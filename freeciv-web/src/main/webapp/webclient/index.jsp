@@ -63,7 +63,7 @@
 
     <jsp:include page="pregame.jsp" flush="false"/>
     <jsp:include page="mapview_excanvas.jsp" flush="false"/>
-    <iframe src ="/freeciv-music/flash_detect.html" width="1" height="1" border="0" frameborder="0" scrolling="no"></iframe>
+    <%--<iframe src ="/freeciv-music/flash_detect.html" width="1" height="1" border="0" frameborder="0" scrolling="no"></iframe>--%>
     
     
 <!-- Google Analytics Code -->

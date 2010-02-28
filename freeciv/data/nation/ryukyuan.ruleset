@@ -1,0 +1,55 @@
+[nation_ryukyuan]
+
+name=_("Ryukyuan")
+plural=_("?plural:Ryukyuans")
+groups="Medieval", "Asian"
+legend=_("The Ryukyu Kingdom (1372-1879) was the Land of Propriety, a\
+ peaceful maritime trading nation eventually invaded, occupied, and annexed\
+ by Japan.")
+leader=
+ "Sho Shisho",
+ "Sho Hashi",
+ "Sho En",
+ "Sho Nei",
+ "Sho Ho"
+leader_sex="Male", "Male", "Male", "Male", "Male"
+flag="ryukyu"
+flag_alt="-"
+city_style="Asian"
+
+ruler_titles={ "government",    "male_title",        "female_title"
+		 ; /* TRANS: Koku-o/Jo-o = King/Queen */
+               "Monarchy",      _("Koku-o"),         _("Jo-o")
+               "Democracy",  _("Prime Minister"), _("?female:Prime Minister")
+}
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations="japanese", "taiwanese"
+
+cities=
+ "Shuri (ocean)",
+ "Naha (ocean)",
+ "Kume (ocean)",
+ "Tomari (ocean)",
+ "Nago (ocean)",
+ "Okinawa (!ocean)",
+ "Kadena (!ocean)",
+ "Chatan (ocean)",
+ "Yomitan (ocean)",
+ "Onna (ocean)",
+ "Ginowan (ocean)",
+ "Ishikawa (ocean)",
+ "Gushikawa (ocean)",
+ "Urasoe (ocean)",
+ "Kuwae (!ocean)",
+ "Futenma (!ocean)",
+ "Nakagusuku (ocean)",
+ "Nishihara (ocean)",
+ "Motobu (ocean)",
+ "Ie (ocean)",
+ "Ikei (ocean)",
+ "Miyako (ocean)",
+ "Kin (ocean)"

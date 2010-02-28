@@ -1,0 +1,49 @@
+style "city_label"
+{
+  fontset = "-*-fixed-bold-r-normal--12-*,
+             -*-fixed-bold-r-normal--13-*"
+}
+
+style "notify_label"
+{
+  fontset = "-*-fixed-bold-r-normal--12-*,
+             -*-fixed-bold-r-normal--13-*"
+}
+
+style "spaceship_label"
+{
+  fontset = "-*-fixed-bold-r-normal--12-*,
+             -*-fixed-bold-r-normal--13-*"
+}
+
+style "help_label"
+{
+  fg[PRELIGHT] = { 1.0, 0.0, 0.0 }
+  fg[ACTIVE] = { 1.0, 0.0, 0.0 }
+  fg[NORMAL] = { 1.0, 0.0, 0.0 }
+  fg[INSENSITIVE] = { 1.0, 0.0, 0.0 }
+}
+
+style "help_text"
+{
+  fontset = "-*-fixed-medium-r-normal--14-*"
+}
+
+style "city_names_font"
+{
+  fontset = "-*-fixed-bold-r-normal--14-*"
+}
+
+style "city_productions_font"
+{
+  fontset = "-*-fixed-medium-r-normal--12-*,
+             -*-fixed-medium-r-normal--13-*"
+}
+
+widget	"Freeciv*.city label"		style	"city_label"
+widget	"Freeciv*.notify label"		style	"notify_label"
+widget	"Freeciv*.spaceship label"	style	"spaceship_label"
+widget	"Freeciv*.help label"		style	"help_label"
+widget	"Freeciv*.help text"		style	"help_text"
+widget	"Freeciv*.city names"		style	"city_names_font"
+widget	"Freeciv*.city productions"	style	"city_productions_font"

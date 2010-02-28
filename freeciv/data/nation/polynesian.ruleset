@@ -1,0 +1,52 @@
+[nation_polynesian]
+
+name=_("Polynesian")
+plural=_("?plural:Polynesian")
+groups= "Oceanian"
+legend=_("Polynesian culture stretches from Hawaii to New Zealand to\
+ Easter Island and covers all the islands in between.")
+leader=
+ "Solomon Mamaloni",
+ "Malietoa Tanumafili",
+ "Tofilau Eti Alesana",
+ "Kamehameha",
+ "Salote Tupou III"
+ 
+leader_sex="Male", "Male", "Male", "Male", "Female"
+flag="polynesian"
+flag_alt = "-"
+city_style = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+conflicts_with = "maori", "hawaiian"
+civilwar_nations = "maori", "hawaiian"
+
+cities =
+ "Apia",	; Samoa
+ "Nukualofa",	; Tonga
+ "Lautoka",	; Fiji
+ "Papeete",	; Tahiti, French Polynesia
+ "Hanga Roa",	; Easter Islands
+ "Honolulu",	; Hawaii
+ "Hilo",	; Hawaii
+ "Lihue",	; Hawaii
+ "Hookena",	; Hawaii
+ "Fongafale",	; Tuvalu
+ "Honiara",	; Solomon Islands
+; Islands
+ "Kapingamarangi",
+ "Anuta",
+ "Emae",
+ "Mele",
+ "Niue",
+ "Nukumanu",
+ "Nukuoro",
+ "Pileni",
+ "Rotuma",
+ "Sikaiana",
+ "Takuu",
+ "Tikopia"

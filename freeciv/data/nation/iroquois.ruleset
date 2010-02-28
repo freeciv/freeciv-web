@@ -1,0 +1,206 @@
+[nation_iroquois]
+
+name=_("Iroquois")
+plural=_("?plural:Iroquois")
+groups="Medieval", "American"
+legend=_("The Iroquois Confederacy - known as Haudenosaunee in their own\
+ language - was a North American group of nations with common language and\
+ culture. They were based in what is now upstate New York and consisted\
+ originally of five nations: Seneca, Cayuga, Onondaga, Oneida and Mohawk.\
+ The confederacy had a written constitution and a currency system making\
+ them the most advanced state in North America upon the arrival of the\
+ Europeans.")
+leader=
+ "Deganawidah",		; a.k.a. The Great Peacemaker
+ "Hiawatha",
+ "Thayendanegea",	; a.k.a. Joseph Brant
+ "Kaintwakon",		; a.k.a. Cornplanter
+ "Kateri Tekakwitha",	; The first canonized Amerindian
+ "Guyasuta"
+leader_sex="Male", "Male", "Male", "Male", "Female", "Male"
+flag="iroquois"
+flag_alt = "-"
+city_style = "Celtic"
+
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Despotism",       _("Chief"),        _("?female:Chief")
+		 "Monarchy", 	    _("Great Chief"),_("?female:Great Chief")
+		 "Republic", 	    _("Spokesman"),    _("Spokeswoman")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations = "american", "quebecois", "sioux"
+
+cities =
+ "Onondaga",		; (Onondaga)
+ "Oneida",		; (Oneida)
+ "Teyagon",		; (at Toronto) (Seneca)
+ "Ganaraske (river)",	; (at Port Hope) (Cayuga)
+ "Akwesasne",		; (=Saint Regis) (Mohawk)
+ "Canienga",		; (Canienga=Mohawk)
+ "Oswegatchie",		; (=Ogdensburgh) (Onondaga / Oneida)
+ "Caughnawaga",		; (Mohawk)
+ "Cattaraugus",		; (Seneca)
+ "Kente",		; (Cayuga)
+
+ "Gandesetaiagon",	; (=Oshawa) (Seneca)
+ "Tiohero",		; (Cayuga)
+ "Niagara Falls (river)", ; (Neutral / Tuscarora)
+ "Tonawanda",		; (Seneca)
+ "Owego",		; (Cayuga)
+ "Kanagaro",		; (Mohawk)
+ "Opolopong",		; (Oneida)
+ "Grand River (river)",	; (Seneca)
+ "Deseroken",		; (Onondaga)
+ "Allegany",		; (Seneca)
+
+ "Salamanca",		; (=Bucktooth) (Seneca)
+ "Tuscarora",		; (Tuscarora)
+ "Saratoga",		; (Mohawk)
+ "Geneseo",		; (Seneca)
+ "Chondote",		; (Cayuga)
+ "Tyendinaga",		; (=Brantville) (Mohawk)
+ "Tueadasso",		; (Onondaga)
+ "Buckaloon",		; (Seneca)
+ "Onnontare",		; (Cayuga)
+ "Skohare",		; (Mohawk)
+
+ "Catherine's Town",	; (Seneca)
+ "Ganogeh",		; (Cayuga)
+ "Oka (mountains)",	; (=Lac des Deux-Montagnes) (Mohawk)
+ "Skannayutenate",	; (Cayuga)
+ "Oriska",		; (Oneida)
+ "Canajoharie",		; (Mohawk)
+ "Oil Springs",		; (Seneca)
+ "Gannentaha",		; (Onondaga)
+ "Buffalo Creek",	; (Seneca)
+ "Neodakheat",		; (Cayuga)
+
+ "Cowassalong",		; (Oneida)
+ "Union Springs",  	; (Cayuga)
+ "Venango",		; (Seneca)
+ "Nowadaga",		; (Mohawk)
+ "Chemung",		; (Seneca)
+ "Osquake",		; (Mohawk)
+ "Cittenango",		; (Oneida)
+ "Gadoquat",		; (Onondaga)
+ "Onnahee",		; (Seneca)
+ "Mingo Town",		; (Iroquois)
+
+; More cities in alphabetical order. Source:
+; http://www.accessgenealogy.com/native/tribes/iroquioi/iroquoisvillages.htm
+
+ "Adjouquay",
+ "Allaquippa", 
+ "Anpuaqun", 
+ "Aquatsagana",
+ "Aratumquat",
+ "Awegen",
+ "Blackleg's Village",
+ "Cahunghage",
+ "Canowdowsa",
+ "Chartierstown",
+ "Chemegaide",
+ "Chenango",
+ "Chinklacamoose",
+ "Chugnut",
+ "Churamuk",
+ "Cocfocoraren",
+ "Cokanuck",
+ "Conaquanosshan",
+ "Conejoholo",
+ "Conihunta",
+ "Connosomothdian",
+ "Conoytown",
+ "Coreorgonel",
+ "Cowawago",
+ "Cussewago",
+ "Ganadoga", 
+ "Ganagarahhare",
+ "Ganasarage", 
+ "Ganeraske",
+ "Ganneious",
+ "Glasswanoge",
+ "Goshgoshunk",
+ "Hickorytown",
+ "Janundat",
+ "Jedakne",
+ "Johnstown",
+ "Jonondes",
+ "Juniata",
+ "Juraken",
+ "Kahendohon", 
+ "Kanaghsaws",
+ "Kannawalohalla",
+ "Kanesadageh",
+ "Karaken",
+ "Karhationni",
+ "Karhawenradon", 
+ "Kayehkwarageh", 
+ "Kaygen",
+ "Kickenapawling",
+ "Kiskiminetas",
+ "Kittaning",
+ "Lawunkhannek",
+ "Logstown",
+ "Loyalhannon",
+ "Mahusquechikoken",
+ "Mahican",
+ "Mahoning",
+ "Manckatawangum",
+ "Matchasaung",
+ "Middletown",
+ "Mohanet",
+ "Nescopeck",
+ "Newtown",
+ "Newtychaning",
+ "Octageron",
+ "Ohrekionni",
+ "Onaweron",
+ "Onkwe Iyede",
+ "Oquaga",
+ "Osewingo",
+ "Oskawaserenhon",
+ "Ostonwackin", 
+ "Otiahanague",
+ "Otsiningo", 
+ "Otskwirakeron",
+ "Ousagwentera",
+ "Paille Coupfle",
+ "Pluggy's Town",
+ "Punxatawney", 
+ "Runonvea",
+ "Sawcunk",
+ "Schoharie", 
+ "Schohorage",
+ "Sconassi",
+ "Scoutash's Town",
+ "Seneca Town",
+ "Sevege",
+ "Sewickly's Old Town",
+ "Shamokin",
+ "Shannopin",
+ "Shenango",
+ "Sheshequin",
+ "Sheoquage", 
+ "Sittawingo",
+ "Skenandowa",
+ "Solocka",
+ "Swahadowri",
+ "Taiaiagon",
+ "Tewanondadon",
+ "Tioga",
+ "Tohoguses Cabins",
+ "Tullihas",
+ "Tonihata",
+ "Tuskokogie",
+ "Tutelo",
+ "Unadilla",
+ "Wakatomica",
+ "Wakerhon",
+ "Wauteghe", 
+ "Yoghroonwago",
+ "Youcham"

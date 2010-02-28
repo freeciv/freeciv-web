@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<svg width="900" height="600" viewBox="0 0 90 60"
+     xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink">
+	<defs>
+		<path id="star" fill="white" stroke="none" d="M 43.236654,26.427041 L 45,21 L 46.763366,26.427041 L 42.14684,23.072939 L 47.85318,23.072939 L 43.236654,26.427041 z" />
+	</defs>
+	<rect width="90" height="21" x="0" y="0" fill="#F7D117" />
+	<rect width="90" height="21" x="0" y="20" fill="#0033AB" />
+	<rect width="90" height="20" x="0" y="40" fill="#CF142B" />
+	<use xlink:href="#star" transform="matrix(0.984808,-0.173648,0.173648,0.984808,-6.609569,8.452255)" />
+	<use xlink:href="#star" transform="matrix(0.984808,0.173648,-0.173648,0.984808,7.976872,-7.176096)" />
+	<use xlink:href="#star" transform="matrix(0.866026,-0.5,0.5,0.866026,-14.97115,28.12697)" />
+	<use xlink:href="#star" transform="matrix(0.866026,0.5,-0.5,0.866026,27.02887,-16.8731)" />
+	<use xlink:href="#star" transform="matrix(0.642789,-0.766045,0.766045,0.642789,-16.09932,49.475)" />
+	<use xlink:href="#star" transform="matrix(0.642789,0.766045,-0.766045,0.642789,48.24848,-19.46914)" />
+	<use xlink:href="#star" transform="matrix(0.342022,-0.939694,0.939694,0.342022,-9.858029,69.92147)" />
+	<use xlink:href="#star" transform="matrix(0.342022,0.939694,-0.939694,0.342022,69.0763,-14.65111)" />
+</svg>

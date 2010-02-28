@@ -1,0 +1,163 @@
+[nation_catalan]
+
+name=_("Catalan")
+plural=_("?plural:Catalans")
+groups="European"
+legend=_("During the Middle Ages, Catalan kings conquered and presided over\
+ several kingdoms on the shores of the Mediterranean Sea, from the Iberian\
+ peninsula to parts of Italy and Greece. This confederation/empire became a\
+ major naval and trading power in the Mediterranean area. Catalans kept\
+ their self-rule after a dynastic union with the neighboring kingdom of\
+ Castile, and sided with England and Austria against France and Castile in\
+ the Spanish Succession War. In 1713, England signed the Treaty of Utrecht\
+ and dropped out of the alliance, and the Catalans were finally defeated in\
+ 1714, losing their national rights as a result.")
+leader=
+ "Guifré el Pilós",
+ "Ramon Berenguer IV",
+ "Jaume I",
+ "Pere II",
+ "Pau Claris",
+ "Francesc Macià",
+ "Lluís Companys",
+ "Josep Tarradellas"
+leader_sex="Male", "Male", "Male", "Male",
+           "Male", "Male", "Male", "Male"
+flag="catalan"
+flag_alt = "-"
+city_style = "Classical"
+
+ruler_titles = { "government",      "male_title",          "female_title"
+                 "Democracy",    _("Primer Ministre"),  _("Primera Ministre")
+                 "Despotism",       _("Dictador"),         _("Dictadora")
+		 ; /* TRANS: Rei/Reina = King/Queen */
+                 "Monarchy",        _("Rei"),              _("Reina")
+                 "Republic",        _("President"),    _("?female:President")
+		 ; /* TRANS: Arquebisbe = Archbishop */
+                 "Fundamentalism",  _("Arquebisbe"),       _("Gran Bruixa")
+               }
+
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+conflicts_with = "spanish"
+civilwar_nations = "spanish", "french"
+
+; This city list does not actually correspond to medieval Catalonia,
+; but rather to all lands settled by Catalans, where Catalan is still spoken
+; nowadays. It corresponds to the "Països Catalans" of modern ethnolinguistic
+; nationalists.
+cities =
+ "Barcelona",
+ "Tarragona",
+ "Lleida",
+ "Girona",
+ "Perpinyà",
+ "València",
+ "Ripoll",
+ "Vic",
+ "La Seu d'Urgell",
+ "Cardona",
+ "Tortosa",
+ "Montserrat (hills)",
+ "Poblet",
+ "Santes Creus",
+ "Vallbona de les Monges",
+ "Balaguer",
+ "Manresa",
+ "Terrassa",
+ "Sabadell",
+ "Palma de Mallorca",
+ "Eivissa",
+ "Alacant",
+ "Elx",
+ "Maó",
+ "Castelló de la Plana",
+ "Montblanc (hills)",
+ "Igualada",
+ "Cervera",
+ "Berga",
+ "Dénia",
+ "Alcoi",
+ "Reus",
+ "Granollers",
+ "Salses",
+ "Mataró",
+ "Figueres",
+ "Xàtiva",
+ "Olot",
+ "Cadaqués",
+ "Badalona",
+ "Tàrrega",
+ "Amposta",
+ "El Bruc",
+ "Valls",
+ "Sant Fruitós de Bages",
+ "Vilafranca del Penedès",
+ "Manacor",
+ "Alcúdia",
+ "Sóller",
+ "Guardamar del Segura (ocean)",
+ "Artà",
+ "Llucmajor",
+ "Felanitx",
+ "Andratx",
+ "Andorra la Vella",
+ "Ciutadella",
+ "Peníscola (hills, ocean)",
+ "Sant Salvador de Guardiola",
+ "Fraga",
+ "Almacelles",
+ "Sitges",
+ "Vilanova i la Geltrú",
+ "Vielha",
+ "L'Alguer",
+ "El Perelló",
+ "Torelló",
+ "Sant Cugat",
+ "Portbou (ocean)",
+ "Palafrugell",
+ "Prada",
+ "Manlleu",
+ "Sallent",
+ "Puigcerdà",
+ "Bellver",
+ "Sant Boi de Llobregat",
+ "Vandellòs",
+ "Cornellà",
+ "Tremp",
+ "Palamós",
+ "El Vendrell",
+ "Sant Feliu de Guíxols",
+ "Sant Celoni",
+ "Martorell",
+ "L'Hospitalet",
+ "Mollet del Vallès",
+ "Banyoles",
+ "Blanes",
+ "Sant Julià de Lòria",
+ "Lloret de mar (ocean)",
+ "Malgrat de mar (ocean)",
+ "Canet de mar (ocean)",
+ "Molins de Rei",
+ "Ponts",
+ "Encamp",
+ "Súria",
+ "Llívia",
+ "La Bisbal d'Empordà",
+ "Elna",
+ "Ceret",
+ "Roses",
+ "Calonge",
+ "Treumal",
+ "Cambrils",
+ "Tossa de Mar (ocean)",
+ "Solsona",
+ "Agramunt",
+ "Begur",
+ "Guardamar de la Safor (ocean)",
+ "Olesa de Montserrat (hills)",
+ "Soldeu"

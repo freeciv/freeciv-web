@@ -1,0 +1,65 @@
+[nation_cree]
+
+name=_("Cree")
+plural=_("?plural:Cree")
+groups="American"
+
+legend=_("The Cree are the largest native group in Canada with over 200,000\
+ members who speak an Algonquian language and often call themselves\
+ \"Iiyiyuu\" or \"Iinuu,\" meaning \"people.\" They originally inhabited\
+ much of Quebec, Labrador, Alberta, Saskatchewan, Ontario and Manitoba.")
+
+leader=
+ "Awashish",
+ "Mukash",
+ "Ominayak"
+leader_sex="Male", "Male", "Male"
+
+ruler_titles = { "government",      "male_title",      "female_title"
+		 ; /* TRANS: Uchimaahkaan = Chief */
+		 ; /* TRANS: Uchimaahkaaniskweu = Chief's wife */
+                 "Despotism",       _("Uchimaahkaan"),_("Uchimaahkaaniskweu")
+		 ; /* TRANS: Chihchiuchimaau = King */
+		 ; /* TRANS: Chihchiuchimaaskweu = Queen */
+                 "Monarchy",    _("Chihchiuchimaau"),_("Chihchiuchimaaskweu")
+               }
+
+flag="innu"
+flag_alt = "-"
+city_style = "Celtic"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="iroquois", "inuit", "sioux"
+
+cities =
+ "Chisasibi",
+ "Whapmagoostui",
+ "Mistissini",
+ "Waskaganish",
+ "Nemaska",
+ "Wemindji",
+ "Ouje Bougoumou",
+ "Waswanipi",
+ "Wemotaci",
+ "Opitciwan",
+ "Manawan",
+ "Sheshatshiu",
+ "Natuashish",
+ "Betsiamites",
+ "Essipit",
+ "Kawawachikamach",
+ "Mashteuiatsh",
+ "Matimekosh",
+ "Mingan",
+ "Natashquan",
+ "Pakuashipi",
+ "Uashat-Maliotenam",
+ "Kashechewan",
+ "O-Pipon-Na-Piwin",
+ "Nisichawayasihk",
+ "Opaskwayak",
+ "Wabasca"

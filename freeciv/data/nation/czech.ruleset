@@ -1,0 +1,68 @@
+[nation_czech]
+
+name = _("Czech")
+plural = _("?plural:Czechs")
+groups="Modern", "Medieval", "European"
+legend=_("Today's Czech Republic was until 1993 part of Czechoslovakia,\
+ which had been until 1918 part of the Austro-Hungarian Empire.")
+leader =
+ "Jan Lucemburský",
+ "Otakar II",
+ "Karel IV",
+ "Václav",
+ "Jiří z Poděbrad",
+ "Jan Žižka",
+ "Jan Hus",
+ "Záviš z Falknštejna",
+ "Libuše",
+ "Kunhuta",
+ "Alžběta Pomořanská",
+ "Eliška Přemyslovna",
+ "Anežka",
+ "T. G. Masaryk",
+ "Edvard Beneš",
+ "Václav Havel"
+leader_sex = "Male", "Male", "Male", "Male", "Male",
+        "Male", "Male", "Male", "Female",
+        "Female", "Female", "Female", "Female",
+        "Male", "Male", "Male"
+
+flag = "czech"
+flag_alt = "-"
+city_style = "European"
+
+; Thane = Vladyka, Prophetess = Vestkyne (Libuse)
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Despotism",       _("Thane"),        _("Prophetess")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations="slovakian", "silesian", "polish"
+
+cities =
+        "Praha", "Brno", "Ostrava", "Plzeň", "Hradec Králové",
+        "Olomouc", "České Budějovice", "Ústí nad Labem", "Opava",
+        "Most", "Pardubice", "Jihlava", "Chomutov", "Přerov",
+        "Teplice", "Frýdek Místek", "Znojmo", "Cheb", "Zlín",
+        "Karlovy Vary", "Uherské Hradiště", "Kolín", "Hodonín",
+        "Stará Boleslav", "Příbram", "Šumperk", "Písek",
+        "Litoměřice", "Třebíč", "Vyškov", "Kroměříž", "Klatovy",
+        "Havlíčkův Brod", "Prostějov", "Chrudim", "Louny", "Děčín",
+        "Rokycany", "Náchod", "Beroun", "Rakovník", "Mělník",
+        "Jičín", "Tachov", "Strakonice", "Kutná Hora",
+        "Bruntál", "Trutnov", "Sokolov", "Pelhřimov", "Nymburk",
+        "Svitavy", "Ústí nad Orlicí", "Nový Jičín", "Tábor",
+        "Domažlice", "Jindřichův Hradec", "Česká Lípa", "Benešov",
+        "Liberec", "Rychnov nad Kněžnou", "Český Krumlov",
+        "Prachatice", "Semily", "Žďár nad Sázavou", "Vsetín",
+        "Osek", "Litomyšl", "Velehrad", "Těšín", "Rožmberk",
+        "Tovačov", "Sezimovo Ústí", "Hořice", "Kouřim",
+        "Poděbrady", "Vilémov", "Kunvald", "Dvůr Králové",
+        "Bezděz", "Třeboň", "Šternberk", "Sázava", "Slaný",
+        "Mladá Boleslav", "Kunštát", "Zelená Hora", "Duchcov",
+        "Žatec", "Kladsko", "Horažďovice", "Čáslav", "Pirkštejn",
+        "Krnov", "Rožmitál", "Loket", "Kladno",
+        "Jablonec nad Nisou", "Břeclav", "Blansko", "Karviná"

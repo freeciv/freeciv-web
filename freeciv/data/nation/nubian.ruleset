@@ -1,0 +1,67 @@
+[nation_nubian]
+
+name=_("Nubian")
+plural=_("?plural:Nubians")
+groups="Ancient", "African"
+legend=_("A succession of kingdoms stretching roughly from the 1st to the\
+ 6th cataracts of Nile river in modern Sudan and Egypt, Nubia was ancient\
+ Egypt's perennial neighbor, competitor, trading partner, enemy, and source\
+ of gold, slaves and soldiers to the south. The border between the two\
+ nations fluctated time and time again. Lower Nubia was at times ruled by\
+ Egypt. The 25th Dynasty of Egypt, however, was a Nubian dynasty, and one\
+ that saw conflict with Assyria, which eventually wrested Egypt from Nubia.\
+ Brief conflict occurred with Rome in 24 BCE when Nubian armies routed the\
+ Roman garrison with it's famed archers. Nubia was a nation shaped by its\
+ position between the Mediterranean world and the African interior. Large\
+ Nubian states centered on Napata and later Meroe broke into smaller\
+ Christian kingdoms which persisted into medieval times before being\
+ conquered by Muslim Arabs.")
+
+leader=
+ "Alara",
+ "Kashta",
+ "Piye",
+ "Aspelta",
+ "Taharqa",
+ "Amanishakheto"
+leader_sex="Male", "Male", "Male", "Male", "Male", "Female"
+flag="nubia"
+flag_alt = "-"
+city_style = "Babylonian"
+
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Despotism",       _("Pharaoh"),       _("?female:Pharaoh")
+                 "Monarchy",   _("Great Pharaoh"), _("?female:Great Pharaoh")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="egyptian", "sudanese"
+
+cities =
+ "Napata",
+ "Kerma",
+ "Meroë",
+ "Dongola",
+ "Faras",
+ "Naqa",
+ "Nuri",
+ "Soleb",
+ "Semna",
+ "Adindan",
+ "Dorginarti",
+ "Buhen",
+ "Ballana",
+ "Dabod",
+ "Kalabsha",
+ "Dakka",
+ "Qustul",
+ "Qubban",
+ "Toshka",
+ "Aniba",
+ "Korosko",
+ "Mirgissa",
+ "Kurgus"

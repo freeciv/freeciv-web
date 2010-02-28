@@ -1,0 +1,22 @@
+#game_communication_panel {
+  width: 50%;
+}
+
+#game_action_panel {
+  width: 21%;
+}
+
+#freeciv_logo {
+  width: 160px;
+}
+
+#turn_done_button_div {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+
+#hel_tab {
+  display: none;
+}

@@ -1,0 +1,81 @@
+[nation_burundi]
+
+name=_("Burundi")
+plural=_("?plural:Burundi")
+groups="African", "Medieval", "Modern"
+
+legend=_("Lasting from 16th century, through European colonial\
+ administration, until finally overthrown in 1966, the Kingdom of Burundi\
+ was an East African state in which the King and aristocracy extracted taxes\
+ from the nation's peasantry. The last King, Ntare V Ndizeye, was killed in\
+ 1972 in a bid to restore the monarchy.")
+
+leader=
+ "Mwezi I",
+ "Ntare IV Rutaganzwa Rugamba",
+ "Mutaga II",
+ "Mwambutsa III Mbariza",
+ "Ntare V Ndizeye",
+ "Inamabuye",
+ "Rugari",
+ "Kayagge"
+
+leader_sex = "Male", "Male", "Male", "Male", "Male", "Female", "Female",
+ "Female"
+
+ruler_titles = { "government",      "male_title",        "female_title"
+		 ; /* TRANS: Mwami/Mwamikazi = King/Queen */
+                 "Monarchy",        _("Mwami"),          _("Mwamikazi")
+               }
+
+flag         = "burundi"
+flag_alt     = "-"
+city_style   = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="kongo"
+
+cities =
+ "Bujumbura",
+ "Gitega",
+ "Muyinga",
+ "Jene",
+ "Ngozi",
+ "Mwaro",
+ "Isare",
+ "Ngagara",
+ "Ruyigi",
+ "Dabambe",
+ "Yonga",
+ "Kayanza",
+ "Gasarara",
+ "Cibitoke",
+ "Ntebe",
+ "Yenda",
+ "Bururi",
+ "Isigi",
+ "Rutana",
+ "Muramvya",
+ "Vyuma",
+ "Cankuzo",
+ "Gitwaro",
+ "Taba",
+ "Musuti",
+ "Rutambiro",
+ "Kumuhuma",
+ "Makamba",
+ "Ijenda",
+ "Kirundo",
+ "Nyarumanga",
+ "Karuzi",
+ "Vyinkora",
+ "Cibitoke",
+ "Bubanza",
+ "Rwibaga",
+ "Jenda",
+ "Mugongomanga",
+ "Birayi"

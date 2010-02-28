@@ -1,0 +1,60 @@
+[nation_malaysian]
+
+name = _("Malaysian")
+plural = _("?plural:Malaysians")
+groups = "Modern", "Asian"
+legend = _("Malaysia was started with the founding of Malacca (Melaka) by\
+ Parameswara in the early 14th century.")
+leader =
+ "Parameswara",
+ "Mansur",
+ "Perak",
+ "Hang Tuah",
+ "Abdul Rahman",
+ "Abdul Razak"
+
+leader_sex = "Male", "Male", "Male", "Male", "Male", "Male"
+flag = "malaysia"
+flag_alt = "-"
+city_style = "Tropical"
+
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Monarchy",        _("Sultan"),       _("Sultana")
+                 "Republic",        _("Tun"),          _("Tun")
+                 "Democracy",_("Prime Minister"), _("?female:Prime Minister")
+               }
+
+init_techs = ""
+init_buildings = ""
+init_government = "Despotism"
+init_units = ""
+
+; Similar flags
+conflicts_with = "american"
+civilwar_nations = "singaporean", "indonesian", "malagasy"
+
+cities =
+ "Kuala Lumpur",
+ "Putrajaya",
+ "Ipoh",
+ "George Town",
+ "Butterworth", 
+ "Muar",
+ "Melaka",
+ "Johor Bahru",
+ "Petaling Jaya",
+ "Kangar",
+ "Kuala Terengganu",
+ "Sungai Petani",
+ "Port Dickson", 
+ "Klang",
+ "Alor Setar",
+ "Kota Baharu",
+ "Taiping",
+ "Kuantan",
+ "Seremban",
+ "Kota Kinabalu",
+ "Kuching",
+ "Miri",
+ "Sibu",
+ "Sandakan"

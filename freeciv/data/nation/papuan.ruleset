@@ -1,0 +1,67 @@
+[nation_papuan]
+
+name=_("Papuan")
+plural=_("?plural:Papuans")
+groups="Modern", "Oceanian"
+legend=_("The Papuans are a Melanesian people on the island of New Guinea.")
+leader=
+ "Michael Somare",
+ "Bill Skate"
+leader_sex="Male", "Male"
+flag = "papua_newguinea"
+flag_alt = "-"
+city_style = "Tropical"
+
+ruler_titles = { "government",   "male_title",          "female_title"
+               "Republic",       _("Governor-General"), _("Governor-General")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations = "maori", "indonesian"
+
+cities =
+ "Port Moresby",
+; Provincial capitals.
+ "Lae",
+ "Arawa",
+ "Popondetta",
+ "Madang",
+ "Mendi",
+ "Kimbe",
+ "Goroka",
+ "Wewak",
+ "Daru",
+ "Kavieng",
+ "Alotau",
+ "Vanimo",
+ "Kundiawa",
+ "Lorengau",
+ "Kerema",
+ "Wabag",
+ "Rabaul",
+; More cities in population order
+ "Mount Hagen",
+ "Kokopo",
+ "Bulolo",
+ "Wau",
+ "Kiunga",
+ "Tari",
+ "Kainantu",
+ "Buka",
+ "Ialibu",
+ "Kokoda",
+ "Aitape",
+ "Kieta",
+ "Balimo",
+ "Panguna",
+ "Morehead",
+ "Ambunti",
+ "Samarai",
+ "Angoram",
+ "Porgera",
+ "Namatanai",
+ "Finschhafen",
+ "Kandrian"

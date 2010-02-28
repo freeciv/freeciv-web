@@ -1,0 +1,91 @@
+=========
+PROBLEMES
+=========
+
+Freeciv 2.1 és una versió "estable" i es considera prou lliure d'errors
+per l'ús normal. No obstant, si hi trobes algun problema, ens agradaria
+molt saber-ho, i així el podrem solucionar.
+
+
+INFORMAR D'UN PROBLEMA:
+=======================
+
+S'ha de fer el següent:
+
+ - Comprovar que no sigui un problema ja conegut. Per una llista que es
+   manté sempre al dia, veure:
+
+        http://www.freeciv.org/wiki/Known_Bugs
+
+ - Mirar el web de Freeciv, per assegurar-se que estàs jugant amb la
+   versió més nova. (Potser ja l'hem solucionat).
+
+ - Mirar el Sistema de Seguiment d'Errors de Freeciv a:
+
+        http://bugs.freeciv.org/
+
+   per veure si ja s'ha informat del problema.
+
+ - Enviar un informe de l'error amb el sistema de seguiment d'errors del
+   punt anterior!
+
+   Si et surten missatges de GDK/GTK, com per exemple:
+
+     Gtk-CRITICAL **: file gtkobject.c: line 1163 (gtk_object_ref): 
+     assertion oject->ref_count > 0' failed.
+
+   si us plau reinicia el client i afegeix "-- --g-fatal-warnings" a
+   la línia de comandes. Així obtindràs un fitxer "core". Si us plau,
+   inclou la "traça de la pila" d'aquest "core" al teu informe d'errors.
+
+   Què incloure al teu informe d'errors:
+
+   - Descriu el problema, inclosos els missatges que han sortit.
+
+   - Indica quin(s) client(s) fas servir (GTK+, SDL, Win32, o Xaw).
+
+   - Digue'ns el nom i versió de:
+
+       - El Sistema Operatiu que fas servir. Et pot ser útil la comanda
+         "uname -a".
+
+       - La versió de Freeciv.
+
+       - Si fas servir el client GTK+, els números de versió (si els saps)
+         de les llibreries GTK+, GLib, i imlib.
+
+       - Si fas servir el client SDL, els números de versió (si els saps)
+         de les llibreries SDL, SDL_image, PNG, i freetype.
+
+       - Si fas servir el client Xaw, els números de versió (si els saps)
+         de les llibreries X, la llibreria PNG, la llibreria Z, i la
+         llibreria Xaw, i sobretot si és el Xaw estàndard, o una variant
+         com ara Xaw3d, Xaw95, o Nextaw.
+
+       - Si compiles del codi font, el nom i número de versió del
+         compilador.
+
+       - Si ho has instal·lat d'un paquet binari, el nom del paquet, la
+         distribució per la qual és, i d'on l'has tret.
+
+   - Si el Freeciv et fa un "core", pot ser que et demanem que facis servir
+     un depurador per donar-nos una "traça de la pila". Et caldrà el fitxer
+     "core" per això, així com el binari que has fet servir; per tant,
+     guarda'ls tots dos.
+
+   - Si és un problema de traducció, s'hauria de dir al Contacte Primari per
+     l'idioma. Per veure els seus noms i adreces, vés a:
+
+        http://www.freeciv.org/wiki/Localization
+
+
+INFORMACIÓ ADDICIONAL:
+======================
+
+Per més informació, com sempre, la web de Freeciv:
+
+        http://www.freeciv.org/
+
+i ara, la versió catalana:
+
+        http://ca.freeciv.wikia.com/

@@ -1,0 +1,30 @@
+[nation_mexican]
+
+name=_("Mexican")
+plural=_("?plural:Mexicans")
+groups="Modern", "American"
+legend=_("Mexico borrows its name from the Mexica people, another name for\
+ the Aztecs.")
+leader=
+ "Benito Juárez",
+ "L. Cárdenas del Río",
+ "A. López de Santa Anna",
+ "Guadalupe Victoria"
+leader_sex="Male", "Male", "Male", "Male"
+flag="mexico"
+flag_alt = "-"
+city_style = "Babylonian"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations="aztec", "texan"
+
+cities =
+  "Ciudad de México", "Guadalajara", "Monterrey",
+  "Puebla", "León de los Aldamas", "Ciudad Juárez",
+  "Tijuana", "Mexicali", "Culiacán Rosales", "Acapulco de Juárez",
+  "Mérida", "Chihuahua", "San Luis Potosí", "Aguascalientes", "Morelia",
+  "Toluco de Lerdo", "Torreón", "Querétaro", "Hermosillo", "Saltillo",
+  "Victoria de Durango"

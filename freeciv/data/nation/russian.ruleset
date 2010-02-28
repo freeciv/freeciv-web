@@ -1,0 +1,117 @@
+[nation_russian]
+
+name=_("Russian")
+plural=_("?plural:Russians")
+groups="Medieval", "Modern", "European"
+legend=_("According to legend, Slavic and Finnic tribes of Novgorod invited\
+ in the year 862 the Varangian (Viking) king Rurik to bring order to their\
+ land. Rurik established Kievan Rus in this realm, the first Russian state.\
+ By the 11th century, Kievan Rus had disintegrated into lesser princedoms,\
+ which were once again united into one state by Ivan III in the 15th\
+ century. After decisive victory over Sweden and large territorial gains,\
+ Peter I pronounced the Russian Empire in 1721. The Russian Empire lasted\
+ until 1917 when a socialist revolution dethroned the last Russian emperor.\
+ After USSR dissolution in 1991 Russia appeared on world map again, now as\
+ a federative republic.")
+
+leader=
+ "Ryurik",		; a.k.a. Rurik the Varangian
+ "Oleg",
+ "Svyatoslav",
+ "Vladimir Krasno Solnyshko",
+ "Yaroslav Mudry",
+ "Vladimir Monomah",
+ "Vsevolod Bolshoe Gnezdo",
+ "Aleksandr Nevsky",
+ "Dmitriy Donskoy",
+ "Ivan III",		; "the Great"
+ "Ivan Grozny",		; "the Terrible"
+ "Petr I",		; a.k.a Pyotr Alexeyevich or Peter the Great
+ "Pavel I",
+ "Nikolay I",
+ "Aleksandr II",
+ "Anna Ioannovna",
+ "Elizaveta Petrovna",
+ "Ekaterina II"	; also Yekaterina, Catherine: compare Yekaterinburg
+
+leader_sex="Male", "Male", "Male", "Male", "Male", "Male", "Male",
+   "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male",
+   "Female", "Female", "Female"
+flag="russia"
+flag_alt = "-"
+city_style = "European"
+
+; Alternative titles for an 'Imperial' Monarchy is Imperator/Imperatritsa
+
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Despotism",       _("Duke"),         _("Duchess")
+                 "Monarchy",        _("Tsar"),         _("Tsaritsa")
+                 "Fundamentalism",  _("Patriarch"),    _("Matriarch")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+; Chain of similar flags:
+conflicts_with="slovenian", "slovakian",
+; Transitional state
+ "soviet"
+civilwar_nations = "soviet"
+
+cities =
+ "Moskva",
+ "Sankt-Peterburg",
+ "Tver",
+ "Velikiy Novgorod",
+ "Yekaterinburg",
+ "Samara",
+ "Pskov",
+ "Ryazan",
+ "Vladimir",
+ "Yaroslavl",
+ "Novosibirsk",
+ "Smolensk",
+ "Briansk",
+ "Oriel",
+ "Voronezh",
+ "Saransk",
+ "Perm",
+ "Ufa",
+ "Saratov",
+ "Volgograd",
+ "Tomsk",
+ "Petrozavodsk",
+ "Rostov",
+ "Omsk",
+ "Chelyabinsk",
+ "Irkutsk",
+ "Vladivostok",
+ "Khabarovsk",
+ "Krasnoyarsk",
+ "Vologda",
+ "Murmansk",
+ "Arkhangelsk",
+ "Krasnodar",
+ "Stavropol",
+ "Murom",
+ "Kaluga",
+ "Tula",
+ "Kursk",
+ "Tambov",
+ "Lipetsk",
+ "Belgorod",
+ "Nizhny Novgorod",
+ "Kostroma",
+ "Izhevsk",
+ "Astrakhan",
+ "Orenburg",
+ "Kurgan",
+ "Tyumen",
+ "Kemerovo",
+ "Yakutsk",
+ "Chita",
+ "Magadan",
+ "Norilsk",
+ "Novokuznetsk"

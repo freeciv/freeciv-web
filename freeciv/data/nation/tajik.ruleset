@@ -1,0 +1,50 @@
+[nation_tajik]
+
+name=_("Tajik")
+plural=_("?plural:Tajiks")
+groups="Modern", "Asian"
+legend=_("Nation in Central Asia. Conquered by the Russian Empire\
+ in 19th century, Tajikistan got independence\
+ from the Soviet Union in 1991.")
+
+leader="Diodotos I", ; king of Bactria
+       "Heraios", ; first Kushan ruler
+       "Saman Khuda", ; founder of Samanid dynasty
+       "Isma'il I ibn Ahmad", ; Samanid ruler
+       "Abolqasem Lahouti" ; political activist and poet
+
+leader_sex="Male", "Male", "Male", "Male", "Male"
+
+flag="tajikistan"
+flag_alt = "-"
+city_style = "Classical"
+
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Monarchy",        _("Khan"),         _("Khatan")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+conflicts_with = "hungarian"
+civilwar_nations = "uzbek", "kyrgyz", "Afghani"
+
+cities =
+ "Dushanbe",
+ "Khorugh",
+ "Kulob",
+ "Khujand",
+ "Qurghonteppa",
+ "Murghob",
+ "Nizhniy Pyandzh",
+ "Garm",
+ "Norak",
+ "Panjakent",
+ "Tursunzoda",
+ "Orjonikidzeobad",
+ "Ayni",
+ "Uroteppa",
+ "Isfara",
+ "Konibodom"

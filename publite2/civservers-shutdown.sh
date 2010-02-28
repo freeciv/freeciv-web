@@ -1,0 +1,2 @@
+killall python
+killall civserver

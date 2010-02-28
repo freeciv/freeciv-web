@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape ("http://www.inkscape.org/") -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg548"
+   sodipodi:version="0.32"
+   width="944"
+   height="720"
+   sodipodi:docname="isaac_newtons_college.svg"
+   inkscape:version="0.44"
+   sodipodi:docbase="C:\freeciv\wonders-sources"
+   version="1.0"
+   inkscape:export-filename="C:\freeciv\wonders-sources\isaac_newtons_college.png"
+   inkscape:export-xdpi="5.5296612"
+   inkscape:export-ydpi="5.5296612">
+  <metadata
+     id="metadata26">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs550">
+    <linearGradient
+       id="linearGradient569">
+      <stop
+         style="stop-color:#00ff00;stop-opacity:1;"
+         offset="0.000000"
+         id="stop570" />
+      <stop
+         style="stop-color:#009d00;stop-opacity:1;"
+         offset="1.000000"
+         id="stop571" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient592">
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0.000000"
+         id="stop593" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:0;"
+         offset="1.000000"
+         id="stop594" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient586">
+      <stop
+         style="stop-color:#ff1f22;stop-opacity:1;"
+         offset="0.000000"
+         id="stop587" />
+      <stop
+         style="stop-color:#c27700;stop-opacity:1;"
+         offset="1.000000"
+         id="stop588" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient581">
+      <stop
+         style="stop-color:#ff8a17;stop-opacity:1;"
+         offset="0.000000"
+         id="stop582" />
+      <stop
+         style="stop-color:#d56500;stop-opacity:1;"
+         offset="1.000000"
+         id="stop583" />
+    </linearGradient>
+    <linearGradient
+       xlink:href="#linearGradient581"
+       id="linearGradient584"
+       x1="0.29114029"
+       y1="0.64842242"
+       x2="0.64556921"
+       y2="0.29687411"
+       gradientUnits="objectBoundingBox"
+       spreadMethod="pad" />
+    <radialGradient
+       xlink:href="#linearGradient586"
+       id="radialGradient585"
+       cx="0.41496593"
+       cy="0.52343643"
+       fx="0.41496593"
+       fy="0.52343643"
+       r="0.99781197"
+       gradientUnits="objectBoundingBox"
+       spreadMethod="pad" />
+    <linearGradient
+       xlink:href="#linearGradient586"
+       id="linearGradient590" />
+    <radialGradient
+       xlink:href="#linearGradient592"
+       id="radialGradient591"
+       cx="0.50000054"
+       cy="0.5"
+       fx="0.50000054"
+       fy="0.5"
+       r="0.5"
+       gradientUnits="objectBoundingBox"
+       spreadMethod="pad" />
+    <radialGradient
+       xlink:href="#linearGradient569"
+       id="radialGradient568"
+       cx="0.46829265"
+       cy="0.25"
+       fx="0.46829265"
+       fy="0.25"
+       r="0.7365784"
+       gradientUnits="objectBoundingBox"
+       spreadMethod="pad" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient581"
+       id="linearGradient1905"
+       gradientUnits="userSpaceOnUse"
+       spreadMethod="pad"
+       x1="305.01239"
+       y1="292.56348"
+       x2="321.98172"
+       y2="275.73206"
+       gradientTransform="scale(0.800661,1.248968)" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient586"
+       id="radialGradient1907"
+       gradientUnits="userSpaceOnUse"
+       spreadMethod="pad"
+       cx="208.17786"
+       cy="517.7276"
+       fx="208.17786"
+       fy="517.7276"
+       r="248.9548"
+       gradientTransform="scale(1.071906,0.932918)" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient592"
+       id="radialGradient1909"
+       gradientUnits="userSpaceOnUse"
+       spreadMethod="pad"
+       cx="155.45078"
+       cy="485.46152"
+       fx="155.45078"
+       fy="485.46152"
+       r="29.681536"
+       gradientTransform="scale(1.185227,0.843721)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient569"
+       id="linearGradient1894"
+       x1="24.436611"
+       y1="706.78162"
+       x2="605.64703"
+       y2="263.1633"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     snaptogrid="true"
+     showgrid="true"
+     width="944px"
+     inkscape:zoom="0.53198887"
+     inkscape:cx="472"
+     inkscape:cy="354.33072"
+     inkscape:window-width="847"
+     inkscape:window-height="579"
+     inkscape:window-x="22"
+     inkscape:window-y="29"
+     inkscape:current-layer="svg548"
+     height="600px" />
+  <rect
+     style="font-size:12px;fill:url(#linearGradient1894);fill-opacity:1;fill-rule:evenodd;stroke-width:3pt"
+     id="rect567"
+     width="944"
+     height="721.81958"
+     x="0"
+     y="-7.5999997e-005" />
+  <g
+     id="g1900"
+     transform="matrix(0.510865,0,0,0.510865,412.2012,-1.889648)">
+    <path
+       transform="matrix(2.113457,0,0,2.113457,140.6511,-613.4749)"
+       id="path580"
+       d="M 254.007,379.781 L 234.926,332.08 L 256.392,328.503 L 269.51,384.551"
+       style="fill:url(#linearGradient1905);fill-opacity:1;fill-rule:evenodd;stroke:black;stroke-width:3pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       transform="matrix(2.113457,0,0,2.113457,140.6511,-613.4749)"
+       sodipodi:nodetypes="ccccccccc"
+       id="path579"
+       d="M 261.162,382.166 C 259.969,382.166 248.044,361.893 209.884,363.086 C 171.723,364.278 102.557,390.514 115.674,472.797 C 128.792,555.081 207.498,592.049 220.616,590.856 C 233.734,589.664 228.964,586.087 240.889,584.894 C 252.814,583.702 252.814,592.049 261.162,592.049 C 269.51,592.049 331.521,587.28 354.178,552.697 C 378.029,513.343 392.339,416.749 354.178,386.936 C 316.017,357.123 263.547,384.551 261.162,382.166 z "
+       style="fill:url(#radialGradient1907);fill-opacity:1;fill-rule:evenodd;stroke:black;stroke-width:3pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       transform="matrix(2.471671,0,0,2.717302,67.09114,-858.2853)"
+       sodipodi:ry="25.042923"
+       sodipodi:rx="35.179344"
+       sodipodi:cy="409.59387"
+       sodipodi:cx="184.24435"
+       d="M 219.4237 409.59387 A 35.179344 25.042923 0 1 1  149.06501,409.59387 A 35.179344 25.042923 0 1 1  219.4237 409.59387 z"
+       id="path589"
+       style="fill:url(#radialGradient1909);fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:3pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:type="arc" />
+  </g>
+  <image
+     y="47.003922"
+     x="-50.099037"
+     id="image1897"
+     height="825.12781"
+     width="708.49579"
+     sodipodi:absref="C:\freeciv\wonders-sources\isaac_newtons_college-raster.png"
+     xlink:href="isaac_newtons_college-raster.png" />
+</svg>

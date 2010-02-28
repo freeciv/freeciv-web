@@ -1,0 +1,81 @@
+[nation_prussian]
+
+name=_("Prussian")
+plural=_("?plural:Prussians")
+groups="Medieval", "European"
+
+legend=_("Prussia was originally the name of a pagan Baltic people, who in\
+ the 13th century were conquered by the German Teutonic Knight order. The\
+ knights established an independent state in this land, and in 1561 Grand\
+ Master Albrecht I proclaimed himself hereditary Duke of Prussia. Evolving\
+ into a regional military powerhouse, Prussia played an important role in\
+ uniting the German nation in 1871 and solidified its power during the\
+ Franco-Prussian war of the same year.")
+
+leader=
+ "Albrecht der Bär",
+ "Waldemar",
+ "Albrecht I",
+ "Albrecht Friedrich",
+ "Friedrich Wilhelm",
+ "Friedrich I"
+leader_sex = "Male", "Male", "Male", "Male", "Male", "Male"
+
+ruler_titles = { "government",      "male_title",        "female_title"
+                 "Despotism",      _("Grand Master"),    _("Grand Master")
+                 "Monarchy",       _("Duke"),            _("Duchess")
+                 "Republic",       _("Elector"),         _("Elector")
+               }
+
+flag         = "prussia"
+flag_alt     = "-"
+city_style   = "European"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations = "german", "polish", "lithuanian"
+
+; Sources:
+; http://commons.wikimedia.org/wiki/Image:Rzeczpospolita_Royal_Ducal.png
+; http://commons.wikimedia.org/wiki/Image:East_Prussia_1939.JPG
+
+cities =
+; Site of the first Teutonic castle in Prussia
+ "Tapiau",
+; Royal Prussia
+ "Elbing",
+ "Marienburg",
+ "Danzig",
+ "Dirschau",
+ "Frauenburg",
+ "Putzig",
+ "Konitz",
+ "Graudenz",
+ "Kulm",
+ "Thorn",
+ "Heilsberg",
+ "Allenstein",
+; Ducal Prussia
+ "Königsberg",
+ "Braunsberg",
+ "Marienwerder",
+ "Wehlau",
+ "Tilsit",
+ "Lyck",
+ "Memelburg",
+; Late East Prussia
+ "Stettin",
+ "Pillau",
+ "Eylau",
+ "Osterode",
+ "Allenstein",
+ "Heilsberg",
+ "Rastenburg",
+ "Ortelsburg",
+ "Angerburg",
+ "Insterburg",
+ "Goldap",
+ "Gumbinnen"

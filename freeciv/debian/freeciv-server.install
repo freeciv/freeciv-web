@@ -1,0 +1,12 @@
+usr/games/civserver
+usr/lib/libfreeciv-srv.so.*
+usr/share/man/man6/civserver.6
+usr/share/applications/freeciv-server.desktop
+usr/share/games/freeciv/default
+usr/share/games/freeciv/default.serv
+usr/share/games/freeciv/nation
+usr/share/games/freeciv/civ1
+usr/share/games/freeciv/civ1.serv
+usr/share/games/freeciv/civ2
+usr/share/games/freeciv/civ2.serv
+usr/share/games/freeciv/scenario

@@ -1,0 +1,103 @@
+[nation_texan]
+
+name=_("Texan")
+plural=_("?plural:Texans")
+groups="American"
+legend=_("Texas is second largest and second most populous state of the\
+ USA, famous for its \"larger than life\" cowboy mentality.")
+leader=
+ "Sam Houston",
+ "Stephen F. Austin",
+ "Ma Ferguson",
+ "Lyndon B. Johnson",
+ "James P. Henderson"
+leader_sex="Male", "Male", "Female", "Male", "Male"
+flag="texas"
+flag_alt = "usa"
+city_style = "European"
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Republic",        _("Governor"),      _("?female:Governor")
+                 "Fundamentalism",  _("Reverend"),      _("?female:Reverend")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+conflicts_with="american", "chilean" ; Latter because of similar flags
+civilwar_nations="american", "mexican"
+
+cities =
+ "Austin",
+ "Dallas",
+ "Houston",
+ "San Antonio",
+ "Fort Worth", 
+ "Galveston",
+ "Corpus Christi",
+ "El Paso",
+ "Lubbock",
+ "Amarillo", 
+ "Eagle Pass",
+ "Wichita Falls",
+ "Midland",
+ "Odessa",
+ "Waco",
+ "Beaumont", 
+ "Irving",
+ "Denton",
+ "Texarkana",
+ "Port Arthur",
+ "Brownsville",
+ "Laredo",
+ "Nacogdoches",
+ "Lufkin",
+ "Killeen",
+ "College Station",  
+ "Abilene",
+ "Waxahachie",
+ "Bryan",
+ "Huntsville",
+ "Texas City",
+ "Tyler",
+ "Arlington",
+ "Garland",
+ "Carrollton",
+ "Mesquite",
+ "Weatherford",  
+ "Stephenville",
+ "New Braunfels",
+ "San Marcos",
+ "Plainview",
+ "Uvalde",
+ "Lake Jackson",
+ "Sherman",
+ "Del Rio",
+ "Kerrville", 
+ "Brownwood",
+ "Round Rock",
+ "The Woodlands", 
+ "Wharton",
+ "Orange",
+ "Temple",
+ "Victoria",
+ "Kingsville",
+ "Harlingen",
+ "Muleshoe",
+ "Canyon",
+ "Lamesa",
+ "Fort Stockton", 
+ "McAllen",
+ "Big Spring",
+ "San Angelo",
+ "Alpine",
+ "Pecos",
+ "Dalhart",
+ "Sweetwater",
+ "Snyder",
+ "Dumas",
+ "Borger",
+ "Pampa",
+ "Perryton",
+ "Tuna"

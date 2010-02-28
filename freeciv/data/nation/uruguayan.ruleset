@@ -1,0 +1,89 @@
+[nation_uruguayan]
+
+name=_("Uruguayan")
+plural=_("?plural:Uruguayans")
+groups="Modern", "American"
+legend=_("Uruguay, a small South American country sometimes referred to as\
+ \"Switzerland of the Americas\" due to its once highly developed social\
+ welfare system.")
+leader=
+ "José Artigas",
+ "Juan Antonio Lavalleja",
+ "Manuel Oribe",
+ "Aparicio Saravia",
+ "José Batlle y Ordóñez",
+ "Wilson Ferreira Aldunate"
+leader_sex="Male", "Male", "Male", "Male", "Male", "Male"
+flag="uruguay"
+flag_alt = "-"
+city_style = "European"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations="argentine", "brazilian"
+
+cities =
+ "Montevideo",
+ "Ciudad del Este",
+ "Salto",
+ "Las Piedras",
+ "Maldonado",
+ "Canelones",
+ "Artigas",
+ "Rocha",
+ "Melo",
+ "Minas",
+ "Colonia",
+ "San José de Mayo",
+ "Artigas",
+ "Tacuarembó",
+ "Rivera",
+ "Durazno",
+ "Punta del Este",
+ "Piriápolis",
+ "Trinidad",
+ "Paysandú",
+ "Mercedes",
+ "Fray Bentos",
+ "Flores",
+ "Treinta y Tres",
+ "Tranqueras",
+ "Pando",
+ "Bella Unión",
+ "Soca",
+ "Santa Rosa",
+ "Tala",
+ "Atlántida",
+ "La Paz",
+ "Santa Lucía",
+ "Migues",
+ "Rio Branco",
+ "Olimar",
+ "Aceguá",
+ "Carmelo",
+ "Nueva Palmira",
+ "Juan Lacaze",
+ "Carmen",
+ "Sarandí del Yí",
+ "José Batlle y Ordóñez",
+ "San Carlos",
+ "Aiguá",
+ "Santiago Vázquez",
+ "Guichón",
+ "San Javier",
+ "Young",
+ "Minas de Corrales",
+ "Castillos",
+ "Lascano",
+ "Constitución",
+ "San Antonio",
+ "Belén",
+ "Dolores",
+ "Cardona",
+ "Paso de Los Toros",
+ "Vergara",
+ "Masoller",
+ "Agraciada",
+ "Asencio"

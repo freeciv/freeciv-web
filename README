@@ -1,0 +1,160 @@
+THE FREECIV WEB CLIENT
+----------------------
+
+This is yet another rewrite of the Freeciv web client, which
+will make it possible to play Freeciv in your web browser.
+
+http://code.google.com/p/freeciv-forever/
+
+
+Contact: Andreas Røsdal  - andrearo@pvv.ntnu.no
+
+
+Overview
+--------
+
+The Freeciv Web client consists of these components:
+
+* freeciv - a fork of the main Freeciv C client and server.
+
+* freeciv-proxy - a HTTP proxy which allows web client users
+  to connect to Freeciv civservers. This proxy converts C packets
+  to and from JSON.
+
+* freeciv-web - a Java web application for the Freeciv web client.
+  This application is a AJAX application which consists of HTML,
+  Javascript, images and JSP files which make up the application
+  viewed in each user's web browser. 
+
+* freeciv-img-extract - extracts the images of the Freeciv tileset,
+  and generates a version for the web. This produces a tileset PNG 
+  and Javascript. Run this to sync with the upstream Freeciv SVN 
+  repository.
+
+* publite2 - a simple way to launch multiple civservers. 
+
+* freeciv-music - contains music which can be played during the game.
+
+
+System Requirements
+-------------------
+
+- Resin 4.0.1 - http://www.caucho.com/
+
+- Java 1.6.0 SDK - http://java.sun.com/javase/downloads/index.jsp
+
+- Python 2.6 - http://www.python.org/
+
+- Mysql 5.0.x - http://www.mysql.com/
+
+- Maven 2 - http://maven.apache.org/download.html
+
+- Probably some Linux distribution.
+
+- Firefox
+
+- Firebug for debugging - http://getfirebug.com/
+
+- Closure Compiler - http://code.google.com/intl/nb/closure/compiler/
+  (Bundled in source code, no need to download.)
+
+- curl-7.19.7 - http://curl.haxx.se/
+
+- OpenSSL - http://www.openssl.org/
+
+- Varnish - http://varnish.projects.linpro.no/
+
+- nginx 0.8.33 - http://nginx.org/
+
+
+Compiling and running the Freeciv Web client
+---------------------------------
+
+1. Install the system requirements. Install Resin in /opt/resin
+
+2. Create mysql database called 'freecivmetaserver'
+   Import mysql dump into a MySQL database from:  /publite2/metaserver-mysql-dump.sql
+
+3. Build and configure freeciv-web. 
+
+   - Edit /freeciv-web/src/main/webapp/freecivmetaserve/php_code/settings.php.dist,
+     rename this file to settings.php, and update values for fcdb_username and fcdb_pw
+     to your MySQL username and password.
+   - Edit /freeciv-web/src/main/webapp/WEB-INF/resin-web.xml.dist, rename this
+     file to resin-web.xml, and update the values for your MySQL database.
+   - Run 'build.sh' in the freeciv-web directory
+
+4. Compile and install Freeciv. This involves running the following commands:
+   cd freeciv 
+   ./autogen.sh
+   make
+   make install     (as root user)
+
+
+5. Start resin with these commands:  
+   cd /opt/resin/bin
+   ./resin.sh start
+
+6. Start publite2:
+  Run publite2.py in the publite2 directory.
+
+7. Run the freeciv-proxy:
+  Run freeciv-proxy.py in the freeciv-proxy directory.
+
+8. Start the web client in your browser:
+   Point your web browser to http://localhost:8080/login.jsp
+   Enter any username and password.
+
+9. Continue to play the game. Pregame is mostly working. Note that gameplay is not ready yet. 
+
+FIXME: Had to add -lssl when compiling server...
+
+- create .awsAuth and change mode like this:  chmod 600 .awsAuth
+
+Current status
+--------------
+All of the main building-blocks for building the web client are in place,
+and the current architecture is very good for completing the project.
+
+Some good points:
+
+- It is possible to send packets between the C civserver and Javascript web client in both directions, 
+- It is possible to render tiles from the Freeciv tileset using Javascript on a HTML5 canvas, 
+- The speed of network packets will be comparable to the Freeciv C client (so it's very fast)
+- The current architucture and code is very fast and scalable.
+
+There is a lot of work remaining.
+
+
+TODO:
+-----
+
+- Implement client-side logic in Javascript.
+  See /freeciv-web/src/main/webapp/javascript/
+  The main logic here is that packets are recieved
+  from the civserver, and handled in packhand.js in Freeciv-web.
+  Based on the JSON packets recieved, the client must perform
+  the correct updates, render mapview, update widgets etc.
+  This is the biggest and most important remaining taks.
+ 
+
+- Implement isometric drawing using Canvas.
+  Testing rendering of tileset using Javascript and HTML 5 canvas.
+  The following function can be found in freeciv-web's mapview.js,
+  and is used like this:   put_tile("u.horsemen", 300, 200)
+  Yes, it draws a horeman unit and x:300 and y:200, based on the loaded
+  tileset. 
+
+- Implement GOTO pathfinding in Javascript.  (not high priority)
+
+- Support rendering mapview using Excanvas with silverlight.   
+  (The non-silverlight version will not support clipping). 
+  See: http://excanvas.sourceforge.net/
+
+- Support Svgweb rendering of mapview:  http://code.google.com/p/svgweb/
+
+- Add graphics design (pretty HTML and CSS).
+
+- Implement ingame dialogs, such as city, research, techtree dialogs etc.
+
+

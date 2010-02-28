@@ -1,0 +1,87 @@
+====
+BUGS
+====
+
+This is a beta release and may contain bugs.  Much of the following text
+applies to the upcoming stable release!  Please report all bugs to
+http://bugs.freeciv.org/.
+
+
+REPORTING A BUG:
+================
+
+Here's what to do:
+
+ - Check that it is not listed as a known bug! For a continuously
+   updated list, see:
+
+        http://www.freeciv.org/wiki/Known_Bugs
+
+ - Check the Freeciv website, to ensure you're playing the latest
+   version.  (We may have already fixed the problem.)
+
+ - Check the Freeciv Bug Tracking System at:
+
+        http://bugs.freeciv.org/
+
+   to see if the bug has already been reported.
+
+ - Submit a bug report through our bug tracking system above!
+
+   If you get any GDK/GTK messages, as for example:
+
+     Gtk-CRITICAL **: file gtkobject.c: line 1163 (gtk_object_ref): 
+     assertion oject->ref_count > 0' failed.
+
+   please restart your client and append "-- --g-fatal-warnings" to
+   the command line. You will get a core dump this way. Please include
+   the "stack trace" of this core dump in your bug report.
+
+   What to include in your bug report:
+
+   - Describe the problem, including any messages that were displayed.
+
+   - Indicate which client(s) you are using (GTK+, SDL, Win32, or Xaw).
+
+   - Tell us the name and version of:
+
+       - The Operating System you're using.  You may find the
+         "uname -a" command useful.
+
+       - The version number of Freeciv.
+
+       - If you are using the GTK+ client, the version numbers
+         (if you know them) of your GTK+, GLib, and imlib libraries.
+
+       - If you are using the SDL client, the version numbers (if you
+         know them) of the SDL, SDL_image, PNG, and freetype libraries.
+
+       - If you are using the Xaw client, the version numbers (if you
+         know them) of the X libraries, the PNG library, the Z library,
+         and the Xaw library, and particularly whether it is standard
+         Xaw, or a variant such as Xaw3d, Xaw95, or Nextaw.
+
+       - If you're compiling from source code, the name
+         and version number of the compiler.
+
+       - If you're installing from a binary package, the name of
+         the package, the distribution it's for, and where you
+         got it from.
+
+   - If Freeciv "dumps core", then we may ask you to use a debugger to
+     give us a "stack trace".  You'll need the "core" file for this as
+     well as the binary which you used, so please backup both.
+
+   - If it is a bug in a translation, it should be reported to the
+     Primary Contact for the language.  For their names and addresses,
+     see:
+
+        http://www.freeciv.org/wiki/Localization
+
+
+FURTHER INFORMATION:
+====================
+
+For more information, as always, see the Freeciv website:
+
+        http://www.freeciv.org/

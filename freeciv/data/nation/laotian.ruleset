@@ -1,0 +1,86 @@
+[nation_laotian]
+
+name=_("Laotian")
+plural=_("?plural:Laotians")
+groups="Modern", "Medieval", "Asian"
+legend=_("The history of Laos starts with the Lan Xang kingdom\
+ created in the 14th century and ended in late 18th century\
+ with invasion of Siam (Thailand). In the end of the 19th\
+ century, Laos became part of French Indochina.\
+ French rule ended with independence in 1946 followed\
+ by 30 years of civil war. In 1975 the communist Pathet\
+ Lao established strict solicalist regime. However,\
+ in 1986 the liberalization and a gradual return to\
+ private enterpise started.")
+
+leader="Khun Lo", ; first laotian king
+       "Fa Ngum", ; king of Lan Xang kingdom
+       "Samsenethai",
+       "Visunarat",
+       "Photisarath",
+       "Setthathirath",
+       "Sourigna Vongsa",
+       "Anouvong",
+       "Phetsarath", ; founder of modern Laos state
+       "Kaysone Phomvihane", ; prime minister and president of Laos
+       "Souphanouvong" ; president of Laos
+leader_sex="Male", "Male", "Male", "Male", "Male",
+           "Male", "Male", "Male", "Male", "Male",
+           "Male"
+
+flag="laos"
+flag_alt = "-"
+city_style = "Asian"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations = "thai", "cambodian", "burmese", "vietnamese"
+
+cities =
+ "Viangchan",
+ "Louangphrabang",
+ "Pakxe",
+ "Attapu",
+ "Salavan",
+ "Savannakhet",
+ "Muang Khammouan",
+ "Muang Pakxan",
+ "Phongsali",
+ "Ban Mouang Cha",
+ "Xam Nua",
+ "Ban Houayxay",
+ "Xaignabouli",
+ "Muang Xai",
+ "Louang Namtha",
+ "Muang Khong",
+ "Champasak",
+ "Lamarn",
+ "Ban Bak",
+ "Muang Khongxedon",
+ "Muang Phin",
+ "Muang Xepon",
+ "Ban Xeno",
+ "Ban Na Phao",
+ "Ban Lakxao",
+ "Ban Nape",
+ "Muang Khamkeut",
+ "Muang Pak-Lay",
+ "Muang Phon-Hong",
+ "Muang Thathom",
+ "Xiangkhoang",
+ "Ban Ban",
+ "Viangxai",
+ "Muang Xon",
+ "Ban Muang-Et",
+ "Ban Nale",
+ "Muang Hongsa",
+ "Ban Phoukhoun",
+ "Khoa",
+ "Ban Nambak",
+ "Muang Pakbeng",
+ "Muang Houn",
+ "Ban Muang Qu-Tai",
+ "Sing Buri"

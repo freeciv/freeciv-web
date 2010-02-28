@@ -1,0 +1,555 @@
+Questo file si basa sulla versione cvs-1.5 di doc/README.
+This file based on cvs-1.5's doc/README.
+
+=====================
+Freeciv Versione 1.13
+=====================
+
+       ******************************************************
+       * Le note relative alla traduzione sono disponibili  *
+       * al termine del documento                           *
+       ******************************************************
+
+Benvenuto in  Freeciv!
+
+Questo pacchetto contiene Freeciv, un clone libero di Civilization progettato
+principalmente per X sotto Unix.
+Supporta la modalita' multiplayer in locale o su una rete, e una IA
+(Intelligenza Artificiale) che da' del filo da torcere a molti giocatori.
+
+Freeciv mira ad avere regole compatibili con Civilization II [tm], pubblicato
+da Sid Meier e Microprose [tm]. Alcune regole sono state cambiate laddove
+credevamo che potessero essere migliorate, e abbiamo reso personalizzabili
+le partite con una montagna di parametri.
+
+Freeciv e' stato creato in modo del tutto indipendente da Civilization; non
+siete obbligati a possedere Civilization per giocare a Freeciv.
+
+Anche se non abbiamo ancora il sopporto per il suono ed i giocatori IA non
+possono ancora negoziare, le regole sono molto complete ed il nostro codice
+per il multiplayer ed il gioco in rete e' eccellente.
+
+(Questo file e' la traduzione in italiano del'originale. Per eventuali errori e
+correzioni scrivete a: slug-freeciv@siena.linux.it Ndt)
+
+
+Traduzioni:
+=============
+
+Potresti trovere una versione tradotta di questo file e di altre parti della 
+documentazione di Freeciv, nelle seguenti locazioni:
+
+       Francese                ./doc/fr
+       Giapponese              ./doc/ja
+       Italiano                ./doc/it
+       Olandese                ./doc/nl
+       Svedese                 ./doc/sv
+       Tedesco                 ./doc/de
+
+Anche se non ci sono traduzioni per la tua lingua, il gioco stesso potrebbe
+supportarla. Guarda per favore "Native Language Support" piu' sotto.
+
+
+Sito Web:
+=========
+
+Il sito Web di Freeciv (in Inglese Ndt) e' reperibile presso:
+
+  http://www.freeciv.org/
+
+Vi invitiamo a visitarci.  Potete trovare le ultime versioni, patch e notizie
+su Freeciv, informarvi sulle mailing list di Freeciv, e vedere il metaserver,
+che registra le partite che vengono giocate in tutto il mondo.
+
+
+Licenza:
+========
+
+Freeciv viene distribuito sotto la GNU General Public License. In breve,
+potete copiare liberamente questo programma (sorgenti inclusi), ma leggete il
+file COPYING per dettagli approfonditi.
+
+
+Compilazione e installazione:
+=============================
+
+Per favore leggete con attenzione il file INSTALL per avere istruzioni su come
+compilare ed installare Freeciv sulla vostra macchina.
+(E' disponibile anche la versione in Italiano. Ndt)
+
+
+Iniziare un nuovo gioco:
+========================
+
+Freeciv e' in verita' due programmi, un server e un client. Quando e' in corso
+una partita saranno in esecuzione un server e tanti client quanti giocatori
+umani partecipano. Il server non richiede X Windows, i client si.
+
+  NOTA:
+  Gli esempi seguenti presumono che Freeciv sia installato sul
+  vostro sistema e che la directory contenente i programmi "civclient"
+  e "civserver" sia nella vostra PATH.  Se Freeciv non e' installato, potreste
+  usare i programmi "civ" e "ser", che si trovano nella directory base di
+  Freeciv. Si usano esattamente allo stesso modo di "civclient" e "civserver".
+
+Eseguire Freeciv richiede l'esecuzione del server, poi del/dei client e della/e
+IA, quindi iniziando la partita digitando "START" sul server.
+Ecco i singoli passi:
+
+Server:
+
+  Per eseguire il server:
+
+  |  % civserver
+
+  O per avere una lista di opzioni da linea di comando:
+
+  |  % civserver --help
+
+  Inizializzato il server, apparira' un propt:
+
+  |  For introductory help, type 'help'.
+  |  >
+
+  Potete visualizzare queste informazioni (in Inglese) usando il comando help:
+
+  |  > help
+  |  Welcome - this is the introductory help text for the Freeciv server.
+  |
+  |  Two important server concepts are Commands and Options.
+  |  Commands, such as 'help', are used to interact with the server.
+  |  Some commands take one or more parameters, separated by spaces.
+  |  In many cases commands and command arguments may be abbreviated.
+  |  Options are settings which control the server as it is running.
+  |
+  |  To find out how to get more information about commands and options,
+  |  use 'help help'.
+  |
+  |  For the impatient, the main commands to get going are:
+  |    show   -  to see current options
+  |    set    -  to set options
+  |    start  -  to start the game once players have connected
+  |    save   -  to save the current game
+  |    quit   -  to exit
+  |  >
+
+  Se volete, potete usare il comando 'set' per impostare le varie opzioni di
+  gioco.  Potete ottenere una lista delle opzioni con il comando 'show', e le
+  relative descrizioni dettagliate con il comando 'help <nome-dell'opzione>'.
+
+  Per esempio:
+
+  |  > help xsize
+  |  Option: xsize  -  Map width in squares
+  |  Status: changeable
+  |  Value: 80, Minimum: 40, Default: 80, Maximum: 200
+
+  E:
+
+  |  > set xsize 100
+  |  > set ysize 80
+
+  Questo raddoppiera' la mappa, rispetto alle dimensioni standard 80x50.
+
+Client:
+
+  Ora e' il momento per far connettere tutti i giocatori, eseguendo il client
+  Freeciv:
+
+  |  % civclient
+
+  Questo comando presume che il server stia girando sulla stessa macchina. Se
+  non e' cosi',potete specificarlo da linea di comando con l'opzione '--server'
+  oppure dalla prima finestra che appare insieme al client.
+
+  Per esempio, supponiamo che il server stia girando su una macchina chiamata
+  'neptune'.  I giocatori si collegherebbero con un comando come:
+
+  |  % civclient --server neptune
+
+  Se siete l'unico giocatore umano, basta eseguire un solo client. Secondo la
+  normale sintassi di Unix potete avviare il client  in background
+  aggiungendo in fondo una "e commerciale":
+
+  |  % civclient &
+
+  Un'altra opzione del client che potreste voler provare e' '--tiles',
+  che puo' essere usata per scegliere diversi "tileset" (cioe' differenti
+  temi per il terreno della mappa, le unita' e cosi' via). La distribuzione
+  include 2 tileset principali:
+  - isotrident: grafica isometrica come quella in civ2 (non ancora supportata
+  dal client xaw).
+  - trident: grafica in stile civ1 con quadranti 30x30.
+  Il tileset trident ha una variante chiamata "trident_shields".
+
+  In questa versione il tileset isotrident e' quello predefinito nei client 
+  gtk, amiga e win32, mentre il client xaw ha il trident come predefinito.
+  La variante "_shields" usa una bandiera "a scudo", che e' piu' piccola e
+  potrebbe risultare meno oscurata. Provatele entrambe e decidete voi. 
+  Per usare il tileset trident fate partire il client con:
+
+  |  % civclient --tiles trident
+
+  Altri tilesets sono disponibili sul sito ftp e nel sito web.
+
+
+  I client possono essere autorizzati a invocare comandi del server. Per
+  permettere che usino solo comandi informativi, scrivete al prompt del server:
+
+  |  > cmdlevel info
+
+  Ora i client possono usare '/help', '/list', '/show settlers', ecc.
+
+Giocatori Simulati:
+
+  Ci sono due modi per creare giocatori con IntelligenzaArtificiale.
+  Il primo e' di impostare il numero totale di giocatori (umani e IA)
+  attraverso l'opzione 'aifill' del server.  Per esempio:
+
+  |  > set aifill 7
+
+  Dopo aver usato il comando 'start' del server per iniziare il gioco,
+  ogni giocatore che non e' controllato da umani sara' controllato dall'IA.
+  Per l'esempio sopra, se partecipassero 2 giocatori umani, verrebbero creati
+  5 (cioe' 7 meno 2) giocatori con IA.
+
+  Il secondo modo e' creare esplicitamente un giocatore con IA col comando
+  'create' del server.  Per esempio:
+
+  |  > create HumanKiller
+
+  Cosi' verra' creato un giocatore con IA, chiamato HumanKiller.
+
+  Ai giocatori con IA vengono assegnate le nazioni dopo che gli umani hanno
+  scelto le loro, ma potete scegliere una nazione particolare per un giocatore
+  IA il nome standard del leader di quella nazione. Per esmpio, per giocare
+  contro Romani controllati dall'IA, usa questo comando del server:
+
+  |  > create Caesar
+
+  Nota che questa e' solo una preferenza: l'IA giochera' con i Romani solo se
+  nessun umano li sceglie prima.
+
+Server:
+
+  Quando tutti si sono connessi (usa il comando "list" per vedere chi lo ha
+  gia' fatto), iniziate il gioco col comando "start":
+
+  |  > start
+
+E il gioco e' iniziato!
+
+
+Annunciare il gioco:
+====================
+
+Se non vuoi limitare il gioco ad amici o giocatori artificiali, visita il
+metaserver di Freeciv:
+
+  http://meta.freeciv.org/metaserver/
+
+E' una lista di server Freeciv. Perche' il tuo server sia annunciato sul
+metaserver, devi avviare civserver con l'opzione '--meta', o solo '-m'
+per brevita'.
+
+Attenzione:
+
+ 1) A causa dell'inclusione di nuove caratteristiche, versioni differenti del
+    client e del server sono spesso incompatibili. La versione 1.13.0 ad 
+    esempio non e' compatibile con l versione 1.12.0 o precedenti.
+
+ 2) Se il bottone Metaserver nella finestra di connessione non funziona,
+    controllate se il vostro ISP usa un proxy WWW obbligatorio e fatelo usare
+    a civclient attraverso la variabile d'ambiente $http_proxy.  Per esempio,
+    se il proxy fosse proxy.mioisp.com sulla porta 8888, impostate $http_proxy
+    su http://proxy.myisp.com:8888/ prima di avviare il client.
+
+ 3) Alcune volte non ci sono giochi sul metaserver. Alle volte succede. 
+    Il numero di giocatori nel metaserver varia con l'ora del giorno. 
+    Provate a crearne uno voi!
+
+
+Giocare:
+========
+
+La partita puo' essere salvata ad ogni momento usando il comando "save" del
+server, per esempio cosi':
+
+  |  > save miapartita.sav
+
+(Se il tuo server e' compilato col supporto per la compressione, e l'opzione
+'compress' del server non e' impostata su 0 (zero), il file salvato puo' essere
+compresso e rinominato miapartita.sav.gz .)
+
+Il client Freeciv funziona come ci si aspetterebbe da un gioco multiplayer di
+Civilization.  Questo significa che prima muovono tutti i giocatori umani,
+quindi, appena gli umani hanno completato il loro turno, giocano tutti i
+giocatori con IA. C'e' un'impostazione di "scadenza" del turno, che e'
+predefinita a 0 secondi ( =nessun limite di tempo). Chi gestisce il server puo'
+cambiare questo valore in ogni momento con il comando "set".
+
+Date un'occhiata al sistema di aiuto on-line. Tutti e tre i tasti del mouse
+possono essere usati, e le funzioni sono documentate nell'help.
+
+I giocatori possono premere il tasto Invio per annunciare la fine del loro
+turno, o semplicemente premere il bottone 'Turn Done' (Turno completo).
+
+Usate la finestra 'Players' (Giocatori) per vedere chi ha annunciato la fine
+del proprio turno, e chi invece si sta facendo aspettare. (Ehi amico, stai
+dormendo o cosa?? ;).
+
+Usate la riga di input in fondo alla pagina per trasmettere messaggi ad altri
+giocatori.
+
+Potete mandare un messaggio ad un singolo giocatore (es. 'matteo') cosi':
+
+  |  matteo: Ritira quel carro armato *ORA*!
+
+Il server e' abbastanza intelligente da completare i nomi, quindi se aveste
+scritto solo "mat:", avrebbe comunque trovato il giocatore che comincia per
+'mat'.
+
+Potete invocare comandi del server dalla riga di input del client:
+
+  |  /list
+  |  /set settlers 4
+  |  /save miapartita.sav
+
+Probabilmente il gestore del server vi lascera' invocare solo comandi
+informativi. Questo  perche' permettendo ai client di usare tutti i
+comandi del server si avrebbero ripercussioni sulla sicurezza; pensate
+se un giocatore scrivesse:
+
+  |  /save /etc/passwd
+
+Ovviamente il server non dovrebbe MAI girare con i privilegi di ROOT, per
+ridurre questo tipo di rischi.
+
+Se giocate per la prima volta e volete farvi un'idea delle strategie, date
+un'occhiata al Freeciv playing HOWTO, contenuto nel file HOWTOPLAY.
+
+Per molte piu' informazioni sul client, sul server esui concetti e le regole di
+gioco, confrontate il manuale di Freeciv, disponibile presso:
+
+  http://www.freeciv.org/manual/
+
+
+Concludere il gioco:
+====================
+
+Ci sono tre modi in cui un gioco puo' finire:
+
+1) Se rimane una sola civilta'.
+2) Si e' raggiunto "il giorno del giudizio".
+3) Un giocatore costruisce e lancia un'astronave, che raggiunge per prima
+   Alpha Centauri.
+
+In ogni caso viene mostrata una tabella dei punteggi.
+Consiglio: il gestore del server puo', con l'opzione 'end-year', impostare il
+giorno del giudizio mentre il gioco si sta ancora svolgendo. Cio' e' utile
+quando il vincitore e' ovvio e non volete giocare la noiosa fase di "sterminio
+dei perdenti".
+
+
+Riprendere una partita:
+=======================
+
+Potete riprendere una partita salvata usando l'opzione '-f'del server.
+Es:
+
+  |  % civserver -f nostrosalvataggio2001.sav
+
+o, se il salvataggio e' stato compresso dal server che lo ha creato:
+
+  |  % civserver -f nostrosalvataggio2001.sav.gz
+
+Ora i giocatori posono riconettersi alla partita:
+
+  |  % civclient -n Alexander
+
+Notate che il nome del giocatore e' specificato con l'opzione -n. E' vitale
+che il giocatore usi lo stesso nome che aveva prima, se vuole essere ammesso.
+
+Il gioco puo' quindi essere riavviato con il comando 'start', come al solito.
+
+
+Supporto per lingue locali:
+===========================
+
+Freeciv supporta diverse lingue.
+
+Potete scegliere quale linguaggio usare specificando un "locale".
+Ogni locale ha un nome standard (es: 'it' per l'Italiano). Se avete installato
+Freeciv, potete scegliere un locale impostando, prima di eseguire civserver e
+civclient, la variabile di ambiente LANG con il nome standard di quel locale.
+
+Per esempio, presumendo di voler installare la localizzazione Italiana, fareste:
+
+  export LANG; LANG=it   (nella shell Bourne (sh) e simili),
+or
+  setenv LANG it         (nella shell C (csh) e simili).
+
+Per comodita' potreste inserire queste righe nel vostro file .profile (bash) o
+.login (csh).
+
+
+Messaggi di Log:
+================
+
+Sia il client e il server danno messaggi conosciuti come "messaggi di log".
+Ci sono cinque categorie di messaggi di log: "fatal"(fatali), "error"(errori),
+"normal"(normali), "verbose"(prolissi) e "debug".
+
+Per default, i messaggi fatali, di errore e normali sono scritti sullo
+standard output su cui il client o il server e' stato avviato. Potete scrivere
+i messaggi in un file invece che sullo schermo con le opzioni da linea di
+comando "--log nomefile" o "-l nomefile".
+
+Potete cambiare il livello di mssaggi di log  mostrati con "--debug livello"
+o "-d livello" (o "-de livello" per il client Xaw, visto che "-d" e' ambiguo
+fra "-debug" e "-display"), dove "livello" is 0, 1, 2 o 3. 0 mostra solo i
+messaggi fatali, 1 mostra quelli fatali e gli errori, 2 (predefinito) mostra i
+fatali, gli errori e i normali, e 3 mostra tutti i messaggi, siano fatali,
+errori, normali o prolissi.
+
+Se avete compilato con DEBUG definito (un modo semplice per farlo e' fare
+configure con --enable-debug), potete avere i messaggi di debug impostando il
+livello 4. Inoltre e' possibile controllare i messaggi di debug (ma non gli
+altri) file per file o linea per linea. Per farlo usate "--debug 4:str1:str2"
+(avanti per quante linee volete, separate da due punti): cosi' qualsiasi nome
+di file che abbia quelle stringhe come substringa avra' i messaggi di debug
+attivi mentre gli altri saranno disattivati. Per controllare le linee, usate:
+"--debug 4:str1,min,max"
+Cosi' per i file che abbiano "str1" verranno mostrati solo messaggi di debug
+compresi fra le linee min e max specificate. Solo una coppia (min,max) puo'
+essere usata su un singolo file.
+
+Esempio:
+
+  |  % civserver -l mio.log -d 3
+
+Questo manda tutti i messaggi del server, compresi i prolissi, nel file
+"mio.log".
+
+Esempio:
+
+  |  % civclient --debug 0
+
+Questo esclude tutti i messaggi del client che non siano fatali.
+
+Esempio:
+
+  |  % civserver -d 4:log:civserver,120,500:autoattack
+
+Questo attiva tutti i messaggi del server fatali, di errore, normali e
+prolissi, piu' i messaggi di debug per certi moduli specificati.  Nota che
+"log" corrisponde sia a "gamelog.c" che a "log.c".  Per "civserver.c", solo i
+messaggi di debug fra le linee 120 e 500 saranno mostrati. Questo esempio
+funziona solo se il server e' stato compilato con DEBUG.
+
+
+Bug:
+====
+
+Avete trovato un bug?  Siamo ansiosi di averne notizie per rimediare.
+Leggete il file BUGS, per una lista di BUG noti in questa versione, e per
+informazioni su come farci sapere di nuovi bug.
+
+
+Mailing list:
+=============
+
+Abbiamo 7 mailing list:
+
+  freeciv          Discussione generale.
+  freeciv-announce Annunci di interesse generale.
+                   Questa e' una lista "solo in lettura", con rari messaggi.
+                   In altre parole non potete postare, ma solo leggerla.
+                   (Questi annunci sono postati anche su freeciv.)
+  freeciv-dev      Sviluppo di Freeciv.
+  freeciv-data     Discussioni sullo sviluppo di dati per Freeciv.
+                   (Discussioni of set di regole, tileset, ecc.)
+  freeciv-java     Sviluppo del client Freeciv per Java.
+  freeciv-ai       Sviluppo della IA di Freeciv.
+  freeciv-cvs      Notifiche di cambiamenti al server CVS.
+                   Questa e' una lista "solo in lettura", con messaggi
+                   automatici.
+                   In altre parole non potete postare, ma solo leggerla.
+
+Tutte le liste sono aperte al pubblico e chiunque e' il benvenuto.
+
+Per iscrivervi o rimuovervi queste liste seguite queste istruzioni:
+
+  1. Mandate un'e-mail a <listar@freeciv.org>.
+  2. Lasciate il soggetto in bianco.
+  3. Nel corpo del messaggio inserite una delle seguenti linee:
+      Per iscrivervi:
+        subscribe freeciv
+        subscribe freeciv-announce
+        subscribe freeciv-dev
+        subscribe freeciv-data
+        subscribe freeciv-java
+        subscribe freeciv-ai
+        subscribe freeciv-cvs
+      Per rimuovervi:
+        unsubscribe freeciv
+        unsubscribe freeciv-announce
+        unsubscribe freeciv-dev
+        unsubscribe freeciv-data
+        unsubscribe freeciv-java
+        unsubscribe freeciv-ai
+        unsubscribe freeciv-cvs
+
+Per mandare una e-mail alle liste indirizzatela a:
+
+  Per freeciv: <freeciv@freeciv.org>.
+  Per freeciv-dev:, <freeciv-dev@freeciv.org>.
+  Per freeciv-data: <freeciv-data@freeciv.org>.
+  Per freeciv-java: <freeciv-java@freeciv.org>.
+  Per freeciv-ai: <freeciv-ai@freeciv.org>.
+
+
+Internet Relay Chat (IRC)
+=========================
+
+Parecchi giocatori e sviluppatori sono presenti sul canale #freeciv sui
+server della rete Open Project. Provate a connettervi al server
+
+       irc.openprojects.net
+
+(Provate anche ad affacciarvi sul canale #freeciv-italia spesso ci trovate
+i giocatori italiani. Ndt)
+
+
+Nuove versioni:
+===============
+
+Speriamo di rilasciare una nuova versione stabile di Freeciv ogni quattro mesi
+circa.  Controllate il sito di Freeciv di tanto in tanto per vedere se c'e'
+una nuova versione!!
+
+
+E per finire:
+=============
+
+Divertitevi!
+
+
+                                   -- Il team di Freeciv.
+
+===========================================================================
+Note per la traduzione in Italiano:
+
+Le note del traduttore sono segnate fra parentesi con 'Ndt'.
+Il traduttore non si assume nessuna responsabilita' per eventuali
+errori/omissioni nel presente documento.
+Comunicate eventuali inesattezze all'indirizzo email:
+
+slug-freeciv@siena.linux.it
+
+o consultate l'indirizzo web:
+
+http://www.freeciv.it
+
+per eventuali aggiornamenti/revisioni.
+===========================================================================

@@ -1,0 +1,77 @@
+[nation_antarctican]
+
+name=_("Antarctican")
+plural=_("?plural:Antarcticans")
+groups="Fictional"
+legend=_("Independent South Pole, land of penguins.")
+leader=
+ "Tux",
+ "Tuxette"
+leader_sex="Male", "Female"
+flag="antarctica"
+flag_alt = "-"
+city_style = "Classical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+; Cities are Antarctic research stations
+cities =
+ "Orcadas",		; (1904, Argentina)
+ "Macquarie",		; (1914, Australia)
+ "Arturo Prat",		; (1947, Chile)
+ "Signy",		; (1947, UK)
+ "O'Higgins",		; (1948, Chile)
+ "Marion Island (ocean, river)", ; (1949, South Africa)
+ "King Edward",		; (1950, UK)
+ "San Martín",		; (1951, Argentina)
+ "Port-aux-Français (ocean)", ; (1951, France)
+ "Esperanza",		; (1952, Argentina)
+ "Halley",		; (1955, UK)
+ "Dumont d'Urville",	; (1956, France)
+ "Mawson",		; (1956, Australia)
+ "McMurdo",		; (1956, USA)
+ "Mirny",		; (1956, Russia)
+ "Amundsen-Scott",	; (1957, USA)
+ "Davis",		; (1957, Australia)
+ "Scott",		; (1957, New Zealand)
+ "Syowa",		; (1957, Japan)
+ "Vostok",		; (1957, Russia)
+ "Bird Island (ocean, river)", ; (1958, UK)
+ "Fossil Bluff (hills, mountains)", ; (1961, UK)
+ "Novolazarevskaya",	; (1961, Russia)
+ "Molodezhnaya",	; (1962, Russia)
+ "Bellingshausen",	; (1968, Russia)
+ "Palmer",		; (1968, USA)
+ "Marambio",		; (1969, Argentina)
+ "Presidente Frei",	; (1969, Chile)
+ "Mizuho",		; (1970, Japan)
+ "Rothera",		; (1975, UK)
+ "Arctowski",		; (1977, Poland)
+ "Belgarno II",		; (1979, Argentina)
+ "Neumayer",		; (1981, Germany)
+ "Jubany",		; (1982, Argentina)
+ "Dakshin Gangotri",	; (1983, India)
+ "Comandante Ferraz",	; (1984, Brazil)
+ "General Artigas",	; (1984, Uruguay)
+ "Villa Las Estrellas", ; (1984, Chile)
+ "Baia Terra Nova (ocean)", ; (1985, Italy)
+ "Great Wall",		; (1985, China)
+ "Casey",		; (1988, Australia)
+ "Gabriel De Castilla",	; (1988, Spain)
+ "Maitri",		; (1988, India)
+ "King Sejong",		; (1988, South Korea)
+ "Svea",		; (1988, Sweden)
+ "Machu Picchu",	; (1989, Peru)
+ "Progress II",		; (1989, Russia)
+ "Wasa",		; (1989, Sweden)
+ "Zhong Shan",		; (1989, China)
+ "St. Kliment Ohridski", ; (1993, Bulgaria)
+ "Sky-Blu",		; (1995, UK)
+ "Akademik Vernadsky",	; (1996, Ukraine)
+ "Concordia",		; (1997, Italy+France)
+ "SANAE IV",		; (1997, South Africa)
+ "Juan Carlos I",	; (1998, Spain)
+ "Kohnen"		; (2001, Germany)

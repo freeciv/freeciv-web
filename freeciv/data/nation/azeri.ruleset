@@ -1,0 +1,146 @@
+[nation_azeri]
+
+name=_("Azeri")
+plural=_("?plural:Azeris")
+groups="Modern", "Asian"
+legend=_("The Azeris are the people of Azerbaijan. The territory\
+ of modern Azerbaijan was the scene of rises and falls of different\
+ ancient states of the Caucasus region. In 1813 Azerbaijan became\
+ part of the Russian Empire, which was followed by a short period\
+ of independence in 1918-1920 - as the first Islamic republic\
+ in history. Then Azerbaijan became part of the Soviet Union until\
+ its dissolution in 1991.")
+
+leader=
+  "İsmayıl Xətai",
+  "Shams ad-Din Eldeqiz",
+  "Shakhverdi",
+  "Dargah Quli",
+  "Haydar Quli",
+  "Husayn",
+  "Malik Najaf",
+  "Muhammed Ali",
+  "Seyid Abbas",
+  "Əbülfəz Elçibəy",
+  "Heydər Əliyev",
+  "Ahmed bey Agaoglu",
+  "Mammed Amin Rasulzade",
+  "Fatali Khan Khoyski",
+  "Nariman Narimanov"
+
+leader_sex="Male", "Male", "Male", "Male", "Male",
+           "Male", "Male", "Male", "Male", "Male",
+           "Male", "Male", "Male", "Male", "Male"
+
+flag="azerbaijan"
+flag_alt="-"
+city_style = "Classical"
+
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Despotism",       _("Khan"),         _("Khatan")
+                 "Monarchy",        _("Shah"),         _("Shahbanu")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+conflicts_with="soviet"
+civilwar_nations="turkish", "persian", "armenian"
+
+; http://de.wikipedia.org/wiki/Liste_der_Städte_in_Aserbaidschan
+cities =
+ "Bakı",
+ "Gəncə",
+ "Sumqayıt",
+ "Mingəçevir",
+ "Qaraçuxur",
+ "Əli Bayramlı",
+ "Bakıxanov",
+ "Naxçıvan",
+ "Şəki",
+ "Yevlax",
+ "Xankəndi",
+ "Lənkəran",
+ "Rəsulzadə",
+ "Biləcəri",
+ "Maştağa",
+ "Ağdam",
+ "Bərdə",
+ "Xaçmaz",
+ "Salyan",
+ "Hövsan",
+ "Cəlilabad",
+ "Şəmkir",
+ "Göyçay",
+ "Ağcabədi",
+ "Xırdalan",
+ "İmişli",
+ "Lökbatan",
+ "Şamaxı",
+ "Sabirabad",
+ "Əmircan",
+ "Füzuli",
+ "Buzovna",
+ "Binə",
+ "Ağdaş",
+ "Qazı Məmməd",
+ "Quba",
+ "Siyəzən",
+ "Sahil",
+ "Dəvəçi",
+ "Zabrat",
+ "Sabunçu",
+ "Ağstafa", ; this and following from a map
+ "Qazax",
+ "Tovuz",
+ "Daşkəsən",
+ "Xaniar",
+ "Nəbiağali",
+ "Dal'mamedli",
+ "Goranboy",
+ "Laçin",
+ "Kəlbəcər",
+ "Tərtər",
+ "Zəngilart",
+ "Karadonlı",
+ "Saatlı",
+ "Qaraçala",
+ "Biləsuvar",
+ "Bankə",
+ "Neftçala",
+ "Prishibinske",
+ "Masallı",
+ "Yardımlı",
+ "Lerik",
+ "Port İliç (ocean)",
+ "Astara",
+ "Ələt",
+ "Pirsaat",
+ "Qobustan",
+ "Səngəçal",
+ "Primorsk",
+ "Marakyany",
+ "Artyom",
+ "Jiloy",
+ "Sitaçay",
+ "Xizi",
+ "Qusar",
+ "Xudat",
+ "Yalama",
+ "Quarsu",
+ "Kürdəmir",
+ "Ağsu",
+ "Shemakha",
+ "Mərəzə",
+ "Ucar",
+ "Zərdab",
+ "İsmayıllı",
+ "Qəbələ",
+ "Ləki",
+ "Xanabad",
+ "Oguz",
+ "Oax",
+ "Zaqatala",
+ "Balakən"

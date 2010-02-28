@@ -1,0 +1,11 @@
+# GGZ client game description file for Freeciv
+
+[ModuleInfo]
+Author = See http://www.freeciv.org/wiki/People
+CommandLine = @bindir@/freeciv-gtk2
+Frontend = any
+Homepage = http://www.freeciv.org/
+Name = Freeciv
+ProtocolEngine = Freeciv
+ProtocolVersion = @NETWORK_CAPSTRING_MANDATORY@
+Version = @VERSION@

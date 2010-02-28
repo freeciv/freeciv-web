@@ -1,0 +1,123 @@
+body { 
+    font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
+	font-size: 14px;
+	margin: 0px 0px 0px 0px; 
+	background-color: #000000;
+}
+
+
+#pregame_page {
+  padding: 10px;
+  background-color: #333333;
+  width: 97%;
+  float:left;
+}
+
+#pregame_logo {
+  width: 100%;
+  height: 60px;
+  background: no-repeat url(/images/header_small.png);
+  background-color: #000000;
+}
+
+#pregame_options {
+  background-color: #333333;
+  width: 99%;
+  height: 30px;
+  padding: 10px;
+  float: left;
+}
+
+#pregame_player_list {
+  background-color: #333333;
+  width: 15%;
+  height: 80%;
+  float: right;
+  overflow: auto;
+}
+
+#pregame_player_name {
+  padding: 5px;
+  margin: 5px;
+  background-color: #777777;
+  float: left;
+  min-width: 180px;
+  height: 48px;
+}
+
+#pregame_message_area {
+  background-color: #111111;
+  color: #ffffff;
+  height: 650px;
+  width: 80%;
+  overflow: auto;
+  float: left;
+}
+
+#pregame_player_icon {
+  background: transparent url(/tileset/freeciv-web-tileset-2.png); 
+  background-position:-649px -689px; 
+  width: 64px; 
+  height: 48px; 
+  float:left;
+  
+}
+
+#pregame_ai_icon {
+  background: transparent url(/tileset/freeciv-web-tileset-2.png); 
+  background-position:-810px -643px; 
+  width: 64px; 
+  height: 48px; 
+  float:left;
+  
+}  
+
+#pregame_chat_box {
+  width: 100%;
+  height: 20px;
+  float: left;
+}
+
+#pregame_text_input {
+  width: 80%;
+  padding: 5px;
+  font-size: 16px;
+}
+
+#pregame_metamessage {
+  width: 50%;
+}
+
+
+#nation_list {
+  float: left; 
+  height:300px; 
+  overflow: auto; 
+  width: 40%;
+}
+
+#nation_legend {
+  float: left; 
+  height: 300px; 
+  overflow: auto; 
+  padding: 10px; 
+  width: 50%;
+}
+
+#nation_choice {
+  width: 180px; 
+  margin-left: 60px; 
+  cursor:pointer;
+  cursor:hand;
+
+}
+
+
+#pregame_buttons {
+  float:left;
+}
+
+#share_icons {
+  float:left;
+  margin-left: 50px;
+}

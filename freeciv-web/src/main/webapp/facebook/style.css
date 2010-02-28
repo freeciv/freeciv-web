@@ -1,0 +1,434 @@
+body {
+  background: #d7e3b5;
+  font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
+  font-size: 13px;
+  margin: 0px;
+  padding: 0px;
+  text-align: left; }
+
+a {
+  color: #1b7bdd;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #2fa600;
+  text-decoration: underline;
+}
+
+#confidential {
+  height: 1.5em;
+  background-color: #3B5998;
+  text-align: center;
+  color: white;
+  padding: 5px;
+  margin-bottom: 5px;
+  font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+}
+
+.HideUntilElementReady
+{
+  visibility:hidden;
+}
+
+.HideUntilElementReady.FB_ElementReady
+{
+  visibility:visible;
+}
+
+h1 {
+  font-size: 25px; }
+
+h2 {
+  margin: 0px 0px;
+  color: #ffffff;
+  margin-bottom: 15px;
+}
+
+h3 {
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+  padding-bottom: 2px;
+  border-bottom: solid 1px #d1ab00;
+  margin: 0px 0px;
+}
+
+h4, h5 {
+  font-size: 11px; }
+
+img {
+  border: none; }
+
+#book {
+  padding: 0px;
+  margin: 0px auto;
+  text-align: left; }
+
+#signin {
+  float: right;
+  text-decoration: none;
+  color: white;
+  padding: 0px 20px 0px 0px;
+  font-size: 11px;
+  margin-top: 10px;
+  vertical-align: bottom;
+}
+
+.inputtext {
+  border: 1px solid #bdc768;
+  font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
+  font-size: 11px;
+  padding: 3px;
+  width: 100px;
+}
+
+#signin .inputsubmit {
+  border: 0pt none;
+  cursor: pointer;
+  background: #9999EE;
+  font-size: 11px;
+}
+
+#signin .fbconnect {
+  vertical-align: bottom;
+}
+
+#content {
+  width: 500px;
+}
+
+#header {
+  display: block;
+  overflow: hidden;
+  color: white;
+  text-decoration: none;
+}
+
+#header a {
+  color: white;
+}
+
+#header .header_content {
+  width: 850px;
+  margin: 0px auto;
+  padding: 5px 20px 0px;
+  overflow: hidden;
+  background: #6e7e38;
+  border-bottom: solid 6px #acbd7d;
+  position: relative;
+}
+
+#header a.title {
+  float: left;
+  font-size: 24px;
+  color: white;
+  text-decoration: none;
+  margin-top: 3px;
+}
+
+#header .account {
+  float: right;
+  font-size: 11px;
+  position: absolute;
+  bottom: 12px;
+  right: 40px;
+}
+
+#header a:hover {
+  color: #cccccc;
+}
+
+.body_content {
+  padding: 30px 20px 50px;
+  width: 850px;
+  background: #2E2F35;
+  margin: 0px auto;
+  overflow: hidden;
+}
+
+.body_content .welcome_img {
+  float: left;
+  border: solid 2px #7e8f45;
+}
+
+.body_content .welcome_dialog {
+  float: left;
+  width: 750px;
+  padding-left: 30px;
+}
+
+.body_content .login_prompt {
+  padding: 10px 0px 15px;
+}
+
+.body_content .login_sector {
+  width: 370px;
+  float: left;
+  border-right: solid 1px #d1ab00;
+}
+
+.body_content .login_sector_fb {
+  float: left;
+  padding-left: 10px;
+}
+
+.body_content label {
+  width: 70px;
+  display: block;
+  float: left;
+  padding: 5px 8px 5px 0px;
+}
+
+.body_content .welcome_dialog .inputtext {
+  width: 170px;
+  float: left;
+}
+
+.body_content .welcome_dialog .inputsubmit {
+  margin-left: 78px;
+}
+
+.body_content .welcome_dialog .signup_container {
+  margin: 15px 0px;
+  border: solid 1px #AAAAAA;
+  padding: 10px;
+  background: #444444;
+}
+
+#header-title {
+  float: left;
+}
+
+#header-nav {
+  float: left;
+  padding: 34px 20px 0px 20px;
+  font-size: 13px;
+}
+
+#header-account {
+  clear: none;
+  text-align: right;
+  padding: 5px 5px 0px 10px;
+  font-size: 11px;
+}
+
+#header-account .account_links {
+  padding: 4px 0px;
+  color: #acbd7d;
+}
+
+#header-account .account_links a {
+  color: #cad4ad;
+}
+
+#header-profilepic {
+  margin: 0px 0px 0px 5px;
+  border: solid 1px #7e8f45;
+  float:right;
+}
+
+
+#header-signin {
+  float: right;
+  text-decoration: none;
+  padding: 5px;
+  font-size: 11px;
+  vertical-align: bottom;
+}
+#header-signin .inputtext {
+  border: 1px solid #bdc768;
+  font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
+  font-size: 11px;
+  padding: 3px;
+  width: 100px;
+}
+#header-signin .inputsubmit {
+  border: 0pt none;
+  cursor: pointer;
+  background: #9999EE;
+  font-size: 11px;
+}
+#header-signin .fbconnect {
+  vertical-align: bottom;
+}
+
+#signup {
+  margin: 20px auto; /* centered */
+  padding: 15px;
+  text-align: center;
+  font-size: 18px;
+  display: block;
+}
+#signup a {
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.footer_stuff {
+  font-size: 9px;
+  padding: 5px 20px;
+  background: #8c9c57;
+  color: white;
+  width: 850px;
+  margin: 0px auto;
+}
+
+.inputtext {
+  width: 180px;
+}
+
+
+#loginbox {
+  padding: 20px 8px;
+}
+
+.error {
+  padding: 10px;
+  margin: 10px;
+  background: #dd8888 none repeat scroll 0%;
+  border-color: red;
+  border: 1px solid red;
+}
+.success {
+  margin: 0px 0px 20px;
+  border: solid 1px #839553;
+  padding: 10px;
+  font-weight: bold;
+  background: #d0dbb0;
+}
+
+#feed_loading {
+  padding-left: 10px;
+  display: inline;
+}
+
+.bluebox {
+  float: left;
+  width: 430px;
+  margin-right: 40px;
+}
+
+.bluebox label {
+  width: 130px;
+}
+
+.bluebox h3 {
+  margin-bottom: 20px;
+}
+
+.friends_box {
+  margin-top: 30px;
+}
+
+.friends_table {
+  width: 430px;
+}
+
+.friends_table .friend_row {
+  border-style: solid;
+  border-width: 1px;
+}
+
+.friends_table .friend_row .profilepic {
+  width : 50px;
+  height: 50px;
+}
+
+.friends_table .friend_row .user {
+  padding: 0px 5px;
+  width: 225px;
+}
+
+.friends_table .friend_row .user .name {
+  font-weight: bold;
+  padding: 0px 0px 3px;
+  white-space: nowrap;
+}
+
+.friends_table .friend_row .user .status {
+  font-color: #CCCCCC;
+  font-size: 11px;
+}
+
+.friends_table .friend_row .lastrun {
+  font-size: 11px;
+}
+
+.connect_invites {
+  padding-top: 8px;
+}
+
+#showruns {
+  padding: 10px;
+  background: #e3ebc9 none repeat scroll 0%;
+  float: right;
+  width: 350px;
+  margin-top: -10px;
+  margin-right: 0px;
+}
+
+#showruns h3 {
+  padding: 2px;
+}
+#showruns td, #showruns th {
+  font-size: 13px;
+  padding: 3px 6px;
+  border: 1px;
+}
+#showruns th {
+  text-align: left;
+}
+
+.editor table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    border-width: 0;
+}
+.editor td, .editor th {
+    margin: 0;
+    padding: 4px;
+    background-color: #FFC;
+}
+
+.datefield {
+  width: auto;
+}
+
+/* hacky using tables for layout */
+.account_table table, .account_table td {
+    margin: 10px;
+    padding: 10px;
+    vertical-align: top;
+}
+
+/*  ----------------------|  LOGIN  |----------------------  */
+
+.register .login_sector {
+    width: 320px;
+}
+
+.register .login_sector_fb {
+    width: 400px;
+}
+
+/*  ----------------------|  SWEET BLESSED CLEARFIX  |----------------------  */
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0; }
+
+.clearfix {
+    display: inline-block; }
+
+html[xmlns] .clearfix {
+    display: block; }
+
+* html .clearfix {
+    height: 1%; }
+

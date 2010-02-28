@@ -1,0 +1,46 @@
+[nation_aramean] 
+
+name=_("Aramean") 
+plural=_("?plural:Arameans") 
+groups="Ancient", "Asian" 
+legend=_("According to legend, the Aramean people are the descendants of\
+ Aram, the grandson of Noah.") 
+leader=
+ "Ahuni",
+ "Kapara",
+ "Barrakib",
+ "Bar Hadad",
+ "Hasael",
+ "Zenobia",
+ "Aryo",
+ "Abgar VIII"	; a.k.a. Abgar the Great
+leader_sex="Male", "Male", "Male", "Male", "Male", "Female", "Male", "Male" 
+flag="aram" 
+flag_alt = "-" 
+city_style = "Classical" 
+
+init_techs="" 
+init_buildings="" 
+init_government="Despotism" 
+init_units="" 
+civilwar_nations = "assyrian", "babylonian"
+
+cities = 
+ "Aram",
+ "Amid",
+ "Mardin",
+ "Commagene",
+ "Urhoi", 
+ "Haran",
+ "Melitene",
+ "Nisibin",
+ "Guzana",
+ "Yamkhat",
+ "Hama", 
+ "Homs",
+ "Damascus",
+ "Tadmor",
+ "Ebla", 
+ "Midyat",
+ "Tikrit",
+ "Bethsaida" 

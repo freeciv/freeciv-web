@@ -1,0 +1,11 @@
+# Server commands to make rules similar to Civ1.
+#
+# Use this as, eg, "./ser -r data/civ1.serv" 
+#
+# Civ1 start:
+set sciencebox 50
+set startunits c
+rulesetdir civ1
+#
+# Minor civ1 rules:
+set borders 0

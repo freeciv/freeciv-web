@@ -1,0 +1,8 @@
+2001-06-15  gettextize  <bug-gnu-utils@gnu.org>
+
+	* Makefile.in.in: Upgrade to gettext-0.10.38.
+	* cat-id-tbl.c: Remove file.
+	* stamp-cat-id: Remove file.
+
+I guess this should be used to record changes to translations.
+Currently it is here just to satisfy the 'make dist' target.  --dwp

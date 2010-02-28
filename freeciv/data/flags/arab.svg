@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Sodipodi ("http://www.sodipodi.com/") -->
+<!--
+
+
+
+-->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="250pt"
+   id="svg607"
+   sodipodi:docbase="/Users/daniel/arabflags"
+   sodipodi:docname="arab.svg"
+   sodipodi:version="0.32"
+   width="375pt"
+   inkscape:version="0.43"
+   version="1.0">
+  <metadata
+     id="metadata3">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title>arab</dc:title>
+        <dc:description />
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li />
+            <rdf:li>flag</rdf:li>
+            <rdf:li>africa</rdf:li>
+            <rdf:li>sign</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+        <dc:publisher>
+          <cc:Agent
+             rdf:about="http://www.openclipart.org">
+            <dc:title> Andrew Duhan</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Andrew Duhan</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:rights>
+          <cc:Agent>
+            <dc:title> Andrew Duhan</dc:title>
+          </cc:Agent>
+        </dc:rights>
+        <dc:date />
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <cc:license
+           rdf:resource="http://web.resource.org/cc/PublicDomain" />
+        <dc:language>en</dc:language>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://web.resource.org/cc/PublicDomain">
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/Reproduction" />
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/Distribution" />
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs609" />
+  <sodipodi:namedview
+     id="base"
+     inkscape:zoom="1.056"
+     inkscape:cx="312.5"
+     inkscape:cy="156.25"
+     inkscape:window-width="887"
+     inkscape:window-height="720"
+     inkscape:window-x="58"
+     inkscape:window-y="22"
+     inkscape:current-layer="svg607" />
+  <rect
+     height="312.5"
+     id="rect612"
+     style="font-size:12px;fill:#107b00;fill-opacity:1;fill-rule:evenodd;stroke-width:1pt"
+     width="468.75"
+     x="0"
+     y="4.2557716e-05" />
+  <g
+     id="g3932"
+     transform="translate(-85.92652,3.542419)">
+    <polygon
+       d="M 331.8761,176.56204 L 315.96701,165.24486 L 300.24834,176.96876 L 306.09544,158.34112 L 290.08801,147.01466 L 309.61081,146.81933 L 315.43634,128.09529 L 321.65499,146.60221 L 341.2628,146.35657 L 325.58334,157.98981 L 331.8761,176.56204 z "
+       inkscape:randomized="0"
+       inkscape:rounded="0"
+       inkscape:flatsided="false"
+       transform="matrix(2.460592,3.048588e-2,-3.048588e-2,2.460592,-398.3439,-233.573)"
+       style="font-size:12px;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke-width:1pt"
+       sodipodi:type="star"
+       sodipodi:sides="5"
+       sodipodi:r2="10.247056"
+       sodipodi:r1="26.906403"
+       sodipodi:cy="154.99947"
+       sodipodi:cx="315.78232"
+       sodipodi:arg2="1.5527715"
+       sodipodi:arg1="0.9296189"
+       points="331.876,176.562 315.967,165.245 300.248,176.969 306.095,158.341 290.088,147.015 309.611,146.819 315.436,128.095 321.655,146.602 341.263,146.357 325.583,157.99 331.876,176.562 "
+       id="polygon644" />
+    <path
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cscsc"
+       id="path648"
+       d="M 339.60378,243.18563 C 263.7305,269.52338 206.601,212.42586 205.60684,153.88634 C 204.61515,95.346803 262.06455,34.981371 339.99012,62.470762 C 295.9003,69.009058 263.52379,107.65071 263.13745,151.33943 C 262.84216,184.37296 282.3783,231.46001 339.60378,243.18563 z " />
+  </g>
+</svg>

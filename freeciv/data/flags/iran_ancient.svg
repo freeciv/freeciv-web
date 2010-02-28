@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="600.00000pt"
+   height="400.00000pt"
+   id="svg2379"
+   sodipodi:version="0.32"
+   inkscape:version="0.42"
+   sodipodi:docbase="/home/daniel/ancientflags"
+   sodipodi:docname="iran_ancient.svg">
+  <defs
+     id="defs2381" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.68800000"
+     inkscape:cx="375.00000"
+     inkscape:cy="250.00000"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     inkscape:window-width="753"
+     inkscape:window-height="513"
+     inkscape:window-x="59"
+     inkscape:window-y="113" />
+  <metadata
+     id="metadata2384">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#c73d30;fill-opacity:1.0000000;fill-rule:nonzero;stroke:none;stroke-width:4.1250000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4.0000000;stroke-dasharray:none;stroke-opacity:1.0000000"
+       id="rect2105"
+       width="750.00000"
+       height="500.00000"
+       x="0.0000000"
+       y="0.0000000" />
+    <rect
+       style="fill:#380b62;fill-opacity:1.0000000;fill-rule:nonzero;stroke:none;stroke-width:4.1250000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4.0000000;stroke-dasharray:none;stroke-opacity:1.0000000"
+       id="rect1377"
+       width="668.90283"
+       height="417.94873"
+       x="41.025642"
+       y="41.025642" />
+    <path
+       style="fill:#ffcc00;fill-opacity:1.0000000;fill-rule:nonzero;stroke:none;stroke-width:7.3114228;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4.0000000;stroke-opacity:1.0000000"
+       d="M 430.94131,224.40294 L 594.66130,176.16553 L 708.87455,45.945485 L 545.15456,94.182897 L 430.94131,224.40294 z "
+       id="path2368"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       sodipodi:type="arc"
+       style="opacity:1.0000000;fill:#ffcc00;fill-opacity:1.0000000;fill-rule:nonzero;stroke:none;stroke-width:4.6725125;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4.0000000;stroke-dasharray:none;stroke-opacity:1.0000000"
+       id="path2362"
+       sodipodi:cx="248.51163"
+       sodipodi:cy="175.04651"
+       sodipodi:rx="37.186047"
+       sodipodi:ry="38.093021"
+       d="M 285.69767 175.04651 A 37.186047 38.093021 0 1 1  211.32558,175.04651 A 37.186047 38.093021 0 1 1  285.69767 175.04651 z"
+       transform="matrix(1.602564,0.000000,0.000000,1.602564,-23.27814,-30.67237)" />
+    <path
+       sodipodi:nodetypes="ccccc"
+       id="path2529"
+       d="M 430.94131,275.94549 L 594.66130,324.18290 L 708.87455,454.40294 L 545.15456,406.16553 L 430.94131,275.94549 z "
+       style="fill:#ffcc00;fill-opacity:1.0000000;fill-rule:nonzero;stroke:none;stroke-width:7.3112500;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4.0000000;stroke-opacity:1.0000000;stroke-dasharray:none" />
+    <path
+       sodipodi:nodetypes="ccccc"
+       id="path2531"
+       d="M 320.87455,224.40294 L 157.15456,176.16553 L 42.941310,45.945485 L 206.66130,94.182897 L 320.87455,224.40294 z "
+       style="fill:#ffcc00;fill-opacity:1.0000000;fill-rule:nonzero;stroke:none;stroke-width:7.3114228;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4.0000000;stroke-opacity:1.0000000" />
+    <path
+       style="fill:#ffcc00;fill-opacity:1.0000000;fill-rule:nonzero;stroke:none;stroke-width:7.3114228;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4.0000000;stroke-opacity:1.0000000"
+       d="M 320.87455,275.94549 L 157.15456,324.18290 L 42.941310,454.40294 L 206.66130,406.16553 L 320.87455,275.94549 z "
+       id="path2533"
+       sodipodi:nodetypes="ccccc" />
+  </g>
+</svg>

@@ -1,0 +1,176 @@
+
+; Modifying this file:
+; You should not modify this file except to make bugfixes or
+; for other "maintenance".  If you want to make custom changes
+; you should create a new datadir subdirectory and copy this file
+; into that directory, and then modify that copy.  Then use the
+; command "rulesetdir <mysubdir>" in the server to have freeciv
+; use your new customized file.
+
+; Note that the freeciv AI may not cope well with anything more
+; than minor changes.
+
+[datafile]
+description="Default governments data for Freeciv (as Civ2, minus fundamentalism)"
+options="1.9"
+
+[governments]
+during_revolution="Anarchy"
+
+; Below: The individual government types, one per section.
+;
+; The actual tag used (the * in [government_*]) does not matter, except 
+; it must be unique within this file, and it may be used in debug 
+; output when reading this file.
+;
+; For the "official" rulesets, the order of these sections should not
+; be changed because that would break backward compatability with 
+; savegames.  (In particular, if Fundamentalism is added to default
+; ruleset, should be added at end.)
+;
+; Notes on fields:
+
+; name        = name of this government form as seen by user 
+; reqs        = requirements for this government (see README.effects)
+; graphic     = tag specifing preferred graphic
+; graphic_alt = alternate graphics tag if preferred is not found;
+;               should be a standard tag if preferred is not;
+;		otherwise may be "-"
+; ai_better   = AI will not consider this government for use if the
+;               government listed here is available
+
+; ruler_titles = ruler titles by nation, "-" is default, and non-matched 
+;	         nations are ignored 
+
+; helptext = optional help text string; should escape all raw newlines 
+;	     so that xgettext parsing works
+
+;------------------------------------------------------------------------
+[government_anarchy]
+
+name        = _("Anarchy")
+; No reqs
+graphic     = "gov.anarchy"
+graphic_alt = "-"
+
+ruler_male_title = _("Usurper")
+ruler_female_title = _("?female:Usurper")
+
+helptext = _("\
+Anarchy is simply the absence of any recognizable government.\
+ Citizens are disorganized and unproductive, and will spend all\
+ income as quickly as possible, rather than paying taxes or\
+ conducting research.\
+\n\n\
+Anarchy offers slightly less corruption than Despotism,\
+ but slightly more unhappiness.\
+")
+
+;------------------------------------------------------------------------
+[government_despotism]
+
+name        = _("Despotism")
+; No reqs
+graphic     = "gov.despotism"
+graphic_alt = "-"
+ai_better   = "Monarchy"
+
+ruler_male_title = _("Chief")
+ruler_female_title = _("?female:Chief")
+
+helptext = _("\
+Under Despotism, you are the absolute ruler of your people.  Your\
+ control over your citizens is maintained largely by martial law.\
+\n\n\
+Despotism suffers the highest level of corruption of all\
+ forms of government.\
+")
+
+;------------------------------------------------------------------------
+[government_monarchy]
+
+name        = _("Monarchy")
+reqs = { "type", "name", "range"
+         "tech", "Monarchy", "Player"
+       }
+graphic     = "gov.monarchy"
+graphic_alt = "-"
+ai_better   = "Communism"
+
+ruler_male_title = _("King")
+ruler_female_title = _("Queen")
+
+helptext = _("\
+Under Monarchy, a king or queen serves as a hereditary figurehead\
+ for your government.\
+\n\n\
+Monarchy suffers the same small amount of corruption that\
+ the Republic does.\
+")
+
+;------------------------------------------------------------------------
+[government_communism]
+
+name        = _("Communism")
+reqs = { "type", "name", "range"
+         "tech", "Communism", "Player"
+       }
+graphic     = "gov.communism"
+graphic_alt = "-"
+
+ruler_male_title = _("Comrade")
+ruler_female_title = _("?female:Comrade")
+
+helptext = _("\
+A Communist government is based on the ideal that all people are\
+ equal.  All goods are owned by the state, rather than by private\
+ citizens.  Communism gives a balance between military and commercial\
+ styles of government.\
+\n\n\
+Under Communism, corruption does not vary by distance from\
+ the capital; all cities (including the capital) have a modest amount\
+ of corruption.\
+")
+
+;------------------------------------------------------------------------
+[government_republic]
+
+name        = _("Republic")
+reqs = { "type", "name", "range"
+         "tech", "The Republic", "Player"
+       }
+graphic     = "gov.republic"
+graphic_alt = "-"
+
+ruler_male_title = _("Consul")
+ruler_female_title = _("?female:Consul")
+
+helptext = _("\
+Under a Republican government, citizens hold an election to select a\
+ representative who will govern them; since elected leaders must\
+ remain popular to remain in control, citizens are given a greater\
+ degree of freedom.  Citizens under the Republic become unhappy\
+ easily, but the self-sufficiency of your citizens allows high levels\
+ of trade.\
+")
+
+;------------------------------------------------------------------------
+[government_democracy]
+
+name        = _("Democracy")
+reqs = { "type", "name", "range"
+         "tech", "Democracy", "Player"
+       }
+graphic     = "gov.democracy"
+graphic_alt = "-"
+
+ruler_male_title = _("President")
+ruler_female_title = _("?female:President")
+
+helptext = _("\
+Under Democracy, citizens govern directly by voting on issues.\
+ Democracy offers the highest possible level of trade, but also\
+ offers the most potential for unhappiness.  There is no corruption\
+ during Democracy, but citizens become very upset during\
+ wars.\
+")

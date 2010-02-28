@@ -1,0 +1,117 @@
+[nation_australian]
+
+name=_("Australian")
+plural=_("?plural:Australians")
+groups="Modern", "Oceanian"
+legend=_("Australia was founded as a British penal colony in 1788AD.\
+ Originally comprising of several colonies (New South Wales, Victoria,\
+ Queensland, South Australia, Western Australia and Tasmania) it\
+ became a single country in 1902.\
+ It is the only country on earth to occupy an entire continent.")
+leader =
+ "Robert Menzies",
+ "Mary Reibey",
+ "John Curtin",
+ "Enid Lyons",
+ "Harold Holt",
+ "Edmund Barton",
+ "Elizabeth Nicholls",
+ "Edith Cowan"
+leader_sex = "Male", "Female", "Male", "Female", "Male", "Male", "Female",
+ "Female"
+
+flag="australia"
+flag_alt = "-"
+city_style = "European"
+
+ruler_titles = { "government",      "male_title",        "female_title"
+                "Democracy", _("Prime Minister"), _("?female:Prime Minister")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations="Australian Aboriginal", "british"
+
+cities =
+ "Canberra (river, hills, forest, !desert, !ocean)",
+ "Sydney (ocean, grassland, !river, !desert)",
+ "Melbourne (ocean, river)",
+ "Brisbane (mountains, river, forest)",
+ "Adelaide (ocean, hills)",
+ "Perth (ocean, forest)",
+ "Darwin (ocean, swamp)",
+ "Hobart (river, ocean, forest)",
+ "Wollongong (ocean)",
+ "Rockhampton (hills, mountains, !ocean)",
+ "Launceston (river, forest, !ocean)",
+ "Townsville (mountains, ocean, !desert)",
+ "Albany (grassland, ocean)",
+ "Bunbury (ocean, !desert)",
+ "Kalgoorlie (river, desert, plains, !ocean)",
+ "Winton (mountains, plains, !ocean)",
+ "Griffith (!ocean, !mountains)",
+ "Alice Springs (desert, !ocean, mountains)",
+ "Quilpie (river, !ocean)",
+ "Cairns (forest, ocean)",
+ "Southport (ocean)",
+ "Ballarat (!ocean, river, forest)",
+ "Fremantle (ocean, river, grassland)",
+ "Whyalla (ocean, desert)",
+ "Albury (mountains, forest, river, !ocean)",
+ "Bathurst (hills)",
+ "Dubbo (river, grassland)",
+ "Mackay",
+ "Newcastle (mountains, ocean)",
+ "Byron Bay (ocean)",
+ "Monkey Mia",
+ "Grafton",
+ "Wagga Wagga",
+ "Lismore (plains)",
+ "Bourke",
+ "Tamworth (desert, !ocean, grassland)",
+ "Woomera",
+ "Carnarvon",
+ "Esperance",
+ "Katherine",
+ "Oodnadatta",
+ "Broken Hill (hills)",
+ "Hughenden",
+ "Geelong",
+ "Mt. Isa (mountains, !ocean, plains)",
+ "Pine Creek (river)",
+ "Daly Waters (ocean, river)",
+ "Wyndham",
+ "Broome",
+ "Onslow",
+ "Geraldton",
+ "Meekathrra",
+ "Tennant Creek (river)",
+ "Ceduna",
+ "Longreach",
+ "Renmark",
+ "Mildura",
+ "Hay (desert)",
+ "Bega",
+ "Toowoomba (river, mountains, swamp, !ocean)",
+ "Queenstown",
+ "Coober Pedy",
+ "Bendigo",
+ "Derby",
+ "Cunnamulla",
+ "Walgett",
+ "Dampier",
+ "Exmouth",
+ "Yorketown",
+ "Kiama",
+ "Moe",
+ "Warwick (plains, hills, !ocean)",
+ "Gosford",
+ "Bowen",
+ "Ingham",
+ "Gympie (!ocean)",
+ "Caloundra",
+ "Taree",
+ "Katoomba",
+ "Proserpine"

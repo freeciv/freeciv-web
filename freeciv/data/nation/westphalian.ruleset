@@ -1,0 +1,59 @@
+[nation_westphalian]
+
+name=_("Westphalian")
+plural=_("?plural:Westphalians")
+groups="Medieval", "European"
+legend=_("Westphalia, before becoming a Prussian province, was the western\
+ region of the Duchy of Saxony. Today it makes up the northern part of\
+ the largest German federal state, North Rhine-Westphalia.")
+leader =
+ "Widukind",
+ "Liudger",
+ "Hermann von Werl",
+ "Gottfried von Arnsberg",
+ "Graf von der Mark",
+ "Heinrich Aldegrever",
+ "Jan van Leiden",
+ "Franz von Waldeck",
+ "Annette von Droste Hülshoff"
+leader_sex = "Male", "Male", "Male", "Male", "Male",
+             "Male", "Male", "Male", "Female"
+flag="westphalia"
+flag_alt = "germany"
+city_style = "European"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+conflicts_with = "german"
+civilwar_nations = "german", "bavarian"
+
+cities =
+ "Münster",
+ "Dortmund",
+ "Bochum",
+ "Bielefeld",
+ "Gelsenkirchen",
+ "Arnsberg",
+ "Bocholt",
+ "Bottrop",
+ "Gütersloh",
+ "Hagen",
+ "Hamm",
+ "Herford",
+ "Herne",
+ "Iserlohn",
+ "Lippstadt",
+ "Lüdenscheid",
+ "Lünen",
+ "Menden",
+ "Minden",
+ "Paderborn",
+ "Recklinghausen",
+ "Rheine",
+ "Siegen",
+ "Soest",
+ "Warendorf",
+ "Werl"

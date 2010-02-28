@@ -1,0 +1,83 @@
+[nation_zulu]
+
+name=_("Zulu")
+plural=_("?plural:Zulus")
+groups="African"
+legend=_("The Zulus are a warlike Bantu people who migrated from\
+ west-central Africa into southern Africa beginning in the early 1700s,\
+ conquering the native Khoisan peoples and clashing with European settlers.")
+leader=
+ "Mnguni",		; Legendary first king of the Zulu and related tribes
+ "Nkosinkulu",
+ "Mdlani",
+ "Malandela kaLuzumana",
+ "Ntombhela kaMalandela",
+ "Zulu kaNtombela",	; Founder of the Zulu clan
+ "Gumede kaZulu",
+ "Phunga kaGumede",
+ "Mageba kaPhunga",
+ "Ndaba kaMageba",
+ "Jama kaNdaba",
+ "Senzangakhona kaJama",
+ "Shaka kaSenzangakhona",	; Shaka Zulu
+ "Dingane kaSenzangakhona",	; Half-brother of Shaka
+ "Mpande kaSenzangakhona",	; Half-brother of Shaka
+ "Cetshwayo kaMpande",
+ "Dinizulu kaCetshwayo",
+ "Solomon kaDinizulu",
+ "Cyprian Bhekuzulu kaSolomon"
+leader_sex="Male", "Male", "Male", "Male", "Male", 
+           "Male", "Male", "Male", "Male", "Male", 
+           "Male", "Male", "Male", "Male", "Male", 
+           "Male", "Male", "Male", "Male"
+flag="zulu"
+flag_alt = "rwanda"  ; used previously
+city_style = "Tropical"
+
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Despotism",       _("Chief"),        _("?female:Chief")
+		 "Republic", 	    _("Spokesman"),    _("Spokeswoman")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations="south african", "swazi"
+
+cities =
+ "Zimbabwe",
+ "Ulundi",
+ "Ethekwini",	; Boer name: Durban
+ "Tshwane",	; Boer name: Pretoria
+ "Harare",
+ "Maputo",
+ "Bulaweyo",
+ "Mzizima",
+ "Luanda",
+ "Umgungundlovu", ; Boer name: Pietermaitzburg
+ "Matola",
+ "Benoni",
+ "Gabarone",
+ "Beira",
+ "Tembisa",
+ "Nampula",
+ "Chitungwiza",
+ "Mbabane",
+ "Arusha",
+ "Mbeya",
+ "Huambo",
+ "Molepolole",
+ "Epumalanga",
+ "Ladysmtih",
+ "KwaDukuza",
+ "Eshowe",
+ "Hlobane",
+ "Esikhawini",
+ "Empangeni",
+ "Nongoma",
+ "Magudu",
+ "Mondlo",
+ "Endumeni",
+ "Mtunzini",
+ "Tongati"

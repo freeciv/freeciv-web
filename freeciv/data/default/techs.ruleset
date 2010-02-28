@@ -1,0 +1,753 @@
+
+; Modifying this file:
+; You should not modify this file except to make bugfixes or
+; for other "maintenance".  If you want to make custom changes,
+; you should create a new datadir subdirectory and copy this file
+; into that directory, and then modify that copy.  Then use the
+; command "rulesetdir <mysubdir>" in the server to have freeciv
+; use your new customized file.
+
+[datafile]
+description="Default technology data for Freeciv (as Civ2, minus a few)"
+options="1.9"
+
+; Below: The individual advances, one per section.
+; The number can be variable, up to 196.
+;
+; The actual tag used (the * in [advance_*]) does not matter, except 
+; it must be unique within this file, and it may be used in debug 
+; output when reading this file.
+;
+; Notes:
+;
+; name          = name as seen by user 
+; req1, req2	= advances required before researching this one
+; root_req      = tech required before acquiring this tech, by any
+;     means, inherited by all techs that require this tech in turn unless
+;     "None" is given here explicitly; and you can make a tech available
+;     only through the init_tech of a nation by making it root_req itself.
+; flags         = special flag strings
+; graphic       = icon for technology
+; graphic_alt   = alternate icon
+; helptext	= optional help text string (set units ruleset for examples)
+; bonus_message = text seen when a player is the first to 
+;                 discover an bonus tech.
+; cost		= if tech_cost_style is set to 3, this field is read for
+;		  information on how much a tech costs
+;
+; Special values for req1 and req2 are "None" (first section below) 
+; and "Never" (never available).  If only one tech is required, 
+; it should be listed as req1.
+;
+; Following flag strings are possible
+;
+; "Bonus_Tech" = player gets extra tech if rearched first
+; "Bridge"   = "Settler" unit types can build bridges over rivers
+; "Railroad" = "Settler" unit types can build rail roads
+; "Farmland" = "Settler" unit types can build farmland
+; "Population_Pollution_Inc" = Increase the pollution factor created by
+;                              population by one
+; "Build_Airborne" = from now on can build air units (for use by AI)
+
+[advance_advanced_flight]
+name     = _("Advanced Flight")
+req1     = "Radio"
+req2     = "Machine Tools"
+flags    = ""
+graphic     = "a.advanced_flight"
+graphic_alt = "-"
+
+[advance_alphabet]
+name     = _("Alphabet")
+req1     = "None"
+req2     = "None"
+flags    = ""
+graphic     = "a.alphabet"
+graphic_alt = "-"
+
+[advance_amphibious_warfare]
+name     = _("Amphibious Warfare")
+req1     = "Navigation"
+req2     = "Tactics"
+flags    = ""
+graphic     = "a.amphibious_warfare"
+graphic_alt = "-"
+
+[advance_astronomy]
+name     = _("Astronomy")
+req1     = "Mysticism"
+req2     = "Mathematics"
+flags    = ""
+graphic     = "a.astronomy"
+graphic_alt = "-"
+
+[advance_atomic_theory]
+name     = _("Atomic Theory")
+req1     = "Theory of Gravity"
+req2     = "Physics"
+flags    = ""
+graphic     = "a.atomic_theory"
+graphic_alt = "-"
+
+[advance_automobile]
+name     = _("Automobile")
+req1     = "Combustion"
+req2     = "Steel"
+flags    = "Population_Pollution_Inc"
+graphic     = "a.automobile"
+graphic_alt = "-"
+
+[advance_banking]
+name     = _("Banking")
+req1     = "Trade"
+req2     = "The Republic"
+flags    = ""
+graphic     = "a.banking"
+graphic_alt = "-"
+
+[advance_bridge_building]
+name     = _("Bridge Building")
+req1     = "Iron Working"
+req2     = "Construction"
+flags    = "Bridge"
+graphic     = "a.bridge_building"
+graphic_alt = "-"
+
+[advance_bronze_working]
+name     = _("Bronze Working")
+req1     = "None"
+req2     = "None"
+flags    = ""
+graphic     = "a.bronze_working"
+graphic_alt = "-"
+
+[advance_ceremonial_burial]
+name     = _("Ceremonial Burial")
+req1     = "None"
+req2     = "None"
+flags    = ""
+graphic     = "a.ceremonial_burial"
+graphic_alt = "-"
+
+[advance_chemistry]
+name     = _("Chemistry")
+req1     = "University"
+req2     = "Medicine"
+flags    = ""
+graphic     = "a.chemistry"
+graphic_alt = "-"
+
+[advance_chivalry]
+name     = _("Chivalry")
+req1     = "Feudalism"
+req2     = "Horseback Riding"
+flags    = ""
+graphic     = "a.chivalry"
+graphic_alt = "-"
+
+[advance_code_of_laws]
+name     = _("Code of Laws")
+req1     = "Alphabet"
+req2     = "None"
+flags    = ""
+graphic     = "a.code_of_laws"
+graphic_alt = "-"
+
+[advance_combined_arms]
+name     = _("Combined Arms")
+req1     = "Mobile Warfare"
+req2     = "Advanced Flight"
+flags    = ""
+graphic     = "a.combined_arms"
+graphic_alt = "-"
+
+[advance_combustion]
+name     = _("Combustion")
+req1     = "Refining"
+req2     = "Explosives"
+flags    = ""
+graphic     = "a.combustion"
+graphic_alt = "-"
+
+[advance_communism]
+name     = _("Communism")
+req1     = "Philosophy"
+req2     = "Industrialization"
+flags    = ""
+graphic     = "a.communism"
+graphic_alt = "-"
+helptext = _("Reduces the effect of Cathedrals.")
+
+[advance_computers]
+name     = _("Computers")
+req1     = "Mass Production"
+req2     = "Miniaturization"
+flags    = ""
+graphic     = "a.computers"
+graphic_alt = "-"
+
+[advance_conscription]
+name     = _("Conscription")
+req1     = "Democracy"
+req2     = "Metallurgy"
+flags    = ""
+graphic     = "a.conscription"
+graphic_alt = "-"
+
+[advance_construction]
+name     = _("Construction")
+req1     = "Masonry"
+req2     = "Currency"
+flags    = ""
+graphic     = "a.construction"
+graphic_alt = "-"
+
+[advance_currency]
+name     = _("Currency")
+req1     = "Bronze Working"
+req2     = "None"
+flags    = ""
+graphic     = "a.currency"
+graphic_alt = "-"
+
+[advance_democracy]
+name     = _("Democracy")
+req1     = "Banking"
+req2     = "Invention"
+flags    = ""
+graphic     = "a.democracy"
+graphic_alt = "-"
+
+[advance_economics]
+name     = _("Economics")
+req1     = "Banking"
+req2     = "University"
+flags    = ""
+graphic     = "a.economics"
+graphic_alt = "-"
+
+[advance_electricity]
+name     = _("Electricity")
+req1     = "Metallurgy"
+req2     = "Magnetism"
+flags    = ""
+graphic     = "a.electricity"
+graphic_alt = "-"
+helptext = _("Improves the effect of Colosseums.")
+
+[advance_electronics]
+name     = _("Electronics")
+req1     = "The Corporation"
+req2     = "Electricity"
+flags    = ""
+graphic     = "a.electronics"
+graphic_alt = "-"
+
+[advance_engineering]
+name     = _("Engineering")
+req1     = "The Wheel"
+req2     = "Construction"
+flags    = ""
+graphic     = "a.engineering"
+graphic_alt = "-"
+
+[advance_environmentalism]
+name     = _("Environmentalism")
+req1     = "Recycling"
+req2     = "Space Flight"
+flags    = ""
+graphic     = "a.environmentalism"
+graphic_alt = "-"
+
+[advance_espionage]
+name     = _("Espionage")
+req1     = "Communism"
+req2     = "Democracy"
+flags    = ""
+graphic     = "a.espionage"
+graphic_alt = "-"
+
+[advance_explosives]
+name     = _("Explosives")
+req1     = "Gunpowder"
+req2     = "Chemistry"
+flags    = ""
+graphic     = "a.explosives"
+graphic_alt = "-"
+
+[advance_feudalism]
+name     = _("Feudalism")
+req1     = "Warrior Code"
+req2     = "Monarchy"
+flags    = ""
+graphic     = "a.feudalism"
+graphic_alt = "-"
+
+[advance_flight]
+name     = _("Flight")
+req1     = "Combustion"
+req2     = "Theory of Gravity"
+flags    = "Build_Airborne"
+graphic     = "a.flight"
+graphic_alt = "-"
+
+[advance_fusion_power]
+name     = _("Fusion Power")
+req1     = "Nuclear Power"
+req2     = "Superconductors"
+flags    = ""
+graphic     = "a.fusion_power"
+graphic_alt = "-"
+
+[advance_genetic_engineering]
+name     = _("Genetic Engineering")
+req1     = "Medicine"
+req2     = "The Corporation"
+flags    = ""
+graphic     = "a.genetic_engineering"
+graphic_alt = "-"
+
+[advance_guerilla_warfare]
+name     = _("Guerilla Warfare")
+req1     = "Communism"
+req2     = "Tactics"
+flags    = ""
+graphic     = "a.guerilla_warfare"
+graphic_alt = "-"
+
+[advance_gunpowder]
+name     = _("Gunpowder")
+req1     = "Invention"
+req2     = "Iron Working"
+flags    = ""
+graphic     = "a.gunpowder"
+graphic_alt = "-"
+
+[advance_horseback_riding]
+name     = _("Horseback Riding")
+req1     = "None"
+req2     = "None"
+flags    = ""
+graphic     = "a.horseback_riding"
+graphic_alt = "-"
+
+[advance_industrialization]
+name     = _("Industrialization")
+req1     = "Railroad"
+req2     = "Banking"
+flags    = "Population_Pollution_Inc"
+graphic     = "a.industrialization"
+graphic_alt = "-"
+
+[advance_invention]
+name     = _("Invention")
+req1     = "Engineering"
+req2     = "Literacy"
+flags    = ""
+graphic     = "a.invention"
+graphic_alt = "-"
+
+[advance_iron_working]
+name     = _("Iron Working")
+req1     = "Bronze Working"
+req2     = "Warrior Code"
+flags    = ""
+graphic     = "a.iron_working"
+graphic_alt = "-"
+
+[advance_labor_union]
+name     = _("Labor Union")
+req1     = "Mass Production"
+req2     = "Guerilla Warfare"
+flags    = ""
+graphic     = "a.labor_union"
+graphic_alt = "-"
+
+[advance_laser]
+name     = _("Laser")
+req1     = "Mass Production"
+req2     = "Nuclear Power"
+flags    = ""
+graphic     = "a.laser"
+graphic_alt = "-"
+
+[advance_leadership]
+name     = _("Leadership")
+req1     = "Chivalry"
+req2     = "Gunpowder"
+flags    = ""
+graphic     = "a.leadership"
+graphic_alt = "-"
+
+[advance_literacy]
+name     = _("Literacy")
+req1     = "Writing"
+req2     = "Code of Laws"
+flags    = ""
+graphic     = "a.literacy"
+graphic_alt = "-"
+
+[advance_machine_tools]
+name     = _("Machine Tools")
+req1     = "Steel"
+req2     = "Tactics"
+flags    = ""
+graphic     = "a.machine_tools"
+graphic_alt = "-"
+
+[advance_magnetism]
+name     = _("Magnetism")
+req1     = "Iron Working"
+req2     = "Physics"
+flags    = ""
+graphic     = "a.magnetism"
+graphic_alt = "-"
+
+[advance_map_making]
+name     = _("Map Making")
+req1     = "Alphabet"
+req2     = "None"
+flags    = ""
+graphic     = "a.map_making"
+graphic_alt = "-"
+
+[advance_masonry]
+name     = _("Masonry")
+req1     = "None"
+req2     = "None"
+flags    = ""
+graphic     = "a.masonry"
+graphic_alt = "-"
+
+[advance_mass_production]
+name     = _("Mass Production")
+req1     = "Automobile"
+req2     = "The Corporation"
+flags    = "Population_Pollution_Inc"
+graphic     = "a.mass_production"
+graphic_alt = "-"
+
+[advance_mathematics]
+name     = _("Mathematics")
+req1     = "Alphabet"
+req2     = "Masonry"
+flags    = ""
+graphic     = "a.mathematics"
+graphic_alt = "-"
+
+[advance_medicine]
+name     = _("Medicine")
+req1     = "Philosophy"
+req2     = "Trade"
+flags    = ""
+graphic     = "a.medicine"
+graphic_alt = "-"
+
+[advance_metallurgy]
+name     = _("Metallurgy")
+req1     = "Gunpowder"
+req2     = "University"
+flags    = ""
+graphic     = "a.metallurgy"
+graphic_alt = "-"
+
+[advance_miniaturization]
+name     = _("Miniaturization")
+req1     = "Machine Tools"
+req2     = "Electronics"
+flags    = ""
+graphic     = "a.miniaturization"
+graphic_alt = "-"
+
+[advance_mobile_warfare]
+name     = _("Mobile Warfare")
+req1     = "Automobile"
+req2     = "Tactics"
+flags    = ""
+graphic     = "a.mobile_warfare"
+graphic_alt = "-"
+
+[advance_monarchy]
+name     = _("Monarchy")
+req1     = "Ceremonial Burial"
+req2     = "Code of Laws"
+flags    = ""
+graphic     = "a.monarchy"
+graphic_alt = "-"
+
+[advance_monotheism]
+name     = _("Monotheism")
+req1     = "Philosophy"
+req2     = "Polytheism"
+flags    = ""
+graphic     = "a.monotheism"
+graphic_alt = "-"
+
+[advance_mysticism]
+name     = _("Mysticism")
+req1     = "Ceremonial Burial"
+req2     = "None"
+flags    = ""
+graphic     = "a.mysticism"
+graphic_alt = "-"
+helptext = _("Improves the effect of Temples.")
+
+[advance_navigation]
+name     = _("Navigation")
+req1     = "Seafaring"
+req2     = "Astronomy"
+flags    = ""
+graphic     = "a.navigation"
+graphic_alt = "-"
+
+[advance_nuclear_fission]
+name     = _("Nuclear Fission")
+req1     = "Mass Production"
+req2     = "Atomic Theory"
+flags    = ""
+graphic     = "a.nuclear_fission"
+graphic_alt = "-"
+
+[advance_nuclear_power]
+name     = _("Nuclear Power")
+req1     = "Nuclear Fission"
+req2     = "Electronics"
+flags    = ""
+graphic     = "a.nuclear_power"
+graphic_alt = "-"
+helptext = _("Gives sea units one extra move.")
+
+[advance_philosophy]
+name     = _("Philosophy")
+req1     = "Mysticism"
+req2     = "Literacy"
+flags    = "Bonus_Tech"
+bonus_message = _("Great philosophers from all the world join \
+your civilization: you get an immediate advance.")
+graphic     = "a.philosophy"
+graphic_alt = "-"
+
+[advance_physics]
+name     = _("Physics")
+req1     = "Literacy"
+req2     = "Navigation"
+flags    = ""
+graphic     = "a.physics"
+graphic_alt = "-"
+
+[advance_plastics]
+name     = _("Plastics")
+req1     = "Refining"
+req2     = "Space Flight"
+flags    = "Population_Pollution_Inc"
+graphic     = "a.plastics"
+graphic_alt = "-"
+
+[advance_polytheism]
+name     = _("Polytheism")
+req1     = "Horseback Riding"
+req2     = "Ceremonial Burial"
+flags    = ""
+graphic     = "a.polytheism"
+graphic_alt = "-"
+
+[advance_pottery]
+name     = _("Pottery")
+req1     = "None"
+req2     = "None"
+flags    = ""
+graphic     = "a.pottery"
+graphic_alt = "-"
+
+[advance_radio]
+name     = _("Radio")
+req1     = "Flight"
+req2     = "Electricity"
+flags    = ""
+graphic     = "a.radio"
+graphic_alt = "-"
+
+[advance_railroad]
+name     = _("Railroad")
+req1     = "Steam Engine"
+req2     = "Bridge Building"
+flags    = "Railroad"
+graphic     = "a.railroad"
+graphic_alt = "-"
+
+[advance_recycling]
+name     = _("Recycling")
+req1     = "Mass Production"
+req2     = "Democracy"
+flags    = ""
+graphic     = "a.recycling"
+graphic_alt = "-"
+
+[advance_refining]
+name     = _("Refining")
+req1     = "Chemistry"
+req2     = "The Corporation"
+flags    = ""
+graphic     = "a.refining"
+graphic_alt = "-"
+
+[advance_refrigeration]
+name     = _("Refrigeration")
+req1     = "Sanitation"
+req2     = "Electricity"
+flags    = "Farmland"
+graphic     = "a.refrigeration"
+graphic_alt = "-"
+
+[advance_robotics]
+name     = _("Robotics")
+req1     = "Mobile Warfare"
+req2     = "Computers"
+flags    = ""
+graphic     = "a.robotics"
+graphic_alt = "-"
+
+[advance_rocketry]
+name     = _("Rocketry")
+req1     = "Advanced Flight"
+req2     = "Electronics"
+flags    = ""
+graphic     = "a.rocketry"
+graphic_alt = "-"
+
+[advance_sanitation]
+name     = _("Sanitation")
+req1     = "Engineering"
+req2     = "Medicine"
+flags    = ""
+graphic     = "a.sanitation"
+graphic_alt = "-"
+
+[advance_seafaring]
+name     = _("Seafaring")
+req1     = "Pottery"
+req2     = "Map Making"
+flags    = ""
+graphic     = "a.seafaring"
+graphic_alt = "-"
+
+[advance_space_flight]
+name     = _("Space Flight")
+req1     = "Computers"
+req2     = "Rocketry"
+flags    = ""
+graphic     = "a.space_flight"
+graphic_alt = "-"
+
+[advance_stealth]
+name     = _("Stealth")
+req1     = "Superconductors"
+req2     = "Advanced Flight"
+flags    = ""
+graphic     = "a.stealth"
+graphic_alt = "-"
+
+[advance_steam_engine]
+name     = _("Steam Engine")
+req1     = "Physics"
+req2     = "Invention"
+flags    = ""
+graphic     = "a.steam_engine"
+graphic_alt = "-"
+
+[advance_steel]
+name     = _("Steel")
+req1     = "Electricity"
+req2     = "Industrialization"
+flags    = ""
+graphic     = "a.steel"
+graphic_alt = "-"
+
+[advance_superconductors]
+name     = _("Superconductors")
+req1     = "Nuclear Power"
+req2     = "Laser"
+flags    = ""
+graphic     = "a.superconductors"
+graphic_alt = "-"
+
+[advance_tactics]
+name     = _("Tactics")
+req1     = "Conscription"
+req2     = "Leadership"
+flags    = ""
+graphic     = "a.tactics"
+graphic_alt = "-"
+
+[advance_the_corporation]
+name     = _("The Corporation")
+req1     = "Economics"
+req2     = "Industrialization"
+flags    = ""
+graphic     = "a.the_corporation"
+graphic_alt = "-"
+
+[advance_the_republic]
+name     = _("The Republic")
+req1     = "Code of Laws"
+req2     = "Literacy"
+flags    = ""
+graphic     = "a.the_republic"
+graphic_alt = "-"
+
+[advance_the_wheel]
+name     = _("The Wheel")
+req1     = "Horseback Riding"
+req2     = "None"
+flags    = ""
+graphic     = "a.the_wheel"
+graphic_alt = "-"
+
+[advance_theology]
+name     = _("Theology")
+req1     = "Feudalism"
+req2     = "Monotheism"
+flags    = ""
+graphic     = "a.theology"
+graphic_alt = "-"
+helptext = _("Improves the effect of Cathedrals.")
+
+[advance_theory_of_gravity]
+name     = _("Theory of Gravity")
+req1     = "Astronomy"
+req2     = "University"
+flags    = ""
+graphic     = "a.theory_of_gravity"
+graphic_alt = "-"
+
+[advance_trade]
+name     = _("Trade")
+req1     = "Currency"
+req2     = "Code of Laws"
+flags    = ""
+graphic     = "a.trade"
+graphic_alt = "-"
+
+[advance_university]
+name     = _("University")
+req1     = "Mathematics"
+req2     = "Philosophy"
+flags    = ""
+graphic     = "a.university"
+graphic_alt = "-"
+
+[advance_warrior_code]
+name     = _("Warrior Code")
+req1     = "None"
+req2     = "None"
+flags    = ""
+graphic     = "a.warrior_code"
+graphic_alt = "-"
+
+[advance_writing]
+name     = _("Writing")
+req1     = "Alphabet"
+req2     = "None"
+flags    = ""
+graphic     = "a.writing"
+graphic_alt = "-"

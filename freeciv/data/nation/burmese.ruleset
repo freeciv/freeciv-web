@@ -1,0 +1,81 @@
+[nation_burmese]
+
+name=_("Burmese")
+plural=_("?plural:Burmese")
+groups="Medieval", "Modern", "Asian"
+legend=_("The Union of Burma (officially \"Myanmar\") is the largest country\
+ in mainland Southeast Asia.")
+leader=
+ "Thibaw",
+ "Alaungpaya",
+ "Mindon",
+ "Supayalatt",
+ "Ne Win",
+ "U Nu"
+leader_sex="Male", "Male", "Male", "Female",  "Male", "Male"
+flag="myanmar"
+flag_alt = "taiwan"	; similar design
+city_style = "Asian"
+
+ruler_titles = { "government",     "male_title",        "female_title"
+                 "Despotism",      _("Bohmugyi"),       _("?female:Bohmugyi")
+                 "Fundamentalism", _("Saya"),           _("Sayama")
+                "Democracy", _("Prime Minister"), _("?female:Prime Minister")
+               }
+
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+; Similar flag
+conflicts_with = "taiwanese"
+civilwar_nations = "bengali", "thai", "laotian"
+
+cities =
+ "Yangon",
+ "Mandalay",
+ "Moulmein",
+ "Taunggyi",
+ "Sitkwin",
+ "Sagaing",
+ "Amarapura",
+ "Maymyo",
+ "Lashio",
+ "Mergui",
+ "Tavoy",
+ "Haka",
+ "Myitkyina",
+ "Magwe",
+ "Prome",
+ "Thaton",
+ "Hpa-an",
+ "Putao",
+ "Muse",
+ "Bhamo",
+ "Pakokku",
+ "Meiktila",
+ "Sittwe",
+ "Sandoway",
+ "Ngapali",
+ "Bassein",
+ "Syriam",
+ "Toungoo",
+ "Loi-kaw",
+ "Shadaw",
+ "Tachilek",
+ "Mogok",
+ "Mong Yawn",
+ "Hsipaw",
+ "Nyaungshwe",
+ "Monywa",
+ "Pyinmana",
+ "Yenangyaung",
+ "Pagan",
+ "Nyaung U",
+ "Mrauk U",
+ "Pegu",
+ "Minhla",
+ "Dala",
+ "Kyaukpadaung"

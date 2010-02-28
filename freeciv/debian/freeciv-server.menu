@@ -1,0 +1,1 @@
+?package(freeciv-server):needs="text" section="Games/Strategy" title="Freeciv server" command="/usr/games/civserver"

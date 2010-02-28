@@ -1,0 +1,109 @@
+______________
+First of all :
+--------------
+
+ -  Some part of graphics and SDL gfx code come from Michael Speck
+    and his "LGeneral" (GPL). Great thanks for his job.
+     
+ -  The zoom and putline functions come from SDL_gfx-2.0 lib (LGPL).
+    AA_ZoomSurfaceFastRGBA(...) function and some others in SDLClient
+    are my invention.
+ 
+_____________
+Requirements:
+-------------
+
+SDL
+SDL_image ( req: libpng )
+FreeType2
+iconv
+
+To compile use:
+
+autogen.sh
+configure --enable-client=sdl
+make
+and pray :)
+
+See also the section on SDLClient in INSTALL
+
+__________
+Some Info:
+----------
+
+Current default GUI theme is "Human" by Hogne Håskjold. To use
+another theme, start the client with the --theme yourtheme option.
+
+See also http://www.freeciv.org/wiki/Themes
+
+If you have current cvs version of SDL (or >= 1.2.6) then uncomment
+#define SDL_CVS line (36) from gui-sdl/mapview.c
+
+If your CPU has MMX1 registers then goto gui-sdl/graphics.h line 31 and 
+#define HAVE_MMX1 parm.
+
+If you want report draw bug in SDLClient then please attach your 
+screen bits per pixel coding.
+
+_________________
+In-game controls:
+-----------------
+
+    - <Tab> to show input dialog (chatline)
+    - <ctrl - shift - w> hide/show fog of war
+    - <ctrl - w> hide/show city worker output on map
+    - <ctrl - r> hide/show road/railroad
+    - <ctrl - shift - t> hide/show terrain
+    - <ctrl - t> hide/show city traderoutes
+    - <ctrl - i> hide/show irrigation/farmlands
+    - <ctrl - u> hide/show units    
+    - <ctrl - o> hide/show pollution
+    - <ctrl - p> hide/show city production
+    - <ctrl - s> hide/show map specials
+    - <ctrl - g> hide/show map grid
+    - <ctrl - b> hide/show national borders
+    - <ctrl - l> hide/show nuke waste
+    - <ctrl - c> hide/show cities
+    - <ctrl - n> hide/show city names
+    - <print screen> make screenschot
+    - <F1> - cities report
+    - <F2> - units report
+    - <F3> - players report    
+    - <F5> - economy report
+    - <F6> - science report
+    - <F7> - wonder list
+    - <F8> - top 5 cities
+    - <F10> - hide/show log
+    - <F11> - demographic
+    - <F12> - your spaceship
+    - <MMB> - advanced menu    
+    - <Left Shift + LMB> - advanced menu
+    - <left CTRL + LBM on city> - open production dialog.
+    - <left ALT + LBM on city> - open buy production dialog
+    - if active unit stays on city then <Enter> opens the city dialog
+    - <Esc> - options dialog
+    - <Shift + Enter> - end turn
+  In options dialog:
+    - <q> exit game
+  In city dialog:
+    - <c> change production dlg.
+    - <h> hurry production dlg.
+    - <a> governor dlg.
+  All dialogs:
+    - <Esc> - exit/close dlg.
+    - <Enter> - ok/commit/etc.
+  In Worklist dialog:
+    - <LMB> on "target" - change production to "target"
+    - <RMB> on "target" - add "target" to work list
+    - <MMB> on "target" - call help about "target"
+    - <LMB> on "worklist item" - swap "item" up
+    - <RMB> on "worklist item" - swap "item" down
+    - <MMB> on "worklist item" - remove "item" from worklist.
+  In Science dialog:
+    - <MMB> on "target" - call help about "target"
+  In Unit Info Window
+    - <LMB> - next unit.
+    - <RMB> - center on focused unit.
+  On MiniMap :
+    - <RMB> center map here.
+    - <???> open minimap scaling dialog.

@@ -1,0 +1,63 @@
+[nation_swazi]
+
+name=_("Swazi")
+plural=_("?plural:Swazis")
+groups="Modern", "African"
+legend=_("The Swazis is a Bantu people of southern Africa. Under the\
+ leadership of Mswati II (1820 - 1868), the Swazis expanded their territory\
+ and stabilized the southern frontier with the Zulus.")
+leader=
+ "Dlamini I",
+ "Sobhuza I",
+ "Mswati II",
+ "Labotsibeni",
+ "Sobhuza II",
+ "Ntombi"
+leader_sex="Male", "Male", "Male", "Female", "Male", "Female"
+flag="swaziland"
+flag_alt = "rwanda"
+city_style = "Tropical"
+
+ruler_titles = { "government",     "male_title",        "female_title"
+                 "Despotism",      _("Chief"),          _("?female:Chief")
+		 ; /* TRANS: Ngwenyama/Indovuzaki = Lion/Elephant cow */
+                 "Monarchy",       _("Ngwenyama"),      _("Indovuzaki")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations="zulu", "kenyan"
+
+; The two capitals at top and the rest in order of population as of 2005
+; http://de.wikipedia.org/wiki/Liste_der_Städte_in_Swasiland
+cities =
+ "Lobamba",
+ "Mbabane",
+ "Manzini",
+ "Big Bend",
+ "Malkerns",
+ "Nhlangano",
+ "Mhlume",
+ "Hluti",
+ "Simunye",
+ "Siteki",
+ "Pigg's Peak",
+ "Ngomane",
+ "Vuvulane",
+ "Mpaka",
+ "Kwaluseni",
+ "Bhunya",
+ "Mhlambanyatsi",
+ "Mondi",
+ "Tabankulu",
+ "Hlatikulu",
+ "Bulembu",
+ "Kubuta",
+ "Tjaneni",
+ "Sidvokodvo",
+ "Lavumisa",
+ "Ngwenya",
+ "Nsoko",
+ "Mankayane"

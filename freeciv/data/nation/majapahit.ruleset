@@ -1,0 +1,81 @@
+[nation_majapahit]
+
+name=_("Majapahit")
+plural=_("?plural:Majapahit")
+groups="Asian", "Medieval"
+
+legend=_("This empire began in 1293 CE when a local prince used invading\
+ Yuan dynasty troops to his own advantage by having them defeat his enemies\
+ and then expelling them. The Majapahit, centered in eastern Java, was\
+ heavily influenced by Buddhism and Hinduism and was a major regional power\
+ in the insular Southeast Asian world, a position which allowed them to\
+ control much of the trade between China, India and the Middle East. They\
+ lasted until 1500 when they were eclipsed by the Sultanate of Malacca and\
+ the rise of Islam in the Indonesian world.")
+
+leader=
+ "Hayam Wuruk",
+ "Kerjarajasa Jayawarddhana",
+ "Tribhuwana Wijayatunggadewi",
+ "Gajah Mada",
+ "Raden Wijaya"
+
+leader_sex = "Male", "Male", "Female", "Male", "Male"
+
+ruler_titles = { "government",      "male_title",        "female_title"
+                 "Monarchy",       _("Raja"),            _("Raja")
+                 "Democracy",      _("Mahapatih"),       _("Mahapatih")
+               }
+
+flag         = "majapahit"
+flag_alt     = "-"
+city_style   = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="Sri Vijaya", "indonesian", "malaysian"
+
+cities =
+ "Majapahit",
+ "Kediri",
+ "Batu",
+ "Madiun",
+ "Surabaya",
+ "Malang",
+ "Blitar",
+ "Pasuruan",
+ "Probolinggo",
+ "Mojokerto",
+ "Bandung",
+ "Bekasi",
+ "Karawang",
+ "Purwakarta",
+ "Subang",
+ "Indramayu",
+ "Bodjanegara",
+ "Sumedang",
+ "Majalengka",
+ "Sumber",
+ "Kuningan",
+ "Ciamis",
+ "Sukoharjo",
+ "Garut",
+ "Purbalingga",
+ "Cianjur",
+ "Pelabuhan Ratu",
+ "Cibinong",
+ "Bogor",
+ "Sukabumi",
+ "Bandung",
+ "Cirebon",
+ "Klaten",
+ "Depok",
+ "Wonosobo",
+ "Tasikmalaya",
+ "Banjar",
+ "Jepara",
+ "Blora",
+ "Minangkabau"

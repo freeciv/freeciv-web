@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Cross of the Knights Templar
+     This is the cross of the monastic/military order known as the Poor
+     Fellow-Soldiers of Christ and of the Temple of Solomon, more commonly as
+     the Knights Templar.
+
+     The original author was K. Bolino (kbolino@sdf.lonestar.org)
+     This document was released into the public domain by the author. -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1500"
+   height="1000"
+   viewBox="0 0 50 50"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.44"
+   sodipodi:docname="templars.svg"
+   sodipodi:docbase="C:\freeciv"
+   version="1.0"
+   inkscape:export-filename="C:\flags\Cross_of_the_Knights_Templar.png"
+   inkscape:export-xdpi="1.62"
+   inkscape:export-ydpi="1.62">
+  <metadata
+     id="metadata24">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     inkscape:window-height="579"
+     inkscape:window-width="847"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     guidetolerance="10.0"
+     gridtolerance="10.0"
+     objecttolerance="10.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     width="1500px"
+     inkscape:zoom="0.377"
+     inkscape:cx="750"
+     inkscape:cy="500"
+     inkscape:window-x="66"
+     inkscape:window-y="87"
+     inkscape:current-layer="svg2" />
+  <defs
+     id="defs4">
+    <clipPath
+       id="border">
+      <rect
+         width="50"
+         height="50"
+         id="rect7"
+         x="0"
+         y="0" />
+    </clipPath>
+  </defs>
+  <rect
+     style="fill:white"
+     y="-5.5511151e-015"
+     x="-12.5"
+     id="rect11"
+     height="50"
+     width="75" />
+  <g
+     id="g1894"
+     transform="matrix(0.824744,0,0,0.824744,4.3814,4.3814)">
+    <path
+       d="M 0,25 L 50,25 M 25,0 L 25,50 L 25,0 z "
+       id="path13"
+       style="fill:none;stroke:#c00;stroke-width:6" />
+    <polygon
+       points="0,18 5,25 0,32 0,18 "
+       id="polygon15"
+       style="fill:#c00;stroke:none" />
+    <polygon
+       points="50,18 45,25 50,32 50,18 "
+       id="polygon17"
+       style="fill:#c00;stroke:none" />
+    <polygon
+       points="18,0 25,5 32,0 18,0 "
+       id="polygon19"
+       style="fill:#c00;stroke:none" />
+    <polygon
+       points="18,50 25,45 32,50 18,50 "
+       id="polygon21"
+       style="fill:#c00;stroke:none" />
+  </g>
+</svg>

@@ -1,0 +1,69 @@
+
+; Modifying this file:
+; You should not modify this file except to make bugfixes or
+; for other "maintenance".  If you want to make custom changes
+; you should create a new datadir subdirectory and copy this file
+; into that directory, and then modify that copy.  Then use the
+; command "rulesetdir <mysubdir>" in the server to have freeciv
+; use your new customized file.
+
+; See data/default/nations.ruleset for more information.
+
+; Note: The list is based on Civ2-ToT.
+
+[datafile]
+description="Civ2-equivalent nations data for Freeciv"
+options="1.9"
+
+; Descriptions of nation groups
+; name 		= name of the group
+; match		= How much the AI will try to select a nation in the same
+;                 group
+
+[ngroup_ancient]
+name=_("?nationgroup:Ancient")
+match=0
+[ngroup_medieval]
+name=_("?nationgroup:Medieval")
+match=0
+[ngroup_modern]
+name=_("?nationgroup:Modern")
+match=0
+[ngroup_african]
+name=_("?nationgroup:African")
+match=0
+[ngroup_american]
+name=_("?nationgroup:American")
+match=0
+[ngroup_asian]
+name=_("?nationgroup:Asian")
+match=0
+[ngroup_european]
+name=_("?nationgroup:European")
+match=0
+
+*include "nation/roman.ruleset"
+*include "nation/babylonian.ruleset"
+*include "nation/german.ruleset"
+*include "nation/egyptian.ruleset"
+*include "nation/american.ruleset"
+*include "nation/greek.ruleset"
+*include "nation/indian.ruleset"
+*include "nation/russian.ruleset"
+*include "nation/zulu.ruleset"
+*include "nation/french.ruleset"
+*include "nation/aztec.ruleset"
+*include "nation/chinese.ruleset"
+*include "nation/english.ruleset"
+*include "nation/mongol.ruleset"
+*include "nation/gallic.ruleset"	; Substitute for "Celtic"
+*include "nation/japanese.ruleset"
+*include "nation/viking.ruleset"
+*include "nation/spanish.ruleset"
+*include "nation/persian.ruleset"
+*include "nation/carthaginian.ruleset"
+*include "nation/sioux.ruleset"
+*include "nation/arab.ruleset"
+*include "nation/inca.ruleset"
+*include "nation/barbarian.ruleset"
+*include "nation/pirate.ruleset"

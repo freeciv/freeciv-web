@@ -1,0 +1,103 @@
+<!-- This is for the HTML validator -->
+   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- The real code begins here -->
+
+<?php
+  // include the php-code finder
+  ini_set("include_path",
+	ini_get("include_path") . ":" . $_SERVER["DOCUMENT_ROOT"]
+  );
+  include_once("php_code/settings.php");
+  include_once("php_code/php_code_find.php");
+  // includes for support routines
+  include_once(php_code_find("fcdb.php"));
+  include_once(php_code_find("img.php"));
+?>
+
+<HTML>
+<HEAD>
+<TITLE>Freeciv Client Stats</TITLE>
+<META HTTP-EQUIV=Content-Language CONTENT=en>
+</HEAD>
+
+<BODY BGCOLOR="#FFFAF0">
+
+<?
+echo "<CENTER>";
+img_html("headers/clients.gif", "Client Statistics", NULL);
+echo "</CENTER><BR><CENTER>";
+
+$start = "start";
+if ( isset($_REQUEST[$start]) ) { 
+  $where[]="date >= \"$_REQUEST[$start]\"";
+}
+$end = "end";
+if ( isset($_REQUEST[$end]) ) {
+  $where[]="date <= \"$_REQUEST[$end]\"";
+}
+$list=array("version","gui","os","arch","tileset");
+foreach ($list as $type) {
+  if ( isset($_REQUEST[$type]) ) {
+    $where[]="$type = \"$_REQUEST[$type]\"";
+  }
+}
+
+if ( $where[0] ) {
+  $swhere="where ". join(" and ", $where);
+}
+
+fcdb_default_connect();
+
+$stmt="select sum(count) from clients $swhere";
+$total=fcdb_query_single_value($stmt);
+
+foreach ($list as $type) {
+  echo "<TABLE BORDER BGCOLOR=\"#9FB6CD\">\n";
+  echo "<TR><TH>$type</TH><TH>Count</TH><TH COLSPAN=2>Percentage</TR>\n"; echo "<TR></TR>\n";
+  
+  $stmt="select distinct $type from clients $swhere order by $type";
+  $res = fcdb_exec($stmt);
+  for ( $inx = 0; $inx < fcdb_num_rows($res); $inx++ ) {
+    $row = fcdb_fetch_array($res, $inx);
+    if ( $swhere ) {
+      $cond="$swhere and $type='$row[$type]'";
+    } else {
+      $cond="where $type='$row[$type]'";
+    }
+    $stmt="select sum(count) from clients $cond";
+    /* echo "\n\n<!-- query $stmt -->\n"; */
+    $count=fcdb_query_single_value($stmt);
+    $l=round($count*100/$total+.0001);
+    echo "<TR><TD ALIGN=\"LEFT\">";
+    if ( $row[$type] == "" ) {
+      echo "Unknown";
+    } else {
+      echo $row[$type];
+    }
+    echo "</TD><TD ALIGN=\"RIGHT\">";
+    echo $count;
+    echo "</TD><TD ALIGN=LEFT>";
+    $img_tag_extra= "height=\"16\" width=\"" . strval($l*6+1) . "\"";
+    img_html("line.png", NULL, "$img_tag_extra");
+    echo "<TD ALIGN=RIGHT>$l%</TD></TR>\n";
+  }
+  echo "</TABLE><BR>";
+}
+
+?>
+</CENTER>
+
+<BR>
+<HR>Return to <a href="/">the main page</A>
+<HR>In case of technical problems, please contact
+<?php echo $webmaster_html ?>.
+
+<BR><BR>
+<P ALIGN="center">
+<?
+img_html("hr.gif", "--------", NULL);
+?>
+<BR><BR>
+
+</BODY>
+</HTML>

@@ -1,0 +1,82 @@
+[nation_afghani]
+
+name=_("Afghani")
+plural=_("?plural:Afghanis")
+groups="Modern", "Asian"
+legend=_("Afghanistan, often called the crossroads of Central Asia, has had\
+ a very turbulent history. Through the ages, the country has been occupied\
+ by many forces including the Persian Empire, Genghis Khan and Alexander the\
+ Great. The Afghanistan nation-state as it is known today came into existence\
+ in 1746 when Ahmad Shah founded the Durrani Empire.")
+leader=
+ "Kanishka",
+ "Mahmud Ghazni",
+ "Timour-i-Lang",
+ "Ahmad Shah",
+ "Zahir Shah",
+ "Daoud Khan"
+leader_sex="Male", "Male", "Male", "Male", "Male", "Male"
+flag="afghanistan"
+flag_alt = "-"
+city_style = "Classical"
+
+ruler_titles = { "government",      "male_title",       "female_title"
+                "Monarchy",        _("Emir"),          _("Emir")
+                "Communism",   _("General Secretary"), _("General Secretary")
+                "Fundamentalism",  _("Mullah"),        _("Mullah")
+                "Democracy", _("Prime Minister"), _("?female:Prime Minister")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="iranian", "pakistani"
+
+; City list based on data from this page:
+; http://de.wikipedia.org/wiki/Liste_der_Städte_in_Afghanistan
+cities =
+ "Kabul",
+ "Kandahar",
+ "Mazar-e Sharif",
+ "Herat",
+ "Kunduz",
+ "Jalalabad",
+ "Ghazni",
+ "Merv",
+ "Baghlan",
+ "Gardez",
+ "Bamiyan",
+ "Maimana",
+ "Balkh",
+ "Hanabad",
+ "Kholm",
+ "Taloqan",
+ "Pol-e Khomri",
+ "Sheberghan",
+ "Charikar",
+ "Qal'eh-ye Now",
+ "Sar-e Pol",
+ "Aqchah",
+ "Ghurian",
+ "Paghman",
+ "Asadabad",
+ "Aybak",
+ "Lashkar Gah",
+ "Gereshk",
+ "Farah",
+ "Faizabad",
+ "Tash Gozar",
+ "Zaranj",
+ "Chaghcharan",
+ "Baghrami",
+ "Peshawar",
+ "Andkhui",
+ "Deshu",
+ "Kang",
+ "Ab Gach",
+ "Qalat",
+ "Samangan",
+ "Mahmud-e Raq",
+ "Maydanshahr"

@@ -1,0 +1,43 @@
+[nation_cuban]
+
+name=_("Cuban")
+plural=_("?plural:Cubans")
+groups="Modern", "American"
+legend=_("Cuba came under Spanish control in the 16th century. In the\
+ following centuries, the island became one of the leading producers of\
+ tobacco, sugar and coffee in the world. Cuba was granted nominal\
+ independence in 1902.")
+leader=
+  "Fidel Castro",
+  "Ernesto Che Guevara",
+  "José Martí",
+  "Camilo Cienfuegos"
+leader_sex="Male", "Male", "Male", "Male"
+flag="cuba"
+flag_alt = "-"
+city_style = "Classical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations = "colombian", "venezuelan"
+
+cities =
+  "La Habana",
+  "Camagüey",
+  "Guantánamo",
+  "Santiago de Cuba",
+  "Pedro Betancourt",
+  "Artemisa",
+  "Matanzas",
+  "Las Tunas",
+  "Manzanillo",
+  "Colón",
+  "Santa Clara",
+  "Trinidad",
+  "Morón",
+  "Cienfuegos",
+  "Holguín",
+  "Pinar del Río",
+  "Placetas"

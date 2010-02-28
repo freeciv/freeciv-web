@@ -1,0 +1,74 @@
+[nation_persian]
+
+name=_("Persian")
+plural=_("?plural:Persians")
+groups="Ancient","Asian"
+legend=_("The first Persian (Achaemenid) Empire lasted from 550BC to 330BC;\
+ the second (Sassanid) from 226AD to 642AD.")
+leader=
+ "Kurush II", ; a.k.a. "Cyrus"
+ "Darayavaush I", ; a.k.a. "Darius"
+ "Khshayarsha I", ; a.k.a. "Xerxes"
+ "Ardashir I",
+ "Khosrau I",
+ "Shapur I"
+leader_sex="Male", "Male", "Male", "Male", "Male", "Male"
+flag="iran_ancient"
+flag_alt = "iran"
+city_style = "Classical"
+
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Monarchy",        _("Shah"),         _("Shahbanu")
+                 "Fundamentalism",  _("Ayatollah"),    _("Ayatollah")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations = "khwarezmian", "arab"
+
+; Sources:
+; http://www.livius.org/persia.html
+; http://www.iranian.com/GuiveMirfendereski/2005/May/Saka/
+cities =
+; Ancient cities first; Latin rendering in comment
+ "Parsa",	; Persepolis
+ "Susa",
+ "Hagmatana",	; Ecbatana
+ "Pathragada",	; Pasaradae
+ "Raga",	; Rhagae
+ "Margush",	; Margiane
+ "Baktra",
+ "Takshasila",	; Taxila
+ "Gaba",	; Gabae
+ "Sakarta",	; Zadrakarta
+ "Herat",
+ "Drapsaka",
+ "Karmana",
+ "Pura",
+ "Bishapur",
+ "Ardashir Khureh",
+ "Tikni",
+ "Istakhr",
+ "Shurkutir",
+ "Susia",
+
+ ; Modern cities of the region
+ "Teheran",
+ "Isfahan",
+ "Tabriz",
+ "Hamadan",
+ "Rasht",
+ "Ahraz",
+ "Shiraz",
+ "Kerman",
+ "Yazd",
+ "Mashhad",
+ "Zahedan",
+ "Bushehr",
+ "Qazrin",
+ "Lhasa",
+ "Bulgar",
+ "Hormuz",
+ "Mosul"

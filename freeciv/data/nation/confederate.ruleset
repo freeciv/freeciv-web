@@ -1,0 +1,70 @@
+[nation_confederate]
+
+name=_("Confederate")
+plural=_("?plural:Confederates")
+groups="American"
+legend=_("The Confederate States of America was a splinter nation of the\
+ United States during the American Civil War. It was formed in 1861 by six\
+ Southern states but had to abandon their claims of independence a few\
+ years later after several military defeats by United States troops.")
+leader=
+ "John Bell Hood",
+ "Robert E. Lee",
+ "John C. Calhoun",
+ "Stonewall Jackson",
+ "John Hunt Morgan",
+ "James Longstreet",
+ "Alexander Stephens",
+ "Jefferson Davis"
+leader_sex="Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male"
+flag="southern_cross"
+flag_alt="-"
+city_style="European"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+conflicts_with="american", "texan"
+civilwar_nations="american", "texan"
+
+; Data from http://en.wikipedia.org/wiki/Confederate_States_of_America
+cities =
+; Capitals and was-to-be capitals
+ "Montgomery",
+ "Richmond",
+ "Danville",
+ "Atlanta",
+ "Columbia",
+; Major cities in order of population
+ "New Orleans",
+ "Charleston",
+ "Mobile",
+ "Memphis",
+ "Savannah",
+ "Petersburg",
+ "Nashville",
+ "Norfolk",
+ "Wheeling",
+ "Alexandria",
+ "Augusta",
+ "Columbus",
+ "Wilmington",
+; A few more cities
+ "Jacksonville",
+ "Louisville",
+ "St. Louis",
+ "Springfield",
+ "Little Rock",
+ "Vicksburg",
+ "Shreveport",
+ "Houston",
+ "Galveston",
+ "Austin",
+ "San Antonio",
+ "Corpus Christi",
+ "El Paso",
+ "Mesilla",
+ "Santa Fe",
+ "Tucson"

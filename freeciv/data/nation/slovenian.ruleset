@@ -1,0 +1,38 @@
+[nation_slovenian]
+
+name=_("Slovenian")
+plural=_("?plural:Slovenians")
+groups="Medieval", "Modern", "European"
+legend=_("Slovenia was the most western and northern republic of the old\
+ Yugoslav Federation.")
+leader=
+ "Valuka",
+ "Valtunk",
+ "Kocelj",
+ "Primož Trubar"
+leader_sex="Male", "Male", "Male", "Male"
+flag="slovenia"
+flag_alt = "-"
+city_style = "European"
+
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Republic",        _("President"),    _("?female:President")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+; Chain of similar flags: Previously "russian"
+conflicts_with="slovakian"
+civilwar_nations = "serbian"
+
+cities =
+  "Ljubljana", "Maribor", "Nova Gorica", "Celje", "Kranj", "Jesenice",
+  "Idrija", "Novo Mesto", "Trbovlje", "Velenje", "Koper", "Murska Sobota",
+  "Ptuj", "Pragersko", "Hrastnik", "Zagorje", "Kamnik", "Domzale",
+  "Skofja Loka", "Radovljica", "Bled", "Postojna", "Izola", "Piran",
+  "Kocevje", "Zidani Most", "Brezice", "Krsko", "Catez", "Ormoz",
+  "Sentilj", "Dravograd", "Ravne", "Lasko", "Trzic", "Kranjska Gora",
+  "Sezana", "Savudrija", "Pivka"

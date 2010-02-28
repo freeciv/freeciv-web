@@ -1,0 +1,47 @@
+[nation_saxon]
+
+name=_("Saxon")
+plural=_("?plural:Saxons")
+groups="Medieval", "European"
+legend=_("The Electorate of Saxony was an independent hereditary electorate\
+ of the Holy Roman Empire from 1356-1806.")
+leader =
+ "Rudolf I",
+ "Frederick Augustus I",
+ "Frederick Augustus II",
+ "Frederick Augustus III"
+leader_sex = "Male", "Male", "Male", "Male"
+flag="saxony"
+flag_alt = "-"
+city_style = "European"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations = "german"
+
+cities =
+  "Wittenberg",
+  "Dresden",
+  "Leipzig",
+  "Chemnitz",
+  "Bautzen",
+  "Görlitz",
+  "Löbau",
+  "Zittau",
+  "Merseburg",
+  "Königstein",
+  "Pirna",
+  "Johann-Georgenstadt",
+  "Zwickau",
+  "Freiberg",
+  "Grimma",
+  "Oschatz",
+  "Meissen",
+  "Naumburg",
+  "Torgau",
+  "Lübben",
+  "Guben",
+  "Eilenburg",
+  "Düben"

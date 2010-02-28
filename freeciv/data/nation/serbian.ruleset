@@ -1,0 +1,122 @@
+[nation_serbian]
+
+name=_("Serbian")
+plural=_("?plural:Serbians")
+groups="Modern", "Medieval", "European"
+legend=_("Serbia is part of the region of the Southern Slavs that was\
+ conquered by the Ottomans after the collapse of the Byzantine Empire. \
+ During most of the 20th century it was part of the Yugoslav Federation.")
+leader=
+ "Vlastimir",
+ "Časlav Klonimirović",
+ "Stephanus Vojislav",
+ "Mihailo Obrenović",
+ "Konstantin Bodin",
+ "Stefan Nemanja",
+ "Stefan Prvovenčani",
+ "Stefan Uroš",
+ "Stefan Milutin",
+ "Stefan Dušan",
+ "Karađorđe Petrović",
+ "Miloš Obrenović",
+ "Aleksandar Karađorđević",
+ "Stevan Šupljikac",
+ "Milan II Obrenović",
+ "Petar Karađorđević",
+ "Slobodan Milošević",
+ "Zoran Đinđić"
+leader_sex="Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male",
+           "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male",
+           "Male", "Male"
+flag="serbia"
+flag_alt = "-"
+city_style = "European"
+
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Despotism",       _("Duke"),         _("Duchess")
+                 "Republic",        _("President"),    _("?female:President")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations = "slovenian", "croatian", "bosnian-herzegovinian"
+
+cities =
+ "Beograd",
+ "Novi Sad",
+ "Niš",
+ "Subotica",
+ "Zrenjanin",
+ "Pančevo",
+ "Zemun",
+ "Kragujevac",
+ "Priština",
+ "Sombor",
+ "Senta",
+ "Kikinda",
+ "Bečej",
+ "Vršac",
+ "Sremska Mitrovica",
+ "Šabac",
+ "Smederevo",
+ "Požarevac",
+ "Bor",
+ "Čačak",
+ "Svetozarevo",
+ "Zaječar",
+ "Vidin",
+ "Kruševac",
+ "Kraljevo",
+ "Novi Pazar",
+ "Leskovac",
+ "Pirot",
+ "Peć",
+ "Kosovska Mitrovica",
+ "Vranje",
+ "Đakovica",
+ "Prizren",
+ "Orahovac",
+ "Uroševac",
+ "Gnjilane",
+ "Prokuplje",
+ "Knjaževac",
+ "Aleksinac",
+ "Priboj",
+ "Paraćin",
+ "Titovo Užice",
+ "Ćuprija",
+ "Negotin",
+ "Šid",
+ "Vel. Plaha",
+ "Arandelovac",
+ "Valjevo",
+ "Loznica",
+ "Mladenovac",
+ "Smederevska Palanka",
+ "Obrenovac",
+ "Železnik",
+ "Kovin",
+ "Ruma",
+ "Batajnica",
+ "Bela Crkva",
+ "Stara Pazova",
+ "Indija",
+ "Nova Pazova",
+ "Bačka Palanka",
+ "Futog",
+ "Petrovaradin",
+ "Mužlja",
+ "Srbobran",
+ "Novi Bečej",
+ "Bačko Petrovo Selo",
+ "Kula",
+ "Apatin",
+ "Sivac",
+ "Crvenka",
+ "Ada",
+ "Bačka Topola",
+ "Bajmok",
+ "Kanjiža"

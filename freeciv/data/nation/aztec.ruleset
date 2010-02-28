@@ -1,0 +1,39 @@
+[nation_aztec]
+
+name=_("Aztec")
+plural=_("?plural:Aztecs")
+groups="Medieval", "American"
+legend=_("The Azteca, a Nahuatl speaking people from the Sonoran desert,\
+ seized control of the Toltec-derived civilizations of Central Mexico\
+ during the 15th century AD, reviving the practice of human sacrifice. \
+ They were conquered by the Spanish under Cortez in 1524.")
+leader=
+ "Moctezuma II",
+ "Cuauhtémoc",
+ "Itzcóatl",
+ "Axayacatl"
+leader_sex="Male", "Male", "Male", "Male"
+flag="aztec"
+flag_alt = "mexico"	; Used previously
+city_style = "Tropical"
+
+ruler_titles = { "government",	"male_title",	 "female_title"
+		 ; /* TRANS: Tlatoani = Speaker */
+		 "Despotism", _("Tlatoani"),     _("Tlatoani")
+		 ; /* TRANS: Huey Tlatoani = Great Speaker */
+		 "Monarchy", _("Huey Tlatoani"), _("Huey Tlatoani")
+	       } 
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations = "P'urhepecha", "hopi"
+
+cities =
+  "Michoacan", "Axaca", "Tuxpan", "Metztitlan", "Otumba",
+  "Tlacopán", "Theotihucanán", "Tezcuco", "Jalapa", "Tlaxcala",
+  "Cholula", "Tenochtitlán", "Yopitzingo", "Teotitlán", "Theuantepec",
+  "Chiauhtia", "Chapultepec", "Coatepec", "Ayotzinco", "Itzapalapa",
+  "Iztapam", "Mitxcoac", "Tacubaya", "Tecamac", "Tepezinco",
+  "Ticomán", "Xaltocán", "Xicalango", "Zumpanco"

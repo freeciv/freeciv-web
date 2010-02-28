@@ -1,0 +1,373 @@
+
+===========================================================================
+Freeciv Nation Rulesets and Flags
+===========================================================================
+
+This file describes the contents of the nation files. This is intended as 
+developer reference, and for people wanting to create/compile alternative 
+nation files for Freeciv. A nation consists of a nation file in the 
+rulesets and a flag in the tilesets. 
+
+The contents of this file is based on this page from the Freeciv wiki:
+http://www.freeciv.org/index.php/Nations
+
+
+
+----------------------------------------------------------------------
+How to add a Nation:
+--------------------
+
+To add a nation of your own, you should look at the following files:
+
+data/nation/<nationname>.ruleset
+
+  This is the new nation, which you will have to create. It may help to
+  copy one of the other nation files over and edit it. See below for a
+  style guide for nation files.
+  - The <nationname> bit is to be replaced with the nations name (duh).
+  Please don't use whitespacees and special characters. Underlines are
+  ok though.
+  - The name should be the same as the name of the nation inside the
+  ruleset file.
+  - The file must be encoded in Unicode.
+
+data/default/nations.ruleset
+
+  This lists all nation files. Add your nation
+  (data/nation/<nationname>.ruleset) to this list.
+
+data/flags/* 
+
+  This is the flags directory. You will have to add a flag-file
+  (see below) for your nation to work (see below).
+
+data/scenario/* 
+
+  You can add starting position for your nation on a scenario map.
+
+Before a nation can be included in the main distribution, the following
+files will also have to be edited. Unless you know what you're doing you
+shouldn't need to worry about this.
+
+data/nation/Makefile.am 
+
+  Another list of nation files - add your nation (<nationname>.ruleset)
+  to this list.
+
+data/flags/Makefile.am 
+
+  Another list of flag files - add your flag to this list.
+
+po/POTFILES.in 
+
+  Here is yet another list of nations files; again add your nation
+  (data/nation/<nationname>.ruleset) to it.
+
+(See utility/fciconv.[ch])
+The data charset is used in all data files and network transactions.
+This is UTF-8.  Currently, the rulesets are in latin1 (ISO-8859-1).
+
+
+----------------------------------------------------------------------
+How to add a Flag:
+------------------
+
+Overview
+========
+
+Please note that Freeciv no longer uses XPM files. PNG is the preferred
+form for graphics, and flags should be made exclusively in SVG. 
+
+A new nation needs a new flag. As of Freeciv 2.1 all flags are stored 
+in SVG (Scalable Vector Graphics) format. Sodipodi and Inkscape are 
+two good SVG editors. If you are creating a real-world nation you can 
+probably find a Free or public domain flag that can be used. One good 
+place to look is the Open Clip Art Library (OCAL.) Remember that any flags 
+we add must be licenced under the GPL and should be attributed to their 
+original author, so make a note of where you found the flag, what its 
+licence is, and who made it.
+
+We also welcome improvements to existing flags. Most of our existing 
+flags come from the Sodipodi clipart collection, and some of them are 
+less than perfect. One common problem is that the colors are wrong. If 
+you fix a flag for a real nation be sure to cite your source so we can 
+be sure it's accurate. Good sources for nation flag data are Wikipedia 
+or Flags Of The World.
+
+If you want to improve an imaginary flag, this is also welcome. We
+recommend you first contact the original author of the flag 
+(see the flags/credits file) to discuss your ideas for changes.
+
+
+Flag Guidelines
+===============
+
+Here are a few guidelines for flags:
+
+  - Flags should be rectangles, since an outline is added to them
+  automatically.
+  - Flags often come in multiple aspect ratios. A 3:2 ratio looks best 
+  for Freeciv and currently every flag has this ratio. For a flag that 
+  is "supposed" to be 2:1 or 4:3, you can often find a 3:2 version 
+  as well.
+
+
+Flag Specifics
+==============
+
+To add a flag you'll have to edit the following files:
+
+data/flags/<flagname>.svg 
+
+  Here is the SVG flag image. This is not used directly by Freeciv but 
+  is  rendered into PNG files (at various resolutions for different 
+  tilesets). The SVG file is not used in Freeciv 2.0 but all the other 
+  steps for adding flags are the same.
+  - The <flagname> should either be the name of the country that represents
+  the flag, or the common name for the actual flag. When in doubt, use the
+  same name as the name of the nation.
+
+data/flags/<flagname>.png
+
+data/flags/<flagname>-shield.png 
+
+  These are the flag images that are used by Freeciv. They are rendered
+  from the SVG file. Once this file has been created it can be used with
+  older versions of Freeciv as well. To run the conversion program you
+  will need to install Inkscape, ImageMagick, and (optionally) pngquant.
+  Once these are installed change to the data/flags directory and run
+  ./convert_png <nationname>.svg.
+
+data/misc/flags.spec 
+
+  This file has a reference to the flag PNG graphic. The "tag" here must
+  match the flag tag you put in the nation ruleset file
+  (usually f.<flagname>) and the "file" should point to the PNG image at
+  flags/<flagname>.png.
+
+data/misc/shields.spec 
+
+  Just like flags.spec, this file must include a reference to the flag
+  PNG graphic. The only difference is that the file should point to the
+  "shield" graphic, flags/<flagname>-shield.png.
+
+Changes to the .spec files can be submitted as a patch (created using 
+diff -ruN). Even though the *.spec files may need to be changed, please 
+include them in the diff -- this should be easier for you, and it 
+provides a convenient place for us to grab the sprite name. See the 
+section on How to Contribute in the Freeciv wiki for more instructions.
+
+
+
+----------------------------------------------------------------------
+Contents and Style:
+-------------------
+
+What nations can be added to Freeciv?
+=====================================
+
+A nation in Freeciv should preferrably be a current independent country
+or a historical kingdom or realm. A nation that is currently governed
+by or the part of a greater political entity, or in other ways lacks
+complete independence could in most cases be made a Freeciv nation as
+well, but must never be listed as _modern_ (see 'Nation grouping' below.)
+
+Copyrighted content may not be added unless full permission is granted by
+the holder of the copyright. This rule effectively disallows the
+inclusion of nations based on most literary works.
+
+
+Nation grouping
+===============
+
+Freeciv supports a classification of nations in an unlimited number of
+groups and every nation should be assigned to at least one. We currently 
+have Ancient, Medieval, Modern, African, American, Asian, European,
+Oceanian and Fictional groups. Modern nations are existing and politically
+independent countries; a nation listed as ancient or medieval should have
+had an independent dynasty or state in ancient or medieval times
+respectively. Finally, a fictional nation is - as the name suggests - a
+product of someone's imagination.
+
+
+Nation naming
+=============
+
+The default name of the nation should be the name of the people, 
+country, or empire in English adjective form. For example, the nation 
+of ancient Babylon is called "Babylonian" in Freeciv. The plural form 
+should be standard English as well. For example, plural for the Polish 
+nation is "Poles" in Freeciv. Use only English ascii for nation names.
+
+
+Conflicting nations
+===================
+
+To specify one or more nations that the AI shouldn't pick for the same 
+game, use this syntax:
+
+	conflicts_with="<nationname>", "<nationname>", ...
+
+You only have to specify this in the nation you're adding, since it 
+works in both directions. Reasons for conflicting nations could be 
+either that they represent the same people in different eras 
+(ex: Roman - Italian) or that the two nations have too similar 
+flags that they are easily mixed up in the game 
+(ex: Russian - Serbian.)
+
+
+Civil war nations
+=================
+
+Specify one or more civil war nations. When a player's capital is 
+captured, that player might suffer a civil war where his or her 
+nation is divided and a new player created. The nation for this new 
+player is selected from one of the civil war nations specified in the
+ruleset. A civil war nation should be linguistically, geographically 
+and/or historically related to the current nation. A linguistic 
+relation is especially important, since city names after a nation 
+run out of their own city names, are selected from the civil war 
+nations' city lists.
+
+
+Legend
+======
+
+A legend is required in a nation ruleset. The legend can be a 
+summarized history of the nation, or just a piece of trivia. 
+Only English ascii can be used in legends.
+
+
+Leaders
+=======
+
+A leader should be a historically notable political leader of the
+nation. Only one living person per nation is permitted.
+
+An ideal leader list should contain between five and ten names.
+
+Leaders should be written in native orthography, e.g.
+"Karl XII" instead of "Charles XII" for the Swedish king.
+
+Use the person's full name to avoid ambiguity.
+
+Monarchs should be marked with the appropriate succession
+number, using Roman numerals in standard English style (not German 
+e.g. "Otto II."; Hungarian e.g. "IV. Béla"; Danish e.g. "Valdemar 4."
+etc.)
+
+Freeciv support any Unicode character, but please keep to 
+Latin letters. When transcribing from a non-Latin writing system, 
+be consistent about the system of transcribation you are using.
+Also, try to avoid unnecessarily technical and/or heavily accented
+systems of transcription.
+
+For consistency and readability, put only one leader per line. 
+Feel free to provide a hint of the leader's identity or a brief 
+background in a comment beside any leader: This information might 
+be used in-game at a later stage.
+
+Leader titles for each government type (including Despotism and
+Anarchy) may be specified in a separate tag. Only ASCII letters
+may be used in leader titles.
+
+
+Flag
+====
+
+You should provide a unique flag for your nation. Using a flag that 
+is already used by another nation in the game is not acceptable.
+
+An alternative flag does not have to be specified.
+
+
+City style
+==========
+
+A nation must specify a default city style. The available city styles 
+depends on the tileset used. Practically every tileset have four city 
+styles: "European", "Classical" (Graeco-Roman style), "Asian" (Pagoda
+style) and "Tropical" (African or Polynesian style). In Amplio tileset, 
+"Babylonian" and "Celtic" are also available. If the tileset used by 
+a client does not support a particular city style, a fallback style is 
+used. Selecting a style for your nation is not that strict. Just try 
+to keep it somewhat "realistic."
+
+
+Cities
+======
+
+As for the list of city names, you should make a clear decision about 
+the type of the nation you add. An _ancient_ or _medieval_ nation may
+list any city that it at some point controlled. However if your
+nation is listed as _modern_, it's city list must be restricted to
+cities within the country's current borders.
+
+The reason for this is, we don't want Freeciv to be used as a political 
+vehicle for discussions about borders or independence of particular
+nations. Another reason is to avoid overlapping with other nations in
+the game.
+
+A city should appear in its native form, rather than Anglicized or
+Graeco-Roman forms. For example, the Danish capital is "København"
+rather than "Copenhagen"; and the ancient Persian capital is "Parsa" 
+rather than "Persepolis."
+
+City names support any Unicode character, but please keep to 
+Latin letters. When transcribing from a non-Latin writing system, 
+be consistent about the system of transcribation you are using.
+Also, try to avoid unnecessarily technical or heavily accented
+systems of transcribation.
+
+The ordering of cities should take both chronology of founding and 
+overall historical importance into consideration. Note that a city 
+earlier in the list has a higher chance of being chosen than later 
+cities.
+
+A discussion of city ordering appears in the freeciv-dev archive:
+  http://arch.freeciv.org/freeciv-dev-199910/msg00030.html 
+
+There is even a perl script available to do the job in the same thread:
+  http://arch.freeciv.org/freeciv-dev-199910/msg00074.html 
+
+
+Natural city names
+==================
+
+Freeciv supports "natural" geographic placements of cities.
+
+Cities can be labeled as matching or not matching a particular
+type of terrain, which will make them more (or less) likely to
+show up as the "default" name. The exact format of the list
+entry is
+
+	"<cityname> (<label>, <label>, ...)"
+
+where the cityname is just the name for the city (note that it
+may not contain quotes or parenthesis), and each "label" matches
+(case-insensitive) a terrain type for the city (or "river"), with a
+preceeding ! to negate it. The terrain list is optional, of course,
+so the entry can just contain the cityname if desired. A city name
+labeled as matching a terrain type will match a particular map
+location if that map location is on or adjacent to a tile of the named
+terrain type; in the case of the "river" label (which is a special
+case) only the map location itself is considered. A complex example:
+
+  "Wilmington (ocean, river, swamp, forest, !hills, !mountains, !desert)"
+
+will cause the city of Wilmington to match ocean, river, swamp, and
+forest tiles while rejecting hills, mountains, and deserts. Although
+this degree of detail is probably unnecessary to achieve the desired
+effect, the system is designed to degrade smoothly so it should work
+just fine.
+
+(A note on scale: it might be tempting to label London as !ocean, i.e.
+not adjacent to an ocean.  However, on a reasonably-sized FreeCiv world
+map, London will be adjacent to the ocean; labeling it !ocean will tend
+to give bad results. This is a limitation of the system, and should be
+taken into account when labelling cities.)
+
+At this point, it is useful to put one city per line, only.
+
+Finally, don't forget to leave a blank line feed in the end of your nation
+ruleset.

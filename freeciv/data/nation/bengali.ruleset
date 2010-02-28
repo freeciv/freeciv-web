@@ -1,0 +1,67 @@
+[nation_bengali]
+
+name=_("Bengali")
+plural=_("?plural:Bengalis")
+groups="Asian", "Medieval", "Modern"
+legend=_("Bengal is a region in the easternmost part of the Indian\
+ subcontinent. The first recorded independent king of the Bengali is\
+ Shashanka who reigned around 606 AD. Today the People's Republic of\
+ Bangladesh occupies the eastern part of the region, while the western part\
+ is the Indian state of West Bengal.")
+leader=
+ "Shashanka",
+ "Gopala I",
+ "Dharampala",
+ "Devapala",
+ "Jagat Malla",
+ "Siraj Ud Daulah",
+ "Ziaur Rahman"
+leader_sex="Male", "Male", "Male", "Male", "Male", "Male", "Male"
+flag="bangladesh"
+flag_alt = "-"
+city_style = "Asian"
+
+ruler_titles = { "government",      "male_title",        "female_title"
+                 "Republic",       _("Nabob"),           _("?female:Nabob")
+                 "Anarchy",        _("Major"),           _("?female:Major")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations = "indian", "burmese"
+
+; Contemporary cities of Bangladesh, in order of population:
+; http://de.wikipedia.org/wiki/Liste_der_Städte_in_Bangladesch
+cities =
+ "Dhaka",
+ "Chittagong",
+ "Khulna",
+ "Rajshahi",
+ "Tongi",
+ "Sylhet",
+ "Rangpur",
+ "Mymensingh",
+ "Narayangonj",
+ "Barisal",
+ "Jessore",
+ "Comilla",
+ "Nawabganj",
+ "Dinajpur",
+ "Bogra",
+ "Kadamrasul",
+ "Madhabdi",
+ "Sirajganj",
+ "Tangail",
+ "Brahmanbaria",
+ "Gazipur",
+ "Savar",
+ "Naogaon",
+ "Jamalpur",
+ "Pabna Sadar",
+ "Feni",
+ "Saidpur",
+ "Faridpur",
+ "Magura",
+ "Chandpur"

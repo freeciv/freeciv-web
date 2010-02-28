@@ -1,0 +1,29 @@
+[nation_barbarian]
+
+name=_("Barbarian")
+plural=_("?plural:Barbarians")
+legend=_("Since the dawn of civilization, barbarians have been a threat to\
+ cultured peoples everywhere.")
+leader=
+ "Genseric",
+ "Alaric",
+ "Theodoric",
+ "Stilicho",
+ "Attila",
+ "Boadicea"
+leader_sex="Male", "Male", "Male", "Male", "Male", "Female"
+flag="barbarian"
+flag_alt = "-"
+city_style = "European"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+cities = "Barbaricum"
+
+is_playable = 0
+barbarian_type = "Land"
+
+; nothing more needed for barbarians

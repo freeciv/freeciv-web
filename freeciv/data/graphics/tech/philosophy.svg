@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="595.28000pt"
+   id="svg1392"
+   version="1.0"
+   width="595.28000pt"
+   x="0.00000000"
+   y="0.00000000"
+   sodipodi:version="0.32"
+   inkscape:version="0.42"
+   sodipodi:docname="jin-jang_multimotyl_01.svg"
+   sodipodi:docbase="/home/daniel/Desktop">
+  <sodipodi:namedview
+     inkscape:window-height="513"
+     inkscape:window-width="753"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     inkscape:zoom="0.32783390"
+     inkscape:cx="372.04724"
+     inkscape:cy="406.23561"
+     inkscape:window-x="0"
+     inkscape:window-y="26"
+     inkscape:current-layer="svg1392" />
+  <metadata
+     id="metadata3">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title>Jin-Jang</dc:title>
+        <dc:description />
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li />
+            <rdf:li>religion</rdf:li>
+            <rdf:li>signs_and_symbols</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+        <dc:publisher>
+          <cc:Agent
+             rdf:about="http://www.openclipart.org">
+            <dc:title>Multimotyl</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Multimotyl</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:rights>
+          <cc:Agent>
+            <dc:title>Multimotyl</dc:title>
+          </cc:Agent>
+        </dc:rights>
+        <dc:date />
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <cc:license
+           rdf:resource="http://web.resource.org/cc/PublicDomain" />
+        <dc:language>en</dc:language>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://web.resource.org/cc/PublicDomain">
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/Reproduction" />
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/Distribution" />
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs3" />
+  <rect
+     style="fill:#ffffff;fill-opacity:1.0000000;stroke:none;stroke-width:0.62500000;stroke-miterlimit:4.0000000;stroke-dasharray:none;stroke-opacity:1.0000000"
+     id="rect1326"
+     width="759.53094"
+     height="756.48065"
+     x="-3.0503252"
+     y="-3.2296293" />
+  <g
+     id="g1318"
+     transform="translate(22.12495,-130.3872)">
+    <path
+       d="M 600.00023,502.36210 C 600.00023,640.43334 488.07138,752.36219 350.00014,752.36219 C 211.92890,752.36219 100.00005,640.43334 100.00005,502.36210 C 100.00005,364.29085 211.92890,252.36200 350.00014,252.36200 C 488.07138,252.36200 600.00023,364.29085 600.00023,502.36210 L 600.00023,502.36210 z "
+       id="path8251"
+       style="fill:#000000;fill-opacity:1.0000000;stroke:#000000;stroke-width:3.0000000;stroke-miterlimit:4.0000000;stroke-opacity:1.0000000" />
+    <path
+       d="M 349.99986,507.36220 C 349.99986,576.39780 294.03548,632.36221 224.99991,632.36221 C 155.96434,632.36221 99.999965,576.39780 99.999965,507.36220 C 99.999965,438.32660 155.96434,382.36220 224.99991,382.36220 C 294.03548,382.36220 349.99986,438.32660 349.99986,507.36220 L 349.99986,507.36220 z "
+       id="path3691"
+       style="fill:#fffbff;fill-opacity:1.0000000" />
+    <path
+       d="M 599.98432,502.44427 C 599.93904,639.94989 488.85469,751.60650 351.35112,752.35831 C 213.84753,753.11013 101.54888,642.67491 99.999985,505.17800 L 349.98423,502.36208 L 599.98432,502.44427 z "
+       id="path5973"
+       style="fill:#ffffff;fill-opacity:1.0000000" />
+    <path
+       d="M 260.00003,502.36226 C 260.00003,524.45364 242.09141,542.36223 220.00000,542.36223 C 197.90859,542.36223 179.99996,524.45364 179.99996,502.36226 C 179.99996,480.27089 197.90859,462.36230 220.00000,462.36230 C 242.09141,462.36230 260.00003,480.27089 260.00003,502.36226 L 260.00003,502.36226 z "
+       id="path4453"
+       style="fill:#000000;fill-opacity:1.0000000" />
+    <path
+       d="M 599.99986,507.36220 C 599.99986,576.39780 544.03548,632.36221 474.99991,632.36221 C 405.96434,632.36221 349.99996,576.39780 349.99996,507.36220 C 349.99996,438.32660 405.96434,382.36220 474.99991,382.36220 C 544.03548,382.36220 599.99986,438.32660 599.99986,507.36220 L 599.99986,507.36220 z "
+       id="path7491"
+       style="fill:#000000;fill-opacity:1.0000000" />
+    <path
+       d="M 519.99983,502.36226 C 519.99983,524.45364 502.09121,542.36223 479.99980,542.36223 C 457.90839,542.36223 439.99976,524.45364 439.99976,502.36226 C 439.99976,480.27089 457.90839,462.36230 479.99980,462.36230 C 502.09121,462.36230 519.99983,480.27089 519.99983,502.36226 L 519.99983,502.36226 z "
+       id="path8253"
+       style="fill:#ffffff;fill-opacity:1.0000000" />
+  </g>
+</svg>

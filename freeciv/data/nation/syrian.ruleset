@@ -1,0 +1,59 @@
+[nation_syrian]
+
+name=_("Syrian")
+plural=_("?plural:Syrians")
+groups="Modern", "Asian"
+legend=_("The modern Syrian Arab Republic was formed from a French mandate\
+ and gradually gained independence during the 1940s.")
+leader=
+ "Taj al-Din al-Hasani",
+ "Hashim al-Atassi",
+ "Khalid al-Azm",
+ "Shukri al-Kuwatli",
+ "Hafez al-Assad"
+leader_sex="Male", "Male", "Male", "Male", "Male"
+flag="syria"
+flag_alt = "-"
+city_style = "Classical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+; Similar flags:
+conflicts_with="iraqi"
+civilwar_nations="turkish", "israeli"
+
+; http://pl.wikipedia.org/wiki/Miasta_Syrii
+cities =
+ "Dimashq ash-Sham",	; Damascus
+ "Halab",		; Aleppo
+ "Hims",		; Homs
+ "Hama",
+ "Al-Ladhiqiyah",	; Latakia
+ "Dayr as-Zawr",
+ "Ar-Raqqah",
+ "Al-Bab",
+ "Duma",
+ "Safita",
+ "Salamiyah",
+ "Tartous",
+ "Ath-Thawra",
+ "Al-Qamishli",
+ "Al-Hasakah",
+ "Dar'a",
+ "Darayya",
+ "Manbij",
+ "Jabala",
+ "Azaz",
+ "As-Suwayda",
+ "Abu Kamal",
+ "At-Tall",
+ "Al-Mayadin",
+ "Nawa",
+ "Ar-Rastan",
+ "Tadmor",		; Palmyra
+ "Ayn al-Arab",
+ "Afrin",
+ "Khan Shaykhun"

@@ -1,0 +1,136 @@
+----------------------------------------------------------------------
+                       Freeciv Rulesets
+----------------------------------------------------------------------
+          (Originally by David Pfitzner, dwp@mso.anu.edu.au)
+
+Quickstart:
+-----------
+ Rulesets allow modifiable sets of data for units, advances, terrain,
+ improvements, wonders, nations, cities, governments and miscellaneous
+ game rules, without requiring recompilation, in a way which is
+ consistent across a network and through savegames.
+
+- To play Freeciv normally: don't do anything special; the new
+  features all have defaults which give the standard Freeciv 
+  behaviour.
+
+- To play a game with rules more like Civ1, start the server with:
+       ./ser -r data/civ1.serv
+  (and any other command-line arguments you normally use; depending on
+  how you have Freeciv installed you may have to give the installed
+  data directory path instead of "data").  
+
+  Start the client normally.  The client must be network-compatible
+  (usually meaning the same or similar version) but otherwise nothing
+  special is needed.  (However some third-party rulesets may
+  potentially require special graphics to work properly, in which case
+  the client should have those graphics available and be started with
+  an appropriate '--tiles' argument.)
+
+  As well as a Civ1 style as above, Freeciv now has a Civ2 style
+  similary, although currently it is almost identical to standard
+  Freeciv rules.
+
+  Note that the Freeciv AI might not play as well with rules other
+  than standard Freeciv.  The AI is supposed to understand and 
+  utilize all sane rules variations, so please report any AI 
+  failures so that they can be fixed.
+
+The rest of this file contains:
+
+- More detailed information on creating and using custom/mixed 
+  rulesets.
+
+- Information on implementation, and notes for further development.
+
+----------------------------------------------------------------------
+Using and modifying rulesets:
+-----------------------------
+
+Rulesets are specified using the server command "rulesetdir".  The 
+command above of "./ser -r data/civ1.serv" just reads a file which 
+uses this command (as well as a few of the standard server options).  
+The server command specifies in which directory the ruleset files
+are to be found.
+
+The ruleset files in the data directory are user-editable, so you can
+modify them to create modified or custom rulesets (without having to
+recompile Freeciv).  It is suggested that you _don't_ edit the 
+existing files in the "default", "classic", "civ1" and "civ2"
+directories, but rather copy them to another directory and edit the
+copies.  This is so that its clear when you are using modified rules
+and not the standard ones.
+
+The format used in the ruleset files should be fairly 
+self-explanatory.  A few points:
+
+- The files are not all independent, since eg, units depend on
+  advances specified in the techs file.
+
+- Units have a field, "roles", which is like "flags", but 
+  determines which units are used in various circumstances of the
+  game (rather than intrinsic properties of the unit).
+  See comments in common/unit.h
+
+Properties of units and advances are now fairly well generalised.
+Properties of buildings are still rather inflexible.
+
+(See utility/fciconv.[ch])
+The data charset is used in all data files and network transactions.
+This is UTF-8.  Currently, the rulesets are in latin1 (ISO-8859-1).
+
+----------------------------------------------------------------------
+Restrictions and Limitations:
+-----------------------------
+
+units.ruleset:
+
+  Restrictions:
+
+    - At least one unit with role "FirstBuild" must be available
+      from the start (i.e., tech_req = "None").
+
+    - There must be units for these roles:
+      - "Explorer"
+      - "FerryBoat"
+      - "Hut"
+      - "Barbarian"
+      - "BarbarianLeader"
+      - "BarbarianBuild"
+      - "BarbarianBoat"  (move_type must be "Sea")
+      - "BarbarianSea"
+
+    - There must be at least one unit with flag "Cities".
+
+  Limitations:
+
+    - These unit flag combinations won't work:
+      - "Diplomat" and "Caravan"
+
+    - These flags and roles work only for move_type "Land" units:
+      - "Partisan"
+      - "Settler"
+      - "IgTer"
+      - "Marines"
+      - "Airbase"
+      - "Barbarian"
+      - "BarbarianTech"
+
+    - These flags and roles work only for move_type "Sea" units:
+      - "No_Land_Attack"
+
+----------------------------------------------------------------------
+Implementation details:
+-----------------------
+
+This section and following section will be mainly of interested to
+developers who are familiar with the Freeciv source code.
+
+Rulesets are mainly implemented in the server.  The server reads the
+files, and then sends information to the clients.  Mostly rulesets 
+are used to fill in the basic data tables on units etc, but in some
+cases some extra information is required.
+
+For units and advances, all information regarding each unit or advance
+is now captured in the data tables, and these are now "fully
+customizable", with the old enumeration types completely removed.

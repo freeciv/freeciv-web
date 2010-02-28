@@ -1,0 +1,60 @@
+[nation_korean]
+
+name=_("Korean")
+plural=_("?plural:Koreans")
+groups="Ancient", "Medieval", "Asian"
+legend=_("According to legend, the first Korean kingdom was founded in\
+ prehistory by the ancestral Tangun in southern Manchuria. The Korean\
+ kingdoms were united in 668 by king Munmu. Today the Korean peninsula is\
+ divided into two states, North and South Korea as a result of the stalemate\
+ after the Korean war in 1953.")
+leader=
+ "Tangun",	; Ancestral founder of Korea
+ "Chumong", ; Founding monarch of Goguryeo, 1st century BC
+ "Kwanggaet'o",	; Great king of Goguryeo, 4th century
+ "Sondok",	; Queen of Silla, 7th century
+ "Munmu",	; King of Silla - unified the Korean kingdoms
+ "Wang Kon",	; Founder and king of Goryeo, temple name "T'aejo"
+ "Yi Song-gye",	; Founder and king of Joseon, temple name "T'aejo"
+ "T'aejong",	; King of Joseon
+ "Sejong",	; Great king of Joseon
+ "Min"		; Queen of Joseon
+leader_sex= "Male", "Male", "Male", "Female", "Male", "Male", "Male", "Male", 
+ "Male", "Female"
+
+flag="korea_ancient"
+flag_alt = "-"
+city_style = "Asian"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+conflicts_with = "north korean", "south korean"
+civilwar_nations = "north korean", "south korean"
+
+cities =
+ "Wanggomsong",
+ "Ungjin",
+ "Sabi",
+ "Jolbon",
+ "Wandu",
+ "Wiryesong",
+ "Kaegyong",
+ "Hanyang (river)",
+ "Kochilsan (mountains, hills)",
+ "Dalgubol",
+ "Hanbat",
+ "Hamhung",
+ "Wonsanjin",
+ "Michuhol",
+ "Sipje",
+ "Kwangju",
+ "Songjin",
+ "Unggi",
+ "Chonju",
+ "Chongju",
+ "Hwasong",
+ "Kaesong",
+ "Kanggye"

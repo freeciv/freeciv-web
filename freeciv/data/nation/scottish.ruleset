@@ -1,0 +1,68 @@
+[nation_scottish]
+
+name=_("Scottish")
+plural=_("?plural:Scots")
+groups="Medieval", "European"
+legend=_("Scotland, originally settled in late Roman times by Irish\
+ raiders who displaced the native Picts, was an independent kingdom from\
+ around 1034AD to the Union of Crowns with England in 1701.")
+leader=
+ "Henry McLeish",
+ "Donald Dewar",
+ "Charles II",
+ "James IV",
+ "Robert the Bruce",
+ "William Wallace",
+ "Mary Stuart"
+leader_sex="Male", "Male", "Male", "Male",
+           "Male", "Male", "Female"
+flag="scotland"
+flag_alt = "united_kingdom"
+city_style = "Celtic"
+
+ruler_titles = { "government",  "male_title",         "female_title"
+                 "Despotism",   _("Chieftain"),       _("?female:Chieftain")
+                 "Republic",    _("Speaker"),         _("?female:Speaker")
+                 "Democracy",_("First Minister"), _("?female:First Minister")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations = "welsh", "irish", "american"
+
+cities =
+"Edinburgh", "Glasgow (river)", "Aberdeen (ocean, river)", 
+"Perth (river)", "Dundee (ocean, river)", "Stirling (hills)", 
+"Inverness (river)", "Hamilton", "Motherwell", "Dunfermline", "Falkirk",
+"Kilmarnock", "Dumfries (river)", "Eastkilbride (hills)", "Coatbridge (river)", 
+"Dumbarton (ocean)", "Irvine (ocean, river)", "Lanark (river)", 
+"St Andrews (ocean,river)", "Kirkcaldy (ocean)", "Fort William (ocean)", 
+"Bathgate", "Cumbernauld", "PortGlasgow (ocean)", "Johnstone",
+"Livingstone (river)", "Lockerbie", "Oban (ocean)", "Leven (ocean)",
+"Paisley (ocean, river)", "Peterhead (ocean)", "Prestwick (ocean)",
+"Stranraer (ocean)", "Airdrie (hills)", "Troon (ocean)", "Ullapool (ocean)", 
+"Ayr (ocean, river)", "Aviemore (mountains)", "Lerwick (ocean)", 
+"Largs (ocean, river)", "Bellshill (hills)", "Wick (ocean)",
+"Larkhall (river)", "Cowdenbeath", "Gretna (ocean, river)", 
+"Brechin (river)", "Helensburgh (ocean)", "Dunblane (river)", 
+"Montrose (ocean, river)", "Kilwinning", "Monifieth (ocean)", 
+"Dunbar (ocean, river)", "Cumnock", "Stornoway (ocean)", "Callander (river)", 
+"Portree (ocean)", "Kelso (river)", "Whitebridge (river)", "Kirkintilloch", 
+"Mallaig (ocean)", "Braemar (hills)", "Jedburgh (river)", "Alloa (river)",
+"Newton Stewart (river)", "Wigtown", "Girvan (ocean, river)", 
+"Fort Augustus (ocean, river)", "Arbroath (ocean)", "Bothwell (river)", 
+"Granton on spey (river)", "Shotts (hills)", "Dornoch (ocean)",
+"Kinghorn (ocean)", "ColdStream (river)", "Eyemouth (ocean, river)",
+"Wishaw", "Kirkwall (ocean)", "Haddington (grassland)", "Strathavon (river)", 
+"Glencoe (river, hills)", "Rothesay (ocean)", "Lennoxtown (hills)", 
+"Biggar (grassland)", "Culross (ocean)", "Gourock (ocean)",
+"Newcastleton (hills)", "Durness (ocean)", "Boness (ocean)",
+"Fraserburgh (ocean)", "Nairn (ocean, river)", "Grangemouth (ocean, river)", 
+"Annan (ocean, river)", "Darvel (hills)", "Huntly (hills)",
+"Inverurie (river)", "Thornhill (hills)", "Peebles (river)", 
+"Elgin (river)", "Ellon (river)", "Dunkeld (river, grassland)", "Stow (hills)",
+"Torphichen (hills)", "Shawhead (forest)"
+; scottish nations updated from the old natural city patch by martin
+; mcmahon.13-7-02 

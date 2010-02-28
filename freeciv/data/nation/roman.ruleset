@@ -1,0 +1,66 @@
+[nation_roman]
+
+name=_("Roman")
+plural=_("?plural:Romans")
+groups="Ancient", "European"
+legend=_("Rome was, in legend, founded by Romulus in 753 BC.  At its\
+ height, Rome controlled nearly all of Europe, northern Africa and\
+ Mesopotamia.")
+leader=
+ ; Full name/s in comment
+ "Caesar",		; full name "Gaius Julius Caesar"
+ "Augustus",		; born "Gaius Octavius Thurinus",
+                        ; name as despot "Gaius Julius Caesar Augustus"
+ "Vespasianus",		; born "Titus Flavius Vespasianus",
+			; name as emperor "Caesar Vespasianus Augustus"
+			; known in English as "Vespasian"
+ "Nero",		; born "Lucius Domitius Ahenobarbus",
+			; name as emperor
+			; "Nero Claudius Caesar Augustus Germanicus"
+ "Traianus",		; full name "Marcus Ulpius Nerva Traianus",
+			; known in English as "Trajan"
+ "Marcus Aurelius",	; born "Marcus Annius Catilius Severus",
+			; name as emperor "Marcus Aurelius Antonius"
+ "Tiberius",		; born "Tiberius Claudius Nero",
+			; name as emperor "Tiberius Caesar Augustus"
+ "Constantinus I",	; full name 
+			; "Gaius Flavius Valerius Aurelius Constantinus"
+			; also known in English as "Constantine the Great"
+ "Livia",		; also known as "Livia Drusilla"
+			; as empress "Julia Augusta" or "Livia Drusa Augusta"
+ "Messalina"		; full name "Valeria Messalina"
+leader_sex="Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male",
+           "Female", "Female"
+flag = "rome"
+flag_alt = "italy"
+city_style = "Classical"
+
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Despotism",       _("Dictator"),     _("Dictatrix")
+                 "Monarchy",        _("Imperator"),    _("Imperatrix")
+}
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations = "italian", "spanish", "french"
+
+cities =
+  "Roma", "Capua", "Veii", "Beneventum", "Corfinium", "Ancona",
+  "Tarentum", "Brundisium", "Ravenna", "Pisa", "Genova", "Mediolanum",
+  "Aquileia", "Florentia", "Bononia", "Verona", "Ostia", "Agrigentum",
+  "Syracusae", "Neapolis", "Pompeii", "Salernum", "Tarraco",
+  "Carthago", "Barcino", "Bracara", "Carthago Nova", "Baiae",
+  "Noviomagus", "Vindobona", "Atuatuca", "Caesarea", "Ierusalem",
+  "Trapezus", "Durocortorum", "Lutetia", "Burdigala", "Portus Namnetum",
+  "Utica", "Lugdunum", "Londinium", "Aquae Sulis", "Camulodunum", "Dubris",
+  "Eburacum", "Coriovallum", "Perusia", "Leptis Magna", "Corduba", "Edessa",
+  "Ariminum", "Narbo Martius", "Pergamum", "Vienna", "Hispalis",
+  "Salonae", "Cyrenae", "Dyrrachium", "Luni", "Noreia", "Ephesus",
+  "Panoramus", "Ancyra", "Caralis", "Patavium", "Petra", "Tolosa",
+  "Pisae", "Palmyra", "Tyrus", "Cortona", "Arenate", "Brigantium",
+  "Lix", "Sala", "Berytus", "Naissus", "Nicomedia", "Berenice",
+  "Sabrata", "Attalea", "Sinope", "Hippo Regius", "Gesoriacum",
+  "Velia", "Segesta", "Gaza", "Aleria", "Colonia Agrippina",
+  "Agentoracum", "Moguntiacum", "Arretium", "Thapsus", "Altinum", "Tarsus"

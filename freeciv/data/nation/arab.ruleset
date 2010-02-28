@@ -1,0 +1,45 @@
+[nation_arab]
+
+name=_("Arab")
+plural=_("?plural:Arabs")
+groups="Medieval", "Asian", "African"
+legend=_("The Arab/Islamic civilization of 622AD-1495AD.")
+leader=
+ "Mohammad",
+ "Umar",
+ "Harun al-Rashid",
+ "Saladin", 
+ "Al-Mansur",
+ "Al-Hakim"
+leader_sex="Male", "Male", "Male", "Male", "Male", "Male"
+flag ="arab"
+flag_alt = "-"
+city_style = "Classical"
+
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Monarchy",        _("Caliph"),       _("Caliph")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+; Should not appear with other Arabic nations from the beginning but...
+conflicts_with="iraqi", "libyan", "sudanese"
+; ...civil war to them.
+civilwar_nations="iraqi", "libyan", "sudanese"
+
+; Arab Peninsula and Near East.  City names are mostly from the Ummayyad 
+; and Abbasid periods.  These are Arab spellings rather than Anglicized ones;
+; thus, Dimashq = Damascus, Al Qahira = Cairo, etc.
+
+cities =
+
+  "Makkah", "Al-Madinah", "Al-Rijadh", "Al-Qahira", "Baghdad",
+  "Timbuktu", "Sijilmasa", "Jidda", "Al-Hufuf", "Buraydah", "At Taif", 
+  "Sana'a", "Al-Hudaydah", "Al'Adan",
+  "Al-Mukalla", "Taizz", "Masquat", "Abu Zaby", "Dubayy",
+  "Ad-Dawhah", "Al-Manamah", "Ad-Damman", "Al-Kuwayt", "Al-Jahrah",
+  "Al-Amman", "Dimashq", "Bayrut", "Hamah", "Aleppo", "Hums",
+  "Al-Ayn", "Al-Basrah", "Khorramshar"

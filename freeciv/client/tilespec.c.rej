@@ -1,0 +1,16 @@
+*************** void tileset_use_prefered_theme(const struct tileset *t)
+*** 5123,5128 ****
+  
+    switch (get_gui_type()) {
+    case GUI_GTK2:
+      default_theme_name = gui_gtk2_default_theme_name;
+      default_theme_name_sz = sizeof(gui_gtk2_default_theme_name);
+      break;
+--- 5123,5129 ----
+  
+    switch (get_gui_type()) {
+    case GUI_GTK2:
++   case GUI_MAPIMG:
+      default_theme_name = gui_gtk2_default_theme_name;
+      default_theme_name_sz = sizeof(gui_gtk2_default_theme_name);
+      break;

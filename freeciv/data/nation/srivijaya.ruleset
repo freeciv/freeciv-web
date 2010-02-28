@@ -1,0 +1,60 @@
+[nation_srivijaya]
+
+name=_("Sri Vijaya")
+plural=_("?plural:Sri Vijaya")
+groups="Asian", "Medieval"
+
+legend=_("Sri Vijaya was an empire centered on Palembang in eastern Sumatra\
+ and extended its control through much of the coastal regions of Sumatra,\
+ Java, Borneo and the Malay peninsula. It was founded sometime in the 3rd\
+ century CE and lasted until roughly 1400, falling first to Jambi, then to\
+ Singhasari and other regional powers, including the South Indian Chola\
+ dynasty.")
+
+leader=
+ "Dapunta Hyang Sri Jayanasa",
+ "Balaputra"
+
+leader_sex = "Male", "Male"
+
+ruler_titles = { "government",      "male_title",        "female_title"
+                 "Monarchy",       _("Datu"),            _("Datu")
+                 "Anarchy",        _("Senapati"),        _("Senapati")
+               }
+
+flag         = "srivijaya"
+flag_alt     = "-"
+city_style   = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="Majapahit", "indonesian", "malaysian"
+
+cities =
+ "Palembang",
+ "Muara Jambi",
+ "Kedah",
+ "Tarumanagara",
+ "Batam",
+ "Lubuklinggau",
+ "Pagar Alam",
+ "Bandar Lampung",
+ "Prabumulih",
+ "Pangkalpinang",
+ "Sungailiat",
+ "Muntok",
+ "Toboali",
+ "Koba",
+ "Belinyu",
+ "Sungai Penuh",
+ "Metro",
+ "Pekanbaru",
+ "Dumai",
+ "Bengkalis",
+ "Tanjung Balai Karimun",
+ "Tanjung Pinang",
+ "Daik",
+ "Ranai"

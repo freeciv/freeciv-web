@@ -1,0 +1,208 @@
+[nation_romanian]
+
+name=_("Romanian")
+plural=_("?plural:Romanians")
+groups="Modern", "Medieval", "European"
+legend=_("Romania as a nation was formed at the beginning of the 20th\
+ century, when the states of Transylvania, Wallachia, and Moldavia merged.\
+ It is a country inhabited by people speaking a language reminiscent from\
+ the time of ancient Rome. Its history is convoluted as it was always at\
+ the borders of great empires: Roman, Ottoman, Austro-Hungarian, and\
+ Russian.")
+
+leader=
+ "Mircea cel Bătrân",		; English: "Mircea the Elder"
+ "Vlad III Dracula",		; also "Vlad Ţepeş" or "Vlad the Impaler"
+ "Mihai Viteazul",		; English: "Michael the Brave"
+ "Ştefan cel Mare",		; English: "Stefan the Great"
+ "Ioan Corvin Huniade",		; English: "John Corvinus Huniades"
+ "Avram Iancu",
+ "Horea",			; real name: "Vasile Ursu Nicola"
+ "Alexandru cel Bun",		; English: "Alexander the Kind"
+ "Carol I",			; First and second king of the house of
+ "Ferdinand I",			; Hohenzollern-Sigmaringen
+ "Nicolae Antonescu",
+ "Nicolae Ceausescu"
+leader_sex="Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male",
+           "Male", "Male", "Male", "Male"
+flag="romania"
+flag_alt = "-"
+city_style = "Classical"
+
+ruler_titles = { "government",      "male_title",      "female_title"
+		 ; /* TRANS: Voievod/Doamna = Prince/Lady */
+                 "Despotism",       _("Voievod"),     	_("Doamna")
+		 ; /* TRANS: Rege/Regina = King/Queen */
+                 "Monarchy",        _("Rege"),    	_("Regina")
+		 ; /* TRANS: Tovaras/Tovarasa = Comrade */
+                 "Communism",       _("Tovaras"),     	_("Tovarasa")
+           "Fundamentalism", _("Director-President"), _("Director-President")
+               }
+
+init_techs=""
+init_buildings=""
+init_units=""
+init_government="Despotism"
+
+conflicts_with = "roman"
+civilwar_nations = "hungarian", "serbian", "ukrainian"
+
+cities =
+ "Bucureşti",
+ "Iaşi",
+ "Cluj-Napoca",
+ "Timişoara",
+ "Constanţa",
+ "Craiova",
+ "Galaţi",
+ "Braşov",
+ "Ploieşti",
+ "Brăila",
+ "Oradea",
+ "Bacău",
+ "Arad",
+ "Piteşti",
+ "Sibiu",
+ "Târgu Mureş",
+ "Baia Mare",
+ "Buzău",
+ "Satu Mare",
+ "Botoşani",
+ "Râmnicu",
+ "Suceava",
+ "Piatra Neamţ",
+ "Drobeta-Severin",
+ "Focşani", 
+ "Târgu Jiu",
+ "Tulcea",
+ "Târgovişte",
+ "Reşiţa",
+ "Bistriţa",
+ "Slatina",
+ "Hunedoara",
+ "Vaslui", 
+ "Călăraşi",
+ "Giurgiu",
+ "Roman",
+ "Deva",
+ "Bârlad",
+ "Alba Iulia",
+ "Zalău",
+ "Sfântu Gheorghe", 
+ "Turda",
+ "Mediaş",
+ "Slobozia",
+ "Oneşti",
+ "Alexandria",
+ "Petroşani",
+ "Lugoj",
+ "Medgidia", 
+ "Paşcani",
+ "Tecuci",
+ "Miercurea Ciuc",
+ "Sighetu Marmaţiei",
+ "Mangalia",
+ "Râmnicu Sărat", 
+ "Câmpina",
+ "Dej",
+ "Câmpulung",
+ "Odorheiu Secuiesc",
+ "Reghin",
+ "Mioveni",
+ "Făgăraş",
+ "Caracal", 
+ "Feteşti",
+ "Curtea de Argeş",
+ "Năvodari",
+ "Sighişoara",
+ "Roşiori de Vede",
+ "Dorohoi",
+ "Turnu Măgurele", 
+ "Fălticeni",
+ "Huşi",
+ "Vulcan",
+ "Rădăuţi",
+ "Olteniţa",
+ "Lupeni",
+ "Caransebeş",
+ "Cugir",
+ "Săcele", 
+ "Câmpia Turzii",
+ "Târnăveni",
+ "Sebeş",
+ "Aiud",
+ "Petrila",
+ "Borşa",
+ "Zărneşti",
+ "Comăneşti", 
+ "Motru",
+ "Carei",
+ "Moineşti",
+ "Codlea",
+ "Orăştie",
+ "Gherla",
+ "Balş",
+ "Moreni",
+ "Târgu Neamţ", 
+ "Drăgăşani",
+ "Târgu Secuiesc",
+ "Băileşti",
+ "Buhuşi",
+ "Corabia",
+ "Câmpulung Moldovenesc",
+ "Blaj", 
+ "Gheorgheni",
+ "Calafat",
+ "Adjud",
+ "Cernavodă",
+ "Băicoi",
+ "Filiaşi",
+ "Salonta",
+ "Buftea",
+ "Urziceni", 
+ "Bocşa",
+ "Breaza",
+ "Marghita",
+ "Luduş",
+ "Vişeu",
+ "Brad",
+ "Vatra",
+ "Cisnădie",
+ "Mizil",
+ "Şimleu Silvaniei", 
+ "Topliţa",
+ "Zimnicea",
+ "Gura Humorului",
+ "Găeşti",
+ "Pucioasa",
+ "Negreşti-Oaş",
+ "Râşnov",
+ "Avrig", 
+ "Baia Sprie",
+ "Ocna Mureş",
+ "Orşova",
+ "Oraviţa",
+ "Moldova Nouă",
+ "Călan",
+ "Sinaia",
+ "Ţăndărei", 
+ "Simeria",
+ "Dărmăneşti",
+ "Târgu Ocna",
+ "Târgu Lăpuş",
+ "Vălenii de Munte",
+ "Târgu Frumos",
+ "Scorniceşti", 
+ "Comarnic",
+ "Ovidiu",
+ "Drăgăneşti",
+ "Oţelu Roşu",
+ "Mărăşeşti",
+ "Sânnicolau",
+ "Ianca",
+ "Nehoiu", 
+ "Rovinari",
+ "Strehaia",
+ "Haţeg",
+ "Videle",
+ "Covasna"

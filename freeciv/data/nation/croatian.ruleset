@@ -1,0 +1,70 @@
+[nation_croatian]
+
+name=_("Croatian")
+plural=_("?plural:Croatians")
+groups="Modern", "European"
+legend=_("Croatia is the region of the Southern Slavs that was held by the\
+ Austro-Hungarian Empire, rather than coming under Ottoman rule after the\
+ collapse of Byzantium. During most of the 20th century it was part of the\
+ Yugoslav Federation.")
+leader=
+ "Ljudevit Posavski",
+ "Borna",
+ "Trpimir",
+ "Domagoj",
+ "Branimir",
+ "Tomislav",
+ "Stjepan Držislav",
+ "Petar Krešimir IV",
+ "Dmitar Zvonimir",
+ "Nikola Šubić Zrinski",
+ "Matija Gubec",
+ "Petar Zrinski",
+ "Franjo Frankopan",
+ "Franjo Tuđman",
+ "Josip Jelačić"
+leader_sex="Male", "Male", "Male", "Male", "Male", "Male", "Male",
+           "Male", "Male", "Male", "Male", "Male", "Male", "Male",
+           "Male"
+flag="croatia"
+flag_alt = "-"
+city_style = "European"
+
+ruler_titles = { "government",      "male_title",      "female_title"
+		 "Republic",	    _("President"),    _("?female:President")
+               }
+
+init_techs=""
+init_buildings=""
+
+init_government="Despotism"
+init_units=""
+civilwar_nations = "slovenian"
+
+cities =
+  "Zagreb", "Split", "Osijek", "Rijeka", "Varazdin", "Rovinj",
+  "Vukovar", "Pula", "Sisak", "Petrinja", "Karlovac", "Pazin",
+  "Dubrovnik", "Zadar", "Sibenik", "Krizevci", "Kutina", "Gospic",
+  "Ivanic Grad", "Slavonski Brod", "Bjelovar", "Biograd", "Pozega",
+  "Cakovec", "Ilok", "Opatija", "Vinkovci", "Glina", "Umag", "Pag",
+  "Virovitica", "Samobor", "Trogir", "Pakrac", "Beli Manastir",
+  "Krapina", "Makarska", "Zabok", "Dakovo", "Mali Losinj", "Rab",
+  "Nasice", "Labin", "Zupanja", "Novska", "Delnice", "Porec", "Krk",
+  "Velika Gorica", "Sesvete", "Okucani", "Lepoglava", "Zapresic",
+  "Crikvenica", "Koprivnica", "Dugo Selo", "Belisce", "Buje",
+  "Topusko", "Hvar", "Gradiska", "Slatina", "Plomin", "Ivanec",
+  "Daruvar", "Vrpolje", "Knin", "Drnis", "Vis", "Senj", "Borovo",
+  "Durdevac", "Narta", "Sunja", "Jastrebarsko", "Ogulin", "Cres",
+  "Slunj", "Novi Vinodolski", "Kostajnica", "Skradin", "Ston",
+  "Omis", "Vrbovsko", "Orahovica", "Donji Miholjac", "Solin",
+  "Cavtat", "Benkovac", "Obrovac", "St.Ivan Zelina", "Ludbreg",
+  "Klostar", "Ivankovo", "Dalj", "Otok", "Cepin",
+  "Crnac", "Suhopolje", "Pitomaca", "Kotoriba", "Mursko Sredisce",
+  "Prelog", "Nedelisce", "Konjscina", "Bedekovcina", "Stupnik",
+  "Pokupsko", "Dvor", "Vrginmost", "Ozalj", "Duga Resa", "Otocac",
+  "Cetingrad", "Plaski", "Novigrad", "Vrsar", "Buzet", "Rabac",
+  "Motovun", "Kanfanar", "Medulin", "Lupoglav", "Kastav", "Lovran",
+  "Ravna Gora", "Karlobag", "Plitvice", "Perisic", "Ugljan",
+  "Gracac", "Sukosan", "Filipjakov", "Pirovac", "Vodice", "Kastel",
+  "Supetar", "Baska", "Orebic", "Blato", "Tucepi",
+  "Imotski", "Metkovic", "Opuzen"

@@ -1,0 +1,49 @@
+[nation_portuguese]
+
+name=_("Portuguese")
+plural=_("?plural:Portuguese")
+groups="Medieval", "Modern", "European"
+legend=_("Portugal founded the first of the great mercantile empires\
+ in the 1400s on the shipbuilding advances funded by Prince Henry the\
+ Navigator.")
+leader=
+ "Afonso Henriques",
+ "Sancho I",
+ "Dinis",
+ "Afonso IV",
+ "João I",
+ "João II",
+ "Manuel I",
+ "João IV",
+ "Maria II",
+ "António de Oliveira Salazar"
+leader_sex="Male", "Male", "Male", "Male",
+	   "Male", "Male", "Male", "Male", "Female", "Male"
+flag="portugal"
+flag_alt = "-"
+city_style = "Classical"
+
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Democracy",_("Prime Minister"), _("?female:Prime Minister")
+}
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations = "brazilian"
+
+cities =
+ "Lisboa", "Guimarães", "Guarda", "Vila Real", "Viseu", "Braga",
+ "Porto (ocean)", "Coimbra", "Aveiro", "Leiria", "Bragança",
+ "Barcelos", "Sintra", "Setúbal", "Alcácer do Sal", "Santarém",
+ "Silves", "Évora", "Portalegre (ocean)", "Faro", "Elvas", "Óbidos",
+ "Alcobaça", "Alcochete", "Alcoutim", "Tomar", "Alenquer",
+ "Aljubarrota", "Fátima", "Batalha", "Nazaré", "Aljustrel", "Almada",
+ "Almeirim", "Aljezur", "Odemira", "Viana do Castelo (mountains)",
+ "Chaves", "Castelo Branco (mountains)", "Caldas da Rainha",
+ "Estremoz", "Vila Viçosa", "Sines", "Portimão", "Albufeira", "Lagos",
+ "Tavira", "Marvão", "Mafra", "Palmela", "Cascais", "Estoril",
+ "Funchal", "Ponta Delgada", "Torres Vedras", "Torres Novas",
+ "Amadora", "Queluz", "Maia", "Figueira da Foz (river)", "Matosinhos",
+ "Vila Nova de Gaia"

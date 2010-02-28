@@ -1,0 +1,131 @@
+[nation_ottoman]
+
+name=_("Ottoman")
+plural=_("?plural:Ottomans")
+groups="Medieval", "Asian", "European"
+legend=_("In the beginning of the 14th century Osman, a leader of a\
+ minor Turkish tribe in western Anatolia, conquered all his neighboring\
+ tribes. A century later the Byzantine capital fell to\
+ Turkish rule which gave the Ottoman empire access to Europe. The\
+ Ottomans subsequently conquered large parts of south-eastern\
+ Europe, the Islamic Arab world as well as\
+ Egypt and much of North Africa, making it a regional superpower\
+ until its dissolution in the aftermath of WWI.")
+leader=
+ "Fâtih Sultân Mehmed",
+ "Yavuz Sultân Selim",
+ "Ertuğrul Gâzi",
+ "Osman",
+ "Orhan",
+ "Kânûnî Sultân Süleyman"
+leader_sex="Male", "Male", "Male", "Male", "Male", "Male"
+flag ="ottoman"
+flag_alt = "turkey"
+city_style = "Classical"
+
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Despotism",       _("Bey"),          _("Bey")
+                 "Monarchy",        _("Hakan"),        _("Hakan")
+                 "Republic",        _("Padisah"),      _("Padisah")
+                 "Democracy",       _("Imparator"),    _("Imparator")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+conflicts_with="turkish"
+civilwar_nations="arab", "armenian", "hellenic"
+
+; Cities from all over the empire
+cities =
+ "Söğüt",
+ "Bursa",
+ "İznik",
+ "Edremit",
+ "Ezine",
+ "Bergama",
+ "Akhisar",
+ "Kocaeli",
+ "Gelibolu",
+ "Edirne",
+ "Niş",
+ "Sofya",
+ "Manastır",
+ "Larende",
+ "Konya",
+ "Sivas",
+ "Kayseri",
+ "Niğde",
+ "Adana",
+ "Angara",
+ "Antakya",
+ "Adalya",
+ "Mut",
+ "Hamidâbâd",
+ "Canik",
+ "Trabzon",
+ "Avlonya",
+ "Samsun",
+ "Kütâhiye",
+ "Selânik",
+ "Semendire",
+ "Seged",
+ "Varna",
+ "Kosova",
+ "Konstantiniyye",
+ "Azirum",
+ "Erzingan",
+ "Diyarbekir",
+ "Maraş",
+ "Antep",
+ "Urfa",
+ "İskenderun",
+ "Van",
+ "Mora",
+ "Eğriboz",
+ "Kırım",
+ "Eflak",
+ "Boğdan",
+ "Kili",
+ "Akkirman",
+ "İnebahtı",
+ "Modon",
+ "Navarin",
+ "Koron",
+ "Tebriz",
+ "Şam",
+ "Kâhire",
+ "Cezâyir",
+ "Belgrad",
+ "Rodos",
+ "Bosna",
+ "Bağdat",
+ "Musul",
+ "Budin",
+ "Estergon",
+ "Lahsâ",
+ "Yemen",
+ "Trablusgarb",
+ "Trablusşam",
+ "Fas",
+ "Cerbe",
+ "Astarhan",
+ "Kıbrıs",
+ "Tunus",
+ "Suakin",
+ "Cidde",
+ "Basra",
+ "Budin",
+ "Tameşvar",
+ "Çıldır",
+ "Gürcistan",
+ "Kanije",
+ "Revan",
+ "Girit",
+ "Varad",
+ "Uyvar",
+ "Kandiye",
+ "Kamaniçe",
+ "Çehrin"

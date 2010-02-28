@@ -1,0 +1,79 @@
+[nation_un]
+
+name=_("UN")
+plural=_("?plural:UN")
+groups="Fictional"
+legend=_("The United Nations believe in human rights and the protection of\
+ the weak.")
+leader=
+ "Trygve Lie",
+ "Dag Hammarskjöld",
+ "U Thant",
+ "Kurt Waldheim",
+ "Javier Pérez de Cuéllar",
+ "Boutros Boutros-Ghali",
+ "Kofi Annan",
+ "Ban Ki-moon"
+leader_sex="Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male"
+flag="united_nations"
+flag_alt = "-"
+city_style = "Classical"
+
+ruler_titles = { "government",      "male_title",      "female_title"
+        	 "Despotism",       _("Chairperson"),_("?female:Chairperson")
+           "Monarchy", _("Secretary-General"), _("?female:Secretary-General")
+        	 "Republic", _("Representative"), _("?female:Representative")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+cities=
+ "Security Council",
+ "General Assembly",
+ "ECOSOC",
+ "Trusteeship Council",
+ "ICJ",
+ "UNHCR",
+ "UNESCO",
+ "UNICEF",
+ "WHO",
+ "WWF",
+ "IMF",
+ "WTO",
+ "UNCTAD",
+ "UNDCP",
+ "UNDP",
+ "UNEP",
+ "UNFPA",
+ "UNHSP",
+ "WFP",
+ "UNRWA",
+ "INSTRAW",
+ "UNICRI",
+ "UNITAR",
+ "UNRISD",
+ "UNIDIR",
+ "OHCHR",
+ "UNOPS",
+ "UNU",
+ "UNOOSA",
+ "UNSSC",
+ "UNAIDS",
+ "UNRRA",
+ "ILO",
+ "FAO",
+ "ICAO",
+ "IMO",
+ "ITU",
+ "UPU",
+ "WMO",
+ "WIPO",
+ "IFAD",
+ "UNIDO",
+ "IRO",
+ "INCB",
+ "IAEA",
+ "ICC"

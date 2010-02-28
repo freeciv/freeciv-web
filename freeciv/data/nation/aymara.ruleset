@@ -1,0 +1,135 @@
+[nation_aymara]
+
+name=_("Aymara")
+plural=_("?plural:Aymaras")
+groups="Medieval", "American"
+legend=_("After the collapse of the Tiwanaku civilization in the\
+ Andes, their heirs reorganized into a set of culturally close\
+ Aymara kingdoms that thrived around the Titicaca lake until they\
+ were conquered by the Incas.")
+leader=
+ "Tupax Katari",	; born Julián Apasa
+ "Pawlu Sarati",
+ "Santos Marka Thula",
+ "Wartulina Sisa",
+ "Kutimpu",
+ "Avelino Siñani",
+ "Kkari",
+ "Kurusa Llawi",
+ "Apasa Tuqi",
+ "Rumi Maki",
+ "Qhawiri",
+ "Fausto Reynaga"	; born José Félix
+leader_sex="Male", "Male", "Male", "Female", "Male",
+ "Male", "Male", "Male", "Male", "Male", "Male", "Male"
+flag="aymara"
+flag_alt = "-"
+city_style = "Tropical"
+
+ruler_titles = { "government",      "male_title",      "female_title"
+        	 "Monarchy",        _("Jiliri"),       _("Jiliri")
+                 "Republic",        _("Mallku"),       _("Ttalla")
+                 "Democracy",       _("Mallku"),       _("Ttalla")
+        	 "Fundamentalism",  _("Willka"),       _("Willka")
+                 "Despotism",       _("Tata"),         _("Mama")
+                 "Communism",       _("Markachiri"),   _("Markachiri")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations = "inca", "chilean"
+
+cities =
+ "Altupata",
+ "Taypi-Qala",
+ "Pukara",
+ "Ariqhipa",
+ "Chukiyapu",
+ "Quta-Qhawaña",
+ "Wanchu-Lima",
+ "Warisata",
+ "Uru-Uru",
+ "Jillawi",
+ "Jatun-Qulla",
+ "Jayu-Jayu",
+ "Sullkawi",
+ "Inkawi",
+ "Jacchakachi",
+ "Karanka",
+ "Xulli",
+ "Amantani",
+ "Suriki",
+ "Chukuwitu",
+ "Wankani",
+ "Uyuni",
+ "Axura",
+ "Killaka",
+ "Arika",
+ "Wiyacha",
+ "Taraqu",
+ "Warina",
+ "Aruma",
+ "Achuqalla",
+ "Isquma",
+ "Karaqullu",
+ "Killa-Qullu",
+ "Karaqutu",
+ "Sipita",
+ "Iki-Iki",
+ "Asapa",
+ "Waki",
+ "Yunkuyu",
+ "Pusi",
+ "Wiñaymarka",
+ "Thaqaña",
+ "Muqhiwa",
+ "Katamarka",
+ "Jayawiri",
+ "Waruchiri",
+ "Aya-Kuchu",
+ "Wakullani",
+ "Willkan-Uta",
+ "Qalaquta",
+ "Jincchupalla",
+ "Asiruni",
+ "Kaxamarka",
+ "Sikuwani",
+ "Jathakama",
+ "Putina",
+ "Pilkuyu",
+ "Chipana",
+ "Kachipukara",
+ "Arapa",
+ "Umayu",
+ "Lampa",
+ "Illimani",
+ "Illampu",
+ "Lariqaxa",
+ "Kuxata",
+ "Laraqiri",
+ "Wañaskkuyu",
+ "Irukkuyu",
+ "Tiyawaya",
+ "Suqhawaya",
+ "Muxu",
+ "Pukarani",
+ "Jawirani",
+ "Anta-Uta",
+ "Saxama",
+ "Apulupampa",
+ "Quluqulu",
+ "Kaminaka",
+ "Puquwata",
+ "Wataxata",
+ "Laxa",
+ "Machaqa",
+ "Challapata",
+ "Chawaya",
+ "Surata",
+ "Ayata",
+ "Charasani",
+ "Qunsata",
+ "Pillapi",
+ "Chuxusiwi"

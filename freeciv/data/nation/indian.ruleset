@@ -1,0 +1,68 @@
+[nation_indian]
+
+name=_("Indian")
+plural=_("?plural:Indians")
+groups="Ancient", "Medieval", "Modern", "Asian"
+legend=_("The cradle of Ancient Indian civilization lay in the Indus river\
+ valley in modern-day Pakistan.")
+leader=
+ "Mohandas Gandhi",
+ "Ashoka",
+ "Chandragupta",
+ "Indira Gandhi"
+leader_sex="Male", "Male", "Male", "Female"
+flag="india"
+flag_alt = "-"
+city_style = "Asian"
+
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Despotism",       _("Raja"),         _("?female:Raja")
+                 "Monarchy",        _("Maharaja"),     _("?female:Maharaja")
+                 "Republic",        _("Mahatma"),      _("?female:Mahatma")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations = "lankese", "bengali"
+
+cities =
+ "Delhi",
+ "Bombay",
+ "Madras",
+ "Bangalore",
+ "Calcutta",
+ "Lahore",
+ "Karachi",
+ "Ahmadabad",
+ "Kanpur",
+ "Hyderabad",
+ "Dacca",
+ "Lucknow",
+ "Benares",
+ "Chandrigarh",
+ "Rawalpindi",
+ "Colombo",
+ "Madurai",
+ "Coimbatore",
+ "Calicut",
+ "Trivandrum",
+ "Nagpur",
+ "Chittagong",
+ "Multan",
+ "Amritsar",
+ "Srinagar",
+ "Agra",
+ "Bhopal",
+ "Patna",
+ "Surat",
+ "Jaipur",
+ "Varanasi",
+ "Allahabad",
+ "Indore",
+ "Mysore",
+ "Raipur",
+ "Gaya",
+ "Cawnpore",
+ "Poona (hills)"

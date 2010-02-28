@@ -1,0 +1,53 @@
+[nation_samogitian]
+
+name=_("Samogitian")
+plural=_("?plural:Samogitians")
+groups="Medieval", "European"
+legend=_("Samogitia - historical country near the Baltic Sea - home to the\
+ last pagans in Europe (official until 1413). Today, Samogitia is a region\
+ of Lithuania")
+leader=
+ "Vīkints",
+ "Ringauds",
+ "Treniuota",
+ "Gedvils",
+ "Algmins"
+leader_sex="Male", "Male", "Male", "Male", "Male"
+flag="samogitia"
+flag_alt = "-"
+city_style = "European"
+ruler_titles = { "government",      "male_title",         "female_title"
+                 "Monarchy",        _("Duke"),            _("Duchess")
+}
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+conflicts_with = "lithuanian"
+civilwar_nations = "lithuanian", "latvian"
+
+cities =
+ "Telšē",
+ "Raseinē",
+ "Klaipieda",
+ "Šiaulē",
+ "Plongė",
+ "Kretinga",
+ "Varnē",
+ "Reitavs",
+ "Tauragie",
+ "Šėlalė",
+ "Kelmė",
+ "Palonga",
+ "Mažeikē",
+ "Koršienā",
+ "Akmenė",
+ "Skouds",
+ "Salontā",
+ "Seda",
+ "Kražē",
+ "Trīškē",
+ "Vėikšnē",
+ "Muosedis"

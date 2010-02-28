@@ -1,0 +1,171 @@
+
+; Modifying this file:
+; You should not modify this file except to make bugfixes or
+; for other "maintenance".  If you want to make custom changes
+; you should create a new datadir subdirectory and copy this file
+; into that directory, and then modify that copy.  Then use the
+; command "rulesetdir <mysubdir>" in the server to have freeciv
+; use your new customized file.
+
+[datafile]
+description="Cities data for Freeciv"
+options="1.9"
+
+; A specialist is a city citizen who is not a tile worker.  Usually the
+; player can control what specialist each citizen is, so long as the
+; requirements for that specialist are met.
+;
+; Below are the entries for the specialists, one per specialist type.
+; The tag name (in [specialist_*]) doesn't matter so long as it's unique.
+; For each specialist the following fields may be set:
+;
+; 
+; name		= name as seen by user 
+; short_name    = one-character "short name" used (for instance) in cityrep
+; reqs		= requirements to have the specialist pick (see
+;		  effects.ruleset and README.effects for help on requirements)
+
+[specialist_elvis]
+name		= _("elvis")
+short_name	= _("?Elvis:E")
+reqs		=
+    { "type", "name", "range"
+; Nothing
+    }
+
+[specialist_scientist]
+name		= _("scientist")
+short_name	= _("?Scientist:S")
+reqs		=
+    { "type", "name", "range"
+      "MinSize", "5", "City"
+    }
+
+[specialist_taxman]
+name		= _("taxman")
+short_name	= _("?Taxman:T")
+reqs		=
+    { "type", "name", "range"
+      "MinSize", "5", "City"
+    }
+
+[parameters]
+add_to_size_limit  = 8		; cities >= this cannot be added to.
+angry_citizens = 1              ; set to zero to disable angry citizens
+celebrate_size_limit = 3        ; cities >= can celebrate
+
+changable_tax = 1		; set to zero to disallow changing of tax rates
+
+;forced_science = 0		; set these fields when changeable_tax is turned off
+;forced_luxury = 100
+;forced_gold = 0
+
+;
+; City styles define the way cities are drawn
+;
+; graphic              = group of tiles to use, see cities spec for
+;                        more info on city tiles
+; oceanic_graphic      = group of tiles to use for oceanic cities. If this
+;                        is omitted, same graphics as for land cities is used
+; citizens_graphic     = group of citizens tiles to use, see citizens/small
+;                        spec for more info on citizens tiles
+; reqs        = requirements for this city style (see README.effects)
+; replaced_by = which style replaced this one
+
+[citystyle_european]
+name        = _("?citystyle:European")
+graphic     = "city.european"
+graphic_alt = "-"
+citizens_graphic     = "ancient"
+citizens_graphic_alt = "generic"
+; No reqs
+replaced_by = "Renaissance"
+
+[citystyle_classical]
+name        = _("?citystyle:Classical")
+graphic     = "city.classical"
+graphic_alt = "-"
+citizens_graphic     = "ancient"
+citizens_graphic_alt = "generic"
+; No reqs
+replaced_by = "Renaissance"
+
+[citystyle_tropical]
+name        = _("?citystyle:Tropical")
+graphic     = "city.tropical"
+graphic_alt = "city.european"
+citizens_graphic     = "ancient"
+citizens_graphic_alt = "generic"
+; No reqs
+replaced_by = "Renaissance"
+
+[citystyle_asian]
+name        = _("?citystyle:Asian")
+graphic     = "city.asian"
+graphic_alt = "city.classical"
+citizens_graphic     = "ancient"
+citizens_graphic_alt = "generic"
+; No reqs
+replaced_by = "Renaissance"
+
+[citystyle_babylonian]
+name        = _("?citystyle:Babylonian")
+graphic     = "city.babylonian"
+graphic_alt = "city.classical"
+citizens_graphic     = "ancient"
+citizens_graphic_alt = "generic"
+; No reqs
+replaced_by = "Renaissance"
+
+[citystyle_celtic]
+name        = _("?citystyle:Celtic")
+graphic     = "city.celtic"
+graphic_alt = "city.european"
+citizens_graphic     = "ancient"
+citizens_graphic_alt = "generic"
+; No reqs
+replaced_by = "Renaissance"
+
+[citystyle_renaissance]
+name        = _("?citystyle:Renaissance")
+graphic     = "city.renaissance"
+graphic_alt = "city.industrial"
+citizens_graphic     = "renaissance"
+citizens_graphic_alt = "generic"
+reqs = { "type", "name", "range"
+         "tech", "University", "Player"
+       }
+replaced_by = "Industrial"
+
+[citystyle_industrial]
+name        = _("?citystyle:Industrial")
+graphic     = "city.industrial"
+graphic_alt = "-"
+citizens_graphic     = "industrial"
+citizens_graphic_alt = "generic"
+reqs = { "type", "name", "range"
+         "tech", "Railroad", "Player"
+       }
+replaced_by = "Modern"
+
+[citystyle_modern]
+name        = _("?citystyle:Modern")
+graphic     = "city.modern"
+graphic_alt = "-"
+citizens_graphic     = "modern"
+citizens_graphic_alt = "generic"
+reqs = { "type", "name", "range"
+         "tech", "Automobile", "Player"
+       }
+replaced_by = "PostModern"
+
+[citystyle_postmodern]
+name        = _("?citystyle:PostModern")
+graphic     = "city.postmodern"
+graphic_alt = "-"
+citizens_graphic     = "postmodern"
+citizens_graphic_alt = "generic"
+reqs = { "type", "name", "range"
+         "tech", "Superconductors", "Player"
+       }
+replaced_by = "-"

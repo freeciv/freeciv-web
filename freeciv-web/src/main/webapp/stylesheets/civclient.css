@@ -1,0 +1,169 @@
+body
+{
+  font: 80% sans-serif; 
+  margin: 0px;
+  background: #000000;
+}
+
+button { 
+  margin: .2em .2em .2em 0; 
+  cursor: pointer; 
+  padding: .2em .6em .3em .6em; 
+  line-height: 1.4em; 
+  width:auto; 
+  overflow:visible; 
+}
+
+.demoHeaders { 
+  margin-top: 0px; 
+}
+
+.ui-tabs .ui-tabs-panel {
+  border-width:0;
+  display:block;
+  height:92%;
+  padding:0px;
+}
+
+#freeciv_logo {
+  float:left; 
+  background: #444444 url(/images/freeciv-forever-logo.png);
+  width: 200px; 
+  height: 34px; 
+  margin-right: 10px;
+}
+
+#game_logo {
+  width: 100%;
+  height: 50px;
+  background-color: #aaaaff;
+}
+
+
+#game_message_area {
+  background-color: #222222;
+  height: 120px;
+  width: 100%;
+  overflow: auto;
+}
+
+#game_chat_box {
+  width: 100%;
+  height: 20px;
+}
+
+#game_text_input {
+  width: 100%;
+  border: 1px solid #555555;
+  color: #ffffff;
+  background-color: #000000;
+}
+
+
+#game_overview_map {
+  float: left;
+  min-width: 20%;
+  height: 150px;
+  background-color: black;
+  text-align: center;
+  overflow: auto;
+}
+
+
+#overview_map {
+  cursor:crosshair;
+  border: 1px solid #555555;
+  width: 90%;
+  height: 140px;
+}
+
+
+#game_action_panel {
+  float: right;
+  width: 24%;
+  height: 140px;
+  background-color: black;
+  color: white;
+  padding-left: 5px;
+  overflow: hidden;
+}
+
+
+#game_unit_info {
+  float: left;
+  background-color: black;
+  color: white;
+  width: 100%;
+  overflow: hidden;
+}
+
+#game_communication_panel {
+  width: 51%;
+  float: left;
+}
+
+#end_game_turn_panel {
+  float: right;
+  width: 120px;
+}
+
+
+
+.order_button {
+	overflow: hidden;
+	float: left;
+	padding-right: 5px;
+}
+
+#ie_canvas {
+  overflow: hidden;
+  position: relative;
+}
+
+#city_ie_canvas {
+  overflow: hidden;
+  position: relative;
+  width: 300px;
+  height: 150px;
+}
+
+#turn_done_button_div {
+  float:right;
+}
+
+
+.main_menu_buttons {
+  padding:20px
+}
+
+#city_canvas_div {
+  width: 300px; 
+  height: 150px; 
+  margin: 30px;
+}
+
+#game_status_panel {
+  width: 98%; 
+  height: 22px; 
+  background-color: #000000; 
+  text-align: center;
+
+}
+
+#city_right_panel {
+  float: right; 
+  width: 60%;
+}
+
+
+#freeciv_manual {  
+  color: #ffffff;
+  padding: 10px;
+  
+}
+
+.manual-tab {
+  background: #2e2f35;
+  min-height: 500px;
+  padding: 30px;
+}

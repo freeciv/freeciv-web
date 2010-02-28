@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Sodipodi ("http://www.sodipodi.com/") -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1"
+   x="0"
+   y="0"
+   width="675"
+   height="450.00000px"
+   id="islenskifaninn"
+   sodipodi:version="0.32"
+   sodipodi:docname="iceland.svg"
+   inkscape:version="0.42"
+   sodipodi:docbase="/Users/daniel/Desktop">
+  <metadata
+     id="metadata2700">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     id="base"
+     inkscape:zoom="0.70781893"
+     inkscape:cx="366.31038"
+     inkscape:cy="221.98590"
+     inkscape:window-width="701"
+     inkscape:window-height="507"
+     inkscape:window-x="20"
+     inkscape:window-y="111"
+     inkscape:current-layer="islenskifaninn" />
+  <defs
+     id="defs380" />
+  <rect
+     width="675.00000"
+     height="450.00000"
+     x="0.0000000"
+     y="0.0000000"
+     style="fill:#003897;fill-opacity:1.0000000;fill-rule:evenodd;stroke-width:0.0000000pt"
+     id="blarfeldur" />
+  <path
+     d="M 0.0000000,172.00000 L 189.00000,172.00000 L 189.00000,-1.0000000 L 297.00000,-1.0000000 L 297.00000,172.00000 L 675.00000,172.00000 L 675.00000,280.00000 L 297.00000,280.00000 L 297.00000,451.00000 L 189.00000,451.00000 L 189.00000,280.00000 L 0.0000000,280.00000 L 0.0000000,172.00000 z "
+     style="fill:#ffffff;fill-rule:evenodd;stroke-width:0.0000000pt"
+     id="hviturkross"
+     fill-cmyk="(0 0 0 0)"
+     sodipodi:nodetypes="ccccccccccccc" />
+  <path
+     d="M 0.0000000,199.00000 L 216.00000,199.00000 L 216.00000,-1.0000000 L 270.00000,-1.0000000 L 270.00000,199.00000 L 675.00000,199.00000 L 675.00000,253.00000 L 270.00000,253.00000 L 270.00000,451.00000 L 216.00000,451.00000 L 216.00000,253.00000 L 0.0000000,253.00000 L 0.0000000,199.00000 z "
+     style="fill:#d72828;fill-opacity:1.0000000;fill-rule:evenodd;stroke-width:0.0000000pt"
+     id="raudurkross"
+     sodipodi:nodetypes="ccccccccccccc" />
+</svg>

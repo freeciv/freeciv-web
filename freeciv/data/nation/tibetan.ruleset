@@ -1,0 +1,66 @@
+[nation_tibetan]
+
+name=_("Tibetan")
+plural=_("?plural:Tibetans")
+groups="Medieval", "Asian"
+legend=_("The Tibetan homeland is sometimes called the \"Roof of the\
+ World\", the highest elevated region in the world. In the 7th century,\
+ Tibet emerged as a formidable empire under the leadership of king Songtsen\
+ Gampo, being recognized by both China and India. This dynasty lasted until\
+ the 11th century, when Tibet was overrun by the Mongols. Centuries later\
+ when Mongol rule had weakened, Lozang Gyatso - born 1617 and the 5th Dalai\
+ Lama - established a buddhist religious state under the control of the\
+ Gelugpa school of Tibetan Buddhism.")
+leader=
+ "Songtsen Gampo",	; 7th century king
+ "Trisonog Detsen",	; 8th century king
+ "Tri Ralpachen",	; 9th century king
+ "Changchub Gyaltsen",	; 14th century king
+ "Lozang Gyatso",	; 5th Dalai Lama (1617-1682)
+ "Thupten Gyatso"	; 13th Dalai Lama (1876-1933)
+leader_sex="Male", "Male", "Male", "Male", "Male", "Male"
+flag="tibet"
+flag_alt = "-"
+city_style = "Asian"
+
+ruler_titles = { "government",     "male_title",        "female_title"
+                 "Despotism",      _("Lama"),           _("Lama")
+		 "Monarchy",       _("Dharma King"),    _("Queen")
+                 "Fundamentalism", _("Dalai Lama"),     _("Dalai Lama")
+                 "Democracy",_("Prime Minister"), _("?female:Prime Minister")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations = "mongol", "indian"
+
+cities =
+ "Lhasa",
+ "Shigatse",
+ "Gyantse",
+ "Chamdo",
+ "Nagchu",
+ "Nyingchi",
+ "Nedong",
+ "Dartsendo",
+ "Jyekundo",
+ "Golmud",
+ "Barkam",
+ "Gartse",
+ "Lhatse",
+ "Machen",
+ "Pelbar",
+ "Sakya",
+ "Tingri",
+ "Shekar",
+ "Dingri",
+ "Kyirong",
+ "Gartok",
+ "Ruthok",
+ "Tsetang",
+ "Pome",
+ "Derge",
+ "Kandze",
+ "Mili"

@@ -1,0 +1,50 @@
+[nation_turkmen]
+
+name=_("Turkmen")
+plural=_("?plural:Turkmens")
+groups="Modern", "Asian"
+legend=_("Nation in Central Asia. Conquered by the Russian Empire\
+ in 19th century, Turkmenistan got independence\
+ from the Soviet Union in 1991.")
+leader="Seleucus I Nicator", ; founder of Seleucid Empire
+       "Arsaces I", ; founder of the Parthian Empire
+       "Mithridates II", ; ruler of Pathria
+       "Ardashir-i Papagan", ; founder of Sassanid Empire (see persian.ruleset)
+       "Seljuk" ; founder of Seljuk dynasty and the state
+
+leader_sex="Male", "Male", "Male", "Male", "Male"
+
+flag="turkmenistan"
+flag_alt = "-"
+city_style = "Classical"
+
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Despotism",       _("Khan"),         _("Khatan")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations = "uzbek", "kazakh", "iranian", "persian", "Afghani"
+
+cities =
+ "Ashgabat",
+ "Mary",
+ "Nebitdag",
+ "Dashhowuz",
+ "Chärjew",
+ "Yerbent",
+ "Gyzylgaya",
+ "Kerki",
+ "Gowurdak",
+ "Gushgy",
+ "Tejen",
+ "Saragt",
+ "Bayramaly",
+ "Esenguly",
+ "Gumdag",
+ "Gyzylarbat",
+ "Turkmenbashi",
+ "Bekdash"

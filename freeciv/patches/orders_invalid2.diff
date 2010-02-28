@@ -1,0 +1,17 @@
+Index: server/unittools.c
+===================================================================
+--- server/unittools.c	(revisjon 108)
++++ server/unittools.c	(arbeidskopi)
+@@ -3245,10 +3245,10 @@
+       if (!res && punit->moves_left > 0) {
+ 	/* Movement failed (ZOC, etc.) */
+ 	cancel_orders(punit, "  attempt to move failed.");
+-	notify_player(pplayer, punit->tile, E_UNIT_ORDERS,
++	/*notify_player(pplayer, punit->tile, E_UNIT_ORDERS,
+                       FTC_SERVER_INFO, NULL,
+                       _("Orders for %s aborted because of failed move."),
+-                      unit_link(punit));
++                      unit_link(punit));*/
+ 	return TRUE;
+       }
+ 

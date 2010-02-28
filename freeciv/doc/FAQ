@@ -1,0 +1,1430 @@
+                  Freeciv Frequently Asked Questions (FAQ)
+
+                 (from http://www.freeciv.org/wiki/FAQ)
+
+   Contents
+
+   1 Gameplay
+      1.1 OK, so I installed Freeciv. How do I play?
+      1.2 How do I play multiplayer?
+      1.3 Where is the chatline you are talking about, how do I
+               chat?
+      1.4 Why can't I attack another player's units?
+      1.5 How do I declare war on another player?
+      1.6 How do I do diplomatic meetings?
+      1.7 How do I trade money with other players?
+      1.8 How can I change the way a Freeciv game is ended?
+      1.9 My irrigated grassland produces only 2 food. Is this a
+               bug?
+      1.10 How do I play against computer players?
+      1.11 Can I build up the palace or throne room as in the
+               commercial Civilization games?
+      1.12 Can I build land over sea/transform ocean to land?
+      1.13 Can I change settings or rules to get different types of
+               games?
+      1.14 How compatible is Freeciv with the commercial
+               Civilization games?
+      1.15 My opponents seem to be able to play two moves at once!
+      1.16 I am far superiour to my opponent but his last city is on
+               a 1x1 island so I cannot conquer it, and he won't give up.
+               What can I do?
+      1.17 Why are the AI players so hard on 'easy'?
+      1.18 Why are the AI players so easy on 'hard'?
+      1.19 What distinguishes AI players from humans? What do the
+               skill levels mean?
+      1.20 How do I play on a hexagonal grid?
+      1.21 How do I create teams of AI or human players?
+      1.22 I want more action.
+   2 Community
+      2.1 Does Freeciv violate any rights of the makers of
+               Civilization I or II?
+      2.2 How do I wake up in the morning?
+      2.3 Where can I ask questions or send improvements?
+   3 Technical Stuff
+      3.1 I've found a bug, what should I do ?
+      3.2 I've started a server but the client cannot find it!
+      3.3 I can play on my own server, but the metaserver doesn't
+               seem to work.
+      3.4 How do I change the metaserver info string?
+      3.5 Am I using the latest version? Do I need to upgrade?
+      3.6 "cannot open display :0"
+      3.7 HOME directory not set?
+      3.8 How do I start the next game?
+      3.9 How do I restart a saved game?
+      3.10 The server cannot save games!
+      3.11 Why are some of the menus in the Freeciv client disabled?
+      3.12 How do I find out about the available units,
+               improvements, terrain types, and technologies?
+      3.13 My diagonal arrow keys do not work on Solaris.
+      3.14 Menu items do not work under KDE.
+      3.15 Popup windows are sent to the back in KDE and pile up
+               there.
+      3.16 The client complains it can't read the .civclientrc file.
+      3.17 My Freeciv client dumps core when I start it!
+      3.18 Freeciv fails to compile due to the Xaw libraries.
+      3.19 When compiling Freeciv from source, the no command cannot
+               be found.
+      3.20 How do I compile Freeciv under Solaris?
+      3.21 How do I compile Freeciv under Solaris or FreeBSD?
+      3.22 I hate isometric view! How do I play with Civilization I
+               style graphics?
+      3.23 What other GUI options do I have for the Freeciv client?
+      3.24 How do I enable/disable sound support?
+      3.25 Where can I find more information on the *.ruleset files?
+      3.26 How can I add add additional civilizations in the nation/
+               subdirectory, or add cities to the list for an existing
+               nation?
+      3.27 How do I change the font?
+      3.28 I am having problems with accented characters. What
+               gives?
+      3.29 How can i change the language of my client/server?
+      3.30 How do I get the latest development code?
+      3.31 How do I disable full screen mode?
+      3.32 What are the system requirements ?
+         3.32.1 Memory
+         3.32.2 Processor
+         3.32.3 Graphic display
+         3.32.4 Network
+   4 Windows
+      4.1 How do I use Freeciv under MS Windows ?
+      4.2 Retrieving the Native Windows Freeciv
+      4.3 OK, I've downloaded and installed it, how do I run it?
+      4.4 I've started civclient, but don't know what to do next?
+      4.5 Native client: How do I save and restart a saved game?
+      4.6 How do I use a different tileset?
+      4.7 How do I use a different ruleset?
+      4.8 I opened a ruleset file in Notepad and it is very hard to
+               read
+   5 Mac OS X
+      5.1 How do I install the latest version of Freeciv?
+      5.2 How do I compile Freeciv myself?
+      5.3 How do I install X11?
+      5.4 How do I troubleshoot Freeciv crashes?
+      5.5 Freeciv crashes because it doesn't find libXinerama
+               something?
+      5.6 How do I install new tilesets?
+      5.7 How do I scroll the map?
+      5.8 Freeciv won't start on my machine
+
+-------
+
+1 Gameplay
+
+-------
+
+1.1 OK, so I installed Freeciv. How do I play?
+
+   Freeciv is a client/server system. But in most cases you don't have to
+   worry about this; the server is run automatically for you when you
+   start a new game. So unless you're using one of the older Freeciv
+   client programs all you have to do is run the client. Do this by
+   double-clicking on the civclient executable program or by typing
+   civclient in a terminal.
+
+   Once the client starts, select start new game. Now edit your game
+   settings (the defaults should be fine for a beginner-level
+   single-player game) and press the start button.
+
+   Once the game is started you can find information in its Help menu. If
+   you've never played a Civilization-style game before you may want to
+   look at the help on Playing.
+
+   You can continue to change the game settings through the Server Options
+   menu item in the Game menu. Type /help in the chatline (or server
+   command line) to get more information about server commands.
+
+   Detailed explanations of how to play Freeciv are also in the
+   ./doc/README file distributed with the source code, and in the online
+   manual available on this site. The manual covers both the client and
+   the server, but it may not completely match the version you are
+   playing. It is available in several languages and it can be downloaded
+   for offline use.
+
+-------
+
+1.2 How do I play multiplayer?
+
+   There are two sorts of multiplayer games to play: local games and
+   global games. The below directions are for the gtk client. Other
+   clients behave similarly.
+
+   To play a local game, simply start up a new game the way you normally
+   would. When you get to the pre-game screen hold on and wait for other
+   players to connect. Now your fellow players (on the same LAN) should
+   launch their clients, choose Connect to Network Game and then Local
+   Area Network. You should see the existing server listed; double-click
+   on it to join.
+
+   To play a global game, you do not start the game yourself but connect
+   to a server already running on the internet. Choose Connect to Network
+   Game and then Internet Metaserver. A list of active servers should come
+   up; double-click one to join it.
+
+   You can also choose to directly connect to a specific server, provided
+   you know the IP address and port of the server you're connecting to.
+   This server will then show up under Local Area Network. You may want to
+   start up the server by hand (with civserver in a terminal or by
+   double-clicking on the executable) and connect to it directly from all
+   clients. You may also start up the server with the -m command-line
+   option, and it will show up on the list of global games (, and show up
+   in other people's metaserver list?)).
+
+-------
+
+1.3 Where is the chatline you are talking about, how do I chat?
+
+   The chatline is located at the bottom of the window. Sometimes you have
+   to activate a Chat tab to see it.
+
+   In SDL Freeciv you have to press Tab to access the chatline.
+
+   The chatline can be used for normal chatting or for issuing server
+   commands by typing:
+/Command
+
+-------
+
+1.4 Why can't I attack another player's units?
+
+   You have to declare war first. F3, Cancel treaty. See below.
+
+   (You start out at war with all players, but you are always offered a
+   cease-fire treaty upon first contact which has to be broken before you
+   can attack the player's units or cities.)
+
+-------
+
+1.5 How do I declare war on another player?
+
+   Go to the players dialog, select the player, and click the Cancel
+   treaty button. This drops you from "cease fire" or "armistice" into
+   "war". If you've already signed a permanent treaty with the player you
+   may have to do it more than once.
+
+-------
+
+1.6 How do I do diplomatic meetings?
+
+   Open players report. Select a player. Click the Meet button. But
+   remember that you have to either have contact with the player or
+   embassy established in one of his cities. Before version 2.0 AI players
+   couldn't negotiate treaties thus you couldn't meet with them.
+
+-------
+
+1.7 How do I trade money with other players?
+
+   If you want to make a monetary exchange, first enter the amount in the
+   gold text box of the two players and then press Enter to insert the
+   clause in the treaty.
+
+-------
+
+1.8 How can I change the way a Freeciv game is ended?
+
+   A standard Freeciv game ends when only one player/team is left alive,
+   when a player's spaceship arrives at Alpha Centauri, or when you reach
+   the ending year - whichever comes first.
+
+   You can change the default ending year by changing the endyear setting.
+   You can do this through the Server Options (see Server options) menu
+   choice in the Game menu or by typing into the chatline something like:
+/set endyear 3000
+
+   You can end a running game immediately with:
+/endgame
+
+   For more information, try:
+/help endgame
+
+   If you want to avoid the game ending by space race, you can change the
+   spacerace setting - again either through the Server Options dialog or
+   through the chatline by:
+/set spacerace 0
+
+   You cannot change the conquest victory condition. A player who defeats
+   all enemies will always win the game.
+
+-------
+
+1.9 My irrigated grassland produces only 2 food. Is this a bug?
+
+   No, it isn't. It's a feature. Your government is probably despotism,
+   which has a -1 penalty whenever a tile produces more than 2 units of
+   food/production/trade. You should change your government (See
+   Government) to get rid of this penalty.
+
+-------
+
+1.10 How do I play against computer players?
+
+   See also How do I create teams of AI or human players?
+
+   In most cases when you start a single-player game you can change the
+   number of players, and their difficulty, directly through the
+   spinbutton. Note the number of players here includes human players (an
+   aifill of 5 adds AI players until the total number of players becomes
+   5).
+
+   If you are playing on a remote server, you'll have to do this manually.
+   Change the aifill server option through the Server Options dialog, or
+   do it on the chatline with something like:
+/set aifill 30
+
+   Difficulty levels are set with the /hard, /normal, /easy, and /novice
+   commands.
+
+   You may also create AI players individually.
+   For instance, to create one hard and one easy AI player, enter:
+/create ai1
+/hard ai1
+/create ai2
+/easy ai2
+/list
+
+   More details are in the ./doc/README file supplied with Freeciv and the
+   online manual on this site.
+
+-------
+
+1.11 Can I build up the palace or throne room as in the commercial Civilization
+games?
+
+   No. This feature is not present in Freeciv, and will not be until
+   someone draws the graphics for it.
+
+-------
+
+1.12 Can I build land over sea/transform ocean to land?
+
+   Yes. You can do that by placing engineer units on a transport and going
+   to the ocean tile you want to build land on (this must be in a land
+   corner). Click the transport to display a list of the transported
+   engineers and activate them. Then give them the order of transforming
+   this tile to swamp. This will take a very long time though, so you'd
+   better try with 6 engineers at a time.
+
+-------
+
+1.13 Can I change settings or rules to get different types of games?
+
+   Of course.
+
+   Before the game is started, you may change settings through the server
+   options dialog (available in the pregame screen). You may also change
+   these settings or use server commands through the chatline. If you use
+   the chatline, use the
+/show
+
+   command to display the most commonly-changed settings (see show), or
+/help <setting>
+
+   to get help on a particular setting, or
+/set <setting> <value>
+
+   to change a setting to a particular value(see set).
+   After the game begins you may still change some settings (but not
+   others).
+
+   World maps can be created using the CivWorld map editor (available
+   separately). It is also possible to edit savefiles from running games:
+   save the game and open it with civworld (or with a text editor, if
+   you're ambitious).
+
+   You can create rulesets or "modpacks" - alternative sets of units,
+   buildings, and technologies. Several different rulesets come with the
+   Freeciv distribution, including a civ1 (Civilization 1 compatibility
+   mode), civ2 (Civilization 2 compatibility mode), and history (more
+   historically accurate) rulesets. Use the rulesetdir command (see
+   rulesetdir) to change the ruleset (as in /rulesetdir civ2). Note the
+   ruleset mechanism is still being refined from version to version; in
+   2.1 you will be able to choose the ruleset directly through the pregame
+   screen.
+
+   Finally, upgrade! Freeciv continues to improve from version to version:
+   a rule may change when the mailing list agrees it is 'wrong'. See, for
+   instance, the NEWS.
+
+-------
+
+1.14 How compatible is Freeciv with the commercial Civilization games?
+
+   Freeciv was created as a multiplayer version of Civilization™ with
+   players moving simultaneously. Rules and elements of Civilization II,
+   and features required for single-player use, such as AI players, were
+   added later. It is still a stated goal to let Freeciv's game engine be
+   100% compatible with Civilization™ I and II, but only as an option.
+
+   This is why Freeciv comes with three game configurations (rulesets):
+   the civ1 and civ2 modpacks implement game rules, elements and features
+   that bring it as close as possible to Civilization I and Civilization
+   II respectively, while the default modpack tries to reflect the most
+   popular settings among Freeciv players. Unimplemented Civilization I
+   and II features are mainly those that would have little or no benefit
+   in multiplayer mode, and nobody is working on closing this gap.
+
+   Relevant discussions on the freeciv-dev mailing list:
+     * in Jan, 1999
+     * in Jun, 1999
+     * in Apr, 2000
+
+   Little or no work is being done on implementing features from other
+   similar games, such as SMAC, CTP or Civilization III. See Mike Jing's
+   list of differences and two discussion threads in July, 2002.
+
+   So the goal of compatibility is mainly used as a limiting factor in
+   development: when a new feature is added to Freeciv that makes gameplay
+   different, it is always implemented in such a way that the
+   "transitional" behaviour remains available as an option.
+
+   See also Projects.
+
+-------
+
+1.15 My opponents seem to be able to play two moves at once!
+
+   Freeciv's multiplayer facilities are asynchronous: during a turn, moves
+   from connected clients are processed in the order they are received.
+   Server managed movement is executed in between turns. This allows human
+   players to surprise their opponents by clever use of goto or quick
+   fingers.
+
+   In some older versions, bugs in the game engine would sometimes allow
+   AI players to move twice in a row against humans. As of Freeciv 2.0
+   this should no longer happen.
+
+   In Freeciv 2.1 an alternating movement option will be available, in
+   which only one player can move their units at a time.
+
+-------
+
+1.16 I am far superiour to my opponent but his last city is on a 1x1 island so I
+cannot conquer it, and he won't give up. What can I do?
+
+   Research amphibious warfare, build a marine, and get him.
+
+-------
+
+1.17 Why are the AI players so hard on 'easy'?
+
+   You are not expanding fast enough. See a discussion on freeciv-dev.
+
+   Also, for version 2.0 and later, try the 'novice' difficulty level.
+
+   See also a thread from Freeciv Forum.
+
+   Be aware that Freeciv 2.0.0 has a bug that makes the easy AI players as
+   good as the hard AIs on expansion. Upgrade to Freeciv 2.0.1 or higher
+   version if its your case.
+
+   You can also turn off Fog of War. That way, you will see the attacks of
+   the AI. Just type /set fogofwar 0' on the chat line.
+
+-------
+
+1.18 Why are the AI players so easy on 'hard'?
+
+   Several reasons. For example, the AI is heavily playtested under and
+   customized to the default ruleset and server settings. Although there
+   are several provisions in the code to adapt to changing rules, playing
+   under different conditions is quite a handicap for it. Though mostly
+   the AI simply doesn't have a good, all encompassing strategy besides
+   "eliminate nation x". For further details, see AI.
+
+   To make the game harder, you could try putting some or all of the AI
+   into a team. This will ensure that they will waste no time and
+   resources negotiating with each other and spend them trying to
+   eliminate you. They will also help each other by trading techs. You can
+   use the team command to set teams before the game starts. For AI teams
+   you have to create the AI players first using the create command. For
+   example
+/create ai1
+/create ai2
+/team ai1 aiteam
+/team ai2 aiteam
+
+   Note that "aiteam" is just the name of the team of the AI players. You
+   can also form more than one AI teams by using different team names, or
+   put some AI players teamed with you.
+
+-------
+
+1.19 What distinguishes AI players from humans? What do the skill levels mean?
+
+   AI players in Freeciv operate in the server, partly before all clients
+   move, partly afterwards. Unlike the clients, they can observe the full
+   state of the game, including everything about other players.
+   Additionally, Hard AI players can see every game unit even through fog
+   of war.
+
+   AI players can change production without penalty and switch governments
+   without going through anarchy. Additionally, Hard AI players can set
+   their research, tax or luxury to 100% regardless of their governments.
+
+   Other than this, the AI players are not known to cheat.
+
+   Further, the easy AI are less eager to build cities, and at easy and
+   normal, the AI 'forget' where huts are and cannot plan attacks against
+   enemy units they shouldn't be aware of.
+
+-------
+
+1.20 How do I play on a hexagonal grid?
+
+   In 2.0, it is possible to play with hexagonal instead of rectangular
+   tiles. To do this you need to set your topology before the game starts
+/set topology 13
+
+   and switch to a hexagonal tileset (isophex is included in 2.0). Note if
+   you do it wrong, you may end up playing with a rectangular tileset on a
+   "true" hexagonal grid or to play with a hexagonal tileset on a
+   rectangular grid - this is probably not what you want.
+
+   If you start a new game the grid (topology) will automatically be set
+   to match your tileset. However since you can't change the tileset in
+   pre-game this may not be helpful. You can try running the client as
+civclient -t isophex
+
+   to set the tileset immediately on startup.
+
+-------
+
+1.21 How do I create teams of AI or human players?
+
+   See also How do I play against computer players?.
+
+   In 2.0 teams are not 100% stable, but they are quite playable.
+   Unfortunately you have to use the command-line interface (through the
+   chatline) to set up teams.
+
+   First of all try the /list command. This will show you all players
+   created, including human players and created AI players. AI players
+   created through aifill will not show up here (they aren't created until
+   the game starts) so you can't assign those players to teams. To assign
+   AI players to teams you have to create them first, as in /create ai1 to
+   create an AI player named "ai1".
+
+   Now, you're ready to assign players to teams. To do this you use the
+   team command. For example, to create two AI players and put them on the
+   same team you can do
+/create ai1
+/create ai2
+/team ai1 team1
+/team ai2 team1
+
+   You may also assign teams for human players, of course. If in doubt use
+   the /list command again; it will show you the name of the team each
+   player is on. Make sure you double-check the teams before starting the
+   game; you can't change teams after you start and a typo here (like
+   misspelling "team1" as "taem1") will give you the wrong teams.
+
+-------
+
+1.22 I want more action.
+
+   In Freeciv, expansion is everything, even more so than in the
+   single-player commercial Civilization games. Some players find it very
+   tedious to build on an empire for hours and hours without even meeting
+   an enemy.
+
+   See some techniques to speed up the game. The basic idea is to reduce
+   the time and space allowed for expansion as much as possible. One idea
+   for multiplayer mode is to add AI players: they reduce the space per
+   player further, and you can toy around with them early on without other
+   humans being aware of it. This only works after you can beat the AI, of
+   course.
+
+   Another idea is to create starting situations in which the players are
+   already fully developed. There is no automated support for this yet,
+   but you can create populated maps with CivWorld.
+
+-------
+
+2 Community
+
+-------
+
+2.1 Does Freeciv violate any rights of the makers of Civilization I or II?
+
+   There have been debates on this and the honest answer seems to be: we
+   don't know.
+
+   Freeciv doesn't contain any actual material from the commercial
+   Civilization games. (The Freeciv maintainers have always been very
+   strict in ensuring that materials contributed to the Freeciv
+   distribution or website do not violate anyone's copyright.) The name of
+   Freeciv is probably not a trademark infringement. The user interface is
+   similar, but with many (deliberate) differences. The game itself can be
+   configured to be practically identical to Civilization I or II, so if
+   the rules of a game are patentable, and those of the said games are
+   patented, then Freeciv may infringe on that patent, but we don't
+   believe this to be the case.
+
+   Incidentally, there are good reasons to assume that Freeciv doesn't
+   harm the sales of any of the commercial Civilization games in any way.
+
+-------
+
+2.2 How do I wake up in the morning?
+
+   We're open to suggestions on this one.
+
+   You can try to give Freeciv to your boss. There is no guarantee, but he
+   may wake up later than you. Remind yourself that if you run into him at
+   Civilization Anonymous, it's time to change jobs.
+
+-------
+
+2.3 Where can I ask questions or send improvements?
+
+   Please ask questions about the game, its installation, or the rest of
+   this site at the Freeciv Forums.
+
+   Patches and bug reports are best reported to the Freeciv bug tracking
+   system at bugs.freeciv.org.
+
+   Copies of submissions to bugs.freeciv.org are automatically sent to the
+   development mailing list, with a ID in the subject; replies that
+   preserve the bug ID will be threaded properly in the bug tracking
+   system as long as you respect the mail reply-to.
+
+-------
+
+3 Technical Stuff
+
+-------
+
+3.1 I've found a bug, what should I do ?
+
+   See Bug Reporting.
+
+-------
+
+3.2 I've started a server but the client cannot find it!
+
+   By default, your server will be available on host localhost (your own
+   machine), port 5555; these are the default values your client uses when
+   asking which game you want to connect to.
+
+   So if you don't get a connection with these values, your server isn't
+   running, or you used -p to start it on a different port, or your
+   system's network configuration is broken.
+
+   To start your local server, go to /usr/local/bin/ and run civserver.
+   Then type start to begin!
+mike@localhost:/usr/local/bin$ ./civserver
+This is the server for Freeciv version 2.0.8
+You can learn a lot about Freeciv at http://www.freeciv.org/
+2: Now accepting new client connections.
+
+> start
+Starting game.
+2: Loading rulesets
+
+   If the server is not running, you will NOT be able to connect to your
+   local server.
+
+   If you can't connect to any of the other games listed, e.g. those on
+   pubserver, a firewall in your organisation/ISP is probably blocking the
+   connection.
+
+-------
+
+3.3 I can play on my own server, but the metaserver doesn't seem to work.
+
+   We have dedicated gameservers now (pubserver.freeciv.org and
+   civ.alkar.net), so if your metaserver button turns up an empty list,
+   there's probably something wrong with your setup.
+
+   First, check your Freeciv version. Freeciv 1.9.0 up to and including
+   1.14.2 use the old metaserver, 2.0 and higher use the new metaserver;
+   if you're mixing versions, you may be getting the wrong list.
+
+   If you can view the metaserver page with your WWW browser, and servers
+   are listed, but the client's Metaserver button still fails to list
+   them, you may be behind a non-transparent WWW proxy. See proxy settings
+   for a detailed explanation.
+
+-------
+
+3.4 How do I change the metaserver info string?
+
+   Use the /metamessage or /metatopic commands. See /help metamessage.
+
+-------
+
+3.5 Am I using the latest version? Do I need to upgrade?
+
+   The current stable Freeciv version is 2.0.9. For an overview of changes
+   that went into this release, see the NEWS file (see NEWS as well).
+
+   The NEWS-#.#.# file is only updated for a new release; updates to
+   Subversion are listed in the freeciv-commits archives (see Mailing
+   Lists) and the actual code changes can be reviewed using our online
+   source code browser.
+
+   If you decide to upgrade, see the Download page for source code or
+   contributed binaries.
+
+   Not all precompiled binaries and ports have been updated to 2.0.9 yet.
+   If you can contribute, please do! Prepare a package and announce it to
+   freeciv-dev@gna.org.
+
+   Clients and servers of different versions are often incompatible due to
+   changes in the client/server protocol. You will see incompatibilities
+   as a 'mismatching capabilities' error. For example, 2.0.0 and 2.0.8 are
+   compatible; 2.0.0 and 2.1.0 are not.
+
+-------
+
+3.6 "cannot open display :0"
+
+   The Freeciv client is unable to open a window on your local X display.
+   Are you running an X server at all? Maybe you need to install and run
+   one, or switch to a Freeciv that doesn't need X; see the previous
+   question.
+
+   Under Mac OS X, try starting the Freeciv client from the xterm session
+   running under X.
+
+-------
+
+3.7 HOME directory not set?
+
+   The Freeciv client wants to write a configuration file named
+   .civclientrc in your $HOME directory. On MS Windows, the $HOME variable
+   is not always set. This can be done from the DOS prompt or a .bat file,
+   for example:
+set home=C:\freeciv
+
+   You can still play if this error message appears, but your client
+   options won't be saved.
+
+-------
+
+3.8 How do I start the next game?
+
+   A running civserver can only run a single game. Once the game has been
+   started with the /start command, restarting is impossible.
+
+   To start a new game, /quit the server and start a new one, then
+   reconnect the client to it. On pubserver.freeciv.org we run additional
+   software that restarts servers automatically once nobody is connected
+   anymore.
+
+-------
+
+3.9 How do I restart a saved game?
+
+   If for some reason you can't use the start-screen interface for loading
+   a game, you can load one directly through the server command line (see
+   Command-line_options). You can start civserver with the -f option, for
+   example
+civserver -f civgame1150.sav
+
+   . Or you can use the /load command inside the server before starting
+   the game. Make sure you saved the game manually, because the server
+   only autosaves every ten turns per default.
+
+-------
+
+3.10 The server cannot save games!
+
+   In a local game the games will be saved into the default Freeciv save
+   directory (typically ~/.freeciv/saves/). If you are running the server
+   from the command line, however, any savegames will be stored in the
+   current directory. If the saveturns server variable is set, the server
+   will periodically save the game automatically (which can take a lot of
+   disk space in some cases). In any case, you should check the ownership,
+   permissions, and disk space/quota for the directory or partition you're
+   trying to save to.
+
+-------
+
+3.11 Why are some of the menus in the Freeciv client disabled?
+
+   Menus that cannot be used will be disabled. This means some menus are
+   disabled during pregame, or unless you select a unit, or if the game
+   has ended.
+
+   It's also possible that you're not connected to a game server at all.
+   If you start the client it should allow you to create a new game
+   automatically (by pressing the Start New Game button). You may also try
+   running the server from the command line (as civserver) then connecting
+   to it manually with the client (connect to localhost). Use the /start
+   command to begin the game once you have connected. The server will now
+   load some configuration files that some of the menus depend on.
+
+-------
+
+3.12 How do I find out about the available units, improvements, terrain types, and
+technologies?
+
+   There is extensive help on this in the Help menu, but only once the
+   game has been started - this is because all of these things are
+   configurable up to that point; see also Why are some of the menus in
+   the Freeciv client disabled? (Some work needs to be done to make this
+   more intuitive.)
+
+   As of version 2.1, the game is shipped with an interactive tutorial. To
+   run it, select Start Scenario Game from the main menu, then load the
+   tutorial scenario.
+
+   Outside the Freeciv client, we have some online tutorials in the Docs
+   section. A graph of the (default) technology tree is available on the
+   wiki or from David Pfitzner.
+
+-------
+
+3.13 My diagonal arrow keys do not work on Solaris.
+
+   Why exactly, I don't know, but you have to xmodmap a few keys around.
+   From my .xinitrc:
+xmodmap -e 'keycode 27 = Up' \
+        -e 'keycode 31 = Left' \
+        -e 'keycode 34 = Down' \
+        -e 'keycode 35 = Right' \
+        -e 'keycode 76 = Up' \
+        -e 'keycode 98 = Left' \
+        -e 'keycode 120 = Down' \
+        -e 'keycode 100 = Right'
+
+   See also the April, 2000 thread on this subject.
+
+-------
+
+3.14 Menu items do not work under KDE.
+
+   Deactivate NumLock.
+
+-------
+
+3.15 Popup windows are sent to the back in KDE and pile up there.
+
+   When opening popups in the Xaw client activated from other popups, eg.
+   the Change production dialog in the city window, the popup that was
+   previously open gets sent to the back. After a while the client slows
+   down due to the number of open city windows, and they have to be closed
+   one by one. The same thing may happen to report windows.
+
+   This problem (PR#866; see maintainer's comment) is specific to the KDE
+   window manager. If you know a way around it, please let us know.
+
+-------
+
+3.16 The client complains it can't read the .civclientrc file.
+
+   This is harmless: the file will be created to store your client
+   options, as soon as you save them; but it isn't supplied initially.
+
+-------
+
+3.17 My Freeciv client dumps core when I start it!
+
+   Read on if you are using the Xaw client under certain Linux
+   distributions or IRIX.
+
+   In all likelihood, the problem is an enhanced version of the Xaw
+   library, (Xaw3d, Xaw95,or neXtaw). A Freeciv binary compiled against
+   the 'plain' Xaw library will segfault upon startup when used with
+   these.
+
+   Remedies:
+     * Freeciv can be recompiled to use Xaw3d, if you have it: use
+
+configure --with-xaw3d
+     * Make sure the libXaw.so Freeciv is seeing is an unenhanced version
+       (by installing the appropriate package, pointing to the right
+       version using environment variables, or whatever; details depend on
+       platform)
+     * If for some reason you can't, but there is a 'plain' libXaw.a
+       somewhere: hunt through the Makefiles and change lines which
+       contain -lXaw to /usr/X11/lib/libXaw.a, or wherever libXaw.a is
+       stored on your machine, then recompile (this was suggested by
+       <dva AT uu.gatech.edu>
+     * Install GTK+ (if not installed already), compile and use the GTK+
+       client instead of the Xaw one.
+
+   This problem used to be documented in the SuSE Linux support database.
+
+   If your SEGV at startup is due to a different problem, please report it
+   to the developers' bug reporting system, by sending it to
+   bugs@freeciv.org.
+
+-------
+
+3.18 Freeciv fails to compile due to the Xaw libraries.
+
+   As reported with Debian 2.1:
+> make[2]: Entering directory `/usr/src/freeciv/client'
+> Making all in gui-xaw
+> make[3]: Entering directory `/usr/src/freeciv/client/gui-xaw'
+> gcc -DHAVE_CONFIG_H -I. -I. -I../.. -I. -I./.. -I./../include
+> -I../../common -I../../intl  -I/usr/X11R6/include    -g -O2 -Wall -c
+> pixcomm.c
+> In file included from pixcomm.c:54:
+> pixcommp.h:54: X11/Xaw3d/CommandP.h: No such file or directory
+> make[3]: *** [pixcomm.o] Error 1
+[...]
+
+   This is, again, an Xaw/Xaw3d confusion problem. In this particular
+   case, the Debian xaw3dg package is not installed on the system.
+
+   To select plain Xaw or Xaw3d explicitly, use:
+./configure --with-xaw [...]
+./configure --with-xaw3d [...]
+
+-------
+
+3.19 When compiling Freeciv from source, the no command cannot be found.
+
+   This silly error message, and possibly others, may arise if you
+   ./configure --with-included-gettext to use the [internationalization
+   multilingual support] library (GNU gettext) distributed with Freeciv,
+   but change your mind later. The problem is the creation of a libintl.h
+   -> intl/libgettext.h that should be removed upon reconfiguration, but
+   isn't. See this question asked on freeciv-dev and the answer given
+   there.
+
+   The same error message may arise if you have no gettext on your system
+   and forget to use --with-included-gettext.
+
+-------
+
+3.20 How do I compile Freeciv under Solaris?
+
+   Solaris (2.5 and up) has its own version of X in /usr/openwin, its own
+   version of make in /usr/ccs/bin/make, and its own compiler (to be
+   purchased separately) which, if you have it, is available in
+   /opt/SUNWspro/bin. Solaris does not provide the XPM library, which is
+   required for the Xaw client; it doesn't provide any of the stuff
+   required for imlib, gdk and gtk, either, which is required to build the
+   GTK+ client. (This stuff can be compiled however, and is now more
+   readily installable with the Ximian GNOME distribution.)
+
+   To confuse matters further, many local systems administrators add MIT X
+   (usually, in /usr/X11), GNU make, and the gcc compiler. If you're
+   unlucky, the
+./configure && make
+
+   procedure will get confused about these different versions of tools.
+
+   However, with some patience, everything can be compiled without
+   problems. Details are provided in the Freeciv INSTALL document.
+
+-------
+
+3.21 How do I compile Freeciv under Solaris or FreeBSD?
+
+   On Solaris, FreeBSD, and some other systems, the default make isn't GNU
+   make. In order to compile you must either
+./configure --disable-cvs-deps --disable-nls
+
+   in order to disable the GNU make specific parts of the Makefile, or
+   simply use GNU make.
+
+-------
+
+3.22 I hate isometric view! How do I play with Civilization I style graphics?
+
+   Start the client as
+civclient --tiles trident
+
+   There is also now a client option in the Local Settings menu.
+
+-------
+
+3.23 What other GUI options do I have for the Freeciv client?
+
+   The look and feel of your GUI is mainly determined by the Freeciv
+   client you use.
+
+   The original client is based on the Athena widget set (Xaw), which is
+   fast and very widely available, but many users find it old-fashioned.
+   The client can also be compiled to use Xaw3d. New features are
+   sometimes implemented in the GTK+ 2 version only, but the Xaw one still
+   has a speed advantage.
+
+   Both xaw and gtk clients compile and run on any Unix variant we are
+   aware of, not just the ones for which our download section provides
+   native installation support.
+
+   For Amiga and MS Windows, clients exist that use the native windowing
+   system rather than X11. They are both in under active maintenance and
+   in the main Subversion tree.
+
+   Some details of the GUI can be configured from the running client.
+
+   A larger impact is made by the tileset used to display terrain, cities,
+   units, etcetera. A tileset can be specified when the client is started
+   up.
+
+   Other tilesets in both categories are separately available from our
+   download page.
+
+   We do not distribute commercial Civilization™ game tiles for obvious
+   copyright reasons.
+
+-------
+
+3.24 How do I enable/disable sound support?
+
+   The client can be started without sound by supplying the commandline
+   arguments: -P none
+
+   Further instructions are in ./doc/README.sound in the source tarball.
+
+   Please note that the stdsounds are extracted to data/stdsounds with
+   soundspec file data/stdsounds.soundspec. For a system-wide installation
+   you can extract that into /usr/local/share/freeciv, such that a
+   directory /usr/local/share/freeciv/data/stdsounds will exist.
+
+   You can then start the client as follows:
+civclient -P <plugin> -S stdsounds
+
+   If that does not work, try:
+civclient -d 3 -P <plugin -S stdsounds
+
+   This will help you get some debug information (e.g. why the sound does
+   not work).
+
+-------
+
+3.25 Where can I find more information on the *.ruleset files?
+
+   There is some documentation in the ./doc/ directory, such as
+   ./doc/README.effects. The default ruleset also has a minimal
+   explanation of what all the fields mean, so default/buildings.ruleset
+   would for instance list the meaning of the fields in the
+   buildings.ruleset. Also of interest might be the rulesets page on
+   freeciv.org; currently it contains little in the way of documentation
+   but you may help change this by contributing some.
+
+-------
+
+3.26 How can I add add additional civilizations in the nation/ subdirectory, or
+add cities to the list for an existing nation?
+
+   See Nations.
+
+-------
+
+3.27 How do I change the font?
+
+   For the GTK+ 1.2 client, you can specify fonts in $HOME/freeciv.rc,
+   which can be copied from the freeciv.rc that comes with Freeciv and
+   edited with a text editor. Use regular X font names such as displayed
+   by a tool like xfontsel.
+
+   For example,
+ style "help_text"
+{
+font = "-*-courier-medium-r-*-*-14-*-*-*-*-*-iso8859-*"
+}
+
+   For the GTK+ 2.0 client, you can specify fonts in
+   $HOME/.freeciv.rc-2.0, which can be copied from the freeciv.rc-2.0 that
+   comes with Freeciv and edited with a text editor. Use Pango font names
+   such as displayed by a tool like then Gnome Font Preferences.
+
+   For example,
+style "help_text"
+{
+font_name = "Monospace 9"
+}
+
+   For the Xaw client, you can change the font with X resources. You can
+   specify them on the command line with the -xrm command-line option, or
+   put them in your .Xdefaults file or the Freeciv app-defaults file.
+
+   To change the main font, try something like:
+civclient -- -xrm "Freeciv*.font: 8x16"
+
+   If the font isn't fixed width, some on the dialogs won't look right,
+   but they'll still work.
+
+   Note that on Microsoft Windows systems the $HOME environment variable
+   usually isn't set by default, so you have to set it. In that case,
+   create a directory for Freeciv settings somewhere (an obvious place
+   would be
+C:\Documents And Settings\(your username goes here)\Application Data
+
+   ), then open a command shell and typing something like:
+set HOME="C:\Documents And Settings\(your username goes here)\Application Data"
+
+   If $HOME is already in use by other applications, just use that
+   directory.
+
+   Now copy the settings file to it as instructed above (note the . at the
+   start of the resulting filename) and change some font settings ((e.g.
+   replace Sans with Utopia here and there) and you should notice the
+   effect.
+
+   (See also this forum thread.)
+
+-------
+
+3.28 I am having problems with accented characters. What gives?
+
+   The problem is that Freeciv (the server or client) simply cannot
+   display the characters properly in the character encoding it is set to
+   use. This is particularly a problem in older clients like the XAW
+   client and the GTK+ 1.2 client.
+     * In the server, this can be fixed by changing your locale to use
+       UTF-8. Normally this is done by changing the $LANG environment
+       variable (you can see your current $LANG with echo $LANG). A full
+       explanation is beyond the scope of this document, but here are a
+       few common examples. If your $LANG is empty, try setting it to
+       en_US.UTF-8 (for US English). If it is ru_RU.KOI8-R, try setting it
+       to ru_RU.UTF-8. Note that the $LANG of the server only affects
+       terminal input and output of the server, and will not have any
+       effect on client behavior.
+
+     * In the XAW or GTK+ 1.2 client, the problem occurrs for the exact
+       same reason as in the server. The solution is the same: change your
+       locale to use UTF-8. If this isn't possible you may improve things
+       by installing GNU libiconv. GNU's iconv library has better
+       transliteration support than the iconv that comes on most unix-like
+       systems.
+
+     * There is no fix available for the Win32 (windows native) client.
+       However with transliteration there shouldn't be much problem.
+
+     * The GTK+ 2 client should not have any character problems. If you do
+       it is probably a font issue.
+
+   (Note: the above applies to Freeciv 2.0 and later. Earlier versions of
+   Freeciv had much poorer support for different character sets. You are
+   better off upgrading your Freeciv instead of trying to get things to
+   work in an older Freeciv.)
+
+-------
+
+3.29 How can i change the language of my client/server?
+
+   On Linux, simply change into your freeciv-directory and type (e.g.)
+LANG=en_US civ
+
+   For a server in another language go to freeciv-directory/server and
+   type
+LANG=de_DE civserver
+
+   On Windows create a simple batch file (e.g. freeciv.bat, in the same
+   directory, where you have installed the package) and then run this file
+   instead of civclient.exe (do not forget to change the target of all
+   shortcuts pointing to this new file). The batch consists of 2 lines:
+set LANG=EN
+civclient.exe
+
+-------
+
+3.30 How do I get the latest development code?
+
+   A snapshot of the development code is made every day; simply retrieve
+   the latest version with your browser. Note: this service is temporarily
+   out of order. --Hima 12:18, 19 January 2007 (UTC)
+
+   This is development code; it may contain new features, bugs, and
+   incompatibilities with older versions.
+
+   An alternative is to use Subversion (SVN) directly:
+    1. Obtain and install SVN on your Unix machine. On modern
+       distributions it is already there; look for the svn command. You
+       can get SVN from Tigris.
+    2. Grab the source:
+
+                $ svn co svn://svn.gna.org/svn/freeciv/trunk freeciv
+
+   Once you're retrieved the source, to update it, cd into the freeciv
+   directory and issue svn update.
+
+   Another useful svn command is svn diff.
+
+   This shows the changes between the version you have on disk and the
+   current development code.
+
+   See also How to Contribute to Freeciv development.
+
+   If you'd like to know more about SVN, try here.
+
+-------
+
+3.31 How do I disable full screen mode?
+
+   In the GTK2 client, go to View and select Full Screen. It won't take
+   effect until the next time you start the client.
+
+   In the SDL client, open the Options dialogue, select Video options,
+   deselect the Fullscreen Mode check box and then select the resolution
+   of your choice. The change will take effect immediately.
+
+-------
+
+3.32 What are the system requirements ?
+
+-------
+
+3.32.1 Memory
+
+   In a typical game the server takes about 15MB of memory and the client
+   needs about 25MB. These values may change with larger maps or tilesets.
+   For a single player game you need to run both the client and the
+   server.
+
+-------
+
+3.32.2 Processor
+
+   We recommend at least a 100Mhz processor. If you find your game running
+   too slow, these may be the reasons:
+     * Too little memory
+       Swapping memory pages on disc (virtual memory) is really slow. Look
+       at the memory requirements above.
+     * Large map
+       Larger map doesn't necessary mean a more challenging or enjoyable
+       game. You may try a smaller map.
+     * Many AI players
+       Again, having more players doesn't necessary mean a more
+       challenging or enjoyable game.
+     * City Governor (CMA)
+       This is a really useful client side agent which helps you to
+       organize our citizens. However, it consumes many CPU cycles.
+
+-------
+
+3.32.3 Graphic display
+
+   The GTK2 client works well on 1024x800 or higher resolutions. On
+   smaller screens some dialogs may not fit on the screen.
+
+-------
+
+3.32.4 Network
+
+   A 56Kb modem should be enough to play a typical pubserver game.
+   However, many players suggest that a large ping is a big disadvantage.
+   Your ISP mustn't block ports 5555 - 5600, because these are the ports
+   which pubserver's servers are run on.
+
+-------
+
+4 Windows
+
+-------
+
+4.1 How do I use Freeciv under MS Windows ?
+
+   Precompiled binaries can be downloaded from www.freeciv.org.
+
+   If you want to compile the source code yourself, you will need mingw or
+   cygwin.
+
+-------
+
+4.2 Retrieving the Native Windows Freeciv
+
+   The Native Windows packages come as self-extracting installers.
+
+   Simply download and install one of the .EXE installers. There are three
+   different packages available, one using the native win32 widget set,
+   one using the GTK+ 2.0 toolkit, and one using the SDL libraries. The
+   GTK version requires Windows NT, 2000, XP or later.
+
+   Please note: your virus checker may inform you that Freeciv contains a
+   Trojan. This is most certainly wrong - read the full explanation before
+   posting about it on the forums.
+
+-------
+
+4.3 OK, I've downloaded and installed it, how do I run it?
+
+   If you used one of the self installer versions then there's a program
+   group with the name chosen at installation time (for example,
+   Freeciv-2.1.0.) Just go to click on
+   Start→Programs→Freeciv-2.1.0→Freeciv
+
+   That's it! You should be up and running.
+
+-------
+
+4.4 I've started civclient, but don't know what to do next?
+
+   The following steps should get you started:
+    1. The Freeciv client will pop up and after a second you will be taken
+       to the main menu.
+    2. If you want to play against other humans (I think they're human
+       anyway :-) then click on the Connect to Network Game button in the
+       main menu. Then either type in the IP address of the server or
+       select the Internet Metaserver tab to play on the freeciv.org
+       server. Then select an available game and click the Connect button.
+       (You may need to click the Update button to get the list of servers
+       initially and to update it after a while.)
+    3. If you want to play on your local machine against the AI (all other
+       players are AI controlled) then click on the Start New Game button.
+       Then select your difficulty level and the Total players (it
+       includes yourself, so if you wanted to play against four AI
+       players, you'd select 5).
+    4. Click the Pick Nation button to choose your nation, leader name,
+       sex, and city style.
+
+   That's it! Enjoy!
+
+-------
+
+4.5 Native client: How do I save and restart a saved game?
+
+   You save the game by clicking the Save Game button at the bottom right
+   of the client window.
+
+   To load the saved game, click the Load Game button in step three or
+   four above. (The name you saved under will have a .gz added to the end
+   of it when you look in the file list.)
+
+-------
+
+4.6 How do I use a different tileset?
+
+   The first thing to do is to download the tileset you want to use from
+   Tilesets.
+
+   Then you have to unpack the tileset into the DATA or root directory in
+   your Freeciv directory (so if your Freeciv directory is
+   C:\FREECIV-2.1.0, then you'd tell WinZip to extract to
+   C:\FREECIV-2.1.0\DATA.) Make sure you tell your extraction program to
+   extract into the subdirectories in the file.
+
+   Once that's done you can start using the new tileset (FINALLY!) You
+   have to pass an argument to CIVCLIENT.EXE so the easiest way to do that
+   is to open a Command Prompt (from Start→Programs→Accessories→Command
+   Prompt in my case, sometimes called an MS-DOS Window). Change to the
+   Freeciv directory (for example, cd \FREECIV-2.1.0) and start the client
+   with the -tiles tilesetname option. For example,
+CIVCLIENT -tiles freeland
+
+   You should be good to go then!
+
+-------
+
+4.7 How do I use a different ruleset?
+
+   A different ruleset can be used by downloading the ruleset and
+   extracting it in the Freeciv root or data directory
+   (C:\FREECIV-2.1.0\DATA, for example). This should create a subdirectory
+   with the ruleset name (ancients, for example.)
+
+   Then you need to tell the server to use it. This is done by typing
+/rulesetdir ''ruleset directory''
+
+   in the chat line of the client before pressing the Start Game button.
+
+-------
+
+4.8 I opened a ruleset file in Notepad and it is very hard to read
+
+   The ruleset files (and other configuration files) are stored with UNIX
+   line endings which Notepad doesn't handle correctly. Please use WordPad
+   or an alternative editor like notepad2 or notepad++ instead.
+
+-------
+
+5 Mac OS X
+
+-------
+
+5.1 How do I install the latest version of Freeciv?
+
+     * See Install-MacOSX.
+
+-------
+
+5.2 How do I compile Freeciv myself?
+
+     * See Install-MacOSX.
+
+-------
+
+5.3 How do I install X11?
+
+   X11 is an application, part of OS X provided by Apple, but not
+   installed by default.
+
+   If you have 10.4 "Tiger":
+     * Find your Tiger install disc and insert it
+     * Open the "Optional installs.mpkg" from the CD
+     * Select Applications > X11 in the installer
+
+   If you have 10.3 "Panther":
+     * Download the X11User.pkg installer from Apple
+     * Open the file and install
+
+   More about Apple's X11
+
+-------
+
+5.4 How do I troubleshoot Freeciv crashes?
+
+   Freeciv writes some information to the system log if crashes. To see
+   this, open /Applications/Utilities/Console.app immediately after a
+   crash. Freeciv-related stuff should appear in the bottom.
+
+-------
+
+5.5 Freeciv crashes because it doesn't find libXinerama something?
+
+   This bug could appear in 10.3 or incomplete X11 installations. To fix
+   it requires either reinstallation of X11 (see above), or some knowledge
+   of OS X internals.
+
+   I found this fix: (copied from [1])
+    1. Download the Xbin.tgz distro from
+       http://ftp.xfree86.org/pub/XFree86/4.5.0/binaries/Darwin-ppc-5.x/
+    2. Unpack it and locate libXinerama.1.0.dylib in the lib directory
+    3. Put libXinerama.1.0.dylib in /usr/X11R6/lib
+    4. Symlink libXinerama.1.0.dylib to libXinerama.dylib and to
+       libXinerama.1.dylib in that directory
+
+-------
+
+5.6 How do I install new tilesets?
+
+   First, the Linux way works fine on OS X (put tilesets in ~/.freeciv).
+
+   There is also an OSX-specific solution (taken from [2]):
+    1. Download your favorite tileset and unpack it.
+    2. Right (or ctrl) click on the client executable and select Show
+       Package Contents from the context menu.
+    3. Go to this directory:
+       Contents/Resources/freeciv-x.y.z/share/freeciv
+    4. Put the *.tileset file and corresponding folder into this
+       directory.
+    5. Start the client and the new tileset should show up in the Local
+       Options dialoge
+
+-------
+
+5.7 How do I scroll the map?
+
+   To recenter the view, you can right-click either on the overview or the
+   large map (the playfield). To right click, hold the command key (apple
+   symbol key) while clicking.
+
+-------
+
+5.8 Freeciv won't start on my machine
+
+   There can be many reasons for this. Here are a few tips:
+     * You need Apple X11 installed to run the official release. Install
+       from your system DVD/CDs (10.4 Tiger) or download and install from
+       Apple's developer website (10.3 Panther).
+
+     * Freeciv may not start if you are logged in as Admin. Log in as a
+       Standard user and try again.
+
+     * Official releases later than 2.0.3 are built to run on OS X Tiger
+       or later and won't start on earlier versions of OS X.
+
+     * The hard drive image you're trying to run Freeciv from has an
+       apostrophe (') in its name. Try renaming your hard drive and try
+       again. This also applies to any folder in the path to the Freeciv
+       Application. A standard install of freeciv is to install it into
+       the /Applications/ directory.

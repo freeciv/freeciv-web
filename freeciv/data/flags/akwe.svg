@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg2"
+   height="1400.0000"
+   width="2000.0000"
+   y="0.00000000"
+   x="0.00000000"
+   version="1.0"
+   sodipodi:version="0.32"
+   inkscape:version="0.44"
+   sodipodi:docname="akwe.svg"
+   sodipodi:docbase="C:\freeciv">
+  <metadata
+     id="metadata10">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     inkscape:window-height="579"
+     inkscape:window-width="847"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     guidetolerance="10.0"
+     gridtolerance="10.0"
+     objecttolerance="10.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     inkscape:zoom="0.26928571"
+     inkscape:cx="1000"
+     inkscape:cy="700"
+     inkscape:window-x="199"
+     inkscape:window-y="100"
+     inkscape:current-layer="svg2" />
+  <defs
+     id="defs3" />
+  <rect
+     width="2000"
+     height="1400"
+     x="0"
+     y="0"
+     style="fill:white;fill-opacity:1;stroke:none;stroke-opacity:1"
+     id="rect2287" />
+  <path
+     d="M 0,0 L 0,1235.6458 L 1784.8217,0 L 0,0 z "
+     style="fill:black;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     id="path1291" />
+  <path
+     d="M 2000,1400 L 2000,165.78249 L 217.24138,1400 L 2000,1400 z "
+     style="fill:#fe0000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     id="path2052" />
+  <path
+     d="M 1400,700 L 1157.5692,727.78371 L 1220.8115,764.36067 L 1147.8207,761.22935 L 1201.6472,810.62742 L 1131.0643,791.77223 L 1282.8427,982.84271 L 1091.7722,831.06433 L 1110.6274,901.64715 L 1061.2293,847.82073 L 1064.3607,920.81147 L 1027.7837,857.56924 L 1000,1100 L 972.21629,857.56924 L 935.63933,920.81147 L 938.77065,847.82073 L 889.37258,901.64715 L 908.22777,831.06433 L 717.15729,982.84271 L 868.93567,791.77223 L 798.35285,810.62742 L 852.17927,761.22935 L 779.18853,764.36067 L 842.43076,727.78371 L 600,700 L 842.43076,672.21629 L 779.18853,635.63933 L 852.17927,638.77065 L 798.35285,589.37258 L 868.93567,608.22777 L 717.15729,417.15729 L 908.22777,568.93567 L 889.37258,498.35285 L 938.77065,552.17927 L 935.63933,479.18853 L 972.21629,542.43076 L 1000,300 L 1027.7837,542.43076 L 1064.3607,479.18853 L 1061.2293,552.17927 L 1110.6274,498.35285 L 1091.7722,568.93567 L 1282.8427,417.15729 L 1131.0643,608.22777 L 1201.6472,589.37258 L 1147.8207,638.77065 L 1220.8115,635.63933 L 1157.5692,672.21629 L 1400,700 z "
+     style="fill:#ffcc01;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     id="path13" />
+</svg>

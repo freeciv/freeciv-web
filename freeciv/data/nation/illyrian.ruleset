@@ -1,0 +1,193 @@
+[nation_illyrian]
+
+name=_("Illyrian")
+plural=_("?plural:Illyrians")
+groups="Ancient", "European"
+legend=_("Illyrians were Indo-European tribes who appeared in the\
+ western part of the Balkan Peninsula before 1000 BC, including\
+ Corcyra island and Ambracia bay in prehistoric Epirus to the south.\
+ They mixed with Thracians in Dardania to the east,\
+ and settled Messapia across the Adriatic Sea.\
+ Illyrian kingdoms were independent for centuries,\
+ until conquered by the Roman Republic.")
+
+; listed from legendary founder, until conquered by romans.
+; researching turns out to be annoyingly difficult due to
+; Albanian apologists opining alternate spellings and "meanings".
+leader=
+  "Hyllus",	; d 1225 BCE
+  "Bardyllis",	; c 385-358 BCE, Dardanian (Bardhylus?)
+  "Grabus",	; c 356 BCE, Grabaei
+  "Pleuratus",	; c 344-337 BCE, Ardiaei
+  "Glaukias",	; c 335-303 BCE, Taulanti
+  "Agron",	; c 250-231 BCE, Ardiaei, capital Scodra
+  "Teuta",	; a 227 BCE
+  "Gentius"	; c 180-168 BCE
+leader_sex="Male", "Male", "Male", "Male", "Male", "Male", "Female", "Male"
+
+flag = "illyria"
+flag_alt = "-"
+city_style = "Classical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations = "thracian", "greek", "roman"
+
+; known regional capitals listed first.
+; remaining order is following the coastline, S-N, W-E,
+; some scattering (as yet unknown) locations within region.
+; some cities were captured from the Greeks.
+; most cities are Dalmatian, Dardanian, or regions Romans called "Illyricum".
+; many cities were destroyed by Romans, and replaced by Latin toponyms.
+; use cities founded before Roman conquest.
+; use earliest known spellings instead of later replacements.
+cities =
+  "Scodra (hills, plains, river, !ocean)",	;-400 42:04N 19:30E
+  ; |Scutari|Shkodra|Shkoder
+  "Skopidia (hills, plains, river, !ocean)",	;-300 42N 21:25E
+  ; |Skopeia|Skupi|Scupu|Skopje
+  "Lyssos (hills, plains, river, ocean)",	;-385 41:46N 19:38E
+  ; |Lissus|Lezha
+  "Epidamnos (ocean)",	;-627 41:19N 19:27E
+  ; |Epidamnus|Dyrrachium|Durres
+  "Delmis (mountains, hills, plains, !ocean)",	; 43:43N 17:13E
+  ; |Delmium|Dalmium|Delminium|Dalminium|Zupanjac|Tomislavgrad|Duvno
+  "Salona (hills, ocean)",	;-400 43:33N 16:30E
+  ; |Solin
+  ;
+  "Buthrot (hills, ocean)",	;-600 39:50N 20E
+  ; |Buthrotum|Butrinti|Butrint
+  "Phoenice (hills, plains, river, !ocean)",	; 39:54N 20:03E
+  ; |Phoinike|Foinike|Fenichi|Eniki|Finiqi|Finiq
+  "Kerkyra (forest, hills, ocean)",	;-733 39:37N 19:55E
+  ; |Scheria|Corcyra|Corfu
+  "Onchesmos (mountains, hills, plains, ocean)",	;-400 39:52N 20:03E
+  ; |Agioi|Saranta|Saranda|Sarande
+  "Antigonea (mountains, hills, plains, forest, !ocean)", ;-280 40:06N 20:13E
+  ; |Saraqinisht [Gjirokaster]
+  "Encheleana (mountains, hills, plains)",	;-500 40:54N 20:39E
+  ; |Enkelana|Pogradec
+  "Albanopoli (mountains, hills, plains, !ocean)",	;-300 41:28N 19:45E
+  ; |Zgerdhesh
+  "Damastion (mountains, hills, !ocean)",	;-400 unknown
+  ; |Damastium
+  ;
+  "Stobi (hills, plains, river, !ocean)",	;-216 41:42N 21:46E
+  ; |Kiprili|Koprulu|Velessa|Veles
+  "Aulon (hills, ocean)",	;-500 40:28N 19:29E
+  ; |Avlon|Avlona|Valona|Vlora|Vlore
+  "Oricus (ocean)",	;-100 40:19N 19:28E
+  ; |Oricum|Orikum|Orik
+  "Amantia (hills, ocean)",	;-350
+  "Bylis (hills, river, !ocean)",	;-1000 40:35N 19:44E
+  ; |Byllis|Gllavenica|Ballesh|Ballsh
+  "Antipatrea (mountains, hills, river, !ocean)",	;-300 40:42N 19:57E
+  ; |Berat
+  "Gylaceia (plains, river, ocean)",	;-588 40:43N 19:33E
+  ; |Apollonia
+  "Scampa (mountains, plains, river)",	;+100 41:06N 20:04E
+  ; |Elbasan
+  "Dimal (hills, river, !ocean)",	
+  ; |Dimallium
+  "Colchinium (hills, ocean)",	;-500 41:55N 19:12E
+  ; |Olcinium|Dulcinium|Dulcigno|Ulcinj
+  ;
+  "Butua (mountains, hills, ocean)",	; 42:17N, 18:50E
+  ; |Budua|Budva
+  "Acruvium (mountains, hills, river, ocean)",	;-300 42:23N 18:31E
+  ; |Kotor
+  "Meteon (mountains, !ocean)",	;-400 42:28N 19:21E
+  ; |Meteoni|Medun
+  "Rhizon (mountains, hills, forest, ocean)", ;-400 42:31N 18:42E
+  ; |Rhizinium|Rhisium|Risan
+  "Doclea (mountains, plains, river, !ocean)",	; 42:26N? 19:15E
+  ; |Dioclea|Ribnica|Titograd|Podgorica
+  "Chinna (mountains, hills, river, !ocean)",	; 42:37N 20:34E
+  ; |Klina|Kline
+  "Epidauros (forest, hills, ocean)",	;-300 42:42N 18:22E
+  ; |Epidaurus|Cavtat
+  "Melita (forest, hills, ocean)",	; 42:46N 17:22E
+  ; |Mljet
+  "Idimum (mountains, hills, river, !ocean)",	; 42:50N 21:34E
+  ; |Medvedja|Medveda
+  "Melaina Korkura (forest, hills, ocean)",	;-600 42:56N 16:57E
+  ; |Corcyra Nigra|Korcula
+  "Issa (hills, ocean)",	;-389 43:03N 16:01E
+  ; |Lissa|Vis
+  "Narona (hills, plains, river, !ocean)",	;-400 43:04N 17:37E
+  ; |Vid
+  "Daorson (hills, !ocean)",	;-1600 43.10N 17.93E
+  ; |Diluntum|Osanici
+  "Pitve (forest, hills, ocean)", ;-385 43:10N 16:26E
+  ; |Pharos|Pharia|Fara|Hvar
+  "Saloniana (mountains, river, !ocean)",	; 43:20N 17:48E
+  ; |Andetrium|Mandertium|Sarsenterum|Vitrinica|Mostar
+  "Bona (hills, river)",	;-7000 43:15N 17:53E
+  ; |Blagaj
+  "Onaeum (hills, river, ocean)",	;  43:26N 16:41E
+  ; |Omis
+  "Pituntium (hills, ocean)",	;  43:28N 16:34E
+  ; |Podstrana
+  "Aspalathos (hills, ocean)",	;-295 43:30N 16:27E
+  ; |Spalato|Split
+  "Tragurion (hills, ocean)",	;-300 43:30N 16:15E
+  ; |Trau|Trogir
+  "Naissos (mountains, hills, plains, river, !ocean)",	;-3000 43:19N 21:54E
+  ; |Naissus|Nissa|Nish|Nis
+  "Epetium (hills, ocean)",	; 43:30N 16:31E
+  ; |Palatium|Stobrez|Stobrec
+  "Aequum (mountains, hills, plains, river, !ocean)",	;+42 43:45N 16:38E
+  ; |Citluk
+  ;
+  "Scardona (hills, river, ocean)",	;-339 43:49N 15:55E
+  ; |Skradin
+  "Promona (hills, plains, river, !ocean)",	; 43:57N 16:04E
+  ; |Promina
+  "Collentum (hills, ocean)",	; 43:48N 15:36E
+  ; |Srimac|Murter
+  "Pelva (mountains, hills, plains, !ocean)",	; 43:49N 17:04E
+  ; |Ludricensis|Livno
+  "Varvaria (hills, plains, !ocean)",	;-1000 43:55N 15:50E
+  ; |Barbary|Berbera|Bribirska|Bribir
+  "Burnum (hills, plains, river, !ocean)",	; 44N 15.98E
+  "Salvia (mountains, hills, plains, !ocean)",	; 44:02N 16:50E
+  ; |Salvium|Glamoc
+  "Nedinum (hills, plains, !ocean)",	; 44:04N 15:30E
+  ; |Nadin
+  "Iader (plains, ocean)",	;-900 44:26N 15:03E
+  ; |Iadera|Zara|Zadar
+  "Aenona (plains, ocean)",	; 44:14N 15:10E
+  ; |Nona|Nin
+  "Corinium (mountains, hills, plains, river, ocean)",	; 44:06N 15:37E
+  ; |Karin Donji
+  "Argyruntum (mountains, ocean)",	; 44:17N 15:26E
+  ; |Velika Paklenica|StariGrad-Paklenica
+  "Vegia (mountains, ocean)",	; 44:31N 15:04E
+  ; |Vegium|Scrissa|Karlobag
+  "Viminacium (hills, plains, river, !ocean)",	;-400 44:42N 21:10E
+  ; |Iminacium|Kostolac
+  "Ortopla (mountains, hills, ocean)",	; 44:43N 14:53E
+  ; |Stinica
+  "Arba (forest, ocean)",	;-360 44:45N 14:45E
+  ; |Rab
+  "Lopsica (mountains, hills, ocean)",	; 44:55N 14:55E
+  ; |San Giorgio|Szentgyorgy|Sveti Juraj|Jurjevo
+  ; [also claimed by 45:07N 14:47E Novi Vinodolski]
+  "Attienities (mountains, hills, ocean)",	;-400 44:59N 14:54E
+  ; |Senia|Segna|Zengg|Senj
+  "Volcera (mountains, hills, ocean)",	; 45:18N 14:31E
+  ; |Bakar
+  "Tarsata (hills, river, ocean)",	;-1000 45:13N 14:53E
+  ; |Tarsatica|Tarsaticum|Trsat|Rijeka
+  "Flanona (hills, ocean)", 	; 45:08N 14:10E
+  ; |Fianona|Plomin
+  "Alvona (hills, ocean)",	;-1100 45:05N 14:07E
+  ; |Albona|Albonessium|Labin
+  "Curicum (ocean)",	;-1000 45:13N 14:32E
+  ; |Krk
+  "Crepsa (ocean)",	;-600 44:57N 14:24E
+  ; |Crexa|Crexi|Cherso|Cres
+  "Apsorrus (plains, ocean)"	;-600 44:32N 14:28E
+  ; |Apsirtides|Lussino|Losinj

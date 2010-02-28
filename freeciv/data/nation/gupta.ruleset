@@ -1,0 +1,61 @@
+[nation_gupta]
+
+name=_("Gupta")
+plural=_("?plural:Gupta")
+groups="Asian", "Ancient"
+
+legend=_("The Gupta Empire was one of the great classical empires. It ruled\
+ northern India from around 240 to 550 CE.")
+
+leader=
+ "Chandra Gupta I",
+ "Sumudra Gupta",
+ "Kumara Gupta",
+ "Skanda Gupta",
+ "Chandra Gupta II"
+
+leader_sex = "Male", "Male", "Male", "Male", "Male"
+
+ruler_titles = { "government",      "male_title",        "female_title"
+		 ; /* TRANS: Maharajadhiraja = Great King of Kings */
+                 "Monarchy",    _("Maharajadhiraja"),    _("Maharajadhiraja")
+               }
+
+flag         = "gupta"
+flag_alt     = "-"
+city_style   = "Babylonian"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="indian", "bengali"
+
+cities =
+ "Pataliputra",
+ "Ujjain",
+ "Ayodhya",
+ "Mathura",
+ "Padmava",
+ "Licron",
+ "Vengi",
+ "Sanchi",
+ "Girnar",
+ "Mandasor",
+ "Rajagriha",
+ "Bodh Gaya",
+ "Kasi",
+ "Sarnath",
+ "Bharut",
+ "Kausaubi",
+ "Prayaga",
+ "Sravasti",
+ "Indraprastra",
+ "Hastinapura",
+ "Kurukshatra",
+ "Broach",
+ "Tmralipti",
+ "Thanesar",
+ "Gwalior",
+ "Nalanda"

@@ -1,0 +1,76 @@
+[nation_silesian]
+
+name=_("Silesian")
+plural=_("?plural:Silesians")
+groups="Medieval", "European"
+legend=_("Silesia is a region of southern Poland that was at one time an\
+ independent kingdom.")
+leader = "Władysław Wygnaniec",
+         "Henryk Brodaty",
+         "Henryk Pobożny",
+	 "Jerzy IV Wilhelm",
+         "Józef Kożdoń",
+         "Jan Kustos",
+         "Wojciech Korfanty"
+leader_sex = "Male", "Male", "Male", "Male", "Male", "Male", "Male"
+flag="silesia"
+flag_alt = "-"
+city_style = "European"
+
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Monarchy",        _("Prince"),         _("Princess")
+                 "Democracy",_("Prime Minister"), _("?female:Prime Minister")
+               }
+init_techs=""
+init_buildings=""
+
+init_government="Despotism"
+init_units=""
+civilwar_nations = "polish"
+
+; if you want your favourite city to be in more prominent place, go ahead
+; only leave first 3 cities where they are
+
+cities =
+  "Wrocław",
+  "Opole",
+  "Katowice",
+  "Legnica",
+  "Zielona Góra (hills, grassland)",
+  "Głogów (forest)",
+  "Bolesławiec",
+  "Wałbrzych",
+  "Gliwice",
+  "Rybnik (river)",
+  "Jelenia Góra (mountains)",
+  "Świdnica",
+  "Lubin",
+  "Chojnów",
+  "Małczyce", 
+  "Kłodzko",
+  "Bytom",
+  "Oświecim",
+  "Złotoryja",
+  "Bielany",
+  "Zgorzelec", 
+  "Żary",
+  "Bystrzyca (river)",
+  "Żagan",
+  "Bogatynia", 
+  "Chocianów",
+  "Nowa Sól",
+  "Zabrze",
+  "Sosnowiec (forest)",
+  "Rokitki",
+  "Lubań",
+  "Polkowice",
+  "Lubiąż",
+  "Kędzierzyn-Koźle",
+  "Chorzów",
+  "Bielsko",
+  "Cieszyn",
+  "Siemianowice Śląskie",
+  "Wojkowice",
+  "Lubliniec",
+  "Będzin",
+  "Czeladź"

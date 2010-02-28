@@ -1,0 +1,413 @@
+[colors]
+
+background = {"r", "g", "b", "a"
+  233, 227, 212, 255
+}
+
+checkbox_label_text = {"r", "g", "b", "a"
+ 78, 54, 30, 255
+}
+
+custom_widget_normal_text = {"r", "g", "b", "a"
+ 78, 54, 30, 255
+}
+
+custom_widget_selected_frame = {"r", "g", "b", "a"
+ 255, 255, 255, 255
+}
+
+custom_widget_selected_text = {"r", "g", "b", "a"
+ 78, 54, 30, 255
+}
+
+custom_widget_pressed_frame = {"r", "g", "b", "a"
+ 246, 254, 2, 255
+}
+
+custom_widget_pressed_text = {"r", "g", "b", "a"
+ 78, 54, 30, 255
+}
+
+custom_widget_disabled_text = {"r", "g", "b", "a"
+ 0, 0, 0, 255
+}
+
+editfield_caret = {"r", "g", "b", "a"
+ 0, 136, 255, 255
+}
+
+label_bar = {"r", "g", "b", "a"
+ 139, 69, 19, 128
+}
+
+quick_info_bg = {"r", "g", "b", "a"
+  231, 213, 176, 255
+}
+
+quick_info_frame = {"r", "g", "b", "a"
+  186, 171, 139, 255
+}
+
+quick_info_text = {"r", "g", "b", "a"
+  65, 56, 37, 255
+}
+
+selectionrectangle = {"r", "g", "b", "a"
+  255, 255, 255, 255
+}
+
+text = {"r", "g", "b", "a"
+ 66, 60, 45, 255
+}
+
+themelabel2_bg = {"r", "g", "b", "a"
+ 139, 69, 19, 96
+}
+
+widget_normal_text = {"r", "g", "b", "a"
+ 75, 66, 47, 255
+}
+
+widget_selected_text = {"r", "g", "b", "a"
+ 78, 54, 30, 255
+}
+
+widget_pressed_text = {"r", "g", "b", "a"
+ 78, 54, 30, 255
+}
+
+widget_disabled_text = {"r", "g", "b", "a"
+ 128, 128, 128, 255
+}
+
+window_titlebar_separator = {"r", "g", "b", "a"
+ 162, 149, 126, 255
+}
+
+advancedterraindlg_text = {"r", "g", "b", "a"
+ 78, 54, 30, 255
+}
+
+citydlg_buy = {"r", "g", "b", "a"
+ 78, 54, 30, 255
+}
+
+citydlg_celeb = {"r", "g", "b", "a"
+ 78, 54, 30, 255
+}
+
+citydlg_corruption = {"r", "g", "b", "a"
+ 75, 66, 47, 255
+}
+
+citydlg_foodperturn = {"r", "g", "b", "a"
+ 75, 66, 47, 255
+}
+
+citydlg_foodstock = {"r", "g", "b", "a"
+  0, 200, 0, 64
+}
+
+citydlg_food_surplus = {"r", "g", "b", "a"
+ 75, 66, 47, 255
+}
+
+citydlg_frame = {"r", "g", "b", "a"
+  160, 150, 126, 255
+}
+
+citydlg_gold = {"r", "g", "b", "a"
+ 75, 66, 47, 255
+}
+
+citydlg_granary = {"r", "g", "b", "a"
+  0, 200, 0, 64
+}
+
+citydlg_growth = {"r", "g", "b", "a"
+ 75, 66, 47, 255
+}
+
+citydlg_happy = {"r", "g", "b", "a"
+ 75, 66, 47, 255
+}
+
+citydlg_impr = {"r", "g", "b", "a"
+ 75, 66, 47, 255
+}
+
+citydlg_infopanel = {"r", "g", "b", "a"
+ 75, 66, 47, 255
+}
+
+citydlg_lux = {"r", "g", "b", "a"
+ 75, 66, 47, 255
+}
+
+citydlg_panel = {"r", "g", "b", "a"
+ 72, 62, 43, 255
+}
+
+citydlg_prod = {"r", "g", "b", "a"
+ 75, 66, 47, 255
+}
+
+citydlg_science = {"r", "g", "b", "a"
+ 75, 66, 47, 255
+}
+
+citydlg_sell = {"r", "g", "b", "a"
+ 75, 66, 47, 255
+}
+
+citydlg_shieldstock = {"r", "g", "b", "a"
+  0, 200, 0, 64
+}
+
+citydlg_stocks = {"r", "g", "b", "a"
+  0, 200, 0, 64
+}
+
+citydlg_support = {"r", "g", "b", "a"
+ 75, 66, 47, 255
+}
+
+citydlg_trade = {"r", "g", "b", "a"
+ 75, 66, 47, 255
+}
+
+citydlg_upkeep = {"r", "g", "b", "a"
+ 75, 66, 47, 255
+}
+
+cityrep_foodstock = {"r", "g", "b", "a"
+  160, 150, 126, 255
+}
+
+cityrep_frame = {"r", "g", "b", "a"
+  160, 150, 126, 255
+}
+
+cityrep_prod = {"r", "g", "b", "a"
+  160, 150, 126, 255
+}
+
+cityrep_text = {"r", "g", "b", "a"
+ 75, 66, 47, 255
+}
+
+cityrep_trade = {"r", "g", "b", "a"
+  0, 0, 0, 96
+}
+
+cma_frame = {"r", "g", "b", "a"
+  160, 150, 126, 255
+}
+
+cma_text = {"r", "g", "b", "a"
+ 75, 66, 47, 255
+}
+
+connectdlg_frame = {"r", "g", "b", "a"
+  160, 150, 126, 255
+}
+
+connectdlg_innerframe = {"r", "g", "b", "a"
+  160, 150, 126, 255
+}
+
+connectdlg_labelframe = {"r", "g", "b", "a"
+  160, 150, 126, 255
+}
+
+connlistdlg_frame = {"r", "g", "b", "a"
+  160, 150, 126, 255
+}
+
+diplodlg_meeting_heading_text = {"r", "g", "b", "a"
+ 78, 54, 30, 255
+}
+
+diplodlg_meeting_text = {"r", "g", "b", "a"
+ 78, 54, 30, 255
+}
+
+diplodlg_text = {"r", "g", "b", "a"
+ 78, 54, 30, 255
+}
+
+economydlg_frame = {"r", "g", "b", "a"
+  160, 150, 126, 255
+}
+
+economydlg_neg_text = {"r", "g", "b", "a"
+  255, 0, 0, 255
+}
+
+economydlg_text = {"r", "g", "b", "a"
+ 78, 54, 30, 255
+}
+
+helpdlg_frame = {"r", "g", "b", "a"
+  160, 150, 126, 255
+}
+
+helpdlg_line = {"r", "g", "b", "a"
+  160, 150, 126, 255
+}
+
+helpdlg_line2 = {"r", "g", "b", "a"
+  255, 255, 255, 255
+}
+
+helpdlg_line3 = {"r", "g", "b", "a"
+  255, 255, 255, 255
+}
+
+helpdlg_text = {"r", "g", "b", "a"
+ 78, 54, 30, 255
+}
+
+joingamedlg_frame = {"r", "g", "b", "a"
+ 75, 66, 47, 255
+}
+
+joingamedlg_text = {"r", "g", "b", "a"
+ 75, 66, 47, 255
+}
+
+mapview_info_frame = {"r", "g", "b", "a"
+  160, 150, 126, 255
+}
+
+mapview_info_text = {"r", "g", "b", "a"
+  255, 255, 255, 255
+}
+
+mapview_unitinfo_text = {"r", "g", "b", "a"
+ 78, 54, 30, 255
+}
+
+mapview_unitinfo_veteran_text = {"r", "g", "b", "a"
+ 78, 54, 30, 255
+}
+
+meswin_active_text = {"r", "g", "b", "a"
+ 255, 255, 0, 255
+}
+
+meswin_active_text2 = {"r", "g", "b", "a"
+ 0, 255, 0, 255
+}
+
+meswin_frame = {"r", "g", "b", "a"
+  160, 150, 126, 255
+}
+
+nationdlg_frame = {"r", "g", "b", "a"
+  160, 150, 126, 255
+}
+
+nationdlg_legend = {"r", "g", "b", "a"
+ 78, 54, 30, 255
+}
+
+nationdlg_text = {"r", "g", "b", "a"
+ 78, 54, 30, 255
+}
+
+newcitydlg_text = {"r", "g", "b", "a"
+ 78, 54, 30, 255
+}
+
+optiondlg_worklistlist_frame = {"r", "g", "b", "a"
+  160, 150, 126, 255
+}
+
+optiondlg_worklistlist_text = {"r", "g", "b", "a"
+ 75, 66, 47, 255
+}
+
+plrdlg_alliance = {"r", "g", "b", "a"
+  220, 186, 60, 255
+}
+
+plrdlg_armistice = {"r", "g", "b", "a"
+ 75, 66, 47, 255
+}
+
+plrdlg_ceasefire = {"r", "g", "b", "a"
+  255, 255, 0, 255
+}
+
+plrdlg_frame = {"r", "g", "b", "a"
+  160, 150, 126, 255
+}
+
+plrdlg_peace = {"r", "g", "b", "a"
+  0, 200, 0, 255
+}
+
+plrdlg_text = {"r", "g", "b", "a"
+ 75, 66, 47, 255
+}
+
+plrdlg_war = {"r", "g", "b", "a"
+  255, 0, 0, 255
+}
+
+plrdlg_war_restricted = {"r", "g", "b", "a"
+  128, 0, 0, 255
+}
+
+revolutiondlg_text = {"r", "g", "b", "a"
+ 75, 66, 47, 255
+}
+
+sabotagedlg_separator = {"r", "g", "b", "a"
+  0, 0, 0, 64
+}
+
+sciencedlg_frame = {"r", "g", "b", "a"
+  160, 150, 126, 255
+}
+
+sciencedlg_med_techicon_bg = {"r", "g", "b", "a"
+  255, 255, 255, 255
+}
+
+sciencedlg_text = {"r", "g", "b", "a"
+ 75, 66, 47, 255
+}
+
+sellimpr_text = {"r", "g", "b", "a"
+ 75, 66, 47, 255
+}
+
+unitsrep_text = {"r", "g", "b", "a"
+ 75, 66, 47, 255
+}
+
+unitsrep_frame = {"r", "g", "b", "a"
+  160, 150, 126, 255
+}
+
+unitupgrade_text = {"r", "g", "b", "a"
+ 75, 66, 47, 255
+}
+
+userpasswddlg_frame = {"r", "g", "b", "a"
+  160, 150, 126, 255
+}
+
+userpasswddlg_text = {"r", "g", "b", "a"
+ 75, 66, 47, 255
+}
+
+wardlg_text = {"r", "g", "b", "a"
+ 75, 66, 47, 255
+}
+
+wldlg_frame = {"r", "g", "b", "a"
+  160, 150, 126, 255
+}

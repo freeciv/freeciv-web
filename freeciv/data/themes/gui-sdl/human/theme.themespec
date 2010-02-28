@@ -1,0 +1,37 @@
+[themespec]
+
+; Format and options of this themespec file:
+options = "+themespec3"
+
+; A simple name for the themespec specified by this file:
+name = "human"
+priority = 20
+
+; The font to be used:
+font_file         = "themes/gui-sdl/human/DejaVuSans.ttf"
+font_file_zh_CN   = "themes/gui-sdl/human/fireflysung.ttf"
+font_file_ja      = "themes/gui-sdl/human/sazanami-gothic.ttf"
+font_file_ko      = "themes/gui-sdl/human/UnDotum.ttf"
+default_font_size = 18
+
+; Below, the graphics spec files; must be somewhere (anywhere) in 
+; the data path. Order may be important for color allocation on 
+; low-color systems, and if there are any duplicate tags (lattermost
+; tag is used).
+files = 
+  "themes/gui-sdl/human/city.spec",
+  "themes/gui-sdl/human/city_fist.spec",
+  "themes/gui-sdl/human/dip_icons.spec",
+  "themes/gui-sdl/human/icons.spec",
+  "themes/gui-sdl/human/small_theme_buttons.spec",
+  "themes/gui-sdl/human/tech_tree.spec",
+  "themes/gui-sdl/human/theme_boxs.spec",
+  "themes/gui-sdl/human/theme_buttons.spec",  
+  "themes/gui-sdl/human/theme_orders_buttons.spec",  
+  "themes/gui-sdl/human/theme_scrolls.spec"
+
+; Include background image definitions
+*include "themes/gui-sdl/human/backgrounds.themespec"
+
+; Include color definitions
+*include "themes/gui-sdl/human/colors.themespec"

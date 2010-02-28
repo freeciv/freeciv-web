@@ -1,0 +1,70 @@
+[nation_khwarezmian]
+
+name=_("Khwarezmian")
+plural=_("?plural:Khwarezmians")
+groups="Asian", "Ancient"
+
+legend=_("Known by the Greeks as Chorasmia, Khwarezm was an urbanized,\
+ centralized, and militarized state south of the Aral sea in Central Asia,\
+ controlling portions of the Silk Road. It was loosely controlled as a\
+ satrapy under the Achaemenid and Sassanid Persian dynasties and was mythic\
+ homeland of Zarathustra, the founder of Zoroastrianism. Following the\
+ introduction of Islam, Khwarezm tended to be devided into two seperate\
+ kingdoms, but was united under the Turkic Anushtegihidy dynasty, which\
+ lasted from 1097 until Chinggis Khan conquered it in 1231.")
+
+leader=
+ "Pharasmanes",
+ "Hystaspes",
+ "Phrataphernes",
+ "Artav",
+ "Vishtapa"
+
+leader_sex = "Male", "Male", "Male", "Male", "Male"
+
+ruler_titles = { "government",      "male_title",        "female_title"
+                 "Monarchy",       _("Khorezmshah"),     _("Khorezmshah")
+               }
+
+flag         = "khwarezm"
+flag_alt     = "-"
+city_style   = "Babylonian"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="persian", "tocharian"
+
+cities =
+ "Gurganj",
+ "Kath",
+ "Samarkand",
+ "Chach",
+ "Sarazm",
+ "Balkh",
+ "Khiveh",
+ "Bukhara",
+ "Khalchayan",
+ "Otrar",
+ "Dzanbas-Kala",
+ "Khujand",
+ "Shahrisadz",
+ "Kesh",
+ "Chirik-Rabat",
+ "Merv",
+ "Giaur-Kala",
+ "Hujeli",
+ "Khavakend",
+ "Zaman Baba",
+ "Sanjan",
+ "Zeravshan",
+ "Usrushana",
+ "Toprak-Kala",
+ "Nakhshab",
+ "Karmana",
+ "Koy-Krylgan-Kala",
+ "Tagisken",
+ "Nukus",
+ "Talas"

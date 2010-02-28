@@ -1,0 +1,78 @@
+#!/usr/bin/make -f
+# Made with the iad of dh_make, by Craig Small
+# Sample debian/rules that uses debhelper. GNU copyright 1997 by Joey Hess.
+# Also some stuff taken from debmake scripts, by Cristopt Lameter.
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+CLIENTS := gtk2,xaw,sdl
+
+CONFIG_PARAMS := --cache-file=$(shell pwd)/config.cache 		\
+		 --prefix=/usr --datadir=/usr/share/games --bindir=/usr/games \
+		 --enable-client=$(CLIENTS) --with-xaw3d --enable-svnrev \
+		 --enable-shared
+
+build: build-stamp
+build-stamp:
+	dh_testdir
+
+	mkdir build
+	(cd build && ../autogen.sh $(CONFIG_PARAMS) && $(MAKE))
+
+	touch build-stamp
+
+clean:
+	dh_testdir
+	dh_testroot
+	-rm -Rf build
+	-rm -f config.cache
+	dh_clean
+
+	-rm -f debian/*~ Makefile Makefile.bak core */Makefile
+
+install: install-stamp
+install-stamp: build-stamp
+	dh_testdir
+	dh_testroot
+	dh_clean -k
+	dh_installdirs
+
+	(cd build; $(MAKE) DESTDIR=`pwd`/../debian/tmp install)
+	# Temporary kludge because the potfiles are not getting installed
+	(cd build/po; $(MAKE) prefix=`pwd`/../../debian/tmp/usr install)
+	ln -s civclient.6 debian/tmp/usr/share/man/man6/freeciv-xaw.6
+	ln -s civclient.6 debian/tmp/usr/share/man/man6/freeciv-gtk2.6
+	ln -s civclient.6 debian/tmp/usr/share/man/man6/freeciv-sdl.6
+#	cp debian/freeciv.desktop debian/tmp/usr/share/gnome/apps/Games
+
+	touch install-stamp
+
+# Build architecture-independent files here (ie none).
+binary-indep:
+
+# Build architecture-dependent files here.
+binary-arch: build install
+	dh_testdir
+	dh_testroot
+	dh_installdocs
+	dh_installexamples
+	dh_installmenu
+#	dh_installman
+	dh_installchangelogs
+	dh_install
+	dh_strip
+	dh_compress
+	dh_fixperms
+	dh_installdeb
+	dh_makeshlibs
+	dh_shlibdeps
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+source diff:
+	@echo 'source and diff are obsolete - use dpkg-source -b' >&2 ; false
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary

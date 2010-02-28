@@ -1,0 +1,31 @@
+/**********************************************************************
+ Freeciv - Copyright (C) 2007 - The Freeciv Project
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2, or (at your option)
+   any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+***********************************************************************/
+
+/* common/fc_svnrev_gen.h is automatically generated from
+ * bootstrap/fc_svnrev_gen.h.in. Do not edit fc_svnrev_gen.h, edit
+ * fc_svnrev_gen.h.in */
+
+#ifndef FC__FC_SVNREV_H
+#define FC__FC_SVNREV_H
+
+/* One of the macros FC_SVNREV_OFF, FC_SVNREV_ON or FC_SVNREV_MOD defined.
+ * If FC_SVNREV_ON is defined, FC_SVNREV contains valid svn revision number
+ * string (currently starting with 'r')
+ * If FC_SVNREV_MOD is defined, this seems to be modified svn checkout.
+ * In that case FC_SVNREV contains revision number and word "modified".
+ * If FC_SVNREV_OFF is defined, you should not use FC_SVNREV even though
+ * it does contain fallback string (currently "dist") */
+#define FC_SVNREV_<SVNREVSTATE>
+#define FC_SVNREV "<SVNREV>"
+
+#endif /* FC__FC_SVNREV_H */

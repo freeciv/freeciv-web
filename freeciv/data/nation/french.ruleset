@@ -1,0 +1,129 @@
+[nation_french]
+
+name=_("French")
+plural=_("?plural:French")
+groups="Modern", "Medieval", "European"
+legend=_("France has long been a major power in Europe. French conquerors\
+ like Emperor Napoleon and King Charlemagne united large parts of\
+ Europe under the French flag.")
+leader=
+ "Napoléon Bonaparte",
+ "Charlemagne",
+ "Henri IV",
+ "Louis XIV",
+ "Charles de Gaulle",
+ "Vercingétorix",
+ "Clovis",
+ "Charles Martel",
+ "Jeanne d'Arc"
+leader_sex="Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male",
+ "Female"
+flag="france"
+flag_alt = "-"
+city_style = "Celtic"
+
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Despotism",       _("Chieftain"),    _("?female:Chieftain")
+                 "Democracy",       _("Premier"),      _("?female:Premier")
+                 "Fundamentalism",  _("Archbishop"),  _("?female:Archbishop")
+	       }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+conflicts_with = "gallic"
+civilwar_nations = "quebecois", "burgundian", "norman", "breton"
+
+cities =
+  "Paris",
+  "Lyon",
+  "Marseille (ocean)",
+  "Lille",
+  "Toulouse",
+  "Nice (ocean)",
+  "Bordeaux",
+  "Nantes (ocean)",
+  "Strasbourg",
+  "Toulon (ocean)",
+  "Rennes",
+  "Rouen",
+  "Grenoble (mountains)",
+  "Montpellier",
+  "Metz",
+  "Nancy",
+  "Clermont-Ferrand (!ocean)",
+  "Valenciennes",
+  "Tours",
+  "Caen",
+  "Orléans (!ocean)",
+  "Angers",
+  "Dijon (!ocean)",
+  "Saint-Étienne",
+  "Brest (ocean)",
+  "Le Havre (ocean)",
+  "Le Mans",
+  "Reims (!ocean)",
+  "Avignon",
+  "Mulhouse (!ocean)",
+  "Amiens",
+  "Béthune",
+  "Dunkerque (ocean)",
+  "Perpignan (ocean)",
+  "Limoges (mountains)",
+  "Besançon",
+  "Nîmes",
+  "Pau",
+  "Bayonne (ocean)",
+  "Annemasse",
+  "Poitiers",
+  "Annecy",
+  "Lorient (ocean)",
+  "Montbéliard",
+  "Saint-Denis",
+  "Troyes",
+  "Saint-Nazaire (ocean)",
+  "La Rochelle (ocean)",
+  "Valence",
+  "Thionville (ocean)",
+  "Angoulême",
+  "Boulogne-sur-Mer (ocean)",
+  "Chambéry",
+  "Chalon-sur-Saône (river)",
+  "Chartres",
+  "Saint-Pierre",
+  "Niort",
+  "Calais (ocean)",
+  "Béziers",
+  "Arras",
+  "Bourges",
+  "Lens",
+  "Saint-Brieuc (ocean)",
+  "Quimper",
+  "Vannes",
+  "Cherbourg (ocean)",
+  "Maubeuge",
+  "Aix-en-Provence (ocean, mountains)",
+  "Blois",
+  "Colmar",
+  "Tarbes",
+  "Compiègne",
+  "Charleville-Mézières",
+  "Belfort (mountains)",
+  "Roanne",
+  "Forbach",
+  "Saint-Quentin",
+  "Laval",
+  "Bourg-en-Bresse (!ocean)",
+  "Beauvais",
+  "Nevers",
+  "Villeurbanne",
+  "Boulogne",
+; Not in most inhabited cities
+  "Ajaccio (ocean, mountains)",
+  "Pointe-à-Pitre (ocean)",
+  "Cayenne (ocean)",
+  "Fort-de-France (ocean)",
+  "Saint-Denis (ocean)"
+

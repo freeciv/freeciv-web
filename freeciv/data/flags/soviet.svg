@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Sodipodi ("http://www.sodipodi.com/") -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg551"
+   sodipodi:version="0.32"
+   width="744.09000px"
+   height="140mm"
+   sodipodi:docbase="/Users/daniel/Desktop"
+   sodipodi:docname="soviet.svg"
+   inkscape:version="0.42"
+   inkscape:export-filename="/Users/daniel/Desktop/soviet.png"
+   inkscape:export-xdpi="16.860001"
+   inkscape:export-ydpi="16.860001">
+  <metadata
+     id="metadata7430">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs553">
+    <linearGradient
+       id="linearGradient567">
+      <stop
+         style="stop-color:#000;stop-opacity:1;"
+         offset="0"
+         id="stop568" />
+      <stop
+         style="stop-color:#fff;stop-opacity:1;"
+         offset="1"
+         id="stop569" />
+    </linearGradient>
+    <linearGradient
+       xlink:href="#linearGradient567"
+       id="linearGradient570" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     inkscape:zoom="0.61181747"
+     inkscape:cx="496.06299"
+     inkscape:cy="248.03149"
+     inkscape:window-width="701"
+     inkscape:window-height="507"
+     inkscape:window-x="43"
+     inkscape:window-y="193"
+     inkscape:current-layer="svg551" />
+  <rect
+     style="font-size:12.000000px;fill:#ff0000;fill-opacity:1.0000000;fill-rule:evenodd;stroke-width:1.0000000pt"
+     id="rect590"
+     width="744.09003"
+     height="496.06299"
+     x="0.0000000"
+     y="-7.5999997e-05" />
+  <g
+     id="g7432"
+     transform="matrix(1.184514,0.000000,0.000000,1.184514,-23.96794,5.401563)">
+    <path
+       transform="matrix(0.520224,0.000000,0.000000,0.414703,24.99743,-37.01097)"
+       sodipodi:nodetypes="ccccccccccc"
+       id="path589"
+       d="M 268.70100,174.68900 L 254.55900,220.65200 L 211.24800,221.53500 L 243.95200,254.23900 L 233.34500,302.85200 L 269.58500,275.45200 L 307.59100,301.96800 L 296.10100,253.35400 L 327.03700,222.41800 L 283.72700,221.53400 L 268.70100,174.68900 z "
+       style="font-size:12.000000px;fill:none;fill-rule:evenodd;stroke:#ffff00;stroke-width:11.625000" />
+    <g
+       transform="matrix(0.831918,0.000000,0.000000,0.797182,32.07594,14.36842)"
+       id="g840">
+      <path
+         transform="matrix(0.757037,0.000000,0.000000,0.770366,-45.00377,-93.99085)"
+         sodipodi:nodetypes="csccccccsscccc"
+         id="path566"
+         d="M 285.56300,244.58500 C 416.01500,365.13300 295.76400,455.35500 246.87600,407.83100 C 241.67500,402.26100 235.80800,397.08900 229.25100,390.03900 L 218.63800,395.55900 L 210.66900,394.20300 L 209.87500,402.90800 L 204.32300,407.91100 L 200.09400,411.57100 C 185.12300,418.96200 183.13000,418.18200 174.93400,429.41200 C 167.78300,439.67100 178.05300,449.81300 190.15600,442.16400 C 201.79300,434.81000 198.72900,437.43600 208.02500,422.36500 L 216.25900,412.57800 L 223.96300,411.25200 C 311.19600,520.92200 466.69100,349.29100 285.56300,244.58500 z "
+         style="font-size:12.000000px;fill:#ffff00;fill-rule:evenodd;stroke-width:1.0000000pt" />
+      <path
+         transform="matrix(0.755308,-5.112918e-2,5.202941e-2,0.768607,-63.48462,-77.14349)"
+         sodipodi:nodetypes="ccccccccc"
+         id="path558"
+         d="M 342.26100,443.32500 L 362.24000,426.93800 L 272.23600,317.20000 L 299.02500,291.09000 L 262.62700,286.07400 L 209.61600,328.89400 L 232.18900,349.69900 L 257.34700,329.36900 L 342.26100,443.32500 z "
+         style="font-size:12.000000px;fill:#ffff00;fill-rule:evenodd;stroke-width:1.0000000pt" />
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,35 @@
+[nation_kenyan]
+
+name = _("Kenyan")
+plural = _("?plural:Kenyans")
+groups="Modern", "African"
+legend=_("Kenya gained independence from Britain in December 1963.")
+leader =
+ "Shiundu",
+ "Mumia",
+ "Ezekiel Apindi",
+ "Jomo Kenyatta"
+leader_sex = "Male", "Male", "Male", "Male"
+flag = "kenya"
+flag_alt = "-"
+city_style = "Tropical"
+
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Monarchy",        _("Nabongo"),      _("Nabongo")
+}
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations="ethiopian", "sudanese"
+
+cities =
+  "Nairobi", "Mombasa", "Malindi", "Kisumu", "Labu", "Kitale", "Nakuru",
+  "Nyeri", "Lokichoki", "Lodwar", "Moyale", "Ramu", "Marsabi", "Wajir",
+  "Eldoret", "Mado Gashi", "Butere", "Kakamega", "Nanyuki", "Isiolo",
+  "Kericho", "Embu", "Garissa", "Narok", "Thika", "Garsen", "Voi",
+  "Konza", "Machakos", "Magadi", "Kilgoris", "Tsavo", "Maungu",
+  "Mwaga", "Kilifi", "Kwale", "Gazi", "Witu", "Lamu", "Wangi", "Hadera",
+  "Liboi", "Maralal", "Kisii", "Busonga", "Nginyang", "Dukana",
+  "Kakuma", "Lokitaung"

@@ -1,0 +1,13 @@
+Index: citytools.c
+===================================================================
+--- citytools.c	(revisjon 63)
++++ citytools.c	(revisjon 64)
+@@ -1160,7 +1160,7 @@
+ 
+   notify_player(pplayer, ptile, E_CITY_BUILD, FTC_SERVER_INFO, NULL,
+ 		_("You have founded %s."),
+-		city_link(pcity));
++		pcity->name);
+   maybe_make_contact(ptile, city_owner(pcity));
+ 
+   unit_list_iterate((ptile)->units, punit) {

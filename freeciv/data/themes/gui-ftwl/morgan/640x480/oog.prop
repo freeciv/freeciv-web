@@ -1,0 +1,36 @@
+[input]
+x = 50
+y = 200
+width = 540
+height = 100
+align="center"
+
+text-color="#0000ff"
+text-background="#ddddff2f"
+text-size=15
+text-font="fonts/Vera.ttf"
+text-antialias=0
+text-outline-width=0
+text-transform=""
+
+[output]
+x = 0
+y = 0
+width = 600
+height = 480
+
+text-color="#000000"
+text-size=9
+text-font="fonts/Vera.ttf"
+text-antialias=0
+text-outline-width=0
+text-transform=""
+
+# text is padded by this amount of pixel at each side
+padding=5
+
+# in msec
+delay=5000
+
+# optional
+background="#ffaa33df"

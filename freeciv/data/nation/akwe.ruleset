@@ -1,0 +1,70 @@
+[nation_akwe]
+
+name=_("Akwe")
+plural=_("?plural:Akwe")
+groups="American"
+
+legend=_("The Akwe are also known by three different tribal names in\
+ Portuguese, Xavante, Xakriaba and Xerente. They have a patrilineal clan\
+ system and live in Mato Grosso and Tocantins states of Brazil, though they\
+ have been forced to move by Brazilians several times through their history.\
+ Traditionally, they are ruled by councils of elders who elect a chief and\
+ have likely lived in large ring villages since about the 9th century CE.\
+ They are Ge speakers who farm maize, manioc, sweet potatoes and yams.")
+
+leader=
+ "Apowe",
+ "Warodi",
+ "Warinatsé"
+
+leader_sex = "Male", "Male", "Male"
+
+ruler_titles = { "government",      "male_title",        "female_title"
+                 "Monarchy",       _("He'a"),            _("He'a")
+                 "Anarchy",        _("Senapati"),        _("Senapati")
+               }
+
+flag         = "akwe"
+flag_alt     = "-"
+city_style   = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="tupi", "tairona", "brazilian"
+
+cities =
+ "Parawadzaradze",
+ "Areões",
+ "Batovi",
+ "Funil",
+ "ZéBrito",
+ "Pe’azurupré",
+ "Maraiwatsede",
+ "Parabubure",
+ "Ubawawe",
+ "Isorepre",
+ "Ete’rau’rawawe",
+ "Wabdzerewapre",
+ "Aröbönipó",
+ "Wede’u",
+ "Kuluene",
+ "Canarana",
+ "Etéñitépa",
+ "Tanguro",
+ "Wedédze",
+ "Casura",
+ "Ötõ",
+ "Jambimbu",
+ "Gurupi",
+ "Itacaja",
+ "Croa",
+ "Paraío",
+ "Baixão",
+ "Traíra",
+ "Ponte",
+ "Itapiratins",
+ "Guaral",
+ "Arapoema"

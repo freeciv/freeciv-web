@@ -1,0 +1,59 @@
+[nation_kurd]
+
+name=_("Kurdish")
+plural=_("?plural:Kurds")
+groups=_("Asian"), _("Medieval")
+legend=_("The Kurds are a distinct ethno-linguistic group speaking an\
+ Indo-Aryan language. Their traditional homeland Kurdistan is situated in\
+ northern Middle East and partitioned between Iraq, Turkey, Syria, and\
+ Iran. The medieval era saw the rise of several principalities ruled by\
+ Kurdish dynasties, including Shaddadid, Rawadid, Hasanwayhid, Annazid,\
+ and Marwanid. Subsequently subdued by the Ottomans, the Kurds' struggle\
+ for self-rule and independence took off again after the fall of the\
+ Ottoman Empire and the end of the colonial era. Today, Iraq's Kurdistan\
+ Autonomous Region is the only Kurd-dominated politial entity in the\
+ world.")
+leader=
+ "Kâvos", ; King of the Median Kurds
+ "Bahram Pasha", ; "the Great", Emir of the Badinan Emirate
+ "Mehmûdê Berzencî", ; King of the Kingdom of Kurdistan
+ "Qazî Mihemmed", ; President of the Republic of Kurdistan
+ "Mistefa Barzanî" ; President of the Kurdistan Democratic Par ty
+leader_sex="Male", "Male", "Male", "Male", "Male"
+
+ruler_titles = { "government", "male_title", "female_title"
+                 "Despotism", _("Emir"), _("Emir")
+                 "Monarchy", _("Sheikh"), _("Sheikh")
+}
+
+flag = "kurd"
+flag_alt = "-"
+city_style = "Babylonian"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations = "iranian", "iraqi", "turkish", "syrian"
+
+cities =
+ "Hewlêr", ; Kurdish name for Arbil (Iraq)
+ "Amed", ; Kurdish name for Diyarbakır (Turkey)
+ "Sine", ; Kurdish name for Sanadaj (Iran)
+ "Qamişlo", ; Kurdish name for Al Qamishli (Syria)
+ "Çölemerik", ; Kurdish name for Hakkâri (Turkey)
+ "Wan", ; Kurdish name for Van (Turkey)
+ "Silêmanî", ; Kurdish name for Sulaymaniyah (Iraq)
+ "Êlih", ; Kurdish name for Batman (Turkey)
+ "Kermānshāh", ; Kurdish name for Kermanshah (Iran)
+ "Duhok", ; Kurdish name for Dahuk (Iraq)
+ "Bane", ; Kurdish name for Ilam (Iran)
+ "Zaxo", ; Kurdish name for Zakho (Iraq)
+ "Amûde", ; Kurdish name for Amuda (Syria)
+ "Chemchemal", ; Kurdish name for Chamchamal (Iraq)
+ "Serêkanî", ; Kurdish name for Ra´s Al Ein (Syria)
+ "Şırnak", ; (Turkey)
+ "Bokan", ; Kurdish name for Bukan (Iran)
+ "Dîwandere", ; Kurdish name for Diwandarreh (Iran)
+ "İdil" ; (Turkey)

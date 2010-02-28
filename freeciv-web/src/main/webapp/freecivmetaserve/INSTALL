@@ -1,0 +1,74 @@
+Config
+======
+
+Local configuration is in file php_code/local.php.
+Values to configure:
+
+$metaURL
+  Address that Freeciv servers should use to contact this metaserver. This is only
+  used to instruct users. Default metaserver should probably set it NULL, others may
+  want to set it to "http://$_SERVER[SERVER_NAME]$_SERVER[REQUEST_URI]"
+
+$metaserver_url_path
+  Metaserver directory relative to server root. Last "/" is required, except if this is
+  pointing to webserver root.
+  Default value is "" (webserver root)
+
+$metaserver_root
+  Filesystem path to metaserver root.
+  Default value is "$_SERVER[DOCUMENT_ROOT]$metaserver_url_path"
+
+$versions_file
+  Filesystem name for file to read Freeciv version information from.
+  Default value is "$metaserver_root/versions"
+
+$fcdb_default_db
+  Name of the default database
+  Default value is "default"
+
+$fcdb_metaserver_db
+  Name of the metaserver database
+  Default value is "metaserver"
+
+$fcdb_username
+  MySQL username
+  Default value is "dude"
+
+$fcdb_pw
+  MySQL password
+  Default value is '' (no password)
+
+$pic_paths
+  Array of image search directories. Maps between filesystem layout and
+  webserver layout.
+
+  Default value searches from pics subdirectories under metaserver directory and webserver 
+  root directory:
+    $metaserver_root . "pics/" => $metaserver_url_path . "pics/",
+    $_SERVER[DOCUMENT_ROOT]/pics/ => "pics/"
+
+$webmaster_email
+  Email address for webmaster
+  Default value is NULL
+
+$webmaster_addr
+  Webmaster URL
+  Default value
+    if $webmaster_email set: "mailto:$webmaster_email"
+    otherwise NULL
+
+$webmaster_name
+  Name of the webmaster.
+  Default value is "Webmaster"
+
+$bugs_addr
+  Bug report URL
+  Default value is NULL
+
+$bugs_name
+  Where to send bug reports
+  Default value is NULL
+
+$metaserver_header
+  Main header to display on metaserver page
+  Default value is "Freeciv servers around the world"

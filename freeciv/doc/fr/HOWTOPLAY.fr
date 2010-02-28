@@ -1,0 +1,283 @@
+Freeciv playing HOWTO
+
+  Écrit initialement par Michael Hohensee (aka Zarchon)
+
+
+Si vous cherchez comment installer Freeciv, lisez le fichier INSTALL.fr
+Si vous cherchez comment lancer Freeciv, lisez le fichier README.fr
+
+Si vous n'avez jamais joué aux jeux Civilization, il sera plus facile de
+commencer par lire le "Freeciv Manual", disponible séparément aux
+endroits suivants :
+
+     http://www.freeciv.org/manual/manual.html
+     ftp://ftp.freeciv.org/pub/freeciv/contrib/manual/
+
+Si vous cherchez des idées pour jouer à Freeciv, continuez à lire !
+
+	Maintenant que Freeciv est lancé, vous allez vouloir jouer vos
+quelques première parties. Il est recommandé que vous jouiez quelques
+parties seul, afin d'avoir un aperçu du fonctionnement du jeu, mais ce
+n'est pas indispensable. Vous pouvez aussi apprendre en jouant contre
+d'autres humains, ou contre l'IA.
+
+Q : Pourrais-je avoir une stratégie de base ?
+
+	Tout d'abord, ce n'est pas une stratégie *parfaite*. On ne peut
+pas dire qu'elle soit vraiment bonne non plus. Mais elle vous permettra
+de commencer à jouer à Freeciv. Une partie de l'engouement pour Freeciv
+découle du développement de nouvelles stratégies.
+
+	La partie est divisée en plusieurs étapes :
+
+		La phase d'expansion initiale
+		La sous-phase technologique
+		La seconde phase d'expansion
+		La phase de production
+	    et la phase d'annihilation totale de vos ennemis
+
+L'expansion initiale :
+
+	 Cette phase est la plus critique. La première chose à faire est
+de construire des villes et d'explorer votre île. Vous devez faire
+beaucoup de villes (au moins 7 ou 8).
+
+	 Le but du jeu est d'occuper le plus de carrés de territoire
+possible.  Lors de la construction d'une ville, assurez-vous que vous ne
+recouvrez pas trop le territoire d'une autre de vos villes. Vous pouvez
+voir quels carrés sont utilisés par une ville en cliquant sur elle.  Le
+territoire occupé/occupable par la ville est visible sur cet écran.  En
+gardant ceci à l'esprit, essayez de construire vos villes suffisamment
+proches les unes des autres. Plus elles sont éloignées, plus elles sont
+difficiles à défendre et à gérer à ce stage (truc : essayez de
+construire sur des "chevaux" ou près de "poissons").
+
+	 Maintenant que vous avez une ville ou deux, vous devez régler
+le taux de science aussi haut que votre type de gouvernement le
+permet. Ne vous inquiétez pas des impôts étant donné que vous n'allez
+pas construire de bâtiments nécessitant des frais de fonctionnement,
+mais des colons. Plus vous aurez de colons, plus vous pourrez avoir de
+villes. Plus vous aurez de villes, plus vous gagnerez de
+technologies. Plus vous gagnerez de technologies, plus la victoire sera
+rapide. Après avoir construit autant de villes que votre coin de monde
+peut contenir, faites construire des routes et des irrigations à vos
+colons.
+
+[ Note : si la production de nourriture dans une ville tombe à +1 à
+cause du soutien d'un nombre important de colons et que vous ne pouvez
+pas réorganiser les habitants pour accroître la production de
+nourriture, construisez des temples. Si vous ne croisez pas d'autres
+joueurs, ne vous préoccupez pas de construire des unités militaires dès
+maintenant ]
+
+	 Pendant tout ce temps, vous avez gagné des technologies aussi
+vite que possible. Vos premiers buts sont "La République", puis
+"Démocratie" puis "Chemin de Fer" et enfin "Industrialisation" (certains
+passent par la Monarchie avant la République). Dès que vous avez
+découvert un nouveau type de gouvernement, déclenchez une révolution
+pour changer de gouvernement. Les villes fonctionnent bien mieux sous la
+République que sous le Despotisme mais il est plus difficile de garder
+des unités militaires en dehors des limites de la ville sous un régime
+républicain. De plus, n'oubliez pas de re-vérifier vos taux de taxe
+après les changements de gouvernement, étant donné que les maxima
+varient suivant chaque type.
+
+	  Lorsque vous avez la Démocratie, vous êtes prêt à passer à la
+seconde phase d'expansion. Pour ce faire, changez de gouvernement pour
+une Démocratie, faites construire des temples à toutes vos villes et
+mettez le taux de "luxe" à 100%. En faisant ceci, toutes les villes vont
+être en liesse et croître à un taux de un habitant par tour tant qu'il y
+aura du surplus de nourriture. Lorsqu'elles sont devenues suffisamment
+grandes, réglez le taux de luxe à un niveau plus raisonnable de
+20-40%. Vous êtes à présent en seconde phase d'expansion.
+
+	 L'inconvénient de tout ceci est qu'avec un taux de luxe de
+100%, votre recherche va totalement s'arrêter. Après que vos villes
+aient grandi, et que vous ayez remis la science à environ 50%, vous
+allez à nouveau gagner des technologies, mais à un rythme moins
+soutenu. Si vous avez fait un peu d'exploration, et que vous n'êtes pas
+directement menacé par un autre joueur, et ce serait donc une bonne idée
+de garder la science au maximum jusqu'à ce que les technologies
+deviennent trop longues à découvrir.
+	
+
+La seconde phase d'expansion :
+
+	Lorsque vos villes ont atteint une population raisonnable,
+diminuez progressivement le luxe et augmentez les taxes. Une fois que
+vous êtes descendu à environ 30 % de luxe, mettez le plus possible de
+taxes pour la recherche tout en maintenant des revenus positifs. Lorsque
+vous avez les chemins de fer, transformez toutes vos routes en chemins
+de fer, ou au moins les carrés utilisés pour la production ou qui font
+partie d'un réseau de transport (astuce : transformez chaque carré
+utilisé par une ville en route/rail afin d'accroître la production de
+cette ville. Ne vous occupez pas du carré central, c'est automatique).
+
+	Il est temps, à présent, de développer l'industrialisation et
+les technologies militaires. Vous devriez également commencer à
+construire des villes sur d'autres îles et à faire sérieusement de
+l'exploration, si ce n'est déjà fait. Vous avez besoin de découvrir où
+vos ennemis se situent. Faites des recherches propices aux bateaux et
+essayez de construire l'expédition de Magellan. Lorsque vous vous sentez
+prêt, passez à :
+
+
+La phase de production :
+
+	 À présent, vous construisez des usines et des centrales dans
+vos villes. Vous voulez tirer le maximum de production de chaque
+ville. La pollution devient un problème. Aussi tôt que vous le pouvez,
+essayez de rechercher la "Production de masse" pour les "Transports en
+commun", et le "Recyclage" pour pouvoir construire des "Usines de
+Recyclage". Une fois que toutes vos villes sont puissantes, vous devez
+construire des unités militiares (note : si vous rencontrez un autre
+joueur, vous devriez immédiatement construire quelques unités offensives
+et au moins une unité défensive par ville).
+
+	Quand vous voulez commencer à envisager d'attaquer quelqu'un,
+mettez la science à 0%, et augmentez les taxes autant que possible sans
+provoquer de révoltes. N'oubliez pas que l'or permet aussi de construire
+des unités !
+
+
+La phase d'annihilation totale de vos ennemis :
+
+	 Ceci peut se produire n'importe quand, mais c'est beaucoup plus
+amusant avec des armes avancées.
+
+	 Choisissez un ennemi relativement faible, et envoyez-lui
+quelques cargaisons de troupes. Capturez ses villes, et utilisez les
+pour produire d'autres unités, qui serviront à capturer le reste. Pas de
+quartiers ! À mort !
+
+Recommencez autant que nécessaire ! ;-)
+
+[ note pour les pacifistes : Freeciv permet aussi à un joueur de gagner
+en construisant et en lançant un vaisseau spatial qui arrive avant tout
+le monde sur Alpha du Centaure ]
+
+
+Autres questions :
+
+Q : Y-a-t-il d'autres stratégies ?
+
+	Il y a un certain nombre de tutoriaux et de guides de stratégie
+disponibles sur les pages web de Freeciv :
+
+	 http://www.freeciv.org/tutorials/tutorials.phtml
+
+L'aide en ligne de Freeciv décrit également une autre stratégie.
+
+
+Q : Dans les parties multijoueurs, quel timeout devrais-je mettre ?
+
+	Ceci dépend du nombre de joueurs. Si vous n'êtes que deux, un
+timeout de 0 devrait rester supportable. Si vous êtes plus de deux, ou
+si l'un des deux a des chances de quitter l'écran de son terminal à des
+intervalles aléatoires et que vous ne voulez pas que le jeu s'arrête
+pour autant, un timeout de 60 secondes est en général suffisant. Plus
+tard dans la partie, cependant, quand les choses deviennent plus
+complexes, vous voudrez sans doute étendre le timeout à 240 secondes. En
+général, plus il y a de joueurs, plus un timeout long sera
+nécessaire. N'hésitez pas à choisir un timeout qui paraît confortable,
+tout en sachant qu'un timeout au-dessus de 300 aura tendance à ennuyer
+les joueurs.
+
+
+Q : Quelle taille de carte devrais-je utiliser ?
+
+	La taille de la carte dépend du nombre de joueurs présents et à
+quelle vitesse vous voulez que la partie se termine. La taille de carte
+par défaut (80x50) est suffisamment grande pour une partie rapide à deux
+joueurs, mais donnera une partie *très* rapide si plus de trois joueurs
+participent.
+
+	Les parties rapides ont tendance à être frustrantes pour tout le
+monde sauf le vainqueur, étant donné que personne n'a vraiment eu le
+temps de développer quelque défense que ce soit. S'il y a plus de trois
+joueurs, vous devriez utiliser une carte de 80x80. S'il y a cinq joueurs
+ou plus, vous aurez sans doute besoin d'une carte de 100x100.
+
+
+Q : Qu'est-ce que l'option "generator" ?
+
+	Elle modifie le processus de génération de la carte. Si vous
+jouez à Freeciv quelques fois sans ce paramètre, vous entendrez
+certainement parler (ou vous en aurez l'expérience) des horreurs d'une
+petite île. Le syndrôme des petites îles (SPI [ NdT : TIS en Anglais,
+pour "Tiny Island Syndrom" ]) a la réputation de rendre les gens
+fous. Pour corriger ceci, nos chers et tendres développeurs ont créé
+l'option "generator". Lorsqu'elle est à 1, on obtient la carte normale,
+avec des îles de tailles différentes (qui peuvent être injustes). Mais
+lorsqu'elle est à 2, 3 ou 4, elle génère des îles de tailles égales
+(parfois avec des îles plus petites). Ainsi, personne ne peut plus se
+plaindre de perdre "à cause de cette s***té d'île".
+
+
+Q : Est-il raisonnable de rendre la partie plus facile en augmentant la
+    quantité d'or initiale ?
+
+	Si vous êtes inexpérimenté, et que vous jouez avec des gens
+inexpérimentés, personne ne trouvera sans doute d'inconvénient à
+augmenter la quantité d'or de départ. Ce n'est cependant pas une bonne
+façon d'apprendre à jouer. Commencer la partie avec beaucoup d'or rend
+la partie plus facile, mais il vous est plus difficile d'apprendre
+comment se débrouiller avec le montant d'or par défaut. Les joueurs les
+plus expérimentés ne modifient pas ce réglage. Or, s'ils savent comment
+se débrouiller avec et que vous ne savez pas, vous allez connaître le
+même sort que l'Atlantide.
+
+Note : on peut appliquer le même raisonnement aux options "techlevel"
+(niveau de technologie) et "researchspeed" (vitesse de recherche).
+
+
+Q : Un petit mot sur les autres paramètres ?
+
+	 Les autres touchent principalement au type de monde qui sera
+généré et aux mécanismes du jeu. Augmenter les "specials" vous donne de
+bonnes chances de ressources/carré et les "huts" déterminent combien de
+huttes indépendantes il y aura. Augmenter le nombre de colons ou
+d'explorateurs de départ rend la partie plus rapide, et permet aux
+joueurs de survivre à "ces $#@! de barbares" qui vivent parfois dans les
+huttes.
+
+	Les paramètres liés au chemin de fer déterminent combien un
+carré produira en plus de nourriture/commerce/production s'il y a un
+chemin de fer dessus. Le paramètre "foodbox" détermine combien de
+nourriture par habitant d'une ville est nécessaire avant qu'un nouvel
+habitant soit ajouté.
+
+        Comme pour le reste, un paramètre "moutains" plus haut implique
+une carte plus montagneuse, un paramètre "deserts" plus haut implique
+plus de déserts, etc.
+
+
+Q : Comment avoir la technologie XXX ?
+
+Consultez l'aide en ligne. Elle vous indique quelles technologies sont
+nécessaires pour pouvoir faire des recherches sur une nouvelle
+technologie.
+
+Sinon, vous pouvez télécharger le "techtree" de Daviid Pfitzner :
+http://msowww.anu.edu.au/~dwp/freeciv/.
+
+En dernier recours, vous pouvez lire les sources dans common/tech.c. Il
+y a une liste de toutes les technologies, et quelles technologies sont
+nécessaires pour pouvoir les avoir [ NdT : en Anglais ].
+
+
+Q : Quelles sont les unités militaires les plus utiles ?
+
+   Pour l'attaque :
+
+	Tanks, Hélicoptères, Missiles de croisière, Cuirassés, 
+	Transports, armes nucléaires, Obusiers, Bombardiers.
+
+   Pour la défense :
+
+	Tanks, Infanterie mobile, Obusiers, Cuirassés, 
+	Missiles de croisière, armes nucléaires.
+
+N"oubliez pas : la meilleure défense, c'est une attaque puissante.
+
+<Les ajouts à ce document sont les bienvenus>

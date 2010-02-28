@@ -1,0 +1,55 @@
+[nation_dutch]
+
+name=_("Dutch")
+plural=_("?plural:Dutch")
+groups="Modern", "Medieval", "European"
+legend=_("When the Holy Roman Emperor sentenced the entire population to\
+ death, the people of the Netherlands revolted and declared themselves\
+ independent, forming the Union of Utrecht in 1579. The Netherlands grew\
+ to be a dominant maritime and economic power in the 17th century.")
+leader=
+ "Willem I",
+ "Maurits",
+ "Emma",
+ "Wilhelmina",
+ "Juliana"
+leader_sex="Male", "Male", "Female", "Female", "Female"
+flag="netherlands"
+flag_alt = "holland"
+city_style = "European"
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Democracy", _("Prime Minister"),_("?female:Prime Minister")
+               }
+
+init_techs=""
+init_buildings=""
+
+init_government="Despotism"
+init_units=""
+civilwar_nations="boer", "belgian"
+
+;names from the Golden Age, from Holland circling outward
+;later important towns added at the end
+
+cities =
+  "Amsterdam (ocean)", "Utrecht", "Leiden", "Haarlem", "Delft", "Alkmaar",
+  "Hoorn (ocean)", "Enkhuizen (ocean)", "'s-Gravenhage (ocean)", "Dordrecht (river)",
+  "Gouda", "Naarden",
+  "Rotterdam (ocean)", "Delfshaven (river)", "Schiedam (river)", "Vlaardingen (river)",
+  "Middelburg", "Goes (ocean)", "Veere (ocean)", "Vlissingen (ocean)",
+  "Brouwershaven (ocean)",
+  "Deventer", "Kampen (river)", "Zutphen (river)", "Zwolle (river)", "Arnhem (river, forest)",
+  "Amersfoort (forest)",
+  "Groningen", "Leeuwarden", "Dokkum", "Sneek (river)", "Stavoren (ocean)",
+  "Franeker (river)",
+  "Breda (forest)", "'s-Hertogenbosch (forest)", "Nijmegen", "Venlo", "Roermond", "Maastricht (river, hills)",
+  "Helmond", "Eindhoven", "Bergen op Zoom", "Hulst", "Batavia (ocean)", 
+  "Willemstad (ocean)",
+  "Tilburg", "Enschede", "Hengelo", "Almelo", "Oss",
+  "Heerlen", "Sittard", "Geleen", "Weert",
+  "Apeldoorn (forest)", "Ede (forest)", "Wageningen (forest)", "Veenendaal",
+  "Assen", "Emmen", "Hoogeveen", "Drachten", "Delfzijl (ocean)", "Veendam (river)",
+  "Zaandam (river)", "Beverwijk", "Velsen", "Purmerend", "Hilversum (forest)", "Bussum (forest)",
+  "Alphen a/d Rijn (river)", "Zoetermeer", "Woerden", "Capelle a/d IJssel (river)",
+  "Spijkenisse (river)", "Terneuzen (ocean)", "Emmeloord (ocean)", "Lelystad (ocean)", 
+  "Almere (ocean)"

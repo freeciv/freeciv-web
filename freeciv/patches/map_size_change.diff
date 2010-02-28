@@ -1,0 +1,16 @@
+Index: map.h
+===================================================================
+--- map.h	(revisjon 30)
++++ map.h	(arbeidskopi)
+@@ -468,9 +468,9 @@
+ #define MAP_MAX_HUTS             500
+ 
+ /* Size of the map in thousands of tiles */
+-#define MAP_DEFAULT_SIZE         4
++#define MAP_DEFAULT_SIZE         3
+ #define MAP_MIN_SIZE             1
+-#define MAP_MAX_SIZE             29
++#define MAP_MAX_SIZE             15
+ 
+ /* This defines the maximum linear size in _map_ coordinates.
+  * This must be smaller than 255 because of the way coordinates are sent

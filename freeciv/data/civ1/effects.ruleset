@@ -1,0 +1,1286 @@
+; Modifying this file:
+; You should not modify this file except to make bugfixes or
+; for other "maintenance".  If you want to make custom changes,
+; you should create a new datadir subdirectory and copy this file
+; into that directory, and then modify that copy.  Then use the
+; command "rulesetdir <mysubdir>" in the server to have freeciv
+; use your new customized file.
+
+; Note that the freeciv AI may not cope well with anything more
+; than minor changes.
+
+[datafile]
+description="Civ1 effects data for Freeciv (approximate)"
+options="1.0"
+
+; /* <-- avoid gettext warnings
+; */ <-- avoid gettext warnings
+
+; Cheating AI effects are in separate file
+*include "default/ai_effects.ruleset"
+
+[effect_unhappysize]
+name    = "City_Unhappy_Size"
+value   = 4
+
+; Specialist output bonuses
+
+[effect_gov_tile_bonus_0]
+name    = "Output_Penalty_Tile"
+value   = 2
+reqs  =
+    { "type",       "name",      "range"
+      "Gov", "Anarchy", "Player"
+    }
+
+[effect_gov_tile_bonus_1]
+name    = "Output_Penalty_Tile"
+value   = 2
+reqs  =
+    { "type",       "name",      "range"
+      "Gov", "Despotism", "Player"
+    }
+
+[effect_gov_tile_bonus_2]
+name    = "Output_Inc_Tile_Celebrate"
+value   = 1
+reqs  =
+    { "type",       "name",      "range"
+      "OutputType", "Trade", "Local"
+      "Gov", "Monarchy", "Player"
+    }
+
+[effect_gov_tile_bonus_3]
+name    = "Output_Inc_Tile_Celebrate"
+value   = 1
+reqs  =
+    { "type",       "name",      "range"
+      "OutputType", "Trade", "Local"
+      "Gov", "Communism", "Player"
+    }
+
+[effect_gov_tile_bonus_4]
+name    = "Output_Inc_Tile"
+value   = 1
+reqs  =
+    { "type",       "name",      "range"
+      "Gov", "Republic", "Player"
+      "OutputType", "Trade", "Local"
+    }
+
+[effect_gov_tile_bonus_5]
+name    = "Output_Inc_Tile"
+value   = 1
+reqs  =
+    { "type",       "name",      "range"
+      "Gov", "Democracy", "Player"
+      "OutputType", "Trade", "Local"
+    }
+
+[effect_corruption_anarchy0]
+name  = "Output_Waste"
+value = 25
+reqs  =
+    { "type", "name", "range"
+      "Gov", "Anarchy", "Player"
+      "OutputType", "Trade", "Local"
+    }
+
+[effect_corruption_anarchy1]
+name  = "Output_Waste_By_Distance"
+value = 2
+reqs  =
+    { "type", "name", "range"
+      "Gov", "Anarchy", "Player"
+      "OutputType", "Trade", "Local"
+    }
+
+[effect_corruption_despotism0]
+name  = "Output_Waste"
+value = 37
+reqs  =
+    { "type", "name", "range"
+      "Gov", "Despotism", "Player"
+      "OutputType", "Trade", "Local"
+    }
+
+[effect_corruption_despotism1]
+name  = "Output_Waste_By_Distance"
+value = 4
+reqs  =
+    { "type", "name", "range"
+      "Gov", "Despotism", "Player"
+      "OutputType", "Trade", "Local"
+    }
+
+[effect_corruption_monarchy0]
+name  = "Output_Waste"
+value = 15
+reqs  =
+    { "type", "name", "range"
+      "Gov", "Monarchy", "Player"
+      "OutputType", "Trade", "Local"
+    }
+
+[effect_corruption_monarchy1]
+name  = "Output_Waste_By_Distance"
+value = 2
+reqs  =
+    { "type", "name", "range"
+      "Gov", "Monarchy", "Player"
+      "OutputType", "Trade", "Local"
+    }
+
+[effect_corruption_communism0]
+name  = "Output_Waste"
+value = 20
+reqs  =
+    { "type", "name", "range"
+      "Gov", "Communism", "Player"
+      "OutputType", "Trade", "Local"
+    }
+
+[effect_corruption_republic0]
+name  = "Output_Waste"
+value = 15
+reqs  =
+    { "type", "name", "range"
+      "Gov", "Republic", "Player"
+      "OutputType", "Trade", "Local"
+    }
+
+[effect_corruption_republic1]
+name  = "Output_Waste_By_Distance"
+value = 2
+reqs  =
+    { "type", "name", "range"
+      "Gov", "Republic", "Player"
+      "OutputType", "Trade", "Local"
+    }
+
+[effect_elvis]
+name    = "Specialist_Output"
+value   = 2
+reqs    =
+    { "type", "name", "range"
+      "Specialist", "elvis", "Local"
+      "OutputType", "luxury", "Local"
+    }
+
+[effect_scientist]
+name    = "Specialist_Output"
+value   = 2
+reqs    =
+    { "type", "name", "range"
+      "Specialist", "scientist", "Local"
+      "OutputType", "science", "Local"
+    }
+
+[effect_taxman]
+name    = "Specialist_Output"
+value   = 2
+reqs    =
+    { "type", "name", "range"
+      "Specialist", "taxman", "Local"
+      "OutputType", "gold", "Local"
+    }
+
+; Barbarian effects
+
+[effect_barb1]
+name    = "No_Diplomacy"
+value   = 1
+reqs    =
+    { "type",   "name", "range"
+      "Nation", "Barbarian", "Player"
+    }
+
+; Fortress HP regen
+[effect_fortress_hp_regen]
+name	= "HP_Regen"
+value	= 100
+reqs	=
+    { "type", "name", "range"
+      "Base", "Fortress", "Tile"
+      "UnitClass", "Land", "Local"
+    }
+
+; Base vision range - radius of vision is sqrt(5) = 2.24
+[effect_city_vision]
+name    = "City_Vision_Radius_Sq"
+value   = 5
+
+[effect_base_unit_upkeep]
+name  = "Upkeep_Factor"
+value = 1
+
+[effect_republic_unit_upkeep]
+name  = "Upkeep_Factor"
+value = 1
+reqs   =
+    { "type", "name", "range"
+      "Gov", "Republic", "Player"
+      "OutputType", "Food", "Local"
+    }
+
+[effect_democracy_unit_upkeep]
+name  = "Upkeep_Factor"
+value = 1
+reqs   =
+    { "type", "name", "range"
+      "Gov", "Democracy", "Player"
+      "OutputType", "Food", "Local"
+    }
+
+[effect_republic_unit_unhappiness]
+name  = "Unhappy_Factor"
+value = 1
+reqs   =
+    { "type", "name", "range"
+      "Gov", "Republic", "Player"
+    }
+
+[effect_democracy_unit_unhappiness]
+name  = "Unhappy_Factor"
+value = 2
+reqs   =
+    { "type", "name", "range"
+      "Gov", "Democracy", "Player"
+    }
+
+[effect_upkeep_free_units_anarchy]
+name  = "Unit_Upkeep_Free_Per_City"
+value = 3
+reqs   =
+    { "type", "name", "range"
+      "Gov", "Anarchy", "Player"
+      "OutputType", "Shield", "Local"
+    }
+
+[effect_upkeep_free_units_despotism]
+name  = "Unit_Upkeep_Free_Per_City"
+value = 3
+reqs   =
+    { "type", "name", "range"
+      "Gov", "Despotism", "Player"
+      "OutputType", "Shield", "Local"
+    }
+
+[effect_civil_war_0]
+name    = "Civil_War_Chance"
+value   = 90
+reqs    =
+    { "type",       "name",      "range"
+      "Gov", "Anarchy",   "Player"
+    }
+
+[effect_civil_war_1]
+name    = "Civil_War_Chance"
+value   = 80
+reqs    =
+    { "type",       "name",      "range"
+      "Gov", "Despotism", "Player"
+    }
+
+[effect_civil_war_2]
+name    = "Civil_War_Chance"
+value   = 70
+reqs    =
+    { "type",       "name",      "range"
+      "Gov", "Monarchy",  "Player"
+    }
+
+[effect_civil_war_3]
+name    = "Civil_War_Chance"
+value   = 50
+reqs    =
+    { "type",       "name",      "range"
+      "Gov", "Communism", "Player"
+    }
+
+[effect_civil_war_4]
+name    = "Civil_War_Chance"
+value   = 40
+reqs    =
+    { "type",       "name",      "range"
+      "Gov", "Republic",  "Player"
+    }
+
+[effect_civil_war_5]
+name    = "Civil_War_Chance"
+value   = 30
+reqs    =
+    { "type",       "name",      "range"
+      "Gov", "Democracy", "Player"
+    }
+
+[effect_empire_size_base_0]
+name    = "Empire_Size_Base"
+value   = 9
+reqs    =
+    { "type",       "name",      "range"
+      "Gov", "Anarchy",   "Player"
+    }
+
+[effect_empire_size_base_1]
+name    = "Empire_Size_Base"
+value   = 10
+reqs    =
+    { "type",       "name",      "range"
+      "Gov", "Despotism", "Player"
+    }
+
+[effect_empire_size_base_2]
+name    = "Empire_Size_Base"
+value   = 11
+reqs    =
+    { "type",       "name",      "range"
+      "Gov", "Monarchy",  "Player"
+    }
+
+[effect_empire_size_base_3]
+name    = "Empire_Size_Base"
+value   = 12
+reqs    =
+    { "type",       "name",      "range"
+      "Gov", "Communism", "Player"
+    }
+
+[effect_empire_size_base_4]
+name    = "Empire_Size_Base"
+value   = 13
+reqs    =
+    { "type",       "name",      "range"
+      "Gov", "Republic",  "Player"
+    }
+
+[effect_empire_size_base_5]
+name    = "Empire_Size_Base"
+value   = 14
+reqs    =
+    { "type",       "name",      "range"
+      "Gov", "Democracy",  "Player"
+    }
+
+; FIXME: How this should work in Civ1?
+;        This just makes it playable.
+[effect_empire_size_step]
+name    = "Empire_Size_Step"
+value   = 10
+
+[effect_max_rates_0]
+name    = "Max_Rates"
+value   = 100
+reqs    =
+    { "type",       "name",      "range"
+      "Gov", "Anarchy",   "Player"
+    }
+
+[effect_max_rates_1]
+name    = "Max_Rates"
+value   = 60
+reqs    =
+    { "type",       "name",      "range"
+      "Gov", "Despotism", "Player"
+    }
+
+[effect_max_rates_2]
+name    = "Max_Rates"
+value   = 70
+reqs    =
+    { "type",       "name",      "range"
+      "Gov", "Monarchy",  "Player"
+    }
+
+[effect_max_rates_3]
+name    = "Max_Rates"
+value   = 80
+reqs    =
+    { "type",       "name",      "range"
+      "Gov", "Communism", "Player"
+    }
+
+[effect_max_rates_4]
+name    = "Max_Rates"
+value   = 80
+reqs    =
+    { "type",       "name",      "range"
+      "Gov", "Republic",  "Player"
+    }
+
+[effect_max_rates_5]
+name    = "Max_Rates"
+value   = 100
+reqs    =
+    { "type",       "name",      "range"
+      "Gov", "Democracy", "Player"
+    }
+
+[effect_martial_law_each_0]
+name    = "Martial_Law_Each"
+value   = 1
+reqs    =
+    { "type",       "name",      "range"
+      "Gov", "Anarchy",   "Player"
+    }
+
+[effect_martial_law_each_1]
+name    = "Martial_Law_Each"
+value   = 1
+reqs    =
+    { "type",       "name",      "range"
+      "Gov", "Despotism", "Player"
+    }
+
+[effect_martial_law_each_2]
+name    = "Martial_Law_Each"
+value   = 1
+reqs    =
+    { "type",       "name",      "range"
+      "Gov", "Monarchy",  "Player"
+    }
+
+[effect_martial_law_each_3]
+name    = "Martial_Law_Each"
+value   = 1
+reqs    =
+    { "type",       "name",      "range"
+      "Gov", "Communism", "Player"
+    }
+
+[effect_martial_law_max_0]
+name    = "Martial_Law_Max"
+value   = 100
+reqs    =
+    { "type",       "name",      "range"
+      "Gov", "Anarchy",   "Player"
+    }
+
+[effect_martial_law_max_1]
+name    = "Martial_Law_Max"
+value   = 100
+reqs    =
+    { "type",       "name",      "range"
+      "Gov", "Despotism", "Player"
+    }
+
+[effect_martial_law_max_2]
+name    = "Martial_Law_Max"
+value   = 3
+reqs    =
+
+    { "type",       "name",      "range"
+      "Gov", "Monarchy",  "Player"
+    }
+
+[effect_martial_law_max_3]
+name    = "Martial_Law_Max"
+value   = 100
+reqs    =
+    { "type",       "name",      "range"
+      "Gov", "Communism", "Player"
+    }
+
+[effect_rapture_grow_0]
+name    = "Rapture_Grow"
+value   = 1
+reqs    =
+    { "type",       "name",      "range"
+      "Gov", "Republic",  "Player"
+    }
+
+[effect_rapture_grow_1]
+name    = "Rapture_Grow"
+value   = 1
+reqs    =
+    { "type",       "name",      "range"
+      "Gov", "Democracy", "Player"
+    }
+
+[effect_democracy_0]
+name    = "Unbribable_Units"
+value   = 1
+reqs    =
+    { "type",       "name",      "range"
+      "Gov", "Democracy", "Player"
+    }
+
+[effect_democracy_1]
+name    = "No_Incite"
+value   = 1
+reqs    =
+    { "type",       "name",      "range"
+      "Gov", "Democracy", "Player"
+    }
+
+[effect_communism_0]
+name    = "Veteran_Build"
+value   = 1
+reqs    =
+    { "type",       "name",      "range"
+      "Gov", "Communism", "Player"
+      "UnitFlag", "Diplomat", "Local"
+    }
+
+[effect_revolution_0]
+name    = "Revolution_When_Unhappy"
+value   = 1
+reqs    =
+    { "type",       "name",      "range"
+      "Gov", "Democracy", "Player"
+    }
+
+[effect_senate_0]
+name    = "Has_Senate"
+value   = 1
+reqs    =
+    { "type",       "name",      "range"
+      "Gov", "Republic",  "Player"
+    }
+
+[effect_senate_1]
+name    = "Has_Senate"
+value   = 1
+reqs    =
+    { "type",       "name",      "range"
+      "Gov", "Democracy", "Player"
+    }
+
+; Base max city size of 10
+[effect_aqueduct_size]
+name    = "Size_Adj"
+value   = 10
+
+[effect_aqueduct]
+name	= "Size_Unlimit"
+value	= 1
+reqs	=
+    { "type", "name", "range"
+      "Building", "Aqueduct", "City"
+    }
+
+[effect_bank]
+name	= "Output_Bonus"
+value	= 50
+reqs	=
+    { "type", "name", "range"
+      "Building", "Marketplace", "City"
+      "Building", "Bank", "City"
+      "OutputType", "Gold", "Local"
+    }
+
+[effect_bank_1]
+name	= "Output_Bonus"
+value	= 50
+reqs	=
+    { "type", "name", "range"
+      "Building", "Marketplace", "City"
+      "Building", "Bank", "City"
+      "OutputType", "Luxury", "Local"
+    }
+
+[effect_barracks]
+name	= "Veteran_Build"
+value	= 1
+reqs	=
+    { "type", "name", "range"
+      "Building", "Barracks", "City"
+    }
+
+[effect_barracks_ii]
+name	= "Veteran_Build"
+value	= 1
+reqs	=
+    { "type", "name", "range"
+      "Building", "Barracks II", "City"
+    }
+
+[effect_barracks_iii]
+name	= "Veteran_Build"
+value	= 1
+reqs	=
+    { "type", "name", "range"
+      "Building", "Barracks III", "City"
+    }
+
+[effect_cathedral]
+name	= "Make_Content"
+value	= 4
+reqs	=
+    { "type", "name", "range"
+      "Building", "Cathedral", "City"
+    }
+
+[effect_city_walls]
+name	= "Defend_Bonus"
+value	= 200
+reqs	=
+    { "type", "name", "range"
+      "Building", "City Walls", "City"
+      "UnitClass", "Land", "Local"
+    }
+nreqs	=
+    { "type", "name", "range"
+      "Building", "Great Wall", "Player"
+    }
+
+[effect_city_walls_1]
+name	= "Defend_Bonus"
+value	= 200
+reqs	=
+    { "type", "name", "range"
+      "Building", "City Walls", "City"
+      "UnitClass", "Sea", "Local"
+    }
+nreqs	=
+    { "type", "name", "range"
+      "Building", "Great Wall", "Player"
+    }
+
+[effect_city_walls_2]
+name	= "Unit_No_Lose_Pop"
+value	= 1
+reqs	=
+    { "type", "name", "range"
+      "Building", "City Walls", "City"
+    }
+
+[effect_city_walls_visible]
+name	= "Visible_Walls"
+value	= 1
+reqs	=
+    { "type", "name", "range"
+      "Building", "City Walls", "City"
+    }
+
+[effect_colosseum]
+name	= "Make_Content"
+value	= 3
+reqs	=
+    { "type", "name", "range"
+      "Building", "Colosseum", "City"
+    }
+
+[effect_courthouse]
+name	= "Output_Waste_Pct"
+value	= 50
+reqs	=
+    { "type", "name", "range"
+      "Building", "Courthouse", "City"
+      "OutputType", "Trade", "Local"
+    }
+nreqs	=
+    { "type", "name", "range"
+      "Building", "Palace", "City"
+    }
+
+;[effect_courthouse_1]
+;name	= "Output_Waste_Pct"
+;value	= 50
+;reqs	=
+;    { "type", "name", "range"
+;      "Building", "Courthouse", "City"
+;      "OutputType", "shield", "local"
+;    }
+;nreqs	=
+;    { "type", "name", "range"
+;      "Building", "Palace", "City"
+;    }
+
+[effect_factory]
+name	= "Output_Bonus"
+value	= 50
+reqs	=
+    { "type", "name", "range"
+      "Building", "Factory", "City"
+      "OutputType", "Shield", "Local"
+    }
+nreqs	=
+    { "type", "name", "range"
+      "Building", "Mfg. Plant", "City"
+    }
+
+[effect_granary]
+name	= "Growth_Food"
+value	= 50
+reqs	=
+    { "type", "name", "range"
+      "Building", "Granary", "City"
+    }
+
+[effect_hydro_plant]
+name	= "Output_Bonus"
+value	= 50
+reqs	=
+    { "type", "name", "range"
+      "Building", "Hydro Plant", "City"
+      "OutputType", "shield", "local"
+    }
+nreqs	=
+    { "type", "name", "range"
+      "Building", "Hoover Dam", "Player"
+      "Building", "Nuclear Plant", "City"
+    }
+
+[effect_hydro_plant_1]
+name	= "Pollu_Prod_Pct"
+value	= -50
+reqs	=
+    { "type", "name", "range"
+      "Building", "Hydro Plant", "City"
+    }
+nreqs	=
+    { "type", "name", "range"
+      "Building", "Recycling Center", "City"
+      "Building", "Hoover Dam", "Player"
+      "Building", "Nuclear Plant", "City"
+    }
+
+[effect_library]
+name	= "Output_Bonus"
+value	= 50
+reqs	=
+    { "type", "name", "range"
+      "Building", "Library", "City"
+      "OutputType", "science", "local"
+    }
+
+[effect_marketplace]
+name	= "Output_Bonus"
+value	= 50
+reqs	=
+    { "type", "name", "range"
+      "Building", "Marketplace", "City"
+      "OutputType", "gold", "local"
+    }
+
+[effect_marketplace_1]
+name	= "Output_Bonus"
+value	= 50
+reqs	=
+    { "type", "name", "range"
+      "Building", "Marketplace", "City"
+      "OutputType", "luxury", "local"
+    }
+
+[effect_mass_transit]
+name	= "Pollu_Pop_Pct"
+value	= -100
+reqs	=
+    { "type", "name", "range"
+      "Building", "Mass Transit", "City"
+    }
+
+[effect_mfg_plant]
+name	= "Output_Bonus"
+value	= 100
+reqs	=
+    { "type", "name", "range"
+      "Building", "Mfg. Plant", "City"
+      "OutputType", "shield", "local"
+    }
+
+[effect_nuclear_plant]
+name	= "Output_Bonus"
+value	= 50
+reqs	=
+    { "type", "name", "range"
+      "Building", "Nuclear Plant", "City"
+      "OutputType", "shield", "local"
+    }
+nreqs	=
+    { "type", "name", "range"
+      "Building", "Hoover Dam", "Player"
+    }
+
+[effect_nuclear_plant_1]
+name	= "Pollu_Prod_Pct"
+value	= -50
+reqs	=
+    { "type", "name", "range"
+      "Building", "Nuclear Plant", "City"
+    }
+nreqs	=
+    { "type", "name", "range"
+      "Building", "Recycling Center", "City"
+      "Building", "Hoover Dam", "Player"
+    }
+
+[effect_palace]
+name	= "Output_Waste_Pct"
+value	= 50
+reqs	=
+    { "type", "name", "range"
+      "Building", "Palace", "City"
+      "OutputType", "trade", "local"
+    }
+
+[effect_palace_1]
+name	= "Output_Waste_Pct"
+value	= 50
+reqs	=
+    { "type", "name", "range"
+      "Building", "Palace", "City"
+      "OutputType", "shield", "local"
+    }
+
+[effect_palace_2]
+name	= "Spy_Resistant"
+value	= 50
+reqs	=
+    { "type", "name", "range"
+      "Building", "Palace", "City"
+    }
+
+[effect_palace_3]
+name	= "No_Incite"
+value	= 1
+reqs	=
+    { "type", "name", "range"
+      "Building", "Palace", "City"
+    }
+
+[effect_palace_4]
+name	= "Capital_City"
+value	= 1
+reqs	=
+    { "type", "name", "range"
+      "Building", "Palace", "City"
+    }
+
+[effect_power_plant]
+name	= "Output_Bonus"
+value	= 50
+reqs	=
+    { "type", "name", "range"
+      "Building", "Power Plant", "City"
+      "OutputType", "shield", "local"
+    }
+nreqs	=
+    { "type", "name", "range"
+      "Building", "Hoover Dam", "Player"
+      "Building", "Nuclear Plant", "City"
+      "Building", "Hydro Plant", "City"
+    }
+
+[effect_recycling_center]
+name	= "Pollu_Prod_Pct"
+value	= -66
+reqs	=
+    { "type", "name", "range"
+      "Building", "Recycling Center", "City"
+    }
+
+[effect_sdi_defense]
+name	= "Nuke_Proof"
+value	= 100
+reqs	=
+    { "type", "name", "range"
+      "Building", "SDI Defense", "City"
+    }
+
+[effect_space_component]
+name	= "SS_Component"
+value	= 1
+reqs	=
+    { "type", "name", "range"
+      "Building", "Space Component", "City"
+    }
+
+[effect_space_module]
+name	= "SS_Module"
+value	= 1
+reqs	=
+    { "type", "name", "range"
+      "Building", "Space Module", "City"
+    }
+
+[effect_space_structural]
+name	= "SS_Structural"
+value	= 1
+reqs	=
+    { "type", "name", "range"
+      "Building", "Space Structural", "City"
+    }
+
+[effect_temple]
+name	= "Make_Content"
+value	= 1
+reqs	=
+    { "type", "name", "range"
+      "Building", "Temple", "City"
+    }
+
+[effect_temple_1]
+name	= "Make_Content"
+value	= 1
+reqs	=
+    { "type", "name", "range"
+      "Tech", "Mysticism", "Player"
+      "Building", "Temple", "City"
+    }
+
+[effect_university]
+name	= "Output_Bonus"
+value	= 50
+reqs	=
+    { "type", "name", "range"
+      "Building", "Library", "City"
+      "Building", "University", "City"
+      "OutputType", "science", "local"
+    }
+
+[effect_apollo_program]
+name	= "Reveal_Cities"
+value	= 1
+reqs	=
+    { "type", "name", "range"
+      "Building", "Apollo Program", "Player"
+    }
+
+[effect_apollo_program_1]
+name	= "Enable_Space"
+value	= 1
+reqs	=
+    { "type", "name", "range", "survives"
+      "Building", "Apollo Program", "World", 1
+    }
+
+[effect_colossus]
+name	= "Output_Inc_Tile"
+value	= 1
+reqs	=
+    { "type", "name", "range"
+      "Building", "Colossus", "City"
+      "OutputType", "trade", "local"
+    }
+
+[effect_copernicus_observatory]
+name	= "Output_Bonus"
+value	= 50
+reqs	=
+    { "type", "name", "range"
+      "Building", "Library", "City"
+      "Building", "Copernicus' Observatory", "City"
+      "OutputType", "science", "local"
+    }
+
+[effect_copernicus_observatory_1]
+name	= "Output_Bonus"
+value	= 50
+reqs	=
+    { "type", "name", "range"
+      "Building", "University", "City"
+      "Building", "Copernicus' Observatory", "City"
+      "OutputType", "science", "local"
+    }
+
+[effect_copernicus_observatory_2]
+name	= "Output_Bonus"
+value	= 100
+reqs	=
+    { "type", "name", "range"
+      "Building", "Copernicus' Observatory", "City"
+      "OutputType", "science", "local"
+    }
+
+[effect_cure_for_cancer]
+name	= "Force_Content"
+value	= 1
+reqs	=
+    { "type", "name", "range"
+      "Building", "Cure For Cancer", "Player"
+    }
+
+[effect_darwins_voyage]
+name	= "Give_Imm_Tech"
+value	= 2
+reqs	=
+    { "type", "name", "range"
+      "Building", "Darwin's Voyage", "Player"
+    }
+
+[effect_great_library]
+name	= "Tech_Parasite"
+value	= 2
+reqs	=
+    { "type", "name", "range"
+      "Building", "Great Library", "Player"
+    }
+
+[effect_great_wall]
+name	= "Defend_Bonus"
+value	= 200
+reqs	=
+    { "type", "name", "range"
+      "Building", "Great Wall", "Player"
+      "UnitClass", "Land", "Local"
+    }
+
+[effect_great_wall_1]
+name	= "Defend_Bonus"
+value	= 200
+reqs	=
+    { "type", "name", "range"
+      "Building", "Great Wall", "Player"
+      "UnitClass", "Sea", "Local"
+    }
+
+[effect_great_wall_visible]
+name	= "Visible_Walls"
+value	= 1
+reqs	=
+    { "type", "name", "range"
+      "Building", "Great Wall", "Player"
+    }
+
+[effect_hanging_gardens]
+name	= "Make_Happy"
+value	= 1
+reqs	=
+    { "type", "name", "range"
+      "Building", "Hanging Gardens", "Player"
+    }
+
+[effect_hoover_dam]
+name	= "Output_Bonus"
+value	= 50
+reqs	=
+    { "type", "name", "range"
+      "Building", "Hoover Dam", "Continent"
+      "OutputType", "shield", "local"
+    }
+
+[effect_hoover_dam_1]
+name	= "Pollu_Prod_Pct"
+value	= -50
+reqs	=
+    { "type", "name", "range"
+      "Building", "Hoover Dam", "Continent"
+    }
+nreqs	=
+    { "type", "name", "range"
+      "Building", "Recycling Center", "City"
+    }
+
+[effect_isaac_newtons_college]
+name	= "Output_Bonus"
+value	= 50
+reqs	=
+    { "type", "name", "range"
+      "Building", "Library", "City"
+      "Building", "Isaac Newton's College", "City"
+      "OutputType", "science", "local"
+    }
+
+[effect_isaac_newtons_college_1]
+name	= "Output_Bonus"
+value	= 50
+reqs	=
+    { "type", "name", "range"
+      "Building", "University", "City"
+      "Building", "Isaac Newton's College", "Player"
+      "OutputType", "science", "local"
+    }
+
+[effect_js_bachs_cathedral]
+name	= "Force_Content"
+value	= 2
+reqs	=
+    { "type", "name", "range"
+      "Building", "J.S. Bach's Cathedral", "Continent"
+    }
+
+[effect_lighthouse]
+name	= "Move_Bonus"
+value	= 1
+reqs	=
+    { "type", "name", "range"
+      "Building", "Lighthouse", "Player"
+      "UnitClass", "Sea", "Local"
+    }
+
+[effect_magellans_expedition]
+name	= "Move_Bonus"
+value	= 1
+reqs	=
+    { "type", "name", "range"
+      "Building", "Magellan's Expedition", "Player"
+      "UnitClass", "Sea", "Local"
+    }
+
+[effect_manhattan_project]
+name	= "Enable_Nuke"
+value	= 1
+reqs	=
+    { "type", "name", "range", "survives"
+      "Building", "Manhattan Project", "World", 1
+    }
+
+[effect_michelangelos_chapel]
+name	= "Make_Content"
+value	= 4
+reqs	=
+    { "type", "name", "range"
+      "Building", "Cathedral", "City"
+      "Building", "Michelangelo's Chapel", "City"
+    }
+
+[effect_oracle]
+name	= "Make_Content"
+value	= 2
+reqs	=
+    { "type", "name", "range"
+      "Building", "Temple", "City"
+      "Building", "Oracle", "Player"
+    }
+
+[effect_pyramids]
+name	= "Any_Government"
+value	= 1
+reqs	=
+    { "type", "name", "range"
+      "Building", "Pyramids", "Player"
+    }
+
+[effect_pyramids_1]
+name	= "No_Anarchy"
+value	= 1
+reqs	=
+    { "type", "name", "range"
+      "Building", "Pyramids", "Player"
+    }
+
+[effect_seti_program]
+name	= "Output_Bonus"
+value	= 50
+reqs	=
+    { "type", "name", "range"
+      "Building", "SETI Program", "Player"
+      "OutputType", "science", "local"
+    }
+
+[effect_shakespeares_theatre]
+name	= "No_Unhappy"
+value	= 1
+reqs	=
+    { "type", "name", "range"
+      "Building", "Shakespeare's Theatre", "City"
+    }
+
+[effect_united_nations]
+name	= "Any_Government"
+value	= 1
+reqs	=
+    { "type", "name", "range"
+      "Building", "United Nations", "Player"
+    }
+
+[effect_united_nations_1]
+name	= "No_Anarchy"
+value	= 1
+reqs	=
+    { "type", "name", "range"
+      "Building", "United Nations", "Player"
+    }
+
+[effect_womens_suffrage]
+name	= "Make_Content_Mil_Per"
+value	= 1
+reqs	=
+    { "type", "name", "range"
+      "Building", "Women's Suffrage", "Player"
+    }
+
+[effect_flight_trade_revenue_reduce]
+name    = "Trade_Revenue_Bonus"
+value   = -585
+reqs    =
+    { "type", "name", "range"
+      "Tech", "Flight", "Player"
+    }
+    
+[effect_railroad_trade_revenue_reduce]
+name    = "Trade_Revenue_Bonus"
+value   = -585
+reqs    =
+    { "type", "name", "range"
+      "Tech", "Railroad", "Player"
+    }
+
+; FIXME: Calendar effects are copied from default rulesets and are
+; probably wrong for civ1 ruleset.
+[effect_calendar_base]
+name    = "Turn_Years"
+value   = 50
+
+; 50 - 25 = 25
+[effect_calendar_1]
+name    = "Turn_Years"
+value   = -25
+reqs    =
+    { "type", "name", "range"
+      "MinYear", "-1000", "World"
+    }
+
+; 25 - 5 = 20
+[effect_calendar_2]
+name    = "Turn_Years"
+value   = -5
+reqs    =
+    { "type", "name", "range"
+      "MinYear", "0", "World"
+    }
+
+; 20 - 10 = 10
+[effect_calendar_3]
+name    = "Turn_Years"
+value   = -10
+reqs    =
+    { "type", "name", "range"
+      "MinYear", "1000", "World"
+    }
+
+; 10 - 5 = 5
+[effect_calendar_4]
+name    = "Turn_Years"
+value   = -5
+reqs    =
+    { "type", "name", "range"
+      "MinYear", "1500", "World"
+    }
+
+; 5 - 3 = 2
+[effect_calendar_5]
+name    = "Turn_Years"
+value   = -3
+reqs    =
+    { "type", "name", "range"
+      "MinYear", "1750", "World"
+    }
+
+; 2 - 1 = 1
+[effect_calendar_6]
+name    = "Turn_Years"
+value   = -1
+reqs    =
+    { "type", "name", "range"
+      "MinYear", "1900", "World"
+    }
+
+[effect_tech_cost_base]
+name    = "Tech_Cost_Factor"
+value   = 1
+
+[effect_tech_cost_double]
+name    = "Tech_Cost_Factor"
+value   = 1
+reqs    =
+    { "type", "name", "range"
+      "MinYear", "1", "World"
+    }
+
+; Cities can always work tiles
+[effect_tile_workable]
+name    = "Tile_Workable"
+value   = 1

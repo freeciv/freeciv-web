@@ -1,0 +1,114 @@
+[nation_southkorean]
+
+name=_("South Korean")
+plural=_("?plural:South Koreans")
+groups="Modern", "Asian"
+legend=_("Formerly the site of a unified Korean state, the Korean\
+ peninsula is today divided into two states - North and South Korea -\
+ as a result of the stalemate after the Korean War in 1953. The South\
+ Korean government was formed from the nationalist and anti-communist\
+ \"Provisional Government of the Republic of Korea\" in 1948.")
+leader=
+ "Kim Gu",
+ "Rhee Syng-man",
+ "Yun Bo-seon",
+ "Park Chung-hee",
+ "Choi Kyu-hah"
+leader_sex="Male", "Male", "Male", "Male", "Male"
+
+flag="korea"
+flag_alt = "-"
+city_style = "Asian"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations = "north korean"
+
+; Sorted according to 2005 population
+cities =
+ "Seoul",
+ "Busan",
+ "Incheon",
+ "Daegu",
+ "Daejeon",
+ "Gwangju",
+ "Ulsan",
+ "Suwon",
+ "Seongnam",
+ "Goyang",
+ "Bucheon",
+ "Yongin",
+ "Ansan",
+ "Cheongju",
+ "Anyang",
+ "Jeonju",
+ "Pohang",
+ "Cheonan",
+ "Changwon",
+ "Gimhae",
+ "Namyangju",
+ "Masan",
+ "Uijeongbu",
+ "Siheung",
+ "Pyeongtaek",
+ "Gumi",
+ "Jinju",
+ "Gwangmyeong",
+ "Iksan",
+ "Yeosu",
+ "Jeju",
+ "Hwaseong",
+ "Wonju",
+ "Gyeongju",
+ "Gunpo",
+ "Suncheon",
+ "Gunsan",
+ "Paju",
+ "Chuncheon",
+ "Mokpo",
+ "Gangneung",
+ "Gyeongsan",
+ "Yangsan",
+ "Gimpo",
+ "Chungju",
+ "Asan",
+ "Guri",
+ "Geoje",
+ "Icheon",
+ "Andong",
+ "Jinhae",
+ "Anseong",
+ "Yangju",
+ "Pocheon",
+ "Seosan",
+ "Uiwang",
+ "Gimcheon",
+ "Jecheon",
+ "Gwangyang",
+ "Nonsan",
+ "Tongyeong",
+ "Hanam",
+ "Jeongeup",
+ "Gongju",
+ "Osan",
+ "Yeongju",
+ "Miryang",
+ "Sacheon",
+ "Sangju",
+ "Yeongcheon",
+ "Boryeong",
+ "Gimje",
+ "Donghae",
+ "Naju",
+ "Namwon",
+ "Sokcho",
+ "Seogwipo",
+ "Dongducheon",
+ "Mungyeong",
+ "Samcheok",
+ "Taebaek",
+ "Gyeryong",
+ "Gokseong"

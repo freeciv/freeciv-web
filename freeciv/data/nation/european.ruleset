@@ -1,0 +1,48 @@
+[nation_europe]
+
+name=_("European")
+plural=_("?plural:Europeans")
+groups="Fictional"
+legend=_("The foundation for the European Union was laid in 1957 with the\
+ Treaty of Rome. The EU project has developed since then and is beginning to\
+ resemble a fledgeling super state. But the question remains: Does such a\
+ thing as a common European identity and nation actually exist?")
+; Presidents of the European Commission that held office over one year.
+leader=
+ "Walter Hallstein",
+ "Jean Rey",
+ "Franco Maria Malfatti",
+ "Sicco L. Mansholt",
+ "Roy Jenkins"
+leader_sex="Male", "Male", "Male", "Male", "Male"
+flag="europe"
+flag_alt = "-"
+city_style = "European"
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Fundamentalism",  _("Pope"),         _("Popess")
+                 "Republic",        _("President of the Commission"),
+			            _("President of the Commission")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+; The 2005 EU member states -- except Cyprus, Luxembourg and Malta.
+conflicts_with="austrian", "belgian", "czech", "danish", "estonian",
+               "finnish", "french", "german", "hellenic", "hungarian",
+               "irish", "italian", "latvian", "lithuanian", "dutch",
+               "polish", "portuguese", "slovakian", "slovenian", "spanish",
+               "swedish", "british"
+civilwar_nations="austrian", "belgian", "czech", "danish", "estonian",
+                 "finnish", "french", "german", "hellenic", "hungarian",
+                 "irish", "italian", "latvian", "lithuanian", "dutch",
+                 "polish", "portuguese", "slovakian", "slovenian", "spanish",
+                 "swedish", "british"
+
+cities=
+ "Luxembourg",
+ "Valletta", ; Capital of Malta
+ "Nicosia"   ; Capital of Cyprus
+; Subsequent cities fetched from city lists of member nations

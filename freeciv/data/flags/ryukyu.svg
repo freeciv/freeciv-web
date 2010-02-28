@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Sodipodi ("http://www.sodipodi.com/") -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1"
+   x="0"
+   y="0"
+   width="1062.99"
+   height="708.661"
+   id="svg378"
+   sodipodi:version="0.32"
+   inkscape:version="0.42"
+   sodipodi:docname="ryukyu.svg"
+   sodipodi:docbase="/Users/daniel/Desktop/to be posted">
+  <metadata
+     id="metadata1411">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Ryukyu kingdom flag</dc:title>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Daniel Markstedt</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:description>Made for inclusion in Freeciv (www.freeciv.org)</dc:description>
+        <cc:license
+           rdf:resource="http://web.resource.org/cc/PublicDomain" />
+      </cc:Work>
+      <cc:License
+         rdf:about="http://web.resource.org/cc/PublicDomain">
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/Reproduction" />
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/Distribution" />
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     inkscape:window-height="650"
+     inkscape:window-width="883"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     inkscape:zoom="1.0000000"
+     inkscape:cx="504.83439"
+     inkscape:cy="365.74674"
+     inkscape:window-x="85"
+     inkscape:window-y="74"
+     inkscape:current-layer="svg378" />
+  <defs
+     id="defs380" />
+  <rect
+     width="1062.99"
+     height="708.661"
+     x="0"
+     y="0"
+     style="font-size:12;fill:#ffffff;fill-rule:evenodd;stroke-width:1pt;"
+     id="rect149"
+     inkscape:export-xdpi="90.000000"
+     inkscape:export-ydpi="90.000000" />
+  <path
+     style="fill:#ff2b00;fill-opacity:1.0000000;fill-rule:evenodd;stroke:#000000;stroke-width:0.0000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;stroke-miterlimit:4.0000000;stroke-dasharray:none"
+     d="M 315.46304,369.08676 C 304.46463,291.28167 331.47003,228.84454 381.81466,189.20414 C 427.15929,150.56375 474.03507,142.47006 521.33969,140.63174 C 600.75099,137.54571 682.22026,189.00371 684.68577,243.32238 C 687.41006,303.34236 654.83904,319.02135 630.14145,325.32176 C 584.29179,337.01812 542.57331,309.22693 529.89093,252.36761 C 525.54931,232.90267 532.65715,205.29029 543.75633,194.21674 L 529.98211,191.20835 C 487.46124,181.92148 408.12986,210.96700 394.26480,222.77921 C 344.76656,264.94878 333.61818,278.44530 323.95004,324.84405 C 318.35245,351.70766 326.23024,397.07512 323.66522,409.44467"
+     id="path1358"
+     sodipodi:nodetypes="ccsssscsssc" />
+  <path
+     style="fill:#0000c8;fill-opacity:1.0000000;fill-rule:evenodd;stroke:#000000;stroke-width:0.0000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;opacity:1.0000000;stroke-miterlimit:4.0000000;stroke-dasharray:none"
+     d="M 661.52798,525.41670 C 628.95196,547.71520 593.90902,568.25516 546.04663,569.38237 C 513.27043,570.15428 451.47054,560.01753 413.44663,534.13491 C 381.99559,512.72640 347.59853,478.43753 335.12562,434.23780 C 323.96639,394.69330 326.77318,357.24168 331.02525,343.21289 C 342.66130,304.82222 385.57075,279.63629 422.43003,281.99310 C 451.23769,283.83508 479.54931,312.83936 482.82511,343.53087 C 485.95386,372.84464 481.27193,385.02201 462.18329,408.19759 C 450.95706,421.82739 424.49286,426.07362 401.68561,429.50030 L 404.98851,441.42265 C 416.16340,481.76023 462.05909,515.41349 496.74201,528.50505 C 536.80302,543.62664 574.75963,542.90101 612.12081,532.72473 C 643.02124,524.30820 677.93942,504.34905 705.65518,481.94718 C 693.27945,497.43702 677.14620,514.72592 661.52798,525.41670 z "
+     id="path1364"
+     sodipodi:nodetypes="cssssssscssscs" />
+  <path
+     style="fill:#e7e500;fill-opacity:1.0000000;fill-rule:evenodd;stroke:#000000;stroke-width:0.0000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4.0000000;stroke-opacity:1.0000000"
+     d="M 613.40499,154.60491 C 600.24898,147.59697 623.93037,158.83784 642.56784,165.19827 C 656.20531,173.55870 682.36497,192.37805 697.84131,212.62505 C 715.58954,235.84426 751.47606,302.48340 749.08916,371.80979 C 747.29606,424.88954 693.62097,485.46639 678.70580,493.93580 C 669.01985,499.43589 636.88341,522.71209 602.64704,521.93631 C 572.09102,521.24393 550.92766,519.25164 534.69332,485.07195 C 522.03327,458.41756 517.04914,434.75262 542.57700,404.06131 C 564.59710,377.58726 575.07372,377.43036 607.12475,379.09205 C 643.62894,380.98462 688.19624,424.56539 678.46155,417.84640 L 699.81322,384.87394 C 708.96708,368.30804 717.30791,352.39339 716.71800,313.53822 C 716.16652,277.21447 698.46571,243.31155 692.00295,227.30608 C 678.17590,193.06242 626.56100,160.61285 613.40499,154.60491 z "
+     id="path1362"
+     sodipodi:nodetypes="ccsssssssccssc" />
+</svg>

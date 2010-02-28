@@ -1,0 +1,100 @@
+[nation_hellenic]
+
+name=_("Hellenic")
+plural=_("?plural:Hellenes")
+groups="Modern", "European"
+legend=_("The Hellenic Republic - also known as Greece - was created when\
+ the Hellenic people gained independence from the Ottoman Empire in 1832.")
+leader=
+ "Theodore Kolokotronis",
+ "Laskarina Boumboulina",
+ "Kharilaos Trikoupis",
+ "Eleutherios Venizelos",
+ "Aris Veloukhiotis"
+leader_sex="Male", "Female", "Male", "Male", "Male"
+flag="greece"
+flag_alt = "-"
+city_style = "Classical"
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Democracy",_("Prime Minister"), _("?female:Prime Minister")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+conflicts_with = "greek", "byzantine"
+civilwar_nations = "turkish", "italian"
+
+cities =
+ "Athina",
+ "Thessaloniki",
+ "Peiraias",
+ "Patra",
+ "Larisa",
+ "Ioanina",
+ "Irakleion",
+ "Volos",
+ "Kavala",
+ "Lamia",
+ "Chania",
+ "Agrinion",
+ "Chalkida",
+ "Kalamata",
+ "Veroia",
+ "Xanthi",
+ "Rodos",
+ "Kerkyra",
+ "Alexandroupolis",
+ "Sparti",
+ "Messologion",
+ "Florina",
+ "Amaliada",
+ "Drama",
+ "Tripolis",
+ "Nauplion",
+ "Arta",
+ "Katerini",
+ "Rethymnon",
+ "Orestiada",
+ "Trikala",
+ "Preveza",
+ "Chios",
+ "Samos",
+ "Kiklis",
+ "Levadeia",
+ "Argos",
+ "Grevena",
+ "Ermoupolis",
+ "Argostoli",
+ "Megara",
+ "Poligyros",
+ "Amphissa",
+ "Serrai",
+ "Igoumenitsa",
+ "Thiva",
+ "Kos",
+ "Agios Nikolaos",
+ "Andros",
+ "Naxos",
+ "Limnos",
+ "Tyrnavos",
+ "Kastoria",
+ "Edessa",
+ "Thassos",
+ "Paxos",
+ "Kalymnos",
+ "Samosathraki",
+ "Nafpaktos",
+ "Athos",
+ "Mykonos",
+ "Psara",
+ "Delos",
+ "Patmos",
+ "Marathonas",
+ "Melos",
+ "Sifnos",
+ "Skyros",
+ "Karpathos",
+ "Megisti"

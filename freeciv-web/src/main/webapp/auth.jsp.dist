@@ -1,0 +1,38 @@
+<%@page import="java.io.*"%>
+<%@page import="javax.servlet.*"%>
+<%@page import="javax.naming.*"%>
+<%@page import="java.security.*"%>
+<%@page import="java.math.*"%>
+
+<%
+   String id = request.getParameter( "id" );
+   String username = request.getParameter( "usr" );
+   
+
+   try {   
+       // Calculate MD5 hash of password.
+       MessageDigest m = MessageDigest.getInstance("MD5");
+       String freeciv_auth = "changeme";
+       String check = freeciv_auth + username;
+       
+       m.update(check.getBytes(),0,check.length());
+       byte[] enc = m.digest();
+       String hashCalc = "" + (new BigInteger(1,enc).toString(16));
+      
+       //  MD5-base64. 
+       out.println(hashCalc);
+
+  
+       if (id != null && id.equals(hashCalc)) {
+	     session.setAttribute( "username", username );
+	     response.sendRedirect("/preload.jsp");
+	   } else {
+	     response.sendRedirect("/");
+	   }
+	
+   } catch (Exception err) {
+     response.sendRedirect("/");
+   }
+
+%>
+

@@ -1,0 +1,103 @@
+#
+# Suppressions to use when debugging freeciv memory problems with valgrind.
+#
+
+
+# Suppressions for ncurses problems (ncurses is used by readline)
+# Some of these work for only one exact ncurses version, as version number
+# is part of .so -file name.
+{
+   ncurses suppression #1
+   Memcheck:Leak
+   fun:realloc
+   fun:_nc_doalloc
+   fun:tparm
+   obj:/lib/libncurses.so.5.6
+   fun:_nc_trim_sgr0
+   fun:tgetent
+   fun:_rl_init_terminal_io
+   fun:rl_initialize
+}
+
+{
+   ncurses suppression #2
+   Memcheck:Leak
+   fun:malloc
+   fun:strdup
+   fun:_nc_setupterm
+   fun:tgetent
+   fun:_rl_init_terminal_io
+   fun:rl_initialize
+}
+
+{
+   ncurses suppression #3
+   Memcheck:Leak
+   fun:malloc
+   fun:_nc_home_terminfo
+   fun:_nc_next_db
+   fun:_nc_read_entry
+   fun:_nc_setupterm
+   fun:tgetent
+   fun:_rl_init_terminal_io
+   fun:rl_initialize
+}
+
+{
+   ncurses suppression #4
+   Memcheck:Leak
+   fun:calloc
+   fun:_nc_read_termtype
+   fun:_nc_read_file_entry
+   fun:_nc_read_entry
+   fun:_nc_setupterm
+   fun:tgetent
+   fun:_rl_init_terminal_io
+   fun:rl_initialize
+}
+
+{
+   ncurses suppression #5
+   Memcheck:Leak
+   fun:malloc
+   fun:_nc_tparm_analyze
+   fun:tparm
+   obj:/lib/libncurses.so.5.6
+   fun:_nc_trim_sgr0
+   fun:tgetent
+   fun:_rl_init_terminal_io
+   fun:rl_initialize
+}
+
+{
+   ncurses suppression #6
+   Memcheck:Leak
+   fun:calloc
+   fun:_nc_setupterm
+   fun:tgetent
+   fun:_rl_init_terminal_io
+   fun:rl_initialize
+}
+
+{
+   ncurses suppression #7
+   Memcheck:Leak
+   fun:malloc
+   fun:_nc_read_termtype
+   fun:_nc_read_file_entry
+   fun:_nc_read_entry
+   fun:_nc_setupterm
+   fun:tgetent
+   fun:_rl_init_terminal_io
+   fun:rl_initialize
+}
+
+{
+   ncurses suppression #8
+   Memcheck:Leak
+   fun:realloc
+   fun:xrealloc
+   fun:rl_add_funmap_entry
+   fun:rl_initialize_funmap
+   fun:rl_initialize
+}

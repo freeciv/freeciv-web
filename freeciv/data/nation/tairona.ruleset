@@ -1,0 +1,78 @@
+[nation_tairona]
+
+name=_("Tairona")
+plural=_("?plural:Tairona")
+groups="American"
+
+legend=_("A Chibchan-speaking people related to the Kuna of Panama and the\
+ Muisca of central Colombia, the Tairona inhabit the modern Magdalena and La\
+ Guajira Departments of northern Colombia. Their city of Teyuna was founded\
+ sometime around 500BCE. The Tairona, living a mountainous area, built stone\
+ steps and terraces on steep hillsides in order to farm the region. Though\
+ they fought against the Spanish for 75 years, eventually they succumb to\
+ the various pressures that all Native American peoples were subject to at\
+ the period.")
+
+leader=
+ "Nabobá",
+ "Nugi Túxe",
+ "Hába Haxtoxé",
+ "Kunhwingumu"
+
+leader_sex = "Male", "Male", "Male", "Male"
+
+ruler_titles = { "government",      "male_title",        "female_title"
+		 ; /* TRANS: Hankwa = Chief */
+                 "Despotism",       _("Hankwa"),         _("Hankwa")
+		 ; /* TRANS: Guacanaoma = Paramount Chief */
+                 "Monarchy",        _("Guacanaoma"),     _("Guacanaoma")
+		 ; /* TRANS: Mama = Priest */
+                 "Fundamentalism",  _("Mama"),           _("Mama")
+               }
+
+flag         = "tairona"
+flag_alt     = "-"
+city_style   = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations = "inca", "tupi", "mayan"
+
+cities =
+ "Teyuna",
+ "Chengue",
+ "Nehuange",
+ "Gaira",
+ "Cinto",
+ "Buritaca",
+ "Posiguieca",
+ "Pongueyca",
+ "Kogi",
+ "Yechikin",
+ "Busin",
+ "Serankua",
+ "Windiwameina",
+ "Singunei",
+ "Zigta",
+ "Yeurwa",
+ "Gumuke",
+ "Yeiwin",
+ "Seiarukwingumu",
+ "Buyuaguenka",
+ "Simonorwa",
+ "Wirwa",
+ "Yugaka",
+ "Karwa",
+ "Sogrome",
+ "Donachwi",
+ "Timaka",
+ "Aruamake",
+ "Seinimin",
+ "Izrwa",
+ "Bonda",
+ "Concha",
+ "Bunkunagega",
+ "Mukuánauiaishi"

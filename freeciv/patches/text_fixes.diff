@@ -1,0 +1,68 @@
+Index: server/srv_main.c
+===================================================================
+--- server/srv_main.c	(revisjon 30)
++++ server/srv_main.c	(arbeidskopi)
+@@ -1891,7 +1891,13 @@
+       char leader_name[MAX_LEN_NAME];
+ 
+       pick_random_player_name(nation_of_player(pplayer), leader_name);
+-      sz_strlcpy(pplayer->name, leader_name);
++      /* FIXME: in Web client, connection username == player name.*/
++      if (pplayer->ai_data.control == TRUE) {
++        sz_strlcpy(pplayer->name, leader_name);
++      } else {
++        sz_strlcpy(pplayer->name, pplayer->username);
++      }
++
+     }
+ 
+     if (check_nation_leader_name(nation_of_player(pplayer), pplayer->name)) {
+Index: common/featured_text.c
+===================================================================
+--- common/featured_text.c	(revisjon 30)
++++ common/featured_text.c	(arbeidskopi)
+@@ -1037,10 +1037,9 @@
+ {
+   static char buf[128];
+ 
+-  my_snprintf(buf, sizeof(buf), "%c%s tgt=\"%s\" id=%d name=\"%s\" %c%c",
+-              SEQ_START, text_tag_type_name(TTT_LINK),
+-              text_link_type_name(TLT_CITY), pcity->id,
+-              city_name(pcity), SEQ_END, SEQ_STOP);
++  my_snprintf(buf, sizeof(buf), "<a href=\"#\" onclick=\"show_city_dialog_by_id(%d);\">%s</a>",
++              pcity->id,
++              city_name(pcity));
+   return buf;
+ }
+ 
+@@ -1071,9 +1070,6 @@
+ 
+   /* We use the rule name of the unit, it will be translated in every
+    * local sides in the function text_tag_replace_text(). */
+-  my_snprintf(buf, sizeof(buf), "%c%s tgt=\"%s\" id=%d name=\"%s\" %c%c",
+-              SEQ_START, text_tag_type_name(TTT_LINK),
+-              text_link_type_name(TLT_UNIT), punit->id,
+-              unit_rule_name(punit), SEQ_END, SEQ_STOP);
++  my_snprintf(buf, sizeof(buf), "%s", unit_rule_name(punit));
+   return buf;
+ }
+Index: common/featured_text.h
+===================================================================
+--- common/featured_text.h	(revisjon 30)
++++ common/featured_text.h	(arbeidskopi)
+@@ -131,13 +131,13 @@
+ /* Some event colors */
+ #define FTC_WARNING     "#FF0000"
+ #define FTC_LOG         "#7F7F7F"
+-#define FTC_SERVER_INFO "#8B0000"
++#define FTC_SERVER_INFO "#FF0000"
+ #define FTC_CLIENT_INFO "#EF7F00"
+ #define FTC_EDITOR      "#0000FF"
+ #define FTC_COMMAND     "#006400"
+ #define FTC_PRIVATE_MSG "#A020F0"
+ #define FTC_ALLY_MSG    "#551166"
+-#define FTC_PUBLIC_MSG  "#00008B"
++#define FTC_PUBLIC_MSG  "#FFFFFF"
+ 
+ /* Main functions. */
+ size_t featured_text_to_plain_text(const char *featured_text,

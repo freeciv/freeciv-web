@@ -1,0 +1,147 @@
+=========================================================================
+  Delta
+=========================================================================
+
+If delta is enable for this packet the packet-payload (after the 3
+byte packet-header) is followed by the delta-header. The delta-header
+is a bitvector which represents all non-key fields of the packet. If
+the the field has changed the corresponding bit is set and the field
+value is so included in delta-body. The values of the unchanged fields
+will be filled in from an old version at the receiving side.
+
+For bool field another optimization called bool-header-folding is
+applied. Instead of sending an indicator in the bitvector if the given
+bool values has changed (and so using 1 byte for the real value) the
+actual value of the bool is transfered in the bitvector bit of this
+bool field.
+
+Another optimization called array-diff is used to reduce the amount of
+elements transfered if an array is changed. This is independent of the
+delta-header bit i.e. it will only be used if the array has changed
+its value and the bit indicates this. Instead of transferring the
+whole array only a list of (index,new value of this index) pairs are
+transferred. The index is 8bit and the end of this pair list is
+denoted by an index of 255.
+
+=========================================================================
+  Compression
+=========================================================================
+
+To further reduce the network traffic the (delta) packets are
+compressed. To get better compression results multiple packets are
+grouped together and compressed into a chunk. This chunk is then
+transfered as a normal packet. A chunk packet start with the 2 byte
+length field which every packet has. A chunk packet has no type. A
+chunk packet is identified by having a too large length field. If the
+length of the packet is over COMPRESSION_BORDER it is a chunk
+packet. It will be uncompressed at the receiving side and re-feed into
+the receiving queue.
+
+If the length of the chunk packet can't be expressed in the available
+space of the 16bit length field (>48kb) the chunk is sent as a jumbo
+packet. The difference between a normal chunk packet and a jumbo chunk
+packet is that the jumbo packet has JUMBO_SIZE in the size field and
+has an additional 4 byte len field after the 2 byte len field. The
+second len field contains the the size of the whole packet (2 byte
+first length field + 4 byte second length field + compressed data).
+
+Packets are grouped for the compression based on the
+PACKET_PROCESSING_STARTED/PACKET_PROCESSING_FINISHED and
+PACKET_FREEZE_HINT/PACKET_THAW_HINT packet pairs. If the first
+(freeze) packet is encountered the packets till the second (thaw)
+packet are put into a queue. This queue is then compressed and sent as
+a chunk packet. If the compression would expand in size the queued
+packets are sent uncompressed as "normal" packets.
+
+The compression level can be controlled by the
+FREECIV_COMPRESSION_LEVEL environment variable.
+
+=========================================================================
+  Files
+=========================================================================
+
+There are four file/filesets involved in the delta protocol:
+ 1) the definition file (common/packets.def).
+ 2) the generator (common/generate_packets.py).
+ 3) the generated files (*/*_gen.[ch] or as a list
+ client/civclient_gen.c, client/packhand_gen.h, common/packets_gen.c,
+ common/packets_gen.h, server/hand_gen.h and server/srv_main_gen.c).
+ 4) the overview (README.delta, this file)
+
+The definition file lists all valid packet types with their
+fields. The generator takes this as input and creates the generated
+files.
+
+For adding and/or removing packets and/or fields you only have to
+touch the definition file. If you however plan to change the generated
+code (adding more statistics for example) you have to change the
+generator.
+
+=========================================================================
+  Changing the definition file
+=========================================================================
+
+Adding a packet:
+ 1) choose an unused packet number. The generator will make sure that
+ you don't use the same number two times.
+ 2) choose a packet name. It should follow the naming style of the
+ other packets: PACKET_<group>_<remaining>. <group> may be SERVER,
+ CITY, UNIT, PLAYER, DIPLOMACY and so on.
+ 3) decide if this packet goes from server to client or client to server
+ 4) choose the field names and types
+ 5) choose packet and field flags
+ 6) write the entry into the corresponding section of common/packets.def
+
+If you add a field which is a struct (say "foobar") you have to write
+the following functions: dio_get_foobar, dio_put_foobar and
+are_foobars_equal.
+
+Removing a packet:
+ 1) add a mandatory capability
+ 2) remove the entry from common/packets.def
+
+Adding a field:
+ Option A:
+   1) add a mandatory capability
+   2) add a normal field line:
+      COORD x
+ Option B:
+   1) add a non-mandatory capability (say "new_version")
+   2) add a normal field line containing this capability in an add-cap
+   flag:
+      COORD x; add-cap(new_version)
+
+Removing a field:
+ Option A:
+   1) add a mandatory capability
+   2) remove the corresponding field line
+ Option B:
+   1) add a non-mandatory capability (say "cleanup")
+   2) add to the corresponding field line a remove-cap flag
+
+After changing the definition file the generator has to be run. The
+common/Makefile will take care of this. You don't need to run
+autoconf/automake/configure.
+
+=========================================================================
+  Capabilities and variants
+=========================================================================
+
+The generator has to generate code which supports different
+capabilities at runtime according to the specification given in the
+definitions with add-cap and remove-cap. The generator will find the
+set of used capabilities for a given packet. Lets say there are two
+fields with "add-cap(cap1)" and one field with an "remove-cap(cap2)"
+flag. So the set of capabilities are cap1, cap2. At runtime the
+generated code may run under 4 different capabilities:
+ - neither cap1 nor cap2 are set
+ - cap1 is set but cap2 isn't
+ - cap1 is not set but cap2 is
+ - cap1 and cap2 are set
+
+Each of these combinations is called a variant. If n is the number of
+capabilities used by the packet the number of variants is 2^n.
+
+For each of these variant a seperate send and receive function will be
+generated. The variant for a packet and a connection are calculated
+once and then saved in the connection struct.

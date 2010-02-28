@@ -1,0 +1,79 @@
+[nation_thracian]
+
+name=_("Thracian")
+plural=_("?plural:Thracians")
+groups="Ancient", "European"
+
+legend=_("The second most numerous people in the ancient western world.")
+
+leader=
+ "Thiras",
+ "Burebista",
+ "Decebalus",
+ "Seuthes",
+ "Spartacus"
+leader_sex="Male", "Male", "Male", "Male", "Male"
+
+
+ruler_titles = { "government",     "male_title",     "female_title"
+                 "Monarchy",       _("Rhesos"),      _("Rhesos")
+}
+
+; A dragon was depicted on the standard of the Thracians.
+flag="thrace"
+flag_alt = "-"
+city_style = "Classical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="turkish", "illyrian"
+
+cities =
+ "Uscudama",
+ "Sarmizegetusa",
+ "Perperikon",
+ "Oescus",
+ "Byzantion",
+ "Agathapara",
+ "Authiparu",
+ "Bazopara",
+ "Bedizos",
+ "Belaidipara",
+ "Bendipara",
+ "Beodizos",
+ "Beripara",
+ "Bessapara",
+ "Bospara",
+ "Breierophara",
+ "Brentopara",
+ "Briparon",
+ "Burtudizos",
+ "Chesdupara",
+ "Dardapara",
+ "Dodoparos",
+ "Drusipara",
+ "Gelupara",
+ "Iamphorynna",
+ "Isgipera",
+ "Ismara",
+ "Isgipera",
+ "Keirpara",
+ "Kistidizos",
+ "Krasalopara",
+ "Longinopara",
+ "Maskiobria",
+ "Mesambria",
+ "Mutzipara",
+ "Orudisza",
+ "Ostudizos",
+ "Poltymbria",
+ "Priskupera",
+ "Skedabria",
+ "Spinopara",
+ "Stratopara",
+ "Subzupara",
+ "Tranupara",
+ "Tyrodiza"

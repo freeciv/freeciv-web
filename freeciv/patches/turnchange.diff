@@ -1,0 +1,26 @@
+Index: packets.def
+===================================================================
+--- packets.def	(revisjon 48)
++++ packets.def	(arbeidskopi)
+@@ -229,14 +229,14 @@
+ type EDIT_TECH_MODE     = uint8(enum editor_tech_mode)
+ 
+ # other typedefs
+-type COORD  		= UINT8
+-type XYSIZE  		= UINT16
+-type YEAR     		= SINT16
+-type HP     		= UINT8
+-type PERCENT  		= UINT8
++type COORD  		= UINT32
++type XYSIZE  		= UINT32
++type YEAR     		= UINT32
++type HP     		= UINT32
++type PERCENT  		= UINT32
+ type GOLD		= UINT32
+-type TURN		= SINT16
+-type PHASE              = SINT16
++type TURN		= UINT32
++type PHASE              = UINT32
+ 
+ /****************************************************
+ The remaining lines are the definition of the packets. These are

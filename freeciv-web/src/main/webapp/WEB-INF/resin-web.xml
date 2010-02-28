@@ -1,0 +1,12 @@
+<web-app xmlns="http://caucho.com/ns/resin">
+  
+  <database jndi-name='jdbc/freeciv_mysql'>
+    <driver>
+      <type>com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource</type>
+      <url>jdbc:mysql://localhost:3306/freecivmetaserver</url>
+      <user>root</user>
+      <password>Civing06</password>
+    </driver>
+  </database>
+  
+</web-app>

@@ -1,0 +1,116 @@
+[nation_emirati]
+
+name=_("Emirati")
+plural=_("?plural:Emiratis")
+groups="Modern", "Asian"
+legend=_("The history of the United Arab Emirates goes back to the 7th\
+ century. In the 19th century the Emirates became a\
+ dependency of the United Kingdom. In 1971 six\
+ emirates joined in a federative state as the United\
+ Arab Emirates. The following year, the seventh member emirate joined\
+ them.")
+leader="Dhiyab bin Isa ibn Nahayan",
+       "Saeed II bin Maktoum",
+       "Zayed II bin Sultan Al Nahayan",
+       "Maktoum bin Rashid Al Maktoum",
+       "Rashid bin Saeed Al Maktoum"
+leader_sex="Male", "Male", "Male", "Male", "Male"
+
+flag="uae"
+flag_alt = "-"
+city_style = "Babylonian"
+
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Despotism",       _("Caliph"),       _("Caliph")
+                 "Monarchy",        _("Emir"),         _("Emir")
+                 "Republic",        _("Sheikh"),       _("Sheikhah")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations = "syrian" ;, "saudi", "omani", "qatari"
+
+cities =
+ "Abu Zaby",
+ "Dubayy",
+ "Shabakah",
+ "Ajman",
+ "Sharm",
+ "Ash Shariqah",
+ "Al Fujayrah",
+ "Umm al Qaywayn",
+ "Ra's al Khaymah",
+ "Rafa",
+ "Dayrah",
+ "Sa'd",
+ "Sall",
+ "Nawah",
+ "Barr Dubayy",
+ "Khawr Fakkan",
+ "Murrah",
+ "Al Jazirah",
+ "Al Manamah",
+ "Al Ayn",
+ "Adhan",
+ "Wafd",
+ "Ghayl",
+ "Layyah",
+ "Ramlah",
+ "Shah",
+ "Asamah",
+ "Wasit",
+ "Sa'if",
+ "Ayim",
+ "Al Awdah",
+ "Far'ah",
+ "As Sur",
+ "Kayyah",
+ "Al Ghabah",
+ "Al Fara",
+ "Daynah",
+ "Bulaydah",
+ "Al Maqta",
+ "Sayh",
+ "Al Khaznah",
+ "Adh Dhayd",
+ "Jumayrah",
+ "Khatt",
+ "Zikt",
+ "Al Qurayyah",
+ "Qabas",
+ "Wamm",
+ "Sur",
+ "Al Khan",
+ "Qidfa",
+ "Mas'udi",
+ "Al Mafraq",
+ "Ghubb",
+ "Al Qawz",
+ "Ma'ali",
+ "Mawsil",
+ "Mazyad",
+ "Suhaylah",
+ "Aqqah",
+ "Al Marfa",
+ "Sinnah",
+ "Al Khis",
+ "Ar Ruways",
+ "Aradah",
+ "Fa'y",
+ "Umm Suqaym",
+ "Al Quwayz",
+ "Shandaghah",
+ "Ad Duss",
+ "Al Udayd",
+ "Sabkhah",
+ "Uqayr",
+ "As Sad",
+ "Baqal",
+ "Hayl",
+ "Umm al Qurayn",
+ "Al Hayr",
+ "Muzayri",
+ "Al Wathbah"

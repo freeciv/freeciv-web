@@ -1,0 +1,9 @@
+
+<?php
+
+function freecivAuthUser($username) {
+  $freeciv_auth = "changeme";
+  header('Location: /auth.jsp?id=' . md5($freeciv_auth . $username) . "&usr=" . $username);
+}
+?>
+

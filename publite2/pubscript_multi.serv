@@ -1,0 +1,7 @@
+cmdlevel ctrl
+set autotoggle 1
+set timeout 60
+set saveturns 0
+set size 3
+set minp 2
+metamessage New Freeciv.net Multiplayer Game

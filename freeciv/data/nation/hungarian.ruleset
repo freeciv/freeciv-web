@@ -1,0 +1,44 @@
+[nation_hungarian]
+
+name=_("Hungarian")
+plural=_("?plural:Hungarians")
+groups="Medieval", "Modern", "European"
+legend=_("Legend says that Hungary was founded by Arpad in the 9th\
+ century.")
+conflicts_with="indian"	; Similar flags
+leader=
+ "Árpád",
+ "Szent István",
+ "Károly Róbert",
+ "Hunyadi Mátyás",
+ "Mária Terézia",
+ "Batthyány",
+ "Béla IV"
+leader_sex="Male", "Male", "Male", "Male", "Female", "Male", "Male"
+flag="hungary"
+flag_alt = "-"
+city_style = "European"
+
+init_techs=""
+init_buildings=""
+
+init_government="Despotism"
+init_units=""
+civilwar_nations = "lithuanian", "croatian", "slovenian"
+
+cities =
+ "Budapest", "Debrecen", "Székesfehérvár", "Kolozsvár", "Szeged",
+ "Kassa", "Pécs", "Pozsony", "Miskolc", "Nagyvárad", "Gyõr",
+ "Esztergom", "Temesvár", "Komárom", "Nyíregyháza", "Marosvásárhely",
+ "Sopron", "Szabadka", "Kecskemét", "Veszprém", "Besztercebánya",
+ "Békéscsaba", "Munkács", "Eger", "Eperjes", "Gyulafehérvár", "Kaposvár",
+ "Szolnok", "Paks", "Zalaegerszeg", "Arad", "Szombathely",
+ "Mohács", "Hatvan", "Selmecbánya", "Keszthely", "Ungvár", "Szekszárd",
+ "Sárospatak", "Tatabánya", "Baja", "Szigetvár", "Csíkszereda",
+ "Nagykanizsa", "Hódmezõvásárhely", "Siklós", "Érsekújvár", "Pápa",
+ "Gyöngyös",  "Dunaújváros", "Szatmárnémeti", "Szentes",
+ "Mosonmagyaróvár",  "Léva", "Szarvas", "Csáktornya",
+ "Mátészalka", "Tata", "Nagykõrös", "Nagyszeben",
+ "Salgótarján", "Újvidék", "Siófok", "Losonc", "Gyula",
+ "Sátoraljaújhely", "Déva", "Tapolca", "Tiszaújváros", "Dombóvár",
+ "Püspökladány", "Balatonfüred", "Vác"

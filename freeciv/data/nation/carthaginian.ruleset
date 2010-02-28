@@ -1,0 +1,35 @@
+[nation_carthaginian]
+
+name=_("Carthaginian")
+plural=_("?plural:Carthaginians")
+groups="Ancient", "African"
+; Carthage being a successor-state of the Phoenician empire
+conflicts_with="phoenician"
+legend=_("The Carthaginians, descendants of Phoenician traders,\
+ ran a naval empire in the Mediterranean from the 5th to 2nd centuries\
+ BC. Carthage was destroyed by Rome in 146BC.")
+leader=
+ "Hannibal Barca",
+ "Hasdrubal Barca",
+ "Hamilcar Barca",
+ "Dido"
+leader_sex="Male", "Male", "Male", "Female"
+flag="cartago"
+flag_alt = "tunisia"	; Used previously
+city_style = "Classical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations="phoenician", "roman"
+
+;Ancient cities from Africa and south Spain,
+;some are later roman colonies and not carthaginian towns
+
+cities =
+  "Carthago", "Leptis Magna", "Cirta", "Hadrumetum", "Aspis",
+  "Charax", "Oea", "Sabrata", "Utica", "Saldae", "Cartenna",
+  "Siga", "Rusaddir", "Tingis", "Gades", "Malaca", "Mastia",
+  "Thapsus", "Capsa", "Thugga", "Thevesta", "Madaura", "Sitifis",
+  "Githis", "Uthina", "Thamugaddi", "Lambaesis"

@@ -1,0 +1,70 @@
+#!/bin/sh
+set -e
+
+if [ `whoami` != "root" ]
+then
+	echo "You need to either run this script as root, or run it using the"
+	echo "'fakeroot' utility (as in: \"fakeroot debian/build.debian\")"
+	exit 1
+fi
+
+# FIXME: Since this script can be run only as (fake)root, this returns root, not user
+username=`id -run`
+fninfo="`grep \^$username /etc/passwd|cut -f 5 -d :`"
+realname=${fninfo%%,*}
+if [ -z "$EMAIL" ]
+then
+	defaultemail="$realname <$username@`hostname`>"
+	echo "Please enter your email address, or type ENTER to use \"$defaultemail\""
+	echo "You can avoid this query in the future by setting the EMAIL"
+	echo "environment variable to your address."
+	echo -n ">"
+	read EMAIL
+	echo
+	if [ -z "$EMAIL" ]
+	then
+		EMAIL="$defaultemail"
+	fi
+fi
+if echo "$EMAIL" |grep " "
+then
+	# address is OK
+	:
+else
+	EMAIL="$realname <$EMAIL>"
+fi
+
+
+if [ ! -r debian/changelog.save ]
+then
+	cp debian/changelog debian/changelog.save
+fi
+lastversion="`dpkg-parsechangelog -ldebian/changelog.save |grep Version |cut -f 2 -d " "`"
+
+MAJOR_VERSION=`grep "MAJOR_VERSION=" version.in | sed -e 's/MAJOR_VERSION="//' -e 's/"//'`
+MINOR_VERSION=`grep "MINOR_VERSION=" version.in | sed -e 's/MINOR_VERSION="//' -e 's/"//'`
+PATCH_VERSION=`grep "PATCH_VERSION=" version.in | sed -e 's/PATCH_VERSION="//' -e 's/"//'`
+SVN_REVISION=`svn info | grep "^Revision: " | sed 's/Revision: //'`
+snapversion="${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}-r${SVN_REVISION}"
+
+cat >debian/changelog <<EOF
+freeciv ($snapversion) experimental; urgency=low
+
+  * New upstream release (svn snapshot)
+
+ -- $EMAIL  `date -R`
+
+EOF
+
+cat debian/changelog.save >>debian/changelog
+
+
+echo
+echo "Building debian packets of ${snapversion}"
+echo
+
+
+debian/rules binary
+
+echo
+echo "Done, you can now install your newly-compiled snapshot."

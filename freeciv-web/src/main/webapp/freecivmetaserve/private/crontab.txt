@@ -1,0 +1,2 @@
+#0 0 * * 4 /usr/bin/php exec/pick_poll.php
+

@@ -1,0 +1,48 @@
+[nation_canadian]
+
+name=_("Canadian")
+plural=_("?plural:Canadians")
+groups="Modern", "American"
+conflicts_with="quebecois", "inuit"
+legend=_("Canada is the geographically northernmost country in world: The\
+ Magnetic North Pole currently lies on Canadian territory.")
+leader=
+ "Pierre Trudeau",
+ "John A. MacDonald",
+ "John Diefenbaker",
+ "Mackenzie King",
+ "Wilfrid Laurier",
+ "Robert Borden"
+leader_sex="Male", "Male", "Male", "Male", "Male", "Male"
+flag="canada"
+flag_alt = "united_kingdom"
+city_style = "Celtic"
+
+ruler_titles = { "government",      "male_title",         "female_title"
+                "Democracy", _("Prime Minister"), _("?female:Prime Minister")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations=
+; Sub-national nations
+ "quebecois",
+; First Nations
+ "inuit", "iroquois"
+
+; Capitals of provinces and territories are listed first in this list
+cities =
+  "Ottawa", "Toronto", "Quebec", "Edmonton", "Victoria", "Winnipeg",
+  "Regina", "Fredericton", "St. John's", "Charlottetown", "Halifax",
+  "Yellowknife", "Whitehorse", "Iqaluit", "Vancouver", "Montreal", "Calgary",
+  "Saskatoon", "Hamilton", "Moncton", "Sherbrooke","Kelowna", "Moose Jaw",
+  "Brandon", "Sudbury", "St. John", "Sault Ste. Marie", "Thunder Bay",
+  "Niagara Fall", "Red Deer", "Jasper", "Gatineau", "Prince Rupert",
+  "Windsor", "Prince George", "Kamloops", "Lethbridge", "Medicine Hat",
+  "Prince Albert", "Thompson", "Timmins", "Sarnia", "Guelph",
+  "St. Catharines", "Barrie", "North Bay", "Belleville", "Kingston",
+  "Cornwall", "Trois-Rivieres", "Chicoutimi", "Rimouski", "Dartmouth",
+  "Glace Bay", "Corner Brook", "Gander", "Swawinigan", "Saguenay",
+  "Banff", "Dawson", "Truro"

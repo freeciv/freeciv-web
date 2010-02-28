@@ -1,0 +1,1066 @@
+                          Freeciv Hacker's Guide
+			  
+This guide is intended to be a help for developers, wanting to mess with
+Freeciv program. 
+
+Here and there, you'll see some comments marked as [...], containing more
+personal thoughts on the design, why it looks like it does, and sometimes what 
+went wrong. I hope developers will find that interesting too.
+
+To read about the AI, see README.AI
+
+===========================================================================
+Basic
+===========================================================================
+Freeciv is a client/server civilization style of game.
+The client is pretty dumb. Almost all calculations are performed on the
+server.
+
+[It wasn't like this always. Originally more code was placed in the
+common/ dir, allowing the client to do some of the world updates itself. 
+The end_of_turn city-refresh was for example performed both on the server 
+and on the client. However things got quite complex, more and more info
+was needed on the client-side(security problem). Little by little we moved 
+more code to the server, and as of 1.5 the client is quite dumb -PU]
+
+The source code has the following important directories:
+common: data structures and code used by both the client and server.
+server: (duh)
+client: common client code
+client/* (fx gui-gtk): a specific gui implementation of the client.
+data: graphics, rulesets and stuff
+po: translations
+ai: the ai, later linked into the server.
+
+Freeciv is written in C.  Header files should be compatible with C++ so
+that C++ add-ons (particularly new clients) are possible.  See the
+CodingStyle file for more.
+
+===========================================================================
+Server
+===========================================================================
+General:
+
+The server main loop basically looks like:
+
+  while(server_state==RUN_GAME_STATE) { /* looped once per turn */
+    do_ai_stuff();   /* do the ai controlled players */
+    sniff_packets(); /* get player requests and handle them */
+    end_turn();      /* main turn update */
+    game_next_year();
+  }
+
+
+Most time is spend in the sniff_packets() function, where a select()
+call waits for packets or input on stdin(server-op commands).
+
+===========================================================================
+Server Autogame Testing
+===========================================================================
+Code changes should always be tested before submission for inclusion
+into the svn source tree. It is useful to run the client and server as
+autogames to verify either a particular savegame no longer shows a
+fixed bug, or as a random sequence of games in a while loop overnight.
+
+To start a server game with all AI players, create a file (below named
+civ.serv) with lines such as the following:
+
+# set gameseed 42       # repeat a particular game (random) sequence
+# set mapseed 42        # repeat a particular map generation sequence
+# set timeout 3         # run a client/server autogame
+set timeout -1          # run a server only autogame
+set minplayers 0        # no human player needed
+set aifill 7            # fill to 7 players
+hard                    # make the AI do complex things
+create Caesar           # first player (with known name) created and 
+                        # toggled to AI mode
+start                   # start game
+
+Note: The server prompt is unusable when game with timeout set to -1
+is running. You can stop such game with single ctrl+c, and continue by
+setting timeout to -1 again.
+
+The commandline to run server-only games can be typed as variations
+of:
+$ while( time server/civserver -r civ.serv ); do date; done
+  ---  or  ---
+$ server/civserver -r civ.serv -f buggy1534.sav.gz
+
+To attach one or more clients to an autogame, remove the "start"
+command, start the server program and attach clients to created AI
+players. Or type "aitoggle <player>" at the server command prompt for
+each player that connects. Finally, type "start" when you are ready to
+watch the show.
+
+Note, that the server will eventually flood a client with updates
+faster than they can be drawn to the screen, thus it should always be
+throttled by setting a timeout value high enough to allow processing
+of the large update loads near the end of the game. 
+
+The autogame mode with timeout -1 is only available in DEBUG versions
+and should not be used with clients as it removes virtually all the
+server gating controls.
+
+===========================================================================
+Data Structures
+===========================================================================
+For variable length list of fx units and cities freeciv uses a genlist,
+which is implemented in common/genlist.c. By some macro magic type specific
+macros have been defined, avoiding much trouble.
+For example a tile struct (the pointer to it we call ptile) has a unit
+list, ptile->units; to iterate though all the units on the tile you would
+do the following:
+
+unit_list_iterate(ptile->units, punit) {
+/* In here we could do something with punit, which is a pointer to a
+    unit struct */
+} unit_list_iterate_end;
+
+Note that the macro itself declares the variable punit.
+Similarly there is a 
+
+city_list_iterate(pplayer->cities, pcity) {
+/* Do something with pcity, the pointer to a city struct */
+} city_list_iterate_end;
+
+There are other operations than iterating that can be performed on a list;
+inserting, deleting, sorting etc. See common/speclist.h
+Note that the way the *_list_iterate macro is implemented means you can use
+"continue" and "break" in the usual manner.
+
+One thing you should keep in the back of your mind: Say you are iterating
+through a unit list, and then somewhere inside the iteration decide to
+disband a unit. In the server you would do this by calling
+wipe_unit(punit), which would then remove the unit node from all the
+relevant unit lists. But by the way unit_list_iterate works, if the removed
+unit was the following node unit_list_iterate will already have saved the
+pointer, and use it in a moment, with a segfault as the result. To avoid 
+this, use unit_list_iterate_safe instead.
+
+You can also define your own lists with operations like iterating; read how
+in common/speclist.h.
+
+=========================================================================
+Network and Packets
+=========================================================================
+The basic netcode is located in server/sernet.c and client/clinet.c.
+
+All information passed between the server and clients, must be sent
+through the network as serialized packet structures.
+These are defined in common/packets.h.
+
+For each 'foo' packet structure, there is one send and one receive function:
+
+int		    send_packet_foo	(struct connection *pc,
+					 struct packet_foo *packet);
+struct packet_foo * receive_packet_foo	(struct connection *pc);
+
+The send_packet_foo() function serializes a structure into a bytestream
+and adds this to the send buffer in the connection struct.
+The receive_packet_foo() function de-serializes a bytestream into a
+structure and removes the bytestream from the input buffer in the
+connection struct.
+The connection struct is defined in common/connection.h.
+
+Each structure field in a structure is serialized using architecture
+independent functions such as dio_put_uint32() and de-serialized with
+functions like dio_get_uint32().
+
+A packet is constituted by header followed by the serialized structure
+data. The header contains the following fields:
+
+uint16	:	length		(the length of the entire packet)
+uint8	:	type		(e.g. PACKET_TILE_INFO)
+
+To demonstrate the route for a packet through the system, here's how
+a unit disband is performed:
+
+1)  A player disbands a unit.
+2)  The client initializes a packet_unit_request structure, and calls the
+    packet layer function send_packet_unit_request() with this structure and
+    packet type: PACKET_UNIT_DISBAND.
+3)  The packet layer serializes the structure, wraps it up in a packet
+    containing the packetlength, type and the serialized data. Finally 
+    the data is send to the server.
+4)  On the server the packet is read. Based on the type, the corresponding
+    de-serialize function is called is called by get_packet_from_connection(). 
+5)  A packet_unit_request is initialized with the bytestream.
+6)  Since the incoming packet is a request (a request in this context 
+    is every packet sent from the client to the server) the server sends a 
+    PACKET_PROCESSING_STARTED packet to the client.
+7)  Finally the corresponding packet-handler, handle_unit_disband() function,
+    is called with the newly constructed structure.
+8)  The handler function checks if the disband request is legal (is the sender
+    really the owner of the unit) etc.
+9)  The unit is disbanded => wipe_unit() => send_remove_unit().
+10) Now an integer, containing the id of the disbanded unit is
+    wrapped into a packet along with the type PACKET_REMOVE_UNIT:
+    send_packet_generic_integer().
+11) The packet is serialized and send across the network.
+12) The packet-handler returns and the end of the processing is 
+    announced to the client with a PACKET_PROCESSING_FINISHED packet.
+13) On the client the PACKET_REMOVE_UNIT packet is deserialized into 
+    a packet_generic_integer structure.
+14) The corresponding client handler function is now called 
+    handle_remove_unit(), and finally the unit is disbanded.
+
+Notice that the two packets (PACKET_UNIT_DISBAND and
+PACKET_REMOVE_UNIT) were generic packets.  That means the packet
+structures involved, are used by various requests.  The
+packet_unit_request() is for example also used for the packets
+PACKET_UNIT_BUILD_CITY and PACKET_UNIT_CHANGE_HOMECITY.
+
+When adding a new packet type, check to see if you can reuse some of the
+existing packet types. This saves you the trouble of
+writing new serialize/deserialize functions.
+
+The PACKET_PROCESSING_STARTED and PACKET_PROCESSING_FINISHED packets
+from above serve two main purposes:
+
+ - they allow the client to identify what causes a certain packet the
+ client receives. If the packet is framed by PACKET_PROCESSING_STARTED
+ and PACKET_PROCESSING_FINISHED packets it is the causes of the
+ request. If not the received packet was not caused by this client
+ (server operator, other clients, server at a new turn)
+
+ - after a PACKET_PROCESSING_FINISHED packet the client can test if
+ the requested action was performed by the server. If the server has
+ sent some updates the client data structure will now hold other
+ values.
+
+The PACKET_FREEZE_HINT and PACKET_THAW_HINT packets serve two
+purposes:
+
+ - Packets send between these two packets may contain multiple
+ information packets which may cause multiple updates of some GUI
+ items. PACKET_FREEZE_HINT and PACKET_THAW_HINT can now be used to
+ freeze the GUI at the time PACKET_FREEZE_HINT is received and only
+ update the GUI after the PACKET_THAW_HINT packet is received.
+
+ - Packets send between these two packets may contain contradicting
+ information which may confuse a client-side AI (agents for
+ example). So any updates send between these two packets are only
+ processed after the PACKET_THAW_HINT packet is received.
+
+The following areas are wrapped by PACKET_FREEZE_HINT and
+PACKET_THAW_HINT:
+
+ - the data send if a new game starts
+ - the data send to a reconnecting player
+ - the end turn activities
+
+The Xaw client uses XtAppAddInput() to tell Xt to call the callback
+functions, when something happens on the client socket.
+The GTK+ client uses a similar gdk_input_add() call.
+
+=========================================================================
+Network Improvements
+=========================================================================
+
+In previous versions when a connection send buffer in the server got full
+we emptied the buffer contents and continued processing. Unfortunately this
+caused incomplete packets to be sent to the client, which caused crashes
+in either the client or the server, since the client cannot detect this
+situation. This has been fixed by closing the client connection when the
+buffer is emptied.
+
+We also had (and still have) several problems related to flow control.
+Basically the problem is the server can send packets much faster than the
+client can process them. This is especially true when in the end of the
+turn the AIs move all their units. Unit moves in particular take a long
+time for the client to process since by default smooth unit moves is on.
+
+There are 3 ways to solve this problem:
+1) We wait for the send buffers to drain before continuing processing.
+2) We cut the player's connection and empty the send buffer.
+3) We lose packets (this is similar to 2) but can cause an incoherent
+   state in the client).
+
+We mitigated the problem by increasing the send buffer size on the server
+and making it dynamic. We also added in strategic places in the code calls
+to a new flush_packets() function that makes the server stall for some time
+draining the send buffers. Strategic places include whenever we send the
+whole map. The maximum amount of time spent per flush_packets() call is
+specified by the 'netwait' variable.
+
+To disconnect unreachable clients we added two other features: the server
+terminates a client connection if it doesn't accept writes for a period
+of time (set using the 'tcptimeout' variable). It also pings the client
+after a certain time elapses (set using the 'pingtimeout' variable). If
+the client doesn't reply its connection is closed.
+
+=========================================================================
+Graphics
+=========================================================================
+Currently the graphics is stored in the PNG file format (other formats
+may be readable by some clients).
+
+If you alter the graphics, then make sure that the background remains
+transparent.  Failing to do this means the mask-pixmaps will not be
+generated properly, which will certainly not give any good results.
+
+Each terrain tile is drawn in 16 versions, all the combinations with
+with a green border in one of the main directions. Hills, mountains,
+forests and rivers are treated in special cases.
+
+The Xaw client requires that the graphics be stored in "paletted" PNGs,
+which for graphics with few colors is probably a good idea anyway. It also
+has a limited number of colors available, although it will try to match
+similar-looking colors after the existing supply has been exhausted.  Of
+course, not every tileset has to be usable by the Xaw client.
+
+Isometric tilesets are drawn in a similar way to how civ2 draws (that's
+why civ2 graphics are compatible).  For each base terrain type there
+exists one tile sprite for that terrain.  The tile is blended with
+nearby tiles to get a nice-looking boundary.  This is erronously called
+"dither" in the code.
+
+Non-isometric tilesets draw the tiles in the "original" freeciv way,
+which is both harder and less pretty.  There are multiple copies of
+each tile, so that a different copy can be drawn depending the terrain
+type of the adjacent tiles.  It may eventually be worthwhile to convert
+this to the civ2 system.
+
+=========================================================================
+Diplomacy
+=========================================================================
+A few words about the diplomacy system. When a diplomacy meeting is
+established, a Treaty structure is created on both of the clients and
+on the server. All these structures are updated concurrently as clauses
+are added and removed.
+
+=========================================================================
+Map structure
+=========================================================================
+The map is maintained in a pretty straightforward C array, containing
+X*Y tiles. You can use the function
+struct tile *map_get_tile(x, y)
+to find a pointer to a specific tile.
+A tile has various fields; see the struct in common/map.h
+
+When operating on tiles you normally iterate over x and y and maybe use
+map_get_tile() to get the tile struct.
+When fx iterating in a square around a map position (x,y) the naive method
+
+for (x1 = x-1; x1 <= x+1; x1++)
+  for (y1 = y-1; y1 <= y+1; y1++)
+    /* do something */
+
+would sometimes, fx if (x,y) = (0,0) , give tiles like (-1,0) or (0,-1)
+Because the map wraps in the x direction the first position should be
+[assuming the map has the size (map.xsize,map.ysize)] (map.xsize-1, 0), while
+the second tile (0,-1) is not a real time at all!
+This could be solved by the following:
+
+for (x1 = x-1; x1 <= x+1; x1++) {
+  for (y1 = y-1; y1 <= y+1; y1++) {
+    int abs_x = x1, abs_y = y1;
+    if (!normalize_map_pos(&abs_x, &abs_y))
+      continue;
+    /* do something with abs_x, abs_y */
+  }
+}
+
+normalize_map_pos() will adjust the values of abs_x, abs_y to fix within
+the map, and if the original pos does not correspond to a tile, as (0, -1),
+it will return 0.
+Alternatively this could have all been done via the macro call
+
+square_iterate(x, y, 1/*radius*/, x1, y1)  {
+/* do something */
+} square_iterate_end;
+
+which automatically adjust the tile values. The defined macros should be
+used whenever possible, the example of a "manual" square iterate was only
+included to give people the knowledge of how things work.
+
+Also available is the function real_map_distance(), which takes wrap and
+such things into account. It does not however take terrain and roads, etc.
+into account. For that you would use a move_cost_map, which is generated
+via the function generate_warmap(), and calculates the distances from a
+tile to all other tiles on the map. See server/gotohand.c.
+
+Note that if all the code that operate on x and y values used macros, it
+would be very simple to convert these, to allow fx a flat world or a map
+structure like in civ2 for isometric view.
+
+Almost all functions expect that any passed map positions are normal
+(is_normal_map_pos returns true). Currently there is no known
+exception of this rule. To assert this the CHECK_MAP_POS macro should
+be used.
+
+=========================================================================
+Different types of map topology
+=========================================================================
+
+Originally Freeciv supports only a simple rectangular map.  For instance
+a 5x3 map would be conceptualized as
+
+  <- XXXXX ->
+  <- XXXXX ->
+  <- XXXXX ->
+
+and it looks just like that under "overhead" (non-isometric) view (the
+arrows represent an east-west wrapping).  But under an isometric-view
+client, the same map will look like
+
+     X
+    X X
+   X X X
+    X X X
+     X X X
+      X X
+       x
+
+where "north" is to the upper-right and "south" to the lower-left.  This
+makes for a mediocre interface.
+
+An isometric-view client will behave better with an isometric map.  This is
+what Civ2, SMAC, Civ3, etc. all use.  A rectangular isometric map can be
+conceptualized as
+
+  <- X X X X X  ->
+  <-  X X X X X ->
+  <- X X X X X  ->
+  <-  X X X X X ->
+
+(north is up) and it will look just like that under an isometric-view client.
+Of course under an overhead-view client it will again turn out badly.
+
+Both types of maps can easily wrap in either direction: north-south or
+east-west.  Thus there are four types of wrapping: flat-earth, vertical
+cylinder, horizontal cylinder, and torus.  Traditionally Freeciv only wraps
+in the east-west direction.
+
+=========================================================================
+Different coordinate systems
+=========================================================================
+
+In Freeciv, we have the general concept of a "position" or "tile".  A tile
+can be referred to in any of several coordinate systems.  The distinction
+becomes important when we start to use non-standard maps (see above).
+
+  Here is a diagram of coordinate conversions for a classical map.
+
+      map        natural      native
+
+      ABCD        ABCD         ABCD
+      EFGH  <=>   EFGH     <=> EFGH   <=> ABCDEFGHIJKL
+      IJKL        IJKL         IJKL
+
+  Here is a diagram of coordinate conversions for an iso-map.
+
+     map          natural     native       index
+
+        CF        A B C         ABC     
+       BEIL  <=>   D E F   <=>  DEF   <=> ABCDEFGHIJKL
+      ADHK        G H I         GJI
+       GJ          J K L        JKL
+
+Below each of the coordinate systems are explained in more detail.
+
+- Map (or "standard") coordinates.
+
+  All of the code examples above are in map coordinates.  These preserve
+  the local geometry of square tiles, but do not represent the global map
+  geometry well.  In map coordinates, you are guaranteed (so long as we use
+  square tiles) that the tile adjacency rules
+
+      (map_x-1, map_y-1)    (map_x, map_y-1)   (map_x+1, map_y-1)
+      (map_x-1, map_y)      (map_x, map_y)     (map_x+1, map_y)
+      (map_x-1, map_y+1)    (map_x, map_y+1)   (map_x+1, map_y+1)
+
+  are preserved, regardless of what the underlying map or drawing code
+  looks like.  This is the definition of the system.
+
+  Map coordinates are easiest for local operations (like square_iterate
+  or adjc_iterate) but unwieldy for global operations.
+
+- Natural coordinates.
+
+  Natural coordinates preserve the geometry of map coordinates, but also have
+  the rectangular property of native coordinates.  They are unwieldy for
+  most operations because of their sparseness - they may not have the same
+  scale as map coordinates and, in the iso case, there are gaps in the
+  natural representation of a map.
+
+- Native coordinates.
+
+  With an iso-rectangular map, global operations are difficult using map
+  coordinates.  Imagine a simple iso-rectangular map.  Its "natural"
+  representation is
+
+                 A B C        (0,0)   (2,0)   (4,0)
+                  D E F  <=>      (1,1)   (3,1)   (5,1)
+                 G H I        (0,2)   (2,2)   (4,2)
+
+  while its representation in map coordinates would be
+
+                     CF                   (2,0) (3,0)
+                    BEI  <=>        (1,1) (2,1) (3,1)
+                   ADH        (0,2) (1,2) (2,2)
+                    G               (1,3)
+
+  Neither is particularly good for a global map operation such as
+  whole_map_iterate.  Something better is needed.
+
+  Native coordinates compress the map into a continuous rectangle; the
+  dimensions are defined as map.xsize x map.ysize.  For instance the
+  above iso-rectangular map is represented in native coordinates by
+  compressing the natural representation in the X axis to get the
+  3x3 iso-rectangle of
+
+                    ABC       (0,0) (1,0) (2,0)
+                    DEF  <=>  (0,1) (1,1) (2,1)
+                    GHI       (0,2) (1,2) (3,2)
+
+  The resulting coordinate system is much easier to use than map
+  coordinates for some operations.  These include most internal topology
+  operations (e.g., normalize_map_pos, whole_map_iterate) as well as
+  storage (in map.tiles and savegames, for instance).
+
+  In general, native coordinates can be defined based on this property:
+  the basic map becomes a continuous (gap-free) cardinally-oriented
+  rectangle when expressed in native coordinates.
+
+- Index coordinates.
+
+  Index coordinates simply reorder the map into a continous (filled-in)
+  one-dimensional system.  This coordinate system is closely tied to
+  the ordering of the tiles in native coordinates, and is slightly
+  easier to use for some operations (like storage) because it is
+  one-dimensional.  In general you can't assume anything about the ordering
+  of the positions within the system.
+
+With a classical rectangular map, the first three coordinate systems are
+equivalent.  When we introduce isometric maps, the distinction becomes
+important, as demonstrated above.  Many places in the code have
+introduced "map_x/map_y" or "nat_x/nat_y" to help distinguish whether
+map or native coordinates are being used.  Other places are not yet
+rigorous in keeping them apart, and will often just name their variables
+"x" and "y".  The latter can usually be assumed to be map coordinates.
+
+Note that map.xsize and map.ysize define the dimension of the map in
+_native_ coordinates.
+
+Of course, if a future topology does not fit these rules for coordinate
+systems, they will have to be refined.
+
+=========================================================================
+Native coordinates on an isometric map
+=========================================================================
+
+An isometric map is defined by the operation that converts between map
+(user) coordinates and native (internal) ones.  In native coordinates, an
+isometric map behaves exactly the same way as a standard one.  (See
+"native coordinates", above.
+
+Converting from map to native coordinates involves a pi/2 rotation (which
+scales in each dimension by sqrt(2)) followed by a compression in the X
+direction by a factor of 2.  Then a translation is required since the
+"normal set" of native coordinates is defined as
+  {(x, y) | x: [0..map.xsize) and y: [0..map.ysize)}
+while the normal set of map coordinates must satisfy x >= 0 and y >= 0.
+
+Converting from native to map coordinates (a less cumbersome operation) is
+the opposite.
+                                        EJ
+           ABCDE     A B C D E         DIO
+  (native) FGHIJ <=>  F G H I J <=>   CHN  (map)
+           KLMNO     K L M N O       BGM
+                                    AFL
+                                     K
+
+Note that
+
+  native_to_map_pos(0, 0) == (0, map.xsize-1)
+  native_to_map_pos(map.xsize-1, 0) == (map.xsize-1, 0)
+  native_to_map_pos(x, y+2) = native_to_map_pos(x,y) + (1,1)
+  native_to_map_pos(x+1, y) = native_to_map_pos(x,y) + (1,-1)
+
+The math then works out to
+
+  map_x = ceiling(nat_y / 2) + nat_x
+  map_y = floor(nat_y / 2) - nat_x + map.xsize - 1
+
+  nat_y = map_x + map_y - map.xsize
+  nat_x = floor(map_x - map_y + map.xsize / 2)
+
+which leads to the macros native_to_map_pos, map_to_native_pos,
+map_pos_to_native_x, and map_pos_to_native_y that are defined in map.h.
+
+=========================================================================
+Unknown tiles and Fog of War
+=========================================================================
+
+In common/tile.h, there are several fields:
+
+struct tile {
+  ...
+  bv_player tile_known, tile_seen[V_COUNT];
+  ...
+};
+
+While tile_get_known() returns:
+
+/* network, order dependent */
+enum known_type {
+ TILE_UNKNOWN = 0,
+ TILE_KNOWN_UNSEEN = 1,
+ TILE_KNOWN_SEEN = 2,
+};
+
+The values TILE_UNKNOWN, TILE_KNOWN_SEEN are straightforward.
+TILE_KNOWN_UNSEEN is a tile of which the user knows the terrain,
+but not recent cities, roads, etc.
+
+TILE_UNKNOWN tiles never are (nor should be) sent to the client.  In the
+past, UNKNOWN tiles that were adjacent to UNSEEN or SEEN were sent to make
+the drawing process easier, but this has now been removed.  This means
+exploring new land may sometimes change the appearance of existing land (but
+this is not fundamentally different from what might happen when you
+transform land).  Sending the extra info, however, not only confused the
+goto code but allowed cheating.
+
+Fog of war is the fact that even when you have seen a tile once you are
+not sent updates unless it is inside the sight range of one of your units
+or cities.
+
+We keep track of fog of war by counting the number of units and cities
+[and nifty future things like radar outposts] of each client that can
+see the tile. This requires a number per player, per tile, so each player_tile
+has a short[]. Every time a unit/city/miscellaneous can observe a tile
+1 is added to its player's number at the tile, and when it can't observe
+any more (killed/moved/pillaged) 1 is subtracted. In addition to the
+initialization/loading of a game this array is manipulated with the
+void unfog_area(struct player *pplayer, int x, int y, int len)
+and
+void fog_area(struct player *pplayer, int x, int y, int len)
+functions. "int len" is the radius of the area that should be
+fogged/unfogged, i.e. a len of 1 is a normal unit. In addition to keeping
+track of fog of war, these functions also make sure to reveal TILE_UNKNOWN
+tiles you get near, and send info about TILE_UNKNOWN tiles near that the
+client needs for drawing. They then send the tiles to
+void send_tile_info(struct player *dest, int x, int y)
+which then sets the correct known_type and sends the tile to the client.
+
+If you want to just show the terrain and cities of the square the
+function show_area does this. The tiles remain fogged.
+If you play without fog of war all the values of the seen arrays are
+initialized to 1. So you are using the exact same code, you just never
+get down to 0. As changes in the "fogginess" of the tiles are only sent
+to the client when the value shifts between zero and non-zero, no
+redundant packages are sent. You can even switch fog of war on/off
+in game just by adding/subtracting 1 to all the tiles.
+
+We only send city and terrain updates to the players who can see the
+tile. So a city (or improvement) can exist in a square that is known and
+fogged and not be shown on the map. Likewise, you can see a city in a
+fogged square even if the city doesn't exist (it will be removed when
+you see the tile again). This is done by 1) only sending info to players
+who can see a tile 2) keeping track of what info has been sent so the
+game can be saved. For the purpose of 2) each player has a map on the
+server (consisting of player_tile's and dumb_city's) where the relevant
+information is kept.
+
+The case where a player p1 gives map info to another player p2: This
+requires some extra info. Imagine a tile that neither player sees, but
+which p1 have the most recent info on. In that case the age of the players'
+info should be compared which is why the player tile has a last_updated
+field.
+This field is not kept up to date as long as the player can see the tile
+and it is unfogged, but when the tile gets fogged the date is updated.
+
+[An alternative solution would be to give each tile a list
+of the units and cities that observe it. IMO this would not be any
+easier than just counting, and would have no benefits. The current
+solution also gives the possibility to reveal squares as you like,
+say near a radar tower tile special. Very flexible.]
+
+[The barbarians and the ai take their map info directly from the server,
+so they can currently ignore fog of war, and they do so. I really think
+that the ideal AI wouldn't be cheating like this.]
+
+There is now a shared vision feature, meaning that if p1 gives shared
+vision to p2, every time a function like show_area, fog_area, unfog_area
+or give_tile_info_from_player_to_player is called on p1 p2 also gets the
+info. Note that if p2 gives shared info to p3, p3 also gets the info.
+This is controlled by p1's really_gives_vision bitvector, where the
+dependencies will be kept.
+
+If there is anything I have explained inadequately in this section you
+can ask me on <thue@diku.dk>.
+-Thue
+
+=========================================================================
+National borders
+=========================================================================
+For the display of national borders (similar to those used in Sid Meier's
+Alpha Centauri) each map tile also has an "owner" field, to identify
+which nation lays claim to it. If game.borders is non-zero, each city
+claims a circle of tiles game.borders in radius (in the case of neighbouring
+enemy cities, tiles are divided equally, with the older city winning any
+ties). Cities claim all immediately adjacent tiles, plus any other tiles
+within the border radius on the same continent. Land cities also claim ocean
+tiles if they are surrounded by 5 land tiles on the same continent (this is
+a crude detection of inland seas or lakes, which should be improved upon).
+
+Tile ownership is decided only by the server, and sent to the clients, which
+draw border lines between tiles of differing ownership. Owner information is
+sent for all tiles that are known by a client, whether or not they are fogged.
+A patch to convert this to "semi-fogged" behaviour, whereby clients receive
+limited information about non-neighbouring and unseen enemies, is available
+at http://freecivac.sf.net/.
+
+=========================================================================
+Client GUI- Athena 
+=========================================================================
+One client GUI is written using athena-widgets. A few comments on this 
+could prove useful for anyone wishing to write new dialogs or improve
+on the current ones.
+
+Widgets:
+--------
+When you create new widgets for a dialog, like:
+
+  players_form = XtVaCreateManagedWidget("playersform", 
+				       formWidgetClass, 
+				       players_dialog_shell, NULL);
+
+then put the widget properties in the app-default file 'Freeciv', instead
+of hardcoding them. For the widget created above, the following entries
+in the app-default file applies:
+
+*playersform.background:          lightblue
+*playersform.resizable:           true
+*playersform.top:                 chainTop
+*playersform.bottom:              chainBottom
+*playersform.left:                chainLeft
+*playersform.right:               chainRight
+
+Pixcomm and Canvas:
+-------------------
+The Pixcomm is a subclassed Command-widget, which can displays a Pixmap
+instead of a string, on top of a button(command). The Pixcomm widget
+should be used all places where this kind of high-level functionality
+is required. 
+
+The Canvas widget is more low-level. One have to write an expose(redraw)
+event-handler for each widget. The widget generates events on resize
+and mousebuttons.
+
+[Reading any Xt documentation, will tell you how powerful widget
+subclassing is. So I went trough great troubles subclassing the
+command widget. It was not before long I got mails from unhappy Xaw3d
+(and derives) users, that the client keeps crashing on them. Turns
+out that subclassing from any widgets but Core, chains the new
+widgets to libXaw. In hindsight I should just subclassed the Canvas
+widget and add more highlevel functionality. -PU]
+
+===========================================================================
+Misc - The idea trashcan 
+===========================================================================
+[Currently all of the major entities - units, cities, players, contains
+an unique id. This id is really only required when a reference to an entity
+is to be serialized(saved or distributed over the net). However in the
+current code, the id is also used for comparing, looking up and in general
+referencing entities. This results in a lot of mess and unnecessary duplicate
+functions. Often when programming, one wonders if some function needs
+the id or a pointer when referring to an entity. -PU]
+
+The paragraph above isn't true anymore for player, units and cities. -RF
+
+===========================================================================
+
+Player-related entities in Freeciv - by Reinier Post <reinpost@win.tue.nl>
++ by dwp@mso.anu.edu.au
+
+Freeciv is confused about the meaning of 'player'.  As a participant in
+Freeciv games, you'll notice that the participants are called 'players'.
+At the same time, players seem to be identified with civilizations.
+On the other hand, civilizations seem to be identified by 'nation':
+every player chooses a nation at the start of the game.
+
+In the data structures, a 'player' identifies a civilization, not a user.
+
+----
+  THE PLAN:
+
+There are four player-related entities:
+
++ player
+  A civilization, with a capital, cities, units, an income, etc.
+
++ nation
+  A type of civilization (except that very little actually depends on
+  nation, and the oddity exists that each player must be of different 
+  nation)
+
++ user
+  Identifies 'someone out there', usually a human user running a civclient
+  (this is the plan; it is not yet implemented).
+
++ connection
+  Records a client connection; like a user, but disappears when the user 
+  disconnects, whereas for real users we may want to remember them between 
+  connections.  See Connections section below.
+
+Where do these entities exist?
+
+Nations aren't actually used for annything that matters; for them,
+so the question isn't very interesting.
+
+Players (more aptly named, 'civilizations'), exist in games.  Except in
+the context of a running game, the entity makes no sense.  Players and
+their status are part of savefiles.  A game can be saved and restarted
+on a different server; the players will be the same.  A new game will
+have new players.  Players exist in common/ (even games do) but a
+client only has one instantiated player.
+
+The reason to introduce users is client-side server commands.  It must
+be possible to assign different levels of access to commands to different
+users.  Attaching it to players is not good enough: the information must
+survive the addition and removal of other players, the start or restart
+of a game, reconnections by the same user even from different computers,
+or transferral of the game to a different server.  However, a user
+may have different levels of access in different games.
+
+While they last, connections are sufficient identification for users.
+The user entity will allow users to be identified when they reconnect.
+
+Ideally, users would be identified with unique global ids, handed out
+by a 'registry service' similar to the metaserver, but this would be
+too cumbersome in practice.  So the plan is to make users persist in
+a server session (even whan a game is started, or restarted when that
+option is added) and make them persist across games (when a saved
+game is loaded in a different server session).
+
+Users will be created when they first connect to a server, remembered by
+the running server and in savefiles.  Upon connecting, the client will
+be sent a unique session id, generated when the server started, plus a
+fresh user id; it will store them in a ~/.civcookie file, and send it
+back when trying to reconnect.  This will allow the identity of users
+to be protected.  'Protected' players will only allow the same user to
+reconnect; 'unprotected' ones allow anyone to connect; server commands
+and probably client options will be available to control this.
+
+Player names will be assigned to users, not players.
+
+The server maintains a default access level, which is used for new
+users and unprotected ones.
+
+----
+  THE PRESENT IMPLEMENTATION:
+
+Currently access levels are stored in the connection struct.  This allows 
+access levels to be assigned to each individual connected player, which 
+would not be the case if they were directly assigned to the player struct 
+(due to the fact that the players array changes when players are added or 
+removed).
+
+But that's it.
+
+Players are still created before the game is started, and player names
+still belong to players.  Access levels exist in client and server, 
+but only the server uses them.  User ids are not yet implemented;
+Server ids do not exist at all.
+
+Commands to protect/unprotect users do not yet exist; they would serve 
+no useful purpose.
+
+Access levels can set for individual users, including AI players with 
+a connected observer, but only while someone is connected; they will not 
+be remembered when the user disconnects.
+
+===========================================================================
+Connections
+===========================================================================
+
+The code is currently transitioning from 1 or 0 connections per player
+only, to allowing multiple connections for each player (recall
+'player' means a civilization, see above), where each connection may
+be either an "observer" or "controller".
+
+This discussion is mostly about connection in the server.  The client
+only has one real connection (client.conn) -- its connection to the
+server -- though it does use some other connection structs (currently
+pplayer->conn) to store information about other connected clients
+(eg, capability strings).
+
+In the old paradigm, server code would usually send information to a
+single player, or to all connected players (usually represented by
+destination being a NULL player pointer).  With multiple connections
+per player things become more complicated.  Sometimes information
+should be sent to a single connection, or to all connections for a
+single player, or to all (established) connections, etc.  To handle
+this, "destinations" should now be specified as a pointer to a struct
+conn_list (list of connections).  For convenience the following
+commonly applicable lists are maintained:
+   game.all_connections   -  all connections
+   game.est_connections   -  established connections
+   game.game_connections  -  connections observing and/or involved in game
+   pplayer->connections   -  connections for specific player
+   pconn->self            -  single connection (as list)
+
+Connections can be classified as follows:  (first match applies)
+
+1. (pconn->used == 0) Not a real connection (closed/unused), should
+   not exist in any list of have any information sent to it.
+
+(All following cases exist in game.all_connections.)
+
+2. (pconn->established == 0) TCP connection has been made, but initial
+   Freeciv packets have not yet been negotiated (join_game etc).
+   Exists in game.all_connections only.  Should not be sent any
+   information except directly as result of join_game etc packets, 
+   or server shutdown, or connection close, etc.
+
+(All following cases exist in game.est_connections.)
+
+3. (pconn->player == NULL) Connection has been established, but is not
+   yet associated with a player.  Currently this is not possible, but
+   the plan is to allow this in future, so clients can connect and
+   then see list of players to choose from, or just control the server
+   or observe etc. Two subcases:
+
+   3a. (pconn->observer == 0) Not observing the game.  Should receive
+       information about other clients, game status etc, but not map,
+       units, cities, etc.
+
+(All following cases exist in game.game_connections.)
+
+   3b. (pconn->observer == 1) Observing the game.  Exists in
+       game.game_connections.  Should receive game information about
+       map, units, cities, etc.
+
+4. (pconn->player != NULL) Connected to specific player, either as
+   "observer" or "controller".  (But observers not yet implemented.)
+   Exists in game.game_connections, and in pconn->player->connections.
+
+
+===========================================================================
+Starting a Server from Within a Client
+===========================================================================
+
+After many years of complaints regarding the ease (or lack thereof) of
+starting a game of Freeciv [start a server, input settings on a command line,
+start a client, and connect, etc], a method has been developed for starting
+and playing a complete game using only the client. This has been called the
+"extended" or "new connect dialog". This is perhaps a misnomer, but there it 
+is. This win32 client has had this feature in some form for some time. 
+
+It works by forking a server from within the client and then controlling that
+server via chatline messages. The guts of the machinery to do this can be
+found in these files:
+
+client/connectdlg_common.[ch]
+client/gui-*/connectdlg.[ch]
+common/packets.def
+server/gamehand.[ch]
+server/stdinhand.[ch]
+
+When a player starts a client, he is presents with several options: start
+a new game, continue a saved game and connect to a networked game. For the 
+latter option, connect_to_server() is called and login proceeeds as normal.
+The the first two options, connectdlg_common.c:client_start_server() is 
+called. Here, a server is spawned, standard input and outputs to that process
+are closed, and then connect_to_server() is called so the client connects to 
+that server.
+
+At this point everything regarding the client/server connection is as usual;
+however, for the client to control the server, it must have access level HACK,
+so it must verify to the server that it is local (on the same machine or at
+least has access to the same disk as the server). The procedure is:
+
+1. the server creates a file using gamehand.c:create_challenge_filename() and
+   puts the name of this file in packet_server_join_reply that it sends back
+   to the client. The name of the file is semi-random.
+2. The client, upon receiving confirmation that it can join the server,
+   creates a file using the name the server selected and places a random number
+   inside that file.
+3. The client sends a packet [packet_single_want_hack_req] with that random 
+   number back to the server.
+4. The server upon receiving the packet [packet_single_want_hack_req], opens
+   the file and compares the two numbers. If the file exists and the numbers
+   are equal the server grants that client HACK access level and sends a
+   packet [packet_single_want_hack_reply] informing the client of its elevated
+   access level.
+
+Only one other packet is used --- packet_single_playerlist_req --- which asks
+the server to send a player list when a savegame is loaded. This list is used
+for player selection.
+
+
+===========================================================================
+Macros and inline functions
+===========================================================================
+
+For a long time Freeciv had no inline functions, only macros.  With the
+use of other C99 features and some new requirements by the code, this has
+changed.  Now both macros and inline functions are used.
+
+This causes problems because one coder may prefer to use a macro while
+another prefers an inline function.  Of course there was always some
+discretion to the author about whether to use a function or a macro; all
+we've done is add even more choices.
+
+Therefore the following guidelines should be followed:
+
+- Functions should only be put into header files when doing so makes a
+  measurable impact on speed.  Functions should not be turned into macros or
+  inlined unless there is a reason to do so.
+
+- Macros that take function-like parameters should evaluate each parameter
+  exactly once.  Any macro that doesn't follow this convention should be
+  named in all upper-case letters as a MACRO.
+
+- Iterator macros should respect "break".
+
+- In header files macros are preferred to inline functions, but inline
+  functions are better than MACROS.
+
+- Functions or macros that are currently in one form do not have to be
+  changed to the other form.
+
+Note that many existing macros do not follow these guidelines.
+
+
+===========================================================================
+Style Guide
+===========================================================================
+
+See CodingStyle in this directory.
+
+- If you send patches, use "diff -u" (or "diff -r -u").  For further
+  information, see <http://www.freeciv.org/index.php/How_to_Contribute>.
+  Also, name patch files descriptively (e.g. "fix-foo-bug-0.diff" is good,
+  but "freeciv.diff" is not).
+
+- When doing a "diff" for a patch, be sure to exclude unnecessary files
+  by using the "-X" argument to "diff".  E.g.:
+
+    % diff -ruN -Xdiff_ignore freeciv_svn freeciv >/tmp/fix-foo-bug-0.diff
+
+  A suggested "diff_ignore" file is included in the Freeciv distribution.
+
+===========================================================================
+Internationalization (I18N)
+===========================================================================
+
+Messages and text in general which are shown in the GUI should be
+translated by using the "_()" macro. In addition freelog(LOG_NORMAL,
+...) messages should be translated. The other loglevels (LOG_FATAL,
+LOG_ERROR,LOG_VERBOSE, LOG_DEBUG) should NOT be translated.
+
+(See utility/fciconv.[ch])
+The data_encoding is used in all data files and network transactions.
+This is UTF-8.  Currently, the rulesets are in latin1 (ISO-8859-1).
+
+The internal_encoding is used internally within freeciv.  This is always
+UTF-8 at the server, but can be configured by the GUI client.  (When your
+charset is the same as your GUI library, GUI writing is easier.)
+
+The local_encoding is the one supported on the command line.  This is not
+under our control, and all output to the command line must be converted.
+
+===========================================================================

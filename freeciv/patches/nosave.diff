@@ -1,0 +1,33 @@
+Index: server/srv_main.c
+===================================================================
+--- server/srv_main.c	(revisjon 111)
++++ server/srv_main.c	(arbeidskopi)
+@@ -1153,8 +1153,8 @@
+   assert(strlen(game.server.save_name)<256);
+ 
+   generate_save_name(filename, sizeof(filename), TRUE, reason_filename);
+-  save_game(filename, save_reason, FALSE);
+-  save_ppm();
++  //save_game(filename, save_reason, FALSE);
++  //save_ppm();
+ }
+ 
+ /**************************************************************************
+@@ -2055,7 +2055,7 @@
+       if (game.info.phase == 0) {
+ 	if (save_counter >= game.info.save_nturns && game.info.save_nturns > 0) {
+ 	  save_counter = 0;
+-	  save_game_auto("Autosave", NULL);
++	  //save_game_auto("Autosave", NULL);
+ 	}
+ 	save_counter++;
+       }
+@@ -2213,7 +2213,7 @@
+       && conn_list_size(game.est_connections) > 0) {
+     /* Save game on game_over, but not when the gameover was caused by
+      * the -q parameter. */
+-    save_game_auto("Game over", "final");
++    //save_game_auto("Game over", "final");
+   }
+ }
+ 

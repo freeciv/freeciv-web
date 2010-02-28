@@ -1,0 +1,32 @@
+[nation_filipino]
+
+name=_("Filipino")
+plural=_("?plural:Filipinos")
+groups="Modern", "Asian"
+conflicts_with="czech"	; Similar flags
+legend=_("After centuries of Spanish rule, the Philippines were ceded to\
+ the Americans in 1898. They attained home rule in 1935 and independence in\
+ 1946.")
+leader=
+ "Ramon Magsaysay",
+ "Jose Rizal",
+ "Luis Taruc",
+ "Sergio Osmeña", 
+ "Ferdinand Marcos"
+leader_sex="Male", "Male", "Male", "Male", "Male"
+flag="philippines"
+flag_alt = "-"
+city_style = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations="japanese", "malaysian"
+
+cities =
+  "Manila", "Cebu", "Makati", "Quezon", "Pasig", "Angeles", "Davao",
+  "San Fernando", "Puerto Princesa", "Cagayan de Oro", "Zamboanga",
+  "Bacolod", "Butuan", "Puerto Galera", "Olongapo", "Los Banos", "Lipa",
+  "Batangas", "Naga", "Bauang", "Agoo", "San Pablo", "Calamba",
+  "Iloilo", "Lucena", "Cabanatuan"

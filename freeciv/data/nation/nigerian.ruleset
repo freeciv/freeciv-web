@@ -1,0 +1,24 @@
+[nation_nigerian]
+
+name=_("Nigerian")
+plural=_("?plural:Nigerians")
+groups="Modern", "African"
+legend=_("Nigeria won full independence from British rule in 1960.")
+leader=
+ "Abubakar Tafawa Balewa",
+ "Nnamdi Azikiwe"
+leader_sex="Male", "Male"
+flag="nigeria"
+flag_alt = "-"
+city_style = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations="kenyan", "malian"
+
+cities =
+  "Abuja", "Lagos", "Ibadan", "Kano", "Oshogbo", "Ilorin", "Abeokuta",
+  "Port Harcourt", "Kaduna", "Maiduguri", "Enugu", "Benin City", "Katsina",
+  "Jos", "Sokoto" 

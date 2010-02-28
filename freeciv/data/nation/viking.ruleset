@@ -1,0 +1,91 @@
+[nation_viking]
+
+name=_("Viking")
+plural=_("?plural:Vikings")
+groups="Medieval", "European"
+legend=_("The Vikings raided and traded along the coasts of Europe\
+ between 800AD and 1100AD. Viking raiders eventually became the rulers of\
+ Normandy, Russia, and a short-lived kingdom in Sicily.")
+
+leader=
+ "Aud Ivarsdottir",	; Danish royalty (7th century)
+ "Rørik",		; Swedish viking and founder of Kiev (9th century)
+ "Gudfred",		; Danish royalty (9th century)
+ "Harald Hårfagre",	; Norwegian king (9th century)
+ "Hrolf Gangr",		; Viking king of Normandy a.k.a "Rollo" (9th century)
+ "Styrbjörn Sterki",	; Swedish royalty (10th century)
+ "Erik Blodøks",	; Norwegian king (10th century)
+ "Olav Trygvasson",	; Norwegian royalty (10th century)
+ "Olav Haraldsson",	; Norwegian king (11th century)
+ "Harald Hardråde",	; Norwegian king (11th century)
+ "Sigurd Jorsalfare",	; Norwegian king (12th century)
+ "Magnus Berrføtt",	; Norwegian king (12th century)
+ "Magnus Lagabøter"	; Norwegian king (13th century)
+leader_sex="Female", "Male", "Male", "Male", "Male", "Male", "Male",
+	   "Male", "Male", "Male", "Male", "Male", "Male"
+
+flag="viking"
+flag_alt="norway"	; Used previously
+city_style="European"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+; We do not want the Vikings to start together with any Scandinavian nation.
+conflicts_with="danish", "icelandic", "norwegian", "swedish"
+
+civilwar_nations=
+; Scandinavian nations
+ "danish", "icelandic", "norwegian", "swedish",
+; Other nations claiming viking heritage
+ "finnish", "russian", "scottish", "ukrainian"
+
+cities =
+ "Skiringssal",		; Viking era name for Kaupang, Norway
+ "Birka",
+ "Ribe",
+ "Hedeby",
+ "Nidaros",
+ "Reykjavik (ocean)",
+ "Torshavn (ocean)",
+ "Bjørgvin",
+ "Jorvik (ocean)",
+ "Fjaler",
+ "Vikarskeid",
+ "Hvitaby",
+ "Torsberg (mountains)",
+ "Bålagardsida",
+ "Odinsøy",
+ "Trasvik (ocean)",
+ "Steinvågen",
+ "Folland",
+ "Medalhus",
+ "Vendelskage",
+ "Vigra",
+ "Haugseid",
+ "Sudatorp",
+ "Omd",
+ "Håstein",
+ "Fyrileiv",
+ "Kjarrekstader",
+ "Gresvik (ocean)",
+ "Valsnes (river)",
+ "Lusbrei",
+ "Åros",
+ "Rossanes",
+ "Kantaraborg (grassland)",
+ "Lejre",
+ "Kongssund (ocean)",
+ "Anger",
+ "Gaular",
+ "Vardynjar",
+ "Dimun",
+ "Dingenes (ocean)",
+ "Brekke",
+ "Florvåg",
+ "Aldeigjuborg (grassland)",
+ "Bøle",
+ "Jungufurda",
+ "Apardjon"

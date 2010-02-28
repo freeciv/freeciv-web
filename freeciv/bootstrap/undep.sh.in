@@ -1,0 +1,69 @@
+#!/bin/sh
+#
+# @configure_input@
+#
+# This script gets run at the end of configure, to modify
+# the Makefile's produced by configure to remove deps stuff 
+# which can (for svn sources and snapshots) upset some make 
+# programs and C compilers.  (GNU make and gcc work, maybe 
+# some others work too...)
+#
+# Whether anything is actually modified depends on how configure
+# sets AUTO_DEPS; see configure.ac; if AUTO_DEPS is set to "yes",
+# this script does nothing.   For a "release" distribution
+# of freeciv (where the deps are done differently and are portable) 
+# this script will in effect do nothing because the sed regex's 
+# won't match. 
+
+AUTO_DEPS=@AUTO_DEPS@
+
+if test "$AUTO_DEPS" = "yes"; then
+    exit
+fi
+
+@CLIENT_TRUE@CSUBDIRS="client client/agents client/@gui_sources@"
+@CLIENT_FALSE@CSUBDIRS=""
+
+@SERVER_TRUE@SSUBDIRS="ai server server/generator server/scripting"
+@SERVER_FALSE@SSUBDIRS=""
+
+SUBDIRS="common common/aicore utility $SSUBDIRS $CSUBDIRS manual"
+
+for subdir in $SUBDIRS ; do
+
+if test ! -d $subdir; then
+   echo "No directory $subdir"
+   continue
+fi
+
+name=$subdir/Makefile
+
+if test ! -r $name; then
+    echo "No file $name"
+    continue
+fi
+
+echo "removing auto-deps from $name"
+
+mv -f $name $name.bak
+
+# These are known to match if automake version used is 1.4
+sed '
+s/^DEPS_MAGIC.*//
+s/^-include $(DEP_FILES)//
+s/^%\.o: %\.c/.c.o:/
+s/\@echo\ '"'"'$(COMPILE) -c $<'"'"'; \\/$(COMPILE) -c $</
+s/	$(COMPILE) -Wp,-MD,\.deps\/$(\*F)\.pp -c $</junknever:/
+' $name.bak > $name.bak2
+
+# These are known to match if automake version used is 1.9.6
+# There is several tab characters. Don't get fooled if they appear as one space!
+sed '
+s/^DEPDIR = .*//
+s/^include .\/$(DEPDIR)\/.*//
+s/^	if $(COMPILE) -MT $@ -MD -MP -MF \"$(DEPDIR).*/	$(COMPILE) -c -o $@ $</
+s/^	then mv -f \"$(DEPDIR).*//
+s/^	-rm -rf \.\/$(DEPDIR)//
+' $name.bak2 > $name
+
+done

@@ -1,0 +1,142 @@
+[nation_american]
+
+name=_("American")
+plural=_("?plural:Americans")
+groups="Modern", "American"
+legend=_("Formally named the United States of America.  Independent from\
+ Great Britain after a revolution in 1776-1783AD.")
+leader="George Washington",
+       "Alexander Hamilton",
+       "Benjamin Franklin",
+       "John Adams",
+       "Thomas Jefferson", 
+       "James Madison",
+       "James Monroe",
+       "John Quincy Adams",
+       "Andrew Jackson",
+       "Martin Van Buren",
+       "John Tyler",
+       "James Polk",
+       "Zachary Taylor",
+       "Abraham Lincoln",
+       "Andew Johnson", 
+       "Ulysses S. Grant",
+       "James Garfield",
+       "Grover Cleveland",
+       "Benjamin Harrison",
+       "William McKinley",
+       "Theodore Roosevelt",
+       "Woodrow Wilson",
+       "Herbert Hoover",
+       "Franklin D. Roosevelt",
+       "Harry S. Truman",
+       "Dwight Eisenhower",
+       "John F. Kennedy", 
+       "Lyndon Johnson",
+       "Richard Nixon",
+       "Ronald Reagan",
+       "Eleanor Roosevelt"
+leader_sex="Male", "Male", "Male", "Male", "Male", 
+           "Male", "Male", "Male", "Male", "Male", 
+           "Male", "Male", "Male", "Male", "Male", 
+           "Male", "Male", "Male", "Male", "Male", 
+           "Male", "Male", "Male", "Male", "Male", 
+           "Male", "Male", "Male", "Male", "Male",
+           "Female"
+flag="usa"
+flag_alt = "-"
+city_style = "Celtic"
+
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Republic",        _("Speaker"),      _("?female:Speaker")
+                 "Fundamentalism",  _("Reverend"),     _("?female:Reverend")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+conflicts_with = "confederate", "texan"
+civilwar_nations = "confederate"
+
+cities =
+  "Washington (ocean, river, swamp, !desert)", 
+  "New York (ocean, river, forest, !desert, !jungle)", 
+  "Boston (ocean, forest, !desert, !jungle)", 
+  "Philadelphia (ocean, river, forest, !desert)", 
+  "Los Angeles (ocean, desert, plains)",
+  "Atlanta (!ocean, forest, !desert)", 
+  "Chicago (!ocean, forest, !desert, !jungle)", 
+  "St. Louis (river, grassland, !desert)", 
+  "Detroit (!ocean, forest, !desert, !jungle)",
+  "New Orleans (ocean, river, swamp, !desert)", 
+  "Baltimore (ocean, river, swamp, !desert)", 
+  "Denver (!ocean, hills, mountains)", 
+  "Cincinnati (!ocean, forest, !desert)", 
+  "Dallas (!ocean, desert, plains)",
+  "Houston (ocean, desert, plains)", 
+  "San Antonio (!ocean, desert, plains)", 
+  "San Francisco (ocean, hills)",
+  "Fresno (hills, plains)", 
+  "Seattle (ocean, hills, forest, !desert, !jungle)",
+  "Portland (river, forest, !desert, !jungle)", 
+  "Miami (ocean, jungle, swamp, !desert, !tundra, !hills, !mountains)", 
+  "Las Vegas (!ocean, desert)",
+  "Cleveland (!ocean, forest, !desert)",
+  "Toledo (!ocean, forest, !desert)", 
+  "Pittsburgh (!ocean, river, forest, hills, !desert)",
+  "Salt Lake City (!ocean, plains, desert)", 
+  "San Diego (ocean, plains, desert)", 
+  "Phoenix (!ocean, desert)", 
+  "Minneapolis (!ocean, !hills, !mountains, !desert, !jungle)",
+  "St. Paul (!ocean, !hills, !mountains, !desert, !jungle)", 
+  "Kansas City (!ocean, river, !hills, !mountains)",
+  "Buffalo (!ocean, !desert, !jungle)",
+  "Syracuse (!ocean, !desert)", 
+  "Wichita (!ocean, !forest, !jungle, !hills, !mountains)", 
+  "Indianapolis (!ocean, forest, !desert)",
+  "Orlando (swamp, jungle, !hills, !mountains)", 
+  "Omaha (!ocean, river, !hills, !mountains)", 
+  "Baton Rouge (river, swamp, !desert, !hills, !mountains)", 
+  "Milwaukee (!ocean, !jungle, !desert)", 
+  "Honolulu (ocean, swamp, jungle, !desert)", 
+  "Boise (!ocean, hills, mountains, !jungle)", 
+  "Fargo (!ocean, tundra, !hills, !mountains, !jungle)", 
+  "Springfield (!ocean, !desert)",
+  "Nashville (!ocean, !desert)", 
+  "Hartford (ocean, !desert)", 
+  "Charlotte (forest, !desert)",
+  "Raleigh (forest, !desert)",
+  "Charleston (ocean, river, swamp, !desert)",
+  "Savannah (ocean, swamp, !desert)",
+  "Mobile (ocean, river, swamp, !desert)",
+  "El Paso (!ocean, desert, plains)", 
+  "Anchorage (ocean, tundra, !jungle)",
+  "Fairbanks (!ocean, tundra, !jungle)",
+  "Spokane (!ocean, plains, !jungle)", 
+  "Tacoma (ocean, river, swamp, forest, !desert, !jungle)", 
+  "Fort Worth (!ocean, desert, plains)", 
+  "Austin (!ocean, desert, plains)", 
+  "Sacramento (!ocean, grassland)", 
+  "Oklahoma City (!ocean, !forest, !hills, !mountains)",
+  "Jacksonville (jungle, swamp, !hills, !mountains)", 
+  "Sioux Falls (!ocean, !jungle)", 
+  "Madison (!ocean, !jungle)", 
+  "Lubbock (!ocean, desert, plains)",
+  "Amarillo (!ocean, desert, plains)", 
+  "Little Rock (!ocean, !desert)", 
+  "Tucson (!ocean, desert)",
+  "Erie (!ocean, !desert, !jungle)", 
+  "Flint (!ocean, !desert, !jungle)", 
+  "Trenton (ocean, forest, !desert)", 
+  "Newark (ocean, forest, !desert)",  
+  "Richmond (!ocean, forest, !desert)",
+  "Reno (!ocean, !forest, desert)",
+  "Santa Fe (!ocean, desert, hills, mountains)",
+  "San Jose (hills, plains)",
+  "Tulsa (!ocean, !forest, !hills, !mountains)", 
+  "Annapolis (ocean, river, swamp, forest, !desert)", 
+  "Akron (!ocean, forest, !desert)", 
+  "Urbana-Champaign (!ocean, forest, !desert)"
+

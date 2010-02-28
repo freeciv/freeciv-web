@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Sodipodi ("http://www.sodipodi.com/") -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1"
+   x="0.00000000"
+   y="0.00000000"
+   width="1062.98999"
+   height="708.661011"
+   id="svg378"
+   sodipodi:version="0.32"
+   sodipodi:docname="syria.svg"
+   sodipodi:docbase="/Users/daniel/Desktop"
+   inkscape:version="0.42">
+  <metadata
+     id="metadata5459">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     id="base"
+     inkscape:zoom="0.48542250"
+     inkscape:cx="531.49500"
+     inkscape:cy="354.33051"
+     inkscape:window-width="701"
+     inkscape:window-height="507"
+     inkscape:window-x="26"
+     inkscape:window-y="184"
+     inkscape:current-layer="svg378" />
+  <defs
+     id="defs380" />
+  <rect
+     width="1062.9900"
+     height="708.66101"
+     rx="0.0000000"
+     ry="0.0000000"
+     x="0.0000000"
+     y="-6.1999999e-05"
+     style="font-size:12.000000px;fill:#ffffff;fill-rule:evenodd;stroke-width:1.0000000pt"
+     id="rect171" />
+  <rect
+     width="1062.98999"
+     height="236.220001"
+     rx="0.00000000"
+     ry="0.00000000"
+     x="0.00000000"
+     y="475.558563"
+     style="font-size:12;fill:#000000;fill-rule:evenodd;stroke-width:1pt;fill-opacity:1;"
+     id="rect256" />
+  <rect
+     width="1062.98999"
+     height="236.220001"
+     x="0.00000000"
+     y="0.00000000"
+     style="font-size:12;fill:#ff0000;fill-rule:evenodd;stroke-width:1pt;fill-opacity:1;"
+     id="rect255" />
+  <path
+     d="M 266.186 534.45 L 255.778 527.018 L 245.421 534.523 L 249.273 522.327 L 238.935 514.796 L 251.725 514.691 L 255.692 502.532 L 259.744 514.663 L 272.534 514.679 L 262.249 522.281 L 266.186 534.45 z "
+     transform="matrix(4.106327,0.000000,0.000000,4.163411,-765.3043,-1811.356)"
+     style="font-size:12;fill:#009900;fill-rule:evenodd;stroke-width:0.112872;fill-opacity:1;"
+     id="path205" />
+  <path
+     d="M 266.186 534.45 L 255.778 527.018 L 245.421 534.523 L 249.273 522.327 L 238.935 514.796 L 251.725 514.691 L 255.692 502.532 L 259.744 514.663 L 272.534 514.679 L 262.249 522.281 L 266.186 534.45 z "
+     transform="matrix(4.106327,0.000000,0.000000,4.163411,-254.4345,-1811.357)"
+     style="font-size:12;fill:#009900;fill-rule:evenodd;stroke-width:0.112872;fill-opacity:1;"
+     id="path583" />
+</svg>

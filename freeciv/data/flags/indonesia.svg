@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Sodipodi ("http://www.sodipodi.com/") -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1"
+   x="0.00000000"
+   y="0.00000000"
+   width="450.00000pt"
+   height="375.000000"
+   id="svg548"
+   sodipodi:version="0.32"
+   inkscape:version="0.42"
+   sodipodi:docname="indonesia.svg"
+   sodipodi:docbase="/Users/daniel/Desktop">
+  <metadata
+     id="metadata8">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     inkscape:window-height="507"
+     inkscape:window-width="701"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     inkscape:zoom="0.91733333"
+     inkscape:cx="250.00000"
+     inkscape:cy="187.50000"
+     inkscape:window-x="20"
+     inkscape:window-y="42"
+     inkscape:current-layer="svg548" />
+  <defs
+     id="defs550" />
+  <g
+     style="font-size:12.000000px"
+     id="g554"
+     transform="matrix(1.123274,0.000000,0.000000,0.995364,1.314253,2.902984)">
+    <rect
+       width="499.59839"
+       height="377.91632"
+       x="-1.1700196"
+       y="-2.9163361"
+       transform="matrix(1.002342,0.000000,0.000000,0.517028,2.740150e-3,-1.408501)"
+       style="fill:#e70011;fill-rule:evenodd;stroke-width:1.0000000pt"
+       id="rect551" />
+    <rect
+       width="499.59839"
+       height="377.91632"
+       x="-1.1700196"
+       y="-2.9163361"
+       transform="matrix(1.002342,0.000000,0.000000,0.498452,2.740150e-3,186.9106)"
+       style="fill:#ffffff;fill-rule:evenodd;stroke-width:1.0000000pt"
+       id="rect553" />
+  </g>
+</svg>

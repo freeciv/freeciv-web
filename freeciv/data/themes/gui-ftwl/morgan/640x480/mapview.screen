@@ -1,0 +1,209 @@
+[screen]
+; This is the mapview background image
+background="mapview-background.png"
+
+;  === Key bindings ===
+
+[key_bindings]
+c="center_unit"
+C="center_capital"
+
+Kp8="move_unit(n)"
+Kp6="move_unit(e)"
+Kp2="move_unit(s)"
+Kp4="move_unit(w)"
+
+Kp7="move_unit(nw)"
+Kp9="move_unit(ne)"
+Kp3="move_unit(se)"
+Kp1="move_unit(sw)"
+
+Left="scroll(left,1,tile)"
+Right="scroll(right,1,tile)"
+Up="scroll(up,1,tile)"
+Down="scroll(down,1,tile)"
+
+Shift-Left="scroll(left,0.5,screen)"
+Shift-Right="scroll(right,0.5,screen)"
+Shift-Up="scroll(up,0.5,screen)"
+Shift-Down="scroll(down,0.5,screen)"
+
+Alt-Left="scroll(left,1,pixel)"
+Alt-Right="scroll(right,1,pixel)"
+Alt-Up="scroll(up,1,pixel)"
+Alt-Down="scroll(down,1,pixel)"
+
+;  === Info bindings and labels ===
+;
+; Sections prefixed by 'info' is looked up by the client and used
+; where appropriate. Any section prefixed by 'label' is inserted 
+; unquestioningly by the client. Any section prefixed by '_' is
+; ignored, however.
+;
+
+[info_text_year]
+x = 7
+y = 345
+width = 80
+height = 30
+align="nw"
+
+text-color="#ffffff"
+text-background="#00000000" ; completely transparent
+text-size=10
+text-font="fonts/Vera.ttf"
+text-antialias=0
+text-outline-width=0
+text-transform=""
+
+[info_text_nation_name]
+x = 7
+y = 332
+width = 80
+height = 30
+align="nw"
+
+text-color="#ffffff"
+text-background="#00000000" ; completely transparent
+text-size=10
+text-font="fonts/VeraBd.ttf"
+text-antialias=0
+text-outline-width=0
+text-transform=""
+
+[label_text_gold]
+x = 100
+y = 345
+width = 70
+height = 30
+align="nw"
+
+text=_("Wealth:")
+text-color="#ffffff"
+text-background="#00000000" ; completely transparent
+text-size=10
+text-font="fonts/Vera.ttf"
+text-antialias=0
+text-outline-width=0
+text-transform=""
+
+[info_text_gold]
+x = 170
+y = 345
+width = 80
+height = 30
+align="nw"
+
+text-color="#ffffff"
+text-background="#00000000" ; completely transparent
+text-size=10
+text-font="fonts/Vera.ttf"
+text-antialias=0
+text-outline-width=0
+text-transform=""
+
+[label_population]
+x = 100
+y = 332
+width = 70
+height = 30
+align="nw"
+
+text=_("Population:")
+text-color="#ffffff"
+text-background="#00000000" ; completely transparent
+text-size=10
+text-font="fonts/Vera.ttf"
+text-antialias=0
+text-outline-width=0
+text-transform=""
+
+[info_text_population]
+x = 170
+y = 332
+width = 80
+height = 30
+align="nw"
+
+text-color="#ffffff"
+text-background="#00000000" ; completely transparent
+text-size=10
+text-font="fonts/Vera.ttf"
+text-antialias=0
+text-outline-width=0
+text-transform=""
+
+[info_text_focus_item]
+x = 200
+y = 370
+width = 185
+height = 50
+align="nw"
+
+text-color="#000000"
+text-size=10
+text-font="fonts/Vera.ttf"
+text-antialias=0
+text-outline-width=0
+text-transform=""
+
+[label_map]
+x = 307
+y = 338
+width = 27
+height = 20
+align="center"
+
+text=_("Map")
+text-color="#000000"
+text-size=10
+text-font="fonts/Vera.ttf"
+text-antialias=0
+text-outline-width=0
+text-transform=""
+
+[info_tooltip_general]
+x = 7
+y = 330
+width = 240
+height = 35
+tooltip-color="#000000"
+tooltip-background="#f4ed8b"
+tooltip-size=10
+tooltip-font="fonts/Vera.ttf"
+tooltip-antialias=0
+tooltip-outline-width=0
+tooltip-delay=1100
+tooltip-shadow=0
+tooltip-shadow-color="#000000"
+tooltip-transform=""
+
+[_label_a]
+x = 307
+y = 380
+width = 150
+height = 20
+align="nw"
+
+text=_("1234567890 Vera")
+text-color="#000000"
+text-size=10
+text-font="fonts/Vera.ttf"
+text-antialias=0
+text-outline-width=0
+text-transform=""
+
+[_label_b]
+x = 307
+y = 399
+width = 150
+height = 20
+align="nw"
+
+text=_("1234567890 vera")
+text-color="#000000"
+text-size=10
+text-font="Vera.ttf"
+text-antialias=0
+text-outline-width=0
+text-transform=""

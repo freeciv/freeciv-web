@@ -1,0 +1,100 @@
+[nation_danish]
+
+name=_("Danish")
+plural=_("?plural:Danes")
+groups="Modern", "Medieval", "European"
+; /* TRANS: The third letter in "Blatand" should be */
+; /* TRANS: A+00E5 LATIN SMALL LETTER A WITH RING if available in */
+; /* TRANS: your charset.  In ISO-8859-1 (ISO Latin 1) this is 0xE5. */
+legend=_("The founding of the Danish kingdom is generally assigned to the\
+ reign of Harald Blatand, who unified what is now Denmark between 958AD and\
+ 988AD.")
+; Leaders in chronological order according to:
+; http://en.wikipedia.org/wiki/List_of_Danish_monarchs
+leader=
+ "Gorm den Gamle",
+ "Harald Blåtand",
+ "Svend Tveskæg",
+ "Knud den Store",
+ "Hardeknud",
+ "Svend Estridsen",
+ "Knud den Hellige",
+ "Valdemar den Store",
+ "Valdemar Sejr",
+ "Erik Glipping",
+ "Valdemar III",
+ "Valdemar Atterdag",
+ "Christian IV",
+ "Margrete I"
+leader_sex=
+  "Male", "Male", "Male", "Male", "Male",
+  "Male", "Male", "Male", "Male", "Male",
+  "Male", "Male", "Male", "Female"
+flag="denmark"
+flag_alt = "-"
+city_style = "European"
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Democracy", _("Prime Minister"),_("?female:Prime Minister")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations = "english", "icelandic", "norwegian", "swedish"
+
+cities =
+ "København",
+ "Aarhus",
+ "Odense",
+ "Aalborg",
+ "Esbjerg",
+ "Randers",
+ "Frederikshavn",
+ "Helsingør",
+ "Roskilde",
+ "Slagelse",
+ "Sønderborg",
+ "Åbenrå",
+ "Haderslev",
+ "Vejle",
+ "Holstebro",
+ "Hirtshals",
+ "Tylstrup",
+ "Skagen",
+ "Hjørring",
+ "Blokhus",
+ "Nørresundby",
+ "Hanstholm",
+ "Thisted",
+ "Løgstør",
+ "Thyborøn",
+ "Skive",
+ "Hadsund",
+ "Ålestrup",
+ "Grenå",
+ "Struer",
+ "Herning",
+ "Silkeborg",
+ "Yding",
+ "Skovhøj",
+ "Give",
+ "Tarm",
+ "Varde",
+ "Assens",
+ "Nyborg",
+ "Fåborg",
+ "Korsør",
+ "Næstved",
+ "Vordingborg",
+ "Nakskov",
+ "Rødby",
+ "Birkerød",
+ "Nykøbing",
+ "Rønne",
+ "Allinge",
+ "Neksø",
+ "Fredericia",
+ "Godthåb",
+ "Julianehåb",
+ "Daneborg"

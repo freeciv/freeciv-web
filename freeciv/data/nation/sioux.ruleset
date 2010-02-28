@@ -1,0 +1,97 @@
+[nation_sioux]
+
+name=_("Sioux")
+plural=_("?plural:Sioux")
+groups="Medieval", "American"
+legend=_("The Sioux was a North American nation that fought several\
+ decisive battles against the United States. It consisted of three distinct\
+ groups of tribes: the Lakota, the Dakota and the Nakota.")
+
+leader=
+	"Sitting Bull", 	; a.k.a. Tatanka Yotanka
+	"Crazy Horse", 		; a.k.a. Tasunka Witko
+	"Little Crow", 		; a.k.a. Taoyateduta
+	"Red Cloud",		; a.k.a. Makhpyia-Luta
+	"Big Eagle", 		; a.k.a. Wamditanka
+	"Crow Dog", 		; a.k.a. Kangisanka
+	"Wizikute", 		; literally "Pine Shooter"
+	"Waneta", 		; literally "The Charger"
+	"Napeshneeduta",	; literally "Red man who flees not"
+	"Tasunkakokipapi"	; literally "Young Man Afraid of His Horses"
+leader_sex="Male", "Male", "Male", "Male", "Male",
+           "Male", "Male", "Male", "Male", "Male"
+flag="cheyenne"
+flag_alt = "-"
+city_style = "Celtic"
+
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Despotism",       _("Chief"),        _("?female:Chief")
+                 "Monarchy",        _("Great Chief"),_("?female:Great Chief")
+                 "Republic",        _("Spokesman"),    _("Spokeswoman")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations = "iroquois", "hopi", "cree"
+
+; City names are tribes. List based on data from this page:
+; http://www.accessgenealogy.com/native/tribes/siouan/siouanfamilyhist.htm
+cities =
+ "Mdewakanton",
+ "Wahpekute",
+ "Sisseton",
+ "Wahpeton",
+ "Yankton",
+ "Yanktonai",
+ "Sichangu",
+ "Itazipcho",
+ "Sihasapa",
+ "Miniconjou",
+ "Oohenonpa",
+ "Oglala",
+ "Hunkpapa",
+ "Assiniboin",
+ "Omaha",
+ "Ponca",
+ "Quapaw",
+ "Osage",
+ "Pahatsi",
+ "Utsehta",
+ "Santsukhdhi",
+ "Kansa",
+ "Iowa",
+ "Oto",
+ "Missouri",
+ "Winnebago",
+ "Mandan",
+ "Hidatsa",
+ "Absaroke",
+ "Biloxi",
+ "Ofo",
+ "Monacan",
+ "Meipontsky",
+ "Mohemencho",
+ "Tutelo",
+ "Saponi",
+ "Occaneechi",
+ "Manahoac",
+ "Stegaraki",
+ "Shackaconia",
+ "Tauxitania",
+ "Ontponea",
+ "Tegninateo",
+ "Whonkentia",
+ "Hassinunga",
+ "Catawba",
+ "Woecon",
+ "Sissipahaw",
+ "Adshusheer",
+ "Eno",
+ "Waxhaw",
+ "Sugeree",
+ "Santee",
+ "Catawba",
+ "Cheraw",
+ "Keyauwee"

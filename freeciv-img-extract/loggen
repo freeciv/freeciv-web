@@ -1,0 +1,114 @@
+Parsing ../freeciv/data/amplio.tilespec
+['tile_jungle', 'layer2', 'layer1', 'layer0', 'tile_mountains', 'tile_grassland', 'tile_lake', 'tile_coast', 'tile_tundra', 'tile_arctic', 'tile_floor', 'tile_desert', 'tilespec', 'tile_swamp', 'tile_plains', 'tile_hills', 'tile_forest']
+Parsing ../freeciv/data/amplio/ancientcities.spec
+['info', 'grid_main', 'spec', 'file']
+"amplio/ancientcities".png
+pixel_border 1
+Parsing ../freeciv/data/amplio/buildings.spec
+['info', 'spec', 'extra']
+Parsing ../freeciv/data/amplio/explosions.spec
+['info', 'grid_main', 'spec', 'file']
+"amplio/explosions".png
+pixel_border 0
+Parsing ../freeciv/data/amplio/fog.spec
+['grid_main', 'spec', 'file']
+"amplio/fog".png
+pixel_border 0
+Parsing ../freeciv/data/amplio/grid.spec
+['info', 'grid_main', 'spec', 'file']
+"amplio/grid".png
+pixel_border 1
+Parsing ../freeciv/data/amplio/icons.spec
+['info', 'spec', 'extra']
+Parsing ../freeciv/data/amplio/medievalcities.spec
+['info', 'grid_main', 'spec', 'file']
+"amplio/medievalcities".png
+pixel_border 1
+Parsing ../freeciv/data/amplio/moderncities.spec
+['info', 'grid_main', 'spec', 'file']
+"amplio/moderncities".png
+pixel_border 1
+Parsing ../freeciv/data/amplio/nuke.spec
+['info', 'grid_main', 'spec', 'file']
+"amplio/nuke".png
+pixel_border 0
+Parsing ../freeciv/data/amplio/ocean.spec
+['grid_main', 'spec', 'file']
+"amplio/ocean".png
+pixel_border 0
+Parsing ../freeciv/data/amplio/select.spec
+['info', 'grid_main', 'spec', 'file']
+"amplio/select-alpha".png
+pixel_border 0
+Parsing ../freeciv/data/amplio/terrain1.spec
+['info', 'grid_main', 'spec', 'file']
+"amplio/terrain1".png
+pixel_border 1
+Parsing ../freeciv/data/amplio/terrain2.spec
+['info', 'grid_main', 'spec', 'file', 'grid_coasts']
+"amplio/terrain2".png
+pixel_border 1
+pixel_border 1
+Parsing ../freeciv/data/amplio/tiles.spec
+['info', 'grid_main', 'spec', 'file']
+"amplio/tiles".png
+pixel_border 0
+Parsing ../freeciv/data/amplio/units.spec
+['info', 'grid_main', 'spec', 'file']
+"amplio/units".png
+pixel_border 0
+Parsing ../freeciv/data/amplio/water.spec
+['info', 'grid_main', 'spec', 'file', 'grid_coasts']
+"amplio/water".png
+pixel_border 1
+pixel_border 1
+Parsing ../freeciv/data/amplio/wonders.spec
+['info', 'spec', 'extra']
+Parsing ../freeciv/data/misc/colors.tilespec
+['colors']
+Parsing ../freeciv/data/misc/buildings.spec
+['info', 'grid_imprvm', 'spec', 'file']
+"misc/buildings".png
+Parsing ../freeciv/data/misc/icons.spec
+['info', 'spec', 'extra']
+Parsing ../freeciv/data/misc/chiefs.spec
+['info', 'grid_main', 'spec', 'file']
+"misc/chiefs".png
+pixel_border 0
+Parsing ../freeciv/data/misc/overlays.spec
+['info', 'grid_main', 'spec', 'file']
+"misc/overlays".png
+pixel_border 2
+Parsing ../freeciv/data/misc/citybar.spec
+['info', 'grid_big', 'grid_bg', 'file', 'grid_star', 'spec']
+"misc/citybar".png
+Parsing ../freeciv/data/misc/shields.spec
+['info', 'spec', 'extra']
+Parsing ../freeciv/data/misc/small.spec
+['info', 'grid_main', 'spec', 'file']
+"misc/small".png
+pixel_border 0
+Parsing ../freeciv/data/misc/cursors.spec
+['info', 'grid_main', 'spec', 'file']
+"misc/cursors".png
+pixel_border 1
+Parsing ../freeciv/data/misc/space.spec
+['info', 'grid_main', 'spec', 'file']
+"misc/space".png
+pixel_border 0
+Parsing ../freeciv/data/misc/editor.spec
+['info', 'grid_extra', 'file', 'grid_main', 'spec', 'grid_mini']
+"misc/editor".png
+pixel_border 1
+Parsing ../freeciv/data/misc/techs.spec
+['info', 'grid_main', 'spec', 'file']
+"misc/techs".png
+pixel_border 0
+Parsing ../freeciv/data/misc/flags.spec
+['info', 'spec', 'extra']
+Parsing ../freeciv/data/misc/treaty.spec
+['info', 'grid_main', 'spec', 'file']
+"misc/treaty".png
+pixel_border 0
+MAX: 180  176  3923122
+done.

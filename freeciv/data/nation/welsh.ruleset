@@ -1,0 +1,43 @@
+[nation_welsh]
+
+name=_("Welsh")
+plural=_("?plural:Welsh")
+groups= "Medieval", "European"
+legend=_("The Welsh at one time controlled all of what is now England\
+ until being driven into the mountainous western reaches by invading\
+ Saxons.")
+leader=
+ "Llywelyn ap Gruffudd",
+ "Hywel Dda",
+ "Owain Glyndwr"
+leader_sex="Male", "Male", "Male"
+flag="wales"
+flag_alt = "united_kingdom"
+city_style = "Celtic"
+
+;names = "Yr Ymerodreath Gymreig"          "empire"            (depotism)
+;      = "Y Twysysogaeth Cymru"            "principality"      (monarchy)
+;      = "Y Gwerinaeth Pobl Cymru"         "people's republic" (communism)
+;    = "Yr Ymerodrath Scantaidd Cymreig" "holy welsh empire" (fundamentalism)
+;      = "Y Gweriniaeth Cymru"           "republic"     (republic, democracy)
+
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Despotism",       _("Chieftain"),    _("?female:Chieftain")
+                 "Monarchy",        _("Prince"),       _("Princess")
+                 "Democracy",_("Prime Minister"), _("?female:Prime Minister")
+               }
+
+init_techs=""
+init_buildings=""
+
+init_government="Despotism"
+init_units=""
+civilwar_nations="scottish", "irish", "cornish"
+
+cities =
+  "Cardiff", "Swansea", "Newport", "Barry", "Port Talbot", "Carmarthen",
+  "Caerphily", "Methyr Tydfil", "Pembroke", "Fishguard", "Aberystwyth",
+  "Lampeter", "Llandovery", "Brecon", "Flint", "Caemarfon", "Llanfyllin",
+  "Holyhead", "Tywyn", "Llandeilo", "Cwmbran"
+
+

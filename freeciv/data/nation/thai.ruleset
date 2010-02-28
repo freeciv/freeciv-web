@@ -1,0 +1,32 @@
+[nation_thai]
+
+name=_("Thai")
+plural=_("?plural:Thai")
+groups="Modern", "Medieval", "Asian"
+legend=_("The Thai kingdom was the only country in Southeast Asia to\
+ preserve its independence throught the colonial era of the 18th and\
+ 19th centuries AD.")
+leader =
+ "Rama Thibodi",
+ "Chao Phya Chakri",
+ "Maha Mongkut",
+ "Chulalongkorn",
+ "Pibul Songgram",
+ "Seni Pramoya"
+leader_sex = "Male", "Male", "Male", "Male",
+             "Male", "Male"
+flag="thailand"
+flag_alt = "-"
+city_style = "Asian"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations="vietnamese", "cambodian", "laotian"
+
+cities =
+  "Bangkok", "Thon Buri", "Nakhon Rachasima", "Chiang Mai", "Khon Kaen",
+  "Hat Yai", "Chiang Rai", "Chumphon", "Hua Hin", "Lop Buri", "Lampang",
+  "Phitsanulok", "Sawankhatok", "Songkhla", "Udon Thani", "Pattaya",
+  "Laem Chabang", "Kanchanaburi", "Surat Thani", "Thammarat", "Phuket"

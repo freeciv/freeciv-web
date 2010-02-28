@@ -1,0 +1,60 @@
+[nation_hittite]
+
+name=_("Hittite")
+plural=_("?plural:Hittites")
+groups="Ancient", "Asian"
+legend=_("The Hittite kingdom lasted from about 1680 BC to about 1180 BC.\
+ They were the first civilisation to discover iron working. At its height,\
+ they controlled central Anatolia, north-western Syria and Mesopotamia down\
+ to Babylon.")
+leader=
+ "Suppiluliumas",
+ "Kanis",
+ "Labarnas",
+ "Anittas",
+ "Hattusilis",
+ "Mursilis",
+ "Telipinus",
+ "Muwatallis"
+leader_sex="Male", "Female", "Male", "Male", "Male",
+           "Male", "Male", "Male"
+; Flag modeled after Neo-Hittite Two-Headed Sphinx. Gold and purple are
+; royal colors in many historical near-eastern empires.
+; http://www.arthistory.upenn.edu/spr03/422/April10/303.JPG
+flag="hittite"
+flag_alt = "syria"
+city_style = "Babylonian"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations = "babylonian", "sumerian", "assyrian"
+
+cities =
+ "Nesa",
+ "Kussara",
+ "Hattusas",
+ "Zalpuwa",
+ "Puruskhanda",
+ "Salatiwari",
+ "Nerik",
+ "Tiliura",
+ "Hupisna",
+ "Tuwanuwa",
+ "Nenassa",
+ "Landa",
+ "Zallara",
+ "Lusna",
+
+; Kizzuwatna cities (they were Hittite neighbours and alllies):
+ "Mersin",
+ "Adana",
+ "Ursa",
+
+; More cities founded or ruled by the Hittites
+ "Carchemish",
+ "Arpad",
+ "Milid",
+ "Emar",
+ "Alalakh"

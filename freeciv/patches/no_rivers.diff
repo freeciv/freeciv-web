@@ -1,0 +1,14 @@
+Index: server/generator/mapgen.c
+===================================================================
+--- server/generator/mapgen.c	(revisjon 30)
++++ server/generator/mapgen.c	(arbeidskopi)
+@@ -1861,7 +1861,8 @@
+     i *= tilefactor;
+ 
+     riverbuck += river_pct * i;
+-    fill_island_rivers(1, &riverbuck, pstate);
++    //FIXME: rivers are disabled in web client
++    //fill_island_rivers(1, &riverbuck, pstate);
+ 
+     mountbuck += mountain_pct * i;
+     fill_island(20, &mountbuck,

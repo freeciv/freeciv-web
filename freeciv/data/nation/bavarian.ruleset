@@ -1,0 +1,31 @@
+[nation_bavarian]
+
+name=_("Bavarian")
+plural=_("?plural:Bavarians")
+groups="Medieval", "European"
+legend=_("Bavaria, before national unification in 1870AD, was one of the\
+ largest of the German kingdoms.") 
+leader =
+ "Tassilo III",
+ "Welf I",
+ "Ludwig II",
+ "Maximilian",
+ "Adelheid",
+ "Max II Emanuel",
+ "Joseph"
+leader_sex = "Male", "Male", "Male", "Male", "Female", "Male", "Male"
+flag="bavarian"
+flag_alt = "-"
+city_style = "European"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations = "german"
+
+cities =
+  "München", "Regensburg", "Ingolstadt", "Landshut", "Rosenheim",
+  "Eichstätt", "Passau",  "Straubing", "Mühldorf", "Freising",
+  "Deggendorf", "Erding", "Freilassing", "Altötting", "Pfaffenhofen",
+  "Vilshofen", "Plattling", "Traunstein", "Burghausen", "Dingolfing"

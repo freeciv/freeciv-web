@@ -1,0 +1,107 @@
+[nation_venezuelan]
+
+name=_("Venezuelan")
+plural=_("?plural:Venezuelans")
+groups="American", "Modern"
+; /* TRANS: The fourth letter in "Simon" should be */
+; /* TRANS: U+00F3 LATIN SMALL LETTER O WITH ACUTE if available in */
+; /* TRANS: your charset.  In ISO-8859-1 (ISO Latin 1) this is 243. */
+legend=_("Venezuela is the most northern country in South America. Having\
+ been a Spanish colony since the 16th century, the country gained\
+ independence on July 5th 1811 under the leadership of El Libertador Simon\
+ Bolivar - The Liberator.")
+leader=
+ "Ambrosio Alfinger",
+ "Simón Bolivar",
+ "Cristóbal Mendoza",
+ "José Antonio Páez",
+ "Juan Vicente Gómez",
+ "Rómulo Betancourt",
+ "Marcos Pérez Jiménez"
+leader_sex="Male", "Male", "Male", "Male", "Male", "Male", "Male"
+flag="venezuela"
+flag_alt = "-"
+city_style = "Tropical"
+
+ruler_titles = { "government",     "male_title",        "female_title"
+                 "Despotism",      _("Governador"),     _("Governadora")
+		 ; /* TRANS: Terrateniente = Junker */
+             "Fundamentalism",     _("Terrateniente"),  _("Terratenienta")
+                 "Monarchy",       _("Dictador"),       _("Dictadora")
+		 "Republic",       _("Presidente"),     _("Presidenta")
+                 "Democracy",      _("Presidente"),     _("Presidenta")
+		 "Communism",      _("Presidente"),     _("Presidenta")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+; Similar flags:
+conflicts_with="colombian"
+civilwar_nations="cuban", "colombian"
+
+cities =
+ "Caracas",
+ "Zulia (ocean)",
+ "Falcón",
+ "Lara",
+ "Yaracuy",
+ "Trujillo",
+ "Barinas",
+ "Apure",
+ "Cojedes",
+ "Táchira",
+ "Mérida (hills)",
+ "Vargas",
+ "Carabobo",
+ "Guarico",
+ "Aragua",
+ "Miranda",
+ "Anzoátegui",
+ "Sucre",
+ "Monagas",
+ "Nueva Esparta",
+ "Delta amacuro",
+ "Bolívar (river)",
+ "Amazonas (forest)",
+ "Maracay",
+ "Valencia",
+ "Barquisimeto",
+ "Maracaibo",
+ "Barcelona",
+ "Ciudad Bolivar",
+ "Cumana",
+ "Puerto Ordaz",
+ "Coro",
+ "Puerto de La Vela",
+ "Nirgua",
+ "Tinaquillo",
+ "San Carlos",
+ "El Tigre",
+ "Puerto La Cruz",
+ "Margarita (ocean)",
+ "Turmero",
+ "Cagua",
+ "Puerto Cabello",
+ "Cabimas",
+ "Punto Fijo",
+ "Carora",
+ "San felipe",
+ "Valera",
+ "La Puerta",
+ "Distrito Federal",
+ "La Asuncion",
+ "San Fernando",
+ "El Tocuyo",
+ "Puerto Ayacucho (river)",
+ "San Cristóbal",
+ "Ciudad Guayana",
+ "La Guaira",
+ "Nueva Cádiz",
+ "Guatire",
+ "Las Mercedes",
+ "Santa Maria de Ipire",
+ "Libertador",
+ "Santa Helena de Guairen"

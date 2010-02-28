@@ -1,0 +1,75 @@
+[nation_hacker]
+
+name=_("Hacker")
+plural=_("?plural:Hackers")
+groups="Fictional"
+legend=_("h4xx0r r0xx0rz!")
+leader=
+ "Linus Torvalds",
+ "Richard Stallman",
+ "Dennis Ritchie",
+ "Ken Thompson",
+ "Robert Pike",
+ "Donald Knuth",
+ "Ada Lovelace",
+ "Grace Murray Hopper",
+ "Jean Sammet",
+ "Barbara Liskov",
+ "Julf",		; Johan Helsingius
+ "Cap'n Crunch",	; John Draper
+ "Condor",		; Kevin Mitnick
+ "Dark Dante",		; Kevin Poulsen
+ "Phiber Optik",	; Mark Abene
+ "rtm",			; Robert Morris
+ "Woz",			; Steve Wozniak
+ "Edsger Dijkstra",
+ "Alan Kay",
+ "Bjarne Stroustrup",
+ "Niklaus Wirth"
+
+leader_sex="Male", "Male", "Male", "Male", "Male", "Male", "Female",
+ "Female", "Female", "Female", "Male", "Male", "Male", "Male", "Male",
+ "Male", "Male", "Male", "Male", "Male", "Male"
+
+flag="hacker"
+flag_alt = "-"
+city_style = "Classical"
+
+ruler_titles = { "government",     "male_title",        "female_title"
+                 "Despotism",      _("?title:Hacker"),  _("?female:Hacker")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="antarctican", "martian"
+
+cities = 
+ "Core Dump",
+ "Kernel Panic",
+ "One More Turn",
+ "Segmentation Fault",
+ "Stack Overflow",
+ "Bus Error",
+ "Divide by Zero",
+ "Buffer Underrun",
+ "Buffer Overrun",
+ "NullPointerException",
+ "Macro",
+ "Assembler",
+ "Interpreter",
+ "Compiler",
+ "Kernel",
+ "Shell",
+ "Editor",	; Why not "Emacs" ;)
+ "Word Processor",
+ "Program Counter",
+ "Garbage Collection",
+ "Deadlock",
+ "Named Pipe",
+ "Press Any Key To Continue",
+ "Multitasking",
+ "Crontab",
+ "Type Mismatch"

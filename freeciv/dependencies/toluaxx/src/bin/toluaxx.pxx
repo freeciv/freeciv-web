@@ -1,0 +1,31 @@
+
+$lfile"lua/tlx_compat51.lua"
+$lfile"lua/tlx_compat.lua"
+$lfile"lua/tlx_basic.lua"
+$lfile"lua/tlx_feature.lua"
+$lfile"lua/tlx_verbatim.lua"
+$lfile"lua/tlx_code.lua"
+$lfile"lua/tlx_typedef.lua"
+$lfile"lua/tlx_container.lua"
+$lfile"lua/tlx_package.lua"
+$lfile"lua/tlx_module.lua"
+$lfile"lua/tlx_namespace.lua"
+$lfile"lua/tlx_define.lua"
+$lfile"lua/tlx_enumerate.lua"
+$lfile"lua/tlx_declaration.lua"
+$lfile"lua/tlx_variable.lua"
+$lfile"lua/tlx_array.lua"
+$lfile"lua/tlx_function.lua"
+$lfile"lua/tlx_operator.lua"
+$lfile"lua/tlx_class.lua"
+$lfile"lua/tlx_clean.lua"
+$lfile"lua/tlx_doit.lua"
+
+$[
+local err,msg = pcall(doit)
+if not err then
+ local _,_,label,msg = strfind(msg,"(.-:.-:%s*)(.*)")
+ tolua_error(msg,label)
+ print(debug.traceback())
+end
+$]

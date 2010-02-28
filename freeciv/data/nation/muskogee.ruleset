@@ -1,0 +1,157 @@
+[nation_muskogee]
+
+name=_("Muskogee")
+plural=_("?plural:Muskogee")
+groups=_("American")
+legend=_("The Muskogee was a confederacy of North American tribes,\
+ including the Creek, Seminole, Choctaw, and Chickasaw. They were based in\
+ the area now encompassed by the U.S. states of Georgia and Alabama. Creek\
+ and Seminole tribes briefly formed a sovereign state known as the \"State\
+ of Muskogee\" during the early 1800s.")
+leader=
+ "Samuel Checote",
+ "Emistesigo",
+ "Great Mortor",
+ "Isparhechar",
+ "Menawa",
+ "Opothle Yohola",
+ "Pleasant Porter",
+ "Red Eagle",
+ "White Warrior",
+ "Alexander McGillivray",
+ "Peter McQueen",
+ "Estajoca"
+leader_sex="Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male",
+ "Male", "Male", "Male", "Male"
+flag="muskogee"
+flag_alt = "-"
+city_style = "Celtic"
+
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Despotism",       _("Chief"),        _("Chief")
+                 "Monarchy",        _("Great Chief"),  _("Great Chief")
+                 "Republic",        _("Spokesman"),    _("Spokeswoman")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations="sioux", "iroquois", "cherokee"
+
+; City list based on data from this page:
+; http://www.accessgenealogy.com/native/tribes/creek/creektowns.htm
+cities =
+ "Kusa", 	; Historical Upper Creek principal town
+ "Kawita", 	; Historical Lower Creek principal town
+ "Mikasuke",	; Capital of the State of Muskogee
+ "Tukabatchi",	; The historically most populous town
+ "Oakfuskee", 	; Current Creek nation capital
+ "Abihka", 
+ "Abikudshi", 
+ "Alkehatchee", 
+ "Anatichapko", 
+ "Assilanapi", 
+ "Atasi", 
+ "Atchinaalgi", 
+ "Atchinahatchi", 
+ "Aucheucaula", 
+ "Canjauda", 
+ "Cayomulgi", 
+ "Chakihlako", 
+ "Chananagi", 
+ "Chatoksofki", 
+ "Chatukchufaula", 
+ "Chiaha", 
+ "Cholocco Litabixee", 
+ "Conaliga", 
+ "Coosahatchi", 
+ "Eufaula", 
+ "Fusihatchi", 
+ "Ghuaclahatche", 
+ "Hatchichapa", 
+ "Hillabi", 
+ "Hlanudshiapala", 
+ "Hlaphlako",
+ "Hlahlokalka", 
+ "Huhliwahli", 
+ "Ikanachaka", 
+ "Ikanhatki", 
+ "Imukfa", 
+ "Ipisogi", 
+ "Istapoga", 
+ "Istudshilaika", 
+ "Kailaidshi", 
+ "Keroff", 
+ "Kitolopataki", 
+ "Kohamutkikatska", 
+ "Kulumi", 
+ "Littefutchi", 
+ "Lutchapoga", 
+ "Muklassa", 
+ "Ninnipaskulgees", 
+ "Niuyaka", 
+ "Oakfuskudshi", 
+ "Okchayi", 
+ "Okchayndshi", 
+ "Ooeasa", 
+ "Opilhlako", 
+ "Oselarneby", 
+ "Otituchina",
+ "Pakan Tallahassee", 
+ "Pinhoti", 
+ "Potchushatchi", 
+ "Sakapatayi", 
+ "Satapo", 
+ "Saugahatchi", 
+ "Sukaispoka", 
+ "Taladega", 
+ "Talasi", 
+ "Talasihatchi", 
+ "Talapoosa", 
+ "Taliposehogy",
+ "Tukpafka", 
+ "Tukhtukagi", 
+ "Tuskegee", 
+ "Uktaliasasi", 
+ "Ullibahali", 
+ "Wakokayi", 
+ "Weogufka", 
+ "Wetumpka", 
+ "Wewoka", 
+ "Woksoyudshi",
+ "Amakalli",
+ "Apalachicola",
+ "Apatai",
+ "Chattahoochee", 
+ "Chiaha",
+ "Chiahudshi",
+ "Chihlakonini",
+ "Chiskatalofa",
+ "Chukahlako",
+ "Cotohautustennuggee", 
+ "Ematlochee",
+ "Finhalui",
+ "Hatchichapa",
+ "Hihagee",
+ "Hlekatska", 
+ "Hogologes",
+ "Hotalihuyana",
+ "Huhlitaiga",
+ "Itahasiwaki", 
+ "Kaila",
+ "Kasihta", 
+ "Kawaiki", 
+ "Nipky", 
+ "Ocheeses",
+ "Ocmulgee", 
+ "Oconee",
+ "Okitiyakni",
+ "Osotchi",
+ "Sawokli", 
+ "Sawokliudshi",
+ "Secharlecha", 
+ "Suolanocha",
+ "Tamali", 
+ "Telmocresses", 
+ "Wikaihlako"

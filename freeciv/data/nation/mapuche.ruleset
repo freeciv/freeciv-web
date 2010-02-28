@@ -1,0 +1,62 @@
+[nation_mapuche]
+
+name=_("Mapuche")
+plural=_("?plural:Mapuche")
+groups="American"
+
+legend=_("The Mapuche people successfully resisted the expansion of the Inka\
+ empire, halting them at the Maule river in what is now central Chile. They\
+ proved to be stubborn opponents of the Spanish, too, who, along with their\
+ Chilean successors, took 300 years to conquer them.")
+
+leader=
+ "Lef-Traru",
+ "Caupolicán",
+ "Colocolo"
+leader_sex = "Male", "Male", "Male"
+
+ruler_titles = { "government",      "male_title",        "female_title"
+                 "Monarchy",       _("Toqui"),           _("Toqui")
+                 "Republic",       _("Lonko"),           _("Lonko")
+                 "Fundamentalism", _("Machi"),           _("Machi")
+               }
+
+flag         = "mapuche"
+flag_alt     = "-"
+city_style   = "Celtic"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations = "inca", "chilean"
+
+cities =
+ "Tucapel",
+ "Temuco",
+ "Purén",
+ "Lebu",
+ "Angol",
+ "Collipulli",
+ "Lonquimay",
+ "Ercilla",
+ "Traiguén",
+ "Lumaco",
+ "Curacautin",
+ "Marihueñu",
+ "Tolhuaca",
+ "Lonquimay",
+ "Llaima",
+ "Malleco",
+ "Malalcahuello",
+ "Carahue",
+ "Pillánlelbu",
+ "Pucón",
+ "Mulchén",
+ "Itata",
+ "Toltén",
+ "Yungay",
+ "Chillán",
+ "Ñiquén",
+ "Ránquil"

@@ -1,0 +1,74 @@
+[nation_swiss]
+
+name=_("Swiss")
+plural=_("?plural:Swiss")
+groups="Modern", "Medieval", "European"
+legend=_("Switzerland is a federation of cantons, some of which have more\
+ than 700 years of history as a confederacy.")
+leader=
+ "Wilhelm Tell",
+ "Arnold von Winkelried",
+ "Hermann Gessler",
+ "Henri Guisan"
+leader_sex="Male", "Male", "Male", "Male"
+flag="switzerland"
+flag_alt = "-"
+city_style = "European"
+
+ruler_titles = { "government",	"male_title",	"female_title"
+		 "Anarchy",     _("General"),   _("?female:General")
+		 "Despotism",   _("Bailiff"),   _("?female:Bailiff")
+		 "Republic",    _("President of the Confederation"),
+				_("President of the Confederation")
+	"Democracy", _("Federal Chancellor"), _("?female:Federal Chancellor")
+	       }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations="austrian", "french", "italian"
+
+cities =
+ "Bern (river)",
+ "Zürich",
+ "Basel (river)",
+ "Genève",
+ "Lausanne",
+ "Winterthur",
+ "St. Gallen",
+ "Luzern",
+ "Biel / Bienne",
+ "Thun (river)",
+ "Köniz",
+ "La Chaux-de-Fonds",
+ "Fribourg (river)",
+ "Schaffhausen (river)",
+ "Neuchatel",
+ "Chur",
+ "Vernier",
+ "Emmen",
+ "Sion (river)",
+ "Lugano",
+ "Uster",
+ "Kriens",
+ "Lancy",
+ "Montreux",
+ "Yverdon-les-bains (river)",
+ "Zug",
+ "Dietikon",
+ "Dübendorf",
+ "Frauenfeld",
+ "Riehen",
+ "Aarau (river)",
+ "Herisau",
+ "Appenzell",
+ "Liestal",
+ "Glarus",
+ "Delemont",
+ "Stans",
+ "Sarnen",
+ "Schwyz",
+ "Solothurn (river)",
+ "Bellinzona",
+ "Altdorf"

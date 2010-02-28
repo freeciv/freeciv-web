@@ -1,0 +1,52 @@
+[nation_dominican]
+
+name=_("Dominican")
+plural=_("?plural:Dominicans")
+groups="Modern", "American"
+legend=_("The island of Dominica was first sighted by Europeans, including\
+ Christopher Columbus, in 1493. Legend has it that the island was named so\
+ since the day of its first sighting was a Sunday. Officially the\
+ \"Commonwealth of Dominica\", the country should not be confused with the\
+ Dominican Republic, another Caribbean nation.")
+
+leader=
+ "Roosevelt Skerrit",
+ "Pierre Charles",
+ "Rosie Douglas",
+ "Jennes Armour"
+leader_sex="Male", "Male", "Male", "Male"
+
+flag="dominica"
+flag_alt = "-"
+city_style = "Classical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="cuban"
+
+cities =
+ "Roseau",
+ "Portsmouth (ocean)",
+ "Berekua",
+ "Marigot",
+ "Grand Bay (ocean)",
+ "Atkinson",
+ "Mahaut",
+ "Canefield",
+ "Saint Joseph",
+ "Wesley",
+ "Coulihaut",
+ "Pointe Michel",
+ "Barroui",
+ "Salisbury",
+ "Castle Bruce",
+ "La Plaine",
+ "Massacre",
+ "Woodford Hill (hills)",
+ "Calibishie",
+ "Soufrière",
+ "Rosalie",
+ "Pont Cassé"

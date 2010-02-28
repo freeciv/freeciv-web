@@ -1,0 +1,107 @@
+
+===========================================================================
+ Sound Support
+===========================================================================
+
+The server sends the client a list of primary and secondary sound tags
+for certain events. The 'primary' tags are those preferred by the
+current modpack. The client does not need to have these sounds. The
+'secondary' tags should refer to standard sounds that all
+installations of Freeciv should have.
+
+Tags are used to give an easy way to change sounds. A specfile is used
+to indicate which tags refer to which sound files. A change of spec
+file, given as an option at startup, will change sounds. For example,
+
+	civclient --Sound mysounds.spec
+
+will read sound files from "mysounds.spec". You will need to download
+or copy or link those sounds into whichever directory is mentioned in this 
+file first, or edit it to refer to the right files. All references are by 
+default relative to the data/ directory. Soundpacks can be downloaded from
+the Freeciv website in the tar format. You will either need to unpack them
+with eg "tar -xzvf stdsoundsX.tar.gz" or use WinZip (for Windows), and
+put the files in the data directory mentioned above.
+
+You can get additional soundsets (sound files and a spec file)
+from <ftp://ftp.freeciv.org/freeciv/contrib/audio/soundsets>. At this address
+you find also extra sound files to change an existing soundset or
+create a new one.
+
+================================
+ Plugins
+================================
+
+The output of the sounds at the client side are done by plugins. The
+set of available plugins depend on the librarys found on the host
+system. You can choose the plugin the client should use via the
+command line:
+
+	civclient --Plugin sdl
+
+You can choose "none" to mute the client. Freeciv currently supports
+the following plugins:
+  - dummy (none)
+  - SDL with SDL_mixer library (sdl)
+
+To add support for a new plugin, change these files (where "whatever"
+is the name of the new plugin):
+	configure.in			/* add new test */
+	acconfig.h			/* add new config metavariable */
+	client/audio.c			/* link in new plugin */
+	client/Makefile.am		/* add the files below */
+	client/audio_whatever.c		/* audio plugin */
+	client/audio_whatever.h		/* audio plugin's header */
+
+================================
+ Tags
+================================
+
+There are two kinds of sound tags:
+ - defined in the rulesets
+ - defined in the program code
+
+While the former can be chosen freely the latter can't be changed.
+
+The sound tags associated with improvements (wonders and normal
+buildings), unit movements and unit fights have to be set in the
+rulesets. Freeciv just hand these sound tags over to the client where
+they are translated into the filenames of the sound files via the
+soundspec file. Every soundspec should have generic sound tags for
+wonders ("w_generic"), normal buildings ("b_generic"), unit movements
+("m_generic") and unit fights ("f_generic").
+
+Sound tags associated with certain events are generated in the Freeciv
+code and can't be configured from outside. The soundspec file also has
+to have mapping for these tags. The complete list of such tags can be
+found in data/stdsounds.spec. The name of the tag is enum name (see
+common/events.h) in lowercase. So E_POLLUTION becomes the tag
+"e_pollution". There is no generic event tag and no alternate tags are
+used.
+
+There is currently only one music: the intro music. This music will be
+played until the game starts. The tag for this music is "music_start".
+
+================================
+ TODO
+================================
+
+There are a few things that can be done to get better sound support in
+Freeciv still:
+  * add more plugins (gstreamer, arts, windows, etc)
+  * add a sound tag for each technology, as for buildings/units
+  * add support for playing .ogg files
+  * always add more event tags
+  * find or create better sound samples and make better spec-file
+
+================================
+ Misc
+================================
+
+Sound creators: Please name sound files intelligibly. Include a README
+where you present the licensing terms used (if public domain, say so)
+for the sound files.
+
+Modpack makers: Please give secondary tags that refer to standard tags 
+so that those who have not downloaded the latest & greatest sound pack 
+can still enjoy the game.

@@ -1,0 +1,114 @@
+[nation_templar]
+
+name=_("Knights Templar")
+plural=_("?plural:Templars")
+groups="Fictional"
+legend=_("The Knights Templar were formed after the first Crusade in order\
+ to protect Pilgrims on their journeys in the Holy Land. The organization\
+ grew to immense power and wealth in the next 200 years, and were the\
+ innovators of many modern concepts such as Banking.")
+leader=
+ "Hugh de Payens",
+ "Robert de Craon",      
+ "Everard des Barres",
+ "Bernhard de Tremelai",
+ "Andre de Montebard",
+ "Bertrand de Blanquefort",
+ "Philip de Milly",
+ "Odo de St. Amand",
+ "Arnold de Toroga",
+ "Gerard de Ridfort",
+ "Robert de Sable",
+ "Gilbert Erail",
+ "Philip de Plessiez",
+ "William de Chartres",
+ "Pedro de Montaigu",
+ "Armand de Perigord",
+ "Richard de Bures",
+ "William de Sonnac",
+ "Reynald de Vichiers",
+ "Thomas Berard",
+ "William de Beaujeu",
+ "Tibald de Gaudin",
+ "Jacques de Molay"
+leader_sex="Male", "Male", "Male", "Male", "Male", "Male", "Male",
+           "Male", "Male", "Male", "Male", "Male", "Male", "Male",
+       "Male", "Male", "Male", "Male", "Male", "Male", "Male",
+           "Male", "Male"
+flag="templar"
+flag_alt = "stpatrick"
+city_style = "European"
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Democracy",       _("Grand Master"), _("Grand Mistress")
+                 "Fundamentalism",  _("Grand Master"), _("Grand Mistress")
+       	         "Despotism",       _("Grand Master"), _("Grand Mistress")
+                 "Republic",        _("Grand Master"), _("Grand Mistress")
+                 "Communism",       _("Grand Master"), _("Grand Mistress")
+                 "Monarchy",        _("Grand Master"), _("Grand Mistress")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations = "german", "french"
+
+cities =
+ "Jerusalem",
+ "Karak",
+ "Acre",
+ "Antioch",
+ "Ascalon",
+ "Safed",
+ "Baghras",
+ "Edessa",
+ "Ibelin",
+ "Clairvaux",
+ "Chastel Pelegrin",
+ "Mansourah",
+ "Tripoli",
+ "Bethleham",
+ "Temple Mount",
+ "Jericho",
+ "Tortosa",
+ "Toron",
+ "Jaffa",
+ "Courtenay",
+ "Tyre",
+ "Sidon",
+ "Beaufort",
+ "Krak des Chevaliers",
+ "Atlit",
+ "Arwad",
+ "Botrun",
+ "Castle Tomar",
+ "Chatillon",
+ "Monzon",
+ "Cressing",
+ "Witham",
+ "Tiberias",
+ "Soissons",
+ "Aquilers",
+ "Springs of Cresson",
+ "Cowley",
+ "Aleppo",
+ "Hitchin",
+ "Anjou",
+ "Laodicea",
+ "Gaza",
+ "Jacob's Ford",
+ "Paneas",
+ "Nazareth",
+ "Joppa",
+ "Damietta",
+ "Lemesos",
+ "Constantia",
+ "Crete",
+ "Cilicia",
+ "Salamis",
+ "Famagusta",
+ "Stravovoun",
+ "Larnaca",
+ "Nicosia",
+ "Kyrenia"

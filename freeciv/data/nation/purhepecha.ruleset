@@ -1,0 +1,73 @@
+[nation_purhepecha]
+
+name=_("P'urhepecha")
+plural=_("?plural:P'urhepecha")
+groups="Medieval", "American"
+
+legend=_("The P'urhepecha are a people native to the modern Mexican state of\
+ Michoacan, the heart of a former empire known to them as Irechecua\
+ Tzintzuntzani, meaning the \"lands of Tzintzuntzan,\" their capital city.\
+ Their kings were the perennial enemy of the Aztec empire, who attempted an\
+ unsuccessful invasion of the P'urhepecha lands. When the Spanish arrived\
+ began their conquest of Mexico in 1519, the Aztecs sent an embassy seeking\
+ the support of the P'urhepecha, but was refused. The conquistadores'\
+ reputation preceded them and the P'urhepecha offered to become a subject\
+ state of the King of Spain rather than meet the same fate as their former\
+ enemies, the Aztecs. Nevertheless, the transition to Spanish rule was not\
+ smooth and devolved into violence. The empire, founded around 1450 CE,\
+ collapsed in 1521.")
+
+leader=
+ "Taríacuri",
+ "Hiripan",
+ "Tangáxuan I",
+ "Tzitzipandáquare",
+ "Zuangua",
+ "Tangáxuan II",
+ "Erendira"
+leader_sex="Male", "Male", "Male", "Male", "Male", "Male", "Female"
+
+ruler_titles = { "government",      "male_title",        "female_title"
+		 ; /* TRANS: Caconzi = King */
+                 "Monarchy",       _("Caconzi"),         _("Caconzi")
+               }
+
+flag="purhepecha"
+flag_alt = "-"
+city_style = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="aztec", "hopi"
+
+cities =
+ "Tzintzuntzan",
+ "Ihuatzio",
+ "Pátzcuaro",
+ "Cherán",
+ "Tingambato",
+ "Huetamo",
+ "Tzacapo Tacanendam",
+ "Uruapan",
+ "Puruándiro",
+ "Tziróndaro",
+ "Paricutín",
+ "Taximaroa",
+ "Tlatictla",
+ "Zacatula",
+ "Apatzingán",
+ "Urichu",
+ "Queréndaro",
+ "Zinapincuaro",
+ "Acambaro",
+ "Chupicuaro",
+ "Huandacareo",
+ "Zacapu",
+ "Zinaparo",
+ "Jiquilpan",
+ "Cojumatlán",
+ "Tizapan",
+ "Xucunan"

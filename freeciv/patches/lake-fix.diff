@@ -1,0 +1,13 @@
+Index: data/default/terrain.ruleset
+===================================================================
+--- data/default/terrain.ruleset	(revisjon 30)
++++ data/default/terrain.ruleset	(arbeidskopi)
+@@ -32,7 +32,7 @@
+ 
+ ; Bodies of water up to this size are considered freshwater lakes, if there is
+ ; also terrain type(s) with flag "FreshWater" in the ruleset.
+-lake_max_size = 14
++lake_max_size = 0 
+ 
+ ; There is no resources in the middle of the oceans, only near coast
+ ocean_resources = 0

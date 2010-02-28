@@ -1,0 +1,30 @@
+[nation_austrian]
+
+name=_("Austrian")
+plural=_("?plural:Austrians")
+groups="Modern", "European"
+legend=_("Austria means Eastern Realm, given its position as the far east\
+ territory of the medieval Holy Roman Empire.")
+leader=
+ "Maria Theresia",
+ "Franz Joseph",
+ "Luitpold" 
+leader_sex="Female", "Male", "Male"
+flag="austria"
+flag_alt = "-"
+city_style = "European"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations="swiss", "hungarian"
+
+cities =
+  "Wien", "Graz", "Linz", "Salzburg", "Innsbruck", "Klagenfurt",
+  "Villach", "Wels", "St. Pölten", "Dornbirn", "Steyr", "Leoben",
+  "Wolfsberg", "Bregenz", "Feldkirch", "Klosterneuburg", "Baden",
+  "Kapfenberg", "Krems", "Traun", "Amstetten", "Leonding", "Mödling",
+  "Lustenau", "Hallein", "Braunau", "Ternitz", "Spittal", "Schwechat",
+  "Eisenstadt"
+

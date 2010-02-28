@@ -1,0 +1,710 @@
+===================
+Installing Freeciv:
+===================
+
+This file describes how to compile and install Freeciv. Last time we
+made sure this file is up to date was 16-Jul-06.
+Last minor update was 08-May-08.
+
+There may be a localized version of this file in the ./doc directory,
+named INSTALL.<locale> (e.g., INSTALL.de).
+
+This document contains sections and subsections as follows:
+     0. Prerequisites:
+     1. Prerequisites for the clients:
+          1a. Prerequisites for the Gtk+ client:
+          1b. Prerequisites for the SDL client:
+          1c. Prerequisites for the Xaw client:
+     2. Generating Makefiles
+          2a. Generating the Makefile for svn versions:
+          2b. Generating the Makefile for release versions:
+     3. Compiling Freeciv:
+     4. Installation:
+     5. Native Language Support:
+     6. Readline Support:
+     7. Reinier's Solaris Installation Notes:
+     8. Reinier's libXpm Solaris Installation Notes:
+     9. Mac OS X and Darwin notes:
+    10. Debian GNU/Linux notes:
+    11. Cygwin notes:
+    12. Win32 ("native MS Windows") notes:
+
+
+0. Prerequisites:
+=================
+
+Freeciv has a number of prerequisites.  Note, that apart from the first
+prerequisite, the Freeciv configuration process is smart enough to work
+out whether your system is suitable.  If in doubt, just try it.
+
+ - Unix (or similar)
+
+   The Unix operating system, a work-alike such as Linux or FreeBSD,
+   or some OS that provides a very Unix-like personality or mode, like
+   EMX under OS/2 or the Cygnus Cygwin toolkit under Windows.
+   (See http://sourceware.cygnus.com/cygwin/).  Support for
+   BSD-style TCP/IP sockets is essential, as is a Bourne-shell
+   compatible shell, such as GNU "bash".  (Most Unixes fit the bill...)
+
+ - An ANSI C compiler.
+
+   Freeciv is written in very portable (almost) ANSI C.  Both 32- and 64-
+   bit machines are supported.  You cannot use a "K&R C" compiler, or
+   a C++ compiler.
+
+   Development of Freeciv is primarily done with "gcc", the GNU
+   project's excellent C compiler.  Releases can be compiled with gcc
+   or most other compilers (such as the unbundled Solaris C compiler).
+   Development releases and svn snapshots will not work without gcc,
+   unless you give configure the "--disable-auto-deps" option.  See
+   the section below for more information.
+   Note that there have been reports that gcc with -O3 miscompiled
+   freeciv.
+
+ - A "make" program.
+
+   Freeciv developers generally use "gmake", the GNU make program.
+
+   Officially released versions of Freeciv are designed to have
+   makefiles which work with most make programs.  Development releases
+   and svn snapshots contain things (like dependencies) which use
+   gmake's enhanced features, so gmake is necessary for development,
+   unless you give configure the "--disable-auto-deps" option.  See the
+   section below for more information.
+
+   You can check if you have GNU make installed on your system by
+   typing:
+
+    % make -v                   [and if this doesn't work, try "gmake -v"]
+
+   The output should include "GNU Make" somewhere.
+
+The svn version has additional requirements. A release version
+contains the generated files.
+
+ - The programs from GNU gettext version 0.10.36 or better
+
+   Especial the xgettext program is required to create the *.gmo
+   files which aren't included in the svn tree.
+
+ - GNU autoconf version 2.55 or better
+
+   Autoconf is required to create configure from configure.ac.
+
+ - GNU automake version 1.6 or better
+
+   Automake is required to create the various Makefile.in from
+   Makefile.am.
+
+1. Prerequisites for the clients:
+=================================
+
+The Freeciv client comes in the following forms:
+* Gtk+ 2.0 widget library ("Gtk+ 2.0").
+* Native Microsoft Windows Common Controls ("Win32").
+* X Athena Widgets library ("Xaw").
+* SDL
+
+These forms have different prerequisites, explained separately below.
+
+Your system will need to satisfy at least one of these sets of prerequisites.
+
+Note that most Linux systems have separate library packages for "runtime" 
+library support and for development support (for compiling programs 
+which use those libraries).  To compile Freeciv on such systems you 
+will need to have the appropriate "development" packages installed.
+
+
+1a. Prerequisites for the Gtk+ 2.0 client:
+==========================================
+
+ - "pkg-config".
+
+   "pkg-config" is a system for managing library compile/link flags that
+   works with automake and autoconf. You may obtain it at:
+
+      ftp://ftp.gtk.org/pub/gtk/v2.0/dependencies/pkgconfig-0.14.0.tar.gz
+
+ - The "Glib" utility library.
+
+   The "Glib" utility library provides non-graphical functions used by the
+   "Gdk" and "Gtk+" libraries, like hash tables, single linked lists, etc.
+
+   Freeciv requires a version of "Glib" greater or equal to 2.4.0.
+
+   If the Freeciv configure process tells you that you don't have the
+   Glib library installed, then it may be obtained from here:
+
+     ftp://ftp.gtk.org/pub/gtk/v2.4/glib-2.4.8.tar.bz2
+
+ - The "Atk" accessibility library.
+
+   The "Atk" library provides a set of interfaces for accessibility.
+   It allows people with disabilities to utilize all the functionality
+   provided by Gtk+ apps. You may obtain it at:
+
+     ftp://ftp.gtk.org/pub/gtk/v2.4/atk-1.8.0.tar.bz2
+
+ - The "Pango" text layout and rendering library.
+
+   "Pango" is library for layout and rendering of text, with an emphasis
+   on internationalization. You may obtain it at:
+
+     ftp://ftp.gtk.org/pub/gtk/v2.4/pango-1.4.1.tar.bz2
+
+ - The "Gtk+" widget library.
+
+   The "Gtk+" widget library was designed for the GIMP graphics program.
+   Since then it has gained popularity as an easy to program, free toolkit.
+
+   "Gtk+" is the default client. If you don't specify any client with
+   "--enablie-client" to configure, you will get "Gtk+" client.
+
+   The "Gtk+" library comes with two companion libraries:
+
+     "Gdk":
+       Provides an abstraction layer over X-Windows/LinuxFB/Win32 to implement
+       basic drawing functions, windows, clipping, etc.
+
+     "GdkPixbuf":
+       Provides image loading/saving facilities.
+
+   Freeciv requires a version of "Gtk+" greater or equal to 2.4.0.
+
+   If the Freeciv configure process tells you that you don't have the
+   Gtk+ library installed, then it may be obtained from here:
+
+     ftp://ftp.gtk.org/pub/gtk/v2.4/gtk+-2.4.14.tar.bz2
+
+   "Gtk+" depends on the "Glib", "Atk" and "Pango" libraries.
+
+If you are going to make these yourself, build and install them in the
+following order: pkg-config, Glib, Atk, Pango, Gtk+.
+
+1b. Prerequisites for the SDL client:
+=====================================
+
+ - The "SDL" library.
+
+   "Simple DirectMedia Layer is a cross-platform multimedia library designed
+    to provide low level access to audio, keyboard, mouse, joystick, 3D hardware
+    via OpenGL, and 2D video framebuffer." (http://www.libsdl.org)
+    
+   These features make it a good choice for portable games. You may obtain it
+   at:
+    
+   http://www.libsdl.org/release/SDL-1.2.11.tar.gz
+
+   To compile the client using the "SDL" library add "--enable-client=sdl"
+   to the Freeciv configure script.  See the section below for more 
+   information about the configure script.
+    
+ - The "SDL_image" library.
+ 
+   This library loads the PNG images (with the help of libpng) and converts
+   them to "SDL surfaces" that can be handled by the "SDL" library. You may
+   obtain it at:
+   
+   http://www.libsdl.org/projects/SDL_image/release/SDL_image-1.2.5.tar.gz
+   
+ - The "freetype" library.
+
+   This library helps to render text for the SDL client, using an externally
+   provided TrueType font. You may obtain it at:
+   
+   http://download.savannah.gnu.org/releases/freetype/freetype-2.3.2.tar.gz
+   
+ 
+1c. Prerequisites for the Xaw client:
+=====================================
+
+ - X-Windows.
+
+   The Freeciv Xaw client is an X-Windows program, so you'll need 
+   some way of running X-Windows programs.  (Most Unixes can...)
+
+   If the Freeciv configuration program can't find X Windows on
+   your system, you may need to use the --x-includes=DIR
+   and --x-libraries=DIR options.
+
+ - The "Athena" widget library.
+
+   This library (also known as "Xaw") is usually supplied standard
+   with the rest of X Windows, but some platforms (HP-UX 10 for
+   example) only provide it in a limited form.
+
+   To compile the client using the "Xaw" library add "--enable-client=xaw"
+   to the Freeciv configure script.  See the section below for more 
+   information about the configure script.
+
+   Many modern Unix systems (such as Linux) ship with a variant called
+   "Xaw3d", which has a more modern "3D" look.  If you'd like to try
+   compiling with Xaw3d, then add "--with-xaw3d" to the Freeciv
+   configure script.
+
+   There are also other variants of Xaw, such as Nextaw.  Freeciv
+   does not work with these, although it should be possible to modify
+   it in the same fashion as for Xaw3d.  Another tool which may help
+   is called "xaw_wrappers", although how to use it is beyond the
+   scope of this file.
+
+ - The "Xpm" library.
+
+   This library is essential for icon and bitmap handling.  It is in
+   wide use, and is supplied standard on most modern Unix machines,
+   although it may be missing on traditional or older Unixes, eg,
+   Solaris.
+
+   When you run the Freeciv configure script, it may be necessary for
+   you to use the "--with-xpm-prefix=DIR" command-line option, where
+   DIR is the name of the directory containing the "include" and "lib"
+   subdirectories where Xpm may be found.
+
+   If the Freeciv configure process tells you that you don't have the
+   Xpm library installed, then it may be obtained from here:
+
+     ftp://koala.inria.fr/pub/xpm/xpm-3.4k.tar.gz
+     ftp://ftp.x.org/contrib/libraries/xpm-3.4k.tar.gz
+
+   Install it as you would any other package.  If you can't install
+   it in a standard system directory, then use the --with-xpm-prefix
+   option, as described above.
+
+   If you have problems installing libXpm on Solaris, or don't want to
+   install it as root, see Reinier's libXpm Solaris Installation Notes
+   section near the end of this file.
+
+
+2. Generating Makefiles
+=======================
+This section contains two parts, one for generating makefiles from svn
+versions and one for generating makefiles from release versions.
+
+2a. Generating the Makefile for svn versions:
+=============================================
+
+This step is only needed for svn versions.
+
+To create the makefile just type
+
+ % ./autogen.sh
+
+This will create the configure script and will run it. All parameters
+of autogen.sh are passed to configure. Read the next section about the
+parameters which can be passed to configure.
+
+2b. Generating the Makefile for release versions:
+=================================================
+
+Before you compile Freeciv, you must generate a Makefile.  This makefile
+is configured to suit the features available on your machine.
+
+This configuration is done using the GNU "configure" script.
+
+To use "configure", "cd" into the top directory containing the Freeciv
+files, and type:
+
+ % ./configure
+
+This script will then attempt to determine the relevant features (and
+misfeatures!!) of your system.  It should print a page or two of
+diagnostics about your machine, then stop gracefully.
+
+If you'd like help on the various options supported by the configure
+script, try the --help option, like this:
+
+ % ./configure --help
+
+If you're compiling a development release or a svn snapshot, and you
+don't have both GNU make AND gcc, then pass configure the
+"--disable-auto-deps" option.  You'll especially need to do this if
+you're using the Solaris cc and make programs.
+
+Note that if you do this, dependency checking is disabled.  If you
+change any Freeciv .h files after this for any reason, you should do
+a "make clean" before doing "make" to ensure everything is compiled
+correctly.
+
+"--disable-auto-deps" has no effect when run with a stable release.
+
+By default the configure script will choose the Gtk+ client if the 
+required libraries are found. If you prefer to override this default,
+you can give configure the "--enable-client=xaw" option.
+
+If you want to change the compiler options, set the CFLAGS environment
+variable in your shell before running "configure".  For example:
+
+ % CFLAGS="-O -g -pipe" ./configure   [for people using Bourne shell or bash]
+
+or
+
+ % setenv CFLAGS "-O -g -pipe"
+ % ./configure                        [for people using C shell or tcsh]
+
+If you're tracking down a "core dump", we suggest that you use
+a value of "-g" for CFLAGS.
+
+When you install Freeciv (later), the game components will be copied into
+subdirectories of /usr/local by default.  If you would like to use some
+other installation prefix besides /usr/local, you should specify it now:
+
+ % ./configure --prefix=/opt/freeciv
+
+If for some reason using "configure" gives you trouble, follow these steps:
+
+  - Read the prerequisites section carefully, to determine if your
+    system meets all the requirements.
+
+  - If you are compiling the Xaw version of the client: Ensure that
+    you have both the Xpm and Xaw libraries installed on your system.
+    Make sure that the configure script can find them, either by
+    installing them in the standard places on your system, or by
+    instructing the configure script with the appropriate command-line
+    options.  (See ./configure --help).
+
+  - If the problem is with "gettext", please read the Native Language
+    Support section, below, for possible work-arounds.
+
+  - Let us know, so that we can fix it for the next release!!
+
+    Send mail to the freeciv-dev mailing list, telling us what you did,
+    and what the result is.  It would be helpful to include the output
+    of the configure script, and the contents of the "config.status",
+    "config.cache" and "config.log" files, which are generated by the
+    configure script.
+
+    You can find out about the freeciv-dev mailing list on our web
+    site, at http://www.freeciv.org/
+
+
+3. Compiling Freeciv:
+=====================
+
+If all has gone well previous to this point, then compiling Freeciv
+should be as easy as typing "make" (or preferably, "gmake").
+
+If you have problems, read the file BUGS, and follow the advice 
+carefully.  If the problem is with "gettext", please read the Native
+Language Support section, below, for possible work-arounds.
+
+After compilation, the important results are:
+
+  - The "client/civclient" and "server/civserver" binaries.
+  - The "data/" directory, which contains the graphics and scenarios.
+  - The "po/" directory, which contains the localization files.
+  - The "civ" and "ser" scripts.
+
+It's perfectly feasible to play Freeciv in this directory, without
+installing it.  If you do this, the "civ" and "ser" scripts may be
+useful, although they are not as necessary as they used to be.
+
+See the README file for more information.
+
+(However you cannot use Internationalization when playing Freeciv from
+the source directory; you must install Freeciv for that.)
+
+
+4. Installation:
+================
+
+Installing Freeciv involves installing the components mentioned in the
+Compiling Freeciv section.  These need to be copied to a directory such
+as /usr/local (the default), /usr/games, /usr/games/freeciv,
+/usr/local/freeciv, or some other suitable directory.
+
+Typing "make install" should install everything correctly on your machine.
+You may like to use the --prefix=DIR configure option (see the Generating
+the Makefile section) to ensure the files get placed where you want.
+
+When the Freeciv client and Freeciv server are run they both need to 
+find some files from the "data" directory.  By default freeciv looks
+in the following directories, in order, for any data files: the current 
+directory; the "data" subdirectory of the current directory; the 
+subdirectory ".freeciv" in the user's home directory; and the directory
+where the files are placed by running "make install".  You can override
+this search patch by setting the FREECIV_PATH environment variable, to
+a single directory or a list of directories separated by colons.
+
+For example:
+
+  % setenv FREECIV_PATH "/usr/games/freeciv/data:./data"
+  (for users of csh, tcsh, etc.)
+
+  % FREECIV_PATH="/usr/games/freeciv/data:./data"; export FREECIV_PATH
+  (for users of sh, bash, ksh, zsh, etc.)
+
+Also, note that you generally must install Freeciv if you wish to use
+its Native Language Support.  See the README file for more information.
+
+Finally, if you've chosen to use the Xaw client and you have permission
+to log in as the 'root' user, you should consider copying the resource
+file data/Freeciv into your app-defaults directory. (Usually this is
+/usr/lib/X11/app-defaults).
+
+
+5. Native Language Support:
+===========================
+
+Freeciv uses the "gettext" system for Native Language Support.
+
+If you experience problems with gettext in either configuring or compiling
+Freeciv, there are a few work-arounds you can try:
+
+1. If you don't need Native Language Support, disable it using the
+   "--disable-nls" ./configure option:
+
+      % ./configure --disable-nls
+      % make
+
+2. You can try to install the latest version of GNU gettext.
+   It may be obtained from here:
+
+      ftp://ftp.gnu.org/pub/gnu/gettext/gettext-0.16.1.tar.gz
+
+
+6. Readline Support:
+====================
+
+Freeciv has optional support for the readline library.
+
+Readline support is what makes the server command line behave sensibly,
+making it possible to
+ - Use the backspace key.
+ - Use the cursor to move back and forth on the line you have written.
+ - Use TAB completion of commands and command arguments. Ie, when you
+   push tab the server will finish the word for you if there is only one
+   possible choice.
+ - Use the up and down cursor to scroll through the history of previously
+   entered commands.
+ - etc.
+
+The configure script will check if you have the readline library correctly
+installed. If so it will automatically set up the makefiles so that readline
+is compiled into the server. If not then it will just silently configure
+without readline support.
+You can force configure to include readline or die trying by giving
+configure the --with-readline option:
+
+ % ./configure --with-readline
+
+Some linux distributions (and possibly other operating systems) have
+readline version 4 incorrectly installed, so that readline is not
+set up to declare it's dynamic dependencies. In that case configure
+will try to guess which extra libs it should link against and add them.
+The configure script will give a warning if it had to add extra libs
+to make readline work. This should be harmless, and is just meant as
+a reminder to the folks who distribute readline. :)
+
+7. Reinier's Solaris Installation Notes:
+========================================
+
+Solaris (2.5 and up) has its own version of X in /usr/openwin, its own
+version of make in /usr/ccs/bin/make, and its own compiler (to be purchased
+separately) which, if you have it, is available in /opt/SUNWspro/bin.
+Solaris does not provide the XPM library, which is required for the Xaw
+client; it doesn't provide any of the stuff required for imlib, gdk and gtk,
+either, which is required to build the GTK+ client.  However, with some
+patience, everything can be compiled without problems.
+
+For information on how to install XPM on Solaris, see the next section.
+
+Many Solaris installations also have MIT X (usually, in /usr/X11), GNU make,
+the gcc compiler, and the XPM library installed somewhere.  The standard
+command "./configure && make" may not be able to find your XPM library and
+it is likely to confuse the different versions.
+
+Make sure your environment variables, especially $PATH and $LD_LIBRARY_PATH,
+and the ./configure options do not point to an inconsistent set of software,
+and compiling will be fine.
+
+A simple recipe to compile with Sun X, Sun make and Sun cc, assuming the xpm
+libraries are on their own in the nonstandard location /path/to/xpm:
+
+  % setenv PATH /opt/SUNWspro/bin:/usr/ccs/bin:/bin
+  % unsetenv LD_LIBRARY_PATH
+  % ./configure --with-xpm-prefix=/path/to/xpm
+                --disable-auto-deps
+  % make
+
+The "--disable-auto-deps" prevents ./configure from creating Makefiles
+specific to GNU make.  The symptoms of this happening are:
+
+  make: Fatal error in reader:
+        Makefile, line 214: = missing from replacement macro reference
+  make: Fatal error: Command failed for target `all-recursive'
+
+Alternatively, you can set up your $PATH and ./configure to use only GNU
+tools.  Furthermore, Freeciv is known to compile with MIT X, and with
+certain combinations of GNU and Sun tools.  The exact recipes depend on your
+local installation.
+
+
+8. Reinier's libXpm Solaris Installation Notes:
+===============================================
+
+When I was root on my Solaris system, I *still* didn't want to install
+third-party software as root.  It's bad practice.
+
+Unfortunately, the libXpm installation procedure assumes installation
+in /usr/openwin, which is owned by root.  But it's not all that hard to
+get around that.
+
+Caveats:
+
+ - Make sure /usr/ucb/install is in your $PATH before /usr/bin/install,
+   otherwise 'make install' will break with strange error messages.
+
+ - The destination you want to install to can be specified with $DESTDIR;
+   however, installation will actually take place in $DESTDIR/$OPENWINDIR,
+   so the additional $OPENWINDIR subdir must be stripped afterwards
+   (changing the value of $OPENWINHOME doesn't work).
+
+The Procedure:
+
+ - Get the source from somewhere, untar it, cd into the source directory,
+   and issue:
+
+     % setenv MYXPMDEST /usr/local   # or wherever you want to install it
+     % xmkmf; make Makefiles includes depend; make
+     % setenv PATH /usr/local/bin:/usr/ucb:$PATH
+     % make DESTDIR=$MYXPMDEST install
+     % make DESTDIR=$MYXPMDEST install.man
+     % cd $MYXPMDEST; mv ./$OPENWINHOME/* .; rm -rf ./$OPENWINHOME
+
+   (If you use sh, bash, ksh, zsh, etc., the "setenv"s above should be:
+     % MYXPMDEST=/usr/local; export MYXPMDEST
+     % PATH=/usr/local/bin:/usr/ucb:$PATH
+   .)
+
+ - You can now configure Freeciv with
+
+     % ./configure --with-xpm-prefix=$MYXPMDEST
+
+   which will add the proper -I/-L/-R options to the compile and link
+   commands.
+
+
+9. Mac OS X and Darwin notes:
+=============================
+
+Apple's version of GCC uses precompiled headers that does not support
+vararg macros (a GCC extension).  This causes GCC to fail when
+compiling Freeciv since the compiler is otherwise (mostly)
+indistinguishable from vanilla GCC.  So instead of the usual
+
+  % ./configure <...>
+
+you should use either
+
+ Bourne shell:
+   $ CC="gcc -no-cpp-precomp" ./configure <...>
+
+or
+
+ C shell:
+   % env CC="gcc -no-cpp-precomp" ./configure <...>
+
+depending on whether your shell is a Bourne or C shell variant.  (If
+in doubt, just try both to see which one will work.)
+
+Replace <...> with whatever additional arguments you want to give to
+configure.
+
+
+10. Debian GNU/Linux notes:
+===========================
+
+To compile freeciv on a debian system you need the following packages:
+
+ Common requirements:
+   gcc
+   libc6-dev
+   libreadline4-dev
+   zlib1g-dev
+   xlib6g-dev
+
+ For the xaw client:
+   xaw3dg-dev
+   libxpm4-dev
+
+If you want to compile the xaw client you should give configure the
+argument --with-xaw3d, ie
+
+  % ./configure --with-xaw3d
+
+If you need to run aclocal (if you don't know what aclocal is then you
+don't need it) you also need to install imlib-dev to get the
+AM_PATH_GDK_IMLIB macro. It is a bug in debian that this macro isn't
+in gdk-imlib-dev, and it will hopefully be fixed in future debian
+releases.
+
+11. Cygwin notes:
+=================
+
+Cygwin specific installation notes can be found in doc/INSTALL-Cygwin.
+
+
+12. Win32 ("native MS Windows") notes:
+======================================
+Requirements: a unix environment with gcc and binutils for windows (mingw32)
+              for the native win32 client: libz and libpng
+              (from ftp://ftp.freeciv.org/pub/freeciv/requirements)
+You can use the standard gcc makefiles for them, but set CC and RANLIB to the
+right thing. If you use the libpng/libz binary shipped with cygwin, you are
+asking for trouble. 
+To compile the zlib from ftp.freeciv.org enter
+with the cygwin utils: make CC="gcc -mno-cygwin"
+with a mingw32 cross compiler: 
+make CC=iX86-mingw32-gcc RANLIB=iX86-mingw32-ranlib
+
+To compile libpng from ftp.freeciv.org enter
+with the cygwin utils: 
+make -f scripts/makefile.gcc CC="gcc -mno-cygwin"
+with a mingw32 cross compiler:
+make -f scripts/makefile.gcc CC=i386-mingw32-gcc RANLIB=i386-mingw32-ranlib
+
+These things have to be put to a place where your compiler will find it.
+
+Autoconf and co:
+If you build from svn, you will have to replace ./configure with ./autogen.sh 
+in the following lines.
+
+Configuring the source:
+-----------------------
+1. with the cygwin utils:
+You need the mingw and the w32api package. 
+
+export CC="gcc -mno-cygwin"
+./configure --with-included-gettext --prefix=.
+
+2. cross compiling from a real unix.
+replace X with a number which you have chosen when you have configured your 
+cross compiler.
+
+export CC=iX86-mingw32-gcc
+export AR=iX86-mingw32-ar
+export RANLIB=iX86-mingw32-ranlib
+./configure --host=iX86-mingw32 --build=$(./config.guess) --with-included-gettext --enable-client=win32 --prefix=.
+
+
+Build and install:
+--------------------
+make
+make DESTDIR=absolute_install_path bindir=./ install
+
+absolute_install_path must be  the path where you want to install freeciv.
+It must be absolute and must end with a slash.
+
+Now it is time to cleanup the stuff a bit.
+cd into your install dir. Then check if the executables have the .exe suffix and if you want, strip them.
+I suggest to move the data dir:
+
+mv share/freeciv data
+
+The final step is to convert the gfx to png. Use your favorite gfx program in
+order to do that. You can use a combination of ImageMagick and pngquant for
+that.  But it is really important that you check the result. Check every file.
+The alpha channel (transparency)  often magically disappears. There is no 
+reliable script for that.
+
+** END **

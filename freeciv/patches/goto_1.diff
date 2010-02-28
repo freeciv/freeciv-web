@@ -1,0 +1,110 @@
+Index: server/unithand.c
+===================================================================
+--- server/unithand.c	(revisjon 64)
++++ server/unithand.c	(arbeidskopi)
+@@ -59,6 +59,8 @@
+ #include "techtools.h"
+ #include "unittools.h"
+ 
++#include "pf_tools.h"
++
+ #include "unithand.h"
+ 
+ static void city_add_or_build_error(struct player *pplayer,
+@@ -791,12 +793,17 @@
+ }
+ 
+ /**************************************************************************
+-...
++  This has been rewritten to handle server-side gotos for the web client.
+ **************************************************************************/
+ void handle_unit_move(struct player *pplayer, int unit_id, int x, int y)
+ {
+   struct unit *punit = player_find_unit_by_id(pplayer, unit_id);
+   struct tile *ptile = map_pos_to_tile(x, y);
++  struct pf_parameter parameter;
++  struct pf_map *pfm;
++  struct pf_path *path;
++  struct tile *old_tile;
++  int i = 0;
+ 
+   if (NULL == punit) {
+     /* Shouldn't happen */
+@@ -816,16 +823,6 @@
+     return;
+   }
+ 
+-  if (!is_tiles_adjacent(punit->tile, ptile)) {
+-    /* Client is out of sync, ignore */
+-    freelog(LOG_VERBOSE, "handle_unit_move()"
+-	    " invalid %s (%d) move (%d,%d)",
+-	    unit_rule_name(punit),
+-	    unit_id,
+-	    x, y);
+-    return;
+-  }
+-
+   if (!is_player_phase(unit_owner(punit), game.info.phase)) {
+     /* Client is out of sync, ignore */
+     freelog(LOG_VERBOSE, "handle_unit_move()"
+@@ -837,7 +834,59 @@
+     return;
+   }
+ 
+-  (void) unit_move_handling(punit, ptile, FALSE, FALSE);
++  /* Use path-finding to find a goto path. */
++  pft_fill_unit_parameter(&parameter, punit);
++  pfm = pf_map_new(&parameter);
++  path = pf_map_get_path(pfm, ptile);
++  pf_map_destroy(pfm);
++
++  if (path) {
++    //send_goto_path(punit, path, NULL);
++
++    old_tile = path->positions[0].tile;
++
++    free_unit_orders(punit);
++    /* If we waited on a tile, reset punit->done_moving */
++    punit->done_moving = (punit->moves_left <= 0);
++    punit->has_orders = TRUE;
++    punit->orders.length = path->length;
++    punit->orders.index = 0;
++    punit->orders.repeat = FALSE;
++    punit->orders.vigilant = FALSE;
++    punit->orders.list
++      = fc_malloc(path->length * sizeof(*(punit->orders.list)));
++    for (i = 0; i < path->length - 1; i++) {
++      struct tile *new_tile = path->positions[i + 1].tile;
++
++      if (same_pos(new_tile, old_tile)) {
++        punit->orders.list[i].order = ORDER_FULL_MP;
++        punit->orders.list[i].dir = -1;
++      } else {
++        punit->orders.list[i].order = ORDER_MOVE;
++        punit->orders.list[i].dir = get_direction_for_step(old_tile, new_tile);
++        punit->orders.list[i].activity = ACTIVITY_LAST;
++      }
++      old_tile = new_tile;
++
++    }
++
++    punit->goto_tile = map_pos_to_tile(x, y);
++
++   if (!is_player_phase(unit_owner(punit), game.info.phase)
++      || execute_orders(punit)) {
++    /* Looks like the unit survived. */
++     send_unit_info(NULL, punit);
++    }
++
++    pf_path_destroy(path);
++    return ;
++  } else {
++    notify_player(pplayer, punit->tile, E_BAD_COMMAND,
++                  FTC_SERVER_INFO, NULL,
++                  _("The unit can't go there."));
++    return ;
++  }
++
+ }
+ 
+ /**************************************************************************

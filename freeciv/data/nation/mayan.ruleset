@@ -1,0 +1,90 @@
+[nation_mayan]
+
+name=_("Mayan")
+plural=_("?plural:Mayas")
+groups="Ancient", "Medieval", "American"
+legend=_("The Mayans were a Mesoamerican civilization. They are\
+ famous for building great pyramids and palaces in the jungle.")
+leader=
+ "K'uk B'alam",
+ "Zac-Kuk",
+ "Pacal",
+ "Tecún Umán"
+leader_sex="Male", "Female", "Male", "Male"
+flag = "maya"
+flag_alt = "-"
+city_style = "Tropical"
+
+ruler_titles = { "government",      "male_title",      "female_title"
+		 ; /* TRANS: Ajaw = Lord */
+                 "Monarchy",        _("Ajaw"),         _("?female:Ajaw")
+		 ; /* TRANS: Ah kin = Priest */
+                 "Fundamentalism",  _("Ah kin"),       _("?female:Ah kin")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations = "aztec", "inca"
+
+; Oldest names take precedence. Later/alternative names in comment.
+cities =
+ "B'ak",
+ "Lakam Ha",	; Palenque
+ "Xukpi",	; Copán, Oxwitik
+ "Siyan Kaan",
+ "Yax Mutal",	; Tikal
+ "Ox Tun",
+ "Ek' Xukpi",
+ "Kaan",
+ "Chich'en",	; Uucyabnal
+ "Yax Ha",
+ "Ak'e",
+ "K'antumak",
+ "Ho Kab",
+ "Ichkantiho",
+ "Mayapan",
+ "Akul",
+ "Man",
+ "Pakab",
+ "Nal",
+ "Po'",
+ "Tzuk",
+ "Wak Yab'nal",
+ "Yokib'",
+ "Kaan Kun",
+ "Waxak Tun",
+ "Siaan K’aan",	; Uaxactun
+ "Uxmal",
+ "Izancanac",	; Yaxchilan
+ "Oxhuitza",	; Caracol
+ "Lam'an'ain",	; Lamanai
+ "Mixco Viejo",	; Pocomam, Saqikajol Nimakaqapek
+ "Uac Cab'nal",	; Naranjo
+ "Quirigua",
+ "Tuluum",	; Zama
+ "Yo'okop",
+ "Zac Tz'otz'",	; Zaculeu
+ "Calakmul",
+ "Teotihuacan",
+ "Chinikiha",
+ "Chinkultic",
+ "Cival",
+ "Dzibilchaltun",
+ "Altun Ha",
+ "Gumarcaj",	; Utatlán
+ "Iximche",
+ "Izamal",
+ "Kabah",	; Kabahaucan
+ "Kaminaljuyu",
+ "Bonampak",
+ "Lubaantun",
+ "Nim Li Punit",
+ "Yokib",	; Piedras Negras
+ "Sayil",
+ "Seibal",
+ "Takalik Abaj",
+ "Tazumal",
+ "Tonina",
+ "Xunantunich"

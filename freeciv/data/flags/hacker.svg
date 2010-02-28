@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created by Keith Packard -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.0"
+   x="0"
+   y="0"
+   width="168pt"
+   height="140"
+   id="glider"
+   sodipodi:version="0.32"
+   inkscape:version="0.43"
+   sodipodi:docname="glider.svg"
+   sodipodi:docbase="/Users/daniel/Desktop/freeciv">
+  <metadata
+     id="metadata1439">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs1437">&gt;
+    </defs>
+  <sodipodi:namedview
+     inkscape:window-height="536"
+     inkscape:window-width="893"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     inkscape:zoom="2.6785714"
+     inkscape:cx="110.09626"
+     inkscape:cy="70"
+     inkscape:window-x="60"
+     inkscape:window-y="82"
+     inkscape:current-layer="glider" />
+  <rect
+     style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:7.48800039;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect1441"
+     width="210"
+     height="140"
+     x="0"
+     y="0" />
+  <g
+     id="dots"
+     style="fill:#26d009;fill-opacity:1"
+     transform="matrix(20,0,0,20,45,10)">
+    <ellipse
+       cx="3"
+       cy="1"
+       rx="0.69999999"
+       ry="0.69999999"
+       id="C1"
+       sodipodi:cx="3"
+       sodipodi:cy="1"
+       sodipodi:rx="0.69999999"
+       sodipodi:ry="0.69999999"
+       style="fill:#26d009;fill-opacity:1" />
+    <ellipse
+       cx="5"
+       cy="3"
+       rx="0.69999999"
+       ry="0.69999999"
+       id="ellipse1428"
+       sodipodi:cx="5"
+       sodipodi:cy="3"
+       sodipodi:rx="0.69999999"
+       sodipodi:ry="0.69999999"
+       style="fill:#26d009;fill-opacity:1" />
+    <ellipse
+       cx="1"
+       cy="5"
+       rx="0.69999999"
+       ry="0.69999999"
+       id="ellipse1430"
+       sodipodi:cx="1"
+       sodipodi:cy="5"
+       sodipodi:rx="0.69999999"
+       sodipodi:ry="0.69999999"
+       style="fill:#26d009;fill-opacity:1" />
+    <ellipse
+       cx="3"
+       cy="5"
+       rx="0.69999999"
+       ry="0.69999999"
+       id="ellipse1432"
+       sodipodi:cx="3"
+       sodipodi:cy="5"
+       sodipodi:rx="0.69999999"
+       sodipodi:ry="0.69999999"
+       style="fill:#26d009;fill-opacity:1" />
+    <ellipse
+       cx="5"
+       cy="5"
+       rx="0.69999999"
+       ry="0.69999999"
+       id="ellipse1434"
+       sodipodi:cx="5"
+       sodipodi:cy="5"
+       sodipodi:rx="0.69999999"
+       sodipodi:ry="0.69999999"
+       style="fill:#26d009;fill-opacity:1" />
+  </g>
+</svg>

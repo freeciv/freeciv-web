@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
+"http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<!-- Created with Sodipodi ("http://www.sodipodi.com/") -->
+<svg
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   height="162.16pt"
+   id="svg559"
+   sodipodi:docbase="/home/krtx/Desktop/"
+   sodipodi:docname="/home/krtx/Desktop/euskadi.svg"
+   sodipodi:version="0.34"
+   version="1"
+   width="243.24pt"
+   x="0.00000000"
+   y="0.00000000">
+  <metadata
+     id="metadata603">
+    <rdf:RDF
+       xmlns:cc="http://web.resource.org/cc/"
+       xmlns:dc="http://purl.org/dc/elements/1.1/"
+       xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <cc:Work
+         rdf:about="">
+        <dc:title>Basque</dc:title>
+        <dc:description />
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>spain</rdf:li>
+            <rdf:li>flag</rdf:li>
+            <rdf:li>france</rdf:li>
+            <rdf:li>ikurrina</rdf:li>
+            <rdf:li>basque</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+        <dc:publisher>
+          <cc:Agent
+             rdf:about="http://www.openclipart.org/">
+            <dc:title>Open Clip Art Library</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Patricia FIDI</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:rights>
+          <cc:Agent>
+            <dc:title>Patricia FIDI</dc:title>
+          </cc:Agent>
+        </dc:rights>
+        <dc:date />
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <cc:license
+           rdf:resource="http://web.resource.org/cc/PublicDomain" />
+        <dc:language>en</dc:language>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://web.resource.org/cc/PublicDomain">
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/Reproduction" />
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/Distribution" />
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     id="base" />
+  <defs
+     id="defs561" />
+  <g
+     id="g571"
+     style="font-size:12;"
+     transform="matrix(0.782531,0,0,0.943774,-28.92742,-56.21791)">
+    <rect
+       height="214.789001"
+       id="rect564"
+       style="fill:#ff0000;fill-rule:evenodd;"
+       width="388.498199"
+       x="37.0035095"
+       y="59.6430397" />
+    <path
+       d="M 425.537 76.247 L 425.433 59.5067 L 388.53 59.6786 L 37.0391 257.413 L 37.0391 274.4 L 73.9753 274.156 L 425.537 76.247 z "
+       id="path570"
+       style="fill:#008d00;fill-rule:evenodd;" />
+    <path
+       d="M 37.1428 76.9732 L 37.1428 59.9218 L 72.8017 59.7826 L 425.33 257.621 L 425.33 274.296 L 387.252 274.157 L 37.1428 76.9732 z "
+       id="path568"
+       style="fill:#008d00;fill-rule:evenodd;" />
+    <rect
+       height="215.618896"
+       id="rect565"
+       style="fill:#ffffff;fill-rule:evenodd;stroke-width:0.890612;"
+       width="32.8639297"
+       x="213.060104"
+       y="59.6428490" />
+    <rect
+       height="388.476501"
+       id="rect566"
+       style="fill:#ffffff;fill-rule:evenodd;stroke-width:1.19775;"
+       transform="matrix(-1.484370e-3,-0.999999,1.000000,-4.537714e-4,0.000000,0.000000)"
+       width="32.8639297"
+       x="-183.574402"
+       y="36.7664490" />
+  </g>
+</svg>

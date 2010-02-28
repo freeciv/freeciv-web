@@ -1,0 +1,73 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN"
+ "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg height="432" version="1.0" width="648" xmlns="http://www.w3.org/2000/svg">
+  <metadata>
+    <rdf:RDF xmlns:cc="http://web.resource.org/cc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <cc:Work rdf:about="">
+        <dc:title>South Korea - Taegeukgi</dc:title>
+        <dc:description>Taegeukgi, the national flag of the Republic of Korea, following the specification at http://english.president.go.kr/warp/en/korea/symbols/flag/</dc:description>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li></rdf:li>
+            <rdf:li>asia</rdf:li>
+            <rdf:li>united_nations_member</rdf:li>
+            <rdf:li>yin-yang</rdf:li>
+            <rdf:li>flag</rdf:li>
+            <rdf:li>korea</rdf:li>
+            <rdf:li>sign</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+        <dc:publisher>
+          <cc:Agent rdf:about="http://www.openclipart.org">
+            <dc:title>Stephen Silver</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Stephen Silver</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:rights>
+          <cc:Agent>
+            <dc:title>Stephen Silver</dc:title>
+          </cc:Agent>
+        </dc:rights>
+        <dc:date></dc:date>
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+        <cc:license rdf:resource="http://web.resource.org/cc/PublicDomain"/>
+        <dc:language>en</dc:language>
+      </cc:Work>
+      <cc:License rdf:about="http://web.resource.org/cc/PublicDomain">
+        <cc:permits rdf:resource="http://web.resource.org/cc/Reproduction"/>
+        <cc:permits rdf:resource="http://web.resource.org/cc/Distribution"/>
+        <cc:permits rdf:resource="http://web.resource.org/cc/DerivativeWorks"/>
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <rect fill="#fff" height="432" width="648"/>
+  <circle cx="324" cy="216" fill="#820b5c" r="54"/>
+  <path d="M234.139 156.092a108 108 0 0 1 179.723 119.815z" fill="#ff1600"/>
+  <path d="M234.139 156.092a108 108 0 0 0 179.723 119.815z" fill="#0500b8"/>
+  <circle cx="279.069" cy="186.046" fill="#ff1600" r="54"/>
+  <circle cx="368.931" cy="245.954" fill="#0500b8" r="54"/>
+  <path d="M461.288 129.883L476.265 119.898L503.723 161.085L488.746 171.069z"/>
+  <path d="M428.838 81.2079L443.815 71.2232L471.273 112.41L456.296 122.394z"/>
+  <path d="M451.304 66.2309L466.281 56.2463L526.188 146.108L511.211 156.092z"/>
+  <path d="M506.219 99.929L521.196 89.9444L548.654 131.131L533.677 141.115z"/>
+  <path d="M473.769 51.254L488.746 41.2694L516.204 82.4559L501.227 92.4405z"/>
+  <path d="M219.162 81.2079L204.185 71.2232L144.277 161.085L159.254 171.069z"/>
+  <path d="M196.696 66.2309L181.719 56.2463L121.812 146.108L136.789 156.092z"/>
+  <path d="M174.231 51.254L159.254 41.2694L99.3464 131.131L114.323 141.115z"/>
+  <path d="M219.162 350.792L204.185 360.777L144.277 270.915L159.254 260.931z"/>
+  <path d="M164.246 317.094L149.269 327.079L121.812 285.892L136.789 275.908z"/>
+  <path d="M196.696 365.769L181.719 375.754L154.262 334.567L169.239 324.583z"/>
+  <path d="M174.231 380.746L159.254 390.731L99.3464 300.869L114.323 290.885z"/>
+  <path d="M461.288 302.117L476.265 312.102L503.723 270.915L488.746 260.931z"/>
+  <path d="M428.838 350.792L443.815 360.777L471.273 319.59L456.296 309.606z"/>
+  <path d="M483.754 317.094L498.731 327.079L526.188 285.892L511.211 275.908z"/>
+  <path d="M451.304 365.769L466.281 375.754L493.738 334.567L478.761 324.583z"/>
+  <path d="M506.219 332.071L521.196 342.056L548.654 300.869L533.677 290.885z"/>
+  <path d="M473.769 380.746L488.746 390.731L516.204 349.544L501.227 339.559z"/>
+</svg>

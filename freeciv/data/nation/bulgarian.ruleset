@@ -1,0 +1,119 @@
+[nation_bulgarian]
+
+name=_("Bulgarian")
+plural=_("?plural:Bulgarians")
+groups="Modern", "Medieval", "European"
+legend=_("Bulgar leader Khan Asparukh led his people into the northern\
+ Balkans, and founded Bulgaria in 681. This was the first Slavic\
+ nation-state in history.")
+leader=
+ "Asparukh",
+ "Omurtag",
+ "Kardam",
+ "Krum",
+ "Boris",
+ "Simeon",
+ "Samuil",
+ "Petar",
+ "Assen",
+ "Kaloyan",
+ "Ivan-Assen",
+ "Ivaylo",
+ "Ivan Shishman",
+ "Alexander I Battemberg"
+leader_sex="Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male",
+           "Male", "Male", "Male", "Male", "Male", "Male"
+flag="bulgaria"
+flag_alt = "-"
+city_style = "European"
+
+ruler_titles = { "government",      "male_title",      "female_title"
+        	 "Monarchy",        _("Tzar"),         _("Tzaritza")
+                 "Republic",        _("President"),    _("?female:President")
+		 "Communism",       _("Drugariat"),    _("Drugarkata")
+		 "Fundamentalism",  _("Patriarch"),    _("Sveta Maika")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="romanian", "serbian"
+
+cities =
+ "Sofia",
+ "Plovdiv",
+ "Varna",
+ "Burgas",
+ "Pleven",
+ "Stara Zagora",
+ "Rousse",
+ "Montana",
+ "Kjustendil",
+ "Pazardzhik",
+ "Razgrad",
+ "Haskovo",
+ "Smolian",
+ "Kyrzdhali",
+ "Dobrich",
+ "Krichim",
+ "Oriahovo",
+ "Veliko Tyrnovo",
+ "Vraca",
+ "Lovech",
+ "Biala",
+ "Elena",
+ "Dupnica",
+ "Bansko",
+ "Samokov",
+ "Kostenec",
+ "Asenovgrad",
+ "Vidin",
+ "Lom",
+ "Karlovo",
+ "Kazanlyk",
+ "Zlatica",
+ "Pirdop",
+ "Elin Pelin",
+ "Bankya",
+ "Krumovgrad",
+ "Pernik",
+ "Tryn",
+ "Breznik",
+ "Zemen",
+ "Petrich",
+ "Stanke Dimitrov",
+ "Chepelare",
+ "Dimitrovgrad",
+ "Slivnica",
+ "Dragoman",
+ "Sozopol",
+ "Ahtopol",
+ "Pomorie",
+ "Primorsko",
+ "Kavarna",
+ "Aitos",
+ "Karnobat",
+ "Shumen",
+ "Yambol",
+ "Kotel",
+ "Ugarchin",
+ "Svoge",
+ "Levski",
+ "Svilengrad",
+ "Malko Tyrnovo",
+ "Devnya",
+ "Godech",
+ "Teteven",
+ "Troyan",
+ "Yablanitza",
+ "Botevgrad",
+ "Kula",
+ "Nikopol",
+ "Silistra",
+ "Kostinbrod",
+ "Koprivshtica",
+ "Panagyurishte",
+ "Peryshtica",
+ "Ihtiman"

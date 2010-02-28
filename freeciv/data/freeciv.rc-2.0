@@ -1,0 +1,83 @@
+style "city_label"
+{
+}
+
+style "notify_label"
+{
+}
+
+style "spaceship_label"
+{
+}
+
+style "help_label"
+{
+  fg[PRELIGHT] = "red"
+  fg[ACTIVE] = "red"
+  fg[NORMAL] = "red"
+  fg[INSENSITIVE] = "red"
+}
+
+style "help_link"
+{
+  fg[PRELIGHT] = "blue"
+  fg[ACTIVE] = "blue"
+  fg[NORMAL] = "blue"
+  fg[INSENSITIVE] = "blue"
+}
+
+style "help_text"
+{
+  bg[NORMAL] = { 0.9, 0.9, 0.9 }
+  base[NORMAL] = { 0.9, 0.9, 0.9 }
+  text[NORMAL] = "black"
+}
+
+style "chatline"
+{
+  base[NORMAL] = "white"
+  text[NORMAL] = "black"
+  base[INSENSITIVE] = "white"
+  text[INSENSITIVE] = "black"
+}
+
+style "beta_label"
+{
+  fg[NORMAL] = "red"
+  fg[PRELIGHT] = "red"
+}
+
+style "small_font"
+{
+}
+
+style "comment_label"
+{
+}
+
+style "city_names_font"
+{
+}
+
+style "city_productions_font"
+{
+}
+
+style "tooltips"
+{
+  font_name = "Monospace 8"
+}
+
+widget	"Freeciv*.city_label"		style	"city_label"
+widget	"Freeciv*.notify_label"		style	"notify_label"
+widget	"Freeciv*.spaceship_label"	style	"spaceship_label"
+widget	"Freeciv*.help_label"		style	"help_label"
+widget	"Freeciv*.help_link"		style	"help_link"
+widget	"Freeciv*.help_text"		style	"help_text"
+widget	"Freeciv*.chatline"		style	"chatline"
+widget	"Freeciv*.beta_label"		style	"beta_label"
+widget	"Freeciv*.small_font"		style	"small_font"
+widget	"Freeciv*.comment_label"	style	"comment_label"
+widget	"Freeciv*.city_names"		style	"city_names_font"
+widget	"Freeciv*.city_productions"	style	"city_productions_font"
+widget	"gtk-tooltips*.*"		style	"tooltips"

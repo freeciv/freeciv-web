@@ -1,0 +1,84 @@
+[nation_spanish]
+
+name=_("Spanish")
+plural=_("?plural:Spanish")
+groups="Medieval","Modern","European"
+legend=_("The modern Spanish nation was formed when the rulers of the\
+ kingdoms of Castille and Aragon led the recapture of the Iberian peninsula\
+ from the Moslems.  The Reconquista was completed in 1492AD, the same year\
+ Columbus sailed.")
+leader=
+ "Viriato",
+ "Recaredo I",
+ "Alfonso X",
+ "Fernando V",
+ "Isabel I",
+ "Carlos I",
+ "Felipe II",
+ "Carlos III",
+ "Manuel Azaña",
+ "Francisco Franco"
+leader_sex="Male", "Male", "Male", "Male", "Female",
+           "Male", "Male", "Male", "Male", "Male"
+flag="spain"
+flag_alt = "-"
+city_style = "Classical"
+
+ruler_titles = { "government",     "male_title",        "female_title"
+                 "Despotism",      _("Caudillo"),       _("Caudilla")
+                 "Fundamentalism", _("Cardinal"),       _("?female:Cardinal")
+                 "Monarchy",       _("King"),           _("Queen")
+                 "Democracy",_("Prime Minister"), _("?female:Prime Minister")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+conflicts_with="catalan", "galician"
+
+civilwar_nations=
+; Sub-national nations
+ "catalan", "galician",
+; Spanish speaking ex-colonies
+ "argentine", "chilean", "colombian", "cuban", "filipino", "venezuelan"
+
+cities =
+  "Madrid", "Barcelona", "Bilbao", "Valencia", "Sevilla", "Zaragoza",
+  "Pamplona", "Oviedo", "Valladolid", "Toledo", "Santander", "Granada",
+  "León", "Córdoba", "San Sebastián", "Segovia", "Gerona", "La Coruña",
+  "Murcia", "Málaga", "Cádiz", "Tarragona", "Vitoria", "Burgos",
+  "Palma", "Castellón de la Plana", "Palencia", "Huelva", "Zamora",
+  "Badajoz", "Jaén", "Teruel", "Lugo", "Ciudad Real", "Alicante",
+  "Almería", "Soria", "Logroño", "Pontevedra", "Orense",
+  "Guadalajara (river)", "Cuenca", "Santa Cruz de Tenerife", "Huesca",
+  "Avila", "Albacete", "Lérida", "Salamanca", "Cáceres",
+  "Las Palmas de Gran Canaria", "Reus", "Linares", "Sabadell",
+  "Baracaldo", "Calahorra", "Manacor", "Calatrava", "Getafe", "Alcudia",
+  "Laredo", "Albarracín", "Rentería", "Almazán", "Durango", "Barbastro",
+  "Ciudad Rodrigo", "El Ferrol", "Jerez de la Frontera", "Algeciras",
+  "Estela", "Alcalá de Henares", "Ponferrada", "Calatayud", "Monforte",
+  "Elche", "Orihuela", "Mérida", "Trujillo", "Vigo", "Alcoy", "Tarrasa",
+  "Astorga", "Manresa", "Torrelavega", "Mataró", "Puertollano (hills)",
+  "Plasencia", "Santurce", "Cartagena", "Ibiza", "Mahón", "Badalona",
+  "Gijón", "Aranjuez", "Almadén", "Urgel", "Bailén", "Ampurias",
+  "Navalcarnero", "Güímar", "Carmona", "Betanzos", "La Laguna", "Hijar",
+  "Baltanás", "Villena", "Valdepeñas", "Vergara", "Tolosa", "Sigüenza",
+  "Cangas", "Morella", "Vitigudino", "Marchena", "Armuña", "Tornelloso",
+  "Arzúa", "Belorado", "Jaca", "Castrojeriz (hills)", "Alméniz",
+  "Cervera", "Cifuentes", "Garafía", "Sequeros", "Alarcón", "Segorbe",
+  "Almudévar", "Salvatierra", "Sarnón", "Barbate", "Albañiz", "Gandía",
+  "Lerma", "Villaviciosa", "Játiva", "Calamocha", "Orotava",
+  "Labastida", "Mogán", "Figueras", "Orcera", "Alcaudete", "Alcira",
+  "Zumárraga", "Tudela", "Montalbán", "Reinosa",
+  "Navalmoral de la mata", "Monreal", "Mazarrón", "Lepe",
+  "Montefrío (hills)", "Utrera", "Alcañiz", "Villalba", "Jaraíz",
+  "Vélez", "Almuñécar", "Brunete", "Talavera", "Cardona", "Amposta",
+  "Sacedón", "Marbella", "Vejer de la frontera", "Guadix (river)",
+  "Azpeitía", "Ubeda", "Caspe", "Torquemada", "Lorca", "Benidorm",
+  "Tortosa", "Motril", "Lucena", "Berga", "Monzón", "Agüimes",
+  "Fregenal", "Aguilar", "Antequera", "Tineo", "Sedano", "Lebrija",
+  "Calatañazor", "Azuaga", "Vilches", "Alcántara", "Fraga", "Benavente",
+  "Mondragón", "Calanda", "Daroca", "Valverde", "Belmonte", "Simancas",
+  "Coria", "Requena", "Aranda"

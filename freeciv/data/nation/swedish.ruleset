@@ -1,0 +1,155 @@
+[nation_swedish]
+
+name=_("Swedish")
+plural=_("?plural:Swedes")
+groups="Medieval", "Modern", "European"
+legend=_("The Kingdom of Sweden was christianized and consolidated as a\
+ political entity by the 12th century AD. The country rose to prominence as\
+ one of the great powers of Europe in the 17th century, following\
+ substantial military conquests by the so called Warrior Kings. However,\
+ due to a worsening economy and several disastrous defeats to Russia, Sweden\
+ soon lost most of its gained territory. The country has not been involved\
+ in an armed conflict since 1814.")
+leader=
+ "Erik Segersäll",
+ "Olof Skötkonung",
+ "Magnus Ladulås",
+ "Gustav Vasa",
+ "Erik IX",
+ "Karl XII",
+ "Gustav II Adolf",
+ "Kristina",
+ "Oscar II",
+ "Per Albin Hansson",
+ "Olof Palme",
+ "Anna Lindh"
+leader_sex="Male", "Male", "Male", "Male", "Male", "Male", "Male",
+           "Female", "Male", "Male", "Male", "Female"
+flag="sweden"
+flag_alt = "-"
+city_style = "European"
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Democracy",_("Prime Minister"), _("?female:Prime Minister")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations = "viking", "danish", "norwegian", "sami"
+
+; /* <-- avoid gettext warnings
+;
+;  Brief explanation of the source and meaning of words in city names
+;  ==================================================================
+;
+;  BORG (source: Våra ord)
+;    Old Swedish, Icelandic <borg>; common Germanic word (German
+;    <Burg>, English <Borough>), related to [berg]
+;
+;  HULT (source: Våra ord)
+;    grove, small forest: Old Swedish <hult>, Icelandic <holt>;
+;    common Germanic word (German <Holz> wood, forest) with relatives in
+;    in a number of other Indo-European languages
+;
+;  HUS
+;    Old Swedish, Icelandic <hús>; common Germanic word (German
+;    <Haus>, English <house>) of obscure origin; cf. [hos],
+;    [hysa]
+;
+;  KIRUNA Finnized Sami language word <giron>, 'Ptarmigan'
+;
+;  KÖPING (source: Våra ord)
+;    Old Swedish <køpunger> trading town; compare Icelandic <kaupangr>,
+;    Norwegian <kaupang>; a compound of [köpa] and <-angr>
+;    (Old Swedish <-anger>) meadow, grassy field
+;
+;  JOKKMOKK Sami language 'bend in the stream'
+;
+;  OR mouth of a river (in for example <Orsa>)
+;
+;  SAL (source: Våra ord)
+;    Old Swedish <sal>, Icelandic <salr>; common Germanic word
+;    (German <Saal>), hypothetically meaning 'large house made for
+;    parties; living quarters' (in for example <Sala>, <Uppsala>)
+;
+;  SEL (source: sv.wikipedia)
+;    The part of a river where it broadens and the water seems to be still.
+;
+;  TORP (source: Våra ord)
+;    Old Swedish, Icelandic <þorp> lesser farm, allotment; farm, village,
+;    Norwegian <torp>; common Germanic word (German <Dorf> village, cf.
+;    [tölp]), hypothetical original meaning 'house'
+;
+;  TUN (source: Våra ord)
+;    farmstead (in the ancient Nordic context): from Icelandic <tún>
+;    fenced land, homestead (in Swedish town names <Tuna>, <Sigtuna>
+;    etc.); common Germanic word (German <Zaun> fencing, English <town>)
+;    with original meaning 'fencing' (Gothlandic <tun> fence) also
+;    related words in Celtic languages
+;
+;  Natural city names are created in the following way:
+;
+;    "holm", "ö", "sjö", "hamn", "sund" -> ocean
+;    "bro", "å", "sel" -> river
+;    "ås" -> hills
+;    "köping" -> grassland
+;    "träsk" -> swamp
+;
+; */ <-- avoid gettext warnings
+
+cities =
+ "Stockholm (ocean)",
+ "Uppsala",
+ "Sollentuna",
+ "Sigtuna",
+ "Lödöse (ocean)",
+ "Norrköping (grassland)",
+ "Husaby",
+ "Linköping (grassland)",
+ "Örebro (river)",
+ "Gävle",
+ "Västerås (hills)",
+ "Göteborg (ocean)",
+ "Karlstad",
+ "Växjö (ocean)",
+ "Kalmar",
+ "Visby",
+ "Malmö (ocean)",
+ "Helsingborg",
+ "Ystad",
+ "Lund",
+ "Bohus",
+ "Luleå (river, ocean)",
+ "Halmstad",
+ "Östersund (ocean)",
+ "Nyköping (grassland)",
+ "Söderhamn (ocean)",
+ "Nässjö",
+ "Sundsvall (ocean)",
+ "Piteå (river, ocean)",
+ "Skellefteå (river, ocean)",
+ "Umeå (river, ocean)",
+ "Jönköping (grassland)",
+ "Kristianstad",
+ "Sala (mountains)",
+ "Karlskrona",
+ "Mora",
+ "Oskarshamn (ocean)",
+ "Hässleholm (ocean)",
+ "Falun",
+ "Viborg",
+ "Holmgård (ocean)",
+ "Orsa (ocean, river)",
+ "Trollhättan",
+ "Kiruna (mountains)",
+ "Jokkmokk (river)",
+ "Lycksele (river)",
+ "Hultsfred",
+ "Sorsele (river)",
+ "Pajala",
+ "Vidsel (river)",
+ "Kalix",
+ "Burträsk (swamp)",
+ "Västervik (ocean)",
+ "Skogstorp (forest)"

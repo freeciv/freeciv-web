@@ -1,0 +1,100 @@
+[nation_inca]
+
+name=_("Inca")
+plural=_("?plural:Incas")
+groups="Medieval", "American"
+
+legend=_("The Inca were an Amerind people of the Northern Andes who\
+ conquered an empire stretching along the west coast of South America\
+ from what is now southern Chile nearly to the Equator. They had the bad\
+ timing to do it just a few decades before the Spanish conquistadors\
+ arrived in their part of the world in the 1530s CE. In that short time\
+ frame, the Inca were able to build over 15,000km of roads throughout\
+ their realm. Their state was the largest in the Americas prior to the\
+ Spanish conquest and was maintained through a complex, hierarchical\
+ and pragmatic administrative system. They were, however, wracked as\
+ many kingdoms have been by crises of succession. When the Spanish\
+ arrived, the Inca were in the middle of one such crisis-- the war\
+ between Atawallpa and Waskhar. They were the sons of the late ruler\
+ Wayna Qhapaq, who had died from disease - likely smallpox - that was\
+ sweeping through the land.")
+
+leader=
+ "Túpaq Amaru",
+ "Manqo Qhapaq",
+ "Atawallpa",
+ "Pachakuti Inka Yupanki",
+ "Thupa Inka Yupanki"
+leader_sex="Male", "Male", "Male", "Male", "Male"
+flag="inca"
+flag_alt = "peru"	; Used previously
+city_style = "Tropical"
+
+; The title of a queen (if female rulers are ever added) would be Qoya.
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Despotism",       _("Inka"),         _("Inka")
+                 "Monarchy",        _("Sapa Inka"),    _("Sapa Inka")
+                 "Fundamentalism",  _("Willaq Umu"),   _("Willaq Umu")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations="aztec", "mayan"
+
+cities =
+ "Qosqo",
+ "Kitu",
+ "Chan Chan",
+ "Pachakamaq",
+ "Ullantaytampu",
+ "Chimputi",
+ "Paramunka",
+ "Supi",
+ "Anqon",
+ "Pikillacta",
+ "Kashamarka",
+ "Lampalliqi",
+ "Pakasmayu",
+ "Chiklayu",
+ "Llaqtakunka",
+ "Ampatu",
+ "Inkapirka",
+ "Sarakuru",
+ "Pumapunqo",
+ "Tumipampa",
+ "Tunpis",
+ "Pirwa",
+ "Wanku",
+ "Hatun Xauxa",
+ "Urupampa",
+ "Wamanqa",
+ "Wankayu",
+ "Pika",
+ "Tupisa",
+ "Tilkara",
+ "Talqa",
+ "P'isaq",
+ "Witqos",
+ "Wilkaswaman",
+ "Milliraya",
+ "Waras",
+ "Inkawasi",
+ "Machu Pikchu",
+ "Pukallaqta",
+ "Katarpi",
+ "Chilisitu",
+ "Tipun",
+ "Pumu Urqo",
+ "Paumartampu",
+ "Amankay",
+ "Antawaylas",
+ "Samaipata",
+ "Tukumi",
+ "Sallana",
+ "Hatun Qolla",
+ "Yanamarka",
+ "Pumpu",
+ "Ariqipa",
+ "Wari"

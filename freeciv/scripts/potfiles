@@ -1,0 +1,27 @@
+#!/bin/bash
+
+POT1="po/POTFILES.in"
+
+if test "$1" == "" ; then 
+	echo Usage: $0 '<path to source root directory with trailing slash>'
+exit;
+fi
+
+POT2="$1"/$POT1
+
+if test ! -f $POT2 ; then
+	echo cannot find $POT2 - abort ;
+	exit;
+fi
+
+sort < $POT2 > /tmp/potfile
+
+echo Suggestions for addition or removal of files with translatable strings to/from POTFILES.in:
+echo Please check the output manually
+
+find "$1" -name '*.c' -o -name '*.sav' -o -name '*.ruleset' -o -name '*.txt' -o -name '*.in' | 
+  xargs grep -l -I '_("' |
+    sed "s%$1%%g" |
+      sort |
+        diff -u /tmp/potfile - |
+          egrep '^[+-]\w'

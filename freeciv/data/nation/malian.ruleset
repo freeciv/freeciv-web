@@ -1,0 +1,80 @@
+[nation_malian]
+
+name=_("Malian")
+plural=_("?plural:Malians")
+groups="Modern", "Medieval", "African"
+legend=_("Sub-Saharan Africa has been a cultural and ethnical melting pot\
+ for millennia. In medieval times, the region was home to a succession of\
+ empires called the Sahelian kingdoms. Of these, the Islamic Mali Empire\
+ with its capital in Timbuktu was the most influential. This empire\
+ reigned from the 14th to the 17th century and was famed for its wealth and\
+ benevolent kings. The modern Republic of Mali derives its name from this\
+ empire.")
+leader=
+ "Sundiata Keita",	; First Mansa of Mali empire
+ "Wali Keita",		; Second Mansa of Mali empire
+ "Sakura",		; Born slave but seized power, conqueror
+ "Gao",			; Mansa from 1300-1305
+ "Kankan Musa I"	; Mansa from 1312-1337
+ 
+leader_sex="Male", "Male", "Male", "Male", "Male"
+flag="mali"
+flag_alt = "-"
+city_style = "Classical"
+
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Despotism",       _("Chief"),        _("?female:Chief")
+		 ; /* TRANS: Mansa = King of kings */
+                 "Monarchy",        _("Mansa"),        _("Mansa")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations="algerian", "nigerian"
+
+; City list based on http://de.wikipedia.org/wiki/Liste_der_Städte_in_Mali
+; With a few historical (and current) capitals at the top.
+cities =
+ "Timbuktu",
+ "Bamako",
+ "Djenné",
+ "Gao",
+ "Koumbi Saleh",
+ "Niani",
+ "Oualata",
+ "Sikasso",
+ "Mopti",
+ "Koutiala",
+ "Kayes",
+ "Ségou",
+ "Nioro du Sahel",
+ "Niono",
+ "Markala",
+ "Kolondiéba",
+ "Kati",
+ "Kolokani",
+ "Ménaka",
+ "Bougouni",
+ "Niafunké",
+ "Banamba",
+ "Macina",
+ "Nara",
+ "Bafoulabé",
+ "San",
+ "Koulikoro",
+ "Sokolo",
+ "Yorosso",
+ "Kangaba",
+ "Kidal",
+ "Diré",
+ "Goundam",
+ "Douentza",
+ "Tenenkou",
+ "Bandiagara",
+ "Kimparana",
+ "Kita",
+ "Araouane",
+ "Taoudenni",
+ "Tessalit"

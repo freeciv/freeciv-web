@@ -1,0 +1,174 @@
+<ui>
+  <menubar>
+    <menu action="MENU_GAME">
+      <menuitem action="CLEAR_CHAT_LOGS" />
+      <menuitem action="SAVE_CHAT_LOGS" />
+      <menu action="MENU_OPTIONS">
+        <menuitem action="LOCAL_OPTIONS" />
+        <menuitem action="MESSAGE_OPTIONS" />
+        <menuitem action="SERVER_OPTIONS" />
+        <menuitem action="SAVE_OPTIONS" />
+        <menuitem action="SAVE_OPTIONS_ON_EXIT" />
+      </menu>
+      <separator />
+      <menuitem action="RELOAD_TILESET" />
+      <menuitem action="GAME_SAVE" />
+      <menuitem action="GAME_SAVE_AS" />
+      <separator />
+      <menuitem action="LEAVE" />
+      <menuitem action="QUIT" />
+    </menu>
+
+    <menu action="MENU_EDIT">
+      <menuitem action="FIND_CITY" />
+      <menuitem action="WORKLISTS" />
+      <separator />
+      <menuitem action="EDIT_MODE" />
+      <menuitem action="RECALC_BORDERS" />
+      <menuitem action="TOGGLE_FOG" />
+      <menuitem action="SCENARIO_PROPERTIES" />
+      <menuitem action="SAVE_SCENARIO" />
+    </menu>
+
+    <menu action="MENU_VIEW">
+      <menuitem action="SHOW_CITY_OUTLINES" />
+      <menuitem action="SHOW_CITY_OUTPUT" />
+      <menuitem action="SHOW_MAP_GRID" />
+      <menuitem action="SHOW_NATIONAL_BORDERS" />
+      <menuitem action="SHOW_CITY_NAMES" />
+      <menuitem action="SHOW_CITY_GROWTH" />
+      <menuitem action="SHOW_CITY_PRODUCTIONS" />
+      <menuitem action="SHOW_CITY_BUY_COST" />
+      <menuitem action="SHOW_CITY_TRADEROUTES" />
+      <separator />
+      <menuitem action="SHOW_TERRAIN" />
+      <menuitem action="SHOW_COASTLINE" />
+      <menu action="MENU_IMPROVEMENTS">
+        <menuitem action="SHOW_ROADS_RAILS" />
+        <menuitem action="SHOW_IRRIGATION" />
+        <menuitem action="SHOW_MINES" />
+        <menuitem action="SHOW_FORTRESS_AIRBASE" />
+      </menu>
+      <menuitem action="SHOW_SPECIALS" />
+      <menuitem action="SHOW_POLLUTION" />
+      <menuitem action="SHOW_CITIES" />
+      <menuitem action="SHOW_UNITS" />
+      <menuitem action="SHOW_FOCUS_UNIT" />
+      <menuitem action="SHOW_FOG_OF_WAR" />
+      <separator />
+      <menuitem action="FULL_SCREEN" />
+      <separator />
+      <menuitem action="CENTER_VIEW" />
+    </menu>
+
+    <menu action="MENU_SELECT">
+      <menuitem action="SELECT_SINGLE" />
+      <menuitem action="SELECT_ALL_ON_TILE" />
+      <separator />
+      <menuitem action="SELECT_SAME_TYPE_TILE" />
+      <menuitem action="SELECT_SAME_TYPE_CONT" />
+      <menuitem action="SELECT_SAME_TYPE" />
+      <separator />
+      <menuitem action="UNIT_WAIT" />
+      <menuitem action="UNIT_DONE" />
+    </menu>
+
+    <menu action="MENU_UNIT">
+      <menuitem action="UNIT_GOTO" />
+      <menuitem action="UNIT_GOTO_CITY" />
+      <menuitem action="UNIT_RETURN" />
+      <separator />
+      <menuitem action="UNIT_EXPLORE" />
+      <menuitem action="UNIT_PATROL" />
+      <separator />
+      <menuitem action="UNIT_SENTRY" />
+      <menuitem action="UNIT_UNSENTRY" />
+      <separator />
+      <menuitem action="UNIT_LOAD" />
+      <menuitem action="UNIT_UNLOAD" />
+      <menuitem action="UNIT_UNLOAD_TRANSPORTER" />
+      <separator />
+      <menuitem action="UNIT_HOMECITY" />
+      <menuitem action="UNIT_UPGRADE" />
+      <menuitem action="UNIT_TRANSFORM" />
+      <menuitem action="UNIT_DISBAND" />
+    </menu>
+
+    <menu action="MENU_WORK">
+      <menuitem action="BUILD_CITY" />
+      <menuitem action="GO_BUILD_CITY" />
+      <menuitem action="AUTO_SETTLER" />
+      <separator />
+      <menuitem action="BUILD_ROAD" />
+      <menuitem action="BUILD_IRRIGATION" />
+      <menuitem action="BUILD_MINE" />
+      <separator />
+      <menuitem action="CONNECT_ROAD" />
+      <menuitem action="CONNECT_RAIL" />
+      <menuitem action="CONNECT_IRRIGATION" />
+      <separator />
+      <menuitem action="TRANSFORM_TERRAIN" />
+      <menuitem action="CLEAN_POLLUTION" />
+      <menuitem action="CLEAN_FALLOUT" />
+    </menu>
+
+    <menu action="MENU_COMBAT">
+      <menuitem action="BUILD_FORTRESS" />
+      <menuitem action="BUILD_AIRBASE" />
+      <menu action="MENU_BUILD_BASE">
+        <!-- The buildable base list is ruleset dependent -->
+        <menuitem action="NULL" />
+      </menu>
+      <separator />
+      <menuitem action="DO_PILLAGE" />
+      <menuitem action="DIPLOMAT_ACTION" />
+      <menuitem action="EXPLODE_NUKE" />
+    </menu>
+
+    <menu action="MENU_CIVILIZATION">
+      <menuitem action="MAP_VIEW" />
+      <menuitem action="REPORT_UNITS" />
+      <menuitem action="REPORT_NATIONS" />
+      <menuitem action="REPORT_CITIES" />
+      <menuitem action="REPORT_ECONOMY" />
+      <menuitem action="REPORT_RESEARCH" />
+      <separator />
+      <menuitem action="TAX_RATE" />
+      <menu action="MENU_GOVERNMENT">
+        <!-- The government types are ruleset dependent -->
+        <menuitem action="NULL" />
+      </menu>
+      <separator />
+      <menuitem action="REPORT_WOW" />
+      <menuitem action="REPORT_TOP_CITIES" />
+      <menuitem action="REPORT_MESSAGES" />
+      <menuitem action="REPORT_DEMOGRAPHIC" />
+      <menuitem action="REPORT_SPACESHIP" />
+    </menu>
+
+    <menu action="MENU_HELP">
+      <menuitem action="HELP_LANGUAGES" />
+      <menuitem action="HELP_CONNECTING" />
+      <menuitem action="HELP_CONTROLS" />
+      <menuitem action="HELP_CHATLINE" />
+      <menuitem action="HELP_WORKLIST_EDITOR" />
+      <menuitem action="HELP_CMA" />
+      <menuitem action="HELP_PLAYING" />
+      <separator />
+      <menuitem action="HELP_RULESET" />
+      <menuitem action="HELP_IMPROVEMENTS" />
+      <menuitem action="HELP_UNITS" />
+      <menuitem action="HELP_COMBAT" />
+      <menuitem action="HELP_ZOC" />
+      <menuitem action="HELP_TECH" />
+      <menuitem action="HELP_TERRAIN" />
+      <menuitem action="HELP_WONDERS" />
+      <menuitem action="HELP_GOVERNMENT" />
+      <menuitem action="HELP_HAPPINESS" />
+      <menuitem action="HELP_SPACE_RACE" />
+      <separator />
+      <menuitem action="HELP_COPYING" />
+      <menuitem action="HELP_ABOUT" />
+    </menu>
+  </menubar>
+</ui>

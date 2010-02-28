@@ -1,0 +1,267 @@
+Com jugar al Freeciv
+
+  Originalment de Michael Hohensee (àlies Zarchon)
+
+
+Si el que busques és com instal·lar el Freeciv, veure el fitxer INSTALL.
+Si el que busques és com executar el Freeciv, mira el fitxer README.ca.
+
+Si no has jugat mai als jocs Civilization, el més fàcil és començar
+llegint el manual de Freeciv, consultable a:
+
+     http://ca.freeciv.wikia.com/wiki/Manual_de_joc
+
+Si el que vols són idees per jugar al Freeciv, continua llegint!!
+
+	Ara que ja tens el Freeciv en marxa, deus voler jugar les
+primeres partides. Es recomana que juguis sol algunes vegades, per
+agafar una idea de com funcionen les coses, però no és estrictament
+necessari. També pots aprendre'n jugant amb d'altres o contra l'IA.
+
+P: Pots donar-me una estratègia bàsica?
+
+	Primer de tot, aquesta estratègia no és pas *perfecte*; ni
+tan sols no és massa bona. Però et servirà per començar a jugar. Part
+de la gràcia del Freeciv és desenvolupar estratègies noves.
+
+	La partida es pot dividir en diferents fases:
+
+		La fase d'Expansió Inicial
+		Subfase tecnològica
+		Fase de la Segona Expansió
+		Fase de Producció
+	    i la fase de l'Anorreament Total dels Teus Enemics
+
+Expansió Inicial:
+
+	Aquesta fase és la més crítica. El primer que has de fer és
+construir ciutats i explorar la teva illa. Necessites moltes ciutats,
+set o vuit com a mínim.
+
+        La clau del joc és apropiar-se de tants quadrats de terra com
+sigui possible. Quan construeixes una ciutat, assegura't que no se
+t'ajunta amb massa territori d'alguna de les altres ciutats teves. Pots
+veure quines caselles fa servir una ciutat clicant-hi a sobre. El mapa
+de la ciutat i l'àrea dels voltants conté el territori d'aquella ciutat.
+Tenint això en compte, intenta mantenir les teves ciutats força juntes.
+Com més lluny estiguin les unes de les altres, més difícils seran de
+defensar i administrar en aquesta fase. (Consell: Intenta de
+construir-les sobre escuts (cavalls) o a prop dels peixos).
+
+        Ara que ja tens una ciutat o dues, cal que posis la taxa de
+ciència tan alta com ho permeti el teu tipus de govern. No et preocupis
+per la taxa d'impostos, perquè encara no construiràs edificis que
+necessitin diners; has de construir colons. Cada ciutat hauria d'estar
+generant colons. Com més colons facis, més ciutats pots tenir; com
+més ciutats tinguis, més ràpid obtindràs tecnologia; com més ràpid
+obtinguis tecnologia, guanyaràs abans. Quan hagis construït tantes
+ciutats com et càpiguen al teu racó de món, envia els colons a irrigar
+i construir camins.
+
+(Nota:	Si l'excedent de menjar d'una ciutat baixa a +1 pel fet de
+suportar massa colons, i no pots redistribuir la gent per augmentar-lo,
+canvia'ls a la producció de temples. Si no és que contactes amb un
+altre jugador, no et preocupis de construir unitats militars, encara).
+
+	Tota aquesta estona, has estat obtenint tecnologies tan ràpid
+com hagi estat possible. On hauries d'apuntar primer és "La República",
+després "Democràcia", després "Ferrocarril", i després "Industrialització".
+(Hi ha gent que ve per la Monarquia abans que la República). De seguida
+que hagis investigat un nou tipus de govern, engega una revolució i
+canvia-hi. Les ciutats funcionen molt millor en una República que no
+pas en Despotisme, però vigila perquè és molt més difícil de mantenir
+les unitats militars fora dels límits de les ciutats en una República.
+També, no t'oblidis de repassar les taxes després de canviar de govern,
+perquè els màxims varien per cada tipus.
+
+	Quan obtens la Democràcia, ja tens tot el que necessites per
+passar a la fase de la Segona Expansió. Això s'aconsegueix canviant el
+govern a Democràcia, fent que totes les ciutats construeixin temples, i
+fixant la taxa de luxes al 100%. Quan facis això, totes les ciutats
+passaran a estar en festa immediatament, i creixeran a un ritme d'un
+per torn mentre tinguin excedent de menjar. Quan siguin prou grans,
+abaixa el luxe a un nivell raonable entre el 20 i el 40%. Això et
+col·loca a la fase de la Segona Expansió. 
+
+	L'inconvenient d'això és que posar els luxes al 100% implica
+que la teva recerca científica pràcticament s'aturarà. Un cop les
+ciutats t'hagin crescut, i tornis la ciència a un nivell de 50% o així,
+tornaràs a guanyar tecnologies, però a un ritme lleugerament menor. Si
+has fet alguna mica d'exploració, i no estàs amenaçat de forma
+immediata per un altre jugador, pot ser bona idea de mantenir la ciència
+al màxim fins que les tecnologies comencin a trigar massa a generar-se.
+	
+Fase de la Segona Expansió:
+
+	Quan tinguis les ciutats a un nivell de població bo, desacostuma-
+les dels luxes gradualment, i augmenta els impostos. Un cop hagin baixat
+al 30% de luxes o així, augmenta la taxa de ciència tant com sigui
+possible, tot mantenint un nivell d'ingressos positiu. Quan obtinguis el
+ferrocarril, converteix tots els camins en vies, o almenys les caselles
+que es fan servir per producció, o les que formin part de la xarxa de
+transport. (Consell: converteix cada casella que faci servir una ciutat
+en camí/via, augmenta la producció de la ciutat. No cal millorar la
+casella del centre mateix - això es fa automàticament).
+
+	Ara és el moment de desenvolupar la industrialització, i les
+tecnologies militars. Et caldria començar a fundar ciutats en d'altres
+illes, i posar-te a explorar sèriament si encara no ho has fet. Has
+d'esbrinar on són els teus enemics. Busca les tecnologies bones per
+als vaixells, i intenta construir l'Expedició de Magallanes. Quan
+estiguis preparat, vés a:
+
+La Fase de Producció:
+
+	Ara estàs construint fàbriques i centrals tèrmiques a les
+teves ciutats. Has d'aconseguir tanta producció com sigui possible de
+cada ciutat. La contaminació es converteix en un problema. De seguida
+que puguis, intenta d'investigar Prouducció en Cadena per tenir Transports
+Públics, i Reciclatge per poder construir Centres de Reciclatge. Un cop
+tinguis totes les ciutats ben fortes, has de construir unitats militars.
+(Nota: si entres en contacte amb un altre jugador, cal que construeixis
+immediatament unes quantes unitats d'atac, i almenys una unitat defensiva
+per ciutat).
+
+	Quan comencis a pensar a atacar algú, fixa la ciència al 0%, i
+augmenta els impostos tant com puguis sense provocar desordres. Recorda
+que els diners també poden construir unitats!
+
+
+Fase de l'Anorreament Total dels Teus Enemics:
+
+	Això pot fer-se en qualsevol moment, però és més divertit amb les
+armes avançades.
+
+	Tria un enemic relativement dèbil, i envia-hi unes quantes barques
+plenes de tropes. Conquereix les seves ciutats, i fes-les servir per
+construir més unitats per conquerir la resta. Sense quarter! A mort!
+
+Repetir el procediment, tan sovint com calgui! ;-)
+
+[Nota per pacifistes: el Freeciv també permet que un jugador guanyi si
+construeix una nau espacial que arribi a Alpha Centauri abans que els
+altres].
+
+
+Questions addicionals:
+
+Q. Quines altres estratègies hi ha?
+
+	Hi ha una colla de tutorials i guies d'estratègia disponibles a la
+wiki de Freeciv (en anglès):
+
+	 http://www.freeciv.org/wiki/Tutorials
+
+A més, l'ajuda en línia de Freeciv en descriu una altra.
+
+
+Q. En partides multijugador, quin temps màxim he de deixar?
+
+	Això depèn del nombre de jugadors. Si només jugueu dos, pots
+deixar-ho en temps 0 (sense límit). Si n'hi ha més de dos, o si un dels
+dos marxarà del seu terminal de tant en tant i no vols aturar el joc, un
+temps màxim de 60 segons normalment és suficient. Avançada la partida,
+però, a mesura que les coses es posen més difícils, voldràs augmentar
+el temps màxim a 240 segons. En general, com més jugadors tinguis,
+més temps necessitaràs. Posa tu mateix el temps amb què en sentis
+més còmode, però recorda que pujar de 300 sol avorrir a la gent.
+
+
+Q. Quina mida de mapa faig servir?
+
+	La mida del mapa depèn de quants jugadors hi hagi, i com de
+ràpid vols que acabi la partida. La mida de mapa per defecte (80x50)
+és prou gran per una partida de dos jugadors força ràpida, però es
+convertirà en una partida *molt* ràpida si hi juguen més de tres persones.
+
+	Les partides ràpides solen ser frustrants per tothom excepte el
+que guanya, ja que ningú no ha tingut temps de desenvolupar cap defensa.
+Si tens més de tres persones jugant, val més que facis servir un mapa de
+80x80. Si tens cinc o més persones, voldràs considerar-ne un de 100x100.
+
+
+Q. Què és aquesta opció del "generador"?
+
+	Modifica el procés de generació del mapa. Si jugues al Freeciv
+unes quantes vegades sense canviar aquest paràmetre, segur que sentiràs
+a parlar de (o patiràs) els horrors d'una illa petita. La Síndrome
+d'Illa Petita (SIP) provoca bogeria en persones. Per solucionar-ho, els
+nostres amables i benvoluguts programadors van instal·lar l'opció de
+generador.
+- Quan es fixa a 1, crear el mapa amb un generador hight aleatori,
+  amb illes de mides diferents (i potencialment injustes).
+- Quan es fixa a 2, genera el mapa amb un generador hight pseudo fractal.
+  Això vol dir que les muntanyes i turons es col·locaran segons xifres
+  matemàtiques.
+- 3 genera illes de mida igual (de vegades amb algunes illes més petites
+  de propina). D'aquesta manera, ningú no pot queixar-se d'haver perdut
+  "per culpa d'aquest recoi d'illa"
+- 0 es fa servir per mapes prefabricats. (Carrega un mapa escrivint 
+  /load /dir/partidadesada.sav.gz al camp d'entrada de la part inferior
+  de la pantalla, d'aquesta manera es poden modificar els paràmetres
+  d'una partida. Fes servir l'editor de mapes per modificar un mapa).
+
+Sota l'opció del generador hi ha l'opció de startpos. Aquest paràmetre
+determina quants jugadors es col·loquen al mateix continent. Cada
+opció de generador té el seu propi valor de startpos per defecte, que
+és el que es carrega quan startpos és 0. (La startpos per defecte per
+al generador fractal hight és 3, que vol dir que el generador intentarà
+col·locar tots els jugadors al mateix continent).
+
+Q. Puc fer la partida més fàcil augmentant l'or inicial?
+
+	Si no tens experiència, i estàs jugant amb gent sense experiència,
+segurament ningú no s'oposarà a un augment en la quantitat d'or amb què es
+comença. No obstant, això no és pas una bona manera d'aprendre a jugar.
+Començar amb molts diners fa que el joc sigui molt més fàcil, i et
+fa més difícil d'aprendre a espavilar-te amb la quantitat per defecte.
+La majoria de jugadors experts no toquen aquest paràmetre, i si saben
+espavilar-se i tu no, acabaràs com l'Atlàntida.
+
+Nota: Es pot dir el mateix dels paràmetres "techlevel" i "researchspeed"
+
+
+Q. I què me'n dius de les altres opcions?
+
+	La resta tenen a veure sobretot amb el tipus de món que es genera
+i la mecànica del joc. Augmentar les "especials" et dóna una taxa alta de
+recursos per casella, i "huts" determina quantes cabanes de regals hi ha.
+Augmentar el nombre de colons i exploradors amb què es comença fa que
+el joc vagi més ràpid, i permet a la gent de sobreviure als "bàrbars dels
+$#@!" que de vegades viuen a les cabanes.
+
+	Els paràmetres relacionats amb el ferrocarril determinen quanta
+més producció de menjar/comerç/producció tindrà una casella amb ferrocarril,
+i el paràmetre "foodbox" determina quant de menjar ha de tenir cada
+persona de la ciutat abans d'afegir-n'hi una altra.
+
+	Sobre la resta, augmentar "mountains" vol dir un mapa més
+muntanyós, augmentar "deserts" implica més deserts, etc.
+
+
+Q. Com obtinc la tecnologia _____?
+
+Busca la tecnologia a l'ajuda online. Et dirà les tecnologies que has
+d'aconseguir primer.
+
+Pots llegir el joc de regles de tecnologia de
+'data/default/techs.ruleset'.  Conté ana llista de totes les tecnologies,
+i quines fan falta per obtenir-ne d'altres.
+
+
+Q. Quins tipus d'unitats militars són els més útils?
+
+   Per Atac:
+
+	Tancs , Helicòpters, Míssils de Creuer, Cuirassats,
+	Transports, Nuclears, Obusos, Bombarders.
+
+   Per Defensa:
+
+	Tancs, Infanteria Mecanitzada, Obusos, Cuirassats,
+	Míssils de Creuer, Nuclears.
+
+Recorda, la millor defensa és un bon atac.
+
+
+Afegits a aquest document seran benvinguts!

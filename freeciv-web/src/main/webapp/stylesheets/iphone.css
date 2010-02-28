@@ -1,0 +1,75 @@
+body { 
+	color: #ffffff;
+	background-color: #000000;
+	margin: 0px 0px 0px 0px;
+}
+
+#game_communication_panel {
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+}
+
+#game_overview_map {
+ display: none;
+}
+
+#game_message_area {
+  height: 37px;
+}
+
+#game_chat_box {
+  display: none;
+}
+
+#game_action_panel {
+  width: 98%;
+  height: 47px;
+  position: absolute;
+  bottom: 37px;
+}
+
+#freeciv_logo {
+  background: #444444 url(/images/freeciv-net-iphone.png);
+  width: 80px; 
+  height: 25px; 
+  
+  position: absolute;
+  top: 27px; 
+  left: 0px;
+}
+
+.ui-helper-reset {
+  font-size: 60%;
+}
+
+#hel_tab {
+  display: none;
+}
+
+#opt_tab {
+  display: none;
+}
+
+#game_status_panel {
+  display: none;
+}
+
+#turn_done_button {
+  position: absolute;
+  top: 23px; 
+  right: 0px;
+}
+
+
+
+#city_right_panel {
+  float: left;
+  clear: left;
+  padding-top: 40px;
+ 
+}
+
+#city_canvas_div {
+  margin: 5px;
+}

@@ -1,0 +1,76 @@
+[nation_esperant]
+
+name=_("Esperant")
+plural=_("?plural:Esperants")
+groups= "Fictional"
+legend=_("The Esperants are a world community united by the Esperanto\
+ language.")
+leader=
+ "L.L. ZAMENHOF",
+ "Théophile CART",
+ "Fernand DORÉ",
+ "Georges KERSAUDY",
+ "Georges LAGRANGE",
+ "Frederic PUJULÀ I VALLÈS"
+ 
+leader_sex="Male", "Male", "Male", "Male", "Male", "Male"
+flag="esperanto"
+flag_alt = "-"
+city_style = "European"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+cities =
+ "Esperanturbo",
+ "Novurbo",
+ "Kongresurbo",
+ "Sabla Plaĝo (ocean)",
+ "Nordaj Montetoj (mountains)",
+ "Venta Valo (plains, grassland)",
+ "Herbejorojo",
+ "Sunleviĝo",
+ "Ferorivereto (river)",
+ "Egaleco",
+ "Montriĉa (mountains)",
+ "Genuo de Mortigicerv",
+ "Piedo de Urso",
+ "Lama Cervo",
+ "Monto de la Lupo (mountains)",
+ "Malakra Tranĉilo",
+ "Eta Grandkorno",
+ "Blua Akvo (ocean)",
+ "Betulara Ravino",
+ "Arbarlago (forest)",
+ "Blankŝtona Monteto (hills)",
+ "Lago de l' Morta Bubalo",
+ "Blankbirda Rojo (river)",
+ "Klar-akvo (ocean)",
+ "Granda Truo",
+ "Pinara Kresto",
+ "Paco",
+ "Espero",
+ "Pafilfumo",
+ "Flugmonaĥino",
+ "Sankta Johano",
+ "Sankta Petro",
+ "Sankta Mateo",
+ "Sankta Andreo",
+ "Sankta Paŭlo",
+ "Sankta Jakvo",
+ "Granda Monto",
+ "Sankta Georgo",
+ "Sankta Baptisto",
+ "Verda Arbaro",
+ "Blua Lago (river)",
+ "Ruĝa Lago (river)",
+ "Nigra Monto",
+ "Neĝa Monto",
+ "Blankŝtona Monteto",
+ "Birda Rojo",
+ "Granda Rojo",
+ "Banburgo-ĉe-Rivero (river)",
+ "Granda Rivero (river)",
+ "Novburgo-ĉe-Maro (ocean)"

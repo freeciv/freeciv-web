@@ -1,0 +1,19 @@
+*************** files =
+*** 92,98 ****
+  
+  
+  ; Include color definitions
+- *include "misc/colors.tilespec"
+  
+  ; Terrain info - see README.graphics
+  
+--- 92,100 ----
+  
+  
+  ; Include color definitions
++ *include "misc/gamecolors.tilespec"
++ *include "misc/playercolors.tilespec"
++ *include "amplio/terraincolors.tilespec"
+  
+  ; Terrain info - see README.graphics
+  

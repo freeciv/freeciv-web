@@ -1,0 +1,68 @@
+[nation_kongo]
+
+name=_("Kongo")
+plural=_("?plural:Kongo")
+groups="Medieval", "African"
+
+legend=_("This Kingdom, lasting from roughly 1400 CE until the late 19th\
+ century, existed in the present-day countries of Angola and the Democratic\
+ Republic of the Congo. Soon after its formation, Portuguese explorers,\
+ missionaries and slavers began to arrive and exerted considerable influence\
+ in the Kingdom.")
+
+leader=
+ "Lukeni lua Nim",
+ "Ntinu Nimi a Lukeni",
+ "Nanga",
+ "Nlaza",
+ "Nkuwu a Ntinu",
+ "Nvita a Nkanga"
+
+leader_sex = "Male", "Male", "Male", "Male", "Male", "Male"
+
+flag         = "kongo"
+flag_alt     = "-"
+city_style   = "Tropical"
+ruler_titles = { "government",      "male_title",        "female_title"
+                 "Despotism",      _("Chief"),           _("Chief")
+                 "Monarchy",       _("Manikongo"),       _("Manikongo")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations = "swazi", "zulu"
+
+cities =
+ "M'banza-Kongo",
+ "Libongo",
+ "Bamba",
+ "Pemba",
+ "Bata",
+ "Kombanso",
+ "Bumbi",
+ "Sundi",
+ "Manebakani",
+ "Kandongo",
+ "Pango",
+ "Kundi",
+ "Banga",
+ "Nsundi",
+ "Kamga",
+ "Wembo",
+ "Nkusu",
+ "Wandu",
+ "Matadi",
+ "Vunda",
+ "Zombo",
+ "Mbwila",
+ "Ulanga",
+ "Mbata",
+ "Soyo",
+ "Mpemba",
+ "Dembos",
+ "Mpangu",
+ "Luanda",
+ "Kitombo"

@@ -1,0 +1,108 @@
+Source: freeciv
+Section: games
+Priority: optional
+Maintainer: Jules Bean <jules@debian.org>
+
+Package: freeciv-common
+Architecture: any
+Depends: ${shlibs:Depends}
+Recommends: freeciv-client
+Description: Turn-based strategy game inspired by the history of human civilization.
+ Freeciv is distributed under the GPL and implemented for X.
+ Freeciv is a turn-based strategy game, in which
+ each player becomes leader of a civilization, fighting to obtain
+ the ultimate goal: The extinction of all other civilizations.
+ .
+ This package contains only the common libraries.
+
+Package: freeciv-server
+Architecture: any
+Depends: freeciv-common (= ${Source-Version}), ${shlibs:Depends}
+Recommends: freeciv-client
+Description: Turn-based strategy game inspired by the history of human civilization.
+ Freeciv is distributed under the GPL and implemented for X.
+ Freeciv is a turn-based strategy game, in which
+ each player becomes leader of a civilization, fighting to obtain
+ the ultimate goal: The extinction of all other civilizations.
+ .
+ This package contains only the server and related datafiles.
+
+Package: freeciv-client-data
+Architecture: all
+Depends:
+Description: Turn-based strategy game inspired by the history of human civilization.
+ Freeciv is distributed under the GPL and implemented for X.
+ Freeciv is a turn-based strategy game, in which
+ each player becomes leader of a civilization, fighting to obtain
+ the ultimate goal: The extinction of all other civilizations.
+ .
+ This package contains data files shared by all clients.
+
+Package: freeciv-client-xaw3d
+Architecture: any
+Depends: freeciv-common (= ${Source-Version}),
+         freeciv-client-data (= ${Source-Version}),
+         ${shlibs:Depends}
+Recommends: freeciv-server
+Provides: freeciv-client
+Description: Turn-based strategy game inspired by the history of human civilization.
+ Freeciv is distributed under the GPL and implemented for X.
+ Freeciv is a turn-based strategy game, in which
+ each player becomes leader of a civilization, fighting to obtain
+ the ultimate goal: The extinction of all other civilizations.
+ .
+ This package contains only the freeciv-xaw executable, which is
+ compiled to run with the xaw3d version of the Athena libraries. You still
+ need the freeciv package for the data files.
+
+Package: freeciv-client-gtk2
+Architecture: any
+Depends: freeciv-common (= ${Source-Version}),
+         freeciv-client-data (= ${Source-Version}),
+         ${shlibs:Depends}
+Recommends: freeciv-server
+Provides: freeciv-client
+Description: Turn-based strategy game inspired by the history of human civilization.
+ Freeciv is distributed under the GPL and implemented for X.
+ Freeciv is a turn-based strategy game, in which
+ each player becomes leader of a civilization, fighting to obtain
+ the ultimate goal: The extinction of all other civilizations.
+ .
+ This package contains only the freeciv-gtk2 executable, which is the GTK+
+ version of the Freeciv client (so you get rid of xaw-variants problems).
+ You still need the freeciv-common package for the data files.
+
+Package: freeciv-client-sdl
+Architecture: any
+Depends: freeciv-common (= ${Source-Version}),
+         freeciv-client-data (= ${Source-Version}),
+         ${shlibs:Depends}
+Recommends: freeciv-server
+Provides: freeciv-client
+Description: Turn-based strategy game inspired by the history of human civilization.
+ Freeciv is distributed under the GPL and implemented for X.
+ Freeciv is a turn-based strategy game, in which
+ each player becomes leader of a civilization, fighting to obtain
+ the ultimate goal: The extinction of all other civilizations.
+ .
+ This package contains only the freeciv-sdl executable, which is the SDL
+ version of the Freeciv client (so you get rid of xaw-variants problems).
+ You still need the freeciv-common package for the data files.
+
+Package: freeciv-tilesets
+Architecture: all
+Description: Turn-based strategy game inspired by the history of human civilization.
+ Freeciv is distributed under the GPL and implemented for X.
+ Freeciv is a turn-based strategy game, in which
+ each player becomes leader of a civilization, fighting to obtain
+ the ultimate goal: The extinction of all other civilizations.
+ .
+ This package contains extra tilesets to be used with Freeciv client.
+
+Package: freeciv-sound-standard
+Architecture: all
+Description: Turn-based strategy game inspired by the history of human civilization.
+ Freeciv is distributed under the GPL and implemented for X.
+ Freeciv is a turn-based strategy game, in which
+ each player becomes leader of a civilization, fighting to obtain
+ the ultimate goal: The extinction of all other civilizations.

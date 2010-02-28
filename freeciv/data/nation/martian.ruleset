@@ -1,0 +1,31 @@
+[nation_martian]
+
+name=_("Martian")
+plural=_("?plural:Martians")
+groups="Fictional"
+legend=_("Marsmen landed on Earth in 4000 BC!")
+leader=
+ "Ray Bradbury",
+ "Wernher von Braun",
+ "Arthur C. Clarke",
+ "Isaac Asimov",
+ "Gene Roddenberry"
+leader_sex="Male", "Male", "Male", "Male", "Male"
+flag="mars"
+flag_alt = "-"
+city_style = "Babylonian"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+cities =
+	"Olympus Mons", "Utopia Planitia", "Hellas Planitia",
+	"Elysium Planitia", "Arsia Mons", "Pavonis Mons", "Ascraeus Mons",
+	"Tharsis Tholus", "Argyre Planitia", "Deuteronilus Mensae",
+	"Elysium Mons", "Apponolaris Patera", "Sinus Sabaeus",
+	"Valles Marineris", "Margaritifer Sinus", "Syria Planum",
+	"Sinai Planum", "Solis Planum", "Lunae Planum", "Amazonis Planitia",
+	"Arcada Planitia", "Alba Paterna", "Biblis Paterna",
+	"Uranius Tholus", "Kassei Vailis"

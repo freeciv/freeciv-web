@@ -1,0 +1,210 @@
+
+[tilespec]
+
+; Format and options of this tilespec file:
+options = "+tilespec4+2007.Oct.26"
+
+; A simple name for the tileset specified by this file:
+name = "hex-2 tileset"
+priority = 5
+
+; TODO: add more overall information fields on tiles, 
+; eg, description, authors, colors, etc.
+
+; Basic tile sizes:
+normal_tile_width  = 40
+normal_tile_height = 72
+small_tile_width   = 15
+small_tile_height  = 20
+
+; Basic tile style.
+hex_side = 24
+is_hex = 1
+is_isometric = 1
+
+; Use roadstyle 0 (old iso style)
+roadstyle = 0
+
+; Use fogstyle 0 (old iso style)
+fogstyle = 0
+
+; Was darkness style 1 (single-sprite)
+darkness_style = 2
+ 
+; offset the flags by this amount when drawing units
+unit_flag_offset_x = 1
+unit_flag_offset_y = 59
+city_flag_offset_x = 1
+city_flag_offset_y = 51
+
+; offset units by this amount
+unit_offset_x = 4
+unit_offset_y = 57
+
+; offset the citybar text by this amount (from the city tile origin)
+citybar_offset_y = 48
+
+; Font to use to draw city names:
+city_names_font = "6x13bold"
+
+; Font to use to draw city productions:
+city_productions_font = "6x13"
+
+; Should flags be drawn as transparent:  (else opaque)
+flags_are_transparent = 1
+
+; Font size (points) to use to draw city names and productions:
+city_names_font_size = 10
+city_productions_font_size = 10
+
+; These are special because they get freed and reloaded
+; as required:
+main_intro_file    = "misc/intro"
+minimap_intro_file = "misc/radar"
+
+; Below, the graphics spec files; must be somewhere (anywhere) in 
+; the data path. Order may be important for color allocation on 
+; low-color systems, and if there are any duplicate tags (lattermost
+; tag is used).
+files = 
+  "misc/colors.spec",
+  "misc/overlays.spec",
+  "misc/citybar.spec",
+  "hex2t/tiles.spec",
+  "hex2t/overlays.spec",
+  "trident/units.spec",
+  "hex2t/select.spec",
+  "hex2t/items.spec",
+  "hex2t/grid.spec",
+  "misc/small.spec",
+  "misc/buildings.spec",
+  "misc/flags.spec",
+  "misc/shields.spec",
+  "misc/cursors.spec",
+  "misc/space.spec",
+  "misc/techs.spec",
+  "misc/treaty.spec",
+  "misc/icons.spec",
+  "misc/editor.spec",
+  "amplio/nuke.spec"
+
+
+; Include color definitions
+*include "misc/colors.tilespec"
+
+; Terrain info - see README.graphics
+
+[layer0]
+match_types = "water", "land"
+
+[layer1]
+match_types = "forest", "jungle", "steep"
+
+; Water graphics referenced by terrain.ruleset
+;
+[tile_coast]
+is_blended = 0
+num_layers = 1
+layer0_match_type = "water"
+layer0_match_with = "water"
+layer0_sprite_type = "corner"
+
+[tile_shelf]
+is_blended = 0
+num_layers = 1
+layer0_match_type = "water"
+layer0_match_with = "water"
+layer0_sprite_type = "corner"
+
+[tile_floor]
+is_blended = 0
+num_layers = 1
+layer0_match_type = "water"
+layer0_match_with = "water"
+layer0_sprite_type = "corner"
+
+[tile_trench]
+is_blended = 0
+num_layers = 1
+layer0_match_type = "water"
+layer0_match_with = "water"
+layer0_sprite_type = "corner"
+
+[tile_ridge]
+is_blended = 0
+num_layers = 2
+layer0_match_type = "water"
+layer0_match_with = "water"
+layer0_sprite_type = "corner"
+layer1_match_type = "steep"
+layer1_match_with = "steep"
+
+[tile_vent]
+is_blended = 0
+num_layers = 1
+layer0_match_type = "water"
+layer0_match_with = "water"
+layer0_sprite_type = "corner"
+
+; Land graphics referenced by terrain.ruleset
+;
+[tile_arctic]
+is_blended = 1
+num_layers = 1
+layer0_match_type = "land"
+mine_sprite = "tx.oil_mine"
+
+[tile_desert]
+is_blended = 1
+num_layers = 1
+layer0_match_type = "land"
+mine_sprite = "tx.oil_mine"
+
+[tile_forest]
+is_blended = 1
+num_layers = 2
+layer0_match_type = "land"
+layer1_match_type = "forest"
+layer1_match_with = "forest"
+
+[tile_grassland]
+is_blended = 1
+num_layers = 1
+layer0_match_type = "land"
+
+[tile_hills]
+is_blended = 1
+num_layers = 2
+layer0_match_type = "land"
+layer1_match_type = "steep"
+layer1_match_with = "steep"
+mine_sprite = "tx.mine"
+
+[tile_jungle]
+is_blended = 1
+num_layers = 2
+layer0_match_type = "land"
+layer1_match_type = "jungle"
+
+[tile_mountains]
+is_blended = 1
+num_layers = 2
+layer0_match_type = "land"
+layer1_match_type = "steep"
+layer1_match_with = "steep"
+mine_sprite = "tx.mine"
+
+[tile_plains]
+is_blended = 1
+num_layers = 1
+layer0_match_type = "land"
+
+[tile_swamp]
+is_blended = 1
+num_layers = 1
+layer0_match_type = "land"
+
+[tile_tundra]
+is_blended = 1
+num_layers = 1
+layer0_match_type = "land"

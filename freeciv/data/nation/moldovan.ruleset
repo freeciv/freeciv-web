@@ -1,0 +1,85 @@
+[nation_moldovan]
+
+name=_("Moldovan")
+plural=_("?plural:Moldovans")
+groups="Modern", "European"
+legend=_("Moldova was conquered by the Ottomans in the 16th century.\
+ Then in 1812 Moldova became part of the Russian Empire.\
+ From 1918 Moldova was part of Romania until inclusion \
+ in the Soviet Union in 1940. The modern Republic of Moldova \
+ gained independence from the Soviet Union in 1991.")
+leader="Dragoş",
+       "Ştefan cel Mare şi Sfânt",
+       "Vasile Lupu",
+       "Dimitrie Cantemir",
+       "Alexandru Ioan Cuza"
+leader_sex="Male", "Male", "Male", "Male", "Male"
+
+flag="moldova"
+flag_alt = "-"
+city_style = "European"
+
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Despotism",       _("Voievod"),      _("Doamna")
+                 "Monarchy",        _("Gospodar"),     _("Gospodarynya")
+                 "Democracy",       _("Presidente"),   _("Presidente")
+                 "Communism",       _("Tovaras"),      _("Tovarasa")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations = "romanian", "ukrainian", "turkish"
+
+cities =
+  "Chişinau",
+  "Bălţi",
+  "Cahul",
+  "Comrat",
+  "Hinceşti",
+  "Căuşeni",
+  "Ungheni",
+  "Soroca",
+  "Orhei",
+  "Edineţ",
+  "Lipcani",
+  "Briceni",
+  "Ocniţa",
+  "Cupcini",
+  "Donduşeni",
+  "Timova",
+  "Rişcani",
+  "Drochia",
+  "Costeşti",
+  "Floreşti",
+  "Chubdeşti",
+  "Soldăneşti",
+  "Balatina",
+  "Glodeni",
+  "Singerei",
+  "Rezina",
+  "Teleneşti",
+  "Sculeni",
+  "Corneşti",
+  "Călăraşi",
+  "Criuleni",
+  "Nispoleni",
+  "Străşeni",
+  "Ialoveni",
+  "Singera",
+  "Cărpineni",
+  "Lăpuşna",
+  "Anenii Noi",
+  "Leova",
+  "Cimişlia",
+  "Cainari",
+  "Olăneşti",
+  "Iargara",
+  "Basarabeasca",
+  "Cantemir",
+  "Congaz",
+  "Ceadîr-Lunga",
+  "Taraclia",
+  "Vulcăneşti"

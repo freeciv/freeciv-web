@@ -1,0 +1,84 @@
+[nation_icelandic]
+
+name=_("Icelandic")
+plural=_("?plural:Icelanders")
+groups="Modern", "European"
+legend=_("Iceland was long one of the largest uninhabited islands in the\
+ world, until it was settled by Norwegian Vikings in the\
+ late 9th century. The island was kept initially under the Norwegian and\
+ later the Danish crown until independence from Denmark in 1944.")
+leader=
+ "Jón Sigurdsson",
+ "Ingólfur Arnarson",
+ "Sveinn Björnsson",
+ "Ásgeir Ásgeirsson",
+ "Kristján Eldjárn",
+ "Vigdís Finnbogadóttir"
+
+leader_sex="Male", "Male", "Male", "Male", "Male", "Female"
+
+flag="iceland"
+flag_alt = "norway"
+city_style = "European"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations = "danish", "english", "canadian"
+
+cities =
+    "Reykjavík",
+    "Akureyri",
+    "Hafnarfjörður",
+    "Kópavogur",
+    "Akranes",
+    "Borgarnes",
+    "Dalvík",
+    "Egilsstaðir",
+    "Garðabær",
+    "Grindavik",
+    "Höfn",
+    "Húsavík",
+    "Hveragerði",
+    "Ísafjörður",
+    "Keflavík",
+    "Mosfellsbær",
+    "Neskaupsstaður",
+    "Njarðvík",
+    "Ólafsvík",
+    "Sauðárkrókur",
+    "Selfoss",
+    "Siglufjörður",
+    "Stykkishólmur",
+    "Vestmannaeyjar",
+    "Þorlákshöfn",
+    "Bíldudalur",
+    "Blönduós",
+    "Bolungarvík",
+    "Breiðdalsvík",
+    "Búðardalur",
+    "Djúpivogur",
+    "Djúpavík",
+    "Drangsnes",
+    "Eskifjörður",
+    "Eyrarbakki",
+    "Fáskrúðsfjörður",
+    "Garður",
+    "Hella",
+    "Hólar",
+    "Hólmavík",
+    "Hvammstangi",
+    "Hvolsvöllur",
+    "Kirkjubæjarklaustur",
+    "Mjóifjörður",
+    "Ólafsfjörður",
+    "Reyðarfjörður",
+    "Reykholt",
+    "Seyðisfjörður",
+    "Skálholt",
+    "Skógar",
+    "Stokkseyri",
+    "Stöðvarfjörður",
+    "Vík í Mýrdal",
+    "Vogar"

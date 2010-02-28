@@ -1,0 +1,24 @@
+[terraincolors]
+
+; Tile tags should match [tile_*] sections in *.tilespec(s)
+; corresponding to graphic tag in terrain.ruleset(s)
+;
+;   coast  == ocean
+;   floor  == depth ocean
+;   arctic == glacier
+;
+tiles = {"r", "g", "b", "tag"
+    0,   0, 220, "lake"
+    0,   0, 200, "coast"
+    0,   0, 170, "floor"
+  255, 255, 255, "arctic"
+  212, 179, 101, "desert"
+   43, 107,  19, "forest"
+   10, 123,   2, "grassland"
+  142, 121,  63, "hills"
+   54, 162,  38, "jungle"
+  138, 168,  60, "plains"
+  167,  77,  38, "mountains"
+   44,  64,  44, "swamp"
+   74,  74,  74, "tundra"
+}

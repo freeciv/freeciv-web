@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="300.00000pt"
+   height="200.00000pt"
+   id="svg1310"
+   sodipodi:version="0.32"
+   inkscape:version="0.42"
+   sodipodi:docbase="/home/daniel/freeciv/data/flags"
+   sodipodi:docname="sapmi.svg">
+  <defs
+     id="defs1312" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.3800000"
+     inkscape:cx="187.49999"
+     inkscape:cy="125.00000"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     inkscape:window-width="753"
+     inkscape:window-height="513"
+     inkscape:window-x="10"
+     inkscape:window-y="72" />
+  <metadata
+     id="metadata1315">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       id="_136607520"
+       class="fil0"
+       x="171.72028"
+       y="0.0000000"
+       width="203.27971"
+       height="250.00000"
+       style="fill:#0033ab;fill-rule:evenodd" />
+    <rect
+       id="_136678936"
+       class="fil1"
+       x="145.73019"
+       y="0.0000000"
+       width="25.990099"
+       height="250.00000"
+       style="fill:#f7d117;fill-rule:evenodd" />
+    <rect
+       id="_136689144"
+       class="fil2"
+       x="119.74011"
+       y="0.0000000"
+       width="25.990099"
+       height="250.00000"
+       style="fill:#007336;fill-rule:evenodd" />
+    <rect
+       id="_136695184"
+       class="fil3"
+       x="0.0000000"
+       y="0.0000000"
+       width="119.74010"
+       height="250.00000"
+       style="fill:#d42e12;fill-rule:evenodd" />
+    <path
+       id="_136686600"
+       class="fil0"
+       d="M 145.73018,214.10817 C 96.524988,214.10817 56.621288,174.20449 56.621288,124.99933 C 56.621288,75.794181 96.524988,35.890501 145.73018,35.890501 L 145.73018,214.10817 z M 145.73018,199.25670 C 104.72598,199.25670 71.472768,166.00365 71.472768,124.99933 C 71.472768,83.995161 104.72583,50.741971 145.73018,50.741971 L 145.73018,199.25670 z "
+       style="fill:#0033ab;fill-rule:evenodd" />
+    <path
+       id="_136682368"
+       class="fil3"
+       d="M 145.73018,35.890501 C 194.93536,35.890501 234.83906,75.794181 234.83906,124.99933 C 234.83906,174.20449 194.93536,214.10817 145.73018,214.10817 L 145.73018,35.890501 z M 145.73018,50.741971 C 186.73437,50.741971 219.98758,83.995011 219.98758,124.99933 C 219.98758,166.00351 186.73452,199.25670 145.73018,199.25670 L 145.73018,50.741971 z "
+       style="fill:#d42e12;fill-rule:evenodd" />
+  </g>
+</svg>

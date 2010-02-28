@@ -1,0 +1,86 @@
+[nation_ainu]
+
+name=_("Ainu")
+plural=_("?plural:Ainu")
+groups="Asian"
+
+legend=_("The Ainu are the indigenous people of northern Japan, the\
+ Kuril islands, Sakhalin, and the southern part of the Kamchatka peninsula.")
+
+leader=
+ "Kayano Shigeru",
+ "Kosamaynu",
+ "Samkusaynu",
+ "Tsukinoe"
+leader_sex="Male", "Male", "Male", "Male"
+
+; Source: http://www.raccoonbend.com/languages/ainuenglish.html
+ruler_titles = { "government",      "male_title",        "female_title"
+		 ; /* TRANS: Nipa = Chief */
+                 "Despotism",       _("Nipa"),           _("Nipa")
+		 ; /* TRANS: Nipsa = Master */
+                 "Monarchy",        _("Nipsa"),          _("Nipsa")
+               }
+
+flag="ainu"
+flag_alt = "-"
+city_style = "Asian"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="japanese", "russian"
+
+; Sources for city names:
+; Hokkaido: http://kam-r.sub.jp/ainu/index.html
+; Aomori: http://www.asahi-net.or.jp/~hi5k-stu/aynu/sanpotimei2.htm
+; Kuril: http://www.fortunecity.com/olympia/ince/698/rurik/kuril.html
+; Sakhalin: http://www.city.wakkanai.hokkaido.jp/main/sakhalin.info/city.other.htm
+;
+; Orthography based on: http://city.hokkai.or.jp/~ayaedu/ainugo/text09.html
+cities =
+; Hokkaido - Japanese name in parentheses
+ "Cipasiri", ; (Abashiri)
+ "Mopet", ; (Monbetsu)
+ "Tomakomanay", ; (Tomakomanai)
+ "Nupurpet (river)", ; (Noboribetsu)
+ "Moruerani", ; (Muroran)
+ "Satporopet (river)", ; (Sapporo)
+ "Esikaripet (river)", ; (Ishikari)
+ "Iput", ; (Ebetsu)
+ "Eeniwa", ; (Eniwa)
+ "Cupupet (river)", ; (Asahikawa)
+ "Sipet (river)", ; (Shibetsu)
+ "Nayoroputo", ; (Nayoro)
+ "Furanuy", ; (Furano)
+ "Kusiru", ; (Kushiro)
+ "Nimuoro", ; (Nemuro)
+ "Rurumotpe", ; (Rumoi)
+ "Pipay", ; (Bibai)
+ "Yuuparo", ; (Yubari)
+ "Sorapuci", ; (Takikawa)
+ "Oohonay", ; (Fukagawa)
+ "Hasupet (river)", ; (Ashibetsu)
+ "Akapira", ; (Akabira)
+ "Otausinay", ; (Sunagawa & Utashinai)
+ "Yamwatkanay", ; (Wakkanai)
+ "Operuperukepu", ; (Obihiro)
+; Sakhalin - Russian name in parentheses
+ "Poronay (river)", ; (Polonaisk)
+ "Rutaka", ; (Aniva)
+; Aomori - Japanese name in parentheses
+ "Towatara", ; (Towada)
+ "Aomori", ; (Aomori)
+ "Piranay", ; (Hiranai)
+ "Wankii", ; (Wakinosawa)
+; Kuril Islands - Russian name in parentheses
+ "Ituruupu", ; (Iturup)
+ "Paramusir (ocean)", ; (Paramushir)
+ "Onnekotan", ; (Onekotan)
+ "Usisir (ocean)", ; (Ushishir)
+ "Ciripoy", ; (Chiripoy)
+ "Urup", ; (Urup)
+ "Kunasir (ocean)", ; (Kunashir)
+ "Sikotan" ; (Shikotan)

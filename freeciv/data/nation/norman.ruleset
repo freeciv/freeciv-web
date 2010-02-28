@@ -1,0 +1,69 @@
+[nation_norman]
+
+name=_("Norman")
+plural=_("?plural:Normans")
+groups="Medieval", "European"
+legend=_("After several devastating Viking raids on what is today northern\
+ France and a siege of Paris, the Frankish king Charles the Simple granted\
+ the Viking leader Rollo a fiefdom in the area. This fief evolved into the\
+ Duchy of Normandy, of which the most famous duke is William II \"the\
+ Conqueror\" who invaded England in 1066.")
+leader=
+ "Rolloun", ; English: Rollo
+ "Ricard I",
+ "Robert II",
+ "Gllâome II" ; English: William the Conqueror
+leader_sex="Male", "Male", "Male", "Male"
+flag="normandy"
+flag_alt = "-"
+city_style = "European"
+
+ruler_titles = { "government",      "male_title",          "female_title"
+                 "Despotism",       _("Jarl"),             _("?female:Jarl")
+                 "Monarchy",        _("Duke"),             _("Duchess")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations = "viking", "french", "english"
+
+cities =
+; Major cities in Normandy
+ "Rouën",
+ "Caën",
+ "Lé Hâvre",
+ "Tchidbouo", ; French: Cherbourg
+; More cities and towns of Normandy in order of 1999 population
+ "Évreux",
+ "Dieppe",
+ "Alençoun", ; French: Alençon
+ "Lisieux",
+ "Saint-Lô",
+ "Bayeus", ; French: Bayeux
+ "Coutanches", ; French: Coutances
+ "Avranches",
+ "Honflieu", ; French: Honfleur
+ "Falaise",
+ "Villers-Bocage",
+ "Doudeville",
+ "Mortain",
+ "Houlgate",
+ "Arromanches",
+; A selection of parishes of the Channel Islands
+ "Saint Hélyi", ; English: Saint Helier
+ "Saint Brélade",
+ "Saint Pierre Port (ocean)", ; English: Saint Peter Port
+ "Sainte-Âone", ; English: Saint Anne
+; Random assortment of Norman place-names with Scandinavian origin
+ "Tournebu",
+ "Cricqueville",
+ "Dieppedale",
+ "Lé Houlme (ocean)",
+ "Drubec",
+ "Carquebu",
+ "Lé Bû-sur-Rouvres",
+ "Barneville",
+ "Oudalle",
+ "Torgistorp"

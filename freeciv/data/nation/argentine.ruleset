@@ -1,0 +1,133 @@
+[nation_argentine]
+
+name=_("Argentine")
+plural=_("?plural:Argentines")
+groups="Modern", "American"
+; /* TRANS: The fourth letter in "Peron" should be */
+; /* TRANS: U+00F3 LATIN SMALL LETTER O WITH ACUTE if available in */
+; /* TRANS: your charset.  In ISO-8859-1 (ISO Latin 1) this is 243. */
+legend=_("Argentina is located on the south-eastern coast of South America.\
+ Since independence from Spain in 1816, it has been plagued by several\
+ internal and external conflicts. In the decades after World War II, the\
+ country's politics was dominated by Juan Peron and his charismatic wife Eva\
+ \"Evita\" Peron.")
+leader=
+ "José de San Martín",
+ "Juan Manuel de Rosas",
+ "Justo Urquiza",
+ "Bernardino Rivadavia",
+ "Domingo Sarmiento",
+ "Juan Domingo Perón",
+ "Eva Duarte de Perón"
+leader_sex="Male", "Male", "Male", "Male", "Male", "Male", "Female"
+flag="argentina"
+flag_alt = "-"
+city_style = "European"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations = "chilean", "brazilian"
+
+cities =
+ "Buenos Aires",
+ "Mar del Plata (ocean)",
+ "Rosario",
+ "La Plata",
+ "Paraná",
+ "Santa Fe",
+ "Corrientes (river)",
+ "Resistencia",
+ "Salta",
+ "Córdoba",
+ "San Miguel de Tucumán",
+ "Santiago del Estero (swamp, !mountains)",
+ "San Juan",
+ "Mendoza",
+ "Bahía Blanca (ocean)",
+ "San Salvador de Jujuy",
+ "Formosa",
+ "Catamarca",
+ "San Luis",
+ "Río Cuarto (river)",
+ "Villa María",
+ "San Nicolás de los arroyos (river)",
+ "Zárate",
+ "Junín",
+ "Comodoro Rivadavia",
+ "San Carlos de Bariloche",
+ "Tandil",
+ "Tartagal",
+ "Embarcación (river)",
+ "Libertador General San Martín",
+ "San Antonio de los Cobres",
+ "Metán",
+ "Rosario de la Frontera",
+ "Las Lomitas",
+ "Campo Gallo",
+ "Tintina",
+ "Andalgalá",
+ "Tinogasta",
+ "Añatuya",
+ "Pinto",
+ "Tostado",
+ "Santo Tomé",
+ "Mercedes",
+ "Albardón",
+ "Quilmes",
+ "San Rafael",
+ "General Alvear",
+ "Malargüe",
+ "Zapala",
+ "Neuquén",
+ "General Roca",
+ "Venado Tuerto",
+ "Rufino",
+ "Pergamino",
+ "Ibicuy",
+ "Maipú",
+ "Chascomús",
+ "Dolores",
+ "Las Flores",
+ "Balcarce",
+ "Necochea",
+ "25 de Mayo",
+ "9 de Julio",
+ "Olavarría",
+ "Coronel Suárez",
+ "Coronel Pringles",
+ "Tres Arroyos (river)",
+ "Punta Alta", 
+ "General Acha",
+ "Río Colorado (river)",
+ "San Cristóbal",
+ "Santa Isabel",
+ "Pehuajo",
+ "Viedma",
+ "Maquinchao",
+ "Esquel",
+ "Paso de indios",
+ "Las Plumas",
+ "Rawson",
+ "Sarmiento",
+ "San Julián",
+ "Perito Moreno",
+ "Puerto Deseado (ocean)",
+ "Santa Cruz",
+ "Río Gallegos (river)",
+ "Río Grande (river)",
+ "Ushuaia",
+ "Entre Ríos (river)",
+ "Chimbas",
+ "El Leoncito",
+ "Lanús",
+ "Morón",
+ "San Lorenzo",
+ "Teniente Matienzo",
+ "Cruz del Eje",
+ "San Pedro",
+ "Río Negro (river)",
+ "Quequén",
+ "Decepción",
+ "Esperanza"

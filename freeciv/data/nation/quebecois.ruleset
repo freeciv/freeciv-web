@@ -1,0 +1,38 @@
+[nation_quebecois]
+
+name=_("Quebecois")
+plural=_("?plural:Quebecois")
+groups= "American"
+legend=_("Quebec is the largest province of Canada, housing the majority of\
+ the Francophone population of America.")
+leader=
+ "Samuel de Champlain",
+ "Louis de Frontenac",
+ "Louis-Joseph de Montcalm",
+ "Louis-Joseph Papineau",
+ "René Lévesque"
+leader_sex="Male", "Male", "Male", "Male", "Male"
+flag = "quebec"
+flag_alt = "-"
+city_style = "Celtic"
+
+ruler_titles = { "government",	"male_title",	"female_title"
+		 "Monarchy",	_("Governor"),	_("?female:Governor")
+	       } 
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations="canadian", "inuit"
+
+cities =
+  "Québec", "Montréal", "Trois-Rivières", "Sherbrooke", "Lévis", "Sorel", 
+  "Chicoutimi", "Jonquière", "Rimouski", "Châteauguay", "Gatineau", 
+  "Tadoussac", "Chambly", "Iberville", "St-Jean", "Verchères", "St-Denis", 
+  "St-Eustache", "Rivière-du-Loup", "Matane", "Gaspé", "Roberval", "Alma",
+  "St-Hyacinthe", "Drummondville", "La Malbaie", "St-Georges", "Montmagny", 
+  "Tracy", "Mont-Joli", "Trois-Pistoles", "Cap-de-la-Madeleine",
+  "Sept-Iles", "Baie-Comeau", "Rouyn-Noranda", "Val d'Or", "Granby",
+  "Varennes", "Lachute", "St-Jérome", "Mont-Laurier", 
+  "Maniwaki", "Shawinigan", "La Tuque", "Havre-St-Pierre", "Chibougamau" 

@@ -1,0 +1,136 @@
+[nation_sami]
+
+name=_("Sami")
+plural=_("?plural:Sami")
+groups="European"
+legend=_("The Sami are a people of northern Scandinavia. Their nation spans\
+ over the northernmost regions of the Scandinavian countries and\
+ northwestern Russia.")
+leader=
+ "Ole Henrik Magga",	; Sami politician and current chairman of UNPFII
+ "Aslak Hætta",		; Rebellion leader against Norwegian rule
+ "Matts Heiva",		; 17th century influential noaydde (shaman)
+ "Kuta-Vuorok",		; 18th century influential noaydde
+ "Elsa Laula"		; Early Sami political activist
+leader_sex="Male", "Male", "Male", "Male", "Female"
+flag="sapmi"
+flag_alt = "-"
+city_style = "European"
+
+ruler_titles = { "government",      "male_title",      "female_title"
+		 ; /* TRANS: Noaydde = Shaman */
+                 "Despotism",       _("Noaydde"),      _("?female:Noaydde")
+                 "Republic",        _("Spokesman"),    _("Spokeswoman")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations="finnish", "swedish", "norwegian", "russian"
+
+; Sami city names are taken from the northernmost regions of Norway 
+; (Finnmark) Sweden and Finland (Lapland) and also a few from Russia.
+; Some of these names use the classic orthography in the respective
+; countries while yet some use a more modern native Sami orthography.
+;
+; Some sources:
+; http://www.sametinget.se/sametinget/view.cfm?oid=2130&sat=no
+; http://www.fjallen.nu/besoka/karta.htm
+
+cities =
+ "Guovdageaidnu", 		; Kautokeino (Norway)
+ "Kárášjohka (river)",		; Karasjok (Norway)
+ "Giron",			; Kiruna (Sweden)
+ "Anar",			; Inari (Finland)
+ "Lujávri (river, swamp)",	; Lovozero (Russia)
+ "Garesavvon",			; Karesuando (Sweden)
+ "Dálvvadis",			; Jokkmokk (Sweden)
+ "Álaheaju",			; Alta (Norway)
+ "Váhtjer (mountains)",		; Gällivare (Sweden)
+ "Guojkkajåhkkå (river)",	; Kvikkjokk (Sweden)
+ "Muorjek (swamp, river)",	; Murjek (Sweden)
+ "Avvil",			; Ivalo (Finland)
+ "Ohcejohka (river)",		; Utsjoki (Finland)
+ "Bårjås",			; Porjus (Sweden)
+ "Ábeskovvu (ocean)",		; Abisko (Sweden)
+ "Jäggeluokta (ocean)",		; Jäkkvik (Sweden)
+ "Njoammelsasskam",		; Harsprånget (Sweden)
+ "Karagasnjarga",
+ "Noarvas",
+ "Aiddejavvre (river, swamp)",
+ "Thohkerasjavre (river, swamp)",
+ "Galanito",
+ "Miron",
+ "Jona",
+ "Reuda",
+ "Masi",
+ "Suolovuobme (forest)",
+ "Jotkajavvre (river, swamp)",
+ "Mollesjok (river)",
+ "Sjusjavrre (river, swamp)",
+ "Bæivašgiedde (grassland)",
+ "Jorgastak",
+ "Valjok (river)",
+ "Skoganvarre (hills, mountains)",
+ "Seida",
+ "Nuorgam",
+ "Polmak",
+ "Ivgovuonbahta",
+ "Rosta",
+ "Bilto",
+ "Galgo",
+ "Mierojokka (river)",
+ "Stuoranjargga",
+ "Šuošjavrre (river, swamp)",
+ "Maskjok (river)",
+ "Buollanjargga",
+ "Dorvinjargga",
+ "Ailegieddi (grassland)",
+ "Goržžam",
+ "Sautso",
+ "Sabitjåkka (river)",
+ "Gabna",
+ "Leavas",
+ "Girjjis",
+ "Vatsadsi",
+ "Håmojåkk (river)",
+ "Dokkas",
+ "Ullatti",
+ "Suorva",
+ "Peuraure",
+ "Jutis",
+ "Labbas",
+ "Lainijaur (river, swamp)",
+ "Adak",
+ "Baktsjaure (river, swamp)",
+ "Tellejokk (river)",
+ "Tjåmotis",
+ "Kitajaur (river, swamp)",
+ "Puottaure",
+ "Tårajaure (river, swamp)",
+ "Ligga",
+ "Nikkaluokta (ocean)",
+ "Saltoluokta (ocean)",
+ "Kuouka",
+ "Nuortikon",
+ "Ripats",
+ "Kilvo",
+ "Vuollerim",
+ "Manjaur (river, swamp)",
+ "Njunjes",
+ "Tjiengaluokta (ocean)",
+ "Gervenåkko",
+ "Vielmesmakke",
+ "Fättjaur (river, swamp)",
+ "Åike",
+ "Juksjaur (river, swamp)",
+ "Laiva",
+ "Sitasjaure (river, swamp)",
+ "Hukejaure (river, swamp)",
+ "Kårtjevuolle (river)",
+ "Tjatjajaure (river, swamp)",
+ "Sjangeli",
+ "Vassijaure (river, swamp)",
+ "Låktasjåkka (river)",
+ "Vuoskojaure (river, swamp)"

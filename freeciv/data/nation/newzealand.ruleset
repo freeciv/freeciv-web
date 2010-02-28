@@ -1,0 +1,97 @@
+[nation_newzealand]
+
+name=_("New Zealand")
+plural=_("?plural:New Zealanders")
+groups="Modern", "Oceanian"
+legend=_("The island group of New Zealand was annexed by Britain in 1840.\
+ Following a royal proclamation in 1907, the country became an independent\
+ dominion within the Commonwealth of Nations.")
+leader=
+ "Norm Kirk",
+ "Dick Seddon",
+ "Rob Muldoon",
+ "David Lange"
+leader_sex="Male", "Male", "Male", "Male"
+flag="newzealand"
+flag_alt = "australia"
+city_style = "Tropical"
+
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Democracy",_("Prime Minister"), _("?female:Prime Minister")
+}
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+; Similar flags
+conflicts_with="australian"
+civilwar_nations="maori", "british"
+
+cities =
+ "Wellington (hills, ocean)",
+ "Auckland (hills, ocean)",
+ "Christchurch (plains, ocean)",
+ "Dunedin (ocean)",
+ "Hamilton (river, grassland)",
+ "Nelson (ocean, hills, forest)",
+ "Invercargill (grassland, plains)",
+ "New Plymouth (ocean, grassland, mountains)",
+ "Wanganui (river)",
+ "Taupo (river)",
+ "Gisborne (ocean)",
+ "Napier (ocean)",
+ "Hastings",
+ "Palmerston North (plains)",
+ "Rotorua",
+ "Tauranga (ocean)",
+ "Queenstown (hills)",
+ "Whangarei (ocean)",
+ "Lower Hutt (river)",
+ "Timaru (ocean)",
+ "Taihape (hills)",
+ "Oamaru (plains, ocean)",
+ "Thames",
+ "Taumaraunui",
+ "Waiheke Island (ocean)",
+ "Otaki",
+ "Levin",
+ "Greymouth (river, ocean, hills)",
+ "Westport (ocean)",
+ "Waiuku",
+ "Waikanae (ocean)",
+ "Katikati",
+ "Paekakariki (ocean)",
+ "Masterton",
+ "Feilding",
+ "Shannon",
+ "Bulls (plains)",
+ "Picton",
+ "Upper Hutt (river)",
+ "Featherston",
+ "Carterton",
+ "Oxford (river, grassland)",
+ "Tawa",
+ "Hokitika (hills, forest, ocean)",
+ "Reefton (river, ocean)",
+ "Franz Josef (hills)",
+ "Lyttelon (hills, ocean)",
+ "Alexander",
+ "Milton (plains)",
+ "Ashburton (plains)",
+ "Te Anau (hills, ocean)",
+ "Mt Cook (hills)",
+ "Sedden",
+ "Scott Base (tundra)",
+ "Te Awamutu",
+ "Motueka",
+ "Hanmer Springs",
+ "Huntly",
+ "Balclutha",
+ "Bluff (ocean)",
+ "Eketahuna",
+ "Waipukurau",
+ "Twizel",
+ "Waiouru (hills, desert)",
+ "Tuatapere"

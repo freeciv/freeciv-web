@@ -1,0 +1,628 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Sodipodi ("http://www.sodipodi.com/") -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg548"
+   sodipodi:version="0.32"
+   width="1013"
+   height="760"
+   sodipodi:docname="great_library.svg"
+   inkscape:version="0.44"
+   sodipodi:docbase="C:\freeciv\wonders-sources"
+   inkscape:export-filename="C:\freeciv\wonders-sources\great_library.png"
+   inkscape:export-xdpi="5.6842103"
+   inkscape:export-ydpi="5.6842103"
+   version="1.0">
+  <defs
+     id="defs550">
+    <linearGradient
+       id="linearGradient2061">
+      <stop
+         id="stop2063"
+         offset="0"
+         style="stop-color:teal;stop-opacity:1;" />
+      <stop
+         id="stop2065"
+         offset="1"
+         style="stop-color:#51aeae;stop-opacity:1;" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient574">
+      <stop
+         style="stop-color:#3800ff;stop-opacity:1;"
+         offset="0.000000"
+         id="stop575" />
+      <stop
+         style="stop-color:#17a5ff;stop-opacity:1;"
+         offset="1.000000"
+         id="stop576" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient559">
+      <stop
+         style="stop-color:#ffd585;stop-opacity:1;"
+         offset="0.000000"
+         id="stop560" />
+      <stop
+         style="stop-color:#ffffb7;stop-opacity:1;"
+         offset="1.000000"
+         id="stop561" />
+    </linearGradient>
+    <linearGradient
+       xlink:href="#linearGradient559"
+       id="linearGradient562"
+       x1="101.19378"
+       y1="448.48355"
+       x2="426.35779"
+       y2="448.48367"
+       gradientUnits="userSpaceOnUse"
+       spreadMethod="reflect"
+       gradientTransform="scale(0.840454,1.189833)" />
+    <linearGradient
+       xlink:href="#linearGradient559"
+       id="linearGradient563"
+       x1="-559.97253"
+       y1="448.48355"
+       x2="-234.80852"
+       y2="448.48367"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="scale(0.840454,1.189833)"
+       spreadMethod="reflect" />
+    <linearGradient
+       xlink:href="#linearGradient559"
+       id="linearGradient570"
+       x1="692.99603"
+       y1="440.78293"
+       x2="431.59433"
+       y2="445.91678"
+       gradientUnits="userSpaceOnUse"
+       spreadMethod="reflect"
+       gradientTransform="scale(0.840454,1.189833)" />
+    <linearGradient
+       xlink:href="#linearGradient559"
+       id="linearGradient571"
+       x1="35.861294"
+       y1="440.7829"
+       x2="-225.54041"
+       y2="445.91678"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="scale(0.840454,1.189833)"
+       spreadMethod="reflect" />
+    <linearGradient
+       xlink:href="#linearGradient574"
+       id="linearGradient573"
+       x1="957.79755"
+       y1="160.32928"
+       x2="1037.0341"
+       y2="228.72977"
+       gradientUnits="userSpaceOnUse"
+       spreadMethod="pad"
+       gradientTransform="scale(0.358051,2.7929)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient559"
+       id="linearGradient2038"
+       gradientUnits="userSpaceOnUse"
+       spreadMethod="reflect"
+       x1="101.19378"
+       y1="448.48355"
+       x2="426.35779"
+       y2="448.48367"
+       gradientTransform="scale(0.840454,1.189833)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient559"
+       id="linearGradient2040"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="scale(0.840454,1.189833)"
+       spreadMethod="reflect"
+       x1="-559.97253"
+       y1="448.48355"
+       x2="-234.80852"
+       y2="448.48367" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2061"
+       id="linearGradient2059"
+       x1="524.58002"
+       y1="-0.85201758"
+       x2="521.76727"
+       y2="760"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="scale(0.937963,1)" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     inkscape:zoom="0.95657895"
+     inkscape:cx="540"
+     inkscape:cy="380"
+     inkscape:window-width="1143"
+     inkscape:window-height="929"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:current-layer="svg548"
+     width="1013px"
+     height="760px" />
+  <rect
+     style="opacity:1;fill:url(#linearGradient2059);fill-opacity:1;stroke:none;stroke-width:6.12300014;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect2121"
+     width="1013"
+     height="760"
+     x="0"
+     y="0" />
+  <g
+     id="g1958"
+     transform="matrix(0.823296,0,0,0.823296,-22.92742,86.95419)">
+    <rect
+       y="32.736622"
+       x="157.40482"
+       height="645.19543"
+       width="971.30719"
+       id="rect556"
+       style="font-size:12px;fill:#934a00;fill-rule:evenodd;stroke:black;stroke-width:1.66697006pt" />
+    <g
+       transform="matrix(1.66697,0,0,1.66697,46.35808,-559.0441)"
+       id="g567">
+      <path
+         transform="translate(-3.372955,5.059402)"
+         sodipodi:nodetypes="ccccccc"
+         id="path568"
+         d="M 84.3239,743.737 C 84.3239,743.737 122.27,711.694 191.415,709.164 C 260.561,706.634 357.533,727.715 357.533,727.715 L 357.533,370.182 C 357.533,370.182 270.68,352.474 184.669,354.16 C 98.659,355.847 82.6374,379.457 82.6374,379.457 C 82.6374,379.457 84.3239,743.737 84.3239,743.737 z "
+         style="fill:url(#linearGradient2038);fill-opacity:1;fill-rule:evenodd;stroke:black;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         transform="matrix(-1,0,0,1,718.4393,5.059402)"
+         sodipodi:nodetypes="ccccccc"
+         id="path569"
+         d="M 84.3239,743.737 C 84.3239,743.737 122.27,711.694 191.415,709.164 C 260.561,706.634 357.533,727.715 357.533,727.715 L 357.533,370.182 C 357.533,370.182 270.68,352.474 184.669,354.16 C 98.659,355.847 82.6374,379.457 82.6374,379.457 C 82.6374,379.457 84.3239,743.737 84.3239,743.737 z "
+         style="fill:url(#linearGradient2040);fill-opacity:1;fill-rule:evenodd;stroke:black;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </g>
+    <g
+       transform="matrix(1.66697,0,0,1.66697,46.35808,-567.4778)"
+       id="g564">
+      <path
+         transform="translate(-3.372955,5.059402)"
+         sodipodi:nodetypes="ccccccc"
+         id="path557"
+         d="M 84.3239,743.737 C 84.3239,743.737 122.27,711.694 191.415,709.164 C 260.561,706.634 357.533,727.715 357.533,727.715 L 357.533,370.182 C 357.533,370.182 270.68,352.474 184.669,354.16 C 98.659,355.847 82.6374,379.457 82.6374,379.457 C 82.6374,379.457 84.3239,743.737 84.3239,743.737 z "
+         style="fill:url(#linearGradient562);fill-opacity:1;fill-rule:evenodd;stroke:black;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         transform="matrix(-1,0,0,1,718.4393,5.059402)"
+         sodipodi:nodetypes="ccccccc"
+         id="path558"
+         d="M 84.3239,743.737 C 84.3239,743.737 122.27,711.694 191.415,709.164 C 260.561,706.634 357.533,727.715 357.533,727.715 L 357.533,370.182 C 357.533,370.182 270.68,352.474 184.669,354.16 C 98.659,355.847 82.6374,379.457 82.6374,379.457 C 82.6374,379.457 84.3239,743.737 84.3239,743.737 z "
+         style="fill:url(#linearGradient563);fill-opacity:1;fill-rule:evenodd;stroke:black;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </g>
+    <path
+       transform="matrix(1.66697,0,0,1.66697,46.35808,-567.478)"
+       sodipodi:nodetypes="ccccccc"
+       id="path554"
+       d="M 84.3239,743.737 C 84.3239,743.737 122.27,711.694 191.415,709.164 C 260.561,706.634 357.533,727.715 357.533,727.715 L 357.533,370.182 C 357.533,370.182 270.68,352.474 184.669,354.16 C 98.659,355.847 82.6374,379.457 82.6374,379.457 C 82.6374,379.457 84.3239,743.737 84.3239,743.737 z "
+       style="fill:url(#linearGradient571);fill-opacity:1;fill-rule:evenodd;stroke:black;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       transform="matrix(-1.66697,0,0,1.66697,1238.352,-567.478)"
+       sodipodi:nodetypes="ccccccc"
+       id="path555"
+       d="M 84.3239,743.737 C 84.3239,743.737 122.27,711.694 191.415,709.164 C 260.561,706.634 357.533,727.715 357.533,727.715 L 357.533,370.182 C 357.533,370.182 270.68,352.474 184.669,354.16 C 98.659,355.847 82.6374,379.457 82.6374,379.457 C 82.6374,379.457 84.3239,743.737 84.3239,743.737 z "
+       style="fill:url(#linearGradient570);fill-opacity:1;fill-rule:evenodd;stroke:black;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       transform="matrix(1.66697,0,0,1.66697,46.35808,-567.4778)"
+       sodipodi:nodetypes="cccccccccccccccccccccccccccccccccccc"
+       d="M 363.794,365.137 C 363.44,367.936 363.055,370.732 362.674,373.527 C 361.616,379.672 359.985,385.489 358.162,391.447 C 356.629,397.67 356.494,402.426 357.606,408.744 C 359.717,415.729 362.523,421.823 366.143,428.156 C 370.346,435.095 374.376,441.883 377.637,449.313 C 379.987,456.763 381.334,463.687 381.689,471.491 C 381.952,479.609 382.633,487.614 382.486,495.785 C 381.96,503.817 381.084,511.596 379.465,519.481 C 377.978,524.98 376.152,530.291 374.223,535.649 C 371.608,543.396 369.356,551.184 367.289,559.095 C 364.426,572.306 361.958,585.466 360.173,598.866 C 359.718,604.47 359.507,609.774 360.032,615.366 C 360.289,621.218 359.769,626.906 359.213,632.734 C 358.599,640.26 358.267,647.648 358.504,655.195 C 358.954,660.045 359.647,664.581 360.994,669.261 C 361.635,671.08 362.333,672.875 363.013,674.68 L 351.336,662.539 L 349.778,677.381 C 349.06,675.448 348.333,673.523 347.666,671.572 C 346.215,666.222 345.557,661.057 345.173,655.528 C 345.079,647.685 345.457,639.944 346.007,632.121 C 346.374,626.736 346.708,621.469 346.368,616.08 C 345.902,609.862 346.512,604.053 347.34,597.873 C 349.664,584.396 352.339,570.998 355.044,557.592 C 356.752,549.244 358.55,541.189 361.172,533.09 C 362.978,527.974 364.762,522.886 366.274,517.675 C 367.961,510.305 368.907,503.044 369.482,495.506 C 369.62,487.389 368.689,479.563 368.302,471.517 C 368.07,464.64 366.981,458.622 364.897,452.062 C 361.847,445.096 358.021,438.718 354.094,432.207 C 350.004,425.093 346.853,418.242 344.476,410.386 C 343.142,402.746 343.222,396.791 345.072,389.262 C 346.774,383.7 348.293,378.313 349.185,372.562 C 349.425,370.121 349.879,367.592 349.586,365.137 L 363.794,365.137 z "
+       id="path572"
+       style="fill:url(#linearGradient573);fill-opacity:1;fill-rule:nonzero;stroke:black;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <g
+       transform="matrix(1.66697,0,0,1.66697,46.35808,-552.0157)"
+       id="g586">
+      <path
+         d="M 118.069,386.082 C 115.579,386.033 127.761,383.289 130.433,382.767 C 136.855,382.334 141.676,382.579 147.557,385.25 C 152.114,387.641 156.518,389.61 161.47,391.017 L 159.429,395.851 C 153.842,394.218 148.789,392.056 143.59,389.442 C 139.528,387.545 136.245,387.457 131.77,387.727 C 127.071,388.642 122.657,390.244 118.069,391.384 L 118.069,386.082 z "
+         id="path578"
+         style="fill:black;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         d="M 148.589,390.435 C 148.158,392.013 147.962,393.729 147.87,395.577 C 148.165,400.181 149.155,404.381 150.371,408.827 C 151.698,413.533 152.714,417.971 153.071,422.853 C 152.478,428.879 150.92,432.484 146.99,437.089 C 142.292,440.441 138.407,441.951 132.699,442.8 L 132.046,437.673 C 135.877,437.161 138.425,436.161 141.601,433.961 C 144.692,430.426 145.791,427.612 146.258,422.945 C 145.939,418.389 144.94,414.24 143.717,409.845 C 142.417,405.06 141.38,400.504 141.001,395.556 C 141.029,394.404 141.836,388.396 141.485,390.435 L 148.589,390.435 z "
+         id="path579"
+         style="fill:black;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         d="M 124.551,391.329 C 125.509,392.724 126.35,393.76 127.709,394.808 C 130.144,395.812 131.979,396.396 134.31,394.983 C 134.805,394.245 136.594,394.956 135.953,396.593 C 135.412,400.118 135.853,402.167 138.078,404.947 C 138.782,405.466 138.417,405.223 139.173,405.674 L 136.981,407.663 C 135.876,406.972 136.408,407.342 135.387,406.556 C 132.569,402.944 131.894,400.433 132.614,395.891 C 134.69,392.545 139.07,391.98 137.001,396.633 C 132.728,398.953 129.907,398.647 125.449,396.776 C 124.167,395.777 122,393.782 121.705,392.913 L 124.551,391.329 z "
+         id="path580"
+         style="fill:red;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         d="M 128.262,412.359 C 128.325,412.223 130.848,416.514 131.444,417.536 C 133.652,421.993 135.108,425.606 134.88,430.592 C 132.297,435.012 129.563,435.296 124.574,435.534 C 122.042,435.783 121.38,435.403 122.442,437.773 C 122.902,438.528 122.657,438.15 123.178,438.904 L 120.116,440.085 C 119.496,439.192 119.788,439.638 119.237,438.748 C 117.695,434.018 120.061,433.446 124.513,432.954 C 127.764,432.829 129.77,433.05 131.483,430.174 C 131.732,425.749 130.266,422.476 128.294,418.539 C 127.096,416.532 125.536,414.535 124.71,412.359 L 128.262,412.359 z "
+         id="path581"
+         style="fill:red;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         d="M 154.065,398.918 C 155.323,400.712 156.43,402.621 157.567,404.494 C 159.823,408.61 161.681,412.649 163.184,417.097 C 164.154,421.807 164.018,425.127 162.549,429.706 C 160.916,433.236 159.111,436.516 156.923,439.732 C 154.275,442.85 151.963,444.406 148.112,445.796 L 146.899,443.376 C 150.005,442.278 151.749,441.007 153.886,438.505 C 155.978,435.455 157.701,432.342 159.26,428.989 C 160.601,424.864 160.721,421.907 159.857,417.656 C 158.416,413.367 156.625,409.495 154.431,405.54 C 153.571,404.154 151.605,401.27 151.218,400.503 L 154.065,398.918 z "
+         id="path582"
+         style="fill:red;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         d="M 162.76,401.743 C 162.378,401.74 164.956,400.465 165.636,400.026 L 168.027,401.887 C 166.315,403.003 164.788,404.041 162.76,404.393 L 162.76,401.743 z "
+         id="path583"
+         style="fill:red;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         d="M 166.872,414.015 C 167.446,412.631 168.555,411.502 169.458,410.287 L 172.526,411.504 C 172.11,412.075 170.339,415.009 170.424,414.015 L 166.872,414.015 z "
+         id="path584"
+         style="fill:red;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <rect
+         y="387.04626"
+         x="116.36701"
+         height="56.497074"
+         width="54.810562"
+         id="rect585"
+         style="font-size:12px;fill:none;fill-rule:evenodd;stroke:black;stroke-width:1pt;stroke-opacity:1" />
+    </g>
+    <text
+       transform="scale(0.722322,1.384425)"
+       id="text601"
+       y="71.113976"
+       x="466.34274"
+       style="font-size:10.05513954px;font-style:normal;font-weight:normal;writing-mode:lr-tb;text-anchor:start;fill:black;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Electroharmonix">
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan858"
+         sodipodi:role="line"
+         y="71.113976"
+         x="466.34274">This is an unofficial translation of the GNU General Public License</tspan>
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan860"
+         sodipodi:role="line"
+         y="83.6829"
+         x="466.34274">into French. It was not published by the Free Software Foundation, and</tspan>
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan862"
+         sodipodi:role="line"
+         y="96.251824"
+         x="466.34274">does not legally state the distribution terms for software that uses</tspan>
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan864"
+         sodipodi:role="line"
+         y="108.82075"
+         x="466.34274">the GNU GPL--only the original English text of the GNU GPL does that.</tspan>
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan866"
+         sodipodi:role="line"
+         y="121.38967"
+         x="466.34274">However, we hope that this translation will help French speakers</tspan>
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan868"
+         sodipodi:role="line"
+         y="133.9586"
+         x="466.34274">understand the GNU GPL better.</tspan>
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan870"
+         sodipodi:role="line"
+         y="146.52752"
+         x="466.34274" />
+    </text>
+    <text
+       transform="scale(0.901681,1.109039)"
+       x="268.61301"
+       y="183.68861"
+       id="text872"
+       style="font-size:13.76997185px;font-style:normal;font-weight:normal;writing-mode:lr-tb;text-anchor:start;fill:black;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Electroharmonix">
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan877"
+         sodipodi:role="line"
+         y="183.68861"
+         x="268.61301">This is an unofficial translation of the GNU General Public License</tspan>
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan879"
+         sodipodi:role="line"
+         y="200.90108"
+         x="268.61301">into French. It was not published by the Free Software Foundation, and</tspan>
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan881"
+         sodipodi:role="line"
+         y="218.11354"
+         x="268.61301">does not legally state the distribution terms for software that uses</tspan>
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan883"
+         sodipodi:role="line"
+         y="235.32601"
+         x="268.61301">the GNU GPL--only the original English text of the GNU GPL does that.</tspan>
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan885"
+         sodipodi:role="line"
+         y="252.53847"
+         x="268.61301">However, we hope that this translation will help French speakers</tspan>
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan887"
+         sodipodi:role="line"
+         y="269.75094"
+         x="268.61301">understand the GNU GPL better.</tspan>
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan889"
+         sodipodi:role="line"
+         y="286.9634"
+         x="268.61301" />
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan891"
+         sodipodi:role="line"
+         y="304.17587"
+         x="268.61301">Voici (http://www.linux-france.org/article/these/gpl.html) une</tspan>
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan893"
+         sodipodi:role="line"
+         y="321.38833"
+         x="268.61301">adaptation non officielle de la Licence Publique Générale du projet</tspan>
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan895"
+         sodipodi:role="line"
+         y="338.6008"
+         x="268.61301">GNU. Elle n'a pas été publiée par la Free Software Foundation et son</tspan>
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan897"
+         sodipodi:role="line"
+         y="355.81326"
+         x="268.61301">contenu n'a aucune portée légale car seule la version anglaise de ce</tspan>
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan899"
+         sodipodi:role="line"
+         y="373.02573"
+         x="268.61301">document détaille le mode de distribution des logiciels sous GNU GPL.</tspan>
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan901"
+         sodipodi:role="line"
+         y="390.23819"
+         x="268.61301">Nous espérons cependant qu'elle permettra aux francophones de mieux</tspan>
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan903"
+         sodipodi:role="line"
+         y="407.45066"
+         x="268.61301">comprendre la GPL.</tspan>
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan905"
+         sodipodi:role="line"
+         y="424.66312"
+         x="268.61301" />
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan907"
+         sodipodi:role="line"
+         y="441.87559"
+         x="268.61301">Licence Publique Générale GNU Version 2, Juin 1991</tspan>
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan909"
+         sodipodi:role="line"
+         y="459.08805"
+         x="268.61301" />
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan911"
+         sodipodi:role="line"
+         y="476.30052"
+         x="268.61301">Copyright © Free Software Foundation, Inc.</tspan>
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan913"
+         sodipodi:role="line"
+         y="493.51298"
+         x="268.61301">59 Temple Place, Suite 330, Boston, MA 02111-1307</tspan>
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan915"
+         sodipodi:role="line"
+         y="510.72545"
+         x="268.61301">États-Unis, 1989, 1991.</tspan>
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan917"
+         sodipodi:role="line"
+         y="527.93791"
+         x="268.61301">La copie et la distribution de copies exactes de ce document sont</tspan>
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan919"
+         sodipodi:role="line"
+         y="545.15037"
+         x="268.61301">autorisées, mais aucune modification n'est permise.</tspan>
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan921"
+         sodipodi:role="line"
+         y="562.36284"
+         x="268.61301" />
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan923"
+         sodipodi:role="line"
+         y="579.5753"
+         x="268.61301" />
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan925"
+         sodipodi:role="line"
+         y="596.78777"
+         x="268.61301" />
+    </text>
+    <text
+       transform="scale(0.833666,1.199521)"
+       id="text931"
+       y="83.540581"
+       x="843.02722"
+       style="font-size:15.16170597px;font-style:normal;font-weight:normal;writing-mode:lr-tb;text-anchor:start;fill:black;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Electroharmonix">
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan936"
+         sodipodi:role="line"
+         y="83.540581"
+         x="843.02722">Nous protégeons vos droits de deux façons : d'abord par le copyright</tspan>
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan938"
+         sodipodi:role="line"
+         y="102.49271"
+         x="843.02722">du logiciel, ensuite par la remise de cette Licence qui vous autorise</tspan>
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan940"
+         sodipodi:role="line"
+         y="121.44485"
+         x="843.02722">légalement à copier, distribuer et/ou modifier le logiciel.</tspan>
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan942"
+         sodipodi:role="line"
+         y="140.39698"
+         x="843.02722" />
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan944"
+         sodipodi:role="line"
+         y="159.34911"
+         x="843.02722">En outre, pour protéger chaque auteur ainsi que la FSF, nous affirmons</tspan>
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan946"
+         sodipodi:role="line"
+         y="178.30124"
+         x="843.02722">solennellement que le programme concerné ne fait l'objet d'aucune</tspan>
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan948"
+         sodipodi:role="line"
+         y="197.25338"
+         x="843.02722">garantie. Si un tiers le modifie puis le redistribue, tous ceux qui en</tspan>
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan950"
+         sodipodi:role="line"
+         y="216.20551"
+         x="843.02722">recevront une copie doivent savoir qu'il ne s'agit pas de l'original</tspan>
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan952"
+         sodipodi:role="line"
+         y="235.15764"
+         x="843.02722">afin qu'une copie défectueuse n'entache pas la réputation de l'auteur</tspan>
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan954"
+         sodipodi:role="line"
+         y="254.10977"
+         x="843.02722">du logiciel.</tspan>
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan956"
+         sodipodi:role="line"
+         y="273.06191"
+         x="843.02722" />
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan958"
+         sodipodi:role="line"
+         y="292.01404"
+         x="843.02722">Enfin, tout programme libre est sans cesse menacé par des dépôts de</tspan>
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan960"
+         sodipodi:role="line"
+         y="310.96617"
+         x="843.02722">brevets. Nous souhaitons à tout prix éviter que des distributeurs</tspan>
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan962"
+         sodipodi:role="line"
+         y="329.9183"
+         x="843.02722">puissent déposer des brevets sur les Logiciels Libres pour leur propre</tspan>
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan964"
+         sodipodi:role="line"
+         y="348.87044"
+         x="843.02722">compte. Pour éviter cela, nous stipulons bien que tout dépôt éventuel</tspan>
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan966"
+         sodipodi:role="line"
+         y="367.82257"
+         x="843.02722">de brevet doit accorder expressément à tout un chacun le libre usage</tspan>
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan968"
+         sodipodi:role="line"
+         y="386.7747"
+         x="843.02722">du produit.</tspan>
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan970"
+         sodipodi:role="line"
+         y="405.72683"
+         x="843.02722" />
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan972"
+         sodipodi:role="line"
+         y="424.67897"
+         x="843.02722">Les dispositions précises et les conditions de copie, de distribution</tspan>
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan974"
+         sodipodi:role="line"
+         y="443.6311"
+         x="843.02722">et de modification de nos logiciels sont les suivantes :</tspan>
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan976"
+         sodipodi:role="line"
+         y="462.58323"
+         x="843.02722" />
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan978"
+         sodipodi:role="line"
+         y="481.53536"
+         x="843.02722">Stipulations et conditions relatives à la copie, la distribution et la</tspan>
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan980"
+         sodipodi:role="line"
+         y="500.48749"
+         x="843.02722">modification</tspan>
+      <tspan
+         style="font-weight:bold;font-family:Garamond"
+         id="tspan982"
+         sodipodi:role="line"
+         y="519.43963"
+         x="843.02722" />
+    </text>
+  </g>
+  <metadata
+     id="metadata1056">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+</svg>

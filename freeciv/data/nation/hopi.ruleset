@@ -1,0 +1,59 @@
+[nation_hopi]
+
+name=_("Hopi")
+plural=_("?plural:Hopis")
+groups="American"
+
+legend=_("A matrilineal culture in North America, who claim descent from the\
+ Hisatsinom. The Hopi live today on the Hopi Reservation in northeastern\
+ Arizona.")
+
+leader=
+ "Waki",
+ "Sunki",
+ "Tiponi",
+ "Tuba",
+ "Alo",
+ "Cha'akmongwi",
+ "Cheveyo",
+ "Wikvaya"
+
+leader_sex = "Female", "Female", "Female", "Male", "Male", "Male", "Male",
+ "Male"
+
+flag         = "hopi"
+flag_alt     = "-"
+city_style   = "Babylonian"
+ruler_titles = { "government",      "male_title",        "female_title"
+                 "Despotism",      _("Kikmongwi"),       _("Kikmongwi")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations = "P'urhepecha", "sioux"
+
+cities =
+ "Orayvi",
+ "Kiqötsmovi",
+ "Supawlavi",
+ "Musungnuvi",
+ "Songoopavi",
+ "Sitsomovi",
+ "Hanoki",
+ "Waalpi",
+ "Hotvela",
+ "Paaqavi",
+ "Mùnqapi",
+ "Pongsikya",
+ "Polacca",
+ "Yuh Weh Loo Pah Ki",
+ "Sichomovi",
+ "Chevaya",
+ "Shinumo",
+ "Nuvatukya’ovi",
+ "Pasiwvi",
+ "Palatkwapi",
+ "Wukoskyavi"

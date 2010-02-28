@@ -1,0 +1,43 @@
+[nation_italian]
+
+name = _("Italian")
+plural = _("?plural:Italians")
+groups="Medieval", "Modern", "European"
+legend=_("The Italian nation was unified in 1870AD after decades of\
+ campaigning by indigenous nationalists. It was a monarchy under the\
+ House of Savoy until 1922, then a fascist state until 1945 after which\
+ democracy was restored by the WWII victors.")
+leader =
+ "Giuseppe Garibaldi",
+ "Giuseppe Mazzini",
+ "Palmiro Togliatti",
+ "Giacomo Matteotti",
+ "Benito Mussolini",
+ "Vittorio Emanuele II"
+leader_sex = "Male", "Male", "Male",
+             "Male", "Male", "Male"
+flag = "italy"
+flag_alt = "-"
+city_style = "Classical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+conflicts_with="roman"
+civilwar_nations="romanian", "swiss"
+; Removed "kenyan": No relation?
+
+cities =
+  "Roma", "Milano", "Napoli", "Venezia", "Genova", "Modena",
+  "Foggia", "Bari", "Lecce", "Perugia", "Rimini", "Bolzano",
+  "Chioggia", "Udine", "Bergamo", "Cremona", "Ferrara",
+  "Prato", "Grosseto", "Latina", "Trani", "Lecce", "Salerno",
+  "Crotone", "Firenze", "Bologna", "Torino", "La Spezia", "Pisa",
+  "Padova", "Cagliari", "Palermo", "Messina", "Teramo", "Ancona", 
+  "Sondrio", "Sassari", "Frascati", "Ostia", "Amalfi", "Grosseto", 
+  "Viterbo", "Benevento", "Aosta", "Campobasso", "Potenza", "Trieste", 
+  "Brindisi", "Legnano", "Parma", "Enna", "Catania", "Catanzaro", "Pavia",
+  "Asti", "Cuneo", "Massa", "Carrara", "Pordenone", "Civitavecchia", 
+  "Caserta"

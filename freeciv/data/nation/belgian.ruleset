@@ -1,0 +1,61 @@
+[nation_belgian]
+
+name=_("Belgian")
+plural=_("?plural:Belgians")
+groups="Modern", "European"
+legend = _("Belgium gained independance from the Dutch Kingdom in 1830.\
+ Belgium is mainly characterized by its movement from a unified state\
+ to a federal one. This is the result of the Flemish and the\
+ Walloon's nationalist (almost) peaceful fights.")
+leader=
+ "Leopold I",
+ "Leopold II",
+ "Albert I",
+ "Leopold III",
+ "Baudouin",	; Flemish name: "Boudewijn"
+ "Philippe",
+ "Elisabeth"
+leader_sex="Male", "Male", "Male", "Male", "Male", "Male", "Female"
+flag="belgium"
+flag_alt = "-"
+city_style = "Celtic"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations="dutch", "french"
+
+; Alternating Flemish and Walloon names
+cities =
+ "Brussel / Bruxelles",
+ "Antwerpen",
+ "Charleroi",
+ "Gent",
+ "Liège",
+ "Brugge",
+ "Namur",
+ "Leuven",
+ "Mons",
+ "Aalst",
+ "La Louvière",
+ "Mechelen",
+ "Tournai",
+ "Kortrijk",
+ "Seraing",
+ "Hasselt",
+ "Verviers",
+ "Sint-Niklaas",
+ "Mouscron",
+ "Oostende",
+ "Herstal",
+ "Genk",
+ "Châtelet",
+ "Roeselare",
+ "Binche",
+ "Beveren",
+ "Wavre",
+ "Dendermonde",
+ "Néau",
+ "Lokeren",
+ "Dinant"

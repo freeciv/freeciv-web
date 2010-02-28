@@ -1,0 +1,1 @@
+?package(freeciv-gtk2):needs="x11" section="Games/Strategy" title="Freeciv client (GTK version)" command="/usr/games/freeciv-gtk2"

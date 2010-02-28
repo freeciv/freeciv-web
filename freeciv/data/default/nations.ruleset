@@ -1,0 +1,240 @@
+
+; Modifying this file:
+; You should not modify this file except to make bugfixes or
+; for other "maintenance".  If you want to make custom changes
+; you should create a new datadir subdirectory and copy this file
+; into that directory, and then modify that copy.  Then use the
+; command "rulesetdir <mysubdir>" in the server to have freeciv
+; use your new customized file.
+
+[datafile]
+description="Default nations data for Freeciv"
+options="1.9"
+
+; Descriptions of nation groups
+; name 		= name of the group
+; match		= How much the AI will try to select a nation in the same
+;                 group
+
+[ngroup_ancient]
+name=_("?nationgroup:Ancient")
+match=2
+[ngroup_medieval]
+name=_("?nationgroup:Medieval")
+match=2
+[ngroup_modern]
+name=_("?nationgroup:Modern")
+match=1
+[ngroup_african]
+name=_("?nationgroup:African")
+match=0
+[ngroup_american]
+name=_("?nationgroup:American")
+match=0
+[ngroup_asian]
+name=_("?nationgroup:Asian")
+match=0
+[ngroup_european]
+name=_("?nationgroup:European")
+match=0
+[ngroup_oceanian]
+name=_("?nationgroup:Oceanian")
+match=0
+[ngroup_fictional]
+name=_("?nationgroup:Fictional")
+match=2
+
+; Below: nations data loaded from ruleset files for
+; all nations available. If you want to have more
+; nations, just add the path to your ruleset to this list.
+;
+; See doc/README.nations for information on how to
+; create nation rulesets, including style guidelines.
+
+*include "nation/aborigines.ruleset"
+*include "nation/afghani.ruleset"
+*include "nation/ainu.ruleset"
+*include "nation/akwe.ruleset"
+*include "nation/algerian.ruleset"
+*include "nation/american.ruleset"
+*include "nation/antarctican.ruleset"
+*include "nation/arab.ruleset"
+*include "nation/aramean.ruleset"
+*include "nation/argentine.ruleset"
+*include "nation/armenian.ruleset"
+*include "nation/assyrian.ruleset"
+*include "nation/australian.ruleset"
+*include "nation/austrian.ruleset"
+*include "nation/aymara.ruleset"
+*include "nation/azeri.ruleset"
+*include "nation/aztec.ruleset"
+*include "nation/babylonian.ruleset"
+*include "nation/barbarian.ruleset"
+*include "nation/basque.ruleset"
+*include "nation/bavarian.ruleset"
+*include "nation/belarusian.ruleset"
+*include "nation/belgian.ruleset"
+*include "nation/bengali.ruleset"
+*include "nation/boer.ruleset"
+*include "nation/bosnia.ruleset"
+*include "nation/brazilian.ruleset"
+*include "nation/breton.ruleset"
+*include "nation/british.ruleset"
+*include "nation/bulgarian.ruleset"
+*include "nation/burgundian.ruleset"
+*include "nation/burmese.ruleset"
+*include "nation/burundi.ruleset"
+*include "nation/byzantium.ruleset"
+*include "nation/cambodian.ruleset"
+*include "nation/canadian.ruleset"
+*include "nation/carthaginian.ruleset"
+*include "nation/catalan.ruleset"
+*include "nation/cherokee.ruleset"
+*include "nation/chilean.ruleset"
+*include "nation/chinese.ruleset"
+*include "nation/chola.ruleset"
+*include "nation/colombian.ruleset"
+*include "nation/confederate.ruleset"
+*include "nation/cornish.ruleset"
+*include "nation/cree.ruleset"
+*include "nation/croatian.ruleset"
+*include "nation/cuban.ruleset"
+*include "nation/czech.ruleset"
+*include "nation/danish.ruleset"
+*include "nation/dominican.ruleset"
+*include "nation/dutch.ruleset"
+*include "nation/egyptian.ruleset"
+*include "nation/emirati.ruleset"
+*include "nation/english.ruleset"
+*include "nation/esperant.ruleset"
+*include "nation/estonian.ruleset"
+*include "nation/ethiopian.ruleset"
+*include "nation/european.ruleset"
+*include "nation/filipino.ruleset"
+*include "nation/finnish.ruleset"
+*include "nation/french.ruleset"
+*include "nation/galician.ruleset"
+*include "nation/gallic.ruleset"
+*include "nation/georgian.ruleset"
+*include "nation/german.ruleset"
+*include "nation/greek.ruleset"
+*include "nation/gupta.ruleset"
+*include "nation/hacker.ruleset"
+*include "nation/hawaiian.ruleset"
+*include "nation/hellenic.ruleset"
+*include "nation/himyarite.ruleset"
+*include "nation/hittite.ruleset"
+*include "nation/hopi.ruleset"
+*include "nation/hungarian.ruleset"
+*include "nation/icelandic.ruleset"
+*include "nation/illyrian.ruleset"
+*include "nation/inca.ruleset"
+*include "nation/indian.ruleset"
+*include "nation/indonesian.ruleset"
+*include "nation/inuit.ruleset"
+*include "nation/iranian.ruleset"
+*include "nation/iraqi.ruleset"
+*include "nation/irish.ruleset"
+*include "nation/iroquois.ruleset"
+*include "nation/israeli.ruleset"
+*include "nation/italian.ruleset"
+*include "nation/japanese.ruleset"
+*include "nation/kanem-bornu.ruleset"
+*include "nation/kazakh.ruleset"
+*include "nation/kenyan.ruleset"
+*include "nation/khwarezmian.ruleset"
+*include "nation/kongo.ruleset"
+*include "nation/korean.ruleset"
+*include "nation/kurd.ruleset"
+*include "nation/kyrgyz.ruleset"
+*include "nation/lankese.ruleset"
+*include "nation/laotian.ruleset"
+*include "nation/latvian.ruleset"
+*include "nation/libyan.ruleset"
+*include "nation/lithuanian.ruleset"
+*include "nation/lojbanistani.ruleset"
+*include "nation/majapahit.ruleset"
+*include "nation/malagasy.ruleset"
+*include "nation/malaysian.ruleset"
+*include "nation/malian.ruleset"
+*include "nation/manchu.ruleset"
+*include "nation/maori.ruleset"
+*include "nation/mapuche.ruleset"
+*include "nation/martian.ruleset"
+*include "nation/mayan.ruleset"
+*include "nation/mexican.ruleset"
+*include "nation/moldovan.ruleset"
+*include "nation/mongol.ruleset"
+*include "nation/muskogee.ruleset"
+*include "nation/newzealand.ruleset"
+*include "nation/nigerian.ruleset"
+*include "nation/norman.ruleset"
+*include "nation/northkorean.ruleset"
+*include "nation/norwegian.ruleset"
+*include "nation/nubian.ruleset"
+*include "nation/numidian.ruleset"
+*include "nation/nuu-chah-nulth.ruleset"
+*include "nation/ottoman.ruleset"
+*include "nation/pakistani.ruleset"
+*include "nation/papuan.ruleset"
+*include "nation/persian.ruleset"
+*include "nation/peruvian.ruleset"
+*include "nation/phoenician.ruleset"
+*include "nation/pirate.ruleset"
+*include "nation/polish.ruleset"
+*include "nation/polynesian.ruleset"
+*include "nation/portuguese.ruleset"
+*include "nation/prussian.ruleset"
+*include "nation/purhepecha.ruleset"
+*include "nation/quebecois.ruleset"
+*include "nation/romanian.ruleset"
+*include "nation/roman.ruleset"
+*include "nation/russian.ruleset"
+*include "nation/rwandan.ruleset"
+*include "nation/ryukyuan.ruleset"
+*include "nation/sami.ruleset"
+*include "nation/samogitian.ruleset"
+*include "nation/saxon.ruleset"
+*include "nation/scottish.ruleset"
+*include "nation/serbian.ruleset"
+*include "nation/silesian.ruleset"
+*include "nation/singaporean.ruleset"
+*include "nation/sioux.ruleset"
+*include "nation/slovakian.ruleset"
+*include "nation/slovenian.ruleset"
+*include "nation/southafrican.ruleset"
+*include "nation/southkorean.ruleset"
+*include "nation/soviet.ruleset"
+*include "nation/spanish.ruleset"
+*include "nation/srivijaya.ruleset"
+*include "nation/sudanese.ruleset"
+*include "nation/sumerian.ruleset"
+*include "nation/swazi.ruleset"
+*include "nation/swedish.ruleset"
+*include "nation/swiss.ruleset"
+*include "nation/syrian.ruleset"
+*include "nation/taino.ruleset"
+*include "nation/tairona.ruleset"
+*include "nation/taiwanese.ruleset"
+*include "nation/tajik.ruleset"
+*include "nation/templar.ruleset"
+*include "nation/texan.ruleset"
+*include "nation/thai.ruleset"
+*include "nation/thracian.ruleset"
+*include "nation/tibetan.ruleset"
+*include "nation/tocharian.ruleset"
+*include "nation/tunisian.ruleset"
+*include "nation/tupi.ruleset"
+*include "nation/turkmen.ruleset"
+*include "nation/turk.ruleset"
+*include "nation/ukrainian.ruleset"
+*include "nation/un.ruleset"
+*include "nation/uruguayan.ruleset"
+*include "nation/uyghur.ruleset"
+*include "nation/uzbek.ruleset"
+*include "nation/venezuelan.ruleset"
+*include "nation/vietnamese.ruleset"
+*include "nation/viking.ruleset"
+*include "nation/welsh.ruleset"
+*include "nation/westphalian.ruleset"
+*include "nation/zulu.ruleset"

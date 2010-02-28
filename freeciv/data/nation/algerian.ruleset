@@ -1,0 +1,48 @@
+[nation_algerian]
+
+name=_("Algerian")
+plural=_("?plural:Algerians")
+groups="Modern", "African"
+legend=_("Algeria is an Arabic nation in North Africa. It is historically\
+ inhabited by the Berber people.")
+leader=
+ "Ahmed Ben Bella",
+ "Houari Boumédienne",
+ "Kahina",
+ "Kusayla",
+ "Abd al-Qadir",
+ "Mohammad Boudiaff"
+leader_sex="Male", "Female", "Male", "Male", "Male", "Male"
+flag="algeria"
+flag_alt = "-"
+city_style = "Classical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations = "tunisian", "libyan"
+
+cities =
+ "Algiers",
+ "Oran",
+ "Biskra",
+ "Sidi Bel Abbès",
+ "Annaba",
+ "Constantine",
+ "Tiemcen",
+ "Béchar",
+ "Tindouf",
+ "Ghardaïa",
+ "Sétif",
+ "Bejaïa",
+ "El Golea",
+ "I-n-Salah",
+ "Ghat",
+ "Tamanrasset",
+ "Adrar",
+ "Ech Cheliff",
+ "El Kala",
+ "Timimoun",
+ "El Oued",
+ "Bordj Omar Driss"

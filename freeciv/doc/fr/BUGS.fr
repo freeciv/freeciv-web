@@ -1,0 +1,162 @@
+====
+BUGS
+====
+
+Freeciv 1.14.0 est une version "stable" et est considérée comme suffisament
+exempte de bugs pour un usage de tous les jours. Cependant, si vous trouvez un
+bug, nous voulons réellement le savoir afin de pouvoir le corriger. Ce fichier
+liste les bugs connus de la version et donne des informations sur la manière de
+rpporter un nouveau bug. 
+
+Ne sont listés que les bugs les plus évidents. Pour une liste exhaustive, 
+voyez : 
+
+    http://www.freeciv.org/cgi-bin/bugs
+
+BUGS CONNUS :
+===========
+
+ - Vos réglages AGU ne sont envoyés au serveur que quand vous pressez "fin du
+   tour" et par conséquent, les changements que vous apportez à l'AGU dans le
+	 même tour que celui où vous sauvegardez un jeu seront perdus.
+
+
+ - L'IA facile ne l'est pas assez pour des joueurs novices. Si l'IA 
+   vous bat trop tôt dans le jeu, essayez de positionner l'option 
+	 "generator" du serveur sur 2 ou 3. C'est à dire, sur le serveur, 
+	 avant de démarrer un jeu, tapez : set generator 2 ou set generator 3.
+
+
+ - L'IA difficile ne l'est pas suffisamment pour des joueurs expérimentés 
+   et continue à faire des choses stupides. Par exemple, elle préfère 
+	 laisser des villes en désordre civil plutôt que de les laisser 
+	 s'affamer/diminuer de taille.
+
+
+ - Parfois, il y a tellement d'avances dans le menu "objectif" du rapport 
+   de science que celui-ci dépasse le haut de l'écran et vous ne pouvez pas
+   sélectionner des items.
+
+
+ - Vous pouvez parfois obtenir les messages 
+	{ss} player for sample <01> not found
+	{ss} player for sample <01> not found
+   en utilisant le pilote son esound. Il n'y a pas lieu de s'inquiéter.
+
+ - Si vous tapez ctrl-c dans le client pendant l'utilisation du plugin son esd,
+   le son actuellement en boucle risque de ne pas être correctement terminé.
+	 
+ - Les effets de certaines merveilles ou technologies ne prennent effet 
+   qu'au tour suivant. Par exemple, quand vous construisez le phare, 
+	 certaines trirèmes n'auront le bonus de déplacement qu'au tour suivant.
+
+ - Le client xaw ne peut afficher que 25 citoyens dans la boite de dialogue 
+   des villes.
+
+ - L'auto-attaque ne fonctionne pas très bien de façon générale.
+
+ - Quand vous préparez un GOTO dans le serveur, par exemple pour un colon 
+   ou bien un avion, le serveur utilisera des connaissances pas encore 
+	 disponibles pour le joueur.
+
+ - Dans le client GTK+, parfois, l'affichage près de la mini-carte contient 
+   des parasites.
+
+ - Les routines automatiques comme auto-explorer ne gèrent pas très bien les
+   trirèmes.
+
+
+ - LOG_DEBUG ne fonctionne pas avec des compilateurs non GCC.
+
+
+ - Au réglage des variables du serveur, celui-ci ne vérifie pas les valeurs 
+   aussi bien qu'il le pourrait.
+
+ - Des choses mauvaises se produisent quand vous manipulez simultanément 
+   des listes de travail multiples.
+
+ - Même en mono-joueur, l'IA peut effectuer à chaque tour des mouvements 
+   avant et après l'humain. Ceci donne parfois l'impression qu'elle effectue 
+	 deux fois ses mouvements.
+
+
+ - Le client xaw ne fonctionne pas très bien avec le gestionnaire de fenêtres 
+   de KDE. Essayez d'utiliser le client gtk ou bien un autre gestionnaire de 
+	 fenêtres.
+
+
+FAIRE UN RAPPORT DE BUG :
+=======================
+
+(S'il s'agit d'un bug dans la traduction, il doit être rapporté au contact
+primaire pour la langage. Voyez <http://www.freeciv.org/l10n.phtml> pour les
+noms et adresses des personnes.)
+
+Voici ce qu'il faut faire :
+
+ - Vérifier si ce n'est pas un des bugs listés plus haut !  :-)
+
+ - Assurez-vous sur le site de Freeciv que vosu utilisez bien la dernière
+   version. (Nous avons peut-être déjà résolu le problème.)
+
+   En particulier, vous pouvez essayer une version de développement depuis 
+	 notre CVS. Vous pouvez la récupérer à :
+
+        http://www.freeciv.org/latest.html
+
+ - Vérifiez la FAQ Freeciv dans le site web pour voir si un moyen de contourner
+   le bug n'a pas été publié.
+
+ - Vérifiez le système de rapport de bugs à :
+
+        http://www.freeciv.org/cgi-bin/bugs
+
+   pour voir si le bug n'a pas déjà été rapporté.
+
+ - Soumettez un rapport !
+
+   Vous pouvez le faire soit en envoyant un message à 
+	 <bugs@freeciv.freeciv.org>, ou par le web à 
+   <http://www.freeciv.org/cgi-bin/bugs>.
+
+   Si vous voulez faire part aux développeurs Freeciv des commentaires sans pour
+	 autant présenter un rapport de bug, vous pouvez envoyer un message à 
+	 <freeciv-dev@freeciv.org>, la liste de diffusion des développeurs Freeciv.
+
+   A inclure dans votre rapport de bug :
+
+   - Décrivez le problème, y compris tout message ayant été affiché.
+	 
+   - Indiquez quel est (sont) le(s) client(s) utilisé (Gtk+ or Xaw).
+
+   - Communiquez nous le nom et la version :
+
+       - Du système d'exploitation que vou utilisez. Vous vouvez trouver la
+			   commande "uname -a" utile.
+
+       - Le numéro de version de Freeciv.
+
+       - Si vous utilisez le client Gtk+, les numéros de version (si vous les
+			   connaissez) des bibliothèques Gtk+, glib, et imlib.
+
+       - Si vous utilisez le client Xaw, les numéros de version (si vous les
+			   connaissez) des bibliothèques X, des la bibliothèque Xpm et Xaw, et en
+				 particulier s'il s'agit de la Xaw standard ou d'une variante telle que
+				 Xaw3d, Xaw95, ou Nextaw.
+
+       - Si compilez depuis le source, le nom et le numéro de version du
+			   compilateur.
+
+       - Si vous installez depuis un paquet binaire, le nom du paquet, la
+			   distribution pour laquelle il est fait, et où vous l'avez obtenu.
+
+   - Si Freeciv fait un vidage de mémoire, alors nous vous demanderons d'utiliser un
+	 debogueur pour nous donner un état de la pile. Vous aurez besoin du fichier
+	 "core" pour cela, donc conservez-le pendant un moment.
+
+INFORMATIONS SUPPLÉMENTAIRES :
+============================
+
+Pour plus d'informations, comme d'habitude, voyez le site web de Freeciv :
+
+        http://www.freeciv.org/

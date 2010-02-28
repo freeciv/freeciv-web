@@ -1,0 +1,55 @@
+[nation_chilean]
+
+name=_("Chilean")
+plural=_("?plural:Chileans")
+groups="Modern", "American"
+legend=_("Chile is located on the south-western coast of South America.")
+leader=
+ "Pedro de Valdivia",
+ "Bernardo O'Higgins",
+ "José Miguel Carrera",
+ "Manuel Blanco Encalada",
+ "Diego Portales",
+ "Manuel Montt",
+ "Arturo Alessandri",
+ "Augusto Pinochet"
+leader_sex="Male", "Male", "Male",
+           "Male", "Male", "Male",
+           "Male", "Male"
+flag="chile"
+flag_alt = "-"
+city_style = "European"
+
+ruler_titles = { "government",      "male_title",        "female_title"
+                 "Despotism",       _("Captain General"),_("Captain General")
+                 "Fundamentalism",  _("Archbishop"),     _("Archbishop")
+                 "Republic",      _("Supreme Director"),_("Supreme Director")
+               }
+
+init_techs=""
+init_buildings=""
+
+init_government="Despotism"
+init_units=""
+civilwar_nations = "argentine", "mapuche"
+
+cities =
+  "Santiago", "La Serena", "Concepción", "Valparaíso (hills)",
+  "Rancagua", "Talca", "Punta Arenas (ocean)", "Copiapó",
+  "Puerto Montt (ocean)", "Antofagasta", "Iquique", "Coyhaique",
+  "Temuco (forest, river)", "Viña del mar (ocean)", "Coquimbo",
+  "San Antonio", "La Calera (hills)", "Chillán", "Talcahuano", "Osorno",
+  "Valdivia", "Puerto Varas (ocean)", "Llanquihue", "Ancud", "Castro",
+  "Calama", "Arica", "Constitución", "Chañaral", "Cauquenes",
+  "Puente Alto (river, hills)", "Talagante", "Melipilla", "Peumo",
+  "Puerto Natales (ocean)", "Lota", "Ovalle", "Huasco", "Mejillones",
+  "Victoria", "San Felipe", "Frutillar", "Illapel", "Angol",
+  "San Fernando", "Toltén", "Curicó", "Pisagua", "Tocopilla",
+  "Vallenar", "Caldera", "Lebu", "La Ligua", "Villarrica", "Pucón",
+  "Puerto Aisén (ocean)", "Tomé", "Mulchén", "Taltal", "Putre",
+  "Vicuña", "Combarbalá", "Los Andes (hills)", "Quillota", "Molina",
+  "Chanco", "Parral", "Bulnes", "Yungay", "Coronel", "Yumbel",
+  "Traiguén (river)", "Pitrufquén", "Calbuco (ocean)",
+  "Maullín (swamp)", "Pelequén", "Algarrobo", "Puerto Toro (ocean)",
+  "Cachiyuyo", "Pelotillehue"
+

@@ -1,0 +1,124 @@
+[nation_brazilian]
+
+name=_("Brazilian")
+plural=_("?plural:Brazilians")
+groups="Modern", "American"
+legend=_("Brazil was founded as a colony of Portugal but became\
+ independent in 1822 as a result of Portugal's occupation by Napoleonic\
+ France. The country was first established as an empire under the exiled\
+ Portuguese royal family. The empire lasted until the establishment of a\
+ republican government in 1889.")
+leader=
+ "Dom Pedro I",
+ "Isabel",
+ "Deodoro da Fonseca",
+ "Tancredo Neves",
+ "Juscelino Kubitscheck",
+ "Getúlio Vargas"
+leader_sex="Male", "Female", "Male", "Male", "Male", "Male"
+flag = "brasil"
+flag_alt = "-"
+city_style = "Tropical"
+
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Despotism",       _("Dictator"),     _("Dictatrix")
+                 "Monarchy",        _("Imperator"),    _("Imperatrix")
+                 "Communism",       _("Chairman"),     _("Chairperson")
+ "Fundamentalism", _("Director-President"), _("?female:Director-President")
+}
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations = "akwe", "tupi"
+
+cities =
+ "São Paulo",
+ "Rio de Janeiro (river)",
+ "Salvador",
+ "Fortaleza",
+ "Belo Horizonte",
+ "Curitiba",
+ "Recife (ocean)",
+ "Belém",
+ "Manaus",
+ "Brasília",
+ "Porto Alegre (ocean)",
+ "São Luís",
+ "Campinas (grassland)",
+ "Natal",
+ "Goiânia",
+ "Maceió",
+ "João Pessoa",
+ "Teresina",
+ "São José dos Campos (grassland)",
+ "Campo Grande (grassland)",
+ "Cuiabá",
+ "Santos",
+ "Ribeirão Preto (river)",
+ "Niterói",
+ "Olinda",
+ "Uberlândia",
+ "Aracaju",
+ "Feira de Santana",
+ "Juiz de Fora",
+ "Joinville",
+ "São Vicente",
+ "Florianópolis",
+ "Campos (grassland)",
+ "Jundiaí",
+ "Campina Grande (grassland)",
+ "Piracicaba",
+ "Londrina",
+ "Serra (mountains)",
+ "São José do Rio Preto (river)",
+ "Caxias do Sul",
+ "Pelotas",
+ "Vitória",
+ "Franca",
+ "Taubaté",
+ "Bauru",
+ "Vila Velha",
+ "Anápolis",
+ "Petrópolis",
+ "Limeira",
+ "Uberaba",
+ "Blumenau",
+ "Vitória da Conquista",
+ "Macapá",
+ "Foz do Iguaçu (river)",
+ "Porto Velho (ocean)",
+ "Caruaru",
+ "Rio Branco (river)",
+ "Maringá",
+ "Santarém",
+ "Ilhéus",
+ "Mossoró",
+ "Governador Valadares",
+ "Juazeiro do Norte",
+ "Volta Redonda",
+ "Araraquara",
+ "Itabuna (hills)",
+ "Boa Vista",
+ "Petrolina",
+ "Presidente Prudente",
+ "Divinópolis",
+ "Itu",
+ "Americana",
+ "Paranaguá",
+ "Pindamonhangaba",
+ "Cabo Frio (ocean)",
+ "Itapetininga (hills)",
+ "Angra dos Reis (ocean)",
+ "Poços de Caldas",
+ "Bragança Paulista",
+ "Dourados",
+ "Barbacena",
+ "Patos de Minas",
+ "Rondonópolis",
+ "Botucatu",
+ "Varginha",
+ "Palmas",
+ "Ouro Preto",
+ "Teresópolis"

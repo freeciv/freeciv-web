@@ -1,0 +1,71 @@
+[nation_inuit]
+
+name=_("Inuit")
+plural=_("?plural:Inuits")
+groups="American"
+legend=_("The Inuit people inhabit northern Canada and Greenland.\
+ Legend says that the Great Shaman Qitdlarssuaq lead his people to Thule\
+ (Qaanaaq) on the west coast of Greenland in the 10th century. All Inuit\
+ of today are descendents of the Thule culture.")
+leader=
+ "Qitdlarssuaq",
+ "Nakasuk"
+
+leader_sex="Male", "Male"
+flag="greenland"
+flag_alt = "-"
+city_style = "European"
+
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Despotism",       _("Shaman"),        _("?female:Shaman")
+                 "Monarchy",    _("Great Shaman"),  _("?female:Great Shaman")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations = "canadian", "quebecois", "danish"
+
+; City names are taken from Greenland (a self-governing territory of the
+; Danish kingdom) and the Canadian territory of Nunavut, both Inuit-
+; dominated political entities.
+
+cities =
+; Alternated Greenlandic and Nunavut communities
+ "Nuuk",		; Godthåb (Danish/Norwegian)
+ "Iqaluit",		; Frobisher Bay
+ "Ilulissat",		; Jakobshavn (Danish/Norwegian)
+ "Igloolik",		
+ "Narsarsuaq",
+ "Arviat",		; Eskimo Point
+ "Qaanaaq",		; Thule (Danish/Norwegian)
+ "Kimmirut",		; Lake Harbour
+ "Upernavik",
+ "Sanikiluaq",
+ "Uummannaq",
+ "Pangnirtung",
+ "Qeqertarsuaq",	; Godhavn (Danish/Norwegian)
+ "Quikiqtarjuaq",
+ "Kangerlussuaq",	; Søndre Strømfjord (Danish/Norwegian)
+ "Taloyoak",
+
+; Only Greenlandic communities below
+ "Asiaat",
+ "Ittoqortoormiut",	; Scoresbysund (Danish/Norwegian)
+ "Kuglutuk",
+ "Kangaatsiak",
+ "Umingmaktok",
+ "Maniitsoq",
+ "Nanisivik",
+ "Nanortalik",
+ "Narsaq",
+ "Paamiut",		; Frederikshåb (Danish/Norwegian)
+ "Qaqortorq",
+ "Qasigiannguit",
+ "Sisimiut",
+ "Tasiilaq",
+
+; Communities in Quebec with Inuit names
+ "Kuujjuaq",
+ "Kangiqsualujjuaq"

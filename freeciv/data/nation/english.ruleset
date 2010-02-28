@@ -1,0 +1,113 @@
+[nation_english]
+
+name=_("English")
+plural=_("?plural:English")
+groups="Medieval", "European"
+legend=_("England was unified by Alfred the Great of Wessex in the late\
+ 9th century AD, only to be conquered by William of Normandy a century\
+ later, in the last successful invasion of the country.")
+leader=
+ "Elizabeth I",
+ "Alfred the Great",		; a.k.a. "Alfred of Wessex"
+ "William the Conqueror", 
+ "Richard Lionheart",
+ "Henry II",
+ "Oliver Cromwell",
+ "John Lackland",
+ "Mary Tudor",
+ "Edward Longshanks"
+leader_sex="Female", "Male", "Male", "Male", "Male", "Male", "Male",
+           "Female", "Male"
+flag="england"
+flag_alt = "united_kingdom"
+city_style = "European"
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Democracy",_("Prime Minister"), _("?female:Prime Minister")
+                 "Fundamentalism",  _("Lord Protector"), _("Lady Protector")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations = "cornish", "british"
+
+cities =
+ "London",
+ "Westminister",
+ "Birmingham",
+ "Liverpool",
+ "Manchester",
+ "Leeds",
+ "York",
+ "Newcastle",
+ "Canterbury",
+ "Bradford",
+ "Derby",
+ "Southampton",
+ "Middlesborough",
+ "Sheffield",
+ "Nottingham",
+ "Coventry",
+ "Bath",
+ "Bristol",
+ "Brighton",
+ "Portsmouth",
+ "Hull",
+ "Leicester",
+ "Plymouth",
+ "Bournemouth",
+ "Sunderland",
+ "Stoke-on-Trent",
+ "Bolton",
+ "Norwich",
+ "Oxford",
+ "Colchester",
+ "Reading",
+ "Cambridge",
+ "Gloucester",
+ "Blackpool",
+ "Stratford-upon-Avon",
+ "Durham",
+ "Eastleigh",
+ "Winchester",
+ "Folkestone",
+ "Dover",
+ "Huntingdon",
+ "Hereford",
+ "Ipswich",
+ "Kettering",
+ "King's Lynn",
+ "Kidderminster",
+ "Leek",
+ "Lincoln",
+ "Lutterworth",
+ "Macclesfield",
+ "Market Bosworth",
+ "Market Harborough",
+ "Melton Mowbray",
+ "Nuneaton",
+ "Oakham",
+ "Peterborough",
+ "Pickering",
+ "Preston",
+ "Poole",
+ "Rochester",
+ "Ramsgate",
+ "Southend",
+ "Stevenage",
+ "Ashford",
+ "Swindon",
+ "Torquay",
+ "Wolverhampton",
+ "Weymouth",
+ "Yeovil",
+ "Halifax",
+ "Oldham",
+ "Rochdale",
+ "Blackburn",
+ "Burnley",
+ "Lancaster",
+ "Northampton",
+ "Salisbury",
+ "Cowes"

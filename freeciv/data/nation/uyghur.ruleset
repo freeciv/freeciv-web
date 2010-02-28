@@ -1,0 +1,69 @@
+[nation_uyghur]
+
+name=_("Uyghur")
+plural=_("?plural:Uyghurs")
+groups="Medieval", "Asian"
+legend=_("Uyghur was an east Turk empire and civilization. At its height in\
+ 820 AD it controlled most of Central and North Asia. After clashing with\
+ the Chinese for several centuries, they were finally subdued by the Qing\
+ dynasty in the 1700s. Today, descendants of the Uyghur form the\
+ populations of the Central Asian states of Uzbekistan, Kazakhstan and\
+ Kyrgyzstan. They are also the main minority of the Xinjiang province of\
+ China.")
+leader=
+ "Kutluk Bilge Kul",
+ "Moyunchur",
+ "Khitan",
+ "Bugu",
+ "Baga Tarkan",
+ "Kutlug Bilge",
+ "Sutuk Bugra",
+ "Guyuk"
+ 
+leader_sex="Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male"
+flag="uyghur"
+flag_alt = "-"
+city_style = "Classical"
+
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Despotism",       _("Khan"),         _("?female:Khan")
+                 "Monarchy",        _("Khagan"),       _("?female:Khagan")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations = "turkish", "tocharian"
+
+cities =
+ "Ürümqi",
+ "Karamay",
+ "Kuytun",
+ "Karabalgasun",
+ "Haml",
+ "Kashi",
+ "Hotan",
+ "Korla",
+ "Turpan",
+ "Kuqa",
+ "Aksu",
+ "Balguntay",
+ "Nilka",
+ "Baxkorgan",
+ "Boron Sum",
+ "Ikanbujmal",
+ "Shihanza",
+ "Serikbuya",
+ "Karakhoja",
+ "Ulanlinggi",
+ "Tumshuke",
+ "Kashgar",
+ "Markit",
+ "Alar",
+ "Narat",
+ "Tikanlik",
+ "Altay",
+ "Tura",
+ "Üjachu",
+ "Yakatograk"

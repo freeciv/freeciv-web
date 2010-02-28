@@ -1,0 +1,205 @@
+[nation_cherokee]
+
+name=_("Cherokee")
+plural=_("?plural:Cherokees")
+groups="American"
+legend=_("The Cherokee nation is the largest Native American\
+ nation in North America today.")
+leader=
+ "Takatoka",
+ "Tahlonteskee",
+ "Atakullakulla",
+ "Sequoyah",
+ "Moytoy",
+ "John Ross",
+ "Wilma Mankiller"
+leader_sex="Male", "Male", "Male", "Male", "Male", "Male", "Female"
+flag= "keetoowah"
+flag_alt = "-"
+city_style = "Celtic"
+
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Despotism",       _("Chief"),        _("?female:Chief")
+                 "Monarchy",        _("Great Chief"),_("?female:Great Chief")
+                 "Republic",        _("Spokesman"),    _("Spokeswoman")
+                "Democracy",_("Principal Chief"),_("?female:Principal Chief")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="sioux", "iroquois", "nuu-chah-nulth"
+
+; names of early Cherokee settlements in no particular order
+cities =
+ "Tanasi",
+ "Nanyahala",
+ "Tikaleyasuni",
+ "Kulsetsiyi",	; (or Sugartown)
+ "Ustanali",
+ "Natuhli",
+ "Cowee",
+ "Nucassee",
+ "Watauga",
+ "Oconee",
+ "Chatuga",
+ "Nayuhi",
+ "Tsiyahi",
+ "Coweeshee",
+ "Stikayi",
+ "Yunsawi",
+ "Qualatchee",
+ "Chilhowee",
+ "Sitiku",
+ "Ustanali",
+ "Ellijay",
+ "Tawsee",
+ "Echota",
+ "Tomassee",
+ "Cotocanahut Echota",
+ "Tallulah",
+ "Itseyi",
+ "Tekanitli",
+ "Estatoee",
+ "Toxaway",
+ "Hiwassee",
+ "Tamahli",
+ "Kituhwa",
+ "Tessuntee",
+ "Keowee",
+ "Tugaloo",
+ "Tellico",
+ "Jore",
+ "Tahlasi",
+ "Toquo",
+; Other Settlements by Location:
+ "Aguaquiri",
+ "Amahyaski",
+ "Amakalali",
+ "Amohi",
+ "Anisgayayi", ;(NC)
+ "Anuyi",
+ "Aquohee", ;(NC)
+ "Aracuchi",
+ "Atsiniyi",
+ "Aumuchee",
+ "Ayahliyi",
+ "Big-island", ;(TN)
+ "Briertown", ;(NC)
+ "Broomtown",
+ "Brown's Village",
+ "Buffalo Fish",
+ "Canuga", ;(2) (NC/SC)
+ "Catatoga", ;(NC)
+ "Chagee", ;(SC)
+ "Chattanooga", ;(TN)
+ "Cheesoheha", ;(SC)
+ "Chewase", ;(TN)
+ "Chicherohe", ;(GA)
+ "Chickamauga", ;(TN)
+ "Conisca",
+ "Conontoroy",
+ "Conoross", ;(SC)
+ "Cooweescoowee",
+ "Coyatee", ;(TN)
+ "Crayfish Town", ;(GA)
+ "Creek Path", ;(AL)
+ "Crowmocker", ;(AL)
+ "Crow Town", ;(AL)
+ "Cuclon",
+ "Cusawatee", ;(GA)
+ "Dulastunyi", ;(NC)
+ "Dustavalunyi", ;(NC)
+ "Ecochee", ;(GA)
+ "Elakulsi", ;(GA)
+ "Etowah", ;(or High Tower Forks) (2) (GA)
+ "Euforsee",
+ "Fightingtown", ;(GA)
+ "Frogtown", ;(GA)
+ "Guasuli",
+ "Gulaniyi",
+ "Gusti", ;(TN)
+ "Gwalgahi", ;(or Guhlaniyi) (Natchez) (NC)
+ "Halfway Town", ;(TN)
+ "Hemptown", ;(GA)
+ "Hickory Log", ;(GA)
+ "Ikatikunahita", ;(GA)
+ "Ivy Log", ;(GA)
+ "Johnstown", ;(GA)
+ "Kalanunyi", ;(NC)
+ "Kanastunyi", ;(NC)
+ "Kansaki", ;(4) (NC/GA/TN)
+ "Kanutaluhi", ;(GA)
+ "Kawanunyi", ;(TN)
+ "Kuhlahi", ;(GA)
+ "Kulahiyi", ;(GA)
+ "Leatherwood", ;(GA)
+ "Long Island", ;(TN)
+ "Lookout Mountain", ;(GA)
+ "Naguchee", ;(GA)
+ "Nanatlugunyi", ;(TN)
+ "Nickajack", ;(TN)
+ "Niowe",
+ "Noewe",
+ "Nowe",
+ "Nununyi", ;(NC)
+ "Ocoee", ;(TN)
+ "Oconaluftee", ;(NC)
+ "Olagatano",
+ "Ooltewah", ;(TN)
+ "Oothcaloga", ;(GA)
+ "Paint Town", ;(NC)
+ "Pine Log", ;(GA)
+ "Quacoshatchee", ;(SC)
+ "Qualla", ;(NC)
+ "Quanusee",
+ "Quinahaqui",
+ "Rabbit Trap", ;(GA)
+ "Red Bank", ;(GA)
+ "Red Clay", ;(NC)
+ "Running Water", ;(TN)
+ "Saguahi",
+ "Sanderstown", ;(AL)
+ "Selikwayi", ;(GA)
+ "Seneca", ;(SC)
+ "Setsi", ;(NC)
+ "Skeinah", ;(or Devil Town (GA)
+ "Soquee", ;(GA)
+ "Spike Bucktown", ;(or Spike Town) (NC)
+ "Spring Place", ;(GA)
+ "Standing Peach Tree", ;(GA)
+ "Sunanee", ;(GA)
+ "Sutali", ;(GA)
+ "Tagwahi", ;(3) (TN/NC)
+ "Takwashnaw",
+ "Talahi",
+ "Talaniyi", ;(GA)
+ "Talking Rock", ;(GA)
+ "Tanasqui",
+ "Tasetsi", ;(GA)
+ "Taskigi", ;(3) (TN/NC)
+ "Tausitu",
+ "Tikwalitsi", ;(NC)
+ "Tlanusiyi", ;(NC)
+ "Tocax",
+ "Torsalla",
+ "Tricentee",
+ "Tsilaluhi", ;(GA)
+ "Tsiskwahi", ;(NC)
+ "Tsistetsiyi", ;(TN)
+ "Tsistuyi", ;(TN)
+ "Tsudinuntiyi", ;(NC)
+ "Tucharechee",
+ "Tuckaseegee", ;(2) (NC/GA)
+ "Turkeytown", ;(AL)
+ "Turniptown", ;(NC)
+ "Turtletown", ;(GA)
+ "Tusquittah", ;(NC)
+ "Two Runs", ;(GA)
+ "Ustisti",
+ "Valleytown", ;(NC)
+ "Wahyahi", ;(NC)
+ "Wasasa", ;(AL)
+ "Willstown" ;(AL)

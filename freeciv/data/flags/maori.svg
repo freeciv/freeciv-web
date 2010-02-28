@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="300.00000pt"
+   height="200.00000pt"
+   id="svg2313"
+   sodipodi:version="0.32"
+   inkscape:version="0.42"
+   sodipodi:docbase="/home/daniel/freeciv/data/flags"
+   sodipodi:docname="maori.svg">
+  <defs
+     id="defs2315" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.4000000"
+     inkscape:cx="202.03038"
+     inkscape:cy="106.20496"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     inkscape:window-width="801"
+     inkscape:window-height="602"
+     inkscape:window-x="30"
+     inkscape:window-y="50"
+     showguides="true"
+     inkscape:guide-bbox="true" />
+  <metadata
+     id="metadata2318">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Maori nation flag (1990)</dc:title>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Daniel Markstedt</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:rights>
+          <cc:Agent>
+            <dc:title />
+          </cc:Agent>
+        </dc:rights>
+        <dc:description>Made for inclusion in Freeciv (www.freeciv.org)</dc:description>
+        <cc:license
+           rdf:resource="http://web.resource.org/cc/PublicDomain" />
+      </cc:Work>
+      <cc:License
+         rdf:about="http://web.resource.org/cc/PublicDomain">
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/Reproduction" />
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/Distribution" />
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#000000;fill-opacity:1.0000000;stroke-width:0.0000000;stroke-miterlimit:4.0000000;stroke-dasharray:none"
+       id="rect2548"
+       width="375.00000"
+       height="250.00000"
+       x="0.0000000"
+       y="0.0000000" />
+    <path
+       style="fill:#ff0000;fill-opacity:1.0000000;stroke:none;stroke-width:0.62500000;stroke-miterlimit:4.0000000;stroke-opacity:1.0000000"
+       d="M 0.0000000,93.571426 L 110.50000,93.571426 L 111.75000,143.57143 L 375.00000,143.57143 L 375.00000,250.00000 L 0.0000000,250.00000 L 0.0000000,93.571426 z "
+       id="rect2767"
+       sodipodi:nodetypes="ccccccc" />
+    <path
+       id="path2544"
+       style="fill:#ffffff;fill-opacity:1.0000000;fill-rule:evenodd;stroke:#000000;stroke-width:0.0000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4.0000000;stroke-opacity:1.0000000"
+       d="M 374.99986,160.00923 L 375.00000,136.14438 L 111.88731,136.14438 C 111.88731,136.14438 119.86476,129.86248 121.57084,127.23608 C 123.27693,124.60968 124.84923,121.58397 125.72747,118.41618 C 126.60571,115.24842 127.79521,113.06305 125.71053,106.43257 C 123.28645,98.722582 118.74258,95.846152 116.76621,94.105002 C 114.78985,92.363852 111.96430,90.958732 107.66933,89.869682 C 103.37438,88.780632 97.624581,87.558112 89.756054,87.530802 C 57.630248,87.417052 0.0000000,87.788782 0.0000000,87.788782 C 0.0000000,87.788782 0.00014694000,110.06982 0.00014694000,110.06982 C 0.00014694000,110.06982 76.767598,110.73273 98.418183,110.45652 L 100.17738,110.51175 C 104.82622,110.65774 107.82366,116.25700 108.59936,122.44419 C 109.37507,128.63138 103.28023,135.26050 103.28023,135.26050 C 103.28023,135.26050 102.94777,128.40162 99.734125,122.54589 C 96.520471,116.69017 91.023117,115.17103 83.541573,114.14899 C 77.664938,113.34620 63.814622,118.62198 63.829885,134.27489 C 63.849274,154.15884 89.539088,159.56730 89.539088,159.56730 L 374.99986,160.00923 z "
+       sodipodi:nodetypes="cccssssscccccscssscc" />
+  </g>
+</svg>

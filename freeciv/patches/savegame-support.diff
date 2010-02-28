@@ -1,0 +1,4374 @@
+Index: configure
+===================================================================
+--- configure	(revisjon 57)
++++ configure	(arbeidskopi)
+@@ -36207,7 +36207,37 @@
+ fi
+ 
+ 
++    { $as_echo "$as_me:$LINENO: checking for libcurl 7.11.0 or later" >&5
++$as_echo_n "checking for libcurl 7.11.0 or later... " >&6; }
++    set x `curl-config --version 2>&1`
++    shift
++    case "$1" in [0-9]*) ;; *) shift;; esac
++    jigdo_curlver="$1"
++    { $as_echo "$as_me:$LINENO: result: $jigdo_curlver" >&5
++$as_echo "$jigdo_curlver" >&6; }
++    case "$jigdo_curlver" in
++        [1-9][0-9].*|[8-9].*|7.1[1-9]*|7.[2-9][0-9]*)
++            CFLAGS="$CFLAGS `curl-config --cflags 2>/dev/null`"
++            SERVER_LIBS="$SERVER_LIBS `curl-config --libs 2>/dev/null`"
++            if test -n "$jigdo_libcurl"; then CURLLIBS="$jigdo_libcurl"; fi
++            ;;
++        *)
++        { $as_echo "$as_me:$LINENO: result:    * libcurl not installed, or the installed version" >&5
++$as_echo "   * libcurl not installed, or the installed version" >&6; }
++        { $as_echo "$as_me:$LINENO: result:    * is too old, or curl-config is not in \$PATH." >&5
++$as_echo "   * is too old, or curl-config is not in \$PATH." >&6; }
++        { $as_echo "$as_me:$LINENO: result:    * Please install libcurl 7.11.0 or later, it is" >&5
++$as_echo "   * Please install libcurl 7.11.0 or later, it is" >&6; }
++        { $as_echo "$as_me:$LINENO: result:    * needed by the jigdo GUI application." >&5
++$as_echo "   * needed by the jigdo GUI application." >&6; }
++        installDevel "libcurl2" "libcurl2"
++    esac
+ 
++
++
++
++
++
+ { $as_echo "$as_me:$LINENO: checking for main in -lnls" >&5
+ $as_echo_n "checking for main in -lnls... " >&6; }
+ if test "${ac_cv_lib_nls_main+set}" = set; then
+Index: config.h
+===================================================================
+--- config.h	(revisjon 57)
++++ config.h	(arbeidskopi)
+@@ -26,7 +26,7 @@
+ #define FC_CONFIG_H 1
+ 
+ /* These are the CFLAGS used in compilation */
+-#define FC_STORE_CFLAGS '-save-temps -Wall -Wpointer-arith -Wcast-align -Wmissing-prototypes -Wmissing-declarations -g -O2'
++#define FC_STORE_CFLAGS '-save-temps -Wall -Wpointer-arith -Wcast-align -Wmissing-prototypes -Wmissing-declarations -g -O2 -I/usr/local/include'
+ 
+ /* These are the CPPFLAGS used in compilation */
+ #define FC_STORE_CPPFLAGS ' -DLOCALEDIR="\"${datarootdir}/locale\"" -DDEFAULT_DATA_PATH="\".:data:~/.freeciv/2.3:${datarootdir}/freeciv\""'
+Index: configure.ac
+===================================================================
+--- configure.ac	(revisjon 57)
++++ configure.ac	(arbeidskopi)
+@@ -709,6 +709,31 @@
+ 		 AC_MSG_ERROR(Did not find math lib!))
+     fi
+ fi
++
++
++dnl The following adds flags for libcurl
++    AC_MSG_CHECKING(for libcurl 7.11.0 or later)
++    set x `curl-config --version 2>&1`
++    shift
++    case "$1" in [[0-9]*]) ;; *) shift;; esac
++    jigdo_curlver="$1"
++    AC_MSG_RESULT($jigdo_curlver)
++    case "$jigdo_curlver" in
++        [[1-9][0-9].*|[8-9].*|7.1[1-9]*|7.[2-9][0-9]*])
++            CFLAGS="$CFLAGS `curl-config --cflags 2>/dev/null`"
++            SERVER_LIBS="$SERVER_LIBS `curl-config --libs 2>/dev/null`"
++            if test -n "$jigdo_libcurl"; then CURLLIBS="$jigdo_libcurl"; fi
++            ;;
++        *)
++        AC_MSG_RESULT([   * libcurl not installed, or the installed version])
++        AC_MSG_RESULT([   * is too old, or curl-config is not in \$PATH.])
++        AC_MSG_RESULT([   * Please install libcurl 7.11.0 or later, it is])
++        AC_MSG_RESULT([   * needed by the jigdo GUI application.])
++        installDevel "libcurl2" "libcurl2"
++    esac
++
++
++
+ AC_SUBST(SERVER_LIBS)
+ 
+ AC_CHECK_LIB(nls,main)
+Index: server/Makefile.in
+===================================================================
+--- server/Makefile.in	(revisjon 30)
++++ server/Makefile.in	(arbeidskopi)
+@@ -73,14 +73,14 @@
+ 	"$(DESTDIR)$(desktopfiledir)"
+ libLTLIBRARIES_INSTALL = $(INSTALL)
+ LTLIBRARIES = $(lib_LTLIBRARIES)
+-am_libfreeciv_srv_la_OBJECTS = aiiface.lo auth.lo barbarian.lo \
+-	cityhand.lo citytools.lo cityturn.lo commands.lo \
++am_libfreeciv_srv_la_OBJECTS = aiiface.lo auth.lo aws4c.lo \
++	barbarian.lo cityhand.lo citytools.lo cityturn.lo commands.lo \
+ 	connecthand.lo console.lo diplhand.lo diplomats.lo edithand.lo \
+ 	gamehand.lo gotohand.lo ggzserver.lo handchat.lo hand_gen.lo \
+-	maphand.lo meta.lo notify.lo plrhand.lo report.lo ruleset.lo \
+-	sanitycheck.lo savegame.lo score.lo sernet.lo settings.lo \
+-	settlers.lo spacerace.lo srv_main.lo stdinhand.lo techtools.lo \
+-	unithand.lo unittools.lo voting.lo
++	maphand.lo meta.lo notify.lo netsave.lo plrhand.lo report.lo \
++	ruleset.lo sanitycheck.lo savegame.lo score.lo sernet.lo \
++	settings.lo settlers.lo spacerace.lo srv_main.lo stdinhand.lo \
++	techtools.lo unithand.lo unittools.lo voting.lo
+ libfreeciv_srv_la_OBJECTS = $(am_libfreeciv_srv_la_OBJECTS)
+ binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
+ PROGRAMS = $(bin_PROGRAMS)
+@@ -396,6 +396,8 @@
+ 		aiiface.h	\
+ 		auth.c		\
+ 		auth.h		\
++		aws4c.c		\
++		aws4c.h		\
+ 		barbarian.c	\
+ 		barbarian.h	\
+ 		cityhand.c	\
+@@ -432,6 +434,8 @@
+ 		meta.h		\
+ 		notify.c	\
+ 		notify.h	\
++		netsave.c	\
++		netsave.h	\
+ 		plrhand.c	\
+ 		plrhand.h	\
+ 		report.c	\
+@@ -605,6 +609,7 @@
+ 
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/aiiface.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/auth.Plo@am__quote@
++@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/aws4c.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/barbarian.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cityhand.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/citytools.Plo@am__quote@
+@@ -623,6 +628,7 @@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/handchat.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/maphand.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/meta.Plo@am__quote@
++@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/netsave.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/notify.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/plrhand.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/report.Plo@am__quote@
+Index: server/commands.c
+===================================================================
+--- server/commands.c	(revisjon 30)
++++ server/commands.c	(arbeidskopi)
+@@ -409,7 +409,7 @@
+       "all cities and units etc.  Use with care!"),
+    VCF_NONE, 50
+   },
+-  {"save",	ALLOW_ADMIN,
++  {"save",	ALLOW_CTRL,
+    /* TRANS: translate text between <> only */
+    N_("save\n"
+       "save <file-name>"),
+Index: server/netsave.c
+===================================================================
+--- server/netsave.c	(revisjon 0)
++++ server/netsave.c	(revisjon 0)
+@@ -0,0 +1,885 @@
++/********************************************************************** 
++ Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
++   This program is free software; you can redistribute it and/or modify
++   it under the terms of the GNU General Public License as published by
++   the Free Software Foundation; either version 2, or (at your option)
++   any later version.
++
++   This program is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++   GNU General Public License for more details.
++***********************************************************************/
++
++
++#ifdef HAVE_CONFIG_H
++#include <config.h>
++#endif
++
++#include <assert.h>
++#include <stdarg.h>
++#include <stdlib.h>
++#include <string.h>
++
++#include "astring.h"
++#include "fcintl.h"
++#include "genlist.h"
++#include "hash.h"
++#include "inputfile.h"
++#include "ioz.h"
++#include "log.h"
++#include "mem.h"
++#include "sbuffer.h"
++#include "shared.h"
++#include "support.h"
++
++#include "aws4c.h"
++#include "netsave.h"
++
++#define SAVE_TABLES TRUE	/* set to 0 for old-style savefiles */
++#define SECF_DEBUG_ENTRIES FALSE/* LOG_DEBUG each entry value */
++
++#define SPECVEC_TAG astring
++#include "specvec.h"
++
++/* An 'entry' is a string, integer or string vector;
++ * Whether it is string or int or string vector is determined by whether
++ * svalue/vec_values is NULL.
++ */
++struct entry {
++  char *name;			/* name, not including section prefix */
++  int  ivalue;			/* value if integer */
++  char *svalue;			/* value if string (in sbuffer) */
++  char **vec_values;		/* string vector values */
++  int dim;			/* vector's size */
++  int  used;			/* number of times entry looked up */
++  char *comment;                /* comment, may be NULL */
++  bool escaped;                 /* " or $. Usually TRUE */
++};
++
++/* create a 'struct entry_list' and related functions: */
++#define SPECLIST_TAG entry
++#include "speclist.h"
++
++#define entry_list_iterate(entlist, pentry) \
++       TYPED_LIST_ITERATE(struct entry, entlist, pentry)
++#define entry_list_iterate_end  LIST_ITERATE_END
++
++
++struct section {
++  char *name;
++  struct entry_list *entries;
++};
++
++/* create a 'struct section_list' and related functions: */
++#define SPECLIST_TAG section
++#include "speclist.h"
++
++#define section_list_iterate(seclist, psection) \
++       TYPED_LIST_ITERATE(struct section, seclist, psection)
++#define section_list_iterate_end  LIST_ITERATE_END
++
++#define section_list_iterate_rev(seclist, psection) \
++       TYPED_LIST_ITERATE_REV(struct section, seclist, psection)
++#define section_list_iterate_rev_end  LIST_ITERATE_REV_END
++
++/* The hash table and some extra data: */
++struct hash_data {
++  struct hash_table *htbl;
++  int num_entries_hashbuild;
++  bool allow_duplicates;
++  int num_duplicates;
++};
++
++
++/***************************************************************
++ Returns a pointer to an internal buffer (can only get one
++ string at a time) with str escaped the opposite of minstrdup.
++ Specifically, any newline, backslash, or double quote is
++ escaped with a backslash.
++ Adds appropriate delimiters: "" if escaped, $$ unescaped.
++ The internal buffer is grown as necessary, and not normally
++ freed (since this will be called frequently.)  A call with
++ str=NULL frees the buffer and does nothing else (returns NULL).
++***************************************************************/
++static char *moutstr(char *str, bool full_escapes)
++{
++  static char *buf = NULL;
++  static int nalloc = 0;
++
++  int len;			/* required length, including terminator */
++  char *c, *dest;
++
++  if (!str) {
++    freelog(LOG_DEBUG, "moutstr alloc was %d", nalloc);
++    free(buf);
++    buf = NULL;
++    nalloc = 0;
++    return NULL;
++  }
++  
++  len = strlen(str)+3;
++  if (full_escapes) {
++    for(c=str; *c != '\0'; c++) {
++      if (*c == '\n' || *c == '\\' || *c == '\"') {
++        len++;
++      }
++    }
++  }
++  if (len > nalloc) {
++    nalloc = 2 * len + 1;
++    buf = fc_realloc(buf, nalloc);
++  }
++  
++  dest = buf;
++  *dest++ = (full_escapes ? '\"' : '$');
++  while(*str != '\0') {
++    if (full_escapes && (*str == '\n' || *str == '\\' || *str == '\"')) {
++      *dest++ = '\\';
++      if (*str == '\n') {
++	*dest++ = 'n';
++	str++;
++      } else {
++	*dest++ = *str++;
++      }
++    } else {
++      *dest++ = *str++;
++    }
++  }
++  *dest++ = (full_escapes ? '\"' : '$');
++  *dest = '\0';
++  return buf;
++}
++
++
++bool net_file_save(struct section_file *my_section_file,
++                       const char *filename)
++{
++  char real_filename[1024];
++  const struct genlist_link *ent_iter, *save_iter, *col_iter;
++  struct entry *pentry, *col_pentry;
++  int i;
++  char S[256];
++
++  aws_init ();
++  aws_set_debug  ( 0 );
++  int rc = aws_read_config  ( "freeciv" );
++  if ( rc )
++    {
++      puts ( "Could not find a credential in the config file" );
++      puts ( "Make sure your ~/.awsAuth file is correct" );
++      exit ( 1 );
++    }
++
++  s3_set_bucket ("freeciv-net-savegames");
++  s3_set_mime ("text/plain");
++  s3_set_acl ("public-read");
++
++  IOBuf * bf = aws_iobuf_new ();
++
++  /* SAVE GAME START  */
++
++  interpret_tilde(real_filename, sizeof(real_filename), filename);
++
++
++  section_list_iterate(my_section_file->sections, psection) {
++    //fz_fprintf(fs, "\n[%s]\n", psection->name);
++    my_snprintf (S, sizeof(S), "\n[%s]\n", psection->name);
++    aws_iobuf_append ( bf, S, strlen(S));
++
++    /* Following doesn't use entry_list_iterate() because we want to do
++     * tricky things with the iterators...
++     */
++    for (ent_iter = genlist_head(entry_list_base(psection->entries));
++         ent_iter && (pentry = genlist_link_data(ent_iter));
++         ent_iter = genlist_link_next(ent_iter)) {
++
++      /* Tables: break out of this loop if this is a non-table
++       * entry (pentry and ent_iter unchanged) or after table (pentry
++       * and ent_iter suitably updated, pentry possibly NULL).
++       * After each table, loop again in case the next entry
++       * is another table.
++       */
++      for(;;) {
++	char *c, *first, base[64];
++	int offset, irow, icol, ncol;
++	
++	/* Example: for first table name of "xyz0.blah":
++	 *  first points to the original string pentry->name
++	 *  base contains "xyz";
++	 *  offset=5 (so first+offset gives "blah")
++	 *  note strlen(base)=offset-2
++	 */
++
++	if(!SAVE_TABLES) break;
++	
++	c = first = pentry->name;
++	if(*c == '\0' || !my_isalpha(*c)) break;
++	for (; *c != '\0' && my_isalpha(*c); c++) {
++	  /* nothing */
++	}
++	if(strncmp(c,"0.",2) != 0) break;
++	c+=2;
++	if(*c == '\0' || !my_isalnum(*c)) break;
++
++	offset = c - first;
++	first[offset-2] = '\0';
++	sz_strlcpy(base, first);
++	first[offset-2] = '0';
++	//fz_fprintf(fs, "%s={", base);
++        my_snprintf (S, sizeof(S), "%s={", base);
++        aws_iobuf_append ( bf, S, strlen(S));
++
++
++
++	/* Save an iterator at this first entry, which we can later use
++	 * to repeatedly iterate over column names:
++	 */
++	save_iter = ent_iter;
++
++	/* write the column names, and calculate ncol: */
++	ncol = 0;
++	col_iter = save_iter;
++        for(; (col_pentry = genlist_link_data(col_iter));
++            col_iter = genlist_link_next(col_iter)) {
++	  if(strncmp(col_pentry->name, first, offset) != 0)
++	    break;
++	  //fz_fprintf(fs, "%c\"%s\"", (ncol==0?' ':','), col_pentry->name+offset);
++          my_snprintf (S, sizeof(S), "%c\"%s\"", (ncol==0?' ':','), col_pentry->name+offset);
++          aws_iobuf_append ( bf, S, strlen(S));
++
++
++
++	  ncol++;
++	}
++	//fz_fprintf(fs, "\n");
++        my_snprintf (S, sizeof(S), "\n");
++        aws_iobuf_append ( bf, S, strlen(S));
++
++
++	/* Iterate over rows and columns, incrementing ent_iter as we go,
++	 * and writing values to the table.  Have a separate iterator
++	 * to the column names to check they all match.
++	 */
++	irow = icol = 0;
++	col_iter = save_iter;
++	for(;;) {
++	  char expect[128];	/* pentry->name we're expecting */
++
++	  pentry = genlist_link_data(ent_iter);
++	  col_pentry = genlist_link_data(col_iter);
++
++	  my_snprintf(expect, sizeof(expect), "%s%d.%s",
++		      base, irow, col_pentry->name+offset);
++
++	  /* break out of tabular if doesn't match: */
++	  if((!pentry) || (strcmp(pentry->name, expect) != 0)) {
++	    if(icol != 0) {
++	      /* If the second or later row of a table is missing some
++	       * entries that the first row had, we drop out of the tabular
++	       * format.  This is inefficient so we print a warning message;
++	       * the calling code probably needs to be fixed so that it can
++	       * use the more efficient tabular format.
++	       *
++	       * FIXME: If the first row is missing some entries that the
++	       * second or later row has, then we'll drop out of tabular
++	       * format without an error message. */
++	      freelog(LOG_ERROR,
++		      "In file %s, there is no entry in the registry for \n"
++		      "%s.%s (or the entries are out of order. This means a \n"
++		      "less efficient non-tabular format will be used. To\n"
++		      "avoid this make sure all rows of a table are filled\n"
++		      "out with an entry for every column.",
++		      real_filename, psection->name, expect);
++	      freelog(LOG_ERROR,
++                      /* TRANS: No full stop after the URL, could cause confusion. */
++                      _("Please report this message at %s"),
++		      BUG_URL);
++	      //fz_fprintf(fs, "\n");
++              my_snprintf (S, sizeof(S), "\n");
++              aws_iobuf_append ( bf, S, strlen(S));
++
++
++	    }
++	    //fz_fprintf(fs, "}\n");
++            my_snprintf (S, sizeof(S), "}\n");
++            aws_iobuf_append ( bf, S, strlen(S));
++
++
++	    break;
++	  }
++
++	  if(icol>0) {
++	    //fz_fprintf(fs, ",");
++            my_snprintf (S, sizeof(S), ",");
++            aws_iobuf_append ( bf, S, strlen(S));
++           }
++
++	  if(pentry->svalue) {
++	    //fz_fprintf(fs, "%s", moutstr(pentry->svalue, pentry->escaped));
++             my_snprintf (S, sizeof(S), "%s", moutstr(pentry->svalue, pentry->escaped));
++             aws_iobuf_append ( bf, S, strlen(S));
++
++	  } else {
++	    //fz_fprintf(fs, "%d", pentry->ivalue);
++             my_snprintf (S, sizeof(S), "%d", pentry->ivalue);
++             aws_iobuf_append ( bf, S, strlen(S));
++
++          }
++
++          ent_iter = genlist_link_next(ent_iter);
++          col_iter = genlist_link_next(col_iter);
++	  
++	  icol++;
++	  if(icol==ncol) {
++	    //fz_fprintf(fs, "\n");
++            my_snprintf (S, sizeof(S), "\n");
++            aws_iobuf_append ( bf, S, strlen(S));
++
++	    irow++;
++	    icol = 0;
++	    col_iter = save_iter;
++	  }
++	}
++	if(!pentry) break;
++      }
++      if(!pentry) break;
++      
++      if (pentry->vec_values) {
++        //fz_fprintf(fs, "%s=%s", pentry->name,
++	//           moutstr(pentry->vec_values[0], pentry->escaped));
++        my_snprintf (S, sizeof(S), "%s=%s", pentry->name,
++	           moutstr(pentry->vec_values[0], pentry->escaped));
++        aws_iobuf_append ( bf, S, strlen(S));
++
++
++	for (i = 1; i < pentry->dim; i++) {
++	  //fz_fprintf(fs, ", %s", moutstr(pentry->vec_values[i], pentry->escaped));
++           my_snprintf (S, sizeof(S), ", %s", moutstr(pentry->vec_values[i], pentry->escaped) );
++           aws_iobuf_append ( bf, S, strlen(S));
++
++	}
++      } else if (pentry->svalue) {
++	//fz_fprintf(fs, "%s=%s", pentry->name, moutstr(pentry->svalue, pentry->escaped));
++           my_snprintf (S, sizeof(S), "%s=%s", pentry->name, moutstr(pentry->svalue, pentry->escaped));
++           aws_iobuf_append ( bf, S, strlen(S));
++
++      } else {
++	//fz_fprintf(fs, "%s=%d", pentry->name, pentry->ivalue);
++        my_snprintf (S, sizeof(S), "%s=%d", pentry->name, pentry->ivalue);
++        aws_iobuf_append ( bf, S, strlen(S));
++
++
++      }
++      
++      if (pentry->comment) {
++	//fz_fprintf(fs, "  # %s\n", pentry->comment);
++        my_snprintf (S, sizeof(S), "  # %s\n", pentry->comment);
++        aws_iobuf_append ( bf, S, strlen(S));
++
++
++      } else {
++	//fz_fprintf(fs, "\n");
++        my_snprintf (S, sizeof(S), "\n");
++        aws_iobuf_append ( bf, S, strlen(S));
++
++
++      }
++    }
++  }
++  section_list_iterate_end;
++  
++  (void) moutstr(NULL, TRUE);		/* free internal buffer */
++
++  /* SAVE GAME END*/
++
++  int rv = s3_put ( bf, real_filename );
++
++  printf ( "RV %d\n", rv );
++
++  printf ( "CODE    [%d] \n", bf->code );
++  printf ( "RESULT  [%s] \n", bf->result );
++  printf ( "LEN     [%d] \n", bf->len );
++  printf ( "LASTMOD [%s] \n", bf->lastMod );
++  printf ( "ETAG    [%s] \n", bf->eTag );
++
++  while(-1)
++    {
++  char Ln[1024];
++  int sz = aws_iobuf_getline ( bf, Ln, sizeof(Ln));
++  if ( Ln[0] == 0 ) break;
++  printf ( "S[%3d] %s", sz, Ln );
++    }
++
++
++  return TRUE;
++
++}
++
++
++/***************************************************************
++  Copies a string. Backslash followed by a genuine newline always
++  removes the newline.
++  If full_escapes is TRUE:
++    - '\n' -> newline translation.
++    - Other '\c' sequences (any character 'c') are just passed
++      through with the '\' removed (eg, includes '\\', '\"')
++***************************************************************/
++static char *minstrdup(struct sbuffer *sb, const char *str,
++                       bool full_escapes)
++{
++  char *dest = sbuf_malloc(sb, strlen(str)+1);
++  char *d2=dest;
++  if(dest) {
++    while (*str != '\0') {
++      if (*str == '\\' && *(str+1) == '\n') {
++        /* Escape followed by newline. Skip both */
++        str += 2;
++      } else if (full_escapes && *str=='\\') {
++	str++;
++        if (*str=='n') {
++	  *dest++='\n';
++	  str++;
++	}
++      } else {
++	*dest++=*str++;
++      }
++
++    }
++
++    *dest='\0';
++  }
++  return d2;
++}
++
++
++
++/**************************************************************************
++  Initialize the entry struct and set to default (empty) values.
++**************************************************************************/
++static void entry_init(struct entry *pentry)
++{
++  pentry->name = NULL;
++  pentry->svalue = NULL;
++  pentry->ivalue = 0;
++  pentry->used = 0;
++  pentry->dim = 0;
++  pentry->vec_values = NULL;
++  pentry->comment = NULL;
++  pentry->escaped = TRUE;
++}
++
++/**************************************************************************
++  Return a new entry struct, allocated from sb, with given name,
++  and where tok is a "value" return token from inputfile.
++  The entry value has any escaped double-quotes etc removed.
++**************************************************************************/
++static struct entry *new_entry(struct sbuffer *sb, const char *name,
++			       const char *tok)
++{
++  struct entry *pentry;
++
++  pentry = sbuf_malloc(sb, sizeof(struct entry));
++  entry_init(pentry);
++  pentry->name = sbuf_strdup(sb, name);
++  if (tok[0] != '-' && !my_isdigit(tok[0])) {
++    /* It is not integer, but string with some border character. */
++    pentry->escaped = (tok[0] != '$'); /* Border character '$' means no escapes */
++
++    /* minstrdup() starting after border character */
++    pentry->svalue = minstrdup(sb, tok+1, pentry->escaped);
++    if (SECF_DEBUG_ENTRIES) {
++      freelog(LOG_DEBUG, "entry %s '%s'", name, pentry->svalue);
++    }
++  } else {
++    if (sscanf(tok, "%d", &pentry->ivalue) != 1) {
++      freelog(LOG_ERROR, "'%s' isn't an integer", tok);
++    }
++    if (SECF_DEBUG_ENTRIES) {
++      freelog(LOG_DEBUG, "entry %s %d", name, pentry->ivalue);
++    }
++  }
++  return pentry;
++}
++
++
++
++/**************************************************************************
++...
++**************************************************************************/
++static struct section*
++section_file_append_section(struct section_file *sf, const char *sec_name)
++{
++  struct section *psection;
++
++  psection = sbuf_malloc(sf->sb, sizeof(*psection));
++  psection->name = sbuf_strdup(sf->sb, sec_name);
++  psection->entries = entry_list_new();
++  section_list_append(sf->sections, psection);
++
++  if (!hash_insert(sf->hash_sections, psection->name, psection)) {
++    freelog(LOG_ERROR, "Section \"%s\" name collision", sec_name);
++  }
++
++  return psection;
++}
++
++
++
++/**************************************************************************
++ Insert a entry into the hash table.  The key is malloced here (using sbuf;
++ malloc somewhere required by hash implementation).
++**************************************************************************/
++static void secfilehash_insert(struct section_file *file,
++			       char *key, struct entry *data)
++{
++  struct entry *hentry;
++
++  key = sbuf_strdup(file->sb, key);
++  hentry = hash_replace(file->hashd->htbl, key, data);
++  if (hentry) {
++    if (file->hashd->allow_duplicates) {
++      hentry->used = 1;
++      file->hashd->num_duplicates++;
++      /* Subsequent entries replace earlier ones; could do differently so
++	 that first entry would be used and following ones ignored.
++	 Need to mark the replaced one as used or else it will show
++	 up when we iterate the sections and entries (since hash
++	 lookup will never find it to mark it as used).
++      */
++    } else {
++      freelog(LOG_FATAL, "Tried to insert same value twice: %s (sectionfile %s)",
++	      key, secfile_filename(file));
++      exit(EXIT_FAILURE);
++    }
++  }
++}
++
++/**************************************************************************
++ Build a hash table for the file.  Note that the section_file should
++ not be modified (except to free it) subsequently.
++ If allow_duplicates is true, then relax normal condition that
++ all entries must have unique names; in this case for duplicates
++ the hash ref will be to the _last_ entry.
++**************************************************************************/
++static void secfilehash_build(struct section_file *file, bool allow_duplicates)
++{
++  struct hash_data *hashd;
++  char buf[256];
++
++  hashd = file->hashd = fc_malloc(sizeof(struct hash_data));
++  hashd->htbl = hash_new_nentries(hash_fval_string, hash_fcmp_string,
++				  file->num_entries);
++  
++  hashd->num_entries_hashbuild = file->num_entries;
++  hashd->allow_duplicates = allow_duplicates;
++  hashd->num_duplicates = 0;
++  
++  section_list_iterate(file->sections, psection) {
++    entry_list_iterate(psection->entries, pentry) {
++      my_snprintf(buf, sizeof(buf), "%s.%s", psection->name, pentry->name);
++      secfilehash_insert(file, buf, pentry);
++    }
++    entry_list_iterate_end;
++  }
++  section_list_iterate_end;
++  
++  if (hashd->allow_duplicates) {
++    freelog(LOG_DEBUG, "Hash duplicates during build: %d",
++	    hashd->num_duplicates);
++  }
++}
++
++
++
++/****************************************************************************
++  Return the section with the given name, or NULL if there is none.
++****************************************************************************/
++static struct section *find_section_by_name(struct section_file *sf,
++					    const char *name)
++{
++  return hash_lookup_data(sf->hash_sections, name);
++}	
++
++
++/**************************************************************************
++...
++**************************************************************************/
++static bool section_file_read_dup(struct section_file *sf,
++      	      	      	      	  const char *filename,
++      	      	      	      	  struct inputfile *inf,
++				  bool allow_duplicates,
++				  const char *requested_section)
++{
++  struct section *psection = NULL;
++  struct entry *pentry;
++  bool table_state = FALSE;	/* 1 when within tabular format */
++  int table_lineno = 0;		/* row number in tabular, 0=top data row */
++  struct sbuffer *sb;
++  const char *tok;
++  int i;
++  struct astring base_name = ASTRING_INIT;    /* for table or single entry */
++  struct astring entry_name = ASTRING_INIT;
++  struct astring_vector columns;    /* astrings for column headings */
++  bool found_my_section = FALSE;
++
++  section_file_init(sf);
++  if (filename) {
++    sf->filename = mystrdup(filename);
++  } else {
++    sf->filename = NULL;
++  }
++  astring_vector_init(&columns);
++  sb = sf->sb;
++
++  if (filename) {
++    freelog(LOG_VERBOSE, "Reading registry from \"%s\"", filename);
++  } else {
++    freelog(LOG_VERBOSE, "Reading registry");
++  }
++
++  while(!inf_at_eof(inf)) {
++    if (inf_token(inf, INF_TOK_EOL))
++      continue;
++    if (inf_at_eof(inf)) {
++      /* may only realise at eof after trying to read eol above */
++      break;
++    }
++    tok = inf_token(inf, INF_TOK_SECTION_NAME);
++    if (tok) {
++      if (found_my_section) {
++	/* This shortcut will stop any further loading after the requested
++	 * section has been loaded (i.e., at the start of a new section).
++	 * This is needed to make the behavior useful, since the whole
++	 * purpose is to short-cut further loading of the file.  However
++	 * normally a section may be split up, and that will no longer
++	 * work here because it will be short-cut. */
++	inf_log(inf, LOG_DEBUG, "found requested section; finishing");
++	return TRUE;
++      }
++      if (table_state) {
++	inf_log(inf, LOG_ERROR, "new section during table");
++        return FALSE;
++      }
++      /* Check if we already have a section with this name.
++	 (Could ignore this and have a duplicate sections internally,
++	 but then secfile_get_secnames_prefix would return duplicates.)
++	 Duplicate section in input are likely to be useful for includes.
++      */
++      psection = find_section_by_name(sf, tok);
++      if (!psection) {
++	if (!requested_section || strcmp(tok, requested_section) == 0) {
++	  psection = section_file_append_section(sf, tok);
++	  if (requested_section) {
++	    found_my_section = TRUE;
++	  }
++	}
++      }
++      (void) inf_token_required(inf, INF_TOK_EOL);
++      continue;
++    }
++    if (inf_token(inf, INF_TOK_TABLE_END)) {
++      if (!table_state) {
++	inf_log(inf, LOG_ERROR, "misplaced \"}\"");
++        return FALSE;
++      }
++      (void) inf_token_required(inf, INF_TOK_EOL);
++      table_state = FALSE;
++      continue;
++    }
++    if (table_state) {
++      i = -1;
++      do {
++	int num_columns = astring_vector_size(&columns);
++
++	i++;
++	inf_discard_tokens(inf, INF_TOK_EOL);  	/* allow newlines */
++	if (!(tok = inf_token_required(inf, INF_TOK_VALUE))) {
++          return FALSE;
++        }
++
++	if (i < num_columns) {
++	  astr_minsize(&entry_name, base_name.n + 10 + columns.p[i].n);
++	  my_snprintf(entry_name.str, entry_name.n_alloc, "%s%d.%s",
++		      base_name.str, table_lineno, columns.p[i].str);
++	} else {
++	  astr_minsize(&entry_name,
++		       base_name.n + 20 + columns.p[num_columns - 1].n);
++	  my_snprintf(entry_name.str, entry_name.n_alloc, "%s%d.%s,%d",
++		      base_name.str, table_lineno,
++		      columns.p[num_columns - 1].str,
++		      (int) (i - num_columns + 1));
++	}
++	if (psection) {
++	  /* Load this entry (if psection == NULL the entry is silently
++	   * skipped). */
++	  pentry = new_entry(sb, entry_name.str, tok);
++	  entry_list_append(psection->entries, pentry);
++	  sf->num_entries++;
++	}
++      } while(inf_token(inf, INF_TOK_COMMA));
++      
++      (void) inf_token_required(inf, INF_TOK_EOL);
++      table_lineno++;
++      continue;
++    }
++    
++    if (!(tok = inf_token_required(inf, INF_TOK_ENTRY_NAME))) {
++      return FALSE;
++    }
++
++    /* need to store tok before next calls: */
++    astr_minsize(&base_name, strlen(tok)+1);
++    strcpy(base_name.str, tok);
++
++    inf_discard_tokens(inf, INF_TOK_EOL);  	/* allow newlines */
++    
++    if (inf_token(inf, INF_TOK_TABLE_START)) {
++      i = -1;
++      do {
++	i++;
++	inf_discard_tokens(inf, INF_TOK_EOL);  	/* allow newlines */
++	if (!(tok = inf_token_required(inf, INF_TOK_VALUE))) {
++          return FALSE;
++        }
++	if( tok[0] != '\"' ) {
++	  inf_log(inf, LOG_ERROR, "table column header non-string");
++          return FALSE;
++	}
++	{ 	/* expand columns: */
++	  int j, n_prev;
++	  n_prev = astring_vector_size(&columns);
++	  for (j = i + 1; j < n_prev; j++) {
++	    astr_free(&columns.p[j]);
++	  }
++	  astring_vector_reserve(&columns, i + 1);
++	  for (j = n_prev; j < i + 1; j++) {
++	    astr_init(&columns.p[j]);
++	  }
++	}
++	astr_minsize(&columns.p[i], strlen(tok));
++	strcpy(columns.p[i].str, tok+1);
++	
++      } while(inf_token(inf, INF_TOK_COMMA));
++      
++      (void) inf_token_required(inf, INF_TOK_EOL);
++      table_state = TRUE;
++      table_lineno=0;
++      continue;
++    }
++    /* ordinary value: */
++    i = -1;
++    do {
++      i++;
++      inf_discard_tokens(inf, INF_TOK_EOL);  	/* allow newlines */
++      if (!(tok = inf_token_required(inf, INF_TOK_VALUE))) {
++        return FALSE;
++      }
++      if (i==0) {
++	pentry = new_entry(sb, base_name.str, tok);
++      } else {
++	astr_minsize(&entry_name, base_name.n + 20);
++	my_snprintf(entry_name.str, entry_name.n_alloc,
++		    "%s,%d", base_name.str, i);
++	pentry = new_entry(sb, entry_name.str, tok);
++      }
++      if (psection) {
++	/* Load this entry (if psection == NULL the entry is silently
++	 * skipped). */
++	entry_list_append(psection->entries, pentry);
++	sf->num_entries++;
++      }
++    } while(inf_token(inf, INF_TOK_COMMA));
++    (void) inf_token_required(inf, INF_TOK_EOL);
++  }
++  
++  if (table_state) {
++    if (filename) {
++      freelog(LOG_FATAL, "finished registry %s before end of table\n", filename);
++    } else {
++      freelog(LOG_FATAL, "finished registry before end of table\n");
++    }
++    exit(EXIT_FAILURE);
++  }
++  
++  astr_free(&base_name);
++  astr_free(&entry_name);
++  for (i = 0; i < astring_vector_size(&columns); i++) {
++    astr_free(&columns.p[i]);
++  }
++  astring_vector_free(&columns);
++  
++  secfilehash_build(sf, allow_duplicates);
++    
++  return TRUE;
++}
++
++
++/**************************************************************************
++  Load a section_file, but disallow (die on) duplicate entries.
++**************************************************************************/
++bool net_file_load(struct section_file *my_section_file,
++			           const char *filename)
++{
++  char real_filename[1024];
++  struct inputfile *inf;
++  bool success;
++
++  char savedata[512000];
++
++
++  FILE *stream;
++
++  savedata[0] = '\0';
++
++  aws_init ();
++  aws_set_debug ( 0 );
++  int rc = aws_read_config  ( "freeciv" );
++  if ( rc )
++    {
++      puts ( "Could not find a credential in the config file" );
++      puts ( "Make sure your ~/.awsAuth file is correct" );
++      exit ( 1 );
++    }
++
++  s3_set_host ( "s3.amazonaws.com");
++  s3_set_bucket ("freeciv-net-savegames");
++
++
++  IOBuf * bf = aws_iobuf_new ();
++
++  interpret_tilde(real_filename, sizeof(real_filename), filename);
++
++  int rv = s3_get ( bf, real_filename );
++
++  printf ( "RV %d\n", rv );
++
++  printf ( "CODE    [%d] \n", bf->code );
++  printf ( "RESULT  [%s] \n", bf->result );
++  printf ( "LEN     [%d] \n", bf->len );
++  printf ( "C-LEN   [%d] \n", bf->contentLen );
++  printf ( "LASTMOD [%s] \n", bf->lastMod );
++  printf ( "ETAG    [%s] \n", bf->eTag );
++
++  while (-1) {
++    char Ln[1024];
++    int sz = aws_iobuf_getline ( bf, Ln, sizeof(Ln));
++    if ( Ln[0] == 0 ) break;
++    sz_strlcat(savedata, Ln);
++  }
++
++  stream = fmemopen (savedata, strlen (savedata), "r");
++
++  inf = inf_from_stream(fz_from_stream(stream), datafilename);
++
++  if (!inf) {
++    return FALSE;
++  }
++  success = section_file_read_dup(my_section_file, real_filename,
++			       inf, FALSE, NULL);
++
++  inf_close(inf);
++
++  return success;
++}
++
+Index: server/netsave.h
+===================================================================
+--- server/netsave.h	(revisjon 0)
++++ server/netsave.h	(revisjon 0)
+@@ -0,0 +1,28 @@
++
++/********************************************************************** 
++ Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
++   This program is free software; you can redistribute it and/or modify
++   it under the terms of the GNU General Public License as published by
++   the Free Software Foundation; either version 2, or (at your option)
++   any later version.
++
++   This program is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++   GNU General Public License for more details.
++***********************************************************************/
++#ifndef FC__NETSAVE_H
++#define FC__NETSAVE_H
++
++#include "ioz.h"
++#include "shared.h"		/* bool type and fc__attribute */
++#include "registry.h"
++
++
++bool net_file_save(struct section_file *my_section_file,
++                       const char *filename);
++
++bool net_file_load(struct section_file *my_section_file,
++			           const char *filename);
++
++#endif  /* FC__NETSAVE_H */
+Index: server/srv_main.c
+===================================================================
+--- server/srv_main.c	(revisjon 105)
++++ server/srv_main.c	(arbeidskopi)
+@@ -100,6 +100,7 @@
+ #include "gamehand.h"
+ #include "ggzserver.h"
+ #include "handchat.h"
++#include "netsave.h"
+ #include "maphand.h"
+ #include "meta.h"
+ #include "notify.h"
+@@ -1045,7 +1046,8 @@
+   struct timer *timer_cpu, *timer_user;
+ 
+   if (!orig_filename) {
+-    filename[0] = '\0';
++    con_write(C_FAIL, _("Failed saving game. Missing filename."));
++    return;
+   } else {
+     sz_strlcpy(filename, orig_filename);
+   }
+@@ -1100,12 +1102,12 @@
+ 
+     if (!scenario) {
+       /* Ensure the saves directory exists. */
+-      make_dir(srvarg.saves_pathname);
++      //make_dir(srvarg.saves_pathname);
+ 
+       sz_strlcpy(tmpname, srvarg.saves_pathname);
+     } else {
+       /* Make sure scenario directory exist */
+-      make_dir(srvarg.scenarios_pathname);
++      //make_dir(srvarg.scenarios_pathname);
+ 
+       sz_strlcpy(tmpname, srvarg.scenarios_pathname);
+     }
+@@ -1117,12 +1119,21 @@
+     sz_strlcpy(filename, tmpname);
+   }
+ 
+-  if (!section_file_save(&file, filename, game.info.save_compress_level,
+-                         game.info.save_compress_type))
++
++  if (!net_file_save(&file, filename))
+     con_write(C_FAIL, _("Failed saving game as %s"), filename);
+   else
+     con_write(C_OK, _("Game saved as %s"), filename);
+ 
++
++  /* Don't save to disk. Webclient saves to Amazon S3.
++
++    if (!section_file_save(&file, filename, game.info.save_compress_level,
++                         game.info.save_compress_type))
++    con_write(C_FAIL, _("Failed saving game as %s"), filename);
++  else
++    con_write(C_OK, _("Game saved as %s"), filename);*/
++
+   section_file_free(&file);
+ 
+   freelog(LOG_VERBOSE, "Save time: %g seconds (%g apparent)",
+Index: server/aws4c.c
+===================================================================
+--- server/aws4c.c	(revisjon 0)
++++ server/aws4c.c	(revisjon 0)
+@@ -0,0 +1,1218 @@
++/**
++
++*/
++
++/*
++ *
++ * Copyright(c) 2009,  Vlad Korolev,  <vlad[@]v-lad.org >
++ * 
++ * with contributions from Henry Nestler < Henry at BigFoot.de >
++ *
++ * This software is licensed as described in the file COPYING, which
++ * you should have received as part of this distribution. The terms
++ * are also available at http://www.gnu.org/licenses/lgpl-3.0.txt
++ * You may opt to use, copy, modify, merge, publish, distribute and/or sell
++ * copies of the Software, and permit persons to whom the Software is
++ * furnished to do so, under the terms of the COPYING file.
++ *
++ * This software is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY
++ * KIND, either express or implied.
++ */
++
++/*!
++  \mainpage
++
++  This is a small library that provides Amazon Web Services binding
++  for C programs.  
++  
++  The AWS4C leverages CURL and OPENSSL libraries for HTTP transfer and 
++  cryptographic functions.
++
++  The \ref todo list is here.
++
++  The \ref bug list is here.
++
++*/
++
++/// \todo Include regression testing
++/// \todo Run thing through valgrind
++
++#include <stdlib.h>
++#include <stdio.h>
++#include <stdarg.h>
++#include <string.h>
++#include <unistd.h>
++#include <sys/stat.h>
++#include <curl/curl.h>
++#include <openssl/hmac.h>
++#include <openssl/evp.h>
++#include <openssl/bio.h>
++#include <openssl/buffer.h>
++
++#include "aws4c.h"
++
++
++/*!
++  \defgroup internal Internal Functions
++  \{
++*/
++
++static int debug = 0;   /// <flag to control debugging options
++static char * ID       = NULL;  /// <Current ID
++static char * awsKeyID = NULL;  /// <AWS Key ID
++static char * awsKey   = NULL;  /// <AWS Key Material
++static char * S3Host     = "s3.amazonaws.com";     /// <AWS S3 host
++/// \todo Use SQSHost in SQS functions
++static char * SQSHost  = "queue.amazonaws.com";  /// <AWS SQS host
++static char * Bucket   = NULL;
++static char * MimeType = NULL;
++static char * AccessControl = NULL;
++
++static void __debug ( char *fmt, ... ) ;
++static char * __aws_get_iso_date ();
++static char * __aws_get_httpdate ();
++static FILE * __aws_getcfg ();
++static int s3_do_get ( IOBuf *b, char * const signature, 
++			  char * const date, char * const resource );
++static int s3_do_put ( IOBuf *b, char * const signature, 
++			  char * const date, char * const resource );
++static char* __aws_sign ( char * const str );
++static void __chomp ( char  * str );
++
++#ifdef ENABLE_UNBASE64
++/// Decode base64 into binary
++/// \param input base64 text
++/// \param length length of the input text
++/// \return decoded data in  newly allocated buffer
++/// \internal
++///
++/// This function allocates a buffer of the same size as the input
++/// buffer and then decodes the given base64 encoded text into 
++/// binary.   The result is placed into the allocated buffer. It is
++/// the caller's responsibility to free this buffer
++static char *unbase64(unsigned char *input, int length)
++{
++  BIO *b64, *bmem;
++
++  /// Allocate and zero the buffer
++  char *buffer = (char *)malloc(length);
++  memset(buffer, 0, length);
++
++  /// Decode the input into the newly allocated buffer
++  /// \todo Check for errors during decode
++  b64 = BIO_new(BIO_f_base64());
++  bmem = BIO_new_mem_buf(input, length);
++  bmem = BIO_push(b64, bmem);
++
++  BIO_read(bmem, buffer, length);
++
++  BIO_free_all(bmem);
++
++  /// Return the decoded text
++  return buffer;
++}
++#endif /* ENABLE_UNBASE64 */
++
++/// Encode a binary into base64 buffer
++/// \param input binary data  text
++/// \param length length of the input text
++/// \internal
++/// \return a newly allocated buffer with base64 encoded data 
++static char *__b64_encode(const unsigned char *input, int length)
++{
++  BIO *bmem, *b64;
++  BUF_MEM *bptr;
++
++  b64 = BIO_new(BIO_f_base64());
++  bmem = BIO_new(BIO_s_mem());
++  b64 = BIO_push(b64, bmem);
++  BIO_write(b64, input, length);
++  if(BIO_flush(b64)) ; /* make gcc 4.1.2 happy */
++  BIO_get_mem_ptr(b64, &bptr);
++
++  char *buff = (char *)malloc(bptr->length);
++  memcpy(buff, bptr->data, bptr->length-1);
++  buff[bptr->length-1] = 0;
++
++  BIO_free_all(b64);
++
++  return buff;
++}
++
++/// Chomp (remove the trailing '\n' from the string
++/// \param str string
++static void __chomp ( char  * str )
++{
++  if ( str[0] == 0 ) return;
++  int ln = strlen(str);
++  ln--;
++  if ( str[ln] == '\n' ) str[ln] = 0;
++  if ( ln == 0 ) return ;
++  ln--;
++  if ( str[ln] == '\r' ) str[ln] = 0;
++}
++
++/// Handles reception of the data
++/// \param ptr pointer to the incoming data
++/// \param size size of the data member
++/// \param nmemb number of data memebers
++/// \param stream pointer to I/O buffer
++/// \return number of bytes processed
++static size_t writefunc ( void * ptr, size_t size, size_t nmemb, void * stream )
++{
++  __debug ( "DATA RCVD %d items of size %d ",  nmemb, size );
++  aws_iobuf_append ( stream, ptr, nmemb*size );
++  return nmemb * size;
++}
++
++/// Suppress outputs to stdout
++static size_t writedummyfunc ( void * ptr, size_t size, size_t nmemb, void * stream )
++{
++  return nmemb * size;
++}
++
++/// Handles sending of the data
++/// \param ptr pointer to the incoming data
++/// \param size size of the data member
++/// \param nmemb number of data memebers
++/// \param stream pointer to I/O buffer
++/// \return number of bytes written
++static size_t readfunc ( void * ptr, size_t size, size_t nmemb, void * stream )
++{
++  char * Ln = ptr;
++  int sz = aws_iobuf_getline ( stream, ptr, size*nmemb);
++  __debug ( "Sent[%3d] %s", sz, Ln );
++  return sz;
++}
++
++/// Process incming header
++/// \param ptr pointer to the incoming data
++/// \param size size of the data member
++/// \param nmemb number of data memebers
++/// \param stream pointer to I/O buffer
++/// \return number of bytes processed
++static size_t header ( void * ptr, size_t size, size_t nmemb, void * stream )
++{
++  IOBuf * b = stream;
++
++  if (!strncmp ( ptr, "HTTP/1.1", 8 ))
++    {
++      b->result = strdup ( ptr + 9 );
++      __chomp(b->result);
++      b->code   = atoi ( ptr + 9 );
++    }
++  else if ( !strncmp ( ptr, "ETag: ", 6 ))
++    {
++      b->eTag = strdup ( ptr + 6 );
++      __chomp(b->eTag);
++    }
++  else if ( !strncmp ( ptr, "Last-Modified: ", 14 ))
++    {
++      b->lastMod = strdup ( ptr + 15 );
++      __chomp(b->lastMod);
++    }
++  else if ( !strncmp ( ptr, "Content-Length: ", 15 ))
++    {
++      b->contentLen = atoi ( ptr + 16 );
++    }
++
++  return nmemb * size;
++}
++
++
++/// Get Data for authentication of SQS request
++/// \return date in ISO format
++static char * __aws_get_iso_date ()
++{
++  static char dTa[256];
++  time_t t = time(NULL);
++  struct tm * gTime = gmtime ( & t );
++
++  memset ( dTa, 0 , sizeof(dTa));
++  strftime ( dTa, sizeof(dTa), "%FT%H:%M:%SZ", gTime );
++  __debug ( "Request Time: %s", dTa );
++  return dTa;
++}
++
++#ifdef ENABLE_DUMP
++/// Dump current state
++/// \internal
++static void Dump ()
++{
++  printf ( "----------------------------------------\n");
++  printf ( "ID     : %-40s \n", ID );
++  printf ( "KeyID  : %-40s \n", awsKeyID );
++  printf ( "Key    : %-40s \n", awsKey );
++  printf ( "S3  Host   : %-40s \n", S3Host );
++  printf ( "SQS Host   : %-40s \n", SQSHost );
++  printf ( "Bucket : %-40s \n", Bucket );
++  printf ( "----------------------------------------\n");
++}
++#endif /* ENABLE_DUMP */
++
++
++/// Print debug output
++/// \internal
++/// \param fmt printf like formating string
++static void __debug ( char *fmt, ... ) {
++  /// If debug flag is not set we won't print anything
++  if ( ! debug ) return ;
++  /// Otherwise process the arguments and print the result
++  va_list args;
++  va_start( args, fmt );
++  fprintf( stderr, "DBG: " );
++  vfprintf( stderr, fmt, args );
++  fprintf( stderr, "\n" );
++  va_end( args );
++}
++
++
++/// Get Request Date
++/// \internal
++/// \return date in HTTP format
++static char * __aws_get_httpdate ()
++{
++  static char dTa[256];
++  time_t t = time(NULL);
++  struct tm * gTime = gmtime ( & t );
++  memset ( dTa, 0 , sizeof(dTa));
++  strftime ( dTa, sizeof(dTa), "%a, %d %b %Y %H:%M:%S +0000", gTime );
++  __debug ( "Request Time: %s", dTa );
++  return dTa;
++}
++
++/// Internal function to get configuration file
++static FILE * __aws_getcfg ()
++{
++  int rv;
++  char ConfigFile[256];
++  /// Compose FileName and check
++  snprintf ( ConfigFile, sizeof(ConfigFile) - 3, "%s/.awsAuth",
++	     getenv("HOME"));
++  __debug ( "Config File %s", ConfigFile );
++
++  struct stat sBuf;
++  rv = stat ( ConfigFile, &sBuf );
++  if ( rv == -1 ) return NULL;
++
++  
++  if ( sBuf.st_mode & 066   ||
++       sBuf.st_uid != getuid () )
++    {
++      fprintf ( stderr, "I refuse to read your credentials from %s as this "
++	       "file is readable by, writable by or owned by someone else."
++		"Try chmod 600 %s", ConfigFile, ConfigFile );
++      return NULL;
++    }
++
++  return fopen ( ConfigFile, "r" );
++}
++
++
++/// Get S3 Request signature
++/// \internal
++/// \param resource -- URI of the object
++/// \param resSize --  size of the resoruce buffer
++/// \param date -- HTTP date
++/// \param method -- HTTP method
++/// \param bucket -- bucket 
++/// \param file --  file
++/// \return fills up resource and date parameters, also 
++///         returns request signature to be used with Authorization header
++static char * GetStringToSign ( char * resource,  int resSize, 
++			     char ** date,
++			     char * const method,
++			     char * const bucket,
++			     char * const file )
++{
++  char  reqToSign[2048];
++  char  acl[32];
++  
++  * date = __aws_get_httpdate();
++
++  memset ( resource,0,resSize);
++  if ( bucket != NULL )
++    snprintf ( resource, resSize,"%s/%s", bucket, file );
++  else
++    snprintf ( resource, resSize,"%s", file );
++
++  if (AccessControl)
++    snprintf( acl, sizeof(acl), "x-amz-acl:%s\n", AccessControl);
++  else
++    acl[0] = 0;
++
++  snprintf ( reqToSign, sizeof(reqToSign),"%s\n\n%s\n%s\n%s/%s",
++	     method,
++	     MimeType ? MimeType : "",
++	     *date,
++	     acl,
++	     resource );
++
++  // EU: If bucket is in virtual host name, remove bucket from path
++  if (bucket && strncmp(S3Host, bucket, strlen(bucket)) == 0)
++    snprintf ( resource, resSize,"%s", file );
++
++  return __aws_sign(reqToSign);
++}
++
++static void __aws_urlencode ( char * src, char * dest, int nDest )
++{
++  int i;
++  int n;
++  memset ( dest, 0, nDest );
++  __debug ( "Encoding: %s", src );
++  const char * badChrs = " \n$&+,/:;=?@";
++  const char * hexDigit = "0123456789ABCDEF";
++
++  n = 0;
++  for ( i = 0 ; src[i] ; i ++ )
++    {
++      if ( n + 5 > nDest ) 
++	{ puts ( "URLEncode:: Dest buffer to small.. can't continue \n" ); exit(0); }
++      if ( strchr ( badChrs, src[i] ))
++	{
++	  unsigned char c = src[i];
++	  dest[n++] = '%'; 
++	  dest[n++] = hexDigit [(c >> 4 ) & 0xF ];
++	  dest[n++] = hexDigit [c & 0xF ];
++	}
++      else dest[n++] = src[i];
++    }
++  __debug ( "Encoded To: %s", dest );
++}
++
++static int SQSRequest ( IOBuf *b, char * verb, char * const url )
++{
++  CURL* ch =  curl_easy_init( );
++  struct curl_slist *slist=NULL;
++
++  curl_easy_setopt ( ch, CURLOPT_URL, url );
++  curl_easy_setopt ( ch, CURLOPT_HEADERDATA, b );
++  curl_easy_setopt ( ch, CURLOPT_VERBOSE, debug );
++  curl_easy_setopt ( ch, CURLOPT_INFILESIZE, b->len );
++  curl_easy_setopt ( ch, CURLOPT_POST, 1 );
++  //curl_easy_setopt ( ch, CURLOPT_POST, CURLOPT_POSTFIELDSIZE , 0 );
++  curl_easy_setopt ( ch, CURLOPT_HEADERFUNCTION, header );
++  curl_easy_setopt ( ch, CURLOPT_WRITEFUNCTION, writefunc );
++  curl_easy_setopt ( ch, CURLOPT_WRITEDATA, b );
++  curl_easy_setopt ( ch, CURLOPT_READFUNCTION, readfunc );
++  curl_easy_setopt ( ch, CURLOPT_READDATA, b );
++
++  int  sc  = curl_easy_perform(ch);
++  /** \todo check the return code  */
++  __debug ( "Return Code: %d ", sc );
++  
++  curl_slist_free_all(slist);
++
++  return sc;
++}
++
++static char * SQSSign ( char * str )
++{
++  char RealSign[1024];
++  char * signature = __aws_sign(str);
++
++  __aws_urlencode ( signature, RealSign, sizeof(RealSign));
++    
++  free ( signature );
++  return strdup(RealSign);
++}
++
++
++
++/*!
++  \}
++*/
++
++
++/*!
++  \defgroup conf Configuration Functions
++  \{
++*/
++
++/// Initialize  the library 
++void aws_init () { curl_global_init (CURL_GLOBAL_ALL); }
++
++/// Set debuging output
++/// \param d  when non-zero causes debugging output to be printed
++void aws_set_debug (int d)
++{
++  debug = d;
++}
++
++/// \brief Set AWS account ID to be read from .awsAuth file
++/// \param id new account ID
++void aws_set_id ( char * const id )     
++{ ID = id == NULL ? NULL : strdup(id); }
++
++/// Set AWS account access key
++/// \param key new AWS authentication key
++void aws_set_key ( char * const key )   
++{ awsKey = key == NULL ? NULL : strdup(key); }
++
++/// Set AWS account access key ID
++/// \param keyid new AWS key ID
++void aws_set_keyid ( char * const keyid ) 
++{ awsKeyID = keyid == NULL ? NULL :  strdup(keyid);}
++
++/// Read AWS authentication records
++/// \param id  user ID
++int aws_read_config ( char * const id )
++{
++  aws_set_id ( id );
++  aws_set_keyid ( NULL );
++  aws_set_key   ( NULL   );
++
++  /// Open File
++  /// Make sure that file permissions are set right
++  __debug ( "Reading Config File ID[%s]", ID );
++  FILE * f = __aws_getcfg();
++  if ( f == NULL ) { perror ("Error opening config file"); exit(1); }
++  
++
++  /// Read Lines
++  char line[1024];
++  int  ln = 0;
++  while ( !feof(f))
++    {
++      ln++;
++      memset (line,0,sizeof(line));
++      fgets ( line, sizeof(line), f );
++
++  /// Skip Comments
++      if ( line[0] == '#' ) continue;
++      if ( line[0] == 0 ) continue;
++
++      __chomp ( line );
++      
++
++	/// Split the line on ':'
++      char * keyID = strchr(line,':');
++      if ( keyID == NULL )
++	{ printf ( "Syntax error in credentials file line %d, no keyid\n", ln );
++	  exit(1);
++	}
++      *keyID = 0; keyID ++;
++
++      char * key = strchr(keyID,':');
++      if ( key == NULL )
++	{ printf ( "Syntax error in credentials file line %d, no key\n", ln );
++	  exit(1);
++	}
++      *key = 0; key ++;
++      
++      
++      /// If the line is correct Set the IDs
++      if ( !strcmp(line,id))
++	{
++	  aws_set_keyid ( keyID );
++	  aws_set_key   ( key   );
++	  break;
++	}
++
++    }
++  /// Return error if not found
++  if ( awsKeyID == NULL ) return -1;
++  return 0;
++}
++
++/*!
++  \}
++*/
++
++
++
++
++/*!
++  \defgroup s3 S3 Interface Functions
++  \{
++*/
++
++
++/// Select current S3 bucket
++/// \param str bucket ID
++void s3_set_bucket ( char * const str ) 
++{ Bucket = str == NULL ? NULL : strdup(str); }
++
++/// Set S3 host
++void s3_set_host ( char * const str )  
++{ S3Host = str == NULL ? NULL :  strdup(str); }
++
++/// Set S3 MimeType
++void s3_set_mime ( char * const str )
++{ MimeType = str ? strdup(str) : NULL; }
++
++/// Set S3 AccessControl
++void s3_set_acl ( char * const str )
++{ AccessControl = str ? strdup(str) : NULL; }
++
++
++/// Upload the file into currently selected bucket
++/// \param b I/O buffer
++/// \param file filename
++int s3_put ( IOBuf * b, char * const file )
++{
++  char * const method = "PUT";
++  char  resource [1024];
++  char * date = NULL;
++
++  char * signature = GetStringToSign ( resource, sizeof(resource), 
++				       &date, method, Bucket, file ); 
++  int sc = s3_do_put( b, signature, date, resource ); 
++  free ( signature );
++  return sc;
++
++}
++
++
++/// Download the file from the current bucket
++/// \param b I/O buffer
++/// \param file filename 
++int s3_get ( IOBuf * b, char * const file )
++{
++  char * const method = "GET";
++  
++  char  resource [1024];
++  char * date = NULL;
++
++  
++  char * signature = GetStringToSign ( resource, sizeof(resource), 
++				       &date, method, Bucket, file ); 
++  int sc = s3_do_get( b, signature, date, resource ); 
++  free ( signature );
++  return sc;
++}
++
++
++
++static int s3_do_put ( IOBuf *b, char * const signature, 
++		       char * const date, char * const resource )
++{
++  char Buf[1024];
++
++  CURL* ch =  curl_easy_init( );
++  struct curl_slist *slist=NULL;
++
++  if (MimeType) {
++    snprintf ( Buf, sizeof(Buf), "Content-Type: %s", MimeType );
++    slist = curl_slist_append(slist, Buf );
++  }
++
++  if (AccessControl) {
++    snprintf ( Buf, sizeof(Buf), "x-amz-acl: %s", AccessControl );
++    slist = curl_slist_append(slist, Buf );
++  }
++
++  snprintf ( Buf, sizeof(Buf), "Date: %s", date );
++  slist = curl_slist_append(slist, Buf );
++  snprintf ( Buf, sizeof(Buf), "Authorization: AWS %s:%s", awsKeyID, signature );
++  slist = curl_slist_append(slist, Buf );
++
++  snprintf ( Buf, sizeof(Buf), "http://%s/%s", S3Host , resource );
++
++  curl_easy_setopt ( ch, CURLOPT_HTTPHEADER, slist);
++  curl_easy_setopt ( ch, CURLOPT_URL, Buf );
++  curl_easy_setopt ( ch, CURLOPT_READDATA, b );
++  if (!debug)
++    curl_easy_setopt ( ch, CURLOPT_WRITEFUNCTION, writedummyfunc );
++  curl_easy_setopt ( ch, CURLOPT_READFUNCTION, readfunc );
++  curl_easy_setopt ( ch, CURLOPT_HEADERFUNCTION, header );
++  curl_easy_setopt ( ch, CURLOPT_HEADERDATA, b );
++  curl_easy_setopt ( ch, CURLOPT_VERBOSE, debug );
++  curl_easy_setopt ( ch, CURLOPT_UPLOAD, 1 );
++  curl_easy_setopt ( ch, CURLOPT_INFILESIZE, b->len );
++  curl_easy_setopt ( ch, CURLOPT_FOLLOWLOCATION, 1 );
++
++  int  sc  = curl_easy_perform(ch);
++  /** \todo check the return code  */
++  __debug ( "Return Code: %d ", sc );
++  
++  curl_slist_free_all(slist);
++
++  return sc;
++
++}
++
++
++static int s3_do_get ( IOBuf *b, char * const signature, 
++		       char * const date, char * const resource )
++{
++  char Buf[1024];
++
++  CURL* ch =  curl_easy_init( );
++  struct curl_slist *slist=NULL;
++
++  slist = curl_slist_append(slist, "If-Modified-Since: Tue, 26 May 2009 18:58:55 GMT" );
++  slist = curl_slist_append(slist, "ETag: \"6ea58533db38eca2c2cc204b7550aab6\"");
++
++  snprintf ( Buf, sizeof(Buf), "Date: %s", date );
++  slist = curl_slist_append(slist, Buf );
++  snprintf ( Buf, sizeof(Buf), "Authorization: AWS %s:%s", awsKeyID, signature );
++  slist = curl_slist_append(slist, Buf );
++
++  snprintf ( Buf, sizeof(Buf), "http://%s/%s", S3Host, resource );
++
++  curl_easy_setopt ( ch, CURLOPT_HTTPHEADER, slist);
++  curl_easy_setopt ( ch, CURLOPT_URL, Buf );
++  curl_easy_setopt ( ch, CURLOPT_WRITEFUNCTION, writefunc );
++  curl_easy_setopt ( ch, CURLOPT_WRITEDATA, b );
++  curl_easy_setopt ( ch, CURLOPT_HEADERFUNCTION, header );
++  curl_easy_setopt ( ch, CURLOPT_HEADERDATA, b );
++  curl_easy_setopt ( ch, CURLOPT_VERBOSE, debug );
++
++  int  sc  = curl_easy_perform(ch);
++  /** \todo check the return code  */
++  __debug ( "Return Code: %d ", sc );
++  
++  curl_slist_free_all(slist);
++
++  return sc;
++
++}
++
++
++
++
++
++
++static char* __aws_sign ( char * const str )
++{
++  HMAC_CTX ctx;
++  unsigned char MD[256];
++  unsigned len;
++
++  __debug("StrToSign:%s", str );
++
++  HMAC_CTX_init(&ctx);
++  HMAC_Init(&ctx, awsKey, strlen(awsKey), EVP_sha1());
++  HMAC_Update(&ctx,(unsigned char*)str, strlen(str));
++  HMAC_Final(&ctx,(unsigned char*)MD,&len);
++  HMAC_CTX_cleanup(&ctx);
++
++  char * b64 = __b64_encode (MD,len);
++  __debug("Signature:  %s", b64 );
++
++  return b64;
++}
++/*!
++  \}
++*/
++
++
++
++#define SQS_REQ_TAIL   "&Signature=%s" "&SignatureVersion=1" "&Timestamp=%s" "&Version=2009-02-01"
++/*!
++  \defgroup sqs SQS Interface Functions
++  \{
++*/
++
++
++/// Create SQS queue
++/// \param b I/O buffer
++/// \param name queue name
++/// \return on success return 0, otherwise error code
++int sqs_create_queue ( IOBuf *b, char * const name )
++{
++  __debug ( "Creating Que: %s\n", name );
++
++  char  resource [1024];
++  char  customSign [1024];
++  char * date = NULL;
++  char * signature = NULL;
++  
++  char * Req = 
++    "http://%s/"
++    "?Action=CreateQueue"
++    "&QueueName=%s"
++    "&AWSAccessKeyId=%s"
++    SQS_REQ_TAIL ;
++
++  char * Sign = "ActionCreateQueue"
++                "AWSAccessKeyId%s"
++                "QueueName%s"
++                "SignatureVersion1"
++                "Timestamp%sVersion2009-02-01";
++
++  date = __aws_get_iso_date  ();
++  snprintf ( customSign, sizeof(customSign), Sign, awsKeyID, name, date );
++  signature =  SQSSign ( customSign );
++
++  snprintf ( resource, sizeof(resource), SQSHost, Req , name, awsKeyID, signature, date );
++
++  int sc = SQSRequest( b, "POST", resource ); 
++  free ( signature );
++  return sc;
++
++}
++
++/// Retrieve URL of the queue
++/// \param b I/O buffer
++/// \param prefix queue prefix. better use the whole name
++/// \return on success return 0, otherwise error code
++///
++/// URL is placed into the I/O buffer. User get_line to retrieve it
++int sqs_list_queues ( IOBuf *b, char * const prefix )
++{
++  __debug ( "Listing Queues PFX: %s\n", prefix );
++
++  char  resource [1024];
++  char  customSign [1024];
++  char * date = NULL;
++  char * signature = NULL;
++  
++  char * Req = 
++    "http://%s/"
++    "?Action=ListQueues"
++    "&QueueNamePrefix=%s"
++    "&AWSAccessKeyId=%s"
++      SQS_REQ_TAIL ;
++
++  char * Sign = "ActionListQueues"
++                "AWSAccessKeyId%s"
++                "QueueNamePrefix%s"
++                "SignatureVersion1"
++                "Timestamp%sVersion2009-02-01";
++
++  date = __aws_get_iso_date  ();
++  snprintf ( customSign, sizeof(customSign), Sign, awsKeyID, prefix, date );
++  signature =  SQSSign ( customSign );
++
++  snprintf ( resource, sizeof(resource), Req , SQSHost , prefix, awsKeyID,
++	     signature, date );
++
++  IOBuf *nb = aws_iobuf_new();
++  int sc = SQSRequest( nb, "POST", resource ); 
++  free ( signature );
++
++  if ( nb->result != NULL )
++    b-> result = strdup(nb->result);
++  b-> code   = nb->code;
++
++  /// \todo This only retrieves just one line in the string..
++  ///       make that all URLs are returned
++
++  if ( b->code == 200 )
++    {
++      /// Parse Out the List Of Queues
++      while(-1)
++	{
++	  char Ln[1024];
++	  aws_iobuf_getline ( nb, Ln, sizeof(Ln));
++	  if ( Ln[0] == 0 ) break;
++	  char *q = strstr ( Ln, "<QueueUrl>" );
++	  if ( q != 0 )
++	    {
++	      q += 10;
++	      char * end = NULL;
++	      end = strstr ( q, "</QueueUrl>" );
++	      if ( *end != 0 )
++		{
++		  * end = 0;
++		  aws_iobuf_append ( b, q, strlen(q ));
++		  aws_iobuf_append ( b, "\n", 1 );
++		}
++	    }
++	}      
++    }
++  aws_iobuf_free ( nb );
++
++  return sc;
++}
++
++
++/// Retrieve queue attributes
++/// \param b I/O buffer
++/// \param url queue url. Use sqs_list_queues to retrieve
++/// \param timeOut queue visibility timeout
++/// \param nMesg   approximate number of messages in the queue
++/// \return on success return 0, otherwise error code
++int sqs_get_queueattributes ( IOBuf *b, char * url, int *timeOut, int *nMesg )
++{
++  __debug ( "Getting Que Attributes\n" );
++
++  char  resource [1024];
++  char  customSign [1024];
++  char * date = NULL;
++  char * signature = NULL;
++
++  char * Req = 
++    "%s/"
++    "?Action=GetQueueAttributes"
++    "&AttributeName.1=VisibilityTimeout"
++    "&AttributeName.2=ApproximateNumberOfMessages"
++    "&AWSAccessKeyId=%s"
++    SQS_REQ_TAIL ;
++
++  char * Sign = 
++    "ActionGetQueueAttributes"
++    "AttributeName.1VisibilityTimeout"
++    "AttributeName.2ApproximateNumberOfMessages"
++    "AWSAccessKeyId%s"
++    "SignatureVersion1"
++    "Timestamp%s"
++    "Version2009-02-01";
++
++  date = __aws_get_iso_date  ();
++  snprintf ( customSign, sizeof(customSign), Sign, awsKeyID, date );
++  signature =  SQSSign ( customSign );
++
++  snprintf ( resource, sizeof(resource), Req , url, awsKeyID, signature, date );
++
++  const char *pfxVisTO = "<Name>VisibilityTimeout</Name><Value>";
++  const char *pfxQLen  = "<Name>ApproximateNumberOfMessages</Name><Value>";
++
++
++  int sc = SQSRequest( b, "POST", resource ); 
++  while(-1) 
++    {
++      char Ln[1024];
++      aws_iobuf_getline ( b, Ln, sizeof(Ln));
++      if ( Ln[0] == 0 ) break;
++      
++      char *q;
++      q = strstr ( Ln, pfxVisTO );
++      if ( q != 0 ) { *timeOut = atoi(q+strlen(pfxVisTO));  }
++      q = strstr ( Ln, pfxQLen );
++      if ( q != 0 ) { *nMesg = atoi(q+strlen(pfxQLen));  }
++    }
++
++  free ( signature );
++  return sc;
++}
++
++/// Set queue visibility timeout
++/// \param b I/O buffer
++/// \param url queue url. Use sqs_list_queues to retrieve
++/// \param sec queue visibility timeout
++/// \return on success return 0, otherwise error code
++int sqs_set_queuevisibilitytimeout ( IOBuf *b, char * url, int sec )
++{
++  __debug ( "Setting Visibility Timeout : %d\n", sec );
++
++  char  resource [1024];
++  char  customSign [1024];
++  char * date = NULL;
++  char * signature = NULL;
++
++  char * Req = 
++    "%s/"
++    "?Action=SetQueueAttributes"
++    "&Attribute.1.Name=VisibilityTimeout"
++    "&Attribute.1.Value=%d"
++    "&AWSAccessKeyId=%s"
++    SQS_REQ_TAIL ;
++
++  char * Sign = 
++    "ActionSetQueueAttributes"
++    "Attribute.1.NameVisibilityTimeout"
++    "Attribute.1.Value%d"
++    "AWSAccessKeyId%s"
++    "SignatureVersion1"
++    "Timestamp%s"
++    "Version2009-02-01";
++
++  date = __aws_get_iso_date  ();
++  snprintf ( customSign, sizeof(customSign), Sign, sec, awsKeyID, date );
++  signature =  SQSSign ( customSign );
++
++  snprintf ( resource, sizeof(resource), Req , 
++	     url, sec, awsKeyID, signature, date );
++
++  int sc = SQSRequest( b, "POST", resource ); 
++  free ( signature );
++  return sc;
++}
++
++/// Send a message to the queue
++/// \param b I/O buffer
++/// \param url queue url. Use sqs_list_queues to retrieve
++/// \param msg a message to send
++/// \return on success return 0, otherwise error code
++int sqs_send_message ( IOBuf *b, char * const url, char * const msg )
++{
++  __debug ( "Sending Message to the queue %s\n[%s]",
++	  url, msg );
++
++  char  resource [10900];
++  char  customSign [10900];
++  char * date = NULL;
++  char * signature = NULL;
++  char  encodedMsg[8192];
++
++  __aws_urlencode ( msg, encodedMsg, sizeof(encodedMsg));
++  __debug ( "Encoded MSG %s", encodedMsg );
++
++  char * Req = 
++    "%s/"
++    "?Action=SendMessage"
++    "&MessageBody=%s"
++    "&AWSAccessKeyId=%s"
++    SQS_REQ_TAIL ;
++
++  char * Sign = 
++    "ActionSendMessage"
++    "AWSAccessKeyId%s"
++    "MessageBody%s"
++    "SignatureVersion1"
++    "Timestamp%s"
++    "Version2009-02-01";
++
++  date = __aws_get_iso_date  ();
++  snprintf ( customSign, sizeof(customSign), Sign, awsKeyID, msg, date );
++  signature =  SQSSign ( customSign );
++
++  snprintf ( resource, sizeof(resource), Req , 
++	     url, encodedMsg, awsKeyID, signature, date );
++
++  int sc = SQSRequest( b, "POST", resource ); 
++  free ( signature );
++  return sc;
++}
++
++/// Retrieve a message from the queue
++/// \param b I/O buffer
++/// \param url queue url. Use sqs_list_queues to retrieve
++/// \param id Message receipt handle. 
++/// \return on success return 0, otherwise error code
++///
++/// Message contents are placed into I/O buffer
++/// Caller has to allocate enough memory for the receipt handle 
++/// 1024 bytes should be enough
++int sqs_get_message ( IOBuf * b, char * const url, char * id  )
++{
++  __debug ( "Retieving message from: %s", url );
++
++  char  resource [10900];
++  char  customSign [10900];
++  char * date = NULL;
++  char * signature = NULL;
++
++  char * Req = 
++    "%s/"
++    "?Action=ReceiveMessage"
++    "&AWSAccessKeyId=%s"
++    SQS_REQ_TAIL ;
++
++  char * Sign = 
++    "ActionReceiveMessage"
++    "AWSAccessKeyId%s"
++    "SignatureVersion1"
++    "Timestamp%s"
++    "Version2009-02-01";
++
++  date = __aws_get_iso_date  ();
++  snprintf ( customSign, sizeof(customSign), Sign, awsKeyID, date );
++  signature =  SQSSign ( customSign );
++
++  snprintf ( resource, sizeof(resource), Req , 
++	     url, awsKeyID, signature, date );
++  free ( signature );
++
++  IOBuf * bf = aws_iobuf_new();
++  int sc = SQSRequest( bf, "POST", resource ); 
++
++  b->code = bf->code;
++  b->result = strdup(bf->result);
++  
++  if ( bf->code != 200 ) { aws_iobuf_free(bf);  return sc; }
++
++      /// \todo This is really bad. Must get a real message parser
++      int inBody = 0;
++      while(-1) 
++	{
++	  char Ln[1024];
++	  aws_iobuf_getline ( bf, Ln, sizeof(Ln));
++	  if ( Ln[0] == 0 ) break;
++
++	  __debug ( "%s|%s|", inBody ? ">>": "", Ln );
++	  
++	  char *q;
++	  char *e;
++
++	  /// Handle a body already being processed..
++	  if ( inBody )
++	    {
++	      e = strstr ( Ln, "</Body>" );
++	      if ( e ) { *e = 0; inBody = 0; }
++	      aws_iobuf_append (b,Ln,strlen(Ln));
++	      if ( ! inBody ) break;
++	      continue;     
++	    }
++
++	  q = strstr ( Ln, "<ReceiptHandle>" );
++	  if ( q != 0 ) 
++	    {
++	      q += 15;
++	      e = strstr ( Ln, "</ReceiptHandle>" );
++	      *e = 0;
++	      strcpy ( id, q );
++	      q = e+1;
++	      q = strstr ( q, "<Body>" );
++	      if ( q != 0 ) 
++		{
++		  q += 6;
++		  e = strstr ( q, "</Body>" );
++		  if ( e ) *e = 0; else inBody = 1;
++		  aws_iobuf_append (b,q,strlen(q));
++		}
++	    }
++	}
++     
++
++  return sc;
++}
++
++/// Delete processed message from the queue
++/// \param bf I/O buffer
++/// \param url queue url. Use sqs_list_queues to retrieve
++/// \param receipt Message receipt handle. 
++/// \return on success return 0, otherwise error code
++///
++int sqs_delete_message ( IOBuf * bf, char * const url, char * receipt )
++{
++  char  resource [10900];
++  char  customSign [10900];
++  char * date = NULL;
++  char * signature = NULL;
++
++  char * Req = 
++    "%s/"
++    "?Action=DeleteMessage"
++    "&ReceiptHandle=%s"
++    "&AWSAccessKeyId=%s"
++      SQS_REQ_TAIL ;
++
++  char * Sign = 
++    "ActionDeleteMessage"
++    "AWSAccessKeyId%s"
++    "ReceiptHandle%s"
++    "SignatureVersion1"
++    "Timestamp%s"
++    "Version2009-02-01";
++
++  date = __aws_get_iso_date  ();
++  snprintf ( customSign, sizeof(customSign), Sign, awsKeyID, receipt, date );
++  signature =  SQSSign ( customSign );
++
++  char encReceipt[1024];
++  __aws_urlencode ( receipt, encReceipt, sizeof(encReceipt));
++
++  snprintf ( resource, sizeof(resource), Req , url, encReceipt, awsKeyID, signature, date );
++  free ( signature );
++
++  int sc = SQSRequest( bf, "POST", resource ); 
++  return sc;
++}
++
++/*!
++  \}
++*/
++
++
++
++/*!
++  \defgroup iobuf I/O Buffer functions
++  \{
++*/
++
++/// \todo Place sentinels at the begining of the buffer
++
++/// Create a new I/O buffer
++/// \return a newly allocated I/O buffer
++IOBuf * aws_iobuf_new ()
++{
++  IOBuf * bf = malloc(sizeof(IOBuf));
++
++  memset(bf, 0, sizeof(IOBuf));
++
++  return bf;
++}
++
++
++/// Append data to I/O buffer
++/// \param B  I/O buffer
++/// \param d  pointer to the data to be appended
++/// \param len length of the data to be appended
++void   aws_iobuf_append ( IOBuf *B, char * d, int len )
++{
++
++  IOBufNode * N = malloc(sizeof(IOBufNode));
++  N->next = NULL;
++  N->buf  = malloc(len+1);
++  memcpy(N->buf,d,len);
++  N->buf[len] = 0;
++  B->len += len;
++
++  if ( B->first == NULL )
++    {
++      B->first   = N;
++      B->current = N;
++      B->pos     = N->buf;
++    }
++  else
++    {
++      // Find the last block
++      IOBufNode * D = B->first;
++      while(D->next != NULL ) D = D->next;
++      D->next = N;
++    }
++}
++
++/// Read the next line from the buffer
++///  \param B I/O buffer
++///  \param Line  character array to store the read line in
++///  \param size  size of the character array Line
++///  \return  number of characters read or 0 
++int    aws_iobuf_getline   ( IOBuf * B, char * Line, int size )
++{
++  int ln = 0;
++  memset ( Line, 0, size );
++
++  if ( B->current == NULL ) return 0;
++
++  while ( size - ln > 1 )
++    {
++      if ( *B->pos == '\n' ) { B->pos++; Line[ln] = '\n'; ln++; break; }
++      if ( *B->pos == 0 ) 
++      {
++	B->current = B->current->next;
++	if ( B->current == NULL ) break;
++	B->pos = B->current->buf;
++	continue;
++      }
++      Line[ln] = * B->pos;
++      ln++;
++      
++      B->pos++;
++      // At the end of the block switch again
++    }
++  B->len -= ln;
++  return ln;
++}
++
++/// Release IO Buffer
++/// \param  bf I/O buffer to be deleted
++void   aws_iobuf_free ( IOBuf * bf )
++{ 
++  /// Release Things
++  IOBufNode * N = bf->first;
++  if ( bf->result  != NULL ) free ( bf->result  );
++  if ( bf->lastMod != NULL ) free ( bf->lastMod );
++  if ( bf->eTag    != NULL ) free ( bf->eTag    );
++  free (bf);
++
++  if ( N == NULL ) return;
++
++  /// Walk down the list and release blocks
++  while ( N->next != NULL )
++    {
++      IOBufNode * NN = N->next;
++      free(N);
++      N = NN;
++    }
++  if ( N != NULL ) free ( N );
++}
++
++/*!
++  \}
++*/
+Index: server/aws4c.h
+===================================================================
+--- server/aws4c.h	(revisjon 0)
++++ server/aws4c.h	(revisjon 0)
+@@ -0,0 +1,71 @@
++
++/*
++ *
++ * Copyright(c) 2009,  Vlad Korolev,  <vlad[@]v-lad.org >
++ *
++ * This software is licensed as described in the file COPYING, which
++ * you should have received as part of this distribution. The terms
++ * are also available at http://www.gnu.org/licenses/lgpl-3.0.txt
++ * You may opt to use, copy, modify, merge, publish, distribute and/or sell
++ * copies of the Software, and permit persons to whom the Software is
++ * furnished to do so, under the terms of the COPYING file.
++ *
++ * This software is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY
++ * KIND, either express or implied.
++ */
++
++
++/// IOBuf Node
++typedef struct _IOBufNode
++{
++  char * buf;
++  struct _IOBufNode * next;
++} IOBufNode;
++
++/// IOBuf structure
++typedef struct IOBuf 
++{
++  IOBufNode * first;
++  IOBufNode * current;
++  char   * pos;
++
++  char * result;
++  char * lastMod;
++  char * eTag;
++  int contentLen;
++  int len;
++  int code;
++
++} IOBuf;
++
++
++
++void aws_init ();
++void aws_set_id ( char * const str );    
++void aws_set_key ( char * const str );
++void aws_set_keyid ( char * const str );
++int aws_read_config ( char * const ID );
++void aws_set_debug (int d);
++
++
++void s3_set_bucket ( char * const str );
++int s3_get ( IOBuf * b, char * const file );
++int s3_put ( IOBuf * b, char * const file );
++void s3_set_host ( char * const str );
++void s3_set_mime ( char * const str );
++void s3_set_acl ( char * const str );
++
++
++int sqs_create_queue ( IOBuf *b, char * const name );
++int sqs_list_queues ( IOBuf *b, char * const prefix );
++int sqs_get_queueattributes ( IOBuf *b, char * url, int *TimeOut, int *nMesg );
++int sqs_set_queuevisibilitytimeout ( IOBuf *b, char * url, int sec );
++int sqs_get_message ( IOBuf * b, char * const url, char * id  );
++int sqs_send_message ( IOBuf *b, char * const url, char * const msg );
++int sqs_delete_message ( IOBuf * bf, char * const url, char * receipt );
++
++IOBuf * aws_iobuf_new ();
++void   aws_iobuf_append ( IOBuf *B, char * d, int len );
++int    aws_iobuf_getline   ( IOBuf * B, char * Line, int size );
++void   aws_iobuf_free ( IOBuf * bf );
++
+Index: server/.deps/srv_main.Plo
+===================================================================
+--- server/.deps/srv_main.Plo	(revisjon 30)
++++ server/.deps/srv_main.Plo	(arbeidskopi)
+@@ -70,12 +70,12 @@
+   ../ai/aihand.h ../ai/aisettler.h ../common/aicore/citymap.h \
+   generator/mapgen.h aiiface.h auth.h barbarian.h cityhand.h hand_gen.h \
+   citytools.h cityturn.h connecthand.h console.h diplhand.h edithand.h \
+-  gamehand.h ggzserver.h handchat.h maphand.h ../common/terrain.h \
+-  ../common/vision.h meta.h notify.h ../common/featured_text.h plrhand.h \
+-  report.h ruleset.h sanitycheck.h savegame.h score.h \
+-  scripting/script_signal.h sernet.h settings.h settlers.h spacerace.h \
+-  stdinhand.h ../common/connection.h techtools.h unithand.h \
+-  ../common/unit.h unittools.h gotohand.h voting.h srv_main.h
++  gamehand.h ggzserver.h handchat.h netsave.h ../utility/ioz.h maphand.h \
++  ../common/terrain.h ../common/vision.h meta.h notify.h \
++  ../common/featured_text.h plrhand.h report.h ruleset.h sanitycheck.h \
++  savegame.h score.h scripting/script_signal.h sernet.h settings.h \
++  settlers.h spacerace.h stdinhand.h ../common/connection.h techtools.h \
++  unithand.h ../common/unit.h unittools.h gotohand.h voting.h srv_main.h
+ 
+ ../config.h:
+ 
+@@ -429,6 +429,10 @@
+ 
+ handchat.h:
+ 
++netsave.h:
++
++../utility/ioz.h:
++
+ maphand.h:
+ 
+ ../common/terrain.h:
+Index: server/.deps/stdinhand.Plo
+===================================================================
+--- server/.deps/stdinhand.Plo	(revisjon 30)
++++ server/.deps/stdinhand.Plo	(arbeidskopi)
+@@ -49,9 +49,9 @@
+   ../ai/ailog.h gotohand.h citytools.h commands.h ../common/connection.h \
+   connecthand.h console.h diplhand.h hand_gen.h gamehand.h ggzserver.h \
+   generator/mapgen.h maphand.h ../common/terrain.h ../common/vision.h \
+-  meta.h notify.h plrhand.h report.h ruleset.h sanitycheck.h savegame.h \
+-  score.h sernet.h settings.h srv_main.h ../utility/netintf.h \
+-  /usr/include/netinet/in.h /usr/include/stdint.h \
++  meta.h netsave.h ../utility/ioz.h notify.h plrhand.h report.h ruleset.h \
++  sanitycheck.h savegame.h score.h sernet.h settings.h srv_main.h \
++  ../utility/netintf.h /usr/include/netinet/in.h /usr/include/stdint.h \
+   /usr/include/bits/wchar.h /usr/include/sys/socket.h \
+   /usr/include/sys/uio.h /usr/include/bits/uio.h \
+   /usr/include/bits/socket.h \
+@@ -321,6 +321,10 @@
+ 
+ meta.h:
+ 
++netsave.h:
++
++../utility/ioz.h:
++
+ notify.h:
+ 
+ plrhand.h:
+Index: server/stdinhand.c
+===================================================================
+--- server/stdinhand.c	(revisjon 30)
++++ server/stdinhand.c	(arbeidskopi)
+@@ -65,6 +65,7 @@
+ #include "mapgen.h"
+ #include "maphand.h"
+ #include "meta.h"
++#include "netsave.h"
+ #include "notify.h"
+ #include "plrhand.h"
+ #include "report.h"
+@@ -699,11 +700,6 @@
+ **************************************************************************/
+ static bool save_command(struct connection *caller, char *arg, bool check)
+ {
+-  if (is_restricted(caller)) {
+-    cmd_reply(CMD_SAVE, caller, C_FAIL,
+-              _("You cannot save games manually on this server."));
+-    return FALSE;
+-  }
+   if (!check) {
+     save_game(arg, "User request", FALSE);
+   }
+@@ -3448,39 +3444,11 @@
+     return FALSE;
+   }
+ 
+-  {
+-    /* it is a normal savegame or maybe a scenario */
+-    char testfile[MAX_LEN_PATH];
+-    const char *paths[] = { "", "scenario/", NULL };
+-    const char *exts[] = {
+-      "sav", "gz", "bz2", "sav.gz", "sav.bz2", NULL
+-    };
+-    const char **path, **ext, *found = NULL;
++  sz_strlcpy(arg, filename);
+ 
+-    for (path = paths; !found && *path; path++) {
+-      for (ext = exts; !found && *ext; ext++) {
+-        my_snprintf(testfile, sizeof(testfile), "%s%s.%s",
+-                    *path, filename, *ext);
+-        if ((found = datafilename(testfile))) {
+-          sz_strlcpy(arg, found);
+-        }
+-      }
+-    }
+-
+-    if (is_restricted(caller) && !found) {
+-      cmd_reply(CMD_LOAD, caller, C_FAIL, _("Cannot find savegame or "
+-                "scenario with the name \"%s\"."), filename);
+-      return FALSE;
+-    }
+-
+-    if (!found) {
+-      sz_strlcpy(arg, filename);
+-    }
+-  }
+-
+   /* attempt to parse the file */
+ 
+-  if (!section_file_load_nodup(&file, arg)) {
++  if (!net_file_load(&file, arg)) {
+     cmd_reply(CMD_LOAD, caller, C_FAIL, _("Could not load savefile: %s"), arg);
+     send_load_game_info(FALSE);
+     return FALSE;
+Index: server/savegame.c
+===================================================================
+--- server/savegame.c	(revisjon 30)
++++ server/savegame.c	(arbeidskopi)
+@@ -407,8 +407,9 @@
+     break;
+   }
+ 
+-  assert(0);
+-  return '?';
++  // FIXME: should not get here!
++  //assert(0);
++  return 'a';
+ }
+ 
+ /****************************************************************************
+Index: server/Makefile.am
+===================================================================
+--- server/Makefile.am	(revisjon 30)
++++ server/Makefile.am	(arbeidskopi)
+@@ -23,6 +23,8 @@
+ 		aiiface.h	\
+ 		auth.c		\
+ 		auth.h		\
++		aws4c.c		\
++		aws4c.h		\
+ 		barbarian.c	\
+ 		barbarian.h	\
+ 		cityhand.c	\
+@@ -59,6 +61,8 @@
+ 		meta.h		\
+ 		notify.c	\
+ 		notify.h	\
++		netsave.c	\
++		netsave.h	\
+ 		plrhand.c	\
+ 		plrhand.h	\
+ 		report.c	\
+Index: bootstrap/undep.sh
+===================================================================
+--- bootstrap/undep.sh	(revisjon 30)
++++ bootstrap/undep.sh	(arbeidskopi)
+@@ -21,8 +21,8 @@
+     exit
+ fi
+ 
+-CSUBDIRS="client client/agents client/@gui_sources@"
+-#CSUBDIRS=""
++#CSUBDIRS="client client/agents client/@gui_sources@"
++CSUBDIRS=""
+ 
+ SSUBDIRS="ai server server/generator server/scripting"
+ #SSUBDIRS=""
+Index: po/Makefile.in
+===================================================================
+--- po/Makefile.in	(revisjon 57)
++++ po/Makefile.in	(arbeidskopi)
+@@ -38,7 +38,7 @@
+ MSGMERGE = msgmerge
+ 
+ DEFS = -DHAVE_CONFIG_H
+-CFLAGS = -save-temps -Wall -Wpointer-arith -Wcast-align -Wmissing-prototypes -Wmissing-declarations -g -O2
++CFLAGS = -save-temps -Wall -Wpointer-arith -Wcast-align -Wmissing-prototypes -Wmissing-declarations -g -O2 -I/usr/local/include
+ CPPFLAGS =  -DLOCALEDIR="\"${datarootdir}/locale\"" -DDEFAULT_DATA_PATH="\".:data:~/.freeciv/2.3:${datarootdir}/freeciv\""
+ 
+ INCLUDES = -I.. -I$(top_srcdir)/intl
+Index: config.status
+===================================================================
+--- config.status	(revisjon 57)
++++ config.status	(arbeidskopi)
+@@ -357,7 +357,7 @@
+ ac_cs_version="\
+ config.status
+ configured by ./configure, generated by GNU Autoconf 2.63,
+-  with options \"\"
++  with options \"'--enable-client=no'\"
+ 
+ Copyright (C) 2008 Free Software Foundation, Inc.
+ This config.status script is free software; the Free Software Foundation
+@@ -439,7 +439,7 @@
+ fi
+ 
+ if $ac_cs_recheck; then
+-  set X '/bin/sh' './configure'  $ac_configure_extra_args --no-create --no-recursion
++  set X '/bin/sh' './configure'  '--enable-client=no' $ac_configure_extra_args --no-create --no-recursion
+   shift
+   $as_echo "running CONFIG_SHELL=/bin/sh $*" >&6
+   CONFIG_SHELL='/bin/sh'
+@@ -508,7 +508,7 @@
+ old_postuninstall_cmds=''
+ old_archive_cmds='$AR $AR_FLAGS $oldlib$oldobjs~$RANLIB $oldlib'
+ CC='gcc'
+-CFLAGS='-save-temps -Wall -Wpointer-arith -Wcast-align -Wmissing-prototypes -Wmissing-declarations -g -O2'
++CFLAGS='-save-temps -Wall -Wpointer-arith -Wcast-align -Wmissing-prototypes -Wmissing-declarations -g -O2 -I/usr/local/include'
+ compiler='g++'
+ GCC='yes'
+ lt_cv_sys_global_symbol_pipe='sed -n -e '\''s/^.*[	 ]\([ABCDGIRSTW][ABCDGIRSTW]*\)[	 ][	 ]*\([_A-Za-z][_A-Za-z0-9]*\)$/\1 \2 \2/p'\'''
+@@ -909,7 +909,7 @@
+ S["GNULIB_CALLOC_POSIX"]="0"
+ S["GNULIB_REALLOC_POSIX"]="0"
+ S["GNULIB_MALLOC_POSIX"]="0"
+-S["SERVER_LIBS"]="-lreadline   -lm"
++S["SERVER_LIBS"]="-lreadline   -lm -L/usr/local/lib -lcurl -lidn -lssl -lcrypto -lldap -lrt -lssl -lcrypto -ldl -lz -lz"
+ S["MINGW32_FALSE"]=""
+ S["MINGW32_TRUE"]="#"
+ S["FTWL_OPENGL_FALSE"]=""
+@@ -928,8 +928,8 @@
+ S["CLIENT_GUI_STUB_TRUE"]="#"
+ S["CLIENT_GUI_XAW_FALSE"]=""
+ S["CLIENT_GUI_XAW_TRUE"]="#"
+-S["CLIENT_GUI_GTK_2_0_FALSE"]="#"
+-S["CLIENT_GUI_GTK_2_0_TRUE"]=""
++S["CLIENT_GUI_GTK_2_0_FALSE"]=""
++S["CLIENT_GUI_GTK_2_0_TRUE"]="#"
+ S["CLIENT_GUI_SDL_FALSE"]=""
+ S["CLIENT_GUI_SDL_TRUE"]="#"
+ S["AUDIO_SDL_FALSE"]=""
+@@ -965,13 +965,11 @@
+ S["GUI_sdl_CXXFLAGS"]=""
+ S["GUI_sdl_CFLAGS"]=""
+ S["GUI_gtk2_LDFLAGS"]=""
+-S["GUI_gtk2_LIBS"]="-lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lgdk_pixbuf-2.0 -lpangocairo-1.0 -lcairo -lpango-1.0 -lfreetype -lz -lfontconfig -lg"\
+-"object-2.0 -lgmodule-2.0 -lglib-2.0   "
++S["GUI_gtk2_LIBS"]=""
+ S["GUI_gtk2_CXXFLAGS"]=""
+-S["GUI_gtk2_CFLAGS"]="-I/usr/include/gtk-2.0 -I/usr/lib64/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/pango-1.0 -I/usr/include/glib-2.0 -I/"\
+-"usr/lib64/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12  "
+-S["CLIENT_FALSE"]="#"
+-S["CLIENT_TRUE"]=""
++S["GUI_gtk2_CFLAGS"]=""
++S["CLIENT_FALSE"]=""
++S["CLIENT_TRUE"]="#"
+ S["GGZ_SERVER_FALSE"]=""
+ S["GGZ_SERVER_TRUE"]="#"
+ S["ggzdexecmodpath"]=""
+@@ -1012,19 +1010,17 @@
+ S["PNG_CFLAGS"]=""
+ S["X_EXTRA_LIBS"]=""
+ S["X_LIBS"]=""
+-S["X_PRE_LIBS"]=" -lSM -lICE"
++S["X_PRE_LIBS"]=""
+ S["X_CFLAGS"]=""
+ S["XMKMF"]=""
+ S["FT2_LIBS"]=""
+ S["FT2_CFLAGS"]=""
+ S["FT2_CONFIG"]=""
+-S["SDL_LIBS"]="-L/usr/lib64 -lSDL -lpthread"
+-S["SDL_CFLAGS"]="-I/usr/include/SDL -D_GNU_SOURCE=1 -D_REENTRANT"
+-S["SDL_CONFIG"]="/usr/bin/sdl-config"
+-S["GTK_LIBS"]="-lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lgdk_pixbuf-2.0 -lpangocairo-1.0 -lcairo -lpango-1.0 -lfreetype -lz -lfontconfig -lg"\
+-"object-2.0 -lgmodule-2.0 -lglib-2.0  "
+-S["GTK_CFLAGS"]="-I/usr/include/gtk-2.0 -I/usr/lib64/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/pango-1.0 -I/usr/include/glib-2.0 -I/"\
+-"usr/lib64/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12  "
++S["SDL_LIBS"]=""
++S["SDL_CFLAGS"]=""
++S["SDL_CONFIG"]=""
++S["GTK_LIBS"]=""
++S["GTK_CFLAGS"]=""
+ S["GZIP"]="/usr/bin/gzip"
+ S["WINDRES"]=""
+ S["AUTO_DEPS"]="yes"
+@@ -1081,7 +1077,7 @@
+ S["SVNREV_TRUE"]="#"
+ S["CAIRO_LIBS"]=""
+ S["CAIRO_CFLAGS"]=""
+-S["PKG_CONFIG"]="/usr/bin/pkg-config"
++S["PKG_CONFIG"]=""
+ S["FTWL_FALSE"]=""
+ S["FTWL_TRUE"]="#"
+ S["SED"]="/usr/bin/sed"
+@@ -1134,7 +1130,7 @@
+ S["ac_ct_CC"]="gcc"
+ S["CPPFLAGS"]=" -DLOCALEDIR=\"\\\"${datarootdir}/locale\\\"\" -DDEFAULT_DATA_PATH=\"\\\".:data:~/.freeciv/2.3:${datarootdir}/freeciv\\\"\""
+ S["LDFLAGS"]=""
+-S["CFLAGS"]="-save-temps -Wall -Wpointer-arith -Wcast-align -Wmissing-prototypes -Wmissing-declarations -g -O2"
++S["CFLAGS"]="-save-temps -Wall -Wpointer-arith -Wcast-align -Wmissing-prototypes -Wmissing-declarations -g -O2 -I/usr/local/include"
+ S["CC"]="gcc"
+ S["host_os"]="linux-gnu"
+ S["host_vendor"]="suse"
+@@ -1350,7 +1346,7 @@
+ D["HAVE_POPEN"]=" 1"
+ D["HAVE__LONGJMP"]=" 1"
+ D["FC_STORE_CPPFLAGS"]=" ' -DLOCALEDIR=\"\\\"${datarootdir}/locale\\\"\" -DDEFAULT_DATA_PATH=\"\\\".:data:~/.freeciv/2.3:${datarootdir}/freeciv\\\"\"'"
+-D["FC_STORE_CFLAGS"]=" '-save-temps -Wall -Wpointer-arith -Wcast-align -Wmissing-prototypes -Wmissing-declarations -g -O2'"
++D["FC_STORE_CFLAGS"]=" '-save-temps -Wall -Wpointer-arith -Wcast-align -Wmissing-prototypes -Wmissing-declarations -g -O2 -I/usr/local/include'"
+ D["FC_STORE_CXXFLAGS"]=" '-Wall -Wpointer-arith -Wcast-align -g -O2'"
+   for (key in D) D_is_set[key] = 1
+   FS = ""
+Index: libtool
+===================================================================
+--- libtool	(revisjon 57)
++++ libtool	(arbeidskopi)
+@@ -132,7 +132,7 @@
+ LTCC="gcc"
+ 
+ # LTCC compiler flags.
+-LTCFLAGS="-save-temps -Wall -Wpointer-arith -Wcast-align -Wmissing-prototypes -Wmissing-declarations -g -O2"
++LTCFLAGS="-save-temps -Wall -Wpointer-arith -Wcast-align -Wmissing-prototypes -Wmissing-declarations -g -O2 -I/usr/local/include"
+ 
+ # Take the output of nm and produce a listing of raw symbols and C names.
+ global_symbol_pipe="sed -n -e 's/^.*[	 ]\\([ABCDGIRSTW][ABCDGIRSTW]*\\)[	 ][	 ]*\\([_A-Za-z][_A-Za-z0-9]*\\)\$/\\1 \\2 \\2/p'"
+Index: autom4te.cache/output.1
+===================================================================
+--- autom4te.cache/output.1	(revisjon 57)
++++ autom4te.cache/output.1	(arbeidskopi)
+@@ -36207,7 +36207,37 @@
+ fi
+ 
+ 
++    { $as_echo "$as_me:$LINENO: checking for libcurl 7.11.0 or later" >&5
++$as_echo_n "checking for libcurl 7.11.0 or later... " >&6; }
++    set x `curl-config --version 2>&1`
++    shift
++    case "$1" in [0-9]*) ;; *) shift;; esac
++    jigdo_curlver="$1"
++    { $as_echo "$as_me:$LINENO: result: $jigdo_curlver" >&5
++$as_echo "$jigdo_curlver" >&6; }
++    case "$jigdo_curlver" in
++        [1-9][0-9].*|[8-9].*|7.1[1-9]*|7.[2-9][0-9]*)
++            CFLAGS="$CFLAGS `curl-config --cflags 2>/dev/null`"
++            SERVER_LIBS="$SERVER_LIBS `curl-config --libs 2>/dev/null`"
++            if test -n "$jigdo_libcurl"; then CURLLIBS="$jigdo_libcurl"; fi
++            ;;
++        *)
++        { $as_echo "$as_me:$LINENO: result:    * libcurl not installed, or the installed version" >&5
++$as_echo "   * libcurl not installed, or the installed version" >&6; }
++        { $as_echo "$as_me:$LINENO: result:    * is too old, or curl-config is not in \$PATH." >&5
++$as_echo "   * is too old, or curl-config is not in \$PATH." >&6; }
++        { $as_echo "$as_me:$LINENO: result:    * Please install libcurl 7.11.0 or later, it is" >&5
++$as_echo "   * Please install libcurl 7.11.0 or later, it is" >&6; }
++        { $as_echo "$as_me:$LINENO: result:    * needed by the jigdo GUI application." >&5
++$as_echo "   * needed by the jigdo GUI application." >&6; }
++        installDevel "libcurl2" "libcurl2"
++    esac
+ 
++
++
++
++
++
+ { $as_echo "$as_me:$LINENO: checking for main in -lnls" >&5
+ $as_echo_n "checking for main in -lnls... " >&6; }
+ if test "${ac_cv_lib_nls_main+set}" = set; then
+Index: autom4te.cache/traces.1
+===================================================================
+--- autom4te.cache/traces.1	(revisjon 30)
++++ autom4te.cache/traces.1	(arbeidskopi)
+@@ -2812,342 +2812,342 @@
+ m4trace:configure.ac:704: -1- m4_pattern_allow([^HAVE_LIBREADLINE$])
+ m4trace:configure.ac:704: -1- AH_OUTPUT([HAVE_LIBREADLINE], [/* Readline support */
+ #undef HAVE_LIBREADLINE])
+-m4trace:configure.ac:712: -1- AC_SUBST([SERVER_LIBS])
+-m4trace:configure.ac:712: -1- AC_SUBST_TRACE([SERVER_LIBS])
+-m4trace:configure.ac:712: -1- m4_pattern_allow([^SERVER_LIBS$])
+-m4trace:configure.ac:714: -1- AH_OUTPUT([HAVE_LIBNLS], [/* Define to 1 if you have the `nls\' library (-lnls). */
++m4trace:configure.ac:737: -1- AC_SUBST([SERVER_LIBS])
++m4trace:configure.ac:737: -1- AC_SUBST_TRACE([SERVER_LIBS])
++m4trace:configure.ac:737: -1- m4_pattern_allow([^SERVER_LIBS$])
++m4trace:configure.ac:739: -1- AH_OUTPUT([HAVE_LIBNLS], [/* Define to 1 if you have the `nls\' library (-lnls). */
+ #undef HAVE_LIBNLS])
+-m4trace:configure.ac:714: -1- AC_DEFINE_TRACE_LITERAL([HAVE_LIBNLS])
+-m4trace:configure.ac:714: -1- m4_pattern_allow([^HAVE_LIBNLS$])
+-m4trace:configure.ac:717: -1- AC_DEFINE_TRACE_LITERAL([STDC_HEADERS])
+-m4trace:configure.ac:717: -1- m4_pattern_allow([^STDC_HEADERS$])
+-m4trace:configure.ac:717: -1- AH_OUTPUT([STDC_HEADERS], [/* Define to 1 if you have the ANSI C header files. */
++m4trace:configure.ac:739: -1- AC_DEFINE_TRACE_LITERAL([HAVE_LIBNLS])
++m4trace:configure.ac:739: -1- m4_pattern_allow([^HAVE_LIBNLS$])
++m4trace:configure.ac:742: -1- AC_DEFINE_TRACE_LITERAL([STDC_HEADERS])
++m4trace:configure.ac:742: -1- m4_pattern_allow([^STDC_HEADERS$])
++m4trace:configure.ac:742: -1- AH_OUTPUT([STDC_HEADERS], [/* Define to 1 if you have the ANSI C header files. */
+ #undef STDC_HEADERS])
+-m4trace:configure.ac:718: -1- AC_DEFINE_TRACE_LITERAL([HAVE_SYS_WAIT_H])
+-m4trace:configure.ac:718: -1- m4_pattern_allow([^HAVE_SYS_WAIT_H$])
+-m4trace:configure.ac:718: -1- AH_OUTPUT([HAVE_SYS_WAIT_H], [/* Define to 1 if you have <sys/wait.h> that is POSIX.1 compatible. */
++m4trace:configure.ac:743: -1- AC_DEFINE_TRACE_LITERAL([HAVE_SYS_WAIT_H])
++m4trace:configure.ac:743: -1- m4_pattern_allow([^HAVE_SYS_WAIT_H$])
++m4trace:configure.ac:743: -1- AH_OUTPUT([HAVE_SYS_WAIT_H], [/* Define to 1 if you have <sys/wait.h> that is POSIX.1 compatible. */
+ #undef HAVE_SYS_WAIT_H])
+-m4trace:configure.ac:719: -1- AH_OUTPUT([HAVE_FCNTL_H], [/* Define to 1 if you have the <fcntl.h> header file. */
++m4trace:configure.ac:744: -1- AH_OUTPUT([HAVE_FCNTL_H], [/* Define to 1 if you have the <fcntl.h> header file. */
+ #undef HAVE_FCNTL_H])
+-m4trace:configure.ac:719: -1- AH_OUTPUT([HAVE_SYS_TIME_H], [/* Define to 1 if you have the <sys/time.h> header file. */
++m4trace:configure.ac:744: -1- AH_OUTPUT([HAVE_SYS_TIME_H], [/* Define to 1 if you have the <sys/time.h> header file. */
+ #undef HAVE_SYS_TIME_H])
+-m4trace:configure.ac:719: -1- AH_OUTPUT([HAVE_SYS_TYPES_H], [/* Define to 1 if you have the <sys/types.h> header file. */
++m4trace:configure.ac:744: -1- AH_OUTPUT([HAVE_SYS_TYPES_H], [/* Define to 1 if you have the <sys/types.h> header file. */
+ #undef HAVE_SYS_TYPES_H])
+-m4trace:configure.ac:719: -1- AH_OUTPUT([HAVE_UNISTD_H], [/* Define to 1 if you have the <unistd.h> header file. */
++m4trace:configure.ac:744: -1- AH_OUTPUT([HAVE_UNISTD_H], [/* Define to 1 if you have the <unistd.h> header file. */
+ #undef HAVE_UNISTD_H])
+-m4trace:configure.ac:719: -1- AH_OUTPUT([HAVE_SYS_UTSNAME_H], [/* Define to 1 if you have the <sys/utsname.h> header file. */
++m4trace:configure.ac:744: -1- AH_OUTPUT([HAVE_SYS_UTSNAME_H], [/* Define to 1 if you have the <sys/utsname.h> header file. */
+ #undef HAVE_SYS_UTSNAME_H])
+-m4trace:configure.ac:719: -1- AH_OUTPUT([HAVE_SYS_FILE_H], [/* Define to 1 if you have the <sys/file.h> header file. */
++m4trace:configure.ac:744: -1- AH_OUTPUT([HAVE_SYS_FILE_H], [/* Define to 1 if you have the <sys/file.h> header file. */
+ #undef HAVE_SYS_FILE_H])
+-m4trace:configure.ac:719: -1- AH_OUTPUT([HAVE_LIBINTL_H], [/* Define to 1 if you have the <libintl.h> header file. */
++m4trace:configure.ac:744: -1- AH_OUTPUT([HAVE_LIBINTL_H], [/* Define to 1 if you have the <libintl.h> header file. */
+ #undef HAVE_LIBINTL_H])
+-m4trace:configure.ac:719: -1- AH_OUTPUT([HAVE_SIGNAL_H], [/* Define to 1 if you have the <signal.h> header file. */
++m4trace:configure.ac:744: -1- AH_OUTPUT([HAVE_SIGNAL_H], [/* Define to 1 if you have the <signal.h> header file. */
+ #undef HAVE_SIGNAL_H])
+-m4trace:configure.ac:719: -1- AH_OUTPUT([HAVE_STRINGS_H], [/* Define to 1 if you have the <strings.h> header file. */
++m4trace:configure.ac:744: -1- AH_OUTPUT([HAVE_STRINGS_H], [/* Define to 1 if you have the <strings.h> header file. */
+ #undef HAVE_STRINGS_H])
+-m4trace:configure.ac:721: -1- AC_DEFINE_TRACE_LITERAL([HAVE__BOOL])
+-m4trace:configure.ac:721: -1- m4_pattern_allow([^HAVE__BOOL$])
+-m4trace:configure.ac:721: -1- AH_OUTPUT([HAVE__BOOL], [/* Define to 1 if the system has the type `_Bool\'. */
++m4trace:configure.ac:746: -1- AC_DEFINE_TRACE_LITERAL([HAVE__BOOL])
++m4trace:configure.ac:746: -1- m4_pattern_allow([^HAVE__BOOL$])
++m4trace:configure.ac:746: -1- AH_OUTPUT([HAVE__BOOL], [/* Define to 1 if the system has the type `_Bool\'. */
+ #undef HAVE__BOOL])
+-m4trace:configure.ac:721: -1- AC_DEFINE_TRACE_LITERAL([HAVE_STDBOOL_H])
+-m4trace:configure.ac:721: -1- m4_pattern_allow([^HAVE_STDBOOL_H$])
+-m4trace:configure.ac:721: -1- AH_OUTPUT([HAVE_STDBOOL_H], [/* Define to 1 if stdbool.h conforms to C99. */
++m4trace:configure.ac:746: -1- AC_DEFINE_TRACE_LITERAL([HAVE_STDBOOL_H])
++m4trace:configure.ac:746: -1- m4_pattern_allow([^HAVE_STDBOOL_H$])
++m4trace:configure.ac:746: -1- AH_OUTPUT([HAVE_STDBOOL_H], [/* Define to 1 if stdbool.h conforms to C99. */
+ #undef HAVE_STDBOOL_H])
+-m4trace:configure.ac:725: -1- AH_OUTPUT([HAVE_ARPA_INET_H], [/* Define to 1 if you have the <arpa/inet.h> header file. */
++m4trace:configure.ac:750: -1- AH_OUTPUT([HAVE_ARPA_INET_H], [/* Define to 1 if you have the <arpa/inet.h> header file. */
+ #undef HAVE_ARPA_INET_H])
+-m4trace:configure.ac:725: -1- AH_OUTPUT([HAVE_NETDB_H], [/* Define to 1 if you have the <netdb.h> header file. */
++m4trace:configure.ac:750: -1- AH_OUTPUT([HAVE_NETDB_H], [/* Define to 1 if you have the <netdb.h> header file. */
+ #undef HAVE_NETDB_H])
+-m4trace:configure.ac:725: -1- AH_OUTPUT([HAVE_NETINET_IN_H], [/* Define to 1 if you have the <netinet/in.h> header file. */
++m4trace:configure.ac:750: -1- AH_OUTPUT([HAVE_NETINET_IN_H], [/* Define to 1 if you have the <netinet/in.h> header file. */
+ #undef HAVE_NETINET_IN_H])
+-m4trace:configure.ac:725: -1- AH_OUTPUT([HAVE_PWD_H], [/* Define to 1 if you have the <pwd.h> header file. */
++m4trace:configure.ac:750: -1- AH_OUTPUT([HAVE_PWD_H], [/* Define to 1 if you have the <pwd.h> header file. */
+ #undef HAVE_PWD_H])
+-m4trace:configure.ac:725: -1- AH_OUTPUT([HAVE_SYS_IOCTL_H], [/* Define to 1 if you have the <sys/ioctl.h> header file. */
++m4trace:configure.ac:750: -1- AH_OUTPUT([HAVE_SYS_IOCTL_H], [/* Define to 1 if you have the <sys/ioctl.h> header file. */
+ #undef HAVE_SYS_IOCTL_H])
+-m4trace:configure.ac:725: -1- AH_OUTPUT([HAVE_SYS_SELECT_H], [/* Define to 1 if you have the <sys/select.h> header file. */
++m4trace:configure.ac:750: -1- AH_OUTPUT([HAVE_SYS_SELECT_H], [/* Define to 1 if you have the <sys/select.h> header file. */
+ #undef HAVE_SYS_SELECT_H])
+-m4trace:configure.ac:725: -1- AH_OUTPUT([HAVE_SYS_SIGNAL_H], [/* Define to 1 if you have the <sys/signal.h> header file. */
++m4trace:configure.ac:750: -1- AH_OUTPUT([HAVE_SYS_SIGNAL_H], [/* Define to 1 if you have the <sys/signal.h> header file. */
+ #undef HAVE_SYS_SIGNAL_H])
+-m4trace:configure.ac:725: -1- AH_OUTPUT([HAVE_SYS_SOCKET_H], [/* Define to 1 if you have the <sys/socket.h> header file. */
++m4trace:configure.ac:750: -1- AH_OUTPUT([HAVE_SYS_SOCKET_H], [/* Define to 1 if you have the <sys/socket.h> header file. */
+ #undef HAVE_SYS_SOCKET_H])
+-m4trace:configure.ac:725: -1- AH_OUTPUT([HAVE_SYS_TERMIO_H], [/* Define to 1 if you have the <sys/termio.h> header file. */
++m4trace:configure.ac:750: -1- AH_OUTPUT([HAVE_SYS_TERMIO_H], [/* Define to 1 if you have the <sys/termio.h> header file. */
+ #undef HAVE_SYS_TERMIO_H])
+-m4trace:configure.ac:725: -1- AH_OUTPUT([HAVE_SYS_UIO_H], [/* Define to 1 if you have the <sys/uio.h> header file. */
++m4trace:configure.ac:750: -1- AH_OUTPUT([HAVE_SYS_UIO_H], [/* Define to 1 if you have the <sys/uio.h> header file. */
+ #undef HAVE_SYS_UIO_H])
+-m4trace:configure.ac:725: -1- AH_OUTPUT([HAVE_TERMIOS_H], [/* Define to 1 if you have the <termios.h> header file. */
++m4trace:configure.ac:750: -1- AH_OUTPUT([HAVE_TERMIOS_H], [/* Define to 1 if you have the <termios.h> header file. */
+ #undef HAVE_TERMIOS_H])
+-m4trace:configure.ac:739: -1- AC_DEFINE_TRACE_LITERAL([const])
+-m4trace:configure.ac:739: -1- m4_pattern_allow([^const$])
+-m4trace:configure.ac:739: -1- AH_OUTPUT([const], [/* Define to empty if `const\' does not conform to ANSI C. */
++m4trace:configure.ac:764: -1- AC_DEFINE_TRACE_LITERAL([const])
++m4trace:configure.ac:764: -1- m4_pattern_allow([^const$])
++m4trace:configure.ac:764: -1- AH_OUTPUT([const], [/* Define to empty if `const\' does not conform to ANSI C. */
+ #undef const])
+-m4trace:configure.ac:740: -1- AC_DEFINE_TRACE_LITERAL([TIME_WITH_SYS_TIME])
+-m4trace:configure.ac:740: -1- m4_pattern_allow([^TIME_WITH_SYS_TIME$])
+-m4trace:configure.ac:740: -1- AH_OUTPUT([TIME_WITH_SYS_TIME], [/* Define to 1 if you can safely include both <sys/time.h> and <time.h>. */
++m4trace:configure.ac:765: -1- AC_DEFINE_TRACE_LITERAL([TIME_WITH_SYS_TIME])
++m4trace:configure.ac:765: -1- m4_pattern_allow([^TIME_WITH_SYS_TIME$])
++m4trace:configure.ac:765: -1- AH_OUTPUT([TIME_WITH_SYS_TIME], [/* Define to 1 if you can safely include both <sys/time.h> and <time.h>. */
+ #undef TIME_WITH_SYS_TIME])
+-m4trace:configure.ac:741: -1- AC_DEFINE_TRACE_LITERAL([TM_IN_SYS_TIME])
+-m4trace:configure.ac:741: -1- m4_pattern_allow([^TM_IN_SYS_TIME$])
+-m4trace:configure.ac:741: -1- AH_OUTPUT([TM_IN_SYS_TIME], [/* Define to 1 if your <sys/time.h> declares `struct tm\'. */
++m4trace:configure.ac:766: -1- AC_DEFINE_TRACE_LITERAL([TM_IN_SYS_TIME])
++m4trace:configure.ac:766: -1- m4_pattern_allow([^TM_IN_SYS_TIME$])
++m4trace:configure.ac:766: -1- AH_OUTPUT([TM_IN_SYS_TIME], [/* Define to 1 if your <sys/time.h> declares `struct tm\'. */
+ #undef TM_IN_SYS_TIME])
+-m4trace:configure.ac:742: -1- AC_DEFINE_TRACE_LITERAL([HAVE_SOCKLEN_T])
+-m4trace:configure.ac:742: -1- m4_pattern_allow([^HAVE_SOCKLEN_T$])
+-m4trace:configure.ac:742: -1- AH_OUTPUT([HAVE_SOCKLEN_T], [/* Define to 1 if the system has the type `socklen_t\'. */
++m4trace:configure.ac:767: -1- AC_DEFINE_TRACE_LITERAL([HAVE_SOCKLEN_T])
++m4trace:configure.ac:767: -1- m4_pattern_allow([^HAVE_SOCKLEN_T$])
++m4trace:configure.ac:767: -1- AH_OUTPUT([HAVE_SOCKLEN_T], [/* Define to 1 if the system has the type `socklen_t\'. */
+ #undef HAVE_SOCKLEN_T])
+-m4trace:configure.ac:748: -1- _m4_warn([obsolete], [The macro `AC_TYPE_SIGNAL' is obsolete.
++m4trace:configure.ac:773: -1- _m4_warn([obsolete], [The macro `AC_TYPE_SIGNAL' is obsolete.
+ You should run autoupdate.], [../../lib/autoconf/types.m4:699: AC_TYPE_SIGNAL is expanded from...
+-configure.ac:748: the top level])
+-m4trace:configure.ac:748: -1- AC_DEFINE_TRACE_LITERAL([RETSIGTYPE])
+-m4trace:configure.ac:748: -1- m4_pattern_allow([^RETSIGTYPE$])
+-m4trace:configure.ac:748: -1- AH_OUTPUT([RETSIGTYPE], [/* Define as the return type of signal handlers (`int\' or `void\'). */
++configure.ac:773: the top level])
++m4trace:configure.ac:773: -1- AC_DEFINE_TRACE_LITERAL([RETSIGTYPE])
++m4trace:configure.ac:773: -1- m4_pattern_allow([^RETSIGTYPE$])
++m4trace:configure.ac:773: -1- AH_OUTPUT([RETSIGTYPE], [/* Define as the return type of signal handlers (`int\' or `void\'). */
+ #undef RETSIGTYPE])
+-m4trace:configure.ac:749: -1- AC_DEFINE_TRACE_LITERAL([pid_t])
+-m4trace:configure.ac:749: -1- m4_pattern_allow([^pid_t$])
+-m4trace:configure.ac:749: -1- AH_OUTPUT([pid_t], [/* Define to `int\' if <sys/types.h> does not define. */
++m4trace:configure.ac:774: -1- AC_DEFINE_TRACE_LITERAL([pid_t])
++m4trace:configure.ac:774: -1- m4_pattern_allow([^pid_t$])
++m4trace:configure.ac:774: -1- AH_OUTPUT([pid_t], [/* Define to `int\' if <sys/types.h> does not define. */
+ #undef pid_t])
+-m4trace:configure.ac:749: -1- AH_OUTPUT([HAVE_VFORK_H], [/* Define to 1 if you have the <vfork.h> header file. */
++m4trace:configure.ac:774: -1- AH_OUTPUT([HAVE_VFORK_H], [/* Define to 1 if you have the <vfork.h> header file. */
+ #undef HAVE_VFORK_H])
+-m4trace:configure.ac:749: -1- AH_OUTPUT([HAVE_FORK], [/* Define to 1 if you have the `fork\' function. */
++m4trace:configure.ac:774: -1- AH_OUTPUT([HAVE_FORK], [/* Define to 1 if you have the `fork\' function. */
+ #undef HAVE_FORK])
+-m4trace:configure.ac:749: -1- AH_OUTPUT([HAVE_VFORK], [/* Define to 1 if you have the `vfork\' function. */
++m4trace:configure.ac:774: -1- AH_OUTPUT([HAVE_VFORK], [/* Define to 1 if you have the `vfork\' function. */
+ #undef HAVE_VFORK])
+-m4trace:configure.ac:749: -1- AC_DEFINE_TRACE_LITERAL([HAVE_WORKING_VFORK])
+-m4trace:configure.ac:749: -1- m4_pattern_allow([^HAVE_WORKING_VFORK$])
+-m4trace:configure.ac:749: -1- AH_OUTPUT([HAVE_WORKING_VFORK], [/* Define to 1 if `vfork\' works. */
++m4trace:configure.ac:774: -1- AC_DEFINE_TRACE_LITERAL([HAVE_WORKING_VFORK])
++m4trace:configure.ac:774: -1- m4_pattern_allow([^HAVE_WORKING_VFORK$])
++m4trace:configure.ac:774: -1- AH_OUTPUT([HAVE_WORKING_VFORK], [/* Define to 1 if `vfork\' works. */
+ #undef HAVE_WORKING_VFORK])
+-m4trace:configure.ac:749: -1- AC_DEFINE_TRACE_LITERAL([vfork])
+-m4trace:configure.ac:749: -1- m4_pattern_allow([^vfork$])
+-m4trace:configure.ac:749: -1- AH_OUTPUT([vfork], [/* Define as `fork\' if `vfork\' does not work. */
++m4trace:configure.ac:774: -1- AC_DEFINE_TRACE_LITERAL([vfork])
++m4trace:configure.ac:774: -1- m4_pattern_allow([^vfork$])
++m4trace:configure.ac:774: -1- AH_OUTPUT([vfork], [/* Define as `fork\' if `vfork\' does not work. */
+ #undef vfork])
+-m4trace:configure.ac:749: -1- AC_DEFINE_TRACE_LITERAL([HAVE_WORKING_FORK])
+-m4trace:configure.ac:749: -1- m4_pattern_allow([^HAVE_WORKING_FORK$])
+-m4trace:configure.ac:749: -1- AH_OUTPUT([HAVE_WORKING_FORK], [/* Define to 1 if `fork\' works. */
++m4trace:configure.ac:774: -1- AC_DEFINE_TRACE_LITERAL([HAVE_WORKING_FORK])
++m4trace:configure.ac:774: -1- m4_pattern_allow([^HAVE_WORKING_FORK$])
++m4trace:configure.ac:774: -1- AH_OUTPUT([HAVE_WORKING_FORK], [/* Define to 1 if `fork\' works. */
+ #undef HAVE_WORKING_FORK])
+-m4trace:configure.ac:750: -1- AC_DEFINE_TRACE_LITERAL([HAVE_STRCOLL])
+-m4trace:configure.ac:750: -1- m4_pattern_allow([^HAVE_STRCOLL$])
+-m4trace:configure.ac:750: -1- AH_OUTPUT([HAVE_STRCOLL], [/* Define to 1 if you have the `strcoll\' function and it is properly defined.
++m4trace:configure.ac:775: -1- AC_DEFINE_TRACE_LITERAL([HAVE_STRCOLL])
++m4trace:configure.ac:775: -1- m4_pattern_allow([^HAVE_STRCOLL$])
++m4trace:configure.ac:775: -1- AH_OUTPUT([HAVE_STRCOLL], [/* Define to 1 if you have the `strcoll\' function and it is properly defined.
+    */
+ #undef HAVE_STRCOLL])
+-m4trace:configure.ac:751: -1- AH_OUTPUT([HAVE_VPRINTF], [/* Define to 1 if you have the `vprintf\' function. */
++m4trace:configure.ac:776: -1- AH_OUTPUT([HAVE_VPRINTF], [/* Define to 1 if you have the `vprintf\' function. */
+ #undef HAVE_VPRINTF])
+-m4trace:configure.ac:751: -1- AC_DEFINE_TRACE_LITERAL([HAVE_DOPRNT])
+-m4trace:configure.ac:751: -1- m4_pattern_allow([^HAVE_DOPRNT$])
+-m4trace:configure.ac:751: -1- AH_OUTPUT([HAVE_DOPRNT], [/* Define to 1 if you don\'t have `vprintf\' but do have `_doprnt.\' */
++m4trace:configure.ac:776: -1- AC_DEFINE_TRACE_LITERAL([HAVE_DOPRNT])
++m4trace:configure.ac:776: -1- m4_pattern_allow([^HAVE_DOPRNT$])
++m4trace:configure.ac:776: -1- AH_OUTPUT([HAVE_DOPRNT], [/* Define to 1 if you don\'t have `vprintf\' but do have `_doprnt.\' */
+ #undef HAVE_DOPRNT])
+-m4trace:configure.ac:755: -1- _m4_warn([obsolete], [The macro `AC_TRY_RUN' is obsolete.
++m4trace:configure.ac:780: -1- _m4_warn([obsolete], [The macro `AC_TRY_RUN' is obsolete.
+ You should run autoupdate.], [../../lib/autoconf/general.m4:2592: AC_TRY_RUN is expanded from...
+ ../../lib/m4sugar/m4sh.m4:505: AS_IF is expanded from...
+ ../../lib/autoconf/general.m4:1974: AC_CACHE_VAL is expanded from...
+ ../../lib/autoconf/general.m4:1994: AC_CACHE_CHECK is expanded from...
+ m4/vsnprintf.m4:12: AC_FUNC_VSNPRINTF is expanded from...
+-configure.ac:755: the top level])
+-m4trace:configure.ac:755: -1- AC_DEFINE_TRACE_LITERAL([HAVE_WORKING_VSNPRINTF])
+-m4trace:configure.ac:755: -1- m4_pattern_allow([^HAVE_WORKING_VSNPRINTF$])
+-m4trace:configure.ac:755: -1- AH_OUTPUT([HAVE_WORKING_VSNPRINTF], [/* Define if you have a version of the \'vsnprintf\' function that honours the
++configure.ac:780: the top level])
++m4trace:configure.ac:780: -1- AC_DEFINE_TRACE_LITERAL([HAVE_WORKING_VSNPRINTF])
++m4trace:configure.ac:780: -1- m4_pattern_allow([^HAVE_WORKING_VSNPRINTF$])
++m4trace:configure.ac:780: -1- AH_OUTPUT([HAVE_WORKING_VSNPRINTF], [/* Define if you have a version of the \'vsnprintf\' function that honours the
+    size argument and has a proper return value. */
+ #undef HAVE_WORKING_VSNPRINTF])
+-m4trace:configure.ac:756: -1- AH_OUTPUT([HAVE_VSNPRINTF], [/* Define to 1 if you have the `vsnprintf\' function. */
++m4trace:configure.ac:781: -1- AH_OUTPUT([HAVE_VSNPRINTF], [/* Define to 1 if you have the `vsnprintf\' function. */
+ #undef HAVE_VSNPRINTF])
+-m4trace:configure.ac:759: -1- AH_OUTPUT([HAVE_BIND], [/* Define to 1 if you have the `bind\' function. */
++m4trace:configure.ac:784: -1- AH_OUTPUT([HAVE_BIND], [/* Define to 1 if you have the `bind\' function. */
+ #undef HAVE_BIND])
+-m4trace:configure.ac:759: -1- AH_OUTPUT([HAVE_CONNECT], [/* Define to 1 if you have the `connect\' function. */
++m4trace:configure.ac:784: -1- AH_OUTPUT([HAVE_CONNECT], [/* Define to 1 if you have the `connect\' function. */
+ #undef HAVE_CONNECT])
+-m4trace:configure.ac:759: -1- AH_OUTPUT([HAVE_FILENO], [/* Define to 1 if you have the `fileno\' function. */
++m4trace:configure.ac:784: -1- AH_OUTPUT([HAVE_FILENO], [/* Define to 1 if you have the `fileno\' function. */
+ #undef HAVE_FILENO])
+-m4trace:configure.ac:759: -1- AH_OUTPUT([HAVE_FLOCK], [/* Define to 1 if you have the `flock\' function. */
++m4trace:configure.ac:784: -1- AH_OUTPUT([HAVE_FLOCK], [/* Define to 1 if you have the `flock\' function. */
+ #undef HAVE_FLOCK])
+-m4trace:configure.ac:759: -1- AH_OUTPUT([HAVE_FTIME], [/* Define to 1 if you have the `ftime\' function. */
++m4trace:configure.ac:784: -1- AH_OUTPUT([HAVE_FTIME], [/* Define to 1 if you have the `ftime\' function. */
+ #undef HAVE_FTIME])
+-m4trace:configure.ac:759: -1- AH_OUTPUT([HAVE_GETHOSTBYNAME], [/* Define to 1 if you have the `gethostbyname\' function. */
++m4trace:configure.ac:784: -1- AH_OUTPUT([HAVE_GETHOSTBYNAME], [/* Define to 1 if you have the `gethostbyname\' function. */
+ #undef HAVE_GETHOSTBYNAME])
+-m4trace:configure.ac:759: -1- AH_OUTPUT([HAVE_GETHOSTNAME], [/* Define to 1 if you have the `gethostname\' function. */
++m4trace:configure.ac:784: -1- AH_OUTPUT([HAVE_GETHOSTNAME], [/* Define to 1 if you have the `gethostname\' function. */
+ #undef HAVE_GETHOSTNAME])
+-m4trace:configure.ac:759: -1- AH_OUTPUT([HAVE_GETPWUID], [/* Define to 1 if you have the `getpwuid\' function. */
++m4trace:configure.ac:784: -1- AH_OUTPUT([HAVE_GETPWUID], [/* Define to 1 if you have the `getpwuid\' function. */
+ #undef HAVE_GETPWUID])
+-m4trace:configure.ac:759: -1- AH_OUTPUT([HAVE_INET_ATON], [/* Define to 1 if you have the `inet_aton\' function. */
++m4trace:configure.ac:784: -1- AH_OUTPUT([HAVE_INET_ATON], [/* Define to 1 if you have the `inet_aton\' function. */
+ #undef HAVE_INET_ATON])
+-m4trace:configure.ac:759: -1- AH_OUTPUT([HAVE_SELECT], [/* Define to 1 if you have the `select\' function. */
++m4trace:configure.ac:784: -1- AH_OUTPUT([HAVE_SELECT], [/* Define to 1 if you have the `select\' function. */
+ #undef HAVE_SELECT])
+-m4trace:configure.ac:759: -1- AH_OUTPUT([HAVE_SNOOZE], [/* Define to 1 if you have the `snooze\' function. */
++m4trace:configure.ac:784: -1- AH_OUTPUT([HAVE_SNOOZE], [/* Define to 1 if you have the `snooze\' function. */
+ #undef HAVE_SNOOZE])
+-m4trace:configure.ac:759: -1- AH_OUTPUT([HAVE_STRCASECMP], [/* Define to 1 if you have the `strcasecmp\' function. */
++m4trace:configure.ac:784: -1- AH_OUTPUT([HAVE_STRCASECMP], [/* Define to 1 if you have the `strcasecmp\' function. */
+ #undef HAVE_STRCASECMP])
+-m4trace:configure.ac:759: -1- AH_OUTPUT([HAVE_STRCASESTR], [/* Define to 1 if you have the `strcasestr\' function. */
++m4trace:configure.ac:784: -1- AH_OUTPUT([HAVE_STRCASESTR], [/* Define to 1 if you have the `strcasestr\' function. */
+ #undef HAVE_STRCASESTR])
+-m4trace:configure.ac:759: -1- AH_OUTPUT([HAVE_STRERROR], [/* Define to 1 if you have the `strerror\' function. */
++m4trace:configure.ac:784: -1- AH_OUTPUT([HAVE_STRERROR], [/* Define to 1 if you have the `strerror\' function. */
+ #undef HAVE_STRERROR])
+-m4trace:configure.ac:759: -1- AH_OUTPUT([HAVE_STRLCAT], [/* Define to 1 if you have the `strlcat\' function. */
++m4trace:configure.ac:784: -1- AH_OUTPUT([HAVE_STRLCAT], [/* Define to 1 if you have the `strlcat\' function. */
+ #undef HAVE_STRLCAT])
+-m4trace:configure.ac:759: -1- AH_OUTPUT([HAVE_STRLCPY], [/* Define to 1 if you have the `strlcpy\' function. */
++m4trace:configure.ac:784: -1- AH_OUTPUT([HAVE_STRLCPY], [/* Define to 1 if you have the `strlcpy\' function. */
+ #undef HAVE_STRLCPY])
+-m4trace:configure.ac:759: -1- AH_OUTPUT([HAVE_STRNCASECMP], [/* Define to 1 if you have the `strncasecmp\' function. */
++m4trace:configure.ac:784: -1- AH_OUTPUT([HAVE_STRNCASECMP], [/* Define to 1 if you have the `strncasecmp\' function. */
+ #undef HAVE_STRNCASECMP])
+-m4trace:configure.ac:759: -1- AH_OUTPUT([HAVE_STRSTR], [/* Define to 1 if you have the `strstr\' function. */
++m4trace:configure.ac:784: -1- AH_OUTPUT([HAVE_STRSTR], [/* Define to 1 if you have the `strstr\' function. */
+ #undef HAVE_STRSTR])
+-m4trace:configure.ac:759: -1- AH_OUTPUT([HAVE_UNAME], [/* Define to 1 if you have the `uname\' function. */
++m4trace:configure.ac:784: -1- AH_OUTPUT([HAVE_UNAME], [/* Define to 1 if you have the `uname\' function. */
+ #undef HAVE_UNAME])
+-m4trace:configure.ac:759: -1- AH_OUTPUT([HAVE_USLEEP], [/* Define to 1 if you have the `usleep\' function. */
++m4trace:configure.ac:784: -1- AH_OUTPUT([HAVE_USLEEP], [/* Define to 1 if you have the `usleep\' function. */
+ #undef HAVE_USLEEP])
+-m4trace:configure.ac:759: -1- AH_OUTPUT([HAVE_GETLINE], [/* Define to 1 if you have the `getline\' function. */
++m4trace:configure.ac:784: -1- AH_OUTPUT([HAVE_GETLINE], [/* Define to 1 if you have the `getline\' function. */
+ #undef HAVE_GETLINE])
+-m4trace:configure.ac:765: -2- AC_DEFINE_TRACE_LITERAL([HAVE_GETTIMEOFDAY])
+-m4trace:configure.ac:765: -2- m4_pattern_allow([^HAVE_GETTIMEOFDAY$])
+-m4trace:configure.ac:765: -2- AH_OUTPUT([HAVE_GETTIMEOFDAY], [/* Define if the gettimeofday function works and is sane. */
++m4trace:configure.ac:790: -2- AC_DEFINE_TRACE_LITERAL([HAVE_GETTIMEOFDAY])
++m4trace:configure.ac:790: -2- m4_pattern_allow([^HAVE_GETTIMEOFDAY$])
++m4trace:configure.ac:790: -2- AH_OUTPUT([HAVE_GETTIMEOFDAY], [/* Define if the gettimeofday function works and is sane. */
+ #undef HAVE_GETTIMEOFDAY])
+-m4trace:configure.ac:765: -1- _m4_warn([obsolete], [The macro `AC_TRY_RUN' is obsolete.
++m4trace:configure.ac:790: -1- _m4_warn([obsolete], [The macro `AC_TRY_RUN' is obsolete.
+ You should run autoupdate.], [../../lib/autoconf/general.m4:2592: AC_TRY_RUN is expanded from...
+ m4/gettimeofday.m4:7: FC_CHECK_GETTIMEOFDAY_RUNTIME is expanded from...
+-configure.ac:765: the top level])
+-m4trace:configure.ac:786: -1- AH_OUTPUT([HAVE_FDOPEN], [/* Define to 1 if you have the `fdopen\' function. */
++configure.ac:790: the top level])
++m4trace:configure.ac:811: -1- AH_OUTPUT([HAVE_FDOPEN], [/* Define to 1 if you have the `fdopen\' function. */
+ #undef HAVE_FDOPEN])
+-m4trace:configure.ac:796: -1- AC_DEFINE_TRACE_LITERAL([HAVE_FCNTL])
+-m4trace:configure.ac:796: -1- m4_pattern_allow([^HAVE_FCNTL$])
+-m4trace:configure.ac:796: -1- AH_OUTPUT([HAVE_FCNTL], [/* fcntl support */
++m4trace:configure.ac:821: -1- AC_DEFINE_TRACE_LITERAL([HAVE_FCNTL])
++m4trace:configure.ac:821: -1- m4_pattern_allow([^HAVE_FCNTL$])
++m4trace:configure.ac:821: -1- AH_OUTPUT([HAVE_FCNTL], [/* fcntl support */
+ #undef HAVE_FCNTL])
+-m4trace:configure.ac:796: -1- AC_DEFINE_TRACE_LITERAL([NONBLOCKING_SOCKETS])
+-m4trace:configure.ac:796: -1- m4_pattern_allow([^NONBLOCKING_SOCKETS$])
+-m4trace:configure.ac:796: -1- AH_OUTPUT([NONBLOCKING_SOCKETS], [/* nonblocking sockets support */
++m4trace:configure.ac:821: -1- AC_DEFINE_TRACE_LITERAL([NONBLOCKING_SOCKETS])
++m4trace:configure.ac:821: -1- m4_pattern_allow([^NONBLOCKING_SOCKETS$])
++m4trace:configure.ac:821: -1- AH_OUTPUT([NONBLOCKING_SOCKETS], [/* nonblocking sockets support */
+ #undef NONBLOCKING_SOCKETS])
+-m4trace:configure.ac:796: -1- AC_DEFINE_TRACE_LITERAL([HAVE_IOCTL])
+-m4trace:configure.ac:796: -1- m4_pattern_allow([^HAVE_IOCTL$])
+-m4trace:configure.ac:796: -1- AH_OUTPUT([HAVE_IOCTL], [/* ioctl support */
++m4trace:configure.ac:821: -1- AC_DEFINE_TRACE_LITERAL([HAVE_IOCTL])
++m4trace:configure.ac:821: -1- m4_pattern_allow([^HAVE_IOCTL$])
++m4trace:configure.ac:821: -1- AH_OUTPUT([HAVE_IOCTL], [/* ioctl support */
+ #undef HAVE_IOCTL])
+-m4trace:configure.ac:796: -1- AC_DEFINE_TRACE_LITERAL([NONBLOCKING_SOCKETS])
+-m4trace:configure.ac:796: -1- m4_pattern_allow([^NONBLOCKING_SOCKETS$])
+-m4trace:configure.ac:796: -1- AH_OUTPUT([NONBLOCKING_SOCKETS], [/* nonblocking sockets support */
++m4trace:configure.ac:821: -1- AC_DEFINE_TRACE_LITERAL([NONBLOCKING_SOCKETS])
++m4trace:configure.ac:821: -1- m4_pattern_allow([^NONBLOCKING_SOCKETS$])
++m4trace:configure.ac:821: -1- AH_OUTPUT([NONBLOCKING_SOCKETS], [/* nonblocking sockets support */
+ #undef NONBLOCKING_SOCKETS])
+-m4trace:configure.ac:805: -1- AC_DEFINE_TRACE_LITERAL([HAVE_SIGPIPE])
+-m4trace:configure.ac:805: -1- m4_pattern_allow([^HAVE_SIGPIPE$])
+-m4trace:configure.ac:805: -1- AH_OUTPUT([HAVE_SIGPIPE], [/* sigpipe support */
++m4trace:configure.ac:830: -1- AC_DEFINE_TRACE_LITERAL([HAVE_SIGPIPE])
++m4trace:configure.ac:830: -1- m4_pattern_allow([^HAVE_SIGPIPE$])
++m4trace:configure.ac:830: -1- AH_OUTPUT([HAVE_SIGPIPE], [/* sigpipe support */
+ #undef HAVE_SIGPIPE])
+-m4trace:configure.ac:829: -1- AC_SUBST([GNULIB_MALLOC_POSIX])
+-m4trace:configure.ac:829: -1- AC_SUBST_TRACE([GNULIB_MALLOC_POSIX])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^GNULIB_MALLOC_POSIX$])
+-m4trace:configure.ac:829: -1- AC_SUBST([GNULIB_REALLOC_POSIX])
+-m4trace:configure.ac:829: -1- AC_SUBST_TRACE([GNULIB_REALLOC_POSIX])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^GNULIB_REALLOC_POSIX$])
+-m4trace:configure.ac:829: -1- AC_SUBST([GNULIB_CALLOC_POSIX])
+-m4trace:configure.ac:829: -1- AC_SUBST_TRACE([GNULIB_CALLOC_POSIX])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^GNULIB_CALLOC_POSIX$])
+-m4trace:configure.ac:829: -1- AC_SUBST([GNULIB_GETSUBOPT])
+-m4trace:configure.ac:829: -1- AC_SUBST_TRACE([GNULIB_GETSUBOPT])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^GNULIB_GETSUBOPT$])
+-m4trace:configure.ac:829: -1- AC_SUBST([GNULIB_MKDTEMP])
+-m4trace:configure.ac:829: -1- AC_SUBST_TRACE([GNULIB_MKDTEMP])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^GNULIB_MKDTEMP$])
+-m4trace:configure.ac:829: -1- AC_SUBST([GNULIB_MKSTEMP])
+-m4trace:configure.ac:829: -1- AC_SUBST_TRACE([GNULIB_MKSTEMP])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^GNULIB_MKSTEMP$])
+-m4trace:configure.ac:829: -1- AC_SUBST([GNULIB_PUTENV])
+-m4trace:configure.ac:829: -1- AC_SUBST_TRACE([GNULIB_PUTENV])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^GNULIB_PUTENV$])
+-m4trace:configure.ac:829: -1- AC_SUBST([GNULIB_RPMATCH])
+-m4trace:configure.ac:829: -1- AC_SUBST_TRACE([GNULIB_RPMATCH])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^GNULIB_RPMATCH$])
+-m4trace:configure.ac:829: -1- AC_SUBST([GNULIB_SETENV])
+-m4trace:configure.ac:829: -1- AC_SUBST_TRACE([GNULIB_SETENV])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^GNULIB_SETENV$])
+-m4trace:configure.ac:829: -1- AC_SUBST([GNULIB_STRTOD])
+-m4trace:configure.ac:829: -1- AC_SUBST_TRACE([GNULIB_STRTOD])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^GNULIB_STRTOD$])
+-m4trace:configure.ac:829: -1- AC_SUBST([GNULIB_UNSETENV])
+-m4trace:configure.ac:829: -1- AC_SUBST_TRACE([GNULIB_UNSETENV])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^GNULIB_UNSETENV$])
+-m4trace:configure.ac:829: -1- AC_SUBST([HAVE_CALLOC_POSIX])
+-m4trace:configure.ac:829: -1- AC_SUBST_TRACE([HAVE_CALLOC_POSIX])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^HAVE_CALLOC_POSIX$])
+-m4trace:configure.ac:829: -1- AC_SUBST([HAVE_GETSUBOPT])
+-m4trace:configure.ac:829: -1- AC_SUBST_TRACE([HAVE_GETSUBOPT])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^HAVE_GETSUBOPT$])
+-m4trace:configure.ac:829: -1- AC_SUBST([HAVE_MALLOC_POSIX])
+-m4trace:configure.ac:829: -1- AC_SUBST_TRACE([HAVE_MALLOC_POSIX])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^HAVE_MALLOC_POSIX$])
+-m4trace:configure.ac:829: -1- AC_SUBST([HAVE_MKDTEMP])
+-m4trace:configure.ac:829: -1- AC_SUBST_TRACE([HAVE_MKDTEMP])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^HAVE_MKDTEMP$])
+-m4trace:configure.ac:829: -1- AC_SUBST([HAVE_REALLOC_POSIX])
+-m4trace:configure.ac:829: -1- AC_SUBST_TRACE([HAVE_REALLOC_POSIX])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^HAVE_REALLOC_POSIX$])
+-m4trace:configure.ac:829: -1- AC_SUBST([HAVE_RPMATCH])
+-m4trace:configure.ac:829: -1- AC_SUBST_TRACE([HAVE_RPMATCH])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^HAVE_RPMATCH$])
+-m4trace:configure.ac:829: -1- AC_SUBST([HAVE_SETENV])
+-m4trace:configure.ac:829: -1- AC_SUBST_TRACE([HAVE_SETENV])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^HAVE_SETENV$])
+-m4trace:configure.ac:829: -1- AC_SUBST([HAVE_STRTOD])
+-m4trace:configure.ac:829: -1- AC_SUBST_TRACE([HAVE_STRTOD])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^HAVE_STRTOD$])
+-m4trace:configure.ac:829: -1- AC_SUBST([HAVE_UNSETENV])
+-m4trace:configure.ac:829: -1- AC_SUBST_TRACE([HAVE_UNSETENV])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^HAVE_UNSETENV$])
+-m4trace:configure.ac:829: -1- AC_SUBST([REPLACE_MKSTEMP])
+-m4trace:configure.ac:829: -1- AC_SUBST_TRACE([REPLACE_MKSTEMP])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^REPLACE_MKSTEMP$])
+-m4trace:configure.ac:829: -1- AC_SUBST([REPLACE_PUTENV])
+-m4trace:configure.ac:829: -1- AC_SUBST_TRACE([REPLACE_PUTENV])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^REPLACE_PUTENV$])
+-m4trace:configure.ac:829: -1- AC_SUBST([REPLACE_STRTOD])
+-m4trace:configure.ac:829: -1- AC_SUBST_TRACE([REPLACE_STRTOD])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^REPLACE_STRTOD$])
+-m4trace:configure.ac:829: -1- AC_SUBST([VOID_UNSETENV])
+-m4trace:configure.ac:829: -1- AC_SUBST_TRACE([VOID_UNSETENV])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^VOID_UNSETENV$])
+-m4trace:configure.ac:829: -1- AC_DEFINE_TRACE_LITERAL([_FILE_OFFSET_BITS])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^_FILE_OFFSET_BITS$])
+-m4trace:configure.ac:829: -1- AH_OUTPUT([_FILE_OFFSET_BITS], [/* Number of bits in a file offset, on hosts where this is settable. */
++m4trace:configure.ac:854: -1- AC_SUBST([GNULIB_MALLOC_POSIX])
++m4trace:configure.ac:854: -1- AC_SUBST_TRACE([GNULIB_MALLOC_POSIX])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^GNULIB_MALLOC_POSIX$])
++m4trace:configure.ac:854: -1- AC_SUBST([GNULIB_REALLOC_POSIX])
++m4trace:configure.ac:854: -1- AC_SUBST_TRACE([GNULIB_REALLOC_POSIX])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^GNULIB_REALLOC_POSIX$])
++m4trace:configure.ac:854: -1- AC_SUBST([GNULIB_CALLOC_POSIX])
++m4trace:configure.ac:854: -1- AC_SUBST_TRACE([GNULIB_CALLOC_POSIX])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^GNULIB_CALLOC_POSIX$])
++m4trace:configure.ac:854: -1- AC_SUBST([GNULIB_GETSUBOPT])
++m4trace:configure.ac:854: -1- AC_SUBST_TRACE([GNULIB_GETSUBOPT])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^GNULIB_GETSUBOPT$])
++m4trace:configure.ac:854: -1- AC_SUBST([GNULIB_MKDTEMP])
++m4trace:configure.ac:854: -1- AC_SUBST_TRACE([GNULIB_MKDTEMP])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^GNULIB_MKDTEMP$])
++m4trace:configure.ac:854: -1- AC_SUBST([GNULIB_MKSTEMP])
++m4trace:configure.ac:854: -1- AC_SUBST_TRACE([GNULIB_MKSTEMP])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^GNULIB_MKSTEMP$])
++m4trace:configure.ac:854: -1- AC_SUBST([GNULIB_PUTENV])
++m4trace:configure.ac:854: -1- AC_SUBST_TRACE([GNULIB_PUTENV])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^GNULIB_PUTENV$])
++m4trace:configure.ac:854: -1- AC_SUBST([GNULIB_RPMATCH])
++m4trace:configure.ac:854: -1- AC_SUBST_TRACE([GNULIB_RPMATCH])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^GNULIB_RPMATCH$])
++m4trace:configure.ac:854: -1- AC_SUBST([GNULIB_SETENV])
++m4trace:configure.ac:854: -1- AC_SUBST_TRACE([GNULIB_SETENV])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^GNULIB_SETENV$])
++m4trace:configure.ac:854: -1- AC_SUBST([GNULIB_STRTOD])
++m4trace:configure.ac:854: -1- AC_SUBST_TRACE([GNULIB_STRTOD])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^GNULIB_STRTOD$])
++m4trace:configure.ac:854: -1- AC_SUBST([GNULIB_UNSETENV])
++m4trace:configure.ac:854: -1- AC_SUBST_TRACE([GNULIB_UNSETENV])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^GNULIB_UNSETENV$])
++m4trace:configure.ac:854: -1- AC_SUBST([HAVE_CALLOC_POSIX])
++m4trace:configure.ac:854: -1- AC_SUBST_TRACE([HAVE_CALLOC_POSIX])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^HAVE_CALLOC_POSIX$])
++m4trace:configure.ac:854: -1- AC_SUBST([HAVE_GETSUBOPT])
++m4trace:configure.ac:854: -1- AC_SUBST_TRACE([HAVE_GETSUBOPT])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^HAVE_GETSUBOPT$])
++m4trace:configure.ac:854: -1- AC_SUBST([HAVE_MALLOC_POSIX])
++m4trace:configure.ac:854: -1- AC_SUBST_TRACE([HAVE_MALLOC_POSIX])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^HAVE_MALLOC_POSIX$])
++m4trace:configure.ac:854: -1- AC_SUBST([HAVE_MKDTEMP])
++m4trace:configure.ac:854: -1- AC_SUBST_TRACE([HAVE_MKDTEMP])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^HAVE_MKDTEMP$])
++m4trace:configure.ac:854: -1- AC_SUBST([HAVE_REALLOC_POSIX])
++m4trace:configure.ac:854: -1- AC_SUBST_TRACE([HAVE_REALLOC_POSIX])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^HAVE_REALLOC_POSIX$])
++m4trace:configure.ac:854: -1- AC_SUBST([HAVE_RPMATCH])
++m4trace:configure.ac:854: -1- AC_SUBST_TRACE([HAVE_RPMATCH])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^HAVE_RPMATCH$])
++m4trace:configure.ac:854: -1- AC_SUBST([HAVE_SETENV])
++m4trace:configure.ac:854: -1- AC_SUBST_TRACE([HAVE_SETENV])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^HAVE_SETENV$])
++m4trace:configure.ac:854: -1- AC_SUBST([HAVE_STRTOD])
++m4trace:configure.ac:854: -1- AC_SUBST_TRACE([HAVE_STRTOD])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^HAVE_STRTOD$])
++m4trace:configure.ac:854: -1- AC_SUBST([HAVE_UNSETENV])
++m4trace:configure.ac:854: -1- AC_SUBST_TRACE([HAVE_UNSETENV])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^HAVE_UNSETENV$])
++m4trace:configure.ac:854: -1- AC_SUBST([REPLACE_MKSTEMP])
++m4trace:configure.ac:854: -1- AC_SUBST_TRACE([REPLACE_MKSTEMP])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^REPLACE_MKSTEMP$])
++m4trace:configure.ac:854: -1- AC_SUBST([REPLACE_PUTENV])
++m4trace:configure.ac:854: -1- AC_SUBST_TRACE([REPLACE_PUTENV])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^REPLACE_PUTENV$])
++m4trace:configure.ac:854: -1- AC_SUBST([REPLACE_STRTOD])
++m4trace:configure.ac:854: -1- AC_SUBST_TRACE([REPLACE_STRTOD])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^REPLACE_STRTOD$])
++m4trace:configure.ac:854: -1- AC_SUBST([VOID_UNSETENV])
++m4trace:configure.ac:854: -1- AC_SUBST_TRACE([VOID_UNSETENV])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^VOID_UNSETENV$])
++m4trace:configure.ac:854: -1- AC_DEFINE_TRACE_LITERAL([_FILE_OFFSET_BITS])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^_FILE_OFFSET_BITS$])
++m4trace:configure.ac:854: -1- AH_OUTPUT([_FILE_OFFSET_BITS], [/* Number of bits in a file offset, on hosts where this is settable. */
+ #undef _FILE_OFFSET_BITS])
+-m4trace:configure.ac:829: -1- AC_DEFINE_TRACE_LITERAL([_LARGE_FILES])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^_LARGE_FILES$])
+-m4trace:configure.ac:829: -1- AH_OUTPUT([_LARGE_FILES], [/* Define for large files, on AIX-style hosts. */
++m4trace:configure.ac:854: -1- AC_DEFINE_TRACE_LITERAL([_LARGE_FILES])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^_LARGE_FILES$])
++m4trace:configure.ac:854: -1- AH_OUTPUT([_LARGE_FILES], [/* Define for large files, on AIX-style hosts. */
+ #undef _LARGE_FILES])
+-m4trace:configure.ac:829: -1- AC_LIBSOURCE([mkstemp.c])
+-m4trace:configure.ac:829: -1- AC_SUBST([LIB@&t@OBJS], ["$LIB@&t@OBJS mkstemp.$ac_objext"])
+-m4trace:configure.ac:829: -1- AC_SUBST_TRACE([LIB@&t@OBJS])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^LIB@&t@OBJS$])
+-m4trace:configure.ac:831: -1- AC_DEFINE_TRACE_LITERAL([HAVE_MKSTEMP])
+-m4trace:configure.ac:831: -1- m4_pattern_allow([^HAVE_MKSTEMP$])
+-m4trace:configure.ac:831: -1- AH_OUTPUT([HAVE_MKSTEMP], [/* Have working mkstemp */
++m4trace:configure.ac:854: -1- AC_LIBSOURCE([mkstemp.c])
++m4trace:configure.ac:854: -1- AC_SUBST([LIB@&t@OBJS], ["$LIB@&t@OBJS mkstemp.$ac_objext"])
++m4trace:configure.ac:854: -1- AC_SUBST_TRACE([LIB@&t@OBJS])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^LIB@&t@OBJS$])
++m4trace:configure.ac:856: -1- AC_DEFINE_TRACE_LITERAL([HAVE_MKSTEMP])
++m4trace:configure.ac:856: -1- m4_pattern_allow([^HAVE_MKSTEMP$])
++m4trace:configure.ac:856: -1- AH_OUTPUT([HAVE_MKSTEMP], [/* Have working mkstemp */
+ #undef HAVE_MKSTEMP])
+-m4trace:configure.ac:833: -1- AH_OUTPUT([HAVE_ISATTY], [/* Define to 1 if you have the `isatty\' function. */
++m4trace:configure.ac:858: -1- AH_OUTPUT([HAVE_ISATTY], [/* Define to 1 if you have the `isatty\' function. */
+ #undef HAVE_ISATTY])
+-m4trace:configure.ac:833: -1- AH_OUTPUT([HAVE_POPEN], [/* Define to 1 if you have the `popen\' function. */
++m4trace:configure.ac:858: -1- AH_OUTPUT([HAVE_POPEN], [/* Define to 1 if you have the `popen\' function. */
+ #undef HAVE_POPEN])
+-m4trace:configure.ac:833: -1- AH_OUTPUT([HAVE__LONGJMP], [/* Define to 1 if you have the `_longjmp\' function. */
++m4trace:configure.ac:858: -1- AH_OUTPUT([HAVE__LONGJMP], [/* Define to 1 if you have the `_longjmp\' function. */
+ #undef HAVE__LONGJMP])
+-m4trace:configure.ac:841: -1- AC_SUBST([LUA_CFLAGS])
+-m4trace:configure.ac:841: -1- AC_SUBST_TRACE([LUA_CFLAGS])
+-m4trace:configure.ac:841: -1- m4_pattern_allow([^LUA_CFLAGS$])
+-m4trace:configure.ac:842: -1- AC_SUBST([LUA_LIBS])
+-m4trace:configure.ac:842: -1- AC_SUBST_TRACE([LUA_LIBS])
+-m4trace:configure.ac:842: -1- m4_pattern_allow([^LUA_LIBS$])
+-m4trace:configure.ac:843: -1- AC_SUBST([LUA_AS_DEPENDENCY])
+-m4trace:configure.ac:843: -1- AC_SUBST_TRACE([LUA_AS_DEPENDENCY])
+-m4trace:configure.ac:843: -1- m4_pattern_allow([^LUA_AS_DEPENDENCY$])
+-m4trace:configure.ac:849: -1- AC_SUBST([TOLUA_CFLAGS])
+-m4trace:configure.ac:849: -1- AC_SUBST_TRACE([TOLUA_CFLAGS])
+-m4trace:configure.ac:849: -1- m4_pattern_allow([^TOLUA_CFLAGS$])
+-m4trace:configure.ac:850: -1- AC_SUBST([TOLUA_LIBS])
+-m4trace:configure.ac:850: -1- AC_SUBST_TRACE([TOLUA_LIBS])
+-m4trace:configure.ac:850: -1- m4_pattern_allow([^TOLUA_LIBS$])
+-m4trace:configure.ac:851: -1- AC_SUBST([TOLUA_AS_DEPENDENCY])
+-m4trace:configure.ac:851: -1- AC_SUBST_TRACE([TOLUA_AS_DEPENDENCY])
+-m4trace:configure.ac:851: -1- m4_pattern_allow([^TOLUA_AS_DEPENDENCY$])
+-m4trace:configure.ac:854: -1- AC_SUBST([TOLUA])
+-m4trace:configure.ac:854: -1- AC_SUBST_TRACE([TOLUA])
+-m4trace:configure.ac:854: -1- m4_pattern_allow([^TOLUA$])
+-m4trace:configure.ac:926: -1- AC_SUBST([CONFIGURE_DEPENDENCIES], ["$CONFIGURE_DEPENDENCIES \$(top_srcdir)/version.in"])
+-m4trace:configure.ac:926: -1- AC_SUBST_TRACE([CONFIGURE_DEPENDENCIES])
+-m4trace:configure.ac:926: -1- m4_pattern_allow([^CONFIGURE_DEPENDENCIES$])
+-m4trace:configure.ac:934: -1- AC_DEFINE_TRACE_LITERAL([FC_STORE_CPPFLAGS])
+-m4trace:configure.ac:934: -1- m4_pattern_allow([^FC_STORE_CPPFLAGS$])
+-m4trace:configure.ac:934: -1- AH_OUTPUT([FC_STORE_CPPFLAGS], [/* These are the CPPFLAGS used in compilation */
++m4trace:configure.ac:866: -1- AC_SUBST([LUA_CFLAGS])
++m4trace:configure.ac:866: -1- AC_SUBST_TRACE([LUA_CFLAGS])
++m4trace:configure.ac:866: -1- m4_pattern_allow([^LUA_CFLAGS$])
++m4trace:configure.ac:867: -1- AC_SUBST([LUA_LIBS])
++m4trace:configure.ac:867: -1- AC_SUBST_TRACE([LUA_LIBS])
++m4trace:configure.ac:867: -1- m4_pattern_allow([^LUA_LIBS$])
++m4trace:configure.ac:868: -1- AC_SUBST([LUA_AS_DEPENDENCY])
++m4trace:configure.ac:868: -1- AC_SUBST_TRACE([LUA_AS_DEPENDENCY])
++m4trace:configure.ac:868: -1- m4_pattern_allow([^LUA_AS_DEPENDENCY$])
++m4trace:configure.ac:874: -1- AC_SUBST([TOLUA_CFLAGS])
++m4trace:configure.ac:874: -1- AC_SUBST_TRACE([TOLUA_CFLAGS])
++m4trace:configure.ac:874: -1- m4_pattern_allow([^TOLUA_CFLAGS$])
++m4trace:configure.ac:875: -1- AC_SUBST([TOLUA_LIBS])
++m4trace:configure.ac:875: -1- AC_SUBST_TRACE([TOLUA_LIBS])
++m4trace:configure.ac:875: -1- m4_pattern_allow([^TOLUA_LIBS$])
++m4trace:configure.ac:876: -1- AC_SUBST([TOLUA_AS_DEPENDENCY])
++m4trace:configure.ac:876: -1- AC_SUBST_TRACE([TOLUA_AS_DEPENDENCY])
++m4trace:configure.ac:876: -1- m4_pattern_allow([^TOLUA_AS_DEPENDENCY$])
++m4trace:configure.ac:879: -1- AC_SUBST([TOLUA])
++m4trace:configure.ac:879: -1- AC_SUBST_TRACE([TOLUA])
++m4trace:configure.ac:879: -1- m4_pattern_allow([^TOLUA$])
++m4trace:configure.ac:951: -1- AC_SUBST([CONFIGURE_DEPENDENCIES], ["$CONFIGURE_DEPENDENCIES \$(top_srcdir)/version.in"])
++m4trace:configure.ac:951: -1- AC_SUBST_TRACE([CONFIGURE_DEPENDENCIES])
++m4trace:configure.ac:951: -1- m4_pattern_allow([^CONFIGURE_DEPENDENCIES$])
++m4trace:configure.ac:959: -1- AC_DEFINE_TRACE_LITERAL([FC_STORE_CPPFLAGS])
++m4trace:configure.ac:959: -1- m4_pattern_allow([^FC_STORE_CPPFLAGS$])
++m4trace:configure.ac:959: -1- AH_OUTPUT([FC_STORE_CPPFLAGS], [/* These are the CPPFLAGS used in compilation */
+ #undef FC_STORE_CPPFLAGS])
+-m4trace:configure.ac:936: -1- AC_DEFINE_TRACE_LITERAL([FC_STORE_CFLAGS])
+-m4trace:configure.ac:936: -1- m4_pattern_allow([^FC_STORE_CFLAGS$])
+-m4trace:configure.ac:936: -1- AH_OUTPUT([FC_STORE_CFLAGS], [/* These are the CFLAGS used in compilation */
++m4trace:configure.ac:961: -1- AC_DEFINE_TRACE_LITERAL([FC_STORE_CFLAGS])
++m4trace:configure.ac:961: -1- m4_pattern_allow([^FC_STORE_CFLAGS$])
++m4trace:configure.ac:961: -1- AH_OUTPUT([FC_STORE_CFLAGS], [/* These are the CFLAGS used in compilation */
+ #undef FC_STORE_CFLAGS])
+-m4trace:configure.ac:938: -1- AC_DEFINE_TRACE_LITERAL([FC_STORE_CXXFLAGS])
+-m4trace:configure.ac:938: -1- m4_pattern_allow([^FC_STORE_CXXFLAGS$])
+-m4trace:configure.ac:938: -1- AH_OUTPUT([FC_STORE_CXXFLAGS], [/* These are the CXXFLAGS used in compilation */
++m4trace:configure.ac:963: -1- AC_DEFINE_TRACE_LITERAL([FC_STORE_CXXFLAGS])
++m4trace:configure.ac:963: -1- m4_pattern_allow([^FC_STORE_CXXFLAGS$])
++m4trace:configure.ac:963: -1- AH_OUTPUT([FC_STORE_CXXFLAGS], [/* These are the CXXFLAGS used in compilation */
+ #undef FC_STORE_CXXFLAGS])
+-m4trace:configure.ac:941: -1- AC_CONFIG_FILES([Makefile
++m4trace:configure.ac:966: -1- AC_CONFIG_FILES([Makefile
+           data/Makefile
+ 	  data/civclient.dsc
+ 	  data/civserver.dsc
+@@ -3234,23 +3234,23 @@
+ 	  data/Freeciv
+ 	  client/freeciv.desktop:bootstrap/freeciv.desktop.in
+ 	  server/freeciv-server.desktop:bootstrap/freeciv-server.desktop.in])
+-m4trace:configure.ac:1028: -1- AC_CONFIG_FILES([civ:bootstrap/civ.in], [chmod +x civ])
+-m4trace:configure.ac:1029: -1- AC_CONFIG_FILES([ser:bootstrap/ser.in], [chmod +x ser])
+-m4trace:configure.ac:1062: -1- AC_SUBST([LIB@&t@OBJS], [$ac_libobjs])
+-m4trace:configure.ac:1062: -1- AC_SUBST_TRACE([LIB@&t@OBJS])
+-m4trace:configure.ac:1062: -1- m4_pattern_allow([^LIB@&t@OBJS$])
+-m4trace:configure.ac:1062: -1- AC_SUBST([LTLIBOBJS], [$ac_ltlibobjs])
+-m4trace:configure.ac:1062: -1- AC_SUBST_TRACE([LTLIBOBJS])
+-m4trace:configure.ac:1062: -1- m4_pattern_allow([^LTLIBOBJS$])
+-m4trace:configure.ac:1062: -1- AC_SUBST_TRACE([top_builddir])
+-m4trace:configure.ac:1062: -1- AC_SUBST_TRACE([top_build_prefix])
+-m4trace:configure.ac:1062: -1- AC_SUBST_TRACE([srcdir])
+-m4trace:configure.ac:1062: -1- AC_SUBST_TRACE([abs_srcdir])
+-m4trace:configure.ac:1062: -1- AC_SUBST_TRACE([top_srcdir])
+-m4trace:configure.ac:1062: -1- AC_SUBST_TRACE([abs_top_srcdir])
+-m4trace:configure.ac:1062: -1- AC_SUBST_TRACE([builddir])
+-m4trace:configure.ac:1062: -1- AC_SUBST_TRACE([abs_builddir])
+-m4trace:configure.ac:1062: -1- AC_SUBST_TRACE([abs_top_builddir])
+-m4trace:configure.ac:1062: -1- AC_SUBST_TRACE([INSTALL])
+-m4trace:configure.ac:1062: -1- AC_SUBST_TRACE([MKDIR_P])
+-m4trace:configure.ac:1062: -1- AC_REQUIRE_AUX_FILE([ltmain.sh])
++m4trace:configure.ac:1053: -1- AC_CONFIG_FILES([civ:bootstrap/civ.in], [chmod +x civ])
++m4trace:configure.ac:1054: -1- AC_CONFIG_FILES([ser:bootstrap/ser.in], [chmod +x ser])
++m4trace:configure.ac:1087: -1- AC_SUBST([LIB@&t@OBJS], [$ac_libobjs])
++m4trace:configure.ac:1087: -1- AC_SUBST_TRACE([LIB@&t@OBJS])
++m4trace:configure.ac:1087: -1- m4_pattern_allow([^LIB@&t@OBJS$])
++m4trace:configure.ac:1087: -1- AC_SUBST([LTLIBOBJS], [$ac_ltlibobjs])
++m4trace:configure.ac:1087: -1- AC_SUBST_TRACE([LTLIBOBJS])
++m4trace:configure.ac:1087: -1- m4_pattern_allow([^LTLIBOBJS$])
++m4trace:configure.ac:1087: -1- AC_SUBST_TRACE([top_builddir])
++m4trace:configure.ac:1087: -1- AC_SUBST_TRACE([top_build_prefix])
++m4trace:configure.ac:1087: -1- AC_SUBST_TRACE([srcdir])
++m4trace:configure.ac:1087: -1- AC_SUBST_TRACE([abs_srcdir])
++m4trace:configure.ac:1087: -1- AC_SUBST_TRACE([top_srcdir])
++m4trace:configure.ac:1087: -1- AC_SUBST_TRACE([abs_top_srcdir])
++m4trace:configure.ac:1087: -1- AC_SUBST_TRACE([builddir])
++m4trace:configure.ac:1087: -1- AC_SUBST_TRACE([abs_builddir])
++m4trace:configure.ac:1087: -1- AC_SUBST_TRACE([abs_top_builddir])
++m4trace:configure.ac:1087: -1- AC_SUBST_TRACE([INSTALL])
++m4trace:configure.ac:1087: -1- AC_SUBST_TRACE([MKDIR_P])
++m4trace:configure.ac:1087: -1- AC_REQUIRE_AUX_FILE([ltmain.sh])
+Index: autom4te.cache/output.2
+===================================================================
+--- autom4te.cache/output.2	(revisjon 57)
++++ autom4te.cache/output.2	(arbeidskopi)
+@@ -36207,7 +36207,37 @@
+ fi
+ 
+ 
++    { $as_echo "$as_me:$LINENO: checking for libcurl 7.11.0 or later" >&5
++$as_echo_n "checking for libcurl 7.11.0 or later... " >&6; }
++    set x `curl-config --version 2>&1`
++    shift
++    case "$1" in [0-9]*) ;; *) shift;; esac
++    jigdo_curlver="$1"
++    { $as_echo "$as_me:$LINENO: result: $jigdo_curlver" >&5
++$as_echo "$jigdo_curlver" >&6; }
++    case "$jigdo_curlver" in
++        [1-9][0-9].*|[8-9].*|7.1[1-9]*|7.[2-9][0-9]*)
++            CFLAGS="$CFLAGS `curl-config --cflags 2>/dev/null`"
++            SERVER_LIBS="$SERVER_LIBS `curl-config --libs 2>/dev/null`"
++            if test -n "$jigdo_libcurl"; then CURLLIBS="$jigdo_libcurl"; fi
++            ;;
++        *)
++        { $as_echo "$as_me:$LINENO: result:    * libcurl not installed, or the installed version" >&5
++$as_echo "   * libcurl not installed, or the installed version" >&6; }
++        { $as_echo "$as_me:$LINENO: result:    * is too old, or curl-config is not in \$PATH." >&5
++$as_echo "   * is too old, or curl-config is not in \$PATH." >&6; }
++        { $as_echo "$as_me:$LINENO: result:    * Please install libcurl 7.11.0 or later, it is" >&5
++$as_echo "   * Please install libcurl 7.11.0 or later, it is" >&6; }
++        { $as_echo "$as_me:$LINENO: result:    * needed by the jigdo GUI application." >&5
++$as_echo "   * needed by the jigdo GUI application." >&6; }
++        installDevel "libcurl2" "libcurl2"
++    esac
+ 
++
++
++
++
++
+ { $as_echo "$as_me:$LINENO: checking for main in -lnls" >&5
+ $as_echo_n "checking for main in -lnls... " >&6; }
+ if test "${ac_cv_lib_nls_main+set}" = set; then
+Index: autom4te.cache/traces.2
+===================================================================
+--- autom4te.cache/traces.2	(revisjon 30)
++++ autom4te.cache/traces.2	(arbeidskopi)
+@@ -7776,95 +7776,95 @@
+ m4/readline.m4:60: FC_HAS_READLINE is expanded from...
+ configure.ac:704: the top level])
+ m4trace:configure.ac:704: -1- m4_pattern_allow([^HAVE_LIBREADLINE$])
+-m4trace:configure.ac:712: -1- m4_pattern_allow([^SERVER_LIBS$])
+-m4trace:configure.ac:714: -1- m4_pattern_allow([^HAVE_LIBNLS$])
+-m4trace:configure.ac:717: -1- m4_pattern_allow([^STDC_HEADERS$])
+-m4trace:configure.ac:718: -1- m4_pattern_allow([^HAVE_SYS_WAIT_H$])
+-m4trace:configure.ac:721: -1- m4_pattern_allow([^HAVE__BOOL$])
+-m4trace:configure.ac:721: -1- m4_pattern_allow([^HAVE_STDBOOL_H$])
+-m4trace:configure.ac:739: -1- m4_pattern_allow([^const$])
+-m4trace:configure.ac:740: -1- m4_pattern_allow([^TIME_WITH_SYS_TIME$])
+-m4trace:configure.ac:741: -1- m4_pattern_allow([^TM_IN_SYS_TIME$])
+-m4trace:configure.ac:742: -1- m4_pattern_allow([^HAVE_SOCKLEN_T$])
+-m4trace:configure.ac:748: -1- _m4_warn([obsolete], [The macro `AC_TYPE_SIGNAL' is obsolete.
++m4trace:configure.ac:737: -1- m4_pattern_allow([^SERVER_LIBS$])
++m4trace:configure.ac:739: -1- m4_pattern_allow([^HAVE_LIBNLS$])
++m4trace:configure.ac:742: -1- m4_pattern_allow([^STDC_HEADERS$])
++m4trace:configure.ac:743: -1- m4_pattern_allow([^HAVE_SYS_WAIT_H$])
++m4trace:configure.ac:746: -1- m4_pattern_allow([^HAVE__BOOL$])
++m4trace:configure.ac:746: -1- m4_pattern_allow([^HAVE_STDBOOL_H$])
++m4trace:configure.ac:764: -1- m4_pattern_allow([^const$])
++m4trace:configure.ac:765: -1- m4_pattern_allow([^TIME_WITH_SYS_TIME$])
++m4trace:configure.ac:766: -1- m4_pattern_allow([^TM_IN_SYS_TIME$])
++m4trace:configure.ac:767: -1- m4_pattern_allow([^HAVE_SOCKLEN_T$])
++m4trace:configure.ac:773: -1- _m4_warn([obsolete], [The macro `AC_TYPE_SIGNAL' is obsolete.
+ You should run autoupdate.], [../../lib/autoconf/types.m4:699: AC_TYPE_SIGNAL is expanded from...
+-configure.ac:748: the top level])
+-m4trace:configure.ac:748: -1- m4_pattern_allow([^RETSIGTYPE$])
+-m4trace:configure.ac:749: -1- m4_pattern_allow([^pid_t$])
+-m4trace:configure.ac:749: -1- m4_pattern_allow([^HAVE_WORKING_VFORK$])
+-m4trace:configure.ac:749: -1- m4_pattern_allow([^vfork$])
+-m4trace:configure.ac:749: -1- m4_pattern_allow([^HAVE_WORKING_FORK$])
+-m4trace:configure.ac:750: -1- m4_pattern_allow([^HAVE_STRCOLL$])
+-m4trace:configure.ac:751: -1- m4_pattern_allow([^HAVE_DOPRNT$])
+-m4trace:configure.ac:755: -1- AC_FUNC_VSNPRINTF
+-m4trace:configure.ac:755: -1- _m4_warn([obsolete], [The macro `AC_TRY_RUN' is obsolete.
++configure.ac:773: the top level])
++m4trace:configure.ac:773: -1- m4_pattern_allow([^RETSIGTYPE$])
++m4trace:configure.ac:774: -1- m4_pattern_allow([^pid_t$])
++m4trace:configure.ac:774: -1- m4_pattern_allow([^HAVE_WORKING_VFORK$])
++m4trace:configure.ac:774: -1- m4_pattern_allow([^vfork$])
++m4trace:configure.ac:774: -1- m4_pattern_allow([^HAVE_WORKING_FORK$])
++m4trace:configure.ac:775: -1- m4_pattern_allow([^HAVE_STRCOLL$])
++m4trace:configure.ac:776: -1- m4_pattern_allow([^HAVE_DOPRNT$])
++m4trace:configure.ac:780: -1- AC_FUNC_VSNPRINTF
++m4trace:configure.ac:780: -1- _m4_warn([obsolete], [The macro `AC_TRY_RUN' is obsolete.
+ You should run autoupdate.], [../../lib/autoconf/general.m4:2592: AC_TRY_RUN is expanded from...
+ ../../lib/m4sugar/m4sh.m4:505: AS_IF is expanded from...
+ ../../lib/autoconf/general.m4:1974: AC_CACHE_VAL is expanded from...
+ ../../lib/autoconf/general.m4:1994: AC_CACHE_CHECK is expanded from...
+ m4/vsnprintf.m4:12: AC_FUNC_VSNPRINTF is expanded from...
+-configure.ac:755: the top level])
+-m4trace:configure.ac:755: -1- m4_pattern_allow([^HAVE_WORKING_VSNPRINTF$])
+-m4trace:configure.ac:765: -2- m4_pattern_allow([^HAVE_GETTIMEOFDAY$])
+-m4trace:configure.ac:765: -1- FC_CHECK_GETTIMEOFDAY_RUNTIME([], [
++configure.ac:780: the top level])
++m4trace:configure.ac:780: -1- m4_pattern_allow([^HAVE_WORKING_VSNPRINTF$])
++m4trace:configure.ac:790: -2- m4_pattern_allow([^HAVE_GETTIMEOFDAY$])
++m4trace:configure.ac:790: -1- FC_CHECK_GETTIMEOFDAY_RUNTIME([], [
+ cat >>confdefs.h <<\_ACEOF
+ @%:@define HAVE_GETTIMEOFDAY 1
+ _ACEOF
+ ], [])
+-m4trace:configure.ac:765: -1- _m4_warn([obsolete], [The macro `AC_TRY_RUN' is obsolete.
++m4trace:configure.ac:790: -1- _m4_warn([obsolete], [The macro `AC_TRY_RUN' is obsolete.
+ You should run autoupdate.], [../../lib/autoconf/general.m4:2592: AC_TRY_RUN is expanded from...
+ m4/gettimeofday.m4:7: FC_CHECK_GETTIMEOFDAY_RUNTIME is expanded from...
+-configure.ac:765: the top level])
+-m4trace:configure.ac:796: -1- m4_pattern_allow([^HAVE_FCNTL$])
+-m4trace:configure.ac:796: -1- m4_pattern_allow([^NONBLOCKING_SOCKETS$])
+-m4trace:configure.ac:796: -1- m4_pattern_allow([^HAVE_IOCTL$])
+-m4trace:configure.ac:796: -1- m4_pattern_allow([^NONBLOCKING_SOCKETS$])
+-m4trace:configure.ac:805: -1- m4_pattern_allow([^HAVE_SIGPIPE$])
+-m4trace:configure.ac:809: -1- FC_EXPAND_DIR([FREECIV_DATADIR], ["$datadir/freeciv"])
+-m4trace:configure.ac:829: -1- gl_FUNC_MKSTEMP
+-m4trace:configure.ac:829: -1- gl_STDLIB_H_DEFAULTS
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^GNULIB_MALLOC_POSIX$])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^GNULIB_REALLOC_POSIX$])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^GNULIB_CALLOC_POSIX$])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^GNULIB_GETSUBOPT$])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^GNULIB_MKDTEMP$])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^GNULIB_MKSTEMP$])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^GNULIB_PUTENV$])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^GNULIB_RPMATCH$])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^GNULIB_SETENV$])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^GNULIB_STRTOD$])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^GNULIB_UNSETENV$])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^HAVE_CALLOC_POSIX$])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^HAVE_GETSUBOPT$])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^HAVE_MALLOC_POSIX$])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^HAVE_MKDTEMP$])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^HAVE_REALLOC_POSIX$])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^HAVE_RPMATCH$])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^HAVE_SETENV$])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^HAVE_STRTOD$])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^HAVE_UNSETENV$])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^REPLACE_MKSTEMP$])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^REPLACE_PUTENV$])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^REPLACE_STRTOD$])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^VOID_UNSETENV$])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^_FILE_OFFSET_BITS$])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^_LARGE_FILES$])
+-m4trace:configure.ac:829: -1- m4_pattern_allow([^LIB@&t@OBJS$])
+-m4trace:configure.ac:829: -1- gl_PREREQ_MKSTEMP
+-m4trace:configure.ac:831: -1- m4_pattern_allow([^HAVE_MKSTEMP$])
+-m4trace:configure.ac:841: -1- m4_pattern_allow([^LUA_CFLAGS$])
+-m4trace:configure.ac:842: -1- m4_pattern_allow([^LUA_LIBS$])
+-m4trace:configure.ac:843: -1- m4_pattern_allow([^LUA_AS_DEPENDENCY$])
+-m4trace:configure.ac:849: -1- m4_pattern_allow([^TOLUA_CFLAGS$])
+-m4trace:configure.ac:850: -1- m4_pattern_allow([^TOLUA_LIBS$])
+-m4trace:configure.ac:851: -1- m4_pattern_allow([^TOLUA_AS_DEPENDENCY$])
+-m4trace:configure.ac:854: -1- m4_pattern_allow([^TOLUA$])
+-m4trace:configure.ac:926: -1- m4_pattern_allow([^CONFIGURE_DEPENDENCIES$])
+-m4trace:configure.ac:934: -1- m4_pattern_allow([^FC_STORE_CPPFLAGS$])
+-m4trace:configure.ac:936: -1- m4_pattern_allow([^FC_STORE_CFLAGS$])
+-m4trace:configure.ac:938: -1- m4_pattern_allow([^FC_STORE_CXXFLAGS$])
+-m4trace:configure.ac:1062: -1- m4_pattern_allow([^LIB@&t@OBJS$])
+-m4trace:configure.ac:1062: -1- m4_pattern_allow([^LTLIBOBJS$])
+-m4trace:configure.ac:1062: -1- _AC_AM_CONFIG_HEADER_HOOK(["$ac_file"])
+-m4trace:configure.ac:1062: -1- _AM_OUTPUT_DEPENDENCY_COMMANDS
+-m4trace:configure.ac:1062: -1- _LT_PROG_LTMAIN
++configure.ac:790: the top level])
++m4trace:configure.ac:821: -1- m4_pattern_allow([^HAVE_FCNTL$])
++m4trace:configure.ac:821: -1- m4_pattern_allow([^NONBLOCKING_SOCKETS$])
++m4trace:configure.ac:821: -1- m4_pattern_allow([^HAVE_IOCTL$])
++m4trace:configure.ac:821: -1- m4_pattern_allow([^NONBLOCKING_SOCKETS$])
++m4trace:configure.ac:830: -1- m4_pattern_allow([^HAVE_SIGPIPE$])
++m4trace:configure.ac:834: -1- FC_EXPAND_DIR([FREECIV_DATADIR], ["$datadir/freeciv"])
++m4trace:configure.ac:854: -1- gl_FUNC_MKSTEMP
++m4trace:configure.ac:854: -1- gl_STDLIB_H_DEFAULTS
++m4trace:configure.ac:854: -1- m4_pattern_allow([^GNULIB_MALLOC_POSIX$])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^GNULIB_REALLOC_POSIX$])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^GNULIB_CALLOC_POSIX$])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^GNULIB_GETSUBOPT$])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^GNULIB_MKDTEMP$])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^GNULIB_MKSTEMP$])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^GNULIB_PUTENV$])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^GNULIB_RPMATCH$])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^GNULIB_SETENV$])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^GNULIB_STRTOD$])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^GNULIB_UNSETENV$])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^HAVE_CALLOC_POSIX$])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^HAVE_GETSUBOPT$])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^HAVE_MALLOC_POSIX$])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^HAVE_MKDTEMP$])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^HAVE_REALLOC_POSIX$])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^HAVE_RPMATCH$])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^HAVE_SETENV$])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^HAVE_STRTOD$])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^HAVE_UNSETENV$])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^REPLACE_MKSTEMP$])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^REPLACE_PUTENV$])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^REPLACE_STRTOD$])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^VOID_UNSETENV$])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^_FILE_OFFSET_BITS$])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^_LARGE_FILES$])
++m4trace:configure.ac:854: -1- m4_pattern_allow([^LIB@&t@OBJS$])
++m4trace:configure.ac:854: -1- gl_PREREQ_MKSTEMP
++m4trace:configure.ac:856: -1- m4_pattern_allow([^HAVE_MKSTEMP$])
++m4trace:configure.ac:866: -1- m4_pattern_allow([^LUA_CFLAGS$])
++m4trace:configure.ac:867: -1- m4_pattern_allow([^LUA_LIBS$])
++m4trace:configure.ac:868: -1- m4_pattern_allow([^LUA_AS_DEPENDENCY$])
++m4trace:configure.ac:874: -1- m4_pattern_allow([^TOLUA_CFLAGS$])
++m4trace:configure.ac:875: -1- m4_pattern_allow([^TOLUA_LIBS$])
++m4trace:configure.ac:876: -1- m4_pattern_allow([^TOLUA_AS_DEPENDENCY$])
++m4trace:configure.ac:879: -1- m4_pattern_allow([^TOLUA$])
++m4trace:configure.ac:951: -1- m4_pattern_allow([^CONFIGURE_DEPENDENCIES$])
++m4trace:configure.ac:959: -1- m4_pattern_allow([^FC_STORE_CPPFLAGS$])
++m4trace:configure.ac:961: -1- m4_pattern_allow([^FC_STORE_CFLAGS$])
++m4trace:configure.ac:963: -1- m4_pattern_allow([^FC_STORE_CXXFLAGS$])
++m4trace:configure.ac:1087: -1- m4_pattern_allow([^LIB@&t@OBJS$])
++m4trace:configure.ac:1087: -1- m4_pattern_allow([^LTLIBOBJS$])
++m4trace:configure.ac:1087: -1- _AC_AM_CONFIG_HEADER_HOOK(["$ac_file"])
++m4trace:configure.ac:1087: -1- _AM_OUTPUT_DEPENDENCY_COMMANDS
++m4trace:configure.ac:1087: -1- _LT_PROG_LTMAIN
+Index: autom4te.cache/requests
+===================================================================
+--- autom4te.cache/requests	(revisjon 57)
++++ autom4te.cache/requests	(arbeidskopi)
+@@ -68,113 +68,113 @@
+                         'configure.ac'
+                       ],
+                       {
++                        'AM_ENABLE_STATIC' => 1,
+                         'AC_GGZ_CHECK' => 1,
+-                        'AM_ENABLE_STATIC' => 1,
++                        'AC_LIBTOOL_LANG_RC_CONFIG' => 1,
+                         'FC_XAW_CLIENT' => 1,
+-                        'AC_LIBTOOL_LANG_RC_CONFIG' => 1,
+                         '_LT_AC_SHELL_INIT' => 1,
+                         'AC_CHECK_FT2' => 1,
+                         'AC_DEFUN' => 1,
+                         '_LT_AC_LANG_CXX_CONFIG' => 1,
+                         'AC_PROG_LIBTOOL' => 1,
+                         'AM_PROG_MKDIR_P' => 1,
++                        'AM_AUTOMAKE_VERSION' => 1,
+                         'FC_WIN32_CLIENT' => 1,
+-                        'AM_AUTOMAKE_VERSION' => 1,
+                         'AC_LIB_RPATH' => 1,
+                         'AM_MISSING_PROG' => 1,
+                         'AM_LIBCHARSET' => 1,
+                         'AM_PATH_GTK_2_0' => 1,
++                        'AC_LIBTOOL_PROG_LD_HARDCODE_LIBPATH' => 1,
+                         'FC_CHECK_X_PROTO_NARROWPROTO_WORKS' => 1,
+-                        'AC_LIBTOOL_PROG_LD_HARDCODE_LIBPATH' => 1,
+                         '_LT_AC_LANG_C_CONFIG' => 1,
+                         'FC_EXPAND_DIR' => 1,
++                        'AM_PROG_INSTALL_STRIP' => 1,
+                         'FC_COMPILER_FLAGS' => 1,
+-                        'AM_PROG_INSTALL_STRIP' => 1,
+                         'AC_GGZ_GGZDMOD' => 1,
+                         '_m4_warn' => 1,
+                         'AC_LIBTOOL_OBJDIR' => 1,
++                        'gl_FUNC_ARGZ' => 1,
+                         'FC_LD_FLAGS' => 1,
+-                        'gl_FUNC_ARGZ' => 1,
++                        'AM_SANITY_CHECK' => 1,
+                         'LTOBSOLETE_VERSION' => 1,
+-                        'AM_SANITY_CHECK' => 1,
+                         'AC_LIBTOOL_LANG_GCJ_CONFIG' => 1,
+                         'AC_LIBTOOL_PROG_COMPILER_PIC' => 1,
+-                        'LT_LIB_M' => 1,
+-                        'AM_PATH_SDL' => 1,
+                         '_LT_AC_CHECK_DLFCN' => 1,
+                         'AC_LIBTOOL_SYS_GLOBAL_SYMBOL_PIPE' => 1,
++                        'AM_PATH_SDL' => 1,
++                        'LT_LIB_M' => 1,
+                         'LTSUGAR_VERSION' => 1,
+                         '_LT_PROG_LTMAIN' => 1,
++                        '_AM_PROG_TAR' => 1,
+                         'LT_SYS_SYMBOL_USCORE' => 1,
+-                        '_AM_PROG_TAR' => 1,
+                         'AC_LIBTOOL_GCJ' => 1,
+                         'AC_GGZ_LIBGGZ' => 1,
++                        'LT_FUNC_DLSYM_USCORE' => 1,
++                        'LT_SYS_DLOPEN_DEPLIBS' => 1,
+                         'gl_FUNC_MKSTEMP' => 1,
+-                        'LT_SYS_DLOPEN_DEPLIBS' => 1,
+-                        'LT_FUNC_DLSYM_USCORE' => 1,
++                        '_LT_AC_LANG_F77' => 1,
++                        'AC_LIBTOOL_CONFIG' => 1,
+                         'AC_LIB_ARG_WITH' => 1,
+-                        'AC_LIBTOOL_CONFIG' => 1,
+-                        '_LT_AC_LANG_F77' => 1,
++                        '_AM_SUBST_NOTMAKE' => 1,
++                        'AC_LTDL_DLLIB' => 1,
+                         'FC_C_FLAGS' => 1,
+-                        'AC_LTDL_DLLIB' => 1,
+-                        '_AM_SUBST_NOTMAKE' => 1,
+                         '_AM_AUTOCONF_VERSION' => 1,
+                         'AM_DISABLE_SHARED' => 1,
+                         '_LTDL_SETUP' => 1,
++                        '_LT_AC_LANG_CXX' => 1,
+                         'AM_PROG_LIBTOOL' => 1,
+-                        '_LT_AC_LANG_CXX' => 1,
++                        'AC_LIB_LTDL' => 1,
++                        '_LT_AC_FILE_LTDLL_C' => 1,
+                         'AM_PROG_LD' => 1,
+-                        '_LT_AC_FILE_LTDLL_C' => 1,
+-                        'AC_LIB_LTDL' => 1,
+                         'FC_DEBUG' => 1,
+                         'AM_ICONV_LINK' => 1,
+                         'AC_LIB_PREPARE_MULTILIB' => 1,
+                         'AU_DEFUN' => 1,
++                        'AC_PROG_NM' => 1,
+                         'AC_GGZ_GGZCORE' => 1,
+-                        'AC_PROG_NM' => 1,
+                         'AC_LIBTOOL_DLOPEN' => 1,
++                        'FC_CXX_FLAGS' => 1,
+                         'AC_PROG_LD' => 1,
+-                        'FC_CXX_FLAGS' => 1,
++                        'AC_PROG_LD_GNU' => 1,
+                         'AC_ENABLE_FAST_INSTALL' => 1,
+-                        'AC_PROG_LD_GNU' => 1,
+                         'FC_NO_CLIENT' => 1,
++                        'AC_LIBTOOL_FC' => 1,
++                        'AC_LIB_HAVE_LINKFLAGS' => 1,
+                         'FC_XPM_PATHS' => 1,
+-                        'AC_LIB_HAVE_LINKFLAGS' => 1,
+-                        'AC_LIBTOOL_FC' => 1,
++                        'LTDL_CONVENIENCE' => 1,
+                         'AM_ICONV_LINKFLAGS_BODY' => 1,
+-                        'LTDL_CONVENIENCE' => 1,
+                         '_AM_SET_OPTION' => 1,
+                         'AC_LTDL_PREOPEN' => 1,
+                         '_LT_LINKER_BOILERPLATE' => 1,
++                        'AC_LIBTOOL_PROG_CC_C_O' => 1,
++                        'AC_LIBTOOL_LANG_CXX_CONFIG' => 1,
++                        'GLIB_RUN_PROG' => 1,
+                         'FC_CHECK_X_LIB' => 1,
+-                        'GLIB_RUN_PROG' => 1,
+-                        'AC_LIBTOOL_LANG_CXX_CONFIG' => 1,
+-                        'AC_LIBTOOL_PROG_CC_C_O' => 1,
+                         'gl_PREREQ_ARGZ' => 1,
+                         'AC_LIB_PREFIX' => 1,
++                        'AC_C99_INITIALIZERS' => 1,
+                         'gl_STDLIB_MODULE_INDICATOR' => 1,
+-                        'AC_C99_INITIALIZERS' => 1,
++                        'AM_OUTPUT_DEPENDENCY_COMMANDS' => 1,
+                         'LT_SUPPORTED_TAG' => 1,
+-                        'AM_OUTPUT_DEPENDENCY_COMMANDS' => 1,
++                        'LT_SYS_MODULE_EXT' => 1,
+                         'LT_PROG_RC' => 1,
+-                        'LT_SYS_MODULE_EXT' => 1,
+                         'AC_DEFUN_ONCE' => 1,
+                         'FC_GTK2_CLIENT' => 1,
+                         '_LT_AC_LANG_GCJ' => 1,
+                         'AC_GGZ_REMOVEDUPS' => 1,
+                         'AC_' => 1,
++                        'FC_CHECK_AUTH' => 1,
+                         'AC_LTDL_OBJDIR' => 1,
+-                        'FC_CHECK_AUTH' => 1,
++                        '_LT_PATH_TOOL_PREFIX' => 1,
+                         'FC_SDL_CLIENT' => 1,
+-                        '_LT_PATH_TOOL_PREFIX' => 1,
++                        'AC_LIBTOOL_RC' => 1,
+                         'AM_ICONV' => 1,
+-                        'AC_LIBTOOL_RC' => 1,
++                        '_LT_AC_PROG_ECHO_BACKSLASH' => 1,
+                         'AC_DISABLE_FAST_INSTALL' => 1,
+-                        '_LT_AC_PROG_ECHO_BACKSLASH' => 1,
+                         'FC_CHECK_GETTIMEOFDAY_RUNTIME' => 1,
++                        '_LT_AC_SYS_LIBPATH_AIX' => 1,
++                        '_LT_AC_TRY_DLOPEN_SELF' => 1,
+                         'include' => 1,
+-                        '_LT_AC_TRY_DLOPEN_SELF' => 1,
+-                        '_LT_AC_SYS_LIBPATH_AIX' => 1,
+                         'LT_AC_PROG_SED' => 1,
+                         'AM_ENABLE_SHARED' => 1,
+                         'AC_LIB_APPENDTOVAR' => 1,
+@@ -183,93 +183,93 @@
+                         'AC_ENABLE_SHARED' => 1,
+                         'FC_ADD_WORDS_TO_VAR' => 1,
+                         'AC_LIB_WITH_FINAL_PREFIX' => 1,
++                        'AC_LIBTOOL_SYS_HARD_LINK_LOCKS' => 1,
+                         'AC_ENABLE_STATIC' => 1,
+-                        'AC_LIBTOOL_SYS_HARD_LINK_LOCKS' => 1,
+                         '_LT_AC_TAGVAR' => 1,
+                         'AC_LIBTOOL_LANG_F77_CONFIG' => 1,
+                         'AM_CONDITIONAL' => 1,
+                         'LT_LIB_DLLOAD' => 1,
++                        'AM_LANGINFO_CODESET' => 1,
+                         'AC_FUNC_VSNPRINTF' => 1,
+-                        'AM_LANGINFO_CODESET' => 1,
++                        'LTDL_INIT' => 1,
+                         'LTVERSION_VERSION' => 1,
+-                        'LTDL_INIT' => 1,
++                        'AM_PROG_INSTALL_SH' => 1,
+                         'm4_include' => 1,
+-                        'AM_PROG_INSTALL_SH' => 1,
+                         'AC_PROG_EGREP' => 1,
++                        '_AC_AM_CONFIG_HEADER_HOOK' => 1,
+                         'AC_PATH_MAGIC' => 1,
+-                        '_AC_AM_CONFIG_HEADER_HOOK' => 1,
+                         'AC_LTDL_SYSSEARCHPATH' => 1,
+                         'FC_HAS_READLINE' => 1,
++                        'AM_MAKE_INCLUDE' => 1,
++                        'FC_CHECK_X_PROTO_DEFINE' => 1,
+                         'FC_CHECK_SOUND' => 1,
+-                        'FC_CHECK_X_PROTO_DEFINE' => 1,
+-                        'AM_MAKE_INCLUDE' => 1,
++                        'LT_CMD_MAX_LEN' => 1,
+                         '_LT_AC_TAGCONFIG' => 1,
+-                        'LT_CMD_MAX_LEN' => 1,
+                         'AC_GGZ_SERVER' => 1,
+                         'm4_pattern_forbid' => 1,
++                        '_LT_LINKER_OPTION' => 1,
+                         'AC_LIB_PREPARE_PREFIX' => 1,
+-                        '_LT_LINKER_OPTION' => 1,
+                         'AC_LIBTOOL_COMPILER_OPTION' => 1,
++                        'AC_DISABLE_SHARED' => 1,
+                         'gl_PREREQ_MKSTEMP' => 1,
+-                        'AC_DISABLE_SHARED' => 1,
+                         '_LT_COMPILER_BOILERPLATE' => 1,
++                        'AC_LIBTOOL_SETUP' => 1,
+                         'AC_LIBTOOL_WIN32_DLL' => 1,
+-                        'AC_LIBTOOL_SETUP' => 1,
++                        'AC_PROG_LD_RELOAD_FLAG' => 1,
+                         'AM_GLIB_GNU_GETTEXT' => 1,
+-                        'AC_PROG_LD_RELOAD_FLAG' => 1,
+                         'AC_LTDL_DLSYM_USCORE' => 1,
++                        'LT_LANG' => 1,
+                         'AM_MISSING_HAS_RUN' => 1,
+-                        'LT_LANG' => 1,
++                        'LT_SYS_DLSEARCH_PATH' => 1,
+                         'AC_GGZ_INIT' => 1,
+-                        'LT_SYS_DLSEARCH_PATH' => 1,
+                         'LT_CONFIG_LTDL_DIR' => 1,
++                        'LT_OUTPUT' => 1,
++                        'AC_LIBTOOL_DLOPEN_SELF' => 1,
+                         'FC_CHECK_READLINE_RUNTIME' => 1,
+-                        'AC_LIBTOOL_DLOPEN_SELF' => 1,
+-                        'LT_OUTPUT' => 1,
++                        'AC_LIB_PROG_LD_GNU' => 1,
+                         'AC_C99_STDINT_H' => 1,
+-                        'AC_LIB_PROG_LD_GNU' => 1,
+                         'AC_LIBTOOL_PROG_LD_SHLIBS' => 1,
+                         '_PKG_SHORT_ERRORS_SUPPORTED' => 1,
++                        'AC_LIBTOOL_LINKER_OPTION' => 1,
+                         'AC_WITH_LTDL' => 1,
+-                        'AC_LIBTOOL_LINKER_OPTION' => 1,
+                         'PKG_CHECK_EXISTS' => 1,
+                         'AC_GGZ_VERSION' => 1,
++                        'AC_LIBTOOL_CXX' => 1,
+                         'LT_AC_PROG_RC' => 1,
+-                        'AC_LIBTOOL_CXX' => 1,
+                         'LT_INIT' => 1,
++                        'LT_SYS_DLOPEN_SELF' => 1,
+                         'LT_AC_PROG_GCJ' => 1,
+-                        'LT_SYS_DLOPEN_SELF' => 1,
++                        'AM_DEP_TRACK' => 1,
+                         'AM_DISABLE_STATIC' => 1,
+-                        'AM_DEP_TRACK' => 1,
++                        '_AC_PROG_LIBTOOL' => 1,
+                         'AM_CONFIG_HEADER' => 1,
+-                        '_AC_PROG_LIBTOOL' => 1,
+                         '_AM_IF_OPTION' => 1,
+                         'AC_PATH_TOOL_PREFIX' => 1,
++                        'AC_LIBTOOL_F77' => 1,
+                         'm4_pattern_allow' => 1,
+-                        'AC_LIBTOOL_F77' => 1,
+                         'AM_SET_LEADING_DOT' => 1,
+                         'LT_AC_PROG_EGREP' => 1,
+                         '_AM_DEPENDENCIES' => 1,
+                         'AC_LIBTOOL_LANG_C_CONFIG' => 1,
++                        'LTOPTIONS_VERSION' => 1,
+                         'AC_GGZ_CONFIG' => 1,
+-                        'LTOPTIONS_VERSION' => 1,
++                        '_LT_AC_SYS_COMPILER' => 1,
+                         'AC_LIB_LINKFLAGS' => 1,
+-                        '_LT_AC_SYS_COMPILER' => 1,
+                         'AM_PROG_NM' => 1,
+                         'PKG_CHECK_MODULES' => 1,
+                         'gl_STDLIB_H' => 1,
+                         'AC_GGZ_GGZMOD' => 1,
+                         'AC_LIBLTDL_CONVENIENCE' => 1,
++                        'AC_DEPLIBS_CHECK_METHOD' => 1,
+                         'FC_CHECK_X_PROTO_FETCH' => 1,
+-                        'AC_DEPLIBS_CHECK_METHOD' => 1,
++                        'AM_SET_CURRENT_AUTOMAKE_VERSION' => 1,
+                         'AC_LIBLTDL_INSTALLABLE' => 1,
+-                        'AM_SET_CURRENT_AUTOMAKE_VERSION' => 1,
++                        'AC_LTDL_ENABLE_INSTALL' => 1,
+                         'AC_C99_VARIABLE_ARRAYS' => 1,
+-                        'AC_LTDL_ENABLE_INSTALL' => 1,
++                        'AC_LIBTOOL_SYS_DYNAMIC_LINKER' => 1,
+                         'LT_PROG_GCJ' => 1,
+-                        'AC_LIBTOOL_SYS_DYNAMIC_LINKER' => 1,
++                        'AM_GLIB_DEFINE_LOCALEDIR' => 1,
+                         'AC_C99_VARIADIC_MACROS' => 1,
+-                        'AM_GLIB_DEFINE_LOCALEDIR' => 1,
+                         'AM_INIT_AUTOMAKE' => 1,
+                         'AC_GGZ_CHECK_SERVER' => 1,
+                         'AC_DISABLE_STATIC' => 1,
+@@ -281,33 +281,33 @@
+                         'LT_SYS_MODULE_PATH' => 1,
+                         'AC_GGZ_GTK' => 1,
+                         'AC_GGZ_FIND_FILE' => 1,
++                        'AC_LIBTOOL_POSTDEP_PREDEP' => 1,
+                         'LT_WITH_LTDL' => 1,
+-                        'AC_LIBTOOL_POSTDEP_PREDEP' => 1,
++                        'AC_LTDL_SHLIBPATH' => 1,
+                         'gl_STDLIB_H_DEFAULTS' => 1,
+-                        'AC_LTDL_SHLIBPATH' => 1,
+                         'AM_AUX_DIR_EXPAND' => 1,
+                         'AC_LIB_LINKFLAGS_FROM_LIBS' => 1,
++                        '_LT_AC_LANG_F77_CONFIG' => 1,
++                        'AC_LIBTOOL_PROG_COMPILER_NO_RTTI' => 1,
+                         'FC_CHECK_X_PROTO_FUNCPROTO_COMPILE' => 1,
+-                        'AC_LIBTOOL_PROG_COMPILER_NO_RTTI' => 1,
+-                        '_LT_AC_LANG_F77_CONFIG' => 1,
++                        '_AM_SET_OPTIONS' => 1,
+                         '_LT_COMPILER_OPTION' => 1,
+-                        '_AM_SET_OPTIONS' => 1,
++                        '_AM_OUTPUT_DEPENDENCY_COMMANDS' => 1,
+                         'AM_RUN_LOG' => 1,
+-                        '_AM_OUTPUT_DEPENDENCY_COMMANDS' => 1,
++                        'AC_LIBTOOL_SYS_OLD_ARCHIVE' => 1,
++                        'AC_LTDL_SYS_DLOPEN_DEPLIBS' => 1,
+                         'AC_LIBTOOL_PICMODE' => 1,
+-                        'AC_LTDL_SYS_DLOPEN_DEPLIBS' => 1,
+-                        'AC_LIBTOOL_SYS_OLD_ARCHIVE' => 1,
+                         'AC_LIB_LINKFLAGS_BODY' => 1,
++                        'LT_PATH_LD' => 1,
+                         'AC_CHECK_LIBM' => 1,
+-                        'LT_PATH_LD' => 1,
++                        'AC_LIBTOOL_SYS_LIB_STRIP' => 1,
+                         'AC_GGZ_ERROR' => 1,
+-                        'AC_LIBTOOL_SYS_LIB_STRIP' => 1,
+                         '_AM_MANGLE_OPTION' => 1,
++                        'AC_LTDL_SYMBOL_USCORE' => 1,
+                         'AC_LIBTOOL_SYS_MAX_CMD_LEN' => 1,
+-                        'AC_LTDL_SYMBOL_USCORE' => 1,
+                         'AM_SET_DEPDIR' => 1,
++                        '_LT_CC_BASENAME' => 1,
+                         'PKG_PROG_PKG_CONFIG' => 1,
+-                        '_LT_CC_BASENAME' => 1,
+                         '_LT_LIBOBJ' => 1,
+                         'AC_LIB_PROG_LD' => 1
+                       }
+@@ -324,25 +324,25 @@
+                         'configure.ac'
+                       ],
+                       {
++                        '_LT_AC_TAGCONFIG' => 1,
+                         'AM_PROG_F77_C_O' => 1,
+-                        '_LT_AC_TAGCONFIG' => 1,
++                        'AC_INIT' => 1,
+                         'm4_pattern_forbid' => 1,
+-                        'AC_INIT' => 1,
++                        '_AM_COND_IF' => 1,
+                         'AC_CANONICAL_TARGET' => 1,
+-                        '_AM_COND_IF' => 1,
++                        'AC_SUBST' => 1,
+                         'AC_CONFIG_LIBOBJ_DIR' => 1,
+-                        'AC_SUBST' => 1,
++                        'AC_FC_SRCEXT' => 1,
+                         'AC_CANONICAL_HOST' => 1,
+-                        'AC_FC_SRCEXT' => 1,
+                         'AC_PROG_LIBTOOL' => 1,
+                         'AM_INIT_AUTOMAKE' => 1,
+                         'AC_CONFIG_SUBDIRS' => 1,
+                         'AM_AUTOMAKE_VERSION' => 1,
+                         'LT_CONFIG_LTDL_DIR' => 1,
++                        'AC_REQUIRE_AUX_FILE' => 1,
+                         'AC_CONFIG_LINKS' => 1,
+-                        'AC_REQUIRE_AUX_FILE' => 1,
++                        'm4_sinclude' => 1,
+                         'LT_SUPPORTED_TAG' => 1,
+-                        'm4_sinclude' => 1,
+                         'AM_MAINTAINER_MODE' => 1,
+                         'AM_GNU_GETTEXT_INTL_SUBDIR' => 1,
+                         '_m4_warn' => 1,
+@@ -358,13 +358,13 @@
+                         'AC_CANONICAL_BUILD' => 1,
+                         'AC_FC_FREEFORM' => 1,
+                         'AH_OUTPUT' => 1,
++                        '_AM_SUBST_NOTMAKE' => 1,
+                         'AC_CONFIG_AUX_DIR' => 1,
+-                        '_AM_SUBST_NOTMAKE' => 1,
++                        'sinclude' => 1,
++                        'AM_PROG_CC_C_O' => 1,
+                         'm4_pattern_allow' => 1,
+-                        'AM_PROG_CC_C_O' => 1,
+-                        'sinclude' => 1,
++                        'AC_CANONICAL_SYSTEM' => 1,
+                         'AM_CONDITIONAL' => 1,
+-                        'AC_CANONICAL_SYSTEM' => 1,
+                         'AC_CONFIG_HEADERS' => 1,
+                         'AC_DEFINE_TRACE_LITERAL' => 1,
+                         'm4_include' => 1,
+@@ -437,113 +437,113 @@
+                         'configure.ac'
+                       ],
+                       {
++                        'AC_GGZ_CHECK' => 1,
+                         'AM_ENABLE_STATIC' => 1,
+-                        'AC_GGZ_CHECK' => 1,
++                        'FC_XAW_CLIENT' => 1,
+                         'AC_LIBTOOL_LANG_RC_CONFIG' => 1,
+-                        'FC_XAW_CLIENT' => 1,
+                         '_LT_AC_SHELL_INIT' => 1,
+                         'AC_CHECK_FT2' => 1,
+                         'AC_DEFUN' => 1,
+                         '_LT_AC_LANG_CXX_CONFIG' => 1,
+                         'AC_PROG_LIBTOOL' => 1,
+                         'AM_PROG_MKDIR_P' => 1,
++                        'FC_WIN32_CLIENT' => 1,
+                         'AM_AUTOMAKE_VERSION' => 1,
+-                        'FC_WIN32_CLIENT' => 1,
+                         'AC_LIB_RPATH' => 1,
+                         'AM_MISSING_PROG' => 1,
+                         'AM_LIBCHARSET' => 1,
+                         'AM_PATH_GTK_2_0' => 1,
++                        'FC_CHECK_X_PROTO_NARROWPROTO_WORKS' => 1,
+                         'AC_LIBTOOL_PROG_LD_HARDCODE_LIBPATH' => 1,
+-                        'FC_CHECK_X_PROTO_NARROWPROTO_WORKS' => 1,
+                         '_LT_AC_LANG_C_CONFIG' => 1,
+                         'FC_EXPAND_DIR' => 1,
++                        'FC_COMPILER_FLAGS' => 1,
+                         'AM_PROG_INSTALL_STRIP' => 1,
+-                        'FC_COMPILER_FLAGS' => 1,
+                         'AC_GGZ_GGZDMOD' => 1,
+                         '_m4_warn' => 1,
+                         'AC_LIBTOOL_OBJDIR' => 1,
++                        'FC_LD_FLAGS' => 1,
+                         'gl_FUNC_ARGZ' => 1,
+-                        'FC_LD_FLAGS' => 1,
++                        'LTOBSOLETE_VERSION' => 1,
+                         'AM_SANITY_CHECK' => 1,
+-                        'LTOBSOLETE_VERSION' => 1,
+                         'AC_LIBTOOL_LANG_GCJ_CONFIG' => 1,
+                         'AC_LIBTOOL_PROG_COMPILER_PIC' => 1,
+-                        '_LT_AC_CHECK_DLFCN' => 1,
+-                        'AC_LIBTOOL_SYS_GLOBAL_SYMBOL_PIPE' => 1,
+                         'AM_PATH_SDL' => 1,
+                         'LT_LIB_M' => 1,
++                        'AC_LIBTOOL_SYS_GLOBAL_SYMBOL_PIPE' => 1,
++                        '_LT_AC_CHECK_DLFCN' => 1,
+                         'LTSUGAR_VERSION' => 1,
+                         '_LT_PROG_LTMAIN' => 1,
++                        'LT_SYS_SYMBOL_USCORE' => 1,
+                         '_AM_PROG_TAR' => 1,
+-                        'LT_SYS_SYMBOL_USCORE' => 1,
+                         'AC_LIBTOOL_GCJ' => 1,
+                         'AC_GGZ_LIBGGZ' => 1,
++                        'gl_FUNC_MKSTEMP' => 1,
++                        'LT_SYS_DLOPEN_DEPLIBS' => 1,
+                         'LT_FUNC_DLSYM_USCORE' => 1,
+-                        'LT_SYS_DLOPEN_DEPLIBS' => 1,
+-                        'gl_FUNC_MKSTEMP' => 1,
++                        'AC_LIB_ARG_WITH' => 1,
++                        'AC_LIBTOOL_CONFIG' => 1,
+                         '_LT_AC_LANG_F77' => 1,
+-                        'AC_LIBTOOL_CONFIG' => 1,
+-                        'AC_LIB_ARG_WITH' => 1,
++                        'FC_C_FLAGS' => 1,
++                        'AC_LTDL_DLLIB' => 1,
+                         '_AM_SUBST_NOTMAKE' => 1,
+-                        'AC_LTDL_DLLIB' => 1,
+-                        'FC_C_FLAGS' => 1,
+                         '_AM_AUTOCONF_VERSION' => 1,
+                         'AM_DISABLE_SHARED' => 1,
+                         '_LTDL_SETUP' => 1,
++                        'AM_PROG_LIBTOOL' => 1,
+                         '_LT_AC_LANG_CXX' => 1,
+-                        'AM_PROG_LIBTOOL' => 1,
++                        'AM_PROG_LD' => 1,
++                        '_LT_AC_FILE_LTDLL_C' => 1,
+                         'AC_LIB_LTDL' => 1,
+-                        '_LT_AC_FILE_LTDLL_C' => 1,
+-                        'AM_PROG_LD' => 1,
+                         'FC_DEBUG' => 1,
+                         'AM_ICONV_LINK' => 1,
+                         'AC_LIB_PREPARE_MULTILIB' => 1,
+                         'AU_DEFUN' => 1,
++                        'AC_GGZ_GGZCORE' => 1,
+                         'AC_PROG_NM' => 1,
+-                        'AC_GGZ_GGZCORE' => 1,
+                         'AC_LIBTOOL_DLOPEN' => 1,
++                        'AC_PROG_LD' => 1,
+                         'FC_CXX_FLAGS' => 1,
+-                        'AC_PROG_LD' => 1,
++                        'AC_ENABLE_FAST_INSTALL' => 1,
+                         'AC_PROG_LD_GNU' => 1,
+-                        'AC_ENABLE_FAST_INSTALL' => 1,
+                         'FC_NO_CLIENT' => 1,
++                        'FC_XPM_PATHS' => 1,
++                        'AC_LIB_HAVE_LINKFLAGS' => 1,
+                         'AC_LIBTOOL_FC' => 1,
+-                        'AC_LIB_HAVE_LINKFLAGS' => 1,
+-                        'FC_XPM_PATHS' => 1,
++                        'AM_ICONV_LINKFLAGS_BODY' => 1,
+                         'LTDL_CONVENIENCE' => 1,
+-                        'AM_ICONV_LINKFLAGS_BODY' => 1,
+                         '_AM_SET_OPTION' => 1,
+                         'AC_LTDL_PREOPEN' => 1,
+                         '_LT_LINKER_BOILERPLATE' => 1,
++                        'FC_CHECK_X_LIB' => 1,
++                        'GLIB_RUN_PROG' => 1,
++                        'AC_LIBTOOL_LANG_CXX_CONFIG' => 1,
+                         'AC_LIBTOOL_PROG_CC_C_O' => 1,
+-                        'AC_LIBTOOL_LANG_CXX_CONFIG' => 1,
+-                        'GLIB_RUN_PROG' => 1,
+-                        'FC_CHECK_X_LIB' => 1,
+                         'gl_PREREQ_ARGZ' => 1,
+                         'AC_LIB_PREFIX' => 1,
++                        'gl_STDLIB_MODULE_INDICATOR' => 1,
+                         'AC_C99_INITIALIZERS' => 1,
+-                        'gl_STDLIB_MODULE_INDICATOR' => 1,
++                        'LT_SUPPORTED_TAG' => 1,
+                         'AM_OUTPUT_DEPENDENCY_COMMANDS' => 1,
+-                        'LT_SUPPORTED_TAG' => 1,
++                        'LT_PROG_RC' => 1,
+                         'LT_SYS_MODULE_EXT' => 1,
+-                        'LT_PROG_RC' => 1,
+                         'AC_DEFUN_ONCE' => 1,
+                         'FC_GTK2_CLIENT' => 1,
+                         '_LT_AC_LANG_GCJ' => 1,
+                         'AC_GGZ_REMOVEDUPS' => 1,
+                         'AC_' => 1,
++                        'AC_LTDL_OBJDIR' => 1,
+                         'FC_CHECK_AUTH' => 1,
+-                        'AC_LTDL_OBJDIR' => 1,
++                        'FC_SDL_CLIENT' => 1,
+                         '_LT_PATH_TOOL_PREFIX' => 1,
+-                        'FC_SDL_CLIENT' => 1,
++                        'AM_ICONV' => 1,
+                         'AC_LIBTOOL_RC' => 1,
+-                        'AM_ICONV' => 1,
++                        'AC_DISABLE_FAST_INSTALL' => 1,
+                         '_LT_AC_PROG_ECHO_BACKSLASH' => 1,
+-                        'AC_DISABLE_FAST_INSTALL' => 1,
+                         'FC_CHECK_GETTIMEOFDAY_RUNTIME' => 1,
++                        'include' => 1,
++                        '_LT_AC_TRY_DLOPEN_SELF' => 1,
+                         '_LT_AC_SYS_LIBPATH_AIX' => 1,
+-                        '_LT_AC_TRY_DLOPEN_SELF' => 1,
+-                        'include' => 1,
+                         'LT_AC_PROG_SED' => 1,
+                         'AM_ENABLE_SHARED' => 1,
+                         'AC_LIB_APPENDTOVAR' => 1,
+@@ -552,93 +552,93 @@
+                         'AC_ENABLE_SHARED' => 1,
+                         'FC_ADD_WORDS_TO_VAR' => 1,
+                         'AC_LIB_WITH_FINAL_PREFIX' => 1,
++                        'AC_ENABLE_STATIC' => 1,
+                         'AC_LIBTOOL_SYS_HARD_LINK_LOCKS' => 1,
+-                        'AC_ENABLE_STATIC' => 1,
+                         '_LT_AC_TAGVAR' => 1,
+                         'AC_LIBTOOL_LANG_F77_CONFIG' => 1,
+                         'AM_CONDITIONAL' => 1,
+                         'LT_LIB_DLLOAD' => 1,
++                        'AC_FUNC_VSNPRINTF' => 1,
+                         'AM_LANGINFO_CODESET' => 1,
+-                        'AC_FUNC_VSNPRINTF' => 1,
++                        'LTVERSION_VERSION' => 1,
+                         'LTDL_INIT' => 1,
+-                        'LTVERSION_VERSION' => 1,
++                        'm4_include' => 1,
+                         'AM_PROG_INSTALL_SH' => 1,
+-                        'm4_include' => 1,
+                         'AC_PROG_EGREP' => 1,
++                        'AC_PATH_MAGIC' => 1,
+                         '_AC_AM_CONFIG_HEADER_HOOK' => 1,
+-                        'AC_PATH_MAGIC' => 1,
+                         'AC_LTDL_SYSSEARCHPATH' => 1,
+                         'FC_HAS_READLINE' => 1,
++                        'FC_CHECK_SOUND' => 1,
++                        'FC_CHECK_X_PROTO_DEFINE' => 1,
+                         'AM_MAKE_INCLUDE' => 1,
+-                        'FC_CHECK_X_PROTO_DEFINE' => 1,
+-                        'FC_CHECK_SOUND' => 1,
++                        '_LT_AC_TAGCONFIG' => 1,
+                         'LT_CMD_MAX_LEN' => 1,
+-                        '_LT_AC_TAGCONFIG' => 1,
+                         'AC_GGZ_SERVER' => 1,
+                         'm4_pattern_forbid' => 1,
++                        'AC_LIB_PREPARE_PREFIX' => 1,
+                         '_LT_LINKER_OPTION' => 1,
+-                        'AC_LIB_PREPARE_PREFIX' => 1,
+                         'AC_LIBTOOL_COMPILER_OPTION' => 1,
++                        'gl_PREREQ_MKSTEMP' => 1,
+                         'AC_DISABLE_SHARED' => 1,
+-                        'gl_PREREQ_MKSTEMP' => 1,
+                         '_LT_COMPILER_BOILERPLATE' => 1,
++                        'AC_LIBTOOL_WIN32_DLL' => 1,
+                         'AC_LIBTOOL_SETUP' => 1,
+-                        'AC_LIBTOOL_WIN32_DLL' => 1,
++                        'AM_GLIB_GNU_GETTEXT' => 1,
+                         'AC_PROG_LD_RELOAD_FLAG' => 1,
+-                        'AM_GLIB_GNU_GETTEXT' => 1,
+                         'AC_LTDL_DLSYM_USCORE' => 1,
++                        'AM_MISSING_HAS_RUN' => 1,
+                         'LT_LANG' => 1,
+-                        'AM_MISSING_HAS_RUN' => 1,
++                        'AC_GGZ_INIT' => 1,
+                         'LT_SYS_DLSEARCH_PATH' => 1,
+-                        'AC_GGZ_INIT' => 1,
+                         'LT_CONFIG_LTDL_DIR' => 1,
++                        'FC_CHECK_READLINE_RUNTIME' => 1,
++                        'AC_LIBTOOL_DLOPEN_SELF' => 1,
+                         'LT_OUTPUT' => 1,
+-                        'AC_LIBTOOL_DLOPEN_SELF' => 1,
+-                        'FC_CHECK_READLINE_RUNTIME' => 1,
++                        'AC_C99_STDINT_H' => 1,
+                         'AC_LIB_PROG_LD_GNU' => 1,
+-                        'AC_C99_STDINT_H' => 1,
+                         'AC_LIBTOOL_PROG_LD_SHLIBS' => 1,
+                         '_PKG_SHORT_ERRORS_SUPPORTED' => 1,
++                        'AC_WITH_LTDL' => 1,
+                         'AC_LIBTOOL_LINKER_OPTION' => 1,
+-                        'AC_WITH_LTDL' => 1,
+                         'PKG_CHECK_EXISTS' => 1,
+                         'AC_GGZ_VERSION' => 1,
++                        'LT_AC_PROG_RC' => 1,
+                         'AC_LIBTOOL_CXX' => 1,
+-                        'LT_AC_PROG_RC' => 1,
+                         'LT_INIT' => 1,
++                        'LT_AC_PROG_GCJ' => 1,
+                         'LT_SYS_DLOPEN_SELF' => 1,
+-                        'LT_AC_PROG_GCJ' => 1,
++                        'AM_DISABLE_STATIC' => 1,
+                         'AM_DEP_TRACK' => 1,
+-                        'AM_DISABLE_STATIC' => 1,
++                        'AM_CONFIG_HEADER' => 1,
+                         '_AC_PROG_LIBTOOL' => 1,
+-                        'AM_CONFIG_HEADER' => 1,
+                         '_AM_IF_OPTION' => 1,
+                         'AC_PATH_TOOL_PREFIX' => 1,
++                        'm4_pattern_allow' => 1,
+                         'AC_LIBTOOL_F77' => 1,
+-                        'm4_pattern_allow' => 1,
+                         'AM_SET_LEADING_DOT' => 1,
+                         'LT_AC_PROG_EGREP' => 1,
+                         '_AM_DEPENDENCIES' => 1,
+                         'AC_LIBTOOL_LANG_C_CONFIG' => 1,
++                        'AC_GGZ_CONFIG' => 1,
+                         'LTOPTIONS_VERSION' => 1,
+-                        'AC_GGZ_CONFIG' => 1,
++                        'AC_LIB_LINKFLAGS' => 1,
+                         '_LT_AC_SYS_COMPILER' => 1,
+-                        'AC_LIB_LINKFLAGS' => 1,
+                         'AM_PROG_NM' => 1,
+                         'PKG_CHECK_MODULES' => 1,
+                         'gl_STDLIB_H' => 1,
+                         'AC_GGZ_GGZMOD' => 1,
+                         'AC_LIBLTDL_CONVENIENCE' => 1,
++                        'FC_CHECK_X_PROTO_FETCH' => 1,
+                         'AC_DEPLIBS_CHECK_METHOD' => 1,
+-                        'FC_CHECK_X_PROTO_FETCH' => 1,
++                        'AC_LIBLTDL_INSTALLABLE' => 1,
+                         'AM_SET_CURRENT_AUTOMAKE_VERSION' => 1,
+-                        'AC_LIBLTDL_INSTALLABLE' => 1,
++                        'AC_C99_VARIABLE_ARRAYS' => 1,
+                         'AC_LTDL_ENABLE_INSTALL' => 1,
+-                        'AC_C99_VARIABLE_ARRAYS' => 1,
++                        'LT_PROG_GCJ' => 1,
+                         'AC_LIBTOOL_SYS_DYNAMIC_LINKER' => 1,
+-                        'LT_PROG_GCJ' => 1,
++                        'AC_C99_VARIADIC_MACROS' => 1,
+                         'AM_GLIB_DEFINE_LOCALEDIR' => 1,
+-                        'AC_C99_VARIADIC_MACROS' => 1,
+                         'AM_INIT_AUTOMAKE' => 1,
+                         'AC_GGZ_CHECK_SERVER' => 1,
+                         'AC_DISABLE_STATIC' => 1,
+@@ -650,33 +650,33 @@
+                         'LT_SYS_MODULE_PATH' => 1,
+                         'AC_GGZ_GTK' => 1,
+                         'AC_GGZ_FIND_FILE' => 1,
++                        'LT_WITH_LTDL' => 1,
+                         'AC_LIBTOOL_POSTDEP_PREDEP' => 1,
+-                        'LT_WITH_LTDL' => 1,
++                        'gl_STDLIB_H_DEFAULTS' => 1,
+                         'AC_LTDL_SHLIBPATH' => 1,
+-                        'gl_STDLIB_H_DEFAULTS' => 1,
+                         'AM_AUX_DIR_EXPAND' => 1,
+                         'AC_LIB_LINKFLAGS_FROM_LIBS' => 1,
++                        'FC_CHECK_X_PROTO_FUNCPROTO_COMPILE' => 1,
++                        'AC_LIBTOOL_PROG_COMPILER_NO_RTTI' => 1,
+                         '_LT_AC_LANG_F77_CONFIG' => 1,
+-                        'AC_LIBTOOL_PROG_COMPILER_NO_RTTI' => 1,
+-                        'FC_CHECK_X_PROTO_FUNCPROTO_COMPILE' => 1,
++                        '_LT_COMPILER_OPTION' => 1,
+                         '_AM_SET_OPTIONS' => 1,
+-                        '_LT_COMPILER_OPTION' => 1,
++                        'AM_RUN_LOG' => 1,
+                         '_AM_OUTPUT_DEPENDENCY_COMMANDS' => 1,
+-                        'AM_RUN_LOG' => 1,
++                        'AC_LIBTOOL_PICMODE' => 1,
++                        'AC_LTDL_SYS_DLOPEN_DEPLIBS' => 1,
+                         'AC_LIBTOOL_SYS_OLD_ARCHIVE' => 1,
+-                        'AC_LTDL_SYS_DLOPEN_DEPLIBS' => 1,
+-                        'AC_LIBTOOL_PICMODE' => 1,
+                         'AC_LIB_LINKFLAGS_BODY' => 1,
++                        'AC_CHECK_LIBM' => 1,
+                         'LT_PATH_LD' => 1,
+-                        'AC_CHECK_LIBM' => 1,
++                        'AC_GGZ_ERROR' => 1,
+                         'AC_LIBTOOL_SYS_LIB_STRIP' => 1,
+-                        'AC_GGZ_ERROR' => 1,
+                         '_AM_MANGLE_OPTION' => 1,
++                        'AC_LIBTOOL_SYS_MAX_CMD_LEN' => 1,
+                         'AC_LTDL_SYMBOL_USCORE' => 1,
+-                        'AC_LIBTOOL_SYS_MAX_CMD_LEN' => 1,
+                         'AM_SET_DEPDIR' => 1,
++                        'PKG_PROG_PKG_CONFIG' => 1,
+                         '_LT_CC_BASENAME' => 1,
+-                        'PKG_PROG_PKG_CONFIG' => 1,
+                         '_LT_LIBOBJ' => 1,
+                         'AC_LIB_PROG_LD' => 1
+                       }

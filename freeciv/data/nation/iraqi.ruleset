@@ -1,0 +1,60 @@
+[nation_iraqi]
+
+name=_("Iraqi")
+plural=_("?plural:Iraqis")
+groups="Modern", "Asian"
+legend=_("Iraq was founded after the fall of the Ottoman\
+ empire. It is encompassing the ancient region of Mesopotamia at the\
+ confluence of the Tigris and Euphrates rivers.")
+leader=
+ "Faisal I",
+ "Saddam Hussein",
+ "Mohammed Baqir al-Hakim",
+ "Abdul Salam Arif",
+ "Bakr Sidqi"
+leader_sex="Male", "Male", "Male", "Male", "Male"
+flag = "iraq"
+flag_alt = "iraq_old"
+city_style = "Babylonian"
+
+ruler_titles = { "government",  "male_title",      "female_title"
+	         "Communism",   _("Dictator"),     _("Dictatress")
+}
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="libyan", "iranian"
+
+cities =
+ "Baghdad",
+ "Basra",
+ "Mosul",
+ "Najaf",
+ "Kirkuk",
+ "Tikrit",
+ "Umm Qasr",
+ "Nassiriya",
+ "Ar Rutbah",
+ "Karbala",
+ "As Sulaymaniyah",
+ "Samarra",
+ "Kut",
+ "Ar Ramadi",
+ "Arbil",
+ "Kazimain",
+ "Sadr City",
+ "Baiji",
+ "Baquba",
+ "Dahuk",
+ "Al Diwaniyah",
+ "Fallujah",
+ "Halabja",
+ "Al Hillah",
+ "Iskandariya",
+ "Muqdadiyah",
+ "Osiraq",
+ "Samawah",
+ "Tadji"

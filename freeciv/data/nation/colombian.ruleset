@@ -1,0 +1,66 @@
+[nation_colombian]
+
+name=_("Colombian")
+plural=_("?plural:Colombians")
+groups="Modern", "American"
+legend=_("Colombia is a country in northern South America. The region was\
+ an Amerindian cultural center in pre-European time. The Spanish began\
+ settling Colombia's north coast around 1500. In 1819 the Republic of\
+ Colombia gained independence.")
+leader=
+ "Simón Bolívar",
+ "G. Jiménez de Quesada",
+ "T. Cipriano de Mosquera",
+ "Rafael Núñez"
+leader_sex="Male", "Male", "Male", "Male"
+flag="colombia"
+flag_alt = "columbia"	; For backward compatibility
+city_style = "Tropical"
+
+ruler_titles = { "government",      "male_title",        "female_title"
+                 "Anarchy",        _("General"),         _("General")
+                 "Despotism",      _("Governador"),      _("Governadora")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations = "venezuelan", "brazilian"
+
+cities =
+ "Bogotá",
+ "Medellín",
+ "Santiago de Cali",
+ "Barranquilla",
+ "Cartagena de Indias",
+ "Cúcuta",
+ "Bucaramanga",
+ "Manizales",
+ "Ibagué",
+ "Pereira",
+ "Arauca",
+ "Armenia",
+ "Barrancabermeja",
+ "Buenaventura",
+ "Florencia",
+ "Leticia",
+ "Mocoa",
+ "Montería",
+ "Neiva",
+ "Palmira",
+ "Pasto",
+ "Popayán",
+ "Quibdó",
+ "Riohacha",
+ "San José del Guaviare",
+ "Santa Marta",
+ "Sincelejo",
+ "Tunja",
+ "Valledupar",
+ "Villavicencio",
+ "Yopal",
+ "Girardot",
+ "Maicao",
+ "Mompós",
+ "San Vicente de Caguán"

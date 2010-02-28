@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1062.9921"
+   height="708.66138"
+   viewBox="0 0 12 6"
+   id="svg2207"
+   sodipodi:version="0.32"
+   inkscape:version="0.45"
+   sodipodi:docname="uae.svg"
+   sodipodi:docbase="/home/divanov/tmp/ttt/u"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   version="1.0"
+   sodipodi:modified="true">
+  <metadata
+     id="metadata2216">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs2214" />
+  <sodipodi:namedview
+     inkscape:window-height="755"
+     inkscape:window-width="1280"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     guidetolerance="10.0"
+     gridtolerance="10.0"
+     objecttolerance="10.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     width="300mm"
+     height="200mm"
+     units="mm"
+     inkscape:zoom="0.60333333"
+     inkscape:cx="600"
+     inkscape:cy="300"
+     inkscape:window-x="-5"
+     inkscape:window-y="-5"
+     inkscape:current-layer="svg2207" />
+  <rect
+     width="3"
+     height="8.039484"
+     id="red"
+     x="0"
+     y="-1.0103868"
+     style="fill:#ce1126" />
+  <rect
+     width="9"
+     height="2.6798282"
+     x="3"
+     id="green"
+     y="-1.0103868"
+     style="fill:#009a00" />
+  <rect
+     width="9"
+     height="2.6798282"
+     x="3"
+     y="1.6694413"
+     id="white"
+     style="fill:#ffffff" />
+  <rect
+     width="9"
+     height="2.6798282"
+     x="3"
+     y="4.3492694"
+     id="black"
+     style="fill:#000000" />
+</svg>

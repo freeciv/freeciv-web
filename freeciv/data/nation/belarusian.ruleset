@@ -1,0 +1,60 @@
+[nation_belarusian]
+
+name=_("Belarusian")
+plural=_("?plural:Belarusians")
+groups="Modern", "European"
+legend=_("Belarus was part of the ancient Slavic state of Kievan Rus', then\
+ subsequently Lithuania, Rzeczpospolita, the Russian Empire and the Soviet\
+ Union. Belarus became independent in 1991 with the dissolution of the\
+ Soviet Union.")
+
+leader =
+ "Usyaslav Brachyslavich",  ; the most famous ruler of Polatsak
+ "Vitaut",                  ; also known as Vytautas the Great, see lithuanian.ruleset
+ "Francysk Skaryna",        ; the printer of first book in Belarusian language
+ "Mikalaj Radzivil",        ; the Grand Hetman of Lithuania
+ "Kastus Kalinouski"        ; the leader of the January Uprising in Belarus
+
+leader_sex = "Male", "Male", "Male", "Male", "Male"
+flag="belarus"
+flag_alt = "-"
+city_style = "European"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="russian", "lithuanian", "polish", "ukrainian"
+
+cities =
+  "Minsk",
+  "Homyel",
+  "Vitsyebsk",
+  "Polatsak",
+  "Mahilyow",
+  "Orsha",
+  "Brest",
+  "Hrodna",
+  "Barysaw",
+  "Niasvizh",
+  "Pastavy",
+  "Lyepyel'",
+  "Maladzyechna",
+  "Lida",
+  "Krychaw",
+  "Asipovichy",
+  "Babruysk",
+  "Pinsk",
+  "Slutsk",
+  "Salihorsk",
+  "Zhlobin",
+  "Vawkavysk",
+  "Slonim",
+  "Baranavichy",
+  "Kobryn",
+  "Byaroza",
+  "Luninyets",
+  "Zhytkavichy",
+  "Mazyr",
+  "Rechytsa"

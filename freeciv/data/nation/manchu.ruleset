@@ -1,0 +1,61 @@
+[nation_manchu]
+
+name=_("Manchu")
+plural=_("?plural:Manchus")
+groups="Medieval", "Asian"
+legend=_("The Manchus were a semi-nomadic people originating from the region\
+ called Manchuria in Northeast Asia. In the 17th century they conquered and\
+ ruled China as the Manchu Empire until 1911.")
+leader=
+ "Nurhaci",
+ "Abatai",
+ "Giocangga",
+ "Puxian Wannu",
+ "Pu Yi"
+leader_sex="Male", "Male", "Male", "Male", "Male"
+flag="qing"
+flag_alt = "-"
+city_style = "Asian"
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Despotism",       _("Warlord"),      _("Warlord")
+                 "Monarchy",        _("Emperor"),      _("Empress")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations = "mongol", "korean", "chinese"
+
+; City list comprised of a selection of cities in 20th century Manchukuo,
+; selection made to ensure minimal overlap with Chinese city list.
+;
+; Source: http://en.wikipedia.org/wiki/Manchukuo_(administration)
+
+cities =
+ "Mukden",	; "Shenyang" in modern China
+ "Harbin",
+ "Fushum",
+ "Fusin",
+ "Tsitsihar",
+ "Aigun",
+ "Shamussi",
+ "Mergen",
+ "Burga",
+ "Hailar",
+ "Manchouli",
+ "Kirin",
+ "Chingwangtao",
+ "Hulutao",
+ "Yankifu",
+ "Yingkow",
+ "Antung",
+ "Hungchun",
+ "Ninguta",
+ "Wugtang",
+ "Fuchow",
+ "Taoan",
+ "Jehol",
+ "Chaoyangfu",
+ "Pingchuan",
+ "Pogranichnaya"

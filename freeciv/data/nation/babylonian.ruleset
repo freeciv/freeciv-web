@@ -1,0 +1,38 @@
+[nation_babylonian]
+
+name=_("Babylonian")
+plural=_("?plural:Babylonians")
+groups="Ancient", "Asian"
+legend=_("Babylon was the dominant city of Mesopotamia from the 18th to\
+ 7th centuries BC under a succession of peoples including Amorites,\
+ Kassites, Assyrians, and Chaldeans.")
+leader=
+ "Hammurabi",
+ "Sargon II",
+ "Nebuchadnezzar II",
+ "Tiglath-Pileser III",
+ "Burnaburiash II",
+ "Nabonassar"
+leader_sex="Male", "Male", "Male", "Male", "Male", "Male"
+flag = "babylon"
+flag_alt = "iraq_old"
+city_style = "Babylonian"
+
+ruler_titles = { "government",	"male_title",	"female_title"
+		 ; /* TRANS: Lugal = Great Man */
+		 "Despotism",	_("Lugal"),	 _("Lugal")
+	       } 
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations = "israeli", "persian", "aramean"
+
+cities =
+  "Babylon", "Lagash", "Nippur", "Ur", "Kish",
+  "Shuruppak", "Kisurra", "Cutha", "Adab", "Umma",
+  "Akkad", "Eridu", "Larsa", "Borsippa", "Sippar",
+  "Nineveh", "Ashur", "Calach", "Carcar", "Hamat",
+  "Opis", "Cunaxa", "Arbela", "Nisibis", "Carrhae",
+  "Seleucia", "Ctesiphon", "Sittace", "Orchoe", "Apamea"

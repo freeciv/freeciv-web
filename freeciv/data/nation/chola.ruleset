@@ -1,0 +1,70 @@
+[nation_chola]
+
+name=_("Chola")
+plural=_("?plural:Cholas")
+groups="Asian", "Ancient"
+
+legend=_("The Cholas were a Tamil dynasty in centered in southern India and\
+ were rare in their level of influence in northern India. They began as a\
+ tributary state to the Pallavas, but in the 9th century their power began\
+ to grow. During the 11th century, they lead expeditions against other\
+ Indian states as far north as Bengal, as well as against the Maldives, Sri\
+ Lanka and even the Indonesian kingdom of Sri Vijaya. They collapsed,\
+ however, in the 1250s as other southern Indian states rose up.")
+
+leader=
+ "Aditya I",
+ "Rajaraja Chola I",
+ "Rajendra Chola II",
+ "Kulothunga Chola III"
+
+leader_sex = "Male", "Male", "Male", "Male"
+
+flag         = "chola"
+flag_alt     = "-"
+city_style   = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations = "gupta", "lankese"
+
+cities =
+ "Thanjavur",
+ "Madurai",
+ "Negupatnam",
+ "Gangaikondacholapuram",
+ "Chidambaram",
+ "Kauchipuram",
+ "Anuradhapura",
+ "Srirangam",
+ "Polilur",
+ "Mamallapuram",
+ "Vengi",
+ "Raichur",
+ "Quilon",
+ "Kaveripattinam",
+ "Pazhaiyaarai",
+ "Uraiyur",
+ "Chennapatnam",
+ "Madraspatnam",
+ "Coimbatore",
+ "Ambattur",
+ "Erode",
+ "Tiruchirappalli",
+ "Salem",
+ "Alandur",
+ "Kumbakonam",
+ "Dindigul",
+ "Karur",
+ "Cuddalore",
+ "Pallavaram",
+ "Kanchipuram",
+ "Vellore",
+ "Pudukkottai",
+ "Nagercoil",
+ "Tirunelveli",
+ "Polonaruwa",
+ "Rohana"

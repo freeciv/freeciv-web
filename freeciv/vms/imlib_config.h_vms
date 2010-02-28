@@ -1,0 +1,85 @@
+/* VMS currently doesn't have fork (being added in
+   future version) use vfork for now */
+#include <unistd.h>
+#include <unixio.h>
+#define fork vfork
+#define lib$get_current_invo_context LIB$GET_CURRENT_INVO_CONTEXT
+					/* Should be in lib$routines.h */
+#include <lib$routines.h>		/* Needed for LIB$GET_CURRENT_INVO_CONTEXT used by vfork */
+
+/*
+** Externals in the X-library are in upper-case
+** but we need mixed-case for everything else.
+*/
+
+#define XAllocColor XALLOCCOLOR
+#define XChangeProperty XCHANGEPROPERTY
+#define XCreateColormap XCREATECOLORMAP
+#define XCreateGC XCREATEGC
+#define XCreateImage XCREATEIMAGE
+#define XCreatePixmap XCREATEPIXMAP
+#define XCreateWindow XCREATEWINDOW
+#define XFlush XFLUSH
+#define XFree XFREE
+#define XFreeColors XFREECOLORS
+#define XFreeGC XFREEGC
+#define XGetGeometry XGETGEOMETRY
+#define XGetImage XGETIMAGE
+#define XGetVisualInfo XGETVISUALINFO
+#define XGetWindowAttributes XGETWINDOWATTRIBUTES
+#define XGetWindowProperty XGETWINDOWPROPERTY
+#define XGrabServer XGRABSERVER
+#define XInternAtom XINTERNATOM
+#define XParseColor XPARSECOLOR
+#define XPutImage XPUTIMAGE
+#define XQueryColors XQUERYCOLORS
+#define XSetErrorHandler XSETERRORHANDLER
+#define XSync XSYNC
+#define XTranslateCoordinates XTRANSLATECOORDINATES
+#define XUngrabServer XUNGRABSERVER
+#define XVisualIDFromVisual XVISUALIDFROMVISUAL
+
+#define XCopyArea XCOPYAREA
+#define XFreePixmap XFREEPIXMAP
+
+#define XQueryExtension XQUERYEXTENSION
+#define XShmAttach XSHMATTACH
+#define XShmCreateImage XSHMCREATEIMAGE
+#define XShmCreatePixmap XSHMCREATEPIXMAP
+#define XShmDetach XSHMDETACH
+#define XShmGetEventBase XSHMGETEVENTBASE
+#define XShmGetImage XSHMGETIMAGE
+#define XShmPixmapFormat XSHMPIXMAPFORMAT
+#define XShmPutImage XSHMPUTIMAGE
+#define XShmQueryExtension XSHMQUERYEXTENSION
+#define XShmQueryVersion XSHMQUERYVERSION
+#define shmat SHMAT
+#define shmctl SHMCTL
+#define shmdt SHMDT
+#define shmget SHMGET
+
+#define PACKAGE "imlib"
+#define VERSION "1.9.8"
+
+#define HAVE_IPC_H
+#define HAVE_SHM_H
+#define HAVE_XSHM_H
+#define HAVE_SHM
+#undef IPC_RMID_DEFERRED_RELEASE
+#undef HAVE_LIBJPEG
+#undef HAVE_LIBTIFF
+#undef HAVE_LIBGIF
+#undef HAVE_LIBPNG
+
+#define HAVE_STDARGS
+#undef USE_GMODULE
+
+/* should be shm.h */
+
+#include <sys/types.h>
+int shmget(key_t key, size_t size, int shmflg);
+
+/* should be in xshm.h */
+
+#include <X11/Xlib.h>
+int XShmQueryExtension (Display *display);

@@ -1,0 +1,84 @@
+[nation_kyrgyz]
+
+name=_("Kyrgyz")
+plural=_("?plural:Kyrgyzs")
+groups="Modern", "Asian"
+legend=_("Nation in Central Asia. Conquered by the Russian Empire\
+ in 19th century, Kyrgyzstan got independence\
+ from the Soviet Union in 1991.")
+
+leader="Gudulu", ; Kyrgyz Khagan
+       "Yshbeg", ; Enisey Kyrgyz Khagan
+       "Bars-beg", ; Kyrgyz Khagan
+       "Tagay-biy", ; Kyrgyz Khagan
+       "Shabdan Dzhantaev", ; Kyrgyz field commander
+       "Kurmanjan Datka" ; Kyrgyz stateswoman
+
+leader_sex="Male", "Male", "Male", "Male", "Male",
+           "Female"
+
+flag="kyrgyzstan"
+flag_alt = "-"
+city_style = "Classical"
+
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Despotism",       _("Khan"),         _("Khatan")
+                 "Monarchy",        _("Khagan"),       _("Khagan")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations = "tajik", "uzbek", "kazakh"
+
+cities =
+ "Bishkek",
+ "Talas",
+ "Karakol",
+ "Naryn",
+ "Jalal-Abad",
+ "Osh",
+ "Batken",
+ "Kara-Balta",
+ "Tokmok",
+ "Balykchy",
+ "Özgön",
+ "Kyzyl-Adyr",
+ "Cholpon-Ata",
+ "Tyup",
+ "Kyzyl-Suu",
+ "Kaji-Say",
+ "Kara-Say",
+ "Ak-Shyyrak",
+ "Engil'chek",
+ "Bökönbaev",
+ "Kochkor",
+ "Chaek",
+ "Min-Kush",
+ "Baetov",
+ "At-Bashy",
+ "Chatyr-Tash",
+ "Kök-Aygyr",
+ "Imeni Kalilina",
+ "Kugart", ; the same city as Imeni Kalinina
+ "Kok-Yangak",
+ "Kazanman",
+ "Kara-Köl",
+ "Tash-Kömür",
+ "Kerben",
+ "Toktogul",
+ "Terek-Say",
+ "Ala-Buka",
+ "Gul'cha",
+ "Sary-Tash",
+ "Irkeshtam",
+ "Bordaba",
+ "Daroot-Korgon",
+ "Karamyk",
+ "Kyzyl-Kyya",
+ "Khaydarkan",
+ "Shürob",
+ "Isfana",
+ "Sülüktü"

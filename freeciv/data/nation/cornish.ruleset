@@ -1,0 +1,37 @@
+[nation_cornish]
+
+name = _("Cornish")
+plural = _("?plural:Cornish")
+groups= "Medieval", "European"
+legend=_("Cornwall is a region in the extreme southwest of England,\
+ traditionally the home of the legendary King Arthur.")
+leader =
+ "Arthur",
+ "Jonathen Trelawny",
+ "Thomas Flamank",
+ "Michael Joseph",
+ "William Bligh"
+leader_sex = "Male", "Male", "Male", "Male", "Male"
+flag = "cornwall"
+flag_alt = "england"
+city_style = "Celtic"
+
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Despotism",       _("Chieftain"),    _("?female:Chieftain")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations = "english", "irish"
+
+cities =
+  "Truro", "Newquay", "Falmouth", "Penzance", "Bodmin",
+  "St. Ives", "Redruth", "Helston", "Saltash", "Wadebridge",
+  "St. Austell", "Penryn", "Torpoint", "St. Keverne", "St. Mewan",
+  "St. Dennis", "Bugle", "St. Stephen", "Grampound", "Trewoon",
+  "Tregony", "Polmassick", "Ladock", "Coombe", "St. Mawes",
+  "Bissom", "Swanpool", "Halvosso", "Newlyn", "Mousehole",
+  "Marazion", "Madron", "Crowlas", "Reawla", "Hellesveor",
+  "Trink", "Lelant", "Gwithian"

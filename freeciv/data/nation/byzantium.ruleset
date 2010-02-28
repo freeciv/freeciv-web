@@ -1,0 +1,83 @@
+[nation_byzantine]
+
+name=_("Byzantine")
+plural=_("?plural:Byzantines")
+groups="Medieval", "Asian", "European"
+legend=_("At the time of the decline of the old Roman empire, the Emperor\
+ Constantine moved the empire's capital to Byzantium and formed a new empire\
+ mostly known as the Eastern Roman empire or the Byzantine empire. This\
+ empire lasted until 1453 when its capital fell to the Ottomans. At the time\
+ of Justinian I, the Byzantines controlled nearly all of the Middle East,\
+ northern Africa, Italy, and parts of Spain.")
+leader=
+ "Justinianus I",
+ "Heraclius",
+ "Michael VIII Palaeologus",
+ "Mauricius I",
+ "Basilios II Bulgaroktonos",
+ "Theodora"
+leader_sex="Male", "Male", "Male", "Male", "Male", "Female"
+flag="byzantium"
+flag_alt = "greek"
+city_style = "Classical"
+
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Despotism",       _("Imperator"),   _("Imperatrix")
+		 "Fundamentalism",  _("Patriarch"),   _("Matriarch")
+		 ; /* TRANS: Basileus = Monarch */
+                 "Monarchy",        _("Basileus"),    _("?female:Basileus")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+; Byzantium was a successor-empire of the Hellenic culture
+conflicts_with = "greek"
+civilwar_nations = "greek", "italian", "turkish", "arab"
+
+cities =
+ "Konstantinoupolis (ocean)",	; Constantinople / Istanbul
+ "Efesos",			; Ephesus
+ "Ikonio",			; Iconium
+ "Romi",			; Rome
+ "Trapezounta",			; Trapezus
+ "Dyrrachio (ocean)",		; Dyrrachium
+ "Antiocheia",			; Antioch
+ "Nikaia",			; Nicaea
+ "Thessaloniki (ocean)",
+ "Rodos (ocean)",		; Rhodes
+ "Tarsos",			; Tarsus
+ "Kaisareia",			; Caesarea
+ "Trier",
+ "Monemvasia",
+ "Irakleia",			; Heraclea
+ "Samosata",
+ "Filadelfeia",			; Philadelphia
+ "Syrakousa",			; Syracuse
+ "Napoli",			; Naples
+ "Karchidon",			; Carthage
+ "Ierousalim",			; Jerusalem
+ "Edessa",			; Edessa
+ "Adrianoupoli",		; Adrianople
+ "Kyrini",			; Cyrene
+ "Ankyra",			; Ankara
+ "Nikomideia",			; Nicomedia
+ "Mystras",			; Myzethras
+ "Ravenna",
+ "Germaniceia",			; Marash
+ "Chersonesos",			; Sevastopol
+ "Prousa",			; Bursa
+ "Athina",			; Athens
+ "Ioannina",
+ "Pella",
+ "Doryleo",
+ "Lefkosia",			; Nicosia
+ "Smyrni (ocean)",		; Smyrna
+ "Alexandreia (ocean)",		; Alexandria
+ "Virytos",			; Beirut
+ "Palmyra",
+ "Pantikapaio",			; Panticapaeum / Kerch
+ "Sougdeia",			; Sudak
+ "Theodosia"

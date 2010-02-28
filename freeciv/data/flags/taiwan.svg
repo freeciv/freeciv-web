@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
+"http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<!-- Created with Sodipodi ("http://www.sodipodi.com/") -->
+<svg
+   id="svg977"
+   sodipodi:version="0.32"
+   width="210mm"
+   height="140mm"
+   sodipodi:docbase="/home/cschalle/sodipodi-flags/Regional/"
+   sodipodi:docname="/home/cschalle/sodipodi-flags/Regional/taiwan.svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs
+     id="defs979" />
+  <sodipodi:namedview
+     id="base"
+     showgrid="false"
+     snaptogrid="false"
+     snaptoguides="true" />
+  <rect
+     style="font-size:12;fill:#de2110;fill-rule:evenodd;stroke-width:1pt;fill-opacity:1;"
+     id="rect983"
+     width="744.094499"
+     height="496.062988"
+     x="0.000000"
+     y="-0.000046"
+     transform="translate(0.000000,2.288818e-5)" />
+  <rect
+     style="font-size:12;fill:#08399c;fill-rule:evenodd;stroke-width:1pt;fill-opacity:1;"
+     id="rect984"
+     width="373.689266"
+     height="248.031494"
+     x="0.000000"
+     y="-0.000031" />
+  <polygon
+     sodipodi:type="star"
+     style="font-size:12;fill:#ffffff;fill-rule:evenodd;stroke-width:1pt;"
+     id="polygon1007"
+     sodipodi:sides="12"
+     sodipodi:cx="186.625671"
+     sodipodi:cy="122.811646"
+     sodipodi:r1="98.9855499"
+     sodipodi:r2="56.4217644"
+     sodipodi:arg1="0.51988852"
+     sodipodi:arg2="0.78168792"
+     points="272.533,171.986 226.67,162.56 236.436,208.351 201.431,177.256 186.993,221.797 172.225,177.365 137.451,208.719 146.878,162.856 101.086,172.622 132.181,137.617 87.6408,123.179 132.073,108.411 100.719,73.6373 146.582,83.0637 136.815,37.2719 171.821,68.367 186.258,23.8268 201.026,68.2586 235.8,36.9046 226.374,82.7677 272.165,73.0012 241.07,108.007 285.611,122.444 241.179,137.212 272.533,171.986 "
+     transform="translate(0.794239,1.011375)" />
+  <polygon
+     sodipodi:type="star"
+     style="font-size:12;fill:#005387;fill-rule:evenodd;stroke-width:1pt;"
+     id="polygon1009"
+     sodipodi:sides="12"
+     sodipodi:cx="186.625671"
+     sodipodi:cy="122.811646"
+     sodipodi:r1="62.6503105"
+     sodipodi:r2="60.1442986"
+     sodipodi:arg1="0.79689646"
+     sodipodi:arg2="1.05869591"
+     points="230.414,167.619 216.097,175.24 202.144,183.51 185.934,182.952 169.716,183.137 155.957,174.549 141.819,166.6 134.197,152.283 125.928,138.33 126.485,122.12 126.301,105.902 134.888,92.1426 142.838,78.0047 157.154,70.3828 171.107,62.1137 187.317,62.6713 203.536,62.4865 217.295,71.0744 231.433,79.0235 239.054,93.3404 247.324,107.293 246.766,123.503 246.951,139.721 238.363,153.481 230.414,167.619 "
+     transform="matrix(1.011220,0.000000,0.000000,1.008521,-1.945835,0.434593)" />
+  <path
+     sodipodi:type="arc"
+     style="font-size:12;fill:#ffffff;fill-rule:evenodd;stroke-width:1pt;"
+     id="path1011"
+     d="M 236.878693 122.811646 A 50.253021 50.253025 0 1 0 136.372650,122.811646 A 50.253 50.253 0 1 0 236.879 122.812 L 186.625671 122.811646 z"
+     sodipodi:cx="186.625671"
+     sodipodi:cy="122.811646"
+     sodipodi:rx="50.253021"
+     sodipodi:ry="50.253025"
+     transform="translate(0.148106,1.481079)" />
+</svg>

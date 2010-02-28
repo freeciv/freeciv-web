@@ -1,0 +1,84 @@
+/********************************************************************** 
+ Freeciv - Copyright (C) 2010 - Andreas Røsdal   andrearo@pvv.ntnu.no
+ 
+   This class isn't in use any more.
+ 
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2, or (at your option)
+   any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+***********************************************************************/
+
+//  This software code is made available "AS IS" without warranties of any
+//  kind.  You may copy, display, modify and redistribute the software
+//  code either by itself or as incorporated into your code; provided that
+//  you do not remove any proprietary notices.  Your use of this software
+//  code is at your own risk and you waive any claim against Amazon
+//  Digital Services, Inc. or its affiliates with respect to your use of
+//  this software code. (c) 2006-2007 Amazon Digital Services, Inc. or its
+//  affiliates.
+
+package freeciv.servlet;
+
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
+import com.amazon.s3.AWSAuthConnection;
+import com.amazon.s3.CallingFormat;
+import com.amazon.s3.GetResponse;
+import com.amazon.s3.ListAllMyBucketsResponse;
+import com.amazon.s3.ListBucketResponse;
+import com.amazon.s3.ListEntry;
+import com.amazon.s3.QueryStringAuthGenerator;
+import com.amazon.s3.Response;
+import com.amazon.s3.S3Object;
+import com.amazon.s3.Utils;
+
+public class SavegameManager {
+	static final String awsAccessKeyId = "changeme";
+	static final String awsSecretAccessKey = "changeme";
+
+	// for subdomains (bucket.s3.amazonaws.com),
+	// the bucket name must be lowercase since DNS is case-insensitive
+	static final String bucketName = "freeciv-net-savegames";
+	static int assertionCount = 0;
+
+	static final int UnspecifiedMaxKeys = -1;
+
+
+	public static List getSavegames(String username) {
+
+		AWSAuthConnection conn = new AWSAuthConnection(awsAccessKeyId,	awsSecretAccessKey);
+
+		ListBucketResponse response = null;
+		try {
+			response = conn.listBucket(bucketName, username + "-",
+					null, null, null);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
+		ListEntry e = (ListEntry)response.entries.get(0);
+		
+		return response.entries;
+	}
+	
+}

@@ -1,0 +1,57 @@
+[nation_peruvian]
+
+name=_("Peruvian")
+plural=_("?plural:Peruvians")
+groups="Modern", "American"
+legend=_("Peru was the cradle of the Inca Empire and civilization. It is\
+ still today a major center of indigenous South American culture.")
+leader=
+ "Andrés de Santa Cruz",
+ "Agustín Gamarra",
+ "Ramón Castilla",
+ "Andrés Avelino Cáceres",
+ "José Pardo y Barreda",
+ "Augusto B. Leguía",
+ "Manuel A. Odría",
+ "Fernando Belaúnde Terry",
+ "Alberto Fujimori"
+leader_sex="Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male",
+           "Male"
+flag="peru"
+flag_alt = "-"
+city_style = "Tropical"
+
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Despotism",       _("Protector"),    _("Protector")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+conflicts_with = "inca"
+civilwar_nations = "chilean", "inca"
+
+cities =
+ "Lima",
+ "Arequipa",
+ "Piura",
+ "Trujillo",
+ "El Callao (ocean)",
+ "Chiclayo (ocean)",
+ "Huancayo",
+ "Chimbote (ocean)",
+ "Iquitos",
+ "Cusco",
+ "Ica",
+ "Tacna",
+ "Pucallpa",
+ "Juliaca",
+ "Huánuco",
+ "Sullana",
+ "Ayacucho",
+ "Cajamarca",
+ "Talara",
+ "Puno",
+ "Tumbes"

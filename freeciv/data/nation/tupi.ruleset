@@ -1,0 +1,75 @@
+[nation_tupi]
+
+name=_("Tupi")
+plural=_("?plural:Tupi")
+groups="American"
+
+legend=_("The Tupi are a native Brazilian people related to the Guarani who\
+ inhabited the modern Brazilian states of Paraiba, Pernambuco, Ceara, Rio\
+ Grande do Norte, Alagoas, Sergipe and others as well. Their chiefdoms were\
+ destroyed through Portuguese slave-raids, the creation of mission-villages,\
+ and disease. The Tupi intermarried with African slaves and Europeans alike\
+ and a great many Brazilian place names are derived from Tupi words. ")
+
+leader=
+ "Tibiriça",
+ "Pindubuçu",
+ "Jugasu",
+ "Konyan Bebe"
+
+leader_sex = "Male", "Male", "Male", "Male"
+
+ruler_titles = { "government",      "male_title",        "female_title"
+		 ; /* TRANS: Morubixaba = Chief */
+                 "Despotism",       _("Morubixaba"),     _("Morubixaba")
+		 ; /* TRANS: Paje = Shaman */
+                 "Fundamentalism",  _("Paje"),           _("Paje")
+               }
+
+flag         = "tupi"
+flag_alt     = "-"
+city_style   = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations = "taino", "tairona"
+
+cities =
+ "Alagoa",
+ "Syara",
+ "Paráyba",
+ "Paranã",
+ "Piauy",
+ "Siri Jibe",
+ "Tukantin",
+ "Itapeva",
+ "Ka'aokai",
+ "Capuan",
+ "Icaraí",
+ "Jandaiguaba",
+ "Paumirim",
+ "Pabussu",
+ "Tabapuá",
+ "Igaporã",
+ "Uubatyba",
+ "Iperoig",
+ "Itauna",
+ "Potengi",
+ "Sergipe",
+ "Yûasú",
+ "Ypanema",
+ "Itáañãgá",
+ "Itákûakesétyba",
+ "Îagûaraíuna",
+ "Pakaembu",
+ "Paranãyba",
+ "Paranãmirĩ",
+ "Pindó",
+ "Piráí",
+ "Ũbuarama",
+ "Tupinambarana",
+ "Uwattibi",
+ "Arari"

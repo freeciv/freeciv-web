@@ -1,0 +1,49 @@
+[nation_lojbanistani]
+
+name=_("Lojbanistani")
+plural=_("?plural:Lojbanistanis")
+groups="Fictional"
+legend=_("Lojbanistan is a fictional place where people speak\
+ Lojban. Lojban is a constructed language meant for human\
+ communication. Lojban is syntactically unambiguous\
+ (\"Time flies like an arrow. Fruit flies like a banana.\"),\
+ culturally neutral and simple to learn.")
+leader=
+ "lojbab",
+ "noras",
+ "banli ve cukta",	; John Woldemar Cowan
+ "camgusmis",	; Robin Lee Powell
+ "tsali",	; Arnt Richard Johansen
+ "xorxes",	; Jorge Llambías
+ "epkat"
+ 
+leader_sex="Male", "Female", "Male", "Male", "Male", "Male", "Male"
+flag="jbonai"
+flag_alt = "american"   ; Born there
+city_style = "European"
+ 
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations="american", "canadian", "argentine", "russian", "viking"
+
+cities =
+ "jbotcad",
+ "feirfeks",
+ "bais",
+ "berti cmana (mountains)",
+ "ri'etcad (river)",
+ "blanu rokci cmama'a (hills)",
+ "xumjimcelxa'i danmno",
+ "tsali barda cmana (mountains)",
+ "ricfoi lalxu (forest)",
+ "barda kevna",
+ "mirli poi spofu se tuple",
+ "da'onri'e (river)",
+ "cribyjgalu",
+ "pamoi xagji sofybakni",
+ "remoi xagji sofybakni",
+ "cimoi xagji sofybakni",
+ "vomoi xagji sofybakni",
+ "mumoi xagji sofybakni"

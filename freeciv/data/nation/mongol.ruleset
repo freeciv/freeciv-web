@@ -1,0 +1,101 @@
+[nation_mongol]
+
+name=_("Mongol")
+plural=_("?plural:Mongols")
+groups="Medieval", "Modern", "Asian"
+legend=_("In the centuries after their unification by Genghis Khan, the\
+ Mongols conquered the largest empire in human history, encompassing most\
+ of the continent of Asia.  They became notorious for the utter ruthlessness\
+ in warfare.")
+leader=
+ "Genghis",
+ "Bortai",
+ "Ogedei",
+ "Dayan",
+ "Timur Lenk",
+ "Batu",
+ "Tokhtamysh",
+ "Kublai",
+ "Altan",
+ "Toregene",
+ "Hulagu",
+ "Kara Nogai"
+leader_sex="Male", "Female", "Male", "Male", "Male", "Male", "Male",
+           "Male", "Male", "Female", "Male", "Male"
+flag="mongolia"
+flag_alt = "-"
+city_style = "Asian"
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Despotism",       _("Khan"),         _("?female:Khan")
+		 ; /* TRANS: Khagan = Great Khan */
+                 "Monarchy",        _("Khagan"),       _("?female:Khagan")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+; Used to have russian here but korean seems closer
+civilwar_nations = "chinese", "korean"
+
+; Many of these are historical (not part of modern Mongolia)
+cities =
+ "Almaligh",
+ "Khotan",
+ "Turfan",
+ "Samarkand",
+ "Bokhara",
+ "Tashkent",
+ "Kashgar",
+ "Balkh",
+ "Kabul",
+ "Sarai",
+ "Astra Khan",
+ "Tana",
+ "Kazan",
+ "Caffa",
+ "Karakorum",
+ "Hami",
+ "Dunhuang",
+ "Tali",
+ "Tabriz",
+ "Basra",
+ "Rayy",
+ "Daybul",
+ "Ulan Bator",
+ "Ulan Ude",
+ "Sainshand",
+ "Ulangom",
+ "Hovd",
+ "Hatgal",
+ "Uliastay",
+ "Tsetserleg",
+ "Altan Bulag",
+ "Dzuunmod",
+ "Bayan Hongor",
+ "Huld",
+ "Dalandzadgad",
+ "Coybalsan",
+ "Erdenet",
+ "Mandal Gobi",
+ "Muren",
+ "Sukhe Bator",
+ "Dzuun Haraa",
+ "Undur Khan",
+ "Olgiy",
+ "Arbay Heere",
+ "Bulgan",
+ "Altay",
+ "Baruun Urt",
+ "Coyr",
+ "Darhan",
+ "Bayan Uul",
+ "Dzuun Balag",
+ "Ereen Cav",
+ "Nalayh",
+ "Tamsag Bulag",
+ "Buyant Uhaa",
+ "Dund Us",
+ "Dzamyn Uud",
+ "Tsetsen Khan"

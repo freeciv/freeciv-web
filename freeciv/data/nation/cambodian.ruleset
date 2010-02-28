@@ -1,0 +1,74 @@
+[nation_cambodian]
+
+name=_("Cambodian")
+plural=_("?plural:Cambodians")
+groups="Modern", "Medieval", "Asian"
+legend=_("Kampuchea (known in English as Cambodia) is the modern successor\
+ state of the mighty Khmer Empire, which ruled most of the Indochinese\
+ Peninsula between the 11th\
+ and 14th centuries.")
+leader=
+ "Pol Pot",
+ "Norodom Sihanouk",
+ "Ang Chan",
+ "Jayavarman II"
+leader_sex="Male", "Male", "Male", "Male"
+flag="kampuchea"
+flag_alt = "-"
+city_style = "Asian"
+
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Despotism",       _("Warlord"),      _("Warlord")
+                 "Communism",       _("Brother"),      _("Sister")
+                 "Democracy", _("Prime Minister"),_("?female:Prime Minister")
+}
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations="thai", "vietnamese"
+
+cities =
+ "Phnom Penh",
+ "Angkor Thom",
+ "Battambang",
+ "Angkor Wat",
+ "Siem Reap",
+ "Takeo",
+ "Kompong Speu",
+ "Prey Veng",
+ "Sisophon",
+ "Pailin",
+ "Kampot",
+ "Kep",
+ "Stung Treng",
+ "Banlung",
+ "Cheom Ksan",
+ "Pursat",
+ "Kompong Chhnang",
+ "Kompong Thum",
+ "Svay Rieng",
+ "Kompong Cham",
+ "Kratie",
+ "Sen Monorom",
+ "Kompong Luong",
+ "Udong",
+ "Veal Renh",
+ "Banam",
+ "Siem Pang",
+ "Koulen",
+ "Krong Koh Kong",
+ "Samrong",
+ "Phnom Thbeng Meanchey",
+ "Kaopong Sralao",
+ "Phsar Oudong",
+ "Boung Long",
+ "Lomphat",
+ "Snuol",
+ "Sre Khtum",
+ "Moung",
+ "Kralanh",
+ "Lomphat",
+ "Rovieng",
+ "Koulen"

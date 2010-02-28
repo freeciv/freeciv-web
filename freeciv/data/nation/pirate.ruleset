@@ -1,0 +1,34 @@
+[nation_pirate]
+
+name=_("Pirate")
+plural=_("?plural:Pirates")
+legend=_("As long as honest men have sailed the seas, pirates have been a\
+ scourge of them and of all coastal dwelling peoples.")
+leader=
+ "Anne Bonny",
+ "Calico Jack",
+ "Cofresí",
+ "Blackbeard",
+ "Henry Morgan",
+ "François l'Ollonais",
+ "Bartolomeo Portugues"
+leader_sex="Female", "Male", "Male", "Male", "Male", "Male", "Male"
+flag="pirate"
+flag_alt = "-"
+city_style = "European"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+; Various pirate havens
+cities =
+ "New Providence",
+ "Port Royal", 
+ "Tortuga"
+
+is_playable = 0
+barbarian_type = "Sea"
+
+; nothing more needed for barbarians

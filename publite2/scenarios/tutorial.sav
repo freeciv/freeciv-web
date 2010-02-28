@@ -1,0 +1,495 @@
+# Keep this section first
+[scenario]
+name=_("Tutorial")
+description=_("Play this tutorial scenario to get an\
+ introduction to Freeciv.")
+
+[script]
+code=$
+function has_unit_type_name(unit, utype_name) 
+  return (unit.utype.id == find.unit_type(utype_name).id)
+end
+function has_tile_terrain_name(tile, terrain_name)
+  return (tile.terrain.id == find.terrain(terrain_name).id)
+end
+
+function turn_callback(turn, year)
+  if turn == 0 then
+    notify.event(nil, nil, E.SCRIPT,
+_("Welcome to Freeciv.  You lead a civilization.  Your\n\
+task is to conquer the world!  You should start by\n\
+exploring the land around you with your explorer,\n\
+and using your settlers to find a good place to build\n\
+a city.  Use the number pad to move units around."))
+  end
+end
+signal.connect('turn_started', 'turn_callback')
+
+function unit_moved_callback(unit, src_tile, dst_tile)
+  if unit.owner:is_human() then
+    if citiesbuilt == 0
+      and has_unit_type_name(unit, 'Settlers')
+      and (has_tile_terrain_name(dst_tile, 'Grassland')
+           or has_tile_terrain_name(dst_tile, 'Plains')) then  
+      notify.event(unit.owner, dst_tile, E.SCRIPT,
+_("This looks like a good place to build a city.  The next time this\n\
+unit gets a chance to move, press (b) to found a city.\n\
+\n\
+In general you want to build cities on open ground near water.  Food\n\
+is the most important resource for any city.  Grassland and plains\n\
+provide plenty of food."))
+    end
+  end
+end
+signal.connect('unit_moved', 'unit_moved_callback')
+
+function city_built_callback(city)
+  if city.owner:is_human() then
+    if citiesbuilt == 0 then
+      notify.event(city.owner, city.tile, E.SCRIPT,
+_("Now you have built your first city.  The city window should have\n\
+opened automatically; if not click on the city to open it.  Cities are\n\
+a fundamental concept in Freeciv, so you should familiarize yourself\n\
+with them by playing around in the window.  See the help menu for more.\n\
+\n\
+You probably want to build some settlers first, so as to expand your\n\
+civilization further.  Click on the production tab, then click on the\n\
+settler unit from the list of possible productions, then click on the\n\
+Change button to begin building it.  When you are done, close the city\n\
+dialog.  If all goes well the city should display the settler\n\
+production on the map view."))
+    elseif citiesbuilt == 1 then
+      notify.event(city.owner, city.tile, E.SCRIPT,
+_("Congratulations, you have founded your second city.  This city will\n\
+behave almost exactly like the first one - it will be slightly different\n\
+because of the terrain around it.  You probably want to build\n\
+settlers here too."))
+    elseif citiesbuilt == 2 then
+      notify.event(city.owner, city.tile, E.SCRIPT,
+_("You have built your third city!  Your civilization seems to be\n\
+thriving.  It might be time to think about a military.  Pick one of\n\
+the cities that has a high production, and convert it into a military\n\
+base. Build a Barracks there first, then start work on a military\n\
+unit.  Pick the best unit you have available - at the beginning of\n\
+the game, Warriors will be the only choice, but soon you will have \n\
+plenty of options.\n\
+\n\
+This might also be a good time to use the worklist feature of the\n\
+city dialog production report.  Click on Barracks, then click Change\n\
+to begin building them.  Then double-click on a military unit to\n\
+append it to the worklist.  As soon as the Barracks are complete the\n\
+city will automatically switch over to producing the unit."))
+    elseif citiesbuilt == 3 then
+      notify.event(city.owner, city.tile, E.SCRIPT,
+_("Another city!  You are really getting the hang of this.  You\n\
+probably have a pretty good idea what to do with new cities by\n\
+now.  Take a moment to look at the bar below the city on the map\n\
+view.  This display shows some useful information about the city.\n\
+The flag and background color indicate what civilization the city\n\
+belongs to (this will be useful when you meet other civilizations).\n\
+The top row of the bar also shows the name and size of the city, and\n\
+will show one or more stars to indicate if there are units in the\n\
+city.  The bottom row shows what the city is building, and how long it\n\
+will take; it also shows how long the city will take to grow to the\n\
+next largest size."))
+    elseif citiesbuilt == 4 then
+      notify.event(city.owner, city.tile, E.SCRIPT,
+_("As the number of cities in your empire grows, it becomes harder to\n\
+manage individual cities.  This is where the city report becomes\n\
+useful.  Press F4 to bring it up.  This report shows a list of cities\n\
+with various statistics about each.  Play around with it a bit if you\n\
+like (return to the map view by pressing F1 or clicking on the Map\n\
+tab).  With a bit of practice it is possible to control almost every\n\
+aspect of the cities from this report.  The full power of the city\n\
+report is beyond the scope of this tutorial, however."))
+    end
+    citiesbuilt = citiesbuilt + 1
+  end
+end
+citiesbuilt = 0
+signal.connect('city_built', 'city_built_callback')
+
+function city_growth_callback(city, size)
+  if city.owner:is_human() then
+    if size == 2 and not growth2msg then
+      notify.event(city.owner, city.tile, E.SCRIPT,
+_("Your city has grown!  As a city grows, more citizens become\n\
+available that can be put to work in the fields or dedicated as\n\
+citizen specialists.  A city of size two or more may also build\n\
+settlers, which costs one unit of population.\n\
+\n\
+If your city is building settlers, you should consider buying them\n\
+now.  Open the city dialog and click on the Buy button.  This trades\n\
+in gold (if you have enough of it) to instantly complete the\n\
+production."))
+      growth2msg = true
+    elseif size == 3 and not growth3msg then
+      notify.event(city.owner, city.tile, E.SCRIPT,
+_("Your city has grown again!  Now with three citizens you have\n\
+a fair amount of choice over where the city should focus its\n\
+resources.  A city with three citizens gets to work three\n\
+different tiles, in addition to its center tile which is worked\n\
+for free.  In the city dialog, the map shows which tiles are working\n\
+and how much food, shields, and trade each provides.  Food is used\n\
+to grow your city, shields are used for production of buildings\n\
+and units, while trade provides taxable revenue that can be\n\
+turned into science research, gold, or luxuries.\n\
+\n\
+Click on a worked tile to remove the citizen from that tile.  Then\n\
+click on an unworked tile to place a worker there.  You may place\n\
+up to three workers, of course.  The remaining citizens are all\n\
+specialists - right now they are all entertainers which provide\n\
+only luxuries (which will not be useful until later)."))
+      growth3msg = true
+    elseif size == 5 and not growth5msg then
+      notify.event(city.owner, city.tile, E.SCRIPT,
+_("Now your city has grown to size five.  As cities get larger unrest\n\
+becomes a problem.  A city of this size will usually have one unhappy\n\
+citizen unless pacifying effects are used; meaning one entertainer\n\
+specialist is required to keep your citizens content.  This is basically\n\
+a wasted citizen.\n\
+\n\
+There are several things that can be done about this.  One quick fix\n\
+is to build a temple (or other cultural building) that will make an\n\
+unhappy citizen content (see the help on City Improvements for specs\n\
+on each building type).  As you get more large cities, it may pay off\n\
+to change your tax rates (by pressing ctrl-T) to dedicate some of\n\
+your taxes directly to luxuries (every two luxuries will pacify one\n\
+citizen).  Building a marketplace enhances the benefit from this\n\
+by providing +50%% luxuries to the city."))
+      growth5msg = true
+    elseif size == 8 and not growth8msg then
+      notify.event(city.owner, city.tile, E.SCRIPT,
+_("Finally you have grown a city to size eight.  A size eight city can\n\
+provide substantial output provided you have enough luxuries to keep\n\
+your population content.\n\
+\n\
+To grow a city beyond size eight requires an aqueduct.  If your city is\n\
+going to continue to grow you should start building one soon.  Building\n\
+an aqueduct requires the Construction technology."))
+      growth8msg = true
+    elseif size == 12 and not growth12msg then
+      notify.event(city.owner, city.tile, E.SCRIPT,
+_("You have grown a city to size twelve.  To grow\n\
+it larger, however, you will need to build a Sewer System.  This\n\
+requires the Sanitation technology."))
+      growth12msg = true
+    elseif size == 13 and not growth13msg then
+      notify.event(city.owner, city.tile, E.TUTURIAL,
+_("Congratulations; you have grown a city to size 13.  A city this\n\
+large can provide a tremendous amount of output if properly upgraded.\n\
+Make sure you have enough taxes and cultural buildings to keep your\n\
+citizens content.  You should also make sure the city is upgraded\n\
+with buildings that provide bonuses to its output.  Library, Marketplace,\n\
+Factory, and Offshore Platform are four good buildings that provide a\n\
+large bonus to big cities.  Consider how much benefit each building\n\
+will provide and weigh this against its cost - for very large cities\n\
+almost all buildings are worthwhile.  Such large cities will also\n\
+provide enough taxable revenue (gold) to allow you to purchase some\n\
+buildings to accelerate their productions."))
+      growth13msg = true
+    end
+  end
+end
+growth2msg = false
+growth3msg = false
+growth5msg = false
+growth8msg = false
+growth12msg = false
+growth13msg = false
+signal.connect('city_growth', 'city_growth_callback')
+
+function unit_built_callback(unit)
+  if not unit.owner:is_human() then
+    return
+  end
+  if has_unit_type_name(unit, 'Settlers') then
+    if settlersbuilt == 0 then
+      notify.event(unit.owner, unit.tile, E.SCRIPT,
+_("You have built a settler unit.  Settlers are best used to build \n\
+new cities, so as to expand your civilization.  Move your settler\n\
+away from your existing cities to find a spot for a new city.  When\n\
+you have picked a spot press B to build the city.\n\
+\n\
+Again, cities are best built on open ground near water.  Grassland\n\
+and plains provide food for the city.  Forests and hills provide\n\
+the resources (shields) needed for building things.  Rivers and ocean\n\
+give trade bonuses that provide civilization-wide benefits.  Desert,\n\
+tundra, and mountains generally provide little output and are not\n\
+of much use to small cities.  See the help on Terrain for more\n\
+information about terrain specs."))
+    elseif settlersbuilt == 1 then
+      notify.event(unit.owner, unit.tile, E.SCRIPT,
+_("Your second Settlers should also be used to build a new city.\n\
+Notice how when you move the Settlers away from your existing cities\n\
+an outline is drawn around them.  This shows the area that would be\n\
+covered by a city built at this location; it fits in with the outline\n\
+already on the map view that shows which tiles are covered by your\n\
+existing cities.  Generally when building new cities you want to make\n\
+sure that all tiles are covered by at least one city, but after that\n\
+it is best that your cities overlap as little as possible.  Spreading\n\
+out cities properly gives each city access to more resources, allowing\n\
+them to grow to larger sizes."))
+    end
+    settlersbuilt = settlersbuilt + 1
+  end
+end
+settlersbuilt = 0
+signal.connect('unit_built', 'unit_built_callback')
+
+function building_built_callback(building, city)
+  if not city.owner:is_human() then
+    return
+  end
+  if building.id == find.building_type('Barracks').id and not barracksmsg then
+    notify.event(city.owner, city.tile, E.SCRIPT,
+_("You have built a Barracks.  This building will make any military\n\
+units you build start out as veterans.  Veteran units are stronger\n\
+than inexperienced (green) troops, and will survive longer in\n\
+combat.  See the help on City Improvements for more information\n\
+about this and other buildings.\n\
+\n\
+You probably want to start building a military unit in the city\n\
+that built the Barracks.  A barracks are a significant investment\n\
+and have a small upkeep as well, so it is not a good idea to let\n\
+them go to waste."))
+    barracksmsg = true
+  end
+end
+barracksmsg = false
+signal.connect('building_built', 'building_built_callback')
+
+function unit_cant_be_built_callback(unittype, city, reason)
+  if not city.owner:is_human() then
+    return
+  end
+  if unittype.id == find.unit_type('Settlers').id and not nosettlermsg then
+    notify.event(city.owner, city.tile, E.SCRIPT,
+_("Your city cannot build a settler.  Settlers take one unit of\n\
+population to build, so a city of size one cannot build one without\n\
+disbanding the city.\n\
+\n\
+To remedy this, you need to adjust the citizens in the city to\n\
+provide more food so as to grow the city faster.  Cities that\n\
+do not have much food should not try to build settlers.  When\n\
+founding a new city, make sure it is built on terrain that provides\n\
+enough food - grassland is best; plains or hills are almost as good."))
+    nosettlermsg = true
+  elseif not unittype:has_flag('NonMil') and not nomilmsg then
+notify.event(city.owner, city.tile, E.SCRIPT,
+_("You have built your first military unit!  Military units have two\n\
+basic purposes: attack and defense.  Each unit has an attack strength\n\
+and a defense strength.  While a Warriors is a measly 1/1, a Phalanx\n\
+is a much stronger defender with 2 defense (1/2).  A Catapult is a good\n\
+attacking unit because it has 6 attack (6/1).\n\
+\n\
+Usually it is a good idea to keep one or two defenders in each city.\n\
+Important cities like your capital may deserve extra protection.  Units\n\
+built in one city may be sent to another city to defend (press the G\n\
+key to enter goto mode to move units easily over distances).  If you\n\
+are at war, however, you may wish to move your unit toward an enemy\n\
+city to attack.  Be careful not to lose it though!"))
+    nomilmsg = true
+  end
+end
+nosettlermsg = false
+nomilmsg = false
+signal.connect('unit_cant_be_built', 'unit_cant_be_built_callback')
+
+function tech_researched_callback(tech, player, reason)
+  if not player:is_human() or not (reason == 'researched') then
+    return
+  end
+  if numtechs == 0 then
+    notify.event(player, nil, E.SCRIPT,
+_("You have researched your first technology!  Technological advances\n\
+are an integral concept in Freeciv.  As you increase your technology\n\
+level new units, buildings, governments, and various free bonuses will\n\
+become available to you.\n\
+\n\
+For now, go over into the Science Dialog and play around a little.\n\
+Press F6 to open the science dialog (or click on the Science tab in\n\
+the main window area).  Find the technology called Republic and click\n\
+on it.  Now Republic has been set as your technology goal; this means\n\
+the next advance on the path toward this technology will automatically\n\
+be chosen to research.  In the top of the window it shows how much\n\
+scientific research you are accomplishing each turn - research (bulbs)\n\
+comes from the taxable trade in your cities.  In the bottom of the\n\
+window is the tech tree; here you may left-click to set the research\n\
+target or research goal, or right-click to get help about a particular\n\
+technology.  When you are done playing around click on the Map tab\n\
+(F1) to return to the map view."))
+  elseif numtechs == 1 then
+    notify.event(player, nil, E.SCRIPT,
+_("Now you have researched your second technology.  Go back into the\n\
+science dialog (F6) and take a quick look at your progress.  If you\n\
+set Republic as your technology goal earlier, a new research target\n\
+should have been chosen for you automatically.  If you do not have\n\
+any goal set, however, there will not be any new target chosen until\n\
+the end of the turn.\n\
+\n\
+In the turn when you complete your research, you can pick a new tech\n\
+to research.  However, switching targets midway through researching a\n\
+particular technology costs you all of the research done on\n\
+it so far.  Setting your technology goal wisely means you do not have\n\
+to worry about picking a new research target each time you finish\n\
+researching a technology."))
+  elseif tech.name == 'Republic' then
+    notify.event(player, nil, E.SCRIPT,
+_("You have successfully completed research into The Republic.  This\n\
+technology is particularly useful because it allows a new form of\n\
+government.  The government your civilization follows is very\n\
+important in determining your development.  In the beginning you\n\
+started as a Despotism, a very inefficient form of government.  Later\n\
+government options will give you some choice of whether your\n\
+civilization is to be a peaceful trading nation or a conquering\n\
+juggernaut.  Each has advantages.\n\
+\n\
+For now, you probably want to switch straight into Republic.  In the\n\
+Civilization menu, go to the Government submenu and choose\n\
+Republic.  Yes you want a revolution!  Changing governments means\n\
+going through a few turns of anarchy, so it is not without cost.\n\
+However Republic is a substantially better form of government\n\
+than Despotism so the investment will soon pay off."))
+  end
+  numtechs = numtechs + 1
+end
+numtechs = 0
+signal.connect('tech_researched', 'tech_researched_callback')
+
+function hut_entered_callback(unit)
+  if not unit.owner:is_human() then
+    return
+  end
+  if not hutmsg then
+    notify.event(unit.owner, unit.tile, E.SCRIPT,
+_("Your unit has found a Hut.  These are small villages scattered across\n\
+the landscape.  When a unit enters one, several things may happen.  The\n\
+most likely outcome is that you will find resources worth a small\n\
+amount of gold.  However it is also possible to find technologies or\n\
+mercenary units inside a hut.  Some huts contain native settlers\n\
+that will join your civilization and bring a new city into your\n\
+empire.  Finally, some huts contain barbarians which will kill your\n\
+unit instantly.  On average, it is beneficial to search out and enter\n\
+any huts you find as soon as possible."))
+    hutmsg = true
+  end
+end
+hutmsg = false
+signal.connect('hut_enter', 'hut_entered_callback')
+
+print(_("Loading tutorial events."))
+$
+
+[game]
+version=20099
+server_state=0
+metapatches=""
+metatopic=""
+metamessage=""
+metaserver="http://meta.freeciv.org/metaserver.phtml"
+gold=50
+tech=0
+skill_level=3
+timeout=0
+timeoutint=0
+timeoutintinc=0
+timeoutinc=0
+timeoutincmult=1
+timeoutcounter=1
+info.timeoutaddenemymove=0
+end_year=2000
+year=-4000
+turn=0
+simultaneous_phases_now=0
+simultaneous_phases_stored=1
+researchcost=20
+min_players=1
+max_players=30
+nplayers=0
+heating=0
+globalwarming=0
+warminglevel=0
+nuclearwinter=0
+cooling=0
+coolinglevel=0
+notradesize=0
+fulltradesize=1
+unhappysize=4
+angrycitizen=1
+cityfactor=14
+citymindist=0
+civilwarsize=10
+contactturns=20
+rapturedelay=1
+diplcost=0
+freecost=0
+conquercost=0
+foodbox=10
+techpenalty=100
+razechance=20
+civstyle=2
+save_nturns=10
+save_name="civgame"
+aifill=2
+; Should set "novice" as well.
+scorelog=0
+id=""
+fogofwar=1
+spacerace=1
+auto_ai_toggle=0
+diplchance=80
+aqueductloss=0
+killcitizen=1
+turnblock=1
+savepalace=1
+fixedlength=0
+barbarians=2
+onsetbarbs=-2000
+revolen=0
+occupychance=0
+autoattack=0
+demography="NASRLPEMOqrb"
+borders=7
+happyborders=1
+diplomacy=0
+watchtower_vision=0
+watchtower_extra_vision=2
+allowed_city_names=1
+settlers=2
+explorer=1
+start_units="cx"
+dispersion=0
+randseed=0
+save_random=0
+rulesetdir="default"
+
+[savefile]
+options="startoptions spacerace2 rulesets diplchance_percent worklists2 map_editor known32fix turn attributes watchtower rulesetdir client_worklists orders startunits turn_last_built improvement_order technology_order embassies"
+reason="User request"
+improvement_order="Airport", "Aqueduct", "Bank", "Barracks", "Barracks II", "Barracks III", "Cathedral", "City Walls", "Coastal Defense", "Colosseum", "Courthouse", "Factory", "Granary", "Harbour", "Hydro Plant", "Library", "Marketplace", "Mass Transit", "Mfg. Plant", "Nuclear Plant", "Offshore Platform", "Palace", "Police Station", "Port Facility", "Power Plant", "Recycling Center", "Research Lab", "SAM Battery", "SDI Defense", "Sewer System", "Space Component", "Space Module", "Space Structural", "Stock Exchange", "Super Highways", "Supermarket", "Temple", "University", "Apollo Program", "A.Smith's Trading Co.", "Colossus", "Copernicus' Observatory", "Cure For Cancer", "Darwin's Voyage", "Eiffel Tower", "Great Library", "Great Wall", "Hanging Gardens", "Hoover Dam", "Isaac Newton's College", "J.S. Bach's Cathedral", "King Richard's Crusade", "Leonardo's Workshop", "Lighthouse", "Magellan's Expedition", "Manhattan Project", "Marco Polo's Embassy", "Michelangelo's Chapel", "Oracle", "Pyramids", "SETI Program", "Shakespeare's Theatre", "Statue of Liberty", "Sun Tzu's War Academy", "United Nations", "Women's Suffrage", "Coinage"
+technology_order="A_NONE", "Advanced Flight", "Alphabet", "Amphibious Warfare", "Astronomy", "Atomic Theory", "Automobile", "Banking", "Bridge Building", "Bronze Working", "Ceremonial Burial", "Chemistry", "Chivalry", "Code of Laws", "Combined Arms", "Combustion", "Communism", "Computers", "Conscription", "Construction", "Currency", "Democracy", "Economics", "Electricity", "Electronics", "Engineering", "Environmentalism", "Espionage", "Explosives", "Feudalism", "Flight", "Fundamentalism", "Fusion Power", "Genetic Engineering", "Guerilla Warfare", "Gunpowder", "Horseback Riding", "Industrialization", "Invention", "Iron Working", "Labor Union", "Laser", "Leadership", "Literacy", "Machine Tools", "Magnetism", "Map Making", "Masonry", "Mass Production", "Mathematics", "Medicine", "Metallurgy", "Miniaturization", "Mobile Warfare", "Monarchy", "Monotheism", "Mysticism", "Navigation", "Nuclear Fission", "Nuclear Power", "Philosophy", "Physics", "Plastics", "Polytheism", "Pottery", "Radio", "Railroad", "Recycling", "Refining", "Refrigeration", "Robotics", "Rocketry", "Sanitation", "Seafaring", "Space Flight", "Stealth", "Steam Engine", "Steel", "Superconductors", "Tactics", "The Corporation", "The Republic", "The Wheel", "Theology", "Theory of Gravity", "Trade", "University", "Warrior Code", "Writing"
+
+[map]
+mountains=30
+grass=35
+swampsize=5
+deserts=5
+riverlength=5
+forestsize=20
+topology_id=5
+size=1
+width=8
+height=8
+seed=0
+landpercent=30
+riches=250
+wetness=50
+steepness=30
+huts=50
+generator=1
+have_huts=0
+temperature=50
+alltemperate=0
+tinyisles=0
+separatepoles=1

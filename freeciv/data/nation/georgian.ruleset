@@ -1,0 +1,68 @@
+[nation_georgian]
+
+name=_("Georgian")
+plural=_("?plural:Georgians")
+groups="Medieval", "Modern", "European"
+legend=_("The Georgians were one of the first peoples in history to adopt\
+ Christianity, in the 300s AD.")
+leader=
+ "Kartlos",
+ "Giorgi III",
+ "Vakhtang I Gorgasali",
+ "Tamar",
+ "Davit IV",
+ "Alexandre Bagrationi",
+ "Merab Kostava",
+ "Eduard Shevardnadze"
+leader_sex="Male", "Male", "Male", "Female",
+           "Male", "Male", "Male", "Male"
+flag="georgia"
+flag_alt = "-"
+city_style = "European"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations = "armenian", "russian"
+
+cities =
+ "Tbilisi (river)",
+ "Kutaisi",
+ "Batumi",
+ "Rustavi (river)",
+ "Gori (river)",
+ "Tskhinvali",
+ "Akhalkalaki",
+ "Zugdidi",
+ "Sokhumi (ocean)",
+ "Poti (ocean)",
+ "Supsa",
+ "Akhaltsikhe",
+ "Chiatura",
+ "Gagra",
+ "Lagodekhi",
+ "Mtskheta",
+ "Rustavi",
+ "Telavi",
+ "Akhmeta",
+ "Ambrolauri",
+ "Bolnisi",
+ "Dusheti",
+ "Gudauta",
+ "Jvari",
+ "Kobuleti",
+ "Kazreti",
+ "Khashuri",
+ "Marneuli",
+ "Ninotsminda",
+ "Ochamchire",
+ "Pasanauri",
+ "Samtredia",
+ "Senaki",
+ "Tianeti",
+ "Tq'varcheli",
+ "Tsalka",
+ "Tsiteli-Tsq'aro",
+ "Tsnori",
+ "Vale"

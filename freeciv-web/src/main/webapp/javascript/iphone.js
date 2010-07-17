@@ -19,7 +19,7 @@ function is_iphone()
 {
   
   var agent=navigator.userAgent.toLowerCase();
-  return (agent.indexOf('iphone')!=-1);
+  return (agent.indexOf('iphone')!=-1 || agent.indexOf('ipad')!=-1);
  
   //return true;
 

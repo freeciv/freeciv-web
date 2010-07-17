@@ -275,14 +275,25 @@ function update_map_canvas(canvas_x, canvas_y, width, height)
   gui_y0 = mapview['gui_y0'] + canvas_y;
   //console.log("update_map_canvas  at " + gui_x0 + "  " + gui_y0 );
 
-  /* Clear the area.  This is necessary since some parts of the rectangle
+  /* Clear the area, if the mapview extends beyond map borders.  
+   *
+   * This is necessary since some parts of the rectangle
    * may not actually have any tiles drawn on them.  This will happen when
    * the mapview is large enough so that the tile is visible in multiple
    * locations.  In this case it will only be drawn in one place.
    *
    * Of course it's necessary to draw to the whole area to cover up any old
    * drawing that was done there. */
-  canvas_put_rectangle(mapview_canvas_ctx, "rgb(0,0,0)", canvas_x, canvas_y, width, height);
+    r = base_canvas_to_map_pos(0, 0);
+    s = base_canvas_to_map_pos(mapview['width'], 0);
+    t = base_canvas_to_map_pos(0, mapview['height']);
+    u = base_canvas_to_map_pos(mapview['width'], mapview['height']);
+    if (    r['map_x'] < 0 || r['map_x'] > map['xsize'] || r['map_y'] < 0 || r['map_y'] > map['ysize']
+	 || s['map_x'] < 0 || s['map_x'] > map['xsize'] || s['map_y'] < 0 || s['map_y'] > map['ysize']
+	 || t['map_x'] < 0 || t['map_x'] > map['xsize'] || t['map_y'] < 0 || t['map_y'] > map['ysize']
+	 || u['map_x'] < 0 || u['map_x'] > map['xsize'] || u['map_y'] < 0 || u['map_y'] > map['ysize']) {
+      canvas_put_rectangle(mapview_canvas_ctx, "rgb(0,0,0)", canvas_x, canvas_y, width, height);
+    }
   
   /* For IE mode, clean up all divs first.*/
   if (!is_canvas_supported()) {    

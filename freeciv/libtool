@@ -2,7 +2,6 @@
 
 # libtool - Provide generalized library-building support services.
 # Generated automatically by config.status (freeciv) 2.2.99-dev
-# Libtool was configured on host andreaspc:
 # NOTE: Changes made to this file will be lost: look at ltmain.sh.
 #
 #   Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001, 2003, 2004, 2005,
@@ -42,8 +41,8 @@ available_tags="CXX "
 build_libtool_libs=no
 
 # Which release of libtool.m4 was used?
-macro_version=2.2.6
-macro_revision=1.3012
+macro_version=2.2.6b
+macro_revision=1.3017
 
 # Whether or not to build static libraries.
 build_old_libs=yes
@@ -86,7 +85,7 @@ NM="/usr/bin/nm -B"
 LN_S="ln -s"
 
 # What is the maximum length of a command?
-max_cmd_len=3458764513820540925
+max_cmd_len=1572864
 
 # Object file suffix (normally "o").
 objext=o
@@ -132,7 +131,7 @@ old_postuninstall_cmds=""
 LTCC="gcc"
 
 # LTCC compiler flags.
-LTCFLAGS="-save-temps -Wall -Wpointer-arith -Wcast-align -Wmissing-prototypes -Wmissing-declarations -g -O2 -fsigned-char -I/usr/local/include"
+LTCFLAGS="-save-temps -Wall -Wpointer-arith -Wcast-align -Wmissing-prototypes -Wmissing-declarations -g -O2 -fsigned-char "
 
 # Take the output of nm and produce a listing of raw symbols and C names.
 global_symbol_pipe="sed -n -e 's/^.*[	 ]\\([ABCDGIRSTW][ABCDGIRSTW]*\\)[	 ][	 ]*\\([_A-Za-z][_A-Za-z0-9]*\\)\$/\\1 \\2 \\2/p'"
@@ -234,7 +233,7 @@ finish_eval=""
 hardcode_into_libs=yes
 
 # Compile-time system search path for libraries.
-sys_lib_search_path_spec="/usr/lib64/gcc/x86_64-suse-linux/4.4 /usr/lib64 /lib64 /usr/x86_64-suse-linux/lib"
+sys_lib_search_path_spec="/usr/lib64/gcc/x86_64-suse-linux/4.5 /usr/lib64 /lib64 /usr/x86_64-suse-linux/lib"
 
 # Run-time system search path for libraries.
 sys_lib_dlsearch_path_spec="/lib /usr/lib /usr/X11R6/lib64/Xaw3d /usr/X11R6/lib64 /usr/lib64/Xaw3d /usr/X11R6/lib/Xaw3d /usr/X11R6/lib /usr/lib/Xaw3d /usr/x86_64-suse-linux/lib /usr/local/lib /opt/kde3/lib /lib64 /lib /usr/lib64 /usr/lib /usr/local/lib64 /opt/kde3/lib64 /usr/lib64/graphviz /usr/lib64/graphviz/sharp /usr/lib64/graphviz/java /usr/lib64/graphviz/perl /usr/lib64/graphviz/php /usr/lib64/graphviz/ocaml /usr/lib64/graphviz/python /usr/lib64/graphviz/lua /usr/lib64/graphviz/tcl /usr/lib64/graphviz/guile /usr/lib64/graphviz/ruby "
@@ -405,7 +404,7 @@ compiler_lib_search_path=""
 
 # Generated from ltmain.m4sh.
 
-# ltmain.sh (GNU libtool) 2.2.6
+# ltmain.sh (GNU libtool) 2.2.6b
 # Written by Gordon Matzigkeit <gord@gnu.ai.mit.edu>, 1996
 
 # Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001, 2003, 2004, 2005, 2006, 2007 2008 Free Software Foundation, Inc.
@@ -470,7 +469,7 @@ compiler_lib_search_path=""
 #       compiler:		$LTCC
 #       compiler flags:		$LTCFLAGS
 #       linker:		$LD (gnu? $with_gnu_ld)
-#       $progname:		(GNU libtool) 2.2.6
+#       $progname:		(GNU libtool) 2.2.6b
 #       automake:		$automake_version
 #       autoconf:		$autoconf_version
 #
@@ -478,9 +477,9 @@ compiler_lib_search_path=""
 
 PROGRAM=ltmain.sh
 PACKAGE=libtool
-VERSION=2.2.6
+VERSION=2.2.6b
 TIMESTAMP=""
-package_revision=1.3012
+package_revision=1.3017
 
 # Be Bourne compatible
 if test -n "${ZSH_VERSION+set}" && (emulate sh) >/dev/null 2>&1; then
@@ -521,15 +520,15 @@ $lt_unset CDPATH
 
 : ${CP="cp -f"}
 : ${ECHO="echo"}
-: ${EGREP="/usr/bin/grep -E"}
-: ${FGREP="/usr/bin/grep -F"}
-: ${GREP="/usr/bin/grep"}
+: ${EGREP="/bin/grep -E"}
+: ${FGREP="/bin/grep -F"}
+: ${GREP="/bin/grep"}
 : ${LN_S="ln -s"}
 : ${MAKE="make"}
 : ${MKDIR="mkdir"}
 : ${MV="mv -f"}
 : ${RM="rm -f"}
-: ${SED="/opt/local/bin/gsed"}
+: ${SED="/bin/sed"}
 : ${SHELL="${CONFIG_SHELL-/bin/sh}"}
 : ${Xsed="$SED -e 1s/^X//"}
 
@@ -9040,17 +9039,17 @@ file_list_spec=""
 hardcode_action=immediate
 
 # The directories searched by this compiler when creating a shared library.
-compiler_lib_search_dirs="/usr/lib64/gcc/x86_64-suse-linux/4.4 /usr/lib64/gcc/x86_64-suse-linux/4.4/../../../../lib64 /lib/../lib64 /usr/lib/../lib64 /usr/lib64/gcc/x86_64-suse-linux/4.4/../../../../x86_64-suse-linux/lib /usr/lib64/gcc/x86_64-suse-linux/4.4/../../.."
+compiler_lib_search_dirs="/usr/lib64/gcc/x86_64-suse-linux/4.5 /usr/lib64/gcc/x86_64-suse-linux/4.5/../../../../lib64 /lib/../lib64 /usr/lib/../lib64 /usr/lib64/gcc/x86_64-suse-linux/4.5/../../../../x86_64-suse-linux/lib /usr/lib64/gcc/x86_64-suse-linux/4.5/../../.."
 
 # Dependencies to place before and after the objects being linked to
 # create a shared library.
-predep_objects="/usr/lib64/gcc/x86_64-suse-linux/4.4/../../../../lib64/crti.o /usr/lib64/gcc/x86_64-suse-linux/4.4/crtbeginS.o"
-postdep_objects="/usr/lib64/gcc/x86_64-suse-linux/4.4/crtendS.o /usr/lib64/gcc/x86_64-suse-linux/4.4/../../../../lib64/crtn.o"
+predep_objects="/usr/lib64/gcc/x86_64-suse-linux/4.5/../../../../lib64/crti.o /usr/lib64/gcc/x86_64-suse-linux/4.5/crtbeginS.o"
+postdep_objects="/usr/lib64/gcc/x86_64-suse-linux/4.5/crtendS.o /usr/lib64/gcc/x86_64-suse-linux/4.5/../../../../lib64/crtn.o"
 predeps=""
 postdeps="-lstdc++ -lm -lgcc_s -lc -lgcc_s"
 
 # The library search path used internally by the compiler when linking
 # a shared library.
-compiler_lib_search_path="-L/usr/lib64/gcc/x86_64-suse-linux/4.4 -L/usr/lib64/gcc/x86_64-suse-linux/4.4/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib64/gcc/x86_64-suse-linux/4.4/../../../../x86_64-suse-linux/lib -L/usr/lib64/gcc/x86_64-suse-linux/4.4/../../.."
+compiler_lib_search_path="-L/usr/lib64/gcc/x86_64-suse-linux/4.5 -L/usr/lib64/gcc/x86_64-suse-linux/4.5/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib64/gcc/x86_64-suse-linux/4.5/../../../../x86_64-suse-linux/lib -L/usr/lib64/gcc/x86_64-suse-linux/4.5/../../.."
 
 # ### END LIBTOOL TAG CONFIG: CXX

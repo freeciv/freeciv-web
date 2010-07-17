@@ -9,6 +9,9 @@
 /* Bug reporting URL */
 #undef BUG_URL
 
+/* Version specific subdir for default data path */
+#undef DATASUBDIR
+
 /* Extra debugging support */
 #undef DEBUG
 

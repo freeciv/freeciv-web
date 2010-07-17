@@ -5,7 +5,6 @@
 
 <link href="/stylesheets/frontpage.css" rel="stylesheet" type="text/css" />
 
-<meta http-equiv="X-UA-Compatible" content="chrome=1">
 
 <% 
   String cookieName = "facebook_mode";
@@ -30,7 +29,7 @@
 <script type="text/javascript" src="/javascript/jquery-1.4.1.min.js"></script>
 
 <script type="text/javascript" src="/javascript/iphone.js"></script>
-
+<meta name="google-site-verification" content="13_ecThQ9UAWizPUoxWp3NOhryW3hMpj7LlMAzc-og8" />
 </head>
 <body>
 <!-- HEADER -->
@@ -48,7 +47,22 @@
 </div>
 
 <div id="body_content">
-<br>
+<div id="header_ads" style="text-align: center;">
+
+<script type="text/javascript"><!--
+google_ad_client = "pub-4977952202639520";
+/* 728x15, opprettet 29.06.10 freeciv.net */
+google_ad_slot = "7465052068";
+google_ad_width = 728;
+google_ad_height = 15;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+
+</div>
+
 
   <jsp:include page="template_call.jsp" flush="false"/>
 </div>

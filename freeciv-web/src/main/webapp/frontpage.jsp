@@ -50,6 +50,34 @@ Freeciv.net is an Open Source strategy game which can be played online against o
 <a href="/wireframe.jsp?do=login">Click here</a> to play online now.
 </span>
 
+
+<br><br><br>
+<span class="title"><a href="http://arstechnica.com/microsoft/news/2010/06/ie9-platform-preview-3-video-audio-canvas-and-fonts-too.ars">Internet Explorer 9 will support HTML5 Canvas natively</a></span>
+<br>
+
+<span class="date">June 29, 2010</span>
+<br>
+<span class="article">
+Microsoft has announced that Internet Explorer 9 will fully support the HTML5 canvas element. Therefore, Freeciv.net will also be fully supported in the next version of Interet Explorer. This is truely good news!
+
+</span>
+
+
+
+
+<br><br><br>
+<span class="title"><a href="http://www.freeciv.net/freeciv-needs-websockets.jsp">Benefits of HTML5 WebSockets for Freeciv.net</a></span>
+<br>
+
+<span class="date">April 29, 2010</span>
+<br>
+<span class="article">
+The Freeciv.net project is a new technology which would improve the performance and user-experience of the game. Read all about it here. 
+</span>
+
+
+
+
 <br><br><br>
 <span class="title">New version of Freeciv.net released today</span>
 <br>
@@ -64,8 +92,8 @@ improved fog-of-war rendering and 4 new scenario maps.
 
 <br><br><br>
 
-<a href="http://www.facebook.com/apps/application.php?id=233603224506"><img src="/images/facebookimg2.png"></a>
-<a class="title" href="http://www.facebook.com/apps/application.php?id=233603224506"><span class="title">Freeciv.net now also on Facebook</span></a>
+<a href="http://www.facebook.com/freeciv/"><img src="/images/facebookimg2.png"></a>
+<a class="title" href="http://www.facebook.com/freeciv/"><span class="title">Freeciv.net now also on Facebook</span></a>
 <br>
 <span class="date">January 10, 2010</span>
 <br>
@@ -110,6 +138,21 @@ Please report any bugs you might find.
 
 
 <br><br><br>
+<br><br><br>
+<br><br><br>
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_identifier = "fp"; //[Optional but recommended: Define a unique identifier (e.g. post id or slug) for this thread] 
+  (function() {
+   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+   dsq.src = 'http://freecivnet.disqus.com/embed.js';
+   (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=freecivnet">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
 </div>
@@ -177,16 +220,30 @@ Please report any bugs you might find.
         </span>
     </div>
 
+
    <div class="right-col-box">
-	<span class="right-box">System requirements</span>
-	<span class="right-box-smaller">Freeciv.net requires a powerful system:<br>
-        - Firefox, Safari, Google Chrome and Opera with Javascript enabled.<br>
-        - A fast CPU and broadband connection.<br>
-        - Internet Explorer 7 or 8 with <a href="code.google.com/chrome/chromeframe/">Google Chrome Frame</a> is currently experimental. <br>
-	<br>
+        <span class="right-box-smaller">
+		Please support Freeciv.net
+		<br>
+		<br>
+		<center>
+
+
+<script type="text/javascript">
+	var flattr_url = 'http://www.freeciv.net';
+</script>
+<script src="http://api.flattr.com/button/load.js" type="text/javascript"></script>
+
+
+
+
+	</center>
+
+		<br>
 
         </span>
     </div>
+
 
 
   </div>
@@ -216,27 +273,29 @@ Please report any bugs you might find.
 
 <div style="width: 320px; float:right; padding-right: 36px;">
 
-<div style="height: 280px;">
+<div style="height: 430px;">
 
 <script src="http://www.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php" type="text/javascript"></script>
 <script type="text/javascript">
-document.write('<fb:fan profile_id="233603224506" stream="0" connections="10" width="320" logobar="1"></fb:fan>');
+document.write('<fb:fan profile_id="233603224506" stream="0" connections="15" width="320" logobar="1" height="430"></fb:fan>');
 FB.init("c118efb4079841cf9c60eb52ece12ab2");
 </script>
 
 </div>
+
+
 <div>
 <script src="http://widgets.twimg.com/j/2/widget.js"></script>
 <script>
 new TWTR.Widget({
   version: 2,
   type: 'search',
-  search: 'freeciv.net OR freecivnet OR Freeciv',
+  search: 'freeciv',
   interval: 6000,
   title: '',
   subject: 'Freeciv.net on Twitter',
   width: 320,
-  height: 250,
+  height: 450,
   theme: {
     shell: {
       background: '#696969',
@@ -276,7 +335,15 @@ new TWTR.Widget({
 	src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 	</script>
 
+</div>
 
+<div style="background-color:#696969; margin-top: 20px; ">
+Link partners:
+<br>
+
+<a href="http://www.bgroom.com">Free backgammon online</a>
+<br>
+<br>
 
 </div>
 
@@ -309,5 +376,18 @@ new TWTR.Widget({
 </div>
 
 
-
+<script type="text/javascript">
+//<![CDATA[
+(function() {
+	var links = document.getElementsByTagName('a');
+	var query = '?';
+	for(var i = 0; i < links.length; i++) {
+	if(links[i].href.indexOf('#disqus_thread') >= 0) {
+		query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
+	}
+	}
+	document.write('<script charset="utf-8" type="text/javascript" src="http://disqus.com/forums/freecivnet/get_num_replies.js' + query + '"></' + 'script>');
+})();
+//]]>
+</script>
 

@@ -302,9 +302,9 @@ function client_handle_packet(p)
  
     }
   }
-  if (p.length > 0) {
-    update_map_canvas_full();
-  }
+  
+  update_map_canvas_check();
+
  } catch(e) {
    if (e.message != null && e.fileName != null && e.lineNumber != null) {
      js_breakpad_report(e.message, e.fileName, e.lineNumber);

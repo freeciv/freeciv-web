@@ -117,14 +117,3 @@ class WebserverHandler(BaseHTTPRequestHandler):
           logging.error(e);
           self.send_error(503, "Service Unavailable. Something is wrong here ");
 
-        #except IOError:
-        #self.send_error(503,'Service failure: %s' % self.path)
-
-            
-
-    def compressBuf(self, buf):
-      zbuf = cStringIO.StringIO()
-      zfile = gzip.GzipFile(mode = 'wb',  fileobj = zbuf, compresslevel = 6)
-      zfile.write(buf)
-      zfile.close()
-      return zbuf.getvalue()

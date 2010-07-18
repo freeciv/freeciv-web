@@ -16,11 +16,11 @@
 
 import sys
 import traceback
-
+from time import gmtime, strftime
  
 def get_debug_info(civcoms):
-    code = "<html><head><meta http-equiv=\"refresh\" content=\"20\"></head><body><h2>Freeciv Web Proxy Status</h2>"
-    
+  code = "<html><head><meta http-equiv=\"refresh\" content=\"20\"></head><body><h2>Freeciv Web Proxy Status</h2>"
+  try:    
     code += ("<h3>Logged in users  (%i) :</h3>" % len(civcoms));
     for key in civcoms.keys():
         code += ("username: <b>%s</b> (%s:%d)<br>" % (civcoms[key].username, civcoms[key].civserverhost, civcoms[key].civserverport));
@@ -31,8 +31,16 @@ def get_debug_info(civcoms):
             code += ('File: "%s", line %d, in %s: ' % (filename, lineno, name))
             if line:
                 code += (" <b>%s</b> <br>" % (line.strip()))
- 
-    return code;
+
+    current_time = strftime("%Y-%m-%d %H:%M:%S", gmtime());
+    code += "<br><br><b>Current time:</b><br> " + current_time;
+
+
+  except:
+    print "Unexpected error:", sys.exc_info()[0]
+    raise
+
+  return code;
 
 
 

@@ -207,6 +207,8 @@ def json_to_civserver(net_packet_json):
   res = "";
 
   packet_number = generate_packets.get_packet_name_type(packet_type);
+  
+  logging.debug("Processing packet from JSON to civserver: " + str(packet_number));
 
   if (packet_number == None): return None;
   for packet_label in packets[packet_number].get_fields():

@@ -39,8 +39,12 @@ for packet in packets.values():
 f.write(""" 
     }
   }
-  
-  update_map_canvas_check();
+ 
+  if (p.length > 0) {
+    update_map_canvas_full();
+  } else {
+    update_map_canvas_check();
+  }
 
  } catch(e) {
    if (e.message != null && e.fileName != null && e.lineNumber != null) {

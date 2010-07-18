@@ -25,6 +25,9 @@
   
 <% } else if (act.equals("frontpage")) { %>
   <jsp:include page="frontpage.jsp" flush="false"/>  
+  
+  <% } else if (act.equals("404")) { %>
+  <jsp:include page="404.jsp" flush="false"/>  
 
 <% } else if (act.equals("load")) { %>
   <jsp:include page="/savegames/load.jsp" flush="false"/>

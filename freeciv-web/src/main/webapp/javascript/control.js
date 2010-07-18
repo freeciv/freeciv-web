@@ -164,6 +164,10 @@ function advance_unit_focus()
     set_unit_focus_and_redraw(candidate);
   } else {
     /* Couldn't center on a unit, then try to center on a city... */
+    current_focus = []; /* Reset focus units. */
+    update_unit_info_label(current_focus);
+    $("#game_unit_orders_default").hide();
+    /* find a city to focus on. */
     for (city_id in cities) {
       var pcity = cities[city_id];
       if (city_owner_player_id(pcity) == client.conn.playing.playerno) {
@@ -625,7 +629,7 @@ function request_new_unit_activity(punit, activity)
 {
 
   var packet = [{"packet_type" : "unit_change_activity", "unit_id" : punit['id'],
-                "activity" : activity, "activity_target" : S_LAST, "activity_base" : -1}];
+                "activity" : activity, "activity_target" : S_LAST, "activity_base" : 0}];
   send_request (JSON.stringify(packet));
 }
 

@@ -19,6 +19,9 @@ var NUM_CORNER_DIRS = 4;
 
 var DIR4_TO_DIR8 = [ DIR8_NORTH, DIR8_SOUTH, DIR8_EAST, DIR8_WEST];
 
+var current_select_sprite = 0;
+var max_select_sprite = 4;
+
 /* Items on the mapview are drawn in layers.  Each entry below represents
  * one layer.  The names are basically arbitrary and just correspond to
  * groups of elements in fill_sprite_array().  Callers of fill_sprite_array
@@ -704,7 +707,8 @@ function fill_fog_sprite_array(ptile, pedge, pcorner)
 ****************************************************************************/
 function get_select_sprite() 
 {
-  return {"key" : "unit.select0"};
+  current_select_sprite = ((current_select_sprite + 1) % max_select_sprite);
+  return {"key" : "unit.select" + current_select_sprite };
 }
 
 /****************************************************************************

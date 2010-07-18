@@ -65,17 +65,6 @@ Microsoft has announced that Internet Explorer 9 will fully support the HTML5 ca
 
 
 
-<br><br><br>
-<span class="title"><a href="http://www.freeciv.net/freeciv-needs-websockets.jsp">Benefits of HTML5 WebSockets for Freeciv.net</a></span>
-<br>
-
-<span class="date">April 29, 2010</span>
-<br>
-<span class="article">
-The Freeciv.net project is a new technology which would improve the performance and user-experience of the game. Read all about it here. 
-</span>
-
-
 
 
 <br><br><br>

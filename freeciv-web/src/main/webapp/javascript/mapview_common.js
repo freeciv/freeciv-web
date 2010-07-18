@@ -17,6 +17,8 @@ var mapdeco_highlight_table = {};
 var mapdeco_crosshair_table = {};
 var mapdeco_gotoline_table = {};
 var mapview_frag = null;
+var last_redraw_time = 0;
+var MAPVIEW_REFRESH_INTERVAL = 400;
 
 function mapdeco_init()
 {
@@ -556,10 +558,23 @@ function update_map_canvas_full()
      
     update_map_canvas(0, 0, mapview['store_width'], mapview['store_height']);
     
-    var end = new Date().getTime();
-    var time = end - start;
+    last_redraw_time = new Date().getTime();
+
+    var time = last_redraw_time - start;
     console.log('Redraw time: ' + time);
     //console.log("4. Mapview render end at: " + new Date().getTime());
     
   }
-}  
+} 
+
+/**************************************************************************
+  Possibly update the entire mapview, if some conditions apply..
+**************************************************************************/
+function update_map_canvas_check()
+{
+  var time = new Date().getTime() - last_redraw_time;
+  if (time > MAPVIEW_REFRESH_INTERVAL) {
+    update_map_canvas_full();
+  }
+
+}

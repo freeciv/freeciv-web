@@ -8,5 +8,9 @@
       <password>changeme</password>
     </driver>
   </database>
+ <error-page>
+    <error-code>404</error-code>
+    <location>/file_not_found.jsp</location>
+  </error-page>
   
 </web-app>

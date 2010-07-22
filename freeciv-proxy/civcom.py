@@ -17,7 +17,7 @@ import socket
 from struct import *
 from zerostrings import *
 from packets import *
-from threading import Thread
+from threading import Thread, RLock;
 import thread
 import logging
 import json
@@ -38,7 +38,7 @@ class CivCom(Thread):
     self.civserverhost = civserverhost;
     self.key = username + str(civserverport) + civserverhost;
     self.send_buffer = [];
-    self.lock=thread.allocate_lock();
+    self.lock = RLock();
     self.pingstamp = time.time();
     self.stopped = False;
 
@@ -148,21 +148,34 @@ class CivCom(Thread):
       return False;
 
   def send_buffer_append(self, data):
-    self.lock.acquire();  
-    self.send_buffer.append(data);
-    self.lock.release();
+    if not self.lock.acquire(False):
+      logging.debug("Could not acquire civcom lock");
+    else:
+      try:
+        self.send_buffer.append(data);
+      finally:
+        self.lock.release();
 
   def send_buffer_clear(self):
-    self.lock.acquire();  
-    del self.send_buffer[:];
-    self.lock.release();
+    if not self.lock.acquire(False):
+      logging.debug("Could not acquire civcom lock");
+    else:
+      try:
+        del self.send_buffer[:];
+      finally:
+        self.lock.release();
 
   def get_send_result_string(self):
+    result = "";
     self.pingstamp = time.time();  
-    self.lock.acquire();
-    result = json.dumps(self.send_buffer, separators=(',',':'), allow_nan=False);
-    del self.send_buffer[:];
-    self.lock.release();
+    if not self.lock.acquire(False):
+      logging.debug("Could not acquire civcom lock");
+    else:
+      try:
+        result = json.dumps(self.send_buffer, separators=(',',':'), allow_nan=False);
+        del self.send_buffer[:];
+      finally:
+        self.lock.release();
     #logging.info("Sent to webclient: " + result);
     return result;
 

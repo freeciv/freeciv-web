@@ -38,10 +38,11 @@ class CivWebServer(ThreadingMixIn, HTTPServer):
       civcom.send_buffer_append(payload_json);
 
   # get the civcom instance which corresponds to the requested user.
-  def get_civcom(self, username, civserverport, civserverhost):
+  def get_civcom(self, username, civserverport, civserverhost, client_ip):
     key = username + str(civserverport) + civserverhost;
     if key not in self.civcoms.keys():
       civcom = CivCom(username, int(civserverport), civserverhost);
+      civcom.client_ip = client_ip;
       civcom.set_civwebserver(self);
       civcom.start();
       self.civcoms[key] = civcom;
@@ -76,9 +77,14 @@ class WebserverHandler(BaseHTTPRequestHandler):
             or username == 'null' or civserverport == 'null' or civserverhost == 'null'): 
             self.send_error(500, "Invalid session");
             return;
-        
+
+        client_ip = "unknown";
+	# x-forwarded-for is a header containing the client's IP address.
+        if self.headers.dict.has_key("x-forwarded-for"):
+          client_ip = self.headers.dict["x-forwarded-for"]
+
         # get the civcom instance which corresponds to this user.        
-        civcom = self.server.get_civcom(username, civserverport, civserverhost);
+        civcom = self.server.get_civcom(username, civserverport, civserverhost, client_ip);
 
         try:
           # parse request from webclient

@@ -502,6 +502,14 @@ if ( isset($port) ) {
 <br />
 <br />
 <p class="center"><em>
+
+
+<br><br>
+Discuss and propose new multiplayer games in <a href="/forum/viewforum.php?f=2">the multiplayer forum</a> on Freeciv.net.
+<br><br>
+
+
+
 <br />
 
 

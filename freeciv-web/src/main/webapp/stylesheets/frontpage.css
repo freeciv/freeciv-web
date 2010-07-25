@@ -305,3 +305,17 @@ div#branding .gBrandingText {
   border:1px solid #AAAAAA;
 
 }
+
+#login_button {
+  background: url("/images/freeciv_login.png") repeat-x scroll 0 0 #FFAA22;
+  width: 180px;
+  height: 184px;
+  display: block;
+}
+
+#login_button:hover {
+  background: url("/images/freeciv_login_hover.png") repeat-x scroll 0 0 #FFAA22;
+  width: 180px;
+  height: 184px;
+  display: block;
+}

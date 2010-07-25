@@ -1,3 +1,7 @@
+alter table auth add column `openid_user` varchar(512) default NULL;
+
+
+
 alter table auth add column `fb_uid` int(11) default NULL;
 alter table auth add column `email_hash` varchar(64) default NULL;
 

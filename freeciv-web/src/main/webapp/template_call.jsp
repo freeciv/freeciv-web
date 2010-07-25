@@ -2,12 +2,14 @@
 <%
   String act = "" + request.getParameter( "do" );
   
-  if (act.equals("login")) {  
-    response.sendRedirect("http://www.freeciv.net/facebook/");
-    
-  } else if (act.equals("dev")) { %>
+  if (act.equals("dev")) { %>
    <jsp:include page="dev.jsp" flush="false"/>
   
+<% } else if (act.equals("login")) { %>
+  <jsp:include page="/auth/index.jsp" flush="false"/>
+<% } else if (act.equals("new_user")) { %>
+  <jsp:include page="/auth/new_user.jsp" flush="false"/>
+ 
 <% } else if (act.equals("about")) { %>
   <jsp:include page="about.jsp" flush="false"/>
   
@@ -34,8 +36,12 @@
   
 <% } else if (act.equals("scenarios")) { %>
   <jsp:include page="/savegames/scenarios.jsp" flush="false"/>  
- 
-<% } else if (act.equals("manual")) { %>
+  
+<% } else if (act.equals("facebook_login")) {  
+    // Facebook is the old authentication method.
+    response.sendRedirect("http://www.freeciv.net/facebook/");
+    
+  } else if (act.equals("manual")) { %>
   <script type="text/javascript" src="/javascript/jquery-ui-1.7.2.custom.min.js"></script>
   <link type="text/css" href="/stylesheets/dark-hive/jquery-ui-1.7.2.custom.css" rel="stylesheet" />
 

@@ -168,10 +168,8 @@ function render_logged_out_index() {
   $html .= '</form></div>';
 
 
-  $html .= '<div class="signup_container"> '
-    .'Don\'t have an account? <a href="register.php">Register Now!</a> ';
 
-  $html .= '</div></div>';
+  $html .= '</div>';
 
   return $html;
 }

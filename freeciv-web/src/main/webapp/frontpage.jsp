@@ -52,6 +52,24 @@ Freeciv.net is an Open Source strategy game which can be played online against o
 
 
 <br><br><br>
+<span class="title"><a href="/wireframe.jsp?do=login">Freeciv.net now supports OpenID for signing in</a></span>
+<br>
+
+<span class="date">July 25, 2010</span>
+<br>
+<span class="article">
+	Freeciv.net now supports <a href="http://www.openid.net">OpenID</a> for logging in to games. This means that you can log-in using
+	your username and password from Google, Yahoo, AOL or any other valid OpenID provider. The old method using Facebook Connect
+	is now deprecated. Please let us know what you think about the new log-in method on Freeciv.net!
+	<br>
+	<img src="/images/openid_logo_big.png">
+
+</span>
+
+
+
+
+<br><br><br>
 <span class="title"><a href="http://arstechnica.com/microsoft/news/2010/06/ie9-platform-preview-3-video-audio-canvas-and-fonts-too.ars">Internet Explorer 9 will support HTML5 Canvas natively</a></span>
 <br>
 
@@ -158,7 +176,7 @@ Please report any bugs you might find.
 			    <input type="hidden" name="cof" value="FORID:10" />
 			    <input type="hidden" name="ie" value="UTF-8" />
 			    <input type="hidden" name="do" value="search" />
-			    <input type="text" name="q" size="25" />
+			    <input type="text" name="q" size="23" />
 			    <input type="submit" name="sa" value="Search" />
 			  </div>
 			</form>
@@ -167,30 +185,8 @@ Please report any bugs you might find.
     </div>
     
     <div id="right-left-column">
-    <div class="right-col-box">
-      <div class="login_prompt"><b>Login</b> with Facebook:</div>
-      <br>
-	  <a href="http://www.freeciv.net/wireframe.jsp?do=login">
-        <img alt="Connect" src="http://static.ak.fbcdn.net/images/fbconnect/login-buttons/connect_light_medium_long.gif" id="fb_login_image"/>
-      </a>
-
-      <br/><br/>
-      <div class="login_prompt">Or login with your <b>Username</b>:</div>
-
-
-      <form name="enter" action="/facebook/login.php" method="post">
-      <input type="text" name="username" size="18" value="" class="login_text_input"/>
-	  <label>
-		Password:
-	  </label>
-	  <input type="password" name="password" size="18" class="login_text_input"/>
-	  <br/>
-      <a class="signup_link" href="/wireframe.jsp?do=login">Signup free now!</a><br/>
-      <br/>
-	  <input type="submit" class="inputsubmit" name="userlogin" value="Log in"/>
-        
-      </form>
-
+    <div class="right-col-box" style="background-color: #000000;">
+	<a id="login_button" href="/wireframe.jsp?do=login"></a>
     </div>
 
     <div class="right-col-box">

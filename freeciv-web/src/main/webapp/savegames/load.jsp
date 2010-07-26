@@ -10,7 +10,7 @@
 <% 
 
 String username = (String)session.getAttribute( "username");
-List savegames = null;
+List savegames = new ArrayList();
 
 if (username != null) {
   savegames = SavegameManager.getSavegames(username);

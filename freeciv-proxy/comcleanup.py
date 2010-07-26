@@ -15,10 +15,10 @@
 
 from threading import Thread
 import traceback
-import thread
 import logging
 import time
 
+logger = logging.getLogger("freeciv-proxy");
 
 PINGLIMIT = 10;
 CLEANUP_TIMER = 5;
@@ -45,6 +45,7 @@ class ComCleanup(Thread):
                 civcom.close_connection();
                 civcom.stopped = True;
         except:
-          logging.error("Exception in ComCleanup");
+          if (logger.isEnabledFor(logging.ERROR)):
+            logging.error("Exception in ComCleanup");
           traceback.print_exc()
 

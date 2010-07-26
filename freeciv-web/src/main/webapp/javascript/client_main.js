@@ -164,7 +164,10 @@ function client_is_observer()
 **************************************************************************/
 function show_new_game_message()
 {
-  if (!is_iphone()) {
+
+  if (observing) {
+    /* do nothing. */
+  } else if (!is_iphone()) {
     show_dialog_message("Welcome to Freeciv.net", 
       "Welcome to Freeciv.net.  You lead a civilization.  Your\n\
       task is to conquer the world!  You should start by\n\

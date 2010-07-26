@@ -320,7 +320,8 @@ function update_unit_info_label(punits)
     var ptype = unit_type(punit);
     var sprite = get_unit_image_sprite(punit);
     
-    unit_info_html += "<div style='float:left;'><div style='float: left; padding-right: 10px; background: transparent url(" 
+    unit_info_html += "<div style='float:left;'><div onclick='set_unit_focus_and_redraw(units[" + punit['id'] + "])' "
+	   + " style='cursor:pointer; float: left; padding-right: 10px; background: transparent url(" 
            + sprite['image-src'] +
            ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y'] 
            + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px;float:left; '"
@@ -361,7 +362,7 @@ function update_select_unit_dialog(punits)
     
     var sprite = get_unit_image_sprite(punit);
     
-    unit_info_html += "<div id='game_unit_list_item' style='cursor: hand; background: transparent url(" 
+    unit_info_html += "<div id='game_unit_list_item' style='cursor: pointer; background: transparent url(" 
     + sprite['image-src'] +
     ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y'] 
        + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px;float:left; '"

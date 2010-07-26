@@ -229,8 +229,8 @@ function set_unit_focus_and_redraw(punit)
   if (punit != null) {
     current_focus[0] = punit;
   }
-  
-  update_map_canvas_full();
+
+  auto_center_on_focus_unit(); 
   update_unit_info_label(current_focus);
   $("#game_unit_orders_default").show();
 }

@@ -5,6 +5,7 @@
 <%@page import="javax.sql.*"%>
 <%@page import="javax.naming.*"%>
 <%@page import="java.security.*"%>
+<%@page import="java.util.regex.*"%>
 
 <%
 
@@ -41,10 +42,20 @@ if (session.getAttribute("openid") != null) {
          //System.out.println("A new OpenID user has submitted the new user form.");
          PreparedStatement check_stmt = conn.prepareStatement("SELECT username FROM auth where username = ?");
          check_stmt.setString(1, requested_username);
-         ResultSet rs2 = check_stmt.executeQuery();
+	 ResultSet rs2 = check_stmt.executeQuery();
+
+
+	 String PATTERN_VALIDATE_ALPHA_NUMERIC = "[0-9a-zA-Z\\.]*";
+
+	 Pattern p = Pattern.compile(PATTERN_VALIDATE_ALPHA_NUMERIC);
+
 	 if (rs2.next()) {
            page_errors += "<br><font color='red'>The username has already been taken.</font><br><br>";
 	   System.out.println("The username has already been taken.");
+         } else if (requested_username != null && !p.matcher(requested_username).matches()) {
+	   System.out.println("The username is invalid (non-alpha).");
+           page_errors += "<br><font color='red'>The username is invalid because it contains some illegal characters. Please try another username.</font> <br><br>";
+
 	 } else if (requested_username == null || requested_username.equals("null") 
 	            || requested_username.length() >= 32 || requested_username.length() <= 3) {
 	   System.out.println("The username is invalid.");

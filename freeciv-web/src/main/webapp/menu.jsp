@@ -29,12 +29,6 @@ src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"> </sc
   <a href="/civclientlauncher?action=new">Start new single-player game</a>
 </div>
 
-<div class="main_menu_buttons" onmouseover="help_facebook_announced();">
-  <a href="/facebook/game-announce.php">Start new Facebook game</a>
-</div>
-
-
-
 <div class="main_menu_buttons" onmouseover="help_multi();">
   <a href="/freecivmetaserve/metaserver.php" >Join multiplayer game</a><br>
 </div>

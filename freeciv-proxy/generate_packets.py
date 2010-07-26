@@ -40,6 +40,7 @@ packet_type_names = {};
 
 import re, string, os, sys
 import logging
+logger = logging.getLogger("freeciv-proxy");
 
 lazy_overwrite=0
 
@@ -770,7 +771,7 @@ static char *stats_%(name)s_names[] = {%(names)s};
         else:
             post=""
 
-        for i in range(2):
+        for i in xrange(2):
             for k,v in vars().items():
                 if type(v)==type(""):
                     temp=string.replace(temp,"<%s>"%k,v)
@@ -796,7 +797,7 @@ static char *stats_%(name)s_names[] = {%(names)s};
 
 '''
         body=""
-        for i in range(len(self.other_fields)):
+        for i in xrange(len(self.other_fields)):
             field=self.other_fields[i]
             body=body+field.get_cmp_wrapper(i)
         if self.gen_freelog:
@@ -818,7 +819,7 @@ static char *stats_%(name)s_names[] = {%(names)s};
             body=body+field.get_put()+"\n"
         body=body+"\n"
 
-        for i in range(len(self.other_fields)):
+        for i in xrange(len(self.other_fields)):
             field=self.other_fields[i]
             body=body+field.get_put_wrapper(self,i)
         body=body+'''
@@ -876,7 +877,7 @@ static char *stats_%(name)s_names[] = {%(names)s};
         else:
             post=""
 
-        for i in range(2):
+        for i in xrange(2):
             for k,v in vars().items():
                 if type(v)==type(""):
                     temp=string.replace(temp,"<%s>"%k,v)
@@ -907,7 +908,7 @@ static char *stats_%(name)s_names[] = {%(names)s};
   }
 
 '''%self.get_dict(vars())
-        for i in range(len(self.other_fields)):
+        for i in xrange(len(self.other_fields)):
             field=self.other_fields[i]
             body=body+field.get_get_wrapper(self,i)
 
@@ -1052,7 +1053,7 @@ class Packet:
         all_caps=all_caps.keys()
         choices=get_choices(all_caps)
         self.variants=[]
-        for i in range(len(choices)):
+        for i in xrange(len(choices)):
             poscaps=choices[i]
             negcaps=without(all_caps,poscaps)
             fields=[]
@@ -1450,6 +1451,7 @@ def gen_main():
 
 def get_packet_name_type(packet_name):
   if ("packet_" + packet_name not in packet_type_names):
-    logging.error("Invalid packet type: " + packet_name); 
+    if (logger.isEnabledFor(logging.ERROR)):
+      logger.error("Invalid packet type: " + packet_name); 
     return None;
   return packet_type_names["packet_" + packet_name];

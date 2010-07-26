@@ -13,7 +13,7 @@ def packExt(fmt, *args):
 		argcounter = 0
 		format_buffer = ""
 		result=""
-		for i in range(0, len(fmt)):
+		for i in xrange(0, len(fmt)):
 			if fmt[i] not in ['x','c','b','B','h','H','i','I','l','L','q','Q','f','d','s','p','P','z']:
 				format_buffer += fmt[i]
 				continue
@@ -47,7 +47,7 @@ def unpackExt(fmt, string):
 		offset = 0
 		result = []
 		format_buffer = ""
-		for i in range(0, len(fmt)):
+		for i in xrange(0, len(fmt)):
 			if fmt[i] == 'z':
 				#process buffer
 				size = 0
@@ -62,7 +62,7 @@ def unpackExt(fmt, string):
 				# now the z part
 				str = ""
 				strsize = -1
-				for j in range(0, len(string)):
+				for j in xrange(0, len(string)):
 					if offset+j < len(string):
 					  if string[offset+j] == '\0':
 					    strsize=j;

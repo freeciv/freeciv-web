@@ -13,15 +13,15 @@
    GNU General Public License for more details.
 '''
 
-import string,cgi,time
-from os import curdir, sep
+import string,time
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 import logging
-import json
 from civcom import *
 from debugging import *
 from SocketServer import ThreadingMixIn
 from urlparse import urlparse
+
+logger = logging.getLogger("freeciv-proxy");
 
 CIVSERVER_ROUNDTRIP_TIME = 0.03;  # 30ms roundtrip time for packets to civserver.
 
@@ -97,15 +97,11 @@ class WebserverHandler(BaseHTTPRequestHandler):
             
             post_data = self.rfile.read(content_length)
             
-            if self.headers.dict.has_key("content-type"):
-                content_type = self.headers.dict["content-type"];
-                #logging.error(content_type);
-            
-            
             # send JSON request to civserver.
 
             if not civcom.send_packets_to_civserver(post_data):
-              logging.info("Sending data to civserver failed.");
+              if (logger.isEnabledFor(logging.INFO)):
+                logger.info("Sending data to civserver failed.");
               self.send_error(503,'Civserver communication failure: %s' % self.path)
               return;
  
@@ -120,6 +116,7 @@ class WebserverHandler(BaseHTTPRequestHandler):
           self.end_headers()
           self.wfile.write(civcom.get_send_result_string());
         except Exception, e:
-          logging.error(e);
+          if (logger.isEnabledFor(logging.ERROR)):
+            logger.error(e);
           self.send_error(503, "Service Unavailable. Something is wrong here ");
 

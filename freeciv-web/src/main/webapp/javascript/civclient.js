@@ -81,8 +81,12 @@ function civclient_init()
 
 
   load_game_check();
-   
-  if (!is_iphone()) { 
+  observe_game_check();
+
+  if (observing) {
+    show_dialog_message("Welcome to Freeciv.net", 
+      "Please wait while you are being logged in as an observer in the game.");
+  } else if (!is_iphone()) { 
     show_dialog_message("Welcome to Freeciv.net", 
       "You have now joined the game. Before the game begins, " +
       "you can change game options or wait for more players " +
@@ -191,4 +195,29 @@ function show_help()
   		});
   		
     		  
+}
+
+
+/**************************************************************************
+ Determines if this is a observer game, and if so, sends an observer cmd.
+**************************************************************************/
+function observe_game_check()
+{
+  var mode_def = $.getUrlVar('mode');
+  if (mode_def != null && mode_def == 'observe') {
+    loadTimerId = setTimeout("request_observe_game();", 2000);
+    observing = true;
+  }
+}
+
+/**************************************************************************
+...
+**************************************************************************/
+function request_observe_game()
+{
+  var test_packet = [{"packet_type" : "chat_msg_req", 
+                         "message" : "/observe "}];
+  var myJSONText = JSON.stringify(test_packet);
+  send_request (myJSONText);
+
 }

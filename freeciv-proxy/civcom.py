@@ -18,15 +18,19 @@ from struct import *
 from zerostrings import *
 from packets import *
 from threading import Thread, RLock;
-import thread
 import logging
-import json
 import time
+
+try:
+    import simplejson as json
+except ImportError:
+    import json
 
 HOST = 'localhost';
 MAX_LEN_PACKET = 48;
 VERSION = "+Freeciv.Devel.2009.Oct.18";  #must be kept in sync with Freeciv server.
 VER_INFO = "-test";
+logger = logging.getLogger("freeciv-proxy");
 
 class CivCom(Thread):
 
@@ -51,7 +55,8 @@ class CivCom(Thread):
 
   def run(self):
     #setup connection to civserver
-    logging.info("Start connection to civserver.")
+    if (logger.isEnabledFor(logging.INFO)):
+      logger.info("Start connection to civserver.")
     self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     self.socket.settimeout(1); 
     self.socket.setblocking(1);
@@ -97,8 +102,9 @@ class CivCom(Thread):
       # sleep a short while, to avoid excessive CPU use.
       if (len(data) == 0): 
         time.sleep(0.01);
-          
-      return net_buf + data;
+        return net_buf;
+      else:
+        return net_buf + data;
     else:
       # sleep a short while, to avoid excessive CPU use.  
       time.sleep(0.01);
@@ -113,11 +119,13 @@ class CivCom(Thread):
     self.packet_type = result[1];
 
     if (len(net_buf) < packet_len): return None;
-    logging.debug("\nNEW PACKET:  type(" + str(self.packet_type) + ") len(" + str(packet_len) + ")" );
+    if (logger.isEnabledFor(logging.DEBUG)):
+      logger.debug("\nNEW PACKET:  type(" + str(self.packet_type) + ") len(" + str(packet_len) + ")" );
     return net_buf[3:packet_len];
   
   def close_connection(self):
-    logging.error("Server connection closed. Removing civcom thread for " + self.username);
+    if (logger.isEnabledFor(logging.ERROR)):
+      logger.error("Server connection closed. Removing civcom thread for " + self.username);
     if (self.key in self.civwebserver.civcoms.keys()):
       del self.civwebserver.civcoms[self.key];
     if (self.socket != None):
@@ -144,12 +152,14 @@ class CivCom(Thread):
         return False;
 
     else:
-      logging.error("invalid packet from 'json_to_civserver'");
+      if (logger.isEnabledFor(logging.ERROR)):
+        logger.error("invalid packet from 'json_to_civserver'");
       return False;
 
   def send_buffer_append(self, data):
     if not self.lock.acquire(False):
-      logging.debug("Could not acquire civcom lock");
+      if (logger.isEnabledFor(logging.DEBUG)):
+        logger.debug("Could not acquire civcom lock");
     else:
       try:
         self.send_buffer.append(data);
@@ -158,7 +168,8 @@ class CivCom(Thread):
 
   def send_buffer_clear(self):
     if not self.lock.acquire(False):
-      logging.debug("Could not acquire civcom lock");
+      if (logger.isEnabledFor(logging.DEBUG)):
+        logger.debug("Could not acquire civcom lock");
     else:
       try:
         del self.send_buffer[:];
@@ -169,18 +180,19 @@ class CivCom(Thread):
     result = "";
     self.pingstamp = time.time();  
     if not self.lock.acquire(False):
-      logging.debug("Could not acquire civcom lock");
+      if (logger.isEnabledFor(logging.DEBUG)):
+        logger.debug("Could not acquire civcom lock");
     else:
       try:
         result = json.dumps(self.send_buffer, separators=(',',':'), allow_nan=False);
         del self.send_buffer[:];
       finally:
         self.lock.release();
-    #logging.info("Sent to webclient: " + result);
     return result;
 
   def send_error_to_client(self, message):
-    logging.error(message);
+    if (logger.isEnabledFor(logging.ERROR)):
+      logger.error(message);
     msg = {};
     msg['packet_type'] = "packet_connect_msg";
     msg['message'] = message;

@@ -4,9 +4,9 @@ Start the proxy like this:
 python proxy-run.py
 
 See status on this URL when proxy is running: 
-http://localhost:8081/status
+http://localhost:8082/status
 
-The proxy requires Python 2.6.
+The proxy requires Python 2.7 and optionally simplejson 2.1.1.
 
 ---------------------------------------------------
 Notes:

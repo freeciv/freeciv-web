@@ -26,9 +26,15 @@ PROXY_PORT = 8082;
 LOG_FILENAME = '/tmp/logging.out'
 
 #logging.basicConfig(filename=LOG_FILENAME,level=logging.DEBUG)
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.WARNING)
+logger = logging.getLogger("freeciv-proxy");
 
-logging.info("Start civ webserver listening on port " + str(PROXY_PORT));
+# start yappi performance profiler.
+#import yappi
+#yappi.start()
+
+print("Starting freeciv-proxy listening on port " + str(PROXY_PORT));
+
 try:
   # init webserver
   server = CivWebServer(('', PROXY_PORT), WebserverHandler)
@@ -37,11 +43,19 @@ try:
   cleanup = ComCleanup(server.civcoms)
   cleanup.start();
 
-  logging.info('started httpserver.');
+  if (logger.isEnabledFor(logging.INFO)):
+    logger.info('Started proxy HTTP server.');
   server.serve_forever();
 except KeyboardInterrupt:
-  logging.error('^C received, shutting down server');
-  server.socket.close()
+  if (logger.isEnabledFor(logging.ERROR)):
+    logger.error('^C received, shutting down server');
+  server.socket.close();
+
+  #stats = yappi.get_stats(yappi.SORTTYPE_TTOTAL);
+  #for stat in stats: 
+  #  print(stat);
+  #yappi.stop();
+
   sys.exit(0);
 
 

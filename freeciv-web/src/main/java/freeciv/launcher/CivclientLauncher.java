@@ -119,8 +119,11 @@ public class CivclientLauncher extends HttpServlet {
 			}
 	   }
 
-		
 
+		if ((action != null && action.equals("observe")) && (username == null || "null".equals(username))) {
+			username = "observer" + System.currentTimeMillis();
+			request.getSession().setAttribute( "username", username);
+		}
 
 		String errors = "";
 		String PATTERN_VALIDATE_ALPHA_NUMERIC = "[0-9a-zA-Z\\.]*";
@@ -142,7 +145,9 @@ public class CivclientLauncher extends HttpServlet {
 		response.getOutputStream().print("success");
 
 		
-		if (!action.equals("load")) {
+		if (action.equals("observe")) {
+		  response.sendRedirect("/webclient/?mode=observe");
+		} else if (!action.equals("load")) {
 		  response.sendRedirect("/webclient/");
 		} else {
 		  response.sendRedirect("/webclient/?load=" + loadFileName + "&scenario=" + scenario);

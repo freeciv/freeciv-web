@@ -66,6 +66,7 @@ System Requirements
 
 - nginx 0.8.33 - http://nginx.org/
 
+- simplejson 2.1.1 optional: http://pypi.python.org/pypi/simplejson
 
 Compiling and running the Freeciv Web client
 ---------------------------------

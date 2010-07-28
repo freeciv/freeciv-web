@@ -75,9 +75,19 @@ public class CivclientLauncher extends HttpServlet {
 		  conn = ds.getConnection();
 		  
 		  if (action != null && (action.equals("new") || action.equals("load"))) {
+
+			  String prefered_server = "" + request.getHeader("Prefered-Civserver");
+
 			  /* If user requested a new game, then get host and port for an available
 			   * server from the metaserver DB, and use that one. */
-			  PreparedStatement stmt = conn.prepareStatement("select host, port from servers where state = 'Pregame' and message LIKE '%Singleplayer%' order by rand() limit 1");
+
+			  String serverFetchSql = "select host, port from servers where state = 'Pregame' and message LIKE '%Singleplayer%' order by rand() limit 1";
+			  if (prefered_server != null && !prefered_server.equals("null")) {
+			    serverFetchSql = "select host, port from servers where state = 'Pregame' and message LIKE '%Singleplayer%' and host = '" 
+				    + prefered_server +  "' order by rand() limit 1";
+			  }
+
+			  PreparedStatement stmt = conn.prepareStatement(serverFetchSql);
 			  ResultSet rs = stmt.executeQuery();
 			  if (rs.next()) {
 				  civServerHost = rs.getString(1);

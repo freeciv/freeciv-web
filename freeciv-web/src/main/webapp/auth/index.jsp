@@ -30,7 +30,7 @@ This means that you can easily and safely use your existing username and passwor
 <br/>
 
 <!-- Simple OpenID Selector -->
-<form action="/auth/consumer_redirect.jsp" method="get" id="openid_form">
+<form action="http://games.freeciv.net/auth/consumer_redirect.jsp" method="get" id="openid_form">
 
 	<fieldset>
     		<legend>Sign-in or Create New Account using OpenID:</legend>

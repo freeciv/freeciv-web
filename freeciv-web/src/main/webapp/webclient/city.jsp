@@ -4,11 +4,25 @@
     
     <div id="city_left_panel" style="float: left; width: 40%;">
       <div id="city_canvas_div" style="border: 1px solid #888888;">
-            <canvas id="city_canvas" width="300" height="150" moz-opaque="true"></canvas>
+            <canvas id="city_canvas" width="300" height="150" onmousedown="city_mapview_mouse_click(event)" moz-opaque="true"></canvas>
       
       		<div id="city_ie_canvas"></div>
       </div>
-      
+
+	<div style="margin-bottom: 40px;">
+	<b>City information:</b>
+	<table>
+	<tr><td>Food: </td><td id="city_food"></td></tr>
+	<tr><td>Prod: </td><td id="city_prod"></td></tr>
+	<tr><td>Trade: </td><td id="city_trade"></td></tr>
+	<tr><td>Gold:: </td><td id="city_gold"></td></tr>
+	<tr><td>Luxury: </td><td id="city_luxury"></td></tr>
+	<tr><td>Science: </td><td id="city_science"></td></tr>
+
+	</table>
+	</div>
+
+
       <span>Improvements:</span>
       <div id="city_improvements" style="height: 100px; width: 90%; overflow: auto; background-color: #111111; border: 1px solid #444444;">
         <div id="city_improvements_list">

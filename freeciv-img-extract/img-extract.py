@@ -303,6 +303,18 @@ for file in files:
           coords[tag2] = (current_tileset_no, curr_x, curr_y, w, h);
           result_tile.save("tiles/" + tag + ".png");
 
+im = Image.open("city_active.png");
+(w, h) = im.size;
+curr_x += w;
+tileset.paste(im, (curr_x, curr_y));
+coords["city_active"] = (current_tileset_no, curr_x, curr_y, w, h);
+
+im = Image.open("city_invalid.png");
+(w, h) = im.size;
+curr_x += w;
+tileset.paste(im, (curr_x, curr_y));
+coords["city_invalid"] = (current_tileset_no, curr_x, curr_y, w, h);
+
 
 increment_tileset_image();
 

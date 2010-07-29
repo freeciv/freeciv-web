@@ -58,6 +58,16 @@ map, progressively revealing more of the unknown world. </td>
     </tr>
     <tr>
       <td style="vertical-align: top;"><img
+ src="../images/orders/sentry_default.png"></td>
+      <td style="vertical-align: top; text-align: center;"><span
+ style="font-weight: bold;">S</span><br>
+      </td>
+      <td style="vertical-align: top;"><span style="font-weight: bold;">Sentry:</span> Orders the unit to wait in this position, until it requires your attention (for example sees an enemy).. </td>
+    </tr>
+    <tr>
+
+    <tr>
+      <td style="vertical-align: top;"><img
  src="../images/orders/fortify_default.png"></td>
       <td style="vertical-align: top; text-align: center;"><span
  style="font-weight: bold;">F</span><br>
@@ -122,6 +132,16 @@ friendly cities. </td>
       <td style="vertical-align: top;">Build roads/rails<br>
       </td>
     </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top; text-align: center;"><span
+ style="font-weight: bold;">M</span><br>
+      </td>
+      <td style="vertical-align: top;">Build mine<br>
+      </td>
+    </tr>
+
   </tbody>
 </table>
 <br>

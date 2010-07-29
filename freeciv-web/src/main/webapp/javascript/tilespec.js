@@ -174,6 +174,13 @@ function fill_sprite_array(layer, ptile, pedge, pcorner, punit, pcity, citymode)
         sprite_array.push(get_city_sprite(pcity));
         sprite_array = sprite_array.concat(get_city_size_sprites(pcity));
       } 
+      if (active_city != null && ptile != null && ptile['worked'] != null && active_city['id'] == ptile['worked']) {
+        sprite_array.push(get_city_active_worked_sprite());
+      } else if (active_city != null && ptile != null && ptile['worked'] != 0) {
+        console.log(ptile['worked']);
+        sprite_array.push(get_city_invalid_worked_sprite());
+      }
+
     break;
     
     
@@ -466,6 +473,26 @@ function get_city_flag_sprite(pcity) {
           "offset_x" : city_flag_offset_x, 
           "offset_y" : - city_flag_offset_y};
 }
+
+/**********************************************************************
+  Return the sprite for a active city worked tile.
+***********************************************************************/
+function get_city_active_worked_sprite() {
+  return {"key" : "city_active", 
+          "offset_x" : 0, 
+          "offset_y" : 0};
+}
+
+
+/**********************************************************************
+  Return the sprite for an invalid city worked tile.
+***********************************************************************/
+function get_city_invalid_worked_sprite() {
+  return {"key" : "city_invalid", 
+          "offset_x" : 0, 
+          "offset_y" : 0};
+}
+
 
 /**********************************************************************
   Return the size graphic to be used by the city.

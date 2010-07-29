@@ -1,5 +1,14 @@
 <%@ page session="true" %>
 
+<%
+  String server = request.getServerName();
+  if (!server.equals("localhost") && !server.equals("games.freeciv.net")) {
+    /* games.freeciv.net has DNS geo load-balancing. */
+    response.sendRedirect ("http://games.freeciv.net/wireframe.jsp?do=login");
+  }
+%>
+
+
 <link rel="stylesheet" href="/stylesheets/openid.css" />
 
 <script type="text/javascript" src="/auth/openid-jquery.js"></script>
@@ -30,7 +39,7 @@ This means that you can easily and safely use your existing username and passwor
 <br/>
 
 <!-- Simple OpenID Selector -->
-<form action="http://games.freeciv.net/auth/consumer_redirect.jsp" method="get" id="openid_form">
+<form action="/auth/consumer_redirect.jsp" method="get" id="openid_form">
 
 	<fieldset>
     		<legend>Sign-in or Create New Account using OpenID:</legend>

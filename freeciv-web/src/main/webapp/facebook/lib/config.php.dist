@@ -10,7 +10,7 @@
  * resides. Make sure it's your exact root - facebook.com
  * and www.facebook.com are different.
  */
-$callback_url     = 'http://www.freeciv.net/facebook/index.php';
+$callback_url     = 'http://games.freeciv.net/facebook/index.php';
 
 /*
  * Get the API key and secret from http://facebook.com/developers

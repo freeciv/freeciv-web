@@ -9,6 +9,16 @@
      </a>
   </div>
 
+  <div id="order_sentry" class="order_button" title="Sentry Unit (wait). Shotcut: S">
+    <a href="#" onclick="key_unit_sentry();" 
+     onmouseover="document.images['sentry_button'].src='/images/orders/sentry_hover.png';"
+     onmouseout="document.images['sentry_button'].src='/images/orders/sentry_default.png';" 
+     onmousedown="document.images['sentry_button'].src='/images/orders/sentry_clicked.png';" 
+     onmouseup="document.images['sentry_button'].src='/images/orders/sentry_hover.png';">
+       <img src="/images/orders/sentry_default.png" name="sentry_button" alt="" border="0" width="30" height="50">
+     </a>
+  </div>
+
   <div id="order_explore" class="order_button" title="Auto explore. Shortcut: X">
     <a href="#" onclick="key_unit_auto_explore();" 
      onmouseover="document.images['auto_explore_button'].src='/images/orders/auto_explore_hover.png';"
@@ -59,7 +69,38 @@
        <img src="/images/orders/auto_settlers_default.png" name="auto_settlers_button" alt="" border="0" width="30" height="50">
      </a>
   </div>
-    
+
+  <div id="order_irrigate" class="order_button" title="Build Irrigation. Shotcut: I">
+    <a href="#" onclick="key_unit_irrigate();" 
+     onmouseover="document.images['irrigate_button'].src='/images/orders/irrigate_hover.png';"
+     onmouseout="document.images['irrigate_button'].src='/images/orders/irrigate_default.png';" 
+     onmousedown="document.images['irrigate_button'].src='/images/orders/irrigate_clicked.png';" 
+     onmouseup="document.images['irrigate_button'].src='/images/orders/irrigate_hover.png';">
+       <img src="/images/orders/irrigate_default.png" name="irrigate_button" alt="" border="0" width="30" height="50">
+     </a>
+  </div>
+
+  <div id="order_road" class="order_button" title="Build Road / Railroads. Shotcut: R">
+    <a href="#" onclick="key_unit_road();" 
+     onmouseover="document.images['road_button'].src='/images/orders/road_hover.png';"
+     onmouseout="document.images['road_button'].src='/images/orders/road_default.png';" 
+     onmousedown="document.images['road_button'].src='/images/orders/road_clicked.png';" 
+     onmouseup="document.images['road_button'].src='/images/orders/road_hover.png';">
+       <img src="/images/orders/road_default.png" name="road_button" alt="" border="0" width="30" height="50">
+     </a>
+  </div>
+
+  <div id="order_mine" class="order_button" title="Build Mine. Shotcut: M">
+    <a href="#" onclick="key_unit_mine();" 
+     onmouseover="document.images['mine_button'].src='/images/orders/mine_hover.png';"
+     onmouseout="document.images['mine_button'].src='/images/orders/mine_default.png';" 
+     onmousedown="document.images['mine_button'].src='/images/orders/mine_clicked.png';" 
+     onmouseup="document.images['mine_button'].src='/images/orders/mine_hover.png';">
+       <img src="/images/orders/mine_default.png" name="mine_button" alt="" border="0" width="30" height="50">
+     </a>
+  </div>
+
+
   
 </div>
 

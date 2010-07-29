@@ -180,6 +180,46 @@ function advance_unit_focus()
 }
 
 /**************************************************************************
+ Enables and disables the correct units commands for the unit in focus.
+**************************************************************************/
+
+function update_unit_order_commands()
+{
+  var funits = get_units_in_focus();
+  for (var i = 0; i < funits.length; i++) {
+    var punit = funits[i]; 
+    var ptype = unit_type(punit);
+    if (ptype['name'] == "Settlers" || ptype['name'] == "Workers" 
+        || ptype['name'] == "Engineers") {
+      $("#order_road").show();
+      $("#order_mine").show();
+      $("#order_irrigate").show();
+      $("#order_fortify").hide();
+      $("#order_sentry").hide();
+      $("#order_explore").hide();
+      $("#order_auto_settlers").show();
+    } else {
+      $("#order_road").hide();
+      $("#order_mine").hide();
+      $("#order_irrigate").hide();
+      $("#order_fortify").show();
+      $("#order_auto_settlers").hide();
+      $("#order_sentry").show();
+      $("#order_explore").show();
+
+    }
+
+    if (ptype['name'] == "Settlers" || ptype['name'] == "Engineers") {
+      $("#order_build_city").show();
+    } else {
+      $("#order_build_city").hide();
+    }
+
+  }
+
+}
+
+/**************************************************************************
  Find the nearest available unit for focus, excluding any current unit
  in focus unless "accept_current" is TRUE.  If the current focus unit
  is the only possible unit, or if there is no possible unit, returns NULL.
@@ -232,7 +272,9 @@ function set_unit_focus_and_redraw(punit)
 
   auto_center_on_focus_unit(); 
   update_unit_info_label(current_focus);
+  update_unit_order_commands();
   $("#game_unit_orders_default").show();
+
 }
 
 /**************************************************************************
@@ -433,7 +475,10 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift)
     case 'I':
       key_unit_irrigate();
     break;      
-    
+
+    case 'S':
+      key_unit_sentry();
+    break;         
     case 'P':
       key_unit_pillage();
     break;
@@ -542,6 +587,19 @@ function key_unit_auto_explore()
 }
 
 /**************************************************************************
+ Tell the units in focus to sentry.
+**************************************************************************/
+function key_unit_sentry()
+{
+  var funits = get_units_in_focus();
+  for (var i = 0; i < funits.length; i++) {
+    var punit = funits[i]; 
+    request_new_unit_activity(punit, ACTIVITY_SENTRY);
+  }  
+  update_unit_focus();
+}
+
+/**************************************************************************
  Tell the units in focus to fortify.
 **************************************************************************/
 function key_unit_fortify()
@@ -555,7 +613,7 @@ function key_unit_fortify()
 }
 
 /**************************************************************************
- Tell the units in focus to mine.
+ Tell the units in focus to irrigate.
 **************************************************************************/
 function key_unit_irrigate()
 {

@@ -37,6 +37,27 @@ function mapview_mouse_click(e)
 
 }
 
+/****************************************************************************
+  This function is triggered when the mouse is clicked on the city canvas.
+****************************************************************************/
+function city_mapview_mouse_click(e)
+{
+  //var x = e.offsetX || e.layerX;
+  //var y = e.offsetY || e.layerY;
+  var rightclick;
+  if (!e) var e = window.event;
+  if (e.which) {
+    rightclick = (e.which == 3);
+  } else if (e.button) {
+    rightclick = (e.button == 2);
+  }
+  
+  if (!rightclick) {
+    city_action_button_pressed(mouse_x, mouse_y);
+  }
+
+
+}
 
 
 /**************************************************************************
@@ -52,6 +73,23 @@ function action_button_pressed(canvas_x, canvas_y, qtype)
     /* FIXME: Some actions here will need to check can_client_issue_orders.
      * But all we can check is the lowest common requirement. */
     do_map_click(ptile, qtype);
+  }
+}
+
+
+/**************************************************************************
+  Do some appropriate action when the "main" mouse button (usually
+  left-click) is pressed.  For more sophisticated user control use (or
+  write) a different xxx_button_pressed function.
+**************************************************************************/
+function city_action_button_pressed(canvas_x, canvas_y)
+{
+  var ptile = canvas_pos_to_tile(canvas_x, canvas_y);
+
+  if (can_client_change_view() && ptile != null) {
+    /* FIXME: Some actions here will need to check can_client_issue_orders.
+     * But all we can check is the lowest common requirement. */
+    do_city_map_click(ptile);
   }
 }
 

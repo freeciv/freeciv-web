@@ -76,7 +76,8 @@ public class CivclientLauncher extends HttpServlet {
 		  
 		  if (action != null && (action.equals("new") || action.equals("load"))) {
 
-			  String prefered_server = "" + request.getHeader("Prefered-Civserver");
+			  String prefered_server = "" + request.getParameter("civserver");
+			  System.out.println("Prefered server: " + prefered_server);
 
 			  /* If user requested a new game, then get host and port for an available
 			   * server from the metaserver DB, and use that one. */

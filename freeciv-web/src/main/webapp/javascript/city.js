@@ -207,6 +207,13 @@ function show_city_dialog(pcity)
     $("#city_present_units_list").html(present_units_html);
   }
 
+  $("#city_food").html(pcity['prod'][0]);
+  $("#city_prod").html(pcity['prod'][1]);
+  $("#city_trade").html(pcity['prod'][2]);
+  $("#city_gold").html(pcity['prod'][3]);
+  $("#city_luxury").html(pcity['prod'][4]);
+  $("#city_science").html(pcity['prod'][5]);
+
 }
 
 
@@ -368,4 +375,26 @@ function close_city_dialog()
   $("#map_tab").removeClass("ui-state-default");
   
   set_default_mapview_active();
+}
+
+
+/**************************************************************************
+ The city map has been clicked.
+**************************************************************************/
+function do_city_map_click(ptile)
+{
+  var packet = null;
+  if (ptile['worked'] == active_city['id']) {
+    packet = [{"packet_type" : "city_make_specialist", 
+	         "city_id" : active_city['id'], 
+                 "worker_x" : ptile['x'] - active_city['x'] + 2, 
+		 "worker_y" : ptile['y'] - active_city['y'] + 2}];
+  } else {
+    packet = [{"packet_type" : "city_make_worker", 
+	         "city_id" : active_city['id'], 
+                 "worker_x" : ptile['x'] - active_city['x'] + 2, 
+		 "worker_y" : ptile['y'] - active_city['y'] + 2}];
+  }    
+  send_request (JSON.stringify(packet));
+
 }

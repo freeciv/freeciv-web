@@ -240,7 +240,11 @@ def json_to_civserver(net_packet_json):
         logger.error("Packet missing required field. ");
       return None;
 
-    res += packExt('>'+packet_label['type'], net_packet_json[packet_label['name']]);
+    net_payload = net_packet_json[packet_label['name']];
+    if isinstance(net_payload, str):
+      net_payload = net_payload.replace("<", "").replace(">", "").replace("\"", "");
+
+    res += packExt('>'+packet_label['type'], net_payload);
 
   header = packExt('>Hc', len(res)+3, chr(packet_number));
   res = header + res;

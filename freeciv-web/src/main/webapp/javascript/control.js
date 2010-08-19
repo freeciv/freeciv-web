@@ -60,7 +60,7 @@ function check_text_input(event,chatboxtextarea) {
 
     $(chatboxtextarea).val('');
     $(chatboxtextarea).focus();
- 
+    keyboard_input = true;
     var test_packet = [{"packet_type" : "chat_msg_req", "message" : message}];
     var myJSONText = JSON.stringify(test_packet);
     send_request (myJSONText);

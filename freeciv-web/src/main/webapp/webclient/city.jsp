@@ -1,9 +1,9 @@
-  <div>
+  <div id="city_viewport">
     <h1 id="city_heading"></h1>
     <h3 id="city_size"></h3>
     
-    <div id="city_left_panel" style="float: left; width: 40%;">
-      <div id="city_canvas_div" style="border: 1px solid #888888;">
+    <div id="city_left_panel">
+      <div id="city_canvas_div">
             <canvas id="city_canvas" width="300" height="150" onmousedown="city_mapview_mouse_click(event)" moz-opaque="true"></canvas>
       
       		<div id="city_ie_canvas"></div>

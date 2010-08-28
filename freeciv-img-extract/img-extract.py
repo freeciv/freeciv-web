@@ -1,9 +1,19 @@
 #!/usr/bin/python
 # -*- coding: iso-8859-1 -*-
+''' 
+ Freeciv - Copyright (C) 2009,2010 - Andreas Røsdal   andrearo@pvv.ntnu.no
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2, or (at your option)
+   any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+'''
 
 import os, sys
-
-# Copyright 2009, Andreas Røsdal
 
 import ConfigParser
 import Image
@@ -60,12 +70,16 @@ sum_area = 0;
 max_row_height = 0;
 curr_x = 0;
 curr_y = 14;
-tileset_height = 1800;  #FIXME: This must be adjusted according to the number of tiles. # Stupid Flash 9 limitation of 2880.
-tileset_width = 1280;
+tileset_height = 1800;  #FIXME: This must be adjusted according to the number of tiles. # Silly Flash 9 limitation of 2880.
+tileset_width = 1340;
+
+dither_types = ["t.l0.desert1", "t.l0.plains1", "t.l0.grassland1", "t.l0.forest1", "t.l0.hills1", "t.l0.mountains1", "t.l0.tundra1", "t.l0.swamp1"];
 
 current_tileset_no = 1;
 tileset = Image.new('RGBA', (tileset_width, tileset_height), (0, 0, 0, 0));
 mask_image = Image.open("mask.png");
+dither_mask = Image.open("dither.png");
+dither_map = {};
 
 def increment_tileset_image():
   # save current tileset file.
@@ -78,7 +92,7 @@ def increment_tileset_image():
   global max_height;
 
   draw = ImageDraw.Draw(tileset)
-  draw.text((130, 0), "Freeciv Web Client   - Amplio tileset number " + str(current_tileset_no) + " -   GPL Licensed  -   Web Client Copyright 2007-2010  Andreas Rosdal", fill="rgb(0,0,0)")
+  draw.text((130, 0), "Freeciv.net - #" + str(current_tileset_no) + " -   GPL Licensed  - Copyright 2007-2010  Andreas Rosdal", fill="rgb(0,0,0)")
 
   tileset.save("freeciv-web-tileset-" + str(current_tileset_no) + ".png");
 
@@ -175,10 +189,10 @@ for file in files:
         result_tile = im.copy().crop(dims); 
         #result_tile.save(tag + ".png");
 
-        if (tag == "t.l0.grassland1"):
-          result_tile = Image.open("grassland1.png");
-        if (tag == "t.l0.plains1"):
-          result_tile = Image.open("plains1.png");
+        #if (tag == "t.l0.grassland1"):
+        #  result_tile = Image.open("grassland1.png");
+        #if (tag == "t.l0.plains1"):
+        #  result_tile = Image.open("plains1.png");
 
         if (tag.find("cellgroup") != -1):
           #handle a cell group (1 tile = 4 cells)
@@ -213,6 +227,9 @@ for file in files:
               curr_y += max_row_height;
               max_row_height = 0;
 
+	elif tag in dither_types:
+          # handle a dithered tile.
+          dither_map[tag] = result_tile.copy();
 
         else:
           # handle a non-cellgroup tile.
@@ -302,6 +319,43 @@ for file in files:
         if (tag2 != None): 
           coords[tag2] = (current_tileset_no, curr_x, curr_y, w, h);
           result_tile.save("tiles/" + tag + ".png");
+
+
+# handle dithered tiles.
+for src_key in dither_map.keys():
+  for alt_key in dither_map.keys():
+      for dir in range(4):
+	tag = str(dir) + src_key[5:].replace("1", "") + "_" + alt_key[5:].replace("1", "");
+	print(tag);
+        src_img = dither_map[src_key].copy();
+        alt_img = dither_map[alt_key].copy();
+        src_img.paste(alt_img, None, dither_mask);
+
+        (WZ, HZ) = src_img.size;
+        #xf = [0, 0, WZ / 2, WZ / 2];
+        xf = [WZ / 2, 0, WZ / 2, 0];
+        #yf = [HZ / 2, 0, 0, HZ / 2];
+        yf = [0, HZ / 2, HZ / 2, 0];
+
+        result_cell = src_img.crop((xf[dir], yf[dir], xf[dir] + (WZ / 2), yf[dir] + (HZ / 2)));
+
+        (w, h) = (WZ / 2 , HZ / 2);
+        if (w > max_width): max_width = w;
+        if (h > max_height): max_height = h;
+        sum_area += (h*w);
+        if (curr_y + h >= tileset_height):
+          increment_tileset_image();
+        tileset.paste(result_cell, (curr_x, curr_y));
+        result_cell.save("tiles/" + tag + ".png");
+
+        coords[tag] = (current_tileset_no, curr_x, curr_y, w, h);
+
+        curr_x += w;
+        if (h > max_row_height): max_row_height = h;
+        if (w + curr_x >= tileset_width): 
+          curr_x = 0;
+          curr_y += max_row_height;
+          max_row_height = 0;
 
 im = Image.open("city_active.png");
 (w, h) = im.size;

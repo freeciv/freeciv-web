@@ -8,7 +8,7 @@ body {
 
 #pregame_page {
   padding: 10px;
-  background-color: #333333;
+  background-color: #222222;
   width: 97%;
   float:left;
 }
@@ -21,7 +21,7 @@ body {
 }
 
 #pregame_options {
-  background-color: #333333;
+  background-color: #222222;
   width: 99%;
   height: 30px;
   padding: 10px;
@@ -29,45 +29,47 @@ body {
 }
 
 #pregame_player_list {
-  background-color: #333333;
+  background-color: #222222;
   width: 15%;
   height: 80%;
   float: right;
   overflow: auto;
+  max-height: 600px;
 }
 
 #pregame_player_name {
   padding: 5px;
   margin: 5px;
-  background-color: #777777;
+  background-color: #111111;
+  color: #ffffff;
   float: left;
   min-width: 180px;
   height: 48px;
 }
 
 #pregame_message_area {
-  background-color: #111111;
+  background: #111111 url(/images/black-bg.png); 
   color: #ffffff;
-  height: 650px;
+  height: 550px;
   width: 80%;
   overflow: auto;
   float: left;
 }
 
 #pregame_player_icon {
-  background: transparent url(/tileset/freeciv-web-tileset-2.png); 
-  background-position:-649px -689px; 
-  width: 64px; 
-  height: 48px; 
+  background: transparent url(/images/player-icon.png); 
+  width: 24px; 
+  height: 24px; 
+  margin: 5px;
   float:left;
   
 }
 
 #pregame_ai_icon {
-  background: transparent url(/tileset/freeciv-web-tileset-2.png); 
-  background-position:-810px -643px; 
-  width: 64px; 
-  height: 48px; 
+  background: transparent url(/images/ai-icon.png); 
+  width: 24px; 
+  height: 24px; 
+  margin: 5px;
   float:left;
   
 }  
@@ -79,7 +81,7 @@ body {
 }
 
 #pregame_text_input {
-  width: 80%;
+  width: 79%;
   padding: 5px;
   font-size: 16px;
 }

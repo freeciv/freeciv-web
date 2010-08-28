@@ -226,7 +226,7 @@ function send_player_research(tech_id)
 {
   var packet = [{"packet_type" : "player_research", "tech" : tech_id}];
   send_request (JSON.stringify(packet));
-  setTimeout ( "update_tech_screen();", 1000);
+  setTimeout ( "update_tech_screen();", 800);
 }
 
 /**************************************************************************
@@ -236,5 +236,5 @@ function send_player_tech_goal(tech_id)
 {
   var packet = [{"packet_type" : "player_tech_goal", "tech" : tech_id}];
   send_request (JSON.stringify(packet));
-  setTimeout ( "update_tech_screen();", 1000);
+  setTimeout ( "update_tech_screen();", 800);
 }

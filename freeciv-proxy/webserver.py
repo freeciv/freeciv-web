@@ -13,7 +13,7 @@
    GNU General Public License for more details.
 '''
 
-import string,time
+import string, time
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 import logging
 from civcom import *
@@ -43,12 +43,17 @@ class CivWebServer(ThreadingMixIn, HTTPServer):
     if key not in self.civcoms.keys():
       civcom = CivCom(username, int(civserverport), civserverhost);
       civcom.client_ip = client_ip;
+      civcom.connect_time = time.time();
       civcom.set_civwebserver(self);
       civcom.start();
       self.civcoms[key] = civcom;
       return civcom;
     else:
-      return self.civcoms[key];
+      usrcivcom = self.civcoms[key];
+      if (usrcivcom.client_ip != client_ip):
+        logger.error("Unauthorized connection from client IP: " + client_ip);
+        return None;
+      return usrcivcom;
 
 class WebserverHandler(BaseHTTPRequestHandler):
 
@@ -85,6 +90,10 @@ class WebserverHandler(BaseHTTPRequestHandler):
 
         # get the civcom instance which corresponds to this user.        
         civcom = self.server.get_civcom(username, civserverport, civserverhost, client_ip);
+
+        if (civcom == None):
+          self.send_error(503, "Could not authenticate user.");
+          return;
 
         try:
           # parse request from webclient

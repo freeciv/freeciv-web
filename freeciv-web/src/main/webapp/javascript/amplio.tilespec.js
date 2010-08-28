@@ -189,24 +189,24 @@ ts_tiles['tundra']['layer0_match_type'] = "land";
 
 var tile_types_setup = 
 {
-"l0.lake":{"match_style":2,"sprite_type":1,"mine_tag":"(null)","match_indices":2,"match_index":[0,2]},
-"l0.coast":{"match_style":3,"sprite_type":1,"mine_tag":"(null)","match_indices":3,"match_index":[0,1,2]},
-"l1.coast":{"match_style":2,"sprite_type":1,"mine_tag":"(null)","match_indices":2,"match_index":[3,4]},
-"l0.floor":{"match_style":3,"sprite_type":1,"mine_tag":"(null)","match_indices":3,"match_index":[1,0,2]},
-"l1.floor":{"match_style":2,"sprite_type":1,"mine_tag":"(null)","match_indices":2,"match_index":[3,4]},
-"l0.arctic":{"match_style":0,"sprite_type":0,"mine_tag":"tx.oil_mine","match_indices":1,"match_index":[0]},
-"l0.desert":{"match_style":0,"sprite_type":0,"mine_tag":"tx.oil_mine","match_indices":1,"match_index":[2]},
-"l0.forest":{"match_style":0,"sprite_type":0,"mine_tag":"(null)","match_indices":1,"match_index":[2]},
-"l1.forest":{"match_style":1,"sprite_type":0,"mine_tag":"(null)","match_indices":2,"match_index":[0,0]},
-"l0.grassland":{"match_style":0,"sprite_type":0,"mine_tag":"(null)","match_indices":1,"match_index":[2]},
-"l0.hills":{"match_style":0,"sprite_type":0,"mine_tag":"tx.mine","match_indices":1,"match_index":[2]},
-"l1.hills":{"match_style":1,"sprite_type":0,"mine_tag":"tx.mine","match_indices":2,"match_index":[1,1]},
-"l0.jungle":{"match_style":0,"sprite_type":0,"mine_tag":"(null)","match_indices":1,"match_index":[2]},
-"l0.mountains":{"match_style":0,"sprite_type":0,"mine_tag":"tx.mine","match_indices":1,"match_index":[2]},
-"l1.mountains":{"match_style":1,"sprite_type":0,"mine_tag":"tx.mine","match_indices":2,"match_index":[2,2]},
-"l0.plains":{"match_style":0,"sprite_type":0,"mine_tag":"(null)","match_indices":1,"match_index":[2]},
-"l0.swamp":{"match_style":0,"sprite_type":0,"mine_tag":"(null)","match_indices":1,"match_index":[2]},
-"l0.tundra":{"match_style":0,"sprite_type":0,"mine_tag":"(null)","match_indices":1,"match_index":[2]}
+"l0.lake":{"match_style":2,"sprite_type":1,"mine_tag":"(null)","match_indices":2,"match_index":[0,2],"dither":false},
+"l0.coast":{"match_style":3,"sprite_type":1,"mine_tag":"(null)","match_indices":3,"match_index":[0,1,2],"dither":false},
+"l1.coast":{"match_style":2,"sprite_type":1,"mine_tag":"(null)","match_indices":2,"match_index":[3,4],"dither":false},
+"l0.floor":{"match_style":3,"sprite_type":1,"mine_tag":"(null)","match_indices":3,"match_index":[1,0,2],"dither":false},
+"l1.floor":{"match_style":2,"sprite_type":1,"mine_tag":"(null)","match_indices":2,"match_index":[3,4],"dither":false},
+"l0.arctic":{"match_style":0,"sprite_type":0,"mine_tag":"tx.oil_mine","match_indices":1,"match_index":[0],"dither":false},
+"l0.desert":{"match_style":0,"sprite_type":0,"mine_tag":"tx.oil_mine","match_indices":1,"match_index":[2],"dither":true},
+"l0.forest":{"match_style":0,"sprite_type":0,"mine_tag":"(null)","match_indices":1,"match_index":[2],"dither":true},
+"l1.forest":{"match_style":1,"sprite_type":0,"mine_tag":"(null)","match_indices":2,"match_index":[0,0],"dither":false},
+"l0.grassland":{"match_style":0,"sprite_type":0,"mine_tag":"(null)","match_indices":1,"match_index":[2],"dither":true},
+"l0.hills":{"match_style":0,"sprite_type":0,"mine_tag":"tx.mine","match_indices":1,"match_index":[2],"dither":true},
+"l1.hills":{"match_style":1,"sprite_type":0,"mine_tag":"tx.mine","match_indices":2,"match_index":[1,1],"dither":false},
+"l0.jungle":{"match_style":0,"sprite_type":0,"mine_tag":"(null)","match_indices":1,"match_index":[2],"dither":false},
+"l0.mountains":{"match_style":0,"sprite_type":0,"mine_tag":"tx.mine","match_indices":1,"match_index":[2],"dither":true},
+"l1.mountains":{"match_style":1,"sprite_type":0,"mine_tag":"tx.mine","match_indices":2,"match_index":[2,2],"dither":false},
+"l0.plains":{"match_style":0,"sprite_type":0,"mine_tag":"(null)","match_indices":1,"match_index":[2],"dither":true},
+"l0.swamp":{"match_style":0,"sprite_type":0,"mine_tag":"(null)","match_indices":1,"match_index":[2],"dither":true},
+"l0.tundra":{"match_style":0,"sprite_type":0,"mine_tag":"(null)","match_indices":1,"match_index":[2],"dither":true}
 
 };
 

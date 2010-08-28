@@ -1,6 +1,6 @@
 
 <div id="pregame_page">
-  <div id="pregame_logo"> </div>
+  <div id="pregame_logo"></div>
   <div id="pregame_options">
     <div id="pregame_buttons">
       <button type="button" class="ui-state-default ui-corner-all" onClick="pregame_start_game();">Start Game</button>
@@ -32,7 +32,5 @@
     			/>
   </div>
 </div>
-
-
 
  <div id="pick_nation_dialog" ></div>

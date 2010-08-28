@@ -79,6 +79,8 @@ var DARKNESS_CARD_FULL = 3;
 /* Corner darkness & fog.  3^4 = 81 sprites. */
 var DARKNESS_CORNER = 4;
 
+var dither_offset_x = [normal_tile_width/2, 0, normal_tile_width/2, 0];
+var dither_offset_y = [0, normal_tile_height/2, normal_tile_height/2, 0];
 
 
 var terrain_match = {"t.l0.hills1" : MATCH_NONE, 
@@ -259,8 +261,24 @@ function fill_terrain_sprite_array(l, ptile, pterrain, tterrain_near)
       switch (dlp['match_style']) {
         case MATCH_NONE:
         {
-          return [ {"key" : "t.l" + l + "." + pterrain['graphic_str'] + 1} ];
-	      break;
+          var result_sprites = [];
+      	   if (dlp['dither'] == true) {
+             for (var i = 0; i < num_cardinal_tileset_dirs; i++) {
+               var dir = cardinal_tileset_dirs[i];
+               if (ts_tiles[tterrain_near[DIR4_TO_DIR8[i]]['graphic_str']] == null) continue; 
+               var near_dlp = tile_types_setup["l" + l + "." + tterrain_near[DIR4_TO_DIR8[i]]['graphic_str']];
+	       var terrain_near = (near_dlp['dither'] == true) ?  tterrain_near[DIR4_TO_DIR8[i]]['graphic_str'] : pterrain['graphic_str'];
+	       var dither_tile = i + pterrain['graphic_str'] + "_" +  terrain_near;
+               var x = dither_offset_x[i];
+               var y = dither_offset_y[i];
+	       result_sprites.push({"key": dither_tile, "offset_x" : x, "offset_y" : y});
+             }
+	     return result_sprites;
+             
+	   } else {
+             return [ {"key" : "t.l" + l + "." + pterrain['graphic_str'] + 1} ];
+	   }
+          break;
         }
         
         case MATCH_SAME:
@@ -268,17 +286,17 @@ function fill_terrain_sprite_array(l, ptile, pterrain, tterrain_near)
           var tileno = 0;
           var this_match_type = ts_tiles[pterrain['graphic_str']]['layer' + l + '_match_type'];
          
-		  for (var i = 0; i < num_cardinal_tileset_dirs; i++) {
+          for (var i = 0; i < num_cardinal_tileset_dirs; i++) {
             var dir = cardinal_tileset_dirs[i];
-		    if (ts_tiles[tterrain_near[i]['graphic_str']] == null) continue; 
-		    var that = ts_tiles[tterrain_near[i]['graphic_str']]['layer' + l + '_match_type'];
+            if (ts_tiles[tterrain_near[i]['graphic_str']] == null) continue; 
+            var that = ts_tiles[tterrain_near[i]['graphic_str']]['layer' + l + '_match_type'];
             if (that == this_match_type) {
 			  tileno |= 1 << i;
-	        }
+            }
           }
           
           return [ {"key" : "t.l" + l + "." + pterrain['graphic_str'] + "_" + cardinal_index_str(tileno)} ];
-	      break;
+          break;
         } 
       }
     }

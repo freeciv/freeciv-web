@@ -47,10 +47,14 @@ function initCanvas(canvas) {
 function init_mapview()
 {
  
-  if (is_canvas_supported()) {
+  if (is_canvas_supported) {
     mapview_canvas = initCanvas(document.getElementById('canvas'));
     mapview_canvas_ctx = mapview_canvas.getContext("2d");
-    
+
+    if ("mozImageSmoothingEnabled" in mapview_canvas_ctx) {
+      // if this Boolean value is false, images won't be smoothed when scaled. This property is true by default.
+      mapview_canvas_ctx.mozImageSmoothingEnabled = false;
+    } 
   
     has_canvas_text_support = (mapview_canvas_ctx.fillText && mapview_canvas_ctx.measureText && !is_iphone());
   
@@ -63,7 +67,7 @@ function init_mapview()
   }
      
   
-  if (!is_canvas_supported()) {
+  if (!is_canvas_supported) {
     $("#canvas").remove();
   } else {
     $("#ie_canvas").remove();
@@ -133,7 +137,7 @@ function setup_window_size ()
     }
   }
   
-  if (is_canvas_supported()) {
+  if (is_canvas_supported) {
     mapview_canvas.width = winWidth - width_offset;
     mapview_canvas.height = winHeight - height_offset;
   } else {
@@ -202,15 +206,10 @@ function mapview_put_tile(pcanvas, tag, canvas_x, canvas_y) {
     return;
   } 
 
-  var tileset_file_no = tileset[tag][0];
-  var tileset_x = tileset[tag][1];
-  var tileset_y = tileset[tag][2];
-  var width = tileset[tag][3];
-  var height = tileset[tag][4];
- 
   if (is_canvas_clipping_supported()) {
-    pcanvas.drawImage(tileset_images[tileset_file_no], tileset_x, tileset_y, width, height,
-                      canvas_x, canvas_y, width, height);
+    pcanvas.drawImage(tileset_images[tileset[tag][0]], tileset[tag][1], tileset[tag][2], 
+                      tileset[tag][3], tileset[tag][4],
+                      canvas_x, canvas_y, tileset[tag][3], tileset[tag][4]);
   } else {
     pcanvas.drawImage(tileset_images[tag], canvas_x, canvas_y);
   }
@@ -250,7 +249,7 @@ function mapview_put_tile_ie(pcanvas, tag, canvas_x, canvas_y) {
 **************************************************************************/
 function mapview_put_city_text(pcanvas, text, canvas_x, canvas_y) {
 
-  if (!is_canvas_supported()) {
+  if (!is_canvas_supported) {
     var xtile = document.createElement("div");
     xtile.style.position = "absolute";
     xtile.style.left = canvas_x-20+"px";
@@ -380,7 +379,7 @@ function update_select_unit_dialog(punits)
 **************************************************************************/
 function set_city_mapview_active()
 {
-  if (is_canvas_supported()) {
+  if (is_canvas_supported) {
     mapview_canvas = initCanvas(document.getElementById('city_canvas'));
     mapview_canvas_ctx = mapview_canvas.getContext("2d");
      
@@ -393,7 +392,7 @@ function set_city_mapview_active()
   }
      
   
-  if (!is_canvas_supported()) {
+  if (!is_canvas_supported) {
     $("#city_canvas").remove();
   } else {
     $("#city_ie_canvas").remove();
@@ -412,7 +411,7 @@ function set_city_mapview_active()
 **************************************************************************/
 function set_default_mapview_active()
 {
-  if (is_canvas_supported()) {
+  if (is_canvas_supported) {
     mapview_canvas = initCanvas(document.getElementById('canvas'));
     mapview_canvas_ctx = mapview_canvas.getContext("2d");
      
@@ -425,7 +424,7 @@ function set_default_mapview_active()
   }
      
   
-  if (!is_canvas_supported()) {
+  if (!is_canvas_supported) {
     $("#canvas").remove();
   } else {
     $("#ie_canvas").remove();

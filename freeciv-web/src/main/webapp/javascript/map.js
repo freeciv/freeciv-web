@@ -215,7 +215,7 @@ function is_cardinal_dir(dir)
 ****************************************************************************/
 function map_pos_to_tile(x, y)
 {
-  if (map['tiles'] == null) return null;
+  //if (map['tiles'] == null) return null;
   return map['tiles'][x + y * map['xsize']];
 }
 

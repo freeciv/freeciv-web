@@ -41,7 +41,7 @@ button {
 
 
 #game_message_area {
-  background-color: #222222;
+  background: #222222 url(/images/black-bg.png); 
   height: 120px;
   width: 100%;
   overflow: auto;
@@ -64,7 +64,6 @@ button {
   float: left;
   min-width: 20%;
   height: 150px;
-  background-color: black;
   text-align: center;
   overflow: auto;
 }
@@ -82,23 +81,29 @@ button {
   float: right;
   width: 24%;
   height: 140px;
-  background-color: black;
   color: white;
   padding-left: 5px;
   overflow: hidden;
+  background: url("/images/black-bg.png") repeat scroll 0 0 #222222;
+}
+
+#game_info_panel {
+  float: left;
+  width: 99%;
+  padding-top: 2px;
+  background: #000000 url(/images/mapview_ui.png); 
 }
 
 
 #game_unit_info {
   float: left;
-  background-color: black;
   color: white;
   width: 100%;
   overflow: hidden;
 }
 
 #game_communication_panel {
-  width: 51%;
+  width: 52%;
   float: left;
 }
 
@@ -140,6 +145,7 @@ button {
   width: 300px; 
   height: 150px; 
   margin: 30px;
+  border: 1px solid #888888;
 }
 
 #game_status_panel {
@@ -150,9 +156,17 @@ button {
 
 }
 
+#city_left_panel {
+  background: url("/images/black-bg.png") repeat scroll 0 0 #222222;
+  float: left; 
+  width: 40%;
+}
+
 #city_right_panel {
   float: right; 
   width: 60%;
+  background: url("/images/black-bg.png") repeat scroll 0 0 #222222;
+  height: 670px;
 }
 
 
@@ -166,4 +180,13 @@ button {
   background: #2e2f35;
   min-height: 500px;
   padding: 30px;
+}
+
+#game_unit_orders_default {
+  margin-top: -10px; 
+  padding-left: 20px;
+}
+
+#city_viewport {
+  background: url("/images/black-bg.png") repeat scroll 0 0 #222222;
 }

@@ -42,8 +42,8 @@ class ComCleanup(Thread):
               civcom = self.civcoms[key];        
               # if ping limit exceeded, close connection and remove civcom.
               if (PINGLIMIT < time.time() - civcom.pingstamp):
-                civcom.close_connection();
                 civcom.stopped = True;
+                civcom.close_connection();
         except:
           if (logger.isEnabledFor(logging.ERROR)):
             logging.error("Exception in ComCleanup");

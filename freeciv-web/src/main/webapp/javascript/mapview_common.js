@@ -298,7 +298,7 @@ function update_map_canvas(canvas_x, canvas_y, width, height)
     }
   
   /* For IE mode, clean up all divs first.*/
-  if (!is_canvas_supported()) {    
+  if (!is_canvas_supported) {    
     if (mapview_canvas.hasChildNodes()) {
       while ( mapview_canvas.childNodes.length >= 1) {
         mapview_canvas.removeChild(mapview_canvas.firstChild );       
@@ -444,7 +444,7 @@ function update_map_canvas(canvas_x, canvas_y, width, height)
     } 
   }
   
-  if (!is_canvas_supported()) {  
+  if (!is_canvas_supported) {  
     mapview_canvas.appendChild(mapview_frag);
   }
   

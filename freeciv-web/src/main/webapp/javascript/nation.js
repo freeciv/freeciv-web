@@ -22,7 +22,8 @@ var nation_groups = [];
 **************************************************************************/
 function update_nation_screen()
 {
-  var nation_list_html = "";
+  var nation_list_html = "<table width=80% border=0 cellspacing=0><tr style='background: #444444;'><td>Flag</td><td>Player Name:</td>"
+	  + "<td>Nation:</td><td>AI/Human</td><td>Alive/Dead</td></tr>";
   
   for (var player_id in players) {
     var pplayer = players[player_id];
@@ -30,14 +31,21 @@ function update_nation_screen()
     var sprite = get_player_fplag_sprite(pplayer);
     
     nation_list_html = nation_list_html  
-           + "<div style='background: transparent url("
+           + "<tr><td><div style='background: transparent url("
            + sprite['image-src'] 
            + "); background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y'] 
            + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px; margin: 5px; '>"
-           + "<div style='width: 600px; margin-left: 60px;'>" + pplayer['name'] + " - " 
-                       + pplayer['username'] + "  - " + nations[pplayer['nation']]['adjective']  + "</div></div>";
+           + "</div></td>";
     
+
+    nation_list_html = nation_list_html 
+           + "<td>" + pplayer['name'] + "</td><td>" 
+           + nations[pplayer['nation']]['adjective']  + "</td><td>" 
+	   + (pplayer['ai'] ? "AI" : "Human") + "</td><td>"
+	   + (pplayer['is_alive'] ? "Alive" : "Dead") +  "</td></tr>";
+
   }
+  nation_list_html = nation_list_html + "</table>";
 
   $("#nations_list").html(nation_list_html);
 

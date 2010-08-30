@@ -207,6 +207,11 @@ void establish_new_connection(struct connection *pconn)
     send_conn_info(dest, game.est_connections);
   }
 
+  if (srvarg.ranked) {
+     notify_conn(dest, NULL, E_CONNECTION, FTC_SERVER_INFO, NULL,
+		_("This is a tournament game, for 2 players, which will report the results to www.freeciv.net."));
+  }
+
   /* remind the connection who he is */
   if (NULL == pconn->playing) {
     notify_conn(dest, NULL, E_CONNECTION, FTC_SERVER_INFO, NULL,

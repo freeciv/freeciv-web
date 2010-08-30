@@ -31,29 +31,29 @@ files = ["../freeciv/data/amplio.tilespec",
   "../freeciv/data/amplio/icons.spec",
   "../freeciv/data/amplio/medievalcities.spec",
   "../freeciv/data/amplio/moderncities.spec",
-  "../freeciv/data/amplio/nuke.spec",
+#  "../freeciv/data/amplio/nuke.spec", 	#not in use yet
   "../freeciv/data/amplio/ocean.spec",
   "../freeciv/data/amplio/select.spec",
   "../freeciv/data/amplio/terrain1.spec",
   "../freeciv/data/amplio/terrain2.spec",
   "../freeciv/data/amplio/tiles.spec",
   "../freeciv/data/amplio/units.spec",
-  "../freeciv/data/amplio/water.spec",
+#  "../freeciv/data/amplio/water.spec",  #not in use yet
   "../freeciv/data/amplio/wonders.spec",
   "../freeciv/data/misc/colors.tilespec",
   "../freeciv/data/misc/buildings.spec",
   "../freeciv/data/misc/icons.spec",
-#  "../freeciv/data/misc/chiefs.spec",
+#  "../freeciv/data/misc/chiefs.spec",  #not in use yet
   "../freeciv/data/misc/overlays.spec",
-  "../freeciv/data/misc/citybar.spec",
+#  "../freeciv/data/misc/citybar.spec",  #not in use yet
   "../freeciv/data/misc/shields.spec",
   "../freeciv/data/misc/small.spec",
   "../freeciv/data/misc/cursors.spec",
   "../freeciv/data/misc/space.spec",
   "../freeciv/data/misc/editor.spec",
   "../freeciv/data/misc/techs.spec",
-  "../freeciv/data/misc/flags.spec",
-  "../freeciv/data/misc/treaty.spec"];
+  "../freeciv/data/misc/flags.spec"];
+#  "../freeciv/data/misc/treaty.spec"];  #not in use yet
 
 global tileset;
 global current_tileset_no;
@@ -332,9 +332,7 @@ for src_key in dither_map.keys():
         src_img.paste(alt_img, None, dither_mask);
 
         (WZ, HZ) = src_img.size;
-        #xf = [0, 0, WZ / 2, WZ / 2];
         xf = [WZ / 2, 0, WZ / 2, 0];
-        #yf = [HZ / 2, 0, 0, HZ / 2];
         yf = [0, HZ / 2, HZ / 2, 0];
 
         result_cell = src_img.crop((xf[dir], yf[dir], xf[dir] + (WZ / 2), yf[dir] + (HZ / 2)));

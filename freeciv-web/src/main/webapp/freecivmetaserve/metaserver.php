@@ -319,8 +319,6 @@ if ( isset($port) ) {
 <html>
 <head>
 <title>Freeciv.net - online multiplayer strategy game</title>
-<link href="/stylesheets/frontpage.css" rel="stylesheet" type="text/css" />
-
 
 <link href="/stylesheets/frontpage.css" rel="stylesheet" type="text/css" />
 
@@ -343,6 +341,7 @@ if ( isset($port) ) {
 <div id="header_menu"> <a class="menu_link" href="/" title="News about Freeciv.net">News</a> &nbsp;&nbsp; 
 <a class="menu_link" href="/wireframe.jsp?do=login" title="Login to play Freeciv.net now">Play Now</a> &nbsp;&nbsp; 
 <a class="menu_link" href="/freecivmetaserve/metaserver.php" title="Multiplayer Games">Games</a> &nbsp;&nbsp; 
+<a class="menu_link" href="http://www.freeciv.net/tournament/" title="Freeciv Tournament">Tournament</a> &nbsp;&nbsp; 
 <a class="menu_link" href="/wiki" title="Documentation">Documentation</a> &nbsp;&nbsp; 
 <a class="menu_link" href="/forum/" title="Freeciv.net Forum">Forum</a> &nbsp;&nbsp;
 <a class="menu_link" title="Contribute to the Freeciv.net development" href="/wireframe.jsp?do=dev">Development</a> &nbsp;&nbsp;
@@ -453,7 +452,7 @@ if ( isset($port) ) {
       }
     } else {
       print "<h1>Freeciv.net multiplayer games around the world</h1><br />\n";
-      $stmt="select host,port,version,patches,state,message,unix_timestamp()-unix_timestamp(stamp),available from servers where message like '%Multiplayer%' order by state,host,port asc";
+      $stmt="select host,port,version,patches,state,message,unix_timestamp()-unix_timestamp(stamp),available from servers where message like '%Multiplayer%' or message like '%Tournament%' order by state,host,port asc";
       $res = fcdb_exec($stmt);
       $nr = fcdb_num_rows($res);
       if ( $nr > 0 ) {

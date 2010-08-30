@@ -221,3 +221,21 @@ function request_observe_game()
   send_request (myJSONText);
 
 }
+
+/**************************************************************************
+...
+**************************************************************************/
+function surrender_game()
+{
+  var test_packet = [{"packet_type" : "chat_msg_req", 
+                         "message" : "/surrender "}];
+  var myJSONText = JSON.stringify(test_packet);
+  send_request (myJSONText);
+
+  $("#tabs-map").removeClass("ui-tabs-hide");
+  $("#tabs-opt").addClass("ui-tabs-hide");
+  $("#map_tab").addClass("ui-state-active");
+  $("#map_tab").addClass("ui-tabs-selected");
+  $("#map_tab").removeClass("ui-state-default");
+
+}

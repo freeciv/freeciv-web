@@ -44,6 +44,8 @@
 #include <winsock.h>
 #endif
 
+#include <curl/curl.h>
+
 /* utility */
 #include "astring.h"
 #include "capability.h"
@@ -239,6 +241,39 @@ void set_server_state(enum server_states newstate)
 }
 
 /**************************************************************************
+...
+**************************************************************************/
+static void freeciv_report_victor(const struct player *winner, 
+		                  const struct player *loser )
+{
+    CURL *curl;
+    CURLcode res;
+    char url_buf[512]; 
+
+    if (game.info.turn >= 10 && srvarg.ranked) {
+       my_snprintf(url_buf, sizeof(url_buf),
+        _("http://localhost/tournament/webclient_report.php?winnername=%s&losername=%s&report=Report+Game"),
+	winner->username, loser->username);
+
+      curl = curl_easy_init();
+      if(curl) {
+        curl_easy_setopt(curl, CURLOPT_URL, url_buf);
+        res = curl_easy_perform(curl);
+ 
+        curl_easy_cleanup(curl);
+
+	notify_conn(game.est_connections, NULL, E_GAME_END,
+                FTC_SERVER_INFO, NULL,
+		_("Reported tournament result to www.freeciv.net for winner: %s"),
+		winner->username);
+
+      }
+  }
+}
+
+
+
+/**************************************************************************
   Returns TRUE if any one game end condition is fulfilled, FALSE otherwise.
 
   This function will notify players but will not set the server_state(). The
@@ -248,7 +283,9 @@ void set_server_state(enum server_states newstate)
 bool check_for_game_over(void)
 {
   int barbs = 0, alive = 0;
+  int humans = 0;
   struct player *victor = NULL, *spacer = NULL;
+  struct player *loser = NULL;
   int winners = 0;
   struct astring str = ASTRING_INIT;
 
@@ -287,6 +324,14 @@ bool check_for_game_over(void)
 
   /* count barbarians and observers */
   players_iterate(pplayer) {
+    if (!is_barbarian(pplayer) && !pplayer->ai_data.control) {
+      humans++;
+    }
+  } players_iterate_end;
+
+
+  /* count barbarians and observers */
+  players_iterate(pplayer) {
     if (is_barbarian(pplayer)) {
       barbs++;
     }
@@ -299,6 +344,8 @@ bool check_for_game_over(void)
         && !pplayer->surrendered) {
       alive++;
       victor = pplayer;
+    } else if (!pplayer->is_alive && !is_barbarian(pplayer) ) {
+      loser = pplayer;
     }
   } players_iterate_end;
 
@@ -345,6 +392,7 @@ bool check_for_game_over(void)
                   player_name(victor));
       ggz_report_victor(victor);
       ggz_report_victory();
+
     }
 
     return TRUE;
@@ -373,6 +421,12 @@ bool check_for_game_over(void)
 	if (pplayer->is_alive
 	    && !pplayer->surrendered) {
 	  ggz_report_victor(pplayer);
+
+	  if (humans == 2) {
+            freeciv_report_victor(pplayer, loser);
+          }
+
+
 	}
       } players_iterate_end;
       ggz_report_victory();
@@ -388,6 +442,11 @@ bool check_for_game_over(void)
 		player_name(victor));
     ggz_report_victor(victor);
     ggz_report_victory();
+
+    if (humans == 2) {
+      freeciv_report_victor(victor, loser);
+    }
+
     return TRUE;
   } else if (alive == 0) {
     notify_conn(game.est_connections, NULL, E_GAME_END,
@@ -396,6 +455,17 @@ bool check_for_game_over(void)
     ggz_report_victory();
     return TRUE;
   }
+
+  if (humans == 1 && alive <= 2 && loser != NULL) {
+    notify_conn(game.est_connections, NULL, E_GAME_END,
+                FTC_SERVER_INFO, NULL,
+		_("Game ended in victory for %s"),
+		player_name(victor));
+       
+    freeciv_report_victor(victor, loser);
+    return TRUE;
+  }
+
 
   return FALSE;
 }

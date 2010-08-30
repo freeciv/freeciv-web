@@ -50,7 +50,7 @@ a:active {
 
 	position: relative;
 	top: 95px; 
-	left: 230px; 
+	left: 180px; 
 	color: #d1ab00; 
 	font-weight: bold;
 }
@@ -73,7 +73,7 @@ a:active {
 
 #body_content {
 	margin-left: 30px; 
-	background: #2e2f35; 
+	background: url(/images/black-bg.png) repeat scroll 0 0 #2E2F35; 
 	width: 942px;  
 	overflow: hidden;
 	min-height: 600px; 

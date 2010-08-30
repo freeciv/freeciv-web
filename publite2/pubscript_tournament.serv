@@ -1,0 +1,8 @@
+cmdlevel ctrl
+set autotoggle 1 
+set timeout 60
+set saveturns 0
+set size 3
+set minp 2
+set maxp 2
+metamessage Freeciv.net Tournament (2 player)

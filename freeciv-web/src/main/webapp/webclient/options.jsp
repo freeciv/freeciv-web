@@ -13,6 +13,11 @@
 </div>
 
 <div class="main_menu_buttons">
+  <button id="surrender_button" type="button" onClick="surrender_game();" >Surrender Game</button>
+</div>
+
+
+<div class="main_menu_buttons">
   <button id="end_button" type="button" onClick="window.location='/';" >End Game</button>
 </div>
 

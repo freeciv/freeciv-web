@@ -50,7 +50,7 @@ body {
 #pregame_message_area {
   background: #111111 url(/images/black-bg.png); 
   color: #ffffff;
-  height: 550px;
+  height: 650px;
   width: 80%;
   overflow: auto;
   float: left;

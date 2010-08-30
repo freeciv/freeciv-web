@@ -6,11 +6,11 @@ from threading import Thread
 import sys
 import time
 
-port = 5655;
+port = 5665;
 # FIXME: This must be the hostname and port of resin server.
 metaserver = "http://localhost:8080/freecivmetaserve/metaserver.php";
 logdir = "/tmp/";
-pubscript = "pubscript_multi.serv";
+pubscript = "pubscript_tournament.serv";
 servers_count = 5;
 
 class civserverproc(Thread):
@@ -21,7 +21,7 @@ class civserverproc(Thread):
   def run(self):
    while 1:
     try:
-        retcode = call("civserver --port " + str(self.port) + " -q 20 -e " 
+        retcode = call("civserver --ranked --port " + str(self.port) + " -q 20 -e " 
                        + " -m -M " + metaserver  + " --read " + pubscript +  " --log " + logdir + "civserver-" + str(self.port) + ".log", shell=True)
         if retcode < 0:
             print >>sys.stderr, "Civserver was terminated by signal", -retcode

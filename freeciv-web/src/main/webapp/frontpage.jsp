@@ -41,13 +41,28 @@
 
 <!-- MAIN COLUMN WITH ARTICLES -->
 <div id="left-column">
+	
+<a href="http://www.freeciv.net/tournament"><img src="/images/freeciv-tournament.png"></a>
+	
+<a class="title" href="/wireframe.jsp?do=login"><span class="title">Play in the Freeciv.net Tournament now!</span></a>
+<br>
+<span class="article">
+	Now you can compete in the Freeciv.net tournament, where you play against all other Freeciv players online. 
+	The tournament is organized as a series of duel-games, and the results of these games are ranked in a Elo rating system.
+<a href="http://www.freeciv.net/tournament/">Click here</a> to participate in the Freeciv tournament.
+</span>
+
+
+<br><br><br>
+	
+	
+	
 <a href="/wireframe.jsp?do=login"><img src="/images/freeciv-screenshot-2.png"></a>
 	
 <a class="title" href="/wireframe.jsp?do=login"><span class="title">Play Freeciv.net online now!</span></a>
 <br>
 <span class="article">
 Freeciv.net is an Open Source strategy game which can be played online against other players, or in single player mode against AI opponents.
-<a href="/wireframe.jsp?do=login">Click here</a> to play online now.
 </span>
 
 
@@ -102,7 +117,6 @@ improved fog-of-war rendering and 4 new scenario maps.
 <a href="http://www.facebook.com/freeciv/"><img src="/images/facebookimg2.png"></a>
 <a class="title" href="http://www.facebook.com/freeciv/"><span class="title">Freeciv.net now also on Facebook</span></a>
 <br>
-<span class="date">January 10, 2010</span>
 <br>
 <span class="article">
 Freeciv.net can now also be found on Facebook. This allows you to 
@@ -116,50 +130,19 @@ of Freeciv.net fans.
 <a href="http://twitter.com/freecivnet"><img src="/images/twitterimg2.png"></a>
 <a class="title" href="http://twitter.com/freecivnet"><span class="title">Follow Freeciv.net on Twitter!</span></a>
 <br>
-<span class="date">December 21, 2009</span>
 <br>
 <span class="article">
 Freeciv.net is now also on Twitter. This is a microblogging service where you can
 get updates about this project and related topics on Twitter. 
 </span>
 
-<br><br><br>
 
-<div style="float: right; padding: 20px;"><img width="250" src="/images/freeciv-iphone-screenshot-2.png"/></div>
-<br>
-<span class="title">Play Freeciv.net on your iPhone</span>
-<br>
-<span class="article">
-A beta version of Freeciv.net now supports the iPhone.
-To play Freeciv.net, open http://www.freeciv.net in the Safari web browser  
-on your iPhone. The game works best with iPhone 3GS
-or newer, with a WLAN Internet connection.
-<br><br>
-If the feedback is positive, then the iPhone version
-will be a well maintained version of Freeciv.net.
-This mobile version can also be used as a basis 
-for other mobile versions of Freeciv.net.<br><br>
-Please report any bugs you might find.
-
-</span>
 
 
 <br><br><br>
 <br><br><br>
 <br><br><br>
 
-
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-  var disqus_identifier = "fp"; //[Optional but recommended: Define a unique identifier (e.g. post id or slug) for this thread] 
-  (function() {
-   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-   dsq.src = 'http://freecivnet.disqus.com/embed.js';
-   (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=freecivnet">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
 </div>
@@ -360,19 +343,4 @@ Link partners:
 	</script>
 </div>
 
-
-<script type="text/javascript">
-//<![CDATA[
-(function() {
-	var links = document.getElementsByTagName('a');
-	var query = '?';
-	for(var i = 0; i < links.length; i++) {
-	if(links[i].href.indexOf('#disqus_thread') >= 0) {
-		query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
-	}
-	}
-	document.write('<script charset="utf-8" type="text/javascript" src="http://disqus.com/forums/freecivnet/get_num_replies.js' + query + '"></' + 'script>');
-})();
-//]]>
-</script>
 

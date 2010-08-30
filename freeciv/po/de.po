@@ -39,7 +39,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.15\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-24 15:06+0100\n"
+"POT-Creation-Date: 2010-08-30 20:14+0200\n"
 "PO-Revision-Date: 2009-03-24 22:03+0100\n"
 "Last-Translator: Christian Knoke <chrisk@cknoke.de>\n"
 "Language-Team: German Freeciv Translators <freeciv.de@freelists.org>\n"
@@ -2398,28 +2398,28 @@ msgstr ""
 "WARNUNG: Die '%s' Option gibt es nicht mehr. Benutzen Sie '-m', um die\n"
 "         Metaserver-Option einzuschalten.\n"
 
-#: server/civserver.c:218
+#: server/civserver.c:221
 #, c-format
 msgid "Illegal value \"%s\" for --Announce"
 msgstr ""
 
-#: server/civserver.c:222
+#: server/civserver.c:225
 #, c-format
 msgid "Error: unknown option '%s'\n"
 msgstr "FEHLER: unbekannte Option '%s'\n"
 
-#: server/civserver.c:233
+#: server/civserver.c:236
 #, c-format
 msgid "This is the server for %s"
 msgstr "%s Server"
 
 #. TRANS: No full stop after the URL, could cause confusion.
-#: server/civserver.c:235
+#: server/civserver.c:238
 #, c-format
 msgid "You can learn a lot about Freeciv at %s"
 msgstr "Weitere Informationen zu Freeciv finden Sie auf %s."
 
-#: server/civserver.c:240 client/client_main.c:285 manual/civmanual.c:380
+#: server/civserver.c:243 client/client_main.c:285 manual/civmanual.c:380
 #, c-format
 msgid ""
 "Usage: %s [option ...]\n"
@@ -2428,13 +2428,13 @@ msgstr ""
 "Syntax: %s [option ...]\n"
 "Gültige Optionen sind:\n"
 
-#: server/civserver.c:241
+#: server/civserver.c:244
 msgid ""
 "  -A  --Announce PROTO\tAnnounce game in LAN using protocol PROTO (IPv4/IPv6/"
 "none)\n"
 msgstr ""
 
-#: server/civserver.c:243
+#: server/civserver.c:246
 msgid ""
 "  -a  --auth FILE\tEnable server authentication with configuration from "
 "FILE.\n"
@@ -2442,92 +2442,92 @@ msgstr ""
 "  -a  --auth DATEI\tServerauthentifizierung einschalten und Konfiguration "
 "aus DATEI lesen.\n"
 
-#: server/civserver.c:245
+#: server/civserver.c:248
 msgid "  -G  --Guests\t\tAllow guests to login if auth is enabled.\n"
 msgstr "  -G  --Guests\t\tGästelogin bei Authentifizierung erlauben.\n"
 
-#: server/civserver.c:247
+#: server/civserver.c:250
 msgid "  -N  --Newusers\tAllow new users to login if auth is enabled.\n"
 msgstr "  -N  --Newusers\tNeue Benutzer bei Authentifizierung erlauben.\n"
 
-#: server/civserver.c:250
+#: server/civserver.c:253
 msgid "  -b  --bind ADDR\tListen for clients on ADDR\n"
 msgstr "  -b, --bind ADR\tNur an ADR auf Client warten\n"
 
-#: server/civserver.c:252 client/client_main.c:290
+#: server/civserver.c:255 client/client_main.c:290
 msgid ""
 "  -d, --debug NUM\tSet debug log level (0 to 4, or 4:file1,min,max:...)\n"
 msgstr ""
 "  -d, --debug NUM\tSetze Debugloglevel (0-4 oder 4:Datei1,min,max:...)\n"
 
-#: server/civserver.c:256 client/client_main.c:294
+#: server/civserver.c:259 client/client_main.c:294
 msgid "  -d, --debug NUM\tSet debug log level (0 to 3)\n"
 msgstr "  -d, --debug NUM\tSetze Debugloglevel (0-3)\n"
 
-#: server/civserver.c:258
+#: server/civserver.c:261
 msgid "  -f, --file FILE\tLoad saved game FILE\n"
 msgstr "  -f, --file DATEI\tGespeichertes Spiel DATEI laden\n"
 
-#: server/civserver.c:260 client/client_main.c:297
+#: server/civserver.c:263 client/client_main.c:297
 msgid "  -h, --help\t\tPrint a summary of the options\n"
 msgstr "  -h, --help\t\tZeige diesen Text\n"
 
-#: server/civserver.c:261
+#: server/civserver.c:264
 #, fuzzy
 msgid "  -i, --identity ADDR\tBe known as ADDR at metaserver\n"
 msgstr "  -M, --Metaserver ADR\tMetaserveradresse ADR benutzen\n"
 
-#: server/civserver.c:262
+#: server/civserver.c:265
 msgid "  -l, --log FILE\tUse FILE as logfile\n"
 msgstr "  -l, --log DATEI\tDATEI als Logdatei benutzen\n"
 
-#: server/civserver.c:263
+#: server/civserver.c:266
 msgid "  -m, --meta\t\tNotify metaserver and send server's info\n"
 msgstr "  -m, --meta\t\tMetaserver verständigen und Serverinfo senden\n"
 
-#: server/civserver.c:265
+#: server/civserver.c:268
 msgid "  -M, --Metaserver ADDR\tSet ADDR as metaserver address\n"
 msgstr "  -M, --Metaserver ADR\tMetaserveradresse ADR benutzen\n"
 
-#: server/civserver.c:268
+#: server/civserver.c:271
 msgid "  -p, --port PORT\tListen for clients on port PORT\n"
 msgstr "  -p, --port PORT\tVerwende Portnummer PORT\n"
 
-#: server/civserver.c:270
+#: server/civserver.c:273
 msgid "  -q, --quitidle TIME\tQuit if no players for TIME seconds\n"
 msgstr "  -q, --quitidle ZEIT\tAbbrechen, wenn ZEIT Sekunden ohne Spieler\n"
 
-#: server/civserver.c:272
+#: server/civserver.c:275
 msgid "  -e, --exit-on-end\tWhen a game ends, exit instead of restarting\n"
 msgstr "  -e, --exit-on-end\tBei Spielende stoppen, kein Neustart\n"
 
-#: server/civserver.c:275
+#: server/civserver.c:278
 msgid "  -s, --saves DIR\tSave games to directory DIR\n"
 msgstr "  -s, --saves VERZ\tSpielstände im Verzeichnis VERZ speichern\n"
 
-#: server/civserver.c:277
+#: server/civserver.c:280
 msgid "  -S, --Serverid ID\tSets the server id to ID\n"
 msgstr "  -S, --Serverid ID\tSetze die Server-ID auf ID\n"
 
-#: server/civserver.c:279
+#: server/civserver.c:282
 msgid "  -P, --Ppm\t\tSave ppms of the map when saving the game.\n"
 msgstr ""
 "  -P, --Ppm\t\tSpeichere PPMs der Karte beim Speichern des Spielstandes\n"
 
-#: server/civserver.c:280
+#: server/civserver.c:283
 msgid "  -r, --read FILE\tRead startup script FILE\n"
 msgstr "  -r, --read DATEI\tStartskript DATEI laden\n"
 
-#: server/civserver.c:282
+#: server/civserver.c:285
 msgid "  -R, --Ranklog FILE\tUse FILE as ranking logfile\n"
 msgstr "  -R, --Ranklog DATEI\tSchreibe Ranking-Informationen in DATEI\n"
 
-#: server/civserver.c:283 client/client_main.c:316
+#: server/civserver.c:286 client/client_main.c:316
 msgid "  -v, --version\t\tPrint the version number\n"
 msgstr "  -v, --version\t\tGebe die Versionsnummer aus\n"
 
 #. TRANS: No full stop after the URL, could cause confusion.
-#: server/civserver.c:285 client/client_main.c:322
+#: server/civserver.c:288 client/client_main.c:322
 #: client/gui-gtk-2.0/gui_main.c:263 client/gui-sdl/gui_main.c:178
 #: client/gui-xaw/gui_main.c:252 manual/civmanual.c:388
 #, c-format
@@ -3348,49 +3348,55 @@ msgstr "%s von %s hat Verbindung aufgenommen."
 msgid "Couldn't attach your connection to new player."
 msgstr "Es steht kein neuer Spieler mehr zur Verfügung."
 
-#: server/connecthand.c:213
+#: server/connecthand.c:212
+msgid ""
+"This is a tournament game, for 2 players, which will report the results to "
+"www.freeciv.net."
+msgstr ""
+
+#: server/connecthand.c:218
 #, c-format
 msgid "You are logged in as '%s' connected to no player."
 msgstr ""
 "Sie sind als '%s' mit dem Spiel verbunden, kontrollieren aber keinen Spieler."
 
-#: server/connecthand.c:217
+#: server/connecthand.c:222
 #, c-format
 msgid "You are logged in as '%s' connected to an anonymous player."
 msgstr ""
 "Sie sind als '%s' mit dem Spiel und mit einem Spieler ohne Namen verbunden."
 
-#: server/connecthand.c:222
+#: server/connecthand.c:227
 #, c-format
 msgid "You are logged in as '%s' connected to %s."
 msgstr "Sie sind als '%s' eingeloggt und mit dem Spieler %s verbunden."
 
-#: server/connecthand.c:235
+#: server/connecthand.c:240
 #, c-format
 msgid "Turn-blocking game play: waiting on %s to finish turn..."
 msgstr "Runden-Sperre aktiv: %s hat die Runde noch nicht beendet..."
 
-#: server/connecthand.c:244
+#: server/connecthand.c:249
 #, fuzzy
 msgid " *** Server is in edit mode. *** "
 msgstr " *** Der Server hat den Edit-Modus verlassen. *** "
 
-#: server/connecthand.c:273
+#: server/connecthand.c:278
 #, c-format
 msgid "Client rejected: %s."
 msgstr "Spieler %s wurde abgewiesen."
 
-#: server/connecthand.c:286
+#: server/connecthand.c:291
 #, c-format
 msgid "Connection request from %s from %s"
 msgstr "%s von %s erbittet Verbindung."
 
-#: server/connecthand.c:290
+#: server/connecthand.c:295
 #, c-format
 msgid "%s has client version %d.%d.%d%s"
 msgstr "%s hat Client %d.%d.%d%s."
 
-#: server/connecthand.c:300
+#: server/connecthand.c:305
 #, c-format
 msgid ""
 "The client is missing a capability that this server needs.\n"
@@ -3400,12 +3406,12 @@ msgstr ""
 "Der Client hat nicht die vom Server benötigten Fähigkeiten.\n"
 "Server Version: %d.%d.%d%s Client Version: %d.%d.%d%s."
 
-#: server/connecthand.c:307 server/connecthand.c:322
+#: server/connecthand.c:312 server/connecthand.c:327
 #, c-format
 msgid "%s was rejected: Mismatched capabilities."
 msgstr "%s abgewiesen: inkompatible Versionen."
 
-#: server/connecthand.c:315
+#: server/connecthand.c:320
 #, c-format
 msgid ""
 "The server is missing a capability that the client needs.\n"
@@ -3415,32 +3421,32 @@ msgstr ""
 "Der Server hat nicht die vom Client benötigten Fähigkeiten.\n"
 "Server Version: %d.%d.%d%s Client Version: %d.%d.%d%s."
 
-#: server/connecthand.c:331
+#: server/connecthand.c:336
 #, c-format
 msgid "Invalid username '%s'"
 msgstr "Unzulässiger Name '%s'"
 
-#: server/connecthand.c:333
+#: server/connecthand.c:338
 #, c-format
 msgid "%s was rejected: Invalid name [%s]."
 msgstr "%s wurde abgewiesen: Name [%s] ungültig."
 
-#: server/connecthand.c:341
+#: server/connecthand.c:346
 #, c-format
 msgid "'%s' already connected."
 msgstr "Verbindung zu %s besteht schon."
 
-#: server/connecthand.c:344
+#: server/connecthand.c:349
 #, c-format
 msgid "%s was rejected: Duplicate login name [%s]."
 msgstr "%s wurde abgewiesen: doppelter Name [%s]."
 
-#: server/connecthand.c:376 server/connecthand.c:388
+#: server/connecthand.c:381 server/connecthand.c:393
 #, c-format
 msgid "Lost connection: %s."
 msgstr "Verbindung verloren: %s."
 
-#: server/connecthand.c:605
+#: server/connecthand.c:610
 #, c-format
 msgid "detaching from %s."
 msgstr "Löse Verbindung zu %s."
@@ -6357,57 +6363,69 @@ msgstr "Höchstzulässige Menge an Solarzellen bereits vorhanden!"
 msgid "Without guidance from the capital, the %s spaceship is lost!"
 msgstr "Ohne Leitung aus der Hauptstadt ist das %s Raumschiff verloren!"
 
-#: server/srv_main.c:274
+#: server/srv_main.c:255
+#, c-format
+msgid ""
+"http://localhost/tournament/webclient_report.php?winnername=%s&losername=%"
+"s&report=Report+Game"
+msgstr ""
+
+#: server/srv_main.c:267
+#, c-format
+msgid "Reported tournament result to www.freeciv.net for winner: %s"
+msgstr ""
+
+#: server/srv_main.c:311
 #, fuzzy, c-format
 msgid "Scenario victory to %s."
 msgstr "Teamsieg für %s"
 
-#: server/srv_main.c:283
+#: server/srv_main.c:320
 #, fuzzy
 msgid "Game ended in a draw as end turn exceeded"
 msgstr "Spiel endete im letzten Jahr unentschieden"
 
-#: server/srv_main.c:316
+#: server/srv_main.c:363
 #, c-format
 msgid "The %s spaceship has arrived at Alpha Centauri."
 msgstr "Das %s Raumschiff hat Alpha Centauri erreicht."
 
-#: server/srv_main.c:334 server/srv_main.c:370
+#: server/srv_main.c:381 server/srv_main.c:418
 #, c-format
 msgid "Team victory to %s"
 msgstr "Teamsieg für %s"
 
-#: server/srv_main.c:344 server/srv_main.c:387
+#: server/srv_main.c:391 server/srv_main.c:441 server/srv_main.c:462
 #, c-format
 msgid "Game ended in victory for %s"
 msgstr "Spiel endete mit einem Sieg von %s"
 
-#: server/srv_main.c:395
+#: server/srv_main.c:454
 msgid "Game ended in a draw"
 msgstr "Spiel endete unentschieden"
 
-#: server/srv_main.c:512 server/srv_main.c:523
+#: server/srv_main.c:582 server/srv_main.c:593
 #, c-format
 msgid "Your %s was disbanded in accordance with your peace treaty with the %s."
 msgstr ""
 "Die %s wurde aufgelöst, in Übereinstimmung mit dem Friedensvertrag mit den %"
 "s."
 
-#: server/srv_main.c:562 server/srv_main.c:566
+#: server/srv_main.c:632 server/srv_main.c:636
 #, c-format
 msgid ""
 "Concerned citizens point out that the cease-fire with %s will run out soon."
 msgstr ""
 "Besorgte Bürger weisen darauf hin, daß die Feuerpause mit %s bald endet."
 
-#: server/srv_main.c:572 server/srv_main.c:577
+#: server/srv_main.c:642 server/srv_main.c:647
 #, c-format
 msgid "The cease-fire with %s has run out. You are now at war with the %s."
 msgstr ""
 "Die Feuerpause mit %s ist beendet. Du befindest dich jetzt im Krieg mit den %"
 "s."
 
-#: server/srv_main.c:596
+#: server/srv_main.c:666
 #, c-format
 msgid ""
 "Ceasefire between %s and %s has run out. They are at war. You cancel your "
@@ -6416,53 +6434,53 @@ msgstr ""
 "Der Waffenstillstand zwischen den %s und den %s ist ausgelaufen. Sie "
 "befinden sich im Krieg. Du beendest deine Allianz mit beiden."
 
-#: server/srv_main.c:1049
+#: server/srv_main.c:1119
 #, fuzzy
 msgid "Failed saving game. Missing filename."
 msgstr "Konnte das Spiel nicht in der Datei '%s' speichern"
 
-#: server/srv_main.c:1091 server/srv_main.c:1094
+#: server/srv_main.c:1161 server/srv_main.c:1164
 #, c-format
 msgid "Unsupported compression type %d"
 msgstr "Nicht unterstützte Komprimierungsart %d."
 
-#: server/srv_main.c:1124
+#: server/srv_main.c:1194
 #, c-format
 msgid "Failed saving game as %s"
 msgstr "Konnte das Spiel nicht in der Datei '%s' speichern"
 
-#: server/srv_main.c:1126
+#: server/srv_main.c:1196
 #, c-format
 msgid "Game saved as %s"
 msgstr "Spiel gespeichert als '%s'"
 
-#: server/srv_main.c:1166
+#: server/srv_main.c:1236
 msgid "The game is already running."
 msgstr "Das Spiel hat bereits angefangen."
 
-#: server/srv_main.c:1174
+#: server/srv_main.c:1244
 #, c-format
 msgid "%s lost control cmdlevel on game start.  Use voting from now on."
 msgstr ""
 "%s hat seit Spielbeginn nicht mehr die Kontrollgewalt. Bitte von jetzt an "
 "Abstimmungen verwenden."
 
-#: server/srv_main.c:1181
+#: server/srv_main.c:1251
 msgid "Starting game."
 msgstr "Spiel begonnen."
 
 # EH: Diese Fehlermeldung sollte mE nicht übersetzt werden.
-#: server/srv_main.c:1251
+#: server/srv_main.c:1321
 #, c-format
 msgid "request for unknown report (type %d)"
 msgstr "request for unknown report (type %d)"
 
-#: server/srv_main.c:1330
+#: server/srv_main.c:1400
 #, c-format
 msgid "Warning: rejecting old client %s"
 msgstr "Warnung: Client %s ist zu alt und wurde abgewiesen"
 
-#: server/srv_main.c:1339
+#: server/srv_main.c:1409
 msgid ""
 "Your client is too old. To use this server, please upgrade your client to a "
 "Freeciv 2.2 or later."
@@ -6470,72 +6488,72 @@ msgstr ""
 "Ihr Client ist zu alt. Um diesen Server zu benutzen, benötigen SieFreeciv "
 "Version 2.2 oder neuer."
 
-#: server/srv_main.c:1396
+#: server/srv_main.c:1466
 #, fuzzy
 msgid "You are not allowed to edit."
 msgstr "Keine Berechtigung zur Änderung dieser Einstellung."
 
 # EH: Diese Fehlermeldung sollte mE nicht übersetzt werden.
-#: server/srv_main.c:1438
+#: server/srv_main.c:1508
 #, c-format
 msgid "Got a packet of type %d from a dead or observer player"
 msgstr "Got a packet of type %d from a dead or observer player"
 
-#: server/srv_main.c:1540
+#: server/srv_main.c:1610
 msgid "Please choose a non-blank name."
 msgstr "Es muß ein Name gewählt werden."
 
-#: server/srv_main.c:1556
+#: server/srv_main.c:1626
 msgid "That nation is already in use."
 msgstr "Diese Nation ist bereits vergeben."
 
-#: server/srv_main.c:1572
+#: server/srv_main.c:1642
 #, c-format
 msgid "Another player already has the name '%s'.  Please choose another name."
 msgstr ""
 "Ein anderer Spieler nimmt bereits unter dem Namen '%s' am Spiel teil. Bitte "
 "wählen Sie einen anderen Namen."
 
-#: server/srv_main.c:1593
+#: server/srv_main.c:1663
 msgid "Please choose a name containing only ASCII characters."
 msgstr "Bitte wählen Sie einen Namen, der nur ASCII-Zeichen enthält."
 
-#: server/srv_main.c:1691
+#: server/srv_main.c:1761
 #, c-format
 msgid "%s nation is not available in this scenario."
 msgstr "Die Nation der %s ist in diesem Szenario nicht verfügbar."
 
-#: server/srv_main.c:1698
+#: server/srv_main.c:1768
 #, c-format
 msgid "%s nation is already in use."
 msgstr "Die Nation der %s ist bereits vergeben."
 
-#: server/srv_main.c:1716
+#: server/srv_main.c:1786
 #, c-format
 msgid "%s is the %s ruler %s."
 msgstr "%s ist der %se Herrscher %s."
 
-#: server/srv_main.c:1772
+#: server/srv_main.c:1842
 #, c-format
 msgid "Waiting to start game: %d out of %d players are ready to start."
 msgstr "Warten auf Spielstart: %d von %d Spielern sind bereit zu starten."
 
-#: server/srv_main.c:1839 server/srv_main.c:1843
+#: server/srv_main.c:1909 server/srv_main.c:1913
 #, c-format
 msgid "%s has been added as %s level AI-controlled player."
 msgstr "%s ist als KI-Spieler mit dem Level '%s' dazu gekommen."
 
-#: server/srv_main.c:1971
+#: server/srv_main.c:2041
 #, c-format
 msgid "Player %d"
 msgstr "Spieler %d"
 
-#: server/srv_main.c:1982 server/srv_main.c:1988
+#: server/srv_main.c:2052 server/srv_main.c:2058
 #, c-format
 msgid "%s rules the %s."
 msgstr "%s beherrscht die %s."
 
-#: server/srv_main.c:2113
+#: server/srv_main.c:2183
 msgid ""
 "This civserver program has player authentication support, but it's currently "
 "not in use."
@@ -6543,20 +6561,20 @@ msgstr ""
 "Unterstützung für Spieler-Authentifizierung verfügbar, wird aber nicht "
 "verwendet."
 
-#: server/srv_main.c:2174
+#: server/srv_main.c:2244
 #, fuzzy, c-format
 msgid "Sending info to metaserver <%s>"
 msgstr "Sende Informationen an den Metaserver [%s]"
 
-#: server/srv_main.c:2179
+#: server/srv_main.c:2249
 msgid "Not starting without explicitly requested metaserver connection."
 msgstr ""
 
-#: server/srv_main.c:2209
+#: server/srv_main.c:2279
 msgid "The game is over..."
 msgstr "Das Spiel ist vorbei..."
 
-#: server/srv_main.c:2433
+#: server/srv_main.c:2503
 msgid "Now accepting new client connections."
 msgstr "Warte auf Spieler..."
 

@@ -71,7 +71,7 @@ max_row_height = 0;
 curr_x = 0;
 curr_y = 14;
 tileset_height = 1800;  #FIXME: This must be adjusted according to the number of tiles. # Silly Flash 9 limitation of 2880.
-tileset_width = 1340;
+tileset_width = 1230;
 
 dither_types = ["t.l0.desert1", "t.l0.plains1", "t.l0.grassland1", "t.l0.forest1", "t.l0.hills1", "t.l0.mountains1", "t.l0.tundra1", "t.l0.swamp1"];
 

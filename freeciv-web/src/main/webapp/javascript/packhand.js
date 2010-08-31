@@ -136,9 +136,9 @@ function handle_packet_tile_info(packet)
   var pterrain = terrains[packet['terrain']];
 
 
-  if (map['tiles'] != null) {
+  if (tiles != null) {
     var index = packet['x'] + packet['y'] * map['xsize'];
-    map['tiles'][index] = $.extend(map['tiles'][index], packet);
+    tiles[index] = $.extend(tiles[index], packet);
   }
 
 }

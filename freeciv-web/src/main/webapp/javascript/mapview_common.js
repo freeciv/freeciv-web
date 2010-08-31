@@ -549,7 +549,7 @@ function canvas_pos_to_tile(canvas_x, canvas_y)
 **************************************************************************/
 function update_map_canvas_full()
 {
-  if (map['tiles'] != null) {
+  if (tiles != null) {
     //console.log("3. Mapview render begin at: " + new Date().getTime());
     var start = new Date().getTime();
   

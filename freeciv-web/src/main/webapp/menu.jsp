@@ -1,7 +1,3 @@
-<script type="text/javascript" 
-src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"> </script>
-
-
 
 <div id="main_column">
 
@@ -30,7 +26,7 @@ src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"> </sc
 </div>
 
 <div class="main_menu_buttons" onmouseover="help_multi();">
-  <a href="/freecivmetaserve/metaserver.php" >Join multiplayer game</a><br>
+  <a href="/freecivmetaserve/metaserver.php" >Join multiplayer/tournament game</a><br>
 </div>
 
 <div class="main_menu_buttons" onmouseover="help_scenario();">
@@ -57,16 +53,6 @@ src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"> </sc
 <div id="placeholder"></div>
 
 </div>
-
-
-
-
-<script>
- CFInstall.check({
-    node: "placeholder",
-    destination: "http://freeciv.net/wireframe.jsp?do=menu"
-  });
-</script>
 
 
 <script type="text/javascript">

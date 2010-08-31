@@ -13,7 +13,7 @@
 
 
 var map = {};
-map['tiles'] = {};
+var tiles = {};
 
 var DIR8_NORTHWEST = 0;
 var DIR8_NORTH = 1;
@@ -74,7 +74,7 @@ function map_allocate()
 	  (void *)map.tiles, map.xsize, map.ysize);*/
 
   /*assert(map.tiles == NULL);*/
-  map['tiles'] = {};
+  tiles = {};
 
   /* Note this use of whole_map_iterate may be a bit sketchy, since the
    * tile values (ptile->index, etc.) haven't been set yet.  It might be
@@ -89,7 +89,7 @@ function map_allocate()
       //tile['nat_y'] = Math.floor(tile['index'] / map['xsize']);
       tile = tile_init(tile);
 
-      map['tiles'][tile['index']] = tile;
+      tiles[tile['index']] = tile;
     }
   }
 
@@ -215,8 +215,7 @@ function is_cardinal_dir(dir)
 ****************************************************************************/
 function map_pos_to_tile(x, y)
 {
-  //if (map['tiles'] == null) return null;
-  return map['tiles'][x + y * map['xsize']];
+  return tiles[x + y * map['xsize']];
 }
 
 /****************************************************************************

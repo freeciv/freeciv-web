@@ -17,6 +17,8 @@ var mapview_canvas = null;
 var tileset_images = {}; 
 var sprites = {};
 
+var sprites_init = false;
+
 var height_offset = 240;
 var height_offset_iphone = 110;
 var width_offset = 30;
@@ -151,6 +153,21 @@ function init_sprites()
     img2.src = '/tileset/freeciv-web-tileset-2.png';
     tileset_images[2] = img2;
 
+  } else {
+    for (var tile_tag in tileset) {
+      var imgx = new Image();
+      imgx.src = '/tiles/' + tile_tag + '.png';
+      tileset_images[tile_tag] = imgx; 
+    }
+  }
+  
+}
+
+/**************************************************************************
+  ...
+**************************************************************************/
+function init_cache_sprites() 
+{
 
    for (var tile_tag in tileset) {
       var image_no = tileset[tile_tag][0];
@@ -168,16 +185,7 @@ function init_sprites()
                        w, h, 0, 0, w, h);
       sprites[tile_tag] = newCanvas;
     }
-
-
-  } else {
-    for (var tile_tag in tileset) {
-      var imgx = new Image();
-      imgx.src = '/tiles/' + tile_tag + '.png';
-      tileset_images[tile_tag] = imgx; 
-    }
-  }
-  
+    sprites_init = true;
 }
 
 /**************************************************************************
@@ -212,9 +220,6 @@ function mapview_put_tile(pcanvas, tag, canvas_x, canvas_y) {
   } 
 
   if (is_canvas_clipping_supported()) {
-    /*pcanvas.drawImage(tileset_images[tileset[tag][0]], tileset[tag][1], tileset[tag][2], 
-                      tileset[tag][3], tileset[tag][4],
-                      canvas_x, canvas_y, tileset[tag][3], tileset[tag][4]);*/
     pcanvas.drawImage(sprites[tag], canvas_x, canvas_y);
   } else {
     pcanvas.drawImage(tileset_images[tag], canvas_x, canvas_y);

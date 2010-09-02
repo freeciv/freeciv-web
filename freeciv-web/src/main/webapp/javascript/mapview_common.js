@@ -535,6 +535,7 @@ function update_map_canvas_full()
   if (tiles != null && civclient_state >= C_S_RUNNING) {
     //console.log("3. Mapview render begin at: " + new Date().getTime());
     var start = new Date().getTime();
+    if (!sprites_init) init_cache_sprites();
   
     // If city dialog is open, don't redraw default mapview.
     if (active_city != null) return;

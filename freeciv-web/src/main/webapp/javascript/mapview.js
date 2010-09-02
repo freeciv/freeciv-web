@@ -168,8 +168,8 @@ function init_sprites()
 **************************************************************************/
 function init_cache_sprites() 
 {
-
-   for (var tile_tag in tileset) {
+  if (is_canvas_clipping_supported()) {
+    for (var tile_tag in tileset) {
       var image_no = tileset[tile_tag][0];
       var x = tileset[tile_tag][1];
       var y = tileset[tile_tag][2];
@@ -185,7 +185,9 @@ function init_cache_sprites()
                        w, h, 0, 0, w, h);
       sprites[tile_tag] = newCanvas;
     }
-    sprites_init = true;
+  }  
+
+  sprites_init = true;
 }
 
 /**************************************************************************
@@ -214,7 +216,7 @@ function drawPath(ctx, x1, y1, x2, y2, x3, y3, x4, y4)
   ...
 **************************************************************************/
 function mapview_put_tile(pcanvas, tag, canvas_x, canvas_y) {
-  if (tileset[tag] == null || sprites[tag] == null) {
+  if (tileset[tag] == null) {
     console.log("Missing in tileset " + tag);
     return;
   } 
@@ -227,33 +229,6 @@ function mapview_put_tile(pcanvas, tag, canvas_x, canvas_y) {
              
 }
 
-/**************************************************************************
-  ...
-**************************************************************************/
-function mapview_put_tile_ie(pcanvas, tag, canvas_x, canvas_y) {
-  if (tileset[tag] == null) {
-    console.log("Missing in tileset " + tag);
-    return;
-  } 
-
-  var tileset_file_no = tileset[tag][0];
-  var tileset_x = tileset[tag][1];
-  var tileset_y = tileset[tag][2];
-  var width = tileset[tag][3];
-  var height = tileset[tag][4];
-
-  var xtile = document.createElement("div");
-  xtile.style.position = "absolute";
-  xtile.style.left = canvas_x+"px";
-  xtile.style.top = canvas_y+"px";
-  xtile.style.backgroundImage = "url(/tileset/freeciv-web-tileset-" + tileset_file_no + ".png)";
-  xtile.style.width = width+"px";
-  xtile.style.height = height+"px";
-  xtile.style.backgroundPosition = "-" + tileset_x + "px -" + tileset_y + "px"; 
-  
-  mapview_frag.appendChild(xtile);   
-              
-}
 
 /**************************************************************************
   Draw city text onto the canvas.

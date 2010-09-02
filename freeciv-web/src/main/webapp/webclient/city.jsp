@@ -6,7 +6,6 @@
       <div id="city_canvas_div">
             <canvas id="city_canvas" width="300" height="150" onmousedown="city_mapview_mouse_click(event)" moz-opaque="true"></canvas>
       
-      		<div id="city_ie_canvas"></div>
       </div>
 
 	<div style="margin-bottom: 40px;">

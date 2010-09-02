@@ -4,8 +4,6 @@
     
     <div id="canvas_div">
       <canvas id="canvas" width="1024" height="768" onmousedown="mapview_mouse_click(event)" moz-opaque="true"></canvas>
-      
-      <div id="ie_canvas" onmousedown="mapview_mouse_click(event)"></div>
     </div>
     
     <div id="game_info_panel">

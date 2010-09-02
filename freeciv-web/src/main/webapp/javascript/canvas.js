@@ -11,19 +11,13 @@
    GNU General Public License for more details.
 ***********************************************************************/
 
-// Determines if the browser supports the HTML5 canvas element.
-var is_canvas_supported = (window.CanvasRenderingContext2D != null);
-
-
 /****************************************************************************
   Draw a filled-in colored rectangle onto the mapview or citydialog canvas.
 ****************************************************************************/
 function canvas_put_rectangle(canvas_context, pcolor, canvas_x, canvas_y, width, height)
 {
- if (is_canvas_supported) {
-   canvas_context.fillStyle = pcolor;
-   canvas_context.fillRect (canvas_x, canvas_y, canvas_x + width, canvas_y + height);
- }
+  canvas_context.fillStyle = pcolor;
+  canvas_context.fillRect (canvas_x, canvas_y, canvas_x + width, canvas_y + height);
 
 }
 
@@ -33,11 +27,7 @@ function canvas_put_rectangle(canvas_context, pcolor, canvas_x, canvas_y, width,
 ****************************************************************************/
 function canvas_put_sprite(pcanvas, canvas_x, canvas_y, sprite, offset_x, offset_y)
 {
-  if (is_canvas_supported) {
     mapview_put_tile(pcanvas, sprite['key'], canvas_x + offset_x, canvas_y + offset_y);
-  } else {
-    mapview_put_tile_ie(pcanvas, sprite['key'], canvas_x + offset_x, canvas_y + offset_y);
-  }
 }
 
 /****************************************************************************

@@ -16,7 +16,6 @@ var mapview = {};
 var mapdeco_highlight_table = {};
 var mapdeco_crosshair_table = {};
 var mapdeco_gotoline_table = {};
-var mapview_frag = null;
 var last_redraw_time = 0;
 var MAPVIEW_REFRESH_INTERVAL = 400;
 
@@ -297,18 +296,6 @@ function update_map_canvas(canvas_x, canvas_y, width, height)
       canvas_put_rectangle(mapview_canvas_ctx, "rgb(0,0,0)", canvas_x, canvas_y, width, height);
     }
   
-  /* For IE mode, clean up all divs first.*/
-  if (!is_canvas_supported) {    
-    if (mapview_canvas.hasChildNodes()) {
-      while ( mapview_canvas.childNodes.length >= 1) {
-        mapview_canvas.removeChild(mapview_canvas.firstChild );       
-      } 
-    }
-    mapview_frag = document.createDocumentFragment();    
-  }
-  
-  
-  
   // mapview_layer_iterate
   for (var layer = 0; layer < LAYER_COUNT; layer++) {
   
@@ -444,10 +431,6 @@ function update_map_canvas(canvas_x, canvas_y, width, height)
     } 
   }
   
-  if (!is_canvas_supported) {  
-    mapview_canvas.appendChild(mapview_frag);
-  }
-  
 }
 
 
@@ -549,7 +532,7 @@ function canvas_pos_to_tile(canvas_x, canvas_y)
 **************************************************************************/
 function update_map_canvas_full()
 {
-  if (tiles != null) {
+  if (tiles != null && civclient_state >= C_S_RUNNING) {
     //console.log("3. Mapview render begin at: " + new Date().getTime());
     var start = new Date().getTime();
   

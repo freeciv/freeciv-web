@@ -45,6 +45,7 @@ button {
   height: 120px;
   width: 100%;
   overflow: auto;
+  border: 1px solid #111111;
 }
 
 #game_chat_box {
@@ -85,6 +86,7 @@ button {
   padding-left: 5px;
   overflow: hidden;
   background: url("/images/black-bg.png") repeat scroll 0 0 #222222;
+  border: 1px solid #555555;
 }
 
 #game_info_panel {

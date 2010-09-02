@@ -42,21 +42,6 @@
 <!-- MAIN COLUMN WITH ARTICLES -->
 <div id="left-column">
 	
-<a href="http://www.freeciv.net/tournament"><img src="/images/freeciv-tournament.png"></a>
-	
-<a class="title" href="/wireframe.jsp?do=login"><span class="title">Play in the Freeciv.net Tournament now!</span></a>
-<br>
-<span class="article">
-	Now you can compete in the Freeciv.net tournament, where you play against all other Freeciv players online. 
-	The tournament is organized as a series of duel-games, and the results of these games are ranked in a Elo rating system.
-<a href="http://www.freeciv.net/tournament/">Click here</a> to participate in the Freeciv tournament.
-</span>
-
-
-<br><br><br>
-	
-	
-	
 <a href="/wireframe.jsp?do=login"><img src="/images/freeciv-screenshot-2.png"></a>
 	
 <a class="title" href="/wireframe.jsp?do=login"><span class="title">Play Freeciv.net online now!</span></a>

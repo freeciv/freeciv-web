@@ -18,6 +18,7 @@ import generate_packets
 from zerostrings import *
 from BitVector import *
 from struct import *
+import urllib
 
 from packetsizes import *
 import logging
@@ -242,7 +243,7 @@ def json_to_civserver(net_packet_json):
 
     net_payload = net_packet_json[packet_label['name']];
     if isinstance(net_payload, str):
-      net_payload = net_payload.replace("<", "").replace(">", "").replace("\"", "");
+      net_payload = net_payload.replace(urllib.quote("<"), "").replace(urllib.quote(">"), "").replace(urllib.quote("\""), "").replace("\"", "");
 
     res += packExt('>'+packet_label['type'], net_payload);
 

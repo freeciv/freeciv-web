@@ -146,7 +146,7 @@ function handle_packet_tile_info(packet)
 /* 100% complete */
 function handle_packet_chat_msg(packet) 
 {
-  var message = packet['message'];
+  var message = unescape(packet['message']);
   var conn_id = packet['conn_id'];
   var event = packet['event'];
   

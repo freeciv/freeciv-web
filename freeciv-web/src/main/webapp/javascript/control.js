@@ -55,8 +55,8 @@ function mouse_moved_cb(e)
 function check_text_input(event,chatboxtextarea) {
 	 
   if (event.keyCode == 13 && event.shiftKey == 0)  {
-    message = $(chatboxtextarea).val();
-    message = message.replace(/^\s+|\s+$/g,"");
+    var message = $(chatboxtextarea).val();
+    message = escape(message.replace(/^\s+|\s+$/g,""));
 
     $(chatboxtextarea).val('');
     $(chatboxtextarea).focus();
@@ -121,6 +121,7 @@ function get_units_in_focus()
 **************************************************************************/
 function update_unit_focus()
 {
+  if (active_city != null) return; /* don't change focus while city dialog is active.*/
 
   /* iterate zero times for no units in focus,
    * otherwise quit for any of the conditions. */
@@ -292,6 +293,8 @@ Center on the focus unit, if off-screen and auto_center_on_unit is true.
 **************************************************************************/
 function auto_center_on_focus_unit()
 {
+  if (active_city != null) return; /* don't change focus while city dialog is active.*/
+
   var ptile = find_a_focus_unit_tile_to_center_on();
   
   if (ptile != null && auto_center_on_unit) {

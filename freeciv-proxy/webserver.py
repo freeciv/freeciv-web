@@ -23,7 +23,8 @@ from urlparse import urlparse
 
 logger = logging.getLogger("freeciv-proxy");
 
-CIVSERVER_ROUNDTRIP_TIME = 0.03;  # 30ms roundtrip time for packets to civserver.
+CIVSERVER_ROUNDTRIP_TIME = 0.035;  # 35ms roundtrip time for packets to civserver.
+PACKET_SIZE_WAIT_THRESHOLD = 4;
 
 class CivWebServer(ThreadingMixIn, HTTPServer):
 
@@ -97,6 +98,7 @@ class WebserverHandler(BaseHTTPRequestHandler):
 
         try:
           # parse request from webclient
+          content_length = 0;
           if self.headers.dict.has_key("content-length"):
             content_length = string.atoi(self.headers.dict["content-length"])
             
@@ -114,9 +116,12 @@ class WebserverHandler(BaseHTTPRequestHandler):
               self.send_error(503,'Civserver communication failure: %s' % self.path)
               return;
  
+          # If client sent packet to server, then wait for server response.
           # Sleep after packets are sent to civserver, to allow 
           # time for packets to arrive at this proxy.
-          time.sleep(CIVSERVER_ROUNDTRIP_TIME);
+          # This will speed up client server latency.
+          if (PACKET_SIZE_WAIT_THRESHOLD < content_length):
+            time.sleep(CIVSERVER_ROUNDTRIP_TIME);
 
           # prepare reponse to webclient.
                    

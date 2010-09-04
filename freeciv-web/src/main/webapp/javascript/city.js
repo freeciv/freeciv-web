@@ -273,6 +273,15 @@ function can_city_build_improvement_direct(pcity, pimprove)
     return false;
   }
 
+  /* Does city already have this? */
+  for (var z = 0; z < pcity['improvements'].length; z ++) {
+    if (pcity['improvements'][z] == 1) {
+      if (improvements[z]['name'] == pimprove['name']) {
+        return false;
+      }
+    }
+  }
+
   /*return are_reqs_active(city_owner(pcity), pcity, null,
 			 city_tile(pcity), null, null, null,
 			 pimprove['reqs'], RPT_CERTAIN);*/

@@ -392,4 +392,5 @@ function set_default_mapview_active()
     active_city = null;
   }
   update_map_canvas_full();
+  chatbox_scroll_down();
 }

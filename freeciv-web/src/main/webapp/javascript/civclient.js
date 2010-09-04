@@ -17,6 +17,8 @@ client.conn = {};
 
 var client_frozen = false;
 
+var chatbox_text_limit = 3000;
+
 var chatbox_text = " ";
 var previous_scroll = 0;
 var phase_start_time = 0;
@@ -114,6 +116,15 @@ function add_chatbox_text(text){
 
     chatbox_text = chatbox_text + text + "<br>";
 
+    /* Limit size of chatbox area. */
+    if (chatbox_text.length > chatbox_text_limit) {
+      chatbox_text = chatbox_text.substring(chatbox_text.length - chatbox_text_limit, chatbox_text.length);
+      var firstNewLine = chatbox_text.indexOf("<br>");
+      if (firstNewLine != -1) {
+        chatbox_text = chatbox_text.substring(firstNewLine, chatbox_text.length);
+      }
+    }
+
     if (scrollDiv != null) {
       scrollDiv.innerHTML = chatbox_text; 
 
@@ -132,7 +143,37 @@ function add_chatbox_text(text){
       previous_scroll = currentHeight;
     }
 
-  }
+}
+
+
+/**************************************************************************
+ ...
+**************************************************************************/
+function chatbox_scroll_down () {
+    var scrollDiv;
+    
+    if (civclient_state <= C_S_PREPARING) {
+      scrollDiv = document.getElementById('pregame_message_area');
+    } else {
+      scrollDiv = document.getElementById('game_message_area');
+    }
+
+    if (scrollDiv != null) {
+      var currentHeight = 0;
+        
+      if (scrollDiv.scrollHeight > 0) {
+        currentHeight = scrollDiv.scrollHeight;
+      } else if (scrollDiv.offsetHeight > 0) {
+        currentHeight = scrollDiv.offsetHeight;
+      }
+
+      scrollDiv.scrollTop = currentHeight;
+
+      previous_scroll = currentHeight;
+    }
+
+}
+
 
 function show_dialog_message(title, message) {
 
@@ -242,9 +283,10 @@ function surrender_game()
 **************************************************************************/
 function send_surrender_game()
 {
-
-  var test_packet = [{"packet_type" : "chat_msg_req", 
+  if (!client_is_observer()) {
+    var test_packet = [{"packet_type" : "chat_msg_req", 
                          "message" : "/surrender "}];
-  var myJSONText = JSON.stringify(test_packet);
-  send_request (myJSONText);
+    var myJSONText = JSON.stringify(test_packet);
+    send_request (myJSONText);
+  }
 }

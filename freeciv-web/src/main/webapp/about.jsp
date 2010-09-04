@@ -9,14 +9,16 @@ which would be playable online in a browser came about some time in 2007, and th
 Freeciv.net requires a browser which supports HTML5 canvas, and a fast computer and internet connection.
 <br><br>
 If you are looking for help playing the game, please ask a question in the <a href="/forum">forum</a>.
- You can also contact the developer of the game by sending an email to  andrearo at pvv.ntnu.no.
+You can also contact the developer of the game by sending an email to  andrearo at pvv.ntnu.no.
+<br><br>
+Freeciv.net is developed by <a href="mailto:andrearo at pvv.ntnu.no">Andreas Rosdal</a>. The Freeciv.org project has been contributed to by <a href="http://freeciv.wikia.com/wiki/People">these people</a>.
 
 </span>
 
 
 <br><br>
-This is a screenshot of Freeciv.net:
+This is a screenshot of Freeciv.net as of September 2010:
 
-<br>  <img src="/images/screenshot1.jpg">
+<br>  <a href="/wireframe.jsp?do=screenshots"><img src="/images/freeciv-screenshot-8-thumb2.png" border="0"></a>
 
 </div>

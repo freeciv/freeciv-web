@@ -24,7 +24,10 @@
   
 <% } else if (act.equals("search")) { %>
   <jsp:include page="search.jsp" flush="false"/>  
-  
+ 
+<% } else if (act.equals("screenshots")) { %>
+  <jsp:include page="screenshots.jsp" flush="false"/>  
+ 
 <% } else if (act.equals("frontpage")) { %>
   <jsp:include page="frontpage.jsp" flush="false"/>  
   

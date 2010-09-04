@@ -42,7 +42,7 @@
 <!-- MAIN COLUMN WITH ARTICLES -->
 <div id="left-column">
 	
-<a href="/wireframe.jsp?do=login"><img src="/images/freeciv-screenshot-2.png"></a>
+<a href="/wireframe.jsp?do=login"><img src="/images/freeciv-screenshot-fp.png" width="548" height="407"></a>
 	
 <a class="title" href="/wireframe.jsp?do=login"><span class="title">Play Freeciv.net online now!</span></a>
 <br>
@@ -226,6 +226,15 @@ get updates about this project and related topics on Twitter.
 
 <div style="width: 320px; float:right; padding-right: 36px;">
 
+
+
+	<div>
+
+		<a href="/wireframe.jsp?do=screenshots"><img src="/images/freeciv-screenshot-fp2.png" border="0"></a>
+		<br>
+		<center><a href="/wireframe.jsp?do=screenshots">See more screenshots here</a></center><br><br>
+	</div>
+
 <div style="height: 430px;">
 
 <script src="http://www.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php" type="text/javascript"></script>
@@ -248,7 +257,7 @@ new TWTR.Widget({
   title: '',
   subject: 'Freeciv.net on Twitter',
   width: 320,
-  height: 450,
+  height: 350,
   theme: {
     shell: {
       background: '#696969',
@@ -297,17 +306,6 @@ Link partners:
 <a href="http://www.bgroom.com">Free backgammon online</a>
 <br>
 <br>
-
-</div>
-
-<div style="background-color:#696969; margin-top: 30px; padding: 3px;">
-<span class="right-box">Download Freeciv desktop version</span><br>
-	<span class="right-box-smaller">
-		Freeciv.net can be played online in your browser on this website.
-		However, if you want to play the desktop version of Freeciv on your computer, you can <br>
-		<a href="http://sourceforge.net/projects/freeciv/files/Freeciv%202.1/2.1.10/Freeciv-2.1.10-win32-gtk2-setup.exe/download" target="_new">Download the desktop version</a>.
-
-	</span>
 
 </div>
 

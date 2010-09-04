@@ -243,7 +243,7 @@ def json_to_civserver(net_packet_json):
 
     net_payload = net_packet_json[packet_label['name']];
     if isinstance(net_payload, str):
-      net_payload = net_payload.replace(urllib.quote("<"), "").replace(urllib.quote(">"), "").replace(urllib.quote("\""), "").replace("\"", "");
+      net_payload = net_payload.replace(urllib.quote("<"), "").replace(urllib.quote(">"), "").replace(urllib.quote("\""), "").replace("\"", "").replace("%20", " ");
 
     res += packExt('>'+packet_label['type'], net_payload);
 

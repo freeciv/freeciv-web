@@ -343,6 +343,13 @@ function find_visible_unit(ptile)
   /* TODO: add missing C logic here.*/
   var vunits = tile_units(ptile);
   for (var i = 0; i < vunits.length; i++) {
+    var aunit = vunits[i];
+    if (aunit['anim_list'] != null && aunit['anim_list'].length > 0) {
+      return aunit;
+    }
+  }
+
+  for (var i = 0; i < vunits.length; i++) {
     var tunit = vunits[i];
     if (tunit['transported'] == false) {
       return tunit;

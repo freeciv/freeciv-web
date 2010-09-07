@@ -16,6 +16,8 @@ var units = {};
 
 var SINGLE_MOVE = 3;
 
+var ANIM_STEPS = 9;
+
 /* Changing this enum will break network compatability. */
 var DIPLOMAT_MOVE = 0;	/* move onto city square - only for allied cities */
 var DIPLOMAT_EMBASSY = 1;
@@ -153,4 +155,108 @@ function get_unit_moves_left(punit)
 function unit_has_goto(punit)
 {
   return (punit['goto_dest_x'] != 255 && punit['goto_dest_y'] != 255);
+}
+
+
+/**************************************************************************
+  Determines the unit_anim_list for the specified unit (old and new unit).
+**************************************************************************/
+function update_unit_anim_list(old_unit, new_unit)
+{
+  if (old_unit == null || new_unit == null) return;
+  /* unit is in same position. */
+  if (new_unit['x'] == old_unit['x'] && new_unit['y'] == old_unit['y']) return;
+  
+  if (old_unit['anim_list'] == null) old_unit['anim_list'] = [];
+
+  /* TODO: is unit visible? */
+
+  var has_old_pos = false;
+  var has_new_pos = false;
+  for (var i = 0; i <  old_unit['anim_list'].length; i++) {
+    var anim_tuple = old_unit['anim_list'][i];
+    if (anim_tuple['x'] == old_unit['x'] && anim_tuple['y'] == old_unit['y']) {
+      has_old_pos = true;
+    }
+    if (anim_tuple['x'] == new_unit['x'] && anim_tuple['y'] == new_unit['y']) {
+      has_new_pos = true;
+    }
+  }
+
+  if (!has_old_pos) {
+    var anim_tuple = {};
+    anim_tuple['x'] = old_unit['x'];
+    anim_tuple['y'] = old_unit['y'];
+    anim_tuple['i'] = ANIM_STEPS;
+    old_unit['anim_list'].push(anim_tuple);
+  }
+
+  if (!has_new_pos) {
+    var anim_tuple = {};
+    anim_tuple['x'] = new_unit['x'];
+    anim_tuple['y'] = new_unit['y'];
+    anim_tuple['i'] = ANIM_STEPS;
+    old_unit['anim_list'].push(anim_tuple);
+  }
+}
+
+/**************************************************************************
+  Determines the pixel offset for the specified unit, based on the units 
+  anim list. This is how Freeciv.net does unit animations.
+**************************************************************************/
+function get_unit_anim_offset(punit)
+{
+  var offset = {};
+  if (punit['anim_list'] != null && punit['anim_list'].length >= 2)  {
+    var anim_tuple_src = punit['anim_list'][0];
+    var anim_tuple_dst = punit['anim_list'][1];
+
+    anim_tuple_dst['i'] = anim_tuple_dst['i'] - 1;
+
+    var i = Math.floor((anim_tuple_dst['i'] + 2 ) / 3);
+
+    var r = map_to_gui_pos( anim_tuple_src['x'], anim_tuple_src['y']);
+    var src_gx = r['gui_dx'];
+    var src_gy = r['gui_dy'];
+
+    var s = map_to_gui_pos(anim_tuple_dst['x'], anim_tuple_dst['y']);
+    var dst_gx = s['gui_dx'];
+    var dst_gy = s['gui_dy'];
+
+    var t = map_to_gui_pos(punit['x'], punit['y']);
+    var punit_gx = t['gui_dx'];
+    var punit_gy = t['gui_dy'];
+
+    var gui_dx = Math.floor((dst_gx - src_gx) * (i / ANIM_STEPS)) + (punit_gx - dst_gx);
+    var gui_dy = Math.floor((dst_gy - src_gy) * (i / ANIM_STEPS)) + (punit_gy - dst_gy);
+
+
+    if (i == 0) {
+      punit['anim_list'].splice(0, 1);
+      if (punit['anim_list'].length == 1) {
+        punit['anim_list'].splice(0, 1);
+      }
+    } 
+
+
+    offset['x'] = - gui_dx ;
+    offset['y'] = - gui_dy;
+
+
+  } else {
+    offset['x'] = 0;
+    offset['y'] = 0;
+  }
+  return offset;
+}
+
+/**************************************************************************
+ Resets the unit anim list, every turn.
+**************************************************************************/
+function reset_unit_anim_list()
+{
+ for (unit_id in units) {
+    var punit = units[unit_id];
+    punit['anim_list'] = [];
+  }
 }

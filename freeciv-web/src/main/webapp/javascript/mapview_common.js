@@ -545,8 +545,7 @@ function update_map_canvas_full()
     last_redraw_time = new Date().getTime();
 
     var time = last_redraw_time - start;
-    console.log('Redraw time: ' + time);
-    //console.log("4. Mapview render end at: " + new Date().getTime());
+    //console.log('Redraw time: ' + time);
     
   }
 } 

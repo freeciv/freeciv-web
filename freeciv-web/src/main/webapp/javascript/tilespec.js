@@ -413,11 +413,17 @@ function check_sprite_type(sprite_type)
 **************************************************************************/
 function fill_unit_sprite_array(punit, stacked, backdrop)
 {
-
+  var unit_offset = get_unit_anim_offset(punit);
   var result = [ get_unit_nation_flag_sprite(punit), 
-           {"key" : unit_type(punit)['graphic_str'], "offset_x": unit_offset_x, "offset_y" : -unit_offset_y} ];
+           {"key" : unit_type(punit)['graphic_str'], 
+            "offset_x": unit_offset['x'] + unit_offset_x, 
+	    "offset_y" : unit_offset['y'] - unit_offset_y} ];
   var activities = get_unit_activity_sprite(punit);
-  if (activities != null) result.push(activities); 
+  if (activities != null) {
+    activities['offset_x'] = activities['offset_x'] + unit_offset['x']; 
+    activities['offset_y'] = activities['offset_y'] + unit_offset['y']; 
+    result.push(activities); 
+  }
   
   result.push(get_unit_hp_sprite(punit));
              
@@ -555,9 +561,11 @@ function get_unit_nation_flag_sprite(punit)
   var owner = players[owner_id];
   var nation_id = owner['nation'];
   var nation = nations[nation_id];
+  var unit_offset = get_unit_anim_offset(punit);
+
   return {"key" : "f.shield." + nation['graphic_str'], 
-          "offset_x" : unit_flag_offset_x, 
-          "offset_y" : - unit_flag_offset_y};
+          "offset_x" : unit_flag_offset_x + unit_offset['x'], 
+          "offset_y" : - unit_flag_offset_y + unit_offset['y']};
 }
 
 /**********************************************************************
@@ -569,11 +577,12 @@ function get_unit_hp_sprite(punit)
   var unit_type = unit_types[punit['type']];
   var max_hp = unit_type['hp'];
   var healthpercent = 10 * Math.floor((10 * hp) / max_hp);
+  var unit_offset = get_unit_anim_offset(punit);
 
 
   return {"key" : "unit.hp_" + healthpercent, 
-          "offset_x" : unit_flag_offset_x + -25, 
-          "offset_y" : - unit_flag_offset_y - 15};
+          "offset_x" : unit_flag_offset_x + -25 + unit_offset['x'], 
+          "offset_y" : - unit_flag_offset_y - 15 + unit_offset['y']};
 }
 
 /**********************************************************************

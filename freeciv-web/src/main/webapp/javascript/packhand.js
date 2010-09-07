@@ -432,6 +432,7 @@ function handle_unit_packet_common(packet_unit)
   var ret = true;
   
   //console.log("2. handle_unit_packet_common at: " + new Date().getTime());
+  //console.log(packet_unit);
   
   punit = player_find_unit_by_id(unit_owner(packet_unit), packet_unit['id']);
   
@@ -443,9 +444,11 @@ function handle_unit_packet_common(packet_unit)
     handle_unit_remove(packet_unit['id']);
   }
  
-  if (units[packet_unit['id']] == null) { 
+  if (units[packet_unit['id']] == null) {
+    packet_unit['anim_list'] = [];  
     units[packet_unit['id']] = packet_unit;
   } else {
+    update_unit_anim_list(units[packet_unit['id']], packet_unit);
     units[packet_unit['id']] = $.extend(units[packet_unit['id']], packet_unit);
   } 
   
@@ -553,13 +556,12 @@ function handle_packet_begin_turn(packet)
   auto_center_on_focus_unit();
   update_unit_info_label(current_focus);
   update_game_status_panel();
-  
   // FIXME: update_client_state(C_S_RUNNING);
 }
 
 function handle_packet_end_turn(packet) 
 {
-  /* TODO: implement*/
+  reset_unit_anim_list(); 
 }
 
 function handle_packet_freeze_client(packet) 

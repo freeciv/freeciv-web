@@ -845,6 +845,15 @@ void handle_unit_move(struct player *pplayer, int unit_id, int x, int y)
 
     old_tile = path->positions[0].tile;
 
+    /* Remove city spot reservations for AI settlers on city founding
+     * mission, before goto_tile reset. */
+    if (punit->ai.ai_role != AIUNIT_NONE) {
+      ai_unit_new_role(punit, AIUNIT_NONE, NULL);
+    }
+
+    punit->ai.control = FALSE;
+    punit->goto_tile = NULL;
+
     free_unit_orders(punit);
     /* If we waited on a tile, reset punit->done_moving */
     punit->done_moving = (punit->moves_left <= 0);

@@ -47,7 +47,6 @@ struct server_arguments {
   int quitidle;
   /* exit the server on game ending */
   bool exit_on_end;
-  bool ranked;
   /* authentication options */
   bool auth_enabled;            /* defaults to FALSE */
   char *auth_conf;              /* auth configuration file */

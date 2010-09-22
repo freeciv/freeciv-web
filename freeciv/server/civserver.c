@@ -177,9 +177,6 @@ int main(int argc, char *argv[])
       free(option);
     } else if (is_option("--exit-on-end", argv[inx])) {
       srvarg.exit_on_end = TRUE;
-    } else if (is_option("--ranked", argv[inx])) {
-      srvarg.ranked = TRUE;
-
     } else if ((option = get_option_malloc("--debug", argv, &inx, argc))) {
       srvarg.loglevel = log_parse_level_str(option);
       if (srvarg.loglevel == -1) {

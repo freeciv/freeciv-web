@@ -52,6 +52,13 @@ Freeciv.net is an Open Source strategy game which can be played online against o
 
 
 <br><br><br>
+
+<object width="548" height="436"><param name="movie" value="http://www.youtube.com/v/p-nkr_Cz1O4?fs=1&amp;hl=nb_NO"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/p-nkr_Cz1O4?fs=1&amp;hl=nb_NO" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="548" height="436"></embed></object>
+
+
+
+
+<br><br><br>
 <span class="title"><a href="/wireframe.jsp?do=login">Freeciv.net now supports OpenID for signing in</a></span>
 <br>
 

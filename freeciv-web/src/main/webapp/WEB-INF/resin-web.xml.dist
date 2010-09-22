@@ -15,5 +15,9 @@
  <rewrite-dispatch>
 	  <forward regexp="/robots.txt" target="/robots.jsp"/>
  </rewrite-dispatch> 
+
+  <session-config>
+     <session-timeout>720</session-timeout>
+  </session-config>
  
 </web-app>

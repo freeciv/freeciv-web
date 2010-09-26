@@ -30,6 +30,10 @@
 
 <script type="text/javascript" src="/javascript/iphone.js"></script>
 <meta name="google-site-verification" content="13_ecThQ9UAWizPUoxWp3NOhryW3hMpj7LlMAzc-og8" />
+
+
+
+
 </head>
 <body>
 <!-- HEADER -->
@@ -45,6 +49,7 @@
 <a class="menu_link" title="Contribute to the Freeciv.net development" href="/wireframe.jsp?do=dev">Development</a> &nbsp;&nbsp;
 <a title="About Freeciv.net" class="menu_link" href="/wireframe.jsp?do=about">About</a></div>
 </div>
+
 
 <div id="body_content">
 <div id="header_ads" style="text-align: center;">
@@ -62,6 +67,8 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </script>
 
 </div>
+
+  <jsp:include page="flags.jsp" flush="false"/>
 
 
   <jsp:include page="template_call.jsp" flush="false"/>

@@ -16,7 +16,7 @@ var units = {};
 
 var SINGLE_MOVE = 3;
 
-var ANIM_STEPS = 9;
+var ANIM_STEPS = 6;
 
 /* Changing this enum will break network compatability. */
 var DIPLOMAT_MOVE = 0;	/* move onto city square - only for allied cities */

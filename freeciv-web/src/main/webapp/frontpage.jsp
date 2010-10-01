@@ -189,11 +189,8 @@ get updates about this project and related topics on Twitter.
 		<center>
 
 
-<script type="text/javascript">
-	var flattr_url = 'http://www.freeciv.net';
-</script>
-<script src="http://api.flattr.com/button/load.js" type="text/javascript"></script>
-
+<a class="FlattrButton" style="display:none;"
+href="http://www.freeciv.net"></a>
 
 
 

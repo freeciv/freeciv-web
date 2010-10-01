@@ -858,7 +858,7 @@ void handle_unit_move(struct player *pplayer, int unit_id, int x, int y)
     /* If we waited on a tile, reset punit->done_moving */
     punit->done_moving = (punit->moves_left <= 0);
     punit->has_orders = TRUE;
-    punit->orders.length = path->length;
+    punit->orders.length = path->length - 1;
     punit->orders.index = 0;
     punit->orders.repeat = FALSE;
     punit->orders.vigilant = FALSE;
@@ -874,6 +874,7 @@ void handle_unit_move(struct player *pplayer, int unit_id, int x, int y)
         punit->orders.list[i].order = ORDER_MOVE;
         punit->orders.list[i].dir = get_direction_for_step(old_tile, new_tile);
         punit->orders.list[i].activity = ACTIVITY_LAST;
+        punit->orders.list[i].base = -1;
       }
       old_tile = new_tile;
 

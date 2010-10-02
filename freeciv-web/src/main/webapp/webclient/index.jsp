@@ -3,6 +3,7 @@
 <head>
 
 <script type="text/javascript" src="/javascript-compressed/webclient.js"></script>
+<script type="text/javascript" src="/javascript-compressed/jquery.jplayer.min.js"></script>
 <script type="text/javascript" src="/webclient/session.jsp"></script>
 
 <%--<!--[if IE]><script type="text/javascript" src="/javascript/explorer/excanvas.js"></script><![endif]-->
@@ -14,6 +15,7 @@
 <link rel="stylesheet" type="text/css" href="/stylesheets/civclient.css" />
 <link rel="stylesheet" type="text/css" href="/stylesheets/pregame.css" />
 <link type="text/css" rel="StyleSheet" href="/stylesheets/bluecurve.css" />
+<link type="text/css" rel="StyleSheet" href="/stylesheets/jplayer.blue.monday.css" />
 
 <link rel="shortcut icon" href="/images/freeciv-forever-icon.png" />
 

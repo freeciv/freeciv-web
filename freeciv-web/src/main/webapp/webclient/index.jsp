@@ -50,6 +50,9 @@
 </head>
 
 <body onload="civclient_init();" onmousemove="mouse_moved_cb(event);" oncontextmenu="return false" onresize="mapview_window_resized();" onOrientationChange="orientation_changed();" onbeforeunload="send_surrender_game();">
+	
+<%-- This is the jQuery jPlayer which plays HTML5 audio. --%>
+<div id="jquery_jplayer"></div> 
 
 <%
   
@@ -74,6 +77,7 @@ document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.
 var pageTracker = _gat._getTracker("UA-5588010-1");
 pageTracker._trackPageview();
 </script>    
-    
+
+ 
 </body>
 </html>

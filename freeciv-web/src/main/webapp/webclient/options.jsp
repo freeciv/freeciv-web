@@ -25,7 +25,6 @@
 <br><br>
 
 <div style="width: 500px; height: 400px; overflow: auto;">
-<div id="jquery_jplayer"></div> 
  
 		<div class="jp-playlist-player"> 
 			<div class="jp-interface"> 

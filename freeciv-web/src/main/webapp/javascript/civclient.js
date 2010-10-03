@@ -24,7 +24,7 @@ var previous_scroll = 0;
 var phase_start_time = 0;
 
 /**************************************************************************
- ...
+ This function is called on page load. 
 **************************************************************************/
 function civclient_init() 
 {
@@ -50,7 +50,7 @@ function civclient_init()
   game_init();
   network_init();
   init_mapview();
-
+  music_init();
 
   // Register keyboard listener.
   if(window.addEventListener){ // Mozilla, Netscape, Firefox

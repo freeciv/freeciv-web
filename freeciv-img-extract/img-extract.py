@@ -94,7 +94,7 @@ def increment_tileset_image():
   draw = ImageDraw.Draw(tileset)
   draw.text((130, 0), "Freeciv.net - #" + str(current_tileset_no) + " -   GPL Licensed  - Copyright 2007-2010  Andreas Rosdal", fill="rgb(0,0,0)")
 
-  tileset.save("freeciv-web-tileset-" + str(current_tileset_no) + ".png");
+  tileset.save("pre-freeciv-web-tileset-" + str(current_tileset_no) + ".png");
 
   current_tileset_no += 1;
   tileset = Image.new('RGBA', (tileset_width, tileset_height), (0, 0, 0, 0));

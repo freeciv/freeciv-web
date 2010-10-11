@@ -540,7 +540,8 @@ function handle_packet_conn_ping_info(packet)
 
 function handle_packet_end_phase(packet) 
 {
-  /* TODO: implement*/
+  chatbox_text = " ";
+
 }
 
 /* Done. */
@@ -562,7 +563,6 @@ function handle_packet_begin_turn(packet)
 function handle_packet_end_turn(packet) 
 {
   reset_unit_anim_list(); 
-  chatbox_text = " ";
 }
 
 function handle_packet_freeze_client(packet) 

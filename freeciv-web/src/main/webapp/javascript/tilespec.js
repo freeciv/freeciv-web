@@ -950,7 +950,7 @@ function fill_road_rail_sprite_array(ptile, pcity)
   for (var dir = 0; dir < 8; dir++) {
     /* Check if there is adjacent road/rail. */
     var tile1 = mapstep(ptile, dir);
-    if (tile1 != null && client_tile_get_known(tile1) != TILE_UNKNOWN) {
+    if (tile1 != null && tile_get_known(tile1) != TILE_UNKNOWN) {
       road_near[dir] = contains_special(tile1, S_ROAD);
       rail_near[dir] = contains_special(tile1, S_RAILROAD);
 

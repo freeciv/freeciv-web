@@ -79,7 +79,7 @@ function tile_terrain_near(ptile)
   var tspecial_near = [];
   for (var dir = 0; dir < 8; dir++) {
     var tile1 = mapstep(ptile, dir);
-    if (tile1 != null && client_tile_get_known(tile1) != TILE_UNKNOWN) {
+    if (tile1 != null && tile_get_known(tile1) != TILE_UNKNOWN) {
       var terrain1 = tile_terrain(tile1);
 
       if (null != terrain1) {

@@ -11,19 +11,4 @@
    GNU General Public License for more details.
 ***********************************************************************/
 
-function client_tile_get_known(ptile)
-{
-
-/* TODO:
-  if (NULL == client.conn.playing) {
-    if (client_is_observer()) {
-      return TILE_KNOWN_SEEN;
-    } else {
-      return TILE_UNKNOWN;
-    }
-  }
-*/
-
-  return tile_get_known(ptile);
-}
-
+/* Not in use at the moment. */

@@ -439,7 +439,7 @@ function update_map_canvas(canvas_x, canvas_y, width, height)
 **************************************************************************/
 function put_one_tile(pcanvas, layer, ptile, canvas_x, canvas_y, citymode)
 {
-  if (client_tile_get_known(ptile) != TILE_UNKNOWN) {
+  if (tile_get_known(ptile) != TILE_UNKNOWN) {
     put_one_element(pcanvas, layer, ptile, null, null,
 		    get_drawable_unit(ptile, citymode),
 		    tile_city(ptile), canvas_x, canvas_y, citymode);
@@ -458,7 +458,7 @@ function put_one_element(pcanvas, layer, ptile, pedge, pcorner, punit,
   var tile_sprs = fill_sprite_array(layer, ptile, pedge, pcorner, punit, pcity, citymode);
 				                    
   var fog = (ptile != null && draw_fog_of_war
-	      && TILE_KNOWN_UNSEEN == client_tile_get_known(ptile));				                    
+	      && TILE_KNOWN_UNSEEN == tile_get_known(ptile));				                    
 
   put_drawn_sprites(pcanvas, canvas_x, canvas_y, tile_sprs, fog);
    

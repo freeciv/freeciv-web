@@ -41,9 +41,9 @@
         <div id="game_message_area"></div>
         <div id="game_chat_box">
           <input id="game_text_input" type="text" name="text_input" onkeydown="javascript:return check_text_input(event,this);"
-            							value="Type your messages here." 
-                                        onfocus="keyboard_input=false; if (this.value=='Type your messages here.') this.value='';" 
-    									value="Type your messages here."
+            							value="..." 
+                                        onfocus="keyboard_input=false; if (this.value=='...') this.value='';" 
+    									value="..."
                                          />
         </div>
       </div>

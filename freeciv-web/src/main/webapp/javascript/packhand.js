@@ -334,7 +334,7 @@ function handle_packet_nuke_tile_info(packet)
 /* done */
 function handle_packet_city_remove(packet) 
 {
-  remove_city(packet['pcity_id']);
+  remove_city(packet['city_id']);
 }
 
 
@@ -562,6 +562,7 @@ function handle_packet_begin_turn(packet)
 function handle_packet_end_turn(packet) 
 {
   reset_unit_anim_list(); 
+  chatbox_text = " ";
 }
 
 function handle_packet_freeze_client(packet) 

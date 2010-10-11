@@ -17,8 +17,6 @@ client.conn = {};
 
 var client_frozen = false;
 
-var chatbox_text_limit = 3000;
-
 var chatbox_text = " ";
 var previous_scroll = 0;
 var phase_start_time = 0;
@@ -114,16 +112,7 @@ function add_chatbox_text(text){
       scrollDiv = document.getElementById('game_message_area');
     }
 
-    chatbox_text = chatbox_text + text + "<br>";
-
-    /* Limit size of chatbox area. */
-    if (chatbox_text.length > chatbox_text_limit) {
-      chatbox_text = chatbox_text.substring(chatbox_text.length - chatbox_text_limit, chatbox_text.length);
-      var firstNewLine = chatbox_text.indexOf("<br>");
-      if (firstNewLine != -1) {
-        chatbox_text = chatbox_text.substring(firstNewLine, chatbox_text.length);
-      }
-    }
+    chatbox_text += text + "<br>";
 
     if (scrollDiv != null) {
       scrollDiv.innerHTML = chatbox_text; 

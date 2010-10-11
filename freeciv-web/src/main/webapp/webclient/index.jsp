@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+	
+<title>Freeciv.net - online multiplayer strategy game</title>
 
 <script type="text/javascript" src="/javascript-compressed/webclient.js"></script>
 <script type="text/javascript" src="/javascript-compressed/jquery.jplayer.min.js"></script>
 <script type="text/javascript" src="/webclient/session.jsp"></script>
-
-<%--<!--[if IE]><script type="text/javascript" src="/javascript/explorer/excanvas.js"></script><![endif]-->
-<script type="text/javascript" src="/javascript/fonts/canvas.text.js"></script>
-<script type="text/javascript" src="/javascript/fonts/faces/dejavu_sans-normal-normal.js"></script>
-<script type="text/javascript" src="/javascript/fonts/faces/dejavu_sans-bold-normal.js"></script>--%>
 
 <link type="text/css" href="/stylesheets/dark-hive/jquery-ui-1.7.2.custom.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" href="/stylesheets/civclient.css" />
@@ -65,7 +62,6 @@
 
     <jsp:include page="pregame.jsp" flush="false"/>
     <jsp:include page="mapview_excanvas.jsp" flush="false"/>
-    <%--<iframe src ="/freeciv-music/flash_detect.html" width="1" height="1" border="0" frameborder="0" scrolling="no"></iframe>--%>
     
     
 <!-- Google Analytics Code -->

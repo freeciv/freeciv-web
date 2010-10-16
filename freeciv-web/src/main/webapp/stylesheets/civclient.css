@@ -192,3 +192,45 @@ button {
 #city_viewport {
   background: url("/images/black-bg.png") repeat scroll 0 0 #222222;
 }
+
+#diplomacy_messages {
+  background-color: #222222;
+  min-height: 120px;
+  max-height: 250px;
+  overflow: auto;
+  border-color: 1px solid;
+  border: 1px solid #555555
+  width: 100%;
+}
+
+#diplomacy_player_box_self {
+  width: 50%;
+  float: left;
+  text-align:center;
+}
+
+#diplomacy_player_box_counterpart {
+  width: 50%;
+  float: left;
+  text-align:center;
+}
+
+.ui-dialog {
+  border: 1px #444444 solid;
+}
+
+#self_dipl_div {
+  float: left;
+  padding-left: 60px;
+  text-align: left;
+}
+
+#counterpart_dipl_div {
+  float: left;
+  padding-left: 60px;
+  text-align: left;
+}
+
+#dialog {
+  max-height: 400px;
+}

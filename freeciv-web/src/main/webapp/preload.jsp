@@ -1,5 +1,24 @@
 <html>
 <head>
+
+
+<script type="text/javascript">	
+function is_iphone()
+{
+  var agent=navigator.userAgent.toLowerCase();
+  return (agent.indexOf('iphone')!=-1);
+  //return true;
+}
+
+function fc_redirect() 
+{
+  if (is_iphone()) {
+    window.location='/civclientlauncher?action=new'
+  } else {
+    window.location='/wireframe.jsp?do=menu'
+  }
+}
+</script>
 </head>
 
 <body onload="fc_redirect();" text="#ffffff" bgcolor="#000000">
@@ -7,12 +26,8 @@
 <center>
 
 
-<canvas id="canvas" width="800" height="600" moz-opaque="true"></canvas>
-
-<script type="text/javascript" src="/javascript-compressed/intro.js"></script>
-
 <br><br>
-
+<h2>Please wait while Freeciv.net is loading...</h2>
 
 <%
 String ua = "" + request.getHeader("User-Agent");

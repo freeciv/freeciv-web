@@ -33,8 +33,8 @@ function client_handle_packet(p)
 
 for packet in packets.values():
   if not "sc" in packet.dirs: continue;
-  f.write("\n    case  \"" + packet.type.lower() + "\":\n");  
-  f.write("      handle_" + packet.type.lower() + "(p[i]);\n      break;\n");
+  f.write("\n    case  \"" + packet.type.lower().replace("packet_", "") + "\":\n");  
+  f.write("      handle_" + packet.type.lower().replace("packet_", "") + "(p[i]);\n      break;\n");
 
 f.write(""" 
     }

@@ -17,28 +17,28 @@
    This file contains the handling-code for packets from the civserver.
 */
 
-function handle_packet_processing_started(packet) 
+function handle_processing_started(packet) 
 {
   client_frozen = true;
 }
 
-function handle_packet_processing_finished(packet) 
+function handle_processing_finished(packet) 
 {
   client_frozen = false;
 }
 
-function handle_packet_freeze_hint(packet) 
+function handle_freeze_hint(packet) 
 {
   client_frozen = true;
 }
 
-function handle_packet_thaw_hint(packet) 
+function handle_thaw_hint(packet) 
 {
   client_frozen = false;
 }
 
 /* 100% */
-function handle_packet_ruleset_terrain(packet) 
+function handle_ruleset_terrain(packet) 
 {
   terrains[packet['id']] = packet;
 }
@@ -47,7 +47,7 @@ function handle_packet_ruleset_terrain(packet)
   After we send a join packet to the server we receive a reply.  This
   function handles the reply.  100% Complete.
 ****************************************************************************/
-function handle_packet_server_join_reply(packet) 
+function handle_server_join_reply(packet) 
 {
   if (packet['you_can_join']) {
     client.conn.established = true;
@@ -78,7 +78,7 @@ function handle_packet_server_join_reply(packet)
   Calls update_players_dialog() in case info for that has changed.
   99% done.
 **************************************************************************/
-function handle_packet_conn_info(packet) 
+function handle_conn_info(packet) 
 {
   var pconn = find_conn_by_id(packet['id']);
 
@@ -117,7 +117,7 @@ function handle_packet_conn_info(packet)
 }
 
 /* 100% done */
-function handle_packet_ruleset_resource(packet) 
+function handle_ruleset_resource(packet) 
 {
   resources[packet['id']] = packet;
 }
@@ -125,7 +125,7 @@ function handle_packet_ruleset_resource(packet)
 /**************************************************************************
 This was once very ugly...                                   99% complete
 **************************************************************************/
-function handle_packet_tile_info(packet) 
+function handle_tile_info(packet) 
 {
   var new_known;
   var old_known;
@@ -144,7 +144,7 @@ function handle_packet_tile_info(packet)
 }
 
 /* 100% complete */
-function handle_packet_chat_msg(packet) 
+function handle_chat_msg(packet) 
 {
   var message = unescape(packet['message']);
   var conn_id = packet['conn_id'];
@@ -161,7 +161,7 @@ function handle_packet_chat_msg(packet)
 }
 
 /* 100% complete */
-function handle_packet_city_info(packet) 
+function handle_city_info(packet) 
 {
   if (cities[packet['id']] == null) { 
     cities[packet['id']] = packet;
@@ -176,7 +176,7 @@ function handle_packet_city_info(packet)
 
 /* 99% complete 
    TODO: does this loose information? */
-function handle_packet_city_short_info(packet) 
+function handle_city_short_info(packet) 
 {
   if (cities[packet['id']] == null) { 
     cities[packet['id']] = packet;
@@ -186,7 +186,7 @@ function handle_packet_city_short_info(packet)
 }
 
 /* 100% complete */
-function handle_packet_player_info(packet) 
+function handle_player_info(packet) 
 {
   players[packet['playerno']] = $.extend(players[packet['playerno']], packet);
   
@@ -200,7 +200,7 @@ function handle_packet_player_info(packet)
 }
 
 /* 100% complete */
-function handle_packet_player_remove(packet) 
+function handle_player_remove(packet) 
 {
   delete players[packet['playerno']];
   update_player_info();
@@ -208,7 +208,7 @@ function handle_packet_player_remove(packet)
 }
 
 /* 100% complete */
-function handle_packet_conn_ping(packet) 
+function handle_conn_ping(packet) 
 {
   var test_packet = [{"packet_type" : "conn_pong"}];
   var myJSONText = JSON.stringify(test_packet);
@@ -217,7 +217,7 @@ function handle_packet_conn_ping(packet)
 }
 
 /* 50% complete */
-function handle_packet_map_info(packet) 
+function handle_map_info(packet) 
 {
   map = packet;
 
@@ -238,13 +238,13 @@ function handle_packet_map_info(packet)
 }
 
 /* 100% complete */
-function handle_packet_game_info(packet) 
+function handle_game_info(packet) 
 {
   game_info = packet;
 }
 
 /* 30% complete */
-function handle_packet_start_phase(packet)
+function handle_start_phase(packet)
 {
 
   update_client_state(C_S_RUNNING);
@@ -255,7 +255,7 @@ function handle_packet_start_phase(packet)
 
 }
 
-function handle_packet_ruleset_control(packet)
+function handle_ruleset_control(packet)
 {
 
   update_client_state(C_S_PREPARING);
@@ -264,7 +264,7 @@ function handle_packet_ruleset_control(packet)
 
 }
 
-function handle_packet_endgame_report(packet)
+function handle_endgame_report(packet)
 {
 
   update_client_state(C_S_OVER);
@@ -316,29 +316,29 @@ function update_client_state(value)
 
 }
 
-function handle_packet_authentication_req(packet) 
+function handle_authentication_req(packet) 
 {
   /* Auth not supported. */
 }
 
-function handle_packet_server_shutdown(packet) 
+function handle_server_shutdown(packet) 
 {
   /* TODO: implement*/
 }
 
-function handle_packet_nuke_tile_info(packet) 
+function handle_nuke_tile_info(packet) 
 {
   /* TODO: implement*/
 }
 
 /* done */
-function handle_packet_city_remove(packet) 
+function handle_city_remove(packet) 
 {
   remove_city(packet['city_id']);
 }
 
 
-function handle_packet_connect_msg(packet) 
+function handle_connect_msg(packet) 
 {
   var message = packet['message'];
   add_chatbox_text(message);
@@ -346,7 +346,7 @@ function handle_packet_connect_msg(packet)
 
 
 /* done */
-function handle_packet_city_name_suggestion_info(packet) 
+function handle_city_name_suggestion_info(packet) 
 {
   var name=prompt("What should we call our new city?", packet['name']);
   var packet = [{"packet_type" : "unit_build_city", "name" : name, "unit_id" : packet['unit_id'] }];
@@ -354,12 +354,12 @@ function handle_packet_city_name_suggestion_info(packet)
   
 }
 
-function handle_packet_city_sabotage_list(packet) 
+function handle_city_sabotage_list(packet) 
 {
   /* TODO: implement*/
 }
 
-function handle_packet_player_attribute_chunk(packet) 
+function handle_player_attribute_chunk(packet) 
 {
   /* TODO: implement*/
 }
@@ -368,7 +368,7 @@ function handle_packet_player_attribute_chunk(packet)
   Handle a remove-unit packet, sent by the server to tell us any time a
   unit is no longer there.                             99% complete.
 **************************************************************************/
-function handle_packet_unit_remove(packet) 
+function handle_unit_remove(packet) 
 {
   var punit = game_find_unit_by_number(packet['unit_id']);
   var powner;
@@ -386,14 +386,14 @@ function handle_packet_unit_remove(packet)
 }
 
 /* 100% complete */
-function handle_packet_unit_info(packet) 
+function handle_unit_info(packet) 
 {
   handle_unit_packet_common(packet);
   
 }
 
 /* 99% complete FIXME: does this loose information? */
-function handle_packet_unit_short_info(packet) 
+function handle_unit_short_info(packet) 
 {
   handle_unit_packet_common(packet);
 }
@@ -467,12 +467,12 @@ function handle_unit_packet_common(packet_unit)
   /* TODO: update various dialogs and mapview. */
 }
 
-function handle_packet_unit_combat_info(packet) 
+function handle_unit_combat_info(packet) 
 {
   /* TODO: implement*/
 }
 
-function handle_packet_unit_diplomat_answer(packet) 
+function handle_unit_diplomat_answer(packet) 
 {
   var diplomat_id = packet['diplomat_id'];  
   var target_id = packet['target_id'];
@@ -502,56 +502,68 @@ function handle_packet_unit_diplomat_answer(packet)
 
 }
 
-function handle_packet_diplomacy_init_meeting(packet) 
+function handle_diplomacy_init_meeting(packet) 
 {
-  /* TODO: implement*/
+  diplomacy_request_queue.push(packet['counterpart']);
+  diplomacy_clause_map[packet['counterpart']] = [];
+  refresh_diplomacy_request_queue();
+
 }
 
-function handle_packet_diplomacy_cancel_meeting(packet) 
+function handle_diplomacy_cancel_meeting(packet) 
 {
-  /* TODO: implement*/
+  cancel_meeting(packet['counterpart']);
 }
 
-function handle_packet_diplomacy_create_clause(packet) 
+function handle_diplomacy_create_clause(packet) 
 {
-  /* TODO: implement*/
+  if(diplomacy_clause_map[packet['counterpart']] == null) {
+    diplomacy_clause_map[packet['counterpart']] = [];
+  }
+  diplomacy_clause_map[packet['counterpart']].push(packet);
+  show_diplomacy_clauses();
 }
 
-function handle_packet_diplomacy_remove_clause(packet) 
+function handle_diplomacy_remove_clause(packet) 
 {
-  /* TODO: implement*/
+  remove_clause(packet);
 }
 
-function handle_packet_diplomacy_accept_treaty(packet) 
+function handle_diplomacy_accept_treaty(packet) 
 {
-  /* TODO: implement*/
+  accept_treaty(packet['counterpart'], 
+		packet['I_accepted'], 
+		packet['other_accepted']);
 }
 
-function handle_packet_page_msg(packet) 
+function handle_page_msg(packet) 
 {
   var message = packet['message'];
-  add_chatbox_text(message);
+  var regxp = /\n/gi;
+  message = message.replace(regxp, "<br>\n");
+  show_dialog_message("Freeciv.net News", message);
+
 }
 
-function handle_packet_conn_ping_info(packet) 
+function handle_conn_ping_info(packet) 
 {
   /* not needed */
 }
 
-function handle_packet_end_phase(packet) 
+function handle_end_phase(packet) 
 {
   chatbox_text = " ";
 
 }
 
 /* Done. */
-function handle_packet_new_year(packet) 
+function handle_new_year(packet) 
 {
   game_info['year'] = packet['year'];
   game_info['turn'] = packet['turn']; 
 }
 
-function handle_packet_begin_turn(packet) 
+function handle_begin_turn(packet) 
 {
   update_unit_focus();
   auto_center_on_focus_unit();
@@ -560,163 +572,163 @@ function handle_packet_begin_turn(packet)
   // FIXME: update_client_state(C_S_RUNNING);
 }
 
-function handle_packet_end_turn(packet) 
+function handle_end_turn(packet) 
 {
   reset_unit_anim_list(); 
 }
 
-function handle_packet_freeze_client(packet) 
+function handle_freeze_client(packet) 
 {
   client_frozen = true;
 }
 
-function handle_packet_thaw_client(packet) 
+function handle_thaw_client(packet) 
 {
   client_frozen = false;
 }
 
-function handle_packet_spaceship_info(packet) 
+function handle_spaceship_info(packet) 
 {
   /* TODO: implement*/
 }
 
 /* 100% complete */
-function handle_packet_ruleset_unit(packet) 
+function handle_ruleset_unit(packet) 
 {
   unit_types[packet['id']] = packet;
 }
 
 /* 100% complete */
-function handle_packet_ruleset_game(packet) 
+function handle_ruleset_game(packet) 
 {
   game_rules = packet;
 }
 
 /* 100% complete */
-function handle_packet_ruleset_specialist(packet) 
+function handle_ruleset_specialist(packet) 
 {
   specialists[packet['id']] = packet;
 }
 
-function handle_packet_ruleset_government_ruler_title(packet) 
+function handle_ruleset_government_ruler_title(packet) 
 {
   /* TODO: implement*/
 }
 
 /* 100% complete */
-function handle_packet_ruleset_tech(packet) 
+function handle_ruleset_tech(packet) 
 {
   techs[packet['id']] = packet;
 }
 
 /* 100% complete */
-function handle_packet_ruleset_government(packet) 
+function handle_ruleset_government(packet) 
 {
   governments[packet['id']] = packet;
 }
 
 /* 100% complete */
-function handle_packet_ruleset_terrain_control(packet) 
+function handle_ruleset_terrain_control(packet) 
 {
   terrain_control = packet;
 }
 
 /* 100% complete */
-function handle_packet_ruleset_nation_groups(packet) 
+function handle_ruleset_nation_groups(packet) 
 {
   nation_groups = packet['groups'];
 }
 
 /* 100% complete */
-function handle_packet_ruleset_nation(packet) 
+function handle_ruleset_nation(packet) 
 {
   nations[packet['id']] = packet;
 }
 
-function handle_packet_ruleset_city(packet) 
+function handle_ruleset_city(packet) 
 {
   city_rules[packet['style_id']] = packet;
 }
 
 /* 100% complete */
-function handle_packet_ruleset_building(packet) 
+function handle_ruleset_building(packet) 
 {
   improvements[packet['id']] = packet;
 }
 
-function handle_packet_ruleset_unit_class(packet) 
+function handle_ruleset_unit_class(packet) 
 {
   /* TODO: implement*/
 }
 
-function handle_packet_ruleset_base(packet) 
+function handle_ruleset_base(packet) 
 {
   /* TODO: implement*/
 }
 
-function handle_packet_single_want_hack_reply(packet) 
+function handle_single_want_hack_reply(packet) 
 {
   /* TODO: implement*/
 }
 
-function handle_packet_ruleset_choices(packet) 
+function handle_ruleset_choices(packet) 
 {
   /* TODO: implement*/
 }
 
-function handle_packet_game_load(packet) 
+function handle_game_load(packet) 
 {
   /* TODO: implement*/
 }
 
-function handle_packet_options_settable_control(packet) 
+function handle_options_settable_control(packet) 
 {
   /* TODO: implement*/
 }
 
-function handle_packet_options_settable(packet) 
+function handle_options_settable(packet) 
 {
   /* TODO: implement*/
 }
 
  /* Done */
-function handle_packet_ruleset_effect(packet) 
+function handle_ruleset_effect(packet) 
 {
   effects[packet['effect_type']] = packet;
 }
  
  /* Done */
-function handle_packet_ruleset_effect_req(packet) 
+function handle_ruleset_effect_req(packet) 
 {
   requirements[packet['effect_id']] = packet;
 }
 
-function handle_packet_scenario_info(packet) 
+function handle_scenario_info(packet) 
 {
   /* TODO: implement*/
 }
 
-function handle_packet_vote_new(packet) 
+function handle_vote_new(packet) 
 {
   /* TODO: implement*/
 }
 
-function handle_packet_vote_update(packet) 
+function handle_vote_update(packet) 
 {
   /* TODO: implement*/
 }
 
-function handle_packet_vote_remove(packet) 
+function handle_vote_remove(packet) 
 {
   /* TODO: implement*/
 }
 
-function handle_packet_vote_resolve(packet) 
+function handle_vote_resolve(packet) 
 {
   /* TODO: implement*/
 }
 
-function handle_packet_edit_object_created(packet) 
+function handle_edit_object_created(packet) 
 {
   /* edit not supported. */
 }

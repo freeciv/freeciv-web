@@ -505,7 +505,7 @@ if ( isset($port) ) {
 
       print "<br><br> ";
       print "<h1>Freeciv.net single-player games</h1><br />\n";
-      $stmt="select host,port,version,patches,state,message,unix_timestamp()-unix_timestamp(stamp),available from servers where message like '%Singleplayer%' and state = 'Running' order by state,host,port asc";
+      $stmt="select host,port,version,patches,state,message,unix_timestamp()-unix_timestamp(stamp), (select user from players p where p.hostport =  CONCAT(s.host ,':',s.port) and p.type = 'Human' Limit 1 ) as player from servers s where message like '%Singleplayer%' and state = 'Running' order by state,host,port asc";
       $res = fcdb_exec($stmt);
       $nr = fcdb_num_rows($res);
       if ( $nr > 0 ) {
@@ -513,7 +513,7 @@ if ( isset($port) ) {
         print "<tr id='meta_header'><th class=\"left\">Action:</th><th>Server ID:</th>";
         print "<th>State</th><th>Players</th>";
         print "<th style='width:45%;'>Topic</th><th>Last Update</th>";
-        print "<th>Players Available</th>\n";
+        print "<th>Player</th>\n";
         print "<th>Info:</th></tr>";
         for ( $inx = 0; $inx < $nr; $inx++ ) {
           $row = fcdb_fetch_array($res, $inx);
@@ -540,7 +540,7 @@ if ( isset($port) ) {
           }
           print $last_update;
           print "</td><td>";
-          print db2html($row["available"]);
+          print db2html($row["player"]);
 	  	  print "</td>"
 	  	  print "<td>";
           print "<a href=\"/freecivmetaserve/metaserver.php?server_port=" . db2html($row["host"]) . ":" . db2html($row["port"]) . "\">";

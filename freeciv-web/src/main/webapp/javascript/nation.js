@@ -22,8 +22,8 @@ var nation_groups = [];
 **************************************************************************/
 function update_nation_screen()
 {
-  var nation_list_html = "<table width=80% border=0 cellspacing=0><tr style='background: #444444;'><td>Flag</td><td>Player Name:</td>"
-	  + "<td>Nation:</td><td>AI/Human</td><td>Alive/Dead</td></tr>";
+  var nation_list_html = "<table width=90% border=0 cellspacing=0><tr style='background: #444444;'><td>Flag</td><td>Player Name:</td>"
+	  + "<td>Nation:</td><td>AI/Human</td><td>Alive/Dead</td><td>Diplomatic state</td><td>Action</td></tr>";
   
   for (var player_id in players) {
     var pplayer = players[player_id];
@@ -42,7 +42,23 @@ function update_nation_screen()
            + "<td>" + pplayer['name'] + "</td><td>" 
            + nations[pplayer['nation']]['adjective']  + "</td><td>" 
 	   + (pplayer['ai'] ? "AI" : "Human") + "</td><td>"
-	   + (pplayer['is_alive'] ? "Alive" : "Dead") +  "</td></tr>";
+	   + (pplayer['is_alive'] ? "Alive" : "Dead") +  "</td>";
+
+
+    if (!client_is_observer() && client.conn.playing['diplstates'] != null) {
+      nation_list_html = nation_list_html + "<td>" + get_diplstate_text(client.conn.playing['diplstates'][player_id]) + "</td><td>";
+      if (client.conn.playing['diplstates'][player_id] != DS_NO_CONTACT) {
+        nation_list_html = nation_list_html + "<a href='#' onclick='diplomacy_init_meeting_req(" + player_id + ");'>Meet</a> ";
+      }
+      if (client.conn.playing['diplstates'][player_id] != DS_WAR && client.conn.playing['diplstates'][player_id] != DS_NO_CONTACT) {
+        nation_list_html = nation_list_html + " - <a href='#' onclick='diplomacy_cancel_treaty(" + player_id + ");'>Cancel Treaty</a>";
+
+      }
+      nation_list_html = nation_list_html + "</td>";
+    }
+
+    nation_list_html = nation_list_html + "</tr>";
+
 
   }
   nation_list_html = nation_list_html + "</table>";

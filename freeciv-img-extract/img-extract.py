@@ -52,8 +52,8 @@ files = ["../freeciv/data/amplio.tilespec",
   "../freeciv/data/misc/space.spec",
   "../freeciv/data/misc/editor.spec",
   "../freeciv/data/misc/techs.spec",
-  "../freeciv/data/misc/flags.spec"];
-#  "../freeciv/data/misc/treaty.spec"];  #not in use yet
+  "../freeciv/data/misc/flags.spec",
+  "../freeciv/data/misc/treaty.spec"]; 
 
 global tileset;
 global current_tileset_no;

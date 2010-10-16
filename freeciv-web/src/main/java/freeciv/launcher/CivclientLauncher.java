@@ -16,6 +16,8 @@ package freeciv.launcher;
 
 import java.util.regex.*;
 
+import java.util.Random;
+
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -132,7 +134,8 @@ public class CivclientLauncher extends HttpServlet {
 
 
 		if ((action != null && action.equals("observe")) && (username == null || "null".equals(username))) {
-			username = "observer" + System.currentTimeMillis();
+			Random randomGenerator = new Random();
+			username = "observer" + randomGenerator.nextInt(1000);
 			request.getSession().setAttribute( "username", username);
 		}
 

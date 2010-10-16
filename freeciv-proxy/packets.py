@@ -216,7 +216,7 @@ def civserver_get_packet(type, payload):
       logger.debug("** PART-RESULT:  " + packet_fields[i]['name'] + " : " + str(sub_res));
     curpos += dx;
 
-  result['packet_type'] = packets[type].name;
+  result['packet_type'] = packets[type].name.replace("packet_", "");
   return result; 
 
 # Process packet from JSON to civserver.

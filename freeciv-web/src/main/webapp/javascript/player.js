@@ -16,6 +16,16 @@
 var players = {};
 var MAX_NUM_PLAYERS = 30;
 
+
+var DS_ARMISTICE = 0;
+var DS_WAR = 1;
+var DS_CEASEFIRE = 2;
+var DS_PEACE = 3;
+var DS_ALLIANCE = 4;
+var DS_NO_CONTACT = 5;
+var DS_TEAM = 6;
+var DS_LAST = 7;
+
 function valid_player_by_number(playerno)
 {
   /*  TODO:
@@ -72,5 +82,31 @@ function player_index(pplayer)
 function player_number(player)
 {
   return player['playerno'];
+}
+
+
+/**************************************************************************
+  ...
+**************************************************************************/
+function get_diplstate_text(state_id) 
+{
+  if (DS_ARMISTICE == state_id) {
+    return "Armistice";
+  } else if (DS_WAR == state_id) {
+    return "War";
+  } else if (DS_CEASEFIRE == state_id) {
+    return "Ceasefire";
+  } else if (DS_PEACE == state_id) {
+    return "Peace";
+  } else if (DS_ALLIANCE == state_id) {
+    return "Alliance";
+  } else if (DS_NO_CONTACT == state_id) {
+    return "No contact";
+  } else if (DS_TEAM == state_id) {
+    return "Team";
+  } else {
+    return "Unknown state";
+  }
+
 }
 

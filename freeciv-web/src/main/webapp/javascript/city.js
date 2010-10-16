@@ -407,3 +407,18 @@ function do_city_map_click(ptile)
   send_request (JSON.stringify(packet));
 
 }
+
+/**************************************************************************
+.. 
+**************************************************************************/
+function does_city_have_improvement(pcity, improvement_name)
+{
+  for (var z = 0; z < pcity['improvements'].length; z ++) {
+    if (pcity['improvements'][z] == 1) {
+      if (improvements[z]['name'] == improvement_name) {
+        return true;
+      }
+    }
+  }
+  return false;
+}

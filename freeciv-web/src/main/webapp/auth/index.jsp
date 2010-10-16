@@ -64,7 +64,6 @@ This means that you can easily and safely use your existing username and passwor
 
 
 <br><br><br>
-Freeciv.net previously supported <a href="http://www.freeciv.net/facebook">Facebook connect</a>. Existing users can still log-in with the old method.
 
 <br><br><br>
 

@@ -23,7 +23,6 @@ var maxrate = 80;
 var freeze = false;
 var government_list;
 var current_government;
-var government_id = -1;
 
 
 function update_rates_dialog()
@@ -32,22 +31,18 @@ function update_rates_dialog()
   if (client_is_observer()) return;
   
   maxrate = government_max_rate(client.conn.playing['government']);
-  
-  if (s_tax == null) {
-    create_rates_dialog(client.conn.playing['tax'], 
-                        client.conn.playing['luxury'], 
-                        client.conn.playing['science'], maxrate);
-  } else {
-    tax = client.conn.playing['tax'];
-    lux = client.conn.playing['luxury'];
-    sci = client.conn.playing['science'];
-    s_tax.setValue(tax);
-    s_tax.setMaximum(maxrate);
-    s_lux.setValue(lux);
-    s_lux.setMaximum(maxrate);
-    s_sci.setValue(sci);
-    s_sci.setMaximum(maxrate);  
-  }
+
+  $("#slider-tax").html("<input class='slider-input' id='slider-tax-input' name='slider-tax-input'/>");
+  $("#slider-lux").html("<input class='slider-input' id='slider-lux-input' name='slider-lux-input'/>");
+  $("#slider-sci").html("<input class='slider-input' id='slider-sci-input' name='slider-sci-input'/>");
+
+  create_rates_dialog(client.conn.playing['tax'], 
+                      client.conn.playing['luxury'], 
+                      client.conn.playing['science'], maxrate);
+
+  var govt = governments[client.conn.playing['government']];
+
+  $("#max_tax_rate").html("<i>" + govt['name'] + " max rate: " + maxrate + "</i>");
 }
 
 function create_rates_dialog(tax, lux, sci, max)
@@ -229,8 +224,8 @@ update_sci_rates ()
   s_sci.setValue(sci);
 
   $("#tax_result").html(tax + "%");
-  $("#lux_result").html(tax + "%");
-  $("#sci_result").html(tax + "%");
+  $("#lux_result").html(lux + "%");
+  $("#sci_result").html(sci + "%");
 
   freeze = false;
 

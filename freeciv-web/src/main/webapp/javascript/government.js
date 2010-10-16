@@ -12,7 +12,7 @@
 ***********************************************************************/
 
 var governments = {};
-
+var requested_gov = -1;
 
 /**************************************************************************
    ...
@@ -26,11 +26,23 @@ function update_govt_dialog()
   
   for (var govt_id in governments) {
     var govt = governments[govt_id];
-    var bgcolor =  (client.conn.playing['government'] == govt_id) ? "#555555" : "#000000";  
+    var bgcolor = "#111111;";   
+
+    if (!can_player_get_gov(govt_id)) {
+      bgcolor = "#000000; color:#333333;";
+    } else if (requested_gov == govt_id) {
+      bgcolor = "#ff0000; color:#000000;";
+    }
+
+    if (client.conn.playing['government'] == govt_id) {
+      bgcolor = "#ffffff; color:#000000;";
+    } 
     
-    governments_list_html = governments_list_html + "<div style='background-color:" + bgcolor + "' " 
-                  + " onclick='send_player_change_government(" + govt['id'] + ");' "
-                  + ">" + govt['name'] + "</div>";
+    governments_list_html = governments_list_html + "<div style='margin:4px;background-color:" + bgcolor + "' " 
+                  + " onclick='set_req_government(" + govt['id'] + ");' "
+                  + ">" 
+		  + "<img src='/images/" + govt['graphic_str'] + ".png'>"
+		  + govt['name'] + "</div>";
   }
 
   $("#governments_list").html(governments_list_html);
@@ -38,6 +50,26 @@ function update_govt_dialog()
 
 }
 
+
+/**************************************************************************
+   ...
+**************************************************************************/
+function start_revolution()
+{
+  if (requested_gov != -1) {
+    send_player_change_government(requested_gov);
+    requested_gov = -1;
+  }
+}
+
+/**************************************************************************
+   ...
+**************************************************************************/
+function set_req_government(gov_id)
+{
+  requested_gov = gov_id;
+  update_govt_dialog();
+}
 
 /**************************************************************************
  ...
@@ -82,5 +114,28 @@ function government_max_rate(govt_id)
   }
     
           
+
+}
+
+/**************************************************************************
+ ...
+**************************************************************************/
+function can_player_get_gov(govt_id)
+{
+  if (govt_id == 0) {	
+	  return true;
+  } else if (govt_id == 1) {
+	  return true;
+  } else if (govt_id == 2) {
+	  return (player_invention_state(client.conn.playing, 53) == TECH_KNOWN);
+  } else if (govt_id == 3) {
+	  return (player_invention_state(client.conn.playing, 16) == TECH_KNOWN);
+  } else if (govt_id == 4) {
+	  return (player_invention_state(client.conn.playing, 80) == TECH_KNOWN);
+  } else if (govt_id == 5) {
+	  return (player_invention_state(client.conn.playing, 21) == TECH_KNOWN);
+  } else {
+    return false;
+  }
 
 }

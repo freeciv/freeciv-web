@@ -166,6 +166,10 @@ function chatbox_scroll_down () {
 
 function show_dialog_message(title, message) {
 
+  // reset dialog page.
+  $("#dialog").remove();
+  $("<div id='dialog'></div>").appendTo("div#game_page");
+
   $("#dialog").html(message);
   $("#dialog").attr("title", title);
   $("#dialog").dialog({

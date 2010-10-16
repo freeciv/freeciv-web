@@ -17,7 +17,7 @@
 import sys
 import traceback
 from time import gmtime, strftime
-import os
+import os, platform
 import time
 
 _proc_status = '/proc/%d/status' % os.getpid()
@@ -34,6 +34,17 @@ def get_debug_info(civcoms):
   code += "<h3>Process Uptime: " + str(int(time.time() - startTime)) + " s.</h3>";
   current_time = strftime("%Y-%m-%d %H:%M:%S", gmtime());
   code += "<b>Current time:</b><br> " + current_time;
+
+  code += ("<br><br>Python version: %s %s (%s)<br>" % (
+      platform.python_implementation(),
+      platform.python_version(),
+      platform.python_build()[0],
+  ));
+  cpu = ' '.join(platform.processor().split())
+  code += ("Platform: %s %s on '%s' <br>" % (
+      platform.machine(),
+      platform.system(),
+      cpu));
 
 
   try:    
@@ -58,7 +69,6 @@ def get_debug_info(civcoms):
             code += ('File: "%s", line %d, in %s: ' % (filename, lineno, name))
             if line:
                 code += (" <b>%s</b> <br>" % (line.strip()))
-
 
 
   except:

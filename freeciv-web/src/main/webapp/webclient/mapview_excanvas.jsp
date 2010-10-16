@@ -55,6 +55,7 @@
       
       
     <div id="dialog" ></div>
+    <div id="diplomacy_dialog" ></div>
       
       
 

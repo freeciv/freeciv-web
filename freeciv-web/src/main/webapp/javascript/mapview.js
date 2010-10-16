@@ -221,7 +221,7 @@ function mapview_put_tile(pcanvas, tag, canvas_x, canvas_y) {
     return;
   } 
 
-  if (is_canvas_clipping_supported()) {
+  if (is_canvas_clipping_supported() && sprites[tag] != null) {
     pcanvas.drawImage(sprites[tag], canvas_x, canvas_y);
   } else {
     pcanvas.drawImage(tileset_images[tag], canvas_x, canvas_y);

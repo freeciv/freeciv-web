@@ -20,8 +20,8 @@ import time
 
 logger = logging.getLogger("freeciv-proxy");
 
-PINGLIMIT = 10;
-CLEANUP_TIMER = 5;
+PINGLIMIT = 20;
+CLEANUP_TIMER = 8;
 
 class ComCleanup(Thread):
 

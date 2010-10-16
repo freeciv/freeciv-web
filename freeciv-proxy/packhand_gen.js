@@ -8,296 +8,296 @@ function client_handle_packet(p)
     var packet_type = p[i]['packet_type'];
     switch (packet_type) {
 
-    case  "packet_processing_started":
-      handle_packet_processing_started(p[i]);
+    case  "processing_started":
+      handle_processing_started(p[i]);
       break;
 
-    case  "packet_processing_finished":
-      handle_packet_processing_finished(p[i]);
+    case  "processing_finished":
+      handle_processing_finished(p[i]);
       break;
 
-    case  "packet_freeze_hint":
-      handle_packet_freeze_hint(p[i]);
+    case  "freeze_hint":
+      handle_freeze_hint(p[i]);
       break;
 
-    case  "packet_thaw_hint":
-      handle_packet_thaw_hint(p[i]);
+    case  "thaw_hint":
+      handle_thaw_hint(p[i]);
       break;
 
-    case  "packet_server_join_reply":
-      handle_packet_server_join_reply(p[i]);
+    case  "server_join_reply":
+      handle_server_join_reply(p[i]);
       break;
 
-    case  "packet_authentication_req":
-      handle_packet_authentication_req(p[i]);
+    case  "authentication_req":
+      handle_authentication_req(p[i]);
       break;
 
-    case  "packet_server_shutdown":
-      handle_packet_server_shutdown(p[i]);
+    case  "server_shutdown":
+      handle_server_shutdown(p[i]);
       break;
 
-    case  "packet_endgame_report":
-      handle_packet_endgame_report(p[i]);
+    case  "endgame_report":
+      handle_endgame_report(p[i]);
       break;
 
-    case  "packet_tile_info":
-      handle_packet_tile_info(p[i]);
+    case  "tile_info":
+      handle_tile_info(p[i]);
       break;
 
-    case  "packet_game_info":
-      handle_packet_game_info(p[i]);
+    case  "game_info":
+      handle_game_info(p[i]);
       break;
 
-    case  "packet_map_info":
-      handle_packet_map_info(p[i]);
+    case  "map_info":
+      handle_map_info(p[i]);
       break;
 
-    case  "packet_nuke_tile_info":
-      handle_packet_nuke_tile_info(p[i]);
+    case  "nuke_tile_info":
+      handle_nuke_tile_info(p[i]);
       break;
 
-    case  "packet_chat_msg":
-      handle_packet_chat_msg(p[i]);
+    case  "chat_msg":
+      handle_chat_msg(p[i]);
       break;
 
-    case  "packet_city_remove":
-      handle_packet_city_remove(p[i]);
+    case  "city_remove":
+      handle_city_remove(p[i]);
       break;
 
-    case  "packet_city_info":
-      handle_packet_city_info(p[i]);
+    case  "city_info":
+      handle_city_info(p[i]);
       break;
 
-    case  "packet_city_short_info":
-      handle_packet_city_short_info(p[i]);
+    case  "city_short_info":
+      handle_city_short_info(p[i]);
       break;
 
-    case  "packet_city_name_suggestion_info":
-      handle_packet_city_name_suggestion_info(p[i]);
+    case  "city_name_suggestion_info":
+      handle_city_name_suggestion_info(p[i]);
       break;
 
-    case  "packet_city_sabotage_list":
-      handle_packet_city_sabotage_list(p[i]);
+    case  "city_sabotage_list":
+      handle_city_sabotage_list(p[i]);
       break;
 
-    case  "packet_player_remove":
-      handle_packet_player_remove(p[i]);
+    case  "player_remove":
+      handle_player_remove(p[i]);
       break;
 
-    case  "packet_player_info":
-      handle_packet_player_info(p[i]);
+    case  "player_info":
+      handle_player_info(p[i]);
       break;
 
-    case  "packet_player_attribute_chunk":
-      handle_packet_player_attribute_chunk(p[i]);
+    case  "player_attribute_chunk":
+      handle_player_attribute_chunk(p[i]);
       break;
 
-    case  "packet_unit_remove":
-      handle_packet_unit_remove(p[i]);
+    case  "unit_remove":
+      handle_unit_remove(p[i]);
       break;
 
-    case  "packet_unit_info":
-      handle_packet_unit_info(p[i]);
+    case  "unit_info":
+      handle_unit_info(p[i]);
       break;
 
-    case  "packet_unit_short_info":
-      handle_packet_unit_short_info(p[i]);
+    case  "unit_short_info":
+      handle_unit_short_info(p[i]);
       break;
 
-    case  "packet_unit_combat_info":
-      handle_packet_unit_combat_info(p[i]);
+    case  "unit_combat_info":
+      handle_unit_combat_info(p[i]);
       break;
 
-    case  "packet_ruleset_specialist":
-      handle_packet_ruleset_specialist(p[i]);
+    case  "ruleset_specialist":
+      handle_ruleset_specialist(p[i]);
       break;
 
-    case  "packet_unit_diplomat_answer":
-      handle_packet_unit_diplomat_answer(p[i]);
+    case  "unit_diplomat_answer":
+      handle_unit_diplomat_answer(p[i]);
       break;
 
-    case  "packet_diplomacy_init_meeting":
-      handle_packet_diplomacy_init_meeting(p[i]);
+    case  "diplomacy_init_meeting":
+      handle_diplomacy_init_meeting(p[i]);
       break;
 
-    case  "packet_diplomacy_cancel_meeting":
-      handle_packet_diplomacy_cancel_meeting(p[i]);
+    case  "diplomacy_cancel_meeting":
+      handle_diplomacy_cancel_meeting(p[i]);
       break;
 
-    case  "packet_diplomacy_create_clause":
-      handle_packet_diplomacy_create_clause(p[i]);
+    case  "diplomacy_create_clause":
+      handle_diplomacy_create_clause(p[i]);
       break;
 
-    case  "packet_diplomacy_remove_clause":
-      handle_packet_diplomacy_remove_clause(p[i]);
+    case  "diplomacy_remove_clause":
+      handle_diplomacy_remove_clause(p[i]);
       break;
 
-    case  "packet_diplomacy_accept_treaty":
-      handle_packet_diplomacy_accept_treaty(p[i]);
+    case  "diplomacy_accept_treaty":
+      handle_diplomacy_accept_treaty(p[i]);
       break;
 
-    case  "packet_page_msg":
-      handle_packet_page_msg(p[i]);
+    case  "page_msg":
+      handle_page_msg(p[i]);
       break;
 
-    case  "packet_conn_info":
-      handle_packet_conn_info(p[i]);
+    case  "conn_info":
+      handle_conn_info(p[i]);
       break;
 
-    case  "packet_conn_ping_info":
-      handle_packet_conn_ping_info(p[i]);
+    case  "conn_ping_info":
+      handle_conn_ping_info(p[i]);
       break;
 
-    case  "packet_conn_ping":
-      handle_packet_conn_ping(p[i]);
+    case  "conn_ping":
+      handle_conn_ping(p[i]);
       break;
 
-    case  "packet_end_phase":
-      handle_packet_end_phase(p[i]);
+    case  "end_phase":
+      handle_end_phase(p[i]);
       break;
 
-    case  "packet_start_phase":
-      handle_packet_start_phase(p[i]);
+    case  "start_phase":
+      handle_start_phase(p[i]);
       break;
 
-    case  "packet_new_year":
-      handle_packet_new_year(p[i]);
+    case  "new_year":
+      handle_new_year(p[i]);
       break;
 
-    case  "packet_spaceship_info":
-      handle_packet_spaceship_info(p[i]);
+    case  "spaceship_info":
+      handle_spaceship_info(p[i]);
       break;
 
-    case  "packet_ruleset_unit":
-      handle_packet_ruleset_unit(p[i]);
+    case  "ruleset_unit":
+      handle_ruleset_unit(p[i]);
       break;
 
-    case  "packet_ruleset_game":
-      handle_packet_ruleset_game(p[i]);
+    case  "ruleset_game":
+      handle_ruleset_game(p[i]);
       break;
 
-    case  "packet_ruleset_government_ruler_title":
-      handle_packet_ruleset_government_ruler_title(p[i]);
+    case  "ruleset_government_ruler_title":
+      handle_ruleset_government_ruler_title(p[i]);
       break;
 
-    case  "packet_ruleset_tech":
-      handle_packet_ruleset_tech(p[i]);
+    case  "ruleset_tech":
+      handle_ruleset_tech(p[i]);
       break;
 
-    case  "packet_ruleset_government":
-      handle_packet_ruleset_government(p[i]);
+    case  "ruleset_government":
+      handle_ruleset_government(p[i]);
       break;
 
-    case  "packet_ruleset_terrain_control":
-      handle_packet_ruleset_terrain_control(p[i]);
+    case  "ruleset_terrain_control":
+      handle_ruleset_terrain_control(p[i]);
       break;
 
-    case  "packet_ruleset_nation":
-      handle_packet_ruleset_nation(p[i]);
+    case  "ruleset_nation":
+      handle_ruleset_nation(p[i]);
       break;
 
-    case  "packet_ruleset_city":
-      handle_packet_ruleset_city(p[i]);
+    case  "ruleset_city":
+      handle_ruleset_city(p[i]);
       break;
 
-    case  "packet_ruleset_building":
-      handle_packet_ruleset_building(p[i]);
+    case  "ruleset_building":
+      handle_ruleset_building(p[i]);
       break;
 
-    case  "packet_ruleset_terrain":
-      handle_packet_ruleset_terrain(p[i]);
+    case  "ruleset_terrain":
+      handle_ruleset_terrain(p[i]);
       break;
 
-    case  "packet_ruleset_control":
-      handle_packet_ruleset_control(p[i]);
+    case  "ruleset_control":
+      handle_ruleset_control(p[i]);
       break;
 
-    case  "packet_single_want_hack_reply":
-      handle_packet_single_want_hack_reply(p[i]);
+    case  "single_want_hack_reply":
+      handle_single_want_hack_reply(p[i]);
       break;
 
-    case  "packet_game_load":
-      handle_packet_game_load(p[i]);
+    case  "game_load":
+      handle_game_load(p[i]);
       break;
 
-    case  "packet_options_settable_control":
-      handle_packet_options_settable_control(p[i]);
+    case  "options_settable_control":
+      handle_options_settable_control(p[i]);
       break;
 
-    case  "packet_options_settable":
-      handle_packet_options_settable(p[i]);
+    case  "options_settable":
+      handle_options_settable(p[i]);
       break;
 
-    case  "packet_ruleset_choices":
-      handle_packet_ruleset_choices(p[i]);
+    case  "ruleset_choices":
+      handle_ruleset_choices(p[i]);
       break;
 
-    case  "packet_ruleset_nation_groups":
-      handle_packet_ruleset_nation_groups(p[i]);
+    case  "ruleset_nation_groups":
+      handle_ruleset_nation_groups(p[i]);
       break;
 
-    case  "packet_ruleset_unit_class":
-      handle_packet_ruleset_unit_class(p[i]);
+    case  "ruleset_unit_class":
+      handle_ruleset_unit_class(p[i]);
       break;
 
-    case  "packet_ruleset_base":
-      handle_packet_ruleset_base(p[i]);
+    case  "ruleset_base":
+      handle_ruleset_base(p[i]);
       break;
 
-    case  "packet_ruleset_effect":
-      handle_packet_ruleset_effect(p[i]);
+    case  "ruleset_effect":
+      handle_ruleset_effect(p[i]);
       break;
 
-    case  "packet_ruleset_effect_req":
-      handle_packet_ruleset_effect_req(p[i]);
+    case  "ruleset_effect_req":
+      handle_ruleset_effect_req(p[i]);
       break;
 
-    case  "packet_ruleset_resource":
-      handle_packet_ruleset_resource(p[i]);
+    case  "ruleset_resource":
+      handle_ruleset_resource(p[i]);
       break;
 
-    case  "packet_freeze_client":
-      handle_packet_freeze_client(p[i]);
+    case  "freeze_client":
+      handle_freeze_client(p[i]);
       break;
 
-    case  "packet_thaw_client":
-      handle_packet_thaw_client(p[i]);
+    case  "thaw_client":
+      handle_thaw_client(p[i]);
       break;
 
-    case  "packet_begin_turn":
-      handle_packet_begin_turn(p[i]);
+    case  "begin_turn":
+      handle_begin_turn(p[i]);
       break;
 
-    case  "packet_end_turn":
-      handle_packet_end_turn(p[i]);
+    case  "end_turn":
+      handle_end_turn(p[i]);
       break;
 
-    case  "packet_scenario_info":
-      handle_packet_scenario_info(p[i]);
+    case  "scenario_info":
+      handle_scenario_info(p[i]);
       break;
 
-    case  "packet_vote_new":
-      handle_packet_vote_new(p[i]);
+    case  "vote_new":
+      handle_vote_new(p[i]);
       break;
 
-    case  "packet_vote_update":
-      handle_packet_vote_update(p[i]);
+    case  "vote_update":
+      handle_vote_update(p[i]);
       break;
 
-    case  "packet_vote_remove":
-      handle_packet_vote_remove(p[i]);
+    case  "vote_remove":
+      handle_vote_remove(p[i]);
       break;
 
-    case  "packet_vote_resolve":
-      handle_packet_vote_resolve(p[i]);
+    case  "vote_resolve":
+      handle_vote_resolve(p[i]);
       break;
 
-    case  "packet_edit_object_created":
-      handle_packet_edit_object_created(p[i]);
+    case  "edit_object_created":
+      handle_edit_object_created(p[i]);
       break;
 
-    case  "packet_connect_msg":
-      handle_packet_connect_msg(p[i]);
+    case  "connect_msg":
+      handle_connect_msg(p[i]);
       break;
  
     }

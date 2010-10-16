@@ -148,7 +148,7 @@ class CivCom(Thread):
         self.socket.sendall(civ_packet)
         return True;
       except:
-        send_error_to_client("Proxy unable to communicate with civserver.");
+        self.send_error_to_client("Proxy unable to communicate with civserver.");
         return False;
 
     else:
@@ -194,7 +194,7 @@ class CivCom(Thread):
     if (logger.isEnabledFor(logging.ERROR)):
       logger.error(message);
     msg = {};
-    msg['packet_type'] = "packet_connect_msg";
+    msg['packet_type'] = "connect_msg";
     msg['message'] = message;
     self.civwebserver.buffer_send(msg, self.key);
       

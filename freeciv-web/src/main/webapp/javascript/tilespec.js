@@ -713,7 +713,13 @@ function get_city_sprite(pcity)
 
   var city_walls = pcity['walls'] ? "wall" : "city"; 
 
-  return {"key" : city_rule['graphic'] + "_" + city_walls + "_" + size, 
+  var gfx = city_rule['graphic'];
+  if (gfx.length <= 2) {
+    /* FIXME: This is a hack, because sometimes the 'graphic' field contains garbage. */
+    gfx = city_rule['oceanic_graphic'];
+  }
+
+  return {"key" :  gfx + "_" + city_walls + "_" + size, 
           "offset_x": 0, "offset_y" : -unit_offset_y};
 }
 
@@ -914,6 +920,48 @@ function get_nation_flag_sprite(pnation)
   var tag = "f." + pnation['graphic_str'];
   
   if (tileset[tag] == null) return null;
+  
+  var tileset_file_no = tileset[tag][0];
+  var tileset_x = tileset[tag][1];
+  var tileset_y = tileset[tag][2];
+  var width = tileset[tag][3];
+  var height = tileset[tag][4];
+  return {"tag": tag, 
+            "image-src" : "/tileset/freeciv-web-tileset-" + tileset_file_no + ".png",
+            "tileset-x" : tileset_x,
+            "tileset-y" : tileset_y,
+            "width" : width,
+            "height" : height
+            };
+}  
+
+/****************************************************************************
+ ...
+****************************************************************************/
+function get_treaty_agree_thumb_up()
+{
+  var tag = "treaty.agree_thumb_up";
+  
+  var tileset_file_no = tileset[tag][0];
+  var tileset_x = tileset[tag][1];
+  var tileset_y = tileset[tag][2];
+  var width = tileset[tag][3];
+  var height = tileset[tag][4];
+  return {"tag": tag, 
+            "image-src" : "/tileset/freeciv-web-tileset-" + tileset_file_no + ".png",
+            "tileset-x" : tileset_x,
+            "tileset-y" : tileset_y,
+            "width" : width,
+            "height" : height
+            };
+}  
+
+/****************************************************************************
+ ...
+****************************************************************************/
+function get_treaty_disagree_thumb_down()
+{
+  var tag = "treaty.disagree_thumb_down";
   
   var tileset_file_no = tileset[tag][0];
   var tileset_x = tileset[tag][1];

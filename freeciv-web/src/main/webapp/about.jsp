@@ -2,7 +2,7 @@
 
 <h2>About Freeciv.net</h2>
 <span>
-Freeciv.net is an open source project, released under the <a href="http://www.gnu.org/licenses/gpl.html">GNU General Public License</a>.
+Freeciv.net is an open source project, released under the <a href="http://www.gnu.org/licenses/agpl-3.0.html">GNU Affero General Public License 3.0 or later</a>.
 The project is a fork of the C server from Freeciv.org, which has origins back to 1996. The idea of creating a version for Freeciv 
 which would be playable online in a browser came about some time in 2007, and this project has evolved into what it is now since then.
 <br><br>

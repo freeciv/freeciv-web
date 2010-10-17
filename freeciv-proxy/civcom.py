@@ -185,8 +185,8 @@ class CivCom(Thread):
     else:
       try:
         result = json.dumps(self.send_buffer, separators=(',',':'), allow_nan=False);
-        del self.send_buffer[:];
       finally:
+        del self.send_buffer[:];
         self.lock.release();
     return result;
 

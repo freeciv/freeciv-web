@@ -3,4 +3,5 @@ set autotoggle 1
 set timeout 60
 set saveturns 0
 set size 3
+set aifill 8
 metamessage New Freeciv.net Singleplayer Game

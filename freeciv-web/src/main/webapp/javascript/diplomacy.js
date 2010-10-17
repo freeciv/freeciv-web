@@ -76,7 +76,6 @@ function accept_treaty_req()
 	         "counterpart" : active_diplomacy_meeting_id}];
   send_request (JSON.stringify(packet));
 
-  //setTimeout("refresh_diplomacy_request_queue();", 1000);
 }
 
 /**************************************************************************
@@ -137,16 +136,10 @@ function cancel_meeting_req()
 	         "counterpart" : active_diplomacy_meeting_id}];
   send_request (JSON.stringify(packet));
 
-  //setTimeout("refresh_diplomacy_request_queue();", 1000);
 }
 
 /**************************************************************************
  ...
- PACKET_DIPLOMACY_CREATE_CLAUSE_REQ=77;cs,dsend
-  PLAYER counterpart, giver;
-  CLAUSE type;
-  UINT32 value;
-
 **************************************************************************/
 function create_clause_req(giver, type, value)
 {
@@ -181,19 +174,21 @@ function cancel_meeting(counterpart)
 **************************************************************************/
 function show_diplomacy_clauses()
 {
-  var clauses = diplomacy_clause_map[active_diplomacy_meeting_id];
-  var diplo_html = "";
-  for (var i = 0; i < clauses.length; i++) {
-    var clause = clauses[i];
-    var diplo_str = client_diplomacy_clause_string(clause['counterpart'], 
+  if (active_diplomacy_meeting_id != null) {
+    var clauses = diplomacy_clause_map[active_diplomacy_meeting_id];
+    var diplo_html = "";
+    for (var i = 0; i < clauses.length; i++) {
+      var clause = clauses[i];
+      var diplo_str = client_diplomacy_clause_string(clause['counterpart'], 
  		          clause['giver'],
 		  	  clause['type'],
 			  clause['value']);
-    diplo_html += "<a href='#' onclick='remove_clause_req(" + i + ");'>" + diplo_str + "</a><br>";
+      diplo_html += "<a href='#' onclick='remove_clause_req(" + i + ");'>" + diplo_str + "</a><br>";
 	
+    }
+  
+    $("#diplomacy_messages").html(diplo_html);
   }
-
- $("#diplomacy_messages").html(diplo_html);
 
 }
 
@@ -452,7 +447,7 @@ function create_diplomacy_dialog(counterpart) {
   $("#diplomacy_dialog").dialog({
 			bgiframe: true,
 			modal: false,
-			width: "40%",
+			width: "50%",
 			buttons: {
 				"Accept treaty": function() {
 				        accept_treaty_req();

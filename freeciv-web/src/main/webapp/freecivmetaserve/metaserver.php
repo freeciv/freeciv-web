@@ -411,7 +411,7 @@ if ( isset($port) ) {
         if ( $nr > 0 ) {
           print "<p><div><table style=\"width: 60%;\">\n";
           print "<tr id='meta_header'><th class=\"left\">Leader</th><th>Nation</th>";
-          print "<th>User</th><th>Type</th><th>Host</th></tr>\n";
+          print "<th>User</th><th>Type</th></tr>\n";
           for ( $inx = 0; $inx < $nr; $inx++ ) {
             $row = fcdb_fetch_array($res, $inx);
             print "<tr id='meta_row'><td class=\"left\">";
@@ -422,8 +422,6 @@ if ( isset($port) ) {
             print db2html($row["user"]);
             print "</td><td>";
             print db2html($row["type"]);
-            print "</td><td>";
-            print db2html($row["host"]);
             print "</td></tr>\n";
           }
           print "</table></div><p>\n";
@@ -459,23 +457,42 @@ if ( isset($port) ) {
         print "<tr id='meta_header'><th class=\"left\">Action:</th><th>Server ID:</th>";
         print "<th>State</th><th>Players</th>";
         print "<th style='width:45%;'>Topic</th><th>Last Update</th>";
-        print "<th>Players Available</th>\n";
         print "<th>Info:</th></tr>";
         for ( $inx = 0; $inx < $nr; $inx++ ) {
-          $row = fcdb_fetch_array($res, $inx);
-          print "<tr id='meta_row'><td class=\"left\">";
-          print "<a href=\"/civclientlauncher?civserverport=" . db2html($row["port"]) . "&civserverhost=" . db2html($row["host"]) . "\">";
-          //print db2html($row["port"]);
-          print "<img src='/images/join.png' border='0' title='Join this game now'>";
-          print "</a>";
+	  $row = fcdb_fetch_array($res, $inx);
+          $stmt="select * from players where hostport=\"".$row['host'].":".$row['port']."\"";
+	  $res1 = fcdb_exec($stmt);
+	  $noplayers = fcdb_num_rows($res1);
+          if ( $noplayers > 0 ) 
+            print "<tr id='meta_row_active'><td class=\"left\">";
+	  else 
+            print "<tr id='meta_row'><td class=\"left\">";
+
+	  $mystate = db2html($row["state"]);
+
+	  
+          if ($mystate != "Running") {
+           print "<a href=\"/civclientlauncher?civserverport=" . db2html($row["port"]) . "&civserverhost=" . db2html($row["host"]) . "\">";
+           print "<img src='/images/join.png' border='0' title='Join this game now'>";
+	   print "</a>";
+	  } else {
+	   print "<a href=\"/civclientlauncher?action=observe&civserverport=" . db2html($row["port"]) . "&civserverhost=" . db2html($row["host"]) . "\">";
+           print "<img src='/images/observe.png' border='0' title='Observe this game now'>";
+           print "</a>";
+	  }
+
           print "</td><td>";
 	  	  print db2html($row["port"]);
-          print "</td><td>";
-          print db2html($row["state"]);
-          print "</td><td>";
-          $stmt="select * from players where hostport=\"".$row['host'].":".$row['port']."\"";
-          $res1 = fcdb_exec($stmt);
-          print fcdb_num_rows($res1);
+          print "</td>";
+          if ($mystate == "Running") {
+  	    print "<td style='color: orange;'>";
+	  } else {
+  	    print "<td>";
+  	  }
+	  print $mystate;
+
+	  print "</td><td>";
+          print $noplayers;
           print "</td><td style=\"width: 30%\" title='To change the message in the topic, use the command:  /metamessage your-new-message in the game.'>";
           print db2html($row["message"]);
           print "</td><td>";
@@ -485,8 +502,6 @@ if ( isset($port) ) {
             $last_update = sprintf("%sm", floor($time_sec/60));
           }
           print $last_update;
-          print "</td><td>";
-          print db2html($row["available"]);
 	  	  print "</td>"
 	  	  print "<td>";
           print "<a href=\"/freecivmetaserve/metaserver.php?server_port=" . db2html($row["host"]) . ":" . db2html($row["port"]) . "\">";
@@ -564,7 +579,9 @@ if ( isset($port) ) {
 
 
 <br><br>
-Discuss and propose new multiplayer games in <a href="/forum/viewforum.php?f=2">the multiplayer forum</a> on Freeciv.net.
+Discuss and propose new multiplayer games in <a href="/forum/viewforum.php?f=2">the multiplayer forum</a> on Freeciv.net.<br>
+Freeciv.net also hosts servers on <a href="http://meta.freeciv.org/">meta.freeciv.org</a> for the desktop version of the game.
+
 <br><br>
 
 

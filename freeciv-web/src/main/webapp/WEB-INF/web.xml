@@ -17,7 +17,13 @@
       <filter-name>Compress</filter-name>
       <url-pattern>/javascript-compressed*</url-pattern>      
    </filter-mapping>
-  
+
+  <filter-mapping>
+      <filter-name>Compress</filter-name>
+      <url-pattern>/stylesheets*</url-pattern>      
+   </filter-mapping>
+
+
  <!-- Civclient launcher servlet -->
   <servlet>
     <servlet-name>CivclientLauncher</servlet-name>

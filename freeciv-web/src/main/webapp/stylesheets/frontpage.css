@@ -231,6 +231,10 @@ div#branding .gBrandingText {
 	background-color: #222222;
 }
 
+#meta_row_active {
+	background-color: #555555;
+	font-weight: bold;
+}
 
 .login_text_input {
   width: 140px;

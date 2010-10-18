@@ -21,20 +21,20 @@
   </div>
 <% } %>
 
-<div class="main_menu_buttons" onmouseover="help_single();">
-  <a href="/civclientlauncher?action=new">Start new single-player game</a>
+<div onmouseover="help_single();">
+  <a class='button' href="/civclientlauncher?action=new">Start single-player game</a>
 </div>
 
-<div class="main_menu_buttons" onmouseover="help_multi();">
-  <a href="/freecivmetaserve/metaserver.php" >Join multiplayer/tournament game</a><br>
+<div onmouseover="help_multi();">
+  <a class="button" href="/freecivmetaserve/metaserver.php" >Multiplayer game</a><br>
 </div>
 
-<div class="main_menu_buttons" onmouseover="help_scenario();">
-  <a href="/wireframe.jsp?do=scenarios">Start scenario game</a>
+<div onmouseover="help_scenario();">
+  <a class="button" href="/wireframe.jsp?do=scenarios">Start scenario game</a>
 </div>
 
-<div class="main_menu_buttons" onmouseover="help_load();">
-  <a href="/wireframe.jsp?do=load">Load saved game</a>
+<div onmouseover="help_load();">
+  <a class="button" href="/wireframe.jsp?do=load">Load saved game</a>
 </div>
 <br>
 </center>
@@ -44,10 +44,8 @@
 <div id="iewarning">
  <b>Internet Explorer detected:</b><br>
  Your web-browser is not optimal for this game. Internet Explorer doesn't support
- the HTML5 canvas element yet. It is recommended to get <a href="http://www.apple.com/safari/">Safari</a>,
+ the HTML5 canvas element yet. Internet Explorer 9 will support Freeciv.net! It is recommended to get <a href="http://www.apple.com/safari/">Safari</a>,
  <a href='http://www.mozilla.com/'>Firefox</a> or <a href="http://www.google.com/chrome">Google Chrome</a> instead.
- If you want to continue using Internet Explorer, then it is highly recommended to install Google Chrome Frame
- for Internet Explorer.
  <br>
 
 <div id="placeholder"></div>
@@ -117,16 +115,10 @@ have clicked the "start game" button.
 </div>
 
 
-	<div id="ad_bottom">
-		<script type="text/javascript"><!--
-		google_ad_client = "pub-4977952202639520";
-		/* 728x90, opprettet 19.12.09 for freeciv.net */
-		google_ad_slot = "9174006131";
-		google_ad_width = 728;
-		google_ad_height = 90;
-		//-->
-		</script>
-		<script type="text/javascript"
-		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-		</script>
-	</div>
+
+<script>
+	$( ".button").button();
+	$( ".button").css("width", "220px");
+	$( ".button").css("margin", "10px");
+</script>
+

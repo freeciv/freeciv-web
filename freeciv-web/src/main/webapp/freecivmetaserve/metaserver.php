@@ -321,6 +321,7 @@ if ( isset($port) ) {
 <title>Freeciv.net - online multiplayer strategy game</title>
 
 <link href="/stylesheets/frontpage.css" rel="stylesheet" type="text/css" />
+<link type="text/css" href="/stylesheets/dark-hive-1.8.5/jquery-ui-1.8.5.custom.css" rel="stylesheet" />
 
 <?php if ($_COOKIE["facebook_mode"] == "true") { ?>
   <link href="/stylesheets/fb_frontpage.css" rel="stylesheet" type="text/css" />
@@ -329,7 +330,10 @@ if ( isset($port) ) {
 
 <link rel="shortcut icon" href="/images/freeciv-forever-icon.png" />
 
-<script type="text/javascript" src="/javascript/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="/javascript/jquery-1.4.3.min.js"></script>
+<script type="text/javascript" src="/javascript-compressed/jquery-ui-1.8.5.custom.min.js"></script>
+
+
 
 </head>
 <body link="white" vlink="white" alink="white" bgcolor="black">
@@ -377,11 +381,11 @@ if ( isset($port) ) {
         $row = fcdb_fetch_array($res, 0);
         
         if ($row["state"] == "Pregame") {
-          print "<div><a href='/civclientlauncher?civserverport=" . db2html($port) . "&amp;civserverhost=" . db2html($host)
-             . "'><img border='0' title='Join this game now' src='/images/join.png'/></a> <b>You can join this game now.</b></div>";
+          print "<div><a class='button' href='/civclientlauncher?civserverport=" . db2html($port) . "&amp;civserverhost=" . db2html($host)
+             . "'>Join</a> <b>You can join this game now.</b></div>";
 	}
-        print "<div><a href='/civclientlauncher?action=observe&civserverport=" . db2html($port) . "&amp;civserverhost=" . db2html($host)
-             . "'><img border='0' title='Join this game now' src='/images/observe.png'/></a> <b>You can observe this game now.</b></div>";
+        print "<div><a class='button' href='/civclientlauncher?action=observe&civserverport=" . db2html($port) . "&amp;civserverhost=" . db2html($host)
+             . "'>Observe</a> <b>You can observe this game now.</b></div>";
 
         print "<br/><br/>";
         $msg = db2html($row["message"]);
@@ -443,7 +447,7 @@ if ( isset($port) ) {
             print "</td></tr>\n";
           }
           print "</table></div>";
-          print "<P><a href=\"".$_SERVER["PHP_SELF"]."\">Return to games list</a>";
+          print "<P><a class='button' href=\"".$_SERVER["PHP_SELF"]."\">Return to games list</a>";
         }
 
       }
@@ -472,12 +476,12 @@ if ( isset($port) ) {
 
 	  
           if ($mystate != "Running") {
-           print "<a href=\"/civclientlauncher?civserverport=" . db2html($row["port"]) . "&civserverhost=" . db2html($row["host"]) . "\">";
-           print "<img src='/images/join.png' border='0' title='Join this game now'>";
+           print "<a class='button' href=\"/civclientlauncher?civserverport=" . db2html($row["port"]) . "&civserverhost=" . db2html($row["host"]) . "\">";
+           print "Play";
 	   print "</a>";
 	  } else {
-	   print "<a href=\"/civclientlauncher?action=observe&civserverport=" . db2html($row["port"]) . "&civserverhost=" . db2html($row["host"]) . "\">";
-           print "<img src='/images/observe.png' border='0' title='Observe this game now'>";
+	   print "<a class='button' href=\"/civclientlauncher?action=observe&civserverport=" . db2html($row["port"]) . "&civserverhost=" . db2html($row["host"]) . "\">";
+           print "Observe";
            print "</a>";
 	  }
 
@@ -504,8 +508,8 @@ if ( isset($port) ) {
           print $last_update;
 	  	  print "</td>"
 	  	  print "<td>";
-          print "<a href=\"/freecivmetaserve/metaserver.php?server_port=" . db2html($row["host"]) . ":" . db2html($row["port"]) . "\">";
-	  	  print "<img src='/images/info.png' border='0'>";
+          print "<a class='button' href=\"/freecivmetaserve/metaserver.php?server_port=" . db2html($row["host"]) . ":" . db2html($row["port"]) . "\">";
+	  	  print "Info";
           print "</a>";
           print "</td>";
 	  	  print "</tr>\n";
@@ -533,9 +537,9 @@ if ( isset($port) ) {
         for ( $inx = 0; $inx < $nr; $inx++ ) {
           $row = fcdb_fetch_array($res, $inx);
           print "<tr id='meta_row'><td class=\"left\">";
-          print "<a href=\"/civclientlauncher?action=observe&civserverport=" . db2html($row["port"]) . "&civserverhost=" . db2html($row["host"]) . "\">";
+          print "<a class='button' href=\"/civclientlauncher?action=observe&civserverport=" . db2html($row["port"]) . "&civserverhost=" . db2html($row["host"]) . "\">";
           //print db2html($row["port"]);
-          print "<img src='/images/observe.png' border='0' title='Observe this game now'>";
+          print "Observe";
           print "</a>";
           print "</td><td>";
 	  	  print db2html($row["port"]);
@@ -558,8 +562,8 @@ if ( isset($port) ) {
           print db2html($row["player"]);
 	  	  print "</td>"
 	  	  print "<td>";
-          print "<a href=\"/freecivmetaserve/metaserver.php?server_port=" . db2html($row["host"]) . ":" . db2html($row["port"]) . "\">";
-	  	  print "<img src='/images/info.png' border='0'>";
+          print "<a class='button' href=\"/freecivmetaserve/metaserver.php?server_port=" . db2html($row["host"]) . ":" . db2html($row["port"]) . "\">";
+	  	  print "Info";
           print "</a>";
           print "</td>";
 	  	  print "</tr>\n";
@@ -584,6 +588,20 @@ Freeciv.net also hosts servers on <a href="http://meta.freeciv.org/">meta.freeci
 
 <br><br>
 
+
+<div id="ad_bottom">
+	<script type="text/javascript"><!--
+	google_ad_client = "pub-4977952202639520";
+	/* 728x90, opprettet 19.12.09 for freeciv.net */
+	google_ad_slot = "9174006131";
+	google_ad_width = 728;
+	google_ad_height = 90;
+	//-->
+	</script>
+	<script type="text/javascript"
+	src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+	</script>
+</div>
 
 
 <br />
@@ -620,6 +638,11 @@ document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.
 var pageTracker = _gat._getTracker("UA-5588010-1");
 pageTracker._trackPageview();
 </script>
+
+<script>
+		$( ".button").button();
+</script>
+
 
 
 </body>

@@ -36,7 +36,7 @@ if (savegames.size() == 0) {
     
 %>
 <tr style="background-color: #222222;"><td>
-<a href="/civclientlauncher?action=load&load=<%= savename %>">
+<a class="button" href="/civclientlauncher?action=load&load=<%= savename %>">
 
 <%= shortname %></a>
 </td><td>
@@ -46,3 +46,10 @@ if (savegames.size() == 0) {
 </table>
 
 </div>
+
+<script>
+	$( ".button").button();
+	$( ".button").css("width", "220px");
+	$( ".button").css("margin", "10px");
+</script>
+

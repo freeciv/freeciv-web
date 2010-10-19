@@ -21,11 +21,7 @@ function network_init()
 {
   civwebserver_url = civwebserver_url_base + "?p=" + civserverport + "&h=" + civserverhost + "&u=" + username;
 
-  if (jQuery.browser.msie) {
-    syncTimerId = setInterval("sync_civclient()", 200);
-  } else {
-    syncTimerId = setInterval("sync_civclient()", 30);
-  }
+  syncTimerId = setInterval("sync_civclient()", 20);
   
  
  $(document).ajaxComplete(function(){ 
@@ -70,7 +66,7 @@ function sync_civclient()
       }
       
    }
-)
+  );
 
 
 }

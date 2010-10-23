@@ -709,6 +709,7 @@ PACKET_PLAYER_INFO=39;sc
   UINT16 bulbs_last_turn;
   UINT32 bulbs_researched;
   UINT32 techs_researched;
+  UINT32 current_research_cost;  
   UINT8 researching;
   UINT16 science_cost;
 

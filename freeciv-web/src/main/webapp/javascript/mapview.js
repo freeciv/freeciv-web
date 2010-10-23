@@ -36,21 +36,10 @@ var fullfog = [];
 /**************************************************************************
   ...
 **************************************************************************/
-function initCanvas(canvas) {
-        if (window.G_vmlCanvasManager && window.attachEvent && !window.opera) {
-          canvas = window.G_vmlCanvasManager.initElement(canvas);
-        }
-        return canvas;
-}
-
-
-/**************************************************************************
-  ...
-**************************************************************************/
 function init_mapview()
 {
  
-  mapview_canvas = initCanvas(document.getElementById('canvas'));
+  mapview_canvas = document.getElementById('canvas');
   mapview_canvas_ctx = mapview_canvas.getContext("2d");
 
   if ("mozImageSmoothingEnabled" in mapview_canvas_ctx) {
@@ -357,7 +346,7 @@ function update_select_unit_dialog(punits)
 **************************************************************************/
 function set_city_mapview_active()
 {
-  mapview_canvas = initCanvas(document.getElementById('city_canvas'));
+  mapview_canvas = document.getElementById('city_canvas');
   mapview_canvas_ctx = mapview_canvas.getContext("2d");
      
   if (!has_canvas_text_support) {
@@ -378,7 +367,7 @@ function set_city_mapview_active()
 **************************************************************************/
 function set_default_mapview_active()
 {
-  mapview_canvas = initCanvas(document.getElementById('canvas'));
+  mapview_canvas = document.getElementById('canvas');
   mapview_canvas_ctx = mapview_canvas.getContext("2d");
     
   if (!has_canvas_text_support) {
@@ -393,4 +382,6 @@ function set_default_mapview_active()
   }
   update_map_canvas_full();
   chatbox_scroll_down();
+
+  tech_dialog_active = false;
 }

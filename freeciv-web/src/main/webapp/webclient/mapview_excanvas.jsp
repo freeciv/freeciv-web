@@ -13,7 +13,7 @@
 			    <div id="freeciv_logo" style="cursor:pointer;cursor:hand" onclick="window.open('http://www.freeciv.net/', '_new');"></div>
 				<li id="map_tab"><a href="#tabs-map" onclick="set_default_mapview_active();">Map</a></li>
 				<li id="civ_tab"><a href="#tabs-civ" onclick="update_rates_dialog(); update_govt_dialog();">Government</a></li>
-				<li><a href="#tabs-tec" onclick="update_tech_screen();">Technologies</a></li>
+				<li><a id="tech_tab_item" href="#tabs-tec" onclick="update_tech_screen();">Technologies</a></li>
 				<li><a href="#tabs-nat" onclick="update_nation_screen();">Nations</a></li>
 				<li style="display: none;"><a href="#tabs-cit">City</a></li>
 				<li id="opt_tab"><a href="#tabs-opt">Options</a></li>

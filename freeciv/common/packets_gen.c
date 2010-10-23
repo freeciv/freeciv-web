@@ -6135,6 +6135,12 @@ static struct packet_player_info *receive_packet_player_info_100(struct connecti
   {
     int readin;
   
+    dio_get_uint32(&din, &readin);
+    real_packet->current_research_cost = readin;
+  }
+  {
+    int readin;
+  
     dio_get_uint8(&din, &readin);
     real_packet->researching = readin;
   }
@@ -6256,6 +6262,7 @@ static int send_packet_player_info_100(struct connection *pc, const struct packe
   dio_put_uint32(&dout, real_packet->bulbs_last_turn);
   dio_put_uint32(&dout, real_packet->bulbs_researched);
   dio_put_uint32(&dout, real_packet->techs_researched);
+  dio_put_uint32(&dout, real_packet->current_research_cost);
   dio_put_uint8(&dout, real_packet->researching);
   dio_put_uint32(&dout, real_packet->science_cost);
   dio_put_uint32(&dout, real_packet->future_tech);

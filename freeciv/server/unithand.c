@@ -1409,7 +1409,7 @@ bool unit_move_handling(struct unit *punit, struct tile *pdesttile,
       notify_player(pplayer, punit->tile, E_BAD_COMMAND,
                     FTC_SERVER_INFO, NULL,
                     _("You must declare war on %s first.  Try using "
-                      "players dialog (F3)."),
+                      "players dialog."),
                     victim == NULL
                     ? player_name(city_owner(pcity))
                     : player_name(unit_owner(victim)));

@@ -13,8 +13,10 @@
 
 
 var techs = {};
+var techcoststyle1 = {};
 
 var is_tech_tree_init = false;
+var tech_dialog_active = false;
 
 var tech_xscale = 1.2;
 
@@ -61,7 +63,12 @@ var A_LAST_REAL = A_UNKNOWN;
 
 var  A_NEVER = null;
 
+var tech_canvas = null;
+var tech_canvas_ctx = null;
 
+var tech_item_width = 208;
+var tech_item_height = 52;
+var maxleft = 0;
 
 /**************************************************************************
   Returns state of the tech for current pplayer.
@@ -93,110 +100,50 @@ function player_invention_state(pplayer, tech_id)
   }
 }
 
+/**************************************************************************
+ ...
+**************************************************************************/
+function init_tech_screen()
+{
+
+  var winWidth, winHeight, d=document;
+  if (typeof window.innerWidth!='undefined') {
+    winWidth = window.innerWidth;
+  } else {
+    if (d.documentElement &&
+      typeof d.documentElement.clientWidth!='undefined' &&
+      d.documentElement.clientWidth!=0) {
+      winWidth = d.documentElement.clientWidth
+    } else {
+      if (d.body &&
+        typeof d.body.clientWidth!='undefined') {
+        winWidth = d.body.clientWidth
+      }
+    }
+  }
+  
+      
+  $("#technologies").width(winWidth - 50);
+
+  tech_canvas = document.getElementById('tech_canvas');
+  tech_canvas_ctx = tech_canvas.getContext("2d");
+
+  is_tech_tree_init = true;
+
+}
 
 /**************************************************************************
  ...
 **************************************************************************/
-function update_tech_screen()
+function update_tech_tree()
 {
-  
-  if (client_is_observer()) return;
-  
-  var technology_heading_html = "<div><b>";
-  
-  
-  if (techs[client.conn.playing['researching']] != null) {
-    technology_heading_html = technology_heading_html + "Researching:" 
-         + techs[client.conn.playing['researching']]['name'];
-  } 
-     
-  if (techs[client.conn.playing['tech_goal']] != null) {   
-     technology_heading_html = technology_heading_html + " <br> Technology goal: "
-     + techs[client.conn.playing['tech_goal']]['name'];
-   }
-   
-  technology_heading_html = technology_heading_html + "</b></div>";
-   
-  $("#technology_heading").html(technology_heading_html);
-  
-  var technology_list_html = "";
-
-  for (var tech_id in techs) {
-    var ptech = techs[tech_id];
-    if (!(tech_id+'' in reqtree)) continue;
-    
-    var x = Math.floor(reqtree[tech_id+'']['x'] * tech_xscale);  //scale in X direction.
-    var y = reqtree[tech_id+'']['y'];  
-    
-    /* KNOWN TECHNOLOGY */
-    if (player_invention_state(client.conn.playing, ptech['id']) == TECH_KNOWN) {   
-        
-      var sprite = get_technology_image_sprite(ptech);
-      
-      technology_list_html = technology_list_html +
-       "<div style='z-index: 1000; cursor:pointer;cursor:hand; position: absolute; left: " + x + "px; top: " + y + "px; background: transparent url(" 
-           + sprite['image-src'] +
-           ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y'] 
-           + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px; margin: 5px; '"
-           + "><div style='background-color:#ffffff; color:#000000; margin-left: 48px; width:160px; height: 48px; font-size: 110%'>" + ptech['name'] + "</div></div>";
-           
-           
-      
-    /* TECH WITH KNOWN PREREQS. */
-    } else if (player_invention_state(client.conn.playing, ptech['id']) == TECH_PREREQS_KNOWN) {
-      var bgcolor = (client.conn.playing['researching'] == ptech['id']) ? "#992222" : "#222266";
-        
-      var sprite = get_technology_image_sprite(ptech);
-      
-      technology_list_html = technology_list_html +
-       "<div style='z-index: 1000; cursor:pointer;cursor:hand; position: absolute; left: " + x + "px; top: " + y + "px; background: transparent url(" 
-           + sprite['image-src'] +
-           ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y'] 
-           + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px; margin: 5px; '"
-           + " onclick='send_player_research(" + ptech['id'] + ");'"
-           + "><div style='background-color:" + bgcolor+ "; margin-left: 48px; width:160px; height: 48px; font-size: 110%'>" + ptech['name'] + "</div></div>";
-    
-    /* UNKNOWN TECHNOLOGY. */
-    } else if (player_invention_state(client.conn.playing, ptech['id']) == TECH_UNKNOWN) { 
-      var bgcolor = (client.conn.playing['tech_goal'] == ptech['id']) ? "#330000" : "#222222";
-        
-      var sprite = get_technology_image_sprite(ptech);
-      
-      technology_list_html = technology_list_html +
-       "<div style='z-index: 1000; cursor:pointer;cursor:hand; position: absolute; left: " + x + "px; top: " + y + "px; background: transparent url(" 
-           + sprite['image-src'] +
-           ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y'] 
-           + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px; margin: 5px; '"
-           + " onclick='send_player_tech_goal(" + ptech['id'] + ");'"
-           + "><div style='background-color:" + bgcolor+ "; margin-left: 48px; width:160px; height: 48px; font-size: 110%'>" + ptech['name'] + "</div></div>";
-    
-    }
-    
-    
-  }
-  
-  $("#technology_list").html(technology_list_html);
-  
-
-  init_tech_tree();  
- 
-  
-}
-
-/**************************************************************************
- Draw dependency lines.
-**************************************************************************/
-function init_tech_tree() 
-{
-
-  if (is_tech_tree_init == true) return;
-  is_tech_tree_init = true;
-
-  /* Draw dependency lines. */
-  var jg = new jsGraphics("technologies");
-  jg.setColor("#eeeeee");
   var hy = 24;
   var hx = 48 + 160;
+
+
+  tech_canvas_ctx.fillStyle = 'rgb(0, 1, 26)';
+  tech_canvas_ctx.fillRect(0, 0, 5824, 726);
+
 
   for (var tech_id in techs) {
     var ptech = techs[tech_id];
@@ -211,13 +158,158 @@ function init_tech_tree()
       var dx = Math.floor(reqtree[rid+'']['x'] * tech_xscale);  //scale in X direction.
       var dy = reqtree[rid+'']['y'];
       
-      jg.drawLine(sx, sy + hy, dx + hx, dy + hy);
+      tech_canvas_ctx.strokeStyle = 'rgb(255, 255, 255)';
+      tech_canvas_ctx.lineWidth = 2;
+
+      tech_canvas_ctx.beginPath();  
+      tech_canvas_ctx.moveTo(sx, sy + hy);  
+      tech_canvas_ctx.lineTo(dx + hx, dy + hy);  
+      tech_canvas_ctx.stroke();
+  
+
     }
   
   }
-  jg.paint();
-  
+
+  tech_canvas_ctx.lineWidth = 1;
+
+  for (var tech_id in techs) {
+    var ptech = techs[tech_id];
+    if (!(tech_id+'' in reqtree)) continue;
+    
+    var x = Math.floor(reqtree[tech_id+'']['x'] * tech_xscale)+2;  //scale in X direction.
+    var y = reqtree[tech_id+'']['y']+2;  
+    
+    /* KNOWN TECHNOLOGY */
+    if (player_invention_state(client.conn.playing, ptech['id']) == TECH_KNOWN) {   
+        
+      var tag = ptech['graphic_str'];
+      tech_canvas_ctx.fillStyle = 'rgb(255, 255, 255)';
+      tech_canvas_ctx.fillRect(x-2, y-2, tech_item_width, tech_item_height);
+      tech_canvas_ctx.strokeStyle = 'rgb(225, 225, 225)';
+      tech_canvas_ctx.strokeRect(x-2, y-2, tech_item_width, tech_item_height);
+      mapview_put_tile(tech_canvas_ctx, tag, x+1, y)
+           
+      tech_canvas_ctx.font = canvas_text_font;
+      tech_canvas_ctx.fillStyle = "rgba(0, 0, 0, 1)";
+      tech_canvas_ctx.fillText(ptech['name'], x + 50, y + 30);  
+
+      if (x > maxleft) maxleft = x;
+       
+      
+    /* TECH WITH KNOWN PREREQS. */
+    } else if (player_invention_state(client.conn.playing, ptech['id']) == TECH_PREREQS_KNOWN) {
+      var bgcolor = (client.conn.playing['researching'] == ptech['id']) ? "rgb(231, 43, 0)" : "rgb(150, 150, 150)";
+        
+      var tag = ptech['graphic_str'];
+      tech_canvas_ctx.fillStyle = bgcolor;
+      tech_canvas_ctx.fillRect(x-2, y-2, tech_item_width, tech_item_height);
+      tech_canvas_ctx.strokeStyle = 'rgb(255, 255, 255)';
+      tech_canvas_ctx.strokeRect(x-2, y-2, tech_item_width, tech_item_height);
+      mapview_put_tile(tech_canvas_ctx, tag, x+1, y)
+
+      tech_canvas_ctx.font = canvas_text_font;
+      tech_canvas_ctx.fillStyle = "rgba(0, 0, 0, 1)";
+      tech_canvas_ctx.fillText(ptech['name'], x + 50, y + 30);  
+         
+ 
+    /* UNKNOWN TECHNOLOGY. */
+    } else if (player_invention_state(client.conn.playing, ptech['id']) == TECH_UNKNOWN) { 
+      var bgcolor = (client.conn.playing['tech_goal'] == ptech['id']) ? "rgb(159, 37, 37)" : "rgb(70, 70, 70)";
+        
+      var tag = ptech['graphic_str'];
+      tech_canvas_ctx.fillStyle =  bgcolor;
+      tech_canvas_ctx.fillRect(x-2, y-2, tech_item_width, tech_item_height);
+      tech_canvas_ctx.strokeStyle = 'rgb(255, 255, 255)';
+      tech_canvas_ctx.strokeRect(x-2, y-2, tech_item_width, tech_item_height);
+
+      mapview_put_tile(tech_canvas_ctx, tag, x+1, y)
+           
+      tech_canvas_ctx.font = canvas_text_font;
+      tech_canvas_ctx.fillStyle = "rgba(0, 0, 0, 1)";
+      tech_canvas_ctx.fillText(ptech['name'], x + 50, y + 30);  
+ 
+    
+    }
+    
+    
+  }
+
 }
+
+/**************************************************************************
+ ...
+**************************************************************************/
+function update_tech_screen()
+{
+  
+  if (client_is_observer()) return;
+
+  init_tech_screen();
+  update_tech_tree();
+
+
+  var research_goal_text = "No research target selected.<br>Please select a technology now";
+  if (techs[client.conn.playing['researching']] != null) {
+    research_goal_text = "Researching: " + techs[client.conn.playing['researching']]['name'];
+  }
+  if (techs[client.conn.playing['tech_goal']] != null) {   
+    research_goal_text = research_goal_text + "<br>Goal: " 
+        + techs[client.conn.playing['tech_goal']]['name'];
+  }
+  $("#tech_goal_box").html(research_goal_text);
+  
+  $("#tech_progress_text").html("Research progress: " 
+		         + client.conn.playing['bulbs_researched'] 
+			 + " / " + client.conn.playing['current_research_cost']);
+
+  var pct_progress = 100 * (client.conn.playing['bulbs_researched'] / client.conn.playing['current_research_cost']);
+
+  $("#progress_fg").css("width", pct_progress  + "%");
+
+  if (techs[client.conn.playing['researching']] != null) {
+    var adv_txt = "";
+    var prunits = get_units_from_tech(client.conn.playing['researching']);
+    var pimprovements = get_improvements_from_tech(client.conn.playing['researching']);
+
+    for (var i = 0; i < prunits.length; i++) {
+      var punit = prunits[i];
+      adv_txt += punit['name'] + ", "; 
+    }
+
+    for (var i = 0; i < pimprovements.length; i++) {
+      var pimpr = pimprovements[i];
+      adv_txt += pimpr['name'] + ", "; 
+    }
+
+  
+
+    $("#tech_result_text").html(techs[client.conn.playing['researching']]['name'] 
+		                + " gives these advances:<br>" + adv_txt);
+  }
+  
+  $("#tech_tab_item").css("color", "#ffffff");
+
+  /* scroll the tech tree, so that the current research targets are on the screen..  */
+  maxleft = maxleft - 280;
+  if (maxleft < 0) maxleft = 0;
+  if (!tech_dialog_active) {
+    setTimeout("scroll_tech_tree();",10);
+  }
+ 
+  tech_dialog_active = true;
+ 
+}
+
+
+/**************************************************************************
+ ...
+**************************************************************************/
+function scroll_tech_tree()
+{
+  $("#technologies").scrollLeft(maxleft);
+}
+
 
 /**************************************************************************
  ...
@@ -226,7 +318,6 @@ function send_player_research(tech_id)
 {
   var packet = [{"packet_type" : "player_research", "tech" : tech_id}];
   send_request (JSON.stringify(packet));
-  setTimeout ( "update_tech_screen();", 800);
 }
 
 /**************************************************************************
@@ -236,5 +327,49 @@ function send_player_tech_goal(tech_id)
 {
   var packet = [{"packet_type" : "player_tech_goal", "tech" : tech_id}];
   send_request (JSON.stringify(packet));
-  setTimeout ( "update_tech_screen();", 800);
 }
+
+
+/****************************************************************************
+  This function is triggered when the mouse is clicked on the tech canvas.
+****************************************************************************/
+function tech_mapview_mouse_click(e)
+{
+  //var x = e.offsetX || e.layerX;
+  //var y = e.offsetY || e.layerY;
+  var rightclick;
+  if (!e) var e = window.event;
+  if (e.which) {
+    rightclick = (e.which == 3);
+  } else if (e.button) {
+    rightclick = (e.button == 2);
+  }
+  
+   if (tech_canvas != null) {
+    var tech_mouse_x = mouse_x - $("#technologies").offset().left + $("#technologies").scrollLeft();
+    var tech_mouse_y = mouse_y - $("#technologies").offset().top;
+    
+    for (var tech_id in techs) {
+      var ptech = techs[tech_id];
+      if (!(tech_id+'' in reqtree)) continue;
+    
+      var x = Math.floor(reqtree[tech_id+'']['x'] * tech_xscale)+2;  //scale in X direction.
+      var y = reqtree[tech_id+'']['y']+2;  
+
+      if (tech_mouse_x > x && tech_mouse_x < x + tech_item_width
+          && tech_mouse_y > y && tech_mouse_y < y + tech_item_height) {
+        if (player_invention_state(client.conn.playing, ptech['id']) == TECH_PREREQS_KNOWN) {
+          send_player_research(ptech['id']);
+	} else if (player_invention_state(client.conn.playing, ptech['id']) == TECH_UNKNOWN) {
+          send_player_tech_goal(ptech['id']);
+	}
+      }
+
+    }
+
+  }
+ 
+  update_tech_screen();
+
+}
+

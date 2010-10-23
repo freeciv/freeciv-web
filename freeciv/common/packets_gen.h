@@ -413,6 +413,7 @@ struct packet_player_info {
   int bulbs_last_turn;
   int bulbs_researched;
   int techs_researched;
+  int current_research_cost;
   int researching;
   int science_cost;
   int future_tech;

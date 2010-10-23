@@ -893,6 +893,11 @@ static void package_player_info(struct player *plr,
     packet->science         = plr->economic.science;
     packet->luxury          = plr->economic.luxury;
     packet->bulbs_researched = research->bulbs_researched;
+    if (research->researching != A_UNSET) {
+      packet->current_research_cost = total_bulbs_required(plr);
+    } else {
+      packet->current_research_cost = 0;
+    }
     packet->techs_researched = research->techs_researched;
     packet->researching = research->researching;
     packet->future_tech = research->future_tech;
@@ -905,6 +910,7 @@ static void package_player_info(struct player *plr,
     packet->science         = 0;
     packet->luxury          = 0;
     packet->bulbs_researched= 0;
+    packet->current_research_cost= 0;
     packet->techs_researched= 0;
     packet->researching     = A_UNKNOWN;
     packet->future_tech     = 0;

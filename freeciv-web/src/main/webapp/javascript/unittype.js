@@ -48,3 +48,19 @@ function can_player_build_unit_direct(p, punittype)
 
   return true;
 }
+
+/**************************************************************************
+...
+**************************************************************************/
+function get_units_from_tech(tech_id)
+{
+  var result = [];
+
+  for (unit_type_id in unit_types) {
+    var punit_type = unit_types[unit_type_id];
+    if (punit_type['tech_requirement'] == tech_id) {
+      result.push(punit_type);
+    }
+  }
+  return result;
+}

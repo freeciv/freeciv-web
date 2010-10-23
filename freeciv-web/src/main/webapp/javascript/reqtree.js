@@ -29,7 +29,7 @@ var reqtree = {
 "55": {"x":416, "y":167}, // Mysticism 
 "48": {"x":416, "y":246}, // Mathematics 
 "45": {"x":416, "y":322}, // Map Making 
-"62": {"x":416, "y":413}, // Polytheism 
+"62": {"x":416, "y":395}, // Polytheism   (changed manually)
 "81": {"x":416, "y":456}, // The Wheel 
 "20": {"x":416, "y":532}, // Currency 
 "38": {"x":416, "y":635}, // Iron Working 
@@ -44,7 +44,7 @@ var reqtree = {
 "56": {"x":918, "y":329}, // Navigation 
 "25": {"x":918, "y":425}, // Engineering 
 "29": {"x":918, "y":504}, // Feudalism 
-"8": {"x":918, "y":676}, // Bridge Building 
+"8": {"x":918, "y":658}, // Bridge Building  (changed manually)
 "7": {"x":1169, "y":6}, // Banking 
 "49": {"x":1169, "y":85}, // Medicine 
 "85": {"x":1169, "y":173}, // University 

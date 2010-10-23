@@ -234,3 +234,51 @@ button {
 #dialog {
   max-height: 400px;
 }
+
+/* Research dialog. */
+
+#technologies {
+  clear: left;
+}
+
+#tech_info_box {
+  float: left; 
+  border: 1px solid rgb(153, 153, 153); 
+  width: 1000px; 
+  height: 60px; 
+  padding: 7px; 
+  margin: 15px; 
+  margin-left: 0px; 
+  background-color: rgb(34, 34, 34);
+}
+
+#tech_goal_box {
+  float: left;
+  font-weight: bold;
+}
+
+#tech_progress_box {
+  float: left; 
+  padding-left: 80px; 
+  width: 280px;
+}
+
+#progress_bg {
+  float: left;
+  background-color: #bbbbbb; 
+  width: 100%;
+  border: 1px solid #ffffff;
+}
+
+#progress_fg {
+  float: left; 
+  width: 60%; 
+  background-color: #5582c2;
+}
+
+
+#tech_results {
+  float: left; 
+  padding-left: 20px;
+}
+

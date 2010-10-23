@@ -14,7 +14,21 @@
 var improvements = {};
 
 
+/**************************************************************************
+ Returns a list containing improvements which are available from a tech.
+**************************************************************************/
+function get_improvements_from_tech(tech_id)
+{
+  var result = [];
+  for (improvement_id in improvements) {
+    var pimprovement = improvements[improvement_id];
+    if (get_improvement_requirements(improvement_id) == tech_id) {
+      result.push(pimprovement);
+    }
+  }
+  return result;
 
+}
 
 
 /**************************************************************************

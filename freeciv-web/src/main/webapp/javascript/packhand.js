@@ -188,6 +188,13 @@ function handle_city_short_info(packet)
 /* 100% complete */
 function handle_player_info(packet) 
 {
+
+  if (client != null && client.conn.playing != null 
+    && packet['playerno'] == client.conn.playing['playerno'] 
+    && packet['researching'] != client.conn.playing['researching']) {
+    $("#tech_tab_item").css("color", "#ff0000");
+  }
+
   players[packet['playerno']] = $.extend(players[packet['playerno']], packet);
   
   if (client.conn.playing != null) {
@@ -197,6 +204,7 @@ function handle_player_info(packet)
   } 
   update_player_info();
 
+  if (is_tech_tree_init && tech_dialog_active) update_tech_screen();
 }
 
 /* 100% complete */
@@ -569,6 +577,8 @@ function handle_begin_turn(packet)
   auto_center_on_focus_unit();
   update_unit_info_label(current_focus);
   update_game_status_panel();
+  if (is_tech_tree_init && tech_dialog_active) update_tech_screen();
+
   // FIXME: update_client_state(C_S_RUNNING);
 }
 

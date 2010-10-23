@@ -39,7 +39,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.15\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-01 22:06+0200\n"
+"POT-Creation-Date: 2010-10-23 11:42+0200\n"
 "PO-Revision-Date: 2009-03-24 22:03+0100\n"
 "Last-Translator: Christian Knoke <chrisk@cknoke.de>\n"
 "Language-Team: German Freeciv Translators <freeciv.de@freelists.org>\n"
@@ -4424,26 +4424,26 @@ msgstr ""
 "Ihr Teampartner %s hat den %s den Krieg erklärt. Sie sind verpflichtet, Ihre "
 "Allianz mit %s zu beenden."
 
-#: server/plrhand.c:1052
+#: server/plrhand.c:1058
 #, c-format
 msgid "Removing player %s."
 msgstr "Spieler %s wird entfernt."
 
-#: server/plrhand.c:1056
+#: server/plrhand.c:1062
 msgid "You've been removed from the game!"
 msgstr "Sie wurden aus dem Spiel entfernt."
 
-#: server/plrhand.c:1060
+#: server/plrhand.c:1066
 #, c-format
 msgid "%s has been removed from the game."
 msgstr "%s wurde aus dem Spiel entfernt."
 
-#: server/plrhand.c:1109 server/plrhand.c:1113
+#: server/plrhand.c:1115 server/plrhand.c:1119
 #, c-format
 msgid "You have made contact with the %s, ruled by %s."
 msgstr "Die %s entdeckt. Ihr Herrscher ist %s."
 
-#: server/plrhand.c:1133
+#: server/plrhand.c:1139
 #, c-format
 msgid ""
 "%s and %s meet and go to instant war. You cancel your alliance with both."
@@ -4451,34 +4451,34 @@ msgstr ""
 "%s und %s treffen aufeinander und beginnen sofort einen Krieg. Du beendest  "
 "deine Allianz mit beiden."
 
-#: server/plrhand.c:1593
+#: server/plrhand.c:1599
 #, c-format
 msgid "Could not throw %s into civil war - too many players"
 msgstr "Bürgerkrieg der %s ist nicht möglich - zu viele Spieler"
 
-#: server/plrhand.c:1600
+#: server/plrhand.c:1606
 #, c-format
 msgid "Could not throw %s into civil war - no available nations"
 msgstr "Bürgerkrieg der %s ist nicht möglich - keine Nationen verfügbar"
 
-#: server/plrhand.c:1620
+#: server/plrhand.c:1626
 msgid "Your nation is thrust into civil war."
 msgstr "Die Nation wird vom Bürgerkrieg gespalten."
 
 #. TRANS: <leader> ... the Poles.
-#: server/plrhand.c:1624
+#: server/plrhand.c:1630
 #, c-format
 msgid "%s is the rebellious leader of the %s."
 msgstr "%s ist der Anführer der revoltierenden %s."
 
 #. TRANS: <city> ... the Poles.
-#: server/plrhand.c:1647
+#: server/plrhand.c:1653
 #, c-format
 msgid "%s declares allegiance to the %s."
 msgstr "%s erklärt ihre Loyalität zu den %s."
 
 #. TRANS: ... Danes ... Poles ... <7> cities.
-#: server/plrhand.c:1662
+#: server/plrhand.c:1668
 #, c-format
 msgid "Civil war partitions the %s; the %s now hold %d city."
 msgid_plural "Civil war partitions the %s; the %s now hold %d cities."
@@ -8056,8 +8056,8 @@ msgid "Unit cannot perform diplomatic action from %s."
 msgstr ""
 
 #: server/unithand.c:1411
-#, c-format
-msgid "You must declare war on %s first.  Try using players dialog (F3)."
+#, fuzzy, c-format
+msgid "You must declare war on %s first.  Try using players dialog."
 msgstr ""
 "Du mußt %s erst den Krieg erklären. Versuche es mit dem Spieler-Bericht (F3)."
 

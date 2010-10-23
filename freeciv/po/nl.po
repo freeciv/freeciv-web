@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Freeciv 2.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-01 22:06+0200\n"
+"POT-Creation-Date: 2010-10-23 11:42+0200\n"
 "PO-Revision-Date: 2007-09-01 22:18+0300\n"
 "Last-Translator: Jelle Pelfrene <jelle.pelfrene@student.kuleuven.ac.be>\n"
 "Language-Team: Nederlands <nl@li.org>\n"
@@ -4434,26 +4434,26 @@ msgstr ""
 "Uw teamgenoot %s verklaarde de oorlog aan %s. U bent gehouden aan het "
 "afbreken van uw alliantie met %s."
 
-#: server/plrhand.c:1052
+#: server/plrhand.c:1058
 #, c-format
 msgid "Removing player %s."
 msgstr "Verwijder speler %s."
 
-#: server/plrhand.c:1056
+#: server/plrhand.c:1062
 msgid "You've been removed from the game!"
 msgstr "U bent uit het spel verwijderd!"
 
-#: server/plrhand.c:1060
+#: server/plrhand.c:1066
 #, c-format
 msgid "%s has been removed from the game."
 msgstr "%s is uit het spel verwijderd."
 
-#: server/plrhand.c:1109 server/plrhand.c:1113
+#: server/plrhand.c:1115 server/plrhand.c:1119
 #, c-format
 msgid "You have made contact with the %s, ruled by %s."
 msgstr "U hebt contact gemaakt met de %s, geregeerd door %s."
 
-#: server/plrhand.c:1133
+#: server/plrhand.c:1139
 #, fuzzy, c-format
 msgid ""
 "%s and %s meet and go to instant war. You cancel your alliance with both."
@@ -4461,35 +4461,35 @@ msgstr ""
 "%s heeft uw geallieerde %s aangevallen! Uw alliantie met de aanvaller is nu "
 "verbroken."
 
-#: server/plrhand.c:1593
+#: server/plrhand.c:1599
 #, c-format
 msgid "Could not throw %s into civil war - too many players"
 msgstr "Kon %s niet in burgeroorlog storten - te veel spelers"
 
-#: server/plrhand.c:1600
+#: server/plrhand.c:1606
 #, fuzzy, c-format
 msgid "Could not throw %s into civil war - no available nations"
 msgstr "Kon %s niet in burgeroorlog storten - te veel spelers"
 
-#: server/plrhand.c:1620
+#: server/plrhand.c:1626
 #, fuzzy
 msgid "Your nation is thrust into civil war."
 msgstr "Uw natie is verzonken in burgeroorlog."
 
 #. TRANS: <leader> ... the Poles.
-#: server/plrhand.c:1624
+#: server/plrhand.c:1630
 #, fuzzy, c-format
 msgid "%s is the rebellious leader of the %s."
 msgstr "%s is benoemd als de leider van de rebellerende staten %s."
 
 #. TRANS: <city> ... the Poles.
-#: server/plrhand.c:1647
+#: server/plrhand.c:1653
 #, fuzzy, c-format
 msgid "%s declares allegiance to the %s."
 msgstr "%s verklaart alliantie aan %s."
 
 #. TRANS: ... Danes ... Poles ... <7> cities.
-#: server/plrhand.c:1662
+#: server/plrhand.c:1668
 #, fuzzy, c-format
 msgid "Civil war partitions the %s; the %s now hold %d city."
 msgid_plural "Civil war partitions the %s; the %s now hold %d cities."
@@ -8054,8 +8054,8 @@ msgid "Unit cannot perform diplomatic action from %s."
 msgstr "Eenheid kan geen diplomatieke diensten verrichten vanaf %s."
 
 #: server/unithand.c:1411
-#, c-format
-msgid "You must declare war on %s first.  Try using players dialog (F3)."
+#, fuzzy, c-format
+msgid "You must declare war on %s first.  Try using players dialog."
 msgstr ""
 "U moet eerst oorlog verklaren aan %s.  Gebruik het spelers venster (F3)."
 

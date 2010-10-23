@@ -144,7 +144,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Freeciv 2.0.99-devel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-01 22:06+0200\n"
+"POT-Creation-Date: 2010-10-23 11:42+0200\n"
 "PO-Revision-Date: 2007-08-12 15:56+0300\n"
 "Last-Translator: MITA Yuusuke <clefs@mail.goo.ne.jp>\n"
 "Language-Team: SAWADA Katsuya <ama@petmail.net>\n"
@@ -4774,31 +4774,31 @@ msgstr ""
 
 # yasu, clefs
 # was "プレイヤー %s を中止させます。"
-#: server/plrhand.c:1052
+#: server/plrhand.c:1058
 #, c-format
 msgid "Removing player %s."
 msgstr "プレイヤー %s を除去します。"
 
 # yasu, clefs
 # was "あなたはゲームを中止させられました。"
-#: server/plrhand.c:1056
+#: server/plrhand.c:1062
 msgid "You've been removed from the game!"
 msgstr "あなたはゲームから除去されました！"
 
 # yasu, clefs
 # was "%sはゲームを中止させられました。"
-#: server/plrhand.c:1060
+#: server/plrhand.c:1066
 #, c-format
 msgid "%s has been removed from the game."
 msgstr "%sはゲームから除去されました。"
 
-#: server/plrhand.c:1109 server/plrhand.c:1113
+#: server/plrhand.c:1115 server/plrhand.c:1119
 #, c-format
 msgid "You have made contact with the %s, ruled by %s."
 msgstr "あなたは %2$s によって統治された %1$s と接触しました。"
 
 # clefs
-#: server/plrhand.c:1133
+#: server/plrhand.c:1139
 #, c-format
 msgid ""
 "%s and %s meet and go to instant war. You cancel your alliance with both."
@@ -4806,33 +4806,33 @@ msgstr ""
 "%s と %s は接触と同時に戦争状態となりました。両国との同盟を破棄します。"
 
 # clefs
-#: server/plrhand.c:1593
+#: server/plrhand.c:1599
 #, c-format
 msgid "Could not throw %s into civil war - too many players"
 msgstr "%sに内戦を起こせませんでした――プレイヤーが多すぎます"
 
 # clefs
-#: server/plrhand.c:1600
+#: server/plrhand.c:1606
 #, fuzzy, c-format
 msgid "Could not throw %s into civil war - no available nations"
 msgstr "%sに内戦を起こせませんでした――プレイヤーが多すぎます"
 
 # yasu
 # XXX
-#: server/plrhand.c:1620
+#: server/plrhand.c:1626
 #, fuzzy
 msgid "Your nation is thrust into civil war."
 msgstr "あなたの国は内戦になりました。%sが叛乱者のリーダー宣言しました。"
 
 #. TRANS: <leader> ... the Poles.
-#: server/plrhand.c:1624
+#: server/plrhand.c:1630
 #, fuzzy, c-format
 msgid "%s is the rebellious leader of the %s."
 msgstr "あなたの国は内戦になりました。%sが叛乱者のリーダー宣言しました。"
 
 # yasu
 #. TRANS: <city> ... the Poles.
-#: server/plrhand.c:1647
+#: server/plrhand.c:1653
 #, fuzzy, c-format
 msgid "%s declares allegiance to the %s."
 msgstr "%sは%sに対する忠誠を宣言しました。"
@@ -4840,7 +4840,7 @@ msgstr "%sは%sに対する忠誠を宣言しました。"
 # clefs
 # 原文の2行目以降に行頭のスペースがあるのは、1行目の「Game:」を消した名残りか
 #. TRANS: ... Danes ... Poles ... <7> cities.
-#: server/plrhand.c:1662
+#: server/plrhand.c:1668
 #, fuzzy, c-format
 msgid "Civil war partitions the %s; the %s now hold %d city."
 msgid_plural "Civil war partitions the %s; the %s now hold %d cities."
@@ -8538,8 +8538,8 @@ msgstr "部隊は%sからは外交行為を行えません。"
 
 # clefs
 #: server/unithand.c:1411
-#, c-format
-msgid "You must declare war on %s first.  Try using players dialog (F3)."
+#, fuzzy, c-format
+msgid "You must declare war on %s first.  Try using players dialog."
 msgstr "まず%sに宣戦しなければなりません。プレイヤーダイアログ参照(F3)。"
 
 #: server/unithand.c:1430

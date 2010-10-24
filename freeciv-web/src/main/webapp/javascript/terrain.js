@@ -45,26 +45,6 @@ function tile_set_terrain(ptile, pterrain)
 /**************************************************************************
  ...
 **************************************************************************/
-function tile_specials(ptile)
-{
-  return {
-  "road" : ptile['special'][0],
-  "irrigation" : ptile['special'][1],
-  "railroad" : ptile['special'][2],
-  "mine" : ptile['special'][3],
-  "pollution" : ptile['special'][4],
-  "hut" : ptile['special'][5],
-  "old_fortress" : ptile['special'][6],
-  "river" : ptile['special'][7],
-  "farmland" : ptile['special'][8],
-  "old_airbase" : ptile['special'][9],
-  "fallout" : ptile['special'][10]  
-  };
-}
-
-/**************************************************************************
- ...
-**************************************************************************/
 function tile_terrain(ptile)
 { 
   return terrains[ptile['terrain']];
@@ -76,7 +56,6 @@ function tile_terrain(ptile)
 function tile_terrain_near(ptile)
 {
   var tterrain_near = [];
-  var tspecial_near = [];
   for (var dir = 0; dir < 8; dir++) {
     var tile1 = mapstep(ptile, dir);
     if (tile1 != null && tile_get_known(tile1) != TILE_UNKNOWN) {
@@ -84,7 +63,6 @@ function tile_terrain_near(ptile)
 
       if (null != terrain1) {
         tterrain_near[dir] = terrain1;
-        tspecial_near[dir] = tile_specials(tile1);
         continue;
       }
       freelog(LOG_ERROR, "build_tile_data() tile (%d,%d) has no terrain!",
@@ -96,7 +74,7 @@ function tile_terrain_near(ptile)
     // FIXME: BV_CLR_ALL(tspecial_near[dir]);
   }
   
-  return {'terrain' : tterrain_near, 'special' : tspecial_near};
+  return tterrain_near;
 }
 
 /**************************************************************************

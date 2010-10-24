@@ -118,7 +118,7 @@ function fill_sprite_array(layer, ptile, pedge, pcorner, punit, pcity, citymode)
   switch (layer) {
     case LAYER_TERRAIN1:
     if (ptile != null) {
-      var tterrain_near = tile_terrain_near(ptile)['terrain'];
+      var tterrain_near = tile_terrain_near(ptile);
       var pterrain = tile_terrain(ptile);
       sprite_array = sprite_array.concat(fill_terrain_sprite_layer(0, ptile, pterrain, tterrain_near));
            
@@ -127,7 +127,7 @@ function fill_sprite_array(layer, ptile, pedge, pcorner, punit, pcity, citymode)
     
     case LAYER_TERRAIN2:
     if (ptile != null) {
-      var tterrain_near = tile_terrain_near(ptile)['terrain'];
+      var tterrain_near = tile_terrain_near(ptile);
       var pterrain = tile_terrain(ptile);
       sprite_array = sprite_array.concat(fill_terrain_sprite_layer(1, ptile, pterrain, tterrain_near));
            
@@ -136,7 +136,7 @@ function fill_sprite_array(layer, ptile, pedge, pcorner, punit, pcity, citymode)
     
     case LAYER_TERRAIN3:
       if (ptile != null) {
-        var tterrain_near = tile_terrain_near(ptile)['terrain'];
+        var tterrain_near = tile_terrain_near(ptile);
         var pterrain = tile_terrain(ptile);
         sprite_array = sprite_array.concat(fill_terrain_sprite_layer(2, ptile, pterrain, tterrain_near));
            

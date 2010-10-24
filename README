@@ -99,7 +99,7 @@ Compiling and running the Freeciv Web client
    ./resin.sh start
 
 6. Start publite2:
-  Run publite2.py in the publite2 directory.
+  Run publite2_single.py in the publite2 directory.
 
 7. Run the freeciv-proxy:
   Run freeciv-proxy.py in the freeciv-proxy directory.
@@ -114,19 +114,6 @@ FIXME: Had to add -lssl when compiling server...
 
 - create .awsAuth and change mode like this:  chmod 600 .awsAuth
 
-Current status
---------------
-All of the main building-blocks for building the web client are in place,
-and the current architecture is very good for completing the project.
-
-Some good points:
-
-- It is possible to send packets between the C civserver and Javascript web client in both directions, 
-- It is possible to render tiles from the Freeciv tileset using Javascript on a HTML5 canvas, 
-- The speed of network packets will be comparable to the Freeciv C client (so it's very fast)
-- The current architucture and code is very fast and scalable.
-
-There is a lot of work remaining.
 
 
 TODO:

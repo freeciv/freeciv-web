@@ -132,32 +132,9 @@ There is a lot of work remaining.
 TODO:
 -----
 
-- Implement client-side logic in Javascript.
-  See /freeciv-web/src/main/webapp/javascript/
-  The main logic here is that packets are recieved
-  from the civserver, and handled in packhand.js in Freeciv-web.
-  Based on the JSON packets recieved, the client must perform
-  the correct updates, render mapview, update widgets etc.
-  This is the biggest and most important remaining taks.
- 
-
-- Implement isometric drawing using Canvas.
-  Testing rendering of tileset using Javascript and HTML 5 canvas.
-  The following function can be found in freeciv-web's mapview.js,
-  and is used like this:   put_tile("u.horsemen", 300, 200)
-  Yes, it draws a horeman unit and x:300 and y:200, based on the loaded
-  tileset. 
-
-- Implement GOTO pathfinding in Javascript.  (not high priority)
-
-- Support rendering mapview using Excanvas with silverlight.   
-  (The non-silverlight version will not support clipping). 
-  See: http://excanvas.sourceforge.net/
-
-- Support Svgweb rendering of mapview:  http://code.google.com/p/svgweb/
-
-- Add graphics design (pretty HTML and CSS).
-
-- Implement ingame dialogs, such as city, research, techtree dialogs etc.
-
+- Show GOTO lines in mapview
+- Name cities.
+- Share world images on the internet.
+- Playback of games.
+- HTML5 Web Sockets.
 

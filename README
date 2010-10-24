@@ -104,11 +104,12 @@ Compiling and running the Freeciv Web client
 7. Run the freeciv-proxy:
   Run freeciv-proxy.py in the freeciv-proxy directory.
 
-8. Start the web client in your browser:
-   Point your web browser to http://localhost:8080/login.jsp
-   Enter any username and password.
+8. Start Varnish and nginx.
 
-9. Continue to play the game. Pregame is mostly working. Note that gameplay is not ready yet. 
+9. Start the web client in your browser:
+   Point your web browser to http://localhost/
+
+10. Continue to play the game. 
 
 FIXME: Had to add -lssl when compiling server...
 

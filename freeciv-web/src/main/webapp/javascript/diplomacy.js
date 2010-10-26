@@ -50,8 +50,6 @@ function refresh_diplomacy_request_queue()
       	show_diplomacy_dialog(active_diplomacy_meeting_id);
 	show_diplomacy_clauses();
     }
-  } else {
-    active_diplomacy_meeting_id = null;
   }
 
 }
@@ -160,6 +158,7 @@ function cancel_meeting(counterpart)
 {
   if (active_diplomacy_meeting_id == counterpart) {
     $("#diplomacy_dialog").remove(); //close the dialog.
+    active_diplomacy_meeting_id = null;
   }
 
   if (diplomacy_request_queue.indexOf(counterpart) >= 0) {

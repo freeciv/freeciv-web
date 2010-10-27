@@ -279,11 +279,21 @@ function set_unit_focus_and_redraw(punit)
 }
 
 /**************************************************************************
+ ...
+**************************************************************************/
+function set_unit_focus_and_activate(punit)
+{
+  set_unit_focus_and_redraw(punit);
+  request_new_unit_activity(punit, ACTIVITY_IDLE);
+
+}
+
+/**************************************************************************
  See set_unit_focus_and_redraw()
 **************************************************************************/
 function city_dialog_activate_unit(punit)
 {
-  request_new_unit_activity(punit, ACTIVITY_IDLE)
+  request_new_unit_activity(punit, ACTIVITY_IDLE);
   close_city_dialog();
   set_unit_focus_and_redraw(punit);
 }
@@ -412,8 +422,7 @@ function do_map_click(ptile, qtype)
         if (sunits.length == 1) {
           /* A single unit has been clicked with the mouse. */
           var unit = sunits[0];  
-          set_unit_focus_and_redraw(unit);
-          request_new_unit_activity(unit, ACTIVITY_IDLE)
+	  set_unit_focus_and_activate(unit);
         } else {
           /* more than one unit is on the selected tile. */
           set_unit_focus_and_redraw(sunits[0]);

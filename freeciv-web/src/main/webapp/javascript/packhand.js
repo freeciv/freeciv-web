@@ -467,7 +467,7 @@ function handle_unit_packet_common(packet_unit)
   
     update_unit_info_label(current_focus);
     
-    if (packet_unit['done_moving'] == true) {
+    if (current_focus[0]['done_moving'] != packet_unit['done_moving']) {
       update_unit_focus();
     }
   }

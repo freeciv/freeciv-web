@@ -332,7 +332,7 @@ function update_select_unit_dialog(punits)
     + sprite['image-src'] +
     ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y'] 
        + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px;float:left; '"
-       + " onclick='set_unit_focus_and_redraw(units[" + punit['id'] + "])'"
+       + " onclick='set_unit_focus_and_activate(units[" + punit['id'] + "])'"
        +"></div>";
   }
   

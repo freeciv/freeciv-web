@@ -169,6 +169,12 @@ function update_unit_anim_list(old_unit, new_unit)
   
   if (old_unit['anim_list'] == null) old_unit['anim_list'] = [];
 
+  if (new_unit['transported'] == true) {
+    /* don't show transported units animated. */
+    old_unit['anim_list'] = [];	  
+    return;
+  }
+
   /* TODO: is unit visible? */
 
   var has_old_pos = false;

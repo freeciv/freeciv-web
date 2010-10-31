@@ -7,7 +7,7 @@ String redir_url = "" + request.getParameter("redir");
 String username = "" + session.getAttribute("username");
 if (username == null || "null".equals(username)) {
 	// User isn't logged in.
-	response.sendRedirect("/wireframe.jsp?do=guest_user&redir=" + redir_url);
+	redir_url = "/wireframe.jsp?do=guest_user&redir=" + redir_url;
 }
 
 

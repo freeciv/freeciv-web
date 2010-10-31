@@ -18,6 +18,8 @@ if (session.getAttribute("openid") != null) {
   String requested_username = "" + request.getParameter("username");
 
   String page_errors = "";
+  
+  request.getSession().setAttribute( "guest_user", "false");
 
   Context env = (Context)(new InitialContext().lookup("java:comp/env"));
   DataSource ds = (DataSource)env.lookup("jdbc/freeciv_mysql"); 
@@ -35,7 +37,7 @@ if (session.getAttribute("openid") != null) {
 	 new_user = false;
 	 String username = rs1.getString(1);
          session.setAttribute( "username", username);
-	 response.sendRedirect("/preload.jsp");  
+	 response.sendRedirect("/wireframe.jsp?do=login");  
 
        } else if (save_action.equals("1")) {
          /* A new OpenID user has submitted the new user form.*/
@@ -68,7 +70,7 @@ if (session.getAttribute("openid") != null) {
            insert_stmt.setString(2, usersOpenID);
 	   insert_stmt.executeUpdate();
            session.setAttribute( "username", requested_username);
-           response.sendRedirect("/preload.jsp");  
+           response.sendRedirect("/wireframe.jsp?do=login");  
          }
        }
   } finally {

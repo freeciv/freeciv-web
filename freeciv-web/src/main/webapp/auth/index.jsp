@@ -1,13 +1,5 @@
 <%@ page session="true" %>
 
-<%
-  String server = request.getServerName();
-  if (!server.equals("localhost") && !server.equals("games.freeciv.net")) {
-    /* games.freeciv.net has DNS geo load-balancing. */
-    response.sendRedirect ("http://games.freeciv.net/wireframe.jsp?do=login");
-  }
-%>
-
 
 <link rel="stylesheet" href="/stylesheets/openid.css" />
 
@@ -90,7 +82,7 @@ This means that you can easily and safely use your existing username and passwor
 <a href="?logout=true">Log out</a>--%>
 
 <%
-  response.sendRedirect("/preload.jsp");  
+  response.sendRedirect("/wireframe.jsp?do=login");  
 %>
 
 

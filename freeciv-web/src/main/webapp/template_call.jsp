@@ -5,8 +5,18 @@
   if (act.equals("dev")) { %>
    <jsp:include page="dev.jsp" flush="false"/>
   
-<% } else if (act.equals("login")) { %>
+<% } else if (act.equals("openid_login")) { %>
   <jsp:include page="/auth/index.jsp" flush="false"/>
+ 
+<%-- login and menu both point to the main menu.--%>
+<% } else if (act.equals("login")) { %>
+  <jsp:include page="menu.jsp" flush="false"/>
+<% } else if (act.equals("menu")) { %>
+  <jsp:include page="menu.jsp" flush="false"/>  
+  
+<% } else if (act.equals("guest_user")) { %>
+  <jsp:include page="guest_user.jsp" flush="false"/>
+
 <% } else if (act.equals("new_user")) { %>
   <jsp:include page="/auth/new_user.jsp" flush="false"/>
  
@@ -19,8 +29,6 @@
 <% } else if (act.equals("preload")) { %>
   <jsp:include page="preload.jsp" flush="false"/>  
   
-<% } else if (act.equals("menu")) { %>
-  <jsp:include page="menu.jsp" flush="false"/>  
   
 <% } else if (act.equals("search")) { %>
   <jsp:include page="search.jsp" flush="false"/>  

@@ -1,3 +1,10 @@
+<%
+  String server = request.getServerName();
+  if (!server.equals("localhost") && !server.equals("games.freeciv.net")) {
+    /* games.freeciv.net has DNS geo load-balancing. */
+    response.sendRedirect ("http://games.freeciv.net/wireframe.jsp?do=menu");
+  }
+%>
 
 <div id="main_column">
 
@@ -13,29 +20,40 @@
   String opponent = "" + session.getAttribute("opponent_username");
   String host = "" + session.getAttribute("opponent_host");
   String port = "" + session.getAttribute("opponent_port");
+  String guest_mode = (String)request.getSession().getAttribute("guest_user");
   if (opponent != null && !"null".equals(opponent) && !"".equals(opponent)) {
 %>
 
   <div class="main_menu_buttons" onmouseover="help_facebook();">
-    <a href="/freecivmetaserve/metaserver.php?server_port=<%= host %>:<%= port %>">Join the game of <%= opponent %></a>
+    <a href="/preload.jsp?redir=/freecivmetaserve/metaserver.php?server_port=<%= host %>:<%= port %>">Join the game of <%= opponent %></a>
   </div>
 <% } %>
 
 <div onmouseover="help_single();">
-  <a class='button' href="/civclientlauncher?action=new">Start single-player game</a>
+  <a class='button' href="/preload.jsp?redir=/civclientlauncher?action=new">Start single-player game</a>
 </div>
 
 <div onmouseover="help_multi();">
-  <a class="button" href="/freecivmetaserve/metaserver.php" >Multiplayer game</a><br>
+  <a class="button" href="/preload.jsp?redir=/freecivmetaserve/metaserver.php" >Multiplayer game</a><br>
 </div>
 
 <div onmouseover="help_scenario();">
-  <a class="button" href="/wireframe.jsp?do=scenarios">Start scenario game</a>
+  <a class="button" href="/preload.jsp?redir=/wireframe.jsp?do=scenarios">Start scenario game</a>
 </div>
 
-<div onmouseover="help_load();">
-  <a class="button" href="/wireframe.jsp?do=load">Load saved game</a>
-</div>
+<% if ((guest_mode != null && guest_mode.equals("false"))) { %>
+  <div onmouseover="help_load();">
+    <a class="button" href="/preload.jsp?redir=/wireframe.jsp?do=load">Load saved game</a>
+  </div>
+<% } %>
+
+<% if (guest_mode == null || (guest_mode != null && guest_mode.equals("true"))) { %>
+  <div onmouseover="help_openid_login();">
+    <a class="button" href="/wireframe.jsp?do=openid_login">Login using OpenID</a>
+  </div>
+<% } %>
+
+
 <br>
 </center>
 </div>
@@ -91,6 +109,13 @@ function help_facebook() {
 function help_facebook_announced() {
   $("#menu_help").html("<b>Help:</b><br> Start a new multiplayer game against your Facebook friends, and invite them to observe or join your game.");
 }
+
+function help_openid_login() {
+	$("#menu_help").html("<b>Help:</b><br> Login or sign up to a free account using OpenID. This will give you a permanent"
+			 + " username, and access to savegames and other "
+			 + " functionality reserved for registered users.");
+}
+
 
 
 </script>

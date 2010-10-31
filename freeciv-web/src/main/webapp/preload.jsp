@@ -1,6 +1,17 @@
 <html>
 <head>
 
+<%
+String redir_url = "" + request.getParameter("redir");
+
+String username = "" + session.getAttribute("username");
+if (username == null || "null".equals(username)) {
+	// User isn't logged in.
+	response.sendRedirect("/wireframe.jsp?do=guest_user&redir=" + redir_url);
+}
+
+
+%>
 
 <script type="text/javascript">	
 function is_iphone()
@@ -15,7 +26,7 @@ function fc_redirect()
   if (is_iphone()) {
     window.location='/civclientlauncher?action=new'
   } else {
-    window.location='/wireframe.jsp?do=menu'
+    window.location='<%= redir_url %>'
   }
 }
 </script>

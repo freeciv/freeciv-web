@@ -2,15 +2,22 @@
 
 <div style="text-align: center;">
 <center>
+<%
+  String guest_mode = (String)request.getSession().getAttribute("guest_user");
+%>
 
 <h2>Game Options</h2>
 
 
 <div id="save_game_dialog"></div>
 
-<div class="main_menu_buttons">
-  <button id="save_button" type="button" onClick="show_savegame_dialog();" >Save Game</button>
-</div>
+<% if ((guest_mode != null && guest_mode.equals("false"))) { %>
+  <div class="main_menu_buttons">
+    <button id="save_button" type="button" onClick="show_savegame_dialog();" >Save Game</button>
+  </div>
+<% } else { %>  
+<br>  Please log in to save games<br>
+<% } %>
 
 <div class="main_menu_buttons">
   <button id="surrender_button" type="button" onClick="surrender_game();" >Surrender Game</button>
@@ -23,7 +30,7 @@
 
 
 <br><br>
-
+<h3>Freeciv music player</h3>
 <div style="width: 500px; height: 400px; overflow: auto;">
  
 		<div class="jp-playlist-player"> 

@@ -1,4 +1,5 @@
-cmdlevel ctrl
+cmdlevel ctrl first
+set allowtake H1Ah1adOo
 set autotoggle 1
 set timeout 60
 set saveturns 0

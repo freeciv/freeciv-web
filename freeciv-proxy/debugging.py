@@ -46,6 +46,14 @@ def get_debug_info(civcoms):
       platform.system(),
       cpu));
 
+  try:
+    f = open("/proc/loadavg");
+    contents = f.read();
+    code += "Load average: " + contents;
+    f.close()
+  except:
+    print("Cannot open uptime file: /proc/uptime");
+
 
   try:    
     code += ("<h3>Logged in users  (count %i) :</h3>" % len(civcoms));

@@ -341,6 +341,31 @@ function create_diplomacy_dialog(counterpart) {
   var agree_counterpart_html = "<div id='agree_counterpart' style='float:right;'></div>";
 
 
+  var title = "Diplomacy: " + counterpart['name'] 
+		 + " of the " + nations[counterpart['nation']]['adjective'];
+
+  $("#diplomacy_dialog").attr("title", title);
+  $("#diplomacy_dialog").dialog({
+			bgiframe: true,
+			modal: false,
+			width: "50%",
+			buttons: {
+				"Accept treaty": function() {
+				        accept_treaty_req();
+				},
+				"Cancel meeting" : function() {
+				        cancel_meeting_req();
+				}
+			},
+			close: function() {
+			     cancel_meeting_req();
+			}
+		});
+	
+  $("#diplomacy_dialog").dialog('open');		
+  $(".ui-dialog").css("overflow", "visible");
+
+
 
   $("#diplomacy_player_box_self").html(flag_self_html + agree_self_html 
 		                       + player_info_html);
@@ -439,29 +464,6 @@ function create_diplomacy_dialog(counterpart) {
   $('#jmenu_counterpart').jmenu({animation:'slide',duration:700});
 
 
-  var title = "Diplomacy: " + counterpart['name'] 
-		 + " of the " + nations[counterpart['nation']]['adjective'];
-
-  $("#diplomacy_dialog").attr("title", title);
-  $("#diplomacy_dialog").dialog({
-			bgiframe: true,
-			modal: false,
-			width: "50%",
-			buttons: {
-				"Accept treaty": function() {
-				        accept_treaty_req();
-				},
-				"Cancel meeting" : function() {
-				        cancel_meeting_req();
-				}
-			},
-			close: function() {
-			     cancel_meeting_req();
-			}
-		});
-	
-  $("#diplomacy_dialog").dialog('open');		
-  $(".ui-dialog").css("overflow", "visible");
 }
 
 

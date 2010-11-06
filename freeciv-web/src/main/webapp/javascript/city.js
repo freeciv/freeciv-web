@@ -413,6 +413,8 @@ function do_city_map_click(ptile)
 **************************************************************************/
 function does_city_have_improvement(pcity, improvement_name)
 {
+  if (pcity == null || pcity['improvements'] == null) return false;
+
   for (var z = 0; z < pcity['improvements'].length; z ++) {
     if (pcity['improvements'][z] == 1) {
       if (improvements[z]['name'] == improvement_name) {

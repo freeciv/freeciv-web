@@ -16,6 +16,8 @@ var mouse_x;
 var mouse_y;
 var keyboard_input = true;
 
+var allow_right_click = false;
+
 var current_focus = [];
 var goto_active = false;
 

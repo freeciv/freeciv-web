@@ -48,7 +48,7 @@
 
 </head>
 
-<body onload="civclient_init();" onmousemove="mouse_moved_cb(event);" oncontextmenu="return false" onresize="mapview_window_resized();" onOrientationChange="orientation_changed();" onbeforeunload="send_surrender_game();">
+<body onload="civclient_init();" onmousemove="mouse_moved_cb(event);" oncontextmenu="return allow_right_click;" onresize="mapview_window_resized();" onOrientationChange="orientation_changed();" onbeforeunload="send_surrender_game();">
 	
 <%-- This is the jQuery jPlayer which plays HTML5 audio. --%>
 <div id="jquery_jplayer"></div> 

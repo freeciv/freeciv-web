@@ -384,4 +384,5 @@ function set_default_mapview_active()
   chatbox_scroll_down();
 
   tech_dialog_active = false;
+  allow_right_click = false;
 }

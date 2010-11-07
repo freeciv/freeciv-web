@@ -15,9 +15,10 @@
   <div class="main_menu_buttons">
     <button id="save_button" type="button" onClick="show_savegame_dialog();" >Save Game</button>
   </div>
-<% } else { %>  
-<br>  Please log in to save games<br>
-<% } %>
+
+  <% } %>
+
+
 
 <div class="main_menu_buttons">
   <button id="surrender_button" type="button" onClick="surrender_game();" >Surrender Game</button>
@@ -28,6 +29,17 @@
   <button id="end_button" type="button" onClick="window.location='/';" >End Game</button>
 </div>
 
+<div id="share_button_box" class="main_menu_buttons">
+  <button id="share_button" type="button" onClick="prepare_share_game_map();" >View map as image</button>
+</div>
+<br>
+
+<div id="map_image"></div>
+
+
+<% if ((guest_mode != null && guest_mode.equals("true"))) { %>
+    <br>  <b>Please log in using OpenID for full savegame support.</b><br>
+<% } %>
 
 <br><br>
 <h3>Freeciv music player</h3>

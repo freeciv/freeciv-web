@@ -283,3 +283,59 @@ function send_surrender_game()
     send_request (myJSONText);
   }
 }
+
+/**************************************************************************
+...
+**************************************************************************/
+function prepare_share_game_map()
+{
+  $("#share_button").html("Please wait while generating image...");
+
+  setTimeout("share_game_map();", 100);
+}
+
+/**************************************************************************
+...
+**************************************************************************/
+function share_game_map()
+{
+  var fullmap_canvas = document.createElement('canvas');
+  var w = map['xsize'] * tileset_tile_width * 0.8;
+  var h = map['ysize'] * tileset_tile_height * 1.1;
+
+  fullmap_canvas.width = w;
+  fullmap_canvas.height = h;
+
+  mapview['width'] = w;
+  mapview['height'] = h; 
+  mapview['store_width'] = w;
+  mapview['store_height'] = h;
+
+  center_tile_mapcanvas(map_pos_to_tile(map['xsize']/2, map['ysize']/2));
+
+  mapview_canvas = fullmap_canvas;
+  mapview_canvas_ctx = mapview_canvas.getContext("2d");
+    
+  if (!has_canvas_text_support) {
+    CanvasTextFunctions.enable(mapview_canvas_ctx);
+  }
+    
+  update_map_canvas_full();
+
+  // save mapview canvas image as PNG!
+  var mapImageData = Canvas2Image.saveAsPNG(mapview_canvas, true);
+  mapImageData.id = "map_image_data";
+  $("#map_image").append(mapImageData);
+  $("#map_image_data").css("width", 500);
+  $("#map_image_data").css("height", 300);
+  $("#map_image").append($("<p>Right click on image to save it</p>"));
+
+  // we're done. set default mapview canvas active again.
+  setup_window_size ();
+  set_default_mapview_active();
+  $("#share_button").html("Image ready.");
+  allow_right_click = true;
+
+}
+
+

@@ -51,6 +51,28 @@ Freeciv.net is an Open Source strategy game which can be played online against o
 </span>
 
 
+
+
+<br><br><br>
+<span class="title">Freeciv.net now supports saving map as image</span>
+<br>
+
+<span class="date">November 7, 2010</span>
+<br>
+<span class="article">
+	Freeciv.net now supports saving the game map as an image, so that you can save and share
+	the great nations that you create. In the game, simply go to the options tab, and click on "View map as image".
+	Then you can share your nations on Facebook, Twitter and Flickr. <a href="http://www.freeciv.net/maps/">This OpenLayers map</a>
+	is an example of what you can do with your nations. Have a lot of fun!
+
+	<br>
+
+</span>
+
+
+
+
+
 <br><br><br>
 
 <object width="548" height="436"><param name="movie" value="http://www.youtube.com/v/p-nkr_Cz1O4?fs=1&amp;hl=nb_NO"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/p-nkr_Cz1O4?fs=1&amp;hl=nb_NO" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="548" height="436"></embed></object>

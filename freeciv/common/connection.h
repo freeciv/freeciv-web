@@ -37,7 +37,7 @@
 struct hash_table;
 struct timer_list;
 
-#define MAX_LEN_PACKET   4096
+#define MAX_LEN_PACKET   4096 * 4
 
 #define MAX_LEN_BUFFER   (MAX_LEN_PACKET * 128)
 #define MAX_LEN_CAPSTR    512

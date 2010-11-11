@@ -51,6 +51,19 @@ Freeciv.net is an Open Source strategy game which can be played online against o
 </span>
 
 
+<br><br><br>
+<span class="title"><a href="http://brazilsgamer.blogspot.com/2010/11/freeciv-online-first-playthrough-pt-1.html">Brazilian Gamer: Freeciv.net First Playthrough, Part 1</a></span>
+<br>
+
+<span class="date">November 11, 2010</span>
+<br>
+<span class="article">
+ Brazilian Gamer plays Freeciv.net! Read all about the adventures that David at the Brazilian Gamer has while playing a game of Freeciv. This is a multi part story, stay tuned for part 2 also.
+	<br>
+
+</span>
+
+
 
 
 <br><br><br>

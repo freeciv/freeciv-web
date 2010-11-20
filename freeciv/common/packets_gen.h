@@ -953,13 +953,13 @@ struct packet_ruleset_building {
   Impr_type_id id;
   enum impr_genus_id genus;
   char name[MAX_LEN_NAME];
+  int build_cost;
   char graphic_str[MAX_LEN_NAME];
   char graphic_alt[MAX_LEN_NAME];
   int reqs_count;
   struct requirement reqs[MAX_NUM_REQS];
   int obsolete_by;
   Impr_type_id replaced_by;
-  int build_cost;
   int upkeep;
   int sabotage;
   int flags;

@@ -32,6 +32,7 @@ const char *default_meta_message_string(void);
 const char *get_meta_patches_string(void);
 const char *get_meta_message_string(void);
 const char *get_user_meta_message_string(void);
+const char *get_meta_topic_string(void);
 
 void maybe_automatic_meta_message(const char *automatic);
 

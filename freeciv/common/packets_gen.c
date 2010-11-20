@@ -14368,12 +14368,18 @@ static struct packet_ruleset_building *receive_packet_ruleset_building_100(struc
     real_packet->genus = readin;
   }
   dio_get_string(&din, real_packet->name, sizeof(real_packet->name));
+  {
+    int readin;
+  
+    dio_get_uint32(&din, &readin);
+    real_packet->build_cost = readin;
+  }
   dio_get_string(&din, real_packet->graphic_str, sizeof(real_packet->graphic_str));
   dio_get_string(&din, real_packet->graphic_alt, sizeof(real_packet->graphic_alt));
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint32(&din, &readin);
     real_packet->reqs_count = readin;
   }
   
@@ -14404,18 +14410,12 @@ static struct packet_ruleset_building *receive_packet_ruleset_building_100(struc
     int readin;
   
     dio_get_uint32(&din, &readin);
-    real_packet->build_cost = readin;
-  }
-  {
-    int readin;
-  
-    dio_get_uint8(&din, &readin);
     real_packet->upkeep = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint32(&din, &readin);
     real_packet->sabotage = readin;
   }
   {
@@ -14439,9 +14439,10 @@ static int send_packet_ruleset_building_100(struct connection *pc, const struct 
   dio_put_uint8(&dout, real_packet->id);
   dio_put_uint8(&dout, real_packet->genus);
   dio_put_string(&dout, real_packet->name);
+  dio_put_uint32(&dout, real_packet->build_cost);
   dio_put_string(&dout, real_packet->graphic_str);
   dio_put_string(&dout, real_packet->graphic_alt);
-  dio_put_uint8(&dout, real_packet->reqs_count);
+  dio_put_uint32(&dout, real_packet->reqs_count);
 
     {
       int i;
@@ -14452,9 +14453,8 @@ static int send_packet_ruleset_building_100(struct connection *pc, const struct 
     } 
   dio_put_uint8(&dout, real_packet->obsolete_by);
   dio_put_uint8(&dout, real_packet->replaced_by);
-  dio_put_uint32(&dout, real_packet->build_cost);
-  dio_put_uint8(&dout, real_packet->upkeep);
-  dio_put_uint8(&dout, real_packet->sabotage);
+  dio_put_uint32(&dout, real_packet->upkeep);
+  dio_put_uint32(&dout, real_packet->sabotage);
   dio_put_uint32(&dout, real_packet->flags);
   dio_put_string(&dout, real_packet->soundtag);
   dio_put_string(&dout, real_packet->soundtag_alt);

@@ -167,6 +167,9 @@ int main(int argc, char *argv[])
       free(option);
     } else if ((option = get_option_malloc("--bind", argv, &inx, argc))) {
       srvarg.bind_addr = option; /* Never freed. */
+    } else if ((option = get_option_malloc("--topic", argv, &inx, argc))) {
+      sz_strlcpy(game.server.meta_info.topic, option);
+
     } else if ((option = get_option_malloc("--read", argv, &inx, argc)))
       srvarg.script_filename = option; /* Never freed. */
     else if ((option = get_option_malloc("--quitidle", argv, &inx, argc))) {
@@ -280,6 +283,8 @@ int main(int argc, char *argv[])
     fc_fprintf(stderr, _("  -r, --read FILE\tRead startup script FILE\n"));
     fc_fprintf(stderr,
 	       _("  -R, --Ranklog FILE\tUse FILE as ranking logfile\n"));
+    fc_fprintf(stderr, _("  -t, --topic \"MESSAGE\"\t\tSet the metaserver topic\n"));
+
     fc_fprintf(stderr, _("  -v, --version\t\tPrint the version number\n"));
     /* TRANS: No full stop after the URL, could cause confusion. */
     fc_fprintf(stderr, _("Report bugs at %s\n"), BUG_URL);

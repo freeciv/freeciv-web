@@ -109,6 +109,12 @@ const char *get_meta_message_string(void)
   return meta_message;
 }
 
+const char *get_meta_topic_string(void)
+{
+  return game.server.meta_info.topic;
+}
+
+
 /*************************************************************************
  The metaserver message set by user
 *************************************************************************/
@@ -258,6 +264,7 @@ static bool send_to_metaserver(enum meta_flag flag)
     mystrlcpy(s, "bye=1&", rest);
     s = end_of_strn(s, &rest);
   } else {
+    const char *topic;
     my_snprintf(s, rest, "version=%s&", fc_url_encode(VERSION_STRING));
     s = end_of_strn(s, &rest);
 
@@ -271,6 +278,13 @@ static bool send_to_metaserver(enum meta_flag flag)
     my_snprintf(s, rest, "serverid=%s&",
                 fc_url_encode(srvarg.serverid));
     s = end_of_strn(s, &rest);
+
+    topic = get_meta_topic_string();
+    if (topic != NULL && topic[0] != '\0') {
+      my_snprintf(s, rest, "topic=%s&",
+                  fc_url_encode(topic));
+      s = end_of_strn(s, &rest);
+    }
 
     my_snprintf(s, rest, "message=%s&",
                 fc_url_encode(get_meta_message_string()));
@@ -311,6 +325,11 @@ static bool send_to_metaserver(enum meta_flag flag)
                     fc_url_encode(plr->nation != NO_NATION_SELECTED 
                                   ? nation_plural_for_player(plr)
                                   : "none"));
+        my_snprintf(s, rest, "pln[]=%s&",
+                    fc_url_encode(plr->nation != NO_NATION_SELECTED 
+                                  ? nation_of_player(plr)->flag_graphic_str
+                                  : "none"));
+
         s = end_of_strn(s, &rest);
 
         my_snprintf(s, rest, "plh[]=%s&",

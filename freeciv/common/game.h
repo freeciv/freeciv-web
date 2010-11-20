@@ -113,6 +113,7 @@ struct civ_game {
       struct {
         bool user_message_set;
         char user_message[256];
+	char topic[256];
       } meta_info;
     } server;
   };

@@ -888,9 +888,6 @@ void handle_goto_path_req(struct player *pplayer, int unit_id, int x, int y)
     send_packet_goto_path(pplayer->current_conn, &p);
 
   } else {
-    notify_player(pplayer, punit->tile, E_BAD_COMMAND,
-                  FTC_SERVER_INFO, NULL,
-                  _("The unit can't go there."));
     return ;
   }
 

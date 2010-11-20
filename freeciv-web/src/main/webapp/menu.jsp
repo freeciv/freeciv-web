@@ -41,6 +41,11 @@
   <a class="button" href="/preload.jsp?redir=/wireframe.jsp?do=scenarios">Start scenario game</a>
 </div>
 
+<div onmouseover="help_tutorial();">
+  <a class="button" href="/preload.jsp?redir=/tutorial.jsp">Start tutorial</a>
+</div>
+
+
 <% if ((guest_mode != null && guest_mode.equals("false"))) { %>
   <div onmouseover="help_load();">
     <a class="button" href="/preload.jsp?redir=/wireframe.jsp?do=load">Load saved game</a>
@@ -106,6 +111,11 @@ function help_facebook() {
   $("#menu_help").html("<b>Help:</b><br> Join this game created by your friend on Facebook.");
 }
 
+function help_tutorial() {
+  $("#menu_help").html("<b>Help:</b><br> Play this tutorial scenario to get an introduction to Freeciv.net. This is recommended the first time you play Freeciv.net.");
+}
+
+
 function help_facebook_announced() {
   $("#menu_help").html("<b>Help:</b><br> Start a new multiplayer game against your Facebook friends, and invite them to observe or join your game.");
 }
@@ -124,8 +134,8 @@ function help_openid_login() {
 <div id="menu_help">
 <b>Help:</b>
 <br>
-You have four ways to play Freeciv.net: Start a new single-player game, join another multiplayer game,
-start a new scenario game, or load an existing game.
+You have five ways to play Freeciv.net: Start a new single-player game, join another multiplayer game,
+start a new scenario game, play the tutorial or load an existing game.
 Multiplayer games requires at least 2 human players before they can begin, while single-player 
 games can start immediately.
 <br><br>

@@ -116,6 +116,9 @@ FIXME: Had to add -lssl when compiling server...
 - create .awsAuth and change mode like this:  chmod 600 .awsAuth
 
 
+Also: 
+Set ulimit -n 65535 in /etc/profile
+and add some TCP/IP tuning in /etc/sysctrl.conf
 
 TODO:
 -----

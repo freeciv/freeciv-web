@@ -43,6 +43,7 @@ void handle_player_attribute_block(struct player *pplayer);
 struct packet_player_attribute_chunk;
 void handle_player_attribute_chunk(struct player *pplayer, struct packet_player_attribute_chunk *packet);
 void handle_unit_move(struct player *pplayer, int unit_id, int x, int y);
+void handle_goto_path_req(struct player *pplayer, int unit_id, int x, int y);
 void handle_unit_build_city(struct player *pplayer, int unit_id, char *name);
 void handle_unit_disband(struct player *pplayer, int unit_id);
 void handle_unit_change_homecity(struct player *pplayer, int unit_id, int city_id);

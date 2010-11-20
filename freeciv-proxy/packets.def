@@ -829,6 +829,21 @@ PACKET_UNIT_MOVE=52;cs,dsend
   COORD x, y;
 end
 
+PACKET_GOTO_PATH_REQ=184;cs,dsend
+  UNIT unit_id;
+  COORD x, y;
+end
+
+
+# used for showing GOTO path in web client.
+PACKET_GOTO_PATH=185;sc,dsend
+  UNIT unit_id;
+  UINT16 length;
+  DIRECTION dir[MAX_LEN_ROUTE:length];
+  COORD dest_x, dest_y;
+end
+
+
 PACKET_UNIT_BUILD_CITY=53;cs,dsend
   UNIT unit_id;
   STRING name[MAX_LEN_NAME];
@@ -1288,15 +1303,15 @@ PACKET_RULESET_BUILDING=104;sc,lsend
   IMPROVEMENT id;
   IMPR_GENUS genus;
   STRING name[MAX_LEN_NAME];
+  UINT32 build_cost;
   STRING graphic_str[MAX_LEN_NAME];
   STRING graphic_alt[MAX_LEN_NAME];
-  UINT8 reqs_count;
+  UINT32 reqs_count;
   REQUIREMENT reqs[MAX_NUM_REQS:reqs_count];
   TECH obsolete_by;
   IMPROVEMENT replaced_by;
-  UINT16 build_cost;
-  UINT8 upkeep, sabotage;
-  UINT16 flags;
+  UINT32 upkeep, sabotage;
+  UINT32 flags;
   STRING soundtag[MAX_LEN_NAME];
   STRING soundtag_alt[MAX_LEN_NAME];
   STRING helptext[MAX_LEN_PACKET];

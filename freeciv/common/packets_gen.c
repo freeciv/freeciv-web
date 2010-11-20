@@ -191,6 +191,12 @@ void *get_packet_from_connection_helper(struct connection *pc,
   case PACKET_UNIT_MOVE:
     return receive_packet_unit_move(pc, type);
 
+  case PACKET_GOTO_PATH_REQ:
+    return receive_packet_goto_path_req(pc, type);
+
+  case PACKET_GOTO_PATH:
+    return receive_packet_goto_path(pc, type);
+
   case PACKET_UNIT_BUILD_CITY:
     return receive_packet_unit_build_city(pc, type);
 
@@ -655,6 +661,12 @@ const char *get_packet_name(enum packet_type type)
 
   case PACKET_UNIT_MOVE:
     return "PACKET_UNIT_MOVE";
+
+  case PACKET_GOTO_PATH_REQ:
+    return "PACKET_GOTO_PATH_REQ";
+
+  case PACKET_GOTO_PATH:
+    return "PACKET_GOTO_PATH";
 
   case PACKET_UNIT_BUILD_CITY:
     return "PACKET_UNIT_BUILD_CITY";
@@ -7846,6 +7858,256 @@ int dsend_packet_unit_move(struct connection *pc, int unit_id, int x, int y)
   real_packet->y = y;
   
   return send_packet_unit_move(pc, real_packet);
+}
+
+static struct packet_goto_path_req *receive_packet_goto_path_req_100(struct connection *pc, enum packet_type type)
+{
+  RECEIVE_PACKET_START(packet_goto_path_req, real_packet);
+  {
+    int readin;
+  
+    dio_get_uint32(&din, &readin);
+    real_packet->unit_id = readin;
+  }
+  {
+    int readin;
+  
+    dio_get_uint32(&din, &readin);
+    real_packet->x = readin;
+  }
+  {
+    int readin;
+  
+    dio_get_uint32(&din, &readin);
+    real_packet->y = readin;
+  }
+
+  RECEIVE_PACKET_END(real_packet);
+}
+
+static int send_packet_goto_path_req_100(struct connection *pc, const struct packet_goto_path_req *packet)
+{
+  const struct packet_goto_path_req *real_packet = packet;
+  SEND_PACKET_START(PACKET_GOTO_PATH_REQ);
+
+  dio_put_uint32(&dout, real_packet->unit_id);
+  dio_put_uint32(&dout, real_packet->x);
+  dio_put_uint32(&dout, real_packet->y);
+
+  SEND_PACKET_END;
+}
+
+static void ensure_valid_variant_packet_goto_path_req(struct connection *pc)
+{
+  int variant = -1;
+
+  if(pc->phs.variant[PACKET_GOTO_PATH_REQ] != -1) {
+    return;
+  }
+
+  if(FALSE) {
+  } else if(TRUE) {
+    variant = 100;
+  } else {
+    die("unknown variant");
+  }
+  pc->phs.variant[PACKET_GOTO_PATH_REQ] = variant;
+}
+
+struct packet_goto_path_req *receive_packet_goto_path_req(struct connection *pc, enum packet_type type)
+{
+  if(!pc->used) {
+    freelog(LOG_ERROR,
+	    "WARNING: trying to read data from the closed connection %s",
+	    conn_description(pc));
+    return NULL;
+  }
+  assert(pc->phs.variant != NULL);
+  if (!pc->is_server) {
+    freelog(LOG_ERROR, "Receiving packet_goto_path_req at the client.");
+  }
+  ensure_valid_variant_packet_goto_path_req(pc);
+
+  switch(pc->phs.variant[PACKET_GOTO_PATH_REQ]) {
+    case 100: return receive_packet_goto_path_req_100(pc, type);
+    default: die("unknown variant"); return NULL;
+  }
+}
+
+int send_packet_goto_path_req(struct connection *pc, const struct packet_goto_path_req *packet)
+{
+  if(!pc->used) {
+    freelog(LOG_ERROR,
+	    "WARNING: trying to send data to the closed connection %s",
+	    conn_description(pc));
+    return -1;
+  }
+  assert(pc->phs.variant != NULL);
+  if (pc->is_server) {
+    freelog(LOG_ERROR, "Sending packet_goto_path_req from the server.");
+  }
+  ensure_valid_variant_packet_goto_path_req(pc);
+
+  switch(pc->phs.variant[PACKET_GOTO_PATH_REQ]) {
+    case 100: return send_packet_goto_path_req_100(pc, packet);
+    default: die("unknown variant"); return -1;
+  }
+}
+
+int dsend_packet_goto_path_req(struct connection *pc, int unit_id, int x, int y)
+{
+  struct packet_goto_path_req packet, *real_packet = &packet;
+
+  real_packet->unit_id = unit_id;
+  real_packet->x = x;
+  real_packet->y = y;
+  
+  return send_packet_goto_path_req(pc, real_packet);
+}
+
+static struct packet_goto_path *receive_packet_goto_path_100(struct connection *pc, enum packet_type type)
+{
+  RECEIVE_PACKET_START(packet_goto_path, real_packet);
+  {
+    int readin;
+  
+    dio_get_uint32(&din, &readin);
+    real_packet->unit_id = readin;
+  }
+  {
+    int readin;
+  
+    dio_get_uint32(&din, &readin);
+    real_packet->length = readin;
+  }
+  
+  {
+    int i;
+  
+    if(real_packet->length > MAX_LEN_ROUTE) {
+      freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
+      real_packet->length = MAX_LEN_ROUTE;
+    }
+    for (i = 0; i < real_packet->length; i++) {
+      {
+    int readin;
+  
+    dio_get_uint8(&din, &readin);
+    real_packet->dir[i] = readin;
+  }
+    }
+  }
+  {
+    int readin;
+  
+    dio_get_uint32(&din, &readin);
+    real_packet->dest_x = readin;
+  }
+  {
+    int readin;
+  
+    dio_get_uint32(&din, &readin);
+    real_packet->dest_y = readin;
+  }
+
+  RECEIVE_PACKET_END(real_packet);
+}
+
+static int send_packet_goto_path_100(struct connection *pc, const struct packet_goto_path *packet)
+{
+  const struct packet_goto_path *real_packet = packet;
+  SEND_PACKET_START(PACKET_GOTO_PATH);
+
+  dio_put_uint32(&dout, real_packet->unit_id);
+  dio_put_uint32(&dout, real_packet->length);
+
+    {
+      int i;
+
+      for (i = 0; i < real_packet->length; i++) {
+        dio_put_uint8(&dout, real_packet->dir[i]);
+      }
+    } 
+  dio_put_uint32(&dout, real_packet->dest_x);
+  dio_put_uint32(&dout, real_packet->dest_y);
+
+  SEND_PACKET_END;
+}
+
+static void ensure_valid_variant_packet_goto_path(struct connection *pc)
+{
+  int variant = -1;
+
+  if(pc->phs.variant[PACKET_GOTO_PATH] != -1) {
+    return;
+  }
+
+  if(FALSE) {
+  } else if(TRUE) {
+    variant = 100;
+  } else {
+    die("unknown variant");
+  }
+  pc->phs.variant[PACKET_GOTO_PATH] = variant;
+}
+
+struct packet_goto_path *receive_packet_goto_path(struct connection *pc, enum packet_type type)
+{
+  if(!pc->used) {
+    freelog(LOG_ERROR,
+	    "WARNING: trying to read data from the closed connection %s",
+	    conn_description(pc));
+    return NULL;
+  }
+  assert(pc->phs.variant != NULL);
+  if (pc->is_server) {
+    freelog(LOG_ERROR, "Receiving packet_goto_path at the server.");
+  }
+  ensure_valid_variant_packet_goto_path(pc);
+
+  switch(pc->phs.variant[PACKET_GOTO_PATH]) {
+    case 100: return receive_packet_goto_path_100(pc, type);
+    default: die("unknown variant"); return NULL;
+  }
+}
+
+int send_packet_goto_path(struct connection *pc, const struct packet_goto_path *packet)
+{
+  if(!pc->used) {
+    freelog(LOG_ERROR,
+	    "WARNING: trying to send data to the closed connection %s",
+	    conn_description(pc));
+    return -1;
+  }
+  assert(pc->phs.variant != NULL);
+  if (!pc->is_server) {
+    freelog(LOG_ERROR, "Sending packet_goto_path from the client.");
+  }
+  ensure_valid_variant_packet_goto_path(pc);
+
+  switch(pc->phs.variant[PACKET_GOTO_PATH]) {
+    case 100: return send_packet_goto_path_100(pc, packet);
+    default: die("unknown variant"); return -1;
+  }
+}
+
+int dsend_packet_goto_path(struct connection *pc, int unit_id, int length, enum direction8 *dir, int dest_x, int dest_y)
+{
+  struct packet_goto_path packet, *real_packet = &packet;
+
+  real_packet->unit_id = unit_id;
+  real_packet->length = length;
+  {
+    int i;
+
+    for (i = 0; i < real_packet->length; i++) {
+      real_packet->dir[i] = dir[i];
+    }
+  }
+  real_packet->dest_x = dest_x;
+  real_packet->dest_y = dest_y;
+  
+  return send_packet_goto_path(pc, real_packet);
 }
 
 static struct packet_unit_build_city *receive_packet_unit_build_city_100(struct connection *pc, enum packet_type type)

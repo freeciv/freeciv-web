@@ -22,7 +22,7 @@ class civserverproc(Thread):
    while 1:
     try:
         retcode = call("civserver --port " + str(self.port) + " -q 20 -e " 
-                       + " -m -M " + metaserver  + " --read " + pubscript +  " --log " + logdir + "civserver-" + str(self.port) + ".log", shell=True)
+                       + " -m -M " + metaserver  + " --topic \"Singleplayer\" --read " + pubscript +  " --log " + logdir + "civserver-" + str(self.port) + ".log", shell=True)
         if retcode < 0:
             print >>sys.stderr, "Civserver was terminated by signal", -retcode
         else:

@@ -154,9 +154,13 @@ function handle_chat_msg(packet)
     var username = connections[conn_id]['username'];
     add_chatbox_text("<b>" + username + ":</b>" + message);
   } else {
-    add_chatbox_text(message);
-    // 45 is the event code for tutorial
-    //if (event == 45) alert(message); 
+    if (packet['event'] == 45) {	  
+      var regxp = /\n/gi;
+      message = message.replace(regxp, "<br>\n");
+      show_dialog_message("Message for you:", message);
+    } else {
+      add_chatbox_text(message);
+    }
   }
 }
 
@@ -744,3 +748,9 @@ function handle_edit_object_created(packet)
 {
   /* edit not supported. */
 }
+
+function handle_goto_path(packet) 
+{
+  show_goto_path(packet);
+}
+

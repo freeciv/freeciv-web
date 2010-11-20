@@ -204,6 +204,20 @@ function drawPath(ctx, x1, y1, x2, y2, x3, y3, x4, y4)
 /**************************************************************************
   ...
 **************************************************************************/
+function drawGotoLine(ctx, x1, y1, x2, y2)
+{
+    ctx.strokeStyle = '#f00';
+    ctx.lineWidth = 2;
+    ctx.beginPath(); 
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.stroke();
+}
+
+
+/**************************************************************************
+  ...
+**************************************************************************/
 function mapview_put_tile(pcanvas, tag, canvas_x, canvas_y) {
   if (tileset[tag] == null) {
     console.log("Missing in tileset " + tag);

@@ -149,6 +149,13 @@ bool server_handle_packet(enum packet_type type, void *packet,
       ((struct packet_unit_move *)packet)->y);
     return TRUE;
 
+  case PACKET_GOTO_PATH_REQ:
+    handle_goto_path_req(pplayer,
+      ((struct packet_goto_path_req *)packet)->unit_id,
+      ((struct packet_goto_path_req *)packet)->x,
+      ((struct packet_goto_path_req *)packet)->y);
+    return TRUE;
+
   case PACKET_UNIT_BUILD_CITY:
     handle_unit_build_city(pplayer,
       ((struct packet_unit_build_city *)packet)->unit_id,

@@ -29,6 +29,9 @@ var SELECT_APPEND = 3;
 
 var intro_click_description = true; 
 
+var goto_request_map = {};
+var current_goto_path = [];
+
 function mouse_moved_cb(e)
 {
   mouse_x = 0;
@@ -50,7 +53,13 @@ function mouse_moved_cb(e)
     mouse_x = mouse_x - mapview_canvas.offsetLeft;
     mouse_y = mouse_y - mapview_canvas.offsetTop;
   }
-  
+
+  if (goto_active && current_focus.length > 0) {
+    var ptile = canvas_pos_to_tile(mouse_x, mouse_y);
+    if (ptile != null) {
+      request_goto_path(current_focus[0]['id'], ptile['x'], ptile['y']);
+    }
+  }
 
 }
 
@@ -567,10 +576,17 @@ function activate_goto()
 {
   goto_active = true;
   mapview_canvas.style.cursor = "crosshair";
-  
-  if (intro_click_description) {
-    add_chatbox_text("Click on the tile to send this unit to.");
-    intro_click_description = false;
+ 
+  if (current_focus.length > 0) {
+    var ptile = canvas_pos_to_tile(mouse_x, mouse_y);
+    if (ptile != null) {
+      request_goto_path(current_focus[0]['id'], ptile['x'], ptile['y']);
+    }
+
+    if (intro_click_description) {
+      add_chatbox_text("Click on the tile to send this unit to.");
+      intro_click_description = false;
+    }
   }
 }
 
@@ -581,6 +597,8 @@ function deactivate_goto()
 {
   goto_active = false;
   mapview_canvas.style.cursor = "default";
+  goto_request_map = {};
+  current_goto_path = [];
 
 }
 
@@ -749,6 +767,11 @@ function key_unit_disband()
     var punit = funits[i]; 
     var packet = [{"packet_type" : "unit_disband", "unit_id" : punit['id'] }];
     send_request (JSON.stringify(packet));
+
+    /* Also remove unit immediately in client, to ensure it is removed. */
+    clear_tile_unit(punit);
+    client_remove_unit(punit);
+
   }  
 }
 
@@ -813,4 +836,43 @@ function process_diplomat_arrival(pdiplomat, target_id)
 function left_click_center()
 {
   return (is_iphone() || jQuery.browser.opera);
+}
+
+
+/****************************************************************************
+  Request GOTO path for unit with unit_id, and dst_x, dst_y in map coords.
+****************************************************************************/
+function request_goto_path(unit_id, dst_x, dst_y)
+{
+  if (goto_request_map[dst_x + "," + dst_y] == null) {
+    goto_request_map[dst_x + "," + dst_y] = true;
+
+    var packet = [{"packet_type" : "goto_path_req", "unit_id" : unit_id,
+                  "x" : dst_x, "y" : dst_y}];
+    send_request (JSON.stringify(packet));
+  
+  } else {
+    current_goto_path = goto_request_map[dst_x + "," + dst_y];
+  }
+}
+
+/****************************************************************************
+  Show the GOTO path in the unit_goto_path packet.
+****************************************************************************/
+function show_goto_path(goto_packet)
+{
+  var punit = units[goto_packet['unit_id']];
+  var t0 =  map_pos_to_tile(punit['x'], punit['y']);
+  var ptile = t0;
+  current_goto_path = [];
+  current_goto_path.push(ptile);
+
+  for (var i = 0; i < goto_packet['dir'].length; i++) {
+    var dir = goto_packet['dir'][i];
+    ptile = mapstep(ptile, dir);
+    current_goto_path.push(ptile);
+  }
+
+  goto_request_map[goto_packet['dest_x'] + "," + goto_packet['dest_y']] 
+	  = current_goto_path;
 }

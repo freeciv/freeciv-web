@@ -31,7 +31,7 @@ function update_govt_dialog()
     if (!can_player_get_gov(govt_id)) {
       bgcolor = "#000000; color:#333333;";
     } else if (requested_gov == govt_id) {
-      bgcolor = "#ff0000; color:#000000;";
+      bgcolor = "#53d000; color:#000000;";
     }
 
     if (client.conn.playing['government'] == govt_id) {

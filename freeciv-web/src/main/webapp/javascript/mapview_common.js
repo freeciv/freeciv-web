@@ -430,7 +430,7 @@ function update_map_canvas(canvas_x, canvas_y, width, height)
       } 
     } 
   }
-  
+ 
 }
 
 
@@ -541,7 +541,8 @@ function update_map_canvas_full()
     if (active_city != null) return;
      
     update_map_canvas(0, 0, mapview['store_width'], mapview['store_height']);
-    
+    update_goto_path_lines(); 
+ 
     last_redraw_time = new Date().getTime();
 
     var time = last_redraw_time - start;
@@ -558,6 +559,32 @@ function update_map_canvas_check()
   var time = new Date().getTime() - last_redraw_time;
   if (time > MAPVIEW_REFRESH_INTERVAL) {
     update_map_canvas_full();
+  }
+
+}
+
+/**************************************************************************
+  ...
+**************************************************************************/
+function update_goto_path_lines()
+{
+  for (var i = 0; i < current_goto_path.length - 1; i++) {
+    var ptile = current_goto_path[i];
+    var ntile = current_goto_path[i+1];
+
+    if (ptile['x'] == (map['xsize'] - 1) && ntile['x'] == 0) continue;
+    if (ntile['x'] == (map['xsize'] - 1) && ptile['x'] == 0) continue;
+
+    var r = map_to_gui_pos(ptile['x'], ptile['y']);
+    var gui_x1 = r['gui_dx'] - mapview['gui_x0'] + (tileset_tile_width / 2);
+    var gui_y1 = r['gui_dy'] - mapview['gui_y0'] + (tileset_tile_height / 2); 
+
+    var s = map_to_gui_pos(ntile['x'], ntile['y']);
+    var gui_x2 = s['gui_dx'] - mapview['gui_x0'] + (tileset_tile_width / 2);
+    var gui_y2 = s['gui_dy'] - mapview['gui_y0'] + (tileset_tile_height / 2);
+
+    drawGotoLine(mapview_canvas_ctx, gui_x1, gui_y1, gui_x2, gui_y2);
+
   }
 
 }

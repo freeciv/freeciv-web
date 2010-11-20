@@ -535,6 +535,20 @@ struct packet_unit_move {
   int y;
 };
 
+struct packet_goto_path_req {
+  int unit_id;
+  int x;
+  int y;
+};
+
+struct packet_goto_path {
+  int unit_id;
+  int length;
+  enum direction8 dir[MAX_LEN_ROUTE];
+  int dest_x;
+  int dest_y;
+};
+
 struct packet_unit_build_city {
   int unit_id;
   char name[MAX_LEN_NAME];
@@ -1510,6 +1524,8 @@ enum packet_type {
   PACKET_EDIT_OBJECT_CREATED,
   PACKET_CONNECT_MSG,
   PACKET_UNIT_TRANSFORM,
+  PACKET_GOTO_PATH_REQ,
+  PACKET_GOTO_PATH,
 
   PACKET_LAST  /* leave this last */
 };
@@ -1709,6 +1725,14 @@ void lsend_packet_unit_combat_info(struct conn_list *dest, const struct packet_u
 struct packet_unit_move *receive_packet_unit_move(struct connection *pc, enum packet_type type);
 int send_packet_unit_move(struct connection *pc, const struct packet_unit_move *packet);
 int dsend_packet_unit_move(struct connection *pc, int unit_id, int x, int y);
+
+struct packet_goto_path_req *receive_packet_goto_path_req(struct connection *pc, enum packet_type type);
+int send_packet_goto_path_req(struct connection *pc, const struct packet_goto_path_req *packet);
+int dsend_packet_goto_path_req(struct connection *pc, int unit_id, int x, int y);
+
+struct packet_goto_path *receive_packet_goto_path(struct connection *pc, enum packet_type type);
+int send_packet_goto_path(struct connection *pc, const struct packet_goto_path *packet);
+int dsend_packet_goto_path(struct connection *pc, int unit_id, int length, enum direction8 *dir, int dest_x, int dest_y);
 
 struct packet_unit_build_city *receive_packet_unit_build_city(struct connection *pc, enum packet_type type);
 int send_packet_unit_build_city(struct connection *pc, const struct packet_unit_build_city *packet);

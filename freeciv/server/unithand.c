@@ -793,6 +793,110 @@ void handle_unit_change_activity(struct player *pplayer, int unit_id,
 }
 
 /**************************************************************************
+  This function handles GOTO path requests from the client.
+**************************************************************************/
+void handle_goto_path_req(struct player *pplayer, int unit_id, int x, int y)
+{
+  struct unit *punit = player_find_unit_by_id(pplayer, unit_id);
+  struct tile *ptile = map_pos_to_tile(x, y);
+  struct pf_parameter parameter;
+  struct pf_map *pfm;
+  struct pf_path *path;
+  struct tile *old_tile;
+  int i = 0;
+  struct packet_goto_path p;
+
+  if (NULL == punit) {
+    /* Shouldn't happen */
+    freelog(LOG_ERROR, "handle_unit_move()"
+	    " invalid unit %d",
+	    unit_id);
+    return;
+  }
+
+  if (NULL == ptile) {
+    /* Shouldn't happen */
+    freelog(LOG_ERROR, "handle_unit_move()"
+	    " invalid %s (%d) tile (%d,%d)",
+	    unit_rule_name(punit),
+	    unit_id,
+	    x, y);
+    return;
+  }
+
+  if (!is_player_phase(unit_owner(punit), game.info.phase)) {
+    /* Client is out of sync, ignore */
+    freelog(LOG_VERBOSE, "handle_unit_move()"
+	    " invalid %s (%d) %s != phase %d",
+	    unit_rule_name(punit),
+	    unit_id,
+	    nation_rule_name(nation_of_unit(punit)),
+	    game.info.phase);
+    return;
+  }
+
+  p.unit_id = punit->id;
+  p.dest_x = x;
+  p.dest_y = y;
+
+
+  /* Use path-finding to find a goto path. */
+  pft_fill_unit_parameter(&parameter, punit);
+  pfm = pf_map_new(&parameter);
+  path = pf_map_get_path(pfm, ptile);
+  pf_map_destroy(pfm);
+
+  if (path) {
+
+    p.length = path->length - 1;
+
+    old_tile = path->positions[0].tile;
+
+    /* Remove city spot reservations for AI settlers on city founding
+     * mission, before goto_tile reset. */
+    if (punit->ai.ai_role != AIUNIT_NONE) {
+      ai_unit_new_role(punit, AIUNIT_NONE, NULL);
+    }
+
+    punit->ai.control = FALSE;
+    punit->goto_tile = NULL;
+
+    free_unit_orders(punit);
+    /* If we waited on a tile, reset punit->done_moving */
+    punit->done_moving = (punit->moves_left <= 0);
+    punit->has_orders = TRUE;
+    punit->orders.length = path->length - 1;
+    punit->orders.index = 0;
+    punit->orders.repeat = FALSE;
+    punit->orders.vigilant = FALSE;
+    punit->orders.list
+      = fc_malloc(path->length * sizeof(*(punit->orders.list)));
+    for (i = 0; i < path->length - 1; i++) {
+      struct tile *new_tile = path->positions[i + 1].tile;
+      int dir;
+      if (same_pos(new_tile, old_tile)) {
+        dir = -1;
+      } else {
+        dir = get_direction_for_step(old_tile, new_tile);
+      }
+      old_tile = new_tile;
+      p.dir[i] = dir;
+
+    }
+    pf_path_destroy(path);
+
+    send_packet_goto_path(pplayer->current_conn, &p);
+
+  } else {
+    notify_player(pplayer, punit->tile, E_BAD_COMMAND,
+                  FTC_SERVER_INFO, NULL,
+                  _("The unit can't go there."));
+    return ;
+  }
+
+}
+
+/**************************************************************************
   This has been rewritten to handle server-side gotos for the web client.
 **************************************************************************/
 void handle_unit_move(struct player *pplayer, int unit_id, int x, int y)
@@ -841,7 +945,6 @@ void handle_unit_move(struct player *pplayer, int unit_id, int x, int y)
   pf_map_destroy(pfm);
 
   if (path) {
-    //send_goto_path(punit, path, NULL);
 
     old_tile = path->positions[0].tile;
 

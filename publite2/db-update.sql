@@ -1,3 +1,6 @@
+alter table players  add column flag VARCHAR(128);
+
+
 alter table auth add column `openid_user` varchar(512) default NULL;
 
 

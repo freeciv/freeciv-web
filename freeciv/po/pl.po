@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: freeciv\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-23 11:42+0200\n"
+"POT-Creation-Date: 2010-11-20 17:32+0100\n"
 "PO-Revision-Date: 2007-09-01 22:37+0300\n"
 "Last-Translator: Mateusz Stefek <matusik_s@o2.pl>\n"
 "Language-Team: none\n"
@@ -2445,28 +2445,28 @@ msgstr ""
 "Ostrzeżenie: opcja %s jest przestarzała. Aby włączyć opcję metaserwera użyj -"
 "m.\n"
 
-#: server/civserver.c:218
+#: server/civserver.c:221
 #, c-format
 msgid "Illegal value \"%s\" for --Announce"
 msgstr ""
 
-#: server/civserver.c:222
+#: server/civserver.c:225
 #, c-format
 msgid "Error: unknown option '%s'\n"
 msgstr "Błąd: nieznana opcja '%s'\n"
 
-#: server/civserver.c:233
+#: server/civserver.c:236
 #, c-format
 msgid "This is the server for %s"
 msgstr "To jest serwer dla %s"
 
 #. TRANS: No full stop after the URL, could cause confusion.
-#: server/civserver.c:235
+#: server/civserver.c:238
 #, c-format
 msgid "You can learn a lot about Freeciv at %s"
 msgstr "Wiele o Freeciv możesz się dowiedzieć na %s"
 
-#: server/civserver.c:240 client/client_main.c:285 manual/civmanual.c:380
+#: server/civserver.c:243 client/client_main.c:285 manual/civmanual.c:380
 #, c-format
 msgid ""
 "Usage: %s [option ...]\n"
@@ -2475,110 +2475,115 @@ msgstr ""
 "Składnia: %s [opcja ...]\n"
 "Poprawnymi opcjami są:\n"
 
-#: server/civserver.c:241
+#: server/civserver.c:244
 msgid ""
 "  -A  --Announce PROTO\tAnnounce game in LAN using protocol PROTO (IPv4/IPv6/"
 "none)\n"
 msgstr ""
 
-#: server/civserver.c:243
+#: server/civserver.c:246
 #, fuzzy
 msgid ""
 "  -a  --auth FILE\tEnable server authentication with configuration from "
 "FILE.\n"
 msgstr "  -a  --auth\t\tWłącz uwierzytelnienie.\n"
 
-#: server/civserver.c:245
+#: server/civserver.c:248
 msgid "  -G  --Guests\t\tAllow guests to login if auth is enabled.\n"
 msgstr "  -G  --Guests\t\tZezwalaj gościom na przyłączenie się do serwera.\n"
 
-#: server/civserver.c:247
+#: server/civserver.c:250
 msgid "  -N  --Newusers\tAllow new users to login if auth is enabled.\n"
 msgstr ""
 "  -N  --Newusers\tZezwalaj nowym użytkownikom na przyłączanie się do "
 "serwera.\n"
 
-#: server/civserver.c:250
+#: server/civserver.c:253
 msgid "  -b  --bind ADDR\tListen for clients on ADDR\n"
 msgstr "  -b  --bind ADDR\tPrzyjmuj klientów z adresu ADDR\n"
 
-#: server/civserver.c:252 client/client_main.c:290
+#: server/civserver.c:255 client/client_main.c:290
 msgid ""
 "  -d, --debug NUM\tSet debug log level (0 to 4, or 4:file1,min,max:...)\n"
 msgstr ""
 "  -d, --debug N\t\tUstaw poziom śledzenia (0,1,2,3,lub 3:plik1,min,"
 "maks:...)\n"
 
-#: server/civserver.c:256 client/client_main.c:294
+#: server/civserver.c:259 client/client_main.c:294
 msgid "  -d, --debug NUM\tSet debug log level (0 to 3)\n"
 msgstr "  -d, --debug N\t\tUstaw poziom śledzenia (0,1,2)\n"
 
-#: server/civserver.c:258
+#: server/civserver.c:261
 msgid "  -f, --file FILE\tLoad saved game FILE\n"
 msgstr "  -f, --file PLIK\tWczytaj zachowaną grę PLIK\n"
 
-#: server/civserver.c:260 client/client_main.c:297
+#: server/civserver.c:263 client/client_main.c:297
 msgid "  -h, --help\t\tPrint a summary of the options\n"
 msgstr "  -h, --help\t\tWypisz listę opcji.\n"
 
-#: server/civserver.c:261
+#: server/civserver.c:264
 #, fuzzy
 msgid "  -i, --identity ADDR\tBe known as ADDR at metaserver\n"
 msgstr "  -M, --Metaserver ADRES\tUstal ADRES jako adres metaserwera.\n"
 
-#: server/civserver.c:262
+#: server/civserver.c:265
 msgid "  -l, --log FILE\tUse FILE as logfile\n"
 msgstr "  -l, --log PLIK\tUżyj PLIK jako pliku dziennika.\n"
 
 #
-#: server/civserver.c:263
+#: server/civserver.c:266
 msgid "  -m, --meta\t\tNotify metaserver and send server's info\n"
 msgstr "  -m, --meta\t\tZamelduj się i wyślij info do metaserwera\n"
 
-#: server/civserver.c:265
+#: server/civserver.c:268
 msgid "  -M, --Metaserver ADDR\tSet ADDR as metaserver address\n"
 msgstr "  -M, --Metaserver ADRES\tUstal ADRES jako adres metaserwera.\n"
 
-#: server/civserver.c:268
+#: server/civserver.c:271
 msgid "  -p, --port PORT\tListen for clients on port PORT\n"
 msgstr "  -p, --port PORT\tNasłuchuj na klientów na porcie PORT\n"
 
-#: server/civserver.c:270
+#: server/civserver.c:273
 msgid "  -q, --quitidle TIME\tQuit if no players for TIME seconds\n"
 msgstr "  -q, --quitidle CZAS\tZakończ jeśli brak graczy po CZAS sekundach\n"
 
-#: server/civserver.c:272
+#: server/civserver.c:275
 msgid "  -e, --exit-on-end\tWhen a game ends, exit instead of restarting\n"
 msgstr ""
 "  -e, --exit-on-end\tGdy gra się skończy, zakończ program zamiast "
 "restartować\n"
 
-#: server/civserver.c:275
+#: server/civserver.c:278
 msgid "  -s, --saves DIR\tSave games to directory DIR\n"
 msgstr "  -s, --saves DIR\tZapisuje gry do katalogu DIR\n"
 
-#: server/civserver.c:277
+#: server/civserver.c:280
 msgid "  -S, --Serverid ID\tSets the server id to ID\n"
 msgstr "  -S, --Serverid ID\tUstawia id serwera na ID\n"
 
-#: server/civserver.c:279
+#: server/civserver.c:282
 msgid "  -P, --Ppm\t\tSave ppms of the map when saving the game.\n"
 msgstr "  -P, --Ppm\t\tZapisuj ppm'y dla mapy podczas zapisywania gry.\n"
 
-#: server/civserver.c:280
+#: server/civserver.c:283
 msgid "  -r, --read FILE\tRead startup script FILE\n"
 msgstr "  -r, --read PLIK\tUruchom skrypt startowy PLIK\n"
 
-#: server/civserver.c:282
+#: server/civserver.c:285
 msgid "  -R, --Ranklog FILE\tUse FILE as ranking logfile\n"
 msgstr "  -R, --Ranklog PLIK\tUżyj PLIK jako pliku dziennika rankingu.\n"
 
-#: server/civserver.c:283 client/client_main.c:316
+#: server/civserver.c:286
+#, fuzzy
+msgid "  -t, --topic \"MESSAGE\"\t\tSet the metaserver topic\n"
+msgstr "  -m, --meta HOST\tPołącz z metaserwerem HOST\n"
+
+#: server/civserver.c:288 client/client_main.c:316
 msgid "  -v, --version\t\tPrint the version number\n"
 msgstr "  -v, --version\t\tWypisz numer wersji.\n"
 
 #. TRANS: No full stop after the URL, could cause confusion.
-#: server/civserver.c:285 client/client_main.c:322
+#: server/civserver.c:290 client/client_main.c:322
 #: client/gui-gtk-2.0/gui_main.c:263 client/gui-sdl/gui_main.c:178
 #: client/gui-xaw/gui_main.c:252 manual/civmanual.c:388
 #, fuzzy, c-format
@@ -4312,11 +4317,11 @@ msgstr "Przesunięto jednostkę %s z powodu zmiany terenu."
 msgid "Disbanded your %s due to changing terrain."
 msgstr "Rozproszono jednostkę %s z powodu zmiany terenu."
 
-#: server/meta.c:193
+#: server/meta.c:199
 msgid "Not reporting to the metaserver in this game."
 msgstr "Nie melduję się na metaserwerze w tej grze."
 
-#: server/meta.c:438
+#: server/meta.c:457
 #, fuzzy, c-format
 msgid "Metaserver: bad address: <%s %d>."
 msgstr "Metaserwer: zły adres: [%s:%d]."
@@ -8001,110 +8006,110 @@ msgstr "Nie można dodać jednostki %s do miasta %s."
 msgid "%s added to aid %s in growing."
 msgstr "%s dodano by wspomóc wzrost miasta %s."
 
-#: server/unithand.c:896
+#: server/unithand.c:893 server/unithand.c:999
 #, fuzzy
 msgid "The unit can't go there."
 msgstr "Nie możesz tam atakować."
 
-#: server/unithand.c:1082
+#: server/unithand.c:1185
 msgid "Your Nuclear missile was shot down by SDI defences, what a waste."
 msgstr ""
 "Twój pocisk nuklearny został zestrzelony przez obronę SDI, co za strata."
 
-#: server/unithand.c:1086
+#: server/unithand.c:1189
 #, c-format
 msgid "The nuclear attack on %s was avoided by your SDI defense."
 msgstr "Obrona SDI zapobiegła atakowi jądrowemu na miasto %s."
 
 #. TRANS: "Your Cannon ... the Polish Destroyer."
-#: server/unithand.c:1161
+#: server/unithand.c:1264
 #, fuzzy, c-format
 msgid "Your %s survived the pathetic attack from the %s %s."
 msgstr "Twoja jednostka %s stacjonująca obroniła się przed %s %s."
 
 #. TRANS: "... Cannon ... the Polish Destroyer."
-#: server/unithand.c:1171
+#: server/unithand.c:1274
 #, fuzzy, c-format
 msgid "Your attacking %s failed against the %s %s!"
 msgstr "Twoja jednostka %s zawiodła podczas ataku przeciwko %s %s!"
 
-#: server/unithand.c:1252
+#: server/unithand.c:1355
 #, c-format
 msgid "Only %s can attack from sea."
 msgstr "Tylko %s mogą atakować z morza."
 
-#: server/unithand.c:1258
+#: server/unithand.c:1361
 msgid "Cannot attack from sea."
 msgstr "Nie możesz atakować z morza."
 
-#: server/unithand.c:1266 server/unittools.c:2270
+#: server/unithand.c:1369 server/unittools.c:2270
 msgid "Cannot attack unless you declare war first."
 msgstr "Nie możesz atakować zanim nie wypowiesz wojny."
 
-#: server/unithand.c:1272
+#: server/unithand.c:1375
 #, c-format
 msgid "%s can only move into your own zone of control."
 msgstr "Jednostka %s może się poruszać tylko we własnej strefie kontroli."
 
-#: server/unithand.c:1279
+#: server/unithand.c:1382
 #, c-format
 msgid "%s cannot move that far from the coast line."
 msgstr ""
 
-#: server/unithand.c:1286
+#: server/unithand.c:1389
 #, fuzzy, c-format
 msgid "Cannot invade unless you break peace with %s first."
 msgstr "Nie możesz atakować zanim nie wypowiesz wojny."
 
-#: server/unithand.c:1332
+#: server/unithand.c:1435
 msgid "This unit has no moves left."
 msgstr "Tej jednostce nie pozostało wystarczająco dużo ruchu."
 
-#: server/unithand.c:1388
+#: server/unithand.c:1491
 msgid "No diplomat action possible."
 msgstr "Nie można wykonać żadnej czynności dyplomatycznej."
 
-#: server/unithand.c:1392
+#: server/unithand.c:1495
 #, fuzzy, c-format
 msgid "Unit cannot perform diplomatic action from %s."
 msgstr "* Może wykonywać czynności dyplomatyczne.\n"
 
-#: server/unithand.c:1411
+#: server/unithand.c:1514
 #, fuzzy, c-format
 msgid "You must declare war on %s first.  Try using players dialog."
 msgstr ""
 "Musisz najpierw wypowiedzieć wojnę przeciwko %s.  Użyj raportu o graczach "
 "(F3)."
 
-#: server/unithand.c:1430
+#: server/unithand.c:1533
 msgid "This unit is being transported, and so cannot bombard."
 msgstr "ta jednostka jest transportowana i dlatego nie może ostrzeliwać."
 
-#: server/unithand.c:1446
+#: server/unithand.c:1549
 msgid "You can't attack there."
 msgstr "Nie możesz tam atakować."
 
-#: server/unithand.c:1469
+#: server/unithand.c:1572
 msgid "This type of troops cannot take over a city."
 msgstr "Ta jednostka nie potrafi przejąć kontroli nad miastem."
 
-#: server/unithand.c:1487
+#: server/unithand.c:1590
 msgid "A transported unit is not allied to all units or city on target tile."
 msgstr ""
 "Transportowana jednostka nie jest w sojuszu z wszystkimi jednostkami lub "
 "miastem na polu docelowym."
 
-#: server/unithand.c:1537
+#: server/unithand.c:1640
 #, c-format
 msgid "Your %s helps build the %s in %s (%d remaining)."
 msgstr "Twoja %s pomogła w budowie %s w mieście %s (pozostało: %d)."
 
-#: server/unithand.c:1539
+#: server/unithand.c:1642
 #, c-format
 msgid "Your %s helps build the %s in %s (%d surplus)."
 msgstr "Twoja %s pomogła w budowie %s w mieście %s (nadwyżka: %d)."
 
-#: server/unithand.c:1595
+#: server/unithand.c:1698
 #, c-format
 msgid ""
 "Sorry, your %s cannot establish a trade route because it has no home city"
@@ -8112,28 +8117,28 @@ msgstr ""
 "Twoja %s nie może ustanowić tu trasy handlowej ponieważ nie należy do "
 "żadnego miasta"
 
-#: server/unithand.c:1609
+#: server/unithand.c:1712
 #, c-format
 msgid "Sorry, your %s cannot establish a trade route between %s and %s"
 msgstr "Twoja %s nie może ustanowić tu trasy handlowej pomiędzy %s i %s!"
 
-#: server/unithand.c:1639 server/unithand.c:1660
+#: server/unithand.c:1742 server/unithand.c:1763
 #, c-format
 msgid "Sorry, your %s cannot establish a trade route here!"
 msgstr "Sorry, twoja %s nie może ustanowić tu trasy handlowej!"
 
-#: server/unithand.c:1644 server/unithand.c:1665
+#: server/unithand.c:1747 server/unithand.c:1768
 #, c-format
 msgid "      The city of %s already has %d better trade routes!"
 msgstr "      Od miasta %s biegną już %d lepsze trasy handlowe!"
 
-#: server/unithand.c:1679 server/unithand.c:1692
+#: server/unithand.c:1782 server/unithand.c:1795
 #, c-format
 msgid "Sorry, %s has canceled the trade route from %s to your city %s."
 msgstr ""
 "Niestety, %s anulował(a) trasę handlową z miasta %s do twojego miasta %s."
 
-#: server/unithand.c:1726
+#: server/unithand.c:1829
 #, c-format
 msgid ""
 "Your %s from %s has arrived in %s, and revenues amount to %d in gold and "

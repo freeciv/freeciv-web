@@ -299,6 +299,10 @@ function client_handle_packet(p)
     case  "connect_msg":
       handle_connect_msg(p[i]);
       break;
+
+    case  "goto_path":
+      handle_goto_path(p[i]);
+      break;
  
     }
   }

@@ -154,6 +154,15 @@ bool client_handle_packet(enum packet_type type, void *packet)
       ((struct packet_unit_combat_info *)packet)->make_winner_veteran);
     return TRUE;
 
+  case PACKET_GOTO_PATH:
+    handle_goto_path(
+      ((struct packet_goto_path *)packet)->unit_id,
+      ((struct packet_goto_path *)packet)->length,
+      ((struct packet_goto_path *)packet)->dir,
+      ((struct packet_goto_path *)packet)->dest_x,
+      ((struct packet_goto_path *)packet)->dest_y);
+    return TRUE;
+
   case PACKET_UNIT_DIPLOMAT_ANSWER:
     handle_unit_diplomat_answer(
       ((struct packet_unit_diplomat_answer *)packet)->diplomat_id,

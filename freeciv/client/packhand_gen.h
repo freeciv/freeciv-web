@@ -50,6 +50,7 @@ void handle_unit_info(struct packet_unit_info *packet);
 struct packet_unit_short_info;
 void handle_unit_short_info(struct packet_unit_short_info *packet);
 void handle_unit_combat_info(int attacker_unit_id, int defender_unit_id, int attacker_hp, int defender_hp, bool make_winner_veteran);
+void handle_goto_path(int unit_id, int length, enum direction8 *dir, int dest_x, int dest_y);
 void handle_unit_diplomat_answer(int diplomat_id, int target_id, int cost, enum diplomat_actions action_type);
 void handle_diplomacy_init_meeting(int counterpart, int initiated_from);
 void handle_diplomacy_cancel_meeting(int counterpart, int initiated_from);

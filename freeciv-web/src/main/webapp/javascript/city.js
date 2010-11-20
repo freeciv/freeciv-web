@@ -123,9 +123,14 @@ function show_city_dialog(pcity)
     var improvement = improvements[pcity['production_value']];
     $("#city_production").html("Producing: " + improvement['name']);
     turns_to_complete = city_turns_to_build(pcity, improvement, true);
+    if (improvement['name'] == "Coinage") {
+      turns_to_complete = FC_INFINITY;
+    }
   }
   if (turns_to_complete != FC_INFINITY) {
     $("#city_production_turns").html("Turns to completion: " + turns_to_complete);
+  } else {
+    $("#city_production_turns").html("-");
   }
 
   

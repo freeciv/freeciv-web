@@ -147,6 +147,11 @@ if ( isset($port) ) {
         $pln[$i] = addneededslashes($pln[$i]);
         $ins .= "nation=\"$pln[$i]\", ";
       }
+      if (isset($pln[$i]) ) {
+        $pln[$i] = addneededslashes($pln[$i]);
+        $ins .= "flag=\"$pln[$i]\", ";
+      }
+
       if (isset($plt[$i]) ) {
         $plt[$i] = addneededslashes($plt[$i]);
         $ins .= "type=\"$plt[$i]\", ";
@@ -414,11 +419,13 @@ if ( isset($port) ) {
         $nr = fcdb_num_rows($res);
         if ( $nr > 0 ) {
           print "<p><div><table style=\"width: 60%;\">\n";
-          print "<tr id='meta_header'><th class=\"left\">Leader</th><th>Nation</th>";
+          print "<tr id='meta_header'><th class=\"left\">Flag</th><th>Leader</th><th>Nation</th>";
           print "<th>User</th><th>Type</th></tr>\n";
           for ( $inx = 0; $inx < $nr; $inx++ ) {
             $row = fcdb_fetch_array($res, $inx);
             print "<tr id='meta_row'><td class=\"left\">";
+            print "<img src='/tiles/f." . db2html($row["flag"]) . ".png'>";
+            print "</td><td>";
             print db2html($row["name"]);
             print "</td><td>";
             print db2html($row["nation"]);
@@ -453,14 +460,14 @@ if ( isset($port) ) {
       }
     } else {
        print "<h1>Freeciv.net single-player games</h1>\n";
-      $stmt="select host,port,version,patches,state,message,unix_timestamp()-unix_timestamp(stamp), (select user from players p where p.hostport =  CONCAT(s.host ,':',s.port) and p.type = 'Human' Limit 1 ) as player from servers s where message like '%Singleplayer%' and state = 'Running' order by state,host,port asc";
+      $stmt="select host,port,version,patches,state,message,unix_timestamp()-unix_timestamp(stamp), IFNULL((select user from players p where p.hostport =  CONCAT(s.host ,':',s.port) and p.type = 'Human' Limit 1 ), 'none') as player, IFNULL((select flag from players p where p.hostport =  CONCAT(s.host ,':',s.port) and p.type = 'Human' Limit 1 ), 'none') as flag from servers s where topic = 'Singleplayer' and state = 'Running' order by state,host,port asc";
       $res = fcdb_exec($stmt);
       $nr = fcdb_num_rows($res);
       if ( $nr > 0 ) {
         print "<br /><table>\n";
         print "<tr id='meta_header'><th class=\"left\">Action:</th><th>Server ID:</th>";
         print "<th>State</th><th>Players</th>";
-        print "<th style='width:45%;'>Topic</th><th>Last Update</th>";
+        print "<th style='width:45%;'>Topic</th>";
         print "<th>Player</th>\n";
         print "<th>Info:</th></tr>";
         for ( $inx = 0; $inx < $nr; $inx++ ) {
@@ -481,13 +488,8 @@ if ( isset($port) ) {
           print "</td><td style=\"width: 30%\" title='To change the message in the topic, use the command:  /metamessage your-new-message in the game.'>";
           print db2html($row["message"]);
           print "</td><td>";
-          $time_sec = $row["unix_timestamp()-unix_timestamp(stamp)"];
-          $last_update = sprintf("%ss", $time_sec);
-          if ($time_sec >= 60) {
-            $last_update = sprintf("%sm", floor($time_sec/60));
-          }
-          print $last_update;
-          print "</td><td>";
+	  print "<img src='/tiles/f." . db2html($row["flag"]) . ".png'>&nbsp;";
+
           print db2html($row["player"]);
 	  	  print "</td>"
 	  	  print "<td>";
@@ -499,11 +501,11 @@ if ( isset($port) ) {
         }
         print "</table>";
       } else {
-        print "<h3>No single player games currently active</h3>";
+        print "<h3><a href='/wireframe.jsp?do=login'>Click here</a> to start a new single player game!</h3>";
       }
       print "<br><br>";
       print "<h1>Freeciv.net multiplayer games around the world</h1><br />\n";
-      $stmt="select host,port,version,patches,state,message,unix_timestamp()-unix_timestamp(stamp),available from servers where message like '%Multiplayer%' or message like '%Tournament%' order by state,host,port asc";
+      $stmt="select host,port,version,patches,state,message,unix_timestamp()-unix_timestamp(stamp),available from servers where topic = 'Multiplayer' order by state,host,port asc";
       $res = fcdb_exec($stmt);
       $nr = fcdb_num_rows($res);
       if ( $nr > 0 ) {

@@ -1,8 +1,7 @@
 # Keep this section first
 [scenario]
 name=_("Tutorial")
-description=_("Play this tutorial scenario to get an\
- introduction to Freeciv.")
+description=_("Tutorial Scenario.")
 
 [script]
 code=$
@@ -47,17 +46,14 @@ function city_built_callback(city)
   if city.owner:is_human() then
     if citiesbuilt == 0 then
       notify.event(city.owner, city.tile, E.SCRIPT,
-_("Now you have built your first city.  The city window should have\n\
-opened automatically; if not click on the city to open it.  Cities are\n\
-a fundamental concept in Freeciv, so you should familiarize yourself\n\
-with them by playing around in the window.  See the help menu for more.\n\
+_("Now you have built your first city.  Click on the new city to open\n\
+the city dialog. Cities are a fundamental concept in Freeciv, \n\
+so you should familiarize yourself with them by playing around in\n\
+the window.  See the help menu for more.\n\
 \n\
 You probably want to build some settlers first, so as to expand your\n\
-civilization further.  Click on the production tab, then click on the\n\
-settler unit from the list of possible productions, then click on the\n\
-Change button to begin building it.  When you are done, close the city\n\
-dialog.  If all goes well the city should display the settler\n\
-production on the map view."))
+civilization further.  Click on the settler unit from the list of \n\
+possible productions.  When you are done, close the city dialog. "))
     elseif citiesbuilt == 1 then
       notify.event(city.owner, city.tile, E.SCRIPT,
 _("Congratulations, you have founded your second city.  This city will\n\
@@ -72,13 +68,7 @@ the cities that has a high production, and convert it into a military\n\
 base. Build a Barracks there first, then start work on a military\n\
 unit.  Pick the best unit you have available - at the beginning of\n\
 the game, Warriors will be the only choice, but soon you will have \n\
-plenty of options.\n\
-\n\
-This might also be a good time to use the worklist feature of the\n\
-city dialog production report.  Click on Barracks, then click Change\n\
-to begin building them.  Then double-click on a military unit to\n\
-append it to the worklist.  As soon as the Barracks are complete the\n\
-city will automatically switch over to producing the unit."))
+plenty of options."))
     elseif citiesbuilt == 3 then
       notify.event(city.owner, city.tile, E.SCRIPT,
 _("Another city!  You are really getting the hang of this.  You\n\
@@ -92,16 +82,6 @@ will show one or more stars to indicate if there are units in the\n\
 city.  The bottom row shows what the city is building, and how long it\n\
 will take; it also shows how long the city will take to grow to the\n\
 next largest size."))
-    elseif citiesbuilt == 4 then
-      notify.event(city.owner, city.tile, E.SCRIPT,
-_("As the number of cities in your empire grows, it becomes harder to\n\
-manage individual cities.  This is where the city report becomes\n\
-useful.  Press F4 to bring it up.  This report shows a list of cities\n\
-with various statistics about each.  Play around with it a bit if you\n\
-like (return to the map view by pressing F1 or clicking on the Map\n\
-tab).  With a bit of practice it is possible to control almost every\n\
-aspect of the cities from this report.  The full power of the city\n\
-report is beyond the scope of this tutorial, however."))
     end
     citiesbuilt = citiesbuilt + 1
   end
@@ -151,9 +131,9 @@ a wasted citizen.\n\
 \n\
 There are several things that can be done about this.  One quick fix\n\
 is to build a temple (or other cultural building) that will make an\n\
-unhappy citizen content (see the help on City Improvements for specs\n\
+unhappy citizen content (see the help on buildings for specs\n\
 on each building type).  As you get more large cities, it may pay off\n\
-to change your tax rates (by pressing ctrl-T) to dedicate some of\n\
+to change your tax rates (by pressing shift-T) to dedicate some of\n\
 your taxes directly to luxuries (every two luxuries will pacify one\n\
 citizen).  Building a marketplace enhances the benefit from this\n\
 by providing +50%% luxuries to the city."))
@@ -216,8 +196,8 @@ and plains provide food for the city.  Forests and hills provide\n\
 the resources (shields) needed for building things.  Rivers and ocean\n\
 give trade bonuses that provide civilization-wide benefits.  Desert,\n\
 tundra, and mountains generally provide little output and are not\n\
-of much use to small cities.  See the help on Terrain for more\n\
-information about terrain specs."))
+of much use to small cities.  See the help on terrain and specials\n\
+for more information about terrain specs."))
     elseif settlersbuilt == 1 then
       notify.event(unit.owner, unit.tile, E.SCRIPT,
 _("Your second Settlers should also be used to build a new city.\n\
@@ -246,8 +226,8 @@ function building_built_callback(building, city)
 _("You have built a Barracks.  This building will make any military\n\
 units you build start out as veterans.  Veteran units are stronger\n\
 than inexperienced (green) troops, and will survive longer in\n\
-combat.  See the help on City Improvements for more information\n\
-about this and other buildings.\n\
+combat.  See the help on buildings for more information about this\n\
+and other buildings.\n\
 \n\
 You probably want to start building a military unit in the city\n\
 that built the Barracks.  A barracks are a significant investment\n\
@@ -307,9 +287,8 @@ are an integral concept in Freeciv.  As you increase your technology\n\
 level new units, buildings, governments, and various free bonuses will\n\
 become available to you.\n\
 \n\
-For now, go over into the Science Dialog and play around a little.\n\
-Press F6 to open the science dialog (or click on the Science tab in\n\
-the main window area).  Find the technology called Republic and click\n\
+For now, go over into the Technology Dialog and play around a little.\n\
+Find the technology called Republic and click\n\
 on it.  Now Republic has been set as your technology goal; this means\n\
 the next advance on the path toward this technology will automatically\n\
 be chosen to research.  In the top of the window it shows how much\n\
@@ -318,11 +297,11 @@ comes from the taxable trade in your cities.  In the bottom of the\n\
 window is the tech tree; here you may left-click to set the research\n\
 target or research goal, or right-click to get help about a particular\n\
 technology.  When you are done playing around click on the Map tab\n\
-(F1) to return to the map view."))
+ to return to the map view."))
   elseif numtechs == 1 then
     notify.event(player, nil, E.SCRIPT,
 _("Now you have researched your second technology.  Go back into the\n\
-science dialog (F6) and take a quick look at your progress.  If you\n\
+Technology dialog and take a quick look at your progress.  If you\n\
 set Republic as your technology goal earlier, a new research target\n\
 should have been chosen for you automatically.  If you do not have\n\
 any goal set, however, there will not be any new target chosen until\n\
@@ -346,11 +325,10 @@ civilization is to be a peaceful trading nation or a conquering\n\
 juggernaut.  Each has advantages.\n\
 \n\
 For now, you probably want to switch straight into Republic.  In the\n\
-Civilization menu, go to the Government submenu and choose\n\
-Republic.  Yes you want a revolution!  Changing governments means\n\
-going through a few turns of anarchy, so it is not without cost.\n\
-However Republic is a substantially better form of government\n\
-than Despotism so the investment will soon pay off."))
+Government menu, choose Republic.  Yes you want a revolution!  \n\
+Changing governments means going through a few turns of anarchy, \n\
+so it is not without cost. However Republic is a substantially better\n\
+form of government than Despotism so the investment will soon pay off."))
   end
   numtechs = numtechs + 1
 end
@@ -477,8 +455,8 @@ swampsize=5
 deserts=5
 riverlength=5
 forestsize=20
-topology_id=5
-size=1
+topology_id=1
+size=2
 width=8
 height=8
 seed=0

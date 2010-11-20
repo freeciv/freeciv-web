@@ -173,7 +173,10 @@ function show_new_game_message()
       task is to conquer the world!  You should start by\n\
       exploring the land around you with your explorer,\n\
       and using your settlers to find a good place to build\n\
-      a city.  Use the number pad to move units around.");
+      a city. To move your units around, either use the number \n\
+      pad, or click on the Goto button, then click on the \n\
+      destination tile on the map.\n\
+      Good luck, and have a lot of fun!");
   } else {
     show_dialog_message("Welcome to Freeciv.net", 
       "Welcome to Freeciv.net.  You lead a civilization.  Your\n\

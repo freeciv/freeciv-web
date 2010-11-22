@@ -1,8 +1,9 @@
 <%
   String server = request.getServerName();
-  if (!server.equals("localhost") && !server.equals("games.freeciv.net")) {
-    /* games.freeciv.net has DNS geo load-balancing. */
-    response.sendRedirect ("http://games.freeciv.net/wireframe.jsp?do=menu");
+  if (!server.equals("localhost") && !server.equals("games.freeciv.net") && 
+    !server.equals("eu.freeciv.net") && !server.equals("us.freeciv.net")) {
+      /* games.freeciv.net has DNS geo load-balancing. */
+      response.sendRedirect ("http://games.freeciv.net/wireframe.jsp?do=menu");
   }
 %>
 

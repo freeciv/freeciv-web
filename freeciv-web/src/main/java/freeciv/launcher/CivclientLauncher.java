@@ -43,20 +43,6 @@ public class CivclientLauncher extends HttpServlet {
 		ServletContext srvContext = request.getSession().getServletContext();
 		HttpSession session = request.getSession();
 
-		/*try {
-			long lastAccessed = (Long) session.getAttribute("lastAccessed");
-			if (lastAccessed > 0 && System.currentTimeMillis() < lastAccessed + restartTimeLimit) {
-				response.sendError(
-						HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
-						"Recently joined a new game."
-								+ " Please wait a short while before trying again.");
-				return;
-			}
-		} catch (Exception err) {
-		}
-
-		session.setAttribute("lastAccessed", System.currentTimeMillis());*/
-
 		
 		/* Parse input parameters.. */
 		

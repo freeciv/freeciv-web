@@ -19,7 +19,7 @@ var isWorking = false;
 
 function network_init()
 {
-  civwebserver_url = civwebserver_url_base + "?p=" + civserverport + "&h=" + civserverhost + "&u=" + username;
+  civwebserver_url = civwebserver_url_base + "?p=" + civserverport + "&u=" + username;
 
   syncTimerId = setInterval("sync_civclient()", 20);
   

@@ -33,6 +33,10 @@ logger = logging.getLogger("freeciv-proxy");
 #import yappi
 #yappi.start()
 
+
+if len(sys.argv) == 2: 
+  PROXY_PORT = int(sys.argv[1]);
+
 print("Starting freeciv-proxy listening on port " + str(PROXY_PORT));
 
 try:

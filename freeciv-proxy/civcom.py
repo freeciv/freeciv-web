@@ -34,13 +34,12 @@ logger = logging.getLogger("freeciv-proxy");
 
 class CivCom(Thread):
 
-  def __init__ (self, username, civserverport, civserverhost):
+  def __init__ (self, username, civserverport):
     Thread.__init__(self)
     self.socket = None;
     self.username = username;
     self.civserverport = civserverport;
-    self.civserverhost = civserverhost;
-    self.key = username + str(civserverport) + civserverhost;
+    self.key = username + str(civserverport);
     self.send_buffer = [];
     self.lock = RLock();
     self.pingstamp = time.time();

@@ -1,3 +1,5 @@
+
+
 alter table players  add column flag VARCHAR(128);
 
 

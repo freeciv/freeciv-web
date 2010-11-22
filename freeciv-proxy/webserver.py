@@ -39,10 +39,10 @@ class CivWebServer(ThreadingMixIn, HTTPServer):
       civcom.send_buffer_append(payload_json);
 
   # get the civcom instance which corresponds to the requested user.
-  def get_civcom(self, username, civserverport, civserverhost, client_ip):
-    key = username + str(civserverport) + civserverhost;
+  def get_civcom(self, username, civserverport, client_ip):
+    key = username + str(civserverport);
     if key not in self.civcoms.keys():
-      civcom = CivCom(username, int(civserverport), civserverhost);
+      civcom = CivCom(username, int(civserverport));
       civcom.client_ip = client_ip;
       civcom.connect_time = time.time();
       civcom.set_civwebserver(self);
@@ -76,11 +76,10 @@ class WebserverHandler(BaseHTTPRequestHandler):
         params = dict([part.split('=') for part in url[4].split('&')])
         username = params["u"];
         civserverport = params["p"];
-        civserverhost = params["h"];
         
         # check if session is valid.
-        if (username == None or civserverport == None or civserverhost == None
-            or username == 'null' or civserverport == 'null' or civserverhost == 'null'): 
+        if (username == None or civserverport == None 
+            or username == 'null' or civserverport == 'null'): 
             self.send_error(500, "Invalid session");
             return;
 
@@ -90,7 +89,7 @@ class WebserverHandler(BaseHTTPRequestHandler):
           client_ip = self.headers.dict["x-forwarded-for"]
 
         # get the civcom instance which corresponds to this user.        
-        civcom = self.server.get_civcom(username, civserverport, civserverhost, client_ip);
+        civcom = self.server.get_civcom(username, civserverport, client_ip);
 
         if (civcom == None):
           self.send_error(503, "Could not authenticate user.");

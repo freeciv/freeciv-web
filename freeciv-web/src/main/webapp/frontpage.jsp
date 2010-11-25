@@ -41,11 +41,21 @@
 
 <!-- MAIN COLUMN WITH ARTICLES -->
 <div id="left-column">
-	
+
+
+	<iframe src="http://player.vimeo.com/video/17196286?autoplay=1" width="548" height="308" frameborder="0"></iframe>
+	<a class="title" href="/wireframe.jsp?do=login"><span class="title">Play Freeciv.net online now!</span></a>
+<br>
+
+<p>Freeciv.net is a turn based strategy game playable for free online using a HTML5 web browser. This video shows gameplay footage from the latest version of Freeciv.net. Coming to a Google Chrome Web Store near you soon! It will be free to play for ever! Stay tuned!</p> To play now, <a href="/wireframe.jsp?do=login">click here</a>!
+
+
+
+
+<br><br><br>
+
 <a href="/wireframe.jsp?do=login"><img src="/images/freeciv-screenshot-fp.png" width="548" height="407"></a>
 	
-<a class="title" href="/wireframe.jsp?do=login"><span class="title">Play Freeciv.net online now!</span></a>
-<br>
 <span class="article">
 Freeciv.net is an Open Source strategy game which can be played online against other players, or in single player mode against AI opponents.
 </span>
@@ -86,9 +96,6 @@ Freeciv.net is an Open Source strategy game which can be played online against o
 
 
 
-<br><br><br>
-
-<object width="548" height="436"><param name="movie" value="http://www.youtube.com/v/p-nkr_Cz1O4?fs=1&amp;hl=nb_NO"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/p-nkr_Cz1O4?fs=1&amp;hl=nb_NO" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="548" height="436"></embed></object>
 
 
 

@@ -38,12 +38,14 @@
 <br>
 <!--<div id="ad_top"></div>-->
 
+<div style="padding-left: 35px;">
+<object width="853" height="505"><param name="movie" value="http://www.youtube.com/v/YLVS2at3aQc?fs=1&amp;hl=nb_NO&amp;hd=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/YLVS2at3aQc?fs=1&amp;hl=nb_NO&amp;hd=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="853" height="505"></embed></object>
+</div>
 
 <!-- MAIN COLUMN WITH ARTICLES -->
 <div id="left-column">
 
 
-	<iframe src="http://player.vimeo.com/video/17196286?autoplay=1" width="548" height="308" frameborder="0"></iframe>
 	<a class="title" href="/wireframe.jsp?do=login"><span class="title">Play Freeciv.net online now!</span></a>
 <br>
 
@@ -58,6 +60,20 @@
 	
 <span class="article">
 Freeciv.net is an Open Source strategy game which can be played online against other players, or in single player mode against AI opponents.
+</span>
+
+<br><br><br>
+<span class="title"><a href="http://freeciv.tumblr.com/post/1717033921/development-plans-for-the-freeciv-net-project
+">Development plans for the Freeciv.net project</a></span>
+<br>
+
+<span class="date">November 28, 2010</span>
+<br>
+<span class="article">
+	These are the development plans for the Freeciv.net project. We want to listen to the feedback of our users, so if you have any
+	cool new features that you would like to suggest, then please let us know about your suggestions!
+	<br>
+
 </span>
 
 

@@ -38,13 +38,11 @@
 <br>
 <!--<div id="ad_top"></div>-->
 
-<div style="padding-left: 35px;">
-<object width="853" height="505"><param name="movie" value="http://www.youtube.com/v/YLVS2at3aQc?fs=1&amp;hl=nb_NO&amp;hd=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/YLVS2at3aQc?fs=1&amp;hl=nb_NO&amp;hd=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="853" height="505"></embed></object>
-</div>
 
 <!-- MAIN COLUMN WITH ARTICLES -->
 <div id="left-column">
 
+<object width="548" height="355"><param name="movie" value="http://www.youtube.com/v/YLVS2at3aQc?fs=1&amp;hl=nb_NO&amp;hd=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/YLVS2at3aQc?fs=1&amp;hl=nb_NO&amp;hd=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="548" height="355"></embed></object>
 
 	<a class="title" href="/wireframe.jsp?do=login"><span class="title">Play Freeciv.net online now!</span></a>
 <br>

@@ -21,20 +21,35 @@ function is_iphone()
   //return true;
 }
 
-function fc_redirect() 
+function fc_redirect_init()
 {
   if (is_iphone()) {
     window.location='/civclientlauncher?action=new'
   } else {
-    window.location='<%= redir_url %>'
+    setTimeout("fc_redirect();", 1200); 
   }
+
+
+}
+
+function fc_redirect() 
+{
+  window.location='<%= redir_url %>'
 }
 </script>
 </head>
 
-<body onload="fc_redirect();" text="#ffffff" bgcolor="#000000">
+<body onload="fc_redirect_init();" text="#eeeeee" bgcolor="#202020">
 
 <center>
+
+
+	<br><br>
+
+ 	<img src="/images/freeciv-splash.png">
+
+
+	<br><br>
 
 
 <br><br>

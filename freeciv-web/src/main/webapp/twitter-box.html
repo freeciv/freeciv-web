@@ -1,0 +1,45 @@
+<html>
+	<body>
+	<style>
+		body { margin: 0px 0px 0px 0px; }
+	</style>
+
+<div>
+<script src="http://widgets.twimg.com/j/2/widget.js"></script>
+<script>
+new TWTR.Widget({
+  version: 2,
+  type: 'search',
+  search: 'freeciv',
+  interval: 6000,
+  title: '',
+  subject: 'Freeciv.net on Twitter',
+  width: 270,
+  height: 350,
+  theme: {
+    shell: {
+      background: '#696969',
+      color: '#eeeeee'
+    },
+    tweets: {
+      background: '#eeeeee',
+      color: '#444444',
+      links: '#1985b5'
+    }
+  },
+  features: {
+    scrollbar: false,
+    loop: true,
+    live: true,
+    hashtags: true,
+    timestamp: true,
+    avatars: true,
+    behavior: 'default'
+  }
+}).render().start();
+</script>
+</div>
+
+
+</body>
+</html>

@@ -42,12 +42,37 @@
 <!-- MAIN COLUMN WITH ARTICLES -->
 <div id="left-column">
 
-<object width="548" height="355"><param name="movie" value="http://www.youtube.com/v/YLVS2at3aQc?fs=1&amp;hl=nb_NO&amp;hd=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/YLVS2at3aQc?fs=1&amp;hl=nb_NO&amp;hd=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="548" height="355"></embed></object>
-
-	<a class="title" href="/wireframe.jsp?do=login"><span class="title">Play Freeciv.net online now!</span></a>
+	<a class="title" href="https://chrome.google.com/webstore/detail/ojdnkfmlponpahkgadcaodiaeieadcbl"><span class="title">Freeciv.net now in the Google Chrome Web Store</span></a>
 <br>
 
+<p>
+Freeciv.net is now available in the <a  href="https://chrome.google.com/webstore/detail/ojdnkfmlponpahkgadcaodiaeieadcbl">Google Chrome Web Store!</a><br>
+
+This allows you to play Freeciv.net directly by clicking on a link on your Chrome browser start page. This means that Freeciv.net will be one of the 500 first web applications to be featured in the Chrome Web Store! And best of all, it is free! You can also provide feedback and comments on <a href="http://freeciv.tumblr.com/post/2135352064/freeciv-net-now-in-the-google-chrome-web-store">The Freeciv.net Project Blog</a>.
+<br><br>
+Install Freeciv.net from Chrome Web Store here now:<br>
+
+<br><br>
+<a href="https://chrome.google.com/webstore/detail/ojdnkfmlponpahkgadcaodiaeieadcbl"><img src="/images/chrome-web-store.png"></a>
+<br><br>
+<br><br>
+
+This is a video introduction to apps in Chrome Web Store:<br>
+
+<object width="548" height="333"><param name="movie" value="http://www.youtube.com/v/KMZLM2AhSE0?fs=1&amp;hl=nb_NO"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/KMZLM2AhSE0?fs=1&amp;hl=nb_NO" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="548" height="333"></embed></object>
+
+
+
+<br><br>
+
+<br>
+	<a class="title" href="/wireframe.jsp?do=login"><span class="title">Play Freeciv.net online now!</span></a>
+	<br>
+	
 <p>Freeciv.net is a turn based strategy game playable for free online using a HTML5 web browser. This video shows gameplay footage from the latest version of Freeciv.net. Coming to a Google Chrome Web Store near you soon! It will be free to play for ever! Stay tuned!</p> To play now, <a href="/wireframe.jsp?do=login">click here</a>!
+<br>
+	<object width="548" height="355"><param name="movie" value="http://www.youtube.com/v/YLVS2at3aQc?fs=1&amp;hl=nb_NO&amp;hd=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/YLVS2at3aQc?fs=1&amp;hl=nb_NO&amp;hd=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="548" height="355"></embed></object>
+
 
 
 

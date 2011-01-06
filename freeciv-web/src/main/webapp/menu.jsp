@@ -47,19 +47,6 @@
 </div>
 
 
-<% if ((guest_mode != null && guest_mode.equals("false"))) { %>
-  <div onmouseover="help_load();">
-    <a class="button" href="/preload.jsp?redir=/wireframe.jsp?do=load">Load saved game</a>
-  </div>
-<% } %>
-
-<% if (guest_mode == null || (guest_mode != null && guest_mode.equals("true"))) { %>
-  <div onmouseover="help_openid_login();">
-    <a class="button" href="/wireframe.jsp?do=openid_login">Login using OpenID</a>
-  </div>
-<% } %>
-
-
 <br>
 </center>
 </div>

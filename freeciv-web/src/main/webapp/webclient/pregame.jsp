@@ -16,10 +16,6 @@
       <a href="http://twitter.com/home?status=Join me in a Freeciv.net multiplayer game at http://www.freeciv.net/games/<%= session.getAttribute("username") %>" target="_new">
         <img src="/images/twitter-share.png" border="0" title="Invite friends on Twitter!">
       </a>
-<a href="#" onClick="stopMusic();">
-        <img src="/images/mute.png" border="0" title="Mute sound.">
-      </a>
-
 
     </div>
 

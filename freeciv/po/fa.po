@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fa\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-20 17:32+0100\n"
+"POT-Creation-Date: 2011-01-04 22:00+0100\n"
 "PO-Revision-Date: 2007-08-11 02:17+0300\n"
 "Last-Translator: Arman Ordookhani <arman_o71@Yahoo.com>\n"
 "Language-Team: Farsi(Persian)\n"
@@ -2987,27 +2987,6 @@ msgstr ""
 msgid ""
 "This *completely* removes a player from the game, including all cities and "
 "units etc.  Use with care!"
-msgstr ""
-
-#. TRANS: translate text between <> only
-#: server/commands.c:414
-msgid ""
-"save\n"
-"save <file-name>"
-msgstr ""
-
-#: server/commands.c:416
-msgid "Save game to file."
-msgstr ""
-
-#: server/commands.c:417
-msgid ""
-"Save the current game to file <file-name>.  If no file-name argument is "
-"given saves to \"<auto-save name prefix><year>m.sav[.gz]\".\n"
-"To reload a savegame created by 'save', start the server with the command-"
-"line argument:\n"
-"    --file <filename>\n"
-"and use the 'start' command once players have reconnected."
 msgstr ""
 
 #. TRANS: translate text between <> only
@@ -7248,131 +7227,131 @@ msgstr ""
 msgid "%s added to aid %s in growing."
 msgstr ""
 
-#: server/unithand.c:893 server/unithand.c:999
+#: server/unithand.c:996
 #, fuzzy
 msgid "The unit can't go there."
 msgstr "این مهره تطمیع نمی‌شود!"
 
-#: server/unithand.c:1185
+#: server/unithand.c:1182
 msgid "Your Nuclear missile was shot down by SDI defences, what a waste."
 msgstr ""
 
-#: server/unithand.c:1189
+#: server/unithand.c:1186
 #, c-format
 msgid "The nuclear attack on %s was avoided by your SDI defense."
 msgstr ""
 
 #. TRANS: "Your Cannon ... the Polish Destroyer."
-#: server/unithand.c:1264
+#: server/unithand.c:1261
 #, fuzzy, c-format
 msgid "Your %s survived the pathetic attack from the %s %s."
 msgstr "%s شما از حمله‌ی %s %s نجات یافت."
 
 #. TRANS: "... Cannon ... the Polish Destroyer."
-#: server/unithand.c:1274
+#: server/unithand.c:1271
 #, c-format
 msgid "Your attacking %s failed against the %s %s!"
 msgstr ""
 
-#: server/unithand.c:1355
+#: server/unithand.c:1352
 #, c-format
 msgid "Only %s can attack from sea."
 msgstr ""
 
-#: server/unithand.c:1361
+#: server/unithand.c:1358
 msgid "Cannot attack from sea."
 msgstr ""
 
-#: server/unithand.c:1369 server/unittools.c:2270
+#: server/unithand.c:1366 server/unittools.c:2270
 msgid "Cannot attack unless you declare war first."
 msgstr ""
 
-#: server/unithand.c:1375
+#: server/unithand.c:1372
 #, c-format
 msgid "%s can only move into your own zone of control."
 msgstr "%s فقط می‌تواند داخل محدوده کنترل  شما باشد."
 
-#: server/unithand.c:1382
+#: server/unithand.c:1379
 #, c-format
 msgid "%s cannot move that far from the coast line."
 msgstr ""
 
-#: server/unithand.c:1389
+#: server/unithand.c:1386
 #, c-format
 msgid "Cannot invade unless you break peace with %s first."
 msgstr ""
 
-#: server/unithand.c:1435
+#: server/unithand.c:1432
 msgid "This unit has no moves left."
 msgstr "برای این مهره حرکتی نمانده."
 
-#: server/unithand.c:1491
+#: server/unithand.c:1488
 msgid "No diplomat action possible."
 msgstr ""
 
-#: server/unithand.c:1495
+#: server/unithand.c:1492
 #, c-format
 msgid "Unit cannot perform diplomatic action from %s."
 msgstr "مهره از %s  نمی‌تواند فعالیت دیپلماتیک انجام دهد."
 
-#: server/unithand.c:1514
+#: server/unithand.c:1511
 #, c-format
 msgid "You must declare war on %s first.  Try using players dialog."
 msgstr ""
 
-#: server/unithand.c:1533
+#: server/unithand.c:1530
 msgid "This unit is being transported, and so cannot bombard."
 msgstr ""
 
-#: server/unithand.c:1549
+#: server/unithand.c:1546
 msgid "You can't attack there."
 msgstr ""
 
-#: server/unithand.c:1572
+#: server/unithand.c:1569
 msgid "This type of troops cannot take over a city."
 msgstr ""
 
-#: server/unithand.c:1590
+#: server/unithand.c:1587
 msgid "A transported unit is not allied to all units or city on target tile."
 msgstr ""
 
-#: server/unithand.c:1640
+#: server/unithand.c:1637
 #, c-format
 msgid "Your %s helps build the %s in %s (%d remaining)."
 msgstr "%s شما به ساخت %s در %s کمک کرد. (%d مانده)"
 
-#: server/unithand.c:1642
+#: server/unithand.c:1639
 #, c-format
 msgid "Your %s helps build the %s in %s (%d surplus)."
 msgstr "%s شما به ساخت %s در %s کمک کرد. (%d مازاد)"
 
-#: server/unithand.c:1698
+#: server/unithand.c:1695
 #, c-format
 msgid ""
 "Sorry, your %s cannot establish a trade route because it has no home city"
 msgstr ""
 
-#: server/unithand.c:1712
+#: server/unithand.c:1709
 #, c-format
 msgid "Sorry, your %s cannot establish a trade route between %s and %s"
 msgstr ""
 
-#: server/unithand.c:1742 server/unithand.c:1763
+#: server/unithand.c:1739 server/unithand.c:1760
 #, c-format
 msgid "Sorry, your %s cannot establish a trade route here!"
 msgstr ""
 
-#: server/unithand.c:1747 server/unithand.c:1768
+#: server/unithand.c:1744 server/unithand.c:1765
 #, c-format
 msgid "      The city of %s already has %d better trade routes!"
 msgstr ""
 
-#: server/unithand.c:1782 server/unithand.c:1795
+#: server/unithand.c:1779 server/unithand.c:1792
 #, c-format
 msgid "Sorry, %s has canceled the trade route from %s to your city %s."
 msgstr ""
 
-#: server/unithand.c:1829
+#: server/unithand.c:1826
 #, c-format
 msgid ""
 "Your %s from %s has arrived in %s, and revenues amount to %d in gold and "

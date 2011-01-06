@@ -35,11 +35,6 @@ if (username == null || "null".equals(username)) {
 <br><br><br>
 
 
-<div>
-	Note that you didn't <a href="/wireframe.jsp?do=openid_login">Login</a> using OpenID, 
-	so this will be a guest username only.
-</div>
-
 
 </div>
 

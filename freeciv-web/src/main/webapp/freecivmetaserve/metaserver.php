@@ -347,11 +347,9 @@ if ( isset($port) ) {
 
 <div id="header">
 
-<div id="header_menu"> <a class="menu_link" href="/" title="News about Freeciv.net">News</a> &nbsp;&nbsp; 
+<div id="header_menu"> <a class="menu_link" href="http://www.freeciv.net/" title="News about Freeciv.net">News</a> &nbsp;&nbsp; 
 <a class="menu_link" href="/wireframe.jsp?do=login" title="Login to play Freeciv.net now">Play Now</a> &nbsp;&nbsp; 
 <a class="menu_link" href="/freecivmetaserve/metaserver.php" title="Multiplayer Games">Games</a> &nbsp;&nbsp; 
-<a class="menu_link" href="/wiki" title="Documentation">Documentation</a> &nbsp;&nbsp; 
-<a class="menu_link" href="/forum/" title="Freeciv.net Forum">Forum</a> &nbsp;&nbsp;
 <a class="menu_link" title="Contribute to the Freeciv.net development" href="/wireframe.jsp?do=dev">Development</a> &nbsp;&nbsp;
 <a title="About Freeciv.net" class="menu_link" href="/wireframe.jsp?do=about">About</a></div>
 </div>
@@ -586,9 +584,6 @@ if ( isset($port) ) {
 <p class="center"><em>
 
 
-<br><br>
-Discuss and propose new multiplayer games in <a href="/forum/viewforum.php?f=2">the multiplayer forum</a> on Freeciv.net.<br>
-Freeciv.net also hosts servers on <a href="http://meta.freeciv.org/">meta.freeciv.org</a> for the desktop version of the game.
 
 <br><br>
 

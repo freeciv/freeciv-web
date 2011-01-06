@@ -48,7 +48,6 @@ function civclient_init()
   game_init();
   network_init();
   init_mapview();
-  music_init();
 
   // Register keyboard listener.
   if(window.addEventListener){ // Mozilla, Netscape, Firefox

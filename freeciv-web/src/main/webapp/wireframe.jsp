@@ -34,7 +34,6 @@
 <script type="text/javascript" src="/javascript/iphone.js"></script>
 <meta name="google-site-verification" content="13_ecThQ9UAWizPUoxWp3NOhryW3hMpj7LlMAzc-og8" />
 
-
 <script type="text/javascript">
 /* <![CDATA[ */
     (function() {
@@ -58,11 +57,9 @@
 
 <div id="header">
 
-<div id="header_menu"> <a class="menu_link" href="/" title="News about Freeciv.net" target="_top">News</a> &nbsp;&nbsp; 
+<div id="header_menu"> <a class="menu_link" href="http://www.freeciv.net/" title="News about Freeciv.net" target="_top">News</a> &nbsp;&nbsp; 
 <a class="menu_link" href="/wireframe.jsp?do=login" title="Login to play Freeciv.net now">Play Now</a> &nbsp;&nbsp; 
 <a class="menu_link" href="/freecivmetaserve/metaserver.php" title="Multiplayer Games">Games</a> &nbsp;&nbsp; 
-<a class="menu_link" href="/wiki" title="Documentation">Documentation</a> &nbsp;&nbsp; 
-<a class="menu_link" href="/forum/" title="Freeciv.net Forum">Forum</a> &nbsp;&nbsp;
 <a class="menu_link" title="Contribute to the Freeciv.net development" href="/wireframe.jsp?do=dev">Development</a> &nbsp;&nbsp;
 <a title="About Freeciv.net" class="menu_link" href="/wireframe.jsp?do=about">About</a></div>
 </div>
@@ -85,13 +82,12 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 
 </div>
 
-  <jsp:include page="flags.jsp" flush="false"/>
 
 
   <jsp:include page="template_call.jsp" flush="false"/>
 </div>
 <div id="footer">
-Copyright &copy; 2008-2010 Freeciv.net
+Copyright &copy; 2008-2011 Freeciv.net
 </div>
 
 </div>

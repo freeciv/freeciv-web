@@ -1,13 +1,13 @@
 {
   "name": "Freeciv.net",
   "description": "Freeciv.net is a free turn-based strategy game, where you build armies, cities, engage in diplomacy and build the greatest empire!",
-  "version": "1.5",
+  "version": "1.6",
   "app": {
     "urls": [
       "http://www.freeciv.net/"
     ],
     "launch": {
-      "web_url": "http://www.freeciv.net/wireframe.jsp?do=login"
+      "web_url": "http://games.freeciv.net/wireframe.jsp?do=login"
     }
   },
   "icons": {

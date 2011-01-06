@@ -39,7 +39,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.15\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-20 17:32+0100\n"
+"POT-Creation-Date: 2011-01-04 22:00+0100\n"
 "PO-Revision-Date: 2009-03-24 22:03+0100\n"
 "Last-Translator: Christian Knoke <chrisk@cknoke.de>\n"
 "Language-Team: German Freeciv Translators <freeciv.de@freelists.org>\n"
@@ -3236,35 +3236,6 @@ msgid ""
 msgstr ""
 "Dieser Befehl entfernt den angegeben Spieler VOLLSTÄNDIG, d.h. "
 "einschließlich aller Städte und Einheiten. Vorsicht!"
-
-#. TRANS: translate text between <> only
-#: server/commands.c:414
-msgid ""
-"save\n"
-"save <file-name>"
-msgstr ""
-"save\n"
-"save <Dateiname>"
-
-#: server/commands.c:416
-msgid "Save game to file."
-msgstr "Spiel speichern"
-
-#: server/commands.c:417
-msgid ""
-"Save the current game to file <file-name>.  If no file-name argument is "
-"given saves to \"<auto-save name prefix><year>m.sav[.gz]\".\n"
-"To reload a savegame created by 'save', start the server with the command-"
-"line argument:\n"
-"    --file <filename>\n"
-"and use the 'start' command once players have reconnected."
-msgstr ""
-"Speichert das Spiel in der Datei <Dateiname>. Wenn kein Dateiname angegeben "
-"wird, heißt die Datei '<auto-save nameprefix><year>m.sav[.gz]'.\n"
-"Um ein gespeichertes Spiel fortzuführen, ruft man den Server mit dem "
-"Argument\n"
-"      --file <Dateiname>\n"
-"auf und gibt nachdem alle Mitspieler bereit sind, 'start' ein."
 
 #. TRANS: translate text between <> only
 #: server/commands.c:427
@@ -7993,134 +7964,134 @@ msgstr "%s kann nicht zu %s hinzugefügt werden."
 msgid "%s added to aid %s in growing."
 msgstr "%s hinzugefügt, um beim Wachstum von %s zu helfen."
 
-#: server/unithand.c:893 server/unithand.c:999
+#: server/unithand.c:996
 #, fuzzy
 msgid "The unit can't go there."
 msgstr "Da ist kein Angriff möglich."
 
-#: server/unithand.c:1185
+#: server/unithand.c:1182
 msgid "Your Nuclear missile was shot down by SDI defences, what a waste."
 msgstr "Atomrakete von SDI-Verteidigung abgeschossen."
 
-#: server/unithand.c:1189
+#: server/unithand.c:1186
 #, c-format
 msgid "The nuclear attack on %s was avoided by your SDI defense."
 msgstr "Der nukleare Angriff auf %s wurde von der SDI-Verteidigung abgewehrt."
 
 #. TRANS: "Your Cannon ... the Polish Destroyer."
-#: server/unithand.c:1264
+#: server/unithand.c:1261
 #, c-format
 msgid "Your %s survived the pathetic attack from the %s %s."
 msgstr "Deine %s überlebte den Angriff der %sen %s."
 
 #. TRANS: "... Cannon ... the Polish Destroyer."
-#: server/unithand.c:1274
+#: server/unithand.c:1271
 #, c-format
 msgid "Your attacking %s failed against the %s %s!"
 msgstr "Der Angriff deiner %s gegen die %sen %s ist fehlgeschlagen!"
 
-#: server/unithand.c:1355
+#: server/unithand.c:1352
 #, c-format
 msgid "Only %s can attack from sea."
 msgstr "Nur %s können von See aus angreifen."
 
-#: server/unithand.c:1361
+#: server/unithand.c:1358
 msgid "Cannot attack from sea."
 msgstr "Kann nicht von See aus angreifen."
 
-#: server/unithand.c:1369 server/unittools.c:2270
+#: server/unithand.c:1366 server/unittools.c:2270
 msgid "Cannot attack unless you declare war first."
 msgstr "Kann erst nach Kriegserklärung angreifen."
 
-#: server/unithand.c:1375
+#: server/unithand.c:1372
 #, c-format
 msgid "%s can only move into your own zone of control."
 msgstr "%s können sich nur in der eigenen Kontrollzone bewegen."
 
-#: server/unithand.c:1382
+#: server/unithand.c:1379
 #, c-format
 msgid "%s cannot move that far from the coast line."
 msgstr "%s kann sich nicht weiter von der Küste entfernen."
 
-#: server/unithand.c:1389
+#: server/unithand.c:1386
 #, c-format
 msgid "Cannot invade unless you break peace with %s first."
 msgstr "Kann erst einmaschieren, wenn du den Frieden mit %s brichst."
 
-#: server/unithand.c:1435
+#: server/unithand.c:1432
 msgid "This unit has no moves left."
 msgstr "Diese Einheit kann nicht mehr ziehen."
 
-#: server/unithand.c:1491
+#: server/unithand.c:1488
 msgid "No diplomat action possible."
 msgstr "Verhandlungen sind nicht möglich."
 
-#: server/unithand.c:1495
+#: server/unithand.c:1492
 #, c-format
 msgid "Unit cannot perform diplomatic action from %s."
 msgstr ""
 
-#: server/unithand.c:1514
+#: server/unithand.c:1511
 #, fuzzy, c-format
 msgid "You must declare war on %s first.  Try using players dialog."
 msgstr ""
 "Du mußt %s erst den Krieg erklären. Versuche es mit dem Spieler-Bericht (F3)."
 
-#: server/unithand.c:1533
+#: server/unithand.c:1530
 msgid "This unit is being transported, and so cannot bombard."
 msgstr "Diese Einheit wird transportiert und kann daher nicht bombardieren."
 
-#: server/unithand.c:1549
+#: server/unithand.c:1546
 msgid "You can't attack there."
 msgstr "Da ist kein Angriff möglich."
 
-#: server/unithand.c:1572
+#: server/unithand.c:1569
 msgid "This type of troops cannot take over a city."
 msgstr "Diese Truppenart kann keine Stadt einnehmen."
 
-#: server/unithand.c:1590
+#: server/unithand.c:1587
 msgid "A transported unit is not allied to all units or city on target tile."
 msgstr ""
 "Eine transportierte Einheit ist nicht mit allen Einheiten oder der Stadt auf "
 "dem Zielfeld alliiert."
 
-#: server/unithand.c:1640
+#: server/unithand.c:1637
 #, c-format
 msgid "Your %s helps build the %s in %s (%d remaining)."
 msgstr "%s hilft, %s in %s zu bauen (Restkosten: %d)."
 
-#: server/unithand.c:1642
+#: server/unithand.c:1639
 #, c-format
 msgid "Your %s helps build the %s in %s (%d surplus)."
 msgstr "%s hilft, %s in %s zu bauen (Überschuß: %d)."
 
-#: server/unithand.c:1698
+#: server/unithand.c:1695
 #, c-format
 msgid ""
 "Sorry, your %s cannot establish a trade route because it has no home city"
 msgstr "%s kann keinen Handelsweg gründen, da sie keine Heimatstadt haben."
 
-#: server/unithand.c:1712
+#: server/unithand.c:1709
 #, c-format
 msgid "Sorry, your %s cannot establish a trade route between %s and %s"
 msgstr "%s kann keinen Handelsweg zwischen %s und %s gründen."
 
-#: server/unithand.c:1742 server/unithand.c:1763
+#: server/unithand.c:1739 server/unithand.c:1760
 #, c-format
 msgid "Sorry, your %s cannot establish a trade route here!"
 msgstr "%s kann hier keinen Handelsweg gründen!"
 
-#: server/unithand.c:1747 server/unithand.c:1768
+#: server/unithand.c:1744 server/unithand.c:1765
 #, c-format
 msgid "      The city of %s already has %d better trade routes!"
 msgstr "      Die Stadt %s hat bereits %d bessere Handelswege!"
 
-#: server/unithand.c:1782 server/unithand.c:1795
+#: server/unithand.c:1779 server/unithand.c:1792
 #, c-format
 msgid "Sorry, %s has canceled the trade route from %s to your city %s."
 msgstr "%s hat die Handelsroute zwischen %s und Ihrer Stadt %s aufgehoben."
 
-#: server/unithand.c:1829
+#: server/unithand.c:1826
 #, c-format
 msgid ""
 "Your %s from %s has arrived in %s, and revenues amount to %d in gold and "
@@ -30319,6 +30290,32 @@ msgstr ""
 #: data/default/game.ruleset:185
 msgid "BC"
 msgstr ""
+
+#~ msgid ""
+#~ "save\n"
+#~ "save <file-name>"
+#~ msgstr ""
+#~ "save\n"
+#~ "save <Dateiname>"
+
+#~ msgid "Save game to file."
+#~ msgstr "Spiel speichern"
+
+#~ msgid ""
+#~ "Save the current game to file <file-name>.  If no file-name argument is "
+#~ "given saves to \"<auto-save name prefix><year>m.sav[.gz]\".\n"
+#~ "To reload a savegame created by 'save', start the server with the command-"
+#~ "line argument:\n"
+#~ "    --file <filename>\n"
+#~ "and use the 'start' command once players have reconnected."
+#~ msgstr ""
+#~ "Speichert das Spiel in der Datei <Dateiname>. Wenn kein Dateiname "
+#~ "angegeben wird, heißt die Datei '<auto-save nameprefix><year>m.sav[."
+#~ "gz]'.\n"
+#~ "Um ein gespeichertes Spiel fortzuführen, ruft man den Server mit dem "
+#~ "Argument\n"
+#~ "      --file <Dateiname>\n"
+#~ "auf und gibt nachdem alle Mitspieler bereit sind, 'start' ein."
 
 #~ msgid "Tutorial message"
 #~ msgstr "Nachrichten des Einführungsszenarios"

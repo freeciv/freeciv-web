@@ -35,12 +35,6 @@
  
 <% } else if (act.equals("screenshots")) { %>
   <jsp:include page="screenshots.jsp" flush="false"/>  
- 
-<% } else if (act.equals("frontpage")) { %>
-  <jsp:include page="frontpage.jsp" flush="false"/>  
-  
-<% } else if (act.equals("frontpage_i18n")) { %>
-  <jsp:include page="frontpage_i18n.jsp" flush="false"/>  
   
   <% } else if (act.equals("404")) { %>
   <jsp:include page="404.jsp" flush="false"/>  

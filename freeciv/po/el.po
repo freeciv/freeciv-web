@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: freeciv 2.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-04 22:00+0100\n"
+"POT-Creation-Date: 2011-01-16 00:05+0100\n"
 "PO-Revision-Date: 2008-05-23 17:41+0200\n"
 "Last-Translator: Prekates Alexandros <aprekates@yahoo.gr>\n"
 "Language-Team: Greek translation team <gr@li.org>\n"
@@ -3297,6 +3297,36 @@ msgstr ""
 "Αυτή η εντολή  *πλήρως* αφαιρεί έναν παίχτη από το παιχνίδι,  "
 "συμπεριλαμβανομένου, συμπεριλαμβανομένου όλες τις πόλεις και μονάδες κτλ. "
 "Χρησιμοποιήσε την εντολή με προσοχή."
+
+#. TRANS: translate text between <> only
+#: server/commands.c:414
+msgid ""
+"save\n"
+"save <file-name>"
+msgstr ""
+"save\n"
+"save <όνομα-αρχείου>"
+
+#: server/commands.c:416
+msgid "Save game to file."
+msgstr "Σώσιμο του παιχνιδίου σε αρχείο."
+
+#: server/commands.c:417
+msgid ""
+"Save the current game to file <file-name>.  If no file-name argument is "
+"given saves to \"<auto-save name prefix><year>m.sav[.gz]\".\n"
+"To reload a savegame created by 'save', start the server with the command-"
+"line argument:\n"
+"    --file <filename>\n"
+"and use the 'start' command once players have reconnected."
+msgstr ""
+"Σώζει το παιχνίδι στο αρχείο <όνομα-αρχείου> , αν δεν δωθεί όρισμα όνομα-"
+"αρχείου σώζεται στο \"< πρόθεμα ονόματος αυτόματου σώσιμου><χρονιά>m.sav[.gz]"
+"\".\n"
+"Για να επαναφορτωθεί ένα σωσμένο παιχνίδι από την εντολή 'save', ξεκίνησε "
+"τον εξυπηρετητή μετο όρισμα  της γραμμής εντολών :\n"
+"    --file <όνομα-αρχείου>\n"
+"και χρησιμοποίησε την εντολή 'start' όταν συνδεθούν ξανά οι παίχτες."
 
 #. TRANS: translate text between <> only
 #: server/commands.c:427
@@ -29149,32 +29179,6 @@ msgstr ""
 #: data/default/game.ruleset:185
 msgid "BC"
 msgstr ""
-
-#~ msgid ""
-#~ "save\n"
-#~ "save <file-name>"
-#~ msgstr ""
-#~ "save\n"
-#~ "save <όνομα-αρχείου>"
-
-#~ msgid "Save game to file."
-#~ msgstr "Σώσιμο του παιχνιδίου σε αρχείο."
-
-#~ msgid ""
-#~ "Save the current game to file <file-name>.  If no file-name argument is "
-#~ "given saves to \"<auto-save name prefix><year>m.sav[.gz]\".\n"
-#~ "To reload a savegame created by 'save', start the server with the command-"
-#~ "line argument:\n"
-#~ "    --file <filename>\n"
-#~ "and use the 'start' command once players have reconnected."
-#~ msgstr ""
-#~ "Σώζει το παιχνίδι στο αρχείο <όνομα-αρχείου> , αν δεν δωθεί όρισμα όνομα-"
-#~ "αρχείου σώζεται στο \"< πρόθεμα ονόματος αυτόματου σώσιμου><χρονιά>m.sav[."
-#~ "gz]\".\n"
-#~ "Για να επαναφορτωθεί ένα σωσμένο παιχνίδι από την εντολή 'save', ξεκίνησε "
-#~ "τον εξυπηρετητή μετο όρισμα  της γραμμής εντολών :\n"
-#~ "    --file <όνομα-αρχείου>\n"
-#~ "και χρησιμοποίησε την εντολή 'start' όταν συνδεθούν ξανά οι παίχτες."
 
 #~ msgid "Tutorial message"
 #~ msgstr "Μήνυμα παιχνιδίου εκμάθησης"

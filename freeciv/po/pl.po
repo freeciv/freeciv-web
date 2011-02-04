@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: freeciv\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-04 22:00+0100\n"
+"POT-Creation-Date: 2011-01-16 00:05+0100\n"
 "PO-Revision-Date: 2007-09-01 22:37+0300\n"
 "Last-Translator: Mateusz Stefek <matusik_s@o2.pl>\n"
 "Language-Team: none\n"
@@ -3280,6 +3280,34 @@ msgid ""
 msgstr ""
 "CAŁKOWICIE usuwa gracza z gry, także jego miasta i jednostki. Używaj z "
 "rozwagą!"
+
+#. TRANS: translate text between <> only
+#: server/commands.c:414
+msgid ""
+"save\n"
+"save <file-name>"
+msgstr ""
+"save\n"
+"save <nazwa-pliku>"
+
+#: server/commands.c:416
+msgid "Save game to file."
+msgstr "Zapisuje stan gry do pliku."
+
+#: server/commands.c:417
+msgid ""
+"Save the current game to file <file-name>.  If no file-name argument is "
+"given saves to \"<auto-save name prefix><year>m.sav[.gz]\".\n"
+"To reload a savegame created by 'save', start the server with the command-"
+"line argument:\n"
+"    --file <filename>\n"
+"and use the 'start' command once players have reconnected."
+msgstr ""
+"Zapisuje stan gry do pliku <nazwa-pliku>.  Jeżeli nie podano nazwy pliku to "
+"gra jest zapisywana do pliku \"<przedrostek auto-save'a><rok>m.sav.[gz]\".\n"
+"Aby wczytać tak zapisaną grę należy uruchomić serwer z argumentem:\n"
+"    --file <nazwa-pliku>\n"
+"oraz użyć komendy 'start' po ponownym przyłączeniu się graczy."
 
 #. TRANS: translate text between <> only
 #: server/commands.c:427
@@ -29984,31 +30012,6 @@ msgstr ""
 #: data/default/game.ruleset:185
 msgid "BC"
 msgstr ""
-
-#~ msgid ""
-#~ "save\n"
-#~ "save <file-name>"
-#~ msgstr ""
-#~ "save\n"
-#~ "save <nazwa-pliku>"
-
-#~ msgid "Save game to file."
-#~ msgstr "Zapisuje stan gry do pliku."
-
-#~ msgid ""
-#~ "Save the current game to file <file-name>.  If no file-name argument is "
-#~ "given saves to \"<auto-save name prefix><year>m.sav[.gz]\".\n"
-#~ "To reload a savegame created by 'save', start the server with the command-"
-#~ "line argument:\n"
-#~ "    --file <filename>\n"
-#~ "and use the 'start' command once players have reconnected."
-#~ msgstr ""
-#~ "Zapisuje stan gry do pliku <nazwa-pliku>.  Jeżeli nie podano nazwy pliku "
-#~ "to gra jest zapisywana do pliku \"<przedrostek auto-save'a><rok>m.sav.[gz]"
-#~ "\".\n"
-#~ "Aby wczytać tak zapisaną grę należy uruchomić serwer z argumentem:\n"
-#~ "    --file <nazwa-pliku>\n"
-#~ "oraz użyć komendy 'start' po ponownym przyłączeniu się graczy."
 
 #, fuzzy
 #~ msgid "Tutorial message"

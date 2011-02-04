@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-04 22:00+0100\n"
+"POT-Creation-Date: 2011-01-16 00:05+0100\n"
 "PO-Revision-Date: 2007-09-01 22:28+0300\n"
 "Last-Translator: Per I. Mathisen <per@freeciv.org>\n"
 "Language-Team: Norwegian <andrearo@stud.ntnu.no>\n"
@@ -3233,6 +3233,35 @@ msgid ""
 msgstr ""
 "Dette fjerner en spiller fullstendig fra spillet, inkludert alle byer og "
 "enheter.  Brukes med måte!"
+
+#. TRANS: translate text between <> only
+#: server/commands.c:414
+msgid ""
+"save\n"
+"save <file-name>"
+msgstr ""
+"save\n"
+"save <filnavn>"
+
+#: server/commands.c:416
+msgid "Save game to file."
+msgstr "Lagre spill til fil."
+
+#: server/commands.c:417
+msgid ""
+"Save the current game to file <file-name>.  If no file-name argument is "
+"given saves to \"<auto-save name prefix><year>m.sav[.gz]\".\n"
+"To reload a savegame created by 'save', start the server with the command-"
+"line argument:\n"
+"    --file <filename>\n"
+"and use the 'start' command once players have reconnected."
+msgstr ""
+"Lagrer det nåværende spillet til filen <filnavn>. Hvis det ikke gis noe "
+"filnavn lagres spillet til \"<auto-lagrings-prefiks><år>m.sav[.gz]\"\n"
+"For å fortsette et lagret spill laget med 'save' kommandoen, start tjeneren "
+"med kommandolinje-argumentet: \n"
+"       -f <filnavn>\n"
+"og bruk 'start' kommandoen når alle spillerne har koblet til på nytt."
 
 #. TRANS: translate text between <> only
 #: server/commands.c:427
@@ -29816,31 +29845,6 @@ msgstr ""
 #: data/default/game.ruleset:185
 msgid "BC"
 msgstr ""
-
-#~ msgid ""
-#~ "save\n"
-#~ "save <file-name>"
-#~ msgstr ""
-#~ "save\n"
-#~ "save <filnavn>"
-
-#~ msgid "Save game to file."
-#~ msgstr "Lagre spill til fil."
-
-#~ msgid ""
-#~ "Save the current game to file <file-name>.  If no file-name argument is "
-#~ "given saves to \"<auto-save name prefix><year>m.sav[.gz]\".\n"
-#~ "To reload a savegame created by 'save', start the server with the command-"
-#~ "line argument:\n"
-#~ "    --file <filename>\n"
-#~ "and use the 'start' command once players have reconnected."
-#~ msgstr ""
-#~ "Lagrer det nåværende spillet til filen <filnavn>. Hvis det ikke gis noe "
-#~ "filnavn lagres spillet til \"<auto-lagrings-prefiks><år>m.sav[.gz]\"\n"
-#~ "For å fortsette et lagret spill laget med 'save' kommandoen, start "
-#~ "tjeneren med kommandolinje-argumentet: \n"
-#~ "       -f <filnavn>\n"
-#~ "og bruk 'start' kommandoen når alle spillerne har koblet til på nytt."
 
 #, fuzzy
 #~ msgid "Tutorial message"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-04 22:00+0100\n"
+"POT-Creation-Date: 2011-01-16 00:05+0100\n"
 "PO-Revision-Date: 2008-06-01 16:36+0300\n"
 "Last-Translator: Uğur Çetin <jnmbk@users.sourceforge.net>\n"
 "Language-Team: Turkish <yerellestirme@kde.org.tr>\n"
@@ -3149,6 +3149,35 @@ msgid ""
 msgstr ""
 "Bu bir oyuncuyu *tamamen* oyundan atar. Sahip olduğu şehirler, birimler, vb "
 "haritadan silinir.  Dikkatli kullanın!"
+
+#. TRANS: translate text between <> only
+#: server/commands.c:414
+msgid ""
+"save\n"
+"save <file-name>"
+msgstr ""
+"save\n"
+"save <dosya-adı>"
+
+#: server/commands.c:416
+msgid "Save game to file."
+msgstr "Oyunu dosyaya kaydet."
+
+#: server/commands.c:417
+msgid ""
+"Save the current game to file <file-name>.  If no file-name argument is "
+"given saves to \"<auto-save name prefix><year>m.sav[.gz]\".\n"
+"To reload a savegame created by 'save', start the server with the command-"
+"line argument:\n"
+"    --file <filename>\n"
+"and use the 'start' command once players have reconnected."
+msgstr ""
+"Mevcut oyunu <dosya-adı> dosyasına kaydet. Eğer dosya adı verilmezse \" < "
+"otokayıt ad öneki > < yıl >m.sav[.gz]\".\n"
+"'Kayıt' ile kaydedilmiş oyunu açmak için, sunucuyu komut satırı argümanı ile "
+"çalıştırın: \n"
+"     --file <dosyaadı> \n"
+"ve bir kez tekrar bağlandığında 'start' komutunu kullanın. "
 
 #. TRANS: translate text between <> only
 #: server/commands.c:427
@@ -29106,31 +29135,6 @@ msgstr ""
 #: data/default/game.ruleset:185
 msgid "BC"
 msgstr ""
-
-#~ msgid ""
-#~ "save\n"
-#~ "save <file-name>"
-#~ msgstr ""
-#~ "save\n"
-#~ "save <dosya-adı>"
-
-#~ msgid "Save game to file."
-#~ msgstr "Oyunu dosyaya kaydet."
-
-#~ msgid ""
-#~ "Save the current game to file <file-name>.  If no file-name argument is "
-#~ "given saves to \"<auto-save name prefix><year>m.sav[.gz]\".\n"
-#~ "To reload a savegame created by 'save', start the server with the command-"
-#~ "line argument:\n"
-#~ "    --file <filename>\n"
-#~ "and use the 'start' command once players have reconnected."
-#~ msgstr ""
-#~ "Mevcut oyunu <dosya-adı> dosyasına kaydet. Eğer dosya adı verilmezse \" < "
-#~ "otokayıt ad öneki > < yıl >m.sav[.gz]\".\n"
-#~ "'Kayıt' ile kaydedilmiş oyunu açmak için, sunucuyu komut satırı argümanı "
-#~ "ile çalıştırın: \n"
-#~ "     --file <dosyaadı> \n"
-#~ "ve bir kez tekrar bağlandığında 'start' komutunu kullanın. "
 
 #~ msgid "Tutorial message"
 #~ msgstr "Öğretici mesajı"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-04 22:00+0100\n"
+"POT-Creation-Date: 2011-01-16 00:05+0100\n"
 "PO-Revision-Date: 2009-09-04 01:38+0200\n"
 "Last-Translator: Joan Creus <joan.creus at gmail dot com>\n"
 "Language-Team: Català <ca@li.org>\n"
@@ -3207,6 +3207,36 @@ msgid ""
 msgstr ""
 "Elimina *completament* un jugador de la partida, incloent les ciutats, "
 "unitats, etc.  Usa amb compte!"
+
+#. TRANS: translate text between <> only
+#: server/commands.c:414
+msgid ""
+"save\n"
+"save <file-name>"
+msgstr ""
+"save\n"
+"save <nom-fitxer>"
+
+#: server/commands.c:416
+msgid "Save game to file."
+msgstr "Desa la partida en un fitxer."
+
+#: server/commands.c:417
+msgid ""
+"Save the current game to file <file-name>.  If no file-name argument is "
+"given saves to \"<auto-save name prefix><year>m.sav[.gz]\".\n"
+"To reload a savegame created by 'save', start the server with the command-"
+"line argument:\n"
+"    --file <filename>\n"
+"and use the 'start' command once players have reconnected."
+msgstr ""
+"Desar la partida actual al fitxer <nom-fitxer>. Si no s'especifica cap nom "
+"de fitxer es desa a \"<Prefix dels noms de desar automàtic><any>m.sav[.gz]"
+"\".\n"
+"Per a tornar a carregar una partida desada amb 'save', s'ha d'iniciar el "
+"servidor amb l'argument de la línia de comanda: \n"
+"    --file <nomfitxer>\n"
+"i usar la comanda 'start' un cop els jugadors s'hagin reconnectat."
 
 #. TRANS: translate text between <> only
 #: server/commands.c:427
@@ -30537,32 +30567,6 @@ msgstr "dC"
 #: data/default/game.ruleset:185
 msgid "BC"
 msgstr "aC"
-
-#~ msgid ""
-#~ "save\n"
-#~ "save <file-name>"
-#~ msgstr ""
-#~ "save\n"
-#~ "save <nom-fitxer>"
-
-#~ msgid "Save game to file."
-#~ msgstr "Desa la partida en un fitxer."
-
-#~ msgid ""
-#~ "Save the current game to file <file-name>.  If no file-name argument is "
-#~ "given saves to \"<auto-save name prefix><year>m.sav[.gz]\".\n"
-#~ "To reload a savegame created by 'save', start the server with the command-"
-#~ "line argument:\n"
-#~ "    --file <filename>\n"
-#~ "and use the 'start' command once players have reconnected."
-#~ msgstr ""
-#~ "Desar la partida actual al fitxer <nom-fitxer>. Si no s'especifica cap "
-#~ "nom de fitxer es desa a \"<Prefix dels noms de desar automàtic><any>m.sav"
-#~ "[.gz]\".\n"
-#~ "Per a tornar a carregar una partida desada amb 'save', s'ha d'iniciar el "
-#~ "servidor amb l'argument de la línia de comanda: \n"
-#~ "    --file <nomfitxer>\n"
-#~ "i usar la comanda 'start' un cop els jugadors s'hagin reconnectat."
 
 #~ msgid "Tutorial message"
 #~ msgstr "Missatge d'aprenentatge"

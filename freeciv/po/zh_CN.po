@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: freeciv\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-04 22:00+0100\n"
+"POT-Creation-Date: 2011-01-16 00:05+0100\n"
 "PO-Revision-Date: 2006-03-26 14:53+0800\n"
 "Last-Translator: Hongjia Cao <hjcao@yahoo.com>\n"
 "Language-Team: zh_CN <i18n-translation@linux.net.cn>\n"
@@ -3129,6 +3129,34 @@ msgid ""
 "This *completely* removes a player from the game, including all cities and "
 "units etc.  Use with care!"
 msgstr "这将从游戏中*完全*删除一个玩家，包括所有的城市和部队等。请小心使用！"
+
+#. TRANS: translate text between <> only
+#: server/commands.c:414
+msgid ""
+"save\n"
+"save <file-name>"
+msgstr ""
+"save\n"
+"save <文件名>"
+
+#: server/commands.c:416
+msgid "Save game to file."
+msgstr "将游戏保存到文件中。"
+
+#: server/commands.c:417
+msgid ""
+"Save the current game to file <file-name>.  If no file-name argument is "
+"given saves to \"<auto-save name prefix><year>m.sav[.gz]\".\n"
+"To reload a savegame created by 'save', start the server with the command-"
+"line argument:\n"
+"    --file <filename>\n"
+"and use the 'start' command once players have reconnected."
+msgstr ""
+"将当前游戏保存到<文件名>指定的文件中。如果未给出文件名参数，保存到\n"
+"“<自动保存名前缀><年代>m.sav[.gz]”文件中。\n"
+"要想重新装载一个由“save”创建的存盘游戏，请使用命令行参数\n"
+"    --file <文件名>\n"
+"启动服务器，并且当玩家都重新连入后使用“start”命令开始游戏。"
 
 #. TRANS: translate text between <> only
 #: server/commands.c:427
@@ -28731,30 +28759,6 @@ msgstr ""
 #: data/default/game.ruleset:185
 msgid "BC"
 msgstr ""
-
-#~ msgid ""
-#~ "save\n"
-#~ "save <file-name>"
-#~ msgstr ""
-#~ "save\n"
-#~ "save <文件名>"
-
-#~ msgid "Save game to file."
-#~ msgstr "将游戏保存到文件中。"
-
-#~ msgid ""
-#~ "Save the current game to file <file-name>.  If no file-name argument is "
-#~ "given saves to \"<auto-save name prefix><year>m.sav[.gz]\".\n"
-#~ "To reload a savegame created by 'save', start the server with the command-"
-#~ "line argument:\n"
-#~ "    --file <filename>\n"
-#~ "and use the 'start' command once players have reconnected."
-#~ msgstr ""
-#~ "将当前游戏保存到<文件名>指定的文件中。如果未给出文件名参数，保存到\n"
-#~ "“<自动保存名前缀><年代>m.sav[.gz]”文件中。\n"
-#~ "要想重新装载一个由“save”创建的存盘游戏，请使用命令行参数\n"
-#~ "    --file <文件名>\n"
-#~ "启动服务器，并且当玩家都重新连入后使用“start”命令开始游戏。"
 
 #, fuzzy
 #~ msgid "Tutorial message"

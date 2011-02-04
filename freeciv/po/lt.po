@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: freeciv\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-04 22:00+0100\n"
+"POT-Creation-Date: 2011-01-16 00:05+0100\n"
 "PO-Revision-Date: 2007-12-16 11:12+0300\n"
 "Last-Translator: Andrius Štikonas <stikonas@gmail.com>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
@@ -3107,6 +3107,29 @@ msgstr "Visiškai pašalina žaidėją iš žaidimo."
 msgid ""
 "This *completely* removes a player from the game, including all cities and "
 "units etc.  Use with care!"
+msgstr ""
+
+#. TRANS: translate text between <> only
+#: server/commands.c:414
+msgid ""
+"save\n"
+"save <file-name>"
+msgstr ""
+"save\n"
+"save <failo-pavadinimas>"
+
+#: server/commands.c:416
+msgid "Save game to file."
+msgstr "Išsaugo žaidimą į failą."
+
+#: server/commands.c:417
+msgid ""
+"Save the current game to file <file-name>.  If no file-name argument is "
+"given saves to \"<auto-save name prefix><year>m.sav[.gz]\".\n"
+"To reload a savegame created by 'save', start the server with the command-"
+"line argument:\n"
+"    --file <filename>\n"
+"and use the 'start' command once players have reconnected."
 msgstr ""
 
 #. TRANS: translate text between <> only
@@ -27898,16 +27921,6 @@ msgstr ""
 #: data/default/game.ruleset:185
 msgid "BC"
 msgstr ""
-
-#~ msgid ""
-#~ "save\n"
-#~ "save <file-name>"
-#~ msgstr ""
-#~ "save\n"
-#~ "save <failo-pavadinimas>"
-
-#~ msgid "Save game to file."
-#~ msgstr "Išsaugo žaidimą į failą."
 
 #~ msgid "Tutorial message"
 #~ msgstr "Apmokomoji žinutė"

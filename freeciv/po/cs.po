@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: freeciv 2.0.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-04 22:00+0100\n"
+"POT-Creation-Date: 2011-01-16 00:05+0100\n"
 "PO-Revision-Date: 2008-01-21 15:42+0100\n"
 "Last-Translator: Dusan Hokuv <dusan@mirc.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -3162,6 +3162,34 @@ msgid ""
 msgstr ""
 "Tento příkaz *kompletně* odstraní hráče ze hry, včetně veškerých jeho měst, "
 "jednotek atd.  Používejte opatrně!"
+
+#. TRANS: translate text between <> only
+#: server/commands.c:414
+msgid ""
+"save\n"
+"save <file-name>"
+msgstr ""
+"save\n"
+"save <jméno-souboru>"
+
+#: server/commands.c:416
+msgid "Save game to file."
+msgstr "Uloží hru do souboru."
+
+#: server/commands.c:417
+msgid ""
+"Save the current game to file <file-name>.  If no file-name argument is "
+"given saves to \"<auto-save name prefix><year>m.sav[.gz]\".\n"
+"To reload a savegame created by 'save', start the server with the command-"
+"line argument:\n"
+"    --file <filename>\n"
+"and use the 'start' command once players have reconnected."
+msgstr ""
+"Uloží stávající hru do souboru <jméno-souboru>.  Pokud není jméno souboru "
+"uvedeno bude použito jméno ve tvaru \"<předpona><rok>.sav[.gz]\".\n"
+"Pokud chcete nahrát hru uloženou pomocí 'save', spusťte server s volbou:\n"
+"    --file <jméno-souboru>\n"
+"počkejte až se všichni hráči znovu připojí a použijte příkaz 'start'."
 
 #. TRANS: translate text between <> only
 #: server/commands.c:427
@@ -29427,30 +29455,6 @@ msgstr ""
 #: data/default/game.ruleset:185
 msgid "BC"
 msgstr ""
-
-#~ msgid ""
-#~ "save\n"
-#~ "save <file-name>"
-#~ msgstr ""
-#~ "save\n"
-#~ "save <jméno-souboru>"
-
-#~ msgid "Save game to file."
-#~ msgstr "Uloží hru do souboru."
-
-#~ msgid ""
-#~ "Save the current game to file <file-name>.  If no file-name argument is "
-#~ "given saves to \"<auto-save name prefix><year>m.sav[.gz]\".\n"
-#~ "To reload a savegame created by 'save', start the server with the command-"
-#~ "line argument:\n"
-#~ "    --file <filename>\n"
-#~ "and use the 'start' command once players have reconnected."
-#~ msgstr ""
-#~ "Uloží stávající hru do souboru <jméno-souboru>.  Pokud není jméno souboru "
-#~ "uvedeno bude použito jméno ve tvaru \"<předpona><rok>.sav[.gz]\".\n"
-#~ "Pokud chcete nahrát hru uloženou pomocí 'save', spusťte server s volbou:\n"
-#~ "    --file <jméno-souboru>\n"
-#~ "počkejte až se všichni hráči znovu připojí a použijte příkaz 'start'."
 
 #, fuzzy
 #~ msgid "Tutorial message"

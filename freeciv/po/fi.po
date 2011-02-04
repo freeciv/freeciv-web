@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: freeciv 2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-04 22:00+0100\n"
+"POT-Creation-Date: 2011-01-16 00:05+0100\n"
 "PO-Revision-Date: 2009-07-29 12:14+0300\n"
 "Last-Translator: Sini Ruohomaa <sini.ruohomaa@iki.fi>\n"
 "Language-Team: Finnish <laatu@lokalisointi.org>\n"
@@ -3214,6 +3214,36 @@ msgid ""
 msgstr ""
 "Tämä poistaa pelaajan *täydellisesti* pelistä - mukaanlukien kaikki "
 "kaupungit ja yksiköt jne. Käytä varoen!"
+
+#. TRANS: translate text between <> only
+#: server/commands.c:414
+msgid ""
+"save\n"
+"save <file-name>"
+msgstr ""
+"save\n"
+"save <tiedostonimi>"
+
+#: server/commands.c:416
+msgid "Save game to file."
+msgstr "Tallenna peli annettuun tiedostoon."
+
+#: server/commands.c:417
+msgid ""
+"Save the current game to file <file-name>.  If no file-name argument is "
+"given saves to \"<auto-save name prefix><year>m.sav[.gz]\".\n"
+"To reload a savegame created by 'save', start the server with the command-"
+"line argument:\n"
+"    --file <filename>\n"
+"and use the 'start' command once players have reconnected."
+msgstr ""
+"Tallenna tämänhetkinen peli tiedostoon <tiedostonimi>. Jos parametriä ei "
+"ole, tallentaa pelin tiedostoon \"<auto-tallennusalkuliite><vuosi>m.sav[.gz]"
+"\".\n"
+"Ladataksesi pelin joka on tallennettu 'savella', käynnistä palvelin "
+"komentoparametrillä:\n"
+"    --file <tiedostonimi>\n"
+"ja käytä komentoa 'start' kunhan pelaajat ovat taas yhteydessä."
 
 #. TRANS: translate text between <> only
 #: server/commands.c:427
@@ -30305,32 +30335,6 @@ msgstr "jKr."
 #: data/default/game.ruleset:185
 msgid "BC"
 msgstr "eKr."
-
-#~ msgid ""
-#~ "save\n"
-#~ "save <file-name>"
-#~ msgstr ""
-#~ "save\n"
-#~ "save <tiedostonimi>"
-
-#~ msgid "Save game to file."
-#~ msgstr "Tallenna peli annettuun tiedostoon."
-
-#~ msgid ""
-#~ "Save the current game to file <file-name>.  If no file-name argument is "
-#~ "given saves to \"<auto-save name prefix><year>m.sav[.gz]\".\n"
-#~ "To reload a savegame created by 'save', start the server with the command-"
-#~ "line argument:\n"
-#~ "    --file <filename>\n"
-#~ "and use the 'start' command once players have reconnected."
-#~ msgstr ""
-#~ "Tallenna tämänhetkinen peli tiedostoon <tiedostonimi>. Jos parametriä ei "
-#~ "ole, tallentaa pelin tiedostoon \"<auto-tallennusalkuliite><vuosi>m.sav[."
-#~ "gz]\".\n"
-#~ "Ladataksesi pelin joka on tallennettu 'savella', käynnistä palvelin "
-#~ "komentoparametrillä:\n"
-#~ "    --file <tiedostonimi>\n"
-#~ "ja käytä komentoa 'start' kunhan pelaajat ovat taas yhteydessä."
 
 #~ msgid "Tutorial message"
 #~ msgstr "Opetusohjelmaviesti"

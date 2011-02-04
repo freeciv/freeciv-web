@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Freeciv 1.14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-04 22:00+0100\n"
+"POT-Creation-Date: 2011-01-16 00:05+0100\n"
 "PO-Revision-Date: 2007-08-12 15:37+0300\n"
 "Last-Translator: Gábor Takács <tg330@hszk.bme.hu>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
@@ -3202,6 +3202,36 @@ msgid ""
 msgstr ""
 "Ez *teljesen* kitöröl egy játékost a játékból, minden városával, egységével, "
 "stb. együtt.  Óvatosan használd!"
+
+#. TRANS: translate text between <> only
+#: server/commands.c:414
+msgid ""
+"save\n"
+"save <file-name>"
+msgstr ""
+"save\n"
+"save <fájlnév>"
+
+#: server/commands.c:416
+msgid "Save game to file."
+msgstr "Játékállás elmentése fájlba."
+
+#: server/commands.c:417
+msgid ""
+"Save the current game to file <file-name>.  If no file-name argument is "
+"given saves to \"<auto-save name prefix><year>m.sav[.gz]\".\n"
+"To reload a savegame created by 'save', start the server with the command-"
+"line argument:\n"
+"    --file <filename>\n"
+"and use the 'start' command once players have reconnected."
+msgstr ""
+"Aktuális játékállás elmentése a <fájlnév> fájlba.  Ha nem adunk meg fájlnév "
+"argumentumot, akkor a mentés az \"<automatikus mentés elõtagja><év>m.sav[.gz]"
+"\" fájlba történik.  Egy 'save' paranccsal elmentett játékállás betöltéséhez "
+"a szervert a\n"
+"    --file <fájlnév>\n"
+"parancssori kapcsolóval kell elindítani, majd ki kell adni a 'start' "
+"parancsot, miután a játékosok csatlakoztak."
 
 #. TRANS: translate text between <> only
 #: server/commands.c:427
@@ -29354,32 +29384,6 @@ msgstr ""
 #: data/default/game.ruleset:185
 msgid "BC"
 msgstr ""
-
-#~ msgid ""
-#~ "save\n"
-#~ "save <file-name>"
-#~ msgstr ""
-#~ "save\n"
-#~ "save <fájlnév>"
-
-#~ msgid "Save game to file."
-#~ msgstr "Játékállás elmentése fájlba."
-
-#~ msgid ""
-#~ "Save the current game to file <file-name>.  If no file-name argument is "
-#~ "given saves to \"<auto-save name prefix><year>m.sav[.gz]\".\n"
-#~ "To reload a savegame created by 'save', start the server with the command-"
-#~ "line argument:\n"
-#~ "    --file <filename>\n"
-#~ "and use the 'start' command once players have reconnected."
-#~ msgstr ""
-#~ "Aktuális játékállás elmentése a <fájlnév> fájlba.  Ha nem adunk meg "
-#~ "fájlnév argumentumot, akkor a mentés az \"<automatikus mentés "
-#~ "elõtagja><év>m.sav[.gz]\" fájlba történik.  Egy 'save' paranccsal "
-#~ "elmentett játékállás betöltéséhez a szervert a\n"
-#~ "    --file <fájlnév>\n"
-#~ "parancssori kapcsolóval kell elindítani, majd ki kell adni a 'start' "
-#~ "parancsot, miután a játékosok csatlakoztak."
 
 #, fuzzy
 #~ msgid "Tutorial message"

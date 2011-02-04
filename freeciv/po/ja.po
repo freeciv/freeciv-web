@@ -144,7 +144,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Freeciv 2.0.99-devel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-04 22:00+0100\n"
+"POT-Creation-Date: 2011-01-16 00:05+0100\n"
 "PO-Revision-Date: 2007-08-12 15:56+0300\n"
 "Last-Translator: MITA Yuusuke <clefs@mail.goo.ne.jp>\n"
 "Language-Team: SAWADA Katsuya <ama@petmail.net>\n"
@@ -3521,6 +3521,35 @@ msgid ""
 msgstr ""
 "全ての都市，部隊などと一緒に，ゲームから完全にプレイヤーを追い出します。注意"
 "して使って下さい。"
+
+#. TRANS: translate text between <> only
+#: server/commands.c:414
+msgid ""
+"save\n"
+"save <file-name>"
+msgstr ""
+"save\n"
+"save <ファイル名>"
+
+#: server/commands.c:416
+msgid "Save game to file."
+msgstr "ファイルにゲームを保存します。"
+
+#: server/commands.c:417
+msgid ""
+"Save the current game to file <file-name>.  If no file-name argument is "
+"given saves to \"<auto-save name prefix><year>m.sav[.gz]\".\n"
+"To reload a savegame created by 'save', start the server with the command-"
+"line argument:\n"
+"    --file <filename>\n"
+"and use the 'start' command once players have reconnected."
+msgstr ""
+"現在のゲームを，ファイル<ファイル名>へ保存します。ファイル名引数が与えられな"
+"ければ， \"<自動保存の名前接頭辞><年>m.sav[.gz]\" へ保存されます。\n"
+"'save' によって作られたセーブデータを再読み込みを行いたければ，コマンドライン"
+"引数で\n"
+"    --file <ファイル名>\n"
+"を使い起動し，一旦プレイヤーを再接続してコマンド 'start' を使って下さい。"
 
 #. TRANS: translate text between <> only
 #: server/commands.c:427
@@ -31238,31 +31267,6 @@ msgstr ""
 #: data/default/game.ruleset:185
 msgid "BC"
 msgstr ""
-
-#~ msgid ""
-#~ "save\n"
-#~ "save <file-name>"
-#~ msgstr ""
-#~ "save\n"
-#~ "save <ファイル名>"
-
-#~ msgid "Save game to file."
-#~ msgstr "ファイルにゲームを保存します。"
-
-#~ msgid ""
-#~ "Save the current game to file <file-name>.  If no file-name argument is "
-#~ "given saves to \"<auto-save name prefix><year>m.sav[.gz]\".\n"
-#~ "To reload a savegame created by 'save', start the server with the command-"
-#~ "line argument:\n"
-#~ "    --file <filename>\n"
-#~ "and use the 'start' command once players have reconnected."
-#~ msgstr ""
-#~ "現在のゲームを，ファイル<ファイル名>へ保存します。ファイル名引数が与えられ"
-#~ "なければ， \"<自動保存の名前接頭辞><年>m.sav[.gz]\" へ保存されます。\n"
-#~ "'save' によって作られたセーブデータを再読み込みを行いたければ，コマンドラ"
-#~ "イン引数で\n"
-#~ "    --file <ファイル名>\n"
-#~ "を使い起動し，一旦プレイヤーを再接続してコマンド 'start' を使って下さい。"
 
 # clefs
 #~ msgid "Tutorial message"

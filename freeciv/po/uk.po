@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: freeciv 1.14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-04 22:00+0100\n"
+"POT-Creation-Date: 2011-01-16 00:05+0100\n"
 "PO-Revision-Date: 2007-09-05 04:24+0300\n"
 "Last-Translator: Roman Festchook <roma@polesye.net>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -3192,6 +3192,35 @@ msgid ""
 msgstr ""
 "Ця команда *повн╕стю* видаля╓ гравця з гри, включаюч╕ ус╕ м╕ста та "
 "п╕дрозд╕ли. Застосовуйте обережно!"
+
+#. TRANS: translate text between <> only
+#: server/commands.c:414
+msgid ""
+"save\n"
+"save <file-name>"
+msgstr ""
+"save\n"
+"save <файл>"
+
+#: server/commands.c:416
+msgid "Save game to file."
+msgstr "Зберегти гру у файл."
+
+#: server/commands.c:417
+msgid ""
+"Save the current game to file <file-name>.  If no file-name argument is "
+"given saves to \"<auto-save name prefix><year>m.sav[.gz]\".\n"
+"To reload a savegame created by 'save', start the server with the command-"
+"line argument:\n"
+"    --file <filename>\n"
+"and use the 'start' command once players have reconnected."
+msgstr ""
+"Зберегти поточну гру у файл <файл>. Якщо не надано ╕мен╕ файлу збер╕гання "
+"йде у файл '<встановлений преф╕кс><р╕к>m.sav[.gz]'.\n"
+"Аби завантажити збережену гру, стартуйте сервер з аргументом у командн╕й "
+"строц╕:\n"
+"    --file <файл>\n"
+"пот╕м виконайте команду 'start' як т╕льк╕ ус╕ гравц╕ п╕д'╓днаються."
 
 #. TRANS: translate text between <> only
 #: server/commands.c:427
@@ -30036,31 +30065,6 @@ msgstr ""
 #: data/default/game.ruleset:185
 msgid "BC"
 msgstr ""
-
-#~ msgid ""
-#~ "save\n"
-#~ "save <file-name>"
-#~ msgstr ""
-#~ "save\n"
-#~ "save <файл>"
-
-#~ msgid "Save game to file."
-#~ msgstr "Зберегти гру у файл."
-
-#~ msgid ""
-#~ "Save the current game to file <file-name>.  If no file-name argument is "
-#~ "given saves to \"<auto-save name prefix><year>m.sav[.gz]\".\n"
-#~ "To reload a savegame created by 'save', start the server with the command-"
-#~ "line argument:\n"
-#~ "    --file <filename>\n"
-#~ "and use the 'start' command once players have reconnected."
-#~ msgstr ""
-#~ "Зберегти поточну гру у файл <файл>. Якщо не надано ╕мен╕ файлу збер╕гання "
-#~ "йде у файл '<встановлений преф╕кс><р╕к>m.sav[.gz]'.\n"
-#~ "Аби завантажити збережену гру, стартуйте сервер з аргументом у командн╕й "
-#~ "строц╕:\n"
-#~ "    --file <файл>\n"
-#~ "пот╕м виконайте команду 'start' як т╕льк╕ ус╕ гравц╕ п╕д'╓днаються."
 
 #, fuzzy
 #~ msgid "Tutorial message"

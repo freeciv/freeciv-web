@@ -39,7 +39,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.15\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-04 22:00+0100\n"
+"POT-Creation-Date: 2011-01-16 00:05+0100\n"
 "PO-Revision-Date: 2009-03-24 22:03+0100\n"
 "Last-Translator: Christian Knoke <chrisk@cknoke.de>\n"
 "Language-Team: German Freeciv Translators <freeciv.de@freelists.org>\n"
@@ -3236,6 +3236,35 @@ msgid ""
 msgstr ""
 "Dieser Befehl entfernt den angegeben Spieler VOLLSTÄNDIG, d.h. "
 "einschließlich aller Städte und Einheiten. Vorsicht!"
+
+#. TRANS: translate text between <> only
+#: server/commands.c:414
+msgid ""
+"save\n"
+"save <file-name>"
+msgstr ""
+"save\n"
+"save <Dateiname>"
+
+#: server/commands.c:416
+msgid "Save game to file."
+msgstr "Spiel speichern"
+
+#: server/commands.c:417
+msgid ""
+"Save the current game to file <file-name>.  If no file-name argument is "
+"given saves to \"<auto-save name prefix><year>m.sav[.gz]\".\n"
+"To reload a savegame created by 'save', start the server with the command-"
+"line argument:\n"
+"    --file <filename>\n"
+"and use the 'start' command once players have reconnected."
+msgstr ""
+"Speichert das Spiel in der Datei <Dateiname>. Wenn kein Dateiname angegeben "
+"wird, heißt die Datei '<auto-save nameprefix><year>m.sav[.gz]'.\n"
+"Um ein gespeichertes Spiel fortzuführen, ruft man den Server mit dem "
+"Argument\n"
+"      --file <Dateiname>\n"
+"auf und gibt nachdem alle Mitspieler bereit sind, 'start' ein."
 
 #. TRANS: translate text between <> only
 #: server/commands.c:427
@@ -30290,32 +30319,6 @@ msgstr ""
 #: data/default/game.ruleset:185
 msgid "BC"
 msgstr ""
-
-#~ msgid ""
-#~ "save\n"
-#~ "save <file-name>"
-#~ msgstr ""
-#~ "save\n"
-#~ "save <Dateiname>"
-
-#~ msgid "Save game to file."
-#~ msgstr "Spiel speichern"
-
-#~ msgid ""
-#~ "Save the current game to file <file-name>.  If no file-name argument is "
-#~ "given saves to \"<auto-save name prefix><year>m.sav[.gz]\".\n"
-#~ "To reload a savegame created by 'save', start the server with the command-"
-#~ "line argument:\n"
-#~ "    --file <filename>\n"
-#~ "and use the 'start' command once players have reconnected."
-#~ msgstr ""
-#~ "Speichert das Spiel in der Datei <Dateiname>. Wenn kein Dateiname "
-#~ "angegeben wird, heißt die Datei '<auto-save nameprefix><year>m.sav[."
-#~ "gz]'.\n"
-#~ "Um ein gespeichertes Spiel fortzuführen, ruft man den Server mit dem "
-#~ "Argument\n"
-#~ "      --file <Dateiname>\n"
-#~ "auf und gibt nachdem alle Mitspieler bereit sind, 'start' ein."
 
 #~ msgid "Tutorial message"
 #~ msgstr "Nachrichten des Einführungsszenarios"

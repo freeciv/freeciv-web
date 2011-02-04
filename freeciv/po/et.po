@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: et\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-04 22:00+0100\n"
+"POT-Creation-Date: 2011-01-16 00:05+0100\n"
 "PO-Revision-Date: 2009-02-27 00:03+0200\n"
 "Last-Translator: Elmo Todurov <todurov@gmail.com>\n"
 "Language-Team: eesti\n"
@@ -3231,6 +3231,34 @@ msgid ""
 msgstr ""
 "See koristab *täielikult* mängija mängust, ka tema linnad ja üksused jne.  "
 "Kasuta ettevaatlikult!"
+
+#. TRANS: translate text between <> only
+#: server/commands.c:414
+msgid ""
+"save\n"
+"save <file-name>"
+msgstr ""
+"save\n"
+"save <failinimi>"
+
+#: server/commands.c:416
+msgid "Save game to file."
+msgstr "Salvesta mäng faili."
+
+#: server/commands.c:417
+msgid ""
+"Save the current game to file <file-name>.  If no file-name argument is "
+"given saves to \"<auto-save name prefix><year>m.sav[.gz]\".\n"
+"To reload a savegame created by 'save', start the server with the command-"
+"line argument:\n"
+"    --file <filename>\n"
+"and use the 'start' command once players have reconnected."
+msgstr ""
+"Salvesta praegune mäng faili <failinimi>. Kui failinime mitte anda, "
+"salvestatakse faili \"<autosalvesuse nime prefix><aasta>m.sav[.gz]\".\n"
+"Salvestatud mängu laadimiseks lase server käima käsureaargumendiga\n"
+"    --file <failinimi>\n"
+"ja lase käima käsk 'start', kui mängijad on ühendunud."
 
 #. TRANS: translate text between <> only
 #: server/commands.c:427
@@ -29600,30 +29628,6 @@ msgstr ""
 #: data/default/game.ruleset:185
 msgid "BC"
 msgstr ""
-
-#~ msgid ""
-#~ "save\n"
-#~ "save <file-name>"
-#~ msgstr ""
-#~ "save\n"
-#~ "save <failinimi>"
-
-#~ msgid "Save game to file."
-#~ msgstr "Salvesta mäng faili."
-
-#~ msgid ""
-#~ "Save the current game to file <file-name>.  If no file-name argument is "
-#~ "given saves to \"<auto-save name prefix><year>m.sav[.gz]\".\n"
-#~ "To reload a savegame created by 'save', start the server with the command-"
-#~ "line argument:\n"
-#~ "    --file <filename>\n"
-#~ "and use the 'start' command once players have reconnected."
-#~ msgstr ""
-#~ "Salvesta praegune mäng faili <failinimi>. Kui failinime mitte anda, "
-#~ "salvestatakse faili \"<autosalvesuse nime prefix><aasta>m.sav[.gz]\".\n"
-#~ "Salvestatud mängu laadimiseks lase server käima käsureaargumendiga\n"
-#~ "    --file <failinimi>\n"
-#~ "ja lase käima käsk 'start', kui mängijad on ühendunud."
 
 #~ msgid "Tutorial message"
 #~ msgstr "Õppealane teade"

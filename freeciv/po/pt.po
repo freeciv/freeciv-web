@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: freeciv\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-04 22:00+0100\n"
+"POT-Creation-Date: 2011-01-16 00:05+0100\n"
 "PO-Revision-Date: 2007-09-01 22:56+0300\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: \n"
@@ -3215,6 +3215,35 @@ msgid ""
 msgstr ""
 "Rmove um jogador *completamente*, incluindo todas as suas cidades, unidades, "
 "etc.  Utilizar com cautela!"
+
+#. TRANS: translate text between <> only
+#: server/commands.c:414
+msgid ""
+"save\n"
+"save <file-name>"
+msgstr ""
+"save\n"
+"save <nome-de-ficheiro>"
+
+#: server/commands.c:416
+msgid "Save game to file."
+msgstr "Grava jogo para ficheiro."
+
+#: server/commands.c:417
+msgid ""
+"Save the current game to file <file-name>.  If no file-name argument is "
+"given saves to \"<auto-save name prefix><year>m.sav[.gz]\".\n"
+"To reload a savegame created by 'save', start the server with the command-"
+"line argument:\n"
+"    --file <filename>\n"
+"and use the 'start' command once players have reconnected."
+msgstr ""
+"Grava o jogo actual para o ficheiro <nome-de-ficheiro>.  Se não for indicado "
+"o nome de ficheiro grava para <pref-auto-gravação><ano>m.sav[.gz]\".\n"
+"Para reler um jogo gravado por 'save', inicie o servidor com o argumento de "
+"linha de comando:\n"
+"    --file <nome-de-ficheiro>\n"
+"e utilize o comando 'start' após os jogadores se terem ligado novamente."
 
 #. TRANS: translate text between <> only
 #: server/commands.c:427
@@ -29905,32 +29934,6 @@ msgstr ""
 #: data/default/game.ruleset:185
 msgid "BC"
 msgstr ""
-
-#~ msgid ""
-#~ "save\n"
-#~ "save <file-name>"
-#~ msgstr ""
-#~ "save\n"
-#~ "save <nome-de-ficheiro>"
-
-#~ msgid "Save game to file."
-#~ msgstr "Grava jogo para ficheiro."
-
-#~ msgid ""
-#~ "Save the current game to file <file-name>.  If no file-name argument is "
-#~ "given saves to \"<auto-save name prefix><year>m.sav[.gz]\".\n"
-#~ "To reload a savegame created by 'save', start the server with the command-"
-#~ "line argument:\n"
-#~ "    --file <filename>\n"
-#~ "and use the 'start' command once players have reconnected."
-#~ msgstr ""
-#~ "Grava o jogo actual para o ficheiro <nome-de-ficheiro>.  Se não for "
-#~ "indicado o nome de ficheiro grava para <pref-auto-gravação><ano>m.sav[.gz]"
-#~ "\".\n"
-#~ "Para reler um jogo gravado por 'save', inicie o servidor com o argumento "
-#~ "de linha de comando:\n"
-#~ "    --file <nome-de-ficheiro>\n"
-#~ "e utilize o comando 'start' após os jogadores se terem ligado novamente."
 
 #, fuzzy
 #~ msgid "Tutorial message"

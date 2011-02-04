@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: po-debconf://kdebase\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-04 22:00+0100\n"
+"POT-Creation-Date: 2011-01-16 00:05+0100\n"
 "PO-Revision-Date: 2007-09-05 03:37+0300\n"
 "Last-Translator: stan ioan-eugen <stan.ieugen@gmail.com>\n"
 "Language-Team: romanian <debian-l10n-romanian@lists.debian.org>\n"
@@ -3284,6 +3284,36 @@ msgid ""
 msgstr ""
 "Această comandă îndepărtează COMPLET jucătorul din joc, incluzând toate "
 "oraşele şi unităţile sale. Folosiţi cu prudentă!"
+
+#. TRANS: translate text between <> only
+#: server/commands.c:414
+msgid ""
+"save\n"
+"save <file-name>"
+msgstr ""
+"save\n"
+"save <nume-fişier>"
+
+#: server/commands.c:416
+msgid "Save game to file."
+msgstr "Salvează jocul într-un fişier."
+
+#: server/commands.c:417
+msgid ""
+"Save the current game to file <file-name>.  If no file-name argument is "
+"given saves to \"<auto-save name prefix><year>m.sav[.gz]\".\n"
+"To reload a savegame created by 'save', start the server with the command-"
+"line argument:\n"
+"    --file <filename>\n"
+"and use the 'start' command once players have reconnected."
+msgstr ""
+"Salvează jocul curent în fişierul <nume-fişier>.  Dacă nu se specifică nici "
+"un nume de fişier ca argument jocul este salvat ca \"<prefix nume auto-"
+"salvare><an>m.sav[.gz]\".\n"
+"Pentru a încărca un joc salvat cu comanda 'save', porneşte serverul cu "
+"argumentul următor pe linia de comandă:\n"
+"    --file <nume-fişier>\n"
+"şi foloseşte comanda 'start' după ce s-au conectat toţi jucătorii."
 
 #. TRANS: translate text between <> only
 #: server/commands.c:427
@@ -29016,32 +29046,6 @@ msgstr ""
 #: data/default/game.ruleset:185
 msgid "BC"
 msgstr ""
-
-#~ msgid ""
-#~ "save\n"
-#~ "save <file-name>"
-#~ msgstr ""
-#~ "save\n"
-#~ "save <nume-fişier>"
-
-#~ msgid "Save game to file."
-#~ msgstr "Salvează jocul într-un fişier."
-
-#~ msgid ""
-#~ "Save the current game to file <file-name>.  If no file-name argument is "
-#~ "given saves to \"<auto-save name prefix><year>m.sav[.gz]\".\n"
-#~ "To reload a savegame created by 'save', start the server with the command-"
-#~ "line argument:\n"
-#~ "    --file <filename>\n"
-#~ "and use the 'start' command once players have reconnected."
-#~ msgstr ""
-#~ "Salvează jocul curent în fişierul <nume-fişier>.  Dacă nu se specifică "
-#~ "nici un nume de fişier ca argument jocul este salvat ca \"<prefix nume "
-#~ "auto-salvare><an>m.sav[.gz]\".\n"
-#~ "Pentru a încărca un joc salvat cu comanda 'save', porneşte serverul cu "
-#~ "argumentul următor pe linia de comandă:\n"
-#~ "    --file <nume-fişier>\n"
-#~ "şi foloseşte comanda 'start' după ce s-au conectat toţi jucătorii."
 
 #~ msgid "Tutorial message"
 #~ msgstr "Mesaj de la tutorial"

@@ -2,9 +2,11 @@
 
 <h2>Screenshots of Freeciv.net</h2>
 <span>
-These are screenshots of Freeciv.net taken on the latest version as of October 2010.
+These are screenshots of Freeciv.net taken on the latest version as of February 2011.
 <br><br>
 <div style="width: 900px;">
+<div style="padding: 15px; float: left;"><a href="/images/freeciv-screenshot-11.png"><img src="/images/freeciv-screenshot-11-thumb.png"></a></div>
+<div style="padding: 15px; float: left;"><a href="/images/freeciv-screenshot-12.png"><img src="/images/freeciv-screenshot-12-thumb.png"></a></div>
 <div style="padding: 15px; float: left;"><a href="/images/freeciv-screenshot-9.png"><img src="/images/freeciv-screenshot-9-thumb.png"></a></div>
 <div style="padding: 15px; float: left;"><a href="/images/freeciv-screenshot-10.png"><img src="/images/freeciv-screenshot-10-thumb.png"></a></div>
 <div style="padding: 15px; float: left;"><a href="/images/freeciv-screenshot-8.png"><img src="/images/freeciv-screenshot-8-thumb.png"></a></div>

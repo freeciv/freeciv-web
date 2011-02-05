@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: iso-8859-1 -*-
 ''' 
- Freeciv - Copyright (C) 2009,2010 - Andreas Røsdal   andrearo@pvv.ntnu.no
+ Freeciv - Copyright (C) 2009,2011 - Andreas Røsdal   andrearo@pvv.ntnu.no
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation; either version 2, or (at your option)
@@ -20,35 +20,36 @@ import Image
 import ImageFont, ImageDraw, ImageOps
 import json
 
-gfxdir = "../freeciv/data/";
+gfxdir = "";
 
-files = ["../freeciv/data/amplio.tilespec",
-  "../freeciv/data/amplio/ancientcities.spec",
-  "../freeciv/data/amplio/buildings.spec",
-  "../freeciv/data/amplio/explosions.spec",
-  "../freeciv/data/amplio/fog.spec",
-  "../freeciv/data/amplio/grid.spec",
-  "../freeciv/data/amplio/icons.spec",
-  "../freeciv/data/amplio/medievalcities.spec",
-  "../freeciv/data/amplio/moderncities.spec",
+files = ["amplio2.tilespec",
+  "amplio2/ancientcities.spec",
+  "amplio2/explosions.spec",
+  "amplio2/fog.spec",
+  "amplio2/grid.spec",
+#  "amplio2/icons.spec",
+  "amplio2/medievalcities.spec",
+  "amplio2/moderncities.spec",
+  "amplio2/mountains.spec",
+  "amplio2/hills.spec",
 #  "../freeciv/data/amplio/nuke.spec", 	#not in use yet
-  "../freeciv/data/amplio/ocean.spec",
-  "../freeciv/data/amplio/select.spec",
-  "../freeciv/data/amplio/terrain1.spec",
-  "../freeciv/data/amplio/terrain2.spec",
-  "../freeciv/data/amplio/tiles.spec",
-  "../freeciv/data/amplio/units.spec",
+  "amplio2/ocean.spec",
+  "amplio2/select.spec",
+  "amplio2/terrain1.spec",
+  "amplio2/terrain2.spec",
+  "amplio2/tiles.spec",
+  "amplio2/units.spec",
 #  "../freeciv/data/amplio/water.spec",  #not in use yet
-  "../freeciv/data/amplio/wonders.spec",
+  "amplio2/wonders.spec",
   "../freeciv/data/misc/colors.tilespec",
-  "../freeciv/data/misc/buildings.spec",
-  "../freeciv/data/misc/icons.spec",
+  "amplio2/buildings-large.spec",
+#  "../freeciv/data/misc/icons.spec",
 #  "../freeciv/data/misc/chiefs.spec",  #not in use yet
   "../freeciv/data/misc/overlays.spec",
 #  "../freeciv/data/misc/citybar.spec",  #not in use yet
   "../freeciv/data/misc/shields.spec",
   "../freeciv/data/misc/small.spec",
-  "../freeciv/data/misc/cursors.spec",
+#  "../freeciv/data/misc/cursors.spec",
   "../freeciv/data/misc/space.spec",
   "../freeciv/data/misc/editor.spec",
   "../freeciv/data/misc/techs.spec",
@@ -92,7 +93,7 @@ def increment_tileset_image():
   global max_height;
 
   draw = ImageDraw.Draw(tileset)
-  draw.text((130, 0), "Freeciv.net - #" + str(current_tileset_no) + " -   GPL Licensed  - Copyright 2007-2010  Andreas Rosdal", fill="rgb(0,0,0)")
+  draw.text((130, 0), "Freeciv.net - #" + str(current_tileset_no) + " -   GPL Licensed  - Copyright 2007-2011  Andreas Rosdal", fill="rgb(0,0,0)")
 
   tileset.save("pre-freeciv-web-tileset-" + str(current_tileset_no) + ".png");
 
@@ -167,7 +168,7 @@ for file in files:
       tiles = tiles_buf.replace("{","").replace("}", "").replace(" ", "").replace("\"","").split("\n");
       for tile in tiles:
         tmptile = tile.split(",");
-        if (tmptile[0] == "row"): continue;
+        if (tmptile[0] == "row" or tmptile[0] == "" or len(tmptile) < 3) : continue;
         gx = int(tmptile[1]);
         gy = int(tmptile[0]);
         tag = str(tmptile[2]);
@@ -253,8 +254,9 @@ for file in files:
             max_row_height = 0;
 
           #if (tag2 != None): result_tile.save(tag2 + ".png"); 
-          if (tag2 != None): 
+          if (tag2 != None and len(tag2) > 0): 
             coords[tag2] = (current_tileset_no, curr_x, curr_y, w, h);
+	    print("saving tag: " + tag2);
             result_tile.save("tiles/" + tag2 + ".png");
  
     if "grid_coasts" in config.sections():
@@ -276,6 +278,7 @@ for file in files:
       for tile in tiles:
         tmptile = tile.split(",");
         if (tmptile[0] == "row"): continue;
+	if (tmptile[0] == ""): continue;
         gx = int(tmptile[1]);
         gy = int(tmptile[0]);
         tag = str(tmptile[2]);

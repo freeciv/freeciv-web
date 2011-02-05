@@ -848,7 +848,10 @@ function get_improvement_image_sprite(pimprovement)
 {
   var tag = pimprovement['graphic_str'];
   
-  if (tileset[tag] == null) return null;
+  if (tileset[tag] == null) {
+    tag = pimprovement['graphic_alt'];
+    if (tileset[tag] == null) return null;
+  }
   
   var tileset_file_no = tileset[tag][0];
   var tileset_x = tileset[tag][1];

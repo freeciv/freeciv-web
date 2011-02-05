@@ -1,0 +1,206 @@
+
+[tilespec]
+
+; Format and options of this tilespec file:
+options = "+Freeciv-2.3-tilespec"
+
+; A simple name for the tileset specified by this file:
+name = "amplio2"
+priority = 30
+
+; TODO: add more overall information fields on tiles, 
+; eg, description, authors, colors, etc.
+
+; Basic tile sizes:
+normal_tile_width  = 96
+normal_tile_height = 48
+small_tile_width   = 15
+small_tile_height  = 20
+
+; Basic tile style.
+is_hex = 0
+is_isometric = 1
+
+; Do not blend hills and mountains together.
+is_mountainous = 0
+
+; Use roadstyle 0 (old iso style)
+roadstyle = 0
+
+; Fogstyle 2, darkness_style 4 : blended fog
+fogstyle = 2
+darkness_style = 4
+ 
+; offset the flags by this amount when drawing units
+unit_flag_offset_x = 25
+unit_flag_offset_y = 16
+city_flag_offset_x = 2
+city_flag_offset_y = 9
+
+; offset the units by this amount when drawing units
+unit_offset_x = 19
+unit_offset_y = 18
+
+;Enable citybar
+is_full_citybar = 1
+
+; offset the citybar text by this amount (from the city tile origin)
+citybar_offset_y = 30
+
+; Font size (points) to use to draw city names and productions:
+city_names_font_size = 10
+city_productions_font_size = 8
+
+; These are special because they get freed and reloaded
+; as required:
+main_intro_file    = "misc/intro"
+minimap_intro_file = "misc/radar"
+
+; Below, the graphics spec files; must be somewhere (anywhere) in 
+; the data path. Order may be important for color allocation on 
+; low-color systems, and if there are any duplicate tags (lattermost
+; tag is used).
+files = 
+  "amplio2/terrain1.spec",
+  "amplio2/terrain2.spec",
+  "amplio2/hills.spec",
+  "amplio2/mountains.spec",
+  "amplio2/ocean.spec",
+  "amplio2/water.spec",
+  "amplio2/tiles.spec",
+  "amplio2/fog.spec",
+  "misc/small.spec",
+  "amplio2/units.spec",
+  "misc/flags.spec",
+  "misc/buildings-large.spec",
+  "misc/wonders-large.spec",
+  "misc/space.spec",
+  "misc/techs.spec",
+  "misc/treaty.spec",
+  "amplio2/nuke.spec",
+  "amplio2/explosions.spec",
+  "amplio2/ancientcities.spec",
+  "amplio2/medievalcities.spec",
+  "amplio2/moderncities.spec",
+  "amplio2/select.spec",
+  "amplio2/grid.spec",
+  "misc/cursors.spec",
+  "misc/colors.spec",
+  "misc/overlays.spec",
+  "misc/citybar.spec",
+  "misc/shields.spec",
+  "misc/editor.spec",
+  "misc/icons.spec"
+
+
+; Include color definitions
+;*include "misc/colors.tilespec"
+
+; Terrain info - see README.graphics
+
+[layer0]
+match_types = "shallow", "deep", "land"
+
+[layer1]
+match_types = "forest", "hills", "mountains", "water", "ice"
+
+[layer2]
+match_types = "water", "ice"
+
+; Water graphics referenced by terrain.ruleset
+;
+[tile_lake]
+is_blended = 0
+num_layers = 1
+layer0_match_type = "shallow"
+layer0_match_with = "land"
+layer0_sprite_type = "corner"
+
+[tile_coast]
+is_blended = 1
+num_layers = 2
+layer0_match_type = "shallow"
+layer0_match_with = "deep", "land"
+layer0_sprite_type = "corner"
+layer1_match_type = "water"
+layer1_match_with = "ice"
+layer1_sprite_type = "corner"
+
+[tile_floor]
+is_blended = 0
+num_layers = 2
+layer0_match_type = "deep"
+layer0_match_with = "shallow", "land"
+layer0_sprite_type = "corner"
+layer1_match_type = "water"
+layer1_match_with = "ice"
+layer1_sprite_type = "corner"
+
+; Land graphics referenced by terrain.ruleset
+;
+[tile_arctic]
+; treated as water for ice cliffs
+is_blended = 0
+num_layers = 3
+layer0_match_type = "shallow"
+layer1_match_type = "ice"
+layer2_match_type = "ice"
+mine_sprite = "tx.oil_mine"
+
+[tile_desert]
+is_blended = 1
+num_layers = 1
+layer0_match_type = "land"
+mine_sprite = "tx.oil_mine"
+
+[tile_forest]
+is_blended = 1
+num_layers = 2
+layer0_match_type = "land"
+layer1_match_type = "forest"
+layer1_match_with = "forest"
+
+[tile_grassland]
+is_blended = 1
+num_layers = 1
+layer0_match_type = "land"
+
+[tile_hills]
+is_blended = 1
+num_layers = 2
+layer0_match_type = "land"
+layer1_match_type = "hills"
+layer1_match_with = "hills"
+mine_sprite = "tx.mine"
+
+[tile_jungle]
+is_blended = 1
+num_layers = 2
+layer0_match_type = "land"
+layer1_match_type = "forest"
+layer1_match_with = "forest"
+
+[tile_mountains]
+is_blended = 1
+num_layers = 2
+layer0_match_type = "land"
+layer1_match_type = "hills"
+layer1_match_with = "hills"
+layer1_is_tall = 1
+layer1_offset_y = 6
+mine_sprite = "tx.mine"
+
+[tile_plains]
+is_blended = 1
+num_layers = 1
+layer0_match_type = "land"
+
+[tile_swamp]
+is_blended = 1
+num_layers = 1
+layer0_match_type = "land"
+
+[tile_tundra]
+is_blended = 1
+num_layers = 1
+layer0_match_type = "land"

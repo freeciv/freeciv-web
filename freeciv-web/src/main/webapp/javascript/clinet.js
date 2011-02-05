@@ -16,13 +16,14 @@ var error_shown = false;
 var syncTimerId = -1;
 var isWorking = false;
 
-
+/****************************************************************************
+  Initialized the network synchronization loop.
+****************************************************************************/
 function network_init()
 {
   civwebserver_url = civwebserver_url_base + "?p=" + civserverport + "&u=" + username;
 
-  syncTimerId = setInterval("sync_civclient()", 20);
-  
+  syncTimerId = setInterval("sync_civclient()", 15);
  
  $(document).ajaxComplete(function(){ 
    isWorking = false;
@@ -32,11 +33,17 @@ function network_init()
   
 }
 
+/****************************************************************************
+  Stops network sync.
+****************************************************************************/
 function network_stop()
 {
   clearInterval(syncTimerId); 
 }
 
+/****************************************************************************
+  Send a syncronization request to the server using POST.
+****************************************************************************/
 function sync_civclient()
 {
 
@@ -49,7 +56,19 @@ function sync_civclient()
   var net_packet = [];
     
   var myJSONText = JSON.stringify(net_packet);
-  
+ 
+  if (goto_active && current_focus.length > 0 
+      && prev_mouse_x == mouse_x && prev_mouse_y == mouse_y) {
+    var ptile = canvas_pos_to_tile(mouse_x, mouse_y);
+    if (ptile != null) {
+      /* Send request for goto_path to server. */
+      request_goto_path(current_focus[0]['id'], ptile['x'], ptile['y']);
+    }
+  }
+  prev_mouse_x = mouse_x;
+  prev_mouse_y = mouse_y;
+
+  /* Send main request for sync to server. */
   $.ajax({
       url: civwebserver_url,
       type: "POST",
@@ -71,7 +90,9 @@ function sync_civclient()
 
 }
 
-
+/****************************************************************************
+  Sends a request to the server, with a JSON packet.
+****************************************************************************/
 function send_request(packet_payload) 
 {
   $.post(civwebserver_url, packet_payload, client_handle_packet, "json");

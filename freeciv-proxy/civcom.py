@@ -100,7 +100,7 @@ class CivCom(Thread):
 
       # sleep a short while, to avoid excessive CPU use.
       if (len(data) == 0): 
-        time.sleep(0.01);
+        time.sleep(0.005);
         return net_buf;
       else:
         return net_buf + data;

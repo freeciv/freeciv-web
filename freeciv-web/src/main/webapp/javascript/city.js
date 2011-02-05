@@ -138,6 +138,10 @@ function show_city_dialog(pcity)
   for (var z = 0; z < pcity['improvements'].length; z ++) {
     if (pcity['improvements'][z] == 1) {
        var sprite = get_improvement_image_sprite(improvements[z]);
+       if (sprite == null) {
+         console.log("Missing sprite for " + improvements[z]['graphic_str']);
+         continue;
+       }
       
       improvements_html = improvements_html +
        "<div style='background: transparent url(" 
@@ -178,6 +182,11 @@ function show_city_dialog(pcity)
   for (var a = 0; a < production_list.length; a++) {
     var current_prod = (pcity['production_kind'] == production_list[a]['kind'] && pcity['production_value'] == production_list[a]['value']);
     var sprite = production_list[a]['sprite'];  
+    if (sprite == null) {
+      console.log("Missing sprite for " + production_list[a]['value']);
+      continue;
+    }
+
     production_html = production_html 
      + "<div style='text-align: center; " + (current_prod ? "background-color:#777777; text:#000000; border: 1px solid #ffffff;" : "") + "'" 
      + " onclick='send_city_change(" + pcity['id'] + "," + production_list[a]['kind'] + "," + production_list[a]['value'] + ")'>"
@@ -200,6 +209,11 @@ function show_city_dialog(pcity)
       var punit = punits[r];
       var ptype = unit_type(punit);   
       var sprite = get_unit_image_sprite(punit);
+      if (sprite == null) {
+         console.log("Missing sprite for " + punit);
+         continue;
+       }
+
       
       present_units_html = present_units_html +
        "<div id='game_unit_list_item' style='cursor:pointer;cursor:hand; background: transparent url(" 

@@ -622,7 +622,7 @@ if ( isset($port) ) {
 </div>
 
 <div id="footer">
-Copyright &copy; 2008-2010 Freeciv.net
+Copyright &copy; 2008-2011 Freeciv.net
 </div>
 
 </div>

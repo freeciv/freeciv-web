@@ -14,6 +14,8 @@
 
 var mouse_x;
 var mouse_y;
+var prev_mouse_x;
+var prev_mouse_y;
 var keyboard_input = true;
 
 var allow_right_click = false;
@@ -52,13 +54,6 @@ function mouse_moved_cb(e)
   if (mapview_canvas != null) {
     mouse_x = mouse_x - mapview_canvas.offsetLeft;
     mouse_y = mouse_y - mapview_canvas.offsetTop;
-  }
-
-  if (goto_active && current_focus.length > 0) {
-    var ptile = canvas_pos_to_tile(mouse_x, mouse_y);
-    if (ptile != null) {
-      request_goto_path(current_focus[0]['id'], ptile['x'], ptile['y']);
-    }
   }
 
 }

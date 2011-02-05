@@ -123,11 +123,11 @@ class WebserverHandler(BaseHTTPRequestHandler):
             time.sleep(CIVSERVER_ROUNDTRIP_TIME);
 
           # prepare reponse to webclient.
-                   
-          self.send_response(200);
-          self.send_header('Content-Type',    'text/html')
-          self.end_headers()
-          self.wfile.write(civcom.get_send_result_string());
+	  response_payload = civcom.get_send_result_string();
+	  response_data = "".join(["HTTP/1.1 200 OK\nContent-Length: " + str(len(response_payload)), \
+                                  "\nContent-Type: text/html\n\n", response_payload]);
+
+          self.wfile.write(response_data);
         except Exception, e:
           if (logger.isEnabledFor(logging.ERROR)):
             logger.error(e);

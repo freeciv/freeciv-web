@@ -3,6 +3,7 @@
 # how to parse zero terminated strings with struct
 
 import struct
+from cStringIO import StringIO
 
 def packExt(fmt, *args):
 	if fmt.find("z") < 0:
@@ -60,7 +61,7 @@ def unpackExt(fmt, string):
 					format_buffer = ""
 				
 				# now the z part
-				str = ""
+				file_str = StringIO()
 				strsize = -1
 				for j in xrange(0, len(string)):
 					if offset+j < len(string):
@@ -68,9 +69,9 @@ def unpackExt(fmt, string):
 					    strsize=j;
 					    break;
 					  else:
-					  	str+=string[offset+j]
+					    file_str.write(string[offset+j]);
 					
-				result += [str]
+				result += [file_str.getvalue()]
 				offset += strsize + 1 # 1 = \0
 			else:
 				# cache all chars for later processing

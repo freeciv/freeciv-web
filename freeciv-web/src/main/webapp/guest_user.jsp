@@ -22,11 +22,11 @@ if (username == null || "null".equals(username)) {
 <h2>Choose your username:</h2>
 
 <div>
-	Please choose your guest username:
+	Please choose your player name:
 </div>
 
 <form name="guest_user" action="/wireframe.jsp" method="get">
-<input type="text" size="20" name="username" value="">
+<input id="usr" type="text" size="20" name="username" value="">
 <input type="hidden" name="redir" value="<%= redir_url %>">
 <input type="hidden" name="do" value="guest_user">
 <input class="button" type="submit" value="Login">
@@ -40,6 +40,7 @@ if (username == null || "null".equals(username)) {
 
 <script>
 	$( ".button").button();
+	$( "#usr").focus();
 </script>
 
 

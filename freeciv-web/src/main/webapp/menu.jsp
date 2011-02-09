@@ -66,7 +66,7 @@
 
 <script type="text/javascript">
 
-if (jQuery.browser.msie) {
+if (jQuery.browser.msie && jQuery.browser.version < 9 ) {
   var div1 = document.getElementById('iewarning');
   div1.style.display = 'block';
 }

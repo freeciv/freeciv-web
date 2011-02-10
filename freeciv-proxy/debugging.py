@@ -56,19 +56,17 @@ def get_debug_info(civcoms):
 
 
   try:    
+    code += "<h3>Memory usage:</h3>";
+    code += "Memory: " + str(memory()/1048576) + " MB <br>";
+    code += "Resident: " + str(resident()/1048576) + " MB <br>";
+    code += "Stacksize: " + str(stacksize()/1048576) + " MB <br>";
+
     code += ("<h3>Logged in users  (count %i) :</h3>" % len(civcoms));
     for key in civcoms.keys():
       code += ("username: <b>%s</b> <br>Civserver: (%d)<br>Client IP:%s<br>Connect time: %d<br><br>" % (civcoms[key].username, civcoms[key].civserverport,  civcoms[key].client_ip, time.time() - civcoms[key].connect_time));
        
 
-    try:   
-      code += "<h3>Memory usage:</h3>";
-      code += "Memory: " + str(memory()/1048576) + " MB <br>";
-      code += "Resident: " + str(resident()/1048576) + " MB <br>";
-      code += "Stacksize: " + str(stacksize()/1048576) + " MB <br>";
-    except:
-      code += "<br>No memory debugging.<br>";
-
+ 
     code += "<h3>Thread dumps:</h3>";
 
     for threadId, stack in sys._current_frames().items():

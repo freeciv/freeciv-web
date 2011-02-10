@@ -4,7 +4,7 @@
 <title>Freeciv.net - strategy game playable online with HTML5</title>
 
 <link href="/stylesheets/frontpage.css" rel="stylesheet" type="text/css" />
-<link type="text/css" href="/stylesheets/dark-hive-1.8.5/jquery-ui-1.8.5.custom.css" rel="stylesheet" />
+<link type="text/css" href="/stylesheets/dark-hive-1.8.9/jquery-ui-1.8.9.custom.css" rel="stylesheet" />
 
 
 <% 
@@ -28,7 +28,7 @@
 <link rel="shortcut icon" href="/images/freeciv-forever-icon.png" />
 
 <script type="text/javascript" src="/javascript/jquery-1.5.min.js"></script>
-<script type="text/javascript" src="/javascript-compressed/jquery-ui-1.8.5.custom.min.js"></script>
+<script type="text/javascript" src="/javascript/jquery-ui-1.8.9.custom.min.js"></script>
 
 
 <script type="text/javascript" src="/javascript/iphone.js"></script>

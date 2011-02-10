@@ -25,18 +25,17 @@ logger = logging.getLogger("freeciv-proxy");
 
 CIVSERVER_ROUNDTRIP_TIME = 0.035;  # 35ms roundtrip time for packets to civserver.
 PACKET_SIZE_WAIT_THRESHOLD = 4;
+REQ_QUEUE_SIZE = 70;
+FC_HTTP_TIMEOUT = 40;
 
 class CivWebServer(ThreadingMixIn, HTTPServer):
 
   def __init__(self, server_address, RequestHandlerClass):
     self.civcoms = {};
+    self.request_queue_size = REQ_QUEUE_SIZE;
+    self.timeout = FC_HTTP_TIMEOUT;
+    self.daemon_threads = True;
     HTTPServer.__init__(self, server_address, RequestHandlerClass);
-
-
-  def buffer_send(self, payload_json, key):
-    if key in self.civcoms:
-      civcom = self.civcoms[key];
-      civcom.send_buffer_append(payload_json);
 
   # get the civcom instance which corresponds to the requested user.
   def get_civcom(self, username, civserverport, client_ip):

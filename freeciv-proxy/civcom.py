@@ -85,8 +85,8 @@ class CivCom(Thread):
         if (packet != None): 
           net_buf = net_buf[3+len(packet):];
           packet_payload = civserver_get_packet(self.packet_type, packet);
-          
-          self.civwebserver.buffer_send(packet_payload, self.key);
+	  self.send_buffer_append(packet_payload);
+
         else:
           break;
 
@@ -195,5 +195,5 @@ class CivCom(Thread):
     msg = {};
     msg['packet_type'] = "connect_msg";
     msg['message'] = message;
-    self.civwebserver.buffer_send(msg, self.key);
+    self.send_buffer_append(msg);
       

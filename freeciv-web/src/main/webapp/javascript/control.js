@@ -270,6 +270,7 @@ function init_game_unit_panel()
   $(".unit_dialog div.ui-dialog-content").css("padding", "5px 0");
   $("#ui-dialog-title-game_unit_panel").css("margin-top", "-5px");
   $("#ui-dialog-title-game_unit_panel").css("font-size", "10px");
+  $("#game_unit_panel").parent().css("overflow", "hidden");		
 }
 
 /**************************************************************************

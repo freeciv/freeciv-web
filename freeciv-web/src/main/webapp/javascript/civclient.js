@@ -51,7 +51,7 @@ function civclient_init()
   init_mapview();
 
   // Register keyboard listener.
-  if(window.addEventListener){ // Mozilla, Netscape, Firefox
+  if(!jQuery.browser.msie && window.addEventListener){ // Mozilla, Netscape, Firefox
     document.addEventListener('keyup', keyboard_listener, false);
   } else { // IE
     document.attachEvent('onkeyup', keyboard_listener);

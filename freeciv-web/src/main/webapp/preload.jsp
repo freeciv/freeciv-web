@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
 
@@ -14,28 +15,18 @@ if (username == null || "null".equals(username)) {
 %>
 
 <script type="text/javascript">	
-function is_iphone()
-{
-  var agent=navigator.userAgent.toLowerCase();
-  return (agent.indexOf('iphone')!=-1);
-  //return true;
-}
-
 function fc_redirect_init()
 {
-  if (is_iphone()) {
-    window.location='/civclientlauncher?action=new'
-  } else {
-    setTimeout("fc_redirect();", 1200); 
-  }
-
-
+    setTimeout("fc_redirect();", 800); 
 }
 
 function fc_redirect() 
 {
   window.location='<%= redir_url %>'
 }
+
+window.onload=fc_redirect_init;
+
 </script>
 </head>
 

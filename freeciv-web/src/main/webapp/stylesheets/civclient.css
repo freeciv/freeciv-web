@@ -3,6 +3,7 @@ body
   font: 80% sans-serif; 
   margin: 0px;
   background: #000000;
+  overflow: hidden;
 }
 
 button { 
@@ -41,9 +42,10 @@ button {
 
 
 #game_message_area {
-  background: #222222 url(/images/black-bg.png); 
-  height: 120px;
-  width: 100%;
+  /*background: #222222 url(/images/black-bg.png); */
+
+  height: 70px;
+  width: 98%;
   overflow: auto;
   border: 1px solid #111111;
 }
@@ -54,16 +56,15 @@ button {
 }
 
 #game_text_input {
-  width: 100%;
+  width: 98%;
   border: 1px solid #555555;
   color: #ffffff;
-  background-color: #000000;
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 
 #game_overview_map {
   float: left;
-  min-width: 20%;
   height: 150px;
   text-align: center;
   overflow: auto;
@@ -73,41 +74,26 @@ button {
 #overview_map {
   cursor:crosshair;
   border: 1px solid #555555;
-  width: 90%;
   height: 140px;
 }
 
 
 #game_action_panel {
   float: right;
-  width: 24%;
-  height: 140px;
   color: white;
   padding-left: 5px;
+  padding-right: 10px;
   overflow: hidden;
-  background: url("/images/black-bg.png") repeat scroll 0 0 #222222;
-  border: 1px solid #555555;
 }
-
-#game_info_panel {
-  float: left;
-  width: 99%;
-  padding-top: 2px;
-  background: #000000 url(/images/mapview_ui.png); 
-}
-
 
 #game_unit_info {
   float: left;
   color: white;
   width: 100%;
   overflow: hidden;
+  margin-top: -15px;
 }
 
-#game_communication_panel {
-  width: 52%;
-  float: left;
-}
 
 #end_game_turn_panel {
   float: right;
@@ -119,7 +105,7 @@ button {
 .order_button {
 	overflow: hidden;
 	float: left;
-	padding-right: 5px;
+	padding-right: 12px;
 }
 
 #ie_canvas {
@@ -185,8 +171,13 @@ button {
 }
 
 #game_unit_orders_default {
-  margin-top: -10px; 
-  padding-left: 20px;
+  bottom: 25px;
+  left: 700px;
+  min-width: 300px;
+  height: 50px;
+  position: absolute;
+  text-align: center;
+
 }
 
 #city_viewport {
@@ -282,3 +273,39 @@ button {
   padding-left: 20px;
 }
 
+
+/* Overrides to jquery-ui-1.8.9.custom.css */ 
+
+.ui-widget-overlay {
+  background: none repeat scroll 0 0 #000000;
+  opacity: 0.65;
+}
+
+.ui-widget-content {
+  background: url("/images/black-bg.png") repeat scroll 50% 50%;
+
+}
+
+
+#game_status_panel {
+  position: absolute;
+  color: #ffffff;
+  height: 23px;
+  text-align: center;
+  bottom: 0px;
+  background-color: #000000
+  overflow: hidden;
+}
+
+
+.ui-dialog .ui-dialog-content {
+  position: static;
+}
+
+#counterpart_dipl_add {
+  z-index: 100;
+}
+
+#self_dipl_add {
+  z-index: 100;
+}

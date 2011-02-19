@@ -19,9 +19,9 @@ var sprites = {};
 
 var sprites_init = false;
 
-var height_offset = 240;
+var height_offset = 67;
 var height_offset_iphone = 110;
-var width_offset = 30;
+var width_offset = 10;
 
 var font = "sans";  // without canvas text support
 var canvas_text_font = "12pt Arial"; // with canvas text support
@@ -90,6 +90,7 @@ function init_mapview()
   orientation_changed();
   
   init_sprites();
+
 }
 
 
@@ -125,6 +126,19 @@ function setup_window_size ()
   mapview['height'] = winHeight - height_offset; 
   mapview['store_width'] = winWidth - width_offset;
   mapview['store_height'] = winHeight - height_offset;
+
+  var twidth = $("#game_unit_orders_default").width();
+  $("#game_unit_orders_default").css("left", Math.floor((mapview_canvas.width - twidth) / 2));
+  $("#game_status_panel").css("width", mapview_canvas.width);
+
+
+  $("#pregame_message_area").height( mapview['height'] - 50);
+  $("#pregame_player_list").height( mapview['height'] - 80);
+
+
+  if (overview_active) init_overview();
+  if (unitpanel_active) init_game_unit_panel(); 
+	
 }
 
 /**************************************************************************
@@ -300,7 +314,7 @@ function update_unit_info_label(punits)
     var ptype = unit_type(punit);
     var sprite = get_unit_image_sprite(punit);
     
-    unit_info_html += "<div style='float:left;'><div onclick='set_unit_focus_and_redraw(units[" + punit['id'] + "])' "
+    unit_info_html += "<div style='float:left; padding-top: 10px; padding-right: 20px;'><div onclick='set_unit_focus_and_redraw(units[" + punit['id'] + "])' "
 	   + " style='cursor:pointer; float: left; padding-right: 10px; background: transparent url(" 
            + sprite['image-src'] +
            ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y'] 
@@ -373,6 +387,8 @@ function set_city_mapview_active()
   mapview['store_width'] = 300;
   mapview['store_height'] = 150;
 
+  set_default_mapview_inactive();
+
 }
 
 
@@ -396,7 +412,20 @@ function set_default_mapview_active()
   }
   update_map_canvas_full();
   chatbox_scroll_down();
+  if (overview_active) $("#game_overview_panel").parent().show();
+  if (unitpanel_active) $("#game_unit_panel").parent().show();
+  if (chatbox_active) $("#game_chatbox_panel").parent().show();
 
   tech_dialog_active = false;
   allow_right_click = false;
+}
+
+/**************************************************************************
+  ...
+**************************************************************************/
+function set_default_mapview_inactive()
+{
+  if (overview_active) $("#game_overview_panel").parent().hide();
+  if (unitpanel_active) $("#game_unit_panel").parent().hide();
+  if (chatbox_active) $("#game_chatbox_panel").parent().hide();
 }

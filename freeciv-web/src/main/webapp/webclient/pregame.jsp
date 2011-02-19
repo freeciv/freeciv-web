@@ -1,13 +1,15 @@
 
 <div id="pregame_page">
-  <div id="pregame_logo"></div>
   <div id="pregame_options">
-    <div id="pregame_buttons">
-      <button type="button" class="ui-state-default ui-corner-all" onClick="pregame_start_game();">Start Game</button>
-      <button type="button" class="ui-state-default ui-corner-all" onClick="leave_pregame();" >Leave Game</button>
-      <button id="observe_button" type="button" class="ui-state-default ui-corner-all" onClick="observe();" >Observe Game</button>
-      <button type="button" class="ui-state-default ui-corner-all" onClick="pick_nation();" >Pick Nation</button>
-    </div>
+	<div id="pregame_buttons">
+		<div id="freeciv_logo" style="cursor:pointer;cursor:hand" 
+			  onclick="window.open('http://www.freeciv.net/', '_new');">
+		</div>
+		<button type="button" class="button" onClick="pregame_start_game();">Start Game</button>
+		<button type="button" class="button" onClick="leave_pregame();" >Leave Game</button>
+		<button id="observe_button" type="button" class="button" onClick="observe();" >Observe Game</button>
+		<button type="button" class="button" onClick="pick_nation();" >Pick Nation</button>
+	</div>
 
     <div id="share_icons">
       <a href="http://www.facebook.com/sharer.php?u=http://www.freeciv.net/games/<%= session.getAttribute("username") %>&t=Join me in a Freeciv.net multiplayer game at http://www.freeciv.net/games/<%= session.getAttribute("username") %>" target="_new">

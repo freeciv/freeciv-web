@@ -1,27 +1,21 @@
     
     <div id="game_page" style="display: none;">
     
-    	<script type="text/javascript">
-			$(function(){
-				$('#tabs').tabs();		
-			});
-        </script>
-         	
 		<div id="tabs">
 		    
 			<ul id="tabs_menu">
 			    <div id="freeciv_logo" style="cursor:pointer;cursor:hand" onclick="window.open('http://www.freeciv.net/', '_new');"></div>
 				<li id="map_tab"><a href="#tabs-map" onclick="set_default_mapview_active();">Map</a></li>
-				<li id="civ_tab"><a href="#tabs-civ" onclick="update_rates_dialog(); update_govt_dialog();">Government</a></li>
-				<li><a id="tech_tab_item" href="#tabs-tec" onclick="update_tech_screen();">Technologies</a></li>
-				<li><a href="#tabs-nat" onclick="update_nation_screen();">Nations</a></li>
+				<li id="civ_tab"><a href="#tabs-civ" onclick="set_default_mapview_inactive(); update_rates_dialog(); update_govt_dialog();">Government</a></li>
+				<li><a id="tech_tab_item" href="#tabs-tec" onclick="set_default_mapview_inactive(); update_tech_screen();">Research</a></li>
+				<li><a href="#tabs-nat" onclick="set_default_mapview_inactive(); update_nation_screen();">Nations</a></li>
 				<li style="display: none;"><a href="#tabs-cit">City</a></li>
-				<li id="opt_tab"><a href="#tabs-opt">Options</a></li>
-				<li id="hel_tab"><a href="#tabs-hel" onclick="show_help();">Manual</a></li>
+				<li id="opt_tab"><a href="#tabs-opt" onclick="init_options_dialog(); set_default_mapview_inactive();">Options</a></li>
+				<li id="hel_tab"><a href="#tabs-hel" onclick="set_default_mapview_inactive(); show_help();">Manual</a></li>
 				<div id="turn_done_button_div">
             		<%--<button id="turn_done_button" type="button" onClick="send_end_turn();" >Turn Done</button>--%>
             		
-            		<button id="turn_done_button" type="button" class="ui-state-default ui-corner-all" onClick="send_end_turn();">Turn Done</button>
+            		<button id="turn_done_button" type="button" class="button" onClick="send_end_turn();">Turn Done</button>
             		
             		
                 </div>
@@ -57,5 +51,4 @@
     <div id="dialog" ></div>
     <div id="diplomacy_dialog" ></div>
       
-      
-
+ 

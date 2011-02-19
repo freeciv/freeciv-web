@@ -16,6 +16,7 @@ var client = {};
 client.conn = {};
 
 var client_frozen = false;
+var chatbox_active = true;
 
 var chatbox_text = " ";
 var previous_scroll = 0;
@@ -78,6 +79,8 @@ function civclient_init()
 	    }
   }
 
+  $('#tabs').tabs();
+  $( ".button").button();
 
   load_game_check();
   observe_game_check();
@@ -102,7 +105,52 @@ function civclient_init()
 /**************************************************************************
  ...
 **************************************************************************/
-function add_chatbox_text(text){
+function chatbox_resized()
+{
+  var newheight = $("#game_chatbox_panel").parent().height() - 58;
+  $("#game_message_area").css("height", newheight);
+
+}
+
+
+/**************************************************************************
+ ...
+**************************************************************************/
+function init_chatbox()
+{
+
+  chatbox_active = true;
+
+  $("#game_chatbox_panel").attr("title", "Messages");		
+  $("#game_chatbox_panel").dialog({
+			bgiframe: true,
+			modal: false,
+			width: "60%",
+			height: "auto",
+			resizable: true,
+			dialogClass: 'chatbox_dialog',
+			resize: chatbox_resized,
+			position: ["center", "top"],
+			close: function(event, ui) { chatbox_active = false;}
+		});
+	
+  $("#game_chatbox_panel").dialog('open');		
+  $(".chatbox_dialog div.ui-dialog-titlebar").css("height", "5px");
+  $(".chatbox_dialog div.ui-dialog-content").css("padding", "5px 0");
+  $("#ui-dialog-title-game_chatbox_panel").css("margin-top", "-5px");
+  $("#ui-dialog-title-game_chatbox_panel").css("font-size", "10px");
+  $("#game_chatbox_panel").parent().css("background", "rgba(0,0,0,0.6)")		
+  $("#game_chatbox_panel").parent().css("background-color", "rgba(0,0,0, 0.6)")		
+  $("#game_chatbox_panel").parent().css("top", "60px");
+
+
+}
+
+/**************************************************************************
+ ...
+**************************************************************************/
+function add_chatbox_text(text)
+{
     var scrollDiv;
     
     if (civclient_state <= C_S_PREPARING) {
@@ -137,7 +185,8 @@ function add_chatbox_text(text){
 /**************************************************************************
  ...
 **************************************************************************/
-function chatbox_scroll_down () {
+function chatbox_scroll_down () 
+{
     var scrollDiv;
     
     if (civclient_state <= C_S_PREPARING) {
@@ -201,7 +250,7 @@ function update_timeout()
   if (game_info != null && game_info['timeout'] != null && game_info['timeout'] > 0) {
     var remaining = game_info['timeout'] - Math.floor((now - phase_start_time) / 1000);
     if (remaining >= 0) {
-      $("#turn_done_button").text("Turn Done (" + remaining + "s)");
+      $("#turn_done_button").button("option", "label", "Turn Done (" + remaining + "s)");
     }
   } 
 }

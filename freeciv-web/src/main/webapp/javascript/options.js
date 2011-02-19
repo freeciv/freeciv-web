@@ -102,4 +102,26 @@ var gui_gtk2_metaserver_tab_first = FALSE;
 var gui_gtk2_allied_chat_only = FALSE;
 var gui_gtk2_small_display_layout = FALSE;
 
+function init_options_dialog() 
+{
+  if (overview_active) {
+    $("#show_overview_button").hide();
+  } else {
+    $("#show_overview_button").show();
+  }
 
+  if (unitpanel_active) {
+    $("#show_unit_button").hide();
+  } else {
+    $("#show_unit_button").show();
+  }
+
+  if (chatbox_active) {
+    $("#show_message_button").hide();
+  } else {
+    $("#show_message_button").show();
+  }
+
+
+
+}

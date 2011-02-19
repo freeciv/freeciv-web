@@ -10,7 +10,7 @@
     </div>
   </div>
   <br>
-  <button id="ok" type="button" onclick="start_revolution();">Start revolution!</button>
+  <button id="ok" class="button" type="button" onclick="start_revolution();">Start revolution!</button>
 
   <br>
 <p>
@@ -65,7 +65,7 @@
 
 </div>
 
-<button id="ok" type="button" onclick="submit_player_rates();">Change tax rates</button>
+<button id="ok" type="button" class="button" onclick="submit_player_rates();">Change tax rates</button>
 
 
 

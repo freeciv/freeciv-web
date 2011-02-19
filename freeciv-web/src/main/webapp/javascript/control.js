@@ -17,7 +17,7 @@ var mouse_y;
 var prev_mouse_x;
 var prev_mouse_y;
 var keyboard_input = true;
-
+var unitpanel_active = false;
 var allow_right_click = false;
 
 var current_focus = [];
@@ -34,6 +34,9 @@ var intro_click_description = true;
 var goto_request_map = {};
 var current_goto_path = [];
 
+/****************************************************************************
+...
+****************************************************************************/
 function mouse_moved_cb(e)
 {
   mouse_x = 0;
@@ -58,6 +61,9 @@ function mouse_moved_cb(e)
 
 }
 
+/****************************************************************************
+...
+****************************************************************************/
 function check_text_input(event,chatboxtextarea) {
 	 
   if (event.keyCode == 13 && event.shiftKey == 0)  {
@@ -189,7 +195,6 @@ function advance_unit_focus()
 /**************************************************************************
  Enables and disables the correct units commands for the unit in focus.
 **************************************************************************/
-
 function update_unit_order_commands()
 {
   var funits = get_units_in_focus();
@@ -224,6 +229,39 @@ function update_unit_order_commands()
 
   }
 
+
+  $("#game_unit_orders_default").css("left", Math.floor((mapview_canvas.width 
+				  - $("#game_unit_orders_default").width()) / 2));
+
+
+}
+
+
+/**************************************************************************
+...
+**************************************************************************/
+function init_game_unit_panel()
+{
+  unitpanel_active = true;
+
+  $("#game_unit_panel").attr("title", "Units");		
+  $("#game_unit_panel").dialog({
+			bgiframe: true,
+			modal: false,
+			width: "250px",
+			height: "auto",
+			resizable: false,
+			dialogClass: 'unit_dialog',
+			position: ["right", "bottom"],
+			close: function(event, ui) { unitpanel_active = false;}
+
+		});
+	
+  $("#game_unit_panel").dialog('open');		
+  $(".unit_dialog div.ui-dialog-titlebar").css("height", "5px");
+  $(".unit_dialog div.ui-dialog-content").css("padding", "5px 0");
+  $("#ui-dialog-title-game_unit_panel").css("margin-top", "-5px");
+  $("#ui-dialog-title-game_unit_panel").css("font-size", "10px");
 }
 
 /**************************************************************************

@@ -13,12 +13,6 @@ body {
   float:left;
 }
 
-#pregame_logo {
-  width: 100%;
-  height: 60px;
-  background: no-repeat url(/images/header_small.png);
-  background-color: #000000;
-}
 
 #pregame_options {
   background-color: #222222;
@@ -30,11 +24,9 @@ body {
 
 #pregame_player_list {
   background-color: #222222;
-  width: 15%;
-  height: 80%;
+  width: 18%;
   float: right;
   overflow: auto;
-  max-height: 600px;
 }
 
 #pregame_player_name {
@@ -43,14 +35,13 @@ body {
   background-color: #111111;
   color: #ffffff;
   float: left;
-  min-width: 180px;
   height: 48px;
+  width: 80%;
 }
 
 #pregame_message_area {
   background: #111111 url(/images/black-bg.png); 
   color: #ffffff;
-  height: 650px;
   width: 80%;
   overflow: auto;
   float: left;

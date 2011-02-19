@@ -57,6 +57,7 @@ function set_client_state(newstate)
       update_unit_focus();
       can_slide = TRUE;*/
       set_client_page(PAGE_GAME);
+      setup_window_size();
       /*// Find something sensible to display instead of the intro gfx. 
       center_on_something();
       free_intro_radar_sprites();

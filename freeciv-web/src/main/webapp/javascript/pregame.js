@@ -29,7 +29,7 @@ function pregame_start_game()
 ****************************************************************************/
 function leave_pregame()
 {
-  history.back();
+  window.location = "/wireframe.jsp?do=login";
 }
 
 /****************************************************************************

@@ -20,6 +20,8 @@ var OVERVIEW_REFRESH = 5000;
 
 var palette = [];
 
+var overview_active = false;
+
 var COLOR_OVERVIEW_UNKNOWN = 0; /* Black */
 var COLOR_OVERVIEW_MY_CITY = 1; /* white */
 var COLOR_OVERVIEW_ALLIED_CITY = 2;
@@ -47,6 +49,27 @@ function init_overview()
 			                    Math.floor((overview_h - 1) / map['ysize'] + 1) + 1);
   OVERVIEW_TILE_SIZE = Math.max(OVERVIEW_TILE_SIZE, 1);
 
+  overview_active = true;
+
+  $("#game_overview_panel").attr("title", "Overview map");		
+  $("#game_overview_panel").dialog({
+			bgiframe: true,
+			modal: false,
+			width: "auto",
+			height: "auto",
+			resizable: false,
+			dialogClass: 'overview_dialog',
+			position: ["left", "bottom"],
+			close: function(event, ui) { overview_active = false;}
+		});
+	
+  $("#game_overview_panel").dialog('open');		
+  $(".overview_dialog div.ui-dialog-titlebar").css("height", "5px");
+  $(".overview_dialog div.ui-dialog-content").css("padding", "5px 0");
+  $("#ui-dialog-title-game_overview_panel").css("margin-top", "-5px");
+  $("#ui-dialog-title-game_overview_panel").css("font-size", "10px");
+	  
+
   palette = generate_palette();
   
   redraw_overview();
@@ -54,6 +77,8 @@ function init_overview()
   if (overviewTimerId == -1) {
     overviewTimerId = setInterval("redraw_overview()", OVERVIEW_REFRESH);
   }
+
+
 }
 
 /****************************************************************************

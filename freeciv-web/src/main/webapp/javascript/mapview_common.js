@@ -26,6 +26,11 @@ function mapdeco_init()
   mapdeco_crosshair_table = {};
   mapdeco_gotoline_table = {};
 
+  init_game_unit_panel();
+  init_chatbox();
+  keyboard_input=true;
+
+
 }
 
 /* cached drawing not supported in javascript webclient. */

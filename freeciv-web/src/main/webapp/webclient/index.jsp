@@ -9,11 +9,12 @@
 <script type="text/javascript" src="/webclient/session.jsp"></script>
 
 <link type="text/css" href="/stylesheets/dark-hive-1.8.9/jquery-ui-1.8.9.custom.css" rel="stylesheet" />
-<link rel="stylesheet" type="text/css" href="/stylesheets/civclient.css" />
-<link rel="stylesheet" type="text/css" href="/stylesheets/pregame.css" />
 <link type="text/css" rel="StyleSheet" href="/stylesheets/bluecurve.css" />
 <link type="text/css" rel="StyleSheet" href="/stylesheets/jplayer.blue.monday.css" />
 <link type="text/css" rel="StyleSheet" href="/stylesheets/jmenu.css" />
+
+<link rel="stylesheet" type="text/css" href="/stylesheets/civclient.css" />
+<link rel="stylesheet" type="text/css" href="/stylesheets/pregame.css" />
 
 <link rel="shortcut icon" href="/images/freeciv-forever-icon.png" />
 
@@ -62,7 +63,7 @@
 %>
 
     <jsp:include page="pregame.jsp" flush="false"/>
-    <jsp:include page="mapview_excanvas.jsp" flush="false"/>
+    <jsp:include page="game.jsp" flush="false"/>
     
     
 <!-- Google Analytics Code -->

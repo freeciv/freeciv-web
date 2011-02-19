@@ -80,7 +80,7 @@ function civclient_init()
   }
 
   $('#tabs').tabs();
-  $( ".button").button();
+  $(".button").button();
 
   load_game_check();
   observe_game_check();
@@ -276,7 +276,9 @@ function show_help()
 			      	}
   		});
   		
-    		  
+    	
+  $(".manual-tab").height( mapview['height'] - 200);   
+
 }
 
 

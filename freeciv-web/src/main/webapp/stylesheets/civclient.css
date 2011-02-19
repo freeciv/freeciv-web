@@ -166,8 +166,8 @@ button {
 
 .manual-tab {
   background: #2e2f35;
-  min-height: 500px;
   padding: 30px;
+  overflow: auto;
 }
 
 #game_unit_orders_default {
@@ -182,6 +182,7 @@ button {
 
 #city_viewport {
   background: url("/images/black-bg.png") repeat scroll 0 0 #222222;
+  overflow: auto;
 }
 
 #diplomacy_messages {
@@ -230,6 +231,9 @@ button {
 
 #technologies {
   clear: left;
+  position: relative; 
+  overflow: auto; 
+  width: 100%;
 }
 
 #tech_info_box {
@@ -271,6 +275,11 @@ button {
 #tech_results {
   float: left; 
   padding-left: 20px;
+}
+
+
+#nations {
+  overflow: auto;
 }
 
 

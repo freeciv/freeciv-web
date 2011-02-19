@@ -41,7 +41,7 @@
       <div id="city_production"></div>
       <div id="city_production_turns"></div>
       <div>
-        <button type="button" onClick="send_city_buy();" >Buy</button>
+        <button type="button" class="button" onClick="send_city_buy();" >Buy</button>
       </div>
       <span>Change city production:</span>
       <div id="city_change_production" style="height: 330px; width: 120px; overflow: auto; border: background-color: #111111; border: 1px solid #444444;">
@@ -50,7 +50,7 @@
       </div>
       
       <div style="margin-top: 50px;"> 
-        <button type="button" onClick="close_city_dialog();" >Close</button>
+        <button type="button" class="button" onClick="close_city_dialog();" >Close</button>
       </div>
     </div>
     

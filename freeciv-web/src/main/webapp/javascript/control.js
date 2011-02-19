@@ -59,6 +59,14 @@ function mouse_moved_cb(e)
     mouse_y = mouse_y - mapview_canvas.offsetTop;
   }
 
+  /* Request preview goto path */
+  if (goto_active && current_focus.length > 0) {
+    var ptile = canvas_pos_to_tile(mouse_x, mouse_y);
+    if (ptile != null && goto_request_map[ptile['x'] + "," + ptile['y']] == null) {
+      preview_goto_path(current_focus[0]['id'], ptile['x'], ptile['y']);
+    }
+  }
+
 }
 
 /****************************************************************************
@@ -609,11 +617,11 @@ function activate_goto()
 {
   goto_active = true;
   mapview_canvas.style.cursor = "crosshair";
- 
+
   if (current_focus.length > 0) {
     var ptile = canvas_pos_to_tile(mouse_x, mouse_y);
     if (ptile != null) {
-      request_goto_path(current_focus[0]['id'], ptile['x'], ptile['y']);
+      preview_goto_path(current_focus[0]['id'], ptile['x'], ptile['y']);
     }
 
     if (intro_click_description) {
@@ -621,6 +629,7 @@ function activate_goto()
       intro_click_description = false;
     }
   }
+
 }
 
 /**************************************************************************
@@ -871,6 +880,49 @@ function left_click_center()
   return (is_iphone() || jQuery.browser.opera);
 }
 
+/****************************************************************************
+  Calculates a preview of the goto path, based on info in the client only.
+  FIXME: This doesn't support map wrapping.
+****************************************************************************/
+function preview_goto_path(unit_id, dst_x, dst_y)
+{
+  var punit = units[unit_id];
+  current_goto_path = [];
+  generate_preview_path(punit['x'], punit['y'], dst_x, dst_y);
+  update_map_canvas_check();
+}
+
+/**************************************************************************
+ ...
+**************************************************************************/
+function generate_preview_path(sx, sy, dx, dy)
+{
+
+  var ptile = map_pos_to_tile(sx, sy);
+  current_goto_path.push(ptile);
+	
+  /* Check if full path has been found*/
+  if (sx == dx && sy == dy) return;
+
+  if (sx < dx && sy == dy) {
+    generate_preview_path(sx+1, sy, dx, dy);
+  } else if (sx > dx && sy == dy) {
+    generate_preview_path(sx-1, sy, dx, dy);
+  } else if (sx == dx && sy < dy) {
+    generate_preview_path(sx, sy+1, dx, dy);
+  } else if (sx == dx && sy > dy) {
+    generate_preview_path(sx, sy-1, dx, dy);
+  } else if (sx > dx && sy > dy) {
+    generate_preview_path(sx-1, sy-1, dx, dy);
+  } else if (sx < dx && sy < dy) {
+    generate_preview_path(sx+1, sy+1, dx, dy);
+  } else if (sx < dx && sy > dy) {
+    generate_preview_path(sx+1, sy-1, dx, dy);
+  } else if (sx > dx && sy < dy) {
+    generate_preview_path(sx-1, sy+1, dx, dy);
+  }
+
+}
 
 /****************************************************************************
   Request GOTO path for unit with unit_id, and dst_x, dst_y in map coords.

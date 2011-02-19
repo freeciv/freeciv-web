@@ -99,7 +99,6 @@ function init_mapview()
 **************************************************************************/
 function setup_window_size () 
 {
-
   var winWidth, winHeight, d=document;
   if (typeof window.innerWidth!='undefined') {
     winWidth = window.innerWidth;
@@ -134,6 +133,15 @@ function setup_window_size ()
 
   $("#pregame_message_area").height( mapview['height'] - 50);
   $("#pregame_player_list").height( mapview['height'] - 80);
+  $("#technologies").height( mapview['height'] - 100);
+  $("#technologies").width( mapview['width'] - 20);
+  
+  $("#nations").height( mapview['height'] - 100);
+  $("#nations").width( mapview['width']);
+  
+  $(".manual-tab").height( mapview['height'] - 200);
+  
+  $("#city_viewport").height( mapview['height'] - 20);
 
 
   if (overview_active) init_overview();

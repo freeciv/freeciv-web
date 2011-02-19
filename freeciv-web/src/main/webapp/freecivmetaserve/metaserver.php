@@ -501,6 +501,24 @@ if ( isset($port) ) {
       } else {
         print "<h3><a href='/wireframe.jsp?do=login'>Click here</a> to start a new single player game!</h3>";
       }
+?>
+
+<div id="ad_bottom">
+	<script type="text/javascript"><!--
+	google_ad_client = "pub-4977952202639520";
+	/* 728x90, opprettet 19.12.09 for freeciv.net */
+	google_ad_slot = "9174006131";
+	google_ad_width = 728;
+	google_ad_height = 90;
+	//-->
+	</script>
+	<script type="text/javascript"
+	src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+	</script>
+</div>
+
+<?
+
       print "<br><br>";
       print "<h1>Freeciv.net multiplayer games around the world</h1><br />\n";
       $stmt="select host,port,version,patches,state,message,unix_timestamp()-unix_timestamp(stamp),available from servers where topic = 'Multiplayer' order by state,host,port asc";

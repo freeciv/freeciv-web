@@ -10,10 +10,7 @@
 standard rules under which Freeciv.net is played. If you need other
 information, like how to run the game on your machine, or what windows
 and menus it will present on your screen, you may want to browse the
-other manuals and tutorials that are available. You can also have a
-look at the <a title="FAQ" href="/wiki/index.php/FAQ" target="_new">FAQ</a>.
-If you are stuck, you can also get help from someone in the <a
- href="/forum/" target="_new">Freeciv.net forums</a>.<br>
+other manuals and tutorials that are available. <br>
 </p>
 <p>The various topics on this game manual are divided into many
 sections, which you can choose between in the tab menu on top of this

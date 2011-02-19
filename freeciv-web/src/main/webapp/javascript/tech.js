@@ -123,7 +123,7 @@ function init_tech_screen()
   }
   
       
-  $("#technologies").width(winWidth - 50);
+  $("#technologies").width(winWidth - 20);
 
   tech_canvas = document.getElementById('tech_canvas');
   tech_canvas_ctx = tech_canvas.getContext("2d");

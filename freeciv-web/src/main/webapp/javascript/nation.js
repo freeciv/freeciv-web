@@ -48,10 +48,10 @@ function update_nation_screen()
     if (!client_is_observer() && client.conn.playing['diplstates'] != null) {
       nation_list_html = nation_list_html + "<td>" + get_diplstate_text(client.conn.playing['diplstates'][player_id]) + "</td><td>";
       if (client.conn.playing['diplstates'][player_id] != DS_NO_CONTACT) {
-        nation_list_html = nation_list_html + "<a href='#' onclick='diplomacy_init_meeting_req(" + player_id + ");'>Meet</a> ";
+        nation_list_html = nation_list_html + " <button type='button' class='nation_button' onClick='diplomacy_init_meeting_req(" + player_id + ");' >Meet</button>";
       }
       if (client.conn.playing['diplstates'][player_id] != DS_WAR && client.conn.playing['diplstates'][player_id] != DS_NO_CONTACT) {
-        nation_list_html = nation_list_html + " - <a href='#' onclick='diplomacy_cancel_treaty(" + player_id + ");'>Cancel Treaty</a>";
+        nation_list_html = nation_list_html + "  <button type='button' class='nation_button' onClick='diplomacy_cancel_treaty(" + player_id + ");' >Cancel Treaty</button>";
 
       }
       nation_list_html = nation_list_html + "</td>";
@@ -64,5 +64,6 @@ function update_nation_screen()
   nation_list_html = nation_list_html + "</table>";
 
   $("#nations_list").html(nation_list_html);
-
+  $(".nation_button").button();
+  $(".nation_button").css("font-size", "11px");
 }

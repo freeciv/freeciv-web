@@ -118,22 +118,38 @@ function help_openid_login() {
 
 </script>
 
+<div id="ad_bottom" style="background-color: transparent; height: 400px;">
 
-<div id="menu_help">
-<b>Help:</b>
-<br>
-You have five ways to play Freeciv.net: Start a new single-player game, join another multiplayer game,
-start a new scenario game, play the tutorial or load an existing game.
-Multiplayer games requires at least 2 human players before they can begin, while single-player 
-games can start immediately.
-<br><br>
-It is recommended to play a few single-player games, before you try playing against
-other human players.
+	<div id="menu_help">
+		<b>Help:</b>
+		<br>
+		You have four ways to play Freeciv.net: Start a new single-player game, join another multiplayer game,
+		start a new scenario game, or play the tutorial.
+		Multiplayer games requires at least 2 human players before they can begin, while single-player 
+		games can start immediately.
+		<br><br>
+		It is recommended to play a few single-player games, before you try playing against
+		other human players.
+	
+		<br><br>
+		Once you have joined a game, the game can be started once all human players
+		have clicked the "start game" button. 
+	</div>
+	
+	<br>
 
-<br><br>
-Once you have joined a game, the game can be started once all human players
-have clicked the "start game" button. 
-</div>
+	<script type="text/javascript"><!--
+	google_ad_client = "pub-4977952202639520";
+	/* 728x90, opprettet 19.12.09 for freeciv.net */
+	google_ad_slot = "9174006131";
+	google_ad_width = 728;
+	google_ad_height = 90;
+	//-->
+	</script>
+	<script type="text/javascript"
+	src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+	</script>
+
 
 </div>
 

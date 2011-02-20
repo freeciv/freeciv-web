@@ -118,7 +118,7 @@ function help_openid_login() {
 
 </script>
 
-<div id="ad_bottom" style="background-color: transparent; height: 400px;">
+<div id="ad_bottom" style="background-color: transparent; height: 430px;">
 
 	<div id="menu_help">
 		<b>Help:</b>

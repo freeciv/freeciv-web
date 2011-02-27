@@ -30,7 +30,7 @@ if ($_COOKIE["facebook_mode"] == "true") {
 
 $html .= '<link rel="shortcut icon" href="/images/freeciv-forever-icon.png" />
 
-<script type="text/javascript" src="/javascript/jquery-1.5.min.js"></script>
+<script type="text/javascript" src="/javascript/jquery-1.5-1.min.js"></script>
 
 </head>
 <body>

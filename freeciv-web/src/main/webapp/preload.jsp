@@ -13,6 +13,7 @@ if (username == null || "null".equals(username)) {
 
 
 %>
+<script type="text/javascript" src="/javascript-compressed/webclient.js"></script>
 
 <script type="text/javascript">	
 function fc_redirect_init()

@@ -11,6 +11,7 @@
 		<input id="game_text_input" type="text" name="text_input" value="..."
 				onkeydown="javascript:return check_text_input(event,this);"
 				onfocus="keyboard_input=false; if (this.value=='...') this.value='';" 
+				onblur="keyboard_input=true;"
     		 />
 	</div>
      </div>

@@ -50,12 +50,8 @@ function civclient_init()
   network_init();
   init_mapview();
 
-  // Register keyboard listener.
-  if(!jQuery.browser.msie && window.addEventListener){ // Mozilla, Netscape, Firefox
-    document.addEventListener('keyup', keyboard_listener, false);
-  } else { // IE
-    document.attachEvent('onkeyup', keyboard_listener);
-  }
+  // Register keyboard listener using JQuery.
+  $(document).keydown (keyboard_listener);
 
   timeoutTimerId = setInterval("update_timeout()", 1000);
   

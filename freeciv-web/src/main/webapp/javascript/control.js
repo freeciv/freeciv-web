@@ -839,7 +839,8 @@ function key_unit_move(dir)
   }
   
   deactivate_goto(); 
-  //update_unit_focus();
+  // update focus to next unit after 500ms.
+  setTimeout("update_unit_focus();", 500);
   
 }
 

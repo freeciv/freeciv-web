@@ -347,7 +347,7 @@ function tech_mapview_mouse_click(e)
   
    if (tech_canvas != null) {
     var tech_mouse_x = mouse_x - $("#technologies").offset().left + $("#technologies").scrollLeft();
-    var tech_mouse_y = mouse_y - $("#technologies").offset().top;
+    var tech_mouse_y = mouse_y - $("#technologies").offset().top + $("#technologies").scrollTop();
     
     for (var tech_id in techs) {
       var ptech = techs[tech_id];

@@ -146,7 +146,7 @@ public class CivclientLauncher extends HttpServlet {
 
 		
 		if (action.equals("observe")) {
-		  response.sendRedirect("/webclient/?mode=observe");
+		  response.sendRedirect("/preload.jsp?redir=/webclient/?mode=observe");
 		} else if (!action.equals("load")) {
 		  response.sendRedirect("/webclient/");
 		} else {

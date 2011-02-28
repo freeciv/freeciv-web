@@ -127,11 +127,9 @@ function help_openid_login() {
 		start a new scenario game, or play the tutorial.
 		Multiplayer games requires at least 2 human players before they can begin, while single-player 
 		games can start immediately.
-		<br><br>
 		It is recommended to play a few single-player games, before you try playing against
 		other human players.
 	
-		<br><br>
 		Once you have joined a game, the game can be started once all human players
 		have clicked the "start game" button. 
 	</div>

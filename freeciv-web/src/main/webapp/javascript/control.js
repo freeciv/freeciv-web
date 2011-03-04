@@ -794,8 +794,12 @@ function request_unit_build_city()
   if (current_focus.length > 0) {
     var punit = current_focus[0];
     if (punit != null) { 
-      var packet = [{"packet_type" : "unit_build_city", "name" : "default", "unit_id" : punit['id'] }];
-      send_request (JSON.stringify(packet));
+      var ptype = unit_type(punit);
+      if (ptype['name'] == "Settlers" || ptype['name'] == "Engineers") {
+        var packet = [{"packet_type" : "city_name_suggestion_req", "unit_id" : punit['id'] }];
+        send_request (JSON.stringify(packet));
+      } 
+
     }
   }
 }

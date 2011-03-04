@@ -110,7 +110,7 @@ function show_city_dialog(pcity)
   $("#map_tab").addClass("ui-state-default");
   
   
-  $("#city_heading").html(pcity['name']);
+  $("#city_heading").html(unescape(pcity['name']));
   $("#city_size").html("City size: " + pcity['size']);
   
   if (pcity['production_kind'] == VUT_UTYPE) {
@@ -443,3 +443,58 @@ function does_city_have_improvement(pcity, improvement_name)
   }
   return false;
 }
+
+/**************************************************************************
+  Shows the Request city name dialog to the user.
+**************************************************************************/
+
+function city_name_dialog(suggested_name, unit_id) {
+
+  // reset dialog page.
+  $("#city_name_dialog").remove();
+  $("<div id='city_name_dialog'></div>").appendTo("div#game_page");
+
+  $("#city_name_dialog").html("<div>What should we call our new city?</div>"
+		  	      + "<input id='city_name_req' type='text' value=" 
+			      + suggested_name + ">");
+  $("#city_name_dialog").attr("title", "Build New City");
+  $("#city_name_dialog").dialog({
+			bgiframe: true,
+			modal: true,
+			width: "300",
+			close: function() {
+				keyboard_input=true;
+			},
+			buttons: [	{
+					text: "Cancel",
+				        click: function() {
+						$(this).dialog('Cancel');
+						$("#city_name_dialog").remove();
+					}
+				},{
+					text: "Ok",
+				        click: function() {
+						var name = $("#city_name_req").val();
+						var packet = [{"packet_type" : "unit_build_city", "name" : escape(name), "unit_id" : unit_id }];
+						send_request (JSON.stringify(packet));
+						$("#city_name_dialog").remove();
+						keyboard_input=true;
+					}
+					}
+				]
+		});
+	
+  $("#city_name_dialog").dialog('open');		
+
+  $('#city_name_dialog').keyup(function(e) {
+    if (e.keyCode == 13) {
+    	var name = $("#city_name_req").val();
+	var packet = [{"packet_type" : "unit_build_city", "name" : escape(name), "unit_id" : unit_id }];
+	send_request (JSON.stringify(packet));
+	$("#city_name_dialog").remove();
+        keyboard_input=true;
+    }
+  });
+  keyboard_input=false;
+}
+

@@ -706,7 +706,6 @@ void handle_unit_build_city(struct player *pplayer, int unit_id, char *name)
 {
   enum add_build_city_result res;
   struct unit *punit = player_find_unit_by_id(pplayer, unit_id);
-  char *wname = city_name_suggestion(pplayer, punit->tile);
 
   if (NULL == punit) {
     /* Shouldn't happen */
@@ -719,7 +718,7 @@ void handle_unit_build_city(struct player *pplayer, int unit_id, char *name)
   res = test_unit_add_or_build_city(punit);
 
   if (res == AB_BUILD_OK) {
-    city_build(pplayer, punit, wname);
+    city_build(pplayer, punit, name);
   } else if (res == AB_ADD_OK) {
     city_add_unit(pplayer, punit);
   } else {

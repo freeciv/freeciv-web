@@ -360,10 +360,7 @@ function handle_connect_msg(packet)
 /* done */
 function handle_city_name_suggestion_info(packet) 
 {
-  var name=prompt("What should we call our new city?", packet['name']);
-  var packet = [{"packet_type" : "unit_build_city", "name" : name, "unit_id" : packet['unit_id'] }];
-  send_request (JSON.stringify(packet));
-  
+  city_name_dialog(packet['name'], packet['unit_id']);
 }
 
 function handle_city_sabotage_list(packet) 

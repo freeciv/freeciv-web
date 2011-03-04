@@ -281,6 +281,10 @@ button {
   overflow: auto;
 }
 
+#city_name_req {
+  width: 100%;
+}
+
 
 /* Overrides to jquery-ui-1.8.9.custom.css */ 
 

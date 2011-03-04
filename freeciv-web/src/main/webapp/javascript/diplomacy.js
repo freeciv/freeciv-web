@@ -248,7 +248,7 @@ function client_diplomacy_clause_string(counterpart, giver, type, value)
     var pcity = cities[value];
 
     if (pcity != null) {
-      return "The " + nation + " give " + pcity['name'];
+      return "The " + nation + " give " + unescape(pcity['name']);
     } else {
       return "The " + nation + " give unknown city.";
     }

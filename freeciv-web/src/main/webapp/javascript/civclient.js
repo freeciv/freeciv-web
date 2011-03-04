@@ -207,7 +207,9 @@ function chatbox_scroll_down ()
 
 }
 
-
+/**************************************************************************
+ Shows a generic message dialog.
+**************************************************************************/
 function show_dialog_message(title, message) {
 
   // reset dialog page.

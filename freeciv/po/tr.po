@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-05 13:12+0100\n"
+"POT-Creation-Date: 2011-03-05 14:01+0100\n"
 "PO-Revision-Date: 2008-06-01 16:36+0300\n"
 "Last-Translator: Uğur Çetin <jnmbk@users.sourceforge.net>\n"
 "Language-Team: Turkish <yerellestirme@kde.org.tr>\n"
@@ -1255,12 +1255,12 @@ msgstr "hata %ld (başarısız BiçimMesajı)"
 msgid "error %d (compiled without strerror)"
 msgstr "hata %d (strerror olmadan derlenmiş)"
 
-#: ai/aicity.c:1494 server/citytools.c:2210
+#: ai/aicity.c:1494 server/citytools.c:2229
 #, c-format
 msgid "The %s have stopped building The %s in %s."
 msgstr "%s %s yapımını %s şehrinde durdurdular."
 
-#: ai/aicity.c:1504 server/citytools.c:2250
+#: ai/aicity.c:1504 server/citytools.c:2269
 #, c-format
 msgid "The %s have started building The %s in %s."
 msgstr "%s %s yapımına %s şehrinde başladılar."
@@ -1908,17 +1908,17 @@ msgstr "%s şehrini serbest bıraktınız!"
 msgid "%s liberated %s."
 msgstr "%s, %s şehrini serbest bıraktı."
 
-#: server/citytools.c:2227
+#: server/citytools.c:2246
 msgid " from the worklist"
 msgstr "iş listesinden "
 
 #. TRANS: "<city> is building <production><source>."
-#: server/citytools.c:2240
+#: server/citytools.c:2259
 #, c-format
 msgid "%s is building %s%s."
 msgstr "%1$s şehri %3$s%2$s inşa ediyor."
 
-#: server/citytools.c:2431
+#: server/citytools.c:2450
 #, c-format
 msgid "You sell %s in %s (now landlocked) for %d gold."
 msgstr "%2$s şehrindeki (karaya oturan) %1$s, %3$d altına satıldı."
@@ -7753,18 +7753,18 @@ msgstr "%s, %s şehrine eklenemedi."
 msgid "%s added to aid %s in growing."
 msgstr "%s, %s şehrinin büyümesi için eklendi."
 
-#: server/unithand.c:996
+#: server/unithand.c:995
 #, fuzzy
 msgid "The unit can't go there."
 msgstr "Burada saldıramazsın."
 
-#: server/unithand.c:1182
+#: server/unithand.c:1181
 msgid "Your Nuclear missile was shot down by SDI defences, what a waste."
 msgstr ""
 "Nükleer bombanız SDI savunması tarafından etkisiz hale getirildi, ne büyük "
 "kayıp."
 
-#: server/unithand.c:1186
+#: server/unithand.c:1185
 #, c-format
 msgid "The nuclear attack on %s was avoided by your SDI defense."
 msgstr ""
@@ -7772,120 +7772,120 @@ msgstr ""
 "edildi."
 
 #. TRANS: "Your Cannon ... the Polish Destroyer."
-#: server/unithand.c:1261
+#: server/unithand.c:1260
 #, c-format
 msgid "Your %s survived the pathetic attack from the %s %s."
 msgstr "%s biriminiz %s %s birimi tarafından yapılan saldırıdan kurtuldu."
 
 #. TRANS: "... Cannon ... the Polish Destroyer."
-#: server/unithand.c:1271
+#: server/unithand.c:1270
 #, c-format
 msgid "Your attacking %s failed against the %s %s!"
 msgstr "%s biriminizin, %s %s birimine saldırısı başarısız oldu!"
 
-#: server/unithand.c:1352
+#: server/unithand.c:1351
 #, c-format
 msgid "Only %s can attack from sea."
 msgstr "Sadece %s birimi denizden saldırabilir."
 
-#: server/unithand.c:1358
+#: server/unithand.c:1357
 msgid "Cannot attack from sea."
 msgstr "Denizden saldırılamaz."
 
-#: server/unithand.c:1366 server/unittools.c:2270
+#: server/unithand.c:1365 server/unittools.c:2279
 msgid "Cannot attack unless you declare war first."
 msgstr "Savaş ilan etmeden saldırılamaz."
 
-#: server/unithand.c:1372
+#: server/unithand.c:1371
 #, c-format
 msgid "%s can only move into your own zone of control."
 msgstr "%s sadece sizin kontrolünüzdeki bölgelere gidebilir."
 
-#: server/unithand.c:1379
+#: server/unithand.c:1378
 #, c-format
 msgid "%s cannot move that far from the coast line."
 msgstr ""
 
-#: server/unithand.c:1386
+#: server/unithand.c:1385
 #, c-format
 msgid "Cannot invade unless you break peace with %s first."
 msgstr "%s ile olan barışı bozmadan sınır ihlal edilemez."
 
-#: server/unithand.c:1432
+#: server/unithand.c:1431
 msgid "This unit has no moves left."
 msgstr "Bu birimin hiç hareketi kalmadı."
 
-#: server/unithand.c:1488
+#: server/unithand.c:1487
 msgid "No diplomat action possible."
 msgstr "Diplomatik işler yapılamaz."
 
-#: server/unithand.c:1492
+#: server/unithand.c:1491
 #, fuzzy, c-format
 msgid "Unit cannot perform diplomatic action from %s."
 msgstr "* Diplomatik işler yapabilir.\n"
 
-#: server/unithand.c:1511
+#: server/unithand.c:1510
 #, fuzzy, c-format
 msgid "You must declare war on %s first.  Try using players dialog."
 msgstr ""
 "Önce %s ile savaş içinde olmanız gerekiyor.  Oyuncular penceresini "
 "kullanmayı deneyin (F3)."
 
-#: server/unithand.c:1530
+#: server/unithand.c:1529
 msgid "This unit is being transported, and so cannot bombard."
 msgstr "Birim taşınıyor, bu yüzden bombardıman yapamaz."
 
-#: server/unithand.c:1546
+#: server/unithand.c:1545
 msgid "You can't attack there."
 msgstr "Burada saldıramazsın."
 
-#: server/unithand.c:1569
+#: server/unithand.c:1568
 msgid "This type of troops cannot take over a city."
 msgstr "Bu türdeki birimler şehir fethedemezler."
 
-#: server/unithand.c:1587
+#: server/unithand.c:1586
 msgid "A transported unit is not allied to all units or city on target tile."
 msgstr ""
 "Taşınan bir birim hedef karedeki tüm birimlerle veya şehirlerle ittifak "
 "içinde değil."
 
-#: server/unithand.c:1637
+#: server/unithand.c:1636
 #, c-format
 msgid "Your %s helps build the %s in %s (%d remaining)."
 msgstr "%s birimi %s yapımına %s şehrinde yardım eder (%d kalıyor)."
 
-#: server/unithand.c:1639
+#: server/unithand.c:1638
 #, c-format
 msgid "Your %s helps build the %s in %s (%d surplus)."
 msgstr "%s birimi %s yapımına %s şehrinde yardım eder (%d artıyor)."
 
-#: server/unithand.c:1695
+#: server/unithand.c:1694
 #, c-format
 msgid ""
 "Sorry, your %s cannot establish a trade route because it has no home city"
 msgstr "Üzgünüm, %s biriminiz ticaret yolu yapamaz çünkü memleketi yok"
 
-#: server/unithand.c:1709
+#: server/unithand.c:1708
 #, c-format
 msgid "Sorry, your %s cannot establish a trade route between %s and %s"
 msgstr "Üzgünüm, %s biriminiz %s ve %s şehirleri arasında ticaret yolu yapamaz"
 
-#: server/unithand.c:1739 server/unithand.c:1760
+#: server/unithand.c:1738 server/unithand.c:1759
 #, c-format
 msgid "Sorry, your %s cannot establish a trade route here!"
 msgstr "Üzgünüm, %s biriminiz buraya ticaret yolu yapamaz!"
 
-#: server/unithand.c:1744 server/unithand.c:1765
+#: server/unithand.c:1743 server/unithand.c:1764
 #, c-format
 msgid "      The city of %s already has %d better trade routes!"
 msgstr "      %s şehrinin zaten %d daha kârlı ticaret yolları var!"
 
-#: server/unithand.c:1779 server/unithand.c:1792
+#: server/unithand.c:1778 server/unithand.c:1791
 #, c-format
 msgid "Sorry, %s has canceled the trade route from %s to your city %s."
 msgstr "Üzgünüm, %s, %s şehrinden %s şehrinize olan ticaret yolunu iptal etti."
 
-#: server/unithand.c:1826
+#: server/unithand.c:1825
 #, c-format
 msgid ""
 "Your %s from %s has arrived in %s, and revenues amount to %d in gold and "
@@ -8016,128 +8016,128 @@ msgstr[0] ""
 "%2$s %3$s biriminin %4$s %5$s birimine saldırması sonucu %1$d birim "
 "kaybedildi."
 
-#: server/unittools.c:2082
+#: server/unittools.c:2091
 #, c-format
 msgid "Your %s was nuked by %s."
 msgstr "%s biriminiz %s tarafından bombalandı."
 
-#: server/unittools.c:2085 server/unittools.c:2105
+#: server/unittools.c:2094 server/unittools.c:2114
 msgid "yourself"
 msgstr "kendiniz"
 
-#: server/unittools.c:2090
+#: server/unittools.c:2099
 #, c-format
 msgid "The %s %s was nuked."
 msgstr "%s tarafındaki %s nükleer bomba ile vuruldu."
 
-#: server/unittools.c:2102
+#: server/unittools.c:2111
 #, c-format
 msgid "%s was nuked by %s."
 msgstr "%s, %s tarafından bombalandı."
 
-#: server/unittools.c:2111
+#: server/unittools.c:2120
 #, c-format
 msgid "You nuked %s."
 msgstr "%s şehrini bombaladınız."
 
-#: server/unittools.c:2149
+#: server/unittools.c:2158
 #, c-format
 msgid "The %s detonated a nuke!"
 msgstr "%s nükleer bomba patlattı!"
 
-#: server/unittools.c:2174
+#: server/unittools.c:2183
 #, c-format
 msgid "%s transported successfully."
 msgstr "%s başarıyla taşındı."
 
-#: server/unittools.c:2233
+#: server/unittools.c:2242
 msgid "This unit type can not be paradropped."
 msgstr "Bu tür birimler paraşütle inemez."
 
-#: server/unittools.c:2243
+#: server/unittools.c:2252
 msgid "You cannot paradrop a unit that is transporting other units."
 msgstr "Diğer birimleri taşıyan bir birime paraşütle iniş yapılamaz."
 
-#: server/unittools.c:2249
+#: server/unittools.c:2258
 msgid "The destination location is not known."
 msgstr "Hedef bölge bilinmiyor."
 
-#: server/unittools.c:2259
+#: server/unittools.c:2268
 #, c-format
 msgid "This unit cannot paradrop into %s."
 msgstr "Bu birin %s içine atlayış yapamaz."
 
-#: server/unittools.c:2279
+#: server/unittools.c:2288
 #, c-format
 msgid "The distance to the target (%i) is greater than the unit's range (%i)."
 msgstr "Hedefe olan mesafe (%i) birimin menzili (%i) dışında kalıyor."
 
-#: server/unittools.c:2290
+#: server/unittools.c:2299
 #, c-format
 msgid "Your %s paradropped into the %s and was lost."
 msgstr "%s biriminiz %s içine düştü ve kayboldu."
 
-#: server/unittools.c:2302
+#: server/unittools.c:2311
 #, c-format
 msgid "Your %s was killed by enemy units at the paradrop destination."
 msgstr "%s biriminiz paraşütle atlarken düşman tarafından vuruldu."
 
-#: server/unittools.c:2331
+#: server/unittools.c:2340
 #, c-format
 msgid "You found %d gold."
 msgstr "Hazine buldunuz (%d altın)."
 
-#: server/unittools.c:2337
+#: server/unittools.c:2346
 msgid "An abandoned village is here."
 msgstr "Terk edinmiş bir şehir buldunuz."
 
-#: server/unittools.c:2341
+#: server/unittools.c:2350
 #, c-format
 msgid "Your %s has been killed by barbarians!"
 msgstr "%s biriminiz barbarlar tarafından öldürüldü!"
 
-#: server/unittools.c:2369
+#: server/unittools.c:2378
 msgid "Your overflight frightens the tribe; they scatter in terror."
 msgstr "Uçaktan korkan kabile korku içinde saklanacak yer aradı."
 
-#: server/unittools.c:2599
+#: server/unittools.c:2608
 #, c-format
 msgid "Orders for %s aborted after enemy movement was spotted."
 msgstr ""
 "%s biriminin emirleri, yakınlarında düşman hareketi gördüğü için iptal "
 "edildi."
 
-#: server/unittools.c:3121
+#: server/unittools.c:3130
 #, c-format
 msgid "Orders for %s aborted as there are units nearby."
 msgstr "%s biriminin emirleri yakınlarında birimler olduğu için iptal edildi."
 
-#: server/unittools.c:3173
+#: server/unittools.c:3182
 #, c-format
 msgid "Orders for %s aborted because building of city failed."
 msgstr "%s biriminin emirleri şehir yapımı başarısız olduğu için iptal edildi."
 
-#: server/unittools.c:3190
+#: server/unittools.c:3199
 #, c-format
 msgid "Orders for %s aborted since they give an invalid activity."
 msgstr "%s biriminin emirleri geçersiz olduğu için iptal edildi."
 
-#: server/unittools.c:3291
+#: server/unittools.c:3300
 #, c-format
 msgid "Attempt to change homecity for %s failed."
 msgstr "%s biriminin memleketi değiştirilemedi."
 
-#: server/unittools.c:3303
+#: server/unittools.c:3312
 #, c-format
 msgid "Attempt to establish trade route for %s failed."
 msgstr "%s şehriyle ticaret yolu yapılamadı."
 
-#: server/unittools.c:3316
+#: server/unittools.c:3325
 #, c-format
 msgid "Attempt to build wonder for %s failed."
 msgstr "%s şehrinde harika yapımı başarısız oldu."
 
-#: server/unittools.c:3326
+#: server/unittools.c:3335
 #, c-format
 msgid "Your %s has invalid orders."
 msgstr "%s biriminiz geçersiz emirler almış."

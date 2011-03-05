@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: freeciv 2.0.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-05 13:12+0100\n"
+"POT-Creation-Date: 2011-03-05 14:01+0100\n"
 "PO-Revision-Date: 2008-01-21 15:42+0100\n"
 "Last-Translator: Dusan Hokuv <dusan@mirc.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -1271,12 +1271,12 @@ msgstr "chyba %ld (selhalo FormatMessage)"
 msgid "error %d (compiled without strerror)"
 msgstr "chyba %d (přeloženo bez strerror)"
 
-#: ai/aicity.c:1494 server/citytools.c:2210
+#: ai/aicity.c:1494 server/citytools.c:2229
 #, c-format
 msgid "The %s have stopped building The %s in %s."
 msgstr "%s přerušili stavbu %s ve městě %s."
 
-#: ai/aicity.c:1504 server/citytools.c:2250
+#: ai/aicity.c:1504 server/citytools.c:2269
 #, c-format
 msgid "The %s have started building The %s in %s."
 msgstr "%s zahájili stavbu %s ve městě %s."
@@ -1931,17 +1931,17 @@ msgstr "Založili jsme město %s"
 msgid "%s liberated %s."
 msgstr "%s vládne %s."
 
-#: server/citytools.c:2227
+#: server/citytools.c:2246
 msgid " from the worklist"
 msgstr " podle seznamu prací"
 
 #. TRANS: "<city> is building <production><source>."
-#: server/citytools.c:2240
+#: server/citytools.c:2259
 #, c-format
 msgid "%s is building %s%s."
 msgstr "%s staví %s%s."
 
-#: server/citytools.c:2431
+#: server/citytools.c:2450
 #, c-format
 msgid "You sell %s in %s (now landlocked) for %d gold."
 msgstr "Prodal(a) jste %s v %s (nyní ve vnitrozemí) za %d zlatých."
@@ -7836,107 +7836,107 @@ msgstr "Jednotka %s se nemůže usadit ve městě %s."
 msgid "%s added to aid %s in growing."
 msgstr "Jednotka %s se usadila ve městě %s."
 
-#: server/unithand.c:996
+#: server/unithand.c:995
 #, fuzzy
 msgid "The unit can't go there."
 msgstr "Zde nemůžete útočit."
 
-#: server/unithand.c:1182
+#: server/unithand.c:1181
 msgid "Your Nuclear missile was shot down by SDI defences, what a waste."
 msgstr "Vaše atomová střela byla sestřelena SDI obranou - jaká škoda."
 
-#: server/unithand.c:1186
+#: server/unithand.c:1185
 #, c-format
 msgid "The nuclear attack on %s was avoided by your SDI defense."
 msgstr "Vaše SDI obrana zabránila atomovému útoku na město %s."
 
 #. TRANS: "Your Cannon ... the Polish Destroyer."
-#: server/unithand.c:1261
+#: server/unithand.c:1260
 #, fuzzy, c-format
 msgid "Your %s survived the pathetic attack from the %s %s."
 msgstr "Vaše %s přežila patetický útok %s %s."
 
 #. TRANS: "... Cannon ... the Polish Destroyer."
-#: server/unithand.c:1271
+#: server/unithand.c:1270
 #, fuzzy, c-format
 msgid "Your attacking %s failed against the %s %s!"
 msgstr "Vaše útočící %s selhala proti %s %s!"
 
-#: server/unithand.c:1352
+#: server/unithand.c:1351
 #, c-format
 msgid "Only %s can attack from sea."
 msgstr "Pouze %s může útočit z moře."
 
-#: server/unithand.c:1358
+#: server/unithand.c:1357
 msgid "Cannot attack from sea."
 msgstr "Nelze útočit z moře."
 
-#: server/unithand.c:1366 server/unittools.c:2270
+#: server/unithand.c:1365 server/unittools.c:2279
 msgid "Cannot attack unless you declare war first."
 msgstr "Nelze útočit dokud nevyhlásíte válku."
 
-#: server/unithand.c:1372
+#: server/unithand.c:1371
 #, c-format
 msgid "%s can only move into your own zone of control."
 msgstr "%s se může pohybovat jen v našich zónach kontroly."
 
-#: server/unithand.c:1379
+#: server/unithand.c:1378
 #, c-format
 msgid "%s cannot move that far from the coast line."
 msgstr "%s se nemůže vzdálit tak daleko od pobřeží."
 
-#: server/unithand.c:1386
+#: server/unithand.c:1385
 #, fuzzy, c-format
 msgid "Cannot invade unless you break peace with %s first."
 msgstr "Nelze útočit dokud nevyhlásíte válku."
 
-#: server/unithand.c:1432
+#: server/unithand.c:1431
 msgid "This unit has no moves left."
 msgstr "Této jednotce nezbývají tahy pro přesun."
 
-#: server/unithand.c:1488
+#: server/unithand.c:1487
 msgid "No diplomat action possible."
 msgstr "Diplomatická akce není možná."
 
-#: server/unithand.c:1492
+#: server/unithand.c:1491
 #, c-format
 msgid "Unit cannot perform diplomatic action from %s."
 msgstr "Jednotka nemůže provádět diplomatickou akci z %s."
 
-#: server/unithand.c:1511
+#: server/unithand.c:1510
 #, fuzzy, c-format
 msgid "You must declare war on %s first.  Try using players dialog."
 msgstr "Nejdříve musíte vyhlásit válku %s.  Zkuste použít dialog hráčů (F3)."
 
-#: server/unithand.c:1530
+#: server/unithand.c:1529
 msgid "This unit is being transported, and so cannot bombard."
 msgstr "Tato jednotka je transportována, takže nemůže bombardovat."
 
-#: server/unithand.c:1546
+#: server/unithand.c:1545
 msgid "You can't attack there."
 msgstr "Zde nemůžete útočit."
 
-#: server/unithand.c:1569
+#: server/unithand.c:1568
 msgid "This type of troops cannot take over a city."
 msgstr "Tento typ jednotek nemůže ovládnout město."
 
-#: server/unithand.c:1587
+#: server/unithand.c:1586
 msgid "A transported unit is not allied to all units or city on target tile."
 msgstr ""
 "Transportovaná jednotka není spojenecká vůči všem jednotkám nebo městu v "
 "cílové lokaci."
 
-#: server/unithand.c:1637
+#: server/unithand.c:1636
 #, c-format
 msgid "Your %s helps build the %s in %s (%d remaining)."
 msgstr "Náš %s pomohl se stavbou %s v %s (%d zbývá)."
 
-#: server/unithand.c:1639
+#: server/unithand.c:1638
 #, c-format
 msgid "Your %s helps build the %s in %s (%d surplus)."
 msgstr "Náš %s pomohl se stavbou %s v %s (%d přebytek)."
 
-#: server/unithand.c:1695
+#: server/unithand.c:1694
 #, c-format
 msgid ""
 "Sorry, your %s cannot establish a trade route because it has no home city"
@@ -7944,27 +7944,27 @@ msgstr ""
 "Lituji, ale jednotka %s nemůže založit obchodní cestu, protože nemá domovské "
 "město"
 
-#: server/unithand.c:1709
+#: server/unithand.c:1708
 #, c-format
 msgid "Sorry, your %s cannot establish a trade route between %s and %s"
 msgstr "Lituji, ale jednotka %s nemůže založit obchodní cestu mezi %s a %s"
 
-#: server/unithand.c:1739 server/unithand.c:1760
+#: server/unithand.c:1738 server/unithand.c:1759
 #, c-format
 msgid "Sorry, your %s cannot establish a trade route here!"
 msgstr "Lituji, ale jednotka %s zde nemůže založit obchodní cestu!"
 
-#: server/unithand.c:1744 server/unithand.c:1765
+#: server/unithand.c:1743 server/unithand.c:1764
 #, c-format
 msgid "      The city of %s already has %d better trade routes!"
 msgstr "      Město %s již má %d lepší obchodní cesty!"
 
-#: server/unithand.c:1779 server/unithand.c:1792
+#: server/unithand.c:1778 server/unithand.c:1791
 #, c-format
 msgid "Sorry, %s has canceled the trade route from %s to your city %s."
 msgstr "Lituji, %s zrušil obchodní cestu z %s do Vašeho města %s."
 
-#: server/unithand.c:1826
+#: server/unithand.c:1825
 #, c-format
 msgid ""
 "Your %s from %s has arrived in %s, and revenues amount to %d in gold and "
@@ -8097,128 +8097,128 @@ msgstr[0] "%d ztracena %s %s při útoku %s %s."
 msgstr[1] "%d ztracena %s %s při útoku %s %s."
 msgstr[2] "%d ztracena %s %s při útoku %s %s."
 
-#: server/unittools.c:2082
+#: server/unittools.c:2091
 #, c-format
 msgid "Your %s was nuked by %s."
 msgstr "Na náš %s podnikli %s jaderný útok!"
 
-#: server/unittools.c:2085 server/unittools.c:2105
+#: server/unittools.c:2094 server/unittools.c:2114
 msgid "yourself"
 msgstr "Vy"
 
-#: server/unittools.c:2090
+#: server/unittools.c:2099
 #, fuzzy, c-format
 msgid "The %s %s was nuked."
 msgstr "Na %s %s byl proveden jaderný útok."
 
-#: server/unittools.c:2102
+#: server/unittools.c:2111
 #, c-format
 msgid "%s was nuked by %s."
 msgstr "Na %s podnikli %s jaderný útok!"
 
-#: server/unittools.c:2111
+#: server/unittools.c:2120
 #, c-format
 msgid "You nuked %s."
 msgstr "Při atomovém útoku jste ozářil(a) město %s."
 
-#: server/unittools.c:2149
+#: server/unittools.c:2158
 #, fuzzy, c-format
 msgid "The %s detonated a nuke!"
 msgstr "%s odpálili atomovou zbraň."
 
-#: server/unittools.c:2174
+#: server/unittools.c:2183
 #, c-format
 msgid "%s transported successfully."
 msgstr "Jednotka %s byla úspěšně transportována."
 
-#: server/unittools.c:2233
+#: server/unittools.c:2242
 msgid "This unit type can not be paradropped."
 msgstr "Tento typ jednotky nemůže provést výsadek."
 
-#: server/unittools.c:2243
+#: server/unittools.c:2252
 #, fuzzy
 msgid "You cannot paradrop a unit that is transporting other units."
 msgstr "Nelze provést výsadek transportní jednotky."
 
-#: server/unittools.c:2249
+#: server/unittools.c:2258
 msgid "The destination location is not known."
 msgstr "Cílová oblast není prozkoumána."
 
-#: server/unittools.c:2259
+#: server/unittools.c:2268
 #, c-format
 msgid "This unit cannot paradrop into %s."
 msgstr "Tato jednotka nemůže provést výsadek do %s."
 
-#: server/unittools.c:2279
+#: server/unittools.c:2288
 #, c-format
 msgid "The distance to the target (%i) is greater than the unit's range (%i)."
 msgstr "Vzdálenost k cíli (%i) je větší než dosah jednotky (%i)."
 
-#: server/unittools.c:2290
+#: server/unittools.c:2299
 #, c-format
 msgid "Your %s paradropped into the %s and was lost."
 msgstr "Jednotka %s vysazena do %s a ztracena."
 
-#: server/unittools.c:2302
+#: server/unittools.c:2311
 #, c-format
 msgid "Your %s was killed by enemy units at the paradrop destination."
 msgstr "Jednotka %s byla zabita nepřátelskými jednotkami v místě výsadku."
 
-#: server/unittools.c:2331
+#: server/unittools.c:2340
 #, c-format
 msgid "You found %d gold."
 msgstr "Nalezli jsme %d zlatých."
 
-#: server/unittools.c:2337
+#: server/unittools.c:2346
 msgid "An abandoned village is here."
 msgstr "Nalezli jsme opuštěnou osadu."
 
-#: server/unittools.c:2341
+#: server/unittools.c:2350
 #, c-format
 msgid "Your %s has been killed by barbarians!"
 msgstr "Jednotka %s byla zničena barbary!"
 
-#: server/unittools.c:2369
+#: server/unittools.c:2378
 #, fuzzy
 msgid "Your overflight frightens the tribe; they scatter in terror."
 msgstr "Přelet nad osadou vyděsil její obyvatele, kteří se v hrůze rozprchli."
 
-#: server/unittools.c:2599
+#: server/unittools.c:2608
 #, fuzzy, c-format
 msgid "Orders for %s aborted after enemy movement was spotted."
 msgstr "Příkazy pro %s byly zrušeny, protože poblíž jsou jednotky."
 
-#: server/unittools.c:3121
+#: server/unittools.c:3130
 #, fuzzy, c-format
 msgid "Orders for %s aborted as there are units nearby."
 msgstr "Příkazy pro %s byly zrušeny, protože poblíž jsou jednotky."
 
-#: server/unittools.c:3173
+#: server/unittools.c:3182
 #, fuzzy, c-format
 msgid "Orders for %s aborted because building of city failed."
 msgstr "Rozkazy pro %s zrušeny kvůli selhání pohybu."
 
-#: server/unittools.c:3190
+#: server/unittools.c:3199
 #, fuzzy, c-format
 msgid "Orders for %s aborted since they give an invalid activity."
 msgstr "Rozkazy pro %s zrušeny, protože určují neplatnou činnost."
 
-#: server/unittools.c:3291
+#: server/unittools.c:3300
 #, c-format
 msgid "Attempt to change homecity for %s failed."
 msgstr "Pokus o změnu domovského města jednotky %s selhal."
 
-#: server/unittools.c:3303
+#: server/unittools.c:3312
 #, c-format
 msgid "Attempt to establish trade route for %s failed."
 msgstr "Pokus o vytvoření obchodní cesty pro %s selhal."
 
-#: server/unittools.c:3316
+#: server/unittools.c:3325
 #, c-format
 msgid "Attempt to build wonder for %s failed."
 msgstr "Pokus o stabu divu světa %s selhal."
 
-#: server/unittools.c:3326
+#: server/unittools.c:3335
 #, c-format
 msgid "Your %s has invalid orders."
 msgstr "Jednotka %s má neplatné rozkazy."

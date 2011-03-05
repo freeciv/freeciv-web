@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: freeciv\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-05 13:12+0100\n"
+"POT-Creation-Date: 2011-03-05 14:01+0100\n"
 "PO-Revision-Date: 2006-03-26 14:53+0800\n"
 "Last-Translator: Hongjia Cao <hjcao@yahoo.com>\n"
 "Language-Team: zh_CN <i18n-translation@linux.net.cn>\n"
@@ -1341,12 +1341,12 @@ msgstr "错误 %ld （格式化消息失败）"
 msgid "error %d (compiled without strerror)"
 msgstr "错误 %d （编译时未引入 strerror）"
 
-#: ai/aicity.c:1494 server/citytools.c:2210
+#: ai/aicity.c:1494 server/citytools.c:2229
 #, c-format
 msgid "The %s have stopped building The %s in %s."
 msgstr "%1$s 停止在 %3$s 中建造 %2$s。"
 
-#: ai/aicity.c:1504 server/citytools.c:2250
+#: ai/aicity.c:1504 server/citytools.c:2269
 #, c-format
 msgid "The %s have started building The %s in %s."
 msgstr " %1$s 开始在 %3$s 中建造 %2$s。"
@@ -1960,17 +1960,17 @@ msgstr "您解放了 %s！"
 msgid "%s liberated %s."
 msgstr "%s 解放了 %s。"
 
-#: server/citytools.c:2227
+#: server/citytools.c:2246
 msgid " from the worklist"
 msgstr " 从工作列表"
 
 #. TRANS: "<city> is building <production><source>."
-#: server/citytools.c:2240
+#: server/citytools.c:2259
 #, c-format
 msgid "%s is building %s%s."
 msgstr "%s 正在建造 %s%s。"
 
-#: server/citytools.c:2431
+#: server/citytools.c:2450
 #, c-format
 msgid "You sell %s in %s (now landlocked) for %d gold."
 msgstr "您以 %3$d 黄金的价格卖出 %2$s 中的 %1$s （目前被陆地包围）。"
@@ -7688,131 +7688,131 @@ msgstr "%s 无法加入 %s。"
 msgid "%s added to aid %s in growing."
 msgstr "%s 已加入 %s 以帮助其增长。"
 
-#: server/unithand.c:996
+#: server/unithand.c:995
 #, fuzzy
 msgid "The unit can't go there."
 msgstr "您不能攻击这里。"
 
-#: server/unithand.c:1182
+#: server/unithand.c:1181
 msgid "Your Nuclear missile was shot down by SDI defences, what a waste."
 msgstr "您的核导弹已经被 SDI 防御系统击落，真浪费啊。"
 
-#: server/unithand.c:1186
+#: server/unithand.c:1185
 #, c-format
 msgid "The nuclear attack on %s was avoided by your SDI defense."
 msgstr "您的 SDI 防御系统防止了对 %s 的核攻击。"
 
 #. TRANS: "Your Cannon ... the Polish Destroyer."
-#: server/unithand.c:1261
+#: server/unithand.c:1260
 #, fuzzy, c-format
 msgid "Your %s survived the pathetic attack from the %s %s."
 msgstr "您 的 %s 从 %s 的 %s 可怜的攻击中存活下来。"
 
 #. TRANS: "... Cannon ... the Polish Destroyer."
-#: server/unithand.c:1271
+#: server/unithand.c:1270
 #, fuzzy, c-format
 msgid "Your attacking %s failed against the %s %s!"
 msgstr "您的 %s 对 %s 的 %s 的攻击失败！"
 
-#: server/unithand.c:1352
+#: server/unithand.c:1351
 #, c-format
 msgid "Only %s can attack from sea."
 msgstr "只有 %s 可以从海洋进行攻击。"
 
-#: server/unithand.c:1358
+#: server/unithand.c:1357
 msgid "Cannot attack from sea."
 msgstr "无法从海洋进行攻击。"
 
-#: server/unithand.c:1366 server/unittools.c:2270
+#: server/unithand.c:1365 server/unittools.c:2279
 msgid "Cannot attack unless you declare war first."
 msgstr "除非您首先宣战否则无法攻击。"
 
-#: server/unithand.c:1372
+#: server/unithand.c:1371
 #, c-format
 msgid "%s can only move into your own zone of control."
 msgstr "%s 只能移动到您自己控制的区域。"
 
-#: server/unithand.c:1379
+#: server/unithand.c:1378
 #, c-format
 msgid "%s cannot move that far from the coast line."
 msgstr ""
 
-#: server/unithand.c:1386
+#: server/unithand.c:1385
 #, fuzzy, c-format
 msgid "Cannot invade unless you break peace with %s first."
 msgstr "除非您首先宣战否则无法攻击。"
 
-#: server/unithand.c:1432
+#: server/unithand.c:1431
 msgid "This unit has no moves left."
 msgstr "该部队已经没有移动力了。"
 
-#: server/unithand.c:1488
+#: server/unithand.c:1487
 msgid "No diplomat action possible."
 msgstr "没有可能的外交活动。"
 
-#: server/unithand.c:1492
+#: server/unithand.c:1491
 #, fuzzy, c-format
 msgid "Unit cannot perform diplomatic action from %s."
 msgstr "* 能够进行外交活动。\n"
 
-#: server/unithand.c:1511
+#: server/unithand.c:1510
 #, fuzzy, c-format
 msgid "You must declare war on %s first.  Try using players dialog."
 msgstr "您必须先对 %s 宣战。请使用玩家对话框（F3）。"
 
-#: server/unithand.c:1530
+#: server/unithand.c:1529
 msgid "This unit is being transported, and so cannot bombard."
 msgstr "此部队正在被运输，所有不能进行攻击。"
 
-#: server/unithand.c:1546
+#: server/unithand.c:1545
 msgid "You can't attack there."
 msgstr "您不能攻击这里。"
 
-#: server/unithand.c:1569
+#: server/unithand.c:1568
 msgid "This type of troops cannot take over a city."
 msgstr "这种类型的部队不能占领城市。"
 
-#: server/unithand.c:1587
+#: server/unithand.c:1586
 msgid "A transported unit is not allied to all units or city on target tile."
 msgstr "一个所运输的部队没有与目标方格的所有部队或城市结盟。"
 
-#: server/unithand.c:1637
+#: server/unithand.c:1636
 #, c-format
 msgid "Your %s helps build the %s in %s (%d remaining)."
 msgstr "您的 %1$s 在 %3$s 中帮助建造 %2$s (还剩 %4$d)。"
 
-#: server/unithand.c:1639
+#: server/unithand.c:1638
 #, c-format
 msgid "Your %s helps build the %s in %s (%d surplus)."
 msgstr "您的 %1$s 在 %3$s 中帮助建造 %2$s （剩余 %4$d ）。"
 
-#: server/unithand.c:1695
+#: server/unithand.c:1694
 #, c-format
 msgid ""
 "Sorry, your %s cannot establish a trade route because it has no home city"
 msgstr "抱歉，您的 %s 不能建立贸易路线，因为它没有基地城市。"
 
-#: server/unithand.c:1709
+#: server/unithand.c:1708
 #, c-format
 msgid "Sorry, your %s cannot establish a trade route between %s and %s"
 msgstr "抱歉，您的 %s 无法在 %s 和 %s 之间建立贸易路线！"
 
-#: server/unithand.c:1739 server/unithand.c:1760
+#: server/unithand.c:1738 server/unithand.c:1759
 #, c-format
 msgid "Sorry, your %s cannot establish a trade route here!"
 msgstr "抱歉，您的 %s 无法在此处建立贸易路线！"
 
-#: server/unithand.c:1744 server/unithand.c:1765
+#: server/unithand.c:1743 server/unithand.c:1764
 #, c-format
 msgid "      The city of %s already has %d better trade routes!"
 msgstr "      城市 %s 已经有 %d 条更好的贸易路线了！"
 
-#: server/unithand.c:1779 server/unithand.c:1792
+#: server/unithand.c:1778 server/unithand.c:1791
 #, c-format
 msgid "Sorry, %s has canceled the trade route from %s to your city %s."
 msgstr "抱歉，%s 取消了从 %s 到您的城市 %s 的贸易路线。"
 
-#: server/unithand.c:1826
+#: server/unithand.c:1825
 #, c-format
 msgid ""
 "Your %s from %s has arrived in %s, and revenues amount to %d in gold and "
@@ -7937,127 +7937,127 @@ msgid "%d unit lost when the %s %s attacked the %s %s."
 msgid_plural "%d units lost when the %s %s attacked the %s %s."
 msgstr[0] "%d 自动攻击： %s 的 %s 正在攻击 %s 的 %s"
 
-#: server/unittools.c:2082
+#: server/unittools.c:2091
 #, c-format
 msgid "Your %s was nuked by %s."
 msgstr "您的 %s 被 %s “核”了。"
 
-#: server/unittools.c:2085 server/unittools.c:2105
+#: server/unittools.c:2094 server/unittools.c:2114
 msgid "yourself"
 msgstr "您自己"
 
-#: server/unittools.c:2090
+#: server/unittools.c:2099
 #, fuzzy, c-format
 msgid "The %s %s was nuked."
 msgstr "%s 的 %s 遭到核武器的攻击。"
 
-#: server/unittools.c:2102
+#: server/unittools.c:2111
 #, c-format
 msgid "%s was nuked by %s."
 msgstr "%s 遭到 %s 的核武器的攻击。"
 
-#: server/unittools.c:2111
+#: server/unittools.c:2120
 #, c-format
 msgid "You nuked %s."
 msgstr "您以核武器攻击 %s。"
 
-#: server/unittools.c:2149
+#: server/unittools.c:2158
 #, fuzzy, c-format
 msgid "The %s detonated a nuke!"
 msgstr "%s 引爆了核弹！"
 
-#: server/unittools.c:2174
+#: server/unittools.c:2183
 #, c-format
 msgid "%s transported successfully."
 msgstr "%s 运输成功。"
 
-#: server/unittools.c:2233
+#: server/unittools.c:2242
 msgid "This unit type can not be paradropped."
 msgstr "这种类型的部队不能空降。"
 
-#: server/unittools.c:2243
+#: server/unittools.c:2252
 #, fuzzy
 msgid "You cannot paradrop a unit that is transporting other units."
 msgstr "您不能空降一个运输部队。"
 
-#: server/unittools.c:2249
+#: server/unittools.c:2258
 msgid "The destination location is not known."
 msgstr "目的位置未知。"
 
-#: server/unittools.c:2259
+#: server/unittools.c:2268
 #, c-format
 msgid "This unit cannot paradrop into %s."
 msgstr "此部队不能空降到 %s。"
 
-#: server/unittools.c:2279
+#: server/unittools.c:2288
 #, c-format
 msgid "The distance to the target (%i) is greater than the unit's range (%i)."
 msgstr "到目标的距离（%i）超出了部队的范围（%i）。"
 
-#: server/unittools.c:2290
+#: server/unittools.c:2299
 #, c-format
 msgid "Your %s paradropped into the %s and was lost."
 msgstr "您的 %s 被空降到 %s 并全部损失。"
 
-#: server/unittools.c:2302
+#: server/unittools.c:2311
 #, c-format
 msgid "Your %s was killed by enemy units at the paradrop destination."
 msgstr "您的 %s 在空降目的地被敌方部队杀死了。"
 
-#: server/unittools.c:2331
+#: server/unittools.c:2340
 #, c-format
 msgid "You found %d gold."
 msgstr "您找到 %d 黄金。"
 
-#: server/unittools.c:2337
+#: server/unittools.c:2346
 msgid "An abandoned village is here."
 msgstr "这里是一座废弃的村庄。"
 
-#: server/unittools.c:2341
+#: server/unittools.c:2350
 #, c-format
 msgid "Your %s has been killed by barbarians!"
 msgstr "您的 %s 被野人杀死了！"
 
-#: server/unittools.c:2369
+#: server/unittools.c:2378
 msgid "Your overflight frightens the tribe; they scatter in terror."
 msgstr "您在空中的飞过惊吓了部落；他们被吓得四下逃窜。"
 
-#: server/unittools.c:2599
+#: server/unittools.c:2608
 #, c-format
 msgid "Orders for %s aborted after enemy movement was spotted."
 msgstr "因附近有部队而取消对 %s 的命令。"
 
-#: server/unittools.c:3121
+#: server/unittools.c:3130
 #, c-format
 msgid "Orders for %s aborted as there are units nearby."
 msgstr "因附近有部队而取消对 %s 的命令。"
 
-#: server/unittools.c:3173
+#: server/unittools.c:3182
 #, c-format
 msgid "Orders for %s aborted because building of city failed."
 msgstr "因修建城市失败而取消对 %s 的命令。"
 
-#: server/unittools.c:3190
+#: server/unittools.c:3199
 #, c-format
 msgid "Orders for %s aborted since they give an invalid activity."
 msgstr "%s 的命令被取消因为它给出了无效的活动。"
 
-#: server/unittools.c:3291
+#: server/unittools.c:3300
 #, c-format
 msgid "Attempt to change homecity for %s failed."
 msgstr "试图改变 %s 的基地城市失败。"
 
-#: server/unittools.c:3303
+#: server/unittools.c:3312
 #, c-format
 msgid "Attempt to establish trade route for %s failed."
 msgstr "试图为 %s 建立贸易路线失败。"
 
-#: server/unittools.c:3316
+#: server/unittools.c:3325
 #, c-format
 msgid "Attempt to build wonder for %s failed."
 msgstr "试图为 %s 修建奇迹失败。"
 
-#: server/unittools.c:3326
+#: server/unittools.c:3335
 #, c-format
 msgid "Your %s has invalid orders."
 msgstr "您的 %s 得到了无效的命令。"

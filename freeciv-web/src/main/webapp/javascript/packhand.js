@@ -477,6 +477,11 @@ function handle_unit_packet_common(packet_unit)
     }
   }
 
+  if ((packet_unit['caravan_trade'] || packet_unit['caravan_wonder'])
+      && unit_owner(packet_unit) == client.conn.playing
+      && !client_is_observer()) 
+    popup_caravan_dialog(packet_unit, packet_unit['caravan_trade'], packet_unit['caravan_wonder']);
+
   /* TODO: update various dialogs and mapview. */
 }
 

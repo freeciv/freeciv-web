@@ -791,6 +791,8 @@ PACKET_UNIT_INFO=49; sc,lsend
   BOOL has_orders;
   UINT16 orders_length, orders_index;
   BOOL orders_repeat, orders_vigilant;
+  BOOL caravan_trade;
+  BOOL caravan_wonder;
   ORDERS orders[MAX_LEN_ROUTE:orders_length];
   DIRECTION orders_dirs[MAX_LEN_ROUTE:orders_length];
   ACTIVITY orders_activities[MAX_LEN_ROUTE:orders_length];

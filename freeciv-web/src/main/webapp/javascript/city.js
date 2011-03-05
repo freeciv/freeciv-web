@@ -408,6 +408,7 @@ function city_name_dialog(suggested_name, unit_id) {
 				        click: function() {
 						$(this).dialog('Cancel');
 						$("#city_name_dialog").remove();
+        					keyboard_input=true;
 					}
 				},{
 					text: "Ok",

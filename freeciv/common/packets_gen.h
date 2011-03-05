@@ -498,6 +498,8 @@ struct packet_unit_info {
   int orders_index;
   bool orders_repeat;
   bool orders_vigilant;
+  bool caravan_trade;
+  bool caravan_wonder;
   enum unit_orders orders[MAX_LEN_ROUTE];
   enum direction8 orders_dirs[MAX_LEN_ROUTE];
   enum unit_activity orders_activities[MAX_LEN_ROUTE];

@@ -7259,6 +7259,8 @@ static struct packet_unit_info *receive_packet_unit_info_100(struct connection *
   }
   dio_get_bool8(&din, &real_packet->orders_repeat);
   dio_get_bool8(&din, &real_packet->orders_vigilant);
+  dio_get_bool8(&din, &real_packet->caravan_trade);
+  dio_get_bool8(&din, &real_packet->caravan_wonder);
   
   {
     int i;
@@ -7372,6 +7374,8 @@ static int send_packet_unit_info_100(struct connection *pc, const struct packet_
   dio_put_uint32(&dout, real_packet->orders_index);
   dio_put_bool8(&dout, real_packet->orders_repeat);
   dio_put_bool8(&dout, real_packet->orders_vigilant);
+  dio_put_bool8(&dout, real_packet->caravan_trade);
+  dio_put_bool8(&dout, real_packet->caravan_wonder);
 
     {
       int i;

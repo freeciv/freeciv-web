@@ -958,3 +958,59 @@ function show_goto_path(goto_packet)
   goto_request_map[goto_packet['dest_x'] + "," + goto_packet['dest_y']] 
 	  = current_goto_path;
 }
+
+/****************************************************************************
+ ...
+****************************************************************************/
+function popup_caravan_dialog(punit, traderoute, wonder)
+{
+  var id = "#caravan_dialog_" + punit['id'];
+  $(id).remove();
+  $("<div id='caravan_dialog_" + punit['id'] + "'></div>").appendTo("div#game_page");
+
+  var homecity = cities[punit['homecity']];
+  var ptile = map_pos_to_tile(punit['x'], punit['y']);
+  var pcity = tile_city(ptile);
+
+
+  var dhtml = "<center>Your caravan from " + unescape(homecity['name']) + " reaches the city of "  
+	    + unescape(pcity['name']) + ". What now? <br>"
+	    + "<input id='car_trade' class='car_button' type='button' value='Establish Traderoute'>"
+	    + "<input id='car_wonder' class='car_button' type='button' value='Help build Wonder'>"
+	    + "<input id='car_cancel' class='car_button' type='button' value='Cancel'>"
+	    + "</center>"
+  $(id).html(dhtml);
+
+  $(id).attr("title", "Your Caravan Has Arrived");
+  $(id).dialog({
+			bgiframe: true,
+			modal: true,
+			width: "350"});
+	
+  $(id).dialog('open');		
+  $(".car_button").button();
+  $(".car_button").css("width", "250px");
+
+
+  if (!traderoute) $("#car_trade").button( "option", "disabled", true);
+  if (!wonder) $("#car_wonder").button( "option", "disabled", true);
+
+  $("#car_trade").click(function() {
+    var packet = [{"packet_type" : "unit_establish_trade", 
+                   "unit_id": punit['id']}];
+    send_request (JSON.stringify(packet));		  
+
+    $(id).remove();	
+  });
+
+  $("#car_wonder").click(function() {
+    var packet = [{"packet_type" : "unit_help_build_wonder", 
+                   "unit_id": punit['id']}];
+    send_request (JSON.stringify(packet));		  
+
+    $(id).remove();	
+  });
+
+
+}
+

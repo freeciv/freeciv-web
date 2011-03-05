@@ -298,6 +298,8 @@ struct packet_city_info {
   bool was_happy;
   bool diplomat_investigate;
   bool walls;
+  char can_build_unit[MAX_LEN_MSG];
+  char can_build_improvement[MAX_LEN_MSG];
   char improvements[MAX_LEN_MSG];
   char name[MAX_LEN_NAME];
 };

@@ -14,18 +14,18 @@
 [spec]
 
 ; Format and options of this spec file:
-options =   "+Freeciv-2.3-spec"
+options =  "+Freeciv-2.3-spec"
 
 [info]
 
-artists =   "
+artists =  "
     Medieval by CapTVK
     Steam Age by Smiley, www.firstcultural.com
     City walls by Hogne Håskjold
-  "
+ "
 
 [file]
-gfx =   "amplio2/medievalcities"
+gfx =  "amplio/medievalcities"
 
 [grid_main]
 
@@ -35,37 +35,37 @@ dx = 96
 dy = 72
 pixel_border = 1
 
-tiles = {   "row", "column", "tag"
+tiles = {  "row", "column", "tag"
 
 ; used by all city styles
 
- 2,  11,   "city.european_occupied_0"
- 2,  11,   "city.industrial_occupied_0"
+ 2,  11,  "city.european_occupied_0"
+ 2,  11,  "city.industrial_occupied_0"
 
 ;
 ; city tiles
 ;
 
- 0,  0,   "city.european_city_0"
- 0,  1,   "city.european_city_4"
- 0,  2,   "city.european_city_8"
- 0,  3,   "city.european_city_12"
- 0,  4,   "city.european_city_16" 
- 0,  5,   "city.european_wall_0"
- 0,  6,   "city.european_wall_4"
- 0,  7,   "city.european_wall_8"
- 0,  8,   "city.european_wall_12"
- 0,  9,   "city.european_wall_16"
+ 0,  0,  "city.european_city_0"
+ 0,  1,  "city.european_city_4"
+ 0,  2,  "city.european_city_8"
+ 0,  3,  "city.european_city_12"
+ 0,  4,  "city.european_city_16" 
+ 0,  5,  "city.european_wall_0"
+ 0,  6,  "city.european_wall_4"
+ 0,  7,  "city.european_wall_8"
+ 0,  8,  "city.european_wall_12"
+ 0,  9,  "city.european_wall_16"
  
- 1,  0,   "city.industrial_city_0"
- 1,  1,   "city.industrial_city_4"
- 1,  2,   "city.industrial_city_8"
- 1,  3,   "city.industrial_city_12"
- 1,  4,   "city.industrial_city_16" 
- 1,  5,   "city.industrial_wall_0"
- 1,  6,   "city.industrial_wall_4"
- 1,  7,   "city.industrial_wall_8"
- 1,  8,   "city.industrial_wall_12"
- 1,  9,   "city.industrial_wall_16" 
+ 1,  0,  "city.industrial_city_0"
+ 1,  1,  "city.industrial_city_4"
+ 1,  2,  "city.industrial_city_8"
+ 1,  3,  "city.industrial_city_12"
+ 1,  4,  "city.industrial_city_16" 
+ 1,  5,  "city.industrial_wall_0"
+ 1,  6,  "city.industrial_wall_4"
+ 1,  7,  "city.industrial_wall_8"
+ 1,  8,  "city.industrial_wall_12"
+ 1,  9,  "city.industrial_wall_16" 
 
  }

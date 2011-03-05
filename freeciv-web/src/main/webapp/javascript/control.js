@@ -794,6 +794,12 @@ function request_unit_build_city()
   if (current_focus.length > 0) {
     var punit = current_focus[0];
     if (punit != null) { 
+
+      if (punit['movesleft'] == 0) {
+        add_chatbox_text("Unit has no moves left to build city");
+        return;
+      }
+
       var ptype = unit_type(punit);
       if (ptype['name'] == "Settlers" || ptype['name'] == "Engineers") {
         var packet = [{"packet_type" : "city_name_suggestion_req", "unit_id" : punit['id'] }];
@@ -856,25 +862,10 @@ function process_diplomat_arrival(pdiplomat, target_id)
   var pcity = game_find_city_by_number(target_id);
   var punit = game_find_unit_by_number(target_id);
   if (punit != null) {
- 
-    var packet = [{"packet_type" : "unit_diplomat_action", 
-                   "diplomat_id" : pdiplomat['id'], 
-                   "target_id": target_id, 
-                   "value" : 0, 
-                   "action_type": DIPLOMAT_BRIBE}];
-    send_request (JSON.stringify(packet));
-
-  
+    popup_diplomat_dialog(pdiplomat, punit, null);
   } else if (pcity != null) {
-    var packet = [{"packet_type" : "unit_diplomat_action", 
-                   "diplomat_id" : pdiplomat['id'], 
-                   "target_id": target_id, 
-                   "value" : 0, 
-                   "action_type": DIPLOMAT_INCITE}];
-    send_request (JSON.stringify(packet));
- 
+    popup_diplomat_dialog(pdiplomat, null, pcity);
   }
-
 }
 
 

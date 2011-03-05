@@ -13,179 +13,150 @@
 
 
 
+function popup_diplomat_dialog(pdiplomat, punit, pcity)
+{
+ // reset dialog page.
+  var id = "#diplo_dialog_" + pdiplomat['id'];
+  $(id).remove();
+  $("<div id='diplo_dialog_" + pdiplomat['id'] + "'></div>").appendTo("div#game_page");
 
+  if (pcity != null) {
+    var dhtml = "<center>Your didplomat has arrived at " + pcity['name'] + ". What is your command?<br>"
+	    + "<input id='diplo_emb' class='diplo_button' type='button' value='Establish Embassy'>"
+	    + "<input id='diplo_inv' class='diplo_button' type='button' value='Investigate City'>"
+	    + "<input id='diplo_sab' class='diplo_button' type='button' value='Sabotage City'>"
+	    + "<input id='diplo_tech' class='diplo_button' type='button' value='Steal Technology'>"
+	    + "<input id='diplo_revo' class='diplo_button' type='button' value='Incite a revolt'>"
+	    + "<input id='diplo_cancel' class='diplo_button' type='button' value='Cancel'>"
+	    + "</center>"
+    $(id).html(dhtml);
+  } else {
+    var dhtml = "<center>The diplomat is waiting for your command"
+	    + "<input id='diplo_bribe' class='diplo_button' type='button' value='Bribe enemy unit'>"
+	    + "<input id='diplo_spy_sabo' class='diplo_button' type='button' value='Sabotage enemy unit'>"
+	    + "<input id='diplo_cancel' class='diplo_button' type='button' value='Cancel'>"
+	    + "</center>";	  
+    $(id).html(dhtml);
+  }
 
-/**************************************************************************
- ...
-**************************************************************************/
-function create_diplomacy_dialog(counterpart) {
-
-  var pplayer = client.conn.playing;
-
-  // reset diplomacy_dialog div.
-  $("#diplomacy_dialog").remove();
-  $("<div id='diplomacy_dialog'></div>").appendTo("div#game_page");
-
-  $("#diplomacy_dialog").html(
-          "<div>Treaty clauses:<br><div id='diplomacy_messages'></div>"
-	  + "<div id='diplomacy_player_box_self'></div>"
-	  + "<div id='diplomacy_player_box_counterpart'></div>"
-	  + "</div>");
-
-  var sprite_self = get_player_fplag_sprite(pplayer);
-  var sprite_counterpart = get_player_fplag_sprite(counterpart);
-
-  var flag_self_html = "<div id='flag_self' style='float:left; background: transparent url("
-           + sprite_self['image-src'] 
-           + "); background-position:-" + sprite_self['tileset-x'] + "px -" 
-	   + sprite_self['tileset-y'] 
-           + "px;  width: " + sprite_self['width'] + "px;height: " 
-	   + sprite_self['height'] + "px; margin: 5px; '>"
-           + "</div>";
-  var flag_counterpart_html = "<div id='flag_counterpart' style='float:left; background: transparent url("
-           + sprite_counterpart['image-src'] 
-           + "); background-position:-" + sprite_counterpart['tileset-x'] + "px -" 
-	   + sprite_counterpart['tileset-y'] 
-           + "px;  width: " + sprite_counterpart['width'] + "px;height: " 
-	   + sprite_counterpart['height'] + "px; margin: 5px; '>"
-           + "</div>";
-
-  var player_info_html = "<div style='float:left; width: 70%;'>" 
-		  			+ nations[pplayer['nation']]['adjective'] + "<br>"
-		  			+ "<h3>" + pplayer['name'] + "</h3></div>"
-  var counterpart_info_html = "<div style='float:left; width: 70%;'>"  
-		  			      + nations[counterpart['nation']]['adjective'] + "<br>"
-		                              + "<h3>" + counterpart['name'] + "</h3></div>"
-
-
-  var agree_self_html = "<div id='agree_self' style='float':right;></div>";
-  var agree_counterpart_html = "<div id='agree_counterpart' style='float:right;'></div>";
-
-
-  var title = "Diplomacy: " + counterpart['name'] 
-		 + " of the " + nations[counterpart['nation']]['adjective'];
-
-  $("#diplomacy_dialog").attr("title", title);
-  $("#diplomacy_dialog").dialog({
+  $(id).attr("title", "Choose Your Diplomat's Strategy");
+  $(id).dialog({
 			bgiframe: true,
-			modal: false,
-			width: "50%",
-			height: 430,
-			buttons: {
-				"Accept treaty": function() {
-				        accept_treaty_req();
-				},
-				"Cancel meeting" : function() {
-				        cancel_meeting_req();
-				}
-			},
-			close: function() {
-			     cancel_meeting_req();
-			}
-		});
+			modal: true,
+			width: "350"});
 	
-  $("#diplomacy_dialog").dialog('open');		
-  $(".ui-dialog").css("overflow", "visible");
+  $(id).dialog('open');		
+  $(".diplo_button").button();
+  $(".diplo_button").css("width", "250px");
+  
+
+  $("#diplo_cancel").click(function() {
+    $(id).remove();		
+  });
+
+  $("#diplo_emb").click(function() {
+    var packet = [{"packet_type" : "unit_diplomat_action", 
+                   "diplomat_id" : pdiplomat['id'], 
+                   "target_id": pcity['id'], 
+                   "value" : 0, 
+                   "action_type": DIPLOMAT_EMBASSY}];
+    send_request (JSON.stringify(packet));		  
+
+    $(id).remove();	
+  });
+
+  $("#diplo_inv").click(function() {
+    var packet = [{"packet_type" : "unit_diplomat_action", 
+                   "diplomat_id" : pdiplomat['id'], 
+                   "target_id": pcity['id'], 
+                   "value" : 0, 
+                   "action_type": DIPLOMAT_INVESTIGATE}];
+    send_request (JSON.stringify(packet));		  
+
+    $(id).remove();	
+  });
 
 
+  $("#diplo_sab").click(function() {
+    var packet = [{"packet_type" : "unit_diplomat_action", 
+                   "diplomat_id" : pdiplomat['id'], 
+                   "target_id": pcity['id'], 
+                   "value" : 0, 
+                   "action_type": DIPLOMAT_SABOTAGE}];
+    send_request (JSON.stringify(packet));		  
 
-  $("#diplomacy_player_box_self").html(flag_self_html + agree_self_html 
-		                       + player_info_html);
-  $("#diplomacy_player_box_counterpart").html(flag_counterpart_html + agree_counterpart_html 
-		                               + counterpart_info_html);
+    $(id).remove();	
+  });
 
-  // Diplomacy meny for current player.
-  $("<div id='self_dipl_div' ></div>").appendTo("#diplomacy_player_box_self");
-  $("<ul id='jmenu_self' class='jmenu ui-state-default ui-corner-all'></ul").appendTo("#self_dipl_div");
-  $("<li id='self_dipl_top'></li>").appendTo("#jmenu_self");
-  $("<a href='#'>Add Clause...</a>").appendTo("#self_dipl_top");
-  $("<ul id='self_dipl_add'></ul>").appendTo("#self_dipl_top");
-  $("<li>Maps...<ul id='self_maps'></ul></li>").appendTo("#self_dipl_add");
-  $("<li><a href='#' onclick='create_clause_req(" + pplayer['playerno']+ "," + CLAUSE_MAP + ",1);'>World-map</a></li>").appendTo("#self_maps");
-  $("<li><a href='#' onclick='create_clause_req(" + pplayer['playerno']+ "," + CLAUSE_SEAMAP + ",1);'>Sea-map</a></li>").appendTo("#self_maps");
-  $("<li id='self_adv_menu'>Advances...<ul id='self_advances'></ul></li>").appendTo("#self_dipl_add");
-  var tech_count_self = 0;
-  for (var tech_id in techs) {
-    if (player_invention_state(pplayer, tech_id) == TECH_KNOWN
-        // && player_invention_reachable(pother, i)
-        && (player_invention_state(counterpart, tech_id) == TECH_UNKNOWN
-            || player_invention_state(counterpart, tech_id) == TECH_PREREQS_KNOWN)) {
-      var ptech = techs[tech_id];
-      $("<li><a href='#' onclick='create_clause_req(" + pplayer['playerno']+ "," + CLAUSE_ADVANCE + "," + tech_id 
-		      + ");'>" + ptech['name'] + "</a></li>").appendTo("#self_advances");
-      tech_count_self += 1;
-    }
-  }
-  if (tech_count_self == 0) {
-    $("#self_adv_menu").hide();
-  }
-  var city_count_self = 0;
-  $("<li id='self_city_menu'>Cities...<ul id='self_cities'></ul></li>").appendTo("#self_dipl_add");
-  for (city_id in cities) {
-    var pcity = cities[city_id];
-    if (!does_city_have_improvement(pcity, "Palace") && city_owner(pcity) == pplayer) {
-      $("<li><a href='#' onclick='create_clause_req(" + pplayer['playerno']+ "," + CLAUSE_CITY + "," + city_id + ");'>" + unescape(pcity['name']) + "</a></li>").appendTo("#self_cities");
-      city_count_self += 1;
-    }
-  }
-  if (city_count_self == 0) {
-    $("#self_city_menu").hide();
-  }
-
-  $("<li><a href='#' onclick='create_clause_req(" + pplayer['playerno']+ "," + CLAUSE_VISION + ",1);'>Give shared vision</a></li>").appendTo("#self_dipl_add");
-  $("<li><a href='#' onclick='create_clause_req(" + pplayer['playerno']+ "," + CLAUSE_EMBASSY + ",1);'>Give embassy</a></li>").appendTo("#self_dipl_add");
-  $("<li>Pacts...<ul id='self_pacts'></ul></li>").appendTo("#self_dipl_add");
-  $("<li><a href='#' onclick='create_clause_req(" + pplayer['playerno']+ "," + CLAUSE_CEASEFIRE + ",1);'>Cease-fire</a></li>").appendTo("#self_pacts");
-  $("<li><a href='#' onclick='create_clause_req(" + pplayer['playerno']+ "," + CLAUSE_PEACE + ",1);'>Peace</a></li>").appendTo("#self_pacts");
-  $("<li><a href='#' onclick='create_clause_req(" + pplayer['playerno']+ "," + CLAUSE_ALLIANCE + ",1);'>Alliance</a></li>").appendTo("#self_pacts");
-
-  // Counterpart menu.
-  $("<div id='counterpart_dipl_div'></div>").appendTo("#diplomacy_player_box_counterpart");
-  $("<ul id='jmenu_counterpart' class='jmenu ui-state-default ui-corner-all'></ul").appendTo("#counterpart_dipl_div");
-  $("<li id='counterpart_dipl_top'></li>").appendTo("#jmenu_counterpart");
-  $("<a href='#'>Add Clause...</a>").appendTo("#counterpart_dipl_top");
-  $("<ul id='counterpart_dipl_add'></ul>").appendTo("#counterpart_dipl_top");
-  $("<li>Maps...<ul id='counterpart_maps'></ul></li>").appendTo("#counterpart_dipl_add");
-
-  $("<li><a href='#' onclick='create_clause_req(" + counterpart['playerno']+ "," + CLAUSE_MAP + ",1);'>World-map</a></li>").appendTo("#counterpart_maps");
-  $("<li><a href='#' onclick='create_clause_req(" + counterpart['playerno']+ "," + CLAUSE_SEAMAP + ",1);'>Sea-map</a></li>").appendTo("#counterpart_maps");
-  $("<li id='counterpart_adv_menu'>Advances...<ul id='counterpart_advances'></ul></li>").appendTo("#counterpart_dipl_add");
   var tech_count_counterpart = 0;
+  var pplayer = client.conn.playing;
+  var counterpart = city_owner(pcity);
+  var last_tech = 0;
   for (var tech_id in techs) {
     if (player_invention_state(counterpart, tech_id) == TECH_KNOWN
         // && player_invention_reachable(pother, i)
         && (player_invention_state(pplayer, tech_id) == TECH_UNKNOWN
             || player_invention_state(pplayer, tech_id) == TECH_PREREQS_KNOWN)) {
-      var ptech = techs[tech_id];
-      $("<li><a href='#' onclick='create_clause_req(" + counterpart['playerno']+ "," + CLAUSE_ADVANCE + "," + tech_id 
-		      + ");'>" + ptech['name'] + "</a></li>").appendTo("#counterpart_advances");
+      last_tech = tech_id;
       tech_count_counterpart += 1;
     }
   }
-  if (tech_count_counterpart == 0) {
-    $("#counterpart_adv_menu").hide();
+
+  if (tech_count_counterpart > 0) {
+    $("#diplo_tech").click(function() {
+      var packet = [{"packet_type" : "unit_diplomat_action", 
+                     "diplomat_id" : pdiplomat['id'], 
+                     "target_id": pcity['id'], 
+                     "value" : last_tech, 
+                     "action_type": DIPLOMAT_STEAL}];
+      send_request (JSON.stringify(packet));
+
+      $(id).remove();	
+    });
+  } else {
+    $("#diplo_tech").button( "option", "disabled", true);
   }
-  var city_count_counterpart = 0;
-  $("<li id='counterpart_city_menu'>Cities...<ul id='counterpart_cities'></ul></li>").appendTo("#counterpart_dipl_add");
-  for (city_id in cities) {
-    var pcity = cities[city_id];
-    if (!does_city_have_improvement(pcity, "Palace") && city_owner(pcity) == counterpart) {
-      $("<li><a href='#' onclick='create_clause_req(" + counterpart['playerno']+ "," + CLAUSE_CITY + "," + city_id + ");'>" + unescape(pcity['name']) + "</a></li>").appendTo("#counterpart_cities");
-      city_count_counterpart += 1;
+
+  $("#diplo_revo").click(function() {
+    var packet = [{"packet_type" : "unit_diplomat_action", 
+                   "diplomat_id" : pdiplomat['id'], 
+                   "target_id": pcity['id'], 
+                   "value" : 0, 
+                   "action_type": DIPLOMAT_INCITE}];
+    send_request (JSON.stringify(packet));		  
+
+    $(id).remove();	
+  });
+
+
+  $("#diplo_bribe").click(function() {
+    var packet = [{"packet_type" : "unit_diplomat_action", 
+                   "diplomat_id" : pdiplomat['id'], 
+                   "target_id": punit['id'], 
+                   "value" : 0, 
+                   "action_type": DIPLOMAT_BRIBE}];
+    send_request (JSON.stringify(packet));		  
+
+    $(id).remove();	
+  });
+  
+  $("#diplo_spy_sabo").click(function() {
+    var packet = [{"packet_type" : "unit_diplomat_action", 
+                   "diplomat_id" : pdiplomat['id'], 
+                   "target_id": punit['id'], 
+                   "value" : 0, 
+                   "action_type": SPY_SABOTAGE_UNIT}];
+    send_request (JSON.stringify(packet));		  
+
+    $(id).remove();	
+  });
+
+  if (punit != null) {
+    var ptype = unit_type(punit);
+    if (ptype['name'] != "Spy") {
+      $("#diplo_spy_sabo").button("option", "disabled", true);
     }
+
   }
-  if (city_count_counterpart == 0) {
-    $("#counterpart_city_menu").hide();
-  }
-
-  $("<li><a href='#' onclick='create_clause_req(" + counterpart['playerno']+ "," + CLAUSE_VISION + ",1);'>Give shared vision</a></li>").appendTo("#counterpart_dipl_add");
-  $("<li><a href='#' onclick='create_clause_req(" + counterpart['playerno']+ "," + CLAUSE_EMBASSY + ",1);'>Give embassy</a></li>").appendTo("#counterpart_dipl_add");
-
-  // Setup menus.
-  $('#jmenu_self').jmenu({animation:'slide',duration:700});
-  $('#jmenu_counterpart').jmenu({animation:'slide',duration:700});
-
-
 }
-
 

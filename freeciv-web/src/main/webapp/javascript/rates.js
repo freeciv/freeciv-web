@@ -257,5 +257,7 @@ function close_rates_dialog()
   $("#map_tab").addClass("ui-state-active");
   $("#map_tab").addClass("ui-tabs-selected");
   $("#map_tab").removeClass("ui-state-default");
+
+  set_default_mapview_active();
 }
 

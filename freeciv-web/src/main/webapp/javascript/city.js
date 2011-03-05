@@ -139,7 +139,7 @@ function show_city_dialog(pcity)
     if (pcity['improvements'][z] == 1) {
        var sprite = get_improvement_image_sprite(improvements[z]);
        if (sprite == null) {
-         console.log("Missing sprite for " + improvements[z]['graphic_str']);
+         console.log("Missing sprite for improvement " + z);
          continue;
        }
       
@@ -242,21 +242,7 @@ function show_city_dialog(pcity)
 **************************************************************************/
 function can_city_build_unit_direct(pcity, punittype)
 {
-  if (!can_player_build_unit_direct(city_owner(pcity), punittype)) {
-    return false;
-  }
-
-  /* Check to see if the unit has a building requirement. */
-  /*if (punittype->need_improvement
-   && !city_has_building(pcity, punittype->need_improvement)) {
-    return FALSE;
-  }*/
-
-  /* You can't build naval units inland. */
-  /*if (!uclass_has_flag(utype_class(punittype), UCF_BUILD_ANYWHERE)
-      && !is_native_near_tile(punittype, pcity->tile)) {
-    return false;
-  }*/
+  /* TODO: implement*/
   return true;
 }
 
@@ -267,45 +253,7 @@ function can_city_build_unit_direct(pcity, punittype)
 **************************************************************************/
 function can_city_build_unit_now(pcity, punittype)
 {  
-  if (!can_city_build_unit_direct(pcity, punittype)) {
-    return false;
-  }
-  while ((punittype = punittype['obsoleted_by']) != U_NOT_OBSOLETED) {
-    if (can_player_build_unit_direct(city_owner(pcity), punittype)) {
-	return false;
-    }
-  }
-  return true;
-}
-
-/**************************************************************************
-  Return whether given city can build given building, ignoring whether
-  it is obsolete.
-**************************************************************************/
-function can_city_build_improvement_direct(pcity, pimprove)
-{
-  if (!can_player_build_improvement_direct(city_owner(pcity), pimprove)) {
-    return false;
-  }
-
-  if (city_has_building(pcity, pimprove)) {
-    return false;
-  }
-
-  /* Does city already have this? */
-  for (var z = 0; z < pcity['improvements'].length; z ++) {
-    if (pcity['improvements'][z] == 1) {
-      if (improvements[z]['name'] == pimprove['name']) {
-        return false;
-      }
-    }
-  }
-
-  /*return are_reqs_active(city_owner(pcity), pcity, null,
-			 city_tile(pcity), null, null, null,
-			 pimprove['reqs'], RPT_CERTAIN);*/
-			 
-  return true;			 
+  return (pcity['can_build_unit'][punittype['id']] == "1"); 
 }
 
 
@@ -315,13 +263,7 @@ function can_city_build_improvement_direct(pcity, pimprove)
 **************************************************************************/
 function can_city_build_improvement_now(pcity, pimprove)
 {  
-  if (!can_city_build_improvement_direct(pcity, pimprove)) {
-    return false;
-  }
-  /*if (improvement_obsolete(city_owner(pcity), pimprove)) {
-    return false;
-  }*/
-  return true;
+  return (pcity['can_build_improvement'][pimprove['id']] == "1"); 
 }
 
 
@@ -331,12 +273,8 @@ function can_city_build_improvement_now(pcity, pimprove)
 function city_has_building(pcity,
 		                   pimprove)
 {
-  if (pimprove = null) {
-    return false;
-  }
-  /* FIXME: check if city has building.  */
+  /* TODO: implement. */
   return false;
-  //return (pcity->built[improvement_index(pimprove)].turn > I_NEVER);
 }
 
 

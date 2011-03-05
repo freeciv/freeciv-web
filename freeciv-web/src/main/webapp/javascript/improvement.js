@@ -31,19 +31,6 @@ function get_improvements_from_tech(tech_id)
 }
 
 
-/**************************************************************************
-   Whether player can build given building somewhere, ignoring whether it
-   is obsolete.
-**************************************************************************/
-function can_player_build_improvement_direct(p, pimprove)
-{
-  /* FIXME! */
-  if (pimprove['name'] == "Coinage") return true;
-  
-  var req = get_improvement_requirements(pimprove['id']);
-  return (player_invention_state(p, req) == TECH_KNOWN);
-}
-
 
 /**************************************************************************
    

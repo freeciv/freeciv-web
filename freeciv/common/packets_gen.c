@@ -4328,6 +4328,8 @@ static struct packet_city_info *receive_packet_city_info_100(struct connection *
   dio_get_bool8(&din, &real_packet->was_happy);
   dio_get_bool8(&din, &real_packet->diplomat_investigate);
   dio_get_bool8(&din, &real_packet->walls);
+  dio_get_string(&din, real_packet->can_build_unit, sizeof(real_packet->can_build_unit));
+  dio_get_string(&din, real_packet->can_build_improvement, sizeof(real_packet->can_build_improvement));
   dio_get_string(&din, real_packet->improvements, sizeof(real_packet->improvements));
   dio_get_string(&din, real_packet->name, sizeof(real_packet->name));
 
@@ -4470,6 +4472,8 @@ static int send_packet_city_info_100(struct connection *pc, const struct packet_
   dio_put_bool8(&dout, real_packet->was_happy);
   dio_put_bool8(&dout, real_packet->diplomat_investigate);
   dio_put_bool8(&dout, real_packet->walls);
+  dio_put_string(&dout, real_packet->can_build_unit);
+  dio_put_string(&dout, real_packet->can_build_improvement);
   dio_put_string(&dout, real_packet->improvements);
   dio_put_string(&dout, real_packet->name);
 

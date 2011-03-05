@@ -1,17 +1,17 @@
 [spec]
 
 ; Format and options of this spec file:
-options =   "+Freeciv-2.3-spec"
+options =  "+Freeciv-2.3-spec"
 
 [info]
 
-artists =   "
+artists =  "
     Tatu Rissanen <tatu.rissanen@hut.fi>
     Jeff Mallatt <jjm@codewell.com> (miscellaneous)
-  "
+ "
 
 [file]
-gfx =   "amplio2/nuke"
+gfx =  "amplio/nuke"
 
 [grid_main]
 
@@ -21,6 +21,6 @@ dx = 180
 dy = 176
 pixel_border = 0
 
-tiles = {   "row", "column", "tag"
- 0, 0,   "explode.nuke"
+tiles = {  "row", "column", "tag"
+ 0, 0,  "explode.nuke"
  }

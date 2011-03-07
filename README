@@ -64,8 +64,6 @@ System Requirements
 
 - OpenSSL - http://www.openssl.org/
 
-- Varnish - http://varnish.projects.linpro.no/
-
 - nginx 0.8.33 - http://nginx.org/
 
 - simplejson 2.1.1 optional: http://pypi.python.org/pypi/simplejson
@@ -76,7 +74,7 @@ Compiling and running the Freeciv Web client
 1. Install the system requirements. Install Resin in /opt/resin
 
 2. Create mysql database called 'freecivmetaserver'
-   Import mysql dump into a MySQL database from:  /publite2/metaserver-mysql-dump.sql
+   Import mysql dump into a MySQL database from:  /publite2/mysqldump.sql.bz2
 
 3. Build and configure freeciv-web. 
 
@@ -89,7 +87,7 @@ Compiling and running the Freeciv Web client
 
 4. Compile and install Freeciv. This involves running the following commands:
    cd freeciv 
-   ./autogen.sh
+   ./autogen.sh --enable-client=no
    make
    make install     (as root user)
 
@@ -102,9 +100,12 @@ Compiling and running the Freeciv Web client
   Run publite2_single.py in the publite2 directory.
 
 7. Run the freeciv-proxy:
-  Run freeciv-proxy.py in the freeciv-proxy directory.
+  Run run.sh in the freeciv-proxy directory.
+ To debug, check the proxy debugging page: 
+http://localhost/civ/status
+http://localhost:8082/civ/status
 
-8. Start Varnish and nginx.
+8. Start nginx on port 80 as root.
 
 9. Start the web client in your browser:
    Point your web browser to http://localhost/
@@ -123,9 +124,15 @@ and add some TCP/IP tuning in /etc/sysctrl.conf
 TODO:
 -----
 
-- Show GOTO lines in mapview
-- Name cities.
-- Share world images on the internet.
+- Make goto lines wrap in X direction of the map.
+- Show city revolt graphics
+- Show attack animation.
+- Opera 11 broken in jQuery 1.5.x.
+- WebGl?
+- Port to Python 3.2
+- Show borders
+- Saving in the client side.
+- Show city tile output in city dialog.
 - Playback of games.
 - HTML5 Web Sockets.
 

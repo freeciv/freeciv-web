@@ -15,6 +15,7 @@ servers_count = 5
 
 
 class civserverproc(Thread):
+
     def __init__ (self, port):
         Thread.__init__(self)
         self.port = port

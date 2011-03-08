@@ -32,7 +32,7 @@ class civserverproc(Thread):
             except OSError, e:
                 print >>sys.stderr, "Execution failed:", e
 
-        time.sleep(10)
+            time.sleep(10)
 
 
 for i in range(servers_count):

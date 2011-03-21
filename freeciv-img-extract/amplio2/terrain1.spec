@@ -14,7 +14,7 @@ artists =  "
  "
 
 [file]
-gfx =  "amplio/terrain1"
+gfx =  "amplio2/terrain1"
 
 [grid_main]
 

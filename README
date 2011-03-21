@@ -47,6 +47,9 @@ System Requirements
 
 - Python 2.7 - http://www.python.org/
 
+- Python Imaging Library (PIL) - http://www.pythonware.com/products/pil/
+  (required for freeciv-img-extract)
+
 - Mysql 5.0.x - http://www.mysql.com/
 
 - Maven 2 - http://maven.apache.org/download.html
@@ -68,10 +71,12 @@ System Requirements
 
 - simplejson 2.1.1 optional: http://pypi.python.org/pypi/simplejson
 
+- pngcrush, required for freeciv-img-extract.  http://pmt.sourceforge.net/pngcrush/
+
 Compiling and running the Freeciv Web client
 ---------------------------------
 
-1. Install the system requirements. Install Resin in /opt/resin
+1. Install the system requirements. 
 
 2. Create mysql database called 'freecivmetaserver'
    Import mysql dump into a MySQL database from:  /publite2/mysqldump.sql.bz2

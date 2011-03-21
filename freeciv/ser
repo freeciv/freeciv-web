@@ -20,7 +20,7 @@ EXENAME=civserver
 if [ "x$FREECIV_PATH" = "x" ] ; then
   FREECIV_PATH=".:data:~/.freeciv/2.3"
 fi
-export FREECIV_PATH="$FREECIV_PATH:/home/andreas/freeciv-web-git/freeciv/data:/home/andreas/freeciv-web-git/freeciv/data"
+export FREECIV_PATH="$FREECIV_PATH:/home/andreas/freeciv-build/freeciv-web/freeciv/data:/home/andreas/freeciv-build/freeciv-web/freeciv/data"
 
 [ -x $BUILDDIR/server/$EXENAME ] && EXE=$BUILDDIR/server/$EXENAME
 [ -x $BUILDDIR/$EXENAME ] && EXE=$BUILDDIR/$EXENAME

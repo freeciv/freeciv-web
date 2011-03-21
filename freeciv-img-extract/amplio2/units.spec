@@ -36,7 +36,7 @@ artists =  "
  "
 
 [file]
-gfx =  "amplio/units"
+gfx =  "amplio2/units"
 
 [grid_main]
 

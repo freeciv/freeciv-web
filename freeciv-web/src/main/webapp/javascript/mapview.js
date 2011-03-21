@@ -179,6 +179,7 @@ function init_sprites()
 **************************************************************************/
 function init_cache_sprites() 
 {
+ try {
   if (is_canvas_clipping_supported()) {
     for (var tile_tag in tileset) {
       var image_no = tileset[tile_tag][0];
@@ -195,10 +196,16 @@ function init_cache_sprites()
       newCtx.drawImage(tileset_images[image_no], x, y, 
                        w, h, 0, 0, w, h);
       sprites[tile_tag] = newCanvas;
+
     }
   }  
 
   sprites_init = true;
+
+ }  catch(e) {
+  console.log("Problem caching sprite: " + tile_tag);
+ }
+
 }
 
 /**************************************************************************

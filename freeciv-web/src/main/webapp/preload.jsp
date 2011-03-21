@@ -13,6 +13,7 @@ if (username == null || "null".equals(username)) {
 
 
 %>
+<script type="text/javascript" src="/javascript-compressed/jquery-1.5.1.min.js"></script>
 <script type="text/javascript" src="/javascript-compressed/webclient.js"></script>
 
 <script type="text/javascript">	

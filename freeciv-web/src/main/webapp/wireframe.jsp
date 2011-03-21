@@ -27,7 +27,7 @@
 
 <link rel="shortcut icon" href="/images/freeciv-forever-icon.png" />
 
-<script type="text/javascript" src="/javascript/jquery-1.5.1.min.js"></script>
+<script type="text/javascript" src="/javascript-compressed/jquery-1.5.1.min.js"></script>
 <script type="text/javascript" src="/javascript/jquery-ui-1.8.9.custom.min.js"></script>
 
 

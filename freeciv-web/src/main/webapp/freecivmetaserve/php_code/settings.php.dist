@@ -2,37 +2,37 @@
 
 $error_msg = NULL;
 
-if (file_exists("php_code/local.php")) {
+if (file_exists('php_code/local.php')) {
   $localsettings = fopen('php_code/local.php', 'r');
 }
 
 if ($localsettings != NULL) {
-  include_once("php_code/local.php");
+  include_once('php_code/local.php');
 }
 
 if ($metaserver_url_path == NULL) {
   // Server root
-  $metaserver_url_path = "";
+  $metaserver_url_path = '';
 }
 
 if ($metaserver_root == NULL) {
-  $metaserver_root = "." . $metaserver_url_path;
+  $metaserver_root = '.' . $metaserver_url_path;
 }
 
 if ($versions_file == NULL) {
-  $versions_file = $metaserver_root . "versions";
+  $versions_file = $metaserver_root . 'versions';
 }
 
 if ($fcdb_default_db == NULL) {
-  $fcdb_default_db = "freecivmetaserver";
+  $fcdb_default_db = 'freecivmetaserver';
 }
 
 if ($fcdb_metaserver_db == NULL) {
-  $fcdb_metaserver_db = "freecivmetaserver";
+  $fcdb_metaserver_db = 'freecivmetaserver';
 }
 
 if ($fcdb_username == NULL) {
-  $fcdb_username = "root";
+  $fcdb_username = 'root';
 }
 
 if ($fcdb_pw == NULL) {
@@ -41,12 +41,12 @@ if ($fcdb_pw == NULL) {
 
 if ($pic_paths == NULL) {
   // Search pics under metaserver directory and under server root.
-  $pic_paths = array($metaserver_root . "pics/" => $metaserver_url_path . "pics/",
-                     $_SERVER[DOCUMENT_ROOT] . "pics/" => "pics/");
+  $pic_paths = array($metaserver_root . 'pics/' => $metaserver_url_path . 'pics/',
+                     $_SERVER[DOCUMENT_ROOT] . 'pics/' => 'pics/');
 }
 
 if ($webmaster_name == NULL) {
-  $webmaster_name = "Webmaster";
+  $webmaster_name = 'Webmaster';
   $webmaster_default = true;
 }
 
@@ -64,7 +64,7 @@ if ($bugs_addr == NULL) {
   $bugs_html = $bugs_name;
 } else {
   if ($bugs_name == NULL) {
-    $bugs_link = "to this address";
+    $bugs_link = 'to this address';
   } else {
     $bugs_link = $bugs_name;
   }
@@ -73,7 +73,7 @@ if ($bugs_addr == NULL) {
 }
 
 if ($metaserver_header == NULL) {
-  $metaserver_header = "Freeciv.net multiplayer games around the world";
+  $metaserver_header = 'Freeciv.net multiplayer games around the world';
 }
 
 // Check configuration

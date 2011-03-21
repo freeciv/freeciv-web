@@ -77,7 +77,7 @@ if ($metaserver_header == NULL) {
 }
 
 // Check configuration
-if (! file_exists($metaserver_root . "/php_code/php_code_find.php")) {
+if (! file_exists($metaserver_root . '/php_code/php_code_find.php')) {
 
   $error_msg = "<table border=\"1\" style=\"font-size:xx-small\">\n" .
                "<tr><th>Metaserver installation problem.</th><tr>\n" .

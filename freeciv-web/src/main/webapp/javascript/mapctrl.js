@@ -17,19 +17,23 @@
 ****************************************************************************/
 function mapview_mouse_click(e)
 {
-  //var x = e.offsetX || e.layerX;
-  //var y = e.offsetY || e.layerY;
-  var rightclick;
+  var rightclick = false;
+  var middleclick = false;
+
   if (!e) var e = window.event;
   if (e.which) {
     rightclick = (e.which == 3);
+    middleclick = (e.which == 2);
   } else if (e.button) {
     rightclick = (e.button == 2);
+    middleclick = (e.button == 1 || e.button == 4);
   }
   
   
-  if (!rightclick) {
+  if (!rightclick && !middleclick) {
     action_button_pressed(mouse_x, mouse_y, SELECT_POPUP);
+  } else if (middleclick) {
+    popit(); 
   } else {
     release_right_button(mouse_x, mouse_y);
   }
@@ -116,4 +120,36 @@ function recenter_button_pressed(canvas_x, canvas_y)
      * But all we can check is the lowest common requirement. */
     center_tile_mapcanvas(ptile);
   }
+}
+
+/**************************************************************************
+...
+**************************************************************************/
+function popit()
+{
+  var ptile = canvas_pos_to_tile(mouse_x, mouse_y);
+  if (ptile == null) return;
+  
+  var punit_id = 0;
+  var punit = find_visible_unit(ptile);
+  if (punit != null) punit_id = punit['id'];
+
+  var packet = [{"packet_type" : "info_text_req", "visible_unit" : punit_id,
+                "x" : ptile['x'], "y" : ptile['y']}];
+  send_request (JSON.stringify(packet));
+
+
+}
+
+/**************************************************************************
+...
+**************************************************************************/
+function handle_info_text_message(packet)
+{
+  var message = unescape(packet['message']);
+  var regxp = /\n/gi;
+  message = message.replace(regxp, "<br>\n");
+
+  show_dialog_message("Tile Information", message);
+
 }

@@ -389,6 +389,11 @@ bool client_handle_packet(enum packet_type type, void *packet)
       ((struct packet_edit_object_created *)packet)->id);
     return TRUE;
 
+  case PACKET_INFO_TEXT_MESSAGE:
+    handle_info_text_message(
+      ((struct packet_info_text_message *)packet)->message);
+    return TRUE;
+
   default:
     return FALSE;
   }

@@ -477,6 +477,13 @@ bool server_handle_packet(enum packet_type type, void *packet,
     handle_edit_game(pconn, packet);
     return TRUE;
 
+  case PACKET_INFO_TEXT_REQ:
+    handle_info_text_req(pplayer,
+      ((struct packet_info_text_req *)packet)->x,
+      ((struct packet_info_text_req *)packet)->y,
+      ((struct packet_info_text_req *)packet)->visible_unit);
+    return TRUE;
+
   default:
     return FALSE;
   }

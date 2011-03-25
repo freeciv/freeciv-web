@@ -1376,6 +1376,16 @@ struct packet_edit_object_created {
   int id;
 };
 
+struct packet_info_text_req {
+  int x;
+  int y;
+  int visible_unit;
+};
+
+struct packet_info_text_message {
+  char message[MAX_LEN_MSG];
+};
+
 enum packet_type {
   PACKET_PROCESSING_STARTED,             /* 0 */
   PACKET_PROCESSING_FINISHED,
@@ -1530,6 +1540,8 @@ enum packet_type {
   PACKET_UNIT_TRANSFORM,
   PACKET_GOTO_PATH_REQ,
   PACKET_GOTO_PATH,
+  PACKET_INFO_TEXT_REQ,
+  PACKET_INFO_TEXT_MESSAGE,
 
   PACKET_LAST  /* leave this last */
 };
@@ -2140,6 +2152,14 @@ int send_packet_edit_game(struct connection *pc, const struct packet_edit_game *
 struct packet_edit_object_created *receive_packet_edit_object_created(struct connection *pc, enum packet_type type);
 int send_packet_edit_object_created(struct connection *pc, const struct packet_edit_object_created *packet);
 int dsend_packet_edit_object_created(struct connection *pc, int tag, int id);
+
+struct packet_info_text_req *receive_packet_info_text_req(struct connection *pc, enum packet_type type);
+int send_packet_info_text_req(struct connection *pc, const struct packet_info_text_req *packet);
+int dsend_packet_info_text_req(struct connection *pc, int x, int y, int visible_unit);
+
+struct packet_info_text_message *receive_packet_info_text_message(struct connection *pc, enum packet_type type);
+int send_packet_info_text_message(struct connection *pc, const struct packet_info_text_message *packet);
+int dsend_packet_info_text_message(struct connection *pc, const char *message);
 
 
 void delta_stats_report(void);

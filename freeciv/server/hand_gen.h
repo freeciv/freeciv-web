@@ -109,5 +109,6 @@ void handle_edit_player(struct connection *pc, struct packet_edit_player *packet
 void handle_edit_player_vision(struct connection *pc, int player, int x, int y, bool known, int size);
 struct packet_edit_game;
 void handle_edit_game(struct connection *pc, struct packet_edit_game *packet);
+void handle_info_text_req(struct player *pplayer, int x, int y, int visible_unit);
 
 #endif /* FC__HAND_GEN_H */

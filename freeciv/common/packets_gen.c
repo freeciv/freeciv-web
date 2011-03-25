@@ -503,6 +503,12 @@ void *get_packet_from_connection_helper(struct connection *pc,
   case PACKET_EDIT_OBJECT_CREATED:
     return receive_packet_edit_object_created(pc, type);
 
+  case PACKET_INFO_TEXT_REQ:
+    return receive_packet_info_text_req(pc, type);
+
+  case PACKET_INFO_TEXT_MESSAGE:
+    return receive_packet_info_text_message(pc, type);
+
   default:
     freelog(LOG_ERROR, "unknown packet type %d received from %s",
 	    type, conn_description(pc));
@@ -973,6 +979,12 @@ const char *get_packet_name(enum packet_type type)
 
   case PACKET_EDIT_OBJECT_CREATED:
     return "PACKET_EDIT_OBJECT_CREATED";
+
+  case PACKET_INFO_TEXT_REQ:
+    return "PACKET_INFO_TEXT_REQ";
+
+  case PACKET_INFO_TEXT_MESSAGE:
+    return "PACKET_INFO_TEXT_MESSAGE";
 
   default:
     return "unknown";
@@ -19920,5 +19932,194 @@ int dsend_packet_edit_object_created(struct connection *pc, int tag, int id)
   real_packet->id = id;
   
   return send_packet_edit_object_created(pc, real_packet);
+}
+
+static struct packet_info_text_req *receive_packet_info_text_req_100(struct connection *pc, enum packet_type type)
+{
+  RECEIVE_PACKET_START(packet_info_text_req, real_packet);
+  {
+    int readin;
+  
+    dio_get_uint32(&din, &readin);
+    real_packet->x = readin;
+  }
+  {
+    int readin;
+  
+    dio_get_uint32(&din, &readin);
+    real_packet->y = readin;
+  }
+  {
+    int readin;
+  
+    dio_get_uint32(&din, &readin);
+    real_packet->visible_unit = readin;
+  }
+
+  RECEIVE_PACKET_END(real_packet);
+}
+
+static int send_packet_info_text_req_100(struct connection *pc, const struct packet_info_text_req *packet)
+{
+  const struct packet_info_text_req *real_packet = packet;
+  SEND_PACKET_START(PACKET_INFO_TEXT_REQ);
+
+  dio_put_uint32(&dout, real_packet->x);
+  dio_put_uint32(&dout, real_packet->y);
+  dio_put_uint32(&dout, real_packet->visible_unit);
+
+  SEND_PACKET_END;
+}
+
+static void ensure_valid_variant_packet_info_text_req(struct connection *pc)
+{
+  int variant = -1;
+
+  if(pc->phs.variant[PACKET_INFO_TEXT_REQ] != -1) {
+    return;
+  }
+
+  if(FALSE) {
+  } else if(TRUE) {
+    variant = 100;
+  } else {
+    die("unknown variant");
+  }
+  pc->phs.variant[PACKET_INFO_TEXT_REQ] = variant;
+}
+
+struct packet_info_text_req *receive_packet_info_text_req(struct connection *pc, enum packet_type type)
+{
+  if(!pc->used) {
+    freelog(LOG_ERROR,
+	    "WARNING: trying to read data from the closed connection %s",
+	    conn_description(pc));
+    return NULL;
+  }
+  assert(pc->phs.variant != NULL);
+  if (!pc->is_server) {
+    freelog(LOG_ERROR, "Receiving packet_info_text_req at the client.");
+  }
+  ensure_valid_variant_packet_info_text_req(pc);
+
+  switch(pc->phs.variant[PACKET_INFO_TEXT_REQ]) {
+    case 100: return receive_packet_info_text_req_100(pc, type);
+    default: die("unknown variant"); return NULL;
+  }
+}
+
+int send_packet_info_text_req(struct connection *pc, const struct packet_info_text_req *packet)
+{
+  if(!pc->used) {
+    freelog(LOG_ERROR,
+	    "WARNING: trying to send data to the closed connection %s",
+	    conn_description(pc));
+    return -1;
+  }
+  assert(pc->phs.variant != NULL);
+  if (pc->is_server) {
+    freelog(LOG_ERROR, "Sending packet_info_text_req from the server.");
+  }
+  ensure_valid_variant_packet_info_text_req(pc);
+
+  switch(pc->phs.variant[PACKET_INFO_TEXT_REQ]) {
+    case 100: return send_packet_info_text_req_100(pc, packet);
+    default: die("unknown variant"); return -1;
+  }
+}
+
+int dsend_packet_info_text_req(struct connection *pc, int x, int y, int visible_unit)
+{
+  struct packet_info_text_req packet, *real_packet = &packet;
+
+  real_packet->x = x;
+  real_packet->y = y;
+  real_packet->visible_unit = visible_unit;
+  
+  return send_packet_info_text_req(pc, real_packet);
+}
+
+static struct packet_info_text_message *receive_packet_info_text_message_100(struct connection *pc, enum packet_type type)
+{
+  RECEIVE_PACKET_START(packet_info_text_message, real_packet);
+  dio_get_string(&din, real_packet->message, sizeof(real_packet->message));
+
+  RECEIVE_PACKET_END(real_packet);
+}
+
+static int send_packet_info_text_message_100(struct connection *pc, const struct packet_info_text_message *packet)
+{
+  const struct packet_info_text_message *real_packet = packet;
+  SEND_PACKET_START(PACKET_INFO_TEXT_MESSAGE);
+
+  dio_put_string(&dout, real_packet->message);
+
+  SEND_PACKET_END;
+}
+
+static void ensure_valid_variant_packet_info_text_message(struct connection *pc)
+{
+  int variant = -1;
+
+  if(pc->phs.variant[PACKET_INFO_TEXT_MESSAGE] != -1) {
+    return;
+  }
+
+  if(FALSE) {
+  } else if(TRUE) {
+    variant = 100;
+  } else {
+    die("unknown variant");
+  }
+  pc->phs.variant[PACKET_INFO_TEXT_MESSAGE] = variant;
+}
+
+struct packet_info_text_message *receive_packet_info_text_message(struct connection *pc, enum packet_type type)
+{
+  if(!pc->used) {
+    freelog(LOG_ERROR,
+	    "WARNING: trying to read data from the closed connection %s",
+	    conn_description(pc));
+    return NULL;
+  }
+  assert(pc->phs.variant != NULL);
+  if (pc->is_server) {
+    freelog(LOG_ERROR, "Receiving packet_info_text_message at the server.");
+  }
+  ensure_valid_variant_packet_info_text_message(pc);
+
+  switch(pc->phs.variant[PACKET_INFO_TEXT_MESSAGE]) {
+    case 100: return receive_packet_info_text_message_100(pc, type);
+    default: die("unknown variant"); return NULL;
+  }
+}
+
+int send_packet_info_text_message(struct connection *pc, const struct packet_info_text_message *packet)
+{
+  if(!pc->used) {
+    freelog(LOG_ERROR,
+	    "WARNING: trying to send data to the closed connection %s",
+	    conn_description(pc));
+    return -1;
+  }
+  assert(pc->phs.variant != NULL);
+  if (!pc->is_server) {
+    freelog(LOG_ERROR, "Sending packet_info_text_message from the client.");
+  }
+  ensure_valid_variant_packet_info_text_message(pc);
+
+  switch(pc->phs.variant[PACKET_INFO_TEXT_MESSAGE]) {
+    case 100: return send_packet_info_text_message_100(pc, packet);
+    default: die("unknown variant"); return -1;
+  }
+}
+
+int dsend_packet_info_text_message(struct connection *pc, const char *message)
+{
+  struct packet_info_text_message packet, *real_packet = &packet;
+
+  sz_strlcpy(real_packet->message, message);
+  
+  return send_packet_info_text_message(pc, real_packet);
 }
 

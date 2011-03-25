@@ -124,5 +124,6 @@ void handle_vote_update(int vote_no, int yes, int no, int abstain, int num_voter
 void handle_vote_remove(int vote_no);
 void handle_vote_resolve(int vote_no, bool passed);
 void handle_edit_object_created(int tag, int id);
+void handle_info_text_message(char *message);
 
 #endif /* FC__PACKHAND_GEN_H */

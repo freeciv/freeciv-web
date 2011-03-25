@@ -121,5 +121,7 @@ void change_playertile_site(struct player_tile *ptile,
 
 void create_base(struct tile *ptile, struct base_type *pbase,
                  struct player *pplayer);
+void handle_info_text_req(struct player *pplayer, int x, int y, int visible_unit_id);
+
 
 #endif  /* FC__MAPHAND_H */

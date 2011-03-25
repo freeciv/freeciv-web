@@ -303,6 +303,10 @@ function client_handle_packet(p)
     case  "goto_path":
       handle_goto_path(p[i]);
       break;
+
+    case  "info_text_message":
+      handle_info_text_message(p[i]);
+      break;
  
     }
   }

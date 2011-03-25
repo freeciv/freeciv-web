@@ -1748,3 +1748,14 @@ PACKET_EDIT_OBJECT_CREATED=181;sc,dsend
   SINT32 tag;
   SINT32 id;
 end
+
+/*************** Webclient specific packets ****************/
+PACKET_INFO_TEXT_REQ=186;cs,dsend
+  COORD x, y;
+  UNIT visible_unit; 
+end
+
+PACKET_INFO_TEXT_MESSAGE=187;sc,dsend
+  STRING message[MAX_LEN_MSG];
+end
+

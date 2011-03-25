@@ -49,9 +49,12 @@ if (username == null || "null".equals(username)) {
   String PATTERN_VALIDATE_ALPHA_NUMERIC = "[0-9a-zA-Z\\.]*";
   Pattern p = Pattern.compile(PATTERN_VALIDATE_ALPHA_NUMERIC);
   if (!p.matcher(username).matches()) {
-     out.println("<h3>Invalid username, it contains invalid characters. Please go back, and try again.</h3>");
-  } else if(username.equals("null") || username.length() >= 32 || username.length() <= 3 ) {
-     out.println("<h3>Invalid username, it is too long or short. Please go back, and try again.</h3>");
+    out.println("<h2>Invalid username<h2><h3> Your username contains invalid characters. Please go back, and try again.</h3>");
+  } else if(username.length() >= 32 ) {
+    out.println("<h2>Invalid username</h2><h3>Your username was too long. Please go back, choose a username shorter than 32 characters and log in again.</h3>");
+  } else if(username.equals("null") || username.length() <= 3 ) {
+    out.println("<h2>Invalid username</h2><h3>Your username is too short. Please go back, choose a username longer than 3 characters and try again.</h3>");
+
   } else {
 
    Context env = (Context)(new InitialContext().lookup("java:comp/env"));

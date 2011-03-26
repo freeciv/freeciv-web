@@ -6118,6 +6118,19 @@ static struct packet_player_info *receive_packet_player_info_100(struct connecti
       dio_get_diplstate(&din, &real_packet->diplstates[i]);
     }
   }
+  
+  {
+    int i;
+  
+    for (i = 0; i < MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS; i++) {
+      {
+    int readin;
+  
+    dio_get_uint32(&din, &readin);
+    real_packet->love[i] = readin;
+  }
+    }
+  }
   {
     int readin;
   
@@ -6221,19 +6234,6 @@ static struct packet_player_info *receive_packet_player_info_100(struct connecti
   {
     int i;
   
-    for (i = 0; i < MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS; i++) {
-      {
-    int readin;
-  
-    dio_get_sint16(&din, &readin);
-    real_packet->love[i] = readin;
-  }
-    }
-  }
-  
-  {
-    int i;
-  
     for (i = 0; i < B_LAST; i++) {
       {
     int readin;
@@ -6283,6 +6283,14 @@ static int send_packet_player_info_100(struct connection *pc, const struct packe
         dio_put_diplstate(&dout, &real_packet->diplstates[i]);
       }
     } 
+
+    {
+      int i;
+
+      for (i = 0; i < MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS; i++) {
+        dio_put_uint32(&dout, real_packet->love[i]);
+      }
+    } 
   dio_put_uint32(&dout, real_packet->gold);
   dio_put_uint32(&dout, real_packet->tax);
   dio_put_uint32(&dout, real_packet->science);
@@ -6302,14 +6310,6 @@ static int send_packet_player_info_100(struct connection *pc, const struct packe
   dio_put_uint8(&dout, real_packet->barbarian_type);
   dio_put_uint32(&dout, real_packet->gives_shared_vision);
   dio_put_string(&dout, real_packet->inventions);
-
-    {
-      int i;
-
-      for (i = 0; i < MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS; i++) {
-        dio_put_sint16(&dout, real_packet->love[i]);
-      }
-    } 
 
     {
       int i;

@@ -408,6 +408,7 @@ struct packet_player_info {
   int nturns_idle;
   bool is_alive;
   struct player_diplstate diplstates[MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS];
+  int love[MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS];
   int gold;
   int tax;
   int science;
@@ -427,7 +428,6 @@ struct packet_player_info {
   int barbarian_type;
   unsigned int gives_shared_vision;
   char inventions[A_LAST+1];
-  int love[MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS];
   int wonders[B_LAST];
 };
 

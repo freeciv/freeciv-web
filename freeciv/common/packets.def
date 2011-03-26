@@ -704,6 +704,8 @@ PACKET_PLAYER_INFO=39;sc
   BOOL is_alive;
 
   DIPLSTATE diplstates[MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS];
+
+  UINT32 love[MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS];
   
   GOLD gold;
   PERCENT tax, science,luxury;
@@ -724,7 +726,6 @@ PACKET_PLAYER_INFO=39;sc
   UINT8 barbarian_type;
   VISION gives_shared_vision;
   STRING inventions[A_LAST+1];
-  SINT16 love[MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS];
 
   CITY wonders[B_LAST]; diff
 end

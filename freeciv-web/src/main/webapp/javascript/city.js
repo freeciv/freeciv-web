@@ -60,10 +60,7 @@ function remove_city(pcity_id)
 {
  if (pcity_id == null) return;
  
- var pcity = cities[city_id];
- if (pcity != null && cities.indexOf(pcity) >= 0) {
-   cities.splice(cities.indexOf(pcity), 1);
- }
+ delete cities[city_id];
  
 }
 

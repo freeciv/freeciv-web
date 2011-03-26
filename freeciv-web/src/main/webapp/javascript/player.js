@@ -16,6 +16,7 @@
 var players = {};
 var MAX_NUM_PLAYERS = 30;
 
+var MAX_AI_LOVE = 1000;
 
 var DS_ARMISTICE = 0;
 var DS_WAR = 1;

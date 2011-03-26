@@ -754,7 +754,7 @@ static void package_player_common(struct player *plr,
   packet->ai = plr->ai_data.control;
   packet->ai_skill_level = plr->ai_data.control ? plr->ai_data.skill_level : 0;
   for (i = 0; i < MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS; i++) {
-    packet->love[i] = plr->ai_data.love[i];
+    packet->love[i] = plr->ai_data.love[i] + MAX_AI_LOVE;
   }
   packet->barbarian_type = plr->ai_data.barbarian_type;
 

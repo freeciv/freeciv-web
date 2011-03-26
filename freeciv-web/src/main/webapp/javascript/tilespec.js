@@ -179,7 +179,6 @@ function fill_sprite_array(layer, ptile, pedge, pcorner, punit, pcity, citymode)
       if (active_city != null && ptile != null && ptile['worked'] != null && active_city['id'] == ptile['worked']) {
         sprite_array.push(get_city_active_worked_sprite());
       } else if (active_city != null && ptile != null && ptile['worked'] != 0) {
-        console.log(ptile['worked']);
         sprite_array.push(get_city_invalid_worked_sprite());
       }
 

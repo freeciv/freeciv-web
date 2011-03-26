@@ -46,7 +46,7 @@ function updateProgress()
 
 window.onload=fc_redirect_init;
 
-setInterval ( "updateProgress()", 1000 );
+setInterval ( "updateProgress()", 500 );
 
 
 </script>

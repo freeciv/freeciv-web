@@ -15,10 +15,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Freeciv 2.1-beta1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-05 14:01+0100\n"
+"POT-Creation-Date: 2011-03-26 13:15+0100\n"
 "PO-Revision-Date: 2007-08-11 01:51+0300\n"
 "Last-Translator: Claudio M. Camacho <claudiomkd@gmail.com>\n"
 "Language-Team: Español <es@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-15\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -964,9 +965,9 @@ msgstr "Transformar"
 msgid "Base"
 msgstr "Desidia"
 
-#: common/unit.c:559 client/text.c:160 client/gui-gtk-2.0/editprop.c:5741
-#: client/gui-sdl/citydlg.c:1972 client/gui-win32/citydlg.c:1229
-#: client/gui-xaw/citydlg.c:1462
+#: common/unit.c:559 server/maphand.c:1952 client/text.c:160
+#: client/gui-gtk-2.0/editprop.c:5741 client/gui-sdl/citydlg.c:1972
+#: client/gui-win32/citydlg.c:1229 client/gui-xaw/citydlg.c:1462
 msgid "Unknown"
 msgstr "Desconocido"
 
@@ -1379,8 +1380,8 @@ msgstr "*%s (Ordenador)* Primero rompe tu alianza con %s, %s."
 #: ai/advdiplomacy.c:335
 #, fuzzy, c-format
 msgid ""
-"*%s (AI)* I would like to see you keep your distance from %s for some time, %"
-"s."
+"*%s (AI)* I would like to see you keep your distance from %s for some time, "
+"%s."
 msgstr ""
 "*%s (Ordenador)* Antes me gustaría que mantuvieses la tregua por un poco más "
 "de tiempo, %s."
@@ -1541,11 +1542,11 @@ msgid_plural ""
 "*%s (AI)* We intend to pillage and plunder the rich civilization of %s. We "
 "declare war in %d turns."
 msgstr[0] ""
-"*%s (Ordenador)* Tenemos la intención de alcanzar la rica civilización de %"
-"s. Nosotros declararemos la guerra en %d turno."
+"*%s (Ordenador)* Tenemos la intención de alcanzar la rica civilización de "
+"%s. Nosotros declararemos la guerra en %d turno."
 msgstr[1] ""
-"*%s (Ordenador)* Tenemos la intención de alcanzar la rica civilización de %"
-"s. Nosotros declararemos la guerra en %d turnos."
+"*%s (Ordenador)* Tenemos la intención de alcanzar la rica civilización de "
+"%s. Nosotros declararemos la guerra en %d turnos."
 
 #: ai/advdiplomacy.c:1302
 #, c-format
@@ -1651,8 +1652,8 @@ msgstr ""
 #: ai/advdiplomacy.c:1611
 #, c-format
 msgid ""
-"*%s (AI)* Greetings ally, I see you have not yet made war with our enemy, %"
-"s. Why do I need to remind you of your promises?"
+"*%s (AI)* Greetings ally, I see you have not yet made war with our enemy, "
+"%s. Why do I need to remind you of your promises?"
 msgstr ""
 "*%s (Ordenador)* Saludos, aliado.  Veo que aún no has emprendido la guerra "
 "contra nuestro enemigo, %s.  ¿Por qué tengo que recordarte tus promesas?"
@@ -4305,11 +4306,11 @@ msgstr "No hay ninguna conexión llamada %s."
 msgid "There is no player nor connection by the name %s."
 msgstr "No hay ningún jugador ni conexión llamado %s."
 
-#: server/maphand.c:120
+#: server/maphand.c:121
 msgid "Global warming has occurred!"
 msgstr "¡Hay calentamiento global!"
 
-#: server/maphand.c:122
+#: server/maphand.c:123
 msgid ""
 "Coastlines have been flooded and vast ranges of grassland have become "
 "deserts."
@@ -4317,17 +4318,17 @@ msgstr ""
 "Las costas se han inundado y extensas áreas de praderas se han transformado "
 "en desierto."
 
-#: server/maphand.c:164
+#: server/maphand.c:165
 msgid "Nuclear winter has occurred!"
 msgstr "¡Ha llegado el Invierno Nuclear!"
 
-#: server/maphand.c:166
+#: server/maphand.c:167
 msgid "Wetlands have dried up and vast ranges of grassland have become tundra."
 msgstr ""
 "Las marismas se han secado y extensas áreas de praderas se han transformado "
 "en tundra."
 
-#: server/maphand.c:187
+#: server/maphand.c:188
 msgid ""
 "New hope sweeps like fire through the country as the discovery of railroad "
 "is announced.\n"
@@ -4337,7 +4338,7 @@ msgstr ""
 "       Los obreros se reúnen espontáneamente e instalan vías férreas en "
 "todas las ciudades."
 
-#: server/maphand.c:193
+#: server/maphand.c:194
 msgid ""
 "The people are pleased to hear that your scientists finally know about "
 "railroads.\n"
@@ -4348,15 +4349,234 @@ msgstr ""
 "       Los obreros se reúnen espontáneamente e instalan vías férreas en "
 "todas las ciudades."
 
-#: server/maphand.c:1380
+#: server/maphand.c:1381
 #, c-format
 msgid "Moved your %s due to changing terrain."
 msgstr "Tu %s se ha movido al transformar el terreno."
 
-#: server/maphand.c:1398
+#: server/maphand.c:1399
 #, c-format
 msgid "Disbanded your %s due to changing terrain."
 msgstr "Se desarticula a tu %s al transformar el terreno."
+
+#. TRANS: "<nation adjective>, team <team name>"
+#: server/maphand.c:1888 client/text.c:121
+#, fuzzy, c-format
+msgid "%s, team %s"
+msgstr ", equipo %s"
+
+#. TRANS: "AI <player name>"
+#: server/maphand.c:1915 client/text.c:97
+#, c-format
+msgid "AI %s"
+msgstr ""
+
+#: server/maphand.c:1932 server/maphand.c:1933 server/maphand.c:1938
+#: client/text.c:138 client/text.c:139 client/text.c:144
+#: client/gui-sdl/mapview.c:563
+msgid "?nation:Neutral"
+msgstr "Neutral"
+
+#: server/maphand.c:1932 client/text.c:138 client/gui-sdl/mapview.c:563
+msgid "?nation:Hostile"
+msgstr "Hostil"
+
+#: server/maphand.c:1934 client/text.c:140 client/gui-sdl/mapview.c:565
+msgid "?nation:Peaceful"
+msgstr "Pacífico"
+
+#: server/maphand.c:1934 client/text.c:140 client/gui-sdl/mapview.c:565
+msgid "?nation:Friendly"
+msgstr "Amigable"
+
+#: server/maphand.c:1935 client/text.c:141 client/gui-sdl/mapview.c:566
+msgid "?nation:Mysterious"
+msgstr "Misterioso"
+
+#: server/maphand.c:1935 client/text.c:141
+msgid "?nation:Friendly(team)"
+msgstr "Amigable(equipo)"
+
+#: server/maphand.c:1937 client/text.c:143 client/gui-sdl/mapview.c:596
+msgid "?city:Neutral"
+msgstr "Neutral"
+
+#: server/maphand.c:1937 client/text.c:143 client/gui-sdl/mapview.c:596
+msgid "?city:Hostile"
+msgstr "Hostil"
+
+#: server/maphand.c:1939 client/text.c:145 client/gui-sdl/mapview.c:597
+msgid "?city:Peaceful"
+msgstr "Pacífica"
+
+#: server/maphand.c:1939 client/text.c:145 client/gui-sdl/mapview.c:598
+msgid "?city:Friendly"
+msgstr "Amigable"
+
+#: server/maphand.c:1939 client/text.c:145 client/gui-sdl/mapview.c:598
+msgid "?city:Mysterious"
+msgstr "Misteriosa"
+
+#: server/maphand.c:1940 client/text.c:146
+msgid "?city:Friendly(team)"
+msgstr "Amigable(equipo)"
+
+#: server/maphand.c:1948
+#, fuzzy, c-format
+msgid "Location: (%d, %d)"
+msgstr "Localización: (%d, %d) [%d]"
+
+#: server/maphand.c:1955 client/text.c:163
+#, c-format
+msgid "Terrain: %s"
+msgstr "Terreno: %s"
+
+#: server/maphand.c:1956 client/text.c:164
+#, c-format
+msgid "Food/Prod/Trade: %s"
+msgstr "Alimento/Producción/Comercio: %s"
+
+#: server/maphand.c:1959 client/text.c:167
+msgid "Minor Tribe Village"
+msgstr "Aldea Indígena"
+
+#: server/maphand.c:1968 client/text.c:176
+#, fuzzy
+msgid "Our territory"
+msgstr "Nuestro Territorio"
+
+#. TRANS: "Territory of <username> (<nation + team>)"
+#: server/maphand.c:1971 client/text.c:179
+#, fuzzy, c-format
+msgid "Territory of %s (%s)"
+msgstr ""
+"\n"
+"Territorio de los %s %s"
+
+#: server/maphand.c:1981 client/text.c:189
+#, fuzzy, c-format
+msgid "Territory of %s (%s) (%d turn cease-fire)"
+msgid_plural "Territory of %s (%s) (%d turn cease-fire)"
+msgstr[0] "Ciudad: %s (%s, %d turno de alto el fuego)"
+msgstr[1] "Ciudad: %s (%s, %d turnos de alto el fuego)"
+
+#. TRANS: "Territory of <username>
+#. * (<nation + team> | <diplomatic state>)"
+#: server/maphand.c:1990 client/text.c:198
+#, fuzzy, c-format
+msgid "Territory of %s (%s | %s)"
+msgstr ""
+"\n"
+"Territorio de los %s %s"
+
+#: server/maphand.c:1995 client/text.c:203
+msgid "Unclaimed territory"
+msgstr "Territorio sin reclamar"
+
+#. TRANS: "City: <city name> | <username> (<nation + team>)"
+#: server/maphand.c:2010 client/text.c:218
+#, fuzzy, c-format
+msgid "City: %s | %s (%s)"
+msgstr "Ciudad: %s (%s, %s)"
+
+#. TRANS:  "City: <city name> | <username>
+#. * (<nation + team>, <number> turn cease-fire)"
+#: server/maphand.c:2020 client/text.c:228
+#, fuzzy, c-format
+msgid "City: %s | %s (%s, %d turn cease-fire)"
+msgid_plural "City: %s | %s (%s, %d turn cease-fire)"
+msgstr[0] "Ciudad: %s (%s, %d turno de alto el fuego)"
+msgstr[1] "Ciudad: %s (%s, %d turnos de alto el fuego)"
+
+#. TRANS: "City: <city name> | <username>
+#. * (<nation + team>, <diplomatic state>)"
+#: server/maphand.c:2027 client/text.c:235
+#, fuzzy, c-format
+msgid "City: %s | %s (%s, %s)"
+msgstr "Ciudad: %s (%s, %s)"
+
+#. TRANS: continue list, in case comma is not the separator of choice.
+#: server/maphand.c:2037 server/stdinhand.c:4465 server/stdinhand.c:4469
+#: client/helpdata.c:289 client/helpdata.c:784 client/text.c:245
+#: client/text.c:1313 client/text.c:1350
+#, c-format
+msgid "?clistmore:, %s"
+msgstr ", %s"
+
+#. TRANS: previous lines gave other information about the city.
+#: server/maphand.c:2042 client/text.c:250
+#, fuzzy, c-format
+msgid "?clistbegin: with %s"
+msgstr " con %s"
+
+#. TRANS: This appears with two or more previous entries in the list
+#: server/maphand.c:2052 client/text.c:260
+#, c-format
+msgid "?clistlast:, and %s"
+msgstr ""
+
+#. TRANS: This appears with only one previous entry in the list
+#: server/maphand.c:2056 client/text.c:264
+#, fuzzy, c-format
+msgid "?clistlast: and %s"
+msgstr "Especialistas"
+
+#: server/maphand.c:2059 client/text.c:267 client/text.c:1323
+#: client/text.c:1361
+msgid "?clistend:."
+msgstr "."
+
+#: server/maphand.c:2073 client/text.c:293
+#, c-format
+msgid "Infrastructure: %s"
+msgstr "Infraestructura: %s"
+
+#: server/maphand.c:2078 client/text.c:298
+#, c-format
+msgid "Activity: %s"
+msgstr "Actividad: %s"
+
+#. TRANS: "Unit: <unit type> | <username>
+#. * (<nation + team>, <homecity>)"
+#. TRANS: "Unit: <unit type> | <username> (<nation + team>,
+#. * <diplomatic state>)"
+#. TRANS: "Unit: <unit type> | <username>
+#. * (<nation + team>, <homecity>)"
+#. TRANS: "Unit: <unit type> | <username> (<nation + team>,
+#. * <diplomatic state>)"
+#: server/maphand.c:2093 server/maphand.c:2117 client/text.c:313
+#: client/text.c:337
+#, fuzzy, c-format
+msgid "Unit: %s | %s (%s, %s)"
+msgstr "Unidad: %s (%s, %s)"
+
+#. TRANS: "Unit: <unit type> | <username> (<nation + team>)"
+#: server/maphand.c:2098 client/text.c:318
+#, fuzzy, c-format
+msgid "Unit: %s | %s (%s)"
+msgstr "Unidad: %s (%s, %s)"
+
+#. TRANS:  "Unit: <unit type> | <username> (<nation + team>,
+#. * <number> turn cease-fire)"
+#: server/maphand.c:2109 client/text.c:329
+#, fuzzy, c-format
+msgid "Unit: %s | %s (%s, %d turn cease-fire)"
+msgid_plural "Unit: %s | %s (%s, %d turn cease-fire)"
+msgstr[0] "Unidad: %s (%s, %d turno de alto el fuego)"
+msgstr[1] "Unidad: %s (%s, %d turnos de alto el fuego)"
+
+#. TRANS: A is attack power, D is defense power, FP is firepower,
+#. * HP is hitpoints (current and max).
+#: server/maphand.c:2125 client/text.c:369
+#, c-format
+msgid "A:%d D:%d FP:%d HP:%d/%d (%s)"
+msgstr "A:%d D:%d PF:%d PV:%d/%d (%s)"
+
+#. TRANS: "5 more" units on this tile
+#: server/maphand.c:2134 client/text.c:378
+#, c-format
+msgid "  (%d more)"
+msgstr "  (%d más)"
 
 #: server/meta.c:199
 msgid "Not reporting to the metaserver in this game."
@@ -6526,8 +6746,8 @@ msgstr "La partida ha acabado en tablas"
 #, fuzzy, c-format
 msgid "Your %s was disbanded in accordance with your peace treaty with the %s."
 msgstr ""
-"Tu %s unidad ha sido desarticulada de acuerdo con tu tratado de paz con los %"
-"s."
+"Tu %s unidad ha sido desarticulada de acuerdo con tu tratado de paz con los "
+"%s."
 
 #: server/srv_main.c:562 server/srv_main.c:566
 #, c-format
@@ -7231,8 +7451,8 @@ msgstr ""
 #: server/stdinhand.c:2177
 #, c-format
 msgid ""
-"%s %d \"%s\" (needs %0.0f%%%s): %d for, %d against, and %d abstained out of %"
-"d players."
+"%s %d \"%s\" (needs %0.0f%%%s): %d for, %d against, and %d abstained out of "
+"%d players."
 msgstr ""
 
 #: server/stdinhand.c:2181
@@ -7885,14 +8105,6 @@ msgstr ", Muerto"
 #, c-format
 msgid ", difficulty level %s"
 msgstr ", nivel de dificultad %s"
-
-#. TRANS: continue list, in case comma is not the separator of choice.
-#: server/stdinhand.c:4465 server/stdinhand.c:4469 client/helpdata.c:289
-#: client/helpdata.c:784 client/text.c:245 client/text.c:1313
-#: client/text.c:1350
-#, c-format
-msgid "?clistmore:, %s"
-msgstr ", %s"
 
 #: server/stdinhand.c:4473
 msgid ", ready"
@@ -11713,67 +11925,6 @@ msgstr ""
 msgid "Failed looking up metaserver's host"
 msgstr "Fallo buscando el metaservidor"
 
-#. TRANS: "AI <player name>"
-#: client/text.c:97
-#, c-format
-msgid "AI %s"
-msgstr ""
-
-#. TRANS: "<nation adjective>, team <team name>"
-#: client/text.c:121
-#, fuzzy, c-format
-msgid "%s, team %s"
-msgstr ", equipo %s"
-
-#: client/text.c:138 client/text.c:139 client/text.c:144
-#: client/gui-sdl/mapview.c:563
-msgid "?nation:Neutral"
-msgstr "Neutral"
-
-#: client/text.c:138 client/gui-sdl/mapview.c:563
-msgid "?nation:Hostile"
-msgstr "Hostil"
-
-#: client/text.c:140 client/gui-sdl/mapview.c:565
-msgid "?nation:Peaceful"
-msgstr "Pacífico"
-
-#: client/text.c:140 client/gui-sdl/mapview.c:565
-msgid "?nation:Friendly"
-msgstr "Amigable"
-
-#: client/text.c:141 client/gui-sdl/mapview.c:566
-msgid "?nation:Mysterious"
-msgstr "Misterioso"
-
-#: client/text.c:141
-msgid "?nation:Friendly(team)"
-msgstr "Amigable(equipo)"
-
-#: client/text.c:143 client/gui-sdl/mapview.c:596
-msgid "?city:Neutral"
-msgstr "Neutral"
-
-#: client/text.c:143 client/gui-sdl/mapview.c:596
-msgid "?city:Hostile"
-msgstr "Hostil"
-
-#: client/text.c:145 client/gui-sdl/mapview.c:597
-msgid "?city:Peaceful"
-msgstr "Pacífica"
-
-#: client/text.c:145 client/gui-sdl/mapview.c:598
-msgid "?city:Friendly"
-msgstr "Amigable"
-
-#: client/text.c:145 client/gui-sdl/mapview.c:598
-msgid "?city:Mysterious"
-msgstr "Misteriosa"
-
-#: client/text.c:146
-msgid "?city:Friendly(team)"
-msgstr "Amigable(equipo)"
-
 #: client/text.c:154
 #, c-format
 msgid "Location: (%d, %d) [%d]"
@@ -11784,155 +11935,17 @@ msgstr "Localización: (%d, %d) [%d]"
 msgid "Native coordinates: (%d, %d)"
 msgstr ""
 
-#: client/text.c:163
-#, c-format
-msgid "Terrain: %s"
-msgstr "Terreno: %s"
-
-#: client/text.c:164
-#, c-format
-msgid "Food/Prod/Trade: %s"
-msgstr "Alimento/Producción/Comercio: %s"
-
-#: client/text.c:167
-msgid "Minor Tribe Village"
-msgstr "Aldea Indígena"
-
-#: client/text.c:176
-#, fuzzy
-msgid "Our territory"
-msgstr "Nuestro Territorio"
-
-#. TRANS: "Territory of <username> (<nation + team>)"
-#: client/text.c:179
-#, fuzzy, c-format
-msgid "Territory of %s (%s)"
-msgstr ""
-"\n"
-"Territorio de los %s %s"
-
-#: client/text.c:189
-#, fuzzy, c-format
-msgid "Territory of %s (%s) (%d turn cease-fire)"
-msgid_plural "Territory of %s (%s) (%d turn cease-fire)"
-msgstr[0] "Ciudad: %s (%s, %d turno de alto el fuego)"
-msgstr[1] "Ciudad: %s (%s, %d turnos de alto el fuego)"
-
-#. TRANS: "Territory of <username>
-#. * (<nation + team> | <diplomatic state>)"
-#: client/text.c:198
-#, fuzzy, c-format
-msgid "Territory of %s (%s | %s)"
-msgstr ""
-"\n"
-"Territorio de los %s %s"
-
-#: client/text.c:203
-msgid "Unclaimed territory"
-msgstr "Territorio sin reclamar"
-
-#. TRANS: "City: <city name> | <username> (<nation + team>)"
-#: client/text.c:218
-#, fuzzy, c-format
-msgid "City: %s | %s (%s)"
-msgstr "Ciudad: %s (%s, %s)"
-
-#. TRANS:  "City: <city name> | <username>
-#. * (<nation + team>, <number> turn cease-fire)"
-#: client/text.c:228
-#, fuzzy, c-format
-msgid "City: %s | %s (%s, %d turn cease-fire)"
-msgid_plural "City: %s | %s (%s, %d turn cease-fire)"
-msgstr[0] "Ciudad: %s (%s, %d turno de alto el fuego)"
-msgstr[1] "Ciudad: %s (%s, %d turnos de alto el fuego)"
-
-#. TRANS: "City: <city name> | <username>
-#. * (<nation + team>, <diplomatic state>)"
-#: client/text.c:235
-#, fuzzy, c-format
-msgid "City: %s | %s (%s, %s)"
-msgstr "Ciudad: %s (%s, %s)"
-
-#. TRANS: previous lines gave other information about the city.
-#: client/text.c:250
-#, fuzzy, c-format
-msgid "?clistbegin: with %s"
-msgstr " con %s"
-
-#. TRANS: This appears with two or more previous entries in the list
-#: client/text.c:260
-#, c-format
-msgid "?clistlast:, and %s"
-msgstr ""
-
-#. TRANS: This appears with only one previous entry in the list
-#: client/text.c:264
-#, fuzzy, c-format
-msgid "?clistlast: and %s"
-msgstr "Especialistas"
-
-#: client/text.c:267 client/text.c:1323 client/text.c:1361
-msgid "?clistend:."
-msgstr "."
-
 #. TRANS: "Trade from Warsaw: 5"
 #: client/text.c:277
 #, c-format
 msgid "Trade from %s: %d"
 msgstr "Comercio de %s: %d"
 
-#: client/text.c:293
-#, c-format
-msgid "Infrastructure: %s"
-msgstr "Infraestructura: %s"
-
-#: client/text.c:298
-#, c-format
-msgid "Activity: %s"
-msgstr "Actividad: %s"
-
-#. TRANS: "Unit: <unit type> | <username>
-#. * (<nation + team>, <homecity>)"
-#. TRANS: "Unit: <unit type> | <username> (<nation + team>,
-#. * <diplomatic state>)"
-#: client/text.c:313 client/text.c:337
-#, fuzzy, c-format
-msgid "Unit: %s | %s (%s, %s)"
-msgstr "Unidad: %s (%s, %s)"
-
-#. TRANS: "Unit: <unit type> | <username> (<nation + team>)"
-#: client/text.c:318
-#, fuzzy, c-format
-msgid "Unit: %s | %s (%s)"
-msgstr "Unidad: %s (%s, %s)"
-
-#. TRANS:  "Unit: <unit type> | <username> (<nation + team>,
-#. * <number> turn cease-fire)"
-#: client/text.c:329
-#, fuzzy, c-format
-msgid "Unit: %s | %s (%s, %d turn cease-fire)"
-msgid_plural "Unit: %s | %s (%s, %d turn cease-fire)"
-msgstr[0] "Unidad: %s (%s, %d turno de alto el fuego)"
-msgstr[1] "Unidad: %s (%s, %d turnos de alto el fuego)"
-
 #. TRANS: "Chance to win: A:95% D:46%"
 #: client/text.c:362
 #, c-format
 msgid "Chance to win: A:%d%% D:%d%%"
 msgstr "Prop. de ganar: A:%d%% D:%d%%"
-
-#. TRANS: A is attack power, D is defense power, FP is firepower,
-#. * HP is hitpoints (current and max).
-#: client/text.c:369
-#, c-format
-msgid "A:%d D:%d FP:%d HP:%d/%d (%s)"
-msgstr "A:%d D:%d PF:%d PV:%d/%d (%s)"
-
-#. TRANS: "5 more" units on this tile
-#: client/text.c:378
-#, c-format
-msgid "  (%d more)"
-msgstr "  (%d más)"
 
 #. TRANS: on own line immediately following \n, ... <city>
 #: client/text.c:475
@@ -30378,8 +30391,8 @@ msgstr ""
 
 #~ msgid "Cannot find savegame or scenario with the name \"%s\"."
 #~ msgstr ""
-#~ "No se pudo encontrar una partida guardada o un escenario con el nombre \"%"
-#~ "s\"."
+#~ "No se pudo encontrar una partida guardada o un escenario con el nombre "
+#~ "\"%s\"."
 
 #~ msgid "Orders for %s aborted since they give an invalid location."
 #~ msgstr ""
@@ -32289,8 +32302,8 @@ msgstr ""
 #~ "experimentado."
 
 #~ msgid ""
-#~ "Your %s has successfully completed her mission and returned unharmed to %"
-#~ "s and has become more experienced."
+#~ "Your %s has successfully completed her mission and returned unharmed to "
+#~ "%s and has become more experienced."
 #~ msgstr ""
 #~ "Tu %s ha completado su misión con éxito y ha vuelto ileso a %s y se ha "
 #~ "vuelto más experimentado."
@@ -32321,11 +32334,11 @@ msgstr ""
 #~ "Your attacking %s succeeded against %s's %s (and %d other units)%s and "
 #~ "became more experienced!"
 #~ msgstr[0] ""
-#~ "¡Tu %1$s ha atacado y destruido a un %3$s de %2$s (y %4$d unidad más) %5"
-#~ "$s y se ha vuelto más experimentado!"
+#~ "¡Tu %1$s ha atacado y destruido a un %3$s de %2$s (y %4$d unidad más) "
+#~ "%5$s y se ha vuelto más experimentado!"
 #~ msgstr[1] ""
-#~ "¡Tu %1$s ha atacado y destruido a un %3$s de %2$s (y %4$d unidades más) %5"
-#~ "$s y se ha vuelto más experimentado!"
+#~ "¡Tu %1$s ha atacado y destruido a un %3$s de %2$s (y %4$d unidades más) "
+#~ "%5$s y se ha vuelto más experimentado!"
 
 #~ msgid "%s lost to an attack from %s's %s."
 #~ msgstr "Has perdido un %1$s bajo un ataque de un %3$s de %2$s."
@@ -32437,8 +32450,8 @@ msgstr ""
 #~ msgstr "No se pudo convertir el texto a mostrar: %s"
 
 #~ msgid ""
-#~ "Error in SDL_create_str16_surf: Couldn't convert text to display format: %"
-#~ "s"
+#~ "Error in SDL_create_str16_surf: Couldn't convert text to display format: "
+#~ "%s"
 #~ msgstr ""
 #~ "Error en SDL_create_str16_surf: No se puede convertir el texto al "
 #~ "formato: %s"
@@ -33099,8 +33112,8 @@ msgstr ""
 #~ "Number of starts (%d) are lower than rules.max_players (%d), lowering "
 #~ "rules.max_players."
 #~ msgstr ""
-#~ "El número de posiciones iniciales (%d) es menor que rules.max_players (%"
-#~ "d), reduciendo rules.max_players."
+#~ "El número de posiciones iniciales (%d) es menor que rules.max_players "
+#~ "(%d), reduciendo rules.max_players."
 
 #~ msgid "Wrong unit type id value (%d)"
 #~ msgstr "Tipo de unidad incorrecto (%d)"
@@ -33526,8 +33539,8 @@ msgstr ""
 #~ "Game: %s is at war with one of your allies - an alliance with %s is "
 #~ "impossible."
 #~ msgstr ""
-#~ "Juego: %s está en guerra con uno de tus aliados - no te puedes aliar con %"
-#~ "s."
+#~ "Juego: %s está en guerra con uno de tus aliados - no te puedes aliar con "
+#~ "%s."
 
 #~ msgid "Game: You agree on a peace treaty with %s."
 #~ msgstr "Juego: Has pactado la paz con los %s."
@@ -35645,8 +35658,8 @@ msgstr ""
 #~ msgstr "Valor inválido para $http_proxy, falta la '/' de separación"
 
 #~ msgid ""
-#~ "(The %s improvement is also required for a city to grow larger than size %"
-#~ "d.)  "
+#~ "(The %s improvement is also required for a city to grow larger than size "
+#~ "%d.)  "
 #~ msgstr ""
 #~ "(También hace falta un %s para que una ciudad crezca a un tamaño mayor "
 #~ "que %d).  "

@@ -9,10 +9,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-05 14:01+0100\n"
+"POT-Creation-Date: 2011-03-26 13:15+0100\n"
 "PO-Revision-Date: 2008-06-01 16:36+0300\n"
 "Last-Translator: Uğur Çetin <jnmbk@users.sourceforge.net>\n"
 "Language-Team: Turkish <yerellestirme@kde.org.tr>\n"
+"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -881,9 +882,9 @@ msgstr "Dönüştür"
 msgid "Base"
 msgstr "Üs"
 
-#: common/unit.c:559 client/text.c:160 client/gui-gtk-2.0/editprop.c:5741
-#: client/gui-sdl/citydlg.c:1972 client/gui-win32/citydlg.c:1229
-#: client/gui-xaw/citydlg.c:1462
+#: common/unit.c:559 server/maphand.c:1952 client/text.c:160
+#: client/gui-gtk-2.0/editprop.c:5741 client/gui-sdl/citydlg.c:1972
+#: client/gui-win32/citydlg.c:1229 client/gui-xaw/citydlg.c:1462
 msgid "Unknown"
 msgstr "Bilinmeyen"
 
@@ -1283,8 +1284,8 @@ msgstr "*%s (YZ)* Önce %s ile yaptığın ittifakı boz, %s."
 #: ai/advdiplomacy.c:335
 #, fuzzy, c-format
 msgid ""
-"*%s (AI)* I would like to see you keep your distance from %s for some time, %"
-"s."
+"*%s (AI)* I would like to see you keep your distance from %s for some time, "
+"%s."
 msgstr ""
 "*%s (YZ)* Öncelikle yaptığımız ateşkesi biraz uzunca tutacağını umuyorum, %s."
 
@@ -1520,8 +1521,8 @@ msgstr ""
 #: ai/advdiplomacy.c:1611
 #, c-format
 msgid ""
-"*%s (AI)* Greetings ally, I see you have not yet made war with our enemy, %"
-"s. Why do I need to remind you of your promises?"
+"*%s (AI)* Greetings ally, I see you have not yet made war with our enemy, "
+"%s. Why do I need to remind you of your promises?"
 msgstr ""
 "*%s (YZ)* Merhaba müttefikimiz, hâlâ düşmanımız %s ile savaşa başlamadın. "
 "Tuttuğun sözü hatırlatmama neden gerek var?"
@@ -1624,8 +1625,8 @@ msgid ""
 "There was an error reading the user database, logging in as guest connection "
 "'%s'."
 msgstr ""
-"Kullanıcı veritabanı okunurken bir hata oluştu. Misafir olarak giriliyor: '%"
-"s'."
+"Kullanıcı veritabanı okunurken bir hata oluştu. Misafir olarak giriliyor: "
+"'%s'."
 
 #: server/auth.c:428
 msgid ""
@@ -4132,25 +4133,25 @@ msgstr "%s isimli bir bağlantı yok."
 msgid "There is no player nor connection by the name %s."
 msgstr "%s adında bir oyuncu veya bağlantı yok"
 
-#: server/maphand.c:120
+#: server/maphand.c:121
 msgid "Global warming has occurred!"
 msgstr "Küresel Isınma başladı!"
 
-#: server/maphand.c:122
+#: server/maphand.c:123
 msgid ""
 "Coastlines have been flooded and vast ranges of grassland have become "
 "deserts."
 msgstr "Kıyılara sel bastı ve ovalar çöl oldu."
 
-#: server/maphand.c:164
+#: server/maphand.c:165
 msgid "Nuclear winter has occurred!"
 msgstr "Nükleer Kış başladı!"
 
-#: server/maphand.c:166
+#: server/maphand.c:167
 msgid "Wetlands have dried up and vast ranges of grassland have become tundra."
 msgstr "Yaş araziler kurudu ve otlaklar tundraya dönüştü."
 
-#: server/maphand.c:187
+#: server/maphand.c:188
 msgid ""
 "New hope sweeps like fire through the country as the discovery of railroad "
 "is announced.\n"
@@ -4159,7 +4160,7 @@ msgstr ""
 "Demiryolunun keşfi ile milyonlara bir umut doğdu.\n"
 "       İşçiler kısa bir zaman içinde bütün şehirleri raylarla donattı."
 
-#: server/maphand.c:193
+#: server/maphand.c:194
 msgid ""
 "The people are pleased to hear that your scientists finally know about "
 "railroads.\n"
@@ -4168,15 +4169,230 @@ msgstr ""
 "İnsanlarınız en sonunda demiryolunu keşfedebildiğiniz için sevindiler.\n"
 "       İşçiler kısa bir zaman içinde bütün şehirleri raylarla donattı."
 
-#: server/maphand.c:1380
+#: server/maphand.c:1381
 #, c-format
 msgid "Moved your %s due to changing terrain."
 msgstr "%s, bulunduğu arazinin türü değiştiği için taşındı."
 
-#: server/maphand.c:1398
+#: server/maphand.c:1399
 #, c-format
 msgid "Disbanded your %s due to changing terrain."
 msgstr "%s, bulunduğu arazinin türü değiştiği için terhis edildi."
+
+#. TRANS: "<nation adjective>, team <team name>"
+#: server/maphand.c:1888 client/text.c:121
+#, fuzzy, c-format
+msgid "%s, team %s"
+msgstr "%s yönetimindeki %s"
+
+#. TRANS: "AI <player name>"
+#: server/maphand.c:1915 client/text.c:97
+#, c-format
+msgid "AI %s"
+msgstr ""
+
+#: server/maphand.c:1932 server/maphand.c:1933 server/maphand.c:1938
+#: client/text.c:138 client/text.c:139 client/text.c:144
+#: client/gui-sdl/mapview.c:563
+msgid "?nation:Neutral"
+msgstr "Tarafsız"
+
+#: server/maphand.c:1932 client/text.c:138 client/gui-sdl/mapview.c:563
+msgid "?nation:Hostile"
+msgstr "Düşmanca"
+
+#: server/maphand.c:1934 client/text.c:140 client/gui-sdl/mapview.c:565
+msgid "?nation:Peaceful"
+msgstr "Barışçıl"
+
+#: server/maphand.c:1934 client/text.c:140 client/gui-sdl/mapview.c:565
+msgid "?nation:Friendly"
+msgstr "Arkadaşça"
+
+#: server/maphand.c:1935 client/text.c:141 client/gui-sdl/mapview.c:566
+msgid "?nation:Mysterious"
+msgstr "Gizemli"
+
+#: server/maphand.c:1935 client/text.c:141
+msgid "?nation:Friendly(team)"
+msgstr "Arkadaşça(takım)"
+
+#: server/maphand.c:1937 client/text.c:143 client/gui-sdl/mapview.c:596
+msgid "?city:Neutral"
+msgstr "Tarafsız"
+
+#: server/maphand.c:1937 client/text.c:143 client/gui-sdl/mapview.c:596
+msgid "?city:Hostile"
+msgstr "Düşmanca"
+
+#: server/maphand.c:1939 client/text.c:145 client/gui-sdl/mapview.c:597
+msgid "?city:Peaceful"
+msgstr "Barışçıl"
+
+#: server/maphand.c:1939 client/text.c:145 client/gui-sdl/mapview.c:598
+msgid "?city:Friendly"
+msgstr "Arkadaşça"
+
+#: server/maphand.c:1939 client/text.c:145 client/gui-sdl/mapview.c:598
+msgid "?city:Mysterious"
+msgstr "Gizemli"
+
+#: server/maphand.c:1940 client/text.c:146
+msgid "?city:Friendly(team)"
+msgstr "Arkadaşça(takım)"
+
+#: server/maphand.c:1948
+#, fuzzy, c-format
+msgid "Location: (%d, %d)"
+msgstr "Yer: (%d, %d) [%d]"
+
+#: server/maphand.c:1955 client/text.c:163
+#, c-format
+msgid "Terrain: %s"
+msgstr "Arazi: %s"
+
+#: server/maphand.c:1956 client/text.c:164
+#, c-format
+msgid "Food/Prod/Trade: %s"
+msgstr "Gıda/Üretim/Ticaret: %s"
+
+#: server/maphand.c:1959 client/text.c:167
+msgid "Minor Tribe Village"
+msgstr "Ufak Yerli Köy"
+
+#: server/maphand.c:1968 client/text.c:176
+msgid "Our territory"
+msgstr "Bizim topraklarımız"
+
+#. TRANS: "Territory of <username> (<nation + team>)"
+#: server/maphand.c:1971 client/text.c:179
+#, fuzzy, c-format
+msgid "Territory of %s (%s)"
+msgstr ""
+"\n"
+"%s (%s) tarafının toprakları"
+
+#: server/maphand.c:1981 client/text.c:189
+#, fuzzy, c-format
+msgid "Territory of %s (%s) (%d turn cease-fire)"
+msgid_plural "Territory of %s (%s) (%d turn cease-fire)"
+msgstr[0] "Şehir: %s (%s, %d sıra ateşkes)"
+
+#. TRANS: "Territory of <username>
+#. * (<nation + team> | <diplomatic state>)"
+#: server/maphand.c:1990 client/text.c:198
+#, fuzzy, c-format
+msgid "Territory of %s (%s | %s)"
+msgstr ""
+"\n"
+"%s (%s) tarafının toprakları"
+
+#: server/maphand.c:1995 client/text.c:203
+msgid "Unclaimed territory"
+msgstr "Sahipsiz bölge"
+
+#. TRANS: "City: <city name> | <username> (<nation + team>)"
+#: server/maphand.c:2010 client/text.c:218
+#, fuzzy, c-format
+msgid "City: %s | %s (%s)"
+msgstr "Şehir: %s (%s, %s)"
+
+#. TRANS:  "City: <city name> | <username>
+#. * (<nation + team>, <number> turn cease-fire)"
+#: server/maphand.c:2020 client/text.c:228
+#, fuzzy, c-format
+msgid "City: %s | %s (%s, %d turn cease-fire)"
+msgid_plural "City: %s | %s (%s, %d turn cease-fire)"
+msgstr[0] "Şehir: %s (%s, %d sıra ateşkes)"
+
+#. TRANS: "City: <city name> | <username>
+#. * (<nation + team>, <diplomatic state>)"
+#: server/maphand.c:2027 client/text.c:235
+#, fuzzy, c-format
+msgid "City: %s | %s (%s, %s)"
+msgstr "Şehir: %s (%s, %s)"
+
+#. TRANS: continue list, in case comma is not the separator of choice.
+#: server/maphand.c:2037 server/stdinhand.c:4465 server/stdinhand.c:4469
+#: client/helpdata.c:289 client/helpdata.c:784 client/text.c:245
+#: client/text.c:1313 client/text.c:1350
+#, c-format
+msgid "?clistmore:, %s"
+msgstr ", %s"
+
+#. TRANS: previous lines gave other information about the city.
+#: server/maphand.c:2042 client/text.c:250
+#, c-format
+msgid "?clistbegin: with %s"
+msgstr " %s ile birlikte"
+
+#. TRANS: This appears with two or more previous entries in the list
+#: server/maphand.c:2052 client/text.c:260
+#, fuzzy, c-format
+msgid "?clistlast:, and %s"
+msgstr ", %s"
+
+#. TRANS: This appears with only one previous entry in the list
+#: server/maphand.c:2056 client/text.c:264
+#, fuzzy, c-format
+msgid "?clistlast: and %s"
+msgstr ", %s"
+
+#: server/maphand.c:2059 client/text.c:267 client/text.c:1323
+#: client/text.c:1361
+msgid "?clistend:."
+msgstr "."
+
+#: server/maphand.c:2073 client/text.c:293
+#, c-format
+msgid "Infrastructure: %s"
+msgstr "Altyapı: %s"
+
+#: server/maphand.c:2078 client/text.c:298
+#, c-format
+msgid "Activity: %s"
+msgstr "Etkinlik: %s"
+
+#. TRANS: "Unit: <unit type> | <username>
+#. * (<nation + team>, <homecity>)"
+#. TRANS: "Unit: <unit type> | <username> (<nation + team>,
+#. * <diplomatic state>)"
+#. TRANS: "Unit: <unit type> | <username>
+#. * (<nation + team>, <homecity>)"
+#. TRANS: "Unit: <unit type> | <username> (<nation + team>,
+#. * <diplomatic state>)"
+#: server/maphand.c:2093 server/maphand.c:2117 client/text.c:313
+#: client/text.c:337
+#, fuzzy, c-format
+msgid "Unit: %s | %s (%s, %s)"
+msgstr "Birim: %s (%s, %s)"
+
+#. TRANS: "Unit: <unit type> | <username> (<nation + team>)"
+#: server/maphand.c:2098 client/text.c:318
+#, fuzzy, c-format
+msgid "Unit: %s | %s (%s)"
+msgstr "Birim: %s (%s, %s)"
+
+#. TRANS:  "Unit: <unit type> | <username> (<nation + team>,
+#. * <number> turn cease-fire)"
+#: server/maphand.c:2109 client/text.c:329
+#, fuzzy, c-format
+msgid "Unit: %s | %s (%s, %d turn cease-fire)"
+msgid_plural "Unit: %s | %s (%s, %d turn cease-fire)"
+msgstr[0] "Birim: %s (%s, %d sıra ateşkes)"
+
+#. TRANS: A is attack power, D is defense power, FP is firepower,
+#. * HP is hitpoints (current and max).
+#: server/maphand.c:2125 client/text.c:369
+#, c-format
+msgid "A:%d D:%d FP:%d HP:%d/%d (%s)"
+msgstr "A:%d D:%d FP:%d HP:%d/%d (%s)"
+
+#. TRANS: "5 more" units on this tile
+#: server/maphand.c:2134 client/text.c:378
+#, c-format
+msgid "  (%d more)"
+msgstr "  (%d fazla)"
 
 #: server/meta.c:199
 msgid "Not reporting to the metaserver in this game."
@@ -6879,8 +7095,8 @@ msgstr ""
 #: server/stdinhand.c:2177
 #, c-format
 msgid ""
-"%s %d \"%s\" (needs %0.0f%%%s): %d for, %d against, and %d abstained out of %"
-"d players."
+"%s %d \"%s\" (needs %0.0f%%%s): %d for, %d against, and %d abstained out of "
+"%d players."
 msgstr ""
 
 #: server/stdinhand.c:2181
@@ -7515,14 +7731,6 @@ msgstr ", Ölü"
 #, c-format
 msgid ", difficulty level %s"
 msgstr ", zorluluk derecesi %s"
-
-#. TRANS: continue list, in case comma is not the separator of choice.
-#: server/stdinhand.c:4465 server/stdinhand.c:4469 client/helpdata.c:289
-#: client/helpdata.c:784 client/text.c:245 client/text.c:1313
-#: client/text.c:1350
-#, c-format
-msgid "?clistmore:, %s"
-msgstr ", %s"
 
 #: server/stdinhand.c:4473
 msgid ", ready"
@@ -11126,67 +11334,6 @@ msgstr ""
 msgid "Failed looking up metaserver's host"
 msgstr ""
 
-#. TRANS: "AI <player name>"
-#: client/text.c:97
-#, c-format
-msgid "AI %s"
-msgstr ""
-
-#. TRANS: "<nation adjective>, team <team name>"
-#: client/text.c:121
-#, fuzzy, c-format
-msgid "%s, team %s"
-msgstr "%s yönetimindeki %s"
-
-#: client/text.c:138 client/text.c:139 client/text.c:144
-#: client/gui-sdl/mapview.c:563
-msgid "?nation:Neutral"
-msgstr "Tarafsız"
-
-#: client/text.c:138 client/gui-sdl/mapview.c:563
-msgid "?nation:Hostile"
-msgstr "Düşmanca"
-
-#: client/text.c:140 client/gui-sdl/mapview.c:565
-msgid "?nation:Peaceful"
-msgstr "Barışçıl"
-
-#: client/text.c:140 client/gui-sdl/mapview.c:565
-msgid "?nation:Friendly"
-msgstr "Arkadaşça"
-
-#: client/text.c:141 client/gui-sdl/mapview.c:566
-msgid "?nation:Mysterious"
-msgstr "Gizemli"
-
-#: client/text.c:141
-msgid "?nation:Friendly(team)"
-msgstr "Arkadaşça(takım)"
-
-#: client/text.c:143 client/gui-sdl/mapview.c:596
-msgid "?city:Neutral"
-msgstr "Tarafsız"
-
-#: client/text.c:143 client/gui-sdl/mapview.c:596
-msgid "?city:Hostile"
-msgstr "Düşmanca"
-
-#: client/text.c:145 client/gui-sdl/mapview.c:597
-msgid "?city:Peaceful"
-msgstr "Barışçıl"
-
-#: client/text.c:145 client/gui-sdl/mapview.c:598
-msgid "?city:Friendly"
-msgstr "Arkadaşça"
-
-#: client/text.c:145 client/gui-sdl/mapview.c:598
-msgid "?city:Mysterious"
-msgstr "Gizemli"
-
-#: client/text.c:146
-msgid "?city:Friendly(team)"
-msgstr "Arkadaşça(takım)"
-
 #: client/text.c:154
 #, c-format
 msgid "Location: (%d, %d) [%d]"
@@ -11197,151 +11344,17 @@ msgstr "Yer: (%d, %d) [%d]"
 msgid "Native coordinates: (%d, %d)"
 msgstr ""
 
-#: client/text.c:163
-#, c-format
-msgid "Terrain: %s"
-msgstr "Arazi: %s"
-
-#: client/text.c:164
-#, c-format
-msgid "Food/Prod/Trade: %s"
-msgstr "Gıda/Üretim/Ticaret: %s"
-
-#: client/text.c:167
-msgid "Minor Tribe Village"
-msgstr "Ufak Yerli Köy"
-
-#: client/text.c:176
-msgid "Our territory"
-msgstr "Bizim topraklarımız"
-
-#. TRANS: "Territory of <username> (<nation + team>)"
-#: client/text.c:179
-#, fuzzy, c-format
-msgid "Territory of %s (%s)"
-msgstr ""
-"\n"
-"%s (%s) tarafının toprakları"
-
-#: client/text.c:189
-#, fuzzy, c-format
-msgid "Territory of %s (%s) (%d turn cease-fire)"
-msgid_plural "Territory of %s (%s) (%d turn cease-fire)"
-msgstr[0] "Şehir: %s (%s, %d sıra ateşkes)"
-
-#. TRANS: "Territory of <username>
-#. * (<nation + team> | <diplomatic state>)"
-#: client/text.c:198
-#, fuzzy, c-format
-msgid "Territory of %s (%s | %s)"
-msgstr ""
-"\n"
-"%s (%s) tarafının toprakları"
-
-#: client/text.c:203
-msgid "Unclaimed territory"
-msgstr "Sahipsiz bölge"
-
-#. TRANS: "City: <city name> | <username> (<nation + team>)"
-#: client/text.c:218
-#, fuzzy, c-format
-msgid "City: %s | %s (%s)"
-msgstr "Şehir: %s (%s, %s)"
-
-#. TRANS:  "City: <city name> | <username>
-#. * (<nation + team>, <number> turn cease-fire)"
-#: client/text.c:228
-#, fuzzy, c-format
-msgid "City: %s | %s (%s, %d turn cease-fire)"
-msgid_plural "City: %s | %s (%s, %d turn cease-fire)"
-msgstr[0] "Şehir: %s (%s, %d sıra ateşkes)"
-
-#. TRANS: "City: <city name> | <username>
-#. * (<nation + team>, <diplomatic state>)"
-#: client/text.c:235
-#, fuzzy, c-format
-msgid "City: %s | %s (%s, %s)"
-msgstr "Şehir: %s (%s, %s)"
-
-#. TRANS: previous lines gave other information about the city.
-#: client/text.c:250
-#, c-format
-msgid "?clistbegin: with %s"
-msgstr " %s ile birlikte"
-
-#. TRANS: This appears with two or more previous entries in the list
-#: client/text.c:260
-#, fuzzy, c-format
-msgid "?clistlast:, and %s"
-msgstr ", %s"
-
-#. TRANS: This appears with only one previous entry in the list
-#: client/text.c:264
-#, fuzzy, c-format
-msgid "?clistlast: and %s"
-msgstr ", %s"
-
-#: client/text.c:267 client/text.c:1323 client/text.c:1361
-msgid "?clistend:."
-msgstr "."
-
 #. TRANS: "Trade from Warsaw: 5"
 #: client/text.c:277
 #, c-format
 msgid "Trade from %s: %d"
 msgstr "%s ile ticaret: %d"
 
-#: client/text.c:293
-#, c-format
-msgid "Infrastructure: %s"
-msgstr "Altyapı: %s"
-
-#: client/text.c:298
-#, c-format
-msgid "Activity: %s"
-msgstr "Etkinlik: %s"
-
-#. TRANS: "Unit: <unit type> | <username>
-#. * (<nation + team>, <homecity>)"
-#. TRANS: "Unit: <unit type> | <username> (<nation + team>,
-#. * <diplomatic state>)"
-#: client/text.c:313 client/text.c:337
-#, fuzzy, c-format
-msgid "Unit: %s | %s (%s, %s)"
-msgstr "Birim: %s (%s, %s)"
-
-#. TRANS: "Unit: <unit type> | <username> (<nation + team>)"
-#: client/text.c:318
-#, fuzzy, c-format
-msgid "Unit: %s | %s (%s)"
-msgstr "Birim: %s (%s, %s)"
-
-#. TRANS:  "Unit: <unit type> | <username> (<nation + team>,
-#. * <number> turn cease-fire)"
-#: client/text.c:329
-#, fuzzy, c-format
-msgid "Unit: %s | %s (%s, %d turn cease-fire)"
-msgid_plural "Unit: %s | %s (%s, %d turn cease-fire)"
-msgstr[0] "Birim: %s (%s, %d sıra ateşkes)"
-
 #. TRANS: "Chance to win: A:95% D:46%"
 #: client/text.c:362
 #, c-format
 msgid "Chance to win: A:%d%% D:%d%%"
 msgstr "Kazanma olasılığı: A:%%%d D:%%%d"
-
-#. TRANS: A is attack power, D is defense power, FP is firepower,
-#. * HP is hitpoints (current and max).
-#: client/text.c:369
-#, c-format
-msgid "A:%d D:%d FP:%d HP:%d/%d (%s)"
-msgstr "A:%d D:%d FP:%d HP:%d/%d (%s)"
-
-#. TRANS: "5 more" units on this tile
-#: client/text.c:378
-#, c-format
-msgid "  (%d more)"
-msgstr "  (%d fazla)"
 
 #. TRANS: on own line immediately following \n, ... <city>
 #: client/text.c:475
@@ -20792,9 +20805,9 @@ msgid ""
 "a city by 200%. Together with a Library and a University, a Research Lab "
 "increases the science production of a city by 450%."
 msgstr ""
-"Araştırma Laboratuvarı, bir kütüphaneyle birlikte şehrin bilim üretimini %"
-"200 arttırır. Bir Kütüphane ve bir Üniversite ile birlikte bilim üretimini %"
-"450 arttırır."
+"Araştırma Laboratuvarı, bir kütüphaneyle birlikte şehrin bilim üretimini "
+"%200 arttırır. Bir Kütüphane ve bir Üniversite ile birlikte bilim üretimini "
+"%450 arttırır."
 
 #: data/default/buildings.ruleset:693 data/civ2/buildings.ruleset:658
 msgid "SAM Battery"
@@ -20951,8 +20964,8 @@ msgid ""
 "city by 50%. Together with a Marketplace and a Bank, a Stock Exchange boosts "
 "tax and luxury production in a city by 150%."
 msgstr ""
-"Bir Market ve Banka ile birlikte Borsa, şehirdeki vergi ve lüks üretimini %"
-"150 oranında arttırır."
+"Bir Market ve Banka ile birlikte Borsa, şehirdeki vergi ve lüks üretimini "
+"%150 oranında arttırır."
 
 #: data/default/buildings.ruleset:893 data/civ2/buildings.ruleset:853
 msgid "Super Highways"
@@ -21497,9 +21510,9 @@ msgid ""
 "a city by 100%. Together with a Library and a University, a Research Lab "
 "increases the science production of a city by 150%."
 msgstr ""
-"Araştırma Laboratuvarı, bir kütüphaneyle birlikte şehrin bilim üretimini %"
-"100 arttırır. Bir Kütüphane ve bir Üniversite ile birlikte bilim üretimini %"
-"150 arttırır."
+"Araştırma Laboratuvarı, bir kütüphaneyle birlikte şehrin bilim üretimini "
+"%100 arttırır. Bir Kütüphane ve bir Üniversite ile birlikte bilim üretimini "
+"%150 arttırır."
 
 #: data/civ2/buildings.ruleset:738
 #, fuzzy, no-c-format
@@ -21525,8 +21538,8 @@ msgid ""
 "Together with a Marketplace and a Bank, a Stock Exchange boosts tax and "
 "luxury production in a city by 150%."
 msgstr ""
-"Bir Market ve Banka ile birlikte Borsa, şehirdeki vergi ve lüks üretimini %"
-"150 oranında arttırır."
+"Bir Market ve Banka ile birlikte Borsa, şehirdeki vergi ve lüks üretimini "
+"%150 oranında arttırır."
 
 #: data/civ2/buildings.ruleset:933 data/civ1/buildings.ruleset:637
 #, no-c-format

@@ -144,10 +144,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Freeciv 2.0.99-devel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-05 14:01+0100\n"
+"POT-Creation-Date: 2011-03-26 13:15+0100\n"
 "PO-Revision-Date: 2007-08-12 15:56+0300\n"
 "Last-Translator: MITA Yuusuke <clefs@mail.goo.ne.jp>\n"
 "Language-Team: SAWADA Katsuya <ama@petmail.net>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1119,9 +1120,9 @@ msgstr "変更"
 msgid "Base"
 msgstr "バスク人"
 
-#: common/unit.c:559 client/text.c:160 client/gui-gtk-2.0/editprop.c:5741
-#: client/gui-sdl/citydlg.c:1972 client/gui-win32/citydlg.c:1229
-#: client/gui-xaw/citydlg.c:1462
+#: common/unit.c:559 server/maphand.c:1952 client/text.c:160
+#: client/gui-gtk-2.0/editprop.c:5741 client/gui-sdl/citydlg.c:1972
+#: client/gui-win32/citydlg.c:1229 client/gui-xaw/citydlg.c:1462
 msgid "Unknown"
 msgstr "不明"
 
@@ -1552,8 +1553,8 @@ msgstr "*%1$s (AI)* %3$sよ，まず最初に%2$sとの同盟関係を絶って�
 #: ai/advdiplomacy.c:335
 #, fuzzy, c-format
 msgid ""
-"*%s (AI)* I would like to see you keep your distance from %s for some time, %"
-"s."
+"*%s (AI)* I would like to see you keep your distance from %s for some time, "
+"%s."
 msgstr ""
 "*%s (AI)* 私はあなたがたが現在の停戦を今しばらく守ることができるのかまず見届"
 "けたいと思う，%sよ。"
@@ -1826,8 +1827,8 @@ msgstr ""
 #: ai/advdiplomacy.c:1611
 #, c-format
 msgid ""
-"*%s (AI)* Greetings ally, I see you have not yet made war with our enemy, %"
-"s. Why do I need to remind you of your promises?"
+"*%s (AI)* Greetings ally, I see you have not yet made war with our enemy, "
+"%s. Why do I need to remind you of your promises?"
 msgstr ""
 "*%s (AI)* 親愛なる同盟国よ，私が見る限り貴国は未だ我々共通の敵である%sとの戦"
 "争を始めていないようだ。何故我が国が貴国の約束を貴国に思い出させてやらねばな"
@@ -4588,27 +4589,27 @@ msgid "There is no player nor connection by the name %s."
 msgstr "%s という名前のプレイヤーもしくは接続はありません。"
 
 # yasu
-#: server/maphand.c:120
+#: server/maphand.c:121
 msgid "Global warming has occurred!"
 msgstr "地球温暖化が起こりました!"
 
 # yasu
-#: server/maphand.c:122
+#: server/maphand.c:123
 msgid ""
 "Coastlines have been flooded and vast ranges of grassland have become "
 "deserts."
 msgstr "海岸が洪水になり，多くの草原が砂漠に変わりました。"
 
-#: server/maphand.c:164
+#: server/maphand.c:165
 msgid "Nuclear winter has occurred!"
 msgstr "核の冬が起こりました!"
 
 # yasu
-#: server/maphand.c:166
+#: server/maphand.c:167
 msgid "Wetlands have dried up and vast ranges of grassland have become tundra."
 msgstr "湿潤な土地は乾燥し，草原の多くがツンドラになりました。"
 
-#: server/maphand.c:187
+#: server/maphand.c:188
 msgid ""
 "New hope sweeps like fire through the country as the discovery of railroad "
 "is announced.\n"
@@ -4617,7 +4618,7 @@ msgstr ""
 "鉄道の発見が公表されたことで，新しい希望が火のように国を駆け巡ります。\n"
 "      労働者が自発的に集まり，全ての都市に鉄道を引きます。"
 
-#: server/maphand.c:193
+#: server/maphand.c:194
 msgid ""
 "The people are pleased to hear that your scientists finally know about "
 "railroads.\n"
@@ -4627,16 +4628,237 @@ msgstr ""
 "労働者は自発的に集まり，全ての都市に鉄道を引きます。"
 
 # clefs
-#: server/maphand.c:1380
+#: server/maphand.c:1381
 #, c-format
 msgid "Moved your %s due to changing terrain."
 msgstr "地形の変更に伴い%sを移動しました。"
 
 # clefs
-#: server/maphand.c:1398
+#: server/maphand.c:1399
 #, c-format
 msgid "Disbanded your %s due to changing terrain."
 msgstr "地形の変更に伴い%sを解散しました。"
+
+#. TRANS: "<nation adjective>, team <team name>"
+#: server/maphand.c:1888 client/text.c:121
+#, fuzzy, c-format
+msgid "%s, team %s"
+msgstr ", チーム %s"
+
+#. TRANS: "AI <player name>"
+#: server/maphand.c:1915 client/text.c:97
+#, c-format
+msgid "AI %s"
+msgstr ""
+
+#: server/maphand.c:1932 server/maphand.c:1933 server/maphand.c:1938
+#: client/text.c:138 client/text.c:139 client/text.c:144
+#: client/gui-sdl/mapview.c:563
+msgid "?nation:Neutral"
+msgstr "中立国"
+
+#: server/maphand.c:1932 client/text.c:138 client/gui-sdl/mapview.c:563
+msgid "?nation:Hostile"
+msgstr "敵国"
+
+# ntaka なんて訳せばよいか悩んだが、和平を結んだ国では長いので友好国
+# clefs 友好通商条約あたりを結んでいるような関係ですね
+#: server/maphand.c:1934 client/text.c:140 client/gui-sdl/mapview.c:565
+msgid "?nation:Peaceful"
+msgstr "友好国"
+
+#: server/maphand.c:1934 client/text.c:140 client/gui-sdl/mapview.c:565
+msgid "?nation:Friendly"
+msgstr "同盟国"
+
+#: server/maphand.c:1935 client/text.c:141 client/gui-sdl/mapview.c:566
+msgid "?nation:Mysterious"
+msgstr "未接触の国"
+
+#: server/maphand.c:1935 client/text.c:141
+msgid "?nation:Friendly(team)"
+msgstr "同盟国(チーム)"
+
+#: server/maphand.c:1937 client/text.c:143 client/gui-sdl/mapview.c:596
+msgid "?city:Neutral"
+msgstr "?city:中立"
+
+#: server/maphand.c:1937 client/text.c:143 client/gui-sdl/mapview.c:596
+msgid "?city:Hostile"
+msgstr "?city:敵対"
+
+#: server/maphand.c:1939 client/text.c:145 client/gui-sdl/mapview.c:597
+msgid "?city:Peaceful"
+msgstr "和平"
+
+#: server/maphand.c:1939 client/text.c:145 client/gui-sdl/mapview.c:598
+msgid "?city:Friendly"
+msgstr "同盟"
+
+#: server/maphand.c:1939 client/text.c:145 client/gui-sdl/mapview.c:598
+msgid "?city:Mysterious"
+msgstr "未接触"
+
+# clefs
+#: server/maphand.c:1940 client/text.c:146
+msgid "?city:Friendly(team)"
+msgstr "同盟国の都市(チーム)"
+
+#: server/maphand.c:1948
+#, fuzzy, c-format
+msgid "Location: (%d, %d)"
+msgstr "座標: (%d, %d) [%d]"
+
+#: server/maphand.c:1955 client/text.c:163
+#, c-format
+msgid "Terrain: %s"
+msgstr "地形: %s"
+
+#: server/maphand.c:1956 client/text.c:164
+#, c-format
+msgid "Food/Prod/Trade: %s"
+msgstr "食料/資源/交易: %s"
+
+#: server/maphand.c:1959 client/text.c:167
+msgid "Minor Tribe Village"
+msgstr "少数部族の村"
+
+# ntaka 領域(または国土)とは、領土、領海、領空の３つを含む概念だそうな。
+#: server/maphand.c:1968 client/text.c:176
+#, fuzzy
+msgid "Our territory"
+msgstr "我が国の領域"
+
+#. TRANS: "Territory of <username> (<nation + team>)"
+#: server/maphand.c:1971 client/text.c:179
+#, fuzzy, c-format
+msgid "Territory of %s (%s)"
+msgstr ""
+"\n"
+"%sの%sの領域"
+
+#: server/maphand.c:1981 client/text.c:189
+#, fuzzy, c-format
+msgid "Territory of %s (%s) (%d turn cease-fire)"
+msgid_plural "Territory of %s (%s) (%d turn cease-fire)"
+msgstr[0] "都市: %s (%s,%dターンの停戦中)"
+
+#. TRANS: "Territory of <username>
+#. * (<nation + team> | <diplomatic state>)"
+#: server/maphand.c:1990 client/text.c:198
+#, fuzzy, c-format
+msgid "Territory of %s (%s | %s)"
+msgstr ""
+"\n"
+"%sの%sの領域"
+
+# ntaka
+#: server/maphand.c:1995 client/text.c:203
+msgid "Unclaimed territory"
+msgstr "公海 もしくは 未占有地"
+
+#. TRANS: "City: <city name> | <username> (<nation + team>)"
+#: server/maphand.c:2010 client/text.c:218
+#, fuzzy, c-format
+msgid "City: %s | %s (%s)"
+msgstr "都市: %s (%s, %s)"
+
+#. TRANS:  "City: <city name> | <username>
+#. * (<nation + team>, <number> turn cease-fire)"
+#: server/maphand.c:2020 client/text.c:228
+#, fuzzy, c-format
+msgid "City: %s | %s (%s, %d turn cease-fire)"
+msgid_plural "City: %s | %s (%s, %d turn cease-fire)"
+msgstr[0] "都市: %s (%s,%dターンの停戦中)"
+
+#. TRANS: "City: <city name> | <username>
+#. * (<nation + team>, <diplomatic state>)"
+#: server/maphand.c:2027 client/text.c:235
+#, fuzzy, c-format
+msgid "City: %s | %s (%s, %s)"
+msgstr "都市: %s (%s, %s)"
+
+#. TRANS: continue list, in case comma is not the separator of choice.
+#: server/maphand.c:2037 server/stdinhand.c:4465 server/stdinhand.c:4469
+#: client/helpdata.c:289 client/helpdata.c:784 client/text.c:245
+#: client/text.c:1313 client/text.c:1350
+#, c-format
+msgid "?clistmore:, %s"
+msgstr ", %s"
+
+#. TRANS: previous lines gave other information about the city.
+#: server/maphand.c:2042 client/text.c:250
+#, fuzzy, c-format
+msgid "?clistbegin: with %s"
+msgstr " 共同 %s"
+
+#. TRANS: This appears with two or more previous entries in the list
+#: server/maphand.c:2052 client/text.c:260
+#, c-format
+msgid "?clistlast:, and %s"
+msgstr ""
+
+#. TRANS: This appears with only one previous entry in the list
+#: server/maphand.c:2056 client/text.c:264
+#, fuzzy, c-format
+msgid "?clistlast: and %s"
+msgstr "専門家"
+
+#: server/maphand.c:2059 client/text.c:267 client/text.c:1323
+#: client/text.c:1361
+msgid "?clistend:."
+msgstr "?clistend:"
+
+#: server/maphand.c:2073 client/text.c:293
+#, c-format
+msgid "Infrastructure: %s"
+msgstr "インフラ: %s"
+
+#: server/maphand.c:2078 client/text.c:298
+#, c-format
+msgid "Activity: %s"
+msgstr "活動: %s"
+
+#. TRANS: "Unit: <unit type> | <username>
+#. * (<nation + team>, <homecity>)"
+#. TRANS: "Unit: <unit type> | <username> (<nation + team>,
+#. * <diplomatic state>)"
+#. TRANS: "Unit: <unit type> | <username>
+#. * (<nation + team>, <homecity>)"
+#. TRANS: "Unit: <unit type> | <username> (<nation + team>,
+#. * <diplomatic state>)"
+#: server/maphand.c:2093 server/maphand.c:2117 client/text.c:313
+#: client/text.c:337
+#, fuzzy, c-format
+msgid "Unit: %s | %s (%s, %s)"
+msgstr "部隊: %s (%s, %s)"
+
+#. TRANS: "Unit: <unit type> | <username> (<nation + team>)"
+#: server/maphand.c:2098 client/text.c:318
+#, fuzzy, c-format
+msgid "Unit: %s | %s (%s)"
+msgstr "部隊: %s (%s, %s)"
+
+#. TRANS:  "Unit: <unit type> | <username> (<nation + team>,
+#. * <number> turn cease-fire)"
+#: server/maphand.c:2109 client/text.c:329
+#, fuzzy, c-format
+msgid "Unit: %s | %s (%s, %d turn cease-fire)"
+msgid_plural "Unit: %s | %s (%s, %d turn cease-fire)"
+msgstr[0] "部隊: %s (%s,%dターンの停戦中)"
+
+#. TRANS: A is attack power, D is defense power, FP is firepower,
+#. * HP is hitpoints (current and max).
+#: server/maphand.c:2125 client/text.c:369
+#, c-format
+msgid "A:%d D:%d FP:%d HP:%d/%d (%s)"
+msgstr "攻:%d 防:%d 火:%d 体:%d/%d (%s)"
+
+#. TRANS: "5 more" units on this tile
+#: server/maphand.c:2134 client/text.c:378
+#, c-format
+msgid "  (%d more)"
+msgstr "  (+%d部隊)"
 
 #: server/meta.c:199
 msgid "Not reporting to the metaserver in this game."
@@ -5442,8 +5664,8 @@ msgstr ""
 "3 = 島ベースの生成(公平ですが，退屈です);   [1]\n"
 "\n"
 "[]の中の数値は，ジェネレータのデフォルトでの開始位置決定方法です。startposの"
-"デフォルト値が使われていれば，startposはジェネレータによって決定されます。"
-"\"startpos\" も参照してください。"
+"デフォルト値が使われていれば，startposはジェネレータによって決定されま"
+"す。\"startpos\" も参照してください。"
 
 # clefs
 #: server/settings.c:314
@@ -7554,8 +7776,8 @@ msgstr ""
 #: server/stdinhand.c:2177
 #, c-format
 msgid ""
-"%s %d \"%s\" (needs %0.0f%%%s): %d for, %d against, and %d abstained out of %"
-"d players."
+"%s %d \"%s\" (needs %0.0f%%%s): %d for, %d against, and %d abstained out of "
+"%d players."
 msgstr ""
 
 #: server/stdinhand.c:2181
@@ -8019,8 +8241,8 @@ msgstr "残念ですがサーバコマンドを使うことを許可されてい
 #, c-format
 msgid "Warning: '%s' interpreted as '%s', but it is ambiguous.  Try '%shelp'."
 msgstr ""
-"警告: '%1$s' は '%2$s' と解釈されましたが，'%1$s' は一意ではありません。'%3"
-"$shelp' と打って下さい。"
+"警告: '%1$s' は '%2$s' と解釈されましたが，'%1$s' は一意ではありませ"
+"ん。'%3$shelp' と打って下さい。"
 
 #: server/stdinhand.c:3720
 #, c-format
@@ -8231,14 +8453,6 @@ msgstr ", 死亡"
 #, c-format
 msgid ", difficulty level %s"
 msgstr ", 難易度レベル %s"
-
-#. TRANS: continue list, in case comma is not the separator of choice.
-#: server/stdinhand.c:4465 server/stdinhand.c:4469 client/helpdata.c:289
-#: client/helpdata.c:784 client/text.c:245 client/text.c:1313
-#: client/text.c:1350
-#, c-format
-msgid "?clistmore:, %s"
-msgstr ", %s"
 
 # clefs
 #: server/stdinhand.c:4473
@@ -12227,70 +12441,6 @@ msgstr "無効な $http プロキシ値です。 `http://' で始めなければ
 msgid "Failed looking up metaserver's host"
 msgstr "メタサーバのホストのルックアップに失敗しました。"
 
-#. TRANS: "AI <player name>"
-#: client/text.c:97
-#, c-format
-msgid "AI %s"
-msgstr ""
-
-#. TRANS: "<nation adjective>, team <team name>"
-#: client/text.c:121
-#, fuzzy, c-format
-msgid "%s, team %s"
-msgstr ", チーム %s"
-
-#: client/text.c:138 client/text.c:139 client/text.c:144
-#: client/gui-sdl/mapview.c:563
-msgid "?nation:Neutral"
-msgstr "中立国"
-
-#: client/text.c:138 client/gui-sdl/mapview.c:563
-msgid "?nation:Hostile"
-msgstr "敵国"
-
-# ntaka なんて訳せばよいか悩んだが、和平を結んだ国では長いので友好国
-# clefs 友好通商条約あたりを結んでいるような関係ですね
-#: client/text.c:140 client/gui-sdl/mapview.c:565
-msgid "?nation:Peaceful"
-msgstr "友好国"
-
-#: client/text.c:140 client/gui-sdl/mapview.c:565
-msgid "?nation:Friendly"
-msgstr "同盟国"
-
-#: client/text.c:141 client/gui-sdl/mapview.c:566
-msgid "?nation:Mysterious"
-msgstr "未接触の国"
-
-#: client/text.c:141
-msgid "?nation:Friendly(team)"
-msgstr "同盟国(チーム)"
-
-#: client/text.c:143 client/gui-sdl/mapview.c:596
-msgid "?city:Neutral"
-msgstr "?city:中立"
-
-#: client/text.c:143 client/gui-sdl/mapview.c:596
-msgid "?city:Hostile"
-msgstr "?city:敵対"
-
-#: client/text.c:145 client/gui-sdl/mapview.c:597
-msgid "?city:Peaceful"
-msgstr "和平"
-
-#: client/text.c:145 client/gui-sdl/mapview.c:598
-msgid "?city:Friendly"
-msgstr "同盟"
-
-#: client/text.c:145 client/gui-sdl/mapview.c:598
-msgid "?city:Mysterious"
-msgstr "未接触"
-
-# clefs
-#: client/text.c:146
-msgid "?city:Friendly(team)"
-msgstr "同盟国の都市(チーム)"
-
 #: client/text.c:154
 #, c-format
 msgid "Location: (%d, %d) [%d]"
@@ -12301,135 +12451,11 @@ msgstr "座標: (%d, %d) [%d]"
 msgid "Native coordinates: (%d, %d)"
 msgstr ""
 
-#: client/text.c:163
-#, c-format
-msgid "Terrain: %s"
-msgstr "地形: %s"
-
-#: client/text.c:164
-#, c-format
-msgid "Food/Prod/Trade: %s"
-msgstr "食料/資源/交易: %s"
-
-#: client/text.c:167
-msgid "Minor Tribe Village"
-msgstr "少数部族の村"
-
-# ntaka 領域(または国土)とは、領土、領海、領空の３つを含む概念だそうな。
-#: client/text.c:176
-#, fuzzy
-msgid "Our territory"
-msgstr "我が国の領域"
-
-#. TRANS: "Territory of <username> (<nation + team>)"
-#: client/text.c:179
-#, fuzzy, c-format
-msgid "Territory of %s (%s)"
-msgstr ""
-"\n"
-"%sの%sの領域"
-
-#: client/text.c:189
-#, fuzzy, c-format
-msgid "Territory of %s (%s) (%d turn cease-fire)"
-msgid_plural "Territory of %s (%s) (%d turn cease-fire)"
-msgstr[0] "都市: %s (%s,%dターンの停戦中)"
-
-#. TRANS: "Territory of <username>
-#. * (<nation + team> | <diplomatic state>)"
-#: client/text.c:198
-#, fuzzy, c-format
-msgid "Territory of %s (%s | %s)"
-msgstr ""
-"\n"
-"%sの%sの領域"
-
-# ntaka
-#: client/text.c:203
-msgid "Unclaimed territory"
-msgstr "公海 もしくは 未占有地"
-
-#. TRANS: "City: <city name> | <username> (<nation + team>)"
-#: client/text.c:218
-#, fuzzy, c-format
-msgid "City: %s | %s (%s)"
-msgstr "都市: %s (%s, %s)"
-
-#. TRANS:  "City: <city name> | <username>
-#. * (<nation + team>, <number> turn cease-fire)"
-#: client/text.c:228
-#, fuzzy, c-format
-msgid "City: %s | %s (%s, %d turn cease-fire)"
-msgid_plural "City: %s | %s (%s, %d turn cease-fire)"
-msgstr[0] "都市: %s (%s,%dターンの停戦中)"
-
-#. TRANS: "City: <city name> | <username>
-#. * (<nation + team>, <diplomatic state>)"
-#: client/text.c:235
-#, fuzzy, c-format
-msgid "City: %s | %s (%s, %s)"
-msgstr "都市: %s (%s, %s)"
-
-#. TRANS: previous lines gave other information about the city.
-#: client/text.c:250
-#, fuzzy, c-format
-msgid "?clistbegin: with %s"
-msgstr " 共同 %s"
-
-#. TRANS: This appears with two or more previous entries in the list
-#: client/text.c:260
-#, c-format
-msgid "?clistlast:, and %s"
-msgstr ""
-
-#. TRANS: This appears with only one previous entry in the list
-#: client/text.c:264
-#, fuzzy, c-format
-msgid "?clistlast: and %s"
-msgstr "専門家"
-
-#: client/text.c:267 client/text.c:1323 client/text.c:1361
-msgid "?clistend:."
-msgstr "?clistend:"
-
 #. TRANS: "Trade from Warsaw: 5"
 #: client/text.c:277
 #, c-format
 msgid "Trade from %s: %d"
 msgstr "%sからの交易: %d"
-
-#: client/text.c:293
-#, c-format
-msgid "Infrastructure: %s"
-msgstr "インフラ: %s"
-
-#: client/text.c:298
-#, c-format
-msgid "Activity: %s"
-msgstr "活動: %s"
-
-#. TRANS: "Unit: <unit type> | <username>
-#. * (<nation + team>, <homecity>)"
-#. TRANS: "Unit: <unit type> | <username> (<nation + team>,
-#. * <diplomatic state>)"
-#: client/text.c:313 client/text.c:337
-#, fuzzy, c-format
-msgid "Unit: %s | %s (%s, %s)"
-msgstr "部隊: %s (%s, %s)"
-
-#. TRANS: "Unit: <unit type> | <username> (<nation + team>)"
-#: client/text.c:318
-#, fuzzy, c-format
-msgid "Unit: %s | %s (%s)"
-msgstr "部隊: %s (%s, %s)"
-
-#. TRANS:  "Unit: <unit type> | <username> (<nation + team>,
-#. * <number> turn cease-fire)"
-#: client/text.c:329
-#, fuzzy, c-format
-msgid "Unit: %s | %s (%s, %d turn cease-fire)"
-msgid_plural "Unit: %s | %s (%s, %d turn cease-fire)"
-msgstr[0] "部隊: %s (%s,%dターンの停戦中)"
 
 # 「勝率」でもいいかなあ (clefs)
 #. TRANS: "Chance to win: A:95% D:46%"
@@ -12437,19 +12463,6 @@ msgstr[0] "部隊: %s (%s,%dターンの停戦中)"
 #, c-format
 msgid "Chance to win: A:%d%% D:%d%%"
 msgstr "勝利確率: 攻:%d%% 守:%d%%"
-
-#. TRANS: A is attack power, D is defense power, FP is firepower,
-#. * HP is hitpoints (current and max).
-#: client/text.c:369
-#, c-format
-msgid "A:%d D:%d FP:%d HP:%d/%d (%s)"
-msgstr "攻:%d 防:%d 火:%d 体:%d/%d (%s)"
-
-#. TRANS: "5 more" units on this tile
-#: client/text.c:378
-#, c-format
-msgid "  (%d more)"
-msgstr "  (+%d部隊)"
 
 # 試しに (clefs)
 #. TRANS: on own line immediately following \n, ... <city>
@@ -33151,8 +33164,8 @@ msgstr ""
 #~ msgstr "%sは，%sの%sの買収に成功し，練度が増しました。"
 
 #~ msgid ""
-#~ "Your %s has successfully completed her mission and returned unharmed to %"
-#~ "s and has become more experienced."
+#~ "Your %s has successfully completed her mission and returned unharmed to "
+#~ "%s and has become more experienced."
 #~ msgstr "%sは任務を完了して無事%sへ戻り，練度が増しました。"
 
 # clefs
@@ -36356,8 +36369,8 @@ msgstr ""
 #~ "は、この変数とコマンド \"timeoutincrease\" を使います。"
 
 #~ msgid ""
-#~ "(The %s improvement is also required for a city to grow larger than size %"
-#~ "d.)  "
+#~ "(The %s improvement is also required for a city to grow larger than size "
+#~ "%d.)  "
 #~ msgstr "(都市を %2$d より大きくするには、さらに %1$s 建造物が必要です。)"
 
 #~ msgid ""

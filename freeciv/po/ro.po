@@ -8,10 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: po-debconf://kdebase\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-05 14:01+0100\n"
+"POT-Creation-Date: 2011-03-26 13:15+0100\n"
 "PO-Revision-Date: 2007-09-05 03:37+0300\n"
 "Last-Translator: stan ioan-eugen <stan.ieugen@gmail.com>\n"
 "Language-Team: romanian <debian-l10n-romanian@lists.debian.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -942,9 +943,9 @@ msgstr "Transformă"
 msgid "Base"
 msgstr "Deşeuri"
 
-#: common/unit.c:559 client/text.c:160 client/gui-gtk-2.0/editprop.c:5741
-#: client/gui-sdl/citydlg.c:1972 client/gui-win32/citydlg.c:1229
-#: client/gui-xaw/citydlg.c:1462
+#: common/unit.c:559 server/maphand.c:1952 client/text.c:160
+#: client/gui-gtk-2.0/editprop.c:5741 client/gui-sdl/citydlg.c:1972
+#: client/gui-win32/citydlg.c:1229 client/gui-xaw/citydlg.c:1462
 msgid "Unknown"
 msgstr "Necunoscut"
 
@@ -1359,8 +1360,8 @@ msgstr "*%s (AI)* Mai întâi rupe alianţa cu %s, %s."
 #: ai/advdiplomacy.c:335
 #, fuzzy, c-format
 msgid ""
-"*%s (AI)* I would like to see you keep your distance from %s for some time, %"
-"s."
+"*%s (AI)* I would like to see you keep your distance from %s for some time, "
+"%s."
 msgstr ""
 "*%s (AI)* Vreau să menţii starea curentă de încetare a focului ceva mai mult "
 "timp, %s."
@@ -1573,8 +1574,8 @@ msgid_plural ""
 "*%s (AI)* We will honour our alliance with %s and declare war on %s in %d "
 "turns.  We expect you to do likewise."
 msgstr[0] ""
-"*%s (AI)* Vom onora alianţa noastră cu %s şi-i vom declara război lui %s în %"
-"d rundă.  Ne aşteptăm ca şi tu să faci la fel."
+"*%s (AI)* Vom onora alianţa noastră cu %s şi-i vom declara război lui %s în "
+"%d rundă.  Ne aşteptăm ca şi tu să faci la fel."
 msgstr[1] ""
 "*%s (AI)* We will honour our alliance with %s and declare war on %s in %d "
 "turns.  We expect you to do likewise."
@@ -1622,8 +1623,8 @@ msgstr ""
 #: ai/advdiplomacy.c:1611
 #, c-format
 msgid ""
-"*%s (AI)* Greetings ally, I see you have not yet made war with our enemy, %"
-"s. Why do I need to remind you of your promises?"
+"*%s (AI)* Greetings ally, I see you have not yet made war with our enemy, "
+"%s. Why do I need to remind you of your promises?"
 msgstr ""
 "*%s (AI)* Salutări aliatule, Văd că încă nu ai declarat război inamicului "
 "nostru, %s. De ce este nevoie să-ţi amintesc promisiunile tale?"
@@ -1713,8 +1714,8 @@ msgstr "Nu s-a găsit fişierul audio %s"
 #, c-format
 msgid "Warning: the guest name '%s' has been taken, renaming to user '%s'."
 msgstr ""
-"Avertizare: numele de oaspete '%s' a fost luat, redenumesc ca utilizator '%"
-"s'."
+"Avertizare: numele de oaspete '%s' a fost luat, redenumesc ca utilizator "
+"'%s'."
 
 #: server/auth.c:402
 msgid "Guests are not allowed on this server. Sorry."
@@ -2152,16 +2153,16 @@ msgstr ""
 msgid ""
 "%s can't build %s from the worklist; %s special is required.  Postponing..."
 msgstr ""
-"%s nu poate construi %s din planul de lucru deoarece are nevoie specială de %"
-"s. Amân dispoziţia..."
+"%s nu poate construi %s din planul de lucru deoarece are nevoie specială de "
+"%s. Amân dispoziţia..."
 
 #: server/cityturn.c:1080
 #, c-format
 msgid ""
 "%s can't build %s from the worklist; %s terrain is required.  Postponing..."
 msgstr ""
-"%s nu poate construi %s din planul de lucru deoarece are nevoie de terenul %"
-"s. Amân dispoziţia..."
+"%s nu poate construi %s din planul de lucru deoarece are nevoie de terenul "
+"%s. Amân dispoziţia..."
 
 #: server/cityturn.c:1095
 #, c-format
@@ -2194,8 +2195,8 @@ msgid ""
 "%s can't build %s from the worklist; %s terrain class is required.  "
 "Postponing..."
 msgstr ""
-"%s nu poate construi %s din planul de lucru deoarece are nevoie de terenul %"
-"s. Amân dispoziţia..."
+"%s nu poate construi %s din planul de lucru deoarece are nevoie de terenul "
+"%s. Amân dispoziţia..."
 
 #: server/cityturn.c:1164
 #, fuzzy, c-format
@@ -4281,27 +4282,27 @@ msgstr "Nu există o conexiune cu numele %s."
 msgid "There is no player nor connection by the name %s."
 msgstr "Nu există jucător sau conexiune cu numele %s."
 
-#: server/maphand.c:120
+#: server/maphand.c:121
 msgid "Global warming has occurred!"
 msgstr "S-a produs încălzirea globală!"
 
-#: server/maphand.c:122
+#: server/maphand.c:123
 msgid ""
 "Coastlines have been flooded and vast ranges of grassland have become "
 "deserts."
 msgstr ""
 "Ţărmurile au fost inundate şi mari porţiuni de câmpie au devenit deşert."
 
-#: server/maphand.c:164
+#: server/maphand.c:165
 msgid "Nuclear winter has occurred!"
 msgstr "S-a produs iarna nucleară!"
 
-#: server/maphand.c:166
+#: server/maphand.c:167
 msgid "Wetlands have dried up and vast ranges of grassland have become tundra."
 msgstr ""
 "Zonele inundate s-au uscat şi mari regiuni de câmpie au devenit tundră."
 
-#: server/maphand.c:187
+#: server/maphand.c:188
 msgid ""
 "New hope sweeps like fire through the country as the discovery of railroad "
 "is announced.\n"
@@ -4312,7 +4313,7 @@ msgstr ""
 "      Muncitorii se adună în mod spontan şi modernizează toate oraşele "
 "construind căi ferate."
 
-#: server/maphand.c:193
+#: server/maphand.c:194
 msgid ""
 "The people are pleased to hear that your scientists finally know about "
 "railroads.\n"
@@ -4323,15 +4324,234 @@ msgstr ""
 "      Muncitorii se adună în mod spontan şi modernizează toate oraşele "
 "construind căi ferate."
 
-#: server/maphand.c:1380
+#: server/maphand.c:1381
 #, c-format
 msgid "Moved your %s due to changing terrain."
 msgstr "%sul dumneavoastră a fost mutat datorită schimbării terenului."
 
-#: server/maphand.c:1398
+#: server/maphand.c:1399
 #, c-format
 msgid "Disbanded your %s due to changing terrain."
 msgstr "%s a fost dizolvat datorită modificării terenului."
+
+#. TRANS: "<nation adjective>, team <team name>"
+#: server/maphand.c:1888 client/text.c:121
+#, fuzzy, c-format
+msgid "%s, team %s"
+msgstr ", echipa %s"
+
+#. TRANS: "AI <player name>"
+#: server/maphand.c:1915 client/text.c:97
+#, c-format
+msgid "AI %s"
+msgstr ""
+
+#: server/maphand.c:1932 server/maphand.c:1933 server/maphand.c:1938
+#: client/text.c:138 client/text.c:139 client/text.c:144
+#: client/gui-sdl/mapview.c:563
+msgid "?nation:Neutral"
+msgstr " ?diplomatic_state:Neutru"
+
+#: server/maphand.c:1932 client/text.c:138 client/gui-sdl/mapview.c:563
+msgid "?nation:Hostile"
+msgstr "?nation:Ostilă"
+
+#: server/maphand.c:1934 client/text.c:140 client/gui-sdl/mapview.c:565
+msgid "?nation:Peaceful"
+msgstr "?nation:Paşnică"
+
+#: server/maphand.c:1934 client/text.c:140 client/gui-sdl/mapview.c:565
+msgid "?nation:Friendly"
+msgstr "?nation:Prietenoasă"
+
+#: server/maphand.c:1935 client/text.c:141 client/gui-sdl/mapview.c:566
+msgid "?nation:Mysterious"
+msgstr "?nation:Misterioasă"
+
+#: server/maphand.c:1935 client/text.c:141
+msgid "?nation:Friendly(team)"
+msgstr "?nation:Prietenoasă(echipă)"
+
+#: server/maphand.c:1937 client/text.c:143 client/gui-sdl/mapview.c:596
+msgid "?city:Neutral"
+msgstr "?city:Nume"
+
+#: server/maphand.c:1937 client/text.c:143 client/gui-sdl/mapview.c:596
+msgid "?city:Hostile"
+msgstr "?city:Nume"
+
+#: server/maphand.c:1939 client/text.c:145 client/gui-sdl/mapview.c:597
+msgid "?city:Peaceful"
+msgstr "?city:Paşnic"
+
+#: server/maphand.c:1939 client/text.c:145 client/gui-sdl/mapview.c:598
+msgid "?city:Friendly"
+msgstr "?city:Prietenos"
+
+#: server/maphand.c:1939 client/text.c:145 client/gui-sdl/mapview.c:598
+msgid "?city:Mysterious"
+msgstr "?city:Misterios"
+
+#: server/maphand.c:1940 client/text.c:146
+msgid "?city:Friendly(team)"
+msgstr "?city:Prietenos(echipă)"
+
+#: server/maphand.c:1948
+#, fuzzy, c-format
+msgid "Location: (%d, %d)"
+msgstr "Locaţie: (%d, %d) [%d]"
+
+#: server/maphand.c:1955 client/text.c:163
+#, c-format
+msgid "Terrain: %s"
+msgstr "Teren: %s"
+
+#: server/maphand.c:1956 client/text.c:164
+#, c-format
+msgid "Food/Prod/Trade: %s"
+msgstr "Hrană/Prod/Negoţ: %s"
+
+#: server/maphand.c:1959 client/text.c:167
+msgid "Minor Tribe Village"
+msgstr "Sat mic tribal"
+
+#: server/maphand.c:1968 client/text.c:176
+#, fuzzy
+msgid "Our territory"
+msgstr "Teritoriul nostru"
+
+#. TRANS: "Territory of <username> (<nation + team>)"
+#: server/maphand.c:1971 client/text.c:179
+#, fuzzy, c-format
+msgid "Territory of %s (%s)"
+msgstr ""
+"\n"
+"Teritoriul %s %s"
+
+#: server/maphand.c:1981 client/text.c:189
+#, fuzzy, c-format
+msgid "Territory of %s (%s) (%d turn cease-fire)"
+msgid_plural "Territory of %s (%s) (%d turn cease-fire)"
+msgstr[0] "Oraş: %s (%s, %d rendă de încetarea focului)"
+msgstr[1] "Oraş: %s (%s, %d runde de încetarea focului)"
+
+#. TRANS: "Territory of <username>
+#. * (<nation + team> | <diplomatic state>)"
+#: server/maphand.c:1990 client/text.c:198
+#, fuzzy, c-format
+msgid "Territory of %s (%s | %s)"
+msgstr ""
+"\n"
+"Teritoriul %s %s"
+
+#: server/maphand.c:1995 client/text.c:203
+msgid "Unclaimed territory"
+msgstr "Teritoriu nerevendicat"
+
+#. TRANS: "City: <city name> | <username> (<nation + team>)"
+#: server/maphand.c:2010 client/text.c:218
+#, fuzzy, c-format
+msgid "City: %s | %s (%s)"
+msgstr "Oraşul: %s(%s, %s)"
+
+#. TRANS:  "City: <city name> | <username>
+#. * (<nation + team>, <number> turn cease-fire)"
+#: server/maphand.c:2020 client/text.c:228
+#, fuzzy, c-format
+msgid "City: %s | %s (%s, %d turn cease-fire)"
+msgid_plural "City: %s | %s (%s, %d turn cease-fire)"
+msgstr[0] "Oraş: %s (%s, %d rendă de încetarea focului)"
+msgstr[1] "Oraş: %s (%s, %d runde de încetarea focului)"
+
+#. TRANS: "City: <city name> | <username>
+#. * (<nation + team>, <diplomatic state>)"
+#: server/maphand.c:2027 client/text.c:235
+#, fuzzy, c-format
+msgid "City: %s | %s (%s, %s)"
+msgstr "Oraşul: %s(%s, %s)"
+
+#. TRANS: continue list, in case comma is not the separator of choice.
+#: server/maphand.c:2037 server/stdinhand.c:4465 server/stdinhand.c:4469
+#: client/helpdata.c:289 client/helpdata.c:784 client/text.c:245
+#: client/text.c:1313 client/text.c:1350
+#, c-format
+msgid "?clistmore:, %s"
+msgstr ", %s"
+
+#. TRANS: previous lines gave other information about the city.
+#: server/maphand.c:2042 client/text.c:250
+#, fuzzy, c-format
+msgid "?clistbegin: with %s"
+msgstr " cu %s"
+
+#. TRANS: This appears with two or more previous entries in the list
+#: server/maphand.c:2052 client/text.c:260
+#, c-format
+msgid "?clistlast:, and %s"
+msgstr ""
+
+#. TRANS: This appears with only one previous entry in the list
+#: server/maphand.c:2056 client/text.c:264
+#, fuzzy, c-format
+msgid "?clistlast: and %s"
+msgstr "Speciale"
+
+#: server/maphand.c:2059 client/text.c:267 client/text.c:1323
+#: client/text.c:1361
+msgid "?clistend:."
+msgstr ". "
+
+#: server/maphand.c:2073 client/text.c:293
+#, c-format
+msgid "Infrastructure: %s"
+msgstr "Infrastructură:  %s"
+
+#: server/maphand.c:2078 client/text.c:298
+#, c-format
+msgid "Activity: %s"
+msgstr "Activitate: %s"
+
+#. TRANS: "Unit: <unit type> | <username>
+#. * (<nation + team>, <homecity>)"
+#. TRANS: "Unit: <unit type> | <username> (<nation + team>,
+#. * <diplomatic state>)"
+#. TRANS: "Unit: <unit type> | <username>
+#. * (<nation + team>, <homecity>)"
+#. TRANS: "Unit: <unit type> | <username> (<nation + team>,
+#. * <diplomatic state>)"
+#: server/maphand.c:2093 server/maphand.c:2117 client/text.c:313
+#: client/text.c:337
+#, fuzzy, c-format
+msgid "Unit: %s | %s (%s, %s)"
+msgstr "Unitate: %s(%s, %s)"
+
+#. TRANS: "Unit: <unit type> | <username> (<nation + team>)"
+#: server/maphand.c:2098 client/text.c:318
+#, fuzzy, c-format
+msgid "Unit: %s | %s (%s)"
+msgstr "Unitate: %s(%s, %s)"
+
+#. TRANS:  "Unit: <unit type> | <username> (<nation + team>,
+#. * <number> turn cease-fire)"
+#: server/maphand.c:2109 client/text.c:329
+#, fuzzy, c-format
+msgid "Unit: %s | %s (%s, %d turn cease-fire)"
+msgid_plural "Unit: %s | %s (%s, %d turn cease-fire)"
+msgstr[0] "Unitate: %s(%s, %d rundă de încetarea focului)"
+msgstr[1] "Unitate: %s(%s, %d runde de încetarea focului)"
+
+#. TRANS: A is attack power, D is defense power, FP is firepower,
+#. * HP is hitpoints (current and max).
+#: server/maphand.c:2125 client/text.c:369
+#, c-format
+msgid "A:%d D:%d FP:%d HP:%d/%d (%s)"
+msgstr "A:%d D:%d FP:%d HP:%d/%d (%s)"
+
+#. TRANS: "5 more" units on this tile
+#: server/maphand.c:2134 client/text.c:378
+#, c-format
+msgid "  (%d more)"
+msgstr "  (%d mai mult)"
 
 #: server/meta.c:199
 msgid "Not reporting to the metaserver in this game."
@@ -4377,11 +4597,11 @@ msgid_plural ""
 "The %s have incited a revolt! %d turns of anarchy will ensue! Target "
 "government is %s."
 msgstr[0] ""
-"%sii au început o revoltă!Va urma %d rundă de anarhie! Guvernul ţintă este %"
-"s."
+"%sii au început o revoltă!Va urma %d rundă de anarhie! Guvernul ţintă este "
+"%s."
 msgstr[1] ""
-"%sii au început o revoltă!Vor urma %d runde de anarhie! Guvernul ţintă este %"
-"s."
+"%sii au început o revoltă!Vor urma %d runde de anarhie! Guvernul ţintă este "
+"%s."
 
 #: server/plrhand.c:355
 msgid "Revolution: returning to anarchy."
@@ -6503,8 +6723,8 @@ msgstr ""
 #, c-format
 msgid "The cease-fire with %s has run out. You are now at war with the %s."
 msgstr ""
-"Starea de încetare a focului cu %s s-a terminat. Acum sunteţi în război cu %"
-"s."
+"Starea de încetare a focului cu %s s-a terminat. Acum sunteţi în război cu "
+"%s."
 
 #: server/srv_main.c:596
 #, fuzzy, c-format
@@ -7178,8 +7398,8 @@ msgstr ""
 #: server/stdinhand.c:2177
 #, c-format
 msgid ""
-"%s %d \"%s\" (needs %0.0f%%%s): %d for, %d against, and %d abstained out of %"
-"d players."
+"%s %d \"%s\" (needs %0.0f%%%s): %d for, %d against, and %d abstained out of "
+"%d players."
 msgstr ""
 
 #: server/stdinhand.c:2181
@@ -7817,14 +8037,6 @@ msgstr ", Decedat"
 msgid ", difficulty level %s"
 msgstr ", nivel %s de dificultate"
 
-#. TRANS: continue list, in case comma is not the separator of choice.
-#: server/stdinhand.c:4465 server/stdinhand.c:4469 client/helpdata.c:289
-#: client/helpdata.c:784 client/text.c:245 client/text.c:1313
-#: client/text.c:1350
-#, c-format
-msgid "?clistmore:, %s"
-msgstr ", %s"
-
 #: server/stdinhand.c:4473
 msgid ", ready"
 msgstr ", pregătit"
@@ -8022,8 +8234,8 @@ msgstr "Nu pot fi adăugată la un oraş."
 #, c-format
 msgid "%s unit has no moves left to add to %s."
 msgstr ""
-"Unitatea %s nu are unităţi de mişcare pe care le să le poată aduga oraşului %"
-"s."
+"Unitatea %s nu are unităţi de mişcare pe care le să le poată aduga oraşului "
+"%s."
 
 #: server/unithand.c:607
 #, c-format
@@ -8379,8 +8591,8 @@ msgstr "Această unitate nu poate paraşuta în %s."
 #, c-format
 msgid "The distance to the target (%i) is greater than the unit's range (%i)."
 msgstr ""
-"Distanţa până la ţintă (%i) este mai mare decât raza de acţiune a unităţi (%"
-"i)."
+"Distanţa până la ţintă (%i) este mai mare decât raza de acţiune a unităţi "
+"(%i)."
 
 #: server/unittools.c:2299
 #, c-format
@@ -9724,8 +9936,8 @@ msgstr "* Descoperirea %s va învechi %s.\n"
 #, c-format
 msgid "* Allows all players with knowledge of %s to build %s units.\n"
 msgstr ""
-"* Permite jucătorilor care au cunoştinţă de %s să construiască unităţile %"
-"s.\n"
+"* Permite jucătorilor care au cunoştinţă de %s să construiască unităţile "
+"%s.\n"
 
 #: client/helpdata.c:734
 #, c-format
@@ -11646,67 +11858,6 @@ msgstr ""
 msgid "Failed looking up metaserver's host"
 msgstr "Căutarea numelui de gazdă al metaserverului a eşuat."
 
-#. TRANS: "AI <player name>"
-#: client/text.c:97
-#, c-format
-msgid "AI %s"
-msgstr ""
-
-#. TRANS: "<nation adjective>, team <team name>"
-#: client/text.c:121
-#, fuzzy, c-format
-msgid "%s, team %s"
-msgstr ", echipa %s"
-
-#: client/text.c:138 client/text.c:139 client/text.c:144
-#: client/gui-sdl/mapview.c:563
-msgid "?nation:Neutral"
-msgstr " ?diplomatic_state:Neutru"
-
-#: client/text.c:138 client/gui-sdl/mapview.c:563
-msgid "?nation:Hostile"
-msgstr "?nation:Ostilă"
-
-#: client/text.c:140 client/gui-sdl/mapview.c:565
-msgid "?nation:Peaceful"
-msgstr "?nation:Paşnică"
-
-#: client/text.c:140 client/gui-sdl/mapview.c:565
-msgid "?nation:Friendly"
-msgstr "?nation:Prietenoasă"
-
-#: client/text.c:141 client/gui-sdl/mapview.c:566
-msgid "?nation:Mysterious"
-msgstr "?nation:Misterioasă"
-
-#: client/text.c:141
-msgid "?nation:Friendly(team)"
-msgstr "?nation:Prietenoasă(echipă)"
-
-#: client/text.c:143 client/gui-sdl/mapview.c:596
-msgid "?city:Neutral"
-msgstr "?city:Nume"
-
-#: client/text.c:143 client/gui-sdl/mapview.c:596
-msgid "?city:Hostile"
-msgstr "?city:Nume"
-
-#: client/text.c:145 client/gui-sdl/mapview.c:597
-msgid "?city:Peaceful"
-msgstr "?city:Paşnic"
-
-#: client/text.c:145 client/gui-sdl/mapview.c:598
-msgid "?city:Friendly"
-msgstr "?city:Prietenos"
-
-#: client/text.c:145 client/gui-sdl/mapview.c:598
-msgid "?city:Mysterious"
-msgstr "?city:Misterios"
-
-#: client/text.c:146
-msgid "?city:Friendly(team)"
-msgstr "?city:Prietenos(echipă)"
-
 #: client/text.c:154
 #, c-format
 msgid "Location: (%d, %d) [%d]"
@@ -11717,155 +11868,17 @@ msgstr "Locaţie: (%d, %d) [%d]"
 msgid "Native coordinates: (%d, %d)"
 msgstr ""
 
-#: client/text.c:163
-#, c-format
-msgid "Terrain: %s"
-msgstr "Teren: %s"
-
-#: client/text.c:164
-#, c-format
-msgid "Food/Prod/Trade: %s"
-msgstr "Hrană/Prod/Negoţ: %s"
-
-#: client/text.c:167
-msgid "Minor Tribe Village"
-msgstr "Sat mic tribal"
-
-#: client/text.c:176
-#, fuzzy
-msgid "Our territory"
-msgstr "Teritoriul nostru"
-
-#. TRANS: "Territory of <username> (<nation + team>)"
-#: client/text.c:179
-#, fuzzy, c-format
-msgid "Territory of %s (%s)"
-msgstr ""
-"\n"
-"Teritoriul %s %s"
-
-#: client/text.c:189
-#, fuzzy, c-format
-msgid "Territory of %s (%s) (%d turn cease-fire)"
-msgid_plural "Territory of %s (%s) (%d turn cease-fire)"
-msgstr[0] "Oraş: %s (%s, %d rendă de încetarea focului)"
-msgstr[1] "Oraş: %s (%s, %d runde de încetarea focului)"
-
-#. TRANS: "Territory of <username>
-#. * (<nation + team> | <diplomatic state>)"
-#: client/text.c:198
-#, fuzzy, c-format
-msgid "Territory of %s (%s | %s)"
-msgstr ""
-"\n"
-"Teritoriul %s %s"
-
-#: client/text.c:203
-msgid "Unclaimed territory"
-msgstr "Teritoriu nerevendicat"
-
-#. TRANS: "City: <city name> | <username> (<nation + team>)"
-#: client/text.c:218
-#, fuzzy, c-format
-msgid "City: %s | %s (%s)"
-msgstr "Oraşul: %s(%s, %s)"
-
-#. TRANS:  "City: <city name> | <username>
-#. * (<nation + team>, <number> turn cease-fire)"
-#: client/text.c:228
-#, fuzzy, c-format
-msgid "City: %s | %s (%s, %d turn cease-fire)"
-msgid_plural "City: %s | %s (%s, %d turn cease-fire)"
-msgstr[0] "Oraş: %s (%s, %d rendă de încetarea focului)"
-msgstr[1] "Oraş: %s (%s, %d runde de încetarea focului)"
-
-#. TRANS: "City: <city name> | <username>
-#. * (<nation + team>, <diplomatic state>)"
-#: client/text.c:235
-#, fuzzy, c-format
-msgid "City: %s | %s (%s, %s)"
-msgstr "Oraşul: %s(%s, %s)"
-
-#. TRANS: previous lines gave other information about the city.
-#: client/text.c:250
-#, fuzzy, c-format
-msgid "?clistbegin: with %s"
-msgstr " cu %s"
-
-#. TRANS: This appears with two or more previous entries in the list
-#: client/text.c:260
-#, c-format
-msgid "?clistlast:, and %s"
-msgstr ""
-
-#. TRANS: This appears with only one previous entry in the list
-#: client/text.c:264
-#, fuzzy, c-format
-msgid "?clistlast: and %s"
-msgstr "Speciale"
-
-#: client/text.c:267 client/text.c:1323 client/text.c:1361
-msgid "?clistend:."
-msgstr ". "
-
 #. TRANS: "Trade from Warsaw: 5"
 #: client/text.c:277
 #, c-format
 msgid "Trade from %s: %d"
 msgstr "Negoţ de la %s: %d"
 
-#: client/text.c:293
-#, c-format
-msgid "Infrastructure: %s"
-msgstr "Infrastructură:  %s"
-
-#: client/text.c:298
-#, c-format
-msgid "Activity: %s"
-msgstr "Activitate: %s"
-
-#. TRANS: "Unit: <unit type> | <username>
-#. * (<nation + team>, <homecity>)"
-#. TRANS: "Unit: <unit type> | <username> (<nation + team>,
-#. * <diplomatic state>)"
-#: client/text.c:313 client/text.c:337
-#, fuzzy, c-format
-msgid "Unit: %s | %s (%s, %s)"
-msgstr "Unitate: %s(%s, %s)"
-
-#. TRANS: "Unit: <unit type> | <username> (<nation + team>)"
-#: client/text.c:318
-#, fuzzy, c-format
-msgid "Unit: %s | %s (%s)"
-msgstr "Unitate: %s(%s, %s)"
-
-#. TRANS:  "Unit: <unit type> | <username> (<nation + team>,
-#. * <number> turn cease-fire)"
-#: client/text.c:329
-#, fuzzy, c-format
-msgid "Unit: %s | %s (%s, %d turn cease-fire)"
-msgid_plural "Unit: %s | %s (%s, %d turn cease-fire)"
-msgstr[0] "Unitate: %s(%s, %d rundă de încetarea focului)"
-msgstr[1] "Unitate: %s(%s, %d runde de încetarea focului)"
-
 #. TRANS: "Chance to win: A:95% D:46%"
 #: client/text.c:362
 #, c-format
 msgid "Chance to win: A:%d%% D:%d%%"
 msgstr "Şansă de câştig: A:%d%% D:%d%%"
-
-#. TRANS: A is attack power, D is defense power, FP is firepower,
-#. * HP is hitpoints (current and max).
-#: client/text.c:369
-#, c-format
-msgid "A:%d D:%d FP:%d HP:%d/%d (%s)"
-msgstr "A:%d D:%d FP:%d HP:%d/%d (%s)"
-
-#. TRANS: "5 more" units on this tile
-#: client/text.c:378
-#, c-format
-msgid "  (%d more)"
-msgstr "  (%d mai mult)"
 
 #. TRANS: on own line immediately following \n, ... <city>
 #: client/text.c:475
@@ -20638,8 +20651,8 @@ msgid ""
 "Allows a city to grow larger than size 8.  A Sewer System is also required "
 "for a city to grow larger than size 12."
 msgstr ""
-"(Îmbunătăţirea %s este necesară pentru ca un oraş să crească mai mare de %"
-"d.)  "
+"(Îmbunătăţirea %s este necesară pentru ca un oraş să crească mai mare de "
+"%d.)  "
 
 #: data/default/buildings.ruleset:91 data/civ2/buildings.ruleset:74
 #: data/civ1/buildings.ruleset:47
@@ -30492,8 +30505,8 @@ msgstr ""
 #~ "experienţă."
 
 #~ msgid ""
-#~ "Your %s has successfully completed her mission and returned unharmed to %"
-#~ "s and has become more experienced."
+#~ "Your %s has successfully completed her mission and returned unharmed to "
+#~ "%s and has become more experienced."
 #~ msgstr ""
 #~ "%sul dumneavoastră şi-a terminat misiunea cu succes, s-a întors nevătămat "
 #~ "la %s şi a devenit mai experimentat."
@@ -30643,8 +30656,8 @@ msgstr ""
 #~ msgstr "Nu am putut desena textul pe ecran: %s"
 
 #~ msgid ""
-#~ "Error in SDL_create_str16_surf: Couldn't convert text to display format: %"
-#~ "s"
+#~ "Error in SDL_create_str16_surf: Couldn't convert text to display format: "
+#~ "%s"
 #~ msgstr ""
 #~ "Eroare în SDL_create_str16_surf: Nu s-a putut converti textul în formatul "
 #~ "ecranului: %s"
@@ -31265,8 +31278,8 @@ msgstr ""
 #~ "Number of starts (%d) are lower than rules.max_players (%d), lowering "
 #~ "rules.max_players."
 #~ msgstr ""
-#~ "NUmărul de pozitii de început (%d) este mai mic decât rules.max_players (%"
-#~ "d), se micşorează rules.max_players."
+#~ "NUmărul de pozitii de început (%d) este mai mic decât rules.max_players "
+#~ "(%d), se micşorează rules.max_players."
 
 #~ msgid "Wrong unit type id value (%d)"
 #~ msgstr "Valoare id greşită pentru tipul de unitate (%d)"

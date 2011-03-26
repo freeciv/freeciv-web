@@ -10,10 +10,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-05 14:01+0100\n"
+"POT-Creation-Date: 2011-03-26 13:15+0100\n"
 "PO-Revision-Date: 2009-09-04 01:38+0200\n"
 "Last-Translator: Joan Creus <joan.creus at gmail dot com>\n"
 "Language-Team: Català <ca@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -871,9 +872,9 @@ msgstr "Transformar"
 msgid "Base"
 msgstr "Base"
 
-#: common/unit.c:559 client/text.c:160 client/gui-gtk-2.0/editprop.c:5741
-#: client/gui-sdl/citydlg.c:1972 client/gui-win32/citydlg.c:1229
-#: client/gui-xaw/citydlg.c:1462
+#: common/unit.c:559 server/maphand.c:1952 client/text.c:160
+#: client/gui-gtk-2.0/editprop.c:5741 client/gui-sdl/citydlg.c:1972
+#: client/gui-win32/citydlg.c:1229 client/gui-xaw/citydlg.c:1462
 msgid "Unknown"
 msgstr "Desconegut"
 
@@ -1278,8 +1279,8 @@ msgstr "*%s (IA)* Primer trenca l'aliança amb %s, %s."
 #: ai/advdiplomacy.c:335
 #, fuzzy, c-format
 msgid ""
-"*%s (AI)* I would like to see you keep your distance from %s for some time, %"
-"s."
+"*%s (AI)* I would like to see you keep your distance from %s for some time, "
+"%s."
 msgstr ""
 "*%s (IA)* Abans, vull que mantinguis l'alto el foc actual una mica més, %s."
 
@@ -1544,8 +1545,8 @@ msgstr ""
 #: ai/advdiplomacy.c:1611
 #, c-format
 msgid ""
-"*%s (AI)* Greetings ally, I see you have not yet made war with our enemy, %"
-"s. Why do I need to remind you of your promises?"
+"*%s (AI)* Greetings ally, I see you have not yet made war with our enemy, "
+"%s. Why do I need to remind you of your promises?"
 msgstr ""
 "*%s (IA)* Salutacions aliat, veig que encara no has declarat la guerra al "
 "nostre enemic %s. Com és que t'he de recordar les teves promeses?"
@@ -2095,8 +2096,8 @@ msgstr ""
 msgid ""
 "%s can't build %s from the worklist; city must be of size %d.  Postponing..."
 msgstr ""
-"%s no pot construir %s de la llista de treball, la ciutat ha de ser de mida %"
-"d.  S'ajorna..."
+"%s no pot construir %s de la llista de treball, la ciutat ha de ser de mida "
+"%d.  S'ajorna..."
 
 #: server/cityturn.c:1123
 #, c-format
@@ -2113,8 +2114,8 @@ msgid ""
 "%s can't build %s from the worklist; %s terrain class is required.  "
 "Postponing..."
 msgstr ""
-"%s no pot construir %s de la llista de treball, necessita classe de terreny %"
-"s.  S'ajorna..."
+"%s no pot construir %s de la llista de treball, necessita classe de terreny "
+"%s.  S'ajorna..."
 
 #: server/cityturn.c:1164
 #, c-format
@@ -3231,8 +3232,8 @@ msgid ""
 "and use the 'start' command once players have reconnected."
 msgstr ""
 "Desar la partida actual al fitxer <nom-fitxer>. Si no s'especifica cap nom "
-"de fitxer es desa a \"<Prefix dels noms de desar automàtic><any>m.sav[.gz]"
-"\".\n"
+"de fitxer es desa a \"<Prefix dels noms de desar automàtic><any>m.sav[."
+"gz]\".\n"
 "Per a tornar a carregar una partida desada amb 'save', s'ha d'iniciar el "
 "servidor amb l'argument de la línia de comanda: \n"
 "    --file <nomfitxer>\n"
@@ -3877,8 +3878,8 @@ msgid ""
 "Cannot modify specials for the tile %s because %d is not a valid terrain "
 "special id."
 msgstr ""
-"No es poden modificar els recursos especials de la casella (%d, %d) perquè %"
-"d no és un identificador vàlid de recurs especial de terreny."
+"No es poden modificar els recursos especials de la casella (%d, %d) perquè "
+"%d no és un identificador vàlid de recurs especial de terreny."
 
 #. TRANS: ..." the tile <tile-coordinates> because"...
 #: server/edithand.c:319
@@ -4030,8 +4031,8 @@ msgid ""
 "No more players can be added because the maximum number of players (%d) has "
 "been reached."
 msgstr ""
-"No es poden afegir més jugadors perquè s'ha arribat al màxim de jugadors (%"
-"d)."
+"No es poden afegir més jugadors perquè s'ha arribat al màxim de jugadors "
+"(%d)."
 
 #: server/edithand.c:885
 #, c-format
@@ -4039,8 +4040,8 @@ msgid ""
 "No more players can be added because there are no available nations (%d "
 "used)."
 msgstr ""
-"No es poden afegir més jugadors perquè no queden nacions (se'n fan servir %"
-"d)."
+"No es poden afegir més jugadors perquè no queden nacions (se'n fan servir "
+"%d)."
 
 #: server/edithand.c:894
 msgid "Player cannot be created because random nation selection failed."
@@ -4072,8 +4073,8 @@ msgid ""
 "Cannot change name of player (%d) '%s' to '%s': another player (%d) already "
 "has that name."
 msgstr ""
-"No es pot modificar el nom del jugador (%d) '%s' a '%s': un altre jugador (%"
-"d) ja té aquest nom."
+"No es pot modificar el nom del jugador (%d) '%s' a '%s': un altre jugador "
+"(%d) ja té aquest nom."
 
 #: server/edithand.c:1017
 #, c-format
@@ -4224,28 +4225,28 @@ msgstr "No hi ha cap connexió amb el nom %s."
 msgid "There is no player nor connection by the name %s."
 msgstr "No hi ha cap connexió ni jugador amb el nom %s."
 
-#: server/maphand.c:120
+#: server/maphand.c:121
 msgid "Global warming has occurred!"
 msgstr "Ha ocorregut l'escalfament global!"
 
-#: server/maphand.c:122
+#: server/maphand.c:123
 msgid ""
 "Coastlines have been flooded and vast ranges of grassland have become "
 "deserts."
 msgstr ""
 "Les costes s'han inundat i grans quantitats de prats s'han desertitzat."
 
-#: server/maphand.c:164
+#: server/maphand.c:165
 msgid "Nuclear winter has occurred!"
 msgstr "Ha ocorregut l'hivern nuclear!"
 
-#: server/maphand.c:166
+#: server/maphand.c:167
 msgid "Wetlands have dried up and vast ranges of grassland have become tundra."
 msgstr ""
 "Les àrees humides s'han assecat i grans quantitats de prats s'han convertit "
 "en tundra."
 
-#: server/maphand.c:187
+#: server/maphand.c:188
 msgid ""
 "New hope sweeps like fire through the country as the discovery of railroad "
 "is announced.\n"
@@ -4256,7 +4257,7 @@ msgstr ""
 "      Els treballadors s'apleguen espontàniament i instal·len ferrocarril en "
 "totes les ciutats."
 
-#: server/maphand.c:193
+#: server/maphand.c:194
 msgid ""
 "The people are pleased to hear that your scientists finally know about "
 "railroads.\n"
@@ -4267,15 +4268,229 @@ msgstr ""
 "      Els treballadors s'apleguen espontàniament i instal·len ferrocarril en "
 "totes les ciutats."
 
-#: server/maphand.c:1380
+#: server/maphand.c:1381
 #, c-format
 msgid "Moved your %s due to changing terrain."
 msgstr "S'ha mogut el teu %s degut a un canvi de terreny."
 
-#: server/maphand.c:1398
+#: server/maphand.c:1399
 #, c-format
 msgid "Disbanded your %s due to changing terrain."
 msgstr "Desmantellat el teu %s degut a un canvi de terreny."
+
+#. TRANS: "<nation adjective>, team <team name>"
+#: server/maphand.c:1888 client/text.c:121
+#, c-format
+msgid "%s, team %s"
+msgstr "%s, equip %s"
+
+#. TRANS: "AI <player name>"
+#: server/maphand.c:1915 client/text.c:97
+#, c-format
+msgid "AI %s"
+msgstr "IA %s"
+
+#: server/maphand.c:1932 server/maphand.c:1933 server/maphand.c:1938
+#: client/text.c:138 client/text.c:139 client/text.c:144
+#: client/gui-sdl/mapview.c:563
+msgid "?nation:Neutral"
+msgstr "?nation:Neutrals"
+
+#: server/maphand.c:1932 client/text.c:138 client/gui-sdl/mapview.c:563
+msgid "?nation:Hostile"
+msgstr "?nation:Hostils"
+
+#: server/maphand.c:1934 client/text.c:140 client/gui-sdl/mapview.c:565
+msgid "?nation:Peaceful"
+msgstr "?nation:Pacífics"
+
+#: server/maphand.c:1934 client/text.c:140 client/gui-sdl/mapview.c:565
+msgid "?nation:Friendly"
+msgstr "?nation:Amistosos"
+
+#: server/maphand.c:1935 client/text.c:141 client/gui-sdl/mapview.c:566
+msgid "?nation:Mysterious"
+msgstr "?nation:Misteriosos"
+
+#: server/maphand.c:1935 client/text.c:141
+msgid "?nation:Friendly(team)"
+msgstr "?nation:Amistosos(equip)"
+
+#: server/maphand.c:1937 client/text.c:143 client/gui-sdl/mapview.c:596
+msgid "?city:Neutral"
+msgstr "?city:Neutrals"
+
+#: server/maphand.c:1937 client/text.c:143 client/gui-sdl/mapview.c:596
+msgid "?city:Hostile"
+msgstr "?city:Hostils"
+
+#: server/maphand.c:1939 client/text.c:145 client/gui-sdl/mapview.c:597
+msgid "?city:Peaceful"
+msgstr "?city:Pacífics"
+
+#: server/maphand.c:1939 client/text.c:145 client/gui-sdl/mapview.c:598
+msgid "?city:Friendly"
+msgstr "?city:Amistosos"
+
+#: server/maphand.c:1939 client/text.c:145 client/gui-sdl/mapview.c:598
+msgid "?city:Mysterious"
+msgstr "?city:Misteriosos"
+
+#: server/maphand.c:1940 client/text.c:146
+msgid "?city:Friendly(team)"
+msgstr "?city:Amistosos(equip)"
+
+#: server/maphand.c:1948
+#, fuzzy, c-format
+msgid "Location: (%d, %d)"
+msgstr "Situació: (%d, %d) [%d]"
+
+#: server/maphand.c:1955 client/text.c:163
+#, c-format
+msgid "Terrain: %s"
+msgstr "Terreny: %s"
+
+#: server/maphand.c:1956 client/text.c:164
+#, c-format
+msgid "Food/Prod/Trade: %s"
+msgstr "Menjar/Producció/Comerç: %s"
+
+#: server/maphand.c:1959 client/text.c:167
+msgid "Minor Tribe Village"
+msgstr "Llogarret indígena"
+
+#: server/maphand.c:1968 client/text.c:176
+msgid "Our territory"
+msgstr "Territori nostre"
+
+#. TRANS: "Territory of <username> (<nation + team>)"
+#: server/maphand.c:1971 client/text.c:179
+#, c-format
+msgid "Territory of %s (%s)"
+msgstr "Territori dels %s (%s)"
+
+#: server/maphand.c:1981 client/text.c:189
+#, c-format
+msgid "Territory of %s (%s) (%d turn cease-fire)"
+msgid_plural "Territory of %s (%s) (%d turn cease-fire)"
+msgstr[0] "Territori dels %s (%s) (%d torn d'alto el foc)"
+msgstr[1] "Territori dels %s (%s) (%d torns d'alto el foc)"
+
+#. TRANS: "Territory of <username>
+#. * (<nation + team> | <diplomatic state>)"
+#: server/maphand.c:1990 client/text.c:198
+#, c-format
+msgid "Territory of %s (%s | %s)"
+msgstr "Territori de %s (%s | %s)"
+
+#: server/maphand.c:1995 client/text.c:203
+msgid "Unclaimed territory"
+msgstr "Territori no reclamat"
+
+#. TRANS: "City: <city name> | <username> (<nation + team>)"
+#: server/maphand.c:2010 client/text.c:218
+#, c-format
+msgid "City: %s | %s (%s)"
+msgstr "Ciutat: %s | %s (%s)"
+
+#. TRANS:  "City: <city name> | <username>
+#. * (<nation + team>, <number> turn cease-fire)"
+#: server/maphand.c:2020 client/text.c:228
+#, c-format
+msgid "City: %s | %s (%s, %d turn cease-fire)"
+msgid_plural "City: %s | %s (%s, %d turn cease-fire)"
+msgstr[0] "Ciutat: %s | %s (%s, %d torn d'alto el foc)"
+msgstr[1] "Ciutat: %s | %s (%s, %d torns d'alto el foc)"
+
+#. TRANS: "City: <city name> | <username>
+#. * (<nation + team>, <diplomatic state>)"
+#: server/maphand.c:2027 client/text.c:235
+#, c-format
+msgid "City: %s | %s (%s, %s)"
+msgstr "Ciutat: %s | %s (%s, %s)"
+
+#. TRANS: continue list, in case comma is not the separator of choice.
+#: server/maphand.c:2037 server/stdinhand.c:4465 server/stdinhand.c:4469
+#: client/helpdata.c:289 client/helpdata.c:784 client/text.c:245
+#: client/text.c:1313 client/text.c:1350
+#, c-format
+msgid "?clistmore:, %s"
+msgstr "?clistmore:, %s"
+
+#. TRANS: previous lines gave other information about the city.
+#: server/maphand.c:2042 client/text.c:250
+#, c-format
+msgid "?clistbegin: with %s"
+msgstr " amb %s"
+
+#. TRANS: This appears with two or more previous entries in the list
+#: server/maphand.c:2052 client/text.c:260
+#, c-format
+msgid "?clistlast:, and %s"
+msgstr ", i %s"
+
+#. TRANS: This appears with only one previous entry in the list
+#: server/maphand.c:2056 client/text.c:264
+#, c-format
+msgid "?clistlast: and %s"
+msgstr " i %s"
+
+#: server/maphand.c:2059 client/text.c:267 client/text.c:1323
+#: client/text.c:1361
+msgid "?clistend:."
+msgstr "?blistend:."
+
+#: server/maphand.c:2073 client/text.c:293
+#, c-format
+msgid "Infrastructure: %s"
+msgstr "Infraestructures: %s"
+
+#: server/maphand.c:2078 client/text.c:298
+#, c-format
+msgid "Activity: %s"
+msgstr "Activitat: %s"
+
+#. TRANS: "Unit: <unit type> | <username>
+#. * (<nation + team>, <homecity>)"
+#. TRANS: "Unit: <unit type> | <username> (<nation + team>,
+#. * <diplomatic state>)"
+#. TRANS: "Unit: <unit type> | <username>
+#. * (<nation + team>, <homecity>)"
+#. TRANS: "Unit: <unit type> | <username> (<nation + team>,
+#. * <diplomatic state>)"
+#: server/maphand.c:2093 server/maphand.c:2117 client/text.c:313
+#: client/text.c:337
+#, c-format
+msgid "Unit: %s | %s (%s, %s)"
+msgstr "Unitat: %s | %s (%s, %s)"
+
+#. TRANS: "Unit: <unit type> | <username> (<nation + team>)"
+#: server/maphand.c:2098 client/text.c:318
+#, c-format
+msgid "Unit: %s | %s (%s)"
+msgstr "Unitat: %s | %s (%s)"
+
+#. TRANS:  "Unit: <unit type> | <username> (<nation + team>,
+#. * <number> turn cease-fire)"
+#: server/maphand.c:2109 client/text.c:329
+#, c-format
+msgid "Unit: %s | %s (%s, %d turn cease-fire)"
+msgid_plural "Unit: %s | %s (%s, %d turn cease-fire)"
+msgstr[0] "Unitat: %s | %s (%s, %d torn d'alto el foc)"
+msgstr[1] "Unitat: %s | %s (%s, %d torns d'alto el foc)"
+
+#. TRANS: A is attack power, D is defense power, FP is firepower,
+#. * HP is hitpoints (current and max).
+#: server/maphand.c:2125 client/text.c:369
+#, c-format
+msgid "A:%d D:%d FP:%d HP:%d/%d (%s)"
+msgstr "A:%d D:%d PF:%d V:%d/%d (%s)"
+
+#. TRANS: "5 more" units on this tile
+#: server/maphand.c:2134 client/text.c:378
+#, c-format
+msgid "  (%d more)"
+msgstr "  (%d més)"
 
 #: server/meta.c:199
 msgid "Not reporting to the metaserver in this game."
@@ -4486,8 +4701,8 @@ msgstr ""
 #, c-format
 msgid "%s %s reports on the most MILITARIZED Civilizations in the World."
 msgstr ""
-"L'informe de %2$s sobre les civilitzacions MÉS MILITARITZADES del món el %1"
-"$s."
+"L'informe de %2$s sobre les civilitzacions MÉS MILITARITZADES del món el "
+"%1$s."
 
 #. TRANS: year <name> reports ...
 #: server/report.c:64
@@ -6776,8 +6991,8 @@ msgid ""
 "Cannot decrease command access level '%s' for connection '%s'; you only have "
 "'%s'."
 msgstr ""
-"No es pot disminuir el nivell d'accés de comanda '%s' per a la connexió '%"
-"s'; només tens '%s'."
+"No es pot disminuir el nivell d'accés de comanda '%s' per a la connexió "
+"'%s'; només tens '%s'."
 
 #: server/stdinhand.c:1149
 #, c-format
@@ -7075,8 +7290,8 @@ msgstr "Vot"
 #: server/stdinhand.c:2177
 #, c-format
 msgid ""
-"%s %d \"%s\" (needs %0.0f%%%s): %d for, %d against, and %d abstained out of %"
-"d players."
+"%s %d \"%s\" (needs %0.0f%%%s): %d for, %d against, and %d abstained out of "
+"%d players."
 msgstr ""
 "%s %d \"%s\" (cal %0.0f%%%s): %d a favor, %d en contra, i %d abstencions "
 "sobre %d jugadors."
@@ -7719,14 +7934,6 @@ msgstr ", Mort"
 msgid ", difficulty level %s"
 msgstr ", nivell de dificultat %s"
 
-#. TRANS: continue list, in case comma is not the separator of choice.
-#: server/stdinhand.c:4465 server/stdinhand.c:4469 client/helpdata.c:289
-#: client/helpdata.c:784 client/text.c:245 client/text.c:1313
-#: client/text.c:1350
-#, c-format
-msgid "?clistmore:, %s"
-msgstr "?clistmore:, %s"
-
 #: server/stdinhand.c:4473
 msgid ", ready"
 msgstr ", preparat"
@@ -7818,8 +8025,8 @@ msgstr "El descobriment de %s DEIXA OBSOLET %s a %s!"
 #, c-format
 msgid "Learned %s. Our scientists focus on %s; goal is %s."
 msgstr ""
-"Un cop descobert %s, els nostres científics es dediquen a %s, l'objectiu és %"
-"s."
+"Un cop descobert %s, els nostres científics es dediquen a %s, l'objectiu és "
+"%s."
 
 #: server/techtools.c:378
 #, c-format
@@ -9172,8 +9379,8 @@ msgstr "Desconnectat del servidor."
 #, c-format
 msgid "Failed to contact server \"%s\" at port %d as \"%s\" after %d attempts"
 msgstr ""
-"No s'ha pogut contactar el servidor \"%s\" port %d com a  \"%s\" després de %"
-"d intents"
+"No s'ha pogut contactar el servidor \"%s\" port %d com a  \"%s\" després de "
+"%d intents"
 
 #: client/clinet.c:486
 msgid "Connection to server refused. Please start the server."
@@ -11566,67 +11773,6 @@ msgstr ""
 msgid "Failed looking up metaserver's host"
 msgstr "Fallada en buscar el host del metaservidor"
 
-#. TRANS: "AI <player name>"
-#: client/text.c:97
-#, c-format
-msgid "AI %s"
-msgstr "IA %s"
-
-#. TRANS: "<nation adjective>, team <team name>"
-#: client/text.c:121
-#, c-format
-msgid "%s, team %s"
-msgstr "%s, equip %s"
-
-#: client/text.c:138 client/text.c:139 client/text.c:144
-#: client/gui-sdl/mapview.c:563
-msgid "?nation:Neutral"
-msgstr "?nation:Neutrals"
-
-#: client/text.c:138 client/gui-sdl/mapview.c:563
-msgid "?nation:Hostile"
-msgstr "?nation:Hostils"
-
-#: client/text.c:140 client/gui-sdl/mapview.c:565
-msgid "?nation:Peaceful"
-msgstr "?nation:Pacífics"
-
-#: client/text.c:140 client/gui-sdl/mapview.c:565
-msgid "?nation:Friendly"
-msgstr "?nation:Amistosos"
-
-#: client/text.c:141 client/gui-sdl/mapview.c:566
-msgid "?nation:Mysterious"
-msgstr "?nation:Misteriosos"
-
-#: client/text.c:141
-msgid "?nation:Friendly(team)"
-msgstr "?nation:Amistosos(equip)"
-
-#: client/text.c:143 client/gui-sdl/mapview.c:596
-msgid "?city:Neutral"
-msgstr "?city:Neutrals"
-
-#: client/text.c:143 client/gui-sdl/mapview.c:596
-msgid "?city:Hostile"
-msgstr "?city:Hostils"
-
-#: client/text.c:145 client/gui-sdl/mapview.c:597
-msgid "?city:Peaceful"
-msgstr "?city:Pacífics"
-
-#: client/text.c:145 client/gui-sdl/mapview.c:598
-msgid "?city:Friendly"
-msgstr "?city:Amistosos"
-
-#: client/text.c:145 client/gui-sdl/mapview.c:598
-msgid "?city:Mysterious"
-msgstr "?city:Misteriosos"
-
-#: client/text.c:146
-msgid "?city:Friendly(team)"
-msgstr "?city:Amistosos(equip)"
-
 #: client/text.c:154
 #, c-format
 msgid "Location: (%d, %d) [%d]"
@@ -11637,150 +11783,17 @@ msgstr "Situació: (%d, %d) [%d]"
 msgid "Native coordinates: (%d, %d)"
 msgstr "Coordenades natives: (%d, %d)"
 
-#: client/text.c:163
-#, c-format
-msgid "Terrain: %s"
-msgstr "Terreny: %s"
-
-#: client/text.c:164
-#, c-format
-msgid "Food/Prod/Trade: %s"
-msgstr "Menjar/Producció/Comerç: %s"
-
-#: client/text.c:167
-msgid "Minor Tribe Village"
-msgstr "Llogarret indígena"
-
-#: client/text.c:176
-msgid "Our territory"
-msgstr "Territori nostre"
-
-#. TRANS: "Territory of <username> (<nation + team>)"
-#: client/text.c:179
-#, c-format
-msgid "Territory of %s (%s)"
-msgstr "Territori dels %s (%s)"
-
-#: client/text.c:189
-#, c-format
-msgid "Territory of %s (%s) (%d turn cease-fire)"
-msgid_plural "Territory of %s (%s) (%d turn cease-fire)"
-msgstr[0] "Territori dels %s (%s) (%d torn d'alto el foc)"
-msgstr[1] "Territori dels %s (%s) (%d torns d'alto el foc)"
-
-#. TRANS: "Territory of <username>
-#. * (<nation + team> | <diplomatic state>)"
-#: client/text.c:198
-#, c-format
-msgid "Territory of %s (%s | %s)"
-msgstr "Territori de %s (%s | %s)"
-
-#: client/text.c:203
-msgid "Unclaimed territory"
-msgstr "Territori no reclamat"
-
-#. TRANS: "City: <city name> | <username> (<nation + team>)"
-#: client/text.c:218
-#, c-format
-msgid "City: %s | %s (%s)"
-msgstr "Ciutat: %s | %s (%s)"
-
-#. TRANS:  "City: <city name> | <username>
-#. * (<nation + team>, <number> turn cease-fire)"
-#: client/text.c:228
-#, c-format
-msgid "City: %s | %s (%s, %d turn cease-fire)"
-msgid_plural "City: %s | %s (%s, %d turn cease-fire)"
-msgstr[0] "Ciutat: %s | %s (%s, %d torn d'alto el foc)"
-msgstr[1] "Ciutat: %s | %s (%s, %d torns d'alto el foc)"
-
-#. TRANS: "City: <city name> | <username>
-#. * (<nation + team>, <diplomatic state>)"
-#: client/text.c:235
-#, c-format
-msgid "City: %s | %s (%s, %s)"
-msgstr "Ciutat: %s | %s (%s, %s)"
-
-#. TRANS: previous lines gave other information about the city.
-#: client/text.c:250
-#, c-format
-msgid "?clistbegin: with %s"
-msgstr " amb %s"
-
-#. TRANS: This appears with two or more previous entries in the list
-#: client/text.c:260
-#, c-format
-msgid "?clistlast:, and %s"
-msgstr ", i %s"
-
-#. TRANS: This appears with only one previous entry in the list
-#: client/text.c:264
-#, c-format
-msgid "?clistlast: and %s"
-msgstr " i %s"
-
-#: client/text.c:267 client/text.c:1323 client/text.c:1361
-msgid "?clistend:."
-msgstr "?blistend:."
-
 #. TRANS: "Trade from Warsaw: 5"
 #: client/text.c:277
 #, c-format
 msgid "Trade from %s: %d"
 msgstr "Comerç des de %s: %d"
 
-#: client/text.c:293
-#, c-format
-msgid "Infrastructure: %s"
-msgstr "Infraestructures: %s"
-
-#: client/text.c:298
-#, c-format
-msgid "Activity: %s"
-msgstr "Activitat: %s"
-
-#. TRANS: "Unit: <unit type> | <username>
-#. * (<nation + team>, <homecity>)"
-#. TRANS: "Unit: <unit type> | <username> (<nation + team>,
-#. * <diplomatic state>)"
-#: client/text.c:313 client/text.c:337
-#, c-format
-msgid "Unit: %s | %s (%s, %s)"
-msgstr "Unitat: %s | %s (%s, %s)"
-
-#. TRANS: "Unit: <unit type> | <username> (<nation + team>)"
-#: client/text.c:318
-#, c-format
-msgid "Unit: %s | %s (%s)"
-msgstr "Unitat: %s | %s (%s)"
-
-#. TRANS:  "Unit: <unit type> | <username> (<nation + team>,
-#. * <number> turn cease-fire)"
-#: client/text.c:329
-#, c-format
-msgid "Unit: %s | %s (%s, %d turn cease-fire)"
-msgid_plural "Unit: %s | %s (%s, %d turn cease-fire)"
-msgstr[0] "Unitat: %s | %s (%s, %d torn d'alto el foc)"
-msgstr[1] "Unitat: %s | %s (%s, %d torns d'alto el foc)"
-
 #. TRANS: "Chance to win: A:95% D:46%"
 #: client/text.c:362
 #, c-format
 msgid "Chance to win: A:%d%% D:%d%%"
 msgstr "Prob. guanyar: A:%d%% D:%d%%"
-
-#. TRANS: A is attack power, D is defense power, FP is firepower,
-#. * HP is hitpoints (current and max).
-#: client/text.c:369
-#, c-format
-msgid "A:%d D:%d FP:%d HP:%d/%d (%s)"
-msgstr "A:%d D:%d PF:%d V:%d/%d (%s)"
-
-#. TRANS: "5 more" units on this tile
-#: client/text.c:378
-#, c-format
-msgid "  (%d more)"
-msgstr "  (%d més)"
 
 #. TRANS: on own line immediately following \n, ... <city>
 #: client/text.c:475
@@ -16108,8 +16121,8 @@ msgstr "No s'ha pogut convertir la imatge des de l'arxiu %s al format %d."
 #, c-format
 msgid "Unable to create Sprite (Surface) of size %d x %d %d Bits in format %d"
 msgstr ""
-"No s'ha pogut crear l'Sprite (superfície) de mida %d x %d %d Bits en format %"
-"d"
+"No s'ha pogut crear l'Sprite (superfície) de mida %d x %d %d Bits en format "
+"%d"
 
 #: client/gui-sdl/graphics.c:1012
 #, c-format

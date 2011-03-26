@@ -15,10 +15,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: freeciv 2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-05 14:01+0100\n"
+"POT-Creation-Date: 2011-03-26 13:15+0100\n"
 "PO-Revision-Date: 2009-07-29 12:14+0300\n"
 "Last-Translator: Sini Ruohomaa <sini.ruohomaa@iki.fi>\n"
 "Language-Team: Finnish <laatu@lokalisointi.org>\n"
+"Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -884,9 +885,9 @@ msgstr "Muokkaa"
 msgid "Base"
 msgstr "Tukikohta"
 
-#: common/unit.c:559 client/text.c:160 client/gui-gtk-2.0/editprop.c:5741
-#: client/gui-sdl/citydlg.c:1972 client/gui-win32/citydlg.c:1229
-#: client/gui-xaw/citydlg.c:1462
+#: common/unit.c:559 server/maphand.c:1952 client/text.c:160
+#: client/gui-gtk-2.0/editprop.c:5741 client/gui-sdl/citydlg.c:1972
+#: client/gui-win32/citydlg.c:1229 client/gui-xaw/citydlg.c:1462
 msgid "Unknown"
 msgstr "Tuntematon"
 
@@ -1295,8 +1296,8 @@ msgstr "*%s (AI)* Pura ensin liittosi pelaajan %s kanssa, %s."
 #: ai/advdiplomacy.c:335
 #, fuzzy, c-format
 msgid ""
-"*%s (AI)* I would like to see you keep your distance from %s for some time, %"
-"s."
+"*%s (AI)* I would like to see you keep your distance from %s for some time, "
+"%s."
 msgstr ""
 "*%s (AI)* Haluaisin sinun pitävän nykyisen tulitauon ensin hieman pidempään, "
 "%s."
@@ -1561,8 +1562,8 @@ msgstr ""
 #: ai/advdiplomacy.c:1611
 #, c-format
 msgid ""
-"*%s (AI)* Greetings ally, I see you have not yet made war with our enemy, %"
-"s. Why do I need to remind you of your promises?"
+"*%s (AI)* Greetings ally, I see you have not yet made war with our enemy, "
+"%s. Why do I need to remind you of your promises?"
 msgstr ""
 "*%s (AI)* Tervehdys, liittolainen. Huomaan, että vihollisemme, %s, ei "
 "vieläkään ole vastaanottanut sodanjulistustasi. Pitääkö minun muistuttaa "
@@ -2106,8 +2107,8 @@ msgstr ""
 msgid ""
 "%s can't build %s from the worklist; city must be of size %d.  Postponing..."
 msgstr ""
-"%s: työlistan projekti %s lykkäytyy, koska se vaatii kaupungin koon olevan %"
-"d."
+"%s: työlistan projekti %s lykkäytyy, koska se vaatii kaupungin koon olevan "
+"%d."
 
 #: server/cityturn.c:1123
 #, c-format
@@ -3238,8 +3239,8 @@ msgid ""
 "and use the 'start' command once players have reconnected."
 msgstr ""
 "Tallenna tämänhetkinen peli tiedostoon <tiedostonimi>. Jos parametriä ei "
-"ole, tallentaa pelin tiedostoon \"<auto-tallennusalkuliite><vuosi>m.sav[.gz]"
-"\".\n"
+"ole, tallentaa pelin tiedostoon \"<auto-tallennusalkuliite><vuosi>m.sav[."
+"gz]\".\n"
 "Ladataksesi pelin joka on tallennettu 'savella', käynnistä palvelin "
 "komentoparametrillä:\n"
 "    --file <tiedostonimi>\n"
@@ -4106,8 +4107,8 @@ msgid ""
 "Cannot change nation for player %d (%s) to nation %d (%s) because that "
 "nation is already assigned to player %d (%s)."
 msgstr ""
-"Pelaajan %d (%s) kansakunnan muuttaminen epäonnistui - uusi kansakunta %d (%"
-"s) on jo pelaajan %d (%s) käytössä."
+"Pelaajan %d (%s) kansakunnan muuttaminen epäonnistui - uusi kansakunta %d "
+"(%s) on jo pelaajan %d (%s) käytössä."
 
 #: server/edithand.c:1059
 #, c-format
@@ -4159,8 +4160,8 @@ msgstr ""
 #, c-format
 msgid "Cannot set invalid game year %d. Valid year range is from %d to %d."
 msgstr ""
-"Pelin vuoden asettaminen arvoon %d epäonnistui; sallitut arvot ovat välillä %"
-"d - %d."
+"Pelin vuoden asettaminen arvoon %d epäonnistui; sallitut arvot ovat välillä "
+"%d - %d."
 
 #: server/edithand.c:1362
 msgid "No permissions to remotely save scenario."
@@ -4247,11 +4248,11 @@ msgstr "En löydä yhteyttä jonka nimi olisi %s."
 msgid "There is no player nor connection by the name %s."
 msgstr "En löydä pelaajaa enkä yhteyttä nimellä %s."
 
-#: server/maphand.c:120
+#: server/maphand.c:121
 msgid "Global warming has occurred!"
 msgstr "Maailmanlaajuista lämpenemistä on ilmennyt!"
 
-#: server/maphand.c:122
+#: server/maphand.c:123
 msgid ""
 "Coastlines have been flooded and vast ranges of grassland have become "
 "deserts."
@@ -4259,17 +4260,17 @@ msgstr ""
 "Rannikkoalueita on joutunut tulvan valtaan ja laajoja ruohikkoalueita on "
 "aavikoitunut."
 
-#: server/maphand.c:164
+#: server/maphand.c:165
 msgid "Nuclear winter has occurred!"
 msgstr "Ydintalvi on laskeutunut!"
 
-#: server/maphand.c:166
+#: server/maphand.c:167
 msgid "Wetlands have dried up and vast ranges of grassland have become tundra."
 msgstr ""
 "Suoalueita on kuivunut ja tundra on levinnyt laajalti entisille "
 "ruohoalueille."
 
-#: server/maphand.c:187
+#: server/maphand.c:188
 msgid ""
 "New hope sweeps like fire through the country as the discovery of railroad "
 "is announced.\n"
@@ -4279,7 +4280,7 @@ msgstr ""
 "myötä.\n"
 "      Työläiset pitävät talkoot ja rakentavat rautatien joka kaupunkiin."
 
-#: server/maphand.c:193
+#: server/maphand.c:194
 msgid ""
 "The people are pleased to hear that your scientists finally know about "
 "railroads.\n"
@@ -4289,15 +4290,229 @@ msgstr ""
 "rautatiet.\n"
 "      Työläiset pitävät talkoot ja rakentavat rautatien joka kaupunkiin."
 
-#: server/maphand.c:1380
+#: server/maphand.c:1381
 #, c-format
 msgid "Moved your %s due to changing terrain."
 msgstr "Yksikkösi %s on siirretty muuttuneen maaston takia."
 
-#: server/maphand.c:1398
+#: server/maphand.c:1399
 #, c-format
 msgid "Disbanded your %s due to changing terrain."
 msgstr "Yksikkösi %s on lakkautettu muuttuneen maaston takia."
+
+#. TRANS: "<nation adjective>, team <team name>"
+#: server/maphand.c:1888 client/text.c:121
+#, c-format
+msgid "%s, team %s"
+msgstr "%s, joukkue %s"
+
+#. TRANS: "AI <player name>"
+#: server/maphand.c:1915 client/text.c:97
+#, c-format
+msgid "AI %s"
+msgstr "AI %s"
+
+#: server/maphand.c:1932 server/maphand.c:1933 server/maphand.c:1938
+#: client/text.c:138 client/text.c:139 client/text.c:144
+#: client/gui-sdl/mapview.c:563
+msgid "?nation:Neutral"
+msgstr "Neutraali"
+
+#: server/maphand.c:1932 client/text.c:138 client/gui-sdl/mapview.c:563
+msgid "?nation:Hostile"
+msgstr "Vihamielinen"
+
+#: server/maphand.c:1934 client/text.c:140 client/gui-sdl/mapview.c:565
+msgid "?nation:Peaceful"
+msgstr "Rauhanomainen"
+
+#: server/maphand.c:1934 client/text.c:140 client/gui-sdl/mapview.c:565
+msgid "?nation:Friendly"
+msgstr "Ystävällinen"
+
+#: server/maphand.c:1935 client/text.c:141 client/gui-sdl/mapview.c:566
+msgid "?nation:Mysterious"
+msgstr "Mystinen"
+
+#: server/maphand.c:1935 client/text.c:141
+msgid "?nation:Friendly(team)"
+msgstr "Ystävällinen(joukkue)"
+
+#: server/maphand.c:1937 client/text.c:143 client/gui-sdl/mapview.c:596
+msgid "?city:Neutral"
+msgstr "Neutraali"
+
+#: server/maphand.c:1937 client/text.c:143 client/gui-sdl/mapview.c:596
+msgid "?city:Hostile"
+msgstr "Vihollinen"
+
+#: server/maphand.c:1939 client/text.c:145 client/gui-sdl/mapview.c:597
+msgid "?city:Peaceful"
+msgstr "Rauhallinen"
+
+#: server/maphand.c:1939 client/text.c:145 client/gui-sdl/mapview.c:598
+msgid "?city:Friendly"
+msgstr "Ystävällinen"
+
+#: server/maphand.c:1939 client/text.c:145 client/gui-sdl/mapview.c:598
+msgid "?city:Mysterious"
+msgstr "Mystinen"
+
+#: server/maphand.c:1940 client/text.c:146
+msgid "?city:Friendly(team)"
+msgstr "Ystävällinen(joukkue)"
+
+#: server/maphand.c:1948
+#, fuzzy, c-format
+msgid "Location: (%d, %d)"
+msgstr "Sijainti: (%d, %d) [%d]"
+
+#: server/maphand.c:1955 client/text.c:163
+#, c-format
+msgid "Terrain: %s"
+msgstr "Maasto: %s"
+
+#: server/maphand.c:1956 client/text.c:164
+#, c-format
+msgid "Food/Prod/Trade: %s"
+msgstr "Ruoka/raaka-aineet/kauppa: %s"
+
+#: server/maphand.c:1959 client/text.c:167
+msgid "Minor Tribe Village"
+msgstr "Pieni heimokylä"
+
+#: server/maphand.c:1968 client/text.c:176
+msgid "Our territory"
+msgstr "Meidän aluettamme"
+
+#. TRANS: "Territory of <username> (<nation + team>)"
+#: server/maphand.c:1971 client/text.c:179
+#, c-format
+msgid "Territory of %s (%s)"
+msgstr "%s (%s) hallitsee aluetta"
+
+#: server/maphand.c:1981 client/text.c:189
+#, c-format
+msgid "Territory of %s (%s) (%d turn cease-fire)"
+msgid_plural "Territory of %s (%s) (%d turn cease-fire)"
+msgstr[0] "Kaupunki: %s (%s) (%d vuoron tulitauko)"
+msgstr[1] "Kaupunki: %s (%s) (%d vuoron tulitauko)"
+
+#. TRANS: "Territory of <username>
+#. * (<nation + team> | <diplomatic state>)"
+#: server/maphand.c:1990 client/text.c:198
+#, c-format
+msgid "Territory of %s (%s | %s)"
+msgstr "%s (%s | %s) hallitsee aluetta"
+
+#: server/maphand.c:1995 client/text.c:203
+msgid "Unclaimed territory"
+msgstr "Valtaamatonta aluetta"
+
+#. TRANS: "City: <city name> | <username> (<nation + team>)"
+#: server/maphand.c:2010 client/text.c:218
+#, c-format
+msgid "City: %s | %s (%s)"
+msgstr "Kaupunki: %s | %s (%s)"
+
+#. TRANS:  "City: <city name> | <username>
+#. * (<nation + team>, <number> turn cease-fire)"
+#: server/maphand.c:2020 client/text.c:228
+#, c-format
+msgid "City: %s | %s (%s, %d turn cease-fire)"
+msgid_plural "City: %s | %s (%s, %d turn cease-fire)"
+msgstr[0] "Kaupunki: %s | %s (%s, %d vuoron tulitauko)"
+msgstr[1] "Kaupunki: %s | %s (%s, %d vuoron tulitauko)"
+
+#. TRANS: "City: <city name> | <username>
+#. * (<nation + team>, <diplomatic state>)"
+#: server/maphand.c:2027 client/text.c:235
+#, c-format
+msgid "City: %s | %s (%s, %s)"
+msgstr "Kaupunki: %s | %s (%s, %s)"
+
+#. TRANS: continue list, in case comma is not the separator of choice.
+#: server/maphand.c:2037 server/stdinhand.c:4465 server/stdinhand.c:4469
+#: client/helpdata.c:289 client/helpdata.c:784 client/text.c:245
+#: client/text.c:1313 client/text.c:1350
+#, c-format
+msgid "?clistmore:, %s"
+msgstr ", %s"
+
+#. TRANS: previous lines gave other information about the city.
+#: server/maphand.c:2042 client/text.c:250
+#, c-format
+msgid "?clistbegin: with %s"
+msgstr " jossa %s"
+
+#. TRANS: This appears with two or more previous entries in the list
+#: server/maphand.c:2052 client/text.c:260
+#, c-format
+msgid "?clistlast:, and %s"
+msgstr " ja %s"
+
+#. TRANS: This appears with only one previous entry in the list
+#: server/maphand.c:2056 client/text.c:264
+#, c-format
+msgid "?clistlast: and %s"
+msgstr " ja %s"
+
+#: server/maphand.c:2059 client/text.c:267 client/text.c:1323
+#: client/text.c:1361
+msgid "?clistend:."
+msgstr "."
+
+#: server/maphand.c:2073 client/text.c:293
+#, c-format
+msgid "Infrastructure: %s"
+msgstr "Infrastruktuuri: %s"
+
+#: server/maphand.c:2078 client/text.c:298
+#, c-format
+msgid "Activity: %s"
+msgstr "Toiminta: %s"
+
+#. TRANS: "Unit: <unit type> | <username>
+#. * (<nation + team>, <homecity>)"
+#. TRANS: "Unit: <unit type> | <username> (<nation + team>,
+#. * <diplomatic state>)"
+#. TRANS: "Unit: <unit type> | <username>
+#. * (<nation + team>, <homecity>)"
+#. TRANS: "Unit: <unit type> | <username> (<nation + team>,
+#. * <diplomatic state>)"
+#: server/maphand.c:2093 server/maphand.c:2117 client/text.c:313
+#: client/text.c:337
+#, c-format
+msgid "Unit: %s | %s (%s, %s)"
+msgstr "Yksikkö: %s | %s (%s, %s)"
+
+#. TRANS: "Unit: <unit type> | <username> (<nation + team>)"
+#: server/maphand.c:2098 client/text.c:318
+#, c-format
+msgid "Unit: %s | %s (%s)"
+msgstr "Yksikkö: %s | %s (%s)"
+
+#. TRANS:  "Unit: <unit type> | <username> (<nation + team>,
+#. * <number> turn cease-fire)"
+#: server/maphand.c:2109 client/text.c:329
+#, c-format
+msgid "Unit: %s | %s (%s, %d turn cease-fire)"
+msgid_plural "Unit: %s | %s (%s, %d turn cease-fire)"
+msgstr[0] "Yksikkö: %s | %s (%s, %d vuoron tulitauko)"
+msgstr[1] "Yksikkö: %s | %s (%s, %d vuoron tulitauko)"
+
+#. TRANS: A is attack power, D is defense power, FP is firepower,
+#. * HP is hitpoints (current and max).
+#: server/maphand.c:2125 client/text.c:369
+#, c-format
+msgid "A:%d D:%d FP:%d HP:%d/%d (%s)"
+msgstr "H:%d P:%d TV:%d VP:%d/%d (%s)"
+
+#. TRANS: "5 more" units on this tile
+#: server/maphand.c:2134 client/text.c:378
+#, c-format
+msgid "  (%d more)"
+msgstr "  (%d muuta)"
 
 #: server/meta.c:199
 msgid "Not reporting to the metaserver in this game."
@@ -6347,8 +6562,8 @@ msgid ""
 "The %s have launched a spaceship!  It is estimated to arrive on Alpha "
 "Centauri in %s."
 msgstr ""
-"%s ovat laukaisseet avaruusaluksen! Laskettu saapumisaika Alpha Centauriin: %"
-"s."
+"%s ovat laukaisseet avaruusaluksen! Laskettu saapumisaika Alpha Centauriin: "
+"%s."
 
 #: server/spacerace.c:209
 msgid "Spaceship action received, but you don't have a spaceship!"
@@ -7122,8 +7337,8 @@ msgstr "Äänestys"
 #: server/stdinhand.c:2177
 #, c-format
 msgid ""
-"%s %d \"%s\" (needs %0.0f%%%s): %d for, %d against, and %d abstained out of %"
-"d players."
+"%s %d \"%s\" (needs %0.0f%%%s): %d for, %d against, and %d abstained out of "
+"%d players."
 msgstr ""
 "%s %d \"%s\" (vaaditaan %0.0f%%%s): %d puolesta, %d vastaan, ja %d tyhjää "
 "kaikkiaan %d pelaajasta."
@@ -7768,14 +7983,6 @@ msgstr ", kuollut"
 #, c-format
 msgid ", difficulty level %s"
 msgstr ", vaikeusaste %s"
-
-#. TRANS: continue list, in case comma is not the separator of choice.
-#: server/stdinhand.c:4465 server/stdinhand.c:4469 client/helpdata.c:289
-#: client/helpdata.c:784 client/text.c:245 client/text.c:1313
-#: client/text.c:1350
-#, c-format
-msgid "?clistmore:, %s"
-msgstr ", %s"
 
 #: server/stdinhand.c:4473
 msgid ", ready"
@@ -11619,67 +11826,6 @@ msgstr ""
 msgid "Failed looking up metaserver's host"
 msgstr "Metapalvelinta ei löytynyt"
 
-#. TRANS: "AI <player name>"
-#: client/text.c:97
-#, c-format
-msgid "AI %s"
-msgstr "AI %s"
-
-#. TRANS: "<nation adjective>, team <team name>"
-#: client/text.c:121
-#, c-format
-msgid "%s, team %s"
-msgstr "%s, joukkue %s"
-
-#: client/text.c:138 client/text.c:139 client/text.c:144
-#: client/gui-sdl/mapview.c:563
-msgid "?nation:Neutral"
-msgstr "Neutraali"
-
-#: client/text.c:138 client/gui-sdl/mapview.c:563
-msgid "?nation:Hostile"
-msgstr "Vihamielinen"
-
-#: client/text.c:140 client/gui-sdl/mapview.c:565
-msgid "?nation:Peaceful"
-msgstr "Rauhanomainen"
-
-#: client/text.c:140 client/gui-sdl/mapview.c:565
-msgid "?nation:Friendly"
-msgstr "Ystävällinen"
-
-#: client/text.c:141 client/gui-sdl/mapview.c:566
-msgid "?nation:Mysterious"
-msgstr "Mystinen"
-
-#: client/text.c:141
-msgid "?nation:Friendly(team)"
-msgstr "Ystävällinen(joukkue)"
-
-#: client/text.c:143 client/gui-sdl/mapview.c:596
-msgid "?city:Neutral"
-msgstr "Neutraali"
-
-#: client/text.c:143 client/gui-sdl/mapview.c:596
-msgid "?city:Hostile"
-msgstr "Vihollinen"
-
-#: client/text.c:145 client/gui-sdl/mapview.c:597
-msgid "?city:Peaceful"
-msgstr "Rauhallinen"
-
-#: client/text.c:145 client/gui-sdl/mapview.c:598
-msgid "?city:Friendly"
-msgstr "Ystävällinen"
-
-#: client/text.c:145 client/gui-sdl/mapview.c:598
-msgid "?city:Mysterious"
-msgstr "Mystinen"
-
-#: client/text.c:146
-msgid "?city:Friendly(team)"
-msgstr "Ystävällinen(joukkue)"
-
 #: client/text.c:154
 #, c-format
 msgid "Location: (%d, %d) [%d]"
@@ -11690,150 +11836,17 @@ msgstr "Sijainti: (%d, %d) [%d]"
 msgid "Native coordinates: (%d, %d)"
 msgstr "Laskennalliset (natiivi)koordinaatit: (%d, %d)"
 
-#: client/text.c:163
-#, c-format
-msgid "Terrain: %s"
-msgstr "Maasto: %s"
-
-#: client/text.c:164
-#, c-format
-msgid "Food/Prod/Trade: %s"
-msgstr "Ruoka/raaka-aineet/kauppa: %s"
-
-#: client/text.c:167
-msgid "Minor Tribe Village"
-msgstr "Pieni heimokylä"
-
-#: client/text.c:176
-msgid "Our territory"
-msgstr "Meidän aluettamme"
-
-#. TRANS: "Territory of <username> (<nation + team>)"
-#: client/text.c:179
-#, c-format
-msgid "Territory of %s (%s)"
-msgstr "%s (%s) hallitsee aluetta"
-
-#: client/text.c:189
-#, c-format
-msgid "Territory of %s (%s) (%d turn cease-fire)"
-msgid_plural "Territory of %s (%s) (%d turn cease-fire)"
-msgstr[0] "Kaupunki: %s (%s) (%d vuoron tulitauko)"
-msgstr[1] "Kaupunki: %s (%s) (%d vuoron tulitauko)"
-
-#. TRANS: "Territory of <username>
-#. * (<nation + team> | <diplomatic state>)"
-#: client/text.c:198
-#, c-format
-msgid "Territory of %s (%s | %s)"
-msgstr "%s (%s | %s) hallitsee aluetta"
-
-#: client/text.c:203
-msgid "Unclaimed territory"
-msgstr "Valtaamatonta aluetta"
-
-#. TRANS: "City: <city name> | <username> (<nation + team>)"
-#: client/text.c:218
-#, c-format
-msgid "City: %s | %s (%s)"
-msgstr "Kaupunki: %s | %s (%s)"
-
-#. TRANS:  "City: <city name> | <username>
-#. * (<nation + team>, <number> turn cease-fire)"
-#: client/text.c:228
-#, c-format
-msgid "City: %s | %s (%s, %d turn cease-fire)"
-msgid_plural "City: %s | %s (%s, %d turn cease-fire)"
-msgstr[0] "Kaupunki: %s | %s (%s, %d vuoron tulitauko)"
-msgstr[1] "Kaupunki: %s | %s (%s, %d vuoron tulitauko)"
-
-#. TRANS: "City: <city name> | <username>
-#. * (<nation + team>, <diplomatic state>)"
-#: client/text.c:235
-#, c-format
-msgid "City: %s | %s (%s, %s)"
-msgstr "Kaupunki: %s | %s (%s, %s)"
-
-#. TRANS: previous lines gave other information about the city.
-#: client/text.c:250
-#, c-format
-msgid "?clistbegin: with %s"
-msgstr " jossa %s"
-
-#. TRANS: This appears with two or more previous entries in the list
-#: client/text.c:260
-#, c-format
-msgid "?clistlast:, and %s"
-msgstr " ja %s"
-
-#. TRANS: This appears with only one previous entry in the list
-#: client/text.c:264
-#, c-format
-msgid "?clistlast: and %s"
-msgstr " ja %s"
-
-#: client/text.c:267 client/text.c:1323 client/text.c:1361
-msgid "?clistend:."
-msgstr "."
-
 #. TRANS: "Trade from Warsaw: 5"
 #: client/text.c:277
 #, c-format
 msgid "Trade from %s: %d"
 msgstr "Kauppa kaupungista %s: %d"
 
-#: client/text.c:293
-#, c-format
-msgid "Infrastructure: %s"
-msgstr "Infrastruktuuri: %s"
-
-#: client/text.c:298
-#, c-format
-msgid "Activity: %s"
-msgstr "Toiminta: %s"
-
-#. TRANS: "Unit: <unit type> | <username>
-#. * (<nation + team>, <homecity>)"
-#. TRANS: "Unit: <unit type> | <username> (<nation + team>,
-#. * <diplomatic state>)"
-#: client/text.c:313 client/text.c:337
-#, c-format
-msgid "Unit: %s | %s (%s, %s)"
-msgstr "Yksikkö: %s | %s (%s, %s)"
-
-#. TRANS: "Unit: <unit type> | <username> (<nation + team>)"
-#: client/text.c:318
-#, c-format
-msgid "Unit: %s | %s (%s)"
-msgstr "Yksikkö: %s | %s (%s)"
-
-#. TRANS:  "Unit: <unit type> | <username> (<nation + team>,
-#. * <number> turn cease-fire)"
-#: client/text.c:329
-#, c-format
-msgid "Unit: %s | %s (%s, %d turn cease-fire)"
-msgid_plural "Unit: %s | %s (%s, %d turn cease-fire)"
-msgstr[0] "Yksikkö: %s | %s (%s, %d vuoron tulitauko)"
-msgstr[1] "Yksikkö: %s | %s (%s, %d vuoron tulitauko)"
-
 #. TRANS: "Chance to win: A:95% D:46%"
 #: client/text.c:362
 #, c-format
 msgid "Chance to win: A:%d%% D:%d%%"
 msgstr "Vaihda ikkunaan: A:%d%% D:%d%%"
-
-#. TRANS: A is attack power, D is defense power, FP is firepower,
-#. * HP is hitpoints (current and max).
-#: client/text.c:369
-#, c-format
-msgid "A:%d D:%d FP:%d HP:%d/%d (%s)"
-msgstr "H:%d P:%d TV:%d VP:%d/%d (%s)"
-
-#. TRANS: "5 more" units on this tile
-#: client/text.c:378
-#, c-format
-msgid "  (%d more)"
-msgstr "  (%d muuta)"
 
 #. TRANS: on own line immediately following \n, ... <city>
 #: client/text.c:475
@@ -20808,8 +20821,8 @@ msgid ""
 msgstr ""
 "Sivilisaatiosi aloittaa yksinvaltana. Kun teknologiasi kehittyy, voit valita "
 "muita hallintomuotoja (lueteltu alempana). Vaihtaaksesi hallintomuotoa sinun "
-"on tehtävä vallankumous. Tämä johtaa sivilisaatiosi anarkiaan, jota kestää 1-"
-"5 pelivuoroa. Tämän jakson lopulla voit valita uuden hallintomuotosi."
+"on tehtävä vallankumous. Tämä johtaa sivilisaatiosi anarkiaan, jota kestää "
+"1-5 pelivuoroa. Tämän jakson lopulla voit valita uuden hallintomuotosi."
 
 #: data/helpdata.txt:1443
 msgid ""
@@ -25430,8 +25443,8 @@ msgid ""
 msgstr ""
 "Buurit olivat hollantilaisia uudisraivaajia brittien hallitsemassa Etelä-"
 "Afrikassa vuonna 1650 jKr.  He hallitsivat lyhyen ajan kahta tasavaltaa, "
-"Transvaalia ja Oranjen vapaavaltiota, ennen häviötään briteille vuosien 1899-"
-"1902 sodassa."
+"Transvaalia ja Oranjen vapaavaltiota, ennen häviötään briteille vuosien "
+"1899-1902 sodassa."
 
 #: data/nation/bosnia.ruleset:3
 msgid "Bosnian-Herzegovinian"

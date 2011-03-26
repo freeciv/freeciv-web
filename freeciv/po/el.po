@@ -7,10 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: freeciv 2.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-05 14:01+0100\n"
+"POT-Creation-Date: 2011-03-26 13:15+0100\n"
 "PO-Revision-Date: 2008-05-23 17:41+0200\n"
 "Last-Translator: Prekates Alexandros <aprekates@yahoo.gr>\n"
 "Language-Team: Greek translation team <gr@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-7\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -941,9 +942,9 @@ msgstr "Μετασχημάτισε"
 msgid "Base"
 msgstr "Βασκικό"
 
-#: common/unit.c:559 client/text.c:160 client/gui-gtk-2.0/editprop.c:5741
-#: client/gui-sdl/citydlg.c:1972 client/gui-win32/citydlg.c:1229
-#: client/gui-xaw/citydlg.c:1462
+#: common/unit.c:559 server/maphand.c:1952 client/text.c:160
+#: client/gui-gtk-2.0/editprop.c:5741 client/gui-sdl/citydlg.c:1972
+#: client/gui-win32/citydlg.c:1229 client/gui-xaw/citydlg.c:1462
 msgid "Unknown"
 msgstr "Άγνωστο"
 
@@ -1354,8 +1355,8 @@ msgstr "*%s (AI)* Πρώτα τερμάτισε τη συμμαχία με %s, %s."
 #: ai/advdiplomacy.c:335
 #, fuzzy, c-format
 msgid ""
-"*%s (AI)* I would like to see you keep your distance from %s for some time, %"
-"s."
+"*%s (AI)* I would like to see you keep your distance from %s for some time, "
+"%s."
 msgstr ""
 "*%s (AI)* Εύχομαι να διατηρήσεις λίγο ακόμα την τωρινή κατάπαυση πυρόςπρώτα, "
 "%s."
@@ -1378,8 +1379,8 @@ msgstr ""
 #, c-format
 msgid "*%s (AI)* I simply do not trust you with an alliance yet, %s."
 msgstr ""
-"*%s (AI)* Απλά δεν σε εμπιστεύομαι αρκετά ακόμα για να συμμαχήσω μαζί σου, %"
-"s."
+"*%s (AI)* Απλά δεν σε εμπιστεύομαι αρκετά ακόμα για να συμμαχήσω μαζί σου, "
+"%s."
 
 #: ai/advdiplomacy.c:470
 #, c-format
@@ -1617,8 +1618,8 @@ msgstr ""
 #: ai/advdiplomacy.c:1611
 #, c-format
 msgid ""
-"*%s (AI)* Greetings ally, I see you have not yet made war with our enemy, %"
-"s. Why do I need to remind you of your promises?"
+"*%s (AI)* Greetings ally, I see you have not yet made war with our enemy, "
+"%s. Why do I need to remind you of your promises?"
 msgstr ""
 "*%s (AI)* Χαιρετίσματα σύμμαχε, Βλέπω ότι δεν έχεις κηρύξει πόλεμο με τον "
 "εχθρό μας, %s. Γιατί πρέπει να σου υπενθυμίσω τις υποσχέσεις σου;"
@@ -1708,8 +1709,8 @@ msgstr "Δεν μπόρεσα να φορτώσω αρχείο σεναρίου συνόλου-κανόνων \"%s\"."
 #, c-format
 msgid "Warning: the guest name '%s' has been taken, renaming to user '%s'."
 msgstr ""
-"Προειδοποίηση: το όνομα επισκέπτη '%s' έχει παρθεί, μετονομασία σε χρήστη '%"
-"s'."
+"Προειδοποίηση: το όνομα επισκέπτη '%s' έχει παρθεί, μετονομασία σε χρήστη "
+"'%s'."
 
 #: server/auth.c:402
 msgid "Guests are not allowed on this server. Sorry."
@@ -1879,8 +1880,8 @@ msgstr "Μια πόλη που καλείται %s υπάρχει ήδη."
 #, c-format
 msgid "Can't use %s as a city name. It is reserved for %s."
 msgstr ""
-"Δεν μπορείς να χρησιμοποιήσεις το %s σαν όνομα πόλης. Είναι δεσμευμένο για %"
-"s."
+"Δεν μπορείς να χρησιμοποιήσεις το %s σαν όνομα πόλης. Είναι δεσμευμένο για "
+"%s."
 
 #: server/citytools.c:379
 #, c-format
@@ -2151,16 +2152,16 @@ msgstr ""
 msgid ""
 "%s can't build %s from the worklist; %s special is required.  Postponing..."
 msgstr ""
-"%s δεν μπορεί να χτίσει %s από την λίστα εργασίων, απαιτείται ο ειδικός  %"
-"s.  Ακυρώνεται..."
+"%s δεν μπορεί να χτίσει %s από την λίστα εργασίων, απαιτείται ο ειδικός  "
+"%s.  Ακυρώνεται..."
 
 #: server/cityturn.c:1080
 #, c-format
 msgid ""
 "%s can't build %s from the worklist; %s terrain is required.  Postponing..."
 msgstr ""
-"%s δεν μπορεί να χτίσει %s από την λίστα εργασίων, απαιτείται τύπος εδάφος %"
-"s.  Ακυρώνεται..."
+"%s δεν μπορεί να χτίσει %s από την λίστα εργασίων, απαιτείται τύπος εδάφος "
+"%s.  Ακυρώνεται..."
 
 #: server/cityturn.c:1095
 #, c-format
@@ -3321,8 +3322,8 @@ msgid ""
 "and use the 'start' command once players have reconnected."
 msgstr ""
 "Σώζει το παιχνίδι στο αρχείο <όνομα-αρχείου> , αν δεν δωθεί όρισμα όνομα-"
-"αρχείου σώζεται στο \"< πρόθεμα ονόματος αυτόματου σώσιμου><χρονιά>m.sav[.gz]"
-"\".\n"
+"αρχείου σώζεται στο \"< πρόθεμα ονόματος αυτόματου σώσιμου><χρονιά>m.sav[."
+"gz]\".\n"
 "Για να επαναφορτωθεί ένα σωσμένο παιχνίδι από την εντολή 'save', ξεκίνησε "
 "τον εξυπηρετητή μετο όρισμα  της γραμμής εντολών :\n"
 "    --file <όνομα-αρχείου>\n"
@@ -4265,47 +4266,262 @@ msgstr ""
 msgid "There is no player nor connection by the name %s."
 msgstr ""
 
-#: server/maphand.c:120
+#: server/maphand.c:121
 msgid "Global warming has occurred!"
 msgstr ""
 
-#: server/maphand.c:122
+#: server/maphand.c:123
 msgid ""
 "Coastlines have been flooded and vast ranges of grassland have become "
 "deserts."
 msgstr ""
 
-#: server/maphand.c:164
+#: server/maphand.c:165
 msgid "Nuclear winter has occurred!"
 msgstr ""
 
-#: server/maphand.c:166
+#: server/maphand.c:167
 msgid "Wetlands have dried up and vast ranges of grassland have become tundra."
 msgstr ""
 
-#: server/maphand.c:187
+#: server/maphand.c:188
 msgid ""
 "New hope sweeps like fire through the country as the discovery of railroad "
 "is announced.\n"
 "      Workers spontaneously gather and upgrade all cities with railroads."
 msgstr ""
 
-#: server/maphand.c:193
+#: server/maphand.c:194
 msgid ""
 "The people are pleased to hear that your scientists finally know about "
 "railroads.\n"
 "      Workers spontaneously gather and upgrade all cities with railroads."
 msgstr ""
 
-#: server/maphand.c:1380
+#: server/maphand.c:1381
 #, c-format
 msgid "Moved your %s due to changing terrain."
 msgstr ""
 
-#: server/maphand.c:1398
+#: server/maphand.c:1399
 #, c-format
 msgid "Disbanded your %s due to changing terrain."
 msgstr ""
+
+#. TRANS: "<nation adjective>, team <team name>"
+#: server/maphand.c:1888 client/text.c:121
+#, fuzzy, c-format
+msgid "%s, team %s"
+msgstr "%s των %s"
+
+#. TRANS: "AI <player name>"
+#: server/maphand.c:1915 client/text.c:97
+#, c-format
+msgid "AI %s"
+msgstr ""
+
+#: server/maphand.c:1932 server/maphand.c:1933 server/maphand.c:1938
+#: client/text.c:138 client/text.c:139 client/text.c:144
+#: client/gui-sdl/mapview.c:563
+msgid "?nation:Neutral"
+msgstr "?nation:Ουδέτερο"
+
+#: server/maphand.c:1932 client/text.c:138 client/gui-sdl/mapview.c:563
+msgid "?nation:Hostile"
+msgstr "?nation:Εχθρικό"
+
+#: server/maphand.c:1934 client/text.c:140 client/gui-sdl/mapview.c:565
+msgid "?nation:Peaceful"
+msgstr "?nation:Ειρηνικό"
+
+#: server/maphand.c:1934 client/text.c:140 client/gui-sdl/mapview.c:565
+msgid "?nation:Friendly"
+msgstr "?nation:Φιλικό"
+
+#: server/maphand.c:1935 client/text.c:141 client/gui-sdl/mapview.c:566
+msgid "?nation:Mysterious"
+msgstr "?nation:Μυστήριο"
+
+#: server/maphand.c:1935 client/text.c:141
+msgid "?nation:Friendly(team)"
+msgstr "?nation:Φιλικό(ομάδα)"
+
+#: server/maphand.c:1937 client/text.c:143 client/gui-sdl/mapview.c:596
+msgid "?city:Neutral"
+msgstr "?city:Ουδέτερη"
+
+#: server/maphand.c:1937 client/text.c:143 client/gui-sdl/mapview.c:596
+msgid "?city:Hostile"
+msgstr "?city:Εχθρική"
+
+#: server/maphand.c:1939 client/text.c:145 client/gui-sdl/mapview.c:597
+msgid "?city:Peaceful"
+msgstr "?city:Ειρηνική"
+
+#: server/maphand.c:1939 client/text.c:145 client/gui-sdl/mapview.c:598
+msgid "?city:Friendly"
+msgstr "?city:Φιλική"
+
+#: server/maphand.c:1939 client/text.c:145 client/gui-sdl/mapview.c:598
+msgid "?city:Mysterious"
+msgstr "?city:Μυστήρια"
+
+#: server/maphand.c:1940 client/text.c:146
+msgid "?city:Friendly(team)"
+msgstr "?city:Φιλική(ομάδα)"
+
+#: server/maphand.c:1948
+#, fuzzy, c-format
+msgid "Location: (%d, %d)"
+msgstr "Τοποθεσία: (%d, %d) [%d]"
+
+#: server/maphand.c:1955 client/text.c:163
+#, c-format
+msgid "Terrain: %s"
+msgstr "Έδαφος: %s"
+
+#: server/maphand.c:1956 client/text.c:164
+#, c-format
+msgid "Food/Prod/Trade: %s"
+msgstr "Φαγ/Παρ/Εμπρ: %s"
+
+#: server/maphand.c:1959 client/text.c:167
+msgid "Minor Tribe Village"
+msgstr "Χωριό μικρής φυλής"
+
+#: server/maphand.c:1968 client/text.c:176
+#, fuzzy
+msgid "Our territory"
+msgstr "Η περιοχή μας"
+
+#. TRANS: "Territory of <username> (<nation + team>)"
+#: server/maphand.c:1971 client/text.c:179
+#, fuzzy, c-format
+msgid "Territory of %s (%s)"
+msgstr "Περιοχή των %s %s"
+
+#: server/maphand.c:1981 client/text.c:189
+#, fuzzy, c-format
+msgid "Territory of %s (%s) (%d turn cease-fire)"
+msgid_plural "Territory of %s (%s) (%d turn cease-fire)"
+msgstr[0] "Πόλη: %s (%s,κατάπαυση πυρός %d γύρος)  "
+msgstr[1] "Πόλη: %s (%s,κατάπαυση πυρός %d γύροι) "
+
+#. TRANS: "Territory of <username>
+#. * (<nation + team> | <diplomatic state>)"
+#: server/maphand.c:1990 client/text.c:198
+#, fuzzy, c-format
+msgid "Territory of %s (%s | %s)"
+msgstr "Περιοχή των %s %s"
+
+#: server/maphand.c:1995 client/text.c:203
+msgid "Unclaimed territory"
+msgstr "Διεκδικήσημη περιοχή"
+
+#. TRANS: "City: <city name> | <username> (<nation + team>)"
+#: server/maphand.c:2010 client/text.c:218
+#, fuzzy, c-format
+msgid "City: %s | %s (%s)"
+msgstr "Πόλη: %s (%s, %s)"
+
+#. TRANS:  "City: <city name> | <username>
+#. * (<nation + team>, <number> turn cease-fire)"
+#: server/maphand.c:2020 client/text.c:228
+#, fuzzy, c-format
+msgid "City: %s | %s (%s, %d turn cease-fire)"
+msgid_plural "City: %s | %s (%s, %d turn cease-fire)"
+msgstr[0] "Πόλη: %s (%s,κατάπαυση πυρός %d γύρος)  "
+msgstr[1] "Πόλη: %s (%s,κατάπαυση πυρός %d γύροι) "
+
+#. TRANS: "City: <city name> | <username>
+#. * (<nation + team>, <diplomatic state>)"
+#: server/maphand.c:2027 client/text.c:235
+#, fuzzy, c-format
+msgid "City: %s | %s (%s, %s)"
+msgstr "Πόλη: %s (%s, %s)"
+
+#. TRANS: continue list, in case comma is not the separator of choice.
+#: server/maphand.c:2037 server/stdinhand.c:4465 server/stdinhand.c:4469
+#: client/helpdata.c:289 client/helpdata.c:784 client/text.c:245
+#: client/text.c:1313 client/text.c:1350
+#, fuzzy, c-format
+msgid "?clistmore:, %s"
+msgstr "Ειδικοί πόροι"
+
+#. TRANS: previous lines gave other information about the city.
+#: server/maphand.c:2042 client/text.c:250
+#, c-format
+msgid "?clistbegin: with %s"
+msgstr ""
+
+#. TRANS: This appears with two or more previous entries in the list
+#: server/maphand.c:2052 client/text.c:260
+#, c-format
+msgid "?clistlast:, and %s"
+msgstr ""
+
+#. TRANS: This appears with only one previous entry in the list
+#: server/maphand.c:2056 client/text.c:264
+#, fuzzy, c-format
+msgid "?clistlast: and %s"
+msgstr "Ειδικοί πόροι"
+
+#: server/maphand.c:2059 client/text.c:267 client/text.c:1323
+#: client/text.c:1361
+msgid "?clistend:."
+msgstr ""
+
+#: server/maphand.c:2073 client/text.c:293
+#, c-format
+msgid "Infrastructure: %s"
+msgstr "Υποδομές: %s"
+
+#: server/maphand.c:2078 client/text.c:298
+#, c-format
+msgid "Activity: %s"
+msgstr "Δραστηριότητα: %s"
+
+#. TRANS: "Unit: <unit type> | <username>
+#. * (<nation + team>, <homecity>)"
+#. TRANS: "Unit: <unit type> | <username> (<nation + team>,
+#. * <diplomatic state>)"
+#. TRANS: "Unit: <unit type> | <username>
+#. * (<nation + team>, <homecity>)"
+#. TRANS: "Unit: <unit type> | <username> (<nation + team>,
+#. * <diplomatic state>)"
+#: server/maphand.c:2093 server/maphand.c:2117 client/text.c:313
+#: client/text.c:337
+#, fuzzy, c-format
+msgid "Unit: %s | %s (%s, %s)"
+msgstr "Μονάδα: %s (%s, %s)"
+
+#. TRANS: "Unit: <unit type> | <username> (<nation + team>)"
+#: server/maphand.c:2098 client/text.c:318
+#, fuzzy, c-format
+msgid "Unit: %s | %s (%s)"
+msgstr "Μονάδα: %s (%s, %s)"
+
+#. TRANS:  "Unit: <unit type> | <username> (<nation + team>,
+#. * <number> turn cease-fire)"
+#: server/maphand.c:2109 client/text.c:329
+#, fuzzy, c-format
+msgid "Unit: %s | %s (%s, %d turn cease-fire)"
+msgid_plural "Unit: %s | %s (%s, %d turn cease-fire)"
+msgstr[0] "Μονάδα: %s (%s,κατάπαυση πυρός %d γύρος)"
+msgstr[1] "Μονάδα: %s (%s,κατάπαυση πυρός %d γύροι)"
+
+#. TRANS: A is attack power, D is defense power, FP is firepower,
+#. * HP is hitpoints (current and max).
+#: server/maphand.c:2125 client/text.c:369
+#, c-format
+msgid "A:%d D:%d FP:%d HP:%d/%d (%s)"
+msgstr "Ε:%d Α:%d ΔΠ:%d ΜΑ:%d/%d (%s)"
+
+#. TRANS: "5 more" units on this tile
+#: server/maphand.c:2134 client/text.c:378
+#, c-format
+msgid "  (%d more)"
+msgstr "  (%d ακόμη)"
 
 #: server/meta.c:199
 msgid "Not reporting to the metaserver in this game."
@@ -4399,8 +4615,8 @@ msgstr ""
 msgid ""
 "The senate passes your bill because of the constant provocations of the %s."
 msgstr ""
-"Η γερουσία θα ψηφίσει την προτασή σου εξαιτίας των συνεχών προκλήσεων του %"
-"s. "
+"Η γερουσία θα ψηφίσει την προτασή σου εξαιτίας των συνεχών προκλήσεων του "
+"%s. "
 
 #: server/plrhand.c:573
 #, c-format
@@ -7110,8 +7326,8 @@ msgstr ""
 #: server/stdinhand.c:2177
 #, c-format
 msgid ""
-"%s %d \"%s\" (needs %0.0f%%%s): %d for, %d against, and %d abstained out of %"
-"d players."
+"%s %d \"%s\" (needs %0.0f%%%s): %d for, %d against, and %d abstained out of "
+"%d players."
 msgstr ""
 
 #: server/stdinhand.c:2181
@@ -7739,14 +7955,6 @@ msgstr ""
 #, c-format
 msgid ", difficulty level %s"
 msgstr ""
-
-#. TRANS: continue list, in case comma is not the separator of choice.
-#: server/stdinhand.c:4465 server/stdinhand.c:4469 client/helpdata.c:289
-#: client/helpdata.c:784 client/text.c:245 client/text.c:1313
-#: client/text.c:1350
-#, fuzzy, c-format
-msgid "?clistmore:, %s"
-msgstr "Ειδικοί πόροι"
 
 #: server/stdinhand.c:4473
 msgid ", ready"
@@ -11348,67 +11556,6 @@ msgstr ""
 msgid "Failed looking up metaserver's host"
 msgstr "Απορυχία εύρεσης υπολογιστή μετάΕξυπηρετητή  "
 
-#. TRANS: "AI <player name>"
-#: client/text.c:97
-#, c-format
-msgid "AI %s"
-msgstr ""
-
-#. TRANS: "<nation adjective>, team <team name>"
-#: client/text.c:121
-#, fuzzy, c-format
-msgid "%s, team %s"
-msgstr "%s των %s"
-
-#: client/text.c:138 client/text.c:139 client/text.c:144
-#: client/gui-sdl/mapview.c:563
-msgid "?nation:Neutral"
-msgstr "?nation:Ουδέτερο"
-
-#: client/text.c:138 client/gui-sdl/mapview.c:563
-msgid "?nation:Hostile"
-msgstr "?nation:Εχθρικό"
-
-#: client/text.c:140 client/gui-sdl/mapview.c:565
-msgid "?nation:Peaceful"
-msgstr "?nation:Ειρηνικό"
-
-#: client/text.c:140 client/gui-sdl/mapview.c:565
-msgid "?nation:Friendly"
-msgstr "?nation:Φιλικό"
-
-#: client/text.c:141 client/gui-sdl/mapview.c:566
-msgid "?nation:Mysterious"
-msgstr "?nation:Μυστήριο"
-
-#: client/text.c:141
-msgid "?nation:Friendly(team)"
-msgstr "?nation:Φιλικό(ομάδα)"
-
-#: client/text.c:143 client/gui-sdl/mapview.c:596
-msgid "?city:Neutral"
-msgstr "?city:Ουδέτερη"
-
-#: client/text.c:143 client/gui-sdl/mapview.c:596
-msgid "?city:Hostile"
-msgstr "?city:Εχθρική"
-
-#: client/text.c:145 client/gui-sdl/mapview.c:597
-msgid "?city:Peaceful"
-msgstr "?city:Ειρηνική"
-
-#: client/text.c:145 client/gui-sdl/mapview.c:598
-msgid "?city:Friendly"
-msgstr "?city:Φιλική"
-
-#: client/text.c:145 client/gui-sdl/mapview.c:598
-msgid "?city:Mysterious"
-msgstr "?city:Μυστήρια"
-
-#: client/text.c:146
-msgid "?city:Friendly(team)"
-msgstr "?city:Φιλική(ομάδα)"
-
 #: client/text.c:154
 #, c-format
 msgid "Location: (%d, %d) [%d]"
@@ -11419,151 +11566,17 @@ msgstr "Τοποθεσία: (%d, %d) [%d]"
 msgid "Native coordinates: (%d, %d)"
 msgstr ""
 
-#: client/text.c:163
-#, c-format
-msgid "Terrain: %s"
-msgstr "Έδαφος: %s"
-
-#: client/text.c:164
-#, c-format
-msgid "Food/Prod/Trade: %s"
-msgstr "Φαγ/Παρ/Εμπρ: %s"
-
-#: client/text.c:167
-msgid "Minor Tribe Village"
-msgstr "Χωριό μικρής φυλής"
-
-#: client/text.c:176
-#, fuzzy
-msgid "Our territory"
-msgstr "Η περιοχή μας"
-
-#. TRANS: "Territory of <username> (<nation + team>)"
-#: client/text.c:179
-#, fuzzy, c-format
-msgid "Territory of %s (%s)"
-msgstr "Περιοχή των %s %s"
-
-#: client/text.c:189
-#, fuzzy, c-format
-msgid "Territory of %s (%s) (%d turn cease-fire)"
-msgid_plural "Territory of %s (%s) (%d turn cease-fire)"
-msgstr[0] "Πόλη: %s (%s,κατάπαυση πυρός %d γύρος)  "
-msgstr[1] "Πόλη: %s (%s,κατάπαυση πυρός %d γύροι) "
-
-#. TRANS: "Territory of <username>
-#. * (<nation + team> | <diplomatic state>)"
-#: client/text.c:198
-#, fuzzy, c-format
-msgid "Territory of %s (%s | %s)"
-msgstr "Περιοχή των %s %s"
-
-#: client/text.c:203
-msgid "Unclaimed territory"
-msgstr "Διεκδικήσημη περιοχή"
-
-#. TRANS: "City: <city name> | <username> (<nation + team>)"
-#: client/text.c:218
-#, fuzzy, c-format
-msgid "City: %s | %s (%s)"
-msgstr "Πόλη: %s (%s, %s)"
-
-#. TRANS:  "City: <city name> | <username>
-#. * (<nation + team>, <number> turn cease-fire)"
-#: client/text.c:228
-#, fuzzy, c-format
-msgid "City: %s | %s (%s, %d turn cease-fire)"
-msgid_plural "City: %s | %s (%s, %d turn cease-fire)"
-msgstr[0] "Πόλη: %s (%s,κατάπαυση πυρός %d γύρος)  "
-msgstr[1] "Πόλη: %s (%s,κατάπαυση πυρός %d γύροι) "
-
-#. TRANS: "City: <city name> | <username>
-#. * (<nation + team>, <diplomatic state>)"
-#: client/text.c:235
-#, fuzzy, c-format
-msgid "City: %s | %s (%s, %s)"
-msgstr "Πόλη: %s (%s, %s)"
-
-#. TRANS: previous lines gave other information about the city.
-#: client/text.c:250
-#, c-format
-msgid "?clistbegin: with %s"
-msgstr ""
-
-#. TRANS: This appears with two or more previous entries in the list
-#: client/text.c:260
-#, c-format
-msgid "?clistlast:, and %s"
-msgstr ""
-
-#. TRANS: This appears with only one previous entry in the list
-#: client/text.c:264
-#, fuzzy, c-format
-msgid "?clistlast: and %s"
-msgstr "Ειδικοί πόροι"
-
-#: client/text.c:267 client/text.c:1323 client/text.c:1361
-msgid "?clistend:."
-msgstr ""
-
 #. TRANS: "Trade from Warsaw: 5"
 #: client/text.c:277
 #, c-format
 msgid "Trade from %s: %d"
 msgstr "Εμπορεύματα από %s: %d "
 
-#: client/text.c:293
-#, c-format
-msgid "Infrastructure: %s"
-msgstr "Υποδομές: %s"
-
-#: client/text.c:298
-#, c-format
-msgid "Activity: %s"
-msgstr "Δραστηριότητα: %s"
-
-#. TRANS: "Unit: <unit type> | <username>
-#. * (<nation + team>, <homecity>)"
-#. TRANS: "Unit: <unit type> | <username> (<nation + team>,
-#. * <diplomatic state>)"
-#: client/text.c:313 client/text.c:337
-#, fuzzy, c-format
-msgid "Unit: %s | %s (%s, %s)"
-msgstr "Μονάδα: %s (%s, %s)"
-
-#. TRANS: "Unit: <unit type> | <username> (<nation + team>)"
-#: client/text.c:318
-#, fuzzy, c-format
-msgid "Unit: %s | %s (%s)"
-msgstr "Μονάδα: %s (%s, %s)"
-
-#. TRANS:  "Unit: <unit type> | <username> (<nation + team>,
-#. * <number> turn cease-fire)"
-#: client/text.c:329
-#, fuzzy, c-format
-msgid "Unit: %s | %s (%s, %d turn cease-fire)"
-msgid_plural "Unit: %s | %s (%s, %d turn cease-fire)"
-msgstr[0] "Μονάδα: %s (%s,κατάπαυση πυρός %d γύρος)"
-msgstr[1] "Μονάδα: %s (%s,κατάπαυση πυρός %d γύροι)"
-
 #. TRANS: "Chance to win: A:95% D:46%"
 #: client/text.c:362
 #, c-format
 msgid "Chance to win: A:%d%% D:%d%%"
 msgstr "Πιθανότητα νίκης: A:%d%% D:%d%%  "
-
-#. TRANS: A is attack power, D is defense power, FP is firepower,
-#. * HP is hitpoints (current and max).
-#: client/text.c:369
-#, c-format
-msgid "A:%d D:%d FP:%d HP:%d/%d (%s)"
-msgstr "Ε:%d Α:%d ΔΠ:%d ΜΑ:%d/%d (%s)"
-
-#. TRANS: "5 more" units on this tile
-#: client/text.c:378
-#, c-format
-msgid "  (%d more)"
-msgstr "  (%d ακόμη)"
 
 #. TRANS: on own line immediately following \n, ... <city>
 #: client/text.c:475

@@ -56,6 +56,9 @@ function control_init()
 	  keyboard_input=true;
     });
 
+  /* disable text-selection, as this gives wrong mouse cursor 
+   * during drag to goto units. */
+  document.onselectstart = function(){ return false; }
 
 }
 

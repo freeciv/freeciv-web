@@ -9,10 +9,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Freeciv 1.14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-05 14:01+0100\n"
+"POT-Creation-Date: 2011-03-26 13:15+0100\n"
 "PO-Revision-Date: 2007-08-12 15:37+0300\n"
 "Last-Translator: Gábor Takács <tg330@hszk.bme.hu>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
+"Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -905,9 +906,9 @@ msgstr "Átalakít"
 msgid "Base"
 msgstr "Bázis"
 
-#: common/unit.c:559 client/text.c:160 client/gui-gtk-2.0/editprop.c:5741
-#: client/gui-sdl/citydlg.c:1972 client/gui-win32/citydlg.c:1229
-#: client/gui-xaw/citydlg.c:1462
+#: common/unit.c:559 server/maphand.c:1952 client/text.c:160
+#: client/gui-gtk-2.0/editprop.c:5741 client/gui-sdl/citydlg.c:1972
+#: client/gui-win32/citydlg.c:1229 client/gui-xaw/citydlg.c:1462
 msgid "Unknown"
 msgstr "Ismeretlen"
 
@@ -1318,8 +1319,8 @@ msgstr "*%s (AI)* Elõször bontsd fel %s játékossal kötött szövetségedet, %s!"
 #: ai/advdiplomacy.c:335
 #, fuzzy, c-format
 msgid ""
-"*%s (AI)* I would like to see you keep your distance from %s for some time, %"
-"s."
+"*%s (AI)* I would like to see you keep your distance from %s for some time, "
+"%s."
 msgstr ""
 "*%s (AI)* Elõbb azt szeretném, hogy továbbra is betartsd a tûzszünetet, %s!"
 
@@ -1504,8 +1505,8 @@ msgid_plural ""
 "*%s (AI)* We will honour our alliance and declare war on %s in %d turns.  "
 "Hold on - we are coming!"
 msgstr[0] ""
-"*%s (AI)* Megháláljuk a szövetségünket, és hadat üzenünk %s ellenségünknek %"
-"d kör múlva.  Tartsatok ki - jövünk!"
+"*%s (AI)* Megháláljuk a szövetségünket, és hadat üzenünk %s ellenségünknek "
+"%d kör múlva.  Tartsatok ki - jövünk!"
 
 #: ai/advdiplomacy.c:1332
 #, c-format
@@ -1562,8 +1563,8 @@ msgstr ""
 #: ai/advdiplomacy.c:1611
 #, c-format
 msgid ""
-"*%s (AI)* Greetings ally, I see you have not yet made war with our enemy, %"
-"s. Why do I need to remind you of your promises?"
+"*%s (AI)* Greetings ally, I see you have not yet made war with our enemy, "
+"%s. Why do I need to remind you of your promises?"
 msgstr ""
 "*%s (AI)* Üdvözöllek, szövetséges! Látom, hogy még nem léptél háborúba %s "
 "ellenségünkkel. Miért kell emlékeztetnem téged az igéreteidre?"
@@ -1575,8 +1576,8 @@ msgid ""
 "peace with our mortal enemy, %s! This is unacceptable; our alliance is no "
 "more!"
 msgstr ""
-"*%s (AI)* Te becstelen, szövetséget kötöttünk, de még mindig békében vagy  %"
-"s halálos ellenségünkkel! Ez elfogadhatatlan; szövetségünk nincs többé!"
+"*%s (AI)* Te becstelen, szövetséget kötöttünk, de még mindig békében vagy  "
+"%s halálos ellenségünkkel! Ez elfogadhatatlan; szövetségünk nincs többé!"
 
 #: ai/advdiplomacy.c:1648
 #, c-format
@@ -1987,8 +1988,8 @@ msgstr "Figyelem, a(z) %2$si %1$s a következõ körben megépül."
 msgid ""
 "Suggest throttling growth in %s to use %s (being built) more effectively."
 msgstr ""
-"Javasolom a növekedés visszafogását %s városában, mert így a (most épülõ) %"
-"sat jobban ki lehet használni."
+"Javasolom a növekedés visszafogását %s városában, mert így a (most épülõ) "
+"%sat jobban ki lehet használni."
 
 #: server/cityturn.c:427
 #, c-format
@@ -3226,9 +3227,9 @@ msgid ""
 "and use the 'start' command once players have reconnected."
 msgstr ""
 "Aktuális játékállás elmentése a <fájlnév> fájlba.  Ha nem adunk meg fájlnév "
-"argumentumot, akkor a mentés az \"<automatikus mentés elõtagja><év>m.sav[.gz]"
-"\" fájlba történik.  Egy 'save' paranccsal elmentett játékállás betöltéséhez "
-"a szervert a\n"
+"argumentumot, akkor a mentés az \"<automatikus mentés elõtagja><év>m.sav[."
+"gz]\" fájlba történik.  Egy 'save' paranccsal elmentett játékállás "
+"betöltéséhez a szervert a\n"
 "    --file <fájlnév>\n"
 "parancssori kapcsolóval kell elindítani, majd ki kell adni a 'start' "
 "parancsot, miután a játékosok csatlakoztak."
@@ -3724,8 +3725,8 @@ msgstr ""
 #, c-format
 msgid "You caught %s %s attempting sabotage in %s!"
 msgstr ""
-"Elfogtál egy %s %s egységet, miközben szabotázsakciót próbált végrehajtani %"
-"s városában!"
+"Elfogtál egy %s %s egységet, miközben szabotázsakciót próbált végrehajtani "
+"%s városában!"
 
 #: server/diplomats.c:903
 #, c-format
@@ -3764,8 +3765,8 @@ msgstr ""
 #, c-format
 msgid "You caught %s %s attempting to sabotage the %s in %s!"
 msgstr ""
-"Elfogtál egy %s %s egységet, miközben szabotálni próbálta a(z) %s épületet %"
-"s városában!"
+"Elfogtál egy %s %s egységet, miközben szabotálni próbálta a(z) %s épületet "
+"%s városában!"
 
 #: server/diplomats.c:1039
 #, c-format
@@ -4213,26 +4214,26 @@ msgstr "Nincs %s nevû kapcsolat."
 msgid "There is no player nor connection by the name %s."
 msgstr "Sem %1$s nevû játékos sem %1$s nevû kapcsolat nincsen."
 
-#: server/maphand.c:120
+#: server/maphand.c:121
 msgid "Global warming has occurred!"
 msgstr "Globális felmelegedés történt!"
 
-#: server/maphand.c:122
+#: server/maphand.c:123
 msgid ""
 "Coastlines have been flooded and vast ranges of grassland have become "
 "deserts."
 msgstr ""
 "A partvonalakat elöntötte a víz, és nagy területû síkságok sivasagosodtak el."
 
-#: server/maphand.c:164
+#: server/maphand.c:165
 msgid "Nuclear winter has occurred!"
 msgstr "Nukleáris tél következett be!"
 
-#: server/maphand.c:166
+#: server/maphand.c:167
 msgid "Wetlands have dried up and vast ranges of grassland have become tundra."
 msgstr "A mocsarak kiszáradtak, és nagy mennyiségû füves puszta vált tundrává."
 
-#: server/maphand.c:187
+#: server/maphand.c:188
 msgid ""
 "New hope sweeps like fire through the country as the discovery of railroad "
 "is announced.\n"
@@ -4241,7 +4242,7 @@ msgstr ""
 "A vasút felfedezése új reménnyel tölti el az embereket.\n"
 "       Önkéntes munkások gyûlnek össze, és minden várost vasúttal látnak el."
 
-#: server/maphand.c:193
+#: server/maphand.c:194
 msgid ""
 "The people are pleased to hear that your scientists finally know about "
 "railroads.\n"
@@ -4250,19 +4251,235 @@ msgstr ""
 "Az emberek örülnek, hogy tudósaid végre megismerték a vasutat.\n"
 "       Önkéntes munkások gyûlnek össze, és minden várost vasúttal látnak el."
 
-#: server/maphand.c:1380
+#: server/maphand.c:1381
 #, fuzzy, c-format
 msgid "Moved your %s due to changing terrain."
 msgstr ""
 "Arrébbment egy %s egységed, mert a(z) (%d, %d) mezõ tengerbõl szárazfölddé "
 "alakult."
 
-#: server/maphand.c:1398
+#: server/maphand.c:1399
 #, fuzzy, c-format
 msgid "Disbanded your %s due to changing terrain."
 msgstr ""
 "Feloszlott egy %s egységed, mert a(z) (%d, %d) mezõ szárazföldbõl tengerré "
 "alakult."
+
+#. TRANS: "<nation adjective>, team <team name>"
+#: server/maphand.c:1888 client/text.c:121
+#, fuzzy, c-format
+msgid "%s, team %s"
+msgstr " %s mellett"
+
+#. TRANS: "AI <player name>"
+#: server/maphand.c:1915 client/text.c:97
+#, c-format
+msgid "AI %s"
+msgstr ""
+
+#: server/maphand.c:1932 server/maphand.c:1933 server/maphand.c:1938
+#: client/text.c:138 client/text.c:139 client/text.c:144
+#: client/gui-sdl/mapview.c:563
+#, fuzzy
+msgid "?nation:Neutral"
+msgstr "?duration:túlcsordulás"
+
+#: server/maphand.c:1932 client/text.c:138 client/gui-sdl/mapview.c:563
+msgid "?nation:Hostile"
+msgstr "?nation:Ellenséges"
+
+#: server/maphand.c:1934 client/text.c:140 client/gui-sdl/mapview.c:565
+msgid "?nation:Peaceful"
+msgstr "?nation:Békés"
+
+#: server/maphand.c:1934 client/text.c:140 client/gui-sdl/mapview.c:565
+msgid "?nation:Friendly"
+msgstr "?nation:Barátságos"
+
+#: server/maphand.c:1935 client/text.c:141 client/gui-sdl/mapview.c:566
+msgid "?nation:Mysterious"
+msgstr "?nation:Rejtélyes"
+
+#: server/maphand.c:1935 client/text.c:141
+msgid "?nation:Friendly(team)"
+msgstr "?nation:Barátságos(csapat)"
+
+#: server/maphand.c:1937 client/text.c:143 client/gui-sdl/mapview.c:596
+#, fuzzy
+msgid "?city:Neutral"
+msgstr "?city:Név"
+
+#: server/maphand.c:1937 client/text.c:143 client/gui-sdl/mapview.c:596
+#, fuzzy
+msgid "?city:Hostile"
+msgstr "?city:Név"
+
+#: server/maphand.c:1939 client/text.c:145 client/gui-sdl/mapview.c:597
+#, fuzzy
+msgid "?city:Peaceful"
+msgstr "?city_state:Béke"
+
+#: server/maphand.c:1939 client/text.c:145 client/gui-sdl/mapview.c:598
+msgid "?city:Friendly"
+msgstr "?city:Barátságos"
+
+#: server/maphand.c:1939 client/text.c:145 client/gui-sdl/mapview.c:598
+msgid "?city:Mysterious"
+msgstr "?city:Rejtélyes"
+
+#: server/maphand.c:1940 client/text.c:146
+msgid "?city:Friendly(team)"
+msgstr "?city:Barátságos(csapat)"
+
+#: server/maphand.c:1948
+#, fuzzy, c-format
+msgid "Location: (%d, %d)"
+msgstr "Hely: (%d, %d)"
+
+#: server/maphand.c:1955 client/text.c:163
+#, c-format
+msgid "Terrain: %s"
+msgstr "Terep: %s"
+
+#: server/maphand.c:1956 client/text.c:164
+#, c-format
+msgid "Food/Prod/Trade: %s"
+msgstr "Élelem/Term/Keresk: %s"
+
+#: server/maphand.c:1959 client/text.c:167
+msgid "Minor Tribe Village"
+msgstr "Apró törzsi falu"
+
+#: server/maphand.c:1968 client/text.c:176
+#, fuzzy
+msgid "Our territory"
+msgstr "A(z) %s"
+
+#. TRANS: "Territory of <username> (<nation + team>)"
+#: server/maphand.c:1971 client/text.c:179
+#, fuzzy, c-format
+msgid "Territory of %s (%s)"
+msgstr "A(z) %2$s   (Államforma: %1$s)"
+
+#: server/maphand.c:1981 client/text.c:189
+#, fuzzy, c-format
+msgid "Territory of %s (%s) (%d turn cease-fire)"
+msgid_plural "Territory of %s (%s) (%d turn cease-fire)"
+msgstr[0] "Egység: %s(%s%s)"
+
+#. TRANS: "Territory of <username>
+#. * (<nation + team> | <diplomatic state>)"
+#: server/maphand.c:1990 client/text.c:198
+#, fuzzy, c-format
+msgid "Territory of %s (%s | %s)"
+msgstr "A(z) %2$s   (Államforma: %1$s)"
+
+#: server/maphand.c:1995 client/text.c:203
+msgid "Unclaimed territory"
+msgstr "Gazdátlan terület"
+
+#. TRANS: "City: <city name> | <username> (<nation + team>)"
+#: server/maphand.c:2010 client/text.c:218
+#, fuzzy, c-format
+msgid "City: %s | %s (%s)"
+msgstr "Város: %s(%s) %s"
+
+#. TRANS:  "City: <city name> | <username>
+#. * (<nation + team>, <number> turn cease-fire)"
+#: server/maphand.c:2020 client/text.c:228
+#, fuzzy, c-format
+msgid "City: %s | %s (%s, %d turn cease-fire)"
+msgid_plural "City: %s | %s (%s, %d turn cease-fire)"
+msgstr[0] "Egység: %s(%s%s)"
+
+#. TRANS: "City: <city name> | <username>
+#. * (<nation + team>, <diplomatic state>)"
+#: server/maphand.c:2027 client/text.c:235
+#, fuzzy, c-format
+msgid "City: %s | %s (%s, %s)"
+msgstr "Város: %s(%s) %s"
+
+#. TRANS: continue list, in case comma is not the separator of choice.
+#: server/maphand.c:2037 server/stdinhand.c:4465 server/stdinhand.c:4469
+#: client/helpdata.c:289 client/helpdata.c:784 client/text.c:245
+#: client/text.c:1313 client/text.c:1350
+#, c-format
+msgid "?clistmore:, %s"
+msgstr ", %s"
+
+#. TRANS: previous lines gave other information about the city.
+#: server/maphand.c:2042 client/text.c:250
+#, fuzzy, c-format
+msgid "?clistbegin: with %s"
+msgstr " ezzel: %s"
+
+#. TRANS: This appears with two or more previous entries in the list
+#: server/maphand.c:2052 client/text.c:260
+#, c-format
+msgid "?clistlast:, and %s"
+msgstr ""
+
+#. TRANS: This appears with only one previous entry in the list
+#: server/maphand.c:2056 client/text.c:264
+#, fuzzy, c-format
+msgid "?clistlast: and %s"
+msgstr "Szakemberek"
+
+#: server/maphand.c:2059 client/text.c:267 client/text.c:1323
+#: client/text.c:1361
+msgid "?clistend:."
+msgstr "."
+
+#: server/maphand.c:2073 client/text.c:293
+#, fuzzy, c-format
+msgid "Infrastructure: %s"
+msgstr "Infrastruktúra: "
+
+#: server/maphand.c:2078 client/text.c:298
+#, fuzzy, c-format
+msgid "Activity: %s"
+msgstr "Tevékenység: "
+
+#. TRANS: "Unit: <unit type> | <username>
+#. * (<nation + team>, <homecity>)"
+#. TRANS: "Unit: <unit type> | <username> (<nation + team>,
+#. * <diplomatic state>)"
+#. TRANS: "Unit: <unit type> | <username>
+#. * (<nation + team>, <homecity>)"
+#. TRANS: "Unit: <unit type> | <username> (<nation + team>,
+#. * <diplomatic state>)"
+#: server/maphand.c:2093 server/maphand.c:2117 client/text.c:313
+#: client/text.c:337
+#, fuzzy, c-format
+msgid "Unit: %s | %s (%s, %s)"
+msgstr "Egység: %s(%s%s)"
+
+#. TRANS: "Unit: <unit type> | <username> (<nation + team>)"
+#: server/maphand.c:2098 client/text.c:318
+#, fuzzy, c-format
+msgid "Unit: %s | %s (%s)"
+msgstr "Egység: %s(%s%s)"
+
+#. TRANS:  "Unit: <unit type> | <username> (<nation + team>,
+#. * <number> turn cease-fire)"
+#: server/maphand.c:2109 client/text.c:329
+#, fuzzy, c-format
+msgid "Unit: %s | %s (%s, %d turn cease-fire)"
+msgid_plural "Unit: %s | %s (%s, %d turn cease-fire)"
+msgstr[0] "Egység: %s(%s%s)"
+
+#. TRANS: A is attack power, D is defense power, FP is firepower,
+#. * HP is hitpoints (current and max).
+#: server/maphand.c:2125 client/text.c:369
+#, fuzzy, c-format
+msgid "A:%d D:%d FP:%d HP:%d/%d (%s)"
+msgstr "T:%d V:%d TE:%d ÉP:%d/%d%s%s"
+
+#. TRANS: "5 more" units on this tile
+#: server/maphand.c:2134 client/text.c:378
+#, c-format
+msgid "  (%d more)"
+msgstr "  (még %d)"
 
 #: server/meta.c:199
 msgid "Not reporting to the metaserver in this game."
@@ -4819,8 +5036,8 @@ msgid ""
 "Warning: Different rulesetdirs ('%s' and '%s') are no longer supported. "
 "Using '%s'."
 msgstr ""
-"Figyelmeztetés: Néhány szabálykészlet ('%s' és '%s') már nem támogatott. '%"
-"s' használata."
+"Figyelmeztetés: Néhány szabálykészlet ('%s' és '%s') már nem támogatott. "
+"'%s' használata."
 
 #. TRANS: Minor error message: <Leader> ... <Poles>.
 #: server/savegame.c:4765
@@ -6714,8 +6931,8 @@ msgid ""
 "Cannot decrease command access level '%s' for connection '%s'; you only have "
 "'%s'."
 msgstr ""
-"Nem sikerült csökkenteni a(z) '%2$s' kapcsolat parancselérési szintjét ('%1"
-"$s'); csak '%3$s' szinttel rendelkezel."
+"Nem sikerült csökkenteni a(z) '%2$s' kapcsolat parancselérési szintjét "
+"('%1$s'); csak '%3$s' szinttel rendelkezel."
 
 #: server/stdinhand.c:1149
 #, c-format
@@ -7014,8 +7231,8 @@ msgstr ""
 #: server/stdinhand.c:2177
 #, c-format
 msgid ""
-"%s %d \"%s\" (needs %0.0f%%%s): %d for, %d against, and %d abstained out of %"
-"d players."
+"%s %d \"%s\" (needs %0.0f%%%s): %d for, %d against, and %d abstained out of "
+"%d players."
 msgstr ""
 
 #: server/stdinhand.c:2181
@@ -7685,14 +7902,6 @@ msgstr ", Legyõzött"
 #, c-format
 msgid ", difficulty level %s"
 msgstr ", erõsségi szint: %s"
-
-#. TRANS: continue list, in case comma is not the separator of choice.
-#: server/stdinhand.c:4465 server/stdinhand.c:4469 client/helpdata.c:289
-#: client/helpdata.c:784 client/text.c:245 client/text.c:1313
-#: client/text.c:1350
-#, c-format
-msgid "?clistmore:, %s"
-msgstr ", %s"
 
 #: server/stdinhand.c:4473
 #, fuzzy
@@ -9212,8 +9421,8 @@ msgid ""
 "Auto-connecting to server \"%s\" at port %d as \"%s\" every %f second(s) for "
 "%d times"
 msgstr ""
-"Automatikus kapcsolódás a(z) \"%s\" szerverhez a(z) %d porton \"%s\" néven %"
-"d.%d másodpercenként (%d kísérlet)"
+"Automatikus kapcsolódás a(z) \"%s\" szerverhez a(z) %d porton \"%s\" néven "
+"%d.%d másodpercenként (%d kísérlet)"
 
 #: client/connectdlg_common.c:208
 #, fuzzy
@@ -11505,71 +11714,6 @@ msgstr "Érvénytelen $http_proxy érték ('http://'-vel kell kezdõdnie)"
 msgid "Failed looking up metaserver's host"
 msgstr "Nem sikerült megtalálni a szervert"
 
-#. TRANS: "AI <player name>"
-#: client/text.c:97
-#, c-format
-msgid "AI %s"
-msgstr ""
-
-#. TRANS: "<nation adjective>, team <team name>"
-#: client/text.c:121
-#, fuzzy, c-format
-msgid "%s, team %s"
-msgstr " %s mellett"
-
-#: client/text.c:138 client/text.c:139 client/text.c:144
-#: client/gui-sdl/mapview.c:563
-#, fuzzy
-msgid "?nation:Neutral"
-msgstr "?duration:túlcsordulás"
-
-#: client/text.c:138 client/gui-sdl/mapview.c:563
-msgid "?nation:Hostile"
-msgstr "?nation:Ellenséges"
-
-#: client/text.c:140 client/gui-sdl/mapview.c:565
-msgid "?nation:Peaceful"
-msgstr "?nation:Békés"
-
-#: client/text.c:140 client/gui-sdl/mapview.c:565
-msgid "?nation:Friendly"
-msgstr "?nation:Barátságos"
-
-#: client/text.c:141 client/gui-sdl/mapview.c:566
-msgid "?nation:Mysterious"
-msgstr "?nation:Rejtélyes"
-
-#: client/text.c:141
-msgid "?nation:Friendly(team)"
-msgstr "?nation:Barátságos(csapat)"
-
-#: client/text.c:143 client/gui-sdl/mapview.c:596
-#, fuzzy
-msgid "?city:Neutral"
-msgstr "?city:Név"
-
-#: client/text.c:143 client/gui-sdl/mapview.c:596
-#, fuzzy
-msgid "?city:Hostile"
-msgstr "?city:Név"
-
-#: client/text.c:145 client/gui-sdl/mapview.c:597
-#, fuzzy
-msgid "?city:Peaceful"
-msgstr "?city_state:Béke"
-
-#: client/text.c:145 client/gui-sdl/mapview.c:598
-msgid "?city:Friendly"
-msgstr "?city:Barátságos"
-
-#: client/text.c:145 client/gui-sdl/mapview.c:598
-msgid "?city:Mysterious"
-msgstr "?city:Rejtélyes"
-
-#: client/text.c:146
-msgid "?city:Friendly(team)"
-msgstr "?city:Barátságos(csapat)"
-
 #: client/text.c:154
 #, fuzzy, c-format
 msgid "Location: (%d, %d) [%d]"
@@ -11580,148 +11724,17 @@ msgstr "Hely: (%d, %d)"
 msgid "Native coordinates: (%d, %d)"
 msgstr ""
 
-#: client/text.c:163
-#, c-format
-msgid "Terrain: %s"
-msgstr "Terep: %s"
-
-#: client/text.c:164
-#, c-format
-msgid "Food/Prod/Trade: %s"
-msgstr "Élelem/Term/Keresk: %s"
-
-#: client/text.c:167
-msgid "Minor Tribe Village"
-msgstr "Apró törzsi falu"
-
-#: client/text.c:176
-#, fuzzy
-msgid "Our territory"
-msgstr "A(z) %s"
-
-#. TRANS: "Territory of <username> (<nation + team>)"
-#: client/text.c:179
-#, fuzzy, c-format
-msgid "Territory of %s (%s)"
-msgstr "A(z) %2$s   (Államforma: %1$s)"
-
-#: client/text.c:189
-#, fuzzy, c-format
-msgid "Territory of %s (%s) (%d turn cease-fire)"
-msgid_plural "Territory of %s (%s) (%d turn cease-fire)"
-msgstr[0] "Egység: %s(%s%s)"
-
-#. TRANS: "Territory of <username>
-#. * (<nation + team> | <diplomatic state>)"
-#: client/text.c:198
-#, fuzzy, c-format
-msgid "Territory of %s (%s | %s)"
-msgstr "A(z) %2$s   (Államforma: %1$s)"
-
-#: client/text.c:203
-msgid "Unclaimed territory"
-msgstr "Gazdátlan terület"
-
-#. TRANS: "City: <city name> | <username> (<nation + team>)"
-#: client/text.c:218
-#, fuzzy, c-format
-msgid "City: %s | %s (%s)"
-msgstr "Város: %s(%s) %s"
-
-#. TRANS:  "City: <city name> | <username>
-#. * (<nation + team>, <number> turn cease-fire)"
-#: client/text.c:228
-#, fuzzy, c-format
-msgid "City: %s | %s (%s, %d turn cease-fire)"
-msgid_plural "City: %s | %s (%s, %d turn cease-fire)"
-msgstr[0] "Egység: %s(%s%s)"
-
-#. TRANS: "City: <city name> | <username>
-#. * (<nation + team>, <diplomatic state>)"
-#: client/text.c:235
-#, fuzzy, c-format
-msgid "City: %s | %s (%s, %s)"
-msgstr "Város: %s(%s) %s"
-
-#. TRANS: previous lines gave other information about the city.
-#: client/text.c:250
-#, fuzzy, c-format
-msgid "?clistbegin: with %s"
-msgstr " ezzel: %s"
-
-#. TRANS: This appears with two or more previous entries in the list
-#: client/text.c:260
-#, c-format
-msgid "?clistlast:, and %s"
-msgstr ""
-
-#. TRANS: This appears with only one previous entry in the list
-#: client/text.c:264
-#, fuzzy, c-format
-msgid "?clistlast: and %s"
-msgstr "Szakemberek"
-
-#: client/text.c:267 client/text.c:1323 client/text.c:1361
-msgid "?clistend:."
-msgstr "."
-
 #. TRANS: "Trade from Warsaw: 5"
 #: client/text.c:277
 #, fuzzy, c-format
 msgid "Trade from %s: %d"
 msgstr "Összes kereskedelem a kereskedelmi kapcsolatokból: %d"
 
-#: client/text.c:293
-#, fuzzy, c-format
-msgid "Infrastructure: %s"
-msgstr "Infrastruktúra: "
-
-#: client/text.c:298
-#, fuzzy, c-format
-msgid "Activity: %s"
-msgstr "Tevékenység: "
-
-#. TRANS: "Unit: <unit type> | <username>
-#. * (<nation + team>, <homecity>)"
-#. TRANS: "Unit: <unit type> | <username> (<nation + team>,
-#. * <diplomatic state>)"
-#: client/text.c:313 client/text.c:337
-#, fuzzy, c-format
-msgid "Unit: %s | %s (%s, %s)"
-msgstr "Egység: %s(%s%s)"
-
-#. TRANS: "Unit: <unit type> | <username> (<nation + team>)"
-#: client/text.c:318
-#, fuzzy, c-format
-msgid "Unit: %s | %s (%s)"
-msgstr "Egység: %s(%s%s)"
-
-#. TRANS:  "Unit: <unit type> | <username> (<nation + team>,
-#. * <number> turn cease-fire)"
-#: client/text.c:329
-#, fuzzy, c-format
-msgid "Unit: %s | %s (%s, %d turn cease-fire)"
-msgid_plural "Unit: %s | %s (%s, %d turn cease-fire)"
-msgstr[0] "Egység: %s(%s%s)"
-
 #. TRANS: "Chance to win: A:95% D:46%"
 #: client/text.c:362
 #, c-format
 msgid "Chance to win: A:%d%% D:%d%%"
 msgstr "Esély a gyõzelemre: A:%d%% D:%d%%"
-
-#. TRANS: A is attack power, D is defense power, FP is firepower,
-#. * HP is hitpoints (current and max).
-#: client/text.c:369
-#, fuzzy, c-format
-msgid "A:%d D:%d FP:%d HP:%d/%d (%s)"
-msgstr "T:%d V:%d TE:%d ÉP:%d/%d%s%s"
-
-#. TRANS: "5 more" units on this tile
-#: client/text.c:378
-#, c-format
-msgid "  (%d more)"
-msgstr "  (még %d)"
 
 #. TRANS: on own line immediately following \n, ... <city>
 #: client/text.c:475
@@ -30547,8 +30560,8 @@ msgstr ""
 
 #, fuzzy
 #~ msgid ""
-#~ "Your %s has successfully completed her mission and returned unharmed to %"
-#~ "s and has become more experienced."
+#~ "Your %s has successfully completed her mission and returned unharmed to "
+#~ "%s and has become more experienced."
 #~ msgstr ""
 #~ "A %s teljesítette a küldetését és sértetlenül visszatért %s városába."
 
@@ -30587,16 +30600,16 @@ msgstr ""
 #~ "Eliminated %s %s while infiltrating %s. The defender became more "
 #~ "experienced."
 #~ msgstr ""
-#~ "Elfogtak egy %s %s egységet, miközben megpróbált beépülni az ellenséghez %"
-#~ "s városában."
+#~ "Elfogtak egy %s %s egységet, miközben megpróbált beépülni az ellenséghez "
+#~ "%s városában."
 
 #, fuzzy
 #~ msgid ""
 #~ "Eliminated %s %s while infiltrating our troops. The defender became more "
 #~ "experienced."
 #~ msgstr ""
-#~ "Elfogtak egy %s %s egységet, miközben megpróbált beépülni az ellenséghez %"
-#~ "s városában."
+#~ "Elfogtak egy %s %s egységet, miközben megpróbált beépülni az ellenséghez "
+#~ "%s városában."
 
 #, fuzzy
 #~ msgid "Ruleset directory name \"%s\" disallowed for security reasons."
@@ -32367,8 +32380,8 @@ msgstr ""
 #~ msgstr "Elõször fel kell bontanod az egyezményt a Játékosok ablakban (F3)."
 
 #~ msgid ""
-#~ "Can't attack %s's unit in the city of %s because you are not at war with %"
-#~ "s."
+#~ "Can't attack %s's unit in the city of %s because you are not at war with "
+#~ "%s."
 #~ msgstr ""
 #~ "Nem támadhatod meg %s egységét %s városában, mert nem állsz háborúban %s "
 #~ "játékossal."
@@ -32450,8 +32463,8 @@ msgstr ""
 #~ msgstr "Érvénytelen $http_proxy érték (hiányzik az elválasztó '/' jel)"
 
 #~ msgid ""
-#~ "(The %s improvement is also required for a city to grow larger than size %"
-#~ "d.)  "
+#~ "(The %s improvement is also required for a city to grow larger than size "
+#~ "%d.)  "
 #~ msgstr ""
 #~ "(Egy %s is szükséges ahhoz, hogy a város %d méretûnél nagyobbra "
 #~ "nõhessen.)  "

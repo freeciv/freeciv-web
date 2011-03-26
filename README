@@ -132,7 +132,6 @@ TODO:
 - Make goto lines wrap in X direction of the map.
 - Show city revolt graphics
 - Show attack animation.
-- Opera 11 broken in jQuery 1.5.x.
 - WebGl?
 - Port to Python 3.2
 - Show borders
@@ -140,4 +139,5 @@ TODO:
 - Show city tile output in city dialog.
 - Playback of games.
 - HTML5 Web Sockets.
-
+- Test Uglify.js
+- Research dialog: highlight all techs up to tech goal.

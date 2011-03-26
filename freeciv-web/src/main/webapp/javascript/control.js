@@ -34,6 +34,31 @@ var intro_click_description = true;
 var goto_request_map = {};
 var current_goto_path = [];
 
+
+/****************************************************************************
+...
+****************************************************************************/
+function control_init() 
+{
+  // Register keyboard and mouse listener using JQuery.
+  $(document).keydown (keyboard_listener);
+  $("#canvas").mouseup(mapview_mouse_click);
+  $("#canvas").mousedown(mapview_mouse_down);
+
+  $("#game_text_input").keydown(function(event) {
+	  return check_text_input(event, $("#game_text_input"));
+    });
+  $("#game_text_input").focus(function(event) {
+	keyboard_input=false;
+    });
+
+  $("#game_text_input").blur(function(event) {
+	  keyboard_input=true;
+    });
+
+
+}
+
 /****************************************************************************
 ...
 ****************************************************************************/
@@ -65,6 +90,34 @@ function mouse_moved_cb(e)
     if (ptile != null && goto_request_map[ptile['x'] + "," + ptile['y']] == null) {
       preview_goto_path(current_focus[0]['id'], ptile['x'], ptile['y']);
     }
+  }
+
+  if (C_S_RUNNING == client_state()) {
+    update_mouse_cursor();
+  }
+
+}
+
+/****************************************************************************
+...
+****************************************************************************/
+function update_mouse_cursor()
+{
+  var ptile = canvas_pos_to_tile(mouse_x, mouse_y);
+
+  if (ptile == null) return;
+
+  var punit = find_visible_unit(ptile);
+  var pcity = tile_city(ptile);
+
+  if (goto_active) {
+    mapview_canvas.style.cursor = "crosshair";
+  } else if (pcity != null && city_owner_player_id(pcity) == client.conn.playing.playerno) { 
+    mapview_canvas.style.cursor = "pointer";
+  } else if (punit != null && punit['owner'] == client.conn.playing.playerno) {
+    mapview_canvas.style.cursor = "move";
+  } else {
+    mapview_canvas.style.cursor = "default";
   }
 
 }
@@ -451,6 +504,13 @@ function do_map_click(ptile, qtype)
   if (goto_active) {
     if (current_focus.length > 0) {
       var punit = current_focus[0];
+
+      if (punit['x'] == ptile['x'] && punit['y'] == ptile['y']) {
+	/* if unit moved by click and drag to the same tile, then deactivate goto. */
+        deactivate_goto();
+        return;
+      }
+
       var packet = [{"packet_type" : "unit_move", "unit_id" : punit['id'], "x": ptile['x'], "y": ptile['y'] }];
       send_request (JSON.stringify(packet));
     }

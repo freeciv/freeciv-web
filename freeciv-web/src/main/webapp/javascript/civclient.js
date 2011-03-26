@@ -49,9 +49,7 @@ function civclient_init()
   game_init();
   network_init();
   init_mapview();
-
-  // Register keyboard listener using JQuery.
-  $(document).keydown (keyboard_listener);
+  control_init();
 
   timeoutTimerId = setInterval("update_timeout()", 1000);
   

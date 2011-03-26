@@ -13,7 +13,7 @@
 
 
 /****************************************************************************
-  This function is triggered when the mouse is clicked on the mapview canvas.
+  Triggered when the mouse button is clicked UP on the mapview canvas.
 ****************************************************************************/
 function mapview_mouse_click(e)
 {
@@ -29,25 +29,49 @@ function mapview_mouse_click(e)
     middleclick = (e.button == 1 || e.button == 4);
   }
   
-  
   if (!rightclick && !middleclick) {
+    /* Left mouse button*/
     action_button_pressed(mouse_x, mouse_y, SELECT_POPUP);
+  } 
+
+}
+
+/****************************************************************************
+  Triggered when the mouse button is clicked DOWN on the mapview canvas.
+****************************************************************************/
+function mapview_mouse_down(e)
+{
+  var rightclick = false;
+  var middleclick = false;
+
+  if (!e) var e = window.event;
+  if (e.which) {
+    rightclick = (e.which == 3);
+    middleclick = (e.which == 2);
+  } else if (e.button) {
+    rightclick = (e.button == 2);
+    middleclick = (e.button == 1 || e.button == 4);
+  }
+
+  if (!rightclick && !middleclick) {
+    /* Left mouse button is down */
+    if (goto_active) return;
+
+    setTimeout("check_mouse_drag_unit(" + mouse_x + "," + mouse_y + ");", 100);
   } else if (middleclick) {
     popit(); 
   } else {
     release_right_button(mouse_x, mouse_y);
   }
 
-
 }
+
 
 /****************************************************************************
   This function is triggered when the mouse is clicked on the city canvas.
 ****************************************************************************/
 function city_mapview_mouse_click(e)
 {
-  //var x = e.offsetX || e.layerX;
-  //var y = e.offsetY || e.layerY;
   var rightclick;
   if (!e) var e = window.event;
   if (e.which) {
@@ -63,6 +87,26 @@ function city_mapview_mouse_click(e)
 
 }
 
+/****************************************************************************
+...
+****************************************************************************/
+function check_mouse_drag_unit(canvas_x, canvas_y)
+{
+  var ptile = canvas_pos_to_tile(canvas_x, canvas_y);
+  if (ptile == null) return;
+
+  var sunit = find_visible_unit(ptile);
+
+  if (sunit != null) {
+    if (sunit['owner'] == client.conn.playing.playerno) {
+      set_unit_focus_and_redraw(sunit);
+      activate_goto();
+    }
+  }
+
+
+
+}
 
 /**************************************************************************
   Do some appropriate action when the "main" mouse button (usually

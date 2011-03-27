@@ -75,7 +75,7 @@ function update_nation_screen()
 **************************************************************************/
 function col_love(pplayer)
 {
-  if (pplayer['playerno'] == client.conn.playing['playerno'] 
+  if (client_is_observer() || pplayer['playerno'] == client.conn.playing['playerno'] 
       || pplayer['ai'] == false) {
     return "-";
   } else {

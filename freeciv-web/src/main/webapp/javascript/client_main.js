@@ -58,6 +58,9 @@ function set_client_state(newstate)
       can_slide = TRUE;*/
       set_client_page(PAGE_GAME);
       setup_window_size();
+
+      if (observing) center_tile_mapcanvas(map_pos_to_tile(15,15));
+
       /*// Find something sensible to display instead of the intro gfx. 
       center_on_something();
       free_intro_radar_sprites();

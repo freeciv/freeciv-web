@@ -11,9 +11,6 @@ if (username == null || "null".equals(username)) {
 	redir_url = "/wireframe.jsp?do=guest_user&redir=" + redir_url;
 }
 
-String ua = "" + request.getHeader("User-Agent");
-boolean isOpera = ( ua != null && ua.indexOf( "Opera" ) != -1 );
-
 %>
 <script type="text/javascript" src="/javascript-compressed/jquery-1.5.1.min.js"></script>
 <script type="text/javascript" src="/javascript-compressed/webclient.js"></script>
@@ -34,11 +31,7 @@ function fc_redirect()
 function updateProgress()
 {
   var x = 120 - progress;
-  <% if (isOpera) { %>
-    progress += 2;
-  <% } else { %>
-    progress += 6;
-  <% } %>
+  progress += 6;
 
   if (progress >= 120) progress = 0;
   document.getElementById("progress").style.backgroundPosition = "-" + x +"px 0pt";
@@ -79,16 +72,8 @@ img.percentImage {
 <br><br>
 <h2>Please wait while Freeciv.net is loading...</h2>
 
-<%
+  <img src="/tileset/freeciv-web-tileset.png" width="1" height="1">
 
-if (!isOpera) {
-%>
-  <img src="/tileset/freeciv-web-tileset-1.png" width="1" height="1">
-  <img src="/tileset/freeciv-web-tileset-2.png" width="1" height="1">
-
-<% } else { %>
-    <jsp:include page="tiles/freeciv-web-tileset-small-preload.html" flush="false"/>
-<% } %>
 </center>
 
 

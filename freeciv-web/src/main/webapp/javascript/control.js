@@ -937,7 +937,7 @@ function process_diplomat_arrival(pdiplomat, target_id)
 **************************************************************************/
 function left_click_center()
 {
-  return (is_iphone() || jQuery.browser.opera);
+  return (is_iphone());
 }
 
 /****************************************************************************

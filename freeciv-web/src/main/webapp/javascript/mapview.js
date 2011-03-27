@@ -14,7 +14,7 @@
 
 var mapview_canvas_ctx = null;
 var mapview_canvas = null; 
-var tileset_images = {}; 
+var tileset_image = null; 
 var sprites = {};
 
 var sprites_init = false;
@@ -154,23 +154,9 @@ function setup_window_size ()
 **************************************************************************/
 function init_sprites()
 {
-  if (is_canvas_clipping_supported()) {
-    /* Load tileset images. FIXME: loading images this way doesn't work in Opera. */
-    var img1 = new Image();
-    img1.src = '/tileset/freeciv-web-tileset-1.png';
-    tileset_images[1] = img1; 
-  
-    var img2 = new Image();
-    img2.src = '/tileset/freeciv-web-tileset-2.png';
-    tileset_images[2] = img2;
-
-  } else {
-    for (var tile_tag in tileset) {
-      var imgx = new Image();
-      imgx.src = '/tiles/' + tile_tag + '.png';
-      tileset_images[tile_tag] = imgx; 
-    }
-  }
+  /* Load tileset images. FIXME: loading images this way doesn't work in Opera. */
+  tileset_image = new Image();
+  tileset_image.src = '/tileset/freeciv-web-tileset.png';
   
 }
 
@@ -180,25 +166,22 @@ function init_sprites()
 function init_cache_sprites() 
 {
  try {
-  if (is_canvas_clipping_supported()) {
-    for (var tile_tag in tileset) {
-      var image_no = tileset[tile_tag][0];
-      var x = tileset[tile_tag][1];
-      var y = tileset[tile_tag][2];
-      var w = tileset[tile_tag][3];
-      var h = tileset[tile_tag][4];
+  for (var tile_tag in tileset) {
+    var x = tileset[tile_tag][0];
+    var y = tileset[tile_tag][1];
+    var w = tileset[tile_tag][2];
+    var h = tileset[tile_tag][3];
 
-      var newCanvas = document.createElement('canvas');
-      newCanvas.height = "" + h;
-      newCanvas.width = "" + w;
-      var newCtx = newCanvas.getContext('2d');
+    var newCanvas = document.createElement('canvas');
+    newCanvas.height = "" + h;
+    newCanvas.width = "" + w;
+    var newCtx = newCanvas.getContext('2d');
 
-      newCtx.drawImage(tileset_images[image_no], x, y, 
+    newCtx.drawImage(tileset_image, x, y, 
                        w, h, 0, 0, w, h);
-      sprites[tile_tag] = newCanvas;
+    sprites[tile_tag] = newCanvas;
 
-    }
-  }  
+  }
 
   sprites_init = true;
 
@@ -253,11 +236,7 @@ function mapview_put_tile(pcanvas, tag, canvas_x, canvas_y) {
     return;
   } 
 
-  if (is_canvas_clipping_supported() && sprites[tag] != null) {
-    pcanvas.drawImage(sprites[tag], canvas_x, canvas_y);
-  } else {
-    pcanvas.drawImage(tileset_images[tag], canvas_x, canvas_y);
-  }
+  pcanvas.drawImage(sprites[tag], canvas_x, canvas_y);
              
 }
 

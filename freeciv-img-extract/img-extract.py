@@ -58,7 +58,6 @@ files = ["amplio2.tilespec",
   "../freeciv/data/misc/treaty.spec"]; 
 
 global tileset;
-global current_tileset_no;
 global curr_x;
 global curr_y;
 global max_row_height;
@@ -72,12 +71,11 @@ sum_area = 0;
 max_row_height = 0;
 curr_x = 0;
 curr_y = 14;
-tileset_height = 1800;  #FIXME: This must be adjusted according to the number of tiles. # Silly Flash 9 limitation of 2880.
-tileset_width = 1270;
+tileset_height = 2200;  #FIXME: This must be adjusted according to the number of tiles. # Silly Flash 9 limitation of 2880.
+tileset_width = 2200;
 
 dither_types = ["t.l0.desert1", "t.l0.plains1", "t.l0.grassland1", "t.l0.forest1", "t.l0.hills1", "t.l0.mountains1", "t.l0.tundra1", "t.l0.swamp1"];
 
-current_tileset_no = 1;
 tileset = Image.new('RGBA', (tileset_width, tileset_height), (0, 0, 0, 0));
 mask_image = Image.open("mask.png");
 dither_mask = Image.open("dither.png");
@@ -86,7 +84,6 @@ dither_map = {};
 def increment_tileset_image():
   # save current tileset file.
   global tileset;
-  global current_tileset_no;
   global curr_x;
   global curr_y;
   global max_row_height;
@@ -94,11 +91,10 @@ def increment_tileset_image():
   global max_height;
 
   draw = ImageDraw.Draw(tileset)
-  draw.text((130, 0), "Freeciv.net - #" + str(current_tileset_no) + " -   GPL Licensed  - Copyright 2007-2011  Andreas Rosdal", fill="rgb(0,0,0)")
+  draw.text((130, 0), "Freeciv.net -   GPL Licensed  - Copyright 2007-2011  Andreas Rosdal", fill="rgb(0,0,0)")
 
-  tileset.save("pre-freeciv-web-tileset-" + str(current_tileset_no) + ".png");
+  tileset.save("pre-freeciv-web-tileset.png");
 
-  current_tileset_no += 1;
   tileset = Image.new('RGBA', (tileset_width, tileset_height), (0, 0, 0, 0));
 
   curr_x = 0;
@@ -134,7 +130,7 @@ for file in files:
         increment_tileset_image();
       tileset.paste(im, (curr_x, curr_y));
       im.save("tiles/" + rsprite[0] + ".png");
-      coords[rsprite[0]] = (current_tileset_no, curr_x, curr_y, w, h);
+      coords[rsprite[0]] = (curr_x, curr_y, w, h);
       curr_x += w;
       if (h > max_row_height): max_row_height = h;
       if (w + curr_x >= tileset_width): 
@@ -221,7 +217,7 @@ for file in files:
             store_img = Image.new('RGBA', (w, h), (0, 0, 0, 0));
             store_img.paste(result_cell, (0, 0), mask);
             store_img.save("tiles/" + tag + "." + str(dir) + ".png");
-            coords[tag + "." + str(dir)] = (current_tileset_no, curr_x, curr_y, w, h);
+            coords[tag + "." + str(dir)] = (curr_x, curr_y, w, h);
             curr_x += w;
             if (h > max_row_height): max_row_height = h;
             if (w + curr_x >= tileset_width): 
@@ -246,7 +242,7 @@ for file in files:
           tileset.paste(result_tile, (curr_x, curr_y));
           result_tile.save("tiles/" + tag + ".png");
 
-          coords[tag] = (current_tileset_no, curr_x, curr_y, w, h);
+          coords[tag] = (curr_x, curr_y, w, h);
           curr_x += w;
           if (h > max_row_height): max_row_height = h;
           if (w + curr_x >= tileset_width): 
@@ -256,7 +252,7 @@ for file in files:
 
           #if (tag2 != None): result_tile.save(tag2 + ".png"); 
           if (tag2 != None and len(tag2) > 0): 
-            coords[tag2] = (current_tileset_no, curr_x, curr_y, w, h);
+            coords[tag2] = (curr_x, curr_y, w, h);
 	    print("saving tag: " + tag2);
             result_tile.save("tiles/" + tag2 + ".png");
  
@@ -311,7 +307,7 @@ for file in files:
         tileset.paste(result_tile, (curr_x, curr_y));
         result_tile.save("tiles/" + tag + ".png");
 
-        coords[tag] = (current_tileset_no, curr_x, curr_y, w, h);
+        coords[tag] = (curr_x, curr_y, w, h);
         curr_x += w;
         if (h > max_row_height): max_row_height = h;
         if (w + curr_x >= tileset_width): 
@@ -321,7 +317,7 @@ for file in files:
 
         #if (tag2 != None): result_tile.save(tag2 + ".png"); 
         if (tag2 != None): 
-          coords[tag2] = (current_tileset_no, curr_x, curr_y, w, h);
+          coords[tag2] = (curr_x, curr_y, w, h);
           result_tile.save("tiles/" + tag + ".png");
 
 
@@ -350,7 +346,7 @@ for src_key in dither_map.keys():
         tileset.paste(result_cell, (curr_x, curr_y));
         result_cell.save("tiles/" + tag + ".png");
 
-        coords[tag] = (current_tileset_no, curr_x, curr_y, w, h);
+        coords[tag] = (curr_x, curr_y, w, h);
 
         curr_x += w;
         if (h > max_row_height): max_row_height = h;
@@ -363,7 +359,7 @@ im = Image.open("city_active.png");
 (w, h) = im.size;
 curr_x += w;
 tileset.paste(im, (curr_x, curr_y));
-coords["city_active"] = (current_tileset_no, curr_x, curr_y, w, h);
+coords["city_active"] = (curr_x, curr_y, w, h);
 
 #FIXME: the city_active and city_invalid graphics must not be drawn outside
 # of the full final tileset image.
@@ -371,7 +367,7 @@ im = Image.open("city_invalid.png");
 (w, h) = im.size;
 curr_x += w;
 tileset.paste(im, (curr_x, curr_y));
-coords["city_invalid"] = (current_tileset_no, curr_x, curr_y, w, h);
+coords["city_invalid"] = (curr_x, curr_y, w, h);
 
 
 increment_tileset_image();

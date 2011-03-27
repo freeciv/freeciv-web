@@ -29,10 +29,3 @@ function canvas_put_sprite(pcanvas, canvas_x, canvas_y, sprite, offset_x, offset
 {
     mapview_put_tile(pcanvas, sprite['key'], canvas_x + offset_x, canvas_y + offset_y);
 }
-
-/****************************************************************************
-  Determines if the browser supports image clipping with Canvas.
-****************************************************************************/
-function is_canvas_clipping_supported() {
-  return !jQuery.browser.opera;
-}

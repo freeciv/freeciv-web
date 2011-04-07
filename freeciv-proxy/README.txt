@@ -1,7 +1,7 @@
 Freeciv web proxy
 
 Start the proxy like this:
-python proxy-run.py
+python freeciv-proxy.py 8082
 
 See status on this URL when proxy is running: 
 http://localhost:8082/status

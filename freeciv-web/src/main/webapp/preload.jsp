@@ -4,6 +4,7 @@
 
 <%
 String redir_url = "" + request.getParameter("redir");
+String load = "" + request.getParameter("load");
 
 String username = "" + session.getAttribute("username");
 if (username == null || "null".equals(username)) {
@@ -11,8 +12,12 @@ if (username == null || "null".equals(username)) {
 	redir_url = "/wireframe.jsp?do=guest_user&redir=" + redir_url;
 }
 
+if (load != null && !"null".equals(load)) {
+  redir_url = redir_url + "&load=" + load;
+}
+
 %>
-<script type="text/javascript" src="/javascript-compressed/jquery-1.5.1.min.js"></script>
+<script type="text/javascript" src="/javascript-compressed/jquery-1.5.2.min.js"></script>
 <script type="text/javascript" src="/javascript-compressed/webclient.js"></script>
 
 <script type="text/javascript">	

@@ -711,28 +711,6 @@ if test "x$server" = "xyes"; then
 fi
 
 
-dnl The following adds flags for libcurl
-    AC_MSG_CHECKING(for libcurl 7.11.0 or later)
-    set x `curl-config --version 2>&1`
-    shift
-    case "$1" in [[0-9]*]) ;; *) shift;; esac
-    jigdo_curlver="$1"
-    AC_MSG_RESULT($jigdo_curlver)
-    case "$jigdo_curlver" in
-        [[1-9][0-9].*|[8-9].*|7.1[1-9]*|7.[2-9][0-9]*])
-            CFLAGS="$CFLAGS `curl-config --cflags 2>/dev/null`"
-            SERVER_LIBS="$SERVER_LIBS `curl-config --libs 2>/dev/null`"
-            if test -n "$jigdo_libcurl"; then CURLLIBS="$jigdo_libcurl"; fi
-            ;;
-        *)
-        AC_MSG_RESULT([   * libcurl not installed, or the installed version])
-        AC_MSG_RESULT([   * is too old, or curl-config is not in \$PATH.])
-        AC_MSG_RESULT([   * Please install libcurl 7.11.0 or later, it is])
-        AC_MSG_RESULT([   * needed by the jigdo GUI application.])
-        installDevel "libcurl2" "libcurl2"
-    esac
-
-
 
 AC_SUBST(SERVER_LIBS)
 
@@ -836,7 +814,7 @@ FC_EXPAND_DIR(FREECIV_DATADIR, "$datadir/freeciv")
 if test x"$MINGW32" = xyes; then
   DEFAULT_DATA_PATH=".;data;~/.freeciv/$DATASUBDIR;$datadir/freeciv"
 else
-  DEFAULT_DATA_PATH=".:data:~/.freeciv/$DATASUBDIR:$datadir/freeciv"
+  DEFAULT_DATA_PATH=".:data:~/.freeciv/$DATASUBDIR:$datadir/freeciv:/mnt/savegames"
 fi
 CPPFLAGS="$CPPFLAGS -DDEFAULT_DATA_PATH=\"\\\"$DEFAULT_DATA_PATH\\\"\""
 

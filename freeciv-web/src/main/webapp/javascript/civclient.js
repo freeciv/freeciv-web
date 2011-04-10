@@ -83,9 +83,9 @@ function civclient_init()
     show_dialog_message("Welcome to Freeciv.net", 
       "Please wait while you are being logged in as an observer in the game.");
   } else if (!is_iphone()) { 
-    show_dialog_message("Welcome to Freeciv.net", 
+    show_intro_dialog("Welcome to Freeciv.net", 
       "You have now joined the game. Before the game begins, " +
-      "you can change game options or wait for more players " +
+      "you can customize game options or wait for more players " +
       "to join the game.  Type /help in the command line " +
       "below to find out how to customize the game. <br><br>" +  
       "Click the start game button to begin the game.");
@@ -225,6 +225,37 @@ function show_dialog_message(title, message) {
 					$(this).dialog('close');
 				}
 			}
+		});
+	
+  $("#dialog").dialog('open');		
+}
+
+/**************************************************************************
+ Shows the Freeciv intro dialog.
+**************************************************************************/
+function show_intro_dialog(title, message) {
+
+  // reset dialog page.
+  $("#dialog").remove();
+  $("<div id='dialog'></div>").appendTo("div#game_page");
+
+  $("#dialog").html(message);
+  $("#dialog").attr("title", title);
+  $("#dialog").dialog({
+			bgiframe: true,
+			modal: true,
+			width: "40%",
+			buttons: 
+			{
+				"Start Game" : function() {
+					pregame_start_game();
+					$(this).dialog('close');
+				}, 
+				  "Customize Game": function() {
+					$(this).dialog('close');
+				}
+			}	
+			
 		});
 	
   $("#dialog").dialog('open');		

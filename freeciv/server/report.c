@@ -933,13 +933,30 @@ static bool scan_score_log(FILE * fp, int *last_turn, char *id,
 **************************************************************************/
 void log_civ_score(void)
 {
-  static const char logname[] = "civscore.log";
+  char logname[600];
+  char tmpname[600];
+
   static FILE *fp = NULL;
   static bool disabled = FALSE;
   static char player_names[MAX_NUM_PLAYERS +
 			   MAX_NUM_BARBARIANS][MAX_LEN_NAME];
   static char *player_name_ptrs[MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS];
   static int last_turn = -1;
+
+ /* put this file in the same place we put savegames */
+  my_snprintf(logname, sizeof(logname),
+              "civscore-%04d.log", srvarg.port);
+
+  /* Ensure the saves directory exists. */
+  make_dir(srvarg.saves_pathname);
+
+  sz_strlcpy(tmpname, srvarg.saves_pathname);
+  if (tmpname[0] != '\0') {
+    sz_strlcat(tmpname, "/");
+  }
+  sz_strlcat(tmpname, logname);
+  sz_strlcpy(logname, tmpname);
+
 
   /* 
    * Add new tags only at end of this list. Maintaining the order of

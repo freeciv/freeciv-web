@@ -37,7 +37,7 @@ function set_client_page(page)
 
   switch (old_page) {
   case -1:
-    $("#pregame_page").hide(); 
+    $("#pregame_page").remove(); 
     break;
   case PAGE_SCENARIO:
     break;

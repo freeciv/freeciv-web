@@ -27,6 +27,8 @@ uname -v = #1 SMP PREEMPT 2011-02-21 10:34:10 +0100
 /usr/bin/oslevel       = unknown
 /bin/universe          = unknown
 
+PATH: /usr/local/maven//bin
+PATH: /usr/local/maven//bin
 PATH: /usr/lib64/mpi/gcc/openmpi/bin
 PATH: /home/andreas/bin
 PATH: /usr/local/bin
@@ -1254,7 +1256,7 @@ configure:27785: result: yes
 configure:27922: checking for pow
 configure:27922: gcc -o conftest -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
 conftest.c:91:6: warning: conflicting types for built-in function 'pow'
-/tmp/ccFDZN7g.o: In function `main':
+/tmp/ccyRGCLg.o: In function `main':
 /home/andreas/freeciv-build/freeciv-web/freeciv/conftest.c:102: undefined reference to `pow'
 collect2: ld returned 1 exit status
 configure:27922: $? = 1
@@ -1370,13 +1372,11 @@ configure:27953: gcc -o conftest -g -O2 -fsigned-char  -DLOCALEDIR="\"${dataroot
 conftest.c:75:6: warning: conflicting types for built-in function 'pow'
 configure:27953: $? = 0
 configure:27962: result: yes
-configure:27974: checking for libcurl 7.11.0 or later
-configure:27980: result: 7.21.2
-configure:28004: checking for main in -lnls
-configure:28023: gcc -o conftest -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lnls  -lbz2 -lz   >&5
+configure:27977: checking for main in -lnls
+configure:27996: gcc -o conftest -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lnls  -lbz2 -lz   >&5
 /usr/lib64/gcc/x86_64-suse-linux/4.5/../../../../x86_64-suse-linux/bin/ld: cannot find -lnls
 collect2: ld returned 1 exit status
-configure:28023: $? = 1
+configure:27996: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME ""
@@ -1454,82 +1454,82 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:28032: result: no
-configure:28044: checking for ANSI C header files
-configure:28148: result: yes
-configure:28156: checking for sys/wait.h that is POSIX.1 compatible
-configure:28182: gcc -c -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
-configure:28182: $? = 0
-configure:28189: result: yes
-configure:28201: checking fcntl.h usability
-configure:28201: gcc -c -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
-configure:28201: $? = 0
-configure:28201: result: yes
-configure:28201: checking fcntl.h presence
-configure:28201: gcc -E  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c
-configure:28201: $? = 0
-configure:28201: result: yes
-configure:28201: checking for fcntl.h
-configure:28201: result: yes
-configure:28201: checking sys/time.h usability
-configure:28201: gcc -c -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
-configure:28201: $? = 0
-configure:28201: result: yes
-configure:28201: checking sys/time.h presence
-configure:28201: gcc -E  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c
-configure:28201: $? = 0
-configure:28201: result: yes
-configure:28201: checking for sys/time.h
-configure:28201: result: yes
-configure:28201: checking for sys/types.h
-configure:28201: result: yes
-configure:28201: checking for unistd.h
-configure:28201: result: yes
-configure:28201: checking sys/utsname.h usability
-configure:28201: gcc -c -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
-configure:28201: $? = 0
-configure:28201: result: yes
-configure:28201: checking sys/utsname.h presence
-configure:28201: gcc -E  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c
-configure:28201: $? = 0
-configure:28201: result: yes
-configure:28201: checking for sys/utsname.h
-configure:28201: result: yes
-configure:28201: checking sys/file.h usability
-configure:28201: gcc -c -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
-configure:28201: $? = 0
-configure:28201: result: yes
-configure:28201: checking sys/file.h presence
-configure:28201: gcc -E  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c
-configure:28201: $? = 0
-configure:28201: result: yes
-configure:28201: checking for sys/file.h
-configure:28201: result: yes
-configure:28201: checking for libintl.h
-configure:28201: result: yes
-configure:28201: checking signal.h usability
-configure:28201: gcc -c -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
-configure:28201: $? = 0
-configure:28201: result: yes
-configure:28201: checking signal.h presence
-configure:28201: gcc -E  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c
-configure:28201: $? = 0
-configure:28201: result: yes
-configure:28201: checking for signal.h
-configure:28201: result: yes
-configure:28201: checking for strings.h
-configure:28201: result: yes
-configure:28211: checking for stdbool.h that conforms to C99
-configure:28278: gcc -c -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
-configure:28278: $? = 0
-configure:28285: result: yes
-configure:28287: checking for _Bool
-configure:28287: gcc -c -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
-configure:28287: $? = 0
-configure:28287: gcc -c -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
+configure:28005: result: no
+configure:28017: checking for ANSI C header files
+configure:28121: result: yes
+configure:28129: checking for sys/wait.h that is POSIX.1 compatible
+configure:28155: gcc -c -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
+configure:28155: $? = 0
+configure:28162: result: yes
+configure:28174: checking fcntl.h usability
+configure:28174: gcc -c -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
+configure:28174: $? = 0
+configure:28174: result: yes
+configure:28174: checking fcntl.h presence
+configure:28174: gcc -E  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c
+configure:28174: $? = 0
+configure:28174: result: yes
+configure:28174: checking for fcntl.h
+configure:28174: result: yes
+configure:28174: checking sys/time.h usability
+configure:28174: gcc -c -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
+configure:28174: $? = 0
+configure:28174: result: yes
+configure:28174: checking sys/time.h presence
+configure:28174: gcc -E  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c
+configure:28174: $? = 0
+configure:28174: result: yes
+configure:28174: checking for sys/time.h
+configure:28174: result: yes
+configure:28174: checking for sys/types.h
+configure:28174: result: yes
+configure:28174: checking for unistd.h
+configure:28174: result: yes
+configure:28174: checking sys/utsname.h usability
+configure:28174: gcc -c -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
+configure:28174: $? = 0
+configure:28174: result: yes
+configure:28174: checking sys/utsname.h presence
+configure:28174: gcc -E  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c
+configure:28174: $? = 0
+configure:28174: result: yes
+configure:28174: checking for sys/utsname.h
+configure:28174: result: yes
+configure:28174: checking sys/file.h usability
+configure:28174: gcc -c -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
+configure:28174: $? = 0
+configure:28174: result: yes
+configure:28174: checking sys/file.h presence
+configure:28174: gcc -E  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c
+configure:28174: $? = 0
+configure:28174: result: yes
+configure:28174: checking for sys/file.h
+configure:28174: result: yes
+configure:28174: checking for libintl.h
+configure:28174: result: yes
+configure:28174: checking signal.h usability
+configure:28174: gcc -c -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
+configure:28174: $? = 0
+configure:28174: result: yes
+configure:28174: checking signal.h presence
+configure:28174: gcc -E  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c
+configure:28174: $? = 0
+configure:28174: result: yes
+configure:28174: checking for signal.h
+configure:28174: result: yes
+configure:28174: checking for strings.h
+configure:28174: result: yes
+configure:28184: checking for stdbool.h that conforms to C99
+configure:28251: gcc -c -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
+configure:28251: $? = 0
+configure:28258: result: yes
+configure:28260: checking for _Bool
+configure:28260: gcc -c -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
+configure:28260: $? = 0
+configure:28260: gcc -c -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
 conftest.c: In function 'main':
 conftest.c:115:20: error: expected expression before ')' token
-configure:28287: $? = 1
+configure:28260: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME ""
@@ -1650,92 +1650,92 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:28287: result: yes
-configure:28309: checking arpa/inet.h usability
-configure:28309: gcc -c -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
-configure:28309: $? = 0
-configure:28309: result: yes
-configure:28309: checking arpa/inet.h presence
-configure:28309: gcc -E  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c
-configure:28309: $? = 0
-configure:28309: result: yes
-configure:28309: checking for arpa/inet.h
-configure:28309: result: yes
-configure:28309: checking netdb.h usability
-configure:28309: gcc -c -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
-configure:28309: $? = 0
-configure:28309: result: yes
-configure:28309: checking netdb.h presence
-configure:28309: gcc -E  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c
-configure:28309: $? = 0
-configure:28309: result: yes
-configure:28309: checking for netdb.h
-configure:28309: result: yes
-configure:28309: checking netinet/in.h usability
-configure:28309: gcc -c -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
-configure:28309: $? = 0
-configure:28309: result: yes
-configure:28309: checking netinet/in.h presence
-configure:28309: gcc -E  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c
-configure:28309: $? = 0
-configure:28309: result: yes
-configure:28309: checking for netinet/in.h
-configure:28309: result: yes
-configure:28309: checking pwd.h usability
-configure:28309: gcc -c -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
-configure:28309: $? = 0
-configure:28309: result: yes
-configure:28309: checking pwd.h presence
-configure:28309: gcc -E  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c
-configure:28309: $? = 0
-configure:28309: result: yes
-configure:28309: checking for pwd.h
-configure:28309: result: yes
-configure:28309: checking sys/ioctl.h usability
-configure:28309: gcc -c -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
-configure:28309: $? = 0
-configure:28309: result: yes
-configure:28309: checking sys/ioctl.h presence
-configure:28309: gcc -E  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c
-configure:28309: $? = 0
-configure:28309: result: yes
-configure:28309: checking for sys/ioctl.h
-configure:28309: result: yes
-configure:28309: checking sys/select.h usability
-configure:28309: gcc -c -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
-configure:28309: $? = 0
-configure:28309: result: yes
-configure:28309: checking sys/select.h presence
-configure:28309: gcc -E  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c
-configure:28309: $? = 0
-configure:28309: result: yes
-configure:28309: checking for sys/select.h
-configure:28309: result: yes
-configure:28309: checking sys/signal.h usability
-configure:28309: gcc -c -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
-configure:28309: $? = 0
-configure:28309: result: yes
-configure:28309: checking sys/signal.h presence
-configure:28309: gcc -E  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c
-configure:28309: $? = 0
-configure:28309: result: yes
-configure:28309: checking for sys/signal.h
-configure:28309: result: yes
-configure:28309: checking sys/socket.h usability
-configure:28309: gcc -c -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
-configure:28309: $? = 0
-configure:28309: result: yes
-configure:28309: checking sys/socket.h presence
-configure:28309: gcc -E  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c
-configure:28309: $? = 0
-configure:28309: result: yes
-configure:28309: checking for sys/socket.h
-configure:28309: result: yes
-configure:28309: checking sys/termio.h usability
-configure:28309: gcc -c -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
+configure:28260: result: yes
+configure:28282: checking arpa/inet.h usability
+configure:28282: gcc -c -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
+configure:28282: $? = 0
+configure:28282: result: yes
+configure:28282: checking arpa/inet.h presence
+configure:28282: gcc -E  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c
+configure:28282: $? = 0
+configure:28282: result: yes
+configure:28282: checking for arpa/inet.h
+configure:28282: result: yes
+configure:28282: checking netdb.h usability
+configure:28282: gcc -c -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
+configure:28282: $? = 0
+configure:28282: result: yes
+configure:28282: checking netdb.h presence
+configure:28282: gcc -E  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c
+configure:28282: $? = 0
+configure:28282: result: yes
+configure:28282: checking for netdb.h
+configure:28282: result: yes
+configure:28282: checking netinet/in.h usability
+configure:28282: gcc -c -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
+configure:28282: $? = 0
+configure:28282: result: yes
+configure:28282: checking netinet/in.h presence
+configure:28282: gcc -E  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c
+configure:28282: $? = 0
+configure:28282: result: yes
+configure:28282: checking for netinet/in.h
+configure:28282: result: yes
+configure:28282: checking pwd.h usability
+configure:28282: gcc -c -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
+configure:28282: $? = 0
+configure:28282: result: yes
+configure:28282: checking pwd.h presence
+configure:28282: gcc -E  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c
+configure:28282: $? = 0
+configure:28282: result: yes
+configure:28282: checking for pwd.h
+configure:28282: result: yes
+configure:28282: checking sys/ioctl.h usability
+configure:28282: gcc -c -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
+configure:28282: $? = 0
+configure:28282: result: yes
+configure:28282: checking sys/ioctl.h presence
+configure:28282: gcc -E  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c
+configure:28282: $? = 0
+configure:28282: result: yes
+configure:28282: checking for sys/ioctl.h
+configure:28282: result: yes
+configure:28282: checking sys/select.h usability
+configure:28282: gcc -c -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
+configure:28282: $? = 0
+configure:28282: result: yes
+configure:28282: checking sys/select.h presence
+configure:28282: gcc -E  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c
+configure:28282: $? = 0
+configure:28282: result: yes
+configure:28282: checking for sys/select.h
+configure:28282: result: yes
+configure:28282: checking sys/signal.h usability
+configure:28282: gcc -c -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
+configure:28282: $? = 0
+configure:28282: result: yes
+configure:28282: checking sys/signal.h presence
+configure:28282: gcc -E  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c
+configure:28282: $? = 0
+configure:28282: result: yes
+configure:28282: checking for sys/signal.h
+configure:28282: result: yes
+configure:28282: checking sys/socket.h usability
+configure:28282: gcc -c -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
+configure:28282: $? = 0
+configure:28282: result: yes
+configure:28282: checking sys/socket.h presence
+configure:28282: gcc -E  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c
+configure:28282: $? = 0
+configure:28282: result: yes
+configure:28282: checking for sys/socket.h
+configure:28282: result: yes
+configure:28282: checking sys/termio.h usability
+configure:28282: gcc -c -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
 conftest.c:122:24: fatal error: sys/termio.h: No such file or directory
 compilation terminated.
-configure:28309: $? = 1
+configure:28282: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME ""
@@ -1859,12 +1859,12 @@ configure: failed program was:
 | # include <unistd.h>
 | #endif
 | #include <sys/termio.h>
-configure:28309: result: no
-configure:28309: checking sys/termio.h presence
-configure:28309: gcc -E  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c
+configure:28282: result: no
+configure:28282: checking sys/termio.h presence
+configure:28282: gcc -E  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c
 conftest.c:89:24: fatal error: sys/termio.h: No such file or directory
 compilation terminated.
-configure:28309: $? = 1
+configure:28282: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME ""
@@ -1955,48 +1955,48 @@ configure: failed program was:
 | #define HAVE_SYS_SOCKET_H 1
 | /* end confdefs.h.  */
 | #include <sys/termio.h>
-configure:28309: result: no
-configure:28309: checking for sys/termio.h
-configure:28309: result: no
-configure:28309: checking sys/uio.h usability
-configure:28309: gcc -c -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
-configure:28309: $? = 0
-configure:28309: result: yes
-configure:28309: checking sys/uio.h presence
-configure:28309: gcc -E  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c
-configure:28309: $? = 0
-configure:28309: result: yes
-configure:28309: checking for sys/uio.h
-configure:28309: result: yes
-configure:28309: checking termios.h usability
-configure:28309: gcc -c -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
-configure:28309: $? = 0
-configure:28309: result: yes
-configure:28309: checking termios.h presence
-configure:28309: gcc -E  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c
-configure:28309: $? = 0
-configure:28309: result: yes
-configure:28309: checking for termios.h
-configure:28309: result: yes
-configure:28334: checking for an ANSI C-conforming const
-configure:28399: gcc -c -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
-configure:28399: $? = 0
-configure:28406: result: yes
-configure:28414: checking whether time.h and sys/time.h may both be included
-configure:28434: gcc -c -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
-configure:28434: $? = 0
-configure:28441: result: yes
-configure:28449: checking whether struct tm is in sys/time.h or time.h
-configure:28469: gcc -c -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
-configure:28469: $? = 0
-configure:28476: result: time.h
-configure:28484: checking for socklen_t
-configure:28484: gcc -c -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
-configure:28484: $? = 0
-configure:28484: gcc -c -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
+configure:28282: result: no
+configure:28282: checking for sys/termio.h
+configure:28282: result: no
+configure:28282: checking sys/uio.h usability
+configure:28282: gcc -c -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
+configure:28282: $? = 0
+configure:28282: result: yes
+configure:28282: checking sys/uio.h presence
+configure:28282: gcc -E  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c
+configure:28282: $? = 0
+configure:28282: result: yes
+configure:28282: checking for sys/uio.h
+configure:28282: result: yes
+configure:28282: checking termios.h usability
+configure:28282: gcc -c -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
+configure:28282: $? = 0
+configure:28282: result: yes
+configure:28282: checking termios.h presence
+configure:28282: gcc -E  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c
+configure:28282: $? = 0
+configure:28282: result: yes
+configure:28282: checking for termios.h
+configure:28282: result: yes
+configure:28307: checking for an ANSI C-conforming const
+configure:28372: gcc -c -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
+configure:28372: $? = 0
+configure:28379: result: yes
+configure:28387: checking whether time.h and sys/time.h may both be included
+configure:28407: gcc -c -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
+configure:28407: $? = 0
+configure:28414: result: yes
+configure:28422: checking whether struct tm is in sys/time.h or time.h
+configure:28442: gcc -c -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
+configure:28442: $? = 0
+configure:28449: result: time.h
+configure:28457: checking for socklen_t
+configure:28457: gcc -c -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
+configure:28457: $? = 0
+configure:28457: gcc -c -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
 conftest.c: In function 'main':
 conftest.c:99:24: error: expected expression before ')' token
-configure:28484: $? = 1
+configure:28457: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME ""
@@ -2101,12 +2101,12 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:28484: result: yes
-configure:28498: checking return type of signal handlers
-configure:28516: gcc -c -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
+configure:28457: result: yes
+configure:28471: checking return type of signal handlers
+configure:28489: gcc -c -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
 conftest.c: In function 'main':
 conftest.c:99:1: error: void value not ignored as it ought to be
-configure:28516: $? = 1
+configure:28489: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME ""
@@ -2210,14 +2210,14 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:28523: result: void
-configure:28531: checking for pid_t
-configure:28531: gcc -c -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
-configure:28531: $? = 0
-configure:28531: gcc -c -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
+configure:28496: result: void
+configure:28504: checking for pid_t
+configure:28504: gcc -c -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
+configure:28504: $? = 0
+configure:28504: gcc -c -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
 conftest.c: In function 'main':
 conftest.c:130:20: error: expected expression before ')' token
-configure:28531: $? = 1
+configure:28504: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME ""
@@ -2353,12 +2353,12 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:28531: result: yes
-configure:28544: checking vfork.h usability
-configure:28544: gcc -c -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
+configure:28504: result: yes
+configure:28517: checking vfork.h usability
+configure:28517: gcc -c -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
 conftest.c:127:19: fatal error: vfork.h: No such file or directory
 compilation terminated.
-configure:28544: $? = 1
+configure:28517: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME ""
@@ -2487,12 +2487,12 @@ configure: failed program was:
 | # include <unistd.h>
 | #endif
 | #include <vfork.h>
-configure:28544: result: no
-configure:28544: checking vfork.h presence
-configure:28544: gcc -E  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c
+configure:28517: result: no
+configure:28517: checking vfork.h presence
+configure:28517: gcc -E  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c
 conftest.c:94:19: fatal error: vfork.h: No such file or directory
 compilation terminated.
-configure:28544: $? = 1
+configure:28517: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME ""
@@ -2588,43 +2588,43 @@ configure: failed program was:
 | #define RETSIGTYPE void
 | /* end confdefs.h.  */
 | #include <vfork.h>
-configure:28544: result: no
-configure:28544: checking for vfork.h
-configure:28544: result: no
-configure:28557: checking for fork
-configure:28557: gcc -o conftest -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
+configure:28517: result: no
+configure:28517: checking for vfork.h
+configure:28517: result: no
+configure:28530: checking for fork
+configure:28530: gcc -o conftest -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
 conftest.c:117:6: warning: conflicting types for built-in function 'fork'
-configure:28557: $? = 0
-configure:28557: result: yes
-configure:28557: checking for vfork
-configure:28557: gcc -o conftest -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
-configure:28557: $? = 0
-configure:28557: result: yes
-configure:28567: checking for working fork
-configure:28589: gcc -o conftest -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
-configure:28589: $? = 0
-configure:28589: ./conftest
-configure:28589: $? = 0
-configure:28599: result: yes
-configure:28620: checking for working vfork
-configure:28730: result: yes
-configure:28755: checking for working strcoll
-configure:28776: gcc -o conftest -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
-configure:28776: $? = 0
-configure:28776: ./conftest
-configure:28776: $? = 0
-configure:28786: result: yes
-configure:28796: checking for vprintf
-configure:28796: gcc -o conftest -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
+configure:28530: $? = 0
+configure:28530: result: yes
+configure:28530: checking for vfork
+configure:28530: gcc -o conftest -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
+configure:28530: $? = 0
+configure:28530: result: yes
+configure:28540: checking for working fork
+configure:28562: gcc -o conftest -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
+configure:28562: $? = 0
+configure:28562: ./conftest
+configure:28562: $? = 0
+configure:28572: result: yes
+configure:28593: checking for working vfork
+configure:28703: result: yes
+configure:28728: checking for working strcoll
+configure:28749: gcc -o conftest -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
+configure:28749: $? = 0
+configure:28749: ./conftest
+configure:28749: $? = 0
+configure:28759: result: yes
+configure:28769: checking for vprintf
+configure:28769: gcc -o conftest -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
 conftest.c:122:6: warning: conflicting types for built-in function 'vprintf'
-configure:28796: $? = 0
-configure:28796: result: yes
-configure:28802: checking for _doprnt
-configure:28802: gcc -o conftest -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
-/tmp/cc26hsH2.o: In function `main':
+configure:28769: $? = 0
+configure:28769: result: yes
+configure:28775: checking for _doprnt
+configure:28775: gcc -o conftest -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
+/tmp/cctucXdy.o: In function `main':
 /home/andreas/freeciv-build/freeciv-web/freeciv/conftest.c:134: undefined reference to `_doprnt'
 collect2: ld returned 1 exit status
-configure:28802: $? = 1
+configure:28775: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME ""
@@ -2763,68 +2763,68 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:28802: result: no
-configure:28815: checking for working vsnprintf
-configure:28869: gcc -o conftest -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
+configure:28775: result: no
+configure:28788: checking for working vsnprintf
+configure:28842: gcc -o conftest -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
 conftest.c: In function 'doit':
 conftest.c:119:5: warning: incompatible implicit declaration of built-in function 'exit'
 conftest.c: In function 'main':
 conftest.c:141:3: warning: incompatible implicit declaration of built-in function 'exit'
-configure:28869: $? = 0
-configure:28869: ./conftest
-configure:28869: $? = 0
-configure:28879: result: yes
-configure:28889: checking for vsnprintf
-configure:28889: gcc -o conftest -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
+configure:28842: $? = 0
+configure:28842: ./conftest
+configure:28842: $? = 0
+configure:28852: result: yes
+configure:28862: checking for vsnprintf
+configure:28862: gcc -o conftest -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
 conftest.c:124:6: warning: conflicting types for built-in function 'vsnprintf'
-configure:28889: $? = 0
-configure:28889: result: yes
-configure:28906: checking for bind
-configure:28906: gcc -o conftest -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
-configure:28906: $? = 0
-configure:28906: result: yes
-configure:28906: checking for connect
-configure:28906: gcc -o conftest -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
-configure:28906: $? = 0
-configure:28906: result: yes
-configure:28906: checking for fileno
-configure:28906: gcc -o conftest -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
-configure:28906: $? = 0
-configure:28906: result: yes
-configure:28906: checking for flock
-configure:28906: gcc -o conftest -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
-configure:28906: $? = 0
-configure:28906: result: yes
-configure:28906: checking for ftime
-configure:28906: gcc -o conftest -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
-configure:28906: $? = 0
-configure:28906: result: yes
-configure:28906: checking for gethostbyname
-configure:28906: gcc -o conftest -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
-configure:28906: $? = 0
-configure:28906: result: yes
-configure:28906: checking for gethostname
-configure:28906: gcc -o conftest -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
-configure:28906: $? = 0
-configure:28906: result: yes
-configure:28906: checking for getpwuid
-configure:28906: gcc -o conftest -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
-configure:28906: $? = 0
-configure:28906: result: yes
-configure:28906: checking for inet_aton
-configure:28906: gcc -o conftest -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
-configure:28906: $? = 0
-configure:28906: result: yes
-configure:28906: checking for select
-configure:28906: gcc -o conftest -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
-configure:28906: $? = 0
-configure:28906: result: yes
-configure:28906: checking for snooze
-configure:28906: gcc -o conftest -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
-/tmp/cc0IHpj1.o: In function `main':
+configure:28862: $? = 0
+configure:28862: result: yes
+configure:28879: checking for bind
+configure:28879: gcc -o conftest -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
+configure:28879: $? = 0
+configure:28879: result: yes
+configure:28879: checking for connect
+configure:28879: gcc -o conftest -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
+configure:28879: $? = 0
+configure:28879: result: yes
+configure:28879: checking for fileno
+configure:28879: gcc -o conftest -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
+configure:28879: $? = 0
+configure:28879: result: yes
+configure:28879: checking for flock
+configure:28879: gcc -o conftest -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
+configure:28879: $? = 0
+configure:28879: result: yes
+configure:28879: checking for ftime
+configure:28879: gcc -o conftest -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
+configure:28879: $? = 0
+configure:28879: result: yes
+configure:28879: checking for gethostbyname
+configure:28879: gcc -o conftest -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
+configure:28879: $? = 0
+configure:28879: result: yes
+configure:28879: checking for gethostname
+configure:28879: gcc -o conftest -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
+configure:28879: $? = 0
+configure:28879: result: yes
+configure:28879: checking for getpwuid
+configure:28879: gcc -o conftest -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
+configure:28879: $? = 0
+configure:28879: result: yes
+configure:28879: checking for inet_aton
+configure:28879: gcc -o conftest -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
+configure:28879: $? = 0
+configure:28879: result: yes
+configure:28879: checking for select
+configure:28879: gcc -o conftest -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
+configure:28879: $? = 0
+configure:28879: result: yes
+configure:28879: checking for snooze
+configure:28879: gcc -o conftest -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
+/tmp/cclmU3An.o: In function `main':
 /home/andreas/freeciv-build/freeciv-web/freeciv/conftest.c:146: undefined reference to `snooze'
 collect2: ld returned 1 exit status
-configure:28906: $? = 1
+configure:28879: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME ""
@@ -2975,26 +2975,26 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:28906: result: no
-configure:28906: checking for strcasecmp
-configure:28906: gcc -o conftest -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
+configure:28879: result: no
+configure:28879: checking for strcasecmp
+configure:28879: gcc -o conftest -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
 conftest.c:135:6: warning: conflicting types for built-in function 'strcasecmp'
-configure:28906: $? = 0
-configure:28906: result: yes
-configure:28906: checking for strcasestr
-configure:28906: gcc -o conftest -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
-configure:28906: $? = 0
-configure:28906: result: yes
-configure:28906: checking for strerror
-configure:28906: gcc -o conftest -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
-configure:28906: $? = 0
-configure:28906: result: yes
-configure:28906: checking for strlcat
-configure:28906: gcc -o conftest -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
-/tmp/ccG8fjdp.o: In function `main':
+configure:28879: $? = 0
+configure:28879: result: yes
+configure:28879: checking for strcasestr
+configure:28879: gcc -o conftest -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
+configure:28879: $? = 0
+configure:28879: result: yes
+configure:28879: checking for strerror
+configure:28879: gcc -o conftest -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
+configure:28879: $? = 0
+configure:28879: result: yes
+configure:28879: checking for strlcat
+configure:28879: gcc -o conftest -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
+/tmp/ccVDhXzD.o: In function `main':
 /home/andreas/freeciv-build/freeciv-web/freeciv/conftest.c:149: undefined reference to `strlcat'
 collect2: ld returned 1 exit status
-configure:28906: $? = 1
+configure:28879: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME ""
@@ -3148,13 +3148,13 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:28906: result: no
-configure:28906: checking for strlcpy
-configure:28906: gcc -o conftest -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
-/tmp/cc6jn1Mu.o: In function `main':
+configure:28879: result: no
+configure:28879: checking for strlcpy
+configure:28879: gcc -o conftest -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
+/tmp/ccqt2XBK.o: In function `main':
 /home/andreas/freeciv-build/freeciv-web/freeciv/conftest.c:149: undefined reference to `strlcpy'
 collect2: ld returned 1 exit status
-configure:28906: $? = 1
+configure:28879: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME ""
@@ -3308,72 +3308,72 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:28906: result: no
-configure:28906: checking for strncasecmp
-configure:28906: gcc -o conftest -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
+configure:28879: result: no
+configure:28879: checking for strncasecmp
+configure:28879: gcc -o conftest -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
 conftest.c:138:6: warning: conflicting types for built-in function 'strncasecmp'
-configure:28906: $? = 0
-configure:28906: result: yes
-configure:28906: checking for strstr
-configure:28906: gcc -o conftest -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
+configure:28879: $? = 0
+configure:28879: result: yes
+configure:28879: checking for strstr
+configure:28879: gcc -o conftest -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
 conftest.c:139:6: warning: conflicting types for built-in function 'strstr'
-configure:28906: $? = 0
-configure:28906: result: yes
-configure:28906: checking for uname
-configure:28906: gcc -o conftest -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
-configure:28906: $? = 0
-configure:28906: result: yes
-configure:28906: checking for usleep
-configure:28906: gcc -o conftest -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
-configure:28906: $? = 0
-configure:28906: result: yes
-configure:28906: checking for getline
-configure:28906: gcc -o conftest -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
-configure:28906: $? = 0
-configure:28906: result: yes
-configure:28916: checking for working gettimeofday
-configure:29023: gcc -o conftest -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c  -lbz2 -lz   >&5
-configure:29023: $? = 0
-configure:29023: ./conftest
-configure:29023: $? = 0
-configure:29024: result: yes
-configure:29172: checking for fdopen
-configure:29172: gcc -o conftest -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
-configure:29172: $? = 0
-configure:29172: result: yes
-configure:29185: checking for fcntl
-configure:29185: gcc -o conftest -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
-configure:29185: $? = 0
-configure:29185: result: yes
-configure:29207: checking for SIGPIPE
-configure:29220: gcc -c -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
-configure:29220: $? = 0
-configure:29221: result: yes
-configure:29329: checking for special C compiler options needed for large files
-configure:29374: result: no
-configure:29380: checking for _FILE_OFFSET_BITS value needed for large files
-configure:29405: gcc -c -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\"" -DDEFAULT_DATA_PATH="\".:data:~/.freeciv/2.3:${datarootdir}/freeciv\"" conftest.c >&5
-configure:29405: $? = 0
-configure:29437: result: no
-configure:29524: checking for working mkstemp
-configure:29558: gcc -o conftest -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\"" -DDEFAULT_DATA_PATH="\".:data:~/.freeciv/2.3:${datarootdir}/freeciv\""  conftest.c -lbz2 -lz   >&5
-configure:29558: $? = 0
-configure:29558: ./conftest
-configure:29558: $? = 0
-configure:29570: result: yes
-configure:29593: checking for isatty
-configure:29593: gcc -o conftest -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\"" -DDEFAULT_DATA_PATH="\".:data:~/.freeciv/2.3:${datarootdir}/freeciv\""  conftest.c -lbz2 -lz   >&5
-configure:29593: $? = 0
-configure:29593: result: yes
-configure:29593: checking for popen
-configure:29593: gcc -o conftest -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\"" -DDEFAULT_DATA_PATH="\".:data:~/.freeciv/2.3:${datarootdir}/freeciv\""  conftest.c -lbz2 -lz   >&5
-configure:29593: $? = 0
-configure:29593: result: yes
-configure:29593: checking for _longjmp
-configure:29593: gcc -o conftest -g -O2 -fsigned-char   -DLOCALEDIR="\"${datarootdir}/locale\"" -DDEFAULT_DATA_PATH="\".:data:~/.freeciv/2.3:${datarootdir}/freeciv\""  conftest.c -lbz2 -lz   >&5
-configure:29593: $? = 0
-configure:29593: result: yes
-configure:29908: creating ./config.status
+configure:28879: $? = 0
+configure:28879: result: yes
+configure:28879: checking for uname
+configure:28879: gcc -o conftest -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
+configure:28879: $? = 0
+configure:28879: result: yes
+configure:28879: checking for usleep
+configure:28879: gcc -o conftest -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
+configure:28879: $? = 0
+configure:28879: result: yes
+configure:28879: checking for getline
+configure:28879: gcc -o conftest -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
+configure:28879: $? = 0
+configure:28879: result: yes
+configure:28889: checking for working gettimeofday
+configure:28996: gcc -o conftest -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c  -lbz2 -lz   >&5
+configure:28996: $? = 0
+configure:28996: ./conftest
+configure:28996: $? = 0
+configure:28997: result: yes
+configure:29145: checking for fdopen
+configure:29145: gcc -o conftest -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
+configure:29145: $? = 0
+configure:29145: result: yes
+configure:29158: checking for fcntl
+configure:29158: gcc -o conftest -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\""  conftest.c -lbz2 -lz   >&5
+configure:29158: $? = 0
+configure:29158: result: yes
+configure:29180: checking for SIGPIPE
+configure:29193: gcc -c -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\"" conftest.c >&5
+configure:29193: $? = 0
+configure:29194: result: yes
+configure:29302: checking for special C compiler options needed for large files
+configure:29347: result: no
+configure:29353: checking for _FILE_OFFSET_BITS value needed for large files
+configure:29378: gcc -c -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\"" -DDEFAULT_DATA_PATH="\".:data:~/.freeciv/2.3:${datarootdir}/freeciv:/mnt/savegames\"" conftest.c >&5
+configure:29378: $? = 0
+configure:29410: result: no
+configure:29497: checking for working mkstemp
+configure:29531: gcc -o conftest -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\"" -DDEFAULT_DATA_PATH="\".:data:~/.freeciv/2.3:${datarootdir}/freeciv:/mnt/savegames\""  conftest.c -lbz2 -lz   >&5
+configure:29531: $? = 0
+configure:29531: ./conftest
+configure:29531: $? = 0
+configure:29543: result: yes
+configure:29566: checking for isatty
+configure:29566: gcc -o conftest -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\"" -DDEFAULT_DATA_PATH="\".:data:~/.freeciv/2.3:${datarootdir}/freeciv:/mnt/savegames\""  conftest.c -lbz2 -lz   >&5
+configure:29566: $? = 0
+configure:29566: result: yes
+configure:29566: checking for popen
+configure:29566: gcc -o conftest -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\"" -DDEFAULT_DATA_PATH="\".:data:~/.freeciv/2.3:${datarootdir}/freeciv:/mnt/savegames\""  conftest.c -lbz2 -lz   >&5
+configure:29566: $? = 0
+configure:29566: result: yes
+configure:29566: checking for _longjmp
+configure:29566: gcc -o conftest -g -O2 -fsigned-char  -DLOCALEDIR="\"${datarootdir}/locale\"" -DDEFAULT_DATA_PATH="\".:data:~/.freeciv/2.3:${datarootdir}/freeciv:/mnt/savegames\""  conftest.c -lbz2 -lz   >&5
+configure:29566: $? = 0
+configure:29566: result: yes
+configure:29881: creating ./config.status
 
 ## ---------------------- ##
 ## Running config.status. ##
@@ -3390,106 +3390,106 @@ generated by GNU Autoconf 2.68.  Invocation command line was
 
 on andreaspc
 
-config.status:1533: creating Makefile
-config.status:1533: creating data/Makefile
-config.status:1533: creating data/civclient.dsc
-config.status:1533: creating data/civserver.dsc
-config.status:1533: creating data/civserver.room
-config.status:1533: creating data/hex2t/Makefile
-config.status:1533: creating data/amplio/Makefile
-config.status:1533: creating data/buildings/Makefile
-config.status:1533: creating data/flags/Makefile
-config.status:1533: creating data/misc/Makefile
-config.status:1533: creating data/trident/Makefile
-config.status:1533: creating data/isophex/Makefile
-config.status:1533: creating data/isotrident/Makefile
-config.status:1533: creating data/stdsounds/Makefile
-config.status:1533: creating data/default/Makefile
-config.status:1533: creating data/civ1/Makefile
-config.status:1533: creating data/civ2/Makefile
-config.status:1533: creating data/scenario/Makefile
-config.status:1533: creating data/nation/Makefile
-config.status:1533: creating data/themes/Makefile
-config.status:1533: creating data/themes/gui-gtk-2.0/Makefile
-config.status:1533: creating data/themes/gui-gtk-2.0/Freeciv/Makefile
-config.status:1533: creating data/themes/gui-gtk-2.0/Freeciv/gtk-2.0/Makefile
-config.status:1533: creating data/themes/gui-gtk-2.0/Freeciv/gtk-2.0/Arrows/Makefile
-config.status:1533: creating data/themes/gui-gtk-2.0/Freeciv/gtk-2.0/Buttons/Makefile
-config.status:1533: creating data/themes/gui-gtk-2.0/Freeciv/gtk-2.0/Check-Radio/Makefile
-config.status:1533: creating data/themes/gui-gtk-2.0/Freeciv/gtk-2.0/Combo/Makefile
-config.status:1533: creating data/themes/gui-gtk-2.0/Freeciv/gtk-2.0/Frame-Gap/Makefile
-config.status:1533: creating data/themes/gui-gtk-2.0/Freeciv/gtk-2.0/Handles/Makefile
-config.status:1533: creating data/themes/gui-gtk-2.0/Freeciv/gtk-2.0/Lines/Makefile
-config.status:1533: creating data/themes/gui-gtk-2.0/Freeciv/gtk-2.0/ListHeaders/Makefile
-config.status:1533: creating data/themes/gui-gtk-2.0/Freeciv/gtk-2.0/Menu-Menubar/Makefile
-config.status:1533: creating data/themes/gui-gtk-2.0/Freeciv/gtk-2.0/Others/Makefile
-config.status:1533: creating data/themes/gui-gtk-2.0/Freeciv/gtk-2.0/Panel/Makefile
-config.status:1533: creating data/themes/gui-gtk-2.0/Freeciv/gtk-2.0/ProgressBar/Makefile
-config.status:1533: creating data/themes/gui-gtk-2.0/Freeciv/gtk-2.0/Range/Makefile
-config.status:1533: creating data/themes/gui-gtk-2.0/Freeciv/gtk-2.0/Scrollbars/Makefile
-config.status:1533: creating data/themes/gui-gtk-2.0/Freeciv/gtk-2.0/Shadows/Makefile
-config.status:1533: creating data/themes/gui-gtk-2.0/Freeciv/gtk-2.0/Spin/Makefile
-config.status:1533: creating data/themes/gui-gtk-2.0/Freeciv/gtk-2.0/Tabs/Makefile
-config.status:1533: creating data/themes/gui-gtk-2.0/Freeciv/gtk-2.0/Toolbar/Makefile
-config.status:1533: creating data/themes/gui-sdl/Makefile
-config.status:1533: creating data/themes/gui-sdl/human/Makefile
-config.status:1533: creating data/wonders/Makefile
-config.status:1533: creating data/icons/Makefile
-config.status:1533: creating utility/Makefile
-config.status:1533: creating utility/ftwl/Makefile
-config.status:1533: creating dependencies/Makefile
-config.status:1533: creating dependencies/lua-5.1/Makefile
-config.status:1533: creating dependencies/lua-5.1/src/Makefile
-config.status:1533: creating dependencies/toluaxx/Makefile
-config.status:1533: creating dependencies/toluaxx/src/Makefile
-config.status:1533: creating dependencies/toluaxx/src/lib/Makefile
-config.status:1533: creating dependencies/toluaxx/src/bin/Makefile
-config.status:1533: creating common/Makefile
-config.status:1533: creating common/aicore/Makefile
-config.status:1533: creating ai/Makefile
-config.status:1533: creating tests/Makefile
-config.status:1533: creating win32/Makefile
-config.status:1533: creating client/Makefile
-config.status:1533: creating client/agents/Makefile
-config.status:1533: creating client/include/Makefile
-config.status:1533: creating client/gui-sdl/Makefile
-config.status:1533: creating client/gui-gtk-2.0/Makefile
-config.status:1533: creating client/gui-xaw/Makefile
-config.status:1533: creating client/gui-win32/Makefile
-config.status:1533: creating client/gui-ftwl/Makefile
-config.status:1533: creating client/gui-stub/Makefile
-config.status:1533: creating server/Makefile
-config.status:1533: creating server/generator/Makefile
-config.status:1533: creating server/scripting/Makefile
-config.status:1533: creating manual/Makefile
-config.status:1533: creating po/Makefile.in
-config.status:1641: WARNING:  'po/Makefile.in.in' seems to ignore the --datarootdir setting
-config.status:1533: creating doc/Makefile
-config.status:1533: creating doc/man/Makefile
-config.status:1533: creating doc/ca/Makefile
-config.status:1533: creating doc/de/Makefile
-config.status:1533: creating doc/fr/Makefile
-config.status:1533: creating doc/it/Makefile
-config.status:1533: creating doc/ja/Makefile
-config.status:1533: creating doc/nl/Makefile
-config.status:1533: creating doc/sv/Makefile
-config.status:1533: creating freeciv.spec
-config.status:1533: creating bootstrap/undep.sh
-config.status:1533: creating data/Freeciv
-config.status:1533: creating client/freeciv.desktop
-config.status:1533: creating server/freeciv-server.desktop
-config.status:1533: creating civ
-config.status:1533: creating ser
-config.status:1533: creating config.h
-config.status:1762: executing depfiles commands
-config.status:1762: executing libtool commands
-config.status:1762: executing default-1 commands
-config.status:1762: executing fc_default-1 commands
-config.status:1762: executing fc_default-2 commands
-config.status:1762: executing fc_default-4 commands
-config.status:1762: executing fc_default-5 commands
-config.status:1762: executing default commands
-configure:32574:
+config.status:1534: creating Makefile
+config.status:1534: creating data/Makefile
+config.status:1534: creating data/civclient.dsc
+config.status:1534: creating data/civserver.dsc
+config.status:1534: creating data/civserver.room
+config.status:1534: creating data/hex2t/Makefile
+config.status:1534: creating data/amplio/Makefile
+config.status:1534: creating data/buildings/Makefile
+config.status:1534: creating data/flags/Makefile
+config.status:1534: creating data/misc/Makefile
+config.status:1534: creating data/trident/Makefile
+config.status:1534: creating data/isophex/Makefile
+config.status:1534: creating data/isotrident/Makefile
+config.status:1534: creating data/stdsounds/Makefile
+config.status:1534: creating data/default/Makefile
+config.status:1534: creating data/civ1/Makefile
+config.status:1534: creating data/civ2/Makefile
+config.status:1534: creating data/scenario/Makefile
+config.status:1534: creating data/nation/Makefile
+config.status:1534: creating data/themes/Makefile
+config.status:1534: creating data/themes/gui-gtk-2.0/Makefile
+config.status:1534: creating data/themes/gui-gtk-2.0/Freeciv/Makefile
+config.status:1534: creating data/themes/gui-gtk-2.0/Freeciv/gtk-2.0/Makefile
+config.status:1534: creating data/themes/gui-gtk-2.0/Freeciv/gtk-2.0/Arrows/Makefile
+config.status:1534: creating data/themes/gui-gtk-2.0/Freeciv/gtk-2.0/Buttons/Makefile
+config.status:1534: creating data/themes/gui-gtk-2.0/Freeciv/gtk-2.0/Check-Radio/Makefile
+config.status:1534: creating data/themes/gui-gtk-2.0/Freeciv/gtk-2.0/Combo/Makefile
+config.status:1534: creating data/themes/gui-gtk-2.0/Freeciv/gtk-2.0/Frame-Gap/Makefile
+config.status:1534: creating data/themes/gui-gtk-2.0/Freeciv/gtk-2.0/Handles/Makefile
+config.status:1534: creating data/themes/gui-gtk-2.0/Freeciv/gtk-2.0/Lines/Makefile
+config.status:1534: creating data/themes/gui-gtk-2.0/Freeciv/gtk-2.0/ListHeaders/Makefile
+config.status:1534: creating data/themes/gui-gtk-2.0/Freeciv/gtk-2.0/Menu-Menubar/Makefile
+config.status:1534: creating data/themes/gui-gtk-2.0/Freeciv/gtk-2.0/Others/Makefile
+config.status:1534: creating data/themes/gui-gtk-2.0/Freeciv/gtk-2.0/Panel/Makefile
+config.status:1534: creating data/themes/gui-gtk-2.0/Freeciv/gtk-2.0/ProgressBar/Makefile
+config.status:1534: creating data/themes/gui-gtk-2.0/Freeciv/gtk-2.0/Range/Makefile
+config.status:1534: creating data/themes/gui-gtk-2.0/Freeciv/gtk-2.0/Scrollbars/Makefile
+config.status:1534: creating data/themes/gui-gtk-2.0/Freeciv/gtk-2.0/Shadows/Makefile
+config.status:1534: creating data/themes/gui-gtk-2.0/Freeciv/gtk-2.0/Spin/Makefile
+config.status:1534: creating data/themes/gui-gtk-2.0/Freeciv/gtk-2.0/Tabs/Makefile
+config.status:1534: creating data/themes/gui-gtk-2.0/Freeciv/gtk-2.0/Toolbar/Makefile
+config.status:1534: creating data/themes/gui-sdl/Makefile
+config.status:1534: creating data/themes/gui-sdl/human/Makefile
+config.status:1534: creating data/wonders/Makefile
+config.status:1534: creating data/icons/Makefile
+config.status:1534: creating utility/Makefile
+config.status:1534: creating utility/ftwl/Makefile
+config.status:1534: creating dependencies/Makefile
+config.status:1534: creating dependencies/lua-5.1/Makefile
+config.status:1534: creating dependencies/lua-5.1/src/Makefile
+config.status:1534: creating dependencies/toluaxx/Makefile
+config.status:1534: creating dependencies/toluaxx/src/Makefile
+config.status:1534: creating dependencies/toluaxx/src/lib/Makefile
+config.status:1534: creating dependencies/toluaxx/src/bin/Makefile
+config.status:1534: creating common/Makefile
+config.status:1534: creating common/aicore/Makefile
+config.status:1534: creating ai/Makefile
+config.status:1534: creating tests/Makefile
+config.status:1534: creating win32/Makefile
+config.status:1534: creating client/Makefile
+config.status:1534: creating client/agents/Makefile
+config.status:1534: creating client/include/Makefile
+config.status:1534: creating client/gui-sdl/Makefile
+config.status:1534: creating client/gui-gtk-2.0/Makefile
+config.status:1534: creating client/gui-xaw/Makefile
+config.status:1534: creating client/gui-win32/Makefile
+config.status:1534: creating client/gui-ftwl/Makefile
+config.status:1534: creating client/gui-stub/Makefile
+config.status:1534: creating server/Makefile
+config.status:1534: creating server/generator/Makefile
+config.status:1534: creating server/scripting/Makefile
+config.status:1534: creating manual/Makefile
+config.status:1534: creating po/Makefile.in
+config.status:1642: WARNING:  'po/Makefile.in.in' seems to ignore the --datarootdir setting
+config.status:1534: creating doc/Makefile
+config.status:1534: creating doc/man/Makefile
+config.status:1534: creating doc/ca/Makefile
+config.status:1534: creating doc/de/Makefile
+config.status:1534: creating doc/fr/Makefile
+config.status:1534: creating doc/it/Makefile
+config.status:1534: creating doc/ja/Makefile
+config.status:1534: creating doc/nl/Makefile
+config.status:1534: creating doc/sv/Makefile
+config.status:1534: creating freeciv.spec
+config.status:1534: creating bootstrap/undep.sh
+config.status:1534: creating data/Freeciv
+config.status:1534: creating client/freeciv.desktop
+config.status:1534: creating server/freeciv-server.desktop
+config.status:1534: creating civ
+config.status:1534: creating ser
+config.status:1534: creating config.h
+config.status:1763: executing depfiles commands
+config.status:1763: executing libtool commands
+config.status:1763: executing default-1 commands
+config.status:1763: executing fc_default-1 commands
+config.status:1763: executing fc_default-2 commands
+config.status:1763: executing fc_default-4 commands
+config.status:1763: executing fc_default-5 commands
+config.status:1763: executing default commands
+configure:32547:
 ****************** Configuration Summary ******************
 
   Build freeciv client: no
@@ -3757,7 +3757,7 @@ CATALOGS=' ar.gmo cs.gmo ca.gmo da.gmo de.gmo el.gmo en_GB.gmo eo.gmo es.gmo et.
 CATOBJEXT='.gmo'
 CC='gcc'
 CCDEPMODE='depmode=gcc3'
-CFLAGS='-save-temps -Wall -Wpointer-arith -Wcast-align -Wmissing-prototypes -Wmissing-declarations -g -O2 -fsigned-char '
+CFLAGS='-save-temps -Wall -Wpointer-arith -Wcast-align -Wmissing-prototypes -Wmissing-declarations -g -O2 -fsigned-char'
 CLIENT_FALSE=''
 CLIENT_GUI_BEOS_FALSE=''
 CLIENT_GUI_BEOS_TRUE='#'
@@ -3776,7 +3776,7 @@ CLIENT_GUI_XAW_TRUE='#'
 CLIENT_TRUE='#'
 CONFIGURE_DEPENDENCIES=' $(top_srcdir)/version.in'
 CPP='gcc -E'
-CPPFLAGS=' -DLOCALEDIR="\"${datarootdir}/locale\"" -DDEFAULT_DATA_PATH="\".:data:~/.freeciv/2.3:${datarootdir}/freeciv\""'
+CPPFLAGS=' -DLOCALEDIR="\"${datarootdir}/locale\"" -DDEFAULT_DATA_PATH="\".:data:~/.freeciv/2.3:${datarootdir}/freeciv:/mnt/savegames\""'
 CXX='g++'
 CXXCPP='g++ -E'
 CXXDEPMODE='depmode=gcc3'
@@ -3944,7 +3944,7 @@ SDL_CONFIG=''
 SDL_LIBS=''
 SED='/usr/bin/sed'
 SERVER_FALSE='#'
-SERVER_LIBS='-lreadline   -lm -lssl -lcurl'
+SERVER_LIBS='-lreadline   -lm -lssl'
 SERVER_TRUE=''
 SET_MAKE=''
 SHELL='/bin/sh'
@@ -4170,8 +4170,8 @@ target_alias=''
 #define HAVE_ISATTY 1
 #define HAVE_POPEN 1
 #define HAVE__LONGJMP 1
-#define FC_STORE_CPPFLAGS ' -DLOCALEDIR="\"${datarootdir}/locale\"" -DDEFAULT_DATA_PATH="\".:data:~/.freeciv/2.3:${datarootdir}/freeciv\""'
-#define FC_STORE_CFLAGS '-save-temps -Wall -Wpointer-arith -Wcast-align -Wmissing-prototypes -Wmissing-declarations -g -O2 -fsigned-char '
+#define FC_STORE_CPPFLAGS ' -DLOCALEDIR="\"${datarootdir}/locale\"" -DDEFAULT_DATA_PATH="\".:data:~/.freeciv/2.3:${datarootdir}/freeciv:/mnt/savegames\""'
+#define FC_STORE_CFLAGS '-save-temps -Wall -Wpointer-arith -Wcast-align -Wmissing-prototypes -Wmissing-declarations -g -O2 -fsigned-char'
 #define FC_STORE_CXXFLAGS '-Wall -Wpointer-arith -Wcast-align -g -O2 -fsigned-char'
 
 configure: exit 0
@@ -4183,24 +4183,16 @@ configure: exit 0
 This file was extended by config.status, which was
 generated by GNU Autoconf 2.68.  Invocation command line was
 
-  CONFIG_FILES    = po/Makefile.in
+  CONFIG_FILES    = 
   CONFIG_HEADERS  = 
   CONFIG_LINKS    = 
   CONFIG_COMMANDS = 
-  $ ./config.status 
+  $ ./config.status config.h
 
 on andreaspc
 
-config.status:1533: creating po/Makefile.in
-config.status:1641: WARNING:  'po/Makefile.in.in' seems to ignore the --datarootdir setting
-config.status:1762: executing depfiles commands
-config.status:1762: executing libtool commands
-config.status:1762: executing default-1 commands
-config.status:1762: executing fc_default-1 commands
-config.status:1762: executing fc_default-2 commands
-config.status:1762: executing fc_default-4 commands
-config.status:1762: executing fc_default-5 commands
-config.status:1762: executing default commands
+config.status:1534: creating config.h
+config.status:1715: config.h is unchanged
 
 ## ---------------------- ##
 ## Running config.status. ##
@@ -4217,13 +4209,39 @@ generated by GNU Autoconf 2.68.  Invocation command line was
 
 on andreaspc
 
-config.status:1533: creating po/Makefile.in
-config.status:1641: WARNING:  'po/Makefile.in.in' seems to ignore the --datarootdir setting
-config.status:1762: executing depfiles commands
-config.status:1762: executing libtool commands
-config.status:1762: executing default-1 commands
-config.status:1762: executing fc_default-1 commands
-config.status:1762: executing fc_default-2 commands
-config.status:1762: executing fc_default-4 commands
-config.status:1762: executing fc_default-5 commands
-config.status:1762: executing default commands
+config.status:1534: creating po/Makefile.in
+config.status:1642: WARNING:  'po/Makefile.in.in' seems to ignore the --datarootdir setting
+config.status:1763: executing depfiles commands
+config.status:1763: executing libtool commands
+config.status:1763: executing default-1 commands
+config.status:1763: executing fc_default-1 commands
+config.status:1763: executing fc_default-2 commands
+config.status:1763: executing fc_default-4 commands
+config.status:1763: executing fc_default-5 commands
+config.status:1763: executing default commands
+
+## ---------------------- ##
+## Running config.status. ##
+## ---------------------- ##
+
+This file was extended by config.status, which was
+generated by GNU Autoconf 2.68.  Invocation command line was
+
+  CONFIG_FILES    = po/Makefile.in
+  CONFIG_HEADERS  = 
+  CONFIG_LINKS    = 
+  CONFIG_COMMANDS = 
+  $ ./config.status 
+
+on andreaspc
+
+config.status:1534: creating po/Makefile.in
+config.status:1642: WARNING:  'po/Makefile.in.in' seems to ignore the --datarootdir setting
+config.status:1763: executing depfiles commands
+config.status:1763: executing libtool commands
+config.status:1763: executing default-1 commands
+config.status:1763: executing fc_default-1 commands
+config.status:1763: executing fc_default-2 commands
+config.status:1763: executing fc_default-4 commands
+config.status:1763: executing fc_default-5 commands
+config.status:1763: executing default commands

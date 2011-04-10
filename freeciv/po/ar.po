@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ar\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-26 13:15+0100\n"
+"POT-Creation-Date: 2011-04-10 09:45+0200\n"
 "PO-Revision-Date: 2007-08-10 18:00+0300\n"
 "Last-Translator: Ahmad M. Zawawi <zeus_go64@yahoo.com>\n"
 "Language-Team: Arabic <freeciv-i18n@freeciv.org>\n"
@@ -500,7 +500,7 @@ msgstr "الوحدة: تم تغيير الموقع"
 msgid "Orders / goto events"
 msgstr "الوحدة: أحداث الأوامر أو الذهاب"
 
-#: common/events.c:159 server/stdinhand.c:3752
+#: common/events.c:159 server/stdinhand.c:3790
 msgid "New vote"
 msgstr ""
 
@@ -4325,7 +4325,7 @@ msgid "City: %s | %s (%s, %s)"
 msgstr "المدينة: %s (%s, %s)"
 
 #. TRANS: continue list, in case comma is not the separator of choice.
-#: server/maphand.c:2037 server/stdinhand.c:4465 server/stdinhand.c:4469
+#: server/maphand.c:2037 server/stdinhand.c:4503 server/stdinhand.c:4507
 #: client/helpdata.c:289 client/helpdata.c:784 client/text.c:245
 #: client/text.c:1313 client/text.c:1350
 #, c-format
@@ -6355,102 +6355,102 @@ msgstr "تحتوي سفينتك الفضائية على أعلى عدد من و�
 msgid "Without guidance from the capital, the %s spaceship is lost!"
 msgstr "بدون توجيه من العاصمة، ستفقد سفينة %s الفضائية!"
 
-#: server/srv_main.c:274
+#: server/srv_main.c:273
 #, fuzzy, c-format
 msgid "Scenario victory to %s."
 msgstr "فوز الفريق ل %s"
 
-#: server/srv_main.c:283
+#: server/srv_main.c:282
 #, fuzzy
 msgid "Game ended in a draw as end turn exceeded"
 msgstr "تم انهاء اللعبة بتعادل عندما تجاوزت نهاية المدة"
 
-#: server/srv_main.c:316
+#: server/srv_main.c:315
 #, c-format
 msgid "The %s spaceship has arrived at Alpha Centauri."
 msgstr "وصلت سفينة الفضاء الخاصة ب %s إلى ألفا سنتوري."
 
-#: server/srv_main.c:334 server/srv_main.c:370
+#: server/srv_main.c:333 server/srv_main.c:369
 #, c-format
 msgid "Team victory to %s"
 msgstr "فوز الفريق ل %s"
 
-#: server/srv_main.c:344 server/srv_main.c:387
+#: server/srv_main.c:343 server/srv_main.c:386
 #, c-format
 msgid "Game ended in victory for %s"
 msgstr "تم انهاء اللعبة بفوز %s"
 
-#: server/srv_main.c:395
+#: server/srv_main.c:394
 msgid "Game ended in a draw"
 msgstr "تم انهاء اللعبة بتعادل"
 
-#: server/srv_main.c:512 server/srv_main.c:523
+#: server/srv_main.c:511 server/srv_main.c:522
 #, fuzzy, c-format
 msgid "Your %s was disbanded in accordance with your peace treaty with the %s."
 msgstr "ملكك وحدات مع مع."
 
-#: server/srv_main.c:562 server/srv_main.c:566
+#: server/srv_main.c:561 server/srv_main.c:565
 #, c-format
 msgid ""
 "Concerned citizens point out that the cease-fire with %s will run out soon."
 msgstr "يوضح المواطنون القلقون أن وقف اطلاق النار مع %s سينتهي قريبا."
 
-#: server/srv_main.c:572 server/srv_main.c:577
+#: server/srv_main.c:571 server/srv_main.c:576
 #, c-format
 msgid "The cease-fire with %s has run out. You are now at war with the %s."
 msgstr "انتهى وقف إطلاق النار مع %s. أنت اﻵن في حرب مع %s."
 
-#: server/srv_main.c:596
+#: server/srv_main.c:595
 #, fuzzy, c-format
 msgid ""
 "Ceasefire between %s and %s has run out. They are at war. You cancel your "
 "alliance with both."
 msgstr "أعلن زميلك في الفريق %s الحرب على %s. أنت مجبر أن تلغي تحالفك مع %s."
 
-#: server/srv_main.c:1049
+#: server/srv_main.c:1056
 #, fuzzy
 msgid "Failed saving game. Missing filename."
 msgstr "فشل حفظ اللعبة ك %s"
 
-#: server/srv_main.c:1091 server/srv_main.c:1094
+#: server/srv_main.c:1093 server/srv_main.c:1096
 #, fuzzy, c-format
 msgid "Unsupported compression type %d"
 msgstr "الخيارات المدعومة: %s"
 
-#: server/srv_main.c:1124
+#: server/srv_main.c:1118
 #, c-format
 msgid "Failed saving game as %s"
 msgstr "فشل حفظ اللعبة ك %s"
 
-#: server/srv_main.c:1126
+#: server/srv_main.c:1120
 #, c-format
 msgid "Game saved as %s"
 msgstr "تم حفظ اللعبة ك %s"
 
-#: server/srv_main.c:1166
+#: server/srv_main.c:1152
 msgid "The game is already running."
 msgstr "اللعبة أصلا شغالة."
 
-#: server/srv_main.c:1174
+#: server/srv_main.c:1160
 #, c-format
 msgid "%s lost control cmdlevel on game start.  Use voting from now on."
 msgstr "فقد %s سيطرة cmdlevel عند بداية اللعبة.  استخدم التصويت من اﻵن فصاعدا."
 
-#: server/srv_main.c:1181
+#: server/srv_main.c:1167
 msgid "Starting game."
 msgstr "جاري بدء اللعبة."
 
-#: server/srv_main.c:1251
+#: server/srv_main.c:1237
 #, c-format
 msgid "request for unknown report (type %d)"
 msgstr "طلب لتقرير مجهول (نوع %d)"
 
-#: server/srv_main.c:1330
+#: server/srv_main.c:1316
 #, c-format
 msgid "Warning: rejecting old client %s"
 msgstr "تحذير: جاري رفض عميل قديم %s"
 
-#: server/srv_main.c:1339
+#: server/srv_main.c:1325
 #, fuzzy
 msgid ""
 "Your client is too old. To use this server, please upgrade your client to a "
@@ -6459,560 +6459,560 @@ msgstr ""
 "عميلك قديم جدا. لاستخدام هذا الخادم الرجاء التطوير العميل إلى اصدار CVS بعد "
 "2003-11-28 أو Freeciv 2.2 وبعد."
 
-#: server/srv_main.c:1396
+#: server/srv_main.c:1382
 #, fuzzy
 msgid "You are not allowed to edit."
 msgstr "لا يُسْمَح لك تغيير هذا الخيار."
 
-#: server/srv_main.c:1438
+#: server/srv_main.c:1424
 #, c-format
 msgid "Got a packet of type %d from a dead or observer player"
 msgstr "حصلت على حزمة من النوع %d من لاعب ميت أو مراقب"
 
-#: server/srv_main.c:1540
+#: server/srv_main.c:1526
 msgid "Please choose a non-blank name."
 msgstr "الرجاء إختيار اسم بدون فراغات."
 
-#: server/srv_main.c:1556
+#: server/srv_main.c:1542
 msgid "That nation is already in use."
 msgstr "هذه الأمة أصلا مستعملة."
 
-#: server/srv_main.c:1572
+#: server/srv_main.c:1558
 #, c-format
 msgid "Another player already has the name '%s'.  Please choose another name."
 msgstr "عند لاعب آخر أصلا هذا الاسم '%s'.  الرجاء اختيار اسم آخر."
 
-#: server/srv_main.c:1593
+#: server/srv_main.c:1579
 msgid "Please choose a name containing only ASCII characters."
 msgstr "الرجاء اختيار اسم يحتوي على أحرف  ASCII فقط."
 
-#: server/srv_main.c:1691
+#: server/srv_main.c:1677
 #, c-format
 msgid "%s nation is not available in this scenario."
 msgstr "الأمة %s غير متوفرة في هذا السيناريو."
 
-#: server/srv_main.c:1698
+#: server/srv_main.c:1684
 #, c-format
 msgid "%s nation is already in use."
 msgstr "الأمة %s أصلا مستعملة."
 
-#: server/srv_main.c:1716
+#: server/srv_main.c:1702
 #, c-format
 msgid "%s is the %s ruler %s."
 msgstr "%s حاكم %s على %s."
 
-#: server/srv_main.c:1772
+#: server/srv_main.c:1758
 #, c-format
 msgid "Waiting to start game: %d out of %d players are ready to start."
 msgstr "جاري الانتظار لبدء اللعبة، %d من %d لاعب جاهز لبدء اللعب."
 
-#: server/srv_main.c:1839 server/srv_main.c:1843
+#: server/srv_main.c:1825 server/srv_main.c:1829
 #, c-format
 msgid "%s has been added as %s level AI-controlled player."
 msgstr "تم إضافة %s كلاعب ذكاء اصتناعي من مستوى %s."
 
-#: server/srv_main.c:1971
+#: server/srv_main.c:1957
 #, c-format
 msgid "Player %d"
 msgstr "اللاعب %d"
 
-#: server/srv_main.c:1982 server/srv_main.c:1988
+#: server/srv_main.c:1968 server/srv_main.c:1974
 #, c-format
 msgid "%s rules the %s."
 msgstr "%s يحكم %s."
 
-#: server/srv_main.c:2113
+#: server/srv_main.c:2101
 msgid ""
 "This civserver program has player authentication support, but it's currently "
 "not in use."
 msgstr ""
 
-#: server/srv_main.c:2174
+#: server/srv_main.c:2162
 #, fuzzy, c-format
 msgid "Sending info to metaserver <%s>"
 msgstr "جاري إرسال المعلومات إلى  metaserver [%s]"
 
-#: server/srv_main.c:2179
+#: server/srv_main.c:2167
 msgid "Not starting without explicitly requested metaserver connection."
 msgstr ""
 
-#: server/srv_main.c:2209
+#: server/srv_main.c:2197
 msgid "The game is over..."
 msgstr "انتهت اللعبة..."
 
-#: server/srv_main.c:2433
+#: server/srv_main.c:2421
 msgid "Now accepting new client connections."
 msgstr "جاري اﻵن استقبال اتصالات عملاء جدد."
 
 #. TRANS: ambiguous command
-#: server/stdinhand.c:295
+#: server/stdinhand.c:294
 msgid "(ambiguous)"
 msgstr "(مبهم)"
 
 #. TRANS: unrecognized command
 #. TRANS: "unknown" location
-#: server/stdinhand.c:298 client/citydlg_common.c:427
+#: server/stdinhand.c:297 client/citydlg_common.c:427
 #: client/gui-gtk-2.0/inteldlg.c:374 client/gui-sdl/inteldlg.c:298
 #: client/gui-sdl/inteldlg.c:310 client/gui-win32/inteldlg.c:148
 #: client/gui-xaw/inteldlg.c:271
 msgid "(unknown)"
 msgstr "(مجهول)"
 
-#: server/stdinhand.c:388
+#: server/stdinhand.c:387
 msgid "Name is empty, so cannot be a player."
 msgstr "الاسم فارغ، لذا لا يمكن أن يكون لاعب."
 
-#: server/stdinhand.c:392
+#: server/stdinhand.c:391
 msgid "Name is too long, so cannot be a player."
 msgstr "الاسم طويل جدا، لذا لا يمكن أن يكون لاعب."
 
-#: server/stdinhand.c:396
+#: server/stdinhand.c:395
 #, c-format
 msgid "Player name prefix '%s' is ambiguous."
 msgstr "بادئة اسم اللاعب '%s' مبهمة."
 
-#: server/stdinhand.c:400
+#: server/stdinhand.c:399
 #, c-format
 msgid "No player by the name of '%s'."
 msgstr "لا وجود للاعب بهذا الاسم '%s'."
 
-#: server/stdinhand.c:404 server/stdinhand.c:439
+#: server/stdinhand.c:403 server/stdinhand.c:438
 #, c-format
 msgid "Unexpected match_result %d (%s) for '%s'."
 msgstr "نتيجة مُطابقة غير متوقعة %d (%s) ل '%s'."
 
-#: server/stdinhand.c:423
+#: server/stdinhand.c:422
 msgid "Name is empty, so cannot be a connection."
 msgstr "الاسم فارغ، لذا لا يمكن أن يكون اتصال."
 
-#: server/stdinhand.c:427
+#: server/stdinhand.c:426
 msgid "Name is too long, so cannot be a connection."
 msgstr "الاسم طويل جدا، لذا لا يمكن أن يكون اتصال."
 
-#: server/stdinhand.c:431
+#: server/stdinhand.c:430
 #, c-format
 msgid "Connection name prefix '%s' is ambiguous."
 msgstr "بادئة اسم الاتصال '%s' مبهمة."
 
-#: server/stdinhand.c:435
+#: server/stdinhand.c:434
 #, c-format
 msgid "No connection by the name of '%s'."
 msgstr "لا يوجد اتصال بالاسم '%s'."
 
-#: server/stdinhand.c:455
+#: server/stdinhand.c:454
 #, c-format
 msgid "Open metaserver connection to [%s]."
 msgstr "انصال metaserver مفتوح إلى [%s]."
 
-#: server/stdinhand.c:468
+#: server/stdinhand.c:467
 #, c-format
 msgid "Close metaserver connection to [%s]."
 msgstr "انصال metaserver مغلق إلى [%s]."
 
-#: server/stdinhand.c:483
+#: server/stdinhand.c:482
 msgid "Metaserver connection is open."
 msgstr "انصال metaserver مفتوح."
 
-#: server/stdinhand.c:486
+#: server/stdinhand.c:485
 msgid "Metaserver connection is closed."
 msgstr "انصال metaserver مغلق."
 
-#: server/stdinhand.c:496
+#: server/stdinhand.c:495
 msgid "Metaserver connection is already open."
 msgstr "انصال metaserver أصلا مفتوح."
 
-#: server/stdinhand.c:507
+#: server/stdinhand.c:506
 msgid "Metaserver connection is already closed."
 msgstr "انصال metaserver أصلا مغلق."
 
-#: server/stdinhand.c:512
+#: server/stdinhand.c:511
 msgid "Argument must be 'u', 'up', 'd', 'down', or '?'."
 msgstr "يجب أن يكون الباراميتر 'u', 'up', 'd', 'down', أو '?'."
 
-#: server/stdinhand.c:533
+#: server/stdinhand.c:532
 #, fuzzy, c-format
 msgid "Metaserver patches string set to '%s'."
 msgstr "Metaserver."
 
-#: server/stdinhand.c:536
+#: server/stdinhand.c:535
 #, fuzzy, c-format
 msgid "Metaserver patches string set to '%s', not reporting to metaserver."
 msgstr "Metaserver."
 
-#: server/stdinhand.c:557
+#: server/stdinhand.c:556
 #, c-format
 msgid "Metaserver message string set to '%s'."
 msgstr "حددت السلسلة لحرفية لرسالة  Metaserver  ب '%s'."
 
-#: server/stdinhand.c:560
+#: server/stdinhand.c:559
 #, fuzzy, c-format
 msgid "Metaserver message string set to '%s', not reporting to metaserver."
 msgstr "Metaserver."
 
-#: server/stdinhand.c:581
+#: server/stdinhand.c:580
 #, c-format
 msgid "Metaserver is now [%s]."
 msgstr "الآن Metaserver هو [%s]."
 
-#: server/stdinhand.c:591
+#: server/stdinhand.c:590
 #, c-format
 msgid "Server id: %s"
 msgstr "رقم تعريف الخادم: %s"
 
-#: server/stdinhand.c:717
+#: server/stdinhand.c:716
 msgid "Cannot toggle a barbarian player."
 msgstr "لا يمكن تفعيل أو تعطيل لاعب بربري."
 
-#: server/stdinhand.c:724
+#: server/stdinhand.c:723
 #, c-format
 msgid "%s is now under AI control."
 msgstr "ال %s هو تحت سيطرة ذ.ا."
 
-#: server/stdinhand.c:746
+#: server/stdinhand.c:745
 #, c-format
 msgid "%s is now under human control."
 msgstr "ال %s هو تحت السيطرة البشرية."
 
-#: server/stdinhand.c:790
+#: server/stdinhand.c:789
 msgid "Can't add AI players once the game has begun."
 msgstr "لا يمكن اضافة لاعبي ذ.ا متى بدأت اللعبة."
 
-#: server/stdinhand.c:806
+#: server/stdinhand.c:805
 msgid "Can't add more players, server is full."
 msgstr "لا يمكن إضافة لاعبيين جدد، الخادم مشغول."
 
-#: server/stdinhand.c:812
+#: server/stdinhand.c:811
 #, fuzzy
 msgid "Can't add more players, not enough nations."
 msgstr "لا يمكن إضافة لاعبيين جدد، الخادم مشغول."
 
-#: server/stdinhand.c:819
+#: server/stdinhand.c:818
 msgid "Can't use an empty name."
 msgstr "لا يمكن استعمال اسم فارغ."
 
-#: server/stdinhand.c:826
+#: server/stdinhand.c:825
 #, c-format
 msgid "That name exceeds the maximum of %d chars."
 msgstr "يزيد ذلك الاسم على الحد الأعلى من عدد الأحرف %d."
 
-#: server/stdinhand.c:832
+#: server/stdinhand.c:831
 msgid "That name is not allowed."
 msgstr "ذلك الاسم غير مسموح."
 
-#: server/stdinhand.c:838
+#: server/stdinhand.c:837
 msgid "A player already exists by that name."
 msgstr "هناك لاعب موجود أصلا بهذا الاسم."
 
-#: server/stdinhand.c:844
+#: server/stdinhand.c:843
 msgid "A user already exists by that name."
 msgstr "هناك مستخدم موجود أصلا بهذا الاسم."
 
-#: server/stdinhand.c:857
+#: server/stdinhand.c:856
 #, fuzzy, c-format
 msgid "Failed to create new player %s."
 msgstr "خطأ انشاء لاعب ذ.ا جديد: %s."
 
-#: server/stdinhand.c:862
+#: server/stdinhand.c:861
 #, c-format
 msgid "%s has been added as an AI-controlled player."
 msgstr "تم إضافة %s كلاعب مسيطر من ال ذ.ا."
 
 #. TRANS: <name> replacing <name> ...
-#: server/stdinhand.c:867
+#: server/stdinhand.c:866
 #, fuzzy, c-format
 msgid "%s replacing %s as an AI-controlled player."
 msgstr "تم إضافة %s كلاعب مسيطر من ال ذ.ا."
 
-#: server/stdinhand.c:908
+#: server/stdinhand.c:907
 msgid "Players cannot be removed once the game has started."
 msgstr "لا يمكن إزالة اللاعبيين متى بدأت اللعبة."
 
-#: server/stdinhand.c:920
+#: server/stdinhand.c:919
 #, c-format
 msgid "Removed player %s from the game."
 msgstr "إزالة اللاعب %s من اللعبة."
 
-#: server/stdinhand.c:979 server/stdinhand.c:3442 server/stdinhand.c:3557
+#: server/stdinhand.c:978 server/stdinhand.c:3441 server/stdinhand.c:3590
 #, c-format
 msgid "Name \"%s\" disallowed for security reasons."
 msgstr "الاسم \"%s\" ممنوع لأسباب أمنية."
 
-#: server/stdinhand.c:992
+#: server/stdinhand.c:991
 #, c-format
 msgid "No command script found by the name \"%s\"."
 msgstr "لا يوجد سكربت أوامر بهذا الاسم \"%s\"."
 
-#: server/stdinhand.c:1000
+#: server/stdinhand.c:999
 #, c-format
 msgid "Loading script file: %s"
 msgstr "جاري تحميل ملف السكربت: %s"
 
-#: server/stdinhand.c:1015
+#: server/stdinhand.c:1014
 #, c-format
 msgid "Cannot read command line scriptfile '%s'."
 msgstr "لا يمكن قراءة ملف السكربت لسطر الأوامر '%s'."
 
-#: server/stdinhand.c:1017
+#: server/stdinhand.c:1016
 #, c-format
 msgid "Could not read script file '%s'."
 msgstr "لا يمكن قراءة ملف السكربت '%s'."
 
-#: server/stdinhand.c:1101
+#: server/stdinhand.c:1100
 #, c-format
 msgid "Could not write script file '%s'."
 msgstr "لا يمكن كتابة ملف السكربت '%s'."
 
-#: server/stdinhand.c:1112
+#: server/stdinhand.c:1111
 msgid "You cannot use the write command on this server for security reasons."
 msgstr "أنت لا تستطيع استخدام أمر الكتابة على هذا الخادم لأسباب أمنية."
 
-#: server/stdinhand.c:1140
+#: server/stdinhand.c:1139
 #, c-format
 msgid ""
 "Cannot decrease command access level '%s' for connection '%s'; you only have "
 "'%s'."
 msgstr "فشل تخفيض مستوى صلاحيات الأوامر '%s' للاتصال '%s'; لديك فقط '%s'."
 
-#: server/stdinhand.c:1149
+#: server/stdinhand.c:1148
 #, c-format
 msgid "Command access level set to '%s' for connection %s."
 msgstr "تم تحديد مستوى صلاحيات الأوامر ب '%s' للاتصال %s."
 
-#: server/stdinhand.c:1198
+#: server/stdinhand.c:1197
 #, c-format
 msgid ""
 "Anyone can now become game organizer '%s' by issuing the 'first' command."
 msgstr "يستطيع أي شخص أن يصبح منظم اللعبة '%s' باستخدام أمر 'first'."
 
-#: server/stdinhand.c:1222
+#: server/stdinhand.c:1221
 msgid "Command access levels in effect:"
 msgstr "مستويات صلاحيات الأوامر المستخدمة:"
 
-#: server/stdinhand.c:1229
+#: server/stdinhand.c:1228
 #, c-format
 msgid "Command access level for new connections: %s"
 msgstr "مستوى صلاحيات الأوامر للاتصالات الجديدة: %s"
 
-#: server/stdinhand.c:1232
+#: server/stdinhand.c:1231
 #, c-format
 msgid "Command access level for first player to take it: %s"
 msgstr "مستوى صلاحيات الأوامر لأول لاعب يأخذها: %s"
 
-#: server/stdinhand.c:1246
+#: server/stdinhand.c:1245
 msgid "?accslvllist:or "
 msgstr ""
 
 #. TRANS: comma and 'or' separated list of access levels
-#: server/stdinhand.c:1251
+#: server/stdinhand.c:1250
 #, fuzzy, c-format
 msgid "Error: command access level must be one of %s."
 msgstr ""
 "خطأ: يجب أن يكون مستوى صلاحيات الأوامر 'none'أو  'info' أو 'ctrl', أو 'hack'."
 
-#: server/stdinhand.c:1255
+#: server/stdinhand.c:1254
 #, c-format
 msgid ""
 "Cannot increase command access level to '%s'; you only have '%s' yourself."
 msgstr "لا يمكن زيادة مستوى صلاحيات الأوامر إلى '%s'; لديك فقط '%s' لنفسك."
 
-#: server/stdinhand.c:1282 server/stdinhand.c:1296 server/stdinhand.c:1317
+#: server/stdinhand.c:1281 server/stdinhand.c:1295 server/stdinhand.c:1316
 #, c-format
 msgid "Command access level set to '%s' for new players."
 msgstr "تم تحديد مستوي صلاحيات الأوامر ب '%s' للاعبين الجدد."
 
-#: server/stdinhand.c:1287 server/stdinhand.c:1301 server/stdinhand.c:1311
+#: server/stdinhand.c:1286 server/stdinhand.c:1300 server/stdinhand.c:1310
 #, c-format
 msgid "Command access level set to '%s' for first player to grab it."
 msgstr "تم تحديد مستوي صلاحيات الأوامر ب '%s' لأول لاعب يأخذها."
 
-#: server/stdinhand.c:1346
+#: server/stdinhand.c:1345
 msgid "The 'first' command makes no sense from the server command line."
 msgstr "لا يعني الأمر 'first' شيئا عند سطر أوامر الخادم."
 
-#: server/stdinhand.c:1350
+#: server/stdinhand.c:1349
 #, c-format
 msgid "You already have command access level '%s' or better."
 msgstr "لديك أصلا مستوى صلاحيات  الأوامر '%s' أو أفضل."
 
-#: server/stdinhand.c:1355
+#: server/stdinhand.c:1354
 msgid "Someone else already is game organizer."
 msgstr "شخص ما هو أصلا منظم اللعبة."
 
-#: server/stdinhand.c:1360
+#: server/stdinhand.c:1359
 #, c-format
 msgid "Connection %s has opted to become the game organizer."
 msgstr "اختار الإتّصال %s أن يصير منظم اللعبة."
 
-#: server/stdinhand.c:1411
+#: server/stdinhand.c:1410
 #, c-format
 msgid "Invalid argument %d."
 msgstr "باراميتر خاطئ %d."
 
-#: server/stdinhand.c:1418 server/stdinhand.c:1858 server/stdinhand.c:2958
-#: server/stdinhand.c:3106 server/stdinhand.c:3118 server/stdinhand.c:3287
-#: server/stdinhand.c:3430
+#: server/stdinhand.c:1417 server/stdinhand.c:1857 server/stdinhand.c:2957
+#: server/stdinhand.c:3105 server/stdinhand.c:3117 server/stdinhand.c:3286
+#: server/stdinhand.c:3429
 #, fuzzy, c-format
 msgid ""
 "Usage:\n"
 "%s"
 msgstr "الاستعمال: away"
 
-#: server/stdinhand.c:1425
+#: server/stdinhand.c:1424
 #, c-format
 msgid "Dynamic timeout set to %d %d %d %d"
 msgstr "تم تحديد وقت الخروج الديناميكي ب %d %d %d %d"
 
 #. TRANS: <untranslated name> - translated short help
-#: server/stdinhand.c:1486
+#: server/stdinhand.c:1485
 #, fuzzy, c-format
 msgid "Option: %s  -  %s"
 msgstr "الخيار: %s  -  %s."
 
 #. TRANS: <untranslated name>
-#: server/stdinhand.c:1492
+#: server/stdinhand.c:1491
 #, fuzzy, c-format
 msgid "Option: %s"
 msgstr "الخيارات %s"
 
-#: server/stdinhand.c:1499 server/stdinhand.c:4179
+#: server/stdinhand.c:1498 server/stdinhand.c:4217
 msgid "Description:"
 msgstr "الوصف:"
 
-#: server/stdinhand.c:1504
+#: server/stdinhand.c:1503
 #, c-format
 msgid "Status: %s"
 msgstr "الحالة: %s"
 
-#: server/stdinhand.c:1505
+#: server/stdinhand.c:1504
 msgid "changeable"
 msgstr "قابل للتغيير"
 
-#: server/stdinhand.c:1505
+#: server/stdinhand.c:1504
 msgid "fixed"
 msgstr "غير قابل للتغيير"
 
-#: server/stdinhand.c:1511
+#: server/stdinhand.c:1510
 #, c-format
 msgid "Value: %d, Minimum: 0, Default: %d, Maximum: 1"
 msgstr "القيمة: %d, الحد الأدنى: 0, الافتراضي: %d, الحد الأعلى: 1"
 
-#: server/stdinhand.c:1516
+#: server/stdinhand.c:1515
 #, c-format
 msgid "Value: %d, Minimum: %d, Default: %d, Maximum: %d"
 msgstr "القيمة: %d, الحد الأدنى: %d, الافتراضي: %d, الحد الأعلى: %d"
 
-#: server/stdinhand.c:1522
+#: server/stdinhand.c:1521
 #, c-format
 msgid "Value: \"%s\", Default: \"%s\""
 msgstr "القيمة: \"%s\", الافتراضي: \"%s\""
 
-#: server/stdinhand.c:1541
+#: server/stdinhand.c:1540
 msgid "Explanations are available for the following server options:"
 msgstr "تتوفر التفسيرات لخيارات الخادم التالية:"
 
-#: server/stdinhand.c:1589
+#: server/stdinhand.c:1588
 msgid "No explanation for that yet."
 msgstr "لا يوجد تفسير لهذا حتى اﻵن."
 
-#: server/stdinhand.c:1592 server/stdinhand.c:2645
+#: server/stdinhand.c:1591 server/stdinhand.c:2644
 msgid "Ambiguous option name."
 msgstr "اسم خيار مبهم."
 
-#: server/stdinhand.c:1612
+#: server/stdinhand.c:1611
 #, c-format
 msgid "Server Operator: %s"
 msgstr "مشغل الخادم: %s"
 
-#: server/stdinhand.c:1651
+#: server/stdinhand.c:1650
 #, c-format
 msgid "Connectmsg truncated to %u bytes."
 msgstr ""
 
-#: server/stdinhand.c:1778 server/stdinhand.c:1815 server/stdinhand.c:1833
+#: server/stdinhand.c:1777 server/stdinhand.c:1814 server/stdinhand.c:1832
 #, c-format
 msgid "Player '%s' now has AI skill level '%s'."
 msgstr "لدى اللاعب '%s' اﻵن مستوى ذ.ا '%s'."
 
-#: server/stdinhand.c:1820
+#: server/stdinhand.c:1819
 #, c-format
 msgid "%s is not controlled by the AI."
 msgstr "يسيطر ال ذ.ا على %s."
 
-#: server/stdinhand.c:1840
+#: server/stdinhand.c:1839
 #, c-format
 msgid "Default AI skill level set to '%s'."
 msgstr "تحديد مستوى لعب ال ذ.ا الاقتراضي ب '%s'."
 
-#: server/stdinhand.c:1855
+#: server/stdinhand.c:1854
 msgid "This command is client only."
 msgstr "هذا الأمر هو للعميل فقط."
 
-#: server/stdinhand.c:1864
+#: server/stdinhand.c:1863
 msgid "Only players may use the away command."
 msgstr "يسمح للاعبيين فقط استخدام أمر away."
 
-#: server/stdinhand.c:1868
+#: server/stdinhand.c:1867
 #, c-format
 msgid "%s set to away mode."
 msgstr "وضع %s في نمط away."
 
-#: server/stdinhand.c:1875
+#: server/stdinhand.c:1874
 #, c-format
 msgid "%s returned to game."
 msgstr "رجع %s إلى اللعبة."
 
-#: server/stdinhand.c:1919
+#: server/stdinhand.c:1918
 #, c-format
 msgid "Sorry, you do not have access to view option '%s'."
 msgstr "آسف، ليس عندك الصلاحية لعرض خيار '%s'."
 
-#: server/stdinhand.c:1925
+#: server/stdinhand.c:1924
 #, c-format
 msgid "Unknown option '%s'."
 msgstr "الخيار مجهول '%s'."
 
-#: server/stdinhand.c:1950
+#: server/stdinhand.c:1949
 msgid "All options with non-default values"
 msgstr "كل الخيارات مع قيم غير افتراضية"
 
-#: server/stdinhand.c:1953
+#: server/stdinhand.c:1952
 msgid "All options"
 msgstr "كل الخيارات"
 
-#: server/stdinhand.c:1956
+#: server/stdinhand.c:1955
 msgid "Vital options"
 msgstr "الخيارات الحيوية"
 
-#: server/stdinhand.c:1959
+#: server/stdinhand.c:1958
 msgid "Situational options"
 msgstr "الخيارات الموقعية"
 
-#: server/stdinhand.c:1962
+#: server/stdinhand.c:1961
 msgid "Rarely used options"
 msgstr "الخيارات النادر استعمالها"
 
-#: server/stdinhand.c:1965
+#: server/stdinhand.c:1964
 msgid "+ means you may change the option"
 msgstr "+ يعني أنك تستطيع تغيير الخيار"
 
-#: server/stdinhand.c:1966
+#: server/stdinhand.c:1965
 msgid "= means the option is on its default value"
 msgstr "= يعني أن الخيار موضوع على القيمة الافتراضية"
 
-#: server/stdinhand.c:1969
+#: server/stdinhand.c:1968
 #, c-format
 msgid "%-*s value   (min,max)      "
 msgstr "%-*s القيمة   (الحد الأدنى,الحد الأعلى)      "
 
-#: server/stdinhand.c:1969
+#: server/stdinhand.c:1968
 msgid "Option"
 msgstr "الخيار"
 
-#: server/stdinhand.c:1973
+#: server/stdinhand.c:1972
 msgid "description"
 msgstr "الوصف"
 
-#: server/stdinhand.c:2055
+#: server/stdinhand.c:2054
 msgid ""
 "Try 'show situational' or 'show rare' to show more options.\n"
 "Try 'show changed' to show settings with non-default values."
@@ -7020,273 +7020,273 @@ msgstr ""
 "جرب 'show situational' أو 'show rare' لعرض خيارات أخرى.\n"
 "جرب 'show changed' لعرض اعدادات مع قيم غير افتراضية."
 
-#: server/stdinhand.c:2105
+#: server/stdinhand.c:2104
 msgid "Cannot change teams once game has begun."
 msgstr "لا تستطيع تغيير الفرق متى بدأت اللعبة."
 
-#: server/stdinhand.c:2115 server/stdinhand.c:2248 server/stdinhand.c:2429
-#: server/stdinhand.c:2454 server/stdinhand.c:2497 server/stdinhand.c:2528
-#: server/stdinhand.c:2570 server/stdinhand.c:2595 server/stdinhand.c:2639
+#: server/stdinhand.c:2114 server/stdinhand.c:2247 server/stdinhand.c:2428
+#: server/stdinhand.c:2453 server/stdinhand.c:2496 server/stdinhand.c:2527
+#: server/stdinhand.c:2569 server/stdinhand.c:2594 server/stdinhand.c:2638
 #, fuzzy, c-format
 msgid ""
 "Undefined argument.  Usage:\n"
 "%s"
 msgstr "باريمتر غير معرف.  الاستعمال: set <الخيار> <القيمة>."
 
-#: server/stdinhand.c:2136
+#: server/stdinhand.c:2135
 #, c-format
 msgid "No such team %s.  Please give a valid team name or number."
 msgstr "الفريق %s غير موجود.  الرجاء إعطاء اسم أو رقم فريق صالح."
 
-#: server/stdinhand.c:2143
+#: server/stdinhand.c:2142
 msgid "Cannot team a barbarian."
 msgstr "لا تستطيع أن تكون فريق مع بربري."
 
-#: server/stdinhand.c:2149
+#: server/stdinhand.c:2148
 #, c-format
 msgid "Player %s set to team %s."
 msgstr "اللاعب %s مع فريق %s."
 
-#: server/stdinhand.c:2175 server/voting.c:510
+#: server/stdinhand.c:2174 server/voting.c:510
 #, fuzzy
 msgid "Teamvote"
 msgstr "فريق"
 
-#: server/stdinhand.c:2175 server/voting.c:514
+#: server/stdinhand.c:2174 server/voting.c:514
 msgid "Vote"
 msgstr ""
 
-#: server/stdinhand.c:2177
+#: server/stdinhand.c:2176
 #, c-format
 msgid ""
 "%s %d \"%s\" (needs %0.0f%%%s): %d for, %d against, and %d abstained out of "
 "%d players."
 msgstr ""
 
-#: server/stdinhand.c:2181
+#: server/stdinhand.c:2180
 msgid " no dissent"
 msgstr ""
 
-#: server/stdinhand.c:2189
+#: server/stdinhand.c:2188
 msgid "There are no votes going on."
 msgstr "لا يوجد أي تصويت جاري."
 
-#: server/stdinhand.c:2234 server/stdinhand.c:2354 server/stdinhand.c:3776
+#: server/stdinhand.c:2233 server/stdinhand.c:2353 server/stdinhand.c:3814
 msgid "You are not allowed to use this command."
 msgstr "لا يُسْمح لك استخدام هذا الأمر."
 
-#: server/stdinhand.c:2243
+#: server/stdinhand.c:2242
 #, fuzzy, c-format
 msgid "The argument \"%s\" is ambigious."
 msgstr "باريمتر المساعدة '%s' مبهم."
 
-#: server/stdinhand.c:2260
+#: server/stdinhand.c:2259
 #, fuzzy
 msgid "There are no votes running."
 msgstr "لا يوجد أي تصويت جاري."
 
-#: server/stdinhand.c:2262
+#: server/stdinhand.c:2261
 #, fuzzy, c-format
 msgid "No legal last vote (%d %s)."
 msgstr "بلا تصويت أخير شرعي."
 
-#: server/stdinhand.c:2263
+#: server/stdinhand.c:2262
 msgid "other vote running"
 msgid_plural "other votes running"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: server/stdinhand.c:2270 server/stdinhand.c:2667 server/stdinhand.c:2708
+#: server/stdinhand.c:2269 server/stdinhand.c:2666 server/stdinhand.c:2707
 msgid "Value must be an integer."
 msgstr "يجب أن تكون القيمة رقما صحيحا."
 
-#: server/stdinhand.c:2276 server/stdinhand.c:2362
+#: server/stdinhand.c:2275 server/stdinhand.c:2361
 #, c-format
 msgid "No such vote (%d)."
 msgstr "التصويت غير موجود (%d)."
 
-#: server/stdinhand.c:2282
+#: server/stdinhand.c:2281
 #, fuzzy
 msgid "You are not allowed to vote on that."
 msgstr "لا يُسْمَح لك تغيير هذا الخيار."
 
-#: server/stdinhand.c:2287
+#: server/stdinhand.c:2286
 #, c-format
 msgid "You voted for \"%s\""
 msgstr "لقد صَوّت ل \"%s\""
 
-#: server/stdinhand.c:2291
+#: server/stdinhand.c:2290
 #, c-format
 msgid "You voted against \"%s\""
 msgstr "لقد صَوّت ضد \"%s\""
 
-#: server/stdinhand.c:2296
+#: server/stdinhand.c:2295
 #, c-format
 msgid "You abstained from voting on \"%s\""
 msgstr ""
 
-#: server/stdinhand.c:2331
+#: server/stdinhand.c:2330
 msgid "Missing argument <vote number> or the string \"all\"."
 msgstr ""
 
-#: server/stdinhand.c:2338
+#: server/stdinhand.c:2337
 #, fuzzy
 msgid "You don't have any vote going on."
 msgstr "ليس عندك عامل هنا."
 
-#: server/stdinhand.c:2345
+#: server/stdinhand.c:2344
 #, fuzzy
 msgid "There isn't any vote going on."
 msgstr "لا يوجد أي تصويت جاري."
 
-#: server/stdinhand.c:2350
+#: server/stdinhand.c:2349
 msgid "All votes have been removed."
 msgstr ""
 
-#: server/stdinhand.c:2367
+#: server/stdinhand.c:2366
 #, fuzzy, c-format
 msgid "You are not allowed to cancel this vote (%d)."
 msgstr "لا يُسْمَح لك تغيير هذا الخيار."
 
-#: server/stdinhand.c:2373
+#: server/stdinhand.c:2372
 msgid "Usage: /cancelvote [<vote number>|all]"
 msgstr ""
 
-#: server/stdinhand.c:2382
+#: server/stdinhand.c:2381
 #, fuzzy, c-format
 msgid "%s has cancelled the vote \"%s\" (number %d)."
 msgstr "آسف, الغى %s طريق التجارة من %s إلى مدينتك %s."
 
-#: server/stdinhand.c:2388
+#: server/stdinhand.c:2387
 #, c-format
 msgid "The vote \"%s\" (number %d) has been cancelled."
 msgstr ""
 
-#: server/stdinhand.c:2409
+#: server/stdinhand.c:2408
 msgid "Can only use this command once game has begun."
 msgstr "تستطيع فقط استخدام هذا الأمر متى بدأت اللعبة."
 
-#: server/stdinhand.c:2440
+#: server/stdinhand.c:2439
 #, c-format
 msgid "%s diplomacy no longer debugged"
 msgstr "لا يتم تنقييح دبلوماسية %s بعد اﻵن "
 
-#: server/stdinhand.c:2444
+#: server/stdinhand.c:2443
 #, c-format
 msgid "%s diplomacy debugged"
 msgstr "يتم تنقييح دبلوماسية %s"
 
-#: server/stdinhand.c:2465
+#: server/stdinhand.c:2464
 #, c-format
 msgid "%s tech no longer debugged"
 msgstr "لا يتم تنقييح تكنولوجيا %s بعد اﻵن "
 
-#: server/stdinhand.c:2469
+#: server/stdinhand.c:2468
 #, c-format
 msgid "%s tech debugged"
 msgstr "يتم تنقييح تكنولوجيا %s"
 
-#: server/stdinhand.c:2485 server/stdinhand.c:2488
+#: server/stdinhand.c:2484 server/stdinhand.c:2487
 #, c-format
 msgid "players=%d cities=%d citizens=%d units=%d"
 msgstr ""
 
-#: server/stdinhand.c:2502 server/stdinhand.c:2533
+#: server/stdinhand.c:2501 server/stdinhand.c:2532
 msgid "Value 2 & 3 must be integer."
 msgstr "يجب أن تكون القيمة 2 &  3 رقم صحيح."
 
-#: server/stdinhand.c:2506 server/stdinhand.c:2537
+#: server/stdinhand.c:2505 server/stdinhand.c:2536
 msgid "Bad map coordinates."
 msgstr "احداثيات خريطة خاطئة."
 
-#: server/stdinhand.c:2511
+#: server/stdinhand.c:2510
 msgid "No city at this coordinate."
 msgstr "لا توجد مدينة في هذه الاحداثيات."
 
-#: server/stdinhand.c:2516
+#: server/stdinhand.c:2515
 #, c-format
 msgid "%s no longer debugged"
 msgstr "لا يتم تنقييح  %s بعد اﻵن "
 
-#: server/stdinhand.c:2543 server/stdinhand.c:2584
+#: server/stdinhand.c:2542 server/stdinhand.c:2583
 #, fuzzy, c-format
 msgid "%s %s no longer debugged."
 msgstr "لا يتم تنقييح %s %s بعد اﻵن."
 
-#: server/stdinhand.c:2558
+#: server/stdinhand.c:2557
 #, fuzzy
 msgid "Ferry system is no longer in debug mode."
 msgstr "لا يتم تنقييح %s %s بعد اﻵن."
 
-#: server/stdinhand.c:2562
+#: server/stdinhand.c:2561
 msgid "Ferry system in debug mode."
 msgstr ""
 
-#: server/stdinhand.c:2575
+#: server/stdinhand.c:2574
 msgid "Value 2 must be integer."
 msgstr "يجب أن تكون القيمة 2  رقم صحيح."
 
-#: server/stdinhand.c:2579
+#: server/stdinhand.c:2578
 #, c-format
 msgid "Unit %d does not exist."
 msgstr "لا وجود للوحدة %d."
 
-#: server/stdinhand.c:2650
+#: server/stdinhand.c:2649
 msgid "You are not allowed to set this option."
 msgstr "لا يُسْمَح لك تغيير هذا الخيار."
 
-#: server/stdinhand.c:2655 server/stdinhand.c:3551
+#: server/stdinhand.c:2654 server/stdinhand.c:3584
 msgid "This setting can't be modified after the game has started."
 msgstr "لا يمكن تغيير هذا الاعداد بعد بدء اللعبة."
 
-#: server/stdinhand.c:2677
+#: server/stdinhand.c:2676
 #, c-format
 msgid "The parameter %s should only contain digits 0-1."
 msgstr ""
 
-#: server/stdinhand.c:2684
+#: server/stdinhand.c:2683
 msgid "Value out of range (minimum: 0, maximum: 1)."
 msgstr "القيمة خارج المدى (الحد الأدنى: 0, الحد الأعلى: 1)."
 
-#: server/stdinhand.c:2699 server/stdinhand.c:2741
+#: server/stdinhand.c:2698 server/stdinhand.c:2740
 #, c-format
 msgid "Option: %s has been set to %d."
 msgstr "الخيار: %s تم تغييره إلى %d."
 
-#: server/stdinhand.c:2719
+#: server/stdinhand.c:2718
 #, c-format
 msgid "The parameter %s should only contain +- and 0-9."
 msgstr ""
 
-#: server/stdinhand.c:2726
+#: server/stdinhand.c:2725
 #, c-format
 msgid "Value out of range (minimum: %d, maximum: %d)."
 msgstr "القيمة خارج المدى (الحد الأدنى: %d, الحد الأعلى: %d)."
 
-#: server/stdinhand.c:2751
+#: server/stdinhand.c:2750
 #, fuzzy, c-format
 msgid ""
 "String value too long.  Usage:\n"
 "%s"
 msgstr "القيمة النصية طويلة جدا.  طريقة الاستعمال: set <الخيار> <القيمة>."
 
-#: server/stdinhand.c:2766
+#: server/stdinhand.c:2765
 #, c-format
 msgid "Option: %s has been set to \"%s\"."
 msgstr "الخيار: %s تم تغييره إلى  \"%s\"."
 
-#: server/stdinhand.c:2824
+#: server/stdinhand.c:2823
 msgid "Sorry, one can't observe globally in this game."
 msgstr "آسف، لا يمكن المراقبة عالميا في هذا اللعبة."
 
-#: server/stdinhand.c:2832
+#: server/stdinhand.c:2831
 #, fuzzy
 msgid "You cannot take a new player at this time."
 msgstr "آسف، لا يمكن أخذ لاعبيين اتسانيين في هذه اللعبة."
 
 #. TRANS: Do not translate "maxplayers".
-#: server/stdinhand.c:2840
+#: server/stdinhand.c:2839
 #, c-format
 msgid ""
 "You cannot take a new player because the maximum of %d player has already "
@@ -7298,302 +7298,307 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: server/stdinhand.c:2852
+#: server/stdinhand.c:2851
 msgid "You cannot take a new player because there are no free player slots."
 msgstr ""
 
-#: server/stdinhand.c:2864
+#: server/stdinhand.c:2863
 msgid "Sorry, one can't observe barbarians in this game."
 msgstr "آسف، لا يمكن مراقبة البرابرة في هذه اللعبة."
 
-#: server/stdinhand.c:2867
+#: server/stdinhand.c:2866
 msgid "Sorry, one can't take barbarians in this game."
 msgstr "آسف، لا يمكن أخد البرابرة في هذه اللعبة."
 
-#: server/stdinhand.c:2876
+#: server/stdinhand.c:2875
 msgid "Sorry, one can't observe dead players in this game."
 msgstr "آسف، لا يمكن مراقبة اللاعبيين الأموات في هذا اللعبة."
 
-#: server/stdinhand.c:2879
+#: server/stdinhand.c:2878
 msgid "Sorry, one can't take dead players in this game."
 msgstr "آسف، لا يمكن أخد لاعبيين أموات في هذه اللعبة."
 
-#: server/stdinhand.c:2889
+#: server/stdinhand.c:2888
 msgid "Sorry, one can't observe AI players in this game."
 msgstr "آسف، لا يمكن مراقبة لاعبي الذكاء الاصطناعي في هذه اللعبة."
 
-#: server/stdinhand.c:2892
+#: server/stdinhand.c:2891
 msgid "Sorry, one can't take AI players in this game."
 msgstr "آسف، لا يمكن أخذ لاعبي الذكاء الاصطناعي في هذه اللعبة."
 
-#: server/stdinhand.c:2902
+#: server/stdinhand.c:2901
 msgid "Sorry, one can't observe human players in this game."
 msgstr "آسف، لا يمكن مراقبة لاعبيين اتاس في هذه اللعبة."
 
-#: server/stdinhand.c:2906
+#: server/stdinhand.c:2905
 msgid "Sorry, one can't take human players in this game."
 msgstr "آسف، لا يمكن أخذ لاعبيين اتسانيين في هذه اللعبة."
 
-#: server/stdinhand.c:2916
+#: server/stdinhand.c:2915
 msgid "Sorry, one can't observe in this game."
 msgstr "آسف، لا يمكن المراقبة في هذه اللعبة."
 
-#: server/stdinhand.c:2921
+#: server/stdinhand.c:2920
 msgid "Sorry, one can't take players in this game."
 msgstr "آسف، لا يمكن أخذ لاعبيين في هذه اللعبة."
 
-#: server/stdinhand.c:2928
+#: server/stdinhand.c:2927
 msgid "Sorry, one can't take players already connected in this game."
 msgstr "آسف، لا يمكن أخد لاعبيين متصليين أصلا في هذه اللعبة."
 
-#: server/stdinhand.c:2965 server/stdinhand.c:3113
+#: server/stdinhand.c:2964 server/stdinhand.c:3112
 #, fuzzy
 msgid "Only the player name form is allowed."
 msgstr "ذلك الاسم غير مسموح."
 
-#: server/stdinhand.c:3015
+#: server/stdinhand.c:3014
 #, c-format
 msgid "%s already controls %s. Using 'observe' would remove %s"
 msgstr "يسيطر %s أصلا على %s. استعمال 'observe' سيزيل %s"
 
-#: server/stdinhand.c:3026
+#: server/stdinhand.c:3025
 #, c-format
 msgid "%s is already observing %s."
 msgstr "يراقب %s أصلا %s."
 
-#: server/stdinhand.c:3031
+#: server/stdinhand.c:3030
 #, c-format
 msgid "%s is already observing."
 msgstr "يقوم %s بالمراقبة أصلا."
 
-#: server/stdinhand.c:3063
+#: server/stdinhand.c:3062
 #, c-format
 msgid "%s now observes %s"
 msgstr "يراقب %s اﻵن %s"
 
-#: server/stdinhand.c:3067
+#: server/stdinhand.c:3066
 #, c-format
 msgid "%s now observes"
 msgstr "يراقب %s اﻵن"
 
-#: server/stdinhand.c:3134
+#: server/stdinhand.c:3133
 #, fuzzy
 msgid "You cannot issue \"/take -\" when the game already started."
 msgstr "لا يمكن إزالة اللاعبيين متى بدأت اللعبة."
 
-#: server/stdinhand.c:3164
+#: server/stdinhand.c:3163
 #, fuzzy, c-format
 msgid "%s already controls %s."
 msgstr "يسيطر %s أصلا على %s"
 
-#: server/stdinhand.c:3178
+#: server/stdinhand.c:3177
 #, fuzzy, c-format
 msgid "There is no free player slot for %s."
 msgstr "لا يوجد هناك لاعب أو اتصال باسم %s."
 
-#: server/stdinhand.c:3196
+#: server/stdinhand.c:3195
 #, fuzzy, c-format
 msgid "Reassigned nation to %s by server console."
 msgstr "يمكن أن "
 
-#: server/stdinhand.c:3201
+#: server/stdinhand.c:3200
 #, c-format
 msgid "Reassigned nation to %s by %s."
 msgstr ""
 
-#: server/stdinhand.c:3240
+#: server/stdinhand.c:3239
 #, fuzzy, c-format
 msgid "%s now controls %s (%s, %s)."
 msgstr "يملك %s اﻵن %s (%s, %s)"
 
-#: server/stdinhand.c:3244 server/stdinhand.c:4450
+#: server/stdinhand.c:3243 server/stdinhand.c:4488
 #: data/nation/barbarian.ruleset:3
 msgid "Barbarian"
 msgstr "بربري"
 
-#: server/stdinhand.c:3246 server/stdinhand.c:4452 client/plrdlg_common.c:264
+#: server/stdinhand.c:3245 server/stdinhand.c:4490 client/plrdlg_common.c:264
 #: client/gui-gtk-2.0/pages.c:2100 client/gui-sdl/plrdlg.c:641
 #: client/gui-win32/connectdlg.c:202 client/gui-win32/plrdlg.c:333
 msgid "AI"
 msgstr "ذكاء اصطناعي"
 
-#: server/stdinhand.c:3247 server/stdinhand.c:4454
+#: server/stdinhand.c:3246 server/stdinhand.c:4492
 #: client/gui-gtk-2.0/pages.c:2100 client/gui-gtk-2.0/pages.c:2123
 #: client/gui-win32/connectdlg.c:202 client/gui-win32/connectdlg.c:214
 msgid "Human"
 msgstr "انساني"
 
-#: server/stdinhand.c:3249 client/gui-gtk-2.0/pages.c:2099
+#: server/stdinhand.c:3248 client/gui-gtk-2.0/pages.c:2099
 #: client/gui-gtk-2.0/pages.c:2122 client/gui-win32/connectdlg.c:201
 #: client/gui-win32/connectdlg.c:213
 msgid "Alive"
 msgstr "حي"
 
-#: server/stdinhand.c:3250 client/gui-gtk-2.0/pages.c:2099
+#: server/stdinhand.c:3249 client/gui-gtk-2.0/pages.c:2099
 #: client/gui-win32/connectdlg.c:201
 msgid "Dead"
 msgstr "ميت"
 
-#: server/stdinhand.c:3255
+#: server/stdinhand.c:3254
 #, fuzzy, c-format
 msgid "%s failed to attach to any player."
 msgstr "ال %s هو غير متصل إلى أي لاعب."
 
-#: server/stdinhand.c:3308
+#: server/stdinhand.c:3307
 msgid "You can not detach other users."
 msgstr "لا تستطيع فصل اللاعبين اﻵخرين."
 
-#: server/stdinhand.c:3317
+#: server/stdinhand.c:3316
 #, c-format
 msgid "%s is not attached to any player."
 msgstr "ال %s هو غير متصل إلى أي لاعب."
 
-#: server/stdinhand.c:3328
+#: server/stdinhand.c:3327
 #, c-format
 msgid "%s detaching from %s"
 msgstr "يفصل %s عن %s"
 
-#: server/stdinhand.c:3333
+#: server/stdinhand.c:3332
 #, c-format
 msgid "%s no longer observing."
 msgstr "لا يقوم  %s بالمراقبة بعد اﻵن."
 
-#: server/stdinhand.c:3436
+#: server/stdinhand.c:3435
 msgid "Cannot load a game while another is running."
 msgstr "لا يمكن تحميل لعبة عند وجود لعبة أخرى جارية."
 
-#: server/stdinhand.c:3452
+#: server/stdinhand.c:3471
+#, c-format
+msgid "Cannot find savegame or scenario with the name \"%s\"."
+msgstr "فشل العثور على لعبة محفوظة أو سيناريو بهذا الاسم \"%s\"."
+
+#: server/stdinhand.c:3485
 #, c-format
 msgid "Could not load savefile: %s"
 msgstr "فشل تحميل ملف محفوظ: %s"
 
-#: server/stdinhand.c:3545
+#: server/stdinhand.c:3578
 #, c-format
 msgid "Current ruleset directory is \"%s\""
 msgstr "دليل مجموعة القواعد الحالي هو \"%s\""
 
-#: server/stdinhand.c:3566
+#: server/stdinhand.c:3599
 #, c-format
 msgid "Ruleset directory \"%s\" not found"
 msgstr "دليل مجموعة القواعد \"%s\" غير موجود"
 
-#: server/stdinhand.c:3572
+#: server/stdinhand.c:3605
 #, c-format
 msgid "Ruleset directory is already \"%s\""
 msgstr "دليل مجموعة القواعد هو أصلا  \"%s\""
 
-#: server/stdinhand.c:3576
+#: server/stdinhand.c:3609
 #, c-format
 msgid "Ruleset directory set to \"%s\""
 msgstr "تم تحديد دليل مجموعة القواعد ب \"%s\""
 
-#: server/stdinhand.c:3624
+#: server/stdinhand.c:3657
 msgid "Goodbye."
 msgstr "مع السّلامة."
 
-#: server/stdinhand.c:3665
+#: server/stdinhand.c:3698
 msgid "Sorry, you are not allowed to use server commands."
 msgstr "آسف، لا يُسْمح لك استخدام أوامر الخادم."
 
-#: server/stdinhand.c:3715
+#: server/stdinhand.c:3748
 #, c-format
 msgid "Warning: '%s' interpreted as '%s', but it is ambiguous.  Try '%shelp'."
 msgstr "تحذير: تم تفسير '%s' ك '%s', ولكنه مبهم.  حاول '%shelp'."
 
-#: server/stdinhand.c:3720
+#: server/stdinhand.c:3753
 #, c-format
 msgid "Unknown command.  Try '%shelp'."
 msgstr "الأمر مجهول.  حاول '%shelp'."
 
-#: server/stdinhand.c:3734
+#: server/stdinhand.c:3772
 #, fuzzy
 msgid "Your new vote cancelled your previous vote."
 msgstr "الغى تصويتك القديم تصويتك السابق."
 
-#: server/stdinhand.c:3748
+#: server/stdinhand.c:3786
 msgid "New teamvote"
 msgstr ""
 
-#: server/stdinhand.c:3757
+#: server/stdinhand.c:3795
 #, fuzzy, c-format
 msgid "%s (number %d) by %s: %s"
 msgstr "تصويت جديد (رقم %d) من قبل %s: %s."
 
-#: server/stdinhand.c:3766
+#: server/stdinhand.c:3804
 #, c-format
 msgid "Your new vote (\"%s\") was not legal or was not recognized."
 msgstr ""
 
-#: server/stdinhand.c:3792
+#: server/stdinhand.c:3830
 msgid "(server prompt)"
 msgstr ""
 
-#: server/stdinhand.c:3903
+#: server/stdinhand.c:3941
 msgid "Game ended in a draw."
 msgstr "انتهت اللعبة بتعادل."
 
-#: server/stdinhand.c:3907
+#: server/stdinhand.c:3945
 msgid ""
 "Ending the game. The server will restart once all clients have disconnected."
 msgstr "جاري انهاء اللعبة. سيعاد تشغيل الخادم بعد انفصال كل العملاء."
 
-#: server/stdinhand.c:3912
+#: server/stdinhand.c:3950
 msgid "Cannot end the game: no game running."
 msgstr "لا يمكن انهاء اللعبة: لا وجود للعبة جارية."
 
-#: server/stdinhand.c:3929
+#: server/stdinhand.c:3967
 #, c-format
 msgid "%s has conceded the game and can no longer win."
 msgstr "استسلم %s وهكذا لا يستطيع الفوز بعد اﻵن."
 
-#: server/stdinhand.c:3934
+#: server/stdinhand.c:3972
 msgid "You cannot surrender now."
 msgstr "لا تستطيع الاستسلام اﻵن."
 
-#: server/stdinhand.c:3955
+#: server/stdinhand.c:3993
 #, fuzzy, c-format
 msgid "Cannot load the script file '%s'"
 msgstr "لا يمكن قراءة ملف السكربت لسطر الأوامر '%s'."
 
-#: server/stdinhand.c:3962
+#: server/stdinhand.c:4000
 msgid "Settings re-initialized."
 msgstr ""
 
-#: server/stdinhand.c:4032
+#: server/stdinhand.c:4070
 #, fuzzy
 msgid "Not enough human players, game will not start."
 msgstr "لا يوجد لاعبيين كفاية, لن تبدأ اللعبة ."
 
-#: server/stdinhand.c:4037
+#: server/stdinhand.c:4075
 #, fuzzy
 msgid "No players, game will not start."
 msgstr "لا يوجد لاعبيين كفاية, لن تبدأ اللعبة ."
 
-#: server/stdinhand.c:4041
+#: server/stdinhand.c:4079
 #, fuzzy
 msgid "Not enough nations for all players, game will not start."
 msgstr "لا يوجد لاعبيين كفاية, لن تبدأ اللعبة ."
 
-#: server/stdinhand.c:4050
+#: server/stdinhand.c:4088
 msgid "All players are ready; starting game."
 msgstr "كل اللاعبيين جاهزين، جاري بدء اللعبة."
 
-#: server/stdinhand.c:4066
+#: server/stdinhand.c:4104
 msgid ""
 "Cannot start the game: the game is waiting for all clients to disconnect."
 msgstr "لا يمكن بدء اللعبة: تنتظر اللعبة كل العملاء أن ينفصلوا."
 
-#: server/stdinhand.c:4073
+#: server/stdinhand.c:4111
 msgid "Cannot start the game: it is already running."
 msgstr "لا يمكن بدء اللعبة: لقد بدأت أصلا."
 
-#: server/stdinhand.c:4104
+#: server/stdinhand.c:4142
 #, c-format
 msgid "Cutting connection %s."
 msgstr "جاري قطع الاتصال %s."
 
 #. TRANS: line break width 70
-#: server/stdinhand.c:4124
+#: server/stdinhand.c:4162
 #, fuzzy
 msgid ""
 "Welcome - this is the introductory help text for the Freeciv server.\n"
@@ -7621,81 +7626,81 @@ msgstr ""
 "\n"
 
 #. TRANS: <untranslated name> - translated short help
-#: server/stdinhand.c:4155
+#: server/stdinhand.c:4193
 #, fuzzy, c-format
 msgid "Command: %s  -  %s"
 msgstr "الأمر: %s  -  %s"
 
 #. TRANS: <untranslated name>
-#: server/stdinhand.c:4161
+#: server/stdinhand.c:4199
 #, fuzzy, c-format
 msgid "Command: %s"
 msgstr "الأمر: %s"
 
-#: server/stdinhand.c:4166
+#: server/stdinhand.c:4204
 msgid "Synopsis: "
 msgstr "الخلاصة: "
 
-#: server/stdinhand.c:4175
+#: server/stdinhand.c:4213
 #, c-format
 msgid "Level: %s"
 msgstr "المستوى: %s"
 
-#: server/stdinhand.c:4196
+#: server/stdinhand.c:4234
 msgid "The following server commands are available:"
 msgstr "أوامر الخادم التالية متوفرة:"
 
-#: server/stdinhand.c:4257
+#: server/stdinhand.c:4295
 #, c-format
 msgid "Possible matches: %s"
 msgstr ""
 
-#: server/stdinhand.c:4311
+#: server/stdinhand.c:4349
 #, c-format
 msgid "Help argument '%s' is ambiguous."
 msgstr "باريمتر المساعدة '%s' مبهم."
 
-#: server/stdinhand.c:4318
+#: server/stdinhand.c:4356
 #, c-format
 msgid "No match for help argument '%s'."
 msgstr "بلا مطابقة لبراميتر المساعدة '%s'."
 
-#: server/stdinhand.c:4384
+#: server/stdinhand.c:4422
 #, c-format
 msgid "Bad list argument: '%s'.  Try '%shelp list'."
 msgstr "خطأ باريمتر القائمة: '%s'.  جرب '%shelp القائمة'."
 
-#: server/stdinhand.c:4424
+#: server/stdinhand.c:4462
 msgid "List of players:"
 msgstr "قائمة اللاعبيين:"
 
-#: server/stdinhand.c:4429
+#: server/stdinhand.c:4467
 msgid "<no players>"
 msgstr "<بلا لاعبيين>"
 
-#: server/stdinhand.c:4446
+#: server/stdinhand.c:4484
 #, c-format
 msgid "user %s, "
 msgstr "المستخدم %s, "
 
-#: server/stdinhand.c:4457
+#: server/stdinhand.c:4495
 msgid ", Dead"
 msgstr ", ميت"
 
-#: server/stdinhand.c:4460
+#: server/stdinhand.c:4498
 #, c-format
 msgid ", difficulty level %s"
 msgstr ", مستوى الصعوبة %s"
 
-#: server/stdinhand.c:4473
+#: server/stdinhand.c:4511
 msgid ", ready"
 msgstr ", جاهز"
 
-#: server/stdinhand.c:4477
+#: server/stdinhand.c:4515
 msgid ", not ready"
 msgstr ", غير جاهز"
 
-#: server/stdinhand.c:4488
+#: server/stdinhand.c:4526
 #, c-format
 msgid " %d connection:"
 msgid_plural " %d connections:"
@@ -7703,21 +7708,21 @@ msgstr[0] " %d اتصال:"
 msgstr[1] "%d اتصالان:"
 msgstr[2] "%d اتصالات:"
 
-#: server/stdinhand.c:4494
+#: server/stdinhand.c:4532
 #, c-format
 msgid "  %s from %s (command access level %s), bufsize=%dkb"
 msgstr "  %s من %s (مستوى صلاحية الأمر %s), bufsize=%d ك.ب"
 
-#: server/stdinhand.c:4499
+#: server/stdinhand.c:4537
 msgid " (observer mode)"
 msgstr " (نمط المراقبة)"
 
-#: server/stdinhand.c:4515
+#: server/stdinhand.c:4553
 msgid "List of teams:"
 msgstr "قائمة الفرق:"
 
 #. TRANS: There will always be at least 2 players here.
-#: server/stdinhand.c:4524
+#: server/stdinhand.c:4562
 #, c-format
 msgid "%2d : '%s' : %d player"
 msgid_plural "%2d : '%s' : %d players"
@@ -7725,25 +7730,25 @@ msgstr[0] "%2d : '%s' : %d لاعب"
 msgstr[1] "%2d : '%s' : %d لاعبان"
 msgstr[2] "%2d : '%s' : %d لاعبيين"
 
-#: server/stdinhand.c:4546
+#: server/stdinhand.c:4584
 #, c-format
 msgid "%2d : '%s' : 1 player : %s"
 msgstr "%2d : '%s' : 1 لاعب : %s"
 
-#: server/stdinhand.c:4555
+#: server/stdinhand.c:4593
 #, c-format
 msgid "Empty team: %s"
 msgstr "فريق فارغ: %s"
 
-#: server/stdinhand.c:4566
+#: server/stdinhand.c:4604
 msgid "List of connections to server:"
 msgstr "قائمة الاتصالات إلى الخادم:"
 
-#: server/stdinhand.c:4570
+#: server/stdinhand.c:4608
 msgid "<no connections>"
 msgstr "<بلا اتصال>"
 
-#: server/stdinhand.c:4594
+#: server/stdinhand.c:4632
 msgid "List of scenarios available:"
 msgstr "قائمة السيناريوهات المتوفرة:"
 
@@ -28761,9 +28766,6 @@ msgstr ""
 
 #~ msgid "Sorry, you can't take a global observer. Observe it instead."
 #~ msgstr "آسف، لا يمكن أخد مراقب عالمي. راقبه بدلا من ذلك."
-
-#~ msgid "Cannot find savegame or scenario with the name \"%s\"."
-#~ msgstr "فشل العثور على لعبة محفوظة أو سيناريو بهذا الاسم \"%s\"."
 
 #~ msgid "Orders for %s aborted since they give an invalid location."
 #~ msgstr "تم الغاء الأوامر ل %s عن العمل لاعطائهم موقع خاطئ."

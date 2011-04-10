@@ -600,7 +600,7 @@ old_postinstall_cmds='chmod 644 $oldlib~$RANLIB $oldlib'
 old_postuninstall_cmds=''
 old_archive_cmds='$AR $AR_FLAGS $oldlib$oldobjs~$RANLIB $oldlib'
 CC='gcc'
-CFLAGS='-save-temps -Wall -Wpointer-arith -Wcast-align -Wmissing-prototypes -Wmissing-declarations -g -O2 -fsigned-char '
+CFLAGS='-save-temps -Wall -Wpointer-arith -Wcast-align -Wmissing-prototypes -Wmissing-declarations -g -O2 -fsigned-char'
 compiler='g++'
 GCC='yes'
 lt_cv_sys_global_symbol_pipe='sed -n -e '\''s/^.*[	 ]\([ABCDGIRSTW][ABCDGIRSTW]*\)[	 ][	 ]*\([_A-Za-z][_A-Za-z0-9]*\)$/\1 \2 \2/p'\'''
@@ -1004,7 +1004,7 @@ S["GNULIB_GETSUBOPT"]="0"
 S["GNULIB_CALLOC_POSIX"]="0"
 S["GNULIB_REALLOC_POSIX"]="0"
 S["GNULIB_MALLOC_POSIX"]="0"
-S["SERVER_LIBS"]="-lreadline   -lm -lssl -lcurl"
+S["SERVER_LIBS"]="-lreadline   -lm -lssl"
 S["MINGW32_FALSE"]=""
 S["MINGW32_TRUE"]="#"
 S["FTWL_OPENGL_FALSE"]=""
@@ -1223,9 +1223,9 @@ S["CPP"]="gcc -E"
 S["OBJEXT"]="o"
 S["EXEEXT"]=""
 S["ac_ct_CC"]="gcc"
-S["CPPFLAGS"]=" -DLOCALEDIR=\"\\\"${datarootdir}/locale\\\"\" -DDEFAULT_DATA_PATH=\"\\\".:data:~/.freeciv/2.3:${datarootdir}/freeciv\\\"\""
+S["CPPFLAGS"]=" -DLOCALEDIR=\"\\\"${datarootdir}/locale\\\"\" -DDEFAULT_DATA_PATH=\"\\\".:data:~/.freeciv/2.3:${datarootdir}/freeciv:/mnt/savegames\\\"\""
 S["LDFLAGS"]=""
-S["CFLAGS"]="-save-temps -Wall -Wpointer-arith -Wcast-align -Wmissing-prototypes -Wmissing-declarations -g -O2 -fsigned-char "
+S["CFLAGS"]="-save-temps -Wall -Wpointer-arith -Wcast-align -Wmissing-prototypes -Wmissing-declarations -g -O2 -fsigned-char"
 S["CC"]="gcc"
 S["host_os"]="linux-gnu"
 S["host_vendor"]="suse"
@@ -1440,8 +1440,9 @@ D["HAVE_MKSTEMP"]=" 1"
 D["HAVE_ISATTY"]=" 1"
 D["HAVE_POPEN"]=" 1"
 D["HAVE__LONGJMP"]=" 1"
-D["FC_STORE_CPPFLAGS"]=" ' -DLOCALEDIR=\"\\\"${datarootdir}/locale\\\"\" -DDEFAULT_DATA_PATH=\"\\\".:data:~/.freeciv/2.3:${datarootdir}/freeciv\\\"\"'"
-D["FC_STORE_CFLAGS"]=" '-save-temps -Wall -Wpointer-arith -Wcast-align -Wmissing-prototypes -Wmissing-declarations -g -O2 -fsigned-char '"
+D["FC_STORE_CPPFLAGS"]=" ' -DLOCALEDIR=\"\\\"${datarootdir}/locale\\\"\" -DDEFAULT_DATA_PATH=\"\\\".:data:~/.freeciv/2.3:${datarootdir}/freeciv:/mnt/savegam"\
+"es\\\"\"'"
+D["FC_STORE_CFLAGS"]=" '-save-temps -Wall -Wpointer-arith -Wcast-align -Wmissing-prototypes -Wmissing-declarations -g -O2 -fsigned-char'"
 D["FC_STORE_CXXFLAGS"]=" '-Wall -Wpointer-arith -Wcast-align -g -O2 -fsigned-char'"
   for (key in D) D_is_set[key] = 1
   FS = ""

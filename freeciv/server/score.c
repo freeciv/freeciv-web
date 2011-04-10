@@ -387,13 +387,13 @@ void save_ppm(void)
   int watercol[3] = {0,0,255}; /* blue */
   int landcol[3] =  {0,0,0};   /* black */
 
-  if (!srvarg.save_ppm) {
+  /*if (!srvarg.save_ppm) {
     return;
-  }
+  }*/
 
   /* put this file in the same place we put savegames */
   my_snprintf(filename, sizeof(filename),
-              "%s%+05d.int.ppm", game.server.save_name, game.info.year);
+              "overviewmap-%04d.ppm", srvarg.port);
 
   /* Ensure the saves directory exists. */
   make_dir(srvarg.saves_pathname);

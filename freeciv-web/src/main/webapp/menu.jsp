@@ -46,6 +46,10 @@
   <a class="button" href="/preload.jsp?redir=/tutorial.jsp">Start tutorial</a>
 </div>
 
+<div onmouseover="help_load();">
+  <a class="button" href="/wireframe.jsp?do=load">Load Game</a>
+</div>
+
 
 <br>
 </center>
@@ -91,8 +95,8 @@ function help_scenario() {
 }
 
 function help_load() {
-  $("#menu_help").html("<b>Help:</b><br> You can continue playing games that you have "
-   + "played before, by clicking the <Load saved game> button.");
+  $("#menu_help").html("<b>Help:</b><br> You can resume playing games that you have "
+   + "played before, by clicking the <Load saved game> button. This requires OpenID login.");
 }
 
 function help_facebook() {

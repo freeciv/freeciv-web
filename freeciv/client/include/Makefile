@@ -85,10 +85,10 @@ CATALOGS =  ar.gmo cs.gmo ca.gmo da.gmo de.gmo el.gmo en_GB.gmo eo.gmo es.gmo et
 CATOBJEXT = .gmo
 CC = gcc
 CCDEPMODE = depmode=gcc3
-CFLAGS = -save-temps -Wall -Wpointer-arith -Wcast-align -Wmissing-prototypes -Wmissing-declarations -g -O2 -fsigned-char 
+CFLAGS = -save-temps -Wall -Wpointer-arith -Wcast-align -Wmissing-prototypes -Wmissing-declarations -g -O2 -fsigned-char
 CONFIGURE_DEPENDENCIES =  $(top_srcdir)/version.in
 CPP = gcc -E
-CPPFLAGS =  -DLOCALEDIR="\"${datarootdir}/locale\"" -DDEFAULT_DATA_PATH="\".:data:~/.freeciv/2.3:${datarootdir}/freeciv\""
+CPPFLAGS =  -DLOCALEDIR="\"${datarootdir}/locale\"" -DDEFAULT_DATA_PATH="\".:data:~/.freeciv/2.3:${datarootdir}/freeciv:/mnt/savegames\""
 CXX = g++
 CXXCPP = g++ -E
 CXXDEPMODE = depmode=gcc3
@@ -236,7 +236,7 @@ SDL_CFLAGS =
 SDL_CONFIG = 
 SDL_LIBS = 
 SED = /usr/bin/sed
-SERVER_LIBS = -lreadline   -lm -lssl -lcurl
+SERVER_LIBS = -lreadline   -lm -lssl
 SET_MAKE = 
 SHELL = /bin/sh
 SOUND_CFLAGS = 

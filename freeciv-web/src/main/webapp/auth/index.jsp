@@ -25,8 +25,8 @@ $(document).ready(function() {
 <div id="main_column">
 
 <h2>Login to play Freeciv.net</h2>
-<p>Freeciv.net uses <a href="http://openid.net/">OpenID</a> to allow users to sign-in to the site.
-This means that you can easily and safely use your existing username and password from Google, Yahoo, or any other valid OpenID provider to log-in.
+<p>Freeciv.net supports <a href="http://openid.net/">OpenID</a> to allow players to sign-in to the game.
+This means that you can easily and safely use your existing username and password from Google, Yahoo, or any other valid OpenID provider to log-in. 
 </p>
 <br/>
 

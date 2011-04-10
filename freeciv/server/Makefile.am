@@ -23,8 +23,6 @@ libfreeciv_srv_la_SOURCES = \
 		aiiface.h	\
 		auth.c		\
 		auth.h		\
-		aws4c.c		\
-		aws4c.h		\
 		barbarian.c	\
 		barbarian.h	\
 		cityhand.c	\
@@ -61,8 +59,6 @@ libfreeciv_srv_la_SOURCES = \
 		meta.h		\
 		notify.c	\
 		notify.h	\
-		netsave.c	\
-		netsave.h	\
 		plrhand.c	\
 		plrhand.h	\
 		report.c	\

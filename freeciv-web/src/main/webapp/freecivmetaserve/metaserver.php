@@ -335,7 +335,7 @@ if ( isset($port) ) {
 
 <link rel="shortcut icon" href="/images/freeciv-forever-icon.png" />
 
-<script type="text/javascript" src="/javascript-compressed/jquery-1.5.1.min.js"></script>
+<script type="text/javascript" src="/javascript-compressed/jquery-1.5.2.min.js"></script>
 <script type="text/javascript" src="/javascript/jquery-ui-1.8.9.custom.min.js"></script>
 
 
@@ -382,7 +382,8 @@ if ( isset($port) ) {
         print "Cannot find the specified server";
       } else {
         $row = fcdb_fetch_array($res, 0);
-        
+
+	print "<img src='/freecivmetaserve/overviewmap-" . db2html($row["port"]) . ".ppm.png' width='250' height='170' style='padding: 5px;'></a>";
         if ($row["state"] == "Pregame") {
           print "<div><a class='button' href='http://" . db2html($host) . "/civclientlauncher?civserverport=" . db2html($port) . "&amp;civserverhost=" . db2html($host)
              . "'>Join</a> <b>You can join this game now.</b></div>";
@@ -458,26 +459,35 @@ if ( isset($port) ) {
       }
     } else {
        print "<h1>Freeciv.net single-player games</h1>\n";
-      $stmt="select host,port,version,patches,state,message,unix_timestamp()-unix_timestamp(stamp), IFNULL((select user from players p where p.hostport =  CONCAT(s.host ,':',s.port) and p.type = 'Human' Limit 1 ), 'none') as player, IFNULL((select flag from players p where p.hostport =  CONCAT(s.host ,':',s.port) and p.type = 'Human' Limit 1 ), 'none') as flag from servers s where topic = 'Singleplayer' and state = 'Running' order by state,host,port asc";
+      $stmt="select host,port,version,patches,state,message,unix_timestamp()-unix_timestamp(stamp), IFNULL((select user from players p where p.hostport =  CONCAT(s.host ,':',s.port) and p.type = 'Human' Limit 1 ), 'none') as player, IFNULL((select flag from players p where p.hostport =  CONCAT(s.host ,':',s.port) and p.type = 'Human' Limit 1 ), 'none') as flag, (select value from variables where name = 'turn' and hostport = CONCAT(s.host ,':',s.port)) as turn from servers s where topic = 'Singleplayer' and state = 'Running' order by turn,port asc";
       $res = fcdb_exec($stmt);
       $nr = fcdb_num_rows($res);
       if ( $nr > 0 ) {
         print "<br /><table>\n";
-        print "<tr id='meta_header'><th class=\"left\">Action:</th><th>Server ID:</th>";
+        print "<tr id='meta_header'><th class=\"left\">Game Map:</th><th>Game Action:</th>";
         print "<th>State</th><th>Players</th>";
         print "<th style='width:45%;'>Topic</th>";
         print "<th>Player</th>\n";
-        print "<th>Info:</th></tr>";
+        print "<th>Turn:</th></tr>";
         for ( $inx = 0; $inx < $nr; $inx++ ) {
           $row = fcdb_fetch_array($res, $inx);
           print "<tr id='meta_row'><td class=\"left\">";
-          print "<a class='button' href=\"http://" . db2html($row["host"]) . "/civclientlauncher?action=observe&civserverport=" . db2html($row["port"]) . "&civserverhost=" . db2html($row["host"]) . "\">";
-          //print db2html($row["port"]);
+	  print "<a href=\"/freecivmetaserve/metaserver.php?server_port=" . db2html($row["host"]) . ":" . db2html($row["port"]) . "\">
+		  <img src='/freecivmetaserve/overviewmap-" . db2html($row["port"]) . ".ppm.png' width='140' height='90' style='padding: 5px;'></a>";
+          print "</td><td>";
+
+	  	  print "<a id='meta_button' class='button' href=\"http://" . db2html($row["host"]) 
+		  . "/civclientlauncher?action=observe&civserverport=" 
+		  . db2html($row["port"]) . "&civserverhost=" . db2html($row["host"]) . "\">";
           print "Observe";
           print "</a>";
-          print "</td><td>";
-	  	  print db2html($row["port"]);
-          print "</td><td>";
+
+          print "<a id='meta_button' class='button' href=\"/freecivmetaserve/metaserver.php?server_port=" . db2html($row["host"]) . ":" . db2html($row["port"]) . "\">";
+	  	  print "Info";
+          print "</a>";
+
+
+	  print "</td><td>";
           print db2html($row["state"]);
           print "</td><td>";
           $stmt="select * from players where hostport=\"".$row['host'].":".$row['port']."\"";
@@ -489,13 +499,9 @@ if ( isset($port) ) {
 	  print "<img src='/tiles/f." . db2html($row["flag"]) . ".png'>&nbsp;";
 
           print db2html($row["player"]);
-	  	  print "</td>"
-	  	  print "<td>";
-          print "<a class='button' href=\"/freecivmetaserve/metaserver.php?server_port=" . db2html($row["host"]) . ":" . db2html($row["port"]) . "\">";
-	  	  print "Info";
-          print "</a>";
-          print "</td>";
-	  	  print "</tr>\n";
+	  print "</td><td>"
+          print db2html($row["turn"]);
+	  print "</td></tr>\n";
         }
         print "</table>";
       } else {
@@ -521,66 +527,62 @@ if ( isset($port) ) {
 
       print "<br><br>";
       print "<h1>Freeciv.net multiplayer games around the world</h1><br />\n";
-      $stmt="select host,port,version,patches,state,message,unix_timestamp()-unix_timestamp(stamp),available from servers where topic = 'Multiplayer' order by state,host,port asc";
+      $stmt="select host,port,version,patches,state,message,unix_timestamp()-unix_timestamp(stamp), (select value from variables where name = 'turn' and hostport = CONCAT(s.host ,':',s.port)) as turn from servers s where topic = 'Multiplayer' order by state desc";
       $res = fcdb_exec($stmt);
       $nr = fcdb_num_rows($res);
       if ( $nr > 0 ) {
-        print "<table>\n";
-        print "<tr id='meta_header'><th class=\"left\">Action:</th><th>Server ID:</th>";
+	print "<table>\n";
+        print "<tr id='meta_header'><th class=\"left\">Game Map:</th><th>Game Action:</th>";
         print "<th>State</th><th>Players</th>";
-        print "<th style='width:45%;'>Topic</th><th>Last Update</th>";
-        print "<th>Info:</th></tr>";
-        for ( $inx = 0; $inx < $nr; $inx++ ) {
-	  $row = fcdb_fetch_array($res, $inx);
-          $stmt="select * from players where hostport=\"".$row['host'].":".$row['port']."\"";
-	  $res1 = fcdb_exec($stmt);
-	  $noplayers = fcdb_num_rows($res1);
-          if ( $noplayers > 0 ) 
-            print "<tr id='meta_row_active'><td class=\"left\">";
-	  else 
-            print "<tr id='meta_row'><td class=\"left\">";
+        print "<th style='width:45%;'>Topic</th>";
+        print "<th>Turn:</th></tr>";
 
+        for ( $inx = 0; $inx < $nr; $inx++ ) {
+ 	  $row = fcdb_fetch_array($res, $inx);
 	  $mystate = db2html($row["state"]);
 
+          print "<tr id='meta_row'><td class=\"left\">";
+          if ($mystate == "Running") {
+	    print "<a href=\"/freecivmetaserve/metaserver.php?server_port=" . db2html($row["host"]) . ":" . db2html($row["port"]) . "\">
+		    <img src='/freecivmetaserve/overviewmap-" . db2html($row["port"]) . ".ppm.png' width='140' height='90' style='padding: 5px;'></a>";
+	  }
+          print "</td><td>";
 	  
+  
           if ($mystate != "Running") {
-           print "<a class='button' href=\"http://" . db2html($row["host"]) . "/civclientlauncher?civserverport=" . db2html($row["port"]) . "&civserverhost=" . db2html($row["host"]) . "\">";
+           print "<a id='meta_button' class='button' href=\"/civclientlauncher?civserverport=" . db2html($row["port"]) . "&civserverhost=" . db2html($row["host"]) . "\">";
            print "Play";
 	   print "</a>";
 	  } else {
-	   print "<a class='button' href=\"http://" . db2html($row["host"]) . "/civclientlauncher?action=observe&civserverport=" . db2html($row["port"]) . "&civserverhost=" . db2html($row["host"]) . "\">";
+	   print "<a id='meta_button' class='button' href=\"/civclientlauncher?action=observe&civserverport=" . db2html($row["port"]) . "&civserverhost=" . db2html($row["host"]) . "\">";
            print "Observe";
            print "</a>";
 	  }
 
-          print "</td><td>";
-	  	  print db2html($row["port"]);
-          print "</td>";
+
+          print "<a id='meta_button' class='button' href=\"/freecivmetaserve/metaserver.php?server_port=" . db2html($row["host"]) . ":" . db2html($row["port"]) . "\">";
+	  	  print "Info";
+          print "</a>";
+
+	  print "</td>";
           if ($mystate == "Running") {
-  	    print "<td style='color: orange;'>";
+  	    print "<td style='color: green;'>";
 	  } else {
   	    print "<td>";
   	  }
-	  print $mystate;
 
-	  print "</td><td>";
-          print $noplayers;
+          print db2html($row["state"]);
+          print "</td><td>";
+          $stmt="select * from players where hostport=\"".$row['host'].":".$row['port']."\"";
+          $res1 = fcdb_exec($stmt);
+          print fcdb_num_rows($res1);
           print "</td><td style=\"width: 30%\" title='To change the message in the topic, use the command:  /metamessage your-new-message in the game.'>";
           print db2html($row["message"]);
-          print "</td><td>";
-          $time_sec = $row["unix_timestamp()-unix_timestamp(stamp)"];
-          $last_update = sprintf("%ss", $time_sec);
-          if ($time_sec >= 60) {
-            $last_update = sprintf("%sm", floor($time_sec/60));
-          }
-          print $last_update;
-	  	  print "</td>"
-	  	  print "<td>";
-          print "<a class='button' href=\"/freecivmetaserve/metaserver.php?server_port=" . db2html($row["host"]) . ":" . db2html($row["port"]) . "\">";
-	  	  print "Info";
-          print "</a>";
-          print "</td>";
-	  	  print "</tr>\n";
+	  print "</td><td>"
+          print db2html($row["turn"]);
+	  print "</td></tr>\n";
+
+
         }
         print "</table>";
       } else {
@@ -658,6 +660,7 @@ pageTracker._trackPageview();
 
 <script>
 		$( ".button").button();
+		$( ".button").css("font-size", "13px");
 </script>
 
 

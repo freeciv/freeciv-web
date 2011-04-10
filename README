@@ -96,6 +96,9 @@ Compiling and running the Freeciv Web client
    make
    make install     (as root user)
 
+   Create the Freeciv savegame directory:  /mnt/savegames
+   and make it writeable by the user running publite.
+
 
 5. Start resin with these commands:  
    cd /opt/resin/bin
@@ -119,7 +122,7 @@ http://localhost:8082/civ/status
 
 FIXME: Had to add -lssl when compiling server...
 
-- create .awsAuth and change mode like this:  chmod 600 .awsAuth
+
 
 
 Also: 

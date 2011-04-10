@@ -100,7 +100,6 @@
 #include "gamehand.h"
 #include "ggzserver.h"
 #include "handchat.h"
-#include "netsave.h"
 #include "maphand.h"
 #include "meta.h"
 #include "notify.h"
@@ -1007,6 +1006,13 @@ static int generate_save_name(char *buf, int buflen, bool is_auto_save,
 {
   int nb, year;
   const char *year_suffix;
+  time_t     now;
+  struct tm  *ts;
+  char buff[80];
+
+  now = time(0); 
+  ts = localtime(&now);
+  strftime(buff, sizeof(buff), "%Y-%m-%d-%H-%M-%S", ts);
 
   if (game.info.year < 0) {
     year = -game.info.year;
@@ -1019,13 +1025,14 @@ static int generate_save_name(char *buf, int buflen, bool is_auto_save,
   /* NB: If you change the format here, be sure to update the above
    * function comment and the help text for the 'savename' setting. */
   if (reason == NULL) {
-    nb = my_snprintf(buf, buflen, "%s-T%03d-Y%d%s%s",
+    nb = my_snprintf(buf, buflen, "%s-T%03d-Y%d%s%s-%s",
                      game.server.save_name, game.info.turn, year,
-                     year_suffix, is_auto_save ? "" : "m");
+                     year_suffix, is_auto_save ? "" : "m",
+		     buff);
   } else {
-    nb = my_snprintf(buf, buflen, "%s-%s-T%03d-Y%d%s%s",
+    nb = my_snprintf(buf, buflen, "%s-%s-T%03d-Y%d%s%s-%s",
                      game.server.save_name, reason, game.info.turn, year,
-                     year_suffix, is_auto_save ? "" : "m");
+                     year_suffix, is_auto_save ? "" : "m", buff);
   }
 
   return nb;
@@ -1038,18 +1045,16 @@ Always prints a message: either save ok, or failed.
 Note that if !HAVE_LIBZ, then game.info.save_compress_level should never
 become non-zero, so no need to check HAVE_LIBZ explicitly here as well.
 **************************************************************************/
-void save_game(char *orig_filename, const char *save_reason, bool scenario)
+void save_game(char *username, const char *save_reason, bool scenario)
 {
   char filename[600];
   char *dot;
   struct section_file file;
   struct timer *timer_cpu, *timer_user;
 
-  if (!orig_filename) {
+  if (!username) {
     con_write(C_FAIL, _("Failed saving game. Missing filename."));
     return;
-  } else {
-    sz_strlcpy(filename, orig_filename);
   }
 
   /* Strip extension. */
@@ -1057,10 +1062,7 @@ void save_game(char *orig_filename, const char *save_reason, bool scenario)
     *dot = '\0';
   }
 
-  /* If orig_filename is NULL or empty, use a generated default name. */
-  if (filename[0] == '\0'){
-    generate_save_name(filename, sizeof(filename), FALSE, NULL);
-  }
+  generate_save_name(filename, sizeof(filename), FALSE, NULL);
   
   timer_cpu = new_timer_start(TIMER_CPU, TIMER_ACTIVE);
   timer_user = new_timer_start(TIMER_USER, TIMER_ACTIVE);
@@ -1100,39 +1102,23 @@ void save_game(char *orig_filename, const char *save_reason, bool scenario)
   if (!path_is_absolute(filename)) {
     char tmpname[600];
 
-    if (!scenario) {
-      /* Ensure the saves directory exists. */
-      //make_dir(srvarg.saves_pathname);
+    sz_strlcpy(tmpname, srvarg.saves_pathname);
+    sz_strlcat(tmpname, username);
+    sz_strlcat(tmpname, "/");
+      
+    /* Ensure the saves directory exists. */
+    make_dir(tmpname);
 
-      sz_strlcpy(tmpname, srvarg.saves_pathname);
-    } else {
-      /* Make sure scenario directory exist */
-      //make_dir(srvarg.scenarios_pathname);
-
-      sz_strlcpy(tmpname, srvarg.scenarios_pathname);
-    }
-
-    if (tmpname[0] != '\0') {
-      sz_strlcat(tmpname, "/");
-    }
     sz_strlcat(tmpname, filename);
     sz_strlcpy(filename, tmpname);
   }
 
-
-  if (!net_file_save(&file, filename))
+  if (!section_file_save(&file, filename, game.info.save_compress_level,
+                         game.info.save_compress_type))
     con_write(C_FAIL, _("Failed saving game as %s"), filename);
   else
     con_write(C_OK, _("Game saved as %s"), filename);
 
-
-  /* Don't save to disk. Webclient saves to Amazon S3.
-
-    if (!section_file_save(&file, filename, game.info.save_compress_level,
-                         game.info.save_compress_type))
-    con_write(C_FAIL, _("Failed saving game as %s"), filename);
-  else
-    con_write(C_OK, _("Game saved as %s"), filename);*/
 
   section_file_free(&file);
 
@@ -1148,11 +1134,11 @@ Save game with autosave filename
 **************************************************************************/
 void save_game_auto(const char *save_reason, const char *reason_filename)
 {
-  char filename[512];
+  //char filename[512];
 
   assert(strlen(game.server.save_name)<256);
 
-  generate_save_name(filename, sizeof(filename), TRUE, reason_filename);
+  //generate_save_name(filename, sizeof(filename), TRUE, reason_filename);
   //save_game(filename, save_reason, FALSE);
   //save_ppm();
 }
@@ -2059,6 +2045,8 @@ static void srv_running(void)
 	}
 	save_counter++;
       }
+
+      save_ppm();
 
       freelog(LOG_DEBUG, "sniffingpackets");
       check_for_full_turn_done(); /* HACK: don't wait during AI phases */

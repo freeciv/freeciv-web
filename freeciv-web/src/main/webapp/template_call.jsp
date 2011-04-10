@@ -40,7 +40,7 @@
   <jsp:include page="404.jsp" flush="false"/>  
 
 <% } else if (act.equals("load")) { %>
-  <jsp:include page="/savegames/load.jsp" flush="false"/>
+  <jsp:include page="/load.jsp" flush="false"/>
   
 <% } else if (act.equals("scenarios")) { %>
   <jsp:include page="/savegames/scenarios.jsp" flush="false"/>  

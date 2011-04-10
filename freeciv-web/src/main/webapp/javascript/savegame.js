@@ -48,53 +48,15 @@ function load_game_real(filename)
 }
 
 /**************************************************************************
- Show the save game dialog.
-**************************************************************************/
-function show_savegame_dialog()
-{
-  $.ajax({url: "/savegames/save.jsp", 
-  		  success: function(msg){
-			     	$("#save_game_dialog").html(msg);
-			      	}
-  		});
-  		
-    $("#save_button").hide();
-
-}
-
-/**************************************************************************
  Save the game
 **************************************************************************/
 function save_game()
 {
-  var save_name = $("#save_name").val();
-  
-  if (save_name == null || save_name.length < 5 || !alpha_numeric_check(save_name)) {
-    $("#save_button").show();
-    $("#save_game_dialog").html("Invalid save game name. The name can only consist of "
-                    + "characters and numbers. It must also be at least 5 characters.");
-    return;
-  }
-  
-  if (save_name != null && save_name.length >= 5) {
-    var test_packet = [{"packet_type" : "chat_msg_req", 
-                 "message" : "/save " + username + "-savegame-" + save_name}];
-    var myJSONText = JSON.stringify(test_packet);
-    send_request (myJSONText);
-    
-    $("#save_button").show();
-    $("#save_game_dialog").html("Game saved.");
-  }
+  var test_packet = [{"packet_type" : "chat_msg_req", "message" : "/save"}];
+  var myJSONText = JSON.stringify(test_packet);
+  send_request(myJSONText);
+
+  $("#save_button").button("option", "label", "Game Saved");
+
 }
 
-/**************************************************************************
- Check filename of savegame
-**************************************************************************/
-function alpha_numeric_check(savegame){
-  var regex=/^[0-9A-Za-z]+$/; 
-  if  (regex.test(savegame)){
-    return true;
-  } else {
-    return false;
-  }
-}

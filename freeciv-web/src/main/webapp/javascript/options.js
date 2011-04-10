@@ -122,6 +122,7 @@ function init_options_dialog()
     $("#show_message_button").show();
   }
 
+  $("#save_button").button("option", "label", "Save Game");
 
 
 }

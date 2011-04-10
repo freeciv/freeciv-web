@@ -65,7 +65,6 @@
 #include "mapgen.h"
 #include "maphand.h"
 #include "meta.h"
-#include "netsave.h"
 #include "notify.h"
 #include "plrhand.h"
 #include "report.h"
@@ -3444,11 +3443,45 @@ bool load_command(struct connection *caller, const char *filename, bool check)
     return FALSE;
   }
 
-  sz_strlcpy(arg, filename);
+  {
+    /* it is a normal savegame or maybe a scenario */
+    char testfile[MAX_LEN_PATH];
+    char usrdir[MAX_LEN_PATH];
+
+    my_snprintf(usrdir, sizeof(usrdir), "%s/", 
+		caller->username);
+
+    const char *paths[] = { "", usrdir, "scenario/", NULL };
+    const char *exts[] = {
+      "sav", "gz", "bz2", "sav.gz", "sav.bz2", NULL
+    };
+    const char **path, **ext, *found = NULL;
+ 
+    for (path = paths; !found && *path; path++) {
+      for (ext = exts; !found && *ext; ext++) {
+        my_snprintf(testfile, sizeof(testfile), "%s%s.%s",
+                    *path, filename, *ext);
+        if ((found = datafilename(testfile))) {
+          sz_strlcpy(arg, found);
+        }
+      }
+    }
+
+    if (is_restricted(caller) && !found) {
+      cmd_reply(CMD_LOAD, caller, C_FAIL, _("Cannot find savegame or "
+                "scenario with the name \"%s\"."), filename);
+      return FALSE;
+    }
+
+    if (!found) {
+      sz_strlcpy(arg, filename);
+    }
+  }
+
 
   /* attempt to parse the file */
 
-  if (!net_file_load(&file, arg)) {
+  if (!section_file_load_nodup(&file, arg)) {
     cmd_reply(CMD_LOAD, caller, C_FAIL, _("Could not load savefile: %s"), arg);
     send_load_game_info(FALSE);
     return FALSE;
@@ -3722,6 +3755,11 @@ static bool handle_stdin_input_real(struct connection *caller, char *str,
   }
 
   level = command_level(command_by_number(cmd));
+
+  /* hack for web client: savegames are saved with username as proposed filename. */
+  if (cmd == CMD_SAVE && caller) {
+    sz_strlcpy(allargs, caller->username);
+  }
 
   if (conn_can_vote(caller, NULL) && level == ALLOW_CTRL
       && conn_get_access(caller) == ALLOW_BASIC && !check) {

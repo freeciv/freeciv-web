@@ -90,14 +90,14 @@ am__base_list = \
 am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(bindir)" \
 	"$(DESTDIR)$(desktopfiledir)"
 LTLIBRARIES = $(lib_LTLIBRARIES)
-am_libfreeciv_srv_la_OBJECTS = aiiface.lo auth.lo aws4c.lo \
-	barbarian.lo cityhand.lo citytools.lo cityturn.lo commands.lo \
+am_libfreeciv_srv_la_OBJECTS = aiiface.lo auth.lo barbarian.lo \
+	cityhand.lo citytools.lo cityturn.lo commands.lo \
 	connecthand.lo console.lo diplhand.lo diplomats.lo edithand.lo \
 	gamehand.lo gotohand.lo ggzserver.lo handchat.lo hand_gen.lo \
-	maphand.lo meta.lo notify.lo netsave.lo plrhand.lo report.lo \
-	ruleset.lo sanitycheck.lo savegame.lo score.lo sernet.lo \
-	settings.lo settlers.lo spacerace.lo srv_main.lo stdinhand.lo \
-	techtools.lo unithand.lo unittools.lo voting.lo
+	maphand.lo meta.lo notify.lo plrhand.lo report.lo ruleset.lo \
+	sanitycheck.lo savegame.lo score.lo sernet.lo settings.lo \
+	settlers.lo spacerace.lo srv_main.lo stdinhand.lo techtools.lo \
+	unithand.lo unittools.lo voting.lo
 libfreeciv_srv_la_OBJECTS = $(am_libfreeciv_srv_la_OBJECTS)
 PROGRAMS = $(bin_PROGRAMS)
 am_civserver_OBJECTS = civserver.$(OBJEXT)
@@ -179,10 +179,10 @@ CATALOGS =  ar.gmo cs.gmo ca.gmo da.gmo de.gmo el.gmo en_GB.gmo eo.gmo es.gmo et
 CATOBJEXT = .gmo
 CC = gcc
 CCDEPMODE = depmode=gcc3
-CFLAGS = -save-temps -Wall -Wpointer-arith -Wcast-align -Wmissing-prototypes -Wmissing-declarations -g -O2 -fsigned-char 
+CFLAGS = -save-temps -Wall -Wpointer-arith -Wcast-align -Wmissing-prototypes -Wmissing-declarations -g -O2 -fsigned-char
 CONFIGURE_DEPENDENCIES =  $(top_srcdir)/version.in
 CPP = gcc -E
-CPPFLAGS =  -DLOCALEDIR="\"${datarootdir}/locale\"" -DDEFAULT_DATA_PATH="\".:data:~/.freeciv/2.3:${datarootdir}/freeciv\""
+CPPFLAGS =  -DLOCALEDIR="\"${datarootdir}/locale\"" -DDEFAULT_DATA_PATH="\".:data:~/.freeciv/2.3:${datarootdir}/freeciv:/mnt/savegames\""
 CXX = g++
 CXXCPP = g++ -E
 CXXDEPMODE = depmode=gcc3
@@ -330,7 +330,7 @@ SDL_CFLAGS =
 SDL_CONFIG = 
 SDL_LIBS = 
 SED = /usr/bin/sed
-SERVER_LIBS = -lreadline   -lm -lssl -lcurl
+SERVER_LIBS = -lreadline   -lm -lssl
 SET_MAKE = 
 SHELL = /bin/sh
 SOUND_CFLAGS = 
@@ -441,8 +441,6 @@ libfreeciv_srv_la_SOURCES = \
 		aiiface.h	\
 		auth.c		\
 		auth.h		\
-		aws4c.c		\
-		aws4c.h		\
 		barbarian.c	\
 		barbarian.h	\
 		cityhand.c	\
@@ -479,8 +477,6 @@ libfreeciv_srv_la_SOURCES = \
 		meta.h		\
 		notify.c	\
 		notify.h	\
-		netsave.c	\
-		netsave.h	\
 		plrhand.c	\
 		plrhand.h	\
 		report.c	\
@@ -674,7 +670,6 @@ distclean-compile:
 
 include ./$(DEPDIR)/aiiface.Plo
 include ./$(DEPDIR)/auth.Plo
-include ./$(DEPDIR)/aws4c.Plo
 include ./$(DEPDIR)/barbarian.Plo
 include ./$(DEPDIR)/cityhand.Plo
 include ./$(DEPDIR)/citytools.Plo
@@ -693,7 +688,6 @@ include ./$(DEPDIR)/hand_gen.Plo
 include ./$(DEPDIR)/handchat.Plo
 include ./$(DEPDIR)/maphand.Plo
 include ./$(DEPDIR)/meta.Plo
-include ./$(DEPDIR)/netsave.Plo
 include ./$(DEPDIR)/notify.Plo
 include ./$(DEPDIR)/plrhand.Plo
 include ./$(DEPDIR)/report.Plo

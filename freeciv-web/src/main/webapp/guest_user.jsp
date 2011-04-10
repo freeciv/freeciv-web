@@ -19,17 +19,24 @@ if (username == null || "null".equals(username)) {
 
 <div style="text-align: center;">
 <center>
-<h2>Choose your username:</h2>
+<h2>Choose Player Name</h2>
 
 <div>
-	Please choose your player name:
+	<b>Please choose your player name, and click Login to begin playing:</b>
 </div>
+<br>
 
 <form name="guest_user" action="/wireframe.jsp" method="get">
-<input id="usr" type="text" size="20" name="username" value="">
+<input id="usr" type="text" size="15" name="username" value="" style="font-size: 20px">
 <input type="hidden" name="redir" value="<%= redir_url %>">
 <input type="hidden" name="do" value="guest_user">
 <input class="button" type="submit" value="Login">
+<br>
+<br>
+<br>
+
+<INPUT TYPE="CHECKBOX" NAME="openid" onclick="window.location='/wireframe.jsp?do=openid_login';">
+	<a href="/wireframe.jsp?do=openid_login">Login using OpenID</a>, which allows saving and loading games, if you want.
 </form>
 
 <br><br><br>

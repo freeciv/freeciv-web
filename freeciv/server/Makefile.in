@@ -90,14 +90,14 @@ am__base_list = \
 am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(bindir)" \
 	"$(DESTDIR)$(desktopfiledir)"
 LTLIBRARIES = $(lib_LTLIBRARIES)
-am_libfreeciv_srv_la_OBJECTS = aiiface.lo auth.lo aws4c.lo \
-	barbarian.lo cityhand.lo citytools.lo cityturn.lo commands.lo \
+am_libfreeciv_srv_la_OBJECTS = aiiface.lo auth.lo barbarian.lo \
+	cityhand.lo citytools.lo cityturn.lo commands.lo \
 	connecthand.lo console.lo diplhand.lo diplomats.lo edithand.lo \
 	gamehand.lo gotohand.lo ggzserver.lo handchat.lo hand_gen.lo \
-	maphand.lo meta.lo notify.lo netsave.lo plrhand.lo report.lo \
-	ruleset.lo sanitycheck.lo savegame.lo score.lo sernet.lo \
-	settings.lo settlers.lo spacerace.lo srv_main.lo stdinhand.lo \
-	techtools.lo unithand.lo unittools.lo voting.lo
+	maphand.lo meta.lo notify.lo plrhand.lo report.lo ruleset.lo \
+	sanitycheck.lo savegame.lo score.lo sernet.lo settings.lo \
+	settlers.lo spacerace.lo srv_main.lo stdinhand.lo techtools.lo \
+	unithand.lo unittools.lo voting.lo
 libfreeciv_srv_la_OBJECTS = $(am_libfreeciv_srv_la_OBJECTS)
 PROGRAMS = $(bin_PROGRAMS)
 am_civserver_OBJECTS = civserver.$(OBJEXT)
@@ -441,8 +441,6 @@ libfreeciv_srv_la_SOURCES = \
 		aiiface.h	\
 		auth.c		\
 		auth.h		\
-		aws4c.c		\
-		aws4c.h		\
 		barbarian.c	\
 		barbarian.h	\
 		cityhand.c	\
@@ -479,8 +477,6 @@ libfreeciv_srv_la_SOURCES = \
 		meta.h		\
 		notify.c	\
 		notify.h	\
-		netsave.c	\
-		netsave.h	\
 		plrhand.c	\
 		plrhand.h	\
 		report.c	\
@@ -674,7 +670,6 @@ distclean-compile:
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/aiiface.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/auth.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/aws4c.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/barbarian.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cityhand.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/citytools.Plo@am__quote@
@@ -693,7 +688,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/handchat.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/maphand.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/meta.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/netsave.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/notify.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/plrhand.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/report.Plo@am__quote@

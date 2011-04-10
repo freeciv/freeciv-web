@@ -3,6 +3,7 @@ set allowtake H1Ah1adOo
 set autotoggle 1
 set timeout 60
 set saveturns 0
+set scorelog 0
 set size 4
 set landm 50
 set minp 2

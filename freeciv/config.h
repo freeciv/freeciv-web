@@ -26,10 +26,10 @@
 #define FC_CONFIG_H 1
 
 /* These are the CFLAGS used in compilation */
-#define FC_STORE_CFLAGS '-save-temps -Wall -Wpointer-arith -Wcast-align -Wmissing-prototypes -Wmissing-declarations -g -O2 -fsigned-char '
+#define FC_STORE_CFLAGS '-save-temps -Wall -Wpointer-arith -Wcast-align -Wmissing-prototypes -Wmissing-declarations -g -O2 -fsigned-char'
 
 /* These are the CPPFLAGS used in compilation */
-#define FC_STORE_CPPFLAGS ' -DLOCALEDIR="\"${datarootdir}/locale\"" -DDEFAULT_DATA_PATH="\".:data:~/.freeciv/2.3:${datarootdir}/freeciv\""'
+#define FC_STORE_CPPFLAGS ' -DLOCALEDIR="\"${datarootdir}/locale\"" -DDEFAULT_DATA_PATH="\".:data:~/.freeciv/2.3:${datarootdir}/freeciv:/mnt/savegames\""'
 
 /* These are the CXXFLAGS used in compilation */
 #define FC_STORE_CXXFLAGS '-Wall -Wpointer-arith -Wcast-align -g -O2 -fsigned-char'

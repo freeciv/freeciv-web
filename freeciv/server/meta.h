@@ -17,7 +17,7 @@
 
 #define DEFAULT_META_SERVER_NO_SEND  TRUE
 #define DEFAULT_META_SERVER_ADDR     META_URL /* config.h */
-#define METASERVER_REFRESH_INTERVAL   (60)
+#define METASERVER_REFRESH_INTERVAL   (20)
 #define METASERVER_MIN_UPDATE_INTERVAL 7   /* not too short, not too long */
 
 enum meta_flag {

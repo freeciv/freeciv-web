@@ -23,7 +23,7 @@ if (username != null && (guest_mode != null && guest_mode == "false")) {
 
     for (int i=0; i<children.length; i++) {
         // Get filename of file or directory
-	String filename = children[i].getName().replaceAll(".bz2", "");
+	String filename = children[i].getName().replaceAll(".bz2", "").replaceAll(".gz", "");
 	out.println("<a class='button' href='/preload.jsp?redir=/civclientlauncher?action=load&load=" + filename + "'>" 
 		+ (children.length - i) + ". " + filename + "</a><br>");
     }

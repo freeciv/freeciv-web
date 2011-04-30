@@ -23,7 +23,8 @@ from urlparse import urlparse
 
 logger = logging.getLogger("freeciv-proxy");
 
-CIVSERVER_ROUNDTRIP_TIME = 0.035;  # 35ms roundtrip time for packets to civserver.
+MAX_WAIT_TIME = 1.0;  # max wait time for packets from civserver.
+INC_WAIT_TIME = 0.005  # waiting time betweeen checking for updates.
 PACKET_SIZE_WAIT_THRESHOLD = 4;
 REQ_QUEUE_SIZE = 70;
 FC_HTTP_TIMEOUT = 40;
@@ -114,15 +115,20 @@ class WebserverHandler(BaseHTTPRequestHandler):
               self.send_error(503,'Civserver communication failure: %s' % self.path)
               return;
  
-          # If client sent packet to server, then wait for server response.
-          # Sleep after packets are sent to civserver, to allow 
-          # time for packets to arrive at this proxy.
-          # This will speed up client server latency.
+  	  response_payload = civcom.get_send_result_string();
+
           if (PACKET_SIZE_WAIT_THRESHOLD < content_length):
-            time.sleep(CIVSERVER_ROUNDTRIP_TIME);
+            # If client sent packet to server, then wait for server response.
+            # Sleep after packets are sent to civserver, to allow 
+            # time for packets to arrive at this proxy.
+            # This will speed up client server latency.
+	    start_time = time.time();
+	    while (len(response_payload) < PACKET_SIZE_WAIT_THRESHOLD \
+		   and time.time() - start_time < MAX_WAIT_TIME):
+              time.sleep(INC_WAIT_TIME);
+              response_payload = civcom.get_send_result_string();
 
           # prepare reponse to webclient.
-	  response_payload = civcom.get_send_result_string();
 	  response_data = "".join(["HTTP/1.1 200 OK\nContent-Length: " + str(len(response_payload)), \
                                   "\nContent-Type: text/html\n\n", response_payload]);
 

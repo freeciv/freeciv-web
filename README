@@ -67,9 +67,9 @@ System Requirements
 
 - OpenSSL - http://www.openssl.org/
 
-- nginx 0.8.33 - http://nginx.org/
+- nginx 1.0.0 - http://nginx.org/
 
-- simplejson 2.1.1 optional: http://pypi.python.org/pypi/simplejson
+- simplejson 2.1.5 required: https://github.com/simplejson/simplejson
 
 - pngcrush, required for freeciv-img-extract.  http://pmt.sourceforge.net/pngcrush/
 

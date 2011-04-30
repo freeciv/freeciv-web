@@ -1002,6 +1002,24 @@ function request_goto_path(unit_id, dst_x, dst_y)
 }
 
 /****************************************************************************
+...
+****************************************************************************/
+function check_request_goto_path()
+{
+ if (goto_active && current_focus.length > 0 
+      && prev_mouse_x == mouse_x && prev_mouse_y == mouse_y) {
+    var ptile = canvas_pos_to_tile(mouse_x, mouse_y);
+    if (ptile != null) {
+      /* Send request for goto_path to server. */
+      request_goto_path(current_focus[0]['id'], ptile['x'], ptile['y']);
+    }
+  }
+  prev_mouse_x = mouse_x;
+  prev_mouse_y = mouse_y;
+
+}
+
+/****************************************************************************
   Show the GOTO path in the unit_goto_path packet.
 ****************************************************************************/
 function show_goto_path(goto_packet)

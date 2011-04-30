@@ -56,6 +56,8 @@ function civclient_init()
   update_game_status_panel();
   statusTimerId = setInterval("update_game_status_panel()", 6000);
   
+  mapviewRedrawingId = setInterval("update_map_canvas_full()", MAPVIEW_REFRESH_INTERVAL);
+  
 
 
   /*

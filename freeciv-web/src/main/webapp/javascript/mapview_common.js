@@ -17,7 +17,7 @@ var mapdeco_highlight_table = {};
 var mapdeco_crosshair_table = {};
 var mapdeco_gotoline_table = {};
 var last_redraw_time = 0;
-var MAPVIEW_REFRESH_INTERVAL = 200;
+var MAPVIEW_REFRESH_INTERVAL = 120;
 
 function mapdeco_init()
 {
@@ -539,7 +539,7 @@ function update_map_canvas_full()
 {
   if (tiles != null && civclient_state >= C_S_RUNNING) {
     //console.log("3. Mapview render begin at: " + new Date().getTime());
-    var start = new Date().getTime();
+    //var start = new Date().getTime();
     if (!sprites_init) init_cache_sprites();
   
     // If city dialog is open, don't redraw default mapview.
@@ -548,9 +548,11 @@ function update_map_canvas_full()
     update_map_canvas(0, 0, mapview['store_width'], mapview['store_height']);
     update_goto_path_lines(); 
  
-    last_redraw_time = new Date().getTime();
+    check_request_goto_path();
 
-    var time = last_redraw_time - start;
+    //last_redraw_time = new Date().getTime();
+
+    //var time = last_redraw_time - start;
     //console.log('Redraw time: ' + time);
     
   }

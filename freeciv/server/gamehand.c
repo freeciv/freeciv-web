@@ -369,6 +369,8 @@ void send_game_info(struct conn_list *dest)
     ginfo.seconds_to_phasedone = -1.0;
   }
 
+  ginfo.mapsize = map.server.size;
+
   conn_list_iterate(dest, pconn) {
     send_packet_game_info(pconn, &ginfo);
   }

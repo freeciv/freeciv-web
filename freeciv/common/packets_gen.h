@@ -103,6 +103,7 @@ struct packet_game_info {
   int tech;
   int skill_level;
   int aifill;
+  int mapsize;
   bool is_new_game;
   bool is_edit_mode;
   float seconds_to_phasedone;

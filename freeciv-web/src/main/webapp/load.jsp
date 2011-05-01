@@ -21,6 +21,9 @@
 <h2>Load Game</h2>
 
   <jsp:include page="/list_savegames.jsp" flush="false"/>
+  
+  <br><br><br>Note that your savegames are stored for 30 days, then they will be deleted.<br>
+
 
 <script>
 	$( ".button").button();

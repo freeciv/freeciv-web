@@ -8,8 +8,12 @@
 <script type="text/javascript" src="/javascript-compressed/webclient.js"></script>
 <script type="text/javascript" src="/javascript-compressed/jmenu.js"></script>
 <script type="text/javascript" src="/webclient/session.jsp"></script>
+<script type="text/javascript" src="http://cdn.socket.io/stable/socket.io.js"></script>
+<script>WEB_SOCKET_SWF_LOCATION = 'http://cdn.socket.io/stable/WebSocketMain.swf';</script>
 
-<link type="text/css" href="/stylesheets/dark-hive-1.8.9/jquery-ui-1.8.9.custom.css" rel="stylesheet" />
+
+
+<link type="text/css" href="/stylesheets/dark-hive-1.8.12/jquery-ui-1.8.12.custom.css" rel="stylesheet" />
 <link type="text/css" rel="StyleSheet" href="/stylesheets/bluecurve.css" />
 <link type="text/css" rel="StyleSheet" href="/stylesheets/jplayer.blue.monday.css" />
 <link type="text/css" rel="StyleSheet" href="/stylesheets/jmenu.css" />

@@ -11,7 +11,7 @@ The project is a fork of the C server from Freeciv.org, which has origins back t
 which would be playable online in a browser came about some time in 2007, and this project has evolved into what it is now since then. The first public beta release of Freeciv.net was available in December 2009, and the code is still under continuous development.
 
 <br><br>
-Freeciv.net requires a browser which supports HTML5 canvas, and a fast computer and internet connection.
+Freeciv.net requires a browser which supports HTML5, such as Firefox 4, Chrome 11, Safari, Opera, Internet Explorer 9. Freeciv.net uses many features from the HTML5 specification, such as HTML5 Canvas to render graphics and optionally HTML5 WebSockets for faster network performance.
 <br><br>
 Freeciv.net is developed by <a href="mailto:andrearo at pvv.ntnu.no">Andreas Rosdal</a>. The Freeciv.org project has been contributed to by <a href="http://freeciv.wikia.com/wiki/People">these people</a>.
 

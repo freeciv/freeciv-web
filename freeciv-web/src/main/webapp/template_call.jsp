@@ -43,27 +43,10 @@
   <jsp:include page="/load.jsp" flush="false"/>
   
 <% } else if (act.equals("scenarios")) { %>
-  <jsp:include page="/savegames/scenarios.jsp" flush="false"/>  
+  <jsp:include page="/scenarios.jsp" flush="false"/>  
   
-<% } else if (act.equals("facebook_login")) {  
-    // Facebook is the old authentication method.
-    response.sendRedirect("http://www.freeciv.net/facebook/");
     
-  } else if (act.equals("manual")) { %>
-  <script type="text/javascript" src="/javascript/jquery-ui-1.7.2.custom.min.js"></script>
-  <link type="text/css" href="/stylesheets/dark-hive/jquery-ui-1.7.2.custom.css" rel="stylesheet" />
-
-  <jsp:include page="/manual/index.jsp" flush="false"/>  
-  <script type="text/javascript">
-    $('#tabs_manual').tabs();
-  </script>
-  <style>
-    #body_content {
-      width: 1300px;
-    }
-  </style> 
-
-<% } else { 
+  <% } else { 
 
 response.sendRedirect("/index.html");
 

@@ -372,7 +372,9 @@ PACKET_GAME_INFO=15; sc
   UINT32 tech;
   UINT32 skill_level;
   
-  UINT8 aifill;
+  UINT32 aifill;
+  
+  UINT32 mapsize;
 
   BOOL is_new_game;   # TRUE only in pregame for "new" (not loaded) games
   BOOL is_edit_mode;  # If set, editing is allowed

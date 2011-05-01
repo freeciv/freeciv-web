@@ -73,6 +73,10 @@ System Requirements
 
 - pngcrush, required for freeciv-img-extract.  http://pmt.sourceforge.net/pngcrush/
 
+- SocketTornad.IO 0.0.4 - https://github.com/MrJoes/tornadio
+
+- Tornado 1.2.1 - http://www.tornadoweb.org/
+
 Compiling and running the Freeciv Web client
 ---------------------------------
 

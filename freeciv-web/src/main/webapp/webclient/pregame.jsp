@@ -9,6 +9,7 @@
 		<button type="button" class="button" onClick="leave_pregame();" >Leave Game</button>
 		<button id="observe_button" type="button" class="button" onClick="observe();" >Observe Game</button>
 		<button type="button" class="button" onClick="pick_nation();" >Pick Nation</button>
+		<button type="button" class="button" onClick="pregame_settings();" >Settings</button>
 	</div>
 
     <div id="share_icons">

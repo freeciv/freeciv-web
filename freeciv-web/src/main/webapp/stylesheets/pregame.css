@@ -97,7 +97,7 @@ body {
   width: 50%;
 }
 
-#nation_choice {
+.nation_choice {
   width: 180px; 
   margin-left: 60px; 
   cursor:pointer;

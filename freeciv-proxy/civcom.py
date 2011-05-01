@@ -45,8 +45,8 @@ class CivCom(Thread):
     self.pingstamp = time.time();
     self.stopped = False;
 
-    self.daemon = True;
 
+    self.daemon = True;
 
   def set_civwebserver(self, civwebserver):
     self.civwebserver = civwebserver;
@@ -95,7 +95,7 @@ class CivCom(Thread):
     size = MAX_LEN_PACKET;
     #TODO: les saa mye som trengs...
 
-    if (self.socket != None and self.key in self.civwebserver.civcoms.keys()):    
+    if (self.socket != None and not self.stopped):    
       data = self.socket.recv(size);
 
       # sleep a short while, to avoid excessive CPU use.
@@ -125,8 +125,10 @@ class CivCom(Thread):
   def close_connection(self):
     if (logger.isEnabledFor(logging.ERROR)):
       logger.error("Server connection closed. Removing civcom thread for " + self.username);
-    if (self.key in self.civwebserver.civcoms.keys()):
+    
+    if (hasattr(self.civwebserver, "civcoms") and self.key in self.civwebserver.civcoms.keys()):
       del self.civwebserver.civcoms[self.key];
+    
     if (self.socket != None):
       self.socket.close();
       self.socket = None; 
@@ -137,6 +139,12 @@ class CivCom(Thread):
     for packet in json_packets: 
       if not self.send_to_civserver(packet): return False;
     return True;
+
+  def send_packet_objects_to_civserver(self, packet_objects):
+    for packet in packet_objects: 
+      if not self.send_to_civserver(packet): return False;
+    return True;
+
 
   def send_to_civserver(self, net_packet_json):
        
@@ -196,4 +204,4 @@ class CivCom(Thread):
     msg['packet_type'] = "connect_msg";
     msg['message'] = message;
     self.send_buffer_append(msg);
-      
+     

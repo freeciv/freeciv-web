@@ -2558,8 +2558,14 @@ static struct packet_game_info *receive_packet_game_info_100(struct connection *
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint32(&din, &readin);
     real_packet->aifill = readin;
+  }
+  {
+    int readin;
+  
+    dio_get_uint32(&din, &readin);
+    real_packet->mapsize = readin;
   }
   dio_get_bool8(&din, &real_packet->is_new_game);
   dio_get_bool8(&din, &real_packet->is_edit_mode);
@@ -3198,7 +3204,8 @@ static int send_packet_game_info_100(struct connection *pc, const struct packet_
   dio_put_uint32(&dout, real_packet->gold);
   dio_put_uint32(&dout, real_packet->tech);
   dio_put_uint32(&dout, real_packet->skill_level);
-  dio_put_uint8(&dout, real_packet->aifill);
+  dio_put_uint32(&dout, real_packet->aifill);
+  dio_put_uint32(&dout, real_packet->mapsize);
   dio_put_bool8(&dout, real_packet->is_new_game);
   dio_put_bool8(&dout, real_packet->is_edit_mode);
   dio_put_uint32(&dout, (int)(real_packet->seconds_to_phasedone * 10000));

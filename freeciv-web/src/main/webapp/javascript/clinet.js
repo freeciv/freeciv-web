@@ -12,9 +12,14 @@
 ***********************************************************************/
 
 var civwebserver_url_base = "/civ";
+
+var websocket_enabled = true;
+
 var error_shown = false;
 var syncTimerId = -1;
 var isWorking = false;
+
+var ws = null;
 
 /****************************************************************************
   Initialized the network synchronization loop.
@@ -22,16 +27,46 @@ var isWorking = false;
 function network_init()
 {
   civwebserver_url = civwebserver_url_base + "?p=" + civserverport + "&u=" + username;
+  
+  websocket_enabled = $.jStorage.get("websocket_enabled");
+ 
+  if (websocket_enabled) {
+    network_websocket_init();
 
-  syncTimerId = setInterval("sync_civclient()", 1000);
+
+  } else {
+    syncTimerId = setInterval("sync_civclient()", 1000);
  
- $(document).ajaxComplete(function(){ 
-   isWorking = false;
- });
- 
- 
+     $(document).ajaxComplete(function(){ 
+       isWorking = false;
+     });
+
+
+  }
   
 }
+
+
+
+/****************************************************************************
+  Initialized the Websocket connection.
+****************************************************************************/
+function network_websocket_init()
+{
+  ws = new io.Socket(window.location.hostname, {port: 8002, rememberTransport: false});
+  ws.connect();
+
+  ws.addEvent('connect', function() {
+    ws.send("{\"u\":\"" + username + "\",\"p\":" + civserverport + ", \"data\":[]}");
+  });
+
+  ws.addEvent('message', function(data) {
+     client_handle_packet(jQuery.parseJSON(data));
+  });
+
+}
+
+
 
 /****************************************************************************
   Stops network sync.
@@ -84,7 +119,11 @@ function sync_civclient()
 ****************************************************************************/
 function send_request(packet_payload) 
 {
-  $.post(civwebserver_url, packet_payload, client_handle_packet, "json");
+  if (websocket_enabled) {
+    ws.send("{\"u\":\"" + username + "\",\"p\":" + civserverport + ", \"data\":" + packet_payload + "}");
+  } else {
+    $.post(civwebserver_url, packet_payload, client_handle_packet, "json");
+  }
 }
 
 

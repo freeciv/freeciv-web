@@ -88,9 +88,9 @@ function civclient_init()
     show_intro_dialog("Welcome to Freeciv.net", 
       "You have now joined the game. Before the game begins, " +
       "you can customize game options or wait for more players " +
-      "to join the game.  Type /help in the command line " +
-      "below to find out how to customize the game. <br><br>" +  
-      "Click the start game button to begin the game.");
+      "to join the game.  <br><br>" +  
+      "Click the start game button to begin the game immediately, or click " +
+      "customize game to change the game settings.");
   } else {
     autostartTimerId = setTimeout("iphone_autostart();", 1000);
     

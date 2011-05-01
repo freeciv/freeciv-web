@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ar\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-10 09:45+0200\n"
+"POT-Creation-Date: 2011-05-01 13:05+0200\n"
 "PO-Revision-Date: 2007-08-10 18:00+0300\n"
 "Last-Translator: Ahmad M. Zawawi <zeus_go64@yahoo.com>\n"
 "Language-Team: Arabic <freeciv-i18n@freeciv.org>\n"
@@ -4079,12 +4079,12 @@ msgstr "بلا أي وحدات مختارة."
 msgid "Year: %s"
 msgstr "السنة: %s"
 
-#: server/gamehand.c:423
+#: server/gamehand.c:425
 #, fuzzy
 msgid "The turn timeout has exceeded its maximum value, fixing at its maximum."
 msgstr "زادت مدة الخروج من الدور الحد الاعلى، جاري تثبيت على الحد الأعلى"
 
-#: server/gamehand.c:432
+#: server/gamehand.c:434
 msgid "The turn timeout is smaller than zero, fixing at zero."
 msgstr "مدة الخروج أقل من الصفر، جاري تثبيت على الصفر."
 

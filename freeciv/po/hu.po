@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Freeciv 1.14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-10 09:45+0200\n"
+"POT-Creation-Date: 2011-05-01 13:05+0200\n"
 "PO-Revision-Date: 2007-08-12 15:37+0300\n"
 "Last-Translator: Gábor Takács <tg330@hszk.bme.hu>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
@@ -4150,14 +4150,14 @@ msgstr "Nincs egység kiválasztva."
 msgid "Year: %s"
 msgstr "Év: %s"
 
-#: server/gamehand.c:423
+#: server/gamehand.c:425
 #, fuzzy
 msgid "The turn timeout has exceeded its maximum value, fixing at its maximum."
 msgstr ""
 "A körökre vonatkozó idõkorlát elérte a maximumát; rögzítés a maximális "
 "értéknél"
 
-#: server/gamehand.c:432
+#: server/gamehand.c:434
 msgid "The turn timeout is smaller than zero, fixing at zero."
 msgstr "A körökre vonatkozó idõkorlát kisebb mint nulla; rögzítés nullánál."
 

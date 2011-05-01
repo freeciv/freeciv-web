@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: freeciv 2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-10 09:45+0200\n"
+"POT-Creation-Date: 2011-05-01 13:05+0200\n"
 "PO-Revision-Date: 2009-07-29 12:14+0300\n"
 "Last-Translator: Sini Ruohomaa <sini.ruohomaa@iki.fi>\n"
 "Language-Team: Finnish <laatu@lokalisointi.org>\n"
@@ -4187,12 +4187,12 @@ msgstr "%s on jäänyt ilman yksiköitä!"
 msgid "Year: %s"
 msgstr "Vuosi: %s"
 
-#: server/gamehand.c:423
+#: server/gamehand.c:425
 #, fuzzy
 msgid "The turn timeout has exceeded its maximum value, fixing at its maximum."
 msgstr "Vuoron aikaraja on liian suuri ja palautetaan maksimiarvoon"
 
-#: server/gamehand.c:432
+#: server/gamehand.c:434
 msgid "The turn timeout is smaller than zero, fixing at zero."
 msgstr "Vuoron aikaraja on nollaa pienempi ja muutetaan nollaksi."
 

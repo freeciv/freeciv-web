@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Freeciv 1.15\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-10 09:45+0200\n"
+"POT-Creation-Date: 2011-05-01 13:05+0200\n"
 "PO-Revision-Date: 2007-08-12 15:06+0300\n"
 "Last-Translator: Frederic Rodrigo <f.rodrigo free.fr>\n"
 "Language-Team: <freeciv-l10n-fr@yahoogroupes.fr>\n"
@@ -4266,12 +4266,12 @@ msgstr "Pas d'unité sélectionnée."
 msgid "Year: %s"
 msgstr "Année : %s"
 
-#: server/gamehand.c:423
+#: server/gamehand.c:425
 #, fuzzy
 msgid "The turn timeout has exceeded its maximum value, fixing at its maximum."
 msgstr "Le timeout a dépassé sa valeur maximale, mis au maximum"
 
-#: server/gamehand.c:432
+#: server/gamehand.c:434
 msgid "The turn timeout is smaller than zero, fixing at zero."
 msgstr "Le timeout est inférieur à zéro, mis à zéro."
 

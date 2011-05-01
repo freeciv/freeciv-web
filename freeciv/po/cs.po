@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: freeciv 2.0.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-10 09:45+0200\n"
+"POT-Creation-Date: 2011-05-01 13:05+0200\n"
 "PO-Revision-Date: 2008-01-21 15:42+0100\n"
 "Last-Translator: Dusan Hokuv <dusan@mirc.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -4084,13 +4084,13 @@ msgstr "Jednotky pro zobrazování souřadnic."
 msgid "Year: %s"
 msgstr "Rok: %s"
 
-#: server/gamehand.c:423
+#: server/gamehand.c:425
 #, fuzzy
 msgid "The turn timeout has exceeded its maximum value, fixing at its maximum."
 msgstr ""
 "Čas na jedno kolo překročil maximální hodnotu, upraveno na maximální hodnotu"
 
-#: server/gamehand.c:432
+#: server/gamehand.c:434
 msgid "The turn timeout is smaller than zero, fixing at zero."
 msgstr "Čas na jedno kolo je menší než nula, upraveno na nulu."
 

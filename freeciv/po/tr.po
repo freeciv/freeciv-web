@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-10 09:45+0200\n"
+"POT-Creation-Date: 2011-05-01 13:05+0200\n"
 "PO-Revision-Date: 2008-06-01 16:36+0300\n"
 "Last-Translator: Uğur Çetin <jnmbk@users.sourceforge.net>\n"
 "Language-Team: Turkish <yerellestirme@kde.org.tr>\n"
@@ -4071,13 +4071,13 @@ msgstr "Seçilmiş birim yok."
 msgid "Year: %s"
 msgstr "Yıl: %s"
 
-#: server/gamehand.c:423
+#: server/gamehand.c:425
 #, fuzzy
 msgid "The turn timeout has exceeded its maximum value, fixing at its maximum."
 msgstr ""
 "Sıra zaman aşımı azami değerini aşmış durumda, azami değere getiriliyor"
 
-#: server/gamehand.c:432
+#: server/gamehand.c:434
 msgid "The turn timeout is smaller than zero, fixing at zero."
 msgstr "Sıra zaman aşımı sıfırdan düşük, sıfır yapılıyor."
 

@@ -23,9 +23,7 @@ import tornadio
 import tornadio.router
 import tornadio.server
 
-#import httplib
-
-from threading import Thread, RLock;
+from threading import Thread;
 
 from civcom import *
 from debugging import *
@@ -36,16 +34,17 @@ except ImportError:
     import json
 
 ROOT = op.normpath(op.dirname(__file__))
-WS_UPDATE_INTERVAL = 0.03;
+WS_UPDATE_INTERVAL = 0.025;
 
 civcoms = {};
 
 class IndexHandler(tornado.web.RequestHandler):
-    """Regular HTTP handler to serve the chatroom page"""
+    """Serves the Freeciv-proxy status page, on the url:  /status """
     def get(self):
         self.write(get_debug_info(civcoms))
 
-class ChatConnection(tornadio.SocketConnection):
+class CivConnection(tornadio.SocketConnection):
+    """ Serves the Freeciv WebSocket service. """
     participants = set()
 
     def on_open(self, request, *args, **kwargs):
@@ -53,9 +52,6 @@ class ChatConnection(tornadio.SocketConnection):
         self.participants.add(self);
 
     def on_message(self, message):
-        #for p in self.participants:
-        #    p.send(message)
-
 	net_data = json.loads(message);
 	packet_payload = net_data["data"];
 
@@ -91,10 +87,6 @@ class ChatConnection(tornadio.SocketConnection):
           self.civcom.close_connection();
           del civcoms[self.civcom.key];
 
-        #for p in self.participants:
-        #    p.send("A user has left.")
-
-
 
     # get the civcom instance which corresponds to the requested user.
     def get_civcom(self, username, civserverport, client_ip, ws_connection):
@@ -111,7 +103,7 @@ class ChatConnection(tornadio.SocketConnection):
         messenger = CivWsMessenger(civcom, ws_connection);
 	messenger.start();
 
-        time.sleep(0.5);
+        time.sleep(0.4);
         return civcom;
       else:
         usrcivcom = civcoms[key];
@@ -124,6 +116,8 @@ class ChatConnection(tornadio.SocketConnection):
 
 
 class CivWsMessenger(Thread):
+  """ This thread listens for messages from the civserver
+      and sends the message to the WebSocket client. """
 
   def __init__ (self, civcom, ws_connection):
     Thread.__init__(self)
@@ -142,11 +136,10 @@ class CivWsMessenger(Thread):
 
 
 
-
-ChatRouter = tornadio.get_router(ChatConnection)
+CivRouter = tornadio.get_router(CivConnection)
 
 application = tornado.web.Application(
-    [(r"/status", IndexHandler), ChatRouter.route()],
+    [(r"/status", IndexHandler), CivRouter.route()],
     enabled_protocols = ['websocket',
                          'flashsocket',
                          'xhr-multipart',

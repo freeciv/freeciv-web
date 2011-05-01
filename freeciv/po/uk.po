@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: freeciv 1.14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-10 09:45+0200\n"
+"POT-Creation-Date: 2011-05-01 13:05+0200\n"
 "PO-Revision-Date: 2007-09-05 04:24+0300\n"
 "Last-Translator: Roman Festchook <roma@polesye.net>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -4118,12 +4118,12 @@ msgstr "Нема п╕дрозд╕л╕в, розм╕щених у %s!"
 msgid "Year: %s"
 msgstr "Р╕к: %s"
 
-#: server/gamehand.c:423
+#: server/gamehand.c:425
 #, fuzzy
 msgid "The turn timeout has exceeded its maximum value, fixing at its maximum."
 msgstr "Таймаут ходу перевищу╓ максимум, виправляю на максимум."
 
-#: server/gamehand.c:432
+#: server/gamehand.c:434
 msgid "The turn timeout is smaller than zero, fixing at zero."
 msgstr "Таймаут ходу менше нуля, виправляю на нуль."
 

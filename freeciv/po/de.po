@@ -39,7 +39,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.15\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-10 09:45+0200\n"
+"POT-Creation-Date: 2011-05-01 13:05+0200\n"
 "PO-Revision-Date: 2009-03-24 22:03+0100\n"
 "Last-Translator: Christian Knoke <chrisk@cknoke.de>\n"
 "Language-Team: German Freeciv Translators <freeciv.de@freelists.org>\n"
@@ -4183,14 +4183,14 @@ msgstr "%s hat keine Einheiten!"
 msgid "Year: %s"
 msgstr "Jahr: %s"
 
-#: server/gamehand.c:423
+#: server/gamehand.c:425
 #, fuzzy
 msgid "The turn timeout has exceeded its maximum value, fixing at its maximum."
 msgstr ""
 "Die zulässige Rundenzeit hat das Maximum überschritten, sie wird auf den "
 "Maximalwert gesetzt."
 
-#: server/gamehand.c:432
+#: server/gamehand.c:434
 msgid "The turn timeout is smaller than zero, fixing at zero."
 msgstr "Die zulässige Rundenzeit ist negativ, sie wird auf Null gesetzt."
 

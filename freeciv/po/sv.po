@@ -61,7 +61,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Freeciv 2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-10 09:45+0200\n"
+"POT-Creation-Date: 2011-05-01 13:05+0200\n"
 "PO-Revision-Date: 2008-04-05 00:14+0100\n"
 "Last-Translator: Susanna Björverud <susanna.bjorverud@telia.com>\n"
 "Language-Team: Swedish <freeciv.sv@freelists.org>\n"
@@ -4172,14 +4172,14 @@ msgstr "Inga trupper har placerats ut för %s!"
 msgid "Year: %s"
 msgstr "År: %s"
 
-#: server/gamehand.c:423
+#: server/gamehand.c:425
 #, fuzzy
 msgid "The turn timeout has exceeded its maximum value, fixing at its maximum."
 msgstr ""
 "Omgångstidsgränsen har överskridit sitt största värde. Låser den vid sitt "
 "största värde."
 
-#: server/gamehand.c:432
+#: server/gamehand.c:434
 msgid "The turn timeout is smaller than zero, fixing at zero."
 msgstr "Omgångstidsgränsen är < 0. Låser den vid 0."
 

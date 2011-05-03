@@ -473,7 +473,7 @@ if ( isset($port) ) {
           $row = fcdb_fetch_array($res, $inx);
           print "<tr id='meta_row'><td class=\"left\">";
 	  print "<a href=\"/freecivmetaserve/metaserver.php?server_port=" . db2html($row["host"]) . ":" . db2html($row["port"]) . "\">
-		  <img src='/freecivmetaserve/overviewmap-" . db2html($row["port"]) . ".ppm.png' width='140' height='90' style='padding: 5px;'></a>";
+		  <img src='/freecivmetaserve/overviewmap-" . db2html($row["port"]) . ".ppm.png' width='120' height='70' style='padding: 5px;'></a>";
           print "</td><td>";
 
 	  	  print "<a id='meta_button' class='button' href=\"http://" . db2html($row["host"]) 
@@ -544,7 +544,7 @@ if ( isset($port) ) {
           print "<tr id='meta_row'><td class=\"left\">";
           if ($mystate == "Running") {
 	    print "<a href=\"/freecivmetaserve/metaserver.php?server_port=" . db2html($row["host"]) . ":" . db2html($row["port"]) . "\">
-		    <img src='/freecivmetaserve/overviewmap-" . db2html($row["port"]) . ".ppm.png' width='140' height='90' style='padding: 5px;'></a>";
+		    <img src='/freecivmetaserve/overviewmap-" . db2html($row["port"]) . ".ppm.png' width='120' height='70' style='padding: 5px;'></a>";
 	  }
           print "</td><td>";
 	  

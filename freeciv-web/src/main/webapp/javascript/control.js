@@ -87,6 +87,8 @@ function mouse_moved_cb(e)
     mouse_y = mouse_y - mapview_canvas.offsetTop;
   }
 
+  if (client.conn.playing == null) return;
+
   /* Request preview goto path */
   if (goto_active && current_focus.length > 0) {
     var ptile = canvas_pos_to_tile(mouse_x, mouse_y);

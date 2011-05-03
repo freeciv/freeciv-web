@@ -33,14 +33,12 @@ function network_init()
   if (websocket_enabled) {
     network_websocket_init();
 
-
   } else {
-    syncTimerId = setInterval("sync_civclient()", 1000);
+    syncTimerId = setInterval("sync_civclient()", 800);
  
      $(document).ajaxComplete(function(){ 
        isWorking = false;
      });
-
 
   }
   

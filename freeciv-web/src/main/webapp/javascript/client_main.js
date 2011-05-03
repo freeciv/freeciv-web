@@ -156,11 +156,11 @@ function can_client_change_view()
 }
 
 /**************************************************************************
-  Webclient doesn't have observer support.
+  Webclient does have observer support.
 **************************************************************************/
 function client_is_observer()
 {
-  return client.conn['observer'];
+  return client.conn['observer'] || observing;
 }
 
 /**************************************************************************

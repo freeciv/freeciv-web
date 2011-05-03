@@ -17,7 +17,7 @@ if (load != null && !"null".equals(load)) {
 }
 
 %>
-<script type="text/javascript" src="/javascript-compressed/jquery-1.5.2.min.js"></script>
+<script type="text/javascript" src="/javascript-compressed/jquery-1.6.min.js"></script>
 <script type="text/javascript" src="/javascript-compressed/webclient.js"></script>
 
 <script type="text/javascript">	

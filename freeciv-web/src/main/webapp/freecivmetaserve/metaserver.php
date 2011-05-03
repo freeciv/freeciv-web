@@ -335,7 +335,7 @@ if ( isset($port) ) {
 
 <link rel="shortcut icon" href="/images/freeciv-forever-icon.png" />
 
-<script type="text/javascript" src="/javascript-compressed/jquery-1.5.2.min.js"></script>
+<script type="text/javascript" src="/javascript-compressed/jquery-1.6.min.js"></script>
 <script type="text/javascript" src="/javascript/jquery-ui-1.8.12.custom.min.js"></script>
 
 

@@ -493,7 +493,7 @@ if ( isset($port) ) {
           $stmt="select * from players where hostport=\"".$row['host'].":".$row['port']."\"";
           $res1 = fcdb_exec($stmt);
           print fcdb_num_rows($res1);
-          print "</td><td style=\"width: 30%\" title='To change the message in the topic, use the command:  /metamessage your-new-message in the game.'>";
+          print "</td><td style=\"width: 30%\" >";
           print db2html($row["message"]);
           print "</td><td>";
 	  print "<img src='/tiles/f." . db2html($row["flag"]) . ".png'>&nbsp;";
@@ -572,11 +572,17 @@ if ( isset($port) ) {
   	  }
 
           print db2html($row["state"]);
-          print "</td><td>";
-          $stmt="select * from players where hostport=\"".$row['host'].":".$row['port']."\"";
-          $res1 = fcdb_exec($stmt);
-          print fcdb_num_rows($res1);
-          print "</td><td style=\"width: 30%\" title='To change the message in the topic, use the command:  /metamessage your-new-message in the game.'>";
+          print "</td>";
+          $stmt="select * from players where type='Human' and hostport=\"".$row['host'].":".$row['port']."\"";
+	  $res1 = fcdb_exec($stmt);
+	  if (fcdb_num_rows($res1) == 0) {
+		  print ("<td>None" );
+	  } else if (fcdb_num_rows($res1) == 1) {
+		  print ("<td style='color: green;'>" . fcdb_num_rows($res1 ) . " player");
+	  } else {
+		  print ("<td style='color: green;'>" . fcdb_num_rows($res1 ) . " players");
+	  }
+          print "</td><td style=\"width: 30%\" >";
           print db2html($row["message"]);
 	  print "</td><td>"
           print db2html($row["turn"]);

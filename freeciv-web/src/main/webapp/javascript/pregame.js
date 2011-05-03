@@ -165,12 +165,14 @@ function pregame_settings()
 
 
   var dhtml = "<table>" +
+  	  "<tr><td>Game title:</td>" +
+	  "<td><input type='text' name='metamessage' id='metamessage' size='20' maxlength='32'></td></tr>" +
 	  "<tr><td>Number of Players (including AI):</td>" +
-	  "<td><input type='text' name='aifill' id='aifill' size='3' length='3'></td></tr>" +
+	  "<td><input type='number' name='aifill' id='aifill' size='4' length='3' min='0' max='30' step='1'></td></tr>" +
 	  "<tr><td>Timeout (number of seconds per round):</td>" +
-	  "<td><input type='text' name='timeout' id='timeout' size='3' length='3'></td></tr>" +
+	  "<td><input type='number' name='timeout' id='timeout' size='4' length='3' min='30' max='3600' step='1'></td></tr>" +
 	  "<tr><td>Map size:</td>" +
-	  "<td><input type='text' name='mapsize' id='mapsize' size='3' length='3'></td></tr>" +
+	  "<td><input type='number' name='mapsize' id='mapsize' size='4' length='3' min='1' max='15' step='1'></td></tr>" +
 	  "<tr><td>AI skill level:</td>" +
 	  "<td><select name='skill_level' id='skill_level'>" +
 	  "<option value='0'>Novice</option>" +
@@ -216,6 +218,16 @@ function pregame_settings()
     var myJSONText = JSON.stringify(test_packet);
     send_request (myJSONText);
   });
+
+  $('#metamessage').change(function() {
+    var test_packet = [{"packet_type" : "chat_msg_req", "message" : "/metamessage " + $('#metamessage').val()}];
+    var myJSONText = JSON.stringify(test_packet);
+    send_request (myJSONText);
+  });
+
+  $('#metamessage').bind('keyup blur',function(){ 
+    $(this).val( $(this).val().replace(/[^a-z\s]/g,'') ); }
+  );
 
   $('#mapsize').change(function() {
     var test_packet = [{"packet_type" : "chat_msg_req", "message" : "/set size " + $('#mapsize').val()}];

@@ -628,6 +628,10 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift)
       if (alt) civclient_benchmark(0); 
     break;
 
+    case 'D':
+      if (alt) show_debug_info(); 
+    break;
+
   };
   
   switch (key_code) {

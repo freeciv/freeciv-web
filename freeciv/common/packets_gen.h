@@ -750,7 +750,7 @@ struct packet_conn_info {
 struct packet_conn_ping_info {
   int connections;
   int conn_id[MAX_NUM_CONNECTIONS];
-  float ping_time[MAX_NUM_CONNECTIONS];
+  int ping_time[MAX_NUM_CONNECTIONS];
 };
 
 struct packet_conn_ping {

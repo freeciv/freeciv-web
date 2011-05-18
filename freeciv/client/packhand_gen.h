@@ -60,7 +60,7 @@ void handle_diplomacy_accept_treaty(int counterpart, bool I_accepted, bool other
 void handle_page_msg(char *message, enum event_type event);
 struct packet_conn_info;
 void handle_conn_info(struct packet_conn_info *packet);
-void handle_conn_ping_info(int connections, int *conn_id, float *ping_time);
+void handle_conn_ping_info(int connections, int *conn_id, int *ping_time);
 void handle_conn_ping(void);
 void handle_end_phase(void);
 void handle_start_phase(int phase);

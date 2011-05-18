@@ -22,6 +22,8 @@ var chatbox_text = " ";
 var previous_scroll = 0;
 var phase_start_time = 0;
 
+var debug_active = false;
+
 /**************************************************************************
  This function is called on page load. 
 **************************************************************************/
@@ -418,3 +420,33 @@ function share_game_map()
 }
 
 
+/**************************************************************************
+...
+**************************************************************************/
+function show_debug_info()
+{
+  console.log("Browser useragent: " + navigator.userAgent);
+  console.log("jQuery version: " + $().jquery);
+  console.log("WebSocket enabled: " + websocket_enabled);
+
+  debug_active = true;
+  /* Show average network latency PING (server to client, and back). */
+  var sum = 0;
+  var max = 0;
+  for (var i = 0; i < debug_ping_list.length; i++) {
+    sum += debug_ping_list[i];
+    if (debug_ping_list[i] > max) max = debug_ping_list[i];
+  }
+  console.log("Network PING average (server): " + (sum / debug_ping_list.length) + " ms. (Max: " + max +"ms.)");
+
+  /* Show average network latency PING (client to server, and back). */
+  sum = 0;
+  max = 0;
+  for (var i = 0; i < debug_client_speed_list.length; i++) {
+    sum += debug_client_speed_list[i];
+    if (debug_client_speed_list[i] > max) max = debug_client_speed_list[i];
+  }
+  console.log("Network PING average (client): " + (sum / debug_client_speed_list.length) + " ms.  (Max: " + max +"ms.)");
+
+
+}

@@ -11713,7 +11713,7 @@ static struct packet_conn_ping_info *receive_packet_conn_ping_info_100(struct co
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint32(&din, &readin);
     real_packet->connections = readin;
   }
   
@@ -11742,10 +11742,12 @@ static struct packet_conn_ping_info *receive_packet_conn_ping_info_100(struct co
       real_packet->connections = MAX_NUM_CONNECTIONS;
     }
     for (i = 0; i < real_packet->connections; i++) {
-      int tmp;
+      {
+    int readin;
   
-      dio_get_uint32(&din, &tmp);
-      real_packet->ping_time[i] = (float)(tmp) / 1000000.0;
+    dio_get_uint32(&din, &readin);
+    real_packet->ping_time[i] = readin;
+  }
     }
   }
 
@@ -11757,7 +11759,7 @@ static int send_packet_conn_ping_info_100(struct connection *pc, const struct pa
   const struct packet_conn_ping_info *real_packet = packet;
   SEND_PACKET_START(PACKET_CONN_PING_INFO);
 
-  dio_put_uint8(&dout, real_packet->connections);
+  dio_put_uint32(&dout, real_packet->connections);
 
     {
       int i;
@@ -11771,7 +11773,7 @@ static int send_packet_conn_ping_info_100(struct connection *pc, const struct pa
       int i;
 
       for (i = 0; i < real_packet->connections; i++) {
-          dio_put_uint32(&dout, (int)(real_packet->ping_time[i] * 1000000));
+        dio_put_uint32(&dout, real_packet->ping_time[i]);
       }
     } 
 

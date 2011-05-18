@@ -12,7 +12,8 @@
 ***********************************************************************/
 
 var connections = {};
-
+var conn_ping_info = {};
+var debug_ping_list = [];
 
 function find_conn_by_id(id)
 {

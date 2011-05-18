@@ -1052,9 +1052,9 @@ end
 
 # Information about the ping times of the connections.
 PACKET_CONN_PING_INFO=87; sc,lsend
-  UINT8 connections;
+  UINT32 connections;
   CONNECTION conn_id[MAX_NUM_CONNECTIONS:connections];
-  FLOAT10x7 ping_time[MAX_NUM_CONNECTIONS:connections];
+  UINT32 ping_time[MAX_NUM_CONNECTIONS:connections];
 end
 
 PACKET_CONN_PING=88;sc

@@ -19,6 +19,9 @@ var error_shown = false;
 var syncTimerId = -1;
 var isWorking = false;
 
+var clinet_last_send = 0;
+var debug_client_speed_list = [];
+
 var ws = null;
 
 /****************************************************************************
@@ -122,6 +125,16 @@ function send_request(packet_payload)
   } else {
     $.post(civwebserver_url, packet_payload, client_handle_packet, "json");
   }
+  if (debug_active) clinet_last_send = new Date().getTime();
 }
 
 
+/****************************************************************************
+...
+****************************************************************************/
+function clinet_debug_collect()
+{
+  var time_elapsed = new Date().getTime() - clinet_last_send;
+  debug_client_speed_list.push(time_elapsed);
+  clinet_last_send = new Date().getTime();
+}

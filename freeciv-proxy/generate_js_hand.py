@@ -41,6 +41,7 @@ f.write("""
   }
  
   if (p.length > 0) {
+    if (debug_active) clinet_debug_collect();
     update_map_canvas_full();
   } else {
     update_map_canvas_check();

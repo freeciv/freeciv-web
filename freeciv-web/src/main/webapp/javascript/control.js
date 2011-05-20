@@ -378,7 +378,9 @@ function set_unit_focus_and_redraw(punit)
 {
   current_focus = [];
   
-  if (punit != null) {
+  if (punit == null) {
+    current_focus = [];
+  } else {
     current_focus[0] = punit;
   }
 
@@ -534,10 +536,13 @@ function do_map_click(ptile, qtype)
       }
       return;
     }
-  
-    if (sunits != null && sunits.length > 0 ) {
+    
+    if (sunits != null && sunits.length == 0) {
+      /* Clicked on a tile with no units. */
+      set_unit_focus_and_redraw(null);
+    } else if (sunits != null && sunits.length > 0 ) {
       if (sunits[0]['owner'] == client.conn.playing.playerno) {
-        if (sunits.length == 1) {
+         if (sunits.length == 1) {
           /* A single unit has been clicked with the mouse. */
           var unit = sunits[0];  
 	  set_unit_focus_and_activate(unit);

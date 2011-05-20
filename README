@@ -41,7 +41,7 @@ The Freeciv Web client consists of these components:
 System Requirements
 -------------------
 
-- Resin 4.0.1 - http://www.caucho.com/
+- Resin 4.0.18 - http://www.caucho.com/
 
 - Java 1.6.0 SDK - http://java.sun.com/javase/downloads/index.jsp
 

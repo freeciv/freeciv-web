@@ -9,7 +9,7 @@ mysql_user="root"
 mysql_pass="changeme"
 
 freeciv_repo="https://github.com/freecivnet/freeciv-web.git"
-resin_version="4.0.15"
+resin_version="4.0.18"
 resin_url="http://www.caucho.com/download/resin-${resin_version}.tar.gz"
 
 # Based on fresh install of Ubuntu 10.10

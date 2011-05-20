@@ -57,9 +57,25 @@ function civclient_init()
   
   update_game_status_panel();
   statusTimerId = setInterval("update_game_status_panel()", 6000);
-  
-  mapviewRedrawingId = setInterval("update_map_canvas_full()", MAPVIEW_REFRESH_INTERVAL);
-  
+
+  // Tells the browser that you wish to perform an animation; this 
+  // requests that the browser schedule a repaint of the window for the 
+  // next animation frame.
+  window.requestAnimFrame = (function(){
+      return  window.requestAnimationFrame       || 
+              window.webkitRequestAnimationFrame || 
+              window.mozRequestAnimationFrame    || 
+              window.oRequestAnimationFrame      || 
+              window.msRequestAnimationFrame     || 
+              function(/* function */ callback, /* DOMElement */ element){
+                window.setTimeout(callback, MAPVIEW_REFRESH_INTERVAL);
+              };
+    })();
+ 
+   (function animloop(){
+      update_map_canvas_full();
+      requestAnimFrame(animloop, mapview_canvas);
+    })();
 
 
   /*

@@ -34,6 +34,7 @@ function mapview_mouse_click(e)
     action_button_pressed(mouse_x, mouse_y, SELECT_POPUP);
   } 
 
+  deactivate_goto();
 }
 
 /****************************************************************************
@@ -102,6 +103,11 @@ function check_mouse_drag_unit(canvas_x, canvas_y)
       set_unit_focus_and_redraw(sunit);
       activate_goto();
     }
+  }
+
+  var ptile_units = tile_units(ptile);
+  if (ptile_units.length > 1) {
+     update_select_unit_dialog(ptile_units);
   }
 
 

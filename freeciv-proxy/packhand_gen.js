@@ -312,8 +312,8 @@ function client_handle_packet(p)
   }
  
   if (p.length > 0) {
-    update_map_canvas_full();
     if (debug_active) clinet_debug_collect();
+    update_map_canvas_full();
   } else {
     update_map_canvas_check();
   }

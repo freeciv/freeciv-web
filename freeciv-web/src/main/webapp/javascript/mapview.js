@@ -231,8 +231,8 @@ function drawGotoLine(ctx, x1, y1, x2, y2)
   ...
 **************************************************************************/
 function mapview_put_tile(pcanvas, tag, canvas_x, canvas_y) {
-  if (tileset[tag] == null) {
-    console.log("Missing in tileset " + tag);
+  if (sprites[tag] == null) {
+    //console.log("Missing sprite " + tag);
     return;
   } 
 

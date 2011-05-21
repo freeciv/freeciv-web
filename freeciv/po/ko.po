@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Freeciv 2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-05-18 20:11+0200\n"
+"POT-Creation-Date: 2011-05-21 09:44+0200\n"
 "PO-Revision-Date: 2007-12-10 21:13+0900\n"
 "Last-Translator: Daniel\n"
 "Language-Team: Korean language team\n"
@@ -7410,218 +7410,218 @@ msgstr ""
 msgid "The %s have stolen %s from the %s."
 msgstr ""
 
-#: server/unithand.c:128
+#: server/unithand.c:131
 #, c-format
 msgid "Illegal packet, can't upgrade %s (yet)."
 msgstr ""
 
-#: server/unithand.c:156
+#: server/unithand.c:159
 #, c-format
 msgid "%d %s upgraded to %s for %d gold."
 msgstr ""
 
-#: server/unithand.c:164
+#: server/unithand.c:167
 msgid "No units could be upgraded."
 msgstr ""
 
-#: server/unithand.c:193
+#: server/unithand.c:196
 #, c-format
 msgid "%s upgraded to %s for %d gold."
 msgstr ""
 
-#: server/unithand.c:226
+#: server/unithand.c:229
 #, fuzzy, c-format
 msgid "%s transformed to %s."
 msgstr "%s(으)로 개조"
 
-#: server/unithand.c:509
+#: server/unithand.c:512
 #, c-format
 msgid "%s refuses to disband!"
 msgstr ""
 
-#: server/unithand.c:563
+#: server/unithand.c:566
 msgid "Can't place city here."
 msgstr ""
 
-#: server/unithand.c:571
+#: server/unithand.c:574
 #, c-format
 msgid "Only %s can build a city."
 msgstr ""
 
-#: server/unithand.c:577
+#: server/unithand.c:580
 msgid "Can't build a city."
 msgstr ""
 
-#: server/unithand.c:587
+#: server/unithand.c:590
 #, c-format
 msgid "Only %s can add to a city."
 msgstr ""
 
-#: server/unithand.c:593
+#: server/unithand.c:596
 msgid "Can't add to a city."
 msgstr ""
 
-#: server/unithand.c:600
+#: server/unithand.c:603
 #, c-format
 msgid "%s unit has no moves left to add to %s."
 msgstr ""
 
-#: server/unithand.c:607
+#: server/unithand.c:610
 #, c-format
 msgid "%s unit has no moves left to build city."
 msgstr ""
 
 #. TRANS: <city> is owned by <nation>, cannot add <unit>.
-#: server/unithand.c:614
+#: server/unithand.c:617
 #, c-format
 msgid "%s is owned by %s, cannot add %s."
 msgstr ""
 
-#: server/unithand.c:622
+#: server/unithand.c:625
 #, c-format
 msgid "%s is too big to add %s."
 msgstr ""
 
-#: server/unithand.c:629
+#: server/unithand.c:632
 #, c-format
 msgid "%s needs an improvement to grow, so you cannot add %s."
 msgstr ""
 
-#: server/unithand.c:641
+#: server/unithand.c:644
 #, c-format
 msgid "Can't add %s to %s."
 msgstr ""
 
-#: server/unithand.c:664
+#: server/unithand.c:667
 #, c-format
 msgid "%s added to aid %s in growing."
 msgstr ""
 
-#: server/unithand.c:995
+#: server/unithand.c:1006
 #, fuzzy
 msgid "The unit can't go there."
 msgstr "이 부대를 매수할 수 없습니다!"
 
-#: server/unithand.c:1181
+#: server/unithand.c:1192
 msgid "Your Nuclear missile was shot down by SDI defences, what a waste."
 msgstr ""
 
-#: server/unithand.c:1185
+#: server/unithand.c:1196
 #, c-format
 msgid "The nuclear attack on %s was avoided by your SDI defense."
 msgstr ""
 
 #. TRANS: "Your Cannon ... the Polish Destroyer."
-#: server/unithand.c:1260
+#: server/unithand.c:1271
 #, c-format
 msgid "Your %s survived the pathetic attack from the %s %s."
 msgstr ""
 
 #. TRANS: "... Cannon ... the Polish Destroyer."
-#: server/unithand.c:1270
+#: server/unithand.c:1281
 #, c-format
 msgid "Your attacking %s failed against the %s %s!"
 msgstr ""
 
-#: server/unithand.c:1351
+#: server/unithand.c:1362
 #, c-format
 msgid "Only %s can attack from sea."
 msgstr ""
 
-#: server/unithand.c:1357
+#: server/unithand.c:1368
 msgid "Cannot attack from sea."
 msgstr ""
 
-#: server/unithand.c:1365 server/unittools.c:2279
+#: server/unithand.c:1376 server/unittools.c:2279
 msgid "Cannot attack unless you declare war first."
 msgstr ""
 
-#: server/unithand.c:1371
+#: server/unithand.c:1382
 #, c-format
 msgid "%s can only move into your own zone of control."
 msgstr ""
 
-#: server/unithand.c:1378
+#: server/unithand.c:1389
 #, c-format
 msgid "%s cannot move that far from the coast line."
 msgstr ""
 
-#: server/unithand.c:1385
+#: server/unithand.c:1396
 #, c-format
 msgid "Cannot invade unless you break peace with %s first."
 msgstr ""
 
-#: server/unithand.c:1431
+#: server/unithand.c:1442
 msgid "This unit has no moves left."
 msgstr ""
 
-#: server/unithand.c:1487
+#: server/unithand.c:1498
 msgid "No diplomat action possible."
 msgstr ""
 
-#: server/unithand.c:1491
+#: server/unithand.c:1502
 #, c-format
 msgid "Unit cannot perform diplomatic action from %s."
 msgstr ""
 
-#: server/unithand.c:1510
+#: server/unithand.c:1521
 #, c-format
 msgid "You must declare war on %s first.  Try using players dialog."
 msgstr ""
 
-#: server/unithand.c:1529
+#: server/unithand.c:1540
 msgid "This unit is being transported, and so cannot bombard."
 msgstr ""
 
-#: server/unithand.c:1545
+#: server/unithand.c:1556
 msgid "You can't attack there."
 msgstr ""
 
-#: server/unithand.c:1568
+#: server/unithand.c:1579
 msgid "This type of troops cannot take over a city."
 msgstr ""
 
-#: server/unithand.c:1586
+#: server/unithand.c:1597
 msgid "A transported unit is not allied to all units or city on target tile."
 msgstr ""
 
-#: server/unithand.c:1636
+#: server/unithand.c:1647
 #, c-format
 msgid "Your %s helps build the %s in %s (%d remaining)."
 msgstr ""
 
-#: server/unithand.c:1638
+#: server/unithand.c:1649
 #, c-format
 msgid "Your %s helps build the %s in %s (%d surplus)."
 msgstr ""
 
-#: server/unithand.c:1694
+#: server/unithand.c:1705
 #, c-format
 msgid ""
 "Sorry, your %s cannot establish a trade route because it has no home city"
 msgstr ""
 
-#: server/unithand.c:1708
+#: server/unithand.c:1719
 #, c-format
 msgid "Sorry, your %s cannot establish a trade route between %s and %s"
 msgstr ""
 
-#: server/unithand.c:1738 server/unithand.c:1759
+#: server/unithand.c:1749 server/unithand.c:1770
 #, c-format
 msgid "Sorry, your %s cannot establish a trade route here!"
 msgstr ""
 
-#: server/unithand.c:1743 server/unithand.c:1764
+#: server/unithand.c:1754 server/unithand.c:1775
 #, c-format
 msgid "      The city of %s already has %d better trade routes!"
 msgstr ""
 
-#: server/unithand.c:1778 server/unithand.c:1791
+#: server/unithand.c:1789 server/unithand.c:1802
 #, c-format
 msgid "Sorry, %s has canceled the trade route from %s to your city %s."
 msgstr ""
 
-#: server/unithand.c:1825
+#: server/unithand.c:1836
 #, c-format
 msgid ""
 "Your %s from %s has arrived in %s, and revenues amount to %d in gold and "

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: po-debconf://kdebase\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-05-18 20:11+0200\n"
+"POT-Creation-Date: 2011-05-21 09:44+0200\n"
 "PO-Revision-Date: 2007-09-05 03:37+0300\n"
 "Last-Translator: stan ioan-eugen <stan.ieugen@gmail.com>\n"
 "Language-Team: romanian <debian-l10n-romanian@lists.debian.org>\n"
@@ -8184,198 +8184,198 @@ msgstr "%si au furat %s de la dvs.!"
 msgid "The %s have stolen %s from the %s."
 msgstr "%si au furat %s de la %s."
 
-#: server/unithand.c:128
+#: server/unithand.c:131
 #, c-format
 msgid "Illegal packet, can't upgrade %s (yet)."
 msgstr "Pachet ilegal, nu pot moderniza %s (încă)."
 
-#: server/unithand.c:156
+#: server/unithand.c:159
 #, c-format
 msgid "%d %s upgraded to %s for %d gold."
 msgstr "%d %s modernizaţi în %s pentru %d galbeni."
 
-#: server/unithand.c:164
+#: server/unithand.c:167
 msgid "No units could be upgraded."
 msgstr "Nici o unitate n-a putut fi modernizată."
 
-#: server/unithand.c:193
+#: server/unithand.c:196
 #, c-format
 msgid "%s upgraded to %s for %d gold."
 msgstr "%s modernizat în %s pentru %d galbeni."
 
-#: server/unithand.c:226
+#: server/unithand.c:229
 #, fuzzy, c-format
 msgid "%s transformed to %s."
 msgstr "Transformează în %s"
 
-#: server/unithand.c:509
+#: server/unithand.c:512
 #, c-format
 msgid "%s refuses to disband!"
 msgstr "%s a refuzat să fie dizolvată!"
 
-#: server/unithand.c:563
+#: server/unithand.c:566
 msgid "Can't place city here."
 msgstr "Nu poate fi construit un oraş aici."
 
-#: server/unithand.c:571
+#: server/unithand.c:574
 #, c-format
 msgid "Only %s can build a city."
 msgstr "Doar %s poate construi un oraş."
 
-#: server/unithand.c:577
+#: server/unithand.c:580
 msgid "Can't build a city."
 msgstr "Nu pot construi un oraş."
 
-#: server/unithand.c:587
+#: server/unithand.c:590
 #, c-format
 msgid "Only %s can add to a city."
 msgstr "Doar %s poate fi adăugat unui oraş."
 
-#: server/unithand.c:593
+#: server/unithand.c:596
 msgid "Can't add to a city."
 msgstr "Nu pot fi adăugată la un oraş."
 
-#: server/unithand.c:600
+#: server/unithand.c:603
 #, c-format
 msgid "%s unit has no moves left to add to %s."
 msgstr ""
 "Unitatea %s nu are unităţi de mişcare pe care le să le poată aduga oraşului "
 "%s."
 
-#: server/unithand.c:607
+#: server/unithand.c:610
 #, c-format
 msgid "%s unit has no moves left to build city."
 msgstr "Unitatea%s nu are unităţi de mişcare cu care să construiască un oraş."
 
 #. TRANS: <city> is owned by <nation>, cannot add <unit>.
-#: server/unithand.c:614
+#: server/unithand.c:617
 #, fuzzy, c-format
 msgid "%s is owned by %s, cannot add %s."
 msgstr "%s este prea mare pentru a adăuga %sul."
 
-#: server/unithand.c:622
+#: server/unithand.c:625
 #, c-format
 msgid "%s is too big to add %s."
 msgstr "%s este prea mare pentru a adăuga %sul."
 
-#: server/unithand.c:629
+#: server/unithand.c:632
 #, c-format
 msgid "%s needs an improvement to grow, so you cannot add %s."
 msgstr ""
 "%s are nevoie de o îmbunătăţire ca să crească, deci nu puteţi adăuga %s."
 
-#: server/unithand.c:641
+#: server/unithand.c:644
 #, c-format
 msgid "Can't add %s to %s."
 msgstr "%s nu poate fi adăugat la %s."
 
-#: server/unithand.c:664
+#: server/unithand.c:667
 #, c-format
 msgid "%s added to aid %s in growing."
 msgstr "%s a fost adăugat la oraşul %s pentru al ajuta la creştere."
 
-#: server/unithand.c:995
+#: server/unithand.c:1006
 #, fuzzy
 msgid "The unit can't go there."
 msgstr "Nu puteţi ataca aici."
 
-#: server/unithand.c:1181
+#: server/unithand.c:1192
 msgid "Your Nuclear missile was shot down by SDI defences, what a waste."
 msgstr "Bomba dvs. atomică a fost anihilată de apărarea SDI, ce risipă."
 
-#: server/unithand.c:1185
+#: server/unithand.c:1196
 #, c-format
 msgid "The nuclear attack on %s was avoided by your SDI defense."
 msgstr "Atacul nuclear asupra %s a fost anihilat de apărarea dvs. SDI."
 
 #. TRANS: "Your Cannon ... the Polish Destroyer."
-#: server/unithand.c:1260
+#: server/unithand.c:1271
 #, fuzzy, c-format
 msgid "Your %s survived the pathetic attack from the %s %s."
 msgstr "Un %1$s al dvs a supravieţuit atacul patetic al unui %3$s a lui %2$s."
 
 #. TRANS: "... Cannon ... the Polish Destroyer."
-#: server/unithand.c:1270
+#: server/unithand.c:1281
 #, fuzzy, c-format
 msgid "Your attacking %s failed against the %s %s!"
 msgstr "Atacul unui %1$s al dvs împotriva unui %3$s a lui %2$s a eşuat!"
 
-#: server/unithand.c:1351
+#: server/unithand.c:1362
 #, c-format
 msgid "Only %s can attack from sea."
 msgstr "Doar %s poate ataca de pe mare."
 
-#: server/unithand.c:1357
+#: server/unithand.c:1368
 msgid "Cannot attack from sea."
 msgstr "Nu puteţi ataca de pe mare."
 
-#: server/unithand.c:1365 server/unittools.c:2279
+#: server/unithand.c:1376 server/unittools.c:2279
 msgid "Cannot attack unless you declare war first."
 msgstr "Nu puteţi ataca înainte de a declara război."
 
-#: server/unithand.c:1371
+#: server/unithand.c:1382
 #, c-format
 msgid "%s can only move into your own zone of control."
 msgstr "%s se poate mişca doar în zona dvs. de control."
 
-#: server/unithand.c:1378
+#: server/unithand.c:1389
 #, c-format
 msgid "%s cannot move that far from the coast line."
 msgstr ""
 
-#: server/unithand.c:1385
+#: server/unithand.c:1396
 #, fuzzy, c-format
 msgid "Cannot invade unless you break peace with %s first."
 msgstr "Nu puteţi ataca înainte de a declara război."
 
-#: server/unithand.c:1431
+#: server/unithand.c:1442
 msgid "This unit has no moves left."
 msgstr "Această unitate nu mai semai poate mişca runda aceasta."
 
-#: server/unithand.c:1487
+#: server/unithand.c:1498
 msgid "No diplomat action possible."
 msgstr "Nu este posibilă nici o acţiune diplomatica."
 
-#: server/unithand.c:1491
+#: server/unithand.c:1502
 #, fuzzy, c-format
 msgid "Unit cannot perform diplomatic action from %s."
 msgstr "* Poate executa acţiuni diplomatice.\n"
 
-#: server/unithand.c:1510
+#: server/unithand.c:1521
 #, fuzzy, c-format
 msgid "You must declare war on %s first.  Try using players dialog."
 msgstr ""
 "Mai întâi trebuie să declareţi război %s. Încercaţi să folosiţi dialogul "
 "Jucători (F3)."
 
-#: server/unithand.c:1529
+#: server/unithand.c:1540
 msgid "This unit is being transported, and so cannot bombard."
 msgstr "Această unitate este transportată, aşa că nu poate transporta."
 
-#: server/unithand.c:1545
+#: server/unithand.c:1556
 msgid "You can't attack there."
 msgstr "Nu puteţi ataca aici."
 
-#: server/unithand.c:1568
+#: server/unithand.c:1579
 msgid "This type of troops cannot take over a city."
 msgstr "Aceste unităţi nu pot cuceri un oraş."
 
-#: server/unithand.c:1586
+#: server/unithand.c:1597
 msgid "A transported unit is not allied to all units or city on target tile."
 msgstr ""
 "O unitate transportată nu este aliată cu unităţile din zona destinaţie."
 
-#: server/unithand.c:1636
+#: server/unithand.c:1647
 #, c-format
 msgid "Your %s helps build the %s in %s (%d remaining)."
 msgstr "%s dvs. ajută la construcţia %s în %s (%d rămase)."
 
-#: server/unithand.c:1638
+#: server/unithand.c:1649
 #, c-format
 msgid "Your %s helps build the %s in %s (%d surplus)."
 msgstr "%s dumneavoastră ajută la construcţia %s în %s (%d surplus)."
 
-#: server/unithand.c:1694
+#: server/unithand.c:1705
 #, c-format
 msgid ""
 "Sorry, your %s cannot establish a trade route because it has no home city"
@@ -8383,27 +8383,27 @@ msgstr ""
 "%sul dvs nu poate stabili un schimb comercial deoarece nu are un oraş de "
 "bază."
 
-#: server/unithand.c:1708
+#: server/unithand.c:1719
 #, c-format
 msgid "Sorry, your %s cannot establish a trade route between %s and %s"
 msgstr "%s dvs nu poate stabili o rută comercială între %s şi %s"
 
-#: server/unithand.c:1738 server/unithand.c:1759
+#: server/unithand.c:1749 server/unithand.c:1770
 #, c-format
 msgid "Sorry, your %s cannot establish a trade route here!"
 msgstr "%s dvs nu poate stabili un schimb comercial aici!"
 
-#: server/unithand.c:1743 server/unithand.c:1764
+#: server/unithand.c:1754 server/unithand.c:1775
 #, c-format
 msgid "      The city of %s already has %d better trade routes!"
 msgstr "      Oraşul %s are deja %d rute comerciale mai bune!"
 
-#: server/unithand.c:1778 server/unithand.c:1791
+#: server/unithand.c:1789 server/unithand.c:1802
 #, c-format
 msgid "Sorry, %s has canceled the trade route from %s to your city %s."
 msgstr "%s a anulat rutele comerciale dintre %s şi oraşul dvs. %s"
 
-#: server/unithand.c:1825
+#: server/unithand.c:1836
 #, c-format
 msgid ""
 "Your %s from %s has arrived in %s, and revenues amount to %d in gold and "

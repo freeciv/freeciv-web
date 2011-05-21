@@ -23,7 +23,7 @@ var nation_groups = [];
 function update_nation_screen()
 {
   var nation_list_html = "<table width=90% border=0 cellspacing=0><tr style='background: #444444;'><td>Flag</td><td>Player Name:</td>"
-	  + "<td>Nation:</td><td>Attitude</td><td>AI/Human</td><td>Alive/Dead</td><td>Diplomatic state</td><td>Action</td></tr>";
+	  + "<td>Nation:</td><td>Attitude</td><td>Score</td><td>AI/Human</td><td>Alive/Dead</td><td>Diplomatic state</td><td>Action</td></tr>";
   
   for (var player_id in players) {
     var pplayer = players[player_id];
@@ -42,6 +42,7 @@ function update_nation_screen()
            + "<td>" + pplayer['name'] + "</td><td>" 
            + nations[pplayer['nation']]['adjective']  + "</td><td>" 
 	   + col_love(pplayer) + "</td><td>" 
+	   + get_score_text(pplayer) + "</td><td>" 
 	   + (pplayer['ai'] ? "AI" : "Human") + "</td><td>"
 	   + (pplayer['is_alive'] ? "Alive" : "Dead") +  "</td>";
 
@@ -80,6 +81,21 @@ function col_love(pplayer)
     return "-";
   } else {
     return love_text(pplayer['love'][client.conn.playing['playerno']] - MAX_AI_LOVE);
+  }
+
+}
+
+/**************************************************************************
+ ...
+**************************************************************************/
+function get_score_text(player)
+{
+
+  if (player['score'] > 0 || client_is_observer() 
+      || player['playerno'] == client.conn.playing['playerno']) {
+    return player['score'];
+  } else {
+    return "?";
   }
 
 }

@@ -21,7 +21,7 @@
 
     <%-- Overview mini-map --%>
     <div id="game_overview_panel">
-	<div id="game_overview_map" onclick="overview_clicked(event);">
+	<div id="game_overview_map">
        		<div id="map_click_div">
 	     		<img id="overview_map"/>   
         	</div>

@@ -16,7 +16,7 @@ var overviewTimerId = -1;
 var overview_w = 230;
 var overview_h = 140;
 
-var OVERVIEW_REFRESH = 5000;
+var OVERVIEW_REFRESH = 4500;
 
 var palette = [];
 
@@ -79,6 +79,12 @@ function init_overview()
     overviewTimerId = setInterval("redraw_overview()", OVERVIEW_REFRESH);
   }
 
+  $("#game_overview_map").click(function(e) {
+    var x = e.pageX - $(this).offset().left;
+    var y = e.pageY - $(this).offset().top;
+    overview_clicked (x, y)
+  });
+
 
 }
 
@@ -87,12 +93,9 @@ function init_overview()
 ****************************************************************************/
 function redraw_overview()
 {
-
-
   bmp_lib.render('overview_map', 
                   generate_overview_grid(map['xsize'], map['ysize']), 
                   palette);
-
 }
 
 
@@ -251,14 +254,8 @@ function overview_tile_color(map_x, map_y)
 /****************************************************************************
   ...
 ****************************************************************************/
-function overview_clicked (event)
+function overview_clicked (x, y)
 {
-  var omap = document.getElementById("overview_map");
-  
-  if (omap != null) {
-
-    var x = event.offsetX?(event.offsetX):event.pageX-omap.offsetLeft;
-	var y = event.offsetY?(event.offsetY):event.pageY-omap.offsetTop;
 
     var width = $("#overview_map").width();
     var height = $("#overview_map").height();
@@ -272,7 +269,5 @@ function overview_clicked (event)
     }
     
     redraw_overview();
-    
-  }
     
 }

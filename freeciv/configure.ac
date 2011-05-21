@@ -523,6 +523,11 @@ if test "$ftwl" = opengl ; then
      FTWL_LIBS="$FTWL_LIBS "`sdl-config --libs`" -lpng "`freetype-config --libs -lGL -lGLU`
 fi
 
+AM_PATH_GLIB_2_0(2.29.0,,
+AC_MSG_ERROR(Test for Glib failed. See the file 'INSTALL' for help))
+
+LIBS="$LIBS $GLIB_LIBS"
+
 dnl Check and choose clients
 if test "x$client" != "xno"; then
 
@@ -922,7 +927,7 @@ AC_CONFIG_COMMANDS([fc_default-5],[[if test x`uname -s` = xBeOS ; then
      fi
    fi]],[[]])
 
-CFLAGS="$EXTRA_DEBUG_CFLAGS $CFLAGS"
+CFLAGS="$EXTRA_DEBUG_CFLAGS $CFLAGS $GLIB_CFLAGS"
 CXXFLAGS="$EXTRA_DEBUG_CXXFLAGS $CXXFLAGS"
 
 dnl Rebuild 'configure' whenever version.in changes, if maintainer mode enabled.

@@ -43,19 +43,20 @@ am__aclocal_m4_deps = $(top_srcdir)/dependencies/m4/mkstemp.m4 \
 	$(top_srcdir)/m4/codeset.m4 $(top_srcdir)/m4/compiler.m4 \
 	$(top_srcdir)/m4/debug.m4 $(top_srcdir)/m4/freetype2.m4 \
 	$(top_srcdir)/m4/gettimeofday.m4 $(top_srcdir)/m4/ggz.m4 \
-	$(top_srcdir)/m4/glib-gettext.m4 $(top_srcdir)/m4/gtk-2.0.m4 \
-	$(top_srcdir)/m4/gtk2-client.m4 $(top_srcdir)/m4/iconv.m4 \
-	$(top_srcdir)/m4/lib-ld.m4 $(top_srcdir)/m4/lib-link.m4 \
-	$(top_srcdir)/m4/lib-prefix.m4 $(top_srcdir)/m4/libtool.m4 \
-	$(top_srcdir)/m4/locale.m4 $(top_srcdir)/m4/ltoptions.m4 \
-	$(top_srcdir)/m4/ltsugar.m4 $(top_srcdir)/m4/ltversion.m4 \
-	$(top_srcdir)/m4/lt~obsolete.m4 $(top_srcdir)/m4/ngettext.m4 \
-	$(top_srcdir)/m4/no-client.m4 $(top_srcdir)/m4/pkg.m4 \
-	$(top_srcdir)/m4/readline.m4 $(top_srcdir)/m4/sdl-client.m4 \
-	$(top_srcdir)/m4/sdl.m4 $(top_srcdir)/m4/sound.m4 \
-	$(top_srcdir)/m4/vsnprintf.m4 $(top_srcdir)/m4/win32-client.m4 \
-	$(top_srcdir)/m4/x.m4 $(top_srcdir)/m4/xaw-client.m4 \
-	$(top_srcdir)/version.in $(top_srcdir)/configure.ac
+	$(top_srcdir)/m4/glib-2.0.m4 $(top_srcdir)/m4/glib-gettext.m4 \
+	$(top_srcdir)/m4/gtk-2.0.m4 $(top_srcdir)/m4/gtk2-client.m4 \
+	$(top_srcdir)/m4/iconv.m4 $(top_srcdir)/m4/lib-ld.m4 \
+	$(top_srcdir)/m4/lib-link.m4 $(top_srcdir)/m4/lib-prefix.m4 \
+	$(top_srcdir)/m4/libtool.m4 $(top_srcdir)/m4/locale.m4 \
+	$(top_srcdir)/m4/ltoptions.m4 $(top_srcdir)/m4/ltsugar.m4 \
+	$(top_srcdir)/m4/ltversion.m4 $(top_srcdir)/m4/lt~obsolete.m4 \
+	$(top_srcdir)/m4/ngettext.m4 $(top_srcdir)/m4/no-client.m4 \
+	$(top_srcdir)/m4/pkg.m4 $(top_srcdir)/m4/readline.m4 \
+	$(top_srcdir)/m4/sdl-client.m4 $(top_srcdir)/m4/sdl.m4 \
+	$(top_srcdir)/m4/sound.m4 $(top_srcdir)/m4/vsnprintf.m4 \
+	$(top_srcdir)/m4/win32-client.m4 $(top_srcdir)/m4/x.m4 \
+	$(top_srcdir)/m4/xaw-client.m4 $(top_srcdir)/version.in \
+	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(SHELL) $(top_srcdir)/bootstrap/mkinstalldirs
@@ -108,7 +109,7 @@ CATALOGS =  ar.gmo cs.gmo ca.gmo da.gmo de.gmo el.gmo en_GB.gmo eo.gmo es.gmo et
 CATOBJEXT = .gmo
 CC = gcc
 CCDEPMODE = depmode=gcc3
-CFLAGS = -save-temps -Wall -Wpointer-arith -Wcast-align -Wmissing-prototypes -Wmissing-declarations -g -O2 -fsigned-char
+CFLAGS = -save-temps -Wall -Wpointer-arith -Wcast-align -Wmissing-prototypes -Wmissing-declarations -g -O2 -fsigned-char -I/usr/local/include/glib-2.0 -I/usr/local/lib/glib-2.0/include  
 CONFIGURE_DEPENDENCIES =  $(top_srcdir)/version.in
 CPP = gcc -E
 CPPFLAGS =  -DLOCALEDIR="\"${datarootdir}/locale\"" -DDEFAULT_DATA_PATH="\".:data:~/.freeciv/2.3:${datarootdir}/freeciv:/mnt/savegames\""
@@ -140,6 +141,10 @@ GGZMOD_LDFLAGS = -L/usr/lib64
 GGZ_CONFIG = true
 GGZ_GTK_INCLUDES = 
 GGZ_GTK_LDFLAGS = 
+GLIB_CFLAGS = -I/usr/local/include/glib-2.0 -I/usr/local/lib/glib-2.0/include  
+GLIB_GENMARSHAL = glib-genmarshal
+GLIB_LIBS = -L/usr/local/lib -lglib-2.0  
+GLIB_MKENUMS = glib-mkenums
 GMOFILES =  ar.gmo cs.gmo ca.gmo da.gmo de.gmo el.gmo en_GB.gmo eo.gmo es.gmo et.gmo fa.gmo fi.gmo fr.gmo he.gmo hu.gmo it.gmo ja.gmo ko.gmo lt.gmo nl.gmo nb.gmo no.gmo pl.gmo pt.gmo pt_BR.gmo ro.gmo ru.gmo sv.gmo tr.gmo uk.gmo zh_CN.gmo
 GMSGFMT = /usr/bin/msgfmt
 GNULIB_CALLOC_POSIX = 0
@@ -153,6 +158,7 @@ GNULIB_RPMATCH = 0
 GNULIB_SETENV = 0
 GNULIB_STRTOD = 0
 GNULIB_UNSETENV = 0
+GOBJECT_QUERY = gobject-query
 GREP = /usr/bin/grep
 GTK_CFLAGS = 
 GTK_LIBS = 
@@ -208,7 +214,7 @@ LIBGGZ_INCLUDES = -I /usr/include
 LIBGGZ_LDFLAGS = -L/usr/lib64
 LIBICONV = 
 LIBOBJS = 
-LIBS = -lbz2 -lz  
+LIBS = -lbz2 -lz   -L/usr/local/lib -lglib-2.0  
 LIBTOOL = $(SHELL) $(top_builddir)/libtool --preserve-dup-deps
 LIB_GGZ = -lggz
 LIB_GGZDMOD = 
@@ -244,7 +250,7 @@ PACKAGE_TARNAME =
 PACKAGE_URL = 
 PACKAGE_VERSION = 
 PATH_SEPARATOR = :
-PKG_CONFIG = 
+PKG_CONFIG = /usr/local/bin/pkg-config
 PNG_CFLAGS = 
 PNG_LIBS = 
 POFILES =  ar.po cs.po ca.po da.po de.po el.po en_GB.po eo.po es.po et.po fa.po fi.po fr.po he.po hu.po it.po ja.po ko.po lt.po nl.po nb.po no.po pl.po pt.po pt_BR.po ro.po ru.po sv.po tr.po uk.po zh_CN.po

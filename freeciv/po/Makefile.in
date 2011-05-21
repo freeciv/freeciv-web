@@ -38,7 +38,7 @@ XGETTEXT = /usr/bin/xgettext
 MSGMERGE = msgmerge
 
 DEFS = -DHAVE_CONFIG_H
-CFLAGS = -save-temps -Wall -Wpointer-arith -Wcast-align -Wmissing-prototypes -Wmissing-declarations -g -O2 -fsigned-char
+CFLAGS = -save-temps -Wall -Wpointer-arith -Wcast-align -Wmissing-prototypes -Wmissing-declarations -g -O2 -fsigned-char -I/usr/local/include/glib-2.0 -I/usr/local/lib/glib-2.0/include  
 CPPFLAGS =  -DLOCALEDIR="\"${datarootdir}/locale\"" -DDEFAULT_DATA_PATH="\".:data:~/.freeciv/2.3:${datarootdir}/freeciv:/mnt/savegames\""
 
 INCLUDES = -I.. -I$(top_srcdir)/intl

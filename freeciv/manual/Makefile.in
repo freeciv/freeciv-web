@@ -44,19 +44,20 @@ am__aclocal_m4_deps = $(top_srcdir)/dependencies/m4/mkstemp.m4 \
 	$(top_srcdir)/m4/codeset.m4 $(top_srcdir)/m4/compiler.m4 \
 	$(top_srcdir)/m4/debug.m4 $(top_srcdir)/m4/freetype2.m4 \
 	$(top_srcdir)/m4/gettimeofday.m4 $(top_srcdir)/m4/ggz.m4 \
-	$(top_srcdir)/m4/glib-gettext.m4 $(top_srcdir)/m4/gtk-2.0.m4 \
-	$(top_srcdir)/m4/gtk2-client.m4 $(top_srcdir)/m4/iconv.m4 \
-	$(top_srcdir)/m4/lib-ld.m4 $(top_srcdir)/m4/lib-link.m4 \
-	$(top_srcdir)/m4/lib-prefix.m4 $(top_srcdir)/m4/libtool.m4 \
-	$(top_srcdir)/m4/locale.m4 $(top_srcdir)/m4/ltoptions.m4 \
-	$(top_srcdir)/m4/ltsugar.m4 $(top_srcdir)/m4/ltversion.m4 \
-	$(top_srcdir)/m4/lt~obsolete.m4 $(top_srcdir)/m4/ngettext.m4 \
-	$(top_srcdir)/m4/no-client.m4 $(top_srcdir)/m4/pkg.m4 \
-	$(top_srcdir)/m4/readline.m4 $(top_srcdir)/m4/sdl-client.m4 \
-	$(top_srcdir)/m4/sdl.m4 $(top_srcdir)/m4/sound.m4 \
-	$(top_srcdir)/m4/vsnprintf.m4 $(top_srcdir)/m4/win32-client.m4 \
-	$(top_srcdir)/m4/x.m4 $(top_srcdir)/m4/xaw-client.m4 \
-	$(top_srcdir)/version.in $(top_srcdir)/configure.ac
+	$(top_srcdir)/m4/glib-2.0.m4 $(top_srcdir)/m4/glib-gettext.m4 \
+	$(top_srcdir)/m4/gtk-2.0.m4 $(top_srcdir)/m4/gtk2-client.m4 \
+	$(top_srcdir)/m4/iconv.m4 $(top_srcdir)/m4/lib-ld.m4 \
+	$(top_srcdir)/m4/lib-link.m4 $(top_srcdir)/m4/lib-prefix.m4 \
+	$(top_srcdir)/m4/libtool.m4 $(top_srcdir)/m4/locale.m4 \
+	$(top_srcdir)/m4/ltoptions.m4 $(top_srcdir)/m4/ltsugar.m4 \
+	$(top_srcdir)/m4/ltversion.m4 $(top_srcdir)/m4/lt~obsolete.m4 \
+	$(top_srcdir)/m4/ngettext.m4 $(top_srcdir)/m4/no-client.m4 \
+	$(top_srcdir)/m4/pkg.m4 $(top_srcdir)/m4/readline.m4 \
+	$(top_srcdir)/m4/sdl-client.m4 $(top_srcdir)/m4/sdl.m4 \
+	$(top_srcdir)/m4/sound.m4 $(top_srcdir)/m4/vsnprintf.m4 \
+	$(top_srcdir)/m4/win32-client.m4 $(top_srcdir)/m4/x.m4 \
+	$(top_srcdir)/m4/xaw-client.m4 $(top_srcdir)/version.in \
+	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(SHELL) $(top_srcdir)/bootstrap/mkinstalldirs
@@ -137,6 +138,10 @@ GGZMOD_LDFLAGS = @GGZMOD_LDFLAGS@
 GGZ_CONFIG = @GGZ_CONFIG@
 GGZ_GTK_INCLUDES = @GGZ_GTK_INCLUDES@
 GGZ_GTK_LDFLAGS = @GGZ_GTK_LDFLAGS@
+GLIB_CFLAGS = @GLIB_CFLAGS@
+GLIB_GENMARSHAL = @GLIB_GENMARSHAL@
+GLIB_LIBS = @GLIB_LIBS@
+GLIB_MKENUMS = @GLIB_MKENUMS@
 GMOFILES = @GMOFILES@
 GMSGFMT = @GMSGFMT@
 GNULIB_CALLOC_POSIX = @GNULIB_CALLOC_POSIX@
@@ -150,6 +155,7 @@ GNULIB_RPMATCH = @GNULIB_RPMATCH@
 GNULIB_SETENV = @GNULIB_SETENV@
 GNULIB_STRTOD = @GNULIB_STRTOD@
 GNULIB_UNSETENV = @GNULIB_UNSETENV@
+GOBJECT_QUERY = @GOBJECT_QUERY@
 GREP = @GREP@
 GTK_CFLAGS = @GTK_CFLAGS@
 GTK_LIBS = @GTK_LIBS@

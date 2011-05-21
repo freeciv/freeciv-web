@@ -896,6 +896,11 @@ SDL_CFLAGS
 SDL_CONFIG
 GTK_LIBS
 GTK_CFLAGS
+GLIB_MKENUMS
+GOBJECT_QUERY
+GLIB_GENMARSHAL
+GLIB_LIBS
+GLIB_CFLAGS
 GZIP
 WINDRES
 AUTO_DEPS
@@ -1078,6 +1083,7 @@ enable_rpath
 with_libiconv_prefix
 enable_nls
 enable_debug
+enable_glibtest
 enable_gtktest
 with_sdl_prefix
 with_sdl_exec_prefix
@@ -1776,6 +1782,7 @@ Optional Features:
   --disable-rpath         do not hardcode runtime library paths
   --disable-nls        do not add localization support
   --enable-debug[=no/some/yes]  turn on debugging [default=some]
+  --disable-glibtest      do not try to compile and run a test GLIB program
   --disable-gtktest       do not try to compile and run a test GTK+ program
   --disable-sdltest       Do not try to compile and run a test SDL program
        --disable-freetypetest  Do not try to compile and run a test FreeType
@@ -7383,13 +7390,13 @@ if ${lt_cv_nm_interface+:} false; then :
 else
   lt_cv_nm_interface="BSD nm"
   echo "int some_variable = 0;" > conftest.$ac_ext
-  (eval echo "\"\$as_me:7386: $ac_compile\"" >&5)
+  (eval echo "\"\$as_me:7393: $ac_compile\"" >&5)
   (eval "$ac_compile" 2>conftest.err)
   cat conftest.err >&5
-  (eval echo "\"\$as_me:7389: $NM \\\"conftest.$ac_objext\\\"\"" >&5)
+  (eval echo "\"\$as_me:7396: $NM \\\"conftest.$ac_objext\\\"\"" >&5)
   (eval "$NM \"conftest.$ac_objext\"" 2>conftest.err > conftest.out)
   cat conftest.err >&5
-  (eval echo "\"\$as_me:7392: output\"" >&5)
+  (eval echo "\"\$as_me:7399: output\"" >&5)
   cat conftest.out >&5
   if $GREP 'External.*some_variable' conftest.out > /dev/null; then
     lt_cv_nm_interface="MS dumpbin"
@@ -8583,7 +8590,7 @@ ia64-*-hpux*)
   ;;
 *-*-irix6*)
   # Find out which ABI we are using.
-  echo '#line 8586 "configure"' > conftest.$ac_ext
+  echo '#line 8593 "configure"' > conftest.$ac_ext
   if { { eval echo "\"\$as_me\":${as_lineno-$LINENO}: \"$ac_compile\""; } >&5
   (eval $ac_compile) 2>&5
   ac_status=$?
@@ -10341,11 +10348,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:10344: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:10351: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:10348: \$? = $ac_status" >&5
+   echo "$as_me:10355: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings other than the usual output.
@@ -10680,11 +10687,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:10683: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:10690: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:10687: \$? = $ac_status" >&5
+   echo "$as_me:10694: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings other than the usual output.
@@ -10785,11 +10792,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:10788: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:10795: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>out/conftest.err)
    ac_status=$?
    cat out/conftest.err >&5
-   echo "$as_me:10792: \$? = $ac_status" >&5
+   echo "$as_me:10799: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s out/conftest2.$ac_objext
    then
      # The compiler can only warn and ignore the option if not recognized
@@ -10840,11 +10847,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:10843: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:10850: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>out/conftest.err)
    ac_status=$?
    cat out/conftest.err >&5
-   echo "$as_me:10847: \$? = $ac_status" >&5
+   echo "$as_me:10854: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s out/conftest2.$ac_objext
    then
      # The compiler can only warn and ignore the option if not recognized
@@ -13208,7 +13215,7 @@ else
   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<_LT_EOF
-#line 13211 "configure"
+#line 13218 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
@@ -13304,7 +13311,7 @@ else
   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<_LT_EOF
-#line 13307 "configure"
+#line 13314 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
@@ -15260,11 +15267,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:15263: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:15270: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:15267: \$? = $ac_status" >&5
+   echo "$as_me:15274: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings other than the usual output.
@@ -15359,11 +15366,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:15362: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:15369: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>out/conftest.err)
    ac_status=$?
    cat out/conftest.err >&5
-   echo "$as_me:15366: \$? = $ac_status" >&5
+   echo "$as_me:15373: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s out/conftest2.$ac_objext
    then
      # The compiler can only warn and ignore the option if not recognized
@@ -15411,11 +15418,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:15414: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:15421: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>out/conftest.err)
    ac_status=$?
    cat out/conftest.err >&5
-   echo "$as_me:15418: \$? = $ac_status" >&5
+   echo "$as_me:15425: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s out/conftest2.$ac_objext
    then
      # The compiler can only warn and ignore the option if not recognized
@@ -19309,6 +19316,358 @@ if test "$ftwl" = opengl ; then
      FTWL_CFLAGS="$FTWL_CFLAGS "`sdl-config --cflags`" "`freetype-config --cflags`
      FTWL_LIBS="$FTWL_LIBS "`sdl-config --libs`" -lpng "`freetype-config --libs -lGL -lGLU`
 fi
+
+# Check whether --enable-glibtest was given.
+if test "${enable_glibtest+set}" = set; then :
+  enableval=$enable_glibtest;
+else
+  enable_glibtest=yes
+fi
+
+
+  pkg_config_args=glib-2.0
+  for module in .
+  do
+      case "$module" in
+         gmodule)
+             pkg_config_args="$pkg_config_args gmodule-2.0"
+         ;;
+         gmodule-no-export)
+             pkg_config_args="$pkg_config_args gmodule-no-export-2.0"
+         ;;
+         gobject)
+             pkg_config_args="$pkg_config_args gobject-2.0"
+         ;;
+         gthread)
+             pkg_config_args="$pkg_config_args gthread-2.0"
+         ;;
+         gio*)
+             pkg_config_args="$pkg_config_args $module-2.0"
+         ;;
+      esac
+  done
+
+
+
+if test "x$ac_cv_env_PKG_CONFIG_set" != "xset"; then
+	if test -n "$ac_tool_prefix"; then
+  # Extract the first word of "${ac_tool_prefix}pkg-config", so it can be a program name with args.
+set dummy ${ac_tool_prefix}pkg-config; ac_word=$2
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
+$as_echo_n "checking for $ac_word... " >&6; }
+if ${ac_cv_path_PKG_CONFIG+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  case $PKG_CONFIG in
+  [\\/]* | ?:[\\/]*)
+  ac_cv_path_PKG_CONFIG="$PKG_CONFIG" # Let the user override the test with a path.
+  ;;
+  *)
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+    for ac_exec_ext in '' $ac_executable_extensions; do
+  if { test -f "$as_dir/$ac_word$ac_exec_ext" && $as_test_x "$as_dir/$ac_word$ac_exec_ext"; }; then
+    ac_cv_path_PKG_CONFIG="$as_dir/$ac_word$ac_exec_ext"
+    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+  done
+IFS=$as_save_IFS
+
+  ;;
+esac
+fi
+PKG_CONFIG=$ac_cv_path_PKG_CONFIG
+if test -n "$PKG_CONFIG"; then
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $PKG_CONFIG" >&5
+$as_echo "$PKG_CONFIG" >&6; }
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+fi
+
+
+fi
+if test -z "$ac_cv_path_PKG_CONFIG"; then
+  ac_pt_PKG_CONFIG=$PKG_CONFIG
+  # Extract the first word of "pkg-config", so it can be a program name with args.
+set dummy pkg-config; ac_word=$2
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
+$as_echo_n "checking for $ac_word... " >&6; }
+if ${ac_cv_path_ac_pt_PKG_CONFIG+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  case $ac_pt_PKG_CONFIG in
+  [\\/]* | ?:[\\/]*)
+  ac_cv_path_ac_pt_PKG_CONFIG="$ac_pt_PKG_CONFIG" # Let the user override the test with a path.
+  ;;
+  *)
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+    for ac_exec_ext in '' $ac_executable_extensions; do
+  if { test -f "$as_dir/$ac_word$ac_exec_ext" && $as_test_x "$as_dir/$ac_word$ac_exec_ext"; }; then
+    ac_cv_path_ac_pt_PKG_CONFIG="$as_dir/$ac_word$ac_exec_ext"
+    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+  done
+IFS=$as_save_IFS
+
+  ;;
+esac
+fi
+ac_pt_PKG_CONFIG=$ac_cv_path_ac_pt_PKG_CONFIG
+if test -n "$ac_pt_PKG_CONFIG"; then
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_pt_PKG_CONFIG" >&5
+$as_echo "$ac_pt_PKG_CONFIG" >&6; }
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+fi
+
+  if test "x$ac_pt_PKG_CONFIG" = x; then
+    PKG_CONFIG=""
+  else
+    case $cross_compiling:$ac_tool_warned in
+yes:)
+{ $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: using cross tools not prefixed with host triplet" >&5
+$as_echo "$as_me: WARNING: using cross tools not prefixed with host triplet" >&2;}
+ac_tool_warned=yes ;;
+esac
+    PKG_CONFIG=$ac_pt_PKG_CONFIG
+  fi
+else
+  PKG_CONFIG="$ac_cv_path_PKG_CONFIG"
+fi
+
+fi
+if test -n "$PKG_CONFIG"; then
+	_pkg_min_version=0.16
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking pkg-config is at least version $_pkg_min_version" >&5
+$as_echo_n "checking pkg-config is at least version $_pkg_min_version... " >&6; }
+	if $PKG_CONFIG --atleast-pkgconfig-version $_pkg_min_version; then
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+	else
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+		PKG_CONFIG=""
+	fi
+
+fi
+
+  no_glib=""
+
+  if test "x$PKG_CONFIG" = x ; then
+    no_glib=yes
+    PKG_CONFIG=no
+  fi
+
+  min_glib_version=2.29.0
+  { $as_echo "$as_me:${as_lineno-$LINENO}: checking for GLIB - version >= $min_glib_version" >&5
+$as_echo_n "checking for GLIB - version >= $min_glib_version... " >&6; }
+
+  if test x$PKG_CONFIG != xno ; then
+    ## don't try to run the test against uninstalled libtool libs
+    if $PKG_CONFIG --uninstalled $pkg_config_args; then
+	  echo "Will use uninstalled version of GLib found in PKG_CONFIG_PATH"
+	  enable_glibtest=no
+    fi
+
+    if $PKG_CONFIG --atleast-version $min_glib_version $pkg_config_args; then
+	  :
+    else
+	  no_glib=yes
+    fi
+  fi
+
+  if test x"$no_glib" = x ; then
+    GLIB_GENMARSHAL=`$PKG_CONFIG --variable=glib_genmarshal glib-2.0`
+    GOBJECT_QUERY=`$PKG_CONFIG --variable=gobject_query glib-2.0`
+    GLIB_MKENUMS=`$PKG_CONFIG --variable=glib_mkenums glib-2.0`
+
+    GLIB_CFLAGS=`$PKG_CONFIG --cflags $pkg_config_args`
+    GLIB_LIBS=`$PKG_CONFIG --libs $pkg_config_args`
+    glib_config_major_version=`$PKG_CONFIG --modversion glib-2.0 | \
+           sed 's/\([0-9]*\).\([0-9]*\).\([0-9]*\)/\1/'`
+    glib_config_minor_version=`$PKG_CONFIG --modversion glib-2.0 | \
+           sed 's/\([0-9]*\).\([0-9]*\).\([0-9]*\)/\2/'`
+    glib_config_micro_version=`$PKG_CONFIG --modversion glib-2.0 | \
+           sed 's/\([0-9]*\).\([0-9]*\).\([0-9]*\)/\3/'`
+    if test "x$enable_glibtest" = "xyes" ; then
+      ac_save_CFLAGS="$CFLAGS"
+      ac_save_LIBS="$LIBS"
+      CFLAGS="$CFLAGS $GLIB_CFLAGS"
+      LIBS="$GLIB_LIBS $LIBS"
+      rm -f conf.glibtest
+      if test "$cross_compiling" = yes; then :
+  echo $ac_n "cross compiling; assumed OK... $ac_c"
+else
+  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+#include <glib.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+int
+main ()
+{
+  unsigned int major, minor, micro;
+  char *tmp_version;
+
+  fclose (fopen ("conf.glibtest", "w"));
+
+  /* HP/UX 9 (%@#!) writes to sscanf strings */
+  tmp_version = g_strdup("$min_glib_version");
+  if (sscanf(tmp_version, "%u.%u.%u", &major, &minor, &micro) != 3) {
+     printf("%s, bad version string\n", "$min_glib_version");
+     exit(1);
+   }
+
+  if ((glib_major_version != $glib_config_major_version) ||
+      (glib_minor_version != $glib_config_minor_version) ||
+      (glib_micro_version != $glib_config_micro_version))
+    {
+      printf("\n*** 'pkg-config --modversion glib-2.0' returned %d.%d.%d, but GLIB (%d.%d.%d)\n",
+             $glib_config_major_version, $glib_config_minor_version, $glib_config_micro_version,
+             glib_major_version, glib_minor_version, glib_micro_version);
+      printf ("*** was found! If pkg-config was correct, then it is best\n");
+      printf ("*** to remove the old version of GLib. You may also be able to fix the error\n");
+      printf("*** by modifying your LD_LIBRARY_PATH enviroment variable, or by editing\n");
+      printf("*** /etc/ld.so.conf. Make sure you have run ldconfig if that is\n");
+      printf("*** required on your system.\n");
+      printf("*** If pkg-config was wrong, set the environment variable PKG_CONFIG_PATH\n");
+      printf("*** to point to the correct configuration files\n");
+    }
+  else if ((glib_major_version != GLIB_MAJOR_VERSION) ||
+	   (glib_minor_version != GLIB_MINOR_VERSION) ||
+           (glib_micro_version != GLIB_MICRO_VERSION))
+    {
+      printf("*** GLIB header files (version %d.%d.%d) do not match\n",
+	     GLIB_MAJOR_VERSION, GLIB_MINOR_VERSION, GLIB_MICRO_VERSION);
+      printf("*** library (version %d.%d.%d)\n",
+	     glib_major_version, glib_minor_version, glib_micro_version);
+    }
+  else
+    {
+      if ((glib_major_version > major) ||
+        ((glib_major_version == major) && (glib_minor_version > minor)) ||
+        ((glib_major_version == major) && (glib_minor_version == minor) && (glib_micro_version >= micro)))
+      {
+        return 0;
+       }
+     else
+      {
+        printf("\n*** An old version of GLIB (%u.%u.%u) was found.\n",
+               glib_major_version, glib_minor_version, glib_micro_version);
+        printf("*** You need a version of GLIB newer than %u.%u.%u. The latest version of\n",
+	       major, minor, micro);
+        printf("*** GLIB is always available from ftp://ftp.gtk.org.\n");
+        printf("***\n");
+        printf("*** If you have already installed a sufficiently new version, this error\n");
+        printf("*** probably means that the wrong copy of the pkg-config shell script is\n");
+        printf("*** being found. The easiest way to fix this is to remove the old version\n");
+        printf("*** of GLIB, but you can also set the PKG_CONFIG environment to point to the\n");
+        printf("*** correct copy of pkg-config. (In this case, you will have to\n");
+        printf("*** modify your LD_LIBRARY_PATH enviroment variable, or edit /etc/ld.so.conf\n");
+        printf("*** so that the correct libraries are found at run-time))\n");
+      }
+    }
+  return 1;
+}
+
+_ACEOF
+if ac_fn_c_try_run "$LINENO"; then :
+
+else
+  no_glib=yes
+fi
+rm -f core *.core core.conftest.* gmon.out bb.out conftest$ac_exeext \
+  conftest.$ac_objext conftest.beam conftest.$ac_ext
+fi
+
+       CFLAGS="$ac_save_CFLAGS"
+       LIBS="$ac_save_LIBS"
+     fi
+  fi
+  if test "x$no_glib" = x ; then
+     { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes (version $glib_config_major_version.$glib_config_minor_version.$glib_config_micro_version)" >&5
+$as_echo "yes (version $glib_config_major_version.$glib_config_minor_version.$glib_config_micro_version)" >&6; }
+     :
+  else
+     { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+     if test "$PKG_CONFIG" = "no" ; then
+       echo "*** A new enough version of pkg-config was not found."
+       echo "*** See http://www.freedesktop.org/software/pkgconfig/"
+     else
+       if test -f conf.glibtest ; then
+        :
+       else
+          echo "*** Could not run GLIB test program, checking why..."
+          ac_save_CFLAGS="$CFLAGS"
+          ac_save_LIBS="$LIBS"
+          CFLAGS="$CFLAGS $GLIB_CFLAGS"
+          LIBS="$LIBS $GLIB_LIBS"
+          cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+#include <glib.h>
+#include <stdio.h>
+
+int
+main ()
+{
+ return ((glib_major_version) || (glib_minor_version) || (glib_micro_version));
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_link "$LINENO"; then :
+   echo "*** The test program compiled, but did not run. This usually means"
+          echo "*** that the run-time linker is not finding GLIB or finding the wrong"
+          echo "*** version of GLIB. If it is not finding GLIB, you'll need to set your"
+          echo "*** LD_LIBRARY_PATH environment variable, or edit /etc/ld.so.conf to point"
+          echo "*** to the installed location  Also, make sure you have run ldconfig if that"
+          echo "*** is required on your system"
+	  echo "***"
+          echo "*** If you have an old version installed, it is best to remove it, although"
+          echo "*** you may also be able to get things to work by modifying LD_LIBRARY_PATH"
+else
+   echo "*** The test program failed to compile or link. See the file config.log for the"
+          echo "*** exact error that occured. This usually means GLIB is incorrectly installed."
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext conftest.$ac_ext
+          CFLAGS="$ac_save_CFLAGS"
+          LIBS="$ac_save_LIBS"
+       fi
+     fi
+     GLIB_CFLAGS=""
+     GLIB_LIBS=""
+     GLIB_GENMARSHAL=""
+     GOBJECT_QUERY=""
+     GLIB_MKENUMS=""
+     as_fn_error $? "Test for Glib failed. See the file 'INSTALL' for help" "$LINENO" 5
+  fi
+
+
+
+
+
+  rm -f conf.glibtest
+
+
+LIBS="$LIBS $GLIB_LIBS"
 
 if test "x$client" != "xno"; then
 
@@ -24267,7 +24626,7 @@ for i in $libggz_incdirs;
 do
   for j in $libggz_header;
   do
-    echo "configure: 24270: $i/$j" >&5
+    echo "configure: 24629: $i/$j" >&5
     if test -r "$i/$j"; then
       echo "taking that" >&5
       libggz_incdir=$i
@@ -24523,7 +24882,7 @@ for i in $ggzmod_incdirs;
 do
   for j in $ggzmod_header;
   do
-    echo "configure: 24526: $i/$j" >&5
+    echo "configure: 24885: $i/$j" >&5
     if test -r "$i/$j"; then
       echo "taking that" >&5
       ggzmod_incdir=$i
@@ -24653,7 +25012,7 @@ for i in $ggz_config_dirs;
 do
   for j in ggz-config;
   do
-    echo "configure: 24656: $i/$j" >&5
+    echo "configure: 25015: $i/$j" >&5
     if test -r "$i/$j"; then
       echo "taking that" >&5
       ggz_config_dir=$i
@@ -24882,7 +25241,7 @@ for i in $ggz_gtk_incdirs;
 do
   for j in $ggz_gtk_header;
   do
-    echo "configure: 24885: $i/$j" >&5
+    echo "configure: 25244: $i/$j" >&5
     if test -r "$i/$j"; then
       echo "taking that" >&5
       ggz_gtk_incdir=$i
@@ -25074,7 +25433,7 @@ for i in $libggz_incdirs;
 do
   for j in $libggz_header;
   do
-    echo "configure: 25077: $i/$j" >&5
+    echo "configure: 25436: $i/$j" >&5
     if test -r "$i/$j"; then
       echo "taking that" >&5
       libggz_incdir=$i
@@ -25326,7 +25685,7 @@ for i in $ggzdmod_incdirs;
 do
   for j in $ggzdmod_header;
   do
-    echo "configure: 25329: $i/$j" >&5
+    echo "configure: 25688: $i/$j" >&5
     if test -r "$i/$j"; then
       echo "taking that" >&5
       ggzdmod_incdir=$i
@@ -25756,7 +26115,7 @@ for i in $libggz_incdirs;
 do
   for j in $libggz_header;
   do
-    echo "configure: 25759: $i/$j" >&5
+    echo "configure: 26118: $i/$j" >&5
     if test -r "$i/$j"; then
       echo "taking that" >&5
       libggz_incdir=$i
@@ -26012,7 +26371,7 @@ for i in $ggzmod_incdirs;
 do
   for j in $ggzmod_header;
   do
-    echo "configure: 26015: $i/$j" >&5
+    echo "configure: 26374: $i/$j" >&5
     if test -r "$i/$j"; then
       echo "taking that" >&5
       ggzmod_incdir=$i
@@ -26142,7 +26501,7 @@ for i in $ggz_config_dirs;
 do
   for j in ggz-config;
   do
-    echo "configure: 26145: $i/$j" >&5
+    echo "configure: 26504: $i/$j" >&5
     if test -r "$i/$j"; then
       echo "taking that" >&5
       ggz_config_dir=$i
@@ -26371,7 +26730,7 @@ for i in $ggz_gtk_incdirs;
 do
   for j in $ggz_gtk_header;
   do
-    echo "configure: 26374: $i/$j" >&5
+    echo "configure: 26733: $i/$j" >&5
     if test -r "$i/$j"; then
       echo "taking that" >&5
       ggz_gtk_incdir=$i
@@ -26563,7 +26922,7 @@ for i in $libggz_incdirs;
 do
   for j in $libggz_header;
   do
-    echo "configure: 26566: $i/$j" >&5
+    echo "configure: 26925: $i/$j" >&5
     if test -r "$i/$j"; then
       echo "taking that" >&5
       libggz_incdir=$i
@@ -26815,7 +27174,7 @@ for i in $ggzdmod_incdirs;
 do
   for j in $ggzdmod_header;
   do
-    echo "configure: 26818: $i/$j" >&5
+    echo "configure: 27177: $i/$j" >&5
     if test -r "$i/$j"; then
       echo "taking that" >&5
       ggzdmod_incdir=$i
@@ -29603,7 +29962,7 @@ ac_config_commands="$ac_config_commands fc_default-4"
 ac_config_commands="$ac_config_commands fc_default-5"
 
 
-CFLAGS="$EXTRA_DEBUG_CFLAGS $CFLAGS"
+CFLAGS="$EXTRA_DEBUG_CFLAGS $CFLAGS $GLIB_CFLAGS"
 CXXFLAGS="$EXTRA_DEBUG_CXXFLAGS $CXXFLAGS"
 
 CONFIGURE_DEPENDENCIES="$CONFIGURE_DEPENDENCIES \$(top_srcdir)/version.in"

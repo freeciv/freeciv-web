@@ -20,8 +20,11 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include <glib.h>
+
 /* utility */
 #include "fcintl.h"
+#include "fciconv.h"
 #include "mem.h"
 #include "rand.h"
 #include "shared.h"
@@ -718,7 +721,15 @@ void handle_unit_build_city(struct player *pplayer, int unit_id, char *name)
   res = test_unit_add_or_build_city(punit);
 
   if (res == AB_BUILD_OK) {
-    city_build(pplayer, punit, name);
+    /* Unescape city name, which has been escaped in Javascript. */
+    char* unescaped_text = g_uri_unescape_string(name, NULL);
+    char result_buf[MAX_LEN_NAME];
+    convert_string(unescaped_text,
+		     "latin1",
+		     "UTF-8",
+		     (char*)result_buf, MAX_LEN_NAME);
+    city_build(pplayer, punit, result_buf);
+    free(unescaped_text);
   } else if (res == AB_ADD_OK) {
     city_add_unit(pplayer, punit);
   } else {

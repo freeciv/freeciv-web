@@ -2,8 +2,8 @@
 # Owen Taylor     1997-2001
 
 dnl AM_PATH_GLIB_2_0([MINIMUM-VERSION, [ACTION-IF-FOUND [, ACTION-IF-NOT-FOUND [, MODULES]]]])
-dnl Test for GLIB, and define GLIB_CFLAGS and GLIB_LIBS, if gmodule, gobject or 
-dnl gthread is specified in MODULES, pass to pkg-config
+dnl Test for GLIB, and define GLIB_CFLAGS and GLIB_LIBS, if gmodule, gobject,
+dnl gthread, or gio is specified in MODULES, pass to pkg-config
 dnl
 AC_DEFUN([AM_PATH_GLIB_2_0],
 [dnl 
@@ -19,29 +19,28 @@ AC_ARG_ENABLE(glibtest, [  --disable-glibtest      do not try to compile and run
          gmodule) 
              pkg_config_args="$pkg_config_args gmodule-2.0"
          ;;
+         gmodule-no-export) 
+             pkg_config_args="$pkg_config_args gmodule-no-export-2.0"
+         ;;
          gobject) 
              pkg_config_args="$pkg_config_args gobject-2.0"
          ;;
          gthread) 
              pkg_config_args="$pkg_config_args gthread-2.0"
          ;;
+         gio*) 
+             pkg_config_args="$pkg_config_args $module-2.0"
+         ;;
       esac
   done
 
-  AC_PATH_PROG(PKG_CONFIG, pkg-config, no)
+  PKG_PROG_PKG_CONFIG([0.16])
 
   no_glib=""
 
-  if test x$PKG_CONFIG != xno ; then
-    if $PKG_CONFIG --atleast-pkgconfig-version 0.7 ; then
-      :
-    else
-      echo *** pkg-config too old; version 0.7 or better required.
-      no_glib=yes
-      PKG_CONFIG=no
-    fi
-  else
+  if test "x$PKG_CONFIG" = x ; then
     no_glib=yes
+    PKG_CONFIG=no
   fi
 
   min_glib_version=ifelse([$1], ,2.0.0,$1)
@@ -92,14 +91,14 @@ dnl
 int 
 main ()
 {
-  int major, minor, micro;
+  unsigned int major, minor, micro;
   char *tmp_version;
 
-  system ("touch conf.glibtest");
+  fclose (fopen ("conf.glibtest", "w"));
 
   /* HP/UX 9 (%@#!) writes to sscanf strings */
   tmp_version = g_strdup("$min_glib_version");
-  if (sscanf(tmp_version, "%d.%d.%d", &major, &minor, &micro) != 3) {
+  if (sscanf(tmp_version, "%u.%u.%u", &major, &minor, &micro) != 3) {
      printf("%s, bad version string\n", "$min_glib_version");
      exit(1);
    }
@@ -138,9 +137,9 @@ main ()
        }
      else
       {
-        printf("\n*** An old version of GLIB (%d.%d.%d) was found.\n",
+        printf("\n*** An old version of GLIB (%u.%u.%u) was found.\n",
                glib_major_version, glib_minor_version, glib_micro_version);
-        printf("*** You need a version of GLIB newer than %d.%d.%d. The latest version of\n",
+        printf("*** You need a version of GLIB newer than %u.%u.%u. The latest version of\n",
 	       major, minor, micro);
         printf("*** GLIB is always available from ftp://ftp.gtk.org.\n");
         printf("***\n");

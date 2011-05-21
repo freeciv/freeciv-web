@@ -2,3 +2,10 @@ This directory contains patches which contain the modifications
 made to the standard Freeciv svn trunk, to make the webclient work.
 
  - Andreas
+
+
+TODO  2011-05-21:
+I forgot to create patches for these changes, will have to be manually merged:
+https://github.com/freecivnet/freeciv-web/commit/3959f31bad154e65488c32ffe8000331fa881146#freeciv
+https://github.com/freecivnet/freeciv-web/commit/c148545a292402a32132c6fe29f4673a342a90d9#freeciv
+

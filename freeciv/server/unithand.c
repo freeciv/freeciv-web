@@ -724,13 +724,12 @@ void handle_unit_build_city(struct player *pplayer, int unit_id, char *name)
     /* Unescape city name, which has been escaped in Javascript. */
     char* unescaped_text = g_uri_unescape_string(name, NULL);
     if (unescaped_text) {
-      char* result_buf = fc_malloc(MAX_LEN_NAME);
+      char result_buf[MAX_LEN_NAME];
       convert_string(unescaped_text,
  	  	       "latin1",
 		       "UTF-8",
-		       result_buf, sizeof(result_buf));
+		       (char*)result_buf, sizeof(result_buf));
       city_build(pplayer, punit, result_buf);
-      free(unescaped_text);
     }
   } else if (res == AB_ADD_OK) {
     city_add_unit(pplayer, punit);

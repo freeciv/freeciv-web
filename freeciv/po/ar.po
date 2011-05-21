@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ar\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-05-21 09:44+0200\n"
+"POT-Creation-Date: 2011-05-21 13:55+0200\n"
 "PO-Revision-Date: 2007-08-10 18:00+0300\n"
 "Last-Translator: Ahmad M. Zawawi <zeus_go64@yahoo.com>\n"
 "Language-Team: Arabic <freeciv-i18n@freeciv.org>\n"
@@ -7917,133 +7917,133 @@ msgstr "لا يمكن إضافة %s إلى %s."
 msgid "%s added to aid %s in growing."
 msgstr "تم إضافة %s لمساعدة %s في التوسع."
 
-#: server/unithand.c:1006
+#: server/unithand.c:1037
 #, fuzzy
 msgid "The unit can't go there."
 msgstr "لا تستطيع الهجوم هناك."
 
-#: server/unithand.c:1192
+#: server/unithand.c:1223
 msgid "Your Nuclear missile was shot down by SDI defences, what a waste."
 msgstr "تم اسقاط صاروخك النووي من دفاع SDI، يا لا الخسارة."
 
-#: server/unithand.c:1196
+#: server/unithand.c:1227
 #, c-format
 msgid "The nuclear attack on %s was avoided by your SDI defense."
 msgstr "تم تجنب الهجوم النووي على %s بواسطة دفاع SDI الخاص بك."
 
 #. TRANS: "Your Cannon ... the Polish Destroyer."
-#: server/unithand.c:1271
+#: server/unithand.c:1302
 #, fuzzy, c-format
 msgid "Your %s survived the pathetic attack from the %s %s."
 msgstr "نجت وحدتك %s من الهجوم المثير للشفقة من %s %s."
 
 #. TRANS: "... Cannon ... the Polish Destroyer."
-#: server/unithand.c:1281
+#: server/unithand.c:1312
 #, fuzzy, c-format
 msgid "Your attacking %s failed against the %s %s!"
 msgstr "فشلت وحدتك %s المهاجمة أمام %s %s!"
 
-#: server/unithand.c:1362
+#: server/unithand.c:1393
 #, c-format
 msgid "Only %s can attack from sea."
 msgstr "يستطيع  %s فقط الهجوم من البحر."
 
-#: server/unithand.c:1368
+#: server/unithand.c:1399
 msgid "Cannot attack from sea."
 msgstr "لا تستطيع الهجوم من البحر."
 
-#: server/unithand.c:1376 server/unittools.c:2279
+#: server/unithand.c:1407 server/unittools.c:2279
 msgid "Cannot attack unless you declare war first."
 msgstr "لا تستطيع الهجوم إلا بعد إعلانك الحرب أولا."
 
-#: server/unithand.c:1382
+#: server/unithand.c:1413
 #, c-format
 msgid "%s can only move into your own zone of control."
 msgstr "يستطيع %s التحرك فقط إلى منطقة سيطرتك."
 
-#: server/unithand.c:1389
+#: server/unithand.c:1420
 #, c-format
 msgid "%s cannot move that far from the coast line."
 msgstr ""
 
-#: server/unithand.c:1396
+#: server/unithand.c:1427
 #, fuzzy, c-format
 msgid "Cannot invade unless you break peace with %s first."
 msgstr "لا تستطيع الهجوم إلا بعد إعلانك الحرب أولا."
 
-#: server/unithand.c:1442
+#: server/unithand.c:1473
 msgid "This unit has no moves left."
 msgstr "لم يبق لهذه الوحدة أي حركات."
 
-#: server/unithand.c:1498
+#: server/unithand.c:1529
 msgid "No diplomat action possible."
 msgstr "لا امكانية لأي أمر دبلوموسي."
 
-#: server/unithand.c:1502
+#: server/unithand.c:1533
 #, fuzzy, c-format
 msgid "Unit cannot perform diplomatic action from %s."
 msgstr "* يستطيع تنفيذ أوامر دبلوماسية.\n"
 
-#: server/unithand.c:1521
+#: server/unithand.c:1552
 #, fuzzy, c-format
 msgid "You must declare war on %s first.  Try using players dialog."
 msgstr ""
 "يجب عليك إعلان الحرب على %s أولا.  جرب استعمال مربع حوار اللاعبين (F3)."
 
-#: server/unithand.c:1540
+#: server/unithand.c:1571
 msgid "This unit is being transported, and so cannot bombard."
 msgstr "يتم نقل هذه الوحدة، ولهذا لا تستطيع القصف."
 
-#: server/unithand.c:1556
+#: server/unithand.c:1587
 msgid "You can't attack there."
 msgstr "لا تستطيع الهجوم هناك."
 
-#: server/unithand.c:1579
+#: server/unithand.c:1610
 msgid "This type of troops cannot take over a city."
 msgstr "لا يستطيع هذا النوع من القوات الاستيلاء على مدينة."
 
-#: server/unithand.c:1597
+#: server/unithand.c:1628
 msgid "A transported unit is not allied to all units or city on target tile."
 msgstr ""
 "الوحدة المنقولة غير متحالفة مع كل الوحدات أو المدينة على البلاطة المستهدفة."
 
-#: server/unithand.c:1647
+#: server/unithand.c:1678
 #, c-format
 msgid "Your %s helps build the %s in %s (%d remaining)."
 msgstr "تساعد وحدتك %s في بناء ال %s في %s (%d باقي)."
 
-#: server/unithand.c:1649
+#: server/unithand.c:1680
 #, c-format
 msgid "Your %s helps build the %s in %s (%d surplus)."
 msgstr "تساعد وحدتك %s في بناء ال %s في %s (%d فائض)."
 
-#: server/unithand.c:1705
+#: server/unithand.c:1736
 #, c-format
 msgid ""
 "Sorry, your %s cannot establish a trade route because it has no home city"
 msgstr "آسف، لا تستطيع وحدتك %s انشاء طريق للتجارة لعدم وجود مدينة أصل لها"
 
-#: server/unithand.c:1719
+#: server/unithand.c:1750
 #, c-format
 msgid "Sorry, your %s cannot establish a trade route between %s and %s"
 msgstr "آسف، لا تستطيع وحدتك %s انشاء طريق للتجارة بين %s و %s"
 
-#: server/unithand.c:1749 server/unithand.c:1770
+#: server/unithand.c:1780 server/unithand.c:1801
 #, c-format
 msgid "Sorry, your %s cannot establish a trade route here!"
 msgstr "آسف، لا تستطيع وحدتك %s انشاء طريق للتجارة هنا!"
 
-#: server/unithand.c:1754 server/unithand.c:1775
+#: server/unithand.c:1785 server/unithand.c:1806
 #, c-format
 msgid "      The city of %s already has %d better trade routes!"
 msgstr "      لدى مدينة ال %s أصلا %d طرق تجارة أفضل!"
 
-#: server/unithand.c:1789 server/unithand.c:1802
+#: server/unithand.c:1820 server/unithand.c:1833
 #, c-format
 msgid "Sorry, %s has canceled the trade route from %s to your city %s."
 msgstr "آسف, الغى %s طريق التجارة من %s إلى مدينتك %s."
 
-#: server/unithand.c:1836
+#: server/unithand.c:1867
 #, c-format
 msgid ""
 "Your %s from %s has arrived in %s, and revenues amount to %d in gold and "

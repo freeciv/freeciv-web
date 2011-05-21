@@ -17,7 +17,7 @@ var mapdeco_highlight_table = {};
 var mapdeco_crosshair_table = {};
 var mapdeco_gotoline_table = {};
 var last_redraw_time = 0;
-var MAPVIEW_REFRESH_INTERVAL = 120;
+var MAPVIEW_REFRESH_INTERVAL = 16;
 
 function mapdeco_init()
 {
@@ -550,7 +550,7 @@ function update_map_canvas_full()
  
     check_request_goto_path();
 
-    //last_redraw_time = new Date().getTime();
+    last_redraw_time = new Date().getTime();
 
     //var time = last_redraw_time - start;
     //console.log('Redraw time: ' + time);

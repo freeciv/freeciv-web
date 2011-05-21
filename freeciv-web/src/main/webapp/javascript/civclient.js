@@ -73,7 +73,7 @@ function civclient_init()
     })();
  
    (function animloop(){
-      update_map_canvas_full();
+      update_map_canvas_check();
       requestAnimFrame(animloop, mapview_canvas);
     })();
 

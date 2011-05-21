@@ -23,5 +23,6 @@ void unit_change_homecity_handling(struct unit *punit, struct city *new_pcity);
 
 bool unit_move_handling(struct unit *punit, struct tile *pdesttile,
                         bool igzoc, bool move_diplomat_city);
+void ai_unit_build_city(struct player *pplayer, int unit_id, char *name);
 
 #endif  /* FC__UNITHAND_H */

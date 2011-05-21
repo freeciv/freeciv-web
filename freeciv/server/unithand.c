@@ -723,19 +723,50 @@ void handle_unit_build_city(struct player *pplayer, int unit_id, char *name)
   if (res == AB_BUILD_OK) {
     /* Unescape city name, which has been escaped in Javascript. */
     char* unescaped_text = g_uri_unescape_string(name, NULL);
-    char result_buf[MAX_LEN_NAME];
-    convert_string(unescaped_text,
-		     "latin1",
-		     "UTF-8",
-		     (char*)result_buf, MAX_LEN_NAME);
-    city_build(pplayer, punit, result_buf);
-    free(unescaped_text);
+    if (unescaped_text) {
+      char* result_buf = fc_malloc(MAX_LEN_NAME);
+      convert_string(unescaped_text,
+ 	  	       "latin1",
+		       "UTF-8",
+		       result_buf, sizeof(result_buf));
+      city_build(pplayer, punit, result_buf);
+      free(unescaped_text);
+    }
   } else if (res == AB_ADD_OK) {
     city_add_unit(pplayer, punit);
   } else {
     city_add_or_build_error(pplayer, punit, res);
   }
 }
+
+/**************************************************************************
+...
+**************************************************************************/
+void ai_unit_build_city(struct player *pplayer, int unit_id, char *name)
+{
+  enum add_build_city_result res;
+  struct unit *punit = player_find_unit_by_id(pplayer, unit_id);
+
+  if (NULL == punit) {
+    /* Shouldn't happen */
+    freelog(LOG_ERROR, "handle_unit_build_city()"
+	    " invalid unit %d",
+	    unit_id);
+    return;
+  }
+
+  res = test_unit_add_or_build_city(punit);
+
+  if (res == AB_BUILD_OK) {
+    /* Unescape city name, which has been escaped in Javascript. */
+    city_build(pplayer, punit, name);
+  } else if (res == AB_ADD_OK) {
+    city_add_unit(pplayer, punit);
+  } else {
+    city_add_or_build_error(pplayer, punit, res);
+  }
+}
+
 
 /**************************************************************************
   Handle change in unit activity.

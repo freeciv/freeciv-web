@@ -99,7 +99,7 @@ static bool ai_do_build_city(struct player *pplayer, struct unit *punit)
             TILE_XY(ptile));
     return FALSE;
   }
-  handle_unit_build_city(pplayer, punit->id,
+  ai_unit_build_city(pplayer, punit->id,
 			 city_name_suggestion(pplayer, ptile));
   pcity = tile_city(ptile);
   if (!pcity) {

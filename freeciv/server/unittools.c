@@ -3171,7 +3171,7 @@ bool execute_orders(struct unit *punit)
       }
       break;
     case ORDER_BUILD_CITY:
-      handle_unit_build_city(pplayer, unitid,
+      ai_unit_build_city(pplayer, unitid,
 			     city_name_suggestion(pplayer, punit->tile));
       freelog(LOG_DEBUG, "  building city");
       if (player_find_unit_by_id(pplayer, unitid)) {

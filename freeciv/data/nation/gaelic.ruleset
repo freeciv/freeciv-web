@@ -1,0 +1,106 @@
+[nation_gaelic]
+
+name = _("Gaelic")
+plural = _("?plural:Gaels")
+groups="Ancient", "Medieval", "European"
+legend=_("The Gaels were Celtic people, they may have originated in Spain\
+ but were first reported in Ireland. During the Migration Period the Gaels\
+ also moved to Scotland. They are the ancestors of the modern Irish, Scots\
+ and Manx. Today, Gaelic speaking areas remain in Ireland, Scotland, the\
+ Isle of Man and the Canadian province of Nova Scotia.")
+
+leaders = {
+ "name",                        "sex"
+ "Naomh Breandán",              "Male"
+ "Naomh Pádraig",               "Male"
+ "Brigid ingen Cobthaig",       "Female"
+ "Conall Echlúath",             "Male"
+ "Mac Cairthinn mac Coelboth",  "Male"
+ "Áed Róin",                    "Male"
+ "Conn Cétchathac",             "Male"
+ "Iseabail Ní Mheic Cailéin",   "Female"
+}
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Monarchy",        _("High King %s"), _("High Queen %s")
+ "Fundamentalism",  _("Druid %s"),     _("?female:Druid %s")
+ "Democracy",       _("Taoiseach %s"), _("?female:Taoiseach %s")
+}
+
+flag="gael"
+flag_alt = "stpatrick"
+city_style = "Celtic"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+conflicts_with="irish", "scottish", "manx"
+civilwar_nations = "irish", "scottish", "manx", "canadian"
+
+	;Gaelic names of cities in Ireland, Scotland, Man and Nova Scotia
+cities =
+ "Teamhair na Rí",	;Hill of Tara
+ "Baile Átha Cliath",	;Dublin
+ "Glaschu",		;Glasgow
+ "Béal Feirste",	;Belfast
+ "Doolish",		;Douglas
+ "Baile Shidni",	;Sydney (Nova Scotia)
+ "Gaoth Dobhair",	;Gweedore
+ "Inbhir Aora",		;Inveraray
+ "Corcaigh",		;Cork
+ "Dùn Èideann",		;Dunedin
+ "Doire",		;Derry
+ "Balley Chashtal",	;Castletown
+ "Halafacs",		;Halifax
+ "Dún na nGall",	;Donegal
+ "Steòrnabhagh",	;Stornoway
+ "Gaillimh",		;Galway
+ "Obar Dheathain",	;Aberdeen
+ "Beannchor",		;Bangor
+ "Rhumsaa",		;Ramsey
+ "Glaschu Nuadh",	;New Glasgow
+ "Loch Baghasdail",	;Lochboisdale
+ "Luimneach",		;Limerick
+ "Dùn Dèagh",		;Dundee
+ "Lios na gCearrbhach",	;Lisburn
+ "Purt ny hInshey",	;Peel
+ "Baile Mór",		;Baile Mór
+ "An Spidéal",		;Spiddal
+ "Bàgh a' Chaisteil",	;Castle Bay
+ "Port Láirge",		;Waterford
+ "Baile Dhùn Lèibhe",	;Livingston
+ "Baile Nua na Mainistreach",	;Newtownabbey
+ "Baile a' Chlamhain",	;Port Hawkesbury
+ "Kione Droghad",	;Onchan
+ "An Cheathrú Rua",	;Carraroe
+ "Baile na h-Eaglais",	;Kirkwall
+ "Cill Chainnigh",	;Kilkenny
+ "Pàislig",		;Paisley
+ "Creag Abhann",	;Craigavon
+ "Baile Inbhir Nis",	;Inverness (Nova Scotia)
+ "An Daingean",		;Dingle
+ "Hiort",		;Saint Kilda
+ "Droichead Átha",	;Drogheda
+ "Cille Bhrìghde an Ear",	;East Kilbride
+ "An Baile Meánach",	;Ballymena
+ "Drochaid Mhira",	;Marion Bridge
+ "Laksaa",		;Laxey
+ "Baile an Sceilg",	;Ballinskelligs
+ "Dún Dealgan",		;Dundalk
+ "Inbhir Nis",		;Inverness (Scotland)
+ "Baile Nua na hArda",	;Newtownards
+ "An Drochaid",		;Mabou
+ "Purt le Moirrey",	;Port St Mary
+ "Baile Mhic Íre",	;Ballymakeera
+ "Sord Cholm Cille",	;Swords
+ "Comar nan Allt",	;Cumbernauld
+ "Purt Chiarn",		;Port Erin
+ "Béal Átha an Ghaorthaidh",	;Ballingeary
+ "Bré",			;Bray
+ "Hamaltan",		;Hamilton
+ "An Uaimh",		;Navan
+ "Sruighlea",		;Stirling
+ "Trá Lí"		;Tralee

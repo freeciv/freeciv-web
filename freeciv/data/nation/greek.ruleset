@@ -4,27 +4,34 @@ name=_("Greek")
 plural=_("?plural:Greeks")
 groups="Ancient", "European"
 legend=_("The ancient Greeks, between Mycenae and the Roman conquest.")
-leader=
- "Alexandros Molossus",
- "Perikles",
- "Leonidas",
- "Solon",
- "Alkibiades",
- "Megas Alexandros"	; Alexander the Great
-leader_sex="Male", "Male", "Male", "Male", "Male", "Male"
+
+leaders = {
+ "name",                "sex"
+ "Alexandros Molossus", "Male"
+ "Perikles",            "Male"
+ "Leonidas",            "Male"
+ "Solon",               "Male"
+ "Alkibiades",          "Male"
+ "Megas Alexandros",    "Male" ; Alexander the Great
+ "Gorgo",               "Female"
+}
+
+ruler_titles = {
+ "government",      "male_title",           "female_title"
+ "Anarchy",         _("Usurper %s"),        _("?female:Usurper %s")
+ "Despotism",       _("Despot %s"),         _("?female:Despot %s")
+ "Fundamentalism",  _("Elder %s"),          _("?female:Elder %s")
+}
+
 flag="greece_ancient"
 flag_alt = "greece"
 city_style = "Classical"
-ruler_titles = { "government",      "male_title",      "female_title"
-                 "Despotism",       _("Despot"),       _("?female:Despot")
-                 "Democracy",_("Prime Minister"), _("?female:Prime Minister")
-               }
 
 init_techs=""
 init_buildings=""
 init_government="Despotism"
 init_units=""
-civilwar_nations="egyptian", "persian", "Byzantine"
+civilwar_nations="macedon", "epirote", "Byzantine"
 
 cities =
 ; Original city list with native Greek orthography

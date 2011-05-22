@@ -5,42 +5,45 @@ plural = _("?plural:Czechs")
 groups="Modern", "Medieval", "European"
 legend=_("Today's Czech Republic was until 1993 part of Czechoslovakia,\
  which had been until 1918 part of the Austro-Hungarian Empire.")
-leader =
- "Jan Lucemburský",
- "Otakar II",
- "Karel IV",
- "Václav",
- "Jiří z Poděbrad",
- "Jan Žižka",
- "Jan Hus",
- "Záviš z Falknštejna",
- "Libuše",
- "Kunhuta",
- "Alžběta Pomořanská",
- "Eliška Přemyslovna",
- "Anežka",
- "T. G. Masaryk",
- "Edvard Beneš",
- "Václav Havel"
-leader_sex = "Male", "Male", "Male", "Male", "Male",
-        "Male", "Male", "Male", "Female",
-        "Female", "Female", "Female", "Female",
-        "Male", "Male", "Male"
+
+leaders = {
+ "name",                "sex"
+ "Jan Lucemburský",     "Male"
+ "Otakar II",           "Male"
+ "Karel IV",            "Male"
+ "Václav",              "Male"
+ "Jiří z Poděbrad",     "Male"
+ "Jan Žižka",           "Male"
+ "Jan Hus",             "Male"
+ "Záviš z Falknštejna", "Male"
+ "Libuše",              "Female"
+ "Kunhuta",             "Female"
+ "Alžběta Pomořanská",  "Female"
+ "Eliška Přemyslovna",  "Female"
+ "Anežka",              "Female"
+ "T. G. Masaryk",       "Male"
+ "Edvard Beneš",        "Male"
+ "Václav Havel",        "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",        "female_title"
+ "Anarchy",         _("Usurper %s"),      _("?female:Usurper %s")
+ "Communism",       _("General Secretary %s"), _("?female:General Secretary %s")
+ "Despotism",       _("Voivode %s"),     _("?female:Voivode %s")
+ "Fundamentalism",  _("Prophet %s"),     _("Prophetess %s")
+}
 
 flag = "czech"
 flag_alt = "-"
 city_style = "European"
 
-; Thane = Vladyka, Prophetess = Vestkyne (Libuse)
-ruler_titles = { "government",      "male_title",      "female_title"
-                 "Despotism",       _("Thane"),        _("Prophetess")
-               }
-
 init_techs=""
 init_buildings=""
 init_government="Despotism"
 init_units=""
-civilwar_nations="slovakian", "silesian", "polish"
+
+civilwar_nations="slovakian", "silesian", "moravian", "sorbian"
 
 cities =
         "Praha", "Brno", "Ostrava", "Plzeň", "Hradec Králové",

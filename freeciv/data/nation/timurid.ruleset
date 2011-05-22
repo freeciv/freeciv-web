@@ -1,0 +1,66 @@
+[nation_timurid]
+
+name=_("Timurid")
+plural=_("?plural:Timurids")
+groups="Medieval", "Asian"
+legend=_("Timur was a military genius who claimed lineage from Chinggis\
+ Khan and from his capital in Samarkand conquered all of Central Asia as\
+ well as parts of the Middle East and India. The court culture of Timurid\
+ Empire was heavily Persianized, while the imperial administration and\
+ military organization displayed influences from the Timurid ruling elite's\
+ Mongolian and Turkic origins.")
+
+leaders = {
+ "name",             "sex"
+ "Husayn Bayqarah",  "Male"
+ "Abu Sa'id",        "Male"
+ "Ulugh Beg",        "Male"
+ "Goharshad",        "Female"
+ "Shah Rukh",        "Male"
+ "Timur",            "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Despotism",       _("%s Khan"),      _("%s Khatan")
+ "Monarchy",        _("Emir %s"),      _("Emira %s")
+ "Fundamentalism",  _("Caliph %s"),    _("Calipha %s")
+}
+
+flag="timur"
+flag_alt="-"
+city_style="Classical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="Uzbek", "Tajik", "Iranian", "Afghani", "Mughal"
+
+cities =
+ "Samarkand",
+ "Herat",
+ "Bokhara",
+ "Tashkent",
+ "Balkh",
+ "Otrar",
+ "Khojent",
+ "Kharesm",
+ "Kish",
+ "Balkh",
+ "Ghazni",
+ "Merv",
+ "Kabul",
+ "Kandahar",
+ "Nishapur",
+ "Sebzewar",
+ "Rai",
+ "Ispahan",
+ "Shiraz",
+ "Alamut",
+ "Bagdad",
+ "Basra",
+ "Ardabil",
+ "Tabriz",
+ "Van"

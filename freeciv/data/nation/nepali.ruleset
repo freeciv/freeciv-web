@@ -1,0 +1,80 @@
+[nation_nepali]
+
+name=_("Nepali")
+plural=_("?plural:Nepalis")
+groups="Medieval", "Early Modern", "Modern", "Asian"
+legend=_("Nepal is a landlocked country located in the Himalayas. Long a\
+ multi-cultural and multi-lingual nation, its history is characterized by\
+ its location between India and China. The Nepalese principalities were\
+ united into one kingdom in the 18th century. Nepal became a republic in\
+ 2008.")
+
+leaders = {
+ "name",                        "sex"
+ "Siddharta Gautama",           "Male"
+ "Janaka",                      "Male"
+ "Dravya Shah",                 "Male"
+ "Prithvi Narayan Shah",        "Male"
+ "Jung Bahadur Rana",           "Male"
+ "Tribhuvan",                   "Male"
+ "Mahendra",                    "Male"
+ "Birendra",                    "Male"
+ "Dipendra",                    "Male"
+ "Prachanda",                   "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",           "female_title"
+ "Communism",       _("Chairman %s"),       _("Chairwoman %s")
+ "Despotism",       _("Prince %s"),         _("Princess %s")
+}
+
+flag= "nepal"
+flag_alt = "-"
+city_style = "Asian" 
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="indian", "sikkimese"
+
+cities = 
+ "Kathmandu",
+ "Pokhara",
+ "Lalitpur",
+ "Biratnagar",
+ "Birganj",
+ "Dharan",
+ "Bharatpur",
+ "Bhim Dutta",
+ "Butwal",
+ "Hetauda",
+ "Bhaktapur",
+ "Janakpur",
+ "Dhangadhi",
+ "Itahari",
+ "Triyuga",
+ "Siddharthanagar",
+ "Nepalganj",
+ "Madhyapur Thimi",
+ "Mechinagar",
+ "Ghorahi",
+ "Lekhnath",
+ "Kirtipur",
+ "Birendranagar",
+ "Gulariya",
+ "Tikapur",
+ "Ratnanagar",
+ "Kalaiya",
+ "Tulsipur",
+ "Kamalamai",
+ "Damak",
+ "Gorkha",
+ "Rajbiraj",
+ "Kapilvastu",
+ "Byas",
+ "Lahan",
+ "Putalibazar"
+ 

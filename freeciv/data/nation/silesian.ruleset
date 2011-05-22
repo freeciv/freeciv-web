@@ -5,28 +5,33 @@ plural=_("?plural:Silesians")
 groups="Medieval", "European"
 legend=_("Silesia is a region of southern Poland that was at one time an\
  independent kingdom.")
-leader = "Władysław Wygnaniec",
-         "Henryk Brodaty",
-         "Henryk Pobożny",
-	 "Jerzy IV Wilhelm",
-         "Józef Kożdoń",
-         "Jan Kustos",
-         "Wojciech Korfanty"
-leader_sex = "Male", "Male", "Male", "Male", "Male", "Male", "Male"
+
+leaders = {
+ "name",                "sex"
+ "Władysław Wygnaniec", "Male"
+ "Henryk Brodaty",      "Male"
+ "Henryk Pobożny",      "Male"
+ "Jerzy IV Wilhelm",    "Male"
+ "Józef Kożdoń",        "Male"
+ "Jan Kustos",          "Male"
+ "Wojciech Korfanty",   "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",           "female_title"
+ "Despotism",        _("Prince %s"),        _("Princess %s")
+ "Fundamentalism",   _("Bishop %s"),        _("Mother Superior %s")
+}
+
 flag="silesia"
 flag_alt = "-"
 city_style = "European"
-
-ruler_titles = { "government",      "male_title",      "female_title"
-                 "Monarchy",        _("Prince"),         _("Princess")
-                 "Democracy",_("Prime Minister"), _("?female:Prime Minister")
-               }
 init_techs=""
 init_buildings=""
 
 init_government="Despotism"
 init_units=""
-civilwar_nations = "polish"
+civilwar_nations = "polish", "sorbian", "moravian"
 
 ; if you want your favourite city to be in more prominent place, go ahead
 ; only leave first 3 cities where they are

@@ -1,0 +1,67 @@
+[nation_pictish]
+
+name = _("Pictish")
+plural = _("?plural:Picts")
+groups="European", "Ancient", "Medieval"
+legend=_("The Picts were the indigenous inhabtitants of Caledonia, Ancient\
+ Scotland. They were probably Celtic or maybe Celticized pre-Indo-Europeans.\
+ They were given the name Picts, \'painted people\', by the Romans because of\
+ their custom of tattooing their bodies. The Picts survived until well into\
+ the Middle Ages but by the 11th century they had been assimilated by the\
+ Gaelic Scots.")
+leaders = {
+ "name",     "sex"
+ "Drest",    "male"
+ "Bridei",   "male"
+ "Der-Ilei", "female"
+ "Nechtan",  "male"
+ "Eogan",    "male"
+ "Ciniod",   "male"
+}
+
+ruler_titles = {
+ "government",     "male_title",       "female_title"
+ "Anarchy",        _("Usurper %s"),    _("?female:Usurper %s")
+ "Fundamentalism", _("Druid %s"),      _("?female:Druid %s")
+ "Monarchy",       _("High King %s"),  _("High Queen %s")
+} 
+
+flag = "pict"
+flag_alt = "scotland"
+city_style = "Celtic"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+conflicts_with="scottish"
+civilwar_nations="gaelic", "briton", "scottish"
+
+cities =
+ "Circinn",
+ "Fotla",
+ "Fortriu",
+ "Cait",
+ "Ce",
+ "Fib",
+ "Fidach",
+ "Dumna",
+ "Orcas",
+ "Inchtuthil",
+ "Devana",
+ "Alauna",
+ "Peanfahel",
+ "Lindon",
+ "Coria",
+ "Colania",
+ "Pitmedden",
+ "Vanduara",
+ "Alcluith",
+ "Corda",
+ "Rerigonion",
+ "Locopibia",
+ "Lanbride",
+ "Fannaguchti",
+ "Mar",
+ "Dundurn"

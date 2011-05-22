@@ -7,32 +7,35 @@ legend=_("Croatia is the region of the Southern Slavs that was held by the\
  Austro-Hungarian Empire, rather than coming under Ottoman rule after the\
  collapse of Byzantium. During most of the 20th century it was part of the\
  Yugoslav Federation.")
-leader=
- "Ljudevit Posavski",
- "Borna",
- "Trpimir",
- "Domagoj",
- "Branimir",
- "Tomislav",
- "Stjepan Držislav",
- "Petar Krešimir IV",
- "Dmitar Zvonimir",
- "Nikola Šubić Zrinski",
- "Matija Gubec",
- "Petar Zrinski",
- "Franjo Frankopan",
- "Franjo Tuđman",
- "Josip Jelačić"
-leader_sex="Male", "Male", "Male", "Male", "Male", "Male", "Male",
-           "Male", "Male", "Male", "Male", "Male", "Male", "Male",
-           "Male"
+
+leaders = {
+ "name",                        "sex"
+ "Ljudevit Posavski",           "Male"
+ "Borna",                       "Male"
+ "Trpimir",                     "Male"
+ "Domagoj",                     "Male"
+ "Branimir",                    "Male"
+ "Tomislav",                    "Male"
+ "Stjepan Držislav",            "Male"
+ "Petar Krešimir IV",           "Male"
+ "Dmitar Zvonimir",             "Male"
+ "Nikola Šubić Zrinski",        "Male"
+ "Matija Gubec",                "Male"
+ "Petar Zrinski",               "Male"
+ "Franjo Frankopan",            "Male"
+ "Franjo Tuđman",               "Male"
+ "Josip Jelačić",               "Male"
+}
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ ; /* TRANS: Ban = Duke */
+ "Despotism",       _("Ban %s"),       _("?female:Ban %s")
+ "Fundamentalism",  _("Bishop %s"),    _("Mother Superior %s")
+}
+
 flag="croatia"
 flag_alt = "-"
 city_style = "European"
-
-ruler_titles = { "government",      "male_title",      "female_title"
-		 "Republic",	    _("President"),    _("?female:President")
-               }
 
 init_techs=""
 init_buildings=""

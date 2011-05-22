@@ -1,0 +1,106 @@
+[nation_ecuadorian]
+
+name=_("Ecuadorian")
+plural=_("?plural:Ecuadorians")
+groups="Modern", "American"
+; /* TRANS: The fourth letter in "Galapagos" should be */
+; /* TRANS: U+00E1 LATIN SMALL LETTER A WITH ACUTE if available in */
+; /* TRANS: your charset. In ISO-8859-1 (ISO Latin 1) this is 00E1. */
+legend=_("Ecuador is a country in western South America. It is divided\
+ into three very distinct geographic regions: the coastal lowlands, the\
+ mountains of the Andes and the jungles of the Oriente. The Galapagos\
+ islands are also part of Ecuador. The country gained independence from\
+ Spain in 1821 and from Colombia in 1830. Ecuador's history has been\
+ marked by rivalry between the coast (Guayaquil) and the mountains\
+ (Quito). It also fought numerous border wars with both Colombia and\
+ Peru. Nowadays Ecuador is one of the main oil producing countries of\
+ South America.")
+
+leaders = {
+ "name",                        "sex"
+ "Sebastián de Belalcázar",     "Male"
+ "Eugenio Espejo",              "Male"
+ "Juan José Flores",            "Male"
+ "Gabriel García Moreno",       "Male"
+ "Eloy Alfaro",                 "Male"
+ "José María Velasco Ibarra",   "Male"
+ "Guillermo Rodríguez Lara",    "Male"
+ "Jaime Roldós",                "Male"
+ "Leon Febres Cordero",         "Male"
+ "Abdalá Bucaram",              "Male"
+ "Rosalía Arteaga",             "Female"
+}
+
+ruler_titles = {
+ "government",      "male_title",        "female_title"
+ "Despotism",       _("General %s"),     _("?female:General %s")
+ "Fundamentalism",  _("Bishop %s"),      _("Mother Superior %s")
+}
+
+flag="ecuador"
+flag_alt = "colombia"
+city_style = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+conflicts_with = "inca"
+civilwar_nations = "colombian", "peruvian", "inca"
+
+cities =
+ "Quito (mountains, !ocean)",
+ "Guayaquil (ocean, river, !mountains)",
+ "Cuenca (mountains, !ocean)",
+ "Machala (!ocean, mountains)",
+ "Manta (ocean)",
+ "Santo Domingo de los Colorados (!ocean)",
+ "Portoviejo (hills)",
+ "Durán (river)", 			;Eloy Alfaro
+ "Ambato (mountains, !ocean)",
+ "Quevedo (river)",
+ "Riobamba (mountains)",
+ "Ibarra (mountains)",
+ "Loja (mountains)",
+ "Milagro (hills)",
+ "Esmeraldas (ocean)",
+ "Babahoyo (river)",
+ "Latacunga (mountains)",
+ "Santa Elena (ocean)",
+ "Azogues (mountains)",
+ "Guaranda (mountains)",
+ "Nueva Loja (forest, jungle)", 	;Lago Agrio
+ "Tulcán (mountains)",
+ "Macas (jungle)",
+ "Coca (jungle, river)", 		;Puerto Francisco de Orellana
+ "Tena (hills, forest, jungle)",
+ "Zamora (mountains, hills)",
+ "Puyo (jungle)",
+ "Puerto Baquerizo Moreno (ocean)",
+ "La Libertad",
+ "El Carmen",
+ "Quinindé", 				;Rosa Zarate
+ "El Empalme", 				;Velasco Ibarra
+ "Ventanas",
+ "Salinas",
+ "Pasaje",
+ "Daule",
+ "Santa Rosa",
+ "Bahía de Caráquez",
+ "Chone",
+ "Huaquillas",
+ "La Troncal",
+ "Naranjito",
+ "Balzar",
+ "Naranjal",
+ "Yaguachi",
+ "Jipijapa",
+ "Machachi",
+ "Vinces",
+ "Otavalo",
+ "Puerto Ayora",
+ "Cañar",
+ "San Cristóbal",
+ "Paquisha",
+ "Santa Rosa de Sucumbíos"

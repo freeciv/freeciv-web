@@ -1,0 +1,85 @@
+[nation_jordanian]
+
+name=_("Jordanian")
+plural=_("?plural:Jordanian")
+groups="Asian", "Modern"
+legend=_("The Hashemite Kingdom of Jordan is a country in the Middle East.\
+ During Antiquity the country was the site of numerous ancient\
+ civilizations, including the Nabateans who built the city of Petra. The\
+ country has been Arab since the 7th century. Conquered by the Ottoman\
+ Turks in 1519, it became a British League of Nations mandate after World\
+ War II. The Hashemite clan, which had led a revolt against the Turks\
+ during the war, was established as Jordan's ruling dynasty. The country\
+ finally became independent in 1946.")
+
+leaders = {
+ "name",                   "sex"
+ "T.E. Lawrence",          "Male"
+ "Abdullah bin al-Husayn", "Male"
+ "Husayn bin Talal",       "Male"
+ "Sulayman al-Nabulsi",    "Male"
+ "Abdullah II",            "Male"
+ "Ranya",                  "Female"
+}
+
+ruler_titles = {
+ "government",     "male_title",              "female_title"
+ "Despotism",      _("Sheikh %s"),            _("Shaykha %s")
+ "Fundamentalism", _("Caliph %s"),            _("Calipha %s")
+}
+
+flag="jordan"
+flag_alt = "-"
+city_style = "Classical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations = "palestinian", "iraqi"
+
+cities =
+ "'Amman",
+ "Irbid",
+ "Az-Zarqa",
+ "Al-'Aqaba (ocean)",
+ "As-Salt",
+ "Madaba",
+ "Al-Mafraq",
+ "Ma'an",
+ "At-Tafila",
+ "Jerash",
+ "Al-Karak",
+ "Ajlun",
+ "Wadi as-Sir",
+ "Ar-Russayfa",
+ "Al-Quwaysima",
+ "Halda wa Tila'-al-'Ali",
+ "Huraybat As-Suq",
+ "Ar-Ramta",
+ "Al-Jubayha",
+ "Suwaylih",
+ "Al-Baq'a",
+ "Mushayrfar Ras al-'Ayn",
+ "Umm Qusayr wal Muqabalin",
+ "Sahab",
+ "'Ayn al-Basha",
+ "Marj al-Hammam",
+ "Shnillar",
+ "Ad-Dulayl",
+ "Al-Hashimiya",
+ "Askan Abu Nusayr",
+ "Kufranja",
+ "Al-Husun",
+ "Bayt Ras",
+ "Shafa Badran",
+ "As-Sarih",
+ "Aydun",
+ "Al-Mashari'a",
+ "'Anjara",
+ "Gawr ash-Shafi",
+ "Dayr Abi Sa'id",
+ "Muhayyam al-Hushin",
+ "Wadi Musa"
+

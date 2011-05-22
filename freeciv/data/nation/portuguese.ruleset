@@ -2,36 +2,40 @@
 
 name=_("Portuguese")
 plural=_("?plural:Portuguese")
-groups="Medieval", "Modern", "European"
+groups="Medieval", "Early Modern", "Modern", "European"
 legend=_("Portugal founded the first of the great mercantile empires\
  in the 1400s on the shipbuilding advances funded by Prince Henry the\
  Navigator.")
-leader=
- "Afonso Henriques",
- "Sancho I",
- "Dinis",
- "Afonso IV",
- "João I",
- "João II",
- "Manuel I",
- "João IV",
- "Maria II",
- "António de Oliveira Salazar"
-leader_sex="Male", "Male", "Male", "Male",
-	   "Male", "Male", "Male", "Male", "Female", "Male"
+
+leaders = {
+ "name",                        "sex"
+ "Afonso Henriques",            "Male"
+ "Sancho I",                    "Male"
+ "Dinis",                       "Male"
+ "Afonso IV",                   "Male"
+ "João I",                      "Male"
+ "João II",                     "Male"
+ "Manuel I",                    "Male"
+ "João IV",                     "Male"
+ "Maria II",                    "Female"
+ "António de Oliveira Salazar", "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",           "female_title"
+ "Despotism",       _("Viscount %s"),       _("Viscountess %s")
+ "Fundamentalism",  _("Patriarch %s"),      _("Mother Superior %s")
+}
+
 flag="portugal"
 flag_alt = "-"
 city_style = "Classical"
-
-ruler_titles = { "government",      "male_title",      "female_title"
-                 "Democracy",_("Prime Minister"), _("?female:Prime Minister")
-}
 
 init_techs=""
 init_buildings=""
 init_government="Despotism"
 init_units=""
-civilwar_nations = "brazilian"
+civilwar_nations = "brazilian", "angolan", "east timorese", "mozambican"
 
 cities =
  "Lisboa", "Guimarães", "Guarda", "Vila Real", "Viseu", "Braga",

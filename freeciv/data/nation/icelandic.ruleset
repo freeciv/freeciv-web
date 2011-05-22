@@ -7,16 +7,21 @@ legend=_("Iceland was long one of the largest uninhabited islands in the\
  world, until it was settled by Norwegian Vikings in the\
  late 9th century. The island was kept initially under the Norwegian and\
  later the Danish crown until independence from Denmark in 1944.")
-leader=
- "Jón Sigurdsson",
- "Ingólfur Arnarson",
- "Sveinn Björnsson",
- "Ásgeir Ásgeirsson",
- "Kristján Eldjárn",
- "Vigdís Finnbogadóttir"
 
-leader_sex="Male", "Male", "Male", "Male", "Male", "Female"
-
+leaders = {
+ "name",                        "sex"
+ "Jón Sigurdsson",              "Male"
+ "Ingólfur Arnarson",           "Male"
+ "Sveinn Björnsson",            "Male"
+ "Ásgeir Ásgeirsson",           "Male"
+ "Kristján Eldjárn",            "Male"
+ "Vigdís Finnbogadóttir",       "Female"
+}
+ruler_titles = {
+ "government",      "male_title",           "female_title"
+ "Despotism",       _("Earl %s"),           _("?female:Earl %s")
+ "Fundamentalism",  _("Bishop %s"),         _("?female:Bishop %s")
+}
 flag="iceland"
 flag_alt = "norway"
 city_style = "European"
@@ -25,7 +30,7 @@ init_techs=""
 init_buildings=""
 init_government="Despotism"
 init_units=""
-civilwar_nations = "danish", "english", "canadian"
+civilwar_nations = "danish", "faroese"
 
 cities =
     "Reykjavík",

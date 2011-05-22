@@ -14,16 +14,17 @@ legend=_("Illyrians were Indo-European tribes who appeared in the\
 ; listed from legendary founder, until conquered by romans.
 ; researching turns out to be annoyingly difficult due to
 ; Albanian apologists opining alternate spellings and "meanings".
-leader=
-  "Hyllus",	; d 1225 BCE
-  "Bardyllis",	; c 385-358 BCE, Dardanian (Bardhylus?)
-  "Grabus",	; c 356 BCE, Grabaei
-  "Pleuratus",	; c 344-337 BCE, Ardiaei
-  "Glaukias",	; c 335-303 BCE, Taulanti
-  "Agron",	; c 250-231 BCE, Ardiaei, capital Scodra
-  "Teuta",	; a 227 BCE
-  "Gentius"	; c 180-168 BCE
-leader_sex="Male", "Male", "Male", "Male", "Male", "Male", "Female", "Male"
+leaders = {
+ "name",        "sex"
+ "Hyllus",      "Male" ; d 1225 BCE
+ "Bardyllis",   "Male" ; c 385-358 BCE, Dardanian (Bardhylus?)
+ "Grabus",      "Male" ; c 356 BCE, Grabaei
+ "Pleuratus",   "Male" ; c 344-337 BCE, Ardiaei
+ "Glaukias",    "Male" ; c 335-303 BCE, Taulanti
+ "Agron",       "Male" ; c 250-231 BCE, Ardiaei, capital Scodra
+ "Teuta",       "Female" ; a 227 BCE
+ "Gentius",     "Male" ; c 180-168 BCE
+}
 
 flag = "illyria"
 flag_alt = "-"
@@ -33,7 +34,7 @@ init_techs=""
 init_buildings=""
 init_government="Despotism"
 init_units=""
-civilwar_nations = "thracian", "greek", "roman"
+civilwar_nations = "thracian", "greek", "epirote"
 
 ; known regional capitals listed first.
 ; remaining order is following the coastline, S-N, W-E,

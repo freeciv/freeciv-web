@@ -5,14 +5,23 @@ plural=_("?plural:Polynesian")
 groups= "Oceanian"
 legend=_("Polynesian culture stretches from Hawaii to New Zealand to\
  Easter Island and covers all the islands in between.")
-leader=
- "Solomon Mamaloni",
- "Malietoa Tanumafili",
- "Tofilau Eti Alesana",
- "Kamehameha",
- "Salote Tupou III"
- 
-leader_sex="Male", "Male", "Male", "Male", "Female"
+
+leaders = {
+ "name",                "sex"
+ "Solomon Mamaloni",    "Male"
+ "Malietoa Tanumafili", "Male"
+ "Tofilau Eti Alesana", "Male"
+ "Kamehameha",          "Male"
+ "Pomare IV",           "Female"
+}
+
+ruler_titles = {
+ "government",      "male_title",            "female_title"
+ "Monarchy",        _("Great Chief %s"),     _("?female:Great Chief %s")
+ "Republic",        _("Spokesman %s"),       _("Spokeswoman %s")
+ "Democracy",       _("Principal Chief %s"), _("?female:Principal Chief %s")
+}
+
 flag="polynesian"
 flag_alt = "-"
 city_style = "Tropical"
@@ -22,12 +31,12 @@ init_buildings=""
 init_government="Despotism"
 init_units=""
 
-conflicts_with = "maori", "hawaiian"
-civilwar_nations = "maori", "hawaiian"
+conflicts_with = "maori", "hawaiian", "fijian", "tongan"
+civilwar_nations = "maori", "hawaiian", "fijian", "tongan"
 
 cities =
  "Apia",	; Samoa
- "Nukualofa",	; Tonga
+ "Nuku'alofa",	; Tonga
  "Lautoka",	; Fiji
  "Papeete",	; Tahiti, French Polynesia
  "Hanga Roa",	; Easter Islands

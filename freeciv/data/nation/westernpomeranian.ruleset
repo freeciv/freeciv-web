@@ -1,0 +1,83 @@
+[nation_westernpomeranian]
+
+name=_("Western Pomeranian")
+plural=_("?plural:Western Pomeranians")
+groups="European", "Medieval"
+legend=_("Western Pomerania is a geographical and historical region in\
+ North West Poland and the extreme North East of Germany. Initially an\
+ independent Slavic state, Western Pomerania was twice conquered by the\
+ Polish. Later, Western Pomerania succumbed to Germanization and was\
+ divided into smaller feudal principalities which were gradually conquered\
+ by Brandenburg. For many years this land was part of Germany but in 1945\
+ it was attached to Poland.")
+
+leaders = {
+ "name",                "sex"
+ "Warcisław I",         "Male"
+ "Warcisław II",        "Male"
+ "Barmin I",            "Male"
+ "Bogusław I",          "Male"
+ "Bogusław IV",         "Male"
+ "Kazimierz II",        "Male"
+ "Racibor",             "Male"
+ "Eryk I",              "Male"
+ "Eryk II",             "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",         "female_title"
+ "Despotism",       _("Prince %s"),       _("Princess %s")
+ "Fundamentalism",  _("Archbishop %s"),   _("?female:Archbishop %s")
+ "Monarchy",        _("Grand Prince %s"), _("Grand Princess %s")
+}
+
+flag = "pomerania"
+flag_alt = "-"
+city_style = "European"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+conflicts_with = "german"
+civilwar_nations = "polish", "greater polish", "prussian", "kashubian"
+
+cities =
+  "Szczecin",
+"Wolin",
+"Kamień Pomorski",
+"Stargard Szczeciński",
+"Kołobrzeg",
+"Koszalin",
+"Arkona",
+"Darłowo",
+"Słupsk",
+"Wołogoszcz",   ;Wolgast
+"Pyrzyce",
+"Szczecinek",
+"Lębork",
+"Bytów",
+"Łeba",
+"Strzałów",      ;Stralsund
+"Świnoujście",
+"Białogard",
+"Świdwin",
+"Nowogard",
+"Sławno",
+"Ustka",
+"Bardo",
+"Człuchów",
+"Police",
+"Złocieniec",
+"Drawsko Pomorskie",
+"Choszczno",
+"Tuczno",
+"Nakło",     ;Anklam
+"Cedynia",
+"Nowe Warpno",
+"Trzebiatów",
+"Pęzino",
+"Trzęsacz",
+"Kołbacz",
+"Krąg"

@@ -8,30 +8,32 @@ legend=_("Moldova was conquered by the Ottomans in the 16th century.\
  From 1918 Moldova was part of Romania until inclusion \
  in the Soviet Union in 1940. The modern Republic of Moldova \
  gained independence from the Soviet Union in 1991.")
-leader="Dragoş",
-       "Ştefan cel Mare şi Sfânt",
-       "Vasile Lupu",
-       "Dimitrie Cantemir",
-       "Alexandru Ioan Cuza"
-leader_sex="Male", "Male", "Male", "Male", "Male"
+
+leaders = {
+ "name",                        "sex"
+ "Dragoş",                      "Male"
+ "Ştefan cel Mare şi Sfânt",    "Male"
+ "Vasile Lupu",                 "Male"
+ "Dimitrie Cantemir",           "Male"
+ "Alexandru Ioan Cuza",         "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",         "female_title"
+ "Despotism",       _("Prince %s"),      _("Princess %s")
+ "Fundamentalism",  _("Patriarch %s"),   _("Matriarch %s")
+}
 
 flag="moldova"
 flag_alt = "-"
 city_style = "European"
-
-ruler_titles = { "government",      "male_title",      "female_title"
-                 "Despotism",       _("Voievod"),      _("Doamna")
-                 "Monarchy",        _("Gospodar"),     _("Gospodarynya")
-                 "Democracy",       _("Presidente"),   _("Presidente")
-                 "Communism",       _("Tovaras"),      _("Tovarasa")
-               }
 
 init_techs=""
 init_buildings=""
 init_government="Despotism"
 init_units=""
 
-civilwar_nations = "romanian", "ukrainian", "turkish"
+civilwar_nations = "romanian", "transnistrian", "turkish"
 
 cities =
   "Chişinau",

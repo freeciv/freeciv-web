@@ -1,0 +1,71 @@
+[nation_bashkir]
+
+name=_("Bashkir")
+plural=_("?plural:Bashkirs")
+groups="European"
+legend=_("The Bashkirs are a Turkic-speaking nation in the southern Urals.\
+ Since the end of the 16th century, the Bashkirs were vassals of the Russian\
+ tsar, but have since participated in several uprisings against the\
+ Russian government. Today most of the Bashkirs live in the Bashkortostan\
+ Republic which is part of the Russian Federation.")
+
+; Latinized Bashkir - English - Cyrillic Bashkir
+leaders = {
+ "name",                        "sex"
+ "Mortadza Räximov",            "Male" ; Murtaza Rakhimov / Мортаҙа Рәхимов
+ "Äxmätzäki Velidi Tughan",     "Male" ; Zeki Velidi Togan / Әхмәтзәки Вәлиди Туған
+ "Batyrsha",                    "Male" ; Батырша
+ "Qarahaqal",                   "Male" ; Ҡараһаҡал
+ "Salawat Julajev",             "Male" ; Salavat Yulayev / Салауат Юлаев
+}
+
+ruler_titles = {
+ "government",      "male_title",         "female_title"
+ "Despotism",       _("%s Khan"),         _("%s Khatan")
+ "Monarchy",        _("Emir %s"),         _("Emira %s")
+ "Communism",  _("General Secretary %s"), _("?female:General Secretary %s")
+ "Fundamentalism",  _("Imam %s"),         _("Imama %s")
+}
+
+flag="bashkortostan"
+flag_alt = "-"
+city_style = "European"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+conflicts_with="Russian", "Soviet"
+civilwar_nations="Turkish", "Tatar", "Crimean Tatar"
+
+cities =
+; Latinized Bashkir - Russian-based English name - Cyrillic Bashkir
+ "Öfö", ; Ufa / Өфө
+ "Stärletamaq", ; Sterlitamak / Стәрлетамаҡ
+ "Salawat", ; Salavat / Салауат
+ "Neftekama", ; Neftekamsk / Нефтекама
+ "Oktjabr'skij", ; Oktyabrsky / Октябрьский
+ "Ishembaj", ; Ishimbay / Ишембай
+ "Beloret", ; Beloretsk / Белорет
+ "Tujmazy", ; Tuymazy / Туймазы
+ "Kümertau", ; Kumertau / Күмертау
+ "Mäläüez", ; Meleuz / Мәләүез
+ "Bäläbäj", ; Belebey / Бәләбәй
+ "Sibaj", ; Sibay / Сибай
+ "Börö", ; Birsk / Бөрө
+ "Uchaly", ; Uchaly / Учалы
+ "Blagoweshchen", ; Blagoveshchensk / Благовещен
+ "Dürtöylö", ; Dyurtyuli / Дүртөйлө
+ "Jangauyl", ; Yanaul / Яңауыл
+ "Däüläkän", ; Davlekanovo / Дәүләкән
+ "Aghidzel", ; Agidel / Ағиҙел
+ "Mezhgor'e", ; Mezhgorye / Межгорье
+ "Bajmaq", ; Baymak / Баймаҡ
+ "Iglin", ; Iglino / Иглин
+ "Saqmaghosh", ; Chekmagush / Саҡмағош
+ "Kushnarenko", ; Kushnarenkovo / Кушнаренко
+ "Bishbuläk", ; Bizhbulyak / Бишбуләк
+ "Jylajyr", ; Zilair / Йылайыр
+ "Stärlebash", ; Sterlibashevo / Стәрлебаш
+ "Järmäkäy" ; Ermekeevo / Йәрмәкәй

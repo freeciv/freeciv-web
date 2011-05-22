@@ -2,66 +2,58 @@
 
 name=_("Bengali")
 plural=_("?plural:Bengalis")
-groups="Asian", "Medieval", "Modern"
+groups="Asian", "Medieval"
 legend=_("Bengal is a region in the easternmost part of the Indian\
  subcontinent. The first recorded independent king of the Bengali is\
  Shashanka who reigned around 606 AD. Today the People's Republic of\
  Bangladesh occupies the eastern part of the region, while the western part\
  is the Indian state of West Bengal.")
-leader=
- "Shashanka",
- "Gopala I",
- "Dharampala",
- "Devapala",
- "Jagat Malla",
- "Siraj Ud Daulah",
- "Ziaur Rahman"
-leader_sex="Male", "Male", "Male", "Male", "Male", "Male", "Male"
-flag="bangladesh"
+
+leaders = {
+ "name",                "sex"
+ "Isa Khan",            "Male"
+ "Vijay Sen",           "Male"
+ "Lakshman Sen",        "Male"
+ "Devapala",            "Male"
+ "Dharampala",          "Male" ; Dhôrmopal
+ "Gopala",              "Male"
+ "Shashanka",           "Male" ; Shôshangko
+}
+
+ruler_titles = {
+ "government",      "male_title",        "female_title"
+ "Despotism",       _("Raja %s"),        _("Rani %s")
+ "Monarchy",        _("Maharaja %s"),    _("Maharani %s")
+ "Republic",        _("Nabob %s"),       _("?female:Nabob %s")
+}
+
+flag="bengal"
 flag_alt = "-"
 city_style = "Asian"
-
-ruler_titles = { "government",      "male_title",        "female_title"
-                 "Republic",       _("Nabob"),           _("?female:Nabob")
-                 "Anarchy",        _("Major"),           _("?female:Major")
-               }
 
 init_techs=""
 init_buildings=""
 init_government="Despotism"
 init_units=""
-civilwar_nations = "indian", "burmese"
+civilwar_nations = "tibetan", "burmese", "bhutanese", "bangladeshi"
 
-; Contemporary cities of Bangladesh, in order of population:
-; http://de.wikipedia.org/wiki/Liste_der_Städte_in_Bangladesch
 cities =
- "Dhaka",
- "Chittagong",
- "Khulna",
- "Rajshahi",
- "Tongi",
- "Sylhet",
- "Rangpur",
- "Mymensingh",
- "Narayangonj",
- "Barisal",
- "Jessore",
- "Comilla",
- "Nawabganj",
- "Dinajpur",
- "Bogra",
- "Kadamrasul",
- "Madhabdi",
- "Sirajganj",
- "Tangail",
- "Brahmanbaria",
- "Gazipur",
- "Savar",
- "Naogaon",
- "Jamalpur",
- "Pabna Sadar",
- "Feni",
- "Saidpur",
- "Faridpur",
- "Magura",
- "Chandpur"
+ "Karnasuvarna", ; কর্ণসুবর্ণ Karnasubarna
+ "Gaur", ; গৌড়
+ "Pataliputra",
+ "Paharpur",
+ "Nabadwip",
+ "Bikrampur",
+ "Bhawal",
+ "Sonargaon",
+ "Betor", ; বেতড়
+ "Devkot", ; দেবকোট
+ "Mahasthangarh", ; Môhasthangôṛ মহাস্থানগড়
+ "Gobindapur", ; গোবিন্দপুর
+ "Kalikata", ; কলিকাতা
+ "Sutanuti", ; সুতানুটি
+ "Mainamati", ; ময়নামতি Môenamoti
+ "Pandua", ; পান্ডুয়া
+ "Saptagram", ; সপ্তগ্রাম
+ "Tamralipta", ; or Tamralipti তাম্রলিপ
+ "Koch Behar"

@@ -9,24 +9,29 @@ legend=_("At the time of the decline of the old Roman empire, the Emperor\
  empire lasted until 1453 when its capital fell to the Ottomans. At the time\
  of Justinian I, the Byzantines controlled nearly all of the Middle East,\
  northern Africa, Italy, and parts of Spain.")
-leader=
- "Justinianus I",
- "Heraclius",
- "Michael VIII Palaeologus",
- "Mauricius I",
- "Basilios II Bulgaroktonos",
- "Theodora"
-leader_sex="Male", "Male", "Male", "Male", "Male", "Female"
+
+leaders = {
+ "name",                        "sex"
+ "Justinianus I",               "Male"
+ "Heraclius",                   "Male"
+ "Michael VIII Palaeologus",    "Male"
+ "Mauricius I",                 "Male"
+ "Basilios II Bulgaroktonos",   "Male"
+ "Theodora",                    "Female"
+}
+
+ruler_titles = {
+ "government",      "male_title",        "female_title"
+ "Anarchy",         _("Usurper %s"),     _("?female:Usurper %s")
+ "Despotism",       _("Despot %s"),      _("?female:Despot %s")
+ "Fundamentalism",  _("Patriarch %s"),   _("Matriarch %s")
+ "Monarchy",        _("Emperor %s"),     _("Empress %s")
+ "Republic",        _("Consul %s"),      _("?female:Consul %s")
+}
+
 flag="byzantium"
 flag_alt = "greek"
 city_style = "Classical"
-
-ruler_titles = { "government",      "male_title",      "female_title"
-                 "Despotism",       _("Imperator"),   _("Imperatrix")
-		 "Fundamentalism",  _("Patriarch"),   _("Matriarch")
-		 ; /* TRANS: Basileus = Monarch */
-                 "Monarchy",        _("Basileus"),    _("?female:Basileus")
-               }
 
 init_techs=""
 init_buildings=""

@@ -1,0 +1,101 @@
+[nation_gokturk]
+
+name=_("Gokturk")
+plural=_("?plural:Gokturks")
+groups="Medieval", "Asian"
+; /* TRANS: The second letter in "Gokturk" should be */
+; /* TRANS: U+00F6 LATIN SMALL LETTER O WITH DIAERESIS if available in */
+; /* TRANS: your charset. In ISO-8859-1 (ISO Latin 1) this is 246. */
+; /* TRANS: The fifth letter in "Gokturk" should be */
+; /* TRANS: U+00FC LATIN SMALL LETTER U WITH DIAERESIS if available in */
+; /* TRANS: your charset. In ISO-8859-1 (ISO Latin 1) this is 252. */
+legend=_("The Gokturk or Old Turkic Khaganate was ruled by the Ashina dynasty\
+ which derived its legendary origins from the red she-wolf. The Gokturks\
+ were ancestors of the modern Turkic nations in Asia and Eastern Europe.\
+ They were the creators of a vast military empire, which covered the\
+ steppe areas from the Kuban river in the West to Korea in the East.")
+
+leaders = {
+ "name",        "sex"
+ "Asena",       "Male" ;legendary son of red she-wolf
+ "Bumin",       "Male"
+ "Issik",       "Male"
+ "Muqan",       "Male"
+ "Taspar",      "Male"
+ "Ishbara",     "Male"
+ "Bagha",       "Male"
+ "Istami",      "Male"
+ "Tardush",     "Male"
+ "Heshana",     "Male"
+ "Böri",        "Male"
+ "Shibir",      "Male"
+ "Ilterish",    "Male"
+ "Qapaghan",    "Male"
+ "Bilge",       "Male"
+ "Tengri",      "Male"
+ "Irterish",    "Male"
+ "Ozmish",      "Male"
+ "Kul Tigin",   "Male"
+ "Tonyukuk",    "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",         "female_title"
+ "Despotism",       _("%s Khan"),         _("%s Khatan")
+ "Monarchy",        _("%s Khagan"),       _("?female:%s Khagan")
+ "Fundamentalism",  _("Great Shaman %s"), _("?female:Great Shaman %s")
+}
+
+flag = "gokturk"
+flag_alt = "-"
+city_style = "asian"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+conflicts_with = "kazakh", "uzbek", "kyrgyz", "uyghur", "khazar", "turkmen", "tatar", "crimean tatar", "turkish",
+                 "ottoman"
+civilwar_nations = "tocharian", "khazar", "uyghur"
+
+; City names come from en.wikipedia and book Drevniye Tiurki by L. Gumilov
+
+cities =
+"Suyab",	; principal capital of Western Turkic Khaganate
+"Navekat",	; summer capital of Western Turkic Khaganate
+"Ashite",	; Old Turkic aristocratic tribe
+"Sir",		; main house of Siejento tribe
+"Semerkand",
+"Merv",
+"Chach",	;Tashkent
+"Qanqlis",
+"Khalkha",
+"Hohhot",
+"Tulu",
+"Nushipi",
+"Karluk",
+"Turgesh",
+"Ili",
+"Shutun",
+"Hochen",
+"Karaşar",
+"Nesef",
+"Derbent",
+"Chik",
+"Tuyuk",
+"Alashan",
+"Yaglakar",
+"Bayirku",
+"Tongra",
+"Bishbalyk",
+"Bukhara",
+"Paykend",
+"Badgis",
+"Balkh",
+"Kashgar",
+"Kucha",
+"Turfan",
+"Fergana",
+"Maymurg",
+"Kesh",
+"Usrushana"

@@ -1,0 +1,95 @@
+[nation_monegasque]
+
+name = _("Monegasque")
+plural = _("?plural:Monegasque")
+groups="European", "Modern", "Early Modern", "Medieval"
+legend=_("With only two square kilometers, Monaco is the second smallest\
+ country in the world. It has been ruled by the Grimaldi dynasty ever\
+ since the country was founded in 1297. In 1861 Monaco lost more than 95\
+ percent of its territory to France. The principality is noted for its\
+ absence of income taxes, its casino and its Formula 1 track. Foreigners\
+ make up more than 80 percent of the population. In terms of GDP per\
+ capita Monaco is the wealthiest country in the world by a large margin.")
+
+leaders = {
+ "name",                "sex"
+ "François Grimaldi",   "Male"
+ "Charles Grimaldi",    "Male"
+ "Claudine",            "Female"
+ "Honoré II",           "Male"
+ "Florestan I",         "Male"
+ "Louis II",            "Male"
+ "Rainier III",         "Male"
+ "Albert II",           "Male"
+ "Caroline",            "Female"
+}
+
+ruler_titles = {
+ "government",     "male_title",           "female_title"
+ "Democracy",   _("Minister of State %s"), _("?female:Minister of State %s")
+ "Fundamentalism", _("Bishop %s"),         _("Mother Superior %s")
+ "Despotism",      _("Prince %s"),         _("Princess %s")
+}
+
+flag = "monaco_alternative" 
+flag_alt = "indonesia" ;the regular flag is identical to the Indonesian flag
+city_style = "Classical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="italian", "french"
+
+cities =
+;traditional quarters
+ "Monaco-Ville",
+ "Monte-Carlo",
+ "La Condamine",
+ "Fontvieille",
+;wards and neighborhoods
+ "Spélugues",
+ "La Rousse",
+ "Saint-Roman",
+ "Larvotto",
+ "Bas Moulins",
+ "Saint-Michel",
+ "La Colle",
+ "Les Révoires",
+ "Le Portier",
+ "Moneghetti",
+ "Le Ténao",
+;territory lost in 1861
+ "Roquebrune",
+ "Menton",
+ "Monti",
+ "Garavan",
+ "Cap-Martin",
+;titles of the Grimaldi dynasty
+ "Valentinois",
+ "Baux",
+ "Carladès",
+ "Polignac",
+ "Calvinet",
+ "Buis",
+ "Saint-Rémy",
+ "Matignon",
+ "Torigni",
+ "Saint-Lô",
+ "La Luthumière",
+ "Hambye",
+ "Estouteville",
+ "Mazarin",
+ "Mayenne",
+ "Château-Porcien",
+ "Ferrette",
+ "Belfort",
+ "Thann",
+ "Rosemont",
+ "Altkirch",
+ "Isenheim",
+ "Chilly",
+ "Longjumeau",
+ "Massy",
+ "Guiscard"

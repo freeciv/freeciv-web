@@ -1,0 +1,81 @@
+[nation_ashanti] 
+
+name=_("Ashanti") 
+plural=_("?plural:Ashantis") 
+groups="African", "Medieval", "Early Modern" 
+legend=_("The Ashanti were an ancient kingdom in part of modern Ghana. The\
+ first Ashanti kingdom was founded in the 11th century.")
+
+leaders = {
+ "name",                "sex"
+ "Twum",                "Male"
+ "Antwi",               "Male"
+ "Kobia Amamfi",        "Male"
+ "Oti Akenten",         "Male"
+ "Obiri Yeboa",         "Male"
+ "Osei Tutu Opemsoo",   "Male"
+ "Amaniampon",          "Male"
+ "Opoku Ware Katakyie", "Male"
+ "Kusi Oboadum",        "Male"
+ "Safo Kantanka",       "Male"
+ "Osei Kwadwo Okoawia", "Male"
+ "Osei Kwame",          "Male"
+ "Atakora Kwame",       "Male"
+ "Opoku Fofie",         "Male"
+ "Osei Yaw Akoto",      "Male"
+ "Kofi Karikari",       "Male"
+ "Mensa Bonsu",         "Male"
+ "Akyampon Panyin",     "Male"
+ "Prempeh I",           "Male"
+}
+
+ruler_titles = {
+ "government",  "male_title",       "female_title"
+ "Democracy",   _("Councillor %s"), _("?female:Councillor %s") 
+ "Monarchy",    _("Asantehene %s"), _("?female:Asantehene %s")  
+}
+
+flag= "ashanti" 
+flag_alt = "-" 
+city_style = "Celtic" 
+
+init_techs="" 
+init_buildings="" 
+init_government="Despotism" 
+init_units="" 
+
+civilwar_nations="dahomean", "malian"
+
+cities=
+  "Kumasi",
+  "Bono Mansu",
+  "Bekwai",
+  "Dumassi",
+  "Jabin",
+  "Abofu",
+  "Insuta",
+  "Jemo",
+  "Ajumakassi",
+  "Odumasi",
+  "Sirasu",
+  "Dudiasi",
+  "Fumsu",
+  "Amudasu",
+  "Akrofumu",
+  "Kumavu",
+  "Kumvo",
+  "Dasuo",
+  "Dahnsu",
+  "Edujan",
+  "Boreman",
+  "Ejura",
+  "Tanosu",
+  "Adada",
+  "Toibassu",
+  "Essian Kwanta",
+  "Moinsi",
+  "Kokotu",
+  "Bosumakwe",
+  "Odumasi",
+  "Mampon",
+  "Edunku"

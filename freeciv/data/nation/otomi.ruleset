@@ -1,0 +1,110 @@
+[nation_otomi]
+
+; /* TRANS: The fifth letter in "Otomi" and "Otomies" should be */
+; /* TRANS: U+00ED LATIN SMALL LETTER I WITH ACUTE if available in */
+; /* TRANS: your charset. In ISO-8859-1 (ISO Latin 1) this is 237. */
+name=_("Otomi")
+plural=_("?plural:Otomies")
+groups="American", "Ancient", "Medieval"
+
+; /* TRANS: The second and fifth letters in "Hnahnu" should be */
+; /* TRANS: U+00F1 LATIN SMALL LETTER N WITH TILDE if available in */
+; /* TRANS: your charset. In ISO-8859-1 (ISO Latin 1) this is 241. */
+; /* TRANS: The third letter in "Hnahnu" should be */
+; /* TRANS: U+00E4 LATIN SMALL LETTER A WITH DIAERESIS if available in */
+; /* TRANS: your charset. In ISO-8859-1 (ISO Latin 1) this is 228. */
+legend=_("The Otomi are one of the most ancient peoples of Mexico. They\
+ have lived in Central Mexico ever since the development of agriculture\
+ or even longer. A warlike people, they served as mercenaries in the\
+ armies of many Mesoamerican civilizations and got their name from the\
+ otmitl, the crack military order of the Aztecs, in which many of them\
+ served. In their own language they are called Hnahnu. With more than half\
+ a million people the Otomi are still one of the biggest indigenous groups\
+ of Mexico.")
+
+leaders = {
+ "name",                "sex"
+ "Zidada Hyadi",        "Male"
+ "Zinänä",              "Female"
+ "B'odga",              "Male"
+ "Ñädo",                "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",         "female_title"
+ "Monarchy",        _("Great Chief %s"),  _("?female:Great Chief %s")
+ "Fundamentalism",  _("Shaman %s"),       _("?female:Shaman %s")
+}
+
+flag = "otomi"
+flag_alt = "-"
+city_style = "Celtic"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations = "aztec", "zapotec", "mixtec"
+
+cities =
+ "Nts'ütkani",	;Ixmiquilpan
+ "Nxamado",	;Huichapan
+ "Mähñem'i",	;Tula
+ "Mäñ'uts'i",	;Actopan
+ "Ndoxei",	;Tlaxcala
+ "Mbado",	;Atlacomulco
+ "Ngühmu",	;Tulancingo
+ "Ndema",	;Puebla
+ "Njünthe",	;Pachuca
+ "Ndäthe",	;Tamazunchale
+ "Magats'i",	;Real del Monte
+ "Ndämxei",	;Querétaro
+ "Ndathi",	;Celaya
+ "Mbixe",	;Tequixquiac
+ "Mb'oñ'u",	;Orizaba
+ "Xamige", 	;Acambay
+ "Ndänuë",	;Guanajuato
+ "Tsinäkua",	;Silao
+ "Nzehni",	;Toluca
+ "T'axt'öhö",	;Chapultepec
+ "Xido",	;Salamanca
+ "M'onda",	;México DF
+ "Nmiñ'u",	;San Luis Potosí
+ "Huaxk'anda",	;Aguascalientes
+ "Nxamti",
+ "Pixkuai",
+ "B'anxu",
+ "B'atha",
+ "Böhai",
+ "B'omits'a",
+ "B'öñä",
+ "Hñe Gamiñ'o",
+ "Mät'äxi",
+ "Hospada",
+ "Däñ'u",
+ "M'omu",
+ "M'ohai",
+ "B'omits'a",
+ "Hiafi",
+ "Nzi'batha",
+ "Nt'ähi",
+ "B'oy'e",
+ "Xonpatrumi",
+ "Bext'ent'öhö",
+ "Nkande",
+ "Mäsofo",
+ "Mäxei",
+ "Mätha",
+ "Nthëkunthë",
+ "Mänguani",
+ "Nzanfre",
+ "Doxei",
+ "Ndoxei",
+ "Taximäi",
+ "Bito",
+ "Uadahe",
+ "B'ithö",
+ "Nänxu",
+ "Mämüi",
+ "Mäböza"
+

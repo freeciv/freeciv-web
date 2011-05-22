@@ -1,0 +1,80 @@
+[nation_scythian] 
+
+name=_("Scythian") 
+plural=_("?plural:Scythians") 
+groups="Ancient", "European", "Asian"
+legend=_("The Scythians or Scyths were an Ancient Iranian people of\
+ horse-riding nomadic pastoralists who throughout Classical Antiquity\
+ dominated the Pontic-Caspian steppe, known at the time as Scythia. By\
+ Late Antiquity the closely-related Sarmatians came to dominate the\
+ Scythians in this area. Much of the surviving information about the\
+ Scythians comes from the Greek historian Herodotus (c. 440 BC) in his\
+ Histories and Ovid in his poem of exile Epistulae ex Ponto, and\
+ archaeologically from the exquisite goldwork found in Scythian burial\
+ mounds in Ukraine and Southern Russia.")
+
+leaders = {
+ "name",        "sex"
+ "Bartatua",    "Male"
+ "Madius",      "Male"
+ "Protothyes",  "Male"
+ "Partitavas",  "Male"
+ "Agar",        "Male"
+ "Akrosas",     "Male"
+ "Anacharsis",  "Male"
+ "Antir",       "Male"
+ "Argotes",     "Male"
+ "Ariant",      "Male"
+ "Ariapeith",   "Male"
+ "Arimaz",      "Male"
+ "Aristagoras", "Male"
+ "Ateus",       "Male"
+ "Gnur",        "Male"
+ "Zarina",      "Female"
+}
+
+flag= "scythia" 
+flag_alt = "-" 
+city_style = "Celtic" 
+
+init_techs="" 
+init_buildings="" 
+init_government="Despotism" 
+init_units="" 
+
+conflicts_with="russian", "ukrainian", "ruthenian"
+civilwar_nations="thracian", "persian", "tocharian", "ossetian", "sarmatian", "saka"
+
+cities =
+ "Tanais",
+ "Kostromskaya",
+ "Solocha",
+ "Voronesh",
+ "Shumeiko",
+ "Chertomlysk",
+ "Olbia",
+ "Jaxartes",
+ "Vettersfelde",
+ "Pantikapaion",
+ "Alana",
+ "Sarmata",
+ "Phasis",
+ "Aspila",
+ "Sauroma",
+ "Dandaria",
+ "Toreta",
+ "Gorgippia",
+ "Ulchu",
+ "Gelonus",
+ "Samarkand",
+ "Aborake",
+ "Sindika",
+ "Kamianka",
+ "Tskhinval",
+ "Hermonassa",
+ "Neapolis",
+ "Ziwiye",
+ "Orlat",
+ "Solokha",
+ "Histria"
+

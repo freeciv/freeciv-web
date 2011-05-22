@@ -1,0 +1,70 @@
+[nation_buryat]
+
+name=_("Buryat")
+plural=_("?plural:Buryats")
+groups="Asian"
+legend=_("According to Mongolian historical annals, the Buryats were\
+ forest dwelling Mongolian tribes living around Lake Baikal. In 1207 they\
+ were subjugated by Jochi, the eldest son of Genghis Khan. When\
+ the Buryat homeland was annexed to Russia through treaties in 1689 and\
+ 1728, they became politically separated from other Mongolians and started\
+ developing a distinct national identitiy. Today, the Buryat Republic\
+ is home to the majority of the roughly half-million Buryats in the world\
+ as well as the center of Buddhism in Russia.")
+
+leaders = {
+ "name",                  "sex"
+ "Vyacheslav Nagovitsyn", "Male"
+ "Dashi-Dorzho Itigilov", "Male"
+ "Agvan Dorzhiev",        "Male"
+ "Elbegdorj Rinchino",    "Male"
+ "Bidia Dandaron",        "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Despotism",       _("%s Khan"),      _("%s Khatan")
+ "Monarchy",        _("%s Khagan"),    _("?female:%s Khagan")
+ "Fundamentalism",  _("Lama %s"),      _("?female:Lama %s")
+}
+
+flag="buryatia"
+flag_alt=""
+city_style="Asian"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="Mongol", "Kalmyk", "Tuvan"
+
+cities =
+ "Ulaan-Üde", ; Улаан-Үдэ, Ulan-Ude
+ "Khojto-Bajgal", ; Хойто-Байгал, Severobaykalsk
+ "Galuuta", ; Галуута, Gusinoozyorsk
+ "Khjaagta", ; Хяагта, Kyakhta
+ "Selenge", ; Сэлэнгэ
+ "Ust-Orda", ; Усть-Орда
+ "Zakhajnaman", ; Захайнаман, Zakamensk
+ "Nokhoj", ; Нохой
+ "Ara Gol", ; Ара Гол
+ "Besüür", ; Бэсүүр
+ "Khori", ; Хори
+ "Khaamin", ; Хаамин
+ "Cagaatajn-Shebee", ; Цагаатайн-Шэбээ
+ "Ebilge", ; Эбилгэ
+ "Bargazhanaj-Adag", ; Баргажанай-Адаг, Ust-Barguzin
+ "Khezhenge", ; Хэжэнгэ
+ "Turantaj", ; Турантай
+ "Khadaanskha", ; Хабаансха
+ "Nashan", ; Нашан
+ "Bargazhan", ; Баргажан
+ "Khuramkhaan", ; Хурамхаан
+ "Narhata", ; Нарһата
+ "Doodo Angar", ; Доодо Ангар
+ "Mukhar-Sheber", ; Мухар-Шэбэр
+ "Zagaraj", ; Загарай
+ "Kheren", ; Хэрэн
+ "Khaljuuta", ; Халюута
+ "Shene Elkhi" ; Шэнэ Элхи

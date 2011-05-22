@@ -9,12 +9,18 @@ legend=_("The island of Dominica was first sighted by Europeans, including\
  \"Commonwealth of Dominica\", the country should not be confused with the\
  Dominican Republic, another Caribbean nation.")
 
-leader=
- "Roosevelt Skerrit",
- "Pierre Charles",
- "Rosie Douglas",
- "Jennes Armour"
-leader_sex="Male", "Male", "Male", "Male"
+leaders = {
+ "name",                "sex"
+ "Roosevelt Skerrit",   "Male"
+ "Pierre Charles",      "Male"
+ "Rosie Douglas",       "Male"
+ "Jennes Armour",       "Male"
+}
+
+ruler_titles = {
+ "government",     "male_title",           "female_title"
+ "Fundamentalism", _("Bishop %s"),         _("Mother Superior %s")
+}
 
 flag="dominica"
 flag_alt = "-"

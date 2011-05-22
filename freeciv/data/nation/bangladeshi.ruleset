@@ -1,0 +1,70 @@
+[nation_bangladeshi]
+
+name=_("Bangladeshi")
+plural=_("?plural:Bangladeshis")
+groups="Modern", "Asian"
+legend=_("The People's Republic of Bangladesh was formed from the former\
+ Pakistani territory of East Bengal following a war of independence.")
+
+leaders = {
+ "name",                   "sex"
+ "Siraj ud-Daulah",        "Male"
+ "Ziaur Rahman",           "Male"
+ "Sheikh Mujibur Rahman",  "Male"
+ "Maulana Bhashani",       "Male"
+ "Hussain Muhammad Ershad", "Male"
+ "Khaleda Zia",            "Female"
+}
+
+ruler_titles = {
+ "government",     "male_title",         "female_title"
+ "Despotism",      _("Raja %s"),         _("Rani %s")
+ "Monarchy",       _("Maharaja %s"),     _("Maharani %s")
+ "Republic",       _("Nabob %s"),        _("?female:Nabob %s")
+ "Fundamentalism", _("Mullah %s"),       _("?female:Mullah %s")
+}
+
+flag="bangladesh"
+flag_alt = "-"
+city_style = "Asian"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+conflicts_with="Bengali"
+civilwar_nations="Sikkimese", "Assamese"
+
+cities =
+ "Dhaka",
+ "Chittagong",
+ "Khulna",
+ "Rajshahi",
+ "Tongi",
+ "Sylhet",
+ "Rangpur",
+ "Mymensingh",
+ "Narayangonj",
+ "Barisal",
+ "Jessore",
+ "Comilla",
+ "Nawabganj",
+ "Dinajpur",
+ "Bogra",
+ "Kadamrasul",
+ "Madhabdi",
+ "Sirajganj",
+ "Tangail",
+ "Brahmanbaria",
+ "Gazipur",
+ "Savar",
+ "Naogaon",
+ "Jamalpur",
+ "Pabna Sadar",
+ "Feni",
+ "Saidpur",
+ "Faridpur",
+ "Magura",
+ "Chandpur"
+

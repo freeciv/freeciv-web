@@ -1,0 +1,104 @@
+[nation_yucatecan]
+
+name=_("Yucatecan")
+plural=_("?plural:Yucatecans")
+groups="American"
+; /* TRANS: The sixth letter in "Yucatan" should be */
+; /* TRANS: U+00E1 LATIN SMALL LETTER A WITH ACUTE if available in */
+; /* TRANS: your charset. In ISO-8859-1 (ISO Latin 1) this is 00E1. */
+legend=_("Yucatan is a peninsula of Mexico, famous for its Maya heritage\
+ and its white beaches. Its name is often claimed to mean \"we don't\
+ understand you\" in Yucatec Maya. On two occasions in the 19th century\
+ Yucatan declared independence from Mexico. Currently it is divided into\
+ three states: Yucatan, Campeche and Quintana Roo.")
+
+leaders = {
+ "name",                        "sex"
+ "Francisco de Montejo",        "Male"
+ "Diego de Landa",              "Male"
+ "Andrés Quintana Roo",         "Male"
+ "Santiago Méndez",             "Male"
+ "Miguel Barbachano",           "Male"
+ "Justo Sierra",                "Male"
+ "Felipe Carrillo Puerto",      "Male"
+ "Víctor Cevera Pacheco",       "Male"
+ "Carlos Sansores Pérez",       "Male"
+ "Ivonne Ortega",               "Female"
+}
+ruler_titles = {
+ "government",      "male_title",            "female_title"
+ "Despotism",       _("Captain General %s"), _("?female:Captain General %s")
+ "Fundamentalism",  _("Bishop %s"),          _("Mother Superior %s")
+}
+
+flag="yucatan"
+flag_alt = "-"
+city_style = "Classical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations = "mayan"
+
+cities =
+ "Mérida (jungle, forest)",
+ "Campeche (ocean)",
+ "Chetumal (ocean, swamp)",
+ "Valladolid (forest, jungle)",
+ "Tekax (jungle, forest, hills)",
+ "Izamal",
+ "Maní",
+ "Sisal (ocean)",
+ "Cancún (ocean, jungle)",
+ "Ciudad del Carmen (ocean, swamp)",
+ "Champotón (ocean)",
+ "San Miguel (ocean)",		;Cozumel
+ "Playa del Carmen (ocean)",
+ "Bacalar (lake, jungle)",
+ "Celestún (swamp)",
+ "Escárcega",
+ "Motul",
+ "Ticul",
+ "Progreso (ocean)",
+ "Tizimín",
+ "Kanasín",
+ "Tulum (ocean)",
+ "Akumal",
+ "Oxkutzcab",
+ "Chicxulub",
+ "Peto (jungle)",
+ "Xpujil (jungle)",
+ "Umán",
+ "Felipe Carrillo Puerto",	;Chan Santa Cruz
+ "Candelaria (river, swamp)",
+ "Isla Mujeres (ocean)",
+ "Dzemul",
+ "Muna",
+ "José María Morelos",
+ "Kantunilkín",
+ "Mahahual",
+ "Xcalak",
+ "Calkiní",
+ "Hecelchakán",
+ "Hopelchén (jungle)",
+ "Palizada",
+ "Tenabo",
+ "Río Lagartos (river, swamp)",
+ "Telchac Puerto (ocean)",
+ "Telchac Pueblo (!ocean)",
+ "Dzitbalché",
+ "Bolonchén",
+ "Zoh Laguna",
+ "Punta Allen (ocean)",		;Javier Rojo Gómez
+ "Tecoh",
+ "Komchén",
+ "Seybaplaya (ocean)",
+ "Chiná",
+ "Xelhá (ocean)",
+ "Yucalpetén",
+ "San Felipe",
+ "Pisté",
+ "Conkal",
+ "Alfredo V. Bonfil"

@@ -6,19 +6,23 @@ groups="Modern", "Oceanian"
 legend=_("The island group of New Zealand was annexed by Britain in 1840.\
  Following a royal proclamation in 1907, the country became an independent\
  dominion within the Commonwealth of Nations.")
-leader=
- "Norm Kirk",
- "Dick Seddon",
- "Rob Muldoon",
- "David Lange"
-leader_sex="Male", "Male", "Male", "Male"
+
+leaders = {
+ "name",        "sex"
+ "Norm Kirk",   "Male"
+ "Dick Seddon", "Male"
+ "Rob Muldoon", "Male"
+ "David Lange", "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",           "female_title"
+ "Fundamentalism",  _("Bishop %s"),         _("?female:Bishop %s")
+}
+
 flag="newzealand"
 flag_alt = "australia"
 city_style = "Tropical"
-
-ruler_titles = { "government",      "male_title",      "female_title"
-                 "Democracy",_("Prime Minister"), _("?female:Prime Minister")
-}
 
 init_techs=""
 init_buildings=""

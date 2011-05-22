@@ -1,0 +1,81 @@
+[nation_raramuri]
+
+; /* TRANS: The fourth letter in "Raramuri" should be */
+; /* TRANS: U+00E1 LATIN SMALL LETTER A WITH ACUTE if available in */
+; /* TRANS: your charset. In ISO-8859-1 (ISO Latin 1) this is 00E1. */
+name=_("Raramuri")
+plural=_("?plural:Raramuris")
+groups= "American"
+legend=_("The Raramuri or Tarahumara live in the canyons of the Sierra\
+ Madre Occidental in the north of Mexico. They are well known for their\
+ endurance; their traditions include running long distances while\
+ kicking wooden balls in races that last up to several days. In 1891 a\
+ Raramuri uprising in Tomochi was brutally repressed by the Mexican\
+ authorities.")
+
+leaders = {
+ "name",                "sex"
+ "Candameña",           "Male"
+ "Basaseachi",          "Female"
+ "Teresa Urrea",        "Female"
+ "Cruz Chávez",         "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Fundamentalism",  _("Shaman %s"),    _("?female:Shaman %s")
+}
+
+flag="raramuri"
+flag_alt = "-"
+city_style = "Celtic"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations = "hopi", "aztec"
+
+cities =
+ "Urike",
+ "Tomochi",
+ "Basasachi",
+ "Kusarare",
+ "Bokoina",
+ "Wachochi",
+ "Kusiwiriachi",
+ "Serokawi",
+ "Batopilas",
+ "Mawarichi",
+ "Sisowichi",
+ "Temosachi",
+ "Uruwachi",
+ "Yepachi",
+ "Areponapuchi",
+ "Yepomera",
+ "Kokomorachi",
+ "Kajurichi",
+ "Wevachi",
+ "Kawisori",
+ "Yokivo",
+ "Sojawachi",
+ "Panalachi",
+ "Karichi",
+ "Tajirachi",
+ "Okoviachi",
+ "Tejolokachi",
+ "Temoris",
+ "Gasogachi",
+ "Jikamorachi",
+ "Bawichivo",
+ "Matachi",
+ "Tejolocachi",
+ "Pakime",
+ "Yekora",
+ "Tonochi",
+ "Tekoripa",
+ "Bakanora",
+ "Tosanachi",
+ "Tabaráopa"
+

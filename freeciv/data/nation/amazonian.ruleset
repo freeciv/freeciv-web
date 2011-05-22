@@ -1,0 +1,37 @@
+[nation_amazonians]
+
+name=_("Amazonian")
+plural=_("?plural:Amazons")
+groups="Imaginary"
+legend=_("The Amazons are a fictional nation of women warriors \
+which appear in Classical Greek writing and art. Authors have located \
+them in the Ukraine, Asia Minor, or Libya. The Amazons were reported \
+to remove their right breasts in order to better use the bow and other \
+weapons.")
+
+leaders = {
+ "name",                "sex"
+ "Penthesilea",         "Female"
+ "Hippolyta",           "Female"
+ "Semiramis",           "Female"
+ "Myrine",              "Female"
+ "Thalestris",          "Female"
+ "Antianara",           "Female"
+ "Antiope",             "Female"
+}
+
+flag="amazon"
+flag_alt = "-"
+city_style = "Classical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations = "Turkish"
+
+cities =
+    "Pontus", "Smyrna", "Ephesus", "Sinope", "Paphos", "Themiscyra", 
+	"Cyme", "Myrine", "Pitane", "Mytilene", "Priene", "Megara",
+	"Chaeronea", "Chalcis", "Scotussa", "Cynoscephalae", "Athens",
+	"Palus Maeotis"

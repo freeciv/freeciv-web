@@ -8,30 +8,37 @@ legend=_("Brazil was founded as a colony of Portugal but became\
  France. The country was first established as an empire under the exiled\
  Portuguese royal family. The empire lasted until the establishment of a\
  republican government in 1889.")
-leader=
- "Dom Pedro I",
- "Isabel",
- "Deodoro da Fonseca",
- "Tancredo Neves",
- "Juscelino Kubitscheck",
- "Getúlio Vargas"
-leader_sex="Male", "Female", "Male", "Male", "Male", "Male"
+
+leaders = {
+ "name",                        "sex"
+ "Pedro I",                     "Male"
+ "Isabel",                      "Female"
+ "Deodoro da Fonseca",          "Male"
+ "Getúlio Vargas",              "Male"
+ "Juscelino Kubitscheck",       "Male"
+ "João Goulart",                "Male"
+ "Ernesto Geisel",              "Male"
+ "Tancredo Neves",              "Male"
+ "Lula",                        "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Despotism",       _("Dictator %s"),  _("Dictatrix %s")
+ "Monarchy",        _("Emperor %s"),   _("Empress %s")
+ "Communism",       _("Chairman %s"),  _("Chairwoman %s")
+ "Fundamentalism", _("Director-President %s"), _("?female:Director-President %s")
+}
+
 flag = "brasil"
 flag_alt = "-"
 city_style = "Tropical"
-
-ruler_titles = { "government",      "male_title",      "female_title"
-                 "Despotism",       _("Dictator"),     _("Dictatrix")
-                 "Monarchy",        _("Imperator"),    _("Imperatrix")
-                 "Communism",       _("Chairman"),     _("Chairperson")
- "Fundamentalism", _("Director-President"), _("?female:Director-President")
-}
 
 init_techs=""
 init_buildings=""
 init_government="Despotism"
 init_units=""
-civilwar_nations = "akwe", "tupi"
+civilwar_nations = "akwe", "tupi", "rio-grandense"
 
 cities =
  "São Paulo",

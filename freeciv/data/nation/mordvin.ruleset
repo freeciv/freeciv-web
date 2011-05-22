@@ -1,0 +1,85 @@
+[nation_mordvin]
+
+name=_("Mordvin")
+plural=_("?plural:Mordvins")
+groups="European"
+legend=_("The Mordvins are a Finnic people consisting of two subgroups: the\
+ Erzya and the Moksha. Mordvins live mainly in the Republic of Mordovia,\
+ a subdivision of the Russian Federation.")
+
+leaders = {
+ "name",                "sex"
+ "Kola Merkushkin",     "Male" ; Nikolay Merkushkin / Кола Меркушкин (Moksha)
+ "Olëna",               "Female" ;  Alyona / Олёна (Erzya)
+ "Purgaz",              "Male" ; Пургаз - Erzyan Prince
+ "Puresh",              "Male" ; Пуреш - Mokshan Prince
+}
+
+ruler_titles={
+ "government",      "male_title",      "female_title"
+ "Despotism",       _("Prince %s"),    _("Princess %s")
+}
+
+flag="mordovia" ; flag of the Republic of Mordovia
+flag_alt="-"
+city_style="European"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+conflicts_with="Russian", "Soviet"
+civilwar_nations="Russian", "Finnish", "Karelian"
+
+cities =
+; Major settlements, in order of population
+ "Saranosh", ; Saransk / Саранош (Moksha)
+ "Orozaj", ; Ruzayevka / Орозай (Moksha)
+ "Lashma", ; Kovylkino / Лашма (Moksha)
+ "Osh", ; Krasnoslobodsk / Ош (Moksha)
+ "Zubu", ; Zubova Polyana / Зубу (Moksha)
+ "Ordan'bue", ; Ardatov / Орданьбуе (Erzya)
+ "Torbejbue", ; Torbeyevo / Торбейбуе (Erzya)
+ "Inzara", ; Insar / Инзара (Moksha)
+ "Ljambir'", ; Lyambir / Лямбирь (Erzya)
+ "Javaz", ; Yavas / Яваз (Moksha)
+ "Otjazhvele", ; Atyashevo / Отяжвеле (Erzya)
+ "Temnikav", ; Temnikov / Темникав (Moksha)
+ "Jo'nik", ; Yelniki / Ельник (Moksha)
+ "Trojcja", ; Troitsk / Тройця (Moksha)
+ "Sire Shjajgav", ; Staroye Shaygovo / Сире Шяйгав (Erzya)
+ "Ater'", ; Atyuryevo / Атерь (Moksha)
+
+; Random Moksha localities
+ "Ten'gzhele", ; Теньгжеле
+ "Draka", ; Трака
+ "Shirenguzha", ; Ширенгужа
+ "Anaju", ; Анаю
+ "Bad Beljazem", ; Вад Велязем
+ "Kˮrhtazh", ; Кърхтаж
+ "Kargon'shjej", ; Каргоньшей
+ "Jol'nik", ; Ельник
+ "Ocju Azjas'", ; Оцю Азясь
+ "Valgapele", ; Валгапеле
+ "Malav", ; Малав
+ "Od Pshen'", ; Од Пшень
+ "Sire Pshen'", ; Сире Пшень
+ "Shishkjeev", ; Шишкеев
+ "Pajgarma", ; Пайгарма
+ "Pir'ht'ljaj'", ; Пирьхтьляй
+ "Suzgjar'ge", ; Сузгярьге
+ "Sire Terizmorga", ; Сире Теризморга
+
+; Random Erzya localities
+ "Lambas'ke", ; Ламбаське
+ "Alovele", ; Аловеле
+ "Vishka Marez'", ; Вишка Марезь
+ "Vishka Er'mezenka", ; Вишка Эрьмезенка
+ "Kirzheman", ; Киржеман
+ "Krasnoj Poselka", ; Красной Поселка
+ "Kul'mina", ; Кульмина
+ "Marez'", ; Марезь
+ "Mokshalej", ; Мокшалей
+ "Poksh Er'mezenka", ; Покш Эрьмезенка
+ "Piche Konya" ; Пиче Коня

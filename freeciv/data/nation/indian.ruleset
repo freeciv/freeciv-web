@@ -2,55 +2,60 @@
 
 name=_("Indian")
 plural=_("?plural:Indians")
-groups="Ancient", "Medieval", "Modern", "Asian"
-legend=_("The cradle of Ancient Indian civilization lay in the Indus river\
- valley in modern-day Pakistan.")
-leader=
- "Mohandas Gandhi",
- "Ashoka",
- "Chandragupta",
- "Indira Gandhi"
-leader_sex="Male", "Male", "Male", "Female"
+groups="Modern", "Asian"
+legend=_("The Republic of India was created in 1950 following a\
+ non-violent independence movement led by Mahatma Gandhi. With more\
+ than a billion inhabitants it is the world's second most populous\
+ country as well as the world's largest democracy.")
+
+leaders = {
+ "name",                "sex"
+ "Chandragupta",        "Male"
+ "Ashoka",              "Male"
+ "Shivaji",             "Male"
+ "Subhas Chandra Bose", "Male"
+ "Mohandas Gandhi",     "Male"
+ "Jawaharlal Nehru",    "Male"
+ "Indira Gandhi",       "Female"
+}
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Despotism",       _("Raja %s"),      _("Rani %s")
+ "Fundamentalism",  _("Guru %s"),      _("?female:Guru %s")
+ "Monarchy",        _("Maharaja %s"),  _("Maharani %s")
+ "Republic",        _("Mahatma %s"),   _("?female:Mahatma %s")
+}
+
 flag="india"
 flag_alt = "-"
 city_style = "Asian"
-
-ruler_titles = { "government",      "male_title",      "female_title"
-                 "Despotism",       _("Raja"),         _("?female:Raja")
-                 "Monarchy",        _("Maharaja"),     _("?female:Maharaja")
-                 "Republic",        _("Mahatma"),      _("?female:Mahatma")
-               }
 
 init_techs=""
 init_buildings=""
 init_government="Despotism"
 init_units=""
-civilwar_nations = "lankese", "bengali"
+
+conflicts_with="Gupta", "Chola", "Mughal"
+civilwar_nations="Bengali", "Sikh", "Kashmiri", "Assamese"
 
 cities =
  "Delhi",
- "Bombay",
- "Madras",
+ "Mumbai",		; Bombay
+ "Chennai",		; Madras
  "Bangalore",
- "Calcutta",
- "Lahore",
- "Karachi",
- "Ahmadabad",
+ "Kolkata",		; Calcutta
+ "Ahmedabad",		; Ahmadabad
  "Kanpur",
  "Hyderabad",
- "Dacca",
  "Lucknow",
- "Benares",
- "Chandrigarh",
- "Rawalpindi",
- "Colombo",
+ "Varanasi",		; Benares
+ "Chandigarh",
  "Madurai",
  "Coimbatore",
- "Calicut",
- "Trivandrum",
+ "Kozhikode",		; Calicut
+ "Thiruvananthapuram",	; Trivandrum
  "Nagpur",
- "Chittagong",
- "Multan",
  "Amritsar",
  "Srinagar",
  "Agra",
@@ -64,5 +69,35 @@ cities =
  "Mysore",
  "Raipur",
  "Gaya",
- "Cawnpore",
- "Poona (hills)"
+ "Kanpur",		; Cawnpore
+ "Pune (hills)",	; Poona
+ "Ranchi",
+ "Bhubaneswar",
+ "Thiruvananthapuram",
+ "Tiruchirappalli",
+ "Dehradun",
+ "Aizawl",
+ "Gandhinagar",
+ "Imphal",
+ "Thane",
+ "Ludhiana",
+ "Pimpri-Chinchwad",
+ "Nashik",
+ "Vadodara",
+ "Faridabad",
+ "Ghaziabad",
+ "Rajkot",
+ "Meerut",
+ "Kalyan-Dombivali",
+ "Navi Mumbai",
+ "Aurangabad",
+ "Solapur",
+ "Jabalpur",
+ "Visakhapatnam",
+ "Howrah",
+ "Jodhpur",
+ "Guwahati",
+ "Vijayawada",
+ "Mira-Bhayandar",
+ "Gwalior",
+ "Hubballi-Dharwad"

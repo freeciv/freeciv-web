@@ -7,20 +7,13 @@ groups="Asian"
 legend=_("The Ainu are the indigenous people of northern Japan, the\
  Kuril islands, Sakhalin, and the southern part of the Kamchatka peninsula.")
 
-leader=
- "Kayano Shigeru",
- "Kosamaynu",
- "Samkusaynu",
- "Tsukinoe"
-leader_sex="Male", "Male", "Male", "Male"
-
-; Source: http://www.raccoonbend.com/languages/ainuenglish.html
-ruler_titles = { "government",      "male_title",        "female_title"
-		 ; /* TRANS: Nipa = Chief */
-                 "Despotism",       _("Nipa"),           _("Nipa")
-		 ; /* TRANS: Nipsa = Master */
-                 "Monarchy",        _("Nipsa"),          _("Nipsa")
-               }
+leaders = {
+ "name",                "sex"
+ "Kayano Shigeru",      "Male"
+ "Kosamaynu",           "Male"
+ "Samkusaynu",          "Male"
+ "Tsukinoe",            "Male"
+}
 
 flag="ainu"
 flag_alt = "-"

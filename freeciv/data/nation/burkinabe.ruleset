@@ -1,0 +1,74 @@
+[nation_burkinabe]
+
+; /* TRANS: The last letter in "Burkinabe" should be */
+; /* TRANS: U+00E9 LATIN SMALL LETTER E WITH ACUTE if available in */
+; /* TRANS: your charset. In ISO-8859-1 (ISO Latin 1) this is 00E9. */
+name=_("Burkinabe")
+plural=_("?plural:Burkinabes")
+groups="Modern", "African"
+legend=_("Formerly Upper Volta, Burkina Faso is a country in inland\
+ West Africa. It achieved its independence from France in 1960.")
+
+leaders = {
+ "name",                "sex"
+ "Maurice Yaméogo",     "Male"
+ "Sangoulé Lamizana",   "Male"
+ "Saye Zerbo",          "Male"
+ "Thomas Sankara",      "Male"
+ "Blaise Compaoré",     "Male"
+}
+
+flag="burkina_faso"
+flag_alt = "-"
+city_style = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations="malian", "kanem-bornu", "ivoirian"
+
+cities =
+ "Ouagadougou",
+ "Bobo-Dioulasso",
+ "Koudougou",
+ "Banfora",
+ "Ouahigouya",
+ "Pouytenga",
+ "Kaya",
+ "Tenkodogo",
+ "Fada N'Gourma",
+ "Dédougou",
+ "Garango",
+ "Houndé",
+ "Djibo",
+ "Koupéla",
+ "Réo",
+ "Léo",
+ "Kongoussi",
+ "Gaoua",
+ "Gourcy",
+ "Pô",
+ "Kombissiri",
+ "Yako",
+ "Niangoloko",
+ "Dori",
+ "Orodara",
+ "Zorgho",
+ "Manga",
+ "Titao",
+ "Nouna",
+ "Tougan",
+ "Diébougou",
+ "Ziniaré",
+ "Boulsa",
+ "Dano",
+ "Bittou",
+ "Boromo",
+ "Boussé",
+ "Solenzo",
+ "Toma",
+ "Bogandé",
+ "Sapouy",
+ "Batié",
+ "Ouargaye"

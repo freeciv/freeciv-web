@@ -2,31 +2,38 @@
 
 name=_("Persian")
 plural=_("?plural:Persians")
-groups="Ancient","Asian"
-legend=_("The first Persian (Achaemenid) Empire lasted from 550BC to 330BC;\
- the second (Sassanid) from 226AD to 642AD.")
-leader=
- "Kurush II", ; a.k.a. "Cyrus"
- "Darayavaush I", ; a.k.a. "Darius"
- "Khshayarsha I", ; a.k.a. "Xerxes"
- "Ardashir I",
- "Khosrau I",
- "Shapur I"
-leader_sex="Male", "Male", "Male", "Male", "Male", "Male"
+groups="Ancient", "Medieval", "Early Modern", "Asian"
+legend=_("The first Persian (Achaemenid) Empire lasted from 550 BC to 330\
+ BC; the second (Sassanid) from 226 AD to 642 AD.")
+
+leaders = {
+ "name",                "sex"
+ "Kurush II",           "Male" ; a.k.a. "Cyrus"
+ "Darayavaush I",       "Male" ; a.k.a. "Darius"
+ "Khshayarsha I",       "Male" ; a.k.a. "Xerxes"
+ "Ardashir I",          "Male"
+ "Khosrau I",           "Male"
+ "Shapur I",            "Male"
+ "Purandokht",          "Female"
+}
+
+ruler_titles = {
+ "government",      "male_title",         "female_title"
+ "Despotism",       _("Satrap %s"),       _("?female:Satrap %s")
+ "Monarchy",        _("%s Shah"),         _("%s Shahbanu")
+ "Fundamentalism",  _("Ayatollah %s"),    _("?female:Ayatollah %s")
+}
+
 flag="iran_ancient"
 flag_alt = "iran"
 city_style = "Classical"
-
-ruler_titles = { "government",      "male_title",      "female_title"
-                 "Monarchy",        _("Shah"),         _("Shahbanu")
-                 "Fundamentalism",  _("Ayatollah"),    _("Ayatollah")
-               }
 
 init_techs=""
 init_buildings=""
 init_government="Despotism"
 init_units=""
-civilwar_nations = "khwarezmian", "arab"
+
+civilwar_nations="Khwarezmian", "Elamite"
 
 ; Sources:
 ; http://www.livius.org/persia.html

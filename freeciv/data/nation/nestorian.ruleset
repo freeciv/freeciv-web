@@ -1,0 +1,225 @@
+[nation_nestorian]
+
+; The country name 'Nestoria' was chosen because the inhabitants were
+; believed to be Nestorian Christians.
+name=_("Nestorian")
+plural=_("?plural:Nestorians")
+groups="Imaginary"
+legend=_("Legends of Prester John circulated in Europe from the 12th\
+ through 17th centuries. The stories told of a Nestorian Christian\
+ nation beyond the boundaries of the European world; over time the\
+ location of the kingdom moved from India to Central Asia to Ethiopia.\
+ The land contained unbelievable riches and creatures, and bordered\
+ Earthly Paradise. Because the country was believed to be on the other\
+ side of the Muslim world, many Europeans hoped Prester John would be a\
+ valuable ally in their quest to end Muslim rule of the Holy Land.")
+
+leaders = {
+ "name",                "sex"
+ "Prester John",        "Male" ; a.k.a. Presbyter Johannes
+ "David of India",      "Male" ; Son, nephew or grandson of John
+ "Repanse de Schoye",   "Female" ; Mother of John (von Eschenbach)
+ "Feirefiz",            "Male" ; Father of John (von Eschenbach)
+}
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Communism",       _("Brother %s"),   _("Sister %s")
+ "Monarchy",        _("Emperor %s"),   _("Empress %s")
+ "Fundamentalism",  _("Patriarch %s"), _("Matriarch %s")
+}
+
+flag="nestoria"
+flag_alt = "-"
+city_style = "Babylonian"
+
+init_techs=""
+init_buildings=""
+
+init_government="Despotism"
+init_units=""
+civilwar_nations = "Arab", "Turkish"
+
+cities =
+ "Susa",	; location of principal palace (Mandeville)
+ "Nyse",	; royal city of Pentexoire (Mandeville)
+ "Ecbatana",	; conquered from Samiardi c. 1145 
+
+ ; Cities found on a map produced in the 1570s by Ortelius in 
+ ; Antwerp: `A Description of the Empire of Prester John, Also Known 
+ ; as the Abyssinian Empire`
+ "Furíngi (river)",
+ "Dacrut (river)",
+ "Tiruti (river)",
+ "Snarbem (ocean)",
+ "Canfila (river)",
+ "Mensuria (ocean)",
+ "Dafila (river)",
+ "Santar (ocean)",
+ "Giabel (!ocean)",
+ "Lacari (ocean)",
+ "Cantiua (river)",
+ "Dobaroa (!ocean)",
+ "Coquette (river)",
+ "Efere (river)",
+ "Finazen (!ocean)",
+ "Abarach",
+ "Carna (!ocean)",
+ "Bara (river)",
+ "Temei (river)",
+ "Chilcut (river)",
+ "Barna (river)",
+ "Callotte",
+ "S. Mïchel",
+ "de la Vi fióne",
+ "Lama",
+ "Lanagni",
+ "Cacania (ocean)",
+ "Docorio",
+ "Dangali",
+ "Docono",
+ "Belul (ocean)",
+ "Leita (ocean)",
+ "Coiberia (river)",
+ "Lumetta (river)",
+ "S. Spirite (river)",
+ "Cernil (river)",
+ "Malua (river)",
+ "Barinette (river)",
+ "Saraboefun (river)",
+ "Ermita (river)",
+ "Baza (river)",
+ "Agoas populi (river)",
+ "Corrora paruz (river)",
+ "S. Quis (river)",
+ "Cazzelle (river)",
+ "Angeba (river)",
+ "Angugi (river)",
+ "Belineluch (river, mountains)",
+ "Dobas (river, mountains)",
+ "Balli (river, mountains)",
+ "Azuga (river)",
+ "Bunace (river)",
+ "Sabbalete (river)",
+ "Candelli (river)",
+ "Dozarfe (river)",
+ "Siri (river)",
+ "Sarane (river)",
+ "Betmairia (river)",
+ "Corcora (river)",
+ "Angotina (river)",
+ "Bachla (river)",
+ "Adel",
+ "Mantra",
+ "Orgabra",
+ "Milgrat",
+ "Cimaire (ocean)",
+ "Zazella (ocean)",
+ "Opin (ocean)",
+ "Zeila (ocean)",
+ "Barbara (ocean)",
+ "Gomizara (ocean)",
+ "Aruua (ocean)",
+ "Mocauar (ocean)",
+ "Carfur (ocean)",
+ "Zingi populi (ocean)",
+ "Afuerri (ocean)",
+ "Zeit",
+ "Magadazo (ocean)",
+ "Aren",
+ "Zachet",
+ "Braua (ocean)",
+ "Pate (ocean)",
+ "Baru (river)",
+ "Aqualen (river)",
+ "Lugabella (river)",
+ "Barcena (river)",
+ "Fungi (river)",
+ "Olabi (river)",
+ "S. Croce (river)",
+ "Beleguanze (river)",
+ "Machada (river)",
+ "Sona (river)",
+ "Cemenia (river)",
+ "Ambian cantiua (river)",
+ "Syre (river)",
+ "Amafen (river)",
+ "Bugana",
+ "Angote",
+ "Maitagazi (river)",
+ "Vangue (river)",
+ "Gaga (river)",
+ "Therua (river)",
+ "Damut (river)",
+ "Vamba (river)",
+ "Zaire",
+ "Tacui (river)",
+ "Agag (river)",
+ "Ambian (river)",
+ "Goraua (river)",
+ "Noua (river)",
+ "Cafates",
+ "Zet (river, mountains)",
+ "Zembre",
+ "Arneto (mountains)",
+ "Tacui",
+ "Cotla (river)",
+ "Giara (river)",
+ "Bilibranos (river)",
+ "Anda (river)",
+ "Anarata",
+ "Zaflari",
+ "Dara (river)",
+ "Orgabea (river)",
+ "La trenit (river)",
+ "Agola (river)",
+ "Asuga (river)",
+ "Azzel (river)",
+ "Melinde (ocean)",
+ "Lamon",
+ "S. Raphael (ocean)",
+ "Gorga (river)",
+ "Sibit (river)",
+ "Quiloa (river, ocean)",
+ "Mozambique (ocean)",
+ "Tirut (river)",
+ "Falacia (mountains, !ocean)",
+ "Gasabeia",
+
+ ; Nations of the kingdom (Letter of Prester John)
+ "Gog",
+ "Magog",
+ "Anie",
+ "Agit",
+ "Azenach",
+ "Fommeperi",
+ "Befari",
+ "Conei-Samante",
+ "Agrimandri",
+ "Vintefolei",
+ "Casbei",
+ "Alanei",
+ "Zone",	; contains salamanders
+
+ ; Geographical features 
+ "Isle of Pentexoire",	; (Mandeville)
+ "Gravelly Sea",	; (Mandeville)
+ "Mistorak",		; an island  (Mandeville)
+ "Castle Gatholonabes", ; a deceitful Gatholonabes is mentioned (Mandeville)
+ "Mount Olympus",	; (Letter of Prester John)
+ "River Indus", 	; (Letter of Prester John)
+ "Lunae montes",        ; Mountains of the Moon (Ortelius)
+ "Zembre Iacus",        ; (Ortelius)
+ "Zaflan Iacus",        ; (Ortelius)
+ "Mount Amara",         ; (Ortelius)
+
+ ; Wonders said to be located in this kingdom
+ "Fountain of Youth",
+ "Gates of Alexander",
+ "Magic Mirror",	; allowed every province to be seen
+ "Holy Grail" 		; (von Eschenbach)
+
+
+
+
+

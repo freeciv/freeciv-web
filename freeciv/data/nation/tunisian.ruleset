@@ -12,27 +12,35 @@ legend=_("The Phoenicians founded Carthage in the area where Tunisia is\
  the Ottoman empire in 1861. But in 1881 Tunisia was invaded by the French\
  and was made a French protectorate. The country became independent in\
  1956.")
-leader=
- "Hussein bin Ali Agha",
- "Khair ad-Din",
- "Mustapha Khaznadar",
- "Muhammad al-Munsif",
- "Habib Bourguiba",
- "Hedi Amara Nouira"
-leader_sex="Male", "Male", "Male", "Male", "Male", "Male"
+
+leaders = {
+ "name",                        "sex"
+ "Hussein bin Ali Agha",        "Male"
+ "Khair ad-Din",                "Male"
+ "Mustapha Khaznadar",          "Male"
+ "Muhammad al-Munsif",          "Male"
+ "Habib Bourguiba",             "Male"
+ "Hedi Amara Nouira",           "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Monarchy",        _("%s Bey"),       _("?female:%s Bey")
+ "Despotism",       _("%s Dey"),       _("?female:%s Dey")
+ "Fundamentalism",  _("Caliph %s"),    _("Calipha %s")
+}
+
 flag="tunisia"
 flag_alt = "-"
 city_style = "Classical"
-
-ruler_titles = { "government",      "male_title",      "female_title"
-                 "Monarchy",        _("Bey"),          _("Bey")
-               }
 
 init_techs=""
 init_buildings=""
 init_government="Despotism"
 init_units=""
-civilwar_nations = "algerian", "libyan"
+
+conflicts_with="Carthaginian"
+civilwar_nations="Algerian", "Libyan", "Amazigh"
 
 cities =
   "Tunis",

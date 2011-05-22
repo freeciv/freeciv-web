@@ -4,15 +4,18 @@ name=_("Pirate")
 plural=_("?plural:Pirates")
 legend=_("As long as honest men have sailed the seas, pirates have been a\
  scourge of them and of all coastal dwelling peoples.")
-leader=
- "Anne Bonny",
- "Calico Jack",
- "Cofresí",
- "Blackbeard",
- "Henry Morgan",
- "François l'Ollonais",
- "Bartolomeo Portugues"
-leader_sex="Female", "Male", "Male", "Male", "Male", "Male", "Male"
+
+leaders = {
+ "name",                        "sex"
+ "Anne Bonny",                  "Female"
+ "Calico Jack",                 "Male"
+ "Cofresí",                     "Male"
+ "Blackbeard",                  "Male"
+ "Henry Morgan",                "Male"
+ "François l'Ollonais",         "Male"
+ "Bartolomeo Portugues",        "Male"
+}
+
 flag="pirate"
 flag_alt = "-"
 city_style = "European"

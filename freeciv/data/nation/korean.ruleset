@@ -2,25 +2,26 @@
 
 name=_("Korean")
 plural=_("?plural:Koreans")
-groups="Ancient", "Medieval", "Asian"
+groups="Ancient", "Medieval", "Early Modern", "Asian"
 legend=_("According to legend, the first Korean kingdom was founded in\
  prehistory by the ancestral Tangun in southern Manchuria. The Korean\
  kingdoms were united in 668 by king Munmu. Today the Korean peninsula is\
  divided into two states, North and South Korea as a result of the stalemate\
  after the Korean war in 1953.")
-leader=
- "Tangun",	; Ancestral founder of Korea
- "Chumong", ; Founding monarch of Goguryeo, 1st century BC
- "Kwanggaet'o",	; Great king of Goguryeo, 4th century
- "Sondok",	; Queen of Silla, 7th century
- "Munmu",	; King of Silla - unified the Korean kingdoms
- "Wang Kon",	; Founder and king of Goryeo, temple name "T'aejo"
- "Yi Song-gye",	; Founder and king of Joseon, temple name "T'aejo"
- "T'aejong",	; King of Joseon
- "Sejong",	; Great king of Joseon
- "Min"		; Queen of Joseon
-leader_sex= "Male", "Male", "Male", "Female", "Male", "Male", "Male", "Male", 
- "Male", "Female"
+
+leaders = {
+ "name",        "sex"
+ "Tangun",      "Male" ; Ancestral founder of Korea.
+ "Chumong",     "Male" ; Founding monarch of Goguryeo, 1st century BC.
+ "Kwanggaet'o", "Male" ; Great king of Goguryeo, 4th century.
+ "Sondok",      "Female" ; Queen of Silla, 7th century.
+ "Munmu",       "Male" ; King of Silla - unified the Korean kingdoms.
+ "Wang Kon",    "Male" ; Founder and king of Goryeo, temple name "T'aejo".
+ "Yi Song-gye", "Male" ; Founder and king of Joseon, temple name "T'aejo".
+ "T'aejong",    "Male" ; King of Joseon.
+ "Sejong",      "Male" ; Great king of Joseon.
+ "Min",         "Female" ; Queen of Joseon.
+}
 
 flag="korea_ancient"
 flag_alt = "-"
@@ -31,8 +32,8 @@ init_buildings=""
 init_government="Despotism"
 init_units=""
 
-conflicts_with = "north korean", "south korean"
-civilwar_nations = "north korean", "south korean"
+conflicts_with = "North Korean", "South Korean"
+civilwar_nations = "North Korean", "South Korean"
 
 cities =
  "Wanggomsong",

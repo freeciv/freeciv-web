@@ -7,39 +7,32 @@ legend=_("After the collapse of the Tiwanaku civilization in the\
  Andes, their heirs reorganized into a set of culturally close\
  Aymara kingdoms that thrived around the Titicaca lake until they\
  were conquered by the Incas.")
-leader=
- "Tupax Katari",	; born Julián Apasa
- "Pawlu Sarati",
- "Santos Marka Thula",
- "Wartulina Sisa",
- "Kutimpu",
- "Avelino Siñani",
- "Kkari",
- "Kurusa Llawi",
- "Apasa Tuqi",
- "Rumi Maki",
- "Qhawiri",
- "Fausto Reynaga"	; born José Félix
-leader_sex="Male", "Male", "Male", "Female", "Male",
- "Male", "Male", "Male", "Male", "Male", "Male", "Male"
+
+leaders = {
+ "name",                "sex"
+ "Tupax Katari",        "Male" ; born Julián Apasa
+ "Pawlu Sarati",        "Male"
+ "Santos Marka Thula",  "Male"
+ "Wartulina Sisa",      "Female"
+ "Kutimpu",             "Male"
+ "Avelino Siñani",      "Male"
+ "Kkari",               "Male"
+ "Kurusa Llawi",        "Male"
+ "Apasa Tuqi",          "Male"
+ "Rumi Maki",           "Male"
+ "Qhawiri",             "Male"
+ "Fausto Reynaga",      "Male" ; born José Félix
+}
+
 flag="aymara"
 flag_alt = "-"
 city_style = "Tropical"
-
-ruler_titles = { "government",      "male_title",      "female_title"
-        	 "Monarchy",        _("Jiliri"),       _("Jiliri")
-                 "Republic",        _("Mallku"),       _("Ttalla")
-                 "Democracy",       _("Mallku"),       _("Ttalla")
-        	 "Fundamentalism",  _("Willka"),       _("Willka")
-                 "Despotism",       _("Tata"),         _("Mama")
-                 "Communism",       _("Markachiri"),   _("Markachiri")
-               }
 
 init_techs=""
 init_buildings=""
 init_government="Despotism"
 init_units=""
-civilwar_nations = "inca", "chilean"
+civilwar_nations = "inca", "bolivian"
 
 cities =
  "Altupata",

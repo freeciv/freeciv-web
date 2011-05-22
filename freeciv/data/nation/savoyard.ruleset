@@ -1,0 +1,95 @@
+[nation_savoyard]
+
+name=_("Savoyard")
+plural=_("?plural:Savoyards")
+groups="Medieval", "Early Modern", "European"
+legend=_("Savoy emerged in the Western Alps after the disintegration of\
+ the Burgundian Kingdom. Its dynasty established control over Sardinia\
+ and Piedmont and later all of Italy. Savoy's growth and survival over\
+ the centuries were not based on spectacular conquests, but on gradual\
+ territorial expansion through marriage and methodical and highly\
+ manipulative political acquisitions. Savoy itself was annexed by France\
+ in 1860.")
+
+leaders = {
+ "name",                        "sex"
+ "Humbert aux Blanches-Mains",  "Male"
+ "Amédée VIII",                 "Male"
+ "Emmanuel-Philibert",          "Male"
+ "François de Sales",           "Male"
+ "Eugène de Savoie",            "Male"
+ "Victor-Amédée II",            "Male"
+ "Antoine Louis Albitte",       "Male"
+}
+
+flag="savoy"
+flag_alt = "-"
+city_style = "European"
+
+ruler_titles = {
+ "government",      "male_title",           "female_title"
+ "Despotism",       _("Duke %s"),           _("Duchess %s")
+ "Fundamentalism",  _("Bishop %s"),         _("Mother Superior %s")
+}
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+conflicts_with = "danish" ;similar flag
+civilwar_nations = "burgundian", "piedmontese"
+
+cities =
+ "Chambéry",
+ "Annecy",
+ "Thonon-les-Bains",
+ "Cluses",
+ "Bonneville",
+ "Moûtiers",
+ "Montmélian",
+ "Aoste",
+ "Aix-les-Bains",
+ "Annemasse",
+ "Annecy-le-Vieux",
+ "Cran-Gevrier",
+ "Seynod",
+ "Albertville",
+ "Sallanches",
+ "La Motte-Servolex",
+ "Rumilly",
+ "Gaillard",
+ "Courmayeur",
+ "Passy",
+ "Chamonix",
+ "Saint-Julien-en-Genevois",
+ "La Roche-sur-Foron",
+ "Saint-Jean-de-Maurienne",
+ "Meythet",
+ "Évian-les-Bains",
+ "Saint-Vincent",
+ "Bourg-Saint-Maurice",
+ "Ugine",
+ "Scionzier",
+ "Ville-la-Grand",
+ "La Ravoire",
+ "Châtillon",
+ "Cognin",
+ "Ambilly",
+ "Poisy",
+ "Faverges",
+ "Thônes",
+ "Vétraz-Monthoux",
+ "Reignier",
+ "Sarre",
+ "Marignier",
+ "Saint-Gervais-les-Bains",
+ "Saint-Pierre-en-Faucigny",
+ "Saint-Jorioz",
+ "Publier",
+ "Pont-Saint-Martin",
+ "Saint-Alban-Leysse",
+ "Thyez",
+ "Megève",
+ "Sciez",
+ "Barberaz"
+

@@ -1,0 +1,74 @@
+[nation_transnistrian]
+
+name=_("Transnistrian")
+plural=_("?plural:Transnistrians")
+groups="Modern", "European"
+legend=_("Transnistria was added to the Moldavian SSR by Stalin, although\
+ it was mostly inhabited by Russians and Ukrainians. After the collapse of\
+ the Soviet Union Transnistria declared its independence from Moldova.\
+ Although the country is de facto independent, it is not recognized by any\
+ UN member. Power is still in the hands of the old communist elite.")
+leaders = {
+ "name",                        "sex"
+ "Grigory Kotovsky",            "Male"
+ "Igor Smirnov",                "Male"
+ "Alena Arshinova",             "Female"
+}
+flag="transnistria"
+flag_alt = "-"
+city_style = "european"
+
+ruler_titles = {
+ "government",      "male_title",        "female_title"
+ "Communism",       _("First Secretary %s"), _("?female:First Secretary %s")
+ "Despotism",       _("Commissar %s"),   _("?female:Commissar %s")
+ "Fundamentalism",  _("Patriarch %s"),   _("Matriarch %s")
+}
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+conflicts_with = "soviet", "ruthenian"
+civilwar_nations = "moldovan", "russian"
+
+cities = 
+ "Tiraspol",
+ "Rybnitsa",
+ "Dubossary",
+ "Slobodzeya",
+ "Grigoriopol",
+ "Dnestrovsk",
+ "Novo-Tiraspolskiy",
+ "Kamenka",
+ "Mayak",
+ "Krasnoye",
+ "Bender",
+ "Rashkovo",
+ "Kolbasna",
+ "Kolosovo",
+ "Korotnoye",
+ "Krasniy Oktyabr",
+ "Vykhvatintsy",
+ "Parkany",
+ "Malayeshty",
+ "Lenino",
+ "Mokra",
+ "Podoyma",
+ "Popenki",
+ "Voronkovo",
+ "Stroentsy",
+ "Tashlyk",
+ "Ternovka",
+ "Vadul-Turkuluy",
+ "Valia-Adynka",
+ "Sovyetskoye",
+ "Katerinovska",
+ "Novo-Komissarovska",
+ "Dzerzhinskoye",
+ "Frunze",
+ "Severinovska",
+ "Sloboda-Rashkov",
+ "Vinogradnoye",
+ "Vladimirobskiy"

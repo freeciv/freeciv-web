@@ -9,108 +9,113 @@ legend=_("The history of the United Arab Emirates goes back to the 7th\
  emirates joined in a federative state as the United\
  Arab Emirates. The following year, the seventh member emirate joined\
  them.")
-leader="Dhiyab bin Isa ibn Nahayan",
-       "Saeed II bin Maktoum",
-       "Zayed II bin Sultan Al Nahayan",
-       "Maktoum bin Rashid Al Maktoum",
-       "Rashid bin Saeed Al Maktoum"
-leader_sex="Male", "Male", "Male", "Male", "Male"
+
+leaders = {
+ "name",                                "sex"
+ "Dhiyab bin Isa ibn Nahayan",          "Male"
+ "Saeed II bin Maktoum",                "Male"
+ "Zayed II bin Sultan Al Nahayan",      "Male"
+ "Maktoum bin Rashid Al Maktoum",       "Male"
+ "Rashid bin Saeed Al Maktoum",         "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Despotism",       _("Sheikh %s"),    _("Shaykha %s")
+ "Fundamentalism",  _("Imam %s"),      _("Imama %s")
+ "Monarchy",        _("Emir %s"),      _("Emira %s")
+ "Republic",        _("Vizier %s"),    _("?female:Vizier %s")
+}
 
 flag="uae"
 flag_alt = "-"
 city_style = "Babylonian"
-
-ruler_titles = { "government",      "male_title",      "female_title"
-                 "Despotism",       _("Caliph"),       _("Caliph")
-                 "Monarchy",        _("Emir"),         _("Emir")
-                 "Republic",        _("Sheikh"),       _("Sheikhah")
-               }
 
 init_techs=""
 init_buildings=""
 init_government="Despotism"
 init_units=""
 
-civilwar_nations = "syrian" ;, "saudi", "omani", "qatari"
+civilwar_nations="Saudi", "Omani", "Qatari"
 
 cities =
- "Abu Zaby",
+ "Abu Zabi",
  "Dubayy",
- "Shabakah",
+ "Shabaka",
  "Ajman",
  "Sharm",
- "Ash Shariqah",
- "Al Fujayrah",
- "Umm al Qaywayn",
- "Ra's al Khaymah",
+ "Ash-Shariqa",
+ "Al-Fujayra",
+ "Umm al-Qaywayn",
+ "Ra's al Khayma",
  "Rafa",
- "Dayrah",
+ "Dayra",
  "Sa'd",
  "Sall",
- "Nawah",
+ "Nawa",
  "Barr Dubayy",
  "Khawr Fakkan",
- "Murrah",
- "Al Jazirah",
- "Al Manamah",
- "Al Ayn",
+ "Murra",
+ "Al-Jazira",
+ "Al-Manama",
+ "Al-'Ayn",
  "Adhan",
  "Wafd",
  "Ghayl",
- "Layyah",
- "Ramlah",
- "Shah",
- "Asamah",
+ "Layya",
+ "Ramla",
+ "Sha",
+ "Asama",
  "Wasit",
  "Sa'if",
  "Ayim",
- "Al Awdah",
- "Far'ah",
- "As Sur",
- "Kayyah",
- "Al Ghabah",
- "Al Fara",
- "Daynah",
- "Bulaydah",
- "Al Maqta",
+ "Al-Awda",
+ "Far'a",
+ "As-Sur",
+ "Kayya",
+ "Al-Ghaba",
+ "Al-Fara",
+ "Dayna",
+ "Bulayda",
+ "Al-Maqta",
  "Sayh",
- "Al Khaznah",
- "Adh Dhayd",
- "Jumayrah",
+ "Al-Khazna",
+ "Adh-Dhayd",
+ "Jumayra",
  "Khatt",
  "Zikt",
- "Al Qurayyah",
+ "Al-Qurayya",
  "Qabas",
  "Wamm",
  "Sur",
- "Al Khan",
+ "Al-Khan",
  "Qidfa",
  "Mas'udi",
- "Al Mafraq",
+ "Al-Mafraq",
  "Ghubb",
- "Al Qawz",
+ "Al-Qawz",
  "Ma'ali",
  "Mawsil",
  "Mazyad",
- "Suhaylah",
- "Aqqah",
- "Al Marfa",
- "Sinnah",
- "Al Khis",
- "Ar Ruways",
- "Aradah",
+ "Suhayla",
+ "Aqqa",
+ "Al-Marfa",
+ "Sinna",
+ "Al-Khis",
+ "Ar-Ruways",
+ "Arada",
  "Fa'y",
  "Umm Suqaym",
- "Al Quwayz",
- "Shandaghah",
- "Ad Duss",
- "Al Udayd",
- "Sabkhah",
+ "Al-Quwayz",
+ "Shandagha",
+ "Ad-Duss",
+ "Al-Udayd",
+ "Sabkha",
  "Uqayr",
- "As Sad",
+ "As-Sad",
  "Baqal",
  "Hayl",
- "Umm al Qurayn",
- "Al Hayr",
+ "Umm al-Qurayn",
+ "Al-Hayr",
  "Muzayri",
- "Al Wathbah"
+ "Al-Wathba"

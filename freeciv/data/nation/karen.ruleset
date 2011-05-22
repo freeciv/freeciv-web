@@ -1,0 +1,58 @@
+[nation_karen]
+
+name=_("Karen")
+plural=_("?plural:Karens")
+groups="Asian", "Ancient", "Medieval"
+
+legend=_("Karens are a hardy mountain people who have lived on the western\
+ fringes of Burmese kingdoms throughout recorded history. Their own oral\
+ history suggests that they at some point migrated southwards through the\
+ Gobi Desert to reach their current home land. With the independence of\
+ Burma from the United Kingdom in 1948, an heterogenous Karen armed\
+ independence movement was initiated that continues to this day.")
+
+leaders = {
+ "name",                 "sex"
+ "Sha Lah Phan",         "Male"
+ "Win Maung",            "Male"
+ "San C. Po",            "Male"
+ "Ba U Gyi",             "Male"
+ "Bo Mya",               "Male"
+}
+
+flag="karen"
+flag_alt="-"
+city_style="Asian"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="Burmese", "Mon", "Thai"
+
+cities =
+
+; Kayin State
+ "Hpa-An",
+ "Manerplaw",
+ "Mutraw", ; Hpapun
+ "Dooplaya", ; Kawkareik
+ "Hlaingbwe",
+ "Thandang", ; Thandaung
+ "Thandanggyi",
+ "Myawaddy",
+ "Kyeikdon",
+ "Kyain Seikgyi",
+ "Payathonsu",
+ "Apalon",
+ "Kanni",
+
+; Kayah State
+ "Loikaw",
+ "Demoso",
+ "Hpruso",
+ "Shadaw",
+ "Bawlakhe",
+ "Hpasawng",
+ "Mese"

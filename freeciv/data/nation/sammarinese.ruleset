@@ -1,0 +1,93 @@
+[nation_sammarinese]
+
+name = _("Sammarinese")
+plural = _("?plural:Sammarinese")
+groups="European", "Modern", "Early Modern", "Medieval"
+legend=_("San Marino is a tiny landlocked country on the Italian Peninsula.\
+ It is the oldest independent republic in the world. According to legend,\
+ it was founded by Saint Marinus in 301 AD.")
+
+leaders = {
+ "name",                        "sex"
+ "Marino",                      "Male"
+ "Gian Giacomo Angeli",         "Male"
+ "Antonio Onofri",              "Male"
+ "Domenico Maria Belzoppi",     "Male"
+ "Domenico Fattori",            "Male"
+ "Giuliano Gozi",               "Male"
+ "Maria Lea Pedini-Angelini",   "Female"
+}
+
+ruler_titles = {
+ "government",      "male_title",           "female_title"
+ "Communism",       _("Chairman %s"),       _("Chairwoman %s")
+ "Democracy",       _("Councillor %s"),     _("?female:Councillor %s")
+ "Fundamentalism",  _("Abbot %s"),          _("Mother Superior %s")
+ "Monarchy",        _("Duke %s"),           _("Duchess %s")
+ "Republic",        _("Captain-Regent %s"), _("?female:Captain-Regent %s")
+}
+
+flag = "san_marino"
+flag_alt = "-"
+city_style = "European"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="Italian", "Papal"
+
+cities =
+ "San Marino",
+ "Acquaviva",
+ "Borgio Maggiore",
+ "Chiesanuova",
+ "Serravalle",
+ "Domagnano",
+ "Fiorentino",
+ "Faetano",
+ "Montegiardino",
+ "Dogana",
+ "Falciano",
+ "Fiorina",
+ "Piandivello",
+ "Spaccio Giannoni",
+ "Rovereta",
+ "Ventoso",
+ "Torraccia",
+ "Cerbaiola",
+ "Cailungo",
+ "Montalbo",
+ "Valgiurata",
+ "Cà Chiavello",
+ "Monte Pulito",
+ "Cà Ragni",
+ "Corianino",
+ "Molarini",
+ "Ponte Mellini",
+ "San Giovanni sotto le Penne",
+ "Crociale",
+ "Poggio Chiesanuova",
+ "Canepa",
+ "Castellaro",
+ "Capanne",
+ "Poggio Casalino",
+ "Valdragone",
+ "Santa Mustiola",
+ "Cà Rigo",
+ "Confine",
+ "Pianacci",
+ "Gualdicciolo",
+ "Casole",
+ "Calligaria",
+ "Cà Giannino",
+ "Cinque Vie",
+ "Cà Berlone",
+ "Murata",
+ "Caladino",
+ "Cà Melone",
+ "Galavotto",
+ "Lesignano",
+ "Teglio",
+ "La Serra"

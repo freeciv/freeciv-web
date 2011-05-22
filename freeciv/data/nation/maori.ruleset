@@ -6,23 +6,29 @@ groups="Oceanian"
 legend=_("The Maori are a Polynesian people that migrated to and settled the\
  island group that is now New Zealand. According to archeological evidence,\
  the migration commenced in the 900s and continued until the 1400s.")
-leader=
- "Te Kooti",
- "Hone Heke",
- "Potatau",
- "Tawhiao",
- "Apirana Ngata",
- "Te Atairangi Kaahu",
- "Te Puea Herangi"
 
-leader_sex="Male", "Male", "Male", "Male", "Male", "Female", "Female"
+leaders = {
+ "name",                "sex"
+ "Te Kooti",            "Male"
+ "Hone Heke",           "Male"
+ "Potatau",             "Male"
+ "Tawhiao",             "Male"
+ "Apirana Ngata",       "Male"
+ "Te Atairangi Kaahu",  "Female"
+ "Te Puea Herangi",     "Female"
+}
+
+ruler_titles = {
+ "government",      "male_title",            "female_title"
+ "Monarchy",        _("Paramount Chief %s"), _("?female:Paramount Chief %s")
+ "Republic",        _("Spokesman %s"),       _("Spokeswoman %s")
+ "Democracy",       _("Principal Chief %s"), _("?female:Principal Chief %s")
+ "Fundamentalism",  _("Elder %s"),           _("?female:Elder %s")
+}
+
 flag="maori"
 flag_alt = "-"
 city_style = "Tropical"
-
-ruler_titles = { "government",      "male_title",      "female_title"
-                 "Despotism",       _("Chief"),        _("?female:Chief")
-}
 
 init_techs=""
 init_buildings=""

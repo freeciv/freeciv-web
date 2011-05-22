@@ -1,0 +1,113 @@
+[nation_lorrain]
+
+name=_("Lorrain")
+plural=_("?plural:Lorrains")
+groups="Medieval", "Early Modern", "European"
+legend=_("Lorraine or Lotharingia was formed as the middle kingdom when\
+ the Frankish empire was split in three in 843. Initially stretching from\
+ the North Sea to the Mediterranean, its territory was mutilated during\
+ the struggles between the various Frankish dynasties. What was left of\
+ Lorraine became a duchy that both France and Germany were continuously\
+ eyeing for. Lorraine became a province of France in 1766.")
+
+leaders = {
+ "name",                                "sex"
+ "Lothaire II",                         "Male"
+ "Louis II le Germanique",              "Male"
+ "Zwentibold",                          "Male"
+ "René II de Lorraine",                 "Male"
+ "Antoine le Bon",                      "Male"
+ "Louise de Lorraine-Vaudémont",        "Female"
+ "Alberte-Barbe de St.-Baslemont",      "Female"
+ "François III",                        "Male"
+ "Stanislas",                           "Male"
+ "Josef Bürckel",                       "Male"
+}
+
+ruler_titles = {
+ "government",          "male_title",          "female_title"
+ "Despotism",           _("Duke %s"),          _("Duchess %s")
+ "Fundamentalism",      _("Prince-Bishop %s"), _("Princess-Bishop %s")
+}
+
+flag="lorraine"
+flag_alt = "france_old"
+city_style = "European"
+
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations = "walloon", "burgundian", "palatinate", "alsatian"
+
+cities =
+ "Nancy",
+ "Metz",
+ "Épinal",
+ "Bar-le-Duc",
+ "Verdun",
+ "Toul",
+ "Sarrebruck",		;Saarbrücken
+ "Thionville",
+ "Saint-Dié",
+ "Sarreguemines",
+ "Forbach",
+ "Lunéville",
+ "Saint-Avold",
+ "Sarrebourg",
+ "Vandoeuvre",
+ "Longwy",
+ "Pont-à-Mousson",
+ "Gérardmer",
+ "Montigny",
+ "Neufchâteau",
+ "Vittel",
+ "Villerupt",
+ "Remiremont",
+ "Laxou",
+ "Yutz",
+ "Villers",
+ "Hayange",
+ "Creutzwald",
+ "Arlon",
+ "Hagondange",
+ "Commercy",
+ "Saint-Mihiel",
+ "Créhange",
+ "Senones",
+ "Deux-Ponts",		;Zweibrücken
+ "Badonviller",
+ "Contrexéville",
+ "Valmont",
+ "Xertigny",
+ "Cattenom",
+ "Golbey",
+ "Bliescastel",		;Blieskastel
+ "Mirecourt",
+ "Freyming-Merlebach",
+ "Raon-l'Étape",
+ "Woippy",
+ "Ligny-en-Barrois",
+ "La Bresse",
+ "Saint-Max",
+ "Virton",
+ "Jarville-la-Malgrange",
+ "Charmes",
+ "Fameck",
+ "Xonrupt-Longemer",
+ "Revigny",
+ "Bains-les-Bains",
+ "Chiny",
+ "Schirmeck",
+ "Briey",
+ "Volmerange-les-Mines",
+ "Varennes-en-Argonne",
+ "Sarrewerden",
+ "Darney",
+ "Saales",
+ "Carignan",
+ "Étain",
+ "Lixing-lès-Rouhling",
+ "Vaudémont"

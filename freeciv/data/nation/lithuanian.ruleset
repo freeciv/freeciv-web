@@ -2,31 +2,36 @@
 
 name=_("Lithuanian")
 plural=_("?plural:Lithuanians")
-groups="Medieval", "Modern", "European"
+groups="Medieval", "Early Modern", "Modern", "European"
 legend=_("Lithuania is a small country on the south coast of the Baltic\
  Sea, northeast of Poland.  Lithuanian is the most archaic and complex of\
  the northern Indo-European languages")
-leader=
- "Mindaugas",
- "Vytenis",
- "Gediminas",
- "Algirdas",
- "Kęstutis",
- "Vytautas",
- "Aleksandras Stulginskis",
- "Kazys Grinius",
- "Antanas Smetona",
- "Morta",
- "Ona",
- "Barbora Radvilaitė",
- "Emilija Pliaterytė"
-leader_sex="Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Female", "Female", "Female", "Female"
+
+leaders = {
+ "name",                        "sex"
+ "Mindaugas",                   "Male"
+ "Vytenis",                     "Male"
+ "Gediminas",                   "Male"
+ "Algirdas",                    "Male"
+ "Kęstutis",                    "Male"
+ "Vytautas",                    "Male"
+ "Aleksandras Stulginskis",     "Male"
+ "Kazys Grinius",               "Male"
+ "Antanas Smetona",             "Male"
+ "Morta",                       "Female"
+ "Ona",                         "Female"
+ "Barbora Radvilaitė",          "Female"
+ "Emilija Pliaterytė",          "Female"
+}
+
+ruler_titles = {
+ "government",    "male_title",            "female_title"
+ "Monarchy",      _("Grand Duke %s"),      _("Grand Duchess %s")
+}
+
 flag="lithuania"
 flag_alt = "-"
 city_style = "European"
-ruler_titles = { "government",      "male_title",         "female_title"
-                 "Monarchy",      _("Great Duke"),      _("Great Duchess")
-}
 
 init_techs=""
 init_buildings=""
@@ -35,7 +40,7 @@ init_units=""
 
 ; Similar flags
 conflicts_with="bulgarian"
-civilwar_nations = "latvian", "polish", "prussian"
+civilwar_nations = "latvian", "polish", "old prussian"
 
 cities =
   "Vilnius", "Kaunas", "Klaipėda", "Šiauliai",

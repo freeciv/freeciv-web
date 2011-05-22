@@ -1,0 +1,88 @@
+[nation_omani] 
+
+name=_("Omani") 
+plural=_("?plural:Omanis") 
+groups="Medieval", "Early Modern", "Modern", "Asian" 
+legend=_("Oman is an Arab country in southwest Asia on the southeast coast\
+ of the Arabian Peninsula. Before the arrival of Islam Oman was controlled\
+ by Achaemenids, Parthians and Sassanids.")
+
+leaders = {
+ "name",                        "sex"
+ "Makhzum ibn Al-Fallah",       "Male"
+ "Umar ibn Al-Khattab",         "Male"
+ "Umar Al-Sharif",              "Male"
+ "Muhammad ibn Ismail",         "Male"
+ "Bakarat ibn Muhammad",        "Male"
+ "Nasir ibn Murshid",           "Male"
+ "Saif I ibn Sultan",           "Male"
+ "Muhammad ibn Nasir",          "Male"
+ "Abu Hilal Ahmad ibn Said",    "Male"
+ "Salim I ibn Sultan",          "Male"
+ "Azzan ibn Qais",              "Male"
+ "Taimur ibn Faisal",           "Male"
+}
+
+ruler_titles = {
+ "government",     "male_title",           "female_title"
+ "Monarchy",       _("Sultan %s"),         _("Sultana %s")
+ "Fundamentalism", _("Imam %s"),           _("Imama %s")
+ "Despotism",      _("Sheikh %s"),         _("Shaykha %s")
+ "Republic",       _("Vizier %s"),         _("?female:Vizier %s")
+ "Communism",   _("General Commander %s"), _("?female:General Commander %s")
+}
+
+flag= "oman" 
+flag_alt = "arab" 
+city_style = "Tropical" 
+
+init_techs="" 
+init_buildings="" 
+init_government="Despotism" 
+init_units="" 
+
+civilwar_nations = "emirati", "himyarite", "persian", "zanzibari"
+
+cities = 
+"Maskat",
+"Nizwa",
+"Al-Hamra",
+"Dibba Al-Baya",
+"Ruwi",
+"Jalan Bani Bu Hassan",
+"Khasab",
+"Masira",
+"Mudhaybi",
+"Izki",
+"As-Sib",
+"Mana",
+"Al-Buraimi",
+"Ibra",
+"Thumrait",
+"Jabrin",
+"Haima",
+"Adam",
+"Al-Suwaiq",
+"Barka",
+"Samail",
+"Saiq",
+"Rustaq",
+"Ibri",
+"Sohar",
+"Mahooth",
+"Matra",
+"Al-Jazer",
+"Shinas",
+"Mudhaireb",
+"Salala",
+"Sur",
+"Bidiya",
+"Saham",
+"Seeb",
+"Bidbid",
+"Raysut",
+"Bahla",
+"Quriyat",
+"Mad'ha",
+"Duqm"
+

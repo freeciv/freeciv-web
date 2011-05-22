@@ -2,23 +2,29 @@
 
 name=_("Chola")
 plural=_("?plural:Cholas")
-groups="Asian", "Ancient"
+groups="Asian", "Medieval"
 
-legend=_("The Cholas were a Tamil dynasty in centered in southern India and\
+legend=_("The Cholas were a Tamil dynasty centered in southern India and\
  were rare in their level of influence in northern India. They began as a\
  tributary state to the Pallavas, but in the 9th century their power began\
- to grow. During the 11th century, they lead expeditions against other\
+ to grow. During the 11th century, they led expeditions against other\
  Indian states as far north as Bengal, as well as against the Maldives, Sri\
  Lanka and even the Indonesian kingdom of Sri Vijaya. They collapsed,\
  however, in the 1250s as other southern Indian states rose up.")
 
-leader=
- "Aditya I",
- "Rajaraja Chola I",
- "Rajendra Chola II",
- "Kulothunga Chola III"
+leaders = {
+ "name",                        "sex"
+ "Aditya I",                    "Male"
+ "Rajaraja Chola I",            "Male"
+ "Rajendra Chola II",           "Male"
+ "Kulothunga Chola III",        "Male"
+}
 
-leader_sex = "Male", "Male", "Male", "Male"
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Despotism",       _("Raja %s"),      _("Rani %s")
+ "Monarchy",        _("Maharaja %s"),  _("Maharani %s")
+}
 
 flag         = "chola"
 flag_alt     = "-"

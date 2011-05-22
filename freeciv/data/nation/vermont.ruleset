@@ -1,0 +1,94 @@
+[nation_vermont]
+
+name=_("Vermont")
+plural=_("?plural:Vermonters")
+groups="American", "Early Modern"
+legend=_("Vermont was an independent state for 14 years before it joined\
+ the United States in 1791. Currently it is one of the smallest states of\
+ the United States, both in population and area. Vermont is famous for\
+ its dairy products and maple syrup.")
+
+leaders = {
+ "name",                  "sex"
+ "Ethan Allen",           "Male"
+ "Thomas Chittenden",     "Male"
+ "Thaddeus Stevens",      "Male"
+ "Moses Robinson",        "Male"
+ "Ethan A. Hitchcock",    "Male"
+ "Ernest W. Gibson, Jr.", "Male"
+ "Madeleine M. Kunin",    "Female"
+ "Bernie Sanders",        "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Despotism",       _("Sheriff %s"),   _("?female:Sheriff %s")
+ "Republic",        _("Governor %s"),  _("?female:Governor %s")
+ "Fundamentalism",  _("Reverend %s"),  _("?female:Reverend %s")
+}
+
+flag="vermont"
+flag_alt = "usa"
+city_style = "European"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="american", "iroquois", "quebecois"
+
+cities =
+ "Windsor",
+ "Castleton",
+ "Montpelier",
+ "Burlington",
+ "Rutland",
+ "Barre",
+ "St. Albans",
+ "Winooski",
+ "Newport",
+ "Vergennes",
+ "Bennington",
+ "Essex",
+ "Brattleboro",
+ "Colchester",
+ "Middlebury",
+ "Hartford",
+ "Essex Junction",
+ "Williston",
+ "St. Johnsbury",
+ "Springfields",
+ "Shelburne",
+ "Morristown",
+ "Lyndon",
+ "Newport",
+ "Randolph",
+ "Stowe",
+ "Derby",
+ "Rockingham",
+ "Jericho",
+ "Hinesburg",
+ "Georgia",
+ "Northfield",
+ "Bellows Falls",
+ "Vergennes",
+ "Swanton",
+ "White River Junction (river)",
+ "Manchester Center",
+ "Fair Haven",
+ "Morrisville",
+ "Graniteville",
+ "Waterbury",
+ "Wilder",
+ "Poultney",
+ "Brandon",
+ "Woodstock",
+ "Newfane",
+ "Chelsea",
+ "Hyde Park",
+ "North Hero",
+ "Guildhall",
+ "South Burlington",
+ "Dummerston"
+

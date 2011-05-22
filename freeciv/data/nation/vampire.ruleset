@@ -1,0 +1,84 @@
+[nation_vampire]
+
+; To avoid any trademark complaints, no modern fictional works are used.
+name=_("Vampire")
+plural=_("?plural:Vampires")
+groups="Imaginary"
+legend=_("Bloodsucking creatures of legend.")
+
+leaders = {
+ "name",                "sex"
+
+; Historical people associated with vampirism.
+ "Vlad Ţepeş",          "Male"
+ "Erzsébet Báthory",    "Female"
+
+; From legend...
+ "Lilith",              "Female"
+
+; From 'Carmilla' by Joseph Sheridan Le Fanu (1872):
+ "Mircalla Karnstein",  "Female"
+
+; From 'Varney the Vampire' by James Malcolm Rymer (1845-47):
+ "Francis Varney",      "Male"
+
+; From 'The Vampyre' by John William Polidori (1819):
+ "Ruthven",             "Male"
+
+; From 'Vampire City' by Paul Féval (1867):
+ "Otto Goetzi",         "Male"
+
+; Fom 'Knightshade' by Paul Féval (1807):
+ "Jean Ténèbr",         "Male"
+ "Ange Ténèbr",         "Male"
+
+; From 'The Vampire Countess' by Paul Féval (1856):
+ "Addhema",             "Female"
+ "Szandor",             "Male"
+
+; From 'Thalaba the Destroyer' by Robert Southey (1797):
+ "Oneiza",              "Female"
+
+; From 'Dracula' by Bram Stoker (1897):
+ "Lucy Westenra",       "Female"
+
+; From 'La Morte Amoureuse' by Théophile Gautier (1836):
+ "Clarimond",           "Female"
+}
+ruler_titles = {
+ "government",     "male_title",       "female_title"
+ "Despotism",      _("Count %s"),      _("Countess %s")
+}
+flag="vampire"
+flag_alt = "-"
+city_style = "European"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="Romanian", "Transylvanian"
+
+; Cities associated with vampires in fiction or legend
+cities =
+ "Selene",              	; from "Vampire City" 
+ "Târgovişte",		; associated with Vlad Dracul
+ "Trencsén",			 ; associated with Elizabeth Bathory
+ "Karnstein",			; from 'Carmilla' 
+ "Bannerworth",			; from 'Varney the Vampire' 
+ "Staffa",			; from 'The Vampire' James Planché (1820)
+ "Sighişoara",		; associated with Vlad Dracul
+ "Nyírbátor",			  ; associated with Elizabeth Baory
+ "Kronstadt",			; associated with Vlad Dracul
+ "Sárvár",			  ; associated with Elizabeth Bathory
+ "Poienari Castle",		; associated with Vlad Dracul
+ "Sibiu",			; associated with Vlad Dracul
+ "Braşov",			; associated with Vlad Dracul
+ "Cetatea Lui Negru Vodă",	; from 'Dracula' 
+ "Mount Snowdon",		; from 'The Vampire' Dion Boucicault (1852)
+ "Marsden Castle",              ; from 'Der Vampyr' Heinrich Marschner (1828)
+ "Palace Concini", 		; from 'La Morte Amoureuse' 
+ "Babylon",			; associated with Lilith
+ "London",			; from 'The Vampyre'
+ "Corinth"                      ; from 'The Bride of Corinth' Goethe (1797)

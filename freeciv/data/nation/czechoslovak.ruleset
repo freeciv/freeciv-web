@@ -1,0 +1,41 @@
+[nation_czechoslovak]
+
+name = _("Czechoslovakian")
+plural = _("?plural:Czechoslovakians")
+groups="European"
+legend=_("Czechoslovakia was founded in 1918. It was long the only\
+ democracy in Eastern Europe until it was overrun by the Nazis in 1939\
+ and the Soviet Union in 1948. Four years after the fall of communism it\
+ was split into the Czech and Slovak republics.")
+leaders = {
+ "name",                "sex"
+ "Tomáš G. Masaryk",	"male"
+ "Edvard Beneš",	"male"
+ "Milada Horáková",	"female"
+ "Klement Gottwald",	"male"
+ "Antonín Novotný",	"male"
+ "Alexander Dubček",	"male"
+ "Jan Palach",		"male"
+ "Gustáv Husák",	"male"
+ "Vaclav Havel",	"male"
+}
+
+
+flag = "czechoslovakia"
+flag_alt = "czech" ;flag was identical to Czech flag
+city_style = "European"
+
+ruler_titles = {
+ "government",      "male_title",        "female_title"
+ "Communism",       _("General Secretary %s"), _("?female:General Secretary %s")
+ "Despotism",       _("Voivode %s"),     _("?female:Voivode %s")
+}
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+conflicts_with="czech", "slovakian", "moravian"
+civilwar_nations="czech", "slovakian"
+
+;city names will be taken from Czech and Slovakian nations

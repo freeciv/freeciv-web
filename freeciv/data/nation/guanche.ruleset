@@ -1,0 +1,81 @@
+[nation_guanche]
+
+name=_("Guanche")
+plural=_("?plural:Guanches")
+groups="African", "Medieval"
+legend=_("The Guanches were the original inhabitants of the Canary\
+ Islands. Little is known of their origins, but it appears that they were\
+ related to the Berbers. In the 15th century they were subjugated by\
+ Castile.")
+
+leaders = {
+ "name",                "sex"
+ "Tinerfe",             "Male"
+ "Añaterve",            "Male"
+ "Tenesor Semidán",     "Male"
+ "Maninidra",           "Male"
+ "Tanausu",             "Male"
+ "Doramas",             "Male"
+ "Beneharo",            "Male"
+}
+
+flag = "guanche"
+flag_alt = "-"
+city_style = "Babylonian"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations="castilian", "amazigh"
+
+cities =
+"Achinech",
+"Gomera",
+"Benahoare",
+"Heró",
+"Tamaran",
+"Titeroygatra",
+"Maxorata",
+"Erbani",
+"Tacoronte",
+"Garafía",
+"Tuineje",
+"Agaete",
+"Acatife",
+"Hipalán",
+"Telde",
+"Abona",
+"Tijarafe",
+"Jandía",
+"Agüimes",
+"Zonzamas",
+"Orone",
+"Güímar",
+"Tedote",
+"Maxorata",
+"Afurgad",
+"Tinache",
+"Yaiza",
+"Mulagua",
+"Taoro",
+"Gáldar",
+"Guatiza",
+"Anaga",
+"Tirajana",
+"Timanfaya",
+"Adeje",
+"Bentayga",
+"Icod",
+"Telde",
+"Daute",
+"Tegueste",
+"Aguere",
+"Acentejo",
+"Garajonay",
+"Tagalgen",
+"Aceró",
+"Aridane",
+"Tihuya",
+"Tamanca",
+"Adeyajamen"

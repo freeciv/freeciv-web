@@ -1,0 +1,74 @@
+[nation_easttimorese]
+
+name=_("East Timorese")
+plural=_("?plural:East Timorese")
+groups="Oceanian", "Asian", "Modern"
+legend=_("A former Portuguese colony, East Timor declared independence\
+ in 1975 but was overrun by Indonesian forces shortly thereafter. East\
+ Timor became the first newly sovereign state of the 21st century when\
+ Indonesia relinquished control on May 20, 2002.")
+
+leaders = {
+ "name",                "sex"
+ "José Ramos-Horta",    "Male"
+ "Lúcia Lobato",        "Female"
+ "Manuel Carrascalão",  "Male"
+ "Nicolau Lobato",      "Male"
+ "Baria Nahak",         "Male"
+}
+
+ruler_titles = {
+ "government",     "male_title",    "female_title"
+ "Fundamentalism", _("Bishop %s"),  _("Mother Superior %s")
+}
+
+flag="east_timor"
+flag_alt="-"
+city_style="Tropical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="Indonesian", "Moluccan"
+
+cities =
+ "Dili",
+ "Dare",
+ "Lospalos",
+ "Baucau",
+ "Ermera",
+ "Maliana",
+ "Suai",
+ "Bobonaro",
+ "Viqueque",
+ "Liquiçá",
+ "Pante Macassar",
+ "Metinaro",
+ "Gleno",
+ "Lolotoe",
+ "Bazartete",
+ "Lautém",
+ "Ainaro",
+ "Same",
+ "Manatuto",
+ "Aileu",
+ "Quelicai",
+ "Hatulia",
+ "Bobonaro",
+ "Maubisse",
+ "Letefoho",
+ "Uato-Lari",
+ "Ossu",
+ "Maubara",
+ "Atsabe",
+ "Laga",
+ "Venilale",
+ "Balibo",
+ "Nitibe",
+ "Hau-Builico",
+ "Oesilo"
+
+
+

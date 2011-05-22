@@ -1,0 +1,86 @@
+[nation_andorran]
+
+name=_("Andorran")
+plural=_("?plural:Andorrans")
+groups="Modern", "Early Modern", "Medieval", "European"
+legend=_("Andorra is a small country in the eastern Pyrenees. In 1278,\
+ a dispute between the bishop of Urgell and the Count of Foix ended with\
+ an agreement to share the sovereignty of Andorra. This arrangement is\
+ still in effect and their successors - the current bishop of Urgell and\
+ the President of the French Republic - bear the (mostly honorific) title\
+ of co-prince of Andorra.")
+
+leaders = {
+ "name",                "sex"
+ "Borís I",             "Male"
+ "Pere d'Urtx",         "Male"
+ "Roger Bernat III",    "Male"
+ "Carlemany",           "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",             "female_title"
+ "Despotism",       _("Dictator %s"),         _("Dictatress %s")
+ "Monarchy",        _("Co-Prince %s"),        _("Co-Princess %s")
+ "Fundamentalism",  _("Bishop %s"),           _("?female:Bishop %s")
+}
+
+flag="andorra"
+flag_alt = "-"
+city_style = "European"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations = "Catalan", "French"
+
+cities =
+ "Andorra la Vella",
+ "Encamp",
+ "Sant Julià de Lòria",
+ "Escaldes",
+ "La Massana",
+ "Engordany",
+ "Santa Coloma",
+ "Pas de la Casa",
+ "Meritxell",
+ "Ordino",
+ "Canillo",
+ "Arinsal",
+ "Les Bons",
+ "El Tarter",
+ "Sispony",
+ "Vila",
+ "Engolasters",
+ "Soldeu",
+ "Aixirivall",
+ "Aldosa",
+ "Anyós",
+ "El Ferrer",
+ "Incles",
+ "La Cortinada",
+ "Erts",
+ "Escàs",
+ "Pal",
+ "Arans",
+ "Aldosa",
+ "Auvinyà",
+ "Juverri",
+ "Ransol",
+ "Sornàs",
+ "Llorts",
+ "Aixovall",
+ "Fontaneda",
+ "El Serrat",
+ "Certés",
+ "Els Plans",
+ "Nagol",
+ "Segudet",
+ "Ansalonga",
+ "El Forn",
+ "Prats",
+ "Bixessarri",
+ "El Vilar",
+ "Llumeneres"

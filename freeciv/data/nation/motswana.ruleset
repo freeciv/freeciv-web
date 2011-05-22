@@ -1,0 +1,54 @@
+[nation_motswana]
+
+name=_("Motswana")
+plural=_("?plural:Batswana")
+groups="Modern", "African"
+legend=_("The Republic of Botswana is a country in Southern Africa.\
+ It gained independence from the UK in 1966. Botswana is considered\
+ the least corrupt country in Africa and it has a rapidly developing\
+ economy.")
+
+leaders = {
+ "name",                "sex"
+ "Sebele",              "Male" ; Chief circa 1885 of what became Bechuanaland
+ "Bathoen",             "Male" ; Chief circa 1885 of what became Bechuanaland
+ "Khama III",           "Male" ; Chief (1837?-1923)
+ "Seretse Khama",       "Male" ; First president until 1980 (d. 1980)
+ "Quett Masire",        "Male" ; President from 1980 - 1998 (d. 1998)
+ "Festus Mogae",        "Male" ; President from 1998 - 2008
+}
+
+flag="botswana"
+flag_alt = "-"
+city_style = "tropical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="Boer", "Mosotho", "Zimbabwean"
+
+cities =
+ "Gaborone",
+ "Francistown",
+ "Molepolole",
+ "Palapye",
+ "Serowe",
+ "Mogoditshane",
+ "Thamaga",
+ "Tshabong",
+ "Mochudi",
+ "Gabane",
+ "Masunga",
+ "Maun",
+ "Kanye",
+ "Mushopa",
+ "Goodhope",
+ "Kopong", 
+ "Hukuntsi",
+ "Kang",
+ "Ghanzi",
+ "Mochudi",
+ "Etsha",
+ "Gumare"

@@ -1,0 +1,84 @@
+[nation_bosporan]
+
+name=_("Bosporan")
+plural=_("?plural:Bosporans")
+groups="European", "Ancient"
+legend=_("The Bosporan Kingdom was an ancient state in eastern Crimea and\
+ the Taman Peninsula on the shores of the Cimmerian Bosporus.")
+
+leaders = {
+ "name",                "sex"
+ "Gomer",               "Male"
+ "Genger",              "Male"
+ "Esdron",              "Male"
+ "Basabiliano",         "Male"
+ "Gaberiano",           "Male"
+ "Teushapa",            "Male"
+ "Getmalor",            "Male"
+ "Sandakhshatra",       "Male"
+ "Almadion",            "Male"
+ "Marcomer",            "Male"
+ "Spartocus I",         "Male"
+ "Paerisades II",       "Male"
+ "Asander",             "Male"
+ "Sauromates I",        "Male"
+ "Rhoemetalces",        "Male"
+ "Rhescuporis II",      "Male"
+ "Ininthimeus",         "Male"
+ "Rhadamsades",         "Male"
+}
+
+ruler_titles =
+ { "government", "male_title",    "female_title"
+ "Anarchy",        _("Usurper %s"),     _("?female:Usurper %s")
+ "Despotism",      _("Despot %s"),      _("?female:Despot %s")
+ "Republic",       _("Consul %s"),      _("?female:Consul %s")
+} 
+
+flag = "bosporus"
+flag_alt = "-"
+city_style = "Classical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+conflicts_with = "ukrainian"
+civilwar_nations = "scythian",  "thracian", "byzantine"
+
+cities =
+"Pantikapaion",
+"Fanagoreia",
+"Tanais",
+"Eupatoria",
+"Theodoseia",
+"Chersonisos Tauriki",
+"Kimmerikon",
+"Hermonassa",
+"Gorgippia",
+"Nymfaion",
+"Olbia Pontiki",
+"Herakleia",
+"Kalamita",
+"Kalos Limen",
+"Kerkintis",
+"Tyras",
+"Borysthenis",
+"Charax",
+"Tyritaki",
+"Myrmikion",
+"Kipoi",
+"Sinda",
+"Chabon",
+"Neapolis",
+"Symbolon Limen",
+"Kyraia",
+"Akra",
+"Iluraton",
+"Parthenion",
+"Porthmion",
+"Achilion",
+"Korkondama"
+
+
+

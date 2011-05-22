@@ -9,17 +9,17 @@ legend=_("The Kingdom of Hawaii was established in 1810 by King Kamehameha\
  States, the former kingdom became the 50th state of the United States\
  on August 21, 1959.")
 
-leader=
- "Kamehameha I",
- "Kamehameha II",
- "Kamehameha III",
- "Kamehameha IV",
- "Kamehameha V",
- "Lunalilo",
- "Kalākaua",
- "Liliʻuokalani"
-
-leader_sex = "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Female"
+leaders = {
+ "name",                "sex"
+ "Kamehameha I",        "Male"
+ "Kamehameha II",       "Male"
+ "Kamehameha III",      "Male"
+ "Kamehameha IV",       "Male"
+ "Kamehameha V",        "Male"
+ "Lunalilo",            "Male"
+ "Kalākaua",            "Male"
+ "Liliʻuokalani",       "Female"
+}
 
 flag         = "hawaii"
 flag_alt     = "-"

@@ -4,18 +4,27 @@ name=_("Boer")
 plural=_("?plural:Boers")
 groups= "African"
 legend=_("The Boers were Dutch settlers in British-controlled South\
- Africa from 1650AD.  They briefly controlled two republics, the\
+ Africa from 1650 AD.  They briefly controlled two republics, the\
  Transvaal and the Orange Free State, before being defeated by the British\
  in the war of 1899-1902.")
-leader=
- "Jacobus Pretorius",
- "Louis Botha",
- "Wessel Pretorius",
- "Paulus Krüger",
- "Piet Retief",
- "Jan Smuts"
-leader_sex= "Male", "Male", "Male",
-	    "Male", "Male", "Male"
+
+leaders = {
+ "name",                "sex"
+ "Jacobus Pretorius",   "Male"
+ "Louis Botha",         "Male"
+ "Wessel Pretorius",    "Male"
+ "Paulus Krüger",       "Male"
+ "Piet Retief",         "Male"
+ "Jan Smuts",           "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",            "female_title"
+ "Despotism",       _("General %s"),         _("?female:General %s")
+ "Fundamentalism",  _("Reverend %s"),        _("?female:Reverend %s")
+ "Republic",        _("State President %s"), _("?female:State President %s")
+}
+
 flag="boer"
 flag_alt = "-"
 city_style = "Tropical"

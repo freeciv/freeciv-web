@@ -1,0 +1,60 @@
+[nation_mughal]
+
+name=_("Mughal")
+plural=_("?plural:Mughals")
+groups="Early Modern", "Asian"
+legend=_("The Mughal Empire ruled most of the Indian subcontinent\
+ throughout the early modern era.")
+leaders = {
+ "name",        "sex"
+ "Aurangzeb",   "Male"
+ "Shah Jahan",  "Male"
+ "Noor Jahan",  "Female"
+ "Akbar",       "Male"
+ "Babur",       "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",        "female_title"
+ "Despotism",       _("%s Khan"),        _("%s Khatan")
+ "Monarchy",        _("Maharaja %s"),    _("Maharani %s")
+ "Fundamentalism",  _("Grand Mufti %s"), _("?female:Grand Mufti %s")
+}
+
+flag="mughal"
+flag_alt="-"
+city_style="Asian"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="Sikh", "Kashmiri", "Pashtun", "Bengali", "Pakistani"
+
+cities=
+ "Agra",
+ "Delhi",
+ "Lahore",
+ "Panipat",
+ "Mathura",
+ "Fatehpur Sikri",
+ "Gwalier",
+ "Peshawar",
+ "Patna",
+ "Ahmedabad",
+ "Vadodara",
+ "Junagadh",
+ "Bombay",
+ "Plassey",
+ "Calcutta",
+ "Kabul",
+ "Kandahar",
+ "Bijapur",
+ "Goa",
+ "Mangalore",
+ "Multan",
+ "Banares",
+ "Chandernagore",
+ "Gujarat",
+ "Surat"

@@ -1,0 +1,125 @@
+[nation_visigothic] 
+
+name=_("Visigothic") 
+plural=_("?plural:Visigoths") 
+groups="Ancient", "Medieval", "European" 
+legend = _("The Thervingi or Visigoths were an East Germanic people, one of\
+ the two tribes of the Goths. They probably originated from Scandinavia.\
+ In the 3rd century they migrated south, to modern Ukraine. They then\
+ crossed the Danube and sacked Rome in 410 AD. Recognized by the Romans as\
+ foederati, they eventually settled around Toulouse where they formed a\
+ kingdom. The Visigoths managed to conquer all of the Iberian Peninsula and\
+ moved their capital to Toledo. They lost all their territories north of\
+ the Pyrenees to the Franks but Visigothic rulers continued to rule the\
+ Romanized Iberians until the peninsula was eventually overrun by Muslim\
+ invaders in 711.")
+
+leaders = {
+ "name",                "sex"
+ "Aþanareiks",          "Male" ; Athanaric
+ "Friþugairns",         "Male" ; Fritigern
+ "Alareiks I",          "Male" ; Alaric I
+ "Wallja",              "Male" ; Wallia
+ "Eureiks",             "Male" ; Euric
+ "Þiudareiks II",       "Male" ; Theodoric II
+ "Alareiks II",         "Male" ; Alaric II
+ "Amalareiks",          "Male" ; Amalaric
+ "Chrodechildis",       "Female" ; Clotilde
+ "Liubagilds",          "Male" ; Leogild
+ "Wittereiks",          "Male" ; Witteric
+ "Swinþila",            "Male" ; Suintila
+ "Hrekkared",           "Male" ; Reccared
+ "Hroþareiks",          "Male" ; Roderic
+ "Egilona",             "Female" ; Egilona
+}
+ruler_titles = {
+ "government",        "male_title",       "female_title"
+ "Anarchy",           _("Usurper %s"),    _("?female:Usurper %s") 
+ "Republic",          _("Consul %s"),     _("?female:Consul %s") 
+}
+flag= "visigoth" 
+flag_alt = "-" 
+city_style = "Celtic" 
+
+init_techs="" 
+init_buildings="" 
+init_government="Despotism" 
+init_units="" 
+
+conflicts_with = "asturian", "leonese", "castilian", "galician", "aragonese", "catalan",
+                 "occitan", "spanish", "portuguese"
+civilwar_nations="asturian", "andalusi", "basque", "vandalic", "ostrogothic", "sarmatian"
+
+cities=
+"Tolosa",		;Toulouse (first capital)
+"Narbo", 		;Narbonne (second capital)
+"Toletum",		;Toledo (final capital)
+"Tarraco",		;Tarragona
+"Carthago Nova",	;Cartagena
+"Emerita",		;Mérida
+"Hispalis",		;Sevilla
+"Auca",			;Villafranca Montes de Oca
+"Lucus",		;Lugo
+"Burdigala",		;Bordeaux
+"Asturga",		;Astorga
+"Bracara",		;Braga
+"Victoriacum",		;Vitoria-Gasteiz
+"Reccopolis",		;Recópolis
+"Ologitis",		;Olite
+"Elusa",		;Éauze
+"Septa",		;Ceuta
+"Pompaelo",		;Pamplona
+"Carcaso",		;Carcasonne
+"Complutum",		;Alcalá de Henares
+"Corduba",		;Córdona
+"Iliberis",		;Granada
+"Ebora",		;Évora
+"Mentesa",		;La Guardia de Jaén
+"Gerunda",		;Girona
+"Pictavium",		;Poitiers
+"Caesaraugusta",	;Zaragoza
+"Legio",		;León
+"Nemausus",		;Nîmes
+"Conimbriga",		;Coimbra
+"Pompaelo",		;Pamplona
+"Agatha",		;Agde
+"Emporiae",		;Empúries
+"Dertosa",		;Tortosa
+"Albia",		;Albi
+"Portus Cale",		;Porto
+"Salmantica",		;Salamanca
+"Caurium",		;Coria
+"Segovia",		;Segovia
+"Segontia",		;Sigüenza
+"Arelate",		;Arles
+"Valentia",		;València
+"Osca",			;Huesca
+"Verurium",		;Viseu
+"Sedes Urgelli",	;La Seu d`Urgell
+"Dianum",		;Dénia
+"Olisipo",		;Lisbon
+"Massilia",		;Marseille
+"Illici",		;Elx
+"Murcia",		;Murica
+"Auriense",		;Ourense
+"Ossonoba",		;Faro
+"Baeterrae",		;Béziers
+"Abula",		;Ávila
+"Ilerda",		;Lleida
+"Ausona",		;Vic
+"Pallantia",		;Palencia
+"Myrtilis",		;Mértola
+"Onoba",		;Huelva
+"Castulum",		;Linares
+"Voglade",		;Voullié
+"Portus Magnus",	;Almeria
+"Ebrodunum",		;Embrun
+"Asidonia",		;Medina Sidonia
+"Malanca",		;Malaga
+"Cauca",		;Coca
+"Consabura",		;Consuegra
+"Segobriga",		;Saelices
+"Barcino",		;Barcelona
+"Vienna"		;Vienne
+
+

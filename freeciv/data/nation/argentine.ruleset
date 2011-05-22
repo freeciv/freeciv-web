@@ -11,15 +11,26 @@ legend=_("Argentina is located on the south-eastern coast of South America.\
  internal and external conflicts. In the decades after World War II, the\
  country's politics was dominated by Juan Peron and his charismatic wife Eva\
  \"Evita\" Peron.")
-leader=
- "José de San Martín",
- "Juan Manuel de Rosas",
- "Justo Urquiza",
- "Bernardino Rivadavia",
- "Domingo Sarmiento",
- "Juan Domingo Perón",
- "Eva Duarte de Perón"
-leader_sex="Male", "Male", "Male", "Male", "Male", "Male", "Female"
+
+leaders = {
+ "name",                        "sex"
+ "José de San Martín",          "Male"
+ "Juan Manuel de Rosas",        "Male"
+ "Justo Urquiza",               "Male"
+ "Bernardino Rivadavia",        "Male"
+ "Domingo Sarmiento",           "Male"
+ "Juan Domingo Perón",          "Male"
+ "Eva Duarte de Perón",         "Female"
+}
+
+ruler_titles = {
+ "government",     "male_title",        "female_title"
+ "Communism",      _("Comandante %s"),  _("Comandanta %s")
+ "Despotism",      _("Caudillo %s"),    _("Caudilla %s")
+ "Fundamentalism", _("Cardinal %s"),    _("?female:Cardinal %s")
+ "Monarchy",       _("Viceroy %s"),     _("Vicereine %s")
+}
+
 flag="argentina"
 flag_alt = "-"
 city_style = "European"
@@ -28,7 +39,7 @@ init_techs=""
 init_buildings=""
 init_government="Despotism"
 init_units=""
-civilwar_nations = "chilean", "brazilian"
+civilwar_nations = "paraguayan", "uruguayan", "mapuche"
 
 cities =
  "Buenos Aires",

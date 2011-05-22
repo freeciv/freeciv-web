@@ -1,0 +1,83 @@
+[nation_senegalese]
+
+name=_("Senegalese")
+plural=_("?plural:Senegalese")
+groups="Modern", "African"
+legend=_("Senegal is the westernmost country of mainland Africa. It has\
+ been independent from France since 1960. Senegal is relatively stable\
+ and democratic compared to its neighbors.")
+
+leaders = {
+ "name",                        "sex"
+ "Léopold Sédar Senghor",       "Male"
+ "Abdou Diouf",                 "Male"
+ "Mame Madior Boye",            "Female"
+}
+ruler_titles = {
+ "government",      "male_title",         "female_title"
+ "Fundamentalism",  _("Grand Mufti %s"), _("?female:Grand Mufti %s")
+ "Monarchy",        _("Mansa %s"),       _("?female:Mansa %s")
+}
+flag= "senegal"
+flag_alt = "-"
+city_style = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+conflicts_with="jolof"
+civilwar_nations="malian", "jolof", "gambian"
+
+cities =
+ "Dakar (ocean)",
+ "Saint-Louis",
+ "Touba",
+ "Thiès",
+ "Pikine",
+ "Kaolack",
+ "Guediawaye",
+ "Mbour",
+ "Rufisque",
+ "Ziguinchor",
+ "Diourbel",
+ "Louga",
+ "Tambacounda",
+ "Mbacké",
+ "Kolda",
+ "Richard Troll",
+ "Bargny",
+ "Tivaouane",
+ "Joal-Fadiouth",
+ "Dahra",
+ "Kaffrine",
+ "Bignona",
+ "Fatick",
+ "Vélingara",
+ "Bambey",
+ "Sébikhotane",
+ "Dagana",
+ "Sédhiou",
+ "Nguékhokh",
+ "Kédougou",
+ "Pout",
+ "Kayar",
+ "Matam",
+ "Mékhé",
+ "Nioro du Rip",
+ "Ouro Sogui",
+ "Kébémer",
+ "Ndioum",
+ "Koungheul",
+ "Guinguinéo",
+ "Linguère",
+ "Khombole",
+ "Bakel",
+ "Sokone",
+ "Diamniadio",
+ "Mboro",
+ "Thiadiaye",
+ "Goudomp",
+ "Podor",
+ "Gossas"

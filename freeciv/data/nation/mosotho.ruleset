@@ -1,0 +1,73 @@
+[nation_mosotho]
+
+name=_("Mosotho")
+plural=_("?plural:Basotho")
+groups="African", "Modern"
+legend=_("A Bantu people in Southern Africa, the ancestors of the Basotho\
+ first arrived in the region by the end of the first millennium AD. The\
+ Basotho first formed a unified polity in the early 19th century under\
+ king Moshoeshoe I. The Mosotho kings sought protection from the British\
+ against Boer incursions and in 1869 their country turned into the\
+ British protectorate of Basutoland. Although surrounded by South Africa\
+ on all sides, that country's apartheid policies prevented its\
+ intgration into South Africa. In 1966 Basutoland became the independent\
+ Kingdom of Lesotho.")
+
+leaders = {
+ "name",                     "sex"
+ "Moshoeshoe I",             "Male"
+ "Lerotholi",                "Male"
+ "Mantsebo Amelia 'Matsaba", "Female"
+ "Leabua Jonathan",          "Male"
+ "Moshoeshoe II",            "Male"
+ "Ntsu Mokhehle",            "Male"
+ "Letsie III",               "Male"
+}
+
+flag="lesotho"
+flag_alt = "-"
+city_style = "Celtic"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="zulu", "xhosa", "motswana"
+
+cities =
+ "Maseru",
+ "Teyateyaneng",
+ "Mafeteng",
+ "Mohale's Hoek",
+ "Hlotse", ;leribe
+ "Quthing",
+ "Butha-Buthe",
+ "Qacha's Nek",
+ "Mokhotlong",
+ "Thaba-Tseka",
+ "Maputsoa",
+ "Peka",
+ "Roma",
+ "Thaba Bosiu",
+ "Nyakosoba",
+ "Nkoebe",
+ "Seshote",
+ "Khomo-Phatsoa",
+ "Makhunoane",
+ "Semonkong",
+ "White-Hill",
+ "Makhalaneng",
+ "Monyake",
+ "Malumeng",
+ "Seforong",
+ "Rafolatsane",
+ "Mosetoa",
+ "Kao",
+ "Makheka",
+ "Mabote",
+ "Manka",
+ "Nazareth",
+ "Mantsonyane",
+ "Ha Baroana",
+ "Marakabei"

@@ -1,0 +1,140 @@
+[nation_rhenish]
+
+name=_("Rhenish")
+plural=_("?plural:Rhenish")
+groups="European", "Medieval"
+legend=_("The Rhineland was the site of three electorates of the Holy\
+ Roman Empire, Cologne, Trier and Mainz, as well as numerous smaller\
+ territories. The Rhenish statelets were gradually absorbed by Prussia\
+ from the 17th century onwards. The Prussian Rhine Province was erected\
+ in 1822. During the Industrial Revolution the region became the economical\
+ and industrial heartland of Germany. Since the end of World War II the\
+ Rhineland is divided between the German states of North Rhine-Westphalia,\
+ Rhineland-Palatinate and Saarland.")
+
+leaders = {
+ "name",                         "sex"
+ "Bonifatius",                   "Male"
+ "Hildegard von Bingen",	 "Female"
+ "Peter von Aspelt",		 "Male"
+ "Balduin von Luxemburg",	 "Male"
+ "Hermann V von Wied",		 "Male"
+ "Anna von Kleve",		 "Female"
+ "Karl Marx",                    "Male"
+ "Friedrich Wilhelm Raiffeisen", "Male"
+ "August Thyssen",               "Male"
+ "Josef Friedrich Matthes",	 "Male"
+ "Konrad Adenauer",		 "Male"
+ "Johannes Rau",		 "Male"
+}
+
+flag="rhineland"
+flag_alt = "-"
+city_style = "European"
+
+ruler_titles = { "government",     "male_title",          "female_title"
+                 "Democracy", _("Minister-President %s"), _("?female:Minister-President %s")
+                 "Despotism",      _("Count %s"),         _("Countess %s")
+                 "Fundamentalism", _("Prince-Bishop %s"), _("Princess-Bishop %s")
+                 "Monarchy",       _("Grand Duke %s"),    _("Grand Duchess %s")
+                 "Republic",       _("Burgomaster %s"),   _("?female:Burgomaster %s")
+	       }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations = "westphalian", "palatinate", "luxembourgish"
+
+cities =
+ "Köln",
+ "Trier",
+ "Mainz",
+ "Aachen",
+ "Bonn",
+ "Koblenz",
+ "Düsseldorf",
+ "Kleve",
+ "Saarbrücken (river)",
+ "Moers",
+ "Jülich",
+ "Essen",
+ "Krefeld",
+ "Duisburg",
+ "Brühl",
+ "Oberhausen",
+ "Mülheim an der Ruhr (river)",
+ "Wesel",
+ "Leverkusen",
+ "Wuppertal",
+ "Eschweiler",
+ "Bad Kreuznach",
+ "Manderscheid",
+ "Malmünd",
+ "Xanten",
+ "Geilenkirchen",
+ "Remagen",
+ "Neuss",
+ "Ratingen",
+ "Euskirchen",
+ "Mönchengladbach",
+ "Neunkirchen",
+ "Bingen",
+ "Heinsberg",
+ "Andernach",
+ "Sankt Wendel",
+ "Remscheid",
+ "Bergheim",
+ "Boppard",
+ "Mettmann",
+ "Prüm",
+ "Bergisch Gladbach",
+ "Eupen",
+ "Viersen",
+ "Wetzlar",
+ "Wittlich",
+ "Solingen",
+ "Saarlouis",
+ "Bitburg",
+ "Neuwied",
+ "Siegburg",
+ "Geldern",
+ "Düren",
+ "Birkenfeld",
+ "Dinslaken",
+ "Goch",
+ "Kastellaun",
+ "Sankt Vith",
+ "Mayen",
+ "Sankt Goar",
+ "Montabaur",
+ "Lennep",
+ "Bad Neuenahr-Ahrweiler",
+ "Erkelenz",
+ "Ottweiler",
+ "Cochem",
+ "Linz am Rhein (river)",
+ "Grevenbroich",
+ "Gummersbach",
+ "Stolberg",
+ "Velbert",
+ "Bacharach",
+ "Sinzig",
+ "Simmern",
+ "Dormagen",
+ "Bad Münstereifel",
+ "Kerpen",
+ "Saarburg",
+ "Merzig",
+ "Bad Ems",
+ "Daun",
+ "Altenkirchen",
+ "Wipperfürth",
+ "Troisdorf",
+ "Bernkastel-Kues",
+ "Emmerich",
+ "Gerolstein",
+ "Bad Godesberg",
+ "Rheinberg",
+ "Herzogenrath"

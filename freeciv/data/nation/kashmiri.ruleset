@@ -1,0 +1,75 @@
+[nation_kashmiri]
+
+name=_("Kashmiri")
+plural=_("?plural:Kashmiris")
+groups="Medieval", "Early Modern", "Asian"
+legend=_("The Kashmir valley is situated by the western foothills of the\
+ Himalayas. Having been inhabited for millennia, it is a melting pot of\
+ Hindu, Tibetan, and Islamic culture.")
+
+leaders = {
+ "name",            "sex"
+ "Gulab Singh",     "Male"
+ "Zain-ul-Abidin",  "Male"
+ "Shah Mir Swati",  "Male"
+ "Kota",            "Female"
+ "Didda",           "Female"
+ "Sugandha",        "Female"
+ "Lalitaditya",     "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Despotism",       _("Raja %s"),      _("Rani %s")
+ "Monarchy",        _("Maharaja %s"),  _("Maharani %s")
+}
+
+flag="kashmir"
+flag_alt="-"
+city_style="Asian"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+conflicts_with="Indian", "Pakistani"
+civilwar_nations="Sikh", "Mughal"
+
+cities=
+ "Rajapura", ; ancient capital
+; Kashmir valley
+ "Srinagar",
+ "Anamtnag", ; Anantnag
+ "Baramulla",
+ "Awantipora",
+ "Pahalgam",
+ "Sonamarg",
+ "Sopore",
+ "Uri",
+ "Gaoran",
+ "Hera Ahlan",
+ "Kupwara",
+; Azad Kashmir
+ "Udabhanda", ; Muzaffarabad
+ "Kotli",
+ "Mirpur",
+ "Bhimber",
+ "Keran",
+ "Kel",
+ "Rawalakot",
+; Jammu
+ "Jammu",
+ "Akhnoor",
+ "Rajouri",
+ "Doda",
+ "Udhampur",
+ "Balhar",
+ "Dumare",
+ "Kishtwar",
+ "Nagrota",
+ "Kaluchak",
+ "Samba",
+ "Poonch",
+ "Kathua"
+ 

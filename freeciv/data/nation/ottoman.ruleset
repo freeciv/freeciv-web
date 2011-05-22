@@ -2,7 +2,7 @@
 
 name=_("Ottoman")
 plural=_("?plural:Ottomans")
-groups="Medieval", "Asian", "European"
+groups="Medieval", "Early Modern", "Asian", "European"
 legend=_("In the beginning of the 14th century Osman, a leader of a\
  minor Turkish tribe in western Anatolia, conquered all his neighboring\
  tribes. A century later the Byzantine capital fell to\
@@ -10,25 +10,29 @@ legend=_("In the beginning of the 14th century Osman, a leader of a\
  Ottomans subsequently conquered large parts of south-eastern\
  Europe, the Islamic Arab world as well as\
  Egypt and much of North Africa, making it a regional superpower\
- until its dissolution in the aftermath of WWI.")
-leader=
- "Fâtih Sultân Mehmed",
- "Yavuz Sultân Selim",
- "Ertuğrul Gâzi",
- "Osman",
- "Orhan",
- "Kânûnî Sultân Süleyman"
-leader_sex="Male", "Male", "Male", "Male", "Male", "Male"
+ until its dissolution in the aftermath of World War I.")
+
+leaders = {
+ "name",                        "sex"
+ "Fâtih Sultân Mehmed",         "Male"
+ "Yavuz Sultân Selim",          "Male"
+ "Ertuğrul Gâzi",               "Male"
+ "Osman",                       "Male"
+ "Orhan",                       "Male"
+ "Kânûnî Sultân Süleyman",      "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",     "female_title"
+ "Despotism",       _("%s Pasha"),    _("?female:%s Pasha")
+ "Fundamentalism" , _("Caliph %s"),   _("Calipha %s")
+ "Monarchy",        _("Padishah %s"), _("?female:Padishah %s")
+ "Republic",        _("Vizier %s"),   _("?female:Vizier %s")
+}
+
 flag ="ottoman"
 flag_alt = "turkey"
 city_style = "Classical"
-
-ruler_titles = { "government",      "male_title",      "female_title"
-                 "Despotism",       _("Bey"),          _("Bey")
-                 "Monarchy",        _("Hakan"),        _("Hakan")
-                 "Republic",        _("Padisah"),      _("Padisah")
-                 "Democracy",       _("Imparator"),    _("Imparator")
-               }
 
 init_techs=""
 init_buildings=""
@@ -36,7 +40,7 @@ init_government="Despotism"
 init_units=""
 
 conflicts_with="turkish"
-civilwar_nations="arab", "armenian", "hellenic"
+civilwar_nations="arab", "armenian", "hellenic", "crimean tatar"
 
 ; Cities from all over the empire
 cities =

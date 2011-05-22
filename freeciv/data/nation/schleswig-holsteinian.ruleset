@@ -1,0 +1,101 @@
+[nation_schleswig-holsteinian]
+
+name=_("Schleswig-Holsteinian")
+plural=_("?plural:Schleswig-Holsteinians")
+groups="European", "Medieval"
+legend=_("For much of its history, the duchies of Schleswig and Holstein\
+ have been contested by Germany and Denmark. The territories were united\
+ in a personal union in 1375. In the 19th century, Schleswig-Holstein's\
+ confused status led to two wars between Denmark and Prussia, and in 1866\
+ Schleswig-Holstein became a Prussian province. After World War I, Northern\
+ Schleswig was annexed by Denmark. Currently Schleswig-Holstein is a state\
+ of the Federal Republic of Germany.")
+leaders = {
+ "name",		"sex"
+"Mechthild",		"female"
+"Heinrich der Eiserne",	"male"
+"Gerhard III",		"male"
+"Adolf IV",		"male"
+"Johann der Jüngere",	"male"
+"Karl Friedrich",	"male"
+"Theodor Steltzer",	"male"
+}
+
+ruler_titles = {
+ "government",      "male_title",         "female_title"
+ "Despotism",       _("Duke %s"),         _("?female:Duchess %s")
+ "Fundamentalism",  _("Bishop %s"),       _("?female:Bishop %s")
+ "Monarchy",        _("Grand Duke %s"),   _("Grand Duchess %s")
+ "Democracy", _("Minister-President %s"), _("?female:Minister-President %s")
+}
+
+flag="schleswig-holstein" 
+flag_alt = "-" 
+city_style = "european" 
+
+init_techs="" 
+init_buildings="" 
+init_government="Despotism" 
+init_units="" 
+
+civilwar_nations = "oldenburgian", "danish", "frisian"
+
+cities = 
+"Schleswig",		;historical capital of Schleswig
+"Kiel",			;capital of Holstein
+"Flensburg",		;later capital of Schleswig
+"Sonderburg",		;Danish Sønderborg
+"Heide",
+"Tondern",		;Danish Tønder
+"Neumünster",
+"Apenrade",		;Danish Aabenraa
+"Plön",
+"Oldenburg in Holstein",
+"Itzehoe",
+"Eckernförde",
+"Husum",
+"Bad Oldesloe",
+"Hadersleben",		;Danish Haderslev
+"Bordesholm",
+"Bad Segeberg",
+"Pinneberg",
+"Rendsburg",
+"Wyk auf Föhr (ocean)",
+"Glückstadt",
+"Burg auf Fehmarn (ocean)",
+"Norburg",		;Danish Norborg
+"Westerland (ocean)",
+"Bargteheide",
+"Meldorf",
+"Christiansfeld",	;Danish Christiansfeld
+"Brunsbüttel",
+"Heiligenhafen",
+"Neustadt in Holstein",
+"Gravenstein",		;Danish Gråsten
+"Kaltenkirchen",
+"Marne",
+"Norderstedt",
+"Reinbek",
+"Reinfeld",
+"Tönning",
+"Preetz",
+"Schwentinental",
+"Pattburg",		;Danish Padborg
+"Bad Bramstedt",
+"Wahlstedt",
+"Tingleff",		;Danish Tinglev
+"Bredstedt",
+"Glinde",
+"Wilster",
+"Woyen",		;Danish Vojens
+"Altona",
+"Wandsbek",
+
+;Free City of Lübeck, not historically part of Schleswig-Holstein
+"Lübeck",
+
+;Duchy of Saxe-Lauenburg
+"Lauenburg/Elbe",
+"Ratzeburg",
+"Geesthacht"
+

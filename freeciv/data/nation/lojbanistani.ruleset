@@ -2,22 +2,24 @@
 
 name=_("Lojbanistani")
 plural=_("?plural:Lojbanistanis")
-groups="Fictional"
+groups="Imaginary"
 legend=_("Lojbanistan is a fictional place where people speak\
  Lojban. Lojban is a constructed language meant for human\
  communication. Lojban is syntactically unambiguous\
  (\"Time flies like an arrow. Fruit flies like a banana.\"),\
  culturally neutral and simple to learn.")
-leader=
- "lojbab",
- "noras",
- "banli ve cukta",	; John Woldemar Cowan
- "camgusmis",	; Robin Lee Powell
- "tsali",	; Arnt Richard Johansen
- "xorxes",	; Jorge Llambías
- "epkat"
- 
-leader_sex="Male", "Female", "Male", "Male", "Male", "Male", "Male"
+
+leaders = {
+ "name",                "sex"
+ "lojbab",              "Male"
+ "noras",               "Female"
+ "banli ve cukta",      "Male" ; John Woldemar Cowan.
+ "camgusmis",           "Male" ; Robin Lee Powell.
+ "tsali",               "Male" ; Arnt Richard Johansen.
+ "xorxes",              "Male" ; Jorge Llambías.
+ "epkat",               "Male"
+}
+
 flag="jbonai"
 flag_alt = "american"   ; Born there
 city_style = "European"

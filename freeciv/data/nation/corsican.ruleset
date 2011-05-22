@@ -1,0 +1,107 @@
+[nation_corsican]
+
+name=_("Corsican")
+plural=_("?plural:Corsicans")
+groups="European", "Early Modern"
+legend=_("For most of its history, Corsica has been ruled by foreign\
+ powers. Greeks, Etruscans, Romans, Vandals, Visigoths, Byzantines,\
+ Saracens, Lombards, the Papal States and Genoese all held sway over\
+ Corsica at one time or another. The 18th century saw a war of\
+ independence inspired by Enlightenment values. Pasquale Paoli managed\
+ to kick out the Genoese and from 1755 to 1769 Corsica was an independent\
+ republic with the first modern constitution in the world. Genoa sold its\
+ claim to France, after which a French invasion force defeated the\
+ Corsicans and Corsica was incorporated into France.")
+
+leaders = {
+ "name",                        "sex"
+ "Vincinteddu d'Istria",        "Male"
+ "Samperu Corsu",               "Male"
+ "Tiadoru di Neuhoff",          "Male"
+ "Pasquale Paoli",              "Male"
+ "Carlu Andria Pozzu di Borgu", "Male"
+ "Napulione Buonaparte",        "Male"
+ "Elisa Buonaparte",            "Female"
+ "Tiadoru Poli",                "Male"
+ "Nonce Romanetti",             "Male"
+ "Danielle Casanova",           "Female"
+}
+
+ruler_titles = {
+ "government",    "male_title",             "female_title"
+ "Republic",      _("General-in-Chief %s"), _("?female:General-in-Chief %s")
+}
+
+flag="corsica"
+flag_alt = "-"
+city_style = "Celtic"
+
+init_techs=""
+init_buildings=""
+
+init_government="Despotism"
+init_units=""
+civilwar_nations = "italian", "french"
+
+cities =
+ "Corti",		;Capital of Corsican Republic
+ "Aiacciu",		;Modern capital of region of Corsica
+ "Bastia",		;Capital of departement of Haute-Corse
+ "Aleria",		;Oldest city of Corsica
+ "Ponte Novu",		;Site of 1769 defeat
+ "Porti Vechju",	;Rest of cities by population size
+ "Biguglia",
+ "U Borgu",
+ "Calvi",
+ "Furiani",
+ "Sartè",
+ "Ghisunaccia",
+ "Lucciana",
+ "E Ville di Petrabugnu",
+ "Prupià",
+ "Bastilicaccia",
+ "Isula Rossa",
+ "I Prunelli di Fiumorbu",
+ "Grussetu è a Prugna",
+ "San Martinu di Lota",
+ "Bunifaziu",
+ "A Penta di Casinca",
+ "Ventisari",
+ "U Vescuvatu",
+ "Alata",
+ "Afà",
+ "Santa Maria di Lota",
+ "Calenzana",
+ "Sarrula è Carcupinu",
+ "Zonza",
+ "Oletta",
+ "Brandu",
+ "Albitreccia",
+ "San Fiurenzu",
+ "Cervionu",
+ "Cuttuli è Curtichjatu",
+ "San Niculaiu",
+ "A Venzulà",
+ "U Munticellu",
+ "Appiettu",
+ "Peri",
+ "Ulmetu",
+ "Merusaglia",
+ "Sari è Sulinzara",
+ "Santa Lucia di Moriani",
+ "Cavru",
+ "Pitrusedda",
+ "Linguizzetta",
+ "Figari",
+ "Carghjesi",
+ "Lumiu",
+ "Vicu",
+ "Santa Riparata di Balagna",
+ "Siscu",
+ "Sotta",
+ "Corbara",
+ "Sorbu è Occagnanu",
+ "Conca",
+ "Moltifau",
+ "San Gavinu di Carbini",
+ "Pianottuli è Caldareddu"

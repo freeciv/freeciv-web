@@ -1,0 +1,256 @@
+[nation_crimeantatar] 
+
+name=_("Crimean Tatar") 
+plural=_("?plural:Crimean Tatars") 
+groups="Medieval", "European", "Early Modern"
+legend=_("Historical feudal state on the Crimean Peninsula, existing from\
+ the 15th to the 18th century. Crimean Tatars invaded Poland and Russia,\
+ which caused wars with Turkey.")
+
+leaders = {
+ "name",                "sex"
+ "Hacı Geray I",        "Male"
+ "Nur Devlet",          "Male"
+ "Meğli Geray I",       "Male"
+ "Ayder",               "Male"
+ "Ğazı Geray I",        "Male"
+ "Saadet Geray I",      "Male"
+ "Sahib Geray I",       "Male"
+ "Fetih Geray I",       "Male"
+ "Toqtamış Geray",      "Male"
+ "Selamet Geray I",     "Male"
+ "Mehmed Geray III",    "Male"
+ "Canibek Geray",       "Male"
+ "Inayet Geray",        "Male"
+ "Bahadır Geray I",     "Male"
+ "Islam Geray III",     "Male"
+ "Adil Geray",          "Male"
+ "Saadet Geray III",    "Male"
+ "Qaplan Geray I",      "Male"
+ "Selamet Geray II",    "Male"
+ "Qırım Geray",         "Male"
+ "Arslan Geray",        "Male"
+ "Maqsud Geray",        "Male"
+ "Şahin Geray",         "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",         "female_title"
+ "Despotism",       _("%s Khan"),         _("%s Khatan")
+ "Monarchy",        _("%s Khagan"),       _("?female:%s Khagan")
+ "Fundamentalism",  _("Grand Mufti %s"),  _("?female:Grand Mufti %s")
+}
+
+flag= "crimean_tatar" 
+flag_alt = "turkey" 
+city_style = "Classical" 
+
+init_techs="" 
+init_buildings="" 
+init_government="Despotism" 
+init_units="" 
+
+civilwar_nations="Tatar", "Ukrainian", "Ottoman", "Bashkir"
+
+;Names of cities comes from this webpages: http://crh.wikipedia.org/wiki/Kategoriya:Q?r?mdaki_regionlar
+cities =
+  "Bağçasaray",
+"Yalta",
+"Curçı",
+"Kefe",
+"Kaygador",
+"Paşa Töpe",
+"Kürey Başı",
+"Otuz",
+"Sultan Sala",
+"Köktöbel",
+"Baraq Göl",
+"Qızıltaş",
+"Aşağı Otuz",
+"Büyük Lambat",
+"Aşağı Degirmenköy",
+"Degirmenköy",
+"Küçük Lambat",
+"Küçükköy",
+"Kürkület",
+"Qarasan",
+"Qastel",
+"Demirci",
+"Lavanda",
+"Yedi Ev",
+"Körbekül",
+"Aşağı Şuma",
+"Haçı Özenbaş",
+"Yuqarı Şuma",
+"Küçük Özen",
+"Quru Özen",
+"Tuvaq",
+"Ulu Özen",
+"Partenit",
+"Çayka",
+"Qarabağ",
+"Üsküt",
+"Arpat",
+"Saraylı Qıyat",
+"Aqtaçı Qıyat",
+"Ana Yurt",
+"Aykavan",
+"Bura",
+"Cafer Berdi",
+"Cağatay",
+"Mamaq",
+"Suin Acı",
+"Yağı Sarabuz",
+"Temir Ağa",
+"Molla Eli",
+"Qaraç",
+"Seymanlarköy",
+"Terek Eli ",
+"Yağmurça",
+"Badana",
+"Aratuq",
+"Atman",
+"Bötke",
+"Çeşmeci",
+"Çumaq Qan",
+"Qarağaç",
+"Qurça",
+"Sabla",
+"Beş Terek",
+"Aşağı Asma",
+"Dermenci",
+"Qalmuq Qan",
+"Şeyhköy",
+"Tuvatay",
+"Yuqan Asma",
+"Biy Tanış",
+"Çalğan",
+"Çüyke",
+"Borançı Qıtay",
+"Qazançi",
+"Uzqastı",
+"Bulğanaq",
+"Cav Cürek",
+"Bulğanaq Badraq",
+"Ağaç Eli",
+"Qoyaş",
+"Çoyunçi",
+"Beki Eli",
+"Eski Lez",
+"Üç Quyu Tarhan",
+"Yağı Lez",
+"Mamut Sultan",
+"Anğara",
+"Büyük Yanköy",
+"Colman",
+"Eski Orda",
+"Şumhay",
+"Tahta Cami",
+"Tavel",
+"Tavşan Bazar",
+"Tirke",
+"Totayköy",
+"Mazanka",
+"Atalıq Eli",
+"Tav Dayır",
+"Tolban",
+"Miğlerçik",
+"Azat",
+"Cabaç",
+"Dörtkül",
+"Kün Tuvğan",
+"Qara Çora",
+"Qasıq Degirmen",
+"Acı Keç",
+"Cağa Mamış",
+"Qulcuq",
+"Cabanaq",
+"Qart Mışıq",
+"Taqıl",
+"Ulu Çoqraq",
+"Sarabuz",
+"Kiçkene",
+"Aqmeçit",
+"Doğuzlav",
+"Dört Saqal",
+"Aqqoca",
+"Camal",
+"Sadir Bağay",
+"Toqa",
+"Qara Acı",
+"Ablaq Acı",
+"Mayak",
+"Qızıl Çoğrav",
+"Çegelek",
+"Yaşpek",
+"Tabuldi Ass",
+"Terekli Ass",
+"Tarpançı",
+"Can Baba",
+"Çeger Acı",
+"Qıpçaq",
+"Qunan",
+"Tatar Çağaltay",
+"Bay Qıyat",
+"Nemse Çağaltay",
+"Yarılğaç",
+"Kerleut",
+"Musa Ali",
+"Qarlav",
+"Balıqlava",
+"Baydar",
+"Bağa",
+"Büyük Muskomiya",
+"Hayto",
+"Kalendo",
+"Küçük Muskomiya",
+"Özömoye",
+"Sahtik",
+"Savatka",
+"Skele",
+"Urkusta",
+"Uzunca",
+"Varnautka",
+"Inkerman",
+"Şülü",
+"Uppa",
+"Aqleyız",
+"Acıköy",
+"Belbek",
+"Otarköy",
+"Qamışlı",
+"Qacı",
+"Eski Eli",
+"Mamaşay",
+"Polüşko",
+"Aqşeyh",
+"Ayıp",
+"Qızılbay",
+"Tatar Aqşeyh",
+"Baqqal",
+"Büyten",
+"Qarçığa",
+"Yuqan Baqqal",
+"Niva",
+"Tavkel Nayman",
+"Celal",
+"Manay",
+"Çerkez",
+"Samay",
+"Smail Bay",
+"Yağı Manay",
+"Munus",
+"Ağay",
+"Aqsaqal Merkit",
+"Biy Örlük",
+"Onfrang",
+"Qara Merkit",
+"Nemse Köp Qan",
+"Atay Temir",
+"Kereyit",
+"Rus Köp Qan",
+"Taş Quyu",
+"Oğuz Oğlu",
+"San Bolat",
+"Toq Şeyh",
+"Qaraba Köküş"

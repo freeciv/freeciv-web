@@ -1,0 +1,90 @@
+[nation_aragonese]
+
+name=_("Aragonese")
+plural=_("?plural:Aragonese")
+groups="European", "Medieval"
+legend=_("Aragon was formed as a Frankish county and was elevated to a\
+ kingdom in the 11th century. It expanded its territory southwards during\
+ the reconquista and subsequently managed to control a large part of the\
+ Mediterranean. In 1469 king Fernando II married Isabella of Castile,\
+ a union that would form the base of the Spanish unification. The kingdom\
+ was legally dissolved in 1707 but today Aragon continues to exist as an\
+ autonomous community of Spain.")
+
+leaders = {
+ "name",                        "sex"
+ "Aureolo",                     "Male"
+ "Aznar",                       "Male"
+ "Sancho Remíriz",              "Male"
+ "Remiro I",                    "Male"
+ "Chaime lo Conqueridor",       "Male"
+ "Ferrando lo Catolico",        "Male"
+ "Catalina d'Aragón",           "Female"
+ "José de Palafox y Melzi",     "Male"
+ "Fermín Galán",                "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",          "female_title"
+ "Despotism",       _("Count %s"),         _("Countess %s")
+ "Fundamentalism",  _("Bishop %s"),        _("Mother Superior %s")
+}
+
+flag="aragon"
+flag_alt = "-"
+city_style = "European"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+conflicts_with="spanish"
+civilwar_nations="spanish", "sicilian", "catalan", "french"
+
+cities =
+ "Zaragoza (river, plains, desert, !mountains)", ;capital of Aragon
+ "Chaca (mountains)", ;historical capital of Aragon
+ "Uesca (mountains, hills)", ;capital of Huesca province
+ "Tergüel (mountains, river)", ;capital of Teruel province
+ "L'Aínsa", ;capital of semi-legendary early medieval Sobrarbe kingdom
+ "Calatayú", ;rest of cities by population size
+ "Exeya d'os Caballers",
+ "Monzón",
+ "Balbastro",
+ "Alcañiz (plains)",
+ "Utebo",
+ "Fraga",
+ "Tarazona",
+ "Samianigo",
+ "Binéfar",
+ "Casp",
+ "Andorra",
+ "L'Almunia de Doña Godina",
+ "Taust",
+ "Zuera",
+ "Alagón",
+ "Cuart de la Uerba",
+ "Puebla d'Alfindén",
+ "La Muela",
+ "Calamocha",
+ "Borcha",
+ "Sariñena",
+ "Epila",
+ "Billanueba de Galligo",
+ "María de la Uerba",
+ "Fuens d'Ebro (river)",
+ "Calanda",
+ "Alcorisa",
+ "Tamarit de Litera",
+ "Graus",
+ "Pinsec",
+ "Pedrola",
+ "Utriellas",
+ "Mallén",
+ "Illueca",
+ "Zella",
+ "Mon Reyal (mountains, hills)",
+ "Benás (mountains)",
+ "Belchit (desert, plains, river)",
+ "Canfrán (mountains)",
+ "Sos"

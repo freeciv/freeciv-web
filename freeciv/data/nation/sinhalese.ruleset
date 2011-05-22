@@ -1,0 +1,65 @@
+[nation_sinhalese]
+
+name=_("Sinhalese")
+plural=_("?plural:Sinhalese")
+groups="Asian", "Ancient", "Medieval"
+
+legend=_("The Sinhalese people of Sri Lanka traces their ancestry to\
+ the semi-legendary Prince Vijaya who settled the island of Sri Lanka\
+ together with 700 followers in 543 BCE.")
+
+leaders = {
+ "name",                 "sex"
+ "Parakramabahu VI",     "Male"
+ "Parakramabahu II",     "Male"
+ "Vijayabahu I",         "Male"
+ "Anula",                "Female"
+ "Dutthagamani",         "Male"
+ "Devanampiya Tissa",    "Male"
+ "Kuveni",               "Female"
+ "Vijaya",               "Male"
+}
+
+ruler_titles = {
+ "government",   "male_title",             "female_title"
+ "Despotism",    _("Prince %s"),           _("Princess %s")
+}
+
+flag="sinhalese"
+flag_alt="-"
+city_style="Asian"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+conflicts_with="Lankese"
+civilwar_nations="Chola", "Gupta"
+
+cities =
+ "Anuradhapura",
+ "Jambukola",
+ "Mathoddam",
+ "Mahatittha",
+ "Urkavalthurai",
+ "Gokanna",
+ "Katharagama",
+ "Polonnaruwa",
+ "Dambadeniya",
+ "Yapahuwa",
+ "Kurunegala",
+ "Gampola",
+ "Dedigama",
+ "Raigama",
+ "Kotte",
+ "Kelaniya",
+ "Sitawaka",
+ "Senkadagalapura",
+ "Balane",
+ "Gannoruwa",
+ "Mudda Kalapuwa",
+ "Thrikunamalaya",
+ "Kalutara",
+ "Puttalam",
+ "Kalpitiya"

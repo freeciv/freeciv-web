@@ -1,0 +1,73 @@
+[nation_central_african]
+
+name=_("Central African")
+plural=_("?plural:Central Africans")
+groups="Modern", "African"
+legend=_("The Central African Republic is a country in Central Africa,\
+ formerly known as the French African territory of Ubangi-Shari. It was\
+ ruled briefly as a dictatorship in the 70s under Emperor Bokassa I during\
+ which it was called the Central African Empire.")
+leaders=
+{
+ "name",		"sex"
+ "André Kolingba",	"male"
+ "David Dacko",		"male"
+ "Elisabeth Domitien",	"female"
+ "Jean-Bédel Bokassa",	"male"
+ "Barthélemy Boganda",	"male"
+}
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Monarchy",        _("Emperor %s"),   _("Empress %s")
+}
+
+flag="car"
+flag_alt="-"
+city_style="Tropical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="Chadian", "Congolese", "Cameroonian"
+
+cities =
+ "Bangui",
+ "Bimbo",
+ "Mbaiki",
+ "Berbérati",
+ "Kaga-Bandoro",
+ "Bozoum",
+ "Carnot",
+ "Sibut",
+ "Bambari",
+ "Bria",
+ "Bouar",
+ "Bossangoa",
+ "Nola",
+ "Bangassou",
+ "Damara",
+ "Mobaye",
+ "Paoua",
+ "Boda",
+ "Ippy",
+ "Batangafo",
+ "Alindao",
+ "Kabo",
+ "Rafaï",
+ "Bouca",
+ "Obo",
+ "Ndélé",
+ "Kembé",
+ "Mongoumba",
+ "Yakolé",
+ "Birao",
+ "Gamboula",
+ "Kouango",
+ "Baoro",
+ "Boali",
+ "Oudda",
+ "Gambo",
+ "Ouango"

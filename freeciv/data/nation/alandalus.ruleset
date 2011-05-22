@@ -1,0 +1,133 @@
+[nation_alandalus]
+
+name=_("Andalusi")
+plural=_("?plural:Andalusis")
+groups="Medieval", "European"
+legend=_("Al-Andalus was the parts of the Iberian peninsula that was\
+ under Muslim control during the Middle Ages. Muslim Andalusians are\
+ noted for their splendid architectural heritage. During the Reconquista\
+ the Christian kingdoms gradually pushed back the Islamic states of\
+ Al-Andalus. Their last city on the Iberian peninsula, Granada, fell in\
+ 1492.")
+
+leaders = {
+ "name",                        "sex"
+ "Tariq ibn Ziad",              "Male"
+ "Yusuf al-Fihr",               "Male"
+ "Abd-Arrahmane I",             "Male"
+ "Abd-Arrahmane III",           "Male"
+ "Al-Mansur Ibn Abi Aamir",     "Male"
+ "Banu Abbad",                  "Male"
+ "Al Sayyid Campeador",         "Male"
+ "Yaqub al-Mansur",             "Male"
+ "Mohamed I ibn Nasr",          "Male"
+ "Yusuf I",                     "Male"
+ "Mohamed V",                   "Male"
+ "Boabdil",                     "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",            "female_title"
+ "Despotism",       _("Sheikh %s"),          _("Shaykha %s")
+ "Fundamentalism",  _("Caliph %s"),          _("Calipha %s")
+ "Monarchy",        _("Emir %s"),            _("Emira %s")
+ "Republic",        _("Vizier %s"),          _("?female:Vizier %s")
+}
+
+flag="almohad"
+flag_alt = "morocco"
+city_style = "Classical"
+
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+conflicts_with="spanish"
+civilwar_nations="aragonese", "catalan", "portuguese", "castilian", "asturian", "leonese"
+
+cities =
+  "Qurtuba (hills, river)",		;Córdoba
+  "Gharnata (mountains)",		;Granada
+  "Ishbiliya (plains, river)",		;Sevilla
+  "Tulaytula (hills)", 			;Toledo
+  "Saraqusta (river, plains)",		;Zaragoza
+  "Balansiyya (ocean)",			;València
+  "Al-Lishbuna (ocean, river)",		;Lisboa
+  "Batalyaws (river, desert)",		;Badajoz
+  "Al-Amiria (ocean, mountains)", 	;Almeria
+  "Qadis (ocean, swamp)",		;Cadiz
+  "Mursiyya (mountains, desert)", 	;Murcia
+  "Malaqa (ocean, mountains)", 		;Málaga
+  "Jabal Tariq (ocean, mountains)", 	;Gibraltar
+  "Wadi al-Hijara (river)", 		;Guadalajara
+  "Turtusha (ocean, river)", 		;Tortosa
+  "Al-Harun (ocean)",			;Faro
+  "Larda (river, hills)",		;Lleida
+  "Al-Daniyya (ocean, mountains)", 	;Denia
+  "Narbuna (ocean, swamp)",		;Narbonne
+  "Marbilla (ocean, mountains)", 	;Marbella
+  "Madina Mayurca (ocean, hills)", 	;Palma
+  "Runda (mountains)",			;Ronda
+  "Bald Al-Walid  (hills, plains)",	;Valladolid
+  "Al-Sahla (mountains)",		;Alpuente
+  "Qarmuna (hills)",			;Carmona
+  "Mawrur (hills)",			;Morón de la Frontera
+  "Qalat Ayyub (mountains)",		;Calatayud
+  "Madina Arqosh (ocean)",		;Arcos de la Frontera
+  "Lebla",				;Niebla
+  "Al-Hulafae (ocean)",			;Huelva
+  "Martula",				;Mértola
+  "Silb",				;Silves
+  "Sebta (ocean, desert)",		;Ceuta
+  "Qarqashuna (plains, forest)",	;Carcassonne
+  "Madina Antaqira (mountains)",	;Antequera
+  "Qasrish (desert)",			;Cáceres
+  "Al-Busherta",			;Alpujarras
+  "Al-Jazira al-Khadra (ocean)",	;Algeciras
+  "Wasqa (mountains)",			;Huesca
+  "Al-Madina Shaduna (hills)",		;Medina-Sidonia
+  "Tanja (ocean, desert)",		;Tanger
+  "Shalamanqa (ocean)",			;Salamanca
+  "Al-Buhair",				;Albufeira
+  "Burgus",				;Burgos
+  "Taryala (desert)",			;Trujillo
+  "Sahla Banu Razin (hills, forest)", 	;Albarracín
+  "Madina Lawsa",			;Loja
+  "Kulumriyya",				;Coimbra
+  "Tarifa (ocean)",			;Tarifa
+  "Shantarin (ocean)",			;Santarém
+  "Banbaluna (ocean, hills)",		;Pamplona
+  "Wadi Ashi (mountains)",		;Guadix
+  "Marida (river, desert)",		;Mérida
+  "Al-Madan",				;Almada
+  "Bragha (hills, forest)",		;Braga
+  "Samura (ocean)",			;Zamora
+  "Jayyana (hills)",			;Jaén
+  "Madina Salim",			;Medinaceli
+  "Liyun",				;León
+  "Al-Basita (desert, plains)",		;Albacete
+  "Tutila",				;Tudela
+  "Tarraquna (ocean)",			;Tarragona
+  "Sharish (ocean, swamp)",		;Jerez de la Frontera
+  "Burtuqal (ocean, river)",		;Porto
+  "Madina Liqant (ocean)",		;Alacant
+  "Bort Ghaka (mountains, hills)",	;Jaca
+  "Uriya (ocean, hills, forest)",	;Ourense
+  "Abila (mountains)",			;Ávila
+  "Quriya (ocean)",			;Coria
+  "Asturqa",				;Astorga
+  "Melilya (mountains, ocean)",		;Melilla
+  "Yabura",				;Evora
+  "Shiqubiyya (hills)",			;Segovia
+  "Qawinqa (mountains)",		;Cuenca
+  "Qartayanna (ocean, hills)",		;Cartagena
+  "Talabayra (river)",			;Talavera de la Reina
+  "Alsh (ocean)",			;Elx
+  "Madina Yebisa (ocean)",		;Eivissa
+  "Lokruy",				;Logroño
+  "Shantara (ocean)",			;Sintra
+  "Siqunza",				;Sigüenza
+  "Madina Barshiluna (ocean)",		;Barcelona
+  "Al-Majrid"				;Madrid

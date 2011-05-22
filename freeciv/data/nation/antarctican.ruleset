@@ -2,12 +2,21 @@
 
 name=_("Antarctican")
 plural=_("?plural:Antarcticans")
-groups="Fictional"
+groups="Imaginary"
 legend=_("Independent South Pole, land of penguins.")
-leader=
- "Tux",
- "Tuxette"
-leader_sex="Male", "Female"
+
+leaders = {
+ "name",                "sex"
+ "Tux",                 "Male"
+ "Tuxette",             "Female"
+}
+
+ruler_titles = {
+ "government",      "male_title",              "female_title"
+ "Monarchy",        _("Emperor %s"),           _("?female:Empress %s")
+}
+; emperor penguins
+
 flag="antarctica"
 flag_alt = "-"
 city_style = "Classical"
@@ -16,6 +25,8 @@ init_techs=""
 init_buildings=""
 init_government="Despotism"
 init_units=""
+
+civilwar_nations="atlantean"
 
 ; Cities are Antarctic research stations
 cities =

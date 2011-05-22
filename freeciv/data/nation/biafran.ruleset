@@ -1,0 +1,75 @@
+[nation_biafran]
+
+name=_("Biafran")
+plural=_("?plural:Biafrans")
+groups="African"
+legend=_("Biafra declared independence from Nigeria in 1967 after years\
+ of ethnic, religious and economic tensions in newly independent Nigeria.\
+ A war between Nigeria and Biafra followed, which claimed up to two\
+ million lives, mostly because of famine and disease caused by the\
+ blockade of Biafran ports. Biafra surrendered in 1970.")
+
+leaders = {
+ "name",                        "sex"
+ "Chukwuemeka Odumegwu Ojukwu", "Male"
+ "Philip Effiong",              "Male"
+ "Oyibo Adinamadu",             "Female"
+}
+
+ruler_titles = {
+ "government",      "male_title",       "female_title"
+ "Despotism",       _("Colonel %s"),    _("?female:Colonel %s")
+}
+
+flag="biafra"
+flag_alt = "-"
+city_style = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+conflicts_with = "benin"
+civilwar_nations = "nigerian", "benin"
+
+cities =
+ "Enugu",
+ "Umuahia",
+ "Aba",
+ "Owerri",
+ "Port Harcourt",
+ "Onitsha",
+ "Ikom",
+ "Calabar",
+ "Ogoja",
+ "Yenagoa",
+ "Awka",
+ "Abakaliki",
+ "Uyo",
+ "Ikot Ekpene",
+ "Makurdi",
+ "Afikpo",
+ "Nembe",
+ "Asaba",
+ "Amaigbo",
+ "Sapele",
+ "Eket",
+ "Annang",
+ "Agbor",
+ "Ughelli",
+ "Ahoada",
+ "Orlu",
+ "Nnewi",
+ "Oji",
+ "Okigwe",
+ "Elele",
+ "Kwale",
+ "Isele-ukwu",
+ "Ila",
+ "Opobo",
+ "Oron",
+ "Uli",
+ "Nsukka"
+
+

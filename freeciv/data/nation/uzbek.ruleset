@@ -3,58 +3,78 @@
 name=_("Uzbek")
 plural=_("?plural:Uzbeks")
 groups="Modern", "Asian"
-legend=_("Nation in Central Asia. Uzbekistan was the center of\
- ancient states such as Khoresm, Khanate of Bukhara, Khanate of\
- Kokand and others. Conquered by the Russian Empire in 19th century,\
- Uzbekistan got independence from the Soviet Union in 1991.")
-leader="Shahrukh Biy", ; Khan of Kokand
-       "Muhammad Shaybani",
-       "Timur", ; founder of Timurid dynasty
-       "Ulugh Beg", ; Timurid ruler
-       "Abdullah II", ; Khan of Bukhara
-       "Ilbars I", ; founder of Khanate of Kiva
-       "Anush Tigin Gharchai", ; Korazm ruler
-       "Mamun I" ; Khorazm ruler
+legend=_("The Central Asian nation of Uzbekistan has been the site of many\
+ ancient states such as Khwarezm, the Khanate of Bukhara, and the Khanate of\
+ Kokand. The Uzbeks regard themselves as descendants of Timur, founder of\
+ the Timurid dynasty, who ruled from his capital at Samarkand.")
 
-leader_sex="Male", "Male", "Male", "Male", "Male",
-           "Male", "Male", "Male"
+leaders = {
+ "name",                        "sex"
+ "Shohruh",                     "Male" ; Khan of Kokand
+ "Shayboniy",                   "Male" ; a.k.a. Muhammad Shaybani
+ "Temur",                       "Male" ; Founder of Timurid dynasty
+ "Ulug'bek",                    "Male" ; Timurid ruler
+ "Abdulla II",                  "Male" ; Khan of Bukhara
+ "Ilbars I",                    "Male" ; Founder of Khanate of Kiva
+}
+
+ruler_titles = {
+ "government",  "male_title",              "female_title"
+ "Despotism",   _("%s Khan"),              _("%s Khatan")
+ "Monarchy",    _("Emir %s"),              _("Emira %s")
+ "Communism",   _("General Secretary %s"), _("?female:General Secretary %s")
+}
 
 flag="uzbekistan"
 flag_alt = "-"
 city_style = "Classical"
-
-ruler_titles = { "government",      "male_title",      "female_title"
-                 "Despotism",       _("Khan"),         _("Khatan")
-                 "Monarchy",        _("Emir"),         _("Emir")
-               }
 
 init_techs=""
 init_buildings=""
 init_government="Despotism"
 init_units=""
 
-civilwar_nations = "turkmen", "tajik", "kazakh", "kyrgyz", "Afghani"
+conflicts_with="Timurid" ; Uzbeks considers Timur their founding father
+civilwar_nations="Turkmen", "Kazakh", "Kyrgyz", "Uyghur"
 
 cities =
- "Bukhoro",
- "Samarqand",
- "Kokand", ; ancient name of Qŭqon
- "Khorazm",
- "Tashkent",
- "Farghona",
- "Nukus",
- "Urganch",
- "Nawoiy",
- "Qarshi",
- "Jizzakh",
- "Guliston",
- "Andijon",
+ "Buxoro", ; Bukhara
+ "Samarqand", ; Samarkand
+ "Qo'qon", ; Kokand
+ "Xiva", ; Khiva
+ "Toshkent", ; Tashkent
  "Namangan",
+ "Andijon", ; Andijan
+ "Nukus",
+ "Farg'ona", ; Fergana
+ "Qarshi",
+ "Chirchiq", ; Chirchik
+ "Marg'ilon", ; Margilan
+ "Urganch", ; Urgench
+ "Jizzax", ; Jizzakh
+ "Olmaliq", ; Almalyk
  "Angren",
- "Chirchiq",
- "Qŭqon",
- "Termiz",
- "Denow",
- "Uchquduq",
- "Oŭnghirot",
- "Mŭynoq"
+ "Navoiy",
+ "Kattaqo'rg'on", ; Kattakurgan
+ "Bekobod", ; Bekabad
+ "Juma",
+ "Zarafshon", ; Zarafshan
+ "Yangiyo'l", ; Yangiyul
+ "Guliston",
+ "Shahrisabz",
+ "To'rtko'l", ; Turtkul
+ "Urgut",
+ "Kosonsoy", ; Kasansay
+ "Asaka",
+ "Termiz", ; Termez
+ "Chimboy",
+ "Beruniy",
+ "Nurota", ; Nurata
+ "Yangiyer",
+ "Uchquduq", ; Uchkuduk
+ "Rishton",
+ "To'ytepa", ; Toytepa
+ "G'ijduvon", ; Gijduvan
+ "Vobkent", ; Vabkent
+ "Qo'ng'irot", ; Kungrad
+ "Mo'ynoq" ; Muynak

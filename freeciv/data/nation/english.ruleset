@@ -2,39 +2,45 @@
 
 name=_("English")
 plural=_("?plural:English")
-groups="Medieval", "European"
+groups="Medieval", "Early Modern", "European"
 legend=_("England was unified by Alfred the Great of Wessex in the late\
  9th century AD, only to be conquered by William of Normandy a century\
  later, in the last successful invasion of the country.")
-leader=
- "Elizabeth I",
- "Alfred the Great",		; a.k.a. "Alfred of Wessex"
- "William the Conqueror", 
- "Richard Lionheart",
- "Henry II",
- "Oliver Cromwell",
- "John Lackland",
- "Mary Tudor",
- "Edward Longshanks"
-leader_sex="Female", "Male", "Male", "Male", "Male", "Male", "Male",
-           "Female", "Male"
+
+leaders = {
+ "name",                        "sex"
+ "Elizabeth I",                 "Female"
+ "Alfred the Great",            "Male" ; a.k.a. "Alfred of Wessex"
+ "William the Conqueror",       "Male"
+ "Richard Lionheart",           "Male"
+ "Henry II",                    "Male"
+ "Oliver Cromwell",             "Male"
+ "John Lackland",               "Male"
+ "Mary Tudor",                  "Female"
+ "Edward Longshanks",           "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",           "female_title"
+ "Anarchy",         _("Pretender %s"),      _("?female:Pretender %s")
+ "Despotism",       _("Lord %s"),         _("Lady %s")
+ "Fundamentalism",  _("Bishop %s"),         _("?female:Bishop %s")
+ "Republic",        _("Lord Protector %s"), _("Lady Protector %s")
+}
+
 flag="england"
 flag_alt = "united_kingdom"
 city_style = "European"
-ruler_titles = { "government",      "male_title",      "female_title"
-                 "Democracy",_("Prime Minister"), _("?female:Prime Minister")
-                 "Fundamentalism",  _("Lord Protector"), _("Lady Protector")
-               }
 
 init_techs=""
 init_buildings=""
 init_government="Despotism"
 init_units=""
-civilwar_nations = "cornish", "british"
+civilwar_nations = "cornish", "british", "northumbrian"
 
 cities =
  "London",
- "Westminister",
+ "Westminster",
  "Birmingham",
  "Liverpool",
  "Manchester",
@@ -45,7 +51,7 @@ cities =
  "Bradford",
  "Derby",
  "Southampton",
- "Middlesborough",
+ "Middlesbrough",
  "Sheffield",
  "Nottingham",
  "Coventry",

@@ -6,25 +6,30 @@ groups="Ancient", "Asian"
 
 legend=_("The Himyar were originally a mountain tribe in what is now Yemen\
  that conquered the other South Arabian kingdoms, including Sabaea in\
- 115BCE, which were rich from the incense trade. The Himyar were castle-\
-builders, finding it necessary to erect citadels to protect against Bedouin\
- raids. The Axumite kingdom from Ethiopia ruled Sabaea from 340 to 378 CE,\
- but the area was reconquered by Himyar forces in 525. The fall of the\
- nation was a slow process involving the Christian states of Axum and the\
- Byzantine Empire on one side, the Mandean Sassanid Empire of Persia on the\
- other, and various South Arabian factions split between. The country\
- switched from Axumite rule to Sassanid in 575 and in 628, the fifth\
- Sassanid satrap of \"al-Yaman\" converted to Islam and Southern Arabia was\
- incorporated into the new, expanding Muslim empire.")
+ 115 BC, which were rich from the incense trade. The Himyar were castle-\
+builders, finding it necessary to erect citadels to protect against\
+ Bedouin raids. The Axumite kingdom from Ethiopia ruled Sabaea from 340 to\
+ 378 AD, but the area was reconquered by Himyar forces in 525. The fall of\
+ the nation was a slow process involving the Christian states of Axum and\
+ the Byzantine Empire on one side, the Mandean Sassanid Empire of Persia\
+ on the other, and various South Arabian factions split between. The\
+ country switched from Axumite rule to Sassanid in 575 and in 628, the\
+ fifth Sassanid satrap of \"al-Yaman\" converted to Islam and Southern\
+ Arabia was incorporated into the new, expanding Muslim empire.")
 
-leader=
- "Shamir Yuhar'esh II",
- "Sha'ram Awtar",
- "Yusif Asar",
- "dhu-Nawas",
- "Sayf ibn-dhi-Yazan"
+leaders = {
+ "name",                "sex"
+ "Shamir Yuhar'esh II", "Male"
+ "Sha'ram Awtar",       "Male"
+ "Yusif Asar",          "Male"
+ "dhu-Nawas",           "Male"
+ "Sayf ibn-dhi-Yazan",  "Male"
+}
 
-leader_sex = "Male", "Male", "Male", "Male", "Male"
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Despotism",       _("Sheikh %s"),    _("Shaykha %s")
+}
 
 flag         = "himyar"
 flag_alt     = "-"
@@ -35,7 +40,7 @@ init_buildings=""
 init_government="Despotism"
 init_units=""
 
-civilwar_nations="arab", "ethiopian"
+civilwar_nations="arab", "yemeni"
 
 cities =
  "Shabwa",

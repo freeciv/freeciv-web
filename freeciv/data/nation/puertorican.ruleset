@@ -1,0 +1,100 @@
+[nation_puertorican]
+
+name=_("Puerto Rican")
+plural=_("?plural:Puerto Ricans")
+groups="American"
+legend=_("The smallest of the Greater Antilles, Puerto Rico was inhabited\
+ by the indigenous Taino people when it was conquered by the Spanish. It\
+ was conquered by the United States in 1898, just one year after Spain\
+ had granted autonomy to the island. Currently it is a US commonwealth,\
+ but its definitive status is still being discussed.")
+
+leaders = {
+ "name",                        "sex"
+ "Juan Ponce de León",          "Male"
+ "Ramón Power y Giralt",        "Male"
+ "Roberto Cofresí",             "Male"
+ "Ramón Emeterio Betances",     "Male"
+ "Segundo Ruiz Belvis",         "Male"
+ "Manuel Rojas",                "Male"
+ "Luisa Capetillo",             "Female"
+ "Luis Muñoz Rivera",           "Male"
+ "Pedro Albizu Campos",         "Male"
+ "Blanca Canales",              "Female"
+}
+
+ruler_titles = {
+ "government",      "male_title",            "female_title"
+ "Despotism",       _("Captain General %s"), _("?female:Captain General %s")
+ "Fundamentalism",  _("Padre %s"),           _("Madre %s")
+ "Republic",        _("Governor %s"),        _("?female:Governor %s")
+}
+
+flag="puerto_rico"
+flag_alt = "-"
+city_style = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations = "taino", "dominicano", "cuban"
+
+cities =
+ "San Juan",
+ "Bayamón",
+ "Mayagüez",
+ "Ponce",
+ "Lares",
+ "Carolina",
+ "Caguas",
+ "Guaynabo",
+ "Trujillo Alto",
+ "Arecibo",
+ "Fajardo",
+ "Vega Baja (grassland)",
+ "Levittown",
+ "Cataño",
+ "Guayama",
+ "Yauco",
+ "Humacao",
+ "Candelaria",
+ "Cayey",
+ "Manatí",
+ "Aguadilla",
+ "Dorado",
+ "Hormigueros",
+ "Pájaros",
+ "Río Grande (river)",
+ "Vega Alta (grassland)",
+ "Isabela",
+ "San Germán",
+ "San Sebastián",
+ "Coamo",
+ "Cabo Rojo (ocean)",
+ "Corozal",
+ "San Lorenzo",
+ "Sabana Grande (plains)",
+ "Utuado",
+ "Gurabo",
+ "San Isidro",
+ "Canóvanas",
+ "Juana Díaz",
+ "Guánica",
+ "Juncos",
+ "Luquillo",
+ "Aibonito",
+ "Florida",
+ "Campanilla",
+ "Peñuelas",
+ "Las Piedras",
+ "Santa Isabel",
+ "Puerto Real (ocean)",
+ "Arroyo",
+ "San Antonio",
+ "Yabucoa",
+ "Vieques",
+ "Culebra",
+ "Mona"
+

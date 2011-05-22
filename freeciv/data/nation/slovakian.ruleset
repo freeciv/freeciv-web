@@ -5,36 +5,36 @@ plural=_("?plural:Slovakians")
 groups="Medieval", "Modern", "European"
 legend=_("Slovakia is a country in the heart of Europe. Formerly part of\
  Czechoslovakia, until 1918 it was part of the Austro-Hungarian Empire.")
-leader=
- "Ľudevít Velislav Štúr",
- "Rastislav Štefánik",
- "Samo",
- "Mojmír",
- "Pribina",
- "Koceľ",
- "Svätopluk", 
- "Rastislav",
- "Matúš Čák Trenčiansky"
-leader_sex="Male", "Male", "Male",
-           "Male", "Male", "Male", "Male",
-           "Male", "Male"
+
+leaders = {
+ "name",                        "sex"
+ "Ľudevít Velislav Štúr",       "Male"
+ "Rastislav Štefánik",          "Male"
+ "Samo",                        "Male"
+ "Mojmír",                      "Male"
+ "Pribina",                     "Male"
+ "Koceľ",                       "Male"
+ "Svätopluk",                   "Male"
+ "Matúš Čák Trenčiansky",       "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",          "female_title"
+ "Despotism",       _("Voivode %s"),       _("?female:Voivode %s")
+ "Fundamentalism",  _("Pope %s"),          _("Priestess %s")
+ "Communism",   _("General Secretary %s"), _("?female:General Secretary %s")
+}
+
 flag="slovakia"
 flag_alt = "-" ; former CzechoSlovakia has the same flag as Czech
                ; - the blue triangle in it means Slovakia
 city_style = "European"
-ruler_titles = { "government",      "male_title",        "female_title"
-                  "Despotism",      _("?male:Leader"),   _("?female:Leader")
-                  "Republic",       _("President"),    _("?female:President")
-                  "Democracy",_("Prime Minister"),_("?female:Prime Minister")
-                  "Fundamentalism", _("Pope"),           _("Priestess")
-          "Communism", _("General Secretary"), _("?female:General Secretary")
-                }
 
 init_techs=""
 init_buildings=""
 init_government="Despotism"
 init_units=""
-civilwar_nations="hungarian", "czech", "polish"
+civilwar_nations="silesian", "czech"
 
 cities =
  "Bratislava",

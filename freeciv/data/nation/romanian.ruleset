@@ -10,34 +10,31 @@ legend=_("Romania as a nation was formed at the beginning of the 20th\
  the borders of great empires: Roman, Ottoman, Austro-Hungarian, and\
  Russian.")
 
-leader=
- "Mircea cel Bătrân",		; English: "Mircea the Elder"
- "Vlad III Dracula",		; also "Vlad Ţepeş" or "Vlad the Impaler"
- "Mihai Viteazul",		; English: "Michael the Brave"
- "Ştefan cel Mare",		; English: "Stefan the Great"
- "Ioan Corvin Huniade",		; English: "John Corvinus Huniades"
- "Avram Iancu",
- "Horea",			; real name: "Vasile Ursu Nicola"
- "Alexandru cel Bun",		; English: "Alexander the Kind"
- "Carol I",			; First and second king of the house of
- "Ferdinand I",			; Hohenzollern-Sigmaringen
- "Nicolae Antonescu",
- "Nicolae Ceausescu"
-leader_sex="Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male",
-           "Male", "Male", "Male", "Male"
+leaders = {
+ "name",                "sex"
+ "Mircea cel Bătrân",   "Male" ; English: "Mircea the Elder"
+ "Vlad III Dracula",    "Male" ; also "Vlad Ţepeş" or "Vlad the Impaler"
+ "Mihai Viteazul",      "Male" ; English: "Michael the Brave"
+ "Ştefan cel Mare",     "Male" ; English: "Stefan the Great"
+ "Ioan Corvin Huniade", "Male" ; English: "John Corvinus Huniades"
+ "Avram Iancu",         "Male"
+ "Horea",               "Male" ; real name: "Vasile Ursu Nicola"
+ "Alexandru cel Bun",   "Male" ; English: "Alexander the Kind"
+ "Carol I",             "Male" ; First and second king of the house of
+ "Ferdinand I",         "Male" ; Hohenzollern-Sigmaringen
+ "Nicolae Antonescu",   "Male"
+ "Nicolae Ceausescu",   "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",            "female_title"
+ "Despotism",       _("Prince %s"),            _("Princess %s")
+ "Fundamentalism",  _("Director-President %s"),_("?female:Director-President %s")
+}
+
 flag="romania"
 flag_alt = "-"
 city_style = "Classical"
-
-ruler_titles = { "government",      "male_title",      "female_title"
-		 ; /* TRANS: Voievod/Doamna = Prince/Lady */
-                 "Despotism",       _("Voievod"),     	_("Doamna")
-		 ; /* TRANS: Rege/Regina = King/Queen */
-                 "Monarchy",        _("Rege"),    	_("Regina")
-		 ; /* TRANS: Tovaras/Tovarasa = Comrade */
-                 "Communism",       _("Tovaras"),     	_("Tovarasa")
-           "Fundamentalism", _("Director-President"), _("Director-President")
-               }
 
 init_techs=""
 init_buildings=""
@@ -45,7 +42,7 @@ init_units=""
 init_government="Despotism"
 
 conflicts_with = "roman"
-civilwar_nations = "hungarian", "serbian", "ukrainian"
+civilwar_nations = "transylvanian", "moldovan"
 
 cities =
  "Bucureşti",

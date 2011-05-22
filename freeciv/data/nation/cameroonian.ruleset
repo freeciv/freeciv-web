@@ -1,0 +1,67 @@
+[nation_cameroonian]
+
+name = _("Cameroonian")
+plural = _("?plural:Cameroonians")
+groups="African", "Modern"
+legend=_("Cameroon is a country in West Central Africa. Colonized by the\
+ Germans, it was divided between Britain and France after World War I. It\
+ has been independent since 1960.")
+leaders = {
+ "name",                "sex"
+ "John Ngu Foncha", "Male"
+ "Ahmadou Ahidjo", "Male"
+ "Paul Biya", "Male"
+}
+
+flag = "cameroon"
+flag_alt = "-"
+city_style = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="nigerian"
+
+cities =
+ "Yaoundé",
+ "Douala",
+ "Maroua",
+ "Bafoussam",
+ "Bamenda",
+ "Buéa",
+ "Garoua",
+ "Bertoua",
+ "Ngaoundéré",
+ "Ebolowa",
+ "Loum",
+ "Kumba",
+ "Edéa",
+ "Mbouda",
+ "Foumban",
+ "Djang",
+ "Nkongsamba",
+ "Ebolowa",
+ "Limbe",
+ "Guider",
+ "Meiganga",
+ "Yagoua",
+ "Tiko",
+ "Mbalmayo",
+ "Kousséri",
+ "Bafang",
+ "Wum",
+ "Bafia",
+ "Kribi",
+ "Sangmélima",
+ "Foumbot",
+ "Banyo",
+ "Batouri",
+ "Bangangté",
+ "Bali",
+ "Nkambé",
+ "Melong",
+ "Mokolo",
+ "Manjo",
+ "Mbanga"

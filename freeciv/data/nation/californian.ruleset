@@ -1,0 +1,152 @@
+[nation_californian]
+
+name=_("Californian")
+plural=_("?plural:Californians")
+groups="American"
+legend=_("California is the largest US state by population and economy.\
+ First populated by Native Americans, it was colonized by Spanish\
+ missionaries in the 18th century. California became a territory of\
+ Mexico upon that country's independence. During the Mexican-American War\
+ local American settlers proclaimed the \'Bear Flag Republic\', which was\
+ incorporated into the United States shortly thereafter. The 1848 Gold\
+ Rush brought massive numbers of immigrants to California. In the 20th\
+ century the state became a center of the world's entertainment and\
+ technology industries.")
+
+leaders = {
+ "name",                  "sex"
+ "Junípero Serra",        "Male" ; Missionary
+ "William B. Ide",        "Male" ; Commander of California Republic
+ "John C. Frémont",       "Male" ; Conqueror and military governor
+ "Joaquin Murrieta",      "Male" ; Outlaw
+ "Leland Stanford",       "Male" ; Tycoon and governor
+ "Norton I",              "Male" ; Self declared emperor of the United States
+ "Hiram Johnson",         "Male" ; Progressive politican and governor
+ "Earl Warren",           "Male" ; US Supreme Court justice and governor
+ "Ronald Reagan",         "Male" ; Actor, governor and president of the
+                                 ; United States
+ "Arnold Schwarzenegger", "Male" ; Governator
+ "Nancy Pelosi",          "Female" ; Politician, speaker
+}
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Despotism",       _("Sheriff %s"),   _("?female:Sheriff %s")
+ "Fundamentalism",  _("Padre %s"),     _("Madre %s")
+ "Monarchy",        _("Emperor %s"),   _("Empress %s")
+ "Republic",        _("Governor %s"),  _("?female:Governor %s")
+}
+
+flag="california"
+flag_alt = "usa"
+city_style = "European"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="mexican", "american", "chumash", "ohlone"
+
+cities =
+ "Sacramento (plains, grassland)", ;state capital
+ "Sonoma (hills)", ;capital of California Republic
+ "Los Angeles (ocean, mountains)",
+ "San Francisco (ocean, hills)",
+ "San Diego (ocean, desert)",
+ "San Jose (hills)",
+ "Fresno (plains, grassland, forest)",
+ "Long Beach (ocean)",
+ "Oakland (ocean, forest)",
+ "Santa Ana (plains)",
+ "Anaheim (plains, hills)",
+ "Bakersfield (plains, grassland, hills, forest)",
+ "Riverside (river, desert)",
+ "Stockton (grassland, plains)",
+ "Chula Vista (hills)",
+ "Berkeley",
+ "Fremont",
+ "Irvine",
+ "Modesto",
+ "Glendale",
+ "San Bernardino",
+ "Huntington Beach (ocean)",
+ "Oxnard",
+ "Fontana",
+ "Moreno Valley",
+ "Oceanside (ocean)",
+ "Rancho Cucamonga",
+ "Santa Clarita",
+ "Garden Grove",
+ "Ontario",
+ "Pomona",
+ "Santa Rosa",
+ "Salinas",
+ "Palmdale",
+ "Hayward",
+ "Pasadena",
+ "Torrance",
+ "Corona",
+ "Lancaster",
+ "Escondido",
+ "Orange",
+ "Elk Grove",
+ "Sunnyvale",
+ "Fullerton",
+ "Thousand Oaks (forest)",
+ "El Monte (mountains, hills)",
+ "Simi Valley",
+ "Concord",
+ "Visalia",
+ "Vallejo",
+ "Inglewood",
+ "Santa Clara",
+ "Carson",
+ "Santa Monica (ocean)",
+ "Santa Barbara",
+ "Alhambra",
+ "Eureka",
+ "San Rafael",
+ "Redwood City (forest)",
+ "Monterey",
+ "Ventura",
+ "Temecula",
+ "Benicia",
+ "San Mateo",
+ "Vacaville",
+ "Redding",
+ "Turlock",
+ "Indio",
+ "Merced",
+ "Redlands",
+ "Chico",
+ "San Luis Obispo",
+ "South Lake Tahoe (lake)",
+ "Calexico",
+ "Martinez",
+ "Fairfield",
+ "Auburn",
+ "Santa Cruz",
+ "Oroville",
+ "Woodland (forest)",
+ "El Centro",
+ "Hanford",
+ "Madera",
+ "Napa",
+ "Nevada City",
+ "Yuba City",
+ "Ukiah",
+ "Marysville",
+ "Lakeport (lake)",
+ "Red Bluff",
+ "Hollister",
+ "Sonora",
+ "San Andreas",
+ "Yreka",
+ "Jackson",
+ "Susanville",
+ "Crescent City",
+ "Willows",
+ "Colusa",
+ "Quincy"
+

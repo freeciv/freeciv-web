@@ -1,0 +1,78 @@
+[nation_iberian]
+
+name=_("Iberian")
+plural=_("?plural:Iberians")
+groups="Ancient", "European"
+legend=_("The Iberians were non-Indo-European inhabitants of the\
+ ancient Iberian Peninsula. Very little is known about their history.\
+ They were subjugated by Rome in the last centuries BC.")
+
+leaders = {
+ "name",        "sex"
+ "Budar",       "Male"
+ "Busadines",   "Male"
+ "Himilce",     "Female"
+ "Indibil",     "Male"
+ "Korbis",      "Male"
+ "Korribilo",   "Male"
+ "Mandonio",    "Male"
+}
+
+flag="iberian"
+flag_alt = "-"
+city_style = "Babylonian"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+conflicts_with = "spanish", "portuguese", "castilian", "catalan", "aragonese"
+civilwar_nations = "basque", "etruscan", "celtiberian" ;lustianian tartessian
+
+cities =
+ "Kastulo",
+ "Gadir",
+ "Ilipla",
+ "Asido",
+ "Orippo",
+ "Asta",
+ "Myrtilis",
+ "Kaetobriga",
+ "Balsa",
+ "Balleia",
+ "Emporion",
+ "Karmo",
+ "Kinniana",
+ "Dekiana",
+ "Ilipa",
+ "Ilturir",
+ "Astigis",
+ "Konistorgis",
+ "Korduba",
+ "Ipolka",
+ "Odisseia",
+ "Aurgi",
+ "Hispalis",
+ "Abra",
+ "Akra Leuke",
+ "Bora",
+ "Tuki",
+ "Baesuri",
+ "Baria",
+ "Akinipo",
+ "Pesula",
+ "Ebusos",
+ "Urso",
+ "Rhoda",
+ "Abdera",
+ "Iptuki",
+ "Ostippo",
+ "Junkaria",
+ "Onuba",
+ "Karisa",
+ "Salalia",
+ "Ossonoba",
+ "Indika",
+ "Kallentum",
+ "Sexs"
+

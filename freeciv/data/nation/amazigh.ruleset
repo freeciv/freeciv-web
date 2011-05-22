@@ -1,0 +1,173 @@
+[nation_amazigh]
+
+name=_("Amazigh")
+plural=_("?plural:Imazighen")
+groups="Ancient", "Medieval", "African"
+legend=_("The Amazigh civilization is one of the oldest in the Mediterranean\
+ Basin, co-existing with ancient Egypt. The Imazighen people, which means\
+ \"free men\", are sturdy and strong but cheerful and\
+ generous with a great consideration for family and tribe.\
+ Every tribe has its own traditions and culture, which is the reason for the\
+ countless diversity of traditions in modern Morocco, Algeria, and Tunisia.\
+ The Imazighen speak old languages such as Tamazirt, Tachelhit or Tarifit,\
+ collectively known as Berber languages,\
+ using an age-old writing system called Tifinagh.")
+
+leaders = {
+ "name",                "sex"
+
+; Son of Syphax, Last King of Massaessyle (Occidental Numidia) before
+; unification. Reigned 203BC-200BC after his father, but resigned to Romans
+; by 200BC.
+ "Vermina",             "Male"
+
+; King of the Massyles (Oriental Numidia).
+ "Niptasan",            "Male"
+
+; Son of Niptasan, King of the Massyles (Oriental Numidia).
+ "Zilalsan",            "Male"
+
+; Son of Zilalsan, Last King of the Massyles (Oriental Numidia) before
+; unification. died 208BC.
+ "Gaïa",                "Male"
+
+; (238BC-148BC) son of Gaïa, unified Massyles and Massaessyle to found
+; Numidia in 202BC. reigned 208BC/148BC.
+ "Masinissa",           "Male"
+
+; son of Mastanabal son of Masinissa, reigned 111BC-105BC.
+ "Jugurthen",           "Male"
+
+; (85BC-46BC) son of Hiempsal II, last king of the free Amazigh Numdia.
+; reigned 60BC-46BC.
+ "Juba I",              "Male"
+
+; son of Juba II, Vassal King of Mauritania, the Roman Numidia, married
+; Cleopatra Selene II (40BC-6AC), daughter of Cleopatra, reigned 52BC-23BC.
+ "Juba II",             "Male"
+
+; Berber: Tiqfarin
+; Amazigh General in the Roman Army, after Roman empire weakens, he unified
+; the amazigh tribes and conquerred a part of Numidia between 17Ac-24AC.
+ "Tacfarinas",          "Male"
+
+; Ptolemy of Mauretania
+; (1AC-40AC) son of Juba II and Cleopatra Selene II, the last King of
+; Mauretania, Conquered Takfarinas revolt and Garamantes Rebellion.
+; reigned 23AC-40AC.
+ "Ptolemaeus",          "Male"
+
+; Amazigh Umayyad General, he Conquered Al-Andalus, d. 720
+ "Tariq Ibn Ziad",      "Male"
+
+; (1006-1106), founder of the Amazigh Almoravides sunnites dynasty, governs
+; over Morocco, Mauritania, west Algeria, Sénégal, Al-Andalus and a part of
+; Portugal.
+ "Youssef Ibn Tachfin", "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",            "female_title"
+ "Despotism",       _("Sheikh %s"),          _("Shaykha %s")
+ "Fundamentalism",  _("Caliph %s"),          _("Calipha %s")
+}
+
+flag= "amazigh"
+flag_alt = "morocco"
+city_style = "Classical"
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+conflicts_with="Numidian"
+civilwar_nations="Moroccan", "Algerian", "Tunisian", "Libyan", "Guanche",
+ "Riffian"
+
+cities =
+"Tingis (mountains, ocean)",
+"Volubilis (plains)",
+"Lixus (ocean)",
+"Sala (river, ocean)",
+"Tamesna (plains)",
+"Banasa (plains)",
+"Sutar (river, ocean)",
+"Sabta (ocean)",
+"Russaddir (ocean)", 	;Melilya
+"Frates",
+"Pomaria",
+
+"Siga (mountains, ocean)",		; capital of king Syphax.
+"Cartennas (mountains, ocean)",
+"Caesarea (mountains, ocean)",
+"Castellum Tingitanum (mountains)",
+"Tipasa (ocean)",
+"Zucchabar (mountains, river)",
+"Icosium (mountains, ocean)",
+"Sitifis (river,desert)",
+"Tubunaf (river,desert)",
+"Rusuxuru (ocean)",
+"Iomnium (ocean)",
+"Avzia (desert, mountains)",
+"Rapidum (desert)",
+"Thanaramusa (desert)",
+"Rusuxurrum (mountains, ocean)",
+"Saldae (mountains, ocean)",
+"Kaputtasaxura (desert)",
+"Tasaxura (desert)",
+"Portus Divini (ocean)",
+"Portus Magnus (ocean)",
+"Castra Nova  (Desert)",
+"Mina (desert)",
+"Castellum Dimmidi (desert)",
+"Gemellae (desert)",
+"Masarfelia (desert)",
+"Ausum (desert)",
+
+"Cirta (mountains)",		; capital of king Massinissa
+"Carthago (mountains, ocean)",
+"Igigil (mountains, ocean)",
+"Hippo Regius (ocean)",
+"Rusicade (mountains, ocean)",
+"Cvicul (river)",
+"Milev (river, plains)",
+"Thabraca (ocean)",
+"Chullu (ocean)",
+"Hippo Diapphutus (ocean)",
+"Thugga (plains)",
+"Calama (plains)",
+"Thagaste (plains)",
+"Sixa Veneria (plains)",
+"Mactaris (mountains)",
+"Madavros (mountains)",
+"Thamugadi (desert)",
+"Lambaese (plains)",
+"Capsa (desert)",
+"Mascula (river, desert)",
+"Theveste (plains,river)",
+"Thelepte (mountains, river)",
+"Hadrumetum (ocean)",
+"Thysdrus (plains)",
+"Taparura (ocean)",
+"Tacape (ocean)",
+"Kerkenna (ocean)",
+"Tacapitanae (plains)",
+"Turris Tamallen (plains)",
+"Gigthis (ocean)",
+"Tusoros (desert)",
+"Sufes (plains, river, mountains)",
+"Vescera (desert)",
+"Thabudeos (desert, river)",
+"Badias (desert)",
+"Ad Maiores  (desert)",
+"Bulla (plains, river)",
+"Sdean (ocean)",
+"Tipasa (plains)",
+"Bagrudas (plains)",
+"Neapolis (mountains, ocean)",
+"Thapsus (ocean)",
+"Thanae (ocean)",
+"Meninx (ocean)",
+"Aurasurs (mountains)",
+"Nepte (desert)",
+"Fritania (desert)"

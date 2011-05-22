@@ -2,7 +2,7 @@
 
 name=_("Azeri")
 plural=_("?plural:Azeris")
-groups="Modern", "Asian"
+groups="Modern", "Asian", "European"
 legend=_("The Azeris are the people of Azerbaijan. The territory\
  of modern Azerbaijan was the scene of rises and falls of different\
  ancient states of the Caucasus region. In 1813 Azerbaijan became\
@@ -11,35 +11,34 @@ legend=_("The Azeris are the people of Azerbaijan. The territory\
  in history. Then Azerbaijan became part of the Soviet Union until\
  its dissolution in 1991.")
 
-leader=
-  "İsmayıl Xətai",
-  "Shams ad-Din Eldeqiz",
-  "Shakhverdi",
-  "Dargah Quli",
-  "Haydar Quli",
-  "Husayn",
-  "Malik Najaf",
-  "Muhammed Ali",
-  "Seyid Abbas",
-  "Əbülfəz Elçibəy",
-  "Heydər Əliyev",
-  "Ahmed bey Agaoglu",
-  "Mammed Amin Rasulzade",
-  "Fatali Khan Khoyski",
-  "Nariman Narimanov"
+leaders = {
+ "name",                        "sex"
+ "İsmayıl Xətai",               "Male"
+ "Shams ad-Din Eldeqiz",        "Male"
+ "Shakhverdi",                  "Male"
+ "Dargah Quli",                 "Male"
+ "Haydar Quli",                 "Male"
+ "Husayn",                      "Male"
+ "Malik Najaf",                 "Male"
+ "Muhammed Ali",                "Male"
+ "Seyid Abbas",                 "Male"
+ "Əbülfəz Elçibəy",             "Male"
+ "Heydər Əliyev",               "Male"
+ "Ahmed bey Agaoglu",           "Male"
+ "Mammed Amin Rasulzade",       "Male"
+ "Fatali Khan Khoyski",         "Male"
+ "Nariman Narimanov",           "Male"
+}
 
-leader_sex="Male", "Male", "Male", "Male", "Male",
-           "Male", "Male", "Male", "Male", "Male",
-           "Male", "Male", "Male", "Male", "Male"
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Despotism",       _("%s Khan"),      _("%s Khatan")
+ "Monarchy",        _("%s Shah"),      _("%s Shahbanu")
+}
 
 flag="azerbaijan"
 flag_alt="-"
 city_style = "Classical"
-
-ruler_titles = { "government",      "male_title",      "female_title"
-                 "Despotism",       _("Khan"),         _("Khatan")
-                 "Monarchy",        _("Shah"),         _("Shahbanu")
-               }
 
 init_techs=""
 init_buildings=""
@@ -47,7 +46,7 @@ init_government="Despotism"
 init_units=""
 
 conflicts_with="soviet"
-civilwar_nations="turkish", "persian", "armenian"
+civilwar_nations="turkish", "persian", "karabakhi"
 
 ; http://de.wikipedia.org/wiki/Liste_der_Städte_in_Aserbaidschan
 cities =

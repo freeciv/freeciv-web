@@ -1,0 +1,67 @@
+[nation_celtiberian]
+
+name=_("Celtiberian")
+plural=_("?plural:Celtiberians")
+groups="Ancient", "European"
+legend=_("The Celtiberians were a people from East-Central Spain that lived\
+ during the last millennium BC. They were of mixed Celtic and Iberian\
+ descent and were defeated by Rome in the Numantian War.")
+
+leaders = {
+ "name",        "sex"
+ "Avaro",       "Male"
+ "Indortes",    "Male"
+ "Istolakio",   "Male"
+ "Leukon",      "Male"
+ "Magavariko",  "Male"
+ "Olindiko",    "Male"
+ "Pirreso",     "Male"
+ "Retogenes",   "Male"
+ "Thurro",      "Male"
+}
+
+flag="celtiberian"
+flag_alt = "-"
+city_style = "Celtic"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+conflicts_with = "spanish", "castilian", "catalan", "aragonese"
+civilwar_nations = "iberian", "gallic", "gaelic"
+
+cities =
+ "Numantia",
+ "Okilis",
+ "Titom",
+ "Turiaso",
+ "Kontebakom",
+ "Sekaisa",
+ "Kluniako",
+ "Nertobriga",
+ "Tiermes",
+ "Kontrebia Karbika",
+ "Aratikos",
+ "Kalakorikos",
+ "Segobriga",
+ "Titiacos",
+ "Uxama Argaela",
+ "Burzao",
+ "Lonimbriga",
+ "Karauez",
+ "Deobriga",
+ "Kontrebia Leukade",
+ "Kemelon",
+ "Lutia",
+ "Kontrebia Belaisca",
+ "Erkavika",
+ "Eberobriga",
+ "Laminiom",
+ "Nertobriga",
+ "Konsabura",
+ "Talabriga",
+ "Uarakos",
+ "Komplega",
+ "Karavis",
+ "Iplakea"

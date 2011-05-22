@@ -7,33 +7,34 @@ legend=_("Phoenicia was an ancient civilization, based in what is now the\
  coastal regions of Lebanon and Syria.  They spoke a Canaanite language\
  related to Hebrew and were famed mariners.  Their alphabet served as the\
  source of the Greek alphabet, and from there evolved into the Etruscan\
- and Latin alphabets as well.  The Greeks and Romans new them for their\
- manufacture of purple dye from the myrex shell, which gave them their\
- Greek and Latin names.  They refered to themselves a Kan'ani and thier\
+ and Latin alphabets as well.  The Greeks and Romans knew them for their\
+ manufacture of purple dye from the murex shell, which gave them their\
+ Greek and Latin names.  They referred to themselves a Kan'ani and their\
  Punic (Carthaginian) descendents in St. Augustine's day called themselves\
  Chanani.")
-leader=
- "Hiram",
- "Agenor",
- "Eshmunazar",
- "Kadmos",
- "Ithobaal",
- "Abd'ashtart"
-leader_sex="Male", "Male", "Male", "Male", "Male",
-           "Male"
+
+leaders = {
+ "name",        "sex"
+ "Hiram",       "Male"
+ "Agenor",      "Male"
+ "Eshmunazar",  "Male"
+ "Kadmos",      "Male"
+ "Ithobaal",    "Male"
+ "Abd'ashtart", "Male"
+}
+ruler_titles = {
+ "government",      "male_title",        "female_title"
+ "Anarchy",         _("Usurper %s"),     _("?female:Usurper %s")
+}
 flag="phoenicia"
 flag_alt = "-"
 city_style = "Classical"
-ruler_titles = { "government",      "male_title",      "female_title"
-                 "Monarchy",       _("Milk"),           _("Milkot")
-                 "Fundamentalism", _("Suffet"),         _("Suffet")
-               }
 
 init_techs=""
 init_buildings=""
 init_government="Despotism"
 init_units=""
-civilwar_nations="turkish", "carthaginian", "israeli"
+civilwar_nations="aramean", "carthaginian", "israelite"
 
 cities =
  "Sur", 	; English: "Tyre"

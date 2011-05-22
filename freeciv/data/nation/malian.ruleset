@@ -2,48 +2,39 @@
 
 name=_("Malian")
 plural=_("?plural:Malians")
-groups="Modern", "Medieval", "African"
-legend=_("Sub-Saharan Africa has been a cultural and ethnical melting pot\
- for millennia. In medieval times, the region was home to a succession of\
- empires called the Sahelian kingdoms. Of these, the Islamic Mali Empire\
- with its capital in Timbuktu was the most influential. This empire\
- reigned from the 14th to the 17th century and was famed for its wealth and\
- benevolent kings. The modern Republic of Mali derives its name from this\
- empire.")
-leader=
- "Sundiata Keita",	; First Mansa of Mali empire
- "Wali Keita",		; Second Mansa of Mali empire
- "Sakura",		; Born slave but seized power, conqueror
- "Gao",			; Mansa from 1300-1305
- "Kankan Musa I"	; Mansa from 1312-1337
- 
-leader_sex="Male", "Male", "Male", "Male", "Male"
+groups="Modern", "African"
+legend=_("Mali is a large country in Western Africa. Once part of French\
+ Sudan, it gained independence together with Senegal in 1959.")
+
+leaders = {
+ "name",                "sex"
+ "Aminata Traoré",      "Female"
+ "Moussa Traoré",       "Male"
+ "Modibo Keïta",        "Male"
+ "Aoua Keïta",          "Female"
+ "Ahmed Baba",          "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Monarchy",        _("Mansa %s"),        _("?female:Mansa %s")
+}
+
 flag="mali"
 flag_alt = "-"
 city_style = "Classical"
-
-ruler_titles = { "government",      "male_title",      "female_title"
-                 "Despotism",       _("Chief"),        _("?female:Chief")
-		 ; /* TRANS: Mansa = King of kings */
-                 "Monarchy",        _("Mansa"),        _("Mansa")
-               }
 
 init_techs=""
 init_buildings=""
 init_government="Despotism"
 init_units=""
-civilwar_nations="algerian", "nigerian"
+
+conflicts_with="Mali"
+civilwar_nations="Burkinabe", "Senegalese", "Ivoirian"
 
 ; City list based on http://de.wikipedia.org/wiki/Liste_der_Städte_in_Mali
-; With a few historical (and current) capitals at the top.
 cities =
- "Timbuktu",
  "Bamako",
- "Djenné",
- "Gao",
- "Koumbi Saleh",
- "Niani",
- "Oualata",
  "Sikasso",
  "Mopti",
  "Koutiala",
@@ -54,16 +45,19 @@ cities =
  "Markala",
  "Kolondiéba",
  "Kati",
+ "Gao",
  "Kolokani",
  "Ménaka",
  "Bougouni",
  "Niafunké",
+ "Tombouctou",
  "Banamba",
  "Macina",
  "Nara",
  "Bafoulabé",
  "San",
  "Koulikoro",
+ "Djenné",
  "Sokolo",
  "Yorosso",
  "Kangaba",

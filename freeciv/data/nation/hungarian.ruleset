@@ -2,19 +2,21 @@
 
 name=_("Hungarian")
 plural=_("?plural:Hungarians")
-groups="Medieval", "Modern", "European"
+groups="Medieval", "Early Modern", "Modern", "European"
 legend=_("Legend says that Hungary was founded by Arpad in the 9th\
  century.")
-conflicts_with="indian"	; Similar flags
-leader=
- "Árpád",
- "Szent István",
- "Károly Róbert",
- "Hunyadi Mátyás",
- "Mária Terézia",
- "Batthyány",
- "Béla IV"
-leader_sex="Male", "Male", "Male", "Male", "Female", "Male", "Male"
+
+leaders = {
+ "name",                "sex"
+ "Árpád",               "Male"
+ "Szent István",        "Male"
+ "Károly Róbert",       "Male"
+ "Hunyadi Mátyás",      "Male"
+ "Mária Terézia",       "Female"
+ "Batthyány",           "Male"
+ "Béla IV",             "Male"
+}
+
 flag="hungary"
 flag_alt = "-"
 city_style = "European"
@@ -24,7 +26,9 @@ init_buildings=""
 
 init_government="Despotism"
 init_units=""
-civilwar_nations = "lithuanian", "croatian", "slovenian"
+
+conflicts_with="indian"	; Similar flags
+civilwar_nations = "transylvanian", "croatian", "slovakian"
 
 cities =
  "Budapest", "Debrecen", "Székesfehérvár", "Kolozsvár", "Szeged",

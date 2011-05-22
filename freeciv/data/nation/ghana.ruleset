@@ -1,0 +1,54 @@
+[nation_ghana]
+
+name=_("Ghana")
+plural=_("?plural:Ghana")
+groups="African", "Medieval"
+legend=_("The Ghana or Wagadou Empire existed in West Africa from the\
+ 9th to the 13th century. It takes its name from the king, whose title\
+ ghana means great warrior. The Ghana Empire grew rich thanks to the\
+ trans-Saharan trade and the goldmines in its territory. The modern\
+ Republic of Ghana takes its name from the Ghana Empire, even though the\
+ empire was located in what is now Mali and Mauretania.")
+leaders = {
+ "name",              "sex"
+ "Majan Dyabe Cisse", "male"
+ "Bassi",             "male"
+ "Tunka Menin",       "male"
+ "Soumaba Cisse",     "male"
+}
+
+flag="ghana_ancient"
+flag_alt = "ghana"
+city_style = "Babylonian"
+
+ruler_titles = { "government",      "male_title",      "female_title"
+                 "Monarchy",        _("Ghana %s"),      _("?female:Ghana %s")
+	       }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+conflicts_with = "malian"
+civilwar_nations = "mali", "jolof", "songhai"
+
+cities =
+ "Kumbi Saleh",
+ "Sama",
+ "Bure",
+ "Walata",
+ "Bamako",
+ "Segu",
+ "Morfil",
+ "Awdaghost",
+ "Sosso",
+ "Kirina",
+ "Auker",
+ "Bambuk",
+ "Tekrur",
+ "Mande",
+ "Faleme",
+ "Nema",
+ "Sila",
+ "Tagant"

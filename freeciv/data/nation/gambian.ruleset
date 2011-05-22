@@ -1,0 +1,77 @@
+[nation_gambian]
+
+name=_("Gambian")
+plural=_("?plural:Gambians")
+groups="African", "Modern"
+legend=_("The Gambia is a small country in West Africa, straddling both\
+ banks of the Gambia river. It achieved independence from the United\
+ Kingdom in 1965.")
+
+leaders = {
+ "name",                  "sex"
+ "Dawda Jawara",          "Male"
+ "Yahya Jammeh",          "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",            "female_title"
+ "Fundamentalism",  _("Grand Mufti %s"), _("?female:Grand Mufti %s")
+ "Monarchy",        _("Mansa %s"),       _("?female:Mansa %s")
+}
+
+flag="gambia"
+flag_alt = "-"
+city_style = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="senegalese", "ghanaian"
+
+cities =
+ "Banjul",
+ "Brikama",
+ "Basse Kanta Su",
+ "Kerewan",
+ "Janjanbureh",
+ "Sera Kunda",
+ "Mansa Konko",
+ "Bakau",
+ "Lamin",
+ "Nema Kunku",
+ "Farafenni",
+ "Brufut",
+ "Gunjur",
+ "Sukuta",
+ "Wellingara",
+ "Busumbala",
+ "Yundum",
+ "Mandinari",
+ "Soma",
+ "Gambisara",
+ "Banjulunding",
+ "Sabi",
+ "Bansang",
+ "Kunkujang",
+ "Abuko",
+ "Garawoll",
+ "Kerr Seringe Ngaga",
+ "Siffoe",
+ "Essau",
+ "Tanju",
+ "Farato",
+ "Sanyang",
+ "Jambajeli",
+ "Barra",
+ "Allunhari",
+ "Kartong",
+ "Tujereng",
+ "Demba Kunda",
+ "Bijilo",
+ "Sibanor",
+ "Madiana",
+ "Kularr",
+ "Kafuta",
+ "Brikama Ba"

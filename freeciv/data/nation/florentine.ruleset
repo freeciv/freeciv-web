@@ -1,0 +1,112 @@
+[nation_florentine]
+
+name = _("Florentine")
+plural = _("?plural:Florentines")
+groups="European", "Medieval", "Early Modern"
+legend=_("The Florentine Republic was founded upon the overthrow of the\
+ Margraviate of Tuscany in 1115. Despite its seemingly endemic political\
+ intrigues, it became the most magnificent city-state of its era. Florence\
+ was the cultural and philosophical leader of Italy and indeed Europe in\
+ Renaissance, bringing forth such luminaries as Dante, Savonarola,\
+ Michelangelo, Da Vinci and Machiavelli. The De' Medici family eventually\
+ managed to consolidate its hold on Florence, and in the 16th century the\
+ Republic was turned into the Grand Duchy of Tuscany. In 1859 it was\
+ annexed by Italy.")
+
+leaders = {
+ "name",                      "sex"
+ "Adalberto I",               "Male"
+ "Matilde di Canossa",        "Female"
+ "Dante Alighieri",           "Male"
+ "Michele di Lando",          "Male"
+ "Cosimo de' Medici",         "Male"
+ "Lorenzo il Magnifico",      "Male"
+ "Girolamo Savonarola",       "Male"
+ "Niccolò Machiavelli",       "Male"
+ "Francesco Guicciardini",    "Male"
+ "Piero Soderini",            "Male"
+ "Alessandro il Moro",        "Male"
+ "Cosimo I de' Medici",       "Male"
+ "Ferdinando II de' Medici",  "Male"
+ "Cosimo III de' Medici",     "Male"
+ "Pietro Leopoldo",           "Male"
+ "Elisa Bonaparte Baciocchi", "Female"
+ "Leopoldo II",               "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",         "female_title"
+ "Despotism",       _("Condottiere %s"),  _("Condottiera %s")
+ "Fundamentalism",  _("Fra %s"),          _("Madre %s")
+ "Monarchy",        _("Grand Duke %s"),   _("Grand Duchess %s")
+ "Republic",        _("Captain %s"),      _("?female:Captain %s")
+}
+
+flag = "florence"
+flag_alt = "-"
+city_style = "Classical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="papal", "milanese"
+
+cities =
+ "Firenze",
+ "Arezzo",
+ "San Miniato",
+ "Pisa",
+ "Livorno",
+ "Prato",
+ "Volterra",
+ "Montepulciano",
+ "Pietrasanta",
+ "Montecatini Terme",
+ "Montevarchi",
+ "Cortona",
+ "Empoli",
+ "Rosignano Marittimo (ocean)",
+ "Cascina",
+ "Sesto Fiorentino",
+ "Montemurlo",
+ "San Gimignano",
+ "Portoferraio (ocean)",
+ "Poggibonsi",
+ "Siena",
+ "Pistoia",
+ "Chiusi",
+ "Grosseto",
+ "Colle di Val d'Elsa (hills)",
+ "Massa Marittima (ocean)",
+ "Montalcino",
+ "Castelnuovo Berardenga",
+ "Casole d'Elsa",
+ "Sovana",
+ "Pittigliano",
+ "Lucca",
+ "Piombino",
+ "Port'Ercole (ocean)",
+ "Talamone",
+ "San Stefano",
+ "Orbetello",
+ "Presidi",
+ "Viareggio",
+ "Caprese",
+ "Vinci",
+ "Scandicci",
+ "Pescia",
+ "Poggio a Caiano (hills)",
+ "Carmignano",
+ "Vicopisano",
+ "Pontremoli",
+ "Fivizzano",
+ "Barga",
+ "Campiglia Marittima (ocean)",
+ "Sorano",
+ "Fiesole",
+ "Certaldo",
+ "Castiglion Fiorentino",
+ "Lucignano",
+ "Borgo Santo Sepolcro"

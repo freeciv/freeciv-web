@@ -1,0 +1,34 @@
+[nation_yugoslav]
+
+name=_("Yugoslav")
+plural=_("?plural:Yugoslavs")
+groups="European"
+legend=_("Yugoslavia was a state consisting of the Slavic nations of the\
+ western Balkans. It was a kingdom until 1941, when it was occupied by\
+ the Axis powers. After a national liberation war the communists threw\
+ out the occupants and continued to rule until the 1980s. The 1990s saw\
+ the bloody breakup of Yugoslavia into independent republics.")
+
+leaders = {
+ "name",                        "sex"
+ "Aleksandar I Karađorđević",   "Male"
+ "Pavle Karađorđević",          "Male"
+ "Petar II Karađorđević",       "Male"
+ "Josip Broz Tito",             "Male"
+}
+
+flag="yugoslavia"
+flag_alt = "-"
+city_style = "European"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+conflicts_with = "slovenian", "croatian", "bosnian-herzegovinian",
+ "serbian", "montenegrin", "macedonian", "kosovar"
+civilwar_nations = "slovenian", "croatian", "bosnian-herzegovinian",
+ "serbian", "montenegrin", "macedonian"
+
+; Cities will be fetched from above nations

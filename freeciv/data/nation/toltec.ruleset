@@ -1,0 +1,98 @@
+[nation_toltec]
+
+name=_("Toltec")
+plural=_("?plural:Toltecs")
+groups="Medieval", "American"
+legend=_("The Toltecs were a Meso-American civilization that existed from\
+ the 10th to the 12th century. The Toltec Empire was founded by Ce\
+ Tecpatl Mixcoac, who led his nomadic people from the north to settle on\
+ the Mexican High Plain. Mixcoatl was murdered by his enemies but was\
+ later avenged by his son Ce Acatl Topilitzin Quetzalcoatl, who would lead\
+ the Toltec civilization to untold heights. Toltec culture continued to\
+ thrive until the 12th century. Their capital Tollan was violently\
+ destroyed in 1168 and the Toltec area fragmented into rivaling\
+ city-states. Toltec cultural influences have been identified from New\
+ Mexico to Nicaragua, though historians do not agree on the political\
+ history of the Toltecs. Since most of the history of the Toltecs\
+ is based on Aztec mythology, some claim there was never a Toltec Empire,\
+ but that Aztec references to the Toltecs were an allegory for\
+ civilization.")
+
+leaders = {
+ "name",                        "sex"
+ "Mixcoatl",                    "Male"
+ "Topiltzin Quetzalcoatl",      "Male"
+ "Quetzalpetlatl",              "Female"
+ "Tlahuizcalpantecuhtli",       "Male"
+ "Huemac",                      "Male"
+}
+
+ruler_titles = {
+ "government",  "male_title",            "female_title"
+ "Despotism",   _("Lord %s"),            _("Lady %s")
+ "Republic",    _("Speaker %s"),         _("?female:Speaker %s")
+ "Monarchy",    _("Emperor %s"),         _("Empress %s")
+}
+
+flag="toltec"
+flag_alt = "aztec"
+city_style = "Classical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+conflicts_with = "mexican", "aztec"
+civilwar_nations = "aztec", "mayan"
+
+cities =
+ "Tollan Xicocotitlan",
+ "Colhuacan",
+ "Cholollan",
+ "Itzameyalco",
+ "Chapoltepec",
+ "Huichapan",
+ "Xilotepec",
+ "Tlalpizahuac",
+ "Tollantzinco",
+ "Chicomoztoc",
+ "Iztepec",
+ "Cuauhtinchan",
+ "Coxcatlan",
+ "Teotitlan",
+ "Mixcoac",
+ "Zacatollan",
+ "Apatzincan",
+ "Tillantonco",
+ "Nonohualco",
+ "Teotzapotlan",
+ "Pochotlan",
+ "Toxtlan",
+ "Coatzacoalco",
+ "Ixtepec",
+ "Ixtlan",
+ "Itzacalco",
+ "Xicallanco",
+ "Cihuatlan",
+ "Nicoyan",
+ "Chimalhuacan",
+ "Tepoztlan",
+ "Xalisco",
+ "Mexcaltitlan",
+ "Chalco",
+ "Ixtapallocan",
+ "Tetellan",
+ "Matacalpan",
+ "Tepoztlan",
+ "Xaltocan",
+ "Coxoltepec",
+ "Minatitlan",
+ "Masayan",
+ "Totonacahpan",
+ "Mayapan",
+ "Pochtlan",
+ "Xochimilco",
+ "Xolotlan"
+
+
+

@@ -1,0 +1,62 @@
+[nation_mali]
+
+name=_("Mali")
+plural=_("?plural:Malis")
+groups="Medieval", "African"
+legend=_("Sub-Saharan Africa has been a cultural and ethnical melting pot\
+ for millennia. In medieval times, the region was home to a succession of\
+ empires called the Sahelian kingdoms. Of these, the Islamic Mali Empire\
+ was the most influential. This empire reigned from the 14th to the 17th\
+ century and was famed for its wealth and benevolent kings. The modern\
+ Republic of Mali derives its name from this empire.")
+
+leaders = {
+ "name",                "sex"
+ "Kankan Musa I",       "Male" ; Mansa from 1312-1337
+ "Gao",                 "Male" ; Mansa from 1300-1305
+ "Sakura",              "Male" ; Born slave but seized power, conqueror
+ "Wali Keita",          "Male" ; Second Mansa of Mali empire
+ "Kolonkan",            "Female" ; Sundiata Keita`s sister
+ "Sundiata Keita",      "Male" ; First Mansa of Mali empire
+}
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ ; /* TRANS: Mansa = King of kings */
+ "Monarchy",        _("Mansa %s"),        _("?female:Mansa %s")
+}
+
+flag="mali_ancient"
+flag_alt = "mali"
+city_style = "Classical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+conflicts_with="Mali" ;similar shield
+civilwar_nations="Jolof", "Songhai"
+
+cities=
+ "Niani",
+ "Ka-ba",
+ "Jenne",
+ "Makina",
+ "Takrur",
+ "Futa Jalon",
+ "Kumbi Saleh",
+ "Kangaba",
+ "Walata",
+ "Timbuktu",
+ "Awadaghust",
+ "Bati",
+ "Kasa",
+ "Bambuk",
+ "Bondu",
+ "Gao",
+ "Diara",
+ "Dyolof",
+ "Takedda",
+ "Tura",
+ "Muli"

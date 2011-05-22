@@ -1,0 +1,62 @@
+[nation_togolese]
+
+name=_("Togolese")
+plural=_("?plural:Togolese")
+groups="African", "Modern"
+legend=_("Togo became a German protectorate in 1885 and was conquered by\
+ the French and British in World War II. Togo became independent in 1960.\
+ Since the late 1960s the country's politics have been dominated by\
+ general Gnassingbe Eyadema, who was succeeded by his son Faure upon his\
+ death in 2005.")
+leaders = {
+ "name",               "sex"
+ "Mlapa III",          "Male"
+ "Sylvanus Olympio",   "Male"
+ "Nicolas Grunitzky",  "Male"
+ "Gnassingbé Eyadéma", "Male"
+ "Faure Gnassingbé",   "Male"
+}
+
+flag="togo" 
+flag_alt = "-" 
+city_style = "tropical" 
+
+init_techs="" 
+init_buildings="" 
+init_government="Despotism" 
+init_units="" 
+
+civilwar_nations="Beninese", "Burkinabe", "Nigerian"
+
+cities = 
+ "Lomé",
+ "Atakpamé",
+ "Kara",
+ "Dapaong",
+ "Sokodé",
+ "Togoville",
+ "Kpalimé",
+ "Tsévié",
+ "Notsé",
+ "Aného",
+ "Bassar",
+ "Mango",
+ "Niamtougou",
+ "Tchamba",
+ "Sotouboua",
+ "Vogan",
+ "Bafilo",
+ "Tabligbo",
+ "Badou",
+ "Kandé",
+ "Tohoun",
+ "Blitta-Garé",
+ "Kpagouda",
+ "Mandouri",
+ "Guérin-Kouka",
+ "Amlamé",
+ "Kévé",
+ "Apéyémé",
+ "Elavagnon",
+ "Gadzépé",
+ "Tandjoaré"

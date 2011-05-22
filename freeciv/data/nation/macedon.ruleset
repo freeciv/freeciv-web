@@ -1,0 +1,80 @@
+[nation_macedon]
+
+name=_("Macedon")
+plural=_("?plural:Macedons")
+groups="Ancient", "European"
+legend=_("The Kingdom of Macedonia was located in the southern Balkans.\
+ Under Alexander the Great it became one of the most powerful states in\
+ the world but it splintered into several states after Alexander's\
+ death. Macedonia was eventually conquered by Rome in 146 BC. ")
+
+leaders = {
+ "name",                "sex"
+ "Filippos II",         "Male"
+ "Olympias",            "Female"
+ "Alexandros",          "Male"
+ "Kassandros",          "Male"
+ "Antipater",           "Male"
+ "Ptolemaios Soter",    "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Anarchy",         _("Diadochos %s"), _("Diadocha %s")
+ "Despotism",       _("Despot %s"),    _("?female:Despot %s")
+}
+
+flag="macedon"
+flag_alt = "-"
+city_style = "Classical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+conflicts_with = "macedonian"
+civilwar_nations = "egyptian", "greek", "seleucid"
+
+cities =
+ "Aigai",
+ "Pella",
+ "Thessalonike",
+ "Kassandreia",
+ "Edessa",
+ "Amfipoli",
+ "Pydna",
+ "Argilos",
+ "Krestone",
+ "Perseis",
+ "Methone",
+ "Duim",
+ "Herakleia",
+; More Macedon cities at: http://en.wikipedia.org/wiki/Mygdonia_(Europe)
+; Below Alexander the Great`s cities, from Ancients modpack by Bobby Bryant
+ "Alexandreia",
+ "Alexandreia sten Latmo",
+ "Alexandreia Karmandeia",
+ "Alexandreia Oreitai",
+ "Alexandreia en Ariois",
+ "Alexandreia Profthaseia",
+ "Alexandreia Arachoseias",
+ "Alexandreia tes Oxes",
+ "Alexandreia Eschate",
+ "Alexandreia Paropamisadai",
+ "Alexandreia Nikaia",
+ "Alexandreia Bukefalous",
+ "Alexandreia Iomoussai",
+ "Alexandretta",
+ "Alexandropouli",
+ "Alexandreia Troas",
+ "Alexandreia tes Sousianes",
+ "Alexandreia tes Margianes",
+ "Alexandreia e Opiane",
+ "Alexandreia Salmous",
+ "Alexandreia e Margiane",
+ "Alexandreia upo ton Kaukaso (mountains)",
+ "Alexandreia Rambakia",
+ "Alexandreia ston Persiko Kolpo (ocean)",
+ "Alexandreia e Soudon"
+

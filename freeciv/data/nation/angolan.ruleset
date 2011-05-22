@@ -1,0 +1,83 @@
+[nation_angolan]
+
+name=_("Angolan")
+plural=_("?plural:Angolans")
+groups="Modern", "African"
+legend=_("When the Portuguese arrived to Angola in the 15th century the\
+ region was controlled by several Bantu kingdoms. Angola became an\
+ important source of slave traders until well into the 19th century.\
+ After two decades of guerrilla war against the Portuguese colonial\
+ authorities Angola finally achieved indepdence in 1975. Soon the various\
+ guerilla groups started fighting each other. After half a century of war\
+ a peace agreement was finally reached in 2002.")
+
+leaders = {
+ "name",                        "sex"
+ "Holden Roberto",              "Male"
+ "Agostinho Neto",              "Male"
+ "Jonas Savimbi",               "Male"
+ "José Eduardo dos Santos",     "Male"
+}
+
+flag= "angola"
+flag_alt = "-"
+city_style = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="kongo", "namibian"
+
+cities =
+ "Luanda",
+ "Huambo",
+ "Cabinda",
+ "Lubango",
+ "Kuito",
+ "Malanje",
+ "Lobito",
+ "Benguela",
+ "Uíge",
+ "Namibe",
+ "Luena",
+ "Saurimo",
+ "Soyo",
+ "Sumbe",
+ "N'dalatando",
+ "Caála",
+ "Cubal",
+ "Dundo",
+ "Negage",
+ "Matala",
+ "Bailundo",
+ "Menongue",
+ "Mbanza Congo",
+ "Dondo",
+ "Uku",
+ "Lucapa",
+ "Waku Kungo",
+ "Andulo",
+ "Ganda",
+ "Caluquembe",
+ "Ambriz",
+ "Cafunfo",
+ "Nzagi",
+ "Catabola",
+ "Ondjiva",
+ "Dombe Grande",
+ "Lândana",
+ "Cuchi",
+ "Quimavongo",
+ "Catchiungo",
+ "Catumbela",
+ "Caimbambo",
+ "Cuimba",
+ "Baía Farta",
+ "Chipindo",
+ "Cazombo",
+ "Capulo",
+ "Calenga",
+ "Camacupa",
+ "Mussende"

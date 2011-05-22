@@ -2,33 +2,29 @@
 
 name=_("Kanem-Bornu")
 plural=_("?plural:Kanem-Bornu")
-groups="Medieval", "African"
+groups="Medieval", "Early Modern", "African"
 
 legend=_("This empire lasted in some form from the 9th-century until 1893 in\
  modern Chad and Nigeria and controlled much of the trans-Saharan trade.")
 
-leader=
- "Dugu",
- "Dunama Dabbalemi",
- "Katuri",
- "Biri II"
-
-leader_sex = "Male", "Male", "Male", "Male"
+leaders = {
+ "name",                "sex"
+ "Dugu",                "Male"
+ "Dunama Dabbalemi",    "Male"
+ "Katuri",              "Male"
+ "Biri II",             "Male"
+}
 
 flag         = "kanem-bornu"
 flag_alt     = "-"
 city_style   = "Tropical"
-ruler_titles = { "government",      "male_title",        "female_title"
-                 "Despotism",      _("Chief"),           _("Chief")
-                 "Monarchy",       _("Mai"),             _("Mai")
-               }
 
 init_techs=""
 init_buildings=""
 init_government="Despotism"
 init_units=""
 
-civilwar_nations="nigerian"
+civilwar_nations="nigerian", "chadian"
 
 cities =
  "Ngazargamu",

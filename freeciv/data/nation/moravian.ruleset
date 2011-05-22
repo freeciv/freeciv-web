@@ -1,0 +1,121 @@
+[nation_moravian] 
+
+name=_("Moravian") 
+plural=_("?plural:Moravians") 
+groups="Medieval", "European" 
+legend=_("Great Moravia was a Slavic medieval monarchy, whose center was\
+ located in the areas of modern Moravia region in Czech Republic. Moravia\
+ conquered areas of the Bohemia, Slovakia, Pannonia and large parts of\
+ southern Poland and Lusatia. The first ruler and founder of this state\
+ was duke Mojmir I. The Great Moravian state was destructed as a result\
+ of the Hungarian invasion from eastern steppes. After the defeat of the\
+ Hungarians by the Holy Roman Empire Moravia was turned into a\
+ principality, which was in a personal union with Bohemia for most of its\
+ history.")
+
+leaders = {
+ "name",                        "sex"
+ "Mojmír I",                    "Male"
+ "Rastislav",                   "Male"
+ "Slavomír",                    "Male"
+ "Svätopluk I",                 "Male"
+ "Mojmír II",                   "Male"
+ "Svätopluk II",                "Male"
+ "Predslav",                    "Male"
+ "Jan Jindřich",                "Male"
+ "Jošt Lucemburský",            "Male"
+ "Mikuláš Ludvík Zinzendorf",   "Male"
+ "Petr rytíř Chlumecký",        "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title", "female_title"
+ "Despotism",       _("Duke %s"),        _("Duchess %s")
+ "Monarchy",        _("Grand Duke %s"),  _("Grand Duchess %s")
+ "Fundamentalism",  _("Bishop %s"),      _("Prophetess %s")
+}
+
+flag= "moravia" 
+flag_alt = "-" 
+city_style = "Celtic" 
+
+init_techs="" 
+init_buildings="" 
+init_government="Despotism" 
+init_units="" 
+
+conflicts_with="czech"
+civilwar_nations="czech", "slovakian", "silesian", "polish"
+
+cities=
+  "Belehrad",
+  "Brno",
+  "Jihlava",
+  "Olomouc",
+  "Ostrava",
+  "Zlín",
+  "Nitra",
+  "Blatnohrad",
+  "Lišeň",
+  "Nitra",
+  "Rajhrad",
+  "Vyšehrad",
+  "Staré Město",
+  "Podbranč",
+  "Mikulčice",
+  "Pohansko",
+  "Hradište u Znojma",
+  "Kremža",
+  "Viedeň",
+  "Devin",
+  "Bratislava",
+  "Pobedim",
+  "Ducové",
+  "Majcichov",
+  "Stary Tekov",
+  "Hont",
+  "Prievidza-Štvrte",
+  "Vyšný Kubin",
+  "Blatnica",
+  "Krašňany",
+  "Divinka",
+  "Čingov",
+  "Drevenik",
+  "Kusin",
+  "Brekov",
+  "Uh",
+  "Zemplin",
+  "Detva",
+  "Prša",
+  "Biňa",
+  "Mužľa-Čenkov",
+  "Smolenice",
+  "Dobrov",
+  "Budín",
+  "Ráb",
+  "Bezprěm",
+  "Tác",
+  "Zounuk",
+  "Žatec",
+  "Levý Hradec",
+  "Praha",
+  "Kouřim",
+  "Libice",
+  "Budyšín",
+  "Žič",
+  "Mišeň",
+  "Hradec u Opavy",
+  "Opole",
+  "Vroclav",
+  "Krakov",
+  "Badeň",
+  "Päťkostolie",
+  "Šopron",
+  "Ptuj",
+  "Kysok",
+  "Sabaria",
+  "Salla",
+  "Tricciana",
+  "Tolna",
+  "Bychor",
+  "Črnograd"

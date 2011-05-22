@@ -1,0 +1,64 @@
+[nation_mwiska] 
+
+name=_("Mwiska") 
+plural=_("?plural:Mwiska") 
+groups="American", "Medieval"
+legend=_("Comprising five states, variously described as chiefdoms\
+ and kingdoms, the Mwiska (a.k.a. Muisca) likely numbered between\
+ half a million to one million people at the time of Spanish conquest.\
+ The two largest of the Mwiska states, Zipa and Zaque, were at\
+ conflict with one another when the Spanish came on the scene, with\
+ the former being more successful than the latter. Spanish conquest\
+ was fairly quick, however, and no rebellion took place after 1541 and\
+ the language went extinct in the 18th century.") 
+
+leaders = {
+ "name",                "sex"
+"Tisquesusa",           "Male"
+"Nemequene",            "Male"
+"Saguanmachica",        "Male"
+"Nompaneme",            "Male"
+"Tundama",              "Male"
+"Aquimin",              "Male"
+}
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Despotism",       _("Cacique %s"),   _("?female:Cacique %s")
+}
+flag = "mwiska" 
+flag_alt = "-" 
+city_style = "Tropical" 
+
+init_techs="" 
+init_buildings="" 
+init_government="Despotism" 
+init_units="" 
+conflicts_with="colombian"
+civilwar_nations="tairona", "inca", "kuna"
+
+cities = 
+"Mequetá", 
+"Suamo", ; Sogamoso 
+"Fosca", 
+"Hunsa", ; Tunja 
+"Zipaquirá", 
+"Tibacuy", 
+"Bacatá", ; Bogota 
+"Chocontá", 
+"Toca", 
+"Pesca", 
+"Sorocotá", 
+"Buzbanzá", 
+"Leiva", 
+"Saboyá", 
+"Guachetá", 
+"Turmequé", 
+"Gámeza", 
+"Soacha", 
+"Usme", 
+"Gachalá", 
+"Fusagasugá", 
+"Soata", 
+"Facatativá", 
+"Iza", 
+"Cerinza"

@@ -2,18 +2,20 @@
 
 name=_("Esperant")
 plural=_("?plural:Esperants")
-groups= "Fictional"
+groups= "Imaginary"
 legend=_("The Esperants are a world community united by the Esperanto\
  language.")
-leader=
- "L.L. ZAMENHOF",
- "Théophile CART",
- "Fernand DORÉ",
- "Georges KERSAUDY",
- "Georges LAGRANGE",
- "Frederic PUJULÀ I VALLÈS"
- 
-leader_sex="Male", "Male", "Male", "Male", "Male", "Male"
+
+leaders = {
+ "name",                        "sex"
+ "L.L. ZAMENHOF",               "Male"
+ "Théophile CART",              "Male"
+ "Fernand DORÉ",                "Male"
+ "Georges KERSAUDY",            "Male"
+ "Georges LAGRANGE",            "Male"
+ "Frederic PUJULÀ I VALLÈS",    "Male"
+}
+
 flag="esperanto"
 flag_alt = "-"
 city_style = "European"

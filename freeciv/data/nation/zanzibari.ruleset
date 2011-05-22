@@ -1,0 +1,84 @@
+[nation_zanzibari]
+
+name=_("Zanzibari")
+plural=_("?plural:Zanzibaris")
+groups="African"
+legend=_("An archipelago off the coast of Eastern Africa, Zanzibar has\
+ been an international trading center since time immemorial. Zanzibari\
+ traders controlled much of the spice and slave trade in the western part\
+ of the Indian Ocean. Periods of relative indpendence and foreign control\
+ by Persians, Portuguese, Omanis and British follwed each other. Occupied\
+ by the British in 1893, Zanzibar achieved independence in 1963. Shortly\
+ thereafter, the last sultan was overthrown and Zanzibar joined with\
+ Tanganyika to form the United Republic of Tanzania.")
+
+leaders = {
+ "name",                 "sex"
+ "Majid bin Said",       "Male"
+ "Barghash bin Said",    "Male"
+ "Hamoud bin Mohammed",  "Male"
+ "Khalifa ibn Kharub",   "Male"
+ "Jamshid ibn Abdullah", "Male"
+ "Abeid Karume",         "Male"
+}
+
+ruler_titles = {
+ "government",     "male_title",           "female_title"
+ "Democracy",      _("Chief Minister %s"), _("?female:Chief Minister %s")
+ "Monarchy",       _("Sultan %s"),         _("Sultana %s")
+ "Fundamentalism", _("Imam %s"),           _("Imama %s")
+}
+
+flag="zanzibar"
+flag_alt = "-"
+city_style = "babylonian"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations = "arab", "tanzanian", "omani" ;comoran
+
+cities =
+ "Zanzibar",
+ "Chake Chake",
+ "Stone Town",
+ "Wete",
+ "Mwanyanya",
+ "Njuguni",
+ "Ngombeni",
+ "Konde",
+ "Bwegaza",
+ "Tumbe Mashariki",
+ "Kangani",
+ "Bweju",
+ "Shumba Mjini",
+ "Mahonda",
+ "Kiuyu",
+ "Maziwa Ng'ombe",
+ "Kijni",
+ "Chuini",
+ "Kivunge",
+ "Tumbe Magharibi",
+ "Mzuri",
+ "Chwaka",
+ "Micheweni",
+ "Kipanda Kiwani",
+ "Sizini",
+ "Ndijani",
+ "Jongowe",
+ "Kiungoni",
+ "Javini Ndagoni",
+ "Mpambani Msikitini",
+ "Mgazini Mkukiani",
+ "Michungwani",
+ "Kichachoni",
+ "Dunga Bweni",
+ "Kambini",
+ "Kangagani",
+ "Ole",
+ "Dole",
+ "Ukutini",
+ "Kiwenga",
+ "Chanjamjawiri"

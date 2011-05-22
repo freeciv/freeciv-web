@@ -1,0 +1,59 @@
+[nation_chinook]
+
+name=_("Chinook")
+plural=_("?plural:Chinooks")
+groups="American", "Early Modern"
+legend=_("The Chinook Confederacy was a group of communities with common\
+ customs and language. They were a sedentary people living along the\
+ Columbia river in present-day Oregon and Washington in the United\
+ States. Chinook regional influence can be seen in the fact that\
+ their tongue became the base of a pidgin language for trade and\
+ communication between Native Americans and Whites throughout Oregon,\
+ Washington, British Columbia and all the way to Alaska.")
+
+leaders = {
+ "name",                "sex"
+ "Catherine Troeh",     "Female"
+ "Tumulth",             "Male"
+ "Comcomly",            "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",            "female_title"
+ "Monarchy",        _("Great Chief %s"),     _("?female:Great Chief %s")
+ "Democracy",       _("Principal Chief %s"), _("?female:Principal Chief %s")
+}
+
+flag="clatsop"
+flag_alt="-"
+city_style="Celtic"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="Nimiipuu", "Salishan"
+
+cities =
+ "Multnomah",
+ "Wasco",
+ "Clatsop",
+ "Clackamas",
+ "Watlala",
+ "Cathlahmahs",
+ "Chilluckittequaw",
+ "Chahcowah",
+ "Wappato",
+ "Cathlamet",
+ "Wishram",
+ "Killaniuck",
+ "Skillot",
+ "Wackiacum",
+ "Wascopa",
+ "Clowwewalla",
+ "Cushook",
+ "Echelut",
+ "Kiksht",
+ "Willapa",
+ "Ilwaco"

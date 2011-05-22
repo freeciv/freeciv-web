@@ -1,0 +1,79 @@
+[nation_papuanewguinean]
+
+name=_("Papua New Guinean")
+plural=_("?plural:Papua New Guineans")
+groups="Modern", "Oceanian"
+legend=_("Papua New Guinea is a country occupying the eastern part of the\
+ island of New Guinea. Inhabited since time immemorial by Papuan peoples,\
+ it was colonized by the British and Germans in the late 19th century.\
+ During World War I Papua New Guinea was transferred to Australia. It\
+ became an independent country in 1975.")
+
+leaders = {
+ "name",                "sex"
+ "John Guise",          "Male"
+ "Bill Skate",          "Male"
+ "Bernard Narokobi",    "Male"
+ "Michael Somare",      "Male"
+}
+
+ruler_titles = {
+ "government",   "male_title",             "female_title"
+ "Republic",     _("Governor-General %s"), _("?female:Governor-General %s")
+}
+
+flag = "papua_newguinea"
+flag_alt = "-"
+city_style = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+conflicts_with = "papuan"
+civilwar_nations = "papuan", "micronesian" ;bougainvillean
+
+cities =
+ "Port Moresby",
+; Provincial capitals.
+ "Lae",
+ "Arawa",
+ "Popondetta",
+ "Madang",
+ "Mendi",
+ "Kimbe",
+ "Goroka",
+ "Wewak",
+ "Daru",
+ "Kavieng",
+ "Alotau",
+ "Vanimo",
+ "Kundiawa",
+ "Lorengau",
+ "Kerema",
+ "Wabag",
+ "Rabaul",
+; More cities in population order
+ "Mount Hagen",
+ "Kokopo",
+ "Bulolo",
+ "Wau",
+ "Kiunga",
+ "Tari",
+ "Kainantu",
+ "Buka",
+ "Ialibu",
+ "Kokoda",
+ "Aitape",
+ "Kieta",
+ "Balimo",
+ "Panguna",
+ "Morehead",
+ "Ambunti",
+ "Samarai",
+ "Angoram",
+ "Porgera",
+ "Namatanai",
+ "Finschhafen",
+ "Kandrian"

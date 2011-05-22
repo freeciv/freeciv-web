@@ -2,100 +2,76 @@
 
 name=_("Mongol")
 plural=_("?plural:Mongols")
-groups="Medieval", "Modern", "Asian"
-legend=_("In the centuries after their unification by Genghis Khan, the\
+groups="Medieval", "Early Modern", "Modern", "Asian"
+legend=_("In the centuries after their unification by Chinggis Khan, the\
  Mongols conquered the largest empire in human history, encompassing most\
- of the continent of Asia.  They became notorious for the utter ruthlessness\
- in warfare.")
-leader=
- "Genghis",
- "Bortai",
- "Ogedei",
- "Dayan",
- "Timur Lenk",
- "Batu",
- "Tokhtamysh",
- "Kublai",
- "Altan",
- "Toregene",
- "Hulagu",
- "Kara Nogai"
-leader_sex="Male", "Female", "Male", "Male", "Male", "Male", "Male",
-           "Male", "Male", "Female", "Male", "Male"
+ of the continent of Asia. They became notorious for their utter\
+ ruthlessness in warfare.")
+
+leaders = {
+ "name",        "sex"
+ "Chinggis",	"Male" ; Genghis / Чингис
+ "Börte",       "Female" ; Bortei / Бөртэ
+ "Ögedei",	"Male" ; Өгэдэй
+ "Bat",		"Male" ; Batu / Бат
+ "Tsagadai",	"Male" ; Chagatai / Цагадай
+ "Tolui",	"Male" ; Толуй
+ "Tokhtamysh",	"Male" ; Тохтамыш
+ "Sübeedei",	"Male" ; Subutai / Сүбээдэй
+ "Dörgene",	"Female" ; Toregene / Дөргэнэ
+ "Güyük", 	"Male" ; Гүюг
+ "Mönkh", 	"Male" ; Mongke / Мөнх
+ "Khubilai",	"Male" ; Kublai / Хубилай
+ "Khülegü",	"Male" ; Hulagu / Хүлэгү
+ "Mandukhai",   "Female" ; Мандухай
+}
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Despotism",       _("%s Khan"),      _("%s Khatan")
+ "Monarchy",        _("%s Khagan"),    _("?female:%s Khagan")
+}
+
 flag="mongolia"
 flag_alt = "-"
 city_style = "Asian"
-ruler_titles = { "government",      "male_title",      "female_title"
-                 "Despotism",       _("Khan"),         _("?female:Khan")
-		 ; /* TRANS: Khagan = Great Khan */
-                 "Monarchy",        _("Khagan"),       _("?female:Khagan")
-               }
 
 init_techs=""
 init_buildings=""
 init_government="Despotism"
 init_units=""
 
-; Used to have russian here but korean seems closer
-civilwar_nations = "chinese", "korean"
+civilwar_nations="Tibetan", "Tuvan", "Kalmyk", "Timurid", "Uyghur", "Tatar",
+ "Crimean Tatar", "Buryat"
 
-; Many of these are historical (not part of modern Mongolia)
-cities =
- "Almaligh",
- "Khotan",
- "Turfan",
- "Samarkand",
- "Bokhara",
- "Tashkent",
- "Kashgar",
- "Balkh",
- "Kabul",
- "Sarai",
- "Astra Khan",
- "Tana",
- "Kazan",
- "Caffa",
- "Karakorum",
- "Hami",
- "Dunhuang",
- "Tali",
- "Tabriz",
- "Basra",
- "Rayy",
- "Daybul",
- "Ulan Bator",
- "Ulan Ude",
- "Sainshand",
- "Ulangom",
- "Hovd",
- "Hatgal",
- "Uliastay",
- "Tsetserleg",
- "Altan Bulag",
- "Dzuunmod",
- "Bayan Hongor",
- "Huld",
- "Dalandzadgad",
- "Coybalsan",
- "Erdenet",
- "Mandal Gobi",
- "Muren",
- "Sukhe Bator",
- "Dzuun Haraa",
- "Undur Khan",
- "Olgiy",
- "Arbay Heere",
- "Bulgan",
- "Altay",
- "Baruun Urt",
- "Coyr",
- "Darhan",
- "Bayan Uul",
- "Dzuun Balag",
- "Ereen Cav",
- "Nalayh",
- "Tamsag Bulag",
- "Buyant Uhaa",
- "Dund Us",
- "Dzamyn Uud",
- "Tsetsen Khan"
+cities=
+ "Karakorum", ; Каракорум
+ "Ulaanbaatar", ; Улаанбаатар
+ "Sainshand", ; Сайншанд
+ "Ulaangom", ; Улаангом
+ "Khovd", ; Ховд
+ "Tsetserleg", ; Цэцэрлэг
+ "Altanbulag", ; Алтанбулаг
+ "Zuunmod", ; Зуунмод
+ "Bayankhongor", ; Баянхонгор
+ "Dalanzadgad", ; Даланзадгад
+ "Choibalsan", ; Чойбалсан
+ "Erdenet", ; Эрдэнэт
+ "Mandalgovi", ; Мандалговь
+ "Mörön", ; Мөрөн
+ "Sükhbaatar", ; Сүхбаатар
+ "Züünkharaa", ; Зүүнхараа
+ "Öndörkhaan", ; Өндөрхаан
+ "Ölgii", ; Өлгий
+ "Arvaikheer", ; Арвайхээр
+ "Bulgan", ; Булган
+ "Altai", ; Алтай
+ "Baruun-Urt", ; Баруун-Урт
+ "Choir", ; Чойр
+ "Darkhan", ; Дархан
+ "Bayan-Uul", ; Баян-Уул
+ "Nalaikh", ; Налайх
+ "Zamyn-Üüd", ; Замын-Үүд
+ "Khatgal", ; Хатгал
+ "Uliastai", ; Улиастай
+ "Khuld" ; Хулд

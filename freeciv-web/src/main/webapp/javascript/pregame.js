@@ -12,8 +12,9 @@
 ***********************************************************************/
 
 var observing = false;
-var chosen_nation = 1;
+var chosen_nation = -1;
 var ai_skill_level = 1;
+var nation_select_id = -1;
 
 /****************************************************************************
   ...
@@ -39,13 +40,13 @@ function leave_pregame()
 function observe()
 {
   if (observing) {
-    $("#observe_button").text("Observe Game");
+    $("#observe_button").button("option", "label", "Observe Game");
     var test_packet = [{"packet_type" : "chat_msg_req", "message" : "/detach"}];
     var myJSONText = JSON.stringify(test_packet);
     send_request (myJSONText);
     
   } else {
-    $("#observe_button").text("Don't observe");
+    $("#observe_button").button("option", "label", "Don't observe");
     var test_packet = [{"packet_type" : "chat_msg_req", "message" : "/observe"}];
     var myJSONText = JSON.stringify(test_packet);
     send_request (myJSONText);
@@ -84,9 +85,10 @@ function update_player_info()
 function pick_nation()
 {
 
-  var nations_html = "";
-  
-  nations_html += "<div id='nation_list'> ";
+  var nations_html = "<div id='nation_heading'><span>Select your nation:</span> <br>"
+                  + "<input id='nation_autocomplete_box' type='text' size='20'>"
+		  + "<div id='nation_choice'></div></div> <div id='nation_list'> ";
+  var nation_name_list = [];
   for (var nation_id in nations) {
     var pnation = nations[nation_id];
     var sprite = get_nation_flag_sprite(pnation);
@@ -95,30 +97,54 @@ function pick_nation()
            + "); background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y'] 
            + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px; margin: 5px; '>"
            + "<div id='nation_" + nation_id + "' class='nation_choice'>" + pnation['adjective'] + "</div></div>";
+    nation_name_list.push(pnation['adjective']);
   }
 
   
   nations_html += "</div><div id='nation_legend'></div>";
   
   $("#pick_nation_dialog").html(nations_html);
-  $("#pick_nation_dialog").attr("title", "Which nation do you want to play?");
+  $("#pick_nation_dialog").attr("title", "Which nation do you want to rule?");
   $("#pick_nation_dialog").dialog({
 			bgiframe: true,
 			modal: true,
-			width: "50%",
+			width: "600px",
 			buttons: {
 				Ok: function() {
 					$(this).dialog('close');
-					submit_nation_choise(chosen_nation);
+					submit_nation_choise();
 				}
 			}
 		});
 	
+  $("#nation_legend").html("Please choose your nation carefully.");
+
+
+  $("#nation_autocomplete_box").autocomplete({
+      source: nation_name_list
+  });
+  
+
+  nation_select_id = setInterval ("update_nation_selection();", 100);
   $("#pick_nation_dialog").dialog('open');		
 
 }
 
+/****************************************************************************
+  ...
+****************************************************************************/
+function update_nation_selection()
+{
+  var nation_name = $("#nation_autocomplete_box").val();
+  if (nation_name.length == 0) return;
 
+  for (var nation_id in nations) {
+    var pnation = nations[nation_id];
+    if (pnation['adjective'].toLowerCase() == nation_name.toLowerCase()) {
+      select_nation(nation_id);
+    }
+  }
+}
 
 /****************************************************************************
   ...
@@ -128,9 +154,17 @@ function select_nation(nation_id)
   var pnation = nations[nation_id];
   $("#nation_legend").html(pnation['legend']);
 
+  $("#nation_autocomplete_box").val(pnation['adjective']);
+
   $("#nation_" + chosen_nation).css("background-color", "transparent");
 
-  chosen_nation = nation_id
+  $("#nation_choice").html("Your Nation: " + pnation['adjective']);
+
+  if (chosen_nation != nation_id) {
+    document.getElementById("nation_" + nation_id).scrollIntoView()
+  }
+
+  chosen_nation = parseFloat(nation_id);
   
   $("#nation_" + chosen_nation).css("background-color", "#555555");
 }
@@ -138,8 +172,10 @@ function select_nation(nation_id)
 /****************************************************************************
   ...
 ****************************************************************************/
-function submit_nation_choise(chosen_nation)
+function submit_nation_choise()
 {
+  if (chosen_nation == -1) return;
+
   var test_packet = [{"packet_type" : "nation_select_req", 
                       "player_no" : client.conn['player_num'],
                       "nation_no" : chosen_nation,
@@ -148,8 +184,8 @@ function submit_nation_choise(chosen_nation)
                       "city_style" : nations[chosen_nation]['city_style']}];
   var myJSONText = JSON.stringify(test_packet);
   send_request (myJSONText);
-  
-  
+  clearInterval(nation_select_id);
+  $("#pick_nation_button").button( "option", "disabled", true); 
 }
 
 

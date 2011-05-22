@@ -1,0 +1,92 @@
+[nation_costarican]
+
+name = _("Costa Rican")
+plural = _("?plural:Costa Ricans")
+groups= "Modern", "American"
+legend=_("Costa Rica became an independent republic in 1840. It has been\
+ without an army since 1949 and is one of the most democratic and wealthy\
+ countries of Latin America.")
+
+leaders = {
+ "name",                                "sex"
+ "Juan Mora Fernández",                 "Male"
+ "Braulio Carrillo Colina",             "Male"
+ "Juan Rafael Mora Porras",             "Male"
+ "Federico Tinoco Granados",            "Male"
+ "Ricardo Jiménez Oreamuno",            "Male"
+ "Rafael Ángel Calderón Guardia",       "Male"
+ "José Figueres Ferrer",                "Male"
+ "Óscar Arias Sánchez",                 "Male"
+ "Laura Chinchilla",                    "Female"
+}
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Despotism",       _("General %s"),   _("?female:General %s")
+ "Fundamentalism",  _("Bishop %s"),    _("Mother Superior %s")
+}
+
+flag = "costa_rica"
+flag_alt = ""
+city_style = "European"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations = "cuban", "nicaraguan"
+
+cities =
+ "San José (mountains, hills)",
+ "Cartago (mountains, hills)",
+ "Puerto Limón (ocean)",
+ "Alajuela (mountains, hills)",
+ "Liberia (ocean)",
+ "Heredia (mountains, hills)",
+ "Puntarenas (ocean)",
+ "San Francisco",
+ "Nicoya",
+ "San Ramón",
+ "Paraíso",
+ "Desamparados",
+ "Santa Ana",
+ "San Isidro de El General",
+ "Curridabat",
+ "San Vincente de Moravia",
+ "Purral",
+ "Turrialba",
+ "San Miguel",
+ "Aguacaliente",
+ "San Rafael",
+ "Golfito (ocean)",
+ "San Rafael Abajo",
+ "Quesada",
+ "San Pedro Montes de Oca",
+ "Mercedes",
+ "Chacarita",
+ "Jacó (ocean)",
+ "Patalillo",
+ "Aserrí",
+ "Tirrases",
+ "El Tejar",
+ "San Felipe",
+ "Guadalupe",
+ "Patarrá",
+ "San Juan de Tibás",
+ "San Pablo",
+ "Ipís",
+ "Concepción",
+ "San Antonio",
+ "San Nicolás",
+ "Cañas",
+ "Guápiles",
+ "Ulloa",
+ "Siquerres",
+ "Mata de Plátano",
+ "Gravilias",
+ "Espíritu Santo",
+ "Colima",
+ "Esparta",
+ "Carmen",
+ "Damas",
+ "Cariari"

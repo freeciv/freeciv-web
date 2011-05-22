@@ -1,0 +1,58 @@
+[nation_abyssinian]
+
+name=_("Abyssinian")
+plural=_("?plural:Abyssinians")
+groups="Ancient", "Medieval", "Early Modern", "African"
+legend=_("Abyssinians - also known as Habesha or Ethiopians - are a\
+ Semitic people who ruled historical states in the Horn of Africa, the\
+ most prominent being the Aksumite Kingdom and the Ethiopian Empire.")
+
+leaders = {
+ "name",                "sex"
+ "Ezana",               "Male"
+ "Yekuno Amlak",        "Male"
+ "Lalibela",            "Male"
+ "Eleni",               "Female"
+ "Dawit II",            "Male"
+ "Menelik II",          "Male"
+ "Haile Selassie",      "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",       "female_title"
+ "Fundamentalism",  _("Patriarch %s"),  _("Matriarch %s")
+ "Monarchy",        _("Emperor %s"),    _("Empress %s")
+}
+
+flag="ethiopia_old"
+flag_alt="-"
+city_style="Babylonian"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="Ethiopian", "Eritrean", "Nubian"
+conflicts_with="Ethiopian", "Eritrean"
+
+cities =
+ "Yeha",
+ "Aksum",
+ "Wukro",
+ "Matara",
+ "Adulis",
+ "Qohaito",
+ "Hawulti",
+ "Mendefera",
+ "Zula",
+ "Dungur",
+ "Lalibela",
+ "Gondar",
+ "Debarwa",
+ "Mek'ele",
+ "Adigrat",
+ "Gefegef",
+ "Tiya",
+ "Debre Berhan",
+ "Magdala"

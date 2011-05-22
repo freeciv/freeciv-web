@@ -1,0 +1,90 @@
+[nation_moluccas]
+
+name=_("Moluccan")
+plural=_("?plural:Moluccans")
+groups="Asian"
+legend=_("The Moluccas, known as the Spice Islands during the era of\
+ colonizations, are an island group in the Indonesian archipelago.\
+ Inhabited by Malay peoples, the islands were contested by the Spanish,\
+ Portuguese and English but ended up under firm Dutch control by the 16th\
+ century. During the decolonization process many Moluccans sided with the\
+ Dutch East Indies Army. This, and the centralism exerted by Java after\
+ Indonesias independence in 1949, led to the proclamation of the Republic\
+ of the South Moluccas in 1950. The rebellion was crushed, but a\
+ government in exile continues to operate, not recognized by any country.")
+
+leaders = {
+ "name",                 "sex"
+ "Bakanuku",             "Male"
+ "Pattimura",            "Male"
+ "Isaac Julius Tamaëla", "Male"
+ "J.H. Manuhutu",        "Male"
+ "Chris Soumokil",       "Male"
+ "Albert Wairisal",      "Male"
+ "Johan Manusama",       "Male"
+ "Hansina Uktolseja",    "Female"
+}
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Despotism",       _("Raja %s"),      _("Rani %s")
+ "Fundamentalism",  _("Reverend %s"),  _("?female:Reverend %s")
+ "Monarchy",        _("Sultan %s"),    _("Sultana %s")
+}
+
+flag="moluccas"
+flag_alt = "-"
+city_style = "Asian"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="indonesian", "dutch"
+
+cities =
+ "Ambon",
+ "Amahai",
+ "Tual",
+ "Masohi",
+ "Piru",
+ "Namlea",
+ "Saumlaki",
+ "Bula",
+ "Dobo",
+ "Tiakur Kecamatan Moa Lakor",
+ "Kecamatan Namrole",
+ "Lioppa",
+ "Tepa",
+ "Ilwaki",
+ "Wasiri",
+ "Ema",
+ "Masapun",
+ "Arwala",
+ "Layoni",
+ "Langgur",
+ "Paperu",
+ "Aru",
+ "Babar",
+ "Banda",
+ "Buru",
+ "Damer",
+ "Kai",
+ "Gorong",
+ "Haraku",
+ "Leti",
+ "Makian",
+ "Saparua",
+ "Sermata",
+ "Barat Daya",
+ "Tanimbar",
+ "Watubela",
+ "Wetar",
+ "Kisar",
+ "Romang",
+ "Manuk",
+ "Seram",
+ "Serua"
+
+

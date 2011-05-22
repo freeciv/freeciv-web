@@ -1,0 +1,56 @@
+[nation_guarani] 
+
+name=_("Guarani") 
+plural=_("?plural:Guarani") 
+groups="American" 
+legend=_("Numbering perhaps as many as 400,000 people at the time\
+ of European contact, the Aba (more popularly known as Guarani) lived\
+ primarily in what is now Paraguay in agricultural villages. Today their\
+ Guarani language is spoken by over 4 million people and is an official\
+ language of the nation of Paraguay.") 
+
+leaders = {
+ "name",                "sex"
+ "Sepe Tiaraju",        "Male"
+ "Nheçu",               "Male"
+ "Nicolás Ñanguirú",    "Male"
+ "Miguel Guarumba",     "Male"
+}
+
+flag = "guarani" 
+flag_alt = "-" 
+city_style = "Tropical" 
+
+init_techs="" 
+init_buildings="" 
+init_government="Despotism" 
+init_units="" 
+
+conflicts_with="dutch"
+civilwar_nations="akwe", "tupi", "aymara" 
+
+cities = 
+"Akã'ai", 
+"Ka'akupe", 
+"Mbarakaju", 
+"Ka'asapa", 
+"Sapukái", 
+"Yvy ja'u", 
+"Tujuti", 
+"Jasyretã", 
+"Ypakarai", 
+"Kapiatã", 
+"Amambái", 
+"Yguasu", 
+"Kurupa'yty", 
+"Itapúa", 
+"Yvyku'i", 
+"Itakuruvi", 
+"Ykuamandyju", 
+"Itaipu", 
+"Yvytymi", 
+"Ysoso", 
+"Kambyretã", 
+"Minas kue", 
+"Ñe'embuku", 
+"Ka'aguasu"

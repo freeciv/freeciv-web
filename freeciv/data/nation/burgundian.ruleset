@@ -9,36 +9,37 @@ legend=_("After the fall of the Western Roman Empire, a Germanic people\
  country with the court in Dijon outshining that of Paris. It is today one\
  of the regions of France.")
 
-leader=
- "Richard le Justicier",
- "Henri le Grand",
- "Hugues III",
- "Eudes IV",
- "Philippe le Hardi",
- "Jean sans Peur",
- "Philippe le Bon",
- "Charles le Téméraire",
- "Marie",
- "Marguerite"
-leader_sex="Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male",
- "Female", "Female"
+leaders = {
+ "name",                        "sex"
+ "Richard le Justicier",        "Male"
+ "Henri le Grand",              "Male"
+ "Hugues III",                  "Male"
+ "Eudes IV",                    "Male"
+ "Philippe le Hardi",           "Male"
+ "Jean sans Peur",              "Male"
+ "Philippe le Bon",             "Male"
+ "Charles le Téméraire",        "Male"
+ "Marie",                       "Female"
+ "Marguerite",                  "Female"
+}
+
+ruler_titles = {
+ "government",     "male_title",        "female_title"
+ "Despotism",      _("Duke %s"),        _("Duchess %s")
+ "Fundamentalism", _("Bishop %s"),      _("Mother Superior %s")
+ "Republic",       _("Stadtholder %s"), _("Stadtholdress %s")
+}
 
 flag = "burgundy"
 flag_alt = "-"
 city_style = "European"
-
-ruler_titles = { "government", "male_title",  "female_title"
-		"Despotism",   _("Margrave"), _("Margravine")
-		"Monarchy",    _("Duke"),     _("Duchess")
-}
 
 init_techs=""
 init_buildings=""
 init_government="Despotism"
 init_units=""
 
-conflicts_with = "French"
-civilwar_nations = "French", "German", "Dutch"
+civilwar_nations="Flemish", "Savoyard", "Luxembourgish", "Lorrain"
 
 cities =
 ; Bourgogne

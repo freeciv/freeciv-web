@@ -1,0 +1,65 @@
+[nation_lendian]
+
+name=_("Lendian")
+plural=_("?plural:Lendians")
+groups="European", "Medieval"
+legend=_("The Lendians were a confederation of West Slavic, Lechitic\
+ tribes inhabiting the borderland areas of today's Poland and Ukraine.\
+ Their land was the object of rivalry between Poland and the Kievan Rus'\
+ at the time of the early Piast dynasty. The Lendians succumbed to\
+ Ruthenization as a result of deportation actions organized by Kievan\
+ princes and the activities of the Orthodox Church.")
+
+leaders = {
+ "name",        "sex"
+ "Lech",        "Male"
+ "Zawigost",    "Male"
+ "Wysz",        "Male"
+ "Włodzisław",  "Male"
+}
+
+flag = "lendian"
+flag_alt = "-"
+city_style = "Celtic"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+conflicts_with = "ukrainian"
+civilwar_nations = "polish", "ruthenian", "ukrainian"
+
+cities =
+"Czerwień",
+"Przemyśl",
+"Peremyl",
+"Lubacew",
+"Bełz",
+"Lublin",
+"Chełm",
+"Czerwony Gród",
+"Wołyń",
+"Sanok",
+"Sąciaska",
+"Stryj",
+"Włodzimierz",
+"Krasnystaw",
+"Rzeszów",
+"Bełżyce",
+"Zamość",
+"Biłgoraj",
+"Leżajsk",
+"Hrubieszów",
+"Włodawa",
+"Puławy",
+"Kock",
+"Łuków",
+"Lendo",
+"Jarosław",
+"Drohobycz",
+"Gródek",
+"Horodło",
+"Czerniejów",
+"Parczew",
+"Garbów",
+"Susiec"

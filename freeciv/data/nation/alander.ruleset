@@ -1,0 +1,120 @@
+[nation_alander]
+
+; /* TRANS: The first letter in "Aland" should be */
+; /* TRANS: U+00C5 LATIN CAPITAL A WITH RING if available in */
+; /* TRANS: your charset. In ISO-8859-1 (ISO Latin 1) this is 197. *
+name=_("Alander")
+plural=_("?plural:Alanders")
+groups="European"
+legend=_("Aland is an archipelago in the Baltic Sea, located between\
+ Sweden and Finland. The islands' inhabitants are Swedish speaking, but\
+ Aland is an autonomous province in Finland, a status that was reached\
+ in 1921 after a long period in which the islands were contested between\
+ Sweden and Finland. Aland's special and demilitarized status is protected\
+ by international law.")
+
+leaders = {
+ "name",                     "sex"
+ "Nils Psilander",           "Male"
+ "Eric Arén",                "Male"
+ "Frans Peter von Knorring", "Male"
+ "Gustaf Erikson",           "Male"
+ "Julius Sundblom",          "Male"
+ "Carl Björkman",            "Male"
+ "Fanny Sundström",          "Female"
+}
+ruler_titles = {
+ "government",     "male_title",     "female_title"
+ "Democracy",      _("Premier %s"),  _("Premiere %s")
+ "Despotism",      _("Earl %s"),     _("?female:Earl %s")
+ "Fundamentalism", _("Vicar %s"),    _("?female:Vicar %s")
+ "Republic",       _("Governor %s"), _("?female:Governor %s")
+}
+flag="aland"
+flag_alt = ""
+city_style = "celtic"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations = "swedish", "finnish"
+
+cities =
+ "Mariehamn",
+ "Kyrkby",	;Jomala
+ "Godby",	;Finström
+ "Söderby",     ;Lemland
+ "Ödkarby",     ;Saltvik
+ "Kattby",	;Hammarland
+ "Björby",	;Sund
+ "Storby",	;Eckerö
+ "Degerby", 	;Föglö
+ "Åva",		;Brändö
+ "Vestergeta",	;Geta
+ "Strömsby",	;Vårdö
+ "Klemetsby",	;Lumparland
+ "Kumlinge",
+ "Kökar",
+ "Sottunga",
+ "Kastelholm",
+ "Långnäs",
+ "Lappo",
+ "Märket",
+ "Germundö",
+ "Hastersboda",
+ "Kasberget",
+ "Hellsö",
+ "Husö",
+ "Norrsunda",
+ "Önningeby",
+ "Vestansunda",
+ "Överö",
+ "Tängsödavik",
+ "Snäckö",
+ "Fiskö",
+ "Apalängen",
+ "Möckelgräs",
+ "Vessingsboda",
+ "Krogstad",
+ "Bamböle",
+ "Vargata",
+ "Höckböle",
+ "Ytterby",
+ "Prästgården",
+ "Västra Ytternäs",
+ "Granboda",
+ "Åsgårda",
+ "Överboda",
+ "Ytternäs",
+ "Björkö",
+ "Pålsböle",
+ "Emkarby",
+ "Kråkböle",
+ "Jomalby",
+ "Sibby",
+ "Torp",
+ "Bråttö",
+ "Övernäs",
+ "Bovik",
+ "Enklinge",
+ "Hellestorp",
+ "Ingby",
+ "Västanträsk",
+ "Ämnäs",
+ "Östernäs",
+ "Överby Degersand",
+ "Bistorp",
+ "Grelsby",
+ "Äppelö",
+ "Björnhuvud",
+ "Nääs",
+ "Espholm",
+ "Ängö",
+ "Finnö",
+ "Postad",
+ "Flisö",
+ "Bistorp",
+ "Skag",
+ "Strömsvik"

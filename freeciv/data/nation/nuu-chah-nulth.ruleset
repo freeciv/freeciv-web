@@ -10,29 +10,30 @@ legend=_("The Nuu-chah-nulth are a Pacific Northwest people, one of the few\
  8,000 individuals. Like other people of the Pacific Northwest, they built\
  large wooden canoes and houses and lived in clan systems.")
 
-leader=
- "Keitlah",
- "Tatoosh",
- "Nookemis"
+leaders = {
+ "name",        "sex"
+ "Keitlah",     "Male"
+ "Tatoosh",     "Male"
+ "Nookemis",    "Male"
+}
 
-leader_sex = "Male", "Male", "Male"
+ruler_titles = {
+ "government",      "male_title",            "female_title"
+ "Democracy",       _("Principal Chief %s"), _("?female:Principal Chief %s")
+ "Fundamentalism",  _("Shaman %s"),          _("?female:Shaman %s")
+ "Monarchy",        _("Great Chief %s"),     _("?female:Great Chief %s")
+}
 
 flag         = "nuu-chah-nulth"
 flag_alt     = "-"
 city_style   = "Celtic"
-ruler_titles = { "government",      "male_title",        "female_title"
-		 ; /* TRANS: Chaabat = Chief */
-                 "Despotism",      _("Chaabat"),         _("Chaabat")
-		 ; /* TRANS: Ha'wiih = Hereditary Chief */
-                 "Monarchy",       _("Ha'wiih"),         _("Ha'wiih")
-               }
 
 init_techs=""
 init_buildings=""
 init_government="Despotism"
 init_units=""
 
-civilwar_nations="cherokee", "sioux"
+civilwar_nations="salishan", "sioux", "chinook"
 
 cities =
  "Ahousaht",

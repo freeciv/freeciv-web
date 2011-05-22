@@ -1,0 +1,87 @@
+[nation_trinidadian]
+
+name=_("Trinidadian and Tobagoan")
+plural=_("?plural:Trinidadians and Tobagoans")
+groups="Modern", "American"
+legend=_("Trinidad and Tobago is a country in the Caribbean, consisting\
+ of the two eponymous islands. It is the most populous country of the\
+ Lesser Antilles. Trinidad was sighted by Columbus in 1498, and remained\
+ a Spanish colony until it was conquered by the British during the\
+ Napoleonic wars; Tobago was colonized by Curonians, Spanish, Dutch,\
+ French and Swedes but eventually also ended up in British hands. The\
+ islands have been independent since 1962. The islands' economy is based\
+ on oil and is relatively developed when compared to its Caribbean\
+ neighbors. Trinidad and Tobago is famous for its music and its Carnival.")
+
+leaders = {
+ "name",                   "sex"
+ "Ralph Abercromby",       "Male"
+ "Jean Baptiste Phillipe", "Male"
+ "Buzz Butler",            "Male"
+ "Albert Gomes",           "Male"
+ "Eric Williams",          "Male"
+ "Ellis Clarke",           "Male"
+ "A. N. R. Robinson",      "Male"
+ "Kamla Persad-Bissessar", "Female"
+}
+
+flag="trinidad_and_tobago"
+flag_alt = "-"
+city_style = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations = "jamaican", "guyanese", "grenadian"
+
+cities =
+ "Port of Spain (ocean)",
+ "San Fernando",
+ "Chaguaramas",
+ "Scarborough",
+ "Chaguanas",
+ "San Juan",
+ "Arima",
+ "Point Fortin (ocean)",
+ "Penal",
+ "Princes Town",
+ "Couva",
+ "Diego Martin",
+ "Rio Claro",
+ "Sangre Grande",
+ "Siparia",
+ "Tunapuna",
+ "Speyside",
+ "Marabella",
+ "Tacarigua",
+ "Saint Joseph",
+ "Crown Point (ocean)",
+ "Mucurapo",
+ "Tabaquite",
+ "Debe",
+ "Biche",
+ "Charlotteville",
+ "Talparo",
+ "Mayaro",
+ "Laventille",
+ "Piarco",
+ "Bacolet",
+ "Cunupia",
+ "Guayaguayare",
+ "Point Lisas (ocean)",
+ "Westmoorings",
+ "Maraval",
+ "Moruga",
+ "Barataria",
+ "Morvant",
+ "Cedros",
+ "Fyzabad",
+ "La Brea",
+ "Arouca",
+ "Curepe",
+ "Saint Augustine",
+ "Trincity",
+ "Castara",
+ "Englishman's Bay (ocean)",
+ "Pigeon Point (ocean)"

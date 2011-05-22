@@ -8,32 +8,26 @@ legend=_("The Tocharians were an Indo-European people living what is now\
  Xinjiang in western China. Because of their unique geopolitical position,\
  their kingdoms of Shanshan, Kucha, and Khotan (as well as other, smaller\
  ones) were influenced by Chinese, Persian, Indian, Sogdian, Scythian, and\
- Tibetan cultures. Their religion, dress, writing, and art all reflect these\
- varied influences. They lived in oasis towns and cities along the Silk\
- Road, along which Buddhism was carried into China. The area was at various\
- times a military protectorate of China, such as during the Han and Tang\
- dynasties. During the decline of the latter dynasty, the Turkic Uighur\
- tribe moved into the Tarim basin, settling in and expanding their khanate\
- through the Tocharian lands. The Uighur intermarried with the Tocharians\
- and supplanted their language for all but liturgical purposes. Even this\
- use fell when Islam spread and took the place of Buddhism as the\
- predominant religion in the region.")
+ Tibetan cultures. Their religion, dress, writing, and art all reflect\
+ these varied influences. They lived in oasis towns and cities along the\
+ Silk Road, along which Buddhism was carried into China. The area was at\
+ various times a military protectorate of China, such as during the Han\
+ and Tang dynasties. During the decline of the latter dynasty, the Turkic\
+ Uyghur tribe moved into the Tarim basin, settling in and expanding their\
+ khanate through the Tocharian lands. The Uyghur intermarried with the\
+ Tocharians and supplanted their language for all but liturgical purposes.\
+ Even this use fell when Islam spread and took the place of Buddhism as\
+ the predominant religion in the region.")
 
-leader=
- "Jiva",
- "Maya",
- "Dhanika",
- "Ambare",
- "Ysassa-Pyapo",
- "Sulica"
-
-leader_sex = "Female", "Female", "Male", "Male", "Male", "Male"
-
-ruler_titles = { "government",      "male_title",        "female_title"
-                 "Despotism",      _("Kakmartik"),       _("Kakmartik")
-		 ; /* TRANS: Lant/Lantsa = King/Queen */
-                 "Monarchy",       _("Lant"),            _("Lantsa")
-               }
+leaders = {
+ "name",                "sex"
+ "Jiva",                "Female"
+ "Maya",                "Female"
+ "Dhanika",             "Male"
+ "Ambare",              "Male"
+ "Ysassa-Pyapo",        "Male"
+ "Sulica",              "Male"
+}
 
 flag         = "tocharian"
 flag_alt     = "-"
@@ -44,7 +38,7 @@ init_buildings=""
 init_government="Despotism"
 init_units=""
 
-civilwar_nations="uyghur", "khwarezmian"
+civilwar_nations="uyghur", "khwarezmian", "saka"
 
 cities =
  "Khotan",

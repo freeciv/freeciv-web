@@ -14,13 +14,14 @@ legend=_("The Numidians were an ancient Berber people renowned for their\
  King Jugurtha. Eventually all of Numidia and Mauretania were added to the\
  Roman realm.")
 
-leader=
- "Syphax",
- "Massinissa",
- "Jugurtha",
- "Micipsa",
- "Gala"
-leader_sex="Male", "Male", "Male", "Male", "Male"
+leaders = {
+ "name",        "sex"
+ "Syphax",      "Male"
+ "Massinissa",  "Male"
+ "Jugurtha",    "Male"
+ "Micipsa",     "Male"
+ "Gala",        "Male"
+}
 
 flag="numidia"
 flag_alt = "-"

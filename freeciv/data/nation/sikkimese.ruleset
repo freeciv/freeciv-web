@@ -1,0 +1,59 @@
+[nation_sikkimese]
+
+name=_("Sikkimese")
+plural=_("?plural:Sikkimese")
+groups="Asian", "Medieval", "Early Modern"
+legend=_("Wedged between Nepal and Bhutan, the Himalayan kingdom\
+ of Sikkim was ruled by a lineage of monarchs known as chogyals for\
+ centuries, until becoming the 22nd state of India in 1975.")
+
+leaders = {
+ "name",                "sex"
+"Tashi Namgyal",        "Male"
+"Tshudpud Namgyal",     "Male"
+"Pendiongmu",           "Female"
+"Phuntsog Namgyal",     "Male"
+"Khye Bumsa",           "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Despotism",       _("Raja %s"),      _("Rani %s")
+ "Fundamentalism",  _("Lama %s"),      _("?female:Lama %s")
+ "Monarchy",        _("Maharaja %s"),  _("Maharani %s")
+}
+
+flag="sikkim"
+flag_alt="-"
+city_style="Asian"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="Bhutanese", "Nepali", "Indian"
+
+cities =
+ "Yuksom",
+ "Rabdentse",
+ "Tumlong",
+ "Gangtok",
+ "Geyzing",
+ "Mangan",
+ "Namchi",
+ "Darjeeling",
+ "Karagong",
+ "Singtam",
+ "Rangpo",
+ "Melli",
+ "Legship",
+ "Dhupidanda",
+ "Pelling",
+ "Lambi",
+ "Lachen",
+ "Lachung",
+ "Jorethang",
+ "Naya Bazar",
+ "Yumthang",
+ "Yumesongdong"

@@ -1,0 +1,54 @@
+[nation_mon] 
+
+name=_("Mon")
+plural=_("?plural:Mons")
+groups="Medieval", "Early Modern", "Asian"
+legend=_("The Mon people were among the earliest inhabitants of Southeast\
+ Asia and instrumental in the spread of Buddhism in the region.")
+
+leaders = {
+ "name",                "sex"
+ "Dhammazedi",          "Male"
+ "Shin Sawbu",          "Female"
+ "Razadarit",           "Male"
+ "Wareru",              "Male"
+ "Aditayaraj",          "Male"
+ "Jamadevi",            "Female"
+}
+
+flag="mon"
+flag_alt="-"
+city_style="Asian"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="Cambodian", "Burmese"
+
+cities =
+ "Thaton",
+ "Hariphunchai",
+ "Lavo",
+ "Martaban",
+ "Pegu",
+ "Donwun",
+ "Dagon",
+ "Prome",
+ "Bassein",
+ "Syriam",
+ "Moulmein",
+ "Bilin",
+ "Kyaikmaraw",
+ "Thanbyuzayat",
+ "Kyaikkami",
+ "Mudon",
+ "Ye",
+ "Paung",
+ "Kyaiktiyo",
+ "Tharrawaddy",
+ "Gyobingauk",
+ "Chaungzon",
+ "Dawei",
+ "Mergui"

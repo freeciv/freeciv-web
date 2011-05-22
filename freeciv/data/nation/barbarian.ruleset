@@ -4,14 +4,17 @@ name=_("Barbarian")
 plural=_("?plural:Barbarians")
 legend=_("Since the dawn of civilization, barbarians have been a threat to\
  cultured peoples everywhere.")
-leader=
- "Genseric",
- "Alaric",
- "Theodoric",
- "Stilicho",
- "Attila",
- "Boadicea"
-leader_sex="Male", "Male", "Male", "Male", "Male", "Female"
+
+leaders = {
+ "name",        "sex"
+ "Genseric",    "Male"
+ "Alaric",      "Male"
+ "Theodoric",   "Male"
+ "Stilicho",    "Male"
+ "Attila",      "Male"
+ "Boadicea",    "Female"
+}
+
 flag="barbarian"
 flag_alt = "-"
 city_style = "European"

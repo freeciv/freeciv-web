@@ -1,0 +1,96 @@
+[nation_antillean]
+
+name=_("Antillean")
+plural=_("?plural:Antilleans")
+groups="American"
+legend=_("Aruba, Bonaire, Curacao, Saba, Saint Martin and Saint Eustatius\
+ were colonized by the Dutch in the 17th century. Its population is of\
+ mixed European, African and Latin American heritage. The Netherlands\
+ Antilles got internal self governance in 1954. The Netherlands Antilles\
+ were dissolved in 2010. Aruba, Curacao and Saint Martin are countries\
+ within the Kingdom of the Netherlands, the other three islands have been\
+ directly integrated into the Netherlands as special municipalities.")
+leaders = {
+ "name",                  "sex"
+ "Alonso de Ojeda",       "male"
+ "Johannes van Walbeeck", "male"
+ "Johannes de Graaff",    "male"
+ "Tula",                  "male"
+ "Wilson Godett",         "male"
+ "Betico Croes",          "male"
+ "Miguel Pourier",        "male"
+ "Emily de Jongh-Elhage", "female"
+}
+
+flag="netherlands_antilles"
+flag_alt = "-"
+city_style = "tropical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations = "surinamese", "dutch"
+
+cities =
+ "Willemstad",		;Curaçao
+ "Oranjestad",		;Aruba
+ "Philipsburg",		;Saint Martin
+ "Kralendijk",		;Bonaire
+ "Sint Eustatius",	;Saint Eustatius
+ "The Bottom",		;Saba
+ "Sint Michiel",	;Curaçao
+ "Sint Nicolaas",	;Aruba
+ "Lower Prince's Quarter", ;Saint Martin
+ "Rincon",		;Bonaire
+ "Concordia",		;Saint Eustatius
+ "Windwardside",	;Saba
+ "Montaña",		;Curaçao
+ "Noord",		;Aruba
+ "Cul de Sac",		;Saint Martin
+ "Antriol",		;Bonaire
+ "Golden Rock",		;Saint Eustatius
+ "Zions Hill",		;Saba
+ "Tera Corá",		;Curaçao
+ "Palm Beach",		;Aruba
+ "Koolbaai",		;Saint Martin
+ "Nikioboko",		;Bonaire
+ "Cherry Tree",		;Saint Eustatius
+ "Saint Johns",		;Saba
+ "Barber",		;Curaçao
+ "Malmok",		;Aruba
+ "Upper Prince's Quarter", ;Saint Martin
+ "Nort Salinja",	;Bonaire
+ "Princess Garde",	;Saint Eustatius
+ "Soto",		;Curaçao
+ "Angochi",		;Aruba
+ "Little Bay",		;Saint Martin
+ "Terra Kora",		;Bonaire
+ "Mountain",		;Saint Eustatius
+ "Westpunt",		;Curaçao
+ "Savaneta",		;Aruba
+ "Simpson Bay",		;Saint Martin
+ "Sint Willibrordus",	;Curaçao
+ "Piedra Plat",		;Aruba
+ "Lowlands",		;Saint Martin
+ "Lagun",		;Curaçao
+ "Santa Cruz",		;Aruba
+ "Hato",		;Curaçao
+ "Bubali",		;Aruba
+ "Grote Berg",		;Curaçao
+ "Ceru Colorado",	;Aruba
+ "Piscadera",		;Curaçao
+ "Cura Cabai",		;Aruba
+ "Julianadorp",		;Curaçao
+ "Brasil",		;Aruba
+ "Otrabanda",		;Curaçao
+ "Ponton",		;Aruba
+ "Saliña",		;Curaçao
+ "Pos Chikitu",		;Aruba
+ "Brievengat",		;Curaçao
+ "Wayaca",		;Aruba
+ "Souax",		;Curaçao
+ "Oostpunt"		;Curaçao
+
+

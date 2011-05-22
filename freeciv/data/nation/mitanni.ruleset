@@ -1,0 +1,67 @@
+[nation_mitanni]
+
+name=_("Mitanni")
+plural=_("?plural:Mitanni")
+groups="Ancient", "Asian"
+legend=_("Mitanni was an ancient Hurrian kingdom in what is now Northern\
+ Syria and Iraq. Mitanni was at the hight of its power during the 14th\
+ century BC, during which it rivalled Egypt.")
+leaders = {
+ "name",              "sex"
+ "Artašumara",        "Male"
+ "Artatama I",        "Male"
+ "Artatama II",       "Male"
+ "Kirta",             "Male"
+ "Paršatatar",        "Male"
+ "Šattiwaza",         "Male"
+ "Šattuara",          "Male"
+ "Šauštatar",         "Male"
+ "Šuttarna I",        "Male"
+ "Šuttarna II",       "Male"
+ "Šuttarna III",      "Male"
+ "Tušratta",          "Male"
+ "Wasašatta",         "Male"
+}
+flag="mitanni"
+flag_alt = "-"
+city_style = "Babylonian"
+
+ruler_titles = { "government",    "male_title",      "female_title"
+                 "Anarchy",       _("Usurper %s"),   _("?female:Usurper %s")
+                 "Despotism",     _("Prince %s"),    _("Princess %s")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+conflicts_with = "syrian", "iraqi", "israeli", "kurdish", "seleucid"
+civilwar_nations = "hittite", "aramean", "assyrian", "israelite", "phoenician"
+
+cities =
+"Waššukanni",
+"Kargamiš",
+"Halap",
+"Emar",
+"Tunip",
+"Qatna",
+"Kadeš",
+"Urkiš",
+"Harran",
+"Alalakh",
+"Ugarit",
+"Terqa",
+"Nagar",
+"Arrapha",
+"Nuzi",
+"Adanya",
+"Kummani",
+"Kurruhanni",
+"Qattara",
+"Ninive",
+"Assur",
+"Tell Fekheriye",
+"Tell Sheikh Hamad",
+"Tell Ahmar",
+"Tell Chuera"

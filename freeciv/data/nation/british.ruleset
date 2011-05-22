@@ -1,26 +1,34 @@
 [nation_british]
 
 name=_("British")
-plural=_("?plural:Britons")
-groups="Modern", "European"
+plural=_("?plural:British")
+groups="Early Modern", "Modern", "European"
 legend=_("The United Kingdom was created in 1707 as a negotiated agreement\
  between the kingdom of England and the kingdom of Scotland. The country -\
  also known as Great Britain - became the leading industrial and maritime\
  power in the 19th century.")
-leader=
- "Benjamin Disraeli",
- "William Gladstone",
- "George VI",
- "Victoria",
- "Winston Churchill",
- "Margaret Thatcher"
-leader_sex="Male", "Male", "Male", "Female", "Male", "Female"
+
+leaders = {
+ "name",                "sex"
+ "Benjamin Disraeli",   "Male"
+ "William Gladstone",   "Male"
+ "George VI",           "Male"
+ "Victoria",            "Female"
+ "Winston Churchill",   "Male"
+ "Margaret Thatcher",   "Female"
+}
+
+ruler_titles = {
+ "government",      "male_title",           "female_title"
+ "Anarchy",         _("Pretender %s"),      _("?female:Pretender %s")
+ "Despotism",       _("Lord %s"),           _("Lady %s")
+ "Fundamentalism",  _("Bishop %s"),         _("?female:Bishop %s")
+ "Republic",        _("Lord Protector %s"), _("Lady Protector %s")
+}
+
 flag="united_kingdom"
 flag_alt = "-"
 city_style = "European"
-ruler_titles = { "government",      "male_title",      "female_title"
-                "Democracy", _("Prime Minister"), _("?female:Prime Minister")
-               }
 
 init_techs=""
 init_buildings=""
@@ -29,7 +37,7 @@ init_units=""
 
 ; We do not want British nation in the same game with English or any of the
 ; other nations within modern Great Britain.
-conflicts_with="english", "scottish", "welsh", "cornish"
+conflicts_with="english", "scottish", "welsh", "cornish", "northumbrian"
 civilwar_nations=
 ; Sub-national nations
  "english", "scottish", "welsh", "cornish",
@@ -48,7 +56,7 @@ cities =
  "Plymouth",
  "Falmouth",
  "Dover",
- "Felixtowe",
+ "Felixstowe",
  "Birmingham",
  "Coventry",
  "Liverpool",

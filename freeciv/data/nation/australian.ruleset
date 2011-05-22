@@ -3,36 +3,38 @@
 name=_("Australian")
 plural=_("?plural:Australians")
 groups="Modern", "Oceanian"
-legend=_("Australia was founded as a British penal colony in 1788AD.\
+legend=_("Australia was founded as a British penal colony in 1788 AD.\
  Originally comprising of several colonies (New South Wales, Victoria,\
  Queensland, South Australia, Western Australia and Tasmania) it\
  became a single country in 1902.\
  It is the only country on earth to occupy an entire continent.")
-leader =
- "Robert Menzies",
- "Mary Reibey",
- "John Curtin",
- "Enid Lyons",
- "Harold Holt",
- "Edmund Barton",
- "Elizabeth Nicholls",
- "Edith Cowan"
-leader_sex = "Male", "Female", "Male", "Female", "Male", "Male", "Female",
- "Female"
+
+leaders = {
+ "name",                "sex"
+ "Robert Menzies",      "Male"
+ "Mary Reibey",         "Female"
+ "John Curtin",         "Male"
+ "Enid Lyons",          "Female"
+ "Harold Holt",         "Male"
+ "Edmund Barton",       "Male"
+ "Elizabeth Nicholls",  "Female"
+ "Edith Cowan",         "Female"
+}
+
+ruler_titles = {
+ "government",      "male_title",   "female_title"
+ "Fundamentalism",  _("Bishop %s"), _("?female:Bishop %s")
+}
 
 flag="australia"
 flag_alt = "-"
 city_style = "European"
 
-ruler_titles = { "government",      "male_title",        "female_title"
-                "Democracy", _("Prime Minister"), _("?female:Prime Minister")
-               }
-
 init_techs=""
 init_buildings=""
 init_government="Despotism"
 init_units=""
-civilwar_nations="Australian Aboriginal", "british"
+civilwar_nations="Australian Aboriginal", "British"
 
 cities =
  "Canberra (river, hills, forest, !desert, !ocean)",

@@ -1,0 +1,88 @@
+[nation_kalmyk]
+
+name=_("Kalmyk")
+plural=_("?plural:Kalmyks")
+groups="European", "Early Modern"
+legend=_("The Kalmyks are a Western Mongolian ethnic group living in\
+ Kalmykia in southern Russia. They migrated to the Caspian plains in the\
+ 17th century and formed a khanate that was allied with Russia. The\
+ Kalmyks are the only Buddhist nation of Europe.")
+
+leaders = {
+ "name",                "sex"
+ "Esen",                "Male"
+ "Kho Orluk",           "Male"
+ "Ayuka",               "Male"
+ "Ubashi",              "Male"
+ "Menko Bormanzhinov",  "Male"
+ "Oka Gorodovikov",     "Male"
+ "Kirsan Ilyumzhinov",  "Male"
+}
+
+ruler_titles = {
+ "government",       "male_title",     "female_title"
+ "Despotism",        _("%s Khan"),     _("%s Khatan")
+ "Fundamentalism",   _("Lama %s"),     _("?female:Lama %s")
+}
+
+flag="kalmykia"
+flag_alt = "-"
+city_style = "Asian"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="mongol", "russian", "tibetan", "buryat"
+
+cities =
+ "Elst",
+ "Lagan",
+ "Bašnta",
+ "Bulğn selän",
+ "Ik Buurl",
+ "Kötšnr",
+ "Oktyabrin",
+ "Priyutnin",
+ "Sarpin",
+ "Tselinnin",
+ "Har Ğazrin",
+ "Yustan",
+ "Yašlt",
+ "Yaškul",
+ "Bağ Dörvd",
+ "Aršan",
+ "Ik Tsarŋ",
+ "Jaškul",
+ "Komsomolsk",
+ "Tsağan Amn",
+ "Priyutn",
+ "Sadovoje",
+ "Ulan Hol",
+ "Mogata",
+ "Hargata",
+ "Šeret",
+ "Kek Usn",
+ "Artezian",
+ "Sultan",
+ "Svetly Erek",
+ "Naryn Huduk",
+ "Šin Teg",
+ "Haltryn Bor",
+ "Adyk",
+ "Sarul",
+ "Atsan Huduk",
+ "Hulhuta",
+ "Teegin Gerl",
+ "Rassvet",
+ "Dolan",
+ "Harba",
+ "Tatal",
+ "Sarpa",
+ "Honč Nur",
+ "Šaridžin",
+ "Hanata",
+ "Zurgan",
+ "Šarnut",
+ "Dogzmakin"

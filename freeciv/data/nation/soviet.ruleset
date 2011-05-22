@@ -10,61 +10,103 @@ legend=_("The history of the Soviet Union starts in November 1917,\
  the 20th century, but by the end of 1991 it had disintegrated\
  into fifteen independent countries due to social and economic\
  problems.")
-leader=
- "Vladimir Lenin",
- "Iosif Stalin",
- "Nikita Khruschov",
- "Leonid Brezhnev",
- "Yuriy Andropov",
- "Nadezhda Krupskaya",
- "Alexandra Kollontai"
-leader_sex="Male", "Male", "Male", "Male", "Male", "Female", "Female"
+
+leaders = {
+ "name",                "sex"
+ "Vladimir Lenin",      "Male"
+ "Iosif Stalin",        "Male"
+ "Nikita Khruschov",    "Male"
+ "Leonid Brezhnev",     "Male"
+ "Yuriy Andropov",      "Male"
+ "Nadezhda Krupskaya",  "Female"
+ "Alexandra Kollontai", "Female"
+}
+
+ruler_titles = {
+ "government",  "male_title",                "female_title"
+ "Anarchy",     _("Enemy of the People %s"), _("?female:Enemy of the People %s")
+ "Communism",   _("General Secretary %s"),   _("?female:General Secretary %s")
+ "Despotism",   _("Commissar %s"),           _("?female:Commissar %s")
+ "Monarchy",    _("Great Leader %s"),        _("?female:Great Leader %s")
+}
+
 flag="soviet"
 flag_alt = "-"
 city_style = "European"
-
-ruler_titles = { "government",    "male_title",       "female_title",
-                 "Republic",      _("Comrade"),       _("?female:Comrade")
-          "Communism", _("General Secretary"), _("?female:General Secretary")
-		 "Monarchy",      _("Great Leader"),_("?female:Great Leader")
-               }
 
 init_techs=""
 init_buildings=""
 init_government="Despotism"
 init_units=""
 
-conflicts_with = "russian", "ukrainian", "belarusian",
- "Lithuanian", "latvian", "estonian",
- "moldovan", "georgian", "armenian", "azeri",
- "kazakh", "kyrgyz", "tajik", "turkmen", "uzbek"
-civilwar_nations = "russian", "ukrainian", "belarusian",
- "Lithuanian", "latvian", "estonian",
- "moldovan", "georgian", "armenian", "azeri",
- "kazakh", "kyrgyz", "tajik", "turkmen", "uzbek"
+conflicts_with = "Russian", "Moldovan", "Kazakh", "Kyrgyz", "Tajik",
+ "Turkmen", "Uzbek"
+civilwar_nations = "Russian", "Ukrainian", "Belarusian",
+ "Lithuanian", "Latvian", "Estonian",
+ "Moldovan", "Georgian", "Armenian", "Azeri",
+ "Kazakh", "Kyrgyz", "Tajik", "Turkmen", "Uzbek"
 
 cities =
+ "Moskva",
  "Leningrad",
- "Stalingrad",
+ "Tashkent",
+ "Kiev",
+ "Baku",
  "Gorky",
- "Sverdlovsk",
+ "Minsk",
+ "Stalino",
+ "Kharkov",
+ "Novosibirsk",
+ "Stalingrad",
+ "Alma-Ata",
  "Kuybyshev",
- "Kalinin",
- "Ulyanovsk",
- "Kirov",
- "Frunze",
+ "Dnepropetrovsk",
+ "Yerevan",
+ "Rostov-na-Donu",
+ "Tbilisi",
+ "Sverdlovsk",
+ "Chelyabinsk",
+ "Omsk",
+ "Odessa",
+ "Kazan",
+ "Saratov",
+ "Ufa",
+ "Krasnoyarsk",
+ "Stalinabad",
  "Molotov",
+ "Voronezh",
+ "Ashkhabad",
+ "Frunze",
+ "Krasnodar",
+ "Stalinsk",
+ "Riga",
+ "Zaporozhye",
+ "Lvov",
+ "Krivoy Rog",
+ "Barnaul",
+ "Tolyatti",
+ "Kishinyov",
+ "Vladivostok",
+ "Namangan",
+ "Ulyanovsk",
+ "Tomsk",
+ "Kramatorsk",
+ "Tula",
+ "Vilnyus",
+ "Kalinin",
+ "Tallin",
+ "Kirov",
+ "Samarkand",
+ "Petrozavodsk",
  "Chkalov",
  "Komsomolsk-na-Amure",
  "Voroshilovgrad",
  "Leninakan",
  "Kirovabad",
- "Stalinabad",
  "Leninsk-Kuznetsky",
  "Dzerzhinsk",
  "Ivano-Frankovsk",
  "Engels",
- "Stalino",
  "Kotovsk",
  "Ordzhonikidze",
  "Ustinov",

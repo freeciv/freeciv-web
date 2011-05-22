@@ -1,0 +1,73 @@
+[nation_muscovite]
+
+name=_("Muscovite")
+plural=_("?plural:Muscovites")
+groups="Medieval", "European"
+legend=_("Moscow emerged as a regional power and successor to the Kievan\
+ Rus' in the 12th century AD. Under the Rurikid dynasty, the Muscovites\
+ consolidated power through alliances with the Golden Horde and the\
+ Orthodox Church, eventually subduing surrounding cities and principalities\
+ including the Novgorod Republic.")
+
+leaders = {
+ "name",                        "sex"
+ "Ivan IV Vasilyevich",         "Male"
+ "Ivan III Vasilyevich",        "Male"
+ "Dmitry Ivanovich Donskoy",    "Male"
+ "Ivan I Danilovich Kalita",    "Male"
+ "Daniil Aleksandrovich",       "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Despotism",       _("Duke %s"),      _("Duchess %s")
+ "Monarchy",        _("Tsar %s"),      _("Tsaritsa %s")
+ "Fundamentalism",  _("Patriarch %s"), _("Matriarch %s")
+}
+
+flag="moscow"
+flag_alt="russia"
+city_style="European"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+conflicts_with="Russian", "Soviet" ; states based in Moscow
+civilwar_nations="Ruthenian" ;, "Novgorodian"
+
+cities =
+ "Moskva",
+ "Pereyaslavl",
+ "Vladimir",
+ "Suzdal",
+ "Starodub",
+ "Yuryev",
+ "Dmitrov",
+ "Kostroma",
+ "Galich",
+ "Beloozero",
+ "Uglich",
+ "Tarusa",
+ "Bezhichi",
+ "Rzhev",
+ "Ustyug",
+ "Murom",
+ "Novgorod",
+ "Gorodets Meschersky",
+ "Rostov",
+ "Yaroslavl",
+ "Tver",
+ "Torzhok",
+ "Kolomna",
+ "Mozhaysk",
+ "Pskov",
+ "Dubna",
+ "Smolensk",
+ "Radonezh",
+ "Vologda",
+ "Ustyug",
+ "Cherdyn",
+ "Nizhny Novgorod",
+ "Zvenigorod"

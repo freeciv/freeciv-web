@@ -5,24 +5,26 @@ plural = _("?plural:Malaysians")
 groups = "Modern", "Asian"
 legend = _("Malaysia was started with the founding of Malacca (Melaka) by\
  Parameswara in the early 14th century.")
-leader =
- "Parameswara",
- "Mansur",
- "Perak",
- "Hang Tuah",
- "Abdul Rahman",
- "Abdul Razak"
 
-leader_sex = "Male", "Male", "Male", "Male", "Male", "Male"
+leaders = {
+ "name",                "sex"
+ "Parameswara",         "Male"
+ "Mansur",              "Male"
+ "Perak",               "Male"
+ "Hang Tuah",           "Male"
+ "Abdul Rahman",        "Male"
+ "Abdul Razak",         "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",            "female_title"
+ "Fundamentalism",  _("Mullah %s"),          _("?female:Mullah %s")
+ "Monarchy",        _("Paramount Ruler %s"), _("?female:Paramount Ruler %s")
+}
+
 flag = "malaysia"
 flag_alt = "-"
 city_style = "Tropical"
-
-ruler_titles = { "government",      "male_title",      "female_title"
-                 "Monarchy",        _("Sultan"),       _("Sultana")
-                 "Republic",        _("Tun"),          _("Tun")
-                 "Democracy",_("Prime Minister"), _("?female:Prime Minister")
-               }
 
 init_techs = ""
 init_buildings = ""

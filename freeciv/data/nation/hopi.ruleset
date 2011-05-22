@@ -8,32 +8,36 @@ legend=_("A matrilineal culture in North America, who claim descent from the\
  Hisatsinom. The Hopi live today on the Hopi Reservation in northeastern\
  Arizona.")
 
-leader=
- "Waki",
- "Sunki",
- "Tiponi",
- "Tuba",
- "Alo",
- "Cha'akmongwi",
- "Cheveyo",
- "Wikvaya"
+leaders = {
+ "name",                "sex"
+ "Waki",                "Female"
+ "Sunki",               "Female"
+ "Tiponi",              "Female"
+ "Tuba",                "Male"
+ "Alo",                 "Male"
+ "Cha'akmongwi",        "Male"
+ "Cheveyo",             "Male"
+ "Wikvaya",             "Male"
+}
 
-leader_sex = "Female", "Female", "Female", "Male", "Male", "Male", "Male",
- "Male"
+ruler_titles = {
+ "government",      "male_title",            "female_title"
+ "Democracy",       _("Principal Chief %s"), _("?female:Principal Chief %s")
+ "Fundamentalism",  _("Shaman %s"),          _("?female:Shaman %s")
+ "Monarchy",        _("Great Chief %s"),     _("?female:Great Chief %s")
+ "Republic",        _("Spokesman %s"),       _("Spokeswoman %s")
+}
 
 flag         = "hopi"
 flag_alt     = "-"
 city_style   = "Babylonian"
-ruler_titles = { "government",      "male_title",        "female_title"
-                 "Despotism",      _("Kikmongwi"),       _("Kikmongwi")
-               }
 
 init_techs=""
 init_buildings=""
 init_government="Despotism"
 init_units=""
 
-civilwar_nations = "P'urhepecha", "sioux"
+civilwar_nations = "raramuri", "sioux"
 
 cities =
  "Orayvi",

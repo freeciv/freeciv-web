@@ -1,0 +1,110 @@
+[nation_genoese]
+
+name=_("Genoese")
+plural=_("?plural:Genoese")
+groups="Medieval", "Early Modern", "European"
+legend=_("The Most Serene Republic of Genoa (Italian: Repubblica di Genova)\
+ was an independent state in Liguria on the northwestern Italian coast from\
+ the 11th century to 1797, when it was invaded by armies of Revolutionary\
+ France under Napoleon. It was then succeeded by the Ligurian Republic, which\
+ existed until 1805 before being annexed by the French Empire. Although its\
+ restoration was briefly proclaimed in 1814, following the defeat of Napoleon,\
+ this was short-lived, and the Republic was ultimately annexed by the Kingdom\
+ of Sardinia.")
+
+leaders= {
+ "name",                        	"sex"
+ "Simone Boccanegra",			"male"
+ "Giovanni da Murta",			"male"
+ "Giovanni Valente",			"male"
+ "Gabriele Adorno",			"male"
+ "Antoniotto Adorno",			"male"
+ "Nicolò Guarco",			"male"
+ "Antoniotto di Montaldo",		"male"
+ "Tommaso di Campofregoso",		"male"
+ "Oberto Cattaneo Lazzari",		"male"
+ "Battista Spinola",			"male"
+ "Battista Lomellini",			"male"
+ "Cristoforo Rosso Grimaldi",		"male"
+ "Giovanni Battista Doria",		"male"
+ "Giannandrea Lungo Giustiniani",	"male"
+ "Leonardo Cattaneo della Volta",	"male"
+ "Andrea Centurione Pietrasanta",	"male"
+ "Giovanni Battista De Fornari",	"male"
+ "Benedetto Gentile Pevere",		"male"
+ "Gaspare Grimaldi Bracelli",		"male"
+ "Giorgio Centurione",			"male"
+ "Giovanni Battista Cattaneo",		"male"
+ "Luca Grimaldi",			"male"
+ "Francesco Maria Della Rovere",	"male"
+ "Pier Franco Grimaldi",		"male"
+ "Giacomo Maria Brignole",		"male"
+}
+
+flag="liguria"
+flag_alt = "-"
+city_style = "European"
+
+ruler_titles = { "government",       "male_title",	  "female_title"
+ 		 "Despotism",      _("Condottiere %s"), _("Condottiera %s")
+ 		 "Fundamentalism", _("Archbishop %s"),  _("Mother Superior %s")
+ 		 "Republic",       _("Doge %s"),        _("Dogaressa %s")
+               }
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations = "monegasque", "corsican"
+
+cities =
+ "Genova",	
+ "La Spezia", 	
+ "Savona", 	
+ "Imperia", 	
+ "Sanremo", 	
+ "Ventimiglia", 	
+ "Chiavari", 		
+ "Sarzana", 	
+ "Rapallo", 	
+ "Albenga", 	
+ "Finale Ligure", 	
+ "Cairo Montenotte",
+ "Sebastopoli",
+ "Caffa",
+ "Tabarca",
+ "Tana",
+ "Cembalo",
+ "Galata", 
+ "Ajaccio",
+ "Bastia", 
+ "Porto Vecchio", 
+ "Borgo",
+ "Corte", 
+ "Calvi", 
+ "Vescovato", 
+ "Isola Rossa", 
+ "Penta di Casinca", 
+ "Sartène", 
+ "Propriano", 
+ "Prunelli di Fiumorbo", 
+ "Albera Ligure", 
+ "Cabella Ligure", 
+ "Cantalupo Ligure", 
+ "Carrega Ligure", 
+ "Mongiardino Ligure", 
+ "Roccaforte Ligure", 
+ "Rocchetta Ligure",  
+ "Parodi Ligure", 
+ "Sestri Levante",
+ "Lavagna",
+ "Arenzano",
+ "Rondanina",
+ "Lerici",
+ "Arcola",
+ "Ortonovo",
+ "Santo Stefano di Magra",
+ "Castelnuovo Magra",
+ "Bolano",
+ "Vezzano Ligure",
+ "Follo"

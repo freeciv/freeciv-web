@@ -1,0 +1,67 @@
+[nation_khmer]
+
+name=_("Khmer")
+plural=_("?plural:Khmers")
+groups="Asian", "Medieval"
+legend=_("The Khmer Empire, established in 802 AD, dominated Southeast\
+ Asia for many centuries during the Middle Ages. Heavily influenced by\
+ Indian culture, the Khmers were great builders who erected innumerable\
+ stone temples to Hindu dieties. The Khmers today are the majority\
+ ethnicity of Cambodia.")
+
+leaders = {
+ "name",                "sex"
+ "Jayavarman VII",      "Male"
+ "Suryavarman II",      "Male"
+ "Suryavarman I",       "Male"
+ "Jayavarman II",       "Male"
+ "Jayavedi",            "Female"
+ "Ishanavarman",        "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",        "female_title"
+ "Despotism",       _("Raja %s"),        _("Rani %s")
+ "Monarchy",        _("Maharaja %s"),    _("Maharani %s")
+ "Communism",       _("Brother %s"),     _("Sister %s")
+}
+
+flag="khmer"
+flag_alt = "-"
+city_style = "Asian"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+conflicts_with="Cambodian"
+civilwar_nations="Mon", "Cham"
+
+cities =
+ "Shreshthapura",
+ "Ishanapura",
+ "Indrapura",
+ "Hariharalaya",
+ "Yasodharapura",
+ "Mahendraparvata",
+ "Vyadhapura",
+ "Koh Ker",
+ "Jayenanagari",
+ "Angkor Thom",
+ "Kompong Svay",
+ "Vat Nokor",
+ "Bati",
+ "Phnom Chisor",
+ "Beng Melea",
+ "Vat Banon",
+ "Banteay Chmar",
+ "Muang Tam",
+ "Preah Vihear",
+ "Vat Phu",
+ "Sikhoraphum",
+ "Phimai",
+ "Roy Et",
+ "Prasat Kamphaeng Yai",
+ "Phra Phang Sam Yod",
+ "Muang Sing"

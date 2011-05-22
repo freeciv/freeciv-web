@@ -2430,11 +2430,11 @@ Load nations.ruleset file
 **************************************************************************/
 static void load_ruleset_nations(struct section_file *file)
 {
-  char *bad_leader, *govern;
+  char *govern;
   struct government *gov;
-  int dim, i, i2, j, k, nval, numgroups;
+  int dim, i, j, k, nval, numgroups;
   char temp_name[MAX_LEN_NAME];
-  char **leaders, **sec, **civilwar_nations, **groups, **conflicts;
+  char **sec, **civilwar_nations, **groups, **conflicts;
   char* name;
   int barb_land_count = 0;
   int barb_sea_count = 0;
@@ -2485,72 +2485,60 @@ static void load_ruleset_nations(struct section_file *file)
     pl->conflicts_with[j] = NO_NATION_SELECTED; /* extra at end of list */
     free(conflicts);
 
-    /* nation leaders */
 
-    leaders = secfile_lookup_str_vec(file, &dim, "%s.leader", sec[i]);
-    if (dim > MAX_NUM_LEADERS) {
-      freelog(LOG_ERROR, "Nation %s: Too many leaders; using %d of %d",
-	      nation_rule_name(pl),
-	      MAX_NUM_LEADERS,
-	      dim);
-      dim = MAX_NUM_LEADERS;
-    } else if (dim < 1) {
-      ruleset_error(LOG_FATAL,
-                    "Nation %s: number of leaders is %d; at least one is required.",
-                    nation_rule_name(pl),
-                    dim);
+    /* Nation leaders (backported from Freeciv 2.3.x). */
+    for (j = 0; j < MAX_NUM_LEADERS; j++) {
+
+      name = secfile_lookup_str(file, "%s.leaders%d.name", sec[i], j);
+      if (NULL == name) {
+        pl->leader_count = j;
+        pl->leaders = fc_calloc(j, sizeof(*(pl->leaders)));
+
+        break;
+      }
     }
-    pl->leader_count = dim;
-    pl->leaders = fc_calloc(dim /*exact*/, sizeof(*(pl->leaders)));
 
-    for(j = 0; j < dim; j++) {
-      pl->leaders[j].name = mystrdup(leaders[j]);
-      if (check_name(leaders[j])) {
+    for (j = 0; j < MAX_NUM_LEADERS; j++) {
+      const char *sex;
+      bool is_male = FALSE;
+
+      name = secfile_lookup_str(file, "%s.leaders%d.name", sec[i], j);
+      if (NULL == name) {
+        /* No more to read. */
+        break;
+      }
+
+      if (check_name(name)) {
+        /* The ruleset contains a name that is too long. This shouldn't
+         * happen - if it does, the author should get immediate feedback */
+        sz_strlcpy(temp_name, name);
+        /*ruleset_error(LOG_ERROR, "Nation %s: leader name \"%s\" "
+                      "is too long; shortening it to \"%s\".",
+                      nation_rule_name(pnation), name, temp_name);*/
+        name = temp_name;
+      }
+
+      sex = secfile_lookup_str(file, "%s.leaders%d.sex", sec[i], j);
+      if (NULL == sex) {
+        /*ruleset_error(LOG_FATAL, "Nation %s: leader \"%s\": %s.",
+                      nation_rule_name(pnation), name, secfile_error());*/
+      } else if (0 == mystrcasecmp("Male", sex)) {
+        is_male = TRUE;
+      } else if (0 != mystrcasecmp("Female", sex)) {
+        /*ruleset_error(LOG_FATAL, "Nation %s: leader \"%s\" has unsupported "
+                      "sex variant \"%s\".",
+                      nation_rule_name(pnation), name, sex);*/
+      }
+
+      pl->leaders[j].name = mystrdup(name);
+      if (check_name(name)) {
 	pl->leaders[j].name[MAX_LEN_NAME - 1] = '\0';
       }
-    }
-    free(leaders);
+      pl->leaders[j].is_male = is_male;
 
-    /* check if leader name is not already defined */
-    if ((bad_leader = check_leader_names(i, &i2))) {
-        if (i == i2) {
-          ruleset_error(LOG_FATAL,
-                        "Nation %s: leader \"%s\" defined more than once.",
-                        nation_rule_name(pl),
-                        bad_leader);
-        } else {
-          ruleset_error(LOG_FATAL,
-                        "Nations %s and %s share the same leader \"%s\".",
-                        nation_rule_name(pl),
-                        nation_rule_name(nation_by_number(i2)),
-                        bad_leader);
-        }
+      //(void) nation_leader_new(pnation, name, is_male);
     }
-    /* read leaders'sexes */
-    leaders = secfile_lookup_str_vec(file, &dim, "%s.leader_sex", sec[i]);
-    if (dim != pl->leader_count) {
-      ruleset_error(LOG_FATAL,
-                    "Nation %s: the leader sex count (%d) "
-                    "is not equal to the number of leaders (%d)",
-                    nation_rule_name(pl),
-                    dim,
-                    pl->leader_count);
-    }
-    for (j = 0; j < dim; j++) {
-      if (0 == mystrcasecmp(leaders[j], "Male")) {
-        pl->leaders[j].is_male = TRUE;
-      } else if (0 == mystrcasecmp(leaders[j], "Female")) {
-        pl->leaders[j].is_male = FALSE;
-      } else {
-        freelog(LOG_ERROR,
-		"Nation %s, leader %s: sex must be either Male or Female; "
-		"assuming Male",
-		nation_rule_name(pl),
-		pl->leaders[j].name);
-	pl->leaders[j].is_male = TRUE;
-      }
-    }
-    free(leaders);
+
     
     pl->is_available = secfile_lookup_bool_default(file, TRUE,
                                                    "%s.is_available", sec[i]);

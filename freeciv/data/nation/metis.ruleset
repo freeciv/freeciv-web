@@ -1,0 +1,67 @@
+[nation_metis]
+
+name=_("Metis")
+plural=_("?plural:Metis")
+groups="American"
+; /* TRANS: The second letter in "Metis" should be */
+; /* TRANS: U+00E9 LATIN SMALL LETTER E WITH ACUTE if available in */
+; /* TRANS: your charset. In ISO-8859-1 (ISO Latin 1) this is 233. */
+legend=_("The Metis are a people of mixed First Nations (Native American)\
+ and European (mostly French) descendance living mainly in the Canadian\
+ prairie provinces. Together with the First Nations and the Inuit they\
+ form one of the three indigenous groups of Canada. In the 19th century\
+ the Metis repeatedly rebelled against the British and Canadian\
+ authorities.")
+
+leaders = {
+ "name",                        "sex"
+ "Toussaint Charbonneau",       "Male"
+ "Gabriel Dumont",              "Male"
+ "Louis Riel",                  "Male"
+ "James P. Brady",              "Male"
+ "Blanche Brillon Macdonald",   "Female"
+}
+
+flag="metis"
+flag_alt="-"
+city_style="Celtic"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="quebecois", "cree", "acadian"
+
+cities =
+ "Batoche",
+ "Sault Ste. Marie",
+ "Prince Albert",
+ "Assiniboia",
+ "Battleford",
+ "Fish Creek",
+ "Cut Knife",
+ "Frenchman's Butte",
+ "Duck Lake",
+ "Loon Lake",
+ "Frog Lake",
+ "Fort Garry",
+ "Lower Fort Garry",
+ "Buffalo Lake",
+ "Kikino",
+ "Paddle",
+ "Gift Lake",
+ "Fishing Lake",
+ "East Prairie",
+ "Peavine",
+ "Elizabeth",
+ "Fort Carlton",
+ "Fort Pitt",
+ "Selkirk",
+ "Sputinow",
+ "Pembina",
+ "Portage la Prairie",
+ "Seven Oaks",
+ "Fort Frances"
+
+

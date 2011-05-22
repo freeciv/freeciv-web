@@ -1,0 +1,68 @@
+[nation_miao]
+
+name=_("Miao")
+plural=_("?plural:Miao")
+groups="Asian", "Ancient"
+legend=_("According to Chinese legend, the Yellow Emperor of Huaxia\
+ battled and defeated Chi You, leader of the Nine Li tribe, at the Battle\
+ of Zhuolu in the 26th century BC. For the Miao people of modern-day China,\
+ Chi You - whom they refer to as \"Txiv Yawg\" - is a mythical king and\
+ founding father of their nation. Most Miao live in southern China, but\
+ there is a significant disapora in southeast Asian countries as well as\
+ Europe and North America, of which many belong to the \"Hmong\"\
+ sub-group.")
+
+leaders = {
+ "name",                "sex"
+ "Haam Choj",           "Male"
+ "Touby Lyfoung",       "Male"
+ "Paj Cai Vwj",         "Male"
+ "Vaj Tsoov Loom",      "Male"
+ "Qin Liangyu",         "Female"
+ "Txiv Yawg",           "Male"
+}
+
+flag="hainan"
+flag_alt="-"
+city_style="Asian"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations = "Chinese", "Vietnamese", "Thai", "Laotian"
+
+cities =
+; Mountains with Miao population
+ "Wuling (mountains)",
+ "Miao (mountains)",
+ "Yueliang (mountains)",
+ "Ma (mountains)",
+ "Da Miao (mountains)",
+ "Wumeng (mountains)",
+
+; Miao autonomous counties
+ "Mayang",
+ "Jingzhou",
+ "Chengbu",
+ "Songtao",
+ "Yingjiang",
+ "Wuchuan",
+ "Daozhen",
+ "Zhenning",
+ "Ziyun",
+ "Guanling",
+ "Weining",
+ "Pingbian",
+ "Jinping",
+ "Luquan",
+ "Xiushan",
+ "Youyang",
+ "Qianjiang",
+ "Pengshui",
+ "Rongshui",
+ "Longsheng",
+ "Longlin",
+ "Qiong",
+ "Baoting"

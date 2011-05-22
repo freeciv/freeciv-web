@@ -2,7 +2,7 @@
 
 name=_("Iroquois")
 plural=_("?plural:Iroquois")
-groups="Medieval", "American"
+groups="Medieval", "Early Modern", "American"
 legend=_("The Iroquois Confederacy - known as Haudenosaunee in their own\
  language - was a North American group of nations with common language and\
  culture. They were based in what is now upstate New York and consisted\
@@ -10,23 +10,27 @@ legend=_("The Iroquois Confederacy - known as Haudenosaunee in their own\
  The confederacy had a written constitution and a currency system making\
  them the most advanced state in North America upon the arrival of the\
  Europeans.")
-leader=
- "Deganawidah",		; a.k.a. The Great Peacemaker
- "Hiawatha",
- "Thayendanegea",	; a.k.a. Joseph Brant
- "Kaintwakon",		; a.k.a. Cornplanter
- "Kateri Tekakwitha",	; The first canonized Amerindian
- "Guyasuta"
-leader_sex="Male", "Male", "Male", "Male", "Female", "Male"
+
+leaders = {
+ "name",                "sex"
+ "Deganawidah",         "Male" ; a.k.a. The Great Peacemaker.
+ "Hiawatha",            "Male"
+ "Thayendanegea",       "Male" ; a.k.a. Joseph Brant.
+ "Kaintwakon",          "Male" ; a.k.a. Cornplanter.
+ "Kateri Tekakwitha",   "Female" ; The first canonized Amerindian.
+ "Guyasuta",            "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",            "female_title"
+ "Monarchy",        _("Great Chief %s"),     _("?female:Great Chief %s")
+ "Republic",        _("Spokesman %s"),       _("Spokeswoman %s")
+ "Democracy",       _("Principal Chief %s"), _("?female:Principal Chief %s")
+}
+
 flag="iroquois"
 flag_alt = "-"
 city_style = "Celtic"
-
-ruler_titles = { "government",      "male_title",      "female_title"
-                 "Despotism",       _("Chief"),        _("?female:Chief")
-		 "Monarchy", 	    _("Great Chief"),_("?female:Great Chief")
-		 "Republic", 	    _("Spokesman"),    _("Spokeswoman")
-               }
 
 init_techs=""
 init_buildings=""

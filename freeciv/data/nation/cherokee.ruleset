@@ -5,25 +5,28 @@ plural=_("?plural:Cherokees")
 groups="American"
 legend=_("The Cherokee nation is the largest Native American\
  nation in North America today.")
-leader=
- "Takatoka",
- "Tahlonteskee",
- "Atakullakulla",
- "Sequoyah",
- "Moytoy",
- "John Ross",
- "Wilma Mankiller"
-leader_sex="Male", "Male", "Male", "Male", "Male", "Male", "Female"
+
+leaders = {
+ "name",                "sex"
+ "Takatoka",            "Male"
+ "Tahlonteskee",        "Male"
+ "Atakullakulla",       "Male"
+ "Sequoyah",            "Male"
+ "Moytoy",              "Male"
+ "John Ross",           "Male"
+ "Wilma Mankiller",     "Female"
+}
+
+ruler_titles = {
+ "government",      "male_title",            "female_title"
+ "Monarchy",        _("Great Chief %s"),     _("?female:Great Chief %s")
+ "Republic",        _("Spokesman %s"),       _("Spokeswoman %s")
+ "Democracy",       _("Principal Chief %s"), _("?female:Principal Chief %s")
+}
+
 flag= "keetoowah"
 flag_alt = "-"
 city_style = "Celtic"
-
-ruler_titles = { "government",      "male_title",      "female_title"
-                 "Despotism",       _("Chief"),        _("?female:Chief")
-                 "Monarchy",        _("Great Chief"),_("?female:Great Chief")
-                 "Republic",        _("Spokesman"),    _("Spokeswoman")
-                "Democracy",_("Principal Chief"),_("?female:Principal Chief")
-               }
 
 init_techs=""
 init_buildings=""

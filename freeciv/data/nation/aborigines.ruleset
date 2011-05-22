@@ -3,20 +3,31 @@
 name=_("Australian Aboriginal")
 plural=_("?plural:Aborigines")
 groups="Oceanian"
+
 legend=_("Australian Aborigines is a collective term for the original\
  inhabitants of the Australian continent. Aborigines from different parts of\
  Australia refer to themselves with different names, including Koori,\
  Yamaji, Nunga, and Murri.")
-leader=
- "Yagan",
- "Neville Bonner",
- "Beruk",		; Also known as William Barak
- "Gatjil Djerrkura",
- "Pearl Gibbs"
-leader_sex="Male", "Male", "Male", "Male", "Female"
+
+leaders = {
+ "name",                "sex"
+ "Yagan",               "Male"
+ "Neville Bonner",      "Male"
+ "Beruk",               "Male" ; Also known as William Barak
+ "Gatjil Djerrkura",    "Male"
+ "Pearl Gibbs",         "Female"
+}
+
 flag="aborigines"
 flag_alt = "-"
 city_style = "Tropical"
+
+ruler_titles = {
+ "government",      "male_title",         "female_title"
+ "Democracy",      _("Principal Chief %s"),  _("?female:Principal Chief %s")
+ "Fundamentalism", _("Elder %s"),            _("?female:Elder %s")
+ "Monarchy",       _("Great Chief %s"),      _("?female:Great Chief %s")
+}
 
 init_techs=""
 init_buildings=""

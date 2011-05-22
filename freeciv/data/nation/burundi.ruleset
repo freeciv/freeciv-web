@@ -1,32 +1,29 @@
 [nation_burundi]
 
-name=_("Burundi")
-plural=_("?plural:Burundi")
-groups="African", "Medieval", "Modern"
+name=_("Burundian")
+plural=_("?plural:Burundians")
+groups="African", "Medieval", "Early Modern", "Modern"
 
-legend=_("Lasting from 16th century, through European colonial\
- administration, until finally overthrown in 1966, the Kingdom of Burundi\
- was an East African state in which the King and aristocracy extracted taxes\
- from the nation's peasantry. The last King, Ntare V Ndizeye, was killed in\
- 1972 in a bid to restore the monarchy.")
+legend=_("A monarchy emerged in the Great Lakes region of East Africa in\
+ the 1100s, ruled by a Mwami (king) and several Ganwa (princes). It went\
+ through a period of expansion until the 1600s when it encompassed\
+ approximately the area of modern-day Burundi. In the late 1700s and early\
+ 1800s a succession dispute weakened the monarchy, and by the end of the\
+ century it had become a German colony. In the aftermath of World War I\
+ the colony fell to Belgium. Following international pressure after World\
+ War II, Burundi became an independent nation in January 1962.")
 
-leader=
- "Mwezi I",
- "Ntare IV Rutaganzwa Rugamba",
- "Mutaga II",
- "Mwambutsa III Mbariza",
- "Ntare V Ndizeye",
- "Inamabuye",
- "Rugari",
- "Kayagge"
-
-leader_sex = "Male", "Male", "Male", "Male", "Male", "Female", "Female",
- "Female"
-
-ruler_titles = { "government",      "male_title",        "female_title"
-		 ; /* TRANS: Mwami/Mwamikazi = King/Queen */
-                 "Monarchy",        _("Mwami"),          _("Mwamikazi")
-               }
+leaders = {
+ "name",                        "sex"
+ "Mwezi I",                     "Male"
+ "Ntare IV Rutaganzwa Rugamba", "Male"
+ "Mutaga II",                   "Male"
+ "Mwambutsa III Mbariza",       "Male"
+ "Ntare V Ndizeye",             "Male"
+ "Inamabuye",                   "Female"
+ "Rugari",                      "Female"
+ "Kayagge",                     "Female"
+}
 
 flag         = "burundi"
 flag_alt     = "-"

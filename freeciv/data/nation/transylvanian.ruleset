@@ -1,0 +1,90 @@
+[nation_transylvanian]
+
+name=_("Transylvanian")
+plural=_("?plural:Transylvanians")
+groups="Early Modern", "European"
+legend=_("Transylvania is a historical territory in what is now Romania,\
+ inhabited by Romanians, Hungarians and Saxon Germans. Transylvania became\
+ a principality under nominal Hungarian suzereignty when that country\
+ started to crumble under the Ottoman incursions. During the Reformation,\
+ Transylvania was the first country in Europe to proclaim religious\
+ freedom. The principality lost its independence to Habsburg Austria in\
+ 1711.")
+
+leaders = {
+ "name",                "sex"
+ "János Szapolyai",     "Male"
+ "Hunyadi János",       "Male"
+ "Bethlen Gábor",       "Male"
+ "Rákóczi György",      "Male"
+ "Báthory Erzsébet",    "Female"
+ "Rákóczi Ferenc",      "Male"
+ "Bem József",          "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",         "female_title"
+ "Despotism",       _("Prince %s"),       _("Princess %s")
+ "Fundamentalism",  _("Bishop %s"),       _("?female:Bishop %s")
+ "Monarchy",        _("Grand Prince %s"), _("Grand Princess %s")
+}
+
+flag="transylvania"
+flag_alt = "-"
+city_style = "European"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations = "romanian", "hungarian", "vampire"
+
+cities =
+ "Gyulafehérvár", ;Alba Iulia
+ "Nagyszeben", ;Sibiu
+ "Kolozsvár", ;Cluj-Napoca
+ "Brassó", ;Braşov
+ "Temesvár", ;Timişoara
+ "Marosvásárhely", ;Târgu Mureş
+ "Nagyvárad", ;Oradea
+ "Beszterce", ;Bistriţa
+ "Arad", ;Arad
+ "Vajdahunyad", ;Hunedoara
+ "Nagybánya", ;Baia Mare
+ "Déva", ;Deva
+ "Szatmárnémeti", ;Satu Mare
+ "Sepsiszentgyörgy", ;Sfântu Gheorghe
+ "Resicabánya", ;Reşiţa
+ "Kézdivásárhely", ;Târgu Secuiesc
+ "Zilah", ;Zalău
+ "Torda", ;Turda
+ "Lugos", ;Lugoj
+ "Medgyes", ;Mediaş
+ "Csíkszereda", ;Miercurea Ciuc
+ "Máramarossziget", ;Sighetu Marmaţiei
+ "Dés", ;Dej
+ "Székelyudvarhely", ;Odorheiu Secuiesc
+ "Nagyenyed", ;Aiud
+ "Balázsfalva", ;Blaj
+ "Szászsebes", ;Sebeş
+ "Belényes", ;Beiuş
+ "Margitta", ;Marghita
+ "Nagyszalonta", ;Salonta
+ "Feketehalom", ;Codlea
+ "Fogaras", ;Făgăraş
+ "Négyfalu", ;Săcele
+ "Aranyosgyéres", ;Câmpia Turzii
+ "Szamosújvár", ;Gherla
+ "Karánsebes", ;Caransebeş
+ "Gyergyószentmiklós", ;Gheorgheni
+ "Maroshévíz", ;Topliţa
+ "Brád", ;Brad
+ "Lupény", ;Lupeni
+ "Szászváros", ;Orăştie
+ "Petrozsény", ;Petroşani
+ "Vulkán", ;Vulcan
+ "Szászrégen", ;Reghin
+ "Segesvár", ;Sighişoara
+ "Dicsõszentmárton", ;Târnăveni
+ "Nagykároly" ;Carei

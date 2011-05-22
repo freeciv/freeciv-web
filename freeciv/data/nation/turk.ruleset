@@ -2,32 +2,44 @@
 
 name=_("Turkish")
 plural=_("?plural:Turks")
-groups="Modern", "Asian"
+groups="Modern", "Asian", "European"
 legend=_("Modern Turkey is the successor state of the Ottoman Empire, which\
  collapsed and was dismembered by the victors in World War I after backing\
- the Central Powers.  The country was subsequently reformed and secularized\
+ the Central Powers. The country was subsequently reformed and secularized\
  by Kemal Mustapha, the hero of the defense of Gallipoli.")
-leader=
- "Kemal Atatürk",
- "İsmet İnönü",
- "Alparslan",
- "Enver Paşa",
- "Selçuk Bey",
- "Kılıçarslan"
-leader_sex="Male", "Male", "Male", "Male", "Male", "Male"
+
+leaders = {
+ "name",                "sex"
+ "Selçuk Bey",          "Male"
+ "Alp Arslan",          "Male"
+ "Kılıçarslan",         "Male"
+ "Osman I",             "Male"
+ "Fatih Mehmed",        "Male"
+ "Kanuni Süleyman",     "Male"
+ "İsmail Enver",        "Male"
+ "Kemal Atatürk",       "Male"
+ "İsmet İnönü",         "Male"
+ "Süleyman Demirel",    "Male"
+ "Tansu Çiller",        "Female"
+}
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Despotism",       _("%s Pasha"),     _("?female:%s Pasha")
+ "Monarchy",        _("Sultan %s"),    _("Sultana %s")
+ "Fundamentalism" , _("Caliph %s"),    _("Calipha %s")
+}
+
 flag="turkey"
 flag_alt = "-"
 city_style = "Classical"
-
-ruler_titles = { "government",      "male_title",      "female_title"
-                 "Monarchy",        _("Sultan"),       _("Sultana")
-               }
 
 init_techs=""
 init_buildings=""
 init_government="Despotism"
 init_units=""
-civilwar_nations="mongol", "uyghur"
+
+civilwar_nations="Tatar", "Azeri", "Turkish Cypriot", "Kurdish"
 
 cities =
  "Ankara (grassland, !mountains, plains, !ocean)",

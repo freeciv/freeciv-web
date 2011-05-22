@@ -6,22 +6,25 @@ groups="Medieval", "Modern", "African"
 legend=_("The Malagasy are the people of Madagascar. For centuries, tribes\
  from Indonesia, East Africa and the Arab world have gathered on the\
  island.")
-leader=
- "Radama I",
- "Ranavalona I",
- "Rasoherina",
- "Ranavalona II",
- "Rainilaiarivony",
- "Didier Ratsiraka"
-leader_sex="Male", "Female", "Female", "Female", "Male", "Male"
+
+leaders = {
+ "name",                "sex"
+ "Radama I",            "Male"
+ "Ranavalona I",        "Female"
+ "Rasoherina",          "Female"
+ "Ranavalona II",       "Female"
+ "Rainilaiarivony",     "Male"
+ "Didier Ratsiraka",    "Male"
+}
+
+ruler_titles = {
+ "government", "male_title",              "female_title"
+ "Republic",   _("High Commissioner %s"), _("?female:High Commissioner %s")
+}
+
 flag="madagascar"
 flag_alt = "-"
 city_style = "Tropical"
-
-ruler_titles = { "government",      "male_title",        "female_title"
-             "Republic",_("High Commissioner"),_("?female:High Commissioner")
-                 "Democracy",_("Prime Minister"), _("?female:Prime Minister")
-               }
 
 init_techs=""
 init_buildings=""

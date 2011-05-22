@@ -6,40 +6,41 @@ groups="Ancient", "Asian"
 legend=_("Sumer controlled southern Mesopotamia until the rise of\
  Babylonia. Tablets of Sumerian writing some 5500 years old have been\
  found, pre-dating every other writing in history.")
-leader=
- "Shulgi",
- "Gilgamesh",
- "Ur-Nina",
- "Lagislazuli",
- "Enmerkar",
- "Urukagina",
- "Etana",
- "Urnammu",
- "Ibissin",
- "Nin-Kasalsi"
-leader_sex="Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male",
- "Male", "Male"
+
+leaders = {
+ "name",                "sex"
+ "Shulgi",              "Male"
+ "Gilgamesh",           "Male"
+ "Ur-Nanshe",           "Male" ; a.k.a. Ur-Nina
+ "Lugal-Za-Gesi",       "Male"
+ "En-Mer-Kar",          "Male"
+ "Urukagina",           "Male"
+ "Etana",               "Male"
+ "Ur-Nammu",            "Male"
+ "Ibbi-Sin",            "Male"
+ "Nin-Kasalsi",         "Female"
+}
+
+ruler_titles = {
+ "government", "male_title",    "female_title"
+ "Anarchy",    _("Usurper %s"), _("?female:Usurper %s")
+ "Monarchy",   _("%s Lugal"),   _("?female:%s Lugal")
+}
+
 flag = "sumeria"
 flag_alt = "-"
 city_style = "Babylonian"
-
-ruler_titles = { "government", "male_title", "female_title"
-		 "Despotism",  _("Nin"),     _("Nin")
-                 "Monarchy",   _("Lugal"),   _("Lugal")
-                 "Communism",  _("Ensi"),    _("Ensi")
-		 "Fundamentalism", _("Sanga"), _("Sanga")
-               }
 
 init_techs=""
 init_buildings=""
 init_government="Despotism"
 init_units=""
-civilwar_nations="assyrian", "egyptian"
+civilwar_nations="assyrian", "egyptian", "babylonian"
 
 cities =
  "Unug", ; Uruk
  "Eridug", ; Eridu
- "Ur",
+ "Urim", ; Ur
  "Sirpurla", ; Lagash
  "Nibru", ; Nippur
  "Umma",
@@ -51,19 +52,19 @@ cities =
  "Borsippa",
  "Isin",
  "Shuruppak",
- "Girsu",
+ "Ngirsu", ; Girsu
  "Bad-tibira",
- "Sippar",
- "Kutha",
+ "Zimbir", ; Sippar
+ "Gudua", ; Kutha
  "Dilbat",
- "Marad",
- "Larsa",
+ "Marda", ; Marad
+ "Der",
  "Kisurra",
  "Zabala",
- "Kisiga",
- "Awan",
+ "Kisiga", ; Kuara
+ "Kes",
  "Hamazi",
  "Eshnunna",
  "Akshak",
- "Zimbir",
- "Babylon"
+ "Mari",
+ "Kesh"

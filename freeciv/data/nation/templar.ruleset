@@ -2,57 +2,56 @@
 
 name=_("Knights Templar")
 plural=_("?plural:Templars")
-groups="Fictional"
+groups="Imaginary"
 legend=_("The Knights Templar were formed after the first Crusade in order\
  to protect Pilgrims on their journeys in the Holy Land. The organization\
  grew to immense power and wealth in the next 200 years, and were the\
  innovators of many modern concepts such as Banking.")
-leader=
- "Hugh de Payens",
- "Robert de Craon",      
- "Everard des Barres",
- "Bernhard de Tremelai",
- "Andre de Montebard",
- "Bertrand de Blanquefort",
- "Philip de Milly",
- "Odo de St. Amand",
- "Arnold de Toroga",
- "Gerard de Ridfort",
- "Robert de Sable",
- "Gilbert Erail",
- "Philip de Plessiez",
- "William de Chartres",
- "Pedro de Montaigu",
- "Armand de Perigord",
- "Richard de Bures",
- "William de Sonnac",
- "Reynald de Vichiers",
- "Thomas Berard",
- "William de Beaujeu",
- "Tibald de Gaudin",
- "Jacques de Molay"
-leader_sex="Male", "Male", "Male", "Male", "Male", "Male", "Male",
-           "Male", "Male", "Male", "Male", "Male", "Male", "Male",
-       "Male", "Male", "Male", "Male", "Male", "Male", "Male",
-           "Male", "Male"
+
+leaders = {
+ "name",                        "sex"
+ "Hugh de Payens",              "Male"
+ "Robert de Craon",             "Male"
+ "Everard des Barres",          "Male"
+ "Bernhard de Tremelai",        "Male"
+ "Andre de Montebard",          "Male"
+ "Bertrand de Blanquefort",     "Male"
+ "Philip de Milly",             "Male"
+ "Odo de St. Amand",            "Male"
+ "Arnold de Toroga",            "Male"
+ "Gerard de Ridfort",           "Male"
+ "Robert de Sable",             "Male"
+ "Gilbert Erail",               "Male"
+ "Philip de Plessiez",          "Male"
+ "William de Chartres",         "Male"
+ "Pedro de Montaigu",           "Male"
+ "Armand de Perigord",          "Male"
+ "Richard de Bures",            "Male"
+ "William de Sonnac",           "Male"
+ "Reynald de Vichiers",         "Male"
+ "Thomas Berard",               "Male"
+ "William de Beaujeu",          "Male"
+ "Tibald de Gaudin",            "Male"
+ "Jacques de Molay",            "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",         "female_title"
+ "Despotism",       _("Master %s"),       _("Mistress %s")
+ "Monarchy",        _("Grand Master %s"), _("Grand Mistress %s")
+ "Democracy",       _("Chancellor %s"),   _("?female:Chancellor %s")
+}
+
 flag="templar"
 flag_alt = "stpatrick"
 city_style = "European"
-ruler_titles = { "government",      "male_title",      "female_title"
-                 "Democracy",       _("Grand Master"), _("Grand Mistress")
-                 "Fundamentalism",  _("Grand Master"), _("Grand Mistress")
-       	         "Despotism",       _("Grand Master"), _("Grand Mistress")
-                 "Republic",        _("Grand Master"), _("Grand Mistress")
-                 "Communism",       _("Grand Master"), _("Grand Mistress")
-                 "Monarchy",        _("Grand Master"), _("Grand Mistress")
-               }
 
 init_techs=""
 init_buildings=""
 init_government="Despotism"
 init_units=""
 
-civilwar_nations = "german", "french"
+civilwar_nations="Holy Roman", "French"
 
 cities =
  "Jerusalem",

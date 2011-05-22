@@ -1,0 +1,96 @@
+[nation_etruscan]
+
+name=_("Etruscan")
+plural=_("?plural:Etruscans")
+groups="Ancient", "European"
+legend=_("The Etruscans were an ancient civilization in Etruria, Italy,\
+ known for their artistic achievements and building of necropolises.\
+ Their language is only partly deciphered and their origins are still\
+ debated. They called themselves Rasna and formed a confederation of twelve\
+ cities. In the 6th century the Etruscan civilization started to crumble\
+ after Roman and Gallic incursions. Rome itself probably originated as\
+ a city state that threw off Etruscan domination. As a result, Roman\
+ sources often put the Etruscans in a negative light, depicting them as\
+ a sexually licentious culture. However, Roman civilization owes a lot to\
+ their Etruscan predecessors.")
+
+leaders = {
+ "name",                "sex"
+ "Osiniu",              "Male"
+ "Tyrsenos",            "Male"
+ "Thefarie Velianas",   "Male"
+ "Aruns",               "Male"
+ "Lars Porsena",        "Male"
+ "Lars Tolumnius",      "Male"
+ "Tarquinius",          "Male"
+ "Sleparis",            "Female"
+}
+
+ruler_titles = {
+ "government",      "male_title",        "female_title"
+ "Anarchy",         _("Usurper %s"),     _("?female:Usurper %s")
+ "Monarchy",        _("High King %s"),   _("High Queen %s")
+ "Republic",        _("Consul %s"),      _("?female:Consul %s")
+}
+
+
+flag = "etruscan"
+flag_alt = "italy"
+city_style = "Classical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+conflicts_with = "italian"
+civilwar_nations = "roman", "corsican", "gallic"
+
+cities =
+ "Velzna",
+ "Veia",
+ "Clevsin",
+ "Cisra",
+ "Persna",
+ "Pupluna",
+ "Tarchnal",
+ "Velathri",
+ "Curtun",
+ "Aret",
+ "Vetluna",
+ "Velch",
+ "Alalia",
+ "Orclae",
+ "Capna",
+ "Cusi",
+ "Hepa",
+ "Narce",
+ "Nepete",
+ "Sena",
+ "Sveama",
+ "Statna",
+ "Surna",
+ "Suthri",
+ "Tlamu",
+ "Tular",
+ "Vipsul",
+ "Arimna",
+ "Hatria",
+ "Ceisna",
+ "Felsina",
+ "Manthva",
+ "Misa",
+ "Mutina",
+ "Parma",
+ "Ravna",
+ "Spina",
+ "Capeva",
+ "Inarime",
+ "Irna",
+ "Nuvla",
+ "Pumpai",
+ "Ruma",
+ "Campeva",
+ "Tuscna",
+ "Spica"
+

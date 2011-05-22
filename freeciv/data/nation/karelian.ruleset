@@ -1,0 +1,81 @@
+[nation_karelian]
+
+name=_("Karelian")
+plural=_("?plural:Karelians")
+groups="European"
+legend=_("The Karelians are a Finno-Ugric people inhabiting Karelia, a\
+ region currently divided between Finland and Russia. They are closely\
+ related to the Finns.")
+
+leaders = {
+ "name",                "sex"
+ "Väinämöinen",         "Male"
+ "Seppo Ilmarinen",     "Male"
+ "Louhi",               "Female"
+ "Arhippa Perttunen",   "Male"
+ "Karl Rautio",         "Male"
+ "Lauri Törni",         "Male"
+ "Otto Kuusinen",       "Male"
+ "Johannes Virolainen", "Male"
+}
+
+flag="karelia"
+flag_alt = "-"
+city_style = "Celtic"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations = "finnish", "sami", "russian"
+
+cities =
+;Names in Finnish/Karelian, Russian names in comment
+ "Petroskoi",	;Petrozavodsk
+ "Kalevala",
+ "Viipuri",	;Vyborg
+ "Anus",	;Olonets
+ "Joensuu",
+ "Lappeenranta",
+ "Kondupohju",	;Kondopoga
+ "Sekee",	;Segezha
+ "Kostamus",	;Kostomuksha
+ "Imatra",
+ "Sortavala",
+ "Käkisalmi",	;Priozersk
+ "Karhumägi",	;Medvezhyegorsk
+ "Enso",	;Svetogorsk
+ "Kem",
+ "Pitäranta",	;Pitkyaranta
+ "Soroka",	;Belomorsk
+ "Lieksa",
+ "Lahdenpohju",	;Lakhdenpokhja
+ "Joutseno",
+ "Kitee",
+ "Nurmes",
+ "Outokumpu",
+ "Antrea",	;Kamenogorsk
+ "Ilomantsi",
+ "Koivisto",	;Pirmorsk
+ "Uhtuo",	;Uhtua
+ "Suojärvi",	;Suoyarvi
+ "Puudosi",	;Pudozh
+ "Pyhäksalkä",
+ "Vojatsu",	;Nadvoitsy
+ "Parikkala",
+ "Louhi",	;Louki
+ "Eno",
+ "Pinduinen",	;Pindushi
+ "Ruokolahti",
+ "Priäžä",	;Pryazha
+ "Juuka",
+ "Mujehdärvi",	;Muyezersky
+ "Taipalsaari",
+ "Läskelä",	;Lyaskelya
+ "Tohmajärvi",
+ "Porarvi",	;Porosozero
+ "Tšuuppa",	;Chupa
+ "Luumäki",
+ "Šuoju",	;Shuya
+ "Polvijärvi"

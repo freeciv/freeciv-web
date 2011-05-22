@@ -1,0 +1,78 @@
+[nation_micronesian]
+
+name=_("Micronesian")
+plural=_("?plural:Micronesian")
+groups= "Oceanian", "Modern"
+legend=_("Micronesia is located in the Central Western Pacific. The site\
+ of several ancient seafaring cultures, nowadays most of the region is\
+ governed by the Federated States of Micronesia.")
+
+leaders = {
+ "name",                "sex"
+ "Olosohpa",            "Male"
+ "Mwohnmwei",           "Male"
+ "Isokelekel",          "Male"
+ "Tosiwo Nakayama",     "Male"
+ "Manny Mori",          "Male"
+}
+
+ruler_titles = {
+ "government",   "male_title",          "female_title"
+ "Democracy",     _("Commissioner %s"),  _("?female:Commissioner %s")
+}
+
+flag="micronesia"
+flag_alt = "-"
+city_style = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations = "fijian", "papuan"
+
+cities =
+ "Palikir",
+ "Kolonia",
+ "Weno",
+ "Colonia", ;sic
+ "Tofol",
+ "Lelu",
+ "Tol",
+ "Nan Madol",
+ "Dinay",
+ "Kitti",
+ "Nett",
+ "Madolenihmw",
+ "Fefen",
+ "Tonoas",
+ "Polle",
+ "Uman",
+ "Tafunsak",
+ "U",
+ "Paata",
+ "Udot",
+ "Malem",
+ "Polowat",
+ "Romanum",
+ "Kuttu",
+ "Pollap",
+ "Nama",
+ "Satowan",
+ "Tomil",
+ "Lekinioch",
+ "Woleai",
+ "Utwe",
+ "Wonei",
+ "Weloy",
+ "Dalipebinaw",
+ "Onoun",
+ "Moch",
+ "Fanapanges",
+ "Gagil",
+ "Ulithi",
+ "Murillo",
+ "Sapwuahfik",
+ "Nomwin",
+ "Map"

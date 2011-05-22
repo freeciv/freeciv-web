@@ -2,7 +2,7 @@
 
 name=_("Uyghur")
 plural=_("?plural:Uyghurs")
-groups="Medieval", "Asian"
+groups="Medieval", "Early Modern", "Asian"
 legend=_("Uyghur was an east Turk empire and civilization. At its height in\
  820 AD it controlled most of Central and North Asia. After clashing with\
  the Chinese for several centuries, they were finally subdued by the Qing\
@@ -10,25 +10,28 @@ legend=_("Uyghur was an east Turk empire and civilization. At its height in\
  populations of the Central Asian states of Uzbekistan, Kazakhstan and\
  Kyrgyzstan. They are also the main minority of the Xinjiang province of\
  China.")
-leader=
- "Kutluk Bilge Kul",
- "Moyunchur",
- "Khitan",
- "Bugu",
- "Baga Tarkan",
- "Kutlug Bilge",
- "Sutuk Bugra",
- "Guyuk"
- 
-leader_sex="Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male"
+
+leaders = {
+ "name",                "sex"
+ "Kutluk Bilge Kul",    "Male"
+ "Moyunchur",           "Male"
+ "Khitan",              "Male"
+ "Bugu",                "Male"
+ "Baga Tarkan",         "Male"
+ "Kutlug Bilge",        "Male"
+ "Sutuk Bugra",         "Male"
+ "Guyuk",               "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Despotism",       _("%s Khan"),      _("%s Khatan")
+ "Monarchy",        _("%s Khagan"),    _("?female:%s Khagan")
+}
+
 flag="uyghur"
 flag_alt = "-"
 city_style = "Classical"
-
-ruler_titles = { "government",      "male_title",      "female_title"
-                 "Despotism",       _("Khan"),         _("?female:Khan")
-                 "Monarchy",        _("Khagan"),       _("?female:Khagan")
-               }
 
 init_techs=""
 init_buildings=""

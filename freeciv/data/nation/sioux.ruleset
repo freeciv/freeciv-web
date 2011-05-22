@@ -7,28 +7,32 @@ legend=_("The Sioux was a North American nation that fought several\
  decisive battles against the United States. It consisted of three distinct\
  groups of tribes: the Lakota, the Dakota and the Nakota.")
 
-leader=
-	"Sitting Bull", 	; a.k.a. Tatanka Yotanka
-	"Crazy Horse", 		; a.k.a. Tasunka Witko
-	"Little Crow", 		; a.k.a. Taoyateduta
-	"Red Cloud",		; a.k.a. Makhpyia-Luta
-	"Big Eagle", 		; a.k.a. Wamditanka
-	"Crow Dog", 		; a.k.a. Kangisanka
-	"Wizikute", 		; literally "Pine Shooter"
-	"Waneta", 		; literally "The Charger"
-	"Napeshneeduta",	; literally "Red man who flees not"
-	"Tasunkakokipapi"	; literally "Young Man Afraid of His Horses"
-leader_sex="Male", "Male", "Male", "Male", "Male",
-           "Male", "Male", "Male", "Male", "Male"
+leaders = {
+ "name",                "sex"
+ "Sitting Bull",        "Male" ; a.k.a. Tatanka Yotanka
+ "Crazy Horse",         "Male" ; a.k.a. Tasunka Witko
+ "Little Crow",         "Male" ; a.k.a. Taoyateduta
+ "Red Cloud",           "Male" ; a.k.a. Makhpyia-Luta
+ "Big Eagle",           "Male" ; a.k.a. Wamditanka
+ "Crow Dog",            "Male" ; a.k.a. Kangisanka
+ "Wizikute",            "Male" ; literally "Pine Shooter"
+ "Waneta",              "Male" ; literally "The Charger"
+ "Napeshneeduta",       "Male" ; literally "Red man who flees not"
+ "Tasunkakokipapi",     "Male" ; literally "Young Man Afraid of His Horses"
+ "Black Shawl",         "Female"
+}
+
+ruler_titles = {
+ "government",      "male_title",            "female_title"
+ "Monarchy",        _("Great Chief %s"),     _("?female:Great Chief %s")
+ "Republic",        _("Spokesman %s"),       _("Spokeswoman %s")
+ "Democracy",       _("Principal Chief %s"), _("?female:Principal Chief %s")
+ "Fundamentalism",  _("Shaman %s"),          _("?female:Shaman %s")
+}
+
 flag="cheyenne"
 flag_alt = "-"
 city_style = "Celtic"
-
-ruler_titles = { "government",      "male_title",      "female_title"
-                 "Despotism",       _("Chief"),        _("?female:Chief")
-                 "Monarchy",        _("Great Chief"),_("?female:Great Chief")
-                 "Republic",        _("Spokesman"),    _("Spokeswoman")
-               }
 
 init_techs=""
 init_buildings=""

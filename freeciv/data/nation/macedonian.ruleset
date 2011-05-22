@@ -1,0 +1,86 @@
+[nation_macedonian]
+
+name=_("Macedonian")
+plural=_("?plural:Macedonians")
+groups="Modern", "European"
+legend=_("The Republic of Macedonia is located in the south-central part\
+ of the Balkan peninsula. It declared independence from Yugoslavia in\
+ 1991.")
+
+leaders = {
+ "name",                        "sex"
+ "Marko Mrnjavčević",           "Male"
+ "Christo Matov",               "Male"
+ "Dame Gruev",                  "Male"
+ "Nikola Karev",                "Male"
+ "Gotze Delchev",               "Male"
+ "Metodija Andonov-Čento",      "Male"
+ "Lazar Koliševski",            "Male"
+ "Kiro Gligorov",               "Male"
+}
+ruler_titles = {
+ "government",      "male_title",        "female_title"
+ "Despotism",       _("Voivode %s"),     _("?female:Voivode %s")
+ "Fundamentalism",  _("Patriarch %s"),   _("Matriarch %s")
+}
+
+flag="macedonia"
+flag_alt = "-"
+city_style = "European"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="bulgarian", "albanian", "serbian"
+
+; http://de.wikipedia.org/wiki/Liste_der_Städte_in_Mazedonien
+cities =
+ "Skopje", 
+ "Kumanovo",
+ "Bitola",
+ "Prilep",
+ "Tetovo",
+ "Veles",
+ "Ohrid",
+ "Gostivar",
+ "Štip",
+ "Strumica",
+ "Kavadarci",
+ "Struga",
+ "Kočani",
+ "Kičevo",
+ "Lipkovo",
+ "Želino",
+ "Saraj",
+ "Radoviš",
+ "Tearce",
+ "Kriva Palanka",
+ "Gevgelija",
+ "Negotino",
+ "Sveti Nikole",
+ "Studeničani",
+ "Vinica",
+ "Debar",
+ "Negotino-Pološko",
+ "Delčevo",
+ "Resen",
+ "Ilinden",
+ "Brvenica",
+ "Kamenjane",
+ "Bogovinje",
+ "Berovo",
+ "Aračinovo",
+ "Probištip",
+ "Čegrane",
+ "Bosilovo",
+ "Vasilevo",
+ "Zajas",
+ "Valandovo",
+ "Novo Selo",
+ "Kondovo",
+ "Dolneni",
+ "Oslomej",
+ "Kratovo",
+ "Dolna Banjica"

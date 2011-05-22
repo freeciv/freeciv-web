@@ -1,0 +1,69 @@
+[nation_equatoguinean]
+
+name=_("Equatoguinean")
+plural=_("?plural:Equatoguineans")
+groups="African", "Modern"
+legend=_("Equatorial Guinea is a country in Africa. It is divided into a\
+ mainland part (Rio Muni) and the islands of Bioko and Annobon. Formerly\
+ Spanish Guinea, the country achieved independence in 1968. Equatorial\
+ Guinea is one of the wealthier countries of Africa but also one of the\
+ most unequal.")
+
+leaders = {
+ "name",                    "sex"
+ "Fernando Pó",             "Male"
+ "Malabo Lopelo Melaka",    "Male"
+ "Bonifacio Ondó Edu",      "Male"
+ "Francisco Macías Nguema", "Male"
+ "Teodoro Obiang Nguema",   "Male"
+}
+
+flag="equatorial_guinea"
+flag_alt = "-"
+city_style = "tropical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations = "cameroonian" ; santomean
+
+cities =
+ "Malabo",
+ "Bata",
+ "Ebebiyín",
+ "Evinayong",
+ "Mongomo",
+ "Luba",
+ "San Antonio de Palé",
+ "Aconibe",
+ "Añisoc",
+ "Mengomeyén",
+ "Micomeseng",
+ "Niefang",
+ "Cogo",
+ "Nsok",
+ "Ayene",
+ "Nkimi",
+ "Machinda",
+ "Corisco",
+ "Acurenam",
+ "Bicurga",
+ "Baney",
+ "Nsang",
+ "Bitica",
+ "Ncue",
+ "Río Campo",
+ "Riaba",
+ "Moca",
+ "Bolondo",
+ "Asalayeng",
+ "Rebola",
+ "Mbini",
+ "San Antonio de Ureca",
+ "Nsang",
+ "Acoacán",
+ "Elobey Grande",
+ "Bidjabidjan",
+ "Nsork"

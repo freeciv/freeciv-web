@@ -1,0 +1,54 @@
+[nation_southsudanese]
+
+name=_("South Sudanese")
+plural=_("?plural:South Sudanese")
+groups="Modern", "African"
+legend=_("A long civil war pitted Southern Sudan, inhabited mostly by black\
+ Africans and predominantly Animist and Christian, against the Muslim and\
+ Arab North. The war left two million dead and many more displaced until a\
+ ceasefire was signed in 2005. Southern Sudan achieved full independence\
+ in 2011.")
+
+leaders = {
+ "name",                       "sex"
+ "John Garang",                "Male"
+ "Dominic Dim Deng",           "Male"
+ "Rebecca Nyandeng De Mabior", "Female"
+ "Salva Kiir Mayardit",        "Male"
+}
+
+flag="southern_sudan"
+flag_alt = "-"
+city_style = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations="sudanese", "ugandan"
+
+cities =
+ "Juba",
+ "Wau",
+ "Malakal",
+ "Bor",
+ "Nimule",
+ "Rumbek",
+ "Yambio",
+ "Torit",
+ "Aweil",
+ "Kapoeta",
+ "Kuajok",
+ "Warrap",
+ "Yei",
+ "Kodok",
+ "Dimo",
+ "Rokon",
+ "Raga",
+ "Kajo Keji",
+ "Mapel",
+ "Mbeli",
+ "Bussery",
+ "Kangi",
+ "Busilia",
+ "Ujugo"

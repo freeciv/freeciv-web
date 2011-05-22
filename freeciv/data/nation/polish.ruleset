@@ -2,43 +2,72 @@
 
 name=_("Polish")
 plural=_("?plural:Poles")
-groups="Medieval", "Modern", "European"
+groups="Medieval", "Early Modern", "Modern", "European"
 legend=_("The Polish state was formed about a millennium ago, and reached\
  its Golden Age near the end of the 16th century.")
-leader="Mieszko I",
-       "Bolesław Chrobry",
-       "Władysław Łokietek", 
-       "Kazimierz Wielki",
-       "Jadwiga",
-       "Władysław Jagiełło",
-       "Stefan Batory",
-       "Jan III Sobieski",
-       "Stanisław Poniatowski",
-       "Tadeusz Kościuszko",
-       "Józef Piłsudski"
-leader_sex="Male", "Male", "Male", "Male", "Female",
-           "Male", "Male", "Male", "Male", "Male", "Male"
+
+leaders = {
+ "name",                        "sex"
+ "Mieszko I",                   "Male"
+ "Bolesław Chrobry",            "Male"
+ "Bolesław Krzywousty",         "Male"
+ "Władysław Łokietek",          "Male"
+ "Kazimierz Wielki",            "Male"
+ "Jadwiga",                     "Female"
+ "Władysław Jagiełło",          "Male"
+ "Zygmunt I Stary",             "Male"
+ "Stefan Batory",               "Male"
+ "Zygmunt III Waza",            "Male"
+ "Władysław IV Waza",           "Male"
+ "Jan II Kazimierz",            "Male"
+ "Jeremi Wiśniowiecki",         "Male"
+ "Jan III Sobieski",            "Male"
+ "Stanisław Poniatowski",       "Male"
+ "Tadeusz Kościuszko",          "Male"
+ "Józef Piłsudski",             "Male"
+ "Ignacy Mościcki",             "Male"
+ "Edward Gierek",               "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",            "female_title"
+ "Despotism",       _("Prince %s"),          _("Princess %s")
+ "Fundamentalism",  _("Bishop %s"),          _("Mother Superior %s")
+ "Communism",       _("First Secretary %s"), _("?female:First Secretary %s")
+}
+
 flag="poland"
 flag_alt = "-"
 city_style = "European"
-
-ruler_titles = { "government",      "male_title",      "female_title"
-		 ; /* TRANS: Dyktator/Dyktatorka = Dictator */
-                 "Despotism",       _("Dyktator"),     _("Dyktatorka")
-		 ; /* TRANS: Prymas = Bishop */
-                 "Fundamentalism",  _("Prymas"),       _("?female:Prymas")
-		 ; /* TRANS: Pierwszy Sekretarz = First Secretary */
-          "Communism",_("Pierwszy Sekretarz"),_("?female:Pierwszy Sekretarz")
-                 "Republic",        _("President"),    _("?female:President")
-               }
 
 init_techs=""
 init_buildings=""
 init_government="Despotism"
 init_units=""
 
-conflicts_with="silesian"
-civilwar_nations = "lithuanian", "silesian", "ukrainian"
+conflicts_with =
+ "Silesian",
+ "Mazovian",
+ "Greater Polish",
+ "Slavic"
+; "Gothic",
+; "Polanian"
+
+civilwar_nations =
+ "Lithuanian",
+ "Silesian",
+ "Mazovian",
+ "Greater Polish",
+ "Western Pomeranian",
+ "Lendian",
+ "Lipka Tatar",
+ "Belarusian",
+ "Ukrainian",
+ "Kashubian",
+ "Old Prussian"
+; "Rusyn",
+; "Polanian",
+
 
 cities =
 ; Te bedą pierwsze, bo tak pasuje
@@ -56,7 +85,7 @@ cities =
 	"Gorzów",
 	"Zielona Góra (hills, forest)",
 	"Poznań",
-	"Łódz",
+	"Łódź",
 	"Lublin",
 	"Kielce",
 	"Opole",
@@ -104,11 +133,9 @@ cities =
 	"Tychy",
 	"Chorzów",
 	"Sosnowiec",
-	"Jastrzębie Zdrój",
+	"Jastrzębie-Zdrój",
 	"Dąbrowa Górnicza",
 ; Inne ważne z różnych względów
-	"Lwów",
-	"Wilno",
 	"Kołobrzeg",
 	"Sopot (ocean)",
 	"Wolin",
@@ -120,7 +147,7 @@ cities =
 	"Sochaczew",
 	"Łowicz",
 	"Września",
-	"Inowroclaw",
+	"Inowrocław",
 	"Kruszwica",
 	"Głogów",
 	"Kłodzko",
@@ -131,7 +158,7 @@ cities =
 	"Brzeg (river)",
 	"Wieluń",
 	"Starachowice",
-	"Skarżysko Kamienna",
+	"Skarżysko-Kamienna",
 	"Ostrowiec Świętokrzyski",
 	"Stalowa Wola",
 	"Oświęcim",

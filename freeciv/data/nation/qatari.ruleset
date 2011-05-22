@@ -1,0 +1,67 @@
+[nation_qatari]
+
+name=_("Qatari")
+plural=_("?plural:Qataris")
+groups="Asian", "Modern"
+legend=_("Qatar is an emirate located on a peninsula on the Persian Gulf.\
+ It is one of the wealthiest countries of the world in terms of GDP per\
+ capita. Qatar is one of the world's few absolute monarchies.")
+
+leaders = {
+ "name",                         "sex"
+ "Mohammed bin Thani",           "Male"
+ "Jassim bin Mohammed Al Thani", "Male"
+ "Abdullah bin Jassim Al Thani", "Male"
+ "Khalifa bin Hamad Al Thani",   "Male"
+}
+
+ruler_titles = {
+ "government",     "male_title",        "female_title"
+ "Despotism",      _("Sheikh %s"),      _("Shaykha %s")
+ "Fundamentalism", _("Grand Mufti %s"), _("?female:Grand Mufti %s")
+ "Monarchy",       _("Emir %s"),        _("Emira %s")
+ "Republic",       _("Vizier %s"),      _("?female:Vizier %s")
+}
+
+flag="qatar"
+flag_alt = ""
+city_style = "Classical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="emirati", "saudi"
+
+cities =
+ "Ad-Dawha",
+ "Al-Rayyan",
+ "Umm Salal Muhammed",
+ "Al-Hawr",
+ "Al-Wakra",
+ "Al-Jumayliya",
+ "Umm Sa'id",
+ "Umm Bab",
+ "Madinat ash-Shamal", ;ar-ruways
+ "Al-Ghuwayriya",
+ "Fuwayriṭ", ; al-jassasiya
+ "Az-Zubara",
+ "Ad-Dahira-Ras Laffan",
+ "Ash-Shahhaniya",
+ "Duhan",
+ "Al-Hisa",
+ "Al-Wukayr",
+ "Rawdad Rashid",
+ "Abu Nahla",
+ "Al-Kir'ana",
+ "Al-'Aturiya",
+ "Abu Samra",
+ "An-Nasraniya",
+ "Sawda Natil",
+ "Al-Harrara",
+ "Hawr al-'Udayd",
+ "Shaqra",
+ "Mirinda",
+ "'Abd al 'Aziz",
+ "Al-Lu'lu'a"

@@ -1,0 +1,98 @@
+[nation_honduran]
+
+name=_("Honduran")
+plural=_("?plural:Hondurans")
+groups="American", "Modern"
+
+legend=_("Honduras has been an independent republic since the dissolution\
+ of the Central American Federation in 1840. The archetypical 'banana\
+ republic', periods of dictatorship and of more or less democratic rule\
+ have followed each other. Its current constitution was adopted in 1982.")
+
+leaders = {
+ "name",                        "sex"
+ "Dionisio de Herrera",         "Male"
+ "Francisco Morazán Quesada",   "Male"
+ "José Santos Guardiola",       "Male"
+ "José María Medina",           "Male"
+ "Ponciano Leiva",              "Male"
+ "Tiburcio Carías Andino",      "Male"
+ "Ramón Villeda Morales",       "Male"
+ "Oswaldo López Arellano",      "Male"
+ "Policarpo Paz",               "Male"
+ "Roberto Suazo",               "Male"
+ "Manuel Zelaya",               "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Despotism",       _("General %s"),   _("?female:General %s")
+ "Fundamentalism",  _("Bishop %s"),    _("Mother Superior %s")
+}
+
+flag         = "honduras"
+flag_alt     = "-"
+city_style   = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+conflicts_with = "salvadoran", "nicaraguan" ;similar flags
+civilwar_nations = "miskito", "mayan", "salvadoran"
+
+cities =
+ "Tegucigalpa (mountains)",
+ "Comayagua (mountains)",
+ "San Pedro Sula (mountains)",
+ "La Ceiba (ocean)",
+ "El Progreso (river)",
+ "Choluteca (river)",
+ "Puerto Cortés (ocean)",
+ "Comayagüela",
+ "Danlí",
+ "Juticalpa",
+ "Catamacas",
+ "Tela (ocean)",
+ "Omoa (ocean)",
+ "Puerto Lempira (jungle, swamp, ocean)",
+ "Santa Rosa de Copán",
+ "Trujillo (ocean)",
+ "Choloma",
+ "Olanchito",
+ "La Lima",
+ "San Lorenzo",
+ "Siguatepeque",
+ "El Paraíso",
+ "Cofradía",
+ "La Paz",
+ "Nueva Ocotepeque",
+ "Coxen Hole (ocean)",
+ "Yoro",
+ "Santa Bárbara",
+ "Intibucá",
+ "La Esperanza",
+ "Copán Ruinas",
+ "Gracias",
+ "Nacaome",
+ "Tocoa",
+ "Potrerillos",
+ "La Entrada",
+ "Guaimaca",
+ "Sonaguera",
+ "Santa Rita",
+ "Talanga",
+ "Morazán",
+ "Santa Cruz de Yojoa",
+ "Marcala",
+ "Sabá",
+ "Baracoa",
+ "Pimienta",
+ "El Negrito",
+ "San Marcos de Colón",
+ "Brus Laguna",
+ "Agua Blanca Sur",
+ "José Santos Guardiola (ocean)"
+
+

@@ -2,7 +2,7 @@
 
 name=_("Swedish")
 plural=_("?plural:Swedes")
-groups="Medieval", "Modern", "European"
+groups="Medieval", "Early Modern", "Modern", "European"
 legend=_("The Kingdom of Sweden was christianized and consolidated as a\
  political entity by the 12th century AD. The country rose to prominence as\
  one of the great powers of Europe in the 17th century, following\
@@ -10,33 +10,37 @@ legend=_("The Kingdom of Sweden was christianized and consolidated as a\
  due to a worsening economy and several disastrous defeats to Russia, Sweden\
  soon lost most of its gained territory. The country has not been involved\
  in an armed conflict since 1814.")
-leader=
- "Erik Segersäll",
- "Olof Skötkonung",
- "Magnus Ladulås",
- "Gustav Vasa",
- "Erik IX",
- "Karl XII",
- "Gustav II Adolf",
- "Kristina",
- "Oscar II",
- "Per Albin Hansson",
- "Olof Palme",
- "Anna Lindh"
-leader_sex="Male", "Male", "Male", "Male", "Male", "Male", "Male",
-           "Female", "Male", "Male", "Male", "Female"
+
+leaders = {
+ "name",                "sex"
+ "Erik Segersäll",      "Male"
+ "Olof Skötkonung",     "Male"
+ "Magnus Ladulås",      "Male"
+ "Gustav Vasa",         "Male"
+ "Erik IX",             "Male"
+ "Karl XII",            "Male"
+ "Gustav II Adolf",     "Male"
+ "Kristina",            "Female"
+ "Oscar II",            "Male"
+ "Per Albin Hansson",   "Male"
+ "Olof Palme",          "Male"
+ "Anna Lindh",          "Female"
+}
+
+ruler_titles = {
+ "government",      "male_title",           "female_title"
+ "Despotism",       _("Earl %s"),           _("?female:Earl %s")
+}
+
 flag="sweden"
 flag_alt = "-"
 city_style = "European"
-ruler_titles = { "government",      "male_title",      "female_title"
-                 "Democracy",_("Prime Minister"), _("?female:Prime Minister")
-               }
 
 init_techs=""
 init_buildings=""
 init_government="Despotism"
 init_units=""
-civilwar_nations = "viking", "danish", "norwegian", "sami"
+civilwar_nations = "viking", "danish", "norwegian", "sami", "scanian", "western pomeranian"
 
 ; /* <-- avoid gettext warnings
 ;

@@ -1,0 +1,76 @@
+[nation_xhosa]
+
+name=_("Xhosa")
+plural=_("?plural:amaXhosa")
+groups="Early Modern", "African"
+legend=_("The Xhosa are Bantu people in South Africa, having arrived\
+ there from the Great Lakes region by the 17th century. During the\
+ apartheid era there were two Xhosa Bantustans, Transkei and Ciskei. Many\
+ of the leading anti-apartheid activists, including Nelson Mandela and\
+ Desmond Tutu, where Xhosa.")
+
+leaders = {
+ "name",                "sex"
+ "Phalo kaTshiwo",      "Male"
+ "Hintsa kaKhawuta",    "Male"
+ "Makana",              "Male"
+ "Mgolombane Sandileh", "Male"
+ "Nongqawuse",          "Female"
+ "Stella Sigcau",       "Female"
+ "Kaiser Matanzima",    "Male"
+ "Walter Sisulu",       "Male"
+ "Madiba",              "Male"	;Nelson Mandela
+}
+
+ruler_titles = {
+ "government",      "male_title",            "female_title"
+ "Fundamentalism",  _("Prophet %s"),         _("Prophetess %s")
+ "Monarchy",        _("Paramount Chief %s"), _("?female:Paramount Chief %s")
+}
+
+flag="xhosa"
+flag_alt = "-"
+city_style = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations = "zulu" ;basotho
+
+cities =
+ "Mthatha",
+ "Bhisho",
+ "iKapa",	;Cape Town
+ "iMonti",	;East London
+ "iBhayi",	;Port Elizabeth
+ "eDikeni",	;Alice
+ "eQonce",	;King Williams town
+ "iKhimbali",	;Kimberley
+ "eNgcobo",
+ "Gcuwa",	;Butterworth
+ "iDutywa",
+ "eRhini",	;Grahamstown
+ "iKwezi",	
+ "Qunu",
+ "Mvezo",
+ "iHanoveri",
+ "Mdantsane",
+ "KwaBhaca",
+ "Bizana",
+ "eZibeleni",	;Queensdale
+ "Haka Haka",
+ "KwaNobhule",	;Uitenhage
+ "KwaTinidubu",	;Fort Beaufort
+ "Lingelihle",	;Cradock
+ "KwaNonzame",	;Middelburg
+ "Nkwenkwezi",	;Port Alfred
+ "KwaNojoli",	;Somerset East
+ "Mzamomhle",	;Burgersdorp
+ "Masibambane",	;Elliot
+ "Umzimvubu",	;Mount Ayliff
+ "Cofimvaba",
+ "Umzimkulu",
+ "Ntabankulu",
+ "Qumbu"

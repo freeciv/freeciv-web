@@ -2,26 +2,45 @@
 
 name=_("Swiss")
 plural=_("?plural:Swiss")
-groups="Modern", "Medieval", "European"
-legend=_("Switzerland is a federation of cantons, some of which have more\
- than 700 years of history as a confederacy.")
-leader=
- "Wilhelm Tell",
- "Arnold von Winkelried",
- "Hermann Gessler",
- "Henri Guisan"
-leader_sex="Male", "Male", "Male", "Male"
+groups="Modern", "Early Modern", "Medieval", "European"
+legend=_("Switzerland has existed as a state in its present form since the\
+ adoption of the Swiss Federal Constitution in 1848. The precursors of modern\
+ Switzerland established a protective alliance at the end of the 13th century,\
+ forming a loose confederation of states which persisted for centuries.")
+
+leaders = {
+ "name",                                "sex"
+ "Wilhelm Tell",                        "Male"
+ "Arnold von Winkelried",               "Male"
+ "Hermann Gessler",                     "Male"
+ "Ulrich von Hohensax",                 "Male"
+ "Hans Ludwig von Erlach",              "Male"
+ "Wilhelm Bernhard von Muralt",         "Male"
+ "Karl Ludwig von Erlach",              "Male"
+ "Augustin Keller",                     "Male"
+ "Johann Weber",                        "Male"
+ "Joseph Leonz Andermatt",              "Male"
+ "Pierre von der Weid",                 "Male"
+ "Niklaus Rudolf von Wattenwyl",        "Male"
+ "Niklaus Franz von Bachmann",          "Male"
+ "C.J. Guiguer de Prangins",            "Male"
+ "Peter Ludwig von Donatz",             "Male"
+ "Guillaume-Henri Dufour",              "Male"
+ "Johann Ulrich von Salis-Soglio",      "Male"
+ "Hans Herzog",                         "Male"
+ "Ulrich Wille",                        "Male"
+ "Henri Guisan",                        "Male"
+}
+
+ruler_titles = {
+ "government",     "male_title",               "female_title"
+ "Despotism",      _("Bailiff %s"),            _("?female:Bailiff %s")
+ "Democracy",      _("Federal Councillor %s"), _("?female:Federal Councillor %s")
+}
+
 flag="switzerland"
 flag_alt = "-"
 city_style = "European"
-
-ruler_titles = { "government",	"male_title",	"female_title"
-		 "Anarchy",     _("General"),   _("?female:General")
-		 "Despotism",   _("Bailiff"),   _("?female:Bailiff")
-		 "Republic",    _("President of the Confederation"),
-				_("President of the Confederation")
-	"Democracy", _("Federal Chancellor"), _("?female:Federal Chancellor")
-	       }
 
 init_techs=""
 init_buildings=""
@@ -38,37 +57,119 @@ cities =
  "Winterthur",
  "St. Gallen",
  "Luzern",
+ "Lugano",
  "Biel / Bienne",
  "Thun (river)",
  "Köniz",
  "La Chaux-de-Fonds",
  "Fribourg (river)",
  "Schaffhausen (river)",
- "Neuchatel",
  "Chur",
+ "Neuchâtel",
  "Vernier",
- "Emmen",
- "Sion (river)",
- "Lugano",
  "Uster",
- "Kriens",
+ "Sion (river)",
+ "Emmen",
  "Lancy",
- "Montreux",
+ "Kriens",
  "Yverdon-les-bains (river)",
  "Zug",
- "Dietikon",
+ "Montreux",
  "Dübendorf",
  "Frauenfeld",
+ "Dietikon",
  "Riehen",
+ "Baar",
+ "Meyrin",
+ "Wädenswil",
+ "Wetzikon",
+ "Carouge",
+ "Reinach",
+ "Wettingen",
+ "Allschwil",
+ "Renens",
+ "Horgen",
  "Aarau (river)",
- "Herisau",
- "Appenzell",
- "Liestal",
- "Glarus",
- "Delemont",
- "Stans",
- "Sarnen",
- "Schwyz",
- "Solothurn (river)",
+ "Jona",
+ "Kreuzlingen",
+ "Onex",
+ "Gossau",
+ "Kloten",
+ "Wil",
+ "Muttenz",
+ "Nyon",
  "Bellinzona",
- "Altdorf"
+ "Olten",
+ "Pully",
+ "Vevey",
+ "Thalwil",
+ "Baden",
+ "Littau",
+ "Grenchen",
+ "Adliswil",
+ "Herisau",
+ "Aarau",
+ "Regensdorf",
+ "Ostermundigen",
+ "Monthey",
+ "Illnau-Effretikon",
+ "Steffisburg",
+ "Solothurn (river)",
+ "Glarus",
+ "Appenzell",
+ "Martigny",
+ "Sierre",
+ "Pratteln",
+ "Volketswil",
+ "Burgdorf",
+ "Locarno",
+ "Freienbach",
+ "Bülach",
+ "Schwyz",
+ "Binningen",
+ "Langenthal",
+ "Morges",
+ "Wohlen",
+ "Cham",
+ "Schlieren",
+ "Thõnex",
+ "Einsiedeln",
+ "Küsnacht",
+ "Liestal",
+ "Arbon",
+ "Opfikon",
+ "Muri",
+ "Stäfa",
+ "Wallisellen",
+ "Horw",
+ "Spiez",
+ "Bulle",
+ "Uzwil",
+ "Zollikon",
+ "Brig-Glis",
+ "Meilen",
+ "Münchenstein",
+ "Küssnacht",
+ "Versoix",
+ "Amriswil",
+ "Ebikon",
+ "Rüti",
+ "Delémont",
+ "Richterswil",
+ "Worb",
+ "Münsingen",
+ "Davos",
+ "Ittigen",
+ "Lyss",
+ "Rheinfelden",
+ "Prilly",
+ "Gland",
+ "Oftringen",
+ "Altstätten",
+ "La Tour-de-Peilz",
+ "Buchs",
+ "Le Locle",
+ "Birsfelden",
+ "Ecublens",
+ "Affoltern am Albis",
+ "Zofingen"

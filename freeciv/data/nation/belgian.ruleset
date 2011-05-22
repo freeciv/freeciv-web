@@ -7,15 +7,25 @@ legend = _("Belgium gained independance from the Dutch Kingdom in 1830.\
  Belgium is mainly characterized by its movement from a unified state\
  to a federal one. This is the result of the Flemish and the\
  Walloon's nationalist (almost) peaceful fights.")
-leader=
- "Leopold I",
- "Leopold II",
- "Albert I",
- "Leopold III",
- "Baudouin",	; Flemish name: "Boudewijn"
- "Philippe",
- "Elisabeth"
-leader_sex="Male", "Male", "Male", "Male", "Male", "Male", "Female"
+
+leaders = {
+ "name",        "sex"
+ "Leopold I",   "Male"
+ "Leopold II",  "Male"
+ "Albert I",    "Male"
+ "Leopold III", "Male"
+ "Baudouin",    "Male" ; Flemish name: "Boudewijn"
+ "Philippe",    "Male"
+ "Elisabeth",   "Female"
+}
+
+ruler_titles = {
+ "government",      "male_title",           "female_title"
+ "Democracy",       _("Prime Minister %s"), _("?female:Prime Minister %s")
+ "Fundamentalism",  _("Bishop %s"),         _("Mother Superior %s")
+ "Republic",        _("Stadtholder %s"),    _("Stadtholdress %s")
+}
+
 flag="belgium"
 flag_alt = "-"
 city_style = "Celtic"
@@ -24,7 +34,8 @@ init_techs=""
 init_buildings=""
 init_government="Despotism"
 init_units=""
-civilwar_nations="dutch", "french"
+conflicts_with="flemish", "walloon"
+civilwar_nations="flemish", "walloon", "congolese"
 
 ; Alternating Flemish and Walloon names
 cities =

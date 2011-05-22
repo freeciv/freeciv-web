@@ -6,45 +6,68 @@ groups="Ancient", "European"
 legend=_("Rome was, in legend, founded by Romulus in 753 BC.  At its\
  height, Rome controlled nearly all of Europe, northern Africa and\
  Mesopotamia.")
-leader=
- ; Full name/s in comment
- "Caesar",		; full name "Gaius Julius Caesar"
- "Augustus",		; born "Gaius Octavius Thurinus",
-                        ; name as despot "Gaius Julius Caesar Augustus"
- "Vespasianus",		; born "Titus Flavius Vespasianus",
-			; name as emperor "Caesar Vespasianus Augustus"
-			; known in English as "Vespasian"
- "Nero",		; born "Lucius Domitius Ahenobarbus",
-			; name as emperor
-			; "Nero Claudius Caesar Augustus Germanicus"
- "Traianus",		; full name "Marcus Ulpius Nerva Traianus",
-			; known in English as "Trajan"
- "Marcus Aurelius",	; born "Marcus Annius Catilius Severus",
-			; name as emperor "Marcus Aurelius Antonius"
- "Tiberius",		; born "Tiberius Claudius Nero",
-			; name as emperor "Tiberius Caesar Augustus"
- "Constantinus I",	; full name 
-			; "Gaius Flavius Valerius Aurelius Constantinus"
-			; also known in English as "Constantine the Great"
- "Livia",		; also known as "Livia Drusilla"
-			; as empress "Julia Augusta" or "Livia Drusa Augusta"
- "Messalina"		; full name "Valeria Messalina"
-leader_sex="Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male",
-           "Female", "Female"
+
+leaders = {
+ "name",                "sex"
+
+; Full name "Gaius Julius Caesar".
+ "Caesar",              "Male"
+
+; Born "Gaius Octavius Thurinus", name as despot
+; "Gaius Julius Caesar Augustus".
+ "Augustus",            "Male"
+
+; Born "Titus Flavius Vespasianus", name as emperor
+; "Caesar Vespasianus Augustus", known in English as "Vespasian".
+ "Vespasianus",         "Male"
+
+; Born "Lucius Domitius Ahenobarbus", name as emperor
+; "Nero Claudius Caesar Augustus Germanicus".
+ "Nero",                "Male"
+
+; Full name "Marcus Ulpius Nerva Traianus", known in English as "Trajan".
+ "Traianus",            "Male"
+
+; Born "Marcus Annius Catilius Severus", name as emperor
+; "Marcus Aurelius Antonius".
+ "Marcus Aurelius",     "Male"
+
+; Born "Tiberius Claudius Nero", name as emperor "Tiberius Caesar Augustus".
+ "Tiberius",            "Male"
+
+; Full name "Gaius Flavius Valerius Aurelius Constantinus", also known
+; in English as "Constantine the Great".
+ "Constantinus I",      "Male"
+
+; Also known as "Livia Drusilla", as empress "Julia Augusta", or
+; "Livia Drusa Augusta"
+ "Livia",               "Female"
+
+; Full name "Valeria Messalina".
+ "Messalina",           "Female"
+}
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Anarchy",         _("Usurper %s"),   _("?female:Usurper %s")
+ "Democracy",       _("Tribune %s"),   _("?female:Tribune %s")
+ "Despotism",       _("Dictator %s"),  _("Dictatrix %s")
+ "Monarchy",        _("%s Augustus"),  _("%s Augusta")
+ "Republic",        _("Consul %s"),    _("?female:Consul %s")
+}
+
 flag = "rome"
 flag_alt = "italy"
 city_style = "Classical"
-
-ruler_titles = { "government",      "male_title",      "female_title"
-                 "Despotism",       _("Dictator"),     _("Dictatrix")
-                 "Monarchy",        _("Imperator"),    _("Imperatrix")
-}
 
 init_techs=""
 init_buildings=""
 init_government="Despotism"
 init_units=""
-civilwar_nations = "italian", "spanish", "french"
+
+conflicts_with="Western Roman", "Byzantine", "Italian", "Spanish", "French",
+ "Portuguese", "Romanian"
+civilwar_nations="Western Roman", "Byzantine", "Palmyrene"
 
 cities =
   "Roma", "Capua", "Veii", "Beneventum", "Corfinium", "Ancona",

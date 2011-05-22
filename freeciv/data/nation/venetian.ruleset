@@ -1,0 +1,97 @@
+[nation_venetian]
+
+name = _("Venetian")
+plural = _("?plural:Venetians")
+groups="Medieval", "Early Modern", "European"
+legend=_("The Republic of Venice emerged from the shadows of history\
+ when refugees from barbarian marauders gathered on the safety of the\
+ islands of a lagoon in northeast Italy. Originally a loyal subject of\
+ the Eastern Roman empire, it gradually acquired its independence and\
+ ranked among the superpowers of the Middle Ages. Its merchants grew rich\
+ on trade, and its navy was respected throughout the Mediterranean sea.\
+ After a long decline, it eventually fell to the armies of Bonaparte in\
+ 1796.")
+
+leaders = {
+ "name",                        "sex"
+ "Enrico Dandolo",              "Male"
+ "Giustiniano Participazio",    "Male"
+ "Pietro Tribuno",              "Male"
+ "Lorenzo Tiepolo",             "Male"
+ "Leonardo Loredan",            "Male"
+ "Andrea Gritti",               "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",         "female_title"
+ "Despotism",       _("Condottiere %s"),  _("Condottiera %s")
+ "Fundamentalism",  _("Patriarch %s"),    _("Matriarch %s")
+ "Monarchy",        _("Viceroy %s"),      _("Vicereine %s")
+ "Republic",        _("Doge %s"),         _("Dogaressa %s")
+}
+
+flag = "venice"
+flag_alt = "italy"
+city_style = "Classical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+conflicts_with="roman", "italian"
+civilwar_nations="cypriot", "italian", "croatian", "friulian"
+
+cities =
+ "Venesia",		;Venice
+ "Eraclea",
+ "Aquiłeja",		;Aquileia
+ "Zara",		;Zadar
+ "Spàłato",		;Split
+ "Raguxa",		;Dubrovnik
+ "Famagosta",		;Famagusta
+ "Canea",		;Chania
+ "Atene",		;Athens
+ "Verona",		
+ "Padoa",		;Padua
+ "Corfù",		;Corfu
+ "Durazo",		;Durrës
+ "Trieste",
+ "Rovigno",		;Rovinj
+ "Lepanto",		;Nafpaktos
+ "Poła",		;Pula
+ "Cefalonia",		;Kefalonia
+ "Trevixo",		;Treviso
+ "Este",
+ "Cióxa",		;Chioggia
+ "Mota de Łivensa",	;Motta di Livenza
+ "Candia",		;Heraklion
+ "Trevixo",		;Treviso
+ "Vicensa",		;Vicenza
+ "Modon",		;Methoni
+ "Cołogna Veneta",	;Cologna Veneta
+ "Bełun",		;Belluno
+ "Basan",		;Bassano del Grappa
+ "Feltre",
+ "Sete Comuni",		;Sette Comuni
+ "Coron",		;Koroni
+ "Roveredo",		;Rovereto
+ "Cividale",		;Cividale del Friuli
+ "Portogruaro",
+ "Udine",
+ "Capodistria",		;Koper
+ "Bresia",		;Brescia
+ "Zante",
+ "Bergamo",
+ "Ravena",		;Ravenna
+ "Gorizia",
+ "Adria",
+ "Spinalonga",
+ "Cremona",
+ "Negroponte",		;Chalcis
+ "Oderso",		;Oderzo
+ "Pordenon",		;Pordenone
+ "Badia",		;Badia/Abtei
+ "Mestre",
+ "Lido (ocean)"
+

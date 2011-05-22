@@ -3,44 +3,57 @@
 name=_("Texan")
 plural=_("?plural:Texans")
 groups="American"
-legend=_("Texas is second largest and second most populous state of the\
- USA, famous for its \"larger than life\" cowboy mentality.")
-leader=
- "Sam Houston",
- "Stephen F. Austin",
- "Ma Ferguson",
- "Lyndon B. Johnson",
- "James P. Henderson"
-leader_sex="Male", "Male", "Female", "Male", "Male"
+legend=_("Texas, \"the Lone Star State\" is the second largest and second\
+ most populous state of the USA, famous for its \"larger than life\"\
+ cowboy mentality. During its history, Texas has been ruled in full or in\
+ part by six countries: France, Spain, Mexico, the Texas Republic, the\
+ Confederacy and the USA - as expressed in the slogan \"six flags over\
+ Texas\".")
+
+leaders = {
+ "name",                "sex"
+ "Stephen F. Austin",   "Male"
+ "Juan N. Seguin",      "Male"
+ "Sam Houston",         "Male"
+ "Mirabeau B. Lamar",   "Male"
+ "James P. Henderson",  "Male"
+ "Ma Ferguson",         "Female"
+ "John Connally",       "Male"
+ "Lyndon B. Johnson",   "Male"
+ "George W. Bush",      "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Despotism",       _("Sheriff %s"),   _("?female:Sheriff %s")
+ "Fundamentalism",  _("Reverend %s"),  _("?female:Reverend %s")
+}
+
 flag="texas"
 flag_alt = "usa"
 city_style = "European"
-ruler_titles = { "government",      "male_title",      "female_title"
-                 "Republic",        _("Governor"),      _("?female:Governor")
-                 "Fundamentalism",  _("Reverend"),      _("?female:Reverend")
-               }
 
 init_techs=""
 init_buildings=""
 init_government="Despotism"
 init_units=""
 
-conflicts_with="american", "chilean" ; Latter because of similar flags
-civilwar_nations="american", "mexican"
+conflicts_with="chilean" ; similar flag
+civilwar_nations="american", "mexican", "hasinay", "comanche", "apache"
 
 cities =
  "Austin",
  "Dallas",
  "Houston",
  "San Antonio",
- "Fort Worth", 
+ "Fort Worth",
  "Galveston",
  "Corpus Christi",
  "El Paso",
  "Lubbock",
- "Amarillo", 
+ "Amarillo",
  "Eagle Pass",
- "Wichita Falls",
+ "Wichita Falls (river)",
  "Midland",
  "Odessa",
  "Waco",
@@ -48,13 +61,13 @@ cities =
  "Irving",
  "Denton",
  "Texarkana",
- "Port Arthur",
+ "Port Arthur (ocean)",
  "Brownsville",
  "Laredo",
  "Nacogdoches",
  "Lufkin",
  "Killeen",
- "College Station",  
+ "College Station",
  "Abilene",
  "Waxahachie",
  "Bryan",
@@ -65,19 +78,19 @@ cities =
  "Garland",
  "Carrollton",
  "Mesquite",
- "Weatherford",  
+ "Weatherford",
  "Stephenville",
  "New Braunfels",
  "San Marcos",
- "Plainview",
+ "Plainview (plains)",
  "Uvalde",
  "Lake Jackson",
  "Sherman",
- "Del Rio",
- "Kerrville", 
+ "Del Rio (river)",
+ "Kerrville",
  "Brownwood",
  "Round Rock",
- "The Woodlands", 
+ "The Woodlands (forest)",
  "Wharton",
  "Orange",
  "Temple",
@@ -87,7 +100,7 @@ cities =
  "Muleshoe",
  "Canyon",
  "Lamesa",
- "Fort Stockton", 
+ "Fort Stockton",
  "McAllen",
  "Big Spring",
  "San Angelo",
@@ -100,4 +113,30 @@ cities =
  "Borger",
  "Pampa",
  "Perryton",
- "Tuna"
+ "Tuna",
+ "Washington on the Brazos (river)",
+ "Velasco",
+ "Columbia",
+ "Pharr",
+ "Plano",
+ "Edinburg",
+ "McKinney",
+ "Richmond",
+ "Conroe",
+ "Georgetown",
+ "Angleton",
+ "Belton",
+ "Cleburne",
+ "Boston",
+ "Seguin",
+ "Greenville",
+ "Gatesville",
+ "Liberty",
+ "Paris",
+ "Canton",
+ "Bay City (ocean)",
+ "Jasper",
+ "Mount Pleasant",
+ "Anahuac",
+ "Marshall",
+ "Mentone"

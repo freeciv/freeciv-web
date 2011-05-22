@@ -6,22 +6,26 @@ groups="European"
 legend=_("The Sami are a people of northern Scandinavia. Their nation spans\
  over the northernmost regions of the Scandinavian countries and\
  northwestern Russia.")
-leader=
- "Ole Henrik Magga",	; Sami politician and current chairman of UNPFII
- "Aslak Hætta",		; Rebellion leader against Norwegian rule
- "Matts Heiva",		; 17th century influential noaydde (shaman)
- "Kuta-Vuorok",		; 18th century influential noaydde
- "Elsa Laula"		; Early Sami political activist
-leader_sex="Male", "Male", "Male", "Male", "Female"
+
+leaders = {
+ "name",                "sex"
+ "Ole Henrik Magga",    "Male" ; Sami politician and current chairman
+                               ; of UNPFII
+ "Aslak Hætta",         "Male" ; Rebellion leader against Norwegian rule
+ "Matts Heiva",         "Male" ; 17th century influential noaydde (shaman)
+ "Kuta-Vuorok",         "Male" ; 18th century influential noaydde
+ "Elsa Laula",          "Female" ; Early Sami political activist
+}
+
+ruler_titles = {
+ "government",      "male_title",        "female_title"
+ "Fundamentalism",  _("Shaman %s"),      _("?female:Shaman %s")
+ "Republic",        _("Spokesman %s"),   _("Spokeswoman %s")
+}
+
 flag="sapmi"
 flag_alt = "-"
 city_style = "European"
-
-ruler_titles = { "government",      "male_title",      "female_title"
-		 ; /* TRANS: Noaydde = Shaman */
-                 "Despotism",       _("Noaydde"),      _("?female:Noaydde")
-                 "Republic",        _("Spokesman"),    _("Spokeswoman")
-               }
 
 init_techs=""
 init_buildings=""

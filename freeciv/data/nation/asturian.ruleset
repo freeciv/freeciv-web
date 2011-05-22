@@ -1,0 +1,57 @@
+[nation_asturian]
+
+name=_("Asturian")
+plural=_("?plural:Asturians")
+groups="Ancient", "European"
+legend=_("Asturians were a Celtic people which occupied most of the northern\
+ coast of Spain. They battled against the Roman Empire until their defeat by\
+ Caesar Augustus' legions between 29 and 19 BC. Under the Visigothic kingdom of\
+ Toledo, there were uneasy relations between Visigoths and Asturians. In year\
+ 722, king Pelayo defeated the Umayyad Muslim troops at Cuadonga, establishing\
+ the Asturian Kingdom, which lasted until year 910 when the capital town was\
+ moved from Uvieu to Leon. Now, Asturias is an autonomous community of Spain")
+
+leaders = {
+ "name",                        "sex"
+ "Pelayo",                      "Male"
+ "Alfonso II",                  "Male"
+ "Ramiro I",                    "Male"
+ "Favila I",                    "Male"
+ "Gonzalo Peláez",              "Male"
+ "Xosefa de Xovellanos",        "Female"
+ "Aida Lafuente",               "Female"
+ "Rosario Acuña",               "Female"
+}
+
+ruler_titles = {
+ "government",      "male_title",           "female_title"
+ "Despotism",       _("Prince %s"),         _("?female:Princess %s")
+ "Fundamentalism",  _("Bishop %s"),        _("Mother Superior %s")
+}
+
+flag="asturias"
+flag_alt = "-"
+city_style = "Celtic"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+conflicts_with="spanish"
+civilwar_nations="galician", "basque", "gallic", "leonese"
+
+cities =
+  "Xixón", "Uviéu", "Avilés", "Cangues d'Onís", "La Pola Siero", "Grau",
+  "Cangas", "Ribesella", "Mieres", "Llugones", "Llangréu", "A Veiga",
+  "Villaviciosa", "Candás", "Cuideiru", "Les Arriondes", "Lluanco",
+  "Llanes", "L.luarca", "Navia", "Pravia", "Tapia", "La Vega", 
+  "La Puela", "Nubleo", "Muros", "Nava", "Soto Ribera", "Posada",
+  "Prau", "Martimporra", "Grullos", "Colunga", "Llastres", "Sames",
+  "Les Arenes", "Santolaya de Morcín", "Benia", "Tinéu", "Salas",
+  "Bual", "El Campu", "Castropol", "Villabre", "Santalla d'Ozcos",
+  "Samartín", "Eilao", "Panes", "Colombres", "Cabanaquinta", "Cuadonga",
+  "Balmonte", "Vilanova", "Degaña", "Alles", "Taramundi", "Noreña",
+  "La Plaza", "San Xuan de Beleño", "Villayón", "Bárzana", "Grandas",
+  "Santuyanu", "Santantolín", "La Caizuela", "Proaza", "Villanueva",
+  "Santolaya de Cabranes", "Cuaña", "La Pola Somiedu", "Pezós", 
+  "L'Infiestu", "Vega", "Rusecu", "A Caridá", "O Chao"

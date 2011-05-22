@@ -2,19 +2,29 @@
 
 name=_("Armenian")
 plural=_("?plural:Armenians")
-groups="Ancient", "Modern", "European"
+groups="Ancient", "Medieval", "Modern", "European", "Asian"
 legend=_("According to legend, the Armenian people are the descendants of\
  Haik - the great-great-grandson of Noah. The modern Republic of Armenia\
  gained independence from the Soviet Union in 1991.")
-leader=
- "Armenak",
- "Ishpuinis",
- "Tigranes II",
- "Gregor Lusarovitch",
- "Trdat III",
- "Menuas",
- "Argishtis I"
-leader_sex="Male", "Male", "Male", "Male", "Male", "Male", "Male"
+
+leaders = {
+ "name",                "sex"
+ "Armenak",             "Male"
+ "Ishpuinis",           "Male"
+ "Tigranes II",         "Male"
+ "Gregor Lusarovitch",  "Male"
+ "Trdat III",           "Male"
+ "Menuas",              "Male"
+ "Argishtis I",         "Male"
+ "Zabel I",             "Female"
+}
+
+ruler_titles = {
+ "government",     "male_title",        "female_title"
+ "Anarchy",        _("Usurper %s"),     _("?female:Usurper %s")
+ "Fundamentalism", _("Patriarch %s"),   _("Matriarch %s")
+}
+
 flag="armenia"
 flag_alt = "-"
 city_style = "Classical"
@@ -23,7 +33,7 @@ init_techs=""
 init_buildings=""
 init_government="Despotism"
 init_units=""
-civilwar_nations = "georgian", "assyrian"
+civilwar_nations = "georgian", "assyrian", "karabakhi"
 
 ; Cities of modern Republic of Armenia only
 cities =

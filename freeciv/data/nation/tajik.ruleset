@@ -3,48 +3,79 @@
 name=_("Tajik")
 plural=_("?plural:Tajiks")
 groups="Modern", "Asian"
-legend=_("Nation in Central Asia. Conquered by the Russian Empire\
- in 19th century, Tajikistan got independence\
- from the Soviet Union in 1991.")
+legend=_("Tajikistan is a nation in Central Asia. The Tajiks trace the\
+ foundation of their nation back to the Samanid Empire, one of the first\
+ Persian states to appear after the Arab conquest.")
 
-leader="Diodotos I", ; king of Bactria
-       "Heraios", ; first Kushan ruler
-       "Saman Khuda", ; founder of Samanid dynasty
-       "Isma'il I ibn Ahmad", ; Samanid ruler
-       "Abolqasem Lahouti" ; political activist and poet
+leaders = {
+ "name",                "sex"
+ "Bobojon Ghafurov",    "Male"
+ "Abulqosim Lohuti",    "Male" ; Political activist and poet.
+ "Nuh I",               "Male" ; Samanid ruler.
+ "Nasri II",            "Male" ; Samanid ruler.
+ "Ismoili Somoni",      "Male" ; Samanid ruler.
+}
 
-leader_sex="Male", "Male", "Male", "Male", "Male"
+ruler_titles = {
+ "government",      "male_title",            "female_title"
+ "Monarchy",        _("Emir %s"),            _("Emira %s")
+ "Communism",       _("First Secretary %s"), _("?female:First Secretary %s")
+}
 
 flag="tajikistan"
 flag_alt = "-"
 city_style = "Classical"
-
-ruler_titles = { "government",      "male_title",      "female_title"
-                 "Monarchy",        _("Khan"),         _("Khatan")
-               }
 
 init_techs=""
 init_buildings=""
 init_government="Despotism"
 init_units=""
 
-conflicts_with = "hungarian"
-civilwar_nations = "uzbek", "kyrgyz", "Afghani"
+conflicts_with="Hungarian" ;similar-looking flag
+civilwar_nations="Iranian", "Pakistani", "Afghani"
 
 cities =
  "Dushanbe",
- "Khorugh",
- "Kulob",
  "Khujand",
+ "Kulob",
  "Qurghonteppa",
- "Murghob",
- "Nizhniy Pyandzh",
- "Garm",
- "Norak",
+ "Istaravshan",
+ "Konibodom",
+ "Vakhdat",
+ "Isfara",
  "Panjakent",
  "Tursunzoda",
- "Orjonikidzeobad",
+ "Khorugh",
+ "Hisor",
+ "Farkhor",
+ "Chkalov",
+ "Vose'",
+ "Maskav",
+ "Danghara",
+ "Norak",
+ "Somoniyon",
+ "Ghafurov",
+ "Kolkhozobod",
+ "Zafarobod",
+ "Nov",
+ "Proletar",
+ "Jirgatol",
+ "Shahrtuz",
+ "Asht",
+ "Sarband",
+ "Taboshar",
+ "Qayroqqum",
+ "Leningrad",
  "Ayni",
- "Uroteppa",
- "Isfara",
- "Konibodom"
+ "Vakhsh",
+ "Dusti",
+ "Buston",
+ "Gharm",
+ "Kuybyshev",
+ "Roghun",
+ "Faizobod",
+ "Panj",
+ "Ishkoshim",
+ "Murghob",
+ "Qal'ai Khumb",
+ "Darband"

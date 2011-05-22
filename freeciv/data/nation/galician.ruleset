@@ -5,34 +5,32 @@ plural=_("?plural:Galicians")
 groups="Medieval", "European"
 legend=_("Galicia is a region in the northwest of Spain, just above\
  Portugal.")
-leader=
- "Afonso",
- "Diego Xelmírez",
- "Hermerico",
- "Pero Pardo de Cela",
- "Rosalía de Castro",
- "Manuel"
-leader_sex="Male", "Male", "Male", "Male",
-           "Female", "Male"
+
+leaders = {
+ "name",                "sex"
+ "Afonso",              "Male"
+ "Diego Xelmírez",      "Male"
+ "Hermerico",           "Male"
+ "Pero Pardo de Cela",  "Male"
+ "Rosalía de Castro",   "Female"
+ "Manuel",              "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",           "female_title"
+ "Despotism",       _("Lord %s"),           _("Lady %s")
+ "Fundamentalism",  _("Bishop %s"),         _("Mother Superior %s")
+}
+
 flag="galicia"
 flag_alt = "-"
 city_style = "Celtic"
-
-ruler_titles = { "government",      "male_title",          "female_title"
-                 "Democracy", _("Primeiro Ministro"),  _("Primeira Ministra")
-; /* TRANS: The third letter in "Dona" should be U+00F1 LATIN SMALL LETTER */
-; /* TRANS: N WITH TILDE */
-                 "Despotism",       _("Don"),              _("Dona")
-                 "Monarchy",        _("Rei"),              _("Raina")
-                 "Republic",        _("Presidente"),       _("Presidenta")
-                 "Fundamentalism",  _("Gran Bardo"),      _("Grande Bardesa")
-               }
 
 init_techs=""
 init_buildings=""
 init_government="Despotism"
 init_units=""
-civilwar_nations="portuguese", "spanish"
+civilwar_nations="portuguese", "asturian"
 
 cities =
   "Santiago de Compostela", "A Coruña", "Vigo", "Lugo", "Pontevedra",

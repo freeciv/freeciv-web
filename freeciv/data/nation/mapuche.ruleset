@@ -2,24 +2,19 @@
 
 name=_("Mapuche")
 plural=_("?plural:Mapuche")
-groups="American"
+groups="American", "Early Modern"
 
 legend=_("The Mapuche people successfully resisted the expansion of the Inka\
  empire, halting them at the Maule river in what is now central Chile. They\
  proved to be stubborn opponents of the Spanish, too, who, along with their\
  Chilean successors, took 300 years to conquer them.")
 
-leader=
- "Lef-Traru",
- "Caupolicán",
- "Colocolo"
-leader_sex = "Male", "Male", "Male"
-
-ruler_titles = { "government",      "male_title",        "female_title"
-                 "Monarchy",       _("Toqui"),           _("Toqui")
-                 "Republic",       _("Lonko"),           _("Lonko")
-                 "Fundamentalism", _("Machi"),           _("Machi")
-               }
+leaders = {
+ "name",        "sex"
+ "Lef-Traru",   "Male"
+ "Caupolicán",  "Male"
+ "Colocolo",    "Male"
+}
 
 flag         = "mapuche"
 flag_alt     = "-"

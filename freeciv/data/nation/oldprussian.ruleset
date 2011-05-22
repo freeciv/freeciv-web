@@ -1,0 +1,54 @@
+[nation_oldprussian]
+
+name=_("Old Prussian")
+plural=_("?plural:Old Prussians")
+groups="Medieval", "European"
+legend=_("The Prussians were Baltic peoples inhabiting the area between\
+ the Pomerania, Mazovia, Lithuania and the Baltic Sea (Baltic coast between\
+ the lower Vistula and lower Nemen). They were conquered and Germanized by\
+ the Teutonic Order.")
+leaders = {
+ "name",                "sex"
+ "Auktuma",             "Male"
+ "Divonis",             "Male"
+ "Herkus Mantas",       "Male"
+ "Richardas Glandas",   "Male"
+ "Glapas",              "Male"
+ "Komantas",            "Male"
+}
+flag="prusai"
+flag_alt = "-"
+city_style = "Celtic"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+conflicts_with="prussian"
+civilwar_nations = "lithuanian" ; polanian
+
+cities =
+  "Truso",
+"Sirgune",
+"Graudings",  
+"Elbings",
+"Regneta",
+"Orneta",
+"Wangus",
+"Kunnegsgarbs",       ; Königsberg/Kaliningrad
+"Salpwange",
+"Weluwa",
+"Wiskiauten",
+"Rast",
+"Alna",
+"Kwedins",
+"Iluwa",
+"Berents",
+"Nydda",
+"Wurmen",
+"Kele",
+"Susse",
+"Pukis",
+"Tuga",
+"Laba"

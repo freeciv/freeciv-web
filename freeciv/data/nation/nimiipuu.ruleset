@@ -1,0 +1,116 @@
+[nation_nimiipuu]
+
+; /* TRANS: The fourth letter in "Nimiipuu" should be */
+; /* TRANS: U+00ED LATIN SMALL LETTER I WITH ACUTE if available in */
+; /* TRANS: your charset. In ISO-8859-1 (ISO Latin 1) this is 00ED. */
+; /* TRANS: The last letter in "Perce" should be */
+; /* TRANS: U+00E9 LATIN SMALL LETTER E WITH ACUTE if available in */
+; /* TRANS: your charset. In ISO-8859-1 (ISO Latin 1) this is 00E9. */
+name=_("Nimiipuu")
+plural=_("?plural:Nimiipuu")
+groups="American"
+legend=_("The Nimiipuu, or the 'Real People', in their own language,\
+ are better known as the 'Nez Perce'. This Native American nation\
+ covered parts of Washington, Oregon, Montana and Idaho and consisted\
+ of more than 70 permanent villages in 1800. At this time the population\
+ numbered about 6,000. After a defeat by the American cavalry on October 5,\
+ 1877, the Nimiipuu were moved to reservations. The elected Nez Perce\
+ Tribal Executive Committee now governs tribal affairs.")
+
+; The Nez Perce was divided into several tribal groups, each with their
+; own leaders.
+leaders = {
+ "name",                        "sex"
+
+; (Chief Joseph) 1840 - 1904, Wallowa chief
+ "Hin-mah-too-yah-lat-kekt",    "Male"
+
+; (Joseph the Elder) 1785 - 1871, Wallowa chief
+ "Tu-eka-kas",                  "Male"
+
+; (White Bird) d. 1892, Lamatta chief
+ "Peo-peo-hix-hiix",            "Male"
+
+; (Looking Glass) c. 1823 - 1877, a war leader
+ "Allalimya Takanin",           "Male"
+
+; (The Preacher) c. 1815, priest of Sokulk
+ "Shmoqŭla",                    "Male"
+
+; (Jackson Sundown) 1863 - 1923, rodeo star
+ "Waaya-Tonah-Toesits-Kahn",    "Male"
+
+; 1903 - 1949, anthropologist and activist
+ "Archie Phinney",              "Male"
+
+; (Lawyer) 1796 - 1876, son of Twisted Hair
+ "Aleiya",                      "Male"
+
+; Clearwater chief
+ "Twisted Hair",                "Male"
+
+; (Three Feathers) signed treaty of 1855
+ "Mi-tat-wap-tes",              "Male"
+
+; (Chief Jason) 
+ "Kalkalshuatash",              "Male"
+
+; First Home and Farm Association President (1923)
+ "James Stuart",                "Male"
+
+; Chair of NPTEC until 2007 
+ "Rebecca Miles",               "Female"
+}
+
+ruler_titles = {
+ "government",      "male_title",         "female_title"
+ "Monarchy",        _("Great Chief %s"),  _("?female:Great Chief %s")
+ "Communism",       _("Chairman %s"),     _("Chairwoman %s")
+}
+
+flag="nez_perce"
+flag_alt = "-"
+city_style = "Celtic"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations = "Salishan", "Sioux", "Nuu-chah-nulth"
+
+cities =
+; Modern communities
+ "Kamiah",    ; inhabited for centuries - means many rope litters
+ "Lapwai",    ; seat of government of the Nez Perce reservation
+ "Orofino",   ; largest city
+ "Craigmont",
+ "Culdesac",
+ "Ferdinand",
+ "Kooskia",
+ "Peck",
+ "Reubens",
+ "Stites",
+ "Winchester",
+
+; Communities and towns within the Nez Perce reservation
+ "Myrtle",
+ "Lenore",
+ "Ahsahka",
+ "Spalding",
+ "Gifford",
+ "Sweetwater",
+ "Greer",
+ "Nezperce",
+ "Waha",
+ "Greencreek",
+ "Cottonwood Creek",
+ "Jacques Spur",
+ "Slickpoo Mission",
+ "Mohler",
+ "Clear Creek",
+ "Westlake"
+
+; No cities were included from the Colville reservation although many of
+; Chief Joseph`s descendants live there.  Including this would create a
+; potential conflict with a Colville nation.

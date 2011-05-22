@@ -1,0 +1,98 @@
+[nation_ivoirian]
+
+name=_("Ivoirian")
+plural=_("?plural:Ivoirian")
+groups="Modern", "African"
+; /* TRANS: The second letter in "Cote" should be */
+; /* TRANS: U+00F4 LATIN SMALL LETTER O WITH CIRCUMFLEX if available in */
+; /* TRANS: your charset. In ISO-8859-1 (ISO Latin 1) this is 00F4. */
+legend=_("Ivory Coast or Cote d'Ivoire achieved independence in 1960. It\
+ has been relatively stable compared to other West African countries, but\
+ in the 2000s it lived through a civil war.")
+
+leaders = {
+ "name",                "sex"
+ "Félix Houphouët-Boigny",      "Male"
+ "Henri Konan Bédié",           "Male"
+ "Robert Guéï",                 "Male"
+ "Laurent Gbagbo",              "Male"
+}
+
+flag = "ivory_coast"
+flag_alt = "-"
+city_style = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="malian", "burkinabe"
+
+cities =
+ "Abidjan",
+ "Yamoussoukro",
+ "Bouaké",
+ "Daloa",
+ "Korhogo",
+ "San-Pédro",
+ "Man",
+ "Gagnoa",
+ "Divo",
+ "Anyama",
+ "Abengourou",
+ "Soubré",
+ "Grand Bassam",
+ "Dabou",
+ "Agboville",
+ "Duékoué",
+ "Bouaflé",
+ "Sinfra",
+ "Bondoukou",
+ "Katiola",
+ "Séguéla",
+ "Ferkessedougou",
+ "Dimbokro",
+ "Issia",
+ "Guiglo",
+ "Bingerville",
+ "Adzopé",
+ "Danané",
+ "Oumé",
+ "Odienné",
+ "Agnibilékrou",
+ "Aboisso",
+ "Bonoua",
+ "Lakota",
+ "Toumodi",
+ "Sassandra",
+ "Tiassalé",
+ "Tingréla",
+ "Boundiali",
+ "Zuénoula",
+ "Vavoua",
+ "Daoukro",
+ "Akoupé",
+ "Arrah",
+ "Bongouanou",
+ "Tabou",
+ "Touba",
+ "Afféry",
+ "Bouna",
+ "Mbato",
+ "Biankouma",
+ "Béoumi",
+ "Mankono",
+ "Tanda",
+ "Toulépleu",
+ "Bangolo",
+ "Adiaké",
+ "Tiébissou",
+ "M'bahiakro",
+ "Sakassou",
+ "Dabakala",
+ "Botro",
+ "Ayamé",
+ "Guibéroua",
+ "Grand-Lahou",
+ "Bocanda"

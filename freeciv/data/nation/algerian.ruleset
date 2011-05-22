@@ -5,14 +5,24 @@ plural=_("?plural:Algerians")
 groups="Modern", "African"
 legend=_("Algeria is an Arabic nation in North Africa. It is historically\
  inhabited by the Berber people.")
-leader=
- "Ahmed Ben Bella",
- "Houari Boumédienne",
- "Kahina",
- "Kusayla",
- "Abd al-Qadir",
- "Mohammad Boudiaff"
-leader_sex="Male", "Female", "Male", "Male", "Male", "Male"
+
+leaders = {
+ "name",                "sex"
+ "Ahmed Ben Bella",     "Male"
+ "Houari Boumédienne",  "Female"
+ "Kahina",              "Male"
+ "Kusayla",             "Male"
+ "Abd al-Qadir",        "Male"
+ "Mohammad Boudiaff",   "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",              "female_title"
+ "Communism",       _("Secretary General %s"), _("Secretary General %s")
+ "Despotism",       _("%s Dey"),               _("?female:%s Dey")
+ "Fundamentalism",  _("Caliph %s"),            _("Calipha %s")
+}
+
 flag="algeria"
 flag_alt = "-"
 city_style = "Classical"
@@ -21,7 +31,7 @@ init_techs=""
 init_buildings=""
 init_government="Despotism"
 init_units=""
-civilwar_nations = "tunisian", "libyan"
+civilwar_nations = "Tunisian", "Libyan", "Amazigh"
 
 cities =
  "Algiers",

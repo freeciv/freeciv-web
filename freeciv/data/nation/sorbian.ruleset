@@ -1,0 +1,141 @@
+[nation_sorbian] 
+
+name=_("Sorbian") 
+plural=_("?plural:Sorbs") 
+groups="Medieval", "European" 
+legend=_("The Sorbs are West Slavic people living in the East of Germany\
+ in Eastern Saxony and Southern Brandenburg (Lusatia).\
+ The region has historically been associated with Poland and Bohemia.")
+
+leaders = {
+ "name",                        "sex"
+ "Derwan",                      "Male"
+ "Miliduch",                    "Male"
+ "Burislaw",                    "Male" ; probably Polish king Bolesław I Chrobry
+ "Bolko",                       "Male" ; Bolko II Mały from silesian lineage
+                                       ; of Piast dynasty
+ "Kaspar Peuker",               "Male"
+ "Jan Skala",                   "Male"
+ "Marja Grólmusec",             "Female" ; WW2 resistance fighter
+ "Měrćin Nowak-Njechorński",    "Male"
+ "Stanisław Tilich",            "Male" ; prime minister of Saxony
+}
+
+ruler_titles = {
+ "government",     "male_title",       "female_title"
+ "Despotism",     _("Prince %s"),      _("Princess %s")
+ "Republic",      _("Burgomaster %s"), _("?female:Burgomaster %s")
+} 
+
+flag= "lusatia" 
+flag_alt = "-" 
+city_style = "Celtic" 
+
+init_techs="" 
+init_buildings="" 
+init_government="Despotism" 
+init_units="" 
+
+civilwar_nations= "saxon", "polish", "czech"
+
+cities=
+  "Chóśebuz",                ;Cottbus
+  "Budyšin",                 ;Bautzen
+  "Kamjenc",
+  "Wojerecy",
+  "Zhorjelc",                ;Görlitz/Zgorzelec
+  "Slepo",
+  "Drježdźany",              ;Dresden
+  "Mišno",
+  "Žitawa",                  ;Żytawa/Zittau
+  "Zahań",                   ;Żagań/Sagan
+  "Kamjenica",               ;Chemnitz
+  "Baršć",                   ;Forst
+  "Žarow",                   ;Żary/Sorau
+  "Lubań",                   ;Lauban
+  "Dobrjoług-Góstkow",
+  "Běła Góra",
+  "Běła Woda",
+  "Borkowy",
+  "Dešno",
+  "Gubin",                   ;Guben
+  "Přibus",                  ;Priebus
+  "Žemeř",                   ;Sommerfeld
+  "Brody",                   ;Pförten
+  "Grabin",
+  "Kalawa",
+  "Wětošow",
+  "Tšavnica",
+  "Liškow",
+  "Liškowk",
+  "Stara Darbnja",
+  "Šejkow",
+  "Čorna Woda",
+  "Tšupc",
+  "Zły Komorow",
+  "Bóšicy",
+  "Budestecy",
+  "Chrósćicy",
+  "Chróstawa",
+  "Halštrow",
+  "Zaruž",
+  "Hodźij",
+  "Dobruša-Huska",
+  "Halštrowska Hola",
+  "Kubšicy",
+  "Łaz",
+  "Kulow",
+  "Hornja Hórka",
+  "Nowe Jěžercy",
+  "Korzym",
+  "Łuty",
+  "Nowosólc",
+  "Hućina",
+  "Njebjelčicy",
+  "Kumwald",
+  "Porchow",
+  "Łužnica",
+  "Malešecy",
+  "Njedźichow",
+  "Radwor",
+  "Ramnow",
+  "Sćenjow",
+  "Sepicy",
+  "Bukecy",
+  "Wjazońca",
+  "Šěrachow",
+  "Wóspork",
+  "Wulka Dubrawa",
+  "Warnoćicy",
+  "Světla",
+  "Połčnica",
+  "Pančicy-Kukow",
+  "Sprjewiny Doł",
+  "Wjelećin",
+  "Załom",
+  "Ralbicy-Różant",         ;Rosenthal
+  "Smělna-Póckowy",
+  "Rólany",
+  "Wóslink",
+  "Wołbramecy",
+  "Rakecy",
+  "Luboraz",
+  "Worklecy",
+  "Kinspork",
+  "Njesvačidło",
+  "Wětnica",
+  "Zemicy-Tumicy",
+  "Drjowk",                 ;Drebkau
+  "Bukowk",
+  "Bukowina",
+  "Benadźice",
+  "Mužakow",
+  "Lubij",
+  "Habrachćicy",
+  "Ochranow",
+  "Wostrowc",
+  "Rózbork",
+  "Trjebule",               ;Triebel
+  "Lěšna",
+  "Zawidow",
+  "Niska"

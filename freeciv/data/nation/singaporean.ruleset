@@ -17,24 +17,24 @@ plural=_("?plural:Singaporeans")
 groups="Modern", "Asian"
 legend=_("Singapore is a mercantile city-state located at the southernmost\
  tip of the Malaysian Peninsula.")
-leader=
- "Stamford Raffles",
- "W.A. Pickering",
- "Ong Teng Cheong",
- "Lee Kuan Yew",
- "Yusof bin Ishak"
-leader_sex="Male", "Male", "Male", "Male", "Male"
+
+leaders = {
+ "name",                "sex"
+ "Stamford Raffles",    "Male"
+ "W.A. Pickering",      "Male"
+ "Ong Teng Cheong",     "Male"
+ "Lee Kuan Yew",        "Male"
+ "Yusof bin Ishak",     "Male"
+}
+
+ruler_titles = {
+ "government",  "male_title",           "female_title"
+ "Monarchy",    _("Sultan %s"),         _("Sultana %s")
+}
+
 flag="singapore"
 flag_alt = "-"
 city_style = "Asian"
-
-ruler_titles = { "government",	"male_title",		"female_title"
-		 "Monarchy",	_("Sultan"),		_("Sultana")
-		 ; /* TRANS: Encik = Sir */
-		 "Communism",	_("Encik"),		_("?female:Encik")
-		 "Republic",	_("President"),	       _("?female:President")
-		 "Democracy",_("Prime Minister"), _("?female:Prime Minister")
-}
 
 init_techs=""
 init_buildings=""

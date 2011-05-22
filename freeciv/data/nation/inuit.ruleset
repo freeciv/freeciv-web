@@ -3,69 +3,61 @@
 name=_("Inuit")
 plural=_("?plural:Inuits")
 groups="American"
-legend=_("The Inuit people inhabit northern Canada and Greenland.\
- Legend says that the Great Shaman Qitdlarssuaq lead his people to Thule\
- (Qaanaaq) on the west coast of Greenland in the 10th century. All Inuit\
- of today are descendents of the Thule culture.")
-leader=
- "Qitdlarssuaq",
- "Nakasuk"
+legend=_("The Inuits are a group of peoples inhabiting the Arctic areas\
+ of North America and Siberia. The Canadian territory of Nunavut has a\
+ majority population of Inuits; the name of the territory means \"our\
+ land\" in Inuktitut.")
 
-leader_sex="Male", "Male"
-flag="greenland"
-flag_alt = "-"
+leaders = {
+ "name",                "sex"
+ "Abe Okpik",           "Male"
+ "Helen Maksagak",      "Female"
+ "Paul Okalik",         "Male"
+ "Eva Aariak",          "Female"
+}
+
+ruler_titles = {
+ "government",      "male_title",         "female_title"
+ "Fundamentalism",  _("Shaman %s"),        _("?female:Shaman %s")
+ "Monarchy",        _("Great Chief %s"),     _("?female:Great Chief %s")
+ "Republic",        _("Spokesman %s"),       _("Spokeswoman %s")
+ "Democracy",       _("Principal Chief %s"), _("?female:Principal Chief %s")
+}
+
+flag="nunavut"
+flag_alt = "greenland" ; used previously
 city_style = "European"
-
-ruler_titles = { "government",      "male_title",      "female_title"
-                 "Despotism",       _("Shaman"),        _("?female:Shaman")
-                 "Monarchy",    _("Great Shaman"),  _("?female:Great Shaman")
-               }
 
 init_techs=""
 init_buildings=""
 init_government="Despotism"
 init_units=""
-civilwar_nations = "canadian", "quebecois", "danish"
-
-; City names are taken from Greenland (a self-governing territory of the
-; Danish kingdom) and the Canadian territory of Nunavut, both Inuit-
-; dominated political entities.
+civilwar_nations="Canadian", "Aleut", "Greenlander"
 
 cities =
-; Alternated Greenlandic and Nunavut communities
- "Nuuk",		; Godthåb (Danish/Norwegian)
+; Communities recognised by the Government of Nunavut
  "Iqaluit",		; Frobisher Bay
- "Ilulissat",		; Jakobshavn (Danish/Norwegian)
- "Igloolik",		
- "Narsarsuaq",
+ "Kangiqiniq",
  "Arviat",		; Eskimo Point
- "Qaanaaq",		; Thule (Danish/Norwegian)
- "Kimmirut",		; Lake Harbour
- "Upernavik",
+ "Qamani’tuaq",
+ "Iglulik",
+ "Iqaluktuuttiaq",
+ "Pangniqtuuq",
+ "Mittimatalik",
+ "Qurluqtuq",
+ "Kinngait",
+ "Uqsuqtuuq",
+ "Kangiqtugaapik",
+ "Talurjuaq",
+ "Salliit",
+ "Naujaat",
  "Sanikiluaq",
- "Uummannaq",
- "Pangnirtung",
- "Qeqertarsuaq",	; Godhavn (Danish/Norwegian)
- "Quikiqtarjuaq",
- "Kangerlussuaq",	; Søndre Strømfjord (Danish/Norwegian)
- "Taloyoak",
-
-; Only Greenlandic communities below
- "Asiaat",
- "Ittoqortoormiut",	; Scoresbysund (Danish/Norwegian)
- "Kuglutuk",
- "Kangaatsiak",
- "Umingmaktok",
- "Maniitsoq",
- "Nanisivik",
- "Nanortalik",
- "Narsaq",
- "Paamiut",		; Frederikshåb (Danish/Norwegian)
- "Qaqortorq",
- "Qasigiannguit",
- "Sisimiut",
- "Tasiilaq",
-
-; Communities in Quebec with Inuit names
- "Kuujjuaq",
- "Kangiqsualujjuaq"
+ "Ikpiarjuk",
+ "Arviligjuaq",
+ "Sanirajak",
+ "Qikiqtarjuaq",
+ "Kimmirut",		; Lake Harbour
+ "Tikirarjuaq",
+ "Igluligaarjuk",
+ "Qausuittuq",
+ "Aujuittuq"

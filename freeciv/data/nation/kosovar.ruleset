@@ -1,0 +1,67 @@
+[nation_kosovar]
+
+name=_("Kosovar")
+plural=_("?plural:Kosovars")
+groups="European", "Modern"
+legend=_("Kosovo is a country on the Balkans. It declared independence in\
+ 2008. Serbia claims Kosovo as a province and its independence is not\
+ universally recognized.")
+
+leaders = {
+ "name",                        "sex"
+ "Mahmud Shevket Pasha",        "Male"
+ "Bajram Curri",                "Male"
+ "Isa Boletini",                "Male"
+ "Fadil Hoxha",                 "Male"
+ "Ibrahim Rugova",              "Male"
+ "Fatmir Sejdiu",               "Male"
+}
+
+flag="kosovo"
+flag_alt = "-"
+city_style = "Celtic"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations = "albanian", "serbian"
+
+cities =
+ "Prishtinë",	;Priština
+ "Prizreni",	;Prizren
+ "Ferizaji",	;Uroševac
+ "Gjakovë",	;Đakovica
+ "Mitrovica",	;Kosovska Mitrovica
+ "Pejë",	;Peć
+ "Gjilan",	;Gnjilane
+ "Vushtrri",	;Vučitrn
+ "Podujevë",	;Podujevo
+ "Rahoveci",	;Orahovac
+ "Fushë Kosovë", ;Kosovo Polje
+ "Suharekë",	;Suva Reka
+ "Kaçaniku",	;Kačanik
+ "Klinë",	;Klina
+ "Kamenicë",	;Kosovska Kamenica
+ "Deçan",	;Dečani
+ "Gllogovc",	;Glogovac
+ "Dragash",	;Dragaš
+ "Istog",	;Istok
+ "Leposaviq",	;Leposavić
+ "Lipjan",	;Lipljan
+ "Obiliq",	;Obilić
+ "Skënderaj",	;Srbica
+ "Shtime",	;Štimlje
+ "Shtërpcë",	;Štrpce
+ "Viti",	;Vitina
+ "Zubin Potok",	;Zubin Potok
+ "Zveçan",	;Zvečan
+ "Malishevë",	;Mališevo
+ "Novobërdë",	;Novo Brdo
+ "Junik",	;Junik
+ "Hani i Elezit", ;Đeneral Janković
+ "Mamushë",	;Mamuša
+ "Graçanica",	;Gračanica
+ "Ranillug",	;Ranilug
+ "Partesh",	;Parteš
+ "Kllokot"	;Klokot

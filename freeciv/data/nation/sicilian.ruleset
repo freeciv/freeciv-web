@@ -1,0 +1,98 @@
+[nation_sicilian]
+
+name=_("Sicilian")
+plural=_("?plural:Sicilians")
+groups="Medieval", "Early Modern", "European"
+legend=_("Sicily is the largest island of Italy. It has been ruled by\
+ Greeks, Carthaginians, Romans, Vandals, Ostrogoths, Byzantines and\
+ Arabs. In the 11th century the Normans founded the Kingdom of Sicily\
+ which gradually became one of Italy's more powerful states. In 1816 it\
+ was merged with Naples into the Kingdom of the Two Sicilies which was\
+ united with Italy in 1861.")
+
+leaders = {
+ "name",                        "sex"
+ "Ruggeru II",                  "Male"
+ "Ruggeru III",                 "Male"
+ "Giorgiu di Antiochia",        "Male"
+ "Gugghiermu lu Malu",          "Male"
+ "Gugghiermu lu Bonu",          "Male"
+ "Custanza",                    "Female"
+ "Fidiricu I",                  "Male"
+ "Petru III d'Aragona",         "Male"
+ "Firdinannu II dî Dui Sicili", "Male"
+ "Sarvaturi Giulianu",          "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Despotism",       _("Count %s"),     _("Countess %s")
+ "Fundamentalism",  _("Fra %s"),       _("Madre %s")
+}
+
+flag="sicily"
+flag_alt = "-"
+city_style = "Classical"
+
+init_techs=""
+init_buildings=""
+
+init_government="Despotism"
+init_units=""
+civilwar_nations = "neapolitan", "maltese"
+
+cities =
+ "Palermu",
+ "Catania",
+ "Missina",
+ "Sarausa",
+ "Marsala",
+ "Gela",
+ "Rausa",
+ "Tràpani",
+ "Nissa",
+ "Vittoria",
+ "Girgenti",
+ "Jaciriali",
+ "Muòrica",
+ "Mazzara",
+ "Patennò",
+ "Mustarjancu",
+ "Àrcamu",
+ "Sciacca",
+ "Barcillona",
+ "Caltaggiruni",
+ "Licata",
+ "Baarìa",
+ "Murriali",
+ "Adranu",
+ "Canniatì",
+ "Favara",
+ "Austa",
+ "Carini",
+ "Milazzu",
+ "Àvula",
+ "Partinicu",
+ "Castedduvitranu",
+ "Enna",
+ "Èrici",
+ "Caniattì",
+ "Jaci Catina",
+ "Còmmisu",
+ "Mascalucìa",
+ "Gravina",
+ "Musulumeli",
+ "Parma di Muntichiaru",
+ "Giarri",
+ "Tèrmini",
+ "Scicli",
+ "Niscemi",
+ "Belpassu",
+ "Biancavilla",
+ "Nuotu",
+ "Lintini",
+ "San Cataldu",
+ "Trimmisteri",
+ "Lìpari (ocean)",
+ "Pantiddirìa (ocean)",
+ "Lampidusa (ocean)"

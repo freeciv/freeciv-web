@@ -1,0 +1,67 @@
+[nation_grenadian]
+
+name=_("Grenadian")
+plural=_("?plural:Grenadians")
+groups="American", "Modern"
+legend=_("Grenada is an island nation in the Caribbean. It gained\
+ independence from the United Kingdom in 1974. The main island was known\
+ as Camahogne by the indigenous Caribs.")
+
+leaders = {
+ "name",                "sex"
+ "Eric Gairy",          "Male" ; First Prime Minister.
+ "Maurice Bishop",      "Male" ; New Jewel Movement.
+ "Bernard Coard",       "Male" ; Army coup.
+ "Phyllis Coard",       "Female" ; Army coup.
+ "Herbert Blaize",      "Male" ; Founder of GNP.
+}
+
+ruler_titles = {
+ "government",      "male_title",   "female_title"
+ "Fundamentalism",  _("Bishop %s"), _("?female:Bishop %s")
+}
+
+flag="grenada"
+flag_alt = "united_kingdom"
+city_style = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations = "vincentian"
+
+cities =
+ "St. George's",	; Previously known as Fort Royal
+ "Grenville",
+ "Gouyave",
+ "Hillsborough",
+ "Hence",
+ "North Village",
+ "Grand Bay",
+ "Victoria",
+ "Marquis",
+ "Sauteurs",
+ "Calivigny",
+ "Grand Roy",
+ "Diego Piece",
+ "Upper Pearl",
+ "Simon",
+ "Chutz",
+ "Mamma Cannes",
+ "Beaton",
+ "Morne",
+ "Lance aux Epines",
+ "Morne Docteur",
+ "Mabouya",
+ "Argyle",
+ "Lovell",
+ "Barbruce",
+ "Old Wall",
+ "Mt Royal",
+ "Glossy",
+ "Retreat",
+ "L'Ance Guyac",
+ "Cheltenham",
+ "Ashton",
+ "L'Appelle"

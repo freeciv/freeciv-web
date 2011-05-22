@@ -1,0 +1,80 @@
+[nation_maltese]
+
+name=_("Maltese")
+plural=_("?plural:Maltese")
+groups="European", "Modern", "Early Modern"
+legend=_("Malta was first settled around 5200 BC. Over the centuries,\
+ the islands have been ruled by the Phoenicians, Romans, Fatimids,\
+ Sicilians, Knights Hospitaller, French, and British. Malta became\
+ independent in 1964 and joined the EU in 2004.")
+
+leaders = {
+ "name",                        "sex"
+ "Pawlu minn Tarsu",            "Male" ; Paul of Tarsus
+ "Ruġġieru I ta' Sqallija",     "Male" ; Roger I of Sicily
+ "Margaritu ta' Brindisi",      "Male" ; Margaritus of Brindisi
+ "Karlu V",                     "Male" ; Charles I of Spain
+ "Jean Parisot de Valette",     "Male" ; Hospitaller grand master
+ "Ferdinand von Hompesch",      "Male" ; Hospitaller grand master
+ "Vittorja",                    "Female" ; Victoria
+ "Lawrence Gonzi",              "Male" ; Current PM
+ "Is-Sinjorina Agata Barbara",  "Female" ; only female President, 1982 - 1987
+}
+
+ruler_titles = {
+ "government",       "male_title",          "female_title"
+ "Fundamentalism",   _("Bishop %s"),        _("Mother Superior %s")
+ "Despotism",        _("Master %s"),        _("Mistress %s")
+ "Monarchy",         _("Grand Master %s"),  _("Grand Mistress %s")
+}
+
+flag="malta"
+flag_alt = "europe"
+                    
+city_style = "Classical"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations="sicilian", "carthaginian" 
+
+cities =
+ "Valletta",		; capital city
+ "Birkirkara",		; largest city
+ "Għar Dalam",		; stone age habitation
+ "Ġgantija",		; site of Neolithic temple/habitation
+ "Ħaġar Qim",		; site of Neolithic temple/habitation
+ "Mnajdra",		; site of Neolithic temple/habitation
+ "Mdina",		; old capital of Malta
+ "Maleth",		; Phoenician city
+ "Żebbuġ",	; built in Knights Hospitaller period (aka Citta Rohan)
+ "Ħaż-Żabbar",	; built in Knights Hospitaller period (aka Citta Hompesch)
+ "Dingli",		; near the highest point of Malta
+ "Żejtun",
+ "Mosta",
+ "Ħal Qormi",
+ "San Pawl il-Baħar",
+ "Tas-Sliema",
+ "San Ġwann",
+ "Naxxar",
+ "Rabat",
+ "Fgura",
+ "Attard",
+ "Żurrieq",
+ "Ħamrun",
+ "Wied il-Għajn",
+ "Raħal Ġdid",
+ "Birżebbuġa",
+ "Swieqi",
+ "Siġġiewi",
+ "San Ġiljan",
+ "Msida",
+ "Ħal Tarxien",
+ "Mellieħa",
+ "Gżira",
+ "Rabat Għawdex",
+ "Ħal-Luqa",
+ "Santa Venera",
+ "Bormla",
+ "Marsa"

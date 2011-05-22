@@ -2,7 +2,7 @@
 
 name=_("Prussian")
 plural=_("?plural:Prussians")
-groups="Medieval", "European"
+groups="Early Modern", "European"
 
 legend=_("Prussia was originally the name of a pagan Baltic people, who in\
  the 13th century were conquered by the German Teutonic Knight order. The\
@@ -12,20 +12,23 @@ legend=_("Prussia was originally the name of a pagan Baltic people, who in\
  uniting the German nation in 1871 and solidified its power during the\
  Franco-Prussian war of the same year.")
 
-leader=
- "Albrecht der Bär",
- "Waldemar",
- "Albrecht I",
- "Albrecht Friedrich",
- "Friedrich Wilhelm",
- "Friedrich I"
-leader_sex = "Male", "Male", "Male", "Male", "Male", "Male"
+leaders = {
+ "name",                "sex"
+ "Waldemar",            "Male"
+ "Albrecht I",          "Male"
+ "Albrecht Friedrich",  "Male"
+ "Friedrich Wilhelm",   "Male"
+ "Friedrich I",         "Male"
+ "Otto von Bismarck",   "Male"
+}
 
-ruler_titles = { "government",      "male_title",        "female_title"
-                 "Despotism",      _("Grand Master"),    _("Grand Master")
-                 "Monarchy",       _("Duke"),            _("Duchess")
-                 "Republic",       _("Elector"),         _("Elector")
-               }
+ruler_titles = {
+ "government",      "male_title",         "female_title"
+ "Despotism",      _("Duke %s"),          _("Duchess %s")
+ "Democracy",      _("Chancellor %s"),    _("?female:Chancellor %s")
+ "Fundamentalism", _("Archbishop %s"),    _("?female:Archbishop %s")
+ "Communism",      _("First Secretary %s"),_("?female:First Secretary %s")
+}
 
 flag         = "prussia"
 flag_alt     = "-"
@@ -36,7 +39,7 @@ init_buildings=""
 init_government="Despotism"
 init_units=""
 
-civilwar_nations = "german", "polish", "lithuanian"
+civilwar_nations = "german", "polish", "lithuanian", "brandenburgian"
 
 ; Sources:
 ; http://commons.wikimedia.org/wiki/Image:Rzeczpospolita_Royal_Ducal.png
@@ -71,11 +74,46 @@ cities =
  "Pillau",
  "Eylau",
  "Osterode",
- "Allenstein",
- "Heilsberg",
  "Rastenburg",
  "Ortelsburg",
  "Angerburg",
  "Insterburg",
  "Goldap",
- "Gumbinnen"
+ "Gumbinnen",
+; Brandenburg-Prussia
+ "Berlin",
+ "Potsdam",
+ "Posen",
+ "Frankfurt/Oder",
+ "Cottbus",
+ "Brandenburg an der Havel",
+ "Charlottenburg",
+ "Halle/Saale",
+ "Küstrin",
+; Later additions
+ "Breslau",
+ "Magdeburg",
+ "Münster",
+ "Köln",
+ "Koblenz",
+ "Kleve",
+ "Sigmaringen",
+ "Schneidemühl",
+ "Oppeln",
+ "Essen",
+ "Düsseldorf",
+ "Dortmund",
+ "Greifswald",
+ "Grünberg",
+ "Trier",
+ "Emden",
+ "Bromberg",
+ "Kiel",
+ "Kassel",
+ "Hannover",
+ "Frankfurt am Main",
+ "Wiesbaden",
+ "Schleswig",
+; Additions after German unification
+ "Ratzeburg",
+ "Arolsen"

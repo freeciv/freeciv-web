@@ -8,30 +8,33 @@ legend=_("The Muskogee was a confederacy of North American tribes,\
  the area now encompassed by the U.S. states of Georgia and Alabama. Creek\
  and Seminole tribes briefly formed a sovereign state known as the \"State\
  of Muskogee\" during the early 1800s.")
-leader=
- "Samuel Checote",
- "Emistesigo",
- "Great Mortor",
- "Isparhechar",
- "Menawa",
- "Opothle Yohola",
- "Pleasant Porter",
- "Red Eagle",
- "White Warrior",
- "Alexander McGillivray",
- "Peter McQueen",
- "Estajoca"
-leader_sex="Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male",
- "Male", "Male", "Male", "Male"
+
+leaders = {
+ "name",                        "sex"
+ "Samuel Checote",              "Male"
+ "Emistesigo",                  "Male"
+ "Great Mortor",                "Male"
+ "Isparhechar",                 "Male"
+ "Menawa",                      "Male"
+ "Opothle Yohola",              "Male"
+ "Pleasant Porter",             "Male"
+ "Red Eagle",                   "Male"
+ "White Warrior",               "Male"
+ "Alexander McGillivray",       "Male"
+ "Peter McQueen",               "Male"
+ "Estajoca",                    "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",            "female_title"
+ "Monarchy",        _("Great Chief %s"),     _("Great Chief %s")
+ "Republic",        _("Spokesman %s"),       _("Spokeswoman %s")
+ "Democracy",       _("Principal Chief %s"), _("?female:Principal Chief %s")
+}
+
 flag="muskogee"
 flag_alt = "-"
 city_style = "Celtic"
-
-ruler_titles = { "government",      "male_title",      "female_title"
-                 "Despotism",       _("Chief"),        _("Chief")
-                 "Monarchy",        _("Great Chief"),  _("Great Chief")
-                 "Republic",        _("Spokesman"),    _("Spokeswoman")
-               }
 
 init_techs=""
 init_buildings=""

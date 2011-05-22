@@ -5,30 +5,26 @@ plural=_("?plural:Tairona")
 groups="American"
 
 legend=_("A Chibchan-speaking people related to the Kuna of Panama and the\
- Muisca of central Colombia, the Tairona inhabit the modern Magdalena and La\
- Guajira Departments of northern Colombia. Their city of Teyuna was founded\
- sometime around 500BCE. The Tairona, living a mountainous area, built stone\
- steps and terraces on steep hillsides in order to farm the region. Though\
- they fought against the Spanish for 75 years, eventually they succumb to\
- the various pressures that all Native American peoples were subject to at\
- the period.")
+ Muisca of central Colombia, the Tairona inhabit the modern Magdalena and\
+ La Guajira Departments of northern Colombia. Their city of Teyuna was\
+ founded sometime around 500 BC. The Tairona, living in a mountainous\
+ area, built stone steps and terraces on steep hillsides in order to farm\
+ the region. Though they fought against the Spanish for 75 years,\
+ eventually they succumbed to the various pressures that all Native\
+ American peoples were subject to at the period.")
 
-leader=
- "Nabobá",
- "Nugi Túxe",
- "Hába Haxtoxé",
- "Kunhwingumu"
+leaders = {
+ "name",                "sex"
+ "Nabobá",              "Male"
+ "Nugi Túxe",           "Male"
+ "Hába Haxtoxé",        "Male"
+ "Kunhwingumu",         "Male"
+}
 
-leader_sex = "Male", "Male", "Male", "Male"
-
-ruler_titles = { "government",      "male_title",        "female_title"
-		 ; /* TRANS: Hankwa = Chief */
-                 "Despotism",       _("Hankwa"),         _("Hankwa")
-		 ; /* TRANS: Guacanaoma = Paramount Chief */
-                 "Monarchy",        _("Guacanaoma"),     _("Guacanaoma")
-		 ; /* TRANS: Mama = Priest */
-                 "Fundamentalism",  _("Mama"),           _("Mama")
-               }
+ruler_titles = {
+ "government",      "male_title",            "female_title"
+ "Monarchy",        _("Paramount Chief %s"), _("?female:Paramount Chief %s")
+}
 
 flag         = "tairona"
 flag_alt     = "-"
@@ -39,7 +35,7 @@ init_buildings=""
 init_government="Despotism"
 init_units=""
 
-civilwar_nations = "inca", "tupi", "mayan"
+civilwar_nations = "inca", "kuna", "miwska"
 
 cities =
  "Teyuna",

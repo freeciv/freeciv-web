@@ -1,0 +1,93 @@
+[nation_zapotec]
+
+name=_("Zapotec")
+plural=_("?plural:Zapotecs")
+groups="Ancient", "Medieval", "American"
+; /* TRANS: The last letter in "Binniza", the fourth letter in */
+; /* TRANS: "Alban" and and the third letter in "Juarez" should be */
+; /* TRANS: U+00E1 LATIN SMALL LETTER A WITH ACUTE if available in */
+; /* TRANS: your charset. In ISO-8859-1 (ISO Latin 1) this is 00E1. */
+legend=_("The Zapotecs or Binniza live in the Mexican state of Oaxaca.\
+ They formed one of the oldest and most resilient Mesoamerican\
+ civilizations. The most notable Zapotec center, Monte Alban, was built\
+ on a razed mountain top. Benito Juarez, Mexico's first indigenous\
+ president, was a Zapotec.")
+
+leaders = {
+ "name",                "sex"
+ "Za'achila II",        "Male"
+ "Za'achila III",       "Male"
+ "Cosijoeza",           "Male"
+ "Cosijopí Sicasibí",   "Male"
+ "Bino Gada",           "Male"
+ "Heliodoro Charis",    "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Despotism",       _("Lord %s"),      _("Lady %s")
+}
+
+flag="zapotec"
+flag_alt = "mexico"
+city_style = "Babylonian"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations = "mixtec", "aztec"
+
+cities =
+ "Lyobáa", ;Mitla
+ "Guilá", ;Monte Albán
+ "Za'achila", ;Zaachila
+ "Guiengola", ;Guiengola
+ "Dainzú", ;Dainzú
+ "Yagul", ;Yagul
+ "Lambityeco", ;Lambityeco
+ "Xabizende", ;Juchitán de Zaragoza
+ "Guisíi", ;Santo Domingo Tehuantepec
+ "La'a", ;Oaxaca
+ "Ike Sidi Biá", ;Salina Cruz
+ "Guielatao", ;Gueletao
+ "Denicahue", ;San Pedro Mixtepec
+ "Quialana", ;San Bartolomé Quialana
+ "Quiaduni", ;San Pedro Quiatoni
+ "Tavela", ;Santa Ana Tavela
+ "I'iya Reni", ;Santa Ana Yareni
+ "Zoogocho", ;San Bartolomé Zoogocho
+ "Guichicovi", ;San Juan Guichicovi
+ "Guie'e Via", ;Guevea de Humboldt
+ "Lohoxicha", ;Candelaria Loxicha
+ "Guetareni", ;San Agustín Yatareni
+ "Zavaache", ;San Andrés Zabache
+ "Lachigoloó", ;San Francisco Lachigoló
+ "Lohogueche", ;San Francisco Logueche
+ "Lachiguiriac", ;San José Lachiguiri
+ "Guelpalachi", ;San Juan Bautista Guelache
+ "Lachigallo", ;San Juan Lachigalla
+ "Quiguixí", ;San Juan Quiahije
+ "Yaee", ;San Juan Yaee
+ "Ya Tzona", ;San Juan Yatzona
+ "Quiaviní", ;San Lucas Quiaviní
+ "Lachilaá", ;San Martín Lachila
+ "Yuo Dao", ;San Miguel Yotao
+ "Yaganiza", ;San Pablo Yaganiza
+ "Quiechapa", ;San Pedro Mártir Quiechapa
+ "Zetgache", ;Santa Ana Zegache
+ "Quieri", ;Santa Catarina Quieri
+ "Latzi Zaatoo", ;Santa Catarina Lachatao
+ "Quiané", ;Santa Catarina Quiané
+ "Quioquitani", ;Santa Catarina Quioquitani
+ "Guelaxeé", ;Santa María Guelacé
+ "Guienagati", ;Santa María Guienagati
+ "Lachiguiri", ;Santiago Lachiguiri
+ "Xanica", ;Santiago Xanica
+ "Xiacui", ;Santiago Xiacui
+ "Yaveo", ;Santiago Yaveo
+ "Yorxchixil", ;Santiago Zoochila
+ "Xeguevcia", ;Xagacia
+ "Xanalieza", ;Santo Tomás Jalieza
+ "Yaaxe" ;Yaxe

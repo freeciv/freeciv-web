@@ -928,9 +928,7 @@ char *secfile_lookup_str(struct section_file *my_section_file, const char *path,
   va_end(ap);
 
   if(!(pentry=section_file_lookup_internal(my_section_file, buf))) {
-    freelog(LOG_FATAL, "sectionfile %s doesn't contain a '%s' entry",
-	    secfile_filename(my_section_file), buf);
-    exit(EXIT_FAILURE);
+    return NULL;
   }
 
   if(!pentry->svalue) {

@@ -1,0 +1,74 @@
+[nation_eritrean]
+
+name=_("Eritrean")
+plural=_("?plural:Eritreans")
+groups="Modern", "African"
+legend=_("Eritrea is a country in eastern Africa which borders Sudan,\
+ Ethiopia, and Djibouti. It was once the Kingdom of D'mt and was later\
+ conquered by Italy. In 1951 it was federated with Ethiopia, which led to\
+ the development of an independence movement in the 1960s. In 1991 the\
+ 31-year war ended with Eritrea gaining independence.")
+
+leaders = {
+ "name",                "sex"
+ "Isaias Afewerki",     "Male" ; First provisional President (living).
+ "Hamid Idris Awate",   "Male" ; leader of Eritrean Liberation Army.
+ "Ali Said Abdella",    "Male" ; rebel commander, politician and diplomat.
+ "Bahta Hagos",         "Male" ; 19th century local military commander.
+ "Woldeab Woldemariam", "Male" ; early 20th century teacher and political
+                               ; leader.
+ "Ibrahim Sultan Ali",  "Male" ; early 20th century independence activist.
+ "Fozia Hashim",        "Female" ; current minister of justice - female
+                                 ; (living).
+}
+
+flag="eritrea"
+flag_alt="-"
+city_style="Babylonian"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+
+civilwar_nations="Ethiopian", "Italian"
+
+cities =
+  "Asmara",	; capital
+  "Nakfa",	; associated with independence movement
+  ; remaining cities seen on Google maps 
+  "Hasta",
+  "Agra",
+  "Afchewa",
+  "Selset",
+  "Anker",
+  "Mariet",
+  "Ghinda",
+  "Mahmimet",
+  "Mebaa",
+  "Hashmet",
+  "Asmat",
+  "Afabet",
+  "Halhal",
+  "Akordat",
+  "Hagaz",
+  "Sebderat",
+  "Wekiro",
+  "Mitsiwa",
+  "Gheden",
+  "Keren",
+  "Teseney",
+  "Haikota",
+  "Barentu",
+  "Omhajer",
+  "Biet Gabriel",
+  "Mendefera",
+  "Dekemhare",
+  "Dbarwa",
+  "Gheden",
+  "Irafayle",
+  "Mersa Fatma",
+  "Aseb",
+  "Harsile",
+  "Ghibdo",
+  "Beylul"

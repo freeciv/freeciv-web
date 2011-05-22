@@ -1,0 +1,84 @@
+[nation_ruthenian]
+
+name=_("Ruthenian")
+plural=_("?plural:Ruthenians")
+groups="European", "Medieval"
+legend=_("The Kievan Rus' were a Medieval Slavic monarchy. It was\
+ centered in Kiev after that city was conquered by Oleg of Novgorod.\
+ In the 13th century the Rus' succumbed to a Mongol invasion. The Rus'\
+ were the precursors of the modern East Slavic nations.")
+
+leaders = {
+ "name",                        "sex"
+ "Oleg",                        "Male"
+ "Igor",                        "Male"
+ "Olga",                        "Female"
+ "Sviatoslav I Veliky",         "Male"
+ "Yaropolk I",                  "Male"
+ "Volodimer Veliky",            "Male"
+ "Sviatopolk Okayanny",         "Male"
+ "Yaroslav Mudry",              "Male"
+ "Iziaslav I",                  "Male"
+ "Volodimer II Monomah",        "Male"
+ "Mstislav I",                  "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",         "female_title"
+ "Despotism",       _("Prince %s"),       _("Princess %s")
+ "Monarchy",        _("Grand Prince %s"), _("Grand Princess %s")
+ "Fundamentalism",  _("Patriarch %s"),    _("Matriarch %s")
+}
+
+flag = "kiev"
+flag_alt = "russia"
+city_style = "celtic"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+conflicts_with = "russian", "ukrainian", "belarusian", "muscovite"
+civilwar_nations = "muscovite", "ukrainian", "belarusian"
+
+cities =
+ "Kiev",
+ "Novgorod",
+ "Volodimer", ;Vladimir
+ "Chernigov",
+ "Galich",
+ "Pereyaslavl",
+ "Peresechen",
+ "Polotsk",
+ "Smolensk",
+ "Suzdal",
+ "Pskov",
+ "Peremyshl",
+ "Lyubech",
+ "Cherven",
+ "Turov",
+ "Moskva",
+ "Ryazan",
+ "Kursk",
+ "Belgorod",
+ "Nizhny Novgorod",
+ "Minsk",
+ "Vitebsk",
+ "Ladoga",
+ "Belo Ozero",
+ "Belaya Cerkov",
+ "Yaroslavl",
+ "Novgorod Seversky",
+ "Azov",
+ "Tmutarakan",
+ "Sarakel",
+ "Rostov",
+ "Murom",
+ "Novgorod-Seversky",
+ "Oleshye",
+ "Peresechen",
+ "Terebovl",
+ "Pereyaslavl",
+ "Berestye",
+ "Toropets"
+

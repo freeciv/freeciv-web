@@ -1,0 +1,85 @@
+[nation_oldenburgian]
+
+name=_("Oldenburgian")
+plural=_("?plural:Oldenburgians")
+groups="Medieval", "Early Modern", "European"
+legend=_("Initially a vassal of the dukes of Saxony, Oldenburg became\
+ a county directly suzerain to the Holy Roman Emperor in the 12th\
+ century. In 1450, when count Christian VI became king Christian I of\
+ Denmark, the country entered into a personal union with Denmark. A second\
+ union with Denmark existed from 1667 to 1773. Oldenburg's dynasty also\
+ ruled Schleswig-Holstein, Russia and Sweden at some point in time.\
+ Oldenburg became a grand duchy in 1815 and a republic in 1918. In 1931\
+ it was the first German state to vote the Nazi Party into power. After\
+ World War II, Oldenburg was merged with Hanover to form the state of\
+ Lower Saxony.")
+leaders = {
+ "name",			"sex"
+ "Egilmar",			"male"
+ "Dietrich",			"male"
+ "Christian VI",		"male"
+ "Anton I",			"male"
+ "Friedrich August",		"male"
+ "Peter Friedrich Ludwig",	"male"
+ "August I",			"male"
+ "Cäcilie",			"female"
+ "Peter II",			"male"
+}
+
+ruler_titles = {
+ "government",     "male_title",          "female_title"
+ "Despotism",      _("Count %s"),         _("Countess %s")
+ "Fundamentalism", _("Bishop %s"),        _("?female:Bishop %s")
+ "Monarchy",       _("Grand Duke %s"),    _("Grand Duchess %s")
+ "Democracy",  _("Minister-President %s"), _("?female:Minister-President %s")
+}
+
+flag="oldenburg"
+flag_alt = "-"
+city_style = "European"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+civilwar_nations = "schleswig-holsteinian", "hanoverian", "frisian", "palatinate" ;latter because of Birkenfeld
+
+cities =
+ "Oldenburg",
+ "Delmenhorst",
+ "Jever",
+ "Varel",
+ "Eutin",
+ "Birkenfeld",
+ "Rüstringen",
+ "Westerstede",
+ "Cloppenburg",
+ "Wildeshausen",
+ "Vechta",
+ "Brake",
+ "Idar-Oberstein",
+ "Schwartau",
+ "Butjadingen",
+ "Elsfleth",
+ "Friesoythe",
+ "Nohfelden",
+ "Kniphausen",
+ "Nordenham",
+ "Apen",
+ "Löningen",
+ "Damme",
+ "Jade",
+ "Scharbeutz",
+ "Herrstein",
+ "Wangerooge (ocean)",
+ "Ahrensböl",
+ "Selbach",
+ "Malente",
+ "Dedesdorf",
+ "Schortens",
+ "Zwischenahn",
+ "Hude",
+ "Berne",
+ "Hooksiel",
+ "Wilhelmshaven"
+

@@ -1,0 +1,77 @@
+[nation_southyemeni]
+
+name=_("South Yemeni")
+plural=_("?plural:South Yemenis")
+groups="Asian"
+legend=_("The area around Aden was colonized by the British in 1839.\
+ South Yemen declared independence in 1967 and joined the communist bloc.\
+ It was united with North Yemen in 1990.")
+
+leaders = {
+ "name",                        "sex"
+ "Qahtan Muhammad al-Shaabi",   "Male"
+ "Muhammad Ali Haitham",        "Male"
+ "Salim Rubai Ali",             "Male"
+ "Abdul Fattah Ismail",         "Male"
+ "Ali Nasir Muhammad",          "Male"
+}
+
+ruler_titles = {
+ "government",     "male_title",           "female_title"
+ "Communism",   _("General Secretary %s"), _("?female:General Secretary %s")
+ "Fundamentalism", _("Imam %s"),           _("Imama %s")
+ "Monarchy",       _("Sultan %s"),         _("Sultana %s")
+}
+
+flag="south_yemen"
+flag_alt = "-"
+city_style = "Babylonian"
+
+init_techs=""
+init_buildings=""
+init_government="Despotism"
+init_units=""
+conflicts_with = "himyarite"
+civilwar_nations = "yemeni"
+
+cities =
+ "'Adan",
+ "Hawata",
+ "Al-Mukalla",
+ "'Ataq",
+ "Zinjibar",
+ "Al-Ghayda",
+ "Ja'ar",
+ "Shibam",
+ "Al-Habilayn",
+ "Zara",
+ "Bayhan al-Qisab",
+ "Ash-Shir",
+ "Al-Quza",
+ "Sena",
+ "Bani Bakr",
+ "Al-Kawd",
+ "Nisab",
+ "Gayl Bawazir",
+ "Qishn",
+ "Say'un",
+ "Al-Waht",
+ "Mudiya",
+ "Al-Hawta",
+ "Ad-Dis as-Sharqiya",
+ "Sayhut",
+ "Tarim",
+ "Muhim Hurz al-Ujain",
+ "Al-Hisn",
+ "Mayfa'a",
+ "Al-Qatn",
+ "Al-'Ays",
+ "Al-Mahzan",
+ "Azzan",
+ "Al-Hami",
+ "Ahwar",
+ "Ar-Rawda",
+ "Hadibu (ocean)",
+ "Batis",
+ "Shuhayr",
+ "Qusay'ir"

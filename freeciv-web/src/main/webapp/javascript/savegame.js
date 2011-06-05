@@ -33,18 +33,28 @@ function load_game_real(filename)
     
     var scenario = $.getUrlVar('scenario');
     if (scenario == "true") {
-      var test_packet = [{"packet_type" : "chat_msg_req", 
-                         "message" : "/load " + filename},
-                         {"packet_type" : "chat_msg_req", 
-                         "message" : "/take AI*1"},
-                         {"packet_type" : "chat_msg_req", 
-                         "message" : "/aitoggle AI*1"}];    
+      var test_packet = {"type" : packet_chat_msg_req, 
+                         "message" : "/load " + filename};
+      var myJSONText = JSON.stringify(test_packet);
+      send_request (myJSONText);
+
+      test_packet = {"type" : packet_chat_msg_req, 
+                         "message" : "/take AI*1"};
+      myJSONText = JSON.stringify(test_packet);
+      send_request (myJSONText);
+
+      test_packet = {"type" : packet_chat_msg_req, 
+                         "message" : "/aitoggle AI*1"};    
+      myJSONText = JSON.stringify(test_packet);
+      send_request (myJSONText);
+
     } else {
-      var test_packet = [{"packet_type" : "chat_msg_req", 
-                         "message" : "/load " + filename}];
+      var test_packet = {"type" : packet_chat_msg_req, 
+                         "message" : "/load " + filename};
+      var myJSONText = JSON.stringify(test_packet);
+      send_request (myJSONText);
+
     }
-    var myJSONText = JSON.stringify(test_packet);
-    send_request (myJSONText);
 }
 
 /**************************************************************************
@@ -52,7 +62,7 @@ function load_game_real(filename)
 **************************************************************************/
 function save_game()
 {
-  var test_packet = [{"packet_type" : "chat_msg_req", "message" : "/save"}];
+  var test_packet = {"type" : packet_chat_msg_req, "message" : "/save"};
   var myJSONText = JSON.stringify(test_packet);
   send_request(myJSONText);
 

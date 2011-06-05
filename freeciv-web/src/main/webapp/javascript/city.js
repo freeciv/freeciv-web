@@ -308,7 +308,7 @@ function city_turns_to_build(pcity,
 function send_city_buy()
 {
   if (active_city != null) {
-    var packet = [{"packet_type" : "city_buy", "city_id" : active_city['id']}];
+    var packet = {"type" : packet_city_buy, "city_id" : active_city['id']};
     send_request (JSON.stringify(packet));
   }
 }
@@ -317,12 +317,10 @@ function send_city_buy()
 **************************************************************************/
 function send_city_change(city_id, kind, value)
 {
-  var packet = [{"packet_type" : "city_change", "city_id" : city_id, 
-                "production_kind": kind, "production_value" : value}];
+  var packet = {"type" : packet_city_change, "city_id" : city_id, 
+                "production_kind": kind, "production_value" : value};
   send_request (JSON.stringify(packet));
 
-  
-  //setTimeout ( "show_city_dialog(cities["+city_id+"]);", 1000);
   
 }
 
@@ -348,15 +346,15 @@ function do_city_map_click(ptile)
 {
   var packet = null;
   if (ptile['worked'] == active_city['id']) {
-    packet = [{"packet_type" : "city_make_specialist", 
+    packet = {"type" : packet_city_make_specialist, 
 	         "city_id" : active_city['id'], 
                  "worker_x" : ptile['x'] - active_city['x'] + 2, 
-		 "worker_y" : ptile['y'] - active_city['y'] + 2}];
+		 "worker_y" : ptile['y'] - active_city['y'] + 2};
   } else {
-    packet = [{"packet_type" : "city_make_worker", 
+    packet = {"type" : packet_city_make_worker, 
 	         "city_id" : active_city['id'], 
                  "worker_x" : ptile['x'] - active_city['x'] + 2, 
-		 "worker_y" : ptile['y'] - active_city['y'] + 2}];
+		 "worker_y" : ptile['y'] - active_city['y'] + 2};
   }    
   send_request (JSON.stringify(packet));
 
@@ -411,7 +409,7 @@ function city_name_dialog(suggested_name, unit_id) {
 					text: "Ok",
 				        click: function() {
 						var name = $("#city_name_req").val();
-						var packet = [{"packet_type" : "unit_build_city", "name" : escape(name), "unit_id" : unit_id }];
+						var packet = {"type" : packet_unit_build_city, "name" : escape(name), "unit_id" : unit_id };
 						send_request (JSON.stringify(packet));
 						$("#city_name_dialog").remove();
 						keyboard_input=true;
@@ -425,7 +423,7 @@ function city_name_dialog(suggested_name, unit_id) {
   $('#city_name_dialog').keyup(function(e) {
     if (e.keyCode == 13) {
     	var name = $("#city_name_req").val();
-	var packet = [{"packet_type" : "unit_build_city", "name" : escape(name), "unit_id" : unit_id }];
+	var packet = {"type" : packet_unit_build_city, "name" : escape(name), "unit_id" : unit_id };
 	send_request (JSON.stringify(packet));
 	$("#city_name_dialog").remove();
         keyboard_input=true;

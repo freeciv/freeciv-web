@@ -28,13 +28,9 @@ from threading import Thread;
 from civcom import *
 from debugging import *
 
-try:
-    import simplejson as json
-except ImportError:
-    import json
 
 ROOT = op.normpath(op.dirname(__file__))
-WS_UPDATE_INTERVAL = 0.025;
+WS_UPDATE_INTERVAL = 0.022;
 
 civcoms = {};
 
@@ -50,16 +46,18 @@ class CivConnection(tornadio.SocketConnection):
     def on_open(self, request, *args, **kwargs):
 	self.ip = request.remote_ip;    
         self.participants.add(self);
+	self.is_ready = False;
 
     def on_message(self, message):
-	net_data = json.loads(message);
-	packet_payload = net_data["data"];
-
-        username = str(net_data["u"]);
-        civserverport = net_data["p"];
+        if (not self.is_ready):
+          auth = message.split(";");
+	  self.username = auth[0];
+	  self.civserverport = auth[1];
+	  self.message = "[]";
+	  self.is_ready = True;
         
         # get the civcom instance which corresponds to this user.        
-        self.civcom = self.get_civcom(username, civserverport, self.ip, self);
+        self.civcom = self.get_civcom(self.username, self.civserverport, self.ip, self);
 
         if (self.civcom == None):
           self.send("Error: Could not authenticate user.");
@@ -68,7 +66,7 @@ class CivConnection(tornadio.SocketConnection):
         try:
             
           # send JSON request to civserver.
-          if not self.civcom.send_packet_objects_to_civserver(packet_payload):
+          if not self.civcom.send_packets_to_civserver(message):
             if (logger.isEnabledFor(logging.INFO)):
               logger.info("Sending data to civserver failed.");
 	    self.send('Error: Civserver communication failure ')
@@ -90,7 +88,7 @@ class CivConnection(tornadio.SocketConnection):
 
     # get the civcom instance which corresponds to the requested user.
     def get_civcom(self, username, civserverport, client_ip, ws_connection):
-      key = username + str(civserverport);
+      key = username + str(civserverport) + str(client_ip);
       if key not in civcoms.keys():
         civcom = CivCom(username, int(civserverport));
         civcom.client_ip = client_ip;

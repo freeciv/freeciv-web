@@ -20,8 +20,8 @@ The Freeciv Web client consists of these components:
 * freeciv - a fork of the main Freeciv C client and server.
 
 * freeciv-proxy - a HTTP proxy which allows web client users
-  to connect to Freeciv civservers. This proxy converts C packets
-  to and from JSON.
+  to connect to Freeciv civservers. The proxy is a HTTP and WebSocket
+  server, and proxy between web browsers and civservers.
 
 * freeciv-web - a Java web application for the Freeciv web client.
   This application is a AJAX application which consists of HTML,
@@ -69,8 +69,6 @@ System Requirements
 
 - nginx 1.0.0 - http://nginx.org/
 
-- simplejson 2.1.5 required: https://github.com/simplejson/simplejson
-
 - pngcrush, required for freeciv-img-extract.  http://pmt.sourceforge.net/pngcrush/
 
 - SocketTornad.IO 0.0.4 - https://github.com/MrJoes/tornadio
@@ -78,6 +76,8 @@ System Requirements
 - Tornado 1.2.1 - http://www.tornadoweb.org/
 
 - GLib 2.29.x - http://ftp.gnome.org/pub/GNOME/sources/glib/2.29/
+
+- Jansson 2.0.1 - http://www.digip.org/jansson/
 
 Compiling and running the Freeciv Web client
 ---------------------------------

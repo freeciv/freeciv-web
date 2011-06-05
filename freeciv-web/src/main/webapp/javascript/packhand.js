@@ -226,7 +226,7 @@ function handle_player_remove(packet)
 /* 100% complete */
 function handle_conn_ping(packet) 
 {
-  var test_packet = [{"packet_type" : "conn_pong"}];
+  var test_packet = {"type" : packet_conn_pong};
   var myJSONText = JSON.stringify(test_packet);
   send_request (myJSONText);
 

@@ -48,8 +48,8 @@ function orientation_changed() {
 function iphone_autostart()
 {
 
-  var test_packet = [{"packet_type" : "chat_msg_req", 
-                         "message" : "/start"}];
+  var test_packet = {"type" : packet_chat_msg_req, 
+                         "message" : "/start"};
   var myJSONText = JSON.stringify(test_packet);
   send_request (myJSONText);
     

@@ -9,7 +9,7 @@ sudo python freeciv-websocket-proxy.py
 See status on this URL when proxy is running: 
 http://localhost:8082/status
 
-The proxy requires Python 2.7 and simplejson 2.1.1.
+The proxy requires Python 2.7.
 
 The HTML5 Websocket server requires:
 - SocketTornad.IO 0.0.4 - https://github.com/MrJoes/tornadio

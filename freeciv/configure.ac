@@ -710,7 +710,7 @@ if test "x$server" = "xyes"; then
 
     AC_CHECK_FUNC(pow)
     if test $ac_cv_func_pow = no; then
-        AC_CHECK_LIB(m, pow, SERVER_LIBS="$SERVER_LIBS -lm -lssl",
+        AC_CHECK_LIB(m, pow, SERVER_LIBS="$SERVER_LIBS -lm -lssl -ljansson",
 		 AC_MSG_ERROR(Did not find math lib!))
     fi
 fi

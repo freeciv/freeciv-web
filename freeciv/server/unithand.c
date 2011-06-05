@@ -730,6 +730,7 @@ void handle_unit_build_city(struct player *pplayer, int unit_id, char *name)
 		       "UTF-8",
 		       (char*)result_buf, sizeof(result_buf));
       city_build(pplayer, punit, result_buf);
+      g_free(unescaped_text);
     }
   } else if (res == AB_ADD_OK) {
     city_add_unit(pplayer, punit);

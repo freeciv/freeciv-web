@@ -31,6 +31,8 @@
 #include "mem.h"
 #include "support.h"
 
+#include <jansson.h>
+
 #include "packets.h"
 
 #ifdef USE_COMPRESSION
@@ -330,7 +332,7 @@ void *get_packet_from_connection(struct connection *pc,
   }
 
   dio_input_init(&din, pc->buffer->data, pc->buffer->ndata);
-  dio_get_uint16(&din, &len_read);
+  dio_get_uint16_old(&din, &len_read);
 
   /* The non-compressed case */
   whole_packet_len = len_read;
@@ -434,10 +436,36 @@ void *get_packet_from_connection(struct connection *pc,
     return NULL;
   }
 
-  dio_get_uint8(&din, &utype.itype);
+  /* Parse JSON packet. */
+  json_error_t error;
+  
+  dio_get_uint8_old(&din, &utype.itype);
+
+  dio_get_string_old(&din, (char*)pc->buffer->data, pc->buffer->ndata);
+ 
+  pc->json_packet = json_loads((char*)pc->buffer->data, 0, &error);
+
+  memmove(pc->buffer->data, pc->buffer->data, pc->buffer->ndata);
+  pc->buffer->ndata = 0;
+
+  if (!pc->json_packet) {
+    freelog(LOG_ERROR, "ERROR: Unable to parse packet: %s", pc->buffer->data);
+    return NULL;
+  }
+
+  json_t *pint = json_object_get(pc->json_packet, "type");
+
+  if (!pint) {
+    freelog(LOG_ERROR, "ERROR: Unable to get packet type.");
+    return NULL;
+  } 
+
+  json_int_t packet_type = json_integer_value(pint);
+  utype.type = packet_type;
 
   freelog(BASIC_PACKET_LOG_LEVEL, "got packet type=(%s)%d len=%d",
-	  get_packet_name(utype.type), utype.itype, whole_packet_len);
+	  get_packet_name(utype.type), utype.type, whole_packet_len);
+
 
   *ptype = utype.type;
   *presult = TRUE;
@@ -501,59 +529,15 @@ void *get_packet_from_connection(struct connection *pc,
 void remove_packet_from_buffer(struct socket_packet_buffer *buffer)
 {
   struct data_in din;
-  int len;
-
+  int len, type;
+ 
   dio_input_init(&din, buffer->data, buffer->ndata);
-  dio_get_uint16(&din, &len);
+  dio_get_uint16_old(&din, &len);
+  //dio_get_uint8_old(&din, &type);
   memmove(buffer->data, buffer->data + len, buffer->ndata - len);
   buffer->ndata -= len;
   freelog(LOG_DEBUG, "remove_packet_from_buffer: remove %d; remaining %d",
 	  len, buffer->ndata);
-}
-
-/**************************************************************************
-  ...
-**************************************************************************/
-void check_packet(struct data_in *din, struct connection *pc)
-{
-  size_t rem = dio_input_remaining(din);
-
-  if (din->bad_string || din->bad_bit_string || rem != 0) {
-    char from[MAX_LEN_ADDR + MAX_LEN_NAME + 128];
-    int type, len;
-
-    assert(pc != NULL);
-    my_snprintf(from, sizeof(from), " from %s", conn_description(pc));
-
-    dio_input_rewind(din);
-    dio_get_uint16(din, &len);
-    dio_get_uint8(din, &type);
-
-    if (din->bad_string) {
-      freelog(LOG_ERROR,
-	      "received bad string in packet (type %d, len %d)%s",
-	      type, len, from);
-    }
-
-    if (din->bad_bit_string) {
-      freelog(LOG_ERROR,
-	      "received bad bit string in packet (type %d, len %d)%s",
-	      type, len, from);
-    }
-
-    if (din->too_short) {
-      freelog(LOG_ERROR, "received short packet (type %d, len %d)%s",
-	      type, len, from);
-    }
-
-    if (rem > 0) {
-      /* This may be ok, eg a packet from a newer version with extra info
-       * which we should just ignore */
-      freelog(LOG_VERBOSE,
-	      "received long packet (type %d, len %d, rem %lu)%s", type,
-	      len, (unsigned long)rem, from);
-    }
-  }
 }
 
 /**************************************************************************

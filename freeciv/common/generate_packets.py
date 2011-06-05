@@ -250,7 +250,7 @@ class Field:
         if self.is_array==1:
             tmp="real_packet->%(name)s[i] = %(name)s[i]"%self.__dict__
             return '''  {
-    int i;
+    int i; /* dette er for put. */
 
     for (i = 0; i < %(array_size_u) s; i++) {
       %(tmp)s;
@@ -338,40 +338,42 @@ class Field:
     # Returns code which put this field.
     def get_put(self):
         if self.dataio_type=="bitvector":
-            return "DIO_BV_PUT(&dout, packet->%(name)s);"%self.__dict__
+            return "DIO_BV_PUT(&dout, \"%(name)s\", packet->%(name)s);"%self.__dict__
 
         if self.struct_type=="float" and not self.is_array:
-            return "  dio_put_uint32(&dout, (int)(real_packet->%(name)s * %(float_factor)d));"%self.__dict__
+            return "  dio_put_uint32(&dout, \"%(name)s\", (int)(real_packet->%(name)s * %(float_factor)d));"%self.__dict__
         
         if self.dataio_type in ["worklist"]:
-            return "  dio_put_%(dataio_type)s(&dout, &real_packet->%(name)s);"%self.__dict__
+            return "  dio_put_%(dataio_type)s(&dout, \"%(name)s\", &real_packet->%(name)s);"%self.__dict__
 
         if self.dataio_type in ["memory"]:
-            return "  dio_put_%(dataio_type)s(&dout, &real_packet->%(name)s, %(array_size_u)s);"%self.__dict__
+            return "  dio_put_%(dataio_type)s(&dout, \"%(name)s\", &real_packet->%(name)s, %(array_size_u)s);"%self.__dict__
         
         arr_types=["string","bit_string","city_map","tech_list"]
         if (self.dataio_type in arr_types and self.is_array==1) or \
            (self.dataio_type not in arr_types and self.is_array==0):
-            return "  dio_put_%(dataio_type)s(&dout, real_packet->%(name)s);"%self.__dict__
-        if self.is_struct:
-            c="dio_put_%(dataio_type)s(&dout, &real_packet->%(name)s[i]);"%self.__dict__
-        elif self.dataio_type=="string":
-            c="dio_put_%(dataio_type)s(&dout, real_packet->%(name)s[i]);"%self.__dict__
+            return "  dio_put_%(dataio_type)s(&dout, \"%(name)s\", real_packet->%(name)s);"%self.__dict__
+        if self.dataio_type=="string":
             array_size_u=self.array_size1_u
+	    self.__dict__["array_size_u"] = array_size_u
+            c=" /*not supported yet... dio_put_%(dataio_type)s_array(&dout, \"%(name)s\", (char *)real_packet->%(name)s, %(array_size_u)s);*/ "%self.__dict__
 
         elif self.struct_type=="float":
-            c="  dio_put_uint32(&dout, (int)(real_packet->%(name)s[i] * %(float_factor)d));"%self.__dict__
+            #c="  dio_put_uint32(&dout, \"%(name)s\", (int)(real_packet->%(name)s[i] * %(float_factor)d));"%self.__dict__
+	    c = " /* %(name)s not supported yet */"%self.__dict__
+        elif self.struct_type=="bool":
+            c="dio_put_array_%(dataio_type)s(&dout, \"%(name)s\", (bool*)real_packet->%(name)s, %(array_size_u)s);"%self.__dict__
+        elif self.dataio_type=="diplstate":
+            c="dio_put_%(dataio_type)s(&dout, \"%(name)s\", (struct player_diplstate*)real_packet->%(name)s, %(array_size_u)s);"%self.__dict__
+        elif self.dataio_type=="requirement":
+            c="dio_put_%(dataio_type)s(&dout, \"%(name)s\", (struct requirement*)real_packet->%(name)s, %(array_size_u)s);"%self.__dict__
         else:
-            c="dio_put_%(dataio_type)s(&dout, real_packet->%(name)s[i]);"%self.__dict__
+            c="dio_put_array_%(dataio_type)s(&dout, \"%(name)s\", (int*)real_packet->%(name)s, %(array_size_u)s);"%self.__dict__
 
         if not self.diff:
             return '''
     {
-      int i;
-
-      for (i = 0; i < %(array_size_u)s; i++) {
         %(c)s
-      }
     } '''%self.get_dict(vars())
         else:
             return '''
@@ -413,45 +415,45 @@ class Field:
             return '''{
   int tmp;
   
-  dio_get_uint32(&din, &tmp);
+  dio_get_uint32(pc->json_packet, "%(name)s", &tmp);
   real_packet->%(name)s = (float)(tmp) / %(float_factor)d.0;
 }'''%self.__dict__
 
         if self.dataio_type=="bitvector":
-            return "DIO_BV_GET(&din, real_packet->%(name)s);"%self.__dict__
+            return " /* not supported yet. DIO_BV_GET(pc->json_packet, real_packet->%(name)s);*/"%self.__dict__
         if self.dataio_type in ["string","bit_string","city_map"] and \
            self.is_array!=2:
-            return "dio_get_%(dataio_type)s(&din, real_packet->%(name)s, sizeof(real_packet->%(name)s));"%self.__dict__
+            return "dio_get_%(dataio_type)s(pc->json_packet, \"%(name)s\", real_packet->%(name)s, sizeof(real_packet->%(name)s));"%self.__dict__
         if self.is_struct and self.is_array==0:
-            return "dio_get_%(dataio_type)s(&din, &real_packet->%(name)s);"%self.__dict__
+            return "dio_get_%(dataio_type)s(pc->json_packet, \"%(name)s\", &real_packet->%(name)s);"%self.__dict__
         if self.dataio_type in ["tech_list"]:
-            return "dio_get_%(dataio_type)s(&din, real_packet->%(name)s);"%self.__dict__
+            return "dio_get_%(dataio_type)s(pc->json_packet, \"%(name)s\", real_packet->%(name)s);"%self.__dict__
         if not self.is_array:
             if self.struct_type=="bool":
-                return "dio_get_%(dataio_type)s(&din, &real_packet->%(name)s);"%self.__dict__
+                return "dio_get_%(dataio_type)s(pc->json_packet, \"%(name)s\", &real_packet->%(name)s);"%self.__dict__
             return '''{
   int readin;
 
-  dio_get_%(dataio_type)s(&din, &readin);
+  dio_get_%(dataio_type)s(pc->json_packet, "%(name)s", &readin);
   real_packet->%(name)s = readin;
 }'''%self.__dict__
 
         if self.is_struct:
-            c="dio_get_%(dataio_type)s(&din, &real_packet->%(name)s[i]);"%self.__dict__
+            c="dio_get_%(dataio_type)s(pc->json_packet, \"%(name)s\", &real_packet->%(name)s[i]);"%self.__dict__
         elif self.dataio_type=="string":
-            c="dio_get_%(dataio_type)s(&din, real_packet->%(name)s[i], sizeof(real_packet->%(name)s[i]));"%self.__dict__
+            c="dio_get_%(dataio_type)s(pc->json_packet, \"%(name)s\", real_packet->%(name)s[i], sizeof(real_packet->%(name)s[i]));"%self.__dict__
         elif self.struct_type=="float":
             c='''int tmp;
 
-    dio_get_uint32(&din, &tmp);
+    dio_get_uint32(pc->json_packet, "%(name)s", &tmp);
     real_packet->%(name)s[i] = (float)(tmp) / %(float_factor)d.0;'''%self.__dict__
         elif self.struct_type=="bool":
-            c="dio_get_%(dataio_type)s(&din, &real_packet->%(name)s[i]);"%self.__dict__
+            c="dio_get_%(dataio_type)s(pc->json_packet, \"%(name)s\", &real_packet->%(name)s[i]);"%self.__dict__
         else:
             c='''{
   int readin;
 
-  dio_get_%(dataio_type)s(&din, &readin);
+  dio_get_%(dataio_type)s(pc->json_packet, "%(name)s", &readin);
   real_packet->%(name)s[i] = readin;
 }'''%self.__dict__
         if self.is_array==2:
@@ -471,11 +473,11 @@ class Field:
             else:
                 extra=""
             if self.dataio_type=="memory":
-                return '''%(extra)s
-  dio_get_%(dataio_type)s(&din, real_packet->%(name)s, %(array_size_u)s);'''%self.get_dict(vars())
+                return ''' /* not supported yet. %(extra)s
+  dio_get_%(dataio_type)s(pc->json_packet, "%(name)s", real_packet->%(name)s, %(array_size_u)s);*/'''%self.get_dict(vars())
             return '''
 {
-  int i;
+   int i;
 %(extra)s
   for (i = 0; i < %(array_size_u)s; i++) {
     %(c)s
@@ -486,7 +488,7 @@ class Field:
 for (;;) {
   int i;
 
-  dio_get_uint8(&din, &i);
+  dio_get_uint8(pc->json_packet, "%(name)s", &i);
   if(i == 255) {
     break;
   }
@@ -784,7 +786,7 @@ static char *stats_%(name)s_names[] = {%(names)s};
 %(fl)s%(s)s<pre2>    return 0;
   }
 
-  DIO_BV_PUT(&dout, fields);
+  DIO_BV_PUT(&dout, \"fields\", fields);
 '''%self.get_dict(vars())
 
         for field in self.key_fields:
@@ -824,7 +826,7 @@ static char *stats_%(name)s_names[] = {%(names)s};
   struct hash_table **hash = &pc->phs.received[type];
   struct %(packet_name)s *clone;
 '''
-            delta_body1="\n  DIO_BV_GET(&din, fields);\n"
+            delta_body1="\n  DIO_BV_GET(pc->json_packet, fields);\n"
             body1=""
             for field in self.key_fields:
                 body1=body1+prefix("  ",field.get_get())+"\n"

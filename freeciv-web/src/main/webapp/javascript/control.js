@@ -139,7 +139,7 @@ function check_text_input(event,chatboxtextarea) {
     $(chatboxtextarea).val('');
     $(chatboxtextarea).focus();
     keyboard_input = true;
-    var test_packet = [{"packet_type" : "chat_msg_req", "message" : message}];
+    var test_packet = {"type" : packet_chat_msg_req, "message" : message};
     var myJSONText = JSON.stringify(test_packet);
     send_request (myJSONText);
     return false;
@@ -518,7 +518,7 @@ function do_map_click(ptile, qtype)
         return;
       }
 
-      var packet = [{"packet_type" : "unit_move", "unit_id" : punit['id'], "x": ptile['x'], "y": ptile['y'] }];
+      var packet = {"type" : packet_unit_move, "unit_id" : punit['id'], "x": ptile['x'], "y": ptile['y'] };
       send_request (JSON.stringify(packet));
     }
   
@@ -724,7 +724,7 @@ function deactivate_goto()
 **************************************************************************/
 function send_end_turn()
 {
-  var packet = [{"packet_type" : "player_phase_done", "turn" : game_info['turn']}];
+  var packet = {"type" : packet_player_phase_done, "turn" : game_info['turn']};
   send_request (JSON.stringify(packet));
 }
 
@@ -842,8 +842,8 @@ function key_unit_auto_settle()
 function request_new_unit_activity(punit, activity)
 {
 
-  var packet = [{"packet_type" : "unit_change_activity", "unit_id" : punit['id'],
-                "activity" : activity, "activity_target" : S_LAST, "activity_base" : 0}];
+  var packet = {"type" : packet_unit_change_activity, "unit_id" : punit['id'],
+                "activity" : activity, "activity_target" : S_LAST, "activity_base" : 0};
   send_request (JSON.stringify(packet));
 }
 
@@ -854,7 +854,7 @@ function request_new_unit_activity(punit, activity)
 function request_unit_autosettlers(punit)
 {
   if (punit != null ) {
-    var packet = [{"packet_type" : "unit_autosettlers", "unit_id" : punit['id']}];
+    var packet = {"type" : packet_unit_autosettlers, "unit_id" : punit['id']};
     send_request (JSON.stringify(packet));
   }
 }
@@ -876,7 +876,7 @@ function request_unit_build_city()
 
       var ptype = unit_type(punit);
       if (ptype['name'] == "Settlers" || ptype['name'] == "Engineers") {
-        var packet = [{"packet_type" : "city_name_suggestion_req", "unit_id" : punit['id'] }];
+        var packet = {"type" : packet_city_name_suggestion_req, "unit_id" : punit['id'] };
         send_request (JSON.stringify(packet));
       } 
 
@@ -892,7 +892,7 @@ function key_unit_disband()
   var funits = get_units_in_focus();
   for (var i = 0; i < funits.length; i++) {
     var punit = funits[i]; 
-    var packet = [{"packet_type" : "unit_disband", "unit_id" : punit['id'] }];
+    var packet = {"type" : packet_unit_disband, "unit_id" : punit['id'] };
     send_request (JSON.stringify(packet));
 
     /* Also remove unit immediately in client, to ensure it is removed. */
@@ -917,7 +917,7 @@ function key_unit_move(dir)
     var newtile = mapstep(ptile, dir);
     if (newtile == null) return;
         
-    var packet = [{"packet_type" : "unit_move", "unit_id" : punit['id'], "x": newtile['x'], "y": newtile['y'] }];
+    var packet = {"type" : packet_unit_move, "unit_id" : punit['id'], "x": newtile['x'], "y": newtile['y'] };
     send_request (JSON.stringify(packet));
         
   }
@@ -1003,8 +1003,8 @@ function request_goto_path(unit_id, dst_x, dst_y)
   if (goto_request_map[dst_x + "," + dst_y] == null) {
     goto_request_map[dst_x + "," + dst_y] = true;
 
-    var packet = [{"packet_type" : "goto_path_req", "unit_id" : unit_id,
-                  "x" : dst_x, "y" : dst_y}];
+    var packet = {"type" : packet_goto_path_req, "unit_id" : unit_id,
+                  "x" : dst_x, "y" : dst_y};
     send_request (JSON.stringify(packet));
   
   } else {
@@ -1088,16 +1088,16 @@ function popup_caravan_dialog(punit, traderoute, wonder)
   if (!wonder) $("#car_wonder").button( "option", "disabled", true);
 
   $("#car_trade").click(function() {
-    var packet = [{"packet_type" : "unit_establish_trade", 
-                   "unit_id": punit['id']}];
+    var packet = {"type" : packet_unit_establish_trade, 
+                   "unit_id": punit['id']};
     send_request (JSON.stringify(packet));		  
 
     $(id).remove();	
   });
 
   $("#car_wonder").click(function() {
-    var packet = [{"packet_type" : "unit_help_build_wonder", 
-                   "unit_id": punit['id']}];
+    var packet = {"type" : packet_unit_help_build_wonder, 
+                   "unit_id": punit['id']};
     send_request (JSON.stringify(packet));		  
 
     $(id).remove();	

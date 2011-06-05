@@ -20,6 +20,8 @@
 #include <stdio.h>
 #include <string.h>
 
+#include <glib.h>
+
 /* utility */
 #include "fcintl.h"
 #include "log.h"
@@ -180,7 +182,7 @@ static void chat_msg_to_player_multi(struct connection *sender,
   avoiding sending both original and echo if sender is in destination
   set.
 **************************************************************************/
-void handle_chat_msg_req(struct connection *pconn, char *message)
+void handle_chat_msg_req(struct connection *pconn, char *raw_message)
 {
   char sender_name[MAX_LEN_CHAT_NAME], chat[MAX_LEN_MSG];
   char *cp;
@@ -188,11 +190,24 @@ void handle_chat_msg_req(struct connection *pconn, char *message)
 
   /* this loop to prevent players from sending multiple lines
    * which can be abused */
-  for (cp = message; *cp != '\0'; cp++) {
-    if (*cp == '\n' || *cp == '\r') {
+  for (cp = raw_message; *cp != '\0'; cp++) {
+    if (*cp == '\n' || *cp == '\r' || *cp == '<' || *cp == '>' || *cp == '"' || *cp == '\'') {
       *cp='\0';
       break;
     }
+  }
+
+  char* unesc_message = g_uri_unescape_string(raw_message, NULL);
+  char message[MAX_LEN_MSG];
+
+  if (unesc_message) {
+      char result_buf[MAX_LEN_MSG];
+      convert_string(unesc_message,
+ 	  	       "latin1",
+		       "UTF-8",
+		       (char*)message, sizeof(message));
+  } else {
+    return;
   }
 
   /* Server commands are prefixed with '/', which is an obvious
@@ -339,4 +354,5 @@ void handle_chat_msg_req(struct connection *pconn, char *message)
   con_puts(C_COMMENT, chat);
   send_chat_msg(game.est_connections, pconn, FTC_PUBLIC_MSG, NULL,
                 "%s", chat);
+  g_free(unesc_message);
 }

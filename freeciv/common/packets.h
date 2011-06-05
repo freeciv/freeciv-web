@@ -29,6 +29,7 @@ struct data_in;
 #include "team.h"
 #include "unittype.h"
 #include "worklist.h"
+#include <jansson.h>
 
 
 #define MAX_LEN_USERNAME        10        /* see below */
@@ -100,41 +101,38 @@ void post_send_packet_ruleset_control(struct connection *pc,
 
 #define SEND_PACKET_START(type) \
   unsigned char buffer[MAX_LEN_PACKET]; \
+  char* json_buffer = NULL; \
   struct data_out dout; \
+  dout.json = json_object(); \
   \
   dio_output_init(&dout, buffer, sizeof(buffer)); \
-  dio_put_uint16(&dout, 0); \
-  dio_put_uint8(&dout, type);
+  dio_put_uint16_old(&dout, 0); \
+  dio_put_uint8_old(&dout, type); \
+  \
+  dio_put_uint8(&dout, "pid", type);
 
 #define SEND_PACKET_END \
   { \
+    json_buffer = json_dumps(dout.json, JSON_COMPACT | JSON_ENSURE_ASCII); \
+    if (json_buffer) {  \
+      dio_put_string_old(&dout, json_buffer);	  \
+    } \
     size_t size = dio_output_used(&dout); \
-    \
     dio_output_rewind(&dout); \
-    dio_put_uint16(&dout, size); \
+    dio_put_uint16_old(&dout, size); \
+	  \
+    free(json_buffer); \
+    json_decref(dout.json); \
     return send_packet_data(pc, buffer, size); \
   }
 
 #define RECEIVE_PACKET_START(type, result) \
-  struct data_in din; \
-  struct type *result = fc_malloc(sizeof(*result)); \
-  \
-  dio_input_init(&din, pc->buffer->data, 2); \
-  { \
-    int size; \
-  \
-    dio_get_uint16(&din, &size); \
-    dio_input_init(&din, pc->buffer->data, MIN(size, pc->buffer->ndata)); \
-  } \
-  dio_get_uint16(&din, NULL); \
-  dio_get_uint8(&din, NULL);
+  struct type *result = fc_malloc(sizeof(*result));
 
 #define RECEIVE_PACKET_END(result) \
-  check_packet(&din, pc); \
-  remove_packet_from_buffer(pc->buffer); \
+  json_decref(pc->json_packet); \
   return result;
 
 int send_packet_data(struct connection *pc, unsigned char *data, int len);
-void check_packet(struct data_in *din, struct connection *pc);
 
 #endif  /* FC__PACKETS_H */

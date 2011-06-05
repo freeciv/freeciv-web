@@ -17,7 +17,6 @@
 import sys
 import traceback
 from time import gmtime, strftime
-import simplejson
 import os, platform
 import time
 
@@ -41,8 +40,6 @@ def get_debug_info(civcoms):
       platform.python_version(),
       platform.python_build()[0],
   ));
-
-  code += "Simplejson version %s (C speedups: %s) <br>" % (simplejson.__version__, simplejson.decoder.scanstring is simplejson.decoder.c_scanstring);
 
   cpu = ' '.join(platform.processor().split())
   code += ("Platform: %s %s on '%s' <br>" % (

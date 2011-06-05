@@ -14,6 +14,7 @@
 #define FC__DATAIO_H
 
 #include "shared.h"		/* bool type */
+#include <jansson.h>
 
 struct worklist;
 struct player_diplstate;
@@ -29,6 +30,7 @@ struct data_in {
 
 struct data_out {
   void *dest;
+  json_t *json;
   size_t dest_size, used, current;
   bool too_short;		/* set to 1 if try to read past end */
 };
@@ -53,60 +55,76 @@ size_t dio_input_remaining(struct data_in *din);
 
 /* gets */
 
-void dio_get_uint8(struct data_in *din, int *dest);
-void dio_get_uint16(struct data_in *din, int *dest);
-void dio_get_uint32(struct data_in *din, int *dest);
+void dio_get_uint8(json_t *json_packet, char *key, int *dest);
+void dio_get_uint16(json_t *json_packet, char *key, int *dest);
+void dio_get_uint32(json_t *json_packet, char *key, int *dest);
+void dio_get_uint16_old(struct data_in *din, int *dest);
+void dio_get_uint8_old(struct data_in *din, int *dest);
 
-void dio_get_sint8(struct data_in *din, int *dest);
-void dio_get_sint16(struct data_in *din, int *dest);
-#define dio_get_sint32(d,v) dio_get_uint32(d,v)
+void dio_get_sint8(json_t *json_packet, char *key, int *dest);
+void dio_get_sint16(json_t *json_packet, char *key, int *dest);
+#define dio_get_sint32(d,v,x) dio_get_uint32(d,v,x)
 
 
-void dio_get_bool8(struct data_in *din, bool *dest);
-void dio_get_bool32(struct data_in *din, bool *dest);
-void dio_get_memory(struct data_in *din, void *dest, size_t dest_size);
-void dio_get_string(struct data_in *din, char *dest, size_t max_dest_size);
-void dio_get_bit_string(struct data_in *din, char *dest,
+void dio_get_bool8(json_t *json_packet, char *key, bool *dest);
+void dio_get_bool32(json_t *json_packet, char *key, bool *dest);
+void dio_get_memory(json_t *json_packet, char *key, void *dest, size_t dest_size);
+void dio_get_string(json_t *json_packet, char *key, char *dest, size_t max_dest_size);
+void dio_get_string_old(struct data_in *din, char *dest, size_t max_dest_size);
+void dio_get_bit_string(json_t *json_packet, char *key, char *dest,
 			size_t max_dest_size);
-void dio_get_tech_list(struct data_in *din, int *dest);
-void dio_get_worklist(struct data_in *din, struct worklist *pwl);
-void dio_get_diplstate(struct data_in *din, struct player_diplstate *pds);
-void dio_get_requirement(struct data_in *din, struct requirement *preq);
+void dio_get_tech_list(json_t *json_packet, char *key, int *dest);
+void dio_get_worklist(json_t *json_packet, char *key, struct worklist *pwl);
+void dio_get_diplstate(json_t *json_packet, char *key, struct player_diplstate *pds);
+void dio_get_requirement(json_t *json_packet, char *key, struct requirement *preq);
 
-void dio_get_uint8_vec8(struct data_in *din, int **values, int stop_value);
-void dio_get_uint16_vec8(struct data_in *din, int **values, int stop_value);
+void dio_get_uint8_vec8(json_t *json_packet, char *key, int **values, int stop_value);
+void dio_get_uint16_vec8(json_t *json_packet, char *key, int **values, int stop_value);
 
 /* Should be a function but we need some macro magic. */
 #define DIO_BV_GET(pdin, bv) \
   dio_get_memory((pdin), (bv).vec, sizeof((bv).vec))
 
 /* puts */
-void dio_put_uint8(struct data_out *dout, int value);
-void dio_put_uint16(struct data_out *dout, int value);
-void dio_put_uint32(struct data_out *dout, int value);
+void dio_put_uint8(struct data_out *dout, char *key, int value);
+void dio_put_uint8_old(struct data_out *dout, int value);
+void dio_put_uint16(struct data_out *dout, char *key, int value);
+void dio_put_uint32(struct data_out *dout, char *key, int value);
+void dio_put_uint16_old(struct data_out *dout, int value);
 
-#define dio_put_sint8(d,v) dio_put_uint8(d,v)
-#define dio_put_sint16(d,v) dio_put_uint16(d,v)
-#define dio_put_sint32(d,v) dio_put_uint32(d,v)
+void dio_put_array_uint8(struct data_out *dout, char *key, int *values, int size);
+void dio_put_array_uint32(struct data_out *dout, char *key, int *values, int size);
+void dio_put_array_sint8(struct data_out *dout, char *key, int *values, int size);
+void dio_put_array_sint16(struct data_out *dout, char *key, int *values, int size);
+void dio_put_array_sint32(struct data_out *dout, char *key, int *values, int size);
+void dio_put_array_bool8(struct data_out *dout, char *key, bool *values, int size);
 
-void dio_put_bool8(struct data_out *dout, bool value);
-void dio_put_bool32(struct data_out *dout, bool value);
+#define dio_put_sint8(d,k,v) dio_put_uint8(d,k,v)
+#define dio_put_sint16(d,k,v) dio_put_uint16(d,k,v)
+#define dio_put_sint32(d,k,v) dio_put_uint32(d,k,v)
 
-void dio_put_memory(struct data_out *dout, const void *value, size_t size);
-void dio_put_string(struct data_out *dout, const char *value);
-void dio_put_bit_string(struct data_out *dout, const char *value);
-void dio_put_city_map(struct data_out *dout, const char *value);
-void dio_put_tech_list(struct data_out *dout, const int *value);
-void dio_put_worklist(struct data_out *dout, const struct worklist *pwl);
-void dio_put_diplstate(struct data_out *dout,
-		       const struct player_diplstate *pds);
-void dio_put_requirement(struct data_out *dout, const struct requirement *preq);
+void dio_put_bool8(struct data_out *dout, char *key, bool value);
+void dio_put_bool32(struct data_out *dout, char *key, bool value);
 
-void dio_put_uint8_vec8(struct data_out *dout, int *values, int stop_value);
-void dio_put_uint16_vec8(struct data_out *dout, int *values, int stop_value);
+void dio_put_memory(struct data_out *dout, char *key, const void *value, size_t size);
+void dio_put_string(struct data_out *dout, char *key, const char *value);
+void dio_put_bit_string(struct data_out *dout, char *key, const char *value);
+void dio_put_city_map(struct data_out *dout, char *key, const char *value);
+void dio_put_tech_list(struct data_out *dout, char *key, const int *value);
+void dio_put_worklist(struct data_out *dout, char *key, const struct worklist *pwl);
+void dio_put_diplstate(struct data_out *dout, char *key,
+		       const struct player_diplstate *pds, int size);
+void dio_put_requirement(struct data_out *dout, char *key, const struct requirement *preq, int size);
+
+void dio_put_uint8_vec8(struct data_out *dout, char *key, int *values, int stop_value);
+void dio_put_uint16_vec8(struct data_out *dout, char *key, int *values, int stop_value);
+void dio_put_string_old(struct data_out *dout, const char *value);
+void dio_put_memory_old(struct data_out *dout, const void *value, size_t size);
+void dio_put_string_array(struct data_out *dout, char *key, const char *value, int size);
+
 
 /* Should be a function but we need some macro magic. */
-#define DIO_BV_PUT(pdout, bv) \
-  dio_put_memory((pdout), (bv).vec, sizeof((bv).vec))
+#define DIO_BV_PUT(pdout, type, bv) \
+  dio_put_memory((pdout), type, (bv).vec, sizeof((bv).vec))
 
 #endif  /* FC__PACKETS_H */

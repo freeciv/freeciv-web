@@ -16,15 +16,9 @@
 import socket
 from struct import *
 from zerostrings import *
-from packets import *
 from threading import Thread, RLock;
 import logging
 import time
-
-try:
-    import simplejson as json
-except ImportError:
-    import json
 
 HOST = 'localhost';
 MAX_LEN_PACKET = 48;
@@ -67,9 +61,12 @@ class CivCom(Thread):
 
 
     # send packet
-    fmt = '>Hc'+str(len(self.username))+'sx'+str(len(VERSION))+'sx'+str(len(VER_INFO))+'s3I';
-    packet = packExt(fmt, calcsize(fmt), chr(4), self.username, VERSION, VER_INFO, 2, 1, 99);
-    self.socket.sendall(packet)
+    #fmt = '>Hc'+str(len(self.username))+'sx'+str(len(VERSION))+'sx'+str(len(VER_INFO))+'s3I';
+    #packet = packExt(fmt, calcsize(fmt), chr(4), self.username, VERSION, VER_INFO, 2, 1, 99);
+    #self.socket.sendall(packet)
+
+    login_packet = "{\"type\":4,\"username\":\"%s\",\"capability\":\"%s\",\"version_label\":\"%s\",\"major_version\":%d,\"minor_version\":%d,\"patch_version\":%d}" %  (self.username, VERSION, VER_INFO, 2, 1, 99);
+    self.send_to_civserver(login_packet)
 
     #receive packets from server
     net_buf = "";
@@ -84,8 +81,9 @@ class CivCom(Thread):
         packet = self.get_packet_from_connection(net_buf);
         if (packet != None): 
           net_buf = net_buf[3+len(packet):];
-          packet_payload = civserver_get_packet(self.packet_type, packet);
-	  self.send_buffer_append(packet_payload);
+	  result = packet[:-1];
+	  if (len(result) > 0):
+	    self.send_buffer_append(result);
 
         else:
           break;
@@ -115,12 +113,12 @@ class CivCom(Thread):
 
     result = unpackExt('>HB', net_buf[:3]);
     packet_len = result[0];
-    self.packet_type = result[1];
 
     if (len(net_buf) < packet_len): return None;
     if (logger.isEnabledFor(logging.DEBUG)):
-      logger.debug("\nNEW PACKET:  type(" + str(self.packet_type) + ") len(" + str(packet_len) + ")" );
+      logger.debug("\nNEW PACKET: len(" + str(packet_len) + ")" );
     return net_buf[3:packet_len];
+
   
   def close_connection(self):
     if (logger.isEnabledFor(logging.ERROR)):
@@ -134,29 +132,20 @@ class CivCom(Thread):
       self.socket = None; 
     
 
-  def send_packets_to_civserver(self, packets):
-    json_packets = json.loads(packets);
-    for packet in json_packets: 
-      if not self.send_to_civserver(packet): return False;
+  def send_packets_to_civserver(self, packet):
+    if not self.send_to_civserver(packet): return False;
     return True;
-
-  def send_packet_objects_to_civserver(self, packet_objects):
-    for packet in packet_objects: 
-      if not self.send_to_civserver(packet): return False;
-    return True;
-
 
   def send_to_civserver(self, net_packet_json):
-       
-    civ_packet = json_to_civserver(net_packet_json);
-    if not civ_packet == None:
-      try:
-        # Send packet to civserver
-        self.socket.sendall(civ_packet)
-        return True;
-      except:
-        self.send_error_to_client("Proxy unable to communicate with civserver.");
-        return False;
+    header = packExt('>Hc', len(net_packet_json)+3, chr(0));
+    civ_packet = header + str(net_packet_json);
+    try:
+      # Send packet to civserver
+      self.socket.sendall(civ_packet)
+      return True;
+    except:
+      self.send_error_to_client("Proxy unable to communicate with civserver.");
+      return False;
 
     else:
       if (logger.isEnabledFor(logging.ERROR)):
@@ -191,7 +180,10 @@ class CivCom(Thread):
         logger.debug("Could not acquire civcom lock");
     else:
       try:
-        result = json.dumps(self.send_buffer, separators=(',',':'), allow_nan=False);
+        if len(self.send_buffer) > 0:
+          result = "[" + ",".join(self.send_buffer) + "]";
+	else:
+          result = "[]";
       finally:
         del self.send_buffer[:];
         self.lock.release();
@@ -200,8 +192,5 @@ class CivCom(Thread):
   def send_error_to_client(self, message):
     if (logger.isEnabledFor(logging.ERROR)):
       logger.error(message);
-    msg = {};
-    msg['packet_type'] = "connect_msg";
-    msg['message'] = message;
-    self.send_buffer_append(msg);
+    self.send_buffer_append("{\"pid\":18,\"message\":\"" + message + "\"}");
      

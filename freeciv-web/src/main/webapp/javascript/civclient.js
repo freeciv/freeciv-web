@@ -346,8 +346,8 @@ function observe_game_check()
 **************************************************************************/
 function request_observe_game()
 {
-  var test_packet = [{"packet_type" : "chat_msg_req", 
-                         "message" : "/observe "}];
+  var test_packet = {"type" : packet_chat_msg_req, 
+                         "message" : "/observe "};
   var myJSONText = JSON.stringify(test_packet);
   send_request (myJSONText);
 
@@ -374,8 +374,8 @@ function surrender_game()
 function send_surrender_game()
 {
   if (!client_is_observer()) {
-    var test_packet = [{"packet_type" : "chat_msg_req", 
-                         "message" : "/surrender "}];
+    var test_packet = {"type" : packet_chat_msg_req, 
+                         "message" : "/surrender "};
     var myJSONText = JSON.stringify(test_packet);
     send_request (myJSONText);
   }

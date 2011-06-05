@@ -34,10 +34,12 @@
 
 #include "fc_types.h"
 
+#include <jansson.h>
+
 struct hash_table;
 struct timer_list;
 
-#define MAX_LEN_PACKET   4096 * 4
+#define MAX_LEN_PACKET   65536
 
 #define MAX_LEN_BUFFER   (MAX_LEN_PACKET * 128)
 #define MAX_LEN_CAPSTR    512
@@ -126,6 +128,7 @@ struct connection {
   struct socket_packet_buffer *buffer;
   struct socket_packet_buffer *send_buffer;
   struct timer *last_write;
+  json_t *json_packet;
 
   double ping_time;
   

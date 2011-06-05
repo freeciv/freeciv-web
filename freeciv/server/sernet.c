@@ -1233,7 +1233,7 @@ static void get_lanserver_announcement(void)
      * Generally we just want to run select again. */
   }
 
-  if (FD_ISSET(socklan, &readfs)) {
+  /*if (FD_ISSET(socklan, &readfs)) {
     if (0 < recvfrom(socklan, msgbuf, sizeof(msgbuf), 0, NULL, NULL)) {
       dio_input_init(&din, msgbuf, 1);
       dio_get_uint8(&din, &type);
@@ -1245,7 +1245,7 @@ static void get_lanserver_announcement(void)
                 "Received invalid request for server LAN announcement.");
       }
     }
-  }
+  }*/
 }
 
 /********************************************************************
@@ -1336,13 +1336,13 @@ static void send_lanserver_response(void)
               srvarg.port );
 
   dio_output_init(&dout, buffer, sizeof(buffer));
-  dio_put_uint8(&dout, SERVER_LAN_VERSION);
-  dio_put_string(&dout, hostname);
-  dio_put_string(&dout, port);
-  dio_put_string(&dout, version);
-  dio_put_string(&dout, status);
-  dio_put_string(&dout, players);
-  dio_put_string(&dout, get_meta_message_string());
+  dio_put_uint8(&dout, "ver", SERVER_LAN_VERSION);
+  dio_put_string(&dout, "host", hostname);
+  dio_put_string(&dout, "port", port);
+  dio_put_string(&dout, "version", version);
+  dio_put_string(&dout, "status", status);
+  dio_put_string(&dout, "players", players);
+  dio_put_string(&dout, "msg", get_meta_message_string());
   size = dio_output_used(&dout);
 
   /* Sending packet to client with the information gathered above. */

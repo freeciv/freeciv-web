@@ -5,306 +5,306 @@ function client_handle_packet(p)
  try {
   for (var i = 0; i < p.length; i++) {
     if (p[i] == null) continue;
-    var packet_type = p[i]['packet_type'];
+    var packet_type = p[i]['pid'];
     switch (packet_type) {
 
-    case  "processing_started":
+    case  0:
       handle_processing_started(p[i]);
       break;
 
-    case  "processing_finished":
+    case  1:
       handle_processing_finished(p[i]);
       break;
 
-    case  "freeze_hint":
+    case  2:
       handle_freeze_hint(p[i]);
       break;
 
-    case  "thaw_hint":
+    case  3:
       handle_thaw_hint(p[i]);
       break;
 
-    case  "server_join_reply":
+    case  5:
       handle_server_join_reply(p[i]);
       break;
 
-    case  "authentication_req":
+    case  6:
       handle_authentication_req(p[i]);
       break;
 
-    case  "server_shutdown":
+    case  8:
       handle_server_shutdown(p[i]);
       break;
 
-    case  "endgame_report":
+    case  13:
       handle_endgame_report(p[i]);
       break;
 
-    case  "tile_info":
+    case  14:
       handle_tile_info(p[i]);
       break;
 
-    case  "game_info":
+    case  15:
       handle_game_info(p[i]);
       break;
 
-    case  "map_info":
+    case  16:
       handle_map_info(p[i]);
       break;
 
-    case  "nuke_tile_info":
+    case  17:
       handle_nuke_tile_info(p[i]);
       break;
 
-    case  "chat_msg":
+    case  18:
       handle_chat_msg(p[i]);
       break;
 
-    case  "city_remove":
+    case  20:
       handle_city_remove(p[i]);
       break;
 
-    case  "city_info":
+    case  21:
       handle_city_info(p[i]);
       break;
 
-    case  "city_short_info":
+    case  22:
       handle_city_short_info(p[i]);
       break;
 
-    case  "city_name_suggestion_info":
+    case  36:
       handle_city_name_suggestion_info(p[i]);
       break;
 
-    case  "city_sabotage_list":
+    case  37:
       handle_city_sabotage_list(p[i]);
       break;
 
-    case  "player_remove":
+    case  38:
       handle_player_remove(p[i]);
       break;
 
-    case  "player_info":
+    case  39:
       handle_player_info(p[i]);
       break;
 
-    case  "player_attribute_chunk":
+    case  47:
       handle_player_attribute_chunk(p[i]);
       break;
 
-    case  "unit_remove":
+    case  48:
       handle_unit_remove(p[i]);
       break;
 
-    case  "unit_info":
+    case  49:
       handle_unit_info(p[i]);
       break;
 
-    case  "unit_short_info":
+    case  50:
       handle_unit_short_info(p[i]);
       break;
 
-    case  "unit_combat_info":
+    case  51:
       handle_unit_combat_info(p[i]);
       break;
 
-    case  "ruleset_specialist":
+    case  58:
       handle_ruleset_specialist(p[i]);
       break;
 
-    case  "unit_diplomat_answer":
+    case  71:
       handle_unit_diplomat_answer(p[i]);
       break;
 
-    case  "diplomacy_init_meeting":
+    case  74:
       handle_diplomacy_init_meeting(p[i]);
       break;
 
-    case  "diplomacy_cancel_meeting":
+    case  76:
       handle_diplomacy_cancel_meeting(p[i]);
       break;
 
-    case  "diplomacy_create_clause":
+    case  78:
       handle_diplomacy_create_clause(p[i]);
       break;
 
-    case  "diplomacy_remove_clause":
+    case  80:
       handle_diplomacy_remove_clause(p[i]);
       break;
 
-    case  "diplomacy_accept_treaty":
+    case  82:
       handle_diplomacy_accept_treaty(p[i]);
       break;
 
-    case  "page_msg":
+    case  84:
       handle_page_msg(p[i]);
       break;
 
-    case  "conn_info":
+    case  86:
       handle_conn_info(p[i]);
       break;
 
-    case  "conn_ping_info":
+    case  87:
       handle_conn_ping_info(p[i]);
       break;
 
-    case  "conn_ping":
+    case  88:
       handle_conn_ping(p[i]);
       break;
 
-    case  "end_phase":
+    case  90:
       handle_end_phase(p[i]);
       break;
 
-    case  "start_phase":
+    case  91:
       handle_start_phase(p[i]);
       break;
 
-    case  "new_year":
+    case  92:
       handle_new_year(p[i]);
       break;
 
-    case  "spaceship_info":
+    case  95:
       handle_spaceship_info(p[i]);
       break;
 
-    case  "ruleset_unit":
+    case  96:
       handle_ruleset_unit(p[i]);
       break;
 
-    case  "ruleset_game":
+    case  97:
       handle_ruleset_game(p[i]);
       break;
 
-    case  "ruleset_government_ruler_title":
+    case  98:
       handle_ruleset_government_ruler_title(p[i]);
       break;
 
-    case  "ruleset_tech":
+    case  99:
       handle_ruleset_tech(p[i]);
       break;
 
-    case  "ruleset_government":
+    case  100:
       handle_ruleset_government(p[i]);
       break;
 
-    case  "ruleset_terrain_control":
+    case  101:
       handle_ruleset_terrain_control(p[i]);
       break;
 
-    case  "ruleset_nation":
+    case  102:
       handle_ruleset_nation(p[i]);
       break;
 
-    case  "ruleset_city":
+    case  103:
       handle_ruleset_city(p[i]);
       break;
 
-    case  "ruleset_building":
+    case  104:
       handle_ruleset_building(p[i]);
       break;
 
-    case  "ruleset_terrain":
+    case  105:
       handle_ruleset_terrain(p[i]);
       break;
 
-    case  "ruleset_control":
+    case  106:
       handle_ruleset_control(p[i]);
       break;
 
-    case  "single_want_hack_reply":
+    case  109:
       handle_single_want_hack_reply(p[i]);
       break;
 
-    case  "game_load":
+    case  111:
       handle_game_load(p[i]);
       break;
 
-    case  "options_settable_control":
+    case  112:
       handle_options_settable_control(p[i]);
       break;
 
-    case  "options_settable":
+    case  113:
       handle_options_settable(p[i]);
       break;
 
-    case  "ruleset_choices":
+    case  115:
       handle_ruleset_choices(p[i]);
       break;
 
-    case  "ruleset_nation_groups":
+    case  118:
       handle_ruleset_nation_groups(p[i]);
       break;
 
-    case  "ruleset_unit_class":
+    case  119:
       handle_ruleset_unit_class(p[i]);
       break;
 
-    case  "ruleset_base":
+    case  120:
       handle_ruleset_base(p[i]);
       break;
 
-    case  "ruleset_effect":
+    case  122:
       handle_ruleset_effect(p[i]);
       break;
 
-    case  "ruleset_effect_req":
+    case  123:
       handle_ruleset_effect_req(p[i]);
       break;
 
-    case  "ruleset_resource":
+    case  124:
       handle_ruleset_resource(p[i]);
       break;
 
-    case  "freeze_client":
+    case  135:
       handle_freeze_client(p[i]);
       break;
 
-    case  "thaw_client":
+    case  136:
       handle_thaw_client(p[i]);
       break;
 
-    case  "begin_turn":
+    case  137:
       handle_begin_turn(p[i]);
       break;
 
-    case  "end_turn":
+    case  138:
       handle_end_turn(p[i]);
       break;
 
-    case  "scenario_info":
+    case  140:
       handle_scenario_info(p[i]);
       break;
 
-    case  "vote_new":
+    case  145:
       handle_vote_new(p[i]);
       break;
 
-    case  "vote_update":
+    case  146:
       handle_vote_update(p[i]);
       break;
 
-    case  "vote_remove":
+    case  147:
       handle_vote_remove(p[i]);
       break;
 
-    case  "vote_resolve":
+    case  148:
       handle_vote_resolve(p[i]);
       break;
 
-    case  "edit_object_created":
+    case  181:
       handle_edit_object_created(p[i]);
       break;
 
-    case  "connect_msg":
+    case  182:
       handle_connect_msg(p[i]);
       break;
 
-    case  "goto_path":
+    case  185:
       handle_goto_path(p[i]);
       break;
 
-    case  "info_text_message":
+    case  187:
       handle_info_text_message(p[i]);
       break;
  

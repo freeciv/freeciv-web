@@ -1288,25 +1288,25 @@ void lsend_packet_thaw_hint(struct conn_list *dest)
 static struct packet_server_join_req *receive_packet_server_join_req_100(struct connection *pc, enum packet_type type)
 {
   RECEIVE_PACKET_START(packet_server_join_req, real_packet);
-  dio_get_string(&din, real_packet->username, sizeof(real_packet->username));
-  dio_get_string(&din, real_packet->capability, sizeof(real_packet->capability));
-  dio_get_string(&din, real_packet->version_label, sizeof(real_packet->version_label));
+  dio_get_string(pc->json_packet, "username", real_packet->username, sizeof(real_packet->username));
+  dio_get_string(pc->json_packet, "capability", real_packet->capability, sizeof(real_packet->capability));
+  dio_get_string(pc->json_packet, "version_label", real_packet->version_label, sizeof(real_packet->version_label));
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "major_version", &readin);
     real_packet->major_version = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "minor_version", &readin);
     real_packet->minor_version = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "patch_version", &readin);
     real_packet->patch_version = readin;
   }
 
@@ -1318,12 +1318,12 @@ static int send_packet_server_join_req_100(struct connection *pc, const struct p
   const struct packet_server_join_req *real_packet = packet;
   SEND_PACKET_START(PACKET_SERVER_JOIN_REQ);
 
-  dio_put_string(&dout, real_packet->username);
-  dio_put_string(&dout, real_packet->capability);
-  dio_put_string(&dout, real_packet->version_label);
-  dio_put_uint32(&dout, real_packet->major_version);
-  dio_put_uint32(&dout, real_packet->minor_version);
-  dio_put_uint32(&dout, real_packet->patch_version);
+  dio_put_string(&dout, "username", real_packet->username);
+  dio_put_string(&dout, "capability", real_packet->capability);
+  dio_put_string(&dout, "version_label", real_packet->version_label);
+  dio_put_uint32(&dout, "major_version", real_packet->major_version);
+  dio_put_uint32(&dout, "minor_version", real_packet->minor_version);
+  dio_put_uint32(&dout, "patch_version", real_packet->patch_version);
 
   SEND_PACKET_END;
 }
@@ -1402,14 +1402,14 @@ int dsend_packet_server_join_req(struct connection *pc, const char *username, co
 static struct packet_server_join_reply *receive_packet_server_join_reply_100(struct connection *pc, enum packet_type type)
 {
   RECEIVE_PACKET_START(packet_server_join_reply, real_packet);
-  dio_get_bool8(&din, &real_packet->you_can_join);
-  dio_get_string(&din, real_packet->message, sizeof(real_packet->message));
-  dio_get_string(&din, real_packet->capability, sizeof(real_packet->capability));
-  dio_get_string(&din, real_packet->challenge_file, sizeof(real_packet->challenge_file));
+  dio_get_bool8(pc->json_packet, "you_can_join", &real_packet->you_can_join);
+  dio_get_string(pc->json_packet, "message", real_packet->message, sizeof(real_packet->message));
+  dio_get_string(pc->json_packet, "capability", real_packet->capability, sizeof(real_packet->capability));
+  dio_get_string(pc->json_packet, "challenge_file", real_packet->challenge_file, sizeof(real_packet->challenge_file));
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "conn_id", &readin);
     real_packet->conn_id = readin;
   }
 
@@ -1421,11 +1421,11 @@ static int send_packet_server_join_reply_100(struct connection *pc, const struct
   const struct packet_server_join_reply *real_packet = packet;
   SEND_PACKET_START(PACKET_SERVER_JOIN_REPLY);
 
-  dio_put_bool8(&dout, real_packet->you_can_join);
-  dio_put_string(&dout, real_packet->message);
-  dio_put_string(&dout, real_packet->capability);
-  dio_put_string(&dout, real_packet->challenge_file);
-  dio_put_uint8(&dout, real_packet->conn_id);
+  dio_put_bool8(&dout, "you_can_join", real_packet->you_can_join);
+  dio_put_string(&dout, "message", real_packet->message);
+  dio_put_string(&dout, "capability", real_packet->capability);
+  dio_put_string(&dout, "challenge_file", real_packet->challenge_file);
+  dio_put_uint8(&dout, "conn_id", real_packet->conn_id);
 
   SEND_PACKET_END;
 }
@@ -1493,10 +1493,10 @@ static struct packet_authentication_req *receive_packet_authentication_req_100(s
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "type", &readin);
     real_packet->type = readin;
   }
-  dio_get_string(&din, real_packet->message, sizeof(real_packet->message));
+  dio_get_string(pc->json_packet, "message", real_packet->message, sizeof(real_packet->message));
 
   RECEIVE_PACKET_END(real_packet);
 }
@@ -1506,8 +1506,8 @@ static int send_packet_authentication_req_100(struct connection *pc, const struc
   const struct packet_authentication_req *real_packet = packet;
   SEND_PACKET_START(PACKET_AUTHENTICATION_REQ);
 
-  dio_put_uint8(&dout, real_packet->type);
-  dio_put_string(&dout, real_packet->message);
+  dio_put_uint8(&dout, "type", real_packet->type);
+  dio_put_string(&dout, "message", real_packet->message);
 
   SEND_PACKET_END;
 }
@@ -1582,7 +1582,7 @@ int dsend_packet_authentication_req(struct connection *pc, enum authentication_t
 static struct packet_authentication_reply *receive_packet_authentication_reply_100(struct connection *pc, enum packet_type type)
 {
   RECEIVE_PACKET_START(packet_authentication_reply, real_packet);
-  dio_get_string(&din, real_packet->password, sizeof(real_packet->password));
+  dio_get_string(pc->json_packet, "password", real_packet->password, sizeof(real_packet->password));
 
   RECEIVE_PACKET_END(real_packet);
 }
@@ -1592,7 +1592,7 @@ static int send_packet_authentication_reply_100(struct connection *pc, const str
   const struct packet_authentication_reply *real_packet = packet;
   SEND_PACKET_START(PACKET_AUTHENTICATION_REPLY);
 
-  dio_put_string(&dout, real_packet->password);
+  dio_put_string(&dout, "password", real_packet->password);
 
   SEND_PACKET_END;
 }
@@ -1737,21 +1737,21 @@ static struct packet_nation_select_req *receive_packet_nation_select_req_100(str
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "player_no", &readin);
     real_packet->player_no = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "nation_no", &readin);
     real_packet->nation_no = readin;
   }
-  dio_get_bool8(&din, &real_packet->is_male);
-  dio_get_string(&din, real_packet->name, sizeof(real_packet->name));
+  dio_get_bool8(pc->json_packet, "is_male", &real_packet->is_male);
+  dio_get_string(pc->json_packet, "name", real_packet->name, sizeof(real_packet->name));
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "city_style", &readin);
     real_packet->city_style = readin;
   }
 
@@ -1763,11 +1763,11 @@ static int send_packet_nation_select_req_100(struct connection *pc, const struct
   const struct packet_nation_select_req *real_packet = packet;
   SEND_PACKET_START(PACKET_NATION_SELECT_REQ);
 
-  dio_put_sint8(&dout, real_packet->player_no);
-  dio_put_uint32(&dout, real_packet->nation_no);
-  dio_put_bool8(&dout, real_packet->is_male);
-  dio_put_string(&dout, real_packet->name);
-  dio_put_uint8(&dout, real_packet->city_style);
+  dio_put_sint8(&dout, "player_no", real_packet->player_no);
+  dio_put_uint32(&dout, "nation_no", real_packet->nation_no);
+  dio_put_bool8(&dout, "is_male", real_packet->is_male);
+  dio_put_string(&dout, "name", real_packet->name);
+  dio_put_uint8(&dout, "city_style", real_packet->city_style);
 
   SEND_PACKET_END;
 }
@@ -1848,10 +1848,10 @@ static struct packet_player_ready *receive_packet_player_ready_100(struct connec
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "player_no", &readin);
     real_packet->player_no = readin;
   }
-  dio_get_bool8(&din, &real_packet->is_ready);
+  dio_get_bool8(pc->json_packet, "is_ready", &real_packet->is_ready);
 
   RECEIVE_PACKET_END(real_packet);
 }
@@ -1861,8 +1861,8 @@ static int send_packet_player_ready_100(struct connection *pc, const struct pack
   const struct packet_player_ready *real_packet = packet;
   SEND_PACKET_START(PACKET_PLAYER_READY);
 
-  dio_put_sint8(&dout, real_packet->player_no);
-  dio_put_bool8(&dout, real_packet->is_ready);
+  dio_put_sint8(&dout, "player_no", real_packet->player_no);
+  dio_put_bool8(&dout, "is_ready", real_packet->is_ready);
 
   SEND_PACKET_END;
 }
@@ -1940,12 +1940,12 @@ static struct packet_endgame_report *receive_packet_endgame_report_100(struct co
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "nscores", &readin);
     real_packet->nscores = readin;
   }
   
   {
-    int i;
+     int i;
   
     if(real_packet->nscores > MAX_NUM_PLAYERS) {
       freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
@@ -1955,14 +1955,14 @@ static struct packet_endgame_report *receive_packet_endgame_report_100(struct co
       {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "id", &readin);
     real_packet->id[i] = readin;
   }
     }
   }
   
   {
-    int i;
+     int i;
   
     if(real_packet->nscores > MAX_NUM_PLAYERS) {
       freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
@@ -1972,14 +1972,14 @@ static struct packet_endgame_report *receive_packet_endgame_report_100(struct co
       {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "score", &readin);
     real_packet->score[i] = readin;
   }
     }
   }
   
   {
-    int i;
+     int i;
   
     if(real_packet->nscores > MAX_NUM_PLAYERS) {
       freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
@@ -1989,14 +1989,14 @@ static struct packet_endgame_report *receive_packet_endgame_report_100(struct co
       {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "pop", &readin);
     real_packet->pop[i] = readin;
   }
     }
   }
   
   {
-    int i;
+     int i;
   
     if(real_packet->nscores > MAX_NUM_PLAYERS) {
       freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
@@ -2006,14 +2006,14 @@ static struct packet_endgame_report *receive_packet_endgame_report_100(struct co
       {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "bnp", &readin);
     real_packet->bnp[i] = readin;
   }
     }
   }
   
   {
-    int i;
+     int i;
   
     if(real_packet->nscores > MAX_NUM_PLAYERS) {
       freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
@@ -2023,14 +2023,14 @@ static struct packet_endgame_report *receive_packet_endgame_report_100(struct co
       {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "mfg", &readin);
     real_packet->mfg[i] = readin;
   }
     }
   }
   
   {
-    int i;
+     int i;
   
     if(real_packet->nscores > MAX_NUM_PLAYERS) {
       freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
@@ -2040,14 +2040,14 @@ static struct packet_endgame_report *receive_packet_endgame_report_100(struct co
       {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "cities", &readin);
     real_packet->cities[i] = readin;
   }
     }
   }
   
   {
-    int i;
+     int i;
   
     if(real_packet->nscores > MAX_NUM_PLAYERS) {
       freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
@@ -2057,14 +2057,14 @@ static struct packet_endgame_report *receive_packet_endgame_report_100(struct co
       {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "techs", &readin);
     real_packet->techs[i] = readin;
   }
     }
   }
   
   {
-    int i;
+     int i;
   
     if(real_packet->nscores > MAX_NUM_PLAYERS) {
       freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
@@ -2074,14 +2074,14 @@ static struct packet_endgame_report *receive_packet_endgame_report_100(struct co
       {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "mil_service", &readin);
     real_packet->mil_service[i] = readin;
   }
     }
   }
   
   {
-    int i;
+     int i;
   
     if(real_packet->nscores > MAX_NUM_PLAYERS) {
       freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
@@ -2091,14 +2091,14 @@ static struct packet_endgame_report *receive_packet_endgame_report_100(struct co
       {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "wonders", &readin);
     real_packet->wonders[i] = readin;
   }
     }
   }
   
   {
-    int i;
+     int i;
   
     if(real_packet->nscores > MAX_NUM_PLAYERS) {
       freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
@@ -2108,14 +2108,14 @@ static struct packet_endgame_report *receive_packet_endgame_report_100(struct co
       {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "research", &readin);
     real_packet->research[i] = readin;
   }
     }
   }
   
   {
-    int i;
+     int i;
   
     if(real_packet->nscores > MAX_NUM_PLAYERS) {
       freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
@@ -2125,14 +2125,14 @@ static struct packet_endgame_report *receive_packet_endgame_report_100(struct co
       {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "landarea", &readin);
     real_packet->landarea[i] = readin;
   }
     }
   }
   
   {
-    int i;
+     int i;
   
     if(real_packet->nscores > MAX_NUM_PLAYERS) {
       freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
@@ -2142,14 +2142,14 @@ static struct packet_endgame_report *receive_packet_endgame_report_100(struct co
       {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "settledarea", &readin);
     real_packet->settledarea[i] = readin;
   }
     }
   }
   
   {
-    int i;
+     int i;
   
     if(real_packet->nscores > MAX_NUM_PLAYERS) {
       freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
@@ -2159,14 +2159,14 @@ static struct packet_endgame_report *receive_packet_endgame_report_100(struct co
       {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "literacy", &readin);
     real_packet->literacy[i] = readin;
   }
     }
   }
   
   {
-    int i;
+     int i;
   
     if(real_packet->nscores > MAX_NUM_PLAYERS) {
       freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
@@ -2176,7 +2176,7 @@ static struct packet_endgame_report *receive_packet_endgame_report_100(struct co
       {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "spaceship", &readin);
     real_packet->spaceship[i] = readin;
   }
     }
@@ -2190,118 +2190,62 @@ static int send_packet_endgame_report_100(struct connection *pc, const struct pa
   const struct packet_endgame_report *real_packet = packet;
   SEND_PACKET_START(PACKET_ENDGAME_REPORT);
 
-  dio_put_uint8(&dout, real_packet->nscores);
+  dio_put_uint8(&dout, "nscores", real_packet->nscores);
 
     {
-      int i;
-
-      for (i = 0; i < real_packet->nscores; i++) {
-        dio_put_sint8(&dout, real_packet->id[i]);
-      }
+        dio_put_array_sint8(&dout, "id", (int*)real_packet->id, real_packet->nscores);
     } 
 
     {
-      int i;
-
-      for (i = 0; i < real_packet->nscores; i++) {
-        dio_put_uint32(&dout, real_packet->score[i]);
-      }
+        dio_put_array_uint32(&dout, "score", (int*)real_packet->score, real_packet->nscores);
     } 
 
     {
-      int i;
-
-      for (i = 0; i < real_packet->nscores; i++) {
-        dio_put_uint32(&dout, real_packet->pop[i]);
-      }
+        dio_put_array_uint32(&dout, "pop", (int*)real_packet->pop, real_packet->nscores);
     } 
 
     {
-      int i;
-
-      for (i = 0; i < real_packet->nscores; i++) {
-        dio_put_uint32(&dout, real_packet->bnp[i]);
-      }
+        dio_put_array_uint32(&dout, "bnp", (int*)real_packet->bnp, real_packet->nscores);
     } 
 
     {
-      int i;
-
-      for (i = 0; i < real_packet->nscores; i++) {
-        dio_put_uint32(&dout, real_packet->mfg[i]);
-      }
+        dio_put_array_uint32(&dout, "mfg", (int*)real_packet->mfg, real_packet->nscores);
     } 
 
     {
-      int i;
-
-      for (i = 0; i < real_packet->nscores; i++) {
-        dio_put_uint32(&dout, real_packet->cities[i]);
-      }
+        dio_put_array_uint32(&dout, "cities", (int*)real_packet->cities, real_packet->nscores);
     } 
 
     {
-      int i;
-
-      for (i = 0; i < real_packet->nscores; i++) {
-        dio_put_uint32(&dout, real_packet->techs[i]);
-      }
+        dio_put_array_uint32(&dout, "techs", (int*)real_packet->techs, real_packet->nscores);
     } 
 
     {
-      int i;
-
-      for (i = 0; i < real_packet->nscores; i++) {
-        dio_put_uint32(&dout, real_packet->mil_service[i]);
-      }
+        dio_put_array_uint32(&dout, "mil_service", (int*)real_packet->mil_service, real_packet->nscores);
     } 
 
     {
-      int i;
-
-      for (i = 0; i < real_packet->nscores; i++) {
-        dio_put_uint8(&dout, real_packet->wonders[i]);
-      }
+        dio_put_array_uint8(&dout, "wonders", (int*)real_packet->wonders, real_packet->nscores);
     } 
 
     {
-      int i;
-
-      for (i = 0; i < real_packet->nscores; i++) {
-        dio_put_uint32(&dout, real_packet->research[i]);
-      }
+        dio_put_array_uint32(&dout, "research", (int*)real_packet->research, real_packet->nscores);
     } 
 
     {
-      int i;
-
-      for (i = 0; i < real_packet->nscores; i++) {
-        dio_put_uint32(&dout, real_packet->landarea[i]);
-      }
+        dio_put_array_uint32(&dout, "landarea", (int*)real_packet->landarea, real_packet->nscores);
     } 
 
     {
-      int i;
-
-      for (i = 0; i < real_packet->nscores; i++) {
-        dio_put_uint32(&dout, real_packet->settledarea[i]);
-      }
+        dio_put_array_uint32(&dout, "settledarea", (int*)real_packet->settledarea, real_packet->nscores);
     } 
 
     {
-      int i;
-
-      for (i = 0; i < real_packet->nscores; i++) {
-        dio_put_uint32(&dout, real_packet->literacy[i]);
-      }
+        dio_put_array_uint32(&dout, "literacy", (int*)real_packet->literacy, real_packet->nscores);
     } 
 
     {
-      int i;
-
-      for (i = 0; i < real_packet->nscores; i++) {
-        dio_put_uint32(&dout, real_packet->spaceship[i]);
-      }
+        dio_put_array_uint32(&dout, "spaceship", (int*)real_packet->spaceship, real_packet->nscores);
     } 
 
   SEND_PACKET_END;
@@ -2377,65 +2321,65 @@ static struct packet_tile_info *receive_packet_tile_info_100(struct connection *
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "x", &readin);
     real_packet->x = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "y", &readin);
     real_packet->y = readin;
   }
   {
     int readin;
   
-    dio_get_sint16(&din, &readin);
+    dio_get_sint16(pc->json_packet, "continent", &readin);
     real_packet->continent = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "known", &readin);
     real_packet->known = readin;
   }
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "owner", &readin);
     real_packet->owner = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "worked", &readin);
     real_packet->worked = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "terrain", &readin);
     real_packet->terrain = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "resource", &readin);
     real_packet->resource = readin;
   }
   
   {
-    int i;
+     int i;
   
     for (i = 0; i < S_LAST; i++) {
-      dio_get_bool8(&din, &real_packet->special[i]);
+      dio_get_bool8(pc->json_packet, "special", &real_packet->special[i]);
     }
   }
-  DIO_BV_GET(&din, real_packet->bases);
-  dio_get_string(&din, real_packet->spec_sprite, sizeof(real_packet->spec_sprite));
+   /* not supported yet. DIO_BV_GET(pc->json_packet, real_packet->bases);*/
+  dio_get_string(pc->json_packet, "spec_sprite", real_packet->spec_sprite, sizeof(real_packet->spec_sprite));
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "nation_start", &readin);
     real_packet->nation_start = readin;
   }
 
@@ -2447,25 +2391,21 @@ static int send_packet_tile_info_100(struct connection *pc, bool force_send, con
   const struct packet_tile_info *real_packet = packet;
   SEND_PACKET_START(PACKET_TILE_INFO);
 
-  dio_put_uint32(&dout, real_packet->x);
-  dio_put_uint32(&dout, real_packet->y);
-  dio_put_sint16(&dout, real_packet->continent);
-  dio_put_uint8(&dout, real_packet->known);
-  dio_put_sint8(&dout, real_packet->owner);
-  dio_put_uint32(&dout, real_packet->worked);
-  dio_put_uint8(&dout, real_packet->terrain);
-  dio_put_uint8(&dout, real_packet->resource);
+  dio_put_uint32(&dout, "x", real_packet->x);
+  dio_put_uint32(&dout, "y", real_packet->y);
+  dio_put_sint16(&dout, "continent", real_packet->continent);
+  dio_put_uint8(&dout, "known", real_packet->known);
+  dio_put_sint8(&dout, "owner", real_packet->owner);
+  dio_put_uint32(&dout, "worked", real_packet->worked);
+  dio_put_uint8(&dout, "terrain", real_packet->terrain);
+  dio_put_uint8(&dout, "resource", real_packet->resource);
 
     {
-      int i;
-
-      for (i = 0; i < S_LAST; i++) {
-        dio_put_bool8(&dout, real_packet->special[i]);
-      }
+        dio_put_array_bool8(&dout, "special", (bool*)real_packet->special, S_LAST);
     } 
-DIO_BV_PUT(&dout, packet->bases);
-  dio_put_string(&dout, real_packet->spec_sprite);
-  dio_put_uint32(&dout, real_packet->nation_start);
+DIO_BV_PUT(&dout, "bases", packet->bases);
+  dio_put_string(&dout, "spec_sprite", real_packet->spec_sprite);
+  dio_put_uint32(&dout, "nation_start", real_packet->nation_start);
 
   SEND_PACKET_END;
 }
@@ -2540,410 +2480,410 @@ static struct packet_game_info *receive_packet_game_info_100(struct connection *
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "gold", &readin);
     real_packet->gold = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "tech", &readin);
     real_packet->tech = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "skill_level", &readin);
     real_packet->skill_level = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "aifill", &readin);
     real_packet->aifill = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "mapsize", &readin);
     real_packet->mapsize = readin;
   }
-  dio_get_bool8(&din, &real_packet->is_new_game);
-  dio_get_bool8(&din, &real_packet->is_edit_mode);
+  dio_get_bool8(pc->json_packet, "is_new_game", &real_packet->is_new_game);
+  dio_get_bool8(pc->json_packet, "is_edit_mode", &real_packet->is_edit_mode);
   {
     int tmp;
     
-    dio_get_uint32(&din, &tmp);
+    dio_get_uint32(pc->json_packet, "seconds_to_phasedone", &tmp);
     real_packet->seconds_to_phasedone = (float)(tmp) / 10000.0;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "timeout", &readin);
     real_packet->timeout = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "turn", &readin);
     real_packet->turn = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "phase", &readin);
     real_packet->phase = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "year", &readin);
     real_packet->year = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "start_year", &readin);
     real_packet->start_year = readin;
   }
-  dio_get_bool8(&din, &real_packet->year_0_hack);
+  dio_get_bool8(pc->json_packet, "year_0_hack", &real_packet->year_0_hack);
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "end_turn", &readin);
     real_packet->end_turn = readin;
   }
-  dio_get_string(&din, real_packet->positive_year_label, sizeof(real_packet->positive_year_label));
-  dio_get_string(&din, real_packet->negative_year_label, sizeof(real_packet->negative_year_label));
+  dio_get_string(pc->json_packet, "positive_year_label", real_packet->positive_year_label, sizeof(real_packet->positive_year_label));
+  dio_get_string(pc->json_packet, "negative_year_label", real_packet->negative_year_label, sizeof(real_packet->negative_year_label));
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "phase_mode", &readin);
     real_packet->phase_mode = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "num_phases", &readin);
     real_packet->num_phases = readin;
   }
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "min_players", &readin);
     real_packet->min_players = readin;
   }
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "max_players", &readin);
     real_packet->max_players = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "globalwarming", &readin);
     real_packet->globalwarming = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "heating", &readin);
     real_packet->heating = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "warminglevel", &readin);
     real_packet->warminglevel = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "nuclearwinter", &readin);
     real_packet->nuclearwinter = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "cooling", &readin);
     real_packet->cooling = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "coolinglevel", &readin);
     real_packet->coolinglevel = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "diplcost", &readin);
     real_packet->diplcost = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "freecost", &readin);
     real_packet->freecost = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "conquercost", &readin);
     real_packet->conquercost = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "angrycitizen", &readin);
     real_packet->angrycitizen = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "techpenalty", &readin);
     real_packet->techpenalty = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "foodbox", &readin);
     real_packet->foodbox = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "shieldbox", &readin);
     real_packet->shieldbox = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "sciencebox", &readin);
     real_packet->sciencebox = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "diplomacy", &readin);
     real_packet->diplomacy = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "dispersion", &readin);
     real_packet->dispersion = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "tcptimeout", &readin);
     real_packet->tcptimeout = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "netwait", &readin);
     real_packet->netwait = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "pingtimeout", &readin);
     real_packet->pingtimeout = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "pingtime", &readin);
     real_packet->pingtime = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "diplchance", &readin);
     real_packet->diplchance = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "citymindist", &readin);
     real_packet->citymindist = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "civilwarsize", &readin);
     real_packet->civilwarsize = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "contactturns", &readin);
     real_packet->contactturns = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "rapturedelay", &readin);
     real_packet->rapturedelay = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "celebratesize", &readin);
     real_packet->celebratesize = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "barbarianrate", &readin);
     real_packet->barbarianrate = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "onsetbarbarian", &readin);
     real_packet->onsetbarbarian = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "occupychance", &readin);
     real_packet->occupychance = readin;
   }
-  dio_get_bool8(&din, &real_packet->autoattack);
-  dio_get_bool8(&din, &real_packet->spacerace);
-  dio_get_bool8(&din, &real_packet->endspaceship);
+  dio_get_bool8(pc->json_packet, "autoattack", &real_packet->autoattack);
+  dio_get_bool8(pc->json_packet, "spacerace", &real_packet->spacerace);
+  dio_get_bool8(pc->json_packet, "endspaceship", &real_packet->endspaceship);
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "aqueductloss", &readin);
     real_packet->aqueductloss = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "killcitizen", &readin);
     real_packet->killcitizen = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "razechance", &readin);
     real_packet->razechance = readin;
   }
-  dio_get_bool8(&din, &real_packet->savepalace);
-  dio_get_bool8(&din, &real_packet->natural_city_names);
-  dio_get_bool8(&din, &real_packet->migration);
+  dio_get_bool8(pc->json_packet, "savepalace", &real_packet->savepalace);
+  dio_get_bool8(pc->json_packet, "natural_city_names", &real_packet->natural_city_names);
+  dio_get_bool8(pc->json_packet, "migration", &real_packet->migration);
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "mgr_turninterval", &readin);
     real_packet->mgr_turninterval = readin;
   }
-  dio_get_bool8(&din, &real_packet->mgr_foodneeded);
+  dio_get_bool8(pc->json_packet, "mgr_foodneeded", &real_packet->mgr_foodneeded);
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "mgr_distance", &readin);
     real_packet->mgr_distance = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "mgr_nationchance", &readin);
     real_packet->mgr_nationchance = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "mgr_worldchance", &readin);
     real_packet->mgr_worldchance = readin;
   }
-  dio_get_bool8(&din, &real_packet->turnblock);
-  dio_get_bool8(&din, &real_packet->fixedlength);
-  dio_get_bool8(&din, &real_packet->auto_ai_toggle);
-  dio_get_bool8(&din, &real_packet->fogofwar);
+  dio_get_bool8(pc->json_packet, "turnblock", &real_packet->turnblock);
+  dio_get_bool8(pc->json_packet, "fixedlength", &real_packet->fixedlength);
+  dio_get_bool8(pc->json_packet, "auto_ai_toggle", &real_packet->auto_ai_toggle);
+  dio_get_bool8(pc->json_packet, "fogofwar", &real_packet->fogofwar);
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "borders", &readin);
     real_packet->borders = readin;
   }
-  dio_get_bool8(&din, &real_packet->happyborders);
-  dio_get_bool8(&din, &real_packet->slow_invasions);
+  dio_get_bool8(pc->json_packet, "happyborders", &real_packet->happyborders);
+  dio_get_bool8(pc->json_packet, "slow_invasions", &real_packet->slow_invasions);
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "add_to_size_limit", &readin);
     real_packet->add_to_size_limit = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "notradesize", &readin);
     real_packet->notradesize = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "fulltradesize", &readin);
     real_packet->fulltradesize = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "trademindist", &readin);
     real_packet->trademindist = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "allowed_city_names", &readin);
     real_packet->allowed_city_names = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "palace_building", &readin);
     real_packet->palace_building = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "land_defend_building", &readin);
     real_packet->land_defend_building = readin;
   }
-  dio_get_bool8(&din, &real_packet->changable_tax);
+  dio_get_bool8(pc->json_packet, "changable_tax", &real_packet->changable_tax);
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "forced_science", &readin);
     real_packet->forced_science = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "forced_luxury", &readin);
     real_packet->forced_luxury = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "forced_gold", &readin);
     real_packet->forced_gold = readin;
   }
-  dio_get_bool8(&din, &real_packet->vision_reveal_tiles);
+  dio_get_bool8(pc->json_packet, "vision_reveal_tiles", &real_packet->vision_reveal_tiles);
   
   {
-    int i;
+     int i;
   
     for (i = 0; i < O_LAST; i++) {
       {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "min_city_center_output", &readin);
     real_packet->min_city_center_output[i] = readin;
   }
     }
@@ -2951,37 +2891,37 @@ static struct packet_game_info *receive_packet_game_info_100(struct connection *
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "min_dist_bw_cities", &readin);
     real_packet->min_dist_bw_cities = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "init_vis_radius_sq", &readin);
     real_packet->init_vis_radius_sq = readin;
   }
-  dio_get_bool8(&din, &real_packet->pillage_select);
+  dio_get_bool8(pc->json_packet, "pillage_select", &real_packet->pillage_select);
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "nuke_contamination", &readin);
     real_packet->nuke_contamination = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "gold_upkeep_style", &readin);
     real_packet->gold_upkeep_style = readin;
   }
   
   {
-    int i;
+     int i;
   
     for (i = 0; i < MAX_GRANARY_INIS; i++) {
       {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "granary_food_ini", &readin);
     real_packet->granary_food_ini[i] = readin;
   }
     }
@@ -2989,205 +2929,205 @@ static struct packet_game_info *receive_packet_game_info_100(struct connection *
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "granary_num_inis", &readin);
     real_packet->granary_num_inis = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "granary_food_inc", &readin);
     real_packet->granary_food_inc = readin;
   }
-  dio_get_bool8(&din, &real_packet->illness_on);
+  dio_get_bool8(pc->json_packet, "illness_on", &real_packet->illness_on);
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "illness_min_size", &readin);
     real_packet->illness_min_size = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "illness_base_factor", &readin);
     real_packet->illness_base_factor = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "illness_trade_infection", &readin);
     real_packet->illness_trade_infection = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "illness_pollution_factor", &readin);
     real_packet->illness_pollution_factor = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "tech_cost_style", &readin);
     real_packet->tech_cost_style = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "tech_leakage", &readin);
     real_packet->tech_leakage = readin;
   }
-  dio_get_bool8(&din, &real_packet->killstack);
-  dio_get_bool8(&din, &real_packet->tired_attack);
+  dio_get_bool8(pc->json_packet, "killstack", &real_packet->killstack);
+  dio_get_bool8(pc->json_packet, "tired_attack", &real_packet->tired_attack);
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "border_city_radius_sq", &readin);
     real_packet->border_city_radius_sq = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "border_size_effect", &readin);
     real_packet->border_size_effect = readin;
   }
-  dio_get_bool8(&din, &real_packet->calendar_skip_0);
+  dio_get_bool8(pc->json_packet, "calendar_skip_0", &real_packet->calendar_skip_0);
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "upgrade_veteran_loss", &readin);
     real_packet->upgrade_veteran_loss = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "autoupgrade_veteran_loss", &readin);
     real_packet->autoupgrade_veteran_loss = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "incite_improvement_factor", &readin);
     real_packet->incite_improvement_factor = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "incite_unit_factor", &readin);
     real_packet->incite_unit_factor = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "incite_total_factor", &readin);
     real_packet->incite_total_factor = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "government_during_revolution_id", &readin);
     real_packet->government_during_revolution_id = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "revolution_length", &readin);
     real_packet->revolution_length = readin;
   }
   {
     int readin;
   
-    dio_get_sint16(&din, &readin);
+    dio_get_sint16(pc->json_packet, "base_pollution", &readin);
     real_packet->base_pollution = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "happy_cost", &readin);
     real_packet->happy_cost = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "food_cost", &readin);
     real_packet->food_cost = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "base_bribe_cost", &readin);
     real_packet->base_bribe_cost = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "base_incite_cost", &readin);
     real_packet->base_incite_cost = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "base_tech_cost", &readin);
     real_packet->base_tech_cost = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "ransom_gold", &readin);
     real_packet->ransom_gold = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "save_nturns", &readin);
     real_packet->save_nturns = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "save_compress_level", &readin);
     real_packet->save_compress_level = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "save_compress_type", &readin);
     real_packet->save_compress_type = readin;
   }
-  dio_get_string(&din, real_packet->start_units, sizeof(real_packet->start_units));
+  dio_get_string(pc->json_packet, "start_units", real_packet->start_units, sizeof(real_packet->start_units));
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "num_teams", &readin);
     real_packet->num_teams = readin;
   }
   
   {
-    int i;
+     int i;
   
     if(real_packet->num_teams > MAX_NUM_TEAMS) {
       freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
       real_packet->num_teams = MAX_NUM_TEAMS;
     }
     for (i = 0; i < real_packet->num_teams; i++) {
-      dio_get_string(&din, real_packet->team_names_orig[i], sizeof(real_packet->team_names_orig[i]));
+      dio_get_string(pc->json_packet, "team_names_orig", real_packet->team_names_orig[i], sizeof(real_packet->team_names_orig[i]));
     }
   }
   
   {
-    int i;
+     int i;
   
     for (i = 0; i < A_LAST; i++) {
-      dio_get_bool8(&din, &real_packet->global_advances[i]);
+      dio_get_bool8(pc->json_packet, "global_advances", &real_packet->global_advances[i]);
     }
   }
   
   {
-    int i;
+     int i;
   
     for (i = 0; i < B_LAST; i++) {
       {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "great_wonder_owners", &readin);
     real_packet->great_wonder_owners[i] = readin;
   }
     }
@@ -3201,166 +3141,146 @@ static int send_packet_game_info_100(struct connection *pc, const struct packet_
   const struct packet_game_info *real_packet = packet;
   SEND_PACKET_START(PACKET_GAME_INFO);
 
-  dio_put_uint32(&dout, real_packet->gold);
-  dio_put_uint32(&dout, real_packet->tech);
-  dio_put_uint32(&dout, real_packet->skill_level);
-  dio_put_uint32(&dout, real_packet->aifill);
-  dio_put_uint32(&dout, real_packet->mapsize);
-  dio_put_bool8(&dout, real_packet->is_new_game);
-  dio_put_bool8(&dout, real_packet->is_edit_mode);
-  dio_put_uint32(&dout, (int)(real_packet->seconds_to_phasedone * 10000));
-  dio_put_uint32(&dout, real_packet->timeout);
-  dio_put_uint32(&dout, real_packet->turn);
-  dio_put_uint32(&dout, real_packet->phase);
-  dio_put_uint32(&dout, real_packet->year);
-  dio_put_uint32(&dout, real_packet->start_year);
-  dio_put_bool8(&dout, real_packet->year_0_hack);
-  dio_put_uint32(&dout, real_packet->end_turn);
-  dio_put_string(&dout, real_packet->positive_year_label);
-  dio_put_string(&dout, real_packet->negative_year_label);
-  dio_put_uint8(&dout, real_packet->phase_mode);
-  dio_put_uint32(&dout, real_packet->num_phases);
-  dio_put_sint8(&dout, real_packet->min_players);
-  dio_put_sint8(&dout, real_packet->max_players);
-  dio_put_uint32(&dout, real_packet->globalwarming);
-  dio_put_uint32(&dout, real_packet->heating);
-  dio_put_uint32(&dout, real_packet->warminglevel);
-  dio_put_uint32(&dout, real_packet->nuclearwinter);
-  dio_put_uint32(&dout, real_packet->cooling);
-  dio_put_uint32(&dout, real_packet->coolinglevel);
-  dio_put_uint8(&dout, real_packet->diplcost);
-  dio_put_uint8(&dout, real_packet->freecost);
-  dio_put_uint8(&dout, real_packet->conquercost);
-  dio_put_uint8(&dout, real_packet->angrycitizen);
-  dio_put_uint8(&dout, real_packet->techpenalty);
-  dio_put_uint32(&dout, real_packet->foodbox);
-  dio_put_uint32(&dout, real_packet->shieldbox);
-  dio_put_uint32(&dout, real_packet->sciencebox);
-  dio_put_uint8(&dout, real_packet->diplomacy);
-  dio_put_uint8(&dout, real_packet->dispersion);
-  dio_put_uint32(&dout, real_packet->tcptimeout);
-  dio_put_uint32(&dout, real_packet->netwait);
-  dio_put_uint32(&dout, real_packet->pingtimeout);
-  dio_put_uint32(&dout, real_packet->pingtime);
-  dio_put_uint8(&dout, real_packet->diplchance);
-  dio_put_uint8(&dout, real_packet->citymindist);
-  dio_put_uint8(&dout, real_packet->civilwarsize);
-  dio_put_uint8(&dout, real_packet->contactturns);
-  dio_put_uint8(&dout, real_packet->rapturedelay);
-  dio_put_uint8(&dout, real_packet->celebratesize);
-  dio_put_uint8(&dout, real_packet->barbarianrate);
-  dio_put_uint32(&dout, real_packet->onsetbarbarian);
-  dio_put_uint8(&dout, real_packet->occupychance);
-  dio_put_bool8(&dout, real_packet->autoattack);
-  dio_put_bool8(&dout, real_packet->spacerace);
-  dio_put_bool8(&dout, real_packet->endspaceship);
-  dio_put_uint8(&dout, real_packet->aqueductloss);
-  dio_put_uint8(&dout, real_packet->killcitizen);
-  dio_put_uint8(&dout, real_packet->razechance);
-  dio_put_bool8(&dout, real_packet->savepalace);
-  dio_put_bool8(&dout, real_packet->natural_city_names);
-  dio_put_bool8(&dout, real_packet->migration);
-  dio_put_uint8(&dout, real_packet->mgr_turninterval);
-  dio_put_bool8(&dout, real_packet->mgr_foodneeded);
-  dio_put_uint8(&dout, real_packet->mgr_distance);
-  dio_put_uint8(&dout, real_packet->mgr_nationchance);
-  dio_put_uint8(&dout, real_packet->mgr_worldchance);
-  dio_put_bool8(&dout, real_packet->turnblock);
-  dio_put_bool8(&dout, real_packet->fixedlength);
-  dio_put_bool8(&dout, real_packet->auto_ai_toggle);
-  dio_put_bool8(&dout, real_packet->fogofwar);
-  dio_put_uint8(&dout, real_packet->borders);
-  dio_put_bool8(&dout, real_packet->happyborders);
-  dio_put_bool8(&dout, real_packet->slow_invasions);
-  dio_put_uint8(&dout, real_packet->add_to_size_limit);
-  dio_put_uint8(&dout, real_packet->notradesize);
-  dio_put_uint8(&dout, real_packet->fulltradesize);
-  dio_put_uint8(&dout, real_packet->trademindist);
-  dio_put_uint8(&dout, real_packet->allowed_city_names);
-  dio_put_uint8(&dout, real_packet->palace_building);
-  dio_put_uint8(&dout, real_packet->land_defend_building);
-  dio_put_bool8(&dout, real_packet->changable_tax);
-  dio_put_uint8(&dout, real_packet->forced_science);
-  dio_put_uint8(&dout, real_packet->forced_luxury);
-  dio_put_uint8(&dout, real_packet->forced_gold);
-  dio_put_bool8(&dout, real_packet->vision_reveal_tiles);
+  dio_put_uint32(&dout, "gold", real_packet->gold);
+  dio_put_uint32(&dout, "tech", real_packet->tech);
+  dio_put_uint32(&dout, "skill_level", real_packet->skill_level);
+  dio_put_uint32(&dout, "aifill", real_packet->aifill);
+  dio_put_uint32(&dout, "mapsize", real_packet->mapsize);
+  dio_put_bool8(&dout, "is_new_game", real_packet->is_new_game);
+  dio_put_bool8(&dout, "is_edit_mode", real_packet->is_edit_mode);
+  dio_put_uint32(&dout, "seconds_to_phasedone", (int)(real_packet->seconds_to_phasedone * 10000));
+  dio_put_uint32(&dout, "timeout", real_packet->timeout);
+  dio_put_uint32(&dout, "turn", real_packet->turn);
+  dio_put_uint32(&dout, "phase", real_packet->phase);
+  dio_put_uint32(&dout, "year", real_packet->year);
+  dio_put_uint32(&dout, "start_year", real_packet->start_year);
+  dio_put_bool8(&dout, "year_0_hack", real_packet->year_0_hack);
+  dio_put_uint32(&dout, "end_turn", real_packet->end_turn);
+  dio_put_string(&dout, "positive_year_label", real_packet->positive_year_label);
+  dio_put_string(&dout, "negative_year_label", real_packet->negative_year_label);
+  dio_put_uint8(&dout, "phase_mode", real_packet->phase_mode);
+  dio_put_uint32(&dout, "num_phases", real_packet->num_phases);
+  dio_put_sint8(&dout, "min_players", real_packet->min_players);
+  dio_put_sint8(&dout, "max_players", real_packet->max_players);
+  dio_put_uint32(&dout, "globalwarming", real_packet->globalwarming);
+  dio_put_uint32(&dout, "heating", real_packet->heating);
+  dio_put_uint32(&dout, "warminglevel", real_packet->warminglevel);
+  dio_put_uint32(&dout, "nuclearwinter", real_packet->nuclearwinter);
+  dio_put_uint32(&dout, "cooling", real_packet->cooling);
+  dio_put_uint32(&dout, "coolinglevel", real_packet->coolinglevel);
+  dio_put_uint8(&dout, "diplcost", real_packet->diplcost);
+  dio_put_uint8(&dout, "freecost", real_packet->freecost);
+  dio_put_uint8(&dout, "conquercost", real_packet->conquercost);
+  dio_put_uint8(&dout, "angrycitizen", real_packet->angrycitizen);
+  dio_put_uint8(&dout, "techpenalty", real_packet->techpenalty);
+  dio_put_uint32(&dout, "foodbox", real_packet->foodbox);
+  dio_put_uint32(&dout, "shieldbox", real_packet->shieldbox);
+  dio_put_uint32(&dout, "sciencebox", real_packet->sciencebox);
+  dio_put_uint8(&dout, "diplomacy", real_packet->diplomacy);
+  dio_put_uint8(&dout, "dispersion", real_packet->dispersion);
+  dio_put_uint32(&dout, "tcptimeout", real_packet->tcptimeout);
+  dio_put_uint32(&dout, "netwait", real_packet->netwait);
+  dio_put_uint32(&dout, "pingtimeout", real_packet->pingtimeout);
+  dio_put_uint32(&dout, "pingtime", real_packet->pingtime);
+  dio_put_uint8(&dout, "diplchance", real_packet->diplchance);
+  dio_put_uint8(&dout, "citymindist", real_packet->citymindist);
+  dio_put_uint8(&dout, "civilwarsize", real_packet->civilwarsize);
+  dio_put_uint8(&dout, "contactturns", real_packet->contactturns);
+  dio_put_uint8(&dout, "rapturedelay", real_packet->rapturedelay);
+  dio_put_uint8(&dout, "celebratesize", real_packet->celebratesize);
+  dio_put_uint8(&dout, "barbarianrate", real_packet->barbarianrate);
+  dio_put_uint32(&dout, "onsetbarbarian", real_packet->onsetbarbarian);
+  dio_put_uint8(&dout, "occupychance", real_packet->occupychance);
+  dio_put_bool8(&dout, "autoattack", real_packet->autoattack);
+  dio_put_bool8(&dout, "spacerace", real_packet->spacerace);
+  dio_put_bool8(&dout, "endspaceship", real_packet->endspaceship);
+  dio_put_uint8(&dout, "aqueductloss", real_packet->aqueductloss);
+  dio_put_uint8(&dout, "killcitizen", real_packet->killcitizen);
+  dio_put_uint8(&dout, "razechance", real_packet->razechance);
+  dio_put_bool8(&dout, "savepalace", real_packet->savepalace);
+  dio_put_bool8(&dout, "natural_city_names", real_packet->natural_city_names);
+  dio_put_bool8(&dout, "migration", real_packet->migration);
+  dio_put_uint8(&dout, "mgr_turninterval", real_packet->mgr_turninterval);
+  dio_put_bool8(&dout, "mgr_foodneeded", real_packet->mgr_foodneeded);
+  dio_put_uint8(&dout, "mgr_distance", real_packet->mgr_distance);
+  dio_put_uint8(&dout, "mgr_nationchance", real_packet->mgr_nationchance);
+  dio_put_uint8(&dout, "mgr_worldchance", real_packet->mgr_worldchance);
+  dio_put_bool8(&dout, "turnblock", real_packet->turnblock);
+  dio_put_bool8(&dout, "fixedlength", real_packet->fixedlength);
+  dio_put_bool8(&dout, "auto_ai_toggle", real_packet->auto_ai_toggle);
+  dio_put_bool8(&dout, "fogofwar", real_packet->fogofwar);
+  dio_put_uint8(&dout, "borders", real_packet->borders);
+  dio_put_bool8(&dout, "happyborders", real_packet->happyborders);
+  dio_put_bool8(&dout, "slow_invasions", real_packet->slow_invasions);
+  dio_put_uint8(&dout, "add_to_size_limit", real_packet->add_to_size_limit);
+  dio_put_uint8(&dout, "notradesize", real_packet->notradesize);
+  dio_put_uint8(&dout, "fulltradesize", real_packet->fulltradesize);
+  dio_put_uint8(&dout, "trademindist", real_packet->trademindist);
+  dio_put_uint8(&dout, "allowed_city_names", real_packet->allowed_city_names);
+  dio_put_uint8(&dout, "palace_building", real_packet->palace_building);
+  dio_put_uint8(&dout, "land_defend_building", real_packet->land_defend_building);
+  dio_put_bool8(&dout, "changable_tax", real_packet->changable_tax);
+  dio_put_uint8(&dout, "forced_science", real_packet->forced_science);
+  dio_put_uint8(&dout, "forced_luxury", real_packet->forced_luxury);
+  dio_put_uint8(&dout, "forced_gold", real_packet->forced_gold);
+  dio_put_bool8(&dout, "vision_reveal_tiles", real_packet->vision_reveal_tiles);
 
     {
-      int i;
-
-      for (i = 0; i < O_LAST; i++) {
-        dio_put_uint8(&dout, real_packet->min_city_center_output[i]);
-      }
+        dio_put_array_uint8(&dout, "min_city_center_output", (int*)real_packet->min_city_center_output, O_LAST);
     } 
-  dio_put_uint8(&dout, real_packet->min_dist_bw_cities);
-  dio_put_uint8(&dout, real_packet->init_vis_radius_sq);
-  dio_put_bool8(&dout, real_packet->pillage_select);
-  dio_put_uint8(&dout, real_packet->nuke_contamination);
-  dio_put_uint8(&dout, real_packet->gold_upkeep_style);
+  dio_put_uint8(&dout, "min_dist_bw_cities", real_packet->min_dist_bw_cities);
+  dio_put_uint8(&dout, "init_vis_radius_sq", real_packet->init_vis_radius_sq);
+  dio_put_bool8(&dout, "pillage_select", real_packet->pillage_select);
+  dio_put_uint8(&dout, "nuke_contamination", real_packet->nuke_contamination);
+  dio_put_uint8(&dout, "gold_upkeep_style", real_packet->gold_upkeep_style);
 
     {
-      int i;
-
-      for (i = 0; i < MAX_GRANARY_INIS; i++) {
-        dio_put_uint8(&dout, real_packet->granary_food_ini[i]);
-      }
+        dio_put_array_uint8(&dout, "granary_food_ini", (int*)real_packet->granary_food_ini, MAX_GRANARY_INIS);
     } 
-  dio_put_uint8(&dout, real_packet->granary_num_inis);
-  dio_put_uint8(&dout, real_packet->granary_food_inc);
-  dio_put_bool8(&dout, real_packet->illness_on);
-  dio_put_uint8(&dout, real_packet->illness_min_size);
-  dio_put_uint8(&dout, real_packet->illness_base_factor);
-  dio_put_uint8(&dout, real_packet->illness_trade_infection);
-  dio_put_uint8(&dout, real_packet->illness_pollution_factor);
-  dio_put_uint8(&dout, real_packet->tech_cost_style);
-  dio_put_uint8(&dout, real_packet->tech_leakage);
-  dio_put_bool8(&dout, real_packet->killstack);
-  dio_put_bool8(&dout, real_packet->tired_attack);
-  dio_put_uint8(&dout, real_packet->border_city_radius_sq);
-  dio_put_uint8(&dout, real_packet->border_size_effect);
-  dio_put_bool8(&dout, real_packet->calendar_skip_0);
-  dio_put_uint8(&dout, real_packet->upgrade_veteran_loss);
-  dio_put_uint8(&dout, real_packet->autoupgrade_veteran_loss);
-  dio_put_uint32(&dout, real_packet->incite_improvement_factor);
-  dio_put_uint32(&dout, real_packet->incite_unit_factor);
-  dio_put_uint32(&dout, real_packet->incite_total_factor);
-  dio_put_uint8(&dout, real_packet->government_during_revolution_id);
-  dio_put_uint8(&dout, real_packet->revolution_length);
-  dio_put_sint16(&dout, real_packet->base_pollution);
-  dio_put_uint8(&dout, real_packet->happy_cost);
-  dio_put_uint8(&dout, real_packet->food_cost);
-  dio_put_uint32(&dout, real_packet->base_bribe_cost);
-  dio_put_uint32(&dout, real_packet->base_incite_cost);
-  dio_put_uint8(&dout, real_packet->base_tech_cost);
-  dio_put_uint32(&dout, real_packet->ransom_gold);
-  dio_put_uint8(&dout, real_packet->save_nturns);
-  dio_put_uint8(&dout, real_packet->save_compress_level);
-  dio_put_uint8(&dout, real_packet->save_compress_type);
-  dio_put_string(&dout, real_packet->start_units);
-  dio_put_uint8(&dout, real_packet->num_teams);
+  dio_put_uint8(&dout, "granary_num_inis", real_packet->granary_num_inis);
+  dio_put_uint8(&dout, "granary_food_inc", real_packet->granary_food_inc);
+  dio_put_bool8(&dout, "illness_on", real_packet->illness_on);
+  dio_put_uint8(&dout, "illness_min_size", real_packet->illness_min_size);
+  dio_put_uint8(&dout, "illness_base_factor", real_packet->illness_base_factor);
+  dio_put_uint8(&dout, "illness_trade_infection", real_packet->illness_trade_infection);
+  dio_put_uint8(&dout, "illness_pollution_factor", real_packet->illness_pollution_factor);
+  dio_put_uint8(&dout, "tech_cost_style", real_packet->tech_cost_style);
+  dio_put_uint8(&dout, "tech_leakage", real_packet->tech_leakage);
+  dio_put_bool8(&dout, "killstack", real_packet->killstack);
+  dio_put_bool8(&dout, "tired_attack", real_packet->tired_attack);
+  dio_put_uint8(&dout, "border_city_radius_sq", real_packet->border_city_radius_sq);
+  dio_put_uint8(&dout, "border_size_effect", real_packet->border_size_effect);
+  dio_put_bool8(&dout, "calendar_skip_0", real_packet->calendar_skip_0);
+  dio_put_uint8(&dout, "upgrade_veteran_loss", real_packet->upgrade_veteran_loss);
+  dio_put_uint8(&dout, "autoupgrade_veteran_loss", real_packet->autoupgrade_veteran_loss);
+  dio_put_uint32(&dout, "incite_improvement_factor", real_packet->incite_improvement_factor);
+  dio_put_uint32(&dout, "incite_unit_factor", real_packet->incite_unit_factor);
+  dio_put_uint32(&dout, "incite_total_factor", real_packet->incite_total_factor);
+  dio_put_uint8(&dout, "government_during_revolution_id", real_packet->government_during_revolution_id);
+  dio_put_uint8(&dout, "revolution_length", real_packet->revolution_length);
+  dio_put_sint16(&dout, "base_pollution", real_packet->base_pollution);
+  dio_put_uint8(&dout, "happy_cost", real_packet->happy_cost);
+  dio_put_uint8(&dout, "food_cost", real_packet->food_cost);
+  dio_put_uint32(&dout, "base_bribe_cost", real_packet->base_bribe_cost);
+  dio_put_uint32(&dout, "base_incite_cost", real_packet->base_incite_cost);
+  dio_put_uint8(&dout, "base_tech_cost", real_packet->base_tech_cost);
+  dio_put_uint32(&dout, "ransom_gold", real_packet->ransom_gold);
+  dio_put_uint8(&dout, "save_nturns", real_packet->save_nturns);
+  dio_put_uint8(&dout, "save_compress_level", real_packet->save_compress_level);
+  dio_put_uint8(&dout, "save_compress_type", real_packet->save_compress_type);
+  dio_put_string(&dout, "start_units", real_packet->start_units);
+  dio_put_uint8(&dout, "num_teams", real_packet->num_teams);
 
     {
-      int i;
-
-      for (i = 0; i < real_packet->num_teams; i++) {
-        dio_put_string(&dout, real_packet->team_names_orig[i]);
-      }
+         /*not supported yet... dio_put_string_array(&dout, "team_names_orig", (char *)real_packet->team_names_orig, real_packet->num_teams);*/ 
     } 
 
     {
-      int i;
-
-      for (i = 0; i < A_LAST; i++) {
-        dio_put_bool8(&dout, real_packet->global_advances[i]);
-      }
+        dio_put_array_bool8(&dout, "global_advances", (bool*)real_packet->global_advances, A_LAST);
     } 
 
     {
-      int i;
-
-      for (i = 0; i < B_LAST; i++) {
-        dio_put_sint8(&dout, real_packet->great_wonder_owners[i]);
-      }
+        dio_put_array_sint8(&dout, "great_wonder_owners", (int*)real_packet->great_wonder_owners, B_LAST);
     } 
 
   SEND_PACKET_END;
@@ -3429,19 +3349,19 @@ static struct packet_map_info *receive_packet_map_info_100(struct connection *pc
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "xsize", &readin);
     real_packet->xsize = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "ysize", &readin);
     real_packet->ysize = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "topology_id", &readin);
     real_packet->topology_id = readin;
   }
 
@@ -3453,9 +3373,9 @@ static int send_packet_map_info_100(struct connection *pc, const struct packet_m
   const struct packet_map_info *real_packet = packet;
   SEND_PACKET_START(PACKET_MAP_INFO);
 
-  dio_put_uint32(&dout, real_packet->xsize);
-  dio_put_uint32(&dout, real_packet->ysize);
-  dio_put_uint8(&dout, real_packet->topology_id);
+  dio_put_uint32(&dout, "xsize", real_packet->xsize);
+  dio_put_uint32(&dout, "ysize", real_packet->ysize);
+  dio_put_uint8(&dout, "topology_id", real_packet->topology_id);
 
   SEND_PACKET_END;
 }
@@ -3530,13 +3450,13 @@ static struct packet_nuke_tile_info *receive_packet_nuke_tile_info_100(struct co
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "x", &readin);
     real_packet->x = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "y", &readin);
     real_packet->y = readin;
   }
 
@@ -3548,8 +3468,8 @@ static int send_packet_nuke_tile_info_100(struct connection *pc, const struct pa
   const struct packet_nuke_tile_info *real_packet = packet;
   SEND_PACKET_START(PACKET_NUKE_TILE_INFO);
 
-  dio_put_uint32(&dout, real_packet->x);
-  dio_put_uint32(&dout, real_packet->y);
+  dio_put_uint32(&dout, "x", real_packet->x);
+  dio_put_uint32(&dout, "y", real_packet->y);
 
   SEND_PACKET_END;
 }
@@ -3641,29 +3561,29 @@ void dlsend_packet_nuke_tile_info(struct conn_list *dest, int x, int y)
 static struct packet_chat_msg *receive_packet_chat_msg_100(struct connection *pc, enum packet_type type)
 {
   RECEIVE_PACKET_START(packet_chat_msg, real_packet);
-  dio_get_string(&din, real_packet->message, sizeof(real_packet->message));
+  dio_get_string(pc->json_packet, "message", real_packet->message, sizeof(real_packet->message));
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "x", &readin);
     real_packet->x = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "y", &readin);
     real_packet->y = readin;
   }
   {
     int readin;
   
-    dio_get_sint32(&din, &readin);
+    dio_get_sint32(pc->json_packet, "event", &readin);
     real_packet->event = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "conn_id", &readin);
     real_packet->conn_id = readin;
   }
 
@@ -3684,11 +3604,11 @@ static int send_packet_chat_msg_100(struct connection *pc, const struct packet_c
     real_packet = tmp;
   }
 
-  dio_put_string(&dout, real_packet->message);
-  dio_put_uint32(&dout, real_packet->x);
-  dio_put_uint32(&dout, real_packet->y);
-  dio_put_sint32(&dout, real_packet->event);
-  dio_put_uint8(&dout, real_packet->conn_id);
+  dio_put_string(&dout, "message", real_packet->message);
+  dio_put_uint32(&dout, "x", real_packet->x);
+  dio_put_uint32(&dout, "y", real_packet->y);
+  dio_put_sint32(&dout, "event", real_packet->event);
+  dio_put_uint8(&dout, "conn_id", real_packet->conn_id);
 
 
   if (real_packet != packet) {
@@ -3764,7 +3684,7 @@ void lsend_packet_chat_msg(struct conn_list *dest, const struct packet_chat_msg 
 static struct packet_chat_msg_req *receive_packet_chat_msg_req_100(struct connection *pc, enum packet_type type)
 {
   RECEIVE_PACKET_START(packet_chat_msg_req, real_packet);
-  dio_get_string(&din, real_packet->message, sizeof(real_packet->message));
+  dio_get_string(pc->json_packet, "message", real_packet->message, sizeof(real_packet->message));
 
   RECEIVE_PACKET_END(real_packet);
 }
@@ -3774,7 +3694,7 @@ static int send_packet_chat_msg_req_100(struct connection *pc, const struct pack
   const struct packet_chat_msg_req *real_packet = packet;
   SEND_PACKET_START(PACKET_CHAT_MSG_REQ);
 
-  dio_put_string(&dout, real_packet->message);
+  dio_put_string(&dout, "message", real_packet->message);
 
   SEND_PACKET_END;
 }
@@ -3848,7 +3768,7 @@ int dsend_packet_chat_msg_req(struct connection *pc, const char *message)
 static struct packet_connect_msg *receive_packet_connect_msg_100(struct connection *pc, enum packet_type type)
 {
   RECEIVE_PACKET_START(packet_connect_msg, real_packet);
-  dio_get_string(&din, real_packet->message, sizeof(real_packet->message));
+  dio_get_string(pc->json_packet, "message", real_packet->message, sizeof(real_packet->message));
 
   RECEIVE_PACKET_END(real_packet);
 }
@@ -3858,7 +3778,7 @@ static int send_packet_connect_msg_100(struct connection *pc, const struct packe
   const struct packet_connect_msg *real_packet = packet;
   SEND_PACKET_START(PACKET_CONNECT_MSG);
 
-  dio_put_string(&dout, real_packet->message);
+  dio_put_string(&dout, "message", real_packet->message);
 
   SEND_PACKET_END;
 }
@@ -3935,7 +3855,7 @@ static struct packet_city_remove *receive_packet_city_remove_100(struct connecti
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "city_id", &readin);
     real_packet->city_id = readin;
   }
 
@@ -3947,7 +3867,7 @@ static int send_packet_city_remove_100(struct connection *pc, const struct packe
   const struct packet_city_remove *real_packet = packet;
   SEND_PACKET_START(PACKET_CITY_REMOVE);
 
-  dio_put_uint32(&dout, real_packet->city_id);
+  dio_put_uint32(&dout, "city_id", real_packet->city_id);
 
   SEND_PACKET_END;
 }
@@ -4040,81 +3960,81 @@ static struct packet_city_info *receive_packet_city_info_100(struct connection *
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "id", &readin);
     real_packet->id = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "x", &readin);
     real_packet->x = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "y", &readin);
     real_packet->y = readin;
   }
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "owner", &readin);
     real_packet->owner = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "size", &readin);
     real_packet->size = readin;
   }
   
   {
-    int i;
+     int i;
   
     for (i = 0; i < 5; i++) {
       {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "ppl_happy", &readin);
     real_packet->ppl_happy[i] = readin;
   }
     }
   }
   
   {
-    int i;
+     int i;
   
     for (i = 0; i < 5; i++) {
       {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "ppl_content", &readin);
     real_packet->ppl_content[i] = readin;
   }
     }
   }
   
   {
-    int i;
+     int i;
   
     for (i = 0; i < 5; i++) {
       {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "ppl_unhappy", &readin);
     real_packet->ppl_unhappy[i] = readin;
   }
     }
   }
   
   {
-    int i;
+     int i;
   
     for (i = 0; i < 5; i++) {
       {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "ppl_angry", &readin);
     real_packet->ppl_angry[i] = readin;
   }
     }
@@ -4122,12 +4042,12 @@ static struct packet_city_info *receive_packet_city_info_100(struct connection *
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "specialists_size", &readin);
     real_packet->specialists_size = readin;
   }
   
   {
-    int i;
+     int i;
   
     if(real_packet->specialists_size > SP_MAX) {
       freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
@@ -4137,85 +4057,85 @@ static struct packet_city_info *receive_packet_city_info_100(struct connection *
       {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "specialists", &readin);
     real_packet->specialists[i] = readin;
   }
     }
   }
   
   {
-    int i;
+     int i;
   
     for (i = 0; i < O_LAST; i++) {
       {
     int readin;
   
-    dio_get_sint16(&din, &readin);
+    dio_get_sint16(pc->json_packet, "surplus", &readin);
     real_packet->surplus[i] = readin;
   }
     }
   }
   
   {
-    int i;
+     int i;
   
     for (i = 0; i < O_LAST; i++) {
       {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "waste", &readin);
     real_packet->waste[i] = readin;
   }
     }
   }
   
   {
-    int i;
+     int i;
   
     for (i = 0; i < O_LAST; i++) {
       {
     int readin;
   
-    dio_get_sint16(&din, &readin);
+    dio_get_sint16(pc->json_packet, "unhappy_penalty", &readin);
     real_packet->unhappy_penalty[i] = readin;
   }
     }
   }
   
   {
-    int i;
+     int i;
   
     for (i = 0; i < O_LAST; i++) {
       {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "prod", &readin);
     real_packet->prod[i] = readin;
   }
     }
   }
   
   {
-    int i;
+     int i;
   
     for (i = 0; i < O_LAST; i++) {
       {
     int readin;
   
-    dio_get_sint16(&din, &readin);
+    dio_get_sint16(pc->json_packet, "citizen_base", &readin);
     real_packet->citizen_base[i] = readin;
   }
     }
   }
   
   {
-    int i;
+     int i;
   
     for (i = 0; i < O_LAST; i++) {
       {
     int readin;
   
-    dio_get_sint16(&din, &readin);
+    dio_get_sint16(pc->json_packet, "usage", &readin);
     real_packet->usage[i] = readin;
   }
     }
@@ -4223,37 +4143,37 @@ static struct packet_city_info *receive_packet_city_info_100(struct connection *
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "food_stock", &readin);
     real_packet->food_stock = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "shield_stock", &readin);
     real_packet->shield_stock = readin;
   }
   
   {
-    int i;
+     int i;
   
     for (i = 0; i < NUM_TRADEROUTES; i++) {
       {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "trade", &readin);
     real_packet->trade[i] = readin;
   }
     }
   }
   
   {
-    int i;
+     int i;
   
     for (i = 0; i < NUM_TRADEROUTES; i++) {
       {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "trade_value", &readin);
     real_packet->trade_value[i] = readin;
   }
     }
@@ -4261,96 +4181,96 @@ static struct packet_city_info *receive_packet_city_info_100(struct connection *
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "pollution", &readin);
     real_packet->pollution = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "illness", &readin);
     real_packet->illness = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "production_kind", &readin);
     real_packet->production_kind = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "production_value", &readin);
     real_packet->production_value = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "turn_founded", &readin);
     real_packet->turn_founded = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "turn_last_built", &readin);
     real_packet->turn_last_built = readin;
   }
   {
     int tmp;
     
-    dio_get_uint32(&din, &tmp);
+    dio_get_uint32(pc->json_packet, "migration_score", &tmp);
     real_packet->migration_score = (float)(tmp) / 10000.0;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "changed_from_kind", &readin);
     real_packet->changed_from_kind = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "changed_from_value", &readin);
     real_packet->changed_from_value = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "before_change_shields", &readin);
     real_packet->before_change_shields = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "disbanded_shields", &readin);
     real_packet->disbanded_shields = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "caravan_shields", &readin);
     real_packet->caravan_shields = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "last_turns_shield_surplus", &readin);
     real_packet->last_turns_shield_surplus = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "airlift", &readin);
     real_packet->airlift = readin;
   }
-  dio_get_bool8(&din, &real_packet->did_buy);
-  dio_get_bool8(&din, &real_packet->did_sell);
-  dio_get_bool8(&din, &real_packet->was_happy);
-  dio_get_bool8(&din, &real_packet->diplomat_investigate);
-  dio_get_bool8(&din, &real_packet->walls);
-  dio_get_string(&din, real_packet->can_build_unit, sizeof(real_packet->can_build_unit));
-  dio_get_string(&din, real_packet->can_build_improvement, sizeof(real_packet->can_build_improvement));
-  dio_get_string(&din, real_packet->improvements, sizeof(real_packet->improvements));
-  dio_get_string(&din, real_packet->name, sizeof(real_packet->name));
+  dio_get_bool8(pc->json_packet, "did_buy", &real_packet->did_buy);
+  dio_get_bool8(pc->json_packet, "did_sell", &real_packet->did_sell);
+  dio_get_bool8(pc->json_packet, "was_happy", &real_packet->was_happy);
+  dio_get_bool8(pc->json_packet, "diplomat_investigate", &real_packet->diplomat_investigate);
+  dio_get_bool8(pc->json_packet, "walls", &real_packet->walls);
+  dio_get_string(pc->json_packet, "can_build_unit", real_packet->can_build_unit, sizeof(real_packet->can_build_unit));
+  dio_get_string(pc->json_packet, "can_build_improvement", real_packet->can_build_improvement, sizeof(real_packet->can_build_improvement));
+  dio_get_string(pc->json_packet, "improvements", real_packet->improvements, sizeof(real_packet->improvements));
+  dio_get_string(pc->json_packet, "name", real_packet->name, sizeof(real_packet->name));
 
   RECEIVE_PACKET_END(real_packet);
 }
@@ -4360,141 +4280,89 @@ static int send_packet_city_info_100(struct connection *pc, const struct packet_
   const struct packet_city_info *real_packet = packet;
   SEND_PACKET_START(PACKET_CITY_INFO);
 
-  dio_put_uint32(&dout, real_packet->id);
-  dio_put_uint32(&dout, real_packet->x);
-  dio_put_uint32(&dout, real_packet->y);
-  dio_put_sint8(&dout, real_packet->owner);
-  dio_put_uint8(&dout, real_packet->size);
+  dio_put_uint32(&dout, "id", real_packet->id);
+  dio_put_uint32(&dout, "x", real_packet->x);
+  dio_put_uint32(&dout, "y", real_packet->y);
+  dio_put_sint8(&dout, "owner", real_packet->owner);
+  dio_put_uint8(&dout, "size", real_packet->size);
 
     {
-      int i;
-
-      for (i = 0; i < 5; i++) {
-        dio_put_uint8(&dout, real_packet->ppl_happy[i]);
-      }
+        dio_put_array_uint8(&dout, "ppl_happy", (int*)real_packet->ppl_happy, 5);
     } 
 
     {
-      int i;
-
-      for (i = 0; i < 5; i++) {
-        dio_put_uint8(&dout, real_packet->ppl_content[i]);
-      }
+        dio_put_array_uint8(&dout, "ppl_content", (int*)real_packet->ppl_content, 5);
     } 
 
     {
-      int i;
-
-      for (i = 0; i < 5; i++) {
-        dio_put_uint8(&dout, real_packet->ppl_unhappy[i]);
-      }
+        dio_put_array_uint8(&dout, "ppl_unhappy", (int*)real_packet->ppl_unhappy, 5);
     } 
 
     {
-      int i;
-
-      for (i = 0; i < 5; i++) {
-        dio_put_uint8(&dout, real_packet->ppl_angry[i]);
-      }
+        dio_put_array_uint8(&dout, "ppl_angry", (int*)real_packet->ppl_angry, 5);
     } 
-  dio_put_uint8(&dout, real_packet->specialists_size);
+  dio_put_uint8(&dout, "specialists_size", real_packet->specialists_size);
 
     {
-      int i;
-
-      for (i = 0; i < real_packet->specialists_size; i++) {
-        dio_put_uint8(&dout, real_packet->specialists[i]);
-      }
+        dio_put_array_uint8(&dout, "specialists", (int*)real_packet->specialists, real_packet->specialists_size);
     } 
 
     {
-      int i;
-
-      for (i = 0; i < O_LAST; i++) {
-        dio_put_sint16(&dout, real_packet->surplus[i]);
-      }
+        dio_put_array_sint16(&dout, "surplus", (int*)real_packet->surplus, O_LAST);
     } 
 
     {
-      int i;
-
-      for (i = 0; i < O_LAST; i++) {
-        dio_put_uint32(&dout, real_packet->waste[i]);
-      }
+        dio_put_array_uint32(&dout, "waste", (int*)real_packet->waste, O_LAST);
     } 
 
     {
-      int i;
-
-      for (i = 0; i < O_LAST; i++) {
-        dio_put_sint16(&dout, real_packet->unhappy_penalty[i]);
-      }
+        dio_put_array_sint16(&dout, "unhappy_penalty", (int*)real_packet->unhappy_penalty, O_LAST);
     } 
 
     {
-      int i;
-
-      for (i = 0; i < O_LAST; i++) {
-        dio_put_uint32(&dout, real_packet->prod[i]);
-      }
+        dio_put_array_uint32(&dout, "prod", (int*)real_packet->prod, O_LAST);
     } 
 
     {
-      int i;
-
-      for (i = 0; i < O_LAST; i++) {
-        dio_put_sint16(&dout, real_packet->citizen_base[i]);
-      }
+        dio_put_array_sint16(&dout, "citizen_base", (int*)real_packet->citizen_base, O_LAST);
     } 
 
     {
-      int i;
-
-      for (i = 0; i < O_LAST; i++) {
-        dio_put_sint16(&dout, real_packet->usage[i]);
-      }
+        dio_put_array_sint16(&dout, "usage", (int*)real_packet->usage, O_LAST);
     } 
-  dio_put_uint32(&dout, real_packet->food_stock);
-  dio_put_uint32(&dout, real_packet->shield_stock);
+  dio_put_uint32(&dout, "food_stock", real_packet->food_stock);
+  dio_put_uint32(&dout, "shield_stock", real_packet->shield_stock);
 
     {
-      int i;
-
-      for (i = 0; i < NUM_TRADEROUTES; i++) {
-        dio_put_uint32(&dout, real_packet->trade[i]);
-      }
+        dio_put_array_uint32(&dout, "trade", (int*)real_packet->trade, NUM_TRADEROUTES);
     } 
 
     {
-      int i;
-
-      for (i = 0; i < NUM_TRADEROUTES; i++) {
-        dio_put_uint8(&dout, real_packet->trade_value[i]);
-      }
+        dio_put_array_uint8(&dout, "trade_value", (int*)real_packet->trade_value, NUM_TRADEROUTES);
     } 
-  dio_put_uint32(&dout, real_packet->pollution);
-  dio_put_uint32(&dout, real_packet->illness);
-  dio_put_uint8(&dout, real_packet->production_kind);
-  dio_put_uint8(&dout, real_packet->production_value);
-  dio_put_uint32(&dout, real_packet->turn_founded);
-  dio_put_uint32(&dout, real_packet->turn_last_built);
-  dio_put_uint32(&dout, (int)(real_packet->migration_score * 10000));
-  dio_put_uint8(&dout, real_packet->changed_from_kind);
-  dio_put_uint8(&dout, real_packet->changed_from_value);
-  dio_put_uint32(&dout, real_packet->before_change_shields);
-  dio_put_uint32(&dout, real_packet->disbanded_shields);
-  dio_put_uint32(&dout, real_packet->caravan_shields);
-  dio_put_uint32(&dout, real_packet->last_turns_shield_surplus);
-  dio_put_uint8(&dout, real_packet->airlift);
-  dio_put_bool8(&dout, real_packet->did_buy);
-  dio_put_bool8(&dout, real_packet->did_sell);
-  dio_put_bool8(&dout, real_packet->was_happy);
-  dio_put_bool8(&dout, real_packet->diplomat_investigate);
-  dio_put_bool8(&dout, real_packet->walls);
-  dio_put_string(&dout, real_packet->can_build_unit);
-  dio_put_string(&dout, real_packet->can_build_improvement);
-  dio_put_string(&dout, real_packet->improvements);
-  dio_put_string(&dout, real_packet->name);
+  dio_put_uint32(&dout, "pollution", real_packet->pollution);
+  dio_put_uint32(&dout, "illness", real_packet->illness);
+  dio_put_uint8(&dout, "production_kind", real_packet->production_kind);
+  dio_put_uint8(&dout, "production_value", real_packet->production_value);
+  dio_put_uint32(&dout, "turn_founded", real_packet->turn_founded);
+  dio_put_uint32(&dout, "turn_last_built", real_packet->turn_last_built);
+  dio_put_uint32(&dout, "migration_score", (int)(real_packet->migration_score * 10000));
+  dio_put_uint8(&dout, "changed_from_kind", real_packet->changed_from_kind);
+  dio_put_uint8(&dout, "changed_from_value", real_packet->changed_from_value);
+  dio_put_uint32(&dout, "before_change_shields", real_packet->before_change_shields);
+  dio_put_uint32(&dout, "disbanded_shields", real_packet->disbanded_shields);
+  dio_put_uint32(&dout, "caravan_shields", real_packet->caravan_shields);
+  dio_put_uint32(&dout, "last_turns_shield_surplus", real_packet->last_turns_shield_surplus);
+  dio_put_uint8(&dout, "airlift", real_packet->airlift);
+  dio_put_bool8(&dout, "did_buy", real_packet->did_buy);
+  dio_put_bool8(&dout, "did_sell", real_packet->did_sell);
+  dio_put_bool8(&dout, "was_happy", real_packet->was_happy);
+  dio_put_bool8(&dout, "diplomat_investigate", real_packet->diplomat_investigate);
+  dio_put_bool8(&dout, "walls", real_packet->walls);
+  dio_put_string(&dout, "can_build_unit", real_packet->can_build_unit);
+  dio_put_string(&dout, "can_build_improvement", real_packet->can_build_improvement);
+  dio_put_string(&dout, "improvements", real_packet->improvements);
+  dio_put_string(&dout, "name", real_packet->name);
 
   SEND_PACKET_END;
 }
@@ -4569,45 +4437,45 @@ static struct packet_city_short_info *receive_packet_city_short_info_100(struct 
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "id", &readin);
     real_packet->id = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "x", &readin);
     real_packet->x = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "y", &readin);
     real_packet->y = readin;
   }
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "owner", &readin);
     real_packet->owner = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "size", &readin);
     real_packet->size = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "tile_trade", &readin);
     real_packet->tile_trade = readin;
   }
-  dio_get_bool8(&din, &real_packet->occupied);
-  dio_get_bool8(&din, &real_packet->walls);
-  dio_get_bool8(&din, &real_packet->happy);
-  dio_get_bool8(&din, &real_packet->unhappy);
-  dio_get_string(&din, real_packet->improvements, sizeof(real_packet->improvements));
-  dio_get_string(&din, real_packet->name, sizeof(real_packet->name));
+  dio_get_bool8(pc->json_packet, "occupied", &real_packet->occupied);
+  dio_get_bool8(pc->json_packet, "walls", &real_packet->walls);
+  dio_get_bool8(pc->json_packet, "happy", &real_packet->happy);
+  dio_get_bool8(pc->json_packet, "unhappy", &real_packet->unhappy);
+  dio_get_string(pc->json_packet, "improvements", real_packet->improvements, sizeof(real_packet->improvements));
+  dio_get_string(pc->json_packet, "name", real_packet->name, sizeof(real_packet->name));
 
   RECEIVE_PACKET_END(real_packet);
 }
@@ -4617,18 +4485,18 @@ static int send_packet_city_short_info_100(struct connection *pc, const struct p
   const struct packet_city_short_info *real_packet = packet;
   SEND_PACKET_START(PACKET_CITY_SHORT_INFO);
 
-  dio_put_uint32(&dout, real_packet->id);
-  dio_put_uint32(&dout, real_packet->x);
-  dio_put_uint32(&dout, real_packet->y);
-  dio_put_sint8(&dout, real_packet->owner);
-  dio_put_uint8(&dout, real_packet->size);
-  dio_put_uint32(&dout, real_packet->tile_trade);
-  dio_put_bool8(&dout, real_packet->occupied);
-  dio_put_bool8(&dout, real_packet->walls);
-  dio_put_bool8(&dout, real_packet->happy);
-  dio_put_bool8(&dout, real_packet->unhappy);
-  dio_put_string(&dout, real_packet->improvements);
-  dio_put_string(&dout, real_packet->name);
+  dio_put_uint32(&dout, "id", real_packet->id);
+  dio_put_uint32(&dout, "x", real_packet->x);
+  dio_put_uint32(&dout, "y", real_packet->y);
+  dio_put_sint8(&dout, "owner", real_packet->owner);
+  dio_put_uint8(&dout, "size", real_packet->size);
+  dio_put_uint32(&dout, "tile_trade", real_packet->tile_trade);
+  dio_put_bool8(&dout, "occupied", real_packet->occupied);
+  dio_put_bool8(&dout, "walls", real_packet->walls);
+  dio_put_bool8(&dout, "happy", real_packet->happy);
+  dio_put_bool8(&dout, "unhappy", real_packet->unhappy);
+  dio_put_string(&dout, "improvements", real_packet->improvements);
+  dio_put_string(&dout, "name", real_packet->name);
 
   SEND_PACKET_END;
 }
@@ -4703,13 +4571,13 @@ static struct packet_city_sell *receive_packet_city_sell_100(struct connection *
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "city_id", &readin);
     real_packet->city_id = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "build_id", &readin);
     real_packet->build_id = readin;
   }
 
@@ -4721,8 +4589,8 @@ static int send_packet_city_sell_100(struct connection *pc, const struct packet_
   const struct packet_city_sell *real_packet = packet;
   SEND_PACKET_START(PACKET_CITY_SELL);
 
-  dio_put_uint32(&dout, real_packet->city_id);
-  dio_put_uint8(&dout, real_packet->build_id);
+  dio_put_uint32(&dout, "city_id", real_packet->city_id);
+  dio_put_uint8(&dout, "build_id", real_packet->build_id);
 
   SEND_PACKET_END;
 }
@@ -4800,7 +4668,7 @@ static struct packet_city_buy *receive_packet_city_buy_100(struct connection *pc
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "city_id", &readin);
     real_packet->city_id = readin;
   }
 
@@ -4812,7 +4680,7 @@ static int send_packet_city_buy_100(struct connection *pc, const struct packet_c
   const struct packet_city_buy *real_packet = packet;
   SEND_PACKET_START(PACKET_CITY_BUY);
 
-  dio_put_uint32(&dout, real_packet->city_id);
+  dio_put_uint32(&dout, "city_id", real_packet->city_id);
 
   SEND_PACKET_END;
 }
@@ -4889,19 +4757,19 @@ static struct packet_city_change *receive_packet_city_change_100(struct connecti
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "city_id", &readin);
     real_packet->city_id = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "production_kind", &readin);
     real_packet->production_kind = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "production_value", &readin);
     real_packet->production_value = readin;
   }
 
@@ -4913,9 +4781,9 @@ static int send_packet_city_change_100(struct connection *pc, const struct packe
   const struct packet_city_change *real_packet = packet;
   SEND_PACKET_START(PACKET_CITY_CHANGE);
 
-  dio_put_uint32(&dout, real_packet->city_id);
-  dio_put_uint8(&dout, real_packet->production_kind);
-  dio_put_uint8(&dout, real_packet->production_value);
+  dio_put_uint32(&dout, "city_id", real_packet->city_id);
+  dio_put_uint8(&dout, "production_kind", real_packet->production_kind);
+  dio_put_uint8(&dout, "production_value", real_packet->production_value);
 
   SEND_PACKET_END;
 }
@@ -4994,10 +4862,10 @@ static struct packet_city_worklist *receive_packet_city_worklist_100(struct conn
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "city_id", &readin);
     real_packet->city_id = readin;
   }
-  dio_get_worklist(&din, &real_packet->worklist);
+  dio_get_worklist(pc->json_packet, "worklist", &real_packet->worklist);
 
   RECEIVE_PACKET_END(real_packet);
 }
@@ -5007,8 +4875,8 @@ static int send_packet_city_worklist_100(struct connection *pc, const struct pac
   const struct packet_city_worklist *real_packet = packet;
   SEND_PACKET_START(PACKET_CITY_WORKLIST);
 
-  dio_put_uint32(&dout, real_packet->city_id);
-  dio_put_worklist(&dout, &real_packet->worklist);
+  dio_put_uint32(&dout, "city_id", real_packet->city_id);
+  dio_put_worklist(&dout, "worklist", &real_packet->worklist);
 
   SEND_PACKET_END;
 }
@@ -5086,19 +4954,19 @@ static struct packet_city_make_specialist *receive_packet_city_make_specialist_1
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "city_id", &readin);
     real_packet->city_id = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "worker_x", &readin);
     real_packet->worker_x = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "worker_y", &readin);
     real_packet->worker_y = readin;
   }
 
@@ -5110,9 +4978,9 @@ static int send_packet_city_make_specialist_100(struct connection *pc, const str
   const struct packet_city_make_specialist *real_packet = packet;
   SEND_PACKET_START(PACKET_CITY_MAKE_SPECIALIST);
 
-  dio_put_uint32(&dout, real_packet->city_id);
-  dio_put_uint32(&dout, real_packet->worker_x);
-  dio_put_uint32(&dout, real_packet->worker_y);
+  dio_put_uint32(&dout, "city_id", real_packet->city_id);
+  dio_put_uint32(&dout, "worker_x", real_packet->worker_x);
+  dio_put_uint32(&dout, "worker_y", real_packet->worker_y);
 
   SEND_PACKET_END;
 }
@@ -5191,19 +5059,19 @@ static struct packet_city_make_worker *receive_packet_city_make_worker_100(struc
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "city_id", &readin);
     real_packet->city_id = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "worker_x", &readin);
     real_packet->worker_x = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "worker_y", &readin);
     real_packet->worker_y = readin;
   }
 
@@ -5215,9 +5083,9 @@ static int send_packet_city_make_worker_100(struct connection *pc, const struct 
   const struct packet_city_make_worker *real_packet = packet;
   SEND_PACKET_START(PACKET_CITY_MAKE_WORKER);
 
-  dio_put_uint32(&dout, real_packet->city_id);
-  dio_put_uint32(&dout, real_packet->worker_x);
-  dio_put_uint32(&dout, real_packet->worker_y);
+  dio_put_uint32(&dout, "city_id", real_packet->city_id);
+  dio_put_uint32(&dout, "worker_x", real_packet->worker_x);
+  dio_put_uint32(&dout, "worker_y", real_packet->worker_y);
 
   SEND_PACKET_END;
 }
@@ -5296,19 +5164,19 @@ static struct packet_city_change_specialist *receive_packet_city_change_speciali
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "city_id", &readin);
     real_packet->city_id = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "from", &readin);
     real_packet->from = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "to", &readin);
     real_packet->to = readin;
   }
 
@@ -5320,9 +5188,9 @@ static int send_packet_city_change_specialist_100(struct connection *pc, const s
   const struct packet_city_change_specialist *real_packet = packet;
   SEND_PACKET_START(PACKET_CITY_CHANGE_SPECIALIST);
 
-  dio_put_uint32(&dout, real_packet->city_id);
-  dio_put_uint8(&dout, real_packet->from);
-  dio_put_uint8(&dout, real_packet->to);
+  dio_put_uint32(&dout, "city_id", real_packet->city_id);
+  dio_put_uint8(&dout, "from", real_packet->from);
+  dio_put_uint8(&dout, "to", real_packet->to);
 
   SEND_PACKET_END;
 }
@@ -5401,10 +5269,10 @@ static struct packet_city_rename *receive_packet_city_rename_100(struct connecti
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "city_id", &readin);
     real_packet->city_id = readin;
   }
-  dio_get_string(&din, real_packet->name, sizeof(real_packet->name));
+  dio_get_string(pc->json_packet, "name", real_packet->name, sizeof(real_packet->name));
 
   RECEIVE_PACKET_END(real_packet);
 }
@@ -5414,8 +5282,8 @@ static int send_packet_city_rename_100(struct connection *pc, const struct packe
   const struct packet_city_rename *real_packet = packet;
   SEND_PACKET_START(PACKET_CITY_RENAME);
 
-  dio_put_uint32(&dout, real_packet->city_id);
-  dio_put_string(&dout, real_packet->name);
+  dio_put_uint32(&dout, "city_id", real_packet->city_id);
+  dio_put_string(&dout, "name", real_packet->name);
 
   SEND_PACKET_END;
 }
@@ -5493,10 +5361,10 @@ static struct packet_city_options_req *receive_packet_city_options_req_100(struc
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "city_id", &readin);
     real_packet->city_id = readin;
   }
-  DIO_BV_GET(&din, real_packet->options);
+   /* not supported yet. DIO_BV_GET(pc->json_packet, real_packet->options);*/
 
   RECEIVE_PACKET_END(real_packet);
 }
@@ -5506,8 +5374,8 @@ static int send_packet_city_options_req_100(struct connection *pc, const struct 
   const struct packet_city_options_req *real_packet = packet;
   SEND_PACKET_START(PACKET_CITY_OPTIONS_REQ);
 
-  dio_put_uint32(&dout, real_packet->city_id);
-DIO_BV_PUT(&dout, packet->options);
+  dio_put_uint32(&dout, "city_id", real_packet->city_id);
+DIO_BV_PUT(&dout, "options", packet->options);
 
   SEND_PACKET_END;
 }
@@ -5585,7 +5453,7 @@ static struct packet_city_refresh *receive_packet_city_refresh_100(struct connec
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "city_id", &readin);
     real_packet->city_id = readin;
   }
 
@@ -5597,7 +5465,7 @@ static int send_packet_city_refresh_100(struct connection *pc, const struct pack
   const struct packet_city_refresh *real_packet = packet;
   SEND_PACKET_START(PACKET_CITY_REFRESH);
 
-  dio_put_uint32(&dout, real_packet->city_id);
+  dio_put_uint32(&dout, "city_id", real_packet->city_id);
 
   SEND_PACKET_END;
 }
@@ -5674,7 +5542,7 @@ static struct packet_city_name_suggestion_req *receive_packet_city_name_suggesti
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "unit_id", &readin);
     real_packet->unit_id = readin;
   }
 
@@ -5686,7 +5554,7 @@ static int send_packet_city_name_suggestion_req_100(struct connection *pc, const
   const struct packet_city_name_suggestion_req *real_packet = packet;
   SEND_PACKET_START(PACKET_CITY_NAME_SUGGESTION_REQ);
 
-  dio_put_uint32(&dout, real_packet->unit_id);
+  dio_put_uint32(&dout, "unit_id", real_packet->unit_id);
 
   SEND_PACKET_END;
 }
@@ -5763,10 +5631,10 @@ static struct packet_city_name_suggestion_info *receive_packet_city_name_suggest
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "unit_id", &readin);
     real_packet->unit_id = readin;
   }
-  dio_get_string(&din, real_packet->name, sizeof(real_packet->name));
+  dio_get_string(pc->json_packet, "name", real_packet->name, sizeof(real_packet->name));
 
   RECEIVE_PACKET_END(real_packet);
 }
@@ -5776,8 +5644,8 @@ static int send_packet_city_name_suggestion_info_100(struct connection *pc, cons
   const struct packet_city_name_suggestion_info *real_packet = packet;
   SEND_PACKET_START(PACKET_CITY_NAME_SUGGESTION_INFO);
 
-  dio_put_uint32(&dout, real_packet->unit_id);
-  dio_put_string(&dout, real_packet->name);
+  dio_put_uint32(&dout, "unit_id", real_packet->unit_id);
+  dio_put_string(&dout, "name", real_packet->name);
 
   SEND_PACKET_END;
 }
@@ -5872,16 +5740,16 @@ static struct packet_city_sabotage_list *receive_packet_city_sabotage_list_100(s
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "diplomat_id", &readin);
     real_packet->diplomat_id = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "city_id", &readin);
     real_packet->city_id = readin;
   }
-  DIO_BV_GET(&din, real_packet->improvements);
+   /* not supported yet. DIO_BV_GET(pc->json_packet, real_packet->improvements);*/
 
   RECEIVE_PACKET_END(real_packet);
 }
@@ -5891,9 +5759,9 @@ static int send_packet_city_sabotage_list_100(struct connection *pc, const struc
   const struct packet_city_sabotage_list *real_packet = packet;
   SEND_PACKET_START(PACKET_CITY_SABOTAGE_LIST);
 
-  dio_put_uint32(&dout, real_packet->diplomat_id);
-  dio_put_uint32(&dout, real_packet->city_id);
-DIO_BV_PUT(&dout, packet->improvements);
+  dio_put_uint32(&dout, "diplomat_id", real_packet->diplomat_id);
+  dio_put_uint32(&dout, "city_id", real_packet->city_id);
+DIO_BV_PUT(&dout, "improvements", packet->improvements);
 
   SEND_PACKET_END;
 }
@@ -5968,7 +5836,7 @@ static struct packet_player_remove *receive_packet_player_remove_100(struct conn
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "playerno", &readin);
     real_packet->playerno = readin;
   }
 
@@ -5980,7 +5848,7 @@ static int send_packet_player_remove_100(struct connection *pc, const struct pac
   const struct packet_player_remove *real_packet = packet;
   SEND_PACKET_START(PACKET_PLAYER_REMOVE);
 
-  dio_put_sint8(&dout, real_packet->playerno);
+  dio_put_sint8(&dout, "playerno", real_packet->playerno);
 
   SEND_PACKET_END;
 }
@@ -6057,83 +5925,83 @@ static struct packet_player_info *receive_packet_player_info_100(struct connecti
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "playerno", &readin);
     real_packet->playerno = readin;
   }
-  dio_get_string(&din, real_packet->name, sizeof(real_packet->name));
-  dio_get_string(&din, real_packet->username, sizeof(real_packet->username));
+  dio_get_string(pc->json_packet, "name", real_packet->name, sizeof(real_packet->name));
+  dio_get_string(pc->json_packet, "username", real_packet->username, sizeof(real_packet->username));
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "score", &readin);
     real_packet->score = readin;
   }
-  dio_get_bool8(&din, &real_packet->is_male);
-  dio_get_bool8(&din, &real_packet->was_created);
+  dio_get_bool8(pc->json_packet, "is_male", &real_packet->is_male);
+  dio_get_bool8(pc->json_packet, "was_created", &real_packet->was_created);
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "government", &readin);
     real_packet->government = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "target_government", &readin);
     real_packet->target_government = readin;
   }
   
   {
-    int i;
+     int i;
   
     for (i = 0; i < MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS; i++) {
-      dio_get_bool8(&din, &real_packet->embassy[i]);
+      dio_get_bool8(pc->json_packet, "embassy", &real_packet->embassy[i]);
     }
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "city_style", &readin);
     real_packet->city_style = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "nation", &readin);
     real_packet->nation = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "team", &readin);
     real_packet->team = readin;
   }
-  dio_get_bool8(&din, &real_packet->is_ready);
-  dio_get_bool8(&din, &real_packet->phase_done);
+  dio_get_bool8(pc->json_packet, "is_ready", &real_packet->is_ready);
+  dio_get_bool8(pc->json_packet, "phase_done", &real_packet->phase_done);
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "nturns_idle", &readin);
     real_packet->nturns_idle = readin;
   }
-  dio_get_bool8(&din, &real_packet->is_alive);
+  dio_get_bool8(pc->json_packet, "is_alive", &real_packet->is_alive);
   
   {
-    int i;
+     int i;
   
     for (i = 0; i < MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS; i++) {
-      dio_get_diplstate(&din, &real_packet->diplstates[i]);
+      dio_get_diplstate(pc->json_packet, "diplstates", &real_packet->diplstates[i]);
     }
   }
   
   {
-    int i;
+     int i;
   
     for (i = 0; i < MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS; i++) {
       {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "love", &readin);
     real_packet->love[i] = readin;
   }
     }
@@ -6141,111 +6009,111 @@ static struct packet_player_info *receive_packet_player_info_100(struct connecti
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "gold", &readin);
     real_packet->gold = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "tax", &readin);
     real_packet->tax = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "science", &readin);
     real_packet->science = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "luxury", &readin);
     real_packet->luxury = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "bulbs_last_turn", &readin);
     real_packet->bulbs_last_turn = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "bulbs_researched", &readin);
     real_packet->bulbs_researched = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "techs_researched", &readin);
     real_packet->techs_researched = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "current_research_cost", &readin);
     real_packet->current_research_cost = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "researching", &readin);
     real_packet->researching = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "science_cost", &readin);
     real_packet->science_cost = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "future_tech", &readin);
     real_packet->future_tech = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "tech_goal", &readin);
     real_packet->tech_goal = readin;
   }
-  dio_get_bool8(&din, &real_packet->is_connected);
+  dio_get_bool8(pc->json_packet, "is_connected", &real_packet->is_connected);
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "revolution_finishes", &readin);
     real_packet->revolution_finishes = readin;
   }
-  dio_get_bool8(&din, &real_packet->ai);
+  dio_get_bool8(pc->json_packet, "ai", &real_packet->ai);
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "ai_skill_level", &readin);
     real_packet->ai_skill_level = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "barbarian_type", &readin);
     real_packet->barbarian_type = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "gives_shared_vision", &readin);
     real_packet->gives_shared_vision = readin;
   }
-  dio_get_string(&din, real_packet->inventions, sizeof(real_packet->inventions));
+  dio_get_string(pc->json_packet, "inventions", real_packet->inventions, sizeof(real_packet->inventions));
   
   {
-    int i;
+     int i;
   
     for (i = 0; i < B_LAST; i++) {
       {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "wonders", &readin);
     real_packet->wonders[i] = readin;
   }
     }
@@ -6259,71 +6127,55 @@ static int send_packet_player_info_100(struct connection *pc, const struct packe
   const struct packet_player_info *real_packet = packet;
   SEND_PACKET_START(PACKET_PLAYER_INFO);
 
-  dio_put_sint8(&dout, real_packet->playerno);
-  dio_put_string(&dout, real_packet->name);
-  dio_put_string(&dout, real_packet->username);
-  dio_put_uint32(&dout, real_packet->score);
-  dio_put_bool8(&dout, real_packet->is_male);
-  dio_put_bool8(&dout, real_packet->was_created);
-  dio_put_uint8(&dout, real_packet->government);
-  dio_put_uint8(&dout, real_packet->target_government);
+  dio_put_sint8(&dout, "playerno", real_packet->playerno);
+  dio_put_string(&dout, "name", real_packet->name);
+  dio_put_string(&dout, "username", real_packet->username);
+  dio_put_uint32(&dout, "score", real_packet->score);
+  dio_put_bool8(&dout, "is_male", real_packet->is_male);
+  dio_put_bool8(&dout, "was_created", real_packet->was_created);
+  dio_put_uint8(&dout, "government", real_packet->government);
+  dio_put_uint8(&dout, "target_government", real_packet->target_government);
 
     {
-      int i;
-
-      for (i = 0; i < MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS; i++) {
-        dio_put_bool8(&dout, real_packet->embassy[i]);
-      }
+        dio_put_array_bool8(&dout, "embassy", (bool*)real_packet->embassy, MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS);
     } 
-  dio_put_uint8(&dout, real_packet->city_style);
-  dio_put_uint32(&dout, real_packet->nation);
-  dio_put_uint8(&dout, real_packet->team);
-  dio_put_bool8(&dout, real_packet->is_ready);
-  dio_put_bool8(&dout, real_packet->phase_done);
-  dio_put_uint32(&dout, real_packet->nturns_idle);
-  dio_put_bool8(&dout, real_packet->is_alive);
+  dio_put_uint8(&dout, "city_style", real_packet->city_style);
+  dio_put_uint32(&dout, "nation", real_packet->nation);
+  dio_put_uint8(&dout, "team", real_packet->team);
+  dio_put_bool8(&dout, "is_ready", real_packet->is_ready);
+  dio_put_bool8(&dout, "phase_done", real_packet->phase_done);
+  dio_put_uint32(&dout, "nturns_idle", real_packet->nturns_idle);
+  dio_put_bool8(&dout, "is_alive", real_packet->is_alive);
 
     {
-      int i;
-
-      for (i = 0; i < MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS; i++) {
-        dio_put_diplstate(&dout, &real_packet->diplstates[i]);
-      }
+        dio_put_diplstate(&dout, "diplstates", (struct player_diplstate*)real_packet->diplstates, MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS);
     } 
 
     {
-      int i;
-
-      for (i = 0; i < MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS; i++) {
-        dio_put_uint32(&dout, real_packet->love[i]);
-      }
+        dio_put_array_uint32(&dout, "love", (int*)real_packet->love, MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS);
     } 
-  dio_put_uint32(&dout, real_packet->gold);
-  dio_put_uint32(&dout, real_packet->tax);
-  dio_put_uint32(&dout, real_packet->science);
-  dio_put_uint32(&dout, real_packet->luxury);
-  dio_put_uint32(&dout, real_packet->bulbs_last_turn);
-  dio_put_uint32(&dout, real_packet->bulbs_researched);
-  dio_put_uint32(&dout, real_packet->techs_researched);
-  dio_put_uint32(&dout, real_packet->current_research_cost);
-  dio_put_uint8(&dout, real_packet->researching);
-  dio_put_uint32(&dout, real_packet->science_cost);
-  dio_put_uint32(&dout, real_packet->future_tech);
-  dio_put_uint8(&dout, real_packet->tech_goal);
-  dio_put_bool8(&dout, real_packet->is_connected);
-  dio_put_uint32(&dout, real_packet->revolution_finishes);
-  dio_put_bool8(&dout, real_packet->ai);
-  dio_put_uint8(&dout, real_packet->ai_skill_level);
-  dio_put_uint8(&dout, real_packet->barbarian_type);
-  dio_put_uint32(&dout, real_packet->gives_shared_vision);
-  dio_put_string(&dout, real_packet->inventions);
+  dio_put_uint32(&dout, "gold", real_packet->gold);
+  dio_put_uint32(&dout, "tax", real_packet->tax);
+  dio_put_uint32(&dout, "science", real_packet->science);
+  dio_put_uint32(&dout, "luxury", real_packet->luxury);
+  dio_put_uint32(&dout, "bulbs_last_turn", real_packet->bulbs_last_turn);
+  dio_put_uint32(&dout, "bulbs_researched", real_packet->bulbs_researched);
+  dio_put_uint32(&dout, "techs_researched", real_packet->techs_researched);
+  dio_put_uint32(&dout, "current_research_cost", real_packet->current_research_cost);
+  dio_put_uint8(&dout, "researching", real_packet->researching);
+  dio_put_uint32(&dout, "science_cost", real_packet->science_cost);
+  dio_put_uint32(&dout, "future_tech", real_packet->future_tech);
+  dio_put_uint8(&dout, "tech_goal", real_packet->tech_goal);
+  dio_put_bool8(&dout, "is_connected", real_packet->is_connected);
+  dio_put_uint32(&dout, "revolution_finishes", real_packet->revolution_finishes);
+  dio_put_bool8(&dout, "ai", real_packet->ai);
+  dio_put_uint8(&dout, "ai_skill_level", real_packet->ai_skill_level);
+  dio_put_uint8(&dout, "barbarian_type", real_packet->barbarian_type);
+  dio_put_uint32(&dout, "gives_shared_vision", real_packet->gives_shared_vision);
+  dio_put_string(&dout, "inventions", real_packet->inventions);
 
     {
-      int i;
-
-      for (i = 0; i < B_LAST; i++) {
-        dio_put_uint32(&dout, real_packet->wonders[i]);
-      }
+        dio_put_array_uint32(&dout, "wonders", (int*)real_packet->wonders, B_LAST);
     } 
 
   SEND_PACKET_END;
@@ -6392,7 +6244,7 @@ static struct packet_player_phase_done *receive_packet_player_phase_done_100(str
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "turn", &readin);
     real_packet->turn = readin;
   }
 
@@ -6404,7 +6256,7 @@ static int send_packet_player_phase_done_100(struct connection *pc, const struct
   const struct packet_player_phase_done *real_packet = packet;
   SEND_PACKET_START(PACKET_PLAYER_PHASE_DONE);
 
-  dio_put_uint32(&dout, real_packet->turn);
+  dio_put_uint32(&dout, "turn", real_packet->turn);
 
   SEND_PACKET_END;
 }
@@ -6481,19 +6333,19 @@ static struct packet_player_rates *receive_packet_player_rates_100(struct connec
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "tax", &readin);
     real_packet->tax = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "luxury", &readin);
     real_packet->luxury = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "science", &readin);
     real_packet->science = readin;
   }
 
@@ -6505,9 +6357,9 @@ static int send_packet_player_rates_100(struct connection *pc, const struct pack
   const struct packet_player_rates *real_packet = packet;
   SEND_PACKET_START(PACKET_PLAYER_RATES);
 
-  dio_put_uint32(&dout, real_packet->tax);
-  dio_put_uint32(&dout, real_packet->luxury);
-  dio_put_uint32(&dout, real_packet->science);
+  dio_put_uint32(&dout, "tax", real_packet->tax);
+  dio_put_uint32(&dout, "luxury", real_packet->luxury);
+  dio_put_uint32(&dout, "science", real_packet->science);
 
   SEND_PACKET_END;
 }
@@ -6586,7 +6438,7 @@ static struct packet_player_change_government *receive_packet_player_change_gove
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "government", &readin);
     real_packet->government = readin;
   }
 
@@ -6598,7 +6450,7 @@ static int send_packet_player_change_government_100(struct connection *pc, const
   const struct packet_player_change_government *real_packet = packet;
   SEND_PACKET_START(PACKET_PLAYER_CHANGE_GOVERNMENT);
 
-  dio_put_uint8(&dout, real_packet->government);
+  dio_put_uint8(&dout, "government", real_packet->government);
 
   SEND_PACKET_END;
 }
@@ -6675,7 +6527,7 @@ static struct packet_player_research *receive_packet_player_research_100(struct 
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "tech", &readin);
     real_packet->tech = readin;
   }
 
@@ -6687,7 +6539,7 @@ static int send_packet_player_research_100(struct connection *pc, const struct p
   const struct packet_player_research *real_packet = packet;
   SEND_PACKET_START(PACKET_PLAYER_RESEARCH);
 
-  dio_put_uint8(&dout, real_packet->tech);
+  dio_put_uint8(&dout, "tech", real_packet->tech);
 
   SEND_PACKET_END;
 }
@@ -6764,7 +6616,7 @@ static struct packet_player_tech_goal *receive_packet_player_tech_goal_100(struc
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "tech", &readin);
     real_packet->tech = readin;
   }
 
@@ -6776,7 +6628,7 @@ static int send_packet_player_tech_goal_100(struct connection *pc, const struct 
   const struct packet_player_tech_goal *real_packet = packet;
   SEND_PACKET_START(PACKET_PLAYER_TECH_GOAL);
 
-  dio_put_uint8(&dout, real_packet->tech);
+  dio_put_uint8(&dout, "tech", real_packet->tech);
 
   SEND_PACKET_END;
 }
@@ -6923,27 +6775,27 @@ static struct packet_player_attribute_chunk *receive_packet_player_attribute_chu
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "offset", &readin);
     real_packet->offset = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "total_length", &readin);
     real_packet->total_length = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "chunk_length", &readin);
     real_packet->chunk_length = readin;
   }
-  
+   /* not supported yet. 
     if(real_packet->chunk_length > ATTRIBUTE_CHUNK_SIZE) {
       freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
       real_packet->chunk_length = ATTRIBUTE_CHUNK_SIZE;
     }
-    dio_get_memory(&din, real_packet->data, real_packet->chunk_length);
+    dio_get_memory(pc->json_packet, "data", real_packet->data, real_packet->chunk_length);*/
 
   RECEIVE_PACKET_END(real_packet);
 }
@@ -6961,10 +6813,10 @@ static int send_packet_player_attribute_chunk_100(struct connection *pc, const s
     real_packet = tmp;
   }
 
-  dio_put_uint32(&dout, real_packet->offset);
-  dio_put_uint32(&dout, real_packet->total_length);
-  dio_put_uint32(&dout, real_packet->chunk_length);
-  dio_put_memory(&dout, &real_packet->data, real_packet->chunk_length);
+  dio_put_uint32(&dout, "offset", real_packet->offset);
+  dio_put_uint32(&dout, "total_length", real_packet->total_length);
+  dio_put_uint32(&dout, "chunk_length", real_packet->chunk_length);
+  dio_put_memory(&dout, "data", &real_packet->data, real_packet->chunk_length);
 
 
   if (real_packet != packet) {
@@ -7030,7 +6882,7 @@ static struct packet_unit_remove *receive_packet_unit_remove_100(struct connecti
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "unit_id", &readin);
     real_packet->unit_id = readin;
   }
 
@@ -7042,7 +6894,7 @@ static int send_packet_unit_remove_100(struct connection *pc, const struct packe
   const struct packet_unit_remove *real_packet = packet;
   SEND_PACKET_START(PACKET_UNIT_REMOVE);
 
-  dio_put_uint32(&dout, real_packet->unit_id);
+  dio_put_uint32(&dout, "unit_id", real_packet->unit_id);
 
   SEND_PACKET_END;
 }
@@ -7135,42 +6987,42 @@ static struct packet_unit_info *receive_packet_unit_info_100(struct connection *
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "id", &readin);
     real_packet->id = readin;
   }
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "owner", &readin);
     real_packet->owner = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "x", &readin);
     real_packet->x = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "y", &readin);
     real_packet->y = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "homecity", &readin);
     real_packet->homecity = readin;
   }
   
   {
-    int i;
+     int i;
   
     for (i = 0; i < O_LAST; i++) {
       {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "upkeep", &readin);
     real_packet->upkeep[i] = readin;
   }
     }
@@ -7178,111 +7030,111 @@ static struct packet_unit_info *receive_packet_unit_info_100(struct connection *
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "veteran", &readin);
     real_packet->veteran = readin;
   }
-  dio_get_bool8(&din, &real_packet->ai);
-  dio_get_bool8(&din, &real_packet->paradropped);
-  dio_get_bool8(&din, &real_packet->transported);
-  dio_get_bool8(&din, &real_packet->done_moving);
+  dio_get_bool8(pc->json_packet, "ai", &real_packet->ai);
+  dio_get_bool8(pc->json_packet, "paradropped", &real_packet->paradropped);
+  dio_get_bool8(pc->json_packet, "transported", &real_packet->transported);
+  dio_get_bool8(pc->json_packet, "done_moving", &real_packet->done_moving);
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "type", &readin);
     real_packet->type = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "transported_by", &readin);
     real_packet->transported_by = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "movesleft", &readin);
     real_packet->movesleft = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "hp", &readin);
     real_packet->hp = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "fuel", &readin);
     real_packet->fuel = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "activity_count", &readin);
     real_packet->activity_count = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "occupy", &readin);
     real_packet->occupy = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "goto_dest_x", &readin);
     real_packet->goto_dest_x = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "goto_dest_y", &readin);
     real_packet->goto_dest_y = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "activity", &readin);
     real_packet->activity = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "activity_target", &readin);
     real_packet->activity_target = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "activity_base", &readin);
     real_packet->activity_base = readin;
   }
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "battlegroup", &readin);
     real_packet->battlegroup = readin;
   }
-  dio_get_bool8(&din, &real_packet->has_orders);
+  dio_get_bool8(pc->json_packet, "has_orders", &real_packet->has_orders);
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "orders_length", &readin);
     real_packet->orders_length = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "orders_index", &readin);
     real_packet->orders_index = readin;
   }
-  dio_get_bool8(&din, &real_packet->orders_repeat);
-  dio_get_bool8(&din, &real_packet->orders_vigilant);
-  dio_get_bool8(&din, &real_packet->caravan_trade);
-  dio_get_bool8(&din, &real_packet->caravan_wonder);
+  dio_get_bool8(pc->json_packet, "orders_repeat", &real_packet->orders_repeat);
+  dio_get_bool8(pc->json_packet, "orders_vigilant", &real_packet->orders_vigilant);
+  dio_get_bool8(pc->json_packet, "caravan_trade", &real_packet->caravan_trade);
+  dio_get_bool8(pc->json_packet, "caravan_wonder", &real_packet->caravan_wonder);
   
   {
-    int i;
+     int i;
   
     if(real_packet->orders_length > MAX_LEN_ROUTE) {
       freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
@@ -7292,14 +7144,14 @@ static struct packet_unit_info *receive_packet_unit_info_100(struct connection *
       {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "orders", &readin);
     real_packet->orders[i] = readin;
   }
     }
   }
   
   {
-    int i;
+     int i;
   
     if(real_packet->orders_length > MAX_LEN_ROUTE) {
       freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
@@ -7309,14 +7161,14 @@ static struct packet_unit_info *receive_packet_unit_info_100(struct connection *
       {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "orders_dirs", &readin);
     real_packet->orders_dirs[i] = readin;
   }
     }
   }
   
   {
-    int i;
+     int i;
   
     if(real_packet->orders_length > MAX_LEN_ROUTE) {
       freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
@@ -7326,14 +7178,14 @@ static struct packet_unit_info *receive_packet_unit_info_100(struct connection *
       {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "orders_activities", &readin);
     real_packet->orders_activities[i] = readin;
   }
     }
   }
   
   {
-    int i;
+     int i;
   
     if(real_packet->orders_length > MAX_LEN_ROUTE) {
       freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
@@ -7343,7 +7195,7 @@ static struct packet_unit_info *receive_packet_unit_info_100(struct connection *
       {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "orders_bases", &readin);
     real_packet->orders_bases[i] = readin;
   }
     }
@@ -7357,75 +7209,55 @@ static int send_packet_unit_info_100(struct connection *pc, const struct packet_
   const struct packet_unit_info *real_packet = packet;
   SEND_PACKET_START(PACKET_UNIT_INFO);
 
-  dio_put_uint32(&dout, real_packet->id);
-  dio_put_sint8(&dout, real_packet->owner);
-  dio_put_uint32(&dout, real_packet->x);
-  dio_put_uint32(&dout, real_packet->y);
-  dio_put_uint32(&dout, real_packet->homecity);
+  dio_put_uint32(&dout, "id", real_packet->id);
+  dio_put_sint8(&dout, "owner", real_packet->owner);
+  dio_put_uint32(&dout, "x", real_packet->x);
+  dio_put_uint32(&dout, "y", real_packet->y);
+  dio_put_uint32(&dout, "homecity", real_packet->homecity);
 
     {
-      int i;
-
-      for (i = 0; i < O_LAST; i++) {
-        dio_put_uint8(&dout, real_packet->upkeep[i]);
-      }
+        dio_put_array_uint8(&dout, "upkeep", (int*)real_packet->upkeep, O_LAST);
     } 
-  dio_put_uint8(&dout, real_packet->veteran);
-  dio_put_bool8(&dout, real_packet->ai);
-  dio_put_bool8(&dout, real_packet->paradropped);
-  dio_put_bool8(&dout, real_packet->transported);
-  dio_put_bool8(&dout, real_packet->done_moving);
-  dio_put_uint8(&dout, real_packet->type);
-  dio_put_uint32(&dout, real_packet->transported_by);
-  dio_put_uint8(&dout, real_packet->movesleft);
-  dio_put_uint8(&dout, real_packet->hp);
-  dio_put_uint8(&dout, real_packet->fuel);
-  dio_put_uint8(&dout, real_packet->activity_count);
-  dio_put_uint8(&dout, real_packet->occupy);
-  dio_put_uint32(&dout, real_packet->goto_dest_x);
-  dio_put_uint32(&dout, real_packet->goto_dest_y);
-  dio_put_uint8(&dout, real_packet->activity);
-  dio_put_uint32(&dout, real_packet->activity_target);
-  dio_put_uint8(&dout, real_packet->activity_base);
-  dio_put_sint8(&dout, real_packet->battlegroup);
-  dio_put_bool8(&dout, real_packet->has_orders);
-  dio_put_uint32(&dout, real_packet->orders_length);
-  dio_put_uint32(&dout, real_packet->orders_index);
-  dio_put_bool8(&dout, real_packet->orders_repeat);
-  dio_put_bool8(&dout, real_packet->orders_vigilant);
-  dio_put_bool8(&dout, real_packet->caravan_trade);
-  dio_put_bool8(&dout, real_packet->caravan_wonder);
+  dio_put_uint8(&dout, "veteran", real_packet->veteran);
+  dio_put_bool8(&dout, "ai", real_packet->ai);
+  dio_put_bool8(&dout, "paradropped", real_packet->paradropped);
+  dio_put_bool8(&dout, "transported", real_packet->transported);
+  dio_put_bool8(&dout, "done_moving", real_packet->done_moving);
+  dio_put_uint8(&dout, "type", real_packet->type);
+  dio_put_uint32(&dout, "transported_by", real_packet->transported_by);
+  dio_put_uint8(&dout, "movesleft", real_packet->movesleft);
+  dio_put_uint8(&dout, "hp", real_packet->hp);
+  dio_put_uint8(&dout, "fuel", real_packet->fuel);
+  dio_put_uint8(&dout, "activity_count", real_packet->activity_count);
+  dio_put_uint8(&dout, "occupy", real_packet->occupy);
+  dio_put_uint32(&dout, "goto_dest_x", real_packet->goto_dest_x);
+  dio_put_uint32(&dout, "goto_dest_y", real_packet->goto_dest_y);
+  dio_put_uint8(&dout, "activity", real_packet->activity);
+  dio_put_uint32(&dout, "activity_target", real_packet->activity_target);
+  dio_put_uint8(&dout, "activity_base", real_packet->activity_base);
+  dio_put_sint8(&dout, "battlegroup", real_packet->battlegroup);
+  dio_put_bool8(&dout, "has_orders", real_packet->has_orders);
+  dio_put_uint32(&dout, "orders_length", real_packet->orders_length);
+  dio_put_uint32(&dout, "orders_index", real_packet->orders_index);
+  dio_put_bool8(&dout, "orders_repeat", real_packet->orders_repeat);
+  dio_put_bool8(&dout, "orders_vigilant", real_packet->orders_vigilant);
+  dio_put_bool8(&dout, "caravan_trade", real_packet->caravan_trade);
+  dio_put_bool8(&dout, "caravan_wonder", real_packet->caravan_wonder);
 
     {
-      int i;
-
-      for (i = 0; i < real_packet->orders_length; i++) {
-        dio_put_uint8(&dout, real_packet->orders[i]);
-      }
+        dio_put_array_uint8(&dout, "orders", (int*)real_packet->orders, real_packet->orders_length);
     } 
 
     {
-      int i;
-
-      for (i = 0; i < real_packet->orders_length; i++) {
-        dio_put_uint8(&dout, real_packet->orders_dirs[i]);
-      }
+        dio_put_array_uint8(&dout, "orders_dirs", (int*)real_packet->orders_dirs, real_packet->orders_length);
     } 
 
     {
-      int i;
-
-      for (i = 0; i < real_packet->orders_length; i++) {
-        dio_put_uint8(&dout, real_packet->orders_activities[i]);
-      }
+        dio_put_array_uint8(&dout, "orders_activities", (int*)real_packet->orders_activities, real_packet->orders_length);
     } 
 
     {
-      int i;
-
-      for (i = 0; i < real_packet->orders_length; i++) {
-        dio_put_uint8(&dout, real_packet->orders_bases[i]);
-      }
+        dio_put_array_uint8(&dout, "orders_bases", (int*)real_packet->orders_bases, real_packet->orders_length);
     } 
 
   SEND_PACKET_END;
@@ -7501,82 +7333,82 @@ static struct packet_unit_short_info *receive_packet_unit_short_info_100(struct 
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "id", &readin);
     real_packet->id = readin;
   }
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "owner", &readin);
     real_packet->owner = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "x", &readin);
     real_packet->x = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "y", &readin);
     real_packet->y = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "type", &readin);
     real_packet->type = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "veteran", &readin);
     real_packet->veteran = readin;
   }
-  dio_get_bool8(&din, &real_packet->occupied);
-  dio_get_bool8(&din, &real_packet->goes_out_of_sight);
-  dio_get_bool8(&din, &real_packet->transported);
+  dio_get_bool8(pc->json_packet, "occupied", &real_packet->occupied);
+  dio_get_bool8(pc->json_packet, "goes_out_of_sight", &real_packet->goes_out_of_sight);
+  dio_get_bool8(pc->json_packet, "transported", &real_packet->transported);
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "hp", &readin);
     real_packet->hp = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "activity", &readin);
     real_packet->activity = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "activity_base", &readin);
     real_packet->activity_base = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "transported_by", &readin);
     real_packet->transported_by = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "packet_use", &readin);
     real_packet->packet_use = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "info_city_id", &readin);
     real_packet->info_city_id = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "serial_num", &readin);
     real_packet->serial_num = readin;
   }
 
@@ -7588,22 +7420,22 @@ static int send_packet_unit_short_info_100(struct connection *pc, const struct p
   const struct packet_unit_short_info *real_packet = packet;
   SEND_PACKET_START(PACKET_UNIT_SHORT_INFO);
 
-  dio_put_uint32(&dout, real_packet->id);
-  dio_put_sint8(&dout, real_packet->owner);
-  dio_put_uint32(&dout, real_packet->x);
-  dio_put_uint32(&dout, real_packet->y);
-  dio_put_uint8(&dout, real_packet->type);
-  dio_put_uint8(&dout, real_packet->veteran);
-  dio_put_bool8(&dout, real_packet->occupied);
-  dio_put_bool8(&dout, real_packet->goes_out_of_sight);
-  dio_put_bool8(&dout, real_packet->transported);
-  dio_put_uint8(&dout, real_packet->hp);
-  dio_put_uint8(&dout, real_packet->activity);
-  dio_put_uint8(&dout, real_packet->activity_base);
-  dio_put_uint32(&dout, real_packet->transported_by);
-  dio_put_uint8(&dout, real_packet->packet_use);
-  dio_put_uint32(&dout, real_packet->info_city_id);
-  dio_put_uint32(&dout, real_packet->serial_num);
+  dio_put_uint32(&dout, "id", real_packet->id);
+  dio_put_sint8(&dout, "owner", real_packet->owner);
+  dio_put_uint32(&dout, "x", real_packet->x);
+  dio_put_uint32(&dout, "y", real_packet->y);
+  dio_put_uint8(&dout, "type", real_packet->type);
+  dio_put_uint8(&dout, "veteran", real_packet->veteran);
+  dio_put_bool8(&dout, "occupied", real_packet->occupied);
+  dio_put_bool8(&dout, "goes_out_of_sight", real_packet->goes_out_of_sight);
+  dio_put_bool8(&dout, "transported", real_packet->transported);
+  dio_put_uint8(&dout, "hp", real_packet->hp);
+  dio_put_uint8(&dout, "activity", real_packet->activity);
+  dio_put_uint8(&dout, "activity_base", real_packet->activity_base);
+  dio_put_uint32(&dout, "transported_by", real_packet->transported_by);
+  dio_put_uint8(&dout, "packet_use", real_packet->packet_use);
+  dio_put_uint32(&dout, "info_city_id", real_packet->info_city_id);
+  dio_put_uint32(&dout, "serial_num", real_packet->serial_num);
 
   SEND_PACKET_END;
 }
@@ -7678,28 +7510,28 @@ static struct packet_unit_combat_info *receive_packet_unit_combat_info_100(struc
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "attacker_unit_id", &readin);
     real_packet->attacker_unit_id = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "defender_unit_id", &readin);
     real_packet->defender_unit_id = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "attacker_hp", &readin);
     real_packet->attacker_hp = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "defender_hp", &readin);
     real_packet->defender_hp = readin;
   }
-  dio_get_bool8(&din, &real_packet->make_winner_veteran);
+  dio_get_bool8(pc->json_packet, "make_winner_veteran", &real_packet->make_winner_veteran);
 
   RECEIVE_PACKET_END(real_packet);
 }
@@ -7709,11 +7541,11 @@ static int send_packet_unit_combat_info_100(struct connection *pc, const struct 
   const struct packet_unit_combat_info *real_packet = packet;
   SEND_PACKET_START(PACKET_UNIT_COMBAT_INFO);
 
-  dio_put_uint32(&dout, real_packet->attacker_unit_id);
-  dio_put_uint32(&dout, real_packet->defender_unit_id);
-  dio_put_uint32(&dout, real_packet->attacker_hp);
-  dio_put_uint32(&dout, real_packet->defender_hp);
-  dio_put_bool8(&dout, real_packet->make_winner_veteran);
+  dio_put_uint32(&dout, "attacker_unit_id", real_packet->attacker_unit_id);
+  dio_put_uint32(&dout, "defender_unit_id", real_packet->defender_unit_id);
+  dio_put_uint32(&dout, "attacker_hp", real_packet->attacker_hp);
+  dio_put_uint32(&dout, "defender_hp", real_packet->defender_hp);
+  dio_put_bool8(&dout, "make_winner_veteran", real_packet->make_winner_veteran);
 
   SEND_PACKET_END;
 }
@@ -7788,19 +7620,19 @@ static struct packet_unit_move *receive_packet_unit_move_100(struct connection *
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "unit_id", &readin);
     real_packet->unit_id = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "x", &readin);
     real_packet->x = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "y", &readin);
     real_packet->y = readin;
   }
 
@@ -7812,9 +7644,9 @@ static int send_packet_unit_move_100(struct connection *pc, const struct packet_
   const struct packet_unit_move *real_packet = packet;
   SEND_PACKET_START(PACKET_UNIT_MOVE);
 
-  dio_put_uint32(&dout, real_packet->unit_id);
-  dio_put_uint32(&dout, real_packet->x);
-  dio_put_uint32(&dout, real_packet->y);
+  dio_put_uint32(&dout, "unit_id", real_packet->unit_id);
+  dio_put_uint32(&dout, "x", real_packet->x);
+  dio_put_uint32(&dout, "y", real_packet->y);
 
   SEND_PACKET_END;
 }
@@ -7893,19 +7725,19 @@ static struct packet_goto_path_req *receive_packet_goto_path_req_100(struct conn
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "unit_id", &readin);
     real_packet->unit_id = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "x", &readin);
     real_packet->x = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "y", &readin);
     real_packet->y = readin;
   }
 
@@ -7917,9 +7749,9 @@ static int send_packet_goto_path_req_100(struct connection *pc, const struct pac
   const struct packet_goto_path_req *real_packet = packet;
   SEND_PACKET_START(PACKET_GOTO_PATH_REQ);
 
-  dio_put_uint32(&dout, real_packet->unit_id);
-  dio_put_uint32(&dout, real_packet->x);
-  dio_put_uint32(&dout, real_packet->y);
+  dio_put_uint32(&dout, "unit_id", real_packet->unit_id);
+  dio_put_uint32(&dout, "x", real_packet->x);
+  dio_put_uint32(&dout, "y", real_packet->y);
 
   SEND_PACKET_END;
 }
@@ -7998,18 +7830,18 @@ static struct packet_goto_path *receive_packet_goto_path_100(struct connection *
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "unit_id", &readin);
     real_packet->unit_id = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "length", &readin);
     real_packet->length = readin;
   }
   
   {
-    int i;
+     int i;
   
     if(real_packet->length > MAX_LEN_ROUTE) {
       freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
@@ -8019,7 +7851,7 @@ static struct packet_goto_path *receive_packet_goto_path_100(struct connection *
       {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "dir", &readin);
     real_packet->dir[i] = readin;
   }
     }
@@ -8027,13 +7859,13 @@ static struct packet_goto_path *receive_packet_goto_path_100(struct connection *
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "dest_x", &readin);
     real_packet->dest_x = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "dest_y", &readin);
     real_packet->dest_y = readin;
   }
 
@@ -8045,18 +7877,14 @@ static int send_packet_goto_path_100(struct connection *pc, const struct packet_
   const struct packet_goto_path *real_packet = packet;
   SEND_PACKET_START(PACKET_GOTO_PATH);
 
-  dio_put_uint32(&dout, real_packet->unit_id);
-  dio_put_uint32(&dout, real_packet->length);
+  dio_put_uint32(&dout, "unit_id", real_packet->unit_id);
+  dio_put_uint32(&dout, "length", real_packet->length);
 
     {
-      int i;
-
-      for (i = 0; i < real_packet->length; i++) {
-        dio_put_uint8(&dout, real_packet->dir[i]);
-      }
+        dio_put_array_uint8(&dout, "dir", (int*)real_packet->dir, real_packet->length);
     } 
-  dio_put_uint32(&dout, real_packet->dest_x);
-  dio_put_uint32(&dout, real_packet->dest_y);
+  dio_put_uint32(&dout, "dest_x", real_packet->dest_x);
+  dio_put_uint32(&dout, "dest_y", real_packet->dest_y);
 
   SEND_PACKET_END;
 }
@@ -8125,7 +7953,7 @@ int dsend_packet_goto_path(struct connection *pc, int unit_id, int length, enum 
   real_packet->unit_id = unit_id;
   real_packet->length = length;
   {
-    int i;
+    int i; /* dette er for put. */
 
     for (i = 0; i < real_packet->length; i++) {
       real_packet->dir[i] = dir[i];
@@ -8143,10 +7971,10 @@ static struct packet_unit_build_city *receive_packet_unit_build_city_100(struct 
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "unit_id", &readin);
     real_packet->unit_id = readin;
   }
-  dio_get_string(&din, real_packet->name, sizeof(real_packet->name));
+  dio_get_string(pc->json_packet, "name", real_packet->name, sizeof(real_packet->name));
 
   RECEIVE_PACKET_END(real_packet);
 }
@@ -8156,8 +7984,8 @@ static int send_packet_unit_build_city_100(struct connection *pc, const struct p
   const struct packet_unit_build_city *real_packet = packet;
   SEND_PACKET_START(PACKET_UNIT_BUILD_CITY);
 
-  dio_put_uint32(&dout, real_packet->unit_id);
-  dio_put_string(&dout, real_packet->name);
+  dio_put_uint32(&dout, "unit_id", real_packet->unit_id);
+  dio_put_string(&dout, "name", real_packet->name);
 
   SEND_PACKET_END;
 }
@@ -8235,7 +8063,7 @@ static struct packet_unit_disband *receive_packet_unit_disband_100(struct connec
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "unit_id", &readin);
     real_packet->unit_id = readin;
   }
 
@@ -8247,7 +8075,7 @@ static int send_packet_unit_disband_100(struct connection *pc, const struct pack
   const struct packet_unit_disband *real_packet = packet;
   SEND_PACKET_START(PACKET_UNIT_DISBAND);
 
-  dio_put_uint32(&dout, real_packet->unit_id);
+  dio_put_uint32(&dout, "unit_id", real_packet->unit_id);
 
   SEND_PACKET_END;
 }
@@ -8324,13 +8152,13 @@ static struct packet_unit_change_homecity *receive_packet_unit_change_homecity_1
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "unit_id", &readin);
     real_packet->unit_id = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "city_id", &readin);
     real_packet->city_id = readin;
   }
 
@@ -8342,8 +8170,8 @@ static int send_packet_unit_change_homecity_100(struct connection *pc, const str
   const struct packet_unit_change_homecity *real_packet = packet;
   SEND_PACKET_START(PACKET_UNIT_CHANGE_HOMECITY);
 
-  dio_put_uint32(&dout, real_packet->unit_id);
-  dio_put_uint32(&dout, real_packet->city_id);
+  dio_put_uint32(&dout, "unit_id", real_packet->unit_id);
+  dio_put_uint32(&dout, "city_id", real_packet->city_id);
 
   SEND_PACKET_END;
 }
@@ -8421,7 +8249,7 @@ static struct packet_unit_establish_trade *receive_packet_unit_establish_trade_1
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "unit_id", &readin);
     real_packet->unit_id = readin;
   }
 
@@ -8433,7 +8261,7 @@ static int send_packet_unit_establish_trade_100(struct connection *pc, const str
   const struct packet_unit_establish_trade *real_packet = packet;
   SEND_PACKET_START(PACKET_UNIT_ESTABLISH_TRADE);
 
-  dio_put_uint32(&dout, real_packet->unit_id);
+  dio_put_uint32(&dout, "unit_id", real_packet->unit_id);
 
   SEND_PACKET_END;
 }
@@ -8510,13 +8338,13 @@ static struct packet_unit_battlegroup *receive_packet_unit_battlegroup_100(struc
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "unit_id", &readin);
     real_packet->unit_id = readin;
   }
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "battlegroup", &readin);
     real_packet->battlegroup = readin;
   }
 
@@ -8528,8 +8356,8 @@ static int send_packet_unit_battlegroup_100(struct connection *pc, const struct 
   const struct packet_unit_battlegroup *real_packet = packet;
   SEND_PACKET_START(PACKET_UNIT_BATTLEGROUP);
 
-  dio_put_uint32(&dout, real_packet->unit_id);
-  dio_put_sint8(&dout, real_packet->battlegroup);
+  dio_put_uint32(&dout, "unit_id", real_packet->unit_id);
+  dio_put_sint8(&dout, "battlegroup", real_packet->battlegroup);
 
   SEND_PACKET_END;
 }
@@ -8607,7 +8435,7 @@ static struct packet_unit_help_build_wonder *receive_packet_unit_help_build_wond
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "unit_id", &readin);
     real_packet->unit_id = readin;
   }
 
@@ -8619,7 +8447,7 @@ static int send_packet_unit_help_build_wonder_100(struct connection *pc, const s
   const struct packet_unit_help_build_wonder *real_packet = packet;
   SEND_PACKET_START(PACKET_UNIT_HELP_BUILD_WONDER);
 
-  dio_put_uint32(&dout, real_packet->unit_id);
+  dio_put_uint32(&dout, "unit_id", real_packet->unit_id);
 
   SEND_PACKET_END;
 }
@@ -8696,32 +8524,32 @@ static struct packet_unit_orders *receive_packet_unit_orders_100(struct connecti
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "unit_id", &readin);
     real_packet->unit_id = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "src_x", &readin);
     real_packet->src_x = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "src_y", &readin);
     real_packet->src_y = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "length", &readin);
     real_packet->length = readin;
   }
-  dio_get_bool8(&din, &real_packet->repeat);
-  dio_get_bool8(&din, &real_packet->vigilant);
+  dio_get_bool8(pc->json_packet, "repeat", &real_packet->repeat);
+  dio_get_bool8(pc->json_packet, "vigilant", &real_packet->vigilant);
   
   {
-    int i;
+     int i;
   
     if(real_packet->length > MAX_LEN_ROUTE) {
       freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
@@ -8731,14 +8559,14 @@ static struct packet_unit_orders *receive_packet_unit_orders_100(struct connecti
       {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "orders", &readin);
     real_packet->orders[i] = readin;
   }
     }
   }
   
   {
-    int i;
+     int i;
   
     if(real_packet->length > MAX_LEN_ROUTE) {
       freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
@@ -8748,14 +8576,14 @@ static struct packet_unit_orders *receive_packet_unit_orders_100(struct connecti
       {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "dir", &readin);
     real_packet->dir[i] = readin;
   }
     }
   }
   
   {
-    int i;
+     int i;
   
     if(real_packet->length > MAX_LEN_ROUTE) {
       freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
@@ -8765,14 +8593,14 @@ static struct packet_unit_orders *receive_packet_unit_orders_100(struct connecti
       {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "activity", &readin);
     real_packet->activity[i] = readin;
   }
     }
   }
   
   {
-    int i;
+     int i;
   
     if(real_packet->length > MAX_LEN_ROUTE) {
       freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
@@ -8782,7 +8610,7 @@ static struct packet_unit_orders *receive_packet_unit_orders_100(struct connecti
       {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "base", &readin);
     real_packet->base[i] = readin;
   }
     }
@@ -8790,13 +8618,13 @@ static struct packet_unit_orders *receive_packet_unit_orders_100(struct connecti
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "dest_x", &readin);
     real_packet->dest_x = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "dest_y", &readin);
     real_packet->dest_y = readin;
   }
 
@@ -8808,46 +8636,30 @@ static int send_packet_unit_orders_100(struct connection *pc, const struct packe
   const struct packet_unit_orders *real_packet = packet;
   SEND_PACKET_START(PACKET_UNIT_ORDERS);
 
-  dio_put_uint32(&dout, real_packet->unit_id);
-  dio_put_uint32(&dout, real_packet->src_x);
-  dio_put_uint32(&dout, real_packet->src_y);
-  dio_put_uint32(&dout, real_packet->length);
-  dio_put_bool8(&dout, real_packet->repeat);
-  dio_put_bool8(&dout, real_packet->vigilant);
+  dio_put_uint32(&dout, "unit_id", real_packet->unit_id);
+  dio_put_uint32(&dout, "src_x", real_packet->src_x);
+  dio_put_uint32(&dout, "src_y", real_packet->src_y);
+  dio_put_uint32(&dout, "length", real_packet->length);
+  dio_put_bool8(&dout, "repeat", real_packet->repeat);
+  dio_put_bool8(&dout, "vigilant", real_packet->vigilant);
 
     {
-      int i;
-
-      for (i = 0; i < real_packet->length; i++) {
-        dio_put_uint8(&dout, real_packet->orders[i]);
-      }
+        dio_put_array_uint8(&dout, "orders", (int*)real_packet->orders, real_packet->length);
     } 
 
     {
-      int i;
-
-      for (i = 0; i < real_packet->length; i++) {
-        dio_put_uint8(&dout, real_packet->dir[i]);
-      }
+        dio_put_array_uint8(&dout, "dir", (int*)real_packet->dir, real_packet->length);
     } 
 
     {
-      int i;
-
-      for (i = 0; i < real_packet->length; i++) {
-        dio_put_uint8(&dout, real_packet->activity[i]);
-      }
+        dio_put_array_uint8(&dout, "activity", (int*)real_packet->activity, real_packet->length);
     } 
 
     {
-      int i;
-
-      for (i = 0; i < real_packet->length; i++) {
-        dio_put_uint8(&dout, real_packet->base[i]);
-      }
+        dio_put_array_uint8(&dout, "base", (int*)real_packet->base, real_packet->length);
     } 
-  dio_put_uint32(&dout, real_packet->dest_x);
-  dio_put_uint32(&dout, real_packet->dest_y);
+  dio_put_uint32(&dout, "dest_x", real_packet->dest_x);
+  dio_put_uint32(&dout, "dest_y", real_packet->dest_y);
 
   SEND_PACKET_END;
 }
@@ -8915,7 +8727,7 @@ static struct packet_unit_autosettlers *receive_packet_unit_autosettlers_100(str
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "unit_id", &readin);
     real_packet->unit_id = readin;
   }
 
@@ -8927,7 +8739,7 @@ static int send_packet_unit_autosettlers_100(struct connection *pc, const struct
   const struct packet_unit_autosettlers *real_packet = packet;
   SEND_PACKET_START(PACKET_UNIT_AUTOSETTLERS);
 
-  dio_put_uint32(&dout, real_packet->unit_id);
+  dio_put_uint32(&dout, "unit_id", real_packet->unit_id);
 
   SEND_PACKET_END;
 }
@@ -9004,13 +8816,13 @@ static struct packet_unit_load *receive_packet_unit_load_100(struct connection *
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "cargo_id", &readin);
     real_packet->cargo_id = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "transporter_id", &readin);
     real_packet->transporter_id = readin;
   }
 
@@ -9022,8 +8834,8 @@ static int send_packet_unit_load_100(struct connection *pc, const struct packet_
   const struct packet_unit_load *real_packet = packet;
   SEND_PACKET_START(PACKET_UNIT_LOAD);
 
-  dio_put_uint32(&dout, real_packet->cargo_id);
-  dio_put_uint32(&dout, real_packet->transporter_id);
+  dio_put_uint32(&dout, "cargo_id", real_packet->cargo_id);
+  dio_put_uint32(&dout, "transporter_id", real_packet->transporter_id);
 
   SEND_PACKET_END;
 }
@@ -9101,13 +8913,13 @@ static struct packet_unit_unload *receive_packet_unit_unload_100(struct connecti
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "cargo_id", &readin);
     real_packet->cargo_id = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "transporter_id", &readin);
     real_packet->transporter_id = readin;
   }
 
@@ -9119,8 +8931,8 @@ static int send_packet_unit_unload_100(struct connection *pc, const struct packe
   const struct packet_unit_unload *real_packet = packet;
   SEND_PACKET_START(PACKET_UNIT_UNLOAD);
 
-  dio_put_uint32(&dout, real_packet->cargo_id);
-  dio_put_uint32(&dout, real_packet->transporter_id);
+  dio_put_uint32(&dout, "cargo_id", real_packet->cargo_id);
+  dio_put_uint32(&dout, "transporter_id", real_packet->transporter_id);
 
   SEND_PACKET_END;
 }
@@ -9198,7 +9010,7 @@ static struct packet_unit_upgrade *receive_packet_unit_upgrade_100(struct connec
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "unit_id", &readin);
     real_packet->unit_id = readin;
   }
 
@@ -9210,7 +9022,7 @@ static int send_packet_unit_upgrade_100(struct connection *pc, const struct pack
   const struct packet_unit_upgrade *real_packet = packet;
   SEND_PACKET_START(PACKET_UNIT_UPGRADE);
 
-  dio_put_uint32(&dout, real_packet->unit_id);
+  dio_put_uint32(&dout, "unit_id", real_packet->unit_id);
 
   SEND_PACKET_END;
 }
@@ -9287,7 +9099,7 @@ static struct packet_unit_transform *receive_packet_unit_transform_100(struct co
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "unit_id", &readin);
     real_packet->unit_id = readin;
   }
 
@@ -9299,7 +9111,7 @@ static int send_packet_unit_transform_100(struct connection *pc, const struct pa
   const struct packet_unit_transform *real_packet = packet;
   SEND_PACKET_START(PACKET_UNIT_TRANSFORM);
 
-  dio_put_uint32(&dout, real_packet->unit_id);
+  dio_put_uint32(&dout, "unit_id", real_packet->unit_id);
 
   SEND_PACKET_END;
 }
@@ -9376,7 +9188,7 @@ static struct packet_unit_nuke *receive_packet_unit_nuke_100(struct connection *
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "unit_id", &readin);
     real_packet->unit_id = readin;
   }
 
@@ -9388,7 +9200,7 @@ static int send_packet_unit_nuke_100(struct connection *pc, const struct packet_
   const struct packet_unit_nuke *real_packet = packet;
   SEND_PACKET_START(PACKET_UNIT_NUKE);
 
-  dio_put_uint32(&dout, real_packet->unit_id);
+  dio_put_uint32(&dout, "unit_id", real_packet->unit_id);
 
   SEND_PACKET_END;
 }
@@ -9465,19 +9277,19 @@ static struct packet_unit_paradrop_to *receive_packet_unit_paradrop_to_100(struc
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "unit_id", &readin);
     real_packet->unit_id = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "x", &readin);
     real_packet->x = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "y", &readin);
     real_packet->y = readin;
   }
 
@@ -9489,9 +9301,9 @@ static int send_packet_unit_paradrop_to_100(struct connection *pc, const struct 
   const struct packet_unit_paradrop_to *real_packet = packet;
   SEND_PACKET_START(PACKET_UNIT_PARADROP_TO);
 
-  dio_put_uint32(&dout, real_packet->unit_id);
-  dio_put_uint32(&dout, real_packet->x);
-  dio_put_uint32(&dout, real_packet->y);
+  dio_put_uint32(&dout, "unit_id", real_packet->unit_id);
+  dio_put_uint32(&dout, "x", real_packet->x);
+  dio_put_uint32(&dout, "y", real_packet->y);
 
   SEND_PACKET_END;
 }
@@ -9570,13 +9382,13 @@ static struct packet_unit_airlift *receive_packet_unit_airlift_100(struct connec
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "unit_id", &readin);
     real_packet->unit_id = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "city_id", &readin);
     real_packet->city_id = readin;
   }
 
@@ -9588,8 +9400,8 @@ static int send_packet_unit_airlift_100(struct connection *pc, const struct pack
   const struct packet_unit_airlift *real_packet = packet;
   SEND_PACKET_START(PACKET_UNIT_AIRLIFT);
 
-  dio_put_uint32(&dout, real_packet->unit_id);
-  dio_put_uint32(&dout, real_packet->city_id);
+  dio_put_uint32(&dout, "unit_id", real_packet->unit_id);
+  dio_put_uint32(&dout, "city_id", real_packet->city_id);
 
   SEND_PACKET_END;
 }
@@ -9667,25 +9479,25 @@ static struct packet_unit_diplomat_query *receive_packet_unit_diplomat_query_100
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "diplomat_id", &readin);
     real_packet->diplomat_id = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "target_id", &readin);
     real_packet->target_id = readin;
   }
   {
     int readin;
   
-    dio_get_sint16(&din, &readin);
+    dio_get_sint16(pc->json_packet, "value", &readin);
     real_packet->value = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "action_type", &readin);
     real_packet->action_type = readin;
   }
 
@@ -9697,10 +9509,10 @@ static int send_packet_unit_diplomat_query_100(struct connection *pc, const stru
   const struct packet_unit_diplomat_query *real_packet = packet;
   SEND_PACKET_START(PACKET_UNIT_DIPLOMAT_QUERY);
 
-  dio_put_uint32(&dout, real_packet->diplomat_id);
-  dio_put_uint32(&dout, real_packet->target_id);
-  dio_put_sint16(&dout, real_packet->value);
-  dio_put_uint8(&dout, real_packet->action_type);
+  dio_put_uint32(&dout, "diplomat_id", real_packet->diplomat_id);
+  dio_put_uint32(&dout, "target_id", real_packet->target_id);
+  dio_put_sint16(&dout, "value", real_packet->value);
+  dio_put_uint8(&dout, "action_type", real_packet->action_type);
 
   SEND_PACKET_END;
 }
@@ -9780,7 +9592,7 @@ static struct packet_unit_type_upgrade *receive_packet_unit_type_upgrade_100(str
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "type", &readin);
     real_packet->type = readin;
   }
 
@@ -9792,7 +9604,7 @@ static int send_packet_unit_type_upgrade_100(struct connection *pc, const struct
   const struct packet_unit_type_upgrade *real_packet = packet;
   SEND_PACKET_START(PACKET_UNIT_TYPE_UPGRADE);
 
-  dio_put_uint8(&dout, real_packet->type);
+  dio_put_uint8(&dout, "type", real_packet->type);
 
   SEND_PACKET_END;
 }
@@ -9869,25 +9681,25 @@ static struct packet_unit_diplomat_action *receive_packet_unit_diplomat_action_1
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "diplomat_id", &readin);
     real_packet->diplomat_id = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "target_id", &readin);
     real_packet->target_id = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "value", &readin);
     real_packet->value = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "action_type", &readin);
     real_packet->action_type = readin;
   }
 
@@ -9899,10 +9711,10 @@ static int send_packet_unit_diplomat_action_100(struct connection *pc, const str
   const struct packet_unit_diplomat_action *real_packet = packet;
   SEND_PACKET_START(PACKET_UNIT_DIPLOMAT_ACTION);
 
-  dio_put_uint32(&dout, real_packet->diplomat_id);
-  dio_put_uint32(&dout, real_packet->target_id);
-  dio_put_uint32(&dout, real_packet->value);
-  dio_put_uint8(&dout, real_packet->action_type);
+  dio_put_uint32(&dout, "diplomat_id", real_packet->diplomat_id);
+  dio_put_uint32(&dout, "target_id", real_packet->target_id);
+  dio_put_uint32(&dout, "value", real_packet->value);
+  dio_put_uint8(&dout, "action_type", real_packet->action_type);
 
   SEND_PACKET_END;
 }
@@ -9982,25 +9794,25 @@ static struct packet_unit_diplomat_answer *receive_packet_unit_diplomat_answer_1
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "diplomat_id", &readin);
     real_packet->diplomat_id = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "target_id", &readin);
     real_packet->target_id = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "cost", &readin);
     real_packet->cost = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "action_type", &readin);
     real_packet->action_type = readin;
   }
 
@@ -10012,10 +9824,10 @@ static int send_packet_unit_diplomat_answer_100(struct connection *pc, const str
   const struct packet_unit_diplomat_answer *real_packet = packet;
   SEND_PACKET_START(PACKET_UNIT_DIPLOMAT_ANSWER);
 
-  dio_put_uint32(&dout, real_packet->diplomat_id);
-  dio_put_uint32(&dout, real_packet->target_id);
-  dio_put_uint32(&dout, real_packet->cost);
-  dio_put_uint8(&dout, real_packet->action_type);
+  dio_put_uint32(&dout, "diplomat_id", real_packet->diplomat_id);
+  dio_put_uint32(&dout, "target_id", real_packet->target_id);
+  dio_put_uint32(&dout, "cost", real_packet->cost);
+  dio_put_uint8(&dout, "action_type", real_packet->action_type);
 
   SEND_PACKET_END;
 }
@@ -10114,25 +9926,25 @@ static struct packet_unit_change_activity *receive_packet_unit_change_activity_1
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "unit_id", &readin);
     real_packet->unit_id = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "activity", &readin);
     real_packet->activity = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "activity_target", &readin);
     real_packet->activity_target = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "activity_base", &readin);
     real_packet->activity_base = readin;
   }
 
@@ -10144,10 +9956,10 @@ static int send_packet_unit_change_activity_100(struct connection *pc, const str
   const struct packet_unit_change_activity *real_packet = packet;
   SEND_PACKET_START(PACKET_UNIT_CHANGE_ACTIVITY);
 
-  dio_put_uint32(&dout, real_packet->unit_id);
-  dio_put_uint8(&dout, real_packet->activity);
-  dio_put_uint32(&dout, real_packet->activity_target);
-  dio_put_uint8(&dout, real_packet->activity_base);
+  dio_put_uint32(&dout, "unit_id", real_packet->unit_id);
+  dio_put_uint8(&dout, "activity", real_packet->activity);
+  dio_put_uint32(&dout, "activity_target", real_packet->activity_target);
+  dio_put_uint8(&dout, "activity_base", real_packet->activity_base);
 
   SEND_PACKET_END;
 }
@@ -10227,7 +10039,7 @@ static struct packet_diplomacy_init_meeting_req *receive_packet_diplomacy_init_m
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "counterpart", &readin);
     real_packet->counterpart = readin;
   }
 
@@ -10239,7 +10051,7 @@ static int send_packet_diplomacy_init_meeting_req_100(struct connection *pc, con
   const struct packet_diplomacy_init_meeting_req *real_packet = packet;
   SEND_PACKET_START(PACKET_DIPLOMACY_INIT_MEETING_REQ);
 
-  dio_put_sint8(&dout, real_packet->counterpart);
+  dio_put_sint8(&dout, "counterpart", real_packet->counterpart);
 
   SEND_PACKET_END;
 }
@@ -10316,13 +10128,13 @@ static struct packet_diplomacy_init_meeting *receive_packet_diplomacy_init_meeti
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "counterpart", &readin);
     real_packet->counterpart = readin;
   }
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "initiated_from", &readin);
     real_packet->initiated_from = readin;
   }
 
@@ -10334,8 +10146,8 @@ static int send_packet_diplomacy_init_meeting_100(struct connection *pc, const s
   const struct packet_diplomacy_init_meeting *real_packet = packet;
   SEND_PACKET_START(PACKET_DIPLOMACY_INIT_MEETING);
 
-  dio_put_sint8(&dout, real_packet->counterpart);
-  dio_put_sint8(&dout, real_packet->initiated_from);
+  dio_put_sint8(&dout, "counterpart", real_packet->counterpart);
+  dio_put_sint8(&dout, "initiated_from", real_packet->initiated_from);
 
   SEND_PACKET_END;
 }
@@ -10430,7 +10242,7 @@ static struct packet_diplomacy_cancel_meeting_req *receive_packet_diplomacy_canc
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "counterpart", &readin);
     real_packet->counterpart = readin;
   }
 
@@ -10442,7 +10254,7 @@ static int send_packet_diplomacy_cancel_meeting_req_100(struct connection *pc, c
   const struct packet_diplomacy_cancel_meeting_req *real_packet = packet;
   SEND_PACKET_START(PACKET_DIPLOMACY_CANCEL_MEETING_REQ);
 
-  dio_put_sint8(&dout, real_packet->counterpart);
+  dio_put_sint8(&dout, "counterpart", real_packet->counterpart);
 
   SEND_PACKET_END;
 }
@@ -10519,13 +10331,13 @@ static struct packet_diplomacy_cancel_meeting *receive_packet_diplomacy_cancel_m
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "counterpart", &readin);
     real_packet->counterpart = readin;
   }
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "initiated_from", &readin);
     real_packet->initiated_from = readin;
   }
 
@@ -10537,8 +10349,8 @@ static int send_packet_diplomacy_cancel_meeting_100(struct connection *pc, const
   const struct packet_diplomacy_cancel_meeting *real_packet = packet;
   SEND_PACKET_START(PACKET_DIPLOMACY_CANCEL_MEETING);
 
-  dio_put_sint8(&dout, real_packet->counterpart);
-  dio_put_sint8(&dout, real_packet->initiated_from);
+  dio_put_sint8(&dout, "counterpart", real_packet->counterpart);
+  dio_put_sint8(&dout, "initiated_from", real_packet->initiated_from);
 
   SEND_PACKET_END;
 }
@@ -10633,25 +10445,25 @@ static struct packet_diplomacy_create_clause_req *receive_packet_diplomacy_creat
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "counterpart", &readin);
     real_packet->counterpart = readin;
   }
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "giver", &readin);
     real_packet->giver = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "type", &readin);
     real_packet->type = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "value", &readin);
     real_packet->value = readin;
   }
 
@@ -10663,10 +10475,10 @@ static int send_packet_diplomacy_create_clause_req_100(struct connection *pc, co
   const struct packet_diplomacy_create_clause_req *real_packet = packet;
   SEND_PACKET_START(PACKET_DIPLOMACY_CREATE_CLAUSE_REQ);
 
-  dio_put_sint8(&dout, real_packet->counterpart);
-  dio_put_sint8(&dout, real_packet->giver);
-  dio_put_uint8(&dout, real_packet->type);
-  dio_put_uint32(&dout, real_packet->value);
+  dio_put_sint8(&dout, "counterpart", real_packet->counterpart);
+  dio_put_sint8(&dout, "giver", real_packet->giver);
+  dio_put_uint8(&dout, "type", real_packet->type);
+  dio_put_uint32(&dout, "value", real_packet->value);
 
   SEND_PACKET_END;
 }
@@ -10746,25 +10558,25 @@ static struct packet_diplomacy_create_clause *receive_packet_diplomacy_create_cl
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "counterpart", &readin);
     real_packet->counterpart = readin;
   }
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "giver", &readin);
     real_packet->giver = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "type", &readin);
     real_packet->type = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "value", &readin);
     real_packet->value = readin;
   }
 
@@ -10776,10 +10588,10 @@ static int send_packet_diplomacy_create_clause_100(struct connection *pc, const 
   const struct packet_diplomacy_create_clause *real_packet = packet;
   SEND_PACKET_START(PACKET_DIPLOMACY_CREATE_CLAUSE);
 
-  dio_put_sint8(&dout, real_packet->counterpart);
-  dio_put_sint8(&dout, real_packet->giver);
-  dio_put_uint8(&dout, real_packet->type);
-  dio_put_uint32(&dout, real_packet->value);
+  dio_put_sint8(&dout, "counterpart", real_packet->counterpart);
+  dio_put_sint8(&dout, "giver", real_packet->giver);
+  dio_put_uint8(&dout, "type", real_packet->type);
+  dio_put_uint32(&dout, "value", real_packet->value);
 
   SEND_PACKET_END;
 }
@@ -10878,25 +10690,25 @@ static struct packet_diplomacy_remove_clause_req *receive_packet_diplomacy_remov
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "counterpart", &readin);
     real_packet->counterpart = readin;
   }
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "giver", &readin);
     real_packet->giver = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "type", &readin);
     real_packet->type = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "value", &readin);
     real_packet->value = readin;
   }
 
@@ -10908,10 +10720,10 @@ static int send_packet_diplomacy_remove_clause_req_100(struct connection *pc, co
   const struct packet_diplomacy_remove_clause_req *real_packet = packet;
   SEND_PACKET_START(PACKET_DIPLOMACY_REMOVE_CLAUSE_REQ);
 
-  dio_put_sint8(&dout, real_packet->counterpart);
-  dio_put_sint8(&dout, real_packet->giver);
-  dio_put_uint8(&dout, real_packet->type);
-  dio_put_uint32(&dout, real_packet->value);
+  dio_put_sint8(&dout, "counterpart", real_packet->counterpart);
+  dio_put_sint8(&dout, "giver", real_packet->giver);
+  dio_put_uint8(&dout, "type", real_packet->type);
+  dio_put_uint32(&dout, "value", real_packet->value);
 
   SEND_PACKET_END;
 }
@@ -10991,25 +10803,25 @@ static struct packet_diplomacy_remove_clause *receive_packet_diplomacy_remove_cl
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "counterpart", &readin);
     real_packet->counterpart = readin;
   }
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "giver", &readin);
     real_packet->giver = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "type", &readin);
     real_packet->type = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "value", &readin);
     real_packet->value = readin;
   }
 
@@ -11021,10 +10833,10 @@ static int send_packet_diplomacy_remove_clause_100(struct connection *pc, const 
   const struct packet_diplomacy_remove_clause *real_packet = packet;
   SEND_PACKET_START(PACKET_DIPLOMACY_REMOVE_CLAUSE);
 
-  dio_put_sint8(&dout, real_packet->counterpart);
-  dio_put_sint8(&dout, real_packet->giver);
-  dio_put_uint8(&dout, real_packet->type);
-  dio_put_uint32(&dout, real_packet->value);
+  dio_put_sint8(&dout, "counterpart", real_packet->counterpart);
+  dio_put_sint8(&dout, "giver", real_packet->giver);
+  dio_put_uint8(&dout, "type", real_packet->type);
+  dio_put_uint32(&dout, "value", real_packet->value);
 
   SEND_PACKET_END;
 }
@@ -11123,7 +10935,7 @@ static struct packet_diplomacy_accept_treaty_req *receive_packet_diplomacy_accep
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "counterpart", &readin);
     real_packet->counterpart = readin;
   }
 
@@ -11135,7 +10947,7 @@ static int send_packet_diplomacy_accept_treaty_req_100(struct connection *pc, co
   const struct packet_diplomacy_accept_treaty_req *real_packet = packet;
   SEND_PACKET_START(PACKET_DIPLOMACY_ACCEPT_TREATY_REQ);
 
-  dio_put_sint8(&dout, real_packet->counterpart);
+  dio_put_sint8(&dout, "counterpart", real_packet->counterpart);
 
   SEND_PACKET_END;
 }
@@ -11212,11 +11024,11 @@ static struct packet_diplomacy_accept_treaty *receive_packet_diplomacy_accept_tr
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "counterpart", &readin);
     real_packet->counterpart = readin;
   }
-  dio_get_bool8(&din, &real_packet->I_accepted);
-  dio_get_bool8(&din, &real_packet->other_accepted);
+  dio_get_bool8(pc->json_packet, "I_accepted", &real_packet->I_accepted);
+  dio_get_bool8(pc->json_packet, "other_accepted", &real_packet->other_accepted);
 
   RECEIVE_PACKET_END(real_packet);
 }
@@ -11226,9 +11038,9 @@ static int send_packet_diplomacy_accept_treaty_100(struct connection *pc, const 
   const struct packet_diplomacy_accept_treaty *real_packet = packet;
   SEND_PACKET_START(PACKET_DIPLOMACY_ACCEPT_TREATY);
 
-  dio_put_sint8(&dout, real_packet->counterpart);
-  dio_put_bool8(&dout, real_packet->I_accepted);
-  dio_put_bool8(&dout, real_packet->other_accepted);
+  dio_put_sint8(&dout, "counterpart", real_packet->counterpart);
+  dio_put_bool8(&dout, "I_accepted", real_packet->I_accepted);
+  dio_put_bool8(&dout, "other_accepted", real_packet->other_accepted);
 
   SEND_PACKET_END;
 }
@@ -11325,13 +11137,13 @@ static struct packet_diplomacy_cancel_pact *receive_packet_diplomacy_cancel_pact
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "other_player_id", &readin);
     real_packet->other_player_id = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "clause", &readin);
     real_packet->clause = readin;
   }
 
@@ -11343,8 +11155,8 @@ static int send_packet_diplomacy_cancel_pact_100(struct connection *pc, const st
   const struct packet_diplomacy_cancel_pact *real_packet = packet;
   SEND_PACKET_START(PACKET_DIPLOMACY_CANCEL_PACT);
 
-  dio_put_sint8(&dout, real_packet->other_player_id);
-  dio_put_uint8(&dout, real_packet->clause);
+  dio_put_sint8(&dout, "other_player_id", real_packet->other_player_id);
+  dio_put_uint8(&dout, "clause", real_packet->clause);
 
   SEND_PACKET_END;
 }
@@ -11419,11 +11231,11 @@ int dsend_packet_diplomacy_cancel_pact(struct connection *pc, int other_player_i
 static struct packet_page_msg *receive_packet_page_msg_100(struct connection *pc, enum packet_type type)
 {
   RECEIVE_PACKET_START(packet_page_msg, real_packet);
-  dio_get_string(&din, real_packet->message, sizeof(real_packet->message));
+  dio_get_string(pc->json_packet, "message", real_packet->message, sizeof(real_packet->message));
   {
     int readin;
   
-    dio_get_sint32(&din, &readin);
+    dio_get_sint32(pc->json_packet, "event", &readin);
     real_packet->event = readin;
   }
 
@@ -11435,8 +11247,8 @@ static int send_packet_page_msg_100(struct connection *pc, const struct packet_p
   const struct packet_page_msg *real_packet = packet;
   SEND_PACKET_START(PACKET_PAGE_MSG);
 
-  dio_put_string(&dout, real_packet->message);
-  dio_put_sint32(&dout, real_packet->event);
+  dio_put_string(&dout, "message", real_packet->message);
+  dio_put_sint32(&dout, "event", real_packet->event);
 
   SEND_PACKET_END;
 }
@@ -11511,7 +11323,7 @@ static struct packet_report_req *receive_packet_report_req_100(struct connection
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "type", &readin);
     real_packet->type = readin;
   }
 
@@ -11523,7 +11335,7 @@ static int send_packet_report_req_100(struct connection *pc, const struct packet
   const struct packet_report_req *real_packet = packet;
   SEND_PACKET_START(PACKET_REPORT_REQ);
 
-  dio_put_uint8(&dout, real_packet->type);
+  dio_put_uint8(&dout, "type", real_packet->type);
 
   SEND_PACKET_END;
 }
@@ -11600,27 +11412,27 @@ static struct packet_conn_info *receive_packet_conn_info_100(struct connection *
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "id", &readin);
     real_packet->id = readin;
   }
-  dio_get_bool8(&din, &real_packet->used);
-  dio_get_bool8(&din, &real_packet->established);
-  dio_get_bool8(&din, &real_packet->observer);
+  dio_get_bool8(pc->json_packet, "used", &real_packet->used);
+  dio_get_bool8(pc->json_packet, "established", &real_packet->established);
+  dio_get_bool8(pc->json_packet, "observer", &real_packet->observer);
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "player_num", &readin);
     real_packet->player_num = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "access_level", &readin);
     real_packet->access_level = readin;
   }
-  dio_get_string(&din, real_packet->username, sizeof(real_packet->username));
-  dio_get_string(&din, real_packet->addr, sizeof(real_packet->addr));
-  dio_get_string(&din, real_packet->capability, sizeof(real_packet->capability));
+  dio_get_string(pc->json_packet, "username", real_packet->username, sizeof(real_packet->username));
+  dio_get_string(pc->json_packet, "addr", real_packet->addr, sizeof(real_packet->addr));
+  dio_get_string(pc->json_packet, "capability", real_packet->capability, sizeof(real_packet->capability));
 
   RECEIVE_PACKET_END(real_packet);
 }
@@ -11630,15 +11442,15 @@ static int send_packet_conn_info_100(struct connection *pc, const struct packet_
   const struct packet_conn_info *real_packet = packet;
   SEND_PACKET_START(PACKET_CONN_INFO);
 
-  dio_put_uint8(&dout, real_packet->id);
-  dio_put_bool8(&dout, real_packet->used);
-  dio_put_bool8(&dout, real_packet->established);
-  dio_put_bool8(&dout, real_packet->observer);
-  dio_put_sint8(&dout, real_packet->player_num);
-  dio_put_uint8(&dout, real_packet->access_level);
-  dio_put_string(&dout, real_packet->username);
-  dio_put_string(&dout, real_packet->addr);
-  dio_put_string(&dout, real_packet->capability);
+  dio_put_uint8(&dout, "id", real_packet->id);
+  dio_put_bool8(&dout, "used", real_packet->used);
+  dio_put_bool8(&dout, "established", real_packet->established);
+  dio_put_bool8(&dout, "observer", real_packet->observer);
+  dio_put_sint8(&dout, "player_num", real_packet->player_num);
+  dio_put_uint8(&dout, "access_level", real_packet->access_level);
+  dio_put_string(&dout, "username", real_packet->username);
+  dio_put_string(&dout, "addr", real_packet->addr);
+  dio_put_string(&dout, "capability", real_packet->capability);
 
   SEND_PACKET_END;
 }
@@ -11713,12 +11525,12 @@ static struct packet_conn_ping_info *receive_packet_conn_ping_info_100(struct co
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "connections", &readin);
     real_packet->connections = readin;
   }
   
   {
-    int i;
+     int i;
   
     if(real_packet->connections > MAX_NUM_CONNECTIONS) {
       freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
@@ -11728,14 +11540,14 @@ static struct packet_conn_ping_info *receive_packet_conn_ping_info_100(struct co
       {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "conn_id", &readin);
     real_packet->conn_id[i] = readin;
   }
     }
   }
   
   {
-    int i;
+     int i;
   
     if(real_packet->connections > MAX_NUM_CONNECTIONS) {
       freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
@@ -11745,7 +11557,7 @@ static struct packet_conn_ping_info *receive_packet_conn_ping_info_100(struct co
       {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "ping_time", &readin);
     real_packet->ping_time[i] = readin;
   }
     }
@@ -11759,22 +11571,14 @@ static int send_packet_conn_ping_info_100(struct connection *pc, const struct pa
   const struct packet_conn_ping_info *real_packet = packet;
   SEND_PACKET_START(PACKET_CONN_PING_INFO);
 
-  dio_put_uint32(&dout, real_packet->connections);
+  dio_put_uint32(&dout, "connections", real_packet->connections);
 
     {
-      int i;
-
-      for (i = 0; i < real_packet->connections; i++) {
-        dio_put_uint8(&dout, real_packet->conn_id[i]);
-      }
+        dio_put_array_uint8(&dout, "conn_id", (int*)real_packet->conn_id, real_packet->connections);
     } 
 
     {
-      int i;
-
-      for (i = 0; i < real_packet->connections; i++) {
-        dio_put_uint32(&dout, real_packet->ping_time[i]);
-      }
+        dio_put_array_uint32(&dout, "ping_time", (int*)real_packet->ping_time, real_packet->connections);
     } 
 
   SEND_PACKET_END;
@@ -11990,7 +11794,7 @@ static struct packet_client_info *receive_packet_client_info_100(struct connecti
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "gui", &readin);
     real_packet->gui = readin;
   }
 
@@ -12002,7 +11806,7 @@ static int send_packet_client_info_100(struct connection *pc, const struct packe
   const struct packet_client_info *real_packet = packet;
   SEND_PACKET_START(PACKET_CLIENT_INFO);
 
-  dio_put_uint8(&dout, real_packet->gui);
+  dio_put_uint8(&dout, "gui", real_packet->gui);
 
   SEND_PACKET_END;
 }
@@ -12147,7 +11951,7 @@ static struct packet_start_phase *receive_packet_start_phase_100(struct connecti
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "phase", &readin);
     real_packet->phase = readin;
   }
 
@@ -12159,7 +11963,7 @@ static int send_packet_start_phase_100(struct connection *pc, const struct packe
   const struct packet_start_phase *real_packet = packet;
   SEND_PACKET_START(PACKET_START_PHASE);
 
-  dio_put_uint32(&dout, real_packet->phase);
+  dio_put_uint32(&dout, "phase", real_packet->phase);
 
   SEND_PACKET_END;
 }
@@ -12252,13 +12056,13 @@ static struct packet_new_year *receive_packet_new_year_100(struct connection *pc
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "year", &readin);
     real_packet->year = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "turn", &readin);
     real_packet->turn = readin;
   }
 
@@ -12270,8 +12074,8 @@ static int send_packet_new_year_100(struct connection *pc, const struct packet_n
   const struct packet_new_year *real_packet = packet;
   SEND_PACKET_START(PACKET_NEW_YEAR);
 
-  dio_put_uint32(&dout, real_packet->year);
-  dio_put_uint32(&dout, real_packet->turn);
+  dio_put_uint32(&dout, "year", real_packet->year);
+  dio_put_uint32(&dout, "turn", real_packet->turn);
 
   SEND_PACKET_END;
 }
@@ -12724,13 +12528,13 @@ static struct packet_spaceship_place *receive_packet_spaceship_place_100(struct 
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "type", &readin);
     real_packet->type = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "num", &readin);
     real_packet->num = readin;
   }
 
@@ -12742,8 +12546,8 @@ static int send_packet_spaceship_place_100(struct connection *pc, const struct p
   const struct packet_spaceship_place *real_packet = packet;
   SEND_PACKET_START(PACKET_SPACESHIP_PLACE);
 
-  dio_put_uint8(&dout, real_packet->type);
-  dio_put_uint8(&dout, real_packet->num);
+  dio_put_uint8(&dout, "type", real_packet->type);
+  dio_put_uint8(&dout, "num", real_packet->num);
 
   SEND_PACKET_END;
 }
@@ -12821,104 +12625,104 @@ static struct packet_spaceship_info *receive_packet_spaceship_info_100(struct co
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "player_num", &readin);
     real_packet->player_num = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "sship_state", &readin);
     real_packet->sship_state = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "structurals", &readin);
     real_packet->structurals = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "components", &readin);
     real_packet->components = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "modules", &readin);
     real_packet->modules = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "fuel", &readin);
     real_packet->fuel = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "propulsion", &readin);
     real_packet->propulsion = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "habitation", &readin);
     real_packet->habitation = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "life_support", &readin);
     real_packet->life_support = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "solar_panels", &readin);
     real_packet->solar_panels = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "launch_year", &readin);
     real_packet->launch_year = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "population", &readin);
     real_packet->population = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "mass", &readin);
     real_packet->mass = readin;
   }
-  dio_get_bit_string(&din, real_packet->structure, sizeof(real_packet->structure));
+  dio_get_bit_string(pc->json_packet, "structure", real_packet->structure, sizeof(real_packet->structure));
   {
     int tmp;
     
-    dio_get_uint32(&din, &tmp);
+    dio_get_uint32(pc->json_packet, "support_rate", &tmp);
     real_packet->support_rate = (float)(tmp) / 10000.0;
   }
   {
     int tmp;
     
-    dio_get_uint32(&din, &tmp);
+    dio_get_uint32(pc->json_packet, "energy_rate", &tmp);
     real_packet->energy_rate = (float)(tmp) / 10000.0;
   }
   {
     int tmp;
     
-    dio_get_uint32(&din, &tmp);
+    dio_get_uint32(pc->json_packet, "success_rate", &tmp);
     real_packet->success_rate = (float)(tmp) / 10000.0;
   }
   {
     int tmp;
     
-    dio_get_uint32(&din, &tmp);
+    dio_get_uint32(pc->json_packet, "travel_time", &tmp);
     real_packet->travel_time = (float)(tmp) / 10000.0;
   }
 
@@ -12930,24 +12734,24 @@ static int send_packet_spaceship_info_100(struct connection *pc, const struct pa
   const struct packet_spaceship_info *real_packet = packet;
   SEND_PACKET_START(PACKET_SPACESHIP_INFO);
 
-  dio_put_sint8(&dout, real_packet->player_num);
-  dio_put_uint8(&dout, real_packet->sship_state);
-  dio_put_uint8(&dout, real_packet->structurals);
-  dio_put_uint8(&dout, real_packet->components);
-  dio_put_uint8(&dout, real_packet->modules);
-  dio_put_uint8(&dout, real_packet->fuel);
-  dio_put_uint8(&dout, real_packet->propulsion);
-  dio_put_uint8(&dout, real_packet->habitation);
-  dio_put_uint8(&dout, real_packet->life_support);
-  dio_put_uint8(&dout, real_packet->solar_panels);
-  dio_put_uint32(&dout, real_packet->launch_year);
-  dio_put_uint32(&dout, real_packet->population);
-  dio_put_uint32(&dout, real_packet->mass);
-  dio_put_bit_string(&dout, real_packet->structure);
-  dio_put_uint32(&dout, (int)(real_packet->support_rate * 10000));
-  dio_put_uint32(&dout, (int)(real_packet->energy_rate * 10000));
-  dio_put_uint32(&dout, (int)(real_packet->success_rate * 10000));
-  dio_put_uint32(&dout, (int)(real_packet->travel_time * 10000));
+  dio_put_sint8(&dout, "player_num", real_packet->player_num);
+  dio_put_uint8(&dout, "sship_state", real_packet->sship_state);
+  dio_put_uint8(&dout, "structurals", real_packet->structurals);
+  dio_put_uint8(&dout, "components", real_packet->components);
+  dio_put_uint8(&dout, "modules", real_packet->modules);
+  dio_put_uint8(&dout, "fuel", real_packet->fuel);
+  dio_put_uint8(&dout, "propulsion", real_packet->propulsion);
+  dio_put_uint8(&dout, "habitation", real_packet->habitation);
+  dio_put_uint8(&dout, "life_support", real_packet->life_support);
+  dio_put_uint8(&dout, "solar_panels", real_packet->solar_panels);
+  dio_put_uint32(&dout, "launch_year", real_packet->launch_year);
+  dio_put_uint32(&dout, "population", real_packet->population);
+  dio_put_uint32(&dout, "mass", real_packet->mass);
+  dio_put_bit_string(&dout, "structure", real_packet->structure);
+  dio_put_uint32(&dout, "support_rate", (int)(real_packet->support_rate * 10000));
+  dio_put_uint32(&dout, "energy_rate", (int)(real_packet->energy_rate * 10000));
+  dio_put_uint32(&dout, "success_rate", (int)(real_packet->success_rate * 10000));
+  dio_put_uint32(&dout, "travel_time", (int)(real_packet->travel_time * 10000));
 
   SEND_PACKET_END;
 }
@@ -13022,127 +12826,127 @@ static struct packet_ruleset_unit *receive_packet_ruleset_unit_100(struct connec
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "id", &readin);
     real_packet->id = readin;
   }
-  dio_get_string(&din, real_packet->name, sizeof(real_packet->name));
-  dio_get_string(&din, real_packet->graphic_str, sizeof(real_packet->graphic_str));
-  dio_get_string(&din, real_packet->graphic_alt, sizeof(real_packet->graphic_alt));
-  dio_get_string(&din, real_packet->sound_move, sizeof(real_packet->sound_move));
-  dio_get_string(&din, real_packet->sound_move_alt, sizeof(real_packet->sound_move_alt));
-  dio_get_string(&din, real_packet->sound_fight, sizeof(real_packet->sound_fight));
-  dio_get_string(&din, real_packet->sound_fight_alt, sizeof(real_packet->sound_fight_alt));
+  dio_get_string(pc->json_packet, "name", real_packet->name, sizeof(real_packet->name));
+  dio_get_string(pc->json_packet, "graphic_str", real_packet->graphic_str, sizeof(real_packet->graphic_str));
+  dio_get_string(pc->json_packet, "graphic_alt", real_packet->graphic_alt, sizeof(real_packet->graphic_alt));
+  dio_get_string(pc->json_packet, "sound_move", real_packet->sound_move, sizeof(real_packet->sound_move));
+  dio_get_string(pc->json_packet, "sound_move_alt", real_packet->sound_move_alt, sizeof(real_packet->sound_move_alt));
+  dio_get_string(pc->json_packet, "sound_fight", real_packet->sound_fight, sizeof(real_packet->sound_fight));
+  dio_get_string(pc->json_packet, "sound_fight_alt", real_packet->sound_fight_alt, sizeof(real_packet->sound_fight_alt));
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "unit_class_id", &readin);
     real_packet->unit_class_id = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "build_cost", &readin);
     real_packet->build_cost = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "pop_cost", &readin);
     real_packet->pop_cost = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "attack_strength", &readin);
     real_packet->attack_strength = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "defense_strength", &readin);
     real_packet->defense_strength = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "move_rate", &readin);
     real_packet->move_rate = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "tech_requirement", &readin);
     real_packet->tech_requirement = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "impr_requirement", &readin);
     real_packet->impr_requirement = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "gov_requirement", &readin);
     real_packet->gov_requirement = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "vision_radius_sq", &readin);
     real_packet->vision_radius_sq = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "transport_capacity", &readin);
     real_packet->transport_capacity = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "hp", &readin);
     real_packet->hp = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "firepower", &readin);
     real_packet->firepower = readin;
   }
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "obsoleted_by", &readin);
     real_packet->obsoleted_by = readin;
   }
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "transformed_to", &readin);
     real_packet->transformed_to = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "fuel", &readin);
     real_packet->fuel = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "happy_cost", &readin);
     real_packet->happy_cost = readin;
   }
   
   {
-    int i;
+     int i;
   
     for (i = 0; i < O_LAST; i++) {
       {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "upkeep", &readin);
     real_packet->upkeep[i] = readin;
   }
     }
@@ -13150,49 +12954,49 @@ static struct packet_ruleset_unit *receive_packet_ruleset_unit_100(struct connec
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "paratroopers_range", &readin);
     real_packet->paratroopers_range = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "paratroopers_mr_req", &readin);
     real_packet->paratroopers_mr_req = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "paratroopers_mr_sub", &readin);
     real_packet->paratroopers_mr_sub = readin;
   }
   
   {
-    int i;
+     int i;
   
     for (i = 0; i < MAX_VET_LEVELS; i++) {
-      dio_get_string(&din, real_packet->veteran_name[i], sizeof(real_packet->veteran_name[i]));
+      dio_get_string(pc->json_packet, "veteran_name", real_packet->veteran_name[i], sizeof(real_packet->veteran_name[i]));
     }
   }
   
   {
-    int i;
+     int i;
   
     for (i = 0; i < MAX_VET_LEVELS; i++) {
       int tmp;
   
-      dio_get_uint32(&din, &tmp);
+      dio_get_uint32(pc->json_packet, "power_fact", &tmp);
       real_packet->power_fact[i] = (float)(tmp) / 10000.0;
     }
   }
   
   {
-    int i;
+     int i;
   
     for (i = 0; i < MAX_VET_LEVELS; i++) {
       {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "move_bonus", &readin);
     real_packet->move_bonus[i] = readin;
   }
     }
@@ -13200,20 +13004,20 @@ static struct packet_ruleset_unit *receive_packet_ruleset_unit_100(struct connec
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "bombard_rate", &readin);
     real_packet->bombard_rate = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "city_size", &readin);
     real_packet->city_size = readin;
   }
-  DIO_BV_GET(&din, real_packet->cargo);
-  DIO_BV_GET(&din, real_packet->targets);
-  dio_get_string(&din, real_packet->helptext, sizeof(real_packet->helptext));
-  DIO_BV_GET(&din, real_packet->flags);
-  DIO_BV_GET(&din, real_packet->roles);
+   /* not supported yet. DIO_BV_GET(pc->json_packet, real_packet->cargo);*/
+   /* not supported yet. DIO_BV_GET(pc->json_packet, real_packet->targets);*/
+  dio_get_string(pc->json_packet, "helptext", real_packet->helptext, sizeof(real_packet->helptext));
+   /* not supported yet. DIO_BV_GET(pc->json_packet, real_packet->flags);*/
+   /* not supported yet. DIO_BV_GET(pc->json_packet, real_packet->roles);*/
 
   RECEIVE_PACKET_END(real_packet);
 }
@@ -13223,73 +13027,57 @@ static int send_packet_ruleset_unit_100(struct connection *pc, const struct pack
   const struct packet_ruleset_unit *real_packet = packet;
   SEND_PACKET_START(PACKET_RULESET_UNIT);
 
-  dio_put_uint8(&dout, real_packet->id);
-  dio_put_string(&dout, real_packet->name);
-  dio_put_string(&dout, real_packet->graphic_str);
-  dio_put_string(&dout, real_packet->graphic_alt);
-  dio_put_string(&dout, real_packet->sound_move);
-  dio_put_string(&dout, real_packet->sound_move_alt);
-  dio_put_string(&dout, real_packet->sound_fight);
-  dio_put_string(&dout, real_packet->sound_fight_alt);
-  dio_put_uint8(&dout, real_packet->unit_class_id);
-  dio_put_uint32(&dout, real_packet->build_cost);
-  dio_put_uint8(&dout, real_packet->pop_cost);
-  dio_put_uint8(&dout, real_packet->attack_strength);
-  dio_put_uint8(&dout, real_packet->defense_strength);
-  dio_put_uint8(&dout, real_packet->move_rate);
-  dio_put_uint8(&dout, real_packet->tech_requirement);
-  dio_put_uint8(&dout, real_packet->impr_requirement);
-  dio_put_uint8(&dout, real_packet->gov_requirement);
-  dio_put_uint32(&dout, real_packet->vision_radius_sq);
-  dio_put_uint8(&dout, real_packet->transport_capacity);
-  dio_put_uint8(&dout, real_packet->hp);
-  dio_put_uint8(&dout, real_packet->firepower);
-  dio_put_sint8(&dout, real_packet->obsoleted_by);
-  dio_put_sint8(&dout, real_packet->transformed_to);
-  dio_put_uint8(&dout, real_packet->fuel);
-  dio_put_uint8(&dout, real_packet->happy_cost);
+  dio_put_uint8(&dout, "id", real_packet->id);
+  dio_put_string(&dout, "name", real_packet->name);
+  dio_put_string(&dout, "graphic_str", real_packet->graphic_str);
+  dio_put_string(&dout, "graphic_alt", real_packet->graphic_alt);
+  dio_put_string(&dout, "sound_move", real_packet->sound_move);
+  dio_put_string(&dout, "sound_move_alt", real_packet->sound_move_alt);
+  dio_put_string(&dout, "sound_fight", real_packet->sound_fight);
+  dio_put_string(&dout, "sound_fight_alt", real_packet->sound_fight_alt);
+  dio_put_uint8(&dout, "unit_class_id", real_packet->unit_class_id);
+  dio_put_uint32(&dout, "build_cost", real_packet->build_cost);
+  dio_put_uint8(&dout, "pop_cost", real_packet->pop_cost);
+  dio_put_uint8(&dout, "attack_strength", real_packet->attack_strength);
+  dio_put_uint8(&dout, "defense_strength", real_packet->defense_strength);
+  dio_put_uint8(&dout, "move_rate", real_packet->move_rate);
+  dio_put_uint8(&dout, "tech_requirement", real_packet->tech_requirement);
+  dio_put_uint8(&dout, "impr_requirement", real_packet->impr_requirement);
+  dio_put_uint8(&dout, "gov_requirement", real_packet->gov_requirement);
+  dio_put_uint32(&dout, "vision_radius_sq", real_packet->vision_radius_sq);
+  dio_put_uint8(&dout, "transport_capacity", real_packet->transport_capacity);
+  dio_put_uint8(&dout, "hp", real_packet->hp);
+  dio_put_uint8(&dout, "firepower", real_packet->firepower);
+  dio_put_sint8(&dout, "obsoleted_by", real_packet->obsoleted_by);
+  dio_put_sint8(&dout, "transformed_to", real_packet->transformed_to);
+  dio_put_uint8(&dout, "fuel", real_packet->fuel);
+  dio_put_uint8(&dout, "happy_cost", real_packet->happy_cost);
 
     {
-      int i;
-
-      for (i = 0; i < O_LAST; i++) {
-        dio_put_uint8(&dout, real_packet->upkeep[i]);
-      }
+        dio_put_array_uint8(&dout, "upkeep", (int*)real_packet->upkeep, O_LAST);
     } 
-  dio_put_uint8(&dout, real_packet->paratroopers_range);
-  dio_put_uint8(&dout, real_packet->paratroopers_mr_req);
-  dio_put_uint8(&dout, real_packet->paratroopers_mr_sub);
+  dio_put_uint8(&dout, "paratroopers_range", real_packet->paratroopers_range);
+  dio_put_uint8(&dout, "paratroopers_mr_req", real_packet->paratroopers_mr_req);
+  dio_put_uint8(&dout, "paratroopers_mr_sub", real_packet->paratroopers_mr_sub);
 
     {
-      int i;
-
-      for (i = 0; i < MAX_VET_LEVELS; i++) {
-        dio_put_string(&dout, real_packet->veteran_name[i]);
-      }
+         /*not supported yet... dio_put_string_array(&dout, "veteran_name", (char *)real_packet->veteran_name, MAX_VET_LEVELS);*/ 
     } 
 
     {
-      int i;
-
-      for (i = 0; i < MAX_VET_LEVELS; i++) {
-          dio_put_uint32(&dout, (int)(real_packet->power_fact[i] * 10000));
-      }
+         /* power_fact not supported yet */
     } 
 
     {
-      int i;
-
-      for (i = 0; i < MAX_VET_LEVELS; i++) {
-        dio_put_uint8(&dout, real_packet->move_bonus[i]);
-      }
+        dio_put_array_uint8(&dout, "move_bonus", (int*)real_packet->move_bonus, MAX_VET_LEVELS);
     } 
-  dio_put_uint8(&dout, real_packet->bombard_rate);
-  dio_put_uint8(&dout, real_packet->city_size);
-DIO_BV_PUT(&dout, packet->cargo);
-DIO_BV_PUT(&dout, packet->targets);
-  dio_put_string(&dout, real_packet->helptext);
-DIO_BV_PUT(&dout, packet->flags);
-DIO_BV_PUT(&dout, packet->roles);
+  dio_put_uint8(&dout, "bombard_rate", real_packet->bombard_rate);
+  dio_put_uint8(&dout, "city_size", real_packet->city_size);
+DIO_BV_PUT(&dout, "cargo", packet->cargo);
+DIO_BV_PUT(&dout, "targets", packet->targets);
+  dio_put_string(&dout, "helptext", real_packet->helptext);
+DIO_BV_PUT(&dout, "flags", packet->flags);
+DIO_BV_PUT(&dout, "roles", packet->roles);
 
   SEND_PACKET_END;
 }
@@ -13364,31 +13152,31 @@ static struct packet_ruleset_game *receive_packet_ruleset_game_100(struct connec
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "default_specialist", &readin);
     real_packet->default_specialist = readin;
   }
   
   {
-    int i;
+     int i;
   
     for (i = 0; i < MAX_VET_LEVELS; i++) {
       {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "work_veteran_chance", &readin);
     real_packet->work_veteran_chance[i] = readin;
   }
     }
   }
   
   {
-    int i;
+     int i;
   
     for (i = 0; i < MAX_VET_LEVELS; i++) {
       {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "veteran_chance", &readin);
     real_packet->veteran_chance[i] = readin;
   }
     }
@@ -13402,22 +13190,14 @@ static int send_packet_ruleset_game_100(struct connection *pc, const struct pack
   const struct packet_ruleset_game *real_packet = packet;
   SEND_PACKET_START(PACKET_RULESET_GAME);
 
-  dio_put_uint8(&dout, real_packet->default_specialist);
+  dio_put_uint8(&dout, "default_specialist", real_packet->default_specialist);
 
     {
-      int i;
-
-      for (i = 0; i < MAX_VET_LEVELS; i++) {
-        dio_put_uint8(&dout, real_packet->work_veteran_chance[i]);
-      }
+        dio_put_array_uint8(&dout, "work_veteran_chance", (int*)real_packet->work_veteran_chance, MAX_VET_LEVELS);
     } 
 
     {
-      int i;
-
-      for (i = 0; i < MAX_VET_LEVELS; i++) {
-        dio_put_uint8(&dout, real_packet->veteran_chance[i]);
-      }
+        dio_put_array_uint8(&dout, "veteran_chance", (int*)real_packet->veteran_chance, MAX_VET_LEVELS);
     } 
 
   SEND_PACKET_END;
@@ -13493,27 +13273,27 @@ static struct packet_ruleset_specialist *receive_packet_ruleset_specialist_100(s
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "id", &readin);
     real_packet->id = readin;
   }
-  dio_get_string(&din, real_packet->name, sizeof(real_packet->name));
-  dio_get_string(&din, real_packet->short_name, sizeof(real_packet->short_name));
+  dio_get_string(pc->json_packet, "name", real_packet->name, sizeof(real_packet->name));
+  dio_get_string(pc->json_packet, "short_name", real_packet->short_name, sizeof(real_packet->short_name));
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "reqs_count", &readin);
     real_packet->reqs_count = readin;
   }
   
   {
-    int i;
+     int i;
   
     if(real_packet->reqs_count > MAX_NUM_REQS) {
       freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
       real_packet->reqs_count = MAX_NUM_REQS;
     }
     for (i = 0; i < real_packet->reqs_count; i++) {
-      dio_get_requirement(&din, &real_packet->reqs[i]);
+      dio_get_requirement(pc->json_packet, "reqs", &real_packet->reqs[i]);
     }
   }
 
@@ -13525,17 +13305,13 @@ static int send_packet_ruleset_specialist_100(struct connection *pc, const struc
   const struct packet_ruleset_specialist *real_packet = packet;
   SEND_PACKET_START(PACKET_RULESET_SPECIALIST);
 
-  dio_put_uint8(&dout, real_packet->id);
-  dio_put_string(&dout, real_packet->name);
-  dio_put_string(&dout, real_packet->short_name);
-  dio_put_uint8(&dout, real_packet->reqs_count);
+  dio_put_uint8(&dout, "id", real_packet->id);
+  dio_put_string(&dout, "name", real_packet->name);
+  dio_put_string(&dout, "short_name", real_packet->short_name);
+  dio_put_uint8(&dout, "reqs_count", real_packet->reqs_count);
 
     {
-      int i;
-
-      for (i = 0; i < real_packet->reqs_count; i++) {
-        dio_put_requirement(&dout, &real_packet->reqs[i]);
-      }
+        dio_put_requirement(&dout, "reqs", (struct requirement*)real_packet->reqs, real_packet->reqs_count);
     } 
 
   SEND_PACKET_END;
@@ -13611,23 +13387,23 @@ static struct packet_ruleset_government_ruler_title *receive_packet_ruleset_gove
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "gov", &readin);
     real_packet->gov = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "id", &readin);
     real_packet->id = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "nation", &readin);
     real_packet->nation = readin;
   }
-  dio_get_string(&din, real_packet->male_title, sizeof(real_packet->male_title));
-  dio_get_string(&din, real_packet->female_title, sizeof(real_packet->female_title));
+  dio_get_string(pc->json_packet, "male_title", real_packet->male_title, sizeof(real_packet->male_title));
+  dio_get_string(pc->json_packet, "female_title", real_packet->female_title, sizeof(real_packet->female_title));
 
   RECEIVE_PACKET_END(real_packet);
 }
@@ -13637,11 +13413,11 @@ static int send_packet_ruleset_government_ruler_title_100(struct connection *pc,
   const struct packet_ruleset_government_ruler_title *real_packet = packet;
   SEND_PACKET_START(PACKET_RULESET_GOVERNMENT_RULER_TITLE);
 
-  dio_put_uint8(&dout, real_packet->gov);
-  dio_put_uint8(&dout, real_packet->id);
-  dio_put_uint32(&dout, real_packet->nation);
-  dio_put_string(&dout, real_packet->male_title);
-  dio_put_string(&dout, real_packet->female_title);
+  dio_put_uint8(&dout, "gov", real_packet->gov);
+  dio_put_uint8(&dout, "id", real_packet->id);
+  dio_put_uint32(&dout, "nation", real_packet->nation);
+  dio_put_string(&dout, "male_title", real_packet->male_title);
+  dio_put_string(&dout, "female_title", real_packet->female_title);
 
   SEND_PACKET_END;
 }
@@ -13716,18 +13492,18 @@ static struct packet_ruleset_tech *receive_packet_ruleset_tech_100(struct connec
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "id", &readin);
     real_packet->id = readin;
   }
   
   {
-    int i;
+     int i;
   
     for (i = 0; i < 2; i++) {
       {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "req", &readin);
     real_packet->req[i] = readin;
   }
     }
@@ -13735,31 +13511,31 @@ static struct packet_ruleset_tech *receive_packet_ruleset_tech_100(struct connec
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "root_req", &readin);
     real_packet->root_req = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "flags", &readin);
     real_packet->flags = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "preset_cost", &readin);
     real_packet->preset_cost = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "num_reqs", &readin);
     real_packet->num_reqs = readin;
   }
-  dio_get_string(&din, real_packet->name, sizeof(real_packet->name));
-  dio_get_string(&din, real_packet->helptext, sizeof(real_packet->helptext));
-  dio_get_string(&din, real_packet->graphic_str, sizeof(real_packet->graphic_str));
-  dio_get_string(&din, real_packet->graphic_alt, sizeof(real_packet->graphic_alt));
+  dio_get_string(pc->json_packet, "name", real_packet->name, sizeof(real_packet->name));
+  dio_get_string(pc->json_packet, "helptext", real_packet->helptext, sizeof(real_packet->helptext));
+  dio_get_string(pc->json_packet, "graphic_str", real_packet->graphic_str, sizeof(real_packet->graphic_str));
+  dio_get_string(pc->json_packet, "graphic_alt", real_packet->graphic_alt, sizeof(real_packet->graphic_alt));
 
   RECEIVE_PACKET_END(real_packet);
 }
@@ -13769,23 +13545,19 @@ static int send_packet_ruleset_tech_100(struct connection *pc, const struct pack
   const struct packet_ruleset_tech *real_packet = packet;
   SEND_PACKET_START(PACKET_RULESET_TECH);
 
-  dio_put_uint8(&dout, real_packet->id);
+  dio_put_uint8(&dout, "id", real_packet->id);
 
     {
-      int i;
-
-      for (i = 0; i < 2; i++) {
-        dio_put_uint8(&dout, real_packet->req[i]);
-      }
+        dio_put_array_uint8(&dout, "req", (int*)real_packet->req, 2);
     } 
-  dio_put_uint8(&dout, real_packet->root_req);
-  dio_put_uint32(&dout, real_packet->flags);
-  dio_put_uint32(&dout, real_packet->preset_cost);
-  dio_put_uint32(&dout, real_packet->num_reqs);
-  dio_put_string(&dout, real_packet->name);
-  dio_put_string(&dout, real_packet->helptext);
-  dio_put_string(&dout, real_packet->graphic_str);
-  dio_put_string(&dout, real_packet->graphic_alt);
+  dio_put_uint8(&dout, "root_req", real_packet->root_req);
+  dio_put_uint32(&dout, "flags", real_packet->flags);
+  dio_put_uint32(&dout, "preset_cost", real_packet->preset_cost);
+  dio_put_uint32(&dout, "num_reqs", real_packet->num_reqs);
+  dio_put_string(&dout, "name", real_packet->name);
+  dio_put_string(&dout, "helptext", real_packet->helptext);
+  dio_put_string(&dout, "graphic_str", real_packet->graphic_str);
+  dio_put_string(&dout, "graphic_alt", real_packet->graphic_alt);
 
   SEND_PACKET_END;
 }
@@ -13860,19 +13632,19 @@ static struct packet_ruleset_government *receive_packet_ruleset_government_100(s
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "id", &readin);
     real_packet->id = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "num_ruler_titles", &readin);
     real_packet->num_ruler_titles = readin;
   }
-  dio_get_string(&din, real_packet->name, sizeof(real_packet->name));
-  dio_get_string(&din, real_packet->graphic_str, sizeof(real_packet->graphic_str));
-  dio_get_string(&din, real_packet->graphic_alt, sizeof(real_packet->graphic_alt));
-  dio_get_string(&din, real_packet->helptext, sizeof(real_packet->helptext));
+  dio_get_string(pc->json_packet, "name", real_packet->name, sizeof(real_packet->name));
+  dio_get_string(pc->json_packet, "graphic_str", real_packet->graphic_str, sizeof(real_packet->graphic_str));
+  dio_get_string(pc->json_packet, "graphic_alt", real_packet->graphic_alt, sizeof(real_packet->graphic_alt));
+  dio_get_string(pc->json_packet, "helptext", real_packet->helptext, sizeof(real_packet->helptext));
 
   RECEIVE_PACKET_END(real_packet);
 }
@@ -13882,12 +13654,12 @@ static int send_packet_ruleset_government_100(struct connection *pc, const struc
   const struct packet_ruleset_government *real_packet = packet;
   SEND_PACKET_START(PACKET_RULESET_GOVERNMENT);
 
-  dio_put_uint8(&dout, real_packet->id);
-  dio_put_uint8(&dout, real_packet->num_ruler_titles);
-  dio_put_string(&dout, real_packet->name);
-  dio_put_string(&dout, real_packet->graphic_str);
-  dio_put_string(&dout, real_packet->graphic_alt);
-  dio_put_string(&dout, real_packet->helptext);
+  dio_put_uint8(&dout, "id", real_packet->id);
+  dio_put_uint8(&dout, "num_ruler_titles", real_packet->num_ruler_titles);
+  dio_put_string(&dout, "name", real_packet->name);
+  dio_put_string(&dout, "graphic_str", real_packet->graphic_str);
+  dio_put_string(&dout, "graphic_alt", real_packet->graphic_alt);
+  dio_put_string(&dout, "helptext", real_packet->helptext);
 
   SEND_PACKET_END;
 }
@@ -13959,88 +13731,88 @@ void lsend_packet_ruleset_government(struct conn_list *dest, const struct packet
 static struct packet_ruleset_terrain_control *receive_packet_ruleset_terrain_control_100(struct connection *pc, enum packet_type type)
 {
   RECEIVE_PACKET_START(packet_ruleset_terrain_control, real_packet);
-  dio_get_bool8(&din, &real_packet->may_road);
-  dio_get_bool8(&din, &real_packet->may_irrigate);
-  dio_get_bool8(&din, &real_packet->may_mine);
-  dio_get_bool8(&din, &real_packet->may_transform);
+  dio_get_bool8(pc->json_packet, "may_road", &real_packet->may_road);
+  dio_get_bool8(pc->json_packet, "may_irrigate", &real_packet->may_irrigate);
+  dio_get_bool8(pc->json_packet, "may_mine", &real_packet->may_mine);
+  dio_get_bool8(pc->json_packet, "may_transform", &real_packet->may_transform);
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "ocean_reclaim_requirement_pct", &readin);
     real_packet->ocean_reclaim_requirement_pct = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "land_channel_requirement_pct", &readin);
     real_packet->land_channel_requirement_pct = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "lake_max_size", &readin);
     real_packet->lake_max_size = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "river_move_mode", &readin);
     real_packet->river_move_mode = readin;
   }
   {
     int readin;
   
-    dio_get_sint16(&din, &readin);
+    dio_get_sint16(pc->json_packet, "river_defense_bonus", &readin);
     real_packet->river_defense_bonus = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "river_trade_incr", &readin);
     real_packet->river_trade_incr = readin;
   }
-  dio_get_string(&din, real_packet->river_help_text, sizeof(real_packet->river_help_text));
+  dio_get_string(pc->json_packet, "river_help_text", real_packet->river_help_text, sizeof(real_packet->river_help_text));
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "road_superhighway_trade_bonus", &readin);
     real_packet->road_superhighway_trade_bonus = readin;
   }
   
   {
-    int i;
+     int i;
   
     for (i = 0; i < O_LAST; i++) {
       {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "rail_tile_bonus", &readin);
     real_packet->rail_tile_bonus[i] = readin;
   }
     }
   }
   
   {
-    int i;
+     int i;
   
     for (i = 0; i < O_LAST; i++) {
       {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "pollution_tile_penalty", &readin);
     real_packet->pollution_tile_penalty[i] = readin;
   }
     }
   }
   
   {
-    int i;
+     int i;
   
     for (i = 0; i < O_LAST; i++) {
       {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "fallout_tile_penalty", &readin);
     real_packet->fallout_tile_penalty[i] = readin;
   }
     }
@@ -14054,41 +13826,29 @@ static int send_packet_ruleset_terrain_control_100(struct connection *pc, const 
   const struct packet_ruleset_terrain_control *real_packet = packet;
   SEND_PACKET_START(PACKET_RULESET_TERRAIN_CONTROL);
 
-  dio_put_bool8(&dout, real_packet->may_road);
-  dio_put_bool8(&dout, real_packet->may_irrigate);
-  dio_put_bool8(&dout, real_packet->may_mine);
-  dio_put_bool8(&dout, real_packet->may_transform);
-  dio_put_uint8(&dout, real_packet->ocean_reclaim_requirement_pct);
-  dio_put_uint8(&dout, real_packet->land_channel_requirement_pct);
-  dio_put_uint8(&dout, real_packet->lake_max_size);
-  dio_put_uint8(&dout, real_packet->river_move_mode);
-  dio_put_sint16(&dout, real_packet->river_defense_bonus);
-  dio_put_uint32(&dout, real_packet->river_trade_incr);
-  dio_put_string(&dout, real_packet->river_help_text);
-  dio_put_uint32(&dout, real_packet->road_superhighway_trade_bonus);
+  dio_put_bool8(&dout, "may_road", real_packet->may_road);
+  dio_put_bool8(&dout, "may_irrigate", real_packet->may_irrigate);
+  dio_put_bool8(&dout, "may_mine", real_packet->may_mine);
+  dio_put_bool8(&dout, "may_transform", real_packet->may_transform);
+  dio_put_uint8(&dout, "ocean_reclaim_requirement_pct", real_packet->ocean_reclaim_requirement_pct);
+  dio_put_uint8(&dout, "land_channel_requirement_pct", real_packet->land_channel_requirement_pct);
+  dio_put_uint8(&dout, "lake_max_size", real_packet->lake_max_size);
+  dio_put_uint8(&dout, "river_move_mode", real_packet->river_move_mode);
+  dio_put_sint16(&dout, "river_defense_bonus", real_packet->river_defense_bonus);
+  dio_put_uint32(&dout, "river_trade_incr", real_packet->river_trade_incr);
+  dio_put_string(&dout, "river_help_text", real_packet->river_help_text);
+  dio_put_uint32(&dout, "road_superhighway_trade_bonus", real_packet->road_superhighway_trade_bonus);
 
     {
-      int i;
-
-      for (i = 0; i < O_LAST; i++) {
-        dio_put_uint32(&dout, real_packet->rail_tile_bonus[i]);
-      }
+        dio_put_array_uint32(&dout, "rail_tile_bonus", (int*)real_packet->rail_tile_bonus, O_LAST);
     } 
 
     {
-      int i;
-
-      for (i = 0; i < O_LAST; i++) {
-        dio_put_uint8(&dout, real_packet->pollution_tile_penalty[i]);
-      }
+        dio_put_array_uint8(&dout, "pollution_tile_penalty", (int*)real_packet->pollution_tile_penalty, O_LAST);
     } 
 
     {
-      int i;
-
-      for (i = 0; i < O_LAST; i++) {
-        dio_put_uint8(&dout, real_packet->fallout_tile_penalty[i]);
-      }
+        dio_put_array_uint8(&dout, "fallout_tile_penalty", (int*)real_packet->fallout_tile_penalty, O_LAST);
     } 
 
   SEND_PACKET_END;
@@ -14164,19 +13924,19 @@ static struct packet_ruleset_nation_groups *receive_packet_ruleset_nation_groups
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "ngroups", &readin);
     real_packet->ngroups = readin;
   }
   
   {
-    int i;
+     int i;
   
     if(real_packet->ngroups > MAX_NUM_NATION_GROUPS) {
       freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
       real_packet->ngroups = MAX_NUM_NATION_GROUPS;
     }
     for (i = 0; i < real_packet->ngroups; i++) {
-      dio_get_string(&din, real_packet->groups[i], sizeof(real_packet->groups[i]));
+      dio_get_string(pc->json_packet, "groups", real_packet->groups[i], sizeof(real_packet->groups[i]));
     }
   }
 
@@ -14188,14 +13948,10 @@ static int send_packet_ruleset_nation_groups_100(struct connection *pc, const st
   const struct packet_ruleset_nation_groups *real_packet = packet;
   SEND_PACKET_START(PACKET_RULESET_NATION_GROUPS);
 
-  dio_put_uint8(&dout, real_packet->ngroups);
+  dio_put_uint8(&dout, "ngroups", real_packet->ngroups);
 
     {
-      int i;
-
-      for (i = 0; i < real_packet->ngroups; i++) {
-        dio_put_string(&dout, real_packet->groups[i]);
-      }
+         /*not supported yet... dio_put_string_array(&dout, "groups", (char *)real_packet->groups, real_packet->ngroups);*/ 
     } 
 
   SEND_PACKET_END;
@@ -14271,42 +14027,42 @@ static struct packet_ruleset_nation *receive_packet_ruleset_nation_100(struct co
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "id", &readin);
     real_packet->id = readin;
   }
-  dio_get_string(&din, real_packet->adjective, sizeof(real_packet->adjective));
-  dio_get_string(&din, real_packet->noun_plural, sizeof(real_packet->noun_plural));
-  dio_get_string(&din, real_packet->graphic_str, sizeof(real_packet->graphic_str));
-  dio_get_string(&din, real_packet->graphic_alt, sizeof(real_packet->graphic_alt));
-  dio_get_string(&din, real_packet->legend, sizeof(real_packet->legend));
+  dio_get_string(pc->json_packet, "adjective", real_packet->adjective, sizeof(real_packet->adjective));
+  dio_get_string(pc->json_packet, "noun_plural", real_packet->noun_plural, sizeof(real_packet->noun_plural));
+  dio_get_string(pc->json_packet, "graphic_str", real_packet->graphic_str, sizeof(real_packet->graphic_str));
+  dio_get_string(pc->json_packet, "graphic_alt", real_packet->graphic_alt, sizeof(real_packet->graphic_alt));
+  dio_get_string(pc->json_packet, "legend", real_packet->legend, sizeof(real_packet->legend));
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "city_style", &readin);
     real_packet->city_style = readin;
   }
   
   {
-    int i;
+     int i;
   
     for (i = 0; i < MAX_NUM_UNIT_LIST; i++) {
       {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "init_units", &readin);
     real_packet->init_units[i] = readin;
   }
     }
   }
   
   {
-    int i;
+     int i;
   
     for (i = 0; i < MAX_NUM_BUILDING_LIST; i++) {
       {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "init_buildings", &readin);
     real_packet->init_buildings[i] = readin;
   }
     }
@@ -14314,56 +14070,56 @@ static struct packet_ruleset_nation *receive_packet_ruleset_nation_100(struct co
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "init_government", &readin);
     real_packet->init_government = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "leader_count", &readin);
     real_packet->leader_count = readin;
   }
   
   {
-    int i;
+     int i;
   
     if(real_packet->leader_count > MAX_NUM_LEADERS) {
       freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
       real_packet->leader_count = MAX_NUM_LEADERS;
     }
     for (i = 0; i < real_packet->leader_count; i++) {
-      dio_get_string(&din, real_packet->leader_name[i], sizeof(real_packet->leader_name[i]));
+      dio_get_string(pc->json_packet, "leader_name", real_packet->leader_name[i], sizeof(real_packet->leader_name[i]));
     }
   }
   
   {
-    int i;
+     int i;
   
     if(real_packet->leader_count > MAX_NUM_LEADERS) {
       freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
       real_packet->leader_count = MAX_NUM_LEADERS;
     }
     for (i = 0; i < real_packet->leader_count; i++) {
-      dio_get_bool8(&din, &real_packet->leader_sex[i]);
+      dio_get_bool8(pc->json_packet, "leader_sex", &real_packet->leader_sex[i]);
     }
   }
-  dio_get_bool8(&din, &real_packet->is_available);
-  dio_get_bool8(&din, &real_packet->is_playable);
+  dio_get_bool8(pc->json_packet, "is_available", &real_packet->is_available);
+  dio_get_bool8(pc->json_packet, "is_playable", &real_packet->is_playable);
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "barbarian_type", &readin);
     real_packet->barbarian_type = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "ngroups", &readin);
     real_packet->ngroups = readin;
   }
   
   {
-    int i;
+     int i;
   
     if(real_packet->ngroups > MAX_NUM_NATION_GROUPS) {
       freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
@@ -14373,7 +14129,7 @@ static struct packet_ruleset_nation *receive_packet_ruleset_nation_100(struct co
       {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "groups", &readin);
     real_packet->groups[i] = readin;
   }
     }
@@ -14387,58 +14143,38 @@ static int send_packet_ruleset_nation_100(struct connection *pc, const struct pa
   const struct packet_ruleset_nation *real_packet = packet;
   SEND_PACKET_START(PACKET_RULESET_NATION);
 
-  dio_put_uint32(&dout, real_packet->id);
-  dio_put_string(&dout, real_packet->adjective);
-  dio_put_string(&dout, real_packet->noun_plural);
-  dio_put_string(&dout, real_packet->graphic_str);
-  dio_put_string(&dout, real_packet->graphic_alt);
-  dio_put_string(&dout, real_packet->legend);
-  dio_put_uint8(&dout, real_packet->city_style);
+  dio_put_uint32(&dout, "id", real_packet->id);
+  dio_put_string(&dout, "adjective", real_packet->adjective);
+  dio_put_string(&dout, "noun_plural", real_packet->noun_plural);
+  dio_put_string(&dout, "graphic_str", real_packet->graphic_str);
+  dio_put_string(&dout, "graphic_alt", real_packet->graphic_alt);
+  dio_put_string(&dout, "legend", real_packet->legend);
+  dio_put_uint8(&dout, "city_style", real_packet->city_style);
 
     {
-      int i;
-
-      for (i = 0; i < MAX_NUM_UNIT_LIST; i++) {
-        dio_put_uint8(&dout, real_packet->init_units[i]);
-      }
+        dio_put_array_uint8(&dout, "init_units", (int*)real_packet->init_units, MAX_NUM_UNIT_LIST);
     } 
 
     {
-      int i;
-
-      for (i = 0; i < MAX_NUM_BUILDING_LIST; i++) {
-        dio_put_uint8(&dout, real_packet->init_buildings[i]);
-      }
+        dio_put_array_uint8(&dout, "init_buildings", (int*)real_packet->init_buildings, MAX_NUM_BUILDING_LIST);
     } 
-  dio_put_uint8(&dout, real_packet->init_government);
-  dio_put_uint8(&dout, real_packet->leader_count);
+  dio_put_uint8(&dout, "init_government", real_packet->init_government);
+  dio_put_uint8(&dout, "leader_count", real_packet->leader_count);
 
     {
-      int i;
-
-      for (i = 0; i < real_packet->leader_count; i++) {
-        dio_put_string(&dout, real_packet->leader_name[i]);
-      }
+         /*not supported yet... dio_put_string_array(&dout, "leader_name", (char *)real_packet->leader_name, real_packet->leader_count);*/ 
     } 
 
     {
-      int i;
-
-      for (i = 0; i < real_packet->leader_count; i++) {
-        dio_put_bool8(&dout, real_packet->leader_sex[i]);
-      }
+        dio_put_array_bool8(&dout, "leader_sex", (bool*)real_packet->leader_sex, real_packet->leader_count);
     } 
-  dio_put_bool8(&dout, real_packet->is_available);
-  dio_put_bool8(&dout, real_packet->is_playable);
-  dio_put_uint8(&dout, real_packet->barbarian_type);
-  dio_put_uint8(&dout, real_packet->ngroups);
+  dio_put_bool8(&dout, "is_available", real_packet->is_available);
+  dio_put_bool8(&dout, "is_playable", real_packet->is_playable);
+  dio_put_uint8(&dout, "barbarian_type", real_packet->barbarian_type);
+  dio_put_uint8(&dout, "ngroups", real_packet->ngroups);
 
     {
-      int i;
-
-      for (i = 0; i < real_packet->ngroups; i++) {
-        dio_put_uint8(&dout, real_packet->groups[i]);
-      }
+        dio_put_array_uint8(&dout, "groups", (int*)real_packet->groups, real_packet->ngroups);
     } 
 
   SEND_PACKET_END;
@@ -14514,38 +14250,38 @@ static struct packet_ruleset_city *receive_packet_ruleset_city_100(struct connec
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "style_id", &readin);
     real_packet->style_id = readin;
   }
-  dio_get_string(&din, real_packet->name, sizeof(real_packet->name));
-  dio_get_string(&din, real_packet->citizens_graphic, sizeof(real_packet->citizens_graphic));
-  dio_get_string(&din, real_packet->citizens_graphic_alt, sizeof(real_packet->citizens_graphic_alt));
+  dio_get_string(pc->json_packet, "name", real_packet->name, sizeof(real_packet->name));
+  dio_get_string(pc->json_packet, "citizens_graphic", real_packet->citizens_graphic, sizeof(real_packet->citizens_graphic));
+  dio_get_string(pc->json_packet, "citizens_graphic_alt", real_packet->citizens_graphic_alt, sizeof(real_packet->citizens_graphic_alt));
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "reqs_count", &readin);
     real_packet->reqs_count = readin;
   }
   
   {
-    int i;
+     int i;
   
     if(real_packet->reqs_count > MAX_NUM_REQS) {
       freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
       real_packet->reqs_count = MAX_NUM_REQS;
     }
     for (i = 0; i < real_packet->reqs_count; i++) {
-      dio_get_requirement(&din, &real_packet->reqs[i]);
+      dio_get_requirement(pc->json_packet, "reqs", &real_packet->reqs[i]);
     }
   }
-  dio_get_string(&din, real_packet->graphic, sizeof(real_packet->graphic));
-  dio_get_string(&din, real_packet->graphic_alt, sizeof(real_packet->graphic_alt));
-  dio_get_string(&din, real_packet->oceanic_graphic, sizeof(real_packet->oceanic_graphic));
-  dio_get_string(&din, real_packet->oceanic_graphic_alt, sizeof(real_packet->oceanic_graphic_alt));
+  dio_get_string(pc->json_packet, "graphic", real_packet->graphic, sizeof(real_packet->graphic));
+  dio_get_string(pc->json_packet, "graphic_alt", real_packet->graphic_alt, sizeof(real_packet->graphic_alt));
+  dio_get_string(pc->json_packet, "oceanic_graphic", real_packet->oceanic_graphic, sizeof(real_packet->oceanic_graphic));
+  dio_get_string(pc->json_packet, "oceanic_graphic_alt", real_packet->oceanic_graphic_alt, sizeof(real_packet->oceanic_graphic_alt));
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "replaced_by", &readin);
     real_packet->replaced_by = readin;
   }
 
@@ -14557,24 +14293,20 @@ static int send_packet_ruleset_city_100(struct connection *pc, const struct pack
   const struct packet_ruleset_city *real_packet = packet;
   SEND_PACKET_START(PACKET_RULESET_CITY);
 
-  dio_put_uint8(&dout, real_packet->style_id);
-  dio_put_string(&dout, real_packet->name);
-  dio_put_string(&dout, real_packet->citizens_graphic);
-  dio_put_string(&dout, real_packet->citizens_graphic_alt);
-  dio_put_uint8(&dout, real_packet->reqs_count);
+  dio_put_uint8(&dout, "style_id", real_packet->style_id);
+  dio_put_string(&dout, "name", real_packet->name);
+  dio_put_string(&dout, "citizens_graphic", real_packet->citizens_graphic);
+  dio_put_string(&dout, "citizens_graphic_alt", real_packet->citizens_graphic_alt);
+  dio_put_uint8(&dout, "reqs_count", real_packet->reqs_count);
 
     {
-      int i;
-
-      for (i = 0; i < real_packet->reqs_count; i++) {
-        dio_put_requirement(&dout, &real_packet->reqs[i]);
-      }
+        dio_put_requirement(&dout, "reqs", (struct requirement*)real_packet->reqs, real_packet->reqs_count);
     } 
-  dio_put_string(&dout, real_packet->graphic);
-  dio_put_string(&dout, real_packet->graphic_alt);
-  dio_put_string(&dout, real_packet->oceanic_graphic);
-  dio_put_string(&dout, real_packet->oceanic_graphic_alt);
-  dio_put_sint8(&dout, real_packet->replaced_by);
+  dio_put_string(&dout, "graphic", real_packet->graphic);
+  dio_put_string(&dout, "graphic_alt", real_packet->graphic_alt);
+  dio_put_string(&dout, "oceanic_graphic", real_packet->oceanic_graphic);
+  dio_put_string(&dout, "oceanic_graphic_alt", real_packet->oceanic_graphic_alt);
+  dio_put_sint8(&dout, "replaced_by", real_packet->replaced_by);
 
   SEND_PACKET_END;
 }
@@ -14649,75 +14381,75 @@ static struct packet_ruleset_building *receive_packet_ruleset_building_100(struc
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "id", &readin);
     real_packet->id = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "genus", &readin);
     real_packet->genus = readin;
   }
-  dio_get_string(&din, real_packet->name, sizeof(real_packet->name));
+  dio_get_string(pc->json_packet, "name", real_packet->name, sizeof(real_packet->name));
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "build_cost", &readin);
     real_packet->build_cost = readin;
   }
-  dio_get_string(&din, real_packet->graphic_str, sizeof(real_packet->graphic_str));
-  dio_get_string(&din, real_packet->graphic_alt, sizeof(real_packet->graphic_alt));
+  dio_get_string(pc->json_packet, "graphic_str", real_packet->graphic_str, sizeof(real_packet->graphic_str));
+  dio_get_string(pc->json_packet, "graphic_alt", real_packet->graphic_alt, sizeof(real_packet->graphic_alt));
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "reqs_count", &readin);
     real_packet->reqs_count = readin;
   }
   
   {
-    int i;
+     int i;
   
     if(real_packet->reqs_count > MAX_NUM_REQS) {
       freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
       real_packet->reqs_count = MAX_NUM_REQS;
     }
     for (i = 0; i < real_packet->reqs_count; i++) {
-      dio_get_requirement(&din, &real_packet->reqs[i]);
+      dio_get_requirement(pc->json_packet, "reqs", &real_packet->reqs[i]);
     }
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "obsolete_by", &readin);
     real_packet->obsolete_by = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "replaced_by", &readin);
     real_packet->replaced_by = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "upkeep", &readin);
     real_packet->upkeep = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "sabotage", &readin);
     real_packet->sabotage = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "flags", &readin);
     real_packet->flags = readin;
   }
-  dio_get_string(&din, real_packet->soundtag, sizeof(real_packet->soundtag));
-  dio_get_string(&din, real_packet->soundtag_alt, sizeof(real_packet->soundtag_alt));
-  dio_get_string(&din, real_packet->helptext, sizeof(real_packet->helptext));
+  dio_get_string(pc->json_packet, "soundtag", real_packet->soundtag, sizeof(real_packet->soundtag));
+  dio_get_string(pc->json_packet, "soundtag_alt", real_packet->soundtag_alt, sizeof(real_packet->soundtag_alt));
+  dio_get_string(pc->json_packet, "helptext", real_packet->helptext, sizeof(real_packet->helptext));
 
   RECEIVE_PACKET_END(real_packet);
 }
@@ -14727,29 +14459,25 @@ static int send_packet_ruleset_building_100(struct connection *pc, const struct 
   const struct packet_ruleset_building *real_packet = packet;
   SEND_PACKET_START(PACKET_RULESET_BUILDING);
 
-  dio_put_uint8(&dout, real_packet->id);
-  dio_put_uint8(&dout, real_packet->genus);
-  dio_put_string(&dout, real_packet->name);
-  dio_put_uint32(&dout, real_packet->build_cost);
-  dio_put_string(&dout, real_packet->graphic_str);
-  dio_put_string(&dout, real_packet->graphic_alt);
-  dio_put_uint32(&dout, real_packet->reqs_count);
+  dio_put_uint8(&dout, "id", real_packet->id);
+  dio_put_uint8(&dout, "genus", real_packet->genus);
+  dio_put_string(&dout, "name", real_packet->name);
+  dio_put_uint32(&dout, "build_cost", real_packet->build_cost);
+  dio_put_string(&dout, "graphic_str", real_packet->graphic_str);
+  dio_put_string(&dout, "graphic_alt", real_packet->graphic_alt);
+  dio_put_uint32(&dout, "reqs_count", real_packet->reqs_count);
 
     {
-      int i;
-
-      for (i = 0; i < real_packet->reqs_count; i++) {
-        dio_put_requirement(&dout, &real_packet->reqs[i]);
-      }
+        dio_put_requirement(&dout, "reqs", (struct requirement*)real_packet->reqs, real_packet->reqs_count);
     } 
-  dio_put_uint8(&dout, real_packet->obsolete_by);
-  dio_put_uint8(&dout, real_packet->replaced_by);
-  dio_put_uint32(&dout, real_packet->upkeep);
-  dio_put_uint32(&dout, real_packet->sabotage);
-  dio_put_uint32(&dout, real_packet->flags);
-  dio_put_string(&dout, real_packet->soundtag);
-  dio_put_string(&dout, real_packet->soundtag_alt);
-  dio_put_string(&dout, real_packet->helptext);
+  dio_put_uint8(&dout, "obsolete_by", real_packet->obsolete_by);
+  dio_put_uint8(&dout, "replaced_by", real_packet->replaced_by);
+  dio_put_uint32(&dout, "upkeep", real_packet->upkeep);
+  dio_put_uint32(&dout, "sabotage", real_packet->sabotage);
+  dio_put_uint32(&dout, "flags", real_packet->flags);
+  dio_put_string(&dout, "soundtag", real_packet->soundtag);
+  dio_put_string(&dout, "soundtag_alt", real_packet->soundtag_alt);
+  dio_put_string(&dout, "helptext", real_packet->helptext);
 
   SEND_PACKET_END;
 }
@@ -14824,35 +14552,35 @@ static struct packet_ruleset_terrain *receive_packet_ruleset_terrain_100(struct 
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "id", &readin);
     real_packet->id = readin;
   }
-  DIO_BV_GET(&din, real_packet->flags);
-  DIO_BV_GET(&din, real_packet->native_to);
-  dio_get_string(&din, real_packet->name_orig, sizeof(real_packet->name_orig));
-  dio_get_string(&din, real_packet->graphic_str, sizeof(real_packet->graphic_str));
-  dio_get_string(&din, real_packet->graphic_alt, sizeof(real_packet->graphic_alt));
+   /* not supported yet. DIO_BV_GET(pc->json_packet, real_packet->flags);*/
+   /* not supported yet. DIO_BV_GET(pc->json_packet, real_packet->native_to);*/
+  dio_get_string(pc->json_packet, "name_orig", real_packet->name_orig, sizeof(real_packet->name_orig));
+  dio_get_string(pc->json_packet, "graphic_str", real_packet->graphic_str, sizeof(real_packet->graphic_str));
+  dio_get_string(pc->json_packet, "graphic_alt", real_packet->graphic_alt, sizeof(real_packet->graphic_alt));
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "movement_cost", &readin);
     real_packet->movement_cost = readin;
   }
   {
     int readin;
   
-    dio_get_sint16(&din, &readin);
+    dio_get_sint16(pc->json_packet, "defense_bonus", &readin);
     real_packet->defense_bonus = readin;
   }
   
   {
-    int i;
+     int i;
   
     for (i = 0; i < O_LAST; i++) {
       {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "output", &readin);
     real_packet->output[i] = readin;
   }
     }
@@ -14860,12 +14588,12 @@ static struct packet_ruleset_terrain *receive_packet_ruleset_terrain_100(struct 
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "num_resources", &readin);
     real_packet->num_resources = readin;
   }
   
   {
-    int i;
+     int i;
   
     if(real_packet->num_resources > MAX_NUM_RESOURCES) {
       freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
@@ -14875,7 +14603,7 @@ static struct packet_ruleset_terrain *receive_packet_ruleset_terrain_100(struct 
       {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "resources", &readin);
     real_packet->resources[i] = readin;
   }
     }
@@ -14883,82 +14611,82 @@ static struct packet_ruleset_terrain *receive_packet_ruleset_terrain_100(struct 
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "road_trade_incr", &readin);
     real_packet->road_trade_incr = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "road_time", &readin);
     real_packet->road_time = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "irrigation_result", &readin);
     real_packet->irrigation_result = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "irrigation_food_incr", &readin);
     real_packet->irrigation_food_incr = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "irrigation_time", &readin);
     real_packet->irrigation_time = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "mining_result", &readin);
     real_packet->mining_result = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "mining_shield_incr", &readin);
     real_packet->mining_shield_incr = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "mining_time", &readin);
     real_packet->mining_time = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "transform_result", &readin);
     real_packet->transform_result = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "transform_time", &readin);
     real_packet->transform_time = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "rail_time", &readin);
     real_packet->rail_time = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "clean_pollution_time", &readin);
     real_packet->clean_pollution_time = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "clean_fallout_time", &readin);
     real_packet->clean_fallout_time = readin;
   }
-  dio_get_string(&din, real_packet->helptext, sizeof(real_packet->helptext));
+  dio_get_string(pc->json_packet, "helptext", real_packet->helptext, sizeof(real_packet->helptext));
 
   RECEIVE_PACKET_END(real_packet);
 }
@@ -14968,45 +14696,37 @@ static int send_packet_ruleset_terrain_100(struct connection *pc, const struct p
   const struct packet_ruleset_terrain *real_packet = packet;
   SEND_PACKET_START(PACKET_RULESET_TERRAIN);
 
-  dio_put_uint8(&dout, real_packet->id);
-DIO_BV_PUT(&dout, packet->flags);
-DIO_BV_PUT(&dout, packet->native_to);
-  dio_put_string(&dout, real_packet->name_orig);
-  dio_put_string(&dout, real_packet->graphic_str);
-  dio_put_string(&dout, real_packet->graphic_alt);
-  dio_put_uint8(&dout, real_packet->movement_cost);
-  dio_put_sint16(&dout, real_packet->defense_bonus);
+  dio_put_uint8(&dout, "id", real_packet->id);
+DIO_BV_PUT(&dout, "flags", packet->flags);
+DIO_BV_PUT(&dout, "native_to", packet->native_to);
+  dio_put_string(&dout, "name_orig", real_packet->name_orig);
+  dio_put_string(&dout, "graphic_str", real_packet->graphic_str);
+  dio_put_string(&dout, "graphic_alt", real_packet->graphic_alt);
+  dio_put_uint8(&dout, "movement_cost", real_packet->movement_cost);
+  dio_put_sint16(&dout, "defense_bonus", real_packet->defense_bonus);
 
     {
-      int i;
-
-      for (i = 0; i < O_LAST; i++) {
-        dio_put_uint8(&dout, real_packet->output[i]);
-      }
+        dio_put_array_uint8(&dout, "output", (int*)real_packet->output, O_LAST);
     } 
-  dio_put_uint8(&dout, real_packet->num_resources);
+  dio_put_uint8(&dout, "num_resources", real_packet->num_resources);
 
     {
-      int i;
-
-      for (i = 0; i < real_packet->num_resources; i++) {
-        dio_put_uint8(&dout, real_packet->resources[i]);
-      }
+        dio_put_array_uint8(&dout, "resources", (int*)real_packet->resources, real_packet->num_resources);
     } 
-  dio_put_uint8(&dout, real_packet->road_trade_incr);
-  dio_put_uint8(&dout, real_packet->road_time);
-  dio_put_uint8(&dout, real_packet->irrigation_result);
-  dio_put_uint8(&dout, real_packet->irrigation_food_incr);
-  dio_put_uint8(&dout, real_packet->irrigation_time);
-  dio_put_uint8(&dout, real_packet->mining_result);
-  dio_put_uint8(&dout, real_packet->mining_shield_incr);
-  dio_put_uint8(&dout, real_packet->mining_time);
-  dio_put_uint8(&dout, real_packet->transform_result);
-  dio_put_uint8(&dout, real_packet->transform_time);
-  dio_put_uint8(&dout, real_packet->rail_time);
-  dio_put_uint8(&dout, real_packet->clean_pollution_time);
-  dio_put_uint8(&dout, real_packet->clean_fallout_time);
-  dio_put_string(&dout, real_packet->helptext);
+  dio_put_uint8(&dout, "road_trade_incr", real_packet->road_trade_incr);
+  dio_put_uint8(&dout, "road_time", real_packet->road_time);
+  dio_put_uint8(&dout, "irrigation_result", real_packet->irrigation_result);
+  dio_put_uint8(&dout, "irrigation_food_incr", real_packet->irrigation_food_incr);
+  dio_put_uint8(&dout, "irrigation_time", real_packet->irrigation_time);
+  dio_put_uint8(&dout, "mining_result", real_packet->mining_result);
+  dio_put_uint8(&dout, "mining_shield_incr", real_packet->mining_shield_incr);
+  dio_put_uint8(&dout, "mining_time", real_packet->mining_time);
+  dio_put_uint8(&dout, "transform_result", real_packet->transform_result);
+  dio_put_uint8(&dout, "transform_time", real_packet->transform_time);
+  dio_put_uint8(&dout, "rail_time", real_packet->rail_time);
+  dio_put_uint8(&dout, "clean_pollution_time", real_packet->clean_pollution_time);
+  dio_put_uint8(&dout, "clean_fallout_time", real_packet->clean_fallout_time);
+  dio_put_string(&dout, "helptext", real_packet->helptext);
 
   SEND_PACKET_END;
 }
@@ -15081,35 +14801,35 @@ static struct packet_ruleset_unit_class *receive_packet_ruleset_unit_class_100(s
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "id", &readin);
     real_packet->id = readin;
   }
-  dio_get_string(&din, real_packet->name, sizeof(real_packet->name));
+  dio_get_string(pc->json_packet, "name", real_packet->name, sizeof(real_packet->name));
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "move_type", &readin);
     real_packet->move_type = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "min_speed", &readin);
     real_packet->min_speed = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "hp_loss_pct", &readin);
     real_packet->hp_loss_pct = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "hut_behavior", &readin);
     real_packet->hut_behavior = readin;
   }
-  DIO_BV_GET(&din, real_packet->flags);
+   /* not supported yet. DIO_BV_GET(pc->json_packet, real_packet->flags);*/
 
   RECEIVE_PACKET_END(real_packet);
 }
@@ -15119,13 +14839,13 @@ static int send_packet_ruleset_unit_class_100(struct connection *pc, const struc
   const struct packet_ruleset_unit_class *real_packet = packet;
   SEND_PACKET_START(PACKET_RULESET_UNIT_CLASS);
 
-  dio_put_uint8(&dout, real_packet->id);
-  dio_put_string(&dout, real_packet->name);
-  dio_put_uint8(&dout, real_packet->move_type);
-  dio_put_uint8(&dout, real_packet->min_speed);
-  dio_put_uint8(&dout, real_packet->hp_loss_pct);
-  dio_put_uint8(&dout, real_packet->hut_behavior);
-DIO_BV_PUT(&dout, packet->flags);
+  dio_put_uint8(&dout, "id", real_packet->id);
+  dio_put_string(&dout, "name", real_packet->name);
+  dio_put_uint8(&dout, "move_type", real_packet->move_type);
+  dio_put_uint8(&dout, "min_speed", real_packet->min_speed);
+  dio_put_uint8(&dout, "hp_loss_pct", real_packet->hp_loss_pct);
+  dio_put_uint8(&dout, "hut_behavior", real_packet->hut_behavior);
+DIO_BV_PUT(&dout, "flags", packet->flags);
 
   SEND_PACKET_END;
 }
@@ -15200,71 +14920,71 @@ static struct packet_ruleset_base *receive_packet_ruleset_base_100(struct connec
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "id", &readin);
     real_packet->id = readin;
   }
-  dio_get_string(&din, real_packet->name, sizeof(real_packet->name));
-  dio_get_bool8(&din, &real_packet->buildable);
-  dio_get_bool8(&din, &real_packet->pillageable);
-  dio_get_string(&din, real_packet->graphic_str, sizeof(real_packet->graphic_str));
-  dio_get_string(&din, real_packet->graphic_alt, sizeof(real_packet->graphic_alt));
-  dio_get_string(&din, real_packet->activity_gfx, sizeof(real_packet->activity_gfx));
+  dio_get_string(pc->json_packet, "name", real_packet->name, sizeof(real_packet->name));
+  dio_get_bool8(pc->json_packet, "buildable", &real_packet->buildable);
+  dio_get_bool8(pc->json_packet, "pillageable", &real_packet->pillageable);
+  dio_get_string(pc->json_packet, "graphic_str", real_packet->graphic_str, sizeof(real_packet->graphic_str));
+  dio_get_string(pc->json_packet, "graphic_alt", real_packet->graphic_alt, sizeof(real_packet->graphic_alt));
+  dio_get_string(pc->json_packet, "activity_gfx", real_packet->activity_gfx, sizeof(real_packet->activity_gfx));
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "reqs_count", &readin);
     real_packet->reqs_count = readin;
   }
   
   {
-    int i;
+     int i;
   
     if(real_packet->reqs_count > MAX_NUM_REQS) {
       freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
       real_packet->reqs_count = MAX_NUM_REQS;
     }
     for (i = 0; i < real_packet->reqs_count; i++) {
-      dio_get_requirement(&din, &real_packet->reqs[i]);
+      dio_get_requirement(pc->json_packet, "reqs", &real_packet->reqs[i]);
     }
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "gui_type", &readin);
     real_packet->gui_type = readin;
   }
-  DIO_BV_GET(&din, real_packet->native_to);
+   /* not supported yet. DIO_BV_GET(pc->json_packet, real_packet->native_to);*/
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "build_time", &readin);
     real_packet->build_time = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "defense_bonus", &readin);
     real_packet->defense_bonus = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "border_sq", &readin);
     real_packet->border_sq = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "vision_main_sq", &readin);
     real_packet->vision_main_sq = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "vision_invis_sq", &readin);
     real_packet->vision_invis_sq = readin;
   }
-  DIO_BV_GET(&din, real_packet->flags);
+   /* not supported yet. DIO_BV_GET(pc->json_packet, real_packet->flags);*/
 
   RECEIVE_PACKET_END(real_packet);
 }
@@ -15274,30 +14994,26 @@ static int send_packet_ruleset_base_100(struct connection *pc, const struct pack
   const struct packet_ruleset_base *real_packet = packet;
   SEND_PACKET_START(PACKET_RULESET_BASE);
 
-  dio_put_uint8(&dout, real_packet->id);
-  dio_put_string(&dout, real_packet->name);
-  dio_put_bool8(&dout, real_packet->buildable);
-  dio_put_bool8(&dout, real_packet->pillageable);
-  dio_put_string(&dout, real_packet->graphic_str);
-  dio_put_string(&dout, real_packet->graphic_alt);
-  dio_put_string(&dout, real_packet->activity_gfx);
-  dio_put_uint8(&dout, real_packet->reqs_count);
+  dio_put_uint8(&dout, "id", real_packet->id);
+  dio_put_string(&dout, "name", real_packet->name);
+  dio_put_bool8(&dout, "buildable", real_packet->buildable);
+  dio_put_bool8(&dout, "pillageable", real_packet->pillageable);
+  dio_put_string(&dout, "graphic_str", real_packet->graphic_str);
+  dio_put_string(&dout, "graphic_alt", real_packet->graphic_alt);
+  dio_put_string(&dout, "activity_gfx", real_packet->activity_gfx);
+  dio_put_uint8(&dout, "reqs_count", real_packet->reqs_count);
 
     {
-      int i;
-
-      for (i = 0; i < real_packet->reqs_count; i++) {
-        dio_put_requirement(&dout, &real_packet->reqs[i]);
-      }
+        dio_put_requirement(&dout, "reqs", (struct requirement*)real_packet->reqs, real_packet->reqs_count);
     } 
-  dio_put_uint8(&dout, real_packet->gui_type);
-DIO_BV_PUT(&dout, packet->native_to);
-  dio_put_uint8(&dout, real_packet->build_time);
-  dio_put_uint8(&dout, real_packet->defense_bonus);
-  dio_put_uint8(&dout, real_packet->border_sq);
-  dio_put_uint8(&dout, real_packet->vision_main_sq);
-  dio_put_uint8(&dout, real_packet->vision_invis_sq);
-DIO_BV_PUT(&dout, packet->flags);
+  dio_put_uint8(&dout, "gui_type", real_packet->gui_type);
+DIO_BV_PUT(&dout, "native_to", packet->native_to);
+  dio_put_uint8(&dout, "build_time", real_packet->build_time);
+  dio_put_uint8(&dout, "defense_bonus", real_packet->defense_bonus);
+  dio_put_uint8(&dout, "border_sq", real_packet->border_sq);
+  dio_put_uint8(&dout, "vision_main_sq", real_packet->vision_main_sq);
+  dio_put_uint8(&dout, "vision_invis_sq", real_packet->vision_invis_sq);
+DIO_BV_PUT(&dout, "flags", packet->flags);
 
   SEND_PACKET_END;
 }
@@ -15372,72 +15088,72 @@ static struct packet_ruleset_control *receive_packet_ruleset_control_100(struct 
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "num_unit_classes", &readin);
     real_packet->num_unit_classes = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "num_unit_types", &readin);
     real_packet->num_unit_types = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "num_impr_types", &readin);
     real_packet->num_impr_types = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "num_tech_types", &readin);
     real_packet->num_tech_types = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "num_base_types", &readin);
     real_packet->num_base_types = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "government_count", &readin);
     real_packet->government_count = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "nation_count", &readin);
     real_packet->nation_count = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "styles_count", &readin);
     real_packet->styles_count = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "terrain_count", &readin);
     real_packet->terrain_count = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "resource_count", &readin);
     real_packet->resource_count = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "num_specialist_types", &readin);
     real_packet->num_specialist_types = readin;
   }
-  dio_get_string(&din, real_packet->prefered_tileset, sizeof(real_packet->prefered_tileset));
-  dio_get_string(&din, real_packet->name, sizeof(real_packet->name));
-  dio_get_string(&din, real_packet->description, sizeof(real_packet->description));
+  dio_get_string(pc->json_packet, "prefered_tileset", real_packet->prefered_tileset, sizeof(real_packet->prefered_tileset));
+  dio_get_string(pc->json_packet, "name", real_packet->name, sizeof(real_packet->name));
+  dio_get_string(pc->json_packet, "description", real_packet->description, sizeof(real_packet->description));
 
   post_receive_packet_ruleset_control(pc, real_packet);
   RECEIVE_PACKET_END(real_packet);
@@ -15448,20 +15164,20 @@ static int send_packet_ruleset_control_100(struct connection *pc, const struct p
   const struct packet_ruleset_control *real_packet = packet;
   SEND_PACKET_START(PACKET_RULESET_CONTROL);
 
-  dio_put_uint8(&dout, real_packet->num_unit_classes);
-  dio_put_uint8(&dout, real_packet->num_unit_types);
-  dio_put_uint8(&dout, real_packet->num_impr_types);
-  dio_put_uint8(&dout, real_packet->num_tech_types);
-  dio_put_uint8(&dout, real_packet->num_base_types);
-  dio_put_uint8(&dout, real_packet->government_count);
-  dio_put_uint8(&dout, real_packet->nation_count);
-  dio_put_uint8(&dout, real_packet->styles_count);
-  dio_put_uint8(&dout, real_packet->terrain_count);
-  dio_put_uint8(&dout, real_packet->resource_count);
-  dio_put_uint8(&dout, real_packet->num_specialist_types);
-  dio_put_string(&dout, real_packet->prefered_tileset);
-  dio_put_string(&dout, real_packet->name);
-  dio_put_string(&dout, real_packet->description);
+  dio_put_uint8(&dout, "num_unit_classes", real_packet->num_unit_classes);
+  dio_put_uint8(&dout, "num_unit_types", real_packet->num_unit_types);
+  dio_put_uint8(&dout, "num_impr_types", real_packet->num_impr_types);
+  dio_put_uint8(&dout, "num_tech_types", real_packet->num_tech_types);
+  dio_put_uint8(&dout, "num_base_types", real_packet->num_base_types);
+  dio_put_uint8(&dout, "government_count", real_packet->government_count);
+  dio_put_uint8(&dout, "nation_count", real_packet->nation_count);
+  dio_put_uint8(&dout, "styles_count", real_packet->styles_count);
+  dio_put_uint8(&dout, "terrain_count", real_packet->terrain_count);
+  dio_put_uint8(&dout, "resource_count", real_packet->resource_count);
+  dio_put_uint8(&dout, "num_specialist_types", real_packet->num_specialist_types);
+  dio_put_string(&dout, "prefered_tileset", real_packet->prefered_tileset);
+  dio_put_string(&dout, "name", real_packet->name);
+  dio_put_string(&dout, "description", real_packet->description);
 
     post_send_packet_ruleset_control(pc, real_packet);
 SEND_PACKET_END;
@@ -15534,7 +15250,7 @@ void lsend_packet_ruleset_control(struct conn_list *dest, const struct packet_ru
 static struct packet_single_want_hack_req *receive_packet_single_want_hack_req_100(struct connection *pc, enum packet_type type)
 {
   RECEIVE_PACKET_START(packet_single_want_hack_req, real_packet);
-  dio_get_string(&din, real_packet->token, sizeof(real_packet->token));
+  dio_get_string(pc->json_packet, "token", real_packet->token, sizeof(real_packet->token));
 
   RECEIVE_PACKET_END(real_packet);
 }
@@ -15544,7 +15260,7 @@ static int send_packet_single_want_hack_req_100(struct connection *pc, const str
   const struct packet_single_want_hack_req *real_packet = packet;
   SEND_PACKET_START(PACKET_SINGLE_WANT_HACK_REQ);
 
-  dio_put_string(&dout, real_packet->token);
+  dio_put_string(&dout, "token", real_packet->token);
 
   SEND_PACKET_END;
 }
@@ -15609,7 +15325,7 @@ int send_packet_single_want_hack_req(struct connection *pc, const struct packet_
 static struct packet_single_want_hack_reply *receive_packet_single_want_hack_reply_100(struct connection *pc, enum packet_type type)
 {
   RECEIVE_PACKET_START(packet_single_want_hack_reply, real_packet);
-  dio_get_bool8(&din, &real_packet->you_have_hack);
+  dio_get_bool8(pc->json_packet, "you_have_hack", &real_packet->you_have_hack);
 
   RECEIVE_PACKET_END(real_packet);
 }
@@ -15619,7 +15335,7 @@ static int send_packet_single_want_hack_reply_100(struct connection *pc, const s
   const struct packet_single_want_hack_reply *real_packet = packet;
   SEND_PACKET_START(PACKET_SINGLE_WANT_HACK_REPLY);
 
-  dio_put_bool8(&dout, real_packet->you_have_hack);
+  dio_put_bool8(&dout, "you_have_hack", real_packet->you_have_hack);
 
   SEND_PACKET_END;
 }
@@ -15696,19 +15412,19 @@ static struct packet_ruleset_choices *receive_packet_ruleset_choices_100(struct 
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "ruleset_count", &readin);
     real_packet->ruleset_count = readin;
   }
   
   {
-    int i;
+     int i;
   
     if(real_packet->ruleset_count > MAX_NUM_RULESETS) {
       freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
       real_packet->ruleset_count = MAX_NUM_RULESETS;
     }
     for (i = 0; i < real_packet->ruleset_count; i++) {
-      dio_get_string(&din, real_packet->rulesets[i], sizeof(real_packet->rulesets[i]));
+      dio_get_string(pc->json_packet, "rulesets", real_packet->rulesets[i], sizeof(real_packet->rulesets[i]));
     }
   }
 
@@ -15720,14 +15436,10 @@ static int send_packet_ruleset_choices_100(struct connection *pc, const struct p
   const struct packet_ruleset_choices *real_packet = packet;
   SEND_PACKET_START(PACKET_RULESET_CHOICES);
 
-  dio_put_uint8(&dout, real_packet->ruleset_count);
+  dio_put_uint8(&dout, "ruleset_count", real_packet->ruleset_count);
 
     {
-      int i;
-
-      for (i = 0; i < real_packet->ruleset_count; i++) {
-        dio_put_string(&dout, real_packet->rulesets[i]);
-      }
+         /*not supported yet... dio_put_string_array(&dout, "rulesets", (char *)real_packet->rulesets, real_packet->ruleset_count);*/ 
     } 
 
   SEND_PACKET_END;
@@ -15793,41 +15505,41 @@ int send_packet_ruleset_choices(struct connection *pc, const struct packet_rules
 static struct packet_game_load *receive_packet_game_load_100(struct connection *pc, enum packet_type type)
 {
   RECEIVE_PACKET_START(packet_game_load, real_packet);
-  dio_get_bool8(&din, &real_packet->load_successful);
+  dio_get_bool8(pc->json_packet, "load_successful", &real_packet->load_successful);
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "nplayers", &readin);
     real_packet->nplayers = readin;
   }
-  dio_get_string(&din, real_packet->load_filename, sizeof(real_packet->load_filename));
+  dio_get_string(pc->json_packet, "load_filename", real_packet->load_filename, sizeof(real_packet->load_filename));
   
   {
-    int i;
+     int i;
   
     if(real_packet->nplayers > MAX_NUM_PLAYERS) {
       freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
       real_packet->nplayers = MAX_NUM_PLAYERS;
     }
     for (i = 0; i < real_packet->nplayers; i++) {
-      dio_get_string(&din, real_packet->name[i], sizeof(real_packet->name[i]));
+      dio_get_string(pc->json_packet, "name", real_packet->name[i], sizeof(real_packet->name[i]));
     }
   }
   
   {
-    int i;
+     int i;
   
     if(real_packet->nplayers > MAX_NUM_PLAYERS) {
       freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
       real_packet->nplayers = MAX_NUM_PLAYERS;
     }
     for (i = 0; i < real_packet->nplayers; i++) {
-      dio_get_string(&din, real_packet->username[i], sizeof(real_packet->username[i]));
+      dio_get_string(pc->json_packet, "username", real_packet->username[i], sizeof(real_packet->username[i]));
     }
   }
   
   {
-    int i;
+     int i;
   
     if(real_packet->nplayers > MAX_NUM_PLAYERS) {
       freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
@@ -15837,33 +15549,33 @@ static struct packet_game_load *receive_packet_game_load_100(struct connection *
       {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "nations", &readin);
     real_packet->nations[i] = readin;
   }
     }
   }
   
   {
-    int i;
+     int i;
   
     if(real_packet->nplayers > MAX_NUM_PLAYERS) {
       freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
       real_packet->nplayers = MAX_NUM_PLAYERS;
     }
     for (i = 0; i < real_packet->nplayers; i++) {
-      dio_get_bool8(&din, &real_packet->is_alive[i]);
+      dio_get_bool8(pc->json_packet, "is_alive", &real_packet->is_alive[i]);
     }
   }
   
   {
-    int i;
+     int i;
   
     if(real_packet->nplayers > MAX_NUM_PLAYERS) {
       freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
       real_packet->nplayers = MAX_NUM_PLAYERS;
     }
     for (i = 0; i < real_packet->nplayers; i++) {
-      dio_get_bool8(&din, &real_packet->is_ai[i]);
+      dio_get_bool8(pc->json_packet, "is_ai", &real_packet->is_ai[i]);
     }
   }
 
@@ -15875,48 +15587,28 @@ static int send_packet_game_load_100(struct connection *pc, const struct packet_
   const struct packet_game_load *real_packet = packet;
   SEND_PACKET_START(PACKET_GAME_LOAD);
 
-  dio_put_bool8(&dout, real_packet->load_successful);
-  dio_put_sint8(&dout, real_packet->nplayers);
-  dio_put_string(&dout, real_packet->load_filename);
+  dio_put_bool8(&dout, "load_successful", real_packet->load_successful);
+  dio_put_sint8(&dout, "nplayers", real_packet->nplayers);
+  dio_put_string(&dout, "load_filename", real_packet->load_filename);
 
     {
-      int i;
-
-      for (i = 0; i < real_packet->nplayers; i++) {
-        dio_put_string(&dout, real_packet->name[i]);
-      }
+         /*not supported yet... dio_put_string_array(&dout, "name", (char *)real_packet->name, real_packet->nplayers);*/ 
     } 
 
     {
-      int i;
-
-      for (i = 0; i < real_packet->nplayers; i++) {
-        dio_put_string(&dout, real_packet->username[i]);
-      }
+         /*not supported yet... dio_put_string_array(&dout, "username", (char *)real_packet->username, real_packet->nplayers);*/ 
     } 
 
     {
-      int i;
-
-      for (i = 0; i < real_packet->nplayers; i++) {
-        dio_put_uint32(&dout, real_packet->nations[i]);
-      }
+        dio_put_array_uint32(&dout, "nations", (int*)real_packet->nations, real_packet->nplayers);
     } 
 
     {
-      int i;
-
-      for (i = 0; i < real_packet->nplayers; i++) {
-        dio_put_bool8(&dout, real_packet->is_alive[i]);
-      }
+        dio_put_array_bool8(&dout, "is_alive", (bool*)real_packet->is_alive, real_packet->nplayers);
     } 
 
     {
-      int i;
-
-      for (i = 0; i < real_packet->nplayers; i++) {
-        dio_put_bool8(&dout, real_packet->is_ai[i]);
-      }
+        dio_put_array_bool8(&dout, "is_ai", (bool*)real_packet->is_ai, real_packet->nplayers);
     } 
 
   SEND_PACKET_END;
@@ -15992,25 +15684,25 @@ static struct packet_options_settable_control *receive_packet_options_settable_c
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "num_settings", &readin);
     real_packet->num_settings = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "num_categories", &readin);
     real_packet->num_categories = readin;
   }
   
   {
-    int i;
+     int i;
   
     if(real_packet->num_categories > 256) {
       freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
       real_packet->num_categories = 256;
     }
     for (i = 0; i < real_packet->num_categories; i++) {
-      dio_get_string(&din, real_packet->category_names[i], sizeof(real_packet->category_names[i]));
+      dio_get_string(pc->json_packet, "category_names", real_packet->category_names[i], sizeof(real_packet->category_names[i]));
     }
   }
 
@@ -16022,15 +15714,11 @@ static int send_packet_options_settable_control_100(struct connection *pc, const
   const struct packet_options_settable_control *real_packet = packet;
   SEND_PACKET_START(PACKET_OPTIONS_SETTABLE_CONTROL);
 
-  dio_put_uint32(&dout, real_packet->num_settings);
-  dio_put_uint8(&dout, real_packet->num_categories);
+  dio_put_uint32(&dout, "num_settings", real_packet->num_settings);
+  dio_put_uint8(&dout, "num_categories", real_packet->num_categories);
 
     {
-      int i;
-
-      for (i = 0; i < real_packet->num_categories; i++) {
-        dio_put_string(&dout, real_packet->category_names[i]);
-      }
+         /*not supported yet... dio_put_string_array(&dout, "category_names", (char *)real_packet->category_names, real_packet->num_categories);*/ 
     } 
 
   SEND_PACKET_END;
@@ -16106,54 +15794,54 @@ static struct packet_options_settable *receive_packet_options_settable_100(struc
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "id", &readin);
     real_packet->id = readin;
   }
-  dio_get_string(&din, real_packet->name, sizeof(real_packet->name));
-  dio_get_string(&din, real_packet->short_help, sizeof(real_packet->short_help));
+  dio_get_string(pc->json_packet, "name", real_packet->name, sizeof(real_packet->name));
+  dio_get_string(pc->json_packet, "short_help", real_packet->short_help, sizeof(real_packet->short_help));
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "stype", &readin);
     real_packet->stype = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "sclass", &readin);
     real_packet->sclass = readin;
   }
-  dio_get_bool8(&din, &real_packet->is_visible);
+  dio_get_bool8(pc->json_packet, "is_visible", &real_packet->is_visible);
   {
     int readin;
   
-    dio_get_sint32(&din, &readin);
+    dio_get_sint32(pc->json_packet, "val", &readin);
     real_packet->val = readin;
   }
   {
     int readin;
   
-    dio_get_sint32(&din, &readin);
+    dio_get_sint32(pc->json_packet, "default_val", &readin);
     real_packet->default_val = readin;
   }
   {
     int readin;
   
-    dio_get_sint32(&din, &readin);
+    dio_get_sint32(pc->json_packet, "min", &readin);
     real_packet->min = readin;
   }
   {
     int readin;
   
-    dio_get_sint32(&din, &readin);
+    dio_get_sint32(pc->json_packet, "max", &readin);
     real_packet->max = readin;
   }
-  dio_get_string(&din, real_packet->strval, sizeof(real_packet->strval));
-  dio_get_string(&din, real_packet->default_strval, sizeof(real_packet->default_strval));
+  dio_get_string(pc->json_packet, "strval", real_packet->strval, sizeof(real_packet->strval));
+  dio_get_string(pc->json_packet, "default_strval", real_packet->default_strval, sizeof(real_packet->default_strval));
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "scategory", &readin);
     real_packet->scategory = readin;
   }
 
@@ -16165,19 +15853,19 @@ static int send_packet_options_settable_100(struct connection *pc, const struct 
   const struct packet_options_settable *real_packet = packet;
   SEND_PACKET_START(PACKET_OPTIONS_SETTABLE);
 
-  dio_put_uint32(&dout, real_packet->id);
-  dio_put_string(&dout, real_packet->name);
-  dio_put_string(&dout, real_packet->short_help);
-  dio_put_uint8(&dout, real_packet->stype);
-  dio_put_uint8(&dout, real_packet->sclass);
-  dio_put_bool8(&dout, real_packet->is_visible);
-  dio_put_sint32(&dout, real_packet->val);
-  dio_put_sint32(&dout, real_packet->default_val);
-  dio_put_sint32(&dout, real_packet->min);
-  dio_put_sint32(&dout, real_packet->max);
-  dio_put_string(&dout, real_packet->strval);
-  dio_put_string(&dout, real_packet->default_strval);
-  dio_put_uint8(&dout, real_packet->scategory);
+  dio_put_uint32(&dout, "id", real_packet->id);
+  dio_put_string(&dout, "name", real_packet->name);
+  dio_put_string(&dout, "short_help", real_packet->short_help);
+  dio_put_uint8(&dout, "stype", real_packet->stype);
+  dio_put_uint8(&dout, "sclass", real_packet->sclass);
+  dio_put_bool8(&dout, "is_visible", real_packet->is_visible);
+  dio_put_sint32(&dout, "val", real_packet->val);
+  dio_put_sint32(&dout, "default_val", real_packet->default_val);
+  dio_put_sint32(&dout, "min", real_packet->min);
+  dio_put_sint32(&dout, "max", real_packet->max);
+  dio_put_string(&dout, "strval", real_packet->strval);
+  dio_put_string(&dout, "default_strval", real_packet->default_strval);
+  dio_put_uint8(&dout, "scategory", real_packet->scategory);
 
   SEND_PACKET_END;
 }
@@ -16252,13 +15940,13 @@ static struct packet_ruleset_effect *receive_packet_ruleset_effect_100(struct co
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "effect_type", &readin);
     real_packet->effect_type = readin;
   }
   {
     int readin;
   
-    dio_get_sint32(&din, &readin);
+    dio_get_sint32(pc->json_packet, "effect_value", &readin);
     real_packet->effect_value = readin;
   }
 
@@ -16270,8 +15958,8 @@ static int send_packet_ruleset_effect_100(struct connection *pc, const struct pa
   const struct packet_ruleset_effect *real_packet = packet;
   SEND_PACKET_START(PACKET_RULESET_EFFECT);
 
-  dio_put_uint8(&dout, real_packet->effect_type);
-  dio_put_sint32(&dout, real_packet->effect_value);
+  dio_put_uint8(&dout, "effect_type", real_packet->effect_type);
+  dio_put_sint32(&dout, "effect_value", real_packet->effect_value);
 
   SEND_PACKET_END;
 }
@@ -16346,30 +16034,30 @@ static struct packet_ruleset_effect_req *receive_packet_ruleset_effect_req_100(s
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "effect_id", &readin);
     real_packet->effect_id = readin;
   }
-  dio_get_bool8(&din, &real_packet->neg);
+  dio_get_bool8(pc->json_packet, "neg", &real_packet->neg);
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "source_type", &readin);
     real_packet->source_type = readin;
   }
   {
     int readin;
   
-    dio_get_sint32(&din, &readin);
+    dio_get_sint32(pc->json_packet, "source_value", &readin);
     real_packet->source_value = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "range", &readin);
     real_packet->range = readin;
   }
-  dio_get_bool8(&din, &real_packet->survives);
-  dio_get_bool8(&din, &real_packet->negated);
+  dio_get_bool8(pc->json_packet, "survives", &real_packet->survives);
+  dio_get_bool8(pc->json_packet, "negated", &real_packet->negated);
 
   RECEIVE_PACKET_END(real_packet);
 }
@@ -16379,13 +16067,13 @@ static int send_packet_ruleset_effect_req_100(struct connection *pc, const struc
   const struct packet_ruleset_effect_req *real_packet = packet;
   SEND_PACKET_START(PACKET_RULESET_EFFECT_REQ);
 
-  dio_put_uint32(&dout, real_packet->effect_id);
-  dio_put_bool8(&dout, real_packet->neg);
-  dio_put_uint8(&dout, real_packet->source_type);
-  dio_put_sint32(&dout, real_packet->source_value);
-  dio_put_uint8(&dout, real_packet->range);
-  dio_put_bool8(&dout, real_packet->survives);
-  dio_put_bool8(&dout, real_packet->negated);
+  dio_put_uint32(&dout, "effect_id", real_packet->effect_id);
+  dio_put_bool8(&dout, "neg", real_packet->neg);
+  dio_put_uint8(&dout, "source_type", real_packet->source_type);
+  dio_put_sint32(&dout, "source_value", real_packet->source_value);
+  dio_put_uint8(&dout, "range", real_packet->range);
+  dio_put_bool8(&dout, "survives", real_packet->survives);
+  dio_put_bool8(&dout, "negated", real_packet->negated);
 
   SEND_PACKET_END;
 }
@@ -16460,25 +16148,25 @@ static struct packet_ruleset_resource *receive_packet_ruleset_resource_100(struc
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "id", &readin);
     real_packet->id = readin;
   }
-  dio_get_string(&din, real_packet->name_orig, sizeof(real_packet->name_orig));
+  dio_get_string(pc->json_packet, "name_orig", real_packet->name_orig, sizeof(real_packet->name_orig));
   
   {
-    int i;
+     int i;
   
     for (i = 0; i < O_LAST; i++) {
       {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "output", &readin);
     real_packet->output[i] = readin;
   }
     }
   }
-  dio_get_string(&din, real_packet->graphic_str, sizeof(real_packet->graphic_str));
-  dio_get_string(&din, real_packet->graphic_alt, sizeof(real_packet->graphic_alt));
+  dio_get_string(pc->json_packet, "graphic_str", real_packet->graphic_str, sizeof(real_packet->graphic_str));
+  dio_get_string(pc->json_packet, "graphic_alt", real_packet->graphic_alt, sizeof(real_packet->graphic_alt));
 
   RECEIVE_PACKET_END(real_packet);
 }
@@ -16488,18 +16176,14 @@ static int send_packet_ruleset_resource_100(struct connection *pc, const struct 
   const struct packet_ruleset_resource *real_packet = packet;
   SEND_PACKET_START(PACKET_RULESET_RESOURCE);
 
-  dio_put_uint8(&dout, real_packet->id);
-  dio_put_string(&dout, real_packet->name_orig);
+  dio_put_uint8(&dout, "id", real_packet->id);
+  dio_put_string(&dout, "name_orig", real_packet->name_orig);
 
     {
-      int i;
-
-      for (i = 0; i < O_LAST; i++) {
-        dio_put_uint8(&dout, real_packet->output[i]);
-      }
+        dio_put_array_uint8(&dout, "output", (int*)real_packet->output, O_LAST);
     } 
-  dio_put_string(&dout, real_packet->graphic_str);
-  dio_put_string(&dout, real_packet->graphic_alt);
+  dio_put_string(&dout, "graphic_str", real_packet->graphic_str);
+  dio_put_string(&dout, "graphic_alt", real_packet->graphic_alt);
 
   SEND_PACKET_END;
 }
@@ -16571,10 +16255,10 @@ void lsend_packet_ruleset_resource(struct conn_list *dest, const struct packet_r
 static struct packet_scenario_info *receive_packet_scenario_info_100(struct connection *pc, enum packet_type type)
 {
   RECEIVE_PACKET_START(packet_scenario_info, real_packet);
-  dio_get_bool8(&din, &real_packet->is_scenario);
-  dio_get_string(&din, real_packet->name, sizeof(real_packet->name));
-  dio_get_string(&din, real_packet->description, sizeof(real_packet->description));
-  dio_get_bool8(&din, &real_packet->players);
+  dio_get_bool8(pc->json_packet, "is_scenario", &real_packet->is_scenario);
+  dio_get_string(pc->json_packet, "name", real_packet->name, sizeof(real_packet->name));
+  dio_get_string(pc->json_packet, "description", real_packet->description, sizeof(real_packet->description));
+  dio_get_bool8(pc->json_packet, "players", &real_packet->players);
 
   RECEIVE_PACKET_END(real_packet);
 }
@@ -16584,10 +16268,10 @@ static int send_packet_scenario_info_100(struct connection *pc, const struct pac
   const struct packet_scenario_info *real_packet = packet;
   SEND_PACKET_START(PACKET_SCENARIO_INFO);
 
-  dio_put_bool8(&dout, real_packet->is_scenario);
-  dio_put_string(&dout, real_packet->name);
-  dio_put_string(&dout, real_packet->description);
-  dio_put_bool8(&dout, real_packet->players);
+  dio_put_bool8(&dout, "is_scenario", real_packet->is_scenario);
+  dio_put_string(&dout, "name", real_packet->name);
+  dio_put_string(&dout, "description", real_packet->description);
+  dio_put_bool8(&dout, "players", real_packet->players);
 
   SEND_PACKET_END;
 }
@@ -16646,7 +16330,7 @@ int send_packet_scenario_info(struct connection *pc, const struct packet_scenari
 static struct packet_save_scenario *receive_packet_save_scenario_100(struct connection *pc, enum packet_type type)
 {
   RECEIVE_PACKET_START(packet_save_scenario, real_packet);
-  dio_get_string(&din, real_packet->name, sizeof(real_packet->name));
+  dio_get_string(pc->json_packet, "name", real_packet->name, sizeof(real_packet->name));
 
   RECEIVE_PACKET_END(real_packet);
 }
@@ -16656,7 +16340,7 @@ static int send_packet_save_scenario_100(struct connection *pc, const struct pac
   const struct packet_save_scenario *real_packet = packet;
   SEND_PACKET_START(PACKET_SAVE_SCENARIO);
 
-  dio_put_string(&dout, real_packet->name);
+  dio_put_string(&dout, "name", real_packet->name);
 
   SEND_PACKET_END;
 }
@@ -16733,21 +16417,21 @@ static struct packet_vote_new *receive_packet_vote_new_100(struct connection *pc
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "vote_no", &readin);
     real_packet->vote_no = readin;
   }
-  dio_get_string(&din, real_packet->user, sizeof(real_packet->user));
-  dio_get_string(&din, real_packet->desc, sizeof(real_packet->desc));
+  dio_get_string(pc->json_packet, "user", real_packet->user, sizeof(real_packet->user));
+  dio_get_string(pc->json_packet, "desc", real_packet->desc, sizeof(real_packet->desc));
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "percent_required", &readin);
     real_packet->percent_required = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "flags", &readin);
     real_packet->flags = readin;
   }
 
@@ -16759,11 +16443,11 @@ static int send_packet_vote_new_100(struct connection *pc, const struct packet_v
   const struct packet_vote_new *real_packet = packet;
   SEND_PACKET_START(PACKET_VOTE_NEW);
 
-  dio_put_uint32(&dout, real_packet->vote_no);
-  dio_put_string(&dout, real_packet->user);
-  dio_put_string(&dout, real_packet->desc);
-  dio_put_uint8(&dout, real_packet->percent_required);
-  dio_put_uint32(&dout, real_packet->flags);
+  dio_put_uint32(&dout, "vote_no", real_packet->vote_no);
+  dio_put_string(&dout, "user", real_packet->user);
+  dio_put_string(&dout, "desc", real_packet->desc);
+  dio_put_uint8(&dout, "percent_required", real_packet->percent_required);
+  dio_put_uint32(&dout, "flags", real_packet->flags);
 
   SEND_PACKET_END;
 }
@@ -16831,31 +16515,31 @@ static struct packet_vote_update *receive_packet_vote_update_100(struct connecti
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "vote_no", &readin);
     real_packet->vote_no = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "yes", &readin);
     real_packet->yes = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "no", &readin);
     real_packet->no = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "abstain", &readin);
     real_packet->abstain = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "num_voters", &readin);
     real_packet->num_voters = readin;
   }
 
@@ -16867,11 +16551,11 @@ static int send_packet_vote_update_100(struct connection *pc, const struct packe
   const struct packet_vote_update *real_packet = packet;
   SEND_PACKET_START(PACKET_VOTE_UPDATE);
 
-  dio_put_uint32(&dout, real_packet->vote_no);
-  dio_put_uint8(&dout, real_packet->yes);
-  dio_put_uint8(&dout, real_packet->no);
-  dio_put_uint8(&dout, real_packet->abstain);
-  dio_put_uint8(&dout, real_packet->num_voters);
+  dio_put_uint32(&dout, "vote_no", real_packet->vote_no);
+  dio_put_uint8(&dout, "yes", real_packet->yes);
+  dio_put_uint8(&dout, "no", real_packet->no);
+  dio_put_uint8(&dout, "abstain", real_packet->abstain);
+  dio_put_uint8(&dout, "num_voters", real_packet->num_voters);
 
   SEND_PACKET_END;
 }
@@ -16939,7 +16623,7 @@ static struct packet_vote_remove *receive_packet_vote_remove_100(struct connecti
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "vote_no", &readin);
     real_packet->vote_no = readin;
   }
 
@@ -16951,7 +16635,7 @@ static int send_packet_vote_remove_100(struct connection *pc, const struct packe
   const struct packet_vote_remove *real_packet = packet;
   SEND_PACKET_START(PACKET_VOTE_REMOVE);
 
-  dio_put_uint32(&dout, real_packet->vote_no);
+  dio_put_uint32(&dout, "vote_no", real_packet->vote_no);
 
   SEND_PACKET_END;
 }
@@ -17019,10 +16703,10 @@ static struct packet_vote_resolve *receive_packet_vote_resolve_100(struct connec
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "vote_no", &readin);
     real_packet->vote_no = readin;
   }
-  dio_get_bool8(&din, &real_packet->passed);
+  dio_get_bool8(pc->json_packet, "passed", &real_packet->passed);
 
   RECEIVE_PACKET_END(real_packet);
 }
@@ -17032,8 +16716,8 @@ static int send_packet_vote_resolve_100(struct connection *pc, const struct pack
   const struct packet_vote_resolve *real_packet = packet;
   SEND_PACKET_START(PACKET_VOTE_RESOLVE);
 
-  dio_put_uint32(&dout, real_packet->vote_no);
-  dio_put_bool8(&dout, real_packet->passed);
+  dio_put_uint32(&dout, "vote_no", real_packet->vote_no);
+  dio_put_bool8(&dout, "passed", real_packet->passed);
 
   SEND_PACKET_END;
 }
@@ -17101,13 +16785,13 @@ static struct packet_vote_submit *receive_packet_vote_submit_100(struct connecti
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "vote_no", &readin);
     real_packet->vote_no = readin;
   }
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "value", &readin);
     real_packet->value = readin;
   }
 
@@ -17119,8 +16803,8 @@ static int send_packet_vote_submit_100(struct connection *pc, const struct packe
   const struct packet_vote_submit *real_packet = packet;
   SEND_PACKET_START(PACKET_VOTE_SUBMIT);
 
-  dio_put_uint32(&dout, real_packet->vote_no);
-  dio_put_sint8(&dout, real_packet->value);
+  dio_put_uint32(&dout, "vote_no", real_packet->vote_no);
+  dio_put_sint8(&dout, "value", real_packet->value);
 
   SEND_PACKET_END;
 }
@@ -17185,7 +16869,7 @@ int send_packet_vote_submit(struct connection *pc, const struct packet_vote_subm
 static struct packet_edit_mode *receive_packet_edit_mode_100(struct connection *pc, enum packet_type type)
 {
   RECEIVE_PACKET_START(packet_edit_mode, real_packet);
-  dio_get_bool8(&din, &real_packet->state);
+  dio_get_bool8(pc->json_packet, "state", &real_packet->state);
 
   RECEIVE_PACKET_END(real_packet);
 }
@@ -17195,7 +16879,7 @@ static int send_packet_edit_mode_100(struct connection *pc, const struct packet_
   const struct packet_edit_mode *real_packet = packet;
   SEND_PACKET_START(PACKET_EDIT_MODE);
 
-  dio_put_bool8(&dout, real_packet->state);
+  dio_put_bool8(&dout, "state", real_packet->state);
 
   SEND_PACKET_END;
 }
@@ -17412,7 +17096,7 @@ static struct packet_edit_toggle_fogofwar *receive_packet_edit_toggle_fogofwar_1
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "player", &readin);
     real_packet->player = readin;
   }
 
@@ -17424,7 +17108,7 @@ static int send_packet_edit_toggle_fogofwar_100(struct connection *pc, const str
   const struct packet_edit_toggle_fogofwar *real_packet = packet;
   SEND_PACKET_START(PACKET_EDIT_TOGGLE_FOGOFWAR);
 
-  dio_put_sint8(&dout, real_packet->player);
+  dio_put_sint8(&dout, "player", real_packet->player);
 
   SEND_PACKET_END;
 }
@@ -17501,25 +17185,25 @@ static struct packet_edit_tile_terrain *receive_packet_edit_tile_terrain_100(str
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "x", &readin);
     real_packet->x = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "y", &readin);
     real_packet->y = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "terrain", &readin);
     real_packet->terrain = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "size", &readin);
     real_packet->size = readin;
   }
 
@@ -17531,10 +17215,10 @@ static int send_packet_edit_tile_terrain_100(struct connection *pc, const struct
   const struct packet_edit_tile_terrain *real_packet = packet;
   SEND_PACKET_START(PACKET_EDIT_TILE_TERRAIN);
 
-  dio_put_uint32(&dout, real_packet->x);
-  dio_put_uint32(&dout, real_packet->y);
-  dio_put_uint8(&dout, real_packet->terrain);
-  dio_put_uint8(&dout, real_packet->size);
+  dio_put_uint32(&dout, "x", real_packet->x);
+  dio_put_uint32(&dout, "y", real_packet->y);
+  dio_put_uint8(&dout, "terrain", real_packet->terrain);
+  dio_put_uint8(&dout, "size", real_packet->size);
 
   SEND_PACKET_END;
 }
@@ -17614,25 +17298,25 @@ static struct packet_edit_tile_resource *receive_packet_edit_tile_resource_100(s
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "x", &readin);
     real_packet->x = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "y", &readin);
     real_packet->y = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "resource", &readin);
     real_packet->resource = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "size", &readin);
     real_packet->size = readin;
   }
 
@@ -17644,10 +17328,10 @@ static int send_packet_edit_tile_resource_100(struct connection *pc, const struc
   const struct packet_edit_tile_resource *real_packet = packet;
   SEND_PACKET_START(PACKET_EDIT_TILE_RESOURCE);
 
-  dio_put_uint32(&dout, real_packet->x);
-  dio_put_uint32(&dout, real_packet->y);
-  dio_put_uint8(&dout, real_packet->resource);
-  dio_put_uint8(&dout, real_packet->size);
+  dio_put_uint32(&dout, "x", real_packet->x);
+  dio_put_uint32(&dout, "y", real_packet->y);
+  dio_put_uint8(&dout, "resource", real_packet->resource);
+  dio_put_uint8(&dout, "size", real_packet->size);
 
   SEND_PACKET_END;
 }
@@ -17727,26 +17411,26 @@ static struct packet_edit_tile_special *receive_packet_edit_tile_special_100(str
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "x", &readin);
     real_packet->x = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "y", &readin);
     real_packet->y = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "special", &readin);
     real_packet->special = readin;
   }
-  dio_get_bool8(&din, &real_packet->remove);
+  dio_get_bool8(pc->json_packet, "remove", &real_packet->remove);
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "size", &readin);
     real_packet->size = readin;
   }
 
@@ -17758,11 +17442,11 @@ static int send_packet_edit_tile_special_100(struct connection *pc, const struct
   const struct packet_edit_tile_special *real_packet = packet;
   SEND_PACKET_START(PACKET_EDIT_TILE_SPECIAL);
 
-  dio_put_uint32(&dout, real_packet->x);
-  dio_put_uint32(&dout, real_packet->y);
-  dio_put_uint32(&dout, real_packet->special);
-  dio_put_bool8(&dout, real_packet->remove);
-  dio_put_uint8(&dout, real_packet->size);
+  dio_put_uint32(&dout, "x", real_packet->x);
+  dio_put_uint32(&dout, "y", real_packet->y);
+  dio_put_uint32(&dout, "special", real_packet->special);
+  dio_put_bool8(&dout, "remove", real_packet->remove);
+  dio_put_uint8(&dout, "size", real_packet->size);
 
   SEND_PACKET_END;
 }
@@ -17843,26 +17527,26 @@ static struct packet_edit_tile_base *receive_packet_edit_tile_base_100(struct co
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "x", &readin);
     real_packet->x = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "y", &readin);
     real_packet->y = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "base_type_id", &readin);
     real_packet->base_type_id = readin;
   }
-  dio_get_bool8(&din, &real_packet->remove);
+  dio_get_bool8(pc->json_packet, "remove", &real_packet->remove);
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "size", &readin);
     real_packet->size = readin;
   }
 
@@ -17874,11 +17558,11 @@ static int send_packet_edit_tile_base_100(struct connection *pc, const struct pa
   const struct packet_edit_tile_base *real_packet = packet;
   SEND_PACKET_START(PACKET_EDIT_TILE_BASE);
 
-  dio_put_uint32(&dout, real_packet->x);
-  dio_put_uint32(&dout, real_packet->y);
-  dio_put_uint8(&dout, real_packet->base_type_id);
-  dio_put_bool8(&dout, real_packet->remove);
-  dio_put_uint8(&dout, real_packet->size);
+  dio_put_uint32(&dout, "x", real_packet->x);
+  dio_put_uint32(&dout, "y", real_packet->y);
+  dio_put_uint8(&dout, "base_type_id", real_packet->base_type_id);
+  dio_put_bool8(&dout, "remove", real_packet->remove);
+  dio_put_uint8(&dout, "size", real_packet->size);
 
   SEND_PACKET_END;
 }
@@ -17959,19 +17643,19 @@ static struct packet_edit_startpos *receive_packet_edit_startpos_100(struct conn
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "x", &readin);
     real_packet->x = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "y", &readin);
     real_packet->y = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "nation", &readin);
     real_packet->nation = readin;
   }
 
@@ -17983,9 +17667,9 @@ static int send_packet_edit_startpos_100(struct connection *pc, const struct pac
   const struct packet_edit_startpos *real_packet = packet;
   SEND_PACKET_START(PACKET_EDIT_STARTPOS);
 
-  dio_put_uint32(&dout, real_packet->x);
-  dio_put_uint32(&dout, real_packet->y);
-  dio_put_uint32(&dout, real_packet->nation);
+  dio_put_uint32(&dout, "x", real_packet->x);
+  dio_put_uint32(&dout, "y", real_packet->y);
+  dio_put_uint32(&dout, "nation", real_packet->nation);
 
   SEND_PACKET_END;
 }
@@ -18064,27 +17748,27 @@ static struct packet_edit_tile *receive_packet_edit_tile_100(struct connection *
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "id", &readin);
     real_packet->id = readin;
   }
-  DIO_BV_GET(&din, real_packet->specials);
-  DIO_BV_GET(&din, real_packet->bases);
+   /* not supported yet. DIO_BV_GET(pc->json_packet, real_packet->specials);*/
+   /* not supported yet. DIO_BV_GET(pc->json_packet, real_packet->bases);*/
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "resource", &readin);
     real_packet->resource = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "terrain", &readin);
     real_packet->terrain = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "startpos_nation", &readin);
     real_packet->startpos_nation = readin;
   }
 
@@ -18096,12 +17780,12 @@ static int send_packet_edit_tile_100(struct connection *pc, const struct packet_
   const struct packet_edit_tile *real_packet = packet;
   SEND_PACKET_START(PACKET_EDIT_TILE);
 
-  dio_put_uint32(&dout, real_packet->id);
-DIO_BV_PUT(&dout, packet->specials);
-DIO_BV_PUT(&dout, packet->bases);
-  dio_put_uint8(&dout, real_packet->resource);
-  dio_put_uint8(&dout, real_packet->terrain);
-  dio_put_uint32(&dout, real_packet->startpos_nation);
+  dio_put_uint32(&dout, "id", real_packet->id);
+DIO_BV_PUT(&dout, "specials", packet->specials);
+DIO_BV_PUT(&dout, "bases", packet->bases);
+  dio_put_uint8(&dout, "resource", real_packet->resource);
+  dio_put_uint8(&dout, "terrain", real_packet->terrain);
+  dio_put_uint32(&dout, "startpos_nation", real_packet->startpos_nation);
 
   SEND_PACKET_END;
 }
@@ -18169,37 +17853,37 @@ static struct packet_edit_unit_create *receive_packet_edit_unit_create_100(struc
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "owner", &readin);
     real_packet->owner = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "x", &readin);
     real_packet->x = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "y", &readin);
     real_packet->y = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "type", &readin);
     real_packet->type = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "count", &readin);
     real_packet->count = readin;
   }
   {
     int readin;
   
-    dio_get_sint32(&din, &readin);
+    dio_get_sint32(pc->json_packet, "tag", &readin);
     real_packet->tag = readin;
   }
 
@@ -18211,12 +17895,12 @@ static int send_packet_edit_unit_create_100(struct connection *pc, const struct 
   const struct packet_edit_unit_create *real_packet = packet;
   SEND_PACKET_START(PACKET_EDIT_UNIT_CREATE);
 
-  dio_put_sint8(&dout, real_packet->owner);
-  dio_put_uint32(&dout, real_packet->x);
-  dio_put_uint32(&dout, real_packet->y);
-  dio_put_uint8(&dout, real_packet->type);
-  dio_put_uint8(&dout, real_packet->count);
-  dio_put_sint32(&dout, real_packet->tag);
+  dio_put_sint8(&dout, "owner", real_packet->owner);
+  dio_put_uint32(&dout, "x", real_packet->x);
+  dio_put_uint32(&dout, "y", real_packet->y);
+  dio_put_uint8(&dout, "type", real_packet->type);
+  dio_put_uint8(&dout, "count", real_packet->count);
+  dio_put_sint32(&dout, "tag", real_packet->tag);
 
   SEND_PACKET_END;
 }
@@ -18298,31 +17982,31 @@ static struct packet_edit_unit_remove *receive_packet_edit_unit_remove_100(struc
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "owner", &readin);
     real_packet->owner = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "x", &readin);
     real_packet->x = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "y", &readin);
     real_packet->y = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "type", &readin);
     real_packet->type = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "count", &readin);
     real_packet->count = readin;
   }
 
@@ -18334,11 +18018,11 @@ static int send_packet_edit_unit_remove_100(struct connection *pc, const struct 
   const struct packet_edit_unit_remove *real_packet = packet;
   SEND_PACKET_START(PACKET_EDIT_UNIT_REMOVE);
 
-  dio_put_sint8(&dout, real_packet->owner);
-  dio_put_uint32(&dout, real_packet->x);
-  dio_put_uint32(&dout, real_packet->y);
-  dio_put_uint8(&dout, real_packet->type);
-  dio_put_uint8(&dout, real_packet->count);
+  dio_put_sint8(&dout, "owner", real_packet->owner);
+  dio_put_uint32(&dout, "x", real_packet->x);
+  dio_put_uint32(&dout, "y", real_packet->y);
+  dio_put_uint8(&dout, "type", real_packet->type);
+  dio_put_uint8(&dout, "count", real_packet->count);
 
   SEND_PACKET_END;
 }
@@ -18419,7 +18103,7 @@ static struct packet_edit_unit_remove_by_id *receive_packet_edit_unit_remove_by_
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "id", &readin);
     real_packet->id = readin;
   }
 
@@ -18431,7 +18115,7 @@ static int send_packet_edit_unit_remove_by_id_100(struct connection *pc, const s
   const struct packet_edit_unit_remove_by_id *real_packet = packet;
   SEND_PACKET_START(PACKET_EDIT_UNIT_REMOVE_BY_ID);
 
-  dio_put_uint32(&dout, real_packet->id);
+  dio_put_uint32(&dout, "id", real_packet->id);
 
   SEND_PACKET_END;
 }
@@ -18508,77 +18192,77 @@ static struct packet_edit_unit *receive_packet_edit_unit_100(struct connection *
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "id", &readin);
     real_packet->id = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "utype", &readin);
     real_packet->utype = readin;
   }
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "owner", &readin);
     real_packet->owner = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "homecity", &readin);
     real_packet->homecity = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "moves_left", &readin);
     real_packet->moves_left = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "hp", &readin);
     real_packet->hp = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "veteran", &readin);
     real_packet->veteran = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "fuel", &readin);
     real_packet->fuel = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "activity", &readin);
     real_packet->activity = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "activity_count", &readin);
     real_packet->activity_count = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "activity_base", &readin);
     real_packet->activity_base = readin;
   }
-  dio_get_bool8(&din, &real_packet->debug);
-  dio_get_bool8(&din, &real_packet->moved);
-  dio_get_bool8(&din, &real_packet->paradropped);
-  dio_get_bool8(&din, &real_packet->done_moving);
+  dio_get_bool8(pc->json_packet, "debug", &real_packet->debug);
+  dio_get_bool8(pc->json_packet, "moved", &real_packet->moved);
+  dio_get_bool8(pc->json_packet, "paradropped", &real_packet->paradropped);
+  dio_get_bool8(pc->json_packet, "done_moving", &real_packet->done_moving);
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "transported_by", &readin);
     real_packet->transported_by = readin;
   }
 
@@ -18590,22 +18274,22 @@ static int send_packet_edit_unit_100(struct connection *pc, const struct packet_
   const struct packet_edit_unit *real_packet = packet;
   SEND_PACKET_START(PACKET_EDIT_UNIT);
 
-  dio_put_uint32(&dout, real_packet->id);
-  dio_put_uint8(&dout, real_packet->utype);
-  dio_put_sint8(&dout, real_packet->owner);
-  dio_put_uint32(&dout, real_packet->homecity);
-  dio_put_uint8(&dout, real_packet->moves_left);
-  dio_put_uint8(&dout, real_packet->hp);
-  dio_put_uint8(&dout, real_packet->veteran);
-  dio_put_uint8(&dout, real_packet->fuel);
-  dio_put_uint8(&dout, real_packet->activity);
-  dio_put_uint8(&dout, real_packet->activity_count);
-  dio_put_uint8(&dout, real_packet->activity_base);
-  dio_put_bool8(&dout, real_packet->debug);
-  dio_put_bool8(&dout, real_packet->moved);
-  dio_put_bool8(&dout, real_packet->paradropped);
-  dio_put_bool8(&dout, real_packet->done_moving);
-  dio_put_uint32(&dout, real_packet->transported_by);
+  dio_put_uint32(&dout, "id", real_packet->id);
+  dio_put_uint8(&dout, "utype", real_packet->utype);
+  dio_put_sint8(&dout, "owner", real_packet->owner);
+  dio_put_uint32(&dout, "homecity", real_packet->homecity);
+  dio_put_uint8(&dout, "moves_left", real_packet->moves_left);
+  dio_put_uint8(&dout, "hp", real_packet->hp);
+  dio_put_uint8(&dout, "veteran", real_packet->veteran);
+  dio_put_uint8(&dout, "fuel", real_packet->fuel);
+  dio_put_uint8(&dout, "activity", real_packet->activity);
+  dio_put_uint8(&dout, "activity_count", real_packet->activity_count);
+  dio_put_uint8(&dout, "activity_base", real_packet->activity_base);
+  dio_put_bool8(&dout, "debug", real_packet->debug);
+  dio_put_bool8(&dout, "moved", real_packet->moved);
+  dio_put_bool8(&dout, "paradropped", real_packet->paradropped);
+  dio_put_bool8(&dout, "done_moving", real_packet->done_moving);
+  dio_put_uint32(&dout, "transported_by", real_packet->transported_by);
 
   SEND_PACKET_END;
 }
@@ -18673,31 +18357,31 @@ static struct packet_edit_city_create *receive_packet_edit_city_create_100(struc
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "owner", &readin);
     real_packet->owner = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "x", &readin);
     real_packet->x = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "y", &readin);
     real_packet->y = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "size", &readin);
     real_packet->size = readin;
   }
   {
     int readin;
   
-    dio_get_sint32(&din, &readin);
+    dio_get_sint32(pc->json_packet, "tag", &readin);
     real_packet->tag = readin;
   }
 
@@ -18709,11 +18393,11 @@ static int send_packet_edit_city_create_100(struct connection *pc, const struct 
   const struct packet_edit_city_create *real_packet = packet;
   SEND_PACKET_START(PACKET_EDIT_CITY_CREATE);
 
-  dio_put_sint8(&dout, real_packet->owner);
-  dio_put_uint32(&dout, real_packet->x);
-  dio_put_uint32(&dout, real_packet->y);
-  dio_put_uint8(&dout, real_packet->size);
-  dio_put_sint32(&dout, real_packet->tag);
+  dio_put_sint8(&dout, "owner", real_packet->owner);
+  dio_put_uint32(&dout, "x", real_packet->x);
+  dio_put_uint32(&dout, "y", real_packet->y);
+  dio_put_uint8(&dout, "size", real_packet->size);
+  dio_put_sint32(&dout, "tag", real_packet->tag);
 
   SEND_PACKET_END;
 }
@@ -18794,7 +18478,7 @@ static struct packet_edit_city_remove *receive_packet_edit_city_remove_100(struc
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "id", &readin);
     real_packet->id = readin;
   }
 
@@ -18806,7 +18490,7 @@ static int send_packet_edit_city_remove_100(struct connection *pc, const struct 
   const struct packet_edit_city_remove *real_packet = packet;
   SEND_PACKET_START(PACKET_EDIT_CITY_REMOVE);
 
-  dio_put_uint32(&dout, real_packet->id);
+  dio_put_uint32(&dout, "id", real_packet->id);
 
   SEND_PACKET_END;
 }
@@ -18883,76 +18567,76 @@ static struct packet_edit_city *receive_packet_edit_city_100(struct connection *
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "id", &readin);
     real_packet->id = readin;
   }
-  dio_get_string(&din, real_packet->name, sizeof(real_packet->name));
+  dio_get_string(pc->json_packet, "name", real_packet->name, sizeof(real_packet->name));
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "owner", &readin);
     real_packet->owner = readin;
   }
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "original", &readin);
     real_packet->original = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "size", &readin);
     real_packet->size = readin;
   }
   
   {
-    int i;
+     int i;
   
     for (i = 0; i < 5; i++) {
       {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "ppl_happy", &readin);
     real_packet->ppl_happy[i] = readin;
   }
     }
   }
   
   {
-    int i;
+     int i;
   
     for (i = 0; i < 5; i++) {
       {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "ppl_content", &readin);
     real_packet->ppl_content[i] = readin;
   }
     }
   }
   
   {
-    int i;
+     int i;
   
     for (i = 0; i < 5; i++) {
       {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "ppl_unhappy", &readin);
     real_packet->ppl_unhappy[i] = readin;
   }
     }
   }
   
   {
-    int i;
+     int i;
   
     for (i = 0; i < 5; i++) {
       {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "ppl_angry", &readin);
     real_packet->ppl_angry[i] = readin;
   }
     }
@@ -18960,12 +18644,12 @@ static struct packet_edit_city *receive_packet_edit_city_100(struct connection *
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "specialists_size", &readin);
     real_packet->specialists_size = readin;
   }
   
   {
-    int i;
+     int i;
   
     if(real_packet->specialists_size > SP_MAX) {
       freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
@@ -18975,20 +18659,20 @@ static struct packet_edit_city *receive_packet_edit_city_100(struct connection *
       {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "specialists", &readin);
     real_packet->specialists[i] = readin;
   }
     }
   }
   
   {
-    int i;
+     int i;
   
     for (i = 0; i < NUM_TRADEROUTES; i++) {
       {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "trade", &readin);
     real_packet->trade[i] = readin;
   }
     }
@@ -18996,59 +18680,59 @@ static struct packet_edit_city *receive_packet_edit_city_100(struct connection *
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "food_stock", &readin);
     real_packet->food_stock = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "shield_stock", &readin);
     real_packet->shield_stock = readin;
   }
-  dio_get_bool8(&din, &real_packet->airlift);
-  dio_get_bool8(&din, &real_packet->debug);
-  dio_get_bool8(&din, &real_packet->did_buy);
-  dio_get_bool8(&din, &real_packet->did_sell);
-  dio_get_bool8(&din, &real_packet->was_happy);
+  dio_get_bool8(pc->json_packet, "airlift", &real_packet->airlift);
+  dio_get_bool8(pc->json_packet, "debug", &real_packet->debug);
+  dio_get_bool8(pc->json_packet, "did_buy", &real_packet->did_buy);
+  dio_get_bool8(pc->json_packet, "did_sell", &real_packet->did_sell);
+  dio_get_bool8(pc->json_packet, "was_happy", &real_packet->was_happy);
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "anarchy", &readin);
     real_packet->anarchy = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "rapture", &readin);
     real_packet->rapture = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "steal", &readin);
     real_packet->steal = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "turn_founded", &readin);
     real_packet->turn_founded = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "turn_last_built", &readin);
     real_packet->turn_last_built = readin;
   }
   
   {
-    int i;
+     int i;
   
     for (i = 0; i < B_LAST; i++) {
       {
     int readin;
   
-    dio_get_sint32(&din, &readin);
+    dio_get_sint32(pc->json_packet, "built", &readin);
     real_packet->built[i] = readin;
   }
     }
@@ -19056,22 +18740,22 @@ static struct packet_edit_city *receive_packet_edit_city_100(struct connection *
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "production_kind", &readin);
     real_packet->production_kind = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "production_value", &readin);
     real_packet->production_value = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "last_turns_shield_surplus", &readin);
     real_packet->last_turns_shield_surplus = readin;
   }
-  DIO_BV_GET(&din, real_packet->city_options);
+   /* not supported yet. DIO_BV_GET(pc->json_packet, real_packet->city_options);*/
 
   RECEIVE_PACKET_END(real_packet);
 }
@@ -19081,84 +18765,56 @@ static int send_packet_edit_city_100(struct connection *pc, const struct packet_
   const struct packet_edit_city *real_packet = packet;
   SEND_PACKET_START(PACKET_EDIT_CITY);
 
-  dio_put_uint32(&dout, real_packet->id);
-  dio_put_string(&dout, real_packet->name);
-  dio_put_sint8(&dout, real_packet->owner);
-  dio_put_sint8(&dout, real_packet->original);
-  dio_put_uint8(&dout, real_packet->size);
+  dio_put_uint32(&dout, "id", real_packet->id);
+  dio_put_string(&dout, "name", real_packet->name);
+  dio_put_sint8(&dout, "owner", real_packet->owner);
+  dio_put_sint8(&dout, "original", real_packet->original);
+  dio_put_uint8(&dout, "size", real_packet->size);
 
     {
-      int i;
-
-      for (i = 0; i < 5; i++) {
-        dio_put_uint8(&dout, real_packet->ppl_happy[i]);
-      }
+        dio_put_array_uint8(&dout, "ppl_happy", (int*)real_packet->ppl_happy, 5);
     } 
 
     {
-      int i;
-
-      for (i = 0; i < 5; i++) {
-        dio_put_uint8(&dout, real_packet->ppl_content[i]);
-      }
+        dio_put_array_uint8(&dout, "ppl_content", (int*)real_packet->ppl_content, 5);
     } 
 
     {
-      int i;
-
-      for (i = 0; i < 5; i++) {
-        dio_put_uint8(&dout, real_packet->ppl_unhappy[i]);
-      }
+        dio_put_array_uint8(&dout, "ppl_unhappy", (int*)real_packet->ppl_unhappy, 5);
     } 
 
     {
-      int i;
-
-      for (i = 0; i < 5; i++) {
-        dio_put_uint8(&dout, real_packet->ppl_angry[i]);
-      }
+        dio_put_array_uint8(&dout, "ppl_angry", (int*)real_packet->ppl_angry, 5);
     } 
-  dio_put_uint8(&dout, real_packet->specialists_size);
+  dio_put_uint8(&dout, "specialists_size", real_packet->specialists_size);
 
     {
-      int i;
-
-      for (i = 0; i < real_packet->specialists_size; i++) {
-        dio_put_uint8(&dout, real_packet->specialists[i]);
-      }
+        dio_put_array_uint8(&dout, "specialists", (int*)real_packet->specialists, real_packet->specialists_size);
     } 
 
     {
-      int i;
-
-      for (i = 0; i < NUM_TRADEROUTES; i++) {
-        dio_put_uint32(&dout, real_packet->trade[i]);
-      }
+        dio_put_array_uint32(&dout, "trade", (int*)real_packet->trade, NUM_TRADEROUTES);
     } 
-  dio_put_uint32(&dout, real_packet->food_stock);
-  dio_put_uint32(&dout, real_packet->shield_stock);
-  dio_put_bool8(&dout, real_packet->airlift);
-  dio_put_bool8(&dout, real_packet->debug);
-  dio_put_bool8(&dout, real_packet->did_buy);
-  dio_put_bool8(&dout, real_packet->did_sell);
-  dio_put_bool8(&dout, real_packet->was_happy);
-  dio_put_uint8(&dout, real_packet->anarchy);
-  dio_put_uint8(&dout, real_packet->rapture);
-  dio_put_uint8(&dout, real_packet->steal);
-  dio_put_uint32(&dout, real_packet->turn_founded);
-  dio_put_uint32(&dout, real_packet->turn_last_built);
+  dio_put_uint32(&dout, "food_stock", real_packet->food_stock);
+  dio_put_uint32(&dout, "shield_stock", real_packet->shield_stock);
+  dio_put_bool8(&dout, "airlift", real_packet->airlift);
+  dio_put_bool8(&dout, "debug", real_packet->debug);
+  dio_put_bool8(&dout, "did_buy", real_packet->did_buy);
+  dio_put_bool8(&dout, "did_sell", real_packet->did_sell);
+  dio_put_bool8(&dout, "was_happy", real_packet->was_happy);
+  dio_put_uint8(&dout, "anarchy", real_packet->anarchy);
+  dio_put_uint8(&dout, "rapture", real_packet->rapture);
+  dio_put_uint8(&dout, "steal", real_packet->steal);
+  dio_put_uint32(&dout, "turn_founded", real_packet->turn_founded);
+  dio_put_uint32(&dout, "turn_last_built", real_packet->turn_last_built);
 
     {
-      int i;
-
-      for (i = 0; i < B_LAST; i++) {
-        dio_put_sint32(&dout, real_packet->built[i]);
-      }
+        dio_put_array_sint32(&dout, "built", (int*)real_packet->built, B_LAST);
     } 
-  dio_put_uint8(&dout, real_packet->production_kind);
-  dio_put_uint8(&dout, real_packet->production_value);
-  dio_put_uint32(&dout, real_packet->last_turns_shield_surplus);
-DIO_BV_PUT(&dout, packet->city_options);
+  dio_put_uint8(&dout, "production_kind", real_packet->production_kind);
+  dio_put_uint8(&dout, "production_value", real_packet->production_value);
+  dio_put_uint32(&dout, "last_turns_shield_surplus", real_packet->last_turns_shield_surplus);
+DIO_BV_PUT(&dout, "city_options", packet->city_options);
 
   SEND_PACKET_END;
 }
@@ -19226,7 +18882,7 @@ static struct packet_edit_player_create *receive_packet_edit_player_create_100(s
   {
     int readin;
   
-    dio_get_sint32(&din, &readin);
+    dio_get_sint32(pc->json_packet, "tag", &readin);
     real_packet->tag = readin;
   }
 
@@ -19238,7 +18894,7 @@ static int send_packet_edit_player_create_100(struct connection *pc, const struc
   const struct packet_edit_player_create *real_packet = packet;
   SEND_PACKET_START(PACKET_EDIT_PLAYER_CREATE);
 
-  dio_put_sint32(&dout, real_packet->tag);
+  dio_put_sint32(&dout, "tag", real_packet->tag);
 
   SEND_PACKET_END;
 }
@@ -19315,7 +18971,7 @@ static struct packet_edit_player_remove *receive_packet_edit_player_remove_100(s
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "id", &readin);
     real_packet->id = readin;
   }
 
@@ -19327,7 +18983,7 @@ static int send_packet_edit_player_remove_100(struct connection *pc, const struc
   const struct packet_edit_player_remove *real_packet = packet;
   SEND_PACKET_START(PACKET_EDIT_PLAYER_REMOVE);
 
-  dio_put_sint8(&dout, real_packet->id);
+  dio_put_sint8(&dout, "id", real_packet->id);
 
   SEND_PACKET_END;
 }
@@ -19404,125 +19060,125 @@ static struct packet_edit_player *receive_packet_edit_player_100(struct connecti
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "id", &readin);
     real_packet->id = readin;
   }
-  dio_get_string(&din, real_packet->name, sizeof(real_packet->name));
-  dio_get_string(&din, real_packet->username, sizeof(real_packet->username));
-  dio_get_string(&din, real_packet->ranked_username, sizeof(real_packet->ranked_username));
+  dio_get_string(pc->json_packet, "name", real_packet->name, sizeof(real_packet->name));
+  dio_get_string(pc->json_packet, "username", real_packet->username, sizeof(real_packet->username));
+  dio_get_string(pc->json_packet, "ranked_username", real_packet->ranked_username, sizeof(real_packet->ranked_username));
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "user_turns", &readin);
     real_packet->user_turns = readin;
   }
-  dio_get_bool8(&din, &real_packet->is_male);
+  dio_get_bool8(pc->json_packet, "is_male", &real_packet->is_male);
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "government", &readin);
     real_packet->government = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "target_government", &readin);
     real_packet->target_government = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "nation", &readin);
     real_packet->nation = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "team", &readin);
     real_packet->team = readin;
   }
-  dio_get_bool8(&din, &real_packet->phase_done);
+  dio_get_bool8(pc->json_packet, "phase_done", &real_packet->phase_done);
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "nturns_idle", &readin);
     real_packet->nturns_idle = readin;
   }
-  dio_get_bool8(&din, &real_packet->is_alive);
-  dio_get_bool8(&din, &real_packet->surrendered);
+  dio_get_bool8(pc->json_packet, "is_alive", &real_packet->is_alive);
+  dio_get_bool8(pc->json_packet, "surrendered", &real_packet->surrendered);
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "revolution_finishes", &readin);
     real_packet->revolution_finishes = readin;
   }
-  dio_get_bool8(&din, &real_packet->capital);
-  DIO_BV_GET(&din, real_packet->embassy);
+  dio_get_bool8(pc->json_packet, "capital", &real_packet->capital);
+   /* not supported yet. DIO_BV_GET(pc->json_packet, real_packet->embassy);*/
   
   {
-    int i;
+     int i;
   
     for (i = 0; i < MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS; i++) {
-      dio_get_diplstate(&din, &real_packet->diplstates[i]);
+      dio_get_diplstate(pc->json_packet, "diplstates", &real_packet->diplstates[i]);
     }
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "city_style", &readin);
     real_packet->city_style = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "gold", &readin);
     real_packet->gold = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "tax", &readin);
     real_packet->tax = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "science", &readin);
     real_packet->science = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "luxury", &readin);
     real_packet->luxury = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "future_tech", &readin);
     real_packet->future_tech = readin;
   }
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "researching", &readin);
     real_packet->researching = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "bulbs_researched", &readin);
     real_packet->bulbs_researched = readin;
   }
   
   {
-    int i;
+     int i;
   
     for (i = 0; i < A_LAST+1; i++) {
-      dio_get_bool8(&din, &real_packet->inventions[i]);
+      dio_get_bool8(pc->json_packet, "inventions", &real_packet->inventions[i]);
     }
   }
-  dio_get_bool8(&din, &real_packet->ai);
+  dio_get_bool8(pc->json_packet, "ai", &real_packet->ai);
 
   RECEIVE_PACKET_END(real_packet);
 }
@@ -19532,48 +19188,40 @@ static int send_packet_edit_player_100(struct connection *pc, const struct packe
   const struct packet_edit_player *real_packet = packet;
   SEND_PACKET_START(PACKET_EDIT_PLAYER);
 
-  dio_put_sint8(&dout, real_packet->id);
-  dio_put_string(&dout, real_packet->name);
-  dio_put_string(&dout, real_packet->username);
-  dio_put_string(&dout, real_packet->ranked_username);
-  dio_put_uint32(&dout, real_packet->user_turns);
-  dio_put_bool8(&dout, real_packet->is_male);
-  dio_put_uint8(&dout, real_packet->government);
-  dio_put_uint8(&dout, real_packet->target_government);
-  dio_put_uint32(&dout, real_packet->nation);
-  dio_put_uint8(&dout, real_packet->team);
-  dio_put_bool8(&dout, real_packet->phase_done);
-  dio_put_uint32(&dout, real_packet->nturns_idle);
-  dio_put_bool8(&dout, real_packet->is_alive);
-  dio_put_bool8(&dout, real_packet->surrendered);
-  dio_put_uint32(&dout, real_packet->revolution_finishes);
-  dio_put_bool8(&dout, real_packet->capital);
-DIO_BV_PUT(&dout, packet->embassy);
+  dio_put_sint8(&dout, "id", real_packet->id);
+  dio_put_string(&dout, "name", real_packet->name);
+  dio_put_string(&dout, "username", real_packet->username);
+  dio_put_string(&dout, "ranked_username", real_packet->ranked_username);
+  dio_put_uint32(&dout, "user_turns", real_packet->user_turns);
+  dio_put_bool8(&dout, "is_male", real_packet->is_male);
+  dio_put_uint8(&dout, "government", real_packet->government);
+  dio_put_uint8(&dout, "target_government", real_packet->target_government);
+  dio_put_uint32(&dout, "nation", real_packet->nation);
+  dio_put_uint8(&dout, "team", real_packet->team);
+  dio_put_bool8(&dout, "phase_done", real_packet->phase_done);
+  dio_put_uint32(&dout, "nturns_idle", real_packet->nturns_idle);
+  dio_put_bool8(&dout, "is_alive", real_packet->is_alive);
+  dio_put_bool8(&dout, "surrendered", real_packet->surrendered);
+  dio_put_uint32(&dout, "revolution_finishes", real_packet->revolution_finishes);
+  dio_put_bool8(&dout, "capital", real_packet->capital);
+DIO_BV_PUT(&dout, "embassy", packet->embassy);
 
     {
-      int i;
-
-      for (i = 0; i < MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS; i++) {
-        dio_put_diplstate(&dout, &real_packet->diplstates[i]);
-      }
+        dio_put_diplstate(&dout, "diplstates", (struct player_diplstate*)real_packet->diplstates, MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS);
     } 
-  dio_put_uint8(&dout, real_packet->city_style);
-  dio_put_uint32(&dout, real_packet->gold);
-  dio_put_uint32(&dout, real_packet->tax);
-  dio_put_uint32(&dout, real_packet->science);
-  dio_put_uint32(&dout, real_packet->luxury);
-  dio_put_uint32(&dout, real_packet->future_tech);
-  dio_put_uint8(&dout, real_packet->researching);
-  dio_put_uint32(&dout, real_packet->bulbs_researched);
+  dio_put_uint8(&dout, "city_style", real_packet->city_style);
+  dio_put_uint32(&dout, "gold", real_packet->gold);
+  dio_put_uint32(&dout, "tax", real_packet->tax);
+  dio_put_uint32(&dout, "science", real_packet->science);
+  dio_put_uint32(&dout, "luxury", real_packet->luxury);
+  dio_put_uint32(&dout, "future_tech", real_packet->future_tech);
+  dio_put_uint8(&dout, "researching", real_packet->researching);
+  dio_put_uint32(&dout, "bulbs_researched", real_packet->bulbs_researched);
 
     {
-      int i;
-
-      for (i = 0; i < A_LAST+1; i++) {
-        dio_put_bool8(&dout, real_packet->inventions[i]);
-      }
+        dio_put_array_bool8(&dout, "inventions", (bool*)real_packet->inventions, A_LAST+1);
     } 
-  dio_put_bool8(&dout, real_packet->ai);
+  dio_put_bool8(&dout, "ai", real_packet->ai);
 
   SEND_PACKET_END;
 }
@@ -19648,26 +19296,26 @@ static struct packet_edit_player_vision *receive_packet_edit_player_vision_100(s
   {
     int readin;
   
-    dio_get_sint8(&din, &readin);
+    dio_get_sint8(pc->json_packet, "player", &readin);
     real_packet->player = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "x", &readin);
     real_packet->x = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "y", &readin);
     real_packet->y = readin;
   }
-  dio_get_bool8(&din, &real_packet->known);
+  dio_get_bool8(pc->json_packet, "known", &real_packet->known);
   {
     int readin;
   
-    dio_get_uint8(&din, &readin);
+    dio_get_uint8(pc->json_packet, "size", &readin);
     real_packet->size = readin;
   }
 
@@ -19679,11 +19327,11 @@ static int send_packet_edit_player_vision_100(struct connection *pc, const struc
   const struct packet_edit_player_vision *real_packet = packet;
   SEND_PACKET_START(PACKET_EDIT_PLAYER_VISION);
 
-  dio_put_sint8(&dout, real_packet->player);
-  dio_put_uint32(&dout, real_packet->x);
-  dio_put_uint32(&dout, real_packet->y);
-  dio_put_bool8(&dout, real_packet->known);
-  dio_put_uint8(&dout, real_packet->size);
+  dio_put_sint8(&dout, "player", real_packet->player);
+  dio_put_uint32(&dout, "x", real_packet->x);
+  dio_put_uint32(&dout, "y", real_packet->y);
+  dio_put_bool8(&dout, "known", real_packet->known);
+  dio_put_uint8(&dout, "size", real_packet->size);
 
   SEND_PACKET_END;
 }
@@ -19764,13 +19412,13 @@ static struct packet_edit_game *receive_packet_edit_game_100(struct connection *
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "year", &readin);
     real_packet->year = readin;
   }
-  dio_get_bool8(&din, &real_packet->scenario);
-  dio_get_string(&din, real_packet->scenario_name, sizeof(real_packet->scenario_name));
-  dio_get_string(&din, real_packet->scenario_desc, sizeof(real_packet->scenario_desc));
-  dio_get_bool8(&din, &real_packet->scenario_players);
+  dio_get_bool8(pc->json_packet, "scenario", &real_packet->scenario);
+  dio_get_string(pc->json_packet, "scenario_name", real_packet->scenario_name, sizeof(real_packet->scenario_name));
+  dio_get_string(pc->json_packet, "scenario_desc", real_packet->scenario_desc, sizeof(real_packet->scenario_desc));
+  dio_get_bool8(pc->json_packet, "scenario_players", &real_packet->scenario_players);
 
   RECEIVE_PACKET_END(real_packet);
 }
@@ -19780,11 +19428,11 @@ static int send_packet_edit_game_100(struct connection *pc, const struct packet_
   const struct packet_edit_game *real_packet = packet;
   SEND_PACKET_START(PACKET_EDIT_GAME);
 
-  dio_put_uint32(&dout, real_packet->year);
-  dio_put_bool8(&dout, real_packet->scenario);
-  dio_put_string(&dout, real_packet->scenario_name);
-  dio_put_string(&dout, real_packet->scenario_desc);
-  dio_put_bool8(&dout, real_packet->scenario_players);
+  dio_put_uint32(&dout, "year", real_packet->year);
+  dio_put_bool8(&dout, "scenario", real_packet->scenario);
+  dio_put_string(&dout, "scenario_name", real_packet->scenario_name);
+  dio_put_string(&dout, "scenario_desc", real_packet->scenario_desc);
+  dio_put_bool8(&dout, "scenario_players", real_packet->scenario_players);
 
   SEND_PACKET_END;
 }
@@ -19852,13 +19500,13 @@ static struct packet_edit_object_created *receive_packet_edit_object_created_100
   {
     int readin;
   
-    dio_get_sint32(&din, &readin);
+    dio_get_sint32(pc->json_packet, "tag", &readin);
     real_packet->tag = readin;
   }
   {
     int readin;
   
-    dio_get_sint32(&din, &readin);
+    dio_get_sint32(pc->json_packet, "id", &readin);
     real_packet->id = readin;
   }
 
@@ -19870,8 +19518,8 @@ static int send_packet_edit_object_created_100(struct connection *pc, const stru
   const struct packet_edit_object_created *real_packet = packet;
   SEND_PACKET_START(PACKET_EDIT_OBJECT_CREATED);
 
-  dio_put_sint32(&dout, real_packet->tag);
-  dio_put_sint32(&dout, real_packet->id);
+  dio_put_sint32(&dout, "tag", real_packet->tag);
+  dio_put_sint32(&dout, "id", real_packet->id);
 
   SEND_PACKET_END;
 }
@@ -19949,19 +19597,19 @@ static struct packet_info_text_req *receive_packet_info_text_req_100(struct conn
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "x", &readin);
     real_packet->x = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "y", &readin);
     real_packet->y = readin;
   }
   {
     int readin;
   
-    dio_get_uint32(&din, &readin);
+    dio_get_uint32(pc->json_packet, "visible_unit", &readin);
     real_packet->visible_unit = readin;
   }
 
@@ -19973,9 +19621,9 @@ static int send_packet_info_text_req_100(struct connection *pc, const struct pac
   const struct packet_info_text_req *real_packet = packet;
   SEND_PACKET_START(PACKET_INFO_TEXT_REQ);
 
-  dio_put_uint32(&dout, real_packet->x);
-  dio_put_uint32(&dout, real_packet->y);
-  dio_put_uint32(&dout, real_packet->visible_unit);
+  dio_put_uint32(&dout, "x", real_packet->x);
+  dio_put_uint32(&dout, "y", real_packet->y);
+  dio_put_uint32(&dout, "visible_unit", real_packet->visible_unit);
 
   SEND_PACKET_END;
 }
@@ -20051,7 +19699,7 @@ int dsend_packet_info_text_req(struct connection *pc, int x, int y, int visible_
 static struct packet_info_text_message *receive_packet_info_text_message_100(struct connection *pc, enum packet_type type)
 {
   RECEIVE_PACKET_START(packet_info_text_message, real_packet);
-  dio_get_string(&din, real_packet->message, sizeof(real_packet->message));
+  dio_get_string(pc->json_packet, "message", real_packet->message, sizeof(real_packet->message));
 
   RECEIVE_PACKET_END(real_packet);
 }
@@ -20061,7 +19709,7 @@ static int send_packet_info_text_message_100(struct connection *pc, const struct
   const struct packet_info_text_message *real_packet = packet;
   SEND_PACKET_START(PACKET_INFO_TEXT_MESSAGE);
 
-  dio_put_string(&dout, real_packet->message);
+  dio_put_string(&dout, "message", real_packet->message);
 
   SEND_PACKET_END;
 }

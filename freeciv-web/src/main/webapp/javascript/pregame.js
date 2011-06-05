@@ -21,7 +21,7 @@ var nation_select_id = -1;
 ****************************************************************************/
 function pregame_start_game()
 {
-  var test_packet = [{"packet_type" : "chat_msg_req", "message" : "/start"}];
+  var test_packet = {"type" : packet_chat_msg_req, "message" : "/start"};
   var myJSONText = JSON.stringify(test_packet);
   send_request (myJSONText);
 }
@@ -41,13 +41,13 @@ function observe()
 {
   if (observing) {
     $("#observe_button").button("option", "label", "Observe Game");
-    var test_packet = [{"packet_type" : "chat_msg_req", "message" : "/detach"}];
+    var test_packet = {"type" : packet_chat_msg_req, "message" : "/detach"};
     var myJSONText = JSON.stringify(test_packet);
     send_request (myJSONText);
     
   } else {
     $("#observe_button").button("option", "label", "Don't observe");
-    var test_packet = [{"packet_type" : "chat_msg_req", "message" : "/observe"}];
+    var test_packet = {"type" : packet_chat_msg_req, "message" : "/observe"};
     var myJSONText = JSON.stringify(test_packet);
     send_request (myJSONText);
   }
@@ -176,12 +176,12 @@ function submit_nation_choise()
 {
   if (chosen_nation == -1) return;
 
-  var test_packet = [{"packet_type" : "nation_select_req", 
+  var test_packet = {"type" : packet_nation_select_req, 
                       "player_no" : client.conn['player_num'],
                       "nation_no" : chosen_nation,
                       "is_male" : true, /* FIXME */
                       "name" : client.conn['username'],
-                      "city_style" : nations[chosen_nation]['city_style']}];
+                      "city_style" : nations[chosen_nation]['city_style']};
   var myJSONText = JSON.stringify(test_packet);
   send_request (myJSONText);
   clearInterval(nation_select_id);
@@ -250,13 +250,13 @@ function pregame_settings()
   $(id).dialog('open');		
 
   $('#aifill').change(function() {
-    var test_packet = [{"packet_type" : "chat_msg_req", "message" : "/set aifill " + $('#aifill').val()}];
+    var test_packet = {"type" : packet_chat_msg_req, "message" : "/set aifill " + $('#aifill').val()};
     var myJSONText = JSON.stringify(test_packet);
     send_request (myJSONText);
   });
 
   $('#metamessage').change(function() {
-    var test_packet = [{"packet_type" : "chat_msg_req", "message" : "/metamessage " + $('#metamessage').val()}];
+    var test_packet = {"type" : packet_chat_msg_req, "message" : "/metamessage " + $('#metamessage').val()};
     var myJSONText = JSON.stringify(test_packet);
     send_request (myJSONText);
   });
@@ -266,13 +266,13 @@ function pregame_settings()
   );
 
   $('#mapsize').change(function() {
-    var test_packet = [{"packet_type" : "chat_msg_req", "message" : "/set size " + $('#mapsize').val()}];
+    var test_packet = {"type" : packet_chat_msg_req, "message" : "/set size " + $('#mapsize').val()};
     var myJSONText = JSON.stringify(test_packet);
     send_request (myJSONText);
   });
 
   $('#timeout').change(function() {
-    var test_packet = [{"packet_type" : "chat_msg_req", "message" : "/set timeout " + $('#timeout').val()}];
+    var test_packet = {"type" : packet_chat_msg_req, "message" : "/set timeout " + $('#timeout').val()};
     var myJSONText = JSON.stringify(test_packet);
     send_request (myJSONText);
   });
@@ -281,13 +281,13 @@ function pregame_settings()
     ai_skill_level = parseFloat($('#skill_level').val());
     var test_packet = "";
     if (ai_skill_level == 0) {
-      test_packet = [{"packet_type" : "chat_msg_req", "message" : "/novice"}];
+      test_packet = {"type" : packet_chat_msg_req, "message" : "/novice"};
     } else if (ai_skill_level == 1) {
-      test_packet = [{"packet_type" : "chat_msg_req", "message" : "/easy"}];
+      test_packet = {"type" : packet_chat_msg_req, "message" : "/easy"};
     } else if (ai_skill_level == 2) {
-      test_packet = [{"packet_type" : "chat_msg_req", "message" : "/normal"}];
+      test_packet = {"type" : packet_chat_msg_req, "message" : "/normal"};
     } else if (ai_skill_level == 3) {
-      test_packet = [{"packet_type" : "chat_msg_req", "message" : "/hard"}];
+      test_packet = {"type" : packet_chat_msg_req, "message" : "/hard"};
     }
     var myJSONText = JSON.stringify(test_packet);
     send_request (myJSONText);

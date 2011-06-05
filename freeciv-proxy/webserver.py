@@ -28,6 +28,7 @@ INC_WAIT_TIME = 0.005  # waiting time betweeen checking for updates.
 PACKET_SIZE_WAIT_THRESHOLD = 4;
 REQ_QUEUE_SIZE = 70;
 FC_HTTP_TIMEOUT = 40;
+MAX_PACKET_LEN = 65536;
 
 class CivWebServer(ThreadingMixIn, HTTPServer):
 
@@ -108,12 +109,12 @@ class WebserverHandler(BaseHTTPRequestHandler):
             post_data = self.rfile.read(content_length)
             
             # send JSON request to civserver.
-
-            if not civcom.send_packets_to_civserver(post_data):
-              if (logger.isEnabledFor(logging.INFO)):
-                logger.info("Sending data to civserver failed.");
-              self.send_error(503,'Civserver communication failure: %s' % self.path)
-              return;
+	    if (post_data != "[]" and len(post_data) < MAX_PACKET_LEN):
+              if not civcom.send_packets_to_civserver(post_data):
+                if (logger.isEnabledFor(logging.INFO)):
+                  logger.info("Sending data to civserver failed.");
+                self.send_error(503,'Civserver communication failure: %s' % self.path)
+                return;
  
   	  response_payload = civcom.get_send_result_string();
 

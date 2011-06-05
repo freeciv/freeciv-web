@@ -234,8 +234,8 @@ update_sci_rates ()
 
 function submit_player_rates()
 {
-  var packet = [{"packet_type" : "player_rates", 
-                "tax" : tax, "luxury" : lux, "science" : sci }];
+  var packet = {"type" : packet_player_rates, 
+                "tax" : tax, "luxury" : lux, "science" : sci };
   send_request (JSON.stringify(packet));
   close_rates_dialog();
 }

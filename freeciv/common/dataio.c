@@ -195,8 +195,13 @@ size_t dio_input_remaining(struct data_in *din)
 /**************************************************************************
 ...
 **************************************************************************/
-void dio_put_uint8(struct data_out *dout, int value)
+void dio_put_uint8(struct data_out *dout, char *key, int value)
 {
+  json_object_set_new(dout->json, key, json_integer(value));
+}
+
+void dio_put_uint8_old(struct data_out *dout, int value)
+ {
   if (enough_space(dout, 1)) {
     uint8_t x = value;
 
@@ -206,10 +211,119 @@ void dio_put_uint8(struct data_out *dout, int value)
   }
 }
 
+
 /**************************************************************************
 ...
 **************************************************************************/
-void dio_put_uint16(struct data_out *dout, int value)
+void dio_put_uint16(struct data_out *dout, char *key, int value)
+{
+  json_object_set_new(dout->json, key, json_integer(value));
+}
+
+/**************************************************************************
+...
+**************************************************************************/
+void dio_put_uint32(struct data_out *dout, char *key, int value)
+{
+  json_object_set_new(dout->json, key, json_integer(value));
+}
+
+/**************************************************************************
+...
+**************************************************************************/
+void dio_put_bool8(struct data_out *dout, char *key, bool value)
+{
+  json_object_set_new(dout->json, key, value ? json_true() : json_false());
+}
+
+/**************************************************************************
+...
+**************************************************************************/
+void dio_put_bool32(struct data_out *dout, char *key, bool value)
+{
+  json_object_set_new(dout->json, key, value ? json_true() : json_false());
+}
+
+/**************************************************************************
+...
+**************************************************************************/
+void dio_put_uint8_vec8(struct data_out *dout, char *key, int *values, int stop_value)
+{
+ /* TODO: implement. */
+}
+
+/**************************************************************************
+...
+**************************************************************************/
+void dio_put_uint16_vec8(struct data_out *dout, char *key, int *values, int stop_value)
+{
+  /* TODO: implement */
+
+}
+
+/**************************************************************************
+...
+**************************************************************************/
+void dio_put_memory(struct data_out *dout, char *key, const void *value, size_t size)
+{
+  /* TODO: implement */
+}
+
+/**************************************************************************
+...
+**************************************************************************/
+void dio_put_memory_old(struct data_out *dout, const void *value, size_t size)
+{
+  if (enough_space(dout, size)) {
+    memcpy(ADD_TO_POINTER(dout->dest, dout->current), value, size);
+    dout->current += size;
+  }
+}
+
+
+/**************************************************************************
+...
+**************************************************************************/
+void dio_put_string(struct data_out *dout, char *key, const char *value)
+{
+  json_object_set_new(dout->json, key, json_string(value));
+}
+
+/**************************************************************************
+...
+**************************************************************************/
+void dio_put_string_array(struct data_out *dout, char *key, 
+		          const char *value, int size)
+{
+  int i;
+
+  json_t *array = json_array();
+  for (i = 0; i < size; i++) {
+    if (value != NULL) {
+      json_array_append_new(array, json_string(value + i));
+    }
+  }
+  
+  json_object_set_new(dout->json, key, array);
+}
+
+
+void dio_put_string_old(struct data_out *dout, const char *value)
+ {
+  if (put_conv_callback) {
+    size_t length;
+    char *buffer;
+
+    if ((buffer = (*put_conv_callback) (value, &length))) {
+      dio_put_memory_old(dout, buffer, length + 1);
+      free(buffer);
+    }
+  } else {
+    dio_put_memory_old(dout, value, strlen(value) + 1);
+  }
+}
+
+void dio_put_uint16_old(struct data_out *dout, int value)
 {
   if (enough_space(dout, 2)) {
     uint16_t x = htons(value);
@@ -220,194 +334,130 @@ void dio_put_uint16(struct data_out *dout, int value)
   }
 }
 
+
+
 /**************************************************************************
 ...
 **************************************************************************/
-void dio_put_uint32(struct data_out *dout, int value)
+void dio_put_bit_string(struct data_out *dout, char *key, const char *value)
 {
-  if (enough_space(dout, 4)) {
-    uint32_t x = htonl(value);
+  /* TODO: implement */
 
-    assert(sizeof(x) == 4);
-    memcpy(ADD_TO_POINTER(dout->dest, dout->current), &x, 4);
-    dout->current += 4;
-  }
 }
 
 /**************************************************************************
 ...
 **************************************************************************/
-void dio_put_bool8(struct data_out *dout, bool value)
+void dio_put_tech_list(struct data_out *dout, char *key, const int *value)
 {
-  if (value != TRUE && value != FALSE) {
-    freelog(LOG_ERROR, "Trying to put a non-boolean: %d", (int) value);
-    value = FALSE;
-  }
-
-  dio_put_uint8(dout, value ? 1 : 0);
+  /* TODO: implement */
 }
 
 /**************************************************************************
 ...
 **************************************************************************/
-void dio_put_bool32(struct data_out *dout, bool value)
+void dio_put_worklist(struct data_out *dout, char *key, const struct worklist *pwl)
 {
-  if (value != TRUE && value != FALSE) {
-    freelog(LOG_ERROR, "Trying to put a non-boolean: %d", (int) value);
-    value = FALSE;
-  }
-
-  dio_put_uint32(dout, value ? 1 : 0);
+  /* TODO: implement */
 }
 
-/**************************************************************************
-...
-**************************************************************************/
-void dio_put_uint8_vec8(struct data_out *dout, int *values, int stop_value)
-{
-  size_t count;
-
-  for (count = 0; values[count] != stop_value; count++) {
-    /* nothing */
-  }
-
-  if (enough_space(dout, 1 + count)) {
-    size_t i;
-
-    dio_put_uint8(dout, count);
-
-    for (i = 0; i < count; i++) {
-      dio_put_uint8(dout, values[i]);
-    }
-  }
-}
-
-/**************************************************************************
-...
-**************************************************************************/
-void dio_put_uint16_vec8(struct data_out *dout, int *values, int stop_value)
-{
-  size_t count;
-
-  for (count = 0; values[count] != stop_value; count++) {
-    /* nothing */
-  }
-
-  if (enough_space(dout, 1 + 2 * count)) {
-    size_t i;
-
-    dio_put_uint8(dout, count);
-
-    for (i = 0; i < count; i++) {
-      dio_put_uint16(dout, values[i]);
-    }
-  }
-}
-
-/**************************************************************************
-...
-**************************************************************************/
-void dio_put_memory(struct data_out *dout, const void *value, size_t size)
-{
-  if (enough_space(dout, size)) {
-    memcpy(ADD_TO_POINTER(dout->dest, dout->current), value, size);
-    dout->current += size;
-  }
-}
-
-/**************************************************************************
-...
-**************************************************************************/
-void dio_put_string(struct data_out *dout, const char *value)
-{
-  if (put_conv_callback) {
-    size_t length;
-    char *buffer;
-
-    if ((buffer = (*put_conv_callback) (value, &length))) {
-      dio_put_memory(dout, buffer, length + 1);
-      free(buffer);
-    }
-  } else {
-    dio_put_memory(dout, value, strlen(value) + 1);
-  }
-}
-
-/**************************************************************************
-...
-**************************************************************************/
-void dio_put_bit_string(struct data_out *dout, const char *value)
-{
-  /* Note that size_t is often an unsigned type, so we must be careful
-   * with the math when calculating 'bytes'. */
-  size_t bits = strlen(value), bytes;
-  size_t max = (unsigned short)(-1);
-
-  if (bits > max) {
-    freelog(LOG_ERROR, "Bit string too long: %lu bits.", (unsigned long)bits);
-    assert(FALSE);
-    bits = max;
-  }
-  bytes = (bits + 7) / 8;
-
-  if (enough_space(dout, bytes + 1)) {
-    size_t i;
-
-    dio_put_uint16(dout, bits);
-
-    for (i = 0; i < bits;) {
-      int bit, data = 0;
-
-      for (bit = 0; bit < 8 && i < bits; bit++, i++) {
-	if (value[i] == '1') {
-	  data |= (1 << bit);
-	}
-      }
-      dio_put_uint8(dout, data);
-    }
-  }
-}
-
-/**************************************************************************
-...
-**************************************************************************/
-void dio_put_tech_list(struct data_out *dout, const int *value)
+void dio_put_array_uint8(struct data_out *dout, char *key, int *values, int size)
 {
   int i;
-
-  for (i = 0; i < MAX_NUM_TECH_LIST; i++) {
-    dio_put_uint8(dout, value[i]);
-    if (value[i] == A_LAST) {
-      break;
-    }
+  json_t *array = json_array();
+  for (i = 0; i < size; i++) {
+    json_array_append_new(array, json_integer(values[i]));
   }
+  
+  json_object_set_new(dout->json, key, array);
 }
 
-/**************************************************************************
-...
-**************************************************************************/
-void dio_put_worklist(struct data_out *dout, const struct worklist *pwl)
+void dio_put_array_uint32(struct data_out *dout, char *key, int *values, int size)
 {
-  dio_put_bool8(dout, pwl->is_valid);
-
-  if (pwl->is_valid) {
-    int i, length = worklist_length(pwl);
-
-    dio_put_uint8(dout, length);
-    for (i = 0; i < length; i++) {
-      const struct universal *pcp = &(pwl->entries[i]);
-
-      dio_put_uint8(dout, pcp->kind);
-      dio_put_uint8(dout, universal_number(pcp));
-    }
+  int i;
+  json_t *array = json_array();
+  for (i = 0; i < size; i++) {
+    json_array_append_new(array, json_integer(values[i]));
   }
+  
+  json_object_set_new(dout->json, key, array);
+
+}
+
+void dio_put_array_sint8(struct data_out *dout, char *key, int *values, int size)
+{
+  int i;
+  json_t *array = json_array();
+  for (i = 0; i < size; i++) {
+    json_array_append_new(array, json_integer(values[i]));
+  }
+  
+  json_object_set_new(dout->json, key, array);
+
+}
+
+void dio_put_array_sint16(struct data_out *dout, char *key, int *values, int size)
+{
+  int i;
+  json_t *array = json_array();
+  for (i = 0; i < size; i++) {
+    json_array_append_new(array, json_integer(values[i]));
+  }
+  
+  json_object_set_new(dout->json, key, array);
+
+}
+
+void dio_put_array_sint32(struct data_out *dout, char *key, int *values, int size)
+{
+  int i;
+  json_t *array = json_array();
+  for (i = 0; i < size; i++) {
+    json_array_append_new(array, json_integer(values[i]));
+  }
+  
+  json_object_set_new(dout->json, key, array);
+
+}
+
+void dio_put_array_bool8(struct data_out *dout, char *key, bool *values, int size)
+{
+  int i;
+  json_t *array = json_array();
+  for (i = 0; i < size; i++) {
+    json_array_append_new(array, values[i] ? json_true() : json_false());
+  }
+  
+  json_object_set_new(dout->json, key, array);
+
+}
+
+
+/**************************************************************************
+ Receive uint8 value to dest. In case of failure, value stored to dest
+ will be zero. Note that zero is legal value even when there is no failure.
+**************************************************************************/
+void dio_get_uint8(json_t *json_packet, char *key, int *dest)
+{
+  json_t *pint = json_object_get(json_packet, key);
+
+  if (!pint) {
+    freelog(LOG_ERROR, "ERROR: Unable to get uint8 with key: %s", key);
+    return;
+  } 
+  *dest = json_integer_value(pint);
+
+  if (!dest) {
+    freelog(LOG_ERROR, "ERROR: Unable to get unit8 with key: %s", key);
+  }
+
 }
 
 /**************************************************************************
  Receive uint8 value to dest. In case of failure, value stored to dest
  will be zero. Note that zero is legal value even when there is no failure.
 **************************************************************************/
-void dio_get_uint8(struct data_in *din, int *dest)
+void dio_get_uint8_old(struct data_in *din, int *dest)
 {
   if (enough_data(din, 1)) {
     if (dest) {
@@ -423,11 +473,12 @@ void dio_get_uint8(struct data_in *din, int *dest)
   }
 }
 
+
 /**************************************************************************
  Receive uint16 value to dest. In case of failure, value stored to dest
  will be zero. Note that zero is legal value even when there is no failure.
 **************************************************************************/
-void dio_get_uint16(struct data_in *din, int *dest)
+void dio_get_uint16_old(struct data_in *din, int *dest)
 {
   if (enough_data(din, 2)) {
     if (dest) {
@@ -443,121 +494,167 @@ void dio_get_uint16(struct data_in *din, int *dest)
   }
 }
 
+
+/**************************************************************************
+ Receive uint16 value to dest. In case of failure, value stored to dest
+ will be zero. Note that zero is legal value even when there is no failure.
+**************************************************************************/
+void dio_get_uint16(json_t *json_packet, char *key, int *dest)
+{
+  json_t *pint = json_object_get(json_packet, key);
+
+  if (!pint) {
+    freelog(LOG_ERROR, "ERROR: Unable to get uint16 with key: %s", key);
+    return;
+  } 
+  *dest = json_integer_value(pint);
+
+  if (!dest) {
+    freelog(LOG_ERROR, "ERROR: Unable to get unit16 with key: %s", key);
+  }
+
+}
+
 /**************************************************************************
  Receive uint32 value to dest. In case of failure, value stored to dest
  will be zero. Note that zero is legal value even when there is no failure.
 **************************************************************************/
-void dio_get_uint32(struct data_in *din, int *dest)
+void dio_get_uint32(json_t *json_packet, char *key, int *dest)
 {
-  if (enough_data(din, 4)) {
-    if (dest) {
-      uint32_t x;
 
-      assert(sizeof(x) == 4);
-      memcpy(&x, ADD_TO_POINTER(din->src, din->current), 4);
-      *dest = ntohl(x);
-    }
-    din->current += 4;
-  } else if (dest) {
-    *dest = 0;
+  json_t *pint = json_object_get(json_packet, key);
+
+  if (!pint) {
+    freelog(LOG_ERROR, "ERROR: Unable to get uint32 with key: %s", key);
+    return;
+  } 
+  *dest = json_integer_value(pint);
+
+  if (!dest) {
+    freelog(LOG_ERROR, "ERROR: Unable to get unit32 with key: %s", key);
+  }
+
+}
+
+/**************************************************************************
+...
+**************************************************************************/
+void dio_get_bool8(json_t *json_packet, char *key, bool * dest)
+{
+  json_t *pbool = json_object_get(json_packet, key);
+
+  if (!pbool) {
+    freelog(LOG_ERROR, "ERROR: Unable to get bool8 with key: %s", key);
+    return;
+  } 
+  *dest = json_is_true(pbool);
+
+  if (!dest) {
+    freelog(LOG_ERROR, "ERROR: Unable to get bool with key: %s", key);
+  }
+
+}
+
+/**************************************************************************
+...
+**************************************************************************/
+void dio_get_bool32(json_t *json_packet, char *key, bool * dest)
+{
+ json_t *pbool = json_object_get(json_packet, key);
+
+  if (!pbool) {
+    freelog(LOG_ERROR, "ERROR: Unable to get bool32 with key: %s", key);
+    return;
+  } 
+  *dest = json_is_true(pbool);
+
+  if (!dest) {
+    freelog(LOG_ERROR, "ERROR: Unable to get bool32 with key: %s", key);
+  }
+
+}
+
+/**************************************************************************
+...
+**************************************************************************/
+void dio_get_sint8(json_t *json_packet, char *key, int *dest)
+{
+  json_t *pint = json_object_get(json_packet, key);
+
+  if (!pint) {
+    freelog(LOG_ERROR, "ERROR: Unable to get sint8 with key: %s", key);
+    return;
+  } 
+  *dest = json_integer_value(pint);
+
+  if (!dest) {
+    freelog(LOG_ERROR, "ERROR: Unable to get sint8 with key: %s", key);
   }
 }
 
 /**************************************************************************
 ...
 **************************************************************************/
-void dio_get_bool8(struct data_in *din, bool * dest)
+void dio_get_sint16(json_t *json_packet, char *key, int *dest)
 {
-  int ival;
+  json_t *pint = json_object_get(json_packet, key);
 
-  dio_get_uint8(din, &ival);
+  if (!pint) {
+    freelog(LOG_ERROR, "ERROR: Unable to get sint16 with key: %s", key);
+    return;
+  } 
+  *dest = json_integer_value(pint);
 
-  if (ival != 0 && ival != 1) {
-    freelog(LOG_ERROR, "Received value isn't boolean: %d", ival);
-    ival = 1;
+  if (!dest) {
+    freelog(LOG_ERROR, "ERROR: Unable to get sint16 with key: %s", key);
   }
 
-  *dest = (ival != 0);
 }
 
 /**************************************************************************
 ...
 **************************************************************************/
-void dio_get_bool32(struct data_in *din, bool * dest)
+void dio_get_memory(json_t *json_packet, char *key, void *dest, size_t dest_size)
 {
-  int ival = 0;
-
-  dio_get_uint32(din, &ival);
-
-  if (ival != 0 && ival != 1) {
-    freelog(LOG_ERROR, "Received value isn't boolean: %d", ival);
-    ival = 1;
-  }
-
-  *dest = (ival != 0);
+  /* TODO: implement */ 
 }
 
 /**************************************************************************
 ...
 **************************************************************************/
-void dio_get_sint8(struct data_in *din, int *dest)
+void dio_get_string(json_t *json_packet, char *key, char *dest, size_t max_dest_size)
 {
-  int tmp;
 
-  dio_get_uint8(din, &tmp);
-  if (dest) {
-    if (tmp > 0x7f) {
-      tmp -= 0x100;
-    }
-    *dest = tmp;
+  json_t *pstring = json_object_get(json_packet, key);
+
+  if (!pstring) {
+    freelog(LOG_ERROR, "ERROR: Unable to get string with key: %s", key);
+    return;
+  } 
+  const char *result_str = json_string_value(pstring);
+
+  if (dest && !(*get_conv_callback) (dest, max_dest_size, result_str, strlen(result_str))) {
+    freelog(LOG_ERROR, "ERROR: Unable to get string with key: %s", key);
   }
+
 }
 
 /**************************************************************************
 ...
 **************************************************************************/
-void dio_get_sint16(struct data_in *din, int *dest)
-{
-  int tmp = 0;
-
-  dio_get_uint16(din, &tmp);
-  if (dest) {
-    if (tmp > 0x7fff) {
-      tmp -= 0x10000;
-    }
-    *dest = tmp;
-  }
-}
-
-/**************************************************************************
-...
-**************************************************************************/
-void dio_get_memory(struct data_in *din, void *dest, size_t dest_size)
-{
-  if (enough_data(din, dest_size)) {
-    if (dest) {
-      memcpy(dest, ADD_TO_POINTER(din->src, din->current), dest_size);
-    }
-    din->current += dest_size;
-  }
-}
-
-/**************************************************************************
-...
-**************************************************************************/
-void dio_get_string(struct data_in *din, char *dest, size_t max_dest_size)
+void dio_get_string_old(struct data_in *din, char *dest, size_t max_dest_size)
 {
   char *c;
-  size_t ps_len;		/* length in packet, not including null */
+  size_t ps_len;               /* length in packet, not including null */
   size_t offset, remaining;
-
+ 
   assert(max_dest_size > 0 || dest == NULL);
-
+ 
   if (!enough_data(din, 1)) {
     dest[0] = '\0';
-    return;
+     return;
   }
-
+ 
   remaining = dio_input_remaining(din);
   c = ADD_TO_POINTER(din->src, din->current);
 
@@ -579,204 +676,90 @@ void dio_get_string(struct data_in *din, char *dest, size_t max_dest_size)
   }
 
   if (!din->too_short) {
-    din->current += (ps_len + 1);	/* past terminator */
+    din->current += (ps_len + 1);      /* past terminator */
   }
 }
+
 
 /**************************************************************************
 ...
 **************************************************************************/
-void dio_get_bit_string(struct data_in *din, char *dest,
+void dio_get_bit_string(json_t *json_packet, char *key, char *dest,
 			size_t max_dest_size)
 {
-  int npack = 0;		/* number claimed in packet */
-  int i;			/* iterate the bytes */
-
-  assert(dest != NULL && max_dest_size > 0);
-
-  if (!enough_data(din, 1)) {
-    dest[0] = '\0';
-    return;
-  }
-
-  dio_get_uint16(din, &npack);
-  if (npack >= max_dest_size) {
-      freelog(LOG_ERROR, "Have size for %lu, got %d",
-              (unsigned long)max_dest_size, npack);
-    din->bad_bit_string = TRUE;
-    dest[0] = '\0';
-    return;
-  }
-
-  for (i = 0; i < npack;) {
-    int bit, byte_value;
-
-    dio_get_uint8(din, &byte_value);
-    for (bit = 0; bit < 8 && i < npack; bit++, i++) {
-      if (TEST_BIT(byte_value, bit)) {
-	dest[i] = '1';
-      } else {
-	dest[i] = '0';
-      }
-    }
-  }
-
-  dest[npack] = '\0';
-
-  if (din->too_short) {
-    din->bad_bit_string = TRUE;
-  }
+  /* TODO: implement */
 }
 
 /**************************************************************************
 ...
 **************************************************************************/
-void dio_get_tech_list(struct data_in *din, int *dest)
+void dio_get_tech_list(json_t *json_packet, char *key, int *dest)
 {
-  int i;
+ /* TODO: implement*/ 
 
-  for (i = 0; i < MAX_NUM_TECH_LIST; i++) {
-    dio_get_uint8(din, &dest[i]);
-    if (dest[i] == A_LAST) {
-      break;
-    }
-  }
-
-  for (; i < MAX_NUM_TECH_LIST; i++) {
-    dest[i] = A_LAST;
-  }
 }
 
 /**************************************************************************
 ...
 **************************************************************************/
-void dio_get_worklist(struct data_in *din, struct worklist *pwl)
+void dio_get_worklist(json_t *json_packet, char *key, struct worklist *pwl)
 {
-  dio_get_bool8(din, &pwl->is_valid);
-
-  if (pwl->is_valid) {
-    int i, length;
-
-    worklist_init(pwl);
-
-    dio_get_uint8(din, &length);
-    for (i = 0; i < length; i++) {
-      struct universal prod;
-      int identifier;
-      int kind;
-
-      dio_get_uint8(din, &kind);
-      dio_get_uint8(din, &identifier);
-
-      prod = universal_by_number(kind, identifier);
-      worklist_append(pwl, prod);
-    }
-  }
+  /* TODO: implement */
 }
 
 /**************************************************************************
 ...
 **************************************************************************/
-void dio_get_uint8_vec8(struct data_in *din, int **values, int stop_value)
+void dio_get_uint8_vec8(json_t *json_packet, char *key, int **values, int stop_value)
 {
-  int count, inx;
-
-  dio_get_uint8(din, &count);
-  if (values) {
-    *values = fc_calloc((count + 1), sizeof(**values));
-  }
-  for (inx = 0; inx < count; inx++) {
-    dio_get_uint8(din, values ? &((*values)[inx]) : NULL);
-  }
-  if (values) {
-    (*values)[inx] = stop_value;
-  }
+  /* TODO: implement */
 }
 
 /**************************************************************************
  Receive vector of uint6 values.
 **************************************************************************/
-void dio_get_uint16_vec8(struct data_in *din, int **values, int stop_value)
+void dio_get_uint16_vec8(json_t *json_packet, char *key, int **values, int stop_value)
 {
-  int count, inx;
-
-  dio_get_uint8(din, &count);
-  if (values) {
-    *values = fc_calloc((count + 1), sizeof(**values));
-  }
-  for (inx = 0; inx < count; inx++) {
-    dio_get_uint16(din, values ? &((*values)[inx]) : NULL);
-  }
-  if (values) {
-    (*values)[inx] = stop_value;
-  }
+ /* TODO: implement */
 }
 
 /**************************************************************************
   De-serialize a player diplomatic state.
 **************************************************************************/
-void dio_get_diplstate(struct data_in *din, struct player_diplstate *pds)
+void dio_get_diplstate(json_t *json_packet, char *key, struct player_diplstate *pds)
 {
-  int value = 0;
-
-  /* backward compatible order defined for this transaction */
-  dio_get_uint8(din, &value);
-  pds->type = value;
-  dio_get_uint16(din, &pds->turns_left);
-  dio_get_uint16(din, &pds->contact_turns_left);
-  dio_get_uint8(din, &pds->has_reason_to_cancel);
-  dio_get_uint16(din, &pds->first_contact_turn);
-  value = 0;
-  dio_get_uint8(din, &value);
-  pds->max_state = value;
+  /* TODO: implement */
 }
 
 /**************************************************************************
   Serialize a player diplomatic state.
 **************************************************************************/
-void dio_put_diplstate(struct data_out *dout,
-		       const struct player_diplstate *pds)
+void dio_put_diplstate(struct data_out *dout, char *key,
+		       const struct player_diplstate *pds, int size)
 {
-  /* backward compatible order defined for this transaction */
-  dio_put_uint8(dout, pds->type);
-  dio_put_uint16(dout, pds->turns_left);
-  dio_put_uint16(dout, pds->contact_turns_left);
-  dio_put_uint8(dout, pds->has_reason_to_cancel);
-  dio_put_uint16(dout, pds->first_contact_turn);
-  dio_put_uint8(dout, pds->max_state);
+  int i;
+
+  json_t *array = json_array();
+  for (i = 0; i < size; i++) {
+    json_array_append_new(array, json_integer(pds[i].type));
+  }
+  
+  json_object_set_new(dout->json, key, array);
 }
 
 /**************************************************************************
   De-serialize a requirement.
 **************************************************************************/
-void dio_get_requirement(struct data_in *din, struct requirement *preq)
+void dio_get_requirement(json_t *json_packet, char *key, struct requirement *preq)
 {
-  int type, range, value;
-  bool survives, negated;
-
-  dio_get_uint8(din, &type);
-  dio_get_sint32(din, &value);
-  dio_get_uint8(din, &range);
-  dio_get_bool8(din, &survives);
-  dio_get_bool8(din, &negated);
-
-  *preq = req_from_values(type, range, survives, negated, value);
+  /* TODO: implement */
 }
 
 /**************************************************************************
   Serialize a requirement.
 **************************************************************************/
-void dio_put_requirement(struct data_out *dout, const struct requirement *preq)
+void dio_put_requirement(struct data_out *dout, char *key, const struct requirement *preq, int size)
 {
-  int type, range, value;
-  bool survives, negated;
-
-  req_get_values(preq, &type, &range, &survives, &negated, &value);
-
-  dio_put_uint8(dout, type);
-  dio_put_sint32(dout, value);
-  dio_put_uint8(dout, range);
-  dio_put_bool8(dout, survives);
-  dio_put_bool8(dout, negated);
+  /* TODO: implement */
 }
 

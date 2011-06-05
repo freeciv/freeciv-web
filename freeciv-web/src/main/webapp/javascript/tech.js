@@ -341,7 +341,7 @@ function scroll_tech_tree()
 **************************************************************************/
 function send_player_research(tech_id)
 {
-  var packet = [{"packet_type" : "player_research", "tech" : tech_id}];
+  var packet = {"type" : packet_player_research, "tech" : tech_id};
   send_request (JSON.stringify(packet));
 }
 
@@ -350,7 +350,7 @@ function send_player_research(tech_id)
 **************************************************************************/
 function send_player_tech_goal(tech_id)
 {
-  var packet = [{"packet_type" : "player_tech_goal", "tech" : tech_id}];
+  var packet = {"type" : packet_player_tech_goal, "tech" : tech_id};
   send_request (JSON.stringify(packet));
 }
 

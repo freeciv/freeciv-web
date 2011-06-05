@@ -31,8 +31,8 @@ var active_diplomacy_meeting_id = null;
 **************************************************************************/
 function diplomacy_init_meeting_req(counterpart)
 {
-  var packet = [{"packet_type" : "diplomacy_init_meeting_req", 
-	         "counterpart" : counterpart}];
+  var packet = {"type" : packet_diplomacy_init_meeting_req, 
+	         "counterpart" : counterpart};
   send_request (JSON.stringify(packet));
 
 }
@@ -70,8 +70,8 @@ function show_diplomacy_dialog(counterpart)
 function accept_treaty_req()
 {
 
-  var packet = [{"packet_type" : "diplomacy_accept_treaty_req", 
-	         "counterpart" : active_diplomacy_meeting_id}];
+  var packet = {"type" : packet_diplomacy_accept_treaty_req, 
+	         "counterpart" : active_diplomacy_meeting_id};
   send_request (JSON.stringify(packet));
 
 }
@@ -130,8 +130,8 @@ function accept_treaty(counterpart, I_accepted, other_accepted)
 **************************************************************************/
 function cancel_meeting_req()
 {
-  var packet = [{"packet_type" : "diplomacy_cancel_meeting_req", 
-	         "counterpart" : active_diplomacy_meeting_id}];
+  var packet = {"type" : packet_diplomacy_cancel_meeting_req, 
+	         "counterpart" : active_diplomacy_meeting_id};
   send_request (JSON.stringify(packet));
 
 }
@@ -141,11 +141,11 @@ function cancel_meeting_req()
 **************************************************************************/
 function create_clause_req(giver, type, value)
 {
-  var packet = [{"packet_type" : "diplomacy_create_clause_req", 
+  var packet = {"type" : packet_diplomacy_create_clause_req, 
 	         "counterpart" : active_diplomacy_meeting_id,
                  "giver" : giver,
                  "type" : type,
-                 "value" : value}];
+                 "value" : value};
   send_request (JSON.stringify(packet));
 
 }
@@ -199,11 +199,11 @@ function remove_clause_req(clause_no)
   var clauses = diplomacy_clause_map[active_diplomacy_meeting_id];
   var clause = clauses[clause_no];
   
-  var packet = [{"packet_type" : "diplomacy_remove_clause_req", 
+  var packet = {"type" : packet_diplomacy_remove_clause_req, 
 	         "counterpart" : clause['counterpart'],
                  "giver": clause['giver'],
                  "type" : clause['type'],
-                 "value": clause['value'] }];
+                 "value": clause['value'] };
   send_request (JSON.stringify(packet));
 
 }
@@ -301,9 +301,9 @@ function client_diplomacy_clause_string(counterpart, giver, type, value)
 **************************************************************************/
 function diplomacy_cancel_treaty(player_id)
 {
-  var packet = [{"packet_type" : "diplomacy_cancel_pact", 
+  var packet = {"type" : packet_diplomacy_cancel_pact, 
 	         "other_player_id" : player_id,
-                 "clause" : DS_CEASEFIRE}];
+                 "clause" : DS_CEASEFIRE};
   send_request (JSON.stringify(packet));
 
   update_nation_screen();

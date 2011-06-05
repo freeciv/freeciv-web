@@ -8,7 +8,6 @@
 <script type="text/javascript" src="/javascript-compressed/webclient.js"></script>
 <script type="text/javascript" src="/javascript-compressed/jmenu.js"></script>
 <script type="text/javascript" src="/webclient/session.jsp"></script>
-<script type="text/javascript" src="http://cdn.socket.io/stable/socket.io.js"></script>
 <script>WEB_SOCKET_SWF_LOCATION = 'http://cdn.socket.io/stable/WebSocketMain.swf';</script>
 
 

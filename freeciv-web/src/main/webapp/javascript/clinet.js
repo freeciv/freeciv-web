@@ -58,7 +58,8 @@ function network_websocket_init()
   ws.connect();
 
   ws.addEvent('connect', function() {
-    ws.send("{\"u\":\"" + username + "\",\"p\":" + civserverport + ", \"data\":[]}");
+    /* first websocket packet contains username and port. */
+    ws.send(username + ";" + civserverport);
   });
 
   ws.addEvent('message', function(data) {
@@ -121,7 +122,7 @@ function sync_civclient()
 function send_request(packet_payload) 
 {
   if (websocket_enabled) {
-    ws.send("{\"u\":\"" + username + "\",\"p\":" + civserverport + ", \"data\":" + packet_payload + "}");
+    ws.send(packet_payload);
   } else {
     $.post(civwebserver_url, packet_payload, client_handle_packet, "json");
   }

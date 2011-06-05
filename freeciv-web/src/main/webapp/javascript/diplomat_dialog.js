@@ -55,22 +55,22 @@ function popup_diplomat_dialog(pdiplomat, punit, pcity)
   });
 
   $("#diplo_emb").click(function() {
-    var packet = [{"packet_type" : "unit_diplomat_action", 
+    var packet = {"type" : packet_unit_diplomat_action, 
                    "diplomat_id" : pdiplomat['id'], 
                    "target_id": pcity['id'], 
                    "value" : 0, 
-                   "action_type": DIPLOMAT_EMBASSY}];
+                   "action_type": DIPLOMAT_EMBASSY};
     send_request (JSON.stringify(packet));		  
 
     $(id).remove();	
   });
 
   $("#diplo_inv").click(function() {
-    var packet = [{"packet_type" : "unit_diplomat_action", 
+    var packet = {"type" : packet_unit_diplomat_action, 
                    "diplomat_id" : pdiplomat['id'], 
                    "target_id": pcity['id'], 
                    "value" : 0, 
-                   "action_type": DIPLOMAT_INVESTIGATE}];
+                   "action_type": DIPLOMAT_INVESTIGATE};
     send_request (JSON.stringify(packet));		  
 
     $(id).remove();	
@@ -78,11 +78,11 @@ function popup_diplomat_dialog(pdiplomat, punit, pcity)
 
 
   $("#diplo_sab").click(function() {
-    var packet = [{"packet_type" : "unit_diplomat_action", 
+    var packet = {"type" : packet_unit_diplomat_action, 
                    "diplomat_id" : pdiplomat['id'], 
                    "target_id": pcity['id'], 
                    "value" : 0, 
-                   "action_type": DIPLOMAT_SABOTAGE}];
+                   "action_type": DIPLOMAT_SABOTAGE};
     send_request (JSON.stringify(packet));		  
 
     $(id).remove();	
@@ -104,11 +104,11 @@ function popup_diplomat_dialog(pdiplomat, punit, pcity)
 
   if (tech_count_counterpart > 0) {
     $("#diplo_tech").click(function() {
-      var packet = [{"packet_type" : "unit_diplomat_action", 
+      var packet = {"type" : packet_unit_diplomat_action, 
                      "diplomat_id" : pdiplomat['id'], 
                      "target_id": pcity['id'], 
                      "value" : last_tech, 
-                     "action_type": DIPLOMAT_STEAL}];
+                     "action_type": DIPLOMAT_STEAL};
       send_request (JSON.stringify(packet));
 
       $(id).remove();	
@@ -118,11 +118,11 @@ function popup_diplomat_dialog(pdiplomat, punit, pcity)
   }
 
   $("#diplo_revo").click(function() {
-    var packet = [{"packet_type" : "unit_diplomat_action", 
+    var packet = {"type" : packet_unit_diplomat_action, 
                    "diplomat_id" : pdiplomat['id'], 
                    "target_id": pcity['id'], 
                    "value" : 0, 
-                   "action_type": DIPLOMAT_INCITE}];
+                   "action_type": DIPLOMAT_INCITE};
     send_request (JSON.stringify(packet));		  
 
     $(id).remove();	
@@ -130,22 +130,22 @@ function popup_diplomat_dialog(pdiplomat, punit, pcity)
 
 
   $("#diplo_bribe").click(function() {
-    var packet = [{"packet_type" : "unit_diplomat_action", 
+    var packet = {"type" : packet_unit_diplomat_action, 
                    "diplomat_id" : pdiplomat['id'], 
                    "target_id": punit['id'], 
                    "value" : 0, 
-                   "action_type": DIPLOMAT_BRIBE}];
+                   "action_type": DIPLOMAT_BRIBE};
     send_request (JSON.stringify(packet));		  
 
     $(id).remove();	
   });
   
   $("#diplo_spy_sabo").click(function() {
-    var packet = [{"packet_type" : "unit_diplomat_action", 
+    var packet = {"type" : packet_unit_diplomat_action, 
                    "diplomat_id" : pdiplomat['id'], 
                    "target_id": punit['id'], 
                    "value" : 0, 
-                   "action_type": SPY_SABOTAGE_UNIT}];
+                   "action_type": SPY_SABOTAGE_UNIT};
     send_request (JSON.stringify(packet));		  
 
     $(id).remove();	

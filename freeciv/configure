@@ -28321,7 +28321,7 @@ fi
 { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_m_pow" >&5
 $as_echo "$ac_cv_lib_m_pow" >&6; }
 if test "x$ac_cv_lib_m_pow" = xyes; then :
-  SERVER_LIBS="$SERVER_LIBS -lm -lssl"
+  SERVER_LIBS="$SERVER_LIBS -lm -lssl -ljansson"
 else
   as_fn_error $? "Did not find math lib!" "$LINENO" 5
 fi

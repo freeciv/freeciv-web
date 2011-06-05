@@ -35,18 +35,12 @@ function load_game_real(filename)
     if (scenario == "true") {
       var test_packet = {"type" : packet_chat_msg_req, 
                          "message" : "/load " + filename};
-      var myJSONText = JSON.stringify(test_packet);
-      send_request (myJSONText);
+      send_request (JSON.stringify(test_packet));
 
-      test_packet = {"type" : packet_chat_msg_req, 
-                         "message" : "/take AI*1"};
-      myJSONText = JSON.stringify(test_packet);
-      send_request (myJSONText);
+      setTimeout("send_request (JSON.stringify({\"type\" : packet_chat_msg_req, \"message\" : \"/aitoggle AI*1\"}));",200);
 
-      test_packet = {"type" : packet_chat_msg_req, 
-                         "message" : "/aitoggle AI*1"};    
-      myJSONText = JSON.stringify(test_packet);
-      send_request (myJSONText);
+      setTimeout("send_request (JSON.stringify({\"type\" : packet_chat_msg_req,\"message\" : \"/take AI*1\"}));", 400);
+
 
     } else {
       var test_packet = {"type" : packet_chat_msg_req, 

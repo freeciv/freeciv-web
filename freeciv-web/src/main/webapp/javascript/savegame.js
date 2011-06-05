@@ -37,9 +37,9 @@ function load_game_real(filename)
                          "message" : "/load " + filename};
       send_request (JSON.stringify(test_packet));
 
-      setTimeout("send_request (JSON.stringify({\"type\" : packet_chat_msg_req, \"message\" : \"/aitoggle AI*1\"}));",200);
+      setTimeout("send_request (JSON.stringify({\"type\" : packet_chat_msg_req, \"message\" : \"/aitoggle AI*1\"}));",400);
 
-      setTimeout("send_request (JSON.stringify({\"type\" : packet_chat_msg_req,\"message\" : \"/take AI*1\"}));", 400);
+      setTimeout("send_request (JSON.stringify({\"type\" : packet_chat_msg_req,\"message\" : \"/take AI*1\"}));", 800);
 
 
     } else {

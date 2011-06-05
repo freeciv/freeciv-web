@@ -83,12 +83,13 @@ class CivConnection(tornadio.SocketConnection):
 	if self.civcom != None:
           self.civcom.stopped = True;
           self.civcom.close_connection();
-          del civcoms[self.civcom.key];
+	  if self.civcom.key in civcoms.keys():
+            del civcoms[self.civcom.key];
 
 
     # get the civcom instance which corresponds to the requested user.
     def get_civcom(self, username, civserverport, client_ip, ws_connection):
-      key = username + str(civserverport) + str(client_ip);
+      key = username + str(civserverport);
       if key not in civcoms.keys():
         civcom = CivCom(username, int(civserverport));
         civcom.client_ip = client_ip;

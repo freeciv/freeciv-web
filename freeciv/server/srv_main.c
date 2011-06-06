@@ -1655,17 +1655,15 @@ void handle_nation_select_req(struct connection *pc,
 {
   struct nation_type *new_nation;
   struct player *pplayer = player_by_number(player_no);
-  freelog(LOG_ERROR, "hepp1");
+  
   if (!pplayer || !can_conn_edit_players_nation(pc, pplayer)) {
     return;
   }
-  freelog(LOG_ERROR, "hepp2");
 
   new_nation = nation_by_number(nation_no);
 
   if (new_nation != NO_NATION_SELECTED) {
     char message[1024];
-    freelog(LOG_ERROR, "hepp3");
 
     /* check sanity of the packet sent by client */
     if (city_style < 0 || city_style >= game.control.styles_count
@@ -1674,7 +1672,6 @@ void handle_nation_select_req(struct connection *pc,
     }
 
     if (!new_nation->is_available) {
-    freelog(LOG_ERROR, "hepp4");
       notify_conn(pplayer->connections, NULL, E_NATION_SELECTED,
                   FTC_SERVER_INFO, NULL,
 		  _("%s nation is not available in this scenario."),
@@ -1700,7 +1697,6 @@ void handle_nation_select_req(struct connection *pc,
 
     name[0] = my_toupper(name[0]);
     sz_strlcpy(pplayer->name, name);
-    freelog(LOG_ERROR, "hepp5");
 
     notify_conn(NULL, NULL, E_NATION_SELECTED, FTC_SERVER_INFO, NULL,
 		_("%s is the %s ruler %s."),
@@ -1712,7 +1708,6 @@ void handle_nation_select_req(struct connection *pc,
     pplayer->city_style = city_style;
   }
 
-  freelog(LOG_ERROR, "hepp6");
   (void) player_set_nation(pplayer, new_nation);
   send_player_info_c(pplayer, game.est_connections);
 }

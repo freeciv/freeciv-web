@@ -50,11 +50,13 @@ class CivConnection(tornadio.SocketConnection):
 
     def on_message(self, message):
         if (not self.is_ready):
-          auth = message.split(";");
+          #called the first time the user connects.
+	  auth = message.split(";");
 	  self.username = auth[0];
 	  self.civserverport = auth[1];
-	  self.message = "[]";
 	  self.is_ready = True;
+          self.civcom = self.get_civcom(self.username, self.civserverport, self.ip, self);
+	  return;
         
         # get the civcom instance which corresponds to this user.        
         self.civcom = self.get_civcom(self.username, self.civserverport, self.ip, self);
@@ -64,7 +66,6 @@ class CivConnection(tornadio.SocketConnection):
           return;
 
         try:
-            
           # send JSON request to civserver.
           if not self.civcom.send_packets_to_civserver(message):
             if (logger.isEnabledFor(logging.INFO)):

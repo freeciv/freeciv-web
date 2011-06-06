@@ -61,10 +61,6 @@ class CivCom(Thread):
 
 
     # send packet
-    #fmt = '>Hc'+str(len(self.username))+'sx'+str(len(VERSION))+'sx'+str(len(VER_INFO))+'s3I';
-    #packet = packExt(fmt, calcsize(fmt), chr(4), self.username, VERSION, VER_INFO, 2, 1, 99);
-    #self.socket.sendall(packet)
-
     login_packet = "{\"type\":4,\"username\":\"%s\",\"capability\":\"%s\",\"version_label\":\"%s\",\"major_version\":%d,\"minor_version\":%d,\"patch_version\":%d}" %  (self.username, VERSION, VER_INFO, 2, 1, 99);
     self.send_to_civserver(login_packet)
 

@@ -13,7 +13,7 @@ resin_version="4.0.18"
 resin_url="http://www.caucho.com/download/resin-${resin_version}.tar.gz"
 
 # Based on fresh install of Ubuntu 10.10
-dependencies="maven2 mysql-server openjdk-6-jdk libcurl4-openssl-dev nginx git-core"
+dependencies="maven2 mysql-server openjdk-6-jdk libcurl4-openssl-dev nginx git-core libjansson-dev"
 
 
 ## Setup

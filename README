@@ -75,12 +75,23 @@ System Requirements
 
 - Tornado 1.2.1 - http://www.tornadoweb.org/
 
-- GLib 2.29.x - http://ftp.gnome.org/pub/GNOME/sources/glib/2.29/
+- GLib 2.16.0 or newer - http://ftp.gnome.org/pub/GNOME/sources/glib/2.16/
 
 - Jansson 2.0.1 - http://www.digip.org/jansson/
 
+
+
 Compiling and running the Freeciv Web client
 ---------------------------------
+
+To compile and run Freeciv.net on Ubuntu, 
+1. Checkout Freeciv.net from github to ~/freeciv-build
+2. Update username/password and run: ~/freeciv-build/freeciv.net-bootstrap.sh
+
+
+On other Linux distributions, follow this installation procedure:
+
+0. Checkout Freeciv.net from github to ~/freeciv-build
 
 1. Install the system requirements. 
 
@@ -107,7 +118,7 @@ Compiling and running the Freeciv Web client
 
 
 5. Start resin with these commands:  
-   cd /opt/resin/bin
+   cd ~/freeciv-build/resin/bin
    ./resin.sh start
 
 6. Start publite2:

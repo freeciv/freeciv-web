@@ -523,7 +523,7 @@ if test "$ftwl" = opengl ; then
      FTWL_LIBS="$FTWL_LIBS "`sdl-config --libs`" -lpng "`freetype-config --libs -lGL -lGLU`
 fi
 
-AM_PATH_GLIB_2_0(2.29.0,,
+AM_PATH_GLIB_2_0(2.16.0,,
 AC_MSG_ERROR(Test for Glib failed. See the file 'INSTALL' for help))
 
 LIBS="$LIBS $GLIB_LIBS"

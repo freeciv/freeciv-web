@@ -168,6 +168,7 @@ function recenter_button_pressed(canvas_x, canvas_y)
   if (can_client_change_view() && ptile != null) {
     /* FIXME: Some actions here will need to check can_client_issue_orders.
      * But all we can check is the lowest common requirement. */
+    enable_mapview_slide(ptile);
     center_tile_mapcanvas(ptile);
   }
 }

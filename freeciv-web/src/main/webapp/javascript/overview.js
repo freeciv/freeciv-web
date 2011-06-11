@@ -256,18 +256,17 @@ function overview_tile_color(map_x, map_y)
 ****************************************************************************/
 function overview_clicked (x, y)
 {
+  var width = $("#overview_map").width();
+  var height = $("#overview_map").height();
 
-    var width = $("#overview_map").width();
-    var height = $("#overview_map").height();
-
-    var x1 = Math.floor((x * map['xsize']) / width);
-    var y1 = Math.floor((y * map['ysize']) / height);
+  var x1 = Math.floor((x * map['xsize']) / width);
+  var y1 = Math.floor((y * map['ysize']) / height);
   
-    var ptile = map_pos_to_tile(x1, y1);  
-    if (ptile != null) {
-      center_tile_mapcanvas(ptile);
-    }
-    
-    redraw_overview();
+  var ptile = map_pos_to_tile(x1, y1);  
+  if (ptile != null) {
+    center_tile_mapcanvas(ptile);
+  }
+  update_map_canvas_full();
+  redraw_overview();
     
 }

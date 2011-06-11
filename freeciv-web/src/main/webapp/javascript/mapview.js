@@ -14,10 +14,20 @@
 
 var mapview_canvas_ctx = null;
 var mapview_canvas = null; 
+var buffer_canvas_ctx = null;
+var buffer_canvas = null; 
+
 var tileset_image = null; 
 var sprites = {};
 
 var sprites_init = false;
+var mapview_slide = {};
+mapview_slide['active'] = false;
+mapview_slide['dx'] = 0;
+mapview_slide['dy'] = 0;
+mapview_slide['i'] = 0;
+mapview_slide['max'] = 100; 
+mapview_slide['slide_time'] = 800;
 
 var height_offset = 67;
 var height_offset_iphone = 110;
@@ -41,6 +51,8 @@ function init_mapview()
  
   mapview_canvas = document.getElementById('canvas');
   mapview_canvas_ctx = mapview_canvas.getContext("2d");
+  buffer_canvas = document.createElement('canvas');
+  buffer_canvas_ctx = buffer_canvas.getContext('2d');
 
   if ("mozImageSmoothingEnabled" in mapview_canvas_ctx) {
     // if this Boolean value is false, images won't be smoothed when scaled. This property is true by default.

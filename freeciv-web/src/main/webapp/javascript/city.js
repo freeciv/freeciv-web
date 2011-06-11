@@ -99,7 +99,8 @@ function show_city_dialog(pcity)
   
   set_city_mapview_active();
   center_tile_mapcanvas(city_tile(pcity));
-  
+  update_map_canvas(0, 0, mapview['store_width'], mapview['store_height']);
+ 
   $("#tabs-map").addClass("ui-tabs-hide");
   $("#tabs-cit").removeClass("ui-tabs-hide");
   $("#map_tab").removeClass("ui-state-active");

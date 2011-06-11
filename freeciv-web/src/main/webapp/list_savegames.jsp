@@ -20,13 +20,16 @@ if (username != null && (guest_mode != null && guest_mode == "false")) {
              (new Long(((File) o1).lastModified()));
       }
     }); 
-
+    out.println("<table style='font-weight: bold;' border='0'><tr><td>Please select game to resume playing:</td><td>Delete:</td></tr>");
     for (int i=0; i<children.length; i++) {
         // Get filename of file or directory
 	String filename = children[i].getName().replaceAll(".bz2", "").replaceAll(".gz", "");
-	out.println("<a class='button' href='/preload.jsp?redir=/civclientlauncher?action=load&load=" + filename + "'>" 
-		+ (children.length - i) + ". " + filename + "</a><br>");
+	out.println("<tr><td><a class='button load' href='/preload.jsp?redir=/civclientlauncher?action=load&load=" + filename + "' title='Load savegame'>" 
+		+ (children.length - i) + ". " + filename + "</a></td><td>" 
+                + "<a href='/delete.jsp?file=" + children[i].getName() 
+		+ "' class='button delete' title='Delete savegame' onClick='return confirmSubmit();'>X</a></td></tr>");
     }
+    out.println("</table>");
   }
 
 

@@ -27,8 +27,20 @@
 
 <script>
 	$( ".button").button();
-	$( ".button").css("width", "400px");
-	$( ".button").css("margin", "10px");
+	$( ".load").css("width", "400px");
+	$( ".load").css("margin", "10px");
+	$( ".delete").css("width", "40px");
+	$( ".delete").css("color", "rgb(200,0,0)");
+
+function confirmSubmit()
+{
+var agree=confirm("Are you sure you want to delete this savegame?");
+if (agree)
+	return true ;
+else
+	return false ;
+}
+
 </script>
 
 <% } %>

@@ -19471,7 +19471,7 @@ fi
     PKG_CONFIG=no
   fi
 
-  min_glib_version=2.29.0
+  min_glib_version=2.16.0
   { $as_echo "$as_me:${as_lineno-$LINENO}: checking for GLIB - version >= $min_glib_version" >&5
 $as_echo_n "checking for GLIB - version >= $min_glib_version... " >&6; }
 

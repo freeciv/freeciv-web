@@ -492,12 +492,9 @@ function put_drawn_sprites(pcanvas, canvas_x, canvas_y, pdrawn, fog)
     } else if (pdrawn[i]['key'] == "unit_activity_text" ) {
       mapview_put_unit_text(pcanvas, pdrawn[i]['text'], canvas_x + offset_x, canvas_y + offset_y);        
     } else {
-      canvas_put_sprite(pcanvas,
-			       canvas_x,
-			       canvas_y,
-			       pdrawn[i],
-			       offset_x, offset_y);
-	}    
+      mapview_put_tile(pcanvas, pdrawn[i]['key'], canvas_x + offset_x, canvas_y + offset_y);
+
+    }    
   }
   
 }

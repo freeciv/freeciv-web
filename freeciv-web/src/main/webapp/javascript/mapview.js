@@ -240,6 +240,15 @@ function mapview_put_tile(pcanvas, tag, canvas_x, canvas_y) {
              
 }
 
+/****************************************************************************
+  Draw a filled-in colored rectangle onto the mapview or citydialog canvas.
+****************************************************************************/
+function canvas_put_rectangle(canvas_context, pcolor, canvas_x, canvas_y, width, height)
+{
+  canvas_context.fillStyle = pcolor;
+  canvas_context.fillRect (canvas_x, canvas_y, canvas_x + width, canvas_y + height);
+
+}
 
 /**************************************************************************
   Draw city text onto the canvas.

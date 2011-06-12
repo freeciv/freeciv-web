@@ -72,6 +72,15 @@
      onmouseup="document.images['road_button'].src='/images/orders/road_hover.png';"><img src="/images/orders/road_default.png" name="road_button" alt="" border="0" width="30"></a>
   </div>
 
+  <div id="order_railroad" class="order_button" >
+    <a href="#" onclick="key_unit_railroad();" 
+     onmouseover="document.images['railroad_button'].src='/images/orders/railroad_hover.png';"
+     onmouseout="document.images['railroad_button'].src='/images/orders/railroad_default.png';" 
+     onmousedown="document.images['railroad_button'].src='/images/orders/railroad_clicked.png';" 
+     onmouseup="document.images['railroad_button'].src='/images/orders/railroad_hover.png';"><img src="/images/orders/railroad_default.png" name="railroad_button" alt="" border="0" width="30"></a>
+  </div>
+
+
   <div id="order_mine" class="order_button">
     <a href="#" onclick="key_unit_mine();" 
      onmouseover="document.images['mine_button'].src='/images/orders/mine_hover.png';"

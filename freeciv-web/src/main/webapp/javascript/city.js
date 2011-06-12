@@ -162,6 +162,7 @@ function show_city_dialog(pcity)
     if (can_city_build_unit_now(pcity, punit_type) == true) { 
       production_list.push({"kind": VUT_UTYPE, "value" : punit_type['id'], 
                             "text" : punit_type['name'],
+	                    "helptext" : punit_type['helptext'],
                             "sprite" : get_unit_type_image_sprite(punit_type)});
     }
   }
@@ -172,6 +173,7 @@ function show_city_dialog(pcity)
       production_list.push({"kind": VUT_IMPROVEMENT, 
                             "value" : pimprovement['id'], 
                             "text" : pimprovement['name'],
+	                    "helptext" : pimprovement['helptext'],
                             "sprite" : get_improvement_image_sprite(pimprovement) });
     }
   }
@@ -187,7 +189,8 @@ function show_city_dialog(pcity)
 
     production_html = production_html 
      + "<div style='text-align: center; " + (current_prod ? "background-color:#777777; text:#000000; border: 1px solid #ffffff;" : "") + "'" 
-     + " onclick='send_city_change(" + pcity['id'] + "," + production_list[a]['kind'] + "," + production_list[a]['value'] + ")'>"
+     + " onclick='send_city_change(" + pcity['id'] + "," + production_list[a]['kind'] + "," + production_list[a]['value'] + ")' "
+     + " title='" + production_list[a]['helptext'] + "'>"
      
      + "<div id='production_list_item' style='cursor:pointer;cursor:hand; background: transparent url(" 
            + sprite['image-src'] +
@@ -431,5 +434,33 @@ function city_name_dialog(suggested_name, unit_id) {
     }
   });
   keyboard_input=false;
+}
+
+/**************************************************************************
+.. 
+**************************************************************************/
+function next_city()
+{
+  if (!client.conn.playing) return;
+
+  var is_next = false;
+  for (city_id in cities) {
+    var pcity = cities[city_id];
+    if (is_next && city_owner(pcity).playerno == client.conn.playing.playerno) {
+      show_city_dialog(pcity);
+      return;
+    }
+    if (active_city['id'] == city_id) {
+      is_next = true;
+    }
+  }
+	
+  for (city_id in cities) {
+    var pcity = cities[city_id];
+    if (is_next && city_owner(pcity).playerno == client.conn.playing.playerno) {
+      show_city_dialog(pcity)
+      return;
+    }
+  }
 }
 

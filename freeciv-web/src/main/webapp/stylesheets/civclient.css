@@ -131,8 +131,21 @@ button {
 #city_canvas_div {
   width: 300px; 
   height: 150px; 
-  margin: 30px;
+  margin: 5px;
   border: 1px solid #888888;
+  float: left;
+}
+
+#city_dialog_info {
+  margin-bottom: 30px;
+  float: left;
+  padding: 10px;
+
+}
+
+#city_button_pane {
+  clear: left; 
+  margin: 20px;
 }
 
 #game_status_panel {
@@ -146,14 +159,14 @@ button {
 #city_left_panel {
   background: url("/images/black-bg.png") repeat scroll 0 0 #222222;
   float: left; 
-  width: 40%;
+  width: 45%;
 }
 
 #city_right_panel {
   float: right; 
-  width: 60%;
+  width: 55%;
   background: url("/images/black-bg.png") repeat scroll 0 0 #222222;
-  height: 663px;
+  height: 533px;
 }
 
 
@@ -320,4 +333,39 @@ button {
 
 #self_dipl_add {
   z-index: 100;
+}
+
+
+#city_change_production {
+  height: 410px; 
+  width: 120px; 
+  overflow: auto; 
+  background-color: #111111; 
+  border: 1px solid #444444;
+  
+}
+
+#city_present_units {
+  height: 100px; 
+  width: 90%; 
+  overflow: auto; 
+  background-color: #111111; 
+  border: 1px solid #444444;
+}
+
+#city_improvements {
+  height: 100px; 
+  width: 90%; 
+  overflow: auto; 
+  background-color: #111111; 
+  border: 1px solid #444444;
+
+}
+
+
+#city_production_choices {
+  cursor:pointer;
+  cursor:hand; 
+  width: 90px;
+
 }

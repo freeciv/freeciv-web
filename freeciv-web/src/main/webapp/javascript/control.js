@@ -276,8 +276,12 @@ function update_unit_order_commands()
       $("#order_sentry").hide();
       $("#order_explore").hide();
       $("#order_auto_settlers").show();
+      if (player_invention_state(client.conn.playing, 65) == TECH_KNOWN) {
+        $("#order_railroad").show();
+      }
     } else {
       $("#order_road").hide();
+      $("#order_railroad").hide();
       $("#order_mine").hide();
       $("#order_irrigate").hide();
       $("#order_fortify").show();
@@ -637,6 +641,10 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift)
       if (alt) show_debug_info(); 
     break;
 
+    case 'L':
+      key_unit_railroad();
+    break;
+
   };
   
   switch (key_code) {
@@ -808,7 +816,7 @@ function key_unit_mine()
 }
 
 /**************************************************************************
- Tell the units in focus to build road.  (FIXME: railroads)
+ Tell the units in focus to build road.  
 **************************************************************************/
 function key_unit_road()
 {
@@ -819,6 +827,20 @@ function key_unit_road()
   }  
   update_unit_focus();
 }
+
+/**************************************************************************
+ Tell the units in focus to build railroads.  
+**************************************************************************/
+function key_unit_railroad()
+{
+  var funits = get_units_in_focus();
+  for (var i = 0; i < funits.length; i++) {
+    var punit = funits[i]; 
+    request_new_unit_activity(punit, ACTIVITY_RAILROAD);
+  }  
+  update_unit_focus();
+}
+
 
 /**************************************************************************
   Call to request (from the server) that the focus unit is put into

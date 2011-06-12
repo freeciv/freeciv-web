@@ -1,0 +1,34 @@
+TODO:
+-----
+
+- Implements various advisory screens. (cities, wonders, diplomacy etc)
+- Make goto lines wrap in X direction of the map.
+- Show city revolt graphics
+- Show attack animation.
+- WebGl?
+- Port to Python 3.2
+- Show national borders
+- Saving in the client side.
+- Show city tile output in city dialog.
+- Playback of games.
+- Test Uglify.js
+- Show attack prompts. At the moment, gotos can result in unwanted attacks.
+- Show what city is a unit's homecity. Rehome units.
+- Show veteran status of units.
+- Dissolve cities.
+- Statue of liberty doesn't allow all governments.
+- Better interface to load units into boats and transports.
+- Show more traderoute info in cities.
+- "Peace wonders" don't work.
+- Paratroopers can't move
+- Nukes can't move
+- Show citizens in cities (scientists, entertainers, etc)
+- Planes goto get blocked by ground units.
+- Separate chat box from other messages.
+- Nations dialog: Show who we are waiting on.
+- Show number of turns a diplomatic agreement will last.
+- Pillage doesn't work.
+- not able to steal tech with diplomat.
+- diplomats inside cities can't see units there.
+
+

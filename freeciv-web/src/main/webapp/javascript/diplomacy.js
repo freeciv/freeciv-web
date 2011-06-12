@@ -323,6 +323,9 @@ function create_diplomacy_dialog(counterpart) {
 
   // reset diplomacy_dialog div.
   $("#diplomacy_dialog").remove();
+  $("#self-items").remove();
+  $("#counterpart-items").remove();
+  $(".positionHelper").remove();
   $("<div id='diplomacy_dialog'></div>").appendTo("div#game_page");
 
   $("#diplomacy_dialog").html(
@@ -396,7 +399,7 @@ function create_diplomacy_dialog(counterpart) {
 
 
 
-  // Diplomacy meny for current player.
+  // Diplomacy menu for current player.
   $("<div id='self_dipl_div' ></div>").appendTo("#diplomacy_player_box_self");
 
   var fg_menu_self_html = "<a tabindex='0' class='fg-button fg-button-icon-right ui-widget ui-state-default ui-corner-all' id='hierarchy_self'><span class='ui-icon ui-icon-triangle-1-s'></span>Add Clause...</a> <div id='self-items' class='hidden'></div>";
@@ -446,7 +449,7 @@ function create_diplomacy_dialog(counterpart) {
 
 
   /* setup fg-menu */
-  $('#hierarchy_self').menu({
+  $('#hierarchy_self').fgmenu({
     content: $('#self-items').html(),
     flyOut: true
   });
@@ -498,7 +501,7 @@ function create_diplomacy_dialog(counterpart) {
 
 
   /* setup fg-menu */
-  $('#hierarchy_counterpart').menu({
+  $('#hierarchy_counterpart').fgmenu({
     content: $('#counterpart-items').html(),
     flyOut: true
   });

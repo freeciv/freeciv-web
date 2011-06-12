@@ -12,8 +12,8 @@ Dual licensed under the MIT (filamentgroup.com/examples/mit-license.txt) and GPL
 
 
 var allUIMenus = [];
-
-$.fn.menu = function(options){
+/* fixme: menu has been renamed to fgmenu, to avoid conflict with jQuery autocomplete menu  -  Andreas */
+$.fn.fgmenu = function(options){
 	var caller = this;
 	var options = options;
 	var m = new Menu(caller, options);	
@@ -88,8 +88,8 @@ function Menu(caller, options){
 		if (container.is('.fg-menu-flyout')) { menu.resetFlyoutMenu(); };	
 		container.parent().hide();	
 		menu.menuOpen = false;
-		$(document).unbind('click', killAllMenus);
-		$(document).unbind('keydown');
+		/*$(document).unbind('click', killAllMenus);
+		$(document).unbind('keydown');*/
 	};
 	
 	this.showLoading = function(){

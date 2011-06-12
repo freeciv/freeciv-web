@@ -146,18 +146,8 @@ Also:
 Set ulimit -n 65535 in /etc/profile
 and add some TCP/IP tuning in /etc/sysctrl.conf
 
-TODO:
------
+Developers interested in Freeciv.net
+------------------------------------
 
-- Make goto lines wrap in X direction of the map.
-- Show city revolt graphics
-- Show attack animation.
-- WebGl?
-- Port to Python 3.2
-- Show borders
-- Saving in the client side.
-- Show city tile output in city dialog.
-- Playback of games.
-- HTML5 Web Sockets.
-- Test Uglify.js
-- Research dialog: highlight all techs up to tech goal.
+If you want to contibute to Freeciv.net, see the TODO file for 
+some tasks you can work on.

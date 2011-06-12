@@ -13,21 +13,21 @@ which would be playable online in a browser came about some time in 2007, and th
 <br><br>
 Freeciv.net requires a browser which supports HTML5, such as Firefox 4, Chrome 11, Safari, Opera, Internet Explorer 9. Freeciv.net uses many features from the HTML5 specification, such as HTML5 Canvas to render graphics and optionally HTML5 WebSockets for faster network performance.
 <br><br>
-Freeciv.net is developed by <a href="mailto:andrearo at pvv.ntnu.no">Andreas Rosdal</a>. The Freeciv.org project has been contributed to by <a href="http://freeciv.wikia.com/wiki/People">these people</a>.
+The Freeciv.net web client for Freeciv was  by <a href="mailto:andrearo at pvv.ntnu.no">Andreas R&oslash;sdal</a>, Twitter: <a href="http://twitter.com/#!/andreasrosdal">@andreasrosdal</a>. The Freeciv.org project has been contributed to by <a href="http://freeciv.wikia.com/wiki/People">these people</a>.
 
 </span>
 <br>
 <br>
 
 <center>
-	<img src="/images/freeciv-splash.png">
-
+<img src="/images/freeciv-splash.png">
+<br>the Freeciv.net logo
 
 
 <br><br><br>
-This is a screenshot of Freeciv.net as of September 2010:
 
-<br>  <a href="/wireframe.jsp?do=screenshots"><img src="/images/freeciv-screenshot-8-thumb2.png" border="0"></a>
-<center>
+<br>  <a href="/wireframe.jsp?do=screenshots"><img src="/images/freeciv-screenshot-sm.png" border="0"></a>
+<br>This is a screenshot of Freeciv.net as of June 2011. Click on image for more screenshots.<br><br>
+</center>
 
 </div>

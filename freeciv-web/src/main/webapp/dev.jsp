@@ -7,7 +7,7 @@ access to the software and the source code.
 <br><br>
 
 
-The source code is maintained and developed at <a href="http://code.google.com/p/freeciv-forever/">code.google.com</a>. 
+The source code is maintained and developed at <a href="https://github.com/freecivnet/freeciv-web">guthub</a> and <a href="http://code.google.com/p/freeciv-forever/">code.google.com</a>. 
 Here you can <a href="http://code.google.com/p/freeciv-forever/issues/list">submit bug reports</a>, download the source code yourself,
 and find some documentation on the wiki there. 
 </span>

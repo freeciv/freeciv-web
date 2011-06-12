@@ -430,6 +430,7 @@ struct packet_player_info {
   unsigned int gives_shared_vision;
   char inventions[A_LAST+1];
   int wonders[B_LAST];
+  int net_income;
 };
 
 struct packet_player_phase_done {

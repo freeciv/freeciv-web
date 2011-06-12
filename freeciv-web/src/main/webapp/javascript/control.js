@@ -46,6 +46,8 @@ function control_init()
   $("#canvas").mouseup(mapview_mouse_click);
   $("#canvas").mousedown(mapview_mouse_down);
 
+  $("#city_canvas").click(city_mapview_mouse_click);
+
   $("#game_text_input").keydown(function(event) {
 	  return check_text_input(event, $("#game_text_input"));
     });

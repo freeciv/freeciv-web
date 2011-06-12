@@ -730,6 +730,7 @@ PACKET_PLAYER_INFO=39;sc
   STRING inventions[A_LAST+1];
 
   CITY wonders[B_LAST]; diff
+  UINT32 net_income;
 end
 
 PACKET_PLAYER_PHASE_DONE=40;cs,dsend

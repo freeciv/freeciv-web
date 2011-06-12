@@ -64,7 +64,6 @@ function get_player_population() {
   ...
 **************************************************************************/
 function update_game_status_panel() {
-  // Turkmen Population: 10,000  Turn: 1  Gold: 51  Tax: 40 Lux: 0 Sci: 60
   
   if (C_S_RUNNING != client_state()) return;
   
@@ -76,16 +75,21 @@ function update_game_status_panel() {
     var lux = client.conn.playing['luxury'];
     var sci = client.conn.playing['science'];
   
-    status_html += nations[pplayer['nation']]['adjective'] + " Population: ";
-    status_html += get_player_population() + "  ";
-    status_html += "Turn: " + game_info['turn'] + "  ";
-    status_html += "Gold: " + pplayer['gold'] + "  "; 
-    status_html += "Tax: " + tax + " ";
-    status_html += "Lux: " + lux + " ";
-    status_html += "Sci: " + sci + " ";
+    var net_income = pplayer['net_income'];
+    if (pplayer['net_income'] > 0) {
+      net_income = "+" + pplayer['net_income'];
+    } 
+
+    status_html += "<b>" + nations[pplayer['nation']]['adjective'] + "</b> Population: ";
+    status_html += "<b>" + get_player_population() + "</b>  ";
+    status_html += "Turn: <b>" + game_info['turn'] + "</b>  ";
+    status_html += "Gold: <b>" + pplayer['gold'] + " (" + net_income + ")</b>  "; 
+    status_html += "Tax: <b>" + tax + "</b> ";
+    status_html += "Lux: <b>" + lux + "</b> ";
+    status_html += "Sci: <b>" + sci + "</b> ";
   } else {
     status_html += "Observing - "; 
-    status_html += "Turn: " + game_info['turn'] + "  ";
+    status_html += "Turn: <b>" + game_info['turn'] + "</b>  ";
   }
   
   $("#game_status_panel").html(status_html); 

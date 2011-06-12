@@ -6118,6 +6118,12 @@ static struct packet_player_info *receive_packet_player_info_100(struct connecti
   }
     }
   }
+  {
+    int readin;
+  
+    dio_get_uint32(pc->json_packet, "net_income", &readin);
+    real_packet->net_income = readin;
+  }
 
   RECEIVE_PACKET_END(real_packet);
 }
@@ -6177,6 +6183,7 @@ static int send_packet_player_info_100(struct connection *pc, const struct packe
     {
         dio_put_array_uint32(&dout, "wonders", (int*)real_packet->wonders, B_LAST);
     } 
+  dio_put_uint32(&dout, "net_income", real_packet->net_income);
 
   SEND_PACKET_END;
 }

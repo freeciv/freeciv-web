@@ -329,11 +329,11 @@ function update_unit_info_label(punits)
     var ptype = unit_type(punit);
     var sprite = get_unit_image_sprite(punit);
     
-    unit_info_html += "<div style='float:left; padding-top: 10px; padding-right: 20px;'><div onclick='set_unit_focus_and_redraw(units[" + punit['id'] + "])' "
-	   + " style='cursor:pointer; float: left; padding-right: 10px; background: transparent url(" 
+    unit_info_html += "<div id='unit_info_div'><div id='unit_info_image' onclick='set_unit_focus_and_redraw(units[" + punit['id'] + "])' "
+	   + " style='background: transparent url(" 
            + sprite['image-src'] +
            ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y'] 
-           + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px;float:left; '"
+           + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px;'"
            + "'></div>";
     unit_info_html += "<div style='float:left;'><b>" + ptype['name'] + "</b><br>"
     unit_info_html += get_unit_moves_left(punit) ;
@@ -343,7 +343,7 @@ function update_unit_info_label(punits)
     + "</span> <span title='Firepower'>F:" + ptype['firepower']  
     + "</span> <span title='Health points'>H:" 
     + ptype['hp'] + "</span>";
-    unit_info_html += "</div></div></div>";
+    unit_info_html += "</div><div id='turns_to_target'></div></div></div>";
     
   }
   

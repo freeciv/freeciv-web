@@ -912,8 +912,10 @@ void handle_goto_path_req(struct player *pplayer, int unit_id, int x, int y)
     punit->orders.vigilant = FALSE;
     punit->orders.list
       = fc_malloc(path->length * sizeof(*(punit->orders.list)));
+    int total_mc = 0;
     for (i = 0; i < path->length - 1; i++) {
       struct tile *new_tile = path->positions[i + 1].tile;
+      total_mc += path->positions[1].total_MC;
       int dir;
       if (same_pos(new_tile, old_tile)) {
         dir = -1;
@@ -925,7 +927,7 @@ void handle_goto_path_req(struct player *pplayer, int unit_id, int x, int y)
 
     }
     pf_path_destroy(path);
-
+    p.turns = total_mc / unit_move_rate(punit);
     send_packet_goto_path(pplayer->current_conn, &p);
 
   } else {

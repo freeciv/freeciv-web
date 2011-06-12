@@ -379,3 +379,15 @@ button {
   width: 90px;
 
 }
+
+#unit_info_div {
+  float:left; 
+  padding-top: 10px; 
+  padding-right: 20px;
+}
+
+#unit_info_image {
+  cursor:pointer; 
+  float: left; 
+  padding-right: 10px;  
+}

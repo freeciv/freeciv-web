@@ -7868,6 +7868,12 @@ static struct packet_goto_path *receive_packet_goto_path_100(struct connection *
     dio_get_uint32(pc->json_packet, "dest_y", &readin);
     real_packet->dest_y = readin;
   }
+  {
+    int readin;
+  
+    dio_get_uint32(pc->json_packet, "turns", &readin);
+    real_packet->turns = readin;
+  }
 
   RECEIVE_PACKET_END(real_packet);
 }
@@ -7885,6 +7891,7 @@ static int send_packet_goto_path_100(struct connection *pc, const struct packet_
     } 
   dio_put_uint32(&dout, "dest_x", real_packet->dest_x);
   dio_put_uint32(&dout, "dest_y", real_packet->dest_y);
+  dio_put_uint32(&dout, "turns", real_packet->turns);
 
   SEND_PACKET_END;
 }
@@ -7946,7 +7953,7 @@ int send_packet_goto_path(struct connection *pc, const struct packet_goto_path *
   }
 }
 
-int dsend_packet_goto_path(struct connection *pc, int unit_id, int length, enum direction8 *dir, int dest_x, int dest_y)
+int dsend_packet_goto_path(struct connection *pc, int unit_id, int length, enum direction8 *dir, int dest_x, int dest_y, int turns)
 {
   struct packet_goto_path packet, *real_packet = &packet;
 
@@ -7961,6 +7968,7 @@ int dsend_packet_goto_path(struct connection *pc, int unit_id, int length, enum 
   }
   real_packet->dest_x = dest_x;
   real_packet->dest_y = dest_y;
+  real_packet->turns = turns;
   
   return send_packet_goto_path(pc, real_packet);
 }

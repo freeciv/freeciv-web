@@ -581,6 +581,12 @@ function update_goto_path_lines()
       drawGotoLine(mapview_canvas_ctx, gui_x1, gui_y1, gui_x2, gui_y2);
 
     }
+    if (current_goto_turns != undefined) {
+      $("#turns_to_target").html("Turns to target: " + current_goto_turns);
+    } else {
+      $("#turns_to_target").html("-" );
+    }
+
   }
 
 }

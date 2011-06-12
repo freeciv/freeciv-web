@@ -848,6 +848,7 @@ PACKET_GOTO_PATH=185;sc,dsend
   UINT16 length;
   DIRECTION dir[MAX_LEN_ROUTE:length];
   COORD dest_x, dest_y;
+  UINT32 turns;
 end
 
 

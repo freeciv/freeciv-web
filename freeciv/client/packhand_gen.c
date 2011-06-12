@@ -155,12 +155,7 @@ bool client_handle_packet(enum packet_type type, void *packet)
     return TRUE;
 
   case PACKET_GOTO_PATH:
-    handle_goto_path(
-      ((struct packet_goto_path *)packet)->unit_id,
-      ((struct packet_goto_path *)packet)->length,
-      ((struct packet_goto_path *)packet)->dir,
-      ((struct packet_goto_path *)packet)->dest_x,
-      ((struct packet_goto_path *)packet)->dest_y);
+    handle_goto_path(packet);
     return TRUE;
 
   case PACKET_UNIT_DIPLOMAT_ANSWER:

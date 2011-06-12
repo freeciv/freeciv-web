@@ -32,8 +32,9 @@ var SELECT_APPEND = 3;
 var intro_click_description = true; 
 
 var goto_request_map = {};
+var goto_turns_request_map = {};
 var current_goto_path = [];
-
+var current_goto_turns = 0;
 
 /****************************************************************************
 ...
@@ -723,6 +724,7 @@ function deactivate_goto()
   goto_active = false;
   mapview_canvas.style.cursor = "default";
   goto_request_map = {};
+  goto_turns_request_map = {};
   current_goto_path = [];
 
 }
@@ -1031,6 +1033,7 @@ function request_goto_path(unit_id, dst_x, dst_y)
   
   } else {
     current_goto_path = goto_request_map[dst_x + "," + dst_y];
+    current_goto_turns = goto_turns_request_map[dst_x + "," + dst_y];
   }
 }
 
@@ -1069,8 +1072,12 @@ function show_goto_path(goto_packet)
     current_goto_path.push(ptile);
   }
 
+  current_goto_turns = goto_packet['turns'];
+
   goto_request_map[goto_packet['dest_x'] + "," + goto_packet['dest_y']] 
 	  = current_goto_path;
+  goto_turns_request_map[goto_packet['dest_x'] + "," + goto_packet['dest_y']] 
+	  = current_goto_turns;
 }
 
 /****************************************************************************

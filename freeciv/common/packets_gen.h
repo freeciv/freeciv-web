@@ -552,6 +552,7 @@ struct packet_goto_path {
   enum direction8 dir[MAX_LEN_ROUTE];
   int dest_x;
   int dest_y;
+  int turns;
 };
 
 struct packet_unit_build_city {
@@ -1749,7 +1750,7 @@ int dsend_packet_goto_path_req(struct connection *pc, int unit_id, int x, int y)
 
 struct packet_goto_path *receive_packet_goto_path(struct connection *pc, enum packet_type type);
 int send_packet_goto_path(struct connection *pc, const struct packet_goto_path *packet);
-int dsend_packet_goto_path(struct connection *pc, int unit_id, int length, enum direction8 *dir, int dest_x, int dest_y);
+int dsend_packet_goto_path(struct connection *pc, int unit_id, int length, enum direction8 *dir, int dest_x, int dest_y, int turns);
 
 struct packet_unit_build_city *receive_packet_unit_build_city(struct connection *pc, enum packet_type type);
 int send_packet_unit_build_city(struct connection *pc, const struct packet_unit_build_city *packet);

@@ -985,25 +985,25 @@ end
 
 PACKET_DIPLOMACY_CREATE_CLAUSE_REQ=77;cs,dsend
   PLAYER counterpart, giver;
-  CLAUSE type;
+  CLAUSE clause_type;
   UINT32 value;
 end
 
 PACKET_DIPLOMACY_CREATE_CLAUSE=78;sc,dsend,lsend
   PLAYER counterpart, giver;
-  CLAUSE type;
+  CLAUSE clause_type;
   UINT32 value;
 end
 
 PACKET_DIPLOMACY_REMOVE_CLAUSE_REQ=79;cs,dsend
   PLAYER counterpart, giver;
-  CLAUSE type;
+  CLAUSE clause_type;
   UINT32 value;
 end
 
 PACKET_DIPLOMACY_REMOVE_CLAUSE=80;sc,dsend,lsend
   PLAYER counterpart, giver;
-  CLAUSE type;
+  CLAUSE clause_type;
   UINT32 value;
 end
 

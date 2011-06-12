@@ -182,7 +182,7 @@ bool client_handle_packet(enum packet_type type, void *packet)
     handle_diplomacy_create_clause(
       ((struct packet_diplomacy_create_clause *)packet)->counterpart,
       ((struct packet_diplomacy_create_clause *)packet)->giver,
-      ((struct packet_diplomacy_create_clause *)packet)->type,
+      ((struct packet_diplomacy_create_clause *)packet)->clause_type,
       ((struct packet_diplomacy_create_clause *)packet)->value);
     return TRUE;
 
@@ -190,7 +190,7 @@ bool client_handle_packet(enum packet_type type, void *packet)
     handle_diplomacy_remove_clause(
       ((struct packet_diplomacy_remove_clause *)packet)->counterpart,
       ((struct packet_diplomacy_remove_clause *)packet)->giver,
-      ((struct packet_diplomacy_remove_clause *)packet)->type,
+      ((struct packet_diplomacy_remove_clause *)packet)->clause_type,
       ((struct packet_diplomacy_remove_clause *)packet)->value);
     return TRUE;
 

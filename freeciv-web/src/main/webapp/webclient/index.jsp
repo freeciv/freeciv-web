@@ -6,7 +6,7 @@
 
 <script type="text/javascript" src="/javascript-compressed/jquery-1.6.1.min.js"></script>
 <script type="text/javascript" src="/javascript-compressed/webclient.js"></script>
-<script type="text/javascript" src="/javascript-compressed/jmenu.js"></script>
+<script type="text/javascript" src="/javascript-compressed/fg.menu.js"></script>
 <script type="text/javascript" src="/webclient/session.jsp"></script>
 <script>WEB_SOCKET_SWF_LOCATION = 'http://cdn.socket.io/stable/WebSocketMain.swf';</script>
 
@@ -14,8 +14,7 @@
 
 <link type="text/css" href="/stylesheets/dark-hive-1.8.12/jquery-ui-1.8.12.custom.css" rel="stylesheet" />
 <link type="text/css" rel="StyleSheet" href="/stylesheets/bluecurve.css" />
-<link type="text/css" rel="StyleSheet" href="/stylesheets/jplayer.blue.monday.css" />
-<link type="text/css" rel="StyleSheet" href="/stylesheets/jmenu.css" />
+<link type="text/css" rel="StyleSheet" href="/stylesheets/fg.menu.css" />
 
 <link rel="stylesheet" type="text/css" href="/stylesheets/civclient.css" />
 <link rel="stylesheet" type="text/css" href="/stylesheets/pregame.css" />
@@ -54,9 +53,6 @@
 
 <body onload="civclient_init();" onmousemove="mouse_moved_cb(event);" oncontextmenu="return allow_right_click;" onresize="mapview_window_resized();" onOrientationChange="orientation_changed();" onbeforeunload="send_surrender_game();">
 	
-<%-- This is the jQuery jPlayer which plays HTML5 audio. --%>
-<div id="jquery_jplayer"></div> 
-
 <%
   
   String username = "" + session.getAttribute("username");

@@ -281,7 +281,7 @@ bool server_handle_packet(enum packet_type type, void *packet,
     handle_diplomacy_create_clause_req(pplayer,
       ((struct packet_diplomacy_create_clause_req *)packet)->counterpart,
       ((struct packet_diplomacy_create_clause_req *)packet)->giver,
-      ((struct packet_diplomacy_create_clause_req *)packet)->type,
+      ((struct packet_diplomacy_create_clause_req *)packet)->clause_type,
       ((struct packet_diplomacy_create_clause_req *)packet)->value);
     return TRUE;
 
@@ -289,7 +289,7 @@ bool server_handle_packet(enum packet_type type, void *packet,
     handle_diplomacy_remove_clause_req(pplayer,
       ((struct packet_diplomacy_remove_clause_req *)packet)->counterpart,
       ((struct packet_diplomacy_remove_clause_req *)packet)->giver,
-      ((struct packet_diplomacy_remove_clause_req *)packet)->type,
+      ((struct packet_diplomacy_remove_clause_req *)packet)->clause_type,
       ((struct packet_diplomacy_remove_clause_req *)packet)->value);
     return TRUE;
 

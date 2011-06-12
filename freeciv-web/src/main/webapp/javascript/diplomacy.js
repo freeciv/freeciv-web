@@ -144,7 +144,7 @@ function create_clause_req(giver, type, value)
   var packet = {"type" : packet_diplomacy_create_clause_req, 
 	         "counterpart" : active_diplomacy_meeting_id,
                  "giver" : giver,
-                 "type" : type,
+                 "clause_type" : type,
                  "value" : value};
   send_request (JSON.stringify(packet));
 
@@ -180,7 +180,7 @@ function show_diplomacy_clauses()
       var clause = clauses[i];
       var diplo_str = client_diplomacy_clause_string(clause['counterpart'], 
  		          clause['giver'],
-		  	  clause['type'],
+		  	  clause['clause_type'],
 			  clause['value']);
       diplo_html += "<a href='#' onclick='remove_clause_req(" + i + ");'>" + diplo_str + "</a><br>";
 	
@@ -202,7 +202,7 @@ function remove_clause_req(clause_no)
   var packet = {"type" : packet_diplomacy_remove_clause_req, 
 	         "counterpart" : clause['counterpart'],
                  "giver": clause['giver'],
-                 "type" : clause['type'],
+                 "clause_type" : clause['clause_type'],
                  "value": clause['value'] };
   send_request (JSON.stringify(packet));
 
@@ -219,7 +219,7 @@ function remove_clause(remove_clause)
     var check_clause = clause_list[i];
     if (remove_clause['counterpart'] == check_clause['counterpart']
 	&& remove_clause['giver'] == check_clause['giver']
-	&& remove_clause['type'] == check_clause['type']) {
+	&& remove_clause['clause_type'] == check_clause['clause_type']) {
 
       clause_list.splice(i, 1);
       break;
@@ -368,8 +368,8 @@ function create_diplomacy_dialog(counterpart) {
   $("#diplomacy_dialog").dialog({
 			bgiframe: true,
 			modal: false,
-			width: "50%",
-			height: 430,
+			width: "45%",
+			height: 435,
 			buttons: {
 				"Accept treaty": function() {
 				        accept_treaty_req();
@@ -393,16 +393,21 @@ function create_diplomacy_dialog(counterpart) {
   $("#diplomacy_player_box_counterpart").html(flag_counterpart_html + agree_counterpart_html 
 		                               + counterpart_info_html);
 
+
+
+
   // Diplomacy meny for current player.
   $("<div id='self_dipl_div' ></div>").appendTo("#diplomacy_player_box_self");
-  $("<ul id='jmenu_self' class='jmenu ui-state-default ui-corner-all'></ul").appendTo("#self_dipl_div");
-  $("<li id='self_dipl_top'></li>").appendTo("#jmenu_self");
-  $("<a href='#'>Add Clause...</a>").appendTo("#self_dipl_top");
-  $("<ul id='self_dipl_add'></ul>").appendTo("#self_dipl_top");
-  $("<li>Maps...<ul id='self_maps'></ul></li>").appendTo("#self_dipl_add");
+
+  var fg_menu_self_html = "<a tabindex='0' class='fg-button fg-button-icon-right ui-widget ui-state-default ui-corner-all' id='hierarchy_self'><span class='ui-icon ui-icon-triangle-1-s'></span>Add Clause...</a> <div id='self-items' class='hidden'></div>";
+  $(fg_menu_self_html).appendTo("#self_dipl_div");
+
+
+  $("<ul id='self_dipl_add'></ul>").appendTo("#self-items");
+  $("<li><a href='#'>Maps...</a><ul id='self_maps'></ul></li>").appendTo("#self_dipl_add");
   $("<li><a href='#' onclick='create_clause_req(" + pplayer['playerno']+ "," + CLAUSE_MAP + ",1);'>World-map</a></li>").appendTo("#self_maps");
   $("<li><a href='#' onclick='create_clause_req(" + pplayer['playerno']+ "," + CLAUSE_SEAMAP + ",1);'>Sea-map</a></li>").appendTo("#self_maps");
-  $("<li id='self_adv_menu'>Advances...<ul id='self_advances'></ul></li>").appendTo("#self_dipl_add");
+  $("<li id='self_adv_menu'><a href='#'>Advances...</a><ul id='self_advances'></ul></li>").appendTo("#self_dipl_add");
   var tech_count_self = 0;
   for (var tech_id in techs) {
     if (player_invention_state(pplayer, tech_id) == TECH_KNOWN
@@ -419,7 +424,7 @@ function create_diplomacy_dialog(counterpart) {
     $("#self_adv_menu").hide();
   }
   var city_count_self = 0;
-  $("<li id='self_city_menu'>Cities...<ul id='self_cities'></ul></li>").appendTo("#self_dipl_add");
+  $("<li id='self_city_menu'><a href='#'>Cities...</a><ul id='self_cities'></ul></li>").appendTo("#self_dipl_add");
   for (city_id in cities) {
     var pcity = cities[city_id];
     if (!does_city_have_improvement(pcity, "Palace") && city_owner(pcity) == pplayer) {
@@ -433,22 +438,33 @@ function create_diplomacy_dialog(counterpart) {
 
   $("<li><a href='#' onclick='create_clause_req(" + pplayer['playerno']+ "," + CLAUSE_VISION + ",1);'>Give shared vision</a></li>").appendTo("#self_dipl_add");
   $("<li><a href='#' onclick='create_clause_req(" + pplayer['playerno']+ "," + CLAUSE_EMBASSY + ",1);'>Give embassy</a></li>").appendTo("#self_dipl_add");
-  $("<li>Pacts...<ul id='self_pacts'></ul></li>").appendTo("#self_dipl_add");
+  $("<li><a href='#'>Pacts...</a><ul id='self_pacts'></ul></li>").appendTo("#self_dipl_add");
   $("<li><a href='#' onclick='create_clause_req(" + pplayer['playerno']+ "," + CLAUSE_CEASEFIRE + ",1);'>Cease-fire</a></li>").appendTo("#self_pacts");
   $("<li><a href='#' onclick='create_clause_req(" + pplayer['playerno']+ "," + CLAUSE_PEACE + ",1);'>Peace</a></li>").appendTo("#self_pacts");
   $("<li><a href='#' onclick='create_clause_req(" + pplayer['playerno']+ "," + CLAUSE_ALLIANCE + ",1);'>Alliance</a></li>").appendTo("#self_pacts");
 
+
+
+  /* setup fg-menu */
+  $('#hierarchy_self').menu({
+    content: $('#self-items').html(),
+    flyOut: true
+  });
+		
+		
   // Counterpart menu.
   $("<div id='counterpart_dipl_div'></div>").appendTo("#diplomacy_player_box_counterpart");
-  $("<ul id='jmenu_counterpart' class='jmenu ui-state-default ui-corner-all'></ul").appendTo("#counterpart_dipl_div");
-  $("<li id='counterpart_dipl_top'></li>").appendTo("#jmenu_counterpart");
-  $("<a href='#'>Add Clause...</a>").appendTo("#counterpart_dipl_top");
-  $("<ul id='counterpart_dipl_add'></ul>").appendTo("#counterpart_dipl_top");
-  $("<li>Maps...<ul id='counterpart_maps'></ul></li>").appendTo("#counterpart_dipl_add");
+
+  var fg_menu_counterpart_html = "<a tabindex='0' class='fg-button fg-button-icon-right ui-widget ui-state-default ui-corner-all' id='hierarchy_counterpart'><span class='ui-icon ui-icon-triangle-1-s'></span>Add Clause...</a> <div id='counterpart-items' class='hidden'> </div>";
+  $(fg_menu_counterpart_html).appendTo("#counterpart_dipl_div");
+
+
+  $("<ul id='counterpart_dipl_add'></ul>").appendTo("#counterpart-items");
+  $("<li><a href='#'>Maps...</a><ul id='counterpart_maps'></ul></li>").appendTo("#counterpart_dipl_add");
 
   $("<li><a href='#' onclick='create_clause_req(" + counterpart['playerno']+ "," + CLAUSE_MAP + ",1);'>World-map</a></li>").appendTo("#counterpart_maps");
   $("<li><a href='#' onclick='create_clause_req(" + counterpart['playerno']+ "," + CLAUSE_SEAMAP + ",1);'>Sea-map</a></li>").appendTo("#counterpart_maps");
-  $("<li id='counterpart_adv_menu'>Advances...<ul id='counterpart_advances'></ul></li>").appendTo("#counterpart_dipl_add");
+  $("<li id='counterpart_adv_menu'><a href='#'>Advances...</a><ul id='counterpart_advances'></ul></li>").appendTo("#counterpart_dipl_add");
   var tech_count_counterpart = 0;
   for (var tech_id in techs) {
     if (player_invention_state(counterpart, tech_id) == TECH_KNOWN
@@ -465,7 +481,7 @@ function create_diplomacy_dialog(counterpart) {
     $("#counterpart_adv_menu").hide();
   }
   var city_count_counterpart = 0;
-  $("<li id='counterpart_city_menu'>Cities...<ul id='counterpart_cities'></ul></li>").appendTo("#counterpart_dipl_add");
+  $("<li id='counterpart_city_menu'><a href='#'>Cities...</a><ul id='counterpart_cities'></ul></li>").appendTo("#counterpart_dipl_add");
   for (city_id in cities) {
     var pcity = cities[city_id];
     if (!does_city_have_improvement(pcity, "Palace") && city_owner(pcity) == counterpart) {
@@ -480,9 +496,13 @@ function create_diplomacy_dialog(counterpart) {
   $("<li><a href='#' onclick='create_clause_req(" + counterpart['playerno']+ "," + CLAUSE_VISION + ",1);'>Give shared vision</a></li>").appendTo("#counterpart_dipl_add");
   $("<li><a href='#' onclick='create_clause_req(" + counterpart['playerno']+ "," + CLAUSE_EMBASSY + ",1);'>Give embassy</a></li>").appendTo("#counterpart_dipl_add");
 
-  // Setup menus.
-  $('#jmenu_self').jmenu({animation:'slide',duration:700});
-  $('#jmenu_counterpart').jmenu({animation:'slide',duration:700});
+
+  /* setup fg-menu */
+  $('#hierarchy_counterpart').menu({
+    content: $('#counterpart-items').html(),
+    flyOut: true
+  });
+
 
 
 }

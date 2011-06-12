@@ -227,12 +227,14 @@ button {
   float: left;
   padding-left: 60px;
   text-align: left;
+  z-index: 2000;
 }
 
 #counterpart_dipl_div {
   float: left;
   padding-left: 60px;
   text-align: left;
+  z-index: 2000;
 }
 
 #dialog {
@@ -391,3 +393,21 @@ button {
   float: left; 
   padding-right: 10px;  
 }
+
+
+/* This is for popup menu support */
+.hidden { position:absolute; top:0; left:-9999px; width:1px; height:1px; overflow:hidden; }
+	
+.fg-button { font-size: 14px; clear:left; margin:0 4px 40px 20px; padding: .4em 1em; text-decoration:none !important; cursor:pointer; position: relative; text-align: center; zoom: 1; }
+.fg-button .ui-icon { position: absolute; top: 50%; margin-top: -8px; left: 50%; margin-left: -8px; }
+.fg-menu-container {font-size: 14px;}
+a.fg-button { float:left;  }
+button.fg-button {  width:auto; overflow:visible; } /* removes extra button width in IE */
+	
+.fg-button-icon-left { padding-left: 2.1em; }
+.fg-button-icon-right { padding-right: 2.1em; }
+.fg-button-icon-left .ui-icon { right: auto; left: .2em; margin-left: 0; }
+.fg-button-icon-right .ui-icon { left: auto; right: .2em; margin-left: 0; }
+.fg-button-icon-solo { display:block; width:8px; text-indent: -9999px; }	 /* solo icon buttons must have block properties for the text-indent to work */	
+
+

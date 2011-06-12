@@ -688,28 +688,28 @@ struct packet_diplomacy_cancel_meeting {
 struct packet_diplomacy_create_clause_req {
   int counterpart;
   int giver;
-  enum clause_type type;
+  enum clause_type clause_type;
   int value;
 };
 
 struct packet_diplomacy_create_clause {
   int counterpart;
   int giver;
-  enum clause_type type;
+  enum clause_type clause_type;
   int value;
 };
 
 struct packet_diplomacy_remove_clause_req {
   int counterpart;
   int giver;
-  enum clause_type type;
+  enum clause_type clause_type;
   int value;
 };
 
 struct packet_diplomacy_remove_clause {
   int counterpart;
   int giver;
-  enum clause_type type;
+  enum clause_type clause_type;
   int value;
 };
 
@@ -1856,23 +1856,23 @@ void dlsend_packet_diplomacy_cancel_meeting(struct conn_list *dest, int counterp
 
 struct packet_diplomacy_create_clause_req *receive_packet_diplomacy_create_clause_req(struct connection *pc, enum packet_type type);
 int send_packet_diplomacy_create_clause_req(struct connection *pc, const struct packet_diplomacy_create_clause_req *packet);
-int dsend_packet_diplomacy_create_clause_req(struct connection *pc, int counterpart, int giver, enum clause_type type, int value);
+int dsend_packet_diplomacy_create_clause_req(struct connection *pc, int counterpart, int giver, enum clause_type clause_type, int value);
 
 struct packet_diplomacy_create_clause *receive_packet_diplomacy_create_clause(struct connection *pc, enum packet_type type);
 int send_packet_diplomacy_create_clause(struct connection *pc, const struct packet_diplomacy_create_clause *packet);
 void lsend_packet_diplomacy_create_clause(struct conn_list *dest, const struct packet_diplomacy_create_clause *packet);
-int dsend_packet_diplomacy_create_clause(struct connection *pc, int counterpart, int giver, enum clause_type type, int value);
-void dlsend_packet_diplomacy_create_clause(struct conn_list *dest, int counterpart, int giver, enum clause_type type, int value);
+int dsend_packet_diplomacy_create_clause(struct connection *pc, int counterpart, int giver, enum clause_type clause_type, int value);
+void dlsend_packet_diplomacy_create_clause(struct conn_list *dest, int counterpart, int giver, enum clause_type clause_type, int value);
 
 struct packet_diplomacy_remove_clause_req *receive_packet_diplomacy_remove_clause_req(struct connection *pc, enum packet_type type);
 int send_packet_diplomacy_remove_clause_req(struct connection *pc, const struct packet_diplomacy_remove_clause_req *packet);
-int dsend_packet_diplomacy_remove_clause_req(struct connection *pc, int counterpart, int giver, enum clause_type type, int value);
+int dsend_packet_diplomacy_remove_clause_req(struct connection *pc, int counterpart, int giver, enum clause_type clause_type, int value);
 
 struct packet_diplomacy_remove_clause *receive_packet_diplomacy_remove_clause(struct connection *pc, enum packet_type type);
 int send_packet_diplomacy_remove_clause(struct connection *pc, const struct packet_diplomacy_remove_clause *packet);
 void lsend_packet_diplomacy_remove_clause(struct conn_list *dest, const struct packet_diplomacy_remove_clause *packet);
-int dsend_packet_diplomacy_remove_clause(struct connection *pc, int counterpart, int giver, enum clause_type type, int value);
-void dlsend_packet_diplomacy_remove_clause(struct conn_list *dest, int counterpart, int giver, enum clause_type type, int value);
+int dsend_packet_diplomacy_remove_clause(struct connection *pc, int counterpart, int giver, enum clause_type clause_type, int value);
+void dlsend_packet_diplomacy_remove_clause(struct conn_list *dest, int counterpart, int giver, enum clause_type clause_type, int value);
 
 struct packet_diplomacy_accept_treaty_req *receive_packet_diplomacy_accept_treaty_req(struct connection *pc, enum packet_type type);
 int send_packet_diplomacy_accept_treaty_req(struct connection *pc, const struct packet_diplomacy_accept_treaty_req *packet);

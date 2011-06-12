@@ -66,8 +66,8 @@ void handle_unit_diplomat_action(struct player *pplayer, int diplomat_id, int ta
 void handle_unit_change_activity(struct player *pplayer, int unit_id, enum unit_activity activity, enum tile_special_type activity_target, Base_type_id activity_base);
 void handle_diplomacy_init_meeting_req(struct player *pplayer, int counterpart);
 void handle_diplomacy_cancel_meeting_req(struct player *pplayer, int counterpart);
-void handle_diplomacy_create_clause_req(struct player *pplayer, int counterpart, int giver, enum clause_type type, int value);
-void handle_diplomacy_remove_clause_req(struct player *pplayer, int counterpart, int giver, enum clause_type type, int value);
+void handle_diplomacy_create_clause_req(struct player *pplayer, int counterpart, int giver, enum clause_type clause_type, int value);
+void handle_diplomacy_remove_clause_req(struct player *pplayer, int counterpart, int giver, enum clause_type clause_type, int value);
 void handle_diplomacy_accept_treaty_req(struct player *pplayer, int counterpart);
 void handle_diplomacy_cancel_pact(struct player *pplayer, int other_player_id, enum clause_type clause);
 void handle_report_req(struct connection *pc, enum report_type type);

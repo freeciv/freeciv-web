@@ -10472,8 +10472,8 @@ static struct packet_diplomacy_create_clause_req *receive_packet_diplomacy_creat
   {
     int readin;
   
-    dio_get_uint8(pc->json_packet, "type", &readin);
-    real_packet->type = readin;
+    dio_get_uint8(pc->json_packet, "clause_type", &readin);
+    real_packet->clause_type = readin;
   }
   {
     int readin;
@@ -10492,7 +10492,7 @@ static int send_packet_diplomacy_create_clause_req_100(struct connection *pc, co
 
   dio_put_sint8(&dout, "counterpart", real_packet->counterpart);
   dio_put_sint8(&dout, "giver", real_packet->giver);
-  dio_put_uint8(&dout, "type", real_packet->type);
+  dio_put_uint8(&dout, "clause_type", real_packet->clause_type);
   dio_put_uint32(&dout, "value", real_packet->value);
 
   SEND_PACKET_END;
@@ -10555,13 +10555,13 @@ int send_packet_diplomacy_create_clause_req(struct connection *pc, const struct 
   }
 }
 
-int dsend_packet_diplomacy_create_clause_req(struct connection *pc, int counterpart, int giver, enum clause_type type, int value)
+int dsend_packet_diplomacy_create_clause_req(struct connection *pc, int counterpart, int giver, enum clause_type clause_type, int value)
 {
   struct packet_diplomacy_create_clause_req packet, *real_packet = &packet;
 
   real_packet->counterpart = counterpart;
   real_packet->giver = giver;
-  real_packet->type = type;
+  real_packet->clause_type = clause_type;
   real_packet->value = value;
   
   return send_packet_diplomacy_create_clause_req(pc, real_packet);
@@ -10585,8 +10585,8 @@ static struct packet_diplomacy_create_clause *receive_packet_diplomacy_create_cl
   {
     int readin;
   
-    dio_get_uint8(pc->json_packet, "type", &readin);
-    real_packet->type = readin;
+    dio_get_uint8(pc->json_packet, "clause_type", &readin);
+    real_packet->clause_type = readin;
   }
   {
     int readin;
@@ -10605,7 +10605,7 @@ static int send_packet_diplomacy_create_clause_100(struct connection *pc, const 
 
   dio_put_sint8(&dout, "counterpart", real_packet->counterpart);
   dio_put_sint8(&dout, "giver", real_packet->giver);
-  dio_put_uint8(&dout, "type", real_packet->type);
+  dio_put_uint8(&dout, "clause_type", real_packet->clause_type);
   dio_put_uint32(&dout, "value", real_packet->value);
 
   SEND_PACKET_END;
@@ -10675,25 +10675,25 @@ void lsend_packet_diplomacy_create_clause(struct conn_list *dest, const struct p
   } conn_list_iterate_end;
 }
 
-int dsend_packet_diplomacy_create_clause(struct connection *pc, int counterpart, int giver, enum clause_type type, int value)
+int dsend_packet_diplomacy_create_clause(struct connection *pc, int counterpart, int giver, enum clause_type clause_type, int value)
 {
   struct packet_diplomacy_create_clause packet, *real_packet = &packet;
 
   real_packet->counterpart = counterpart;
   real_packet->giver = giver;
-  real_packet->type = type;
+  real_packet->clause_type = clause_type;
   real_packet->value = value;
   
   return send_packet_diplomacy_create_clause(pc, real_packet);
 }
 
-void dlsend_packet_diplomacy_create_clause(struct conn_list *dest, int counterpart, int giver, enum clause_type type, int value)
+void dlsend_packet_diplomacy_create_clause(struct conn_list *dest, int counterpart, int giver, enum clause_type clause_type, int value)
 {
   struct packet_diplomacy_create_clause packet, *real_packet = &packet;
 
   real_packet->counterpart = counterpart;
   real_packet->giver = giver;
-  real_packet->type = type;
+  real_packet->clause_type = clause_type;
   real_packet->value = value;
   
   lsend_packet_diplomacy_create_clause(dest, real_packet);
@@ -10717,8 +10717,8 @@ static struct packet_diplomacy_remove_clause_req *receive_packet_diplomacy_remov
   {
     int readin;
   
-    dio_get_uint8(pc->json_packet, "type", &readin);
-    real_packet->type = readin;
+    dio_get_uint8(pc->json_packet, "clause_type", &readin);
+    real_packet->clause_type = readin;
   }
   {
     int readin;
@@ -10737,7 +10737,7 @@ static int send_packet_diplomacy_remove_clause_req_100(struct connection *pc, co
 
   dio_put_sint8(&dout, "counterpart", real_packet->counterpart);
   dio_put_sint8(&dout, "giver", real_packet->giver);
-  dio_put_uint8(&dout, "type", real_packet->type);
+  dio_put_uint8(&dout, "clause_type", real_packet->clause_type);
   dio_put_uint32(&dout, "value", real_packet->value);
 
   SEND_PACKET_END;
@@ -10800,13 +10800,13 @@ int send_packet_diplomacy_remove_clause_req(struct connection *pc, const struct 
   }
 }
 
-int dsend_packet_diplomacy_remove_clause_req(struct connection *pc, int counterpart, int giver, enum clause_type type, int value)
+int dsend_packet_diplomacy_remove_clause_req(struct connection *pc, int counterpart, int giver, enum clause_type clause_type, int value)
 {
   struct packet_diplomacy_remove_clause_req packet, *real_packet = &packet;
 
   real_packet->counterpart = counterpart;
   real_packet->giver = giver;
-  real_packet->type = type;
+  real_packet->clause_type = clause_type;
   real_packet->value = value;
   
   return send_packet_diplomacy_remove_clause_req(pc, real_packet);
@@ -10830,8 +10830,8 @@ static struct packet_diplomacy_remove_clause *receive_packet_diplomacy_remove_cl
   {
     int readin;
   
-    dio_get_uint8(pc->json_packet, "type", &readin);
-    real_packet->type = readin;
+    dio_get_uint8(pc->json_packet, "clause_type", &readin);
+    real_packet->clause_type = readin;
   }
   {
     int readin;
@@ -10850,7 +10850,7 @@ static int send_packet_diplomacy_remove_clause_100(struct connection *pc, const 
 
   dio_put_sint8(&dout, "counterpart", real_packet->counterpart);
   dio_put_sint8(&dout, "giver", real_packet->giver);
-  dio_put_uint8(&dout, "type", real_packet->type);
+  dio_put_uint8(&dout, "clause_type", real_packet->clause_type);
   dio_put_uint32(&dout, "value", real_packet->value);
 
   SEND_PACKET_END;
@@ -10920,25 +10920,25 @@ void lsend_packet_diplomacy_remove_clause(struct conn_list *dest, const struct p
   } conn_list_iterate_end;
 }
 
-int dsend_packet_diplomacy_remove_clause(struct connection *pc, int counterpart, int giver, enum clause_type type, int value)
+int dsend_packet_diplomacy_remove_clause(struct connection *pc, int counterpart, int giver, enum clause_type clause_type, int value)
 {
   struct packet_diplomacy_remove_clause packet, *real_packet = &packet;
 
   real_packet->counterpart = counterpart;
   real_packet->giver = giver;
-  real_packet->type = type;
+  real_packet->clause_type = clause_type;
   real_packet->value = value;
   
   return send_packet_diplomacy_remove_clause(pc, real_packet);
 }
 
-void dlsend_packet_diplomacy_remove_clause(struct conn_list *dest, int counterpart, int giver, enum clause_type type, int value)
+void dlsend_packet_diplomacy_remove_clause(struct conn_list *dest, int counterpart, int giver, enum clause_type clause_type, int value)
 {
   struct packet_diplomacy_remove_clause packet, *real_packet = &packet;
 
   real_packet->counterpart = counterpart;
   real_packet->giver = giver;
-  real_packet->type = type;
+  real_packet->clause_type = clause_type;
   real_packet->value = value;
   
   lsend_packet_diplomacy_remove_clause(dest, real_packet);

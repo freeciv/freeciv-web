@@ -359,7 +359,17 @@ button {
   overflow: auto; 
   background-color: #111111; 
   border: 1px solid #444444;
+  padding: 3px;
 
+}
+
+#city_improvement_element {
+  text-align: center; 
+  color: #ffffff; 
+  width: 70px; 
+  cursor:pointer; 
+  cursor:hand;
+  float: left;
 }
 
 

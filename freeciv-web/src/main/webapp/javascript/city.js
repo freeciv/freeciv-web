@@ -142,12 +142,13 @@ function show_city_dialog(pcity)
        }
       
       improvements_html = improvements_html +
-       "<div style='background: transparent url(" 
+       "<div id='city_improvement_element'><div style='background: transparent url(" 
            + sprite['image-src'] +
            ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y'] 
            + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px;float:left; '"
-           + ">"
-           +"</div>";
+           + "title='" + improvements[z]['helptext'] + "' " 
+	   + "onclick='city_sell_improvement(" + z + ");'>"
+           +"</div>" + improvements[z]['name'] + "</div>";
     }
   }
   $("#city_improvements_list").html(improvements_html);
@@ -464,3 +465,17 @@ function next_city()
   }
 }
 
+/**************************************************************************
+.. 
+**************************************************************************/
+function city_sell_improvement(improvement_id)
+{
+  var agree=confirm("Are you sure you want to sell this building?");
+  if (agree) {
+
+    var packet = {"type" : packet_city_sell, "city_id" : active_city['id'], 
+                  "build_id": improvement_id};
+    send_request (JSON.stringify(packet));
+  }
+
+}

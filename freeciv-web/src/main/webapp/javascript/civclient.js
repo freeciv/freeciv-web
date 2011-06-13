@@ -72,10 +72,7 @@ function civclient_init()
               };
     })();
  
-   (function animloop(){
-      update_map_canvas_check();
-      requestAnimFrame(animloop, mapview_canvas);
-    })();
+  requestAnimFrame(update_map_canvas_check, mapview_canvas);
 
 
   /*

@@ -12,16 +12,6 @@
 		<button type="button" class="button" onClick="pregame_settings();" >Settings</button>
 	</div>
 
-    <div id="share_icons">
-      <a href="http://www.facebook.com/sharer.php?u=http://www.freeciv.net/&t=Join me in a Freeciv.net multiplayer game at http://www.freeciv.net/" target="_new">
-        <img src="/images/facebook-share.png" border="0" title="Invite friends on Facebook!">
-      </a>
-      <a href="http://twitter.com/home?status=Join me in a Freeciv.net multiplayer game at http://www.freeciv.net/" target="_new">
-        <img src="/images/twitter-share.png" border="0" title="Invite friends on Twitter!">
-      </a>
-
-    </div>
-
   </div>
 
   

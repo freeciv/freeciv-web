@@ -554,6 +554,7 @@ function update_map_canvas_check()
   if (time > MAPVIEW_REFRESH_INTERVAL || mapview_slide['active']) {
     update_map_canvas_full();
   }
+  requestAnimFrame(update_map_canvas_check, mapview_canvas);
 
 }
 
@@ -602,11 +603,14 @@ function enable_mapview_slide(ptile)
   var gui_x = r['gui_dx'];
   var gui_y = r['gui_dy'];
   
-  gui_x -= (mapview['width'] - tileset_tile_width) >> 1 ;
+  gui_x -= (mapview['width'] - tileset_tile_width) >> 1;
   gui_y -= (mapview['height'] - tileset_tile_height) >> 1;
 
   var dx = gui_x - mapview['gui_x0'];
   var dy = gui_y - mapview['gui_y0'];
+  mapview_slide['dx'] = dx;
+  mapview_slide['dy'] = dy;
+  mapview_slide['i'] = mapview_slide['max'];
 
   if (Math.abs(dx) > mapview['width'] || Math.abs(dy) > mapview['height']) {
     // sliding across map edge.
@@ -665,9 +669,6 @@ function enable_mapview_slide(ptile)
   mapview['width'] = old_width;
   mapview['height'] = old_height;
 
-  mapview_slide['dx'] = dx;
-  mapview_slide['dy'] = dy;
-  mapview_slide['i'] = mapview_slide['max'];
   mapview_slide['start'] = new Date().getTime();
  
 }
@@ -682,6 +683,7 @@ function update_map_slide()
     mapview_slide['active'] = false;
     return;
   } 
+
   dx = mapview_slide['dx'];
   dy = mapview_slide['dy'];
   var sx = 0;

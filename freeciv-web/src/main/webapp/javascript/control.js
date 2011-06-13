@@ -47,6 +47,12 @@ function control_init()
   $("#canvas").mousedown(mapview_mouse_down);
 
   $("#city_canvas").click(city_mapview_mouse_click);
+  
+  $("#turn_done_button").click(send_end_turn);
+  $("#freeciv_logo").click(function(event) {
+    window.open('http://www.freeciv.net/', '_new');
+    });
+
 
   $("#game_text_input").keydown(function(event) {
 	  return check_text_input(event, $("#game_text_input"));

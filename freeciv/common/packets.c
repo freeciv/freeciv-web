@@ -443,7 +443,7 @@ void *get_packet_from_connection(struct connection *pc,
 
   dio_get_string_old(&din, (char*)pc->buffer->data, pc->buffer->ndata);
  
-  pc->json_packet = json_loads((char*)pc->buffer->data, 0, &error);
+  pc->json_packet = json_loadb((char*)pc->buffer->data, whole_packet_len, 0, &error);
 
   memmove(pc->buffer->data, pc->buffer->data, pc->buffer->ndata);
   pc->buffer->ndata = 0;

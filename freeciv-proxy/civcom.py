@@ -133,7 +133,7 @@ class CivCom(Thread):
     return True;
 
   def send_to_civserver(self, net_packet_json):
-    header = packExt('>Hc', len(net_packet_json)+3, chr(0));
+    header = packExt('>Hc', len(net_packet_json), chr(0));
     civ_packet = header + str(net_packet_json);
     try:
       # Send packet to civserver

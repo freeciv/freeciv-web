@@ -15,7 +15,7 @@ artists =  "
  "
 
 [file]
-gfx =  "amplio/water"
+gfx =  "amplio2/water"
 
 [grid_main]
 
@@ -68,17 +68,17 @@ tiles = {  "row", "column", "tag"
 
 ;river outlets
 
- 10, 0,  "tx.river_outlet_n"
- 10, 1,  "tx.river_outlet_e"
- 10, 2,  "tx.river_outlet_s"
- 10, 3,  "tx.river_outlet_w"
+ 4,  0,  "tx.river_outlet_n"
+ 4,  1,  "tx.river_outlet_e"
+ 4,  2,  "tx.river_outlet_s"
+ 4,  3,  "tx.river_outlet_w"
  }
 
 
 [grid_coasts]
 
 x_top_left = 1
-y_top_left = 645
+y_top_left = 437
 dx = 48
 dy = 24
 pixel_border = 1

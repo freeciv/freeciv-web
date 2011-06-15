@@ -1,14 +1,16 @@
 ;
 ; The names for city tiles are not free and must follow the following rules.
-; The names consists of style name, _ , size. The style name is as specified
-; in cities.ruleset file. The size indicates which size city must
-; have to be drawn with a tile. E.g. european_4 means that the tile is to be
-; used for cities of size 4+ in european style. Obviously the first tile
-; must be style_name_0. The sizes must be in ascending order.
-; There must also be a style_name_wall tile used to draw the wall and
-; an occupied tile to indicate a miltary units in a city.
-; The maximum size supported now is 31, but there can only be MAX_CITY_TILES
-; normal tiles. The constant is defined in common/city.h and set to 8 now.
+; The names consists of 'style name' + '_' + 'index'. The style name is as
+; specified in cities.ruleset file and the index only defines the read order
+; of the images. The definitions are read starting with index 0 till the first
+; missing value The index is checked against the city bonus of effect
+; EFT_CITY_IMG and the resulting image is used to draw the city on the tile.
+;
+; Obviously the first tile must be 'style_name'_city_0 and the sizes must be
+; in ascending order. There must also be a 'style_name'_wall_0 tile used to
+; draw the wall and an occupied tile to indicate a military units in a city.
+; The maximum number of images is only limited by the maximum size of a city
+; (currently MAX_CITY_SIZE = 250). The constant is defined in common/city.h.
 ;
 
 [spec]
@@ -62,38 +64,38 @@ tiles = {  "row", "column", "tag"
 ;
 
  2,  0,  "city.electricage_city_0"
- 2,  1,  "city.electricage_city_4"
- 2,  2,  "city.electricage_city_8"
- 2,  3,  "city.electricage_city_12"
- 2,  4,  "city.electricage_city_16" 
+ 2,  1,  "city.electricage_city_1"
+ 2,  2,  "city.electricage_city_2"
+ 2,  3,  "city.electricage_city_3"
+ 2,  4,  "city.electricage_city_4" 
  2,  5,  "city.electricage_wall_0"
- 2,  6,  "city.electricage_wall_4"
- 2,  7,  "city.electricage_wall_8"
- 2,  8,  "city.electricage_wall_12"
- 2,  9,  "city.electricage_wall_16" 
+ 2,  6,  "city.electricage_wall_1"
+ 2,  7,  "city.electricage_wall_2"
+ 2,  8,  "city.electricage_wall_3"
+ 2,  9,  "city.electricage_wall_4" 
 
 
  3,  0,  "city.modern_city_0"
- 3,  1,  "city.modern_city_4"
- 3,  2,  "city.modern_city_8"
- 3,  3,  "city.modern_city_12"
- 3,  4,  "city.modern_city_16"
+ 3,  1,  "city.modern_city_1"
+ 3,  2,  "city.modern_city_2"
+ 3,  3,  "city.modern_city_3"
+ 3,  4,  "city.modern_city_4"
  3,  5,  "city.modern_wall_0"
- 3,  6,  "city.modern_wall_4"
- 3,  7,  "city.modern_wall_8"
- 3,  8,  "city.modern_wall_12"
- 3,  9,  "city.modern_wall_16"
+ 3,  6,  "city.modern_wall_1"
+ 3,  7,  "city.modern_wall_2"
+ 3,  8,  "city.modern_wall_3"
+ 3,  9,  "city.modern_wall_4"
 
 
  4,  0,  "city.postmodern_city_0"
- 4,  1,  "city.postmodern_city_4"
- 4,  2,  "city.postmodern_city_8"
- 4,  3,  "city.postmodern_city_12"
- 4,  4,  "city.postmodern_city_16" 
+ 4,  1,  "city.postmodern_city_1"
+ 4,  2,  "city.postmodern_city_2"
+ 4,  3,  "city.postmodern_city_3"
+ 4,  4,  "city.postmodern_city_4" 
  4,  5,  "city.postmodern_wall_0"
- 4,  6,  "city.postmodern_wall_4"
- 4,  7,  "city.postmodern_wall_8"
- 4,  8,  "city.postmodern_wall_12"
- 4,  9,  "city.postmodern_wall_16" 
+ 4,  6,  "city.postmodern_wall_1"
+ 4,  7,  "city.postmodern_wall_2"
+ 4,  8,  "city.postmodern_wall_3"
+ 4,  9,  "city.postmodern_wall_4" 
 
  }

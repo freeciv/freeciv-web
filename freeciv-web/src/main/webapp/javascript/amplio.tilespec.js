@@ -79,7 +79,7 @@ ts_layer[0]['match_types'] = ["shallow", "deep", "land"];
 
 //[layer1]
 ts_layer[1] = {};
-ts_layer[1]['match_types'] = ["forest", "hills", "mountains", "water", "ice"];
+ts_layer[1]['match_types'] = ["forest", "hills", "mountains", "water", "ice", "jungle"];
 
 //[layer2]
 ts_layer[2] = {};
@@ -156,8 +156,10 @@ ts_tiles['hills']['mine_sprite'] = "tx.mine";
 
 ts_tiles['jungle'] = {};
 ts_tiles['jungle']['is_blended'] = 1;
-ts_tiles['jungle']['num_layers'] = 1;
+ts_tiles['jungle']['num_layers'] = 2;
 ts_tiles['jungle']['layer0_match_type'] = "land";
+ts_tiles['jungle']['layer1_match_type'] = "jungle";
+ts_tiles['jungle']['layer1_match_with'] = ["jungle"];
 
 ts_tiles['mountains'] = {};
 ts_tiles['mountains']['is_blended'] = 1;
@@ -201,7 +203,8 @@ var tile_types_setup =
 "l0.grassland":{"match_style":0,"sprite_type":0,"mine_tag":"(null)","match_indices":1,"match_index":[2],"dither":true},
 "l0.hills":{"match_style":0,"sprite_type":0,"mine_tag":"tx.mine","match_indices":1,"match_index":[2],"dither":true},
 "l1.hills":{"match_style":1,"sprite_type":0,"mine_tag":"tx.mine","match_indices":2,"match_index":[1,1],"dither":false},
-"l0.jungle":{"match_style":0,"sprite_type":0,"mine_tag":"(null)","match_indices":1,"match_index":[2],"dither":false},
+"l0.jungle":{"match_style":0,"sprite_type":0,"mine_tag":"(null)","match_indices":1,"match_index":[5],"dither":true},
+"l1.jungle":{"match_style":1,"sprite_type":0,"mine_tag":"(null)","match_indices":2,"match_index":[5,5],"dither":false},
 "l0.mountains":{"match_style":0,"sprite_type":0,"mine_tag":"tx.mine","match_indices":1,"match_index":[2],"dither":true},
 "l1.mountains":{"match_style":1,"sprite_type":0,"mine_tag":"tx.mine","match_indices":2,"match_index":[2,2],"dither":false},
 "l0.plains":{"match_style":0,"sprite_type":0,"mine_tag":"(null)","match_indices":1,"match_index":[2],"dither":true},

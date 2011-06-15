@@ -16,6 +16,6 @@ artists =  "
 sprites = 
 	{	 "tag", "file"
 		 "icon.freeciv", "misc/civicon"
-;		 "icon.freeciv", "amplio/civicon"
-		 "icon.citydlg", "amplio/cityicon"
+;		 "icon.freeciv", "amplio2/civicon"
+		 "icon.citydlg", "amplio2/cityicon"
 	 }

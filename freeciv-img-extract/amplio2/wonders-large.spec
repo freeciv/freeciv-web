@@ -1,11 +1,11 @@
 [spec]
 
 ; Format and options of this spec file:
-options =   "+Freeciv-2.3-spec"
+options =    "+Freeciv-2.3-spec"
 
 [info]
 
-artists =   "
+artists =    "
   Special thanks to Brendon Oram (Yautja) for the frame!
 
   Daniel Markstedt
@@ -49,37 +49,37 @@ artists =   "
   b.manhattan_project
   b.oracle
   b.statue_of_liberty
-  "
+   "
 
 [extra]
 sprites =
-	{	  "tag", "file"
-		  "b.asmiths_trading_co", "wonders/asmiths_trading_co"
-		  "b.apollo_program", "wonders/apollo_program"
-		  "b.colossus", "wonders/colossus"
-		  "b.copernicus_observatory", "wonders/copernicus_observatory"
-		  "b.cure_for_cancer", "wonders/cure_for_cancer"
-		  "b.darwins_voyage", "wonders/darwins_voyage"
-		  "b.eiffel_tower", "wonders/eiffel_tower"
-		  "b.great_library", "wonders/great_library"
-		  "b.great_wall", "wonders/great_wall"
-		  "b.hanging_gardens", "wonders/hanging_gardens"
-		  "b.hoover_dam", "wonders/hoover_dam"
-		  "b.isaac_newtons_college", "wonders/isaac_newtons_college"
-		  "b.js_bachs_cathedral", "wonders/js_bachs_cathedral"
-		  "b.king_richards_crusade", "wonders/king_richards_crusade"
-		  "b.leonardos_workshop", "wonders/leonardos_workshop"
-		  "b.lighthouse", "wonders/lighthouse"
-		  "b.magellans_expedition", "wonders/magellans_expedition"
-		  "b.manhattan_project", "wonders/manhattan_project"
-		  "b.marco_polos_embassy", "wonders/marco_polos_embassy"
-		  "b.michelangelos_chapel", "wonders/michelangelos_chapel"
-		  "b.oracle", "wonders/oracle"
-		  "b.pyramids", "wonders/pyramids"
-		  "b.seti_program", "wonders/seti_program"
-		  "b.shakespeares_theatre", "wonders/shakespeares_theatre"
-		  "b.statue_of_liberty", "wonders/statue_of_liberty"
-		  "b.sun_tzus_war_academy", "wonders/sun_tzus_war_academy"
-		  "b.united_nations", "wonders/united_nations"
-		  "b.womens_suffrage", "wonders/womens_suffrage"
-	  }
+	{	   "tag", "file"
+		   "b.asmiths_trading_co", "wonders/asmiths_trading_co"
+		   "b.apollo_program", "wonders/apollo_program"
+		   "b.colossus", "wonders/colossus"
+		   "b.copernicus_observatory", "wonders/copernicus_observatory"
+		   "b.cure_for_cancer", "wonders/cure_for_cancer"
+		   "b.darwins_voyage", "wonders/darwins_voyage"
+		   "b.eiffel_tower", "wonders/eiffel_tower"
+		   "b.great_library", "wonders/great_library"
+		   "b.great_wall", "wonders/great_wall"
+		   "b.hanging_gardens", "wonders/hanging_gardens"
+		   "b.hoover_dam", "wonders/hoover_dam"
+		   "b.isaac_newtons_college", "wonders/isaac_newtons_college"
+		   "b.js_bachs_cathedral", "wonders/js_bachs_cathedral"
+		   "b.king_richards_crusade", "wonders/king_richards_crusade"
+		   "b.leonardos_workshop", "wonders/leonardos_workshop"
+		   "b.lighthouse", "wonders/lighthouse"
+		   "b.magellans_expedition", "wonders/magellans_expedition"
+		   "b.manhattan_project", "wonders/manhattan_project"
+		   "b.marco_polos_embassy", "wonders/marco_polos_embassy"
+		   "b.michelangelos_chapel", "wonders/michelangelos_chapel"
+		   "b.oracle", "wonders/oracle"
+		   "b.pyramids", "wonders/pyramids"
+		   "b.seti_program", "wonders/seti_program"
+		   "b.shakespeares_theatre", "wonders/shakespeares_theatre"
+		   "b.statue_of_liberty", "wonders/statue_of_liberty"
+		   "b.sun_tzus_war_academy", "wonders/sun_tzus_war_academy"
+		   "b.united_nations", "wonders/united_nations"
+		   "b.womens_suffrage", "wonders/womens_suffrage"
+	   }

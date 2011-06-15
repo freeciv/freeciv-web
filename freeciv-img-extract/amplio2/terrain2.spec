@@ -1,13 +1,11 @@
-
 [spec]
 
 ; Format and options of this spec file:
 options =  "+Freeciv-2.3-spec"
 
 [info]
-
 artists =  "
-    Hogne Håskjold
+    Hogne Håskjold <haskjold@gmail.com>
     Tim F. Smith <yoohootim@hotmail.com>
     Yautja
     Daniel Speyer
@@ -27,6 +25,26 @@ pixel_border = 1
 
 tiles = {  "row", "column","tag"
 
+;jungle as overlay
+
+ 2,  0,  "t.l1.jungle_n0e0s0w0"
+ 2,  1,  "t.l1.jungle_n1e0s0w0"
+ 2,  2,  "t.l1.jungle_n0e1s0w0"
+ 2,  3,  "t.l1.jungle_n1e1s0w0"
+ 2,  4,  "t.l1.jungle_n0e0s1w0"
+ 2,  5,  "t.l1.jungle_n1e0s1w0"
+ 2,  6,  "t.l1.jungle_n0e1s1w0"
+ 2,  7,  "t.l1.jungle_n1e1s1w0"
+ 3,  0,  "t.l1.jungle_n0e0s0w1"
+ 3,  1,  "t.l1.jungle_n1e0s0w1"
+ 3,  2,  "t.l1.jungle_n0e1s0w1"
+ 3,  3,  "t.l1.jungle_n1e1s0w1"
+ 3,  4,  "t.l1.jungle_n0e0s1w1"
+ 3,  5,  "t.l1.jungle_n1e0s1w1"
+ 3,  6,  "t.l1.jungle_n0e1s1w1"
+ 3,  7,  "t.l1.jungle_n1e1s1w1"
+
+
 ;forests as overlay
 
  4,  0,  "t.l1.forest_n0e0s0w0"
@@ -45,44 +63,6 @@ tiles = {  "row", "column","tag"
  5,  5,  "t.l1.forest_n1e0s1w1"
  5,  6,  "t.l1.forest_n0e1s1w1"
  5,  7,  "t.l1.forest_n1e1s1w1"
-
-;mountains as overlay
-
- 6,  0,  "t.l1.mountains_n0e0s0w0"
- 6,  1,  "t.l1.mountains_n0e0s0w1"
- 6,  2,  "t.l1.mountains_n0e0s1w0"
- 6,  3,  "t.l1.mountains_n0e0s1w1"
- 6,  4,  "t.l1.mountains_n0e1s0w0"
- 6,  5,  "t.l1.mountains_n0e1s0w1"
- 6,  6,  "t.l1.mountains_n0e1s1w0"
- 6,  7,  "t.l1.mountains_n0e1s1w1"
- 7,  0,  "t.l1.mountains_n1e0s0w0"
- 7,  1,  "t.l1.mountains_n1e0s0w1"
- 7,  2,  "t.l1.mountains_n1e0s1w0"
- 7,  3,  "t.l1.mountains_n1e0s1w1"
- 7,  4,  "t.l1.mountains_n1e1s0w0"
- 7,  5,  "t.l1.mountains_n1e1s0w1"
- 7,  6,  "t.l1.mountains_n1e1s1w0"
- 7,  7,  "t.l1.mountains_n1e1s1w1"
-
-;hills as overlay
-
- 8,  0,  "t.l1.hills_n0e0s0w0"
- 8,  1,  "t.l1.hills_n0e0s0w1"
- 8,  2,  "t.l1.hills_n0e0s1w0"
- 8,  3,  "t.l1.hills_n0e0s1w1"
- 8,  4,  "t.l1.hills_n0e1s0w0"
- 8,  5,  "t.l1.hills_n0e1s0w1"
- 8,  6,  "t.l1.hills_n0e1s1w0"
- 8,  7,  "t.l1.hills_n0e1s1w1"
- 9,  0,  "t.l1.hills_n1e0s0w0"
- 9,  1,  "t.l1.hills_n1e0s0w1"
- 9,  2,  "t.l1.hills_n1e0s1w0"
- 9,  3,  "t.l1.hills_n1e0s1w1"
- 9,  4,  "t.l1.hills_n1e1s0w0"
- 9,  5,  "t.l1.hills_n1e1s0w1"
- 9,  6,  "t.l1.hills_n1e1s1w0"
- 9,  7,  "t.l1.hills_n1e1s1w1"
 
  }
 

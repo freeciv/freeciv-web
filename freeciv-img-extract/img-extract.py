@@ -74,7 +74,7 @@ curr_y = 14;
 tileset_height = 2250;  #FIXME: This must be adjusted according to the number of tiles. # Silly Flash 9 limitation of 2880.
 tileset_width = 2200;
 
-dither_types = ["t.l0.desert1", "t.l0.plains1", "t.l0.grassland1", "t.l0.forest1", "t.l0.hills1", "t.l0.mountains1", "t.l0.tundra1", "t.l0.swamp1"];
+dither_types = ["t.l0.desert1", "t.l0.plains1", "t.l0.grassland1", "t.l0.forest1", "t.l0.jungle1", "t.l0.hills1", "t.l0.mountains1", "t.l0.tundra1", "t.l0.swamp1"];
 
 tileset = Image.new('RGBA', (tileset_width, tileset_height), (0, 0, 0, 0));
 mask_image = Image.open("mask.png");

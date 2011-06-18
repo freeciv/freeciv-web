@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: freeciv 2.0.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-12 18:30+0200\n"
+"POT-Creation-Date: 2011-06-18 15:51+0200\n"
 "PO-Revision-Date: 2008-01-21 15:42+0100\n"
 "Last-Translator: Dusan Hokuv <dusan@mirc.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -1272,12 +1272,12 @@ msgstr "chyba %ld (selhalo FormatMessage)"
 msgid "error %d (compiled without strerror)"
 msgstr "chyba %d (přeloženo bez strerror)"
 
-#: ai/aicity.c:1494 server/citytools.c:2229
+#: ai/aicity.c:1494 server/citytools.c:2260
 #, c-format
 msgid "The %s have stopped building The %s in %s."
 msgstr "%s přerušili stavbu %s ve městě %s."
 
-#: ai/aicity.c:1504 server/citytools.c:2269
+#: ai/aicity.c:1504 server/citytools.c:2300
 #, c-format
 msgid "The %s have started building The %s in %s."
 msgstr "%s zahájili stavbu %s ve městě %s."
@@ -1932,17 +1932,17 @@ msgstr "Založili jsme město %s"
 msgid "%s liberated %s."
 msgstr "%s vládne %s."
 
-#: server/citytools.c:2246
+#: server/citytools.c:2277
 msgid " from the worklist"
 msgstr " podle seznamu prací"
 
 #. TRANS: "<city> is building <production><source>."
-#: server/citytools.c:2259
+#: server/citytools.c:2290
 #, c-format
 msgid "%s is building %s%s."
 msgstr "%s staví %s%s."
 
-#: server/citytools.c:2450
+#: server/citytools.c:2481
 #, c-format
 msgid "You sell %s in %s (now landlocked) for %d gold."
 msgstr "Prodal(a) jste %s v %s (nyní ve vnitrozemí) za %d zlatých."

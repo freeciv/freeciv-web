@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: da\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-12 18:30+0200\n"
+"POT-Creation-Date: 2011-06-18 15:51+0200\n"
 "PO-Revision-Date: 2009-10-01 18:43+0300\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
@@ -1253,12 +1253,12 @@ msgstr "fejl %ld (mislykket FormatMessage)"
 msgid "error %d (compiled without strerror)"
 msgstr "fejl %d (oversat uden strerror)"
 
-#: ai/aicity.c:1494 server/citytools.c:2229
+#: ai/aicity.c:1494 server/citytools.c:2260
 #, c-format
 msgid "The %s have stopped building The %s in %s."
 msgstr "%s har stoppet bygningen af %s i %s."
 
-#: ai/aicity.c:1504 server/citytools.c:2269
+#: ai/aicity.c:1504 server/citytools.c:2300
 #, c-format
 msgid "The %s have started building The %s in %s."
 msgstr "%s har startet bygningen af %s i %s."
@@ -1937,17 +1937,17 @@ msgstr "Du har befriet %s!"
 msgid "%s liberated %s."
 msgstr "%s befriede %s."
 
-#: server/citytools.c:2246
+#: server/citytools.c:2277
 msgid " from the worklist"
 msgstr " fra arbejdslisten"
 
 #. TRANS: "<city> is building <production><source>."
-#: server/citytools.c:2259
+#: server/citytools.c:2290
 #, c-format
 msgid "%s is building %s%s."
 msgstr "%s bygger nu %s%s."
 
-#: server/citytools.c:2450
+#: server/citytools.c:2481
 #, c-format
 msgid "You sell %s in %s (now landlocked) for %d gold."
 msgstr "Du sælger %s i %s (nu uden havn) for %d guld."

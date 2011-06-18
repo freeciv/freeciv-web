@@ -144,7 +144,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Freeciv 2.0.99-devel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-12 18:30+0200\n"
+"POT-Creation-Date: 2011-06-18 15:51+0200\n"
 "PO-Revision-Date: 2007-08-12 15:56+0300\n"
 "Last-Translator: MITA Yuusuke <clefs@mail.goo.ne.jp>\n"
 "Language-Team: SAWADA Katsuya <ama@petmail.net>\n"
@@ -1520,12 +1520,12 @@ msgstr ""
 msgid "error %d (compiled without strerror)"
 msgstr "エラー %d (strerror 無しでコンパイルされました)"
 
-#: ai/aicity.c:1494 server/citytools.c:2229
+#: ai/aicity.c:1494 server/citytools.c:2260
 #, c-format
 msgid "The %s have stopped building The %s in %s."
 msgstr "%sは%sを%sに建てるのを中断しました。"
 
-#: ai/aicity.c:1504 server/citytools.c:2269
+#: ai/aicity.c:1504 server/citytools.c:2300
 #, c-format
 msgid "The %s have started building The %s in %s."
 msgstr "%sは%sを%sに建て始めました。"
@@ -2251,17 +2251,17 @@ msgstr "%sを解放しました！"
 msgid "%s liberated %s."
 msgstr "%sは%sを解放しました。"
 
-#: server/citytools.c:2246
+#: server/citytools.c:2277
 msgid " from the worklist"
 msgstr "作業リストから"
 
 #. TRANS: "<city> is building <production><source>."
-#: server/citytools.c:2259
+#: server/citytools.c:2290
 #, c-format
 msgid "%s is building %s%s."
 msgstr "%sで%sを%s作り始めました。"
 
-#: server/citytools.c:2450
+#: server/citytools.c:2481
 #, c-format
 msgid "You sell %s in %s (now landlocked) for %d gold."
 msgstr "(今は陸地で囲まれている)%2$sの%1$sを%3$dで売ります。"

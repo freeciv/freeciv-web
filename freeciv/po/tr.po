@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-12 18:30+0200\n"
+"POT-Creation-Date: 2011-06-18 15:51+0200\n"
 "PO-Revision-Date: 2008-06-01 16:36+0300\n"
 "Last-Translator: Uğur Çetin <jnmbk@users.sourceforge.net>\n"
 "Language-Team: Turkish <yerellestirme@kde.org.tr>\n"
@@ -1256,12 +1256,12 @@ msgstr "hata %ld (başarısız BiçimMesajı)"
 msgid "error %d (compiled without strerror)"
 msgstr "hata %d (strerror olmadan derlenmiş)"
 
-#: ai/aicity.c:1494 server/citytools.c:2229
+#: ai/aicity.c:1494 server/citytools.c:2260
 #, c-format
 msgid "The %s have stopped building The %s in %s."
 msgstr "%s %s yapımını %s şehrinde durdurdular."
 
-#: ai/aicity.c:1504 server/citytools.c:2269
+#: ai/aicity.c:1504 server/citytools.c:2300
 #, c-format
 msgid "The %s have started building The %s in %s."
 msgstr "%s %s yapımına %s şehrinde başladılar."
@@ -1909,17 +1909,17 @@ msgstr "%s şehrini serbest bıraktınız!"
 msgid "%s liberated %s."
 msgstr "%s, %s şehrini serbest bıraktı."
 
-#: server/citytools.c:2246
+#: server/citytools.c:2277
 msgid " from the worklist"
 msgstr "iş listesinden "
 
 #. TRANS: "<city> is building <production><source>."
-#: server/citytools.c:2259
+#: server/citytools.c:2290
 #, c-format
 msgid "%s is building %s%s."
 msgstr "%1$s şehri %3$s%2$s inşa ediyor."
 
-#: server/citytools.c:2450
+#: server/citytools.c:2481
 #, c-format
 msgid "You sell %s in %s (now landlocked) for %d gold."
 msgstr "%2$s şehrindeki (karaya oturan) %1$s, %3$d altına satıldı."

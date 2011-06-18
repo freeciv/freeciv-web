@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Freeciv 2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-12 18:30+0200\n"
+"POT-Creation-Date: 2011-06-18 15:51+0200\n"
 "PO-Revision-Date: 2007-12-10 21:13+0900\n"
 "Last-Translator: Daniel\n"
 "Language-Team: Korean language team\n"
@@ -1295,12 +1295,12 @@ msgstr "에러 %ld(포멧메세지 실패)"
 msgid "error %d (compiled without strerror)"
 msgstr "에러 %d(sterror이 없는 컴파일)"
 
-#: ai/aicity.c:1494 server/citytools.c:2229
+#: ai/aicity.c:1494 server/citytools.c:2260
 #, c-format
 msgid "The %s have stopped building The %s in %s."
 msgstr "%s(은)는 %s의 건설을 %s어서 중단했습니다."
 
-#: ai/aicity.c:1504 server/citytools.c:2269
+#: ai/aicity.c:1504 server/citytools.c:2300
 #, c-format
 msgid "The %s have started building The %s in %s."
 msgstr "%s(은)는 %s의 건설을 %s어서 시작했습니다."
@@ -1925,17 +1925,17 @@ msgstr "당신은 %s를 약탈했습니다!"
 msgid "%s liberated %s."
 msgstr "%s는 %s를 약탈했습니다"
 
-#: server/citytools.c:2246
+#: server/citytools.c:2277
 msgid " from the worklist"
 msgstr "작업리스트로 부터"
 
 #. TRANS: "<city> is building <production><source>."
-#: server/citytools.c:2259
+#: server/citytools.c:2290
 #, c-format
 msgid "%s is building %s%s."
 msgstr "%s는 %s%s를 건설하고 있습니다"
 
-#: server/citytools.c:2450
+#: server/citytools.c:2481
 #, c-format
 msgid "You sell %s in %s (now landlocked) for %d gold."
 msgstr ""

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: et\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-12 18:30+0200\n"
+"POT-Creation-Date: 2011-06-18 15:51+0200\n"
 "PO-Revision-Date: 2009-02-27 00:03+0200\n"
 "Last-Translator: Elmo Todurov <todurov@gmail.com>\n"
 "Language-Team: eesti\n"
@@ -1335,12 +1335,12 @@ msgstr "viga %ld (FormatMessage andis vea)"
 msgid "error %d (compiled without strerror)"
 msgstr "viga %d (kompileeritud ilma strerror'ita)"
 
-#: ai/aicity.c:1494 server/citytools.c:2229
+#: ai/aicity.c:1494 server/citytools.c:2260
 #, c-format
 msgid "The %s have stopped building The %s in %s."
 msgstr "%s on lõpetanud %s ehitamise linnas %s."
 
-#: ai/aicity.c:1504 server/citytools.c:2269
+#: ai/aicity.c:1504 server/citytools.c:2300
 #, c-format
 msgid "The %s have started building The %s in %s."
 msgstr "%s on alustanud %s ehitamist linnas %s."
@@ -2005,17 +2005,17 @@ msgstr "Sa vabastasid linna %s!"
 msgid "%s liberated %s."
 msgstr "%s vabastas %s."
 
-#: server/citytools.c:2246
+#: server/citytools.c:2277
 msgid " from the worklist"
 msgstr " tööde nimekirjast"
 
 #. TRANS: "<city> is building <production><source>."
-#: server/citytools.c:2259
+#: server/citytools.c:2290
 #, c-format
 msgid "%s is building %s%s."
 msgstr "%s ehitab %s%s."
 
-#: server/citytools.c:2450
+#: server/citytools.c:2481
 #, c-format
 msgid "You sell %s in %s (now landlocked) for %d gold."
 msgstr "Linn %s (nüüd ilma merele pääsuta) müüb %s %d raha eest."

@@ -266,7 +266,6 @@ function update_map_canvas(canvas_x, canvas_y, width, height)
 
   gui_x0 = mapview['gui_x0'] + canvas_x;
   gui_y0 = mapview['gui_y0'] + canvas_y;
-  //console.log("update_map_canvas  at " + gui_x0 + "  " + gui_y0 );
 
   /* Clear the area, if the mapview extends beyond map borders.  
    *
@@ -323,8 +322,6 @@ function update_map_canvas(canvas_x, canvas_y, width, height)
                        && ((gui_y_0 + gui_y_h) * ptile_r2 + ptile_h - 1) % (ptile_h) < 0 ) ? 1 : 0) ) + ptile_r1); 
       var ptile_count = (ptile_x1 - ptile_x0) * (ptile_y1 - ptile_y0);
       
-      //console.log("Iterating over %d-%d x %d-%d rectangle : " +  ptile_x1 + " " + ptile_x0 + " " + ptile_y1 + " " + ptile_y0); 
-       
       for (var ptile_index = 0; ptile_index < ptile_count; ptile_index++) { 
         var ptile = null; 
         var pedge = null; 
@@ -406,7 +403,6 @@ function update_map_canvas(canvas_x, canvas_y, width, height)
 
 
           if (ptile != null) {
-            //console.log("put_one_tile " + cx + " " + cy);
             put_one_tile(mapview_canvas_ctx, layer, ptile, cx, cy, null);
             
           } else if (pedge != null) {
@@ -465,7 +461,6 @@ function put_one_element(pcanvas, layer, ptile, pedge, pcorner, punit,
 function put_drawn_sprites(pcanvas, canvas_x, canvas_y, pdrawn, fog)
 { 
   for (var i = 0; i < pdrawn.length; i++) {
-    //console.log(pdrawn[i]);
     var offset_x = 0, offset_y = 0;
     if ('offset_x' in pdrawn[i]) {
       offset_x += pdrawn[i]['offset_x'];
@@ -522,7 +517,6 @@ function canvas_pos_to_tile(canvas_x, canvas_y)
 function update_map_canvas_full()
 {
   if (tiles != null && civclient_state >= C_S_RUNNING) {
-    //console.log("3. Mapview render begin at: " + new Date().getTime());
     //var start = new Date().getTime();
     if (!sprites_init) init_cache_sprites();
   
@@ -684,11 +678,13 @@ function update_map_slide()
     return;
   } 
 
+  var elapsed = 1 + new Date().getTime() - mapview_slide['start'];  
+  mapview_slide['i'] = Math.floor(mapview_slide['max'] * (mapview_slide['slide_time'] - elapsed) / mapview_slide['slide_time']);
+
   dx = mapview_slide['dx'];
   dy = mapview_slide['dy'];
   var sx = 0;
   var sy = 0;
-  mapview_slide['i'] -= 1;
 
   if (dx >= 0 && dy <= 0) {
     sx = Math.floor((dx * ((mapview_slide['max'] - mapview_slide['i']) / mapview_slide['max'])));
@@ -708,9 +704,5 @@ function update_map_slide()
       mapview['width'], mapview['height'],
       0,0, mapview['width'], mapview['height']);
 
-  var elapsed = new Date().getTime() - mapview_slide['start'];  
-  var render_time = new Date().getTime() - last_redraw_time;  
-  var render_time_of_total = mapview_slide['slide_time'] / render_time; 
-  mapview_slide['i'] -= Math.floor(mapview_slide['max'] / render_time_of_total);
 
 }

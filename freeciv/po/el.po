@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: freeciv 2.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-12 18:30+0200\n"
+"POT-Creation-Date: 2011-06-18 15:51+0200\n"
 "PO-Revision-Date: 2008-05-23 17:41+0200\n"
 "Last-Translator: Prekates Alexandros <aprekates@yahoo.gr>\n"
 "Language-Team: Greek translation team <gr@li.org>\n"
@@ -1325,12 +1325,12 @@ msgstr "σφάλμα %ld (αποτυχημένο ΜήνυμαΦορμαρίσματος)"
 msgid "error %d (compiled without strerror)"
 msgstr "σφάλμα %d (μεταγλωττισμένο χωρίς strerror)"
 
-#: ai/aicity.c:1494 server/citytools.c:2229
+#: ai/aicity.c:1494 server/citytools.c:2260
 #, c-format
 msgid "The %s have stopped building The %s in %s."
 msgstr "Το  %s έχει σταματήσει να χτίζει το  %s στο %s."
 
-#: ai/aicity.c:1504 server/citytools.c:2269
+#: ai/aicity.c:1504 server/citytools.c:2300
 #, c-format
 msgid "The %s have started building The %s in %s."
 msgstr "Το  %s έχει αρχίσει να χτίζει το  %s στο %s."
@@ -2025,17 +2025,17 @@ msgstr "Απελευθέρωσες τη %s!  "
 msgid "%s liberated %s."
 msgstr "%s απελευθερώθηκε από %s"
 
-#: server/citytools.c:2246
+#: server/citytools.c:2277
 msgid " from the worklist"
 msgstr " από τη λίστα εργασίας"
 
 #. TRANS: "<city> is building <production><source>."
-#: server/citytools.c:2259
+#: server/citytools.c:2290
 #, c-format
 msgid "%s is building %s%s."
 msgstr "%s χτίζει %s%s"
 
-#: server/citytools.c:2450
+#: server/citytools.c:2481
 #, c-format
 msgid "You sell %s in %s (now landlocked) for %d gold."
 msgstr "Πουλάς %s στην %s (τώρα αποκλεισμένο) για %d χρυσά."

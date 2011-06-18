@@ -65,7 +65,7 @@ function init_civ_dialog()
     
     var pplayer = client.conn.playing;
     var civ_description = 
-	    "<canvas id='flag_canvas' width='145' height='100' moz-opaque='true'></canvas>"
+	    "<canvas id='flag_canvas' width='100' height='70' moz-opaque='true'></canvas>"
 	    + "<br><div>" + pplayer['name'] + " rules the " + nations[pplayer['nation']]['adjective'] 
 	    + " with the form of government: " + governments[client.conn.playing['government']]['name']
 	    + "<br>Choose your command carefully:</div><br>"
@@ -74,11 +74,11 @@ function init_civ_dialog()
     $("#civ_dialog_text").html(civ_description);
 
 
-    $("#revolution_button").css("width", 180);
-    $("#taxrates_button").css("width", 180);
-    $("#wonders_report").css("width", 180);
-    $("#top_cities_report").css("width", 180);
-    $("#demography_report").css("width", 180);
+    $("#revolution_button").css("width", 190);
+    $("#taxrates_button").css("width", 190);
+    $("#wonders_report").css("width", 190);
+    $("#top_cities_report").css("width", 190);
+    $("#demography_report").css("width", 190);
 
     var pnation = nations[pplayer['nation']]; 
     var tag = "f." + pnation['graphic_str'];
@@ -89,7 +89,7 @@ function init_civ_dialog()
       flag_canvas_ctx.mozImageSmoothingEnabled = true;
     } 
 
-    flag_canvas_ctx.drawImage(sprites[tag], 0,0,29,20,0,0,145,100);
+    flag_canvas_ctx.drawImage(sprites[tag], 0, 0, 29, 20, 0, 0, 100, 70);
 
 
   } else {

@@ -27,7 +27,7 @@ mapview_slide['dx'] = 0;
 mapview_slide['dy'] = 0;
 mapview_slide['i'] = 0;
 mapview_slide['max'] = 100; 
-mapview_slide['slide_time'] = 800;
+mapview_slide['slide_time'] = 600;
 
 var height_offset = 67;
 var height_offset_iphone = 110;

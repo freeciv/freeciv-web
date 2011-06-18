@@ -306,7 +306,7 @@ bool server_handle_packet(enum packet_type type, void *packet,
 
   case PACKET_REPORT_REQ:
     handle_report_req(pconn,
-      ((struct packet_report_req *)packet)->type);
+      ((struct packet_report_req *)packet)->report_type);
     return TRUE;
 
   case PACKET_CONN_PONG:

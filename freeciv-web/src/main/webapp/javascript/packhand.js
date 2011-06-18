@@ -561,7 +561,7 @@ function handle_page_msg(packet)
   var message = packet['message'];
   var regxp = /\n/gi;
   message = message.replace(regxp, "<br>\n");
-  show_dialog_message("Freeciv.net News", message);
+  show_dialog_message(" ", message);
 
 }
 

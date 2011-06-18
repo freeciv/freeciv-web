@@ -20,6 +20,11 @@
 <% } %>
 
 <div class="main_menu_buttons">
+  <button id="fullscreen_button" type="button" class="button" onClick="show_dialog_message('Fullscreen', 'Press F11 for fullscreen mode.');" >Fullscreen</button>
+</div>
+
+
+<div class="main_menu_buttons">
   <button id="surrender_button" type="button" class="button" onClick="surrender_game();" >Surrender Game</button>
 </div>
 

@@ -1899,6 +1899,7 @@ void package_city(struct city *pcity, struct packet_city_info *packet,
   packet->did_buy = pcity->did_buy;
   packet->did_sell = pcity->did_sell;
   packet->was_happy = pcity->was_happy;
+  packet->unhappy = city_unhappy(pcity);
 
   packet->walls = city_got_citywalls(pcity);
 

@@ -70,7 +70,7 @@ void handle_diplomacy_create_clause_req(struct player *pplayer, int counterpart,
 void handle_diplomacy_remove_clause_req(struct player *pplayer, int counterpart, int giver, enum clause_type clause_type, int value);
 void handle_diplomacy_accept_treaty_req(struct player *pplayer, int counterpart);
 void handle_diplomacy_cancel_pact(struct player *pplayer, int other_player_id, enum clause_type clause);
-void handle_report_req(struct connection *pc, enum report_type type);
+void handle_report_req(struct connection *pc, enum report_type report_type);
 void handle_conn_pong(struct connection *pc);
 void handle_client_info(struct connection *pc, enum gui_type gui);
 void handle_spaceship_launch(struct player *pplayer);

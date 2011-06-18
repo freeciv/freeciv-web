@@ -340,6 +340,11 @@ function update_unit_info_label(punits)
       unit_info_html += "<b>" + get_unit_homecity_name(punit) + "</b>";
       unit_info_html += "<br>";
     }
+    if (punit['veteran'] > 0) {
+      unit_info_html += "Veteran level: " + punit['veteran'] + "";
+      unit_info_html += "<br>";
+    }
+
     unit_info_html += get_unit_moves_left(punit) ;
     unit_info_html += "<br>";
     unit_info_html += "<div style='font-size: 80%;'><span title='Attack strength'>A:" + ptype['attack_strength'] 

@@ -306,6 +306,7 @@ struct packet_city_info {
   char shield_output[MAX_LEN_MSG];
   char trade_output[MAX_LEN_MSG];
   char name[MAX_LEN_NAME];
+  bool unhappy;
 };
 
 struct packet_city_short_info {
@@ -737,7 +738,7 @@ struct packet_page_msg {
 };
 
 struct packet_report_req {
-  enum report_type type;
+  enum report_type report_type;
 };
 
 struct packet_conn_info {
@@ -1897,7 +1898,7 @@ void lsend_packet_page_msg(struct conn_list *dest, const struct packet_page_msg 
 
 struct packet_report_req *receive_packet_report_req(struct connection *pc, enum packet_type type);
 int send_packet_report_req(struct connection *pc, const struct packet_report_req *packet);
-int dsend_packet_report_req(struct connection *pc, enum report_type type);
+int dsend_packet_report_req(struct connection *pc, enum report_type report_type);
 
 struct packet_conn_info *receive_packet_conn_info(struct connection *pc, enum packet_type type);
 int send_packet_conn_info(struct connection *pc, const struct packet_conn_info *packet);

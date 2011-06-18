@@ -25,6 +25,56 @@ var government_list;
 var current_government;
 
 
+/**************************************************************************
+  ...
+**************************************************************************/
+function show_tax_rates_dialog()
+{
+
+  var id = "#rates_dialog";
+  $(id).remove();
+  $("<div id='rates_dialog'></div>").appendTo("div#game_page");
+
+  var dhtml = "<div> <p><h2>Select tax, luxury and science rates</h2>"
+    + "<P><form name='rates'><table border='0' style='color: #ffffff;'>"
+    + "<tr> <td><span>Tax:</td> <td> <div class='slider' id='slider-tax' tabIndex='1'></div>"
+    + "</td><td>"
+    + "<div id='tax_result' style='float:left;'></div></td>"
+    + "<td> <INPUT TYPE='CHECKBOX' NAME='lock'>Lock</td></tr>"
+    + "<tr><td>Luxury:</td><td><div class='slider' id='slider-lux' tabIndex='1'></div>"
+    + "</td><td> <div id='lux_result' style='float:left;'></div>"
+    + "</td><td><INPUT TYPE='CHECKBOX' NAME='lock'>Lock</td></tr>"
+    + "<tr><td>Science:</td><td><div class='slider' id='slider-sci' tabIndex='1'></div>"
+    + "</td><td><div id='sci_result' style='float:left;'></div>"
+    + "</td><td><INPUT TYPE='CHECKBOX' NAME='lock'>Lock</td></tr>"
+    + "</table></form>"
+    + "<div id='max_tax_rate' style='margin:10px;'>"
+    + "</div>";
+
+  $(id).html(dhtml);
+
+  $(id).attr("title", "Change your tax rates!");
+  $(id).dialog({
+			bgiframe: true,
+			modal: true,
+			width: "450",
+			  buttons: {
+				"Change tax rates" : function() {
+					submit_player_rates();
+					close_rates_dialog();
+					$(this).dialog('close');
+				}
+			  }
+
+  });
+
+  update_rates_dialog();
+
+}
+
+/**************************************************************************
+  ...
+**************************************************************************/
 function update_rates_dialog()
 { 
 
@@ -45,6 +95,9 @@ function update_rates_dialog()
   $("#max_tax_rate").html("<i>" + govt['name'] + " max rate: " + maxrate + "</i>");
 }
 
+/**************************************************************************
+  ...
+**************************************************************************/
 function create_rates_dialog(tax, lux, sci, max)
 {
   s_tax = new Slider(document.getElementById("slider-tax"),
@@ -81,8 +134,9 @@ function create_rates_dialog(tax, lux, sci, max)
 
 }
 
-
-/* FIXME: doesn't work in IE. */
+/**************************************************************************
+  ...
+**************************************************************************/
 function
 update_rates_labels ()
 {
@@ -97,8 +151,11 @@ update_rates_labels ()
 
 
 }
-function
-update_tax_rates ()
+
+/**************************************************************************
+  ...
+**************************************************************************/
+function update_tax_rates ()
 {
   if (freeze) return;
   freeze = true;
@@ -142,9 +199,10 @@ update_tax_rates ()
 
 }
 
-
-function
-update_lux_rates ()
+/**************************************************************************
+  ...
+**************************************************************************/
+function update_lux_rates ()
 {
   if (freeze) return;
   freeze = true;
@@ -187,9 +245,10 @@ update_lux_rates ()
 
 }
 
-
-function
-update_sci_rates ()
+/**************************************************************************
+  ...
+**************************************************************************/
+function update_sci_rates ()
 {
   if (freeze) return;
   freeze = true;
@@ -231,7 +290,9 @@ update_sci_rates ()
 
 }
 
-
+/**************************************************************************
+  ...
+**************************************************************************/
 function submit_player_rates()
 {
   var packet = {"type" : packet_player_rates, 

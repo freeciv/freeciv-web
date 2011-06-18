@@ -26,7 +26,7 @@ The Freeciv.net web client for Freeciv was  by <a href="mailto:andrearo at pvv.n
 
 <br><br><br>
 
-<br>  <a href="/wireframe.jsp?do=screenshots"><img src="/images/freeciv-screenshot-sm.png" border="0"></a>
+<br>  <a href="/images/freeciv-screenshot-full.png"><img src="/images/freeciv-screenshot-sm.png" border="0"></a>
 <br>This is a screenshot of Freeciv.net as of June 2011. Click on image for more screenshots.<br><br>
 </center>
 

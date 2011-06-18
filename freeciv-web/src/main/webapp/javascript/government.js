@@ -14,6 +14,92 @@
 var governments = {};
 var requested_gov = -1;
 
+var REPORT_WONDERS_OF_THE_WORLD = 0;
+var REPORT_TOP_5_CITIES = 1;
+var REPORT_DEMOGRAPHIC = 2;
+
+
+/**************************************************************************
+   ...
+**************************************************************************/
+function show_revolution_dialog()
+{
+  var id = "#revolution_dialog";
+  $(id).remove();
+  $("<div id='revolution_dialog'></div>").appendTo("div#game_page");
+
+
+  var dhtml = "<h2>Start a revolution!</h2>" 
+  + "To start a revolution, select your nations new government:"
+  + "<p><div id='governments' style='height: 180px; width: 250px; overflow: auto;'>"
+  + "<div id='governments_list' style='cursor:pointer;cursor:hand'>"
+  + "</div></div><br> ";
+  
+  $(id).html(dhtml);
+
+  $(id).attr("title", "Revolution");
+  $(id).dialog({
+			bgiframe: true,
+			modal: true,
+			width: "450",
+			  buttons: {
+				"Start revolution!" : function() {
+					start_revolution();
+					$(this).dialog('close');
+				}
+			  }
+
+  });
+
+
+  update_govt_dialog();
+
+}
+
+/**************************************************************************
+   ...
+**************************************************************************/
+function init_civ_dialog()
+{
+  if (!client_is_observer() && client.conn.playing != null) {
+    
+    var pplayer = client.conn.playing;
+    var civ_description = 
+	    "<canvas id='flag_canvas' width='145' height='100' moz-opaque='true'></canvas>"
+	    + "<br><div>" + pplayer['name'] + " rules the " + nations[pplayer['nation']]['adjective'] 
+	    + " with the form of government: " + governments[client.conn.playing['government']]['name']
+	    + "<br>Choose your command carefully:</div><br>"
+            
+
+    $("#civ_dialog_text").html(civ_description);
+
+
+    $("#revolution_button").css("width", 180);
+    $("#taxrates_button").css("width", 180);
+    $("#wonders_report").css("width", 180);
+    $("#top_cities_report").css("width", 180);
+    $("#demography_report").css("width", 180);
+
+    var pnation = nations[pplayer['nation']]; 
+    var tag = "f." + pnation['graphic_str'];
+
+    var flag_canvas = document.getElementById('flag_canvas');
+    var flag_canvas_ctx = flag_canvas.getContext("2d");
+    if ("mozImageSmoothingEnabled" in flag_canvas_ctx) {
+      flag_canvas_ctx.mozImageSmoothingEnabled = true;
+    } 
+
+    flag_canvas_ctx.drawImage(sprites[tag], 0,0,29,20,0,0,145,100);
+
+
+  } else {
+    $("#civ_dialog_text").html("This dialog isn't available as observer.");
+
+  }
+
+}
+
+
 /**************************************************************************
    ...
 **************************************************************************/
@@ -40,7 +126,7 @@ function update_govt_dialog()
     
     governments_list_html = governments_list_html + "<div style='margin:4px;background-color:" + bgcolor + "' " 
                   + " onclick='set_req_government(" + govt['id'] + ");' "
-                  + ">" 
+                  + " title='" + govt['helptext'] + "'>" 
 		  + "<img src='/images/" + govt['graphic_str'] + ".png'>"
 		  + govt['name'] + "</div>";
   }
@@ -137,5 +223,16 @@ function can_player_get_gov(govt_id)
   } else {
     return false;
   }
+
+}
+
+/**************************************************************************
+ ...
+**************************************************************************/
+function request_report(rtype)
+{
+  var packet = {"type" :  packet_report_req, 
+                "report_type" : rtype};
+  send_request (JSON.stringify(packet));
 
 }

@@ -305,6 +305,13 @@ button {
   width: 100%;
 }
 
+#civ_dialog {
+  padding: 30px;
+  margin: 20px;
+  width: 99%;
+  height: 500px;
+  text-align: center;
+}
 
 /* Overrides to jquery-ui-1.8.9.custom.css */ 
 

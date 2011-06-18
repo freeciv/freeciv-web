@@ -590,6 +590,7 @@ PACKET_CITY_INFO=21; sc,lsend
   STRING trade_output[MAX_LEN_MSG];
   #BV_CITY_OPTIONS city_options;
   STRING name[MAX_LEN_NAME];
+  BOOL unhappy;
 end
 
 PACKET_CITY_SHORT_INFO=22; sc,lsend
@@ -1033,7 +1034,7 @@ PACKET_PAGE_MSG=84;sc,lsend
 end
 
 PACKET_REPORT_REQ=85;cs,handle-per-conn,dsend
-  REPORT_TYPE type;
+  REPORT_TYPE report_type;
 end
 
 /************** Connection packets **********************/

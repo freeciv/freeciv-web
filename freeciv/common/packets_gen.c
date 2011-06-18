@@ -4274,6 +4274,7 @@ static struct packet_city_info *receive_packet_city_info_100(struct connection *
   dio_get_string(pc->json_packet, "shield_output", real_packet->shield_output, sizeof(real_packet->shield_output));
   dio_get_string(pc->json_packet, "trade_output", real_packet->trade_output, sizeof(real_packet->trade_output));
   dio_get_string(pc->json_packet, "name", real_packet->name, sizeof(real_packet->name));
+  dio_get_bool8(pc->json_packet, "unhappy", &real_packet->unhappy);
 
   RECEIVE_PACKET_END(real_packet);
 }
@@ -4369,6 +4370,7 @@ static int send_packet_city_info_100(struct connection *pc, const struct packet_
   dio_put_string(&dout, "shield_output", real_packet->shield_output);
   dio_put_string(&dout, "trade_output", real_packet->trade_output);
   dio_put_string(&dout, "name", real_packet->name);
+  dio_put_bool8(&dout, "unhappy", real_packet->unhappy);
 
   SEND_PACKET_END;
 }
@@ -11344,8 +11346,8 @@ static struct packet_report_req *receive_packet_report_req_100(struct connection
   {
     int readin;
   
-    dio_get_uint8(pc->json_packet, "type", &readin);
-    real_packet->type = readin;
+    dio_get_uint8(pc->json_packet, "report_type", &readin);
+    real_packet->report_type = readin;
   }
 
   RECEIVE_PACKET_END(real_packet);
@@ -11356,7 +11358,7 @@ static int send_packet_report_req_100(struct connection *pc, const struct packet
   const struct packet_report_req *real_packet = packet;
   SEND_PACKET_START(PACKET_REPORT_REQ);
 
-  dio_put_uint8(&dout, "type", real_packet->type);
+  dio_put_uint8(&dout, "report_type", real_packet->report_type);
 
   SEND_PACKET_END;
 }
@@ -11418,11 +11420,11 @@ int send_packet_report_req(struct connection *pc, const struct packet_report_req
   }
 }
 
-int dsend_packet_report_req(struct connection *pc, enum report_type type)
+int dsend_packet_report_req(struct connection *pc, enum report_type report_type)
 {
   struct packet_report_req packet, *real_packet = &packet;
 
-  real_packet->type = type;
+  real_packet->report_type = report_type;
   
   return send_packet_report_req(pc, real_packet);
 }

@@ -85,7 +85,7 @@ function sync_civclient()
 {
 
   /* Prevent race conditions. */
-  if (isWorking) return;
+  if (isWorking || mapview_slide['active']) return;
   isWorking = true;
   
   if (over_error_threshold()) return;

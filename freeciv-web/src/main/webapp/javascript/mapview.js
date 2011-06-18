@@ -335,7 +335,11 @@ function update_unit_info_label(punits)
            ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y'] 
            + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px;'"
            + "'></div>";
-    unit_info_html += "<div style='float:left;'><b>" + ptype['name'] + "</b><br>"
+    unit_info_html += "<div id='unit_text_details'><b>" + ptype['name'] + "</b><br>"
+    if (get_unit_homecity_name(punit) != null) {
+      unit_info_html += "<b>" + get_unit_homecity_name(punit) + "</b>";
+      unit_info_html += "<br>";
+    }
     unit_info_html += get_unit_moves_left(punit) ;
     unit_info_html += "<br>";
     unit_info_html += "<div style='font-size: 80%;'><span title='Attack strength'>A:" + ptype['attack_strength'] 

@@ -93,6 +93,11 @@ button {
   margin-top: -15px;
 }
 
+#unit_text_details {
+  float:left;
+  width: 120px;
+
+}
 
 #end_game_turn_panel {
   float: right;

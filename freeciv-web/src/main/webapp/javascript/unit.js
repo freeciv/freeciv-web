@@ -266,3 +266,16 @@ function reset_unit_anim_list()
     punit['anim_list'] = [];
   }
 }
+
+/**************************************************************************
+  Returns the name of the unit's homecity. 
+**************************************************************************/
+function get_unit_homecity_name(punit)
+{
+  if (punit['homecity'] != 0 && cities[punit['homecity']] != null) {
+    return unescape(cities[punit['homecity']]['name']);
+  } else {
+    return null;
+  }
+
+}

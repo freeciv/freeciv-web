@@ -548,7 +548,7 @@ function update_map_canvas_check()
   if (time > MAPVIEW_REFRESH_INTERVAL || mapview_slide['active']) {
     update_map_canvas_full();
   }
-  requestAnimFrame(update_map_canvas_check, mapview_canvas);
+  requestAnimFrame(update_map_canvas_check);
 
 }
 
@@ -613,6 +613,7 @@ function enable_mapview_slide(ptile)
   }
 
   mapview_slide['active'] = true;
+  mapview_slide['start'] = new Date().getTime();
  
   var new_width = mapview['width'] + Math.abs(dx);
   var new_height = mapview['height'] + Math.abs(dy);
@@ -620,8 +621,6 @@ function enable_mapview_slide(ptile)
   var old_height = mapview['store_height'];
 
   mapview_canvas = buffer_canvas;
-  mapview_canvas.width = new_width;
-  mapview_canvas.height = new_height;
   mapview_canvas_ctx = buffer_canvas_ctx;
 
   if (dx == 0 && dy == 0) {
@@ -646,24 +645,16 @@ function enable_mapview_slide(ptile)
   /* redraw mapview on large back buffer. */
   update_map_canvas(0, 0, mapview['store_width'], mapview['store_height']);
   update_goto_path_lines(); 
-  check_request_goto_path();
-
 
   /* restore default mapview. */
-  buffer_canvas = mapview_canvas;
-  buffer_canvas_ctx = mapview_canvas_ctx;
   mapview_canvas = document.getElementById('canvas');
   mapview_canvas_ctx = mapview_canvas.getContext("2d");
     
-  if (!has_canvas_text_support) {
-    CanvasTextFunctions.enable(mapview_canvas_ctx);
-  }
   mapview['store_width'] = old_width;
   mapview['store_height'] = old_height;
   mapview['width'] = old_width;
   mapview['height'] = old_height;
 
-  mapview_slide['start'] = new Date().getTime();
  
 }
 
@@ -673,16 +664,16 @@ function enable_mapview_slide(ptile)
 **************************************************************************/
 function update_map_slide()
 {
+  var elapsed = 1 + new Date().getTime() - mapview_slide['start'];  
+  mapview_slide['i'] = Math.floor(mapview_slide['max'] * (mapview_slide['slide_time'] - elapsed) / mapview_slide['slide_time']);
+
   if (mapview_slide['i'] <= 0) {
     mapview_slide['active'] = false;
     return;
   } 
 
-  var elapsed = 1 + new Date().getTime() - mapview_slide['start'];  
-  mapview_slide['i'] = Math.floor(mapview_slide['max'] * (mapview_slide['slide_time'] - elapsed) / mapview_slide['slide_time']);
-
-  dx = mapview_slide['dx'];
-  dy = mapview_slide['dy'];
+  var dx = mapview_slide['dx'];
+  var dy = mapview_slide['dy'];
   var sx = 0;
   var sy = 0;
 
@@ -703,6 +694,5 @@ function update_map_slide()
   mapview_canvas_ctx.drawImage(buffer_canvas, sx, sy, 
       mapview['width'], mapview['height'],
       0,0, mapview['width'], mapview['height']);
-
 
 }

@@ -132,6 +132,8 @@ function setup_window_size ()
   
   mapview_canvas.width = winWidth - width_offset;
   mapview_canvas.height = winHeight - height_offset;
+  buffer_canvas.width = Math.floor(mapview_canvas.width * 1.5);
+  buffer_canvas.height = Math.floor(mapview_canvas.height * 1.5);
 
   mapview['width'] = winWidth - width_offset;
   mapview['height'] = winHeight - height_offset; 

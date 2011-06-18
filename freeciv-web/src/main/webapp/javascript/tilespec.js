@@ -175,9 +175,20 @@ function fill_sprite_array(layer, ptile, pedge, pcorner, punit, pcity, citymode)
         sprite_array.push(get_city_flag_sprite(pcity));
         sprite_array.push(get_city_sprite(pcity));
         sprite_array = sprite_array.concat(get_city_size_sprites(pcity));
-      } 
+      }
+
       if (active_city != null && ptile != null && ptile['worked'] != null && active_city['id'] == ptile['worked']) {
         sprite_array.push(get_city_active_worked_sprite());
+	var dx = city_tile(active_city)['x'] - ptile['x'];
+	var dy = city_tile(active_city)['y'] - ptile['y'];
+        var idx = get_city_dxy_to_index(dx, dy);
+	var food_output = active_city['food_output'].substring(idx, idx + 1);
+	var shield_output = active_city['shield_output'].substring(idx, idx + 1);
+	var trade_output = active_city['trade_output'].substring(idx, idx + 1);
+        
+        sprite_array.push(get_city_food_output_sprite(food_output));
+        sprite_array.push(get_city_shields_output_sprite(shield_output));
+        sprite_array.push(get_city_trade_output_sprite(trade_output));
       } else if (active_city != null && ptile != null && ptile['worked'] != 0) {
         sprite_array.push(get_city_invalid_worked_sprite());
       }
@@ -504,6 +515,33 @@ function get_city_active_worked_sprite() {
   return {"key" : "city_active", 
           "offset_x" : 0, 
           "offset_y" : 0};
+}
+
+/**********************************************************************
+...
+***********************************************************************/
+function get_city_food_output_sprite(num) {
+  return {"key" : "city.t_food_" + num, 
+          "offset_x" : normal_tile_width/4, 
+          "offset_y" : -normal_tile_height/4};
+}
+
+/**********************************************************************
+...
+***********************************************************************/
+function get_city_shields_output_sprite(num) {
+  return {"key" : "city.t_shields_" + num, 
+          "offset_x" : normal_tile_width/4, 
+          "offset_y" : -normal_tile_height/4};
+}
+
+/**********************************************************************
+...
+***********************************************************************/
+function get_city_trade_output_sprite(num) {
+  return {"key" : "city.t_trade_" + num, 
+          "offset_x" : normal_tile_width/4, 
+          "offset_y" : -normal_tile_height/4};
 }
 
 

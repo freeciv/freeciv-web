@@ -302,6 +302,9 @@ struct packet_city_info {
   char can_build_unit[MAX_LEN_MSG];
   char can_build_improvement[MAX_LEN_MSG];
   char improvements[MAX_LEN_MSG];
+  char food_output[MAX_LEN_MSG];
+  char shield_output[MAX_LEN_MSG];
+  char trade_output[MAX_LEN_MSG];
   char name[MAX_LEN_NAME];
 };
 

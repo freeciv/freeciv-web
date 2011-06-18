@@ -4,7 +4,7 @@
     
     <div id="city_left_panel">
       <div id="city_canvas_div">
-            <canvas id="city_canvas" width="300" height="150" moz-opaque="true"></canvas>
+            <canvas id="city_canvas" width="350" height="175" moz-opaque="true"></canvas>
       </div>
 
       <div id="city_dialog_info">

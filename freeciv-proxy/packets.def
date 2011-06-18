@@ -584,6 +584,10 @@ PACKET_CITY_INFO=21; sc,lsend
   STRING can_build_unit[MAX_LEN_MSG];
   STRING can_build_improvement[MAX_LEN_MSG];
   STRING improvements[MAX_LEN_MSG];
+  
+  STRING food_output[MAX_LEN_MSG];
+  STRING shield_output[MAX_LEN_MSG];
+  STRING trade_output[MAX_LEN_MSG];
   #BV_CITY_OPTIONS city_options;
   STRING name[MAX_LEN_NAME];
 end

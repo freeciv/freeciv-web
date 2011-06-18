@@ -17,10 +17,6 @@ var city_rules = {};
 
 var active_city = null;
 
-var I_NEVER	 = (-1);    /* Improvement never built */
-var I_DESTROYED = (-2); /* Improvement built and destroyed */
-
-
 
 /**************************************************************************
  ...
@@ -477,5 +473,38 @@ function city_sell_improvement(improvement_id)
                   "build_id": improvement_id};
     send_request (JSON.stringify(packet));
   }
+
+}
+
+/**************************************************************************
+  Converts from coordinate offset from city center (dx, dy),
+  to index in the city_info['food_output'] packet.
+**************************************************************************/
+function get_city_dxy_to_index(dx, dy) 
+{
+  city_tile_map = {};
+  city_tile_map[" 00"] = 0;
+  city_tile_map[" 10"] = 1;
+  city_tile_map[" 01"] = 2;
+  city_tile_map[" 0-1"] = 3;
+  city_tile_map[" -10"] = 4;
+  city_tile_map[" 11"] = 5;
+  city_tile_map[" 1-1"] = 6;
+  city_tile_map[" -11"] = 7;
+  city_tile_map[" -1-1"] = 8;
+  city_tile_map[" 20"] = 9;
+  city_tile_map[" 02"] = 10;
+  city_tile_map[" 0-2"] = 11;
+  city_tile_map[" -20"] = 12;
+  city_tile_map[" 21"] = 13;
+  city_tile_map[" 2-1"] = 14;
+  city_tile_map[" 12"] = 15;
+  city_tile_map[" 1-2"] = 16;
+  city_tile_map[" -12"] = 17;
+  city_tile_map[" -1-2"] = 18;
+  city_tile_map[" -21"] = 19;
+  city_tile_map[" -2-1"] = 20;
+
+  return city_tile_map[" "+dx+""+dy];
 
 }

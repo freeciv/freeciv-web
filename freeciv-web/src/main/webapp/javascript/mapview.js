@@ -397,10 +397,10 @@ function set_city_mapview_active()
   }
     
 
-  mapview['width'] = 300;
-  mapview['height'] = 150; 
-  mapview['store_width'] = 300;
-  mapview['store_height'] = 150;
+  mapview['width'] = 350;
+  mapview['height'] = 175; 
+  mapview['store_width'] = 350;
+  mapview['store_height'] = 175;
 
   set_default_mapview_inactive();
 

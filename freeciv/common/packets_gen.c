@@ -4270,6 +4270,9 @@ static struct packet_city_info *receive_packet_city_info_100(struct connection *
   dio_get_string(pc->json_packet, "can_build_unit", real_packet->can_build_unit, sizeof(real_packet->can_build_unit));
   dio_get_string(pc->json_packet, "can_build_improvement", real_packet->can_build_improvement, sizeof(real_packet->can_build_improvement));
   dio_get_string(pc->json_packet, "improvements", real_packet->improvements, sizeof(real_packet->improvements));
+  dio_get_string(pc->json_packet, "food_output", real_packet->food_output, sizeof(real_packet->food_output));
+  dio_get_string(pc->json_packet, "shield_output", real_packet->shield_output, sizeof(real_packet->shield_output));
+  dio_get_string(pc->json_packet, "trade_output", real_packet->trade_output, sizeof(real_packet->trade_output));
   dio_get_string(pc->json_packet, "name", real_packet->name, sizeof(real_packet->name));
 
   RECEIVE_PACKET_END(real_packet);
@@ -4362,6 +4365,9 @@ static int send_packet_city_info_100(struct connection *pc, const struct packet_
   dio_put_string(&dout, "can_build_unit", real_packet->can_build_unit);
   dio_put_string(&dout, "can_build_improvement", real_packet->can_build_improvement);
   dio_put_string(&dout, "improvements", real_packet->improvements);
+  dio_put_string(&dout, "food_output", real_packet->food_output);
+  dio_put_string(&dout, "shield_output", real_packet->shield_output);
+  dio_put_string(&dout, "trade_output", real_packet->trade_output);
   dio_put_string(&dout, "name", real_packet->name);
 
   SEND_PACKET_END;

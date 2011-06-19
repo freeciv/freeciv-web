@@ -266,7 +266,7 @@ function overview_clicked (x, y)
   if (ptile != null) {
     center_tile_mapcanvas(ptile);
   }
-  update_map_canvas_full();
+  
+  requestAnimFrame(update_map_canvas_check); 
   redraw_overview();
-    
 }

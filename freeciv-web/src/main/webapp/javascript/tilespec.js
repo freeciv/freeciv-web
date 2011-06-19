@@ -744,25 +744,23 @@ function get_city_sprite(pcity)
   
   var size = 0;
   if (pcity['size'] >=4 && pcity['size'] <=7) {
-    size = 4;
+    size = 1;
   } else if (pcity['size'] >=8 && pcity['size'] <=11) {
-    size = 8;
+    size = 2;
   } else if (pcity['size'] >=12 && pcity['size'] <=15) {
-    size = 12;
+    size = 3;
   } else if (pcity['size'] >=16) {
-    size = 16;
+    size = 4;
   }  
 
   var city_walls = pcity['walls'] ? "wall" : "city"; 
 
-  var gfx = city_rule['graphic'];
-  if (gfx.length <= 2) {
-    /* FIXME: This is a hack, because sometimes the 'graphic' field contains garbage. */
-    gfx = city_rule['oceanic_graphic'];
+  var tag = city_rule['graphic'] + "_" + city_walls + "_" + size;
+  if (sprites[tag] == null) {
+    tag = city_rule['graphic_alt'] + "_" + city_walls + "_" + size;
   }
 
-  return {"key" :  gfx + "_" + city_walls + "_" + size, 
-          "offset_x": 0, "offset_y" : -unit_offset_y};
+  return {"key" :  tag, "offset_x": 0, "offset_y" : -unit_offset_y};
 }
 
 

@@ -9,7 +9,7 @@
 
 <link rel="shortcut icon" href="/images/freeciv-shortcut-icon.png" />
 
-<script type="text/javascript" src="/javascript-compressed/jquery-1.6.1.min.js"></script>
+<script type="text/javascript" src="/javascript-compressed/jquery-1.6.2rc1.min.js"></script>
 <script type="text/javascript" src="/javascript/jquery-ui-1.8.13.custom.min.js"></script>
 
 

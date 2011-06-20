@@ -326,17 +326,17 @@ if ( isset($port) ) {
 <title>Freeciv.net - online multiplayer strategy game</title>
 
 <link href="/stylesheets/frontpage.css" rel="stylesheet" type="text/css" />
-<link type="text/css" href="/stylesheets/dark-hive-1.8.12/jquery-ui-1.8.12.custom.css" rel="stylesheet" />
+<link type="text/css" href="/stylesheets/dark-hive-1.8.13/jquery-ui-1.8.13.custom.css" rel="stylesheet" />
 
 <?php if ($_COOKIE["facebook_mode"] == "true") { ?>
   <link href="/stylesheets/fb_frontpage.css" rel="stylesheet" type="text/css" />
 <? } ?>
 
 
-<link rel="shortcut icon" href="/images/freeciv-forever-icon.png" />
+<link rel="shortcut icon" href="/images/freeciv-shortcut-icon.png" />
 
 <script type="text/javascript" src="/javascript-compressed/jquery-1.6.1.min.js"></script>
-<script type="text/javascript" src="/javascript/jquery-ui-1.8.12.custom.min.js"></script>
+<script type="text/javascript" src="/javascript/jquery-ui-1.8.13.custom.min.js"></script>
 
 
 

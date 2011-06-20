@@ -118,7 +118,7 @@ function help_openid_login() {
 
 </script>
 
-<div id="ad_bottom" style="background-color: transparent; height: 430px;">
+<div id="ad_bottom" style="background-color: transparent; height: 180px;">
 
 	<div id="menu_help">
 		<b>Help:</b>
@@ -140,6 +140,19 @@ function help_openid_login() {
 
 </div>
 
+<div id="ad_bottom">
+	<script type="text/javascript"><!--
+	google_ad_client = "pub-4977952202639520";
+	/* 728x90, opprettet 19.12.09 for freeciv.net */
+	google_ad_slot = "9174006131";
+	google_ad_width = 728;
+	google_ad_height = 90;
+	//-->
+	</script>
+	<script type="text/javascript"
+	src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+	</script>
+</div>
 
 
 <script>

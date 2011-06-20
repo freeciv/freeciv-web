@@ -7,7 +7,7 @@
    <artifactId>freeciv-web</artifactId>
    <version>1.0</version>
    <packaging>war</packaging>
-   <name>Freeciv Web Client</name>
+   <name>Freeciv.net Web Client</name>
 
 
     <repositories>
@@ -71,15 +71,35 @@
                    <target>1.6</target>
                 </configuration>
             </plugin>
-    		<plugin>
-    			<groupId>org.mortbay.jetty</groupId>
-    			<artifactId>maven-jetty-plugin</artifactId>
-    			<version>6.0.1</version>
-    			<configuration>
-    				<scanIntervalSeconds>10</scanIntervalSeconds>
-    			</configuration>
-    		</plugin>
-    	</plugins>
+
+      <plugin>
+        <groupId>com.samaxes.maven</groupId>
+        <artifactId>maven-minify-plugin</artifactId>
+        <version>1.3.5</version>
+        <executions>
+          <execution>
+            <id>default-minify</id>
+            <phase>process-resources</phase>
+            <configuration>
+              <cssSourceDir>css</cssSourceDir>
+              <cssSourceFiles>
+	      <cssSourceFile>jquery-ui-1.8.13.custom.css</cssSourceFile>
+	      <cssSourceFile>bluecurve.css</cssSourceFile>
+	      <cssSourceFile>fg.menu.css</cssSourceFile>
+	      <cssSourceFile>pregame.css</cssSourceFile>
+	      <cssSourceFile>civclient.css</cssSourceFile>
+              </cssSourceFiles>
+	      <cssFinalFile>webclient.css</cssFinalFile>
+             </configuration>
+            <goals>
+              <goal>minify</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>	    
+
+
+     </plugins>
     </build>
 
 

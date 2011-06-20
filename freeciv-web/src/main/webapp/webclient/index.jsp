@@ -4,18 +4,12 @@
 	
 <title>Freeciv.net - online multiplayer strategy game</title>
 
+<link rel="stylesheet" type="text/css" href="/css/webclient.min.css" />
+
 <script type="text/javascript" src="/javascript-compressed/jquery-1.6.1.min.js"></script>
 <script type="text/javascript" src="/javascript-compressed/webclient.js"></script>
 <script type="text/javascript" src="/webclient/session.jsp"></script>
 <script>WEB_SOCKET_SWF_LOCATION = 'http://cdn.socket.io/stable/WebSocketMain.swf';</script>
-
-
-
-<link type="text/css" href="/stylesheets/dark-hive-1.8.13/jquery-ui-1.8.13.custom.css" rel="stylesheet" />
-<link type="text/css" rel="StyleSheet" href="/stylesheets/bluecurve.css" />
-<link type="text/css" rel="StyleSheet" href="/stylesheets/fg.menu.css" />
-<link rel="stylesheet" type="text/css" href="/stylesheets/civclient.css" />
-<link rel="stylesheet" type="text/css" href="/stylesheets/pregame.css" />
 
 <link rel="shortcut icon" href="/images/freeciv-shotcut-icon.png" />
 
@@ -24,8 +18,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-<link type="text/css" rel="stylesheet" media="only screen and (max-device-width: 480px)" href="/stylesheets/iphone.css">
-<%-- FIXME! remove this in prod. --%>
+<%--<link type="text/css" rel="stylesheet" media="only screen and (max-device-width: 480px)" href="/stylesheets/iphone.css">--%>
 <%--<link type="text/css" rel="StyleSheet" href="/stylesheets/iphone.css" /> --%> 
 
 

@@ -3,27 +3,9 @@
 <head>
 <title>Freeciv.net - strategy game playable online with HTML5</title>
 
-<link href="/stylesheets/frontpage.css" rel="stylesheet" type="text/css" />
-<link type="text/css" href="/stylesheets/dark-hive-1.8.13/jquery-ui-1.8.13.custom.css" rel="stylesheet" />
+<link href="/css/frontpage.css" rel="stylesheet" type="text/css" />
+<link type="text/css" href="/css/jquery-ui-1.8.13.custom.css" rel="stylesheet" />
 
-
-<% 
-  String cookieName = "facebook_mode";
-  Cookie cookies [] = request.getCookies();
-  Cookie myCookie = null;
-  if (cookies != null) {
-    for (int i = 0; i < cookies.length; i++) {
-      if (cookies [i].getName().equals (cookieName)) {
-        myCookie = cookies[i];
-        break;
-      }
-    }
-  }
-  
-  if (myCookie != null && "true".equals(myCookie.getValue())) {
- %>
-  <link href="/stylesheets/fb_frontpage.css" rel="stylesheet" type="text/css" />
- <% } %>
 
 <link rel="shortcut icon" href="/images/freeciv-shortcut-icon.png" />
 

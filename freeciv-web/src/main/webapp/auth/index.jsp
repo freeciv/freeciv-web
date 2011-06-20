@@ -1,7 +1,7 @@
 <%@ page session="true" %>
 
 
-<link rel="stylesheet" href="/stylesheets/openid.css" />
+<link rel="stylesheet" href="/css/openid.css" />
 
 <script type="text/javascript" src="/auth/openid-jquery.js"></script>
 <script type="text/javascript">

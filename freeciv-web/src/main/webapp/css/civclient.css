@@ -260,8 +260,8 @@ button {
   border: 1px solid rgb(153, 153, 153); 
   width: 1000px; 
   height: 60px; 
-  padding: 7px; 
-  margin: 15px; 
+  padding: 4px; 
+  margin: 5px; 
   margin-left: 0px; 
   background-color: rgb(34, 34, 34);
 }

@@ -33,10 +33,6 @@
   <button id="end_button" type="button" class="button" onClick="window.location='/';" >End Game</button>
 </div>
 
-<div id="share_button_box" class="main_menu_buttons">
-  <button id="share_button" type="button" class="button" onClick="prepare_share_game_map();" >View map as image</button>
-</div>
-
 <div class="main_menu_buttons">
   <button id="show_overview_button" type="button" class="button" onClick="init_overview();" >Show overview map</button>
 </div>

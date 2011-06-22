@@ -93,6 +93,8 @@ function init_overview()
 ****************************************************************************/
 function redraw_overview()
 {
+  if (mapview_slide['active']) return;
+
   bmp_lib.render('overview_map', 
                   generate_overview_grid(map['xsize'], map['ysize']), 
                   palette);

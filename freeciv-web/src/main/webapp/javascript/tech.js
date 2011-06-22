@@ -105,28 +105,16 @@ function player_invention_state(pplayer, tech_id)
 **************************************************************************/
 function init_tech_screen()
 {
-
-  var winWidth, winHeight, d=document;
-  if (typeof window.innerWidth!='undefined') {
-    winWidth = window.innerWidth;
-  } else {
-    if (d.documentElement &&
-      typeof d.documentElement.clientWidth!='undefined' &&
-      d.documentElement.clientWidth!=0) {
-      winWidth = d.documentElement.clientWidth
-    } else {
-      if (d.body &&
-        typeof d.body.clientWidth!='undefined') {
-        winWidth = d.body.clientWidth
-      }
-    }
-  }
+  $("#technologies").width($(window).width() - 20);
   
-      
-  $("#technologies").width(winWidth - 20);
+  if (is_tech_tree_init) return;
 
   tech_canvas = document.getElementById('tech_canvas');
   tech_canvas_ctx = tech_canvas.getContext("2d");
+  if ("mozImageSmoothingEnabled" in tech_canvas_ctx) {
+    // if this Boolean value is false, images won't be smoothed when scaled. This property is true by default.
+    tech_canvas_ctx.mozImageSmoothingEnabled = false;
+  } 
 
   is_tech_tree_init = true;
 

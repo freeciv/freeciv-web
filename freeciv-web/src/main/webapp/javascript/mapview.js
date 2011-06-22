@@ -16,6 +16,8 @@ var mapview_canvas_ctx = null;
 var mapview_canvas = null; 
 var buffer_canvas_ctx = null;
 var buffer_canvas = null; 
+var city_canvas_ctx = null;
+var city_canvas = null; 
 
 var tileset_image = null; 
 var sprites = {};
@@ -33,12 +35,9 @@ var height_offset = 67;
 var height_offset_iphone = 110;
 var width_offset = 10;
 
-var font = "sans";  // without canvas text support
 var canvas_text_font = "12pt Arial"; // with canvas text support
 
 var fontsize = 12;
-
-var has_canvas_text_support = false;
 
 var fullfog = [];
 
@@ -53,18 +52,13 @@ function init_mapview()
   mapview_canvas_ctx = mapview_canvas.getContext("2d");
   buffer_canvas = document.createElement('canvas');
   buffer_canvas_ctx = buffer_canvas.getContext('2d');
+  city_canvas = document.getElementById('city_canvas');
+  city_canvas_ctx = city_canvas.getContext('2d');
 
   if ("mozImageSmoothingEnabled" in mapview_canvas_ctx) {
     // if this Boolean value is false, images won't be smoothed when scaled. This property is true by default.
     mapview_canvas_ctx.mozImageSmoothingEnabled = false;
   } 
-  
-  has_canvas_text_support = (mapview_canvas_ctx.fillText && mapview_canvas_ctx.measureText && !is_iphone());
-  
-  if (!has_canvas_text_support) {
-    CanvasTextFunctions.enable(mapview_canvas_ctx);
-  }
-    
   
   if (is_iphone()) {
     height_offset = height_offset_iphone;
@@ -111,25 +105,9 @@ function init_mapview()
 **************************************************************************/
 function setup_window_size () 
 {
-  var winWidth, winHeight, d=document;
-  if (typeof window.innerWidth!='undefined') {
-    winWidth = window.innerWidth;
-    winHeight = window.innerHeight;
-  } else {
-    if (d.documentElement &&
-      typeof d.documentElement.clientWidth!='undefined' &&
-      d.documentElement.clientWidth!=0) {
-      winWidth = d.documentElement.clientWidth
-      winHeight = d.documentElement.clientHeight
-    } else {
-      if (d.body &&
-        typeof d.body.clientWidth!='undefined') {
-        winWidth = d.body.clientWidth
-        winHeight = d.body.clientHeight
-      }
-    }
-  }
-  
+  var winWidth = $(window).width(); 
+  var winHeight = $(window).height(); 
+
   mapview_canvas.width = winWidth - width_offset;
   mapview_canvas.height = winHeight - height_offset;
   buffer_canvas.width = Math.floor(mapview_canvas.width * 1.5);
@@ -269,27 +247,13 @@ function canvas_put_rectangle(canvas_context, pcolor, canvas_x, canvas_y, width,
 **************************************************************************/
 function mapview_put_city_text(pcanvas, text, canvas_x, canvas_y) {
 
-  if (has_canvas_text_support) {
-    pcanvas.font = canvas_text_font;
+  pcanvas.font = canvas_text_font;
 
-    var width = pcanvas.measureText(text).width;
-    pcanvas.fillStyle = "rgba(0, 0, 0, 0.5)";
-    pcanvas.fillRect (canvas_x - Math.floor(width / 2) - 5, canvas_y - 14, width + 10, 20);
-    pcanvas.fillStyle = "rgba(255, 255, 255, 1)";
-    pcanvas.fillText(text, canvas_x - Math.floor(width / 2), canvas_y);  
-  } else {
-    var width = pcanvas.measureText(font, fontsize, text)
-    pcanvas.fillStyle = "rgba(0, 0, 0, 0.5)";
-    pcanvas.fillRect (canvas_x - Math.floor(width / 2) - 5, canvas_y - 14, width + 10, 20);
-    
-    pcanvas.strokeStyle = "rgba(255,255,255,1)";
-    pcanvas.drawTextCenter ( font, fontsize, canvas_x, canvas_y, text );
-    
-
-    
-    
-  }
-  
+  var width = pcanvas.measureText(text).width;
+  pcanvas.fillStyle = "rgba(0, 0, 0, 0.5)";
+  pcanvas.fillRect (canvas_x - Math.floor(width / 2) - 5, canvas_y - 14, width + 10, 20);
+  pcanvas.fillStyle = "rgba(255, 255, 255, 1)";
+  pcanvas.fillText(text, canvas_x - Math.floor(width / 2), canvas_y);  
     
 }
 
@@ -297,17 +261,9 @@ function mapview_put_city_text(pcanvas, text, canvas_x, canvas_y) {
   Draw unit activity text onto the canvas. (not in use?)
 **************************************************************************/
 function mapview_put_unit_text(pcanvas, text, canvas_x, canvas_y) {
-
-  
-  if (has_canvas_text_support) {
-    pcanvas.font = canvas_text_font;
-    pcanvas.fillStyle = "rgba(255, 200, 70, 1)";
-    pcanvas.fillText(text, canvas_x, canvas_y);  
-  } else {  
-    pcanvas.strokeStyle = "rgba(255, 200, 70, 1)"
-    pcanvas.drawTextCenter ( font, fontsize, canvas_x, canvas_y, text );
-  }
-  
+  pcanvas.font = canvas_text_font;
+  pcanvas.fillStyle = "rgba(255, 200, 70, 1)";
+  pcanvas.fillText(text, canvas_x, canvas_y);  
     
 }
 
@@ -400,14 +356,8 @@ function update_select_unit_dialog(punits)
 **************************************************************************/
 function set_city_mapview_active()
 {
-  mapview_canvas = document.getElementById('city_canvas');
-  mapview_canvas_ctx = mapview_canvas.getContext("2d");
+  mapview_canvas_ctx = city_canvas.getContext("2d");
      
-  if (!has_canvas_text_support) {
-    CanvasTextFunctions.enable(mapview_canvas_ctx);
-  }
-    
-
   mapview['width'] = 350;
   mapview['height'] = 175; 
   mapview['store_width'] = 350;
@@ -423,14 +373,8 @@ function set_city_mapview_active()
 **************************************************************************/
 function set_default_mapview_active()
 {
-  mapview_canvas = document.getElementById('canvas');
   mapview_canvas_ctx = mapview_canvas.getContext("2d");
     
-  if (!has_canvas_text_support) {
-    CanvasTextFunctions.enable(mapview_canvas_ctx);
-  }
-    
- 
   if (active_city != null) {
     setup_window_size (); 
     center_tile_mapcanvas(city_tile(active_city)); 

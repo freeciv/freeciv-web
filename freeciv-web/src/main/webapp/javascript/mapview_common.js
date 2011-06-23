@@ -17,7 +17,7 @@ var mapdeco_highlight_table = {};
 var mapdeco_crosshair_table = {};
 var mapdeco_gotoline_table = {};
 var last_redraw_time = 0;
-var MAPVIEW_REFRESH_INTERVAL = 12;
+var MAPVIEW_REFRESH_INTERVAL = 16;
 
 
 function mapdeco_init()

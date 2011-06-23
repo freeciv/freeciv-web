@@ -992,7 +992,6 @@ function preview_goto_path(unit_id, dst_x, dst_y)
   var punit = units[unit_id];
   current_goto_path = [];
   generate_preview_path(punit['x'], punit['y'], dst_x, dst_y);
-  update_map_canvas_check();
 }
 
 /**************************************************************************

@@ -761,6 +761,5 @@ function handle_edit_object_created(packet)
 function handle_goto_path(packet) 
 {
   show_goto_path(packet);
-  update_map_canvas_check();
 }
 

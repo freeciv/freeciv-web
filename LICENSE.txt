@@ -1,3 +1,21 @@
+Freeciv.net is is free and open source software. The Freeciv C server is released under
+the GNU General Public License, while the Freeciv.net web client is released
+under the GNU Affero General Public License. 
+
+
+See also: http://www.copyright.gov/fls/fl108.html
+"Copyright does not protect the idea for a game, its name or title, or the method or 
+methods for playing it. Nor does copyright protect any idea, system, method, device, or 
+trademark material involved in developing, merchandising, or playing a game. Once a game 
+has been made public, nothing in the copyright law prevents others from developing another
+game based on similar principles. Copyright protects only the particular manner of an 
+author’s expression in literary, artistic, or musical form."
+
+
+Freeciv.net is released under the GNU Affero General Public License, which is included here:
+
+
+
                     GNU AFFERO GENERAL PUBLIC LICENSE
                        Version 3, 19 November 2007
 

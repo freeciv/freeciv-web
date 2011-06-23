@@ -6,7 +6,10 @@ will make it possible to play Freeciv in your web browser.
 
 http://www.freeciv.net
 
-This software is licensed under the GNU AFFERO GENERAL PUBLIC LICENSE.
+Freeciv.net is is free and open source software. The Freeciv C server is released under
+the GNU General Public License, while the Freeciv.net web client is released
+under the GNU Affero General Public License. See LICENSE.txt for details.
+
 
 
 Contact: Andreas Røsdal  - andrearo@pvv.ntnu.no

@@ -17,7 +17,8 @@ var mapdeco_highlight_table = {};
 var mapdeco_crosshair_table = {};
 var mapdeco_gotoline_table = {};
 var last_redraw_time = 0;
-var MAPVIEW_REFRESH_INTERVAL = 16;
+var MAPVIEW_REFRESH_INTERVAL = 12;
+
 
 function mapdeco_init()
 {
@@ -532,9 +533,6 @@ function update_map_canvas_full()
     }
 
     last_redraw_time = new Date().getTime();
-
-    //var time = last_redraw_time - start;
-    //console.log('Redraw time: ' + time);
     
   }
 } 
@@ -545,7 +543,7 @@ function update_map_canvas_full()
 function update_map_canvas_check()
 {
   var time = new Date().getTime() - last_redraw_time;
-  if (time > MAPVIEW_REFRESH_INTERVAL || mapview_slide['active']) {
+  if (time > MAPVIEW_REFRESH_INTERVAL) {
     update_map_canvas_full();
   }
   requestAnimFrame(update_map_canvas_check);
@@ -605,6 +603,7 @@ function enable_mapview_slide(ptile)
   mapview_slide['dx'] = dx;
   mapview_slide['dy'] = dy;
   mapview_slide['i'] = mapview_slide['max'];
+  mapview_slide['start'] = new Date().getTime();
 
   if (Math.abs(dx) > mapview['width'] || Math.abs(dy) > mapview['height']) {
     // sliding across map edge.
@@ -613,7 +612,6 @@ function enable_mapview_slide(ptile)
   }
 
   mapview_slide['active'] = true;
-  mapview_slide['start'] = new Date().getTime();
  
   var new_width = mapview['width'] + Math.abs(dx);
   var new_height = mapview['height'] + Math.abs(dy);
@@ -655,7 +653,6 @@ function enable_mapview_slide(ptile)
   mapview['width'] = old_width;
   mapview['height'] = old_height;
 
- 
 }
 
 /**************************************************************************

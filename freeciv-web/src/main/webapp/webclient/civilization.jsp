@@ -1,6 +1,6 @@
 <div id="civ_dialog">
 
-<h2>Your civilisation</h2>
+<h2>Your Nation</h2>
 <div id="civ_dialog_text"></div>
 
 <button id="revolution_button" class="button" type="button" onclick="show_revolution_dialog();">Revolution</button><br>

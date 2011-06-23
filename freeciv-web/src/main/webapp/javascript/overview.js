@@ -269,6 +269,6 @@ function overview_clicked (x, y)
     center_tile_mapcanvas(ptile);
   }
   
-  requestAnimFrame(update_map_canvas_check); 
+  update_map_canvas_check(); 
   redraw_overview();
 }

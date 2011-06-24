@@ -90,10 +90,13 @@ function mouse_moved_cb(e)
       mouse_y = e.clientY;
     }
   }
-  
-  if (mapview_canvas != null) {
-    mouse_x = mouse_x - mapview_canvas.offsetLeft;
-    mouse_y = mouse_y - mapview_canvas.offsetTop;
+  if (active_city == null && mapview_canvas != null) {
+    mouse_x = mouse_x - $("#canvas").offset().left;
+    mouse_y = mouse_y - $("#canvas").offset().top;
+  } else if (active_city != null && city_canvas != null) {
+    mouse_x = mouse_x - $("#city_canvas").offset().left;
+    mouse_y = mouse_y - $("#city_canvas").offset().top;
+
   }
 
   if (client.conn.playing == null) return;

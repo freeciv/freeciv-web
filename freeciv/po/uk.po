@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: freeciv 1.14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-18 15:51+0200\n"
+"POT-Creation-Date: 2011-07-11 10:10+0200\n"
 "PO-Revision-Date: 2007-09-05 04:24+0300\n"
 "Last-Translator: Roman Festchook <roma@polesye.net>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -8529,16 +8529,16 @@ msgstr ""
 msgid "High landmass - this may take a few seconds."
 msgstr "Багато земл╕ - це займе дек╕лька секунд."
 
-#: server/generator/mapgen.c:2006 server/generator/mapgen.c:2075
+#: server/generator/mapgen.c:2005 server/generator/mapgen.c:2074
 #, fuzzy, c-format
 msgid "Falling back to generator %d."
 msgstr "Повертаюсь до генератор 2"
 
-#: server/generator/mapgen.c:2095
+#: server/generator/mapgen.c:2094
 msgid "Generator 3 didn't place all big islands."
 msgstr "Генератор 3 не може розташувати ус╕ велик╕ острови."
 
-#: server/generator/mapgen.c:2124
+#: server/generator/mapgen.c:2123
 #, c-format
 msgid "Generator 3 left %li landmass unplaced."
 msgstr "Генератор 3 залишив нерозм╕щеними %li земель."

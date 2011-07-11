@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Freeciv 2.1-beta1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-18 15:51+0200\n"
+"POT-Creation-Date: 2011-07-11 10:10+0200\n"
 "PO-Revision-Date: 2007-08-11 01:51+0300\n"
 "Last-Translator: Claudio M. Camacho <claudiomkd@gmail.com>\n"
 "Language-Team: Español <es@li.org>\n"
@@ -8781,16 +8781,16 @@ msgstr ""
 msgid "High landmass - this may take a few seconds."
 msgstr "Gran cantidad de masa terrestre - esto podría llevar unos segundos."
 
-#: server/generator/mapgen.c:2006 server/generator/mapgen.c:2075
+#: server/generator/mapgen.c:2005 server/generator/mapgen.c:2074
 #, c-format
 msgid "Falling back to generator %d."
 msgstr "Recurriendo al generador %d."
 
-#: server/generator/mapgen.c:2095
+#: server/generator/mapgen.c:2094
 msgid "Generator 3 didn't place all big islands."
 msgstr "El generador 3 no ha podido colocar todas las islas grandes."
 
-#: server/generator/mapgen.c:2124
+#: server/generator/mapgen.c:2123
 #, c-format
 msgid "Generator 3 left %li landmass unplaced."
 msgstr "El generador 3 ha dejado %li masas terrestres sin colocar."

@@ -39,7 +39,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.15\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-18 15:51+0200\n"
+"POT-Creation-Date: 2011-07-11 10:10+0200\n"
 "PO-Revision-Date: 2009-03-24 22:03+0100\n"
 "Last-Translator: Christian Knoke <chrisk@cknoke.de>\n"
 "Language-Team: German Freeciv Translators <freeciv.de@freelists.org>\n"
@@ -8646,16 +8646,16 @@ msgstr ""
 msgid "High landmass - this may take a few seconds."
 msgstr "Große Landfläche - bitte warten..."
 
-#: server/generator/mapgen.c:2006 server/generator/mapgen.c:2075
+#: server/generator/mapgen.c:2005 server/generator/mapgen.c:2074
 #, c-format
 msgid "Falling back to generator %d."
 msgstr "Benutze Kartengenerator %d."
 
-#: server/generator/mapgen.c:2095
+#: server/generator/mapgen.c:2094
 msgid "Generator 3 didn't place all big islands."
 msgstr "Kartengenerator 3 hat nicht alle großen Inseln erzeugt."
 
-#: server/generator/mapgen.c:2124
+#: server/generator/mapgen.c:2123
 #, c-format
 msgid "Generator 3 left %li landmass unplaced."
 msgstr "Kartengenerator 3 hat %li Land nicht plaziert."

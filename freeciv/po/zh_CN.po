@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: freeciv\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-18 15:51+0200\n"
+"POT-Creation-Date: 2011-07-11 10:10+0200\n"
 "PO-Revision-Date: 2006-03-26 14:53+0800\n"
 "Last-Translator: Hongjia Cao <hjcao@yahoo.com>\n"
 "Language-Team: zh_CN <i18n-translation@linux.net.cn>\n"
@@ -8318,16 +8318,16 @@ msgstr ""
 msgid "High landmass - this may take a few seconds."
 msgstr "大型的陆地 －这可能需要几秒钟。"
 
-#: server/generator/mapgen.c:2006 server/generator/mapgen.c:2075
+#: server/generator/mapgen.c:2005 server/generator/mapgen.c:2074
 #, c-format
 msgid "Falling back to generator %d."
 msgstr "回到生成器 %d 。"
 
-#: server/generator/mapgen.c:2095
+#: server/generator/mapgen.c:2094
 msgid "Generator 3 didn't place all big islands."
 msgstr "生成器 3 未能成功放置所有的大型岛屿。"
 
-#: server/generator/mapgen.c:2124
+#: server/generator/mapgen.c:2123
 #, c-format
 msgid "Generator 3 left %li landmass unplaced."
 msgstr "生成器3留下了 %li 陆地未能放置。"

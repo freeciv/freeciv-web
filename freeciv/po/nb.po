@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-18 15:51+0200\n"
+"POT-Creation-Date: 2011-07-11 10:10+0200\n"
 "PO-Revision-Date: 2007-09-01 22:28+0300\n"
 "Last-Translator: Per I. Mathisen <per@freeciv.org>\n"
 "Language-Team: Norwegian <andrearo@stud.ntnu.no>\n"
@@ -8583,16 +8583,16 @@ msgstr ""
 msgid "High landmass - this may take a few seconds."
 msgstr "Mye landmasse - dette kan ta noen sekunder."
 
-#: server/generator/mapgen.c:2006 server/generator/mapgen.c:2075
+#: server/generator/mapgen.c:2005 server/generator/mapgen.c:2074
 #, c-format
 msgid "Falling back to generator %d."
 msgstr "Faller tilbake på generator %d."
 
-#: server/generator/mapgen.c:2095
+#: server/generator/mapgen.c:2094
 msgid "Generator 3 didn't place all big islands."
 msgstr "Generator 3 plasserte ikke alle de store øyene."
 
-#: server/generator/mapgen.c:2124
+#: server/generator/mapgen.c:2123
 #, c-format
 msgid "Generator 3 left %li landmass unplaced."
 msgstr "Generator 3 forlot %li landmasse uplassert."

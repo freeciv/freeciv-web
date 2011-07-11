@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: freeciv 2.0.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-18 15:51+0200\n"
+"POT-Creation-Date: 2011-07-11 10:10+0200\n"
 "PO-Revision-Date: 2008-01-21 15:42+0100\n"
 "Last-Translator: Dusan Hokuv <dusan@mirc.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -8485,16 +8485,16 @@ msgstr ""
 msgid "High landmass - this may take a few seconds."
 msgstr "Příliš velká pevnina - to může pár sekund trvat."
 
-#: server/generator/mapgen.c:2006 server/generator/mapgen.c:2075
+#: server/generator/mapgen.c:2005 server/generator/mapgen.c:2074
 #, c-format
 msgid "Falling back to generator %d."
 msgstr "Návrat zpět ke generátoru %d."
 
-#: server/generator/mapgen.c:2095
+#: server/generator/mapgen.c:2094
 msgid "Generator 3 didn't place all big islands."
 msgstr "Generátoru 3 se nepodařilo rozmístit všechny velké ostrovy."
 
-#: server/generator/mapgen.c:2124
+#: server/generator/mapgen.c:2123
 #, c-format
 msgid "Generator 3 left %li landmass unplaced."
 msgstr "Generátor 3 nezozmístil %li pevniny."

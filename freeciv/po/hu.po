@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Freeciv 1.14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-18 15:51+0200\n"
+"POT-Creation-Date: 2011-07-11 10:10+0200\n"
 "PO-Revision-Date: 2007-08-12 15:37+0300\n"
 "Last-Translator: Gábor Takács <tg330@hszk.bme.hu>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
@@ -8578,16 +8578,16 @@ msgstr ""
 msgid "High landmass - this may take a few seconds."
 msgstr "Sok szárazföld - ez néhány másodpercet vehet igénybe."
 
-#: server/generator/mapgen.c:2006 server/generator/mapgen.c:2075
+#: server/generator/mapgen.c:2005 server/generator/mapgen.c:2074
 #, fuzzy, c-format
 msgid "Falling back to generator %d."
 msgstr "Vissza a 2-es generálóeljáráshoz."
 
-#: server/generator/mapgen.c:2095
+#: server/generator/mapgen.c:2094
 msgid "Generator 3 didn't place all big islands."
 msgstr "A 3-as generálóeljárás nem helyezte el az összes nagy szigetet."
 
-#: server/generator/mapgen.c:2124
+#: server/generator/mapgen.c:2123
 #, c-format
 msgid "Generator 3 left %li landmass unplaced."
 msgstr "A 3-as generálóeljárás %li szárazföldi mezõt nem helyezett el."

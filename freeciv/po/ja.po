@@ -144,7 +144,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Freeciv 2.0.99-devel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-18 15:51+0200\n"
+"POT-Creation-Date: 2011-07-11 10:10+0200\n"
 "PO-Revision-Date: 2007-08-12 15:56+0300\n"
 "Last-Translator: MITA Yuusuke <clefs@mail.goo.ne.jp>\n"
 "Language-Team: SAWADA Katsuya <ama@petmail.net>\n"
@@ -9145,16 +9145,16 @@ msgid "High landmass - this may take a few seconds."
 msgstr "広大な土地です - 少し時間がかかるかもしれません。"
 
 # Daniel
-#: server/generator/mapgen.c:2006 server/generator/mapgen.c:2075
+#: server/generator/mapgen.c:2005 server/generator/mapgen.c:2074
 #, c-format
 msgid "Falling back to generator %d."
 msgstr "Generator %d を試みます。"
 
-#: server/generator/mapgen.c:2095
+#: server/generator/mapgen.c:2094
 msgid "Generator 3 didn't place all big islands."
 msgstr "Generator 3 は大きな島のいくつかを配置できません。"
 
-#: server/generator/mapgen.c:2124
+#: server/generator/mapgen.c:2123
 #, c-format
 msgid "Generator 3 left %li landmass unplaced."
 msgstr "Generator 3 は配置しなかった%liの島を残しました。"

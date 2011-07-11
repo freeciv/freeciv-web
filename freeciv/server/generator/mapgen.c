@@ -1861,8 +1861,7 @@ static bool make_island(int islemass, int starters,
     i *= tilefactor;
 
     riverbuck += river_pct * i;
-    //FIXME: rivers are disabled in web client
-    //fill_island_rivers(1, &riverbuck, pstate);
+    fill_island_rivers(1, &riverbuck, pstate);
 
     mountbuck += mountain_pct * i;
     fill_island(20, &mountbuck,

@@ -152,6 +152,10 @@ function fill_sprite_array(layer, ptile, pedge, pcorner, punit, pcity, citymode)
 
     case LAYER_SPECIAL1:
       if (ptile != null) {
+
+        var river_sprite = get_tile_river_sprite(ptile);
+        if (river_sprite != null) sprite_array.push(river_sprite);
+
         var spec_sprite = get_tile_specials_sprite(ptile);
         if (spec_sprite != null) sprite_array.push(spec_sprite);
         
@@ -832,6 +836,44 @@ function get_tile_specials_sprite(ptile)
   if (resource == null) return null; 
   
   return  {"key" : resource['graphic_str']} ;
+}
+
+/****************************************************************************
+ ...
+****************************************************************************/
+function get_tile_river_sprite(ptile)
+{
+  if (ptile == null || ptile['special'] == null) return null;
+
+  if (contains_special(ptile, S_RIVER)) {
+    var river_str = "";
+    for (var i = 0; i < num_cardinal_tileset_dirs; i++) {
+      var dir = cardinal_tileset_dirs[i];
+      var checktile = mapstep(ptile, dir);
+      if (checktile 
+          && (contains_special(checktile, S_RIVER) || is_ocean_tile(checktile))) {
+        river_str = river_str + dir_get_tileset_name(dir) + "1";
+      } else {
+        river_str = river_str + dir_get_tileset_name(dir) + "0";
+      }
+
+    }
+    return {"key" : "tx.s_river_" + river_str};
+  }
+
+  var pterrain = tile_terrain(ptile);
+  if (pterrain['graphic_str'] == "coast") {
+    for (var i = 0; i < num_cardinal_tileset_dirs; i++) {
+      var dir = cardinal_tileset_dirs[i];
+      var checktile = mapstep(ptile, dir);
+      if (checktile != null && contains_special(checktile, S_RIVER)) {
+        return {"key" : "tx.river_outlet_" + dir_get_tileset_name(dir)};
+      }
+    }
+  }
+
+  return null;
+
 }
 
 /****************************************************************************

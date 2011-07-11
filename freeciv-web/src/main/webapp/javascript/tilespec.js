@@ -171,6 +171,9 @@ function fill_sprite_array(layer, ptile, pedge, pcorner, punit, pcity, citymode)
         if (contains_special(ptile, S_POLLUTION)) {
           sprite_array.push({"key" : "tx.pollution"}); 
         }
+
+        sprite_array = sprite_array.concat(get_border_line_sprites(ptile));
+
       } 
     break;
     
@@ -594,6 +597,30 @@ function get_city_size_sprites(pcity) {
             "offset_y" : - city_size_offset_y});
   }
   
+  return result;
+}
+
+/**********************************************************************
+...
+***********************************************************************/
+function get_border_line_sprites(ptile)
+{
+  var result = [];
+
+  for (var i = 0; i < num_cardinal_tileset_dirs; i++) {
+    var dir = cardinal_tileset_dirs[i];
+    var checktile = mapstep(ptile, dir);
+
+    if (checktile != null && checktile['owner'] != null 
+        && ptile['owner'] != null 
+        && ptile['owner'] != 255 
+	&& ptile['owner'] != checktile['owner']) {
+      var pnation = nations[ptile['owner']];
+      result.push({"key" : "border", "dir" : dir,
+                   "color": pnation['color']});
+    }
+  }
+
   return result;
 }
 

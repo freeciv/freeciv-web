@@ -97,6 +97,30 @@ function init_mapview()
   
   init_sprites();
 
+  /* Adds dashedLine() to canvas context. */
+  if (window.CanvasRenderingContext2D && CanvasRenderingContext2D.prototype.lineTo){
+    CanvasRenderingContext2D.prototype.dashedLine = function(x,y,x2,y2,dashArray){
+    if (!dashArray) dashArray=[10,5];
+      var dashCount = dashArray.length;
+      this.moveTo(x, y);
+      var dx = (x2-x), dy = (y2-y);
+      var slope = dy/dx;
+      var distRemaining = Math.sqrt( dx*dx + dy*dy );
+      var dashIndex=0, draw=true;
+      while (distRemaining>=0.1 && dashIndex<10000){
+        var dashLength = dashArray[dashIndex++%dashCount];
+        if (dashLength > distRemaining) dashLength = distRemaining;
+          var xStep = Math.sqrt( dashLength*dashLength / (1 + slope*slope) );
+          x += xStep
+          y += slope*xStep;
+          this[draw ? 'lineTo' : 'moveTo'](x,y);
+          distRemaining -= dashLength;
+          draw = !draw;
+      }
+      this.moveTo(0,0);
+    }
+  }
+
 }
 
 
@@ -256,6 +280,32 @@ function mapview_put_city_text(pcanvas, text, canvas_x, canvas_y) {
   pcanvas.fillText(text, canvas_x - Math.floor(width / 2), canvas_y);  
     
 }
+
+/**************************************************************************
+ Renders the national border lines onto the canvas.
+**************************************************************************/
+function mapview_put_border_line(pcanvas, dir, color, canvas_x, canvas_y) {
+  var x = canvas_x + 47;
+  var y = canvas_y + 3;
+
+  pcanvas.strokeStyle = color;
+  pcanvas.lineWidth = 2;
+  pcanvas.lineCap = 'butt';
+  pcanvas.beginPath();
+  if (dir == DIR8_NORTH) {
+    pcanvas.dashedLine(x, y - 2, x + (tileset_tile_width / 2),  y + (tileset_tile_height / 2) - 2, [4, 4]);
+  } else if (dir == DIR8_EAST) {
+    pcanvas.dashedLine(x - 3, y + tileset_tile_height - 3, x + (tileset_tile_width / 2) - 3,  y + (tileset_tile_height / 2) - 3, [4, 4]);
+  } else if (dir == DIR8_SOUTH) {
+    pcanvas.dashedLine(x - (tileset_tile_width / 2) + 3, y + (tileset_tile_height / 2) - 3, x + 3,  y + tileset_tile_height - 3, [4, 4]);
+  } else if (dir == DIR8_WEST) {
+    pcanvas.dashedLine(x - (tileset_tile_width / 2) + 3, y + (tileset_tile_height / 2) - 3, x + 3,  y - 3, [4, 4]);
+  }
+  pcanvas.closePath();
+  pcanvas.stroke();
+    
+}
+
 
 /**************************************************************************
   Draw unit activity text onto the canvas. (not in use?)

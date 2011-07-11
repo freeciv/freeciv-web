@@ -668,6 +668,7 @@ function handle_ruleset_nation_groups(packet)
 function handle_ruleset_nation(packet) 
 {
   nations[packet['id']] = packet;
+  nations[packet['id']]['color'] = player_colors[(packet['id'] % player_colors.length)];
 }
 
 function handle_ruleset_city(packet) 

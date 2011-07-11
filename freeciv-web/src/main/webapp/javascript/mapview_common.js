@@ -474,6 +474,8 @@ function put_drawn_sprites(pcanvas, canvas_x, canvas_y, pdrawn, fog)
       
     } else if (pdrawn[i]['key'] == "unit_activity_text" ) {
       mapview_put_unit_text(pcanvas, pdrawn[i]['text'], canvas_x + offset_x, canvas_y + offset_y);        
+    } else if (pdrawn[i]['key'] == "border" ) {
+      mapview_put_border_line(pcanvas, pdrawn[i]['dir'], pdrawn[i]['color'], canvas_x, canvas_y);
     } else {
       mapview_put_tile(pcanvas, pdrawn[i]['key'], canvas_x + offset_x, canvas_y + offset_y);
 

@@ -621,7 +621,11 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift)
     case 'A':
       key_unit_auto_settle();
     break;
-    
+
+    case 'W':
+      key_unit_wait();
+    break;
+     
     case 'R':
       key_unit_road();
     break;
@@ -761,6 +765,14 @@ function key_unit_auto_explore()
     request_new_unit_activity(punit, ACTIVITY_EXPLORE);
   }  
   update_unit_focus();
+}
+
+/**************************************************************************
+ Tell the unit to wait (focus to next unit with moves left)
+**************************************************************************/
+function key_unit_wait()
+{
+  advance_unit_focus();
 }
 
 /**************************************************************************

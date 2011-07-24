@@ -407,5 +407,6 @@ function show_debug_info()
   }
   console.log("Network PING average (client): " + (sum / debug_client_speed_list.length) + " ms.  (Max: " + max +"ms.)");
 
+  console.log("mozDash support: " + mozDashSupport);
 
 }

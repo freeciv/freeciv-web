@@ -36,7 +36,7 @@ var height_offset_iphone = 110;
 var width_offset = 10;
 
 var canvas_text_font = "12pt Arial"; // with canvas text support
-
+var mozDashSupport = false; 
 var fontsize = 12;
 
 var fullfog = [];
@@ -98,7 +98,9 @@ function init_mapview()
   init_sprites();
 
   /* Adds dashedLine() to canvas context. */
-  if (window.CanvasRenderingContext2D && CanvasRenderingContext2D.prototype.lineTo){
+  mozDashSupport = "mozDash" in mapview_canvas_ctx;
+
+  if (!mozDashSupport && window.CanvasRenderingContext2D && CanvasRenderingContext2D.prototype.lineTo){
     CanvasRenderingContext2D.prototype.dashedLine = function(x,y,x2,y2,dashArray){
     if (!dashArray) dashArray=[10,5];
       var dashCount = dashArray.length;
@@ -282,7 +284,11 @@ function mapview_put_city_text(pcanvas, text, canvas_x, canvas_y) {
 }
 
 /**************************************************************************
- Renders the national border lines onto the canvas.
+  Renders the national border lines onto the canvas.
+
+  Note that pcanvas.dashedLine is a custom dashed line implementation,
+  while pcanvas.mozDash is an experimental line implementation 
+  found in development versions of Firefox.
 **************************************************************************/
 function mapview_put_border_line(pcanvas, dir, color, canvas_x, canvas_y) {
   var x = canvas_x + 47;
@@ -290,19 +296,45 @@ function mapview_put_border_line(pcanvas, dir, color, canvas_x, canvas_y) {
 
   pcanvas.strokeStyle = color;
   pcanvas.lineWidth = 2;
-  pcanvas.lineCap = 'butt';
+
+  if (mozDashSupport) {
+    pcanvas.mozDash = [4, 4];
+  } else {
+    pcanvas.lineCap = 'butt';
+  }
   pcanvas.beginPath();
   if (dir == DIR8_NORTH) {
-    pcanvas.dashedLine(x, y - 2, x + (tileset_tile_width / 2),  y + (tileset_tile_height / 2) - 2, [4, 4]);
+    if (mozDashSupport) {
+      pcanvas.moveTo(x, y - 2, x + (tileset_tile_width / 2));
+      pcanvas.lineTo(x + (tileset_tile_width / 2),  y + (tileset_tile_height / 2) - 2);
+    } else {
+      pcanvas.dashedLine(x, y - 2, x + (tileset_tile_width / 2),  y + (tileset_tile_height / 2) - 2, [4, 4]);
+    }
   } else if (dir == DIR8_EAST) {
-    pcanvas.dashedLine(x - 3, y + tileset_tile_height - 3, x + (tileset_tile_width / 2) - 3,  y + (tileset_tile_height / 2) - 3, [4, 4]);
+    if (mozDashSupport) {
+      pcanvas.moveTo(x - 3, y + tileset_tile_height - 3);
+      pcanvas.lineTo(x + (tileset_tile_width / 2) - 3,  y + (tileset_tile_height / 2) - 3);
+    } else {
+      pcanvas.dashedLine(x - 3, y + tileset_tile_height - 3, x + (tileset_tile_width / 2) - 3,  y + (tileset_tile_height / 2) - 3, [4, 4]);
+    }
   } else if (dir == DIR8_SOUTH) {
-    pcanvas.dashedLine(x - (tileset_tile_width / 2) + 3, y + (tileset_tile_height / 2) - 3, x + 3,  y + tileset_tile_height - 3, [4, 4]);
+    if (mozDashSupport) {
+      pcanvas.moveTo(x - (tileset_tile_width / 2) + 3, y + (tileset_tile_height / 2) - 3);
+      pcanvas.lineTo(x + 3,  y + tileset_tile_height - 3);
+    } else {
+      pcanvas.dashedLine(x - (tileset_tile_width / 2) + 3, y + (tileset_tile_height / 2) - 3, x + 3,  y + tileset_tile_height - 3, [4, 4]);
+    }
   } else if (dir == DIR8_WEST) {
-    pcanvas.dashedLine(x - (tileset_tile_width / 2) + 3, y + (tileset_tile_height / 2) - 3, x + 3,  y - 3, [4, 4]);
+    if (mozDashSupport) {
+      pcanvas.moveTo(x - (tileset_tile_width / 2) + 3, y + (tileset_tile_height / 2) - 3);
+      pcanvas.lineTo(x + 3,  y - 3);
+    } else {
+      pcanvas.dashedLine(x - (tileset_tile_width / 2) + 3, y + (tileset_tile_height / 2) - 3, x + 3,  y - 3, [4, 4]);
+    }
   }
   pcanvas.closePath();
   pcanvas.stroke();
+  
     
 }
 

@@ -4,13 +4,13 @@
 <title>Freeciv.net - strategy game playable online with HTML5</title>
 
 <link href="/css/frontpage.css" rel="stylesheet" type="text/css" />
-<link type="text/css" href="/css/jquery-ui-1.8.13.custom.css" rel="stylesheet" />
+<link type="text/css" href="/css/jquery-ui-1.8.14.custom.css" rel="stylesheet" />
 
 
 <link rel="shortcut icon" href="/images/freeciv-shortcut-icon.png" />
 
 <script type="text/javascript" src="/javascript-compressed/jquery-1.6.2rc1.min.js"></script>
-<script type="text/javascript" src="/javascript/jquery-ui-1.8.13.custom.min.js"></script>
+<script type="text/javascript" src="/javascript/jquery-ui-1.8.14.custom.min.js"></script>
 
 
 <script type="text/javascript" src="/javascript/iphone.js"></script>

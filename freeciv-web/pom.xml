@@ -83,7 +83,7 @@
             <configuration>
               <cssSourceDir>css</cssSourceDir>
               <cssSourceFiles>
-	      <cssSourceFile>jquery-ui-1.8.13.custom.css</cssSourceFile>
+	      <cssSourceFile>jquery-ui-1.8.14.custom.css</cssSourceFile>
 	      <cssSourceFile>bluecurve.css</cssSourceFile>
 	      <cssSourceFile>fg.menu.css</cssSourceFile>
 	      <cssSourceFile>pregame.css</cssSourceFile>

@@ -237,6 +237,9 @@ function drawPath(ctx, x1, y1, x2, y2, x3, y3, x4, y4)
 function drawGotoLine(ctx, x1, y1, x2, y2)
 {
     ctx.strokeStyle = '#f00';
+    if (mozDashSupport) {
+      ctx.mozDash = null;
+    }
     ctx.lineWidth = 2;
     ctx.beginPath(); 
     ctx.moveTo(x1, y1);

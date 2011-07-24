@@ -11,7 +11,7 @@
 <script type="text/javascript" src="/webclient/session.jsp"></script>
 <script>WEB_SOCKET_SWF_LOCATION = 'http://cdn.socket.io/stable/WebSocketMain.swf';</script>
 
-<link rel="shortcut icon" href="/images/freeciv-shotcut-icon.png" />
+<link rel="shortcut icon" href="/images/freeciv-shortcut-icon.png" />
 
 <%--  iPhone setup --%>
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />

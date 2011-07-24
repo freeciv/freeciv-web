@@ -561,6 +561,7 @@ function update_goto_path_lines()
     for (var i = 0; i < current_goto_path.length - 1; i++) {
       var ptile = current_goto_path[i];
       var ntile = current_goto_path[i+1];
+      if (ptile == null || ntile == null) continue;
 
       if (ptile['x'] == (map['xsize'] - 1) && ntile['x'] == 0) continue;
       if (ntile['x'] == (map['xsize'] - 1) && ptile['x'] == 0) continue;
@@ -608,7 +609,8 @@ function enable_mapview_slide(ptile)
   mapview_slide['start'] = new Date().getTime();
 
   if (Math.abs(dx) > mapview['width'] || Math.abs(dy) > mapview['height']) {
-    // sliding across map edge.
+    // sliding across map edge: don't slide, just go there directly.
+    mapview_slide['active'] = false;
     update_map_canvas_full();
     return;
   }

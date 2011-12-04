@@ -54,15 +54,14 @@ function network_init()
 ****************************************************************************/
 function network_websocket_init()
 {
-  ws = new io.Socket(window.location.hostname, {port: 8002, rememberTransport: false});
-  ws.connect();
+  ws = new io.connect('http://' + window.location.hostname + ":" + 8002);
 
-  ws.addEvent('connect', function() {
+  ws.on('connect', function() {
     /* first websocket packet contains username and port. */
     ws.send(username + ";" + civserverport);
   });
 
-  ws.addEvent('message', function(data) {
+  ws.on('message', function(data) {
      client_handle_packet(jQuery.parseJSON(data));
   });
 

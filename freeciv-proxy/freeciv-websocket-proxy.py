@@ -18,10 +18,9 @@ from os import path as op
 
 import time
 
-import tornado.web
-import tornadio
-import tornadio.router
-import tornadio.server
+from tornado import web
+
+from tornadio2 import SocketConnection, TornadioRouter, SocketServer, event
 
 from threading import Thread;
 
@@ -34,17 +33,17 @@ WS_UPDATE_INTERVAL = 0.022;
 
 civcoms = {};
 
-class IndexHandler(tornado.web.RequestHandler):
+class IndexHandler(web.RequestHandler):
     """Serves the Freeciv-proxy status page, on the url:  /status """
     def get(self):
         self.write(get_debug_info(civcoms))
 
-class CivConnection(tornadio.SocketConnection):
+class CivConnection(SocketConnection):
     """ Serves the Freeciv WebSocket service. """
     participants = set()
 
-    def on_open(self, request, *args, **kwargs):
-	self.ip = request.remote_ip;    
+    def on_open(self, request):
+	self.ip = self.user_id = request.get_argument('id');
         self.participants.add(self);
 	self.is_ready = False;
 
@@ -136,10 +135,9 @@ class CivWsMessenger(Thread):
 
 
 
-CivRouter = tornadio.get_router(CivConnection)
+CivRouter = TornadioRouter(CivConnection);
 
-application = tornado.web.Application(
-    [(r"/status", IndexHandler), CivRouter.route()],
+application = web.Application( CivRouter.urls,
     enabled_protocols = ['websocket',
                          'flashsocket',
                          'xhr-multipart',
@@ -153,7 +151,7 @@ if __name__ == "__main__":
     import logging
     logging.getLogger().setLevel(level=logging.INFO);
 
-    tornadio.server.SocketServer(application);
+    SocketServer(application);
 
 
 

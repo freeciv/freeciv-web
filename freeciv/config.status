@@ -562,11 +562,13 @@ sed_quote_subst='s/\(["`$\\]\)/\\\1/g'
 double_quote_subst='s/\(["`\\]\)/\\\1/g'
 delay_variable_subst='s/\\\\\\\\\\\$/\\\\\\$/g'
 enable_shared='no'
-macro_version='2.2.6b'
-macro_revision='1.3018'
+macro_version='2.4'
+macro_revision='1.3293'
 enable_static='yes'
 pic_mode='default'
 enable_fast_install='needless'
+SHELL='/bin/sh'
+ECHO='printf %s\n'
 host_alias=''
 host='x86_64-suse-linux-gnu'
 host_os='linux-gnu'
@@ -587,36 +589,45 @@ exeext=''
 lt_unset='unset'
 lt_SP2NL='tr \040 \012'
 lt_NL2SP='tr \015\012 \040\040'
+lt_cv_to_host_file_cmd='func_convert_file_noop'
+lt_cv_to_tool_file_cmd='func_convert_file_noop'
 reload_flag=' -r'
 reload_cmds='$LD$reload_flag -o $output$reload_objs'
 OBJDUMP='objdump'
 deplibs_check_method='pass_all'
 file_magic_cmd='$MAGIC_CMD'
+file_magic_glob=''
+want_nocaseglob='no'
+DLLTOOL='false'
+sharedlib_from_linklib_cmd='printf %s\n'
 AR='ar'
 AR_FLAGS='cru'
+archiver_list_spec='@'
 STRIP='strip'
 RANLIB='ranlib'
 old_postinstall_cmds='chmod 644 $oldlib~$RANLIB $oldlib'
 old_postuninstall_cmds=''
 old_archive_cmds='$AR $AR_FLAGS $oldlib$oldobjs~$RANLIB $oldlib'
+lock_old_archive_extraction='no'
 CC='gcc'
-CFLAGS='-save-temps -Wall -Wpointer-arith -Wcast-align -Wmissing-prototypes -Wmissing-declarations -g -O2 -fsigned-char -I/usr/local/include/glib-2.0 -I/usr/local/lib/glib-2.0/include  '
+CFLAGS='-save-temps -Wall -Wpointer-arith -Wcast-align -Wmissing-prototypes -Wmissing-declarations -g -O2 -fsigned-char -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include  '
 compiler='g++'
 GCC='yes'
-lt_cv_sys_global_symbol_pipe='sed -n -e '\''s/^.*[	 ]\([ABCDGIRSTW][ABCDGIRSTW]*\)[	 ][	 ]*\([_A-Za-z][_A-Za-z0-9]*\)$/\1 \2 \2/p'\'''
+lt_cv_sys_global_symbol_pipe='sed -n -e '\''s/^.*[	 ]\([ABCDGIRSTW][ABCDGIRSTW]*\)[	 ][	 ]*\([_A-Za-z][_A-Za-z0-9]*\)$/\1 \2 \2/p'\'' | sed '\''/ __gnu_lto/d'\'''
 lt_cv_sys_global_symbol_to_cdecl='sed -n -e '\''s/^T .* \(.*\)$/extern int \1();/p'\'' -e '\''s/^[ABCDGIRSTW]* .* \(.*\)$/extern char \1;/p'\'''
-lt_cv_sys_global_symbol_to_c_name_address='sed -n -e '\''s/^: \([^ ]*\) $/  {\"\1\", (void *) 0},/p'\'' -e '\''s/^[ABCDGIRSTW]* \([^ ]*\) \([^ ]*\)$/  {"\2", (void *) \&\2},/p'\'''
-lt_cv_sys_global_symbol_to_c_name_address_lib_prefix='sed -n -e '\''s/^: \([^ ]*\) $/  {\"\1\", (void *) 0},/p'\'' -e '\''s/^[ABCDGIRSTW]* \([^ ]*\) \(lib[^ ]*\)$/  {"\2", (void *) \&\2},/p'\'' -e '\''s/^[ABCDGIRSTW]* \([^ ]*\) \([^ ]*\)$/  {"lib\2", (void *) \&\2},/p'\'''
+lt_cv_sys_global_symbol_to_c_name_address='sed -n -e '\''s/^: \([^ ]*\)[ ]*$/  {\"\1\", (void *) 0},/p'\'' -e '\''s/^[ABCDGIRSTW]* \([^ ]*\) \([^ ]*\)$/  {"\2", (void *) \&\2},/p'\'''
+lt_cv_sys_global_symbol_to_c_name_address_lib_prefix='sed -n -e '\''s/^: \([^ ]*\)[ ]*$/  {\"\1\", (void *) 0},/p'\'' -e '\''s/^[ABCDGIRSTW]* \([^ ]*\) \(lib[^ ]*\)$/  {"\2", (void *) \&\2},/p'\'' -e '\''s/^[ABCDGIRSTW]* \([^ ]*\) \([^ ]*\)$/  {"lib\2", (void *) \&\2},/p'\'''
+nm_file_list_spec='@'
+lt_sysroot=''
 objdir='.libs'
-SHELL='/bin/sh'
-ECHO='echo'
 MAGIC_CMD='file'
 lt_prog_compiler_no_builtin_flag=' -fno-builtin'
-lt_prog_compiler_wl='-Wl,'
 lt_prog_compiler_pic=' -fPIC -DPIC'
-lt_prog_compiler_static='-static'
+lt_prog_compiler_wl='-Wl,'
+lt_prog_compiler_static=''
 lt_cv_prog_compiler_c_o='yes'
 need_locks='no'
+MANIFEST_TOOL=':'
 DSYMUTIL=''
 NMEDIT=''
 LIPO=''
@@ -632,11 +643,11 @@ whole_archive_flag_spec='${wl}--whole-archive$convenience ${wl}--no-whole-archiv
 compiler_needs_object='no'
 old_archive_from_new_cmds=''
 old_archive_from_expsyms_cmds=''
-archive_cmds='$CC -shared $libobjs $deplibs $compiler_flags ${wl}-soname $wl$soname -o $lib'
+archive_cmds='$CC -shared $pic_flag $libobjs $deplibs $compiler_flags ${wl}-soname $wl$soname -o $lib'
 archive_expsym_cmds='echo "{ global:" > $output_objdir/$libname.ver~
 	    cat $export_symbols | sed -e "s/\(.*\)/\1;/" >> $output_objdir/$libname.ver~
 	    echo "local: *; };" >> $output_objdir/$libname.ver~
-	    $CC -shared $libobjs $deplibs $compiler_flags ${wl}-soname $wl$soname ${wl}-version-script ${wl}$output_objdir/$libname.ver -o $lib'
+	    $CC -shared $pic_flag $libobjs $deplibs $compiler_flags ${wl}-soname $wl$soname ${wl}-version-script ${wl}$output_objdir/$libname.ver -o $lib'
 module_cmds=''
 module_expsym_cmds=''
 with_gnu_ld='yes'
@@ -652,12 +663,12 @@ hardcode_shlibpath_var='unsupported'
 hardcode_automatic='no'
 inherit_rpath='no'
 link_all_deplibs='unknown'
-fix_srcfile_path=''
 always_export_symbols='no'
 export_symbols_cmds='$NM $libobjs $convenience | $global_symbol_pipe | $SED '\''s/.* //'\'' | sort | uniq > $export_symbols'
 exclude_expsyms='_GLOBAL_OFFSET_TABLE_|_GLOBAL__F[ID]_.*'
 include_expsyms=''
 prelink_cmds=''
+postlink_cmds=''
 file_list_spec=''
 variables_saved_for_relink='PATH LD_LIBRARY_PATH LD_RUN_PATH GCC_EXEC_PREFIX COMPILER_PATH LIBRARY_PATH'
 need_lib_prefix='no'
@@ -669,13 +680,14 @@ shlibpath_overrides_runpath='yes'
 libname_spec='lib$name'
 library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major $libname${shared_ext}'
 soname_spec='${libname}${release}${shared_ext}$major'
+install_override_mode=''
 postinstall_cmds=''
 postuninstall_cmds=''
 finish_cmds='PATH="\$PATH:/sbin" ldconfig -n $libdir'
 finish_eval=''
 hardcode_into_libs='yes'
-sys_lib_search_path_spec='/usr/lib64/gcc/x86_64-suse-linux/4.5 /usr/lib64 /lib64 /usr/x86_64-suse-linux/lib'
-sys_lib_dlsearch_path_spec='/lib /usr/lib /usr/X11R6/lib64/Xaw3d /usr/X11R6/lib64 /usr/lib64/Xaw3d /usr/X11R6/lib/Xaw3d /usr/X11R6/lib /usr/lib/Xaw3d /usr/x86_64-suse-linux/lib /usr/local/lib /opt/kde3/lib /lib64 /lib /usr/lib64 /usr/lib /usr/local/lib64 /opt/kde3/lib64 /usr/lib64/graphviz /usr/lib64/graphviz/sharp /usr/lib64/graphviz/java /usr/lib64/graphviz/perl /usr/lib64/graphviz/php /usr/lib64/graphviz/ocaml /usr/lib64/graphviz/python /usr/lib64/graphviz/lua /usr/lib64/graphviz/tcl /usr/lib64/graphviz/guile /usr/lib64/graphviz/ruby '
+sys_lib_search_path_spec='/usr/lib64/gcc/x86_64-suse-linux/4.6 /usr/lib64 /lib64 /usr/x86_64-suse-linux/lib '
+sys_lib_dlsearch_path_spec='/lib /usr/lib /usr/local/lib64 /usr/local/lib /usr/lib64/graphviz /usr/lib64/graphviz/sharp /usr/lib64/graphviz/java /usr/lib64/graphviz/perl /usr/lib64/graphviz/php /usr/lib64/graphviz/ocaml /usr/lib64/graphviz/python /usr/lib64/graphviz/lua /usr/lib64/graphviz/tcl /usr/lib64/graphviz/guile /usr/lib64/graphviz/ruby '
 hardcode_action='immediate'
 enable_dlopen='unknown'
 enable_dlopen_self='unknown'
@@ -689,13 +701,15 @@ predeps=''
 postdeps=''
 compiler_lib_search_path=''
 LD_CXX='/usr/x86_64-suse-linux/bin/ld -m elf_x86_64'
+reload_flag_CXX=' -r'
+reload_cmds_CXX='$LD$reload_flag -o $output$reload_objs'
 old_archive_cmds_CXX='$AR $AR_FLAGS $oldlib$oldobjs~$RANLIB $oldlib'
 compiler_CXX='g++'
 GCC_CXX='yes'
 lt_prog_compiler_no_builtin_flag_CXX=' -fno-builtin'
-lt_prog_compiler_wl_CXX='-Wl,'
 lt_prog_compiler_pic_CXX=' -fPIC -DPIC'
-lt_prog_compiler_static_CXX='-static'
+lt_prog_compiler_wl_CXX='-Wl,'
+lt_prog_compiler_static_CXX=''
 lt_cv_prog_compiler_c_o_CXX='yes'
 archive_cmds_need_lc_CXX='no'
 enable_shared_with_static_runtimes_CXX='no'
@@ -704,8 +718,8 @@ whole_archive_flag_spec_CXX='${wl}--whole-archive$convenience ${wl}--no-whole-ar
 compiler_needs_object_CXX='no'
 old_archive_from_new_cmds_CXX=''
 old_archive_from_expsyms_cmds_CXX=''
-archive_cmds_CXX='$CC -shared -nostdlib $predep_objects $libobjs $deplibs $postdep_objects $compiler_flags ${wl}-soname $wl$soname -o $lib'
-archive_expsym_cmds_CXX='$CC -shared -nostdlib $predep_objects $libobjs $deplibs $postdep_objects $compiler_flags ${wl}-soname $wl$soname ${wl}-retain-symbols-file $wl$export_symbols -o $lib'
+archive_cmds_CXX='$CC $pic_flag -shared -nostdlib $predep_objects $libobjs $deplibs $postdep_objects $compiler_flags ${wl}-soname $wl$soname -o $lib'
+archive_expsym_cmds_CXX='$CC $pic_flag -shared -nostdlib $predep_objects $libobjs $deplibs $postdep_objects $compiler_flags ${wl}-soname $wl$soname ${wl}-retain-symbols-file $wl$export_symbols -o $lib'
 module_cmds_CXX=''
 module_expsym_cmds_CXX=''
 with_gnu_ld_CXX='yes'
@@ -721,30 +735,38 @@ hardcode_shlibpath_var_CXX='unsupported'
 hardcode_automatic_CXX='no'
 inherit_rpath_CXX='no'
 link_all_deplibs_CXX='unknown'
-fix_srcfile_path_CXX=''
 always_export_symbols_CXX='no'
 export_symbols_cmds_CXX='$NM $libobjs $convenience | $global_symbol_pipe | $SED '\''s/.* //'\'' | sort | uniq > $export_symbols'
 exclude_expsyms_CXX='_GLOBAL_OFFSET_TABLE_|_GLOBAL__F[ID]_.*'
 include_expsyms_CXX=''
 prelink_cmds_CXX=''
+postlink_cmds_CXX=''
 file_list_spec_CXX=''
 hardcode_action_CXX='immediate'
-compiler_lib_search_dirs_CXX='/usr/lib64/gcc/x86_64-suse-linux/4.5 /usr/lib64/gcc/x86_64-suse-linux/4.5/../../../../lib64 /lib/../lib64 /usr/lib/../lib64 /usr/lib64/gcc/x86_64-suse-linux/4.5/../../../../x86_64-suse-linux/lib /usr/lib64/gcc/x86_64-suse-linux/4.5/../../..'
-predep_objects_CXX='/usr/lib64/gcc/x86_64-suse-linux/4.5/../../../../lib64/crti.o /usr/lib64/gcc/x86_64-suse-linux/4.5/crtbeginS.o'
-postdep_objects_CXX='/usr/lib64/gcc/x86_64-suse-linux/4.5/crtendS.o /usr/lib64/gcc/x86_64-suse-linux/4.5/../../../../lib64/crtn.o'
+compiler_lib_search_dirs_CXX='/usr/lib64/gcc/x86_64-suse-linux/4.6 /usr/lib64/gcc/x86_64-suse-linux/4.6/../../../../lib64 /lib/../lib64 /usr/lib/../lib64 /usr/lib64/gcc/x86_64-suse-linux/4.6/../../../../x86_64-suse-linux/lib /usr/lib64/gcc/x86_64-suse-linux/4.6/../../..'
+predep_objects_CXX='/usr/lib64/gcc/x86_64-suse-linux/4.6/../../../../lib64/crti.o /usr/lib64/gcc/x86_64-suse-linux/4.6/crtbeginS.o'
+postdep_objects_CXX='/usr/lib64/gcc/x86_64-suse-linux/4.6/crtendS.o /usr/lib64/gcc/x86_64-suse-linux/4.6/../../../../lib64/crtn.o'
 predeps_CXX=''
 postdeps_CXX='-lstdc++ -lm -lgcc_s -lc -lgcc_s'
-compiler_lib_search_path_CXX='-L/usr/lib64/gcc/x86_64-suse-linux/4.5 -L/usr/lib64/gcc/x86_64-suse-linux/4.5/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib64/gcc/x86_64-suse-linux/4.5/../../../../x86_64-suse-linux/lib -L/usr/lib64/gcc/x86_64-suse-linux/4.5/../../..'
+compiler_lib_search_path_CXX='-L/usr/lib64/gcc/x86_64-suse-linux/4.6 -L/usr/lib64/gcc/x86_64-suse-linux/4.6/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib64/gcc/x86_64-suse-linux/4.6/../../../../x86_64-suse-linux/lib -L/usr/lib64/gcc/x86_64-suse-linux/4.6/../../..'
 
 LTCC='gcc'
 LTCFLAGS='-g -O2'
 compiler='gcc'
 
+# A function that is used when there is no print builtin or printf.
+func_fallback_echo ()
+{
+  eval 'cat <<_LTECHO_EOF
+$1
+_LTECHO_EOF'
+}
+
 # Quote evaled strings.
-for var in SED GREP EGREP FGREP LD NM LN_S lt_SP2NL lt_NL2SP reload_flag OBJDUMP deplibs_check_method file_magic_cmd AR AR_FLAGS STRIP RANLIB CC CFLAGS compiler lt_cv_sys_global_symbol_pipe lt_cv_sys_global_symbol_to_cdecl lt_cv_sys_global_symbol_to_c_name_address lt_cv_sys_global_symbol_to_c_name_address_lib_prefix SHELL ECHO lt_prog_compiler_no_builtin_flag lt_prog_compiler_wl lt_prog_compiler_pic lt_prog_compiler_static lt_cv_prog_compiler_c_o need_locks DSYMUTIL NMEDIT LIPO OTOOL OTOOL64 shrext_cmds export_dynamic_flag_spec whole_archive_flag_spec compiler_needs_object with_gnu_ld allow_undefined_flag no_undefined_flag hardcode_libdir_flag_spec hardcode_libdir_flag_spec_ld hardcode_libdir_separator fix_srcfile_path exclude_expsyms include_expsyms file_list_spec variables_saved_for_relink libname_spec library_names_spec soname_spec finish_eval old_striplib striplib compiler_lib_search_dirs predep_objects postdep_objects predeps postdeps compiler_lib_search_path LD_CXX compiler_CXX lt_prog_compiler_no_builtin_flag_CXX lt_prog_compiler_wl_CXX lt_prog_compiler_pic_CXX lt_prog_compiler_static_CXX lt_cv_prog_compiler_c_o_CXX export_dynamic_flag_spec_CXX whole_archive_flag_spec_CXX compiler_needs_object_CXX with_gnu_ld_CXX allow_undefined_flag_CXX no_undefined_flag_CXX hardcode_libdir_flag_spec_CXX hardcode_libdir_flag_spec_ld_CXX hardcode_libdir_separator_CXX fix_srcfile_path_CXX exclude_expsyms_CXX include_expsyms_CXX file_list_spec_CXX compiler_lib_search_dirs_CXX predep_objects_CXX postdep_objects_CXX predeps_CXX postdeps_CXX compiler_lib_search_path_CXX; do
-    case `eval \\$ECHO "X\\$$var"` in
+for var in SHELL ECHO SED GREP EGREP FGREP LD NM LN_S lt_SP2NL lt_NL2SP reload_flag OBJDUMP deplibs_check_method file_magic_cmd file_magic_glob want_nocaseglob DLLTOOL sharedlib_from_linklib_cmd AR AR_FLAGS archiver_list_spec STRIP RANLIB CC CFLAGS compiler lt_cv_sys_global_symbol_pipe lt_cv_sys_global_symbol_to_cdecl lt_cv_sys_global_symbol_to_c_name_address lt_cv_sys_global_symbol_to_c_name_address_lib_prefix nm_file_list_spec lt_prog_compiler_no_builtin_flag lt_prog_compiler_pic lt_prog_compiler_wl lt_prog_compiler_static lt_cv_prog_compiler_c_o need_locks MANIFEST_TOOL DSYMUTIL NMEDIT LIPO OTOOL OTOOL64 shrext_cmds export_dynamic_flag_spec whole_archive_flag_spec compiler_needs_object with_gnu_ld allow_undefined_flag no_undefined_flag hardcode_libdir_flag_spec hardcode_libdir_flag_spec_ld hardcode_libdir_separator exclude_expsyms include_expsyms file_list_spec variables_saved_for_relink libname_spec library_names_spec soname_spec install_override_mode finish_eval old_striplib striplib compiler_lib_search_dirs predep_objects postdep_objects predeps postdeps compiler_lib_search_path LD_CXX reload_flag_CXX compiler_CXX lt_prog_compiler_no_builtin_flag_CXX lt_prog_compiler_pic_CXX lt_prog_compiler_wl_CXX lt_prog_compiler_static_CXX lt_cv_prog_compiler_c_o_CXX export_dynamic_flag_spec_CXX whole_archive_flag_spec_CXX compiler_needs_object_CXX with_gnu_ld_CXX allow_undefined_flag_CXX no_undefined_flag_CXX hardcode_libdir_flag_spec_CXX hardcode_libdir_flag_spec_ld_CXX hardcode_libdir_separator_CXX exclude_expsyms_CXX include_expsyms_CXX file_list_spec_CXX compiler_lib_search_dirs_CXX predep_objects_CXX postdep_objects_CXX predeps_CXX postdeps_CXX compiler_lib_search_path_CXX; do
+    case `eval \\$ECHO \\""\\$$var"\\"` in
     *[\\\`\"\$]*)
-      eval "lt_$var=\\\"\`\$ECHO \"X\$$var\" | \$Xsed -e \"\$sed_quote_subst\"\`\\\""
+      eval "lt_$var=\\\"\`\$ECHO \"\$$var\" | \$SED \"\$sed_quote_subst\"\`\\\""
       ;;
     *)
       eval "lt_$var=\\\"\$$var\\\""
@@ -753,22 +775,16 @@ for var in SED GREP EGREP FGREP LD NM LN_S lt_SP2NL lt_NL2SP reload_flag OBJDUMP
 done
 
 # Double-quote double-evaled strings.
-for var in reload_cmds old_postinstall_cmds old_postuninstall_cmds old_archive_cmds extract_expsyms_cmds old_archive_from_new_cmds old_archive_from_expsyms_cmds archive_cmds archive_expsym_cmds module_cmds module_expsym_cmds export_symbols_cmds prelink_cmds postinstall_cmds postuninstall_cmds finish_cmds sys_lib_search_path_spec sys_lib_dlsearch_path_spec old_archive_cmds_CXX old_archive_from_new_cmds_CXX old_archive_from_expsyms_cmds_CXX archive_cmds_CXX archive_expsym_cmds_CXX module_cmds_CXX module_expsym_cmds_CXX export_symbols_cmds_CXX prelink_cmds_CXX; do
-    case `eval \\$ECHO "X\\$$var"` in
+for var in reload_cmds old_postinstall_cmds old_postuninstall_cmds old_archive_cmds extract_expsyms_cmds old_archive_from_new_cmds old_archive_from_expsyms_cmds archive_cmds archive_expsym_cmds module_cmds module_expsym_cmds export_symbols_cmds prelink_cmds postlink_cmds postinstall_cmds postuninstall_cmds finish_cmds sys_lib_search_path_spec sys_lib_dlsearch_path_spec reload_cmds_CXX old_archive_cmds_CXX old_archive_from_new_cmds_CXX old_archive_from_expsyms_cmds_CXX archive_cmds_CXX archive_expsym_cmds_CXX module_cmds_CXX module_expsym_cmds_CXX export_symbols_cmds_CXX prelink_cmds_CXX postlink_cmds_CXX; do
+    case `eval \\$ECHO \\""\\$$var"\\"` in
     *[\\\`\"\$]*)
-      eval "lt_$var=\\\"\`\$ECHO \"X\$$var\" | \$Xsed -e \"\$double_quote_subst\" -e \"\$sed_quote_subst\" -e \"\$delay_variable_subst\"\`\\\""
+      eval "lt_$var=\\\"\`\$ECHO \"\$$var\" | \$SED -e \"\$double_quote_subst\" -e \"\$sed_quote_subst\" -e \"\$delay_variable_subst\"\`\\\""
       ;;
     *)
       eval "lt_$var=\\\"\$$var\\\""
       ;;
     esac
 done
-
-# Fix-up fallback echo if it was mangled by the above quoting rules.
-case $lt_ECHO in
-*'\$0 --fallback-echo"')  lt_ECHO=`$ECHO "X$lt_ECHO" | $Xsed -e 's/\\\\\\\$0 --fallback-echo"$/$0 --fallback-echo"/'`
-  ;;
-esac
 
 ac_aux_dir='bootstrap'
 xsi_shell='yes'
@@ -1119,8 +1135,8 @@ S["GTK_CFLAGS"]=""
 S["GLIB_MKENUMS"]="glib-mkenums"
 S["GOBJECT_QUERY"]="gobject-query"
 S["GLIB_GENMARSHAL"]="glib-genmarshal"
-S["GLIB_LIBS"]="-L/usr/local/lib -lglib-2.0  "
-S["GLIB_CFLAGS"]="-I/usr/local/include/glib-2.0 -I/usr/local/lib/glib-2.0/include  "
+S["GLIB_LIBS"]="-lglib-2.0  "
+S["GLIB_CFLAGS"]="-I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include  "
 S["GZIP"]="/usr/bin/gzip"
 S["WINDRES"]=""
 S["AUTO_DEPS"]="yes"
@@ -1152,9 +1168,11 @@ S["OTOOL"]=""
 S["LIPO"]=""
 S["NMEDIT"]=""
 S["DSYMUTIL"]=""
-S["lt_ECHO"]="echo"
+S["MANIFEST_TOOL"]=":"
 S["RANLIB"]="ranlib"
+S["ac_ct_AR"]="ar"
 S["AR"]="ar"
+S["DLLTOOL"]="false"
 S["OBJDUMP"]="objdump"
 S["NM"]="/usr/bin/nm -B"
 S["ac_ct_DUMPBIN"]=""
@@ -1177,7 +1195,7 @@ S["SVNREV_FALSE"]=""
 S["SVNREV_TRUE"]="#"
 S["CAIRO_LIBS"]=""
 S["CAIRO_CFLAGS"]=""
-S["PKG_CONFIG"]="/usr/local/bin/pkg-config"
+S["PKG_CONFIG"]="/usr/bin/pkg-config"
 S["FTWL_FALSE"]=""
 S["FTWL_TRUE"]="#"
 S["SED"]="/usr/bin/sed"
@@ -1230,8 +1248,8 @@ S["EXEEXT"]=""
 S["ac_ct_CC"]="gcc"
 S["CPPFLAGS"]=" -DLOCALEDIR=\"\\\"${datarootdir}/locale\\\"\" -DDEFAULT_DATA_PATH=\"\\\".:data:~/.freeciv/2.3:${datarootdir}/freeciv:/mnt/savegames\\\"\""
 S["LDFLAGS"]=""
-S["CFLAGS"]="-save-temps -Wall -Wpointer-arith -Wcast-align -Wmissing-prototypes -Wmissing-declarations -g -O2 -fsigned-char -I/usr/local/include/glib-2.0 -I/usr"\
-"/local/lib/glib-2.0/include  "
+S["CFLAGS"]="-save-temps -Wall -Wpointer-arith -Wcast-align -Wmissing-prototypes -Wmissing-declarations -g -O2 -fsigned-char -I/usr/include/glib-2.0 -I/usr/lib64"\
+"/glib-2.0/include  "
 S["CC"]="gcc"
 S["host_os"]="linux-gnu"
 S["host_vendor"]="suse"
@@ -1244,14 +1262,14 @@ S["build"]="x86_64-suse-linux-gnu"
 S["target_alias"]=""
 S["host_alias"]=""
 S["build_alias"]=""
-S["LIBS"]="-lbz2 -lz   -L/usr/local/lib -lglib-2.0  "
+S["LIBS"]="-lbz2 -lz   -lglib-2.0  "
 S["ECHO_T"]=""
 S["ECHO_N"]="-n"
 S["ECHO_C"]=""
 S["DEFS"]="-DHAVE_CONFIG_H"
 S["mandir"]="${datarootdir}/man"
 S["localedir"]="${datarootdir}/locale"
-S["libdir"]="${exec_prefix}/lib"
+S["libdir"]="${exec_prefix}/lib64"
 S["psdir"]="${docdir}"
 S["pdfdir"]="${docdir}"
 S["dvidir"]="${docdir}"
@@ -1265,7 +1283,7 @@ S["sharedstatedir"]="${prefix}/com"
 S["sysconfdir"]="${prefix}/etc"
 S["datadir"]="${datarootdir}"
 S["datarootdir"]="${prefix}/share"
-S["libexecdir"]="${exec_prefix}/libexec"
+S["libexecdir"]="${exec_prefix}/lib"
 S["sbindir"]="${exec_prefix}/sbin"
 S["bindir"]="${exec_prefix}/bin"
 S["program_transform_name"]="s,x,x,"
@@ -1381,7 +1399,7 @@ D["HAVE_LIBZ"]=" 1"
 D["HAVE_LIBBZ2"]=" 1"
 D["HAVE_BZLIB_H"]=" 1"
 D["GGZMODULECONFDIR"]=" \"/usr/local/etc\""
-D["GAMEDIR"]=" \"${exec_prefix}/lib/ggz\""
+D["GAMEDIR"]=" \"${exec_prefix}/lib64/ggz\""
 D["GGZDATADIR"]=" \"${datarootdir}/ggz\""
 D["HAVE_LIBREADLINE"]=" 1"
 D["HAVE_NEWLIBREADLINE"]=" 1"
@@ -1448,8 +1466,8 @@ D["HAVE_POPEN"]=" 1"
 D["HAVE__LONGJMP"]=" 1"
 D["FC_STORE_CPPFLAGS"]=" ' -DLOCALEDIR=\"\\\"${datarootdir}/locale\\\"\" -DDEFAULT_DATA_PATH=\"\\\".:data:~/.freeciv/2.3:${datarootdir}/freeciv:/mnt/savegam"\
 "es\\\"\"'"
-D["FC_STORE_CFLAGS"]=" '-save-temps -Wall -Wpointer-arith -Wcast-align -Wmissing-prototypes -Wmissing-declarations -g -O2 -fsigned-char -I/usr/loca"\
-"l/include/glib-2.0 -I/usr/local/lib/glib-2.0/include  '"
+D["FC_STORE_CFLAGS"]=" '-save-temps -Wall -Wpointer-arith -Wcast-align -Wmissing-prototypes -Wmissing-declarations -g -O2 -fsigned-char -I/usr/incl"\
+"ude/glib-2.0 -I/usr/lib64/glib-2.0/include  '"
 D["FC_STORE_CXXFLAGS"]=" '-Wall -Wpointer-arith -Wcast-align -g -O2 -fsigned-char'"
   for (key in D) D_is_set[key] = 1
   FS = ""
@@ -1886,10 +1904,12 @@ $as_echo X"$file" |
 
 # `$ECHO "$ofile" | sed 's%^.*/%%'` - Provide generalized library-building support services.
 # Generated automatically by $as_me ($PACKAGE$TIMESTAMP) $VERSION
+# Libtool was configured on host `(hostname || uname -n) 2>/dev/null | sed 1q`:
 # NOTE: Changes made to this file will be lost: look at ltmain.sh.
 #
 #   Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001, 2003, 2004, 2005,
-#                 2006, 2007, 2008 Free Software Foundation, Inc.
+#                 2006, 2007, 2008, 2009, 2010 Free Software Foundation,
+#                 Inc.
 #   Written by Gordon Matzigkeit, 1996
 #
 #   This file is part of GNU Libtool.
@@ -1936,6 +1956,12 @@ pic_mode=$pic_mode
 
 # Whether or not to optimize for fast installation.
 fast_install=$enable_fast_install
+
+# Shell to use when invoking shell scripts.
+SHELL=$lt_SHELL
+
+# An echo program that protects backslashes.
+ECHO=$lt_ECHO
 
 # The host system.
 host_alias=$host_alias
@@ -1986,9 +2012,11 @@ SP2NL=$lt_lt_SP2NL
 # turn newlines into spaces.
 NL2SP=$lt_lt_NL2SP
 
-# How to create reloadable object files.
-reload_flag=$lt_reload_flag
-reload_cmds=$lt_reload_cmds
+# convert \$build file names to \$host format.
+to_host_file_cmd=$lt_cv_to_host_file_cmd
+
+# convert \$build files to toolchain format.
+to_tool_file_cmd=$lt_cv_to_tool_file_cmd
 
 # An object symbol dumper.
 OBJDUMP=$lt_OBJDUMP
@@ -1996,12 +2024,29 @@ OBJDUMP=$lt_OBJDUMP
 # Method to check whether dependent libraries are shared objects.
 deplibs_check_method=$lt_deplibs_check_method
 
-# Command to use when deplibs_check_method == "file_magic".
+# Command to use when deplibs_check_method = "file_magic".
 file_magic_cmd=$lt_file_magic_cmd
+
+# How to find potential files when deplibs_check_method = "file_magic".
+file_magic_glob=$lt_file_magic_glob
+
+# Find potential files using nocaseglob when deplibs_check_method = "file_magic".
+want_nocaseglob=$lt_want_nocaseglob
+
+# DLL creation program.
+DLLTOOL=$lt_DLLTOOL
+
+# Command to associate shared and link libraries.
+sharedlib_from_linklib_cmd=$lt_sharedlib_from_linklib_cmd
 
 # The archiver.
 AR=$lt_AR
+
+# Flags to create an archive.
 AR_FLAGS=$lt_AR_FLAGS
+
+# How to feed a file listing to the archiver.
+archiver_list_spec=$lt_archiver_list_spec
 
 # A symbol stripping program.
 STRIP=$lt_STRIP
@@ -2010,6 +2055,9 @@ STRIP=$lt_STRIP
 RANLIB=$lt_RANLIB
 old_postinstall_cmds=$lt_old_postinstall_cmds
 old_postuninstall_cmds=$lt_old_postuninstall_cmds
+
+# Whether to use a lock for old archive extraction.
+lock_old_archive_extraction=$lock_old_archive_extraction
 
 # A C compiler.
 LTCC=$lt_CC
@@ -2029,20 +2077,23 @@ global_symbol_to_c_name_address=$lt_lt_cv_sys_global_symbol_to_c_name_address
 # Transform the output of nm in a C name address pair when lib prefix is needed.
 global_symbol_to_c_name_address_lib_prefix=$lt_lt_cv_sys_global_symbol_to_c_name_address_lib_prefix
 
+# Specify filename containing input files for \$NM.
+nm_file_list_spec=$lt_nm_file_list_spec
+
+# The root where to search for dependent libraries,and in which our libraries should be installed.
+lt_sysroot=$lt_sysroot
+
 # The name of the directory that contains temporary libtool files.
 objdir=$objdir
-
-# Shell to use when invoking shell scripts.
-SHELL=$lt_SHELL
-
-# An echo program that does not interpret backslashes.
-ECHO=$lt_ECHO
 
 # Used to examine libraries when file_magic_cmd begins with "file".
 MAGIC_CMD=$MAGIC_CMD
 
 # Must we lock files when doing compilation?
 need_locks=$lt_need_locks
+
+# Manifest tool.
+MANIFEST_TOOL=$lt_MANIFEST_TOOL
 
 # Tool to manipulate archived DWARF debug symbol files on Mac OS X.
 DSYMUTIL=$lt_DSYMUTIL
@@ -2100,6 +2151,9 @@ library_names_spec=$lt_library_names_spec
 # The coded name of the library, if different from the real name.
 soname_spec=$lt_soname_spec
 
+# Permission mode override for installation of shared libraries.
+install_override_mode=$lt_install_override_mode
+
 # Command to use after installation of a shared archive.
 postinstall_cmds=$lt_postinstall_cmds
 
@@ -2139,6 +2193,10 @@ striplib=$lt_striplib
 # The linker used to build libraries.
 LD=$lt_LD
 
+# How to create reloadable object files.
+reload_flag=$lt_reload_flag
+reload_cmds=$lt_reload_cmds
+
 # Commands used to build an old-style archive.
 old_archive_cmds=$lt_old_archive_cmds
 
@@ -2151,11 +2209,11 @@ with_gcc=$GCC
 # Compiler flag to turn off builtin functions.
 no_builtin_flag=$lt_lt_prog_compiler_no_builtin_flag
 
-# How to pass a linker flag through the compiler.
-wl=$lt_lt_prog_compiler_wl
-
 # Additional compiler flags for building library objects.
 pic_flag=$lt_lt_prog_compiler_pic
+
+# How to pass a linker flag through the compiler.
+wl=$lt_lt_prog_compiler_wl
 
 # Compiler flag to prevent dynamic linking.
 link_static_flag=$lt_lt_prog_compiler_static
@@ -2243,9 +2301,6 @@ inherit_rpath=$inherit_rpath
 # Whether libtool must link a program against all its dependency libraries.
 link_all_deplibs=$link_all_deplibs
 
-# Fix the shell variable \$srcfile for the compiler.
-fix_srcfile_path=$lt_fix_srcfile_path
-
 # Set to "yes" if exported symbols are required.
 always_export_symbols=$always_export_symbols
 
@@ -2260,6 +2315,9 @@ include_expsyms=$lt_include_expsyms
 
 # Commands necessary for linking programs (against libraries) with templates.
 prelink_cmds=$lt_prelink_cmds
+
+# Commands necessary for finishing linking programs.
+postlink_cmds=$lt_postlink_cmds
 
 # Specify filename containing input files.
 file_list_spec=$lt_file_list_spec
@@ -2307,212 +2365,169 @@ ltmain="$ac_aux_dir/ltmain.sh"
   # if finds mixed CR/LF and LF-only lines.  Since sed operates in
   # text mode, it properly converts lines to CR/LF.  This bash problem
   # is reportedly fixed, but why not run on old versions too?
-  sed '/^# Generated shell functions inserted here/q' "$ltmain" >> "$cfgfile" \
-    || (rm -f "$cfgfile"; exit 1)
+  sed '$q' "$ltmain" >> "$cfgfile" \
+     || (rm -f "$cfgfile"; exit 1)
 
-  case $xsi_shell in
-  yes)
-    cat << \_LT_EOF >> "$cfgfile"
-
-# func_dirname file append nondir_replacement
-# Compute the dirname of FILE.  If nonempty, add APPEND to the result,
-# otherwise set result to NONDIR_REPLACEMENT.
-func_dirname ()
-{
-  case ${1} in
-    */*) func_dirname_result="${1%/*}${2}" ;;
-    *  ) func_dirname_result="${3}" ;;
-  esac
-}
-
-# func_basename file
-func_basename ()
-{
-  func_basename_result="${1##*/}"
-}
-
-# func_dirname_and_basename file append nondir_replacement
-# perform func_basename and func_dirname in a single function
-# call:
-#   dirname:  Compute the dirname of FILE.  If nonempty,
-#             add APPEND to the result, otherwise set result
-#             to NONDIR_REPLACEMENT.
-#             value returned in "$func_dirname_result"
-#   basename: Compute filename of FILE.
-#             value retuned in "$func_basename_result"
-# Implementation must be kept synchronized with func_dirname
-# and func_basename. For efficiency, we do not delegate to
-# those functions but instead duplicate the functionality here.
-func_dirname_and_basename ()
-{
-  case ${1} in
-    */*) func_dirname_result="${1%/*}${2}" ;;
-    *  ) func_dirname_result="${3}" ;;
-  esac
-  func_basename_result="${1##*/}"
-}
-
-# func_stripname prefix suffix name
-# strip PREFIX and SUFFIX off of NAME.
-# PREFIX and SUFFIX must not contain globbing or regex special
-# characters, hashes, percent signs, but SUFFIX may contain a leading
-# dot (in which case that matches only a dot).
-func_stripname ()
-{
-  # pdksh 5.2.14 does not do ${X%$Y} correctly if both X and Y are
-  # positional parameters, so assign one to ordinary parameter first.
-  func_stripname_result=${3}
-  func_stripname_result=${func_stripname_result#"${1}"}
-  func_stripname_result=${func_stripname_result%"${2}"}
-}
-
-# func_opt_split
-func_opt_split ()
-{
-  func_opt_split_opt=${1%%=*}
-  func_opt_split_arg=${1#*=}
-}
-
-# func_lo2o object
-func_lo2o ()
-{
-  case ${1} in
-    *.lo) func_lo2o_result=${1%.lo}.${objext} ;;
-    *)    func_lo2o_result=${1} ;;
-  esac
-}
-
-# func_xform libobj-or-source
-func_xform ()
-{
-  func_xform_result=${1%.*}.lo
-}
-
-# func_arith arithmetic-term...
-func_arith ()
-{
-  func_arith_result=$(( $* ))
-}
-
-# func_len string
-# STRING may not start with a hyphen.
-func_len ()
-{
-  func_len_result=${#1}
-}
-
-_LT_EOF
-    ;;
-  *) # Bourne compatible functions.
-    cat << \_LT_EOF >> "$cfgfile"
-
-# func_dirname file append nondir_replacement
-# Compute the dirname of FILE.  If nonempty, add APPEND to the result,
-# otherwise set result to NONDIR_REPLACEMENT.
-func_dirname ()
-{
-  # Extract subdirectory from the argument.
-  func_dirname_result=`$ECHO "X${1}" | $Xsed -e "$dirname"`
-  if test "X$func_dirname_result" = "X${1}"; then
-    func_dirname_result="${3}"
-  else
-    func_dirname_result="$func_dirname_result${2}"
-  fi
-}
-
-# func_basename file
-func_basename ()
-{
-  func_basename_result=`$ECHO "X${1}" | $Xsed -e "$basename"`
-}
+  if test x"$xsi_shell" = xyes; then
+  sed -e '/^func_dirname ()$/,/^} # func_dirname /c\
+func_dirname ()\
+{\
+\    case ${1} in\
+\      */*) func_dirname_result="${1%/*}${2}" ;;\
+\      *  ) func_dirname_result="${3}" ;;\
+\    esac\
+} # Extended-shell func_dirname implementation' "$cfgfile" > $cfgfile.tmp \
+  && mv -f "$cfgfile.tmp" "$cfgfile" \
+    || (rm -f "$cfgfile" && cp "$cfgfile.tmp" "$cfgfile" && rm -f "$cfgfile.tmp")
+test 0 -eq $? || _lt_function_replace_fail=:
 
 
-# func_stripname prefix suffix name
-# strip PREFIX and SUFFIX off of NAME.
-# PREFIX and SUFFIX must not contain globbing or regex special
-# characters, hashes, percent signs, but SUFFIX may contain a leading
-# dot (in which case that matches only a dot).
-# func_strip_suffix prefix name
-func_stripname ()
-{
-  case ${2} in
-    .*) func_stripname_result=`$ECHO "X${3}" \
-           | $Xsed -e "s%^${1}%%" -e "s%\\\\${2}\$%%"`;;
-    *)  func_stripname_result=`$ECHO "X${3}" \
-           | $Xsed -e "s%^${1}%%" -e "s%${2}\$%%"`;;
-  esac
-}
-
-# sed scripts:
-my_sed_long_opt='1s/^\(-[^=]*\)=.*/\1/;q'
-my_sed_long_arg='1s/^-[^=]*=//'
-
-# func_opt_split
-func_opt_split ()
-{
-  func_opt_split_opt=`$ECHO "X${1}" | $Xsed -e "$my_sed_long_opt"`
-  func_opt_split_arg=`$ECHO "X${1}" | $Xsed -e "$my_sed_long_arg"`
-}
-
-# func_lo2o object
-func_lo2o ()
-{
-  func_lo2o_result=`$ECHO "X${1}" | $Xsed -e "$lo2o"`
-}
-
-# func_xform libobj-or-source
-func_xform ()
-{
-  func_xform_result=`$ECHO "X${1}" | $Xsed -e 's/\.[^.]*$/.lo/'`
-}
-
-# func_arith arithmetic-term...
-func_arith ()
-{
-  func_arith_result=`expr "$@"`
-}
-
-# func_len string
-# STRING may not start with a hyphen.
-func_len ()
-{
-  func_len_result=`expr "$1" : ".*" 2>/dev/null || echo $max_cmd_len`
-}
-
-_LT_EOF
-esac
-
-case $lt_shell_append in
-  yes)
-    cat << \_LT_EOF >> "$cfgfile"
-
-# func_append var value
-# Append VALUE to the end of shell variable VAR.
-func_append ()
-{
-  eval "$1+=\$2"
-}
-_LT_EOF
-    ;;
-  *)
-    cat << \_LT_EOF >> "$cfgfile"
-
-# func_append var value
-# Append VALUE to the end of shell variable VAR.
-func_append ()
-{
-  eval "$1=\$$1\$2"
-}
-
-_LT_EOF
-    ;;
-  esac
+  sed -e '/^func_basename ()$/,/^} # func_basename /c\
+func_basename ()\
+{\
+\    func_basename_result="${1##*/}"\
+} # Extended-shell func_basename implementation' "$cfgfile" > $cfgfile.tmp \
+  && mv -f "$cfgfile.tmp" "$cfgfile" \
+    || (rm -f "$cfgfile" && cp "$cfgfile.tmp" "$cfgfile" && rm -f "$cfgfile.tmp")
+test 0 -eq $? || _lt_function_replace_fail=:
 
 
-  sed -n '/^# Generated shell functions inserted here/,$p' "$ltmain" >> "$cfgfile" \
-    || (rm -f "$cfgfile"; exit 1)
+  sed -e '/^func_dirname_and_basename ()$/,/^} # func_dirname_and_basename /c\
+func_dirname_and_basename ()\
+{\
+\    case ${1} in\
+\      */*) func_dirname_result="${1%/*}${2}" ;;\
+\      *  ) func_dirname_result="${3}" ;;\
+\    esac\
+\    func_basename_result="${1##*/}"\
+} # Extended-shell func_dirname_and_basename implementation' "$cfgfile" > $cfgfile.tmp \
+  && mv -f "$cfgfile.tmp" "$cfgfile" \
+    || (rm -f "$cfgfile" && cp "$cfgfile.tmp" "$cfgfile" && rm -f "$cfgfile.tmp")
+test 0 -eq $? || _lt_function_replace_fail=:
 
-  mv -f "$cfgfile" "$ofile" ||
+
+  sed -e '/^func_stripname ()$/,/^} # func_stripname /c\
+func_stripname ()\
+{\
+\    # pdksh 5.2.14 does not do ${X%$Y} correctly if both X and Y are\
+\    # positional parameters, so assign one to ordinary parameter first.\
+\    func_stripname_result=${3}\
+\    func_stripname_result=${func_stripname_result#"${1}"}\
+\    func_stripname_result=${func_stripname_result%"${2}"}\
+} # Extended-shell func_stripname implementation' "$cfgfile" > $cfgfile.tmp \
+  && mv -f "$cfgfile.tmp" "$cfgfile" \
+    || (rm -f "$cfgfile" && cp "$cfgfile.tmp" "$cfgfile" && rm -f "$cfgfile.tmp")
+test 0 -eq $? || _lt_function_replace_fail=:
+
+
+  sed -e '/^func_split_long_opt ()$/,/^} # func_split_long_opt /c\
+func_split_long_opt ()\
+{\
+\    func_split_long_opt_name=${1%%=*}\
+\    func_split_long_opt_arg=${1#*=}\
+} # Extended-shell func_split_long_opt implementation' "$cfgfile" > $cfgfile.tmp \
+  && mv -f "$cfgfile.tmp" "$cfgfile" \
+    || (rm -f "$cfgfile" && cp "$cfgfile.tmp" "$cfgfile" && rm -f "$cfgfile.tmp")
+test 0 -eq $? || _lt_function_replace_fail=:
+
+
+  sed -e '/^func_split_short_opt ()$/,/^} # func_split_short_opt /c\
+func_split_short_opt ()\
+{\
+\    func_split_short_opt_arg=${1#??}\
+\    func_split_short_opt_name=${1%"$func_split_short_opt_arg"}\
+} # Extended-shell func_split_short_opt implementation' "$cfgfile" > $cfgfile.tmp \
+  && mv -f "$cfgfile.tmp" "$cfgfile" \
+    || (rm -f "$cfgfile" && cp "$cfgfile.tmp" "$cfgfile" && rm -f "$cfgfile.tmp")
+test 0 -eq $? || _lt_function_replace_fail=:
+
+
+  sed -e '/^func_lo2o ()$/,/^} # func_lo2o /c\
+func_lo2o ()\
+{\
+\    case ${1} in\
+\      *.lo) func_lo2o_result=${1%.lo}.${objext} ;;\
+\      *)    func_lo2o_result=${1} ;;\
+\    esac\
+} # Extended-shell func_lo2o implementation' "$cfgfile" > $cfgfile.tmp \
+  && mv -f "$cfgfile.tmp" "$cfgfile" \
+    || (rm -f "$cfgfile" && cp "$cfgfile.tmp" "$cfgfile" && rm -f "$cfgfile.tmp")
+test 0 -eq $? || _lt_function_replace_fail=:
+
+
+  sed -e '/^func_xform ()$/,/^} # func_xform /c\
+func_xform ()\
+{\
+    func_xform_result=${1%.*}.lo\
+} # Extended-shell func_xform implementation' "$cfgfile" > $cfgfile.tmp \
+  && mv -f "$cfgfile.tmp" "$cfgfile" \
+    || (rm -f "$cfgfile" && cp "$cfgfile.tmp" "$cfgfile" && rm -f "$cfgfile.tmp")
+test 0 -eq $? || _lt_function_replace_fail=:
+
+
+  sed -e '/^func_arith ()$/,/^} # func_arith /c\
+func_arith ()\
+{\
+    func_arith_result=$(( $* ))\
+} # Extended-shell func_arith implementation' "$cfgfile" > $cfgfile.tmp \
+  && mv -f "$cfgfile.tmp" "$cfgfile" \
+    || (rm -f "$cfgfile" && cp "$cfgfile.tmp" "$cfgfile" && rm -f "$cfgfile.tmp")
+test 0 -eq $? || _lt_function_replace_fail=:
+
+
+  sed -e '/^func_len ()$/,/^} # func_len /c\
+func_len ()\
+{\
+    func_len_result=${#1}\
+} # Extended-shell func_len implementation' "$cfgfile" > $cfgfile.tmp \
+  && mv -f "$cfgfile.tmp" "$cfgfile" \
+    || (rm -f "$cfgfile" && cp "$cfgfile.tmp" "$cfgfile" && rm -f "$cfgfile.tmp")
+test 0 -eq $? || _lt_function_replace_fail=:
+
+fi
+
+if test x"$lt_shell_append" = xyes; then
+  sed -e '/^func_append ()$/,/^} # func_append /c\
+func_append ()\
+{\
+    eval "${1}+=\\${2}"\
+} # Extended-shell func_append implementation' "$cfgfile" > $cfgfile.tmp \
+  && mv -f "$cfgfile.tmp" "$cfgfile" \
+    || (rm -f "$cfgfile" && cp "$cfgfile.tmp" "$cfgfile" && rm -f "$cfgfile.tmp")
+test 0 -eq $? || _lt_function_replace_fail=:
+
+
+  sed -e '/^func_append_quoted ()$/,/^} # func_append_quoted /c\
+func_append_quoted ()\
+{\
+\    func_quote_for_eval "${2}"\
+\    eval "${1}+=\\\\ \\$func_quote_for_eval_result"\
+} # Extended-shell func_append_quoted implementation' "$cfgfile" > $cfgfile.tmp \
+  && mv -f "$cfgfile.tmp" "$cfgfile" \
+    || (rm -f "$cfgfile" && cp "$cfgfile.tmp" "$cfgfile" && rm -f "$cfgfile.tmp")
+test 0 -eq $? || _lt_function_replace_fail=:
+
+
+  # Save a `func_append' function call where possible by direct use of '+='
+  sed -e 's%func_append \([a-zA-Z_]\{1,\}\) "%\1+="%g' $cfgfile > $cfgfile.tmp \
+    && mv -f "$cfgfile.tmp" "$cfgfile" \
+      || (rm -f "$cfgfile" && cp "$cfgfile.tmp" "$cfgfile" && rm -f "$cfgfile.tmp")
+  test 0 -eq $? || _lt_function_replace_fail=:
+else
+  # Save a `func_append' function call even when '+=' is not available
+  sed -e 's%func_append \([a-zA-Z_]\{1,\}\) "%\1="$\1%g' $cfgfile > $cfgfile.tmp \
+    && mv -f "$cfgfile.tmp" "$cfgfile" \
+      || (rm -f "$cfgfile" && cp "$cfgfile.tmp" "$cfgfile" && rm -f "$cfgfile.tmp")
+  test 0 -eq $? || _lt_function_replace_fail=:
+fi
+
+if test x"$_lt_function_replace_fail" = x":"; then
+  { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: Unable to substitute extended shell functions in $ofile" >&5
+$as_echo "$as_me: WARNING: Unable to substitute extended shell functions in $ofile" >&2;}
+fi
+
+
+   mv -f "$cfgfile" "$ofile" ||
     (rm -f "$ofile" && cp "$cfgfile" "$ofile" && rm -f "$cfgfile")
   chmod +x "$ofile"
 
@@ -2523,6 +2538,10 @@ _LT_EOF
 
 # The linker used to build libraries.
 LD=$lt_LD_CXX
+
+# How to create reloadable object files.
+reload_flag=$lt_reload_flag_CXX
+reload_cmds=$lt_reload_cmds_CXX
 
 # Commands used to build an old-style archive.
 old_archive_cmds=$lt_old_archive_cmds_CXX
@@ -2536,11 +2555,11 @@ with_gcc=$GCC_CXX
 # Compiler flag to turn off builtin functions.
 no_builtin_flag=$lt_lt_prog_compiler_no_builtin_flag_CXX
 
-# How to pass a linker flag through the compiler.
-wl=$lt_lt_prog_compiler_wl_CXX
-
 # Additional compiler flags for building library objects.
 pic_flag=$lt_lt_prog_compiler_pic_CXX
+
+# How to pass a linker flag through the compiler.
+wl=$lt_lt_prog_compiler_wl_CXX
 
 # Compiler flag to prevent dynamic linking.
 link_static_flag=$lt_lt_prog_compiler_static_CXX
@@ -2628,9 +2647,6 @@ inherit_rpath=$inherit_rpath_CXX
 # Whether libtool must link a program against all its dependency libraries.
 link_all_deplibs=$link_all_deplibs_CXX
 
-# Fix the shell variable \$srcfile for the compiler.
-fix_srcfile_path=$lt_fix_srcfile_path_CXX
-
 # Set to "yes" if exported symbols are required.
 always_export_symbols=$always_export_symbols_CXX
 
@@ -2645,6 +2661,9 @@ include_expsyms=$lt_include_expsyms_CXX
 
 # Commands necessary for linking programs (against libraries) with templates.
 prelink_cmds=$lt_prelink_cmds_CXX
+
+# Commands necessary for finishing linking programs.
+postlink_cmds=$lt_postlink_cmds_CXX
 
 # Specify filename containing input files.
 file_list_spec=$lt_file_list_spec_CXX

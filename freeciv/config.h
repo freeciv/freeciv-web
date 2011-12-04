@@ -26,7 +26,7 @@
 #define FC_CONFIG_H 1
 
 /* These are the CFLAGS used in compilation */
-#define FC_STORE_CFLAGS '-save-temps -Wall -Wpointer-arith -Wcast-align -Wmissing-prototypes -Wmissing-declarations -g -O2 -fsigned-char -I/usr/local/include/glib-2.0 -I/usr/local/lib/glib-2.0/include  '
+#define FC_STORE_CFLAGS '-save-temps -Wall -Wpointer-arith -Wcast-align -Wmissing-prototypes -Wmissing-declarations -g -O2 -fsigned-char -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include  '
 
 /* These are the CPPFLAGS used in compilation */
 #define FC_STORE_CPPFLAGS ' -DLOCALEDIR="\"${datarootdir}/locale\"" -DDEFAULT_DATA_PATH="\".:data:~/.freeciv/2.3:${datarootdir}/freeciv:/mnt/savegames\""'
@@ -38,7 +38,7 @@
 /* #undef FUNCPROTO */
 
 /* Path where to install the games */
-#define GAMEDIR "${exec_prefix}/lib/ggz"
+#define GAMEDIR "${exec_prefix}/lib64/ggz"
 
 /* Path where the games should look for their data files */
 #define GGZDATADIR "${datarootdir}/ggz"

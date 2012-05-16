@@ -1,8 +1,7 @@
-diff --git a/freeciv/data/default/terrain.ruleset b/freeciv/data/default/terrain.ruleset
-index 0856ed1..1348b1c 100644
---- a/freeciv/data/default/terrain.ruleset
-+++ b/freeciv/data/default/terrain.ruleset
-@@ -293,7 +293,7 @@ Ocean squares can never be polluted or subjected to fallout.\
+diff -Nurd freeciv/data/default/terrain.ruleset freeciv/data/default/terrain.ruleset
+--- freeciv/data/default/terrain.ruleset	2012-05-16 18:20:18.000000000 +0300
++++ freeciv/data/default/terrain.ruleset	2012-05-16 18:20:01.000000000 +0300
+@@ -293,7 +293,7 @@
  
  [terrain_glacier]
  name                 = _("Glacier")

@@ -1,0 +1,1 @@
+Freeciv here seems to be based on freeciv TRUNK revision 16158.

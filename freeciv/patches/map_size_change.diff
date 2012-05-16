@@ -1,7 +1,6 @@
-Index: map.h
-===================================================================
---- map.h	(revisjon 30)
-+++ map.h	(arbeidskopi)
+diff -Nurd -X.diff_ignore freeciv/common/map.h freeciv/common/map.h
+--- freeciv/common/map.h	2012-05-16 20:56:43.000000000 +0300
++++ freeciv/common/map.h	2012-05-16 21:58:39.000000000 +0300
 @@ -468,9 +468,9 @@
  #define MAP_MAX_HUTS             500
  

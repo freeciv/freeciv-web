@@ -1,8 +1,7 @@
-diff --git a/freeciv/common/game.h b/freeciv/common/game.h
-index e275bdb..edde72b 100644
---- a/freeciv/common/game.h
-+++ b/freeciv/common/game.h
-@@ -113,6 +113,7 @@ struct civ_game {
+diff -Nurd -X.diff_ignore freeciv/common/game.h freeciv/common/game.h
+--- freeciv/common/game.h	2012-05-16 20:56:43.000000000 +0300
++++ freeciv/common/game.h	2012-05-16 22:02:44.000000000 +0300
+@@ -113,6 +113,7 @@
        struct {
          bool user_message_set;
          char user_message[256];
@@ -10,11 +9,10 @@ index e275bdb..edde72b 100644
        } meta_info;
      } server;
    };
-diff --git a/freeciv/common/packets.def b/freeciv/common/packets.def
-index b62a7a0..0274ac0 100644
---- a/freeciv/common/packets.def
-+++ b/freeciv/common/packets.def
-@@ -1288,15 +1288,15 @@ PACKET_RULESET_BUILDING=104;sc,lsend
+diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
+--- freeciv/common/packets.def	2012-05-16 21:58:13.000000000 +0300
++++ freeciv/common/packets.def	2012-05-16 22:02:44.000000000 +0300
+@@ -1293,15 +1293,15 @@
    IMPROVEMENT id;
    IMPR_GENUS genus;
    STRING name[MAX_LEN_NAME];
@@ -34,98 +32,10 @@ index b62a7a0..0274ac0 100644
    STRING soundtag[MAX_LEN_NAME];
    STRING soundtag_alt[MAX_LEN_NAME];
    STRING helptext[MAX_LEN_PACKET];
-diff --git a/freeciv/common/packets_gen.c b/freeciv/common/packets_gen.c
-index acf9321..6e12c85 100644
---- a/freeciv/common/packets_gen.c
-+++ b/freeciv/common/packets_gen.c
-@@ -14368,12 +14368,18 @@ static struct packet_ruleset_building *receive_packet_ruleset_building_100(struc
-     real_packet->genus = readin;
-   }
-   dio_get_string(&din, real_packet->name, sizeof(real_packet->name));
-+  {
-+    int readin;
-+  
-+    dio_get_uint32(&din, &readin);
-+    real_packet->build_cost = readin;
-+  }
-   dio_get_string(&din, real_packet->graphic_str, sizeof(real_packet->graphic_str));
-   dio_get_string(&din, real_packet->graphic_alt, sizeof(real_packet->graphic_alt));
-   {
-     int readin;
-   
--    dio_get_uint8(&din, &readin);
-+    dio_get_uint32(&din, &readin);
-     real_packet->reqs_count = readin;
-   }
-   
-@@ -14404,18 +14410,12 @@ static struct packet_ruleset_building *receive_packet_ruleset_building_100(struc
-     int readin;
-   
-     dio_get_uint32(&din, &readin);
--    real_packet->build_cost = readin;
--  }
--  {
--    int readin;
--  
--    dio_get_uint8(&din, &readin);
-     real_packet->upkeep = readin;
-   }
-   {
-     int readin;
-   
--    dio_get_uint8(&din, &readin);
-+    dio_get_uint32(&din, &readin);
-     real_packet->sabotage = readin;
-   }
-   {
-@@ -14439,9 +14439,10 @@ static int send_packet_ruleset_building_100(struct connection *pc, const struct
-   dio_put_uint8(&dout, real_packet->id);
-   dio_put_uint8(&dout, real_packet->genus);
-   dio_put_string(&dout, real_packet->name);
-+  dio_put_uint32(&dout, real_packet->build_cost);
-   dio_put_string(&dout, real_packet->graphic_str);
-   dio_put_string(&dout, real_packet->graphic_alt);
--  dio_put_uint8(&dout, real_packet->reqs_count);
-+  dio_put_uint32(&dout, real_packet->reqs_count);
- 
-     {
-       int i;
-@@ -14452,9 +14453,8 @@ static int send_packet_ruleset_building_100(struct connection *pc, const struct
-     } 
-   dio_put_uint8(&dout, real_packet->obsolete_by);
-   dio_put_uint8(&dout, real_packet->replaced_by);
--  dio_put_uint32(&dout, real_packet->build_cost);
--  dio_put_uint8(&dout, real_packet->upkeep);
--  dio_put_uint8(&dout, real_packet->sabotage);
-+  dio_put_uint32(&dout, real_packet->upkeep);
-+  dio_put_uint32(&dout, real_packet->sabotage);
-   dio_put_uint32(&dout, real_packet->flags);
-   dio_put_string(&dout, real_packet->soundtag);
-   dio_put_string(&dout, real_packet->soundtag_alt);
-diff --git a/freeciv/common/packets_gen.h b/freeciv/common/packets_gen.h
-index 02cf62f..f334a09 100644
---- a/freeciv/common/packets_gen.h
-+++ b/freeciv/common/packets_gen.h
-@@ -953,13 +953,13 @@ struct packet_ruleset_building {
-   Impr_type_id id;
-   enum impr_genus_id genus;
-   char name[MAX_LEN_NAME];
-+  int build_cost;
-   char graphic_str[MAX_LEN_NAME];
-   char graphic_alt[MAX_LEN_NAME];
-   int reqs_count;
-   struct requirement reqs[MAX_NUM_REQS];
-   int obsolete_by;
-   Impr_type_id replaced_by;
--  int build_cost;
-   int upkeep;
-   int sabotage;
-   int flags;
-diff --git a/freeciv/server/civserver.c b/freeciv/server/civserver.c
-index 24d0b80..b0908bf 100644
---- a/freeciv/server/civserver.c
-+++ b/freeciv/server/civserver.c
-@@ -167,6 +167,9 @@ int main(int argc, char *argv[])
+diff -Nurd -X.diff_ignore freeciv/server/civserver.c freeciv/server/civserver.c
+--- freeciv/server/civserver.c	2012-05-16 20:56:43.000000000 +0300
++++ freeciv/server/civserver.c	2012-05-16 22:02:49.000000000 +0300
+@@ -167,6 +167,9 @@
        free(option);
      } else if ((option = get_option_malloc("--bind", argv, &inx, argc))) {
        srvarg.bind_addr = option; /* Never freed. */
@@ -135,7 +45,7 @@ index 24d0b80..b0908bf 100644
      } else if ((option = get_option_malloc("--read", argv, &inx, argc)))
        srvarg.script_filename = option; /* Never freed. */
      else if ((option = get_option_malloc("--quitidle", argv, &inx, argc))) {
-@@ -280,6 +283,8 @@ int main(int argc, char *argv[])
+@@ -280,6 +283,8 @@
      fc_fprintf(stderr, _("  -r, --read FILE\tRead startup script FILE\n"));
      fc_fprintf(stderr,
  	       _("  -R, --Ranklog FILE\tUse FILE as ranking logfile\n"));
@@ -144,11 +54,10 @@ index 24d0b80..b0908bf 100644
      fc_fprintf(stderr, _("  -v, --version\t\tPrint the version number\n"));
      /* TRANS: No full stop after the URL, could cause confusion. */
      fc_fprintf(stderr, _("Report bugs at %s\n"), BUG_URL);
-diff --git a/freeciv/server/meta.c b/freeciv/server/meta.c
-index 10aa4c1..5b931a5 100644
---- a/freeciv/server/meta.c
-+++ b/freeciv/server/meta.c
-@@ -109,6 +109,12 @@ const char *get_meta_message_string(void)
+diff -Nurd -X.diff_ignore freeciv/server/meta.c freeciv/server/meta.c
+--- freeciv/server/meta.c	2012-05-16 20:56:43.000000000 +0300
++++ freeciv/server/meta.c	2012-05-16 22:02:49.000000000 +0300
+@@ -109,6 +109,12 @@
    return meta_message;
  }
  
@@ -161,7 +70,7 @@ index 10aa4c1..5b931a5 100644
  /*************************************************************************
   The metaserver message set by user
  *************************************************************************/
-@@ -258,6 +264,7 @@ static bool send_to_metaserver(enum meta_flag flag)
+@@ -258,6 +264,7 @@
      mystrlcpy(s, "bye=1&", rest);
      s = end_of_strn(s, &rest);
    } else {
@@ -169,7 +78,7 @@ index 10aa4c1..5b931a5 100644
      my_snprintf(s, rest, "version=%s&", fc_url_encode(VERSION_STRING));
      s = end_of_strn(s, &rest);
  
-@@ -272,6 +279,13 @@ static bool send_to_metaserver(enum meta_flag flag)
+@@ -272,6 +279,13 @@
                  fc_url_encode(srvarg.serverid));
      s = end_of_strn(s, &rest);
  
@@ -183,7 +92,7 @@ index 10aa4c1..5b931a5 100644
      my_snprintf(s, rest, "message=%s&",
                  fc_url_encode(get_meta_message_string()));
      s = end_of_strn(s, &rest);
-@@ -311,6 +325,11 @@ static bool send_to_metaserver(enum meta_flag flag)
+@@ -311,6 +325,11 @@
                      fc_url_encode(plr->nation != NO_NATION_SELECTED 
                                    ? nation_plural_for_player(plr)
                                    : "none"));
@@ -195,11 +104,10 @@ index 10aa4c1..5b931a5 100644
          s = end_of_strn(s, &rest);
  
          my_snprintf(s, rest, "plh[]=%s&",
-diff --git a/freeciv/server/meta.h b/freeciv/server/meta.h
-index 8f70c86..efe25e4 100644
---- a/freeciv/server/meta.h
-+++ b/freeciv/server/meta.h
-@@ -32,6 +32,7 @@ const char *default_meta_message_string(void);
+diff -Nurd -X.diff_ignore freeciv/server/meta.h freeciv/server/meta.h
+--- freeciv/server/meta.h	2012-05-16 22:02:21.000000000 +0300
++++ freeciv/server/meta.h	2012-05-16 22:02:49.000000000 +0300
+@@ -32,6 +32,7 @@
  const char *get_meta_patches_string(void);
  const char *get_meta_message_string(void);
  const char *get_user_meta_message_string(void);

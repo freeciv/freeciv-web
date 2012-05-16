@@ -1,8 +1,7 @@
-Index: packets.def
-===================================================================
---- packets.def	(revisjon 48)
-+++ packets.def	(arbeidskopi)
-@@ -229,14 +229,14 @@
+diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
+--- freeciv/common/packets.def	2012-05-16 22:05:42.000000000 +0300
++++ freeciv/common/packets.def	2012-05-16 22:14:29.000000000 +0300
+@@ -228,14 +228,14 @@
  type EDIT_TECH_MODE     = uint8(enum editor_tech_mode)
  
  # other typedefs

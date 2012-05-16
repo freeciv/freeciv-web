@@ -1,8 +1,7 @@
-Index: client/tilespec.c
-===================================================================
---- client/tilespec.c	(revisjon 16401)
-+++ client/tilespec.c	(arbeidskopi)
-@@ -2832,10 +2831,20 @@
+diff -Nurd -X.diff_ignore freeciv/client/tilespec.c freeciv/client/tilespec.c
+--- freeciv/client/tilespec.c	2012-05-16 20:56:41.000000000 +0300
++++ freeciv/client/tilespec.c	2012-05-16 22:13:10.000000000 +0300
+@@ -2837,10 +2837,20 @@
  
    /* Set up each layer of the drawing. */
    for (l = 0; l < draw->num_layers; l++) {
@@ -23,7 +22,7 @@ Index: client/tilespec.c
      switch (dlp->sprite_type) {
      case CELL_WHOLE:
        switch (dlp->match_style) {
-@@ -2999,6 +3008,7 @@
+@@ -3004,6 +3014,7 @@
  			  tslp->match_types[s][0],
  			  tslp->match_types[w][0]);
  	      sprite = load_sprite(t, buffer);
@@ -31,7 +30,7 @@ Index: client/tilespec.c
  
  	      if (sprite) {
  		/* Crop the sprite to separate this cell. */
-@@ -3954,6 +3964,7 @@
+@@ -3959,6 +3970,7 @@
  	      int k = 0;
  	      for (; k < count; k++) {
  		n[j] = k; /* default to last entry */
@@ -39,7 +38,7 @@ Index: client/tilespec.c
  		if (m[j] == dlp->match_index[k])
  		{
  		  break;
-@@ -3967,7 +3978,7 @@
+@@ -3972,7 +3984,7 @@
  	  break;
  	};
  	array_index = array_index * NUM_CORNER_DIRS + i;

@@ -1,8 +1,7 @@
-diff --git a/freeciv/utility/shared.c b/freeciv/utility/shared.c
-index 9f5b5ca..4a5e1c0 100644
---- a/freeciv/utility/shared.c
-+++ b/freeciv/utility/shared.c
-@@ -439,7 +439,7 @@ bool is_safe_filename(const char *name)
+diff -Nurd -X.diff_ignore freeciv/utility/shared.c freeciv/utility/shared.c
+--- freeciv/utility/shared.c	2012-05-16 20:56:42.000000000 +0300
++++ freeciv/utility/shared.c	2012-05-16 21:12:39.000000000 +0300
+@@ -439,7 +439,7 @@
  ***************************************************************/
  bool is_ascii_name(const char *name)
  {

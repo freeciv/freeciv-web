@@ -1,8 +1,7 @@
-Index: server/unittools.c
-===================================================================
---- server/unittools.c	(revisjon 79)
-+++ server/unittools.c	(arbeidskopi)
-@@ -3205,11 +3205,12 @@
+diff -Nurd -X.diff_ignore freeciv/server/unittools.c freeciv/server/unittools.c
+--- freeciv/server/unittools.c	2012-05-16 21:49:21.000000000 +0300
++++ freeciv/server/unittools.c	2012-05-16 22:07:56.000000000 +0300
+@@ -3214,11 +3214,12 @@
        /* Move unit */
        if (!(dst_tile = mapstep(punit->tile, order.dir))) {
  	cancel_orders(punit, "  move order sent us to invalid location");

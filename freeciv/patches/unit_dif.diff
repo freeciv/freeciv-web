@@ -1,7 +1,6 @@
-Index: data/default/units.ruleset
-===================================================================
---- data/default/units.ruleset	(revisjon 30)
-+++ data/default/units.ruleset	(arbeidskopi)
+diff -Nurd -X.diff_ignore freeciv/data/default/units.ruleset freeciv/data/default/units.ruleset
+--- freeciv/data/default/units.ruleset	2012-05-16 20:56:42.000000000 +0300
++++ freeciv/data/default/units.ruleset	2012-05-16 22:15:37.000000000 +0300
 @@ -324,7 +324,7 @@
  ")
  

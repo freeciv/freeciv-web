@@ -1,7 +1,6 @@
-Index: data/default/terrain.ruleset
-===================================================================
---- data/default/terrain.ruleset	(revisjon 30)
-+++ data/default/terrain.ruleset	(arbeidskopi)
+diff -Nurd -X.diff_ignore freeciv/data/default/terrain.ruleset freeciv/data/default/terrain.ruleset
+--- freeciv/data/default/terrain.ruleset	2012-05-16 21:02:54.000000000 +0300
++++ freeciv/data/default/terrain.ruleset	2012-05-16 21:35:15.000000000 +0300
 @@ -32,7 +32,7 @@
  
  ; Bodies of water up to this size are considered freshwater lakes, if there is

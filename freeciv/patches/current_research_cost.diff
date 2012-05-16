@@ -1,8 +1,7 @@
-diff --git a/freeciv/common/packets.def b/freeciv/common/packets.def
-index d949de0..b62a7a0 100644
---- a/freeciv/common/packets.def
-+++ b/freeciv/common/packets.def
-@@ -709,6 +709,7 @@ PACKET_PLAYER_INFO=39;sc
+diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
+--- freeciv/common/packets.def	2012-05-16 21:07:37.000000000 +0300
++++ freeciv/common/packets.def	2012-05-16 21:18:07.000000000 +0300
+@@ -710,6 +710,7 @@
    UINT16 bulbs_last_turn;
    UINT32 bulbs_researched;
    UINT32 techs_researched;
@@ -10,11 +9,10 @@ index d949de0..b62a7a0 100644
    UINT8 researching;
    UINT16 science_cost;
  
-diff --git a/freeciv/server/plrhand.c b/freeciv/server/plrhand.c
-index f0c2cbd..e07a77a 100644
---- a/freeciv/server/plrhand.c
-+++ b/freeciv/server/plrhand.c
-@@ -893,6 +893,11 @@ static void package_player_info(struct player *plr,
+diff -Nurd -X.diff_ignore freeciv/server/plrhand.c freeciv/server/plrhand.c
+--- freeciv/server/plrhand.c	2012-05-16 20:56:43.000000000 +0300
++++ freeciv/server/plrhand.c	2012-05-16 21:18:07.000000000 +0300
+@@ -893,6 +893,11 @@
      packet->science         = plr->economic.science;
      packet->luxury          = plr->economic.luxury;
      packet->bulbs_researched = research->bulbs_researched;
@@ -26,7 +24,7 @@ index f0c2cbd..e07a77a 100644
      packet->techs_researched = research->techs_researched;
      packet->researching = research->researching;
      packet->future_tech = research->future_tech;
-@@ -905,6 +910,7 @@ static void package_player_info(struct player *plr,
+@@ -905,6 +910,7 @@
      packet->science         = 0;
      packet->luxury          = 0;
      packet->bulbs_researched= 0;

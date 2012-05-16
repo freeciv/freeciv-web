@@ -1,7 +1,6 @@
-Index: meta.h
-===================================================================
---- meta.h	(revisjon 30)
-+++ meta.h	(arbeidskopi)
+diff -Nurd -X.diff_ignore freeciv/server/meta.h freeciv/server/meta.h
+--- freeciv/server/meta.h	2012-05-16 20:56:43.000000000 +0300
++++ freeciv/server/meta.h	2012-05-16 22:01:30.000000000 +0300
 @@ -17,7 +17,7 @@
  
  #define DEFAULT_META_SERVER_NO_SEND  TRUE

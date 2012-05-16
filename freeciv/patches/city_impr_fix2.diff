@@ -1,8 +1,7 @@
-diff --git a/freeciv/common/packets.def b/freeciv/common/packets.def
-index 29ead46..728e4c1 100644
---- a/freeciv/common/packets.def
-+++ b/freeciv/common/packets.def
-@@ -579,6 +579,8 @@ PACKET_CITY_INFO=21; sc,lsend
+diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
+--- freeciv/common/packets.def	2012-05-16 21:02:54.000000000 +0300
++++ freeciv/common/packets.def	2012-05-16 21:05:34.000000000 +0300
+@@ -578,6 +578,8 @@
    
    #WORKLIST worklist;
  
@@ -11,46 +10,10 @@ index 29ead46..728e4c1 100644
    STRING improvements[MAX_LEN_MSG];
    #BV_CITY_OPTIONS city_options;
    STRING name[MAX_LEN_NAME];
-diff --git a/freeciv/common/packets_gen.c b/freeciv/common/packets_gen.c
-index ffe9579..caa12d1 100644
---- a/freeciv/common/packets_gen.c
-+++ b/freeciv/common/packets_gen.c
-@@ -4328,6 +4328,8 @@ static struct packet_city_info *receive_packet_city_info_100(struct connection *
-   dio_get_bool8(&din, &real_packet->was_happy);
-   dio_get_bool8(&din, &real_packet->diplomat_investigate);
-   dio_get_bool8(&din, &real_packet->walls);
-+  dio_get_string(&din, real_packet->can_build_unit, sizeof(real_packet->can_build_unit));
-+  dio_get_string(&din, real_packet->can_build_improvement, sizeof(real_packet->can_build_improvement));
-   dio_get_string(&din, real_packet->improvements, sizeof(real_packet->improvements));
-   dio_get_string(&din, real_packet->name, sizeof(real_packet->name));
- 
-@@ -4470,6 +4472,8 @@ static int send_packet_city_info_100(struct connection *pc, const struct packet_
-   dio_put_bool8(&dout, real_packet->was_happy);
-   dio_put_bool8(&dout, real_packet->diplomat_investigate);
-   dio_put_bool8(&dout, real_packet->walls);
-+  dio_put_string(&dout, real_packet->can_build_unit);
-+  dio_put_string(&dout, real_packet->can_build_improvement);
-   dio_put_string(&dout, real_packet->improvements);
-   dio_put_string(&dout, real_packet->name);
- 
-diff --git a/freeciv/common/packets_gen.h b/freeciv/common/packets_gen.h
-index 731e7e4..30800fe 100644
---- a/freeciv/common/packets_gen.h
-+++ b/freeciv/common/packets_gen.h
-@@ -298,6 +298,8 @@ struct packet_city_info {
-   bool was_happy;
-   bool diplomat_investigate;
-   bool walls;
-+  char can_build_unit[MAX_LEN_MSG];
-+  char can_build_improvement[MAX_LEN_MSG];
-   char improvements[MAX_LEN_MSG];
-   char name[MAX_LEN_NAME];
- };
-diff --git a/freeciv/server/citytools.c b/freeciv/server/citytools.c
-index eade632..56b8097 100644
---- a/freeciv/server/citytools.c
-+++ b/freeciv/server/citytools.c
-@@ -1801,6 +1801,8 @@ void package_city(struct city *pcity, struct packet_city_info *packet,
+diff -Nurd -X.diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
+--- freeciv/server/citytools.c	2012-05-16 21:02:54.000000000 +0300
++++ freeciv/server/citytools.c	2012-05-16 21:05:39.000000000 +0300
+@@ -1801,6 +1801,8 @@
    int i;
    int ppl = 0;
    char impr_buf[MAX_NUM_ITEMS + 1];
@@ -59,7 +22,7 @@ index eade632..56b8097 100644
  
    packet->id=pcity->id;
    packet->owner = player_number(city_owner(pcity));
-@@ -1898,6 +1900,23 @@ void package_city(struct city *pcity, struct packet_city_info *packet,
+@@ -1898,6 +1900,23 @@
    packet->walls = city_got_citywalls(pcity);
  
    improvement_iterate(pimprove) {

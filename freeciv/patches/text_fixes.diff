@@ -1,26 +1,6 @@
-Index: server/srv_main.c
-===================================================================
---- server/srv_main.c	(revisjon 30)
-+++ server/srv_main.c	(arbeidskopi)
-@@ -1891,7 +1891,13 @@
-       char leader_name[MAX_LEN_NAME];
- 
-       pick_random_player_name(nation_of_player(pplayer), leader_name);
--      sz_strlcpy(pplayer->name, leader_name);
-+      /* FIXME: in Web client, connection username == player name.*/
-+      if (pplayer->ai_data.control == TRUE) {
-+        sz_strlcpy(pplayer->name, leader_name);
-+      } else {
-+        sz_strlcpy(pplayer->name, pplayer->username);
-+      }
-+
-     }
- 
-     if (check_nation_leader_name(nation_of_player(pplayer), pplayer->name)) {
-Index: common/featured_text.c
-===================================================================
---- common/featured_text.c	(revisjon 30)
-+++ common/featured_text.c	(arbeidskopi)
+diff -Nurd -X.diff_ignore freeciv/common/featured_text.c freeciv/common/featured_text.c
+--- freeciv/common/featured_text.c	2012-05-16 20:56:43.000000000 +0300
++++ freeciv/common/featured_text.c	2012-05-16 22:11:57.000000000 +0300
 @@ -1037,10 +1037,9 @@
  {
    static char buf[128];
@@ -46,10 +26,9 @@ Index: common/featured_text.c
 +  my_snprintf(buf, sizeof(buf), "%s", unit_rule_name(punit));
    return buf;
  }
-Index: common/featured_text.h
-===================================================================
---- common/featured_text.h	(revisjon 30)
-+++ common/featured_text.h	(arbeidskopi)
+diff -Nurd -X.diff_ignore freeciv/common/featured_text.h freeciv/common/featured_text.h
+--- freeciv/common/featured_text.h	2012-05-16 20:56:43.000000000 +0300
++++ freeciv/common/featured_text.h	2012-05-16 22:11:57.000000000 +0300
 @@ -131,13 +131,13 @@
  /* Some event colors */
  #define FTC_WARNING     "#FF0000"
@@ -66,3 +45,21 @@ Index: common/featured_text.h
  
  /* Main functions. */
  size_t featured_text_to_plain_text(const char *featured_text,
+diff -Nurd -X.diff_ignore freeciv/server/srv_main.c freeciv/server/srv_main.c
+--- freeciv/server/srv_main.c	2012-05-16 22:11:36.000000000 +0300
++++ freeciv/server/srv_main.c	2012-05-16 22:11:57.000000000 +0300
+@@ -1902,7 +1902,13 @@
+       char leader_name[MAX_LEN_NAME];
+ 
+       pick_random_player_name(nation_of_player(pplayer), leader_name);
+-      sz_strlcpy(pplayer->name, leader_name);
++      /* FIXME: in Web client, connection username == player name.*/
++      if (pplayer->ai_data.control == TRUE) {
++        sz_strlcpy(pplayer->name, leader_name);
++      } else {
++        sz_strlcpy(pplayer->name, pplayer->username);
++      }
++
+     }
+ 
+     if (check_nation_leader_name(nation_of_player(pplayer), pplayer->name)) {

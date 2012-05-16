@@ -1,8 +1,7 @@
-diff --git a/freeciv/server/unithand.c b/freeciv/server/unithand.c
-index 189242f..b992673 100644
---- a/freeciv/server/unithand.c
-+++ b/freeciv/server/unithand.c
-@@ -1409,7 +1409,7 @@ bool unit_move_handling(struct unit *punit, struct tile *pdesttile,
+diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
+--- freeciv/server/unithand.c	2012-05-16 21:53:25.000000000 +0300
++++ freeciv/server/unithand.c	2012-05-16 22:16:45.000000000 +0300
+@@ -1416,7 +1416,7 @@
        notify_player(pplayer, punit->tile, E_BAD_COMMAND,
                      FTC_SERVER_INFO, NULL,
                      _("You must declare war on %s first.  Try using "

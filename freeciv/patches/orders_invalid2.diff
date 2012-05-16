@@ -1,8 +1,7 @@
-Index: server/unittools.c
-===================================================================
---- server/unittools.c	(revisjon 108)
-+++ server/unittools.c	(arbeidskopi)
-@@ -3245,10 +3245,10 @@
+diff -Nurd -X.diff_ignore freeciv/server/unittools.c freeciv/server/unittools.c
+--- freeciv/server/unittools.c	2012-05-16 22:08:49.000000000 +0300
++++ freeciv/server/unittools.c	2012-05-16 22:09:00.000000000 +0300
+@@ -3254,10 +3254,10 @@
        if (!res && punit->moves_left > 0) {
  	/* Movement failed (ZOC, etc.) */
  	cancel_orders(punit, "  attempt to move failed.");

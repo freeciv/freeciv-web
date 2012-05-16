@@ -1,7 +1,6 @@
-Index: server/sernet.c
-===================================================================
---- server/sernet.c	(revisjon 30)
-+++ server/sernet.c	(arbeidskopi)
+diff -Nurd -X.diff_ignore freeciv/server/sernet.c freeciv/server/sernet.c
+--- freeciv/server/sernet.c	2012-05-16 20:56:43.000000000 +0300
++++ freeciv/server/sernet.c	2012-05-16 22:06:41.000000000 +0300
 @@ -501,7 +501,7 @@
        if (connections && conn_list_size(game.est_connections) == 0) {
  	if (last_noplayers != 0) {

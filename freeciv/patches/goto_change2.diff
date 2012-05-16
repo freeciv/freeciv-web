@@ -1,10 +1,9 @@
-diff --git a/freeciv/server/unithand.c b/freeciv/server/unithand.c
-index 5abaade..225c985 100644
---- a/freeciv/server/unithand.c
-+++ b/freeciv/server/unithand.c
-@@ -888,9 +888,6 @@ void handle_goto_path_req(struct player *pplayer, int unit_id, int x, int y)
-     send_packet_goto_path(pplayer->current_conn, &p);
- 
+diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
+--- freeciv/server/unithand.c	2012-05-16 21:47:42.000000000 +0300
++++ freeciv/server/unithand.c	2012-05-16 21:49:54.000000000 +0300
+@@ -891,9 +891,6 @@
+     pf_path_destroy(path);
+     return ;
    } else {
 -    notify_player(pplayer, punit->tile, E_BAD_COMMAND,
 -                  FTC_SERVER_INFO, NULL,

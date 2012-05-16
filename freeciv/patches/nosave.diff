@@ -1,8 +1,7 @@
-Index: server/srv_main.c
-===================================================================
---- server/srv_main.c	(revisjon 111)
-+++ server/srv_main.c	(arbeidskopi)
-@@ -1153,8 +1153,8 @@
+diff -Nurd -X.diff_ignore freeciv/server/srv_main.c freeciv/server/srv_main.c
+--- freeciv/server/srv_main.c	2012-05-16 20:56:43.000000000 +0300
++++ freeciv/server/srv_main.c	2012-05-16 21:33:32.000000000 +0300
+@@ -1142,8 +1142,8 @@
    assert(strlen(game.server.save_name)<256);
  
    generate_save_name(filename, sizeof(filename), TRUE, reason_filename);
@@ -13,7 +12,7 @@ Index: server/srv_main.c
  }
  
  /**************************************************************************
-@@ -2055,7 +2055,7 @@
+@@ -2038,7 +2038,7 @@
        if (game.info.phase == 0) {
  	if (save_counter >= game.info.save_nturns && game.info.save_nturns > 0) {
  	  save_counter = 0;
@@ -22,7 +21,7 @@ Index: server/srv_main.c
  	}
  	save_counter++;
        }
-@@ -2213,7 +2213,7 @@
+@@ -2196,7 +2196,7 @@
        && conn_list_size(game.est_connections) > 0) {
      /* Save game on game_over, but not when the gameover was caused by
       * the -q parameter. */

@@ -1,8 +1,7 @@
-diff --git a/freeciv/server/unithand.c b/freeciv/server/unithand.c
-index fd3023f..42290c2 100644
---- a/freeciv/server/unithand.c
-+++ b/freeciv/server/unithand.c
-@@ -845,6 +845,15 @@ void handle_unit_move(struct player *pplayer, int unit_id, int x, int y)
+diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
+--- freeciv/server/unithand.c	2012-05-16 21:50:50.000000000 +0300
++++ freeciv/server/unithand.c	2012-05-16 21:51:16.000000000 +0300
+@@ -855,6 +855,15 @@
  
      old_tile = path->positions[0].tile;
  

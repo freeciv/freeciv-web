@@ -3,7 +3,7 @@
 PATCHLIST="arctic-bugfix caravan_fixes1"
 
 apply_patch() {
-  patch -u -p1 -d freeciv < patches/$1.diff
+  patch -u -p1 -d freeciv.upstream < patches/$1.diff
 }
 
 for patch in $PATCHLIST

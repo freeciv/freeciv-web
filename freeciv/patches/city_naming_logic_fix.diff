@@ -1,0 +1,96 @@
+diff -Nurd -X.diff_ignore freeciv/server/settlers.c freeciv/server/settlers.c
+--- freeciv/server/settlers.c	2012-05-16 20:56:43.000000000 +0300
++++ freeciv/server/settlers.c	2012-05-16 22:35:16.000000000 +0300
+@@ -99,7 +99,7 @@
+             TILE_XY(ptile));
+     return FALSE;
+   }
+-  handle_unit_build_city(pplayer, punit->id,
++  ai_unit_build_city(pplayer, punit->id,
+ 			 city_name_suggestion(pplayer, ptile));
+   pcity = tile_city(ptile);
+   if (!pcity) {
+diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
+--- freeciv/server/unithand.c	2012-05-16 22:17:27.000000000 +0300
++++ freeciv/server/unithand.c	2012-05-16 22:35:16.000000000 +0300
+@@ -723,13 +723,15 @@
+   if (res == AB_BUILD_OK) {
+     /* Unescape city name, which has been escaped in Javascript. */
+     char* unescaped_text = g_uri_unescape_string(name, NULL);
+-    char result_buf[MAX_LEN_NAME];
+-    convert_string(unescaped_text,
+-		     "latin1",
+-		     "UTF-8",
+-		     (char*)result_buf, MAX_LEN_NAME);
+-    city_build(pplayer, punit, result_buf);
+-    free(unescaped_text);
++    if (unescaped_text) {
++      char* result_buf = fc_malloc(MAX_LEN_NAME);
++      convert_string(unescaped_text,
++ 	  	       "latin1",
++		       "UTF-8",
++		       result_buf, sizeof(result_buf));
++      city_build(pplayer, punit, result_buf);
++      free(unescaped_text);
++    }
+   } else if (res == AB_ADD_OK) {
+     city_add_unit(pplayer, punit);
+   } else {
+@@ -738,6 +740,35 @@
+ }
+ 
+ /**************************************************************************
++...
++**************************************************************************/
++void ai_unit_build_city(struct player *pplayer, int unit_id, char *name)
++{
++  enum add_build_city_result res;
++  struct unit *punit = player_find_unit_by_id(pplayer, unit_id);
++
++  if (NULL == punit) {
++    /* Shouldn't happen */
++    freelog(LOG_ERROR, "handle_unit_build_city()"
++	    " invalid unit %d",
++	    unit_id);
++    return;
++  }
++
++  res = test_unit_add_or_build_city(punit);
++
++  if (res == AB_BUILD_OK) {
++    /* Unescape city name, which has been escaped in Javascript. */
++    city_build(pplayer, punit, name);
++  } else if (res == AB_ADD_OK) {
++    city_add_unit(pplayer, punit);
++  } else {
++    city_add_or_build_error(pplayer, punit, res);
++  }
++}
++
++
++/**************************************************************************
+   Handle change in unit activity.
+ **************************************************************************/
+ void handle_unit_change_activity(struct player *pplayer, int unit_id,
+diff -Nurd -X.diff_ignore freeciv/server/unithand.h freeciv/server/unithand.h
+--- freeciv/server/unithand.h	2012-05-16 20:56:43.000000000 +0300
++++ freeciv/server/unithand.h	2012-05-16 22:35:16.000000000 +0300
+@@ -23,5 +23,6 @@
+ 
+ bool unit_move_handling(struct unit *punit, struct tile *pdesttile,
+                         bool igzoc, bool move_diplomat_city);
++void ai_unit_build_city(struct player *pplayer, int unit_id, char *name);
+ 
+ #endif  /* FC__UNITHAND_H */
+diff -Nurd -X.diff_ignore freeciv/server/unittools.c freeciv/server/unittools.c
+--- freeciv/server/unittools.c	2012-05-16 22:09:51.000000000 +0300
++++ freeciv/server/unittools.c	2012-05-16 22:35:16.000000000 +0300
+@@ -3171,7 +3171,7 @@
+       }
+       break;
+     case ORDER_BUILD_CITY:
+-      handle_unit_build_city(pplayer, unitid,
++      ai_unit_build_city(pplayer, unitid,
+ 			     city_name_suggestion(pplayer, punit->tile));
+       freelog(LOG_DEBUG, "  building city");
+       if (player_find_unit_by_id(pplayer, unitid)) {

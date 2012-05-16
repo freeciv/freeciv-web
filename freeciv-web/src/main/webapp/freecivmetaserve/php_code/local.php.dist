@@ -1,0 +1,9 @@
+<?php
+
+$fcdb_metaserver_db = "freeciv_net";
+$fcdb_username = "freecivmeta";
+$fcdb_pw = "changeme";
+
+$metaserver_header = "Servers on this freeciv.net server";
+
+?>

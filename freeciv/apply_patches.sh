@@ -1,6 +1,6 @@
 #!/bin/sh
 
-PATCHLIST="arctic-bugfix"
+PATCHLIST="arctic-bugfix caravan_fixes1"
 
 apply_patch() {
   patch -u -p1 -d freeciv < patches/$1.diff

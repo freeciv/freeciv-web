@@ -1742,9 +1742,9 @@ static bool base_handle_unit_establish_trade(struct player *pplayer, int unit_id
    
   }
 
-  sz_strlcpy(homecity_link, city_name(pcity_homecity));
-  sz_strlcpy(destcity_link, city_name(pcity_dest));
-  sz_strlcpy(punit_link, unit_rule_name(punit));
+  sz_strlcpy(homecity_link, city_link(pcity_homecity));
+  sz_strlcpy(destcity_link, city_link(pcity_dest));
+  sz_strlcpy(punit_link, unit_link(punit));
 
   if (!can_cities_trade(pcity_homecity, pcity_dest)) {
     notify_player(pplayer, pcity_dest->tile, E_BAD_COMMAND,

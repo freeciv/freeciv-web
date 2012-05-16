@@ -1892,15 +1892,6 @@ void package_unit(struct unit *punit, struct packet_unit_info *packet)
     packet->orders_repeat = packet->orders_vigilant = FALSE;
     /* No need to initialize array. */
   }
-
-  packet->caravan_trade = (unit_has_type_flag(punit, F_TRADE_ROUTE)
-	   && !unit_has_orders(punit)
-	   && unit_can_est_traderoute_here(punit));
-
-  packet->caravan_wonder = (unit_has_type_flag(punit, F_HELP_WONDER)
-	   && !unit_has_orders(punit)
-	   && unit_can_help_build_wonder_here(punit));
-
 }
 
 /**************************************************************************

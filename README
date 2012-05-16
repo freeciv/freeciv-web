@@ -115,7 +115,7 @@ On other Linux distributions, follow this installation procedure:
    - Run 'build.sh' in the freeciv-web directory
 
 4. Compile and install Freeciv. This involves running the following commands:
-   cd freeciv 
+   cd freeciv/freeciv
    ./autogen.sh --enable-client=no
    make
    make install     (as root user)

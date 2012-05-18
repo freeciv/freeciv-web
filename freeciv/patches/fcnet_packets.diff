@@ -1,0 +1,97 @@
+diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
+--- freeciv/common/packets.def	2012-05-19 01:03:32.000000000 +0300
++++ freeciv/common/packets.def	2012-05-19 01:13:02.000000000 +0300
+@@ -584,8 +584,13 @@
+   STRING can_build_unit[MAX_LEN_MSG];
+   STRING can_build_improvement[MAX_LEN_MSG];
+   STRING improvements[MAX_LEN_MSG];
++
++  STRING food_output[MAX_LEN_MSG];
++  STRING shield_output[MAX_LEN_MSG];
++  STRING trade_output[MAX_LEN_MSG];
+   #BV_CITY_OPTIONS city_options;
+   STRING name[MAX_LEN_NAME];
++  BOOL unhappy;
+ end
+ 
+ PACKET_CITY_SHORT_INFO=22; sc,lsend
+@@ -730,6 +735,7 @@
+   STRING inventions[A_LAST+1];
+ 
+   CITY wonders[B_LAST]; diff
++  UINT32 net_income;
+ end
+ 
+ PACKET_PLAYER_PHASE_DONE=40;cs,dsend
+@@ -836,6 +842,20 @@
+   COORD x, y;
+ end
+ 
++PACKET_GOTO_PATH_REQ=184;cs,dsend
++  UNIT unit_id;
++  COORD x, y;
++end
++
++# used for showing GOTO path in web client.
++PACKET_GOTO_PATH=185;sc,dsend
++  UNIT unit_id;
++  UINT16 length;
++  DIRECTION dir[MAX_LEN_ROUTE:length];
++  COORD dest_x, dest_y;
++  UINT32 turns;
++end
++
+ PACKET_UNIT_BUILD_CITY=53;cs,dsend
+   UNIT unit_id;
+   STRING name[MAX_LEN_NAME];
+@@ -968,25 +988,25 @@
+ 
+ PACKET_DIPLOMACY_CREATE_CLAUSE_REQ=77;cs,dsend
+   PLAYER counterpart, giver;
+-  CLAUSE type;
++  CLAUSE clause_type;
+   UINT32 value;
+ end
+ 
+ PACKET_DIPLOMACY_CREATE_CLAUSE=78;sc,dsend,lsend
+   PLAYER counterpart, giver;
+-  CLAUSE type;
++  CLAUSE clause_type;
+   UINT32 value;
+ end
+ 
+ PACKET_DIPLOMACY_REMOVE_CLAUSE_REQ=79;cs,dsend
+   PLAYER counterpart, giver;
+-  CLAUSE type;
++  CLAUSE clause_type;
+   UINT32 value;
+ end
+ 
+ PACKET_DIPLOMACY_REMOVE_CLAUSE=80;sc,dsend,lsend
+   PLAYER counterpart, giver;
+-  CLAUSE type;
++  CLAUSE clause_type;
+   UINT32 value;
+ end
+ 
+@@ -1012,7 +1032,7 @@
+ end
+ 
+ PACKET_REPORT_REQ=85;cs,handle-per-conn,dsend
+-  REPORT_TYPE type;
++  REPORT_TYPE report_type;
+ end
+ 
+ /************** Connection packets **********************/
+@@ -1037,9 +1057,9 @@
+ 
+ # Information about the ping times of the connections.
+ PACKET_CONN_PING_INFO=87; sc,lsend
+-  UINT8 connections;
++  UINT32 connections;
+   CONNECTION conn_id[MAX_NUM_CONNECTIONS:connections];
+-  FLOAT10x7 ping_time[MAX_NUM_CONNECTIONS:connections];
++  UINT32 ping_time[MAX_NUM_CONNECTIONS:connections];
+ end
+ 
+ PACKET_CONN_PING=88;sc

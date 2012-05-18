@@ -55,8 +55,8 @@ class CivCom(Thread):
     self.socket.setblocking(1);
     try:
       self.socket.connect((HOST, self.civserverport))
-    except:
-      self.send_error_to_client("Proxy unable to connect to civserver. Please go back and try again.");
+    except socket.error, reason:
+      self.send_error_to_client("Proxy unable to connect to civserver. Please go back and try again. %s" % (reason));
       return;
 
 

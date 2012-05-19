@@ -545,6 +545,7 @@ class Variant:
         self.type=packet.type
         self.delta=packet.delta
         self.is_action=packet.is_action
+        self.cancel=packet.cancel
         
         self.poscaps=poscaps
         self.negcaps=negcaps
@@ -833,6 +834,16 @@ static char *stats_%(name)s_names[] = {%(names)s};
   *clone = *real_packet;
   hash_insert(*hash, clone, clone);
 '''
+
+        # Cancel some is-info packets.
+        for i in self.cancel:
+            body=body+'''
+  hash = &pc->phs.sent[%s];
+  if (NULL != *hash) {
+    hash_delete_entry(*hash, real_packet);
+  }
+'''%i
+
         return intro+body
 
     # Returns a code fragement which is the implementation of the receive
@@ -989,6 +1000,17 @@ class Packet:
 
         self.want_lsend="lsend" in arr
         if self.want_lsend: arr.remove("lsend")
+
+ 	self.cancel=[]
+        removes=[]
+        remaining=[]
+        for i in arr:
+            mo=re.search("^cancel\((.*)\)$",i)
+            if mo:
+                self.cancel.append(mo.group(1))
+                continue
+            remaining.append(i)
+        arr=remaining
 
         assert len(arr)==0,repr(arr)
         

@@ -219,6 +219,14 @@ function map_pos_to_tile(x, y)
 }
 
 /****************************************************************************
+  Return the tile for the given index.
+****************************************************************************/
+function index_to_tile(index)
+{
+  return tiles[index];
+}
+
+/****************************************************************************
   Obscure math.  See explanation in doc/HACKING. 
 ****************************************************************************/
 function NATIVE_TO_MAP_POS(nat_x, nat_y)                     

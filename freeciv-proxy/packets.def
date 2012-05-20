@@ -62,6 +62,9 @@ Syntax:
               the client outside of the reception of that packet, or for
               any packet with side effects at the client.
 
+     cancel(PACKET_number): Cancel a packet with the same key (must be the
+     same key type at the start of the packet), useful for is-info packets.
+
      pre-send:
      post-recv:
      post-send: generate calls to pre-send, post-receive and post-send
@@ -141,7 +144,7 @@ Syntax:
       add-cap: only transfer this field if the given capability is
       available at runtime. If you have a capability named
       "new_version" a field line may look like this:
-        COORD x; add-cap(new_version)
+        TILE tile; add-cap(new_version)
       when making an optional capability mandatory, go through and remove
       the add-cap flag for it while leaving the field intact.
 
@@ -216,10 +219,11 @@ type PLAYER 		= SINT8
 type CITY   		= UINT16
 type UNIT   		= UINT16
 type TECH     		= UINT8
+type TILE		= SINT16
 type UNIT_TYPE		= uint8(Unit_type_id)
 type NATION		    = UINT32
 type GOVERNMENT		= UINT8
-type CONNECTION		= UINT8
+type CONNECTION		= SINT16
 type TEAM		= UINT8
 type CONTINENT          = sint16(Continent_id)
 type IMPROVEMENT	= uint8(Impr_type_id)
@@ -229,9 +233,9 @@ type TERRAIN            = uint8(Terrain_type_id)
 type EDIT_TECH_MODE     = uint8(enum editor_tech_mode)
 
 # other typedefs
-type COORD  		= UINT32
+type CITY_COORD         = UINT32
 type XYSIZE  		= UINT32
-type YEAR     		= UINT32
+type YEAR     		= SINT32
 type HP     		= UINT32
 type PERCENT  		= UINT32
 type GOLD		= UINT32
@@ -349,7 +353,7 @@ end
 # Packet spam from excess sending of tiles has slowed the client greatly in
 # the past.  However see the comment on is_info at the top about the dangers.
 PACKET_TILE_INFO=14; sc,lsend,is-info
-  COORD x, y; key
+  TILE tile; key
 
   CONTINENT continent;
   KNOWN known;
@@ -412,6 +416,7 @@ PACKET_GAME_INFO=15; sc
   UINT8 diplchance;
   UINT8 citymindist;
   UINT8 civilwarsize;
+  BOOL restrictinfra;
   UINT8 contactturns;
   UINT8 rapturedelay;
   UINT8 celebratesize; /* size limit for cities before they can celebrate */
@@ -507,14 +512,14 @@ PACKET_MAP_INFO=16; sc,lsend
 end
 
 PACKET_NUKE_TILE_INFO=17;sc,dsend,lsend
-  COORD x,y;
+  TILE tile;
 end
 
 /************** Chat/event packets **********************/
 
-PACKET_CHAT_MSG=18;sc, pre-send, post-recv,lsend
+PACKET_CHAT_MSG=18;sc, lsend
   STRING message[MAX_LEN_MSG];
-  COORD x, y;
+  TILE tile;
   EVENT event;
   CONNECTION conn_id;
 end
@@ -529,14 +534,13 @@ end
 
 /************** City packets **********************/
 
-PACKET_CITY_REMOVE=20;sc,dsend,lsend
+PACKET_CITY_REMOVE = 20; sc, dsend, lsend, cancel(PACKET_CITY_INFO), cancel(PACKET_CITY_SHORT_INFO)
   CITY city_id;
 end
 
-PACKET_CITY_INFO=21; sc,lsend
+PACKET_CITY_INFO = 21; sc, lsend, cancel(PACKET_CITY_SHORT_INFO)
   CITY id; key
-  COORD x;
-  COORD y;
+  TILE tile;
 
   PLAYER owner;
   UINT8 size;
@@ -554,8 +558,8 @@ PACKET_CITY_INFO=21; sc,lsend
   SINT16 usage[O_LAST];
   UINT16 food_stock, shield_stock;
 
-  UINT16 trade[NUM_TRADEROUTES];
-  UINT8 trade_value[NUM_TRADEROUTES];
+  UINT16 trade[NUM_TRADE_ROUTES];
+  UINT8 trade_value[NUM_TRADE_ROUTES];
 
   UINT16 pollution;
   UINT16 illness;
@@ -584,7 +588,7 @@ PACKET_CITY_INFO=21; sc,lsend
   STRING can_build_unit[MAX_LEN_MSG];
   STRING can_build_improvement[MAX_LEN_MSG];
   STRING improvements[MAX_LEN_MSG];
-  
+
   STRING food_output[MAX_LEN_MSG];
   STRING shield_output[MAX_LEN_MSG];
   STRING trade_output[MAX_LEN_MSG];
@@ -593,10 +597,9 @@ PACKET_CITY_INFO=21; sc,lsend
   BOOL unhappy;
 end
 
-PACKET_CITY_SHORT_INFO=22; sc,lsend
+PACKET_CITY_SHORT_INFO = 22; sc, lsend, cancel(PACKET_CITY_INFO)
   CITY id; key
-  COORD x;
-  COORD y;
+  TILE tile;
 
   PLAYER owner;
   UINT8 size;
@@ -635,12 +638,12 @@ end
 
 PACKET_CITY_MAKE_SPECIALIST=27;cs,dsend
   CITY city_id;
-  COORD worker_x, worker_y;
+  CITY_COORD worker_x, worker_y;
 end
 
 PACKET_CITY_MAKE_WORKER=28;cs,dsend
   CITY city_id;
-  COORD worker_x, worker_y;
+  CITY_COORD worker_x, worker_y;
 end
 
 PACKET_CITY_CHANGE_SPECIALIST=29;cs,dsend
@@ -687,12 +690,12 @@ end
 
 /************** Player packets **********************/
 
-PACKET_PLAYER_REMOVE=38;sc,dsend
+PACKET_PLAYER_REMOVE = 38; sc, dsend, cancel(PACKET_PLAYER_INFO)
   PLAYER playerno;
 end
 
-PACKET_PLAYER_INFO=39;sc
-  PLAYER playerno; key 
+PACKET_PLAYER_INFO = 39; sc, is-info
+  PLAYER playerno; key
   STRING name[MAX_LEN_NAME];
   STRING username[MAX_LEN_NAME];
 
@@ -701,7 +704,7 @@ PACKET_PLAYER_INFO=39;sc
   BOOL was_created;
   GOVERNMENT government;
   GOVERNMENT target_government;
-  BOOL embassy[MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS];
+  BOOL real_embassy[MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS];
   UINT8 city_style;
   NATION nation;
   TEAM team;
@@ -770,14 +773,14 @@ end
 
 /************** Unit packets **********************/
 
-PACKET_UNIT_REMOVE=48;sc,dsend,lsend
+PACKET_UNIT_REMOVE=48; sc, dsend, lsend, cancel(PACKET_UNIT_INFO), cancel(PACKET_UNIT_SHORT_INFO)
   UNIT unit_id;
 end
 
-PACKET_UNIT_INFO=49; sc,lsend
+PACKET_UNIT_INFO = 49; sc, lsend, is-info, cancel(PACKET_UNIT_SHORT_INFO)
   UNIT id; key
   PLAYER owner;
-  COORD x,y;
+  TILE tile;
   CITY homecity;
 
   UINT8 upkeep[O_LAST];
@@ -790,7 +793,7 @@ PACKET_UNIT_INFO=49; sc,lsend
   UNIT transported_by; /* Only valid if transported is set. */
   UINT8 movesleft, hp, fuel, activity_count;
   UINT8 occupy;
-  COORD goto_dest_x,goto_dest_y;
+  TILE goto_tile;
   ACTIVITY activity;
   SPECIAL activity_target;
   BASE activity_base;
@@ -808,10 +811,10 @@ PACKET_UNIT_INFO=49; sc,lsend
   BASE orders_bases[MAX_LEN_ROUTE:orders_length];
 end
 
-PACKET_UNIT_SHORT_INFO=50; sc,lsend
+PACKET_UNIT_SHORT_INFO = 50; sc, lsend, is-info, cancel(PACKET_UNIT_INFO)
   UNIT id; key
   PLAYER owner;
-  COORD x,y;
+  TILE tile;
   UNIT_TYPE type;
 
   UINT8 veteran;
@@ -839,24 +842,22 @@ end
 
 PACKET_UNIT_MOVE=52;cs,dsend
   UNIT unit_id;
-  COORD x, y;
+  TILE tile;
 end
 
 PACKET_GOTO_PATH_REQ=184;cs,dsend
   UNIT unit_id;
-  COORD x, y;
+  TILE goal;
 end
-
 
 # used for showing GOTO path in web client.
 PACKET_GOTO_PATH=185;sc,dsend
   UNIT unit_id;
   UINT16 length;
   DIRECTION dir[MAX_LEN_ROUTE:length];
-  COORD dest_x, dest_y;
+  TILE dest;
   UINT32 turns;
 end
-
 
 PACKET_UNIT_BUILD_CITY=53;cs,dsend
   UNIT unit_id;
@@ -888,7 +889,7 @@ end
 # used for client orders: currently client-side goto and patrol
 PACKET_UNIT_ORDERS=59;cs
   UNIT unit_id;
-  COORD src_x, src_y; # Origin tile, included for sanity checking
+  TILE src_tile; # Origin tile, included for sanity checking
 
   UINT16 length;
   BOOL repeat, vigilant;
@@ -896,7 +897,7 @@ PACKET_UNIT_ORDERS=59;cs
   DIRECTION dir[MAX_LEN_ROUTE:length];
   ACTIVITY activity[MAX_LEN_ROUTE:length];
   BASE base[MAX_LEN_ROUTE:length];
-  COORD dest_x, dest_y;
+  TILE dest_tile;
 end
 
 # Enable autosettlers for a unit.  Only works for settler units naturally.
@@ -928,7 +929,7 @@ end
 
 PACKET_UNIT_PARADROP_TO=64;cs,dsend
   UNIT unit_id;
-  COORD x, y;
+  TILE tile;
 end
 
 PACKET_UNIT_AIRLIFT=65;cs,dsend
@@ -1042,7 +1043,7 @@ end
 # For telling clients information about other connections to server.
 # Clients may not use all info, but supply now to avoid unnecessary
 # protocol changes later.
-PACKET_CONN_INFO=86; sc,lsend
+PACKET_CONN_INFO = 86; sc, lsend, is-info
   CONNECTION id; key
 
   # 0 means client should forget its
@@ -1404,18 +1405,18 @@ end
   other part of the rulesets.  (Terrain ruleset has enough info for its
   own "control" packet, done separately.)
 **************************************************************************/
-PACKET_RULESET_CONTROL=106; sc, post-send, post-recv, lsend
-  UINT8 num_unit_classes;
-  UINT8 num_unit_types;
-  UINT8 num_impr_types;
-  UINT8 num_tech_types;
-  UINT8 num_base_types;
-  UINT8 government_count;
-  UINT8 nation_count;
-  UINT8 styles_count;
-  UINT8 terrain_count;
-  UINT8 resource_count;
-  UINT8 num_specialist_types;
+PACKET_RULESET_CONTROL=106; sc, lsend
+  UINT16 num_unit_classes;
+  UINT16 num_unit_types;
+  UINT16 num_impr_types;
+  UINT16 num_tech_types;
+  UINT16 num_base_types;
+  UINT16 government_count;
+  UINT16 nation_count;
+  UINT16 styles_count;
+  UINT16 terrain_count;
+  UINT16 resource_count;
+  UINT16 num_specialist_types;
 
   STRING prefered_tileset[MAX_LEN_NAME];
 
@@ -1475,6 +1476,8 @@ PACKET_OPTIONS_SETTABLE=113;sc,lsend
   STRING default_strval[MAX_LEN_PACKET];	/* space for string */
 
   UINT8 scategory;
+
+  BOOL initial_setting;
 end
 
 /************** Effects hash packets **********************/
@@ -1520,7 +1523,7 @@ end
 
 /*************** "voteinfo" Capability Packets ***************/
 
-PACKET_VOTE_NEW=145;sc,handle-via-packet,no-delta
+PACKET_VOTE_NEW = 145; sc, handle-via-packet
   UINT32 vote_no;
   STRING user[MAX_LEN_NAME];
   STRING desc[512];
@@ -1529,7 +1532,7 @@ PACKET_VOTE_NEW=145;sc,handle-via-packet,no-delta
 end
 
 /* Sent to the client to give the new vote totals. */
-PACKET_VOTE_UPDATE=146;sc,no-delta
+PACKET_VOTE_UPDATE = 146; sc
   UINT32 vote_no; key
   UINT8 yes;
   UINT8 no;
@@ -1537,11 +1540,11 @@ PACKET_VOTE_UPDATE=146;sc,no-delta
   UINT8 num_voters;
 end
 
-PACKET_VOTE_REMOVE=147;sc,no-delta
+PACKET_VOTE_REMOVE = 147; sc
   UINT32 vote_no;
 end
 
-PACKET_VOTE_RESOLVE=148;sc,no-delta
+PACKET_VOTE_RESOLVE = 148; sc
   UINT32 vote_no;
   BOOL passed;
 end
@@ -1576,38 +1579,38 @@ PACKET_EDIT_TOGGLE_FOGOFWAR=153;cs,handle-per-conn,dsend
 end
 
 PACKET_EDIT_TILE_TERRAIN=154;cs,handle-per-conn,dsend
-  COORD x, y; key
+  TILE tile; key
   TERRAIN terrain;
   UINT8 size;
 end
 
 PACKET_EDIT_TILE_RESOURCE=155;cs,handle-per-conn,dsend
-  COORD x, y; key
+  TILE tile; key
   RESOURCE resource;
   UINT8 size;
 end
 
 PACKET_EDIT_TILE_SPECIAL=156;cs,handle-per-conn,dsend
-  COORD x, y; key
+  TILE tile; key
   SPECIAL special;
   BOOL remove;
   UINT8 size;
 end
 
 PACKET_EDIT_TILE_BASE=157;cs,handle-per-conn,dsend
-  COORD x, y; key
+  TILE tile; key
   BASE base_type_id;
   BOOL remove;
   UINT8 size;
 end
 
 PACKET_EDIT_STARTPOS=159;cs,handle-per-conn,dsend
-  COORD x, y; key
-  NATION nation; # -1 for erase
+  TILE tile; key
+  NATION nation; # NATION_NONE for erase
 end
 
 PACKET_EDIT_TILE=160;cs,handle-per-conn,handle-via-packet
-  UNIT id; key
+  TILE tile; key
   BV_SPECIAL specials;
   BV_BASES bases;
   RESOURCE resource;
@@ -1617,7 +1620,7 @@ end
 
 PACKET_EDIT_UNIT_CREATE=161;cs,handle-per-conn,dsend
   PLAYER owner;
-  COORD x,y;
+  TILE tile;
   UNIT_TYPE type;
   UINT8 count;
   SINT32 tag;
@@ -1625,7 +1628,7 @@ end
 
 PACKET_EDIT_UNIT_REMOVE=162;cs,handle-per-conn,dsend
   PLAYER owner;
-  COORD x,y;
+  TILE tile;
   UNIT_TYPE type;
   UINT8 count;
 end
@@ -1655,7 +1658,7 @@ end
 
 PACKET_EDIT_CITY_CREATE=165;cs,handle-per-conn,dsend
   PLAYER owner;
-  COORD x, y;
+  TILE tile;
   UINT8 size;
   SINT32 tag;
 end
@@ -1673,7 +1676,7 @@ PACKET_EDIT_CITY=167;cs,handle-per-conn,handle-via-packet
   UINT8 ppl_happy[5], ppl_content[5], ppl_unhappy[5], ppl_angry[5];
   UINT8 specialists_size;
   UINT8 specialists[SP_MAX:specialists_size];
-  UINT16 trade[NUM_TRADEROUTES];
+  UINT16 trade[NUM_TRADE_ROUTES];
   UINT16 food_stock, shield_stock;
   BOOL airlift;
   BOOL debug;
@@ -1736,7 +1739,7 @@ end
 
 PACKET_EDIT_PLAYER_VISION=171;cs,handle-per-conn,dsend
   PLAYER player;
-  COORD x, y;
+  TILE tile;
   BOOL known;
   UINT8 size;
 end
@@ -1761,7 +1764,7 @@ end
 
 /*************** Webclient specific packets ****************/
 PACKET_INFO_TEXT_REQ=186;cs,dsend
-  COORD x, y;
+  TILE loc;
   UNIT visible_unit; 
 end
 

@@ -137,8 +137,7 @@ function handle_tile_info(packet)
 
 
   if (tiles != null) {
-    var index = packet['x'] + packet['y'] * map['xsize'];
-    tiles[index] = $.extend(tiles[index], packet);
+    tiles[packet['tile']] = $.extend(tiles[packet['tile']], packet);
   }
 
 }
@@ -456,7 +455,7 @@ function handle_unit_packet_common(packet_unit)
      * by simply deleting the old one and creating a new one. */
     handle_unit_remove(packet_unit['id']);
   }
- 
+
   if (units[packet_unit['id']] == null) {
     packet_unit['anim_list'] = [];  
     units[packet_unit['id']] = packet_unit;

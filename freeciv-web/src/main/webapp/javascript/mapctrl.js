@@ -186,7 +186,7 @@ function popit()
   if (punit != null) punit_id = punit['id'];
 
   var packet = {"type" : packet_info_text_req, "visible_unit" : punit_id,
-                "x" : ptile['x'], "y" : ptile['y']};
+                "loc" : ptile['index']};
   send_request (JSON.stringify(packet));
 
 

@@ -1,6 +1,6 @@
 diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
---- freeciv/server/unithand.c	2012-05-16 21:12:05.000000000 +0300
-+++ freeciv/server/unithand.c	2012-05-16 21:46:36.000000000 +0300
+--- freeciv/server/unithand.c	2012-05-19 04:34:18.000000000 +0300
++++ freeciv/server/unithand.c	2012-05-19 04:39:37.000000000 +0300
 @@ -62,6 +62,8 @@
  #include "techtools.h"
  #include "unittools.h"
@@ -10,17 +10,10 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
  #include "unithand.h"
  
  static void city_add_or_build_error(struct player *pplayer,
-@@ -801,12 +803,17 @@
- }
- 
- /**************************************************************************
--...
-+  This has been rewritten to handle server-side gotos for the web client.
- **************************************************************************/
- void handle_unit_move(struct player *pplayer, int unit_id, int x, int y)
+@@ -775,6 +777,11 @@
  {
    struct unit *punit = player_find_unit_by_id(pplayer, unit_id);
-   struct tile *ptile = map_pos_to_tile(x, y);
+   struct tile *ptile = index_to_tile(tile);
 +  struct pf_parameter parameter;
 +  struct pf_map *pfm;
 +  struct pf_path *path;
@@ -28,25 +21,24 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
 +  int i = 0;
  
    if (NULL == punit) {
-     /* Shouldn't happen */
-@@ -826,16 +833,6 @@
+     /* Probably died or bribed. */
+@@ -790,15 +797,6 @@
      return;
    }
  
--  if (!is_tiles_adjacent(punit->tile, ptile)) {
+-  if (!is_tiles_adjacent(unit_tile(punit), ptile)) {
 -    /* Client is out of sync, ignore */
--    freelog(LOG_VERBOSE, "handle_unit_move()"
--	    " invalid %s (%d) move (%d,%d)",
--	    unit_rule_name(punit),
--	    unit_id,
--	    x, y);
+-    freelog(LOG_VERBOSE, "handle_unit_move() invalid %s (%d) move "
+-            "from (%d, %d) to (%d, %d).",
+-            unit_rule_name(punit), unit_id,
+-            TILE_XY(unit_tile(punit)), TILE_XY(ptile));
 -    return;
 -  }
 -
    if (!is_player_phase(unit_owner(punit), game.info.phase)) {
      /* Client is out of sync, ignore */
      freelog(LOG_VERBOSE, "handle_unit_move()"
-@@ -847,7 +844,59 @@
+@@ -810,7 +808,59 @@
      return;
    }
  
@@ -87,7 +79,7 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
 +
 +    }
 +
-+    punit->goto_tile = map_pos_to_tile(x, y);
++   punit->goto_tile = ptile;
 +
 +   if (!is_player_phase(unit_owner(punit), game.info.phase)
 +      || execute_orders(punit)) {
@@ -99,7 +91,7 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
 +    return ;
 +  } else {
 +    notify_player(pplayer, punit->tile, E_BAD_COMMAND,
-+                  FTC_SERVER_INFO, NULL,
++                  ftc_server, NULL,
 +                  _("The unit can't go there."));
 +    return ;
 +  }

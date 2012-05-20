@@ -1,7 +1,7 @@
 diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2012-05-19 01:03:32.000000000 +0300
-+++ freeciv/common/packets.def	2012-05-19 01:13:02.000000000 +0300
-@@ -584,8 +584,13 @@
+--- freeciv/common/packets.def	2012-05-19 06:04:29.000000000 +0300
++++ freeciv/common/packets.def	2012-05-19 22:49:53.000000000 +0300
+@@ -588,8 +588,13 @@
    STRING can_build_unit[MAX_LEN_MSG];
    STRING can_build_improvement[MAX_LEN_MSG];
    STRING improvements[MAX_LEN_MSG];
@@ -14,8 +14,8 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
 +  BOOL unhappy;
  end
  
- PACKET_CITY_SHORT_INFO=22; sc,lsend
-@@ -730,6 +735,7 @@
+ PACKET_CITY_SHORT_INFO = 22; sc, lsend, cancel(PACKET_CITY_INFO)
+@@ -733,6 +738,7 @@
    STRING inventions[A_LAST+1];
  
    CITY wonders[B_LAST]; diff
@@ -23,13 +23,13 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  end
  
  PACKET_PLAYER_PHASE_DONE=40;cs,dsend
-@@ -836,6 +842,20 @@
-   COORD x, y;
+@@ -839,6 +845,20 @@
+   TILE tile;
  end
  
 +PACKET_GOTO_PATH_REQ=184;cs,dsend
 +  UNIT unit_id;
-+  COORD x, y;
++  TILE goal;
 +end
 +
 +# used for showing GOTO path in web client.
@@ -37,14 +37,14 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
 +  UNIT unit_id;
 +  UINT16 length;
 +  DIRECTION dir[MAX_LEN_ROUTE:length];
-+  COORD dest_x, dest_y;
++  TILE dest;
 +  UINT32 turns;
 +end
 +
  PACKET_UNIT_BUILD_CITY=53;cs,dsend
    UNIT unit_id;
    STRING name[MAX_LEN_NAME];
-@@ -968,25 +988,25 @@
+@@ -971,25 +991,25 @@
  
  PACKET_DIPLOMACY_CREATE_CLAUSE_REQ=77;cs,dsend
    PLAYER counterpart, giver;
@@ -74,7 +74,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    UINT32 value;
  end
  
-@@ -1012,7 +1032,7 @@
+@@ -1015,7 +1035,7 @@
  end
  
  PACKET_REPORT_REQ=85;cs,handle-per-conn,dsend
@@ -83,7 +83,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  end
  
  /************** Connection packets **********************/
-@@ -1037,9 +1057,9 @@
+@@ -1040,9 +1060,9 @@
  
  # Information about the ping times of the connections.
  PACKET_CONN_PING_INFO=87; sc,lsend
@@ -95,3 +95,124 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  end
  
  PACKET_CONN_PING=88;sc
+diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
+--- freeciv/server/unithand.c	2012-05-19 12:37:13.000000000 +0300
++++ freeciv/server/unithand.c	2012-05-19 23:11:21.000000000 +0300
+@@ -801,6 +801,107 @@
+ }
+ 
+ /**************************************************************************
++  This function handles GOTO path requests from the client.
++**************************************************************************/
++void handle_goto_path_req(struct player *pplayer, int unit_id, int goal)
++{
++  struct unit *punit = player_find_unit_by_id(pplayer, unit_id);
++  struct tile *ptile = index_to_tile(goal);
++  struct pf_parameter parameter;
++  struct pf_map *pfm;
++  struct pf_path *path;
++  struct tile *old_tile;
++  int i = 0;
++  struct packet_goto_path p;
++
++  if (NULL == punit) {
++    /* Shouldn't happen */
++    freelog(LOG_ERROR, "handle_unit_move()"
++           " invalid unit %d",
++           unit_id);
++    return;
++  }
++
++  if (NULL == ptile) {
++    /* Shouldn't happen */
++    freelog(LOG_ERROR, "handle_unit_move()"
++           " invalid %s (%d) tile (%d,%d)",
++           unit_rule_name(punit),
++           unit_id,
++           TILE_XY(ptile));
++    return;
++  }
++
++  if (!is_player_phase(unit_owner(punit), game.info.phase)) {
++    /* Client is out of sync, ignore */
++    freelog(LOG_VERBOSE, "handle_unit_move()"
++           " invalid %s (%d) %s != phase %d",
++           unit_rule_name(punit),
++           unit_id,
++           nation_rule_name(nation_of_unit(punit)),
++           game.info.phase);
++    return;
++  }
++
++  p.unit_id = punit->id;
++  p.dest = tile_index(ptile);
++
++  /* Use path-finding to find a goto path. */
++  pft_fill_unit_parameter(&parameter, punit);
++  pfm = pf_map_new(&parameter);
++  path = pf_map_get_path(pfm, ptile);
++  pf_map_destroy(pfm);
++
++  if (path) {
++
++    p.length = path->length - 1;
++
++    old_tile = path->positions[0].tile;
++
++    /* Remove city spot reservations for AI settlers on city founding
++     * mission, before goto_tile reset. */
++    if (punit->ai.ai_role != AIUNIT_NONE) {
++      ai_unit_new_role(punit, AIUNIT_NONE, NULL);
++    }
++
++    punit->ai.control = FALSE;
++    punit->goto_tile = NULL;
++
++    free_unit_orders(punit);
++    /* If we waited on a tile, reset punit->done_moving */
++    punit->done_moving = (punit->moves_left <= 0);
++    punit->has_orders = TRUE;
++    punit->orders.length = path->length - 1;
++    punit->orders.index = 0;
++    punit->orders.repeat = FALSE;
++    punit->orders.vigilant = FALSE;
++    punit->orders.list
++      = fc_malloc(path->length * sizeof(*(punit->orders.list)));
++    int total_mc = 0;
++    for (i = 0; i < path->length - 1; i++) {
++      struct tile *new_tile = path->positions[i + 1].tile;
++      total_mc += path->positions[1].total_MC;
++      int dir;
++      if (same_pos(new_tile, old_tile)) {
++        dir = -1;
++      } else {
++        dir = get_direction_for_step(old_tile, new_tile);
++      }
++      old_tile = new_tile;
++      p.dir[i] = dir;
++
++    }
++    pf_path_destroy(path);
++    p.turns = total_mc / unit_move_rate(punit);
++    send_packet_goto_path(pplayer->current_conn, &p);
++
++  } else {
++    return ;
++  }
++
++}
++
++/**************************************************************************
+ ...
+ **************************************************************************/
+ void handle_unit_move(struct player *pplayer, int unit_id, int tile)
+@@ -895,6 +996,9 @@
+     pf_path_destroy(path);
+     return ;
+   } else {
++    notify_player(pplayer, punit->tile, E_BAD_COMMAND,
++                  ftc_server, NULL,
++                  _("The unit can't go there."));
+     return ;
+   }
+ 

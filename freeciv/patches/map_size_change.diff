@@ -1,14 +1,14 @@
 diff -Nurd -X.diff_ignore freeciv/common/map.h freeciv/common/map.h
---- freeciv/common/map.h	2012-05-16 20:56:43.000000000 +0300
-+++ freeciv/common/map.h	2012-05-16 21:58:39.000000000 +0300
-@@ -468,9 +468,9 @@
- #define MAP_MAX_HUTS             500
- 
- /* Size of the map in thousands of tiles */
+--- freeciv/common/map.h	2012-05-19 03:14:33.000000000 +0300
++++ freeciv/common/map.h	2012-05-19 03:26:24.000000000 +0300
+@@ -472,9 +472,9 @@
+ /* Size of the map in thousands of tiles.  Setting the maximal size over
+  * than 30 is dangerous, because some parts of the code (e.g. path finding)
+  * assume the tile index is of type (signed short int). */
 -#define MAP_DEFAULT_SIZE         4
 +#define MAP_DEFAULT_SIZE         3
  #define MAP_MIN_SIZE             1
--#define MAP_MAX_SIZE             29
+-#define MAP_MAX_SIZE             30
 +#define MAP_MAX_SIZE             15
  
  /* This defines the maximum linear size in _map_ coordinates.

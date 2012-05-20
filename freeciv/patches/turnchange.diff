@@ -1,18 +1,18 @@
 diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2012-05-16 22:05:42.000000000 +0300
-+++ freeciv/common/packets.def	2012-05-16 22:14:29.000000000 +0300
-@@ -228,14 +228,14 @@
+--- freeciv/common/packets.def	2012-05-19 04:48:08.000000000 +0300
++++ freeciv/common/packets.def	2012-05-19 05:36:36.000000000 +0300
+@@ -232,14 +232,14 @@
  type EDIT_TECH_MODE     = uint8(enum editor_tech_mode)
  
  # other typedefs
--type COORD  		= UINT8
+-type CITY_COORD         = UINT8
 -type XYSIZE  		= UINT16
 -type YEAR     		= SINT16
 -type HP     		= UINT8
 -type PERCENT  		= UINT8
-+type COORD  		= UINT32
++type CITY_COORD         = UINT32
 +type XYSIZE  		= UINT32
-+type YEAR     		= UINT32
++type YEAR     		= SINT32
 +type HP     		= UINT32
 +type PERCENT  		= UINT32
  type GOLD		= UINT32

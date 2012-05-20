@@ -171,7 +171,7 @@ function get_focus_unit_on_tile(ptile)
   
   for (var i = 0; i < funits.length; i++) {
     var punit = funits[i]; 
-    if (punit['x'] == ptile['x'] && punit['y'] == ptile['y']) {
+    if (punit['tile'] == ptile['index']) {
       return punit;
     } 
   } 
@@ -450,7 +450,7 @@ function find_a_focus_unit_tile_to_center_on()
   
   if (funit == null) return null;
   
-  return map_pos_to_tile(funit['x'], funit['y']);
+  return index_to_tile(funit['tile']);
 }
 
 /**************************************************************************
@@ -528,13 +528,13 @@ function do_map_click(ptile, qtype)
     if (current_focus.length > 0) {
       var punit = current_focus[0];
 
-      if (punit['x'] == ptile['x'] && punit['y'] == ptile['y']) {
+      if (punit['tile'] == ptile['index']) {
 	/* if unit moved by click and drag to the same tile, then deactivate goto. */
         deactivate_goto();
         return;
       }
 
-      var packet = {"type" : packet_unit_move, "unit_id" : punit['id'], "x": ptile['x'], "y": ptile['y'] };
+      var packet = {"type" : packet_unit_move, "unit_id" : punit['id'], "tile": ptile['index'] };
       send_request (JSON.stringify(packet));
     }
   
@@ -958,13 +958,13 @@ function key_unit_move(dir)
     var punit = current_focus[0];
     if (punit == null) return;
     
-    var ptile = map_pos_to_tile(punit['x'], punit['y']);
+    var ptile = index_to_tile(punit['tile']);
     if (ptile == null) return;
     
     var newtile = mapstep(ptile, dir);
     if (newtile == null) return;
         
-    var packet = {"type" : packet_unit_move, "unit_id" : punit['id'], "x": newtile['x'], "y": newtile['y'] };
+    var packet = {"type" : packet_unit_move, "unit_id" : punit['id'], "tile": newtile['index'] };
     send_request (JSON.stringify(packet));
         
   }
@@ -1004,9 +1004,9 @@ function left_click_center()
 ****************************************************************************/
 function preview_goto_path(unit_id, dst_x, dst_y)
 {
-  var punit = units[unit_id];
+  var start_tile = index_to_tile(units[unit_id]['index']);
   current_goto_path = [];
-  generate_preview_path(punit['x'], punit['y'], dst_x, dst_y);
+  generate_preview_path(start_tile['x'], start_tile['y'], dst_x, dst_y);
 }
 
 /**************************************************************************
@@ -1050,7 +1050,7 @@ function request_goto_path(unit_id, dst_x, dst_y)
     goto_request_map[dst_x + "," + dst_y] = true;
 
     var packet = {"type" : packet_goto_path_req, "unit_id" : unit_id,
-                  "x" : dst_x, "y" : dst_y};
+                  "goal" : map_pos_to_tile(dst_x, dst_y)['index']};
     send_request (JSON.stringify(packet));
   
   } else {
@@ -1083,8 +1083,9 @@ function check_request_goto_path()
 function show_goto_path(goto_packet)
 {
   var punit = units[goto_packet['unit_id']];
-  var t0 =  map_pos_to_tile(punit['x'], punit['y']);
+  var t0 =  index_to_tile(punit['tile']);
   var ptile = t0;
+  var goaltile = index_to_tile(goto_packet['dest']);
   current_goto_path = [];
   current_goto_path.push(ptile);
 
@@ -1096,9 +1097,9 @@ function show_goto_path(goto_packet)
 
   current_goto_turns = goto_packet['turns'];
 
-  goto_request_map[goto_packet['dest_x'] + "," + goto_packet['dest_y']] 
+  goto_request_map[goaltile['x'] + "," + goaltile['y']] 
 	  = current_goto_path;
-  goto_turns_request_map[goto_packet['dest_x'] + "," + goto_packet['dest_y']] 
+  goto_turns_request_map[goaltile['x'] + "," + goaltile['y']] 
 	  = current_goto_turns;
 }
 
@@ -1112,7 +1113,7 @@ function popup_caravan_dialog(punit, traderoute, wonder)
   $("<div id='caravan_dialog_" + punit['id'] + "'></div>").appendTo("div#game_page");
 
   var homecity = cities[punit['homecity']];
-  var ptile = map_pos_to_tile(punit['x'], punit['y']);
+  var ptile = index_to_tile(punit['index']);
   var pcity = tile_city(ptile);
 
 

@@ -1,12 +1,12 @@
 diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
---- freeciv/server/unithand.c	2012-05-16 21:47:42.000000000 +0300
-+++ freeciv/server/unithand.c	2012-05-16 21:49:54.000000000 +0300
-@@ -891,9 +891,6 @@
+--- freeciv/server/unithand.c	2012-05-19 04:40:15.000000000 +0300
++++ freeciv/server/unithand.c	2012-05-19 04:42:58.000000000 +0300
+@@ -855,9 +855,6 @@
      pf_path_destroy(path);
      return ;
    } else {
 -    notify_player(pplayer, punit->tile, E_BAD_COMMAND,
--                  FTC_SERVER_INFO, NULL,
+-                  ftc_server, NULL,
 -                  _("The unit can't go there."));
      return ;
    }

@@ -1,7 +1,7 @@
-diff -Nurd freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2012-05-16 18:35:05.000000000 +0300
-+++ freeciv/common/packets.def	2012-05-16 18:20:01.000000000 +0300
-@@ -800,6 +800,8 @@
+diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
+--- freeciv/common/packets.def	2012-05-19 04:26:10.000000000 +0300
++++ freeciv/common/packets.def	2012-05-19 04:28:44.000000000 +0300
+@@ -790,6 +790,8 @@
    BOOL has_orders;
    UINT16 orders_length, orders_index;
    BOOL orders_repeat, orders_vigilant;
@@ -10,10 +10,10 @@ diff -Nurd freeciv/common/packets.def freeciv/common/packets.def
    ORDERS orders[MAX_LEN_ROUTE:orders_length];
    DIRECTION orders_dirs[MAX_LEN_ROUTE:orders_length];
    ACTIVITY orders_activities[MAX_LEN_ROUTE:orders_length];
-diff -Nurd freeciv/server/unithand.c freeciv/server/unithand.c
---- freeciv/server/unithand.c	2012-05-16 18:35:06.000000000 +0300
-+++ freeciv/server/unithand.c	2012-05-16 18:20:01.000000000 +0300
-@@ -1742,9 +1742,9 @@
+diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
+--- freeciv/server/unithand.c	2012-05-19 04:26:10.000000000 +0300
++++ freeciv/server/unithand.c	2012-05-19 04:28:44.000000000 +0300
+@@ -1481,9 +1481,9 @@
     
    }
  
@@ -25,18 +25,18 @@ diff -Nurd freeciv/server/unithand.c freeciv/server/unithand.c
 +  sz_strlcpy(punit_link, unit_rule_name(punit));
  
    if (!can_cities_trade(pcity_homecity, pcity_dest)) {
-     notify_player(pplayer, pcity_dest->tile, E_BAD_COMMAND,
-diff -Nurd freeciv/server/unittools.c freeciv/server/unittools.c
---- freeciv/server/unittools.c	2012-05-16 18:35:06.000000000 +0300
-+++ freeciv/server/unittools.c	2012-05-16 18:20:01.000000000 +0300
-@@ -1892,6 +1892,15 @@
+     notify_player(pplayer, city_tile(pcity_dest), E_BAD_COMMAND, ftc_server,
+diff -Nurd -X.diff_ignore freeciv/server/unittools.c freeciv/server/unittools.c
+--- freeciv/server/unittools.c	2012-05-19 04:26:10.000000000 +0300
++++ freeciv/server/unittools.c	2012-05-19 04:29:07.000000000 +0300
+@@ -1884,6 +1884,15 @@
      packet->orders_repeat = packet->orders_vigilant = FALSE;
      /* No need to initialize array. */
    }
 +
 +  packet->caravan_trade = (unit_has_type_flag(punit, F_TRADE_ROUTE)
 +	   && !unit_has_orders(punit)
-+	   && unit_can_est_traderoute_here(punit));
++	   && unit_can_est_trade_route_here(punit));
 +
 +  packet->caravan_wonder = (unit_has_type_flag(punit, F_HELP_WONDER)
 +	   && !unit_has_orders(punit)

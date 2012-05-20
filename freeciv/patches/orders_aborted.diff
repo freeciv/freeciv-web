@@ -1,18 +1,16 @@
 diff -Nurd -X.diff_ignore freeciv/server/unittools.c freeciv/server/unittools.c
---- freeciv/server/unittools.c	2012-05-16 21:49:21.000000000 +0300
-+++ freeciv/server/unittools.c	2012-05-16 22:07:56.000000000 +0300
-@@ -3214,11 +3214,12 @@
+--- freeciv/server/unittools.c	2012-05-19 03:23:36.000000000 +0300
++++ freeciv/server/unittools.c	2012-05-19 03:28:57.000000000 +0300
+@@ -3220,10 +3220,11 @@
        /* Move unit */
        if (!(dst_tile = mapstep(punit->tile, order.dir))) {
- 	cancel_orders(punit, "  move order sent us to invalid location");
--	notify_player(pplayer, punit->tile, E_UNIT_ORDERS,
+         cancel_orders(punit, "  move order sent us to invalid location");
 +	/* FIXME: annoys webclient:
-+               notify_player(pplayer, punit->tile, E_UNIT_ORDERS,
-                       FTC_SERVER_INFO, NULL,
+         notify_player(pplayer, unit_tile(punit), E_UNIT_ORDERS, ftc_server,
                        _("Orders for %s aborted since they "
                          "give an invalid location."),
 -                      unit_link(punit));
-+                      unit_link(punit));*/
- 	return TRUE;
++                      unit_link(punit)); */
+         return TRUE;
        }
  

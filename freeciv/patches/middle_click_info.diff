@@ -1,14 +1,14 @@
 diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2012-05-16 22:03:59.000000000 +0300
-+++ freeciv/common/packets.def	2012-05-16 22:04:21.000000000 +0300
-@@ -1734,3 +1734,14 @@
+--- freeciv/common/packets.def	2012-05-19 04:03:43.000000000 +0300
++++ freeciv/common/packets.def	2012-05-19 04:04:53.000000000 +0300
+@@ -1739,3 +1739,14 @@
    SINT32 tag;
    SINT32 id;
  end
 +
 +/*************** Webclient specific packets ****************/
 +PACKET_INFO_TEXT_REQ=186;cs,dsend
-+  COORD x, y;
++  TILE loc;
 +  UNIT visible_unit; 
 +end
 +
@@ -17,8 +17,8 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
 +end
 +
 diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
---- freeciv/server/maphand.c	2012-05-16 20:56:43.000000000 +0300
-+++ freeciv/server/maphand.c	2012-05-16 22:04:29.000000000 +0300
+--- freeciv/server/maphand.c	2012-05-19 04:03:43.000000000 +0300
++++ freeciv/server/maphand.c	2012-05-19 04:13:12.000000000 +0300
 @@ -36,6 +36,7 @@
  #include "unit.h"
  #include "unitlist.h"
@@ -27,7 +27,7 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
  
  /* generator */
  #include "utilities.h"
-@@ -1753,3 +1754,403 @@
+@@ -1811,3 +1812,403 @@
      }
    }
  }
@@ -419,9 +419,9 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +/****************************************************************************
 +...
 +****************************************************************************/
-+void handle_info_text_req(struct player *pplayer, int x, int y, int visible_unit_id)
++void handle_info_text_req(struct player *pplayer, int loc, int visible_unit_id)
 +{
-+  struct tile *ptile = map_pos_to_tile(x, y);
++  struct tile *ptile = index_to_tile(loc);
 +  struct unit *punit = (visible_unit_id == 0) ? NULL : game_find_unit_by_number(visible_unit_id);
 +  const char *info_text = popup_info_text(ptile, pplayer, punit);
 +
@@ -432,13 +432,13 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +}
 +
 diff -Nurd -X.diff_ignore freeciv/server/maphand.h freeciv/server/maphand.h
---- freeciv/server/maphand.h	2012-05-16 20:56:43.000000000 +0300
-+++ freeciv/server/maphand.h	2012-05-16 22:04:29.000000000 +0300
-@@ -121,5 +121,7 @@
+--- freeciv/server/maphand.h	2012-05-19 04:03:43.000000000 +0300
++++ freeciv/server/maphand.h	2012-05-19 04:13:18.000000000 +0300
+@@ -122,5 +122,7 @@
  
  void create_base(struct tile *ptile, struct base_type *pbase,
                   struct player *pplayer);
-+void handle_info_text_req(struct player *pplayer, int x, int y, int visible_unit_id);
++void handle_info_text_req(struct player *pplayer, int loc, int visible_unit_id);
 +
  
  #endif  /* FC__MAPHAND_H */

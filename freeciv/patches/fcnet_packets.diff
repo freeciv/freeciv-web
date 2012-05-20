@@ -1,7 +1,7 @@
 diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2012-05-19 06:04:29.000000000 +0300
-+++ freeciv/common/packets.def	2012-05-19 22:49:53.000000000 +0300
-@@ -588,8 +588,13 @@
+--- freeciv/common/packets.def	2012-05-20 05:58:51.000000000 +0300
++++ freeciv/common/packets.def	2012-05-20 05:55:42.000000000 +0300
+@@ -595,8 +595,13 @@
    STRING can_build_unit[MAX_LEN_MSG];
    STRING can_build_improvement[MAX_LEN_MSG];
    STRING improvements[MAX_LEN_MSG];
@@ -14,8 +14,8 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
 +  BOOL unhappy;
  end
  
- PACKET_CITY_SHORT_INFO = 22; sc, lsend, cancel(PACKET_CITY_INFO)
-@@ -733,6 +738,7 @@
+ PACKET_CITY_SHORT_INFO = 22; sc, lsend, is-game-info, cancel(PACKET_CITY_INFO)
+@@ -738,6 +743,7 @@
    STRING inventions[A_LAST+1];
  
    CITY wonders[B_LAST]; diff
@@ -23,7 +23,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  end
  
  PACKET_PLAYER_PHASE_DONE=40;cs,dsend
-@@ -839,6 +845,20 @@
+@@ -844,6 +850,20 @@
    TILE tile;
  end
  
@@ -44,7 +44,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  PACKET_UNIT_BUILD_CITY=53;cs,dsend
    UNIT unit_id;
    STRING name[MAX_LEN_NAME];
-@@ -971,25 +991,25 @@
+@@ -976,25 +996,25 @@
  
  PACKET_DIPLOMACY_CREATE_CLAUSE_REQ=77;cs,dsend
    PLAYER counterpart, giver;
@@ -74,7 +74,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    UINT32 value;
  end
  
-@@ -1015,7 +1035,7 @@
+@@ -1020,7 +1040,7 @@
  end
  
  PACKET_REPORT_REQ=85;cs,handle-per-conn,dsend
@@ -83,7 +83,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  end
  
  /************** Connection packets **********************/
-@@ -1040,9 +1060,9 @@
+@@ -1045,9 +1065,9 @@
  
  # Information about the ping times of the connections.
  PACKET_CONN_PING_INFO=87; sc,lsend
@@ -96,9 +96,9 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  
  PACKET_CONN_PING=88;sc
 diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
---- freeciv/server/unithand.c	2012-05-19 12:37:13.000000000 +0300
-+++ freeciv/server/unithand.c	2012-05-19 23:11:21.000000000 +0300
-@@ -801,6 +801,107 @@
+--- freeciv/server/unithand.c	2012-05-20 05:58:51.000000000 +0300
++++ freeciv/server/unithand.c	2012-05-20 08:18:19.000000000 +0300
+@@ -791,6 +791,107 @@
  }
  
  /**************************************************************************
@@ -117,30 +117,30 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
 +
 +  if (NULL == punit) {
 +    /* Shouldn't happen */
-+    freelog(LOG_ERROR, "handle_unit_move()"
-+           " invalid unit %d",
-+           unit_id);
++    log_error("handle_unit_move()"
++              " invalid unit %d",
++              unit_id);
 +    return;
 +  }
 +
 +  if (NULL == ptile) {
 +    /* Shouldn't happen */
-+    freelog(LOG_ERROR, "handle_unit_move()"
-+           " invalid %s (%d) tile (%d,%d)",
-+           unit_rule_name(punit),
-+           unit_id,
-+           TILE_XY(ptile));
++    log_error(LOG_ERROR, "handle_unit_move()"
++              " invalid %s (%d) tile (%d,%d)",
++              unit_rule_name(punit),
++              unit_id,
++              TILE_XY(ptile));
 +    return;
 +  }
 +
 +  if (!is_player_phase(unit_owner(punit), game.info.phase)) {
 +    /* Client is out of sync, ignore */
-+    freelog(LOG_VERBOSE, "handle_unit_move()"
-+           " invalid %s (%d) %s != phase %d",
-+           unit_rule_name(punit),
-+           unit_id,
-+           nation_rule_name(nation_of_unit(punit)),
-+           game.info.phase);
++    log_verbose("handle_unit_move()"
++                " invalid %s (%d) %s != phase %d",
++                unit_rule_name(punit),
++                unit_id,
++                nation_rule_name(nation_of_unit(punit)),
++                game.info.phase);
 +    return;
 +  }
 +
@@ -206,7 +206,7 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
  ...
  **************************************************************************/
  void handle_unit_move(struct player *pplayer, int unit_id, int tile)
-@@ -895,6 +996,9 @@
+@@ -888,6 +989,9 @@
      pf_path_destroy(path);
      return ;
    } else {

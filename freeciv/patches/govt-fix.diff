@@ -1,23 +1,23 @@
 diff -Nurd -X.diff_ignore freeciv/client/packhand.c freeciv/client/packhand.c
---- freeciv/client/packhand.c	2012-05-16 21:17:44.000000000 +0300
-+++ freeciv/client/packhand.c	2012-05-16 21:53:58.000000000 +0300
-@@ -2750,10 +2750,10 @@
+--- freeciv/client/packhand.c	2012-05-20 04:29:43.000000000 +0300
++++ freeciv/client/packhand.c	2012-05-20 04:38:00.000000000 +0300
+@@ -2723,10 +2723,12 @@
  
    gov->item_number = p->id;
  
--  for (j = 0; j < p->reqs_count; j++) {
-+  /*for (j = 0; j < p->reqs_count; j++) {
++#if 0
+   for (j = 0; j < p->reqs_count; j++) {
      requirement_vector_append(&gov->reqs, &p->reqs[j]);
    }
--  assert(gov->reqs.size == p->reqs_count);
-+  assert(gov->reqs.size == p->reqs_count);*/
+   fc_assert(gov->reqs.size == p->reqs_count);
++#endif
  
    gov->num_ruler_titles    = p->num_ruler_titles;
      
 diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2012-05-16 21:20:41.000000000 +0300
-+++ freeciv/common/packets.def	2012-05-16 21:53:52.000000000 +0300
-@@ -1209,8 +1209,8 @@
+--- freeciv/common/packets.def	2012-05-20 04:31:54.000000000 +0300
++++ freeciv/common/packets.def	2012-05-20 04:35:43.000000000 +0300
+@@ -1217,8 +1217,8 @@
  PACKET_RULESET_GOVERNMENT=100;sc,lsend
    GOVERNMENT id;
  
@@ -29,9 +29,9 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    UINT8 num_ruler_titles;
         
 diff -Nurd -X.diff_ignore freeciv/server/ruleset.c freeciv/server/ruleset.c
---- freeciv/server/ruleset.c	2012-05-16 20:56:43.000000000 +0300
-+++ freeciv/server/ruleset.c	2012-05-16 21:53:52.000000000 +0300
-@@ -3607,10 +3607,10 @@
+--- freeciv/server/ruleset.c	2012-05-20 04:06:53.000000000 +0300
++++ freeciv/server/ruleset.c	2012-05-20 04:35:43.000000000 +0300
+@@ -3778,10 +3778,10 @@
      gov.id = government_number(g);
  
      j = 0;

@@ -1,8 +1,8 @@
 diff -Nurd -X.diff_ignore freeciv/server/settlers.c freeciv/server/settlers.c
---- freeciv/server/settlers.c	2012-05-16 20:56:43.000000000 +0300
-+++ freeciv/server/settlers.c	2012-05-16 22:35:16.000000000 +0300
-@@ -99,7 +99,7 @@
-             TILE_XY(ptile));
+--- freeciv/server/settlers.c	2012-05-20 05:52:38.000000000 +0300
++++ freeciv/server/settlers.c	2012-05-20 05:54:31.000000000 +0300
+@@ -97,7 +97,7 @@
+               player_name(pplayer), TILE_XY(ptile));
      return FALSE;
    }
 -  handle_unit_build_city(pplayer, punit->id,
@@ -11,9 +11,9 @@ diff -Nurd -X.diff_ignore freeciv/server/settlers.c freeciv/server/settlers.c
    pcity = tile_city(ptile);
    if (!pcity) {
 diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
---- freeciv/server/unithand.c	2012-05-16 22:17:27.000000000 +0300
-+++ freeciv/server/unithand.c	2012-05-16 22:35:16.000000000 +0300
-@@ -723,13 +723,15 @@
+--- freeciv/server/unithand.c	2012-05-20 05:52:38.000000000 +0300
++++ freeciv/server/unithand.c	2012-05-20 05:54:52.000000000 +0300
+@@ -682,13 +682,15 @@
    if (res == AB_BUILD_OK) {
      /* Unescape city name, which has been escaped in Javascript. */
      char* unescaped_text = g_uri_unescape_string(name, NULL);
@@ -36,7 +36,7 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
    } else if (res == AB_ADD_OK) {
      city_add_unit(pplayer, punit);
    } else {
-@@ -738,6 +740,35 @@
+@@ -697,6 +699,35 @@
  }
  
  /**************************************************************************
@@ -49,9 +49,9 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
 +
 +  if (NULL == punit) {
 +    /* Shouldn't happen */
-+    freelog(LOG_ERROR, "handle_unit_build_city()"
-+	    " invalid unit %d",
-+	    unit_id);
++    log_error("handle_unit_build_city()"
++	      " invalid unit %d",
++	      unit_id);
 +    return;
 +  }
 +
@@ -73,24 +73,25 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
  **************************************************************************/
  void handle_unit_change_activity(struct player *pplayer, int unit_id,
 diff -Nurd -X.diff_ignore freeciv/server/unithand.h freeciv/server/unithand.h
---- freeciv/server/unithand.h	2012-05-16 20:56:43.000000000 +0300
-+++ freeciv/server/unithand.h	2012-05-16 22:35:16.000000000 +0300
-@@ -23,5 +23,6 @@
+--- freeciv/server/unithand.h	2012-05-20 05:52:38.000000000 +0300
++++ freeciv/server/unithand.h	2012-05-20 05:54:31.000000000 +0300
+@@ -23,6 +23,7 @@
  
  bool unit_move_handling(struct unit *punit, struct tile *pdesttile,
                          bool igzoc, bool move_diplomat_city);
 +void ai_unit_build_city(struct player *pplayer, int unit_id, char *name);
  
- #endif  /* FC__UNITHAND_H */
+ void city_add_or_build_error(struct player *pplayer, struct unit *punit,
+                              enum add_build_city_result res);
 diff -Nurd -X.diff_ignore freeciv/server/unittools.c freeciv/server/unittools.c
---- freeciv/server/unittools.c	2012-05-16 22:09:51.000000000 +0300
-+++ freeciv/server/unittools.c	2012-05-16 22:35:16.000000000 +0300
-@@ -3171,7 +3171,7 @@
+--- freeciv/server/unittools.c	2012-05-20 05:52:38.000000000 +0300
++++ freeciv/server/unittools.c	2012-05-20 05:54:31.000000000 +0300
+@@ -3175,7 +3175,7 @@
        }
        break;
      case ORDER_BUILD_CITY:
 -      handle_unit_build_city(pplayer, unitid,
 +      ai_unit_build_city(pplayer, unitid,
  			     city_name_suggestion(pplayer, punit->tile));
-       freelog(LOG_DEBUG, "  building city");
+       log_debug("  building city");
        if (player_find_unit_by_id(pplayer, unitid)) {

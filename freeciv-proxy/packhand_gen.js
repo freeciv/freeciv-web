@@ -221,11 +221,11 @@ function client_handle_packet(p)
       break;
 
     case  112:
-      handle_options_settable_control(p[i]);
+      handle_server_setting_control(p[i]);
       break;
 
     case  113:
-      handle_options_settable(p[i]);
+      handle_server_setting(p[i]);
       break;
 
     case  115:

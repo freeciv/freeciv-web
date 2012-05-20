@@ -544,7 +544,7 @@ class Variant:
         self.want_post_send=packet.want_post_send
         self.type=packet.type
         self.delta=packet.delta
-        self.is_action=packet.is_action
+        self.is_info=packet.is_info
         self.cancel=packet.cancel
         
         self.poscaps=poscaps
@@ -585,8 +585,6 @@ class Variant:
         if not self.no_packet:
             self.extra_send_args=', const struct %(packet_name)s *packet'%self.__dict__+self.extra_send_args
             self.extra_send_args2=', packet'+self.extra_send_args2
-        if not self.is_action:
-            self.extra_force_arg=', bool force_send'
         self.receive_prototype='static struct %(packet_name)s *receive_%(name)s(struct connection *pc, enum packet_type type)'%self.__dict__
         self.send_prototype='static int send_%(name)s(struct connection *pc%(extra_force_arg)s%(extra_send_args)s)'%self.__dict__
 
@@ -744,13 +742,9 @@ static char *stats_%(name)s_names[] = {%(names)s};
         if not self.no_packet:
             if self.delta:
                 body=self.get_delta_send_body()
-                if self.is_action:
-                    force_send_var="\n  bool force_send = TRUE;"
-                else:
-                    force_send_var=""
                 delta_header='''  %(name)s_fields fields;
   struct %(packet_name)s *old, *clone;
-  bool differ, old_from_hash;%(force_send_var)s
+  bool differ, old_from_hash;
   struct hash_table **hash = &pc->phs.sent[%(type)s];
   int different = 0;
 '''
@@ -793,7 +787,6 @@ static char *stats_%(name)s_names[] = {%(names)s};
   if (!old) {
     old = fc_malloc(sizeof(*old));
     memset(old, 0, sizeof(*old));
-    force_send = TRUE;
   }
 
 '''
@@ -809,12 +802,17 @@ static char *stats_%(name)s_names[] = {%(names)s};
             s='    stats_%(name)s_discarded++;\n'
         else:
             s=""
-        body=body+'''  if (different == 0 && !force_send) {
+
+        if self.is_info != "no":
+            body=body+'''
+  if (different == 0) {
 %(fl)s%(s)s<pre2>    return 0;
   }
-
-  DIO_BV_PUT(&dout, fields);
 '''%self.get_dict(vars())
+
+        body=body+'''
+  DIO_BV_PUT(&dout, \"fields\", fields);
+'''
 
         for field in self.key_fields:
             body=body+field.get_put()+"\n"
@@ -968,8 +966,16 @@ class Packet:
             arr.remove("cs")
         assert len(self.dirs)>0,repr(self.name)+repr(self.dirs)
 
-        self.is_action="is-info" not in arr
-        if not self.is_action: arr.remove("is-info")
+        # "no" means normal packet
+        # "yes" means is-info packet
+        # "game" means is-game-info packet
+        self.is_info="no"
+        if "is-info" in arr:
+            self.is_info="yes"
+            arr.remove("is-info")
+        if "is-game-info" in arr:
+            self.is_info="game"
+            arr.remove("is-game-info")
         
         self.want_pre_send="pre-send" in arr
         if self.want_pre_send: arr.remove("pre-send")
@@ -1055,14 +1061,11 @@ class Packet:
         self.receive_prototype='struct %(name)s *receive_%(name)s(struct connection *pc, enum packet_type type)'%self.__dict__
         self.force_arg=""
         self.force_value=""
-        if not self.is_action:
-            self.force_arg=", bool force_send"
-            self.force_value=", force_send"
-        self.send_prototype='int send_%(name)s(struct connection *pc%(force_arg)s%(extra_send_args)s)'%self.__dict__
+        self.send_prototype='int send_%(name)s(struct connection *pc%(extra_send_args)s)'%self.__dict__
         if self.want_lsend:
-            self.lsend_prototype='void lsend_%(name)s(struct conn_list *dest%(force_arg)s%(extra_send_args)s)'%self.__dict__
+            self.lsend_prototype='void lsend_%(name)s(struct conn_list *dest%(extra_send_args)s)'%self.__dict__
         if self.want_dsend:
-            self.dsend_prototype='int dsend_%(name)s(struct connection *pc%(force_arg)s%(extra_send_args3)s)'%self.__dict__
+            self.dsend_prototype='int dsend_%(name)s(struct connection *pc%(extra_send_args3)s)'%self.__dict__
             if self.want_lsend:
                 self.dlsend_prototype='void dlsend_%(name)s(struct conn_list *dest%(extra_send_args3)s)'%self.__dict__
 
@@ -1236,8 +1239,6 @@ class Packet:
   switch(pc->phs.variant[%(type)s]) {
 '''%self.get_dict(vars())
         args="pc"
-        if not self.is_action:
-            args=args+', force_send'
         if not self.no_packet:
             args=args+', packet'
         for v in self.variants:
@@ -1372,6 +1373,29 @@ def get_get_packet_name(packets):
         body=body+'  case %(type)s:\n    return "%(type)s";\n\n'%p.__dict__
     extro='''  default:
     return "unknown";
+  }
+}
+
+'''
+    return intro+body+extro
+
+# Returns a code fragement which is the implementation of the
+# packet_has_game_info_flag() function.
+def get_packet_has_game_info_flag(packets):
+    intro='''bool packet_has_game_info_flag(enum packet_type type)
+{
+  switch (type) {
+
+'''
+    body=""
+    for p in packets:
+        body=body+'  case %(type)s:\n'%p.__dict__
+        if p.is_info != "game":
+            body=body+'    return FALSE;\n\n'
+        else:
+            body=body+'    return TRUE;\n\n'
+    extro='''  default:
+    return FALSE;
   }
 }
 

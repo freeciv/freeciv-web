@@ -261,7 +261,6 @@ function handle_game_info(packet)
 /* 30% complete */
 function handle_start_phase(packet)
 {
-
   update_client_state(C_S_RUNNING);
 
   set_phase_start();
@@ -706,16 +705,6 @@ function handle_game_load(packet)
   /* TODO: implement*/
 }
 
-function handle_options_settable_control(packet) 
-{
-  /* TODO: implement*/
-}
-
-function handle_options_settable(packet) 
-{
-  /* TODO: implement*/
-}
-
  /* Done */
 function handle_ruleset_effect(packet) 
 {
@@ -763,3 +752,12 @@ function handle_goto_path(packet)
   show_goto_path(packet);
 }
 
+function handle_server_setting(packet)
+{
+  /* TODO: implement */
+}
+
+function handle_server_setting_control(packet)
+{
+  /* TODO: implement */
+}

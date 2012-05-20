@@ -1,7 +1,7 @@
 diff -Nurd -X.diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
---- freeciv/server/citytools.c	2012-05-19 04:30:22.000000000 +0300
-+++ freeciv/server/citytools.c	2012-05-19 23:14:55.000000000 +0300
-@@ -1792,6 +1792,11 @@
+--- freeciv/server/citytools.c	2012-05-20 04:29:29.000000000 +0300
++++ freeciv/server/citytools.c	2012-05-20 08:27:07.000000000 +0300
+@@ -1778,6 +1778,11 @@
    char impr_buf[MAX_NUM_ITEMS + 1];
    char can_build_impr_buf[MAX_NUM_ITEMS + 1];
    char can_build_unit_buf[MAX_NUM_ITEMS + 1];
@@ -13,7 +13,7 @@ diff -Nurd -X.diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
  
    packet->id=pcity->id;
    packet->owner = player_number(city_owner(pcity));
-@@ -1884,6 +1889,7 @@
+@@ -1872,6 +1877,7 @@
    packet->did_buy = pcity->did_buy;
    packet->did_sell = pcity->did_sell;
    packet->was_happy = pcity->was_happy;
@@ -21,13 +21,13 @@ diff -Nurd -X.diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
  
    packet->walls = city_got_citywalls(pcity);
  
-@@ -1910,7 +1916,28 @@
+@@ -1898,7 +1904,28 @@
    } improvement_iterate_end;
    impr_buf[improvement_count()] = '\0';
    sz_strlcpy(packet->improvements, impr_buf);
 -  
 +
-+  city_tile_iterate_cxy(pcenter, ptile, x, y) {
++  city_tile_iterate_cxy(city_map_radius_sq_get(pcity), pcenter, ptile, x, y) {
 +    char f[2];
 +    char s[2];
 +    char t[2];
@@ -52,9 +52,9 @@ diff -Nurd -X.diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
  
  /**************************************************************************
 diff -Nurd -X.diff_ignore freeciv/server/plrhand.c freeciv/server/plrhand.c
---- freeciv/server/plrhand.c	2012-05-19 05:38:31.000000000 +0300
-+++ freeciv/server/plrhand.c	2012-05-19 23:14:55.000000000 +0300
-@@ -812,6 +812,8 @@
+--- freeciv/server/plrhand.c	2012-05-20 04:54:47.000000000 +0300
++++ freeciv/server/plrhand.c	2012-05-20 08:19:47.000000000 +0300
+@@ -807,6 +807,8 @@
      packet->score = 0;
    }
  
@@ -64,9 +64,9 @@ diff -Nurd -X.diff_ignore freeciv/server/plrhand.c freeciv/server/plrhand.c
      packet->gold = plr->economic.gold;
      pgov = government_of_player(plr);
 diff -Nurd -X.diff_ignore freeciv/server/ruleset.c freeciv/server/ruleset.c
---- freeciv/server/ruleset.c	2012-05-19 06:04:29.000000000 +0300
-+++ freeciv/server/ruleset.c	2012-05-19 23:29:36.000000000 +0300
-@@ -2516,12 +2516,12 @@
+--- freeciv/server/ruleset.c	2012-05-20 05:07:47.000000000 +0300
++++ freeciv/server/ruleset.c	2012-05-20 08:24:49.000000000 +0300
+@@ -2540,12 +2540,12 @@
  **************************************************************************/
  static void load_ruleset_nations(struct section_file *file)
  {
@@ -82,7 +82,7 @@ diff -Nurd -X.diff_ignore freeciv/server/ruleset.c freeciv/server/ruleset.c
    const char *name;
    int barb_land_count = 0;
    int barb_sea_count = 0;
-@@ -2578,67 +2578,56 @@
+@@ -2609,65 +2609,54 @@
      pl->conflicts_with[j] = NO_NATION_SELECTED; /* extra at end of list */
      free(conflicts);
  
@@ -90,8 +90,8 @@ diff -Nurd -X.diff_ignore freeciv/server/ruleset.c freeciv/server/ruleset.c
 -
 -    leaders = secfile_lookup_str_vec(file, &dim, "%s.leader", sec_name);
 -    if (dim > MAX_NUM_LEADERS) {
--      freelog(LOG_ERROR, "Nation %s: Too many leaders; using %d of %d",
--              nation_rule_name(pl), MAX_NUM_LEADERS, (int) dim);
+-      log_error("Nation %s: Too many leaders; using %d of %d",
+-                nation_rule_name(pl), MAX_NUM_LEADERS, (int) dim);
 -      dim = MAX_NUM_LEADERS;
 -    } else if (dim < 1) {
 -      ruleset_error(LOG_FATAL,
@@ -154,11 +154,9 @@ diff -Nurd -X.diff_ignore freeciv/server/ruleset.c freeciv/server/ruleset.c
 -      } else if (0 == mystrcasecmp(leaders[j], "Female")) {
 -        pl->leaders[j].is_male = FALSE;
 -      } else {
--        freelog(LOG_ERROR,
--		"Nation %s, leader %s: sex must be either Male or Female; "
--		"assuming Male",
--		nation_rule_name(pl),
--		pl->leaders[j].name);
+-        log_error("Nation %s, leader %s: sex must be either Male or Female; "
+-                  "assuming Male",
+-                  nation_rule_name(pl), pl->leaders[j].name);
 -	pl->leaders[j].is_male = TRUE;
 +      if (check_name(name)) {
 +        /* The ruleset contains a name that is too long. This shouldn't
@@ -168,7 +166,7 @@ diff -Nurd -X.diff_ignore freeciv/server/ruleset.c freeciv/server/ruleset.c
 +                      "is too long; shortening it to \"%s\".",
 +                      nation_rule_name(pnation), name, temp_name);*/
 +        name = temp_name;
-+      }
+       }
 +
 +      sex = secfile_lookup_str(file, "%s.leaders%d.sex", sec_name, j);
 +      if (NULL == sex) {
@@ -180,26 +178,24 @@ diff -Nurd -X.diff_ignore freeciv/server/ruleset.c freeciv/server/ruleset.c
 +        /*ruleset_error(LOG_FATAL, "Nation %s: leader \"%s\" has unsupported "
 +                      "sex variant \"%s\".",
 +                      nation_rule_name(pnation), name, sex);*/
-       }
++      }
 +
 +      pl->leaders[j].name = mystrdup(name);
 +      if (check_name(name)) {
 +        pl->leaders[j].name[MAX_LEN_NAME - 1] = '\0';
 +      }
 +      pl->leaders[j].is_male = is_male;
-+
-+      //(void) nation_leader_new(pnation, name, is_male);
      }
 -    free(leaders);
      
      pl->is_available = secfile_lookup_bool_default(file, TRUE,
                                                     "%s.is_available",
 diff -Nurd -X.diff_ignore freeciv/server/sernet.c freeciv/server/sernet.c
---- freeciv/server/sernet.c	2012-05-19 12:34:35.000000000 +0300
-+++ freeciv/server/sernet.c	2012-05-19 23:14:55.000000000 +0300
-@@ -1190,7 +1190,7 @@
+--- freeciv/server/sernet.c	2012-05-20 05:51:42.000000000 +0300
++++ freeciv/server/sernet.c	2012-05-20 08:19:47.000000000 +0300
+@@ -1185,7 +1185,7 @@
      }
-     assert(i < ARRAY_SIZE(packet.conn_id));
+     fc_assert(i < ARRAY_SIZE(packet.conn_id));
      packet.conn_id[i] = pconn->id;
 -    packet.ping_time[i] = pconn->ping_time;
 +    packet.ping_time[i] = pconn->ping_time * 1000;
@@ -207,9 +203,9 @@ diff -Nurd -X.diff_ignore freeciv/server/sernet.c freeciv/server/sernet.c
    } conn_list_iterate_end;
    packet.connections = i;
 diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
---- freeciv/server/unithand.c	2012-05-19 23:12:09.000000000 +0300
-+++ freeciv/server/unithand.c	2012-05-19 23:16:53.000000000 +0300
-@@ -699,6 +699,7 @@
+--- freeciv/server/unithand.c	2012-05-20 08:19:10.000000000 +0300
++++ freeciv/server/unithand.c	2012-05-20 08:19:47.000000000 +0300
+@@ -689,6 +689,7 @@
  		       "UTF-8",
  		       (char*)result_buf, sizeof(result_buf));
        city_build(pplayer, punit, result_buf);

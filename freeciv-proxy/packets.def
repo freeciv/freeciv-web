@@ -62,6 +62,9 @@ Syntax:
               the client outside of the reception of that packet, or for
               any packet with side effects at the client.
 
+     is-game-info: same as is-info, but the state is reset every time a
+                   connection changes of player target.
+
      cancel(PACKET_number): Cancel a packet with the same key (must be the
      same key type at the start of the packet), useful for is-info packets.
 
@@ -196,9 +199,10 @@ type SSET_CLASS         = uint8(enum sset_class)
 type REQ_TYPE	        = uint8(enum universals_n)
 type REQ_RANGE		= uint8(enum req_range)
 type EFFECT_TYPE	= uint8(enum effect_type)
-type BASE               = uint8(Base_type_id)
+type BASE               = sint8(Base_type_id)
 type BASE_GUI           = uint8(enum base_gui_type)
 type GUI_TYPE           = uint8(enum gui_type)
+type AIRLIFTING_STYLE   = uint8(enum airlifting_style)
 
 type BV_IMPRS		= bitvector(bv_imprs)
 type BV_UCLASS_FLAGS    = bitvector(bv_unit_class_flags)
@@ -349,10 +353,11 @@ end
 
 /************** Info packets **********************/
 
-# Use of is-info on this packet is dangerous but speeds things up greatly.
-# Packet spam from excess sending of tiles has slowed the client greatly in
-# the past.  However see the comment on is_info at the top about the dangers.
-PACKET_TILE_INFO=14; sc,lsend,is-info
+# Use of is-game-info on this packet is dangerous but speeds things up
+# greatly. Packet spam from excess sending of tiles has slowed the client
+# greatly in the past.  However see the comment on is-game-info at the top
+# about the dangers.
+PACKET_TILE_INFO=14; sc,lsend,is-game-info
   TILE tile; key
 
   CONTINENT continent;
@@ -457,6 +462,7 @@ PACKET_GAME_INFO=15; sc
   BOOL vision_reveal_tiles;
   UINT8 min_city_center_output[O_LAST];
   UINT8 min_dist_bw_cities;
+  UINT8 init_city_radius_sq;
   UINT8 init_vis_radius_sq;
   BOOL pillage_select;
   UINT8 nuke_contamination;
@@ -490,6 +496,7 @@ PACKET_GAME_INFO=15; sc
   UINT16 base_incite_cost;
   UINT8 base_tech_cost;
   UINT16 ransom_gold;
+  AIRLIFTING_STYLE airlifting_style;
 
   UINT8 save_nturns;
   UINT8 save_compress_level;
@@ -538,12 +545,13 @@ PACKET_CITY_REMOVE = 20; sc, dsend, lsend, cancel(PACKET_CITY_INFO), cancel(PACK
   CITY city_id;
 end
 
-PACKET_CITY_INFO = 21; sc, lsend, cancel(PACKET_CITY_SHORT_INFO)
+PACKET_CITY_INFO = 21; sc, lsend, is-game-info, cancel(PACKET_CITY_SHORT_INFO)
   CITY id; key
   TILE tile;
 
   PLAYER owner;
   UINT8 size;
+  UINT8 city_radius_sq;
 
   UINT8 ppl_happy[5], ppl_content[5], ppl_unhappy[5], ppl_angry[5];
 
@@ -562,14 +570,13 @@ PACKET_CITY_INFO = 21; sc, lsend, cancel(PACKET_CITY_SHORT_INFO)
   UINT8 trade_value[NUM_TRADE_ROUTES];
 
   UINT16 pollution;
-  UINT16 illness;
+  UINT16 illness_trade;
 
   UINT8 production_kind;
   UINT8 production_value;
 
   TURN turn_founded;
   TURN turn_last_built;
-  FLOAT migration_score;
   UINT8 changed_from_kind;
   UINT8 changed_from_value;
   UINT16 before_change_shields;
@@ -597,14 +604,12 @@ PACKET_CITY_INFO = 21; sc, lsend, cancel(PACKET_CITY_SHORT_INFO)
   BOOL unhappy;
 end
 
-PACKET_CITY_SHORT_INFO = 22; sc, lsend, cancel(PACKET_CITY_INFO)
+PACKET_CITY_SHORT_INFO = 22; sc, lsend, is-game-info, cancel(PACKET_CITY_INFO)
   CITY id; key
   TILE tile;
 
   PLAYER owner;
   UINT8 size;
-
-  UINT16 tile_trade;
 
   BOOL occupied;
   BOOL walls;
@@ -777,7 +782,7 @@ PACKET_UNIT_REMOVE=48; sc, dsend, lsend, cancel(PACKET_UNIT_INFO), cancel(PACKET
   UNIT unit_id;
 end
 
-PACKET_UNIT_INFO = 49; sc, lsend, is-info, cancel(PACKET_UNIT_SHORT_INFO)
+PACKET_UNIT_INFO = 49; sc, lsend, is-game-info, cancel(PACKET_UNIT_SHORT_INFO)
   UNIT id; key
   PLAYER owner;
   TILE tile;
@@ -811,7 +816,7 @@ PACKET_UNIT_INFO = 49; sc, lsend, is-info, cancel(PACKET_UNIT_SHORT_INFO)
   BASE orders_bases[MAX_LEN_ROUTE:orders_length];
 end
 
-PACKET_UNIT_SHORT_INFO = 50; sc, lsend, is-info, cancel(PACKET_UNIT_INFO)
+PACKET_UNIT_SHORT_INFO = 50; sc, lsend, is-game-info, cancel(PACKET_UNIT_INFO)
   UNIT id; key
   PLAYER owner;
   TILE tile;
@@ -1440,31 +1445,25 @@ PACKET_RULESET_CHOICES=115;sc
   STRING rulesets[MAX_NUM_RULESETS:ruleset_count][MAX_RULESET_NAME_LENGTH];
 end
 
-PACKET_GAME_LOAD=111;sc,handle-via-packet,lsend
+PACKET_GAME_LOAD = 111; sc, lsend, dsend
   BOOL load_successful;
-  PLAYER nplayers;
   STRING load_filename[MAX_LEN_PACKET];
-  STRING name[MAX_NUM_PLAYERS:nplayers][MAX_LEN_NAME]; 
-  STRING username[MAX_NUM_PLAYERS:nplayers][MAX_LEN_NAME]; 
-  NATION nations[MAX_NUM_PLAYERS:nplayers];
-  BOOL is_alive[MAX_NUM_PLAYERS:nplayers];
-  BOOL is_ai[MAX_NUM_PLAYERS:nplayers];
 end
 
-PACKET_OPTIONS_SETTABLE_CONTROL=112;sc,handle-via-packet,lsend
-  UINT16 num_settings;
-  UINT8 num_categories;
-  STRING category_names[256:num_categories][MAX_LEN_NAME];
+PACKET_SERVER_SETTING_CONTROL = 112; sc, handle-via-packet, is-info
+  UINT16 settings_num;
+  UINT8 categories_num;
+  STRING category_names[256:categories_num][MAX_LEN_NAME];
 end
 
-PACKET_OPTIONS_SETTABLE=113;sc,lsend
-  UINT16 id;
+PACKET_SERVER_SETTING = 113; sc, is-info
+  UINT16 id; key
   STRING name[MAX_LEN_NAME];
   STRING short_help[MAX_LEN_PACKET];
   #STRING extra_help[MAX_LEN_PACKET]; Removed from web-client.  - Andreas
 
   SSET_TYPE stype;
-  SSET_CLASS sclass;
+  BOOL is_changeable;
   BOOL is_visible;
 
   SINT32 val;					/* value for bool or int */

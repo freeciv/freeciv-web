@@ -1,7 +1,7 @@
 diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2012-05-16 20:56:43.000000000 +0300
-+++ freeciv/common/packets.def	2012-05-16 20:59:21.000000000 +0300
-@@ -576,10 +576,10 @@
+--- freeciv/common/packets.def	2012-05-20 04:19:41.000000000 +0300
++++ freeciv/common/packets.def	2012-05-20 04:19:54.000000000 +0300
+@@ -587,10 +587,10 @@
    BOOL diplomat_investigate;
    BOOL walls;
    
@@ -15,7 +15,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    STRING name[MAX_LEN_NAME];
  end
  
-@@ -599,7 +599,7 @@
+@@ -607,7 +607,7 @@
    BOOL happy;
    BOOL unhappy;
  
@@ -25,9 +25,9 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  end
  
 diff -Nurd -X.diff_ignore freeciv/configure.ac freeciv/configure.ac
---- freeciv/configure.ac	2012-05-16 20:56:43.000000000 +0300
-+++ freeciv/configure.ac	2012-05-16 20:59:19.000000000 +0300
-@@ -705,7 +705,7 @@
+--- freeciv/configure.ac	2012-05-20 04:06:53.000000000 +0300
++++ freeciv/configure.ac	2012-05-20 04:19:54.000000000 +0300
+@@ -717,7 +717,7 @@
  
      AC_CHECK_FUNC(pow)
      if test $ac_cv_func_pow = no; then
@@ -37,9 +37,9 @@ diff -Nurd -X.diff_ignore freeciv/configure.ac freeciv/configure.ac
      fi
  fi
 diff -Nurd -X.diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
---- freeciv/server/citytools.c	2012-05-16 20:56:43.000000000 +0300
-+++ freeciv/server/citytools.c	2012-05-16 20:59:19.000000000 +0300
-@@ -1586,7 +1586,7 @@
+--- freeciv/server/citytools.c	2012-05-20 04:06:53.000000000 +0300
++++ freeciv/server/citytools.c	2012-05-20 04:21:10.000000000 +0300
+@@ -1561,7 +1561,7 @@
    packet->happy = pdcity->happy;
    packet->unhappy = pdcity->unhappy;
  
@@ -48,7 +48,7 @@ diff -Nurd -X.diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
  }
  
  /**************************************************************************
-@@ -1800,6 +1800,7 @@
+@@ -1775,6 +1775,7 @@
  {
    int i;
    int ppl = 0;
@@ -56,16 +56,16 @@ diff -Nurd -X.diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
  
    packet->id=pcity->id;
    packet->owner = player_number(city_owner(pcity));
-@@ -1870,7 +1871,7 @@
-   packet->shield_stock=pcity->shield_stock;
-   packet->pollution=pcity->pollution;
-   packet->illness = pcity->illness;
+@@ -1846,7 +1847,7 @@
+   packet->shield_stock = pcity->shield_stock;
+   packet->pollution = pcity->pollution;
+   packet->illness_trade = pcity->illness_trade;
 -  packet->city_options = pcity->city_options;
-+  //packet->city_options = pcity->city_options;
-   
++  /* packet->city_options = pcity->city_options; */
+ 
    packet->production_kind = pcity->production.kind;
    packet->production_value = universal_number(&pcity->production);
-@@ -1886,7 +1887,7 @@
+@@ -1862,7 +1863,7 @@
    packet->caravan_shields=pcity->caravan_shields;
    packet->last_turns_shield_surplus = pcity->last_turns_shield_surplus;
  
@@ -74,7 +74,7 @@ diff -Nurd -X.diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
    packet->diplomat_investigate=dipl_invest;
  
    packet->airlift = pcity->airlift;
-@@ -1896,12 +1897,13 @@
+@@ -1872,12 +1873,13 @@
  
    packet->walls = city_got_citywalls(pcity);
  

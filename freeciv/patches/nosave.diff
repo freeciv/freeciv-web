@@ -1,32 +1,19 @@
 diff -Nurd -X.diff_ignore freeciv/server/srv_main.c freeciv/server/srv_main.c
---- freeciv/server/srv_main.c	2012-05-16 20:56:43.000000000 +0300
-+++ freeciv/server/srv_main.c	2012-05-16 21:33:32.000000000 +0300
-@@ -1142,8 +1142,8 @@
-   assert(strlen(game.server.save_name)<256);
+--- freeciv/server/srv_main.c	2012-05-21 01:28:22.000000000 +0300
++++ freeciv/server/srv_main.c	2012-05-21 01:51:11.000000000 +0300
+@@ -1131,6 +1131,7 @@
+ **************************************************************************/
+ void save_game_auto(const char *save_reason, const char *reason_filename)
+ {
++#if 0
+   char filename[512];
  
-   generate_save_name(filename, sizeof(filename), TRUE, reason_filename);
--  save_game(filename, save_reason, FALSE);
--  save_ppm();
-+  //save_game(filename, save_reason, FALSE);
-+  //save_ppm();
+   fc_assert(256 > strlen(game.server.save_name));
+@@ -1139,6 +1140,7 @@
+                      reason_filename);
+   save_game(filename, save_reason, FALSE);
+   save_ppm();
++#endif
  }
  
  /**************************************************************************
-@@ -2038,7 +2038,7 @@
-       if (game.info.phase == 0) {
- 	if (save_counter >= game.info.save_nturns && game.info.save_nturns > 0) {
- 	  save_counter = 0;
--	  save_game_auto("Autosave", NULL);
-+	  //save_game_auto("Autosave", NULL);
- 	}
- 	save_counter++;
-       }
-@@ -2196,7 +2196,7 @@
-       && conn_list_size(game.est_connections) > 0) {
-     /* Save game on game_over, but not when the gameover was caused by
-      * the -q parameter. */
--    save_game_auto("Game over", "final");
-+    //save_game_auto("Game over", "final");
-   }
- }
- 

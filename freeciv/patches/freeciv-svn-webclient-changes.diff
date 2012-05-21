@@ -1,7 +1,7 @@
 diff -Nurd -X.diff_ignore freeciv/client/packhand.c freeciv/client/packhand.c
---- freeciv/client/packhand.c	2012-05-20 04:39:17.000000000 +0300
-+++ freeciv/client/packhand.c	2012-05-20 04:56:32.000000000 +0300
-@@ -2935,7 +2935,7 @@
+--- freeciv/client/packhand.c	2012-05-21 01:53:19.000000000 +0300
++++ freeciv/client/packhand.c	2012-05-21 03:06:43.000000000 +0300
+@@ -2924,7 +2924,7 @@
    pl->is_playable = p->is_playable;
    pl->barb_type = p->barbarian_type;
  
@@ -11,8 +11,8 @@ diff -Nurd -X.diff_ignore freeciv/client/packhand.c freeciv/client/packhand.c
           sizeof(pl->init_buildings));
    memcpy(pl->init_units, p->init_units, 
 diff -Nurd -X.diff_ignore freeciv/common/connection.c freeciv/common/connection.c
---- freeciv/common/connection.c	2012-05-20 04:06:53.000000000 +0300
-+++ freeciv/common/connection.c	2012-05-20 04:56:32.000000000 +0300
+--- freeciv/common/connection.c	2012-05-21 01:28:25.000000000 +0300
++++ freeciv/common/connection.c	2012-05-21 03:06:43.000000000 +0300
 @@ -350,7 +350,8 @@
  {
    if (pc && pc->used) {
@@ -42,8 +42,8 @@ diff -Nurd -X.diff_ignore freeciv/common/connection.c freeciv/common/connection.
  
  /**************************************************************************
 diff -Nurd -X.diff_ignore freeciv/common/connection.h freeciv/common/connection.h
---- freeciv/common/connection.h	2012-05-20 04:06:53.000000000 +0300
-+++ freeciv/common/connection.h	2012-05-20 04:56:32.000000000 +0300
+--- freeciv/common/connection.h	2012-05-21 01:28:25.000000000 +0300
++++ freeciv/common/connection.h	2012-05-21 03:06:43.000000000 +0300
 @@ -22,7 +22,7 @@
  #include <sys/time.h>
  #endif
@@ -54,8 +54,8 @@ diff -Nurd -X.diff_ignore freeciv/common/connection.h freeciv/common/connection.
  /**************************************************************************
    The connection struct and related stuff.
 diff -Nurd -X.diff_ignore freeciv/common/featured_text.c freeciv/common/featured_text.c
---- freeciv/common/featured_text.c	2012-05-20 04:52:57.000000000 +0300
-+++ freeciv/common/featured_text.c	2012-05-20 04:56:32.000000000 +0300
+--- freeciv/common/featured_text.c	2012-05-21 03:01:59.000000000 +0300
++++ freeciv/common/featured_text.c	2012-05-21 03:08:26.000000000 +0300
 @@ -33,8 +33,8 @@
  
  #include "featured_text.h"
@@ -67,7 +67,7 @@ diff -Nurd -X.diff_ignore freeciv/common/featured_text.c freeciv/common/featured
  #define SEQ_END '/'
  
  #define MAX_LEN_STR 32
-@@ -137,7 +137,7 @@
+@@ -136,7 +136,7 @@
    case TTT_UNDERLINE:
      return "u";
    case TTT_COLOR:
@@ -76,7 +76,7 @@ diff -Nurd -X.diff_ignore freeciv/common/featured_text.c freeciv/common/featured
    case TTT_LINK:
      return "l";
    };
-@@ -234,7 +234,7 @@
+@@ -233,7 +233,7 @@
      {
        if (!find_option(sequence, "foreground", ptag->color.foreground,
                         sizeof(ptag->color.foreground))
@@ -85,18 +85,18 @@ diff -Nurd -X.diff_ignore freeciv/common/featured_text.c freeciv/common/featured
                            sizeof(ptag->color.foreground))) {
          ptag->color.foreground[0] = '\0';
        }
-@@ -478,7 +478,7 @@
+@@ -477,7 +477,7 @@
                                 text_tag_type_short_name(ptag->type));
  
        if (ptag->color.foreground[0] != '\0') {
--        ret += my_snprintf(buf + ret, len - ret, " fg=\"%s\"",
-+        ret += my_snprintf(buf + ret, len - ret, " color=\"%s\"",
+-        ret += fc_snprintf(buf + ret, len - ret, " fg=\"%s\"",
++        ret += fc_snprintf(buf + ret, len - ret, " color=\"%s\"",
                             ptag->color.foreground);
        }
        if (ptag->color.background[0] != '\0') {
 diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/generate_packets.py
---- freeciv/common/generate_packets.py	2012-05-20 04:06:53.000000000 +0300
-+++ freeciv/common/generate_packets.py	2012-05-20 04:56:32.000000000 +0300
+--- freeciv/common/generate_packets.py	2012-05-21 01:28:26.000000000 +0300
++++ freeciv/common/generate_packets.py	2012-05-21 03:06:43.000000000 +0300
 @@ -27,7 +27,7 @@
  
  ### The following parameters CHANGE the protocol. You have been warned.
@@ -107,8 +107,8 @@ diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/gene
  ################# END OF PARAMETERS ####################
  
 diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2012-05-20 04:54:47.000000000 +0300
-+++ freeciv/common/packets.def	2012-05-20 04:56:32.000000000 +0300
+--- freeciv/common/packets.def	2012-05-21 03:06:36.000000000 +0300
++++ freeciv/common/packets.def	2012-05-21 03:10:06.000000000 +0300
 @@ -159,7 +159,7 @@
  
  # typedefs for numbers
@@ -138,7 +138,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  type DIPLOMAT_ACTION	= uint8(enum diplomat_actions)
  type CMDLEVEL		= uint8(enum cmdlevel_id)
  type PLACE_TYPE		= uint8(enum spaceship_place_type)
-@@ -224,7 +225,7 @@
+@@ -223,7 +224,7 @@
  type TECH     		= UINT8
  type TILE		= SINT16
  type UNIT_TYPE		= uint8(Unit_type_id)
@@ -147,8 +147,8 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  type GOVERNMENT		= UINT8
  type CONNECTION		= SINT16
  type TEAM		= UINT8
-@@ -1185,7 +1186,7 @@
- PACKET_RULESET_GAME=97;sc,lsend
+@@ -1127,7 +1128,7 @@
+ PACKET_RULESET_GAME = 141; sc, lsend
    UINT8 default_specialist;
  
 -  TECH_LIST global_init_techs[MAX_NUM_TECH_LIST];
@@ -156,7 +156,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    UINT8 work_veteran_chance[MAX_VET_LEVELS];
    UINT8 veteran_chance[MAX_VET_LEVELS];
  end
-@@ -1268,7 +1269,7 @@
+@@ -1210,7 +1211,7 @@
    STRING legend[MAX_LEN_MSG];
  
    UINT8 city_style;
@@ -165,18 +165,18 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    UNIT_TYPE init_units[MAX_NUM_UNIT_LIST];
    IMPROVEMENT init_buildings[MAX_NUM_BUILDING_LIST];
    GOVERNMENT init_government;
-@@ -1439,7 +1440,7 @@
+@@ -1381,7 +1382,7 @@
    UINT16 id; key
    STRING name[MAX_LEN_NAME];
    STRING short_help[MAX_LEN_PACKET];
 -  STRING extra_help[MAX_LEN_PACKET];
-+  #STRING extra_help[MAX_LEN_PACKET]; Removed from web-client.  - Andreas
++  # STRING extra_help[MAX_LEN_PACKET];
+   UINT8 category;
+ end
  
-   SSET_TYPE stype;
-   BOOL is_changeable;
 diff -Nurd -X.diff_ignore freeciv/data/amplio/ancientcities.spec freeciv/data/amplio/ancientcities.spec
---- freeciv/data/amplio/ancientcities.spec	2012-05-20 04:06:52.000000000 +0300
-+++ freeciv/data/amplio/ancientcities.spec	2012-05-20 04:56:32.000000000 +0300
+--- freeciv/data/amplio/ancientcities.spec	2012-05-21 01:28:15.000000000 +0300
++++ freeciv/data/amplio/ancientcities.spec	2012-05-21 03:06:43.000000000 +0300
 @@ -23,8 +23,7 @@
      Polynesian style by CapTVK
      Celtic style by Erwan, adapted to 96x48 by CapTVK
@@ -196,8 +196,8 @@ diff -Nurd -X.diff_ignore freeciv/data/amplio/ancientcities.spec freeciv/data/am
 -}
 + 4,  9, "city.babylonian_wall_16"}
 diff -Nurd -X.diff_ignore freeciv/data/amplio/buildings.spec freeciv/data/amplio/buildings.spec
---- freeciv/data/amplio/buildings.spec	2012-05-20 04:06:52.000000000 +0300
-+++ freeciv/data/amplio/buildings.spec	2012-05-20 04:56:32.000000000 +0300
+--- freeciv/data/amplio/buildings.spec	2012-05-21 01:28:15.000000000 +0300
++++ freeciv/data/amplio/buildings.spec	2012-05-21 03:06:43.000000000 +0300
 @@ -7,8 +7,8 @@
  [info]
  
@@ -210,8 +210,8 @@ diff -Nurd -X.diff_ignore freeciv/data/amplio/buildings.spec freeciv/data/amplio
  sprites =
  	{	"tag", "file"
 diff -Nurd -X.diff_ignore freeciv/data/amplio/explosions.spec freeciv/data/amplio/explosions.spec
---- freeciv/data/amplio/explosions.spec	2012-05-20 04:06:52.000000000 +0300
-+++ freeciv/data/amplio/explosions.spec	2012-05-20 04:56:32.000000000 +0300
+--- freeciv/data/amplio/explosions.spec	2012-05-21 01:28:15.000000000 +0300
++++ freeciv/data/amplio/explosions.spec	2012-05-21 03:06:43.000000000 +0300
 @@ -10,8 +10,7 @@
      Explosions from xgalaga <http://rumsey.org/xgal.html>
      Credits:
@@ -230,8 +230,8 @@ diff -Nurd -X.diff_ignore freeciv/data/amplio/explosions.spec freeciv/data/ampli
 -}
 +  4,  0, "explode.unit_4"}
 diff -Nurd -X.diff_ignore freeciv/data/amplio/fog.spec freeciv/data/amplio/fog.spec
---- freeciv/data/amplio/fog.spec	2012-05-20 04:06:52.000000000 +0300
-+++ freeciv/data/amplio/fog.spec	2012-05-20 04:56:32.000000000 +0300
+--- freeciv/data/amplio/fog.spec	2012-05-21 01:28:15.000000000 +0300
++++ freeciv/data/amplio/fog.spec	2012-05-21 03:06:43.000000000 +0300
 @@ -3,8 +3,7 @@
  options = "+spec3"
  
@@ -250,8 +250,8 @@ diff -Nurd -X.diff_ignore freeciv/data/amplio/fog.spec freeciv/data/amplio/fog.s
 -}
 +  8,  8, "t.fog_u_u_u_u"}
 diff -Nurd -X.diff_ignore freeciv/data/amplio/grid.spec freeciv/data/amplio/grid.spec
---- freeciv/data/amplio/grid.spec	2012-05-20 04:06:52.000000000 +0300
-+++ freeciv/data/amplio/grid.spec	2012-05-20 04:56:32.000000000 +0300
+--- freeciv/data/amplio/grid.spec	2012-05-21 01:28:15.000000000 +0300
++++ freeciv/data/amplio/grid.spec	2012-05-21 03:06:43.000000000 +0300
 @@ -9,8 +9,7 @@
  artists = "
      Jason Dorje Short <jdorje@freeciv.org>
@@ -270,8 +270,8 @@ diff -Nurd -X.diff_ignore freeciv/data/amplio/grid.spec freeciv/data/amplio/grid
 -}
 +  2, 3, "grid.borders.e"}
 diff -Nurd -X.diff_ignore freeciv/data/amplio/icons.spec freeciv/data/amplio/icons.spec
---- freeciv/data/amplio/icons.spec	2012-05-20 04:06:52.000000000 +0300
-+++ freeciv/data/amplio/icons.spec	2012-05-20 04:56:32.000000000 +0300
+--- freeciv/data/amplio/icons.spec	2012-05-21 01:28:15.000000000 +0300
++++ freeciv/data/amplio/icons.spec	2012-05-21 03:06:43.000000000 +0300
 @@ -9,8 +9,7 @@
  artists = "
      Hogne Håskjold <hogne@freeciv.org>
@@ -283,8 +283,8 @@ diff -Nurd -X.diff_ignore freeciv/data/amplio/icons.spec freeciv/data/amplio/ico
  [extra]
  sprites = 
 diff -Nurd -X.diff_ignore freeciv/data/amplio/medievalcities.spec freeciv/data/amplio/medievalcities.spec
---- freeciv/data/amplio/medievalcities.spec	2012-05-20 04:06:52.000000000 +0300
-+++ freeciv/data/amplio/medievalcities.spec	2012-05-20 04:56:32.000000000 +0300
+--- freeciv/data/amplio/medievalcities.spec	2012-05-21 01:28:15.000000000 +0300
++++ freeciv/data/amplio/medievalcities.spec	2012-05-21 03:06:43.000000000 +0300
 @@ -21,8 +21,7 @@
  artists = "
      Medieval by CapTVK
@@ -304,8 +304,8 @@ diff -Nurd -X.diff_ignore freeciv/data/amplio/medievalcities.spec freeciv/data/a
 -}
 + 1,  9, "city.industrial_wall_16" }
 diff -Nurd -X.diff_ignore freeciv/data/amplio/moderncities.spec freeciv/data/amplio/moderncities.spec
---- freeciv/data/amplio/moderncities.spec	2012-05-20 04:06:52.000000000 +0300
-+++ freeciv/data/amplio/moderncities.spec	2012-05-20 04:56:32.000000000 +0300
+--- freeciv/data/amplio/moderncities.spec	2012-05-21 01:28:15.000000000 +0300
++++ freeciv/data/amplio/moderncities.spec	2012-05-21 03:06:43.000000000 +0300
 @@ -23,8 +23,7 @@
      Modern, Post Modern and Electric Age by Smiley, www.firstcultural.com
      City walls by Hogne Håskjold
@@ -325,8 +325,8 @@ diff -Nurd -X.diff_ignore freeciv/data/amplio/moderncities.spec freeciv/data/amp
 -}
 + 4,  9, "city.postmodern_wall_16"}
 diff -Nurd -X.diff_ignore freeciv/data/amplio/nuke.spec freeciv/data/amplio/nuke.spec
---- freeciv/data/amplio/nuke.spec	2012-05-20 04:06:52.000000000 +0300
-+++ freeciv/data/amplio/nuke.spec	2012-05-20 04:56:32.000000000 +0300
+--- freeciv/data/amplio/nuke.spec	2012-05-21 01:28:15.000000000 +0300
++++ freeciv/data/amplio/nuke.spec	2012-05-21 03:06:43.000000000 +0300
 @@ -7,8 +7,7 @@
  
  artists = "
@@ -345,8 +345,8 @@ diff -Nurd -X.diff_ignore freeciv/data/amplio/nuke.spec freeciv/data/amplio/nuke
 -}
 + 0, 0, "explode.nuke"}
 diff -Nurd -X.diff_ignore freeciv/data/amplio/ocean.spec freeciv/data/amplio/ocean.spec
---- freeciv/data/amplio/ocean.spec	2012-05-20 04:06:52.000000000 +0300
-+++ freeciv/data/amplio/ocean.spec	2012-05-20 04:56:32.000000000 +0300
+--- freeciv/data/amplio/ocean.spec	2012-05-21 01:28:15.000000000 +0300
++++ freeciv/data/amplio/ocean.spec	2012-05-21 03:06:43.000000000 +0300
 @@ -10,8 +10,7 @@
      Yautja
      CapTVK
@@ -365,8 +365,8 @@ diff -Nurd -X.diff_ignore freeciv/data/amplio/ocean.spec freeciv/data/amplio/oce
 -}
 +  0, 0, "t.l0.cellgroup_l_l_l_l"}
 diff -Nurd -X.diff_ignore freeciv/data/amplio/select.spec freeciv/data/amplio/select.spec
---- freeciv/data/amplio/select.spec	2012-05-20 04:06:52.000000000 +0300
-+++ freeciv/data/amplio/select.spec	2012-05-20 04:56:32.000000000 +0300
+--- freeciv/data/amplio/select.spec	2012-05-21 01:28:15.000000000 +0300
++++ freeciv/data/amplio/select.spec	2012-05-21 03:06:43.000000000 +0300
 @@ -8,8 +8,7 @@
  artists = "
      Jason Dorje Short <jdorje@freeciv.org>
@@ -385,8 +385,8 @@ diff -Nurd -X.diff_ignore freeciv/data/amplio/select.spec freeciv/data/amplio/se
 -}
 +  0, 3, "unit.select3"}
 diff -Nurd -X.diff_ignore freeciv/data/amplio/terrain1.spec freeciv/data/amplio/terrain1.spec
---- freeciv/data/amplio/terrain1.spec	2012-05-20 04:06:52.000000000 +0300
-+++ freeciv/data/amplio/terrain1.spec	2012-05-20 04:56:32.000000000 +0300
+--- freeciv/data/amplio/terrain1.spec	2012-05-21 01:28:15.000000000 +0300
++++ freeciv/data/amplio/terrain1.spec	2012-05-21 03:06:43.000000000 +0300
 @@ -10,8 +10,7 @@
      Hogne Håskjold
      Daniel Speyer
@@ -405,8 +405,8 @@ diff -Nurd -X.diff_ignore freeciv/data/amplio/terrain1.spec freeciv/data/amplio/
 -}
 + 15,  5, "tx.fog"}
 diff -Nurd -X.diff_ignore freeciv/data/amplio/terrain2.spec freeciv/data/amplio/terrain2.spec
---- freeciv/data/amplio/terrain2.spec	2012-05-20 04:06:52.000000000 +0300
-+++ freeciv/data/amplio/terrain2.spec	2012-05-20 04:56:32.000000000 +0300
+--- freeciv/data/amplio/terrain2.spec	2012-05-21 01:28:15.000000000 +0300
++++ freeciv/data/amplio/terrain2.spec	2012-05-21 03:06:43.000000000 +0300
 @@ -11,8 +11,7 @@
      Tim F. Smith <yoohootim@hotmail.com>
      Yautja
@@ -437,8 +437,8 @@ diff -Nurd -X.diff_ignore freeciv/data/amplio/terrain2.spec freeciv/data/amplio/
 -}
 +;* previous coordinates now in water.spec}
 diff -Nurd -X.diff_ignore freeciv/data/amplio/tiles.spec freeciv/data/amplio/tiles.spec
---- freeciv/data/amplio/tiles.spec	2012-05-20 04:06:52.000000000 +0300
-+++ freeciv/data/amplio/tiles.spec	2012-05-20 04:56:32.000000000 +0300
+--- freeciv/data/amplio/tiles.spec	2012-05-21 01:28:15.000000000 +0300
++++ freeciv/data/amplio/tiles.spec	2012-05-21 03:06:43.000000000 +0300
 @@ -8,8 +8,7 @@
  
  artists = "
@@ -480,8 +480,8 @@ diff -Nurd -X.diff_ignore freeciv/data/amplio/tiles.spec freeciv/data/amplio/til
 -}
 +  2,  2, "explode.nuke_22"}
 diff -Nurd -X.diff_ignore freeciv/data/amplio/units.spec freeciv/data/amplio/units.spec
---- freeciv/data/amplio/units.spec	2012-05-20 04:06:52.000000000 +0300
-+++ freeciv/data/amplio/units.spec	2012-05-20 04:56:32.000000000 +0300
+--- freeciv/data/amplio/units.spec	2012-05-21 01:28:15.000000000 +0300
++++ freeciv/data/amplio/units.spec	2012-05-21 03:06:43.000000000 +0300
 @@ -32,8 +32,7 @@
      Vodvakov
      J. W. Bjerk / Eleazar <www.jwbjerk.com>
@@ -508,8 +508,8 @@ diff -Nurd -X.diff_ignore freeciv/data/amplio/units.spec freeciv/data/amplio/uni
 -}
 +  3, 11, "unit.tired"}
 diff -Nurd -X.diff_ignore freeciv/data/amplio/water.spec freeciv/data/amplio/water.spec
---- freeciv/data/amplio/water.spec	2012-05-20 04:06:52.000000000 +0300
-+++ freeciv/data/amplio/water.spec	2012-05-20 04:56:32.000000000 +0300
+--- freeciv/data/amplio/water.spec	2012-05-21 01:28:15.000000000 +0300
++++ freeciv/data/amplio/water.spec	2012-05-21 03:06:43.000000000 +0300
 @@ -11,8 +11,7 @@
      Tim F. Smith <yoohootim@hotmail.com>
      Yautja
@@ -538,8 +538,8 @@ diff -Nurd -X.diff_ignore freeciv/data/amplio/water.spec freeciv/data/amplio/wat
 -}
 + 11, 15, "t.l0.lake_cell_r_l_l_l"}
 diff -Nurd -X.diff_ignore freeciv/data/amplio/wonders.spec freeciv/data/amplio/wonders.spec
---- freeciv/data/amplio/wonders.spec	2012-05-20 04:06:52.000000000 +0300
-+++ freeciv/data/amplio/wonders.spec	2012-05-20 04:56:32.000000000 +0300
+--- freeciv/data/amplio/wonders.spec	2012-05-21 01:28:15.000000000 +0300
++++ freeciv/data/amplio/wonders.spec	2012-05-21 03:06:43.000000000 +0300
 @@ -48,8 +48,7 @@
    b.hoover_dam
    b.manhattan_project
@@ -551,8 +551,8 @@ diff -Nurd -X.diff_ignore freeciv/data/amplio/wonders.spec freeciv/data/amplio/w
  [extra]
  sprites =
 diff -Nurd -X.diff_ignore freeciv/data/amplio.tilespec freeciv/data/amplio.tilespec
---- freeciv/data/amplio.tilespec	2012-05-20 04:06:53.000000000 +0300
-+++ freeciv/data/amplio.tilespec	2012-05-20 04:56:32.000000000 +0300
+--- freeciv/data/amplio.tilespec	2012-05-21 01:28:16.000000000 +0300
++++ freeciv/data/amplio.tilespec	2012-05-21 03:06:43.000000000 +0300
 @@ -92,7 +92,7 @@
  
  
@@ -563,8 +563,8 @@ diff -Nurd -X.diff_ignore freeciv/data/amplio.tilespec freeciv/data/amplio.tiles
  ; Terrain info - see README.graphics
  
 diff -Nurd -X.diff_ignore freeciv/data/misc/buildings.spec freeciv/data/misc/buildings.spec
---- freeciv/data/misc/buildings.spec	2012-05-20 04:06:52.000000000 +0300
-+++ freeciv/data/misc/buildings.spec	2012-05-20 04:56:32.000000000 +0300
+--- freeciv/data/misc/buildings.spec	2012-05-21 01:28:15.000000000 +0300
++++ freeciv/data/misc/buildings.spec	2012-05-21 03:06:43.000000000 +0300
 @@ -9,8 +9,7 @@
      Tim F. Smith <yoohootim@hotmail.com>
      Frederic Rodrigo <f.rodrigo@tuxfamily.org>
@@ -583,8 +583,8 @@ diff -Nurd -X.diff_ignore freeciv/data/misc/buildings.spec freeciv/data/misc/bui
 -}
 +  8,  7, "b.womens_suffrage"}
 diff -Nurd -X.diff_ignore freeciv/data/misc/chiefs.spec freeciv/data/misc/chiefs.spec
---- freeciv/data/misc/chiefs.spec	2012-05-20 04:06:52.000000000 +0300
-+++ freeciv/data/misc/chiefs.spec	2012-05-20 04:56:32.000000000 +0300
+--- freeciv/data/misc/chiefs.spec	2012-05-21 01:28:15.000000000 +0300
++++ freeciv/data/misc/chiefs.spec	2012-05-21 03:06:43.000000000 +0300
 @@ -6,8 +6,7 @@
  [info]
  
@@ -626,8 +626,8 @@ diff -Nurd -X.diff_ignore freeciv/data/misc/chiefs.spec freeciv/data/misc/chiefs
 + 0,  9, "unit.hp_10"
 + 0, 10, "unit.hp_0"}
 diff -Nurd -X.diff_ignore freeciv/data/misc/citybar.spec freeciv/data/misc/citybar.spec
---- freeciv/data/misc/citybar.spec	2012-05-20 04:06:52.000000000 +0300
-+++ freeciv/data/misc/citybar.spec	2012-05-20 04:56:32.000000000 +0300
+--- freeciv/data/misc/citybar.spec	2012-05-21 01:28:15.000000000 +0300
++++ freeciv/data/misc/citybar.spec	2012-05-21 03:06:43.000000000 +0300
 @@ -8,8 +8,7 @@
  
  artists = "
@@ -670,8 +670,8 @@ diff -Nurd -X.diff_ignore freeciv/data/misc/citybar.spec freeciv/data/misc/cityb
 -}
 +  0,  0, "citybar.background"}
 diff -Nurd -X.diff_ignore freeciv/data/misc/cursors.spec freeciv/data/misc/cursors.spec
---- freeciv/data/misc/cursors.spec	2012-05-20 04:06:52.000000000 +0300
-+++ freeciv/data/misc/cursors.spec	2012-05-20 04:56:32.000000000 +0300
+--- freeciv/data/misc/cursors.spec	2012-05-21 01:28:15.000000000 +0300
++++ freeciv/data/misc/cursors.spec	2012-05-21 03:06:43.000000000 +0300
 @@ -11,9 +11,7 @@
  
      edit_paint cursor take from GIMP
@@ -691,8 +691,8 @@ diff -Nurd -X.diff_ignore freeciv/data/misc/cursors.spec freeciv/data/misc/curso
 -}
 +       5, 9, "cursor.wait5", 16, 16}
 diff -Nurd -X.diff_ignore freeciv/data/misc/editor.spec freeciv/data/misc/editor.spec
---- freeciv/data/misc/editor.spec	2012-05-20 04:06:52.000000000 +0300
-+++ freeciv/data/misc/editor.spec	2012-05-20 04:56:32.000000000 +0300
+--- freeciv/data/misc/editor.spec	2012-05-21 01:28:15.000000000 +0300
++++ freeciv/data/misc/editor.spec	2012-05-21 03:06:43.000000000 +0300
 @@ -7,8 +7,7 @@
  [info]
  
@@ -731,9 +731,9 @@ diff -Nurd -X.diff_ignore freeciv/data/misc/editor.spec freeciv/data/misc/editor
 -}
 +  0,  6, "editor.paste"}
 diff -Nurd -X.diff_ignore freeciv/data/misc/flags.spec freeciv/data/misc/flags.spec
---- freeciv/data/misc/flags.spec	2012-05-20 04:06:52.000000000 +0300
-+++ freeciv/data/misc/flags.spec	2012-05-20 04:56:32.000000000 +0300
-@@ -215,9 +215,7 @@
+--- freeciv/data/misc/flags.spec	2012-05-21 01:28:15.000000000 +0300
++++ freeciv/data/misc/flags.spec	2012-05-21 03:06:43.000000000 +0300
+@@ -225,9 +225,7 @@
     Viking		Daniel Markstedt
     Wales		Tobias Jakobs
     Westphalia		Daniel Markstedt and Tobias Jakobs
@@ -745,8 +745,8 @@ diff -Nurd -X.diff_ignore freeciv/data/misc/flags.spec freeciv/data/misc/flags.s
  sprites =
  	{	"tag", "file"
 diff -Nurd -X.diff_ignore freeciv/data/misc/icons.spec freeciv/data/misc/icons.spec
---- freeciv/data/misc/icons.spec	2012-05-20 04:06:52.000000000 +0300
-+++ freeciv/data/misc/icons.spec	2012-05-20 04:56:32.000000000 +0300
+--- freeciv/data/misc/icons.spec	2012-05-21 01:28:15.000000000 +0300
++++ freeciv/data/misc/icons.spec	2012-05-21 03:06:43.000000000 +0300
 @@ -7,8 +7,7 @@
  [info]
  
@@ -758,8 +758,8 @@ diff -Nurd -X.diff_ignore freeciv/data/misc/icons.spec freeciv/data/misc/icons.s
  [extra]
  sprites = 
 diff -Nurd -X.diff_ignore freeciv/data/misc/overlays.spec freeciv/data/misc/overlays.spec
---- freeciv/data/misc/overlays.spec	2012-05-20 04:06:52.000000000 +0300
-+++ freeciv/data/misc/overlays.spec	2012-05-20 04:56:32.000000000 +0300
+--- freeciv/data/misc/overlays.spec	2012-05-21 01:28:15.000000000 +0300
++++ freeciv/data/misc/overlays.spec	2012-05-21 03:06:43.000000000 +0300
 @@ -7,8 +7,7 @@
  [info]
  
@@ -778,8 +778,8 @@ diff -Nurd -X.diff_ignore freeciv/data/misc/overlays.spec freeciv/data/misc/over
 -}
 +  1, 2, "mask.unworked_tile"}
 diff -Nurd -X.diff_ignore freeciv/data/misc/shields.spec freeciv/data/misc/shields.spec
---- freeciv/data/misc/shields.spec	2012-05-20 04:06:52.000000000 +0300
-+++ freeciv/data/misc/shields.spec	2012-05-20 04:56:32.000000000 +0300
+--- freeciv/data/misc/shields.spec	2012-05-21 01:28:15.000000000 +0300
++++ freeciv/data/misc/shields.spec	2012-05-21 03:06:43.000000000 +0300
 @@ -7,8 +7,7 @@
  [info]
  
@@ -791,8 +791,8 @@ diff -Nurd -X.diff_ignore freeciv/data/misc/shields.spec freeciv/data/misc/shiel
  sprites =
  	{	"tag", "file"
 diff -Nurd -X.diff_ignore freeciv/data/misc/small.spec freeciv/data/misc/small.spec
---- freeciv/data/misc/small.spec	2012-05-20 04:06:52.000000000 +0300
-+++ freeciv/data/misc/small.spec	2012-05-20 04:56:32.000000000 +0300
+--- freeciv/data/misc/small.spec	2012-05-21 01:28:15.000000000 +0300
++++ freeciv/data/misc/small.spec	2012-05-21 03:06:43.000000000 +0300
 @@ -11,8 +11,7 @@
      Jeff Mallatt <jjm@codewell.com> (cooling flakes)
      Davide Pagnin <nightmare@freeciv.it> (angry citizens)
@@ -811,8 +811,8 @@ diff -Nurd -X.diff_ignore freeciv/data/misc/small.spec freeciv/data/misc/small.s
 -}
 +  1, 12, "s.minus"}
 diff -Nurd -X.diff_ignore freeciv/data/misc/space.spec freeciv/data/misc/space.spec
---- freeciv/data/misc/space.spec	2012-05-20 04:06:52.000000000 +0300
-+++ freeciv/data/misc/space.spec	2012-05-20 04:56:32.000000000 +0300
+--- freeciv/data/misc/space.spec	2012-05-21 01:28:15.000000000 +0300
++++ freeciv/data/misc/space.spec	2012-05-21 03:06:43.000000000 +0300
 @@ -7,8 +7,7 @@
  [info]
  
@@ -831,8 +831,8 @@ diff -Nurd -X.diff_ignore freeciv/data/misc/space.spec freeciv/data/misc/space.s
 -}
 +  0,  6, "spaceship.exhaust"}
 diff -Nurd -X.diff_ignore freeciv/data/misc/techs.spec freeciv/data/misc/techs.spec
---- freeciv/data/misc/techs.spec	2012-05-20 04:06:52.000000000 +0300
-+++ freeciv/data/misc/techs.spec	2012-05-20 04:56:32.000000000 +0300
+--- freeciv/data/misc/techs.spec	2012-05-21 01:28:15.000000000 +0300
++++ freeciv/data/misc/techs.spec	2012-05-21 03:06:43.000000000 +0300
 @@ -109,8 +109,7 @@
   PD - Unknown author
   a.communism         a.flight             a.refining
@@ -851,8 +851,8 @@ diff -Nurd -X.diff_ignore freeciv/data/misc/techs.spec freeciv/data/misc/techs.s
 -}
 +  8, 7, "a.fundamentalism"}
 diff -Nurd -X.diff_ignore freeciv/data/misc/treaty.spec freeciv/data/misc/treaty.spec
---- freeciv/data/misc/treaty.spec	2012-05-20 04:06:52.000000000 +0300
-+++ freeciv/data/misc/treaty.spec	2012-05-20 04:56:32.000000000 +0300
+--- freeciv/data/misc/treaty.spec	2012-05-21 01:28:15.000000000 +0300
++++ freeciv/data/misc/treaty.spec	2012-05-21 03:06:43.000000000 +0300
 @@ -7,8 +7,7 @@
  [info]
  
@@ -872,8 +872,8 @@ diff -Nurd -X.diff_ignore freeciv/data/misc/treaty.spec freeciv/data/misc/treaty
 -}
 +  0,  1, "treaty.disagree_thumb_down"}
 diff -Nurd -X.diff_ignore freeciv/server/console.c freeciv/server/console.c
---- freeciv/server/console.c	2012-05-20 04:06:53.000000000 +0300
-+++ freeciv/server/console.c	2012-05-20 04:56:32.000000000 +0300
+--- freeciv/server/console.c	2012-05-21 01:28:24.000000000 +0300
++++ freeciv/server/console.c	2012-05-21 03:06:43.000000000 +0300
 @@ -60,7 +60,9 @@
      /* Make sure that message is not left to buffers when server dies */
      conn_list_iterate(game.est_connections, pconn) {
@@ -885,29 +885,22 @@ diff -Nurd -X.diff_ignore freeciv/server/console.c freeciv/server/console.c
  
      notify_conn(NULL, NULL, E_LOG_FATAL, ftc_warning, "%s", message);
 diff -Nurd -X.diff_ignore freeciv/server/ruleset.c freeciv/server/ruleset.c
---- freeciv/server/ruleset.c	2012-05-20 04:39:17.000000000 +0300
-+++ freeciv/server/ruleset.c	2012-05-20 05:05:44.000000000 +0300
-@@ -3820,7 +3820,7 @@
- {
-   struct packet_ruleset_nation packet;
-   struct packet_ruleset_nation_groups groups_packet;
--  struct nation_type *n;
-+  //struct nation_type *n;
-   int i;
- 
-   groups_packet.ngroups = nation_group_count();
-@@ -3829,8 +3829,10 @@
+--- freeciv/server/ruleset.c	2012-05-21 01:53:19.000000000 +0300
++++ freeciv/server/ruleset.c	2012-05-21 03:12:21.000000000 +0300
+@@ -3830,10 +3830,12 @@
    } nation_groups_iterate_end;
    lsend_packet_ruleset_nation_groups(dest, &groups_packet);
  
 +#if 0
-   fc_assert(sizeof(packet.init_techs) == sizeof(n->init_techs));
-   fc_assert(ARRAY_SIZE(packet.init_techs) == ARRAY_SIZE(n->init_techs));
+   fc_assert(sizeof(packet.init_techs)
+             == FC_MEMBER_SIZEOF(struct nation_type, init_techs));
+   fc_assert(ARRAY_SIZE(packet.init_techs)
+             == FC_MEMBER_ARRAY_SIZE(struct nation_type, init_techs));
 +#endif
  
    nations_iterate(n) {
      packet.id = nation_number(n);
-@@ -3847,7 +3849,7 @@
+@@ -3850,7 +3852,7 @@
      packet.is_playable = n->is_playable;
      packet.is_available = n->is_available;
      packet.barbarian_type = n->barb_type;
@@ -916,7 +909,7 @@ diff -Nurd -X.diff_ignore freeciv/server/ruleset.c freeciv/server/ruleset.c
      memcpy(packet.init_buildings, n->init_buildings, 
             sizeof(packet.init_buildings));
      memcpy(packet.init_units, n->init_units, 
-@@ -3911,12 +3913,15 @@
+@@ -3914,12 +3916,15 @@
    memcpy(misc_p.veteran_chance, game.veteran_chance, 
           sizeof(game.veteran_chance));
  
@@ -933,14 +926,14 @@ diff -Nurd -X.diff_ignore freeciv/server/ruleset.c freeciv/server/ruleset.c
    misc_p.default_specialist = DEFAULT_SPECIALIST;
  
 diff -Nurd -X.diff_ignore freeciv/server/settings.c freeciv/server/settings.c
---- freeciv/server/settings.c	2012-05-20 04:06:53.000000000 +0300
-+++ freeciv/server/settings.c	2012-05-20 04:56:32.000000000 +0300
-@@ -2122,7 +2122,7 @@
-     packet.id = setting_number(pset);
-     sz_strlcpy(packet.name, setting_name(pset));
-     sz_strlcpy(packet.short_help, setting_short_help(pset));
--    sz_strlcpy(packet.extra_help, setting_extra_help(pset));
-+    // sz_strlcpy(packet.extra_help, setting_extra_help(pset));
+--- freeciv/server/settings.c	2012-05-21 01:28:20.000000000 +0300
++++ freeciv/server/settings.c	2012-05-21 03:13:27.000000000 +0300
+@@ -2821,7 +2821,7 @@
+     setting.id = setting_number(pset);
+     sz_strlcpy(setting.name, setting_name(pset));
+     sz_strlcpy(setting.short_help, setting_short_help(pset));
+-    sz_strlcpy(setting.extra_help, setting_extra_help(pset));
++    /* sz_strlcpy(setting.extra_help, setting_extra_help(pset)); */
+     setting.category = pset->scategory;
  
-     packet.stype = setting_type(pset);
-     packet.scategory = pset->scategory;
+     send_packet_server_setting_const(pconn, &setting);

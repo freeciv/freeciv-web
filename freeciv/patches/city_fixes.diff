@@ -1,7 +1,7 @@
 diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2012-05-20 04:19:41.000000000 +0300
-+++ freeciv/common/packets.def	2012-05-20 04:19:54.000000000 +0300
-@@ -587,10 +587,10 @@
+--- freeciv/common/packets.def	2012-05-21 01:31:17.000000000 +0300
++++ freeciv/common/packets.def	2012-05-21 01:33:26.000000000 +0300
+@@ -534,10 +534,10 @@
    BOOL diplomat_investigate;
    BOOL walls;
    
@@ -15,7 +15,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    STRING name[MAX_LEN_NAME];
  end
  
-@@ -607,7 +607,7 @@
+@@ -554,7 +554,7 @@
    BOOL happy;
    BOOL unhappy;
  
@@ -25,21 +25,21 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  end
  
 diff -Nurd -X.diff_ignore freeciv/configure.ac freeciv/configure.ac
---- freeciv/configure.ac	2012-05-20 04:06:53.000000000 +0300
-+++ freeciv/configure.ac	2012-05-20 04:19:54.000000000 +0300
-@@ -717,7 +717,7 @@
+--- freeciv/configure.ac	2012-05-21 01:28:25.000000000 +0300
++++ freeciv/configure.ac	2012-05-21 01:36:29.000000000 +0300
+@@ -732,7 +732,7 @@
  
-     AC_CHECK_FUNC(pow)
-     if test $ac_cv_func_pow = no; then
--        AC_CHECK_LIB(m, pow, SERVER_LIBS="$SERVER_LIBS -lm",
-+        AC_CHECK_LIB(m, pow, SERVER_LIBS="$SERVER_LIBS -lm -lssl",
- 		 AC_MSG_ERROR(Did not find math lib!))
-     fi
- fi
+ dnl Checks for additional server libraries:
+ if test "x$server" = "xyes"; then
+-    SERVER_LIBS=" -lm "
++    SERVER_LIBS=" -lm -lssl "
+ 
+     dnl Some systems (e.g., BeOS) need this lib
+     AC_CHECK_LIB(bind, gethostbyaddr, SERVER_LIBS="-lbind $SERVER_LIBS")
 diff -Nurd -X.diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
---- freeciv/server/citytools.c	2012-05-20 04:06:53.000000000 +0300
-+++ freeciv/server/citytools.c	2012-05-20 04:21:10.000000000 +0300
-@@ -1561,7 +1561,7 @@
+--- freeciv/server/citytools.c	2012-05-21 01:28:22.000000000 +0300
++++ freeciv/server/citytools.c	2012-05-21 01:33:26.000000000 +0300
+@@ -1660,7 +1660,7 @@
    packet->happy = pdcity->happy;
    packet->unhappy = pdcity->unhappy;
  
@@ -48,7 +48,7 @@ diff -Nurd -X.diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
  }
  
  /**************************************************************************
-@@ -1775,6 +1775,7 @@
+@@ -1874,6 +1874,7 @@
  {
    int i;
    int ppl = 0;
@@ -56,7 +56,7 @@ diff -Nurd -X.diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
  
    packet->id=pcity->id;
    packet->owner = player_number(city_owner(pcity));
-@@ -1846,7 +1847,7 @@
+@@ -1945,7 +1946,7 @@
    packet->shield_stock = pcity->shield_stock;
    packet->pollution = pcity->pollution;
    packet->illness_trade = pcity->illness_trade;
@@ -65,7 +65,7 @@ diff -Nurd -X.diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
  
    packet->production_kind = pcity->production.kind;
    packet->production_value = universal_number(&pcity->production);
-@@ -1862,7 +1863,7 @@
+@@ -1961,7 +1962,7 @@
    packet->caravan_shields=pcity->caravan_shields;
    packet->last_turns_shield_surplus = pcity->last_turns_shield_surplus;
  
@@ -74,7 +74,7 @@ diff -Nurd -X.diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
    packet->diplomat_investigate=dipl_invest;
  
    packet->airlift = pcity->airlift;
-@@ -1872,12 +1873,13 @@
+@@ -1971,12 +1972,13 @@
  
    packet->walls = city_got_citywalls(pcity);
  

@@ -1,7 +1,7 @@
 diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2012-05-20 05:58:51.000000000 +0300
-+++ freeciv/common/packets.def	2012-05-20 05:55:42.000000000 +0300
-@@ -595,8 +595,13 @@
+--- freeciv/common/packets.def	2012-05-21 03:15:21.000000000 +0300
++++ freeciv/common/packets.def	2012-05-21 03:25:13.000000000 +0300
+@@ -541,8 +541,13 @@
    STRING can_build_unit[MAX_LEN_MSG];
    STRING can_build_improvement[MAX_LEN_MSG];
    STRING improvements[MAX_LEN_MSG];
@@ -14,79 +14,58 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
 +  BOOL unhappy;
  end
  
- PACKET_CITY_SHORT_INFO = 22; sc, lsend, is-game-info, cancel(PACKET_CITY_INFO)
-@@ -738,6 +743,7 @@
+ PACKET_CITY_SHORT_INFO = 32; sc, lsend, is-game-info, cancel(PACKET_CITY_INFO)
+@@ -682,6 +687,7 @@
    STRING inventions[A_LAST+1];
  
    CITY wonders[B_LAST]; diff
 +  UINT32 net_income;
  end
  
- PACKET_PLAYER_PHASE_DONE=40;cs,dsend
-@@ -844,6 +850,20 @@
-   TILE tile;
- end
+ PACKET_PLAYER_PHASE_DONE = 52; cs, dsend
+@@ -918,25 +924,25 @@
  
-+PACKET_GOTO_PATH_REQ=184;cs,dsend
-+  UNIT unit_id;
-+  TILE goal;
-+end
-+
-+# used for showing GOTO path in web client.
-+PACKET_GOTO_PATH=185;sc,dsend
-+  UNIT unit_id;
-+  UINT16 length;
-+  DIRECTION dir[MAX_LEN_ROUTE:length];
-+  TILE dest;
-+  UINT32 turns;
-+end
-+
- PACKET_UNIT_BUILD_CITY=53;cs,dsend
-   UNIT unit_id;
-   STRING name[MAX_LEN_NAME];
-@@ -976,25 +996,25 @@
- 
- PACKET_DIPLOMACY_CREATE_CLAUSE_REQ=77;cs,dsend
+ PACKET_DIPLOMACY_CREATE_CLAUSE_REQ = 99; cs, dsend
    PLAYER counterpart, giver;
 -  CLAUSE type;
 +  CLAUSE clause_type;
    UINT32 value;
  end
  
- PACKET_DIPLOMACY_CREATE_CLAUSE=78;sc,dsend,lsend
+ PACKET_DIPLOMACY_CREATE_CLAUSE = 100; sc, dsend, lsend
    PLAYER counterpart, giver;
 -  CLAUSE type;
 +  CLAUSE clause_type;
    UINT32 value;
  end
  
- PACKET_DIPLOMACY_REMOVE_CLAUSE_REQ=79;cs,dsend
+ PACKET_DIPLOMACY_REMOVE_CLAUSE_REQ = 101; cs, dsend
    PLAYER counterpart, giver;
 -  CLAUSE type;
 +  CLAUSE clause_type;
    UINT32 value;
  end
  
- PACKET_DIPLOMACY_REMOVE_CLAUSE=80;sc,dsend,lsend
+ PACKET_DIPLOMACY_REMOVE_CLAUSE = 102; sc, dsend, lsend
    PLAYER counterpart, giver;
 -  CLAUSE type;
 +  CLAUSE clause_type;
    UINT32 value;
  end
  
-@@ -1020,7 +1040,7 @@
+@@ -962,7 +968,7 @@
  end
  
- PACKET_REPORT_REQ=85;cs,handle-per-conn,dsend
+ PACKET_REPORT_REQ = 111; cs, handle-per-conn, dsend
 -  REPORT_TYPE type;
 +  REPORT_TYPE report_type;
  end
  
  /************** Connection packets **********************/
-@@ -1045,9 +1065,9 @@
+@@ -987,9 +993,9 @@
  
  # Information about the ping times of the connections.
- PACKET_CONN_PING_INFO=87; sc,lsend
+ PACKET_CONN_PING_INFO = 116; sc, lsend
 -  UINT8 connections;
 +  UINT32 connections;
    CONNECTION conn_id[MAX_NUM_CONNECTIONS:connections];
@@ -94,11 +73,28 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
 +  UINT32 ping_time[MAX_NUM_CONNECTIONS:connections];
  end
  
- PACKET_CONN_PING=88;sc
+ PACKET_CONN_PING = 117; sc
+@@ -1722,3 +1728,16 @@
+   STRING message[MAX_LEN_MSG];
+ end
+ 
++PACKET_GOTO_PATH_REQ=229;cs,dsend
++  UNIT unit_id;
++  TILE goal;
++end
++
++# used for showing GOTO path in web client.
++PACKET_GOTO_PATH=230;sc,dsend
++  UNIT unit_id;
++  UINT16 length;
++  DIRECTION dir[MAX_LEN_ROUTE:length];
++  TILE dest;
++  UINT32 turns;
++end
 diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
---- freeciv/server/unithand.c	2012-05-20 05:58:51.000000000 +0300
-+++ freeciv/server/unithand.c	2012-05-20 08:18:19.000000000 +0300
-@@ -791,6 +791,107 @@
+--- freeciv/server/unithand.c	2012-05-21 03:21:54.000000000 +0300
++++ freeciv/server/unithand.c	2012-05-21 03:22:00.000000000 +0300
+@@ -796,6 +796,107 @@
  }
  
  /**************************************************************************
@@ -206,7 +202,7 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
  ...
  **************************************************************************/
  void handle_unit_move(struct player *pplayer, int unit_id, int tile)
-@@ -888,6 +989,9 @@
+@@ -893,6 +994,9 @@
      pf_path_destroy(path);
      return ;
    } else {

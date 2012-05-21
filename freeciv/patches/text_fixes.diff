@@ -1,7 +1,7 @@
 diff -Nurd -X.diff_ignore freeciv/common/featured_text.c freeciv/common/featured_text.c
---- freeciv/common/featured_text.c	2012-05-19 03:14:33.000000000 +0300
-+++ freeciv/common/featured_text.c	2012-05-19 05:33:16.000000000 +0300
-@@ -74,7 +74,7 @@
+--- freeciv/common/featured_text.c	2012-05-21 01:28:25.000000000 +0300
++++ freeciv/common/featured_text.c	2012-05-21 03:01:40.000000000 +0300
+@@ -73,7 +73,7 @@
  
  const struct ft_color ftc_warning       = FT_COLOR("#FF0000",   NULL);
  const struct ft_color ftc_log           = FT_COLOR("#7F7F7F",   NULL);
@@ -10,7 +10,7 @@ diff -Nurd -X.diff_ignore freeciv/common/featured_text.c freeciv/common/featured
  const struct ft_color ftc_client        = FT_COLOR("#EF7F00",   NULL);
  const struct ft_color ftc_editor        = FT_COLOR("#0000FF",   NULL);
  const struct ft_color ftc_command       = FT_COLOR("#006400",   NULL);
-@@ -83,7 +83,7 @@
+@@ -82,7 +82,7 @@
  const struct ft_color ftc_player_lost   = FT_COLOR("#FFFFFF",   "#000000");
  const struct ft_color ftc_game_start    = FT_COLOR("#00FF00",   "#115511");
  
@@ -19,36 +19,39 @@ diff -Nurd -X.diff_ignore freeciv/common/featured_text.c freeciv/common/featured
  const struct ft_color ftc_chat_ally     = FT_COLOR("#551166",   NULL);
  const struct ft_color ftc_chat_private  = FT_COLOR("#A020F0",   NULL);
  
-@@ -1075,10 +1075,9 @@
+@@ -1048,10 +1048,9 @@
  {
    static char buf[MAX_LEN_LINK];
  
--  my_snprintf(buf, sizeof(buf), "%c%s tgt=\"%s\" id=%d name=\"%s\" %c%c",
+-  fc_snprintf(buf, sizeof(buf), "%c%s tgt=\"%s\" id=%d name=\"%s\" %c%c",
 -              SEQ_START, text_tag_type_short_name(TTT_LINK),
 -              text_link_type_name(TLT_CITY), pcity->id,
 -              city_name(pcity), SEQ_END, SEQ_STOP);
-+  my_snprintf(buf, sizeof(buf), "<a href=\"#\" onclick=\"show_city_dialog_by_id(%d);\">%s</a>",
++  fc_snprintf(buf, sizeof(buf), "<a href=\"#\" onclick=\"show_city_dialog_by_id(%d);\">%s</a>",
 +              pcity->id,
 +              city_name(pcity));
    return buf;
  }
  
-@@ -1109,9 +1108,7 @@
+@@ -1098,12 +1097,8 @@
+ {
+   static char buf[MAX_LEN_LINK];
  
-   /* We use the rule name of the unit, it will be translated in every
-    * local sides in the function text_tag_replace_text(). */
--  my_snprintf(buf, sizeof(buf), "%c%s tgt=\"%s\" id=%d name=\"%s\" %c%c",
+-  /* We use the rule name of the unit, it will be translated in every
+-   * local sides in the function text_tag_replace_text(). */
+-  fc_snprintf(buf, sizeof(buf), "%c%s tgt=\"%s\" id=%d name=\"%s\" %c%c",
 -              SEQ_START, text_tag_type_short_name(TTT_LINK),
 -              text_link_type_name(TLT_UNIT), punit->id,
 -              unit_rule_name(punit), SEQ_END, SEQ_STOP);
-+  my_snprintf(buf, sizeof(buf), "%s", unit_rule_name(punit));
++  fc_snprintf(buf, sizeof(buf), "%s", unit_name_translation(punit));
 +
    return buf;
  }
+ 
 diff -Nurd -X.diff_ignore freeciv/server/srv_main.c freeciv/server/srv_main.c
---- freeciv/server/srv_main.c	2012-05-19 05:25:30.000000000 +0300
-+++ freeciv/server/srv_main.c	2012-05-19 05:25:47.000000000 +0300
-@@ -1908,7 +1908,13 @@
+--- freeciv/server/srv_main.c	2012-05-21 02:57:40.000000000 +0300
++++ freeciv/server/srv_main.c	2012-05-21 02:57:55.000000000 +0300
+@@ -1914,7 +1914,13 @@
        char leader_name[MAX_LEN_NAME];
  
        pick_random_player_name(nation_of_player(pplayer), leader_name);

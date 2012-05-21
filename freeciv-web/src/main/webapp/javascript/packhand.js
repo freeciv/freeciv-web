@@ -752,7 +752,27 @@ function handle_goto_path(packet)
   show_goto_path(packet);
 }
 
-function handle_server_setting(packet)
+function handle_server_setting_const(packet)
+{
+  /* TODO: implement */
+}
+
+function handle_server_setting_int(packet)
+{
+  /* TODO: implement */
+}
+
+function handle_server_setting_enum(packet)
+{
+  /* TODO: implement */
+}
+
+function handle_server_setting_bool(packet)
+{
+  /* TODO: implement */
+}
+
+function handle_server_setting_str(packet)
 {
   /* TODO: implement */
 }

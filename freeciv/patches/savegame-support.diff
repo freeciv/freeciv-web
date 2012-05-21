@@ -1,7 +1,35 @@
+diff -Nurd -X.diff_ignore freeciv/common/game.c freeciv/common/game.c
+--- freeciv/common/game.c	2012-05-21 01:28:25.000000000 +0300
++++ freeciv/common/game.c	2012-05-21 02:37:35.000000000 +0300
+@@ -795,6 +795,13 @@
+     CF_INT_SEQ('Y', game.info.year),
+     CF_END
+   };
++  time_t     now;
++  struct tm  *ts;
++  char buff[80];
++
++  now = time(0); 
++  ts = localtime(&now);
++  strftime(buff, sizeof(buff), "%Y-%m-%d-%H-%M-%S", ts);
+ 
+   fc_vsnprintcf(buf, buflen, format, sequences, -1);
+ 
+@@ -803,8 +810,8 @@
+      * printf information. */
+     char savename[512];
+ 
+-    fc_snprintf(savename, sizeof(savename), "%s-T%%04T-Y%%05Y-%%R",
+-                format);
++    fc_snprintf(savename, sizeof(savename), "%s-T%%04T-Y%%05Y-%%R-%s",
++                format, buff);
+     fc_vsnprintcf(buf, buflen, savename, sequences, -1);
+   }
+ 
 diff -Nurd -X.diff_ignore freeciv/configure.ac freeciv/configure.ac
---- freeciv/configure.ac	2012-05-20 04:28:48.000000000 +0300
-+++ freeciv/configure.ac	2012-05-20 04:46:43.000000000 +0300
-@@ -831,7 +831,7 @@
+--- freeciv/configure.ac	2012-05-21 01:41:44.000000000 +0300
++++ freeciv/configure.ac	2012-05-21 02:23:05.000000000 +0300
+@@ -850,7 +850,7 @@
    DEFAULT_SCENARIO_PATH=".;data/scenario;~/.freeciv/scenario;$datadir/freeciv/scenario"
  else
    DEFAULT_DATA_PATH=".:data:~/.freeciv/$DATASUBDIR:$datadir/freeciv"
@@ -11,9 +39,9 @@ diff -Nurd -X.diff_ignore freeciv/configure.ac freeciv/configure.ac
  fi
  CPPFLAGS="$CPPFLAGS -DDEFAULT_DATA_PATH=\"\\\"$DEFAULT_DATA_PATH\\\"\""
 diff -Nurd -X.diff_ignore freeciv/server/commands.c freeciv/server/commands.c
---- freeciv/server/commands.c	2012-05-20 04:06:53.000000000 +0300
-+++ freeciv/server/commands.c	2012-05-20 04:46:43.000000000 +0300
-@@ -433,7 +433,7 @@
+--- freeciv/server/commands.c	2012-05-21 01:28:22.000000000 +0300
++++ freeciv/server/commands.c	2012-05-21 02:23:05.000000000 +0300
+@@ -436,7 +436,7 @@
        "all cities and units etc. Use with care!"),
     VCF_NONE, 50
    },
@@ -23,8 +51,8 @@ diff -Nurd -X.diff_ignore freeciv/server/commands.c freeciv/server/commands.c
     N_("save\n"
        "save <file-name>"),
 diff -Nurd -X.diff_ignore freeciv/server/meta.h freeciv/server/meta.h
---- freeciv/server/meta.h	2012-05-20 04:42:16.000000000 +0300
-+++ freeciv/server/meta.h	2012-05-20 04:46:43.000000000 +0300
+--- freeciv/server/meta.h	2012-05-21 02:09:09.000000000 +0300
++++ freeciv/server/meta.h	2012-05-21 02:23:05.000000000 +0300
 @@ -17,7 +17,7 @@
  
  #define DEFAULT_META_SERVER_NO_SEND  TRUE
@@ -35,8 +63,8 @@ diff -Nurd -X.diff_ignore freeciv/server/meta.h freeciv/server/meta.h
  
  enum meta_flag {
 diff -Nurd -X.diff_ignore freeciv/server/report.c freeciv/server/report.c
---- freeciv/server/report.c	2012-05-20 04:06:53.000000000 +0300
-+++ freeciv/server/report.c	2012-05-20 04:46:43.000000000 +0300
+--- freeciv/server/report.c	2012-05-21 01:28:21.000000000 +0300
++++ freeciv/server/report.c	2012-05-21 02:56:51.000000000 +0300
 @@ -935,7 +935,9 @@
  **************************************************************************/
  void log_civ_score(void)
@@ -52,8 +80,8 @@ diff -Nurd -X.diff_ignore freeciv/server/report.c freeciv/server/report.c
    static char *player_name_ptrs[MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS];
    static int last_turn = -1;
  
-+ /* put this file in the same place we put savegames */
-+  my_snprintf(logname, sizeof(logname),
++  /* put this file in the same place we put savegames */
++  fc_snprintf(logname, sizeof(logname),
 +              "civscore-%04d.log", srvarg.port);
 +
 +  /* Ensure the saves directory exists. */
@@ -71,9 +99,9 @@ diff -Nurd -X.diff_ignore freeciv/server/report.c freeciv/server/report.c
     * Add new tags only at end of this list. Maintaining the order of
     * old tags is critical.
 diff -Nurd -X.diff_ignore freeciv/server/savegame.c freeciv/server/savegame.c
---- freeciv/server/savegame.c	2012-05-20 04:06:53.000000000 +0300
-+++ freeciv/server/savegame.c	2012-05-20 04:48:40.000000000 +0300
-@@ -419,8 +419,12 @@
+--- freeciv/server/savegame.c	2012-05-21 01:28:21.000000000 +0300
++++ freeciv/server/savegame.c	2012-05-21 02:23:05.000000000 +0300
+@@ -411,8 +411,12 @@
      break;
    }
  
@@ -87,63 +115,30 @@ diff -Nurd -X.diff_ignore freeciv/server/savegame.c freeciv/server/savegame.c
  
  /****************************************************************************
 diff -Nurd -X.diff_ignore freeciv/server/score.c freeciv/server/score.c
---- freeciv/server/score.c	2012-05-20 04:06:53.000000000 +0300
-+++ freeciv/server/score.c	2012-05-20 04:46:43.000000000 +0300
-@@ -387,13 +387,13 @@
+--- freeciv/server/score.c	2012-05-21 01:28:22.000000000 +0300
++++ freeciv/server/score.c	2012-05-21 02:24:31.000000000 +0300
+@@ -386,13 +386,15 @@
    int watercol[3] = {0,0,255}; /* blue */
    int landcol[3] =  {0,0,0};   /* black */
  
--  if (!srvarg.save_ppm) {
-+  /*if (!srvarg.save_ppm) {
++#if 0
+   if (!srvarg.save_ppm) {
      return;
--  }
-+  }*/
+   }
++#endif
  
    /* put this file in the same place we put savegames */
-   my_snprintf(filename, sizeof(filename),
+   fc_snprintf(filename, sizeof(filename),
 -              "%s%+05d.int.ppm", game.server.save_name, game.info.year);
 +              "overviewmap-%04d.ppm", srvarg.port);
  
    /* Ensure the saves directory exists. */
    make_dir(srvarg.saves_pathname);
 diff -Nurd -X.diff_ignore freeciv/server/srv_main.c freeciv/server/srv_main.c
---- freeciv/server/srv_main.c	2012-05-20 04:32:33.000000000 +0300
-+++ freeciv/server/srv_main.c	2012-05-20 04:50:50.000000000 +0300
-@@ -1016,6 +1016,13 @@
- {
-   int nb, year;
-   const char *year_suffix;
-+  time_t     now;
-+  struct tm  *ts;
-+  char buff[80];
-+
-+  now = time(0); 
-+  ts = localtime(&now);
-+  strftime(buff, sizeof(buff), "%Y-%m-%d-%H-%M-%S", ts);
- 
-   if (game.info.year < 0) {
-     year = -game.info.year;
-@@ -1028,13 +1035,14 @@
-   /* NB: If you change the format here, be sure to update the above
-    * function comment and the help text for the 'savename' setting. */
-   if (reason == NULL) {
--    nb = my_snprintf(buf, buflen, "%s-T%03d-Y%d%s%s",
-+    nb = my_snprintf(buf, buflen, "%s-T%03d-Y%d%s%s-%s",
-                      game.server.save_name, game.info.turn, year,
--                     year_suffix, is_auto_save ? "" : "m");
-+                     year_suffix, is_auto_save ? "" : "m",
-+		     buff);
-   } else {
--    nb = my_snprintf(buf, buflen, "%s-%s-T%03d-Y%d%s%s",
-+    nb = my_snprintf(buf, buflen, "%s-%s-T%03d-Y%d%s%s-%s",
-                      game.server.save_name, reason, game.info.turn, year,
--                     year_suffix, is_auto_save ? "" : "m");
-+                     year_suffix, is_auto_save ? "" : "m", buff);
-   }
- 
-   return nb;
-@@ -1047,18 +1055,19 @@
- Note that if !HAVE_LIBZ, then game.info.save_compress_level should never
+--- freeciv/server/srv_main.c	2012-05-21 01:52:00.000000000 +0300
++++ freeciv/server/srv_main.c	2012-05-21 02:54:19.000000000 +0300
+@@ -1014,18 +1014,19 @@
+ Note that if !HAVE_LIBZ, then game.server.save_compress_level should never
  become non-zero, so no need to check HAVE_LIBZ explicitly here as well.
  **************************************************************************/
 -void save_game(char *orig_filename, const char *save_reason, bool scenario)
@@ -167,96 +162,53 @@ diff -Nurd -X.diff_ignore freeciv/server/srv_main.c freeciv/server/srv_main.c
      if ((filename = strrchr(filepath, '/'))) {
        filename++;
      } else {
-@@ -1078,11 +1087,7 @@
+@@ -1045,12 +1046,9 @@
      }
    }
  
 -  /* If orig_filename is NULL or empty, use a generated default name. */
 -  if (filename[0] == '\0'){
--    generate_save_name(filename, sizeof(filepath) + filepath - filename,
--                       FALSE, NULL);
+-    /* manual save */
+-    generate_save_name(game.server.save_name, filename,
+-                       sizeof(filepath) + filepath - filename, "manual");
 -  }
-+  generate_save_name(genname, sizeof(genname), FALSE, NULL);
++  /* manual save */
++  generate_save_name(game.server.save_name, filepath,
++                     sizeof(filepath), "manual");
  
    timer_cpu = new_timer_start(TIMER_CPU, TIMER_ACTIVE);
    timer_user = new_timer_start(TIMER_USER, TIMER_ACTIVE);
-@@ -1091,20 +1096,20 @@
-   game_save(file, save_reason, scenario);
- 
-   /* Append ".sav" to filename. */
--  sz_strlcat(filepath, ".sav");
-+  sz_strlcat(genname, ".sav");
- 
-   if (game.info.save_compress_level > 0) {
-     switch (game.info.save_compress_type) {
- #ifdef HAVE_LIBZ
-     case FZ_ZLIB:
-       /* Append ".gz" to filename. */
--      sz_strlcat(filepath, ".gz");
-+      sz_strlcat(genname, ".gz");
-       break;
- #endif
- #ifdef HAVE_LIBBZ2
-     case FZ_BZIP2:
-       /* Append ".bz2" to filename. */
--      sz_strlcat(filepath, ".bz2");
-+      sz_strlcat(genname, ".bz2");
-       break;
- #endif
-     case FZ_PLAIN:
-@@ -1124,24 +1129,28 @@
+@@ -1092,12 +1090,12 @@
  
      if (!scenario) {
        /* Ensure the saves directory exists. */
 -      make_dir(srvarg.saves_pathname);
-+      //make_dir(srvarg.saves_pathname);
++/*      make_dir(srvarg.saves_pathname); */
  
        sz_strlcpy(tmpname, srvarg.saves_pathname);
      } else {
        /* Make sure scenario directory exist */
 -      make_dir(srvarg.scenarios_pathname);
-+      //make_dir(srvarg.scenarios_pathname);
++/*      make_dir(srvarg.scenarios_pathname); */
  
        sz_strlcpy(tmpname, srvarg.scenarios_pathname);
      }
- 
--    if (tmpname[0] != '\0') {
--      sz_strlcat(tmpname, "/");
--    }
--    sz_strlcat(tmpname, filepath);
-+    sz_strlcpy(tmpname, srvarg.saves_pathname);
-+    sz_strlcat(tmpname, filename);
+@@ -1105,7 +1103,14 @@
+     if (tmpname[0] != '\0') {
+       sz_strlcat(tmpname, "/");
+     }
++    sz_strlcat(tmpname, username);
 +    sz_strlcat(tmpname, "/");
-+      
++
 +    /* Ensure the saves directory exists. */
 +    make_dir(tmpname);
 +
-+    sz_strlcat(tmpname, genname);
+     sz_strlcat(tmpname, filepath);
++
      sz_strlcpy(filepath, tmpname);
    }
  
--  if (!secfile_save(file, filepath, game.info.save_compress_level,
-+  if (!secfile_save(&file, filename, game.info.save_compress_level,
-                     game.info.save_compress_type)) {
-     con_write(C_FAIL, _("Failed saving game as %s"), filepath);
-   } else {
-@@ -1163,6 +1172,7 @@
- **************************************************************************/
- void save_game_auto(const char *save_reason, const char *reason_filename)
- {
-+#if 0
-   char filename[512];
- 
-   fc_assert(256 > strlen(game.server.save_name));
-@@ -1170,6 +1180,7 @@
-   generate_save_name(filename, sizeof(filename), TRUE, reason_filename);
-   //save_game(filename, save_reason, FALSE);
-   //save_ppm();
-+#endif
- }
- 
- /**************************************************************************
-@@ -2094,6 +2105,8 @@
+@@ -2069,6 +2074,8 @@
  	save_counter++;
        }
  
@@ -266,9 +218,9 @@ diff -Nurd -X.diff_ignore freeciv/server/srv_main.c freeciv/server/srv_main.c
        check_for_full_turn_done(); /* HACK: don't wait during AI phases */
        while (server_sniff_all_input() == S_E_OTHERWISE) {
 diff -Nurd -X.diff_ignore freeciv/server/stdinhand.c freeciv/server/stdinhand.c
---- freeciv/server/stdinhand.c	2012-05-20 04:06:53.000000000 +0300
-+++ freeciv/server/stdinhand.c	2012-05-20 04:46:43.000000000 +0300
-@@ -672,11 +672,6 @@
+--- freeciv/server/stdinhand.c	2012-05-21 01:28:24.000000000 +0300
++++ freeciv/server/stdinhand.c	2012-05-21 02:57:17.000000000 +0300
+@@ -676,11 +676,6 @@
  **************************************************************************/
  static bool save_command(struct connection *caller, char *arg, bool check)
  {
@@ -280,7 +232,7 @@ diff -Nurd -X.diff_ignore freeciv/server/stdinhand.c freeciv/server/stdinhand.c
    if (!check) {
      save_game(arg, "User request", FALSE);
    }
-@@ -3275,15 +3270,17 @@
+@@ -3533,15 +3528,17 @@
    {
      /* it is a normal savegame or maybe a scenario */
      char testfile[MAX_LEN_PATH];
@@ -289,7 +241,7 @@ diff -Nurd -X.diff_ignore freeciv/server/stdinhand.c freeciv/server/stdinhand.c
 -    };
 +    char usrdir[MAX_LEN_PATH];
 +
-+    my_snprintf(usrdir, sizeof(usrdir), "%s/", 
++    fc_snprintf(usrdir, sizeof(usrdir), "%s/", 
 +		caller->username);
 +
 +    const char *pathes[] = { "", usrdir, "scenario/", NULL };
@@ -303,8 +255,8 @@ diff -Nurd -X.diff_ignore freeciv/server/stdinhand.c freeciv/server/stdinhand.c
 + 
      for (path = pathes; !found && *path; path++) {
        for (ext = exts; !found && *ext; ext++) {
-         my_snprintf(testfile, sizeof(testfile), "%s.%s", filename, *ext);
-@@ -3596,6 +3593,11 @@
+         fc_snprintf(testfile, sizeof(testfile), "%s.%s", filename, *ext);
+@@ -3860,6 +3857,11 @@
  
    level = command_level(command_by_number(cmd));
  

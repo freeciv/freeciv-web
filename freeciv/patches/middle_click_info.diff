@@ -1,25 +1,25 @@
 diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2012-05-19 04:03:43.000000000 +0300
-+++ freeciv/common/packets.def	2012-05-19 04:04:53.000000000 +0300
-@@ -1739,3 +1739,14 @@
+--- freeciv/common/packets.def	2012-05-21 02:09:09.000000000 +0300
++++ freeciv/common/packets.def	2012-05-21 02:13:02.000000000 +0300
+@@ -1709,3 +1709,14 @@
    SINT32 tag;
    SINT32 id;
  end
 +
 +/*************** Webclient specific packets ****************/
-+PACKET_INFO_TEXT_REQ=186;cs,dsend
++PACKET_INFO_TEXT_REQ=227;cs,dsend
 +  TILE loc;
-+  UNIT visible_unit; 
++  UNIT visible_unit;
 +end
 +
-+PACKET_INFO_TEXT_MESSAGE=187;sc,dsend
++PACKET_INFO_TEXT_MESSAGE=228;sc,dsend
 +  STRING message[MAX_LEN_MSG];
 +end
 +
 diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
---- freeciv/server/maphand.c	2012-05-19 04:03:43.000000000 +0300
-+++ freeciv/server/maphand.c	2012-05-19 04:13:12.000000000 +0300
-@@ -36,6 +36,7 @@
+--- freeciv/server/maphand.c	2012-05-21 01:28:24.000000000 +0300
++++ freeciv/server/maphand.c	2012-05-21 02:20:46.000000000 +0300
+@@ -34,6 +34,7 @@
  #include "unit.h"
  #include "unitlist.h"
  #include "vision.h"
@@ -27,7 +27,7 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
  
  /* generator */
  #include "utilities.h"
-@@ -1811,3 +1812,403 @@
+@@ -1836,3 +1837,403 @@
      }
    }
  }
@@ -53,9 +53,9 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +    }
 +
 +    if (before_penalty > 0 && x > before_penalty) {
-+      my_snprintf(output_text[i], sizeof(output_text[i]), "%d(-1)", x);
++      fc_snprintf(output_text[i], sizeof(output_text[i]), "%d(-1)", x);
 +    } else {
-+      my_snprintf(output_text[i], sizeof(output_text[i]), "%d", x);
++      fc_snprintf(output_text[i], sizeof(output_text[i]), "%d", x);
 +    }
 +  }
 +  
@@ -65,7 +65,7 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +		output_text[O_SHIELD],
 +		output_text[O_TRADE]);
 +
-+  return str.str;
++  return astr_str(&str);
 +}
 +
 +
@@ -140,7 +140,7 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +    }
 +  }
 +
-+  return str.str;
++  return astr_str(&str);
 +}
 +
 +
@@ -162,11 +162,11 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +
 +  if (pplayer->team) {
 +    /* TRANS: "<nation adjective>, team <team name>" */
-+    my_snprintf(buf, buflen, _("%s, team %s"),
++    fc_snprintf(buf, buflen, _("%s, team %s"),
 +                nation_adjective_for_player(pplayer),
 +                team_name_translation(pplayer->team));
 +  } else {
-+    mystrlcpy(buf, nation_adjective_for_player(pplayer), buflen);
++    fc_strlcpy(buf, nation_adjective_for_player(pplayer), buflen);
 +  }
 +}
 +
@@ -189,9 +189,9 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +
 +  if (pplayer->ai_data.control) {
 +    /* TRANS: "AI <player name>" */
-+    my_snprintf(buf, buflen, _("AI %s"), pplayer->name);
++    fc_snprintf(buf, buflen, _("AI %s"), pplayer->name);
 +  } else {
-+    mystrlcpy(buf, pplayer->username, buflen);
++    fc_strlcpy(buf, pplayer->username, buflen);
 +  }
 +}
 +
@@ -227,7 +227,7 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +
 +  if (tile_get_known(ptile, pplayer) == TILE_UNKNOWN) {
 +    astr_add(&str, _("Unknown"));
-+    return str.str;
++    return astr_str(&str);
 +  }
 +  astr_add_line(&str, _("Terrain: %s"),  tile_get_info_text(ptile, 0));
 +  astr_add_line(&str, _("Food/Prod/Trade: %s"),
@@ -411,7 +411,7 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +      astr_add(&str, _("  (%d more)"), unit_list_size(ptile->units) - 1);
 +    }
 +  } 
-+  return str.str;
++  return astr_str(&str);
 +}
 +
 +
@@ -432,8 +432,8 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +}
 +
 diff -Nurd -X.diff_ignore freeciv/server/maphand.h freeciv/server/maphand.h
---- freeciv/server/maphand.h	2012-05-19 04:03:43.000000000 +0300
-+++ freeciv/server/maphand.h	2012-05-19 04:13:18.000000000 +0300
+--- freeciv/server/maphand.h	2012-05-21 01:28:24.000000000 +0300
++++ freeciv/server/maphand.h	2012-05-21 02:09:21.000000000 +0300
 @@ -122,5 +122,7 @@
  
  void create_base(struct tile *ptile, struct base_type *pbase,

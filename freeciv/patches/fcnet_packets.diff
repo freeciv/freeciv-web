@@ -1,7 +1,7 @@
 diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2012-05-21 03:15:21.000000000 +0300
-+++ freeciv/common/packets.def	2012-05-21 03:25:13.000000000 +0300
-@@ -541,8 +541,13 @@
+--- freeciv/common/packets.def	2012-05-23 01:09:51.000000000 +0300
++++ freeciv/common/packets.def	2012-05-23 03:15:07.000000000 +0300
+@@ -539,8 +539,13 @@
    STRING can_build_unit[MAX_LEN_MSG];
    STRING can_build_improvement[MAX_LEN_MSG];
    STRING improvements[MAX_LEN_MSG];
@@ -15,15 +15,15 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  end
  
  PACKET_CITY_SHORT_INFO = 32; sc, lsend, is-game-info, cancel(PACKET_CITY_INFO)
-@@ -682,6 +687,7 @@
-   STRING inventions[A_LAST+1];
+@@ -677,6 +682,7 @@
+   UINT32 love[MAX_NUM_PLAYER_SLOTS];
  
    CITY wonders[B_LAST]; diff
 +  UINT32 net_income;
  end
  
  PACKET_PLAYER_PHASE_DONE = 52; cs, dsend
-@@ -918,25 +924,25 @@
+@@ -928,25 +934,25 @@
  
  PACKET_DIPLOMACY_CREATE_CLAUSE_REQ = 99; cs, dsend
    PLAYER counterpart, giver;
@@ -53,7 +53,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    UINT32 value;
  end
  
-@@ -962,7 +968,7 @@
+@@ -972,7 +978,7 @@
  end
  
  PACKET_REPORT_REQ = 111; cs, handle-per-conn, dsend
@@ -62,7 +62,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  end
  
  /************** Connection packets **********************/
-@@ -987,9 +993,9 @@
+@@ -997,9 +1003,9 @@
  
  # Information about the ping times of the connections.
  PACKET_CONN_PING_INFO = 116; sc, lsend
@@ -73,8 +73,8 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
 +  UINT32 ping_time[MAX_NUM_CONNECTIONS:connections];
  end
  
- PACKET_CONN_PING = 117; sc
-@@ -1722,3 +1728,16 @@
+ # For compatibility with older versions, this number cannot be changed.
+@@ -1733,3 +1739,16 @@
    STRING message[MAX_LEN_MSG];
  end
  
@@ -92,9 +92,9 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
 +  UINT32 turns;
 +end
 diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
---- freeciv/server/unithand.c	2012-05-21 03:21:54.000000000 +0300
-+++ freeciv/server/unithand.c	2012-05-21 03:22:00.000000000 +0300
-@@ -796,6 +796,107 @@
+--- freeciv/server/unithand.c	2012-05-23 03:15:01.000000000 +0300
++++ freeciv/server/unithand.c	2012-05-23 03:23:58.000000000 +0300
+@@ -803,6 +803,107 @@
  }
  
  /**************************************************************************
@@ -121,7 +121,7 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
 +
 +  if (NULL == ptile) {
 +    /* Shouldn't happen */
-+    log_error(LOG_ERROR, "handle_unit_move()"
++    log_error("handle_unit_move()"
 +              " invalid %s (%d) tile (%d,%d)",
 +              unit_rule_name(punit),
 +              unit_id,
@@ -157,11 +157,11 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
 +
 +    /* Remove city spot reservations for AI settlers on city founding
 +     * mission, before goto_tile reset. */
-+    if (punit->ai.ai_role != AIUNIT_NONE) {
++    if (punit->server.adv->role != AIUNIT_NONE) {
 +      ai_unit_new_role(punit, AIUNIT_NONE, NULL);
 +    }
 +
-+    punit->ai.control = FALSE;
++    punit->ai_controlled = FALSE;
 +    punit->goto_tile = NULL;
 +
 +    free_unit_orders(punit);
@@ -202,7 +202,7 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
  ...
  **************************************************************************/
  void handle_unit_move(struct player *pplayer, int unit_id, int tile)
-@@ -893,6 +994,9 @@
+@@ -900,6 +1001,9 @@
      pf_path_destroy(path);
      return ;
    } else {

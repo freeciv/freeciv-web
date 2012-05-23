@@ -1,6 +1,6 @@
 diff -Nurd -X.diff_ignore freeciv/common/game.h freeciv/common/game.h
---- freeciv/common/game.h	2012-05-21 01:28:25.000000000 +0300
-+++ freeciv/common/game.h	2012-05-21 02:04:37.000000000 +0300
+--- freeciv/common/game.h	2012-05-21 12:41:30.000000000 +0300
++++ freeciv/common/game.h	2012-05-21 14:49:49.000000000 +0300
 @@ -195,6 +195,7 @@
        struct {
          bool user_message_set;
@@ -10,13 +10,10 @@ diff -Nurd -X.diff_ignore freeciv/common/game.h freeciv/common/game.h
      } server;
    };
 diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2012-05-21 02:02:26.000000000 +0300
-+++ freeciv/common/packets.def	2012-05-21 02:04:37.000000000 +0300
-@@ -1243,15 +1243,15 @@
-   IMPROVEMENT id;
-   IMPR_GENUS genus;
+--- freeciv/common/packets.def	2012-05-21 14:45:55.000000000 +0300
++++ freeciv/common/packets.def	2012-05-21 14:51:36.000000000 +0300
+@@ -1259,12 +1259,12 @@
    STRING name[MAX_LEN_NAME];
-+  UINT32 build_cost;
    STRING graphic_str[MAX_LEN_NAME];
    STRING graphic_alt[MAX_LEN_NAME];
 -  UINT8 reqs_count;
@@ -26,15 +23,14 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    IMPROVEMENT replaced_by;
 -  UINT16 build_cost;
 -  UINT8 upkeep, sabotage;
--  UINT16 flags;
++  UINT32 build_cost;
 +  UINT32 upkeep, sabotage;
-+  UINT32 flags;
+   BV_IMPR_FLAGS flags;
    STRING soundtag[MAX_LEN_NAME];
    STRING soundtag_alt[MAX_LEN_NAME];
-   STRING helptext[MAX_LEN_PACKET];
 diff -Nurd -X.diff_ignore freeciv/server/civserver.c freeciv/server/civserver.c
---- freeciv/server/civserver.c	2012-05-21 01:28:22.000000000 +0300
-+++ freeciv/server/civserver.c	2012-05-21 02:04:37.000000000 +0300
+--- freeciv/server/civserver.c	2012-05-21 12:41:29.000000000 +0300
++++ freeciv/server/civserver.c	2012-05-21 14:49:49.000000000 +0300
 @@ -244,6 +244,9 @@
        free(option);
      } else if ((option = get_option_malloc("--bind", argv, &inx, argc))) {
@@ -55,8 +51,8 @@ diff -Nurd -X.diff_ignore freeciv/server/civserver.c freeciv/server/civserver.c
      /* TRANS: No full stop after the URL, could cause confusion. */
      fc_fprintf(stderr, _("Report bugs at %s\n"), BUG_URL);
 diff -Nurd -X.diff_ignore freeciv/server/meta.c freeciv/server/meta.c
---- freeciv/server/meta.c	2012-05-21 01:28:21.000000000 +0300
-+++ freeciv/server/meta.c	2012-05-21 02:08:57.000000000 +0300
+--- freeciv/server/meta.c	2012-05-21 12:41:29.000000000 +0300
++++ freeciv/server/meta.c	2012-05-21 14:49:49.000000000 +0300
 @@ -109,6 +109,12 @@
    return meta_message;
  }
@@ -106,8 +102,8 @@ diff -Nurd -X.diff_ignore freeciv/server/meta.c freeciv/server/meta.c
  
          fc_snprintf(s, rest, "plh[]=%s&",
 diff -Nurd -X.diff_ignore freeciv/server/meta.h freeciv/server/meta.h
---- freeciv/server/meta.h	2012-05-21 02:04:34.000000000 +0300
-+++ freeciv/server/meta.h	2012-05-21 02:04:37.000000000 +0300
+--- freeciv/server/meta.h	2012-05-21 14:49:46.000000000 +0300
++++ freeciv/server/meta.h	2012-05-21 14:49:49.000000000 +0300
 @@ -32,6 +32,7 @@
  const char *get_meta_patches_string(void);
  const char *get_meta_message_string(void);

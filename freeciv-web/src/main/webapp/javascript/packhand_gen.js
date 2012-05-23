@@ -48,6 +48,10 @@ function client_handle_packet(p)
       handle_nuke_tile_info(p[i]);
       break;
 
+    case  19:
+      handle_team_name_info(p[i]);
+      break;
+
     case  25:
       handle_chat_msg(p[i]);
       break;
@@ -88,24 +92,32 @@ function client_handle_packet(p)
       handle_player_attribute_chunk(p[i]);
       break;
 
-    case  65:
+    case  59:
+      handle_player_diplstate(p[i]);
+      break;
+
+    case  62:
       handle_unit_remove(p[i]);
       break;
 
-    case  66:
+    case  63:
       handle_unit_info(p[i]);
       break;
 
-    case  67:
+    case  64:
       handle_unit_short_info(p[i]);
       break;
 
-    case  68:
+    case  65:
       handle_unit_combat_info(p[i]);
       break;
 
-    case  88:
+    case  85:
       handle_unit_diplomat_answer(p[i]);
+      break;
+
+    case  88:
+      handle_conn_ping(p[i]);
       break;
 
     case  96:
@@ -138,10 +150,6 @@ function client_handle_packet(p)
 
     case  116:
       handle_conn_ping_info(p[i]);
-      break;
-
-    case  117:
-      handle_conn_ping(p[i]);
       break;
 
     case  125:

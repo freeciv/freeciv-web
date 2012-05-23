@@ -1,7 +1,7 @@
 diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2012-05-21 02:09:09.000000000 +0300
-+++ freeciv/common/packets.def	2012-05-21 02:13:02.000000000 +0300
-@@ -1709,3 +1709,14 @@
+--- freeciv/common/packets.def	2012-05-23 00:39:46.000000000 +0300
++++ freeciv/common/packets.def	2012-05-23 00:39:53.000000000 +0300
+@@ -1721,3 +1721,14 @@
    SINT32 tag;
    SINT32 id;
  end
@@ -17,9 +17,9 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
 +end
 +
 diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
---- freeciv/server/maphand.c	2012-05-21 01:28:24.000000000 +0300
-+++ freeciv/server/maphand.c	2012-05-21 02:20:46.000000000 +0300
-@@ -34,6 +34,7 @@
+--- freeciv/server/maphand.c	2012-05-21 12:41:29.000000000 +0300
++++ freeciv/server/maphand.c	2012-05-23 00:43:42.000000000 +0300
+@@ -36,6 +36,7 @@
  #include "unit.h"
  #include "unitlist.h"
  #include "vision.h"
@@ -27,7 +27,7 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
  
  /* generator */
  #include "utilities.h"
-@@ -1836,3 +1837,403 @@
+@@ -1864,3 +1865,403 @@
      }
    }
  }
@@ -187,7 +187,7 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +    return;
 +  }
 +
-+  if (pplayer->ai_data.control) {
++  if (pplayer->ai_controlled) {
 +    /* TRANS: "AI <player name>" */
 +    fc_snprintf(buf, buflen, _("AI %s"), pplayer->name);
 +  } else {
@@ -432,9 +432,9 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +}
 +
 diff -Nurd -X.diff_ignore freeciv/server/maphand.h freeciv/server/maphand.h
---- freeciv/server/maphand.h	2012-05-21 01:28:24.000000000 +0300
-+++ freeciv/server/maphand.h	2012-05-21 02:09:21.000000000 +0300
-@@ -122,5 +122,7 @@
+--- freeciv/server/maphand.h	2012-05-21 12:41:29.000000000 +0300
++++ freeciv/server/maphand.h	2012-05-23 00:39:53.000000000 +0300
+@@ -121,5 +121,7 @@
  
  void create_base(struct tile *ptile, struct base_type *pbase,
                   struct player *pplayer);

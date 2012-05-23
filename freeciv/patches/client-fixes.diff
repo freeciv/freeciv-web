@@ -1,16 +1,16 @@
 diff -Nurd -X.diff_ignore freeciv/client/packhand.c freeciv/client/packhand.c
---- freeciv/client/packhand.c	2012-05-16 20:56:41.000000000 +0300
-+++ freeciv/client/packhand.c	2012-05-16 21:16:58.000000000 +0300
-@@ -563,7 +563,7 @@
-     pcity->size = packet->size;
-   }
+--- freeciv/client/packhand.c	2012-05-21 12:41:00.000000000 +0300
++++ freeciv/client/packhand.c	2012-05-21 13:38:22.000000000 +0300
+@@ -582,7 +582,7 @@
+ 
+   pcity->city_radius_sq = packet->city_radius_sq;
  
 -  pcity->city_options = packet->city_options;
 +  //pcity->city_options = packet->city_options;
  
-   for (i = 0; i < NUM_TRADEROUTES; i++) {
-     pcity->trade[i]=packet->trade[i];
-@@ -606,7 +606,7 @@
+   for (i = 0; i < NUM_TRADE_ROUTES; i++) {
+     pcity->trade[i] = packet->trade[i];
+@@ -625,7 +625,7 @@
    }
  #endif
  
@@ -19,7 +19,7 @@ diff -Nurd -X.diff_ignore freeciv/client/packhand.c freeciv/client/packhand.c
  
    pcity->airlift = packet->airlift;
    pcity->did_buy=packet->did_buy;
-@@ -636,14 +636,14 @@
+@@ -655,14 +655,14 @@
    pcity->caravan_shields=packet->caravan_shields;
    pcity->last_turns_shield_surplus = packet->last_turns_shield_surplus;
  
@@ -36,16 +36,3 @@ diff -Nurd -X.diff_ignore freeciv/client/packhand.c freeciv/client/packhand.c
  
    /* We should be able to see units in the city.  But for a diplomat
     * investigating an enemy city we can't.  In that case we don't update
-@@ -881,10 +881,10 @@
-   }
- #endif
- 
--  improvement_iterate(pimprove) {
-+  /*improvement_iterate(pimprove) {
-     bool have = BV_ISSET(packet->improvements, improvement_index(pimprove));
-     update_improvement_from_packet(pcity, pimprove, have);
--  } improvement_iterate_end;
-+  } improvement_iterate_end;*/
- 
- #ifdef DONE_BY_create_city_virtual
-   /* This sets dumb values for everything else. This is not really required,

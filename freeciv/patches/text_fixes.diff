@@ -1,6 +1,6 @@
 diff -Nurd -X.diff_ignore freeciv/common/featured_text.c freeciv/common/featured_text.c
---- freeciv/common/featured_text.c	2012-05-21 01:28:25.000000000 +0300
-+++ freeciv/common/featured_text.c	2012-05-21 03:01:40.000000000 +0300
+--- freeciv/common/featured_text.c	2012-05-21 12:41:30.000000000 +0300
++++ freeciv/common/featured_text.c	2012-05-23 00:58:46.000000000 +0300
 @@ -73,7 +73,7 @@
  
  const struct ft_color ftc_warning       = FT_COLOR("#FF0000",   NULL);
@@ -49,15 +49,15 @@ diff -Nurd -X.diff_ignore freeciv/common/featured_text.c freeciv/common/featured
  }
  
 diff -Nurd -X.diff_ignore freeciv/server/srv_main.c freeciv/server/srv_main.c
---- freeciv/server/srv_main.c	2012-05-21 02:57:40.000000000 +0300
-+++ freeciv/server/srv_main.c	2012-05-21 02:57:55.000000000 +0300
-@@ -1914,7 +1914,13 @@
+--- freeciv/server/srv_main.c	2012-05-23 00:58:34.000000000 +0300
++++ freeciv/server/srv_main.c	2012-05-23 00:59:29.000000000 +0300
+@@ -1915,7 +1915,13 @@
        char leader_name[MAX_LEN_NAME];
  
        pick_random_player_name(nation_of_player(pplayer), leader_name);
 -      sz_strlcpy(pplayer->name, leader_name);
 +      /* FIXME: in Web client, connection username == player name.*/
-+      if (pplayer->ai_data.control == TRUE) {
++      if (pplayer->ai_controlled == TRUE) {
 +        sz_strlcpy(pplayer->name, leader_name);
 +      } else {
 +        sz_strlcpy(pplayer->name, pplayer->username);

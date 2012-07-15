@@ -546,6 +546,7 @@ class Variant:
         self.delta=packet.delta
         self.is_info=packet.is_info
         self.cancel=packet.cancel
+        self.want_force=packet.want_force
         
         self.poscaps=poscaps
         self.negcaps=negcaps
@@ -585,6 +586,12 @@ class Variant:
         if not self.no_packet:
             self.extra_send_args=', const struct %(packet_name)s *packet'%self.__dict__+self.extra_send_args
             self.extra_send_args2=', packet'+self.extra_send_args2
+
+        if self.want_force:
+            self.extra_send_args=self.extra_send_args+', bool force_to_send'
+            self.extra_send_args2=self.extra_send_args2+', force_to_send'
+            self.extra_send_args3=self.extra_send_args3+', bool force_to_send'
+
         self.receive_prototype='static struct %(packet_name)s *receive_%(name)s(struct connection *pc, enum packet_type type)'%self.__dict__
         self.send_prototype='static int send_%(name)s(struct connection *pc%(extra_force_arg)s%(extra_send_args)s)'%self.__dict__
 
@@ -1007,6 +1014,9 @@ class Packet:
         self.want_lsend="lsend" in arr
         if self.want_lsend: arr.remove("lsend")
 
+        self.want_force="force" in arr
+        if self.want_force: arr.remove("force")
+
  	self.cancel=[]
         removes=[]
         remaining=[]
@@ -1241,6 +1251,8 @@ class Packet:
         args="pc"
         if not self.no_packet:
             args=args+', packet'
+        if self.want_force:
+            args=args+", force_to_send"
         for v in self.variants:
             name2=v.name
             no=v.no

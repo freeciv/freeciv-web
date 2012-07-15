@@ -1,7 +1,7 @@
 diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2012-05-23 00:39:46.000000000 +0300
-+++ freeciv/common/packets.def	2012-05-23 00:39:53.000000000 +0300
-@@ -1721,3 +1721,14 @@
+--- freeciv/common/packets.def	2012-07-16 00:23:58.000000000 +0300
++++ freeciv/common/packets.def	2012-07-16 00:24:03.000000000 +0300
+@@ -1762,3 +1762,14 @@
    SINT32 tag;
    SINT32 id;
  end
@@ -17,8 +17,8 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
 +end
 +
 diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
---- freeciv/server/maphand.c	2012-05-21 12:41:29.000000000 +0300
-+++ freeciv/server/maphand.c	2012-05-23 00:43:42.000000000 +0300
+--- freeciv/server/maphand.c	2012-07-15 21:52:13.000000000 +0300
++++ freeciv/server/maphand.c	2012-07-16 00:28:27.000000000 +0300
 @@ -36,6 +36,7 @@
  #include "unit.h"
  #include "unitlist.h"
@@ -27,9 +27,9 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
  
  /* generator */
  #include "utilities.h"
-@@ -1864,3 +1865,403 @@
-     }
+@@ -1862,3 +1863,403 @@
    }
+   tile_remove_base(ptile, pbase);
  }
 +
 +/****************************************************************************
@@ -362,7 +362,7 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +    get_full_nation(nation, sizeof(nation), owner);
 +
 +    if (NULL == pplayer || owner == pplayer) {
-+      struct city *pcity = player_find_city_by_id(owner, punit->homecity);
++      struct city *pcity = player_city_by_number(owner, punit->homecity);
 +
 +      if (pcity) {
 +        /* TRANS: "Unit: <unit type> | <username>
@@ -422,7 +422,7 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +void handle_info_text_req(struct player *pplayer, int loc, int visible_unit_id)
 +{
 +  struct tile *ptile = index_to_tile(loc);
-+  struct unit *punit = (visible_unit_id == 0) ? NULL : game_find_unit_by_number(visible_unit_id);
++  struct unit *punit = (visible_unit_id == 0) ? NULL : game_unit_by_number(visible_unit_id);
 +  const char *info_text = popup_info_text(ptile, pplayer, punit);
 +
 +  conn_list_iterate(pplayer->connections, pconn) {
@@ -432,13 +432,12 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +}
 +
 diff -Nurd -X.diff_ignore freeciv/server/maphand.h freeciv/server/maphand.h
---- freeciv/server/maphand.h	2012-05-21 12:41:29.000000000 +0300
-+++ freeciv/server/maphand.h	2012-05-23 00:39:53.000000000 +0300
-@@ -121,5 +121,7 @@
- 
- void create_base(struct tile *ptile, struct base_type *pbase,
+--- freeciv/server/maphand.h	2012-07-15 21:52:14.000000000 +0300
++++ freeciv/server/maphand.h	2012-07-16 00:24:32.000000000 +0300
+@@ -123,4 +123,6 @@
                   struct player *pplayer);
+ void destroy_base(struct tile *ptile, struct base_type *pbase);
+ 
 +void handle_info_text_req(struct player *pplayer, int loc, int visible_unit_id);
 +
- 
  #endif  /* FC__MAPHAND_H */

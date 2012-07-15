@@ -767,6 +767,11 @@ function handle_server_setting_enum(packet)
   /* TODO: implement */
 }
 
+function handle_server_setting_bitwise(packet)
+{
+  /* TODO: implement */
+}
+
 function handle_server_setting_bool(packet)
 {
   /* TODO: implement */

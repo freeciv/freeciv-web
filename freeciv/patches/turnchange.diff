@@ -1,25 +1,23 @@
 diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2012-05-19 04:48:08.000000000 +0300
-+++ freeciv/common/packets.def	2012-05-19 05:36:36.000000000 +0300
-@@ -232,14 +232,14 @@
- type EDIT_TECH_MODE     = uint8(enum editor_tech_mode)
+--- freeciv/common/packets.def	2012-07-16 00:28:55.000000000 +0300
++++ freeciv/common/packets.def	2012-07-16 00:38:57.000000000 +0300
+@@ -246,14 +246,14 @@
+ type UNIT_TYPE          = uint8(Unit_type_id)
  
  # other typedefs
 -type CITY_COORD         = UINT8
--type XYSIZE  		= UINT16
--type YEAR     		= SINT16
--type HP     		= UINT8
--type PERCENT  		= UINT8
 +type CITY_COORD         = UINT32
-+type XYSIZE  		= UINT32
-+type YEAR     		= SINT32
-+type HP     		= UINT32
-+type PERCENT  		= UINT32
- type GOLD		= UINT32
--type TURN		= SINT16
--type PHASE              = SINT16
-+type TURN		= UINT32
-+type PHASE              = UINT32
+ type GOLD               = UINT32
+-type HP                 = UINT8
+-type PERCENT            = UINT8
++type HP                 = UINT32
++type PERCENT            = UINT32
+ type PHASE              = SINT16
+ type TURN               = SINT16
+-type XYSIZE             = UINT16
+-type YEAR               = SINT16
++type XYSIZE             = UINT32
++type YEAR               = SINT32
  
  /****************************************************
  The remaining lines are the definition of the packets. These are

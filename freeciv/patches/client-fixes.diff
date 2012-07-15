@@ -1,7 +1,7 @@
 diff -Nurd -X.diff_ignore freeciv/client/packhand.c freeciv/client/packhand.c
---- freeciv/client/packhand.c	2012-05-21 12:41:00.000000000 +0300
-+++ freeciv/client/packhand.c	2012-05-21 13:38:22.000000000 +0300
-@@ -582,7 +582,7 @@
+--- freeciv/client/packhand.c	2012-07-15 21:52:29.000000000 +0300
++++ freeciv/client/packhand.c	2012-07-16 00:06:52.000000000 +0300
+@@ -594,7 +594,7 @@
  
    pcity->city_radius_sq = packet->city_radius_sq;
  
@@ -10,7 +10,7 @@ diff -Nurd -X.diff_ignore freeciv/client/packhand.c freeciv/client/packhand.c
  
    for (i = 0; i < NUM_TRADE_ROUTES; i++) {
      pcity->trade[i] = packet->trade[i];
-@@ -625,7 +625,7 @@
+@@ -648,7 +648,7 @@
    }
  #endif
  
@@ -19,20 +19,21 @@ diff -Nurd -X.diff_ignore freeciv/client/packhand.c freeciv/client/packhand.c
  
    pcity->airlift = packet->airlift;
    pcity->did_buy=packet->did_buy;
-@@ -655,14 +655,14 @@
+@@ -678,7 +678,7 @@
    pcity->caravan_shields=packet->caravan_shields;
    pcity->last_turns_shield_surplus = packet->last_turns_shield_surplus;
  
 -  improvement_iterate(pimprove) {
-+  /*improvement_iterate(pimprove) {
++  /* improvement_iterate(pimprove) {
      bool have = BV_ISSET(packet->improvements, improvement_index(pimprove));
-     if (have  &&  !city_is_new
-      && pcity->built[improvement_index(pimprove)].turn <= I_NEVER) {
-       audio_play_sound(pimprove->soundtag, pimprove->soundtag_alt);
+ 
+     if (have && !city_is_new
+@@ -687,7 +687,7 @@
      }
-     update_improvement_from_packet(pcity, pimprove, have);
+     need_economy_dialog_update |=
+         update_improvement_from_packet(pcity, pimprove, have);
 -  } improvement_iterate_end;
-+  } improvement_iterate_end;*/
++  } improvement_iterate_end; */
  
    /* We should be able to see units in the city.  But for a diplomat
     * investigating an enemy city we can't.  In that case we don't update

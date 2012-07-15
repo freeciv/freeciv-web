@@ -19,6 +19,4 @@ The HTML5 Websocket server requires:
 Notes:
 Run sync.sh to generate packhand_gen.js
 
-packets.def syncronized with Freeciv SVN:  2009-10-18
-
-
+packets.def syncronized with Freeciv SVN: r18511

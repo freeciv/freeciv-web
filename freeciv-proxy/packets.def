@@ -65,6 +65,12 @@ Syntax:
      is-game-info: same as is-info, but the state is reset every time a
                    connection changes of player target.
 
+     force: sending functions will take an extra argument 'force_to_send'
+            to force to send the packet (at least an empty one). In this
+            case, the is-info or is-game-info flags are ignored. It has no
+            effect if the packets doesn't have the is-info or is-game-info
+            flags.
+
      cancel(PACKET_number): Cancel a packet with the same key (must be the
      same key type at the start of the packet), useful for is-info packets.
 
@@ -158,92 +164,97 @@ Syntax:
 */
 
 # typedefs for numbers
-type UINT8		= uint8(int)
-type UINT16		= uint32(int)
-type UINT32		= uint32(int)
-type SINT8		= sint8(int)
-type SINT16		= sint16(int)
-type SINT32		= sint32(int)
-type BOOL		= bool8(bool)
-type FLOAT		= float10000(float)
-type FLOAT10x7		= float1000000(float)
+type BOOL               = bool8(bool)
+type FLOAT              = float10000(float)
+type FLOAT10x7          = float1000000(float)
+type SINT8              = sint8(int)
+type SINT16             = sint16(int)
+type SINT32             = sint32(int)
+type UINT8              = uint8(int)
+type UINT16             = uint32(int)
+type UINT32             = uint32(int)
 
 # typedefs for arrays/structs
-type MEMORY		= memory(unsigned char)
-type STRING		= string(char)
-type BIT_STRING		= bit_string(char)
-type WORKLIST		= worklist(struct worklist)
+type BIT_STRING         = bit_string(char)
+type MEMORY             = memory(unsigned char)
+type REQUIREMENT        = requirement(struct requirement)
+type STRING             = string(char)
 # The TECH_LIST has been removed for the web client.  -Andreas
-#type TECH_LIST		= tech_list(int)
-type REQUIREMENT	= requirement(struct requirement)
+#type TECH_LIST          = tech_list(int)
+type WORKLIST           = worklist(struct worklist)
 
 # typedefs for enums
-type CLAUSE		= uint8(enum clause_type)
-type ACTIVITY		= uint8(enum unit_activity)
-type EVENT		= sint32(enum event_type)
-type KNOWN		= uint8(enum known_type)
-type SPECIAL		= uint32(enum tile_special_type)
-type DIPLOMAT_ACTION	= uint8(enum diplomat_actions)
-type CMDLEVEL		= uint8(enum cmdlevel_id)
-type PLACE_TYPE		= uint8(enum spaceship_place_type)
-type RIVER_MOVE		= uint8(enum special_river_move)
-type REPORT_TYPE	= uint8(enum report_type)
-type AUTH_TYPE		= uint8(enum authentication_type)
-type IMPR_RANGE		= uint8(enum impr_range)
-type IMPR_GENUS		= uint8(enum impr_genus_id)
-type DIRECTION		= uint8(enum direction8)
-type ORDERS		= uint8(enum unit_orders)
-type SSET_TYPE		= uint8(enum sset_type)
-type SSET_CLASS         = uint8(enum sset_class)
-type REQ_TYPE	        = uint8(enum universals_n)
-type REQ_RANGE		= uint8(enum req_range)
-type EFFECT_TYPE	= uint8(enum effect_type)
-type BASE               = sint8(Base_type_id)
-type BASE_GUI           = uint8(enum base_gui_type)
-type GUI_TYPE           = uint8(enum gui_type)
+type ACTIVITY           = uint8(enum unit_activity)
 type AIRLIFTING_STYLE   = uint8(enum airlifting_style)
+type AUTH_TYPE          = uint8(enum authentication_type)
+type BASE_GUI           = uint8(enum base_gui_type)
+type BORDERS_MODE       = uint8(enum borders_mode)
+type CLAUSE             = uint8(enum clause_type)
+type CMDLEVEL           = uint8(enum cmdlevel)
+type DIPLOMACY_MODE     = uint8(enum diplomacy_mode)
+type DIPLOMAT_ACTION    = uint8(enum diplomat_actions)
+type DIRECTION          = uint8(enum direction8)
+type EFFECT_TYPE        = uint8(enum effect_type)
+type EVENT              = sint32(enum event_type)
+type GUI_TYPE           = uint8(enum gui_type)
+type IMPR_GENUS         = uint8(enum impr_genus_id)
+type IMPR_RANGE         = uint8(enum impr_range)
+type KNOWN              = uint8(enum known_type)
+type ORDERS             = uint8(enum unit_orders)
+type PHASE_MODE         = uint8(enum phase_mode_types)
+type PLACE_TYPE         = uint8(enum spaceship_place_type)
+type REPORT_TYPE        = uint8(enum report_type)
+type REQ_RANGE          = uint8(enum req_range)
+type REQ_TYPE           = uint8(enum universals_n)
+type RIVER_MOVE         = uint8(enum special_river_move)
+type SPECIAL            = uint32(enum tile_special_type)
+type SSET_CLASS         = uint8(enum sset_class)
+type SSET_TYPE          = uint8(enum sset_type)
 
-type BV_IMPRS           = bitvector(bv_imprs)
+# typedefs for bit vectors
+type BV_BASE_FLAGS      = bitvector(bv_base_flags)
+type BV_BASES           = bitvector(bv_bases)
+type BV_CITY_OPTIONS    = bitvector(bv_city_options)
 type BV_IMPR_FLAGS      = bitvector(bv_impr_flags)
+type BV_IMPRS           = bitvector(bv_imprs)
+type BV_PLAYER          = bitvector(bv_player)
+type BV_SPECIAL         = bitvector(bv_special)
+type BV_STARTPOS_NATIONS= bitvector(bv_startpos_nations)
+type BV_TECH_FLAGS      = bitvector(bv_tech_flags)
+type BV_TERRAIN_FLAGS   = bitvector(bv_terrain_flags)
 type BV_UCLASS_FLAGS    = bitvector(bv_unit_class_flags)
+type BV_UNIT_CLASSES    = bitvector(bv_unit_classes)
 type BV_UTYPE_FLAGS     = bitvector(bv_unit_type_flags)
 type BV_UTYPE_ROLES     = bitvector(bv_unit_type_roles)
-type BV_TECH_FLAGS      = bitvector(bv_tech_flags)
-type BV_TERRAIN_FLAGS	= bitvector(bv_terrain_flags)
-type BV_BASE_FLAGS      = bitvector(bv_base_flags)
-type BV_CITY_OPTIONS    = bitvector(bv_city_options)
-type BV_SPECIAL         = bitvector(bv_special)
-type BV_PLAYER          = bitvector(bv_player)
-type BV_UNIT_CLASSES    = bitvector(bv_unit_classes)
-type BV_BASES           = bitvector(bv_bases)
 
 # typedefs for IDs
-type PLAYER 		= SINT8
-type CITY   		= UINT16
-type UNIT   		= UINT16
-type TECH     		= UINT8
-type TILE		= SINT32
-type UNIT_TYPE		= uint8(Unit_type_id)
-type NATION		    = UINT32
-type GOVERNMENT		= UINT8
-type CONNECTION		= SINT16
-type TEAM		= UINT8
+type BASE               = sint8(Base_type_id)
+type CITY               = UINT16
+type CONNECTION         = SINT16
 type CONTINENT          = sint16(Continent_id)
-type IMPROVEMENT	= uint8(Impr_type_id)
+type EDIT_TECH_MODE     = uint8(enum editor_tech_mode)
+type GOVERNMENT         = UINT8
+type IMPROVEMENT        = uint8(Impr_type_id)
+type NATION             = UINT32
+type PLAYER             = SINT8
 type RESOURCE           = uint8(Resource_type_id)
 type SPECIALIST         = uint8(Specialist_type_id)
+type TEAM               = UINT8
+type TECH               = UINT8
 type TERRAIN            = uint8(Terrain_type_id)
-type EDIT_TECH_MODE     = uint8(enum editor_tech_mode)
+type TILE               = SINT32
+type UNIT               = UINT16
+type UNIT_TYPE          = uint8(Unit_type_id)
 
 # other typedefs
 type CITY_COORD         = UINT32
-type XYSIZE  		= UINT32
-type YEAR     		= SINT32
-type HP     		= UINT32
-type PERCENT  		= UINT32
-type GOLD		= UINT32
-type TURN		= UINT32
-type PHASE              = UINT32
+type GOLD               = UINT32
+type HP                 = UINT32
+type PERCENT            = UINT32
+type PHASE              = SINT16
+type TURN               = SINT16
+type XYSIZE             = UINT32
+type YEAR               = SINT32
 
 /****************************************************
 The remaining lines are the definition of the packets. These are
@@ -355,7 +366,6 @@ PACKET_TILE_INFO = 15; sc, lsend, is-game-info
   BOOL special[S_LAST];
   BV_BASES bases;
   STRING spec_sprite[MAX_LEN_NAME];
-  NATION nation_start;
 end
 
 # This packet used to have is_info set but that doesn't work with the
@@ -373,7 +383,7 @@ PACKET_GAME_INFO = 16; sc
   UINT8 base_tech_cost;
   UINT8 border_city_radius_sq;
   UINT8 border_size_effect;
-  UINT8 borders;
+  BORDERS_MODE borders;
   BOOL calendar_skip_0;
   /* size limit for cities before they can celebrate */
   UINT8 celebratesize;
@@ -381,7 +391,7 @@ PACKET_GAME_INFO = 16; sc
   UINT8 citymindist;
   UINT32 cooling;
   UINT32 coolinglevel;
-  UINT8 diplomacy;
+  DIPLOMACY_MODE diplomacy;
   BOOL fogofwar;
   UINT8 food_cost;
   UINT32 foodbox;
@@ -422,11 +432,12 @@ PACKET_GAME_INFO = 16; sc
   BOOL nuclear_winter;
   UINT32 nuclearwinter;
   PHASE phase;
-  UINT8 phase_mode;
+  PHASE_MODE phase_mode;
   BOOL pillage_select;
   STRING positive_year_label[MAX_LEN_NAME];
   UINT8 rapturedelay;
   BOOL restrictinfra;
+  BOOL unreachable_protects;
   UINT32 sciencebox;
   FLOAT seconds_to_phasedone;
   UINT32 shieldbox;
@@ -489,7 +500,7 @@ PACKET_CITY_REMOVE = 30; sc, dsend, lsend, cancel(PACKET_CITY_INFO), cancel(PACK
   CITY city_id;
 end
 
-PACKET_CITY_INFO = 31; sc, lsend, is-game-info, cancel(PACKET_CITY_SHORT_INFO)
+PACKET_CITY_INFO = 31; sc, lsend, is-game-info, force, cancel(PACKET_CITY_SHORT_INFO)
   CITY id; key
   TILE tile;
 
@@ -715,7 +726,7 @@ PACKET_PLAYER_ATTRIBUTE_CHUNK = 58; pre-send, sc, cs, handle-via-packet
   MEMORY data[ATTRIBUTE_CHUNK_SIZE:chunk_length]; diff
 end
 
-PACKET_PLAYER_DIPLSTATE = 59; sc, is-info
+PACKET_PLAYER_DIPLSTATE = 59; sc
   UINT32 diplstate_id; key
   PLAYER plr1;
   PLAYER plr2;
@@ -973,7 +984,9 @@ end
 /**************  Report packets **********************/
 
 PACKET_PAGE_MSG = 110; sc, lsend
-  STRING message[MAX_LEN_MSG];
+  STRING caption[MAX_LEN_MSG];
+  STRING headline[MAX_LEN_MSG];
+  STRING lines[MAX_LEN_PACKET];
   EVENT event;
 end
 
@@ -1097,6 +1110,7 @@ end
 PACKET_RULESET_UNIT = 140; sc, lsend
   UNIT_TYPE id;
   STRING name[MAX_LEN_NAME];
+  STRING rule_name[MAX_LEN_NAME];
   STRING graphic_str[MAX_LEN_NAME];
   STRING graphic_alt[MAX_LEN_NAME];
   STRING sound_move[MAX_LEN_NAME];
@@ -1153,15 +1167,16 @@ end
 
 PACKET_RULESET_SPECIALIST = 142; sc, lsend
   SPECIALIST id;
-  STRING name[MAX_LEN_NAME];
+  STRING plural_name[MAX_LEN_NAME];
+  STRING rule_name[MAX_LEN_NAME];
   STRING short_name[MAX_LEN_NAME];
   UINT8 reqs_count;
   REQUIREMENT reqs[MAX_NUM_REQS:reqs_count];
+  STRING helptext[MAX_LEN_PACKET];
 end
 
 PACKET_RULESET_GOVERNMENT_RULER_TITLE = 143; sc, lsend
   GOVERNMENT gov;
-  UINT8 id;
   NATION nation;
   STRING male_title[MAX_LEN_NAME];
   STRING female_title[MAX_LEN_NAME];
@@ -1174,6 +1189,7 @@ PACKET_RULESET_TECH = 144; sc, lsend
   BV_TECH_FLAGS flags;
   UINT32 preset_cost, num_reqs;
   STRING name[MAX_LEN_NAME];
+  STRING rule_name[MAX_LEN_NAME];
   STRING helptext[MAX_LEN_PACKET];
   STRING graphic_str[MAX_LEN_NAME];
   STRING graphic_alt[MAX_LEN_NAME];
@@ -1185,9 +1201,8 @@ PACKET_RULESET_GOVERNMENT = 145; sc, lsend
   #UINT8 reqs_count;
   #REQUIREMENT reqs[MAX_NUM_REQS:reqs_count];
 
-  UINT8 num_ruler_titles;
-       
   STRING name[MAX_LEN_NAME];
+  STRING rule_name[MAX_LEN_NAME];
   STRING graphic_str[MAX_LEN_NAME];
   STRING graphic_alt[MAX_LEN_NAME];
   STRING helptext[MAX_LEN_PACKET];
@@ -1224,20 +1239,17 @@ PACKET_RULESET_NATION = 148; sc, lsend
   NATION id; key
 
   STRING adjective[MAX_LEN_NAME];
+  STRING rule_name[MAX_LEN_NAME];
   STRING noun_plural[MAX_LEN_NAME];
   STRING graphic_str[MAX_LEN_NAME];
   STRING graphic_alt[MAX_LEN_NAME];
   STRING legend[MAX_LEN_MSG];
 
   UINT8 city_style;
-  #TECH_LIST init_techs[MAX_NUM_TECH_LIST]; Removed for web client. - Andreas
-  UNIT_TYPE init_units[MAX_NUM_UNIT_LIST];
-  IMPROVEMENT init_buildings[MAX_NUM_BUILDING_LIST];
-  GOVERNMENT init_government;
 
   UINT8 leader_count;
   STRING leader_name[MAX_NUM_LEADERS:leader_count][MAX_LEN_NAME];
-  BOOL leader_sex[MAX_NUM_LEADERS:leader_count];
+  BOOL leader_is_male[MAX_NUM_LEADERS:leader_count];
 
   BOOL is_available, is_playable;
   UINT8 barbarian_type;
@@ -1249,6 +1261,7 @@ end
 PACKET_RULESET_CITY = 149; sc, lsend
   UINT8 style_id; 
   STRING name[MAX_LEN_NAME];
+  STRING rule_name[MAX_LEN_NAME];
   STRING citizens_graphic[MAX_LEN_NAME];
   STRING citizens_graphic_alt[MAX_LEN_NAME];
   UINT8 reqs_count;
@@ -1264,6 +1277,7 @@ PACKET_RULESET_BUILDING = 150; sc, lsend
   IMPROVEMENT id;
   IMPR_GENUS genus;
   STRING name[MAX_LEN_NAME];
+  STRING rule_name[MAX_LEN_NAME];
   STRING graphic_str[MAX_LEN_NAME];
   STRING graphic_alt[MAX_LEN_NAME];
   UINT32 reqs_count;
@@ -1284,7 +1298,8 @@ PACKET_RULESET_TERRAIN = 151; sc, lsend
   BV_TERRAIN_FLAGS flags;
   BV_UNIT_CLASSES native_to;
 
-  STRING name_orig[MAX_LEN_NAME];
+  STRING name[MAX_LEN_NAME];
+  STRING rule_name[MAX_LEN_NAME];
   STRING graphic_str[MAX_LEN_NAME];
   STRING graphic_alt[MAX_LEN_NAME];
 
@@ -1318,6 +1333,7 @@ end
 PACKET_RULESET_UNIT_CLASS = 152; sc, lsend
   UINT8 id;
   STRING name[MAX_LEN_NAME];
+  STRING rule_name[MAX_LEN_NAME];
   UINT8 move_type;
   UINT8 min_speed;
   UINT8 hp_loss_pct;
@@ -1328,6 +1344,7 @@ end
 PACKET_RULESET_BASE = 153; sc, lsend
   UINT8 id;
   STRING name[MAX_LEN_NAME];
+  STRING rule_name[MAX_LEN_NAME];
   BOOL buildable;
   BOOL pillageable;
   STRING graphic_str[MAX_LEN_NAME];
@@ -1339,10 +1356,12 @@ PACKET_RULESET_BASE = 153; sc, lsend
   BV_UNIT_CLASSES native_to;
   UINT8 build_time;
   UINT8 defense_bonus;
-  UINT8 border_sq;
-  UINT8 vision_main_sq;
-  UINT8 vision_invis_sq;
+  SINT8 border_sq;
+  SINT8 vision_main_sq;
+  SINT8 vision_invis_sq;
   BV_BASE_FLAGS flags;
+  BV_BASES conflicts;
+  STRING helptext[MAX_LEN_PACKET];
 end
 
 /**************************************************************************
@@ -1446,7 +1465,21 @@ PACKET_SERVER_SETTING_ENUM = 169; sc, handle-via-packet, is-info
   SINT8 val;
   SINT8 default_val;
   SINT8 values_num;
-  STRING values[64:values_num][MAX_LEN_ENUM];
+  STRING support_names[64:values_num][MAX_LEN_NAME];
+  STRING pretty_names[64:values_num][MAX_LEN_ENUM];
+end
+
+PACKET_SERVER_SETTING_BITWISE = 170; sc, handle-via-packet, is-info
+  UINT16 id; key
+  BOOL is_visible;
+  BOOL is_changeable;
+  BOOL initial_setting;
+
+  UINT16 val;
+  UINT16 default_val;
+  UINT8 bits_num;
+  STRING support_names[64:bits_num][MAX_LEN_NAME];
+  STRING pretty_names[64:bits_num][MAX_LEN_ENUM];
 end
 
 /************** Effects hash packets **********************/
@@ -1471,7 +1504,8 @@ end
 PACKET_RULESET_RESOURCE = 177; sc, lsend
   RESOURCE id;
   
-  STRING name_orig[MAX_LEN_NAME];
+  STRING name[MAX_LEN_NAME];
+  STRING rule_name[MAX_LEN_NAME];
   UINT8 output[O_LAST];
   STRING graphic_str[MAX_LEN_NAME];
   STRING graphic_alt[MAX_LEN_NAME];
@@ -1573,12 +1607,19 @@ PACKET_EDIT_TILE_BASE = 203; cs, handle-per-conn, dsend
   UINT8 size;
 end
 
-PACKET_EDIT_STARTPOS = 204; cs, handle-per-conn, dsend
-  TILE tile; key
-  NATION nation; # NATION_NONE for erase
+PACKET_EDIT_STARTPOS = 204; cs, sc, dsend, handle-per-conn, handle-via-packet, no-delta
+  TILE id;
+  BOOL remove;
+  SINT32 tag;
 end
 
-PACKET_EDIT_TILE = 205; cs, handle-per-conn, handle-via-packet
+PACKET_EDIT_STARTPOS_FULL = 205; cs, sc, handle-per-conn, handle-via-packet, no-delta
+  TILE id;
+  BOOL exclude;
+  BV_STARTPOS_NATIONS nations;
+end
+
+PACKET_EDIT_TILE = 206; cs, handle-per-conn, handle-via-packet
   TILE tile; key
   BV_SPECIAL specials;
   BV_BASES bases;
@@ -1587,7 +1628,7 @@ PACKET_EDIT_TILE = 205; cs, handle-per-conn, handle-via-packet
   NATION startpos_nation;
 end
 
-PACKET_EDIT_UNIT_CREATE = 206; cs, handle-per-conn, dsend
+PACKET_EDIT_UNIT_CREATE = 207; cs, handle-per-conn, dsend
   PLAYER owner;
   TILE tile;
   UNIT_TYPE type;
@@ -1595,18 +1636,18 @@ PACKET_EDIT_UNIT_CREATE = 206; cs, handle-per-conn, dsend
   SINT32 tag;
 end
 
-PACKET_EDIT_UNIT_REMOVE = 207; cs, handle-per-conn, dsend
+PACKET_EDIT_UNIT_REMOVE = 208; cs, handle-per-conn, dsend
   PLAYER owner;
   TILE tile;
   UNIT_TYPE type;
   UINT8 count;
 end
 
-PACKET_EDIT_UNIT_REMOVE_BY_ID = 208; cs, handle-per-conn, dsend
+PACKET_EDIT_UNIT_REMOVE_BY_ID = 209; cs, handle-per-conn, dsend
   UNIT id;
 end
 
-PACKET_EDIT_UNIT = 209; cs, handle-per-conn, handle-via-packet
+PACKET_EDIT_UNIT = 210; cs, handle-per-conn, handle-via-packet
   UNIT id; key
   UNIT_TYPE utype;
   PLAYER owner;
@@ -1625,18 +1666,18 @@ PACKET_EDIT_UNIT = 209; cs, handle-per-conn, handle-via-packet
   UNIT transported_by;
 end
 
-PACKET_EDIT_CITY_CREATE = 210; cs, handle-per-conn, dsend
+PACKET_EDIT_CITY_CREATE = 211; cs, handle-per-conn, dsend
   PLAYER owner;
   TILE tile;
   UINT8 size;
   SINT32 tag;
 end
 
-PACKET_EDIT_CITY_REMOVE = 211; cs, handle-per-conn, dsend
+PACKET_EDIT_CITY_REMOVE = 212; cs, handle-per-conn, dsend
   CITY id;
 end
 
-PACKET_EDIT_CITY = 212; cs, handle-per-conn, handle-via-packet
+PACKET_EDIT_CITY = 213; cs, handle-per-conn, handle-via-packet
   CITY id; key
   STRING name[MAX_LEN_NAME];
   PLAYER owner;
@@ -1664,15 +1705,15 @@ PACKET_EDIT_CITY = 212; cs, handle-per-conn, handle-via-packet
   BV_CITY_OPTIONS city_options;
 end
 
-PACKET_EDIT_PLAYER_CREATE = 213; cs, handle-per-conn, dsend
+PACKET_EDIT_PLAYER_CREATE = 214; cs, handle-per-conn, dsend
   SINT32 tag;
 end
 
-PACKET_EDIT_PLAYER_REMOVE = 214; cs, handle-per-conn, dsend
+PACKET_EDIT_PLAYER_REMOVE = 215; cs, handle-per-conn, dsend
   PLAYER id;
 end
 
-PACKET_EDIT_PLAYER = 215; cs, handle-per-conn, lsend
+PACKET_EDIT_PLAYER = 216; cs, handle-per-conn, lsend
   PLAYER id; key 
   STRING name[MAX_LEN_NAME];
   STRING username[MAX_LEN_NAME];
@@ -1704,7 +1745,7 @@ PACKET_EDIT_PLAYER = 215; cs, handle-per-conn, lsend
   BOOL ai;
 end
 
-PACKET_EDIT_PLAYER_VISION = 216; cs, handle-per-conn, dsend
+PACKET_EDIT_PLAYER_VISION = 217; cs, handle-per-conn, dsend
   PLAYER player;
   TILE tile;
   BOOL known;
@@ -1714,7 +1755,7 @@ end
 /* Always keep this as the last edit type packet sent by
  * the client, so that the test in server/srv_main.c in
  * the function is_client_edit_packet() is easy to write. */
-PACKET_EDIT_GAME = 217; cs, handle-per-conn, handle-via-packet
+PACKET_EDIT_GAME = 218; cs, handle-per-conn, handle-via-packet
   YEAR year;
   BOOL scenario;
   STRING scenario_name[256];
@@ -1724,7 +1765,7 @@ end
 
 /************** Server Editor Packets **********************/
 
-PACKET_EDIT_OBJECT_CREATED = 218; sc, dsend
+PACKET_EDIT_OBJECT_CREATED = 219; sc, dsend
   SINT32 tag;
   SINT32 id;
 end

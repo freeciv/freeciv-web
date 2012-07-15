@@ -1,7 +1,7 @@
 diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2012-05-20 04:06:53.000000000 +0300
-+++ freeciv/common/packets.def	2012-05-20 04:09:28.000000000 +0300
-@@ -795,6 +795,8 @@
+--- freeciv/common/packets.def	2012-07-15 21:52:29.000000000 +0300
++++ freeciv/common/packets.def	2012-07-15 21:55:07.000000000 +0300
+@@ -760,6 +760,8 @@
    BOOL has_orders;
    UINT16 orders_length, orders_index;
    BOOL orders_repeat, orders_vigilant;
@@ -11,9 +11,9 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    DIRECTION orders_dirs[MAX_LEN_ROUTE:orders_length];
    ACTIVITY orders_activities[MAX_LEN_ROUTE:orders_length];
 diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
---- freeciv/server/unithand.c	2012-05-20 04:06:53.000000000 +0300
-+++ freeciv/server/unithand.c	2012-05-20 04:19:13.000000000 +0300
-@@ -1477,21 +1477,20 @@
+--- freeciv/server/unithand.c	2012-07-15 21:52:14.000000000 +0300
++++ freeciv/server/unithand.c	2012-07-15 21:57:28.000000000 +0300
+@@ -1561,8 +1561,9 @@
     
    }
  
@@ -25,24 +25,10 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
  
    if (!can_cities_trade(pcity_homecity, pcity_dest)) {
      notify_player(pplayer, city_tile(pcity_dest), E_BAD_COMMAND, ftc_server,
-                   _("Sorry, your %s cannot establish"
-                     " a trade route between %s and %s"),
--                  unit_link(punit),
-+                  unit_link,
-                   homecity_link,
-                   destcity_link);
-     return FALSE;
-   }
- 
--  sz_strlcpy(punit_link, unit_tile_link(punit));
--
-   /* This part of code works like can_establish_trade_route, except
-    * that we actually do the action of making the trade route. */
- 
 diff -Nurd -X.diff_ignore freeciv/server/unittools.c freeciv/server/unittools.c
---- freeciv/server/unittools.c	2012-05-20 04:06:53.000000000 +0300
-+++ freeciv/server/unittools.c	2012-05-20 04:09:28.000000000 +0300
-@@ -1881,6 +1881,15 @@
+--- freeciv/server/unittools.c	2012-07-15 21:52:14.000000000 +0300
++++ freeciv/server/unittools.c	2012-07-15 21:55:07.000000000 +0300
+@@ -1926,6 +1926,15 @@
      packet->orders_repeat = packet->orders_vigilant = FALSE;
      /* No need to initialize array. */
    }

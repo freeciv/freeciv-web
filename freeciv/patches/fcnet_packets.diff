@@ -1,7 +1,7 @@
 diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2012-05-23 01:09:51.000000000 +0300
-+++ freeciv/common/packets.def	2012-05-23 03:15:07.000000000 +0300
-@@ -539,8 +539,13 @@
+--- freeciv/common/packets.def	2012-07-16 01:02:18.000000000 +0300
++++ freeciv/common/packets.def	2012-07-16 01:05:54.000000000 +0300
+@@ -550,8 +550,13 @@
    STRING can_build_unit[MAX_LEN_MSG];
    STRING can_build_improvement[MAX_LEN_MSG];
    STRING improvements[MAX_LEN_MSG];
@@ -15,7 +15,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  end
  
  PACKET_CITY_SHORT_INFO = 32; sc, lsend, is-game-info, cancel(PACKET_CITY_INFO)
-@@ -677,6 +682,7 @@
+@@ -688,6 +693,7 @@
    UINT32 love[MAX_NUM_PLAYER_SLOTS];
  
    CITY wonders[B_LAST]; diff
@@ -23,7 +23,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  end
  
  PACKET_PLAYER_PHASE_DONE = 52; cs, dsend
-@@ -928,25 +934,25 @@
+@@ -939,25 +945,25 @@
  
  PACKET_DIPLOMACY_CREATE_CLAUSE_REQ = 99; cs, dsend
    PLAYER counterpart, giver;
@@ -53,7 +53,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    UINT32 value;
  end
  
-@@ -972,7 +978,7 @@
+@@ -985,7 +991,7 @@
  end
  
  PACKET_REPORT_REQ = 111; cs, handle-per-conn, dsend
@@ -62,7 +62,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  end
  
  /************** Connection packets **********************/
-@@ -997,9 +1003,9 @@
+@@ -1010,9 +1016,9 @@
  
  # Information about the ping times of the connections.
  PACKET_CONN_PING_INFO = 116; sc, lsend
@@ -74,7 +74,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  end
  
  # For compatibility with older versions, this number cannot be changed.
-@@ -1733,3 +1739,16 @@
+@@ -1774,3 +1780,16 @@
    STRING message[MAX_LEN_MSG];
  end
  
@@ -92,9 +92,9 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
 +  UINT32 turns;
 +end
 diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
---- freeciv/server/unithand.c	2012-05-23 03:15:01.000000000 +0300
-+++ freeciv/server/unithand.c	2012-05-23 03:23:58.000000000 +0300
-@@ -803,6 +803,107 @@
+--- freeciv/server/unithand.c	2012-07-16 01:05:46.000000000 +0300
++++ freeciv/server/unithand.c	2012-07-16 01:08:28.000000000 +0300
+@@ -807,6 +807,107 @@
  }
  
  /**************************************************************************
@@ -102,7 +102,7 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
 +**************************************************************************/
 +void handle_goto_path_req(struct player *pplayer, int unit_id, int goal)
 +{
-+  struct unit *punit = player_find_unit_by_id(pplayer, unit_id);
++  struct unit *punit = player_unit_by_number(pplayer, unit_id);
 +  struct tile *ptile = index_to_tile(goal);
 +  struct pf_parameter parameter;
 +  struct pf_map *pfm;
@@ -146,7 +146,7 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
 +  /* Use path-finding to find a goto path. */
 +  pft_fill_unit_parameter(&parameter, punit);
 +  pfm = pf_map_new(&parameter);
-+  path = pf_map_get_path(pfm, ptile);
++  path = pf_map_path(pfm, ptile);
 +  pf_map_destroy(pfm);
 +
 +  if (path) {
@@ -202,7 +202,7 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
  ...
  **************************************************************************/
  void handle_unit_move(struct player *pplayer, int unit_id, int tile)
-@@ -900,6 +1001,9 @@
+@@ -904,6 +1005,9 @@
      pf_path_destroy(path);
      return ;
    } else {

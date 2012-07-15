@@ -1,7 +1,7 @@
 diff -Nurd -X.diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
---- freeciv/server/citytools.c	2012-05-21 01:43:46.000000000 +0300
-+++ freeciv/server/citytools.c	2012-05-21 03:34:42.000000000 +0300
-@@ -1877,6 +1877,11 @@
+--- freeciv/server/citytools.c	2012-07-16 00:05:33.000000000 +0300
++++ freeciv/server/citytools.c	2012-07-16 01:09:07.000000000 +0300
+@@ -1887,6 +1887,11 @@
    char impr_buf[MAX_NUM_ITEMS + 1];
    char can_build_impr_buf[MAX_NUM_ITEMS + 1];
    char can_build_unit_buf[MAX_NUM_ITEMS + 1];
@@ -13,7 +13,7 @@ diff -Nurd -X.diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
  
    packet->id=pcity->id;
    packet->owner = player_number(city_owner(pcity));
-@@ -1971,6 +1976,7 @@
+@@ -1981,6 +1986,7 @@
    packet->did_buy = pcity->did_buy;
    packet->did_sell = pcity->did_sell;
    packet->was_happy = pcity->was_happy;
@@ -21,7 +21,7 @@ diff -Nurd -X.diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
  
    packet->walls = city_got_citywalls(pcity);
  
-@@ -1997,7 +2003,28 @@
+@@ -2007,7 +2013,28 @@
    } improvement_iterate_end;
    impr_buf[improvement_count()] = '\0';
    sz_strlcpy(packet->improvements, impr_buf);
@@ -52,9 +52,9 @@ diff -Nurd -X.diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
  
  /**************************************************************************
 diff -Nurd -X.diff_ignore freeciv/server/plrhand.c freeciv/server/plrhand.c
---- freeciv/server/plrhand.c	2012-05-21 03:06:36.000000000 +0300
-+++ freeciv/server/plrhand.c	2012-05-21 03:28:19.000000000 +0300
-@@ -808,6 +808,8 @@
+--- freeciv/server/plrhand.c	2012-07-16 01:02:18.000000000 +0300
++++ freeciv/server/plrhand.c	2012-07-16 01:09:07.000000000 +0300
+@@ -892,6 +892,8 @@
      packet->score = 0;
    }
  
@@ -63,136 +63,10 @@ diff -Nurd -X.diff_ignore freeciv/server/plrhand.c freeciv/server/plrhand.c
    if (info_level >= INFO_MEETING) {
      packet->gold = plr->economic.gold;
      pgov = government_of_player(plr);
-diff -Nurd -X.diff_ignore freeciv/server/ruleset.c freeciv/server/ruleset.c
---- freeciv/server/ruleset.c	2012-05-21 03:15:21.000000000 +0300
-+++ freeciv/server/ruleset.c	2012-05-21 03:35:31.000000000 +0300
-@@ -2534,12 +2534,12 @@
- **************************************************************************/
- static void load_ruleset_nations(struct section_file *file)
- {
--  const char *bad_leader, *govern;
-+  const char *govern;
-   struct government *gov;
--  int i2, j, k;
-+  int j, k;
-   size_t dim;
-   char temp_name[MAX_LEN_NAME];
--  const char **groups, **leaders, **civilwar_nations, **conflicts;
-+  const char **groups, **civilwar_nations, **conflicts;
-   const char *name;
-   int barb_land_count = 0;
-   int barb_sea_count = 0;
-@@ -2603,65 +2603,53 @@
-     pl->conflicts_with[j] = NO_NATION_SELECTED; /* extra at end of list */
-     free(conflicts);
- 
--    /* nation leaders */
--
--    leaders = secfile_lookup_str_vec(file, &dim, "%s.leader", sec_name);
--    if (dim > MAX_NUM_LEADERS) {
--      log_error("Nation %s: Too many leaders; using %d of %d",
--                nation_rule_name(pl), MAX_NUM_LEADERS, (int) dim);
--      dim = MAX_NUM_LEADERS;
--    } else if (dim < 1) {
--      ruleset_error(LOG_FATAL,
--                    "Nation %s: number of leaders is %d; at least one is required.",
--                    nation_rule_name(pl), (int) dim);
-+    /* Nation leaders (backported from Freeciv 2.3.x). */
-+    for (j = 0; j < MAX_NUM_LEADERS; j++) {
-+      name = secfile_lookup_str(file, "%s.leaders%d.name", sec_name, j);
-+      if (NULL == name) {
-+        pl->leader_count = j;
-+        pl->leaders = fc_calloc(j, sizeof(*(pl->leaders)));
-+        break;
-+      }
-     }
--    pl->leader_count = dim;
--    pl->leaders = fc_calloc(dim /*exact*/, sizeof(*(pl->leaders)));
-+    for (j = 0; j < MAX_NUM_LEADERS; j++) {
-+      const char *sex;
-+      bool is_male = FALSE;
- 
--    for(j = 0; j < dim; j++) {
--      pl->leaders[j].name = fc_strdup(leaders[j]);
--      if (check_name(leaders[j])) {
--	pl->leaders[j].name[MAX_LEN_NAME - 1] = '\0';
-+      name = secfile_lookup_str(file, "%s.leaders%d.name", sec_name, j);
-+      if (NULL == name) {
-+        /* No more to read. */
-+        break;
-       }
--    }
--    free(leaders);
- 
--    /* check if leader name is not already defined */
--    if ((bad_leader = check_leader_names(i, &i2))) {
--        if (i == i2) {
--          ruleset_error(LOG_FATAL,
--                        "Nation %s: leader \"%s\" defined more than once.",
--                        nation_rule_name(pl),
--                        bad_leader);
--        } else {
--          ruleset_error(LOG_FATAL,
--                        "Nations %s and %s share the same leader \"%s\".",
--                        nation_rule_name(pl),
--                        nation_rule_name(nation_by_number(i2)),
--                        bad_leader);
--        }
--    }
--    /* read leaders'sexes */
--    leaders = secfile_lookup_str_vec(file, &dim, "%s.leader_sex", sec_name);
--    if (dim != pl->leader_count) {
--      ruleset_error(LOG_FATAL,
--                    "Nation %s: the leader sex count (%d) "
--                    "is not equal to the number of leaders (%d)",
--                    nation_rule_name(pl), (int) dim, pl->leader_count);
--    }
--    for (j = 0; j < dim; j++) {
--      if (0 == fc_strcasecmp(leaders[j], "Male")) {
--        pl->leaders[j].is_male = TRUE;
--      } else if (0 == fc_strcasecmp(leaders[j], "Female")) {
--        pl->leaders[j].is_male = FALSE;
--      } else {
--        log_error("Nation %s, leader %s: sex must be either Male or Female; "
--                  "assuming Male",
--                  nation_rule_name(pl), pl->leaders[j].name);
--	pl->leaders[j].is_male = TRUE;
-+      if (check_name(name)) {
-+        /* The ruleset contains a name that is too long. This shouldn't
-+         * happen - if it does, the author should get immediate feedback */
-+        sz_strlcpy(temp_name, name);
-+        /*ruleset_error(LOG_ERROR, "Nation %s: leader name \"%s\" "
-+                      "is too long; shortening it to \"%s\".",
-+                      nation_rule_name(pnation), name, temp_name);*/
-+        name = temp_name;
-       }
-+
-+      sex = secfile_lookup_str(file, "%s.leaders%d.sex", sec_name, j);
-+      if (NULL == sex) {
-+        /*ruleset_error(LOG_FATAL, "Nation %s: leader \"%s\": %s.",
-+                      nation_rule_name(pnation), name, secfile_error());*/
-+      } else if (0 == fc_strcasecmp("Male", sex)) {
-+        is_male = TRUE;
-+      } else if (0 != fc_strcasecmp("Female", sex)) {
-+        /*ruleset_error(LOG_FATAL, "Nation %s: leader \"%s\" has unsupported "
-+                      "sex variant \"%s\".",
-+                      nation_rule_name(pnation), name, sex);*/
-+      }
-+
-+      pl->leaders[j].name = fc_strdup(name);
-+      if (check_name(name)) {
-+        pl->leaders[j].name[MAX_LEN_NAME - 1] = '\0';
-+      }
-+      pl->leaders[j].is_male = is_male;
-     }
--    free(leaders);
-     
-     pl->is_available = secfile_lookup_bool_default(file, TRUE,
-                                                    "%s.is_available",
 diff -Nurd -X.diff_ignore freeciv/server/sernet.c freeciv/server/sernet.c
---- freeciv/server/sernet.c	2012-05-21 03:21:01.000000000 +0300
-+++ freeciv/server/sernet.c	2012-05-21 03:28:19.000000000 +0300
-@@ -1184,7 +1184,7 @@
+--- freeciv/server/sernet.c	2012-07-16 01:02:18.000000000 +0300
++++ freeciv/server/sernet.c	2012-07-16 01:09:07.000000000 +0300
+@@ -1268,7 +1268,7 @@
      }
      fc_assert(i < ARRAY_SIZE(packet.conn_id));
      packet.conn_id[i] = pconn->id;
@@ -202,9 +76,9 @@ diff -Nurd -X.diff_ignore freeciv/server/sernet.c freeciv/server/sernet.c
    } conn_list_iterate_end;
    packet.connections = i;
 diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
---- freeciv/server/unithand.c	2012-05-21 03:28:11.000000000 +0300
-+++ freeciv/server/unithand.c	2012-05-21 03:28:19.000000000 +0300
-@@ -694,6 +694,7 @@
+--- freeciv/server/unithand.c	2012-07-16 01:08:53.000000000 +0300
++++ freeciv/server/unithand.c	2012-07-16 01:09:07.000000000 +0300
+@@ -705,6 +705,7 @@
  		       "UTF-8",
  		       (char*)result_buf, sizeof(result_buf));
        city_build(pplayer, punit, result_buf);

@@ -1,18 +1,18 @@
 diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
---- freeciv/server/unithand.c	2012-05-20 04:28:48.000000000 +0300
-+++ freeciv/server/unithand.c	2012-05-20 04:34:09.000000000 +0300
-@@ -61,6 +61,8 @@
- #include "techtools.h"
- #include "unittools.h"
+--- freeciv/server/unithand.c	2012-07-16 00:12:02.000000000 +0300
++++ freeciv/server/unithand.c	2012-07-16 00:13:01.000000000 +0300
+@@ -65,6 +65,8 @@
+ #include "autoexplorer.h"
+ #include "autosettlers.h"
  
 +#include "pf_tools.h"
 +
  #include "unithand.h"
  
  static void city_add_unit(struct player *pplayer, struct unit *punit);
-@@ -765,6 +767,11 @@
+@@ -781,6 +783,11 @@
  {
-   struct unit *punit = player_find_unit_by_id(pplayer, unit_id);
+   struct unit *punit = player_unit_by_number(pplayer, unit_id);
    struct tile *ptile = index_to_tile(tile);
 +  struct pf_parameter parameter;
 +  struct pf_map *pfm;
@@ -22,7 +22,7 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
  
    if (NULL == punit) {
      /* Probably died or bribed. */
-@@ -779,15 +786,6 @@
+@@ -795,15 +802,6 @@
      return;
    }
  
@@ -38,7 +38,7 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
    if (!is_player_phase(unit_owner(punit), game.info.phase)) {
      /* Client is out of sync, ignore */
      log_verbose("handle_unit_move() invalid %s (%d) %s != phase %d",
-@@ -803,7 +801,56 @@
+@@ -819,7 +817,56 @@
      unit_activity_handling(punit, ACTIVITY_IDLE);
    }
  
@@ -46,7 +46,7 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
 +  /* Use path-finding to find a goto path. */
 +  pft_fill_unit_parameter(&parameter, punit);
 +  pfm = pf_map_new(&parameter);
-+  path = pf_map_get_path(pfm, ptile);
++  path = pf_map_path(pfm, ptile);
 +  pf_map_destroy(pfm);
 +
 +  if (path) {

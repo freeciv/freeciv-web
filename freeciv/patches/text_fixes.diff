@@ -1,6 +1,6 @@
 diff -Nurd -X.diff_ignore freeciv/common/featured_text.c freeciv/common/featured_text.c
---- freeciv/common/featured_text.c	2012-05-21 12:41:30.000000000 +0300
-+++ freeciv/common/featured_text.c	2012-05-23 00:58:46.000000000 +0300
+--- freeciv/common/featured_text.c	2012-07-15 21:52:29.000000000 +0300
++++ freeciv/common/featured_text.c	2012-07-16 00:32:58.000000000 +0300
 @@ -73,7 +73,7 @@
  
  const struct ft_color ftc_warning       = FT_COLOR("#FF0000",   NULL);
@@ -19,7 +19,7 @@ diff -Nurd -X.diff_ignore freeciv/common/featured_text.c freeciv/common/featured
  const struct ft_color ftc_chat_ally     = FT_COLOR("#551166",   NULL);
  const struct ft_color ftc_chat_private  = FT_COLOR("#A020F0",   NULL);
  
-@@ -1048,10 +1048,9 @@
+@@ -1046,10 +1046,9 @@
  {
    static char buf[MAX_LEN_LINK];
  
@@ -33,7 +33,7 @@ diff -Nurd -X.diff_ignore freeciv/common/featured_text.c freeciv/common/featured
    return buf;
  }
  
-@@ -1098,12 +1097,8 @@
+@@ -1096,12 +1095,8 @@
  {
    static char buf[MAX_LEN_LINK];
  
@@ -49,20 +49,21 @@ diff -Nurd -X.diff_ignore freeciv/common/featured_text.c freeciv/common/featured
  }
  
 diff -Nurd -X.diff_ignore freeciv/server/srv_main.c freeciv/server/srv_main.c
---- freeciv/server/srv_main.c	2012-05-23 00:58:34.000000000 +0300
-+++ freeciv/server/srv_main.c	2012-05-23 00:59:29.000000000 +0300
-@@ -1915,7 +1915,13 @@
-       char leader_name[MAX_LEN_NAME];
+--- freeciv/server/srv_main.c	2012-07-16 00:32:47.000000000 +0300
++++ freeciv/server/srv_main.c	2012-07-16 00:36:20.000000000 +0300
+@@ -1870,8 +1870,13 @@
  
-       pick_random_player_name(nation_of_player(pplayer), leader_name);
--      sz_strlcpy(pplayer->name, leader_name);
-+      /* FIXME: in Web client, connection username == player name.*/
-+      if (pplayer->ai_controlled == TRUE) {
-+        sz_strlcpy(pplayer->name, leader_name);
-+      } else {
-+        sz_strlcpy(pplayer->name, pplayer->username);
-+      }
-+
-     }
+   /* Don't change the name of a created player. */
+   if (!pplayer->was_created) {
+-    server_player_set_name(pplayer, pick_random_player_name
+-                           (nation_of_player(pplayer)));
++    /* FIXME: in Web client, connection username == player name.*/
++    if (pplayer->ai_controlled) {
++      server_player_set_name(pplayer,
++                             pick_random_player_name(nation_of_player(pplayer)));
++    } else {
++      server_player_set_name(pplayer, pplayer->username);
++    }
+   }
  
-     if (check_nation_leader_name(nation_of_player(pplayer), pplayer->name)) {
+   if ((pleader = nation_leader_by_name(nation_of_player(pplayer),

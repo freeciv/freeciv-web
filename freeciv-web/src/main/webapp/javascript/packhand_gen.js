@@ -280,6 +280,10 @@ function client_handle_packet(p)
       handle_server_setting_enum(p[i]);
       break;
 
+    case  170:
+      handle_server_setting_bitwise(p[i]);
+      break;
+
     case  175:
       handle_ruleset_effect(p[i]);
       break;
@@ -312,7 +316,15 @@ function client_handle_packet(p)
       handle_vote_resolve(p[i]);
       break;
 
-    case  218:
+    case  204:
+      handle_edit_startpos(p[i]);
+      break;
+
+    case  205:
+      handle_edit_startpos_full(p[i]);
+      break;
+
+    case  219:
       handle_edit_object_created(p[i]);
       break;
 

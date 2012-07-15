@@ -1,7 +1,7 @@
 diff -Nurd -X.diff_ignore freeciv/configure.ac freeciv/configure.ac
---- freeciv/configure.ac	2012-05-16 21:02:54.000000000 +0300
-+++ freeciv/configure.ac	2012-05-16 21:08:12.000000000 +0300
-@@ -523,6 +523,11 @@
+--- freeciv/configure.ac	2012-07-15 23:13:27.000000000 +0300
++++ freeciv/configure.ac	2012-07-15 23:19:19.000000000 +0300
+@@ -545,6 +545,11 @@
       FTWL_LIBS="$FTWL_LIBS "`sdl-config --libs`" -lpng "`freetype-config --libs -lGL -lGLU`
  fi
  
@@ -13,7 +13,7 @@ diff -Nurd -X.diff_ignore freeciv/configure.ac freeciv/configure.ac
  dnl Check and choose clients
  if test "x$client" != "xno"; then
  
-@@ -919,7 +924,7 @@
+@@ -950,7 +955,7 @@
       fi
     fi]],[[]])
  
@@ -21,23 +21,24 @@ diff -Nurd -X.diff_ignore freeciv/configure.ac freeciv/configure.ac
 +CFLAGS="$EXTRA_DEBUG_CFLAGS $CFLAGS $GLIB_CFLAGS"
  CXXFLAGS="$EXTRA_DEBUG_CXXFLAGS $CXXFLAGS"
  
- dnl Rebuild 'configure' whenever version.in changes, if maintainer mode enabled.
+ dnl Rebuild 'configure' whenever fc_version changes, if maintainer mode enabled.
 diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
---- freeciv/server/unithand.c	2012-05-16 21:02:54.000000000 +0300
-+++ freeciv/server/unithand.c	2012-05-16 21:08:12.000000000 +0300
-@@ -20,8 +20,11 @@
+--- freeciv/server/unithand.c	2012-07-15 22:02:41.000000000 +0300
++++ freeciv/server/unithand.c	2012-07-15 23:20:16.000000000 +0300
+@@ -19,9 +19,12 @@
  #include <stdlib.h>
  #include <string.h>
  
 +#include <glib.h>
 +
  /* utility */
+ #include "astring.h"
  #include "fcintl.h"
 +#include "fciconv.h"
  #include "mem.h"
  #include "rand.h"
  #include "shared.h"
-@@ -716,7 +719,15 @@
+@@ -691,7 +694,15 @@
    res = test_unit_add_or_build_city(punit);
  
    if (res == AB_BUILD_OK) {

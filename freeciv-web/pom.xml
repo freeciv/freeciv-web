@@ -12,10 +12,10 @@
 
     <repositories>
         <repository>
-            <id>shibboleth.internet2.edu</id>
-            <name>Internet2</name>
+            <id>repo1.maven.org</id>
+            <name>Rep1</name>
             <layout>default</layout>
-            <url>http://shibboleth.internet2.edu/downloads/maven2</url>
+            <url>http://repo1.maven.org/maven2</url>
             	<snapshots>
                 <enabled>false</enabled>
             </snapshots>

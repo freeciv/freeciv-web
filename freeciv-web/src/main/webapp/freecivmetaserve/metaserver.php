@@ -38,6 +38,8 @@ $posts = array(
   "topic",
   "message",
   "serverid",
+  "available",
+  "humans",
   "vn",
   "vv",
   "plrs",
@@ -64,6 +66,8 @@ $sqlvars = array(
   "state",
   "topic",
   "message",
+  "available",
+  "humans",
   "serverid"
 );
 
@@ -207,7 +211,9 @@ if ( isset($port) ) {
     $string = array();
 
     foreach($sqlvars as $var) {
+      if (isset($assoc_array[$var])) {
         array_push($string, "$var=\"$assoc_array[$var]\"");
+      }
     }
 
     /* we always want to update the timestamp */
@@ -238,7 +244,7 @@ if ( isset($port) ) {
 
     /* if dropplrs=1 then set available back to 0 */
     if (isset($dropplrs)) {
-      $avstmt = "update servers set available=0 where host=\"$host\" and port=\"$port\"";
+      $avstmt = "update servers set available=0, humans=-1 where host=\"$host\" and port=\"$port\"";
       $res = fcdb_exec($avstmt);
     }
 

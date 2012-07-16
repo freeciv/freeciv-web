@@ -32,6 +32,7 @@ CREATE TABLE servers (
   message varchar(255) default 'none',
   stamp timestamp(14) NOT NULL,
   available int(11) default '0',
+  humans int(11) default '-1',
   serverid varchar(255) default NULL,
   PRIMARY KEY  (host,port)
 ) TYPE=HEAP MAX_ROWS=256;

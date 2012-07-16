@@ -257,11 +257,18 @@ if ( isset($port) ) {
   /* We've done the database so we're done */
 
 } elseif ( isset($client_cap) || isset($client) ) {
+  global $freeciv_versions;
+  $output = "";
+  $output .= "[versions]\n";
+  $output .= "latest_stable=\"" . version_by_tag("stable") . "\"\n";
+  $verkeys = array_keys($freeciv_versions);
+  foreach ($verkeys as $key) {
+    $output .= "$key=\"" . version_by_Tag("$key") . "\"\n";
+  }
   $stmt="select * from servers where message like '%Multiplayer%' order by host,port asc";
   $res = fcdb_exec($stmt);
   $nr = fcdb_num_rows($res);
   $nservers=0;
-  $output="";
   if ( $nr > 0 ) {
     for ($inx = 0; $inx < $nr; $inx++) {
       $row = fcdb_fetch_array($res, $inx);

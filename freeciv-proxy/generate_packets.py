@@ -46,12 +46,12 @@ lazy_overwrite=0
 
 def verbose(s):
     if len(sys.argv)>1 and sys.argv[1]=="-v":
-        print s
+        print(s)
         
 def prefix(prefix,str):
-    lines=string.split(str,"\n")
+    lines=str.split("\n")
     lines=map(lambda x,prefix=prefix: prefix+x,lines)
-    return string.join(lines,"\n")
+    return "\n".join(lines)
 
 def write_disclaimer(f):
     f.write('''
@@ -105,7 +105,7 @@ def parse_fields(str, types):
     arr=[]
     for i in mo.groups():
         if i:
-            arr.append(string.strip(i))
+            arr.append(i.strip())
         else:
             arr.append("")
     type,fields_,flags=arr
@@ -134,11 +134,11 @@ def parse_fields(str, types):
 
     # analyze fields
     fields=[]
-    for i in map(string.strip,string.split(fields_,",")):
+    for i in fields_.split(","):
         t={}
 
         def f(x):
-            arr=string.split(x,":")
+            arr=x.split(":")
             if len(arr)==1:
                 return [x,x,x]
             else:
@@ -166,8 +166,8 @@ def parse_fields(str, types):
 
     # analyze flags
     flaginfo={}
-    arr=map(string.strip,string.split(flags,","))
-    arr=filter(lambda x:len(x)>0,arr)
+    arr=list(item.strip() for item in flags.split(","))
+    arr=list(filter(lambda x:len(x)>0,arr))
     flaginfo["is_key"]=("key" in arr)
     if flaginfo["is_key"]: arr.remove("key")
     flaginfo["diff"]=("diff" in arr)
@@ -555,15 +555,15 @@ class Variant:
                 return '(has_capability("%s", pc->capability) && has_capability("%s", our_capability))'%(cap,cap)
             t=(map(lambda x,f=f: f(x),self.poscaps)+
                map(lambda x,f=f: '!'+f(x),self.negcaps))
-            self.condition=string.join(t," && ")
+            self.condition=" && ".join(t)
         else:
             self.condition="TRUE"
-        self.key_fields=filter(lambda x:x.is_key,self.fields)
-        self.other_fields=filter(lambda x:not x.is_key,self.fields)
+        self.key_fields=list(filter(lambda x:x.is_key,self.fields))
+        self.other_fields=list(filter(lambda x:not x.is_key,self.fields))
         self.bits=len(self.other_fields)
-        self.keys_format=string.join(["%d"]*len(self.key_fields),", ")
-        self.keys_arg=string.join(map(lambda x:"real_packet->"+x.name,
-                                      self.key_fields),", ")
+        self.keys_format=", ".join(["%d"]*len(self.key_fields))
+        self.keys_arg=", ".join(map(lambda x:"real_packet->"+x.name,
+                                    self.key_fields))
         if self.keys_arg:
             self.keys_arg=",\n    "+self.keys_arg
 
@@ -571,15 +571,15 @@ class Variant:
             self.delta=0
             self.no_packet=1
 
-        if len(self.fields)>5 or string.split(self.name,"_")[1]=="ruleset":
+        if len(self.fields)>5 or self.name.split("_")[1]=="ruleset":
             self.handle_via_packet=1
 
         self.extra_force_arg=""
         self.extra_send_args=""
         self.extra_send_args2=""
-        self.extra_send_args3=string.join(
+        self.extra_send_args3=", ".join(
             map(lambda x:"%s%s"%(x.get_handle_type(1), x.name),
-                self.fields),", ")
+                self.fields))
         if self.extra_send_args3:
             self.extra_send_args3=", "+self.extra_send_args3
 
@@ -605,7 +605,7 @@ class Variant:
     # statistical counters of this packet.
     def get_stats(self):
         names=map(lambda x:'"'+x.name+'"',self.other_fields)
-        names=string.join(names,", ")
+        names=", ".join(names)
 
         return '''static int stats_%(name)s_sent;
 static int stats_%(name)s_discarded;
@@ -663,7 +663,7 @@ static char *stats_%(name)s_names[] = {%(names)s};
 
 '''%self.__dict__
 
-            keys=map(lambda x:"key->"+x.name,self.key_fields)
+            keys=list(map(lambda x:"key->"+x.name,self.key_fields))
             if len(keys)==1:
                 a=keys[0]
             elif len(keys)==2:
@@ -776,7 +776,7 @@ static char *stats_%(name)s_names[] = {%(names)s};
         for i in xrange(2):
             for k,v in vars().items():
                 if type(v)==type(""):
-                    temp=string.replace(temp,"<%s>"%k,v)
+                    temp=temp.replace("<%s>"%k,v)
         return temp%self.get_dict(vars())
 
     # '''
@@ -896,15 +896,15 @@ static char *stats_%(name)s_names[] = {%(names)s};
         for i in xrange(2):
             for k,v in vars().items():
                 if type(v)==type(""):
-                    temp=string.replace(temp,"<%s>"%k,v)
+                    temp=temp.replace("<%s>"%k,v)
         return temp%self.get_dict(vars())
 
     # Helper for get_receive()
     def get_delta_receive_body(self):
         key1=map(lambda x:"    %s %s = real_packet->%s;"%(x.struct_type,x.name,x.name),self.key_fields)
         key2=map(lambda x:"    real_packet->%s = %s;"%(x.name,x.name),self.key_fields)
-        key1=string.join(key1,"\n")
-        key2=string.join(key2,"\n")
+        key1="\n".join(key1)
+        key2="\n".join(key2)
         if key1: key1=key1+"\n\n"
         if key2: key2="\n\n"+key2
         if self.gen_freelog:
@@ -947,21 +947,21 @@ class Packet:
         self.log_level=freelog_log_level
         self.gen_stats=generate_stats
         self.gen_freelog=generate_freelogs
-        str=string.strip(str)
-        lines=string.split(str,"\n")
+        str=str.strip()
+        lines=str.split("\n")
         
         mo=re.search("^\s*(\S+)\s*=\s*(\d+)\s*;\s*(.*?)\s*$",lines[0])
         assert mo,repr(lines[0])
 
         self.type=mo.group(1)
-        self.name=string.lower(self.type)
+        self.name=self.type.lower()
         self.type_number=int(mo.group(2))
         assert 0<=self.type_number<=255
         dummy=mo.group(3)
 
         del lines[0]
 
-        arr=filter(lambda x:x,map(string.strip,string.split(dummy,",")))
+        arr=list(item.strip() for item in dummy.split(",") if item)
 
         self.dirs=[]
 
@@ -1036,12 +1036,12 @@ class Packet:
         self.fields=[]
         for i in lines:
             self.fields=self.fields+parse_fields(i,types)
-        self.key_fields=filter(lambda x:x.is_key,self.fields)
-        self.other_fields=filter(lambda x:not x.is_key,self.fields)
+        self.key_fields=list(filter(lambda x:x.is_key,self.fields))
+        self.other_fields=list(filter(lambda x:not x.is_key,self.fields))
         self.bits=len(self.other_fields)
-        self.keys_format=string.join(["%d"]*len(self.key_fields),", ")
-        self.keys_arg=string.join(map(lambda x:"real_packet->"+x.name,
-                                      self.key_fields),", ")
+        self.keys_format=", ".join(["%d"]*len(self.key_fields))
+        self.keys_arg=", ".join(map(lambda x:"real_packet->"+x.name,
+                                    self.key_fields))
         if self.keys_arg:
             self.keys_arg=",\n    "+self.keys_arg
 
@@ -1053,14 +1053,14 @@ class Packet:
             self.no_packet=1
             assert not self.want_dsend,"dsend for a packet without fields isn't useful"
 
-        if len(self.fields)>5 or string.split(self.name,"_")[1]=="ruleset":
+        if len(self.fields)>5 or self.name.split("_")[1]=="ruleset":
             self.handle_via_packet=1
 
         self.extra_send_args=""
         self.extra_send_args2=""
-        self.extra_send_args3=string.join(
+        self.extra_send_args3=", ".join(
             map(lambda x:"%s%s"%(x.get_handle_type(1), x.name),
-                self.fields),", ")
+                self.fields))
         if self.extra_send_args3:
             self.extra_send_args3=", "+self.extra_send_args3
 
@@ -1289,7 +1289,7 @@ class Packet:
     # dsend function.
     def get_dsend(self):
         if not self.want_dsend: return ""
-        fill=string.join(map(lambda x:x.get_fill(),self.fields),"\n")
+        fill="\n".join(map(lambda x:x.get_fill(),self.fields))
         return '''%(dsend_prototype)s
 {
   struct %(name)s packet, *real_packet = &packet;
@@ -1305,7 +1305,7 @@ class Packet:
     # dlsend function.
     def get_dlsend(self):
         if not (self.want_lsend and self.want_dsend): return ""
-        fill=string.join(map(lambda x:x.get_fill(),self.fields),"\n")
+        fill="\n".join(map(lambda x:x.get_fill(),self.fields))
         return '''%(dlsend_prototype)s
 {
   struct %(name)s packet, *real_packet = &packet;
@@ -1421,11 +1421,11 @@ def get_enum_packet(packets):
 
     mapping={}
     for p in packets:
-        if mapping.has_key(p.type_number):
-            print p.name,mapping[p.type_number].name
+        if p.type_number in mapping :
+            print(p.name,mapping[p.type_number].name)
             assert 0
         mapping[p.type_number]=p
-    sorted=mapping.keys()
+    sorted=list(mapping.keys())
     sorted.sort()
 
     last=-1
@@ -1455,8 +1455,8 @@ def strip_c_comment(s):
   # doesn't work with python version 2.2 and 2.3.
   # Do it by hand then.
   result=""
-  for i in filter(lambda x:x,string.split(s,"/*")):
-      l=string.split(i,"*/",1)
+  for i in filter(lambda x:x,s.split("/*")):
+      l=i.split("*/",1)
       assert len(l)==2,repr(i)
       result=result+l[1]
   return result  
@@ -1477,7 +1477,7 @@ def gen_main():
 
     content=open(input_name).read()
     content=strip_c_comment(content)
-    lines=string.split(content,"\n")
+    lines=content.split("\n")
     lines=map(lambda x: re.sub("#.*$","",x),lines)
     lines=map(lambda x: re.sub("//.*$","",x),lines)
     lines=filter(lambda x:not re.search("^\s*$",x),lines)
@@ -1491,8 +1491,8 @@ def gen_main():
             lines2.append(i)
 
     packets=[]
-    for str in re.split("(?m)^end$",string.join(lines2,"\n")):
-        str=string.strip(str)
+    for str in re.split("(?m)^end$","\n".join(lines2)):
+        str=str.strip()
         if str:
             packets.append(Packet(str,types))
 

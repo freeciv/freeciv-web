@@ -1,8 +1,8 @@
 diff -Nurd -X.diff_ignore freeciv/configure.ac freeciv/configure.ac
---- freeciv/configure.ac	2012-07-15 23:13:27.000000000 +0300
-+++ freeciv/configure.ac	2012-07-15 23:19:19.000000000 +0300
-@@ -545,6 +545,11 @@
-      FTWL_LIBS="$FTWL_LIBS "`sdl-config --libs`" -lpng "`freetype-config --libs -lGL -lGLU`
+--- freeciv/configure.ac	2012-07-16 02:53:09.000000000 +0300
++++ freeciv/configure.ac	2012-07-16 02:59:06.000000000 +0300
+@@ -656,6 +656,11 @@
+   AC_DEFINE([HAVE_THREADS], [1], [Defined if there is any thread implementation at all])
  fi
  
 +AM_PATH_GLIB_2_0(2.29.0,,
@@ -13,7 +13,7 @@ diff -Nurd -X.diff_ignore freeciv/configure.ac freeciv/configure.ac
  dnl Check and choose clients
  if test "x$client" != "xno"; then
  
-@@ -950,7 +955,7 @@
+@@ -1088,7 +1093,7 @@
       fi
     fi]],[[]])
  
@@ -23,8 +23,8 @@ diff -Nurd -X.diff_ignore freeciv/configure.ac freeciv/configure.ac
  
  dnl Rebuild 'configure' whenever fc_version changes, if maintainer mode enabled.
 diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
---- freeciv/server/unithand.c	2012-07-15 22:02:41.000000000 +0300
-+++ freeciv/server/unithand.c	2012-07-15 23:20:16.000000000 +0300
+--- freeciv/server/unithand.c	2012-07-16 02:51:14.000000000 +0300
++++ freeciv/server/unithand.c	2012-07-16 03:00:22.000000000 +0300
 @@ -19,9 +19,12 @@
  #include <stdlib.h>
  #include <string.h>
@@ -38,20 +38,21 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
  #include "mem.h"
  #include "rand.h"
  #include "shared.h"
-@@ -691,7 +694,15 @@
-   res = test_unit_add_or_build_city(punit);
+@@ -705,7 +708,16 @@
+   res = unit_add_or_build_city_test(punit);
  
-   if (res == AB_BUILD_OK) {
+   if (UAB_BUILD_OK == res) {
 -    city_build(pplayer, punit, name);
 +    /* Unescape city name, which has been escaped in Javascript. */
 +    char* unescaped_text = g_uri_unescape_string(name, NULL);
 +    char result_buf[MAX_LEN_NAME];
++
 +    convert_string(unescaped_text,
-+		     "latin1",
-+		     "UTF-8",
-+		     (char*)result_buf, MAX_LEN_NAME);
++                   "latin1",
++                   "UTF-8",
++                   (char*)result_buf, MAX_LEN_NAME);
 +    city_build(pplayer, punit, result_buf);
 +    free(unescaped_text);
-   } else if (res == AB_ADD_OK) {
+   } else if (UAB_ADD_OK == res) {
      city_add_unit(pplayer, punit);
    } else {

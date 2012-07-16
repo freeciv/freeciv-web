@@ -873,7 +873,7 @@ PACKET_UNIT_UPGRADE = 77; cs, dsend
   UNIT unit_id;
 end
 
-PACKET_UNIT_TRANSFORM = 78; cs, dsend
+PACKET_UNIT_CONVERT = 78; cs, dsend
   UNIT unit_id;
 end
 
@@ -1131,7 +1131,7 @@ PACKET_RULESET_UNIT = 140; sc, lsend
   UINT8 hp;
   UINT8 firepower;
   SINT8 obsoleted_by;
-  SINT8 transformed_to;
+  SINT8 converted_to;
   UINT8 fuel;
 
   UINT8 happy_cost;   # unhappy people in home city

@@ -1,7 +1,7 @@
 diff -Nurd -X.diff_ignore freeciv/common/game.h freeciv/common/game.h
---- freeciv/common/game.h	2012-05-21 12:41:30.000000000 +0300
-+++ freeciv/common/game.h	2012-05-21 14:49:49.000000000 +0300
-@@ -195,6 +195,7 @@
+--- freeciv/common/game.h	2012-07-16 02:48:57.000000000 +0300
++++ freeciv/common/game.h	2012-07-16 03:12:56.000000000 +0300
+@@ -207,6 +207,7 @@
        struct {
          bool user_message_set;
          char user_message[256];
@@ -10,10 +10,10 @@ diff -Nurd -X.diff_ignore freeciv/common/game.h freeciv/common/game.h
      } server;
    };
 diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2012-05-21 14:45:55.000000000 +0300
-+++ freeciv/common/packets.def	2012-05-21 14:51:36.000000000 +0300
-@@ -1259,12 +1259,12 @@
-   STRING name[MAX_LEN_NAME];
+--- freeciv/common/packets.def	2012-07-16 03:08:42.000000000 +0300
++++ freeciv/common/packets.def	2012-07-16 03:12:56.000000000 +0300
+@@ -1273,12 +1273,12 @@
+   STRING rule_name[MAX_LEN_NAME];
    STRING graphic_str[MAX_LEN_NAME];
    STRING graphic_alt[MAX_LEN_NAME];
 -  UINT8 reqs_count;
@@ -29,8 +29,8 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    STRING soundtag[MAX_LEN_NAME];
    STRING soundtag_alt[MAX_LEN_NAME];
 diff -Nurd -X.diff_ignore freeciv/server/civserver.c freeciv/server/civserver.c
---- freeciv/server/civserver.c	2012-05-21 12:41:29.000000000 +0300
-+++ freeciv/server/civserver.c	2012-05-21 14:49:49.000000000 +0300
+--- freeciv/server/civserver.c	2012-07-16 02:48:33.000000000 +0300
++++ freeciv/server/civserver.c	2012-07-16 03:13:50.000000000 +0300
 @@ -244,6 +244,9 @@
        free(option);
      } else if ((option = get_option_malloc("--bind", argv, &inx, argc))) {
@@ -41,19 +41,18 @@ diff -Nurd -X.diff_ignore freeciv/server/civserver.c freeciv/server/civserver.c
      } else if ((option = get_option_malloc("--read", argv, &inx, argc)))
        srvarg.script_filename = option; /* Never freed. */
      else if ((option = get_option_malloc("--quitidle", argv, &inx, argc))) {
-@@ -360,6 +363,8 @@
+@@ -368,6 +371,7 @@
      fc_fprintf(stderr, _("  -r, --read FILE\tRead startup script FILE\n"));
      fc_fprintf(stderr,
  	       _("  -R, --Ranklog FILE\tUse FILE as ranking logfile\n"));
 +    fc_fprintf(stderr, _("  -t, --topic \"MESSAGE\"\t\tSet the metaserver topic\n"));
-+
-     fc_fprintf(stderr, _("  -v, --version\t\tPrint the version number\n"));
-     /* TRANS: No full stop after the URL, could cause confusion. */
-     fc_fprintf(stderr, _("Report bugs at %s\n"), BUG_URL);
+ #ifdef AI_MODULES
+     fc_fprintf(stderr,
+                _("  -L, --LoadAI MODULE\tLoad ai module MODULE. Can appear multiple times\n"));
 diff -Nurd -X.diff_ignore freeciv/server/meta.c freeciv/server/meta.c
---- freeciv/server/meta.c	2012-05-21 12:41:29.000000000 +0300
-+++ freeciv/server/meta.c	2012-05-21 14:49:49.000000000 +0300
-@@ -109,6 +109,12 @@
+--- freeciv/server/meta.c	2012-07-16 02:48:33.000000000 +0300
++++ freeciv/server/meta.c	2012-07-16 03:12:56.000000000 +0300
+@@ -114,6 +114,12 @@
    return meta_message;
  }
  
@@ -66,7 +65,7 @@ diff -Nurd -X.diff_ignore freeciv/server/meta.c freeciv/server/meta.c
  /*************************************************************************
   The metaserver message set by user
  *************************************************************************/
-@@ -256,6 +262,8 @@
+@@ -288,6 +294,8 @@
      fc_strlcpy(s, "bye=1&", rest);
      s = end_of_strn(s, &rest);
    } else {
@@ -75,7 +74,7 @@ diff -Nurd -X.diff_ignore freeciv/server/meta.c freeciv/server/meta.c
      fc_snprintf(s, rest, "version=%s&", fc_url_encode(VERSION_STRING));
      s = end_of_strn(s, &rest);
  
-@@ -270,6 +278,13 @@
+@@ -302,6 +310,13 @@
                  fc_url_encode(srvarg.serverid));
      s = end_of_strn(s, &rest);
  
@@ -89,7 +88,7 @@ diff -Nurd -X.diff_ignore freeciv/server/meta.c freeciv/server/meta.c
      fc_snprintf(s, rest, "message=%s&",
                  fc_url_encode(get_meta_message_string()));
      s = end_of_strn(s, &rest);
-@@ -309,6 +324,11 @@
+@@ -341,6 +356,11 @@
                      fc_url_encode(plr->nation != NO_NATION_SELECTED 
                                    ? nation_plural_for_player(plr)
                                    : "none"));
@@ -102,8 +101,8 @@ diff -Nurd -X.diff_ignore freeciv/server/meta.c freeciv/server/meta.c
  
          fc_snprintf(s, rest, "plh[]=%s&",
 diff -Nurd -X.diff_ignore freeciv/server/meta.h freeciv/server/meta.h
---- freeciv/server/meta.h	2012-05-21 14:49:46.000000000 +0300
-+++ freeciv/server/meta.h	2012-05-21 14:49:49.000000000 +0300
+--- freeciv/server/meta.h	2012-07-16 03:12:51.000000000 +0300
++++ freeciv/server/meta.h	2012-07-16 03:12:56.000000000 +0300
 @@ -32,6 +32,7 @@
  const char *get_meta_patches_string(void);
  const char *get_meta_message_string(void);

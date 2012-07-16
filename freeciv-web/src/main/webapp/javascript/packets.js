@@ -34,7 +34,7 @@
  var packet_unit_load = 75
  var packet_unit_unload = 76
  var packet_unit_upgrade = 77
- var packet_unit_transform = 78
+ var packet_unit_convert = 78
  var packet_unit_nuke = 79
  var packet_unit_paradrop_to = 80
  var packet_unit_airlift = 81

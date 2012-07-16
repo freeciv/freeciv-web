@@ -22,8 +22,8 @@ import time
 
 HOST = 'localhost';
 MAX_LEN_PACKET = 48;
-VERSION = "+Freeciv.Web.Devel.2012.Jul.16";  #must be kept in sync with Freeciv server.
-VER_INFO = "-test";
+VERSION = "+Freeciv.Web.Devel.2012.Jul.16-2";  # Must be kept in sync with Freeciv server.
+VER_INFO = "-dev";
 logger = logging.getLogger("freeciv-proxy");
 
 class CivCom(Thread):

@@ -1,1 +1,0 @@
-?package(freeciv-sdl):needs="x11" section="Games/Strategy" title="Freeciv client (SDL version)" command="/usr/games/freeciv-sdl"

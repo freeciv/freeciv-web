@@ -1,8 +1,0 @@
-# List of source files containing translatable strings that will be
-# ignored.
-# (Filenames relative to top-level directory
-client/gui-stub/chatline.c
-client/gui-stub/connectdlg.c
-client/gui-stub/dialogs.c
-client/gui-stub/mapview.c
-server/sanitycheck.c

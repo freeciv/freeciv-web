@@ -1,3 +1,0 @@
-#include <windows.h>
-
-server_icon ICON "server.ico"

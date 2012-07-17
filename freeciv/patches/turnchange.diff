@@ -1,6 +1,6 @@
 diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2012-07-16 00:28:55.000000000 +0300
-+++ freeciv/common/packets.def	2012-07-16 00:38:57.000000000 +0300
+--- freeciv/common/packets.def	2012-07-17 03:37:00.000000000 +0300
++++ freeciv/common/packets.def	2012-07-17 03:47:34.000000000 +0300
 @@ -246,14 +246,14 @@
  type UNIT_TYPE          = uint8(Unit_type_id)
  
@@ -18,6 +18,6 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
 -type YEAR               = SINT16
 +type XYSIZE             = UINT32
 +type YEAR               = SINT32
+ type CITIZENS           = UINT8
  
  /****************************************************
- The remaining lines are the definition of the packets. These are

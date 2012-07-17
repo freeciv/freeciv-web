@@ -1,19 +1,12 @@
-diff -Nurd -X.diff_ignore freeciv/server/srv_main.c freeciv/server/srv_main.c
---- freeciv/server/srv_main.c	2012-05-21 01:28:22.000000000 +0300
-+++ freeciv/server/srv_main.c	2012-05-21 01:51:11.000000000 +0300
-@@ -1131,6 +1131,7 @@
- **************************************************************************/
- void save_game_auto(const char *save_reason, const char *reason_filename)
- {
-+#if 0
-   char filename[512];
- 
-   fc_assert(256 > strlen(game.server.save_name));
-@@ -1139,6 +1140,7 @@
-                      reason_filename);
-   save_game(filename, save_reason, FALSE);
-   save_ppm();
-+#endif
- }
- 
- /**************************************************************************
+diff -Nurd -X.diff_ignore freeciv/data/default/game.ruleset freeciv/data/default/game.ruleset
+--- freeciv/data/default/game.ruleset	2012-07-17 02:35:27.000000000 +0300
++++ freeciv/data/default/game.ruleset	2012-07-17 02:57:36.000000000 +0300
+@@ -259,3 +259,8 @@
+ ;       "int_set", 123, FALSE
+ ;       "str_set", "test", FALSE
+ ;     }
++
++set =
++  { "name", "value", "lock"
++    "autosaves", "", TRUE
++  }

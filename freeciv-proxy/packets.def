@@ -255,6 +255,7 @@ type PHASE              = SINT16
 type TURN               = SINT16
 type XYSIZE             = UINT32
 type YEAR               = SINT32
+type CITIZENS           = UINT8
 
 /****************************************************
 The remaining lines are the definition of the packets. These are
@@ -366,6 +367,7 @@ PACKET_TILE_INFO = 15; sc, lsend, is-game-info
   BOOL special[S_LAST];
   BV_BASES bases;
   STRING spec_sprite[MAX_LEN_NAME];
+  STRING label[MAX_LEN_NAME];
 end
 
 # This packet used to have is_info set but that doesn't work with the
@@ -384,10 +386,12 @@ PACKET_GAME_INFO = 16; sc
   UINT8 border_city_radius_sq;
   UINT8 border_size_effect;
   BORDERS_MODE borders;
+  UINT32 base_bribe_cost;
   BOOL calendar_skip_0;
   /* size limit for cities before they can celebrate */
   UINT8 celebratesize;
   BOOL changable_tax;
+  BOOL citizen_nationality;
   UINT8 citymindist;
   UINT32 cooling;
   UINT32 coolinglevel;
@@ -426,7 +430,6 @@ PACKET_GAME_INFO = 16; sc
   UINT8 killcitizen;
   BOOL killstack;
   UINT8 min_city_center_output[O_LAST];
-  UINT8 min_dist_bw_cities;
   STRING negative_year_label[MAX_LEN_NAME];
   UINT8 notradesize;
   BOOL nuclear_winter;
@@ -505,13 +508,20 @@ PACKET_CITY_INFO = 31; sc, lsend, is-game-info, force, cancel(PACKET_CITY_SHORT_
   TILE tile;
 
   PLAYER owner;
-  UINT8 size;
+  CITIZENS size;
   UINT8 city_radius_sq;
 
-  UINT8 ppl_happy[5], ppl_content[5], ppl_unhappy[5], ppl_angry[5];
+  CITIZENS ppl_happy[FEELING_LAST];
+  CITIZENS ppl_content[FEELING_LAST];
+  CITIZENS ppl_unhappy[FEELING_LAST];
+  CITIZENS ppl_angry[FEELING_LAST];
 
   UINT8 specialists_size;
-  UINT8 specialists[SP_MAX:specialists_size];
+  CITIZENS specialists[SP_MAX:specialists_size];
+
+  UINT8 nationalities_count;
+  PLAYER nation_id[MAX_NUM_PLAYER_SLOTS:nationalities_count];
+  CITIZENS nation_citizens[MAX_NUM_PLAYER_SLOTS:nationalities_count];
 
   SINT16 surplus[O_LAST];
   UINT16 waste[O_LAST];
@@ -691,6 +701,10 @@ PACKET_PLAYER_INFO = 51; sc, is-info
   BV_PLAYER gives_shared_vision;
   STRING inventions[A_LAST+1];
   UINT32 love[MAX_NUM_PLAYER_SLOTS];
+
+  UINT8 color_red;
+  UINT8 color_green;
+  UINT8 color_blue;
 
   CITY wonders[B_LAST]; diff
   UINT32 net_income;
@@ -1141,9 +1155,10 @@ PACKET_RULESET_UNIT = 140; sc, lsend
   UINT8 paratroopers_mr_req;
   UINT8 paratroopers_mr_sub;
 
-  STRING veteran_name[MAX_VET_LEVELS][MAX_LEN_NAME];
-  FLOAT power_fact[MAX_VET_LEVELS];
-  UINT8 move_bonus[MAX_VET_LEVELS];
+  UINT8 veteran_levels;
+  STRING veteran_name[MAX_VET_LEVELS:veteran_levels][MAX_LEN_NAME];
+  UINT16 power_fact[MAX_VET_LEVELS:veteran_levels];
+  UINT8 move_bonus[MAX_VET_LEVELS:veteran_levels];
 
   UINT8 bombard_rate;
   UINT8 city_size;
@@ -1161,8 +1176,15 @@ PACKET_RULESET_GAME = 141; sc, lsend
   UINT8 default_specialist;
 
   #TECH_LIST global_init_techs[MAX_NUM_TECH_LIST]; - Removed for web client. - Andreas
-  UINT8 work_veteran_chance[MAX_VET_LEVELS];
-  UINT8 veteran_chance[MAX_VET_LEVELS];
+
+  UINT8 veteran_levels;
+  STRING veteran_name[MAX_VET_LEVELS:veteran_levels][MAX_LEN_NAME];
+  UINT16 power_fact[MAX_VET_LEVELS:veteran_levels];
+  UINT8 move_bonus[MAX_VET_LEVELS:veteran_levels];
+
+  UINT8 background_red;
+  UINT8 background_green;
+  UINT8 background_blue;
 end
 
 PACKET_RULESET_SPECIALIST = 142; sc, lsend
@@ -1326,7 +1348,11 @@ PACKET_RULESET_TERRAIN = 151; sc, lsend
   UINT8 rail_time;
   UINT8 clean_pollution_time;
   UINT8 clean_fallout_time;
-  
+
+  UINT8 color_red;
+  UINT8 color_green;
+  UINT8 color_blue;
+
   STRING helptext[MAX_LEN_PACKET];
 end
 
@@ -1626,6 +1652,7 @@ PACKET_EDIT_TILE = 206; cs, handle-per-conn, handle-via-packet
   RESOURCE resource;
   TERRAIN terrain;
   NATION startpos_nation;
+  STRING label[MAX_LEN_NAME];
 end
 
 PACKET_EDIT_UNIT_CREATE = 207; cs, handle-per-conn, dsend

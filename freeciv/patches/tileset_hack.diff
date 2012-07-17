@@ -1,36 +1,15 @@
 diff -Nurd -X.diff_ignore freeciv/client/tilespec.c freeciv/client/tilespec.c
---- freeciv/client/tilespec.c	2012-05-16 20:56:41.000000000 +0300
-+++ freeciv/client/tilespec.c	2012-05-16 22:13:10.000000000 +0300
-@@ -2837,10 +2837,20 @@
- 
-   /* Set up each layer of the drawing. */
-   for (l = 0; l < draw->num_layers; l++) {
-+
-+
-     struct drawing_layer *dlp = &draw->layer[l];
-     struct tileset_layer *tslp = &t->layers[l];
-     sprite_vector_init(&dlp->base);
- 
-+    printf("\"l%d.%s\":{\"match_style\":%d,\"sprite_type\":%d,\"mine_tag\":\"%s\",\"match_indices\":%d,\"match_index\":[",l,
-+		 draw->name,  dlp->match_style,dlp->sprite_type, draw->mine_tag, dlp->match_indices);
-+    int sx;
-+    for (sx = 0; sx < dlp->match_indices; sx++) {
-+      printf("%d",dlp->match_index[sx]);
-+      if (sx < dlp->match_indices - 1) printf(",");
-+    }
-+    printf("]},\n");
-     switch (dlp->sprite_type) {
-     case CELL_WHOLE:
-       switch (dlp->match_style) {
-@@ -3004,6 +3014,7 @@
- 			  tslp->match_types[s][0],
- 			  tslp->match_types[w][0]);
+--- freeciv/client/tilespec.c	2012-07-17 02:35:54.000000000 +0300
++++ freeciv/client/tilespec.c	2012-07-17 03:43:56.000000000 +0300
+@@ -3042,6 +3042,7 @@
+                           tslp->match_types[n][0], tslp->match_types[e][0],
+                           tslp->match_types[s][0], tslp->match_types[w][0]);
  	      sprite = load_sprite(t, buffer);
 +              printf("\"%s.%d\":\"%s\",\n", draw->name, i, buffer);
  
  	      if (sprite) {
  		/* Crop the sprite to separate this cell. */
-@@ -3959,6 +3970,7 @@
+@@ -4000,6 +4001,7 @@
  	      int k = 0;
  	      for (; k < count; k++) {
  		n[j] = k; /* default to last entry */
@@ -38,7 +17,7 @@ diff -Nurd -X.diff_ignore freeciv/client/tilespec.c freeciv/client/tilespec.c
  		if (m[j] == dlp->match_index[k])
  		{
  		  break;
-@@ -3972,7 +3984,7 @@
+@@ -4013,7 +4015,7 @@
  	  break;
  	};
  	array_index = array_index * NUM_CORNER_DIRS + i;

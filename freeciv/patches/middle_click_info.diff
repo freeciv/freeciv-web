@@ -1,7 +1,7 @@
 diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2012-07-16 00:23:58.000000000 +0300
-+++ freeciv/common/packets.def	2012-07-16 00:24:03.000000000 +0300
-@@ -1762,3 +1762,14 @@
+--- freeciv/common/packets.def	2012-07-17 03:24:51.000000000 +0300
++++ freeciv/common/packets.def	2012-07-17 03:25:04.000000000 +0300
+@@ -1789,3 +1789,14 @@
    SINT32 tag;
    SINT32 id;
  end
@@ -17,8 +17,8 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
 +end
 +
 diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
---- freeciv/server/maphand.c	2012-07-15 21:52:13.000000000 +0300
-+++ freeciv/server/maphand.c	2012-07-16 00:28:27.000000000 +0300
+--- freeciv/server/maphand.c	2012-07-17 02:35:26.000000000 +0300
++++ freeciv/server/maphand.c	2012-07-17 03:36:02.000000000 +0300
 @@ -36,6 +36,7 @@
  #include "unit.h"
  #include "unitlist.h"
@@ -27,7 +27,7 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
  
  /* generator */
  #include "utilities.h"
-@@ -1862,3 +1863,403 @@
+@@ -1860,3 +1861,403 @@
    }
    tile_remove_base(ptile, pbase);
  }
@@ -403,7 +403,7 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +		  ptype->attack_strength, 
 +		  ptype->defense_strength, ptype->firepower, punit->hp, 
 +		  ptype->hp,
-+		  _(ptype->veteran[punit->veteran].name));
++		  name_translation(&ptype->veteran->definitions[punit->veteran].name));
 +
 +    if ((NULL == pplayer || owner == pplayer)
 +	&& unit_list_size(ptile->units) >= 2) {
@@ -432,9 +432,9 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +}
 +
 diff -Nurd -X.diff_ignore freeciv/server/maphand.h freeciv/server/maphand.h
---- freeciv/server/maphand.h	2012-07-15 21:52:14.000000000 +0300
-+++ freeciv/server/maphand.h	2012-07-16 00:24:32.000000000 +0300
-@@ -123,4 +123,6 @@
+--- freeciv/server/maphand.h	2012-07-17 02:35:27.000000000 +0300
++++ freeciv/server/maphand.h	2012-07-17 03:25:04.000000000 +0300
+@@ -124,4 +124,6 @@
                   struct player *pplayer);
  void destroy_base(struct tile *ptile, struct base_type *pbase);
  

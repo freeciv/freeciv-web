@@ -1,14 +1,22 @@
 diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
---- freeciv/server/unithand.c	2012-05-21 14:12:04.000000000 +0300
-+++ freeciv/server/unithand.c	2012-05-21 14:20:42.000000000 +0300
-@@ -824,6 +824,15 @@
+--- freeciv/server/unithand.c	2012-07-17 03:00:05.000000000 +0300
++++ freeciv/server/unithand.c	2012-07-17 03:03:40.000000000 +0300
+@@ -45,6 +45,7 @@
+ #include "unitlist.h"
+ 
+ /* ai */
++#include "aiplayer.h"
+ #include "aitools.h"
+ 
+ /* server */
+@@ -887,6 +888,15 @@
  
      old_tile = path->positions[0].tile;
  
 +    /* Remove city spot reservations for AI settlers on city founding
 +     * mission, before goto_tile reset. */
-+    if (punit->server.adv->role != AIUNIT_NONE) {
-+      ai_unit_new_role(punit, AIUNIT_NONE, NULL);
++    if (def_ai_unit_data(punit)->task != AIUNIT_NONE) {
++      ai_unit_new_task(punit, AIUNIT_NONE, NULL);
 +    }
 +
 +    punit->ai_controlled = FALSE;

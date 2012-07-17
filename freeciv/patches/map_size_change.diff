@@ -1,10 +1,10 @@
 diff -Nurd -X.diff_ignore freeciv/common/map.h freeciv/common/map.h
---- freeciv/common/map.h	2012-07-16 02:48:57.000000000 +0300
-+++ freeciv/common/map.h	2012-07-16 03:09:43.000000000 +0300
-@@ -563,9 +563,9 @@
- /* Size of the map in thousands of tiles.  Setting the maximal size over
-  * than 30 is dangerous, because some parts of the code (e.g. path finding)
-  * assume the tile index is of type (signed short int). */
+--- freeciv/common/map.h	2012-07-17 19:04:32.000000000 +0300
++++ freeciv/common/map.h	2012-07-17 19:50:22.000000000 +0300
+@@ -564,9 +564,9 @@
+ /* Size of the map in thousands of tiles. If MAP_MAX_SIZE is increased, 
+  * MAX_DBV_LENGTH in bitvector.c must be checked. The following equation must
+  * be valid: MAP_MAX_SIZE * 1000 <= MAX_DBV_LENGTH! */
 -#define MAP_DEFAULT_SIZE         4
 +#define MAP_DEFAULT_SIZE         3
  #define MAP_MIN_SIZE             0

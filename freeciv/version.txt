@@ -1,1 +1,1 @@
-Patches are against freeciv revision 19590.
+Patches are against freeciv revision 20040.

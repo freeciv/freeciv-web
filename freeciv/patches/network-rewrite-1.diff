@@ -1,6 +1,6 @@
 diff -Nurd -X.diff_ignore freeciv/common/connection.h freeciv/common/connection.h
---- freeciv/common/connection.h	2012-07-17 03:56:39.000000000 +0300
-+++ freeciv/common/connection.h	2012-07-17 03:56:54.000000000 +0300
+--- freeciv/common/connection.h	2012-07-17 20:23:05.000000000 +0300
++++ freeciv/common/connection.h	2012-07-17 20:37:17.000000000 +0300
 @@ -41,11 +41,13 @@
  /* common */
  #include "fc_types.h"
@@ -25,8 +25,8 @@ diff -Nurd -X.diff_ignore freeciv/common/connection.h freeciv/common/connection.
    double ping_time;
    
 diff -Nurd -X.diff_ignore freeciv/common/dataio.c freeciv/common/dataio.c
---- freeciv/common/dataio.c	2012-07-17 02:35:58.000000000 +0300
-+++ freeciv/common/dataio.c	2012-07-17 04:10:42.000000000 +0300
+--- freeciv/common/dataio.c	2012-07-17 19:04:32.000000000 +0300
++++ freeciv/common/dataio.c	2012-07-17 20:37:17.000000000 +0300
 @@ -194,8 +194,13 @@
  /**************************************************************************
    Insert value using 8 bits. May overflow.
@@ -608,8 +608,8 @@ diff -Nurd -X.diff_ignore freeciv/common/dataio.c freeciv/common/dataio.c
 +
 +}
 diff -Nurd -X.diff_ignore freeciv/common/dataio.h freeciv/common/dataio.h
---- freeciv/common/dataio.h	2012-07-17 02:35:58.000000000 +0300
-+++ freeciv/common/dataio.h	2012-07-17 03:56:54.000000000 +0300
+--- freeciv/common/dataio.h	2012-07-17 19:04:32.000000000 +0300
++++ freeciv/common/dataio.h	2012-07-17 20:37:17.000000000 +0300
 @@ -20,6 +20,8 @@
  #include "bitvector.h"
  #include "support.h"            /* bool type */
@@ -728,8 +728,8 @@ diff -Nurd -X.diff_ignore freeciv/common/dataio.h freeciv/common/dataio.h
  }
  #endif /* __cplusplus */
 diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/generate_packets.py
---- freeciv/common/generate_packets.py	2012-07-17 03:56:39.000000000 +0300
-+++ freeciv/common/generate_packets.py	2012-07-17 03:56:54.000000000 +0300
+--- freeciv/common/generate_packets.py	2012-07-17 20:23:05.000000000 +0300
++++ freeciv/common/generate_packets.py	2012-07-17 20:37:17.000000000 +0300
 @@ -249,7 +249,7 @@
          if self.is_array==1:
              tmp="real_packet->%(name)s[i] = %(name)s[i]"%self.__dict__
@@ -927,8 +927,8 @@ diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/gene
              for field in self.key_fields:
                  body1=body1+prefix("  ",field.get_get())+"\n"
 diff -Nurd -X.diff_ignore freeciv/common/packets.c freeciv/common/packets.c
---- freeciv/common/packets.c	2012-07-17 02:35:58.000000000 +0300
-+++ freeciv/common/packets.c	2012-07-17 04:11:55.000000000 +0300
+--- freeciv/common/packets.c	2012-07-17 19:04:32.000000000 +0300
++++ freeciv/common/packets.c	2012-07-17 20:44:49.000000000 +0300
 @@ -33,6 +33,8 @@
  #include "events.h"
  #include "map.h"
@@ -938,7 +938,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.c freeciv/common/packets.c
  #include "packets.h"
  
  #ifdef USE_COMPRESSION
-@@ -357,7 +359,7 @@
+@@ -356,7 +358,7 @@
    }
  
    dio_input_init(&din, pc->buffer->data, pc->buffer->ndata);
@@ -947,14 +947,15 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.c freeciv/common/packets.c
  
    /* The non-compressed case */
    whole_packet_len = len_read;
-@@ -455,10 +457,35 @@
+@@ -454,12 +456,35 @@
      return NULL;
    }
  
 -  dio_get_uint8(&din, &utype.itype);
 +  /* Parse JSON packet. */
 +  json_error_t error;
-+  
+ 
+-  utype.type = utype.itype;
 +  dio_get_uint8_old(&din, &utype.itype);
 +
 +  dio_get_string_old(&din, (char*)pc->buffer->data, pc->buffer->ndata);
@@ -979,13 +980,13 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.c freeciv/common/packets.c
 +  json_int_t packet_type = json_integer_value(pint);
 +  utype.type = packet_type;
  
-   log_packet("got packet type=(%s)%d len=%d",
--             packet_name(utype.type), utype.itype, whole_packet_len);
-+             packet_name(utype.type), utype.type, whole_packet_len);
+   log_packet("got packet type=(%s)%d len=%d from %s",
+-             packet_name(utype.type), utype.itype, whole_packet_len,
++             packet_name(utype.type), utype.type, whole_packet_len,
+              is_server() ? pc->username : "server");
  
    *ptype = utype.type;
-   *presult = TRUE;
-@@ -520,10 +547,11 @@
+@@ -522,10 +547,11 @@
  void remove_packet_from_buffer(struct socket_packet_buffer *buffer)
  {
    struct data_in din;
@@ -1000,7 +1001,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.c freeciv/common/packets.c
    memmove(buffer->data, buffer->data + len, buffer->ndata - len);
    buffer->ndata -= len;
    log_debug("remove_packet_from_buffer: remove %d; remaining %d",
-@@ -531,48 +559,6 @@
+@@ -533,48 +559,6 @@
  }
  
  /**************************************************************************
@@ -1050,8 +1051,8 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.c freeciv/common/packets.c
  **************************************************************************/
  void generic_handle_player_attribute_chunk(struct player *pplayer,
 diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2012-07-17 03:56:39.000000000 +0300
-+++ freeciv/common/packets.def	2012-07-17 03:56:54.000000000 +0300
+--- freeciv/common/packets.def	2012-07-17 20:23:05.000000000 +0300
++++ freeciv/common/packets.def	2012-07-17 20:37:17.000000000 +0300
 @@ -738,7 +738,7 @@
    UINT32 diplstate_id; key
    PLAYER plr1;
@@ -1062,8 +1063,8 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    UINT8 has_reason_to_cancel;
    UINT16 contact_turns_left;
 diff -Nurd -X.diff_ignore freeciv/common/packets.h freeciv/common/packets.h
---- freeciv/common/packets.h	2012-07-17 02:35:58.000000000 +0300
-+++ freeciv/common/packets.h	2012-07-17 03:56:54.000000000 +0300
+--- freeciv/common/packets.h	2012-07-17 19:04:32.000000000 +0300
++++ freeciv/common/packets.h	2012-07-17 20:37:17.000000000 +0300
 @@ -33,6 +33,7 @@
  #include "team.h"
  #include "unittype.h"
@@ -1132,9 +1133,9 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.h freeciv/common/packets.h
  /* Utilities to exchange strings and string vectors. */
  #define PACKET_STRVEC_SEPARATOR '\3'
 diff -Nurd -X.diff_ignore freeciv/configure.ac freeciv/configure.ac
---- freeciv/configure.ac	2012-07-17 03:43:28.000000000 +0300
-+++ freeciv/configure.ac	2012-07-17 03:56:54.000000000 +0300
-@@ -902,7 +902,7 @@
+--- freeciv/configure.ac	2012-07-17 20:08:32.000000000 +0300
++++ freeciv/configure.ac	2012-07-17 20:37:17.000000000 +0300
+@@ -940,7 +940,7 @@
  
  dnl Checks for additional server libraries:
  if test "x$server" = "xyes"; then
@@ -1144,8 +1145,8 @@ diff -Nurd -X.diff_ignore freeciv/configure.ac freeciv/configure.ac
      dnl Some systems (e.g., BeOS) need this lib
      AC_CHECK_LIB(bind, gethostbyaddr, SERVER_LIBS="-lbind $SERVER_LIBS")
 diff -Nurd -X.diff_ignore freeciv/server/handchat.c freeciv/server/handchat.c
---- freeciv/server/handchat.c	2012-07-17 02:35:26.000000000 +0300
-+++ freeciv/server/handchat.c	2012-07-17 03:56:54.000000000 +0300
+--- freeciv/server/handchat.c	2012-07-17 19:04:04.000000000 +0300
++++ freeciv/server/handchat.c	2012-07-17 20:37:17.000000000 +0300
 @@ -19,6 +19,8 @@
  #include <stdio.h>
  #include <string.h>
@@ -1193,9 +1194,9 @@ diff -Nurd -X.diff_ignore freeciv/server/handchat.c freeciv/server/handchat.c
       but confusing choice: even before this feature existed,
       novice players were trying /who, /nick etc.
 diff -Nurd -X.diff_ignore freeciv/server/plrhand.c freeciv/server/plrhand.c
---- freeciv/server/plrhand.c	2012-07-17 03:49:35.000000000 +0300
-+++ freeciv/server/plrhand.c	2012-07-17 03:56:54.000000000 +0300
-@@ -1026,12 +1026,12 @@
+--- freeciv/server/plrhand.c	2012-07-17 20:14:21.000000000 +0300
++++ freeciv/server/plrhand.c	2012-07-17 20:37:17.000000000 +0300
+@@ -1023,12 +1023,12 @@
        || (receiver
            && player_diplstate_get(receiver, plr1)->contact_turns_left > 0)
        || (receiver && receiver == plr2)) {
@@ -1211,9 +1212,9 @@ diff -Nurd -X.diff_ignore freeciv/server/plrhand.c freeciv/server/plrhand.c
      packet_ds->has_reason_to_cancel = 0;
      packet_ds->contact_turns_left   = 0;
 diff -Nurd -X.diff_ignore freeciv/server/sernet.c freeciv/server/sernet.c
---- freeciv/server/sernet.c	2012-07-17 02:35:26.000000000 +0300
-+++ freeciv/server/sernet.c	2012-07-17 04:13:20.000000000 +0300
-@@ -1368,7 +1368,7 @@
+--- freeciv/server/sernet.c	2012-07-17 19:04:04.000000000 +0300
++++ freeciv/server/sernet.c	2012-07-17 20:37:17.000000000 +0300
+@@ -1387,7 +1387,7 @@
       * Generally we just want to run select again. */
    }
  
@@ -1222,7 +1223,7 @@ diff -Nurd -X.diff_ignore freeciv/server/sernet.c freeciv/server/sernet.c
      if (0 < recvfrom(socklan, msgbuf, sizeof(msgbuf), 0, NULL, NULL)) {
        dio_input_init(&din, msgbuf, 1);
        dio_get_uint8(&din, &type);
-@@ -1379,7 +1379,7 @@
+@@ -1398,7 +1398,7 @@
          log_debug("Received invalid request for server LAN announcement.");
        }
      }
@@ -1231,7 +1232,7 @@ diff -Nurd -X.diff_ignore freeciv/server/sernet.c freeciv/server/sernet.c
  }
  
  /********************************************************************
-@@ -1478,14 +1478,14 @@
+@@ -1497,14 +1497,14 @@
                srvarg.port );
  
    dio_output_init(&dout, buffer, sizeof(buffer));
@@ -1255,9 +1256,9 @@ diff -Nurd -X.diff_ignore freeciv/server/sernet.c freeciv/server/sernet.c
  
    /* Sending packet to client with the information gathered above. */
 diff -Nurd -X.diff_ignore freeciv/server/srv_main.c freeciv/server/srv_main.c
---- freeciv/server/srv_main.c	2012-07-17 03:43:50.000000000 +0300
-+++ freeciv/server/srv_main.c	2012-07-17 03:56:54.000000000 +0300
-@@ -1480,21 +1480,21 @@
+--- freeciv/server/srv_main.c	2012-07-17 20:08:53.000000000 +0300
++++ freeciv/server/srv_main.c	2012-07-17 20:37:17.000000000 +0300
+@@ -1489,21 +1489,21 @@
                 conn_description(pconn));
  
      dio_output_init(&dout, buffer, sizeof(buffer));

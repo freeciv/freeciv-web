@@ -1,6 +1,6 @@
 diff -Nurd -X.diff_ignore freeciv/common/game.c freeciv/common/game.c
---- freeciv/common/game.c	2012-07-17 02:35:58.000000000 +0300
-+++ freeciv/common/game.c	2012-07-17 03:39:08.000000000 +0300
+--- freeciv/common/game.c	2012-07-17 19:04:32.000000000 +0300
++++ freeciv/common/game.c	2012-07-17 20:04:01.000000000 +0300
 @@ -718,6 +718,13 @@
      cf_int_seq('Y', game.info.year),
      cf_end()
@@ -27,20 +27,20 @@ diff -Nurd -X.diff_ignore freeciv/common/game.c freeciv/common/game.c
    }
  
 diff -Nurd -X.diff_ignore freeciv/configure.ac freeciv/configure.ac
---- freeciv/configure.ac	2012-07-17 02:50:24.000000000 +0300
-+++ freeciv/configure.ac	2012-07-17 03:39:08.000000000 +0300
-@@ -1014,7 +1014,7 @@
-   DEFAULT_SCENARIO_PATH=".;data/scenario;~/.freeciv/scenarios;$datadir/freeciv/scenario"
+--- freeciv/configure.ac	2012-07-17 19:26:12.000000000 +0300
++++ freeciv/configure.ac	2012-07-17 20:04:40.000000000 +0300
+@@ -1053,7 +1053,7 @@
+   DEFAULT_SCENARIO_PATH=".;data/scenarios;~/.freeciv/$DATASUBDIR/scenarios;~/.freeciv/scenarios;$datadir/freeciv/scenarios"
  else
    DEFAULT_DATA_PATH=".:data:~/.freeciv/$DATASUBDIR:$datadir/freeciv"
 -  DEFAULT_SAVE_PATH=".:~/.freeciv/saves"
 +  DEFAULT_SAVE_PATH=".:~/.freeciv/saves:/mnt/savegames"
-   DEFAULT_SCENARIO_PATH=".:data/scenario:~/.freeciv/scenarios:$datadir/freeciv/scenario"
+   DEFAULT_SCENARIO_PATH=".:data/scenarios:~/.freeciv/$DATASUBDIR/scenarios:~/.freeciv/scenarios:$datadir/freeciv/scenarios"
  fi
  CPPFLAGS="$CPPFLAGS -DDEFAULT_DATA_PATH=\"\\\"$DEFAULT_DATA_PATH\\\"\""
 diff -Nurd -X.diff_ignore freeciv/server/commands.c freeciv/server/commands.c
---- freeciv/server/commands.c	2012-07-17 02:35:26.000000000 +0300
-+++ freeciv/server/commands.c	2012-07-17 03:39:08.000000000 +0300
+--- freeciv/server/commands.c	2012-07-17 19:04:04.000000000 +0300
++++ freeciv/server/commands.c	2012-07-17 20:04:01.000000000 +0300
 @@ -513,7 +513,7 @@
        "all cities and units etc. Use with care!"),
     CMD_ECHO_ALL, VCF_NONE, 50
@@ -51,8 +51,8 @@ diff -Nurd -X.diff_ignore freeciv/server/commands.c freeciv/server/commands.c
     N_("save\n"
        "save <file-name>"),
 diff -Nurd -X.diff_ignore freeciv/server/meta.h freeciv/server/meta.h
---- freeciv/server/meta.h	2012-07-17 03:24:51.000000000 +0300
-+++ freeciv/server/meta.h	2012-07-17 03:39:08.000000000 +0300
+--- freeciv/server/meta.h	2012-07-17 19:59:15.000000000 +0300
++++ freeciv/server/meta.h	2012-07-17 20:04:01.000000000 +0300
 @@ -17,7 +17,7 @@
  
  #define DEFAULT_META_SERVER_NO_SEND  TRUE
@@ -63,8 +63,8 @@ diff -Nurd -X.diff_ignore freeciv/server/meta.h freeciv/server/meta.h
  
  enum meta_flag {
 diff -Nurd -X.diff_ignore freeciv/server/savegame.c freeciv/server/savegame.c
---- freeciv/server/savegame.c	2012-07-17 02:35:27.000000000 +0300
-+++ freeciv/server/savegame.c	2012-07-17 03:39:08.000000000 +0300
+--- freeciv/server/savegame.c	2012-07-17 19:04:04.000000000 +0300
++++ freeciv/server/savegame.c	2012-07-17 20:04:01.000000000 +0300
 @@ -422,8 +422,12 @@
      break;
    }
@@ -79,9 +79,9 @@ diff -Nurd -X.diff_ignore freeciv/server/savegame.c freeciv/server/savegame.c
  
  /****************************************************************************
 diff -Nurd -X.diff_ignore freeciv/server/srv_main.c freeciv/server/srv_main.c
---- freeciv/server/srv_main.c	2012-07-17 02:35:26.000000000 +0300
-+++ freeciv/server/srv_main.c	2012-07-17 03:41:56.000000000 +0300
-@@ -1145,19 +1145,20 @@
+--- freeciv/server/srv_main.c	2012-07-17 19:04:04.000000000 +0300
++++ freeciv/server/srv_main.c	2012-07-17 20:04:01.000000000 +0300
+@@ -1154,19 +1154,20 @@
  Note that if !HAVE_LIBZ, then game.server.save_compress_level should never
  become non-zero, so no need to check HAVE_LIBZ explicitly here as well.
  **************************************************************************/
@@ -107,7 +107,7 @@ diff -Nurd -X.diff_ignore freeciv/server/srv_main.c freeciv/server/srv_main.c
      if ((filename = strrchr(filepath, '/'))) {
        filename++;
      } else {
-@@ -1177,12 +1178,9 @@
+@@ -1186,12 +1187,9 @@
      }
    }
  
@@ -123,7 +123,7 @@ diff -Nurd -X.diff_ignore freeciv/server/srv_main.c freeciv/server/srv_main.c
  
    timer_cpu = new_timer_start(TIMER_CPU, TIMER_ACTIVE);
    timer_user = new_timer_start(TIMER_USER, TIMER_ACTIVE);
-@@ -1232,12 +1230,12 @@
+@@ -1241,12 +1239,12 @@
  
      if (!scenario) {
        /* Ensure the saves directory exists. */
@@ -138,7 +138,7 @@ diff -Nurd -X.diff_ignore freeciv/server/srv_main.c freeciv/server/srv_main.c
  
        sz_strlcpy(tmpname, srvarg.scenarios_pathname);
      }
-@@ -1245,7 +1243,14 @@
+@@ -1254,7 +1252,14 @@
      if (tmpname[0] != '\0') {
        sz_strlcat(tmpname, "/");
      }
@@ -154,8 +154,8 @@ diff -Nurd -X.diff_ignore freeciv/server/srv_main.c freeciv/server/srv_main.c
    }
  
 diff -Nurd -X.diff_ignore freeciv/server/stdinhand.c freeciv/server/stdinhand.c
---- freeciv/server/stdinhand.c	2012-07-17 02:35:26.000000000 +0300
-+++ freeciv/server/stdinhand.c	2012-07-17 03:39:08.000000000 +0300
+--- freeciv/server/stdinhand.c	2012-07-17 19:04:04.000000000 +0300
++++ freeciv/server/stdinhand.c	2012-07-17 20:04:01.000000000 +0300
 @@ -730,11 +730,6 @@
  **************************************************************************/
  static bool save_command(struct connection *caller, char *arg, bool check)
@@ -168,7 +168,7 @@ diff -Nurd -X.diff_ignore freeciv/server/stdinhand.c freeciv/server/stdinhand.c
    if (!check) {
      save_game(arg, "User request", FALSE);
    }
-@@ -3579,15 +3574,17 @@
+@@ -3582,15 +3577,17 @@
    {
      /* it is a normal savegame or maybe a scenario */
      char testfile[MAX_LEN_PATH];
@@ -192,7 +192,7 @@ diff -Nurd -X.diff_ignore freeciv/server/stdinhand.c freeciv/server/stdinhand.c
      for (path = pathes; !found && *path; path++) {
        for (ext = exts; !found && *ext; ext++) {
          fc_snprintf(testfile, sizeof(testfile), "%s.%s", filename, *ext);
-@@ -4107,6 +4104,11 @@
+@@ -4110,6 +4107,11 @@
  
    level = command_level(command_by_number(cmd));
  

@@ -1,12 +1,12 @@
 diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
---- freeciv/server/unithand.c	2012-05-16 21:53:25.000000000 +0300
-+++ freeciv/server/unithand.c	2012-05-16 22:16:45.000000000 +0300
-@@ -1416,7 +1416,7 @@
-       notify_player(pplayer, punit->tile, E_BAD_COMMAND,
-                     FTC_SERVER_INFO, NULL,
+--- freeciv/server/unithand.c	2012-07-17 19:39:33.000000000 +0300
++++ freeciv/server/unithand.c	2012-07-17 20:10:38.000000000 +0300
+@@ -1511,7 +1511,7 @@
+         || (victim = is_non_attack_unit_tile(pdesttile, pplayer))) {
+       notify_player(pplayer, unit_tile(punit), E_BAD_COMMAND, ftc_server,
                      _("You must declare war on %s first.  Try using "
--                      "players dialog (F3)."),
-+                      "players dialog."),
+-                      "the Nations report (F3)."),
++                      "the Nations report."),
                      victim == NULL
                      ? player_name(city_owner(pcity))
                      : player_name(unit_owner(victim)));

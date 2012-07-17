@@ -48,13 +48,13 @@ Syntax:
     are used for the capability checking PACKET_PROCESSING_STARTED,
     PACKET_PROCESSING_FINISHED, PACKET_SERVER_JOIN_REQ and
     PACKET_SERVER_JOIN_REPLY are excluded here. These packets should
-    never change their number. The packet number can be freely choosen
+    never change their number. The packet number can be freely chosen
     as long as it is below 255 and unique.
 
    Packet flags:
    -------------
 
-    Packet flags is a comma seperated list of:
+    Packet flags is a comma separated list of:
 
      is-info: a second packet with the same content can be discarded
               WARNING: this flag is dangerous and should not be used for
@@ -760,6 +760,7 @@ PACKET_UNIT_INFO = 63; sc, lsend, is-game-info, cancel(PACKET_UNIT_SHORT_INFO)
   UNIT id; key
   PLAYER owner;
   TILE tile;
+  DIRECTION facing;
   CITY homecity;
 
   UINT8 upkeep[O_LAST];
@@ -797,6 +798,7 @@ PACKET_UNIT_SHORT_INFO = 64; sc, lsend, is-game-info, cancel(PACKET_UNIT_INFO)
   UNIT id; key
   PLAYER owner;
   TILE tile;
+  DIRECTION facing;
   UNIT_TYPE type;
 
   UINT8 veteran;
@@ -1439,14 +1441,14 @@ end
 PACKET_SERVER_SETTING_CONTROL = 164; sc, handle-via-packet, is-info
   UINT16 settings_num;
   UINT8 categories_num;
-  STRING category_names[256:categories_num][MAX_LEN_NAME];
+  STRING category_names[256:categories_num][MAX_LEN_NAME]; /* untranslated */
 end
 
 PACKET_SERVER_SETTING_CONST = 165; sc, handle-via-packet, is-info
   UINT16 id; key
   STRING name[MAX_LEN_NAME];
-  STRING short_help[MAX_LEN_PACKET];
-  # STRING extra_help[MAX_LEN_PACKET];
+  STRING short_help[MAX_LEN_PACKET]; /* untranslated */
+  # STRING extra_help[MAX_LEN_PACKET]; /* untranslated */
   UINT8 category;
 end
 
@@ -1492,7 +1494,7 @@ PACKET_SERVER_SETTING_ENUM = 169; sc, handle-via-packet, is-info
   SINT8 default_val;
   SINT8 values_num;
   STRING support_names[64:values_num][MAX_LEN_NAME];
-  STRING pretty_names[64:values_num][MAX_LEN_ENUM];
+  STRING pretty_names[64:values_num][MAX_LEN_ENUM]; /* untranslated */
 end
 
 PACKET_SERVER_SETTING_BITWISE = 170; sc, handle-via-packet, is-info
@@ -1505,7 +1507,7 @@ PACKET_SERVER_SETTING_BITWISE = 170; sc, handle-via-packet, is-info
   UINT16 default_val;
   UINT8 bits_num;
   STRING support_names[64:bits_num][MAX_LEN_NAME];
-  STRING pretty_names[64:bits_num][MAX_LEN_ENUM];
+  STRING pretty_names[64:bits_num][MAX_LEN_ENUM]; /* untranslated */
 end
 
 /************** Effects hash packets **********************/

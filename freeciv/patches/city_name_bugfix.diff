@@ -1,7 +1,7 @@
-diff -Nurd -X.diff_ignore freeciv/ai/aisettler.c freeciv/ai/aisettler.c
---- freeciv/ai/aisettler.c	2012-07-17 02:35:58.000000000 +0300
-+++ freeciv/ai/aisettler.c	2012-07-17 02:47:51.000000000 +0300
-@@ -1170,8 +1170,8 @@
+diff -Nurd -X.diff_ignore freeciv/ai/default/aisettler.c freeciv/ai/default/aisettler.c
+--- freeciv/ai/default/aisettler.c	2012-07-17 19:04:32.000000000 +0300
++++ freeciv/ai/default/aisettler.c	2012-07-17 19:24:16.000000000 +0300
+@@ -1175,8 +1175,8 @@
                player_name(pplayer), TILE_XY(ptile));
      return FALSE;
    }
@@ -13,8 +13,8 @@ diff -Nurd -X.diff_ignore freeciv/ai/aisettler.c freeciv/ai/aisettler.c
    if (!pcity) {
      log_error("%s: Failed to build city at (%d, %d)",
 diff -Nurd -X.diff_ignore freeciv/configure.ac freeciv/configure.ac
---- freeciv/configure.ac	2012-07-17 02:43:08.000000000 +0300
-+++ freeciv/configure.ac	2012-07-17 02:45:31.000000000 +0300
+--- freeciv/configure.ac	2012-07-17 19:21:14.000000000 +0300
++++ freeciv/configure.ac	2012-07-17 19:24:16.000000000 +0300
 @@ -712,6 +712,11 @@
    AC_DEFINE([HAVE_THREADS], [1], [Defined if there is any thread implementation at all])
  fi
@@ -27,18 +27,18 @@ diff -Nurd -X.diff_ignore freeciv/configure.ac freeciv/configure.ac
  dnl Check and choose clients
  if test "x$client" != "xno"; then
  
-@@ -1138,7 +1143,7 @@
+@@ -1198,7 +1203,7 @@
       fi
     fi]],[[]])
  
 -CFLAGS="$EXTRA_DEBUG_CFLAGS $CFLAGS"
 +CFLAGS="$EXTRA_DEBUG_CFLAGS $CFLAGS $GLIB_CFLAGS"
  CXXFLAGS="$EXTRA_DEBUG_CXXFLAGS $CXXFLAGS"
+ LDFLAGS="$EXTRA_DEBUG_LDFLAGS $LDFLAGS"
  
- dnl Rebuild 'configure' whenever fc_version changes, if maintainer mode enabled.
 diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
---- freeciv/server/unithand.c	2012-07-17 02:37:56.000000000 +0300
-+++ freeciv/server/unithand.c	2012-07-17 02:47:51.000000000 +0300
+--- freeciv/server/unithand.c	2012-07-17 19:14:28.000000000 +0300
++++ freeciv/server/unithand.c	2012-07-17 19:24:16.000000000 +0300
 @@ -19,9 +19,12 @@
  #include <stdlib.h>
  #include <string.h>
@@ -52,7 +52,7 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
  #include "mem.h"
  #include "rand.h"
  #include "shared.h"
-@@ -719,7 +722,18 @@
+@@ -728,7 +731,18 @@
    res = unit_add_or_build_city_test(punit);
  
    if (UAB_BUILD_OK == res) {
@@ -72,7 +72,7 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
    } else if (UAB_ADD_OK == res) {
      city_add_unit(pplayer, punit);
    } else {
-@@ -728,6 +742,34 @@
+@@ -737,6 +751,34 @@
  }
  
  /**************************************************************************
@@ -108,8 +108,8 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
  **************************************************************************/
  void handle_unit_change_activity(struct player *pplayer, int unit_id,
 diff -Nurd -X.diff_ignore freeciv/server/unithand.h freeciv/server/unithand.h
---- freeciv/server/unithand.h	2012-07-17 02:35:26.000000000 +0300
-+++ freeciv/server/unithand.h	2012-07-17 02:47:51.000000000 +0300
+--- freeciv/server/unithand.h	2012-07-17 19:04:04.000000000 +0300
++++ freeciv/server/unithand.h	2012-07-17 19:24:16.000000000 +0300
 @@ -23,6 +23,7 @@
  
  bool unit_move_handling(struct unit *punit, struct tile *pdesttile,
@@ -119,9 +119,9 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.h freeciv/server/unithand.h
  void city_add_or_build_error(struct player *pplayer, struct unit *punit,
                               enum unit_add_build_city_result res);
 diff -Nurd -X.diff_ignore freeciv/server/unittools.c freeciv/server/unittools.c
---- freeciv/server/unittools.c	2012-07-17 02:37:56.000000000 +0300
-+++ freeciv/server/unittools.c	2012-07-17 02:48:46.000000000 +0300
-@@ -3328,8 +3328,8 @@
+--- freeciv/server/unittools.c	2012-07-17 19:14:28.000000000 +0300
++++ freeciv/server/unittools.c	2012-07-17 19:24:16.000000000 +0300
+@@ -3333,8 +3333,8 @@
        }
        break;
      case ORDER_BUILD_CITY:

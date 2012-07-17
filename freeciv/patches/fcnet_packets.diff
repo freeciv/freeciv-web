@@ -1,6 +1,6 @@
 diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2012-07-17 04:16:09.000000000 +0300
-+++ freeciv/common/packets.def	2012-07-17 04:16:16.000000000 +0300
+--- freeciv/common/packets.def	2012-07-17 20:48:15.000000000 +0300
++++ freeciv/common/packets.def	2012-07-17 20:48:28.000000000 +0300
 @@ -560,8 +560,13 @@
    STRING can_build_unit[MAX_LEN_MSG];
    STRING can_build_improvement[MAX_LEN_MSG];
@@ -23,7 +23,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  end
  
  PACKET_PLAYER_PHASE_DONE = 52; cs, dsend
-@@ -953,25 +959,25 @@
+@@ -955,25 +961,25 @@
  
  PACKET_DIPLOMACY_CREATE_CLAUSE_REQ = 99; cs, dsend
    PLAYER counterpart, giver;
@@ -53,7 +53,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    UINT32 value;
  end
  
-@@ -999,7 +1005,7 @@
+@@ -1001,7 +1007,7 @@
  end
  
  PACKET_REPORT_REQ = 111; cs, handle-per-conn, dsend
@@ -62,7 +62,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  end
  
  /************** Connection packets **********************/
-@@ -1024,9 +1030,9 @@
+@@ -1026,9 +1032,9 @@
  
  # Information about the ping times of the connections.
  PACKET_CONN_PING_INFO = 116; sc, lsend
@@ -74,7 +74,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  end
  
  # For compatibility with older versions, this number cannot be changed.
-@@ -1801,3 +1807,16 @@
+@@ -1803,3 +1809,16 @@
    STRING message[MAX_LEN_MSG];
  end
  
@@ -92,9 +92,9 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
 +  UINT32 turns;
 +end
 diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
---- freeciv/server/unithand.c	2012-07-17 03:48:34.000000000 +0300
-+++ freeciv/server/unithand.c	2012-07-17 04:19:09.000000000 +0300
-@@ -745,6 +745,107 @@
+--- freeciv/server/unithand.c	2012-07-17 20:13:23.000000000 +0300
++++ freeciv/server/unithand.c	2012-07-17 20:51:34.000000000 +0300
+@@ -753,6 +753,107 @@
  }
  
  /**************************************************************************
@@ -157,8 +157,8 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
 +
 +    /* Remove city spot reservations for AI settlers on city founding
 +     * mission, before goto_tile reset. */
-+    if (def_ai_unit_data(punit)->task != AIUNIT_NONE) {
-+      ai_unit_new_task(punit, AIUNIT_NONE, NULL);
++    if (punit->server.adv->task != AUT_NONE) {
++      adv_unit_new_task(punit, AUT_NONE, NULL);
 +    }
 +
 +    punit->ai_controlled = FALSE;
@@ -202,7 +202,7 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
  ...
  **************************************************************************/
  void ai_unit_build_city(struct player *pplayer, int unit_id, char *name)
-@@ -934,6 +1035,9 @@
+@@ -942,6 +1043,9 @@
      pf_path_destroy(path);
      return ;
    } else {

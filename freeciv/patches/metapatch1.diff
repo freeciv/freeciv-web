@@ -1,18 +1,18 @@
 diff -Nurd -X.diff_ignore freeciv/common/game.h freeciv/common/game.h
---- freeciv/common/game.h	2012-07-17 02:35:58.000000000 +0300
-+++ freeciv/common/game.h	2012-07-17 03:17:40.000000000 +0300
+--- freeciv/common/game.h	2012-07-17 19:04:32.000000000 +0300
++++ freeciv/common/game.h	2012-07-17 19:56:45.000000000 +0300
 @@ -220,6 +220,7 @@
        struct {
          bool user_message_set;
          char user_message[256];
 +	char topic[256];
        } meta_info;
-     } server;
-   };
+ 
+       int first_timeout;
 diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2012-07-17 03:14:25.000000000 +0300
-+++ freeciv/common/packets.def	2012-07-17 03:17:40.000000000 +0300
-@@ -1295,12 +1295,12 @@
+--- freeciv/common/packets.def	2012-07-17 19:43:57.000000000 +0300
++++ freeciv/common/packets.def	2012-07-17 19:56:45.000000000 +0300
+@@ -1297,12 +1297,12 @@
    STRING rule_name[MAX_LEN_NAME];
    STRING graphic_str[MAX_LEN_NAME];
    STRING graphic_alt[MAX_LEN_NAME];
@@ -29,19 +29,18 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    STRING soundtag[MAX_LEN_NAME];
    STRING soundtag_alt[MAX_LEN_NAME];
 diff -Nurd -X.diff_ignore freeciv/server/civserver.c freeciv/server/civserver.c
---- freeciv/server/civserver.c	2012-07-17 02:35:27.000000000 +0300
-+++ freeciv/server/civserver.c	2012-07-17 03:17:40.000000000 +0300
-@@ -244,6 +244,9 @@
-       free(option);
-     } else if ((option = get_option_malloc("--bind", argv, &inx, argc))) {
+--- freeciv/server/civserver.c	2012-07-17 19:04:04.000000000 +0300
++++ freeciv/server/civserver.c	2012-07-17 19:57:16.000000000 +0300
+@@ -246,6 +246,8 @@
        srvarg.bind_addr = option; /* Never freed. */
+     } else if ((option = get_option_malloc("--Bind-meta", argv, &inx, argc))) {
+       srvarg.bind_meta_addr = option; /* Never freed. */
 +    } else if ((option = get_option_malloc("--topic", argv, &inx, argc))) {
 +      sz_strlcpy(game.server.meta_info.topic, option);
-+
      } else if ((option = get_option_malloc("--read", argv, &inx, argc)))
        srvarg.script_filename = option; /* Never freed. */
      else if ((option = get_option_malloc("--quitidle", argv, &inx, argc))) {
-@@ -369,6 +372,7 @@
+@@ -372,6 +374,7 @@
      fc_fprintf(stderr, _("  -r, --read FILE\tRead startup script FILE\n"));
      fc_fprintf(stderr,
  	       _("  -R, --Ranklog FILE\tUse FILE as ranking logfile\n"));
@@ -50,8 +49,8 @@ diff -Nurd -X.diff_ignore freeciv/server/civserver.c freeciv/server/civserver.c
      fc_fprintf(stderr,
                 _("  -L, --LoadAI MODULE\tLoad ai module MODULE. Can appear multiple times\n"));
 diff -Nurd -X.diff_ignore freeciv/server/meta.c freeciv/server/meta.c
---- freeciv/server/meta.c	2012-07-17 02:35:27.000000000 +0300
-+++ freeciv/server/meta.c	2012-07-17 03:22:10.000000000 +0300
+--- freeciv/server/meta.c	2012-07-17 19:04:04.000000000 +0300
++++ freeciv/server/meta.c	2012-07-17 19:56:45.000000000 +0300
 @@ -112,6 +112,12 @@
    return meta_message;
  }
@@ -65,7 +64,7 @@ diff -Nurd -X.diff_ignore freeciv/server/meta.c freeciv/server/meta.c
  /*************************************************************************
   The metaserver message set by user
  *************************************************************************/
-@@ -271,6 +277,8 @@
+@@ -278,6 +284,8 @@
    if (flag == META_GOODBYE) {
      netfile_add_form_int(post, "bye", 1);
    } else {
@@ -74,7 +73,7 @@ diff -Nurd -X.diff_ignore freeciv/server/meta.c freeciv/server/meta.c
      netfile_add_form_str(post, "version", VERSION_STRING);
      netfile_add_form_str(post, "patches",
                           get_meta_patches_string());
-@@ -309,6 +317,10 @@
+@@ -316,6 +324,10 @@
                               fc_url_encode(plr->nation != NO_NATION_SELECTED 
                                             ? nation_plural_for_player(plr)
                                             : "none"));
@@ -86,8 +85,8 @@ diff -Nurd -X.diff_ignore freeciv/server/meta.c freeciv/server/meta.c
                               pconn ? pconn->addr : "");
  
 diff -Nurd -X.diff_ignore freeciv/server/meta.h freeciv/server/meta.h
---- freeciv/server/meta.h	2012-07-17 03:17:37.000000000 +0300
-+++ freeciv/server/meta.h	2012-07-17 03:17:40.000000000 +0300
+--- freeciv/server/meta.h	2012-07-17 19:56:37.000000000 +0300
++++ freeciv/server/meta.h	2012-07-17 19:56:45.000000000 +0300
 @@ -32,6 +32,7 @@
  const char *get_meta_patches_string(void);
  const char *get_meta_message_string(void);

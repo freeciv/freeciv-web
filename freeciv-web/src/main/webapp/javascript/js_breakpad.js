@@ -18,7 +18,7 @@ var MAX_ERROR_REPORTS = 10;
 var ERROR_REPORTING_ENABLED = false;
 
 /**************************************************************************
-  Setup hanlding of exceptions
+  Setup handling of exceptions
 **************************************************************************/
 function setup_crash_reporting()
 { 

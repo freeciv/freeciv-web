@@ -1,5 +1,17 @@
 /*
 
+Max used id:
+============
+
+Max id: 219
+
+Packets are not ordered by their id, but by their category. New packet
+with higher id may get added to existing category, and not to the end of file.
+For this reason it's important to keep information about max id currently
+in use updated here. So we know what ids are safe to use when adding new
+packets.
+
+
 Syntax:
 
  Comments:
@@ -767,12 +779,11 @@ PACKET_UNIT_INFO = 63; sc, lsend, is-game-info, cancel(PACKET_UNIT_SHORT_INFO)
 
   UINT8 veteran;
   BOOL ai, paradropped;
-  BOOL transported, done_moving;
+  BOOL occupied, transported, done_moving;
 
   UNIT_TYPE type;
   UNIT transported_by; /* Only valid if transported is set. */
   UINT8 movesleft, hp, fuel, activity_count, changed_from_count;
-  UINT8 occupy;
   TILE goto_tile;
   ACTIVITY activity;
   SPECIAL activity_target;
@@ -1047,6 +1058,7 @@ end
 
 PACKET_CLIENT_INFO = 119; cs, handle-per-conn
   GUI_TYPE gui;
+  STRING distribution[MAX_LEN_NAME];
 end
 
 /************** New turn packets **********************/

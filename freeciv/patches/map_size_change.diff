@@ -1,15 +1,15 @@
 diff -Nurd -X.diff_ignore freeciv/common/map.h freeciv/common/map.h
---- freeciv/common/map.h	2012-07-17 19:04:32.000000000 +0300
-+++ freeciv/common/map.h	2012-07-17 19:50:22.000000000 +0300
-@@ -564,9 +564,9 @@
+--- freeciv/common/map.h	2012-07-18 01:55:33.000000000 +0300
++++ freeciv/common/map.h	2012-07-18 02:21:11.000000000 +0300
+@@ -572,9 +572,9 @@
  /* Size of the map in thousands of tiles. If MAP_MAX_SIZE is increased, 
-  * MAX_DBV_LENGTH in bitvector.c must be checked. The following equation must
-  * be valid: MAP_MAX_SIZE * 1000 <= MAX_DBV_LENGTH! */
+  * MAX_DBV_LENGTH in bitvector.c must be checked; see the static assertion
+  * below. */
 -#define MAP_DEFAULT_SIZE         4
 +#define MAP_DEFAULT_SIZE         3
  #define MAP_MIN_SIZE             0
--#define MAP_MAX_SIZE             128
+-#define MAP_MAX_SIZE             2048
 +#define MAP_MAX_SIZE             15
  
- #define MAP_DEFAULT_TILESPERPLAYER      100
- #define MAP_MIN_TILESPERPLAYER            1
+ FC_STATIC_ASSERT(MAP_MAX_SIZE * 1000 <= MAX_DBV_LENGTH,
+                  map_too_big_for_bitvector);

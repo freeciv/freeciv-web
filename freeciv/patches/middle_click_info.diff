@@ -1,7 +1,7 @@
 diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2012-07-17 22:15:44.000000000 +0300
-+++ freeciv/common/packets.def	2012-07-17 22:25:52.000000000 +0300
-@@ -1791,3 +1791,14 @@
+--- freeciv/common/packets.def	2012-07-18 02:31:10.000000000 +0300
++++ freeciv/common/packets.def	2012-07-18 02:31:18.000000000 +0300
+@@ -1803,3 +1803,14 @@
    SINT32 tag;
    SINT32 id;
  end
@@ -17,8 +17,8 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
 +end
 +
 diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
---- freeciv/server/maphand.c	2012-07-17 22:15:31.000000000 +0300
-+++ freeciv/server/maphand.c	2012-07-17 22:27:05.000000000 +0300
+--- freeciv/server/maphand.c	2012-07-18 01:55:00.000000000 +0300
++++ freeciv/server/maphand.c	2012-07-18 02:34:00.000000000 +0300
 @@ -36,6 +36,7 @@
  #include "unit.h"
  #include "unitlist.h"
@@ -27,7 +27,7 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
  
  /* generator */
  #include "utilities.h"
-@@ -1890,3 +1891,410 @@
+@@ -1926,3 +1927,409 @@
    }
    tile_remove_base(ptile, pbase);
  }
@@ -222,8 +222,7 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +  char nation[2 * MAX_LEN_NAME + 32];
 +
 +  astr_clear(&str);
-+  astr_add_line(&str, _("Location: (%d, %d)"),
-+                ptile->x, ptile->y);
++  astr_add_line(&str, _("Location: (%d, %d)"), TILE_XY(ptile));
 +
 +  if (tile_get_known(ptile, pplayer) == TILE_UNKNOWN) {
 +    astr_add(&str, _("Unknown"));
@@ -439,9 +438,9 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +}
 +
 diff -Nurd -X.diff_ignore freeciv/server/maphand.h freeciv/server/maphand.h
---- freeciv/server/maphand.h	2012-07-17 22:15:32.000000000 +0300
-+++ freeciv/server/maphand.h	2012-07-17 22:25:52.000000000 +0300
-@@ -125,4 +125,6 @@
+--- freeciv/server/maphand.h	2012-07-18 01:55:00.000000000 +0300
++++ freeciv/server/maphand.h	2012-07-18 02:31:18.000000000 +0300
+@@ -126,4 +126,6 @@
                   struct player *pplayer);
  void destroy_base(struct tile *ptile, struct base_type *pbase);
  

@@ -32,7 +32,7 @@ files = ["amplio2.tilespec",
   "amplio2/moderncities.spec",
   "amplio2/mountains.spec",
   "amplio2/hills.spec",
-#  "../freeciv/data/amplio/nuke.spec", 	#not in use yet
+#  "../freeciv/freeciv/data/amplio/nuke.spec", 	#not in use yet
   "amplio2/ocean.spec",
   "amplio2/select.spec",
   "amplio2/terrain1.spec",
@@ -42,20 +42,20 @@ files = ["amplio2.tilespec",
   "amplio2/water.spec",  
 #  "amplio2/wonders.spec",
   "amplio2/wonders-large.spec",
-  "../freeciv/data/misc/colors.tilespec",
+  "../freeciv/freeciv/data/misc/colors.tilespec",
   "amplio2/buildings-large.spec",
-#  "../freeciv/data/misc/icons.spec",
-#  "../freeciv/data/misc/chiefs.spec",  #not in use yet
-  "../freeciv/data/misc/overlays.spec",
-#  "../freeciv/data/misc/citybar.spec",  #not in use yet
-  "../freeciv/data/misc/shields.spec",
-  "../freeciv/data/misc/small.spec",
-#  "../freeciv/data/misc/cursors.spec",
-  "../freeciv/data/misc/space.spec",
-  "../freeciv/data/misc/editor.spec",
-  "../freeciv/data/misc/techs.spec",
-  "../freeciv/data/misc/flags.spec",
-  "../freeciv/data/misc/treaty.spec"]; 
+#  "../freeciv/freeciv/data/misc/icons.spec",
+#  "../freeciv/freeciv/data/misc/chiefs.spec",  #not in use yet
+  "../freeciv/freeciv/data/misc/overlays.spec",
+#  "../freeciv/freeciv/data/misc/citybar.spec",  #not in use yet
+  "../freeciv/freeciv/data/misc/shields.spec",
+  "../freeciv/freeciv/data/misc/small.spec",
+#  "../freeciv/freeciv/data/misc/cursors.spec",
+  "../freeciv/freeciv/data/misc/space.spec",
+  "../freeciv/freeciv/data/misc/editor.spec",
+  "../freeciv/freeciv/data/misc/techs.spec",
+  "../freeciv/freeciv/data/misc/flags.spec",
+  "../freeciv/freeciv/data/misc/treaty.spec"]; 
 
 global tileset;
 global curr_x;

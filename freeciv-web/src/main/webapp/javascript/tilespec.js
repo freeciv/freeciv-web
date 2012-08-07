@@ -683,7 +683,7 @@ function get_unit_activity_sprite(punit)
           "offset_y" : - unit_activity_offset_y}
     break;
 
-    case ACTIVITY_ROAD:
+    case ACTIVITY_OLD_ROAD:
       return {"key" : "unit.road",
           "offset_x" : unit_activity_offset_x, 
           "offset_y" : - unit_activity_offset_y}
@@ -719,7 +719,7 @@ function get_unit_activity_sprite(punit)
           "offset_y" : - unit_activity_offset_y}
     break;
     
-    case ACTIVITY_RAILROAD:
+    case ACTIVITY_OLD_RAILROAD:
       return {"key" : "unit.road",
           "offset_x" : unit_activity_offset_x, 
           "offset_y" : - unit_activity_offset_y}
@@ -751,6 +751,18 @@ function get_unit_activity_sprite(punit)
        
     case ACTIVITY_FORTIFYING:
       return {"key" : "unit.fortifying",
+          "offset_x" : unit_activity_offset_x, 
+          "offset_y" : - unit_activity_offset_y}
+    break;
+
+    case ACTIVITY_GEN_ROAD:
+      return {"key" : "unit.road",
+          "offset_x" : unit_activity_offset_x, 
+          "offset_y" : - unit_activity_offset_y}
+    break;
+
+    case ACTIVITY_CONVERT:
+      return {"key" : "unit.convert",
           "offset_x" : unit_activity_offset_x, 
           "offset_y" : - unit_activity_offset_y}
     break;

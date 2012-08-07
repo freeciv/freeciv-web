@@ -20,13 +20,13 @@ var FC_INFINITY = (1000 * 1000 * 1000);
 
 var ACTIVITY_IDLE = 0;
 var ACTIVITY_POLLUTION = 1;
-var ACTIVITY_ROAD = 2;
+var ACTIVITY_OLD_ROAD = 2;
 var ACTIVITY_MINE = 3;
 var ACTIVITY_IRRIGATE = 4;
 var ACTIVITY_FORTIFIED = 5;
 var ACTIVITY_FORTRESS = 6;
 var ACTIVITY_SENTRY = 7;
-var ACTIVITY_RAILROAD = 8;
+var ACTIVITY_OLD_RAILROAD = 8;
 var ACTIVITY_PILLAGE = 9;
 var ACTIVITY_GOTO = 10;
 var ACTIVITY_EXPLORE = 11;
@@ -37,7 +37,9 @@ var ACTIVITY_FORTIFYING = 15;
 var ACTIVITY_FALLOUT = 16;
 var ACTIVITY_PATROL_UNUSED = 17;		/* savegame compatability. */
 var ACTIVITY_BASE = 18;			/* building base */
-var ACTIVITY_LAST;   /* leave this one last */
+var ACTIVITY_GEN_ROAD = 19;
+var ACTIVITY_CONVERT = 20;
+var ACTIVITY_LAST = 21;   /* leave this one last */
 
 
 

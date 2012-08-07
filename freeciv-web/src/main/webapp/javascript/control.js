@@ -848,8 +848,8 @@ function key_unit_road()
   var funits = get_units_in_focus();
   for (var i = 0; i < funits.length; i++) {
     var punit = funits[i]; 
-    request_new_unit_activity(punit, ACTIVITY_ROAD);
-  }  
+    request_new_unit_activity_road(punit, ACTIVITY_GEN_ROAD, 0);
+  }
   update_unit_focus();
 }
 
@@ -861,7 +861,7 @@ function key_unit_railroad()
   var funits = get_units_in_focus();
   for (var i = 0; i < funits.length; i++) {
     var punit = funits[i]; 
-    request_new_unit_activity(punit, ACTIVITY_RAILROAD);
+    request_new_unit_activity(punit, ACTIVITY_GEN_ROAD, 1);
   }  
   update_unit_focus();
 }
@@ -890,7 +890,29 @@ function request_new_unit_activity(punit, activity)
 {
 
   var packet = {"type" : packet_unit_change_activity, "unit_id" : punit['id'],
-                "activity" : activity, "activity_target" : S_LAST, "activity_base" : 0};
+                "activity" : activity, "activity_target" : S_LAST };
+  send_request (JSON.stringify(packet));
+}
+
+/**************************************************************************
+ ...
+**************************************************************************/
+function request_new_unit_activity_base(punit, activity, base)
+{
+
+  var packet = {"type" : packet_unit_change_activity_base, "unit_id" : punit['id'],
+                "activity" : activity, "activity_base" : base };
+  send_request (JSON.stringify(packet));
+}
+
+/**************************************************************************
+ ...
+**************************************************************************/
+function request_new_unit_activity_road(punit, activity, road)
+{
+
+  var packet = {"type" : packet_unit_change_activity_road, "unit_id" : punit['id'],
+                "activity" : activity, "activity_road" : road };
   send_request (JSON.stringify(packet));
 }
 

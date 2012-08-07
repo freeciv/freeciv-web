@@ -1,6 +1,6 @@
 diff -Nurd -X.diff_ignore freeciv/common/connection.c freeciv/common/connection.c
---- freeciv/common/connection.c	2012-07-22 00:41:08.000000000 +0300
-+++ freeciv/common/connection.c	2012-07-22 00:44:00.000000000 +0300
+--- freeciv/common/connection.c	2012-08-07 16:00:17.000000000 +0300
++++ freeciv/common/connection.c	2012-08-07 17:21:59.000000000 +0300
 @@ -290,6 +290,8 @@
    }
  
@@ -22,8 +22,8 @@ diff -Nurd -X.diff_ignore freeciv/common/connection.c freeciv/common/connection.
      if (!add_connection_data(pconn, data, len)) {
        log_verbose("cut connection %s due to huge send buffer (2)",
 diff -Nurd -X.diff_ignore freeciv/common/connection.h freeciv/common/connection.h
---- freeciv/common/connection.h	2012-07-22 00:41:08.000000000 +0300
-+++ freeciv/common/connection.h	2012-07-22 00:44:00.000000000 +0300
+--- freeciv/common/connection.h	2012-08-07 16:00:18.000000000 +0300
++++ freeciv/common/connection.h	2012-08-07 17:21:59.000000000 +0300
 @@ -26,7 +26,7 @@
  #include <sys/time.h>
  #endif
@@ -34,8 +34,8 @@ diff -Nurd -X.diff_ignore freeciv/common/connection.h freeciv/common/connection.
  /**************************************************************************
    The connection struct and related stuff.
 diff -Nurd -X.diff_ignore freeciv/common/featured_text.c freeciv/common/featured_text.c
---- freeciv/common/featured_text.c	2012-07-22 00:41:08.000000000 +0300
-+++ freeciv/common/featured_text.c	2012-07-22 00:44:00.000000000 +0300
+--- freeciv/common/featured_text.c	2012-08-07 17:17:02.000000000 +0300
++++ freeciv/common/featured_text.c	2012-08-07 17:21:59.000000000 +0300
 @@ -33,8 +33,8 @@
  
  #include "featured_text.h"
@@ -75,8 +75,8 @@ diff -Nurd -X.diff_ignore freeciv/common/featured_text.c freeciv/common/featured
        }
        if (ptag->color.background[0] != '\0') {
 diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/generate_packets.py
---- freeciv/common/generate_packets.py	2012-07-22 00:41:08.000000000 +0300
-+++ freeciv/common/generate_packets.py	2012-07-22 00:44:00.000000000 +0300
+--- freeciv/common/generate_packets.py	2012-08-07 16:00:18.000000000 +0300
++++ freeciv/common/generate_packets.py	2012-08-07 17:21:59.000000000 +0300
 @@ -27,7 +27,7 @@
  
  ### The following parameters CHANGE the protocol. You have been warned.
@@ -87,9 +87,9 @@ diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/gene
  ################# END OF PARAMETERS ####################
  
 diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2012-07-22 00:41:08.000000000 +0300
-+++ freeciv/common/packets.def	2012-07-22 00:44:00.000000000 +0300
-@@ -183,7 +183,7 @@
+--- freeciv/common/packets.def	2012-08-07 17:21:52.000000000 +0300
++++ freeciv/common/packets.def	2012-08-07 17:23:31.000000000 +0300
+@@ -186,7 +186,7 @@
  type SINT16             = sint16(int)
  type SINT32             = sint32(int)
  type UINT8              = uint8(int)
@@ -98,17 +98,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  type UINT32             = uint32(int)
  
  # typedefs for arrays/structs
-@@ -191,7 +191,8 @@
- type MEMORY             = memory(unsigned char)
- type REQUIREMENT        = requirement(struct requirement)
- type STRING             = string(char)
--type TECH_LIST          = tech_list(int)
-+# The TECH_LIST has been removed for the web client.  -Andreas
-+#type TECH_LIST          = tech_list(int)
- type WORKLIST           = worklist(struct worklist)
- 
- # typedefs for enums
-@@ -206,7 +207,7 @@
+@@ -211,7 +211,7 @@
  type DIPLOMAT_ACTION    = uint8(enum diplomat_actions)
  type DIRECTION          = uint8(enum direction8)
  type EFFECT_TYPE        = uint8(enum effect_type)
@@ -117,7 +107,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  type GUI_TYPE           = uint8(enum gui_type)
  type IMPR_GENUS         = uint8(enum impr_genus_id)
  type IMPR_RANGE         = uint8(enum impr_range)
-@@ -218,7 +219,7 @@
+@@ -223,7 +223,7 @@
  type REQ_RANGE          = uint8(enum req_range)
  type REQ_TYPE           = uint8(enum universals_n)
  type RIVER_MOVE         = uint8(enum special_river_move)
@@ -126,7 +116,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  type SSET_CLASS         = uint8(enum sset_class)
  type SSET_TYPE          = uint8(enum sset_type)
  
-@@ -246,7 +247,7 @@
+@@ -255,7 +255,7 @@
  type EDIT_TECH_MODE     = uint8(enum editor_tech_mode)
  type GOVERNMENT         = UINT8
  type IMPROVEMENT        = uint8(Impr_type_id)
@@ -135,16 +125,19 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  type PLAYER             = SINT8
  type RESOURCE           = uint8(Resource_type_id)
  type SPECIALIST         = uint8(Specialist_type_id)
-@@ -1182,7 +1183,7 @@
+@@ -1212,8 +1212,9 @@
  PACKET_RULESET_GAME = 141; sc, lsend
    UINT8 default_specialist;
  
 -  TECH_LIST global_init_techs[MAX_NUM_TECH_LIST];
-+  #TECH_LIST global_init_techs[MAX_NUM_TECH_LIST]; - Removed for web client. - Andreas
+-  BUILDING_LIST global_init_buildings[MAX_NUM_BUILDING_LIST];
++  # These are removed from freeciv-web
++  # TECH_LIST global_init_techs[MAX_NUM_TECH_LIST];
++  # BUILDING_LIST global_init_buildings[MAX_NUM_BUILDING_LIST];
  
    UINT8 veteran_levels;
    STRING veteran_name[MAX_VET_LEVELS:veteran_levels][MAX_LEN_NAME];
-@@ -1453,7 +1454,7 @@
+@@ -1516,7 +1517,7 @@
    UINT16 id; key
    STRING name[MAX_LEN_NAME];
    STRING short_help[MAX_LEN_PACKET]; /* untranslated */
@@ -153,42 +146,30 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    UINT8 category;
  end
  
-diff -Nurd -X.diff_ignore freeciv/server/console.c freeciv/server/console.c
---- freeciv/server/console.c	2012-07-22 00:40:58.000000000 +0300
-+++ freeciv/server/console.c	2012-07-22 00:44:00.000000000 +0300
-@@ -61,7 +61,9 @@
-     /* Make sure that message is not left to buffers when server dies */
-     conn_list_iterate(game.est_connections, pconn) {
-       pconn->send_buffer->do_buffer_sends = 0;
-+#ifdef USE_COMPRESSION
-       pconn->compression.frozen_level = 0;
-+#endif
-     } conn_list_iterate_end;
- 
-     notify_conn(NULL, NULL, E_LOG_FATAL, ftc_warning, "%s", message);
 diff -Nurd -X.diff_ignore freeciv/server/ruleset.c freeciv/server/ruleset.c
---- freeciv/server/ruleset.c	2012-07-22 00:40:58.000000000 +0300
-+++ freeciv/server/ruleset.c	2012-07-22 00:44:00.000000000 +0300
-@@ -4050,12 +4050,15 @@
+--- freeciv/server/ruleset.c	2012-08-07 16:43:11.000000000 +0300
++++ freeciv/server/ruleset.c	2012-08-07 17:25:55.000000000 +0300
+@@ -4382,6 +4382,8 @@
      misc_p.move_bonus[i] = vlevel->move_bonus;
    }
  
 +  /* FIXME: removed for webclient. - ANdreas. */
 +#if 0
    fc_assert(sizeof(misc_p.global_init_techs)
-             == sizeof(game.server.rgame.global_init_techs));
+             == sizeof(game.rgame.global_init_techs));
    fc_assert(ARRAY_SIZE(misc_p.global_init_techs)
-             == ARRAY_SIZE(game.server.rgame.global_init_techs));
-   memcpy(misc_p.global_init_techs, game.server.rgame.global_init_techs,
-          sizeof(misc_p.global_init_techs));
+@@ -4396,6 +4398,7 @@
+     misc_p.global_init_buildings[i] =
+       game.rgame.global_init_buildings[i];
+   }
 +#endif
  
    misc_p.default_specialist = DEFAULT_SPECIALIST;
  
 diff -Nurd -X.diff_ignore freeciv/server/settings.c freeciv/server/settings.c
---- freeciv/server/settings.c	2012-07-22 00:40:58.000000000 +0300
-+++ freeciv/server/settings.c	2012-07-22 00:44:00.000000000 +0300
-@@ -3988,7 +3988,7 @@
+--- freeciv/server/settings.c	2012-08-07 15:59:03.000000000 +0300
++++ freeciv/server/settings.c	2012-08-07 17:22:07.000000000 +0300
+@@ -4045,7 +4045,7 @@
      sz_strlcpy(setting.name, setting_name(pset));
      /* Send untranslated strings to client */
      sz_strlcpy(setting.short_help, setting_short_help(pset));

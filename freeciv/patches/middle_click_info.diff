@@ -1,7 +1,7 @@
 diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2012-07-18 02:31:10.000000000 +0300
-+++ freeciv/common/packets.def	2012-07-18 02:31:18.000000000 +0300
-@@ -1803,3 +1803,14 @@
+--- freeciv/common/packets.def	2012-08-07 16:53:17.000000000 +0300
++++ freeciv/common/packets.def	2012-08-07 16:53:24.000000000 +0300
+@@ -1866,3 +1866,14 @@
    SINT32 tag;
    SINT32 id;
  end
@@ -17,9 +17,9 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
 +end
 +
 diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
---- freeciv/server/maphand.c	2012-07-18 01:55:00.000000000 +0300
-+++ freeciv/server/maphand.c	2012-07-18 02:34:00.000000000 +0300
-@@ -36,6 +36,7 @@
+--- freeciv/server/maphand.c	2012-08-07 15:59:03.000000000 +0300
++++ freeciv/server/maphand.c	2012-08-07 17:12:21.000000000 +0300
+@@ -37,6 +37,7 @@
  #include "unit.h"
  #include "unitlist.h"
  #include "vision.h"
@@ -27,7 +27,7 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
  
  /* generator */
  #include "utilities.h"
-@@ -1926,3 +1927,409 @@
+@@ -1995,3 +1996,436 @@
    }
    tile_remove_base(ptile, pbase);
  }
@@ -82,6 +82,8 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +  int activity_units[ACTIVITY_LAST];
 +  int base_total[MAX_BASE_TYPES];
 +  int base_units[MAX_BASE_TYPES];
++  int road_total[MAX_ROAD_TYPES];
++  int road_units[MAX_ROAD_TYPES];
 +  int num_activities = 0;
 +  int remains, turns, i;
 +  static struct astring str = ASTRING_INIT;
@@ -92,16 +94,22 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +  memset(activity_units, 0, sizeof(activity_units));
 +  memset(base_total, 0, sizeof(base_total));
 +  memset(base_units, 0, sizeof(base_units));
++  memset(road_total, 0, sizeof(road_total));
++  memset(road_units, 0, sizeof(road_units));
 +
 +  unit_list_iterate(ptile->units, punit) {
 +    if (punit->activity == ACTIVITY_BASE) {
-+      base_total[punit->activity_base] += punit->activity_count;
-+      base_total[punit->activity_base] += get_activity_rate_this_turn(punit);
-+      base_units[punit->activity_base] += get_activity_rate(punit);
++      base_total[punit->activity_target.obj.base] += punit->activity_count;
++      base_total[punit->activity_target.obj.base] += get_activity_rate_this_turn(punit);
++      base_units[punit->activity_target.obj.base] += get_activity_rate(punit);
++    } else if (punit->activity == ACTIVITY_GEN_ROAD) {
++      road_total[punit->activity_target.obj.road] += punit->activity_count;
++      road_total[punit->activity_target.obj.road] += get_activity_rate_this_turn(punit);
++      road_units[punit->activity_target.obj.road] += get_activity_rate(punit);
 +    } else {
-+      activity_total[punit->activity] += punit->activity_count;
-+      activity_total[punit->activity] += get_activity_rate_this_turn(punit);
-+      activity_units[punit->activity] += get_activity_rate(punit);
++      activity_total[punit->activity_target.obj.spe] += punit->activity_count;
++      activity_total[punit->activity_target.obj.spe] += get_activity_rate_this_turn(punit);
++      activity_units[punit->activity_target.obj.spe] += get_activity_rate(punit);
 +    }
 +  } unit_list_iterate_end;
 +
@@ -124,6 +132,24 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +	  num_activities++;
 +	}
 +      } base_type_iterate_end;
++    } else if (i == ACTIVITY_GEN_ROAD) {
++      road_type_iterate(rp) {
++        Road_type_id r = road_index(rp);
++	if (road_units[r] > 0) {
++	  remains = tile_activity_road_time(ptile, r) - road_total[r];
++	  if (remains > 0) {
++	    turns = 1 + (remains + road_units[r] - 1) / road_units[r];
++	  } else {
++	    /* road will be finished this turn */
++	    turns = 1;
++	  }
++	  if (num_activities > 0) {
++	    astr_add(&str, "/");
++	  }
++	  astr_add(&str, "%s(%d)", road_name_translation(rp), turns);
++	  num_activities++;
++	}
++      } road_type_iterate_end;
 +    } else if (is_build_or_clean_activity(i) && activity_units[i] > 0) {
 +      if (num_activities > 0) {
 +	astr_add(&str, "/");
@@ -246,7 +272,7 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +      /* TRANS: "Territory of <username> (<nation + team>)" */
 +      astr_add_line(&str, _("Territory of %s (%s)"), username, nation);
 +    } else if (NULL != owner) {
-+      struct player_diplstate *ds = pplayer->diplstates;
++      struct player_diplstate *ds = *pplayer->diplstates;
 +
 +      if (ds[player_index(owner)].type == DS_CEASEFIRE) {
 +	int turns = ds[player_index(owner)].turns_left;
@@ -347,7 +373,8 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +  }
 +  if (infracount > 0) {
 +    astr_add_line(&str, _("Infrastructure: %s"),
-+		  get_infrastructure_text(ptile->special, ptile->bases));
++		  get_infrastructure_text(ptile->special, ptile->bases,
++                                          ptile->roads));
 +  }
 +  activity_text = concat_tile_activity_text(ptile);
 +  if (strlen(activity_text) > 0) {
@@ -438,9 +465,9 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +}
 +
 diff -Nurd -X.diff_ignore freeciv/server/maphand.h freeciv/server/maphand.h
---- freeciv/server/maphand.h	2012-07-18 01:55:00.000000000 +0300
-+++ freeciv/server/maphand.h	2012-07-18 02:31:18.000000000 +0300
-@@ -126,4 +126,6 @@
+--- freeciv/server/maphand.h	2012-08-07 15:59:03.000000000 +0300
++++ freeciv/server/maphand.h	2012-08-07 16:53:24.000000000 +0300
+@@ -129,4 +129,6 @@
                   struct player *pplayer);
  void destroy_base(struct tile *ptile, struct base_type *pbase);
  

@@ -377,7 +377,7 @@ class Field:
         if self.dataio_type in ["memory"]:
             return "  dio_put_%(dataio_type)s(&dout, &real_packet->%(name)s, %(array_size_u)s);"%self.__dict__
         
-        arr_types=["string","bit_string","city_map","tech_list"]
+        arr_types=["string","bit_string","city_map","tech_list","unit_list","building_list"]
         if (self.dataio_type in arr_types and self.is_array==1) or \
            (self.dataio_type not in arr_types and self.is_array==0):
             return "  dio_put_%(dataio_type)s(&dout, real_packet->%(name)s);"%self.__dict__
@@ -452,7 +452,7 @@ class Field:
             return "dio_get_%(dataio_type)s(&din, real_packet->%(name)s, sizeof(real_packet->%(name)s));"%self.__dict__
         if self.is_struct and self.is_array==0:
             return "dio_get_%(dataio_type)s(&din, &real_packet->%(name)s);"%self.__dict__
-        if self.dataio_type in ["tech_list"]:
+        if self.dataio_type in ["tech_list","unit_list","building_list"]:
             return "dio_get_%(dataio_type)s(&din, real_packet->%(name)s);"%self.__dict__
         if not self.is_array:
             if self.struct_type=="bool":

@@ -22,7 +22,7 @@ import time
 
 HOST = 'localhost';
 MAX_LEN_PACKET = 48;
-VERSION = "+Freeciv.Web.Devel-2012.Jul.18";  # Must be kept in sync with Freeciv server.
+VERSION = "+Freeciv.Web.Devel-2.5-2012.Aug.07";  # Must be kept in sync with Freeciv server.
 VER_INFO = "-dev";
 logger = logging.getLogger("freeciv-proxy");
 
@@ -105,9 +105,9 @@ class CivCom(Thread):
 
   def get_packet_from_connection(self, net_buf):
 
-    if (len(net_buf) < 3): return None;
+    if (len(net_buf) < 4): return None;
 
-    result = unpackExt('>HB', net_buf[:3]);
+    result = unpackExt('>HH', net_buf[:4]);
     packet_len = result[0];
 
     if (len(net_buf) < packet_len): return None;
@@ -133,7 +133,8 @@ class CivCom(Thread):
     return True;
 
   def send_to_civserver(self, net_packet_json):
-    header = packExt('>Hc', len(net_packet_json), chr(0));
+#    header = packExt('>HH', len(net_packet_json), chr(0));
+    header = packExt('>HH', len(net_packet_json), 0);
     civ_packet = header + str(net_packet_json);
     try:
       # Send packet to civserver

@@ -34,14 +34,13 @@
  var packet_unit_load = 75
  var packet_unit_unload = 76
  var packet_unit_upgrade = 77
- var packet_unit_convert = 78
  var packet_unit_nuke = 79
  var packet_unit_paradrop_to = 80
  var packet_unit_airlift = 81
  var packet_unit_diplomat_query = 82
  var packet_unit_type_upgrade = 83
  var packet_unit_diplomat_action = 84
- var packet_unit_change_activity = 86
+ var packet_unit_change_activity_base = 86
  var packet_conn_pong = 89
  var packet_diplomacy_init_meeting_req = 95
  var packet_diplomacy_cancel_meeting_req = 97
@@ -80,5 +79,7 @@
  var packet_edit_player = 216
  var packet_edit_player_vision = 217
  var packet_edit_game = 218
+ var packet_unit_change_activity_road = 221
+ var packet_unit_change_activity = 222
  var packet_info_text_req = 227
  var packet_goto_path_req = 229

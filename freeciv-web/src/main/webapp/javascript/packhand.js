@@ -682,27 +682,37 @@ function handle_ruleset_building(packet)
 
 function handle_ruleset_unit_class(packet) 
 {
-  /* TODO: implement*/
+  /* TODO: implement */
 }
 
 function handle_ruleset_base(packet) 
 {
-  /* TODO: implement*/
+  /* TODO: implement */
+}
+
+function handle_ruleset_road(packet) 
+{
+  /* TODO: implement */
+}
+
+function handle_ruleset_disaster(packet) 
+{
+  /* TODO: implement */
 }
 
 function handle_single_want_hack_reply(packet) 
 {
-  /* TODO: implement*/
+  /* TODO: implement */
 }
 
 function handle_ruleset_choices(packet) 
 {
-  /* TODO: implement*/
+  /* TODO: implement */
 }
 
 function handle_game_load(packet) 
 {
-  /* TODO: implement*/
+  /* TODO: implement */
 }
 
  /* Done */

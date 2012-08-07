@@ -328,6 +328,18 @@ function client_handle_packet(p)
       handle_edit_object_created(p[i]);
       break;
 
+    case  220:
+      handle_ruleset_road(p[i]);
+      break;
+
+    case  223:
+      handle_endgame_player(p[i]);
+      break;
+
+    case  224:
+      handle_ruleset_disaster(p[i]);
+      break;
+
     case  228:
       handle_info_text_message(p[i]);
       break;

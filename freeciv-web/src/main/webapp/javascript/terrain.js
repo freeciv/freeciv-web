@@ -17,22 +17,20 @@ var terrains = {};
 var resources = {};
 var terrain_control = {};
 
-var S_ROAD = 0;
-var S_IRRIGATION = 1;
-var S_RAILROAD = 2;
-var S_MINE = 3;
-var S_POLLUTION = 4;
-var S_HUT = 5;
-var S_OLD_FORTRESS = 6;
-var S_RIVER = 7;
-var S_FARMLAND = 8;
-var S_OLD_AIRBASE = 9;
-var S_FALLOUT = 10;
+var S_IRRIGATION = 0;
+var S_MINE = 1;
+var S_POLLUTION = 2;
+var S_HUT = 3;
+var S_RIVER = 4;
+var S_FARMLAND = 5;
+var S_FALLOUT = 6;
 
   /* internal values not saved */
-var S_LAST = 11;
+var S_LAST = 7;
 var S_RESOURCE_VALID = S_LAST;
 
+var ROAD_ROAD = 0;
+var ROAD_RAIL = 1;
 
 /**************************************************************************
  ...

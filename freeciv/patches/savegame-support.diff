@@ -1,7 +1,7 @@
 diff -Nurd -X.diff_ignore freeciv/common/game.c freeciv/common/game.c
---- freeciv/common/game.c	2012-07-17 19:04:32.000000000 +0300
-+++ freeciv/common/game.c	2012-07-17 20:04:01.000000000 +0300
-@@ -718,6 +718,13 @@
+--- freeciv/common/game.c	2012-08-08 00:18:50.000000000 +0300
++++ freeciv/common/game.c	2012-08-08 01:19:11.000000000 +0300
+@@ -730,6 +730,13 @@
      cf_int_seq('Y', game.info.year),
      cf_end()
    };
@@ -15,7 +15,7 @@ diff -Nurd -X.diff_ignore freeciv/common/game.c freeciv/common/game.c
  
    fc_vsnprintcf(buf, buflen, format, sequences, -1);
  
-@@ -726,8 +733,8 @@
+@@ -738,8 +745,8 @@
       * printf information. */
      char savename[512];
  
@@ -27,9 +27,9 @@ diff -Nurd -X.diff_ignore freeciv/common/game.c freeciv/common/game.c
    }
  
 diff -Nurd -X.diff_ignore freeciv/configure.ac freeciv/configure.ac
---- freeciv/configure.ac	2012-07-17 19:26:12.000000000 +0300
-+++ freeciv/configure.ac	2012-07-17 20:04:40.000000000 +0300
-@@ -1053,7 +1053,7 @@
+--- freeciv/configure.ac	2012-08-08 00:50:09.000000000 +0300
++++ freeciv/configure.ac	2012-08-08 01:19:11.000000000 +0300
+@@ -1127,7 +1127,7 @@
    DEFAULT_SCENARIO_PATH=".;data/scenarios;~/.freeciv/$DATASUBDIR/scenarios;~/.freeciv/scenarios;$datadir/freeciv/scenarios"
  else
    DEFAULT_DATA_PATH=".:data:~/.freeciv/$DATASUBDIR:$datadir/freeciv"
@@ -37,12 +37,12 @@ diff -Nurd -X.diff_ignore freeciv/configure.ac freeciv/configure.ac
 +  DEFAULT_SAVE_PATH=".:~/.freeciv/saves:/mnt/savegames"
    DEFAULT_SCENARIO_PATH=".:data/scenarios:~/.freeciv/$DATASUBDIR/scenarios:~/.freeciv/scenarios:$datadir/freeciv/scenarios"
  fi
- CPPFLAGS="$CPPFLAGS -DDEFAULT_DATA_PATH=\"\\\"$DEFAULT_DATA_PATH\\\"\""
+ CPPFLAGS="$CPPFLAGS -DFC_CONF_PATH=\"\\\"$FC_CONF_PATH\\\"\""
 diff -Nurd -X.diff_ignore freeciv/server/commands.c freeciv/server/commands.c
---- freeciv/server/commands.c	2012-07-17 19:04:04.000000000 +0300
-+++ freeciv/server/commands.c	2012-07-17 20:04:01.000000000 +0300
-@@ -513,7 +513,7 @@
-       "all cities and units etc. Use with care!"),
+--- freeciv/server/commands.c	2012-08-08 00:18:29.000000000 +0300
++++ freeciv/server/commands.c	2012-08-08 01:19:11.000000000 +0300
+@@ -529,7 +529,7 @@
+       "all cities and units etc. Use with care!"), NULL,
     CMD_ECHO_ALL, VCF_NONE, 50
    },
 -  {"save",	ALLOW_ADMIN,
@@ -51,8 +51,8 @@ diff -Nurd -X.diff_ignore freeciv/server/commands.c freeciv/server/commands.c
     N_("save\n"
        "save <file-name>"),
 diff -Nurd -X.diff_ignore freeciv/server/meta.h freeciv/server/meta.h
---- freeciv/server/meta.h	2012-07-17 19:59:15.000000000 +0300
-+++ freeciv/server/meta.h	2012-07-17 20:04:01.000000000 +0300
+--- freeciv/server/meta.h	2012-08-08 01:10:49.000000000 +0300
++++ freeciv/server/meta.h	2012-08-08 01:19:11.000000000 +0300
 @@ -17,7 +17,7 @@
  
  #define DEFAULT_META_SERVER_NO_SEND  TRUE
@@ -63,9 +63,9 @@ diff -Nurd -X.diff_ignore freeciv/server/meta.h freeciv/server/meta.h
  
  enum meta_flag {
 diff -Nurd -X.diff_ignore freeciv/server/savegame.c freeciv/server/savegame.c
---- freeciv/server/savegame.c	2012-07-17 19:04:04.000000000 +0300
-+++ freeciv/server/savegame.c	2012-07-17 20:04:01.000000000 +0300
-@@ -422,8 +422,12 @@
+--- freeciv/server/savegame.c	2012-08-08 00:18:29.000000000 +0300
++++ freeciv/server/savegame.c	2012-08-08 01:19:11.000000000 +0300
+@@ -447,8 +447,12 @@
      break;
    }
  
@@ -79,9 +79,9 @@ diff -Nurd -X.diff_ignore freeciv/server/savegame.c freeciv/server/savegame.c
  
  /****************************************************************************
 diff -Nurd -X.diff_ignore freeciv/server/srv_main.c freeciv/server/srv_main.c
---- freeciv/server/srv_main.c	2012-07-17 19:04:04.000000000 +0300
-+++ freeciv/server/srv_main.c	2012-07-17 20:04:01.000000000 +0300
-@@ -1154,19 +1154,20 @@
+--- freeciv/server/srv_main.c	2012-08-08 00:18:29.000000000 +0300
++++ freeciv/server/srv_main.c	2012-08-08 01:20:33.000000000 +0300
+@@ -1144,7 +1144,7 @@
  Note that if !HAVE_LIBZ, then game.server.save_compress_level should never
  become non-zero, so no need to check HAVE_LIBZ explicitly here as well.
  **************************************************************************/
@@ -90,8 +90,7 @@ diff -Nurd -X.diff_ignore freeciv/server/srv_main.c freeciv/server/srv_main.c
                 bool scenario)
  {
    char filepath[600];
-+  char genname[600];
-   char *dot, *filename;
+@@ -1152,11 +1152,11 @@
    struct section_file *file;
    struct timer *timer_cpu, *timer_user;
  
@@ -107,7 +106,7 @@ diff -Nurd -X.diff_ignore freeciv/server/srv_main.c freeciv/server/srv_main.c
      if ((filename = strrchr(filepath, '/'))) {
        filename++;
      } else {
-@@ -1186,12 +1187,9 @@
+@@ -1189,12 +1189,9 @@
      }
    }
  
@@ -123,7 +122,7 @@ diff -Nurd -X.diff_ignore freeciv/server/srv_main.c freeciv/server/srv_main.c
  
    timer_cpu = new_timer_start(TIMER_CPU, TIMER_ACTIVE);
    timer_user = new_timer_start(TIMER_USER, TIMER_ACTIVE);
-@@ -1241,12 +1239,12 @@
+@@ -1244,12 +1241,12 @@
  
      if (!scenario) {
        /* Ensure the saves directory exists. */
@@ -138,7 +137,7 @@ diff -Nurd -X.diff_ignore freeciv/server/srv_main.c freeciv/server/srv_main.c
  
        sz_strlcpy(tmpname, srvarg.scenarios_pathname);
      }
-@@ -1254,7 +1252,14 @@
+@@ -1257,7 +1254,14 @@
      if (tmpname[0] != '\0') {
        sz_strlcat(tmpname, "/");
      }
@@ -154,9 +153,17 @@ diff -Nurd -X.diff_ignore freeciv/server/srv_main.c freeciv/server/srv_main.c
    }
  
 diff -Nurd -X.diff_ignore freeciv/server/stdinhand.c freeciv/server/stdinhand.c
---- freeciv/server/stdinhand.c	2012-07-17 19:04:04.000000000 +0300
-+++ freeciv/server/stdinhand.c	2012-07-17 20:04:01.000000000 +0300
-@@ -730,11 +730,6 @@
+--- freeciv/server/stdinhand.c	2012-08-08 00:18:29.000000000 +0300
++++ freeciv/server/stdinhand.c	2012-08-08 01:31:01.000000000 +0300
+@@ -37,6 +37,7 @@
+ #include "mem.h"
+ #include "registry.h"
+ #include "shared.h"
++#include "string_vector.h"
+ #include "support.h"            /* fc__attribute, bool type, etc. */
+ #include "timing.h"
+ 
+@@ -735,11 +736,6 @@
  **************************************************************************/
  static bool save_command(struct connection *caller, char *arg, bool check)
  {
@@ -168,7 +175,7 @@ diff -Nurd -X.diff_ignore freeciv/server/stdinhand.c freeciv/server/stdinhand.c
    if (!check) {
      save_game(arg, "User request", FALSE);
    }
-@@ -3582,15 +3577,17 @@
+@@ -3603,24 +3599,33 @@
    {
      /* it is a normal savegame or maybe a scenario */
      char testfile[MAX_LEN_PATH];
@@ -181,18 +188,38 @@ diff -Nurd -X.diff_ignore freeciv/server/stdinhand.c freeciv/server/stdinhand.c
 +		caller->username);
 +
 +    const char *pathes[] = { "", usrdir, "scenario/", NULL };
++    int elems;
      const char *exts[] = {
        "sav", "gz", "bz2", "sav.gz", "sav.bz2", NULL
      };
--    const char **ext, *found = NULL;
++    struct strvec *sv;
+     const char **ext, *found = NULL;
 -    const struct strvec **path;
--
-+    const char **path, **ext, *found = NULL;
+ 
+-    for (path = pathes; !found && *path; path++) {
+-      for (ext = exts; !found && *ext; ext++) {
+-        fc_snprintf(testfile, sizeof(testfile), "%s.%s", filename, *ext);
+-        if ((found = fileinfoname(*path, testfile))) {
+-          sz_strlcpy(arg, found);
+-        }
++    for (elems = 0; pathes[elems] != NULL; elems++);
++
++    sv = strvec_new();
++    strvec_store(sv, pathes, elems);
 + 
-     for (path = pathes; !found && *path; path++) {
-       for (ext = exts; !found && *ext; ext++) {
-         fc_snprintf(testfile, sizeof(testfile), "%s.%s", filename, *ext);
-@@ -4110,6 +4107,11 @@
++    for (ext = exts; !found && *ext; ext++) {
++      fc_snprintf(testfile, sizeof(testfile), "%s.%s", filename, *ext);
++      if ((found = fileinfoname(sv, testfile))) {
++        sz_strlcpy(arg, found);
+       }
+     }
+ 
++    strvec_destroy(sv);
++
+     if (is_restricted(caller) && !found) {
+       cmd_reply(CMD_LOAD, caller, C_FAIL, _("Cannot find savegame or "
+                 "scenario with the name \"%s\"."), filename);
+@@ -4145,6 +4150,11 @@
  
    level = command_level(command_by_number(cmd));
  

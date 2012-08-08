@@ -340,6 +340,10 @@ function client_handle_packet(p)
       handle_ruleset_disaster(p[i]);
       break;
 
+    case  225:
+      handle_rulesets_ready(p[i]);
+      break;
+
     case  228:
       handle_info_text_message(p[i]);
       break;

@@ -1,6 +1,6 @@
 diff -Nurd -X.diff_ignore freeciv/ai/default/aisettler.c freeciv/ai/default/aisettler.c
---- freeciv/ai/default/aisettler.c	2012-07-17 19:04:32.000000000 +0300
-+++ freeciv/ai/default/aisettler.c	2012-07-17 19:24:16.000000000 +0300
+--- freeciv/ai/default/aisettler.c	2012-08-08 00:18:50.000000000 +0300
++++ freeciv/ai/default/aisettler.c	2012-08-08 00:35:01.000000000 +0300
 @@ -1175,8 +1175,8 @@
                player_name(pplayer), TILE_XY(ptile));
      return FALSE;
@@ -13,10 +13,10 @@ diff -Nurd -X.diff_ignore freeciv/ai/default/aisettler.c freeciv/ai/default/aise
    if (!pcity) {
      log_error("%s: Failed to build city at (%d, %d)",
 diff -Nurd -X.diff_ignore freeciv/configure.ac freeciv/configure.ac
---- freeciv/configure.ac	2012-07-17 19:21:14.000000000 +0300
-+++ freeciv/configure.ac	2012-07-17 19:24:16.000000000 +0300
-@@ -712,6 +712,11 @@
-   AC_DEFINE([HAVE_THREADS], [1], [Defined if there is any thread implementation at all])
+--- freeciv/configure.ac	2012-08-08 00:31:38.000000000 +0300
++++ freeciv/configure.ac	2012-08-08 00:35:01.000000000 +0300
+@@ -700,6 +700,11 @@
+   AC_MSG_ERROR([No usable thread implementation available])
  fi
  
 +AM_PATH_GLIB_2_0(2.29.0,,
@@ -27,7 +27,7 @@ diff -Nurd -X.diff_ignore freeciv/configure.ac freeciv/configure.ac
  dnl Check and choose clients
  if test "x$client" != "xno"; then
  
-@@ -1198,7 +1203,7 @@
+@@ -1273,7 +1278,7 @@
       fi
     fi]],[[]])
  
@@ -37,8 +37,8 @@ diff -Nurd -X.diff_ignore freeciv/configure.ac freeciv/configure.ac
  LDFLAGS="$EXTRA_DEBUG_LDFLAGS $LDFLAGS"
  
 diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
---- freeciv/server/unithand.c	2012-07-17 19:14:28.000000000 +0300
-+++ freeciv/server/unithand.c	2012-07-17 19:24:16.000000000 +0300
+--- freeciv/server/unithand.c	2012-08-08 00:28:06.000000000 +0300
++++ freeciv/server/unithand.c	2012-08-08 00:39:58.000000000 +0300
 @@ -19,9 +19,12 @@
  #include <stdlib.h>
  #include <string.h>
@@ -52,7 +52,7 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
  #include "mem.h"
  #include "rand.h"
  #include "shared.h"
-@@ -728,7 +731,18 @@
+@@ -704,7 +707,18 @@
    res = unit_add_or_build_city_test(punit);
  
    if (UAB_BUILD_OK == res) {
@@ -72,13 +72,15 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
    } else if (UAB_ADD_OK == res) {
      city_add_unit(pplayer, punit);
    } else {
-@@ -737,6 +751,34 @@
+@@ -782,6 +796,36 @@
  }
  
  /**************************************************************************
-+...
++  City building function called from inside server itself - notably city
++  name has not been transfered over network so network encodings and such
++  do not apply.
 +**************************************************************************/
-+void ai_unit_build_city(struct player *pplayer, int unit_id, char *name)
++void ai_unit_build_city(struct player *pplayer, int unit_id, const char *name)
 +{
 +  enum unit_add_build_city_result res;
 +  struct unit *punit = player_unit_by_number(pplayer, unit_id);
@@ -108,20 +110,20 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
  **************************************************************************/
  void handle_unit_change_activity(struct player *pplayer, int unit_id,
 diff -Nurd -X.diff_ignore freeciv/server/unithand.h freeciv/server/unithand.h
---- freeciv/server/unithand.h	2012-07-17 19:04:04.000000000 +0300
-+++ freeciv/server/unithand.h	2012-07-17 19:24:16.000000000 +0300
-@@ -23,6 +23,7 @@
+--- freeciv/server/unithand.h	2012-08-08 00:18:29.000000000 +0300
++++ freeciv/server/unithand.h	2012-08-08 00:38:31.000000000 +0300
+@@ -26,6 +26,7 @@
  
  bool unit_move_handling(struct unit *punit, struct tile *pdesttile,
                          bool igzoc, bool move_diplomat_city);
-+void ai_unit_build_city(struct player *pplayer, int unit_id, char *name);
++void ai_unit_build_city(struct player *pplayer, int unit_id, const char *name);
  
  void city_add_or_build_error(struct player *pplayer, struct unit *punit,
                               enum unit_add_build_city_result res);
 diff -Nurd -X.diff_ignore freeciv/server/unittools.c freeciv/server/unittools.c
---- freeciv/server/unittools.c	2012-07-17 19:14:28.000000000 +0300
-+++ freeciv/server/unittools.c	2012-07-17 19:24:16.000000000 +0300
-@@ -3333,8 +3333,8 @@
+--- freeciv/server/unittools.c	2012-08-08 00:28:06.000000000 +0300
++++ freeciv/server/unittools.c	2012-08-08 00:35:01.000000000 +0300
+@@ -3418,8 +3418,8 @@
        }
        break;
      case ORDER_BUILD_CITY:

@@ -1,7 +1,7 @@
 diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2012-08-07 16:53:17.000000000 +0300
-+++ freeciv/common/packets.def	2012-08-07 16:53:24.000000000 +0300
-@@ -1866,3 +1866,14 @@
+--- freeciv/common/packets.def	2012-08-08 01:10:49.000000000 +0300
++++ freeciv/common/packets.def	2012-08-08 01:10:56.000000000 +0300
+@@ -1884,3 +1884,14 @@
    SINT32 tag;
    SINT32 id;
  end
@@ -17,8 +17,8 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
 +end
 +
 diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
---- freeciv/server/maphand.c	2012-08-07 15:59:03.000000000 +0300
-+++ freeciv/server/maphand.c	2012-08-07 17:12:21.000000000 +0300
+--- freeciv/server/maphand.c	2012-08-08 00:18:29.000000000 +0300
++++ freeciv/server/maphand.c	2012-08-08 01:17:42.000000000 +0300
 @@ -37,6 +37,7 @@
  #include "unit.h"
  #include "unitlist.h"
@@ -27,7 +27,7 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
  
  /* generator */
  #include "utilities.h"
-@@ -1995,3 +1996,436 @@
+@@ -2003,3 +2004,444 @@
    }
    tile_remove_base(ptile, pbase);
  }
@@ -242,7 +242,6 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +     Q_("?city:Peaceful"), Q_("?city:Friendly"), Q_("?city:Mysterious"),
 +     Q_("?city:Friendly(team)")};
 +  int infracount;
-+  bv_special infra;
 +  static struct astring str = ASTRING_INIT;
 +  char username[MAX_LEN_NAME + 32];
 +  char nation[2 * MAX_LEN_NAME + 32];
@@ -272,7 +271,7 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +      /* TRANS: "Territory of <username> (<nation + team>)" */
 +      astr_add_line(&str, _("Territory of %s (%s)"), username, nation);
 +    } else if (NULL != owner) {
-+      struct player_diplstate *ds = *pplayer->diplstates;
++      const struct player_diplstate *ds = *pplayer->diplstates;
 +
 +      if (ds[player_index(owner)].type == DS_CEASEFIRE) {
 +	int turns = ds[player_index(owner)].turns_left;
@@ -312,7 +311,7 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +      astr_add_line(&str, _("City: %s | %s (%s)"),
 +                    city_name(pcity), username, nation);
 +    } else {
-+      struct player_diplstate *ds = pplayer->diplstates;
++      const struct player_diplstate *ds = *pplayer->diplstates;
 +
 +      if (ds[player_index(owner)].type == DS_CEASEFIRE) {
 +	int turns = ds[player_index(owner)].turns_left;
@@ -362,7 +361,7 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +    }
 +
 +  }
-+  infra = get_tile_infrastructure_set(ptile, &infracount);
++  get_tile_infrastructure_set(ptile, &infracount);
 +  if (infracount == 0) {
 +    base_type_iterate(pbase) {
 +      if (BV_ISSET(ptile->bases, base_index(pbase))) {
@@ -370,6 +369,15 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +        break;
 +      }
 +    } base_type_iterate_end;
++
++    if (infracount == 0) {
++      road_type_iterate(proad) {
++        if (BV_ISSET(ptile->roads, road_index(proad))) {
++          infracount = 1;
++          break;
++        }
++      } road_type_iterate_end;
++    }
 +  }
 +  if (infracount > 0) {
 +    astr_add_line(&str, _("Infrastructure: %s"),
@@ -403,7 +411,7 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +                      utype_name_translation(ptype), username, nation);
 +      }
 +    } else if (NULL != owner) {
-+      struct player_diplstate *ds = pplayer->diplstates;
++      const struct player_diplstate *ds = *pplayer->diplstates;
 +
 +      if (ds[player_index(owner)].type == DS_CEASEFIRE) {
 +	int turns = ds[player_index(owner)].turns_left;
@@ -465,8 +473,8 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +}
 +
 diff -Nurd -X.diff_ignore freeciv/server/maphand.h freeciv/server/maphand.h
---- freeciv/server/maphand.h	2012-08-07 15:59:03.000000000 +0300
-+++ freeciv/server/maphand.h	2012-08-07 16:53:24.000000000 +0300
+--- freeciv/server/maphand.h	2012-08-08 00:18:29.000000000 +0300
++++ freeciv/server/maphand.h	2012-08-08 01:10:56.000000000 +0300
 @@ -129,4 +129,6 @@
                   struct player *pplayer);
  void destroy_base(struct tile *ptile, struct base_type *pbase);

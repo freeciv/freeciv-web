@@ -700,6 +700,11 @@ function handle_ruleset_disaster(packet)
   /* TODO: implement */
 }
 
+function handle_rulesets_ready(packet) 
+{
+  /* Nothing to do */
+}
+
 function handle_single_want_hack_reply(packet) 
 {
   /* TODO: implement */

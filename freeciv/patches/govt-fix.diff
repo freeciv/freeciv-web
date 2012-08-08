@@ -1,7 +1,7 @@
 diff -Nurd -X.diff_ignore freeciv/client/packhand.c freeciv/client/packhand.c
---- freeciv/client/packhand.c	2012-07-16 00:07:35.000000000 +0300
-+++ freeciv/client/packhand.c	2012-07-16 00:16:17.000000000 +0300
-@@ -2753,10 +2753,12 @@
+--- freeciv/client/packhand.c	2012-08-08 00:51:09.000000000 +0300
++++ freeciv/client/packhand.c	2012-08-08 00:57:49.000000000 +0300
+@@ -2994,10 +2994,12 @@
  
    gov->item_number = p->id;
  
@@ -15,9 +15,9 @@ diff -Nurd -X.diff_ignore freeciv/client/packhand.c freeciv/client/packhand.c
    names_set(&gov->name, p->name, p->rule_name);
    sz_strlcpy(gov->graphic_str, p->graphic_str);
 diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2012-07-16 00:11:03.000000000 +0300
-+++ freeciv/common/packets.def	2012-07-16 00:15:29.000000000 +0300
-@@ -1190,8 +1190,8 @@
+--- freeciv/common/packets.def	2012-08-08 00:54:55.000000000 +0300
++++ freeciv/common/packets.def	2012-08-08 00:57:49.000000000 +0300
+@@ -1257,8 +1257,8 @@
  PACKET_RULESET_GOVERNMENT = 145; sc, lsend
    GOVERNMENT id;
  
@@ -29,18 +29,26 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    STRING name[MAX_LEN_NAME];
    STRING rule_name[MAX_LEN_NAME];
 diff -Nurd -X.diff_ignore freeciv/server/ruleset.c freeciv/server/ruleset.c
---- freeciv/server/ruleset.c	2012-07-15 21:52:14.000000000 +0300
-+++ freeciv/server/ruleset.c	2012-07-16 00:15:29.000000000 +0300
-@@ -3787,10 +3787,10 @@
+--- freeciv/server/ruleset.c	2012-08-08 00:18:29.000000000 +0300
++++ freeciv/server/ruleset.c	2012-08-08 01:01:54.000000000 +0300
+@@ -4279,17 +4279,19 @@
+ {
+   struct packet_ruleset_government gov;
+   struct packet_ruleset_government_ruler_title title;
+-  int j;
++  /*  int j; */
+ 
+   governments_iterate(g) {
+     /* send one packet_government */
      gov.id = government_number(g);
  
++#if 0
      j = 0;
--    requirement_vector_iterate(&g->reqs, preq) {
-+    /*requirement_vector_iterate(&g->reqs, preq) {
+     requirement_vector_iterate(&g->reqs, preq) {
        gov.reqs[j++] = *preq;
      } requirement_vector_iterate_end;
--    gov.reqs_count = j;
-+    gov.reqs_count = j;*/
+     gov.reqs_count = j;
++#endif
  
      sz_strlcpy(gov.name, untranslated_name(&g->name));
      sz_strlcpy(gov.rule_name, rule_name(&g->name));

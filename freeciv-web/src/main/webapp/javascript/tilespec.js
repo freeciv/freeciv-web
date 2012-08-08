@@ -1101,8 +1101,8 @@ function get_treaty_disagree_thumb_down()
 ****************************************************************************/
 function fill_road_rail_sprite_array(ptile, pcity)
 {
-  var road = contains_special(ptile, S_ROAD);
-  var rail = contains_special(ptile, S_RAILROAD);
+  var road = tile_has_road(ptile, ROAD_ROAD);
+  var rail = tile_has_road(ptile, ROAD_RAIL);
   var road_near = [];
   var rail_near = [];
   var draw_rail = [];
@@ -1116,8 +1116,8 @@ function fill_road_rail_sprite_array(ptile, pcity)
     /* Check if there is adjacent road/rail. */
     var tile1 = mapstep(ptile, dir);
     if (tile1 != null && tile_get_known(tile1) != TILE_UNKNOWN) {
-      road_near[dir] = contains_special(tile1, S_ROAD);
-      rail_near[dir] = contains_special(tile1, S_RAILROAD);
+      road_near[dir] = tile_has_road(tile1, ROAD_ROAD);
+      rail_near[dir] = tile_has_road(tile1, ROAD_RAIL);
 
       /* Draw rail/road if there is a connection from this tile to the
         * adjacent tile.  But don't draw road if there is also a rail

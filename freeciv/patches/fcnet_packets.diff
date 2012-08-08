@@ -1,7 +1,7 @@
 diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2012-07-17 20:48:15.000000000 +0300
-+++ freeciv/common/packets.def	2012-07-17 20:48:28.000000000 +0300
-@@ -560,8 +560,13 @@
+--- freeciv/common/packets.def	2012-08-08 01:51:03.000000000 +0300
++++ freeciv/common/packets.def	2012-08-08 01:51:13.000000000 +0300
+@@ -586,8 +586,13 @@
    STRING can_build_unit[MAX_LEN_MSG];
    STRING can_build_improvement[MAX_LEN_MSG];
    STRING improvements[MAX_LEN_MSG];
@@ -15,7 +15,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  end
  
  PACKET_CITY_SHORT_INFO = 32; sc, lsend, is-game-info, cancel(PACKET_CITY_INFO)
-@@ -702,6 +707,7 @@
+@@ -728,6 +733,7 @@
    UINT8 color_blue;
  
    CITY wonders[B_LAST]; diff
@@ -23,7 +23,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  end
  
  PACKET_PLAYER_PHASE_DONE = 52; cs, dsend
-@@ -955,25 +961,25 @@
+@@ -994,25 +1000,25 @@
  
  PACKET_DIPLOMACY_CREATE_CLAUSE_REQ = 99; cs, dsend
    PLAYER counterpart, giver;
@@ -53,7 +53,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    UINT32 value;
  end
  
-@@ -1001,7 +1007,7 @@
+@@ -1040,7 +1046,7 @@
  end
  
  PACKET_REPORT_REQ = 111; cs, handle-per-conn, dsend
@@ -62,7 +62,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  end
  
  /************** Connection packets **********************/
-@@ -1026,9 +1032,9 @@
+@@ -1065,9 +1071,9 @@
  
  # Information about the ping times of the connections.
  PACKET_CONN_PING_INFO = 116; sc, lsend
@@ -74,7 +74,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  end
  
  # For compatibility with older versions, this number cannot be changed.
-@@ -1803,3 +1809,16 @@
+@@ -1896,3 +1902,16 @@
    STRING message[MAX_LEN_MSG];
  end
  
@@ -92,9 +92,9 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
 +  UINT32 turns;
 +end
 diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
---- freeciv/server/unithand.c	2012-07-17 20:13:23.000000000 +0300
-+++ freeciv/server/unithand.c	2012-07-17 20:51:34.000000000 +0300
-@@ -753,6 +753,107 @@
+--- freeciv/server/unithand.c	2012-08-08 01:34:32.000000000 +0300
++++ freeciv/server/unithand.c	2012-08-08 01:56:07.000000000 +0300
+@@ -798,6 +798,107 @@
  }
  
  /**************************************************************************
@@ -150,6 +150,7 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
 +  pf_map_destroy(pfm);
 +
 +  if (path) {
++    int total_mc = 0;
 +
 +    p.length = path->length - 1;
 +
@@ -174,11 +175,11 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
 +    punit->orders.vigilant = FALSE;
 +    punit->orders.list
 +      = fc_malloc(path->length * sizeof(*(punit->orders.list)));
-+    int total_mc = 0;
 +    for (i = 0; i < path->length - 1; i++) {
 +      struct tile *new_tile = path->positions[i + 1].tile;
-+      total_mc += path->positions[1].total_MC;
 +      int dir;
++
++      total_mc += path->positions[1].total_MC;
 +      if (same_pos(new_tile, old_tile)) {
 +        dir = -1;
 +      } else {
@@ -193,22 +194,31 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
 +    send_packet_goto_path(pplayer->current_conn, &p);
 +
 +  } else {
-+    return ;
++    return;
 +  }
-+
 +}
 +
 +/**************************************************************************
- ...
- **************************************************************************/
- void ai_unit_build_city(struct player *pplayer, int unit_id, char *name)
-@@ -942,6 +1043,9 @@
+   City building function called from inside server itself - notably city
+   name has not been transfered over network so network encodings and such
+   do not apply.
+@@ -967,14 +1068,16 @@
+ 
+    if (!is_player_phase(unit_owner(punit), game.info.phase)
+       || execute_orders(punit)) {
+-    /* Looks like the unit survived. */
++     /* Looks like the unit survived. */
+      send_unit_info(NULL, punit);
+     }
+ 
      pf_path_destroy(path);
-     return ;
+-    return ;
++    return;
    } else {
+-    return ;
 +    notify_player(pplayer, punit->tile, E_BAD_COMMAND,
-+                  ftc_server, NULL,
-+                  _("The unit can't go there."));
-     return ;
++                  ftc_server, _("The unit can't go there."));
++    return;
    }
  
+ }

@@ -1,7 +1,7 @@
-diff -Nurd freeciv/data/default/terrain.ruleset freeciv/data/default/terrain.ruleset
---- freeciv/data/default/terrain.ruleset	2012-05-16 18:20:18.000000000 +0300
-+++ freeciv/data/default/terrain.ruleset	2012-05-16 18:20:01.000000000 +0300
-@@ -293,7 +293,7 @@
+diff -Nurd -X.diff_ignore freeciv/data/classic/terrain.ruleset freeciv/data/classic/terrain.ruleset
+--- freeciv/data/classic/terrain.ruleset	2012-08-08 00:18:48.000000000 +0300
++++ freeciv/data/classic/terrain.ruleset	2012-08-08 00:20:16.000000000 +0300
+@@ -314,7 +314,7 @@
  
  [terrain_glacier]
  name                 = _("Glacier")

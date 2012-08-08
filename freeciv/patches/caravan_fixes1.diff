@@ -1,7 +1,7 @@
 diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2012-07-15 21:52:29.000000000 +0300
-+++ freeciv/common/packets.def	2012-07-15 21:55:07.000000000 +0300
-@@ -760,6 +760,8 @@
+--- freeciv/common/packets.def	2012-08-08 00:18:50.000000000 +0300
++++ freeciv/common/packets.def	2012-08-08 00:23:33.000000000 +0300
+@@ -805,6 +805,8 @@
    BOOL has_orders;
    UINT16 orders_length, orders_index;
    BOOL orders_repeat, orders_vigilant;
@@ -11,9 +11,9 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    DIRECTION orders_dirs[MAX_LEN_ROUTE:orders_length];
    ACTIVITY orders_activities[MAX_LEN_ROUTE:orders_length];
 diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
---- freeciv/server/unithand.c	2012-07-15 21:52:14.000000000 +0300
-+++ freeciv/server/unithand.c	2012-07-15 21:57:28.000000000 +0300
-@@ -1561,8 +1561,9 @@
+--- freeciv/server/unithand.c	2012-08-08 00:18:29.000000000 +0300
++++ freeciv/server/unithand.c	2012-08-08 00:23:33.000000000 +0300
+@@ -1673,8 +1673,9 @@
     
    }
  
@@ -26,18 +26,18 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
    if (!can_cities_trade(pcity_homecity, pcity_dest)) {
      notify_player(pplayer, city_tile(pcity_dest), E_BAD_COMMAND, ftc_server,
 diff -Nurd -X.diff_ignore freeciv/server/unittools.c freeciv/server/unittools.c
---- freeciv/server/unittools.c	2012-07-15 21:52:14.000000000 +0300
-+++ freeciv/server/unittools.c	2012-07-15 21:55:07.000000000 +0300
-@@ -1926,6 +1926,15 @@
+--- freeciv/server/unittools.c	2012-08-08 00:18:29.000000000 +0300
++++ freeciv/server/unittools.c	2012-08-08 00:27:02.000000000 +0300
+@@ -2024,6 +2024,15 @@
      packet->orders_repeat = packet->orders_vigilant = FALSE;
      /* No need to initialize array. */
    }
 +
-+  packet->caravan_trade = (unit_has_type_flag(punit, F_TRADE_ROUTE)
++  packet->caravan_trade = (unit_has_type_flag(punit, UTYF_TRADE_ROUTE)
 +	   && !unit_has_orders(punit)
 +	   && unit_can_est_trade_route_here(punit));
 +
-+  packet->caravan_wonder = (unit_has_type_flag(punit, F_HELP_WONDER)
++  packet->caravan_wonder = (unit_has_type_flag(punit, UTYF_HELP_WONDER)
 +	   && !unit_has_orders(punit)
 +	   && unit_can_help_build_wonder_here(punit));
 +

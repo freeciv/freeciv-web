@@ -22,7 +22,7 @@ import time
 
 HOST = 'localhost';
 MAX_LEN_PACKET = 48;
-VERSION = "+Freeciv.Web.Devel-2.5-2012.Aug.07";  # Must be kept in sync with Freeciv server.
+VERSION = "+Freeciv.Web.Devel-2.5-2012.Aug.08";  # Must be kept in sync with Freeciv server.
 VER_INFO = "-dev";
 logger = logging.getLogger("freeciv-proxy");
 
@@ -76,7 +76,7 @@ class CivCom(Thread):
               
         packet = self.get_packet_from_connection(net_buf);
         if (packet != None): 
-          net_buf = net_buf[3+len(packet):];
+          net_buf = net_buf[4+len(packet):];
 	  result = packet[:-1];
 	  if (len(result) > 0):
 	    self.send_buffer_append(result);
@@ -112,8 +112,8 @@ class CivCom(Thread):
 
     if (len(net_buf) < packet_len): return None;
     if (logger.isEnabledFor(logging.DEBUG)):
-      logger.debug("\nNEW PACKET: len(" + str(packet_len) + ")" );
-    return net_buf[3:packet_len];
+      logger.debug("\nNEW PACKET: " + str(result[1]) + " len(" + str(packet_len) + ")" );
+    return net_buf[4:packet_len];
 
   
   def close_connection(self):

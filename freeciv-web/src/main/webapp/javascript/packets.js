@@ -81,5 +81,6 @@
  var packet_edit_game = 218
  var packet_unit_change_activity_road = 221
  var packet_unit_change_activity = 222
+ var packet_edit_tile_road = 226
  var packet_info_text_req = 227
  var packet_goto_path_req = 229

@@ -1,7 +1,7 @@
-diff -Nurd -X.diff_ignore freeciv/data/default/game.ruleset freeciv/data/default/game.ruleset
---- freeciv/data/default/game.ruleset	2012-07-17 02:35:27.000000000 +0300
-+++ freeciv/data/default/game.ruleset	2012-07-17 02:57:36.000000000 +0300
-@@ -259,3 +259,8 @@
+diff -Nurd -X.diff_ignore freeciv/data/classic/game.ruleset freeciv/data/classic/game.ruleset
+--- freeciv/data/classic/game.ruleset	2012-08-08 00:18:48.000000000 +0300
++++ freeciv/data/classic/game.ruleset	2012-08-08 00:55:09.000000000 +0300
+@@ -307,3 +307,8 @@
  ;       "int_set", 123, FALSE
  ;       "str_set", "test", FALSE
  ;     }

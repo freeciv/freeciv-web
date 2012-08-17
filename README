@@ -1,4 +1,4 @@
-# THE FREECIV.NET PROJECT
+THE FREECIV.NET PROJECT
 -----------------------
 
 Freeciv.net is an open-source turn-based strategy game playable online in a browser. It’s built entirely in HTML5 
@@ -7,8 +7,7 @@ and features in-depth game-play and a wide variety of game modes and options. Yo
 ultimate goal of creating the best civilization. You can play online against other players 
 (multiplayer) or play by yourself against the computer. 
 
-UPDATE 2012-08-17: Marko Lindqvist is now working on updating Freeciv.net to the latest
-development version of Freeciv (http://www.freeciv.org) - The work can be tracked here: https://github.com/cazfi/freeciv-web
+UPDATE 2012-08-17: Marko Lindqvist is now working on updating Freeciv.net to the latest development version of Freeciv (http://www.freeciv.org) - The work can be tracked here: https://github.com/cazfi/freeciv-web
 
 If you are interested in hosting a Freeciv.net server, then please contact me. A lot of people have
 been missing Freeciv.net since the Amazon server was shut down, so it seems that this is 

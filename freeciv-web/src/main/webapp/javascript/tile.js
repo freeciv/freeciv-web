@@ -54,7 +54,7 @@ function tile_has_base(ptile, base)
     return false;
   }
 
-  return ptile['bases'][base];
+  return ptile['bases'][base] == 1;
 }
 
 function tile_has_road(ptile, road)
@@ -63,7 +63,7 @@ function tile_has_road(ptile, road)
     return false;
   }
 
-  return ptile['roads'][road];
+  return ptile['roads'][road] == 1;
 }
 
 function tile_resource(tile)

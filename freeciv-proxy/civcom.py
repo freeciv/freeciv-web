@@ -22,7 +22,7 @@ import time
 
 HOST = 'localhost';
 MAX_LEN_PACKET = 48;
-VERSION = "+Freeciv.Web.Devel-2.5-2012.Aug.08";  # Must be kept in sync with Freeciv server.
+VERSION = "+Freeciv.Web.Devel-2.5-2012.Aug.28";  # Must be kept in sync with Freeciv server.
 VER_INFO = "-dev";
 logger = logging.getLogger("freeciv-proxy");
 

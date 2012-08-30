@@ -700,6 +700,11 @@ function handle_ruleset_disaster(packet)
   /* TODO: implement */
 }
 
+function handle_ruleset_trade(packet) 
+{
+  /* TODO: implement */
+}
+
 function handle_rulesets_ready(packet) 
 {
   /* Nothing to do */

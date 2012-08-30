@@ -1,24 +1,23 @@
 diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2012-08-08 01:10:49.000000000 +0300
-+++ freeciv/common/packets.def	2012-08-08 01:10:56.000000000 +0300
-@@ -1884,3 +1884,14 @@
+--- freeciv/common/packets.def	2012-08-30 03:55:47.000000000 +0300
++++ freeciv/common/packets.def	2012-08-30 04:16:46.000000000 +0300
+@@ -1893,3 +1893,13 @@
    SINT32 tag;
    SINT32 id;
  end
 +
 +/*************** Webclient specific packets ****************/
-+PACKET_INFO_TEXT_REQ=227;cs,dsend
++PACKET_INFO_TEXT_REQ = 228; cs, dsend
 +  TILE loc;
 +  UNIT visible_unit;
 +end
 +
-+PACKET_INFO_TEXT_MESSAGE=228;sc,dsend
++PACKET_INFO_TEXT_MESSAGE = 229; sc, dsend
 +  STRING message[MAX_LEN_MSG];
 +end
-+
 diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
---- freeciv/server/maphand.c	2012-08-08 00:18:29.000000000 +0300
-+++ freeciv/server/maphand.c	2012-08-08 01:17:42.000000000 +0300
+--- freeciv/server/maphand.c	2012-08-30 03:55:13.000000000 +0300
++++ freeciv/server/maphand.c	2012-08-30 04:13:44.000000000 +0300
 @@ -37,6 +37,7 @@
  #include "unit.h"
  #include "unitlist.h"
@@ -27,7 +26,7 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
  
  /* generator */
  #include "utilities.h"
-@@ -2003,3 +2004,444 @@
+@@ -2004,3 +2005,444 @@
    }
    tile_remove_base(ptile, pbase);
  }
@@ -473,8 +472,8 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +}
 +
 diff -Nurd -X.diff_ignore freeciv/server/maphand.h freeciv/server/maphand.h
---- freeciv/server/maphand.h	2012-08-08 00:18:29.000000000 +0300
-+++ freeciv/server/maphand.h	2012-08-08 01:10:56.000000000 +0300
+--- freeciv/server/maphand.h	2012-08-30 03:55:14.000000000 +0300
++++ freeciv/server/maphand.h	2012-08-30 04:13:44.000000000 +0300
 @@ -129,4 +129,6 @@
                   struct player *pplayer);
  void destroy_base(struct tile *ptile, struct base_type *pbase);

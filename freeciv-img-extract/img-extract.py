@@ -32,7 +32,7 @@ files = ["../freeciv/freeciv/data/amplio2.tilespec",
   "../freeciv/freeciv/data/amplio2/moderncities.spec",
   "../freeciv/freeciv/data/amplio2/mountains.spec",
   "../freeciv/freeciv/data/amplio2/hills.spec",
-#  "../freeciv/freeciv/data/amplio/nuke.spec", 	#not in use yet
+#  "../freeciv/freeciv/data/amplio2/nuke.spec", #not in use yet
   "../freeciv/freeciv/data/amplio2/ocean.spec",
   "../freeciv/freeciv/data/amplio2/select.spec",
   "../freeciv/freeciv/data/amplio2/terrain1.spec",
@@ -72,7 +72,7 @@ max_row_height = 0;
 curr_x = 0;
 curr_y = 14;
 # Set size of tileset image manually depending on number of tiles.
-tileset_height = 2250;  
+tileset_height = 2500;
 tileset_width = 2250;
 
 dither_types = ["t.l0.desert1", "t.l0.plains1", "t.l0.grassland1", "t.l0.forest1", "t.l0.jungle1", "t.l0.hills1", "t.l0.mountains1", "t.l0.tundra1", "t.l0.swamp1"];

@@ -9,7 +9,7 @@ apply_patch() {
 for patch in $PATCHLIST
 do
   if ! apply_patch $patch ; then
-    echo "Patching failed" >&2
+    echo "Patching failed ($patch.patch)" >&2
     exit 1
   fi
 done

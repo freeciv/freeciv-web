@@ -514,7 +514,9 @@ class Field:
 for (;;) {
   int i;
 
-  dio_get_uint8(&din, &i);
+  if (!dio_get_uint8(&din, &i)) {
+    break;
+  }
   if(i == 255) {
     break;
   }

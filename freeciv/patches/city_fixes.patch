@@ -1,10 +1,10 @@
 diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2012-07-16 02:51:14.000000000 +0300
-+++ freeciv/common/packets.def	2012-07-16 02:51:20.000000000 +0300
-@@ -543,10 +543,10 @@
-   BOOL diplomat_investigate;
+--- freeciv/common/packets.def	2012-09-02 02:23:30.000000000 +0300
++++ freeciv/common/packets.def	2012-09-02 02:28:44.000000000 +0300
+@@ -582,10 +582,10 @@
    BOOL walls;
-   
+   SINT8 city_image;
+ 
 -  WORKLIST worklist;
 +  #WORKLIST worklist;
  
@@ -15,9 +15,9 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    STRING name[MAX_LEN_NAME];
  end
  
-@@ -563,7 +563,7 @@
-   BOOL happy;
-   BOOL unhappy;
+@@ -604,7 +604,7 @@
+ 
+   SINT8 city_image;
  
 -  BV_IMPRS improvements;
 +  STRING improvements[MAX_LEN_MSG];
@@ -25,9 +25,9 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  end
  
 diff -Nurd -X.diff_ignore freeciv/configure.ac freeciv/configure.ac
---- freeciv/configure.ac	2012-07-16 02:48:57.000000000 +0300
-+++ freeciv/configure.ac	2012-07-16 02:52:19.000000000 +0300
-@@ -847,7 +847,7 @@
+--- freeciv/configure.ac	2012-09-02 02:20:50.000000000 +0300
++++ freeciv/configure.ac	2012-09-02 02:27:38.000000000 +0300
+@@ -1007,7 +1007,7 @@
  
  dnl Checks for additional server libraries:
  if test "x$server" = "xyes"; then
@@ -37,9 +37,9 @@ diff -Nurd -X.diff_ignore freeciv/configure.ac freeciv/configure.ac
      dnl Some systems (e.g., BeOS) need this lib
      AC_CHECK_LIB(bind, gethostbyaddr, SERVER_LIBS="-lbind $SERVER_LIBS")
 diff -Nurd -X.diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
---- freeciv/server/citytools.c	2012-07-16 02:48:33.000000000 +0300
-+++ freeciv/server/citytools.c	2012-07-16 02:51:20.000000000 +0300
-@@ -1730,7 +1730,7 @@
+--- freeciv/server/citytools.c	2012-09-02 02:19:14.000000000 +0300
++++ freeciv/server/citytools.c	2012-09-02 02:27:38.000000000 +0300
+@@ -1727,7 +1727,7 @@
    packet->happy = pdcity->happy;
    packet->unhappy = pdcity->unhappy;
  
@@ -48,7 +48,7 @@ diff -Nurd -X.diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
  }
  
  /**************************************************************************
-@@ -1948,6 +1948,7 @@
+@@ -1951,6 +1951,7 @@
  {
    int i;
    int ppl = 0;
@@ -56,7 +56,7 @@ diff -Nurd -X.diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
  
    packet->id=pcity->id;
    packet->owner = player_number(city_owner(pcity));
-@@ -2019,7 +2020,7 @@
+@@ -2041,7 +2042,7 @@
    packet->shield_stock = pcity->shield_stock;
    packet->pollution = pcity->pollution;
    packet->illness_trade = pcity->illness_trade;
@@ -65,7 +65,7 @@ diff -Nurd -X.diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
  
    packet->production_kind = pcity->production.kind;
    packet->production_value = universal_number(&pcity->production);
-@@ -2035,7 +2036,7 @@
+@@ -2057,7 +2058,7 @@
    packet->caravan_shields=pcity->caravan_shields;
    packet->last_turns_shield_surplus = pcity->last_turns_shield_surplus;
  
@@ -74,9 +74,9 @@ diff -Nurd -X.diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
    packet->diplomat_investigate=dipl_invest;
  
    packet->airlift = pcity->airlift;
-@@ -2045,12 +2046,13 @@
- 
+@@ -2068,12 +2069,13 @@
    packet->walls = city_got_citywalls(pcity);
+   packet->city_image = get_city_bonus(pcity, EFT_CITY_IMAGE);
  
 -  BV_CLR_ALL(packet->improvements);
    improvement_iterate(pimprove) {

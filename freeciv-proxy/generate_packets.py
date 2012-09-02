@@ -958,7 +958,7 @@ class Packet:
         self.type=mo.group(1)
         self.name=self.type.lower()
         self.type_number=int(mo.group(2))
-        assert 0<=self.type_number<=255
+        assert 0<=self.type_number<=65535
         dummy=mo.group(3)
 
         del lines[0]

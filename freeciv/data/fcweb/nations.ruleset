@@ -1,0 +1,23 @@
+; Modifying this file:
+; You should not modify this file except to make bugfixes or
+; for other "maintenance".  If you want to make custom changes
+; you should create a new datadir subdirectory and copy this file
+; into that directory, and then modify that copy.  Then use the
+; command "rulesetdir <mysubdir>" in the server to have freeciv
+; use your new customized file.
+
+[datafile]
+description="Freeciv-web nations data"
+options="+Freeciv-ruleset-Devel-2012.Feb.28"
+
+[compatibility]
+; Initial government for all the nations that do not
+; have it explicitly defined
+default_government = "Despotism"
+
+[default_traits]
+;expansionist = 50
+;trader = 50
+aggressive = 150
+
+*include "default/nationlist.ruleset"

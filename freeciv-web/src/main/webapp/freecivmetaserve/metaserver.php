@@ -37,6 +37,7 @@ $posts = array(
   "state",
   "topic",
   "message",
+  "type",
   "serverid",
   "available",
   "humans",
@@ -66,6 +67,7 @@ $sqlvars = array(
   "state",
   "topic",
   "message",
+  "type",
   "available",
   "humans",
   "serverid"
@@ -127,6 +129,9 @@ if ( isset($port) ) {
   }
   if (isset($message)) {
     $message = addneededslashes($message); /* escape stuff to go into the database */
+  }
+  if (isset($type)) {
+    $type = addneededslashes($type); /* escape stuff going to database */
   }
   if (isset($serverid)) {
     $serverid = addneededslashes($serverid); /* escape stuff to go into the database */
@@ -265,7 +270,7 @@ if ( isset($port) ) {
   foreach ($verkeys as $key) {
     $output .= "$key=\"" . version_by_Tag("$key") . "\"\n";
   }
-  $stmt="select * from servers where message like '%Multiplayer%' order by host,port asc";
+  $stmt="select * from servers order by host,port asc";
   $res = fcdb_exec($stmt);
   $nr = fcdb_num_rows($res);
   $nservers=0;
@@ -473,7 +478,7 @@ if ( isset($port) ) {
       }
     } else {
        print "<h1>Freeciv.net single-player games</h1>\n";
-      $stmt="select host,port,version,patches,state,message,unix_timestamp()-unix_timestamp(stamp), IFNULL((select user from players p where p.hostport =  CONCAT(s.host ,':',s.port) and p.type = 'Human' Limit 1 ), 'none') as player, IFNULL((select flag from players p where p.hostport =  CONCAT(s.host ,':',s.port) and p.type = 'Human' Limit 1 ), 'none') as flag, (select value from variables where name = 'turn' and hostport = CONCAT(s.host ,':',s.port)) as turn, (select value from variables where name = 'turn' and hostport = CONCAT(s.host ,':',s.port)) + 0 as turnsort from servers s where topic = 'Singleplayer' and state = 'Running' order by turnsort desc";
+      $stmt="select host,port,version,patches,state,message,unix_timestamp()-unix_timestamp(stamp), IFNULL((select user from players p where p.hostport =  CONCAT(s.host ,':',s.port) and p.type = 'Human' Limit 1 ), 'none') as player, IFNULL((select flag from players p where p.hostport =  CONCAT(s.host ,':',s.port) and p.type = 'Human' Limit 1 ), 'none') as flag, (select value from variables where name = 'turn' and hostport = CONCAT(s.host ,':',s.port)) as turn, (select value from variables where name = 'turn' and hostport = CONCAT(s.host ,':',s.port)) + 0 as turnsort from servers s where type = 'Singleplayer' and state = 'Running' order by turnsort desc";
       $res = fcdb_exec($stmt);
       $nr = fcdb_num_rows($res);
       if ( $nr > 0 ) {
@@ -541,7 +546,7 @@ if ( isset($port) ) {
 
       print "<br><br>";
       print "<h1>Freeciv.net multiplayer games around the world</h1><br />\n";
-      $stmt="select host,port,version,patches,state,message,unix_timestamp()-unix_timestamp(stamp), (select value from variables where name = 'turn' and hostport = CONCAT(s.host ,':',s.port)) as turn from servers s where topic = 'Multiplayer' order by state desc";
+      $stmt="select host,port,version,patches,state,message,unix_timestamp()-unix_timestamp(stamp), (select value from variables where name = 'turn' and hostport = CONCAT(s.host ,':',s.port)) as turn from servers s where type = 'Multiplayer' order by state desc";
       $res = fcdb_exec($stmt);
       $nr = fcdb_num_rows($res);
       if ( $nr > 0 ) {

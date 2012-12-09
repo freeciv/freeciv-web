@@ -15,7 +15,7 @@ CREATE TABLE players (
   type varchar(10) default NULL,
   host varchar(255) default 'unknown',
   PRIMARY KEY  (hostport,name)
-) TYPE=HEAP MAX_ROWS=8192;
+) MAX_ROWS=8192;
 
 --
 -- Table structure for table `servers`
@@ -30,12 +30,13 @@ CREATE TABLE servers (
   state varchar(20) default 'Pregame',
   topic varchar(255) default 'none',
   message varchar(255) default 'none',
-  stamp timestamp(14) NOT NULL,
+  type varchar(20) default NULL,
+  stamp timestamp NOT NULL,
   available int(11) default '0',
   humans int(11) default '-1',
   serverid varchar(255) default NULL,
   PRIMARY KEY  (host,port)
-) TYPE=HEAP MAX_ROWS=256;
+) MAX_ROWS=256;
 
 --
 -- Table structure for table `variables`
@@ -46,5 +47,4 @@ CREATE TABLE variables (
   name varchar(64) NOT NULL default '',
   value varchar(64) default NULL,
   PRIMARY KEY  (hostport,name)
-) TYPE=MyISAM;
-
+);

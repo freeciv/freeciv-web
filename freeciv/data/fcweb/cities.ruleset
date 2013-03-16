@@ -78,20 +78,20 @@ per turn.\
 
 [parameters]
 add_to_size_limit  = 8		; cities >= this cannot be added to.
-angry_citizens = 1              ; set to zero to disable angry citizens
+angry_citizens = TRUE           ; set to FALSE to disable angry citizens
 celebrate_size_limit = 3        ; cities >= can celebrate
 
-changable_tax = 1		; set to zero to disallow changing of tax rates
+changable_tax = TRUE            ; set to FALSE to disallow changing of tax rates
 ;forced_science = 0		; set these fields when changeable_tax is turned off
 ;forced_luxury = 100
 ;forced_gold = 0
 
-vision_reveal_tiles = 1		; civ1 & 2 default zero
+vision_reveal_tiles = TRUE      ; civ1 & 2 default FALSE
 
 pop_report_zeroes = 4           ; Population in reports in tens of thousands
 
 [citizen]
-nationality   = 0               ; account for the nationality of the citizens
+nationality   = FALSE           ; account for the nationality of the citizens
 convert_speed = 50              ; base probability 50/1000 -> once every 20 turns
 
 ; /* <-- avoid gettext warnings

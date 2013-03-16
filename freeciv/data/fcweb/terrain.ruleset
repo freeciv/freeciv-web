@@ -14,10 +14,10 @@ description="Freeciv-web terrain data"
 options="+Freeciv-ruleset-Devel-2012.Feb.28"
 
 [options]
-may_road=1           ; 0 means no, 1 means yes
-may_irrigate=1       ; 0 means no, 1 means yes
-may_mine=1           ; 0 means no, 1 means yes
-may_transform=1      ; 0 means no, 1 means yes
+may_road = TRUE           ; FALSE means no, TRUE means yes
+may_irrigate = TRUE       ; FALSE means no, TRUE means yes
+may_mine = TRUE           ; FALSE means no, TRUE means yes
+may_transform = TRUE      ; FALSE means no, TRUE means yes
 
 [control]
 ; Names for custom terrain flags.
@@ -44,7 +44,7 @@ lake_max_size = 0
 min_start_native_area = 0
 
 ; There is no resources in the middle of the oceans, only near coast
-ocean_resources = 0
+ocean_resources = FALSE
 
 ; special movement costs for rivers:
 ;   0 - normal movement cost for rivers (matches Civ1)
@@ -960,8 +960,8 @@ shield      = 3 ; glacier used to have 4
 ;                           present, 'name' is used. Since the name used in
 ;                           savegames must not change, use this when renaming a
 ;                           base after a ruleset has been released.
-; buildable               = Can base be built? Defaults to true
-; pillageable             = Can base be pillaged? Defaults to true
+; buildable               = Can base be built? Defaults to TRUE
+; pillageable             = Can base be pillaged? Defaults to TRUE
 ; graphic                 = tag specifing preferred graphic
 ; graphic_alt             = tag for alternate graphic if preferred graphic is not 
 ;                           present. Can use eg "-" for no alternate graphic.
@@ -1070,7 +1070,7 @@ reqs           =
     { "type", "name", "range"
       "TerrainClass", "Land", "Local"
     }
-buildable      = 0
+buildable      = FALSE
 build_time     = 0
 gui_type       = "Other"
 helptext       = _("\
@@ -1102,8 +1102,8 @@ They have no effect on gameplay.\
 ; build_time              = how many movement points it takes to build this road. Value of
 ;                           0 means that terrain specific value is used instead.
 ; defense_bonus           = Percent added to defense
-; buildable               = Can road be built? Defaults to true
-; pillageable             = Can road be pillaged? Defaults to true
+; buildable               = Can road be built? Defaults to TRUE
+; pillageable             = Can road be pillaged? Defaults to TRUE
 ; food_incr               = food production added to tile
 ; shield_incr             = shield production added to tile
 ; trade_incr              = trade production added to tile
@@ -1127,6 +1127,7 @@ They have no effect on gameplay.\
 ;                           matter about reqs.
 ;   - "PreventsOtherRoads" = Other roads with "RequiresBridge" flag cannot be built
 ;                            to same tile after this road.
+;   - "Natural"           = Not infrastructure road
 ; helptext                = optional help text string; should escape all raw 
 ;                           newlines so that xgettext parsing works
 ;

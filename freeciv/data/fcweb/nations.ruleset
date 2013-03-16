@@ -15,6 +15,10 @@ options="+Freeciv-ruleset-Devel-2012.Feb.28"
 ; have it explicitly defined
 default_government = "Despotism"
 
+; List of names of governments that do not exist in ruleset,
+; but which are allowed to be mentioned in nation rulesets
+ignore_govs = "Fundamentalism"
+
 [default_traits]
 ;expansionist = 50
 ;trader = 50

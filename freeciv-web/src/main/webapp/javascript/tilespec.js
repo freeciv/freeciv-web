@@ -898,7 +898,7 @@ function get_tile_river_sprite(ptile)
       }
 
     }
-    return {"key" : "tx.s_river_" + river_str};
+    return {"key" : "river_s_" + river_str};
   }
 
   var pterrain = tile_terrain(ptile);
@@ -907,7 +907,7 @@ function get_tile_river_sprite(ptile)
       var dir = cardinal_tileset_dirs[i];
       var checktile = mapstep(ptile, dir);
       if (checktile != null && contains_special(checktile, S_RIVER)) {
-        return {"key" : "tx.river_outlet_" + dir_get_tileset_name(dir)};
+        return {"key" : "river_outlet_" + dir_get_tileset_name(dir)};
       }
     }
   }

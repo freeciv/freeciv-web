@@ -105,6 +105,8 @@ veteran_move_bonus = 0, 0, 0, 0
 ;                       This applies for both attacking from transport or cities. If only
 ;                       some unit types of the class should get this property, use type flag
 ;                       "Marines"
+; "KillCitizen"       = Upon successful attack against a city unit kills one citizen.
+;                       There's server setting, as well as effects, to disable this.
 ;
 ; */ <-- avoid gettext warnings
 
@@ -123,7 +125,7 @@ min_speed     = 1
 hp_loss_pct   = 0
 flags         = "TerrainSpeed", "DamageSlows", "CanOccupyCity", "BuildAnywhere",
                 "CollectRansom", "ZOC", "CanFortify", "CanPillage",
-                "TerrainDefense"
+                "TerrainDefense", "KillCitizen"
 
 [unitclass_sea]
 ; /* TRANS: Unit class: used adjectivally */
@@ -225,8 +227,14 @@ flags         = "Unreachable", "DoesntOccupyTile"
 ;
 ; ** Bonuses **
 ;
-; "DefenseMultiplier" = Add defense value 'value' times. Value of 1 means multiplication
-;                       by 2, value 2 by 3...
+; "DefenseMultiplier" = Multiply defense value (1 + 'value') times.
+;                       Value of 1 means multiplication by 2, value 2 by 3...
+;                       Bonus is defined in defenders entry.
+; "DefenseDivider"    = Divide defense value with (1 + 'value').
+;                       Bonus is defined in attackers entry.
+; "FirePower1"        = Defender firepower is reduced to value 1 when
+;                       ever this has non-zero value.
+;                       Bonus is defined in attackers entry.
 ;
 ;
 ; ** Flags **

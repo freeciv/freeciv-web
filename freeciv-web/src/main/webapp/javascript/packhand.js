@@ -747,6 +747,11 @@ function handle_ruleset_unit_bonus(packet)
   /* TODO: implement */
 }
 
+function handle_ruleset_terrain_flag(packet)
+{
+  /* TODO: implement */
+}
+
 function handle_scenario_info(packet) 
 {
   /* TODO: implement*/

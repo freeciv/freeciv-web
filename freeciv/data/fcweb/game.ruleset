@@ -160,12 +160,6 @@ total_factor = 100
 slow_invasions = 1
 
 [combat_rules]
-;If killstack is set to 1, each time a defender unit lost in combat, and is
-;not inside a city, fortress or airbase, all units in the same tile are
-;destroyed along with the defender. This is the freeciv default.
-;If this options is set to 0, only the defender unit is destroyed.
-killstack = 1
-
 ;If tired_attack is set to 1, units that attack with only 1/3 or 2/3 moves
 ;left will have their attack power reduced by 2/3 or 1/3 respectively. If
 ;this is set to 0 units will attack with full strength even if they have
@@ -256,14 +250,18 @@ effects        = "ReducePopulation", "Fallout"
 ;
 ; For each of the trade route types; "National", "NationalIC", "IN", "INIC":
 ; "pct" - Trade income %. If this is 0, trade route cannot be established at all
+; "cancelling" - What to do to previously established traderoutes when they turn illegal
+;                "Active"   - Keep them active
+;                "Inactive" - Keep them inactive
+;                "Cancel"   - Cancel them altogether
 ;
 [trade]
 settings =
-  { "type",       "pct"
-    "National",   100
-    "NationalIC", 200
-    "IN",         200
-    "INIC",       400
+  { "type",       "pct", "cancelling"
+    "National",   100,   "Cancel"
+    "NationalIC", 200,   "Cancel"
+    "IN",         200,   "Cancel"
+    "INIC",       400,   "Cancel"
   }
 
 [playercolors]

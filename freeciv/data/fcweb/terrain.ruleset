@@ -19,9 +19,11 @@ may_irrigate=1       ; 0 means no, 1 means yes
 may_mine=1           ; 0 means no, 1 means yes
 may_transform=1      ; 0 means no, 1 means yes
 
-[flags]
+[control]
 ; Names for custom terrain flags.
-;names = ""
+;flags =
+;  { "name", "helptxt"
+;  }
 
 [parameters]
 
@@ -35,7 +37,11 @@ land_channel_requirement = 10
 
 ; Bodies of water up to this size are considered freshwater lakes, if there is
 ; also terrain type(s) with flag "FreshWater" in the ruleset.
-lake_max_size = 0 
+lake_max_size = 0
+
+; How many native tiles first startunit must be able to reach.
+; 0 to disable check.
+min_start_native_area = 0
 
 ; There is no resources in the middle of the oceans, only near coast
 ocean_resources = 0
@@ -1088,8 +1094,14 @@ They have no effect on gameplay.\
 ; move_cost               = how much movement it takes to to travel
 ;                           via this road. Value of 3 indicates full
 ;                           movement point.
+; move_mode               = how movement costs are applied
+;   - "NoBonus"    = Road gives no movement bonuses
+;   - "Cardinal"   = Road cost applies only on cardinal moves
+;   - "Relaxed"    = Road cost is normal for cardinal, double for diagonal moves
+;   - "FastAlways" = Road cost applies always between two tiles with the roads (default)
 ; build_time              = how many movement points it takes to build this road. Value of
 ;                           0 means that terrain specific value is used instead.
+; defense_bonus           = Percent added to defense
 ; buildable               = Can road be built? Defaults to true
 ; pillageable             = Can road be pillaged? Defaults to true
 ; food_incr               = food production added to tile
@@ -1110,9 +1122,11 @@ They have no effect on gameplay.\
 ;                           appearance only
 ;   - "RequiresBridge"    = Road cannot be built to river tiles without
 ;                           appropriate technologies
-;   - "CardinalOnly"      = Only cardinal moves are possible along the road
+;   - "CardinalOnly"      = Roads are drawn in cardinal directions only
 ;   - "AlwaysOnCityCenter" = City Center tiles always have this road type no
 ;                           matter about reqs.
+;   - "PreventsOtherRoads" = Other roads with "RequiresBridge" flag cannot be built
+;                            to same tile after this road.
 ; helptext                = optional help text string; should escape all raw 
 ;                           newlines so that xgettext parsing works
 ;

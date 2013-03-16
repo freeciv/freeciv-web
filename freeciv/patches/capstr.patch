@@ -1,12 +1,12 @@
 diff -Nurd -X.diff_ignore freeciv/fc_version freeciv/fc_version
---- freeciv/fc_version	2012-09-11 17:29:58.000000000 +0300
-+++ freeciv/fc_version	2012-09-11 17:36:55.000000000 +0300
+--- freeciv/fc_version	2013-03-16 14:31:42.613041174 +0200
++++ freeciv/fc_version	2013-03-16 14:32:43.033039847 +0200
 @@ -30,7 +30,7 @@
  #   - Avoid adding a new mandatory capability to the development branch for
  #     as long as possible.  We want to maintain network compatibility with
  #     the stable branch for as long as possible.
--NETWORK_CAPSTRING_MANDATORY="+Freeciv.Devel-2.5-2012.Sep.10"
-+NETWORK_CAPSTRING_MANDATORY="+Freeciv.Web.Devel-2.5-2012.Sep.11"
+-NETWORK_CAPSTRING_MANDATORY="+Freeciv.Devel-2.5-2012.Nov.22"
++NETWORK_CAPSTRING_MANDATORY="+Freeciv.Web.Devel-2.5-2013.Mar.16"
  NETWORK_CAPSTRING_OPTIONAL=""
  
  FREECIV_DISTRIBUTOR=""

@@ -18,11 +18,16 @@
 description="Freeciv-web unit data"
 options="+Freeciv-ruleset-Devel-2012.Feb.28"
 
-[flags]
+[control]
 ; Names for custom unit type flags.
-names = "Airbase", "Transform"
-; Airbase - can build airbases. See airbase definition in terrain.ruleset
-; Transform - can transform terrain.
+flags =
+  { "name", "helptxt"
+    "Airbase", _("Can build Airbases.")
+    "Transform", _("Can transform terrain.")
+    "AirUnit", _("Very bad at attacking AEGIS.")
+    "Horse", _("Attack value halved when attacking Pikemen.")
+    "Helicopter", _("Defends very badly against Fighters.")
+  }
 
 [veteran_system]
 ; What are the names of the levels?
@@ -193,6 +198,10 @@ flags         = "Unreachable", "DoesntOccupyTile"
 ; city_size     = Initial size of the cities Settlers type unit builds
 ; targets       = list of unit classes this unit can attack against even
 ;                 if they have Unreachable unit class flag
+; bonuses       = definitions of combat bonuses against specific other units
+; bonuses.flag  = flag of the unit that bonus applies against
+; bonuses.type  = type of the bonus. See below
+; bonuses.value = value of the bonus. Sum of these is used if multiple apply.
 ; flags         = special flag strings
 ;
 ; veteran_names = Special veteran level for this unit. See the definitions in
@@ -213,6 +222,13 @@ flags         = "Unreachable", "DoesntOccupyTile"
 ; helptext	= optional help text string; should escape all raw newlines 
 ;		  so that xgettext parsing works
 ;
+;
+; ** Bonuses **
+;
+; "DefenseMultiplier" = Add defense value 'value' times. Value of 1 means multiplication
+;                       by 2, value 2 by 3...
+;
+;
 ; ** Flags **
 ;
 ; "HelpWonder"	= can help build wonders
@@ -222,11 +238,8 @@ flags         = "Unreachable", "DoesntOccupyTile"
 ;                 peaceful borders; DoesntOccupyTile
 ; "IgTer"	= ignore terrain/road/rail, treat every tile as 1/3 move cost
 ; "OneAttack"	= can only make a single attack, regardless of movement points
-; "Pikemen"	= double defence power against "Horse" flag units
-; "Horse"	= (no effect)
 ; "IgWall"	= ignore effect of city walls
 ; "FieldUnit"	= cause unhappiness even when not being aggressive
-; "AEGIS"	= fivefold increased defence against "AirUnit" attacks
 ; "Marines"	= can attack from non-native tile (from transport or city)
 ; "Partial_Invis" = visible only to adjancent units; does not hide transported
 ;		  units other than missiles
@@ -270,9 +283,6 @@ flags         = "Unreachable", "DoesntOccupyTile"
 ; "BadCityDefender"	= if attacked while in a city, firepower is set to 1
 ;		  and firepower of attacker is doubled (the Pearl Harbour
 ;                 rule)
-; "Helicopter"  = defends very badly against "Fighter" units
-; "AirUnit"     = very bad at attacking "AEGIS" units
-; "Fighter"     = good attacker against "Helicopter" units
 ; "BarbarianOnly" = only barbarians can build this unit
 ; "Shield2Gold" = Switch from shield upkeep to gold upkeep possible
 ; "Capturable"  = can be captured by units with "Capturer" flag
@@ -586,7 +596,11 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "Pikemen"
+bonuses       =
+   { "flag", "type", "value"
+     "Horse", "DefenseMultiplier", 1
+   }
+flags         = ""
 roles         = "DefendGood", "FirstBuild"
 helptext      = _("\
 Equipped with long pikes, Pikemen replaces Phalanx\
@@ -1180,8 +1194,13 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-targets       = "Air", "Missile" 
-flags         = "AirUnit", "Fighter"
+targets       = "Air", "Missile"
+bonuses       =
+   { "flag", "type", "value"
+     "Helicopter", "DefenseDivider", 1
+     "Helicopter", "Firepower1", 1
+   }
+flags         = "AirUnit"
 roles         = ""
 helptext      = _("\
 Fighters are your first airborne units. They can\
@@ -1283,7 +1302,12 @@ uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
 targets       = "Air", "Missile"
-flags         = "Partial_Invis", "AirUnit", "Fighter"
+bonuses       =
+   { "flag", "type", "value"
+     "Helicopter", "DefenseDivider", 1
+     "Helicopter", "Firepower1", 1
+   }
+flags         = "Partial_Invis", "AirUnit"
 roles         = ""
 helptext      = _("\
 An improved Fighter, with improved attack and a higher movement\
@@ -1581,7 +1605,11 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "AEGIS", "BadCityDefender"
+bonuses       =
+   { "flag", "type", "value"
+     "AirUnit", "DefenseMultiplier", 4
+   }
+flags         = "BadCityDefender"
 roles         = "DefendGood"
 helptext      = _("\
 The AEGIS Cruiser is equipped with an advanced\

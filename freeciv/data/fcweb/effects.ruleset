@@ -844,6 +844,7 @@ nreqs   =
     { "type", "name", "range"
       "UnitFlag", "NonMil", "Local"
       "UnitFlag", "NoVeteran", "Local"
+      "Building", "Barracks", "City"
     }
 
 [effect_barracks_ii_1]
@@ -867,6 +868,8 @@ nreqs   =
     { "type", "name", "range"
       "UnitFlag", "NonMil", "Local"
       "UnitFlag", "NoVeteran", "Local"
+      "Building", "Barracks", "City"
+      "Building", "Barracks II", "City"
     }
 
 [effect_barracks_iii_1]

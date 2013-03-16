@@ -50,13 +50,13 @@ ocean_resources = 0
 ;   3 - 1/3 movement cost for any river to river move (classic Freeciv)
 river_move_mode=1
 
-; percent added to defense if tile is Civ2-style river
+; percent added to defense if tile is river
 river_defense_bonus=50
 
-; amount added to trade production if tile is Civ2-style river
+; amount added to trade production if tile is river
 river_trade_incr=1
 
-; help text for Civ2-style rivers
+; help text for rivers
 river_help_text=_("\
 Any land terrain type may have a River on it.  A River adds 1\
  trade to the resources produced by that tile.  It also increases a tile's\
@@ -1091,6 +1091,7 @@ They have no effect on gameplay.\
 ; build_time              = how many movement points it takes to build this road. Value of
 ;                           0 means that terrain specific value is used instead.
 ; buildable               = Can road be built? Defaults to true
+; pillageable             = Can road be pillaged? Defaults to true
 ; food_incr               = food production added to tile
 ; shield_incr             = shield production added to tile
 ; trade_incr              = trade production added to tile
@@ -1099,12 +1100,11 @@ They have no effect on gameplay.\
 ; trade_bonus             = percent added to trade production
 ; compat_special          = road type used in old savegames with just two road specials:
 ;                           "Road", "Railroad", or "None"
-; native_to               = List of unit classes that consider tile
-;                           with this road native even if terrain is not
+; native_to               = List of unit classes that can use this road.
 ; hidden_by               = List of road types that will make this road
 ;                           type not to show on UI if both present.
 ; flags
-;   - "NativeTile"        = Units consider tile native regardless of terrain
+;   - "NativeTile"        = Native units consider tile native regardless of terrain
 ;   - "ConnectLand"       = Roads on Oceanic tiles are drawn to connect to adjacent
 ;                           Land tiles even if they have no road. This affects
 ;                           appearance only

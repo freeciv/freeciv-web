@@ -6,8 +6,8 @@
 <h1>Overview</h1>
 <div id="bodyContent">
 <div id="contentSub">
-<p>Welcome to the Freeciv.net Game Manual! This document explains the
-standard rules under which Freeciv.net is played. If you need other
+<p>Welcome to the Freeciv-web Game Manual! This document explains the
+standard rules under which Freeciv-web is played. If you need other
 information, like how to run the game on your machine, or what windows
 and menus it will present on your screen, you may want to browse the
 other manuals and tutorials that are available. <br>
@@ -16,13 +16,13 @@ other manuals and tutorials that are available. <br>
 sections, which you can choose between in the tab menu on top of this
 page.<br>
 </p>
-<p>This manual covers the latest stable version of Freeciv.net, which
-is mostly compatible with Freeciv 2.x.&nbsp;
+<p>This manual covers the latest stable version of Freeciv-web, which
+is mostly compatible with Freeciv 2.5.&nbsp;
 </p>
 <a id="Overview" name="Overview" rel="nofollow"></a>
 <h3><span class="editsection"><a id="Overview" name="Overview"
  rel="nofollow"></a></span> <span class="mw-headline">Overview</span></h3>
-<p>In Freeciv.net you compete against several opponents to found
+<p>In Freeciv-web you compete against several opponents to found
 cities, use them to support a military and economy, and finally to
 complete an empire that survives all encounters with its neighbors to
 emerge victorious. Each opponent may be either another human or be
@@ -78,14 +78,14 @@ highest score is the winner. </li>
 <a id="Variations" name="Variations" rel="nofollow"></a>
 <h3><span class="editsection"><a id="Variations" name="Variations"
  rel="nofollow"></a></span><span class="mw-headline">Variations</span></h3>
-<p>In Freeciv.net there are three rules levels:
+<p>In Freeciv-web there are three rules levels:
 </p>
 <ul>
   <li>hardcoded rules </li>
   <li>rules from the ruleset </li>
   <li>rules from server options. </li>
 </ul>
-<p>This manual describes the basic rules which Freeciv.net supports out
+<p>This manual describes the basic rules which Freeciv-web supports out
 of the box. After learning this version of the rules you will be able
 to play in other situations by learning the ways in which those
 configurations differ from the vanilla rules described here.&nbsp;

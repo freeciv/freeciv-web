@@ -97,10 +97,10 @@ function civclient_init()
   observe_game_check();
 
   if (observing) {
-    show_dialog_message("Welcome to Freeciv.net", 
+    show_dialog_message("Welcome to Freeciv-web", 
       "Please wait while you are being logged in as an observer in the game.");
   } else if (!is_iphone()) { 
-    show_intro_dialog("Welcome to Freeciv.net", 
+    show_intro_dialog("Welcome to Freeciv-web", 
       "You have now joined the game. Before the game begins, " +
       "you can customize game options or wait for more players " +
       "to join the game.  <br><br>" +  

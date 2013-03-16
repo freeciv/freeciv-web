@@ -135,7 +135,7 @@ class CivCom(Thread):
   def send_to_civserver(self, net_packet_json):
 #    header = packExt('>HH', len(net_packet_json), chr(0));
     header = packExt('>HH', len(net_packet_json), 0);
-    civ_packet = header + str(net_packet_json);
+    civ_packet = header + str(net_packet_json) + '\0';
     try:
       # Send packet to civserver
       self.socket.sendall(civ_packet)

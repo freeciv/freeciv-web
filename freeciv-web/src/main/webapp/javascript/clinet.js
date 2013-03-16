@@ -13,8 +13,6 @@
 
 var civwebserver_url_base = "/civ";
 
-var websocket_enabled = true;
-
 var error_shown = false;
 var syncTimerId = -1;
 var isWorking = false;
@@ -30,21 +28,8 @@ var ws = null;
 function network_init()
 {
   civwebserver_url = civwebserver_url_base + "?p=" + civserverport + "&u=" + username;
-  
-  websocket_enabled = $.jStorage.get("websocket_enabled");
- 
-  if (websocket_enabled) {
-    network_websocket_init();
 
-  } else {
-    syncTimerId = setInterval("sync_civclient()", 800);
- 
-     $(document).ajaxComplete(function(){ 
-       isWorking = false;
-     });
-
-  }
-  
+  network_websocket_init();
 }
 
 
@@ -120,12 +105,11 @@ function sync_civclient()
 ****************************************************************************/
 function send_request(packet_payload) 
 {
-  if (websocket_enabled) {
-    ws.send(packet_payload);
-  } else {
-    $.post(civwebserver_url, packet_payload, client_handle_packet, "json");
+  ws.send(packet_payload);
+
+  if (debug_active) {
+    clinet_last_send = new Date().getTime();
   }
-  if (debug_active) clinet_last_send = new Date().getTime();
 }
 
 

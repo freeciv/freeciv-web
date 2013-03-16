@@ -215,9 +215,7 @@ function pregame_settings()
 	  "<option value='1'>Easy</option>" +
           "<option value='2'>Normal</option>" +
           "<option value='3'>Hard</option>" +
-	  "</select></td></tr>" +
-	  "<tr><td>Network: HTML5 WebSocket support:</td>" +
-	  "<td><input type='CHECKBOX' name='websockets' id='websockets_enable'></td></tr></table><br>" +
+	  "</select></td></tr></table><br>" +
 	  "<span id='settings_info'><i>Freeciv.net can be customized using the command line in many other ways also. Type /help in the command line for more information.</i></span>" 
 	  ;
   $(id).html(dhtml);
@@ -239,13 +237,6 @@ function pregame_settings()
   $("#mapsize").val(game_info['mapsize']);
   $("#timeout").val(game_info['timeout']);
   $("#skill_level").val(ai_skill_level);
-
-  var value = $.jStorage.get("websocket_enabled");
-  if(value){
-    $("#websockets_enable").attr('checked', true);
-  } else {
-    $("#websockets_enable").attr('checked', false);
-  }
 
   $(id).dialog('open');		
 
@@ -292,31 +283,6 @@ function pregame_settings()
     var myJSONText = JSON.stringify(test_packet);
     send_request (myJSONText);
   });
-
-
-  $('#websockets_enable').mouseover(function() {
-    $("#settings_info").html("<i>You can choose between running Freeciv.net in the default AJAX mode, or with experimental HTML5 Websockets. " +
-	   "WebSocket is only supported on some modern browsers. WebSockets requires restarting the game once enabled.</i>");
-  });
-
-  $('#websockets_enable').change(function() {
-    var my_websocket_enabled = $('#websockets_enable').is(':checked');
-    $.jStorage.set("websocket_enabled", my_websocket_enabled);
-    if (my_websocket_enabled) {
-      $("#settings_info").html("<i>You have activated HTML5 WebSocket support in Freeciv.net. " + 
-	      "HTML5 WebSocket support is experiental, and only supported on some browsers. " + 
-	      "<a href='/wireframe.jsp?do=menu'>Restarting Freeciv.net</a> is required to use WebSockets.</i>");
-    } else {
-      $("#settings_info").html("<i>You have activated the default AJAX network mode of Freeciv.net." +
-	      " <a href='/wireframe.jsp?do=menu'>Restarting Freeciv.net</a> is required now.</i>"); 
-    }
-    show_dialog_message("Please restart Freeciv.net", 
-      "You have changed the Websocket support option, and you will have to <a href='/wireframe.jsp?do=menu'>restart Freeciv.net</a> " +
-      "for the change to take effect. Your setting will be stored for future games also.");
-
-
-  });
-
 
 }
 

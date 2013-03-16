@@ -387,7 +387,6 @@ function show_debug_info()
   console.log("Browser useragent: " + navigator.userAgent);
   console.log("jQuery version: " + $().jquery);
   console.log("jQuery UI version: " + $.ui.version);
-  console.log("WebSocket enabled: " + websocket_enabled);
 
   debug_active = true;
   /* Show average network latency PING (server to client, and back). */

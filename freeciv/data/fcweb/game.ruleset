@@ -332,4 +332,5 @@ colorlist =
 set =
   { "name", "value", "lock"
     "autosaves", "", TRUE
+    "topology", "WRAPX", TRUE
   }

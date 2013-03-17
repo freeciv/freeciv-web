@@ -8,7 +8,7 @@
 
 [datafile]
 description="Freeciv-web cities data"
-options="+Freeciv-ruleset-Devel-2012.Feb.28"
+options="+Freeciv-ruleset-Devel-2013.Mar.06"
 
 ; /* <-- avoid gettext warnings
 ;
@@ -93,6 +93,8 @@ pop_report_zeroes = 4           ; Population in reports in tens of thousands
 [citizen]
 nationality   = FALSE           ; account for the nationality of the citizens
 convert_speed = 50              ; base probability 50/1000 -> once every 20 turns
+partisans_pct = 0               ; percentage of own nationality to inspire partisans
+                                ; if 0, original city owner information is used instead
 
 ; /* <-- avoid gettext warnings
 ;

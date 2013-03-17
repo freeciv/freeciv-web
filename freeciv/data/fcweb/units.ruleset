@@ -16,7 +16,7 @@
 
 [datafile]
 description="Freeciv-web unit data"
-options="+Freeciv-ruleset-Devel-2012.Feb.28"
+options="+Freeciv-ruleset-Devel-2013.Mar.06"
 
 [control]
 ; Names for custom unit type flags.
@@ -77,6 +77,8 @@ veteran_move_bonus = 0, 0, 0, 0
 ;                 for unit that has no native Oceanic terrains.
 ; min_speed     = Minimum speed after damage and effects
 ; hp_loss_pct   = Hitpoints lost each turn if unit not in city or airbase
+; non_native_def_pct = Defense power percentage applying when defending on
+;                      non-native terrain (such as ship in harbour)
 ; hut_behavior  = What happens to huts when unit enters tile: "Normal", "Nothing" or
 ;                 "Frighten"
 ; flags         = List of unit class flags

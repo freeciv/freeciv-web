@@ -1,1 +1,1 @@
-Patches are against freeciv revision 22420.
+Patches are against freeciv revision 22520.

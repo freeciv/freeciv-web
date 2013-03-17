@@ -7,7 +7,7 @@
    <artifactId>freeciv-web</artifactId>
    <version>1.0</version>
    <packaging>war</packaging>
-   <name>Freeciv.net Web Client</name>
+   <name>Freeciv-Web Client</name>
 
 
     <repositories>
@@ -27,7 +27,7 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
-            <version>2.4</version>
+            <version>2.5</version>
             <scope>provided</scope>
         </dependency>
 
@@ -41,21 +41,20 @@
         <dependency>
           <groupId>commons-codec</groupId>
           <artifactId>commons-codec</artifactId>
-          <version>1.3</version>
+          <version>1.7</version>
         </dependency> 
-
 
 	<dependency>
 	   <groupId>org.openid4java</groupId>
 	   <artifactId>openid4java</artifactId>
-	   <version>0.9.5</version>
+	   <version>0.9.7</version>
 	</dependency>
 
-	     <dependency>
-	           <groupId>mysql</groupId>
-	           <artifactId>mysql-connector-java</artifactId>
-	           <version>5.1.6</version>
-		 </dependency>
+        <dependency>
+           <groupId>mysql</groupId>
+           <artifactId>mysql-connector-java</artifactId>
+           <version>5.1.9</version>
+        </dependency>
     
 
     	</dependencies>
@@ -67,8 +66,8 @@
     		<plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                   <source>1.6</source>
-                   <target>1.6</target>
+                   <source>2.5.1</source>
+                   <target>2.5.1</target>
                    <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
@@ -76,7 +75,7 @@
       <plugin>
         <groupId>com.samaxes.maven</groupId>
         <artifactId>maven-minify-plugin</artifactId>
-        <version>1.3.5</version>
+        <version>1.3.5.1</version>
         <executions>
           <execution>
             <id>default-minify</id>

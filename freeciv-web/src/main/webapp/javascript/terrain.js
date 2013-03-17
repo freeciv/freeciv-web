@@ -29,8 +29,9 @@ var S_FALLOUT = 6;
 var S_LAST = 7;
 var S_RESOURCE_VALID = S_LAST;
 
-var ROAD_ROAD = 0;
-var ROAD_RAIL = 1;
+var ROAD_ROAD  = 0;
+var ROAD_RAIL  = 1;
+var ROAD_RIVER = 2;
 
 /**************************************************************************
  ...

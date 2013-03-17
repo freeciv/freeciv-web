@@ -2287,7 +2287,7 @@ type    = "Irrig_Possible"
 value   = 1
 reqs    =
     { "type", "name", "range"
-      "Special", "River", "CAdjacent"
+      "Road", "River", "CAdjacent"
     }
 
 [effect_irrigate_src_irrigation]

@@ -1192,3 +1192,36 @@ trade_bonus    = 0
 compat_special = "Railroad"
 native_to      = "Land"
 flags          = "RequiresBridge"
+
+[road_river]
+name           = _("River")
+graphic        = "river"
+graphic_alt    = "-"
+activity_gfx   = "unit.rail"
+act_gfx_alt    = "unit.road"
+buildable      = FALSE
+pillageable    = FALSE
+defense_bonus  = 50
+move_cost      = 1
+move_mode      = "Cardinal"
+food_incr_const   = 0
+shield_incr_const = 0
+trade_incr_const  = 1
+food_incr         = 0
+shield_incr       = 0
+trade_incr        = 0
+food_bonus        = 0
+shield_bonus      = 0
+trade_bonus       = 0
+compat_special = "River"
+native_to      = "Land"
+flags          = "River", "PreventsOtherRoads", "Natural"
+helptext       = _("\
+Any land terrain type may have a River on it.  A River adds 1\
+ trade to the resources produced by that tile.  It also increases a tile's\
+ defense factor by 50%.  Finally, land units may move along a River (but\
+ not diagonally); movement along a River costs only 1/3 of a movement point.\
+"), _("\
+Roads and railroads can only be built on River tiles if your\
+ civilization has learned Bridge Building technology.\
+")

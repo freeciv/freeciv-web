@@ -883,15 +883,17 @@ function get_tile_specials_sprite(ptile)
 ****************************************************************************/
 function get_tile_river_sprite(ptile)
 {
-  if (ptile == null || ptile['special'] == null) return null;
+  if (ptile == null) {
+    return null;
+  }
 
-  if (contains_special(ptile, S_RIVER)) {
+  if (tile_has_road(ptile, ROAD_RIVER)) {
     var river_str = "";
     for (var i = 0; i < num_cardinal_tileset_dirs; i++) {
       var dir = cardinal_tileset_dirs[i];
       var checktile = mapstep(ptile, dir);
       if (checktile 
-          && (contains_special(checktile, S_RIVER) || is_ocean_tile(checktile))) {
+          && (tile_has_road(checktile, ROAD_RIVER) || is_ocean_tile(checktile))) {
         river_str = river_str + dir_get_tileset_name(dir) + "1";
       } else {
         river_str = river_str + dir_get_tileset_name(dir) + "0";
@@ -906,7 +908,7 @@ function get_tile_river_sprite(ptile)
     for (var i = 0; i < num_cardinal_tileset_dirs; i++) {
       var dir = cardinal_tileset_dirs[i];
       var checktile = mapstep(ptile, dir);
-      if (checktile != null && contains_special(checktile, S_RIVER)) {
+      if (checktile != null && tile_has_road(checktile, ROAD_RIVER)) {
         return {"key" : "river_outlet_" + dir_get_tileset_name(dir)};
       }
     }

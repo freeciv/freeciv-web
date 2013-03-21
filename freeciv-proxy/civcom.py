@@ -61,7 +61,7 @@ class CivCom(Thread):
 
 
     # send packet
-    login_packet = "{\"type\":4,\"username\":\"%s\",\"capability\":\"%s\",\"version_label\":\"%s\",\"major_version\":%d,\"minor_version\":%d,\"patch_version\":%d}" %  (self.username, VERSION, VER_INFO, 2, 1, 99);
+    login_packet = "{\"type\":4,\"username\":\"%s\",\"capability\":\"%s\",\"version_label\":\"%s\",\"major_version\":%d,\"minor_version\":%d,\"patch_version\":%d}" %  (self.username, VERSION, VER_INFO, 2, 4, 99);
     self.send_to_civserver(login_packet)
 
     #receive packets from server

@@ -35,7 +35,6 @@ $posts = array(
   "patches",
   "capability",
   "state",
-  "topic",
   "message",
   "type",
   "serverid",
@@ -65,7 +64,6 @@ $sqlvars = array(
   "patches",
   "capability",
   "state",
-  "topic",
   "message",
   "type",
   "available",
@@ -124,9 +122,6 @@ if ( isset($port) ) {
     exit(0); /* toss all entries and exit */
   }
 
-  if (isset($topic)) {
-    $topic = addneededslashes($topic); /* escape stuff to go into the database */
-  }
   if (isset($message)) {
     $message = addneededslashes($message); /* escape stuff to go into the database */
   }
@@ -485,7 +480,7 @@ if ( isset($port) ) {
         print "<br /><table>\n";
         print "<tr id='meta_header'><th class=\"left\">Game Map:</th><th>Game Action:</th>";
         print "<th>State</th><th>Players</th>";
-        print "<th style='width:45%;'>Topic</th>";
+        print "<th style='width:45%;'>Message</th>";
         print "<th>Player</th>\n";
         print "<th>Turn:</th></tr>";
         for ( $inx = 0; $inx < $nr; $inx++ ) {
@@ -553,7 +548,7 @@ if ( isset($port) ) {
 	print "<table>\n";
         print "<tr id='meta_header'><th class=\"left\">Game Map:</th><th>Game Action:</th>";
         print "<th>State</th><th>Players</th>";
-        print "<th style='width:45%;'>Topic</th>";
+        print "<th style='width:45%;'>Message</th>";
         print "<th>Turn:</th></tr>";
 
         for ( $inx = 0; $inx < $nr; $inx++ ) {

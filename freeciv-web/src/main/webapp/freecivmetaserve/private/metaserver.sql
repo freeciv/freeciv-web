@@ -28,7 +28,6 @@ CREATE TABLE servers (
   patches varchar(255) default 'none',
   capability varchar(255) default NULL,
   state varchar(20) default 'Pregame',
-  topic varchar(255) default 'none',
   message varchar(255) default 'none',
   type varchar(20) default NULL,
   stamp timestamp NOT NULL,

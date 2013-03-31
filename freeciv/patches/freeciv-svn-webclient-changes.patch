@@ -1,6 +1,6 @@
 diff -Nurd -X.diff_ignore freeciv/common/connection.c freeciv/common/connection.c
---- freeciv/common/connection.c	2012-08-08 00:18:50.000000000 +0300
-+++ freeciv/common/connection.c	2012-08-08 01:36:57.000000000 +0300
+--- freeciv/common/connection.c	2013-03-31 23:23:07.450844632 +0300
++++ freeciv/common/connection.c	2013-03-31 23:23:38.970843940 +0300
 @@ -240,6 +240,7 @@
  /**************************************************************************
    flush'em
@@ -39,8 +39,8 @@ diff -Nurd -X.diff_ignore freeciv/common/connection.c freeciv/common/connection.
      if (!add_connection_data(pconn, data, len)) {
        log_verbose("cut connection %s due to huge send buffer (2)",
 diff -Nurd -X.diff_ignore freeciv/common/connection.h freeciv/common/connection.h
---- freeciv/common/connection.h	2012-08-08 00:18:50.000000000 +0300
-+++ freeciv/common/connection.h	2012-08-08 01:35:57.000000000 +0300
+--- freeciv/common/connection.h	2013-03-31 23:23:07.434844632 +0300
++++ freeciv/common/connection.h	2013-03-31 23:23:38.970843940 +0300
 @@ -26,7 +26,7 @@
  #include <sys/time.h>
  #endif
@@ -51,8 +51,8 @@ diff -Nurd -X.diff_ignore freeciv/common/connection.h freeciv/common/connection.
  /**************************************************************************
    The connection struct and related stuff.
 diff -Nurd -X.diff_ignore freeciv/common/featured_text.c freeciv/common/featured_text.c
---- freeciv/common/featured_text.c	2012-08-08 01:32:36.000000000 +0300
-+++ freeciv/common/featured_text.c	2012-08-08 01:35:57.000000000 +0300
+--- freeciv/common/featured_text.c	2013-03-31 23:23:07.402844633 +0300
++++ freeciv/common/featured_text.c	2013-03-31 23:23:38.970843940 +0300
 @@ -33,8 +33,8 @@
  
  #include "featured_text.h"
@@ -92,8 +92,8 @@ diff -Nurd -X.diff_ignore freeciv/common/featured_text.c freeciv/common/featured
        }
        if (ptag->color.background[0] != '\0') {
 diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/generate_packets.py
---- freeciv/common/generate_packets.py	2012-08-08 00:18:50.000000000 +0300
-+++ freeciv/common/generate_packets.py	2012-08-08 01:38:24.000000000 +0300
+--- freeciv/common/generate_packets.py	2013-03-31 23:23:07.450844632 +0300
++++ freeciv/common/generate_packets.py	2013-03-31 23:23:38.970843940 +0300
 @@ -27,7 +27,7 @@
  
  ### The following parameters CHANGE the protocol. You have been warned.
@@ -103,7 +103,7 @@ diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/gene
  
  ################# END OF PARAMETERS ####################
  
-@@ -1608,6 +1608,7 @@
+@@ -1639,6 +1639,7 @@
  
  #include "packets.h"
  
@@ -111,7 +111,7 @@ diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/gene
  static genhash_val_t hash_const(const void *vkey, size_t num_buckets)
  {
    return 0;
-@@ -1617,6 +1618,7 @@
+@@ -1648,6 +1649,7 @@
  {
    return TRUE;
  }
@@ -120,8 +120,8 @@ diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/gene
  ''')
  
 diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2012-08-08 01:35:49.000000000 +0300
-+++ freeciv/common/packets.def	2012-08-08 01:35:57.000000000 +0300
+--- freeciv/common/packets.def	2013-03-31 23:23:07.434844632 +0300
++++ freeciv/common/packets.def	2013-03-31 23:24:26.246842903 +0300
 @@ -186,7 +186,7 @@
  type SINT16             = sint16(int)
  type SINT32             = sint32(int)
@@ -133,23 +133,23 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  # typedefs for arrays/structs
 @@ -211,7 +211,7 @@
  type DIPLOMAT_ACTION    = uint8(enum diplomat_actions)
- type DIRECTION          = uint8(enum direction8)
+ type DIRECTION          = sint8(enum direction8)
  type EFFECT_TYPE        = uint8(enum effect_type)
 -type EVENT              = sint16(enum event_type)
 +type EVENT              = sint32(enum event_type)
  type GUI_TYPE           = uint8(enum gui_type)
  type IMPR_GENUS         = uint8(enum impr_genus_id)
  type KNOWN              = uint8(enum known_type)
-@@ -222,7 +222,7 @@
+@@ -221,7 +221,7 @@
+ type REPORT_TYPE        = uint8(enum report_type)
  type REQ_RANGE          = uint8(enum req_range)
  type REQ_TYPE           = uint8(enum universals_n)
- type RIVER_MOVE         = uint8(enum special_river_move)
 -type SPECIAL            = uint16(enum tile_special_type)
 +type SPECIAL            = uint32(enum tile_special_type)
  type SSET_CLASS         = uint8(enum sset_class)
  type SSET_TYPE          = uint8(enum sset_type)
  type ROAD_COMPAT        = uint8(enum road_compat)
-@@ -254,7 +254,7 @@
+@@ -258,7 +258,7 @@
  type CONTINENT          = sint16(Continent_id)
  type GOVERNMENT         = UINT8
  type IMPROVEMENT        = uint8(Impr_type_id)
@@ -158,7 +158,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  type PLAYER             = SINT8
  type RESOURCE           = uint8(Resource_type_id)
  type SPECIALIST         = uint8(Specialist_type_id)
-@@ -1212,8 +1212,9 @@
+@@ -1250,8 +1250,9 @@
  PACKET_RULESET_GAME = 141; sc, lsend
    UINT8 default_specialist;
  
@@ -170,7 +170,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  
    UINT8 veteran_levels;
    STRING veteran_name[MAX_VET_LEVELS:veteran_levels][MAX_LEN_NAME];
-@@ -1526,7 +1527,7 @@
+@@ -1581,7 +1582,7 @@
    UINT16 id; key
    STRING name[MAX_LEN_NAME];
    STRING short_help[MAX_LEN_PACKET]; /* untranslated */
@@ -180,9 +180,9 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  end
  
 diff -Nurd -X.diff_ignore freeciv/server/ruleset.c freeciv/server/ruleset.c
---- freeciv/server/ruleset.c	2012-08-08 01:02:48.000000000 +0300
-+++ freeciv/server/ruleset.c	2012-08-08 01:35:57.000000000 +0300
-@@ -4439,6 +4439,8 @@
+--- freeciv/server/ruleset.c	2013-03-31 23:23:07.514844630 +0300
++++ freeciv/server/ruleset.c	2013-03-31 23:23:38.970843940 +0300
+@@ -5370,6 +5370,8 @@
      misc_p.move_bonus[i] = vlevel->move_bonus;
    }
  
@@ -191,7 +191,7 @@ diff -Nurd -X.diff_ignore freeciv/server/ruleset.c freeciv/server/ruleset.c
    fc_assert(sizeof(misc_p.global_init_techs)
              == sizeof(game.rgame.global_init_techs));
    fc_assert(ARRAY_SIZE(misc_p.global_init_techs)
-@@ -4453,6 +4455,7 @@
+@@ -5384,6 +5386,7 @@
      misc_p.global_init_buildings[i] =
        game.rgame.global_init_buildings[i];
    }
@@ -200,9 +200,9 @@ diff -Nurd -X.diff_ignore freeciv/server/ruleset.c freeciv/server/ruleset.c
    misc_p.default_specialist = DEFAULT_SPECIALIST;
  
 diff -Nurd -X.diff_ignore freeciv/server/settings.c freeciv/server/settings.c
---- freeciv/server/settings.c	2012-08-08 00:18:29.000000000 +0300
-+++ freeciv/server/settings.c	2012-08-08 01:35:57.000000000 +0300
-@@ -4051,7 +4051,7 @@
+--- freeciv/server/settings.c	2013-03-31 23:23:07.466844631 +0300
++++ freeciv/server/settings.c	2013-03-31 23:23:38.974843940 +0300
+@@ -4111,7 +4111,7 @@
      sz_strlcpy(setting.name, setting_name(pset));
      /* Send untranslated strings to client */
      sz_strlcpy(setting.short_help, setting_short_help(pset));

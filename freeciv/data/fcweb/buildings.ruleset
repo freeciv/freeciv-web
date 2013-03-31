@@ -379,7 +379,7 @@ reqs	=
     { "type", "name", "range"
       "Tech", "Electronics", "Player"
       "Building", "Factory", "City"
-      "Special", "River", "Adjacent"
+      "Road", "River", "Adjacent"
     }
 graphic	= "b.hydro_plant"
 graphic_alt	= "-"
@@ -1227,7 +1227,7 @@ genus		= "GreatWonder"
 reqs	=
     { "type", "name", "range"
       "Tech", "Electronics", "Player"
-      "Special", "River", "Adjacent"
+      "Road", "River", "Adjacent"
     }
 graphic	= "b.hoover_dam"
 graphic_alt	= "-"

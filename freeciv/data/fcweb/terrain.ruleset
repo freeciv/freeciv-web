@@ -46,33 +46,6 @@ min_start_native_area = 0
 ; There is no resources in the middle of the oceans, only near coast
 ocean_resources = FALSE
 
-; special movement costs for rivers:
-;   0 - normal movement cost for rivers (matches Civ1)
-;   1 - 1/3 movement cost, but only when moving exactly along rivers,
-;       diagonal moves incur full terrain movement costs (matches Civ2)
-;   2 - 1/3 movement cost directly along river, 2/3 for diagonals (this
-;       is effectively the same as '1', as if you had done the two moves,
-;       except for differences relating to ZOC, etc.)
-;   3 - 1/3 movement cost for any river to river move (classic Freeciv)
-river_move_mode=1
-
-; percent added to defense if tile is river
-river_defense_bonus=50
-
-; amount added to trade production if tile is river
-river_trade_incr=1
-
-; help text for rivers
-river_help_text=_("\
-Any land terrain type may have a River on it.  A River adds 1\
- trade to the resources produced by that tile.  It also increases a tile's\
- defense factor by 50%.  Finally, land units may move along a River (but\
- not diagonally); movement along a River costs only 1/3 of a movement point.\
-"), _("\
-Roads and railroads can only be built on River tiles if your\
- civilization has learned Bridge Building technology.\
-")
-
 ; percent added to trade production if road and city has superhighways
 road_superhighway_trade_bonus=50
 

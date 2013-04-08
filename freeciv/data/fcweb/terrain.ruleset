@@ -13,12 +13,6 @@
 description="Freeciv-web terrain data"
 options="+Freeciv-ruleset-Devel-2013.Mar.06"
 
-[options]
-may_road = TRUE           ; FALSE means no, TRUE means yes
-may_irrigate = TRUE       ; FALSE means no, TRUE means yes
-may_mine = TRUE           ; FALSE means no, TRUE means yes
-may_transform = TRUE      ; FALSE means no, TRUE means yes
-
 [control]
 ; Names for custom terrain flags.
 ;flags =
@@ -45,9 +39,6 @@ min_start_native_area = 0
 
 ; There is no resources in the middle of the oceans, only near coast
 ocean_resources = FALSE
-
-; percent added to trade production if road and city has superhighways
-road_superhighway_trade_bonus=50
 
 ; percent subtracted from food production if tile is polluted
 pollution_food_penalty=50

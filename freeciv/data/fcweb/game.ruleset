@@ -89,6 +89,9 @@ civil_war_enabled        = TRUE
 ;                Partial map, gold, techs, cities
 gameloss_style           = ""
 
+; Whether units may safely paradrop to transport on non-native terrain
+paradrop_to_transport    = FALSE
+
 ; Method of paying unit and improvement gold upkeep
 ; 0 - The player`s total gold must be non-negative after paying upkeep
 ;     costs associated with each city. If for any city the player`s gold

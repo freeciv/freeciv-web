@@ -78,7 +78,7 @@ function update_tile_unit(punit)
   if (punit == null) return;
   
   var found = false;
-  var ptile = map_pos_to_tile(punit['x'], punit['y']);
+  var ptile = index_to_tile(punit['tile']);
   
   if (ptile == null || ptile['units'] == null) return;
   
@@ -101,7 +101,7 @@ function update_tile_unit(punit)
 function clear_tile_unit(punit)
 {
   if (punit == null) return;
-  var ptile = map_pos_to_tile(punit['x'], punit['y']);
+  var ptile = index_to_tile(punit['tile']);
   if (ptile == null || ptile['units'] == null) return -1;
 
   if (ptile['units'].indexOf(punit) >= 0) {
@@ -146,7 +146,7 @@ function get_unit_moves_left(punit)
   } else {
     result = "Moves: "  + Math.floor(punit['movesleft'] / SINGLE_MOVE);
   }
-  return result;  
+  return result;
 }
 
 /**************************************************************************
@@ -154,7 +154,7 @@ function get_unit_moves_left(punit)
 **************************************************************************/
 function unit_has_goto(punit)
 {
-  return (punit['goto_dest_x'] != 255 && punit['goto_dest_y'] != 255);
+  return (punit['goto_tile'] != -1);
 }
 
 
@@ -165,7 +165,7 @@ function update_unit_anim_list(old_unit, new_unit)
 {
   if (old_unit == null || new_unit == null) return;
   /* unit is in same position. */
-  if (new_unit['x'] == old_unit['x'] && new_unit['y'] == old_unit['y']) return;
+  if (new_unit['tile'] == old_unit['tile']) return;
   
   if (old_unit['anim_list'] == null) old_unit['anim_list'] = [];
 
@@ -181,26 +181,24 @@ function update_unit_anim_list(old_unit, new_unit)
   var has_new_pos = false;
   for (var i = 0; i <  old_unit['anim_list'].length; i++) {
     var anim_tuple = old_unit['anim_list'][i];
-    if (anim_tuple['x'] == old_unit['x'] && anim_tuple['y'] == old_unit['y']) {
+    if (anim_tuple['tile'] == old_unit['tile']) {
       has_old_pos = true;
     }
-    if (anim_tuple['x'] == new_unit['x'] && anim_tuple['y'] == new_unit['y']) {
+    if (anim_tuple['tile'] == new_unit['tile']) {
       has_new_pos = true;
     }
   }
 
   if (!has_old_pos) {
     var anim_tuple = {};
-    anim_tuple['x'] = old_unit['x'];
-    anim_tuple['y'] = old_unit['y'];
+    anim_tuple['tile'] = old_unit['tile'];
     anim_tuple['i'] = ANIM_STEPS;
     old_unit['anim_list'].push(anim_tuple);
   }
 
   if (!has_new_pos) {
     var anim_tuple = {};
-    anim_tuple['x'] = new_unit['x'];
-    anim_tuple['y'] = new_unit['y'];
+    anim_tuple['tile'] = new_unit['tile'];
     anim_tuple['i'] = ANIM_STEPS;
     old_unit['anim_list'].push(anim_tuple);
   }
@@ -216,20 +214,23 @@ function get_unit_anim_offset(punit)
   if (punit['anim_list'] != null && punit['anim_list'].length >= 2)  {
     var anim_tuple_src = punit['anim_list'][0];
     var anim_tuple_dst = punit['anim_list'][1];
+    var src_tile = index_to_tile(anim_tuple_src['tile']);
+    var dst_tile = index_to_tile(anim_tuple_dst['tile']);
+    var u_tile = index_to_tile(punit['tile']);
 
     anim_tuple_dst['i'] = anim_tuple_dst['i'] - 1;
 
     var i = Math.floor((anim_tuple_dst['i'] + 2 ) / 3);
 
-    var r = map_to_gui_pos( anim_tuple_src['x'], anim_tuple_src['y']);
+    var r = map_to_gui_pos( src_tile['x'], src_tile['y']);
     var src_gx = r['gui_dx'];
     var src_gy = r['gui_dy'];
 
-    var s = map_to_gui_pos(anim_tuple_dst['x'], anim_tuple_dst['y']);
+    var s = map_to_gui_pos(dst_tile['x'], dst_tile['y']);
     var dst_gx = s['gui_dx'];
     var dst_gy = s['gui_dy'];
 
-    var t = map_to_gui_pos(punit['x'], punit['y']);
+    var t = map_to_gui_pos(u_tile['x'], u_tile['y']);
     var punit_gx = t['gui_dx'];
     var punit_gy = t['gui_dy'];
 

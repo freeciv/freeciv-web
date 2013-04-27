@@ -137,8 +137,7 @@ function handle_tile_info(packet)
 
 
   if (tiles != null) {
-    var index = packet['x'] + packet['y'] * map['xsize'];
-    tiles[index] = $.extend(tiles[index], packet);
+    tiles[packet['tile']] = $.extend(tiles[packet['tile']], packet);
   }
 
 }
@@ -262,7 +261,6 @@ function handle_game_info(packet)
 /* 30% complete */
 function handle_start_phase(packet)
 {
-
   update_client_state(C_S_RUNNING);
 
   set_phase_start();
@@ -456,7 +454,7 @@ function handle_unit_packet_common(packet_unit)
      * by simply deleting the old one and creating a new one. */
     handle_unit_remove(packet_unit['id']);
   }
- 
+
   if (units[packet_unit['id']] == null) {
     packet_unit['anim_list'] = [];  
     units[packet_unit['id']] = packet_unit;
@@ -684,37 +682,47 @@ function handle_ruleset_building(packet)
 
 function handle_ruleset_unit_class(packet) 
 {
-  /* TODO: implement*/
+  /* TODO: implement */
 }
 
 function handle_ruleset_base(packet) 
 {
-  /* TODO: implement*/
+  /* TODO: implement */
+}
+
+function handle_ruleset_road(packet) 
+{
+  /* TODO: implement */
+}
+
+function handle_ruleset_disaster(packet) 
+{
+  /* TODO: implement */
+}
+
+function handle_ruleset_trade(packet) 
+{
+  /* TODO: implement */
+}
+
+function handle_rulesets_ready(packet) 
+{
+  /* Nothing to do */
 }
 
 function handle_single_want_hack_reply(packet) 
 {
-  /* TODO: implement*/
+  /* TODO: implement */
 }
 
 function handle_ruleset_choices(packet) 
 {
-  /* TODO: implement*/
+  /* TODO: implement */
 }
 
 function handle_game_load(packet) 
 {
-  /* TODO: implement*/
-}
-
-function handle_options_settable_control(packet) 
-{
-  /* TODO: implement*/
-}
-
-function handle_options_settable(packet) 
-{
-  /* TODO: implement*/
+  /* TODO: implement */
 }
 
  /* Done */
@@ -727,6 +735,26 @@ function handle_ruleset_effect(packet)
 function handle_ruleset_effect_req(packet) 
 {
   requirements[packet['effect_id']] = packet;
+}
+
+function handle_ruleset_unit_flag(packet)
+{
+  /* TODO: implement */
+}
+
+function handle_ruleset_unit_bonus(packet)
+{
+  /* TODO: implement */
+}
+
+function handle_ruleset_terrain_flag(packet)
+{
+  /* TODO: implement */
+}
+
+function handle_tech_gained(packet) 
+{
+  /* TODO: implement*/
 }
 
 function handle_scenario_info(packet) 
@@ -764,3 +792,46 @@ function handle_goto_path(packet)
   show_goto_path(packet);
 }
 
+function handle_server_setting_const(packet)
+{
+  /* TODO: implement */
+}
+
+function handle_server_setting_int(packet)
+{
+  /* TODO: implement */
+}
+
+function handle_server_setting_enum(packet)
+{
+  /* TODO: implement */
+}
+
+function handle_server_setting_bitwise(packet)
+{
+  /* TODO: implement */
+}
+
+function handle_server_setting_bool(packet)
+{
+  /* TODO: implement */
+}
+
+function handle_server_setting_str(packet)
+{
+  /* TODO: implement */
+}
+
+function handle_server_setting_control(packet)
+{
+  /* TODO: implement */
+}
+
+function handle_player_diplstate(packet)
+{
+  if (packet['plr1'] == client.conn.playing['playerno']) {
+    diplstates[packet['plr2']] = packet['ds_type'];
+  } else if (packet['plr2'] == client.conn.playing['playerno']) {
+    diplstates[packet['plr1']] = packet['ds_type'];
+  }
+}

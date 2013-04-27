@@ -1,0 +1,12 @@
+diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
+--- freeciv/common/packets.def	2012-05-16 21:19:06.000000000 +0300
++++ freeciv/common/packets.def	2012-05-16 21:19:35.000000000 +0300
+@@ -926,7 +926,7 @@
+ PACKET_UNIT_DIPLOMAT_ACTION=70;cs,dsend
+   UNIT diplomat_id;
+   UNIT target_id;   # city_id or unit_id
+-  SINT16 value;
++  UINT32 value;
+   DIPLOMAT_ACTION action_type;
+ end
+ 

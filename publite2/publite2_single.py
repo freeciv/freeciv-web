@@ -25,12 +25,12 @@ class civserverproc(Thread):
     def run(self):
         while 1:
             try:
-                retcode = call("civserver --port " + str(self.port) + " -q 20 -e " 
-                       + " -m -M " + metaserver  + " --topic \"Singleplayer\" --read " + pubscript +  " --log " + logdir + "civserver-" + str(self.port) + ".log --saves " + savesdir, shell=True)
+                retcode = call("freeciv-web --port " + str(self.port) + " -q 20 -e "
+                       + " -m -M " + metaserver  + " --type \"Singleplayer\" --read " + pubscript +  " --log " + logdir + "fcweb-" + str(self.port) + ".log --saves " + savesdir, shell=True)
                 if retcode < 0:
-                    print >>sys.stderr, "Civserver was terminated by signal", -retcode
+                    print >>sys.stderr, "Freeciv-web was terminated by signal", -retcode
                 else:
-                    print >>sys.stderr, "Civserver returned", retcode
+                    print >>sys.stderr, "Freeciv-web returned", retcode
             except OSError, e:
                 print >>sys.stderr, "Execution failed:", e
 
@@ -49,4 +49,4 @@ for i in range(servers_count):
     current.start()
 
 
-print("Civservers done!")
+print("Freeciv-webs done!")

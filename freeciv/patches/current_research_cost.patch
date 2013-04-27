@@ -1,0 +1,34 @@
+diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
+--- freeciv/common/packets.def	2012-05-16 21:07:37.000000000 +0300
++++ freeciv/common/packets.def	2012-05-16 21:18:07.000000000 +0300
+@@ -710,6 +710,7 @@
+   UINT16 bulbs_last_turn;
+   UINT32 bulbs_researched;
+   UINT32 techs_researched;
++  UINT32 current_research_cost;  
+   UINT8 researching;
+   UINT16 science_cost;
+ 
+diff -Nurd -X.diff_ignore freeciv/server/plrhand.c freeciv/server/plrhand.c
+--- freeciv/server/plrhand.c	2012-05-16 20:56:43.000000000 +0300
++++ freeciv/server/plrhand.c	2012-05-16 21:18:07.000000000 +0300
+@@ -893,6 +893,11 @@
+     packet->science         = plr->economic.science;
+     packet->luxury          = plr->economic.luxury;
+     packet->bulbs_researched = research->bulbs_researched;
++    if (research->researching != A_UNSET) {
++      packet->current_research_cost = total_bulbs_required(plr);
++    } else {
++      packet->current_research_cost = 0;
++    }
+     packet->techs_researched = research->techs_researched;
+     packet->researching = research->researching;
+     packet->future_tech = research->future_tech;
+@@ -905,6 +910,7 @@
+     packet->science         = 0;
+     packet->luxury          = 0;
+     packet->bulbs_researched= 0;
++    packet->current_research_cost= 0;
+     packet->techs_researched= 0;
+     packet->researching     = A_UNKNOWN;
+     packet->future_tech     = 0;

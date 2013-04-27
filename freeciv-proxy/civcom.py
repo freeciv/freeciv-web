@@ -22,8 +22,8 @@ import time
 
 HOST = 'localhost';
 MAX_LEN_PACKET = 48;
-VERSION = "+Freeciv.Devel.2009.Oct.18";  #must be kept in sync with Freeciv server.
-VER_INFO = "-test";
+VERSION = "+Freeciv.Web.Devel-2.5-2013.Apr.12";  # Must be kept in sync with Freeciv server.
+VER_INFO = "-dev";
 logger = logging.getLogger("freeciv-proxy");
 
 class CivCom(Thread):
@@ -55,13 +55,13 @@ class CivCom(Thread):
     self.socket.setblocking(1);
     try:
       self.socket.connect((HOST, self.civserverport))
-    except:
-      self.send_error_to_client("Proxy unable to connect to civserver. Please go back and try again.");
+    except socket.error, reason:
+      self.send_error_to_client("Proxy unable to connect to civserver. Please go back and try again. %s" % (reason));
       return;
 
 
     # send packet
-    login_packet = "{\"type\":4,\"username\":\"%s\",\"capability\":\"%s\",\"version_label\":\"%s\",\"major_version\":%d,\"minor_version\":%d,\"patch_version\":%d}" %  (self.username, VERSION, VER_INFO, 2, 1, 99);
+    login_packet = "{\"type\":4,\"username\":\"%s\",\"capability\":\"%s\",\"version_label\":\"%s\",\"major_version\":%d,\"minor_version\":%d,\"patch_version\":%d}" %  (self.username, VERSION, VER_INFO, 2, 4, 99);
     self.send_to_civserver(login_packet)
 
     #receive packets from server
@@ -76,7 +76,7 @@ class CivCom(Thread):
               
         packet = self.get_packet_from_connection(net_buf);
         if (packet != None): 
-          net_buf = net_buf[3+len(packet):];
+          net_buf = net_buf[4+len(packet):];
 	  result = packet[:-1];
 	  if (len(result) > 0):
 	    self.send_buffer_append(result);
@@ -105,15 +105,15 @@ class CivCom(Thread):
 
   def get_packet_from_connection(self, net_buf):
 
-    if (len(net_buf) < 3): return None;
+    if (len(net_buf) < 4): return None;
 
-    result = unpackExt('>HB', net_buf[:3]);
+    result = unpackExt('>HH', net_buf[:4]);
     packet_len = result[0];
 
     if (len(net_buf) < packet_len): return None;
     if (logger.isEnabledFor(logging.DEBUG)):
-      logger.debug("\nNEW PACKET: len(" + str(packet_len) + ")" );
-    return net_buf[3:packet_len];
+      logger.debug("\nNEW PACKET: " + str(result[1]) + " len(" + str(packet_len) + ")" );
+    return net_buf[4:packet_len];
 
   
   def close_connection(self):
@@ -133,8 +133,9 @@ class CivCom(Thread):
     return True;
 
   def send_to_civserver(self, net_packet_json):
-    header = packExt('>Hc', len(net_packet_json), chr(0));
-    civ_packet = header + str(net_packet_json);
+#    header = packExt('>HH', len(net_packet_json), chr(0));
+    header = packExt('>HH', len(net_packet_json), 0);
+    civ_packet = header + str(net_packet_json) + '\0';
     try:
       # Send packet to civserver
       self.socket.sendall(civ_packet)

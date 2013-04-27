@@ -1,0 +1,19 @@
+diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
+--- freeciv/server/unithand.c	2012-07-17 19:34:38.000000000 +0300
++++ freeciv/server/unithand.c	2012-07-17 19:38:48.000000000 +0300
+@@ -896,6 +896,15 @@
+ 
+     old_tile = path->positions[0].tile;
+ 
++    /* Remove city spot reservations for AI settlers on city founding
++     * mission, before goto_tile reset. */
++    if (punit->server.adv->task != AUT_NONE) {
++      adv_unit_new_task(punit, AUT_NONE, NULL);
++    }
++
++    punit->ai_controlled = FALSE;
++    punit->goto_tile = NULL;
++
+     free_unit_orders(punit);
+     /* If we waited on a tile, reset punit->done_moving */
+     punit->done_moving = (punit->moves_left <= 0);

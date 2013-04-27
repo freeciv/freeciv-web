@@ -1,2 +1,2 @@
 killall python
-killall civserver
+killall freeciv-web

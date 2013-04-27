@@ -1,0 +1,15 @@
+diff -Nurd -X.diff_ignore freeciv/server/unittools.c freeciv/server/unittools.c
+--- freeciv/server/unittools.c	2012-05-19 03:29:18.000000000 +0300
++++ freeciv/server/unittools.c	2012-05-19 03:30:38.000000000 +0300
+@@ -3258,9 +3258,9 @@
+       if (!res && punit->moves_left > 0) {
+         /* Movement failed (ZOC, etc.) */
+         cancel_orders(punit, "  attempt to move failed.");
+-        notify_player(pplayer, unit_tile(punit), E_UNIT_ORDERS, ftc_server,
++        /* notify_player(pplayer, unit_tile(punit), E_UNIT_ORDERS, ftc_server,
+                       _("Orders for %s aborted because of failed move."),
+-                      unit_link(punit));
++                      unit_link(punit)); */
+         return TRUE;
+       }
+ 

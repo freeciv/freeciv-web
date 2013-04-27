@@ -1,0 +1,48 @@
+diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
+--- freeciv/common/packets.def	2012-05-16 21:02:54.000000000 +0300
++++ freeciv/common/packets.def	2012-05-16 21:05:34.000000000 +0300
+@@ -578,6 +578,8 @@
+   
+   #WORKLIST worklist;
+ 
++  STRING can_build_unit[MAX_LEN_MSG];
++  STRING can_build_improvement[MAX_LEN_MSG];
+   STRING improvements[MAX_LEN_MSG];
+   #BV_CITY_OPTIONS city_options;
+   STRING name[MAX_LEN_NAME];
+diff -Nurd -X.diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
+--- freeciv/server/citytools.c	2012-05-16 21:02:54.000000000 +0300
++++ freeciv/server/citytools.c	2012-05-16 21:05:39.000000000 +0300
+@@ -1801,6 +1801,8 @@
+   int i;
+   int ppl = 0;
+   char impr_buf[MAX_NUM_ITEMS + 1];
++  char can_build_impr_buf[MAX_NUM_ITEMS + 1];
++  char can_build_unit_buf[MAX_NUM_ITEMS + 1];
+ 
+   packet->id=pcity->id;
+   packet->owner = player_number(city_owner(pcity));
+@@ -1898,6 +1900,23 @@
+   packet->walls = city_got_citywalls(pcity);
+ 
+   improvement_iterate(pimprove) {
++    can_build_impr_buf[improvement_index(pimprove)] = 
++	    can_city_build_improvement_now(pcity, pimprove)
++      ? '1' : '0';
++  } improvement_iterate_end;
++  can_build_impr_buf[improvement_count()] = '\0';
++  sz_strlcpy(packet->can_build_improvement, can_build_impr_buf);
++
++  unit_type_iterate(punittype) {
++    can_build_unit_buf[utype_index(punittype)] = 
++	    can_city_build_unit_now(pcity, punittype)
++      ? '1' : '0';
++  } unit_type_iterate_end;
++  can_build_unit_buf[utype_count()] = '\0';
++  sz_strlcpy(packet->can_build_unit, can_build_unit_buf);
++
++
++  improvement_iterate(pimprove) {
+     impr_buf[improvement_index(pimprove)] = city_has_building(pcity, pimprove)
+       ? '1' : '0';
+   } improvement_iterate_end;

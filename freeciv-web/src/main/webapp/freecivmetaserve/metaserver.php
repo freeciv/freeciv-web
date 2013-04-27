@@ -35,9 +35,11 @@ $posts = array(
   "patches",
   "capability",
   "state",
-  "topic",
   "message",
+  "type",
   "serverid",
+  "available",
+  "humans",
   "vn",
   "vv",
   "plrs",
@@ -62,8 +64,10 @@ $sqlvars = array(
   "patches",
   "capability",
   "state",
-  "topic",
   "message",
+  "type",
+  "available",
+  "humans",
   "serverid"
 );
 
@@ -118,11 +122,11 @@ if ( isset($port) ) {
     exit(0); /* toss all entries and exit */
   }
 
-  if (isset($topic)) {
-    $topic = addneededslashes($topic); /* escape stuff to go into the database */
-  }
   if (isset($message)) {
     $message = addneededslashes($message); /* escape stuff to go into the database */
+  }
+  if (isset($type)) {
+    $type = addneededslashes($type); /* escape stuff going to database */
   }
   if (isset($serverid)) {
     $serverid = addneededslashes($serverid); /* escape stuff to go into the database */
@@ -207,7 +211,9 @@ if ( isset($port) ) {
     $string = array();
 
     foreach($sqlvars as $var) {
+      if (isset($assoc_array[$var])) {
         array_push($string, "$var=\"$assoc_array[$var]\"");
+      }
     }
 
     /* we always want to update the timestamp */
@@ -238,7 +244,7 @@ if ( isset($port) ) {
 
     /* if dropplrs=1 then set available back to 0 */
     if (isset($dropplrs)) {
-      $avstmt = "update servers set available=0 where host=\"$host\" and port=\"$port\"";
+      $avstmt = "update servers set available=0, humans=-1 where host=\"$host\" and port=\"$port\"";
       $res = fcdb_exec($avstmt);
     }
 
@@ -251,11 +257,18 @@ if ( isset($port) ) {
   /* We've done the database so we're done */
 
 } elseif ( isset($client_cap) || isset($client) ) {
-  $stmt="select * from servers where message like '%Multiplayer%' order by host,port asc";
+  global $freeciv_versions;
+  $output = "";
+  $output .= "[versions]\n";
+  $output .= "latest_stable=\"" . version_by_tag("stable") . "\"\n";
+  $verkeys = array_keys($freeciv_versions);
+  foreach ($verkeys as $key) {
+    $output .= "$key=\"" . version_by_Tag("$key") . "\"\n";
+  }
+  $stmt="select * from servers order by host,port asc";
   $res = fcdb_exec($stmt);
   $nr = fcdb_num_rows($res);
   $nservers=0;
-  $output="";
   if ( $nr > 0 ) {
     for ($inx = 0; $inx < $nr; $inx++) {
       $row = fcdb_fetch_array($res, $inx);
@@ -460,14 +473,14 @@ if ( isset($port) ) {
       }
     } else {
        print "<h1>Freeciv.net single-player games</h1>\n";
-      $stmt="select host,port,version,patches,state,message,unix_timestamp()-unix_timestamp(stamp), IFNULL((select user from players p where p.hostport =  CONCAT(s.host ,':',s.port) and p.type = 'Human' Limit 1 ), 'none') as player, IFNULL((select flag from players p where p.hostport =  CONCAT(s.host ,':',s.port) and p.type = 'Human' Limit 1 ), 'none') as flag, (select value from variables where name = 'turn' and hostport = CONCAT(s.host ,':',s.port)) as turn, (select value from variables where name = 'turn' and hostport = CONCAT(s.host ,':',s.port)) + 0 as turnsort from servers s where topic = 'Singleplayer' and state = 'Running' order by turnsort desc";
+      $stmt="select host,port,version,patches,state,message,unix_timestamp()-unix_timestamp(stamp), IFNULL((select user from players p where p.hostport =  CONCAT(s.host ,':',s.port) and p.type = 'Human' Limit 1 ), 'none') as player, IFNULL((select flag from players p where p.hostport =  CONCAT(s.host ,':',s.port) and p.type = 'Human' Limit 1 ), 'none') as flag, (select value from variables where name = 'turn' and hostport = CONCAT(s.host ,':',s.port)) as turn, (select value from variables where name = 'turn' and hostport = CONCAT(s.host ,':',s.port)) + 0 as turnsort from servers s where type = 'Singleplayer' and state = 'Running' order by turnsort desc";
       $res = fcdb_exec($stmt);
       $nr = fcdb_num_rows($res);
       if ( $nr > 0 ) {
         print "<br /><table>\n";
         print "<tr id='meta_header'><th class=\"left\">Game Map:</th><th>Game Action:</th>";
         print "<th>State</th><th>Players</th>";
-        print "<th style='width:45%;'>Topic</th>";
+        print "<th style='width:45%;'>Message</th>";
         print "<th>Player</th>\n";
         print "<th>Turn:</th></tr>";
         for ( $inx = 0; $inx < $nr; $inx++ ) {
@@ -528,14 +541,14 @@ if ( isset($port) ) {
 
       print "<br><br>";
       print "<h1>Freeciv.net multiplayer games around the world</h1><br />\n";
-      $stmt="select host,port,version,patches,state,message,unix_timestamp()-unix_timestamp(stamp), (select value from variables where name = 'turn' and hostport = CONCAT(s.host ,':',s.port)) as turn from servers s where topic = 'Multiplayer' order by state desc";
+      $stmt="select host,port,version,patches,state,message,unix_timestamp()-unix_timestamp(stamp), (select value from variables where name = 'turn' and hostport = CONCAT(s.host ,':',s.port)) as turn from servers s where type = 'Multiplayer' order by state desc";
       $res = fcdb_exec($stmt);
       $nr = fcdb_num_rows($res);
       if ( $nr > 0 ) {
 	print "<table>\n";
         print "<tr id='meta_header'><th class=\"left\">Game Map:</th><th>Game Action:</th>";
         print "<th>State</th><th>Players</th>";
-        print "<th style='width:45%;'>Topic</th>";
+        print "<th style='width:45%;'>Message</th>";
         print "<th>Turn:</th></tr>";
 
         for ( $inx = 0; $inx < $nr; $inx++ ) {

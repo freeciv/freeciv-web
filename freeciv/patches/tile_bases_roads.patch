@@ -1,0 +1,101 @@
+diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
+--- freeciv/common/packets.def	2012-08-27 22:37:05.000000000 +0300
++++ freeciv/common/packets.def	2012-08-27 22:47:26.000000000 +0300
+@@ -388,8 +388,8 @@
+   TERRAIN terrain;
+   RESOURCE resource;
+   BOOL special[S_LAST];
+-  BV_BASES bases;
+-  BV_ROADS roads;
++  STRING bases[MAX_BASE_TYPES];
++  STRING roads[MAX_ROAD_TYPES];
+   STRING spec_sprite[MAX_LEN_NAME];
+   STRING label[MAX_LEN_NAME];
+ end
+diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
+--- freeciv/server/maphand.c	2012-08-27 22:36:56.000000000 +0300
++++ freeciv/server/maphand.c	2012-08-27 23:32:42.000000000 +0300
+@@ -413,6 +413,34 @@
+ }
+ 
+ /**************************************************************************
++  Fill bases string describig tile roads to web-client.
++**************************************************************************/
++static void build_bases_string(char *buffer, bv_bases *bases)
++{
++  int i = 0;
++
++  base_type_iterate(pbase) {
++    buffer[i++] = BV_ISSET(*bases, base_index(pbase)) ? '1' : '0';
++  } base_type_iterate_end;
++
++  buffer[i] = '\0';
++}
++
++/**************************************************************************
++  Fill roads string describig tile roads to web-client.
++**************************************************************************/
++static void build_roads_string(char *buffer, bv_roads *roads)
++{
++  int i = 0;
++
++  road_type_iterate(proad) {
++    buffer[i++] = BV_ISSET(*roads, road_index(proad)) ? '1' : '0';
++  } road_type_iterate_end;
++
++  buffer[i] = '\0';
++}
++
++/**************************************************************************
+   Send tile information to all the clients in dest which know and see
+   the tile. If dest is NULL, sends to all clients (game.est_connections)
+   which know and see tile.
+@@ -468,8 +496,8 @@
+       tile_special_type_iterate(spe) {
+ 	info.special[spe] = BV_ISSET(ptile->special, spe);
+       } tile_special_type_iterate_end;
+-      info.bases = ptile->bases;
+-      info.roads = ptile->roads;
++      build_bases_string(info.bases, &ptile->bases);
++      build_roads_string(info.roads, &ptile->roads);
+ 
+       if (ptile->label != NULL) {
+         strncpy(info.label, ptile->label, sizeof(info.label));
+@@ -502,8 +530,8 @@
+       tile_special_type_iterate(spe) {
+ 	info.special[spe] = BV_ISSET(plrtile->special, spe);
+       } tile_special_type_iterate_end;
+-      info.bases = plrtile->bases;
+-      info.roads = plrtile->roads;
++      build_bases_string(info.bases, &plrtile->bases);
++      build_roads_string(info.roads, &plrtile->roads);
+ 
+       /* Labels never change, so they are not subject to fog of war */
+       if (ptile->label != NULL) {
+@@ -514,6 +542,8 @@
+ 
+       send_packet_tile_info(pconn, &info);
+     } else if (send_unknown) {
++      int i;
++
+       info.known = TILE_UNKNOWN;
+       info.continent = 0;
+       info.owner = MAP_TILE_OWNER_NULL;
+@@ -525,8 +555,15 @@
+       tile_special_type_iterate(spe) {
+         info.special[spe] = FALSE;
+       } tile_special_type_iterate_end;
+-      BV_CLR_ALL(info.bases);
+-      BV_CLR_ALL(info.roads);
++      i = 0;
++      base_type_iterate(pbase) {
++        info.bases[i++] = '0';
++      } base_type_iterate_end;
++      info.bases[i] = '\0';
++      for (i = 0; i < game.control.num_road_types; i++) {
++        info.roads[i++] = '0';
++      }
++      info.roads[i] = '\0';
+ 
+       info.label[0] = '\0';
+ 

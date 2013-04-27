@@ -46,12 +46,12 @@ lazy_overwrite=0
 
 def verbose(s):
     if len(sys.argv)>1 and sys.argv[1]=="-v":
-        print s
+        print(s)
         
 def prefix(prefix,str):
-    lines=string.split(str,"\n")
+    lines=str.split("\n")
     lines=map(lambda x,prefix=prefix: prefix+x,lines)
-    return string.join(lines,"\n")
+    return "\n".join(lines)
 
 def write_disclaimer(f):
     f.write('''
@@ -105,7 +105,7 @@ def parse_fields(str, types):
     arr=[]
     for i in mo.groups():
         if i:
-            arr.append(string.strip(i))
+            arr.append(i.strip())
         else:
             arr.append("")
     type,fields_,flags=arr
@@ -134,11 +134,11 @@ def parse_fields(str, types):
 
     # analyze fields
     fields=[]
-    for i in map(string.strip,string.split(fields_,",")):
+    for i in fields_.split(","):
         t={}
 
         def f(x):
-            arr=string.split(x,":")
+            arr=x.split(":")
             if len(arr)==1:
                 return [x,x,x]
             else:
@@ -166,8 +166,8 @@ def parse_fields(str, types):
 
     # analyze flags
     flaginfo={}
-    arr=map(string.strip,string.split(flags,","))
-    arr=filter(lambda x:len(x)>0,arr)
+    arr=list(item.strip() for item in flags.split(","))
+    arr=list(filter(lambda x:len(x)>0,arr))
     flaginfo["is_key"]=("key" in arr)
     if flaginfo["is_key"]: arr.remove("key")
     flaginfo["diff"]=("diff" in arr)
@@ -377,7 +377,7 @@ class Field:
         if self.dataio_type in ["memory"]:
             return "  dio_put_%(dataio_type)s(&dout, &real_packet->%(name)s, %(array_size_u)s);"%self.__dict__
         
-        arr_types=["string","bit_string","city_map","tech_list"]
+        arr_types=["string","bit_string","city_map","tech_list","unit_list","building_list"]
         if (self.dataio_type in arr_types and self.is_array==1) or \
            (self.dataio_type not in arr_types and self.is_array==0):
             return "  dio_put_%(dataio_type)s(&dout, real_packet->%(name)s);"%self.__dict__
@@ -452,7 +452,7 @@ class Field:
             return "dio_get_%(dataio_type)s(&din, real_packet->%(name)s, sizeof(real_packet->%(name)s));"%self.__dict__
         if self.is_struct and self.is_array==0:
             return "dio_get_%(dataio_type)s(&din, &real_packet->%(name)s);"%self.__dict__
-        if self.dataio_type in ["tech_list"]:
+        if self.dataio_type in ["tech_list","unit_list","building_list"]:
             return "dio_get_%(dataio_type)s(&din, real_packet->%(name)s);"%self.__dict__
         if not self.is_array:
             if self.struct_type=="bool":
@@ -514,7 +514,9 @@ class Field:
 for (;;) {
   int i;
 
-  dio_get_uint8(&din, &i);
+  if (!dio_get_uint8(&din, &i)) {
+    break;
+  }
   if(i == 255) {
     break;
   }
@@ -544,7 +546,9 @@ class Variant:
         self.want_post_send=packet.want_post_send
         self.type=packet.type
         self.delta=packet.delta
-        self.is_action=packet.is_action
+        self.is_info=packet.is_info
+        self.cancel=packet.cancel
+        self.want_force=packet.want_force
         
         self.poscaps=poscaps
         self.negcaps=negcaps
@@ -553,15 +557,15 @@ class Variant:
                 return '(has_capability("%s", pc->capability) && has_capability("%s", our_capability))'%(cap,cap)
             t=(map(lambda x,f=f: f(x),self.poscaps)+
                map(lambda x,f=f: '!'+f(x),self.negcaps))
-            self.condition=string.join(t," && ")
+            self.condition=" && ".join(t)
         else:
             self.condition="TRUE"
-        self.key_fields=filter(lambda x:x.is_key,self.fields)
-        self.other_fields=filter(lambda x:not x.is_key,self.fields)
+        self.key_fields=list(filter(lambda x:x.is_key,self.fields))
+        self.other_fields=list(filter(lambda x:not x.is_key,self.fields))
         self.bits=len(self.other_fields)
-        self.keys_format=string.join(["%d"]*len(self.key_fields),", ")
-        self.keys_arg=string.join(map(lambda x:"real_packet->"+x.name,
-                                      self.key_fields),", ")
+        self.keys_format=", ".join(["%d"]*len(self.key_fields))
+        self.keys_arg=", ".join(map(lambda x:"real_packet->"+x.name,
+                                    self.key_fields))
         if self.keys_arg:
             self.keys_arg=",\n    "+self.keys_arg
 
@@ -569,23 +573,27 @@ class Variant:
             self.delta=0
             self.no_packet=1
 
-        if len(self.fields)>5 or string.split(self.name,"_")[1]=="ruleset":
+        if len(self.fields)>5 or self.name.split("_")[1]=="ruleset":
             self.handle_via_packet=1
 
         self.extra_force_arg=""
         self.extra_send_args=""
         self.extra_send_args2=""
-        self.extra_send_args3=string.join(
+        self.extra_send_args3=", ".join(
             map(lambda x:"%s%s"%(x.get_handle_type(1), x.name),
-                self.fields),", ")
+                self.fields))
         if self.extra_send_args3:
             self.extra_send_args3=", "+self.extra_send_args3
 
         if not self.no_packet:
             self.extra_send_args=', const struct %(packet_name)s *packet'%self.__dict__+self.extra_send_args
             self.extra_send_args2=', packet'+self.extra_send_args2
-        if not self.is_action:
-            self.extra_force_arg=', bool force_send'
+
+        if self.want_force:
+            self.extra_send_args=self.extra_send_args+', bool force_to_send'
+            self.extra_send_args2=self.extra_send_args2+', force_to_send'
+            self.extra_send_args3=self.extra_send_args3+', bool force_to_send'
+
         self.receive_prototype='static struct %(packet_name)s *receive_%(name)s(struct connection *pc, enum packet_type type)'%self.__dict__
         self.send_prototype='static int send_%(name)s(struct connection *pc%(extra_force_arg)s%(extra_send_args)s)'%self.__dict__
 
@@ -599,7 +607,7 @@ class Variant:
     # statistical counters of this packet.
     def get_stats(self):
         names=map(lambda x:'"'+x.name+'"',self.other_fields)
-        names=string.join(names,", ")
+        names=", ".join(names)
 
         return '''static int stats_%(name)s_sent;
 static int stats_%(name)s_discarded;
@@ -657,7 +665,7 @@ static char *stats_%(name)s_names[] = {%(names)s};
 
 '''%self.__dict__
 
-            keys=map(lambda x:"key->"+x.name,self.key_fields)
+            keys=list(map(lambda x:"key->"+x.name,self.key_fields))
             if len(keys)==1:
                 a=keys[0]
             elif len(keys)==2:
@@ -743,13 +751,9 @@ static char *stats_%(name)s_names[] = {%(names)s};
         if not self.no_packet:
             if self.delta:
                 body=self.get_delta_send_body()
-                if self.is_action:
-                    force_send_var="\n  bool force_send = TRUE;"
-                else:
-                    force_send_var=""
                 delta_header='''  %(name)s_fields fields;
   struct %(packet_name)s *old, *clone;
-  bool differ, old_from_hash;%(force_send_var)s
+  bool differ, old_from_hash;
   struct hash_table **hash = &pc->phs.sent[%(type)s];
   int different = 0;
 '''
@@ -774,7 +778,7 @@ static char *stats_%(name)s_names[] = {%(names)s};
         for i in xrange(2):
             for k,v in vars().items():
                 if type(v)==type(""):
-                    temp=string.replace(temp,"<%s>"%k,v)
+                    temp=temp.replace("<%s>"%k,v)
         return temp%self.get_dict(vars())
 
     # '''
@@ -792,7 +796,6 @@ static char *stats_%(name)s_names[] = {%(names)s};
   if (!old) {
     old = fc_malloc(sizeof(*old));
     memset(old, 0, sizeof(*old));
-    force_send = TRUE;
   }
 
 '''
@@ -808,12 +811,17 @@ static char *stats_%(name)s_names[] = {%(names)s};
             s='    stats_%(name)s_discarded++;\n'
         else:
             s=""
-        body=body+'''  if (different == 0 && !force_send) {
+
+        if self.is_info != "no":
+            body=body+'''
+  if (different == 0) {
 %(fl)s%(s)s<pre2>    return 0;
   }
-
-  DIO_BV_PUT(&dout, fields);
 '''%self.get_dict(vars())
+
+        body=body+'''
+  DIO_BV_PUT(&dout, \"fields\", fields);
+'''
 
         for field in self.key_fields:
             body=body+field.get_put()+"\n"
@@ -833,6 +841,16 @@ static char *stats_%(name)s_names[] = {%(names)s};
   *clone = *real_packet;
   hash_insert(*hash, clone, clone);
 '''
+
+        # Cancel some is-info packets.
+        for i in self.cancel:
+            body=body+'''
+  hash = &pc->phs.sent[%s];
+  if (NULL != *hash) {
+    hash_delete_entry(*hash, real_packet);
+  }
+'''%i
+
         return intro+body
 
     # Returns a code fragement which is the implementation of the receive
@@ -880,15 +898,15 @@ static char *stats_%(name)s_names[] = {%(names)s};
         for i in xrange(2):
             for k,v in vars().items():
                 if type(v)==type(""):
-                    temp=string.replace(temp,"<%s>"%k,v)
+                    temp=temp.replace("<%s>"%k,v)
         return temp%self.get_dict(vars())
 
     # Helper for get_receive()
     def get_delta_receive_body(self):
         key1=map(lambda x:"    %s %s = real_packet->%s;"%(x.struct_type,x.name,x.name),self.key_fields)
         key2=map(lambda x:"    real_packet->%s = %s;"%(x.name,x.name),self.key_fields)
-        key1=string.join(key1,"\n")
-        key2=string.join(key2,"\n")
+        key1="\n".join(key1)
+        key2="\n".join(key2)
         if key1: key1=key1+"\n\n"
         if key2: key2="\n\n"+key2
         if self.gen_freelog:
@@ -931,21 +949,21 @@ class Packet:
         self.log_level=freelog_log_level
         self.gen_stats=generate_stats
         self.gen_freelog=generate_freelogs
-        str=string.strip(str)
-        lines=string.split(str,"\n")
+        str=str.strip()
+        lines=str.split("\n")
         
         mo=re.search("^\s*(\S+)\s*=\s*(\d+)\s*;\s*(.*?)\s*$",lines[0])
         assert mo,repr(lines[0])
 
         self.type=mo.group(1)
-        self.name=string.lower(self.type)
+        self.name=self.type.lower()
         self.type_number=int(mo.group(2))
-        assert 0<=self.type_number<=255
+        assert 0<=self.type_number<=65535
         dummy=mo.group(3)
 
         del lines[0]
 
-        arr=filter(lambda x:x,map(string.strip,string.split(dummy,",")))
+        arr=list(item.strip() for item in dummy.split(",") if item)
 
         self.dirs=[]
 
@@ -957,8 +975,16 @@ class Packet:
             arr.remove("cs")
         assert len(self.dirs)>0,repr(self.name)+repr(self.dirs)
 
-        self.is_action="is-info" not in arr
-        if not self.is_action: arr.remove("is-info")
+        # "no" means normal packet
+        # "yes" means is-info packet
+        # "game" means is-game-info packet
+        self.is_info="no"
+        if "is-info" in arr:
+            self.is_info="yes"
+            arr.remove("is-info")
+        if "is-game-info" in arr:
+            self.is_info="game"
+            arr.remove("is-game-info")
         
         self.want_pre_send="pre-send" in arr
         if self.want_pre_send: arr.remove("pre-send")
@@ -990,6 +1016,20 @@ class Packet:
         self.want_lsend="lsend" in arr
         if self.want_lsend: arr.remove("lsend")
 
+        self.want_force="force" in arr
+        if self.want_force: arr.remove("force")
+
+ 	self.cancel=[]
+        removes=[]
+        remaining=[]
+        for i in arr:
+            mo=re.search("^cancel\((.*)\)$",i)
+            if mo:
+                self.cancel.append(mo.group(1))
+                continue
+            remaining.append(i)
+        arr=remaining
+
         assert len(arr)==0,repr(arr)
         
         if disable_delta:
@@ -998,12 +1038,12 @@ class Packet:
         self.fields=[]
         for i in lines:
             self.fields=self.fields+parse_fields(i,types)
-        self.key_fields=filter(lambda x:x.is_key,self.fields)
-        self.other_fields=filter(lambda x:not x.is_key,self.fields)
+        self.key_fields=list(filter(lambda x:x.is_key,self.fields))
+        self.other_fields=list(filter(lambda x:not x.is_key,self.fields))
         self.bits=len(self.other_fields)
-        self.keys_format=string.join(["%d"]*len(self.key_fields),", ")
-        self.keys_arg=string.join(map(lambda x:"real_packet->"+x.name,
-                                      self.key_fields),", ")
+        self.keys_format=", ".join(["%d"]*len(self.key_fields))
+        self.keys_arg=", ".join(map(lambda x:"real_packet->"+x.name,
+                                    self.key_fields))
         if self.keys_arg:
             self.keys_arg=",\n    "+self.keys_arg
 
@@ -1015,14 +1055,14 @@ class Packet:
             self.no_packet=1
             assert not self.want_dsend,"dsend for a packet without fields isn't useful"
 
-        if len(self.fields)>5 or string.split(self.name,"_")[1]=="ruleset":
+        if len(self.fields)>5 or self.name.split("_")[1]=="ruleset":
             self.handle_via_packet=1
 
         self.extra_send_args=""
         self.extra_send_args2=""
-        self.extra_send_args3=string.join(
+        self.extra_send_args3=", ".join(
             map(lambda x:"%s%s"%(x.get_handle_type(1), x.name),
-                self.fields),", ")
+                self.fields))
         if self.extra_send_args3:
             self.extra_send_args3=", "+self.extra_send_args3
 
@@ -1033,14 +1073,11 @@ class Packet:
         self.receive_prototype='struct %(name)s *receive_%(name)s(struct connection *pc, enum packet_type type)'%self.__dict__
         self.force_arg=""
         self.force_value=""
-        if not self.is_action:
-            self.force_arg=", bool force_send"
-            self.force_value=", force_send"
-        self.send_prototype='int send_%(name)s(struct connection *pc%(force_arg)s%(extra_send_args)s)'%self.__dict__
+        self.send_prototype='int send_%(name)s(struct connection *pc%(extra_send_args)s)'%self.__dict__
         if self.want_lsend:
-            self.lsend_prototype='void lsend_%(name)s(struct conn_list *dest%(force_arg)s%(extra_send_args)s)'%self.__dict__
+            self.lsend_prototype='void lsend_%(name)s(struct conn_list *dest%(extra_send_args)s)'%self.__dict__
         if self.want_dsend:
-            self.dsend_prototype='int dsend_%(name)s(struct connection *pc%(force_arg)s%(extra_send_args3)s)'%self.__dict__
+            self.dsend_prototype='int dsend_%(name)s(struct connection *pc%(extra_send_args3)s)'%self.__dict__
             if self.want_lsend:
                 self.dlsend_prototype='void dlsend_%(name)s(struct conn_list *dest%(extra_send_args3)s)'%self.__dict__
 
@@ -1214,10 +1251,10 @@ class Packet:
   switch(pc->phs.variant[%(type)s]) {
 '''%self.get_dict(vars())
         args="pc"
-        if not self.is_action:
-            args=args+', force_send'
         if not self.no_packet:
             args=args+', packet'
+        if self.want_force:
+            args=args+", force_to_send"
         for v in self.variants:
             name2=v.name
             no=v.no
@@ -1254,7 +1291,7 @@ class Packet:
     # dsend function.
     def get_dsend(self):
         if not self.want_dsend: return ""
-        fill=string.join(map(lambda x:x.get_fill(),self.fields),"\n")
+        fill="\n".join(map(lambda x:x.get_fill(),self.fields))
         return '''%(dsend_prototype)s
 {
   struct %(name)s packet, *real_packet = &packet;
@@ -1270,7 +1307,7 @@ class Packet:
     # dlsend function.
     def get_dlsend(self):
         if not (self.want_lsend and self.want_dsend): return ""
-        fill=string.join(map(lambda x:x.get_fill(),self.fields),"\n")
+        fill="\n".join(map(lambda x:x.get_fill(),self.fields))
         return '''%(dlsend_prototype)s
 {
   struct %(name)s packet, *real_packet = &packet;
@@ -1356,6 +1393,29 @@ def get_get_packet_name(packets):
 '''
     return intro+body+extro
 
+# Returns a code fragement which is the implementation of the
+# packet_has_game_info_flag() function.
+def get_packet_has_game_info_flag(packets):
+    intro='''bool packet_has_game_info_flag(enum packet_type type)
+{
+  switch (type) {
+
+'''
+    body=""
+    for p in packets:
+        body=body+'  case %(type)s:\n'%p.__dict__
+        if p.is_info != "game":
+            body=body+'    return FALSE;\n\n'
+        else:
+            body=body+'    return TRUE;\n\n'
+    extro='''  default:
+    return FALSE;
+  }
+}
+
+'''
+    return intro+body+extro
+
 # Returns a code fragement which is the declartion of
 # "enum packet_type".
 def get_enum_packet(packets):
@@ -1363,11 +1423,11 @@ def get_enum_packet(packets):
 
     mapping={}
     for p in packets:
-        if mapping.has_key(p.type_number):
-            print p.name,mapping[p.type_number].name
+        if p.type_number in mapping :
+            print(p.name,mapping[p.type_number].name)
             assert 0
         mapping[p.type_number]=p
-    sorted=mapping.keys()
+    sorted=list(mapping.keys())
     sorted.sort()
 
     last=-1
@@ -1397,8 +1457,8 @@ def strip_c_comment(s):
   # doesn't work with python version 2.2 and 2.3.
   # Do it by hand then.
   result=""
-  for i in filter(lambda x:x,string.split(s,"/*")):
-      l=string.split(i,"*/",1)
+  for i in filter(lambda x:x,s.split("/*")):
+      l=i.split("*/",1)
       assert len(l)==2,repr(i)
       result=result+l[1]
   return result  
@@ -1409,7 +1469,7 @@ def gen_main():
     ### parsing input
     src_dir=os.path.dirname(sys.argv[0])
     src_root=src_dir+"."
-    input_name="./packets.def"
+    input_name="../freeciv/freeciv/common/packets.def"
     ### We call this variable target_root instead of build_root
     ### to avoid confusion as we are not building to builddir in
     ### automake sense.
@@ -1419,7 +1479,7 @@ def gen_main():
 
     content=open(input_name).read()
     content=strip_c_comment(content)
-    lines=string.split(content,"\n")
+    lines=content.split("\n")
     lines=map(lambda x: re.sub("#.*$","",x),lines)
     lines=map(lambda x: re.sub("//.*$","",x),lines)
     lines=filter(lambda x:not re.search("^\s*$",x),lines)
@@ -1433,8 +1493,8 @@ def gen_main():
             lines2.append(i)
 
     packets=[]
-    for str in re.split("(?m)^end$",string.join(lines2,"\n")):
-        str=string.strip(str)
+    for str in re.split("(?m)^end$","\n".join(lines2)):
+        str=str.strip()
         if str:
             packets.append(Packet(str,types))
 

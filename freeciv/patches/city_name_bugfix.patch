@@ -1,0 +1,136 @@
+diff -Nurd -X.diff_ignore freeciv/ai/default/aisettler.c freeciv/ai/default/aisettler.c
+--- freeciv/ai/default/aisettler.c	2012-08-08 00:18:50.000000000 +0300
++++ freeciv/ai/default/aisettler.c	2012-08-08 00:35:01.000000000 +0300
+@@ -1175,8 +1175,8 @@
+               player_name(pplayer), TILE_XY(ptile));
+     return FALSE;
+   }
+-  handle_unit_build_city(pplayer, punit->id,
+-                         city_name_suggestion(pplayer, ptile));
++  ai_unit_build_city(pplayer, punit->id,
++                     city_name_suggestion(pplayer, ptile));
+   pcity = tile_city(ptile);
+   if (!pcity) {
+     log_error("%s: Failed to build city at (%d, %d)",
+diff -Nurd -X.diff_ignore freeciv/configure.ac freeciv/configure.ac
+--- freeciv/configure.ac	2012-08-08 00:31:38.000000000 +0300
++++ freeciv/configure.ac	2012-08-08 00:35:01.000000000 +0300
+@@ -700,6 +700,11 @@
+   AC_MSG_ERROR([No usable thread implementation available])
+ fi
+ 
++AM_PATH_GLIB_2_0(2.29.0,,
++AC_MSG_ERROR(Test for Glib failed. See the file 'INSTALL' for help))
++
++LIBS="$LIBS $GLIB_LIBS"
++
+ dnl Check and choose clients
+ if test "x$client" != "xno"; then
+ 
+@@ -1273,7 +1278,7 @@
+      fi
+    fi]],[[]])
+ 
+-CFLAGS="$EXTRA_DEBUG_CFLAGS $CFLAGS"
++CFLAGS="$EXTRA_DEBUG_CFLAGS $CFLAGS $GLIB_CFLAGS"
+ CXXFLAGS="$EXTRA_DEBUG_CXXFLAGS $CXXFLAGS"
+ LDFLAGS="$EXTRA_DEBUG_LDFLAGS $LDFLAGS"
+ 
+diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
+--- freeciv/server/unithand.c	2012-08-08 00:28:06.000000000 +0300
++++ freeciv/server/unithand.c	2012-08-08 00:39:58.000000000 +0300
+@@ -19,9 +19,12 @@
+ #include <stdlib.h>
+ #include <string.h>
+ 
++#include <glib.h>
++
+ /* utility */
+ #include "astring.h"
+ #include "fcintl.h"
++#include "fciconv.h"
+ #include "mem.h"
+ #include "rand.h"
+ #include "shared.h"
+@@ -704,7 +707,18 @@
+   res = unit_add_or_build_city_test(punit);
+ 
+   if (UAB_BUILD_OK == res) {
+-    city_build(pplayer, punit, name);
++    /* Unescape city name, which has been escaped in Javascript. */
++    char* unescaped_text = g_uri_unescape_string(name, NULL);
++
++    if (unescaped_text) {
++      char result_buf[MAX_LEN_NAME];
++
++      convert_string(unescaped_text,
++                     "latin1",
++                     "UTF-8",
++                     (char *)result_buf, sizeof(result_buf));
++      city_build(pplayer, punit, result_buf);
++    }
+   } else if (UAB_ADD_OK == res) {
+     city_add_unit(pplayer, punit);
+   } else {
+@@ -782,6 +796,36 @@
+ }
+ 
+ /**************************************************************************
++  City building function called from inside server itself - notably city
++  name has not been transfered over network so network encodings and such
++  do not apply.
++**************************************************************************/
++void ai_unit_build_city(struct player *pplayer, int unit_id, const char *name)
++{
++  enum unit_add_build_city_result res;
++  struct unit *punit = player_unit_by_number(pplayer, unit_id);
++
++  if (NULL == punit) {
++    /* Shouldn't happen */
++    log_error("handle_unit_build_city()"
++	      " invalid unit %d",
++	      unit_id);
++    return;
++  }
++
++  res = unit_add_or_build_city_test(punit);
++
++  if (res == UAB_BUILD_OK) {
++    city_build(pplayer, punit, name);
++  } else if (res == UAB_ADD_OK) {
++    city_add_unit(pplayer, punit);
++  } else {
++    city_add_or_build_error(pplayer, punit, res);
++  }
++}
++
++
++/**************************************************************************
+   Handle change in unit activity.
+ **************************************************************************/
+ void handle_unit_change_activity(struct player *pplayer, int unit_id,
+diff -Nurd -X.diff_ignore freeciv/server/unithand.h freeciv/server/unithand.h
+--- freeciv/server/unithand.h	2012-08-08 00:18:29.000000000 +0300
++++ freeciv/server/unithand.h	2012-08-08 00:38:31.000000000 +0300
+@@ -26,6 +26,7 @@
+ 
+ bool unit_move_handling(struct unit *punit, struct tile *pdesttile,
+                         bool igzoc, bool move_diplomat_city);
++void ai_unit_build_city(struct player *pplayer, int unit_id, const char *name);
+ 
+ void city_add_or_build_error(struct player *pplayer, struct unit *punit,
+                              enum unit_add_build_city_result res);
+diff -Nurd -X.diff_ignore freeciv/server/unittools.c freeciv/server/unittools.c
+--- freeciv/server/unittools.c	2012-08-08 00:28:06.000000000 +0300
++++ freeciv/server/unittools.c	2012-08-08 00:35:01.000000000 +0300
+@@ -3418,8 +3418,8 @@
+       }
+       break;
+     case ORDER_BUILD_CITY:
+-      handle_unit_build_city(pplayer, unitid,
+-			     city_name_suggestion(pplayer, unit_tile(punit)));
++      ai_unit_build_city(pplayer, unitid,
++                         city_name_suggestion(pplayer, unit_tile(punit)));
+       log_debug("  building city");
+       if (player_unit_by_number(pplayer, unitid)) {
+ 	/* Build failed. */

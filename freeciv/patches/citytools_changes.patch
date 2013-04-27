@@ -1,0 +1,12 @@
+diff -Nurd -X.diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
+--- freeciv/server/citytools.c	2012-05-16 21:07:37.000000000 +0300
++++ freeciv/server/citytools.c	2012-05-16 21:15:05.000000000 +0300
+@@ -1160,7 +1160,7 @@
+ 
+   notify_player(pplayer, ptile, E_CITY_BUILD, FTC_SERVER_INFO, NULL,
+ 		_("You have founded %s."),
+-		city_link(pcity));
++		pcity->name);
+   maybe_make_contact(ptile, city_owner(pcity));
+ 
+   unit_list_iterate((ptile)->units, punit) {

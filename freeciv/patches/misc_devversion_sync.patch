@@ -1,0 +1,88 @@
+diff -Nurd -X.diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
+--- freeciv/server/citytools.c	2012-07-16 00:05:33.000000000 +0300
++++ freeciv/server/citytools.c	2012-07-16 01:09:07.000000000 +0300
+@@ -1887,6 +1887,11 @@
+   char impr_buf[MAX_NUM_ITEMS + 1];
+   char can_build_impr_buf[MAX_NUM_ITEMS + 1];
+   char can_build_unit_buf[MAX_NUM_ITEMS + 1];
++  char food_output_buf[MAX_NUM_ITEMS + 1];
++  char shield_output_buf[MAX_NUM_ITEMS + 1];
++  char trade_output_buf[MAX_NUM_ITEMS + 1];
++  struct tile *pcenter = city_tile(pcity);
++  int c = 0;
+ 
+   packet->id=pcity->id;
+   packet->owner = player_number(city_owner(pcity));
+@@ -1981,6 +1986,7 @@
+   packet->did_buy = pcity->did_buy;
+   packet->did_sell = pcity->did_sell;
+   packet->was_happy = pcity->was_happy;
++  packet->unhappy = city_unhappy(pcity);
+ 
+   packet->walls = city_got_citywalls(pcity);
+ 
+@@ -2007,7 +2013,28 @@
+   } improvement_iterate_end;
+   impr_buf[improvement_count()] = '\0';
+   sz_strlcpy(packet->improvements, impr_buf);
+-  
++
++  city_tile_iterate(city_map_radius_sq_get(pcity), pcenter, ptile) {
++    char f[2];
++    char s[2];
++    char t[2];
++
++    fc_snprintf(f, sizeof(f), "%d", city_tile_output_now(pcity, ptile, O_FOOD));
++    fc_snprintf(s, sizeof(s), "%d", city_tile_output_now(pcity, ptile, O_SHIELD));
++    fc_snprintf(t, sizeof(t), "%d", city_tile_output_now(pcity, ptile, O_TRADE));
++    food_output_buf[c] = f[0];
++    shield_output_buf[c] = s[0];
++    trade_output_buf[c] = t[0];
++
++    c += 1;
++
++  } city_tile_iterate_end;
++  food_output_buf[c] = '\0';
++  shield_output_buf[c] = '\0';
++  trade_output_buf[c] = '\0';
++  sz_strlcpy(packet->food_output, food_output_buf);
++  sz_strlcpy(packet->shield_output, shield_output_buf);
++  sz_strlcpy(packet->trade_output, trade_output_buf);
+ }
+ 
+ /**************************************************************************
+diff -Nurd -X.diff_ignore freeciv/server/plrhand.c freeciv/server/plrhand.c
+--- freeciv/server/plrhand.c	2012-07-16 01:02:18.000000000 +0300
++++ freeciv/server/plrhand.c	2012-07-16 01:09:07.000000000 +0300
+@@ -892,6 +892,8 @@
+     packet->score = 0;
+   }
+ 
++  packet->net_income = player_get_expected_income(plr);
++
+   if (info_level >= INFO_MEETING) {
+     packet->gold = plr->economic.gold;
+     pgov = government_of_player(plr);
+diff -Nurd -X.diff_ignore freeciv/server/sernet.c freeciv/server/sernet.c
+--- freeciv/server/sernet.c	2012-07-16 01:02:18.000000000 +0300
++++ freeciv/server/sernet.c	2012-07-16 01:09:07.000000000 +0300
+@@ -1268,7 +1268,7 @@
+     }
+     fc_assert(i < ARRAY_SIZE(packet.conn_id));
+     packet.conn_id[i] = pconn->id;
+-    packet.ping_time[i] = pconn->ping_time;
++    packet.ping_time[i] = pconn->ping_time * 1000;
+     i++;
+   } conn_list_iterate_end;
+   packet.connections = i;
+diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
+--- freeciv/server/unithand.c	2012-07-16 01:08:53.000000000 +0300
++++ freeciv/server/unithand.c	2012-07-16 01:09:07.000000000 +0300
+@@ -705,6 +705,7 @@
+ 		       "UTF-8",
+ 		       (char*)result_buf, sizeof(result_buf));
+       city_build(pplayer, punit, result_buf);
++      g_free(unescaped_text);
+     }
+   } else if (res == AB_ADD_OK) {
+     city_add_unit(pplayer, punit);

@@ -1,0 +1,20 @@
+diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
+--- freeciv/server/unithand.c	2012-05-16 21:52:23.000000000 +0300
++++ freeciv/server/unithand.c	2012-05-16 21:52:33.000000000 +0300
+@@ -868,7 +868,7 @@
+     /* If we waited on a tile, reset punit->done_moving */
+     punit->done_moving = (punit->moves_left <= 0);
+     punit->has_orders = TRUE;
+-    punit->orders.length = path->length;
++    punit->orders.length = path->length - 1;
+     punit->orders.index = 0;
+     punit->orders.repeat = FALSE;
+     punit->orders.vigilant = FALSE;
+@@ -884,6 +884,7 @@
+         punit->orders.list[i].order = ORDER_MOVE;
+         punit->orders.list[i].dir = get_direction_for_step(old_tile, new_tile);
+         punit->orders.list[i].activity = ACTIVITY_LAST;
++        punit->orders.list[i].base = -1;
+       }
+       old_tile = new_tile;
+ 

@@ -683,7 +683,7 @@ function get_unit_activity_sprite(punit)
           "offset_y" : - unit_activity_offset_y}
     break;
 
-    case ACTIVITY_ROAD:
+    case ACTIVITY_OLD_ROAD:
       return {"key" : "unit.road",
           "offset_x" : unit_activity_offset_x, 
           "offset_y" : - unit_activity_offset_y}
@@ -719,7 +719,7 @@ function get_unit_activity_sprite(punit)
           "offset_y" : - unit_activity_offset_y}
     break;
     
-    case ACTIVITY_RAILROAD:
+    case ACTIVITY_OLD_RAILROAD:
       return {"key" : "unit.road",
           "offset_x" : unit_activity_offset_x, 
           "offset_y" : - unit_activity_offset_y}
@@ -751,6 +751,18 @@ function get_unit_activity_sprite(punit)
        
     case ACTIVITY_FORTIFYING:
       return {"key" : "unit.fortifying",
+          "offset_x" : unit_activity_offset_x, 
+          "offset_y" : - unit_activity_offset_y}
+    break;
+
+    case ACTIVITY_GEN_ROAD:
+      return {"key" : "unit.road",
+          "offset_x" : unit_activity_offset_x, 
+          "offset_y" : - unit_activity_offset_y}
+    break;
+
+    case ACTIVITY_CONVERT:
+      return {"key" : "unit.convert",
           "offset_x" : unit_activity_offset_x, 
           "offset_y" : - unit_activity_offset_y}
     break;
@@ -871,22 +883,24 @@ function get_tile_specials_sprite(ptile)
 ****************************************************************************/
 function get_tile_river_sprite(ptile)
 {
-  if (ptile == null || ptile['special'] == null) return null;
+  if (ptile == null) {
+    return null;
+  }
 
-  if (contains_special(ptile, S_RIVER)) {
+  if (tile_has_road(ptile, ROAD_RIVER)) {
     var river_str = "";
     for (var i = 0; i < num_cardinal_tileset_dirs; i++) {
       var dir = cardinal_tileset_dirs[i];
       var checktile = mapstep(ptile, dir);
       if (checktile 
-          && (contains_special(checktile, S_RIVER) || is_ocean_tile(checktile))) {
+          && (tile_has_road(checktile, ROAD_RIVER) || is_ocean_tile(checktile))) {
         river_str = river_str + dir_get_tileset_name(dir) + "1";
       } else {
         river_str = river_str + dir_get_tileset_name(dir) + "0";
       }
 
     }
-    return {"key" : "tx.s_river_" + river_str};
+    return {"key" : "river_s_" + river_str};
   }
 
   var pterrain = tile_terrain(ptile);
@@ -894,8 +908,8 @@ function get_tile_river_sprite(ptile)
     for (var i = 0; i < num_cardinal_tileset_dirs; i++) {
       var dir = cardinal_tileset_dirs[i];
       var checktile = mapstep(ptile, dir);
-      if (checktile != null && contains_special(checktile, S_RIVER)) {
-        return {"key" : "tx.river_outlet_" + dir_get_tileset_name(dir)};
+      if (checktile != null && tile_has_road(checktile, ROAD_RIVER)) {
+        return {"key" : "river_outlet_" + dir_get_tileset_name(dir)};
       }
     }
   }
@@ -1089,8 +1103,8 @@ function get_treaty_disagree_thumb_down()
 ****************************************************************************/
 function fill_road_rail_sprite_array(ptile, pcity)
 {
-  var road = contains_special(ptile, S_ROAD);
-  var rail = contains_special(ptile, S_RAILROAD);
+  var road = tile_has_road(ptile, ROAD_ROAD);
+  var rail = tile_has_road(ptile, ROAD_RAIL);
   var road_near = [];
   var rail_near = [];
   var draw_rail = [];
@@ -1104,8 +1118,8 @@ function fill_road_rail_sprite_array(ptile, pcity)
     /* Check if there is adjacent road/rail. */
     var tile1 = mapstep(ptile, dir);
     if (tile1 != null && tile_get_known(tile1) != TILE_UNKNOWN) {
-      road_near[dir] = contains_special(tile1, S_ROAD);
-      rail_near[dir] = contains_special(tile1, S_RAILROAD);
+      road_near[dir] = tile_has_road(tile1, ROAD_ROAD);
+      rail_near[dir] = tile_has_road(tile1, ROAD_RAIL);
 
       /* Draw rail/road if there is a connection from this tile to the
         * adjacent tile.  But don't draw road if there is also a rail

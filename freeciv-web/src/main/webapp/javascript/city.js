@@ -25,11 +25,7 @@ function city_tile(pcity)
 {
   if (pcity == null) return null;
   
-  if (pcity['tile'] != null) {
-    return pcity['tile'];
-  } else {
-    return map_pos_to_tile(pcity['x'], pcity['y'])
-  }
+  return index_to_tile(pcity['tile'])
 }
 
 /**************************************************************************
@@ -64,14 +60,14 @@ function remove_city(pcity_id)
  ...
 **************************************************************************/
 function is_city_center(city, tile) {
-  return (city['x'] == tile['x'] && city['y'] == tile['y']);
+  return (city['tile'] == tile['index']);
 } 
 
 /**************************************************************************
  ...
 **************************************************************************/
 function is_free_worked(city, tile) {
-  return (city['tile'] == tile);
+  return (city['tile'] == tile['index']);
 }
 
 
@@ -346,16 +342,17 @@ function close_city_dialog()
 function do_city_map_click(ptile)
 {
   var packet = null;
+  var c_tile = index_to_tile(active_city['tile']);
   if (ptile['worked'] == active_city['id']) {
     packet = {"type" : packet_city_make_specialist, 
 	         "city_id" : active_city['id'], 
-                 "worker_x" : ptile['x'] - active_city['x'] + 2, 
-		 "worker_y" : ptile['y'] - active_city['y'] + 2};
+                 "worker_x" : ptile['x'] - c_tile['x'] + 2, 
+		 "worker_y" : ptile['y'] - c_tile['y'] + 2};
   } else {
     packet = {"type" : packet_city_make_worker, 
 	         "city_id" : active_city['id'], 
-                 "worker_x" : ptile['x'] - active_city['x'] + 2, 
-		 "worker_y" : ptile['y'] - active_city['y'] + 2};
+                 "worker_x" : ptile['x'] - c_tile['x'] + 2, 
+		 "worker_y" : ptile['y'] - c_tile['y'] + 2};
   }    
   send_request (JSON.stringify(packet));
 

@@ -18,10 +18,6 @@ $metaserver_root
   Filesystem path to metaserver root.
   Default value is "$_SERVER[DOCUMENT_ROOT]$metaserver_url_path"
 
-$versions_file
-  Filesystem name for file to read Freeciv version information from.
-  Default value is "$metaserver_root/versions"
-
 $fcdb_default_db
   Name of the default database
   Default value is "default"

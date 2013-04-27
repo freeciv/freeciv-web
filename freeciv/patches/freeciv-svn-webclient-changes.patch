@@ -1,0 +1,213 @@
+diff -Nurd -X.diff_ignore freeciv/common/connection.c freeciv/common/connection.c
+--- freeciv/common/connection.c	2013-03-31 23:23:07.450844632 +0300
++++ freeciv/common/connection.c	2013-03-31 23:23:38.970843940 +0300
+@@ -240,6 +240,7 @@
+ /**************************************************************************
+   flush'em
+ **************************************************************************/
++#if 0
+ static void flush_connection_send_buffer_packets(struct connection *pc)
+ {
+   if(pc && pc->used && pc->send_buffer->ndata >= MAX_LEN_PACKET) {
+@@ -250,7 +251,7 @@
+     }
+   }
+ }
+-
++#endif
+ /****************************************************************************
+   Add data to send to the connection.
+ ****************************************************************************/
+@@ -290,6 +291,8 @@
+   }
+ 
+   pconn->statistics.bytes_send += len;
++
++#if 0
+   if (0 < pconn->send_buffer->do_buffer_sends) {
+     flush_connection_send_buffer_packets(pconn);
+     if (!add_connection_data(pconn, data, len)) {
+@@ -298,7 +301,9 @@
+       return FALSE;
+     }
+     flush_connection_send_buffer_packets(pconn);
+-  } else {
++  } else
++#endif
++  {
+     flush_connection_send_buffer_all(pconn);
+     if (!add_connection_data(pconn, data, len)) {
+       log_verbose("cut connection %s due to huge send buffer (2)",
+diff -Nurd -X.diff_ignore freeciv/common/connection.h freeciv/common/connection.h
+--- freeciv/common/connection.h	2013-03-31 23:23:07.434844632 +0300
++++ freeciv/common/connection.h	2013-03-31 23:23:38.970843940 +0300
+@@ -26,7 +26,7 @@
+ #include <sys/time.h>
+ #endif
+ 
+-#define USE_COMPRESSION
++//#define USE_COMPRESSION   /* webclient doesn't like compression*/
+ 
+ /**************************************************************************
+   The connection struct and related stuff.
+diff -Nurd -X.diff_ignore freeciv/common/featured_text.c freeciv/common/featured_text.c
+--- freeciv/common/featured_text.c	2013-03-31 23:23:07.402844633 +0300
++++ freeciv/common/featured_text.c	2013-03-31 23:23:38.970843940 +0300
+@@ -33,8 +33,8 @@
+ 
+ #include "featured_text.h"
+ 
+-#define SEQ_START '['
+-#define SEQ_STOP ']'
++#define SEQ_START '<'
++#define SEQ_STOP '>'
+ #define SEQ_END '/'
+ 
+ #define MAX_LEN_STR 32
+@@ -141,7 +141,7 @@
+   case TTT_UNDERLINE:
+     return "u";
+   case TTT_COLOR:
+-    return "c";
++    return "font";
+   case TTT_LINK:
+     return "l";
+   };
+@@ -238,7 +238,7 @@
+     {
+       if (!find_option(sequence, "foreground", ptag->color.foreground,
+                        sizeof(ptag->color.foreground))
+-          && !find_option(sequence, "fg", ptag->color.foreground,
++          && !find_option(sequence, "color", ptag->color.foreground,
+                           sizeof(ptag->color.foreground))) {
+         ptag->color.foreground[0] = '\0';
+       }
+@@ -482,7 +482,7 @@
+                                text_tag_type_short_name(ptag->type));
+ 
+       if (ptag->color.foreground[0] != '\0') {
+-        ret += fc_snprintf(buf + ret, len - ret, " fg=\"%s\"",
++        ret += fc_snprintf(buf + ret, len - ret, " color=\"%s\"",
+                            ptag->color.foreground);
+       }
+       if (ptag->color.background[0] != '\0') {
+diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/generate_packets.py
+--- freeciv/common/generate_packets.py	2013-03-31 23:23:07.450844632 +0300
++++ freeciv/common/generate_packets.py	2013-03-31 23:23:38.970843940 +0300
+@@ -27,7 +27,7 @@
+ 
+ ### The following parameters CHANGE the protocol. You have been warned.
+ fold_bool_into_header=1
+-disable_delta=0
++disable_delta=1
+ 
+ ################# END OF PARAMETERS ####################
+ 
+@@ -1639,6 +1639,7 @@
+ 
+ #include "packets.h"
+ 
++#if 0
+ static genhash_val_t hash_const(const void *vkey, size_t num_buckets)
+ {
+   return 0;
+@@ -1648,6 +1649,7 @@
+ {
+   return TRUE;
+ }
++#endif /* 0 */
+ 
+ ''')
+ 
+diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
+--- freeciv/common/packets.def	2013-03-31 23:23:07.434844632 +0300
++++ freeciv/common/packets.def	2013-03-31 23:24:26.246842903 +0300
+@@ -186,7 +186,7 @@
+ type SINT16             = sint16(int)
+ type SINT32             = sint32(int)
+ type UINT8              = uint8(int)
+-type UINT16             = uint16(int)
++type UINT16             = uint32(int)
+ type UINT32             = uint32(int)
+ 
+ # typedefs for arrays/structs
+@@ -211,7 +211,7 @@
+ type DIPLOMAT_ACTION    = uint8(enum diplomat_actions)
+ type DIRECTION          = sint8(enum direction8)
+ type EFFECT_TYPE        = uint8(enum effect_type)
+-type EVENT              = sint16(enum event_type)
++type EVENT              = sint32(enum event_type)
+ type GUI_TYPE           = uint8(enum gui_type)
+ type IMPR_GENUS         = uint8(enum impr_genus_id)
+ type KNOWN              = uint8(enum known_type)
+@@ -221,7 +221,7 @@
+ type REPORT_TYPE        = uint8(enum report_type)
+ type REQ_RANGE          = uint8(enum req_range)
+ type REQ_TYPE           = uint8(enum universals_n)
+-type SPECIAL            = uint16(enum tile_special_type)
++type SPECIAL            = uint32(enum tile_special_type)
+ type SSET_CLASS         = uint8(enum sset_class)
+ type SSET_TYPE          = uint8(enum sset_type)
+ type ROAD_COMPAT        = uint8(enum road_compat)
+@@ -258,7 +258,7 @@
+ type CONTINENT          = sint16(Continent_id)
+ type GOVERNMENT         = UINT8
+ type IMPROVEMENT        = uint8(Impr_type_id)
+-type NATION             = sint16(Nation_type_id)
++type NATION             = UINT32
+ type PLAYER             = SINT8
+ type RESOURCE           = uint8(Resource_type_id)
+ type SPECIALIST         = uint8(Specialist_type_id)
+@@ -1250,8 +1250,9 @@
+ PACKET_RULESET_GAME = 141; sc, lsend
+   UINT8 default_specialist;
+ 
+-  TECH_LIST global_init_techs[MAX_NUM_TECH_LIST];
+-  BUILDING_LIST global_init_buildings[MAX_NUM_BUILDING_LIST];
++  # These are removed from freeciv-web
++  # TECH_LIST global_init_techs[MAX_NUM_TECH_LIST];
++  # BUILDING_LIST global_init_buildings[MAX_NUM_BUILDING_LIST];
+ 
+   UINT8 veteran_levels;
+   STRING veteran_name[MAX_VET_LEVELS:veteran_levels][MAX_LEN_NAME];
+@@ -1581,7 +1582,7 @@
+   UINT16 id; key
+   STRING name[MAX_LEN_NAME];
+   STRING short_help[MAX_LEN_PACKET]; /* untranslated */
+-  STRING extra_help[MAX_LEN_PACKET]; /* untranslated */
++  # STRING extra_help[MAX_LEN_PACKET]; /* untranslated */
+   UINT8 category;
+ end
+ 
+diff -Nurd -X.diff_ignore freeciv/server/ruleset.c freeciv/server/ruleset.c
+--- freeciv/server/ruleset.c	2013-03-31 23:23:07.514844630 +0300
++++ freeciv/server/ruleset.c	2013-03-31 23:23:38.970843940 +0300
+@@ -5370,6 +5370,8 @@
+     misc_p.move_bonus[i] = vlevel->move_bonus;
+   }
+ 
++  /* FIXME: removed for webclient. - ANdreas. */
++#if 0
+   fc_assert(sizeof(misc_p.global_init_techs)
+             == sizeof(game.rgame.global_init_techs));
+   fc_assert(ARRAY_SIZE(misc_p.global_init_techs)
+@@ -5384,6 +5386,7 @@
+     misc_p.global_init_buildings[i] =
+       game.rgame.global_init_buildings[i];
+   }
++#endif
+ 
+   misc_p.default_specialist = DEFAULT_SPECIALIST;
+ 
+diff -Nurd -X.diff_ignore freeciv/server/settings.c freeciv/server/settings.c
+--- freeciv/server/settings.c	2013-03-31 23:23:07.466844631 +0300
++++ freeciv/server/settings.c	2013-03-31 23:23:38.974843940 +0300
+@@ -4111,7 +4111,7 @@
+     sz_strlcpy(setting.name, setting_name(pset));
+     /* Send untranslated strings to client */
+     sz_strlcpy(setting.short_help, setting_short_help(pset));
+-    sz_strlcpy(setting.extra_help, setting_extra_help(pset));
++    /* sz_strlcpy(setting.extra_help, setting_extra_help(pset)); */
+     setting.category = pset->scategory;
+ 
+     send_packet_server_setting_const(pconn, &setting);

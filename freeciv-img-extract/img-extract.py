@@ -22,40 +22,40 @@ import json
 
 gfxdir = "";
 
-files = ["amplio2.tilespec",
-  "amplio2/ancientcities.spec",
-  "amplio2/explosions.spec",
-  "amplio2/fog.spec",
-  "amplio2/grid.spec",
-#  "amplio2/icons.spec",
-  "amplio2/medievalcities.spec",
-  "amplio2/moderncities.spec",
-  "amplio2/mountains.spec",
-  "amplio2/hills.spec",
-#  "../freeciv/data/amplio/nuke.spec", 	#not in use yet
-  "amplio2/ocean.spec",
-  "amplio2/select.spec",
-  "amplio2/terrain1.spec",
-  "amplio2/terrain2.spec",
-  "amplio2/tiles.spec",
-  "amplio2/units.spec",
-  "amplio2/water.spec",  
-#  "amplio2/wonders.spec",
-  "amplio2/wonders-large.spec",
-  "../freeciv/data/misc/colors.tilespec",
-  "amplio2/buildings-large.spec",
-#  "../freeciv/data/misc/icons.spec",
-#  "../freeciv/data/misc/chiefs.spec",  #not in use yet
-  "../freeciv/data/misc/overlays.spec",
-#  "../freeciv/data/misc/citybar.spec",  #not in use yet
-  "../freeciv/data/misc/shields.spec",
-  "../freeciv/data/misc/small.spec",
-#  "../freeciv/data/misc/cursors.spec",
-  "../freeciv/data/misc/space.spec",
-  "../freeciv/data/misc/editor.spec",
-  "../freeciv/data/misc/techs.spec",
-  "../freeciv/data/misc/flags.spec",
-  "../freeciv/data/misc/treaty.spec"]; 
+files = ["../freeciv/freeciv/data/amplio2.tilespec",
+  "../freeciv/freeciv/data/amplio2/ancientcities.spec",
+  "../freeciv/freeciv/data/amplio2/explosions.spec",
+  "../freeciv/freeciv/data/amplio2/fog.spec",
+  "../freeciv/freeciv/data/amplio2/grid.spec",
+#  "../freeciv/freeciv/data/amplio2/icons.spec",
+  "../freeciv/freeciv/data/amplio2/medievalcities.spec",
+  "../freeciv/freeciv/data/amplio2/moderncities.spec",
+  "../freeciv/freeciv/data/amplio2/mountains.spec",
+  "../freeciv/freeciv/data/amplio2/hills.spec",
+#  "../freeciv/freeciv/data/amplio2/nuke.spec", #not in use yet
+  "../freeciv/freeciv/data/amplio2/ocean.spec",
+  "../freeciv/freeciv/data/amplio2/select.spec",
+  "../freeciv/freeciv/data/amplio2/terrain1.spec",
+  "../freeciv/freeciv/data/amplio2/terrain2.spec",
+  "../freeciv/freeciv/data/amplio2/tiles.spec",
+  "../freeciv/freeciv/data/amplio2/units.spec",
+  "../freeciv/freeciv/data/amplio2/veterancy.spec",
+  "../freeciv/freeciv/data/amplio2/water.spec",
+  "../freeciv/freeciv/data/misc/wonders-large.spec",
+  "../freeciv/freeciv/data/misc/colors.tilespec",
+  "../freeciv/freeciv/data/misc/buildings-large.spec",
+#  "../freeciv/freeciv/data/misc/icons.spec",
+#  "../freeciv/freeciv/data/misc/chiefs.spec",  #not in use yet
+  "../freeciv/freeciv/data/misc/overlays.spec",
+#  "../freeciv/freeciv/data/misc/citybar.spec",  #not in use yet
+  "../freeciv/freeciv/data/misc/shields.spec",
+  "../freeciv/freeciv/data/misc/small.spec",
+#  "../freeciv/freeciv/data/misc/cursors.spec",
+  "../freeciv/freeciv/data/misc/space.spec",
+  "../freeciv/freeciv/data/misc/editor.spec",
+  "../freeciv/freeciv/data/misc/techs.spec",
+  "../freeciv/freeciv/data/misc/flags.spec",
+  "../freeciv/freeciv/data/misc/treaty.spec"]; 
 
 global tileset;
 global curr_x;
@@ -72,7 +72,7 @@ max_row_height = 0;
 curr_x = 0;
 curr_y = 14;
 # Set size of tileset image manually depending on number of tiles.
-tileset_height = 2250;  
+tileset_height = 2500;
 tileset_width = 2250;
 
 dither_types = ["t.l0.desert1", "t.l0.plains1", "t.l0.grassland1", "t.l0.forest1", "t.l0.jungle1", "t.l0.hills1", "t.l0.mountains1", "t.l0.tundra1", "t.l0.swamp1"];

@@ -1,0 +1,225 @@
+diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
+--- freeciv/common/packets.def	2013-03-16 20:33:58.048564292 +0200
++++ freeciv/common/packets.def	2013-03-16 20:38:15.896558636 +0200
+@@ -594,8 +594,13 @@
+   STRING can_build_unit[MAX_LEN_MSG];
+   STRING can_build_improvement[MAX_LEN_MSG];
+   STRING improvements[MAX_LEN_MSG];
++
++  STRING food_output[MAX_LEN_MSG];
++  STRING shield_output[MAX_LEN_MSG];
++  STRING trade_output[MAX_LEN_MSG];
+   #BV_CITY_OPTIONS city_options;
+   STRING name[MAX_LEN_NAME];
++  BOOL unhappy;
+ end
+ 
+ PACKET_CITY_SHORT_INFO = 32; sc, lsend, is-game-info, cancel(PACKET_CITY_INFO)
+@@ -738,6 +743,7 @@
+   UINT8 color_blue;
+ 
+   CITY wonders[B_LAST]; diff
++  UINT32 net_income;
+ end
+ 
+ PACKET_PLAYER_PHASE_DONE = 52; cs, dsend
+@@ -1007,25 +1013,25 @@
+ 
+ PACKET_DIPLOMACY_CREATE_CLAUSE_REQ = 99; cs, dsend
+   PLAYER counterpart, giver;
+-  CLAUSE type;
++  CLAUSE clause_type;
+   UINT32 value;
+ end
+ 
+ PACKET_DIPLOMACY_CREATE_CLAUSE = 100; sc, dsend, lsend
+   PLAYER counterpart, giver;
+-  CLAUSE type;
++  CLAUSE clause_type;
+   UINT32 value;
+ end
+ 
+ PACKET_DIPLOMACY_REMOVE_CLAUSE_REQ = 101; cs, dsend
+   PLAYER counterpart, giver;
+-  CLAUSE type;
++  CLAUSE clause_type;
+   UINT32 value;
+ end
+ 
+ PACKET_DIPLOMACY_REMOVE_CLAUSE = 102; sc, dsend, lsend
+   PLAYER counterpart, giver;
+-  CLAUSE type;
++  CLAUSE clause_type;
+   UINT32 value;
+ end
+ 
+@@ -1053,7 +1059,7 @@
+ end
+ 
+ PACKET_REPORT_REQ = 111; cs, handle-per-conn, dsend
+-  REPORT_TYPE type;
++  REPORT_TYPE report_type;
+ end
+ 
+ /************** Connection packets **********************/
+@@ -1078,9 +1084,9 @@
+ 
+ # Information about the ping times of the connections.
+ PACKET_CONN_PING_INFO = 116; sc, lsend
+-  UINT8 connections;
++  UINT32 connections;
+   CONNECTION conn_id[MAX_NUM_CONNECTIONS:connections];
+-  FLOAT10x7 ping_time[MAX_NUM_CONNECTIONS:connections];
++  UINT32 ping_time[MAX_NUM_CONNECTIONS:connections];
+ end
+ 
+ # For compatibility with older versions, this number cannot be changed.
+@@ -1942,3 +1948,17 @@
+ PACKET_INFO_TEXT_MESSAGE = 255; sc, dsend
+   STRING message[MAX_LEN_MSG];
+ end
++
++PACKET_GOTO_PATH_REQ = 253; cs, dsend
++  UNIT unit_id;
++  TILE goal;
++end
++
++# used for showing GOTO path in web client.
++PACKET_GOTO_PATH = 252; sc, dsend
++  UNIT unit_id;
++  UINT16 length;
++  DIRECTION dir[MAX_LEN_ROUTE:length];
++  TILE dest;
++  UINT32 turns;
++end
+diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
+--- freeciv/server/unithand.c	2013-03-16 20:33:58.292564287 +0200
++++ freeciv/server/unithand.c	2013-03-16 20:37:31.136559618 +0200
+@@ -799,6 +799,107 @@
+ }
+ 
+ /**************************************************************************
++  This function handles GOTO path requests from the client.
++**************************************************************************/
++void handle_goto_path_req(struct player *pplayer, int unit_id, int goal)
++{
++  struct unit *punit = player_unit_by_number(pplayer, unit_id);
++  struct tile *ptile = index_to_tile(goal);
++  struct pf_parameter parameter;
++  struct pf_map *pfm;
++  struct pf_path *path;
++  struct tile *old_tile;
++  int i = 0;
++  struct packet_goto_path p;
++
++  if (NULL == punit) {
++    /* Shouldn't happen */
++    log_error("handle_unit_move()"
++              " invalid unit %d",
++              unit_id);
++    return;
++  }
++
++  if (NULL == ptile) {
++    /* Shouldn't happen */
++    log_error("handle_unit_move()"
++              " invalid %s (%d) tile (%d,%d)",
++              unit_rule_name(punit),
++              unit_id,
++              TILE_XY(ptile));
++    return;
++  }
++
++  if (!is_player_phase(unit_owner(punit), game.info.phase)) {
++    /* Client is out of sync, ignore */
++    log_verbose("handle_unit_move()"
++                " invalid %s (%d) %s != phase %d",
++                unit_rule_name(punit),
++                unit_id,
++                nation_rule_name(nation_of_unit(punit)),
++                game.info.phase);
++    return;
++  }
++
++  p.unit_id = punit->id;
++  p.dest = tile_index(ptile);
++
++  /* Use path-finding to find a goto path. */
++  pft_fill_unit_parameter(&parameter, punit);
++  pfm = pf_map_new(&parameter);
++  path = pf_map_path(pfm, ptile);
++  pf_map_destroy(pfm);
++
++  if (path) {
++    int total_mc = 0;
++
++    p.length = path->length - 1;
++
++    old_tile = path->positions[0].tile;
++
++    /* Remove city spot reservations for AI settlers on city founding
++     * mission, before goto_tile reset. */
++    if (punit->server.adv->task != AUT_NONE) {
++      adv_unit_new_task(punit, AUT_NONE, NULL);
++    }
++
++    punit->ai_controlled = FALSE;
++    punit->goto_tile = NULL;
++
++    free_unit_orders(punit);
++    /* If we waited on a tile, reset punit->done_moving */
++    punit->done_moving = (punit->moves_left <= 0);
++    punit->has_orders = TRUE;
++    punit->orders.length = path->length - 1;
++    punit->orders.index = 0;
++    punit->orders.repeat = FALSE;
++    punit->orders.vigilant = FALSE;
++    punit->orders.list
++      = fc_malloc(path->length * sizeof(*(punit->orders.list)));
++    for (i = 0; i < path->length - 1; i++) {
++      struct tile *new_tile = path->positions[i + 1].tile;
++      int dir;
++
++      total_mc += path->positions[1].total_MC;
++      if (same_pos(new_tile, old_tile)) {
++        dir = -1;
++      } else {
++        dir = get_direction_for_step(old_tile, new_tile);
++      }
++      old_tile = new_tile;
++      p.dir[i] = dir;
++
++    }
++    pf_path_destroy(path);
++    p.turns = total_mc / unit_move_rate(punit);
++    send_packet_goto_path(pplayer->current_conn, &p);
++
++  } else {
++    return;
++  }
++}
++
++/**************************************************************************
+   City building function called from inside server itself - notably city
+   name has not been transfered over network so network encodings and such
+   do not apply.
+@@ -968,14 +1069,16 @@
+ 
+    if (!is_player_phase(unit_owner(punit), game.info.phase)
+       || execute_orders(punit)) {
+-    /* Looks like the unit survived. */
++     /* Looks like the unit survived. */
+      send_unit_info(NULL, punit);
+     }
+ 
+     pf_path_destroy(path);
+-    return ;
++    return;
+   } else {
+-    return ;
++    notify_player(pplayer, punit->tile, E_BAD_COMMAND,
++                  ftc_server, _("The unit can't go there."));
++    return;
+   }
+ 
+ }

@@ -1,0 +1,1435 @@
+diff -Nurd -X.diff_ignore freeciv/common/connection.h freeciv/common/connection.h
+--- freeciv/common/connection.h	2013-03-24 22:21:16.660331701 +0200
++++ freeciv/common/connection.h	2013-03-24 22:21:53.208330899 +0200
+@@ -26,6 +26,8 @@
+ #include <sys/time.h>
+ #endif
+ 
++#include <jansson.h>
++
+ //#define USE_COMPRESSION   /* webclient doesn't like compression*/
+ 
+ /**************************************************************************
+@@ -46,7 +48,7 @@
+ struct conn_pattern_list;
+ 
+ /* Used in the network protocol. */
+-#define MAX_LEN_PACKET   4096
++#define MAX_LEN_PACKET    65536
+ #define MAX_LEN_CAPSTR    512
+ #define MAX_LEN_PASSWORD  512 /* do not change this under any circumstances */
+ 
+@@ -150,6 +152,7 @@
+   struct socket_packet_buffer *buffer;
+   struct socket_packet_buffer *send_buffer;
+   struct timer *last_write;
++  json_t *json_packet;
+ 
+   double ping_time;
+   
+diff -Nurd -X.diff_ignore freeciv/common/dataio.c freeciv/common/dataio.c
+--- freeciv/common/dataio.c	2013-03-24 22:21:16.684331700 +0200
++++ freeciv/common/dataio.c	2013-03-24 22:21:53.208330899 +0200
+@@ -222,9 +222,17 @@
+ }
+ 
+ /**************************************************************************
++  Insert 8 bit value with json.
++**************************************************************************/
++void dio_put_uint8(struct data_out *dout, char *key, int value)
++{
++  json_object_set_new(dout->json, key, json_integer(value));
++}
++
++/**************************************************************************
+   Insert value using 8 bits. May overflow.
+ **************************************************************************/
+-void dio_put_uint8(struct data_out *dout, int value)
++void dio_put_uint8_old(struct data_out *dout, int value)
+ {
+   if (value < 0x00 || 0xff < value) {
+     log_error("Trying to put %d into 8 bits", value);
+@@ -242,7 +250,7 @@
+ /**************************************************************************
+   Insert value using 16 bits. May overflow.
+ **************************************************************************/
+-void dio_put_uint16(struct data_out *dout, int value)
++void dio_put_uint16_old(struct data_out *dout, int value)
+ {
+   if (value < 0x0000 || 0xffff < value) {
+     log_error("Trying to put %d into 16 bits", value);
+@@ -260,6 +268,15 @@
+ /**************************************************************************
+   Insert value using 32 bits. May overflow.
+ **************************************************************************/
++void dio_put_uint16(struct data_out *dout, char *key, int value)
++{
++  json_object_set_new(dout->json, key, json_integer(value));
++}
++
++/**************************************************************************
++...
++**************************************************************************/
++#if 0
+ void dio_put_uint32(struct data_out *dout, int value)
+ {
+   if (sizeof(value) > 4 && (value < 0x00000000 || 0xffffffff < value)) {
+@@ -278,26 +295,26 @@
+ /**************************************************************************
+   Insert value using 'size' bits. May overflow.
+ **************************************************************************/
+-void dio_put_type(struct data_out *dout, enum data_type type, int value)
++void dio_put_type(struct data_out *dout, enum data_type type, char *key, int value)
+ {
+   switch (type) {
+   case DIOT_UINT8:
+-    dio_put_uint8(dout, value);
++    dio_put_uint8(dout, key, value);
+     return;
+   case DIOT_UINT16:
+-    dio_put_uint16(dout, value);
++    dio_put_uint16(dout, key, value);
+     return;
+   case DIOT_UINT32:
+-    dio_put_uint32(dout, value);
++    dio_put_uint32(dout, key, value);
+     return;
+   case DIOT_SINT8:
+-    dio_put_sint8(dout, value);
++    dio_put_sint8(dout, key, value);
+     return;
+   case DIOT_SINT16:
+-    dio_put_sint16(dout, value);
++    dio_put_sint16(dout, key, value);
+     return;
+   case DIOT_SINT32:
+-    dio_put_sint32(dout, value);
++    dio_put_sint32(dout, key, value);
+     return;
+   case DIOT_LAST:
+     break;
+@@ -413,11 +430,12 @@
+     }
+   }
+ }
++#endif
+ 
+ /**************************************************************************
+   Insert block directly from memory.
+ **************************************************************************/
+-void dio_put_memory(struct data_out *dout, const void *value, size_t size)
++void dio_put_memory_old(struct data_out *dout, const void *value, size_t size)
+ {
+   if (enough_space(dout, size)) {
+     memcpy(ADD_TO_POINTER(dout->dest, dout->current), value, size);
+@@ -428,18 +446,18 @@
+ /**************************************************************************
+   Insert NULL-terminated string. Conversion callback is used if set.
+ **************************************************************************/
+-void dio_put_string(struct data_out *dout, const char *value)
++void dio_put_string_old(struct data_out *dout, const char *value)
+ {
+   if (put_conv_callback) {
+     size_t length;
+     char *buffer;
+ 
+     if ((buffer = (*put_conv_callback) (value, &length))) {
+-      dio_put_memory(dout, buffer, length + 1);
++      dio_put_memory_old(dout, buffer, length + 1);
+       free(buffer);
+     }
+   } else {
+-    dio_put_memory(dout, value, strlen(value) + 1);
++    dio_put_memory_old(dout, value, strlen(value) + 1);
+   }
+ }
+ 
+@@ -448,6 +466,7 @@
+   value string each bit is represented by one character, value '1' indicating
+   TRUE bit.
+ **************************************************************************/
++#if 0
+ void dio_put_bit_string(struct data_out *dout, const char *value)
+ {
+   /* Note that size_t is often an unsigned type, so we must be careful
+@@ -544,10 +563,105 @@
+   }
+ }
+ 
++#endif
++
++/**************************************************************************
++...
++**************************************************************************/
++void dio_put_worklist(struct data_out *dout, char *key, const struct worklist *pwl)
++{
++  /* TODO: implement */
++}
++
++/**************************************************************************
++...
++**************************************************************************/
++void dio_put_array_uint8(struct data_out *dout, char *key, int *values, int size)
++{
++  int i;
++  json_t *array = json_array();
++  for (i = 0; i < size; i++) {
++    json_array_append_new(array, json_integer(values[i]));
++  }
++  
++  json_object_set_new(dout->json, key, array);
++}
++
++/**************************************************************************
++...
++**************************************************************************/
++void dio_put_array_uint32(struct data_out *dout, char *key, int *values, int size)
++{
++  int i;
++  json_t *array = json_array();
++
++  for (i = 0; i < size; i++) {
++    json_array_append_new(array, json_integer(values[i]));
++  }
++  
++  json_object_set_new(dout->json, key, array);
++}
++
++/**************************************************************************
++...
++**************************************************************************/
++void dio_put_array_sint8(struct data_out *dout, char *key, int *values, int size)
++{
++  int i;
++  json_t *array = json_array();
++  for (i = 0; i < size; i++) {
++    json_array_append_new(array, json_integer(values[i]));
++  }
++  
++  json_object_set_new(dout->json, key, array);
++}
++
++/**************************************************************************
++...
++**************************************************************************/
++void dio_put_array_sint16(struct data_out *dout, char *key, int *values, int size)
++{
++  int i;
++  json_t *array = json_array();
++  for (i = 0; i < size; i++) {
++    json_array_append_new(array, json_integer(values[i]));
++  }
++  
++  json_object_set_new(dout->json, key, array);
++}
++
++/**************************************************************************
++...
++**************************************************************************/
++void dio_put_array_sint32(struct data_out *dout, char *key, int *values, int size)
++{
++  int i;
++  json_t *array = json_array();
++  for (i = 0; i < size; i++) {
++    json_array_append_new(array, json_integer(values[i]));
++  }
++  
++  json_object_set_new(dout->json, key, array);
++}
++
++/**************************************************************************
++...
++**************************************************************************/
++void dio_put_array_bool8(struct data_out *dout, char *key, bool *values, int size)
++{
++  int i;
++  json_t *array = json_array();
++  for (i = 0; i < size; i++) {
++    json_array_append_new(array, values[i] ? json_true() : json_false());
++  }
++  
++  json_object_set_new(dout->json, key, array);
++}
++
+ /**************************************************************************
+  Receive uint8 value to dest.
+ **************************************************************************/
+-bool dio_get_uint8(struct data_in *din, int *dest)
++bool dio_get_uint8_old(struct data_in *din, int *dest)
+ {
+   uint8_t x;
+ 
+@@ -566,9 +680,100 @@
+ }
+ 
+ /**************************************************************************
++ Receive uint8 value to dest with json.
++**************************************************************************/
++bool dio_get_uint8(json_t *json_packet, char *key, int *dest)
++{
++  json_t *pint = json_object_get(json_packet, key);
++
++  if (!pint) {
++    log_error("ERROR: Unable to get uint8 with key: %s", key);
++    return FALSE;
++  } 
++  *dest = json_integer_value(pint);
++
++  if (!dest) {
++    log_error("ERROR: Unable to get unit8 with key: %s", key);
++    return FALSE;
++  }
++
++  return TRUE;
++}
++
++/**************************************************************************
++ Receive uint16 value to dest with json.
++**************************************************************************/
++bool dio_get_uint16(json_t *json_packet, char *key, int *dest)
++{
++  json_t *pint = json_object_get(json_packet, key);
++
++  if (!pint) {
++    log_error("ERROR: Unable to get uint16 with key: %s", key);
++    return FALSE;
++  } 
++  *dest = json_integer_value(pint);
++
++  if (!dest) {
++    log_error("ERROR: Unable to get unit16 with key: %s", key);
++    return FALSE;
++  }
++
++  return TRUE;
++}
++
++/**************************************************************************
++ ..
++**************************************************************************/
++bool dio_get_uint32(json_t *json_packet, char *key, int *dest)
++{
++  json_t *pint = json_object_get(json_packet, key);
++
++  if (!pint) {
++    log_error("ERROR: Unable to get uint32 with key: %s", key);
++    return FALSE;
++  } 
++  *dest = json_integer_value(pint);
++
++  if (!dest) {
++    log_error("ERROR: Unable to get unit32 with key: %s", key);
++    return FALSE;
++  }
++
++  return TRUE;
++}
++
++/**************************************************************************
++ ..
++**************************************************************************/
++bool dio_get_bit_string(json_t *json_packet, char *key, char *dest,
++ 			size_t max_dest_size)
++{
++  /* TODO: implement */
++  return TRUE;
++}
++
++/**************************************************************************
++ ..
++**************************************************************************/
++bool dio_get_tech_list(json_t *json_packet, char *key, int *dest)
++{
++  /* TODO: implement */
++  return TRUE;
++}
++
++/**************************************************************************
++ ..
++**************************************************************************/
++bool dio_get_worklist(json_t *json_packet, char *key, struct worklist *pwl)
++{
++  /* TODO: implement */
++  return TRUE;
++}
++
++/**************************************************************************
+  Receive uint16 value to dest.
+ **************************************************************************/
+-bool dio_get_uint16(struct data_in *din, int *dest)
++bool dio_get_uint16_old(struct data_in *din, int *dest)
+ {
+   uint16_t x;
+ 
+@@ -589,6 +794,7 @@
+ /**************************************************************************
+  Receive uint32 value to dest.
+ **************************************************************************/
++#if 0
+ bool dio_get_uint32(struct data_in *din, int *dest)
+ {
+   uint32_t x;
+@@ -757,11 +963,12 @@
+   din->current += dest_size;
+   return TRUE;
+ }
++#endif
+ 
+ /**************************************************************************
+   Take string. Conversion callback is used.
+ **************************************************************************/
+-bool dio_get_string(struct data_in *din, char *dest, size_t max_dest_size)
++bool dio_get_string_old(struct data_in *din, char *dest, size_t max_dest_size)
+ {
+   char *c;
+   size_t offset, remaining;
+@@ -798,6 +1005,7 @@
+ /**************************************************************************
+   Take bits and produce string containing chars '0' and '1'
+ **************************************************************************/
++#if 0
+ bool dio_get_bit_string(struct data_in *din, char *dest,
+ 			size_t max_dest_size)
+ {
+@@ -971,10 +1179,31 @@
+ 
+   return TRUE;
+ }
++#endif
++
++/**************************************************************************
++...
++**************************************************************************/
++bool dio_get_uint8_vec8(json_t *json_packet, char *key, int **values, int stop_value)
++{
++  /* TODO: implement */
++  return TRUE;
++}
++
++/**************************************************************************
++...
++**************************************************************************/
++bool dio_get_uint16_vec8(json_t *json_packet, char *key, int **values,
++                         int stop_value)
++{
++  /* TODO: implement */
++  return TRUE;
++}
+ 
+ /**************************************************************************
+  Receive vector of uint6 values.
+ **************************************************************************/
++#if 0
+ bool dio_get_uint16_vec8(struct data_in *din, int **values, int stop_value)
+ {
+   int count, inx;
+@@ -1021,10 +1250,21 @@
+ 
+   return TRUE;
+ }
++#endif
++
++/**************************************************************************
++  ..
++**************************************************************************/
++bool dio_get_requirement(json_t *json_packet, char *key, struct requirement *preq)
++{
++  /* TODO: implement */
++  return TRUE;
++}
+ 
+ /**************************************************************************
+   Serialize a requirement.
+ **************************************************************************/
++#if 0
+ void dio_put_requirement(struct data_out *dout, const struct requirement *preq)
+ {
+   int type, range, value;
+@@ -1038,3 +1278,241 @@
+   dio_put_bool8(dout, survives);
+   dio_put_bool8(dout, negated);
+ }
++#endif
++
++/**************************************************************************
++...
++**************************************************************************/
++void dio_put_uint32(struct data_out *dout, char *key, int value)
++{
++  json_object_set_new(dout->json, key, json_integer(value));
++}
++
++/**************************************************************************
++...
++**************************************************************************/
++void dio_put_bool8(struct data_out *dout, char *key, bool value)
++{
++  json_object_set_new(dout->json, key, value ? json_true() : json_false());
++}
++
++/**************************************************************************
++...
++**************************************************************************/
++void dio_put_bool32(struct data_out *dout, char *key, bool value)
++{
++  json_object_set_new(dout->json, key, value ? json_true() : json_false());
++}
++
++/**************************************************************************
++...
++**************************************************************************/
++void dio_put_float(struct data_out *dout, char *key, float value, int float_factor)
++{
++  json_object_set_new(dout->json, key, json_real(value));
++}
++
++/**************************************************************************
++...
++**************************************************************************/
++void dio_put_uint8_vec8(struct data_out *dout, char *key, int *values, int stop_value)
++{
++  /* TODO: implement. */
++}
++
++/**************************************************************************
++...
++**************************************************************************/
++void dio_put_uint16_vec8(struct data_out *dout, char *key, int *values,
++                         int stop_value)
++{
++  /* TODO: implement. */
++}
++
++/**************************************************************************
++...
++**************************************************************************/
++void dio_put_memory(struct data_out *dout, char *key, const void *value, size_t size)
++{
++  /* TODO: implement */
++}
++
++/**************************************************************************
++...
++**************************************************************************/
++void dio_put_string(struct data_out *dout, char *key, const char *value)
++{
++  json_object_set_new(dout->json, key, json_string(value));
++}
++
++/**************************************************************************
++...
++**************************************************************************/
++void dio_put_string_array(struct data_out *dout, char *key, 
++		          const char *value, int size)
++{
++  int i;
++
++  json_t *array = json_array();
++  for (i = 0; i < size; i++) {
++    if (value != NULL) {
++      json_array_append_new(array, json_string(value + i));
++    }
++  }
++  
++  json_object_set_new(dout->json, key, array);
++}
++
++/**************************************************************************
++...
++**************************************************************************/
++void dio_put_bit_string(struct data_out *dout, char *key, const char *value)
++{
++  /* TODO: implement */
++}
++
++/**************************************************************************
++...
++**************************************************************************/
++void dio_put_tech_list(struct data_out *dout, char *key, const int *value)
++{
++  /* TODO: implement */
++}
++
++/**************************************************************************
++  ..
++**************************************************************************/
++void dio_put_requirement(struct data_out *dout, char *key, const struct requirement *preq, int size)
++{
++  /* TODO: implement */
++}
++
++/**************************************************************************
++...
++**************************************************************************/
++bool dio_get_bool8(json_t *json_packet, char *key, bool * dest)
++{
++  json_t *pbool = json_object_get(json_packet, key);
++
++  if (!pbool) {
++    log_error("ERROR: Unable to get bool8 with key: %s", key);
++    return FALSE;
++  } 
++  *dest = json_is_true(pbool);
++
++  if (!dest) {
++    log_error("ERROR: Unable to get bool with key: %s", key);
++    return FALSE;
++  }
++
++  return TRUE;
++}
++
++/**************************************************************************
++...
++**************************************************************************/
++bool dio_get_bool32(json_t *json_packet, char *key, bool *dest)
++{
++  json_t *pbool = json_object_get(json_packet, key);
++
++  if (!pbool) {
++    log_error("ERROR: Unable to get bool32 with key: %s", key);
++    return FALSE;
++  }
++  *dest = json_is_true(pbool);
++
++  if (!dest) {
++    log_error("ERROR: Unable to get bool32 with key: %s", key);
++    return FALSE;
++  }
++
++  return TRUE;
++}
++
++/**************************************************************************
++  ...
++**************************************************************************/
++bool dio_get_float(json_t *json_packet, char *key, float *dest, int float_factor)
++{
++  json_t *preal = json_object_get(json_packet, key);
++
++  if (!preal) {
++    log_error("ERROR: Unable to get real with key: %s", key);
++    return FALSE;
++  }
++  *dest = json_real_value(preal);
++
++  return TRUE;
++}
++
++/**************************************************************************
++...
++**************************************************************************/
++bool dio_get_sint8(json_t *json_packet, char *key, int *dest)
++{
++  json_t *pint = json_object_get(json_packet, key);
++
++  if (!pint) {
++    log_error("ERROR: Unable to get sint8 with key: %s", key);
++    return FALSE;
++  }
++  *dest = json_integer_value(pint);
++
++  if (!dest) {
++    log_error("ERROR: Unable to get sint8 with key: %s", key);
++    return FALSE;
++  }
++
++  return TRUE;
++}
++
++/**************************************************************************
++...
++**************************************************************************/
++bool dio_get_sint16(json_t *json_packet, char *key, int *dest)
++{
++  json_t *pint = json_object_get(json_packet, key);
++
++  if (!pint) {
++    log_error("ERROR: Unable to get sint16 with key: %s", key);
++    return FALSE;
++  }
++  *dest = json_integer_value(pint);
++
++  if (!dest) {
++    log_error("ERROR: Unable to get sint16 with key: %s", key);
++    return FALSE;
++  }
++
++  return TRUE;
++}
++
++/**************************************************************************
++...
++**************************************************************************/
++bool dio_get_memory(json_t *json_packet, char *key, void *dest, size_t dest_size)
++{
++  /* TODO: implement */ 
++  return TRUE;
++}
++
++/**************************************************************************
++...
++**************************************************************************/
++bool dio_get_string(json_t *json_packet, char *key, char *dest, size_t max_dest_size)
++{
++  json_t *pstring = json_object_get(json_packet, key);
++
++  if (!pstring) {
++    log_error("ERROR: Unable to get string with key: %s", key);
++    return FALSE;
++  }
++  const char *result_str = json_string_value(pstring);
++
++  if (dest && !(*get_conv_callback) (dest, max_dest_size, result_str, strlen(result_str))) {
++    log_error("ERROR: Unable to get string with key: %s", key);
++    return FALSE;
++  }
++
++  return TRUE;
++}
+diff -Nurd -X.diff_ignore freeciv/common/dataio.h freeciv/common/dataio.h
+--- freeciv/common/dataio.h	2013-03-24 22:21:16.616331701 +0200
++++ freeciv/common/dataio.h	2013-03-24 22:21:53.208330899 +0200
+@@ -20,6 +20,8 @@
+ #include "bitvector.h"
+ #include "support.h"            /* bool type */
+ 
++#include <jansson.h>
++
+ struct worklist;
+ struct requirement;
+ 
+@@ -30,6 +32,7 @@
+ 
+ struct data_out {
+   void *dest;
++  json_t *json;
+   size_t dest_size, used, current;
+   bool too_short;		/* set to 1 if try to read past end */
+ };
+@@ -72,6 +75,8 @@
+ bool dio_get_type(struct data_in *din, enum data_type type, int *dest)
+     fc__attribute((nonnull (3)));
+ 
++#if 0
++
+ bool dio_get_uint8(struct data_in *din, int *dest)
+     fc__attribute((nonnull (2)));
+ bool dio_get_uint16(struct data_in *din, int *dest)
+@@ -115,11 +120,41 @@
+ bool dio_get_uint16_vec8(struct data_in *din, int **values, int stop_value)
+     fc__attribute((nonnull (2)));
+ 
++#else
++
++bool dio_get_uint8(json_t *json_packet, char *key, int *dest);
++bool dio_get_uint16(json_t *json_packet, char *key, int *dest);
++bool dio_get_uint32(json_t *json_packet, char *key, int *dest);
++
++bool dio_get_uint16_old(struct data_in *din, int *dest);
++bool dio_get_uint8_old(struct data_in *din, int *dest);
++bool dio_get_sint8(json_t *json_packet, char *key, int *dest);
++bool dio_get_sint16(json_t *json_packet, char *key, int *dest);
++#define dio_get_sint32(d,v,x) dio_get_uint32(d,v,x)
++
++
++bool dio_get_bool8(json_t *json_packet, char *key, bool *dest);
++bool dio_get_bool32(json_t *json_packet, char *key, bool *dest);
++bool dio_get_float(json_t *json_packet, char *key, float *dest, int float_factor);
++bool dio_get_memory(json_t *json_packet, char *key, void *dest, size_t dest_size);
++bool dio_get_string(json_t *json_packet, char *key, char *dest, size_t max_dest_size);
++bool dio_get_string_old(struct data_in *din, char *dest, size_t max_dest_size);
++bool dio_get_bit_string(json_t *json_packet, char *key, char *dest,
++ 			size_t max_dest_size);
++bool dio_get_tech_list(json_t *json_packet, char *key, int *dest);
++bool dio_get_worklist(json_t *json_packet, char *key, struct worklist *pwl);
++bool dio_get_requirement(json_t *json_packet, char *key, struct requirement *preq);
++
++bool dio_get_uint8_vec8(json_t *json_packet, char *key, int **values, int stop_value);
++bool dio_get_uint16_vec8(json_t *json_packet, char *key, int **values, int stop_value);
++#endif
++
+ /* Should be a function but we need some macro magic. */
+ #define DIO_BV_GET(pdin, bv) \
+   dio_get_memory((pdin), (bv).vec, sizeof((bv).vec))
+ 
+ /* puts */
++#if 0
+ void dio_put_type(struct data_out *dout, enum data_type type, int value);
+ 
+ void dio_put_uint8(struct data_out *dout, int value);
+@@ -151,6 +186,51 @@
+ #define DIO_BV_PUT(pdout, bv) \
+   dio_put_memory((pdout), (bv).vec, sizeof((bv).vec))
+ 
++#else
++
++void dio_put_type(struct data_out *dout, enum data_type type, char *key, int value);
++
++void dio_put_uint8(struct data_out *dout, char *key, int value);
++void dio_put_uint8_old(struct data_out *dout, int value);
++void dio_put_uint16(struct data_out *dout, char *key, int value);
++void dio_put_uint32(struct data_out *dout, char *key, int value);
++void dio_put_uint16_old(struct data_out *dout, int value);
++
++void dio_put_array_uint8(struct data_out *dout, char *key, int *values, int size);
++void dio_put_array_uint32(struct data_out *dout, char *key, int *values, int size);
++void dio_put_array_sint8(struct data_out *dout, char *key, int *values, int size);
++void dio_put_array_sint16(struct data_out *dout, char *key, int *values, int size);
++void dio_put_array_sint32(struct data_out *dout, char *key, int *values, int size);
++void dio_put_array_bool8(struct data_out *dout, char *key, bool *values, int size);
++
++#define dio_put_sint8(d,k,v) dio_put_uint8(d,k,v)
++#define dio_put_sint16(d,k,v) dio_put_uint16(d,k,v)
++#define dio_put_sint32(d,k,v) dio_put_uint32(d,k,v)
++
++void dio_put_bool8(struct data_out *dout, char *key, bool value);
++void dio_put_bool32(struct data_out *dout, char *key, bool value);
++void dio_put_float(struct data_out *dout, char *key, float value, int float_factor);
++
++void dio_put_memory(struct data_out *dout, char *key, const void *value, size_t size);
++void dio_put_string(struct data_out *dout, char *key, const char *value);
++void dio_put_bit_string(struct data_out *dout, char *key, const char *value);
++void dio_put_city_map(struct data_out *dout, char *key, const char *value);
++void dio_put_tech_list(struct data_out *dout, char *key, const int *value);
++void dio_put_worklist(struct data_out *dout, char *key, const struct worklist *pwl);
++void dio_put_requirement(struct data_out *dout, char *key, const struct requirement *preq, int size);
++
++void dio_put_uint8_vec8(struct data_out *dout, char *key, int *values, int stop_value);
++void dio_put_uint16_vec8(struct data_out *dout, char *key, int *values, int stop_value);
++void dio_put_string_old(struct data_out *dout, const char *value);
++void dio_put_memory_old(struct data_out *dout, const void *value, size_t size);
++void dio_put_string_array(struct data_out *dout, char *key, const char *value, int size);
++
++/* Should be a function but we need some macro magic. */
++#define DIO_BV_PUT(pdout, type, bv) \
++  dio_put_memory((pdout), type, (bv).vec, sizeof((bv).vec))
++
++#endif
++
+ #ifdef __cplusplus
+ }
+ #endif /* __cplusplus */
+diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/generate_packets.py
+--- freeciv/common/generate_packets.py	2013-03-24 22:21:16.684331700 +0200
++++ freeciv/common/generate_packets.py	2013-03-24 22:21:53.208330899 +0200
+@@ -249,7 +249,7 @@
+         if self.is_array==1:
+             tmp="real_packet->%(name)s[i] = %(name)s[i]"%self.__dict__
+             return '''  {
+-    int i;
++    int i; /* this is for put. */
+ 
+     for (i = 0; i < %(array_size_u) s; i++) {
+       %(tmp)s;
+@@ -347,41 +347,36 @@
+     # Returns code which put this field.
+     def get_put(self):
+         if self.dataio_type=="bitvector":
+-            return "DIO_BV_PUT(&dout, packet->%(name)s);"%self.__dict__
++            return "DIO_BV_PUT(&dout, \"%(name)s\", packet->%(name)s);"%self.__dict__
+ 
+         if self.struct_type=="float" and not self.is_array:
+-            return "  dio_put_float(&dout, real_packet->%(name)s, %(float_factor)d);"%self.__dict__
++            return "  dio_put_float(&dout, \"%(name)s\", real_packet->%(name)s, %(float_factor)d);"%self.__dict__
+         
+         if self.dataio_type in ["worklist"]:
+-            return "  dio_put_%(dataio_type)s(&dout, &real_packet->%(name)s);"%self.__dict__
++            return "  dio_put_%(dataio_type)s(&dout, \"%(name)s\", &real_packet->%(name)s);"%self.__dict__
+ 
+         if self.dataio_type in ["memory"]:
+-            return "  dio_put_%(dataio_type)s(&dout, &real_packet->%(name)s, %(array_size_u)s);"%self.__dict__
++            return "  dio_put_%(dataio_type)s(&dout, \"%(name)s\", &real_packet->%(name)s, %(array_size_u)s);"%self.__dict__
+         
+         arr_types=["string","bit_string","city_map","tech_list",
+                    "unit_list","building_list"]
+         if (self.dataio_type in arr_types and self.is_array==1) or \
+            (self.dataio_type not in arr_types and self.is_array==0):
+-            return "  dio_put_%(dataio_type)s(&dout, real_packet->%(name)s);"%self.__dict__
+-        if self.is_struct:
+-            if self.is_array==2:
+-                c="dio_put_%(dataio_type)s(&dout, &real_packet->%(name)s[i][j]);"%self.__dict__
+-            else:
+-                c="dio_put_%(dataio_type)s(&dout, &real_packet->%(name)s[i]);"%self.__dict__
+-        elif self.dataio_type=="string":
+-            c="dio_put_%(dataio_type)s(&dout, real_packet->%(name)s[i]);"%self.__dict__
++            return "  dio_put_%(dataio_type)s(&dout, \"%(name)s\", real_packet->%(name)s);"%self.__dict__
++        if self.dataio_type=="string":
++            c="/* dio_put_%(dataio_type)s(&dout, \"%(name)s\", real_packet->%(name)s[i]); */"%self.__dict__
+             array_size_u=self.array_size1_u
++            self.__dict__["array_size_u"] = array_size_u
+ 
+         elif self.struct_type=="float":
+-            if self.is_array==2:
+-                c="  dio_put_float(&dout, real_packet->%(name)s[i][j], %(float_factor)d);"%self.__dict__
+-            else:
+-                c="  dio_put_float(&dout, real_packet->%(name)s[i], %(float_factor)d);"%self.__dict__
++            c="/*  dio_put_float(&dout, \"%(name)s\", real_packet->%(name)s[i], %(float_factor)d); */"%self.__dict__
++        elif self.dataio_type=="requirement":
++            c="  dio_put_%(dataio_type)s(&dout, \"%(name)s\", (struct requirement *)real_packet->%(name)s, %(array_size_u)s);"%self.__dict__
+         else:
+             if self.is_array==2:
+-                c="dio_put_%(dataio_type)s(&dout, real_packet->%(name)s[i][j]);"%self.__dict__
++                c="/* dio_put_%(dataio_type)s(&dout, \"%(name)s\", real_packet->%(name)s[i][j]); */"%self.__dict__
+             else:
+-                c="dio_put_%(dataio_type)s(&dout, real_packet->%(name)s[i]);"%self.__dict__
++                c="dio_put_array_%(dataio_type)s(&dout, \"%(name)s\", (void *)real_packet->%(name)s, %(array_size_u)s);"%self.__dict__
+ 
+         if not self.diff:
+             if self.is_array==2 and self.dataio_type!="string":
+@@ -398,11 +393,7 @@
+             else:
+                 return '''
+     {
+-      int i;
+-
+-      for (i = 0; i < %(array_size_u)s; i++) {
+         %(c)s
+-      }
+     } '''%self.get_dict(vars())
+         else:
+             return '''
+@@ -441,36 +432,38 @@
+     # Returns code which get this field.
+     def get_get(self):
+         if self.struct_type=="float" and not self.is_array:
+-            return '''if (!dio_get_float(&din, &real_packet->%(name)s, %(float_factor)d)) {
++            return '''if (!dio_get_float(pc->json_packet, \"%(name)s\", &real_packet->%(name)s, %(float_factor)d)) {
+   RECEIVE_PACKET_FIELD_ERROR(%(name)s);
+ }'''%self.__dict__
+         if self.dataio_type=="bitvector":
+-            return '''if (!DIO_BV_GET(&din, real_packet->%(name)s)) {
++            return '''#if 0
++if (!DIO_BV_GET(&din, real_packet->%(name)s)) {
+   RECEIVE_PACKET_FIELD_ERROR(%(name)s);
+-}'''%self.__dict__
++}
++#endif'''%self.__dict__
+         if self.dataio_type in ["string","bit_string","city_map"] and \
+            self.is_array!=2:
+-            return '''if (!dio_get_%(dataio_type)s(&din, real_packet->%(name)s, sizeof(real_packet->%(name)s))) {
++            return '''if (!dio_get_%(dataio_type)s(pc->json_packet, \"%(name)s\", real_packet->%(name)s, sizeof(real_packet->%(name)s))) {
+   RECEIVE_PACKET_FIELD_ERROR(%(name)s);
+ }'''%self.__dict__
+         if self.is_struct and self.is_array==0:
+-            return '''if (!dio_get_%(dataio_type)s(&din, &real_packet->%(name)s)) {
++            return '''if (!dio_get_%(dataio_type)s(pc->json_packet, \"%(name)s\", &real_packet->%(name)s)) {
+   RECEIVE_PACKET_FIELD_ERROR(%(name)s);
+ }'''%self.__dict__
+         if self.dataio_type in ["tech_list","unit_list","building_list"]:
+-            return '''if (!dio_get_%(dataio_type)s(&din, real_packet->%(name)s)) {
++            return '''if (!dio_get_%(dataio_type)s(pc->json_packet, \"%(name)s\", real_packet->%(name)s)) {
+   RECEIVE_PACKET_FIELD_ERROR(%(name)s);
+ }'''%self.__dict__
+         if not self.is_array:
+             if self.struct_type in ["int","bool"]:
+-                return '''if (!dio_get_%(dataio_type)s(&din, &real_packet->%(name)s)) {
++                return '''if (!dio_get_%(dataio_type)s(pc->json_packet, \"%(name)s\", &real_packet->%(name)s)) {
+   RECEIVE_PACKET_FIELD_ERROR(%(name)s);
+ }'''%self.__dict__
+             else:
+                 return '''{
+   int readin;
+   
+-  if (!dio_get_%(dataio_type)s(&din, &readin)) {
++  if (!dio_get_%(dataio_type)s(pc->json_packet, \"%(name)s\", &readin)) {
+     RECEIVE_PACKET_FIELD_ERROR(%(name)s);
+   }
+   real_packet->%(name)s = readin;
+@@ -478,49 +471,49 @@
+ 
+         if self.is_struct:
+             if self.is_array==2:
+-                c='''if (!dio_get_%(dataio_type)s(&din, &real_packet->%(name)s[i][j])) {
++                c='''if (!dio_get_%(dataio_type)s(pc->json_packet, \"%(name)s\", &real_packet->%(name)s[i][j])) {
+       RECEIVE_PACKET_FIELD_ERROR(%(name)s);
+     }'''%self.__dict__
+             else:
+-                c='''if (!dio_get_%(dataio_type)s(&din, &real_packet->%(name)s[i])) {
++                c='''if (!dio_get_%(dataio_type)s(pc->json_packet, \"%(name)s\", &real_packet->%(name)s[i])) {
+       RECEIVE_PACKET_FIELD_ERROR(%(name)s);
+     }'''%self.__dict__
+         elif self.dataio_type=="string":
+-            c='''if (!dio_get_%(dataio_type)s(&din, real_packet->%(name)s[i], sizeof(real_packet->%(name)s[i]))) {
++            c='''if (!dio_get_%(dataio_type)s(pc->json_packet, \"%(name)s\", real_packet->%(name)s[i], sizeof(real_packet->%(name)s[i]))) {
+       RECEIVE_PACKET_FIELD_ERROR(%(name)s);
+     }'''%self.__dict__
+         elif self.struct_type=="float":
+             if self.is_array==2:
+-                c='''if (!dio_get_float(&din, &real_packet->%(name)s[i][j], %(float_factor)d)) {
++                c='''if (!dio_get_float(pc->json_packet, \"%(name)s\", &real_packet->%(name)s[i][j], %(float_factor)d)) {
+       RECEIVE_PACKET_FIELD_ERROR(%(name)s);
+     }'''%self.__dict__
+             else:
+-                c='''if (!dio_get_float(&din, &real_packet->%(name)s[i], %(float_factor)d)) {
++                c='''if (!dio_get_float(pc->json_packet, \"%(name)s\", &real_packet->%(name)s[i], %(float_factor)d)) {
+       RECEIVE_PACKET_FIELD_ERROR(%(name)s);
+     }'''%self.__dict__
+         elif self.is_array==2:
+             if self.struct_type in ["int","bool"]:
+-                c='''if (!dio_get_%(dataio_type)s(&din, &real_packet->%(name)s[i][j])) {
++                c='''if (!dio_get_%(dataio_type)s(pc->json_packet, \"%(name)s\", &real_packet->%(name)s[i][j])) {
+       RECEIVE_PACKET_FIELD_ERROR(%(name)s);
+     }'''%self.__dict__
+             else:
+                 c='''{
+       int readin;
+   
+-      if (!dio_get_%(dataio_type)s(&din, &readin)) {
++      if (!dio_get_%(dataio_type)s(pc->json_packet, \"%(name)s\", &readin)) {
+         RECEIVE_PACKET_FIELD_ERROR(%(name)s);
+       }
+       real_packet->%(name)s[i][j] = readin;
+     }'''%self.__dict__
+         elif self.struct_type in ["int","bool"]:
+-            c='''if (!dio_get_%(dataio_type)s(&din, &real_packet->%(name)s[i])) {
++            c='''if (!dio_get_%(dataio_type)s(pc->json_packet, \"%(name)s\", &real_packet->%(name)s[i])) {
+       RECEIVE_PACKET_FIELD_ERROR(%(name)s);
+     }'''%self.__dict__
+         else:
+             c='''{
+       int readin;
+   
+-      if (!dio_get_%(dataio_type)s(&din, &readin)) {
++      if (!dio_get_%(dataio_type)s(pc->json_packet, \"%(name)s\", &readin)) {
+         RECEIVE_PACKET_FIELD_ERROR(%(name)s);
+       }
+       real_packet->%(name)s[i] = readin;
+@@ -542,10 +535,10 @@
+             else:
+                 extra=""
+             if self.dataio_type=="memory":
+-                return '''%(extra)s
+-  if (!dio_get_%(dataio_type)s(&din, real_packet->%(name)s, %(array_size_u)s)){
++                return ''' /* not supported yet. %(extra)s
++  if (!dio_get_%(dataio_type)s(pc->json_packet, \"%(name)s\", real_packet->%(name)s, %(array_size_u)s)){
+     RECEIVE_PACKET_FIELD_ERROR(%(name)s);
+-  }'''%self.get_dict(vars())
++  } */'''%self.get_dict(vars())
+             elif self.is_array==2 and self.dataio_type!="string":
+                 return '''
+ {
+@@ -571,7 +564,7 @@
+ for (;;) {
+   int i;
+ 
+-  if (!dio_get_uint8(&din, &i)) {
++  if (!dio_get_uint8(pc->json_packet, \"%(name)s\", &i)) {
+     RECEIVE_PACKET_FIELD_ERROR(%(name)s);
+   }
+   if (i == 255) {
+@@ -880,7 +873,7 @@
+ '''%self.get_dict(vars())
+ 
+         body=body+'''
+-  DIO_BV_PUT(&dout, fields);
++  DIO_BV_PUT(&dout, \"fields\", fields);
+ '''
+ 
+         for field in self.key_fields:
+@@ -921,7 +914,7 @@
+   struct %(packet_name)s *old;
+   struct genhash **hash = pc->phs.received + %(type)s;
+ '''
+-            delta_body1="\n  DIO_BV_GET(&din, fields);\n"
++            delta_body1="\n  DIO_BV_GET(pc->json_packet, fields);\n"
+             body1=""
+             for field in self.key_fields:
+                 body1=body1+prefix("  ",field.get_get())+"\n"
+diff -Nurd -X.diff_ignore freeciv/common/packets.c freeciv/common/packets.c
+--- freeciv/common/packets.c	2013-03-24 22:21:16.664331700 +0200
++++ freeciv/common/packets.c	2013-03-24 22:21:53.208330899 +0200
+@@ -43,6 +43,8 @@
+ #include "events.h"
+ #include "map.h"
+ 
++#include <jansson.h>
++
+ #include "packets.h"
+ 
+ #ifdef USE_COMPRESSION
+@@ -347,7 +349,7 @@
+   }
+ 
+   dio_input_init(&din, pc->buffer->data, pc->buffer->ndata);
+-  dio_get_type(&din, pc->packet_header.length, &len_read);
++  dio_get_uint16_old(&din, &len_read);
+ 
+   /* The non-compressed case */
+   whole_packet_len = len_read;
+@@ -454,8 +456,39 @@
+     return NULL;
+   }
+ 
++#if 0
+   dio_get_type(&din, pc->packet_header.type, &utype.itype);
+   utype.type = utype.itype;
++#else
++
++  /* Parse JSON packet. */
++  json_error_t error;
++
++  dio_get_uint16_old(&din, &utype.itype);
++
++  dio_get_string_old(&din, (char*)pc->buffer->data, pc->buffer->ndata);
++
++  pc->json_packet = json_loadb((char*)pc->buffer->data, whole_packet_len, 0, &error);
++
++  memmove(pc->buffer->data, pc->buffer->data, pc->buffer->ndata);
++  pc->buffer->ndata = 0;
++
++  if (!pc->json_packet) {
++    log_error("ERROR: Unable to parse packet: %s", pc->buffer->data);
++    return NULL;
++  }
++
++  json_t *pint = json_object_get(pc->json_packet, "type");
++
++  if (!pint) {
++    log_error("ERROR: Unable to get packet type.");
++    return NULL;
++  } 
++
++  json_int_t packet_type = json_integer_value(pint);
++  utype.type = packet_type;
++
++#endif
+ 
+   log_packet("got packet type=(%s)%d len=%d from %s",
+              packet_name(utype.type), utype.itype, whole_packet_len,
+@@ -527,9 +560,9 @@
+ {
+   struct data_in din;
+   int len;
+-
++ 
+   dio_input_init(&din, buffer->data, buffer->ndata);
+-  dio_get_uint16(&din, &len);
++  dio_get_uint16_old(&din, &len);
+   memmove(buffer->data, buffer->data + len, buffer->ndata - len);
+   buffer->ndata -= len;
+   log_debug("remove_packet_from_buffer: remove %d; remaining %d",
+@@ -590,6 +623,7 @@
+ /**************************************************************************
+   Sanity check packet
+ **************************************************************************/
++#if 0
+ bool packet_check(struct data_in *din, struct connection *pc)
+ {
+   size_t rem = dio_input_remaining(din);
+@@ -610,6 +644,7 @@
+   }
+   return TRUE;
+ }
++#endif
+ 
+ /**************************************************************************
+  Updates pplayer->attribute_block according to the given packet.
+diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
+--- freeciv/common/packets.def	2013-03-24 22:21:16.664331700 +0200
++++ freeciv/common/packets.def	2013-03-24 22:21:53.208330899 +0200
+@@ -194,9 +194,9 @@
+ type MEMORY             = memory(unsigned char)
+ type REQUIREMENT        = requirement(struct requirement)
+ type STRING             = string(char)
+-type TECH_LIST          = tech_list(int)
+-type UNIT_LIST          = unit_list(int)
+-type BUILDING_LIST      = building_list(int)
++# type TECH_LIST          = tech_list(int)
++# type UNIT_LIST          = unit_list(int)
++# type BUILDING_LIST      = building_list(int)
+ type WORKLIST           = worklist(struct worklist)
+ 
+ # typedefs for enums
+@@ -786,7 +786,7 @@
+   UINT32 diplstate_id; key
+   PLAYER plr1;
+   PLAYER plr2;
+-  UINT8 type;
++  UINT32 ds_type;
+   UINT16 turns_left;
+   UINT8 has_reason_to_cancel;
+   UINT16 contact_turns_left;
+@@ -1359,9 +1359,9 @@
+   UINT8 groups[MAX_NUM_NATION_GROUPS:ngroups];
+ 
+   GOVERNMENT init_government_id;
+-  TECH_LIST init_techs[MAX_NUM_TECH_LIST];
+-  UNIT_LIST init_units[MAX_NUM_UNIT_LIST];
+-  BUILDING_LIST init_buildings[MAX_NUM_BUILDING_LIST];
++  # TECH_LIST init_techs[MAX_NUM_TECH_LIST];
++  # UNIT_LIST init_units[MAX_NUM_UNIT_LIST];
++  # BUILDING_LIST init_buildings[MAX_NUM_BUILDING_LIST];
+ end
+ 
+ PACKET_RULESET_CITY = 149; sc, lsend
+diff -Nurd -X.diff_ignore freeciv/common/packets.h freeciv/common/packets.h
+--- freeciv/common/packets.h	2013-03-24 22:21:16.660331701 +0200
++++ freeciv/common/packets.h	2013-03-24 22:24:52.880326957 +0200
+@@ -34,6 +34,7 @@
+ #include "traderoutes.h"
+ #include "unittype.h"
+ #include "worklist.h"
++#include <jansson.h>
+ 
+ 
+ #define MAX_LEN_USERNAME        10        /* see below */
+@@ -113,42 +114,36 @@
+ 
+ #define SEND_PACKET_START(packet_type) \
+   unsigned char buffer[MAX_LEN_PACKET]; \
++  char *json_buffer = NULL; \
+   struct data_out dout; \
++  dout.json = json_object(); \
+   \
+   dio_output_init(&dout, buffer, sizeof(buffer)); \
+-  dio_put_type(&dout, pc->packet_header.length, 0); \
+-  dio_put_type(&dout, pc->packet_header.type, packet_type);
++  dio_put_uint16_old(&dout, 0); \
++  dio_put_uint16_old(&dout, packet_type); \
++  dio_put_uint8(&dout, "pid", packet_type);
+ 
+ #define SEND_PACKET_END(packet_type) \
+   { \
++    json_buffer = json_dumps(dout.json, JSON_COMPACT | JSON_ENSURE_ASCII); \
++    if (json_buffer) { \
++      dio_put_string_old(&dout, json_buffer); \
++    } \
+     size_t size = dio_output_used(&dout); \
+     \
+     dio_output_rewind(&dout); \
+-    dio_put_type(&dout, pc->packet_header.length, size); \
++    dio_put_uint16_old(&dout, size); \
++    free(json_buffer); \
++    json_decref(dout.json); \
+     fc_assert(!dout.too_short); \
+     return send_packet_data(pc, buffer, size, packet_type); \
+   }
+ 
+ #define RECEIVE_PACKET_START(packet_type, result) \
+-  struct data_in din; \
+-  struct packet_type packet_buf, *result = &packet_buf; \
+-  \
+-  dio_input_init(&din, pc->buffer->data, \
+-                 data_type_size(pc->packet_header.length)); \
+-  { \
+-    int size; \
+-  \
+-    dio_get_type(&din, pc->packet_header.length, &size); \
+-    dio_input_init(&din, pc->buffer->data, MIN(size, pc->buffer->ndata)); \
+-  } \
+-  dio_input_skip(&din, (data_type_size(pc->packet_header.length) \
+-                        + data_type_size(pc->packet_header.type)));
++  struct packet_type packet_buf, *result = &packet_buf;
+ 
+ #define RECEIVE_PACKET_END(result) \
+-  if (!packet_check(&din, pc)) { \
+-    return NULL; \
+-  } \
+-  remove_packet_from_buffer(pc->buffer); \
++  json_decref(pc->json_packet); \
+   result = fc_malloc(sizeof(*result)); \
+   *result = packet_buf; \
+   return result;
+@@ -159,7 +154,6 @@
+ 
+ int send_packet_data(struct connection *pc, unsigned char *data, int len,
+                      enum packet_type packet_type);
+-bool packet_check(struct data_in *din, struct connection *pc);
+ 
+ /* Utilities to exchange strings and string vectors. */
+ #define PACKET_STRVEC_SEPARATOR '\3'
+diff -Nurd -X.diff_ignore freeciv/server/handchat.c freeciv/server/handchat.c
+--- freeciv/server/handchat.c	2013-03-24 22:21:16.804331697 +0200
++++ freeciv/server/handchat.c	2013-03-24 22:21:53.208330899 +0200
+@@ -19,7 +19,10 @@
+ #include <stdio.h>
+ #include <string.h>
+ 
++#include <glib.h>
++
+ /* utility */
++#include "fciconv.h"
+ #include "fcintl.h"
+ #include "log.h"
+ #include "shared.h"
+@@ -319,19 +322,32 @@
+ void handle_chat_msg_req(struct connection *pconn, const char *message)
+ {
+   char real_message[MAX_LEN_MSG], *cp;
++  char raw_message[MAX_LEN_MSG];
++  char* unesc_message;
+   bool double_colon;
+ 
+-  sz_strlcpy(real_message, message);
++  sz_strlcpy(raw_message, message);
+ 
+   /* This loop to prevent players from sending multiple lines which can
+    * be abused */
+-  for (cp = real_message; *cp != '\0'; cp++) {
+-    if (*cp == '\n' || *cp == '\r') {
++  for (cp = raw_message; *cp != '\0'; cp++) {
++    if (*cp == '\n' || *cp == '\r' || *cp == '<' || *cp == '>' || *cp == '"' || *cp == '\'') {
+       *cp = '\0';
+       break;
+     }
+   }
+ 
++  unesc_message = g_uri_unescape_string(raw_message, NULL);
++  if (unesc_message) {
++      convert_string(unesc_message,
++ 	  	       "latin1",
++		       "UTF-8",
++		       (char*)real_message, sizeof(real_message));
++      g_free(unesc_message);
++  } else {
++    return;
++  }
++
+   /* Server commands are prefixed with '/', which is an obvious
+      but confusing choice: even before this feature existed,
+      novice players were trying /who, /nick etc.
+diff -Nurd -X.diff_ignore freeciv/server/plrhand.c freeciv/server/plrhand.c
+--- freeciv/server/plrhand.c	2013-03-24 22:21:16.792331698 +0200
++++ freeciv/server/plrhand.c	2013-03-24 22:21:53.212330899 +0200
+@@ -1124,12 +1124,12 @@
+       || (receiver
+           && player_diplstate_get(receiver, plr1)->contact_turns_left > 0)
+       || (receiver && receiver == plr2)) {
+-    packet_ds->type                 = ds->type;
++    packet_ds->ds_type              = ds->type;
+     packet_ds->turns_left           = ds->turns_left;
+     packet_ds->has_reason_to_cancel = ds->has_reason_to_cancel;
+     packet_ds->contact_turns_left   = ds->contact_turns_left;
+   } else {
+-    packet_ds->type                 = DS_WAR;
++    packet_ds->ds_type              = DS_WAR;
+     packet_ds->turns_left           = 0;
+     packet_ds->has_reason_to_cancel = 0;
+     packet_ds->contact_turns_left   = 0;
+diff -Nurd -X.diff_ignore freeciv/server/ruleset.c freeciv/server/ruleset.c
+--- freeciv/server/ruleset.c	2013-03-24 22:21:16.792331698 +0200
++++ freeciv/server/ruleset.c	2013-03-24 22:21:53.212330899 +0200
+@@ -5274,6 +5274,8 @@
+     packet.ngroups = i;
+ 
+     packet.init_government_id = government_number(n->init_government);
++
++#if 0
+     fc_assert(ARRAY_SIZE(packet.init_techs) == ARRAY_SIZE(n->init_techs));
+     for (i = 0; i < MAX_NUM_TECH_LIST; i++) {
+       packet.init_techs[i] = n->init_techs[i];
+@@ -5289,6 +5291,7 @@
+       /* Impr_type_id to int */
+       packet.init_buildings[i] = n->init_buildings[i];
+     }
++#endif
+ 
+     lsend_packet_ruleset_nation(dest, &packet);
+   } nations_iterate_end;
+diff -Nurd -X.diff_ignore freeciv/server/sernet.c freeciv/server/sernet.c
+--- freeciv/server/sernet.c	2013-03-24 22:21:16.744331699 +0200
++++ freeciv/server/sernet.c	2013-03-24 22:21:53.212330899 +0200
+@@ -129,7 +129,7 @@
+ static void send_ping_times_to_all(void);
+ 
+ static void get_lanserver_announcement(void);
+-static void send_lanserver_response(void);
++/* static void send_lanserver_response(void); */
+ 
+ static bool no_input = FALSE;
+ 
+@@ -1361,9 +1361,6 @@
+ ********************************************************************/
+ static void get_lanserver_announcement(void)
+ {
+-  char msgbuf[128];
+-  struct data_in din;
+-  int type;
+   fd_set readfs, exceptfs;
+   struct timeval tv;
+ 
+@@ -1388,7 +1385,7 @@
+      * Generally we just want to run select again. */
+   }
+ 
+-  if (FD_ISSET(socklan, &readfs)) {
++  /*if (FD_ISSET(socklan, &readfs)) {
+     if (0 < recvfrom(socklan, msgbuf, sizeof(msgbuf), 0, NULL, NULL)) {
+       dio_input_init(&din, msgbuf, 1);
+       dio_get_uint8(&din, &type);
+@@ -1399,13 +1396,14 @@
+         log_debug("Received invalid request for server LAN announcement.");
+       }
+     }
+-  }
++  }*/
+ }
+ 
+ /********************************************************************
+   This function broadcasts an UDP packet to clients with
+   that requests information about the server state.
+ ********************************************************************/
++#if 0
+ static void send_lanserver_response(void)
+ {
+ #ifndef HAVE_WINSOCK
+@@ -1498,14 +1496,14 @@
+               srvarg.port );
+ 
+   dio_output_init(&dout, buffer, sizeof(buffer));
+-  dio_put_uint8(&dout, SERVER_LAN_VERSION);
+-  dio_put_string(&dout, hostname);
+-  dio_put_string(&dout, port);
+-  dio_put_string(&dout, version);
+-  dio_put_string(&dout, status);
+-  dio_put_string(&dout, players);
+-  dio_put_string(&dout, humans);
+-  dio_put_string(&dout, get_meta_message_string());
++  dio_put_uint8(&dout, "ver", SERVER_LAN_VERSION);
++  dio_put_string(&dout, "host", hostname);
++  dio_put_string(&dout, "port", port);
++  dio_put_string(&dout, "version", version);
++  dio_put_string(&dout, "status", status);
++  dio_put_string(&dout, "players", players);
++  dio_put_string(&dout, "humans", humans);
++  dio_put_string(&dout, "msg", get_meta_message_string());
+   size = dio_output_used(&dout);
+ 
+   /* Sending packet to client with the information gathered above. */
+@@ -1518,3 +1516,4 @@
+ 
+   fc_closesocket(socksend);
+ }
++#endif /* 0 */
+diff -Nurd -X.diff_ignore freeciv/server/srv_main.c freeciv/server/srv_main.c
+--- freeciv/server/srv_main.c	2013-03-24 22:21:16.780331698 +0200
++++ freeciv/server/srv_main.c	2013-03-24 22:21:53.212330899 +0200
+@@ -1519,21 +1519,21 @@
+                conn_description(pconn));
+ 
+     dio_output_init(&dout, buffer, sizeof(buffer));
+-    dio_put_uint16(&dout, 0);
++    dio_put_uint16(&dout, "msg", 0);
+ 
+     /* 1 == PACKET_LOGIN_REPLY in the old client */
+-    dio_put_uint8(&dout, 1);
++    dio_put_uint8(&dout, "msg", 1);
+ 
+-    dio_put_bool32(&dout, FALSE);
+-    dio_put_string(&dout, _("Your client is too old. To use this server, "
++    dio_put_bool32(&dout, "msg", FALSE);
++    dio_put_string(&dout, "msg", _("Your client is too old. To use this server, "
+ 			    "please upgrade your client to a "
+ 			    "Freeciv 2.2 or later."));
+-    dio_put_string(&dout, "");
++    dio_put_string(&dout, "msg", "");
+ 
+     {
+       size_t size = dio_output_used(&dout);
+       dio_output_rewind(&dout);
+-      dio_put_uint16(&dout, size);
++      dio_put_uint16(&dout, "size",  size);
+ 
+       /* 
+        * Use send_connection_data instead of send_packet_data to avoid

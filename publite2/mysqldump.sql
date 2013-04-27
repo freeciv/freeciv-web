@@ -31,7 +31,7 @@ CREATE TABLE `auth` (
   `createtime` int(11) DEFAULT NULL,
   `accesstime` int(11) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
-  `createaddress` varchar(15) DEFAULT NULL,
+  `createaddress` varchar(255) DEFAULT NULL,
   `logincount` int(11) DEFAULT '0',
   `fb_uid` bigint(20) DEFAULT NULL,
   `email_hash` varchar(64) DEFAULT NULL,

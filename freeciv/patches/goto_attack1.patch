@@ -1,0 +1,35 @@
+diff -Nurd -X.diff_ignore freeciv/server/unittools.c freeciv/server/unittools.c
+--- freeciv/server/unittools.c	2012-08-07 16:22:29.000000000 +0300
++++ freeciv/server/unittools.c	2012-08-07 16:39:11.000000000 +0300
+@@ -3317,12 +3317,14 @@
+ /**************************************************************************
+   Maybe cancel the goto if there is an enemy in the way
+ **************************************************************************/
++#if 0
+ static bool maybe_cancel_goto_due_to_enemy(struct unit *punit, 
+                                            struct tile *ptile)
+ {
+   return (is_non_allied_unit_tile(ptile, unit_owner(punit)) 
+ 	  || is_non_allied_city_tile(ptile, unit_owner(punit)));
+ }
++#endif
+ 
+ /**************************************************************************
+   Maybe cancel the patrol as there is an enemy near.
+@@ -3506,6 +3508,8 @@
+         return TRUE;
+       }
+ 
++      /* FIXME: the web client want gotos to result in attack. */
++#if 0
+       if (!last_order
+           && maybe_cancel_goto_due_to_enemy(punit, dst_tile)) {
+         cancel_orders(punit, "  orders canceled because of enemy");
+@@ -3515,6 +3519,7 @@
+                       unit_link(punit));
+         return TRUE;
+       }
++#endif /* web client */
+ 
+       log_debug("  moving to %d,%d", TILE_XY(dst_tile));
+       res = unit_move_handling(punit, dst_tile, FALSE, !last_order);

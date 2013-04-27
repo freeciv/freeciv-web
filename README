@@ -43,7 +43,7 @@ The Freeciv Web client consists of these components:
 System Requirements
 -------------------
 
-- Resin 4.0.18 - http://www.caucho.com/
+- Resin 4.0.35 - http://www.caucho.com/
 
 - Java 1.6.0 SDK - http://java.sun.com/javase/downloads/index.jsp
 
@@ -95,23 +95,31 @@ On other Linux distributions, follow this installation procedure:
 
 0. Checkout Freeciv.net from github to ~/freeciv-build
 
-1. Install the system requirements. 
+1. Install the system requirements.
 
-2. Create mysql database called 'freecivmetaserver'
+2. Create mysql database called 'freeciv_net'
    Import mysql dump into a MySQL database from:  /publite2/mysqldump.sql.bz2
 
 3. Build and configure freeciv-web. 
 
-   - Edit /freeciv-web/src/main/webapp/freecivmetaserve/php_code/settings.php.dist,
-     rename this file to settings.php, and update values for fcdb_username and fcdb_pw
+   - Edit /freeciv-web/src/main/webapp/freecivmetaserve/php_code/local.php.dist,
+     rename this file to local.php, and update values for fcdb_username and fcdb_pw
      to your MySQL username and password.
    - Edit /freeciv-web/src/main/webapp/WEB-INF/resin-web.xml.dist, rename this
      file to resin-web.xml, and update the values for your MySQL database.
    - Run 'build.sh' in the freeciv-web directory
 
-4. Compile and install Freeciv. This involves running the following commands:
-   cd freeciv 
-   ./autogen.sh --enable-client=no
+4. Get checkout from freeciv revision mentioned in freeciv/version.txt as
+   freeciv/freeciv:
+   cd freeciv
+   svn co svn://svn.gna.org/svn/freeciv/trunk -r <revision> freeciv
+
+5. Patch freeciv:
+   ./apply_patches.sh
+
+6. Compile and install Freeciv. This involves running the following commands:
+   cd freeciv
+   ./autogen.sh --enable-fcweb
    make
    make install     (as root user)
 
@@ -119,25 +127,25 @@ On other Linux distributions, follow this installation procedure:
    and make it writeable by the user running publite.
 
 
-5. Start resin with these commands:  
+7. Start resin with these commands:
    cd ~/freeciv-build/resin/bin
    ./resin.sh start
 
-6. Start publite2:
+8. Start publite2:
   Run publite2_single.py in the publite2 directory.
 
-7. Run the freeciv-proxy:
+9. Run the freeciv-proxy:
   Run run.sh in the freeciv-proxy directory.
  To debug, check the proxy debugging page: 
 http://localhost/civ/status
 http://localhost:8082/civ/status
 
-8. Start nginx on port 80 as root.
+10. Start nginx on port 80 as root.
 
-9. Start the web client in your browser:
-   Point your web browser to http://localhost/
+11. Start the web client in your browser:
+    Point your web browser to http://localhost/
 
-10. Continue to play the game. 
+12. Continue to play the game. 
 
 FIXME: Had to add -lssl when compiling server...
 

@@ -1,0 +1,25 @@
+diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
+--- freeciv/common/packets.def	2012-05-21 01:53:19.000000000 +0300
++++ freeciv/common/packets.def	2012-05-21 02:00:02.000000000 +0300
+@@ -370,7 +370,8 @@
+ # The variables in the packet are listed in alphabetical order.
+ PACKET_GAME_INFO = 16; sc
+   UINT8 add_to_size_limit;
+-  UINT8 aifill;
++  UINT32 aifill;
++  UINT32 mapsize;
+   AIRLIFTING_STYLE airlifting_style;
+   UINT8 angrycitizen;
+   SINT16 base_pollution;
+diff -Nurd -X.diff_ignore freeciv/server/gamehand.c freeciv/server/gamehand.c
+--- freeciv/server/gamehand.c	2012-05-21 01:28:21.000000000 +0300
++++ freeciv/server/gamehand.c	2012-05-21 01:56:47.000000000 +0300
+@@ -364,6 +364,8 @@
+     ginfo.seconds_to_phasedone = -1.0;
+   }
+ 
++  ginfo.mapsize = map.server.size;
++
+   conn_list_iterate(dest, pconn) {
+     send_packet_game_info(pconn, &ginfo);
+   }

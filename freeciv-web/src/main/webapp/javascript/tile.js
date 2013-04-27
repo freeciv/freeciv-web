@@ -48,6 +48,24 @@ function tile_has_special(tile, index)
 
 }
 
+function tile_has_base(ptile, base)
+{
+  if (ptile['bases'] == null || ptile['bases'][base] == null) {
+    return false;
+  }
+
+  return ptile['bases'][base] == 1;
+}
+
+function tile_has_road(ptile, road)
+{
+  if (ptile['roads'] == null || ptile['roads'][road] == null) {
+    return false;
+  }
+
+  return ptile['roads'][road] == 1;
+}
+
 function tile_resource(tile)
 {
   return tile['resource'];

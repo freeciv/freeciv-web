@@ -1,0 +1,67 @@
+diff -Nurd -X.diff_ignore freeciv/common/featured_text.c freeciv/common/featured_text.c
+--- freeciv/common/featured_text.c	2013-03-16 18:25:57.156732814 +0200
++++ freeciv/common/featured_text.c	2013-03-16 18:26:31.420732062 +0200
+@@ -73,7 +73,7 @@
+ 
+ const struct ft_color ftc_warning       = FT_COLOR("#FF0000",   NULL);
+ const struct ft_color ftc_log           = FT_COLOR("#7F7F7F",   NULL);
+-const struct ft_color ftc_server        = FT_COLOR("#8B0000",   NULL);
++const struct ft_color ftc_server        = FT_COLOR("#FF0000",   NULL);
+ const struct ft_color ftc_client        = FT_COLOR("#EF7F00",   NULL);
+ const struct ft_color ftc_editor        = FT_COLOR("#0000FF",   NULL);
+ const struct ft_color ftc_command       = FT_COLOR("#006400",   NULL);
+@@ -82,7 +82,7 @@
+ const struct ft_color ftc_player_lost   = FT_COLOR("#FFFFFF",   "#000000");
+ const struct ft_color ftc_game_start    = FT_COLOR("#00FF00",   "#115511");
+ 
+-const struct ft_color ftc_chat_public   = FT_COLOR("#00008B",   NULL);
++const struct ft_color ftc_chat_public   = FT_COLOR("#FFFFFF",   NULL);
+ const struct ft_color ftc_chat_ally     = FT_COLOR("#551166",   NULL);
+ const struct ft_color ftc_chat_private  = FT_COLOR("#A020F0",   NULL);
+ const struct ft_color ftc_chat_luaconsole = FT_COLOR("#006400", NULL);
+@@ -1053,10 +1053,9 @@
+ {
+   static char buf[MAX_LEN_LINK];
+ 
+-  fc_snprintf(buf, sizeof(buf), "%c%s tgt=\"%s\" id=%d name=\"%s\" %c%c",
+-              SEQ_START, text_tag_type_short_name(TTT_LINK),
+-              text_link_type_name(TLT_CITY), pcity->id,
+-              city_name(pcity), SEQ_END, SEQ_STOP);
++  fc_snprintf(buf, sizeof(buf), "<a href=\"#\" onclick=\"show_city_dialog_by_id(%d);\">%s</a>",
++              pcity->id,
++              city_name(pcity));
+   return buf;
+ }
+ 
+@@ -1103,12 +1102,8 @@
+ {
+   static char buf[MAX_LEN_LINK];
+ 
+-  /* We use the rule name of the unit, it will be translated in every
+-   * local sides in the function text_tag_replace_text(). */
+-  fc_snprintf(buf, sizeof(buf), "%c%s tgt=\"%s\" id=%d name=\"%s\" %c%c",
+-              SEQ_START, text_tag_type_short_name(TTT_LINK),
+-              text_link_type_name(TLT_UNIT), punit->id,
+-              unit_rule_name(punit), SEQ_END, SEQ_STOP);
++  fc_snprintf(buf, sizeof(buf), "%s", unit_name_translation(punit));
++
+   return buf;
+ }
+ 
+diff -Nurd -X.diff_ignore freeciv/server/srv_main.c freeciv/server/srv_main.c
+--- freeciv/server/srv_main.c	2013-03-16 18:26:01.672732715 +0200
++++ freeciv/server/srv_main.c	2013-03-16 18:29:58.868727509 +0200
+@@ -1959,7 +1959,12 @@
+   pplayer->city_style = city_style_of_nation(nation_of_player(pplayer));
+ 
+   if (set_name) {
+-    server_player_set_name(pplayer, pick_random_player_name(pnation));
++    if (pplayer->ai_controlled) {
++      server_player_set_name(pplayer, pick_random_player_name(pnation));
++    } else {
++      /* FIXME: in Web client, connection username == player name.*/
++      server_player_set_name(pplayer, pplayer->username);
++    }
+   }
+ 
+   if ((pleader = nation_leader_by_name(pnation, player_name(pplayer)))) {

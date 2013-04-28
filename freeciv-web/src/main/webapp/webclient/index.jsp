@@ -6,7 +6,7 @@
 
 <link rel="stylesheet" type="text/css" href="/css/webclient.min.css" />
 
-<script type="text/javascript" src="/javascript-compressed/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="/javascript-compressed/jquery-2.0.0.min.js"></script>
 <script type="text/javascript" src="/javascript-compressed/webclient.js"></script>
 <script type="text/javascript" src="/webclient/session.jsp"></script>
 

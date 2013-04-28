@@ -423,3 +423,6 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 .fg-button-icon-solo { display:block; width:8px; text-indent: -9999px; }	 /* solo icon buttons must have block properties for the text-indent to work */	
 
 
+.ui-dialog .ui-dialog-title {
+  float: none;
+}

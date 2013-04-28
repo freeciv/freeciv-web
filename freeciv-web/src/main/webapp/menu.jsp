@@ -51,26 +51,7 @@
 
 <br>
 
-
-<div id="iewarning">
- <b>Internet Explorer detected:</b><br>
- Your web-browser is not optimal for this game. Internet Explorer doesn't support
- the HTML5 canvas element yet. Internet Explorer 9 will support Freeciv.net! It is recommended to get <a href="http://www.apple.com/safari/">Safari</a>,
- <a href='http://www.mozilla.com/'>Firefox</a> or <a href="http://www.google.com/chrome">Google Chrome</a> instead.
- <br>
-
-<div id="placeholder"></div>
-
-</div>
-
-
 <script type="text/javascript">
-
-if (jQuery.browser.msie && jQuery.browser.version < 9 ) {
-  var div1 = document.getElementById('iewarning');
-  div1.style.display = 'block';
-}
-
 
 function help_single() {
   $("#menu_help").html("<b>Help:</b><br> Start new single player game. Here you can play against a "

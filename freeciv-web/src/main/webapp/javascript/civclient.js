@@ -240,11 +240,14 @@ function show_dialog_message(title, message) {
 			buttons: {
 				Ok: function() {
 					$(this).dialog('close');
+					$("#game_text_input").blur();
 				}
 			}
 		});
 	
   $("#dialog").dialog('open');		
+  $("#game_text_input").blur();
+
 }
 
 /**************************************************************************
@@ -378,6 +381,18 @@ function send_surrender_game()
   }
 }
 
+/**************************************************************************
+...
+**************************************************************************/
+function show_fullscreen_window()
+{
+  if (BigScreen.enabled) {
+    BigScreen.toggle();
+  } else {
+   show_dialog_message('Fullscreen', 'Press F11 for fullscreen mode.');
+  }
+
+}
 
 /**************************************************************************
 ...

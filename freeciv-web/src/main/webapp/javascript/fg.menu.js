@@ -632,13 +632,7 @@ Number.prototype.pxToEm = String.prototype.pxToEm = function(settings){
 		When this happens, we calculate the correct body font-size (%) and multiply it by 16 (the standard browser font size) 
 		to get an accurate em value. */
 				
-	if (settings.scope == 'body' && $.browser.msie && (parseFloat($('body').css('font-size')) / getWindowWidth()).toFixed(1) > 0.0) {
-		var calcFontSize = function(){		
-			return (parseFloat($('body').css('font-size'))/getWindowWidth()).toFixed(3) * 16;
-		};
-		scopeVal = calcFontSize();
-	}
-	else { scopeVal = parseFloat(jQuery(settings.scope).css("font-size")); };
+	 scopeVal = parseFloat(jQuery(settings.scope).css("font-size")); 
 			
 	var result = (settings.reverse == true) ? (pxVal * scopeVal).toFixed(2) + 'px' : (pxVal / scopeVal).toFixed(2) + 'em';
 	return result;

@@ -102,6 +102,7 @@ On other Linux distributions, follow this installation procedure:
 
 3. Build and configure freeciv-web. 
 
+   - Run sync.sh in freeciv-img-extract and synx.sh in freeciv-proxy.
    - Edit /freeciv-web/src/main/webapp/freecivmetaserve/php_code/local.php.dist,
      rename this file to local.php, and update values for fcdb_username and fcdb_pw
      to your MySQL username and password.
@@ -122,6 +123,8 @@ On other Linux distributions, follow this installation procedure:
    ./autogen.sh --enable-fcweb
    make
    make install     (as root user)
+   
+   copy freeciv-web/freeciv/data/fcweb to /usr/local/share/freeciv
 
    Create the Freeciv savegame directory:  /mnt/savegames
    and make it writeable by the user running publite.

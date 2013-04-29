@@ -23,23 +23,11 @@ var debug_client_speed_list = [];
 var ws = null;
 
 /****************************************************************************
-  Initialized the network synchronization loop.
+  Initialized the Network communication with Websockets.
 ****************************************************************************/
 function network_init()
 {
-  civwebserver_url = civwebserver_url_base + "?p=" + civserverport + "&u=" + username;
-
-  network_websocket_init();
-}
-
-
-
-/****************************************************************************
-  Initialized the Websocket connection.
-****************************************************************************/
-function network_websocket_init()
-{
-  ws = new io.connect('http://' + window.location.hostname + ":" + 8002);
+  ws = new io.connect('http://' + window.location.hostname);
 
   ws.on('connect', function() {
     /* first websocket packet contains username and port. */
@@ -60,44 +48,6 @@ function network_websocket_init()
 function network_stop()
 {
   clearInterval(syncTimerId); 
-}
-
-/****************************************************************************
-  Send a syncronization request to the server using POST.
-****************************************************************************/
-function sync_civclient()
-{
-
-  /* Prevent race conditions. */
-  if (isWorking || mapview_slide['active']) return;
-  isWorking = true;
-  
-  if (over_error_threshold()) return;
-  
-  var net_packet = [];
-    
-  var myJSONText = JSON.stringify(net_packet);
- 
-  /* Send main request for sync to server. */
-  $.ajax({
-      url: civwebserver_url,
-      type: "POST",
-      data: myJSONText,
-      dataType: "json",
-      success: client_handle_packet,
-      error: function(XMLHttpRequest, textStatus, errorThrown){
-        var error_msg = "Network error: " + textStatus + "\n"
-                        + XMLHttpRequest.status + "\n"
-                        + XMLHttpRequest.statusText + "\n\n"
-                        + XMLHttpRequest.responseText + "\n\n";
-      
-         js_breakpad_report(error_msg, "clinet.js", 62); 
-      }
-      
-   }
-  );
-
-
 }
 
 /****************************************************************************

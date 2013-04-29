@@ -1,18 +1,38 @@
 <html>
 <head>
-<title>Freeciv.net - open source strategy game playable using HTML5</title>
-<meta http-equiv="refresh" content="1; URL=http://www.freeciv.net/">
-<meta name="keywords" content="automatic redirection">
-<meta name="google-site-verification" content="13_ecThQ9UAWizPUoxWp3NOhryW3hMpj7LlMAzc-og8" />
+<title>Freeciv - open source strategy game</title>
+<style>
+body
+{
+background-color:#e6e6e6;
+}
+</style>
 </head>
 <body>
-	Freeciv.net is an open source strategy game playable using HTML5.
+
+<center>
+<h1>Freeciv</h1>
+<b>Freeciv is a Free and Open Source empire-building strategy game inspired by the history of human civilization. The game commences in prehistory and your mission is to lead your tribe from the Stone Age to the Space Age...
+</b>
 	
-	<br>
-	If your browser doesn't automatically go there within a few seconds, 
-you may want to go to 
-<a href="http://www.freeciv.net/">the destination</a> 
-manually.
+<br>
+<br>
+
+
+<a href="http://freeciv.wikia.com/wiki/Main_Page">Freeciv wiki</a>  | 
+
+<a href="/wireframe.jsp?do=menu">Play Freeciv-web</a>  |
+
+<a href="http://freeciv.wikia.com/wiki/Download">Download Freeciv</a>  |
+
+<a href="http://forum.freeciv.org">Freeciv Forum</a> 
+
+
+<br><br>
+       <img src="/images/freeciv-splash2.png">
+
+
+</center>
 </body>
 </html>
 

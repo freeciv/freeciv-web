@@ -1,6 +1,3 @@
-This directory contains patches which contain the modifications
-made to the standard Freeciv svn trunk, to make the webclient work.
-
- - Andreas
-
-
+This directory contains patches containing the modifications
+against standard Freeciv svn revision listed in version.txt in parent
+directory, to make the webclient work.

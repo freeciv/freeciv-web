@@ -15,6 +15,7 @@ fi
 
 sed "s/$ORIGCAPSTR/$WEBCAPSTR/" freeciv/fc_version > freeciv/fc_version.tmp
 mv freeciv/fc_version.tmp freeciv/fc_version
+chmod a+x freeciv/fc_version
 
 for patch in $PATCHLIST
 do

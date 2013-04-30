@@ -146,14 +146,6 @@ class CivWsMessenger(Thread):
 
 
 
-CivRouter = TornadioRouter(CivConnection,
-                           dict(enabled_protocols = ['websocket']));
-
-application = web.Application( 
-    CivRouter.apply_routes([(r"/", IndexHandler),
-                            (r"/status", StatusHandler, dict(router=CivRouter))]),
-    socket_io_port = PROXY_PORT
-)
 
 if __name__ == "__main__":
   try:
@@ -167,6 +159,15 @@ if __name__ == "__main__":
     #logging.basicConfig(filename=LOG_FILENAME,level=logging.INFO)
     logging.basicConfig(level=logging.INFO)
     logger = logging.getLogger("freeciv-proxy");
+
+    CivRouter = TornadioRouter(CivConnection,
+                               dict(enabled_protocols = ['websocket']));
+
+    application = web.Application( 
+        CivRouter.apply_routes([(r"/", IndexHandler),
+                                (r"/status", StatusHandler, dict(router=CivRouter))]),
+        socket_io_port = PROXY_PORT
+    )
 
     # Create and start tornadio server
     SocketServer(application);

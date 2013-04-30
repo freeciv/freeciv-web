@@ -1,7 +1,7 @@
-THE FREECIV.NET PROJECT - http://www.freeciv.net
-------------------------------------------------
+THE FREECIV-WEB PROJECT
+-----------------------
 
-Freeciv.net is an open-source turn-based strategy game. It’s built entirely in HTML5 
+Freeciv-web is an open-source turn-based strategy game. It’s built entirely in HTML5 
 and features in-depth game-play and a wide variety of game modes and options. Your goal is
  to build cities, collect resources, organize your government, and build an army, with the 
 ultimate goal of creating the best civilization. You can play online against other players 
@@ -10,8 +10,8 @@ ultimate goal of creating the best civilization. You can play online against oth
 This is yet another rewrite of the Freeciv web client, which
 will make it possible to play Freeciv in your web browser.
 
-Freeciv.net is is free and open source software. The Freeciv C server is released under
-the GNU General Public License, while the Freeciv.net web client is released
+Freeciv-web is is free and open source software. The Freeciv C server is released under
+the GNU General Public License, while the Freeciv-web client is released
 under the GNU Affero General Public License. See LICENSE.txt for details.
 
 
@@ -91,14 +91,14 @@ System Requirements
 Compiling and running the Freeciv Web client
 ---------------------------------
 
-To compile and run Freeciv.net on Ubuntu, 
-1. Checkout Freeciv.net from github to ~/freeciv-build
-2. Update username/password and run: ~/freeciv-build/freeciv.net-bootstrap.sh
+To compile and run Freeciv-web on Ubuntu, 
+1. Checkout Freeciv-web from github to ~/freeciv-build
+2. Update username/password and run: ~/freeciv-build/freeciv-web-bootstrap.sh
 
 
 On other Linux distributions, follow this installation procedure:
 
-0. Checkout Freeciv.net from github to ~/freeciv-build
+0. Checkout Freeciv-web from github to ~/freeciv-build
 
 1. Install the system requirements.
 
@@ -161,8 +161,8 @@ Also:
 Set ulimit -n 65535 in /etc/profile
 and add some TCP/IP tuning in /etc/sysctrl.conf
 
-Developers interested in Freeciv.net
+Developers interested in Freeciv-web
 ------------------------------------
 
-If you want to contibute to Freeciv.net, see the TODO file for 
+If you want to contibute to Freeciv-web, see the TODO file for 
 some tasks you can work on.

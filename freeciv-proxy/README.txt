@@ -1,8 +1,5 @@
 Freeciv web proxy
 
-Start the Freeciv-proxy process like this:
-python freeciv-proxy.py 8082
-
 Start the Freeciv HTML5 WebSocket proxy like this:
 sudo python freeciv-websocket-proxy.py
 

@@ -27,7 +27,7 @@ _scale = {'kB': 1024.0, 'mB': 1024.0*1024.0,
 
 startTime = time.time()
 
-def get_debug_info(civcoms):
+def get_debug_info(civcoms, router):
   code = "<html><head><meta http-equiv=\"refresh\" content=\"20\"></head><body><h2>Freeciv Web Proxy Status</h2>"
   code += "<font color=\"green\">Process status: OK</font><br>";
 
@@ -55,6 +55,7 @@ def get_debug_info(civcoms):
   except:
     print("Cannot open uptime file: /proc/uptime");
 
+  code += "<br><br><b>Tornadio status:</b> " + str(router.stats.dump()) + "<br>" 
 
   try:    
     code += "<h3>Memory usage:</h3>";

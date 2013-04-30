@@ -94,7 +94,9 @@ function show_city_dialog(pcity)
   update_map_canvas(0, 0, mapview['store_width'], mapview['store_height']);
  
   $("#tabs-map").addClass("ui-tabs-hide");
+  $("#tabs-map").hide();
   $("#tabs-cit").removeClass("ui-tabs-hide");
+  $("#tabs-cit").show();
   $("#map_tab").removeClass("ui-state-active");
   $("#map_tab").removeClass("ui-tabs-selected");
   $("#map_tab").addClass("ui-state-default");
@@ -327,7 +329,9 @@ function send_city_change(city_id, kind, value)
 function close_city_dialog()
 {
   $("#tabs-map").removeClass("ui-tabs-hide");
+  $("#tabs-map").show();
   $("#tabs-cit").addClass("ui-tabs-hide");
+  $("#tabs-cit").hide();
   $("#map_tab").addClass("ui-state-active");
   $("#map_tab").addClass("ui-tabs-selected");
   $("#map_tab").removeClass("ui-state-default");

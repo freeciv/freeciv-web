@@ -20,7 +20,7 @@
 <% } %>
 
 <div class="main_menu_buttons">
-  <button id="fullscreen_button" type="button" class="button" onClick="show_dialog_message('Fullscreen', 'Press F11 for fullscreen mode.');" >Fullscreen</button>
+  <button id="fullscreen_button" type="button" class="button" onClick="show_fullscreen_window();" >Fullscreen</button>
 </div>
 
 

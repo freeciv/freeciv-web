@@ -339,7 +339,7 @@ if ( isset($port) ) {
 <title>Freeciv.net - online multiplayer strategy game</title>
 
 <link href="/css/frontpage.css" rel="stylesheet" type="text/css" />
-<link type="text/css" href="/css/jquery-ui-1.8.16.custom.css" rel="stylesheet" />
+<link type="text/css" href="/css/jquery-ui-1.10.2.custom.min.css" rel="stylesheet" />
 
 <?php if ($_COOKIE["facebook_mode"] == "true") { ?>
   <link href="/css/fb_frontpage.css" rel="stylesheet" type="text/css" />
@@ -348,8 +348,8 @@ if ( isset($port) ) {
 
 <link rel="shortcut icon" href="/images/freeciv-shortcut-icon.png" />
 
-<script type="text/javascript" src="/javascript-compressed/jquery-1.7.1.min.js"></script>
-<script type="text/javascript" src="/javascript/jquery-ui-1.8.16.custom.min.js"></script>
+<script type="text/javascript" src="/javascript-compressed/jquery-2.0.0.min.js"></script>
+<script type="text/javascript" src="/javascript/jquery-ui-1.10.2.custom.min.js"></script>
 
 
 

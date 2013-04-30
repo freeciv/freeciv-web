@@ -1,5 +1,5 @@
 
-RESINVER="4.0.35"
+RESINVER="4.0.36"
 
 ROOTDIR="$(pwd)/../.."
 

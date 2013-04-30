@@ -4,32 +4,17 @@
 <title>Freeciv.net - strategy game playable online with HTML5</title>
 
 <link href="/css/frontpage.css" rel="stylesheet" type="text/css" />
-<link type="text/css" href="/css/jquery-ui-1.8.16.custom.css" rel="stylesheet" />
+<link type="text/css" href="/css/jquery-ui-1.10.2.custom.min.css" rel="stylesheet" />
 
 
 <link rel="shortcut icon" href="/images/freeciv-shortcut-icon.png" />
 
-<script type="text/javascript" src="/javascript-compressed/jquery-1.7.1.min.js"></script>
-<script type="text/javascript" src="/javascript/jquery-ui-1.8.16.custom.min.js"></script>
+<script type="text/javascript" src="/javascript-compressed/jquery-2.0.0.min.js"></script>
+<script type="text/javascript" src="/javascript/jquery-ui-1.10.2.custom.min.js"></script>
 
 
 <script type="text/javascript" src="/javascript/iphone.js"></script>
 <meta name="google-site-verification" content="13_ecThQ9UAWizPUoxWp3NOhryW3hMpj7LlMAzc-og8" />
-
-<script type="text/javascript">
-/* <![CDATA[ */
-    (function() {
-        var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
-        
-        s.type = 'text/javascript';
-        s.async = true;
-        s.src = 'http://api.flattr.com/js/0.5.0/load.js?mode=auto';
-        
-        t.parentNode.insertBefore(s, t);
-    })();
-/* ]]> */
-</script>
-
 
 
 </head>

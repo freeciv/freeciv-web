@@ -149,6 +149,8 @@ CREATE TABLE `servers` (
   `capability` varchar(255) DEFAULT NULL,
   `state` varchar(20) DEFAULT 'Pregame',
   `topic` varchar(255) DEFAULT 'none',
+  `type` varchar(255) DEFAULT 'none',
+  `humans` varchar(64) DEFAULT '0',
   `message` varchar(255) DEFAULT 'none',
   `stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `available` int(11) DEFAULT '0',

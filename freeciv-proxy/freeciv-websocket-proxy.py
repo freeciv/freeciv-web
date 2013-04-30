@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # -*- coding: latin-1 -*-
 
 ''' 
@@ -26,24 +27,35 @@ from threading import Thread;
 
 from civcom import *
 from debugging import *
+import logging
 
 
 ROOT = op.normpath(op.dirname(__file__))
 WS_UPDATE_INTERVAL = 0.022;
+PROXY_PORT = 8002;
 
 civcoms = {};
 
 class IndexHandler(web.RequestHandler):
-    """Serves the Freeciv-proxy status page, on the url:  /status """
+    """Serves the Freeciv-proxy index page """
     def get(self):
-        self.write(get_debug_info(civcoms))
+        self.write("Freeciv-web websocket proxy");
+
+
+class StatusHandler(web.RequestHandler):
+    """Serves the Freeciv-proxy status page, on the url:  /status """
+    def initialize(self, router):
+        self.router = router;
+
+    def get(self):
+        self.write(get_debug_info(civcoms, self.router));
 
 class CivConnection(SocketConnection):
     """ Serves the Freeciv WebSocket service. """
     participants = set()
 
     def on_open(self, request):
-	self.ip = self.user_id = request.get_argument('id');
+	self.ip = self.user_id = self.session.remote_ip;
         self.participants.add(self);
 	self.is_ready = False;
 
@@ -135,24 +147,33 @@ class CivWsMessenger(Thread):
 
 
 
-CivRouter = TornadioRouter(CivConnection);
-
-application = web.Application( CivRouter.urls,
-    enabled_protocols = ['websocket',
-                         'flashsocket',
-                         'xhr-multipart',
-                         'xhr-polling'],
-    flash_policy_port = 843,
-    flash_policy_file = op.join(ROOT, 'flashpolicy.xml'),
-    socket_io_port = 8002
-)
 
 if __name__ == "__main__":
-    import logging
-    logging.getLogger().setLevel(level=logging.INFO);
+  try:
+    print 'Started Freeciv-proxy. Use Control-C to exit'
+ 
+    if len(sys.argv) == 2:
+      PROXY_PORT = int(sys.argv[1]);
+    print 'port: ' + str(PROXY_PORT);
+ 
+    LOG_FILENAME = '/tmp/logging' +str(PROXY_PORT) + '.out'
+    #logging.basicConfig(filename=LOG_FILENAME,level=logging.INFO)
+    logging.basicConfig(level=logging.INFO)
+    logger = logging.getLogger("freeciv-proxy");
 
+    CivRouter = TornadioRouter(CivConnection,
+                               dict(enabled_protocols = ['websocket']));
+
+    application = web.Application( 
+        CivRouter.apply_routes([(r"/", IndexHandler),
+                                (r"/status", StatusHandler, dict(router=CivRouter))]),
+        socket_io_port = PROXY_PORT
+    )
+
+    # Create and start tornadio server
     SocketServer(application);
-
+  except KeyboardInterrupt:
+    print('Exiting...');
 
 
 

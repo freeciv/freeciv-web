@@ -1,17 +1,22 @@
-THE FREECIV.NET PROJECT
+THE FREECIV-WEB PROJECT
 -----------------------
 
-Freeciv.net is an open-source turn-based strategy game playable online in a browser. It’s built entirely in HTML5 and features in-depth game-play and a wide variety of game modes and options. Your goal is to build cities, collect resources, organize your government, and build an army, with the ultimate goal of creating the best civilization. You can play online against other players  (multiplayer) or play by yourself against the computer. 
+Freeciv-web is an open-source turn-based strategy game. It’s built entirely in HTML5 
+and features in-depth game-play and a wide variety of game modes and options. Your goal is
+ to build cities, collect resources, organize your government, and build an army, with the 
+ultimate goal of creating the best civilization. You can play online against other players 
+(multiplayer) or play by yourself against the computer. 
 
-UPDATE 2012-08-17: Marko Lindqvist is now working on updating Freeciv.net to the latest development version of Freeciv (http://www.freeciv.org) - The work can be tracked here: https://github.com/cazfi/freeciv-web
+This is yet another rewrite of the Freeciv web client, which
+will make it possible to play Freeciv in your web browser.
 
-If you are interested in hosting a Freeciv.net server, then please contact me. A lot of people have been missing Freeciv.net since the Amazon server was shut down, so it seems that this is  a game that people really want to play in their browsers!
+Freeciv-web is is free and open source software. The Freeciv C server is released under
+the GNU General Public License, while the Freeciv-web client is released
+under the GNU Affero General Public License. See LICENSE.txt for details.
 
-Freeciv.net is is free and open source software. The Freeciv C server is released under the GNU General Public License, while the Freeciv.net web client is released under the GNU Affero General Public License. See LICENSE.txt for details.
 
 
 Contact: Andreas Røsdal  - andrearo@pvv.ntnu.no
-Twitter:   http://www.twitter.com/andreasrosdal/
 
 
 Overview
@@ -43,7 +48,7 @@ The Freeciv Web client consists of these components:
 System Requirements
 -------------------
 
-- Resin 4.0.36 - http://www.caucho.com/
+- Resin 4.0.35 - http://www.caucho.com/
 
 - Java 1.6.0 SDK - http://java.sun.com/javase/downloads/index.jsp
 
@@ -69,13 +74,13 @@ System Requirements
 
 - OpenSSL - http://www.openssl.org/
 
-- nginx 1.4.0 - http://nginx.org/
+- nginx 1.0.0 - http://nginx.org/
 
 - pngcrush, required for freeciv-img-extract.  http://pmt.sourceforge.net/pngcrush/
 
 - TornadIO2 - https://github.com/MrJoes/tornadio2
 
-- Tornado 3.0.1 - http://www.tornadoweb.org/
+- Tornado 2.1.1 - http://www.tornadoweb.org/
 
 - GLib 2.16.0 or newer - http://ftp.gnome.org/pub/GNOME/sources/glib/2.16/
 
@@ -86,14 +91,14 @@ System Requirements
 Compiling and running the Freeciv Web client
 ---------------------------------
 
-To compile and run Freeciv.net on Ubuntu, 
-1. Checkout Freeciv.net from github to ~/freeciv-build
-2. Update username/password and run: ~/freeciv-build/freeciv.net-bootstrap.sh
+To compile and run Freeciv-web on Ubuntu, 
+1. Checkout Freeciv-web from github to ~/freeciv-build
+2. Update username/password and run: ~/freeciv-build/freeciv-web-bootstrap.sh
 
 
 On other Linux distributions, follow this installation procedure:
 
-0. Checkout Freeciv.net from github to ~/freeciv-build
+0. Checkout Freeciv-web from github to ~/freeciv-build
 
 1. Install the system requirements.
 
@@ -102,7 +107,6 @@ On other Linux distributions, follow this installation procedure:
 
 3. Build and configure freeciv-web. 
 
-   - Run sync.sh in freeciv-img-extract and synx.sh in freeciv-proxy.
    - Edit /freeciv-web/src/main/webapp/freecivmetaserve/php_code/local.php.dist,
      rename this file to local.php, and update values for fcdb_username and fcdb_pw
      to your MySQL username and password.
@@ -123,8 +127,6 @@ On other Linux distributions, follow this installation procedure:
    ./autogen.sh --enable-fcweb
    make
    make install     (as root user)
-   
-   copy freeciv-web/freeciv/data/fcweb to /usr/local/share/freeciv
 
    Create the Freeciv savegame directory:  /mnt/savegames
    and make it writeable by the user running publite.
@@ -159,8 +161,8 @@ Also:
 Set ulimit -n 65535 in /etc/profile
 and add some TCP/IP tuning in /etc/sysctrl.conf
 
-Developers interested in Freeciv.net
+Developers interested in Freeciv-web
 ------------------------------------
 
-If you want to contibute to Freeciv.net, see the TODO file for 
+If you want to contibute to Freeciv-web, see the TODO file for 
 some tasks you can work on.

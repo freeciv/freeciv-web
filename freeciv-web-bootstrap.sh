@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# FIXME: This is not in working condition
+# It doesn't get freeciv sources and patch them automatically
+# It doesn't create javascript packet definitions 
+# It doesn't create javascript gfx definitions
+
 basedir="${HOME}/freeciv-build"
 srcdir="${basedir}/freeciv-web"
 destdir="${basedir}/build"
@@ -8,8 +13,8 @@ destdir="${basedir}/build"
 mysql_user="root"
 mysql_pass="changeme"
 
-freeciv_repo="https://github.com/freecivnet/freeciv-web.git"
-resin_version="4.0.18"
+freeciv_repo="https://github.com/cazfi/freeciv-web.git"
+resin_version="4.0.35"
 resin_url="http://www.caucho.com/download/resin-${resin_version}.tar.gz"
 
 # Based on fresh install of Ubuntu 10.10
@@ -22,7 +27,7 @@ cd ${basedir}
 
 ## dependencies
 echo "==== Installing Dependencies ===="
-sudo aptitude build-dep freeciv-client-gtk
+sudo aptitude build-dep freeciv-server
 sudo aptitude install ${dependencies}
 
 ## freeciv source
@@ -43,8 +48,8 @@ mysql -u ${mysql_user} -p${mysql_pass} freecivmetaserver < ${srcdir}/publite2/my
 
 echo "==== Configuring Build ===="
 sed -e "s/fcdb_username = \"root\"/fcdb_username = \"${mysql_user}\"/" -e "s/fcdb_pw = 'changeme'/fcdb_pw = \"${mysql_pass}\"/" \
-        ${srcdir}/freeciv-web/src/main/webapp/freecivmetaserve/php_code/settings.php.dist \
-        > ${srcdir}/freeciv-web/src/main/webapp/freecivmetaserve/php_code/settings.php
+        ${srcdir}/freeciv-web/src/main/webapp/freecivmetaserve/php_code/local.php.dist \
+        > ${srcdir}/freeciv-web/src/main/webapp/freecivmetaserve/php_code/local.php
 
 sed -e "s/user>root/user>${mysql_user}/" -e "s/password>changeme/password>${mysql_pass}/" \
         ${srcdir}/freeciv-web/src/main/webapp/WEB-INF/resin-web.xml.dist \
@@ -58,9 +63,9 @@ cp target/freeciv-web.war ${destdir}/resin/webapps/
 
 echo "==== Building freeciv ===="
 cd ${basedir}/freeciv-web/freeciv
-./autogen.sh --enable-client=no
+./autogen.sh --enable-fcweb
 make && sudo make install
 
 echo "=============================="
-echo "Refer to the freeciv.net README for instructions on how to proceed after the build"
+echo "Refer to the freeciv-web README for instructions on how to proceed after the build"
 echo "=============================="

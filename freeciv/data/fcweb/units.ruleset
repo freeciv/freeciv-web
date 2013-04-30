@@ -201,6 +201,10 @@ flags         = "Unreachable", "DoesntOccupyTile"
 ; city_size     = Initial size of the cities Settlers type unit builds
 ; targets       = list of unit classes this unit can attack against even
 ;                 if they have Unreachable unit class flag
+; embarks       = list of unit classes this unit may embark upon even if they
+;                 have Unreachable unit class flag and are not in native base
+; disembarks    = list of unit classes this unit may disembark from even if they
+;                 have Unreachable unit class flag and are not in native base
 ; bonuses       = definitions of combat bonuses against specific other units
 ; bonuses.flag  = flag of the unit that bonus applies against
 ; bonuses.type  = type of the bonus. See below

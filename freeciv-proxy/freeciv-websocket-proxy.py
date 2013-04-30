@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # -*- coding: latin-1 -*-
 
 ''' 
@@ -54,7 +55,7 @@ class CivConnection(SocketConnection):
     participants = set()
 
     def on_open(self, request):
-	self.ip = self.user_id = request.get_argument('id');
+	self.ip = self.user_id = self.session.remote_ip;
         self.participants.add(self);
 	self.is_ready = False;
 

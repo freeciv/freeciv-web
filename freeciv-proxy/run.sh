@@ -1,4 +1,3 @@
-nohup python freeciv-proxy.py 8082 &
-nohup python freeciv-proxy.py 8083 &
-nohup python freeciv-proxy.py 8084 &
-sudo nohup python freeciv-websocket-proxy.py &
+nohup python freeciv-websocket-proxy.py 8002 &
+nohup python freeciv-websocket-proxy.py 8003 &
+nohup python freeciv-websocket-proxy.py 8004 &

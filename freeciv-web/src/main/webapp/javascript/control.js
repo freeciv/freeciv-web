@@ -1015,7 +1015,7 @@ function process_diplomat_arrival(pdiplomat, target_id)
 ****************************************************************************/
 function preview_goto_path(unit_id, dst_x, dst_y)
 {
-  var start_tile = index_to_tile(units[unit_id]['index']);
+  var start_tile = index_to_tile(units[unit_id]['tile']);
   current_goto_path = [];
   generate_preview_path(start_tile['x'], start_tile['y'], dst_x, dst_y);
 }

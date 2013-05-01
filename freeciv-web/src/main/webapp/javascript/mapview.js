@@ -158,7 +158,41 @@ function setup_window_size ()
 
   if (overview_active) init_overview();
   if (unitpanel_active) init_game_unit_panel(); 
+
+
+  if (is_small_screen()) {
+    /* adapt widgets on sceen to fit on a small device */
+    $("#freeciv_logo").remove();
+    $("#hel_tab").remove();
+    $("#opt_tab").remove();
+    $("#tabs-opt").remove();
+    $("#tabs-hel").remove();
+    $(".ui-tabs-anchor").css("padding", "0px");
+    $(".ui-button-text").css("padding", "0px");
+    $(".overview_dialog").hide();
+    $(".unit_dialog").hide();
+    $(".ui-dialog-titlebar").hide();
+    $("#game_chatbox_panel").css("min-height", "50px");
+    $("#game_message_area").css("height", "30px");
+  }
+
 	
+}
+
+/**************************************************************************
+  ...
+**************************************************************************/
+function is_small_screen() 
+{
+  var winWidth = $(window).width(); 
+  var winHeight = $(window).height(); 
+
+  if (winWidth <= 640 || winHeight <= 640) {
+    return true;
+  } else {
+    return false;
+  }
+
 }
 
 /**************************************************************************

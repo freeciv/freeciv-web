@@ -99,6 +99,13 @@ function civclient_init()
   if (observing) {
     show_dialog_message("Welcome to Freeciv-web", 
       "Please wait while you are being logged in as an observer in the game.");
+
+  } else if (is_small_screen()) {
+    show_intro_dialog("Welcome to Freeciv-web", 
+      "You have now joined the game. " + 
+      "Click the start game button to begin the game immediately");
+
+
   } else { 
     show_intro_dialog("Welcome to Freeciv-web", 
       "You have now joined the game. Before the game begins, " +
@@ -232,7 +239,7 @@ function show_dialog_message(title, message) {
   $("#dialog").dialog({
 			bgiframe: true,
 			modal: true,
-			width: "40%",
+			width: is_small_screen() ? "90%" : "40%",
 			buttons: {
 				Ok: function() {
 					$(this).dialog('close');
@@ -260,7 +267,7 @@ function show_intro_dialog(title, message) {
   $("#dialog").dialog({
 			bgiframe: true,
 			modal: true,
-			width: "40%",
+			width: is_small_screen() ? "90%" : "40%",
 			buttons: 
 			{
 				"Start Game" : function() {
@@ -273,6 +280,12 @@ function show_intro_dialog(title, message) {
 			}	
 			
 		});
+
+  if (is_small_screen()) {
+    /* some fixes for pregame screen on small devices.*/
+    $("#freeciv_logo").remove();
+    $("#pregame_options").height(105);
+  }
 	
   $("#dialog").dialog('open');		
 }
@@ -293,7 +306,12 @@ function update_timeout()
   if (game_info != null && game_info['timeout'] != null && game_info['timeout'] > 0) {
     var remaining = game_info['timeout'] - Math.floor((now - phase_start_time) / 1000);
     if (remaining >= 0) {
-      $("#turn_done_button").button("option", "label", "Turn Done (" + remaining + "s)");
+      if (is_small_screen()) {
+        $("#turn_done_button").button("option", "label", "EndTurn");
+        $(".ui-button-text").css("padding", "0px");
+      } else {
+        $("#turn_done_button").button("option", "label", "Turn Done (" + remaining + "s)");
+      }
     }
   } 
 }

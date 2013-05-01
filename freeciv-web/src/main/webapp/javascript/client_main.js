@@ -171,6 +171,12 @@ function show_new_game_message()
 
   if (observing) {
     /* do nothing. */
+
+  } else if (is_small_screen()) {
+    show_dialog_message("Welcome to Freeciv-web", 
+      "You lead a civilization. Your task is to conquer the world!\n\
+      Good luck, and have a lot of fun!");
+
   } else  {
     show_dialog_message("Welcome to Freeciv-web", 
       "Welcome to Freeciv-web.  You lead a civilization.  Your\n\

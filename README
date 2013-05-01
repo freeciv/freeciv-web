@@ -102,7 +102,7 @@ On other Linux distributions, follow this installation procedure:
 
 1. Install the system requirements.
 
-2. Create mysql database called 'freeciv_net'
+2. Create mysql database called 'freeciv_web'
    Import mysql dump into a MySQL database from:  /publite2/mysqldump.sql.bz2
 
 3. Build and configure freeciv-web. 

@@ -3,7 +3,7 @@
   <database jndi-name='jdbc/freeciv_mysql'>
     <driver>
       <type>com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource</type>
-      <url>jdbc:mysql://localhost:3306/freeciv_net</url>
+      <url>jdbc:mysql://localhost:3306/freeciv_web</url>
       <user>root</user>
       <password>changeme</password>
     </driver>

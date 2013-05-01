@@ -426,3 +426,10 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 .ui-dialog .ui-dialog-title {
   float: none;
 }
+
+.ui-dialog .ui-dialog-titlebar {
+  padding-bottom: 14px;
+  padding-left: 10px;
+  padding-top: 3px;
+
+}

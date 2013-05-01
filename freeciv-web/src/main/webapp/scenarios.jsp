@@ -1,6 +1,4 @@
-<%@page import="freeciv.servlet.*"%>
 <%@page import="java.util.*"%>
-<%@page import="com.amazon.s3.*"%>
 
 <div id="main_column">
 

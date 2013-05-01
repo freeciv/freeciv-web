@@ -4,7 +4,7 @@
 	
 <title>Freeciv-web</title>
 
-<script type="text/javascript" src="/javascript-compressed/waterbug.js"> </script> 
+<%--<script type="text/javascript" src="/javascript-compressed/waterbug.js"> </script> --%>
 
 <link rel="stylesheet" type="text/css" href="/css/webclient.min.css" />
 

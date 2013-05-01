@@ -65,7 +65,7 @@ def get_debug_info(civcoms, router):
 
     code += ("<h3>Logged in users  (count %i) :</h3>" % len(civcoms));
     for key in civcoms.keys():
-      code += ("username: <b>%s</b> <br>Civserver: (%d)<br>Client IP:%s<br>Connect time: %d<br><br>" % (civcoms[key].username, civcoms[key].civserverport,  civcoms[key].client_ip, time.time() - civcoms[key].connect_time));
+      code += ("username: <b>%s</b> <br>Civserver: (%d)<br>Session id:%s<br>Connect time: %d<br><br>" % (civcoms[key].username, civcoms[key].civserverport,  civcoms[key].client_ip, time.time() - civcoms[key].connect_time));
        
 
  

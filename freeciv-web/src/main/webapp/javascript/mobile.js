@@ -13,26 +13,10 @@
 
 
 /**************************************************************************
-  FIXME:...
-**************************************************************************/
-function is_iphone()
-{
-  
-  var agent=navigator.userAgent.toLowerCase();
-  return (agent.indexOf('iphone')!=-1 || agent.indexOf('ipad')!=-1);
- 
-  //return true;
-
-}
-
-
-
-/**************************************************************************
   Called when orientation changes.
 **************************************************************************/
 function orientation_changed() {
 
-  if (!is_iphone()) return;
   
   switch(window.orientation){
    case 0:
@@ -45,12 +29,4 @@ function orientation_changed() {
   } 
 }
 
-function iphone_autostart()
-{
-
-  var test_packet = {"type" : packet_chat_msg_req, 
-                         "message" : "/start"};
-  var myJSONText = JSON.stringify(test_packet);
-  send_request (myJSONText);
-    
-}    
+   

@@ -99,18 +99,14 @@ function civclient_init()
   if (observing) {
     show_dialog_message("Welcome to Freeciv-web", 
       "Please wait while you are being logged in as an observer in the game.");
-  } else if (!is_iphone()) { 
+  } else { 
     show_intro_dialog("Welcome to Freeciv-web", 
       "You have now joined the game. Before the game begins, " +
       "you can customize game options or wait for more players " +
       "to join the game.  <br><br>" +  
       "Click the start game button to begin the game immediately, or click " +
       "customize game to change the game settings.");
-  } else {
-    autostartTimerId = setTimeout("iphone_autostart();", 1000);
-    
-  }
-
+  } 
 }
 
 /**************************************************************************

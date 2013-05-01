@@ -32,7 +32,6 @@ mapview_slide['max'] = 100;
 mapview_slide['slide_time'] = 600;
 
 var height_offset = 67;
-var height_offset_iphone = 110;
 var width_offset = 10;
 
 var canvas_text_font = "12pt Arial"; // with canvas text support
@@ -60,11 +59,6 @@ function init_mapview()
     mapview_canvas_ctx.mozImageSmoothingEnabled = false;
   } 
   
-  if (is_iphone()) {
-    height_offset = height_offset_iphone;
-    width_offset = 0;
-  }
-     
   setup_window_size();  
 
   mapview['gui_x0'] = 0;

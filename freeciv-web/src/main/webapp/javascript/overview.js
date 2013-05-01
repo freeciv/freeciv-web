@@ -40,9 +40,6 @@ var COLOR_OVERVIEW_VIEWRECT = 9; /* white */
 function init_overview()
 {
 
-  // iphone version doesn't have overview.
-  if (is_iphone()) return;
-
   var xfact = 2;
   
   OVERVIEW_TILE_SIZE = Math.min(Math.floor((overview_w - 1) / (map['xsize'] * xfact) + 1) + 1,

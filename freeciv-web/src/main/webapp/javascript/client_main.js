@@ -171,7 +171,7 @@ function show_new_game_message()
 
   if (observing) {
     /* do nothing. */
-  } else if (!is_iphone()) {
+  } else  {
     show_dialog_message("Welcome to Freeciv-web", 
       "Welcome to Freeciv-web.  You lead a civilization.  Your\n\
       task is to conquer the world!  You should start by\n\
@@ -181,9 +181,5 @@ function show_new_game_message()
       pad, or click on the Goto button, then click on the \n\
       destination tile on the map.\n\
       Good luck, and have a lot of fun!");
-  } else {
-    show_dialog_message("Welcome to Freeciv-web", 
-      "Welcome to Freeciv-web.  You lead a civilization.  Your\n\
-      task is to conquer the world!");    
-    }
+  } 
 }

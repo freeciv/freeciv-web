@@ -570,10 +570,6 @@ function do_map_click(ptile, qtype)
       }
     }
     
-    if (left_click_center()) {
-      center_tile_mapcanvas(ptile)   
-    }
-    
   }
    
 }
@@ -1012,13 +1008,6 @@ function process_diplomat_arrival(pdiplomat, target_id)
 }
 
 
-/**************************************************************************
- ...
-**************************************************************************/
-function left_click_center()
-{
-  return (is_iphone());
-}
 
 /****************************************************************************
   Calculates a preview of the goto path, based on info in the client only.

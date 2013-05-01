@@ -35,7 +35,12 @@ function network_init()
   });
 
   ws.on('message', function(data) {
-     client_handle_packet(jQuery.parseJSON(data));
+     if (typeof client_handle_packet !== 'undefined') {
+       client_handle_packet(jQuery.parseJSON(data));
+     } else {
+       alert("Error, freeciv-web not compiled correctly. Please "
+             + "run sync.sh in freeciv-proxy correctly.");
+     }
   });
 
 }

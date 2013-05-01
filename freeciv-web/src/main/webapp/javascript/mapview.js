@@ -184,6 +184,13 @@ function init_sprites()
 function init_cache_sprites() 
 {
  try {
+
+  if (typeof tileset === 'undefined') {
+    alert("Tileset not generated correctly. Run sync.sh in "
+          + "freeciv-img-extract and recompile.");
+    return;
+  }  
+
   for (var tile_tag in tileset) {
     var x = tileset[tile_tag][0];
     var y = tileset[tile_tag][1];

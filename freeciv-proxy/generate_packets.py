@@ -1476,8 +1476,11 @@ def gen_main():
     ### We build to src dir. Building to builddir causes a lot
     ### of problems we have been unable to solve.
     target_root=src_root
-
-    content=open(input_name).read()
+    try:
+      content=open(input_name).read()
+    except IOError:
+      print("Error! Check out freeciv from svn in ../freeciv directory and apply patches.");
+      exit(-1);
     content=strip_c_comment(content)
     lines=content.split("\n")
     lines=map(lambda x: re.sub("#.*$","",x),lines)

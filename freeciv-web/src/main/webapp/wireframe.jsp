@@ -14,7 +14,6 @@
 
 
 <script type="text/javascript" src="/javascript/iphone.js"></script>
-<meta name="google-site-verification" content="13_ecThQ9UAWizPUoxWp3NOhryW3hMpj7LlMAzc-og8" />
 
 
 </head>
@@ -34,42 +33,18 @@
 
 
 <div id="body_content">
-<div id="header_ads" style="text-align: center;">
-
-<script type="text/javascript"><!--
-google_ad_client = "pub-4977952202639520";
-/* 728x15, opprettet 29.06.10 freeciv.net */
-google_ad_slot = "7465052068";
-google_ad_width = 728;
-google_ad_height = 15;
-//-->
-</script>
-<script type="text/javascript"
-src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script>
-
-</div>
 
 
 
   <jsp:include page="template_call.jsp" flush="false"/>
 </div>
 <div id="footer">
-Copyright &copy; 2008-2011 Freeciv.net
+Copyright &copy; 2008-2013 Freeciv-web
 </div>
 
 </div>
 
 
-<!-- Google Analytics Code -->
-<script type="text/javascript">
-var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-<script type="text/javascript">
-var pageTracker = _gat._getTracker("UA-5588010-1");
-pageTracker._trackPageview();
-</script>
 
 
 </body>

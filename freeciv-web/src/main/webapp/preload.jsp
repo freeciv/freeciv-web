@@ -59,14 +59,14 @@ img.percentImage {
 </style>
 </head>
 
-<body onload="fc_redirect_init();" text="#eeeeee" bgcolor="#202020">
+<body onload="fc_redirect_init();" text="#000000" bgcolor="#e6e6e6">
 
 <center>
 
 
 	<br><br>
 
- 	<img src="/images/freeciv-splash.png">
+ 	<img src="/images/freeciv-splash2.png">
 
 
 	<br><br>
@@ -75,7 +75,7 @@ img.percentImage {
 <img id="progress" src="/images/percentImage.png" class="percentImage" style="background-position: -120px 0pt;" />
 
 <br><br>
-<h2>Please wait while Freeciv.net is loading...</h2>
+<h2>Please wait while Freeciv-web is loading...</h2>
 
   <img src="/tileset/freeciv-web-tileset-0.png" width="1" height="1">
   <img src="/tileset/freeciv-web-tileset-1.png" width="1" height="1">

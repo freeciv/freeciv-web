@@ -19,7 +19,7 @@ var buffer_canvas = null;
 var city_canvas_ctx = null;
 var city_canvas = null; 
 
-var tileset_image = null; 
+var tileset_images = []; 
 var sprites = {};
 
 var sprites_init = false;
@@ -166,9 +166,13 @@ function setup_window_size ()
 **************************************************************************/
 function init_sprites()
 {
-  /* Load tileset images. FIXME: loading images this way doesn't work in Opera. */
-  tileset_image = new Image();
-  tileset_image.src = '/tileset/freeciv-web-tileset.png';
+  var tileset_image = new Image();
+  tileset_image.src = '/tileset/freeciv-web-tileset-0.png';
+  tileset_images[0] = tileset_image;
+
+  var tileset_image = new Image();
+  tileset_image.src = '/tileset/freeciv-web-tileset-1.png';
+  tileset_images[1] = tileset_image;
   
 }
 
@@ -190,13 +194,14 @@ function init_cache_sprites()
     var y = tileset[tile_tag][1];
     var w = tileset[tile_tag][2];
     var h = tileset[tile_tag][3];
+    var i = tileset[tile_tag][4];
 
     var newCanvas = document.createElement('canvas');
-    newCanvas.height = "" + h;
-    newCanvas.width = "" + w;
+    newCanvas.height = h;
+    newCanvas.width = w;
     var newCtx = newCanvas.getContext('2d');
 
-    newCtx.drawImage(tileset_image, x, y, 
+    newCtx.drawImage(tileset_images[i], x, y, 
                        w, h, 0, 0, w, h);
     sprites[tile_tag] = newCanvas;
 

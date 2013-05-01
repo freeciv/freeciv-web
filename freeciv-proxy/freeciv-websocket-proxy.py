@@ -67,11 +67,14 @@ class CivConnection(SocketConnection):
         if (not self.is_ready):
           #called the first time the user connects.
 	  auth = message.split(";");
-	  self.username = auth[0];
-	  self.civserverport = auth[1];
-	  self.is_ready = True;
-          self.civcom = self.get_civcom(self.username, self.civserverport, self.ip, self);
-	  return;
+	  if (len(auth) == 2):
+	    self.username = auth[0];
+	    self.civserverport = auth[1];
+	    self.is_ready = True;
+	    self.civcom = self.get_civcom(self.username, self.civserverport, self.ip, self);
+	    return;
+	  else:
+	    self.send("Error: Could not authenticate user.");
         
         # get the civcom instance which corresponds to this user.        
         self.civcom = self.get_civcom(self.username, self.civserverport, self.ip, self);

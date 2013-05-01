@@ -77,7 +77,8 @@ img.percentImage {
 <br><br>
 <h2>Please wait while Freeciv.net is loading...</h2>
 
-  <img src="/tileset/freeciv-web-tileset.png" width="1" height="1">
+  <img src="/tileset/freeciv-web-tileset-0.png" width="1" height="1">
+  <img src="/tileset/freeciv-web-tileset-1.png" width="1" height="1">
 
 </center>
 

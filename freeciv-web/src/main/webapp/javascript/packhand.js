@@ -829,6 +829,8 @@ function handle_server_setting_control(packet)
 
 function handle_player_diplstate(packet)
 {
+  if (client == null || client.conn.playing == null) return;
+
   if (packet['plr1'] == client.conn.playing['playerno']) {
     diplstates[packet['plr2']] = packet['ds_type'];
   } else if (packet['plr2'] == client.conn.playing['playerno']) {

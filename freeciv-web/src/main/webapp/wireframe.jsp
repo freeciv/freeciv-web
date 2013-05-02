@@ -45,15 +45,17 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="brand" href="#">The Freeciv Project</a>
+	<a href="/" style="padding: 3px; float: left;"><img src="/images/freeciv-web-logo.png" alt="The Freeciv Project"></a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li class="active"><a href="/">Home</a></li>
+              <li><a href="/">Home</a></li>
               <li class="active"><a href="/wireframe.jsp?do=menu">Play Online</a></li>
               <li><a href="http://freeciv.wikia.com/wiki/Main_Page">Freeciv Wiki</a></li>
               <li><a href="/freecivmetaserve/metaserver.php">Metaserver</a></li>
               <li><a href="http://forum.freeciv.org">Freeciv Forum</a></li>
               <li><a href="http://github.com/cazfi/freeciv-web">Code on Github</a></li>
+              <li><a href="http://freeciv.wikia.com/wiki/Donations">Donate!</a></li>
+
             </ul>
            </div><!--/.nav-collapse -->
         </div>

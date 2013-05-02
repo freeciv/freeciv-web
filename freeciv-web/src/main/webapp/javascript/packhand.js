@@ -556,10 +556,11 @@ function handle_diplomacy_accept_treaty(packet)
 
 function handle_page_msg(packet) 
 {
-  var message = packet['message'];
+  var headline = packet['headline'];
+  var message = packet['lines'];
   var regxp = /\n/gi;
   message = message.replace(regxp, "<br>\n");
-  show_dialog_message(" ", message);
+  show_dialog_message(headline, message);
 
 }
 

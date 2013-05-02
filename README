@@ -14,9 +14,10 @@ Freeciv-web is is free and open source software. The Freeciv C server is release
 the GNU General Public License, while the Freeciv-web client is released
 under the GNU Affero General Public License. See LICENSE.txt for details.
 
+Freeciv-web is now playable online at http://play.freeciv.org/
 
-
-Contact: Andreas Røsdal  - andrearo@pvv.ntnu.no
+Contact: The Freeciv Project - freeciv-dev@gna.org
+https://mail.gna.org/listinfo/freeciv-dev
 
 
 Overview
@@ -74,13 +75,13 @@ System Requirements
 
 - OpenSSL - http://www.openssl.org/
 
-- nginx 1.0.0 - http://nginx.org/
+- nginx 1.4.0 - http://nginx.org/
 
 - pngcrush, required for freeciv-img-extract.  http://pmt.sourceforge.net/pngcrush/
 
 - TornadIO2 - https://github.com/MrJoes/tornadio2
 
-- Tornado 2.1.1 - http://www.tornadoweb.org/
+- Tornado 3.0.1 - http://www.tornadoweb.org/
 
 - GLib 2.16.0 or newer - http://ftp.gnome.org/pub/GNOME/sources/glib/2.16/
 

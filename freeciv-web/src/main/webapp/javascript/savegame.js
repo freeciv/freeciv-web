@@ -32,14 +32,14 @@ function load_game_real(filename)
 {
     
     var scenario = $.getUrlVar('scenario');
+    console.log(scenario);
     if (scenario == "true") {
       var test_packet = {"type" : packet_chat_msg_req, 
                          "message" : "/load " + filename};
       send_request (JSON.stringify(test_packet));
 
-      setTimeout("send_request (JSON.stringify({\"type\" : packet_chat_msg_req, \"message\" : \"/aitoggle AI*1\"}));",400);
+      setTimeout(load_game_toggle,1000);
 
-      setTimeout("send_request (JSON.stringify({\"type\" : packet_chat_msg_req,\"message\" : \"/take AI*1\"}));", 800);
 
 
     } else {
@@ -49,6 +49,21 @@ function load_game_real(filename)
       send_request (myJSONText);
 
     }
+}
+
+/**************************************************************************
+...
+**************************************************************************/
+function load_game_toggle()
+{
+  var test_packet = {"type" : packet_chat_msg_req, 
+                         "message" : "/aitoggle AI*1"};
+
+  send_request (JSON.stringify(test_packet));
+  test_packet = {"type" : packet_chat_msg_req, 
+                         "message" : "/take AI*1"};
+  send_request (JSON.stringify(test_packet));
+
 }
 
 /**************************************************************************

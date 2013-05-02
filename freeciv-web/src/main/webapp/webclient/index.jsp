@@ -2,7 +2,9 @@
 <html>
 <head>
 	
-<title>Freeciv.net - online multiplayer strategy game</title>
+<title>Freeciv-web</title>
+
+<%--<script type="text/javascript" src="/javascript-compressed/waterbug.js"> </script> --%>
 
 <link rel="stylesheet" type="text/css" href="/css/webclient.min.css" />
 
@@ -16,10 +18,6 @@
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-
-<%--<link type="text/css" rel="stylesheet" media="only screen and (max-device-width: 480px)" href="/stylesheets/iphone.css">--%>
-<%--<link type="text/css" rel="StyleSheet" href="/stylesheets/iphone.css" /> --%> 
-
 
 </head>
 
@@ -37,17 +35,16 @@
     <jsp:include page="pregame.jsp" flush="false"/>
     <jsp:include page="game.jsp" flush="false"/>
     
-    
-<!-- Google Analytics Code -->
-<script type="text/javascript">
-var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-<script type="text/javascript">
-var pageTracker = _gat._getTracker("UA-5588010-1");
-pageTracker._trackPageview();
-</script>    
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
+  ga('create', 'UA-40584174-1', 'freeciv.org');
+  ga('send', 'pageview');
+      
+</script>
  
 </body>
 </html>

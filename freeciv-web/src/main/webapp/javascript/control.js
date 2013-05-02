@@ -570,10 +570,6 @@ function do_map_click(ptile, qtype)
       }
     }
     
-    if (left_click_center()) {
-      center_tile_mapcanvas(ptile)   
-    }
-    
   }
    
 }
@@ -1012,13 +1008,6 @@ function process_diplomat_arrival(pdiplomat, target_id)
 }
 
 
-/**************************************************************************
- ...
-**************************************************************************/
-function left_click_center()
-{
-  return (is_iphone());
-}
 
 /****************************************************************************
   Calculates a preview of the goto path, based on info in the client only.
@@ -1026,7 +1015,7 @@ function left_click_center()
 ****************************************************************************/
 function preview_goto_path(unit_id, dst_x, dst_y)
 {
-  var start_tile = index_to_tile(units[unit_id]['index']);
+  var start_tile = index_to_tile(units[unit_id]['tile']);
   current_goto_path = [];
   generate_preview_path(start_tile['x'], start_tile['y'], dst_x, dst_y);
 }

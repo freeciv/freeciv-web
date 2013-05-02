@@ -22,7 +22,6 @@ var MAPVIEW_REFRESH_INTERVAL = 16;
 
 function mapdeco_init()
 {
-  mapview['can_do_cached_drawing'] = can_do_cached_drawing();
   mapdeco_highlight_table = {};
   mapdeco_crosshair_table = {};
   mapdeco_gotoline_table = {};
@@ -32,12 +31,6 @@ function mapdeco_init()
   keyboard_input=true;
 
 
-}
-
-/* cached drawing not supported in javascript webclient. */
-function can_do_cached_drawing()
-{
-  return false;
 }
 
 /**************************************************************************

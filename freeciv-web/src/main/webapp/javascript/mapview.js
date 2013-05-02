@@ -19,7 +19,7 @@ var buffer_canvas = null;
 var city_canvas_ctx = null;
 var city_canvas = null; 
 
-var tileset_image = null; 
+var tileset_images = []; 
 var sprites = {};
 
 var sprites_init = false;
@@ -32,7 +32,6 @@ mapview_slide['max'] = 100;
 mapview_slide['slide_time'] = 600;
 
 var height_offset = 67;
-var height_offset_iphone = 110;
 var width_offset = 10;
 
 var canvas_text_font = "12pt Arial"; // with canvas text support
@@ -60,11 +59,6 @@ function init_mapview()
     mapview_canvas_ctx.mozImageSmoothingEnabled = false;
   } 
   
-  if (is_iphone()) {
-    height_offset = height_offset_iphone;
-    width_offset = 0;
-  }
-     
   setup_window_size();  
 
   mapview['gui_x0'] = 0;
@@ -164,7 +158,41 @@ function setup_window_size ()
 
   if (overview_active) init_overview();
   if (unitpanel_active) init_game_unit_panel(); 
+
+
+  if (is_small_screen()) {
+    /* adapt widgets on sceen to fit on a small device */
+    $("#freeciv_logo").remove();
+    $("#hel_tab").remove();
+    $("#opt_tab").remove();
+    $("#tabs-opt").remove();
+    $("#tabs-hel").remove();
+    $(".ui-tabs-anchor").css("padding", "0px");
+    $(".ui-button-text").css("padding", "0px");
+    $(".overview_dialog").hide();
+    $(".unit_dialog").hide();
+    $(".ui-dialog-titlebar").hide();
+    $("#game_chatbox_panel").css("min-height", "50px");
+    $("#game_message_area").css("height", "30px");
+  }
+
 	
+}
+
+/**************************************************************************
+  ...
+**************************************************************************/
+function is_small_screen() 
+{
+  var winWidth = $(window).width(); 
+  var winHeight = $(window).height(); 
+
+  if (winWidth <= 640 || winHeight <= 640) {
+    return true;
+  } else {
+    return false;
+  }
+
 }
 
 /**************************************************************************
@@ -172,9 +200,13 @@ function setup_window_size ()
 **************************************************************************/
 function init_sprites()
 {
-  /* Load tileset images. FIXME: loading images this way doesn't work in Opera. */
-  tileset_image = new Image();
-  tileset_image.src = '/tileset/freeciv-web-tileset.png';
+  var tileset_image = new Image();
+  tileset_image.src = '/tileset/freeciv-web-tileset-0.png';
+  tileset_images[0] = tileset_image;
+
+  var tileset_image = new Image();
+  tileset_image.src = '/tileset/freeciv-web-tileset-1.png';
+  tileset_images[1] = tileset_image;
   
 }
 
@@ -184,18 +216,26 @@ function init_sprites()
 function init_cache_sprites() 
 {
  try {
+
+  if (typeof tileset === 'undefined') {
+    alert("Tileset not generated correctly. Run sync.sh in "
+          + "freeciv-img-extract and recompile.");
+    return;
+  }  
+
   for (var tile_tag in tileset) {
     var x = tileset[tile_tag][0];
     var y = tileset[tile_tag][1];
     var w = tileset[tile_tag][2];
     var h = tileset[tile_tag][3];
+    var i = tileset[tile_tag][4];
 
     var newCanvas = document.createElement('canvas');
-    newCanvas.height = "" + h;
-    newCanvas.width = "" + w;
+    newCanvas.height = h;
+    newCanvas.width = w;
     var newCtx = newCanvas.getContext('2d');
 
-    newCtx.drawImage(tileset_image, x, y, 
+    newCtx.drawImage(tileset_images[i], x, y, 
                        w, h, 0, 0, w, h);
     sprites[tile_tag] = newCanvas;
 

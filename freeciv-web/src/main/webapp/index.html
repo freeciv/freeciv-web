@@ -17,9 +17,6 @@
     </style>
     <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
 <link rel="shortcut icon" href="images/freeciv-shortcut-icon.png" />
-<link type="text/css" href="/css/jquery-ui-1.10.2.custom.min.css" rel="stylesheet" />
-<script type="text/javascript" src="/javascript-compressed/jquery-2.0.0.min.js"></script>
-<script type="text/javascript" src="/javascript/jquery-ui-1.10.2.custom.min.js"></script>
 
   </head>
 
@@ -39,7 +36,7 @@
               <li class="active"><a href="/">Home</a></li>
               <li class="active"><a href="/wireframe.jsp?do=menu">Play Online</a></li>
               <li><a href="http://freeciv.wikia.com/wiki/Main_Page">Freeciv Wiki</a></li>
-              <li><a href="/freecivmetaserve/metaserver.php">Metaserver</a></li>
+              <li><a href="http://freeciv.wikia.com/wiki/Download">Download</a></li>
               <li><a href="http://forum.freeciv.org">Freeciv Forum</a></li>
               <li><a href="http://github.com/cazfi/freeciv-web">Code on Github</a></li>
             </ul>
@@ -50,17 +47,49 @@
 
     <div class="container">
 
+      <!-- Main hero unit for a primary marketing message or call to action -->
 
-<div id="header">
+      <div class="hero-unit" >
+        <h1 >Play Freeciv!</h1>  <div style="float: right; margin: 20px; margin-top: -30px;">	<img src="images/freeciv-splash2.png"></div>
 
-<div id="body_content">
+        <p>Freeciv is a Free and Open Source empire-building strategy game inspired by the history of human civilization. The game commences in prehistory and your mission is to lead your tribe from the Stone Age to the Space Age...
+	</p>
+        <p><a href="/wireframe.jsp?do=menu" class="btn btn-primary btn-large">Play Online Now &raquo;</a></p>
+
+      </div>
+      
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="span4">
+          <h2>HTML5 browser game</h2>
+          <p>Freeciv-web can be played online using a desktop computer, mobile phone or tablet. </p>
+          <p><a class="btn" href="/wireframe.jsp?do=menu">To Browser version &raquo;</a></p>
+	<br><br>
 
 
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style ">
+<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+<a class="addthis_button_tweet"></a>
+<a class="addthis_button_pinterest_pinit"></a>
+<a class="addthis_counter addthis_pill_style"></a>
+</div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-518171163196112a"></script>
+<!-- AddThis Button END -->
 
-  <jsp:include page="template_call.jsp" flush="false"/>
 
-
-
+        </div>
+        <div class="span4">
+          <h2>Desktop game</h2>
+          <p>Freeciv can also be played as a desktop game, downloaded to your computer. There are many clients for most operating systems, such as Microsoft Windows, Linux, Apple OS X.</p>
+          <p><a class="btn" href="http://freeciv.wikia.com/wiki/Download">Desktop version &raquo;</a></p>
+       </div>
+        <div class="span4">
+	  <img src="images/freeciv-web-screenshot.png">
+          <p>Screenshot of Freeciv in action!</p>
+          <p><a class="btn" href="http://freeciv.wikia.com/wiki/Screenshots">View more screenshots &raquo;</a></p>
+        </div>
+      </div>
 
       <hr>
 
@@ -83,6 +112,4 @@
   
   </body>
 </html>
-
-
 

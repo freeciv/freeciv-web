@@ -4,7 +4,7 @@
 		<div id="tabs">
 		    
 			<ul id="tabs_menu">
-			    <div id="freeciv_logo" style="cursor:pointer;cursor:hand"></div>
+			    <div id="freeciv_logo" ></div>
 				<li id="map_tab"><a href="#tabs-map" onclick="set_default_mapview_active();">Map</a></li>
 				<li id="civ_tab"><a href="#tabs-civ" onclick="set_default_mapview_inactive(); init_civ_dialog();">Nation</a></li>
 				<li><a id="tech_tab_item" href="#tabs-tec" onclick="set_default_mapview_inactive(); update_tech_screen();">Research</a></li>

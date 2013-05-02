@@ -931,8 +931,9 @@ function get_unit_image_sprite(punit)
   var tileset_y = tileset[tag][1];
   var width = tileset[tag][2];
   var height = tileset[tag][3];
+  var i = tileset[tag][4];
   return {"tag": tag, 
-            "image-src" : "/tileset/freeciv-web-tileset.png",
+            "image-src" : "/tileset/freeciv-web-tileset-" + i + ".png",
             "tileset-x" : tileset_x,
             "tileset-y" : tileset_y,
             "width" : width,
@@ -954,8 +955,9 @@ function get_unit_type_image_sprite(punittype)
   var tileset_y = tileset[tag][1];
   var width = tileset[tag][2];
   var height = tileset[tag][3];
+  var i = tileset[tag][4];
   return {"tag": tag, 
-            "image-src" : "/tileset/freeciv-web-tileset.png",
+            "image-src" : "/tileset/freeciv-web-tileset-" + i + ".png",
             "tileset-x" : tileset_x,
             "tileset-y" : tileset_y,
             "width" : width,
@@ -979,8 +981,9 @@ function get_improvement_image_sprite(pimprovement)
   var tileset_y = tileset[tag][1];
   var width = tileset[tag][2];
   var height = tileset[tag][3];
+  var i = tileset[tag][4];
   return {"tag": tag, 
-            "image-src" : "/tileset/freeciv-web-tileset.png",
+            "image-src" : "/tileset/freeciv-web-tileset-" + i + ".png",
             "tileset-x" : tileset_x,
             "tileset-y" : tileset_y,
             "width" : width,
@@ -1001,8 +1004,9 @@ function get_technology_image_sprite(ptech)
   var tileset_y = tileset[tag][1];
   var width = tileset[tag][2];
   var height = tileset[tag][3];
+  var i = tileset[tag][4];
   return {"tag": tag, 
-            "image-src" : "/tileset/freeciv-web-tileset.png",
+            "image-src" : "/tileset/freeciv-web-tileset-" + i + ".png",
             "tileset-x" : tileset_x,
             "tileset-y" : tileset_y,
             "width" : width,
@@ -1024,8 +1028,9 @@ function get_player_fplag_sprite(pplayer)
   var tileset_y = tileset[tag][1];
   var width = tileset[tag][2];
   var height = tileset[tag][3];
+  var i = tileset[tag][4];
   return {"tag": tag, 
-            "image-src" : "/tileset/freeciv-web-tileset.png",
+            "image-src" : "/tileset/freeciv-web-tileset-" + i + ".png",
             "tileset-x" : tileset_x,
             "tileset-y" : tileset_y,
             "width" : width,
@@ -1047,8 +1052,9 @@ function get_nation_flag_sprite(pnation)
   var tileset_y = tileset[tag][1];
   var width = tileset[tag][2];
   var height = tileset[tag][3];
+  var i = tileset[tag][4];
   return {"tag": tag, 
-            "image-src" : "/tileset/freeciv-web-tileset.png",
+            "image-src" : "/tileset/freeciv-web-tileset-" + i + ".png",
             "tileset-x" : tileset_x,
             "tileset-y" : tileset_y,
             "width" : width,
@@ -1067,8 +1073,9 @@ function get_treaty_agree_thumb_up()
   var tileset_y = tileset[tag][1];
   var width = tileset[tag][2];
   var height = tileset[tag][3];
+  var i = tileset[tag][4];
   return {"tag": tag, 
-            "image-src" : "/tileset/freeciv-web-tileset.png",
+            "image-src" : "/tileset/freeciv-web-tileset-" + i + ".png",
             "tileset-x" : tileset_x,
             "tileset-y" : tileset_y,
             "width" : width,
@@ -1087,8 +1094,9 @@ function get_treaty_disagree_thumb_down()
   var tileset_y = tileset[tag][1];
   var width = tileset[tag][2];
   var height = tileset[tag][3];
+  var i = tileset[tag][4];
   return {"tag": tag, 
-            "image-src" : "/tileset/freeciv-web-tileset.png",
+            "image-src" : "/tileset/freeciv-web-tileset-" + i + ".png",
             "tileset-x" : tileset_x,
             "tileset-y" : tileset_y,
             "width" : width,

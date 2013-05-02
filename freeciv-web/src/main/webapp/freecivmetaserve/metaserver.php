@@ -336,7 +336,7 @@ if ( isset($port) ) {
 ?>
 <html>
 <head>
-<title>Freeciv.net - online multiplayer strategy game</title>
+<title>Freeciv-web metaserver</title>
 
 <link href="/css/frontpage.css" rel="stylesheet" type="text/css" />
 <link type="text/css" href="/css/jquery-ui-1.10.2.custom.min.css" rel="stylesheet" />
@@ -358,15 +358,6 @@ if ( isset($port) ) {
 <!-- HEADER -->
 <div id="container">
 
-<div id="header">
-
-<div id="header_menu"> <a class="menu_link" href="http://www.freeciv.net/" title="News about Freeciv.net">News</a> &nbsp;&nbsp; 
-<a class="menu_link" href="/wireframe.jsp?do=login" title="Login to play Freeciv.net now">Play Now</a> &nbsp;&nbsp; 
-<a class="menu_link" href="/freecivmetaserve/metaserver.php" title="Multiplayer Games">Games</a> &nbsp;&nbsp; 
-<a class="menu_link" title="The Freeciv.net Community Forum" href="http://forum.freeciv.net/">Forum</a> &nbsp;&nbsp;
-<a class="menu_link" title="Contribute to the Freeciv.net development" href="/wireframe.jsp?do=dev">Development</a> &nbsp;&nbsp;
-<a title="About Freeciv.net" class="menu_link" href="/wireframe.jsp?do=about">About</a></div>
-</div>
 
 <div id="body_content">
 <br>
@@ -385,8 +376,8 @@ if ( isset($port) ) {
 
       $port = substr(strrchr($server_port, ":"), 1);
       $host = substr($server_port, 0, strlen($server_port) - strlen($port) - 1);
-      print "<h1>Freeciv.net server id: " . db2html($port) . "</h1>\n";
-      print "Freeciv.net is an Open Source strategy game which can be played online against other players, or in single player mode against AI opponents.<br><br>";
+      print "<h1>Freeciv-web server id: " . db2html($port) . "</h1>\n";
+      print "Freeciv-web is an Open Source strategy game which can be played online against other players, or in single player mode against AI opponents.<br><br>";
 
       
       $stmt = "select * from servers where host=\"$host\" and port=\"$port\"";
@@ -399,10 +390,10 @@ if ( isset($port) ) {
 
 	print "<img src='/freecivmetaserve/overviewmap-" . db2html($row["port"]) . ".ppm.png' width='250' height='170' style='padding: 5px;'></a>";
         if ($row["state"] == "Pregame") {
-          print "<div><a class='button' href='http://" . db2html($host) . "/civclientlauncher?civserverport=" . db2html($port) . "&amp;civserverhost=" . db2html($host)
+          print "<div><a class='button' href='/civclientlauncher?civserverport=" . db2html($port) . "&amp;civserverhost=" . db2html($host)
              . "'>Join</a> <b>You can join this game now.</b></div>";
 	}
-        print "<div><a class='button' href='http://" . db2html($host) . "/civclientlauncher?action=observe&civserverport=" . db2html($port) . "&amp;civserverhost=" . db2html($host)
+        print "<div><a class='button' href='/civclientlauncher?action=observe&civserverport=" . db2html($port) . "&amp;civserverhost=" . db2html($host)
              . "'>Observe</a> <b>You can observe this game now.</b></div>";
 
         print "<br/><br/>";
@@ -472,7 +463,7 @@ if ( isset($port) ) {
 
       }
     } else {
-       print "<h1>Freeciv.net single-player games</h1>\n";
+       print "<h1>Freeciv-web single-player games</h1>\n";
       $stmt="select host,port,version,patches,state,message,unix_timestamp()-unix_timestamp(stamp), IFNULL((select user from players p where p.hostport =  CONCAT(s.host ,':',s.port) and p.type = 'Human' Limit 1 ), 'none') as player, IFNULL((select flag from players p where p.hostport =  CONCAT(s.host ,':',s.port) and p.type = 'Human' Limit 1 ), 'none') as flag, (select value from variables where name = 'turn' and hostport = CONCAT(s.host ,':',s.port)) as turn, (select value from variables where name = 'turn' and hostport = CONCAT(s.host ,':',s.port)) + 0 as turnsort from servers s where type = 'Singleplayer' and state = 'Running' order by turnsort desc";
       $res = fcdb_exec($stmt);
       $nr = fcdb_num_rows($res);
@@ -490,8 +481,7 @@ if ( isset($port) ) {
 		  <img src='/freecivmetaserve/overviewmap-" . db2html($row["port"]) . ".ppm.png' width='120' height='70' style='padding: 5px;'></a>";
           print "</td><td>";
 
-	  	  print "<a id='meta_button' class='button' href=\"http://" . db2html($row["host"]) 
-		  . "/civclientlauncher?action=observe&civserverport=" 
+	  	  print "<a id='meta_button' class='button' href=\"/civclientlauncher?action=observe&civserverport=" 
 		  . db2html($row["port"]) . "&civserverhost=" . db2html($row["host"]) . "\">";
           print "Observe";
           print "</a>";
@@ -523,24 +513,11 @@ if ( isset($port) ) {
       }
 ?>
 
-<div id="ad_bottom">
-	<script type="text/javascript"><!--
-	google_ad_client = "pub-4977952202639520";
-	/* 728x90, opprettet 19.12.09 for freeciv.net */
-	google_ad_slot = "9174006131";
-	google_ad_width = 728;
-	google_ad_height = 90;
-	//-->
-	</script>
-	<script type="text/javascript"
-	src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-	</script>
-</div>
 
 <?
 
       print "<br><br>";
-      print "<h1>Freeciv.net multiplayer games around the world</h1><br />\n";
+      print "<h1>Freeciv-wen multiplayer games around the world</h1><br />\n";
       $stmt="select host,port,version,patches,state,message,unix_timestamp()-unix_timestamp(stamp), (select value from variables where name = 'turn' and hostport = CONCAT(s.host ,':',s.port)) as turn from servers s where type = 'Multiplayer' order by state desc";
       $res = fcdb_exec($stmt);
       $nr = fcdb_num_rows($res);
@@ -628,19 +605,6 @@ if ( isset($port) ) {
 <br><br>
 
 
-<div id="ad_bottom">
-	<script type="text/javascript"><!--
-	google_ad_client = "pub-4977952202639520";
-	/* 728x90, opprettet 19.12.09 for freeciv.net */
-	google_ad_slot = "9174006131";
-	google_ad_width = 728;
-	google_ad_height = 90;
-	//-->
-	</script>
-	<script type="text/javascript"
-	src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-	</script>
-</div>
 
 
 <br />
@@ -662,20 +626,21 @@ if ( isset($port) ) {
 </div>
 
 <div id="footer">
-Copyright &copy; 2008-2011 Freeciv.net
+Copyright &copy; 2008-2013 Freeciv-web
 </div>
 
 </div>
 
 
-<!-- Google Analytics Code --!>
-<script type="text/javascript">
-var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-<script type="text/javascript">
-var pageTracker = _gat._getTracker("UA-5588010-1");
-pageTracker._trackPageview();
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-40584174-1', 'freeciv.org');
+  ga('send', 'pageview');
+      
 </script>
 
 <script>

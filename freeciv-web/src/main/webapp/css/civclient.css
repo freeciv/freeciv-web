@@ -28,8 +28,8 @@ button {
 
 #freeciv_logo {
   float:left; 
-  background: #444444 url(/images/freeciv-forever-logo.png);
-  width: 200px; 
+  background: #444444 url(/images/freeciv-web-logo.png);
+  width: 140px; 
   height: 37px; 
   margin-right: 10px;
 }
@@ -425,4 +425,11 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 
 .ui-dialog .ui-dialog-title {
   float: none;
+}
+
+.ui-dialog .ui-dialog-titlebar {
+  padding-bottom: 14px;
+  padding-left: 10px;
+  padding-top: 3px;
+
 }

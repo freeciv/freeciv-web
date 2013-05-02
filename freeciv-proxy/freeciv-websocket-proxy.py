@@ -49,13 +49,17 @@ class StatusHandler(web.RequestHandler):
 
     def get(self):
         self.write(get_debug_info(civcoms, self.router));
+def dump(obj):
+  for attr in dir(obj):
+    print "obj.%s = %s" % (attr, getattr(obj, attr))
+
 
 class CivConnection(SocketConnection):
     """ Serves the Freeciv WebSocket service. """
     participants = set()
 
     def on_open(self, request):
-	self.ip = self.user_id = self.session.remote_ip;
+	self.ip = self.user_id = self.session.session_id;
         self.participants.add(self);
 	self.is_ready = False;
 
@@ -63,11 +67,14 @@ class CivConnection(SocketConnection):
         if (not self.is_ready):
           #called the first time the user connects.
 	  auth = message.split(";");
-	  self.username = auth[0];
-	  self.civserverport = auth[1];
-	  self.is_ready = True;
-          self.civcom = self.get_civcom(self.username, self.civserverport, self.ip, self);
-	  return;
+	  if (len(auth) == 2):
+	    self.username = auth[0];
+	    self.civserverport = auth[1];
+	    self.is_ready = True;
+	    self.civcom = self.get_civcom(self.username, self.civserverport, self.ip, self);
+	    return;
+	  else:
+	    self.send("Error: Could not authenticate user.");
         
         # get the civcom instance which corresponds to this user.        
         self.civcom = self.get_civcom(self.username, self.civserverport, self.ip, self);
@@ -92,7 +99,7 @@ class CivConnection(SocketConnection):
 
     def on_close(self):
         self.participants.remove(self)
-	if self.civcom != None:
+	if hasattr(self, 'civcom') and self.civcom != None: 
           self.civcom.stopped = True;
           self.civcom.close_connection();
 	  if self.civcom.key in civcoms.keys():

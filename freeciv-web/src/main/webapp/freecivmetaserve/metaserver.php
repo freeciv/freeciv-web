@@ -527,7 +527,7 @@ if ( isset($port) ) {
 <?
 
       print "<br><br>";
-      print "<h1>Freeciv-wen multiplayer games around the world</h1><br />\n";
+      print "<h1>Freeciv-web multiplayer games around the world</h1><br />\n";
       $stmt="select host,port,version,patches,state,message,unix_timestamp()-unix_timestamp(stamp), (select value from variables where name = 'turn' and hostport = CONCAT(s.host ,':',s.port)) as turn from servers s where type = 'Multiplayer' order by state desc";
       $res = fcdb_exec($stmt);
       $nr = fcdb_num_rows($res);

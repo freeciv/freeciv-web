@@ -23,7 +23,7 @@ if (username != null && (guest_mode != null && guest_mode == "false")) {
     out.println("<table style='font-weight: bold;' border='0'><tr><td>Please select game to resume playing:</td><td>Delete:</td></tr>");
     for (int i=0; i<children.length; i++) {
         // Get filename of file or directory
-	String filename = children[i].getName().replaceAll(".bz2", "").replaceAll(".gz", "");
+	String filename = children[i].getName().replaceAll(".sav.bz2", "").replaceAll(".sav.gz", "");
 	out.println("<tr><td><a class='button load' href='/preload.jsp?redir=/civclientlauncher?action=load&load=" + filename + "' title='Load savegame'>" 
 		+ (children.length - i) + ". " + filename + "</a></td><td>" 
                 + "<a href='/delete.jsp?file=" + children[i].getName() 

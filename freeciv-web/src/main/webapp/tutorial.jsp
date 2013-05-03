@@ -1,7 +1,7 @@
 <html>
 <head>
 <script type="text/javascript">	
-    window.location='/civclientlauncher?action=load&load=tutorial.sav&scenario=true';
+    window.location='/civclientlauncher?action=load&load=tutorial&scenario=true';
 </script>
 </head>
 

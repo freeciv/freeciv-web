@@ -21,6 +21,18 @@
 <script type="text/javascript" src="/javascript-compressed/jquery-2.0.0.min.js"></script>
 <script type="text/javascript" src="/javascript/jquery-ui-1.10.2.custom.min.js"></script>
 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-40584174-1', 'freeciv.org');
+  ga('send', 'pageview');
+      
+</script>
+
+
   </head>
 
   <body>
@@ -33,15 +45,17 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="brand" href="#">The Freeciv Project</a>
+	<a href="/" style="padding: 3px; float: left;"><img src="/images/freeciv-web-logo.png" alt="The Freeciv Project"></a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li class="active"><a href="/">Home</a></li>
+              <li><a href="/">Home</a></li>
               <li class="active"><a href="/wireframe.jsp?do=menu">Play Online</a></li>
               <li><a href="http://freeciv.wikia.com/wiki/Main_Page">Freeciv Wiki</a></li>
               <li><a href="/freecivmetaserve/metaserver.php">Metaserver</a></li>
               <li><a href="http://forum.freeciv.org">Freeciv Forum</a></li>
               <li><a href="http://github.com/cazfi/freeciv-web">Code on Github</a></li>
+              <li><a href="http://freeciv.wikia.com/wiki/Donations">Donate!</a></li>
+
             </ul>
            </div><!--/.nav-collapse -->
         </div>
@@ -70,16 +84,6 @@
 
     </div> <!-- /container -->
 
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-40584174-1', 'freeciv.org');
-  ga('send', 'pageview');
-      
-</script>
   
   </body>
 </html>

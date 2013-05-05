@@ -156,7 +156,12 @@ http://localhost:8082/civ/status
 
 12. Continue to play the game. 
 
-FIXME: Had to add -lssl when compiling server...
+
+* Some useful scripts:
+
+scripts/start-freeciv-web.sh      # starts all freeciv-web processes
+scripts/stop-freeciv-web.sh       # stops all freeciv-web processes
+scripts/status-freeciv-web.sh     # checks status of all freeciv-web processes
 
 
 

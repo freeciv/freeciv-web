@@ -398,7 +398,7 @@ if ( isset($port) ) {
       } else {
         $row = fcdb_fetch_array($res, 0);
 
-	print "<img src='/freecivmetaserve/overviewmap-" . db2html($row["port"]) . ".ppm.png' width='250' height='170' style='padding: 5px;'></a>";
+	print "</a>";
         if ($row["state"] == "Pregame") {
           print "<div><a class='button' href='/civclientlauncher?civserverport=" . db2html($port) . "&amp;civserverhost=" . db2html($host)
              . "'>Join</a> <b>You can join this game now.</b></div>";
@@ -479,17 +479,14 @@ if ( isset($port) ) {
       $nr = fcdb_num_rows($res);
       if ( $nr > 0 ) {
         print "<br /><table>\n";
-        print "<tr id='meta_header'><th class=\"left\">Game Map:</th><th>Game Action:</th>";
+        print "<tr id='meta_header'><th>Game Action:</th>";
         print "<th>State</th><th>Players</th>";
         print "<th style='width:45%;'>Message</th>";
         print "<th>Player</th>\n";
         print "<th>Turn:</th></tr>";
         for ( $inx = 0; $inx < $nr; $inx++ ) {
           $row = fcdb_fetch_array($res, $inx);
-          print "<tr id='meta_row'><td class=\"left\">";
-	  print "<a href=\"/freecivmetaserve/metaserver.php?server_port=" . db2html($row["host"]) . ":" . db2html($row["port"]) . "\">
-		  <img src='/freecivmetaserve/overviewmap-" . db2html($row["port"]) . ".ppm.png' width='120' height='70' style='padding: 5px;'></a>";
-          print "</td><td>";
+          print "<tr id='meta_row'><td>";
 
 	  	  print "<a id='meta_button' class='button' href=\"/civclientlauncher?action=observe&civserverport=" 
 		  . db2html($row["port"]) . "&civserverhost=" . db2html($row["host"]) . "\">";
@@ -533,7 +530,7 @@ if ( isset($port) ) {
       $nr = fcdb_num_rows($res);
       if ( $nr > 0 ) {
 	print "<table>\n";
-        print "<tr id='meta_header'><th class=\"left\">Game Map:</th><th>Game Action:</th>";
+        print "<tr id='meta_header'><th>Game Action:</th>";
         print "<th>State</th><th>Players</th>";
         print "<th style='width:45%;'>Message</th>";
         print "<th>Turn:</th></tr>";
@@ -542,12 +539,7 @@ if ( isset($port) ) {
  	  $row = fcdb_fetch_array($res, $inx);
 	  $mystate = db2html($row["state"]);
 
-          print "<tr id='meta_row'><td class=\"left\">";
-          if ($mystate == "Running") {
-	    print "<a href=\"/freecivmetaserve/metaserver.php?server_port=" . db2html($row["host"]) . ":" . db2html($row["port"]) . "\">
-		    <img src='/freecivmetaserve/overviewmap-" . db2html($row["port"]) . ".ppm.png' width='120' height='70' style='padding: 5px;'></a>";
-	  }
-          print "</td><td>";
+          print "<tr id='meta_row'><td>";
 	  
   
           if ($mystate != "Running") {

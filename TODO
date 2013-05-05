@@ -1,17 +1,14 @@
 TODO:
 -----
 
-- Implements various advisory screens. (cities, wonders, diplomacy etc)
 - Make goto lines wrap in X direction of the map.
 - Show city revolt graphics
 - Show attack animation.
 - WebGl?
 - Port to Python 3.2
-- Show national borders
 - Saving in the client side.
 - Show city tile output in city dialog.
 - Playback of games.
-- Test Uglify.js
 - Show attack prompts. At the moment, gotos can result in unwanted attacks.
 - Show what city is a unit's homecity. Rehome units.
 - Show veteran status of units.

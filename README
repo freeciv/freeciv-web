@@ -132,10 +132,6 @@ On other Linux distributions, follow this installation procedure:
 
    copy freeciv-web/freeciv/data/fcweb to /usr/local/share/freeciv 
 
-   Create the Freeciv savegame directory:  /mnt/savegames
-   and make it writeable by the user running publite.
-
-
 7. Start resin with these commands:
    cd ~/freeciv-build/resin/bin
    ./resin.sh start
@@ -175,3 +171,11 @@ Developers interested in Freeciv-web
 
 If you want to contibute to Freeciv-web, see the TODO file for 
 some tasks you can work on.
+
+
+Contributors to Freeciv-web
+---------------------------
+Andreas Røsdal
+Marko Lindqvist
+and the Freeciv.org project!
+

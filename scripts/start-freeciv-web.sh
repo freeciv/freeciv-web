@@ -18,7 +18,7 @@ fi
 
 # 2. Resin
 echo "Starting up Resin" && \
-~/freeciv-build/resin-4.0.36/bin/resin.sh start && \
+~/freeciv-build/resin/bin/resin.sh start && \
 echo "Resin started" && \
 sleep 4 && \
 

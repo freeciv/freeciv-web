@@ -7,7 +7,7 @@ echo "Shutting down Freeciv-web: nginx, resin, publite2, freeciv-proxy."
 sudo killall nginx
 
 # 2. Resin
-~/freeciv-build/resin-4.0.36/bin/resin.sh stop 
+~/freeciv-build/resin/bin/resin.sh stop 
 
 #3. publite2
 killall freeciv-web

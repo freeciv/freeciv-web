@@ -39,7 +39,7 @@ echo "==== Fetching/Installing Resin ${resin_version} ===="
 wget ${resin_url}
 tar xvfz resin-${resin_version}.tar.gz
 cd resin-${resin_version}
-./configure --prefix=${destdir}/resin --with-resin-init.d=${destdir}/resin/bin/initscript --with-resin-log=${destdir}/resin/log/ && make && make install
+./configure --prefix=${basedir}/resin --with-resin-init.d=${basedir}/resin/bin/initscript --with-resin-log=${basedir}/resin/log/ && make && make install
 
 ## mysql setup
 echo "==== Setting up MySQL ===="

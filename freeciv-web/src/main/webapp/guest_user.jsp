@@ -34,9 +34,6 @@ if (username == null || "null".equals(username)) {
 <br>
 <br>
 <br>
-
-<INPUT TYPE="CHECKBOX" NAME="openid" onclick="window.location='/wireframe.jsp?do=openid_login';">
-	<a href="/wireframe.jsp?do=openid_login">Login using OpenID</a>, which allows saving and loading games, if you want.
 </form>
 
 <br><br><br>

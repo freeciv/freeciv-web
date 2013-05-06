@@ -44,12 +44,6 @@
           <version>1.7</version>
         </dependency> 
 
-	<dependency>
-	   <groupId>org.openid4java</groupId>
-	   <artifactId>openid4java</artifactId>
-	   <version>0.9.7</version>
-	</dependency>
-
         <dependency>
            <groupId>mysql</groupId>
            <artifactId>mysql-connector-java</artifactId>

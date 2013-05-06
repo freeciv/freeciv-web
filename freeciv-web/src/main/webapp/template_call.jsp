@@ -5,9 +5,6 @@
   if (act.equals("dev")) { %>
    <jsp:include page="dev.jsp" flush="false"/>
   
-<% } else if (act.equals("openid_login")) { %>
-  <jsp:include page="/auth/index.jsp" flush="false"/>
- 
 <%-- login and menu both point to the main menu.--%>
 <% } else if (act.equals("login")) { %>
   <jsp:include page="menu.jsp" flush="false"/>

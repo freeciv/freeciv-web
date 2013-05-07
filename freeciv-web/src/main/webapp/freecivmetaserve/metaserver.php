@@ -438,7 +438,6 @@ if ( isset($port) ) {
           for ( $inx = 0; $inx < $nr; $inx++ ) {
             $row = fcdb_fetch_array($res, $inx);
             print "<tr id='meta_row'><td class=\"left\">";
-            print "<img src='/tiles/f." . db2html($row["flag"]) . ".png'>";
             print "</td><td>";
             print db2html($row["name"]);
             print "</td><td>";
@@ -507,7 +506,6 @@ if ( isset($port) ) {
           print "</td><td style=\"width: 30%\" >";
           print db2html($row["message"]);
           print "</td><td>";
-	  print "<img src='/tiles/f." . db2html($row["flag"]) . ".png'>&nbsp;";
 
           print db2html($row["player"]);
 	  print "</td><td>"

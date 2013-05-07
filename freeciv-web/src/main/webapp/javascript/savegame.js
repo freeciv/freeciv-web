@@ -106,8 +106,12 @@ function save_game()
 				Save: function() {
 					keyboard_input = true;
 					savename = $("#savegamename").val()
-					$(this).dialog('close');
-					save_game_send();
+					if (savename == null || savename.length < 4 || savename.length > 32) {
+						alert("Invalid savegame name.");
+					} else {
+						$(this).dialog('close');
+						save_game_send();
+					}
 				}
 			}
 		});

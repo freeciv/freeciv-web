@@ -10,7 +10,7 @@ sudo killall nginx
 ~/freeciv-build/resin/bin/resin.sh stop 
 
 #3. publite2
-killall freeciv-web
+killall -9 freeciv-web
 ps aux | grep -ie publite2 | awk '{print $2}' | xargs kill -9 
 
 

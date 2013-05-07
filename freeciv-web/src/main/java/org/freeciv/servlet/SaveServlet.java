@@ -57,6 +57,14 @@ public class SaveServlet extends HttpServlet {
 
 		String savename = "" + request.getParameter("savename");
 
+		if (savename.length() == 0 || username.length() == 0 || savename.length() >= 64 
+		    || username.length() >= 32) {
+	    	   response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
+				"Invalid username or savename.");
+		    return;
+		}
+
+
 		String relativeWebPath = "/savegames/" + username + ".sav.bz2";
 		String absoluteDiskPath = getServletContext().getRealPath(relativeWebPath);
 		File file = new File(absoluteDiskPath);

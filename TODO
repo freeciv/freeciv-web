@@ -6,7 +6,6 @@ TODO:
 - Show attack animation.
 - WebGl?
 - Port to Python 3.2
-- Saving in the client side.
 - Show city tile output in city dialog.
 - Playback of games.
 - Show attack prompts. At the moment, gotos can result in unwanted attacks.

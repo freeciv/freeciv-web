@@ -49,9 +49,6 @@ class StatusHandler(web.RequestHandler):
 
     def get(self):
         self.write(get_debug_info(civcoms, self.router));
-def dump(obj):
-  for attr in dir(obj):
-    print "obj.%s = %s" % (attr, getattr(obj, attr))
 
 
 class CivConnection(SocketConnection):
@@ -59,22 +56,22 @@ class CivConnection(SocketConnection):
     participants = set()
 
     def on_open(self, request):
-	self.ip = self.user_id = self.session.session_id;
+        self.ip = self.user_id = self.session.session_id;
         self.participants.add(self);
-	self.is_ready = False;
+        self.is_ready = False;
 
     def on_message(self, message):
         if (not self.is_ready):
           #called the first time the user connects.
-	  auth = message.split(";");
-	  if (len(auth) == 2):
-	    self.username = auth[0];
-	    self.civserverport = auth[1];
-	    self.is_ready = True;
-	    self.civcom = self.get_civcom(self.username, self.civserverport, self.ip, self);
-	    return;
-	  else:
-	    self.send("Error: Could not authenticate user.");
+          auth = message.split(";");
+          if (len(auth) == 2):
+            self.username = auth[0];
+            self.civserverport = auth[1];
+            self.is_ready = True;
+            self.civcom = self.get_civcom(self.username, self.civserverport, self.ip, self);
+            return;
+          else:
+            self.send("Error: Could not authenticate user.");
         
         # get the civcom instance which corresponds to this user.        
         self.civcom = self.get_civcom(self.username, self.civserverport, self.ip, self);
@@ -88,21 +85,21 @@ class CivConnection(SocketConnection):
           if not self.civcom.send_packets_to_civserver(message):
             if (logger.isEnabledFor(logging.INFO)):
               logger.info("Sending data to civserver failed.");
-	    self.send('Error: Civserver communication failure ')
+            self.send('Error: Civserver communication failure ')
             return;
  
-        except Exception, e:
+        except (Exception, e):
           if (logger.isEnabledFor(logging.ERROR)):
             logger.error(e);
-	  self.send("Error: Service Unavailable. Something is wrong here ");
+          self.send("Error: Service Unavailable. Something is wrong here ");
 
 
     def on_close(self):
         self.participants.remove(self)
-	if hasattr(self, 'civcom') and self.civcom != None: 
+        if hasattr(self, 'civcom') and self.civcom != None: 
           self.civcom.stopped = True;
           self.civcom.close_connection();
-	  if self.civcom.key in civcoms.keys():
+          if self.civcom.key in civcoms.keys():
             del civcoms[self.civcom.key];
 
 
@@ -119,7 +116,7 @@ class CivConnection(SocketConnection):
         civcoms[key] = civcom;
 
         messenger = CivWsMessenger(civcom, ws_connection);
-	messenger.start();
+        messenger.start();
 
         time.sleep(0.4);
         return civcom;
@@ -157,11 +154,11 @@ class CivWsMessenger(Thread):
 
 if __name__ == "__main__":
   try:
-    print 'Started Freeciv-proxy. Use Control-C to exit'
+    print('Started Freeciv-proxy. Use Control-C to exit');
  
     if len(sys.argv) == 2:
       PROXY_PORT = int(sys.argv[1]);
-    print 'port: ' + str(PROXY_PORT);
+    print('port: ' + str(PROXY_PORT));
  
     LOG_FILENAME = '/tmp/logging' +str(PROXY_PORT) + '.out'
     #logging.basicConfig(filename=LOG_FILENAME,level=logging.INFO)

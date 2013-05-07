@@ -216,7 +216,7 @@ function pregame_settings()
           "<option value='2'>Normal</option>" +
           "<option value='3'>Hard</option>" +
 	  "</select></td></tr></table><br>" +
-	  "<span id='settings_info'><i>Freeciv.net can be customized using the command line in many other ways also. Type /help in the command line for more information.</i></span>" 
+	  "<span id='settings_info'><i>Freeciv-web can be customized using the command line in many other ways also. Type /help in the command line for more information.</i></span>" 
 	  ;
   $(id).html(dhtml);
 

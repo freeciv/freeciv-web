@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # Startup script for running all processes of Freeciv-web
 
 echo "Starting up Freeciv-web: nginx, resin, publite2, freeciv-proxy."
@@ -20,7 +20,7 @@ fi
 echo "Starting up Resin" && \
 ~/freeciv-build/resin/bin/resin.sh start && \
 echo "Resin started" && \
-sleep 4 && \
+sleep 20 && \
 
 #3. publite2
 echo "Starting publite2" && \

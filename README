@@ -75,7 +75,7 @@ System Requirements
 
 - OpenSSL - http://www.openssl.org/
 
-- nginx 1.4.0 - http://nginx.org/
+- nginx 1.4.1 - http://nginx.org/
 
 - pngcrush, required for freeciv-img-extract.  http://pmt.sourceforge.net/pngcrush/
 

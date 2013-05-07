@@ -12,7 +12,7 @@
 ***********************************************************************/
 
 
-package freeciv.launcher;
+package org.freeciv.servlet;
 
 import java.util.regex.*;
 
@@ -50,8 +50,8 @@ public class CivclientLauncher extends HttpServlet {
 		
 		String username = "" + session.getAttribute("username");
 
-		String civServerPort = "" + request.getParameter("civserverport");
-		String civServerHost = "" + request.getParameter("civserverhost");
+		String civServerPort = "";
+		String civServerHost = "";
 		
 		String loadFileName = "" + request.getParameter("load");
 		String scenario = "" + request.getParameter("scenario");
@@ -64,17 +64,10 @@ public class CivclientLauncher extends HttpServlet {
 		  
 		  if (action != null && (action.equals("new") || action.equals("load"))) {
 
-			  String prefered_server = "" + request.getParameter("civserver");
-			  System.out.println("Prefered server: " + prefered_server);
-
 			  /* If user requested a new game, then get host and port for an available
 			   * server from the metaserver DB, and use that one. */
 
 			  String serverFetchSql = "select host, port from servers where state = 'Pregame' and message LIKE '%Singleplayer%' order by rand() limit 1";
-			  if (prefered_server != null && !prefered_server.equals("null")) {
-			    serverFetchSql = "select host, port from servers where state = 'Pregame' and message LIKE '%Singleplayer%' and host = '" 
-				    + prefered_server +  "' order by rand() limit 1";
-			  }
 
 			  PreparedStatement stmt = conn.prepareStatement(serverFetchSql);
 			  ResultSet rs = stmt.executeQuery();
@@ -86,18 +79,6 @@ public class CivclientLauncher extends HttpServlet {
 					"No servers available for creating a new game on.");
 			  }
 		  }
-		
-		  /* Validate port and host */
-		  PreparedStatement stmt = conn.prepareStatement("SELECT count(*) FROM servers WHERE host = ? and port = ?");
-	      stmt.setString(1, civServerHost);
-	      stmt.setInt(2, Integer.parseInt(civServerPort));
-	      ResultSet rs = stmt.executeQuery();
-	       rs.next();
-	       if (rs.getInt(1) != 1) {
-	    	   response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
-				"Invalid input values to civclient.");
-	    	   return;
-	       }
 	       
 	       PreparedStatement stmti = conn.prepareStatement("INSERT INTO player_game_list (username, host, port, timepoint) "
 	    		   + "VALUES (?,?,?,NOW()) ON DUPLICATE KEY UPDATE host = VALUES(host), port = VALUES(port), timepoint = VALUES(timepoint)");

@@ -3,14 +3,12 @@
 
 
 
-    <display-name>Freeciv Web Client</display-name>
-
- 
+    <display-name>Freeciv-web Client</display-name>
 
   
   <filter>
     <filter-name>Compress</filter-name>
-    <filter-class>freeciv.filter.CompressFilter</filter-class>
+    <filter-class>org.freeciv.filter.CompressFilter</filter-class>
   </filter>
   
   <filter-mapping>
@@ -24,16 +22,41 @@
    </filter-mapping>
 
 
- <!-- Civclient launcher servlet -->
+ <!-- /civclientlauncher   (game launcher servlet) -->
   <servlet>
     <servlet-name>CivclientLauncher</servlet-name>
-    <servlet-class>freeciv.launcher.CivclientLauncher</servlet-class>
+    <servlet-class>org.freeciv.servlet.CivclientLauncher</servlet-class>
   </servlet>
 
  <servlet-mapping>
     <servlet-name>CivclientLauncher</servlet-name>
     <url-pattern>/civclientlauncher</url-pattern>
   </servlet-mapping>
+
+
+ <!-- /saveservlet -->
+  <servlet>
+    <servlet-name>SaveServlet</servlet-name>
+    <servlet-class>org.freeciv.servlet.SaveServlet</servlet-class>
+  </servlet>
+
+ <servlet-mapping>
+    <servlet-name>SaveServlet</servlet-name>
+    <url-pattern>/saveservlet</url-pattern>
+  </servlet-mapping>
+
+
+ <!-- /loadservlet -->
+  <servlet>
+    <servlet-name>LoadServlet</servlet-name>
+    <servlet-class>org.freeciv.servlet.LoadServlet</servlet-class>
+  </servlet>
+
+ <servlet-mapping>
+    <servlet-name>LoadServlet</servlet-name>
+    <url-pattern>/loadservlet</url-pattern>
+  </servlet-mapping>
+
 
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-PATCHLIST="caravan_fixes1 city_fixes city_impr_fix2 city_name_bugfix city-naming-change citytools_changes client-fixes current_research_cost diplchanges goto_1 goto_attack1 goto_fix_1 goto_fix_2 govt-fix map-settings map_size_change metachange metatype packets middle_click_info orders_aborted orders_invalid2 savegame-support text_fixes tileset_hack turnchange unithand-change2 webclient-ai-attitude freeciv-svn-webclient-changes network-rewrite-1 fcnet_packets misc_devversion_sync specs_format tile_bases_roads"
+PATCHLIST="caravan_fixes1 city_fixes city_impr_fix2 city_name_bugfix city-naming-change citytools_changes client-fixes current_research_cost diplchanges goto_1 goto_attack1 goto_fix_1 goto_fix_2 govt-fix map-settings map_size_change metachange metatype packets middle_click_info orders_aborted orders_invalid2 text_fixes tileset_hack turnchange unithand-change2 webclient-ai-attitude freeciv-svn-webclient-changes network-rewrite-1 fcnet_packets misc_devversion_sync specs_format tile_bases_roads savegame"
 
 apply_patch() {
   patch -u -p1 -d freeciv < patches/$1.patch

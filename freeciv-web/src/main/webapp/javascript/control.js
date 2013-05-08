@@ -22,6 +22,7 @@ var allow_right_click = false;
 
 var current_focus = [];
 var goto_active = false;
+var goto_preview_active = true;
 
 /* Selecting unit from a stack without popup. */
 var SELECT_POPUP = 0;
@@ -46,11 +47,17 @@ function control_init()
   $("#canvas").mouseup(mapview_mouse_click);
   $("#canvas").mousedown(mapview_mouse_down);
 
+  if (is_touch_device()) {
+    $('#canvas').bind('touchstart', mapview_touch_start);
+    $('#canvas').bind('touchend', mapview_touch_end);
+    $('#canvas').bind('touchmove', mapview_touch_move);
+  }
+
   $("#city_canvas").click(city_mapview_mouse_click);
   
   $("#turn_done_button").click(send_end_turn);
   $("#freeciv_logo").click(function(event) {
-    window.open('http://www.freeciv.net/', '_new');
+    window.open('http://play.freeciv.org/', '_new');
     });
 
 
@@ -69,6 +76,18 @@ function control_init()
    * during drag to goto units. */
   document.onselectstart = function(){ return false; }
 
+}
+
+/****************************************************************************
+ determined if this is a touch enabled device, such as iPhone, iPad.
+****************************************************************************/
+function is_touch_device() {
+  if(('ontouchstart' in window) || 'onmsgesturechange' in window 
+      || window.DocumentTouch && document instanceof DocumentTouch) {    
+    return true;
+  } else {
+    return false;
+  }
 }
 
 /****************************************************************************
@@ -723,7 +742,21 @@ function activate_goto()
       add_chatbox_text("Click on the tile to send this unit to.");
       intro_click_description = false;
     }
+
   }
+
+}
+
+/**************************************************************************
+ ...
+**************************************************************************/
+function check_goto()
+{
+  if (is_touch_device()) {
+    goto_preview_active = false;
+  }
+
+  activate_goto();
 
 }
 
@@ -737,6 +770,7 @@ function deactivate_goto()
   goto_request_map = {};
   goto_turns_request_map = {};
   current_goto_path = [];
+  goto_preview_active = true;
 
 }
 

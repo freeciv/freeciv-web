@@ -1,0 +1,54 @@
+Index: freeciv/server/cityhand.c
+===================================================================
+--- freeciv/server/cityhand.c	(revision 22812)
++++ freeciv/server/cityhand.c	(working copy)
+@@ -135,7 +135,6 @@
+                                  int worker_x, int worker_y)
+ {
+   struct tile *ptile;
+-  struct tile *pcenter;
+   struct city *pcity = player_city_by_number(pplayer, city_id);
+   int city_radius_sq;
+ 
+@@ -147,15 +146,8 @@
+   }
+ 
+   city_radius_sq = city_map_radius_sq_get(pcity);
+-  if (!is_valid_city_coords(city_radius_sq, worker_x, worker_y)) {
+-    log_error("handle_city_make_specialist() invalid city map {%d,%d} "
+-              "\"%s\".", worker_x, worker_y, city_name(pcity));
+-    return;
+-  }
+-  pcenter = city_tile(pcity);
+ 
+-  if (NULL == (ptile = city_map_to_tile(pcenter, city_radius_sq, worker_x,
+-                                        worker_y))) {
++  if (NULL == (ptile = map_pos_to_tile(worker_x, worker_y))) {
+     log_error("handle_city_make_specialist() unavailable city map {%d,%d} "
+               "\"%s\".", worker_x, worker_y, city_name(pcity));
+     return;
+@@ -185,7 +177,6 @@
+ 			     int worker_x, int worker_y)
+ {
+   struct tile *ptile;
+-  struct tile *pcenter;
+   struct city *pcity = player_city_by_number(pplayer, city_id);
+   int city_radius_sq = city_map_radius_sq_get(pcity);
+ 
+@@ -195,15 +186,7 @@
+     return;
+   }
+ 
+-  if (!is_valid_city_coords(city_radius_sq, worker_x, worker_y)) {
+-    log_error("handle_city_make_worker() invalid city map {%d,%d} "
+-              "\"%s\".", worker_x, worker_y, city_name(pcity));
+-    return;
+-  }
+-  pcenter = city_tile(pcity);
+-
+-  if (NULL == (ptile = city_map_to_tile(pcenter, city_radius_sq, worker_x,
+-                                        worker_y))) {
++  if (NULL == (ptile = map_pos_to_tile(worker_x, worker_y))) {
+     log_error("handle_city_make_worker() unavailable city map {%d,%d} "
+               "\"%s\".", worker_x, worker_y, city_name(pcity));
+     return;

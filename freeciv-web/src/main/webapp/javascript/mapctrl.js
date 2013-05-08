@@ -12,6 +12,9 @@
 ***********************************************************************/
 
 
+var touch_start_x;
+var touch_start_y;
+
 /****************************************************************************
   Triggered when the mouse button is clicked UP on the mapview canvas.
 ****************************************************************************/
@@ -66,6 +69,64 @@ function mapview_mouse_down(e)
   }
 
 }
+/****************************************************************************
+  This function is triggered when beginning a touch event on a touch device,
+  eg. finger down on screen.
+****************************************************************************/
+function mapview_touch_start(e)
+{
+  e.preventDefault(); 
+
+  touch_start_x = e.originalEvent.touches[0].pageX - $('#canvas').position().left;
+  touch_start_y = e.originalEvent.touches[0].pageY - $('#canvas').position().top;
+
+ 
+  check_mouse_drag_unit(touch_start_x, touch_start_y)
+
+  //mapview_mouse_down(e);
+
+}
+
+/****************************************************************************
+  This function is triggered when ending a touch event on a touch device,
+  eg finger up from screen.
+****************************************************************************/
+function mapview_touch_end(e)
+{
+  action_button_pressed(touch_start_x, touch_start_y, SELECT_POPUP);
+}
+
+/****************************************************************************
+  This function is triggered on a touch move event on a touch device.
+****************************************************************************/
+function mapview_touch_move(e)
+{
+  mouse_x = e.originalEvent.touches[0].pageX - $('#canvas').position().left;
+  mouse_y = e.originalEvent.touches[0].pageY - $('#canvas').position().top;
+
+  var diff_x = (mouse_x - touch_start_x) * 2;
+  var diff_y = (mouse_y - touch_start_y) * 2;
+ 
+  touch_start_x = mouse_x;
+  touch_start_y = mouse_y;
+
+  if (!goto_active) {
+    set_mapview_origin(mapview['gui_x0'] + diff_x, mapview['gui_y0'] + diff_y);
+  }
+
+  if (client.conn.playing == null) return;
+
+  /* Request preview goto path */
+  goto_preview_active = true;
+  if (goto_active && current_focus.length > 0) {
+    var ptile = canvas_pos_to_tile(mouse_x, mouse_y);
+    if (ptile != null && goto_request_map[ptile['x'] + "," + ptile['y']] == null) {
+      preview_goto_path(current_focus[0]['id'], ptile['x'], ptile['y']);
+    }
+  }
+
+
+}
 
 
 /****************************************************************************
@@ -109,8 +170,6 @@ function check_mouse_drag_unit(canvas_x, canvas_y)
   if (ptile_units.length > 1) {
      update_select_unit_dialog(ptile_units);
   }
-
-
 
 }
 

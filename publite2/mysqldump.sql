@@ -204,3 +204,16 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2011-03-05 14:44:15
+
+
+
+CREATE TABLE
+    `savegames`
+    (
+        id BIGINT NOT NULL AUTO_INCREMENT,
+        username VARCHAR(32) NOT NULL,
+        title VARCHAR(64) NOT NULL,
+        digest VARCHAR(256) NOT NULL,
+        PRIMARY KEY (id)
+    )
+    ENGINE=MyISAM DEFAULT CHARSET=latin1

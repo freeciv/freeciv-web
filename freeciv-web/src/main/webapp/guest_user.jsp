@@ -6,8 +6,19 @@
 <%@page import="javax.sql.*"%>
 <%@page import="javax.naming.*"%>
 <%@page import="java.security.*"%>
-<%@page import="java.util.regex.*"%>
 
+<script>
+$(document).ready(function() {
+	$(".button").button();
+	$("#usr").focus();
+        $("#usr").val($.jStorage.get("username", ""));
+
+	$('#usr').change(function() {
+		$.jStorage.set("username", $("#usr").val());
+	});
+
+});
+</script>
 
 <div id="main_column">
 <%
@@ -34,22 +45,11 @@ if (username == null || "null".equals(username)) {
 <br>
 <br>
 <br>
-
-<INPUT TYPE="CHECKBOX" NAME="openid" onclick="window.location='/wireframe.jsp?do=openid_login';">
-	<a href="/wireframe.jsp?do=openid_login">Login using OpenID</a>, which allows saving and loading games, if you want.
 </form>
 
 <br><br><br>
 
-
-
 </div>
-
-<script>
-	$( ".button").button();
-	$( "#usr").focus();
-</script>
-
 
 <% } else { 
 

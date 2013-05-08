@@ -5,7 +5,7 @@
 <h2>Play a scenario game</h2>
 
 <div id="scenario_div">
-<a href="/civclientlauncher?action=load&load=earth-80x50-v2&scenario=true">
+<a href="/civclientlauncher?action=load&load=earth-80x50-v3&scenario=true">
 <img src="/images/world_large.png" border="0"><br>
 The World - Medium (80x50)</a>
 </div>

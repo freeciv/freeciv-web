@@ -1,6 +1,3 @@
-<%	
-  String guest_mode = (String)request.getSession().getAttribute("guest_user");	 	
-%>
   
 <div>
 
@@ -9,15 +6,11 @@
 
 <h2>Game Options</h2>
 
-
-<% if ((guest_mode != null && guest_mode.equals("false"))) { %>
-	 	
   <div class="main_menu_buttons">
 	 	
     <button id="save_button" type="button" class="button" onClick="save_game();" >Save Game</button>
 	 	
   </div>	 	 	
-<% } %>
 
 <div class="main_menu_buttons">
   <button id="fullscreen_button" type="button" class="button" onClick="show_fullscreen_window();" >Fullscreen</button>
@@ -48,13 +41,6 @@
 <br>
 
 <div id="map_image"></div>
-
-
-
-<% if ((guest_mode != null && guest_mode.equals("true"))) { %>
-	 	
-<br>  <b>Please log in using OpenID for full savegame support.</b><br><br><br>
-<% } %>
 
 </div>
 

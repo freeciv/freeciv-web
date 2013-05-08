@@ -12,7 +12,7 @@
 ***********************************************************************/
 
 
-package freeciv.filter;
+package org.freeciv.filter;
 
 
 import javax.servlet.Filter;

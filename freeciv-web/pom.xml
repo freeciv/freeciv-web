@@ -45,9 +45,9 @@
         </dependency> 
 
 	<dependency>
-	   <groupId>org.openid4java</groupId>
-	   <artifactId>openid4java</artifactId>
-	   <version>0.9.7</version>
+	  <groupId>commons-io</groupId>
+	  <artifactId>commons-io</artifactId>
+	  <version>2.4</version>
 	</dependency>
 
         <dependency>

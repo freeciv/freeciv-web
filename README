@@ -75,7 +75,7 @@ System Requirements
 
 - OpenSSL - http://www.openssl.org/
 
-- nginx 1.4.0 - http://nginx.org/
+- nginx 1.4.1 - http://nginx.org/
 
 - pngcrush, required for freeciv-img-extract.  http://pmt.sourceforge.net/pngcrush/
 
@@ -132,10 +132,6 @@ On other Linux distributions, follow this installation procedure:
 
    copy freeciv-web/freeciv/data/fcweb to /usr/local/share/freeciv 
 
-   Create the Freeciv savegame directory:  /mnt/savegames
-   and make it writeable by the user running publite.
-
-
 7. Start resin with these commands:
    cd ~/freeciv-build/resin/bin
    ./resin.sh start
@@ -156,7 +152,12 @@ http://localhost:8082/civ/status
 
 12. Continue to play the game. 
 
-FIXME: Had to add -lssl when compiling server...
+
+* Some useful scripts:
+
+scripts/start-freeciv-web.sh      # starts all freeciv-web processes
+scripts/stop-freeciv-web.sh       # stops all freeciv-web processes
+scripts/status-freeciv-web.sh     # checks status of all freeciv-web processes
 
 
 
@@ -170,3 +171,11 @@ Developers interested in Freeciv-web
 
 If you want to contibute to Freeciv-web, see the TODO file for 
 some tasks you can work on.
+
+
+Contributors to Freeciv-web
+---------------------------
+Andreas Røsdal
+Marko Lindqvist
+and the Freeciv.org project!
+

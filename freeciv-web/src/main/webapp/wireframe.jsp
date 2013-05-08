@@ -21,6 +21,9 @@
 <script type="text/javascript" src="/javascript-compressed/jquery-2.0.0.min.js"></script>
 <script type="text/javascript" src="/javascript/jquery-ui-1.10.2.custom.min.js"></script>
 
+<script type="text/javascript" src="/javascript/json2.js"></script>
+<script type="text/javascript" src="/javascript/jstorage.js"></script>
+
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -50,7 +53,7 @@
             <ul class="nav">
               <li><a href="/">Home</a></li>
               <li class="active"><a href="/wireframe.jsp?do=menu">Play Online</a></li>
-              <li><a href="http://freeciv.wikia.com/wiki/Main_Page">Freeciv Wiki</a></li>
+              <li><a href="http://www.freeciv.org/wiki/">Freeciv Wiki</a></li>
               <li><a href="/freecivmetaserve/metaserver.php">Metaserver</a></li>
               <li><a href="http://forum.freeciv.org">Freeciv Forum</a></li>
               <li><a href="http://github.com/cazfi/freeciv-web">Code on Github</a></li>

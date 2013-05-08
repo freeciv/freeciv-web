@@ -7,18 +7,6 @@
   Please choose gameplay mode:
 </div>
 
-<%
-  String opponent = "" + session.getAttribute("opponent_username");
-  String host = "" + session.getAttribute("opponent_host");
-  String port = "" + session.getAttribute("opponent_port");
-  String guest_mode = (String)request.getSession().getAttribute("guest_user");
-  if (opponent != null && !"null".equals(opponent) && !"".equals(opponent)) {
-%>
-
-  <div class="main_menu_buttons" onmouseover="help_facebook();">
-    <a href="/preload.jsp?redir=/freecivmetaserve/metaserver.php?server_port=<%= host %>:<%= port %>">Join the game of <%= opponent %></a>
-  </div>
-<% } %>
 
 <div onmouseover="help_single();">
   <a class='button' href="/preload.jsp?redir=/civclientlauncher?action=new">Start single-player game</a>
@@ -65,26 +53,12 @@ function help_scenario() {
 
 function help_load() {
   $("#menu_help").html("<b>Help:</b><br> You can resume playing games that you have "
-   + "played before, by clicking the <Load saved game> button. This requires OpenID login.");
+   + "played before, by clicking the <Load saved game> button. This requires HTML5 localstorage.");
 }
 
-function help_facebook() {
-  $("#menu_help").html("<b>Help:</b><br> Join this game created by your friend on Facebook.");
-}
 
 function help_tutorial() {
-  $("#menu_help").html("<b>Help:</b><br> Play this tutorial scenario to get an introduction to Freeciv.net. This is recommended the first time you play Freeciv.net.");
-}
-
-
-function help_facebook_announced() {
-  $("#menu_help").html("<b>Help:</b><br> Start a new multiplayer game against your Facebook friends, and invite them to observe or join your game.");
-}
-
-function help_openid_login() {
-	$("#menu_help").html("<b>Help:</b><br> Login or sign up to a free account using OpenID. This will give you a permanent"
-			 + " username, and access to savegames and other "
-			 + " functionality reserved for registered users.");
+  $("#menu_help").html("<b>Help:</b><br> Play this tutorial scenario to get an introduction to Freeciv-web. This is recommended the first time you play Freeciv-web.");
 }
 
 
@@ -96,7 +70,7 @@ function help_openid_login() {
 	<div id="menu_help">
 		<b>Help:</b>
 		<br>
-		You have four ways to play Freeciv.net: Start a new single-player game, join another multiplayer game,
+		You have four ways to play Freeciv-web: Start a new single-player game, join another multiplayer game,
 		start a new scenario game, or play the tutorial.
 		Multiplayer games requires at least 2 human players before they can begin, while single-player 
 		games can start immediately.

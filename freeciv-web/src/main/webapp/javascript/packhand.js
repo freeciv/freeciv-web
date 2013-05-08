@@ -171,6 +171,9 @@ function handle_city_info(packet)
   } else {
     cities[packet['id']] = $.extend(cities[packet['id']], packet);
   } 
+
+  /* manually update tile relation.*/
+  tiles[packet['tile']]['worked'] = packet['id'];
    
   if (active_city != null) {
     show_city_dialog(active_city);

@@ -1,6 +1,6 @@
 <div id="game_unit_orders_default">       
   <div id="order_goto" class="order_button" >
-    <a href="#" onclick="activate_goto();" 
+    <a href="#" onclick="check_goto();" 
      onmouseover="document.images['goto_button'].src='/images/orders/goto_hover.png';"
      onmouseout="document.images['goto_button'].src='/images/orders/goto_default.png';" 
      onmousedown="document.images['goto_button'].src='/images/orders/goto_clicked.png';" 

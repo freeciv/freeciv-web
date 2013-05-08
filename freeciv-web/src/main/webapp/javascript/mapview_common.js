@@ -550,7 +550,7 @@ function update_map_canvas_check()
 **************************************************************************/
 function update_goto_path_lines()
 {
-  if (goto_active) {
+  if (goto_active && goto_preview_active) {
     for (var i = 0; i < current_goto_path.length - 1; i++) {
       var ptile = current_goto_path[i];
       var ntile = current_goto_path[i+1];

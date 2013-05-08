@@ -157,7 +157,10 @@ function init_chatbox()
   $("#game_chatbox_panel").parent().css("background-color", "rgba(0,0,0, 0.6)")		
   $("#game_chatbox_panel").parent().css("top", "60px");
 
+  if (is_small_screen()) {
+    $("#game_chatbox_panel").parent().hide();
 
+  }
 }
 
 /**************************************************************************

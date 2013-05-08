@@ -174,6 +174,13 @@ function setup_window_size ()
     $(".ui-dialog-titlebar").hide();
     $("#game_chatbox_panel").css("min-height", "50px");
     $("#game_message_area").css("height", "30px");
+    overview_active = false;
+    unitpanel_active = false;
+    chatbox_active = false;
+    $("#game_unit_orders_default").css("bottom", "3px");
+    $("#game_status_panel").css("font-size", "0.8em");
+    $(".order_button").css("padding-right", "5px");
+
   }
 
 	
@@ -507,9 +514,12 @@ function set_default_mapview_active()
   }
   update_map_canvas_full();
   chatbox_scroll_down();
-  if (overview_active) $("#game_overview_panel").parent().show();
-  if (unitpanel_active) $("#game_unit_panel").parent().show();
-  if (chatbox_active) $("#game_chatbox_panel").parent().show();
+
+  if (!is_small_screen()) {
+    if (overview_active) $("#game_overview_panel").parent().show();
+    if (unitpanel_active) $("#game_unit_panel").parent().show();
+    if (chatbox_active) $("#game_chatbox_panel").parent().show();
+  }
 
   tech_dialog_active = false;
   allow_right_click = false;

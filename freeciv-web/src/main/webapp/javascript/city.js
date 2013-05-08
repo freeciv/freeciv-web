@@ -350,13 +350,13 @@ function do_city_map_click(ptile)
   if (ptile['worked'] == active_city['id']) {
     packet = {"type" : packet_city_make_specialist, 
 	         "city_id" : active_city['id'], 
-                 "worker_x" : ptile['x'] - c_tile['x'] + 2, 
-		 "worker_y" : ptile['y'] - c_tile['y'] + 2};
+                 "worker_x" : ptile['x'], 
+		 "worker_y" : ptile['y']};
   } else {
     packet = {"type" : packet_city_make_worker, 
 	         "city_id" : active_city['id'], 
-                 "worker_x" : ptile['x'] - c_tile['x'] + 2, 
-		 "worker_y" : ptile['y'] - c_tile['y'] + 2};
+                 "worker_x" : ptile['x'], 
+		 "worker_y" : ptile['y']};
   }    
   send_request (JSON.stringify(packet));
 

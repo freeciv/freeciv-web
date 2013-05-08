@@ -50,7 +50,7 @@ function control_init()
   
   $("#turn_done_button").click(send_end_turn);
   $("#freeciv_logo").click(function(event) {
-    window.open('http://www.freeciv.net/', '_new');
+    window.open('http://play.freeciv.org/', '_new');
     });
 
 

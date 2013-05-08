@@ -88,7 +88,7 @@ function show_city_dialog(pcity)
   active_city = pcity;
   
   if (pcity == null) return;
-  
+  $("#dialog").dialog('close');	 
   set_city_mapview_active();
   center_tile_mapcanvas(city_tile(pcity));
   update_map_canvas(0, 0, mapview['store_width'], mapview['store_height']);
@@ -107,22 +107,22 @@ function show_city_dialog(pcity)
   
   if (pcity['production_kind'] == VUT_UTYPE) {
     var punit_type = unit_types[pcity['production_value']];
-    $("#city_production").html("Producing: " + punit_type['name']);   
+    $("#city_production_overview").html("Producing: " + punit_type['name']);   
     turns_to_complete = city_turns_to_build(pcity, punit_type, true); 
   }
 
   if (pcity['production_kind'] == VUT_IMPROVEMENT) {
     var improvement = improvements[pcity['production_value']];
-    $("#city_production").html("Producing: " + improvement['name']);
+    $("#city_production_overview").html("Producing: " + improvement['name']);
     turns_to_complete = city_turns_to_build(pcity, improvement, true);
     if (improvement['name'] == "Coinage") {
       turns_to_complete = FC_INFINITY;
     }
   }
   if (turns_to_complete != FC_INFINITY) {
-    $("#city_production_turns").html("Turns to completion: " + turns_to_complete);
+    $("#city_production_turns_overview").html("Turns to completion: " + turns_to_complete);
   } else {
-    $("#city_production_turns").html("-");
+    $("#city_production_turns_overview").html("-");
   }
 
   
@@ -147,56 +147,7 @@ function show_city_dialog(pcity)
   }
   $("#city_improvements_list").html(improvements_html);
   
-  var production_list = [];
-  for (unit_type_id in unit_types) {
-    var punit_type = unit_types[unit_type_id];
-    
-    /* FIXME: web client doesn't support unit flags yet, so this is a hack: */
-    if (punit_type['name'] == "Barbarian Leader" || punit_type['name'] == "Leader") continue;
-    
-    if (can_city_build_unit_now(pcity, punit_type) == true) { 
-      production_list.push({"kind": VUT_UTYPE, "value" : punit_type['id'], 
-                            "text" : punit_type['name'],
-	                    "helptext" : punit_type['helptext'],
-                            "sprite" : get_unit_type_image_sprite(punit_type)});
-    }
-  }
   
-  for (improvement_id in improvements) {
-    var pimprovement = improvements[improvement_id];
-    if (can_city_build_improvement_now(pcity, pimprovement)) {
-      production_list.push({"kind": VUT_IMPROVEMENT, 
-                            "value" : pimprovement['id'], 
-                            "text" : pimprovement['name'],
-	                    "helptext" : pimprovement['helptext'],
-                            "sprite" : get_improvement_image_sprite(pimprovement) });
-    }
-  }
-  
-  var production_html = "";
-  for (var a = 0; a < production_list.length; a++) {
-    var current_prod = (pcity['production_kind'] == production_list[a]['kind'] && pcity['production_value'] == production_list[a]['value']);
-    var sprite = production_list[a]['sprite'];  
-    if (sprite == null) {
-      console.log("Missing sprite for " + production_list[a]['value']);
-      continue;
-    }
-
-    production_html = production_html 
-     + "<div style='text-align: center; " + (current_prod ? "background-color:#777777; text:#000000; border: 1px solid #ffffff;" : "") + "'" 
-     + " onclick='send_city_change(" + pcity['id'] + "," + production_list[a]['kind'] + "," + production_list[a]['value'] + ")' "
-     + " title='" + production_list[a]['helptext'] + "'>"
-     
-     + "<div id='production_list_item' style='cursor:pointer;cursor:hand; background: transparent url(" 
-           + sprite['image-src'] +
-           ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y'] 
-           + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px;float:left; '"
-           +"></div>"
-      
-     + production_list[a]['text'] + "</div>";
-  }
-  
-  $("#city_production_choices").html(production_html);
   
   var punits = tile_units(city_tile(pcity));
   if (punits != null) {
@@ -228,6 +179,125 @@ function show_city_dialog(pcity)
   $("#city_gold").html(pcity['prod'][3]);
   $("#city_luxury").html(pcity['prod'][4]);
   $("#city_science").html(pcity['prod'][5]);
+
+}
+
+/**************************************************************************
+...
+**************************************************************************/
+function change_city_production_dialog()
+{
+
+  var pcity = active_city;
+
+  // reset dialog page.
+  $("#dialog").remove();
+  $("<div id='dialog'></div>").appendTo("div#game_page");
+
+  var dhtml = " <div id='city_production_change'></div>" +
+	"  <div id='city_production_turns_change'></div>" +
+	"  <div id='city_change_production'>" +
+	"  <div id='city_production_choices'>" +
+	"  </div>" +
+	"  </div>"
+
+
+
+  $("#dialog").html(dhtml);
+
+
+  var production_list = [];
+  for (unit_type_id in unit_types) {
+    var punit_type = unit_types[unit_type_id];
+    
+    /* FIXME: web client doesn't support unit flags yet, so this is a hack: */
+    if (punit_type['name'] == "Barbarian Leader" || punit_type['name'] == "Leader") continue;
+    
+    if (can_city_build_unit_now(pcity, punit_type) == true) { 
+      production_list.push({"kind": VUT_UTYPE, "value" : punit_type['id'], 
+                            "text" : punit_type['name'],
+	                    "helptext" : punit_type['helptext'],
+                            "sprite" : get_unit_type_image_sprite(punit_type)});
+    }
+  }
+
+  for (improvement_id in improvements) {
+    var pimprovement = improvements[improvement_id];
+    if (can_city_build_improvement_now(pcity, pimprovement)) {
+      production_list.push({"kind": VUT_IMPROVEMENT, 
+                            "value" : pimprovement['id'], 
+                            "text" : pimprovement['name'],
+	                    "helptext" : pimprovement['helptext'],
+                            "sprite" : get_improvement_image_sprite(pimprovement) });
+    }
+  }
+
+
+  var production_html = "";
+  for (var a = 0; a < production_list.length; a++) {
+    var current_prod = (pcity['production_kind'] == production_list[a]['kind'] 
+	&& pcity['production_value'] == production_list[a]['value']);
+    var sprite = production_list[a]['sprite'];  
+    if (sprite == null) {
+      console.log("Missing sprite for " + production_list[a]['value']);
+      continue;
+    }
+
+    production_html = production_html 
+     + "<div id='production_list_item' style='" + (current_prod ? "background-color:#777777; text:#000000; border: 1px solid #ffffff;" : "") + "'" 
+     + " onclick='send_city_change(" + pcity['id'] + "," + production_list[a]['kind'] + "," + production_list[a]['value'] + ")' "
+     + " title='" + production_list[a]['helptext'] + "'>"
+     
+     + "<div id='production_list_item_sub' style=' background: transparent url(" 
+           + sprite['image-src'] +
+           ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y'] 
+           + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px;'"
+           +"></div>"
+      
+     + production_list[a]['text'] + "</div>";
+  }
+  
+  $("#city_production_choices").html(production_html);
+
+
+ if (pcity['production_kind'] == VUT_UTYPE) {
+    var punit_type = unit_types[pcity['production_value']];
+    $("#city_production").html("Producing: " + punit_type['name']);   
+    turns_to_complete = city_turns_to_build(pcity, punit_type, true); 
+  }
+
+  if (pcity['production_kind'] == VUT_IMPROVEMENT) {
+    var improvement = improvements[pcity['production_value']];
+    $("#city_production").html("Producing: " + improvement['name']);
+    turns_to_complete = city_turns_to_build(pcity, improvement, true);
+    if (improvement['name'] == "Coinage") {
+      turns_to_complete = FC_INFINITY;
+    }
+  }
+  if (turns_to_complete != FC_INFINITY) {
+    $("#city_production_turns_change").html("Turns to completion: " + turns_to_complete);
+  } else {
+    $("#city_production_turns_change").html("-");
+  }
+
+  $("#dialog").attr("title", "Change city production");
+  $("#dialog").dialog({
+			bgiframe: true,
+			modal: true,
+			width: is_small_screen() ? "95%" : "60%",
+			buttons: {
+				"Buy": function() {
+						send_city_buy();
+						$(this).dialog('close');
+				},
+				"Close": function() {
+						$(this).dialog('close');
+
+				}
+			}
+		});
+	
+  $("#dialog").dialog('open');		
 
 }
 

@@ -142,7 +142,6 @@ button {
 }
 
 #city_dialog_info {
-  margin-bottom: 30px;
   float: left;
   padding: 10px;
 
@@ -161,10 +160,14 @@ button {
 
 }
 
-#city_left_panel {
+.city_panel {
   background: url("/images/black-bg.png") repeat scroll 0 0 #222222;
   float: left; 
-  width: 45%;
+  padding-right: 30px;
+}
+
+#city_improvements_panel {
+  width: 100%;
 }
 
 #city_right_panel {
@@ -351,10 +354,9 @@ button {
 
 
 #city_change_production {
-  height: 410px; 
-  width: 120px; 
-  overflow: auto; 
-  background-color: #111111; 
+  height: 100%; 
+  width: 100%; 
+  background-color: #090909; 
   border: 1px solid #444444;
   
 }
@@ -387,11 +389,17 @@ button {
 }
 
 
-#city_production_choices {
-  cursor:pointer;
-  cursor:hand; 
-  width: 90px;
+#production_list_item {
+  float: left;
+  text-align: center; 
+  width: 80px;
+  height: 90px;
+}
 
+#production_list_item_sub {
+  cursor:pointer;
+  cursor:hand;
+  float:left; 
 }
 
 #unit_info_div {

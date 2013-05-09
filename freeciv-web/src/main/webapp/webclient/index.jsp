@@ -13,11 +13,13 @@
 <script type="text/javascript" src="/webclient/session.jsp"></script>
 
 <link rel="shortcut icon" href="/images/freeciv-shortcut-icon.png" />
+<link rel="apple-touch-icon" href="/images/freeciv-splash2.png" />
 
 <%--  iPhone setup --%>
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

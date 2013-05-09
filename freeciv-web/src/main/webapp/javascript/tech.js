@@ -113,8 +113,14 @@ function init_tech_screen()
   tech_canvas_ctx = tech_canvas.getContext("2d");
   if ("mozImageSmoothingEnabled" in tech_canvas_ctx) {
     // if this Boolean value is false, images won't be smoothed when scaled. This property is true by default.
-    tech_canvas_ctx.mozImageSmoothingEnabled = false;
+    tech_canvas_ctx.mozImageSmoothingEnabled = true;
   } 
+
+  if (is_small_screen()) {
+    tech_canvas.width = Math.floor(tech_canvas.width * 0.6);
+    tech_canvas.height = Math.floor(tech_canvas.height * 0.6);
+    tech_canvas_ctx.scale(0.6,0.6);
+  }
 
   is_tech_tree_init = true;
 
@@ -198,7 +204,7 @@ function update_tech_tree()
       mapview_put_tile(tech_canvas_ctx, tag, x+1, y)
 
       tech_canvas_ctx.font = canvas_text_font;
-      tech_canvas_ctx.fillStyle = "rgba(0, 0, 0, 1)";
+      tech_canvas_ctx.fillStyle = "rgba(255, 255, 255, 1)";
       tech_canvas_ctx.fillText(ptech['name'], x + 50, y + 30);  
          
  
@@ -215,7 +221,7 @@ function update_tech_tree()
       mapview_put_tile(tech_canvas_ctx, tag, x+1, y)
            
       tech_canvas_ctx.font = canvas_text_font;
-      tech_canvas_ctx.fillStyle = "rgba(0, 0, 0, 1)";
+      tech_canvas_ctx.fillStyle = "rgba(255, 255, 255, 1)";
       tech_canvas_ctx.fillText(ptech['name'], x + 50, y + 30);  
  
     
@@ -368,6 +374,11 @@ function tech_mapview_mouse_click(e)
     
       var x = Math.floor(reqtree[tech_id+'']['x'] * tech_xscale)+2;  //scale in X direction.
       var y = reqtree[tech_id+'']['y']+2;  
+
+      if (is_small_screen()) {
+        x = x * 0.6;
+        y = y * 0.6;
+      }
 
       if (tech_mouse_x > x && tech_mouse_x < x + tech_item_width
           && tech_mouse_y > y && tech_mouse_y < y + tech_item_height) {

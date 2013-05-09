@@ -1,4 +1,4 @@
- <div>
+ <div id="mapview_canvas_div">
     <%-- The main mapview canvas --%>  
     <div id="canvas_div">
       <canvas id="canvas" width="1024" height="768" moz-opaque="true"></canvas>

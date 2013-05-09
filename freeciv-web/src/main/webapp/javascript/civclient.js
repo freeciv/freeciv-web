@@ -135,6 +135,12 @@ function init_chatbox()
 
   chatbox_active = true;
 
+  if (is_small_screen()) {
+    $("#game_chatbox_panel").detach().prependTo("#tabs-chat");
+  } else {
+    $("#game_chatbox_panel").detach().prependTo("#mapview_canvas_div");
+  }
+
   $("#game_chatbox_panel").attr("title", "Messages");		
   $("#game_chatbox_panel").dialog({
 			bgiframe: true,
@@ -153,13 +159,18 @@ function init_chatbox()
   $(".chatbox_dialog div.ui-dialog-content").css("padding", "5px 0");
   $("#ui-dialog-title-game_chatbox_panel").css("margin-top", "-5px");
   $("#ui-dialog-title-game_chatbox_panel").css("font-size", "10px");
-  $("#game_chatbox_panel").parent().css("background", "rgba(0,0,0,0.6)")		
-  $("#game_chatbox_panel").parent().css("background-color", "rgba(0,0,0, 0.6)")		
-  $("#game_chatbox_panel").parent().css("top", "60px");
+  $(".chatbox_dialog").css("background", "rgba(0,0,0,0.6)")		
+  $(".chatbox_dialog").css("background-color", "rgba(0,0,0, 0.6)")		
+  $(".chatbox_dialog").css("top", "60px");
+
 
   if (is_small_screen()) {
-    $("#game_chatbox_panel").parent().hide();
-
+    $("#game_chatbox_panel").css("position", "relative");
+    $("#game_chatbox_panel").css("float", "left");
+    $("#game_chatbox_panel").css("height", "79%");
+    $("#game_chatbox_panel").css("width", "99%");
+    $("#game_chatbox_panel").show();
+    chatbox_resized();
   }
 }
 

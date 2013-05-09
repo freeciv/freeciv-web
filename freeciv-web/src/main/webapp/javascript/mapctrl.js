@@ -104,8 +104,8 @@ function mapview_touch_move(e)
   mouse_x = e.originalEvent.touches[0].pageX - $('#canvas').position().left;
   mouse_y = e.originalEvent.touches[0].pageY - $('#canvas').position().top;
 
-  var diff_x = (mouse_x - touch_start_x) * 2;
-  var diff_y = (mouse_y - touch_start_y) * 2;
+  var diff_x = (touch_start_x - mouse_x) * 2;
+  var diff_y = (touch_start_y - mouse_y) * 2;
  
   touch_start_x = mouse_x;
   touch_start_y = mouse_y;

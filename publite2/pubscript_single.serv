@@ -7,4 +7,4 @@ set scorelog disabled
 set size 4
 set landm 50
 set aifill 8
-metamessage New Freeciv.net Singleplayer Game
+metamessage New Freeciv-web Singleplayer Game

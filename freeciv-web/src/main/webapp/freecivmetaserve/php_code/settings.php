@@ -73,7 +73,7 @@ if ($bugs_addr == NULL) {
 }
 
 if ($metaserver_header == NULL) {
-  $metaserver_header = 'Freeciv.net multiplayer games around the world';
+  $metaserver_header = 'Freeciv-web multiplayer games around the world';
 }
 
 // Check configuration

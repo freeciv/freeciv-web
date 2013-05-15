@@ -145,7 +145,7 @@ function setup_window_size ()
 
   $("#pregame_message_area").height( mapview['height'] - 50);
   $("#pregame_player_list").height( mapview['height'] - 80);
-  $("#technologies").height( mapview['height'] - 100);
+  $("#technologies").height( mapview['height'] - 50);
   $("#technologies").width( mapview['width'] - 20);
   
   $("#nations").height( mapview['height'] - 100);
@@ -155,36 +155,84 @@ function setup_window_size ()
   
   $("#city_viewport").height( mapview['height'] - 20);
 
+  var i = 0;
 
-  if (overview_active) init_overview();
-  if (unitpanel_active) init_game_unit_panel(); 
+  $("#opt_tab").children().html("Options")
+  $("#players_tab").children().html("Players")
+  $("#tech_tab").children().html("Technologies")
+  $("#civ_tab").children().html("Nation")
+  $("#chat_tab").children().html("Chat")
 
+  $("#opt_tab").show();
+  $("#tabs-hel").show();
+  $("#players_tab").show(); 
+  $("#freeciv_logo").show();
+  $("#chat_tab").show();
+
+
+  /* dynamically reduce content in top meny according to content*/
+  while ($(window).width() - sum_width() < 20) {
+    if (i == 0) $("#freeciv_logo").width(40);
+    if (i == 1) $("#hel_tab").hide();
+
+    if (i == 2) $("#opt_tab").children().html("Opts")
+    if (i == 3) $("#players_tab").children().html("Plrs")
+    if (i == 4) $("#tech_tab").children().html("Tech")
+    if (i == 5) $("#civ_tab").children().html("Nat")
+
+    if (i == 6) $("#freeciv_logo").hide();
+    if (i == 7) $("#opt_tab").children().html("O")
+    if (i == 8) $("#players_tab").children().html("P")
+    if (i == 9) $("#tech_tab").children().html("T")
+    if (i == 10) $("#civ_tab").children().html("N")
+    if (i == 11) $("#chat_tab").children().html("C")
+    if (i == 12) $("#map_tab").children().html("M")
+
+    if (i == 13) $("#opt_tab").hide();
+    if (i == 14) $("#tabs-hel").hide();
+    if (i == 15) $("#players_tab").hide(); 
+
+    if (i == 16) break;
+
+    i++;
+  }
 
   if (is_small_screen()) {
-    /* adapt widgets on sceen to fit on a small device */
-    $("#freeciv_logo").remove();
-    $("#hel_tab").remove();
-    $("#opt_tab").remove();
-    $("#tabs-opt").remove();
-    $("#tabs-hel").remove();
     $(".ui-tabs-anchor").css("padding", "0px");
     $(".ui-button-text").css("padding", "0px");
     $(".overview_dialog").hide();
     $(".unit_dialog").hide();
     $(".ui-dialog-titlebar").hide();
-    $("#game_chatbox_panel").css("min-height", "50px");
-    $("#game_message_area").css("height", "30px");
+
+    $(".chatbox_dialog").hide();
+    $("#game_chatbox_panel").detach().prependTo("#tabs-chat");
+    chatbox_resized(); 
+
     overview_active = false;
     unitpanel_active = false;
-    chatbox_active = false;
     $("#game_unit_orders_default").css("bottom", "3px");
     $("#game_status_panel").css("font-size", "0.8em");
     $(".order_button").css("padding-right", "5px");
+    $("#chat_tab").show();
+    $("#freeciv_logo").height(22);
+  } else {
+    $("#chat_tab").hide();
 
   }
 
+  if (overview_active) init_overview();
+  if (unitpanel_active) init_game_unit_panel(); 
+
 	
 }
+
+function sum_width()
+{
+  var sum=0;
+  $("#tabs_menu").children().each( function(){ if ($(this).is(":visible")) sum += $(this).width(); });
+  return sum;
+}
+
 
 /**************************************************************************
   ...

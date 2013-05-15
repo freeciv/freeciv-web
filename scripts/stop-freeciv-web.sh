@@ -1,5 +1,5 @@
 #!/bin/bash
-# Shitdown script for Freeciv-web
+# Shutdown script for Freeciv-web
 
 SCRIPT_DIR="$(dirname "$0")"
 export FREECIV_WEB_DIR="${SCRIPT_DIR}/../.."

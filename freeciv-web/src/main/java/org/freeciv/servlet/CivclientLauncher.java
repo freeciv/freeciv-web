@@ -50,8 +50,8 @@ public class CivclientLauncher extends HttpServlet {
 		
 		String username = "" + session.getAttribute("username");
 
-		String civServerPort = "";
-		String civServerHost = "";
+		String civServerPort = "" + request.getParameter("civserverport");
+		String civServerHost = "" + request.getParameter("civserverhost");
 		
 		String loadFileName = "" + request.getParameter("load");
 		String scenario = "" + request.getParameter("scenario");
@@ -79,6 +79,18 @@ public class CivclientLauncher extends HttpServlet {
 					"No servers available for creating a new game on.");
 			  }
 		  }
+		
+		  /* Validate port and host */
+		  PreparedStatement stmt = conn.prepareStatement("SELECT count(*) FROM servers WHERE host = ? and port = ?");
+	      stmt.setString(1, civServerHost);
+	      stmt.setInt(2, Integer.parseInt(civServerPort));
+	      ResultSet rs = stmt.executeQuery();
+	       rs.next();
+	       if (rs.getInt(1) != 1) {
+	    	   response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
+				"Invalid input values to civclient.");
+	    	   return;
+	       }
 	       
 	       PreparedStatement stmti = conn.prepareStatement("INSERT INTO player_game_list (username, host, port, timepoint) "
 	    		   + "VALUES (?,?,?,NOW()) ON DUPLICATE KEY UPDATE host = VALUES(host), port = VALUES(port), timepoint = VALUES(timepoint)");

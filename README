@@ -106,7 +106,12 @@ On other Linux distributions, follow this installation procedure:
 2. Create mysql database called 'freeciv_web'
    Import mysql dump into a MySQL database from:  /publite2/mysqldump.sql.bz2
 
-3. Build and configure freeciv-web. 
+3. Get checkout from freeciv revision mentioned in freeciv/version.txt as
+   freeciv/freeciv:
+   cd freeciv
+   svn co svn://svn.gna.org/svn/freeciv/trunk -r <revision> freeciv
+
+4. Build and configure freeciv-web. 
 
    - Run sync.sh in freeciv-img-extract and synx.sh in freeciv-proxy.
    - Edit /freeciv-web/src/main/webapp/freecivmetaserve/php_code/local.php.dist,
@@ -115,11 +120,6 @@ On other Linux distributions, follow this installation procedure:
    - Edit /freeciv-web/src/main/webapp/WEB-INF/resin-web.xml.dist, rename this
      file to resin-web.xml, and update the values for your MySQL database.
    - Run 'build.sh' in the freeciv-web directory
-
-4. Get checkout from freeciv revision mentioned in freeciv/version.txt as
-   freeciv/freeciv:
-   cd freeciv
-   svn co svn://svn.gna.org/svn/freeciv/trunk -r <revision> freeciv
 
 5. Patch freeciv:
    ./apply_patches.sh

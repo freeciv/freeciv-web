@@ -24,6 +24,7 @@ function pregame_start_game()
   var test_packet = {"type" : packet_chat_msg_req, "message" : "/start"};
   var myJSONText = JSON.stringify(test_packet);
   send_request (myJSONText);
+  setup_window_size ();
 }
 
 /****************************************************************************

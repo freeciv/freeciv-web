@@ -125,9 +125,15 @@ button {
 }
 
 #turn_done_button_div {
-  float:right;
+  position: absolute;
+  padding: 5px;
+  right: 0;
+  top: 0;
 }
 
+#turn_done_button {
+  float: left;
+}
 
 .main_menu_buttons {
   padding:20px
@@ -152,13 +158,6 @@ button {
   margin: 20px;
 }
 
-#game_status_panel {
-  width: 98%; 
-  height: 22px; 
-  background-color: #000000; 
-  text-align: center;
-
-}
 
 .city_panel {
   background: url("/images/black-bg.png") repeat scroll 0 0 #222222;
@@ -192,7 +191,6 @@ button {
 
 #game_unit_orders_default {
   bottom: 25px;
-  left: 700px;
   min-width: 300px;
   height: 50px;
   position: absolute;
@@ -262,9 +260,9 @@ button {
   float: left; 
   border: 1px solid rgb(153, 153, 153); 
   width: 1000px; 
-  height: 60px; 
+  height: 40px; 
   padding: 4px; 
-  margin: 5px; 
+  margin: 2px; 
   margin-left: 0px; 
   background-color: rgb(34, 34, 34);
 }
@@ -441,3 +439,8 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
   padding-top: 3px;
 
 }
+
+#tabs_menu {
+  overflow: hidden;
+}
+

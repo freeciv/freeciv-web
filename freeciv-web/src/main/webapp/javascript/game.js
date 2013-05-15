@@ -70,23 +70,28 @@ function update_game_status_panel() {
   var status_html = "";
 
   if (client.conn.playing != null) {
-    var pplayer = client.conn.playing;
-    var tax = client.conn.playing['tax'];
-    var lux = client.conn.playing['luxury'];
-    var sci = client.conn.playing['science'];
-  
-    var net_income = pplayer['net_income'];
-    if (pplayer['net_income'] > 0) {
-      net_income = "+" + pplayer['net_income'];
-    } 
+    if (is_small_screen()) {
+      status_html = chatbox_text;
 
-    status_html += "<b>" + nations[pplayer['nation']]['adjective'] + "</b> Population: ";
-    status_html += "<b>" + get_player_population() + "</b>  ";
-    status_html += "Turn: <b>" + game_info['turn'] + "</b>  ";
-    status_html += "Gold: <b>" + pplayer['gold'] + " (" + net_income + ")</b>  "; 
-    status_html += "Tax: <b>" + tax + "</b> ";
-    status_html += "Lux: <b>" + lux + "</b> ";
-    status_html += "Sci: <b>" + sci + "</b> ";
+    } else {
+      var pplayer = client.conn.playing;
+      var tax = client.conn.playing['tax'];
+      var lux = client.conn.playing['luxury'];
+      var sci = client.conn.playing['science'];
+  
+      var net_income = pplayer['net_income'];
+      if (pplayer['net_income'] > 0) {
+        net_income = "+" + pplayer['net_income'];
+      } 
+
+      status_html += "<b>" + nations[pplayer['nation']]['adjective'] + "</b> Population: ";
+      status_html += "<b>" + get_player_population() + "</b>  ";
+      status_html += "Turn: <b>" + game_info['turn'] + "</b>  ";
+      status_html += "Gold: <b>" + pplayer['gold'] + " (" + net_income + ")</b>  "; 
+      status_html += "Tax: <b>" + tax + "</b> ";
+      status_html += "Lux: <b>" + lux + "</b> ";
+      status_html += "Sci: <b>" + sci + "</b> ";
+    }
   } else {
     status_html += "Observing - "; 
     status_html += "Turn: <b>" + game_info['turn'] + "</b>  ";

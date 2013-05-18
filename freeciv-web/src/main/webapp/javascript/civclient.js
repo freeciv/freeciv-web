@@ -25,6 +25,18 @@ var phase_start_time = 0;
 var debug_active = false;
 
 /**************************************************************************
+ Main starting point for Freeciv-web 
+**************************************************************************/
+$(document).ready(function() {
+
+  if ($("#canvas").length == 1) {
+    civclient_init();
+  } else {
+    console.log("Freeciv-web not started. missing canvas element in body.");
+  }
+});
+
+/**************************************************************************
  This function is called on page load. 
 **************************************************************************/
 function civclient_init() 

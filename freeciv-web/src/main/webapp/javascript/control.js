@@ -46,6 +46,9 @@ function control_init()
   $(document).keydown (keyboard_listener);
   $("#canvas").mouseup(mapview_mouse_click);
   $("#canvas").mousedown(mapview_mouse_down);
+  $(window).mousemove(mouse_moved_cb);
+  $(window).resize(mapview_window_resized);
+  $(window).bind('orientationchange resize', orientation_changed);
 
   if (is_touch_device()) {
     $('#canvas').bind('touchstart', mapview_touch_start);
@@ -76,7 +79,18 @@ function control_init()
    * during drag to goto units. */
   document.onselectstart = function(){ return false; }
 
+  /* disable right clicks. */
+  document.oncontextmenu = function(){return allow_right_click;};
+ 
+  $(window).bind('beforeunload', function(){
+    return "Do you really want to leave your nation behind now?";
+  });
 
+  $(window).on('unload', function(){
+    send_surrender_game();
+  });
+
+  /* Click callbacks for main tabs. */
   $("#map_tab").click(function(event) {
     set_default_mapview_active();
   });

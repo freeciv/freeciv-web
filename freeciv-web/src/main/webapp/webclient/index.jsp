@@ -16,7 +16,7 @@
 <link rel="apple-touch-icon" href="/images/freeciv-splash2.png" />
 
 <%--  iPhone setup --%>
-<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
@@ -33,7 +33,7 @@
 
 </head>
 
-<body onload="civclient_init();" onmousemove="mouse_moved_cb(event);" oncontextmenu="return allow_right_click;" onresize="mapview_window_resized();" onOrientationChange="orientation_changed();" onbeforeunload="send_surrender_game();">
+<body>
 	
 <%
   

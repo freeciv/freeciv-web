@@ -80,10 +80,7 @@ function mapview_touch_start(e)
   touch_start_x = e.originalEvent.touches[0].pageX - $('#canvas').position().left;
   touch_start_y = e.originalEvent.touches[0].pageY - $('#canvas').position().top;
 
- 
-  check_mouse_drag_unit(touch_start_x, touch_start_y)
-
-  //mapview_mouse_down(e);
+  setTimeout("check_mouse_drag_unit(" + touch_start_x + "," + touch_start_y + ");", 100);
 
 }
 

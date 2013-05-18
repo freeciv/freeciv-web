@@ -390,11 +390,6 @@ function update_unit_order_commands()
 
   }
 
-
-  $("#game_unit_orders_default").css("left", Math.floor((mapview_canvas.width 
-				  - $("#game_unit_orders_default").width()) / 2));
-
-
 }
 
 

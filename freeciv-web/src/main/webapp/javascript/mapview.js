@@ -138,8 +138,6 @@ function setup_window_size ()
   mapview['store_width'] = winWidth - width_offset;
   mapview['store_height'] = winHeight - height_offset;
 
-  var twidth = $("#game_unit_orders_default").width();
-  $("#game_unit_orders_default").css("left", Math.floor((mapview_canvas.width - twidth) / 2));
   $("#game_status_panel").css("width", mapview_canvas.width);
 
 

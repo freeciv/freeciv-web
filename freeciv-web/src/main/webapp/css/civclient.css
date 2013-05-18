@@ -107,9 +107,10 @@ button {
 
 
 .order_button {
-	overflow: hidden;
-	float: left;
-	padding-right: 12px;
+  overflow: hidden;
+  padding-right: 12px;
+  display: inline-block;
+  height: 40px;
 }
 
 #ie_canvas {
@@ -192,10 +193,10 @@ button {
 #game_unit_orders_default {
   bottom: 25px;
   min-width: 300px;
-  height: 50px;
+  height: 40px;
   position: absolute;
   text-align: center;
-
+  width: 100%;
 }
 
 #city_viewport {

@@ -492,7 +492,7 @@ if ( isset($port) ) {
           print "Observe";
           print "</a>";
 
-          print "<a id='meta_button' class='button' href=\"/freecivmetaserve/metaserver.php?server_port=" . db2html($row["host"]) . ":" . db2html($row["port"]) . "\">";
+          print "<a id='meta_button' class='button' href=\"/meta/metaserver.php?server_port=" . db2html($row["host"]) . ":" . db2html($row["port"]) . "\">";
 	  	  print "Info";
           print "</a>";
 
@@ -551,7 +551,7 @@ if ( isset($port) ) {
 	  }
 
 
-          print "<a id='meta_button' class='button' href=\"/freecivmetaserve/metaserver.php?server_port=" . db2html($row["host"]) . ":" . db2html($row["port"]) . "\">";
+          print "<a id='meta_button' class='button' href=\"/meta/metaserver.php?server_port=" . db2html($row["host"]) . ":" . db2html($row["port"]) . "\">";
 	  	  print "Info";
           print "</a>";
 

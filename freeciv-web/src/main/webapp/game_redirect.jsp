@@ -30,7 +30,7 @@
        session.setAttribute( "opponent_username", username);
        session.setAttribute( "opponent_host", host);
        session.setAttribute( "opponent_port", port);
-       response.sendRedirect("/freecivmetaserve/metaserver.php?server_port=" + host + ":" + port);
+       response.sendRedirect("/meta/metaserver.php?server_port=" + host + ":" + port);
    } finally {
      conn.close();
    }       

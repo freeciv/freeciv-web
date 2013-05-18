@@ -9,7 +9,7 @@ import time
 
 port = 5556
 # FIXME: This must be the hostname and port of resin server.
-metaserver = "http://localhost:8080/freecivmetaserve/metaserver.php"
+metaserver = "http://localhost:8080/meta/metaserver.php"
 logdir = "/tmp/"
 savesdir = "~/freeciv-build/resin/webapps/ROOT/savegames/"
 pubscript = "pubscript_single.serv"

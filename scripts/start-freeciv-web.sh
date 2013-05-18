@@ -27,14 +27,14 @@ sleep 20 && \
 
 #3. publite2
 echo "Starting publite2" && \
-cd ${FREECIV_WEB_DIR}/freeciv-web/publite2/ && \
-sh run.sh && \
+(cd ${FREECIV_WEB_DIR}/freeciv-web/publite2/ && \
+sh run.sh) && \
 echo "Publite2 started" && \
 
 #4. freeciv-proxy
 echo "Starting freeciv-proxy" && \
-cd  ${FREECIV_WEB_DIR}/freeciv-web/freeciv-proxy/ && \
-sh run.sh & \
+(cd  ${FREECIV_WEB_DIR}/freeciv-web/freeciv-proxy/ && \
+sh run.sh) && \
 echo "freeciv-proxy started" &&\
 echo "Will sleep for 30 seconds, then do a status test..." && \
 sleep 30 && \

@@ -404,7 +404,7 @@ if ( isset($port) ) {
 
 <div id="container">
 
- <div class="row">
+ <div class="row" style="margin: 0 auto; width: 60%;">
  <div class="span10" style="padding: 50px;">
 
 

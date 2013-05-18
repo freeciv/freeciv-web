@@ -88,6 +88,7 @@ function control_init()
 
   $(window).on('unload', function(){
     send_surrender_game();
+    network_stop();
   });
 
   /* Click callbacks for main tabs. */

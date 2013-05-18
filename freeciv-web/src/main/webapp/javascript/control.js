@@ -76,6 +76,52 @@ function control_init()
    * during drag to goto units. */
   document.onselectstart = function(){ return false; }
 
+
+  $("#map_tab").click(function(event) {
+    set_default_mapview_active();
+  });
+
+  $("#civ_tab").click(function(event) {
+    city_dialog_remove();
+    set_default_mapview_inactive();
+    init_civ_dialog();
+  });
+
+  $("#tech_tab").click(function(event) {
+    city_dialog_remove(); 
+    set_default_mapview_inactive(); 
+    update_tech_screen();
+  });
+
+  $("#players_tab").click(function(event) {
+    city_dialog_remove(); 
+    set_default_mapview_inactive(); 
+    update_nation_screen();
+  });
+
+  $("#opt_tab").click(function(event) {
+    city_dialog_remove();
+    init_options_dialog(); 
+    set_default_mapview_inactive();
+  });
+
+  $("#chat_tab").click(function(event) {
+    city_dialog_remove();
+    chatbox_resized();
+    set_default_mapview_inactive();
+  });
+
+
+  $("#hel_tab").click(function(event) {
+    city_dialog_remove();
+    set_default_mapview_inactive();
+    show_help();
+  });
+
+
+
+
+
 }
 
 /****************************************************************************

@@ -398,17 +398,23 @@ function send_city_change(city_id, kind, value)
 **************************************************************************/
 function close_city_dialog()
 {
-  $("#tabs-map").removeClass("ui-tabs-hide");
-  $("#tabs-map").show();
-  $("#tabs-cit").addClass("ui-tabs-hide");
-  $("#tabs-cit").hide();
-  $("#map_tab").addClass("ui-state-active");
-  $("#map_tab").addClass("ui-tabs-selected");
-  $("#map_tab").removeClass("ui-state-default");
-  
   set_default_mapview_active();
 }
 
+/**************************************************************************
+ Close city dialog, shows/hides appropriate widgets, hides city dialog UI. 
+**************************************************************************/
+function city_dialog_remove()
+{
+  if (active_city != null) {
+    setup_window_size (); 
+    center_tile_mapcanvas(city_tile(active_city)); 
+    active_city = null;
+
+    $("#tabs-cit").addClass("ui-tabs-hide");
+    $("#tabs-cit").hide();
+   }
+}
 
 /**************************************************************************
  The city map has been clicked.

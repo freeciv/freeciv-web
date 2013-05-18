@@ -217,6 +217,8 @@ function setup_window_size ()
     $("#chat_tab").hide();
 
   }
+  $("#tabs-hel").hide();
+
 
   if (overview_active) init_overview();
   if (unitpanel_active) init_game_unit_panel(); 

@@ -333,7 +333,7 @@ function update_timeout()
     var remaining = game_info['timeout'] - Math.floor((now - phase_start_time) / 1000);
     if (remaining >= 0) {
       if (is_small_screen()) {
-        $("#turn_done_button").button("option", "label", "EndTurn");
+        $("#turn_done_button").button("option", "label", "Turn" + remaining);
         $(".ui-button-text").css("padding", "0px");
       } else {
         $("#turn_done_button").button("option", "label", "Turn Done (" + remaining + "s)");

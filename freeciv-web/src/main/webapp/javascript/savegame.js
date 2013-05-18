@@ -33,7 +33,6 @@ function load_game_check()
       var savename = $.jStorage.get("savegame-savename-" + load_game_id);
       var saveusr = $.jStorage.get("savegame-username-" + load_game_id);
 
-
       if (savefile != null && savename != null && username != null) {
 	$.ajax({
           url: "/loadservlet?username=" + saveusr + "&savename=" + savename,
@@ -43,7 +42,7 @@ function load_game_check()
     	}).done(function() {
           loadTimerId = setTimeout("load_game_real('" + username + "');", 
                              1000);
-        });
+        }).fail(function() { alert("Loading game failed"); });
       } else {
         alert("Loading game failed");
       }
@@ -84,6 +83,11 @@ function load_game_toggle()
 ****************************************************************************/
 function save_game()
 {
+  if (!$.jStorage.storageAvailable()) {
+    alert("HTML5 Storage not available");
+    return;
+  }
+
   keyboard_input = false;
   // reset dialog page.
   $("#dialog").remove();
@@ -108,6 +112,9 @@ function save_game()
 					savename = $("#savegamename").val()
 					if (savename == null || savename.length < 4 || savename.length > 32) {
 						alert("Invalid savegame name.");
+					} else if (check_savegame_duplicate(savename)) {
+						alert("Savegame name already in use. "
+						 + "Please use a new savegame name.");
 					} else {
 						$(this).dialog('close');
 						save_game_send();
@@ -119,8 +126,18 @@ function save_game()
   $("#dialog").dialog('open');		
 
 }
-
-
+/**************************************************************************
+ Check for duplicate savegame name
+**************************************************************************/
+function check_savegame_duplicate(new_savename)
+{
+  var savegame_count = $.jStorage.get("savegame-count", 0);
+  for (var i = 1; i <= savegame_count; i++) {
+    var savename = $.jStorage.get("savegame-savename-" + i);
+    if (savename == new_savename) return true;
+  }
+  return false;
+}
 
 /**************************************************************************
  Save the game
@@ -148,6 +165,6 @@ function save_game_fetch()
       $.jStorage.set("savegame-savename-" + savegame_count, savename);
       $.jStorage.set("savegame-username-" + savegame_count, username);
       $.jStorage.set("savegame-count" , savegame_count);
-    });
-  $("#save_button").button("option", "label", "Game Saved" );
+      alert("Game saved successfully");
+    }).fail(function() { alert("Failed saving game"); });
 }

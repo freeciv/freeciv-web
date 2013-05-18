@@ -1,0 +1,12 @@
+Index: freeciv/server/savegame2.c
+===================================================================
+--- freeciv/server/savegame2.c	(revision 22812)
++++ freeciv/server/savegame2.c	(working copy)
+@@ -920,7 +920,6 @@
+     break;
+   }
+ 
+-  fc_assert(FALSE);
+   return '?';
+ }
+ 

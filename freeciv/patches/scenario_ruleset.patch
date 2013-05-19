@@ -1,0 +1,144 @@
+diff -Nurd -X.diff_ignore freeciv/data/scenarios/british-isles-85x80-v2.80.sav freeciv/data/scenarios/british-isles-85x80-v2.80.sav
+--- freeciv/data/scenarios/british-isles-85x80-v2.80.sav	2013-05-20 00:22:00.932617615 +0300
++++ freeciv/data/scenarios/british-isles-85x80-v2.80.sav	2013-05-20 00:23:12.372616047 +0300
+@@ -40,7 +40,7 @@
+ diplchance=3
+ aqueductloss=0
+ ;randseed=0
+-rulesetdir="classic"
++rulesetdir="fcweb"
+ settlers=3
+ explorer=2
+ borders=4
+diff -Nurd -X.diff_ignore freeciv/data/scenarios/earth-160x90-v2.sav freeciv/data/scenarios/earth-160x90-v2.sav
+--- freeciv/data/scenarios/earth-160x90-v2.sav	2013-05-20 00:22:00.932617615 +0300
++++ freeciv/data/scenarios/earth-160x90-v2.sav	2013-05-20 00:23:44.596615340 +0300
+@@ -40,7 +40,7 @@
+ diplchance=3
+ aqueductloss=0
+ ;randseed=0
+-rulesetdir="classic"
++rulesetdir="fcweb"
+ settlers=2
+ explorer=2
+ borders=4
+diff -Nurd -X.diff_ignore freeciv/data/scenarios/earth-80x50-v3.sav freeciv/data/scenarios/earth-80x50-v3.sav
+--- freeciv/data/scenarios/earth-80x50-v3.sav	2013-05-20 00:22:00.932617615 +0300
++++ freeciv/data/scenarios/earth-80x50-v3.sav	2013-05-20 00:23:58.556615033 +0300
+@@ -2,7 +2,7 @@
+ [savefile]
+ options=" +version2 riversoverlay"
+ reason="Scenario"
+-rulesetdir="classic"
++rulesetdir="fcweb"
+ improvement_size=68
+ improvement_vector="Airport","Aqueduct","Bank","Barracks","Barracks II","Barracks III","Cathedral","City Walls","Coastal Defense","Colosseum","Courthouse","Factory","Granary","Harbour","Hydro Plant","Library","Marketplace","Mass Transit","Mfg. Plant","Nuclear Plant","Offshore Platform","Palace","Police Station","Port Facility","Power Plant","Recycling Center","Research Lab","SAM Battery","SDI Defense","Sewer System","Solar Plant","Space Component","Space Module","Space Structural","Stock Exchange","Super Highways","Supermarket","Temple","University","Apollo Program","A.Smith's Trading Co.","Colossus","Copernicus' Observatory","Cure For Cancer","Darwin's Voyage","Eiffel Tower","Great Library","Great Wall","Hanging Gardens","Hoover Dam","Isaac Newton's College","J.S. Bach's Cathedral","King Richard's Crusade","Leonardo's Workshop","Lighthouse","Magellan's Expedition","Manhattan Project","Marco Polo's Embassy","Michelangelo's Chapel","Oracle","Pyramids","SETI Program","Shakespeare's Theatre","Statue of Liberty","Sun Tzu's War Academy","United Nations","Women's Suffrage","Coinage"
+ technology_size=88
+diff -Nurd -X.diff_ignore freeciv/data/scenarios/europe-200x100-v2.sav freeciv/data/scenarios/europe-200x100-v2.sav
+--- freeciv/data/scenarios/europe-200x100-v2.sav	2013-05-20 00:22:00.932617615 +0300
++++ freeciv/data/scenarios/europe-200x100-v2.sav	2013-05-20 00:24:11.164614755 +0300
+@@ -50,7 +50,7 @@
+ barbarians=2
+ onsetbarbs=60
+ occupychance=0
+-rulesetdir="classic"
++rulesetdir="fcweb"
+ demography="NASRLPEMOqrb"
+ settlers=3
+ explorer=3
+diff -Nurd -X.diff_ignore freeciv/data/scenarios/france-140x90-v2.sav freeciv/data/scenarios/france-140x90-v2.sav
+--- freeciv/data/scenarios/france-140x90-v2.sav	2013-05-20 00:22:00.932617615 +0300
++++ freeciv/data/scenarios/france-140x90-v2.sav	2013-05-20 00:24:33.968614256 +0300
+@@ -80,7 +80,7 @@
+ dispersion=0
+ randseed=0
+ save_random=0
+-rulesetdir="classic"
++rulesetdir="fcweb"
+ save_starts=1
+ save_known=0
+ save_players=0
+diff -Nurd -X.diff_ignore freeciv/data/scenarios/hagworld-120x60-v1.2.sav freeciv/data/scenarios/hagworld-120x60-v1.2.sav
+--- freeciv/data/scenarios/hagworld-120x60-v1.2.sav	2013-05-20 00:22:00.932617615 +0300
++++ freeciv/data/scenarios/hagworld-120x60-v1.2.sav	2013-05-20 00:24:44.680614022 +0300
+@@ -49,7 +49,7 @@
+ barbarians=2
+ onsetbarbs=60
+ occupychance=0
+-rulesetdir="classic"
++rulesetdir="fcweb"
+ demography="NASRLPEMOqrb"
+ settlers=2
+ explorer=1
+diff -Nurd -X.diff_ignore freeciv/data/scenarios/iberian-peninsula-136x100-v1.0.sav freeciv/data/scenarios/iberian-peninsula-136x100-v1.0.sav
+--- freeciv/data/scenarios/iberian-peninsula-136x100-v1.0.sav	2013-05-20 00:22:00.932617615 +0300
++++ freeciv/data/scenarios/iberian-peninsula-136x100-v1.0.sav	2013-05-20 00:24:54.952613797 +0300
+@@ -41,7 +41,7 @@
+ diplchance=80
+ aqueductloss=0
+ ;randseed=0
+-rulesetdir="classic"
++rulesetdir="fcweb"
+ fogofwar=1
+ settlers=4
+ explorer=2
+diff -Nurd -X.diff_ignore freeciv/data/scenarios/italy-100x100-v1.5.sav freeciv/data/scenarios/italy-100x100-v1.5.sav
+--- freeciv/data/scenarios/italy-100x100-v1.5.sav	2013-05-20 00:22:00.932617615 +0300
++++ freeciv/data/scenarios/italy-100x100-v1.5.sav	2013-05-20 00:25:04.748613580 +0300
+@@ -46,7 +46,7 @@
+ barbarians=2
+ onsetbarbs=60
+ occupychance=0
+-rulesetdir="classic"
++rulesetdir="fcweb"
+ demography="NASRLPEMOqrb"
+ settlers=2
+ explorer=1
+diff -Nurd -X.diff_ignore freeciv/data/scenarios/japan-88x100-v1.3.sav freeciv/data/scenarios/japan-88x100-v1.3.sav
+--- freeciv/data/scenarios/japan-88x100-v1.3.sav	2013-05-20 00:22:00.932617615 +0300
++++ freeciv/data/scenarios/japan-88x100-v1.3.sav	2013-05-20 00:25:19.468613259 +0300
+@@ -49,7 +49,7 @@
+ barbarians=2
+ onsetbarbs=60
+ occupychance=0
+-rulesetdir="classic"
++rulesetdir="fcweb"
+ demography="NASRLPEMOqrb"
+ settlers=2
+ explorer=1
+diff -Nurd -X.diff_ignore freeciv/data/scenarios/north_america_116x100-v1.2.sav freeciv/data/scenarios/north_america_116x100-v1.2.sav
+--- freeciv/data/scenarios/north_america_116x100-v1.2.sav	2013-05-20 00:22:00.932617615 +0300
++++ freeciv/data/scenarios/north_america_116x100-v1.2.sav	2013-05-20 00:25:33.644612946 +0300
+@@ -49,7 +49,7 @@
+ barbarians=2
+ onsetbarbs=60
+ occupychance=0
+-rulesetdir="classic"
++rulesetdir="fcweb"
+ demography="NASRLPEMOqrb"
+ settlers=2
+ explorer=1
+diff -Nurd -X.diff_ignore freeciv/data/scenarios/tileset-demo.sav freeciv/data/scenarios/tileset-demo.sav
+--- freeciv/data/scenarios/tileset-demo.sav	2013-05-20 00:22:00.932617615 +0300
++++ freeciv/data/scenarios/tileset-demo.sav	2013-05-20 00:25:48.212612629 +0300
+@@ -2,7 +2,7 @@
+ [savefile]
+ options=" +version2 specials"
+ reason="User request"
+-rulesetdir="classic"
++rulesetdir="fcweb"
+ improvement_size=68
+ improvement_vector="Airport","Aqueduct","Bank","Barracks","Barracks II","Barracks III","Cathedral","City Walls","Coastal Defense","Colosseum","Courthouse","Factory","Granary","Harbour","Hydro Plant","Library","Marketplace","Mass Transit","Mfg. Plant","Nuclear Plant","Offshore Platform","Palace","Police Station","Port Facility","Power Plant","Recycling Center","Research Lab","SAM Battery","SDI Defense","Sewer System","Solar Plant","Space Component","Space Module","Space Structural","Stock Exchange","Super Highways","Supermarket","Temple","University","Apollo Program","A.Smith's Trading Co.","Colossus","Copernicus' Observatory","Cure For Cancer","Darwin's Voyage","Eiffel Tower","Great Library","Great Wall","Hanging Gardens","Hoover Dam","Isaac Newton's College","J.S. Bach's Cathedral","King Richard's Crusade","Leonardo's Workshop","Lighthouse","Magellan's Expedition","Manhattan Project","Marco Polo's Embassy","Michelangelo's Chapel","Oracle","Pyramids","SETI Program","Shakespeare's Theatre","Statue of Liberty","Sun Tzu's War Academy","United Nations","Women's Suffrage","Coinage"
+ technology_size=88
+diff -Nurd -X.diff_ignore freeciv/data/scenarios/tutorial.sav freeciv/data/scenarios/tutorial.sav
+--- freeciv/data/scenarios/tutorial.sav	2013-05-20 00:22:00.932617615 +0300
++++ freeciv/data/scenarios/tutorial.sav	2013-05-20 00:22:46.848616607 +0300
+@@ -8,7 +8,7 @@
+ options=" +version2"
+ version=20
+ reason="Scenario"
+-rulesetdir="classic"
++rulesetdir="fcweb"
+ improvement_size=68
+ improvement_vector="Airport","Aqueduct","Bank","Barracks","Barracks II","Barracks III","Cathedral","City Walls","Coastal Defense","Colosseum","Courthouse","Factory","Granary","Harbour","Hydro Plant","Library","Marketplace","Mass Transit","Mfg. Plant","Nuclear Plant","Offshore Platform","Palace","Police Station","Port Facility","Power Plant","Recycling Center","Research Lab","SAM Battery","SDI Defense","Sewer System","Solar Plant","Space Component","Space Module","Space Structural","Stock Exchange","Super Highways","Supermarket","Temple","University","Apollo Program","A.Smith's Trading Co.","Colossus","Copernicus' Observatory","Cure For Cancer","Darwin's Voyage","Eiffel Tower","Great Library","Great Wall","Hanging Gardens","Hoover Dam","Isaac Newton's College","J.S. Bach's Cathedral","King Richard's Crusade","Leonardo's Workshop","Lighthouse","Magellan's Expedition","Manhattan Project","Marco Polo's Embassy","Michelangelo's Chapel","Oracle","Pyramids","SETI Program","Shakespeare's Theatre","Statue of Liberty","Sun Tzu's War Academy","United Nations","Women's Suffrage","Coinage"
+ technology_size=88

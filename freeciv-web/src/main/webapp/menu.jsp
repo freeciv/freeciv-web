@@ -13,7 +13,7 @@
 </div>
 
 <div onmouseover="help_multi();">
-  <a class="button" href="/preload.jsp?redir=/freecivmetaserve/metaserver.php" >Multiplayer game</a><br>
+  <a class="button" href="/preload.jsp?redir=/meta/metaserver.php%3Ftab%3Dmulti" >Multiplayer game</a><br>
 </div>
 
 <div onmouseover="help_scenario();">

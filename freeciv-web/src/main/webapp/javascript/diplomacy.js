@@ -371,7 +371,7 @@ function create_diplomacy_dialog(counterpart) {
   $("#diplomacy_dialog").dialog({
 			bgiframe: true,
 			modal: false,
-			width: "45%",
+			width: is_small_screen() ? "90%" : "50%",
 			height: 435,
 			buttons: {
 				"Accept treaty": function() {

@@ -334,20 +334,27 @@ if ( isset($port) ) {
   header("Content-Type: text/html; charset=\"utf-8\"");
 
 ?>
-<html>
-<head>
-<title>Freeciv-web metaserver</title>
 
-<link href="/css/frontpage.css" rel="stylesheet" type="text/css" />
-<link type="text/css" href="/css/jquery-ui-1.10.2.custom.min.css" rel="stylesheet" />
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Freeciv-web - Live Games Metaserver</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Freeciv is a Free and Open Source empire-building strategy game">
+    <meta name="author" content="The Freeciv project">
 
-<?php if ($_COOKIE["facebook_mode"] == "true") { ?>
-  <link href="/css/fb_frontpage.css" rel="stylesheet" type="text/css" />
-<? } ?>
-
-
+    <!-- Le styles -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+    </style>
+    <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
 <link rel="shortcut icon" href="/images/freeciv-shortcut-icon.png" />
-
+<link type="text/css" href="/css/jquery-ui-1.10.2.custom.min.css" rel="stylesheet" />
 <script type="text/javascript" src="/javascript-compressed/jquery-2.0.0.min.js"></script>
 <script type="text/javascript" src="/javascript/jquery-ui-1.10.2.custom.min.js"></script>
 
@@ -363,16 +370,42 @@ if ( isset($port) ) {
       
 </script>
 
-</head>
-<body link="white" vlink="white" alink="white" bgcolor="black">
-<!-- HEADER -->
+
+  </head>
+
+  <body>
+
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"
+		onclick="window.location='/wireframe.jsp?do=menu';">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+	<a href="/" style="padding: 3px; float: left;"><img src="/images/freeciv-web-logo.png" alt="The Freeciv Project"></a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li><a href="/">Home</a></li>
+              <li><a href="/wireframe.jsp?do=menu">Play Online</a></li>
+              <li><a href="http://www.freeciv.org/wiki/">Freeciv Wiki</a></li>
+              <li class="active"><a href="/meta/metaserver.php">Live Games</a></li>
+              <li><a href="http://forum.freeciv.org">Freeciv Forum</a></li>
+              <li><a href="http://github.com/cazfi/freeciv-web">Code on Github</a></li>
+              <li><a href="http://freeciv.wikia.com/wiki/Donations">Donate!</a></li>
+
+            </ul>
+           </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
 <div id="container">
 
-
-<div id="body_content">
-<br>
-
-<div id="main_column">
+ <div class="row" style="margin: 0 auto; width: 70%;">
+ <div class="span10" style="padding: 50px;">
 
 
 <div>
@@ -403,15 +436,15 @@ if ( isset($port) ) {
           print "<div><a class='button' href='/civclientlauncher?civserverport=" . db2html($port) . "&amp;civserverhost=" . db2html($host)
              . "'>Join</a> <b>You can join this game now.</b></div>";
 	}
-        print "<div><a class='button' href='/civclientlauncher?action=observe&civserverport=" . db2html($port) . "&amp;civserverhost=" . db2html($host)
+        print "<div><a class='button' href='/civclientlauncher?action=observe&amp;civserverport=" . db2html($port) . "&amp;civserverhost=" . db2html($host)
              . "'>Observe</a> <b>You can observe this game now.</b></div>";
 
         print "<br/><br/>";
         $msg = db2html($row["message"]);
-        print "<table><tr id='meta_header'><th>Version</th><th>Patches</th><th>Capabilities</th>";
+        print "<table><tr class='meta_header'><th>Version</th><th>Patches</th><th>Capabilities</th>";
         print "<th>State</th>";
         print "<th>Server ID</th></tr>\n";
-        print "<tr id='meta_row'><td>";
+        print "<tr class='meta_row'><td>";
         print db2html($row["version"]);
         print "</td><td>";
         print db2html($row["patches"]);
@@ -424,7 +457,7 @@ if ( isset($port) ) {
         print "</td></tr>\n</table></p>\n";
         if ($msg != "") {
           print "<p>";
-          print "<table><tr id='meta_header'><th>Message</th></tr>\n";
+          print "<table><tr class='meta_header'><th>Message</th></tr>\n";
           print "<tr><td>" . $msg . "</td></tr>";
           print "</table></p>\n";
         }
@@ -433,11 +466,11 @@ if ( isset($port) ) {
         $nr = fcdb_num_rows($res);
         if ( $nr > 0 ) {
           print "<p><div><table style=\"width: 60%;\">\n";
-          print "<tr id='meta_header'><th class=\"left\">Flag</th><th>Leader</th><th>Nation</th>";
+          print "<tr class='meta_header'><th class=\"left\">Flag</th><th>Leader</th><th>Nation</th>";
           print "<th>User</th><th>Type</th></tr>\n";
           for ( $inx = 0; $inx < $nr; $inx++ ) {
             $row = fcdb_fetch_array($res, $inx);
-            print "<tr id='meta_row'><td class=\"left\">";
+            print "<tr class='meta_row'><td class=\"left\">";
             print "</td><td>";
             print db2html($row["name"]);
             print "</td><td>";
@@ -472,27 +505,36 @@ if ( isset($port) ) {
 
       }
     } else {
-       print "<h1>Freeciv-web single-player games</h1>\n";
+	?>
+
+<div id="tabs">
+<ul>
+<li><a href="#tabs-1">Single-player Games</a></li>
+<li><a href="#tabs-2">Multi-player Games</a></li>
+</ul>
+<div id="tabs-1">
+<h2>Freeciv-web Single-player games</h2>
+<?
       $stmt="select host,port,version,patches,state,message,unix_timestamp()-unix_timestamp(stamp), IFNULL((select user from players p where p.hostport =  CONCAT(s.host ,':',s.port) and p.type = 'Human' Limit 1 ), 'none') as player, IFNULL((select flag from players p where p.hostport =  CONCAT(s.host ,':',s.port) and p.type = 'Human' Limit 1 ), 'none') as flag, (select value from variables where name = 'turn' and hostport = CONCAT(s.host ,':',s.port)) as turn, (select value from variables where name = 'turn' and hostport = CONCAT(s.host ,':',s.port)) + 0 as turnsort from servers s where type = 'Singleplayer' and state = 'Running' order by turnsort desc";
       $res = fcdb_exec($stmt);
       $nr = fcdb_num_rows($res);
       if ( $nr > 0 ) {
         print "<br /><table>\n";
-        print "<tr id='meta_header'><th>Game Action:</th>";
+        print "<tr class='meta_header'><th>Game Action:</th>";
         print "<th>State</th><th>Players</th>";
         print "<th style='width:45%;'>Message</th>";
         print "<th>Player</th>\n";
         print "<th>Turn:</th></tr>";
         for ( $inx = 0; $inx < $nr; $inx++ ) {
           $row = fcdb_fetch_array($res, $inx);
-          print "<tr id='meta_row'><td>";
+          print "<tr class='meta_row'><td>";
 
-	  	  print "<a id='meta_button' class='button' href=\"/civclientlauncher?action=observe&civserverport=" 
-		  . db2html($row["port"]) . "&civserverhost=" . db2html($row["host"]) . "\">";
+	  print "<a  class='button' href=\"/civclientlauncher?action=observe&amp;civserverport=" 
+		  . db2html($row["port"]) . "&amp;civserverhost=" . db2html($row["host"]) . "\">";
           print "Observe";
           print "</a>";
 
-          print "<a id='meta_button' class='button' href=\"/freecivmetaserve/metaserver.php?server_port=" . db2html($row["host"]) . ":" . db2html($row["port"]) . "\">";
+          print "<a class='button' href=\"/meta/metaserver.php?server_port=" . db2html($row["host"]) . ":" . db2html($row["port"]) . "\">";
 	  	  print "Info";
           print "</a>";
 
@@ -512,23 +554,23 @@ if ( isset($port) ) {
           print db2html($row["turn"]);
 	  print "</td></tr>\n";
         }
-        print "</table>";
+        print "</table><br><br><br><br>";
       } else {
-        print "<h3><a href='/wireframe.jsp?do=login'>Click here</a> to start a new single player game!</h3>";
+        print "<h3><a href='/wireframe.jsp?do=login'>Click here to start a new single player game!</a></h3><br><br><br>";
       }
 ?>
 
+ </div>
+ <div id="tabs-2">
+ <h2>Freeciv-web Multiplayer games around the world</h2>
 
 <?
-
-      print "<br><br>";
-      print "<h1>Freeciv-web multiplayer games around the world</h1><br />\n";
       $stmt="select host,port,version,patches,state,message,unix_timestamp()-unix_timestamp(stamp), (select value from variables where name = 'turn' and hostport = CONCAT(s.host ,':',s.port)) as turn from servers s where type = 'Multiplayer' order by state desc";
       $res = fcdb_exec($stmt);
       $nr = fcdb_num_rows($res);
       if ( $nr > 0 ) {
 	print "<table>\n";
-        print "<tr id='meta_header'><th>Game Action:</th>";
+        print "<tr class='meta_header'><th>Game Action:</th>";
         print "<th>State</th><th>Players</th>";
         print "<th style='width:45%;'>Message</th>";
         print "<th>Turn:</th></tr>";
@@ -537,21 +579,21 @@ if ( isset($port) ) {
  	  $row = fcdb_fetch_array($res, $inx);
 	  $mystate = db2html($row["state"]);
 
-          print "<tr id='meta_row'><td>";
+          print "<tr class='meta_row'><td>";
 	  
   
           if ($mystate != "Running") {
-           print "<a id='meta_button' class='button' href=\"/civclientlauncher?civserverport=" . db2html($row["port"]) . "&civserverhost=" . db2html($row["host"]) . "\">";
+           print "<a  class='button' href=\"/civclientlauncher?civserverport=" . db2html($row["port"]) . "&amp;civserverhost=" . db2html($row["host"]) . "\">";
            print "Play";
 	   print "</a>";
 	  } else {
-	   print "<a id='meta_button' class='button' href=\"/civclientlauncher?action=observe&civserverport=" . db2html($row["port"]) . "&civserverhost=" . db2html($row["host"]) . "\">";
+	   print "<a  class='button' href=\"/civclientlauncher?action=observe&amp;civserverport=" . db2html($row["port"]) . "&amp;civserverhost=" . db2html($row["host"]) . "\">";
            print "Observe";
            print "</a>";
 	  }
 
 
-          print "<a id='meta_button' class='button' href=\"/freecivmetaserve/metaserver.php?server_port=" . db2html($row["host"]) . ":" . db2html($row["port"]) . "\">";
+          print "<a class='button' href=\"/meta/metaserver.php?server_port=" . db2html($row["host"]) . ":" . db2html($row["port"]) . "\">";
 	  	  print "Info";
           print "</a>";
 
@@ -581,66 +623,47 @@ if ( isset($port) ) {
 
 
         }
-        print "</table>";
+        print "</table> </div> </div>";
       } else {
         print "<h2>No servers currently listed</h2>";
       }
 
-
-
-
-      print "<br><br> ";
-
-
-
-
-
 ?>
-<br />
-<br />
-<p class="center"><em>
 
-
-
-<br><br>
-
-
-
-
-<br />
-
+</div>
+</div>
 
 <?
     }
-    echo "<br /><br /><p class=\"center\">";
     
-    echo "</p><br /><br />";
     
   }
-?>
-
-</div>
-</div>
+ ?>
 
 
 </div>
 
-<div id="footer">
-Copyright &copy; 2008-2013 Freeciv-web
-</div>
-
-</div>
 
 
+      <hr>
+
+      <footer>
+        <p>&copy; The Freeciv Project 2013</p>
+      </footer>
+
+    </div> <!-- /container -->
 
 <script>
-		$( ".button").button();
-		$( ".button").css("font-size", "13px");
+	$( ".button").button();
+	$( ".button").css("font-size", "13px");
+	<?php if (isset($_GET['tab'])) { ?>
+		$( "#tabs" ).tabs({ active: 1 });
+	<?php } else { ?>
+		$( "#tabs" ).tabs();
+	<?php } ?>
 </script>
 
-
-
-</body>
+  </body>
 </html>
 
 

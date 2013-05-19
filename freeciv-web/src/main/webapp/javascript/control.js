@@ -46,6 +46,9 @@ function control_init()
   $(document).keydown (keyboard_listener);
   $("#canvas").mouseup(mapview_mouse_click);
   $("#canvas").mousedown(mapview_mouse_down);
+  $(window).mousemove(mouse_moved_cb);
+  $(window).resize(mapview_window_resized);
+  $(window).bind('orientationchange resize', orientation_changed);
 
   if (is_touch_device()) {
     $('#canvas').bind('touchstart', mapview_touch_start);
@@ -75,6 +78,64 @@ function control_init()
   /* disable text-selection, as this gives wrong mouse cursor 
    * during drag to goto units. */
   document.onselectstart = function(){ return false; }
+
+  /* disable right clicks. */
+  document.oncontextmenu = function(){return allow_right_click;};
+ 
+  $(window).bind('beforeunload', function(){
+    return "Do you really want to leave your nation behind now?";
+  });
+
+  $(window).on('unload', function(){
+    send_surrender_game();
+    network_stop();
+  });
+
+  /* Click callbacks for main tabs. */
+  $("#map_tab").click(function(event) {
+    set_default_mapview_active();
+  });
+
+  $("#civ_tab").click(function(event) {
+    city_dialog_remove();
+    set_default_mapview_inactive();
+    init_civ_dialog();
+  });
+
+  $("#tech_tab").click(function(event) {
+    city_dialog_remove(); 
+    set_default_mapview_inactive(); 
+    update_tech_screen();
+  });
+
+  $("#players_tab").click(function(event) {
+    city_dialog_remove(); 
+    set_default_mapview_inactive(); 
+    update_nation_screen();
+  });
+
+  $("#opt_tab").click(function(event) {
+    city_dialog_remove();
+    init_options_dialog(); 
+    set_default_mapview_inactive();
+  });
+
+  $("#chat_tab").click(function(event) {
+    city_dialog_remove();
+    chatbox_resized();
+    set_default_mapview_inactive();
+  });
+
+
+  $("#hel_tab").click(function(event) {
+    city_dialog_remove();
+    set_default_mapview_inactive();
+    show_help();
+  });
+
+
+
+
 
 }
 
@@ -329,11 +390,6 @@ function update_unit_order_commands()
     }
 
   }
-
-
-  $("#game_unit_orders_default").css("left", Math.floor((mapview_canvas.width 
-				  - $("#game_unit_orders_default").width()) / 2));
-
 
 }
 

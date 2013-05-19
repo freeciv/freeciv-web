@@ -1,6 +1,6 @@
 
   <div id="freeciv_manual">
-    <h2>Freeciv.net Game Manual</h2>
+    <h2>Freeciv-web Game Manual</h2>
     	
          	
 		<div id="tabs_manual">

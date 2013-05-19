@@ -1,1 +1,0 @@
-sh mlame -l  *.wav

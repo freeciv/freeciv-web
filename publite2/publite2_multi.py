@@ -9,11 +9,11 @@ import time
 
 port = 5655
 # FIXME: This must be the hostname and port of resin server.
-metaserver = "http://localhost:8080/freecivmetaserve/metaserver.php"
+metaserver = "http://localhost:8080/meta/metaserver.php"
 logdir = "/tmp/"
 savesdir = "~/freeciv-build/resin/webapps/ROOT/savegames/"
 pubscript = "pubscript_multi.serv"
-servers_count = 5
+servers_count = 8 
 
 
 class civserverproc(Thread):

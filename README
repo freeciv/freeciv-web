@@ -111,7 +111,19 @@ On other Linux distributions, follow this installation procedure:
    cd freeciv
    svn co svn://svn.gna.org/svn/freeciv/trunk -r <revision> freeciv
 
-4. Build and configure freeciv-web. 
+4. Patch freeciv:
+   ./apply_patches.sh
+
+
+5. Compile and install Freeciv. This involves running the following commands:
+   cd freeciv
+   ./autogen.sh --enable-fcweb
+   make
+   make install     (as root user)
+
+   copy freeciv-web/freeciv/data/fcweb to /usr/local/share/freeciv 
+
+6. Build and configure freeciv-web. 
 
    - Run sync.sh in freeciv-img-extract and synx.sh in freeciv-proxy.
    - Edit /freeciv-web/src/main/webapp/freecivmetaserve/php_code/local.php.dist,
@@ -121,16 +133,6 @@ On other Linux distributions, follow this installation procedure:
      file to resin-web.xml, and update the values for your MySQL database.
    - Run 'build.sh' in the freeciv-web directory
 
-5. Patch freeciv:
-   ./apply_patches.sh
-
-6. Compile and install Freeciv. This involves running the following commands:
-   cd freeciv
-   ./autogen.sh --enable-fcweb
-   make
-   make install     (as root user)
-
-   copy freeciv-web/freeciv/data/fcweb to /usr/local/share/freeciv 
 
 7. Start resin with these commands:
    cd ~/freeciv-build/resin/bin

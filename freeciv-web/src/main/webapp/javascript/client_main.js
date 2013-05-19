@@ -189,3 +189,14 @@ function show_new_game_message()
       Good luck, and have a lot of fun!");
   } 
 }
+
+/**************************************************************************
+...
+**************************************************************************/
+function alert_war(player_no)
+{
+  var pplayer = players[player_no];
+  show_dialog_message("War!", "You are now at war with the " 
+	+ nations[pplayer['nation']]['adjective']
+    + " leader " + pplayer['name'] + "!");
+}

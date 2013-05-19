@@ -138,8 +138,6 @@ function setup_window_size ()
   mapview['store_width'] = winWidth - width_offset;
   mapview['store_height'] = winHeight - height_offset;
 
-  var twidth = $("#game_unit_orders_default").width();
-  $("#game_unit_orders_default").css("left", Math.floor((mapview_canvas.width - twidth) / 2));
   $("#game_status_panel").css("width", mapview_canvas.width);
 
 
@@ -219,6 +217,8 @@ function setup_window_size ()
     $("#chat_tab").hide();
 
   }
+  $("#tabs-hel").hide();
+
 
   if (overview_active) init_overview();
   if (unitpanel_active) init_game_unit_panel(); 
@@ -555,11 +555,16 @@ function set_default_mapview_active()
 {
   mapview_canvas_ctx = mapview_canvas.getContext("2d");
     
-  if (active_city != null) {
-    setup_window_size (); 
-    center_tile_mapcanvas(city_tile(active_city)); 
-    active_city = null;
-  }
+  city_dialog_remove();
+
+  /* shows mapview elements */
+  $("#tabs-map").removeClass("ui-tabs-hide");
+  $("#tabs-map").show();
+  $("#map_tab").addClass("ui-state-active");
+  $("#map_tab").addClass("ui-tabs-selected");
+  $("#map_tab").removeClass("ui-state-default");
+  $("#tabs-hel").hide();
+
   update_map_canvas_full();
   chatbox_scroll_down();
 
@@ -581,4 +586,5 @@ function set_default_mapview_inactive()
   if (overview_active) $("#game_overview_panel").parent().hide();
   if (unitpanel_active) $("#game_unit_panel").parent().hide();
   if (chatbox_active) $("#game_chatbox_panel").parent().hide();
+
 }

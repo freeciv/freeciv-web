@@ -1,41 +1,45 @@
-Index: freeciv/server/cityhand.c
-===================================================================
---- freeciv/server/cityhand.c	(revision 22812)
-+++ freeciv/server/cityhand.c	(working copy)
-@@ -135,7 +135,6 @@
+diff -Nurd -X.diff_ignore freeciv/server/cityhand.c freeciv/server/cityhand.c
+--- freeciv/server/cityhand.c	2013-05-19 23:01:17.712723877 +0300
++++ freeciv/server/cityhand.c	2013-05-19 23:14:21.004706689 +0300
+@@ -135,9 +135,7 @@
                                   int worker_x, int worker_y)
  {
    struct tile *ptile;
 -  struct tile *pcenter;
    struct city *pcity = player_city_by_number(pplayer, city_id);
-   int city_radius_sq;
+-  int city_radius_sq;
  
-@@ -147,15 +146,8 @@
+   if (NULL == pcity) {
+     /* Probably lost. */
+@@ -146,16 +144,7 @@
+     return;
    }
  
-   city_radius_sq = city_map_radius_sq_get(pcity);
+-  city_radius_sq = city_map_radius_sq_get(pcity);
 -  if (!is_valid_city_coords(city_radius_sq, worker_x, worker_y)) {
 -    log_error("handle_city_make_specialist() invalid city map {%d,%d} "
 -              "\"%s\".", worker_x, worker_y, city_name(pcity));
 -    return;
 -  }
 -  pcenter = city_tile(pcity);
- 
+-
 -  if (NULL == (ptile = city_map_to_tile(pcenter, city_radius_sq, worker_x,
 -                                        worker_y))) {
 +  if (NULL == (ptile = map_pos_to_tile(worker_x, worker_y))) {
      log_error("handle_city_make_specialist() unavailable city map {%d,%d} "
                "\"%s\".", worker_x, worker_y, city_name(pcity));
      return;
-@@ -185,7 +177,6 @@
+@@ -185,9 +174,7 @@
  			     int worker_x, int worker_y)
  {
    struct tile *ptile;
 -  struct tile *pcenter;
    struct city *pcity = player_city_by_number(pplayer, city_id);
-   int city_radius_sq = city_map_radius_sq_get(pcity);
+-  int city_radius_sq = city_map_radius_sq_get(pcity);
  
-@@ -195,15 +186,7 @@
+   if (NULL == pcity) {
+     /* Probably lost. */
+@@ -195,15 +182,7 @@
      return;
    }
  

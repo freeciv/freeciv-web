@@ -28,11 +28,11 @@ class civserverproc(Thread):
                 retcode = call("freeciv-web --port " + str(self.port) + " -q 20 -e "
                         + " -m -M " + metaserver  + " --type \"Multiplayer\" --read " + pubscript +  " --log " + logdir + "fcweb-" + str(self.port) + ".log --saves " + savesdir, shell=True)
                 if retcode < 0:
-                    print >>sys.stderr, "Freeciv-web was terminated by signal", -retcode
+                    print("Freeciv-web was terminated by signal", -retcode, file=sys.stderr)
                 else:
-                    print >>sys.stderr, "Freeciv-web returned", retcode
-            except OSError, e:
-              print >>sys.stderr, "Execution failed:", e
+                    print("Freeciv-web returned", retcode, file=sys.stderr)
+            except OSError as e:
+              print("Execution failed:", e, file=sys.stderr)
 
         time.sleep(10)
 

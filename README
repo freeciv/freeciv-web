@@ -53,7 +53,9 @@ System Requirements
 
 - Java 1.6.0 SDK - http://java.sun.com/javase/downloads/index.jsp
 
-- Python 2.7 - http://www.python.org/
+- Python 3.3 - http://www.python.org/
+  (freeciv-proxy uses Python 3.3, freeciv-img-extract uses Python 2.7
+   due to PIL depenedency)
 
 - Python Imaging Library (PIL) - http://www.pythonware.com/products/pil/
   (required for freeciv-img-extract)
@@ -78,8 +80,6 @@ System Requirements
 - nginx 1.4.1 - http://nginx.org/
 
 - pngcrush, required for freeciv-img-extract.  http://pmt.sourceforge.net/pngcrush/
-
-- TornadIO2 - https://github.com/MrJoes/tornadio2
 
 - Tornado 3.0.1 - http://www.tornadoweb.org/
 
@@ -125,7 +125,7 @@ On other Linux distributions, follow this installation procedure:
 
 6. Build and configure freeciv-web. 
 
-   - Run sync.sh in freeciv-img-extract and synx.sh in freeciv-proxy.
+   - Run setup_links.sh and sync.sh in freeciv-img-extract and sync.sh in freeciv-proxy.
    - Edit /freeciv-web/src/main/webapp/freecivmetaserve/php_code/local.php.dist,
      rename this file to local.php, and update values for fcdb_username and fcdb_pw
      to your MySQL username and password.
@@ -144,8 +144,7 @@ On other Linux distributions, follow this installation procedure:
 9. Run the freeciv-proxy:
   Run run.sh in the freeciv-proxy directory.
  To debug, check the proxy debugging page: 
-http://localhost/civ/status
-http://localhost:8082/civ/status
+http://localhost:8002/status
 
 10. Start nginx on port 80 as root.
 

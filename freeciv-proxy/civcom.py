@@ -15,7 +15,6 @@
 
 import socket
 from struct import *
-from zerostrings import *
 from threading import Thread, RLock;
 import logging
 import time
@@ -55,17 +54,16 @@ class CivCom(Thread):
     self.socket.setblocking(1);
     try:
       self.socket.connect((HOST, self.civserverport))
-    except socket.error, reason:
+    except socket.error as reason:
       self.send_error_to_client("Proxy unable to connect to civserver. Please go back and try again. %s" % (reason));
       return;
 
 
     # send packet
-    login_packet = "{\"type\":4,\"username\":\"%s\",\"capability\":\"%s\",\"version_label\":\"%s\",\"major_version\":%d,\"minor_version\":%d,\"patch_version\":%d}" %  (self.username, VERSION, VER_INFO, 2, 4, 99);
-    self.send_to_civserver(login_packet)
+    self.send_to_civserver(self.civwebserver.loginpacket);
 
     #receive packets from server
-    net_buf = "";
+    net_buf = bytearray(0);
     while 1:
       net_buf = self.read_from_connection(net_buf);
     
@@ -77,9 +75,9 @@ class CivCom(Thread):
         packet = self.get_packet_from_connection(net_buf);
         if (packet != None): 
           net_buf = net_buf[4+len(packet):];
-	  result = packet[:-1];
-	  if (len(result) > 0):
-	    self.send_buffer_append(result);
+          result = packet[:-1];
+          if (len(result) > 0):
+            self.send_buffer_append(result);
 
         else:
           break;
@@ -107,12 +105,10 @@ class CivCom(Thread):
 
     if (len(net_buf) < 4): return None;
 
-    result = unpackExt('>HH', net_buf[:4]);
+    result = unpack('>HH', net_buf[:4]);
     packet_len = result[0];
 
     if (len(net_buf) < packet_len): return None;
-    if (logger.isEnabledFor(logging.DEBUG)):
-      logger.debug("\nNEW PACKET: " + str(result[1]) + " len(" + str(packet_len) + ")" );
     return net_buf[4:packet_len];
 
   
@@ -120,7 +116,7 @@ class CivCom(Thread):
     if (logger.isEnabledFor(logging.ERROR)):
       logger.error("Server connection closed. Removing civcom thread for " + self.username);
     
-    if (hasattr(self.civwebserver, "civcoms") and self.key in self.civwebserver.civcoms.keys()):
+    if (hasattr(self.civwebserver, "civcoms") and self.key in list(self.civwebserver.civcoms.keys())):
       del self.civwebserver.civcoms[self.key];
     
     if (self.socket != None):
@@ -133,17 +129,14 @@ class CivCom(Thread):
     return True;
 
   def send_to_civserver(self, net_packet_json):
-#    header = packExt('>HH', len(net_packet_json), chr(0));
-    header = packExt('>HH', len(net_packet_json), 0);
-    civ_packet = header + str(net_packet_json) + '\0';
+    header = pack('>HH', len(net_packet_json), 0);
     try:
       # Send packet to civserver
-      self.socket.sendall(civ_packet)
+      self.socket.sendall(header + str(net_packet_json).encode('utf-8') + b'\0');
       return True;
     except:
       self.send_error_to_client("Proxy unable to communicate with civserver.");
       return False;
-
     else:
       if (logger.isEnabledFor(logging.ERROR)):
         logger.error("invalid packet from 'json_to_civserver'");
@@ -155,7 +148,7 @@ class CivCom(Thread):
         logger.debug("Could not acquire civcom lock");
     else:
       try:
-        self.send_buffer.append(data);
+        self.send_buffer.append(data.decode('utf-8'));
       finally:
         self.lock.release();
 
@@ -179,8 +172,8 @@ class CivCom(Thread):
       try:
         if len(self.send_buffer) > 0:
           result = "[" + ",".join(self.send_buffer) + "]";
-	else:
-          result = "[]";
+        else:
+          result = None;
       finally:
         del self.send_buffer[:];
         self.lock.release();

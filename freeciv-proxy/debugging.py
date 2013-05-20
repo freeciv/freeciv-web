@@ -1,7 +1,7 @@
 # -*- coding: latin-1 -*-
 
 ''' 
- Freeciv - Copyright (C) 2009 - Andreas Røsdal   andrearo@pvv.ntnu.no
+ Freeciv - Copyright (C) 2009-2013 - Andreas Røsdal   andrearo@pvv.ntnu.no
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation; either version 2, or (at your option)
@@ -27,8 +27,8 @@ _scale = {'kB': 1024.0, 'mB': 1024.0*1024.0,
 
 startTime = time.time()
 
-def get_debug_info(civcoms, router):
-  code = "<html><head><meta http-equiv=\"refresh\" content=\"20\"></head><body><h2>Freeciv Web Proxy Status</h2>"
+def get_debug_info(civcoms):
+  code = "<html><head><meta http-equiv=\"refresh\" content=\"20\"></head><body><h2>Freeciv WebSocket Proxy Status</h2>"
   code += "<font color=\"green\">Process status: OK</font><br>";
 
   code += "<h3>Process Uptime: " + str(int(time.time() - startTime)) + " s.</h3>";
@@ -55,8 +55,6 @@ def get_debug_info(civcoms, router):
   except:
     print("Cannot open uptime file: /proc/uptime");
 
-  code += "<br><br><b>Tornadio status:</b> " + str(router.stats.dump()) + "<br>" 
-
   try:    
     code += "<h3>Memory usage:</h3>";
     code += "Memory: " + str(memory()/1048576) + " MB <br>";
@@ -64,14 +62,14 @@ def get_debug_info(civcoms, router):
     code += "Stacksize: " + str(stacksize()/1048576) + " MB <br>";
 
     code += ("<h3>Logged in users  (count %i) :</h3>" % len(civcoms));
-    for key in civcoms.keys():
-      code += ("username: <b>%s</b> <br>Civserver: (%d)<br>Session id:%s<br>Connect time: %d<br><br>" % (civcoms[key].username, civcoms[key].civserverport,  civcoms[key].client_ip, time.time() - civcoms[key].connect_time));
+    for key in list(civcoms.keys()):
+      code += ("username: <b>%s</b> <br>Civserver: (%d)<br>Connect time: %d<br><br>" % (civcoms[key].username, civcoms[key].civserverport,   time.time() - civcoms[key].connect_time));
        
 
  
     code += "<h3>Thread dumps:</h3>";
 
-    for threadId, stack in sys._current_frames().items():
+    for threadId, stack in list(sys._current_frames().items()):
         code += ("<br><br><b><u># ThreadID: %s</u></b><br>" % threadId)
         for filename, lineno, name, line in traceback.extract_stack(stack):
             code += ('File: "%s", line %d, in %s: ' % (filename, lineno, name))
@@ -80,7 +78,7 @@ def get_debug_info(civcoms, router):
 
 
   except:
-    print "Unexpected error:", sys.exc_info()[0]
+    print(("Unexpected error:" + str(sys.exc_info()[0])));
     raise
 
   return code;

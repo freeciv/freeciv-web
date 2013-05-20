@@ -1,3 +1,3 @@
+<%@ page language="java" contentType="application/javascript" pageEncoding="UTF-8"%>
 var civserverport = <%= session.getAttribute("civserverport") %>;
-var civserverhost = "<%= session.getAttribute("civserverhost") %>";
 var username = "<%= session.getAttribute("username") %>";

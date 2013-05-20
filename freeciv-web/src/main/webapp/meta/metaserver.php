@@ -404,8 +404,8 @@ if ( isset($port) ) {
 
 <div id="container">
 
- <div class="row" style="margin: 0 auto; width: 70%;">
- <div class="span10" style="padding: 50px;">
+ <div class="row" >
+ <div class="span10" style="padding: 50px; width: 90%;">
 
 
 <div>
@@ -509,8 +509,8 @@ if ( isset($port) ) {
 
 <div id="tabs">
 <ul>
-<li><a href="#tabs-1">Single-player Games</a></li>
-<li><a href="#tabs-2">Multi-player Games</a></li>
+<li><a id="singleplr" href="#tabs-1">Single-player Games</a></li>
+<li><a id="multiplr" href="#tabs-2">Multi-player Games</a></li>
 </ul>
 <div id="tabs-1">
 <h2>Freeciv-web Single-player games</h2>
@@ -656,11 +656,22 @@ if ( isset($port) ) {
 <script>
 	$( ".button").button();
 	$( ".button").css("font-size", "13px");
+	$(".button").css("margin", "7px");
 	<?php if (isset($_GET['tab'])) { ?>
 		$( "#tabs" ).tabs({ active: 1 });
 	<?php } else { ?>
 		$( "#tabs" ).tabs();
 	<?php } ?>
+
+        if ($(window).width() <= 1024) {
+          // for small screens
+          $(".row").width("100%");
+          $(".span10").width("100%");
+          $(".span10").css("padding", "0px");
+          $("#singleplr").html("Single-player");
+          $("#multiplr").html("Multi-player");
+        }
+
 </script>
 
   </body>

@@ -107,6 +107,7 @@ class CivConnection(SocketConnection):
     def get_civcom(self, username, civserverport, client_ip, ws_connection):
       key = username + str(civserverport);
       if key not in civcoms.keys():
+        if (int(civserverport) < 5500): return None;
         civcom = CivCom(username, int(civserverport));
         civcom.client_ip = client_ip;
         civcom.connect_time = time.time();

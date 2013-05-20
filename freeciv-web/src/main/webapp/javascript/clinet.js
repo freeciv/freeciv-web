@@ -11,7 +11,6 @@
    GNU General Public License for more details.
 ***********************************************************************/
 
-var civwebserver_url_base = "/civ";
 
 var error_shown = false;
 var syncTimerId = -1;
@@ -20,6 +19,8 @@ var isWorking = false;
 var clinet_last_send = 0;
 var debug_client_speed_list = [];
 
+var freeciv_version = "+Freeciv.Web.Devel-2.5-2013.May.02";
+
 var ws = null;
 
 /****************************************************************************
@@ -27,21 +28,42 @@ var ws = null;
 ****************************************************************************/
 function network_init()
 {
-  ws = new io.connect('http://' + window.location.hostname);
 
-  ws.on('connect', function() {
-    /* first websocket packet contains username and port. */
-    ws.send(username + ";" + civserverport);
-  });
+  if (!"WebSocket" in window) {
+    alert("WebSockets not supported");
+    return;
+  }
 
-  ws.on('message', function(data) {
+  ws = new WebSocket("ws://" + window.location.hostname + "/civsocket");
+
+  ws.onopen = function () {
+    var login_message = {"type":4, "username" : username,
+    "capability": freeciv_version, "version_label": "-dev",
+    "major_version" : 2, "minor_version" : 4, "patch_version" : 99,
+    "port": civserverport};
+    ws.send(JSON.stringify(login_message));
+  };
+
+
+  ws.onmessage = function (event) {
      if (typeof client_handle_packet !== 'undefined') {
-       client_handle_packet(jQuery.parseJSON(data));
+       client_handle_packet(jQuery.parseJSON(event.data));
      } else {
        alert("Error, freeciv-web not compiled correctly. Please "
              + "run sync.sh in freeciv-proxy correctly.");
      }
-  });
+  };
+
+  ws.onclose = function (event) {
+   console.log("WebSocket connection closed."); 
+  };
+
+  ws.onerror = function (errpr) {
+   show_dialog_message("Network error", errpr); 
+  };
+
+
+
 
 }
 
@@ -52,7 +74,7 @@ function network_init()
 ****************************************************************************/
 function network_stop()
 {
-  ws.disconnect();
+  ws.close();
 }
 
 /****************************************************************************

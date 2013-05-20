@@ -2,7 +2,7 @@
 # -*- coding: latin-1 -*-
 
 ''' 
- Freeciv - Copyright (C) 2011 - Andreas Røsdal   andrearo@pvv.ntnu.no
+ Freeciv - Copyright (C) 2011-2013 - Andreas Røsdal   andrearo@pvv.ntnu.no
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation; either version 2, or (at your option)
@@ -16,65 +16,52 @@
 
 
 from os import path as op
-
 import time
-
-from tornado import web
-
-from tornadio2 import SocketConnection, TornadioRouter, SocketServer, event
-
-from threading import Thread;
-
-from civcom import *
+from tornado import web, websocket, ioloop, httpserver
 from debugging import *
 import logging
-
+from civcom import *
+import json
 
 ROOT = op.normpath(op.dirname(__file__))
-WS_UPDATE_INTERVAL = 0.022;
 PROXY_PORT = 8002;
+WS_UPDATE_INTERVAL = 0.011;
 
 civcoms = {};
 
 class IndexHandler(web.RequestHandler):
     """Serves the Freeciv-proxy index page """
     def get(self):
-        self.write("Freeciv-web websocket proxy");
+        self.write("Freeciv-web websocket proxy, port: " + str(PROXY_PORT));
 
 
 class StatusHandler(web.RequestHandler):
     """Serves the Freeciv-proxy status page, on the url:  /status """
-    def initialize(self, router):
-        self.router = router;
-
     def get(self):
-        self.write(get_debug_info(civcoms, self.router));
+        self.write(get_debug_info(civcoms));
 
 
-class CivConnection(SocketConnection):
-    """ Serves the Freeciv WebSocket service. """
-    participants = set()
+class WSHandler(websocket.WebSocketHandler):
+    clients = []
+    logger = logging.getLogger("freeciv-proxy");
 
-    def on_open(self, request):
-        self.ip = self.user_id = self.session.session_id;
-        self.participants.add(self);
+    def open(self):
+        self.clients.append(self)
         self.is_ready = False;
 
     def on_message(self, message):
         if (not self.is_ready):
           #called the first time the user connects.
-          auth = message.split(";");
-          if (len(auth) == 2):
-            self.username = auth[0];
-            self.civserverport = auth[1];
-            self.is_ready = True;
-            self.civcom = self.get_civcom(self.username, self.civserverport, self.ip, self);
-            return;
-          else:
-            self.send("Error: Could not authenticate user.");
+          login_message = json.loads(message);
+          self.username = login_message['username'];
+          self.civserverport = login_message['port'];
+          self.loginpacket = message;
+          self.is_ready = True;
+          self.civcom = self.get_civcom(self.username, self.civserverport, self);
+          return; 
         
         # get the civcom instance which corresponds to this user.        
-        self.civcom = self.get_civcom(self.username, self.civserverport, self.ip, self);
+        self.civcom = self.get_civcom(self.username, self.civserverport, self);
 
         if (self.civcom == None):
           self.send("Error: Could not authenticate user.");
@@ -85,31 +72,32 @@ class CivConnection(SocketConnection):
           if not self.civcom.send_packets_to_civserver(message):
             if (logger.isEnabledFor(logging.INFO)):
               logger.info("Sending data to civserver failed.");
-            self.send('Error: Civserver communication failure ')
+            self.write_message('Error: Civserver communication failure ')
             return;
  
-        except (Exception, e):
+        except:
           if (logger.isEnabledFor(logging.ERROR)):
-            logger.error(e);
-          self.send("Error: Service Unavailable. Something is wrong here ");
+            logger.error("Service unavailable: freeciv-web down.");
+          self.write_message("Error: Service Unavailable. Something is wrong here ");
+
 
 
     def on_close(self):
-        self.participants.remove(self)
-        if hasattr(self, 'civcom') and self.civcom != None: 
+       self.clients.remove(self)
+       if hasattr(self, 'civcom') and self.civcom != None: 
           self.civcom.stopped = True;
           self.civcom.close_connection();
-          if self.civcom.key in civcoms.keys():
+          if self.civcom.key in list(civcoms.keys()):
             del civcoms[self.civcom.key];
 
 
+
     # get the civcom instance which corresponds to the requested user.
-    def get_civcom(self, username, civserverport, client_ip, ws_connection):
+    def get_civcom(self, username, civserverport, ws_connection):
       key = username + str(civserverport);
-      if key not in civcoms.keys():
+      if key not in list(civcoms.keys()):
         if (int(civserverport) < 5500): return None;
         civcom = CivCom(username, int(civserverport));
-        civcom.client_ip = client_ip;
         civcom.connect_time = time.time();
         civcom.set_civwebserver(self);
         civcom.is_websocket_active = True;
@@ -123,33 +111,27 @@ class CivConnection(SocketConnection):
         return civcom;
       else:
         usrcivcom = civcoms[key];
-        if (usrcivcom.client_ip != client_ip):
-          logger.error("Unauthorized connection from client IP: " + client_ip);
-          return None;
         return usrcivcom;
-
-
 
 
 class CivWsMessenger(Thread):
   """ This thread listens for messages from the civserver
       and sends the message to the WebSocket client. """
 
-  def __init__ (self, civcom, ws_connection):
+  def __init__ (self, civcom, ws_handler):
     Thread.__init__(self)
     self.daemon = True;
     self.civcom = civcom;
-    self.ws_connection = ws_connection;
+    self.ws_handler = ws_handler;
 
   def run(self):
     while 1:
-      if (self.civcom.stopped): return;
+      if (self.civcom.stopped or self.ws_handler == None): return;
 
       packet = self.civcom.get_send_result_string();
-      if (len(packet) > 4):
-        self.ws_connection.send(packet);
+      if (packet != None and self.ws_handler != None):
+        self.ws_handler.write_message(packet);
       time.sleep(WS_UPDATE_INTERVAL);
-
 
 
 
@@ -159,24 +141,23 @@ if __name__ == "__main__":
  
     if len(sys.argv) == 2:
       PROXY_PORT = int(sys.argv[1]);
-    print('port: ' + str(PROXY_PORT));
+    print(('port: ' + str(PROXY_PORT)));
  
     LOG_FILENAME = '/tmp/logging' +str(PROXY_PORT) + '.out'
     #logging.basicConfig(filename=LOG_FILENAME,level=logging.INFO)
     logging.basicConfig(level=logging.INFO)
     logger = logging.getLogger("freeciv-proxy");
 
-    CivRouter = TornadioRouter(CivConnection,
-                               dict(enabled_protocols = ['websocket']));
+    application = web.Application([
+        (r'/civsocket', WSHandler),
+        (r"/", IndexHandler),
+        (r"/status", StatusHandler),
+    ])
 
-    application = web.Application( 
-        CivRouter.apply_routes([(r"/", IndexHandler),
-                                (r"/status", StatusHandler, dict(router=CivRouter))]),
-        socket_io_port = PROXY_PORT
-    )
+    http_server = httpserver.HTTPServer(application)
+    http_server.listen(PROXY_PORT)
+    ioloop.IOLoop.instance().start()
 
-    # Create and start tornadio server
-    SocketServer(application);
   except KeyboardInterrupt:
     print('Exiting...');
 

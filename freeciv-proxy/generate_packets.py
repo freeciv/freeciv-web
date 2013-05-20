@@ -50,7 +50,7 @@ def verbose(s):
         
 def prefix(prefix,str):
     lines=str.split("\n")
-    lines=map(lambda x,prefix=prefix: prefix+x,lines)
+    lines=list(map(lambda x,prefix=prefix: prefix+x,lines))
     return "\n".join(lines)
 
 def write_disclaimer(f):
@@ -167,7 +167,7 @@ def parse_fields(str, types):
     # analyze flags
     flaginfo={}
     arr=list(item.strip() for item in flags.split(","))
-    arr=list(filter(lambda x:len(x)>0,arr))
+    arr=list([x for x in arr if len(x)>0])
     flaginfo["is_key"]=("key" in arr)
     if flaginfo["is_key"]: arr.remove("key")
     flaginfo["diff"]=("diff" in arr)
@@ -555,17 +555,16 @@ class Variant:
         if self.poscaps or self.negcaps:
             def f(cap):
                 return '(has_capability("%s", pc->capability) && has_capability("%s", our_capability))'%(cap,cap)
-            t=(map(lambda x,f=f: f(x),self.poscaps)+
-               map(lambda x,f=f: '!'+f(x),self.negcaps))
+            t=(list(map(lambda x,f=f: f(x),self.poscaps))+
+               list(map(lambda x,f=f: '!'+f(x),self.negcaps)))
             self.condition=" && ".join(t)
         else:
             self.condition="TRUE"
-        self.key_fields=list(filter(lambda x:x.is_key,self.fields))
-        self.other_fields=list(filter(lambda x:not x.is_key,self.fields))
+        self.key_fields=list([x for x in self.fields if x.is_key])
+        self.other_fields=list([x for x in self.fields if not x.is_key])
         self.bits=len(self.other_fields)
         self.keys_format=", ".join(["%d"]*len(self.key_fields))
-        self.keys_arg=", ".join(map(lambda x:"real_packet->"+x.name,
-                                    self.key_fields))
+        self.keys_arg=", ".join(["real_packet->"+x.name for x in self.key_fields])
         if self.keys_arg:
             self.keys_arg=",\n    "+self.keys_arg
 
@@ -580,8 +579,7 @@ class Variant:
         self.extra_send_args=""
         self.extra_send_args2=""
         self.extra_send_args3=", ".join(
-            map(lambda x:"%s%s"%(x.get_handle_type(1), x.name),
-                self.fields))
+            ["%s%s"%(x.get_handle_type(1), x.name) for x in self.fields])
         if self.extra_send_args3:
             self.extra_send_args3=", "+self.extra_send_args3
 
@@ -606,7 +604,7 @@ class Variant:
     # Returns a code fragement which contains the declarations of the
     # statistical counters of this packet.
     def get_stats(self):
-        names=map(lambda x:'"'+x.name+'"',self.other_fields)
+        names=['"'+x.name+'"' for x in self.other_fields]
         names=", ".join(names)
 
         return '''static int stats_%(name)s_sent;
@@ -665,7 +663,7 @@ static char *stats_%(name)s_names[] = {%(names)s};
 
 '''%self.__dict__
 
-            keys=list(map(lambda x:"key->"+x.name,self.key_fields))
+            keys=list(["key->"+x.name for x in self.key_fields])
             if len(keys)==1:
                 a=keys[0]
             elif len(keys)==2:
@@ -775,8 +773,8 @@ static char *stats_%(name)s_names[] = {%(names)s};
         else:
             post=""
 
-        for i in xrange(2):
-            for k,v in vars().items():
+        for i in range(2):
+            for k,v in list(vars().items()):
                 if type(v)==type(""):
                     temp=temp.replace("<%s>"%k,v)
         return temp%self.get_dict(vars())
@@ -800,7 +798,7 @@ static char *stats_%(name)s_names[] = {%(names)s};
 
 '''
         body=""
-        for i in xrange(len(self.other_fields)):
+        for i in range(len(self.other_fields)):
             field=self.other_fields[i]
             body=body+field.get_cmp_wrapper(i)
         if self.gen_freelog:
@@ -827,7 +825,7 @@ static char *stats_%(name)s_names[] = {%(names)s};
             body=body+field.get_put()+"\n"
         body=body+"\n"
 
-        for i in xrange(len(self.other_fields)):
+        for i in range(len(self.other_fields)):
             field=self.other_fields[i]
             body=body+field.get_put_wrapper(self,i)
         body=body+'''
@@ -895,16 +893,16 @@ static char *stats_%(name)s_names[] = {%(names)s};
         else:
             post=""
 
-        for i in xrange(2):
-            for k,v in vars().items():
+        for i in range(2):
+            for k,v in list(vars().items()):
                 if type(v)==type(""):
                     temp=temp.replace("<%s>"%k,v)
         return temp%self.get_dict(vars())
 
     # Helper for get_receive()
     def get_delta_receive_body(self):
-        key1=map(lambda x:"    %s %s = real_packet->%s;"%(x.struct_type,x.name,x.name),self.key_fields)
-        key2=map(lambda x:"    real_packet->%s = %s;"%(x.name,x.name),self.key_fields)
+        key1=["    %s %s = real_packet->%s;"%(x.struct_type,x.name,x.name) for x in self.key_fields]
+        key2=["    real_packet->%s = %s;"%(x.name,x.name) for x in self.key_fields]
         key1="\n".join(key1)
         key2="\n".join(key2)
         if key1: key1=key1+"\n\n"
@@ -926,7 +924,7 @@ static char *stats_%(name)s_names[] = {%(names)s};
   }
 
 '''%self.get_dict(vars())
-        for i in xrange(len(self.other_fields)):
+        for i in range(len(self.other_fields)):
             field=self.other_fields[i]
             body=body+field.get_get_wrapper(self,i)
 
@@ -1038,12 +1036,11 @@ class Packet:
         self.fields=[]
         for i in lines:
             self.fields=self.fields+parse_fields(i,types)
-        self.key_fields=list(filter(lambda x:x.is_key,self.fields))
-        self.other_fields=list(filter(lambda x:not x.is_key,self.fields))
+        self.key_fields=list([x for x in self.fields if x.is_key])
+        self.other_fields=list([x for x in self.fields if not x.is_key])
         self.bits=len(self.other_fields)
         self.keys_format=", ".join(["%d"]*len(self.key_fields))
-        self.keys_arg=", ".join(map(lambda x:"real_packet->"+x.name,
-                                    self.key_fields))
+        self.keys_arg=", ".join(["real_packet->"+x.name for x in self.key_fields])
         if self.keys_arg:
             self.keys_arg=",\n    "+self.keys_arg
 
@@ -1061,8 +1058,7 @@ class Packet:
         self.extra_send_args=""
         self.extra_send_args2=""
         self.extra_send_args3=", ".join(
-            map(lambda x:"%s%s"%(x.get_handle_type(1), x.name),
-                self.fields))
+            ["%s%s"%(x.get_handle_type(1), x.name) for x in self.fields])
         if self.extra_send_args3:
             self.extra_send_args3=", "+self.extra_send_args3
 
@@ -1087,10 +1083,10 @@ class Packet:
             if f.add_cap:  all_caps[f.add_cap]=1
             if f.remove_cap:  all_caps[f.remove_cap]=1
                         
-        all_caps=all_caps.keys()
+        all_caps=list(all_caps.keys())
         choices=get_choices(all_caps)
         self.variants=[]
-        for i in xrange(len(choices)):
+        for i in range(len(choices)):
             poscaps=choices[i]
             negcaps=without(all_caps,poscaps)
             fields=[]
@@ -1291,7 +1287,7 @@ class Packet:
     # dsend function.
     def get_dsend(self):
         if not self.want_dsend: return ""
-        fill="\n".join(map(lambda x:x.get_fill(),self.fields))
+        fill="\n".join([x.get_fill() for x in self.fields])
         return '''%(dsend_prototype)s
 {
   struct %(name)s packet, *real_packet = &packet;
@@ -1307,7 +1303,7 @@ class Packet:
     # dlsend function.
     def get_dlsend(self):
         if not (self.want_lsend and self.want_dsend): return ""
-        fill="\n".join(map(lambda x:x.get_fill(),self.fields))
+        fill="\n".join([x.get_fill() for x in self.fields])
         return '''%(dlsend_prototype)s
 {
   struct %(name)s packet, *real_packet = &packet;
@@ -1424,7 +1420,7 @@ def get_enum_packet(packets):
     mapping={}
     for p in packets:
         if p.type_number in mapping :
-            print(p.name,mapping[p.type_number].name)
+            print((p.name,mapping[p.type_number].name))
             assert 0
         mapping[p.type_number]=p
     sorted=list(mapping.keys())
@@ -1457,7 +1453,7 @@ def strip_c_comment(s):
   # doesn't work with python version 2.2 and 2.3.
   # Do it by hand then.
   result=""
-  for i in filter(lambda x:x,s.split("/*")):
+  for i in [x for x in s.split("/*") if x]:
       l=i.split("*/",1)
       assert len(l)==2,repr(i)
       result=result+l[1]
@@ -1483,9 +1479,9 @@ def gen_main():
       exit(-1);
     content=strip_c_comment(content)
     lines=content.split("\n")
-    lines=map(lambda x: re.sub("#.*$","",x),lines)
-    lines=map(lambda x: re.sub("//.*$","",x),lines)
-    lines=filter(lambda x:not re.search("^\s*$",x),lines)
+    lines=[re.sub("#.*$","",x) for x in lines]
+    lines=[re.sub("//.*$","",x) for x in lines]
+    lines=[x for x in lines if not re.search("^\s*$",x)]
     lines2=[]
     types=[]
     for i in lines:

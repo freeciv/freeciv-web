@@ -53,7 +53,9 @@ System Requirements
 
 - Java 1.6.0 SDK - http://java.sun.com/javase/downloads/index.jsp
 
-- Python 2.7 - http://www.python.org/
+- Python 3.3 - http://www.python.org/
+  (freeciv-proxy uses Python 3.3, freeciv-img-extract uses Python 2.7
+   due to PIL depenedency)
 
 - Python Imaging Library (PIL) - http://www.pythonware.com/products/pil/
   (required for freeciv-img-extract)
@@ -78,8 +80,6 @@ System Requirements
 - nginx 1.4.1 - http://nginx.org/
 
 - pngcrush, required for freeciv-img-extract.  http://pmt.sourceforge.net/pngcrush/
-
-- TornadIO2 - https://github.com/MrJoes/tornadio2
 
 - Tornado 3.0.1 - http://www.tornadoweb.org/
 

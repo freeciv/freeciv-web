@@ -67,7 +67,7 @@ public class CivclientLauncher extends HttpServlet {
 			  /* If user requested a new game, then get host and port for an available
 			   * server from the metaserver DB, and use that one. */
 
-			  String serverFetchSql = "select host, port from servers where state = 'Pregame' and message LIKE '%Singleplayer%' order by rand() limit 1";
+			  String serverFetchSql = "select host, port from servers where state = 'Pregame' and type LIKE '%Singleplayer%' order by rand() limit 1";
 
 			  PreparedStatement stmt = conn.prepareStatement(serverFetchSql);
 			  ResultSet rs = stmt.executeQuery();

@@ -346,17 +346,13 @@ if ( isset($port) ) {
 
     <!-- Le styles -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <style type="text/css">
-      body {
-        padding-top: 60px;
-        padding-bottom: 40px;
-      }
-    </style>
     <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="/meta/css/metaserver.css" rel="stylesheet">
 <link rel="shortcut icon" href="/images/freeciv-shortcut-icon.png" />
-<link type="text/css" href="/css/jquery-ui.custom.min.css" rel="stylesheet" />
+<link type="text/css" href="/meta/css/jquery-ui.custom.min.css" rel="stylesheet" />
 <script type="text/javascript" src="/javascript-compressed/jquery.min.js"></script>
 <script type="text/javascript" src="/javascript/jquery-ui.custom.min.js"></script>
+<script type="text/javascript" src="/meta/js/meta.js"></script>
 
 
 <script>
@@ -511,6 +507,7 @@ if ( isset($port) ) {
 <ul>
 <li><a id="singleplr" href="#tabs-1">Single-player Games</a></li>
 <li><a id="multiplr" href="#tabs-2">Multi-player Games</a></li>
+<li><a id="freecivmeta" href="#tabs-3">Desktop Games</a></li>
 </ul>
 <div id="tabs-1">
 <h2>Freeciv-web Single-player games</h2>
@@ -519,7 +516,7 @@ if ( isset($port) ) {
       $res = fcdb_exec($stmt);
       $nr = fcdb_num_rows($res);
       if ( $nr > 0 ) {
-        print "<br /><table>\n";
+        print "<br /><table class='metatable'>\n";
         print "<tr class='meta_header'><th>Game Action:</th>";
         print "<th>State</th><th>Players</th>";
         print "<th style='width:45%;'>Message</th>";
@@ -569,7 +566,7 @@ if ( isset($port) ) {
       $res = fcdb_exec($stmt);
       $nr = fcdb_num_rows($res);
       if ( $nr > 0 ) {
-	print "<table>\n";
+	print "<table class='metatable'>\n";
         print "<tr class='meta_header'><th>Game Action:</th>";
         print "<th>State</th><th>Players</th>";
         print "<th style='width:45%;'>Message</th>";
@@ -623,15 +620,27 @@ if ( isset($port) ) {
 
 
         }
-        print "</table> </div> </div>";
+        print "</table> </div> ";
       } else {
         print "<h2>No servers currently listed</h2>";
       }
 
 ?>
 
+
+<div id="tabs-3">
+  <h2>Desktop version of Freeciv - meta.freeciv.org </h2>
+<iframe src="http://meta.freeciv.org" width="100%" height="1500" frameborder="0"></iframe>
+</div>
+
 </div>
 </div>
+
+
+
+</div>
+
+
 
 <?
     }
@@ -652,27 +661,6 @@ if ( isset($port) ) {
       </footer>
 
     </div> <!-- /container -->
-
-<script>
-	$( ".button").button();
-	$( ".button").css("font-size", "13px");
-	$(".button").css("margin", "7px");
-	<?php if (isset($_GET['tab'])) { ?>
-		$( "#tabs" ).tabs({ active: 1 });
-	<?php } else { ?>
-		$( "#tabs" ).tabs();
-	<?php } ?>
-
-        if ($(window).width() <= 1024) {
-          // for small screens
-          $(".row").width("100%");
-          $(".span10").width("100%");
-          $(".span10").css("padding", "0px");
-          $("#singleplr").html("Single-player");
-          $("#multiplr").html("Multi-player");
-        }
-
-</script>
 
   </body>
 </html>

@@ -17,9 +17,9 @@
     </style>
     <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
 <link rel="shortcut icon" href="images/freeciv-shortcut-icon.png" />
-<link type="text/css" href="/css/jquery-ui-1.10.2.custom.min.css" rel="stylesheet" />
-<script type="text/javascript" src="/javascript-compressed/jquery-2.0.0.min.js"></script>
-<script type="text/javascript" src="/javascript/jquery-ui-1.10.2.custom.min.js"></script>
+<link type="text/css" href="/css/jquery-ui.custom.min.css" rel="stylesheet" />
+<script type="text/javascript" src="/javascript-compressed/jquery.min.js"></script>
+<script type="text/javascript" src="/javascript/jquery-ui.custom.min.js"></script>
 
 <script type="text/javascript" src="/javascript/json2.js"></script>
 <script type="text/javascript" src="/javascript/jstorage.js"></script>

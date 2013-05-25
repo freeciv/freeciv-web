@@ -96,7 +96,7 @@ def increment_tileset_image():
   global tileset_inc;
 
   draw = ImageDraw.Draw(tileset)
-  draw.text((130, 0), "Freeciv.net -   GPL Licensed  - Copyright 2007-2011  Andreas Rosdal", fill="rgb(0,0,0)")
+  draw.text((130, 0), "Freeciv-web -   GPL Licensed  - Copyright 2007-2013  Andreas Rosdal", fill="rgb(0,0,0)")
 
   tileset.save("pre-freeciv-web-tileset-" + str(tileset_inc) + ".png");
   tileset_inc += 1;
@@ -135,7 +135,6 @@ for file in files:
       if (curr_y + h >= tileset_height):
         increment_tileset_image();
       tileset.paste(im, (curr_x, curr_y));
-      im.save("tiles/" + rsprite[0] + ".png");
       coords[rsprite[0]] = (curr_x, curr_y, w, h, tileset_inc);
       curr_x += w;
       if (h > max_row_height): max_row_height = h;
@@ -222,7 +221,6 @@ for file in files:
             tileset.paste(result_cell, (curr_x, curr_y), mask);
             store_img = Image.new('RGBA', (w, h), (0, 0, 0, 0));
             store_img.paste(result_cell, (0, 0), mask);
-            store_img.save("tiles/" + tag + "." + str(dir) + ".png");
             coords[tag + "." + str(dir)] = (curr_x, curr_y, w, h, tileset_inc);
             curr_x += w;
             if (h > max_row_height): max_row_height = h;
@@ -246,7 +244,6 @@ for file in files:
             increment_tileset_image();
 
           tileset.paste(result_tile, (curr_x, curr_y));
-          result_tile.save("tiles/" + tag + ".png");
 
           coords[tag] = (curr_x, curr_y, w, h, tileset_inc);
           curr_x += w;
@@ -260,7 +257,6 @@ for file in files:
           if (tag2 != None and len(tag2) > 0): 
             coords[tag2] = (curr_x, curr_y, w, h, tileset_inc);
 	    print("saving tag: " + tag2);
-            result_tile.save("tiles/" + tag2 + ".png");
  
     if "grid_coasts" in config.sections():
       dx = int(config.get("grid_coasts", "dx"));
@@ -311,7 +307,6 @@ for file in files:
           increment_tileset_image();
 
         tileset.paste(result_tile, (curr_x, curr_y));
-        result_tile.save("tiles/" + tag + ".png");
 
         coords[tag] = (curr_x, curr_y, w, h, tileset_inc);
         curr_x += w;
@@ -324,7 +319,6 @@ for file in files:
         #if (tag2 != None): result_tile.save(tag2 + ".png"); 
         if (tag2 != None): 
           coords[tag2] = (curr_x, curr_y, w, h, tileset_inc);
-          result_tile.save("tiles/" + tag + ".png");
 
 
 # handle dithered tiles.
@@ -350,7 +344,6 @@ for src_key in dither_map.keys():
         if (curr_y + h >= tileset_height):
           increment_tileset_image();
         tileset.paste(result_cell, (curr_x, curr_y));
-        result_cell.save("tiles/" + tag + ".png");
 
         coords[tag] = (curr_x, curr_y, w, h, tileset_inc);
 
@@ -384,9 +377,5 @@ f = open('freeciv-web-tileset.js', 'w')
 
 f.write("var tileset = " + json.dumps(coords, separators=(',',':')));
 
-
-f_sm = open('freeciv-web-tileset-small-preload.html', 'w')
-for sp_key in coords:
-  f_sm.write("<img src='/tiles/" + sp_key + ".png' width='0' height='0'>");
 
 print("done.");

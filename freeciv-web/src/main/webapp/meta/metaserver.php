@@ -386,10 +386,10 @@ if ( isset($port) ) {
             <ul class="nav">
               <li><a href="/">Home</a></li>
               <li><a href="/wireframe.jsp?do=menu">Play Online</a></li>
-              <li><a href="http://www.freeciv.org/wiki/">Freeciv Wiki</a></li>
-              <li class="active"><a href="/meta/metaserver.php">Live Games</a></li>
-              <li><a href="http://forum.freeciv.org">Freeciv Forum</a></li>
-              <li><a href="http://github.com/cazfi/freeciv-web">Code on Github</a></li>
+              <li><a href="http://www.freeciv.org/wiki/">Wiki</a></li>
+              <li class="active"><a href="/meta/metaserver.php">Current Games</a></li>
+              <li><a href="http://forum.freeciv.org">Forum</a></li>
+              <li><a href="http://github.com/cazfi/freeciv-web">Development</a></li>
               <li><a href="http://freeciv.wikia.com/wiki/Donations">Donate!</a></li>
 
             </ul>
@@ -401,7 +401,7 @@ if ( isset($port) ) {
 <div id="container">
 
  <div class="row" >
- <div class="span10" style="padding: 50px; width: 90%;">
+ <div class="span10 metaspan">
 
 
 <div>
@@ -461,7 +461,7 @@ if ( isset($port) ) {
         $res = fcdb_exec($stmt);
         $nr = fcdb_num_rows($res);
         if ( $nr > 0 ) {
-          print "<p><div><table style=\"width: 60%;\">\n";
+          print "<p><div><table class='metainfotable'>\n";
           print "<tr class='meta_header'><th class=\"left\">Flag</th><th>Leader</th><th>Nation</th>";
           print "<th>User</th><th>Type</th></tr>\n";
           for ( $inx = 0; $inx < $nr; $inx++ ) {

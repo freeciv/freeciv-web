@@ -2,3 +2,21 @@
 .metatable {
   width: 100%;
 }
+
+.metaspan {
+  padding: 50px;
+  width: 90%;
+}
+
+.metainfotable {
+  width:  60%;
+}
+
+.meta_header th {
+  text-align: left;
+}
+
+table, th, td
+{
+  border: 1px solid white;
+}

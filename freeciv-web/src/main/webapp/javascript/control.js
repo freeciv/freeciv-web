@@ -299,8 +299,7 @@ function update_unit_focus()
   for (var i = 0; i < funits.length; i++) {
     var punit = funits[i]; 
 
-    if (unit_has_goto(punit)
-	  && punit['movesleft'] > 0 
+    if (punit['movesleft'] > 0
 	  && punit['done_moving'] == false
 	  && punit['ai'] == false) {
       return;
@@ -828,6 +827,10 @@ function deactivate_goto()
   current_goto_path = [];
   goto_preview_active = true;
 
+  // update focus to next unit after 600ms.
+  setTimeout("update_unit_focus();", 600);
+
+
 }
 
 /**************************************************************************
@@ -1078,8 +1081,6 @@ function key_unit_move(dir)
   }
   
   deactivate_goto(); 
-  // update focus to next unit after 500ms.
-  setTimeout("update_unit_focus();", 500);
   
 }
 

@@ -279,6 +279,15 @@ diff -Nurd -X.diff_ignore freeciv/data/amplio2/tiles.spec freeciv/data/amplio2/t
  
  [file]
  gfx = "amplio2/tiles"
+@@ -25,7 +24,7 @@
+ ; Unit activity letters:  (note unit icons have just "u.")
+ 
+   0, 18, "unit.auto_attack",
+-         "unit.auto_settler"
++  0, 18, "unit.auto_settler"
+   0, 19, "unit.stack"
+   1, 17, "unit.loaded"
+   1, 18, "unit.connect"
 @@ -150,6 +149,4 @@
    1,  2, "explode.nuke_12"
    2,  0, "explode.nuke_20"

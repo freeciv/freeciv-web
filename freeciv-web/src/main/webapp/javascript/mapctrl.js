@@ -37,7 +37,6 @@ function mapview_mouse_click(e)
     action_button_pressed(mouse_x, mouse_y, SELECT_POPUP);
   } 
 
-  deactivate_goto();
 }
 
 /****************************************************************************

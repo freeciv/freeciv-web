@@ -669,12 +669,6 @@ function get_unit_activity_sprite(punit)
   if (client.conn.playing == null || punit['owner'] != client.conn.playing.playerno) {
     return null;
   }
-  
-  if (unit_has_goto(punit)) {
-      return {"key" : "unit.goto",
-          "offset_x" : unit_activity_offset_x, 
-          "offset_y" : - unit_activity_offset_y}
-  }  
 
   switch (activity) {
     case ACTIVITY_POLLUTION:
@@ -768,6 +762,17 @@ function get_unit_activity_sprite(punit)
     break;
   }
 
+  if (unit_has_goto(punit)) {
+      return {"key" : "unit.goto",
+          "offset_x" : unit_activity_offset_x, 
+          "offset_y" : - unit_activity_offset_y}
+  }  
+
+  if (punit['ai'] == true) {
+      return {"key" : "unit.auto_settler",
+          "offset_x" : unit_activity_offset_x, 
+          "offset_y" : - unit_activity_offset_y}
+  }
 
   return null;
 }

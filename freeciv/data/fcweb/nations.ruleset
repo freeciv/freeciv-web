@@ -8,7 +8,7 @@
 
 [datafile]
 description="Freeciv-web nations data"
-options="+Freeciv-ruleset-Devel-2013.Apr.23"
+options="+Freeciv-ruleset-Devel-2013.May.14"
 
 [compatibility]
 ; Initial government for all the nations that do not

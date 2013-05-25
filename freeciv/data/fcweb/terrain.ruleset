@@ -11,7 +11,7 @@
 
 [datafile]
 description="Freeciv-web terrain data"
-options="+Freeciv-ruleset-Devel-2013.Apr.23"
+options="+Freeciv-ruleset-Devel-2013.May.14"
 
 [control]
 ; Names for custom terrain flags.

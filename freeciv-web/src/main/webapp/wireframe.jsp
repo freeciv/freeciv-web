@@ -17,9 +17,9 @@
     </style>
     <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
 <link rel="shortcut icon" href="images/freeciv-shortcut-icon.png" />
-<link type="text/css" href="/css/jquery-ui-1.10.2.custom.min.css" rel="stylesheet" />
-<script type="text/javascript" src="/javascript-compressed/jquery-2.0.0.min.js"></script>
-<script type="text/javascript" src="/javascript/jquery-ui-1.10.2.custom.min.js"></script>
+<link type="text/css" href="/css/jquery-ui.custom.min.css" rel="stylesheet" />
+<script type="text/javascript" src="/javascript-compressed/jquery.min.js"></script>
+<script type="text/javascript" src="/javascript/jquery-ui.custom.min.js"></script>
 
 <script type="text/javascript" src="/javascript/json2.js"></script>
 <script type="text/javascript" src="/javascript/jstorage.js"></script>
@@ -54,10 +54,10 @@
             <ul class="nav">
               <li><a href="/">Home</a></li>
               <li class="active"><a href="/wireframe.jsp?do=menu">Play Online</a></li>
-              <li><a href="http://www.freeciv.org/wiki/">Freeciv Wiki</a></li>
-              <li><a href="/meta/metaserver.php">Live Games</a></li>
-              <li><a href="http://forum.freeciv.org">Freeciv Forum</a></li>
-              <li><a href="http://github.com/cazfi/freeciv-web">Code on Github</a></li>
+              <li><a href="http://www.freeciv.org/wiki/">Wiki</a></li>
+              <li><a href="/meta/metaserver.php">Current Games</a></li>
+              <li><a href="http://forum.freeciv.org">Forum</a></li>
+              <li><a href="http://github.com/cazfi/freeciv-web">Development</a></li>
               <li><a href="http://freeciv.wikia.com/wiki/Donations">Donate!</a></li>
 
             </ul>

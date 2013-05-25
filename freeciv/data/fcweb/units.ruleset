@@ -16,7 +16,7 @@
 
 [datafile]
 description="Freeciv-web unit data"
-options="+Freeciv-ruleset-Devel-2013.Apr.23"
+options="+Freeciv-ruleset-Devel-2013.May.14"
 
 [control]
 ; Names for custom unit type flags.

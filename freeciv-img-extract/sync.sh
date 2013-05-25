@@ -4,6 +4,4 @@ pngcrush pre-freeciv-web-tileset-1.png freeciv-web-tileset-1.png &&
 mkdir -p ../freeciv-web/src/main/webapp/tileset &&
 cp freeciv-web-tileset-0.png ../freeciv-web/src/main/webapp/tileset/ &&
 cp freeciv-web-tileset-1.png ../freeciv-web/src/main/webapp/tileset/ &&
-cp freeciv-web-tileset.js ../freeciv-web/src/main/webapp/javascript/ &&
-mkdir -p ../freeciv-web/src/main/webapp/tiles &&
-cp tiles/*.png ../freeciv-web/src/main/webapp/tiles/
+cp freeciv-web-tileset.js ../freeciv-web/src/main/webapp/javascript/

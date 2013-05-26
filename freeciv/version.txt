@@ -1,4 +1,4 @@
-# Patches are against freeciv trunk revision 22889.
+# Patches are against freeciv trunk revision 22904.
 
 ORIGCAPSTR="+Freeciv.Devel-2.6-2013.May.02-2"
 WEBCAPSTR="+Freeciv.Web.Devel-2.6-2013.May.25"

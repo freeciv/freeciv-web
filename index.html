@@ -1,44 +1,35 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Freeciv-web </title>
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="javascripts/respond.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <!--[if lt IE 8]>
-    <link rel="stylesheet" href="stylesheets/ie.css">
-    <![endif]-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <title>Freeciv-web by freeciv</title>
   </head>
+
   <body>
-      <div id="header">
-        <nav>
-          <li class="fork"><a href="https://github.com/andreasrosdal/freeciv-web">View On GitHub</a></li>
-          <li class="downloads"><a href="https://github.com/andreasrosdal/freeciv-web/zipball/master">ZIP</a></li>
-          <li class="downloads"><a href="https://github.com/andreasrosdal/freeciv-web/tarball/master">TAR</a></li>
-          <li class="title">DOWNLOADS</li>
-        </nav>
-      </div><!-- end header -->
 
-    <div class="wrapper">
+    <header>
+      <div class="container">
+        <h1>Freeciv-web</h1>
+        <h2>Freeciv-web is an Open Source strategy game implemented in HTML5, which can be played online against other players, or in single player mode against AI opponents.</h2>
 
-      <section>
-        <div id="title">
-          <h1>Freeciv-web</h1>
-          <p>Freeciv-web is an Open Source strategy game implemented in HTML5, which can be played online against other players, or in single player mode against AI opponents.</p>
-          <hr>
-          <span class="credits left">Project maintained by <a href="http://www.freeciv.org">the Freeciv project</a></span>
-          <span class="credits right">Hosted on GitHub Pages &mdash;</span>
-        </div>
+        <section id="downloads">
+          <a href="https://github.com/freeciv/freeciv-web/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/freeciv/freeciv-web/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/freeciv/freeciv-web" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
 
-        <h2>THE FREECIV-WEB PROJECT</h2>
+    <div class="container">
+      <section id="main_content">
+        <h2>
+<a name="the-freeciv-web-project" class="anchor" href="#the-freeciv-web-project"><span class="octicon octicon-link"></span></a>THE FREECIV-WEB PROJECT</h2>
 
 <p>Freeciv-web is an open-source turn-based strategy game. It’s built entirely in HTML5 
 and features in-depth game-play and a wide variety of game modes and options. Your goal is
@@ -58,7 +49,8 @@ under the GNU Affero General Public License. See LICENSE.txt for details.</p>
 <p>Contact: The Freeciv Project - <a href="mailto:freeciv-dev@gna.org">freeciv-dev@gna.org</a>
 <a href="https://mail.gna.org/listinfo/freeciv-dev">https://mail.gna.org/listinfo/freeciv-dev</a></p>
 
-<h2>Overview</h2>
+<h2>
+<a name="overview" class="anchor" href="#overview"><span class="octicon octicon-link"></span></a>Overview</h2>
 
 <p>The Freeciv Web client consists of these components:</p>
 
@@ -77,7 +69,8 @@ and Javascript. Run this to sync with the upstream Freeciv SVN
 repository.</p></li>
 <li><p>publite2 - a simple way to launch multiple civservers. </p></li>
 <li><p>freeciv-music - contains music which can be played during the game.</p></li>
-</ul><h2>System Requirements</h2>
+</ul><h2>
+<a name="system-requirements" class="anchor" href="#system-requirements"><span class="octicon octicon-link"></span></a>System Requirements</h2>
 
 <ul>
 <li><p>Resin 4.0.36 - <a href="http://www.caucho.com/">http://www.caucho.com/</a></p></li>
@@ -100,7 +93,8 @@ repository.</p></li>
 <li><p>Tornado 3.0.1 - <a href="http://www.tornadoweb.org/">http://www.tornadoweb.org/</a></p></li>
 <li><p>GLib 2.16.0 or newer - <a href="http://ftp.gnome.org/pub/GNOME/sources/glib/2.16/">http://ftp.gnome.org/pub/GNOME/sources/glib/2.16/</a></p></li>
 <li><p>Jansson 2.1.1 - <a href="http://www.digip.org/jansson/">http://www.digip.org/jansson/</a></p></li>
-</ul><h2>Compiling and running the Freeciv Web client</h2>
+</ul><h2>
+<a name="compiling-and-running-the-freeciv-web-client" class="anchor" href="#compiling-and-running-the-freeciv-web-client"><span class="octicon octicon-link"></span></a>Compiling and running the Freeciv Web client</h2>
 
 <p>To compile and run Freeciv-web on Ubuntu, 
 1. Checkout Freeciv-web from github to ~/freeciv-build
@@ -162,20 +156,21 @@ scripts/status-freeciv-web.sh     # checks status of all freeciv-web processes</
 Set ulimit -n 65535 in /etc/profile
 and add some TCP/IP tuning in /etc/sysctrl.conf</p>
 
-<h2>Developers interested in Freeciv-web</h2>
+<h2>
+<a name="developers-interested-in-freeciv-web" class="anchor" href="#developers-interested-in-freeciv-web"><span class="octicon octicon-link"></span></a>Developers interested in Freeciv-web</h2>
 
 <p>If you want to contibute to Freeciv-web, see the TODO file for 
 some tasks you can work on.</p>
 
-<h2>Contributors to Freeciv-web</h2>
+<h2>
+<a name="contributors-to-freeciv-web" class="anchor" href="#contributors-to-freeciv-web"><span class="octicon octicon-link"></span></a>Contributors to Freeciv-web</h2>
 
-<p>Andreas Røsdal<br>
-Marko Lindqvist<br>
+<p>Andreas Røsdal
+Marko Lindqvist
 and the Freeciv.org project!</p>
       </section>
-
     </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+
               <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));

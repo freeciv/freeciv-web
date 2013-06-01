@@ -1,33 +1,43 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <meta charset='utf-8'>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-
     <title>Freeciv-web by freeciv</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
   </head>
-
   <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/freeciv/freeciv-web">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/freeciv/freeciv-web/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/freeciv/freeciv-web/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
 
-    <header>
-      <div class="container">
-        <h1>Freeciv-web</h1>
-        <h2>Freeciv-web is an Open Source strategy game implemented in HTML5, which can be played online against other players, or in single player mode against AI opponents.</h2>
+    <div class="wrapper">
 
-        <section id="downloads">
-          <a href="https://github.com/freeciv/freeciv-web/zipball/master" class="btn">Download as .zip</a>
-          <a href="https://github.com/freeciv/freeciv-web/tarball/master" class="btn">Download as .tar.gz</a>
-          <a href="https://github.com/freeciv/freeciv-web" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
-        </section>
-      </div>
-    </header>
+      <section>
+        <div id="title">
+          <h1>Freeciv-web</h1>
+          <p>Freeciv-web is an Open Source strategy game implemented in HTML5, which can be played online against other players, or in single player mode against AI opponents.</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/freeciv">freeciv</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></span>
+        </div>
 
-    <div class="container">
-      <section id="main_content">
         <h2>
 <a name="the-freeciv-web-project" class="anchor" href="#the-freeciv-web-project"><span class="octicon octicon-link"></span></a>THE FREECIV-WEB PROJECT</h2>
 
@@ -75,7 +85,9 @@ repository.</p></li>
 <ul>
 <li><p>Resin 4.0.36 - <a href="http://www.caucho.com/">http://www.caucho.com/</a></p></li>
 <li><p>Java 1.6.0 SDK - <a href="http://java.sun.com/javase/downloads/index.jsp">http://java.sun.com/javase/downloads/index.jsp</a></p></li>
-<li><p>Python 2.7 - <a href="http://www.python.org/">http://www.python.org/</a></p></li>
+<li><p>Python 3.3 - <a href="http://www.python.org/">http://www.python.org/</a>
+(freeciv-proxy uses Python 3.3, freeciv-img-extract uses Python 2.7
+due to PIL depenedency)</p></li>
 <li><p>Python Imaging Library (PIL) - <a href="http://www.pythonware.com/products/pil/">http://www.pythonware.com/products/pil/</a>
 (required for freeciv-img-extract)</p></li>
 <li><p>Mysql 5.0.x - <a href="http://www.mysql.com/">http://www.mysql.com/</a></p></li>
@@ -89,7 +101,6 @@ repository.</p></li>
 <li><p>OpenSSL - <a href="http://www.openssl.org/">http://www.openssl.org/</a></p></li>
 <li><p>nginx 1.4.1 - <a href="http://nginx.org/">http://nginx.org/</a></p></li>
 <li><p>pngcrush, required for freeciv-img-extract.  <a href="http://pmt.sourceforge.net/pngcrush/">http://pmt.sourceforge.net/pngcrush/</a></p></li>
-<li><p>TornadIO2 - <a href="https://github.com/MrJoes/tornadio2">https://github.com/MrJoes/tornadio2</a></p></li>
 <li><p>Tornado 3.0.1 - <a href="http://www.tornadoweb.org/">http://www.tornadoweb.org/</a></p></li>
 <li><p>GLib 2.16.0 or newer - <a href="http://ftp.gnome.org/pub/GNOME/sources/glib/2.16/">http://ftp.gnome.org/pub/GNOME/sources/glib/2.16/</a></p></li>
 <li><p>Jansson 2.1.1 - <a href="http://www.digip.org/jansson/">http://www.digip.org/jansson/</a></p></li>
@@ -106,21 +117,12 @@ repository.</p></li>
 <li><p>Checkout Freeciv-web from github to ~/freeciv-build</p></li>
 <li><p>Install the system requirements.</p></li>
 <li><p>Create mysql database called 'freeciv_web'
-Import mysql dump into a MySQL database from:  /publite2/mysqldump.sql.bz2</p></li>
+Import mysql tables into a MySQL database from:
+freeciv-web/src/main/webapp/meta/private/metaserver.sql</p></li>
 <li><p>Get checkout from freeciv revision mentioned in freeciv/version.txt as
 freeciv/freeciv:
 cd freeciv
 svn co svn://svn.gna.org/svn/freeciv/trunk -r  freeciv</p></li>
-<li><p>Build and configure freeciv-web. </p></li>
-</ol><ul>
-<li>Run sync.sh in freeciv-img-extract and synx.sh in freeciv-proxy.</li>
-<li>Edit /freeciv-web/src/main/webapp/freecivmetaserve/php_code/local.php.dist,
- rename this file to local.php, and update values for fcdb_username and fcdb_pw
- to your MySQL username and password.</li>
-<li>Edit /freeciv-web/src/main/webapp/WEB-INF/resin-web.xml.dist, rename this
- file to resin-web.xml, and update the values for your MySQL database.</li>
-<li>Run 'build.sh' in the freeciv-web directory</li>
-</ul><ol>
 <li><p>Patch freeciv:
 ./apply_patches.sh</p></li>
 <li>
@@ -132,6 +134,16 @@ make install     (as root user)</p>
 
 <p>copy freeciv-web/freeciv/data/fcweb to /usr/local/share/freeciv </p>
 </li>
+<li><p>Build and configure freeciv-web. </p></li>
+</ol><ul>
+<li>Run setup_links.sh and sync.sh in freeciv-img-extract and sync.sh in freeciv-proxy.</li>
+<li>Edit /freeciv-web/src/main/webapp/freecivmetaserve/php_code/local.php.dist,
+ rename this file to local.php, and update values for fcdb_username and fcdb_pw
+ to your MySQL username and password.</li>
+<li>Edit /freeciv-web/src/main/webapp/WEB-INF/resin-web.xml.dist, rename this
+ file to resin-web.xml, and update the values for your MySQL database.</li>
+<li>Run 'build.sh' in the freeciv-web directory</li>
+</ul><ol>
 <li><p>Start resin with these commands:
 cd ~/freeciv-build/resin/bin
 ./resin.sh start</p></li>
@@ -140,8 +152,7 @@ Run publite2_single.py in the publite2 directory.</p></li>
 <li><p>Run the freeciv-proxy:
 Run run.sh in the freeciv-proxy directory.
 To debug, check the proxy debugging page: 
-http://localhost/civ/status
-http://localhost:8082/civ/status</p></li>
+http://localhost:8002/status</p></li>
 <li><p>Start nginx on port 80 as root.</p></li>
 <li><p>Start the web client in your browser:
 Point your web browser to http://localhost/</p></li>
@@ -169,8 +180,9 @@ some tasks you can work on.</p>
 Marko Lindqvist
 and the Freeciv.org project!</p>
       </section>
-    </div>
 
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
               <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));

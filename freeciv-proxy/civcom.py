@@ -48,7 +48,7 @@ class CivCom(Thread):
   def run(self):
     #setup connection to civserver
     if (logger.isEnabledFor(logging.INFO)):
-      logger.info("Start connection to civserver.")
+      logger.info("Start connection to civserver for user: " + self.username)
     self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     self.socket.settimeout(1); 
     self.socket.setblocking(1);

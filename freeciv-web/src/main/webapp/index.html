@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Freeciv-web </title>
+    <title>Freeciv-web - strategy game playable online with HTML5</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Freeciv is a Free and Open Source empire-building strategy game made with HTML5 which you can play in your browser, tablet or mobile device!">
     <meta name="author" content="The Freeciv project">
@@ -16,6 +16,8 @@
         padding-bottom: 40px;
       }
     </style>
+    <script type="text/javascript" src="/javascript-compressed/jquery.min.js"></script>
+
     <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
     <link rel="shortcut icon" href="images/freeciv-shortcut-icon.png" />
     <link rel="apple-touch-icon" href="images/freeciv-splash2.png" />
@@ -29,7 +31,19 @@
   ga('create', 'UA-40584174-1', 'freeciv.org');
   ga('send', 'pageview');
       
-</script>
+  $(document).ready(function() {
+    if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1) {
+      $("#chromews").show();
+      $("#mozws").hide();
+    } else if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
+      $("#mozws").show();
+      $("#chromews").hide();
+    } else {
+      $("#mozws").hide();
+      $("#chromews").hide();
+    }
+  });
+</script> 
 
 
   </head>
@@ -84,8 +98,9 @@
 	<br><br>
 
 
-              <a href="https://chrome.google.com/webstore/detail/freeciv/ldhdjhmbapbeafmhdoobnlldhfopfcgh"><img src="/images/chrome-ws.png"></a>
-
+		<div id="chromews"><a href="https://chrome.google.com/webstore/detail/freeciv/ldhdjhmbapbeafmhdoobnlldhfopfcgh" ><img src="/images/chrome-ws.png"></a></div>
+		<div id="mozws"><a href="https://marketplace.firefox.com/app/freeciv"><img src="/images/firefox-marketplace.png"></a></div>
+<br><br>
 	<br><br>
 
 <!-- AddThis Button BEGIN -->
@@ -133,7 +148,6 @@
 
     </div> <!-- /container -->
 
-  
   </body>
 </html>
 

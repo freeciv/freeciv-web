@@ -43,8 +43,6 @@ The Freeciv Web client consists of these components:
 
 * publite2 - a simple way to launch multiple civservers. 
 
-* freeciv-music - contains music which can be played during the game.
-
 
 System Requirements
 -------------------
@@ -64,10 +62,6 @@ System Requirements
 
 - Maven 2 - http://maven.apache.org/download.html
 
-- Probably some Linux distribution.
-
-- Firefox
-
 - Firebug for debugging - http://getfirebug.com/
 
 - Closure Compiler - http://code.google.com/intl/nb/closure/compiler/
@@ -77,11 +71,11 @@ System Requirements
 
 - OpenSSL - http://www.openssl.org/
 
-- nginx 1.4.1 - http://nginx.org/
+- nginx 1.5.1 - http://nginx.org/
 
 - pngcrush, required for freeciv-img-extract.  http://pmt.sourceforge.net/pngcrush/
 
-- Tornado 3.0.1 - http://www.tornadoweb.org/
+- Tornado 3.0.2 - http://www.tornadoweb.org/
 
 - GLib 2.16.0 or newer - http://ftp.gnome.org/pub/GNOME/sources/glib/2.16/
 

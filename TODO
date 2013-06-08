@@ -1,6 +1,9 @@
 TODO:
 -----
 
+- Refactor packet handling in freeciv-proxy, so that the packet 
+  length is used to recv() the correct length from the socket.
+  Also make freeciv-proxy more robust and fault tolerant.
 - Make goto lines wrap in X direction of the map.
 - Show city revolt graphics
 - Show attack animation.

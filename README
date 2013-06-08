@@ -140,7 +140,7 @@ On other Linux distributions, follow this installation procedure:
 9. Run the freeciv-proxy:
   Run run.sh in the freeciv-proxy directory.
  To debug, check the proxy debugging page: 
-http://localhost:8008/status
+http://localhost:8002/status
 
 10. Start nginx on port 80 as root.
 

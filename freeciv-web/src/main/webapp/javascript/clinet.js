@@ -47,12 +47,7 @@ function network_init()
 
   ws.onmessage = function (event) {
      if (typeof client_handle_packet !== 'undefined') {
-       try {
-         client_handle_packet(jQuery.parseJSON(event.data));
-       } catch (err) {
-         console.log(err);
-         console.log("websocket packet: " + event.data);
-      }
+       client_handle_packet(jQuery.parseJSON(event.data));
      } else {
        alert("Error, freeciv-web not compiled correctly. Please "
              + "run sync.sh in freeciv-proxy correctly.");

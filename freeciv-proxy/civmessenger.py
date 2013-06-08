@@ -20,8 +20,8 @@ WS_UPDATE_INTERVAL = 0.011;
 
 
 class CivWsMessenger(Thread):
-  """ This thread listens for messages from all freeciv-web servers
-      and sends the messages to the WebSocket clients. """
+  """ This thread listens for messages from the civserver
+      and sends the message to the WebSocket client. """
 
   def __init__ (self, civcoms):
     Thread.__init__(self)
@@ -35,10 +35,10 @@ class CivWsMessenger(Thread):
           if (civcom.stopped or civcom.civwebserver == None): return;
 
           packet = civcom.get_send_result_string();
-          if (packet != None and civcom.civwebserver != None and len(packet) > 0):
+          if (packet != None and civcom.civwebserver != None):
             civcom.civwebserver.write_message(packet);
         except:
           print("Unexpected error:", sys.exc_info()[0]);
-      if (time): time.sleep(WS_UPDATE_INTERVAL);
+      time.sleep(WS_UPDATE_INTERVAL);
 
 

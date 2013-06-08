@@ -66,47 +66,49 @@ class CivCom(Thread):
     while 1:
       self.net_buf = self.read_from_connection();
     
-      if (self.net_buf == None or self.stopped or self.socket == None):
-        return;
+      while 1:
+        if (self.stopped):
+          return;
               
-      if (len(self.net_buf) == self.packet_len): 
-        # valid packet received
-        self.send_buffer_append(self.net_buf[:-1]);
-        self.net_buf = bytearray(0);
-        self.packet_len = -1;
+        if (self.net_buf != None and len(self.net_buf) == self.packet_len): 
+          # valid packet received
+          self.send_buffer_append(self.net_buf[:-1]);
+          self.net_buf = bytearray(0);
+          self.packet_len = -1;
+
+        else:
+           break;
 
 
   def read_from_connection(self):
-    try:
-      if (self.socket != None and not self.stopped):    
-        if (self.packet_len == -1):
-          header_msg = self.socket.recv(4);
-          if not header_msg: 
-            self.close_connection();
-            return None;
 
-          if (len(header_msg) == 4):
-            header_pck = unpack('>HH', header_msg[:4]);
-            self.packet_len = header_pck[0] - 4;
+    if (self.socket != None and not self.stopped):    
+      if (self.packet_len == -1):
+        header_msg = self.socket.recv(4);
+        if (header_msg == None): 
+          self.close_connection();
+          return None;
 
-        if (self.socket is not None and self.packet_len >= 0 and self.net_buf != None):
-          data = self.socket.recv(self.packet_len - len(self.net_buf));
-          if not data: 
-            self.close_connection();
-            return None;
+        if (len(header_msg) == 4):
+          header_pck = unpack('>HH', header_msg[:4]);
+          self.packet_len = header_pck[0] - 4;
 
-          if (len(data) == 0): 
-            return self.net_buf;
-          else:
-            return self.net_buf + data;
-      else:
-        return None;
+      if (self.socket is not None and self.packet_len > 0 and self.net_buf != None):
+        data = self.socket.recv(self.packet_len - len(self.net_buf));
+        if (data == None): 
+          self.close_connection();
+          return None;
 
-    except socket.error:
-      if (logger.isEnabledFor(logging.ERROR)):
-        logger.error("Server connection closed. Removing civcom thread for " + self.username);
-      return None;
-   
+        # sleep a short while, to avoid excessive CPU use.
+        if (len(data) == 0): 
+          time.sleep(0.005);
+          return self.net_buf;
+        else:
+          return self.net_buf + data;
+    else:
+      # sleep a short while, to avoid excessive CPU use.  
+      time.sleep(0.01);
+      return self.net_buf;
 
   
   def close_connection(self):
@@ -142,7 +144,6 @@ class CivCom(Thread):
       return False;
 
   def send_buffer_append(self, data):
-    if (data == None or len(data) == 0): return;
     if not self.lock.acquire(False):
       if (logger.isEnabledFor(logging.DEBUG)):
         logger.debug("Could not acquire civcom lock");

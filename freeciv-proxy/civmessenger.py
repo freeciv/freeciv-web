@@ -32,7 +32,7 @@ class CivWsMessenger(Thread):
     while 1:
       for civcom in list(self.civcoms.values()):
         try:
-          if (civcom.stopped or civcom.civwebserver == None): continue;
+          if (civcom.stopped or civcom.civwebserver == None): return;
 
           packet = civcom.get_send_result_string();
           if (packet != None and civcom.civwebserver != None and len(packet) > 0):

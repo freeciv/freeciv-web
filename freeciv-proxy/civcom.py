@@ -1,7 +1,7 @@
 # -*- coding: latin-1 -*-
 
 ''' 
- Freeciv - Copyright (C) 2009-2013 - Andreas Røsdal   andrearo@pvv.ntnu.no
+ Freeciv - Copyright (C) 2009 - Andreas Røsdal   andrearo@pvv.ntnu.no
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation; either version 2, or (at your option)
@@ -20,6 +20,7 @@ import logging
 import time
 
 HOST = 'localhost';
+MAX_LEN_PACKET = 48;
 VERSION = "+Freeciv.Web.Devel-2.5-2013.May.02";  # Must be kept in sync with Freeciv server.
 VER_INFO = "-dev";
 logger = logging.getLogger("freeciv-proxy");
@@ -36,8 +37,7 @@ class CivCom(Thread):
     self.lock = RLock();
     self.pingstamp = time.time();
     self.stopped = False;
-    self.net_buf = bytearray(0);
-    self.packet_len = -1;
+
 
     self.daemon = True;
 
@@ -63,52 +63,53 @@ class CivCom(Thread):
     self.send_to_civserver(self.civwebserver.loginpacket);
 
     #receive packets from server
+    net_buf = bytearray(0);
     while 1:
-      self.net_buf = self.read_from_connection();
+      net_buf = self.read_from_connection(net_buf);
     
       while 1:
+          
         if (self.stopped):
           return;
               
-        if (self.net_buf != None and len(self.net_buf) == self.packet_len): 
-          # valid packet received
-          self.send_buffer_append(self.net_buf[:-1]);
-          self.net_buf = bytearray(0);
-          self.packet_len = -1;
+        packet = self.get_packet_from_connection(net_buf);
+        if (packet != None): 
+          net_buf = net_buf[4+len(packet):];
+          result = packet[:-1];
+          if (len(result) > 0):
+            self.send_buffer_append(result);
 
         else:
-           break;
+          break;
 
 
-  def read_from_connection(self):
+  def read_from_connection(self, net_buf):
+    size = MAX_LEN_PACKET;
+    #TODO: les saa mye som trengs...
 
     if (self.socket != None and not self.stopped):    
-      if (self.packet_len == -1):
-        header_msg = self.socket.recv(4);
-        if (header_msg == None): 
-          self.close_connection();
-          return None;
+      data = self.socket.recv(size);
 
-        if (len(header_msg) == 4):
-          header_pck = unpack('>HH', header_msg[:4]);
-          self.packet_len = header_pck[0] - 4;
-
-      if (self.socket is not None and self.packet_len > 0 and self.net_buf != None):
-        data = self.socket.recv(self.packet_len - len(self.net_buf));
-        if (data == None): 
-          self.close_connection();
-          return None;
-
-        # sleep a short while, to avoid excessive CPU use.
-        if (len(data) == 0): 
-          time.sleep(0.005);
-          return self.net_buf;
-        else:
-          return self.net_buf + data;
+      # sleep a short while, to avoid excessive CPU use.
+      if (len(data) == 0): 
+        time.sleep(0.005);
+        return net_buf;
+      else:
+        return net_buf + data;
     else:
       # sleep a short while, to avoid excessive CPU use.  
       time.sleep(0.01);
-      return self.net_buf;
+      return net_buf;
+
+  def get_packet_from_connection(self, net_buf):
+
+    if (len(net_buf) < 4): return None;
+
+    result = unpack('>HH', net_buf[:4]);
+    packet_len = result[0];
+
+    if (len(net_buf) < packet_len): return None;
+    return net_buf[4:packet_len];
 
   
   def close_connection(self):
@@ -121,7 +122,6 @@ class CivCom(Thread):
     if (self.socket != None):
       self.socket.close();
       self.socket = None; 
-      self.stopped = True;
     
 
   def send_packets_to_civserver(self, packet):
@@ -136,7 +136,6 @@ class CivCom(Thread):
       return True;
     except:
       self.send_error_to_client("Proxy unable to communicate with civserver.");
-      self.civwebserver.close(); 
       return False;
     else:
       if (logger.isEnabledFor(logging.ERROR)):
@@ -183,5 +182,5 @@ class CivCom(Thread):
   def send_error_to_client(self, message):
     if (logger.isEnabledFor(logging.ERROR)):
       logger.error(message);
-    self.send_buffer_append(("{\"pid\":25,\"message\":\"" + message + "\"}").encode("utf-8"));
+    self.send_buffer_append("{\"pid\":18,\"message\":\"" + message + "\"}");
      

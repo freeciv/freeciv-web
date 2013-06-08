@@ -21,11 +21,11 @@ from tornado import web, websocket, ioloop, httpserver
 from debugging import *
 import logging
 from civcom import *
-from civmessenger import *
 import json
 
 ROOT = op.normpath(op.dirname(__file__))
-PROXY_PORT = 8008;
+PROXY_PORT = 8002;
+WS_UPDATE_INTERVAL = 0.011;
 
 civcoms = {};
 
@@ -77,8 +77,8 @@ class WSHandler(websocket.WebSocketHandler):
  
         except:
           if (logger.isEnabledFor(logging.ERROR)):
-            logger.error("Service unavailable: freeciv-web down.", sys.exc_info()[0]);
-          self.civcom.send_error_to_client("Error: Freeciv-web Unavailable.");
+            logger.error("Service unavailable: freeciv-web down.");
+          self.write_message("Error: Service Unavailable. Something is wrong here ");
 
 
 
@@ -104,12 +104,34 @@ class WSHandler(websocket.WebSocketHandler):
         civcom.start();
         civcoms[key] = civcom;
 
+        messenger = CivWsMessenger(civcom, ws_connection);
+        messenger.start();
+
         time.sleep(0.4);
         return civcom;
       else:
         usrcivcom = civcoms[key];
         return usrcivcom;
 
+
+class CivWsMessenger(Thread):
+  """ This thread listens for messages from the civserver
+      and sends the message to the WebSocket client. """
+
+  def __init__ (self, civcom, ws_handler):
+    Thread.__init__(self)
+    self.daemon = True;
+    self.civcom = civcom;
+    self.ws_handler = ws_handler;
+
+  def run(self):
+    while 1:
+      if (self.civcom.stopped or self.ws_handler == None): return;
+
+      packet = self.civcom.get_send_result_string();
+      if (packet != None and self.ws_handler != None):
+        self.ws_handler.write_message(packet);
+      time.sleep(WS_UPDATE_INTERVAL);
 
 
 
@@ -131,9 +153,6 @@ if __name__ == "__main__":
         (r"/", IndexHandler),
         (r"/status", StatusHandler),
     ])
-
-    messenger = CivWsMessenger(civcoms);
-    messenger.start();
 
     http_server = httpserver.HTTPServer(application)
     http_server.listen(PROXY_PORT)

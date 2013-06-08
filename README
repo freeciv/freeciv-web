@@ -120,8 +120,7 @@ On other Linux distributions, follow this installation procedure:
 
 6. Build and configure freeciv-web. 
 
-   - Run setup_links.sh and sync.sh in freeciv-img-extract 
-   - Run sync-js.sh in /scripts/.
+   - Run setup_links.sh and sync.sh in freeciv-img-extract and sync.sh in freeciv-proxy.
    - Edit /freeciv-web/src/main/webapp/freecivmetaserve/php_code/local.php.dist,
      rename this file to local.php, and update values for fcdb_username and fcdb_pw
      to your MySQL username and password.

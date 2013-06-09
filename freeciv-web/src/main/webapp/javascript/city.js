@@ -103,7 +103,9 @@ function show_city_dialog(pcity)
   
   
   $("#city_heading").html(unescape(pcity['name']));
-  $("#city_size").html("City size: " + pcity['size']);
+  $("#city_size").html("City size: " + pcity['size'] + "<br>"
+                       + "Granary: " + pcity['food_stock'] + "/" + pcity['granary_size'] + "<br>"
+                       + "Change in: " + city_turns_to_growth_text(pcity));
   
   if (pcity['production_kind'] == VUT_UTYPE) {
     var punit_type = unit_types[pcity['production_value']];
@@ -551,6 +553,24 @@ function city_sell_improvement(improvement_id)
     send_request (JSON.stringify(packet));
   }
 
+}
+
+/**************************************************************************
+  Create text describing city growth. 
+**************************************************************************/
+function city_turns_to_growth_text(pcity)
+{
+  var turns = pcity['granary_turns'];
+
+  if (turns == 0) {
+    return "blocked";
+  } else if (turns > 1000000) {
+    return "never";
+  } else if (turns < 0) {
+    return "Starving in " + Math.abs(turns) + " turns";
+  } else {
+    return turns + " turns";
+  }
 }
 
 /**************************************************************************

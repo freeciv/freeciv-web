@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Freeciv is a Free and Open Source empire-building strategy game">
     <meta name="author" content="The Freeciv project">
+    <meta name="apple-mobile-web-app-capable" content="yes">
 
     <!-- Le styles -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -17,6 +18,7 @@
     </style>
     <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
 <link rel="shortcut icon" href="images/freeciv-shortcut-icon.png" />
+<link rel="apple-touch-icon" href="/images/freeciv-splash2.png" />
 <link type="text/css" href="/css/jquery-ui.custom.min.css" rel="stylesheet" />
 <script type="text/javascript" src="/javascript-compressed/jquery.min.js"></script>
 <script type="text/javascript" src="/javascript/jquery-ui.custom.min.js"></script>

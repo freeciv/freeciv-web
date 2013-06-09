@@ -794,7 +794,11 @@ function activate_goto()
     }
 
     if (intro_click_description) {
-      add_chatbox_text("Click on the tile to send this unit to.");
+      if (is_touch_device()) {
+        add_chatbox_text("Carefully drag unit to the tile you want it to go to.");
+      } else {
+        add_chatbox_text("Click on the tile to send this unit to.");
+      }
       intro_click_description = false;
     }
 

@@ -389,7 +389,7 @@ if ( isset($port) ) {
               <li><a href="http://www.freeciv.org/wiki/">Wiki</a></li>
               <li class="active"><a href="/meta/metaserver.php">Current Games</a></li>
               <li><a href="http://forum.freeciv.org">Forum</a></li>
-              <li><a href="http://github.com/cazfi/freeciv-web">Development</a></li>
+              <li><a href="http://github.com/freeciv/freeciv-web">Development</a></li>
               <li><a href="http://freeciv.wikia.com/wiki/Donations">Donate!</a></li>
 
             </ul>

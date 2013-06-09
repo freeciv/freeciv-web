@@ -10,7 +10,6 @@ Medium:
 - Show city tile output in city dialog.
 - Make goto lines wrap in X direction of the map.
 - Show city revolt graphics
-- Show attack animation.
 - Port freeciv-img-extract to Python 3.2
 - Playback of games.
 - Show attack prompts. At the moment, gotos can result in unwanted attacks.

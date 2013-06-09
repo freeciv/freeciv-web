@@ -488,7 +488,17 @@ function handle_unit_packet_common(packet_unit)
 
 function handle_unit_combat_info(packet) 
 {
-  /* TODO: implement*/
+  var attacker = units[packet['attacker_unit_id']];
+  var defender = units[packet['defender_unit_id']];
+  var attacker_hp = packet['attacker_hp'];
+  var defender_hp = packet['defender_hp'];
+
+  if (attacker_hp == 0) {
+    explosion_anim_map[attacker['tile']] = 25;
+  }
+  if (defender_hp == 0) {
+    explosion_anim_map[defender['tile']] = 25;
+  }
 }
 
 function handle_unit_diplomat_answer(packet) 

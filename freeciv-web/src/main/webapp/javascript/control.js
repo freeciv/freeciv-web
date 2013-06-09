@@ -134,7 +134,7 @@ function control_init()
   });
 
 
-
+  $("#game_unit_orders_default").tooltip();
 
 
 }

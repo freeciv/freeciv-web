@@ -1,15 +1,17 @@
 TODO:
 -----
 
-- Refactor packet handling in freeciv-proxy, so that the packet 
-  length is used to recv() the correct length from the socket.
-  Also make freeciv-proxy more robust and fault tolerant.
+Major:
+- Integrate Freeciv-web into Freeciv.org codebase as much as possible.
+- Remove need for patches in /freeciv/patches directory.
+- Remove freeciv-proxy, integrate a WebSocket server into the freeciv C server.
+
+Medium:
+- Show city tile output in city dialog.
 - Make goto lines wrap in X direction of the map.
 - Show city revolt graphics
 - Show attack animation.
-- WebGl?
 - Port freeciv-img-extract to Python 3.2
-- Show city tile output in city dialog.
 - Playback of games.
 - Show attack prompts. At the moment, gotos can result in unwanted attacks.
 - Show what city is a unit's homecity. Rehome units.
@@ -23,7 +25,6 @@ TODO:
 - Nukes can't move
 - Show citizens in cities (scientists, entertainers, etc)
 - Planes goto get blocked by ground units.
-- Separate chat box from other messages.
 - Nations dialog: Show who we are waiting on.
 - Show number of turns a diplomatic agreement will last.
 - Pillage doesn't work.
@@ -31,3 +32,6 @@ TODO:
 - diplomats inside cities can't see units there.
 
 
+Minor/Other:
+- Separate chat box from other messages.
+- WebGl?

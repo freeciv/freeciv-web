@@ -65,7 +65,7 @@ diff -Nurd -X.diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
  
    packet->id=pcity->id;
    packet->owner = player_number(city_owner(pcity));
-@@ -2041,7 +2042,7 @@
+@@ -2041,7 +2042,9 @@
    packet->shield_stock = pcity->shield_stock;
    packet->pollution = pcity->pollution;
    packet->illness_trade = pcity->illness_trade;

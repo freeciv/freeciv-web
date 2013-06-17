@@ -19,6 +19,7 @@ import traceback
 from time import gmtime, strftime
 import os, platform
 import time
+from tornado import version as tornado_version
 
 _proc_status = '/proc/%d/status' % os.getpid()
 
@@ -46,6 +47,8 @@ def get_debug_info(civcoms):
       platform.machine(),
       platform.system(),
       cpu));
+
+  code += ("Tornado version %s <br>" % (tornado_version));
 
   try:
     f = open("/proc/loadavg");

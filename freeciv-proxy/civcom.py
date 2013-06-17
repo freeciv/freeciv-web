@@ -52,7 +52,7 @@ class CivCom(Thread):
     self.socket.settimeout(2);
     try:
         self.socket.connect((HOST, self.civserverport))
-        self.socket.settimeout(0.025);
+        self.socket.settimeout(0.03);
     except socket.error as reason:
       self.send_error_to_client("Proxy unable to connect to civserver. Error: %s" % (reason));
       return;
@@ -62,7 +62,7 @@ class CivCom(Thread):
 
     #receive packets from server
     while 1:
-      packet = self.read_from_connection();
+      packet = self.read_from_connection(); 
           
       if (self.stopped):
         return;
@@ -71,9 +71,12 @@ class CivCom(Thread):
         self.net_buf += packet;
         current_netbuf_len = len(self.net_buf);
         if (current_netbuf_len >= self.packet_size - 1):
+          # valid packet received from freeciv server, send it to client.
           self.send_buffer_append(self.net_buf[:-1]);
           self.packet_size = -1;
           self.net_buf = bytearray(0);
+          continue;
+      time.sleep(0.01); #prevent max CPU usage in case of error
 
   def read_from_connection(self):
     try:
@@ -114,10 +117,6 @@ class CivCom(Thread):
 
     self.stopped = True;
     
-
-  def send_packets_to_civserver(self, packet):
-    if not self.send_to_civserver(packet): return False;
-    return True;
 
   def send_to_civserver(self, net_packet_json):
     header = pack('>HH', len(net_packet_json), 0);

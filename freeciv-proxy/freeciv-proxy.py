@@ -23,7 +23,6 @@ import logging
 from civcom import *
 import json
 
-ROOT = op.normpath(op.dirname(__file__))
 PROXY_PORT = 8002;
 
 civcoms = {};
@@ -47,6 +46,7 @@ class WSHandler(websocket.WebSocketHandler):
     def open(self):
         self.clients.append(self)
         self.is_ready = False;
+        self.set_nodelay(True);
 
     def on_message(self, message):
         if (not self.is_ready):
@@ -69,7 +69,7 @@ class WSHandler(websocket.WebSocketHandler):
 
         try:
           # send JSON request to civserver.
-          if not self.civcom.send_packets_to_civserver(message):
+          if not self.civcom.send_to_civserver(message):
             if (logger.isEnabledFor(logging.INFO)):
               logger.info("Sending data to civserver failed.");
             self.write_message('Error: Civserver communication failure ')

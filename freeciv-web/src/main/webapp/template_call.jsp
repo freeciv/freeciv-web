@@ -6,12 +6,13 @@
    <jsp:include page="dev.jsp" flush="false"/>
   
 <%-- login and menu both point to the main menu.--%>
-<% } else if (act.equals("login")) { %>
-  <jsp:include page="menu.jsp" flush="false"/>
-<% } else if (act.equals("menu")) { %>
-  <jsp:include page="menu.jsp" flush="false"/>  
+<% } else if (act.equals("login")) { 
+  response.sendRedirect("/");
+
+ } else if (act.equals("menu")) { 
+  response.sendRedirect("/");
   
-<% } else if (act.equals("guest_user")) { %>
+ } else if (act.equals("guest_user")) { %>
   <jsp:include page="guest_user.jsp" flush="false"/>
 
 <% } else if (act.equals("new_user")) { %>

@@ -54,8 +54,7 @@
 	<a href="/" style="padding: 3px; float: left;"><img src="/images/freeciv-web-logo.png" alt="The Freeciv Project"></a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li><a href="/">Home</a></li>
-              <li class="active"><a href="/wireframe.jsp?do=menu">Play Online</a></li>
+              <li><a href="/">Play Freeciv!</a></li>
               <li><a href="http://www.freeciv.org/wiki/">Wiki</a></li>
               <li><a href="/meta/metaserver.php">Current Games</a></li>
               <li><a href="http://forum.freeciv.org">Forum</a></li>

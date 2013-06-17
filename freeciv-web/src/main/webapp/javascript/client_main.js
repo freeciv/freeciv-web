@@ -175,10 +175,21 @@ function show_new_game_message()
   } else if (is_small_screen()) {
     show_dialog_message("Welcome to Freeciv-web", 
       "You lead a civilization. Your task is to conquer the world!\n\
-      Good luck, and have a lot of fun!");
+      Touch units to move them around. Good luck, and have a lot of fun!");
 
   } else  {
-    show_dialog_message("Welcome to Freeciv-web", 
+    if (is_touch_device()) {
+      show_dialog_message("Welcome to Freeciv-web", 
+      "Welcome to Freeciv-web.  You lead a civilization.  Your\n\
+      task is to conquer the world!  You should start by\n\
+      exploring the land around you with your explorer,\n\
+      and using your settlers to find a good place to build\n\
+      a city. To move your units around, carefully use your\n\
+      finger to drag units to the place you want it to go.\n\
+      Good luck, and have a lot of fun!");
+
+    } else {
+      show_dialog_message("Welcome to Freeciv-web", 
       "Welcome to Freeciv-web.  You lead a civilization.  Your\n\
       task is to conquer the world!  You should start by\n\
       exploring the land around you with your explorer,\n\
@@ -187,6 +198,9 @@ function show_new_game_message()
       pad, or click on the Goto button, then click on the \n\
       destination tile on the map.\n\
       Good luck, and have a lot of fun!");
+
+    }
+
   } 
 }
 

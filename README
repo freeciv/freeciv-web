@@ -32,7 +32,7 @@ The Freeciv Web client consists of these components:
   server, and proxy between web browsers and civservers.
 
 * freeciv-web - a Java web application for the Freeciv web client.
-  This application is a AJAX application which consists of HTML,
+  This application is a Java web application which consists of HTML,
   Javascript, images and JSP files which make up the application
   viewed in each user's web browser. 
 
@@ -49,7 +49,7 @@ System Requirements
 
 - Resin 4.0.36 - http://www.caucho.com/
 
-- Java 1.6.0 SDK - http://java.sun.com/javase/downloads/index.jsp
+- Java 7 JDK - http://www.oracle.com/technetwork/java/javase/downloads/ 
 
 - Python 3.3 - http://www.python.org/
   (freeciv-proxy uses Python 3.3, freeciv-img-extract uses Python 2.7

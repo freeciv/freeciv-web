@@ -41,7 +41,7 @@
         <dependency>
           <groupId>commons-codec</groupId>
           <artifactId>commons-codec</artifactId>
-          <version>1.7</version>
+          <version>1.8</version>
         </dependency> 
 
 	<dependency>
@@ -53,7 +53,7 @@
         <dependency>
            <groupId>mysql</groupId>
            <artifactId>mysql-connector-java</artifactId>
-           <version>5.1.9</version>
+           <version>5.1.25</version>
         </dependency>
     
 

@@ -35,7 +35,7 @@
           <p>Freeciv-web is an Open Source strategy game implemented in HTML5, which can be played online against other players, or in single player mode against AI opponents.</p>
           <hr>
           <span class="credits left">Project maintained by <a href="https://github.com/freeciv">freeciv</a></span>
-          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
         </div>
 
         <h2>
@@ -70,7 +70,7 @@ under the GNU Affero General Public License. See LICENSE.txt for details.</p>
 to connect to Freeciv civservers. The proxy is a HTTP and WebSocket
 server, and proxy between web browsers and civservers.</p></li>
 <li><p>freeciv-web - a Java web application for the Freeciv web client.
-This application is a AJAX application which consists of HTML,
+This application is a Java web application which consists of HTML,
 Javascript, images and JSP files which make up the application
 viewed in each user's web browser. </p></li>
 <li><p>freeciv-img-extract - extracts the images of the Freeciv tileset,
@@ -78,13 +78,12 @@ and generates a version for the web. This produces a tileset PNG
 and Javascript. Run this to sync with the upstream Freeciv SVN 
 repository.</p></li>
 <li><p>publite2 - a simple way to launch multiple civservers. </p></li>
-<li><p>freeciv-music - contains music which can be played during the game.</p></li>
 </ul><h2>
 <a name="system-requirements" class="anchor" href="#system-requirements"><span class="octicon octicon-link"></span></a>System Requirements</h2>
 
 <ul>
 <li><p>Resin 4.0.36 - <a href="http://www.caucho.com/">http://www.caucho.com/</a></p></li>
-<li><p>Java 1.6.0 SDK - <a href="http://java.sun.com/javase/downloads/index.jsp">http://java.sun.com/javase/downloads/index.jsp</a></p></li>
+<li><p>Java 7 JDK - <a href="http://www.oracle.com/technetwork/java/javase/downloads/">http://www.oracle.com/technetwork/java/javase/downloads/</a> </p></li>
 <li><p>Python 3.3 - <a href="http://www.python.org/">http://www.python.org/</a>
 (freeciv-proxy uses Python 3.3, freeciv-img-extract uses Python 2.7
 due to PIL depenedency)</p></li>
@@ -92,16 +91,14 @@ due to PIL depenedency)</p></li>
 (required for freeciv-img-extract)</p></li>
 <li><p>Mysql 5.0.x - <a href="http://www.mysql.com/">http://www.mysql.com/</a></p></li>
 <li><p>Maven 2 - <a href="http://maven.apache.org/download.html">http://maven.apache.org/download.html</a></p></li>
-<li><p>Probably some Linux distribution.</p></li>
-<li><p>Firefox</p></li>
 <li><p>Firebug for debugging - <a href="http://getfirebug.com/">http://getfirebug.com/</a></p></li>
 <li><p>Closure Compiler - <a href="http://code.google.com/intl/nb/closure/compiler/">http://code.google.com/intl/nb/closure/compiler/</a>
 (Bundled in source code, no need to download.)</p></li>
 <li><p>curl-7.19.7 - <a href="http://curl.haxx.se/">http://curl.haxx.se/</a></p></li>
 <li><p>OpenSSL - <a href="http://www.openssl.org/">http://www.openssl.org/</a></p></li>
-<li><p>nginx 1.4.1 - <a href="http://nginx.org/">http://nginx.org/</a></p></li>
+<li><p>nginx 1.5.1 - <a href="http://nginx.org/">http://nginx.org/</a></p></li>
 <li><p>pngcrush, required for freeciv-img-extract.  <a href="http://pmt.sourceforge.net/pngcrush/">http://pmt.sourceforge.net/pngcrush/</a></p></li>
-<li><p>Tornado 3.0.1 - <a href="http://www.tornadoweb.org/">http://www.tornadoweb.org/</a></p></li>
+<li><p>Tornado 3.1 - <a href="http://www.tornadoweb.org/">http://www.tornadoweb.org/</a></p></li>
 <li><p>GLib 2.16.0 or newer - <a href="http://ftp.gnome.org/pub/GNOME/sources/glib/2.16/">http://ftp.gnome.org/pub/GNOME/sources/glib/2.16/</a></p></li>
 <li><p>Jansson 2.1.1 - <a href="http://www.digip.org/jansson/">http://www.digip.org/jansson/</a></p></li>
 </ul><h2>
@@ -128,7 +125,7 @@ svn co svn://svn.gna.org/svn/freeciv/trunk -r  freeciv</p></li>
 <li>
 <p>Compile and install Freeciv. This involves running the following commands:
 cd freeciv
-./autogen.sh --enable-fcweb
+./autogen.sh --enable-fcweb --disable-nls
 make
 make install     (as root user)</p>
 
@@ -136,10 +133,8 @@ make install     (as root user)</p>
 </li>
 <li><p>Build and configure freeciv-web. </p></li>
 </ol><ul>
-<li>Run setup_links.sh and sync.sh in freeciv-img-extract and sync.sh in freeciv-proxy.</li>
-<li>Edit /freeciv-web/src/main/webapp/freecivmetaserve/php_code/local.php.dist,
- rename this file to local.php, and update values for fcdb_username and fcdb_pw
- to your MySQL username and password.</li>
+<li>Run setup_links.sh and sync.sh in freeciv-img-extract </li>
+<li>Run sync-js-hand.sh in /freeciv-web/scripts/ directory.</li>
 <li>Edit /freeciv-web/src/main/webapp/WEB-INF/resin-web.xml.dist, rename this
  file to resin-web.xml, and update the values for your MySQL database.</li>
 <li>Run 'build.sh' in the freeciv-web directory</li>

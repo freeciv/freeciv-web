@@ -5,6 +5,7 @@ Major:
 - Integrate Freeciv-web into Freeciv.org codebase as much as possible.
 - Remove need for patches in /freeciv/patches directory.
 - Remove freeciv-proxy, integrate a WebSocket server into the freeciv C server.
+- Add better goto handling with display of the number of turns required for goto
 
 Medium:
 - Make goto lines wrap in X direction of the map.
@@ -33,3 +34,7 @@ Medium:
 Minor/Other:
 - Separate chat box from other messages.
 - WebGl?
+
+Feedback from user:
+- "Trinidad and Tobago" doesn't wrap well in select nation dialog.
+- "Freeciv confuses me because I get invaded in 2000 BC and I didn't know I was at war with people and sometimes my settlers can't found cities."

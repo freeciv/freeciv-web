@@ -109,7 +109,7 @@ function pick_nation()
   $("#pick_nation_dialog").dialog({
 			bgiframe: true,
 			modal: true,
-			width: "600px",
+			width: "80%",
 			buttons: {
 				Ok: function() {
 					$(this).dialog('close');

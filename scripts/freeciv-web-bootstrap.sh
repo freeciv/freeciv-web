@@ -43,8 +43,8 @@ cd resin-${resin_version}
 
 ## mysql setup
 echo "==== Setting up MySQL ===="
-mysqladmin -u ${mysql_user} -p${mysql_pass} create freecivmetaserver
-mysql -u ${mysql_user} -p${mysql_pass} freecivmetaserver < ${srcdir}/publite2/mysqldump.sql
+mysqladmin -u ${mysql_user} -p${mysql_pass} create freeciv_web
+mysql -u ${mysql_user} -p${mysql_pass} freeciv_web < ${srcdir}/publite2/mysqldump.sql
 
 echo "==== Configuring Build ===="
 sed -e "s/fcdb_username = \"root\"/fcdb_username = \"${mysql_user}\"/" -e "s/fcdb_pw = 'changeme'/fcdb_pw = \"${mysql_pass}\"/" \

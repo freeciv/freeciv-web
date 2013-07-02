@@ -302,6 +302,9 @@ function init_cache_sprites()
   }
 
   sprites_init = true;
+  tileset_images[0] = null;
+  tileset_images[1] = null;
+  delete tileset_images;
 
  }  catch(e) {
   console.log("Problem caching sprite: " + tile_tag);

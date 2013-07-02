@@ -917,6 +917,39 @@ shield      = 3 ; glacier used to have 4
 
 ; /* <-- avoid gettext warnings
 ;
+; Each of the specials Irrigation, Mine, Pollution, Hut, Farmland, and Fallout
+; must have section here, in that order.
+;
+; Extra types:
+;
+; name                    = translatable name as seen by user
+; rule_name               = (optional) name for savegames, rulesets etc; if not
+;                           present, 'name' is used. Since the name used in
+;                           savegames must not change, use this when renaming a
+;                           base after a ruleset has been released.
+;
+; */ <-- avoid gettext warnings
+
+[extra_irrigation]
+name           = _("Irrigation")
+
+[extra_mine]
+name           = _("Mine")
+
+[extra_pollution]
+name           = _("Pollution")
+
+[extra_hut]
+name           = _("Hut")
+
+[extra_farmland]
+name           = _("Farmland")
+
+[extra_fallout]
+name           = _("Fallout")
+
+; /* <-- avoid gettext warnings
+;
 ; Base types:
 ;
 ; name                    = translatable name as seen by user

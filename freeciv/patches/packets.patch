@@ -1,14 +1,16 @@
-diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2012-10-06 08:58:33.232269092 +0300
-+++ freeciv/common/packets.def	2012-10-06 09:08:44.376255682 +0300
-@@ -1345,12 +1345,12 @@
+Index: freeciv/common/packets.def
+===================================================================
+--- freeciv/common/packets.def	(revision 23003)
++++ freeciv/common/packets.def	(working copy)
+@@ -1375,13 +1375,13 @@
    STRING rule_name[MAX_LEN_NAME];
    STRING graphic_str[MAX_LEN_NAME];
    STRING graphic_alt[MAX_LEN_NAME];
 -  UINT8 reqs_count;
 +  UINT32 reqs_count;
    REQUIREMENT reqs[MAX_NUM_REQS:reqs_count];
-   TECH obsolete_by;
+   UINT8 obs_count;
+   REQUIREMENT obs_reqs[MAX_NUM_REQS:obs_count];
    IMPROVEMENT replaced_by;
 -  UINT16 build_cost;
 -  UINT8 upkeep, sabotage;

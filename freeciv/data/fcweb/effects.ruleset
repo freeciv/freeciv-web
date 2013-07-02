@@ -1687,6 +1687,10 @@ reqs	=
       "Building", "Supermarket", "City"
       "OutputType", "Food", "Local"
     }
+nreqs   =
+    { "type", "name", "range"
+      "Special", "Mine", "Local"
+    }
 
 [effect_temple]
 name	= "Make_Content"

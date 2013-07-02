@@ -659,7 +659,9 @@ function enable_mapview_slide(ptile)
 function update_map_slide()
 {
   var elapsed = 1 + new Date().getTime() - mapview_slide['start'];  
-  mapview_slide['i'] = Math.floor(mapview_slide['max'] * (mapview_slide['slide_time'] - elapsed) / mapview_slide['slide_time']);
+  mapview_slide['i'] = Math.floor(mapview_slide['max'] 
+                        * (mapview_slide['slide_time'] 
+                        - elapsed) / mapview_slide['slide_time']);
 
   if (mapview_slide['i'] <= 0) {
     mapview_slide['active'] = false;

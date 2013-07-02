@@ -166,7 +166,9 @@ function update_unit_anim_list(old_unit, new_unit)
   if (old_unit == null || new_unit == null) return;
   /* unit is in same position. */
   if (new_unit['tile'] == old_unit['tile']) return;
-  
+ 
+  if (!is_unit_visible(new_unit)) return;
+ 
   if (old_unit['anim_list'] == null) old_unit['anim_list'] = [];
 
   if (new_unit['transported'] == true) {
@@ -174,8 +176,6 @@ function update_unit_anim_list(old_unit, new_unit)
     old_unit['anim_list'] = [];	  
     return;
   }
-
-  /* TODO: is unit visible? */
 
   var has_old_pos = false;
   var has_new_pos = false;
@@ -277,6 +277,28 @@ function get_unit_homecity_name(punit)
     return unescape(cities[punit['homecity']]['name']);
   } else {
     return null;
+  }
+
+}
+
+/**************************************************************************
+  Determines if unit is visible 
+**************************************************************************/
+function is_unit_visible(punit)
+{
+  if (punit == null || punit['tile'] == null) return;
+
+  var u_tile = index_to_tile(punit['tile']);
+  var r = map_to_gui_pos(u_tile['x'], u_tile['y']);
+  var unit_gui_x = r['gui_dx'];
+  var unit_gui_y = r['gui_dy'];
+
+  if (unit_gui_x < mapview['gui_x0'] || unit_gui_y < mapview['gui_y0']
+      || unit_gui_x > mapview['gui_x0'] + mapview['width'] 
+      || unit_gui_y > mapview['gui_y0'] + mapview['height']) {
+    return false;
+  } else {
+    return true;
   }
 
 }

@@ -493,10 +493,10 @@ function handle_unit_combat_info(packet)
   var attacker_hp = packet['attacker_hp'];
   var defender_hp = packet['defender_hp'];
 
-  if (attacker_hp == 0) {
+  if (attacker_hp == 0 && is_unit_visible(attacker)) {
     explosion_anim_map[attacker['tile']] = 25;
   }
-  if (defender_hp == 0) {
+  if (defender_hp == 0 && is_unit_visible(defender)) {
     explosion_anim_map[defender['tile']] = 25;
   }
 }

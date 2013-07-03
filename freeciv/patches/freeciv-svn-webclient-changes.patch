@@ -144,7 +144,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  type REPORT_TYPE        = uint8(enum report_type)
  type REQ_RANGE          = uint8(enum req_range)
  type REQ_TYPE           = uint8(enum universals_n)
--type SPECIAL            = uint16(enum tile_special_type)
+-type SPECIAL            = uint8(enum tile_special_type)
 +type SPECIAL            = uint32(enum tile_special_type)
  type SSET_CLASS         = uint8(enum sset_class)
  type SSET_TYPE          = uint8(enum sset_type)

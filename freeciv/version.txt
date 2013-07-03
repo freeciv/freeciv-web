@@ -1,4 +1,4 @@
-# Patches are against freeciv trunk revision 23003.
+# Patches are against freeciv trunk revision 23011.
 
-ORIGCAPSTR="+Freeciv.Devel-2.6-2013.Jul.01"
-WEBCAPSTR="+Freeciv.Web.Devel-2.6-2013.Jul.01"
+ORIGCAPSTR="+Freeciv.Devel-2.6-2013.Jul.03"
+WEBCAPSTR="+Freeciv.Web.Devel-2.6-2013.Jul.03"

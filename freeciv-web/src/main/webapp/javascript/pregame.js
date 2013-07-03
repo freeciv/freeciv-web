@@ -206,7 +206,7 @@ function pregame_settings()
 	  "<td><input type='text' name='metamessage' id='metamessage' size='20' maxlength='32'></td></tr>" +
 	  "<tr><td>Number of Players (including AI):</td>" +
 	  "<td><input type='number' name='aifill' id='aifill' size='4' length='3' min='0' max='30' step='1'></td></tr>" +
-	  "<tr><td>Timeout (number of seconds per round):</td>" +
+	  "<tr><td>Timeout (seconds per turn):</td>" +
 	  "<td><input type='number' name='timeout' id='timeout' size='4' length='3' min='30' max='3600' step='1'></td></tr>" +
 	  "<tr><td>Map size:</td>" +
 	  "<td><input type='number' name='mapsize' id='mapsize' size='4' length='3' min='1' max='15' step='1'></td></tr>" +
@@ -238,6 +238,7 @@ function pregame_settings()
   $("#mapsize").val(game_info['mapsize']);
   $("#timeout").val(game_info['timeout']);
   $("#skill_level").val(ai_skill_level);
+  $("#metamessage").val(game_info['meta_message']);
 
   $(id).dialog('open');		
 

@@ -6,11 +6,17 @@
 
 <h2>Game Options</h2>
 
-  <div class="main_menu_buttons">
-	 	
-    <button id="save_button" type="button" class="button" onClick="save_game();" >Save Game</button>
-	 	
-  </div>	 	 	
+<div class="main_menu_buttons">
+  <b>Game title:</b> <input type='text' name='metamessage_setting' id='metamessage_setting' size='20' maxlength='32'>
+</div>
+
+<div class="main_menu_buttons">
+  <b>Timeout (seconds per turn):</b> <input type='number' name='timeout_setting' id='timeout_setting' size='6' length='3' min='30' max='3600' step='1'>
+</div>
+
+<div class="main_menu_buttons">
+  <button id="save_button" type="button" class="button" onClick="save_game();" >Save Game</button> 	
+</div>	 	 	
 
 <div class="main_menu_buttons">
   <button id="fullscreen_button" type="button" class="button" onClick="show_fullscreen_window();" >Fullscreen</button>

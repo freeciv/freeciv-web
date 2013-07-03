@@ -124,5 +124,25 @@ function init_options_dialog()
 
   $("#save_button").button("option", "label", "Save Game");
 
+  $("#timeout_setting").val(game_info['timeout']);
+  $("#metamessage_setting").val(game_info['meta_message']);
+
+
+  $('#metamessage_setting').change(function() {
+    var test_packet = {"type" : packet_chat_msg_req, "message" : "/metamessage " + $('#metamessage_setting').val()};
+    var myJSONText = JSON.stringify(test_packet);
+    send_request (myJSONText);
+  });
+
+  $('#metamessage_setting').bind('keyup blur',function(){ 
+    $(this).val( $(this).val().replace(/[^a-z\s]/g,'') ); }
+  );
+
+  $('#timeout_setting').change(function() {
+    var test_packet = {"type" : packet_chat_msg_req, "message" : "/set timeout " + $('#timeout_setting').val()};
+    var myJSONText = JSON.stringify(test_packet);
+    send_request (myJSONText);
+  });
+
 
 }

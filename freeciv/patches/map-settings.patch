@@ -23,3 +23,13 @@ diff -Nurd -X.diff_ignore freeciv/server/gamehand.c freeciv/server/gamehand.c
    conn_list_iterate(dest, pconn) {
      send_packet_game_info(pconn, &ginfo);
    }
+@@ -503,6 +503,9 @@
+     ginfo.seconds_to_phasedone = -1.0;
+   }
+ 
++  ginfo.mapsize = map.server.size;
++  sz_strlcpy(ginfo.meta_message, game.server.meta_info.user_message);
++
+   conn_list_iterate(dest, pconn) {
+     send_packet_game_info(pconn, &ginfo);
+   }

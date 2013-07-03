@@ -2,6 +2,14 @@ Index: freeciv/common/packets.def
 ===================================================================
 --- freeciv/common/packets.def	(revision 23003)
 +++ freeciv/common/packets.def	(working copy)
+@@ -506,6 +507,7 @@
+   BOOL year_0_hack;
+   BOOL civil_war_enabled;
+   BOOL paradrop_to_transport;
++  STRING meta_message[MAX_LEN_NAME];
+ end
+ 
+ PACKET_MAP_INFO = 17; sc, lsend
 @@ -1375,13 +1375,13 @@
    STRING rule_name[MAX_LEN_NAME];
    STRING graphic_str[MAX_LEN_NAME];

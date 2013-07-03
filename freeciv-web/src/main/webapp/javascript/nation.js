@@ -50,13 +50,18 @@ function update_nation_screen()
     if (!client_is_observer() && diplstates[player_id] != null) {
       nation_list_html = nation_list_html + "<td>" + get_diplstate_text(diplstates[player_id]) + "</td><td>";
       if (diplstates[player_id] != DS_NO_CONTACT) {
-        nation_list_html = nation_list_html + " <button type='button' class='nation_button' onClick='diplomacy_init_meeting_req(" + player_id + ");' >Meet</button>";
+        nation_list_html = nation_list_html + " <button type='button' class='nation_button' onClick='diplomacy_init_meeting_req(" 
+                           + player_id + ");' >Meet</button>";
       }
       if (diplstates[player_id] != DS_WAR && diplstates[player_id] != DS_NO_CONTACT) {
-        nation_list_html = nation_list_html + "  <button type='button' class='nation_button' onClick='diplomacy_cancel_treaty(" + player_id + ");' >Cancel Treaty</button>";
+        nation_list_html = nation_list_html + "  <button type='button' class='nation_button' onClick='diplomacy_cancel_treaty("
+                           + player_id + ");' >Cancel Treaty</button>";
 
       }
       nation_list_html = nation_list_html + "</td>";
+    } else if (client_is_observer() && pplayer['ai']) {
+      nation_list_html = nation_list_html + "<td>  <button type='button' class='nation_button' onClick='take_player(\"" 
+            + pplayer['name'] + "\");' >Play as " + pplayer['name'] + "</button></td>";
     }
 
     nation_list_html = nation_list_html + "</tr>";
@@ -67,7 +72,6 @@ function update_nation_screen()
 
   $("#nations_list").html(nation_list_html);
   $(".nation_button").button();
-  $(".nation_button").css("font-size", "11px");
 }
 
 
@@ -133,3 +137,15 @@ function love_text(love)
   }
 }
 
+/**************************************************************************
+ ...
+**************************************************************************/
+function take_player(player_name)
+{
+  var test_packet = {"type" : packet_chat_msg_req, 
+                         "message" : "/take " + player_name.substring(0,3)};
+  var myJSONText = JSON.stringify(test_packet);
+  send_request (myJSONText);
+  observing = false;
+  setTimeout(update_nation_screen, 2000);
+}

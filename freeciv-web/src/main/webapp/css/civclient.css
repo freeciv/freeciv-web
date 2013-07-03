@@ -448,3 +448,24 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
   overflow: hidden;
 }
 
+.chatbox_dialog {
+  background: rgba(0,0,0,0.6);
+  background-color: rgba(0,0,0, 0.6);
+}
+
+#ui-dialog-title-game_chatbox_panel {
+  margin-top: -5px;
+  font-size: 10px;
+}
+
+.chatbox_dialog div.ui-dialog-titlebar {
+  height: 5px;
+}
+
+.chatbox_dialog div.ui-dialog-content {
+  padding: 5px 0;
+}
+
+.nation_button {
+  font-size: 11px;
+}

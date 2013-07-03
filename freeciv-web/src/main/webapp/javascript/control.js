@@ -124,6 +124,8 @@ function control_init()
     city_dialog_remove();
     chatbox_resized();
     set_default_mapview_inactive();
+    $("#tabs-chat").show();
+
   });
 
 

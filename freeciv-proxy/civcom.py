@@ -52,7 +52,7 @@ class CivCom(Thread):
     self.socket.settimeout(2);
     try:
         self.socket.connect((HOST, self.civserverport))
-        self.socket.settimeout(0.03);
+        self.socket.settimeout(0.06);
     except socket.error as reason:
       self.send_error_to_client("Proxy unable to connect to civserver. Error: %s" % (reason));
       return;

@@ -868,3 +868,8 @@ function handle_ruleset_extra(packet)
 {
   /* TODO: implement */
 }
+
+function handle_endgame_player(packet)
+{
+  /* TODO: implement */
+}

@@ -383,7 +383,7 @@ Upkeep for Settlers is in food as well as production, and a Settler\
 ")
 
 [unit_worker]
-name          = _("Workers")
+name          = _("?unit:Workers")
 class         = "Land"
 tech_req      = "Pottery"
 obsolete_by   = "Engineers"
@@ -2134,7 +2134,7 @@ Explorers are brave individuals that are very useful for\
 ")
 
 [unit_leader]
-name          = _("Leader")
+name          = _("?unit:Leader")
 class         = "Land"
 tech_req      = "None"
 obsolete_by   = "None"

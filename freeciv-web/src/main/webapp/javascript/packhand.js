@@ -632,6 +632,9 @@ function handle_spaceship_info(packet)
 /* 100% complete */
 function handle_ruleset_unit(packet) 
 {
+  if (packet['name'] != null && packet['name'].indexOf('?unit:') == 0) 
+    packet['name'] = packet['name'].replace('?unit:', '');
+
   unit_types[packet['id']] = packet;
 }
 

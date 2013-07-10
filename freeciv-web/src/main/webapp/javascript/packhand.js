@@ -123,23 +123,13 @@ function handle_ruleset_resource(packet)
 }
 
 /**************************************************************************
-This was once very ugly...                                   99% complete
+ 100% complete.
 **************************************************************************/
 function handle_tile_info(packet) 
 {
-  var new_known;
-  var old_known;
-  var known_changed = false;
-  var tile_changed = false;
-  var powner = valid_player_by_number(packet['owner']);
-  var presource = resources[packet['resource']];
-  var pterrain = terrains[packet['terrain']];
-
-
   if (tiles != null) {
     tiles[packet['tile']] = $.extend(tiles[packet['tile']], packet);
   }
-
 }
 
 /* 100% complete */

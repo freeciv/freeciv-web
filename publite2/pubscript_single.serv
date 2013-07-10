@@ -2,6 +2,9 @@ cmdlevel ctrl first
 set allowtake H1Ah1adOo
 set autotoggle enabled
 set timeout 60
+set netwait 10
+set nettimeout 20
+set maxconnectionsperhost 256
 set autosaves ""
 set scorelog disabled
 set size 4

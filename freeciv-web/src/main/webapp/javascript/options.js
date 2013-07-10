@@ -135,7 +135,10 @@ function init_options_dialog()
   });
 
   $('#metamessage_setting').bind('keyup blur',function(){ 
-    $(this).val( $(this).val().replace(/[^a-z\s]/g,'') ); }
+    var cleaned_text = $(this).val().replace(/[^a-zA-Z\s\-]/g,'');
+    if ($(this).val() != cleaned_text) {
+      $(this).val( cleaned_text ); }
+    }
   );
 
   $('#timeout_setting').change(function() {

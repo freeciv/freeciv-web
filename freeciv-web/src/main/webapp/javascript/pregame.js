@@ -203,7 +203,7 @@ function pregame_settings()
 
   var dhtml = "<table>" +
   	  "<tr><td>Game title:</td>" +
-	  "<td><input type='text' name='metamessage' id='metamessage' size='20' maxlength='32'></td></tr>" +
+	  "<td><input type='text' name='metamessage' id='metamessage' size='28' maxlength='42'></td></tr>" +
 	  "<tr><td>Number of Players (including AI):</td>" +
 	  "<td><input type='number' name='aifill' id='aifill' size='4' length='3' min='0' max='30' step='1'></td></tr>" +
 	  "<tr><td>Timeout (seconds per turn):</td>" +
@@ -255,7 +255,10 @@ function pregame_settings()
   });
 
   $('#metamessage').bind('keyup blur',function(){ 
-    $(this).val( $(this).val().replace(/[^a-z\s]/g,'') ); }
+    var cleaned_text = $(this).val().replace(/[^a-zA-Z\s\-]/g,'');
+    if ($(this).val() != cleaned_text) {
+      $(this).val( cleaned_text ); }
+    }
   );
 
   $('#mapsize').change(function() {

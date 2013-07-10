@@ -31,7 +31,7 @@ land_channel_requirement = 10
 
 ; Bodies of water up to this size are considered freshwater lakes, if there is
 ; also terrain type(s) with flag "FreshWater" in the ruleset.
-lake_max_size = 0
+lake_max_size = 14
 
 ; How many native tiles first startunit must be able to reach.
 ; 0 to disable check.

@@ -40,6 +40,7 @@ function handle_thaw_hint(packet)
 /* 100% */
 function handle_ruleset_terrain(packet) 
 {
+  if (packet['name'] == "Lake") packet['graphic_str'] = packet['graphic_alt'];
   terrains[packet['id']] = packet;
 }
 

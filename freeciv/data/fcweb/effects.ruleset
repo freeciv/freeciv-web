@@ -10,7 +10,7 @@
 ; than minor changes.
 
 [datafile]
-description="Freeciv-web effects data"
+description="Default effects data for Freeciv"
 options="+Freeciv-ruleset-Devel-2013.May.14"
 
 ; /* <-- avoid gettext warnings
@@ -1661,6 +1661,31 @@ reqs	=
       "Road", "Road", "Local"
       "Building", "Super Highways", "City"
       "OutputType", "Trade", "Local"
+    }
+
+[effect_irrigation]
+type    = "Irrigation_Pct"
+value   = 100
+reqs    =
+    { "type", "name", "range"
+      "Extra", "Irrigation", "Local"
+    }
+nreqs   =
+    { "type", "name", "range"
+      "CityTile", "Center", "Local"
+    }
+
+[effect_irrigation_2]
+name	= "Irrigation_Pct"
+value	= 100
+reqs	=
+    { "type", "name", "range"
+      "CityTile", "Center", "Local"
+      "TerrainAlter", "CanIrrigate", "Local"
+    }
+nreqs   =
+    { "type", "name", "range"
+      "Extra", "Mine", "Local"
     }
 
 [effect_supermarket]

@@ -10,11 +10,3 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
      punit->orders.index = 0;
      punit->orders.repeat = FALSE;
      punit->orders.vigilant = FALSE;
-@@ -884,6 +884,7 @@
-         punit->orders.list[i].order = ORDER_MOVE;
-         punit->orders.list[i].dir = get_direction_for_step(old_tile, new_tile);
-         punit->orders.list[i].activity = ACTIVITY_LAST;
-+        punit->orders.list[i].base = -1;
-       }
-       old_tile = new_tile;
- 

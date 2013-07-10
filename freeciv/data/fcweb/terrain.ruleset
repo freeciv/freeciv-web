@@ -1,3 +1,4 @@
+
 ; Modifying this file:
 ; You should not modify this file except to make bugfixes or
 ; for other "maintenance".  If you want to make custom changes,
@@ -10,7 +11,7 @@
 ; than minor changes.
 
 [datafile]
-description="Freeciv-web terrain data"
+description="Default tile_type data for Freeciv"
 options="+Freeciv-ruleset-Devel-2013.May.14"
 
 [control]
@@ -238,8 +239,7 @@ color.g              = 46
 color.b              = 137
 helptext             = _("\
 Shallow oceans are mostly found near coastlines, and are often rich\
- sources of food and other resources. They can be traversed by sea\
- units, including Triremes.\
+ sources of food and other resources.\
 ")
 
 [terrain_deep_ocean]
@@ -917,8 +917,10 @@ shield      = 3 ; glacier used to have 4
 
 ; /* <-- avoid gettext warnings
 ;
-; Each of the specials Irrigation, Mine, Pollution, Hut, Farmland, and Fallout
-; must have section here, in that order.
+; Each of the specials, bases, and roads must have section here, in correct order.
+; First are specials Irrigation, Mine, Pollution, Hut, Farmland, and Fallout.
+; Then are bases in the same order as the dedicated [base] sections.
+; Last are roads in the same order as the dedicated [road] sections.
 ;
 ; Extra types:
 ;
@@ -947,6 +949,27 @@ name           = _("Farmland")
 
 [extra_fallout]
 name           = _("Fallout")
+
+[extra_fortress]
+name           = _("Fortress")
+
+[extra_airbase]
+name           = _("Airbase")
+
+[extra_buoy]
+name           = _("Buoy")
+
+[extra_ruins]
+name           = _("Ruins")
+
+[extra_road]
+name           = _("Road")
+
+[extra_railroad]
+name           = _("Railroad")
+
+[extra_river]
+name           = _("River")
 
 ; /* <-- avoid gettext warnings
 ;
@@ -986,6 +1009,10 @@ name           = _("Fallout")
 ;   - "ParadropFrom"      = Paradrop can be initiated from base
 ;   - "NativeTile"        = Units consider tile native regardless of terrain
 ;   - "ShowFlag"          = Draw owner's flag
+;   - "AlwaysOnCityCenter" = City Center tiles always have this base type no
+;                           matter about reqs.
+;   - "AutoOnCityCenter"  = City Center tiles will automatically have this
+;                           base type if the player can build it.
 ; helptext                = optional help text string; should escape all raw 
 ;                           newlines so that xgettext parsing works
 ;
@@ -998,10 +1025,11 @@ graphic_alt    = "-"
 activity_gfx   = "unit.fortress"
 act_gfx_alt    = "-"
 reqs           =
-    { "type", "name", "range"
-      "Tech", "Construction", "Player"
-      "TerrainClass", "Land", "Local"
-      "UnitFlag", "Settlers", "Local"
+    { "type", "name", "range", "present"
+      "Tech", "Construction", "Player", TRUE
+      "TerrainClass", "Land", "Local", TRUE
+      "UnitFlag", "Settlers", "Local", TRUE
+      "CityTile", "Center", "Local", FALSE
     }
 gui_type       = "Fortress"
 build_time     = 3
@@ -1023,10 +1051,11 @@ graphic_alt    = "-"
 activity_gfx   = "unit.airbase"
 act_gfx_alt    = "-"
 reqs           =
-    { "type", "name", "range"
-      "Tech", "Radio", "Player"
-      "TerrainClass", "Land", "Local"
-      "UnitFlag", "Airbase", "Local"
+    { "type", "name", "range", "present"
+      "Tech", "Radio", "Player", TRUE
+      "TerrainClass", "Land", "Local", TRUE
+      "UnitFlag", "Airbase", "Local", TRUE
+      "CityTile", "Center", "Local", FALSE
     }
 gui_type       = "Airbase"
 build_time     = 3
@@ -1044,14 +1073,14 @@ graphic_alt    = "base.fortress"
 activity_gfx   = "unit.buoy"
 act_gfx_alt    = "unit.fortress"
 reqs           =
-    { "type", "name", "range"
-      "Tech", "Radio", "Player"
-      "TerrainClass", "Oceanic", "Local"
-      "UnitFlag", "Airbase", "Local"
+    { "type", "name", "range", "present"
+      "Tech", "Radio", "Player", TRUE
+      "TerrainClass", "Oceanic", "Local", TRUE
+      "UnitFlag", "Airbase", "Local", TRUE
+      "CityTile", "Center", "Local", FALSE
     }
 gui_type       = "Fortress"
 build_time     = 3
-border_sq      = 0
 vision_main_sq = 5
 helptext       = _("\
 Buoys may be built in the ocean (by units on a sea-going vessel).\
@@ -1064,8 +1093,9 @@ graphic_alt    = "-"
 activity_gfx   = "unit.ruins"
 act_gfx_alt    = "unit.fortress"
 reqs           =
-    { "type", "name", "range"
-      "TerrainClass", "Land", "Local"
+    { "type", "name", "range", "present"
+      "TerrainClass", "Land", "Local", TRUE
+      "CityTile", "Center", "Local", FALSE
     }
 buildable      = FALSE
 build_time     = 0
@@ -1110,9 +1140,6 @@ They have no effect on gameplay.\
 ;                           specific factor
 ; trade_incr              = trade production added to tile multiplied by terrain
 ;                           specific factor
-; food_incr               = food production added to tile
-; shield_incr             = shield production added to tile
-; trade_incr              = trade production added to tile
 ; food_bonus              = percent added to food production
 ; shield_bonus            = percent added to shield production
 ; trade_bonus             = percent added to trade production
@@ -1136,7 +1163,9 @@ They have no effect on gameplay.\
 ;   - "River"             = Always flows from land tiles to ocean, automatically
 ;                           generated by map generator
 ;   - "Natural"           = Not infrastructure road
-; helptext                = optional help text string; should escape all raw 
+;   - "AutoOnCityCenter"  = City Center tiles will automatically have this
+;                           road type if the player can build it.
+; helptext                = optional help text string; should escape all raw
 ;                           newlines so that xgettext parsing works
 ;
 ; */ <-- avoid gettext warnings
@@ -1163,7 +1192,7 @@ trade_bonus    = 0
 compat_special = "Road"
 native_to      = "Land"
 hidden_by      = "Railroad"
-flags          = "RequiresBridge"
+flags          = "RequiresBridge", "AutoOnCityCenter"
 
 [road_railroad]
 name           = _("Railroad")
@@ -1188,7 +1217,7 @@ shield_bonus   = 50
 trade_bonus    = 0
 compat_special = "Railroad"
 native_to      = "Land"
-flags          = "RequiresBridge"
+flags          = "RequiresBridge", "AutoOnCityCenter"
 
 [road_river]
 name           = _("River")

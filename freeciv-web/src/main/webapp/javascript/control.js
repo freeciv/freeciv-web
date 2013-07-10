@@ -489,7 +489,7 @@ function set_unit_focus_and_redraw(punit)
 function set_unit_focus_and_activate(punit)
 {
   set_unit_focus_and_redraw(punit);
-  request_new_unit_activity(punit, ACTIVITY_IDLE);
+  request_new_unit_activity(punit, ACTIVITY_IDLE, 0);
 
 }
 
@@ -498,7 +498,7 @@ function set_unit_focus_and_activate(punit)
 **************************************************************************/
 function city_dialog_activate_unit(punit)
 {
-  request_new_unit_activity(punit, ACTIVITY_IDLE);
+  request_new_unit_activity(punit, ACTIVITY_IDLE, 0);
   close_city_dialog();
   set_unit_focus_and_redraw(punit);
 }
@@ -857,7 +857,7 @@ function key_unit_auto_explore()
   var funits = get_units_in_focus();
   for (var i = 0; i < funits.length; i++) {
     var punit = funits[i]; 
-    request_new_unit_activity(punit, ACTIVITY_EXPLORE);
+    request_new_unit_activity(punit, ACTIVITY_EXPLORE, 0);
   }  
   update_unit_focus();
 }
@@ -878,7 +878,7 @@ function key_unit_sentry()
   var funits = get_units_in_focus();
   for (var i = 0; i < funits.length; i++) {
     var punit = funits[i]; 
-    request_new_unit_activity(punit, ACTIVITY_SENTRY);
+    request_new_unit_activity(punit, ACTIVITY_SENTRY, 0);
   }  
   update_unit_focus();
 }
@@ -891,7 +891,7 @@ function key_unit_fortify()
   var funits = get_units_in_focus();
   for (var i = 0; i < funits.length; i++) {
     var punit = funits[i]; 
-    request_new_unit_activity(punit, ACTIVITY_FORTIFYING);
+    request_new_unit_activity(punit, ACTIVITY_FORTIFYING, 0);
   }  
   update_unit_focus();
 }
@@ -904,7 +904,7 @@ function key_unit_irrigate()
   var funits = get_units_in_focus();
   for (var i = 0; i < funits.length; i++) {
     var punit = funits[i]; 
-    request_new_unit_activity(punit, ACTIVITY_IRRIGATE);
+    request_new_unit_activity(punit, ACTIVITY_IRRIGATE, 0);
   }  
   update_unit_focus();
 }
@@ -917,7 +917,7 @@ function key_unit_pillage()
   var funits = get_units_in_focus();
   for (var i = 0; i < funits.length; i++) {
     var punit = funits[i]; 
-    request_new_unit_activity(punit, ACTIVITY_PILLAGE);
+    request_new_unit_activity(punit, ACTIVITY_PILLAGE, 0);
   }  
   update_unit_focus();
 }
@@ -930,7 +930,7 @@ function key_unit_mine()
   var funits = get_units_in_focus();
   for (var i = 0; i < funits.length; i++) {
     var punit = funits[i]; 
-    request_new_unit_activity(punit, ACTIVITY_MINE);
+    request_new_unit_activity(punit, ACTIVITY_MINE, 0);
   }  
   update_unit_focus();
 }
@@ -943,7 +943,7 @@ function key_unit_road()
   var funits = get_units_in_focus();
   for (var i = 0; i < funits.length; i++) {
     var punit = funits[i]; 
-    request_new_unit_activity_road(punit, ACTIVITY_GEN_ROAD, 0);
+    request_new_unit_activity(punit, ACTIVITY_GEN_ROAD, 0);
   }
   update_unit_focus();
 }
@@ -981,35 +981,14 @@ function key_unit_auto_settle()
 /**************************************************************************
  ...
 **************************************************************************/
-function request_new_unit_activity(punit, activity)
+function request_new_unit_activity(punit, activity, target)
 {
 
   var packet = {"type" : packet_unit_change_activity, "unit_id" : punit['id'],
-                "activity" : activity, "activity_target" : S_LAST };
+                "activity" : activity, "target" : target };
   send_request (JSON.stringify(packet));
 }
 
-/**************************************************************************
- ...
-**************************************************************************/
-function request_new_unit_activity_base(punit, activity, base)
-{
-
-  var packet = {"type" : packet_unit_change_activity_base, "unit_id" : punit['id'],
-                "activity" : activity, "activity_base" : base };
-  send_request (JSON.stringify(packet));
-}
-
-/**************************************************************************
- ...
-**************************************************************************/
-function request_new_unit_activity_road(punit, activity, road)
-{
-
-  var packet = {"type" : packet_unit_change_activity_road, "unit_id" : punit['id'],
-                "activity" : activity, "activity_road" : road };
-  send_request (JSON.stringify(packet));
-}
 
 /****************************************************************************
   Call to request (from the server) that the settler unit is put into

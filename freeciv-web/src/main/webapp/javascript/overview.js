@@ -19,6 +19,7 @@ var overview_h = 140;
 var OVERVIEW_REFRESH = 4500;
 
 var palette = [];
+var palette_size = 0;
 
 var overview_active = false;
 
@@ -81,6 +82,8 @@ function init_overview()
     var y = e.pageY - $(this).offset().top;
     overview_clicked (x, y)
   });
+
+  palette_size = Object.keys(players).length;
 
 
 }
@@ -203,6 +206,16 @@ function generate_palette() {
   palette[COLOR_OVERVIEW_OCEAN] = [30,65,195];  
   palette[COLOR_OVERVIEW_LAND] = [40,114,22];
   palette[COLOR_OVERVIEW_VIEWRECT] = [200,200,255];  
+
+  for (var player_id in players) {
+    var pplayer = players[player_id];
+    var pcolor = nations[pplayer['nation']]['color'];
+    var color_rgb = pcolor.match(/\d+/g);
+    color_rgb[0] = parseFloat(color_rgb[0]);
+    color_rgb[1] = parseFloat(color_rgb[1]);
+    color_rgb[2] = parseFloat(color_rgb[2]);
+    palette[9+(player_id % palette_size)] = color_rgb;
+  }
   return palette;
 }
 
@@ -231,12 +244,18 @@ function overview_tile_color(map_x, map_y)
       return COLOR_OVERVIEW_ENEMY_UNIT;
     } else if (punit['owner'] == client.conn.playing['id']) {
       return COLOR_OVERVIEW_MY_UNIT; 
+    } else if (punit['owner'] != null && punit['owner'] != 255) {
+      return 9 + (punit['owner'] % palette_size);
     } else {
       return COLOR_OVERVIEW_ENEMY_UNIT;
     }
   }
   
   if (tile_get_known(ptile) != TILE_UNKNOWN) {
+
+    if (ptile['owner'] != null && ptile['owner'] != 255) {
+      return 9 + (ptile['owner'] % palette_size);
+    }
 
     if (is_ocean_tile(ptile)) {
       return COLOR_OVERVIEW_OCEAN;

@@ -238,7 +238,7 @@ function pregame_settings()
   $(id).dialog({
 			bgiframe: true,
 			modal: false,
-			width: "450",
+			width: "550",
 			  buttons: {
 				Ok: function() {
 					$(this).dialog('close');

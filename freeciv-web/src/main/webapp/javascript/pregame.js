@@ -216,7 +216,20 @@ function pregame_settings()
 	  "<option value='1'>Easy</option>" +
           "<option value='2'>Normal</option>" +
           "<option value='3'>Hard</option>" +
-	  "</select></td></tr></table><br>" +
+	  "</select></td></tr>"+ 
+	  "<tr><td>Tech level:</td>" +
+	  "<td><input type='number' name='techlevel' id='techlevel' size='3' length='3' min='0' max='100' step='10'></td></tr>" +
+	  "<tr><td>Landmass:</td>" +
+	  "<td><input type='number' name='landmass' id='landmass' size='3' length='3' min='15' max='85' step='10'></td></tr>" +
+	  "<tr><td>Specials:</td>" +
+	  "<td><input type='number' name='specials' id='specials' size='4' length='4' min='0' max='1000' step='50'></td></tr>" +
+	  "<tr><td>Map generator:</td>" +
+	  "<td><select name='generator' id='generator'>" +
+	  "<option value='random'>Fully random height</option>" +
+	  "<option value='fractal'>Pseudo-fractal height</option>" +
+          "<option value='island'>Island-based</option>" +
+	  "</select></td></tr>"+ 
+          "</table><br>" +
 	  "<span id='settings_info'><i>Freeciv-web can be customized using the command line in many other ways also. Type /help in the command line for more information.</i></span>" 
 	  ;
   $(id).html(dhtml);
@@ -239,6 +252,9 @@ function pregame_settings()
   $("#timeout").val(game_info['timeout']);
   $("#skill_level").val(ai_skill_level);
   $("#metamessage").val(game_info['meta_message']);
+  $("#techlevel").val("0");
+  $("#landmass").val("30");
+  $("#specials").val("250");
 
   $(id).dialog('open');		
 
@@ -272,6 +288,32 @@ function pregame_settings()
     var myJSONText = JSON.stringify(test_packet);
     send_request (myJSONText);
   });
+
+  $('#techlevel').change(function() {
+    var test_packet = {"type" : packet_chat_msg_req, "message" : "/set techlevel " + $('#techlevel').val()};
+    var myJSONText = JSON.stringify(test_packet);
+    send_request (myJSONText);
+  });
+
+  $('#specials').change(function() {
+    var test_packet = {"type" : packet_chat_msg_req, "message" : "/set specials " + $('#specials').val()};
+    var myJSONText = JSON.stringify(test_packet);
+    send_request (myJSONText);
+  });
+
+  $('#landmass').change(function() {
+    var test_packet = {"type" : packet_chat_msg_req, "message" : "/set landmass " + $('#landmass').val()};
+    var myJSONText = JSON.stringify(test_packet);
+    send_request (myJSONText);
+  });
+
+  $('#generator').change(function() {
+    var test_packet = {"type" : packet_chat_msg_req, "message" : "/set generator " + $('#generator').val()};
+    var myJSONText = JSON.stringify(test_packet);
+    send_request (myJSONText);
+
+  });
+
 
   $('#skill_level').change(function() {
     ai_skill_level = parseFloat($('#skill_level').val());

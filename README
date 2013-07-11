@@ -117,7 +117,8 @@ On other Linux distributions, follow this installation procedure:
    - Edit /freeciv-web/src/main/webapp/WEB-INF/resin-web.xml.dist, rename this
      file to resin-web.xml, and update the values for your MySQL database.
    - Run 'build.sh' in the freeciv-web directory
-
+   - copy nginx configuration file from publite2/nginx.conf 
+     to /usr/local/nginx/conf/
 
 7. Start resin with these commands:
    cd ~/freeciv-build/resin/bin

@@ -254,7 +254,7 @@ function overview_tile_color(map_x, map_y)
   if (tile_get_known(ptile) != TILE_UNKNOWN) {
 
     if (ptile['owner'] != null && ptile['owner'] != 255) {
-      return 9 + (ptile['owner'] % palette_size);
+      return 10 + (ptile['owner'] % palette_size);
     }
 
     if (is_ocean_tile(ptile)) {

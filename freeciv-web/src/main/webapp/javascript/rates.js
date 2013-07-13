@@ -61,7 +61,6 @@ function show_tax_rates_dialog()
 			  buttons: {
 				"Change tax rates" : function() {
 					submit_player_rates();
-					close_rates_dialog();
 					$(this).dialog('close');
 				}
 			  }
@@ -298,27 +297,5 @@ function submit_player_rates()
   var packet = {"type" : packet_player_rates, 
                 "tax" : tax, "luxury" : lux, "science" : sci };
   send_request (JSON.stringify(packet));
-  close_rates_dialog();
-}
-
-
-
-/**************************************************************************
- Close dialog.
-**************************************************************************/
-function close_rates_dialog()
-{
-  $("#tabs-map").removeClass("ui-tabs-hide");
-  $("#tabs-civ").addClass("ui-tabs-hide");
-  $("#civ_tab").removeClass("ui-tabs-selected");
-  $("#civ_tab").removeClass("ui-state-active");
-  $("#civ_tab").addClass("ui-state-default");
-
-  
-  $("#map_tab").addClass("ui-state-active");
-  $("#map_tab").addClass("ui-tabs-selected");
-  $("#map_tab").removeClass("ui-state-default");
-
-  set_default_mapview_active();
 }
 

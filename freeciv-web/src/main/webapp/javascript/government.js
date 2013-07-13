@@ -165,7 +165,6 @@ function send_player_change_government(govt_id)
   var packet = {"type" : packet_player_change_government, 
                 "government" : govt_id };
   send_request (JSON.stringify(packet));
-  close_rates_dialog();
 }
 
 

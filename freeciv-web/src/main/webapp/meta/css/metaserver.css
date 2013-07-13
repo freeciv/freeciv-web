@@ -1,3 +1,7 @@
+body {
+  background-image:url('/images/bg.jpg');
+
+}
 
 .metatable {
   width: 100%;

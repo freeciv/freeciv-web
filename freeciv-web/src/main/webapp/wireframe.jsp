@@ -14,6 +14,8 @@
       body {
         padding-top: 60px;
         padding-bottom: 40px;
+	background-image:url('/images/bg.jpg');
+
       }
     </style>
     <link href="css/bootstrap-responsive.min.css" rel="stylesheet">

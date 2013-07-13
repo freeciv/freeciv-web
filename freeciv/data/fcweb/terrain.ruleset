@@ -1203,7 +1203,7 @@ act_gfx_alt    = "unit.road"
 reqs           =
     { "type", "name", "range"
       "Tech", "Railroad", "Player"
-      "Road", "Road", "Local"
+      "Extra", "Road", "Local"
       "UnitFlag", "Settlers", "Local"
       "TerrainClass", "Land", "Local"
     }

@@ -469,3 +469,7 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 .nation_button {
   font-size: 11px;
 }
+
+.specialist_item {
+  float: left;
+}

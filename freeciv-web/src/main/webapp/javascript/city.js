@@ -182,6 +182,40 @@ function show_city_dialog(pcity)
   $("#city_luxury").html(pcity['prod'][4]);
   $("#city_science").html(pcity['prod'][5]);
 
+  /* Handle citizens and specialists */
+  var specialist_html = "";
+  var citizen_types = ["angry", "unhappy", "content", "happy"];
+  for (var s = 0; s < citizen_types.length; s++) {
+    for (var i = 0; i < pcity['ppl_' + citizen_types[s]][0]; i ++) {
+     var sprite = get_specialist_image_sprite("citizen." + citizen_types[s] + "_" 
+         + (i % 2));
+     specialist_html = specialist_html +
+     "<div class='specialist_item' style='background: transparent url(" 
+           + sprite['image-src'] +
+           ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y'] 
+           + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px;float:left; '"
+           +" title='One " + citizen_types[s] + " citizen'></div>";
+    }
+  }
+
+  for (var i = 0; i < pcity['specialists_size']; i++) {
+    var spec_type_name = specialists[i]['plural_name'];
+    var spec_gfx_key = "specialist." + specialists[i]['rule_name'] + "_0";
+    for (var s = 0; s < pcity['specialists'][i]; s++) {
+     var sprite = get_specialist_image_sprite(spec_gfx_key);
+     specialist_html = specialist_html +
+     "<div class='specialist_item' style='cursor:pointer;cursor:hand; background: transparent url(" 
+           + sprite['image-src'] +
+           ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y'] 
+           + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px;float:left; '"
+           + " onclick='city_change_specialist(" + pcity['id'] + "," + specialists[i]['id'] + ");'"
+           +" title='" + spec_type_name + " (click to change)'></div>";
+
+    }
+  }
+  specialist_html += "<div style='clear: both;'></div>";
+  $("#specialist_panel").html(specialist_html);
+
 }
 
 /**************************************************************************
@@ -481,7 +515,6 @@ function city_name_dialog(suggested_name, unit_id) {
 			buttons: [	{
 					text: "Cancel",
 				        click: function() {
-						$(this).dialog('Cancel');
 						$("#city_name_dialog").remove();
         					keyboard_input=true;
 					}
@@ -603,5 +636,19 @@ function get_city_dxy_to_index(dx, dy)
   city_tile_map[" -2-1"] = 20;
 
   return city_tile_map[" "+dx+""+dy];
+
+}
+
+
+/**************************************************************************
+...
+**************************************************************************/
+function city_change_specialist(city_id, from_specialist_id)
+{
+  var city_message = {"type": packet_city_change_specialist, 
+                       "city_id" : city_id,
+                       "from" : from_specialist_id,
+                       "to" : (from_specialist_id + 1) % 3};
+  send_request(JSON.stringify(city_message));
 
 }

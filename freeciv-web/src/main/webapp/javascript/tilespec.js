@@ -1033,6 +1033,28 @@ function get_improvement_image_sprite(pimprovement)
 /****************************************************************************
  ...
 ****************************************************************************/
+function get_specialist_image_sprite(tag)
+{
+  if (tileset[tag] == null) return null;
+  
+  var tileset_x = tileset[tag][0];
+  var tileset_y = tileset[tag][1];
+  var width = tileset[tag][2];
+  var height = tileset[tag][3];
+  var i = tileset[tag][4];
+  return {"tag": tag, 
+            "image-src" : "/tileset/freeciv-web-tileset-" + i + ".png",
+            "tileset-x" : tileset_x,
+            "tileset-y" : tileset_y,
+            "width" : width,
+            "height" : height
+            };
+}    
+
+
+/****************************************************************************
+ ...
+****************************************************************************/
 function get_technology_image_sprite(ptech)
 {
   var tag = ptech['graphic_str'];

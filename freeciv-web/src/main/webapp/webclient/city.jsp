@@ -1,6 +1,8 @@
   <div id="city_viewport">
     <h2 style="margin: 5px;" id="city_heading"></h2>
-    
+
+    <div id="specialist_panel">
+    </div>
     
     <div class="city_panel">
       <div id="city_canvas_div">

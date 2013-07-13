@@ -86,6 +86,7 @@
 	      <cssSourceFile>jquery-ui.custom.min.css</cssSourceFile>
 	      <cssSourceFile>bluecurve.css</cssSourceFile>
 	      <cssSourceFile>fg.menu.css</cssSourceFile>
+	      <cssSourceFile>theme.dark.css</cssSourceFile>
 	      <cssSourceFile>pregame.css</cssSourceFile>
 	      <cssSourceFile>civclient.css</cssSourceFile>
               </cssSourceFiles>

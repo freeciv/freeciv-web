@@ -22,8 +22,8 @@ var diplstates = {};
 **************************************************************************/
 function update_nation_screen()
 {
-  var nation_list_html = "<table width=90% border=0 cellspacing=0><tr style='background: #444444;'><td>Flag</td><td>Color</td><td>Player Name:</td>"
-	  + "<td>Nation:</td><td>Attitude</td><td>Score</td><td>AI/Human</td><td>Alive/Dead</td><td>Diplomatic state</td><td>Action</td></tr>";
+  var nation_list_html = "<table class='tablesorter' id='nation_table' width=90% border=0 cellspacing=0 ><thead><td>Flag</td><td>Color</td><td>Player Name:</td>"
+	  + "<td>Nation:</td><td>Attitude</td><td>Score</td><td>AI/Human</td><td>Alive/Dead</td><td>Diplomatic state</td><td>Action</td></thead>";
   
   for (var player_id in players) {
     var pplayer = players[player_id];
@@ -77,6 +77,7 @@ function update_nation_screen()
 
   $("#nations_list").html(nation_list_html);
   $(".nation_button").button();
+  $("#nation_table").tablesorter({theme: "dark"});
 }
 
 

@@ -91,7 +91,7 @@ class CivCom(Thread):
       if (self.socket != None and not self.stopped):    
         if (self.packet_size == -1):
           self.header_buf += self.socket.recv(4 - len(self.header_buf));
-          if (self.header_buf == None): 
+          if (len(self.header_buf) == 0): 
             self.close_connection();
             return None;
           if (len(self.header_buf) == 4):

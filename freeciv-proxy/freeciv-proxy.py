@@ -67,20 +67,8 @@ class WSHandler(websocket.WebSocketHandler):
           self.write_message("Error: Could not authenticate user.");
           return;
 
-        try:
-          # send JSON request to civserver.
-          if not self.civcom.send_to_civserver(message):
-            if (logger.isEnabledFor(logging.INFO)):
-              logger.info("Sending data to civserver failed.");
-            self.write_message('Error: Civserver communication failure ')
-            return;
- 
-        except:
-          if (logger.isEnabledFor(logging.ERROR)):
-            logger.error("Service unavailable: freeciv-web down.");
-            logger.error(sys.exc_info());
-          self.write_message("Error: Freeciv-web Unavailable. Something is wrong here ");
-
+        # send JSON request to civserver.
+        self.civcom.queue_to_civserver(message);
 
 
     def on_close(self):

@@ -708,7 +708,7 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift)
     break;
      
     case 'R':
-      key_unit_road_();
+      key_unit_road();
     break;
 
     case 'F':

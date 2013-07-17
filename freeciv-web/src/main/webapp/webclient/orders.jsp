@@ -37,7 +37,7 @@
   </div>
 
   <div id="order_railroad" class="order_button" title="Build railroad (R)">
-    <a href="#" onclick="key_unit_railroad();"><img src="/images/orders/railroad_default.png" name="railroad_button" alt="" border="0" width="30" height="30"></a>
+    <a href="#" onclick="key_unit_road();"><img src="/images/orders/railroad_default.png" name="railroad_button" alt="" border="0" width="30" height="30"></a>
   </div>
 
 

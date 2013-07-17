@@ -360,18 +360,27 @@ function update_unit_order_commands()
   for (var i = 0; i < funits.length; i++) {
     var punit = funits[i]; 
     var ptype = unit_type(punit);
+    var ptile = index_to_tile(punit['tile']);
     if (ptype['name'] == "Settlers" || ptype['name'] == "Workers" 
         || ptype['name'] == "Engineers") {
-      $("#order_road").show();
+      if (!tile_has_road(ptile, ROAD_ROAD)) {
+        $("#order_road").show();
+        $("#order_railroad").hide();
+      } else if (player_invention_state(client.conn.playing, 65) == TECH_KNOWN
+                 && tile_has_road(ptile, ROAD_ROAD) 
+               && !tile_has_road(ptile, ROAD_RAIL)) {
+        $("#order_road").hide();
+        $("#order_railroad").show();
+      } else {
+        $("#order_road").hide();
+        $("#order_railroad").hide();
+      }
       $("#order_mine").show();
       $("#order_irrigate").show();
       $("#order_fortify").hide();
       $("#order_sentry").hide();
       $("#order_explore").hide();
       $("#order_auto_settlers").show();
-      if (player_invention_state(client.conn.playing, 65) == TECH_KNOWN) {
-        $("#order_railroad").show();
-      }
     } else {
       $("#order_road").hide();
       $("#order_railroad").hide();
@@ -699,7 +708,7 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift)
     break;
      
     case 'R':
-      key_unit_road();
+      key_unit_road_();
     break;
 
     case 'F':
@@ -727,10 +736,6 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift)
 
     case 'D':
       if (alt) show_debug_info(); 
-    break;
-
-    case 'L':
-      key_unit_railroad();
     break;
 
   };
@@ -936,28 +941,21 @@ function key_unit_mine()
 }
 
 /**************************************************************************
- Tell the units in focus to build road.  
+ Tell the units in focus to build road or railroad.  
 **************************************************************************/
 function key_unit_road()
 {
   var funits = get_units_in_focus();
   for (var i = 0; i < funits.length; i++) {
     var punit = funits[i]; 
-    request_new_unit_activity(punit, ACTIVITY_GEN_ROAD, 0);
+    var ptile = index_to_tile(punit['tile']);
+    if (!tile_has_road(ptile, ROAD_ROAD)) {
+      request_new_unit_activity(punit, ACTIVITY_GEN_ROAD, ROAD_ROAD);
+    } else if (tile_has_road(ptile, ROAD_ROAD) 
+               && !tile_has_road(ptile, ROAD_RAIL)) {
+      request_new_unit_activity(punit, ACTIVITY_GEN_ROAD, ROAD_RAIL);
+    }
   }
-  update_unit_focus();
-}
-
-/**************************************************************************
- Tell the units in focus to build railroads.  
-**************************************************************************/
-function key_unit_railroad()
-{
-  var funits = get_units_in_focus();
-  for (var i = 0; i < funits.length; i++) {
-    var punit = funits[i]; 
-    request_new_unit_activity(punit, ACTIVITY_GEN_ROAD, 1);
-  }  
   update_unit_focus();
 }
 

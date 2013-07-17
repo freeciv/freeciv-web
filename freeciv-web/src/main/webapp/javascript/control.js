@@ -1198,7 +1198,7 @@ function popup_caravan_dialog(punit, traderoute, wonder)
   $("<div id='caravan_dialog_" + punit['id'] + "'></div>").appendTo("div#game_page");
 
   var homecity = cities[punit['homecity']];
-  var ptile = index_to_tile(punit['index']);
+  var ptile = index_to_tile(punit['tile']);
   var pcity = tile_city(ptile);
 
 

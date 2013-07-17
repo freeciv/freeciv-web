@@ -436,9 +436,6 @@ function handle_unit_packet_common(packet_unit)
   var moved = true;
   var ret = true;
   
-  //console.log("2. handle_unit_packet_common at: " + new Date().getTime());
-  //console.log(packet_unit);
-  
   punit = player_find_unit_by_id(unit_owner(packet_unit), packet_unit['id']);
   
   clear_tile_unit(punit);

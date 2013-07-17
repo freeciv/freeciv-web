@@ -70,13 +70,8 @@ class CivCom(Thread):
               
       if (packet != None): 
         self.net_buf += packet;
-        if (len(self.net_buf) >= self.packet_size 
-            and chr(self.net_buf[-2]) != '}' 
-            and self.net_buf[-1] != 0):
-          logger.error("Invalid packet recieved!");
-          logger.info(repr(self.net_buf));
 
-        if (len(self.net_buf) == self.packet_size):
+        if (len(self.net_buf) == self.packet_size and self.net_buf[-1] == 0):
           # valid packet received from freeciv server, send it to client.
           self.send_buffer_append(self.net_buf[:-1]);
           self.packet_size = -1;
@@ -101,7 +96,7 @@ class CivCom(Thread):
             if (self.packet_size <= 0 or self.packet_size > 32767): 
               logger.error("Invalid packet size.");
           else:
-            logger.error("Incomplete packet header: " + repr(self.header_buf));
+            # complete header not read yet. return now, and read the rest next time.
             return None;
 
       if (self.socket != None and self.net_buf != None and self.packet_size > 0):

@@ -435,12 +435,12 @@ function request_city_buy()
   if (pcity['buy_gold_cost'] > pplayer['gold']) {
     show_dialog_message("Buy It!", 
       punit_type['name'] + " costs " + pcity['buy_gold_cost'] + " gold.<br>" 
-      + "Treaury contains " + pplayer['gold'] + " gold.");
+      + "Treasury contains " + pplayer['gold'] + " gold.");
       return;
   }
 
   var dhtml = "Buy " + punit_type['name'] + " for " + pcity['buy_gold_cost'] + " gold?<br>"
-              + "Treaury contains " + pplayer['gold'] + " gold.";
+              + "Treasury contains " + pplayer['gold'] + " gold.";
 
 
 

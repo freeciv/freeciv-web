@@ -1,12 +1,13 @@
 diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
 --- freeciv/common/packets.def	2012-09-02 02:23:30.000000000 +0300
 +++ freeciv/common/packets.def	2012-09-02 02:28:44.000000000 +0300
-@@ -574,6 +574,8 @@
+@@ -574,6 +574,9 @@
    SINT16 citizen_base[O_LAST];
    SINT16 usage[O_LAST];
    UINT16 food_stock, shield_stock;
 +  UINT16 granary_size;
 +  TURN granary_turns;
++  UINT16 buy_gold_cost;
  
    UINT16 trade[MAX_TRADE_ROUTES];
    UINT8 trade_value[MAX_TRADE_ROUTES];
@@ -65,13 +66,14 @@ diff -Nurd -X.diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
  
    packet->id=pcity->id;
    packet->owner = player_number(city_owner(pcity));
-@@ -2041,7 +2042,9 @@
+@@ -2041,7 +2042,10 @@
    packet->shield_stock = pcity->shield_stock;
    packet->pollution = pcity->pollution;
    packet->illness_trade = pcity->illness_trade;
 -  packet->city_options = pcity->city_options;
 +  packet->granary_size = city_granary_size(city_size_get(pcity));
 +  packet->granary_turns = city_turns_to_grow(pcity);
++  packet->buy_gold_cost = city_production_buy_gold_cost(pcity);
 +  /* packet->city_options = pcity->city_options; */
  
    packet->production_kind = pcity->production.kind;

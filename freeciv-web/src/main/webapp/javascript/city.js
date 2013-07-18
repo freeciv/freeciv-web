@@ -216,6 +216,8 @@ function show_city_dialog(pcity)
   specialist_html += "<div style='clear: both;'></div>";
   $("#specialist_panel").html(specialist_html);
 
+  $("#buy_button").button(city_can_buy(pcity) ? "enable" : "disable");
+
 }
 
 /**************************************************************************
@@ -225,6 +227,7 @@ function change_city_production_dialog()
 {
 
   var pcity = active_city;
+  var turns_to_complete = FC_INFINITY;
 
   // reset dialog page.
   $("#dialog").remove();
@@ -323,7 +326,7 @@ function change_city_production_dialog()
 			width: is_small_screen() ? "95%" : "60%",
 			buttons: {
 				"Buy": function() {
-						send_city_buy();
+						request_city_buy();
 						$(this).dialog('close');
 				},
 				"Close": function() {
@@ -332,8 +335,10 @@ function change_city_production_dialog()
 				}
 			}
 		});
-	
+
   $("#dialog").dialog('open');		
+  
+  if (!city_can_buy(pcity)) $(".ui-dialog-buttonpane button:contains('Buy')").button("disable");	
 
 }
 
@@ -408,6 +413,57 @@ function city_turns_to_build(pcity,
 }
 
 /**************************************************************************
+ Show buy production in city dialog
+**************************************************************************/
+function request_city_buy()
+{
+  var pcity = active_city;
+  var pplayer = client.conn.playing;
+
+  // reset dialog page.
+  $("#dialog").remove();
+  $("<div id='dialog'></div>").appendTo("div#game_page");
+    
+  var punit_type = unit_types[pcity['production_value']];
+
+  if (pcity['buy_gold_cost'] > pplayer['gold']) {
+    show_dialog_message("Buy It!", 
+      punit_type['name'] + " costs " + pcity['buy_gold_cost'] + " gold.<br>" 
+      + "Treaury contains " + pplayer['gold'] + " gold.");
+      return;
+  }
+
+  var dhtml = "Buy " + punit_type['name'] + " for " + pcity['buy_gold_cost'] + " gold?<br>"
+              + "Treaury contains " + pplayer['gold'] + " gold.";
+
+
+
+  $("#dialog").html(dhtml);
+
+  $("#dialog").attr("title", "Buy It!");
+  $("#dialog").dialog({
+			bgiframe: true,
+			modal: true,
+			width: is_small_screen() ? "95%" : "50%",
+			buttons: {
+				"Yes": function() {
+						send_city_buy();
+						$(this).dialog('close');
+				},
+				"No": function() {
+						$(this).dialog('close');
+
+				}
+			}
+		});
+	
+  $("#dialog").dialog('open');		
+
+
+}
+
+
+/**************************************************************************
  Buy whatever is being built in the city.
 **************************************************************************/
 function send_city_buy()
@@ -417,6 +473,7 @@ function send_city_buy()
     send_request (JSON.stringify(packet));
   }
 }
+
 /**************************************************************************
  Change city production.
 **************************************************************************/
@@ -650,5 +707,18 @@ function city_change_specialist(city_id, from_specialist_id)
                        "from" : from_specialist_id,
                        "to" : (from_specialist_id + 1) % 3};
   send_request(JSON.stringify(city_message));
+
+}
+
+
+/**************************************************************************
+...  (simplified)
+**************************************************************************/
+function city_can_buy(pcity)
+{
+  var improvement = improvements[pcity['production_value']];
+
+  return (!pcity['did_buy'] && pcity['turn_founded'] != game_info['turn']
+          && improvement['name'] != "Coinage");
 
 }

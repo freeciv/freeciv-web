@@ -17,6 +17,12 @@ var city_rules = {};
 
 var active_city = null;
 
+var FEELING_BASE = 0;		/* before any of the modifiers below */
+var FEELING_LUXURY = 1;		/* after luxury */
+var FEELING_EFFECT = 2;		/* after building effects */
+var FEELING_NATIONALITY = 3;  	/* after citizen nationality effects */
+var FEELING_MARTIAL = 4;	/* after units enforce martial order */
+var FEELING_FINAL = 5;		/* after wonders (final result) */
 
 /**************************************************************************
  ...
@@ -186,7 +192,7 @@ function show_city_dialog(pcity)
   var specialist_html = "";
   var citizen_types = ["angry", "unhappy", "content", "happy"];
   for (var s = 0; s < citizen_types.length; s++) {
-    for (var i = 0; i < pcity['ppl_' + citizen_types[s]][0]; i ++) {
+    for (var i = 0; i < pcity['ppl_' + citizen_types[s]][FEELING_FINAL]; i ++) {
      var sprite = get_specialist_image_sprite("citizen." + citizen_types[s] + "_" 
          + (i % 2));
      specialist_html = specialist_html +

@@ -399,6 +399,12 @@ function update_unit_order_commands()
       $("#order_build_city").hide();
     }
 
+    if (ptype['attack_strength'] > 0) {
+      $("#order_pillage").show();
+    } else {
+      $("#order_pillage").hide();
+    }
+
   }
 
 }
@@ -926,7 +932,7 @@ function key_unit_pillage()
   var funits = get_units_in_focus();
   for (var i = 0; i < funits.length; i++) {
     var punit = funits[i]; 
-    request_new_unit_activity(punit, ACTIVITY_PILLAGE, 0);
+    request_new_unit_activity(punit, ACTIVITY_PILLAGE, EXTRA_NONE);
   }  
   update_unit_focus();
 }

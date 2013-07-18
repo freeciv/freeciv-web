@@ -14,7 +14,12 @@
   <div id="order_fortify" class="order_button" title="Fortify unit (F)">
     <a href="#" onclick="key_unit_fortify();"><img src="/images/orders/fortify_default.png" name="fortify_button" alt="" border="0" width="30" height="30"></a>
   </div>
-    
+ 
+  <div id="order_pillage" class="order_button" title="Pillage (P)">
+    <a href="#" onclick="key_unit_pillage();"><img src="/images/orders/pillage.png" name="pillage_button" alt="" border="0" width="30" height="30"></a>
+  </div>
+
+   
   <div id="order_disband" class="order_button" title="Disband unit">
     <a href="#" onclick="key_unit_disband();"><img src="/images/orders/disband_default.png" name="disband_button" alt="" border="0" width="30" height="30"></a>
   </div>  

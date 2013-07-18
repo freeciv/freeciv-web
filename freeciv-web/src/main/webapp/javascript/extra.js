@@ -13,4 +13,4 @@
 
 var extras = {};
 
-
+var EXTRA_NONE = -1;

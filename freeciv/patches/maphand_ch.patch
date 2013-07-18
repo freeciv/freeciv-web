@@ -1,6 +1,6 @@
 Index: freeciv/server/maphand.c
 ===================================================================
---- freeciv/server/maphand.c	(revision 23027)
+--- freeciv/server/maphand.c	(revision 23063)
 +++ freeciv/server/maphand.c	(working copy)
 @@ -37,6 +37,7 @@
  #include "unit.h"
@@ -94,7 +94,7 @@ Index: freeciv/server/maphand.c
  
        info.label[0] = '\0';
  
-@@ -2188,3 +2226,468 @@
+@@ -2188,3 +2226,454 @@
  
    unbuffer_shared_vision(pto);
  }
@@ -332,25 +332,26 @@ Index: freeciv/server/maphand.c
 +     Q_("?nation:Neutral"),
 +     Q_("?city:Peaceful"), Q_("?city:Friendly"), Q_("?city:Mysterious"),
 +     Q_("?city:Friendly(team)")};
-+  int infracount;
 +  static struct astring str = ASTRING_INIT;
 +  char username[MAX_LEN_NAME + 32];
 +  char nation[2 * MAX_LEN_NAME + 32];
++  int tile_x, tile_y, nat_x, nat_y;
 +
 +  astr_clear(&str);
-+  astr_add_line(&str, _("Location: (%d, %d)"), TILE_XY(ptile));
++  index_to_map_pos(&tile_x, &tile_y, tile_index(ptile));
++  astr_add_line(&str, _("Location: (%d, %d) [%d]"),
++                tile_x, tile_y, tile_continent(ptile));
++  index_to_native_pos(&nat_x, &nat_y, tile_index(ptile));
++  astr_add_line(&str, _("Native coordinates: (%d, %d)"),
++                nat_x, nat_y);
 +
-+  if (tile_get_known(ptile, pplayer) == TILE_UNKNOWN) {
-+    astr_add(&str, _("Unknown"));
-+    return astr_str(&str);
-+  }
 +  astr_add_line(&str, _("Terrain: %s"),  tile_get_info_text(ptile, 0));
 +  astr_add_line(&str, _("Food/Prod/Trade: %s"),
 +		get_tile_output_text(ptile, pplayer));
 +  if (tile_has_special(ptile, S_HUT)) {
 +    astr_add_line(&str, _("Minor Tribe Village"));
 +  }
-+  if (game.info.borders > 0 && !pcity) {
++  if (BORDERS_DISABLED != game.info.borders && !pcity) {
 +    struct player *owner = tile_owner(ptile);
 +
 +    get_full_username(username, sizeof(username), owner);
@@ -362,20 +363,21 @@ Index: freeciv/server/maphand.c
 +      /* TRANS: "Territory of <username> (<nation + team>)" */
 +      astr_add_line(&str, _("Territory of %s (%s)"), username, nation);
 +    } else if (NULL != owner) {
-+      const struct player_diplstate *ds = *pplayer->diplstates;
++      struct player_diplstate *ds = player_diplstate_get(pplayer,
++                                                         owner);
 +
-+      if (ds[player_index(owner)].type == DS_CEASEFIRE) {
-+	int turns = ds[player_index(owner)].turns_left;
++      if (ds->type == DS_CEASEFIRE) {
++        int turns = ds->turns_left;
 +
-+        /* TRANS: "Territory of <username> (<nation + team>)
-+         * (<number> turn cease-fire)" */
 +        astr_add_line(&str,
++                      /* TRANS: "Territory of <username> (<nation + team>)
++                       * (<number> turn cease-fire)" */
 +                      PL_("Territory of %s (%s) (%d turn cease-fire)",
 +                          "Territory of %s (%s) (%d turn cease-fire)",
 +                          turns),
 +                      username, nation, turns);
 +      } else {
-+	int type = ds[player_index(owner)].type;
++        int type = ds->type;
 +
 +        /* TRANS: "Territory of <username>
 +         * (<nation + team> | <diplomatic state>)" */
@@ -391,8 +393,8 @@ Index: freeciv/server/maphand.c
 +    /* Look at city owner, not tile owner (the two should be the same, if
 +     * borders are in use). */
 +    struct player *owner = city_owner(pcity);
++    const char *improvements[improvement_count()];
 +    int has_improvements = 0;
-+    struct impr_type *prev_impr = NULL;
 +
 +    get_full_username(username, sizeof(username), owner);
 +    get_full_nation(nation, sizeof(nation), owner);
@@ -402,10 +404,10 @@ Index: freeciv/server/maphand.c
 +      astr_add_line(&str, _("City: %s | %s (%s)"),
 +                    city_name(pcity), username, nation);
 +    } else {
-+      const struct player_diplstate *ds = *pplayer->diplstates;
-+
-+      if (ds[player_index(owner)].type == DS_CEASEFIRE) {
-+	int turns = ds[player_index(owner)].turns_left;
++      struct player_diplstate *ds
++        = player_diplstate_get(pplayer, owner);
++      if (ds->type == DS_CEASEFIRE) {
++        int turns = ds->turns_left;
 +
 +        /* TRANS:  "City: <city name> | <username>
 +         * (<nation + team>, <number> turn cease-fire)" */
@@ -418,62 +420,50 @@ Index: freeciv/server/maphand.c
 +         * (<nation + team>, <diplomatic state>)" */
 +        astr_add_line(&str, _("City: %s | %s (%s, %s)"),
 +                      city_name(pcity), username, nation,
-+                      diplo_city_adjectives[ds[player_index(owner)].type]);
++                      diplo_city_adjectives[ds->type]);
++      }
++    }
++    if (can_player_see_units_in_city(pplayer, pcity)) {
++      int count = unit_list_size(ptile->units);
++
++      if (count > 0) {
++        astr_add(&str, PL_(" | Occupied with %d unit.",
++                                " | Occupied with %d units.", count), count);
++      } else {
++        astr_add(&str, _(" | Not occupied."));
++      }
++    } else {
++      if (pcity->client.occupied) {
++        astr_add(&str, _(" | Occupied."));
++      } else {
++        astr_add(&str, _(" | Not occupied."));
 +      }
 +    }
 +    improvement_iterate(pimprove) {
 +      if (is_improvement_visible(pimprove)
 +          && city_has_building(pcity, pimprove)) {
-+        if (has_improvements++ > 1) {
-+          /* TRANS: continue list, in case comma is not the separator of choice. */
-+          astr_add(&str, Q_("?clistmore:, %s"),
-+                   improvement_name_translation(prev_impr));
-+        } else if (has_improvements == 1) {
-+          astr_add_line(&str, "  ");
-+          /* TRANS: previous lines gave other information about the city. */
-+          astr_add(&str, Q_("?clistbegin: with %s"),
-+                   improvement_name_translation(pimprove));
-+        }
-+        prev_impr = pimprove;
++        improvements[has_improvements++] =
++            improvement_name_translation(pimprove);
 +      }
 +    } improvement_iterate_end;
 +
-+    if (NULL != prev_impr) {
-+      if (has_improvements > 2) {
-+        /* TRANS: This appears with two or more previous entries in the list */
-+        astr_add(&str, Q_("?clistlast:, and %s"),
-+		 improvement_name_translation(prev_impr));
-+      } else if (has_improvements > 1) {
-+        /* TRANS: This appears with only one previous entry in the list */
-+        astr_add(&str, Q_("?clistlast: and %s"),
-+		 improvement_name_translation(prev_impr));
-+      }
-+      astr_add(&str, "%s", Q_("?clistend:."));
++    if (0 < has_improvements) {
++      struct astring list = ASTRING_INIT;
++
++      astr_build_and_list(&list, improvements, has_improvements);
++      /* TRANS: %s is a list of "and"-separated improvements. */
++      astr_add_line(&str, _("   with %s."), astr_str(&list));
++      astr_free(&list);
 +    }
 +
 +  }
-+  get_tile_infrastructure_set(ptile, &infracount);
-+  if (infracount == 0) {
-+    base_type_iterate(pbase) {
-+      if (BV_ISSET(ptile->bases, base_index(pbase))) {
-+        infracount = 1;
-+        break;
-+      }
-+    } base_type_iterate_end;
-+
-+    if (infracount == 0) {
-+      road_type_iterate(proad) {
-+        if (BV_ISSET(ptile->roads, road_index(proad))) {
-+          infracount = 1;
-+          break;
-+        }
-+      } road_type_iterate_end;
++  {
++    const char *infratext = get_infrastructure_text(ptile->special,
++                                                    ptile->bases,
++                                                    ptile->roads);
++    if (*infratext != '\0') {
++      astr_add_line(&str, _("Infrastructure: %s"), infratext);
 +    }
-+  }
-+  if (infracount > 0) {
-+    astr_add_line(&str, _("Infrastructure: %s"),
-+		  get_infrastructure_text(ptile->special, ptile->bases,
-+                                          ptile->roads));
 +  }
 +  activity_text = concat_tile_activity_text(ptile);
 +  if (strlen(activity_text) > 0) {
@@ -482,12 +472,11 @@ Index: freeciv/server/maphand.c
 +  if (punit && !pcity) {
 +    struct player *owner = unit_owner(punit);
 +    struct unit_type *ptype = unit_type(punit);
-+    struct veteran_system *vetsys;
 +
 +    get_full_username(username, sizeof(username), owner);
 +    get_full_nation(nation, sizeof(nation), owner);
 +
-+    if (NULL == pplayer || owner == pplayer) {
++    if (!pplayer || owner == pplayer) {
 +      struct city *pcity = player_city_by_number(owner, punit->homecity);
 +
 +      if (pcity) {
@@ -502,10 +491,10 @@ Index: freeciv/server/maphand.c
 +                      utype_name_translation(ptype), username, nation);
 +      }
 +    } else if (NULL != owner) {
-+      const struct player_diplstate *ds = *pplayer->diplstates;
-+
-+      if (ds[player_index(owner)].type == DS_CEASEFIRE) {
-+	int turns = ds[player_index(owner)].turns_left;
++      struct player_diplstate *ds = player_diplstate_get(pplayer,
++                                                         owner);
++      if (ds->type == DS_CEASEFIRE) {
++        int turns = ds->turns_left;
 +
 +        /* TRANS:  "Unit: <unit type> | <username> (<nation + team>,
 +         * <number> turn cease-fire)" */
@@ -519,30 +508,27 @@ Index: freeciv/server/maphand.c
 +         * <diplomatic state>)" */
 +        astr_add_line(&str, _("Unit: %s | %s (%s, %s)"),
 +                      utype_name_translation(ptype), username, nation,
-+                      diplo_city_adjectives[ds[player_index(owner)].type]);
++                      diplo_city_adjectives[ds->type]);
 +      }
 +    }
 +
-+    if (ptype->veteran != NULL) {
-+      vetsys = ptype->veteran;
++    if (unit_owner(punit) == pplayer) {
++      /* Show bribe cost for own units. */
++      astr_add_line(&str, _("Bribe cost: %d"), unit_bribe_cost(punit));
 +    } else {
-+      vetsys = game.veteran;
++      /* We can only give an (lower) boundary for units of other players. */
++      astr_add_line(&str, _("Estimated bribe cost: > %d"),
++                    unit_bribe_cost(punit));
 +    }
 +
-+    /* TRANS: A is attack power, D is defense power, FP is firepower,
-+     * HP is hitpoints (current and max). */
-+    astr_add_line(&str, _("A:%d D:%d FP:%d HP:%d/%d (%s)"),
-+		  ptype->attack_strength, 
-+		  ptype->defense_strength, ptype->firepower, punit->hp, 
-+		  ptype->hp,
-+		  name_translation(&vetsys->definitions[punit->veteran].name));
-+
 +    if ((NULL == pplayer || owner == pplayer)
-+	&& unit_list_size(ptile->units) >= 2) {
++        && unit_list_size(ptile->units) >= 2) {
 +      /* TRANS: "5 more" units on this tile */
 +      astr_add(&str, _("  (%d more)"), unit_list_size(ptile->units) - 1);
 +    }
-+  } 
++  }
++
++  astr_break_lines(&str, LINE_BREAK);
 +  return astr_str(&str);
 +}
 +
@@ -565,7 +551,7 @@ Index: freeciv/server/maphand.c
 +
 Index: freeciv/server/maphand.h
 ===================================================================
---- freeciv/server/maphand.h	(revision 23027)
+--- freeciv/server/maphand.h	(revision 23063)
 +++ freeciv/server/maphand.h	(working copy)
 @@ -139,4 +139,6 @@
  void give_distorted_map(struct player *pfrom, struct player *pto, int good,

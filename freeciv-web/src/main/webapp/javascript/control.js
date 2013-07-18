@@ -950,10 +950,10 @@ function key_unit_road()
     var punit = funits[i]; 
     var ptile = index_to_tile(punit['tile']);
     if (!tile_has_road(ptile, ROAD_ROAD)) {
-      request_new_unit_activity(punit, ACTIVITY_GEN_ROAD, ROAD_ROAD);
+      request_new_unit_activity(punit, ACTIVITY_GEN_ROAD, extras['Road']['id']);
     } else if (tile_has_road(ptile, ROAD_ROAD) 
                && !tile_has_road(ptile, ROAD_RAIL)) {
-      request_new_unit_activity(punit, ACTIVITY_GEN_ROAD, ROAD_RAIL);
+      request_new_unit_activity(punit, ACTIVITY_GEN_ROAD, extras['Railroad']['id']);
     }
   }
   update_unit_focus();

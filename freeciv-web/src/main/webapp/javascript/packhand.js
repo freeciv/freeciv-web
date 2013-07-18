@@ -854,7 +854,7 @@ function handle_player_diplstate(packet)
 
 function handle_ruleset_extra(packet)
 {
-  /* TODO: implement */
+  extras[packet['name']] = packet;
 }
 
 function handle_endgame_player(packet)

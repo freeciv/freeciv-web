@@ -694,6 +694,10 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift)
         activate_goto();
       }
     break;
+
+    case 'H':
+      key_unit_homecity();
+    break;
       
     case 'X':
       key_unit_auto_explore();
@@ -957,6 +961,26 @@ function key_unit_road()
     }
   }
   update_unit_focus();
+}
+
+/**************************************************************************
+ Changes unit homecity to the city on same tile.
+**************************************************************************/
+function key_unit_homecity()
+{
+  var funits = get_units_in_focus();
+  for (var i = 0; i < funits.length; i++) {
+    var punit = funits[i]; 
+    var ptile = index_to_tile(punit['tile']);
+    var pcity = tile_city(ptile);
+
+    if (pcity != null) {
+      var packet = {"type" : packet_unit_change_homecity, "unit_id" : punit['id'],
+                "city_id" : pcity['id']};
+      send_request (JSON.stringify(packet));
+    }
+
+  }
 }
 
 

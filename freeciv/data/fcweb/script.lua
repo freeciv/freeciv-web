@@ -44,15 +44,12 @@ function place_map_labels()
   if random(1, 100) <= 75 then
     selected_mountains = random(1, mountains)
   end
-
   if random(1, 100) <= 75 then
     selected_ocean = random(1, deep_oceans)
   end
-
   if random(1, 100) <= 75 then
     selected_desert = random(1, deserts)
   end
-
   if random(1, 100) <= 75 then
     selected_glacier = random(1, glaciers)
   end
@@ -74,12 +71,12 @@ function place_map_labels()
     elseif tname == "Desert" then
       selected_desert = selected_desert - 1
       if selected_desert == 0 then
-        place:set_label("Scorched Spot")
+        place:set_label("Scorched spot")
       end
     elseif tname == "Glacier" then
       selected_glacier = selected_glacier - 1
       if selected_glacier == 0 then
-        place:set_label("Frozen Lake")
+        place:set_label("Frozen lake")
       end
     end
   end

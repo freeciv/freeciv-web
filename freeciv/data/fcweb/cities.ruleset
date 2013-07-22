@@ -1,3 +1,4 @@
+
 ; Modifying this file:
 ; You should not modify this file except to make bugfixes or
 ; for other "maintenance".  If you want to make custom changes
@@ -7,7 +8,7 @@
 ; use your new customized file.
 
 [datafile]
-description="Freeciv-web cities data"
+description="Cities data for Freeciv"
 options="+Freeciv-ruleset-Devel-2013.May.14"
 
 ; /* <-- avoid gettext warnings
@@ -91,7 +92,7 @@ vision_reveal_tiles = TRUE      ; civ1 & 2 default FALSE
 pop_report_zeroes = 4           ; Population in reports in tens of thousands
 
 [citizen]
-nationality   = FALSE           ; account for the nationality of the citizens
+nationality   = TRUE            ; account for the nationality of the citizens
 convert_speed = 50              ; base probability 50/1000 -> once every 20 turns
 partisans_pct = 0               ; percentage of own nationality to inspire partisans
                                 ; if 0, original city owner information is used instead

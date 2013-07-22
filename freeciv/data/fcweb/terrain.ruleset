@@ -38,6 +38,13 @@ lake_max_size = 14
 ; 0 to disable check.
 min_start_native_area = 0
 
+; How many fragments each movement point has.
+; For example road movement costs are relative to this.
+move_fragments = 3
+
+; How many move fragments IgTer unit movement costs
+igter_cost = 1
+
 ; There is no resources in the middle of the oceans, only near coast
 ocean_resources = FALSE
 
@@ -929,6 +936,9 @@ shield      = 3 ; glacier used to have 4
 ;                           present, 'name' is used. Since the name used in
 ;                           savegames must not change, use this when renaming a
 ;                           base after a ruleset has been released.
+; reqs                    = requirements to build the extra (see effects.ruleset
+;                           and README.effects for help on requirements)
+; buildable               = Can extra be built? Defaults to TRUE
 ;
 ; */ <-- avoid gettext warnings
 
@@ -946,30 +956,74 @@ name           = _("Hut")
 
 [extra_farmland]
 name           = _("Farmland")
+reqs           =
+    { "type", "name", "range"
+      "Tech", "Refrigeration", "Player"
+    }
 
 [extra_fallout]
 name           = _("Fallout")
 
 [extra_fortress]
 name           = _("Fortress")
+reqs           =
+    { "type", "name", "range", "present"
+      "Tech", "Construction", "Player", TRUE
+      "TerrainClass", "Land", "Local", TRUE
+      "UnitFlag", "Settlers", "Local", TRUE
+      "CityTile", "Center", "Local", FALSE
+    }
 
 [extra_airbase]
 name           = _("Airbase")
+reqs           =
+    { "type", "name", "range", "present"
+      "Tech", "Radio", "Player", TRUE
+      "TerrainClass", "Land", "Local", TRUE
+      "UnitFlag", "Airbase", "Local", TRUE
+      "CityTile", "Center", "Local", FALSE
+    }
 
 [extra_buoy]
 name           = _("Buoy")
+reqs           =
+    { "type", "name", "range", "present"
+      "Tech", "Radio", "Player", TRUE
+      "TerrainClass", "Oceanic", "Local", TRUE
+      "UnitFlag", "Airbase", "Local", TRUE
+      "CityTile", "Center", "Local", FALSE
+    }
 
 [extra_ruins]
 name           = _("Ruins")
+reqs           =
+    { "type", "name", "range", "present"
+      "TerrainClass", "Land", "Local", TRUE
+      "CityTile", "Center", "Local", FALSE
+    }
+buildable      = FALSE
 
 [extra_road]
 name           = _("Road")
+reqs           =
+    { "type", "name", "range"
+      "UnitFlag", "Settlers", "Local"
+      "TerrainClass", "Land", "Local"
+    }
 
 [extra_railroad]
 name           = _("Railroad")
+reqs           =
+    { "type", "name", "range"
+      "Tech", "Railroad", "Player"
+      "Extra", "Road", "Local"
+      "UnitFlag", "Settlers", "Local"
+      "TerrainClass", "Land", "Local"
+    }
 
 [extra_river]
 name           = _("River")
+buildable      = FALSE
 
 ; /* <-- avoid gettext warnings
 ;
@@ -980,15 +1034,12 @@ name           = _("River")
 ;                           present, 'name' is used. Since the name used in
 ;                           savegames must not change, use this when renaming a
 ;                           base after a ruleset has been released.
-; buildable               = Can base be built? Defaults to TRUE
 ; pillageable             = Can base be pillaged? Defaults to TRUE
 ; graphic                 = tag specifing preferred graphic
 ; graphic_alt             = tag for alternate graphic if preferred graphic is not 
 ;                           present. Can use eg "-" for no alternate graphic.
 ; activity_gfx            = tag specifing graphic for unit building base
 ; act_gfx_alt             = tag for alternative graphic for unit building base
-; reqs                    = requirements to build the base (see effects.ruleset
-;                           and README.effects for help on requirements)
 ; gui_type                = How gui should handle this base. Fortress/Airbase/Other
 ; build_time              = How long it takes for a unit to build this base. Value 0
 ;                           means that terrain specific value is used instead.
@@ -1024,13 +1075,6 @@ graphic        = "base.fortress"
 graphic_alt    = "-"
 activity_gfx   = "unit.fortress"
 act_gfx_alt    = "-"
-reqs           =
-    { "type", "name", "range", "present"
-      "Tech", "Construction", "Player", TRUE
-      "TerrainClass", "Land", "Local", TRUE
-      "UnitFlag", "Settlers", "Local", TRUE
-      "CityTile", "Center", "Local", FALSE
-    }
 gui_type       = "Fortress"
 build_time     = 3
 defense_bonus  = 100
@@ -1050,13 +1094,6 @@ graphic        = "base.airbase"
 graphic_alt    = "-"
 activity_gfx   = "unit.airbase"
 act_gfx_alt    = "-"
-reqs           =
-    { "type", "name", "range", "present"
-      "Tech", "Radio", "Player", TRUE
-      "TerrainClass", "Land", "Local", TRUE
-      "UnitFlag", "Airbase", "Local", TRUE
-      "CityTile", "Center", "Local", FALSE
-    }
 gui_type       = "Airbase"
 build_time     = 3
 native_to      = "Air", "Helicopter", "Missile"
@@ -1072,13 +1109,6 @@ graphic        = "base.buoy"
 graphic_alt    = "base.fortress"
 activity_gfx   = "unit.buoy"
 act_gfx_alt    = "unit.fortress"
-reqs           =
-    { "type", "name", "range", "present"
-      "Tech", "Radio", "Player", TRUE
-      "TerrainClass", "Oceanic", "Local", TRUE
-      "UnitFlag", "Airbase", "Local", TRUE
-      "CityTile", "Center", "Local", FALSE
-    }
 gui_type       = "Fortress"
 build_time     = 3
 vision_main_sq = 5
@@ -1092,12 +1122,6 @@ graphic        = "base.ruins"
 graphic_alt    = "-"
 activity_gfx   = "unit.ruins"
 act_gfx_alt    = "unit.fortress"
-reqs           =
-    { "type", "name", "range", "present"
-      "TerrainClass", "Land", "Local", TRUE
-      "CityTile", "Center", "Local", FALSE
-    }
-buildable      = FALSE
 build_time     = 0
 gui_type       = "Other"
 helptext       = _("\
@@ -1116,11 +1140,8 @@ They have no effect on gameplay.\
 ;                           present. Can use eg "-" for no alternate graphic.
 ; activity_gfx            = tag specifing graphic for unit building road
 ; act_gfx_alt             = tag for alternative graphic for unit building road
-; reqs                    = requirements to build the road (see effects.ruleset
-;                           and README.effects for help on requirements)
-; move_cost               = how much movement it takes to to travel
-;                           via this road. Value of 3 indicates full
-;                           movement point.
+; move_cost               = how much movement it takes to travel
+;                           via this road.
 ; move_mode               = how movement costs are applied
 ;   - "NoBonus"    = Road gives no movement bonuses
 ;   - "Cardinal"   = Road cost applies only on cardinal moves
@@ -1129,7 +1150,6 @@ They have no effect on gameplay.\
 ; build_time              = how many movement points it takes to build this road. Value of
 ;                           0 means that terrain specific value is used instead.
 ; defense_bonus           = Percent added to defense
-; buildable               = Can road be built? Defaults to TRUE
 ; pillageable             = Can road be pillaged? Defaults to TRUE
 ; food_incr_const         = food production added to tile regardless of terrain
 ; shield_incr_const       = shield production added to tile regardless of terrain
@@ -1176,11 +1196,6 @@ graphic        = "road"
 graphic_alt    = "-"
 activity_gfx   = "unit.road"
 act_gfx_alt    = "-"
-reqs           =
-    { "type", "name", "range"
-      "UnitFlag", "Settlers", "Local"
-      "TerrainClass", "Land", "Local"
-    }
 move_cost      = 1
 build_time     = 0
 food_incr      = 0
@@ -1200,13 +1215,6 @@ graphic        = "rail"
 graphic_alt    = "-"
 activity_gfx   = "unit.rail"
 act_gfx_alt    = "unit.road"
-reqs           =
-    { "type", "name", "range"
-      "Tech", "Railroad", "Player"
-      "Extra", "Road", "Local"
-      "UnitFlag", "Settlers", "Local"
-      "TerrainClass", "Land", "Local"
-    }
 move_cost      = 0
 build_time     = 3
 food_incr      = 0
@@ -1225,7 +1233,6 @@ graphic        = "river"
 graphic_alt    = "-"
 activity_gfx   = "unit.rail"
 act_gfx_alt    = "unit.road"
-buildable      = FALSE
 pillageable    = FALSE
 defense_bonus  = 50
 move_cost      = 1
@@ -1246,7 +1253,7 @@ helptext       = _("\
 Any land terrain type may have a River on it.  A River adds 1\
  trade to the resources produced by that tile.  It also increases a tile's\
  defense factor by 50%.  Finally, land units may move along a River (but\
- not diagonally); movement along a River costs only 1/3 of a movement point.\
+ not diagonally) for fast travel.\
 "), _("\
 Roads and railroads can only be built on River tiles if your\
  civilization has learned Bridge Building technology.\

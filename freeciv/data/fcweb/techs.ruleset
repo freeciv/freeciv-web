@@ -1,3 +1,4 @@
+
 ; Modifying this file:
 ; You should not modify this file except to make bugfixes or
 ; for other "maintenance".  If you want to make custom changes,
@@ -7,7 +8,7 @@
 ; use your new customized file.
 
 [datafile]
-description="Freeciv-web technology data"
+description="Default technology data for Freeciv (as Civ2, minus a few)"
 options="+Freeciv-ruleset-Devel-2013.May.14"
 
 ; /* <-- avoid gettext warnings
@@ -48,7 +49,6 @@ options="+Freeciv-ruleset-Devel-2013.May.14"
 ;
 ; "Bonus_Tech" = player gets extra tech if rearched first
 ; "Bridge"   = "Settler" unit types can build bridges over rivers
-; "Farmland" = "Settler" unit types can build farmland
 ; "Population_Pollution_Inc" = Increase the pollution factor created by
 ;                              population by one
 ; "Build_Airborne" = from now on can build air units (for use by AI)
@@ -609,7 +609,7 @@ graphic_alt = "-"
 name     = _("Refrigeration")
 req1     = "Sanitation"
 req2     = "Electricity"
-flags    = "Farmland"
+flags    = ""
 graphic     = "a.refrigeration"
 graphic_alt = "-"
 

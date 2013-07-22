@@ -1,3 +1,4 @@
+
 ; Modifying this file:
 ; You should not modify this file except to make bugfixes or
 ; for other "maintenance".  If you want to make custom changes
@@ -10,7 +11,7 @@
 ; than minor changes.
 
 [datafile]
-description="Freeciv-web governments data"
+description="Default governments data for Freeciv (as Civ2, minus fundamentalism)"
 options="+Freeciv-ruleset-Devel-2013.May.14"
 
 [governments]

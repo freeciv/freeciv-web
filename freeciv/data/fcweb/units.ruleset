@@ -15,14 +15,14 @@
 ; then the first unit with this role will be chosen.
 
 [datafile]
-description="Freeciv-web unit data"
+description="Default unit_type data for Freeciv"
 options="+Freeciv-ruleset-Devel-2013.May.14"
 
 [control]
 ; Names for custom unit type flags.
 flags =
   { "name", "helptxt"
-    "Airbase", _("Can build Airbases.")
+    "Airbase", _("Can build Airbases.") 
     "Transform", _("Can transform terrain.")
     "AirUnit", _("Very bad at attacking AEGIS.")
     "Horse", _("Attack value halved when attacking Pikemen.")

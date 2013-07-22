@@ -10,16 +10,16 @@
 ; than minor changes.
 
 [datafile]
-description="Freeciv-web game rules"
+description="Default game rules for Freeciv"
 options="+Freeciv-ruleset-Devel-2013.May.14"
 
 [about]
 ; Ruleset name
-name = _("Freeciv-web ruleset")
+name = _("Default ruleset")
 
 ; Description of the ruleset
 description = _("\
-These rules are meant to be used in freeciv-web.\
+You are playing Freeciv with default ruleset for single player games.\
 ")
 
 [options]
@@ -171,8 +171,8 @@ total_factor = 100
 ; Shore landing style
 ;  FALSE - normal movement
 ;  TRUE  - (default) slow invasions by removing all
-;      movement points from ground units moving
-;      from ocean tile to land
+;          movement points from ground units moving
+;          from ocean tile to land
 slow_invasions = TRUE
 
 [combat_rules]
@@ -264,7 +264,7 @@ effects        = "ReducePopulation", "Fallout"
 ; Trade settings
 ;
 ; For each of the trade route types; "National", "NationalIC", "IN", "INIC":
-; "pct" - Trade income %. If this is 0, trade route cannot be established at all
+; "pct"        - Trade income %. If this is 0, trade route cannot be established at all
 ; "cancelling" - What to do to previously established traderoutes when they turn illegal
 ;                "Active"   - Keep them active
 ;                "Inactive" - Keep them inactive
@@ -343,9 +343,9 @@ colorlist =
 ;       "int_set", 123, FALSE
 ;       "str_set", "test", FALSE
 ;     }
-
 set =
   { "name", "value", "lock"
     "autosaves", "", TRUE
     "topology", "WRAPX", TRUE
   }
+

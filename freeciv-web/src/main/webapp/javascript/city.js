@@ -429,19 +429,28 @@ function request_city_buy()
   // reset dialog page.
   $("#dialog").remove();
   $("<div id='dialog'></div>").appendTo("div#game_page");
-    
-  var punit_type = unit_types[pcity['production_value']];
+  var buy_price_string = "";
+  var buy_question_string = "";
+
+  if (pcity['production_kind'] == VUT_UTYPE) {
+    var punit_type = unit_types[pcity['production_value']];
+    buy_price_string = punit_type['name'] + " costs " + pcity['buy_gold_cost'] + " gold.";
+    buy_question_string = "Buy " + punit_type['name'] + " for " + pcity['buy_gold_cost'] + " gold?";
+  } else {
+    var improvement = improvements[pcity['production_value']];
+    buy_price_string = improvement['name'] + " costs " + pcity['buy_gold_cost'] + " gold.";
+    buy_question_string = "Buy " + improvement['name'] + " for " + pcity['buy_gold_cost'] + " gold?";
+  }
+
+  var treasury_text = "<br>Treasury contains " + pplayer['gold'] + " gold.";
 
   if (pcity['buy_gold_cost'] > pplayer['gold']) {
     show_dialog_message("Buy It!", 
-      punit_type['name'] + " costs " + pcity['buy_gold_cost'] + " gold.<br>" 
-      + "Treasury contains " + pplayer['gold'] + " gold.");
-      return;
+      buy_price_string + treasury_text);
+    return;
   }
 
-  var dhtml = "Buy " + punit_type['name'] + " for " + pcity['buy_gold_cost'] + " gold?<br>"
-              + "Treasury contains " + pplayer['gold'] + " gold.";
-
+  var dhtml = buy_question_string + treasury_text;
 
 
   $("#dialog").html(dhtml);

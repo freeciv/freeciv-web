@@ -1458,10 +1458,6 @@ Transit </li>
  src="http://images2.wikia.nocookie.net/freeciv/images/0/00/U.cannon.png"
  alt="image:u.cannon.png" border="0" height="48" width="64"></span>Cannon
         </li>
-        <li> <span class="image"><img
- src="http://images2.wikia.nocookie.net/freeciv/images/0/02/B.coastal_defense.png"
- alt="image:b.coastal_defense.png" border="0" height="64" width="64"></span>Coastal
-Defense </li>
         <li> Conscription (with Democracy) </li>
         <li> Electricity (with Magnetism)</li>
       </ul>

@@ -120,7 +120,7 @@ friendly cities. </td>
       <td style="vertical-align: top; text-align: center;"><span
  style="font-weight: bold;">I</span><br>
       </td>
-      <td style="vertical-align: top;">Build Ittigation<br>
+      <td style="vertical-align: top;">Build Irrigation<br>
       </td>
     </tr>
     <tr>

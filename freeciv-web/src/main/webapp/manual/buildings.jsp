@@ -184,7 +184,7 @@ which occurs when a defending unit is destroyed by a land unit. </td>
       <td align="center"><b>60</b>
       <p>1 </p>
       </td>
-      <td align="left">Metallurgy
+      <td align="left">Gunpowder
       <p>None </p>
       </td>
       <td align="left">Increases the defence strength of units within a

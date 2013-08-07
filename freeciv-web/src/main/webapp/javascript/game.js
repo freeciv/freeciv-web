@@ -44,19 +44,18 @@ function game_find_unit_by_number(id)
 }
 
 /**************************************************************************
-  ...
+ Count the # of thousand citizen in a civilisation. 
 **************************************************************************/
-function get_player_population() {
+function civ_population(playerno) {
   var population = 0;
-  var playerno = client.conn.playing.playerno;
   
   for (city_id in cities) {
     var pcity = cities[city_id];
     if (playerno == pcity['owner']) {
-      population += pcity['size'];
+      population += city_population(pcity);
     }
   }
-  return population * 10000;
+  return numberWithCommas(population * 1000);
 }
 
 
@@ -85,7 +84,7 @@ function update_game_status_panel() {
       } 
 
       status_html += "<b>" + nations[pplayer['nation']]['adjective'] + "</b> Population: ";
-      status_html += "<b>" + get_player_population() + "</b>  ";
+      status_html += "<b>" + civ_population(client.conn.playing.playerno) + "</b>  ";
       status_html += "Turn: <b>" + game_info['turn'] + "</b>  ";
       status_html += "Gold: <b>" + pplayer['gold'] + " (" + net_income + ")</b>  "; 
       status_html += "Tax: <b>" + tax + "</b> ";

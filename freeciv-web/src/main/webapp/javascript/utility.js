@@ -98,3 +98,10 @@ function civclient_benchmark(frame)
     alert('Redraw time: ' + time);
   }
 }
+
+/****************************************************************************
+ ...
+****************************************************************************/
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}

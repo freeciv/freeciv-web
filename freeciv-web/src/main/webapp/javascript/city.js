@@ -737,3 +737,12 @@ function city_can_buy(pcity)
           && improvement['name'] != "Coinage");
 
 }
+
+/**************************************************************************
+ Returns how many thousand citizen live in this city.
+**************************************************************************/
+function city_population(pcity)
+{
+  /*  Sum_{i=1}^{n} i  ==  n*(n+1)/2  */
+  return pcity['size'] * (pcity['size'] + 1) * 5;
+}

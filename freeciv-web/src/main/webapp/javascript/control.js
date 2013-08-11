@@ -135,8 +135,9 @@ function control_init()
     show_help();
   });
 
-
-  $("#game_unit_orders_default").tooltip();
+  if (!is_touch_device()) { 
+    $("#game_unit_orders_default").tooltip();
+  }
 
 
 }

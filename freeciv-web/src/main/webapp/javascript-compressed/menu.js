@@ -29,12 +29,14 @@ function help_tutorial() {
 
 $(document).ready(function() {
 
-  $('#single-button').mouseover(help_single);
-  $('#multi-button').mouseover(help_multi);
-  $('#scenarios-button').mouseover(help_scenario);
-  $('#tutorial-button').mouseover(help_tutorial);
-  $('#scenarios-button').mouseover(help_scenario);
-  $('#load-button').mouseover(help_load);
+  if (!('ontouchstart' in document.documentElement)) {
+    $('#single-button').mouseover(help_single);
+    $('#multi-button').mouseover(help_multi);
+    $('#scenarios-button').mouseover(help_scenario);
+    $('#tutorial-button').mouseover(help_tutorial);
+    $('#scenarios-button').mouseover(help_scenario);
+    $('#load-button').mouseover(help_load);
+  }
 
   var savegame_count = $.jStorage.get("savegame-count", 0);
 

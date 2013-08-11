@@ -41,7 +41,7 @@ function set_client_state(newstate)
     switch (civclient_state) {
     case C_S_RUNNING:
       chatbox_text = " ";
-      
+      $.unblockUI(); 
       show_new_game_message();
       
       /*init_city_report_game_data();

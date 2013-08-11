@@ -22,8 +22,9 @@ function load_game_check()
   var scenario = $.getUrlVar('scenario');
  
   if (load_game_id != null) {
+    $.blockUI();
 
-   if (scenario == "true") {
+    if (scenario == "true") {
       loadTimerId = setTimeout("load_game_real('" + load_game_id + "');", 
                              1500);
       setTimeout(load_game_toggle,3500);
@@ -61,6 +62,7 @@ function load_game_real(filename)
                          "message" : "/load " + filename};
       var myJSONText = JSON.stringify(test_packet);
       send_request (myJSONText);
+      $.unblockUI();
 }
 
 /**************************************************************************
@@ -75,6 +77,7 @@ function load_game_toggle()
   test_packet = {"type" : packet_chat_msg_req, 
                          "message" : "/take AI*1"};
   send_request (JSON.stringify(test_packet));
+  $.unblockUI();
 
 }
 
@@ -118,6 +121,7 @@ function save_game()
 					} else {
 						$(this).dialog('close');
 						save_game_send();
+                                                $.blockUI();
 					}
 				}
 			}
@@ -165,6 +169,7 @@ function save_game_fetch()
       $.jStorage.set("savegame-savename-" + savegame_count, savename);
       $.jStorage.set("savegame-username-" + savegame_count, username);
       $.jStorage.set("savegame-count" , savegame_count);
+      $.unblockUI();
       alert("Game saved successfully");
     }).fail(function() { alert("Failed saving game"); });
 }

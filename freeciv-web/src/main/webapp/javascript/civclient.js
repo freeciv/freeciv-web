@@ -109,8 +109,7 @@ function civclient_init()
   observe_game_check();
 
   if (observing) {
-    show_dialog_message("Welcome to Freeciv-web", 
-      "Please wait while you are being logged in as an observer in the game.");
+    $.blockUI({ message: '<h1>Please wait while you are being logged in as an observer in the game.</h1>' });
 
   } else if (is_small_screen()) {
     show_intro_dialog("Welcome to Freeciv-web", 

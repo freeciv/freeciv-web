@@ -1,5 +1,14 @@
 
 <script type="text/javascript" src="/javascript-compressed/savegames.js"></script>
+<%
+String username = "" + session.getAttribute("username");
+if (username == null || "null".equals(username)) {
+	// User isn't logged in, make user log in.
+	String redir_url = "/wireframe.jsp?do=guest_user&redir=/wireframe.jsp?do=load";
+        response.sendRedirect(redir_url);
+}
+%>
+
 
 <div id="main_column">
 

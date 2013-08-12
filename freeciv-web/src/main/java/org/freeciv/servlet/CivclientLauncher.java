@@ -114,7 +114,7 @@ public class CivclientLauncher extends HttpServlet {
 
 		if ((action != null && action.equals("observe")) && (username == null || "null".equals(username))) {
 			Random randomGenerator = new Random();
-			username = "observer" + randomGenerator.nextInt(1000);
+			username = "Observer" + randomGenerator.nextInt(10000);
 			request.getSession().setAttribute( "username", username);
 		}
 

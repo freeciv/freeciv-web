@@ -1,0 +1,13 @@
+Index: freeciv/server/unittools.c
+===================================================================
+--- freeciv/server/unittools.c	(revision 23091)
++++ freeciv/server/unittools.c	(working copy)
+@@ -2368,7 +2368,7 @@
+   conn_list_iterate(dest, pconn) {
+     struct player *pplayer = pconn->playing;
+ 
+-    if (!conn_is_global_observer(pconn)
++    if (pplayer != NULL && !conn_is_global_observer(pconn)
+         && can_player_see_unit_at(pplayer, punit, old_tile)
+         && !can_player_see_unit_at(pplayer, punit,
+                                    unit_tile(punit))) {

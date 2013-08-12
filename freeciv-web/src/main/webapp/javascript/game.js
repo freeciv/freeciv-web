@@ -103,4 +103,7 @@ function update_game_status_panel() {
   
   $("#game_status_panel").html(status_html); 
 
+  document.title = "Freeciv-web - " + username + "  (turn:" + game_info['turn'] + ", port:" + civserverport + ")";
+
+
 }

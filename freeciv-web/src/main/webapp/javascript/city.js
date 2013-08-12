@@ -109,7 +109,8 @@ function show_city_dialog(pcity)
   
   
   $("#city_heading").html(unescape(pcity['name']));
-  $("#city_size").html("City size: " + pcity['size'] + "<br>"
+  $("#city_size").html("Population: " + numberWithCommas(city_population(pcity)*1000) + "<br>" 
+                       + "Size: " + pcity['size'] + "<br>"
                        + "Granary: " + pcity['food_stock'] + "/" + pcity['granary_size'] + "<br>"
                        + "Change in: " + city_turns_to_growth_text(pcity));
   

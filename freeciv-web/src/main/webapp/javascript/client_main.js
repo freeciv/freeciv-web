@@ -19,6 +19,11 @@ var C_S_OVER = 3;       /* Connected with game over. */
 
 var civclient_state = C_S_INITIAL;
 
+var endgame_player_info = [];
+
+/**************************************************************************
+ Sets the client state (initial, pre, running, over etc).
+**************************************************************************/
 function set_client_state(newstate)
 {
   var connect_error = (C_S_PREPARING == civclient_state)
@@ -26,16 +31,6 @@ function set_client_state(newstate)
   var oldstate = civclient_state;
 
   if (civclient_state != newstate) {
-    /*FIXME: struct player *pplayer = client_player();*/
-
-    /* If changing from pre-game state to _either_ select race
-       or running state, then we have finished getting ruleset data.
-    */
-    /*FIXME:if (C_S_PREPARING == civclient_state
-	&& C_S_RUNNING == newstate) {
-      audio_stop();		// stop intro sound loop 
-    }*/
-
     civclient_state = newstate;
 
     switch (civclient_state) {
@@ -44,95 +39,21 @@ function set_client_state(newstate)
       $.unblockUI(); 
       show_new_game_message();
       
-      /*init_city_report_game_data();
-      load_ruleset_specific_options();
-      create_event(NULL, E_GAME_START, _("Game started."));
-      precalc_tech_data();
-      if (pplayer) {
-        player_research_update(pplayer);
-      }
-      role_unit_precalcs();
-      boot_help_texts(pplayer);	 //reboot with player 
-      can_slide = FALSE;
-      update_unit_focus();
-      can_slide = TRUE;*/
       set_client_page(PAGE_GAME);
       setup_window_size();
 
       if (observing) center_tile_mapcanvas(map_pos_to_tile(15,15));
 
-      /*// Find something sensible to display instead of the intro gfx. 
-      center_on_something();
-      free_intro_radar_sprites();
-      agents_game_start();
-      editgui_tileset_changed();*/
       break;
     case C_S_OVER:
-      //if (C_S_RUNNING == oldstate) {
-        /*
-         * Extra kludge for end-game handling of the CMA.
-         */
-        /*if (pplayer && pplayer->cities) {
-          city_list_iterate(pplayer->cities, pcity) {
-            if (cma_is_city_under_agent(pcity, NULL)) {
-              cma_release_city(pcity);
-            }
-          } city_list_iterate_end;
-        }
-        popdown_all_city_dialogs();
-        popdown_all_game_dialogs();
-        set_unit_focus(NULL);*/
-      //} else {
-        /*init_city_report_game_data();
-        precalc_tech_data();
-        if (pplayer) {
-          player_research_update(pplayer);
-        }
-        role_unit_precalcs();
-        boot_help_texts(pplayer);            // reboot
-        set_unit_focus(NULL);
-        set_client_page(PAGE_GAME);
-        center_on_something();*/
-      //}
+      setTimeout(show_endgame_dialog, 500);
       break;
     case C_S_PREPARING:
-      /*popdown_all_city_dialogs();
-      close_all_diplomacy_dialogs();
-      popdown_all_game_dialogs();
-      clear_notify_window();
-      if (C_S_INITIAL != oldstate) {
-	client_game_free();
-      }
-      client_game_init();
-      set_unit_focus(NULL);
-      if (!client.conn.established && !with_ggz) {
-	set_client_page(in_ggz ? PAGE_GGZ : PAGE_MAIN);
-      } else {
-	set_client_page(PAGE_START);
-      }*/
       break;
     default:
       break;
     }
-    //update_menus();
   }
-  /*if (!client.conn.established && C_S_PREPARING == civclient_state) {
-    client_game_free();
-    client_game_init();
-    gui_server_connect();
-    if (auto_connect) {
-      if (connect_error) {
-	freelog(LOG_FATAL,
-		_("There was an error while auto connecting; aborting."));
-	exit(EXIT_FAILURE);
-      } else {
-	start_autoconnecting_to_server();
-	auto_connect = FALSE;	// don't try this again 
-      }
-    } 
-  }
-  update_turn_done_button_state();
-  update_conn_list_dialog();*/
 
 
 }
@@ -213,4 +134,20 @@ function alert_war(player_no)
   show_dialog_message("War!", "You are now at war with the " 
 	+ nations[pplayer['nation']]['adjective']
     + " leader " + pplayer['name'] + "!");
+}
+
+/**************************************************************************
+ Shows the endgame dialog
+**************************************************************************/
+function show_endgame_dialog()
+{
+  var title = "Final Report: The Greatest Civilizations in the world!";
+  var message = "";
+  for (var i = 0; i < endgame_player_info.length; i++) {
+    var pplayer = players[endgame_player_info[i]['player_id']];
+    var nation_adj = nations[pplayer['nation']]['adjective'];
+    message += (i+1) + ": The " + nation_adj + " ruler " + pplayer['name'] + " scored " + endgame_player_info[i]['score'] + " points" + "<br>";
+  }
+
+  show_dialog_message(title, message);
 }

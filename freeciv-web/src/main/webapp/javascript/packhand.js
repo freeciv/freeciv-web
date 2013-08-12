@@ -859,5 +859,5 @@ function handle_ruleset_extra(packet)
 
 function handle_endgame_player(packet)
 {
-  /* TODO: implement */
+  endgame_player_info.push(packet);
 }

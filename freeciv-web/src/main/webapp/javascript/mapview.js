@@ -432,7 +432,7 @@ function mapview_put_border_line(pcanvas, dir, color, canvas_x, canvas_y) {
   }
   pcanvas.closePath();
   pcanvas.stroke();
-  if (dashedSupport) pcanvas.setLineDash(null);
+  if (dashedSupport) pcanvas.setLineDash([]);
   if (mozDashSupport) pcanvas.mozDash = null;
   
     

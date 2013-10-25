@@ -62,7 +62,9 @@ function init_mapview()
   } 
   
   dashedSupport = ("setLineDash" in mapview_canvas_ctx);
-  mozDashSupport = ("mozDash" in mapview_canvas_ctx);
+  if (!dashedSupport) {
+    mozDashSupport = ("mozDash" in mapview_canvas_ctx);
+  }
 
   setup_window_size();  
 
@@ -397,8 +399,11 @@ function mapview_put_border_line(pcanvas, dir, color, canvas_x, canvas_y) {
   pcanvas.lineWidth = 2;
 
   pcanvas.lineCap = 'butt';
-  if (dashedSupport) pcanvas.setLineDash([4,4]);
-  if (mozDashSupport) pcanvas.mozDash = [4, 4];
+  if (dashedSupport) {
+    pcanvas.setLineDash([4,4]);
+  } else if (mozDashSupport) {
+    pcanvas.mozDash = [4, 4];
+  }
 
   pcanvas.beginPath();
   if (dir == DIR8_NORTH) {
@@ -432,9 +437,11 @@ function mapview_put_border_line(pcanvas, dir, color, canvas_x, canvas_y) {
   }
   pcanvas.closePath();
   pcanvas.stroke();
-  if (dashedSupport) pcanvas.setLineDash([]);
-  if (mozDashSupport) pcanvas.mozDash = null;
-  
+  if (dashedSupport) {
+    pcanvas.setLineDash([]);
+  } else if (mozDashSupport) {
+    pcanvas.mozDash = null;
+  }
     
 }
 

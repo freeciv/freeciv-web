@@ -27,7 +27,7 @@
  (function(){
     var
         /* jStorage version */
-        JSTORAGE_VERSION = "0.4.3",
+        JSTORAGE_VERSION = "0.4.5",
 
         /* detect a dollar object or create one if not found */
         $ = window.jQuery || window.$ || (window.$ = {}),
@@ -46,7 +46,7 @@
         };
 
     // Break if no JSON support was found
-    if(!JSON.parse || !JSON.stringify){
+    if(!('parse' in JSON) || !('stringify' in JSON)){
         throw new Error("No JSON support found, include //cdnjs.cloudflare.com/ajax/libs/json2/20110223/json2.js to page");
     }
 
@@ -176,7 +176,12 @@
         else if("globalStorage" in window){
             try {
                 if(window.globalStorage) {
-                    _storage_service = window.globalStorage[window.location.hostname];
+					if(window.location.hostname == 'localhost'){
+						_storage_service = window.globalStorage['localhost.localdomain'];
+					}
+					else{
+						_storage_service = window.globalStorage[window.location.hostname];
+					}
                     _backend = "globalStorage";
                     _observer_update = _storage_service.jStorage_update;
                 }
@@ -387,7 +392,12 @@
         var updateTime = (+new Date()).toString();
 
         if(_backend == "localStorage" || _backend == "globalStorage"){
-            _storage_service.jStorage_update = updateTime;
+            try {
+                _storage_service.jStorage_update = updateTime;
+            } catch (E8) {
+                // safari private mode has been enabled after the jStorage initialization
+                _backend = false;
+            }
         }else if(_backend == "userDataBehavior"){
             _storage_elm.setAttribute("jStorage_update", updateTime);
             _storage_elm.save("jStorage");
@@ -525,7 +535,9 @@
         if(_pubsub_observers[channel]){
             for(var i=0, len = _pubsub_observers[channel].length; i<len; i++){
                 // send immutable data that can't be modified by listeners
-                _pubsub_observers[channel][i](channel, JSON.parse(JSON.stringify(payload)));
+                try{
+                    _pubsub_observers[channel][i](channel, JSON.parse(JSON.stringify(payload)));
+                }catch(E){};
             }
         }
     }

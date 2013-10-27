@@ -98,7 +98,7 @@ function save_game()
 
   var dhtml = "<table>" +
   	  "<tr><td>Savegame name:</td>" +
-	  "<td><input type='text' name='savegamename' id='savegamename' size='20' maxlength='32'></td></tr>" +
+	  "<td><input type='text' name='savegamename' id='savegamename' size='32' maxlength='64'></td></tr>" +
 	  "</td></tr></table><br>" +
 	  "<span id='settings_info'><i>Freeciv-web allows you to save games. Games are stored in your web browser using HTML5 localstorage. Saved games will be stored in your browser until you clear your browser cache. Savegames are tied to your username " + username + ".</i></span>" 
 
@@ -113,7 +113,7 @@ function save_game()
 				Save: function() {
 					keyboard_input = true;
 					savename = $("#savegamename").val()
-					if (savename == null || savename.length < 4 || savename.length > 32) {
+					if (savename == null || savename.length < 4 || savename.length > 64) {
 						alert("Invalid savegame name.");
 					} else if (check_savegame_duplicate(savename)) {
 						alert("Savegame name already in use. "
@@ -126,7 +126,15 @@ function save_game()
 				}
 			}
 		});
-	
+  var pplayer = client.conn.playing;
+  var suggest_savename = username + " of the " + nations[pplayer['nation']]['adjective'] + " in the year " + get_year_string() + " [" 
+                         + ($.jStorage.get("savegame-count", 0) + 1) + "]";
+  if (suggest_savename.length >= 64) suggest_savename = username + " [" 
+                         + ($.jStorage.get("savegame-count", 0) + 1) + "]";
+
+
+  $("#savegamename").val(suggest_savename);	
+
   $("#dialog").dialog('open');		
 
 }

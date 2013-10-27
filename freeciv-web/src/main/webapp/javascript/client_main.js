@@ -43,6 +43,7 @@ function set_client_state(newstate)
       setup_window_size();
 
       if (observing) center_tile_mapcanvas(map_pos_to_tile(15,15));
+      update_metamessage_on_gamestart();
 
       break;
     case C_S_OVER:
@@ -151,3 +152,23 @@ function show_endgame_dialog()
 
   show_dialog_message(title, message);
 }
+
+
+/**************************************************************************
+ 
+**************************************************************************/
+function update_metamessage_on_gamestart()
+{
+  if (!observing && !metamessage_changed && client.conn.playing != null
+      && client.conn.playing['pid'] == players[0]['pid']) {
+    var pplayer = client.conn.playing;
+    var metasuggest = username + " ruler of the " + nations[pplayer['nation']]['adjective'] + " empire.";
+
+    var test_packet = {"type" : packet_chat_msg_req, "message" : "/metamessage " + metasuggest};
+    var myJSONText = JSON.stringify(test_packet);
+    send_request (myJSONText);
+    setTimeout("chatbox_text = ' '; add_chatbox_text('');", 500);
+ 
+  }
+}
+

@@ -15,6 +15,7 @@ var observing = false;
 var chosen_nation = -1;
 var ai_skill_level = 1;
 var nation_select_id = -1;
+var metamessage_changed = false;
 
 /****************************************************************************
   ...
@@ -268,6 +269,7 @@ function pregame_settings()
     var test_packet = {"type" : packet_chat_msg_req, "message" : "/metamessage " + $('#metamessage').val()};
     var myJSONText = JSON.stringify(test_packet);
     send_request (myJSONText);
+    metamessage_changed = true;
   });
 
   $('#metamessage').bind('keyup blur',function(){ 

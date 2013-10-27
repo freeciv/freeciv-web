@@ -113,9 +113,9 @@ public class CivclientLauncher extends HttpServlet {
 
 
 		if ((action != null && action.equals("observe")) && (username == null || "null".equals(username))) {
-			Random randomGenerator = new Random();
-			username = "Observer" + randomGenerator.nextInt(10000);
-			request.getSession().setAttribute( "username", username);
+			response.sendRedirect("/wireframe.jsp?do=guest_user&redir=%2Fcivclientlauncher%3Faction%3Dobserve%26civserverport%3D" 
+			+ civServerPort + "%26civserverhost%3D" + civServerHost);
+			return;
 		}
 
 		String errors = "";

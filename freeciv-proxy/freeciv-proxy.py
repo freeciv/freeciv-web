@@ -85,7 +85,7 @@ class WSHandler(websocket.WebSocketHandler):
     def get_civcom(self, username, civserverport, ws_connection):
       key = username + str(civserverport);
       if key not in list(civcoms.keys()):
-        if (int(civserverport) < 5500): return None;
+        if (int(civserverport) < 5000): return None;
         civcom = CivCom(username, int(civserverport), self);
         civcom.start();
         civcoms[key] = civcom;

@@ -5,3 +5,4 @@ export FREECIV_SAVE_PATH
 
 nohup python3.3 publite2_single.py  &
 nohup python3.3 publite2_multi.py  &
+nohup python3.3 publite2_tourny.py  &

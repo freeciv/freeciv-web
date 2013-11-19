@@ -91,22 +91,33 @@ friendly cities. </td>
     <tr>
       <td></td>
       <td style="text-align: center;"><kbd>I</kbd></td>
-      <td>Build Irrigation<br>
-      </td>
+      <td>Build Irrigation</td>
     </tr>
     <tr>
       <td></td>
       <td style="text-align: center;"><kbd>R</kbd></td>
-      <td>Build roads/rails<br>
-      </td>
+      <td>Build roads/rails</td>
     </tr>
     <tr>
       <td></td>
       <td style="text-align: center;"><kbd>M</kbd></td>
-      <td>Build mine<br>
-      </td>
+      <td>Build mine</td>
     </tr>
-
+    <tr>
+      <td></td>
+      <td style="text-align: center;"><kbd>W</kbd></td>
+      <td>Unit wait</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td style="text-align: center;"><kbd>X</kbd></td>
+      <td>Auto explore</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td style="text-align: center;"><kbd>P</kbd></td>
+      <td>Pillage</td>
+    </tr>
   </tbody>
 </table>
 <br>

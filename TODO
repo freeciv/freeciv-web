@@ -2,6 +2,7 @@ TODO:
 -----
 
 Major:
+- Update Freeciv-web to work with latest Freeciv.org SVN trunk version.
 - Integrate Freeciv-web into Freeciv.org codebase as much as possible.
 - Remove need for patches in /freeciv/patches directory.
 - Remove freeciv-proxy, integrate a WebSocket server into the freeciv C server.

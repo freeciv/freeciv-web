@@ -93,24 +93,17 @@ On other Linux distributions, follow this installation procedure:
    Import mysql tables into a MySQL database from:
     freeciv-web/src/main/webapp/meta/private/metaserver.sql
 
-3. Get checkout from freeciv revision mentioned in freeciv/version.txt as
-   freeciv/freeciv:
-   cd freeciv
-   svn co svn://svn.gna.org/svn/freeciv/trunk -r <revision> freeciv
+3. Get, prepare, and build freeciv server:
+   > cd freeciv
+   > ./prepare_freeciv.sh
 
-4. Patch freeciv:
-   ./apply_patches.sh
-
-
-5. Compile and install Freeciv. This involves running the following commands:
-   cd freeciv
-   ./autogen.sh --enable-fcweb --disable-nls --disable-debug
-   make
-   make install     (as root user)
+4. Install Freeciv. This involves running the following commands:
+   > cd freeciv/freeciv
+   > make install     (as root user)
 
    copy freeciv-web/freeciv/data/fcweb to /usr/local/share/freeciv 
 
-6. Build and configure freeciv-web. 
+5. Build and configure freeciv-web. 
 
    - Run setup_links.sh and sync.sh in freeciv-img-extract 
    - Run sync-js-hand.sh in /freeciv-web/scripts/ directory.
@@ -120,24 +113,24 @@ On other Linux distributions, follow this installation procedure:
    - copy nginx configuration file from publite2/nginx.conf 
      to /usr/local/nginx/conf/
 
-7. Start resin with these commands:
-   cd ~/freeciv-build/resin/bin
-   ./resin.sh start
+6. Start resin with these commands:
+   > cd ~/freeciv-build/resin/bin
+   > ./resin.sh start
 
-8. Start publite2:
+7. Start publite2:
   Run publite2_single.py in the publite2 directory.
 
-9. Run the freeciv-proxy:
+8. Run the freeciv-proxy:
   Run run.sh in the freeciv-proxy directory.
  To debug, check the proxy debugging page: 
 http://localhost:8002/status
 
-10. Start nginx on port 80 as root.
+9. Start nginx on port 80 as root.
 
-11. Start the web client in your browser:
+10. Start the web client in your browser:
     Point your web browser to http://localhost/
 
-12. Continue to play the game. 
+11. Continue to play the game. 
 
 
 * Some useful scripts:

@@ -110,8 +110,8 @@ On other Linux distributions, follow this installation procedure:
    - Edit /freeciv-web/src/main/webapp/WEB-INF/resin-web.xml.dist, rename this
      file to resin-web.xml, and update the values for your MySQL database.
    - Run 'build.sh' in the freeciv-web directory
-   - copy nginx configuration file from publite2/nginx.conf 
-     to /usr/local/nginx/conf/
+   - Copy nginx configuration file from publite2/nginx/freeciv-web
+     to /etc/nginx/sites-enabled/ and edit to suit your needs.
 
 6. Start resin with these commands:
    > cd ~/freeciv-build/resin/bin
@@ -125,12 +125,10 @@ On other Linux distributions, follow this installation procedure:
  To debug, check the proxy debugging page: 
 http://localhost:8002/status
 
-9. Start nginx on port 80 as root.
+9. Start the web client in your browser:
+   Point your web browser to http://localhost/
 
-10. Start the web client in your browser:
-    Point your web browser to http://localhost/
-
-11. Continue to play the game. 
+10. Continue to play the game. 
 
 
 * Some useful scripts:

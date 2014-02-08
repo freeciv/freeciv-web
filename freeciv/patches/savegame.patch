@@ -1,7 +1,17 @@
-Index: freeciv/server/commands.c
-===================================================================
---- freeciv/server/commands.c	(revision 22812)
-+++ freeciv/server/commands.c	(working copy)
+diff -Nurd -X.diff_ignore freeciv/data/scenarios/tutorial.sav freeciv/data/scenarios/tutorial.sav
+--- freeciv/data/scenarios/tutorial.sav	2014-02-08 13:31:28.249133865 +0200
++++ freeciv/data/scenarios/tutorial.sav	2014-02-08 13:35:56.928457672 +0200
+@@ -234,7 +234,6 @@
+ "aifill",2,2
+ "mapsize","FULLSIZE","FULLSIZE"
+ "size",1,1
+-"topology","WRAPX|ISO","WRAPX|ISO"
+ }
+ set_count=4
+ gamestart_valid=TRUE
+diff -Nurd -X.diff_ignore freeciv/server/commands.c freeciv/server/commands.c
+--- freeciv/server/commands.c	2014-02-08 13:21:39.126571890 +0200
++++ freeciv/server/commands.c	2014-02-08 13:35:04.168590439 +0200
 @@ -533,7 +533,7 @@
        "all cities and units etc. Use with care!"), NULL,
     CMD_ECHO_ALL, VCF_NONE, 50
@@ -11,11 +21,10 @@ Index: freeciv/server/commands.c
     /* TRANS: translate text between <> only */
     N_("save\n"
        "save <file-name>"),
-Index: freeciv/server/srv_main.c
-===================================================================
---- freeciv/server/srv_main.c	(revision 22812)
-+++ freeciv/server/srv_main.c	(working copy)
-@@ -1152,7 +1152,7 @@
+diff -Nurd -X.diff_ignore freeciv/server/srv_main.c freeciv/server/srv_main.c
+--- freeciv/server/srv_main.c	2014-02-08 13:25:13.202078097 +0200
++++ freeciv/server/srv_main.c	2014-02-08 13:35:04.168590439 +0200
+@@ -1167,7 +1167,7 @@
  Note that if !HAVE_LIBZ, then game.server.save_compress_level should never
  become non-zero, so no need to check HAVE_LIBZ explicitly here as well.
  **************************************************************************/
@@ -24,7 +33,7 @@ Index: freeciv/server/srv_main.c
                 bool scenario)
  {
    char filepath[600];
-@@ -1160,11 +1160,11 @@
+@@ -1175,11 +1175,11 @@
    struct section_file *file;
    struct timer *timer_cpu, *timer_user;
  
@@ -40,7 +49,7 @@ Index: freeciv/server/srv_main.c
      if ((filename = strrchr(filepath, '/'))) {
        filename++;
      } else {
-@@ -1197,13 +1197,6 @@
+@@ -1212,13 +1212,6 @@
      }
    }
  
@@ -54,10 +63,9 @@ Index: freeciv/server/srv_main.c
    timer_cpu = timer_new(TIMER_CPU, TIMER_ACTIVE);
    timer_start(timer_cpu);
    timer_user = timer_new(TIMER_USER, TIMER_ACTIVE);
-Index: freeciv/server/stdinhand.c
-===================================================================
---- freeciv/server/stdinhand.c	(revision 22812)
-+++ freeciv/server/stdinhand.c	(working copy)
+diff -Nurd -X.diff_ignore freeciv/server/stdinhand.c freeciv/server/stdinhand.c
+--- freeciv/server/stdinhand.c	2014-02-08 13:21:39.126571890 +0200
++++ freeciv/server/stdinhand.c	2014-02-08 13:35:04.168590439 +0200
 @@ -731,11 +731,6 @@
  **************************************************************************/
  static bool save_command(struct connection *caller, char *arg, bool check)
@@ -84,15 +92,3 @@ Index: freeciv/server/stdinhand.c
    if (conn_can_vote(caller, NULL) && level == ALLOW_CTRL
        && conn_get_access(caller) == ALLOW_BASIC && !check) {
      struct vote *vote;
-Index: freeciv/data/scenarios/tutorial.sav
-===================================================================
---- freeciv/data/scenarios/tutorial.sav	(revision 22812)
-+++ freeciv/data/scenarios/tutorial.sav	(working copy)
-@@ -435,7 +435,6 @@
- 
- set = {"name", "value", "gamestart"
- "aifill", 2, 2
--"topology", "ISO|WRAPX", "ISO|WRAPX"
- "mapsize", "FULLSIZE", "FULLSIZE"
- "size", 1, 1
- }

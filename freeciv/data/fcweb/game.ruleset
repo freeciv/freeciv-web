@@ -260,6 +260,24 @@ reqs           =
 frequency      = 10
 effects        = "ReducePopulation", "Fallout"
 
+; /* <-- avoid gettext warnings
+;
+; Achievement types:
+;
+; name                    = translatable name as seen by user
+; rule_name               = (optional) name for savegames, rulesets etc; if not
+;                           present, 'name' is used. Since the name used in
+;                           savegames must not change, use this when renaming a
+;                           achievement after a ruleset has been released.
+; type                    = What event grants the achievement to player.
+;                           See README.achievements for list of these types.
+; value                   = Value to reach. Exact meaning of this depends on
+;                           achievement type.
+;
+; */ <-- avoid gettext warnings
+
+; No achievements in fcweb ruleset
+
 ;
 ; Trade settings
 ;
@@ -348,4 +366,3 @@ set =
     "autosaves", "", TRUE
     "topology", "WRAPX", TRUE
   }
-

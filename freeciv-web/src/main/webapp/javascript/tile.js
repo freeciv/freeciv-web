@@ -33,37 +33,13 @@ function tile_get_known(ptile)
   
 }
 
-
-function tile_set_special(ptile, index, value)
+function tile_has_extra(ptile, extra)
 {
-  if (ptile['special'] == null) ptile['special'] = [];
-  ptile['special'][index] = value;
-}
-
-function tile_has_special(tile, index)
-{
-  if (tile['special'] == null || tile['special'][index] == null) return false;
-
-  return tile['special'][index];
-
-}
-
-function tile_has_base(ptile, base)
-{
-  if (ptile['bases'] == null || ptile['bases'][base] == null) {
+  if (ptile['extras'] == null || ptile['extras'][extra] == null) {
     return false;
   }
 
-  return ptile['bases'][base] == 1;
-}
-
-function tile_has_road(ptile, road)
-{
-  if (ptile['roads'] == null || ptile['roads'][road] == null) {
-    return false;
-  }
-
-  return ptile['roads'][road] == 1;
+  return ptile['extras'][extra] == 1;
 }
 
 function tile_resource(tile)

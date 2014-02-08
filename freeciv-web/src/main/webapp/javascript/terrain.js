@@ -17,21 +17,21 @@ var terrains = {};
 var resources = {};
 var terrain_control = {};
 
-var S_IRRIGATION = 0;
-var S_MINE = 1;
-var S_POLLUTION = 2;
-var S_HUT = 3;
-var S_RIVER = 4;
-var S_FARMLAND = 5;
-var S_FALLOUT = 6;
+var EXTRA_IRRIGATION = 0;
+var EXTRA_MINE = 1;
+var EXTRA_POLLUTION = 2;
+var EXTRA_HUT = 3;
+var EXTRA_FARMLAND = 4;
+var EXTRA_FALLOUT = 5;
 
-  /* internal values not saved */
-var S_LAST = 7;
-var S_RESOURCE_VALID = S_LAST;
+var BASE_FORTRESS = 6;
+var BASE_AIRBASE = 7;
+var BASE_BUOY = 8;
+var BASE_RUINS = 9;
 
-var ROAD_ROAD  = 0;
-var ROAD_RAIL  = 1;
-var ROAD_RIVER = 2;
+var ROAD_ROAD  = 10;
+var ROAD_RAIL  = 11;
+var ROAD_RIVER = 12;
 
 /**************************************************************************
  ...
@@ -83,16 +83,4 @@ function is_ocean_tile(ptile)
 {
   var pterrain = tile_terrain(ptile); 
   return (pterrain['graphic_str'] == "floor" || pterrain['graphic_str'] == "coast");
-}
-
-
-/**************************************************************************
- ...
-**************************************************************************/
-function contains_special(ptile, special_id)
-{
-  if (ptile != null && ptile['special'] != null) {
-    return ptile['special'][special_id]; 
-  }
-  return false;
 }

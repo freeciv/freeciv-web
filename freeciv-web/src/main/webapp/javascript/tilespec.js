@@ -162,15 +162,15 @@ function fill_sprite_array(layer, ptile, pedge, pcorner, punit, pcity, citymode)
         if (spec_sprite != null) sprite_array.push(spec_sprite);
         
         
-        if (contains_special(ptile, S_MINE)) {
+        if (tile_has_extra(ptile, EXTRA_MINE)) {
           sprite_array.push({"key" : "tx.mine"}); 
         }
         
-        if (contains_special(ptile, S_HUT)) {
+        if (tile_has_extra(ptile, EXTRA_HUT)) {
           sprite_array.push({"key" : "tx.village"}); 
         }
         
-        if (contains_special(ptile, S_POLLUTION)) {
+        if (tile_has_extra(ptile, EXTRA_POLLUTION)) {
           sprite_array.push({"key" : "tx.pollution"}); 
         }
 
@@ -926,13 +926,13 @@ function get_tile_river_sprite(ptile)
     return null;
   }
 
-  if (tile_has_road(ptile, ROAD_RIVER)) {
+  if (tile_has_extra(ptile, ROAD_RIVER)) {
     var river_str = "";
     for (var i = 0; i < num_cardinal_tileset_dirs; i++) {
       var dir = cardinal_tileset_dirs[i];
       var checktile = mapstep(ptile, dir);
       if (checktile 
-          && (tile_has_road(checktile, ROAD_RIVER) || is_ocean_tile(checktile))) {
+          && (tile_has_extra(checktile, ROAD_RIVER) || is_ocean_tile(checktile))) {
         river_str = river_str + dir_get_tileset_name(dir) + "1";
       } else {
         river_str = river_str + dir_get_tileset_name(dir) + "0";
@@ -947,7 +947,7 @@ function get_tile_river_sprite(ptile)
     for (var i = 0; i < num_cardinal_tileset_dirs; i++) {
       var dir = cardinal_tileset_dirs[i];
       var checktile = mapstep(ptile, dir);
-      if (checktile != null && tile_has_road(checktile, ROAD_RIVER)) {
+      if (checktile != null && tile_has_extra(checktile, ROAD_RIVER)) {
         return {"key" : "river_outlet_" + dir_get_tileset_name(dir)};
       }
     }
@@ -1172,8 +1172,8 @@ function get_treaty_disagree_thumb_down()
 ****************************************************************************/
 function fill_road_rail_sprite_array(ptile, pcity)
 {
-  var road = tile_has_road(ptile, ROAD_ROAD);
-  var rail = tile_has_road(ptile, ROAD_RAIL);
+  var road = tile_has_extra(ptile, ROAD_ROAD);
+  var rail = tile_has_extra(ptile, ROAD_RAIL);
   var road_near = [];
   var rail_near = [];
   var draw_rail = [];
@@ -1187,8 +1187,8 @@ function fill_road_rail_sprite_array(ptile, pcity)
     /* Check if there is adjacent road/rail. */
     var tile1 = mapstep(ptile, dir);
     if (tile1 != null && tile_get_known(tile1) != TILE_UNKNOWN) {
-      road_near[dir] = tile_has_road(tile1, ROAD_ROAD);
-      rail_near[dir] = tile_has_road(tile1, ROAD_RAIL);
+      road_near[dir] = tile_has_extra(tile1, ROAD_ROAD);
+      rail_near[dir] = tile_has_extra(tile1, ROAD_RAIL);
 
       /* Draw rail/road if there is a connection from this tile to the
         * adjacent tile.  But don't draw road if there is also a rail
@@ -1250,8 +1250,8 @@ function fill_irrigation_sprite_array(ptile, pcity)
 
   /* We don't draw the irrigation if there's a city (it just gets overdrawn
    * anyway, and ends up looking bad). */
-  if (contains_special(ptile, S_IRRIGATION) && pcity == null) {
-    if (contains_special(ptile, S_FARMLAND)) {
+  if (tile_has_extra(ptile, EXTRA_IRRIGATION) && pcity == null) {
+    if (tile_has_extra(ptile, EXTRA_FARMLAND)) {
       result_sprites.push({"key" : "tx.farmland"});
     } else {
       result_sprites.push({"key" : "tx.irrigation"});

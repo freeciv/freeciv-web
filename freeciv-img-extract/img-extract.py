@@ -50,6 +50,7 @@ files = ["../freeciv/freeciv/data/amplio2.tilespec",
 #  "../freeciv/freeciv/data/misc/citybar.spec",  #not in use yet
   "../freeciv/freeciv/data/misc/shields.spec",
   "../freeciv/freeciv/data/misc/small.spec",
+  "../freeciv/freeciv/data/misc/governments.spec",
 #  "../freeciv/freeciv/data/misc/cursors.spec",
   "../freeciv/freeciv/data/misc/space.spec",
   "../freeciv/freeciv/data/misc/editor.spec",

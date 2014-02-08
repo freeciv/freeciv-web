@@ -655,8 +655,8 @@ reqs	=
     }
 
 [effect_revolution_0]
-type    = "Revolution_When_Unhappy"
-value   = 1
+type    = "Revolution_Unhappiness"
+value   = 2
 reqs	=
     { "type",       "name",      "range"
       "Gov", "Democracy", "Player"
@@ -2353,4 +2353,45 @@ value   = 1
 reqs    =
     { "type", "name", "range"
       "UnitFlag", "Transform", "Local"
+    }
+
+[effect_pollution]
+type    = "Output_Tile_Punish_Pct"
+value   = 50
+reqs    =
+    { "type", "name", "range"
+      "Extra", "Pollution", "Local"
+    }
+nreqs   =
+    { "type", "name", "range"
+      "Extra", "Fallout", "Local"
+    }
+
+[effect_fallout]
+type    = "Output_Tile_Punish_Pct"
+value   = 50
+reqs    =
+    { "type", "name", "range"
+      "Extra", "Fallout", "Local"
+    }
+nreqs   =
+    { "type", "name", "range"
+      "Extra", "Pollution", "Local"
+    }
+
+[effect_pollution_fallout]
+type    = "Output_Tile_Punish_Pct"
+value   = 75
+reqs    =
+    { "type", "name", "range"
+      "Extra", "Fallout", "Local"
+      "Extra", "Pollution", "Local"
+    }
+
+[effect_unit_bribe_cost_settlers]
+type    = "Unit_Bribe_Cost_Pct"
+value   = -50
+reqs    =
+    { "type", "name", "range"
+      "UnitFlag", "Cities", "Local"
     }

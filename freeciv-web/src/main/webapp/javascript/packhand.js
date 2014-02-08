@@ -202,7 +202,7 @@ function handle_player_info(packet)
     if (packet['playerno'] == client.conn.playing['playerno']) {
       client.conn.playing = players[packet['playerno']];
     }
-  } 
+  }
   update_player_info();
 
   if (is_tech_tree_init && tech_dialog_active) update_tech_screen();
@@ -649,6 +649,11 @@ function handle_ruleset_tech(packet)
   techs[packet['id']] = packet;
 }
 
+function handle_ruleset_tech_flag(packet)
+{
+  /* TODO: implement*/
+}
+
 /* 100% complete */
 function handle_ruleset_government(packet) 
 {
@@ -686,16 +691,6 @@ function handle_ruleset_building(packet)
 }
 
 function handle_ruleset_unit_class(packet) 
-{
-  /* TODO: implement */
-}
-
-function handle_ruleset_base(packet) 
-{
-  /* TODO: implement */
-}
-
-function handle_ruleset_road(packet) 
 {
   /* TODO: implement */
 }
@@ -855,6 +850,16 @@ function handle_player_diplstate(packet)
 function handle_ruleset_extra(packet)
 {
   extras[packet['name']] = packet;
+}
+
+function handle_ruleset_base(packet)
+{
+  /* TODO: Implement */
+}
+
+function handle_ruleset_road(packet)
+{
+  /* TODO: Implement */
 }
 
 function handle_endgame_player(packet)

@@ -364,12 +364,12 @@ function update_unit_order_commands()
     var ptile = index_to_tile(punit['tile']);
     if (ptype['name'] == "Settlers" || ptype['name'] == "Workers" 
         || ptype['name'] == "Engineers") {
-      if (!tile_has_road(ptile, ROAD_ROAD)) {
+      if (!tile_has_extra(ptile, ROAD_ROAD)) {
         $("#order_road").show();
         $("#order_railroad").hide();
       } else if (player_invention_state(client.conn.playing, 65) == TECH_KNOWN
-                 && tile_has_road(ptile, ROAD_ROAD) 
-               && !tile_has_road(ptile, ROAD_RAIL)) {
+                 && tile_has_extra(ptile, ROAD_ROAD) 
+               && !tile_has_extra(ptile, ROAD_RAIL)) {
         $("#order_road").hide();
         $("#order_railroad").show();
       } else {
@@ -505,7 +505,7 @@ function set_unit_focus_and_redraw(punit)
 function set_unit_focus_and_activate(punit)
 {
   set_unit_focus_and_redraw(punit);
-  request_new_unit_activity(punit, ACTIVITY_IDLE, 0);
+  request_new_unit_activity(punit, ACTIVITY_IDLE, EXTRA_NONE);
 
 }
 
@@ -514,7 +514,7 @@ function set_unit_focus_and_activate(punit)
 **************************************************************************/
 function city_dialog_activate_unit(punit)
 {
-  request_new_unit_activity(punit, ACTIVITY_IDLE, 0);
+  request_new_unit_activity(punit, ACTIVITY_IDLE, EXTRA_NONE);
   close_city_dialog();
   set_unit_focus_and_redraw(punit);
 }
@@ -873,8 +873,8 @@ function key_unit_auto_explore()
   var funits = get_units_in_focus();
   for (var i = 0; i < funits.length; i++) {
     var punit = funits[i]; 
-    request_new_unit_activity(punit, ACTIVITY_EXPLORE, 0);
-  }  
+    request_new_unit_activity(punit, ACTIVITY_EXPLORE, EXTRA_NONE);
+  }
   update_unit_focus();
 }
 
@@ -894,8 +894,8 @@ function key_unit_sentry()
   var funits = get_units_in_focus();
   for (var i = 0; i < funits.length; i++) {
     var punit = funits[i]; 
-    request_new_unit_activity(punit, ACTIVITY_SENTRY, 0);
-  }  
+    request_new_unit_activity(punit, ACTIVITY_SENTRY, EXTRA_NONE);
+  }
   update_unit_focus();
 }
 
@@ -907,8 +907,8 @@ function key_unit_fortify()
   var funits = get_units_in_focus();
   for (var i = 0; i < funits.length; i++) {
     var punit = funits[i]; 
-    request_new_unit_activity(punit, ACTIVITY_FORTIFYING, 0);
-  }  
+    request_new_unit_activity(punit, ACTIVITY_FORTIFYING, EXTRA_NONE);
+  }
   update_unit_focus();
 }
 
@@ -919,9 +919,10 @@ function key_unit_irrigate()
 {
   var funits = get_units_in_focus();
   for (var i = 0; i < funits.length; i++) {
-    var punit = funits[i]; 
-    request_new_unit_activity(punit, ACTIVITY_IRRIGATE, 0);
-  }  
+    var punit = funits[i];
+    /* EXTRA_NONE -> server decides */
+    request_new_unit_activity(punit, ACTIVITY_IRRIGATE, EXTRA_NONE);
+  }
   update_unit_focus();
 }
 
@@ -945,9 +946,10 @@ function key_unit_mine()
 {
   var funits = get_units_in_focus();
   for (var i = 0; i < funits.length; i++) {
-    var punit = funits[i]; 
-    request_new_unit_activity(punit, ACTIVITY_MINE, 0);
-  }  
+    var punit = funits[i];
+    /* EXTRA_NONE -> server decides */
+    request_new_unit_activity(punit, ACTIVITY_MINE, EXTRA_NONE);
+  }
   update_unit_focus();
 }
 
@@ -960,10 +962,9 @@ function key_unit_road()
   for (var i = 0; i < funits.length; i++) {
     var punit = funits[i]; 
     var ptile = index_to_tile(punit['tile']);
-    if (!tile_has_road(ptile, ROAD_ROAD)) {
+    if (!tile_has_extra(ptile, ROAD_ROAD)) {
       request_new_unit_activity(punit, ACTIVITY_GEN_ROAD, extras['Road']['id']);
-    } else if (tile_has_road(ptile, ROAD_ROAD) 
-               && !tile_has_road(ptile, ROAD_RAIL)) {
+    } else if (!tile_has_extra(ptile, ROAD_RAIL)) {
       request_new_unit_activity(punit, ACTIVITY_GEN_ROAD, extras['Railroad']['id']);
     }
   }

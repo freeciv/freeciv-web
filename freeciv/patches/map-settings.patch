@@ -1,7 +1,7 @@
 diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2012-05-21 01:53:19.000000000 +0300
-+++ freeciv/common/packets.def	2012-05-21 02:00:02.000000000 +0300
-@@ -370,7 +370,8 @@
+--- freeciv/common/packets.def	2014-02-08 14:06:59.523775781 +0200
++++ freeciv/common/packets.def	2014-02-08 14:27:24.600709362 +0200
+@@ -415,7 +415,8 @@
  # The variables in the packet are listed in alphabetical order.
  PACKET_GAME_INFO = 16; sc
    UINT8 add_to_size_limit;
@@ -11,22 +11,23 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    AIRLIFTING_STYLE airlifting_style;
    UINT8 angrycitizen;
    SINT16 base_pollution;
+@@ -508,6 +509,7 @@
+   BOOL year_0_hack;
+   BOOL civil_war_enabled;
+   BOOL paradrop_to_transport;
++  STRING meta_message[MAX_LEN_NAME];
+ end
+ 
+ PACKET_MAP_INFO = 17; sc, lsend
 diff -Nurd -X.diff_ignore freeciv/server/gamehand.c freeciv/server/gamehand.c
---- freeciv/server/gamehand.c	2012-05-21 01:28:21.000000000 +0300
-+++ freeciv/server/gamehand.c	2012-05-21 01:56:47.000000000 +0300
-@@ -364,6 +364,8 @@
+--- freeciv/server/gamehand.c	2014-02-08 13:48:27.118570612 +0200
++++ freeciv/server/gamehand.c	2014-02-08 14:07:10.355748594 +0200
+@@ -510,6 +510,11 @@
      ginfo.seconds_to_phasedone = -1.0;
    }
  
 +  ginfo.mapsize = map.server.size;
 +
-   conn_list_iterate(dest, pconn) {
-     send_packet_game_info(pconn, &ginfo);
-   }
-@@ -503,6 +503,9 @@
-     ginfo.seconds_to_phasedone = -1.0;
-   }
- 
 +  ginfo.mapsize = map.server.size;
 +  sz_strlcpy(ginfo.meta_message, game.server.meta_info.user_message);
 +

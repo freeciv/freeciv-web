@@ -27,6 +27,7 @@ flags =
     "AirUnit", _("Very bad at attacking AEGIS.")
     "Horse", _("Attack value halved when attacking Pikemen.")
     "Helicopter", _("Defends very badly against Fighters.")
+    "Unbribable", _("May not be bribed.")
   }
 
 [veteran_system]
@@ -258,7 +259,7 @@ flags         = "Unreachable", "DoesntOccupyTile"
 ;		  units other than missiles
 ; "Settlers"	= can irrigate and build roads
 ; "Diplomat"	= can do diplomat actions (see diplchance server option)
-; "Spy"		= can do poison and sabotage, _must_ be "Diplomat" also
+; "Spy"         = enhanced diplomat actions. _Must_ be "Diplomat" also
 ; "Trireme"	= (sea only) cannot leave shoreline
 ; "Nuclear"	= nuke!
 ; "Paratroopers"= (land only) can paradrop
@@ -272,7 +273,6 @@ flags         = "Unreachable", "DoesntOccupyTile"
 ;		  the same time; barbarians cannot use this at present
 ; "GameLoss"	= losing one of these units means you lose the game, but it
 ;		  is produced without homecity and upkeep
-; "Unbribable"	= this unit cannot be bribed
 ; "Undisbandable" = this unit cannot be disbanded, will not drown, and will not
 ;		  disband due to lack of shields to upkeep it in homecity;
 ;		  if not given enough food to upkeep it, homecity will shrink 

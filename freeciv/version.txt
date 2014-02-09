@@ -1,6 +1,5 @@
-# fcweb/effects.ruleset changes like in classic r23313
-FCREV=23241
+FCREV=23875
 FCBRANCH=trunk
 
-ORIGCAPSTR="+Freeciv.Devel-2.6-2013.Aug.27b"
-WEBCAPSTR="+Freeciv.Web.Devel-2.6-2014.Feb.08"
+ORIGCAPSTR="+Freeciv.Devel-2.6-2013.Dec.18b"
+WEBCAPSTR="+Freeciv.Web.Devel-2.6-2014.Feb.09"

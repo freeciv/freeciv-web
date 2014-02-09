@@ -862,6 +862,11 @@ function handle_ruleset_road(packet)
   /* TODO: Implement */
 }
 
+function handle_ruleset_action_enabler(packet)
+{
+  /* TODO: Implement */
+}
+
 function handle_endgame_player(packet)
 {
   endgame_player_info.push(packet);

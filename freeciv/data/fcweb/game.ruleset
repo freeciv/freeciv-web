@@ -182,6 +182,117 @@ slow_invasions = TRUE
 ; strength even if they have only fractional moves left.
 tired_attack = FALSE
 
+; /* <-- avoid gettext warnings
+;
+; Action enablers:
+;
+; action               = the action to enable.
+; actor_reqs           = requirements that apply to the actor.
+; target_reqs          = requirements that apply to the target.
+;
+; README.actions lists the possible actions and their hard coded
+; requirements.
+;
+; An action enabler is active when its actor_reqs AND its target_reqs are
+; satisfied.
+;
+; */ <-- avoid gettext warnings
+[actionenabler_sabotage_city]
+action = "Sabotage City"
+actor_reqs    =
+    { "type",   "name", "range", "present"
+      "DiplRel", "War", "Local", TRUE
+      "UnitFlag", "Spy", "Local", FALSE
+    }
+
+[actionenabler_sabotage_city_target]
+action = "Targeted Sabotage City"
+actor_reqs    =
+    { "type",   "name", "range"
+      "DiplRel", "War", "Local"
+      "UnitFlag", "Spy", "Local"
+    }
+
+[actionenabler_establish_embassy]
+action       = "Establish Embassy"
+target_reqs  =
+    { "type",   "name", "range", "present"
+      "Nation", "Barbarian", "Player", FALSE
+      "Nation", "Pirate", "Player", FALSE
+    }
+
+[actionenabler_investigate_city]
+action       = "Investigate City"
+
+[actionenabler_poison_city]
+action = "Poison City"
+actor_reqs    =
+    { "type",   "name", "range"
+      "UnitFlag", "Spy", "Local"
+      "DiplRel", "War", "Local"
+    }
+target_reqs    =
+    { "type",   "name", "range"
+      "MinSize", "2", "City"
+    }
+
+[actionenabler_steal_tech_random]
+action = "Steal Tech"
+actor_reqs    =
+    { "type",   "name", "range", "present"
+      "UnitFlag", "Spy", "Local", FALSE
+    }
+target_reqs  =
+    { "type",   "name", "range", "present"
+      "Nation", "Barbarian", "Player", FALSE
+      "Nation", "Pirate", "Player", FALSE
+    }
+
+[actionenabler_steal_tech_target]
+action = "Targeted Steal Tech"
+actor_reqs    =
+    { "type",   "name", "range"
+      "UnitFlag", "Spy", "Local"
+    }
+target_reqs  =
+    { "type",   "name", "range", "present"
+      "Nation", "Barbarian", "Player", FALSE
+      "Nation", "Pirate", "Player", FALSE
+    }
+
+[actionenabler_incite_city]
+action = "Incite City"
+actor_reqs    =
+    { "type",   "name", "range", "present"
+      "DiplRel", "Alliance", "Local", FALSE
+      "DiplRel", "Team", "Local", FALSE
+    }
+
+[actionenabler_bribe_unit]
+action = "Bribe Unit"
+actor_reqs    =
+    { "type",   "name", "range", "present"
+      "DiplRel", "Alliance", "Local", FALSE
+      "DiplRel", "Team", "Local", FALSE
+    }
+target_reqs    =
+    { "type",   "name", "range", "present"
+      "UnitFlag", "Unbribable", "Local", FALSE
+      "CityTile", "Center", "Local", FALSE
+    }
+
+[actionenabler_sabotage_unit]
+action = "Sabotage Unit"
+actor_reqs    =
+    { "type",   "name", "range"
+      "Unitflag", "Spy", "Local"
+      "DiplRel", "War", "Local"
+    }
+target_reqs    =
+    { "type",   "name", "range", "present"
+      "CityTile", "Center", "Local", FALSE
+    }
+
 [borders]
 ; Base border radius from city.
 radius_sq_city = 17
@@ -271,6 +382,8 @@ effects        = "ReducePopulation", "Fallout"
 ;                           achievement after a ruleset has been released.
 ; type                    = What event grants the achievement to player.
 ;                           See README.achievements for list of these types.
+; unique                  = If TRUE, only first one reaching the achievement will
+;                           get it. Defaults to TRUE.
 ; value                   = Value to reach. Exact meaning of this depends on
 ;                           achievement type.
 ;

@@ -31,6 +31,11 @@ options="+Freeciv-ruleset-Devel-2013.May.14"
 ;                 user-visible.)
 ; short_name    = one-character "short name" used (for instance) in cityrep;
 ;                 should be first character/abbrevation of "name"
+; graphic_alt   = fallback graphic tag in case the specialist graphic isn't
+;                 found. Example value: "specialist.scientist_0"
+;                 The specialist graphic allow different images based on
+;                 citizen number. The alt tag don't. To use another
+;                 specialist's tag use specialist.<otherrulename>_<number>.
 ; reqs		= requirements to have the specialist pick (see
 ;		  effects.ruleset and README.effects for help on requirements)
 ; helptext      = optional help text string; should escape all raw newlines

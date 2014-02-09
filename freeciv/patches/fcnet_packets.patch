@@ -1,7 +1,7 @@
 diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2013-03-16 20:33:58.048564292 +0200
-+++ freeciv/common/packets.def	2013-03-16 20:38:15.896558636 +0200
-@@ -594,8 +594,13 @@
+--- freeciv/common/packets.def	2014-02-09 06:21:19.697600446 +0200
++++ freeciv/common/packets.def	2014-02-09 06:22:05.897499871 +0200
+@@ -614,8 +614,13 @@
    STRING can_build_unit[MAX_LEN_MSG];
    STRING can_build_improvement[MAX_LEN_MSG];
    STRING improvements[MAX_LEN_MSG];
@@ -15,15 +15,15 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  end
  
  PACKET_CITY_SHORT_INFO = 32; sc, lsend, is-game-info, cancel(PACKET_CITY_INFO)
-@@ -738,6 +743,7 @@
+@@ -758,6 +763,7 @@
    UINT8 color_blue;
  
-   CITY wonders[B_LAST]; diff
-+  UINT32 net_income;
+   CITYSPE wonders[B_LAST]; diff
++  UINT32  net_income;
  end
  
  PACKET_PLAYER_PHASE_DONE = 52; cs, dsend
-@@ -1007,25 +1013,25 @@
+@@ -1011,25 +1017,25 @@
  
  PACKET_DIPLOMACY_CREATE_CLAUSE_REQ = 99; cs, dsend
    PLAYER counterpart, giver;
@@ -53,7 +53,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    UINT32 value;
  end
  
-@@ -1053,7 +1059,7 @@
+@@ -1057,7 +1063,7 @@
  end
  
  PACKET_REPORT_REQ = 111; cs, handle-per-conn, dsend
@@ -62,7 +62,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  end
  
  /************** Connection packets **********************/
-@@ -1078,9 +1084,9 @@
+@@ -1082,9 +1088,9 @@
  
  # Information about the ping times of the connections.
  PACKET_CONN_PING_INFO = 116; sc, lsend
@@ -74,9 +74,9 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  end
  
  # For compatibility with older versions, this number cannot be changed.
-@@ -1942,3 +1948,17 @@
- PACKET_INFO_TEXT_MESSAGE = 255; sc, dsend
-   STRING message[MAX_LEN_MSG];
+@@ -1959,3 +1965,17 @@
+   SINT32 tag;
+   SINT32 id;
  end
 +
 +PACKET_GOTO_PATH_REQ = 253; cs, dsend
@@ -93,9 +93,9 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
 +  UINT32 turns;
 +end
 diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
---- freeciv/server/unithand.c	2013-03-16 20:33:58.292564287 +0200
-+++ freeciv/server/unithand.c	2013-03-16 20:37:31.136559618 +0200
-@@ -799,6 +799,107 @@
+--- freeciv/server/unithand.c	2014-02-09 06:01:00.748301997 +0200
++++ freeciv/server/unithand.c	2014-02-09 06:21:29.137579900 +0200
+@@ -866,6 +866,107 @@
  }
  
  /**************************************************************************
@@ -203,7 +203,7 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
    City building function called from inside server itself - notably city
    name has not been transfered over network so network encodings and such
    do not apply.
-@@ -968,14 +1069,16 @@
+@@ -1003,14 +1104,16 @@
  
     if (!is_player_phase(unit_owner(punit), game.info.phase)
        || execute_orders(punit)) {

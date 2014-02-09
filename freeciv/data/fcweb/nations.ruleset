@@ -19,6 +19,6 @@ default_government = "Despotism"
 [default_traits]
 ;expansionist = 50
 ;trader = 50
-aggressive = 150
+;aggressive = 50
 
 *include "default/nationlist.ruleset"

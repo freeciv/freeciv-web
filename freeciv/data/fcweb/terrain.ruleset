@@ -102,6 +102,7 @@ ocean_resources = FALSE
 ;                        "no"  -- cannot transform
 ;                        terrain section -- transformation changes to that terrain
 ; transform_time       = time to transform; if 0, cannot transform
+; animal               = unit type that can appear as animal on the terrain
 ; warmer_wetter_result = result of global warming for wet terrains; one of:
 ;                        "no"  -- no change; does not count for warming
 ;                        "yes" -- no change; counts for warming
@@ -119,6 +120,7 @@ ocean_resources = FALSE
 ;   - NoPollution      = Pollution and Fallout will not be put on this
 ;                        terrain type.
 ;   - Starter          = Players will only be started on "Starter" terrain.
+;                        (Currently this cannot be Oceanic terrain.)
 ;   - CanHaveRiver     = Set to 1 if this terrain can have river on it (the
 ;                        actual chance of river generation is controlled
 ;                        separately).
@@ -128,6 +130,8 @@ ocean_resources = FALSE
 ;                        If this becomes adjacent to non-FreshWater terrain,
 ;                        the whole contiguous FreshWater area will be flooded
 ;                        with the non-FreshWater terrain.
+;   - NotGenerated     = Map generator never places this terrain type. It can
+;                        be added from editor only, or by ingame events (lua scripting)
 ; property_*           = specific property % values used by mapgen.  Most
 ;                        terrains will have 0 for most values.
 ;  - mountainous       = degree to which this terrain is mountainous
@@ -147,6 +151,45 @@ ocean_resources = FALSE
 ;                        newlines so that xgettext parsing works
 ;
 ; */ <-- avoid gettext warnings
+
+[terrain_inaccesible]
+name                 = _("Inaccessible")
+graphic              = "inaccessible"
+graphic_alt          = "arctic"
+identifier           = "i"
+class                = "Land"
+movement_cost        = 0
+defense_bonus        = 0
+food                 = 0
+shield               = 0
+trade                = 0
+road_food_incr_pct   = 0
+road_shield_incr_pct = 0
+road_trade_incr_pct  = 0
+base_time            = 0
+road_time            = 0
+irrigation_result    = "no"
+irrigation_food_incr = 0
+irrigation_time      = 0
+mining_result        = "no"
+mining_shield_incr   = 0
+mining_time          = 0
+transform_result     = "no"
+transform_time       = 0
+clean_pollution_time = 0
+clean_fallout_time   = 0
+animal               = "None"
+warmer_wetter_result = "no"
+warmer_drier_result  = "no"
+cooler_wetter_result = "no"
+cooler_drier_result  = "no"
+flags                = "NotGenerated", "NoPollution"
+color.r              = 25
+color.g              = 25
+color.b              = 25
+helptext             = _("\
+No unit can enter this terrain, nor can city work the tile.\
+")
 
 [terrain_lake]
 name                 = _("Lake")
@@ -175,6 +218,7 @@ transform_result     = "terrain_swamp"
 transform_time       = 36
 clean_pollution_time = 3
 clean_fallout_time   = 3
+animal               = "None"
 warmer_wetter_result = "no"
 warmer_drier_result  = "terrain_swamp"
 cooler_wetter_result = "terrain_glacier"
@@ -216,6 +260,7 @@ transform_result     = "terrain_swamp"
 transform_time       = 36
 clean_pollution_time = 3
 clean_fallout_time   = 3
+animal               = "None"
 warmer_wetter_result = "no"
 warmer_drier_result  = "terrain_swamp"
 cooler_wetter_result = "terrain_glacier"
@@ -258,6 +303,7 @@ transform_result     = "no"
 transform_time       = 0
 clean_pollution_time = 3
 clean_fallout_time   = 3
+animal               = "None"
 warmer_wetter_result = "no"
 warmer_drier_result  = "no"
 cooler_wetter_result = "no"
@@ -300,6 +346,7 @@ transform_result     = "terrain_tundra"
 transform_time       = 24
 clean_pollution_time = 3
 clean_fallout_time   = 3
+animal               = "None"
 warmer_wetter_result = "terrain_tundra"
 warmer_drier_result  = "terrain_tundra"
 cooler_wetter_result = "no"
@@ -343,6 +390,7 @@ transform_result     = "terrain_plains"
 transform_time       = 24
 clean_pollution_time = 3
 clean_fallout_time   = 3
+animal               = "None"
 warmer_wetter_result = "terrain_grassland"
 warmer_drier_result  = "no"
 cooler_wetter_result = "terrain_plains"
@@ -387,6 +435,7 @@ transform_result     = "terrain_grassland"
 transform_time       = 24
 clean_pollution_time = 3
 clean_fallout_time   = 3
+animal               = "None"
 warmer_wetter_result = "terrain_jungle"
 warmer_drier_result  = "terrain_plains"
 cooler_wetter_result = "terrain_swamp"
@@ -432,6 +481,7 @@ transform_result     = "terrain_hills"
 transform_time       = 24
 clean_pollution_time = 3
 clean_fallout_time   = 3
+animal               = "None"
 warmer_wetter_result = "terrain_lake"
 warmer_drier_result  = "terrain_desert"
 cooler_wetter_result = "terrain_glacier"
@@ -474,6 +524,7 @@ transform_result     = "terrain_plains"
 transform_time       = 24
 clean_pollution_time = 3
 clean_fallout_time   = 3
+animal               = "None"
 warmer_wetter_result = "no"
 warmer_drier_result  = "no"
 cooler_wetter_result = "no"
@@ -517,6 +568,7 @@ transform_result     = "terrain_plains"
 transform_time       = 24
 clean_pollution_time = 3
 clean_fallout_time   = 3
+animal               = "None"
 warmer_wetter_result = "terrain_lake"
 warmer_drier_result  = "terrain_desert"
 cooler_wetter_result = "terrain_swamp"
@@ -561,6 +613,7 @@ transform_result     = "terrain_hills"
 transform_time       = 24
 clean_pollution_time = 3
 clean_fallout_time   = 3
+animal               = "None"
 warmer_wetter_result = "no"
 warmer_drier_result  = "no"
 cooler_wetter_result = "no"
@@ -603,6 +656,7 @@ transform_result     = "terrain_grassland"
 transform_time       = 24
 clean_pollution_time = 3
 clean_fallout_time   = 3
+animal               = "None"
 warmer_wetter_result = "terrain_lake"
 warmer_drier_result  = "terrain_desert"
 cooler_wetter_result = "terrain_glacier"
@@ -646,6 +700,7 @@ transform_result     = "terrain_lake"
 transform_time       = 36
 clean_pollution_time = 3
 clean_fallout_time   = 3
+animal               = "None"
 warmer_wetter_result = "terrain_lake"
 warmer_drier_result  = "terrain_desert"
 cooler_wetter_result = "terrain_glacier"
@@ -691,6 +746,7 @@ transform_result     = "terrain_desert"
 transform_time       = 24
 clean_pollution_time = 3
 clean_fallout_time   = 3
+animal               = "None"
 warmer_wetter_result = "terrain_lake"
 warmer_drier_result  = "terrain_desert"
 cooler_wetter_result = "terrain_glacier"
@@ -906,10 +962,9 @@ shield      = 3 ; glacier used to have 4
 
 ; /* <-- avoid gettext warnings
 ;
-; Each of the specials, bases, and roads must have section here, in correct order.
-; First are specials Irrigation, Mine, Pollution, Hut, Farmland, and Fallout.
-; Then are bases in the same order as the dedicated [base] sections.
-; Last are roads in the same order as the dedicated [road] sections.
+; Each extra, including bases and roads, must have a section here.
+; Bases and roads have additional sections for their specific features below.
+;
 ;
 ; Extra types:
 ;
@@ -918,40 +973,138 @@ shield      = 3 ; glacier used to have 4
 ;                           present, 'name' is used. Since the name used in
 ;                           savegames must not change, use this when renaming a
 ;                           base after a ruleset has been released.
+; category                = How UI should categorize this extra. One of
+;                           "Infra", "Natural", "Nuisance", or "Bonus"
+; causes                  = events that can create extra type.
+;                           "Irrigation", "Mine", "Hut", "Pollution", "Fallout",
+;                           "Base", or "Road"
+; graphic                 = tag specifing preferred graphic
+; graphic_alt             = tag for alternate graphic if preferred graphic is not
+;                           present. Can use eg "-" for no alternate graphic.
+; activity_gfx            = tag specifing graphic for unit building extra
+; act_gfx_alt             = tag for alternative graphic for unit building extra
+; rmact_gfx               = tag specifing graphic for unit removing extra
+; rmact_gfx_alt           = tag for alternative graphic for unit removing extra
 ; reqs                    = requirements to build the extra (see effects.ruleset
 ;                           and README.effects for help on requirements)
 ; buildable               = Can extra be built? Defaults to TRUE
+; pillageable             = Can extra be pillaged? Defaults to TRUE
 ; native_to               = List of unit classes that are considered to
 ;                           be inside the extra when they are on same tile
+; conflicts               = List of extras that cannot be on the same tile.
+;                           Bases with non-zero border_sq automatically conflict
+;                           with each other.
+; hidden_by               = List of extra types that will make this extra
+;                           type not to show on UI if both present.
 ; flags
 ;   - "NativeTile"        = Native units consider tile native regardless of terrain
+;   - "Refuel"            = Native units can use tile as refuel point
+;   - "TerrChangeRemoves" = Extra gets removed when ever terrain changes even if target
+;                           terrain could support it.
+;   - "AlwaysOnCityCenter" = City Center tiles always have this extra type no
+;                           matter about reqs.
+;   - "AutoOnCityCenter"  = City Center tiles will automatically have this
+;                           extra type if the player can build it.
+;   - "ConnectLand"       = Road style gfx on Oceanic tiles are drawn to connect to
+;                           adjacent. Land tiles even if they have no extra.
+;                           This affects appearance only
+;   - "GlobalWarming"     = Instances of this extra on map count towards
+;                           Global Warming
+;   - "NuclearWinter"     = Instances of this extra on map count towards
+;                           Nuclear Winter
 ;
 ; */ <-- avoid gettext warnings
 
 [extra_irrigation]
 name           = _("Irrigation")
+category       = "Infra"
+causes         = "Irrigation"
+graphic        = "tx.irrigation"
+graphic_alt    = "-"
+activity_gfx   = "unit.irrigate"
+act_gfx_alt    = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+conflicts      = "Mine"
+hidden_by      = "Farmland"
 
 [extra_mine]
 name           = _("Mine")
+category       = "Infra"
+causes         = "Mine"
+graphic        = "tx.mine"
+graphic_alt    = "-"
+activity_gfx   = "unit.mine"
+act_gfx_alt    = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+conflicts      = "Irrigation", "Farmland"
 
 [extra_pollution]
 name           = _("Pollution")
+category       = "Nuisance"
+causes         = "Pollution"
+graphic        = "tx.pollution"
+graphic_alt    = "-"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+rmact_gfx      = "unit.pollution"
+rmact_gfx_alt  = "-"
+pillageable    = FALSE
+flags          = "GlobalWarming"
 
 [extra_hut]
-name           = _("Hut")
+name           = _("Minor Tribe Village")
+rule_name      = "Hut"
+category       = "Bonus"
+causes         = "Hut"
+graphic        = "tx.village"
+graphic_alt    = "-"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
 
 [extra_farmland]
 name           = _("Farmland")
+category       = "Infra"
+causes         = "Irrigation"
+graphic        = "tx.farmland"
+graphic_alt    = "-"
+activity_gfx   = "unit.farmland"
+act_gfx_alt    = "unit.irrigate"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
 reqs           =
     { "type", "name", "range"
       "Tech", "Refrigeration", "Player"
+      "Extra", "Irrigation", "Local"
     }
+conflicts      = "Mine"
 
 [extra_fallout]
 name           = _("Fallout")
+category       = "Nuisance"
+causes         = "Fallout"
+graphic        = "tx.fallout"
+graphic_alt    = "-"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+rmact_gfx      = "unit.fallout"
+rmact_gfx_alt  = "-"
+pillageable    = FALSE
+flags          = "NuclearWinter"
 
 [extra_fortress]
 name           = _("Fortress")
+category       = "Infra"
+causes         = "Base"
+graphic        = "base.fortress"
+graphic_alt    = "-"
+activity_gfx   = "unit.fortress"
+act_gfx_alt    = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
 reqs           =
     { "type", "name", "range", "present"
       "Tech", "Construction", "Player", TRUE
@@ -963,6 +1116,14 @@ native_to      = "Land"
 
 [extra_airbase]
 name           = _("Airbase")
+category       = "Infra"
+causes         = "Base"
+graphic        = "base.airbase"
+graphic_alt    = "-"
+activity_gfx   = "unit.airbase"
+act_gfx_alt    = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
 reqs           =
     { "type", "name", "range", "present"
       "Tech", "Radio", "Player", TRUE
@@ -971,9 +1132,18 @@ reqs           =
       "CityTile", "Center", "Local", FALSE
     }
 native_to      = "Air", "Helicopter", "Missile"
+flags          = "Refuel"
 
 [extra_buoy]
 name           = _("Buoy")
+category       = "Infra"
+causes         = "Base"
+graphic        = "base.buoy"
+graphic_alt    = "base.fortress"
+activity_gfx   = "unit.buoy"
+act_gfx_alt    = "unit.fortress"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
 reqs           =
     { "type", "name", "range", "present"
       "Tech", "Radio", "Player", TRUE
@@ -984,24 +1154,51 @@ reqs           =
 
 [extra_ruins]
 name           = _("Ruins")
+category       = "Bonus"
+causes         = "Base"
+graphic        = "base.ruins"
+graphic_alt    = "-"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
 reqs           =
     { "type", "name", "range", "present"
       "TerrainClass", "Land", "Local", TRUE
       "CityTile", "Center", "Local", FALSE
     }
 buildable      = FALSE
+flags          = "TerrChangeRemoves"
 
 [extra_road]
 name           = _("Road")
+category       = "Infra"
+causes         = "Road"
+graphic        = "road"
+graphic_alt    = "-"
+activity_gfx   = "unit.road"
+act_gfx_alt    = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
 reqs           =
     { "type", "name", "range"
       "UnitFlag", "Settlers", "Local"
       "TerrainClass", "Land", "Local"
     }
 native_to      = "Land"
+hidden_by      = "Railroad"
+flags          = "AutoOnCityCenter"
 
 [extra_railroad]
 name           = _("Railroad")
+category       = "Infra"
+causes         = "Road"
+graphic        = "rail"
+graphic_alt    = "-"
+activity_gfx   = "unit.rail"
+act_gfx_alt    = "unit.road"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
 reqs           =
     { "type", "name", "range"
       "Tech", "Railroad", "Player"
@@ -1010,10 +1207,20 @@ reqs           =
       "TerrainClass", "Land", "Local"
     }
 native_to      = "Land"
+flags          = "AutoOnCityCenter"
 
 [extra_river]
 name           = _("River")
+category       = "Natural"
+causes         = "Road"
+graphic        = "river"
+graphic_alt    = "-"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
 buildable      = FALSE
+pillageable    = FALSE
 native_to      = "Land"
 
 ; /* <-- avoid gettext warnings
@@ -1025,12 +1232,6 @@ native_to      = "Land"
 ;                           present, 'name' is used. Since the name used in
 ;                           savegames must not change, use this when renaming a
 ;                           base after a ruleset has been released.
-; pillageable             = Can base be pillaged? Defaults to TRUE
-; graphic                 = tag specifing preferred graphic
-; graphic_alt             = tag for alternate graphic if preferred graphic is not 
-;                           present. Can use eg "-" for no alternate graphic.
-; activity_gfx            = tag specifing graphic for unit building base
-; act_gfx_alt             = tag for alternative graphic for unit building base
 ; gui_type                = How gui should handle this base. Fortress/Airbase/Other
 ; build_time              = How long it takes for a unit to build this base. Value 0
 ;                           means that terrain specific value is used instead.
@@ -1039,19 +1240,12 @@ native_to      = "Land"
 ;                           -1 to disable.
 ; vision_main_sq          = Base will have main layer vision to this radius
 ; vision_invis_sq         = Base will have invisible layer vision to this radius
-; conflicts               = List of bases that cannot be on the same tile.
-;                           Bases with non-zero border_sq automatically conflict
-;                           with each other.
 ; flags
 ;   - "NoAggressive"      = Units inside are not considered aggressive
 ;   - "NoStackDeath"      = Units inside do not die all at once when attacked
 ;   - "DiplomatDefense"   = Diplomats inside get bonus to diplomatic defense
 ;   - "ParadropFrom"      = Paradrop can be initiated from base
 ;   - "ShowFlag"          = Draw owner's flag
-;   - "AlwaysOnCityCenter" = City Center tiles always have this base type no
-;                           matter about reqs.
-;   - "AutoOnCityCenter"  = City Center tiles will automatically have this
-;                           base type if the player can build it.
 ; helptext                = optional help text string; should escape all raw 
 ;                           newlines so that xgettext parsing works
 ;
@@ -1059,10 +1253,6 @@ native_to      = "Land"
 
 [base_fortress]
 name           = _("Fortress")
-graphic        = "base.fortress"
-graphic_alt    = "-"
-activity_gfx   = "unit.fortress"
-act_gfx_alt    = "-"
 gui_type       = "Fortress"
 build_time     = 3
 defense_bonus  = 100
@@ -1077,10 +1267,6 @@ from which units can see further afield.\
 
 [base_airbase]
 name           = _("Airbase")
-graphic        = "base.airbase"
-graphic_alt    = "-"
-activity_gfx   = "unit.airbase"
-act_gfx_alt    = "-"
 gui_type       = "Airbase"
 build_time     = 3
 flags          = "NoStackDeath", "ParadropFrom"
@@ -1091,10 +1277,6 @@ airbase may be attacked by land units.\
 
 [base_buoy]
 name           = _("Buoy")
-graphic        = "base.buoy"
-graphic_alt    = "base.fortress"
-activity_gfx   = "unit.buoy"
-act_gfx_alt    = "unit.fortress"
 gui_type       = "Fortress"
 build_time     = 3
 vision_main_sq = 5
@@ -1104,10 +1286,6 @@ Buoys may be built in the ocean (by units on a sea-going vessel).\
 
 [base_ruins]
 name           = _("Ruins")
-graphic        = "base.ruins"
-graphic_alt    = "-"
-activity_gfx   = "unit.ruins"
-act_gfx_alt    = "unit.fortress"
 build_time     = 0
 gui_type       = "Other"
 helptext       = _("\
@@ -1121,11 +1299,6 @@ They have no effect on gameplay.\
 ; Road types:
 ;
 ; name                    = translatable name as seen by user
-; graphic                 = tag specifing preferred graphic
-; graphic_alt             = tag for alternate graphic if preferred graphic is not 
-;                           present. Can use eg "-" for no alternate graphic.
-; activity_gfx            = tag specifing graphic for unit building road
-; act_gfx_alt             = tag for alternative graphic for unit building road
 ; move_cost               = how much movement it takes to travel
 ;                           via this road.
 ; move_mode               = how movement costs are applied
@@ -1136,7 +1309,6 @@ They have no effect on gameplay.\
 ; build_time              = how many movement points it takes to build this road. Value of
 ;                           0 means that terrain specific value is used instead.
 ; defense_bonus           = Percent added to defense
-; pillageable             = Can road be pillaged? Defaults to TRUE
 ; food_incr_const         = food production added to tile regardless of terrain
 ; shield_incr_const       = shield production added to tile regardless of terrain
 ; trade_incr_const        = trade production added to tile regardless of terrain
@@ -1152,12 +1324,7 @@ They have no effect on gameplay.\
 ; compat_special          = road type used in old savegames with just two road,
 ;                           and one river specials:
 ;                           "Road", "Railroad", "River, or "None"
-; hidden_by               = List of road types that will make this road
-;                           type not to show on UI if both present.
 ; flags
-;   - "ConnectLand"       = Roads on Oceanic tiles are drawn to connect to adjacent
-;                           Land tiles even if they have no road. This affects
-;                           appearance only
 ;   - "RequiresBridge"    = Road cannot be built to river tiles without
 ;                           appropriate technologies
 ;   - "AlwaysOnCityCenter" = City Center tiles always have this road type no
@@ -1167,8 +1334,6 @@ They have no effect on gameplay.\
 ;   - "River"             = Always flows from land tiles to ocean, automatically
 ;                           generated by map generator
 ;   - "Natural"           = Not infrastructure road
-;   - "AutoOnCityCenter"  = City Center tiles will automatically have this
-;                           road type if the player can build it.
 ; helptext                = optional help text string; should escape all raw
 ;                           newlines so that xgettext parsing works
 ;
@@ -1176,10 +1341,6 @@ They have no effect on gameplay.\
 
 [road_road]
 name           = _("Road")
-graphic        = "road"
-graphic_alt    = "-"
-activity_gfx   = "unit.road"
-act_gfx_alt    = "-"
 move_cost      = 1
 build_time     = 0
 food_incr      = 0
@@ -1189,15 +1350,10 @@ food_bonus     = 0
 shield_bonus   = 0
 trade_bonus    = 0
 compat_special = "Road"
-hidden_by      = "Railroad"
-flags          = "RequiresBridge", "AutoOnCityCenter"
+flags          = "RequiresBridge"
 
 [road_railroad]
 name           = _("Railroad")
-graphic        = "rail"
-graphic_alt    = "-"
-activity_gfx   = "unit.rail"
-act_gfx_alt    = "unit.road"
 move_cost      = 0
 build_time     = 3
 food_incr      = 0
@@ -1207,15 +1363,10 @@ food_bonus     = 0
 shield_bonus   = 50
 trade_bonus    = 0
 compat_special = "Railroad"
-flags          = "RequiresBridge", "AutoOnCityCenter"
+flags          = "RequiresBridge"
 
 [road_river]
 name           = _("River")
-graphic        = "river"
-graphic_alt    = "-"
-activity_gfx   = "unit.rail"
-act_gfx_alt    = "unit.road"
-pillageable    = FALSE
 defense_bonus  = 50
 move_cost      = 1
 move_mode      = "Cardinal"

@@ -1,0 +1,43 @@
+diff -Nurd -X.diff_ignore freeciv/common/name_translation.h freeciv/common/name_translation.h
+--- freeciv/common/name_translation.h	2013-11-06 03:04:48.338242941 +0200
++++ freeciv/common/name_translation.h	2014-01-12 08:42:26.869326662 +0200
+@@ -75,7 +75,7 @@
+     if (domain == NULL) {
+       ptrans->translated = Q_(ptrans->vernacular);
+     } else {
+-      ptrans->translated = skip_intl_qualifier_prefix(dgettext(domain, ptrans->vernacular));
++      ptrans->translated = skip_intl_qualifier_prefix(DG_(domain, ptrans->vernacular));
+     }
+   } else {
+     ptrans->translated = ptrans->vernacular;
+diff -Nurd -X.diff_ignore freeciv/common/nation.c freeciv/common/nation.c
+--- freeciv/common/nation.c	2013-12-30 19:47:32.422611308 +0200
++++ freeciv/common/nation.c	2014-01-12 08:42:38.237299245 +0200
+@@ -319,7 +319,7 @@
+     return _(legend);
+   }
+ 
+-  return dgettext(pnation->translation_domain, legend);
++  return DG_(pnation->translation_domain, legend);
+ }
+ 
+ /****************************************************************************
+diff -Nurd -X.diff_ignore freeciv/utility/fcintl.h freeciv/utility/fcintl.h
+--- freeciv/utility/fcintl.h	2013-11-03 03:13:04.207082618 +0200
++++ freeciv/utility/fcintl.h	2014-01-12 08:42:14.061357547 +0200
+@@ -40,6 +40,7 @@
+ 
+ /* Core freeciv */
+ #define _(String) gettext(String)
++#define DG_(domain, String) dgettext(domain, String)
+ #define N_(String) String
+ #define Q_(String) skip_intl_qualifier_prefix(gettext(String))
+ #define PL_(String1, String2, n) ngettext((String1), (String2), (n))
+@@ -51,6 +52,7 @@
+ 
+ /* Core freeciv */
+ #define _(String) (String)
++#define DG_(domain, String) (String)
+ #define N_(String) String
+ #define Q_(String) skip_intl_qualifier_prefix(String)
+ #define PL_(String1, String2, n) ((n) == 1 ? (String1) : (String2))

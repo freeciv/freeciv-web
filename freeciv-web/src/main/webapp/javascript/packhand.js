@@ -867,6 +867,16 @@ function handle_ruleset_action_enabler(packet)
   /* TODO: Implement */
 }
 
+function handle_ruleset_nation_sets(packet)
+{
+  /* TODO: Implement */
+}
+
+function handle_nation_availability(packet)
+{
+  /* TODO: Implement */
+}
+
 function handle_endgame_player(packet)
 {
   endgame_player_info.push(packet);

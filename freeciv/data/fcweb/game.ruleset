@@ -56,11 +56,6 @@ init_city_radius_sq     = 5
 ; Square of initially visible radius (true distance).
 init_vis_radius_sq	= 5
 
-; The type of collateral contamination produced by a nuclear attack.
-;   "Pollution" - Pollution (same as industrial/population-generated).
-;   "Fallout"   - Nuclear Fallout (distinct from industrial/population).
-nuke_contamination      = "Fallout"
-
 ; A base bribe cost, modified heavily by other factors
 base_bribe_cost  = 750
 
@@ -478,4 +473,5 @@ set =
   { "name", "value", "lock"
     "autosaves", "", TRUE
     "topology", "WRAPX", TRUE
+    "nationset", "all", TRUE
   }

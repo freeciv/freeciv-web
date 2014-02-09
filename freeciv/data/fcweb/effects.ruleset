@@ -1671,6 +1671,14 @@ reqs    =
       "Extra", "Mine", "Local"
     }
 
+[effect_oil_well]
+type    = "Mining_Pct"
+value   = 100
+reqs    =
+    { "type", "name", "range"
+      "Extra", "Oil Well", "Local"
+    }
+
 [effect_irrigation]
 type    = "Irrigation_Pct"
 value   = 100
@@ -1694,6 +1702,7 @@ reqs	=
 nreqs   =
     { "type", "name", "range"
       "Extra", "Mine", "Local"
+      "Extra", "Oil Well", "Local"
     }
 
 [effect_supermarket]
@@ -1723,6 +1732,7 @@ reqs	=
 nreqs   =
     { "type", "name", "range"
       "Extra", "Mine", "Local"
+      "Extra", "Oil Well", "Local"
     }
 
 [effect_temple]

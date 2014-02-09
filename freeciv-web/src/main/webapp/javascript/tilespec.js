@@ -160,12 +160,15 @@ function fill_sprite_array(layer, ptile, pedge, pcorner, punit, pcity, citymode)
 
         var spec_sprite = get_tile_specials_sprite(ptile);
         if (spec_sprite != null) sprite_array.push(spec_sprite);
-        
-        
+
+
         if (tile_has_extra(ptile, EXTRA_MINE)) {
-          sprite_array.push({"key" : "tx.mine"}); 
+          sprite_array.push({"key" : "tx.mine"});
         }
-        
+        if (tile_has_extra(ptile, EXTRA_OIL_WELL)) {
+          sprite_array.push({"key" : "tx.oil_mine"});
+        }
+
         if (tile_has_extra(ptile, EXTRA_HUT)) {
           sprite_array.push({"key" : "tx.village"}); 
         }

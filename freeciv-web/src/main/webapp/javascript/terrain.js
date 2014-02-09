@@ -17,22 +17,6 @@ var terrains = {};
 var resources = {};
 var terrain_control = {};
 
-var EXTRA_IRRIGATION = 0;
-var EXTRA_MINE = 1;
-var EXTRA_POLLUTION = 2;
-var EXTRA_HUT = 3;
-var EXTRA_FARMLAND = 4;
-var EXTRA_FALLOUT = 5;
-
-var BASE_FORTRESS = 6;
-var BASE_AIRBASE = 7;
-var BASE_BUOY = 8;
-var BASE_RUINS = 9;
-
-var ROAD_ROAD  = 10;
-var ROAD_RAIL  = 11;
-var ROAD_RIVER = 12;
-
 /**************************************************************************
  ...
 **************************************************************************/

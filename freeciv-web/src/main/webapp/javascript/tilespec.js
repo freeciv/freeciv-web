@@ -942,7 +942,7 @@ function get_tile_river_sprite(ptile)
       }
 
     }
-    return {"key" : "river_s_" + river_str};
+    return {"key" : "road.river_s_" + river_str};
   }
 
   var pterrain = tile_terrain(ptile);
@@ -951,7 +951,7 @@ function get_tile_river_sprite(ptile)
       var dir = cardinal_tileset_dirs[i];
       var checktile = mapstep(ptile, dir);
       if (checktile != null && tile_has_extra(checktile, ROAD_RIVER)) {
-        return {"key" : "river_outlet_" + dir_get_tileset_name(dir)};
+        return {"key" : "road.river_outlet_" + dir_get_tileset_name(dir)};
       }
     }
   }
@@ -1216,7 +1216,7 @@ function fill_road_rail_sprite_array(ptile, pcity)
     if (road) {
       for (i = 0; i < 8; i++) {
         if (draw_road[i]) {
-	      result_sprites.push({"key" : "r.road_" + dir_get_tileset_name(i)});
+	      result_sprites.push({"key" : "road.road_" + dir_get_tileset_name(i)});
 	    }
       }
     }
@@ -1225,7 +1225,7 @@ function fill_road_rail_sprite_array(ptile, pcity)
     if (rail) {
       for (i = 0; i < 8; i++) {
         if (draw_rail[i]) {
-	      result_sprites.push({"key" : "r.rail_" + dir_get_tileset_name(i)});
+	      result_sprites.push({"key" : "road.rail_" + dir_get_tileset_name(i)});
         }
       }
     }
@@ -1234,9 +1234,9 @@ function fill_road_rail_sprite_array(ptile, pcity)
  /* Draw isolated rail/road separately (styles 0 and 1 only). */
  
   if (draw_single_rail) {
-      result_sprites.push({"key" : "r.rail_isolated"});
+      result_sprites.push({"key" : "road.rail_isolated"});
   } else if (draw_single_road) {
-      result_sprites.push({"key" : "r.road_isolated"});
+      result_sprites.push({"key" : "road.road_isolated"});
   }
 
   return result_sprites; 

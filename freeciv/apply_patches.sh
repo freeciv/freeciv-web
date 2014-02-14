@@ -14,6 +14,26 @@ apply_patch() {
   echo "=== $1.patch applied ==="
 }
 
+# APPLY_UNTIL feature is used when rebasing the patches, and the working directory
+# is needed to get to correct patch level easily.
+if test "x$1" != "x" ; then
+  APPLY_UNTIL="$1"
+  au_found=false
+
+  for patch in $PATCHLIST
+  do
+    if test "x$patch" = "x$APPLY_UNTIL" ; then
+      au_found=true
+    fi
+  done
+  if test "x$au_found" != "xtrue" ; then
+    echo "There's no such patch as \"$APPLY_UNTIL\"" >&2
+    exit 1
+  fi
+else
+  APPLY_UNTIL=""
+fi
+
 . ./version.txt
 
 if ! grep "NETWORK_CAPSTRING_MANDATORY=\"$ORIGCAPSTR\"" freeciv/fc_version 2>/dev/null >/dev/null ; then
@@ -27,6 +47,10 @@ chmod a+x freeciv/fc_version
 
 for patch in $PATCHLIST
 do
+  if test "x$patch" = "x$APPLY_UNTIL" ; then
+    echo "$patch not applied as requested to stop"
+    break
+  fi
   if ! apply_patch $patch ; then
     echo "Patching failed ($patch.patch)" >&2
     exit 1

@@ -979,6 +979,8 @@ shield      = 3 ; glacier used to have 4
 ; causes                  = events that can create extra type.
 ;                           "Irrigation", "Mine", "Hut", "Pollution", "Fallout",
 ;                           "Base", or "Road"
+; rmcauses                = events that can remove extra type.
+;                           "CleanPollution", "CleanFallout", or "Pillage"
 ; graphic                 = tag specifing preferred graphic
 ; graphic_alt             = tag for alternate graphic if preferred graphic is not
 ;                           present. Can use eg "-" for no alternate graphic.
@@ -988,8 +990,9 @@ shield      = 3 ; glacier used to have 4
 ; rmact_gfx_alt           = tag for alternative graphic for unit removing extra
 ; reqs                    = requirements to build the extra (see effects.ruleset
 ;                           and README.effects for help on requirements)
+; rmreqs                  = requirements to remove the extra
 ; buildable               = Can extra be built? Defaults to TRUE
-; pillageable             = Can extra be pillaged? Defaults to TRUE
+; defense_bonus           = Percent added to defense when tile has the extra
 ; native_to               = List of unit classes that are considered to
 ;                           be inside the extra when they are on same tile
 ; conflicts               = List of extras that cannot be on the same tile.
@@ -1020,6 +1023,7 @@ shield      = 3 ; glacier used to have 4
 name           = _("Irrigation")
 category       = "Infra"
 causes         = "Irrigation"
+rmcauses       = "Pillage"
 graphic        = "tx.irrigation"
 graphic_alt    = "-"
 activity_gfx   = "unit.irrigate"
@@ -1033,6 +1037,7 @@ hidden_by      = "Farmland"
 name           = _("Mine")
 category       = "Infra"
 causes         = "Mine"
+rmcauses       = "Pillage"
 graphic        = "tx.mine"
 graphic_alt    = "-"
 activity_gfx   = "unit.mine"
@@ -1049,6 +1054,7 @@ conflicts      = "Irrigation", "Farmland"
 name           = _("Oil Well")
 category       = "Infra"
 causes         = "Mine"
+rmcauses       = "Pillage"
 graphic        = "tx.oil_mine"
 graphic_alt    = "tx.mine"
 activity_gfx   = "unit.oil_mine"
@@ -1065,13 +1071,13 @@ conflicts      = "Irrigation", "Farmland"
 name           = _("Pollution")
 category       = "Nuisance"
 causes         = "Pollution"
+rmcauses       = "CleanPollution"
 graphic        = "tx.pollution"
 graphic_alt    = "-"
 activity_gfx   = "None"
 act_gfx_alt    = "-"
 rmact_gfx      = "unit.pollution"
 rmact_gfx_alt  = "-"
-pillageable    = FALSE
 flags          = "GlobalWarming"
 
 [extra_hut]
@@ -1079,17 +1085,23 @@ name           = _("Minor Tribe Village")
 rule_name      = "Hut"
 category       = "Bonus"
 causes         = "Hut"
+rmcauses       = "Pillage"
 graphic        = "tx.village"
 graphic_alt    = "-"
 activity_gfx   = "None"
 act_gfx_alt    = "-"
 rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
+reqs           =
+    { "type", "name", "range"
+      "TerrainClass", "Land", "Local"
+    }
 
 [extra_farmland]
 name           = _("Farmland")
 category       = "Infra"
 causes         = "Irrigation"
+rmcauses       = "Pillage"
 graphic        = "tx.farmland"
 graphic_alt    = "-"
 activity_gfx   = "unit.farmland"
@@ -1107,19 +1119,20 @@ conflicts      = "Mine", "Oil Well"
 name           = _("Fallout")
 category       = "Nuisance"
 causes         = "Fallout"
+rmcauses       = "CleanFallout"
 graphic        = "tx.fallout"
 graphic_alt    = "-"
 activity_gfx   = "None"
 act_gfx_alt    = "-"
 rmact_gfx      = "unit.fallout"
 rmact_gfx_alt  = "-"
-pillageable    = FALSE
 flags          = "NuclearWinter"
 
 [extra_fortress]
 name           = _("Fortress")
 category       = "Infra"
 causes         = "Base"
+rmcauses       = "Pillage"
 graphic        = "base.fortress"
 graphic_alt    = "-"
 activity_gfx   = "unit.fortress"
@@ -1133,12 +1146,14 @@ reqs           =
       "UnitFlag", "Settlers", "Local", TRUE
       "CityTile", "Center", "Local", FALSE
     }
+defense_bonus  = 100
 native_to      = "Land"
 
 [extra_airbase]
 name           = _("Airbase")
 category       = "Infra"
 causes         = "Base"
+rmcauses       = "Pillage"
 graphic        = "base.airbase"
 graphic_alt    = "-"
 activity_gfx   = "unit.airbase"
@@ -1159,6 +1174,7 @@ flags          = "Refuel"
 name           = _("Buoy")
 category       = "Infra"
 causes         = "Base"
+rmcauses       = "Pillage"
 graphic        = "base.buoy"
 graphic_alt    = "base.fortress"
 activity_gfx   = "unit.buoy"
@@ -1177,6 +1193,7 @@ reqs           =
 name           = _("Ruins")
 category       = "Bonus"
 causes         = "Base"
+rmcauses       = "Pillage"
 graphic        = "base.ruins"
 graphic_alt    = "-"
 activity_gfx   = "None"
@@ -1195,6 +1212,7 @@ flags          = "TerrChangeRemoves"
 name           = _("Road")
 category       = "Infra"
 causes         = "Road"
+rmcauses       = "Pillage"
 graphic        = "road"
 graphic_alt    = "-"
 activity_gfx   = "unit.road"
@@ -1214,6 +1232,7 @@ flags          = "AutoOnCityCenter"
 name           = _("Railroad")
 category       = "Infra"
 causes         = "Road"
+rmcauses       = "Pillage"
 graphic        = "rail"
 graphic_alt    = "-"
 activity_gfx   = "unit.rail"
@@ -1234,6 +1253,7 @@ flags          = "AutoOnCityCenter"
 name           = _("River")
 category       = "Natural"
 causes         = "Road"
+;rmcauses       = ""
 graphic        = "river"
 graphic_alt    = "-"
 activity_gfx   = "None"
@@ -1241,7 +1261,7 @@ act_gfx_alt    = "-"
 rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 buildable      = FALSE
-pillageable    = FALSE
+defense_bonus  = 50
 native_to      = "Land"
 
 ; /* <-- avoid gettext warnings
@@ -1256,7 +1276,6 @@ native_to      = "Land"
 ; gui_type                = How gui should handle this base. Fortress/Airbase/Other
 ; build_time              = How long it takes for a unit to build this base. Value 0
 ;                           means that terrain specific value is used instead.
-; defense_bonus           = Percent added to defense
 ; border_sq               = Base will claim land ownership up to this radius,
 ;                           -1 to disable.
 ; vision_main_sq          = Base will have main layer vision to this radius
@@ -1276,7 +1295,6 @@ native_to      = "Land"
 name           = _("Fortress")
 gui_type       = "Fortress"
 build_time     = 3
-defense_bonus  = 100
 border_sq      = 5
 flags          = "NoAggressive", "NoStackDeath", "DiplomatDefense"
 helptext       = _("\
@@ -1329,7 +1347,6 @@ They have no effect on gameplay.\
 ;   - "FastAlways" = Road cost applies always between two tiles with the roads (default)
 ; build_time              = how many movement points it takes to build this road. Value of
 ;                           0 means that terrain specific value is used instead.
-; defense_bonus           = Percent added to defense
 ; food_incr_const         = food production added to tile regardless of terrain
 ; shield_incr_const       = shield production added to tile regardless of terrain
 ; trade_incr_const        = trade production added to tile regardless of terrain
@@ -1354,7 +1371,8 @@ They have no effect on gameplay.\
 ;                            to same tile after this road.
 ;   - "River"             = Always flows from land tiles to ocean, automatically
 ;                           generated by map generator
-;   - "Natural"           = Not infrastructure road
+;   - "UnrestrictedInfra" = Use of the enemy owned road is not restricted
+;                           even if server setting 'restrictinfra' is set
 ; helptext                = optional help text string; should escape all raw
 ;                           newlines so that xgettext parsing works
 ;
@@ -1388,7 +1406,6 @@ flags          = "RequiresBridge"
 
 [road_river]
 name           = _("River")
-defense_bonus  = 50
 move_cost      = 1
 move_mode      = "Cardinal"
 food_incr_const   = 0
@@ -1401,7 +1418,7 @@ food_bonus        = 0
 shield_bonus      = 0
 trade_bonus       = 0
 compat_special = "River"
-flags          = "River", "PreventsOtherRoads", "Natural"
+flags          = "River", "PreventsOtherRoads", "UnrestrictedInfra"
 helptext       = _("\
 Any land terrain type may have a River on it.  A River adds 1\
  trade to the resources produced by that tile.  It also increases a tile's\

@@ -77,7 +77,7 @@ veteran_move_bonus = 0, 0, 0, 0
 ;                 type "Both" for unit that has no native Land terrains or
 ;                 for unit that has no native Oceanic terrains.
 ; min_speed     = Minimum speed after damage and effects
-; hp_loss_pct   = Hitpoints lost each turn if unit not in city or airbase
+; hp_loss_pct   = Hitpoints lost each turn if unit not in city or native base
 ; non_native_def_pct = Defense power percentage applying when defending on
 ;                      non-native terrain (such as ship in harbour)
 ; hut_behavior  = What happens to huts when unit enters tile: "Normal", "Nothing" or

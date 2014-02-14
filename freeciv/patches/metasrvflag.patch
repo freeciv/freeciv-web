@@ -1,0 +1,14 @@
+diff -Nurd -X.diff_ignore freeciv/server/meta.c freeciv/server/meta.c
+--- freeciv/server/meta.c	2014-02-14 02:06:39.887481863 +0200
++++ freeciv/server/meta.c	2014-02-14 02:07:07.395419255 +0200
+@@ -327,6 +327,10 @@
+                              plr->nation != NO_NATION_SELECTED 
+                              ? nation_plural_for_player(plr)
+                              : "none");
++        netfile_add_form_str(post, "pln[]",
++                             plr->nation != NO_NATION_SELECTED 
++                             ? nation_of_player(plr)->flag_graphic_str
++                             : "none");
+         netfile_add_form_str(post, "plh[]",
+                              pconn ? pconn->addr : "");
+ 

@@ -61,22 +61,22 @@ function place_map_labels()
     if tname == "Mountains" then
       selected_mountain = selected_mountain - 1
       if selected_mountain == 0 then
-        place:set_label("Highest Peak")
+        place:set_label(_("Highest Peak"))
       end
     elseif tname == "Deep Ocean" then
       selected_ocean = selected_ocean - 1
       if selected_ocean == 0 then
-        place:set_label("Deep Trench")
+        place:set_label(_("Deep Trench"))
       end
     elseif tname == "Desert" then
       selected_desert = selected_desert - 1
       if selected_desert == 0 then
-        place:set_label("Scorched spot")
+        place:set_label(_("Scorched Spot"))
       end
     elseif tname == "Glacier" then
       selected_glacier = selected_glacier - 1
       if selected_glacier == 0 then
-        place:set_label("Frozen lake")
+        place:set_label(_("Frozen Lake"))
       end
     end
   end

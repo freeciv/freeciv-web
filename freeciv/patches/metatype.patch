@@ -1,18 +1,18 @@
 diff -Nurd -X.diff_ignore freeciv/common/game.h freeciv/common/game.h
---- freeciv/common/game.h	2012-10-06 08:58:33.248269092 +0300
-+++ freeciv/common/game.h	2012-10-06 09:12:32.140250686 +0300
-@@ -220,6 +220,7 @@
+--- freeciv/common/game.h	2014-02-14 01:23:04.189582544 +0200
++++ freeciv/common/game.h	2014-02-14 02:04:09.823823234 +0200
+@@ -229,6 +229,7 @@
        struct {
          bool user_message_set;
          char user_message[256];
 +	char type[20];
        } meta_info;
  
-       int first_timeout;
+       struct {
 diff -Nurd -X.diff_ignore freeciv/server/civserver.c freeciv/server/civserver.c
---- freeciv/server/civserver.c	2012-10-06 08:58:46.812268794 +0300
-+++ freeciv/server/civserver.c	2012-10-06 09:13:27.676249466 +0300
-@@ -248,6 +248,8 @@
+--- freeciv/server/civserver.c	2014-02-14 01:23:05.241580158 +0200
++++ freeciv/server/civserver.c	2014-02-14 02:04:09.839823199 +0200
+@@ -249,6 +249,8 @@
        srvarg.bind_addr = option; /* Never freed. */
      } else if ((option = get_option_malloc("--Bind-meta", argv, &inx, argc))) {
        srvarg.bind_meta_addr = option; /* Never freed. */
@@ -21,7 +21,7 @@ diff -Nurd -X.diff_ignore freeciv/server/civserver.c freeciv/server/civserver.c
      } else if ((option = get_option_malloc("--read", argv, &inx, argc)))
        srvarg.script_filename = option; /* Never freed. */
      else if ((option = get_option_malloc("--quitidle", argv, &inx, argc))) {
-@@ -417,6 +419,8 @@
+@@ -418,6 +420,8 @@
                  /* TRANS: "Ranklog" is exactly what user must type, do not translate. */
                  _("Ranklog FILE"),
                  _("Use FILE as ranking logfile"));
@@ -31,8 +31,8 @@ diff -Nurd -X.diff_ignore freeciv/server/civserver.c freeciv/server/civserver.c
      cmdhelp_add(help, "L",
                  /* TRANS: "LoadAI" is exactly what user must type, do not translate. */
 diff -Nurd -X.diff_ignore freeciv/server/meta.c freeciv/server/meta.c
---- freeciv/server/meta.c	2012-10-06 08:58:46.832268794 +0300
-+++ freeciv/server/meta.c	2012-10-06 09:14:15.700248414 +0300
+--- freeciv/server/meta.c	2014-02-14 01:23:05.225580194 +0200
++++ freeciv/server/meta.c	2014-02-14 02:04:09.839823199 +0200
 @@ -113,6 +113,15 @@
  }
  
@@ -58,20 +58,9 @@ diff -Nurd -X.diff_ignore freeciv/server/meta.c freeciv/server/meta.c
      netfile_add_form_str(post, "version", VERSION_STRING);
      netfile_add_form_str(post, "patches",
                           get_meta_patches_string());
-@@ -316,6 +327,10 @@
-                              fc_url_encode(plr->nation != NO_NATION_SELECTED 
-                                            ? nation_plural_for_player(plr)
-                                            : "none"));
-+        netfile_add_form_str(post, "pln[]",
-+                             fc_url_encode(plr->nation != NO_NATION_SELECTED 
-+                                           ? nation_of_player(plr)->flag_graphic_str
-+                                           : "none"));
-         netfile_add_form_str(post, "plh[]",
-                              pconn ? pconn->addr : "");
- 
 diff -Nurd -X.diff_ignore freeciv/server/meta.h freeciv/server/meta.h
---- freeciv/server/meta.h	2012-10-06 08:58:46.832268794 +0300
-+++ freeciv/server/meta.h	2012-10-06 09:14:32.748248040 +0300
+--- freeciv/server/meta.h	2014-02-14 02:04:01.231842771 +0200
++++ freeciv/server/meta.h	2014-02-14 02:04:09.839823199 +0200
 @@ -32,6 +32,7 @@
  const char *get_meta_patches_string(void);
  const char *get_meta_message_string(void);

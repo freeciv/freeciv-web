@@ -1,7 +1,7 @@
 diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2014-02-09 08:40:13.281873971 +0200
-+++ freeciv/common/packets.def	2014-02-09 08:40:32.193823204 +0200
-@@ -405,7 +405,7 @@
+--- freeciv/common/packets.def	2014-02-14 02:20:50.893527741 +0200
++++ freeciv/common/packets.def	2014-02-14 02:26:00.296783678 +0200
+@@ -406,7 +406,7 @@
  
    TERRAIN terrain;
    RESOURCE resource;
@@ -10,7 +10,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    STRING spec_sprite[MAX_LEN_NAME];
    STRING label[MAX_LEN_NAME];
  end
-@@ -1979,3 +1979,13 @@
+@@ -2015,3 +2015,13 @@
    TILE dest;
    UINT32 turns;
  end
@@ -25,8 +25,8 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
 +  STRING message[MAX_LEN_MSG];
 +end
 diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
---- freeciv/server/maphand.c	2014-02-09 08:40:13.285873961 +0200
-+++ freeciv/server/maphand.c	2014-02-09 08:41:28.889671124 +0200
+--- freeciv/server/maphand.c	2014-02-14 01:23:05.133580403 +0200
++++ freeciv/server/maphand.c	2014-02-14 02:28:19.936448434 +0200
 @@ -37,6 +37,7 @@
  #include "unit.h"
  #include "unitlist.h"
@@ -96,7 +96,7 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
  
        info.label[0] = '\0';
  
-@@ -2143,3 +2164,446 @@
+@@ -2182,3 +2203,479 @@
  
    unbuffer_shared_vision(pto);
  }
@@ -151,8 +151,9 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +  int activity_units[ACTIVITY_LAST];
 +  int extra_total[MAX_EXTRA_TYPES];
 +  int extra_units[MAX_EXTRA_TYPES];
++  int rmextra_total[MAX_EXTRA_TYPES];
++  int rmextra_units[MAX_EXTRA_TYPES];
 +  int num_activities = 0;
-+  int pillaging = 0;
 +  int remains, turns;
 +  static struct astring str = ASTRING_INIT;
 +
@@ -162,11 +163,17 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +  memset(activity_units, 0, sizeof(activity_units));
 +  memset(extra_total, 0, sizeof(extra_total));
 +  memset(extra_units, 0, sizeof(extra_units));
++  memset(rmextra_total, 0, sizeof(rmextra_total));
++  memset(rmextra_units, 0, sizeof(rmextra_units));
 +
 +  unit_list_iterate(ptile->units, punit) {
-+    if (punit->activity == ACTIVITY_PILLAGE) {
-+      pillaging = 1;
-+    } else if (activity_requires_target(punit->activity)) {
++    if (is_clean_activity(punit->activity)) {
++     int eidx = extra_index(punit->activity_target);
++
++      rmextra_total[eidx] += punit->activity_count;
++      rmextra_total[eidx] += get_activity_rate_this_turn(punit);
++      rmextra_units[eidx] += get_activity_rate(punit);
++    } else if (is_build_activity(punit->activity, ptile)) {
 +      int eidx = extra_index(punit->activity_target);
 +
 +      extra_total[eidx] += punit->activity_count;
@@ -179,21 +186,8 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +    }
 +  } unit_list_iterate_end;
 +
-+  if (pillaging) {
-+    bv_extras pillage_set = get_unit_tile_pillage_set(ptile);
-+
-+    if (BV_ISSET_ANY(pillage_set)) {
-+      astr_add(&str, "%s(%s)", _("Pillage"),
-+               get_infrastructure_text(pillage_set));
-+    } else {
-+      /* Untargeted pillaging is happening. */
-+      astr_add(&str, "%s", _("Pillage"));
-+    }
-+    num_activities++;
-+  }
-+
 +  activity_type_iterate(i) {
-+    if (activity_requires_target(i)) {
++    if (is_build_activity(i, ptile)) {
 +      enum extra_cause cause = EC_NONE;
 +
 +      switch(i) {
@@ -208,8 +202,6 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +        break;
 +      case ACTIVITY_MINE:
 +        cause = EC_MINE;
-+        break;
-+      case ACTIVITY_PILLAGE:
 +        break;
 +      default:
 +        fc_assert(cause != EC_NONE);
@@ -236,19 +228,60 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +          }
 +        } extra_type_by_cause_iterate_end;
 +      }
-+    } else if (is_build_or_clean_activity(i) && activity_units[i] > 0) {
-+      if (num_activities > 0) {
-+	astr_add(&str, "/");
++    } else if (is_clean_activity(i)) {
++      enum extra_rmcause rmcause = ERM_NONE;
++
++      switch(i) {
++      case ACTIVITY_PILLAGE:
++        rmcause = ERM_PILLAGE;
++        break;
++      case ACTIVITY_POLLUTION:
++        rmcause = ERM_CLEANPOLLUTION;
++        break;
++      case ACTIVITY_FALLOUT:
++        rmcause = ERM_CLEANFALLOUT;
++        break;
++      default:
++        fc_assert(rmcause != ERM_NONE);
++        break;
++      };
++
++      if (rmcause != ERM_NONE) {
++        extra_type_by_rmcause_iterate(rmcause, ep) {
++          int ei = extra_index(ep);
++
++          if (rmextra_units[ei] > 0) {
++            remains = tile_activity_time(i, ptile, ep) - rmextra_total[ei];
++            if (remains > 0) {
++              turns = 1 + (remains + rmextra_units[ei] - 1) / rmextra_units[ei];
++            } else {
++              /* extra will be removed this turn */
++              turns = 1;
++            }
++            if (num_activities > 0) {
++              astr_add(&str, "/");
++            }
++            astr_add(&str, rmcause == ERM_PILLAGE ? _("Pillage %s(%d)") : _("Clean %s(%d)"),
++                     extra_name_translation(ep), turns);
++            num_activities++;
++          }
++        } extra_type_by_rmcause_iterate_end;
 +      }
-+      remains = tile_activity_time(i, ptile, NULL) - activity_total[i];
-+      if (remains > 0) {
-+	turns = 1 + (remains + activity_units[i] - 1) / activity_units[i];
-+      } else {
-+	/* activity will be finished this turn */
-+	turns = 1;
++    } else if (is_tile_activity(i)) {
++      if (activity_units[i] > 0) {
++        remains = tile_activity_time(i, ptile, NULL) - activity_total[i];
++        if (remains > 0) {
++          turns = 1 + (remains + activity_units[i] - 1) / activity_units[i];
++        } else {
++          /* activity will be finished this turn */
++          turns = 1;
++        }
++        if (num_activities > 0) {
++          astr_add(&str, "/");
++        }
++        astr_add(&str, "%s(%d)", get_activity_text(i), turns);
++        num_activities++;
 +      }
-+      astr_add(&str, "%s(%d)", get_activity_text(i), turns);
-+      num_activities++;
 +    }
 +  } activity_type_iterate_end;
 +
@@ -544,9 +577,9 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +}
 +
 diff -Nurd -X.diff_ignore freeciv/server/maphand.h freeciv/server/maphand.h
---- freeciv/server/maphand.h	2014-02-09 08:40:13.285873961 +0200
-+++ freeciv/server/maphand.h	2014-02-09 08:40:32.193823204 +0200
-@@ -137,4 +137,6 @@
+--- freeciv/server/maphand.h	2014-02-14 01:23:05.225580194 +0200
++++ freeciv/server/maphand.h	2014-02-14 02:26:00.296783678 +0200
+@@ -138,4 +138,6 @@
  void give_distorted_map(struct player *pfrom, struct player *pto, int good,
                          int bad, bool reveal_cities);
  

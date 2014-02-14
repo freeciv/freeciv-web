@@ -1,10 +1,10 @@
 diff -Nurd -X.diff_ignore freeciv/server/meta.h freeciv/server/meta.h
---- freeciv/server/meta.h	2012-05-16 20:56:43.000000000 +0300
-+++ freeciv/server/meta.h	2012-05-16 22:01:30.000000000 +0300
+--- freeciv/server/meta.h	2014-02-14 01:23:05.229580185 +0200
++++ freeciv/server/meta.h	2014-02-14 01:58:50.480560440 +0200
 @@ -17,7 +17,7 @@
  
  #define DEFAULT_META_SERVER_NO_SEND  TRUE
- #define DEFAULT_META_SERVER_ADDR     META_URL /* config.h */
+ #define DEFAULT_META_SERVER_ADDR     META_URL /* fc_config.h */
 -#define METASERVER_REFRESH_INTERVAL   (3*60)
 +#define METASERVER_REFRESH_INTERVAL   (60)
  #define METASERVER_MIN_UPDATE_INTERVAL 7   /* not too short, not too long */

@@ -1,6 +1,6 @@
 diff -Nurd -X.diff_ignore freeciv/data/scenarios/british-isles-85x80-v2.80.sav freeciv/data/scenarios/british-isles-85x80-v2.80.sav
---- freeciv/data/scenarios/british-isles-85x80-v2.80.sav	2014-02-09 04:40:13.155722916 +0200
-+++ freeciv/data/scenarios/british-isles-85x80-v2.80.sav	2014-02-09 06:26:00.552988183 +0200
+--- freeciv/data/scenarios/british-isles-85x80-v2.80.sav	2014-02-14 01:23:00.481590956 +0200
++++ freeciv/data/scenarios/british-isles-85x80-v2.80.sav	2014-02-14 02:24:34.712989317 +0200
 @@ -8,7 +8,7 @@
  options=" +version2"
  version=20
@@ -11,8 +11,8 @@ diff -Nurd -X.diff_ignore freeciv/data/scenarios/british-isles-85x80-v2.80.sav f
  improvement_vector="Airport","Aqueduct","Bank","Barracks","Barracks II","Barracks III","Cathedral","City Walls","Coastal Defense","Colosseum","Courthouse","Factory","Granary","Harbour","Hydro Plant","Library","Marketplace","Mass Transit","Mfg. Plant","Nuclear Plant","Offshore Platform","Palace","Police Station","Port Facility","Power Plant","Recycling Center","Research Lab","SAM Battery","SDI Defense","Sewer System","Solar Plant","Space Component","Space Module","Space Structural","Stock Exchange","Super Highways","Supermarket","Temple","University","Apollo Program","A.Smith's Trading Co.","Colossus","Copernicus' Observatory","Cure For Cancer","Darwin's Voyage","Eiffel Tower","Great Library","Great Wall","Hanging Gardens","Hoover Dam","Isaac Newton's College","J.S. Bach's Cathedral","King Richard's Crusade","Leonardo's Workshop","Lighthouse","Magellan's Expedition","Manhattan Project","Marco Polo's Embassy","Michelangelo's Chapel","Oracle","Pyramids","SETI Program","Shakespeare's Theatre","Statue of Liberty","Sun Tzu's War Academy","United Nations","Women's Suffrage","Coinage"
  technology_size=88
 diff -Nurd -X.diff_ignore freeciv/data/scenarios/earth-160x90-v2.sav freeciv/data/scenarios/earth-160x90-v2.sav
---- freeciv/data/scenarios/earth-160x90-v2.sav	2014-02-09 04:40:13.247722694 +0200
-+++ freeciv/data/scenarios/earth-160x90-v2.sav	2014-02-09 06:26:19.224947407 +0200
+--- freeciv/data/scenarios/earth-160x90-v2.sav	2014-02-14 01:23:00.485590947 +0200
++++ freeciv/data/scenarios/earth-160x90-v2.sav	2014-02-14 02:24:34.712989317 +0200
 @@ -8,7 +8,7 @@
  options=" +version2"
  version=20
@@ -23,8 +23,8 @@ diff -Nurd -X.diff_ignore freeciv/data/scenarios/earth-160x90-v2.sav freeciv/dat
  improvement_vector="Airport","Aqueduct","Bank","Barracks","Barracks II","Barracks III","Cathedral","City Walls","Coastal Defense","Colosseum","Courthouse","Factory","Granary","Harbour","Hydro Plant","Library","Marketplace","Mass Transit","Mfg. Plant","Nuclear Plant","Offshore Platform","Palace","Police Station","Port Facility","Power Plant","Recycling Center","Research Lab","SAM Battery","SDI Defense","Sewer System","Solar Plant","Space Component","Space Module","Space Structural","Stock Exchange","Super Highways","Supermarket","Temple","University","Apollo Program","A.Smith's Trading Co.","Colossus","Copernicus' Observatory","Cure For Cancer","Darwin's Voyage","Eiffel Tower","Great Library","Great Wall","Hanging Gardens","Hoover Dam","Isaac Newton's College","J.S. Bach's Cathedral","King Richard's Crusade","Leonardo's Workshop","Lighthouse","Magellan's Expedition","Manhattan Project","Marco Polo's Embassy","Michelangelo's Chapel","Oracle","Pyramids","SETI Program","Shakespeare's Theatre","Statue of Liberty","Sun Tzu's War Academy","United Nations","Women's Suffrage","Coinage"
  technology_size=88
 diff -Nurd -X.diff_ignore freeciv/data/scenarios/earth-80x50-v3.sav freeciv/data/scenarios/earth-80x50-v3.sav
---- freeciv/data/scenarios/earth-80x50-v3.sav	2014-02-09 04:40:13.139722955 +0200
-+++ freeciv/data/scenarios/earth-80x50-v3.sav	2014-02-09 06:25:24.557066767 +0200
+--- freeciv/data/scenarios/earth-80x50-v3.sav	2014-02-14 01:23:00.473590975 +0200
++++ freeciv/data/scenarios/earth-80x50-v3.sav	2014-02-14 02:24:34.712989317 +0200
 @@ -8,7 +8,7 @@
  options=" +version2"
  version=20
@@ -35,8 +35,8 @@ diff -Nurd -X.diff_ignore freeciv/data/scenarios/earth-80x50-v3.sav freeciv/data
  improvement_vector="Airport","Aqueduct","Bank","Barracks","Barracks II","Barracks III","Cathedral","City Walls","Coastal Defense","Colosseum","Courthouse","Factory","Granary","Harbour","Hydro Plant","Library","Marketplace","Mass Transit","Mfg. Plant","Nuclear Plant","Offshore Platform","Palace","Police Station","Port Facility","Power Plant","Recycling Center","Research Lab","SAM Battery","SDI Defense","Sewer System","Solar Plant","Space Component","Space Module","Space Structural","Stock Exchange","Super Highways","Supermarket","Temple","University","Apollo Program","A.Smith's Trading Co.","Colossus","Copernicus' Observatory","Cure For Cancer","Darwin's Voyage","Eiffel Tower","Great Library","Great Wall","Hanging Gardens","Hoover Dam","Isaac Newton's College","J.S. Bach's Cathedral","King Richard's Crusade","Leonardo's Workshop","Lighthouse","Magellan's Expedition","Manhattan Project","Marco Polo's Embassy","Michelangelo's Chapel","Oracle","Pyramids","SETI Program","Shakespeare's Theatre","Statue of Liberty","Sun Tzu's War Academy","United Nations","Women's Suffrage","Coinage"
  technology_size=88
 diff -Nurd -X.diff_ignore freeciv/data/scenarios/europe-200x100-v2.sav freeciv/data/scenarios/europe-200x100-v2.sav
---- freeciv/data/scenarios/europe-200x100-v2.sav	2014-02-09 04:40:13.155722916 +0200
-+++ freeciv/data/scenarios/europe-200x100-v2.sav	2014-02-09 06:26:37.492907505 +0200
+--- freeciv/data/scenarios/europe-200x100-v2.sav	2014-02-14 01:23:00.481590956 +0200
++++ freeciv/data/scenarios/europe-200x100-v2.sav	2014-02-14 02:24:34.712989317 +0200
 @@ -8,7 +8,7 @@
  options=" +version2"
  version=20
@@ -47,8 +47,8 @@ diff -Nurd -X.diff_ignore freeciv/data/scenarios/europe-200x100-v2.sav freeciv/d
  improvement_vector="Airport","Aqueduct","Bank","Barracks","Barracks II","Barracks III","Cathedral","City Walls","Coastal Defense","Colosseum","Courthouse","Factory","Granary","Harbour","Hydro Plant","Library","Marketplace","Mass Transit","Mfg. Plant","Nuclear Plant","Offshore Platform","Palace","Police Station","Port Facility","Power Plant","Recycling Center","Research Lab","SAM Battery","SDI Defense","Sewer System","Solar Plant","Space Component","Space Module","Space Structural","Stock Exchange","Super Highways","Supermarket","Temple","University","Apollo Program","A.Smith's Trading Co.","Colossus","Copernicus' Observatory","Cure For Cancer","Darwin's Voyage","Eiffel Tower","Great Library","Great Wall","Hanging Gardens","Hoover Dam","Isaac Newton's College","J.S. Bach's Cathedral","King Richard's Crusade","Leonardo's Workshop","Lighthouse","Magellan's Expedition","Manhattan Project","Marco Polo's Embassy","Michelangelo's Chapel","Oracle","Pyramids","SETI Program","Shakespeare's Theatre","Statue of Liberty","Sun Tzu's War Academy","United Nations","Women's Suffrage","Coinage"
  technology_size=88
 diff -Nurd -X.diff_ignore freeciv/data/scenarios/france-140x90-v2.sav freeciv/data/scenarios/france-140x90-v2.sav
---- freeciv/data/scenarios/france-140x90-v2.sav	2014-02-09 04:40:13.247722694 +0200
-+++ freeciv/data/scenarios/france-140x90-v2.sav	2014-02-09 06:26:55.316868564 +0200
+--- freeciv/data/scenarios/france-140x90-v2.sav	2014-02-14 01:23:00.485590947 +0200
++++ freeciv/data/scenarios/france-140x90-v2.sav	2014-02-14 02:24:34.712989317 +0200
 @@ -8,7 +8,7 @@
  options=" +version2"
  version=20
@@ -59,8 +59,8 @@ diff -Nurd -X.diff_ignore freeciv/data/scenarios/france-140x90-v2.sav freeciv/da
  improvement_vector="Airport","Aqueduct","Bank","Barracks","Barracks II","Barracks III","Cathedral","City Walls","Coastal Defense","Colosseum","Courthouse","Factory","Granary","Harbour","Hydro Plant","Library","Marketplace","Mass Transit","Mfg. Plant","Nuclear Plant","Offshore Platform","Palace","Police Station","Port Facility","Power Plant","Recycling Center","Research Lab","SAM Battery","SDI Defense","Sewer System","Solar Plant","Space Component","Space Module","Space Structural","Stock Exchange","Super Highways","Supermarket","Temple","University","Apollo Program","A.Smith's Trading Co.","Colossus","Copernicus' Observatory","Cure For Cancer","Darwin's Voyage","Eiffel Tower","Great Library","Great Wall","Hanging Gardens","Hoover Dam","Isaac Newton's College","J.S. Bach's Cathedral","King Richard's Crusade","Leonardo's Workshop","Lighthouse","Magellan's Expedition","Manhattan Project","Marco Polo's Embassy","Michelangelo's Chapel","Oracle","Pyramids","SETI Program","Shakespeare's Theatre","Statue of Liberty","Sun Tzu's War Academy","United Nations","Women's Suffrage","Coinage"
  technology_size=88
 diff -Nurd -X.diff_ignore freeciv/data/scenarios/hagworld-120x60-v1.2.sav freeciv/data/scenarios/hagworld-120x60-v1.2.sav
---- freeciv/data/scenarios/hagworld-120x60-v1.2.sav	2014-02-09 04:40:13.155722916 +0200
-+++ freeciv/data/scenarios/hagworld-120x60-v1.2.sav	2014-02-09 06:27:13.696828402 +0200
+--- freeciv/data/scenarios/hagworld-120x60-v1.2.sav	2014-02-14 01:23:00.481590956 +0200
++++ freeciv/data/scenarios/hagworld-120x60-v1.2.sav	2014-02-14 02:24:34.712989317 +0200
 @@ -8,7 +8,7 @@
  options=" +version2"
  version=20
@@ -71,8 +71,8 @@ diff -Nurd -X.diff_ignore freeciv/data/scenarios/hagworld-120x60-v1.2.sav freeci
  improvement_vector="Airport","Aqueduct","Bank","Barracks","Barracks II","Barracks III","Cathedral","City Walls","Coastal Defense","Colosseum","Courthouse","Factory","Granary","Harbour","Hydro Plant","Library","Marketplace","Mass Transit","Mfg. Plant","Nuclear Plant","Offshore Platform","Palace","Police Station","Port Facility","Power Plant","Recycling Center","Research Lab","SAM Battery","SDI Defense","Sewer System","Solar Plant","Space Component","Space Module","Space Structural","Stock Exchange","Super Highways","Supermarket","Temple","University","Apollo Program","A.Smith's Trading Co.","Colossus","Copernicus' Observatory","Cure For Cancer","Darwin's Voyage","Eiffel Tower","Great Library","Great Wall","Hanging Gardens","Hoover Dam","Isaac Newton's College","J.S. Bach's Cathedral","King Richard's Crusade","Leonardo's Workshop","Lighthouse","Magellan's Expedition","Manhattan Project","Marco Polo's Embassy","Michelangelo's Chapel","Oracle","Pyramids","SETI Program","Shakespeare's Theatre","Statue of Liberty","Sun Tzu's War Academy","United Nations","Women's Suffrage","Coinage"
  technology_size=88
 diff -Nurd -X.diff_ignore freeciv/data/scenarios/iberian-peninsula-136x100-v1.0.sav freeciv/data/scenarios/iberian-peninsula-136x100-v1.0.sav
---- freeciv/data/scenarios/iberian-peninsula-136x100-v1.0.sav	2014-02-09 04:40:13.247722694 +0200
-+++ freeciv/data/scenarios/iberian-peninsula-136x100-v1.0.sav	2014-02-09 06:27:31.372789769 +0200
+--- freeciv/data/scenarios/iberian-peninsula-136x100-v1.0.sav	2014-02-14 01:23:00.485590947 +0200
++++ freeciv/data/scenarios/iberian-peninsula-136x100-v1.0.sav	2014-02-14 02:24:34.712989317 +0200
 @@ -8,7 +8,7 @@
  options=" +version2"
  version=20
@@ -83,8 +83,8 @@ diff -Nurd -X.diff_ignore freeciv/data/scenarios/iberian-peninsula-136x100-v1.0.
  improvement_vector="Airport","Aqueduct","Bank","Barracks","Barracks II","Barracks III","Cathedral","City Walls","Coastal Defense","Colosseum","Courthouse","Factory","Granary","Harbour","Hydro Plant","Library","Marketplace","Mass Transit","Mfg. Plant","Nuclear Plant","Offshore Platform","Palace","Police Station","Port Facility","Power Plant","Recycling Center","Research Lab","SAM Battery","SDI Defense","Sewer System","Solar Plant","Space Component","Space Module","Space Structural","Stock Exchange","Super Highways","Supermarket","Temple","University","Apollo Program","A.Smith's Trading Co.","Colossus","Copernicus' Observatory","Cure For Cancer","Darwin's Voyage","Eiffel Tower","Great Library","Great Wall","Hanging Gardens","Hoover Dam","Isaac Newton's College","J.S. Bach's Cathedral","King Richard's Crusade","Leonardo's Workshop","Lighthouse","Magellan's Expedition","Manhattan Project","Marco Polo's Embassy","Michelangelo's Chapel","Oracle","Pyramids","SETI Program","Shakespeare's Theatre","Statue of Liberty","Sun Tzu's War Academy","United Nations","Women's Suffrage","Coinage"
  technology_size=88
 diff -Nurd -X.diff_ignore freeciv/data/scenarios/italy-100x100-v1.5.sav freeciv/data/scenarios/italy-100x100-v1.5.sav
---- freeciv/data/scenarios/italy-100x100-v1.5.sav	2014-02-09 04:40:13.171722878 +0200
-+++ freeciv/data/scenarios/italy-100x100-v1.5.sav	2014-02-09 06:27:42.948764464 +0200
+--- freeciv/data/scenarios/italy-100x100-v1.5.sav	2014-02-14 01:23:00.485590947 +0200
++++ freeciv/data/scenarios/italy-100x100-v1.5.sav	2014-02-14 02:24:34.712989317 +0200
 @@ -8,7 +8,7 @@
  options=" +version2"
  version=20
@@ -95,8 +95,8 @@ diff -Nurd -X.diff_ignore freeciv/data/scenarios/italy-100x100-v1.5.sav freeciv/
  improvement_vector="Airport","Aqueduct","Bank","Barracks","Barracks II","Barracks III","Cathedral","City Walls","Coastal Defense","Colosseum","Courthouse","Factory","Granary","Harbour","Hydro Plant","Library","Marketplace","Mass Transit","Mfg. Plant","Nuclear Plant","Offshore Platform","Palace","Police Station","Port Facility","Power Plant","Recycling Center","Research Lab","SAM Battery","SDI Defense","Sewer System","Solar Plant","Space Component","Space Module","Space Structural","Stock Exchange","Super Highways","Supermarket","Temple","University","Apollo Program","A.Smith's Trading Co.","Colossus","Copernicus' Observatory","Cure For Cancer","Darwin's Voyage","Eiffel Tower","Great Library","Great Wall","Hanging Gardens","Hoover Dam","Isaac Newton's College","J.S. Bach's Cathedral","King Richard's Crusade","Leonardo's Workshop","Lighthouse","Magellan's Expedition","Manhattan Project","Marco Polo's Embassy","Michelangelo's Chapel","Oracle","Pyramids","SETI Program","Shakespeare's Theatre","Statue of Liberty","Sun Tzu's War Academy","United Nations","Women's Suffrage","Coinage"
  technology_size=88
 diff -Nurd -X.diff_ignore freeciv/data/scenarios/japan-88x100-v1.3.sav freeciv/data/scenarios/japan-88x100-v1.3.sav
---- freeciv/data/scenarios/japan-88x100-v1.3.sav	2014-02-09 04:40:13.155722916 +0200
-+++ freeciv/data/scenarios/japan-88x100-v1.3.sav	2014-02-09 06:27:56.492734853 +0200
+--- freeciv/data/scenarios/japan-88x100-v1.3.sav	2014-02-14 01:23:00.485590947 +0200
++++ freeciv/data/scenarios/japan-88x100-v1.3.sav	2014-02-14 02:24:34.712989317 +0200
 @@ -8,7 +8,7 @@
  options=" +version2"
  version=20
@@ -107,8 +107,8 @@ diff -Nurd -X.diff_ignore freeciv/data/scenarios/japan-88x100-v1.3.sav freeciv/d
  improvement_vector="Airport","Aqueduct","Bank","Barracks","Barracks II","Barracks III","Cathedral","City Walls","Coastal Defense","Colosseum","Courthouse","Factory","Granary","Harbour","Hydro Plant","Library","Marketplace","Mass Transit","Mfg. Plant","Nuclear Plant","Offshore Platform","Palace","Police Station","Port Facility","Power Plant","Recycling Center","Research Lab","SAM Battery","SDI Defense","Sewer System","Solar Plant","Space Component","Space Module","Space Structural","Stock Exchange","Super Highways","Supermarket","Temple","University","Apollo Program","A.Smith's Trading Co.","Colossus","Copernicus' Observatory","Cure For Cancer","Darwin's Voyage","Eiffel Tower","Great Library","Great Wall","Hanging Gardens","Hoover Dam","Isaac Newton's College","J.S. Bach's Cathedral","King Richard's Crusade","Leonardo's Workshop","Lighthouse","Magellan's Expedition","Manhattan Project","Marco Polo's Embassy","Michelangelo's Chapel","Oracle","Pyramids","SETI Program","Shakespeare's Theatre","Statue of Liberty","Sun Tzu's War Academy","United Nations","Women's Suffrage","Coinage"
  technology_size=88
 diff -Nurd -X.diff_ignore freeciv/data/scenarios/north_america_116x100-v1.2.sav freeciv/data/scenarios/north_america_116x100-v1.2.sav
---- freeciv/data/scenarios/north_america_116x100-v1.2.sav	2014-02-09 04:40:13.147722936 +0200
-+++ freeciv/data/scenarios/north_america_116x100-v1.2.sav	2014-02-09 06:28:16.480691146 +0200
+--- freeciv/data/scenarios/north_america_116x100-v1.2.sav	2014-02-14 01:23:00.473590975 +0200
++++ freeciv/data/scenarios/north_america_116x100-v1.2.sav	2014-02-14 02:24:34.712989317 +0200
 @@ -8,7 +8,7 @@
  options=" +version2"
  version=20
@@ -119,20 +119,20 @@ diff -Nurd -X.diff_ignore freeciv/data/scenarios/north_america_116x100-v1.2.sav 
  improvement_vector="Airport","Aqueduct","Bank","Barracks","Barracks II","Barracks III","Cathedral","City Walls","Coastal Defense","Colosseum","Courthouse","Factory","Granary","Harbour","Hydro Plant","Library","Marketplace","Mass Transit","Mfg. Plant","Nuclear Plant","Offshore Platform","Palace","Police Station","Port Facility","Power Plant","Recycling Center","Research Lab","SAM Battery","SDI Defense","Sewer System","Solar Plant","Space Component","Space Module","Space Structural","Stock Exchange","Super Highways","Supermarket","Temple","University","Apollo Program","A.Smith's Trading Co.","Colossus","Copernicus' Observatory","Cure For Cancer","Darwin's Voyage","Eiffel Tower","Great Library","Great Wall","Hanging Gardens","Hoover Dam","Isaac Newton's College","J.S. Bach's Cathedral","King Richard's Crusade","Leonardo's Workshop","Lighthouse","Magellan's Expedition","Manhattan Project","Marco Polo's Embassy","Michelangelo's Chapel","Oracle","Pyramids","SETI Program","Shakespeare's Theatre","Statue of Liberty","Sun Tzu's War Academy","United Nations","Women's Suffrage","Coinage"
  technology_size=88
 diff -Nurd -X.diff_ignore freeciv/data/scenarios/tileset-demo.sav freeciv/data/scenarios/tileset-demo.sav
---- freeciv/data/scenarios/tileset-demo.sav	2014-02-09 04:40:13.163722897 +0200
-+++ freeciv/data/scenarios/tileset-demo.sav	2014-02-09 06:25:24.557066767 +0200
-@@ -2,7 +2,7 @@
- [savefile]
+--- freeciv/data/scenarios/tileset-demo.sav	2014-02-14 01:23:00.485590947 +0200
++++ freeciv/data/scenarios/tileset-demo.sav	2014-02-14 02:24:59.952928657 +0200
+@@ -3,7 +3,7 @@
  options=" +version2 specials"
- reason="User request"
+ version=20
+ reason="Scenario"
 -rulesetdir="classic"
 +rulesetdir="fcweb"
  improvement_size=68
  improvement_vector="Airport","Aqueduct","Bank","Barracks","Barracks II","Barracks III","Cathedral","City Walls","Coastal Defense","Colosseum","Courthouse","Factory","Granary","Harbour","Hydro Plant","Library","Marketplace","Mass Transit","Mfg. Plant","Nuclear Plant","Offshore Platform","Palace","Police Station","Port Facility","Power Plant","Recycling Center","Research Lab","SAM Battery","SDI Defense","Sewer System","Solar Plant","Space Component","Space Module","Space Structural","Stock Exchange","Super Highways","Supermarket","Temple","University","Apollo Program","A.Smith's Trading Co.","Colossus","Copernicus' Observatory","Cure For Cancer","Darwin's Voyage","Eiffel Tower","Great Library","Great Wall","Hanging Gardens","Hoover Dam","Isaac Newton's College","J.S. Bach's Cathedral","King Richard's Crusade","Leonardo's Workshop","Lighthouse","Magellan's Expedition","Manhattan Project","Marco Polo's Embassy","Michelangelo's Chapel","Oracle","Pyramids","SETI Program","Shakespeare's Theatre","Statue of Liberty","Sun Tzu's War Academy","United Nations","Women's Suffrage","Coinage"
  technology_size=88
 diff -Nurd -X.diff_ignore freeciv/data/scenarios/tutorial.sav freeciv/data/scenarios/tutorial.sav
---- freeciv/data/scenarios/tutorial.sav	2014-02-09 04:40:13.247722694 +0200
-+++ freeciv/data/scenarios/tutorial.sav	2014-02-09 06:25:24.557066767 +0200
+--- freeciv/data/scenarios/tutorial.sav	2014-02-14 01:23:00.485590947 +0200
++++ freeciv/data/scenarios/tutorial.sav	2014-02-14 02:24:34.712989317 +0200
 @@ -7,7 +7,7 @@
  options=" +version2"
  version=20

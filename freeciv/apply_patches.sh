@@ -7,7 +7,10 @@ PATCHLIST="caravan_fixes1 city_fixes city_impr_fix2 city_name_bugfix city-naming
 
 apply_patch() {
   echo "*** Applying $1.patch ***"
-  patch -u -p1 -d freeciv < patches/$1.patch
+  if ! patch -u -p1 -d freeciv < patches/$1.patch ; then
+    echo "APPLYING PATCH $1.patch FAILED!"
+    return 1
+  fi
   echo "=== $1.patch applied ==="
 }
 

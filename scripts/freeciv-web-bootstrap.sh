@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Freeciv-web Vagrant Bootstrap Script - play.freeciv.org 
-# 2014-02-17 - Andreas Røsdal
+# 2014-02-17 - Andreas RÃ¸sdal
 #
 # Setup script for Freeciv-web to be used on a Vagrant local developer image.
 # This script assumes that the source code in git has been checked out from

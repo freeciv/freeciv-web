@@ -36,10 +36,32 @@ The Freeciv Web client consists of these components:
 * publite2 - a simple way to launch multiple civservers. 
 
 
-System Requirements
--------------------
+Running Freeciv-web with Vagrant on VirtualBox
+----------------------------------------------
+Freeciv-web can be setup using Vagrant on VirtualBox to quickly create a 
+local developer image running Freeciv-web on Ubuntu 13.10 on your host operating 
+system such as Windows, OSX or Linux. 
 
-- Resin 4.0.36 - http://www.caucho.com/
+1. Install VirtualBox: https://www.virtualbox.org/
+2. Install Vagrant: http://www.vagrantup.com/
+
+3. Install Git, then check out Freeciv-web from git to a directory on your computer, 
+for example by running these two git commands:
+git config --global core.autocrlf false
+git clone https://github.com/freeciv/freeciv-web.git
+
+4. Run the 'vagrant up' command in your Freeciv-web directory.
+This will build, compile, install and run Freeciv-web on the virtual server image.
+Wait for the installation process to complete, watching for any error messages on the logs.
+
+Then test Freeciv-web by pointing your browser to http://localhost/ on your
+host operating system.
+
+
+System Requirements for manual install
+--------------------------------------
+
+- Resin 4.0.38 - http://www.caucho.com/
 
 - Java 7 JDK - http://www.oracle.com/technetwork/java/javase/downloads/ 
 
@@ -50,7 +72,7 @@ System Requirements
 - Python Imaging Library (PIL) - http://www.pythonware.com/products/pil/
   (required for freeciv-img-extract)
 
-- Mysql 5.0.x - http://www.mysql.com/
+- Mysql 5.5.x - http://www.mysql.com/
 
 - Maven 2 - http://maven.apache.org/download.html
 
@@ -63,27 +85,21 @@ System Requirements
 
 - OpenSSL - http://www.openssl.org/
 
-- nginx 1.5.1 - http://nginx.org/
+- nginx 1.5.10 - http://nginx.org/
 
 - pngcrush, required for freeciv-img-extract.  http://pmt.sourceforge.net/pngcrush/
 
-- Tornado 3.1 - http://www.tornadoweb.org/
+- Tornado 3.2 - http://www.tornadoweb.org/
 
 - GLib 2.16.0 or newer - http://ftp.gnome.org/pub/GNOME/sources/glib/2.16/
 
-- Jansson 2.1.1 - http://www.digip.org/jansson/
+- Jansson 2.5 - http://www.digip.org/jansson/
 
 
-
-Compiling and running the Freeciv Web client
----------------------------------
-
-To compile and run Freeciv-web on Ubuntu, 
-1. Checkout Freeciv-web from github to ~/freeciv-build
-2. Update username/password and run: ~/freeciv-build/freeciv-web-bootstrap.sh
-
-
-On other Linux distributions, follow this installation procedure:
+Compiling and running the Freeciv Web client (old method)
+---------------------------------------------------------
+When not using Vagrant, or with other Linux distributions, follow this 
+manual installation procedure to setup Freeciv-web:
 
 0. Checkout Freeciv-web from github to ~/freeciv-build
 
@@ -113,29 +129,11 @@ On other Linux distributions, follow this installation procedure:
    - Copy nginx configuration file from publite2/nginx/freeciv-web
      to /etc/nginx/sites-enabled/ and edit to suit your needs.
 
-6. Start resin with these commands:
-   > cd ~/freeciv-build/resin/bin
-   > ./resin.sh start
 
-7. Start publite2:
-  Run publite2_single.py in the publite2 directory.
-
-8. Run the freeciv-proxy:
-  Run run.sh in the freeciv-proxy directory.
- To debug, check the proxy debugging page: 
-http://localhost:8002/status
-
-9. Start the web client in your browser:
-   Point your web browser to http://localhost/
-
-10. Continue to play the game. 
-
-
-* Some useful scripts:
-
-scripts/start-freeciv-web.sh      # starts all freeciv-web processes
-scripts/stop-freeciv-web.sh       # stops all freeciv-web processes
-scripts/status-freeciv-web.sh     # checks status of all freeciv-web processes
+6.  Start and stop Freeciv-web with the following commands:
+  scripts/start-freeciv-web.sh
+  scripts/stop-freeciv-web.sh       
+  scripts/status-freeciv-web.sh     
 
 
 

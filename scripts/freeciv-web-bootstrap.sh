@@ -1,68 +1,82 @@
 #!/bin/bash
 
-# FIXME: This is not in working condition
-# It doesn't get freeciv sources and patch them automatically
-# It doesn't create javascript packet definitions 
-# It doesn't create javascript gfx definitions
+# Freeciv-web Vagrant Bootstrap Script - play.freeciv.org 
+# 2014-02-17 - Andreas Røsdal
+#
+# Setup script for Freeciv-web to be used on a Vagrant local developer image.
+# This script assumes that the source code in git has been checked out from
+# https://github.com/freeciv/freeciv-web to /vagrant 
 
-basedir="${HOME}/freeciv-build"
-srcdir="${basedir}/freeciv-web"
-destdir="${basedir}/build"
+echo "================================="
+echo "Running Freeciv-web setup script."
+echo "================================="
+
+set -e
+
+basedir="/vagrant"
 
 # User will need permissions to create a database
 mysql_user="root"
-mysql_pass="changeme"
+mysql_pass="vagrant"
 
-freeciv_repo="https://github.com/cazfi/freeciv-web.git"
-resin_version="4.0.35"
+resin_version="4.0.38"
 resin_url="http://www.caucho.com/download/resin-${resin_version}.tar.gz"
+tornado_url="https://pypi.python.org/packages/source/t/tornado/tornado-3.2.tar.gz"
 
-# Based on fresh install of Ubuntu 10.10
-dependencies="maven2 mysql-server openjdk-6-jdk libcurl4-openssl-dev nginx git-core libjansson-dev"
-
+# Based on fresh install of Ubuntu 12.04
+dependencies="maven2 mysql-server-5.5 openjdk-7-jdk libcurl4-openssl-dev nginx libjansson-dev subversion pngcrush python-imaging"
 
 ## Setup
 mkdir -p ${basedir}
 cd ${basedir}
 
 ## dependencies
-echo "==== Installing Dependencies ===="
-sudo aptitude build-dep freeciv-server
-sudo aptitude install ${dependencies}
-
-## freeciv source
-echo "==== Fetching Source ===="
-git clone ${freeciv_repo} ${basedir}/freeciv-web
+echo "==== Installing Updates and Dependencies ===="
+apt-get -y update
+apt-get -y upgrade
+sudo debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password password vagrant'
+sudo debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password_again password vagrant'
+apt-get -y install ${dependencies}
+apt-get -y build-dep freeciv-server
 
 ## build/install resin
 echo "==== Fetching/Installing Resin ${resin_version} ===="
 wget ${resin_url}
 tar xvfz resin-${resin_version}.tar.gz
-cd resin-${resin_version}
-./configure --prefix=${basedir}/resin --with-resin-init.d=${basedir}/resin/bin/initscript --with-resin-log=${basedir}/resin/log/ && make && make install
+rm -Rf resin
+mv resin-${resin_version} resin
+
+echo "==== Fetching/Installing Tornado Web Server ===="
+wget ${tornado_url}
+tar xvfz tornado-3.2.tar.gz
+cd tornado-3.2
+python3.3 setup.py install
 
 ## mysql setup
 echo "==== Setting up MySQL ===="
 mysqladmin -u ${mysql_user} -p${mysql_pass} create freeciv_web
-mysql -u ${mysql_user} -p${mysql_pass} freeciv_web < ${srcdir}/freeciv-web/src/main/webapp/meta/private/metaserver.sql
-
-echo "==== Configuring Build ===="
-
-sed -e "s/user>root/user>${mysql_user}/" -e "s/password>changeme/password>${mysql_pass}/" \
-        ${srcdir}/freeciv-web/src/main/webapp/WEB-INF/resin-web.xml.dist \
-        > ${srcdir}/freeciv-web/src/main/webapp/WEB-INF/resin-web.xml
-
-echo "==== Building freeciv-web ===="
-cd ${srcdir}/freeciv-web/src/main/webapp/ && bash compress-js.sh
-cd ${srcdir}/freeciv-web && mvn install
-mv ${destdir}/resin/webapps/ROOT ${destdir}/resin/webapps/old-root 
-cp target/freeciv-web.war ${destdir}/resin/webapps/
+mysql -u ${mysql_user} -p${mysql_pass} freeciv_web < ${basedir}/freeciv-web/src/main/webapp/meta/private/metaserver.sql
 
 echo "==== Building freeciv ===="
-cd ${basedir}/freeciv-web/freeciv
-./autogen.sh --enable-fcweb
-make && sudo make install
+cd ${basedir}/freeciv && ./prepare_freeciv.sh
+cd freeciv && make install
+cd ${basedir}/freeciv/data/ && cp -rf fcweb /usr/local/share/freeciv
+
+echo "==== Building freeciv-web ===="
+sed -e "s/user>root/user>${mysql_user}/" -e "s/password>changeme/password>${mysql_pass}/" \
+       ${basedir}/freeciv-web/src/main/webapp/WEB-INF/resin-web.xml.dist \
+       > ${basedir}/freeciv-web/src/main/webapp/WEB-INF/resin-web.xml
+cd ${basedir}/freeciv-img-extract/ && ./setup_links.sh && ./sync.sh
+cd ${basedir}/scripts && ./sync-js-hand.sh
+cd ${basedir}/freeciv-web && ./build.sh
 
 echo "=============================="
-echo "Refer to the freeciv-web README for instructions on how to proceed after the build"
-echo "=============================="
+
+rm /etc/nginx/sites-enabled/default
+cp ${basedir}/publite2/nginx.conf /etc/nginx/
+cp ${basedir}/publite2/nginx/freeciv-web /etc/nginx/sites-enabled/
+
+echo "Starting Freeciv-web..."
+service nginx start
+cd ${basedir}/scripts/ && sudo -u vagrant ./start-freeciv-web.sh
+echo "Freeciv-web started! Now try http://localhost/ on your host operating system."

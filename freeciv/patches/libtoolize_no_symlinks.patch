@@ -1,0 +1,13 @@
+Index: freeciv/autogen.sh
+===================================================================
+--- freeciv/autogen.sh	(revision 24505)
++++ freeciv/autogen.sh	(working copy)
+@@ -270,7 +270,7 @@
+   exit 1
+ }
+ echo "+ running $LIBTOOLIZE ... "
+-$LIBTOOLIZE -f || {
++$LIBTOOLIZE -f -c || {
+   echo
+   echo "$LIBTOOLIZE failed"
+   exit 1

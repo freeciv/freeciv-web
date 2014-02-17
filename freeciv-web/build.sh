@@ -1,5 +1,5 @@
 
-ROOTDIR="$(pwd)/../.."
+ROOTDIR="$(pwd)/.."
 
 cd src/main/webapp/ &&
 sh compress-js.sh &&

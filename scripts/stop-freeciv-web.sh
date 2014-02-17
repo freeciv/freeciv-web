@@ -2,7 +2,7 @@
 # Shutdown script for Freeciv-web
 
 SCRIPT_DIR="$(dirname "$0")"
-export FREECIV_WEB_DIR="${SCRIPT_DIR}/../.."
+export FREECIV_WEB_DIR="${SCRIPT_DIR}/.."
 
 echo "Shutting down Freeciv-web: nginx, resin, publite2, freeciv-proxy."
 

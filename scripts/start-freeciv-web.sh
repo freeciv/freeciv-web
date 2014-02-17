@@ -2,7 +2,7 @@
 # Startup script for running all processes of Freeciv-web
 
 SCRIPT_DIR="$(dirname "$0")"
-export FREECIV_WEB_DIR="${SCRIPT_DIR}/../.."
+export FREECIV_WEB_DIR="${SCRIPT_DIR}/.."
 
 echo "Starting up Freeciv-web: nginx, resin, publite2, freeciv-proxy."
 
@@ -13,7 +13,7 @@ if [ "$(pidof nginx)" ]
 then
   echo "nginx running!"
 else
-  sudo /usr/local/nginx/sbin/nginx && \
+  sudo service nginx start && \
   echo "nginx started!" && \
   sleep 1 
 fi
@@ -27,13 +27,13 @@ sleep 20 && \
 
 #3. publite2
 echo "Starting publite2" && \
-(cd ${FREECIV_WEB_DIR}/freeciv-web/publite2/ && \
+(cd ${FREECIV_WEB_DIR}/publite2/ && \
 sh run.sh) && \
 echo "Publite2 started" && \
 
 #4. freeciv-proxy
 echo "Starting freeciv-proxy" && \
-(cd  ${FREECIV_WEB_DIR}/freeciv-web/freeciv-proxy/ && \
+(cd  ${FREECIV_WEB_DIR}/freeciv-proxy/ && \
 sh run.sh) && \
 echo "freeciv-proxy started" &&\
 echo "Will sleep for 30 seconds, then do a status test..." && \

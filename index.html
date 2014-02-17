@@ -41,17 +41,9 @@
         <h2>
 <a name="the-freeciv-web-project" class="anchor" href="#the-freeciv-web-project"><span class="octicon octicon-link"></span></a>THE FREECIV-WEB PROJECT</h2>
 
-<p>Freeciv-web is an open-source turn-based strategy game. It’s built entirely in HTML5 
-and features in-depth game-play and a wide variety of game modes and options. Your goal is
- to build cities, collect resources, organize your government, and build an army, with the 
-ultimate goal of creating the best civilization. You can play online against other players 
-(multiplayer) or play by yourself against the computer. </p>
+<p>Freeciv-web is an open-source turn-based strategy game. It’s built entirely in HTML5 and features in-depth game-play and a wide variety of game modes and options. Your goal is to build cities, collect resources, organize your government, and build an army, with the ultimate goal of creating the best civilization. You can play online against other players (multiplayer) or play by yourself against the computer. </p>
 
-<p>This is yet another rewrite of the Freeciv web client, which
-will make it possible to play Freeciv in your web browser.</p>
-
-<p>Freeciv-web is is free and open source software. The Freeciv C server is released under
-the GNU General Public License, while the Freeciv-web client is released
+<p>Freeciv-web is is free and open source software. The Freeciv C server is released under the GNU General Public License, while the Freeciv-web client is released
 under the GNU Affero General Public License. See LICENSE.txt for details.</p>
 
 <p>Freeciv-web is now playable online at <a href="http://play.freeciv.org/">http://play.freeciv.org/</a></p>
@@ -79,36 +71,54 @@ and Javascript. Run this to sync with the upstream Freeciv SVN
 repository.</p></li>
 <li><p>publite2 - a simple way to launch multiple civservers. </p></li>
 </ul><h2>
-<a name="system-requirements" class="anchor" href="#system-requirements"><span class="octicon octicon-link"></span></a>System Requirements</h2>
+<a name="running-freeciv-web-with-vagrant-on-virtualbox" class="anchor" href="#running-freeciv-web-with-vagrant-on-virtualbox"><span class="octicon octicon-link"></span></a>Running Freeciv-web with Vagrant on VirtualBox</h2>
+
+<p>Freeciv-web can be setup using Vagrant on VirtualBox to quickly create a 
+local developer image running Freeciv-web on Ubuntu 13.10 on your host operating 
+system such as Windows, OSX or Linux. </p>
+
+<ol>
+<li>Install VirtualBox: <a href="https://www.virtualbox.org/">https://www.virtualbox.org/</a>
+</li>
+<li><p>Install Vagrant: <a href="http://www.vagrantup.com/">http://www.vagrantup.com/</a></p></li>
+<li><p>Install Git, then check out Freeciv-web from git to a directory on your computer, 
+for example by running these two git commands:
+git config --global core.autocrlf false
+git clone <a href="https://github.com/freeciv/freeciv-web.git">https://github.com/freeciv/freeciv-web.git</a></p></li>
+<li><p>Run the 'vagrant up' command in your Freeciv-web directory.
+This will build, compile, install and run Freeciv-web on the virtual server image.
+Wait for the installation process to complete, watching for any error messages on the logs.</p></li>
+</ol><p>Then test Freeciv-web by pointing your browser to http://localhost/ on your
+host operating system.</p>
+
+<h2>
+<a name="system-requirements-for-manual-install" class="anchor" href="#system-requirements-for-manual-install"><span class="octicon octicon-link"></span></a>System Requirements for manual install</h2>
 
 <ul>
-<li><p>Resin 4.0.36 - <a href="http://www.caucho.com/">http://www.caucho.com/</a></p></li>
+<li><p>Resin 4.0.38 - <a href="http://www.caucho.com/">http://www.caucho.com/</a></p></li>
 <li><p>Java 7 JDK - <a href="http://www.oracle.com/technetwork/java/javase/downloads/">http://www.oracle.com/technetwork/java/javase/downloads/</a> </p></li>
 <li><p>Python 3.3 - <a href="http://www.python.org/">http://www.python.org/</a>
 (freeciv-proxy uses Python 3.3, freeciv-img-extract uses Python 2.7
 due to PIL depenedency)</p></li>
 <li><p>Python Imaging Library (PIL) - <a href="http://www.pythonware.com/products/pil/">http://www.pythonware.com/products/pil/</a>
 (required for freeciv-img-extract)</p></li>
-<li><p>Mysql 5.0.x - <a href="http://www.mysql.com/">http://www.mysql.com/</a></p></li>
+<li><p>Mysql 5.5.x - <a href="http://www.mysql.com/">http://www.mysql.com/</a></p></li>
 <li><p>Maven 2 - <a href="http://maven.apache.org/download.html">http://maven.apache.org/download.html</a></p></li>
 <li><p>Firebug for debugging - <a href="http://getfirebug.com/">http://getfirebug.com/</a></p></li>
 <li><p>Closure Compiler - <a href="http://code.google.com/intl/nb/closure/compiler/">http://code.google.com/intl/nb/closure/compiler/</a>
 (Bundled in source code, no need to download.)</p></li>
 <li><p>curl-7.19.7 - <a href="http://curl.haxx.se/">http://curl.haxx.se/</a></p></li>
 <li><p>OpenSSL - <a href="http://www.openssl.org/">http://www.openssl.org/</a></p></li>
-<li><p>nginx 1.5.1 - <a href="http://nginx.org/">http://nginx.org/</a></p></li>
+<li><p>nginx 1.5.10 - <a href="http://nginx.org/">http://nginx.org/</a></p></li>
 <li><p>pngcrush, required for freeciv-img-extract.  <a href="http://pmt.sourceforge.net/pngcrush/">http://pmt.sourceforge.net/pngcrush/</a></p></li>
-<li><p>Tornado 3.1 - <a href="http://www.tornadoweb.org/">http://www.tornadoweb.org/</a></p></li>
+<li><p>Tornado 3.2 - <a href="http://www.tornadoweb.org/">http://www.tornadoweb.org/</a></p></li>
 <li><p>GLib 2.16.0 or newer - <a href="http://ftp.gnome.org/pub/GNOME/sources/glib/2.16/">http://ftp.gnome.org/pub/GNOME/sources/glib/2.16/</a></p></li>
-<li><p>Jansson 2.1.1 - <a href="http://www.digip.org/jansson/">http://www.digip.org/jansson/</a></p></li>
+<li><p>Jansson 2.5 - <a href="http://www.digip.org/jansson/">http://www.digip.org/jansson/</a></p></li>
 </ul><h2>
-<a name="compiling-and-running-the-freeciv-web-client" class="anchor" href="#compiling-and-running-the-freeciv-web-client"><span class="octicon octicon-link"></span></a>Compiling and running the Freeciv Web client</h2>
+<a name="compiling-and-running-the-freeciv-web-client-old-method" class="anchor" href="#compiling-and-running-the-freeciv-web-client-old-method"><span class="octicon octicon-link"></span></a>Compiling and running the Freeciv Web client (old method)</h2>
 
-<p>To compile and run Freeciv-web on Ubuntu, 
-1. Checkout Freeciv-web from github to ~/freeciv-build
-2. Update username/password and run: ~/freeciv-build/freeciv-web-bootstrap.sh</p>
-
-<p>On other Linux distributions, follow this installation procedure:</p>
+<p>When not using Vagrant, or with other Linux distributions, follow this 
+manual installation procedure to setup Freeciv-web:</p>
 
 <ol>
 <li><p>Checkout Freeciv-web from github to ~/freeciv-build</p></li>
@@ -116,49 +126,44 @@ due to PIL depenedency)</p></li>
 <li><p>Create mysql database called 'freeciv_web'
 Import mysql tables into a MySQL database from:
 freeciv-web/src/main/webapp/meta/private/metaserver.sql</p></li>
-<li><p>Get checkout from freeciv revision mentioned in freeciv/version.txt as
-freeciv/freeciv:
-cd freeciv
-svn co svn://svn.gna.org/svn/freeciv/trunk -r  freeciv</p></li>
-<li><p>Patch freeciv:
-./apply_patches.sh</p></li>
 <li>
-<p>Compile and install Freeciv. This involves running the following commands:
-cd freeciv
-./autogen.sh --enable-fcweb --disable-nls
-make
+<p>Get, prepare, and build freeciv server:</p>
+
+<blockquote>
+<p>cd freeciv
+./prepare_freeciv.sh</p>
+</blockquote>
+</li>
+<li>
+<p>Install Freeciv. This involves running the following commands:</p>
+
+<blockquote>
+<p>cd freeciv/freeciv
 make install     (as root user)</p>
+</blockquote>
 
 <p>copy freeciv-web/freeciv/data/fcweb to /usr/local/share/freeciv </p>
 </li>
-<li><p>Build and configure freeciv-web. </p></li>
-</ol><ul>
+<li>
+<p>Build and configure freeciv-web. </p>
+
+<ul>
 <li>Run setup_links.sh and sync.sh in freeciv-img-extract </li>
 <li>Run sync-js-hand.sh in /freeciv-web/scripts/ directory.</li>
 <li>Edit /freeciv-web/src/main/webapp/WEB-INF/resin-web.xml.dist, rename this
- file to resin-web.xml, and update the values for your MySQL database.</li>
+file to resin-web.xml, and update the values for your MySQL database.</li>
 <li>Run 'build.sh' in the freeciv-web directory</li>
-</ul><ol>
-<li><p>Start resin with these commands:
-cd ~/freeciv-build/resin/bin
-./resin.sh start</p></li>
-<li><p>Start publite2:
-Run publite2_single.py in the publite2 directory.</p></li>
-<li><p>Run the freeciv-proxy:
-Run run.sh in the freeciv-proxy directory.
-To debug, check the proxy debugging page: 
-http://localhost:8002/status</p></li>
-<li><p>Start nginx on port 80 as root.</p></li>
-<li><p>Start the web client in your browser:
-Point your web browser to http://localhost/</p></li>
-<li><p>Continue to play the game. </p></li>
-</ol><ul>
-<li>Some useful scripts:</li>
-</ul><p>scripts/start-freeciv-web.sh      # starts all freeciv-web processes
-scripts/stop-freeciv-web.sh       # stops all freeciv-web processes
-scripts/status-freeciv-web.sh     # checks status of all freeciv-web processes</p>
-
-<p>Also: 
+<li>Copy nginx configuration file from publite2/nginx/freeciv-web
+to /etc/nginx/sites-enabled/ and edit to suit your needs.</li>
+</ul>
+</li>
+</ol><ol>
+<li> Start and stop Freeciv-web with the following commands:
+scripts/start-freeciv-web.sh
+scripts/stop-freeciv-web.sh<br>
+scripts/status-freeciv-web.sh<br>
+</li>
+</ol><p>Also: 
 Set ulimit -n 65535 in /etc/profile
 and add some TCP/IP tuning in /etc/sysctrl.conf</p>
 

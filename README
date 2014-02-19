@@ -45,21 +45,35 @@ system such as Windows, OSX or Linux.
 1. Install VirtualBox: https://www.virtualbox.org/
 2. Install Vagrant: http://www.vagrantup.com/
 
-3. Install Git, then check out Freeciv-web from git to a directory on your computer, 
-for example by running these two git commands:
+3. Install Git: http://git-scm.com/ then check out Freeciv-web from git to 
+a directory on your computer, by running these two git commands:
 git config --global core.autocrlf false
 git clone https://github.com/freeciv/freeciv-web.git
 
-4. Run the 'vagrant up' command in your Freeciv-web directory.
+4. Run Vagrant with the following commands in your Freeciv-web directory from step 3:
+vagrant plugin install vagrant-vbguest
+vagrant up
+
 This will build, compile, install and run Freeciv-web on the virtual server image.
-Wait for the installation process to complete, watching for any error messages on the logs.
+Wait for the installation process to complete, watching for any error messages in the logs.
+
+5. (Skip this step if you run Windows) For Linux or OS X, then you 
+need to setup a SSH tunnel to port 80 like this:
+ssh -p 2222 -gNfL 80:localhost:80 vagrant@localhost -i ~/.vagrant.d/insecure_private_key
 
 Then test Freeciv-web by pointing your browser to http://localhost/ on your
 host operating system.
 
+To log in to your Vagrant server, run the command:  vagrant ssh
+
+Note that running Freeciv-web using Vagrant requires about 6Gb of memory
+and 3 Gb of harddisk space.
+
 
 System Requirements for manual install
 --------------------------------------
+
+Install this software if you are not running Freeciv-web with Vagrant:
 
 - Resin 4.0.38 - http://www.caucho.com/
 

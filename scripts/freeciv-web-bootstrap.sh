@@ -24,7 +24,7 @@ resin_url="http://www.caucho.com/download/resin-${resin_version}.tar.gz"
 tornado_url="https://pypi.python.org/packages/source/t/tornado/tornado-3.2.tar.gz"
 
 # Based on fresh install of Ubuntu 12.04
-dependencies="maven2 mysql-server-5.5 openjdk-7-jdk libcurl4-openssl-dev nginx libjansson-dev subversion pngcrush python-imaging"
+dependencies="maven2 mysql-server-5.5 openjdk-7-jdk libcurl4-openssl-dev nginx libjansson-dev subversion pngcrush python-imaging libtool automake autoconf autotools-dev language-pack-en python3.3-dev python3-setuptools libglib2.0-dev"
 
 ## Setup
 mkdir -p ${basedir}
@@ -32,12 +32,15 @@ cd ${basedir}
 
 ## dependencies
 echo "==== Installing Updates and Dependencies ===="
+echo "apt-get update"
 apt-get -y update
+echo "apt-get upgrade"
 apt-get -y upgrade
+echo "mysql setup..."
 sudo debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password password vagrant'
 sudo debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password_again password vagrant'
+echo "apt-get install dependencies"
 apt-get -y install ${dependencies}
-apt-get -y build-dep freeciv-server
 
 ## build/install resin
 echo "==== Fetching/Installing Resin ${resin_version} ===="
@@ -63,9 +66,7 @@ cd freeciv && make install
 cd ${basedir}/freeciv/data/ && cp -rf fcweb /usr/local/share/freeciv
 
 echo "==== Building freeciv-web ===="
-sed -e "s/user>root/user>${mysql_user}/" -e "s/password>changeme/password>${mysql_pass}/" \
-       ${basedir}/freeciv-web/src/main/webapp/WEB-INF/resin-web.xml.dist \
-       > ${basedir}/freeciv-web/src/main/webapp/WEB-INF/resin-web.xml
+sed -e "s/user>root/user>${mysql_user}/" -e "s/password>changeme/password>${mysql_pass}/" ${basedir}/freeciv-web/src/main/webapp/WEB-INF/resin-web.xml.dist > ${basedir}/freeciv-web/src/main/webapp/WEB-INF/resin-web.xml
 cd ${basedir}/freeciv-img-extract/ && ./setup_links.sh && ./sync.sh
 cd ${basedir}/scripts && ./sync-js-hand.sh
 cd ${basedir}/freeciv-web && ./build.sh

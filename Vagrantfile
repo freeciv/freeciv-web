@@ -18,7 +18,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "ubuntu64"
+  config.vm.box = "saucy64"
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
@@ -26,8 +26,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
-  # accessing "localhost:8080" will access port 80 on the guest machine.
-  config.vm.network :forwarded_port, guest: 80, host: 80
+  # on Windows accessing "localhost:80" will access port 80 on the guest 
+  # machine, and on Linux and OS X accessing "localhost:8080" will access 
+  # port 80 on the guest machine. Se README for creating a SSH tunnel for
+  # Linux and OS X on port 80.
+  if Vagrant::Util::Platform.windows?
+    config.vm.network :forwarded_port, guest: 80, host: 80
+  else 
+    config.vm.network :forwarded_port, guest: 80, host: 8080
+  end
 
  
    config.vm.provider "virtualbox" do |v|

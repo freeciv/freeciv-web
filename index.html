@@ -81,18 +81,38 @@ system such as Windows, OSX or Linux. </p>
 <li>Install VirtualBox: <a href="https://www.virtualbox.org/">https://www.virtualbox.org/</a>
 </li>
 <li><p>Install Vagrant: <a href="http://www.vagrantup.com/">http://www.vagrantup.com/</a></p></li>
-<li><p>Install Git, then check out Freeciv-web from git to a directory on your computer, 
-for example by running these two git commands:
-git config --global core.autocrlf false
-git clone <a href="https://github.com/freeciv/freeciv-web.git">https://github.com/freeciv/freeciv-web.git</a></p></li>
-<li><p>Run the 'vagrant up' command in your Freeciv-web directory.
-This will build, compile, install and run Freeciv-web on the virtual server image.
-Wait for the installation process to complete, watching for any error messages on the logs.</p></li>
-</ol><p>Then test Freeciv-web by pointing your browser to http://localhost/ on your
+<li><p>Install Git: <a href="http://git-scm.com/">http://git-scm.com/</a> then check out Freeciv-web from git to 
+a directory on your computer, by running these two git commands:</p></li>
+</ol><p>git config --global core.autocrlf false</p>
+
+<p>git clone <a href="https://github.com/freeciv/freeciv-web.git">https://github.com/freeciv/freeciv-web.git</a></p>
+
+<ol>
+<li>Run Vagrant with the following commands in your Freeciv-web directory from step 3:</li>
+</ol><p>vagrant plugin install vagrant-vbguest</p>
+
+<p>vagrant up</p>
+
+<p>This will build, compile, install and run Freeciv-web on the virtual server image.
+Wait for the installation process to complete, watching for any error messages in the logs.</p>
+
+<ol>
+<li>(Skip this step if you run Windows) For Linux or OS X, then you 
+need to setup a SSH tunnel to port 80 like this:</li>
+</ol><p>ssh -p 2222 -gNfL 80:localhost:80 vagrant@localhost -i ~/.vagrant.d/insecure_private_key</p>
+
+<p>Then test Freeciv-web by pointing your browser to http://localhost/ on your
 host operating system.</p>
+
+<p>To log in to your Vagrant server, run the command:  vagrant ssh</p>
+
+<p>Note that running Freeciv-web using Vagrant requires about 6Gb of memory
+and 3 Gb of harddisk space.</p>
 
 <h2>
 <a name="system-requirements-for-manual-install" class="anchor" href="#system-requirements-for-manual-install"><span class="octicon octicon-link"></span></a>System Requirements for manual install</h2>
+
+<p>Install this software if you are not running Freeciv-web with Vagrant:</p>
 
 <ul>
 <li><p>Resin 4.0.38 - <a href="http://www.caucho.com/">http://www.caucho.com/</a></p></li>
@@ -176,9 +196,11 @@ some tasks you can work on.</p>
 <h2>
 <a name="contributors-to-freeciv-web" class="anchor" href="#contributors-to-freeciv-web"><span class="octicon octicon-link"></span></a>Contributors to Freeciv-web</h2>
 
-<p>Andreas Røsdal
-Marko Lindqvist
-and the Freeciv.org project!</p>
+<p>Andreas Røsdal</p>
+
+<p>Marko Lindqvist</p>
+
+<p>and the Freeciv.org project!</p>
       </section>
 
     </div>

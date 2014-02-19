@@ -6,7 +6,7 @@
 #
 # Run 'vagrant up' in this directory, which will create a VirtualBox image,
 # and run scripts/freeciv-web-bootstrap.sh to install Freeciv-web for you.
-# Then point your browser to localhost:8080/
+# Then point your browser to http://localhost/ on your host OS.
 #
 
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!

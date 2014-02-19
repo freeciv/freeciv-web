@@ -39,8 +39,8 @@ The Freeciv Web client consists of these components:
 Running Freeciv-web with Vagrant on VirtualBox
 ----------------------------------------------
 Freeciv-web can be setup using Vagrant on VirtualBox to quickly create a 
-local developer image running Freeciv-web on Ubuntu 13.10 on your host operating 
-system such as Windows, OSX or Linux. 
+local developer image running Freeciv-web on Ubuntu 13.10 on your host 
+operating system such as Windows, OSX or Linux. 
 
 1. Install VirtualBox: https://www.virtualbox.org/
 2. Install Vagrant: http://www.vagrantup.com/
@@ -54,12 +54,13 @@ git clone https://github.com/freeciv/freeciv-web.git
 vagrant plugin install vagrant-vbguest
 vagrant up
 
-This will build, compile, install and run Freeciv-web on the virtual server image.
-Wait for the installation process to complete, watching for any error messages in the logs.
+This will build, compile, install and run Freeciv-web on the virtual server 
+image. Wait for the installation process to complete, watching for any error 
+messages in the logs.
 
 5. (Skip this step if you run Windows) For Linux or OS X, then you 
 need to setup a SSH tunnel to port 80 like this:
-ssh -p 2222 -gNfL 80:localhost:80 vagrant@localhost -i ~/.vagrant.d/insecure_private_key
+sudo ssh -p 2222 -gNfL 80:localhost:80 vagrant@localhost -i ~/.vagrant.d/insecure_private_key
 
 Then test Freeciv-web by pointing your browser to http://localhost/ on your
 host operating system.

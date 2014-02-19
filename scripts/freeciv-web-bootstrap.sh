@@ -7,11 +7,15 @@
 # This script assumes that the source code in git has been checked out from
 # https://github.com/freeciv/freeciv-web to /vagrant 
 
+# Redirect copy of output to a log file.
+exec > >(tee /tmp/vagrant-logfile.txt)
+exec 2>&1
+set -e
+
 echo "================================="
 echo "Running Freeciv-web setup script."
 echo "================================="
 
-set -e
 
 basedir="/vagrant"
 
@@ -54,6 +58,7 @@ wget ${tornado_url}
 tar xvfz tornado-3.2.tar.gz
 cd tornado-3.2
 python3.3 setup.py install
+
 
 ## mysql setup
 echo "==== Setting up MySQL ===="

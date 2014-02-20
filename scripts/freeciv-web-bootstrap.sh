@@ -7,8 +7,20 @@
 # This script assumes that the source code in git has been checked out from
 # https://github.com/freeciv/freeciv-web to /vagrant 
 
+if [ -d "/vagrant/" ]; then
+  # script is run to install Freeciv-web under vagrant
+  basedir="/vagrant"
+  logfile="/vagrant/freeciv-web-vagrant.log"
+else
+  # script is run to install Freeciv-web on current system without vagrant
+  echo "Installing Freeciv-web on current system. Please run this script as root user."
+  basedir=$(pwd)"/.."
+  logfile="${basedir}/freeciv-web-vagrant.log"
+fi
+
+
 # Redirect copy of output to a log file.
-exec > >(tee /tmp/vagrant-logfile.txt)
+exec > >(tee ${logfile})
 exec 2>&1
 set -e
 
@@ -16,8 +28,9 @@ echo "================================="
 echo "Running Freeciv-web setup script."
 echo "================================="
 
-
-basedir="/vagrant"
+uname -a
+echo basedir  $basedir
+echo logfile $logfile
 
 # User will need permissions to create a database
 mysql_user="root"
@@ -41,8 +54,8 @@ apt-get -y update
 echo "apt-get upgrade"
 apt-get -y upgrade
 echo "mysql setup..."
-sudo debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password password vagrant'
-sudo debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password_again password vagrant'
+sudo debconf-set-selections <<< "mysql-server-5.5 mysql-server/root_password password ${mysql_pass}"
+sudo debconf-set-selections <<< "mysql-server-5.5 mysql-server/root_password_again password ${mysql_pass}"
 echo "apt-get install dependencies"
 apt-get -y install ${dependencies}
 
@@ -82,7 +95,11 @@ rm /etc/nginx/sites-enabled/default
 cp ${basedir}/publite2/nginx.conf /etc/nginx/
 cp ${basedir}/publite2/nginx/freeciv-web /etc/nginx/sites-enabled/
 
-echo "Starting Freeciv-web..."
-service nginx start
-cd ${basedir}/scripts/ && sudo -u vagrant ./start-freeciv-web.sh
-echo "Freeciv-web started! Now try http://localhost/ on your host operating system."
+if [ -d "/vagrant/" ]; then
+  echo "Starting Freeciv-web..."
+  service nginx start
+  cd ${basedir}/scripts/ && sudo -u vagrant ./start-freeciv-web.sh
+  echo "Freeciv-web started! Now try http://localhost/ on your host operating system."
+else
+  echo "Freeciv-web installed. Please start it manually."
+fi

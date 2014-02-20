@@ -501,8 +501,8 @@ function handle_unit_diplomat_answer(packet)
   var pdiplomat = game_find_unit_by_number(diplomat_id);
   
   
-  switch (action_type) {
-  /*case DIPLOMAT_BRIBE:
+  /*switch (action_type) {
+  case DIPLOMAT_BRIBE:
     if (punit != null) {
         //popup_bribe_dialog(punit, cost);
     }
@@ -511,12 +511,22 @@ function handle_unit_diplomat_answer(packet)
     if (pcity != null) {
         //popup_incite_dialog(pcity, cost);
     }
-    break;*/
-  case DIPLOMAT_MOVE:
-      process_diplomat_arrival(pdiplomat, target_id);
     break;
-  };
+    break;
+  };*/
 
+}
+/**************************************************************************
+  Handle server request for user input about diplomat action to do.
+**************************************************************************/
+function handle_unit_diplomat_wants_input(packet) 
+{
+  var diplomat_id = packet['diplomat_id'];  
+  var target_tile_id = packet['target_tile_id'];
+
+  var pdiplomat = game_find_unit_by_number(diplomat_id);
+
+  process_diplomat_arrival(pdiplomat, target_tile_id);
 }
 
 function handle_diplomacy_init_meeting(packet) 

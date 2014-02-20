@@ -3,31 +3,41 @@
  * Simple local storage wrapper to save data on the browser side, supporting
  * all major browsers - IE6+, Firefox2+, Safari4+, Chrome4+ and Opera 10.5+
  *
- * Copyright (c) 2010 - 2012 Andris Reinman, andris.reinman@gmail.com
+ * Author: Andris Reinman, andris.reinman@gmail.com
  * Project homepage: www.jstorage.info
  *
- * Licensed under MIT-style license:
+ * Licensed under Unlicense:
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * This is free and unencumbered software released into the public domain.
+ * 
+ * Anyone is free to copy, modify, publish, use, compile, sell, or
+ * distribute this software, either in source code form or as a compiled
+ * binary, for any purpose, commercial or non-commercial, and by any
+ * means.
+ * 
+ * In jurisdictions that recognize copyright laws, the author or authors
+ * of this software dedicate any and all copyright interest in the
+ * software to the public domain. We make this dedication for the benefit
+ * of the public at large and to the detriment of our heirs and
+ * successors. We intend this dedication to be an overt act of
+ * relinquishment in perpetuity of all present and future rights to this
+ * software under copyright law.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ * IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+ * OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ * OTHER DEALINGS IN THE SOFTWARE.
+ * 
+ * For more information, please refer to <http://unlicense.org/>
  */
 
  (function(){
     var
         /* jStorage version */
-        JSTORAGE_VERSION = "0.4.5",
+        JSTORAGE_VERSION = "0.4.8",
 
         /* detect a dollar object or create one if not found */
         $ = window.jQuery || window.$ || (window.$ = {}),
@@ -46,7 +56,7 @@
         };
 
     // Break if no JSON support was found
-    if(!('parse' in JSON) || !('stringify' in JSON)){
+    if(!("parse" in JSON) || !("stringify" in JSON)){
         throw new Error("No JSON support found, include //cdnjs.cloudflare.com/ajax/libs/json2/20110223/json2.js to page");
     }
 
@@ -54,7 +64,7 @@
         /* This is the object, that holds the cached values */
         _storage = {__jstorage_meta:{CRC32:{}}},
 
-        /* Actual browser storage (localStorage or globalStorage['domain']) */
+        /* Actual browser storage (localStorage or globalStorage["domain"]) */
         _storage_service = {jStorage:"{}"},
 
         /* DOM element for older IE versions, holds userData behavior */
@@ -128,8 +138,8 @@
             decode: function(xmlString){
                 var dom_parser = ("DOMParser" in window && (new DOMParser()).parseFromString) ||
                         (window.ActiveXObject && function(_xmlString) {
-                    var xml_doc = new ActiveXObject('Microsoft.XMLDOM');
-                    xml_doc.async = 'false';
+                    var xml_doc = new ActiveXObject("Microsoft.XMLDOM");
+                    xml_doc.async = "false";
                     xml_doc.loadXML(_xmlString);
                     return xml_doc;
                 }),
@@ -137,7 +147,7 @@
                 if(!dom_parser){
                     return false;
                 }
-                resultXML = dom_parser.call("DOMParser" in window && (new DOMParser()) || window, xmlString, 'text/xml');
+                resultXML = dom_parser.call("DOMParser" in window && (new DOMParser()) || window, xmlString, "text/xml");
                 return this.isXML(resultXML)?resultXML:false;
             }
         };
@@ -154,9 +164,9 @@
         var localStorageReallyWorks = false;
         if("localStorage" in window){
             try {
-                window.localStorage.setItem('_tmptest', 'tmpval');
+                window.localStorage.setItem("_tmptest", "tmpval");
                 localStorageReallyWorks = true;
-                window.localStorage.removeItem('_tmptest');
+                window.localStorage.removeItem("_tmptest");
             } catch(BogusQuotaExceededErrorOnIos5) {
                 // Thanks be to iOS5 Private Browsing mode which throws
                 // QUOTA_EXCEEDED_ERRROR DOM Exception 22.
@@ -176,12 +186,12 @@
         else if("globalStorage" in window){
             try {
                 if(window.globalStorage) {
-					if(window.location.hostname == 'localhost'){
-						_storage_service = window.globalStorage['localhost.localdomain'];
-					}
-					else{
-						_storage_service = window.globalStorage[window.location.hostname];
-					}
+                    if(window.location.hostname == "localhost"){
+                        _storage_service = window.globalStorage["localhost.localdomain"];
+                    }
+                    else{
+                        _storage_service = window.globalStorage[window.location.hostname];
+                    }
                     _backend = "globalStorage";
                     _observer_update = _storage_service.jStorage_update;
                 }
@@ -189,14 +199,14 @@
         }
         /* Check if browser supports userData behavior */
         else {
-            _storage_elm = document.createElement('link');
+            _storage_elm = document.createElement("link");
             if(_storage_elm.addBehavior){
 
                 /* Use a DOM element to act as userData storage */
-                _storage_elm.style.behavior = 'url(#default#userData)';
+                _storage_elm.style.behavior = "url(#default#userData)";
 
                 /* userData element needs to be inserted into the DOM! */
-                document.getElementsByTagName('head')[0].appendChild(_storage_elm);
+                document.getElementsByTagName("head")[0].appendChild(_storage_elm);
 
                 try{
                     _storage_elm.load("jStorage");
@@ -450,11 +460,11 @@
      * @param {String} key Key name
      */
     function _checkKey(key){
-        if(!key || (typeof key != "string" && typeof key != "number")){
-            throw new TypeError('Key name must be string or numeric');
+        if(typeof key != "string" && typeof key != "number"){
+            throw new TypeError("Key name must be string or numeric");
         }
         if(key == "__jstorage_meta"){
-            throw new TypeError('Reserved key name');
+            throw new TypeError("Reserved key name");
         }
         return true;
     }
@@ -703,7 +713,7 @@
                     return _storage[key];
                 }
             }
-            return typeof(def) == 'undefined' ? null : def;
+            return typeof(def) == "undefined" ? null : def;
         },
 
         /**
@@ -808,7 +818,7 @@
 
         /**
          * Returns an index of all used keys as an array
-         * ['key1', 'key2',..'keyN']
+         * ["key1", "key2",.."keyN"]
          *
          * @return {Array} Used keys
         */
@@ -898,7 +908,7 @@
         subscribe: function(channel, callback){
             channel = (channel || "").toString();
             if(!channel){
-                throw new TypeError('Channel not defined');
+                throw new TypeError("Channel not defined");
             }
             if(!_pubsub_observers[channel]){
                 _pubsub_observers[channel] = [];
@@ -915,7 +925,7 @@
         publish: function(channel, payload){
             channel = (channel || "").toString();
             if(!channel){
-                throw new TypeError('Channel not defined');
+                throw new TypeError("Channel not defined");
             }
 
             _publish(channel, payload);
@@ -926,7 +936,22 @@
          */
         reInit: function(){
             _reloadData();
-        }
+        },
+
+        /**
+         * Removes reference from global objects and saves it as jStorage
+         *
+         * @param {Boolean} option if needed to save object as simple "jStorage" in windows context
+         */
+         noConflict: function( saveInGlobal ) {
+            delete window.$.jStorage
+
+            if ( saveInGlobal ) {
+                window.jStorage = this;
+            }
+
+            return this;
+         }
     };
 
     // Initialize jStorage

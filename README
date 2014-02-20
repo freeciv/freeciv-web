@@ -67,7 +67,7 @@ host operating system.
 
 To log in to your Vagrant server, run the command:  vagrant ssh
 
-Note that running Freeciv-web using Vagrant requires about 6Gb of memory
+Note that running Freeciv-web using Vagrant requires about 4Gb of memory
 and 3 Gb of harddisk space.
 
 

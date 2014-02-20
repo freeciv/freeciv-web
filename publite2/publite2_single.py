@@ -13,7 +13,7 @@ metaserver = "http://localhost:8080/meta/metaserver.php"
 logdir = "/tmp/"
 savesdir = "~/freeciv-build/resin/webapps/ROOT/savegames/"
 pubscript = "pubscript_single.serv"
-servers_count = 80
+servers_count = 5
 
 
 class civserverproc(Thread):

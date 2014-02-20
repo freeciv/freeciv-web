@@ -28,7 +28,9 @@ var DIPLOMAT_SABOTAGE = 5;
 var DIPLOMAT_STEAL = 6;
 var SPY_POISON = 7; 
 var SPY_SABOTAGE_UNIT = 8;
-var DIPLOMAT_ANY_ACTION = 9;   /* leave this one last */
+var DIPLOMAT_SABOTAGE_TARGET = 9;
+var DIPLOMAT_STEAL_TARGET = 10;
+var DIPLOMAT_ANY_ACTION = 11;   /* leave this one last */
 
 /****************************************************************************
  ...

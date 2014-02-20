@@ -1102,10 +1102,12 @@ function key_unit_move(dir)
 /**************************************************************************
  ...
 **************************************************************************/
-function process_diplomat_arrival(pdiplomat, target_id)
+function process_diplomat_arrival(pdiplomat, target_tile_id)
 {
-  var pcity = game_find_city_by_number(target_id);
-  var punit = game_find_unit_by_number(target_id);
+  var ptile = index_to_tile(target_tile_id);
+  var pcity = tile_city(ptile);
+  var punit = tile_units(ptile)[0];
+
   if (punit != null) {
     popup_diplomat_dialog(pdiplomat, punit, null);
   } else if (pcity != null) {

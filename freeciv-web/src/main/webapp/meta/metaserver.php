@@ -656,7 +656,7 @@ if ( isset($port) ) {
       <hr>
 
       <footer>
-        <p>&copy; The Freeciv Project 2013</p>
+        <p>&copy; The Freeciv Project 2013-2014</p>
       </footer>
 
     </div> <!-- /container -->

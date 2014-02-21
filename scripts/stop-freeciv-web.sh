@@ -7,7 +7,9 @@ export FREECIV_WEB_DIR="${SCRIPT_DIR}/.."
 echo "Shutting down Freeciv-web: nginx, resin, publite2, freeciv-proxy."
 
 # 1. nginx
-sudo killall nginx
+if [ "$(pidof nginx)" ] ; then
+  sudo killall nginx
+fi
 
 # 2. Resin
 ${FREECIV_WEB_DIR}/resin/bin/resin.sh stop 

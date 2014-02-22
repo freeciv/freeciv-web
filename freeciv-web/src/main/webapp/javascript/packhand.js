@@ -882,6 +882,11 @@ function handle_ruleset_nation_sets(packet)
   /* TODO: Implement */
 }
 
+function handle_ruleset_style(packet)
+{
+  /* TODO: Implement */
+}
+
 function handle_nation_availability(packet)
 {
   /* TODO: Implement */

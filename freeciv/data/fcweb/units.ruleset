@@ -248,6 +248,8 @@ flags         = "Unreachable", "DoesntOccupyTile"
 ; "HelpWonder"	= can help build wonders
 ; "TradeRoute"	= can establish trade routes
 ; "IgZOC"	= ignore Zones of Control (ZOC) even if unit class has "ZOC" flag
+; "HasNoZOC"    = unit has no Zone of Control (ZOC), thus any unit can move
+;                 around it freely
 ; "NonMil"	= a non-military unit: no attacks; no martial law; can enter
 ;                 peaceful borders; DoesntOccupyTile
 ; "IgTer"	= ignore terrain/road/rail, treat every tile as 1/3 move cost

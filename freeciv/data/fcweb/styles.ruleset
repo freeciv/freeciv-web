@@ -1,0 +1,39 @@
+; Modifying this file:
+; You should not modify this file except to make bugfixes or
+; for other "maintenance".  If you want to make custom changes
+; you should create a new datadir subdirectory and copy this file
+; into that directory, and then modify that copy.  Then use the
+; command "rulesetdir <mysubdir>" in the server to have freeciv
+; use your new customized file.
+
+[datafile]
+description="Nation theme data for Freeciv"
+options="+Freeciv-ruleset-Devel-2013.May.14"
+
+; /* <-- avoid gettext warnings
+;
+; Nation styles
+;
+; name          = translatable name as seen by user
+; rule_name     = (optional) name for rulesets; if not
+;                 present, 'name' is used.
+;
+; */ <-- avoid gettext warnings
+
+[style_european]
+name = _("?style:European")
+
+[style_classical]
+name = _("?style:Classical")
+
+[style_tropical]
+name = _("?style:Tropical")
+
+[style_asian]
+name = _("?style:Asian")
+
+[style_babylonian]
+name = _("?style:Babylonian")
+
+[style_celtic]
+name = _("?style:Celtic")

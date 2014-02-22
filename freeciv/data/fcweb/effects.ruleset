@@ -1293,9 +1293,9 @@ reqs	=
     }
 
 [effect_palace_5]
-name = "Output_Bonus"
-value  = 75
-reqs =
+type    = "Output_Bonus"
+value   = 75
+reqs    =
     { "type", "name", "range"
       "Gov", "Despotism", "Player"
       "Building", "Palace", "City"
@@ -1303,9 +1303,9 @@ reqs =
     }
 
 [effect_palace_6]
-name = "Output_Bonus"
-value  = 50
-reqs =
+type    = "Output_Bonus"
+value   = 50
+reqs    =
     { "type", "name", "range"
       "Gov", "Monarchy", "Player"
       "Building", "Palace", "City"

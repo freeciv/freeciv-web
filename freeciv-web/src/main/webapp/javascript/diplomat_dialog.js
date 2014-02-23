@@ -13,7 +13,8 @@
 
 
 
-function popup_diplomat_dialog(pdiplomat, punit, pcity)
+function popup_diplomat_dialog(pdiplomat, action_probabilities,
+                               punit, pcity)
 {
  // reset dialog page.
   var id = "#diplo_dialog_" + pdiplomat['id'];
@@ -54,39 +55,50 @@ function popup_diplomat_dialog(pdiplomat, punit, pcity)
     $(id).remove();		
   });
 
-  $("#diplo_emb").click(function() {
-    var packet = {"type" : packet_unit_diplomat_action, 
-                   "diplomat_id" : pdiplomat['id'], 
-                   "target_id": pcity['id'], 
-                   "value" : 0, 
-                   "action_type": DIPLOMAT_EMBASSY};
-    send_request (JSON.stringify(packet));		  
+  if (action_probabilities[ACTION_ESTABLISH_EMBASSY] != 0) {
+    $("#diplo_emb").click(function() {
+      var packet = {"type" : packet_unit_diplomat_action,
+                     "diplomat_id" : pdiplomat['id'],
+                     "target_id": pcity['id'],
+                     "value" : 0,
+                     "action_type": DIPLOMAT_EMBASSY};
+      send_request (JSON.stringify(packet));
 
-    $(id).remove();	
-  });
+      $(id).remove();
+    });
+  } else {
+    $("#diplo_emb").button( "option", "disabled", true);
+  }
 
-  $("#diplo_inv").click(function() {
-    var packet = {"type" : packet_unit_diplomat_action, 
-                   "diplomat_id" : pdiplomat['id'], 
-                   "target_id": pcity['id'], 
-                   "value" : 0, 
-                   "action_type": DIPLOMAT_INVESTIGATE};
-    send_request (JSON.stringify(packet));		  
+  if (action_probabilities[ACTION_SPY_INVESTIGATE_CITY] != 0) {
+    $("#diplo_inv").click(function() {
+      var packet = {"type" : packet_unit_diplomat_action,
+        "diplomat_id" : pdiplomat['id'],
+        "target_id": pcity['id'],
+        "value" : 0,
+        "action_type": DIPLOMAT_INVESTIGATE};
+        send_request (JSON.stringify(packet));
 
-    $(id).remove();	
-  });
+        $(id).remove();
+    });
+  } else {
+    $("#diplo_inv").button( "option", "disabled", true);
+  }
 
+  if (action_probabilities[ACTION_SPY_SABOTAGE_CITY] != 0) {
+    $("#diplo_sab").click(function() {
+      var packet = {"type" : packet_unit_diplomat_action,
+        "diplomat_id" : pdiplomat['id'],
+        "target_id": pcity['id'],
+        "value" : 0,
+        "action_type": DIPLOMAT_SABOTAGE};
+        send_request (JSON.stringify(packet));
 
-  $("#diplo_sab").click(function() {
-    var packet = {"type" : packet_unit_diplomat_action, 
-                   "diplomat_id" : pdiplomat['id'], 
-                   "target_id": pcity['id'], 
-                   "value" : 0, 
-                   "action_type": DIPLOMAT_SABOTAGE};
-    send_request (JSON.stringify(packet));		  
-
-    $(id).remove();	
-  });
+        $(id).remove();
+    });
+  } else {
+    $("#diplo_sab").button( "option", "disabled", true);
+  }
 
   var tech_count_counterpart = 0;
   var pplayer = client.conn.playing;
@@ -102,7 +114,8 @@ function popup_diplomat_dialog(pdiplomat, punit, pcity)
     }
   }
 
-  if (tech_count_counterpart > 0) {
+  if (action_probabilities[ACTION_SPY_STEAL_TECH] != 0
+      && tech_count_counterpart > 0) {
     $("#diplo_tech").click(function() {
       var packet = {"type" : packet_unit_diplomat_action, 
                      "diplomat_id" : pdiplomat['id'], 
@@ -111,52 +124,55 @@ function popup_diplomat_dialog(pdiplomat, punit, pcity)
                      "action_type": DIPLOMAT_STEAL};
       send_request (JSON.stringify(packet));
 
-      $(id).remove();	
+      $(id).remove();
     });
   } else {
     $("#diplo_tech").button( "option", "disabled", true);
   }
 
-  $("#diplo_revo").click(function() {
-    var packet = {"type" : packet_unit_diplomat_action, 
-                   "diplomat_id" : pdiplomat['id'], 
-                   "target_id": pcity['id'], 
-                   "value" : 0, 
-                   "action_type": DIPLOMAT_INCITE};
-    send_request (JSON.stringify(packet));		  
+  if (action_probabilities[ACTION_SPY_INCITE_CITY] != 0) {
+    $("#diplo_revo").click(function() {
+      var packet = {"type" : packet_unit_diplomat_action,
+        "diplomat_id" : pdiplomat['id'],
+        "target_id": pcity['id'],
+        "value" : 0,
+        "action_type": DIPLOMAT_INCITE};
+        send_request (JSON.stringify(packet));
 
-    $(id).remove();	
-  });
+        $(id).remove();
+    });
+  } else {
+    $("#diplo_revo").button( "option", "disabled", true);
+  }
 
+  if (action_probabilities[ACTION_SPY_BRIBE_UNIT] != 0) {
+    $("#diplo_bribe").click(function() {
+      var packet = {"type" : packet_unit_diplomat_action,
+        "diplomat_id" : pdiplomat['id'],
+        "target_id": punit['id'],
+        "value" : 0,
+        "action_type": DIPLOMAT_BRIBE};
+        send_request (JSON.stringify(packet));
 
-  $("#diplo_bribe").click(function() {
-    var packet = {"type" : packet_unit_diplomat_action, 
-                   "diplomat_id" : pdiplomat['id'], 
-                   "target_id": punit['id'], 
-                   "value" : 0, 
-                   "action_type": DIPLOMAT_BRIBE};
-    send_request (JSON.stringify(packet));		  
+        $(id).remove();
+    });
+  } else {
+    $("#diplo_bribe").button( "option", "disabled", true);
+  }
 
-    $(id).remove();	
-  });
-  
-  $("#diplo_spy_sabo").click(function() {
-    var packet = {"type" : packet_unit_diplomat_action, 
-                   "diplomat_id" : pdiplomat['id'], 
-                   "target_id": punit['id'], 
-                   "value" : 0, 
-                   "action_type": SPY_SABOTAGE_UNIT};
-    send_request (JSON.stringify(packet));		  
+  if (action_probabilities[ACTION_SPY_SABOTAGE_UNIT] != 0) {
+    $("#diplo_spy_sabo").click(function() {
+      var packet = {"type" : packet_unit_diplomat_action,
+        "diplomat_id" : pdiplomat['id'],
+        "target_id": punit['id'],
+        "value" : 0,
+        "action_type": SPY_SABOTAGE_UNIT};
+        send_request (JSON.stringify(packet));
 
-    $(id).remove();	
-  });
-
-  if (punit != null) {
-    var ptype = unit_type(punit);
-    if (ptype['name'] != "Spy") {
-      $("#diplo_spy_sabo").button("option", "disabled", true);
-    }
-
+        $(id).remove();
+    });
+  } else {
+    $("#diplo_spy_sabo").button( "option", "disabled", true);
   }
 }
 

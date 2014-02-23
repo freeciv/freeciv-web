@@ -41,7 +41,18 @@ var ACTIVITY_GEN_ROAD = 19;
 var ACTIVITY_CONVERT = 20;
 var ACTIVITY_LAST = 21;   /* leave this one last */
 
-
+/* Actions */
+var ACTION_SPY_POISON = 0;
+var ACTION_SPY_SABOTAGE_UNIT = 1;
+var ACTION_SPY_BRIBE_UNIT = 2;
+var ACTION_SPY_SABOTAGE_CITY = 3;
+var ACTION_SPY_TARGETED_SABOTAGE_CITY = 4;
+var ACTION_SPY_INCITE_CITY = 5;
+var ACTION_ESTABLISH_EMBASSY = 6;
+var ACTION_SPY_STEAL_TECH = 7;
+var ACTION_SPY_TARGETED_STEAL_TECH = 8;
+var ACTION_SPY_INVESTIGATE_CITY = 9;
+var ACTION_COUNT = 10;
 
 
 /* The kind of universals_u (value_union_type was req_source_type).

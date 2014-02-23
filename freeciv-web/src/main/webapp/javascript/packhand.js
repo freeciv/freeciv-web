@@ -516,6 +516,7 @@ function handle_unit_diplomat_answer(packet)
   };*/
 
 }
+
 /**************************************************************************
   Handle server request for user input about diplomat action to do.
 **************************************************************************/
@@ -527,6 +528,38 @@ function handle_unit_diplomat_wants_input(packet)
   var pdiplomat = game_find_unit_by_number(diplomat_id);
 
   process_diplomat_arrival(pdiplomat, target_tile_id);
+}
+
+/**************************************************************************
+  Handle server reply about what actions an unit can do.
+**************************************************************************/
+function handle_unit_actions(packet)
+{
+  var actor_unit_id = packet['actor_unit_id'];
+  var target_tile_id = packet['target_tile_id'];
+  var action_probabilities = packet['action_probabilities'];
+
+  var pdiplomat = game_find_unit_by_number(actor_unit_id);
+  var ptile = index_to_tile(target_tile_id);
+
+  var hasActions = false;
+
+  var target_city = tile_city(ptile);
+  var target_unit = tile_units(ptile)[0];
+
+  /* The dead can't act. */
+  if (pdiplomat != null && ptile != null) {
+    action_probabilities.forEach(function(prob) {
+      if (prob != 0) {
+        hasActions = true;
+      }
+    });
+  }
+
+  if (hasActions) {
+    popup_diplomat_dialog(pdiplomat, action_probabilities,
+                          target_unit, target_city);
+  }
 }
 
 function handle_diplomacy_init_meeting(packet) 

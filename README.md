@@ -12,6 +12,9 @@ Contact: The Freeciv Project - freeciv-dev@gna.org
 https://mail.gna.org/listinfo/freeciv-dev
 
 
+![Freeciv-web](http://upload.wikimedia.org/wikipedia/en/thumb/e/ee/Freeciv-net-screenshot-2011-06-23.png/800px-Freeciv-net-screenshot-2011-06-23.png "Freeciv-web screenshot")
+
+
 Overview
 --------
 
@@ -47,12 +50,16 @@ operating system such as Windows, OSX or Linux.
 
 3. Install Git: http://git-scm.com/ then check out Freeciv-web from git to 
 a directory on your computer, by running these two git commands:
+```bash
 git config --global core.autocrlf false
 git clone https://github.com/freeciv/freeciv-web.git
+```
 
 4. Run Vagrant with the following commands in your Freeciv-web directory from step 3:
+```bash
 vagrant plugin install vagrant-vbguest
 vagrant up
+```
 
 This will build, compile, install and run Freeciv-web on the virtual server 
 image. Wait for the installation process to complete, watching for any error 
@@ -166,7 +173,7 @@ some tasks you can work on.
 
 Contributors to Freeciv-web
 ---------------------------
-Andreas Røsdal
-Marko Lindqvist
+Andreas Røsdal  
+Marko Lindqvist  
 and the Freeciv.org project!
 

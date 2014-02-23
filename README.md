@@ -50,29 +50,32 @@ operating system such as Windows, OSX or Linux.
 
 3. Install Git: http://git-scm.com/ then check out Freeciv-web from git to 
 a directory on your computer, by running these two git commands:
-```bash
-git config --global core.autocrlf false
-git clone https://github.com/freeciv/freeciv-web.git
-```
+ ```bash
+ git config --global core.autocrlf false
+ git clone https://github.com/freeciv/freeciv-web.git
+ ```
 
 4. Run Vagrant with the following commands in your Freeciv-web directory from step 3:
-```bash
-vagrant plugin install vagrant-vbguest
-vagrant up
-```
+ ```bash
+ vagrant plugin install vagrant-vbguest
+ vagrant up
+ ```
 
-This will build, compile, install and run Freeciv-web on the virtual server 
-image. Wait for the installation process to complete, watching for any error 
-messages in the logs.
+  This will build, compile, install and run Freeciv-web on the virtual server image. Wait for the installation process to complete, watching for any error messages in the logs.
 
 5. (Skip this step if you run Windows) For Linux or OS X, then you 
 need to setup a SSH tunnel to port 80 like this:
-sudo ssh -p 2222 -gNfL 80:localhost:80 vagrant@localhost -i ~/.vagrant.d/insecure_private_key
+ ```bash
+ sudo ssh -p 2222 -gNfL 80:localhost:80 vagrant@localhost -i ~/.vagrant.d/insecure_private_key
+ ```
 
 Then test Freeciv-web by pointing your browser to http://localhost/ on your
 host operating system.
 
-To log in to your Vagrant server, run the command:  vagrant ssh
+To log in to your Vagrant server, run the command: 
+ ```bash
+ vagrant ssh
+ ```
 
 Note that running Freeciv-web using Vagrant requires about 4Gb of memory
 and 3 Gb of harddisk space.

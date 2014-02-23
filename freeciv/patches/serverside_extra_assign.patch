@@ -1,119 +1,54 @@
-diff -Nurd -X.diff_ignore freeciv/common/tile.c freeciv/common/tile.c
---- freeciv/common/tile.c	2014-02-09 07:52:14.025135778 +0200
-+++ freeciv/common/tile.c	2014-02-09 08:08:19.330736539 +0200
-@@ -577,12 +577,21 @@
-   Build irrigation on the tile.  This may change the extras of the tile
-   or change the terrain type itself.
- ****************************************************************************/
--static void tile_irrigate(struct tile *ptile, struct extra_type *tgt)
-+static void tile_irrigate(struct tile *ptile, struct extra_type *tgt,
-+                          struct unit *punit)
- {
-   struct terrain *pterrain = tile_terrain(ptile);
- 
-   if (pterrain == pterrain->irrigation_result) {
--    tile_extra_apply(ptile, tgt);
-+    if (tgt == NULL && punit != NULL) {
-+      tgt = next_extra_for_tile(unit_tile(punit),
-+                                EC_IRRIGATION,
-+                                unit_owner(punit),
-+                                punit);
-+    }
-+    if (tgt != NULL) {
-+      tile_extra_apply(ptile, tgt);
-+    }
-   } else if (pterrain->irrigation_result) {
-     tile_change_terrain(ptile, pterrain->irrigation_result);
+diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
+--- freeciv/server/unithand.c	2014-02-22 06:57:52.437982172 +0200
++++ freeciv/server/unithand.c	2014-02-22 07:13:23.175711213 +0200
+@@ -1083,6 +1083,50 @@
+     activity_target = extra_by_number(target_id);
    }
-@@ -592,12 +601,21 @@
-   Build a mine on the tile.  This may change the extras of the tile
-   or change the terrain type itself.
- ****************************************************************************/
--static void tile_mine(struct tile *ptile, struct extra_type *tgt)
-+static void tile_mine(struct tile *ptile, struct extra_type *tgt,
-+                      struct unit *punit)
- {
-   struct terrain *pterrain = tile_terrain(ptile);
  
-   if (pterrain == pterrain->mining_result) {
--    tile_extra_apply(ptile, tgt);
-+    if (tgt == NULL && punit != NULL) {
-+      tgt = next_extra_for_tile(unit_tile(punit),
-+                                EC_MINE,
-+                                unit_owner(punit),
-+                                punit);
++  if (activity_target == NULL) {
++    struct unit *punit = player_unit_by_number(pplayer, unit_id);
++    bool required = TRUE;
++
++    if (punit == NULL) {
++      return;
 +    }
-+    if (tgt != NULL) {
-+      tile_extra_apply(ptile, tgt);
++
++    if (activity == ACTIVITY_IRRIGATE) {
++      struct tile *ptile = unit_tile(punit);
++      struct terrain *pterrain = tile_terrain(ptile);
++
++      if (pterrain->irrigation_result != pterrain) {
++        required = FALSE;
++      } else {
++        activity_target = next_extra_for_tile(ptile, EC_IRRIGATION,
++                                              pplayer, punit);
++      }
++    } else if (activity == ACTIVITY_MINE) {
++      struct tile *ptile = unit_tile(punit);
++      struct terrain *pterrain = tile_terrain(ptile);
++
++      if (pterrain->mining_result != pterrain) {
++        required = FALSE;
++      } else {
++        activity_target = next_extra_for_tile(ptile, EC_MINE,
++                                              pplayer, punit);
++      }
++    } else if (activity == ACTIVITY_POLLUTION) {
++      activity_target = prev_extra_in_tile(unit_tile(punit), ERM_CLEANPOLLUTION,
++                                           pplayer, punit);
++    } else if (activity == ACTIVITY_FALLOUT) {
++      activity_target = prev_extra_in_tile(unit_tile(punit), ERM_CLEANFALLOUT,
++                                           pplayer, punit);
++    } else {
++      required = FALSE;
 +    }
-   } else if (pterrain->mining_result) {
-     tile_change_terrain(ptile, pterrain->mining_result);
-   }
-@@ -622,17 +640,17 @@
-   by this function.
- ****************************************************************************/
- bool tile_apply_activity(struct tile *ptile, Activity_type_id act,
--                         struct extra_type *tgt)
-+                         struct extra_type *tgt, struct unit *punit)
- {
-   /* FIXME: for irrigate, mine, and transform we always return TRUE
-    * even if the activity fails. */
-   switch(act) {
-   case ACTIVITY_MINE:
--    tile_mine(ptile, tgt);
-+    tile_mine(ptile, tgt, punit);
-     return TRUE;
++
++    if (activity_target == NULL && required) {
++      /* Nothing more we can do */
++      return;
++    }
++  }
++
+   handle_unit_change_activity_real(pplayer, unit_id, activity, activity_target);
+ }
  
-   case ACTIVITY_IRRIGATE: 
--    tile_irrigate(ptile, tgt);
-+    tile_irrigate(ptile, tgt, punit);
-     return TRUE;
- 
-   case ACTIVITY_TRANSFORM:
-diff -Nurd -X.diff_ignore freeciv/common/tile.h freeciv/common/tile.h
---- freeciv/common/tile.h	2014-02-09 07:52:14.569134477 +0200
-+++ freeciv/common/tile.h	2014-02-09 08:02:37.099588605 +0200
-@@ -160,7 +160,7 @@
- /* These are higher-level functions that handle side effects on the tile. */
- void tile_change_terrain(struct tile *ptile, struct terrain *pterrain);
- bool tile_apply_activity(struct tile *ptile, Activity_type_id act,
--                         struct extra_type *tgt);
-+                         struct extra_type *tgt, struct unit *punit);
- 
- #define TILE_LB_TERRAIN_RIVER    (1 << 0)
- #define TILE_LB_RIVER_RESOURCE   (1 << 1)
-diff -Nurd -X.diff_ignore freeciv/server/generator/startpos.c freeciv/server/generator/startpos.c
---- freeciv/server/generator/startpos.c	2014-02-09 07:52:16.501129857 +0200
-+++ freeciv/server/generator/startpos.c	2014-02-09 08:09:03.438627052 +0200
-@@ -80,7 +80,8 @@
-   vtile = tile_virtual_new(roaded);
- 
-   tile_apply_activity(vtile, ACTIVITY_IRRIGATE,
--                      next_extra_for_tile(vtile, EC_IRRIGATION, NULL, NULL));
-+                      next_extra_for_tile(vtile, EC_IRRIGATION, NULL, NULL),
-+                      NULL);
-   irrig_bonus = -value;
-   output_type_iterate(o) {
-     irrig_bonus += city_tile_output(NULL, vtile, FALSE, o);
-@@ -92,7 +93,8 @@
-   vtile = tile_virtual_new(roaded);
- 
-   tile_apply_activity(vtile, ACTIVITY_MINE,
--                      next_extra_for_tile(vtile, EC_MINE, NULL, NULL));
-+                      next_extra_for_tile(vtile, EC_MINE, NULL, NULL),
-+                      NULL);
-   mine_bonus = -value;
-   output_type_iterate(o) {
-     mine_bonus += city_tile_output(NULL, vtile, FALSE, o);
-diff -Nurd -X.diff_ignore freeciv/server/unittools.c freeciv/server/unittools.c
---- freeciv/server/unittools.c	2014-02-09 07:52:15.621131961 +0200
-+++ freeciv/server/unittools.c	2014-02-09 08:14:09.449869435 +0200
-@@ -872,7 +872,7 @@
- 
-       /* The function below could change the terrain. Therefore, we have to
-        * check the terrain (which will also do a sanity check for the tile). */
--      tile_apply_activity(ptile, activity, punit->activity_target);
-+      tile_apply_activity(ptile, activity, punit->activity_target, punit);
-       check_terrain_change(ptile, old);
- 
-       unit_activity_done = TRUE;

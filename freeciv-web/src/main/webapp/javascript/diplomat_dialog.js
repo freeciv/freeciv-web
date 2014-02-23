@@ -28,6 +28,7 @@ function popup_diplomat_dialog(pdiplomat, action_probabilities,
 	    + "<input id='diplo_sab' class='diplo_button' type='button' value='Sabotage City'>"
 	    + "<input id='diplo_tech' class='diplo_button' type='button' value='Steal Technology'>"
 	    + "<input id='diplo_revo' class='diplo_button' type='button' value='Incite a revolt'>"
+            + "<input id='diplo_poi' class='diplo_button' type='button' value='Poison city'>"
 	    + "<input id='diplo_cancel' class='diplo_button' type='button' value='Cancel'>"
 	    + "</center>"
     $(id).html(dhtml);
@@ -143,6 +144,21 @@ function popup_diplomat_dialog(pdiplomat, action_probabilities,
     });
   } else {
     $("#diplo_revo").button( "option", "disabled", true);
+  }
+
+  if (action_probabilities[ACTION_SPY_POISON] != 0) {
+    $("#diplo_poi").click(function() {
+      var packet = {"type" : packet_unit_diplomat_action,
+        "diplomat_id" : pdiplomat['id'],
+        "target_id": pcity['id'],
+        "value" : 0,
+        "action_type": SPY_POISON};
+        send_request (JSON.stringify(packet));
+
+        $(id).remove();
+    });
+  } else {
+    $("#diplo_poi").button( "option", "disabled", true);
   }
 
   if (action_probabilities[ACTION_SPY_BRIBE_UNIT] != 0) {

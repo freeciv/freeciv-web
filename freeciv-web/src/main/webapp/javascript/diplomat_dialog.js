@@ -101,22 +101,9 @@ function popup_diplomat_dialog(pdiplomat, action_probabilities,
     $("#diplo_sab").button( "option", "disabled", true);
   }
 
-  var tech_count_counterpart = 0;
-  var pplayer = client.conn.playing;
-  var counterpart = city_owner(pcity);
   var last_tech = 0;
-  for (var tech_id in techs) {
-    if (player_invention_state(counterpart, tech_id) == TECH_KNOWN
-        // && player_invention_reachable(pother, i)
-        && (player_invention_state(pplayer, tech_id) == TECH_UNKNOWN
-            || player_invention_state(pplayer, tech_id) == TECH_PREREQS_KNOWN)) {
-      last_tech = tech_id;
-      tech_count_counterpart += 1;
-    }
-  }
 
-  if (action_probabilities[ACTION_SPY_STEAL_TECH] != 0
-      && tech_count_counterpart > 0) {
+  if (action_probabilities[ACTION_SPY_STEAL_TECH] != 0) {
     $("#diplo_tech").click(function() {
       var packet = {"type" : packet_unit_diplomat_action, 
                      "diplomat_id" : pdiplomat['id'], 

@@ -22,9 +22,11 @@ var metamessage_changed = false;
 ****************************************************************************/
 function pregame_start_game()
 {
-  var test_packet = {"type" : packet_chat_msg_req, "message" : "/start"};
+  var test_packet = {"type" : packet_player_ready, "is_ready" : true,
+                     "player_no": client.conn['player_num']};
   var myJSONText = JSON.stringify(test_packet);
   send_request (myJSONText);
+
   setup_window_size ();
 }
 
@@ -62,20 +64,45 @@ function observe()
 ****************************************************************************/
 function update_player_info()
 {
-  player_html = "";
-  for (id in players) {
-    player = players[id];
-    if (player != null) {
-      if (player['name'].indexOf("AI") != -1) {
-        player_html += "<div id='pregame_player_name'><div id='pregame_ai_icon'></div><b>" 
-                      + player['name'] + "</b></div>";
-      } else {
-        player_html += "<div id='pregame_player_name'><div id='pregame_player_icon'></div><b>" 
-                      + player['name'] + "</b></div>";
-      } 
+  if (C_S_PREPARING <= client_state()) {
+    player_html = "";
+    for (id in players) {
+      player = players[id];
+      if (player != null) {
+        if (player['name'].indexOf("AI") != -1) {
+          player_html += "<div id='pregame_plr_" + id
+		        + "' class='pregame_player_name'><div id='pregame_ai_icon'></div><b>" 
+                        + player['name'] + "</b></div>";
+        } else {
+          player_html += "<div id='pregame_plr_" + id
+		        + "' class='pregame_player_name'><div id='pregame_player_icon'></div><b>" 
+                        + player['name'] + "</b></div>";
+        } 
+      }
     }
+    $("#pregame_player_list").html(player_html);
+
+    /* show player ready state in pregame dialog */
+    for (id in players) {
+      player = players[id];
+      var nation_text = player['nation'] in nations ? " - " + nations[player['nation']]['adjective'] : "";
+      if (player['is_ready'] == true) {
+        $("#pregame_plr_"+id).addClass("pregame_player_ready");
+        $("#pregame_plr_"+id).attr("title", "Player ready" + nation_text);
+      } else {
+        $("#pregame_plr_"+id).attr("title", "Player not ready" + nation_text);
+      }
+    }
+
+    /* set state of Start game button depending on if user is ready. */
+    if (client.conn['player_num'] != null  && client.conn['player_num'] in players
+        && players[client.conn['player_num']]['is_ready'] == true) {
+        $("#start_game_button").button( "option", "disabled", true); 
+    } else {
+        $("#start_game_button").button( "option", "disabled", false); 
+    }
+
   }
-  $("#pregame_player_list").html(player_html);
 
 
 }

@@ -29,7 +29,7 @@ body {
   overflow: auto;
 }
 
-#pregame_player_name {
+.pregame_player_name {
   padding: 5px;
   margin: 5px;
   background-color: #111111;
@@ -37,6 +37,10 @@ body {
   float: left;
   height: 48px;
   width: 80%;
+}
+
+.pregame_player_ready {
+  color: green;
 }
 
 #pregame_message_area {

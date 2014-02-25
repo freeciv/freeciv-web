@@ -22,8 +22,13 @@ fi
 # 2. Resin
 echo "Starting up Resin" && \
 ${FREECIV_WEB_DIR}/resin/bin/resin.sh start && \
-echo "Resin started" && \
-sleep 20 && \
+echo "Resin starting.." && \
+
+# waiting for Resin to start, since it will take some time.
+until `curl --output /dev/null --silent --head --fail "http://localhost:8080/meta/metaserver.php"`; do
+    printf ".."
+    sleep 3
+done
 
 #3. publite2
 echo "Starting publite2" && \
@@ -36,6 +41,6 @@ echo "Starting freeciv-proxy" && \
 (cd  ${FREECIV_WEB_DIR}/freeciv-proxy/ && \
 sh run.sh) && \
 echo "freeciv-proxy started" &&\
-echo "Will sleep for 30 seconds, then do a status test..." && \
-sleep 30 && \
+echo "Will sleep for 5 seconds, then do a status test..." && \
+sleep 5 && \
 sh ./status-freeciv-web.sh

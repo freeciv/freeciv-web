@@ -32,6 +32,7 @@ class metachecker():
       global port;
       while 1:
         try:
+          time.sleep(1);
           conn = http.client.HTTPConnection(metahost);
           conn.request("GET", statuspath);
           r1 = conn.getresponse();
@@ -65,7 +66,6 @@ class metachecker():
         except Exception as e:
           print("Error: Publite2 is unable to connect to Freeciv-web metaserver on http://" 
                 + metahost + metapath + ", error" + str(e));
-          sys.exit(1)
         finally:
           conn.close();
 
@@ -94,6 +94,19 @@ class civserverproc(Thread):
             except OSError as e:
                 print("Execution failed:", e, file=sys.stderr)
             time.sleep(5)
+
+#perform a test-request to the Metaserver
+try:
+  conn = http.client.HTTPConnection(metahost);
+  conn.request("GET", statuspath);
+  r1 = conn.getresponse();
+except Exception as e:
+  print("Error: Publite2 is unable to connect to Freeciv-web metaserver on http://" 
+        + metahost + metapath + ", error" + str(e));
+  sys.exit(1)
+finally:
+  conn.close();
+
 
 metachecker().check();
 

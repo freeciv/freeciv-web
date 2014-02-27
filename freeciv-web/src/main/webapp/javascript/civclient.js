@@ -102,6 +102,10 @@ function civclient_init()
 	    }
   }
 
+  $.blockUI.defaults['css']['backgroundColor'] = "#222";
+  $.blockUI.defaults['css']['color'] = "#fff";
+  $.blockUI.defaults['theme'] = true;
+
   $('#tabs').tabs();
   $(".button").button();
 

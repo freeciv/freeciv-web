@@ -473,3 +473,7 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 .specialist_item {
   float: left;
 }
+
+.blockUI h1 {
+  font-size: 18px;
+}

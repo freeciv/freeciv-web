@@ -179,5 +179,8 @@ function save_game_fetch()
       $.jStorage.set("savegame-count" , savegame_count);
       $.unblockUI();
       alert("Game saved successfully");
-    }).fail(function() { alert("Failed saving game"); });
+    }).fail(function() { 
+	    alert("Failed saving game");
+	    $.unblockUI();
+    });
 }

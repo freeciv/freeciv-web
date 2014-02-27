@@ -9,8 +9,6 @@ Major:
 - Add better goto handling with display of the number of turns required for goto
 
 Medium:
-- In pregame dialog, change the start game button to send PACKET_PLAYER_READY packet
-to server instead of /start message. Show which players are ready on pregame dialog.
 - Make goto lines wrap in X direction of the map.
 - Show city revolt graphics
 - Port freeciv-img-extract to Python 3.2

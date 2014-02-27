@@ -860,6 +860,7 @@ function deactivate_goto()
 **************************************************************************/
 function send_end_turn()
 {
+  $("#turn_done_button").button( "option", "disabled", true); 
   var packet = {"type" : packet_player_phase_done, "turn" : game_info['turn']};
   send_request (JSON.stringify(packet));
 }

@@ -631,6 +631,7 @@ function handle_new_year(packet)
 
 function handle_begin_turn(packet) 
 {
+  if (!observing) $("#turn_done_button").button( "option", "disabled", false); 
   update_unit_focus();
   auto_center_on_focus_unit();
   update_unit_info_label(current_focus);
@@ -643,6 +644,7 @@ function handle_begin_turn(packet)
 function handle_end_turn(packet) 
 {
   reset_unit_anim_list(); 
+  if (!observing) $("#turn_done_button").button( "option", "disabled", true); 
 }
 
 function handle_freeze_client(packet) 

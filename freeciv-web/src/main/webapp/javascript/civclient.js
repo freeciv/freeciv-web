@@ -114,6 +114,7 @@ function civclient_init()
 
   if (observing) {
     $.blockUI({ message: '<h1>Please wait while you are being logged in as an observer in the game.</h1>' });
+    $("#turn_done_button").button( "option", "disabled", true); 
 
   } else if (is_small_screen()) {
     show_intro_dialog("Welcome to Freeciv-web", 

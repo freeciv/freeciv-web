@@ -4,6 +4,7 @@
 /* overall */
 .tablesorter-dark {
 	width: 100%;
+	font: 11px/18px Arial, Sans-serif;
 	color: #ccc;
 	text-align: left;
 	background-color: #000;
@@ -14,6 +15,7 @@
 .tablesorter-dark th,
 .tablesorter-dark thead td {
 	padding: 4px;
+	font: bold 12px/20px Arial, Sans-serif;
 	color: #fff;
 	background-color: #000;
 	border-collapse: collapse;
@@ -43,6 +45,7 @@
 }
 .tablesorter-dark thead .sorter-false {
 	background-image: none;
+	cursor: default;
 	padding: 4px;
 }
 
@@ -112,7 +115,7 @@
 
 /* caption */
 caption {
-	background: #fff;
+	background: #202020;
 }
 
 /* filter widget */
@@ -174,6 +177,7 @@ caption {
 
 /* ajax error row */
 .tablesorter .tablesorter-errorRow td {
+	text-align: center;
 	cursor: pointer;
 	background-color: #e6bf99;
 }

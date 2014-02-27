@@ -91,10 +91,8 @@ Install this software if you are not running Freeciv-web with Vagrant:
 - Java 7 JDK - http://www.oracle.com/technetwork/java/javase/downloads/ 
 
 - Python 3.3 - http://www.python.org/
-  (freeciv-proxy uses Python 3.3, freeciv-img-extract uses Python 2.7
-   due to PIL depenedency)
 
-- Python Imaging Library (PIL) - http://www.pythonware.com/products/pil/
+- Pillow v2.3.0 (PIL fork) - http://pillow.readthedocs.org/
   (required for freeciv-img-extract)
 
 - Mysql 5.5.x - http://www.mysql.com/

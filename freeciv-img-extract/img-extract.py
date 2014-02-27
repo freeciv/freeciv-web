@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: iso-8859-1 -*-
 ''' 
- Freeciv - Copyright (C) 2009,2011 - Andreas Røsdal   andrearo@pvv.ntnu.no
+ Freeciv - Copyright (C) 2009-2014 - Andreas Røsdal   andrearo@pvv.ntnu.no
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation; either version 2, or (at your option)
@@ -15,9 +15,9 @@
 
 import os, sys
 
-import ConfigParser
-import Image
-import ImageFont, ImageDraw, ImageOps
+import configparser
+from PIL import Image
+from PIL import ImageFont, ImageDraw, ImageOps
 import json
 
 gfxdir = "";
@@ -80,12 +80,27 @@ tileset_height = 1000;
 tileset_width = 2700;
 
 dither_types = ["t.l0.desert1", "t.l0.plains1", "t.l0.grassland1", "t.l0.forest1", "t.l0.jungle1", "t.l0.hills1", "t.l0.mountains1", "t.l0.tundra1", "t.l0.swamp1"];
-
+print("Freeciv-img-extract running with PIL " + Image.VERSION);
 tileset = Image.new('RGBA', (tileset_width, tileset_height), (0, 0, 0, 0));
 mask_image = Image.open("mask.png");
 dither_mask = Image.open("dither.png");
 dither_map = {};
 tileset_inc = 0;
+
+
+def config_read(file):
+  print(("Parsing " + file ));
+  config = configparser.ConfigParser(strict=False)
+  with open (file, "r") as myfile:
+    config_text=myfile.read();
+    # These changes are required so that the Python config parser can read Freeciv spec files.
+    config_text = config_text.replace("*include", "#*include");
+    config_text = config_text.replace("\n\"", "\n \"");
+    config_text = config_text.replace("\n}", "\n }");
+    config_text = config_text.replace("\n1", "\n 1");
+    config.read_string(config_text);
+    print((config.sections()));
+    return config;
 
 def increment_tileset_image():
   # save current tileset file.
@@ -98,7 +113,7 @@ def increment_tileset_image():
   global tileset_inc;
 
   draw = ImageDraw.Draw(tileset)
-  draw.text((130, 0), "Freeciv-web -   GPL Licensed  - Copyright 2007-2013  Andreas Rosdal", fill="rgb(0,0,0)")
+  draw.text((130, 0), "Freeciv-web -   GPL Licensed  - Copyright 2007-2014  Andreas Rosdal", fill="rgb(0,0,0)")
 
   tileset.save("pre-freeciv-web-tileset-" + str(tileset_inc) + ".png");
   tileset_inc += 1;
@@ -112,11 +127,8 @@ def increment_tileset_image():
   max_height = 0;
 
 for file in files:
-  config = ConfigParser.ConfigParser()
-  print("Parsing " + file );
-  config.read(file);
-  print(config.sections());
-
+  config = config_read(file);
+  
   if "extra" in config.sections():
     csprites = config.get("extra", "sprites");
     sprites = csprites.replace("{","").replace("}", "").replace(" ", "").replace("\"","").split("\n");
@@ -192,25 +204,20 @@ for file in files:
                                       y_top_left + gy*dy + dy + pixel_border*gy)
 
         result_tile = im.copy().crop(dims); 
-        #result_tile.save(tag + ".png");
 
-        #if (tag == "t.l0.grassland1"):
-        #  result_tile = Image.open("grassland1.png");
-        #if (tag == "t.l0.plains1"):
-        #  result_tile = Image.open("plains1.png");
 
         if (tag.find("cellgroup") != -1):
           #handle a cell group (1 tile = 4 cells)
           (WZ, HZ) = result_tile.size;
-	  xf = [WZ / 4, WZ / 4, 0, WZ / 2];
-	  yf = [HZ / 2, 0, HZ / 4, HZ / 4];
-	  xo = [0, 0, -WZ / 2, WZ / 2];
-	  yo = [HZ / 2, -HZ / 2, 0, 0];
+          xf = [int(WZ / 4), int(WZ / 4), 0, int(WZ / 2)];
+          yf = [int(HZ / 2), 0, int(HZ / 4), int(HZ / 4)];
+          xo = [0, 0, int(-WZ / 2), int(WZ / 2)];
+          yo = [int(HZ / 2), int(-HZ / 2), 0, 0];
 
           for dir in range(4):
-            result_cell = result_tile.copy().crop((xf[dir], yf[dir], xf[dir] + (WZ / 2), yf[dir] + (HZ / 2)));
-            mask = Image.new('RGBA', (WZ/2, HZ/2), (255));
-            mask.paste(mask_image, (xo[dir] - xf[dir], yo[dir] - yf[dir]));
+            result_cell = result_tile.copy().crop((xf[dir], yf[dir], int(xf[dir] + (WZ / 2)), int(yf[dir] + (HZ / 2))));
+            mask = Image.new('RGBA', (int(WZ/2), int(HZ/2)), (255));
+            mask.paste(mask_image, (int(xo[dir] - xf[dir]), int(yo[dir] - yf[dir])));
            
             (w, h) = result_cell.size;
             if (w > max_width): max_width = w;
@@ -220,7 +227,7 @@ for file in files:
             if (curr_y + h >= tileset_height):
               increment_tileset_image();
 
-            tileset.paste(result_cell, (curr_x, curr_y), mask);
+            tileset.paste(result_cell, (int(curr_x), int(curr_y)), mask);
             store_img = Image.new('RGBA', (w, h), (0, 0, 0, 0));
             store_img.paste(result_cell, (0, 0), mask);
             coords[tag + "." + str(dir)] = (curr_x, curr_y, w, h, tileset_inc);
@@ -231,7 +238,7 @@ for file in files:
               curr_y += max_row_height;
               max_row_height = 0;
 
-	elif tag in dither_types:
+        elif tag in dither_types:
           # handle a dithered tile.
           dither_map[tag] = result_tile.copy();
 
@@ -258,7 +265,6 @@ for file in files:
           #if (tag2 != None): result_tile.save(tag2 + ".png"); 
           if (tag2 != None and len(tag2) > 0): 
             coords[tag2] = (curr_x, curr_y, w, h, tileset_inc);
-	    print("saving tag: " + tag2);
  
     if "grid_coasts" in config.sections():
       dx = int(config.get("grid_coasts", "dx"));
@@ -271,7 +277,6 @@ for file in files:
       except:
         pass;
 
-      print("pixel_border " + str(pixel_border));
       tag2 = None;
 
       tiles_buf = config.get("grid_coasts", "tiles");
@@ -279,7 +284,7 @@ for file in files:
       for tile in tiles:
         tmptile = tile.split(",");
         if (tmptile[0] == "row"): continue;
-	if (tmptile[0] == ""): continue;
+        if (tmptile[0] == ""): continue;
         gx = int(tmptile[1]);
         gy = int(tmptile[0]);
         tag = str(tmptile[2]);
@@ -327,19 +332,18 @@ for file in files:
 for src_key in dither_map.keys():
   for alt_key in dither_map.keys():
       for dir in range(4):
-	tag = str(dir) + src_key[5:].replace("1", "") + "_" + alt_key[5:].replace("1", "");
-	print(tag);
+        tag = str(dir) + src_key[5:].replace("1", "") + "_" + alt_key[5:].replace("1", "");
         src_img = dither_map[src_key].copy();
         alt_img = dither_map[alt_key].copy();
         src_img.paste(alt_img, None, dither_mask);
 
         (WZ, HZ) = src_img.size;
-        xf = [WZ / 2, 0, WZ / 2, 0];
-        yf = [0, HZ / 2, HZ / 2, 0];
+        xf = [int(WZ / 2), 0, int(WZ / 2), 0];
+        yf = [0, int(HZ / 2), int(HZ / 2), 0];
 
-        result_cell = src_img.crop((xf[dir], yf[dir], xf[dir] + (WZ / 2), yf[dir] + (HZ / 2)));
+        result_cell = src_img.crop((xf[dir], yf[dir], int(xf[dir] + (WZ / 2)), int(yf[dir] + (HZ / 2))));
 
-        (w, h) = (WZ / 2 , HZ / 2);
+        (w, h) = (int(WZ / 2) , int(HZ / 2));
         if (w > max_width): max_width = w;
         if (h > max_height): max_height = h;
         sum_area += (h*w);

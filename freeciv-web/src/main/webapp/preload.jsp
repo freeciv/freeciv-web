@@ -2,6 +2,8 @@
 <html>
 <head>
 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <%
 String redir_url = "" + request.getParameter("redir");
 String load = "" + request.getParameter("load");
@@ -25,7 +27,7 @@ var progress = 0;
 
 function fc_redirect_init()
 {
-    setTimeout("fc_redirect();", 800); 
+    setTimeout("fc_redirect();", 300); 
 }
 
 function fc_redirect() 
@@ -35,47 +37,40 @@ function fc_redirect()
 
 function updateProgress()
 {
-  var x = 120 - progress;
-  progress += 6;
-
-  if (progress >= 120) progress = 0;
-  document.getElementById("progress").style.backgroundPosition = "-" + x +"px 0pt";
+  progress += 3;
+  if (progress >= 100) progress = 0;
+  var progressbar = $('#progressbar');
+  progressbar.val(progress);
 }
 
-window.onload=fc_redirect_init;
+$( window ).load(function() {
+  fc_redirect_init();
+});
 
-setInterval ( "updateProgress()", 500 );
-
+setInterval ( "updateProgress()", 300 );
 
 </script>
 
-<style type="text/css">
-img.percentImage {
- background: #202020 url(/images/percentImage_back.png) top left no-repeat;
- padding: 0;
- margin: 5px 0 0 0;
- background-position: 1px 0;
-}
-</style>
 </head>
 
-<body onload="fc_redirect_init();" text="#000000" bgcolor="#e6e6e6">
+<body text="#000000" bgcolor="#e6e6e6">
 
 <center>
 
 
-	<br><br>
+<br><br>
 
- 	<img src="/images/freeciv-splash2.png">
+<img src="/images/freeciv-splash2.png">
 
-
-	<br><br>
-
-
-<img id="progress" src="/images/percentImage.png" class="percentImage" style="background-position: -120px 0pt;" />
 
 <br><br>
-<h2>Please wait while Freeciv-web is loading...</h2>
+
+
+<progress id="progressbar" value="0" max="100"></progress>
+
+
+<br><br>
+<h3>Please wait while Freeciv-web is loading...</h3>
 
   <img src="/tileset/freeciv-web-tileset-0.png" width="1" height="1">
   <img src="/tileset/freeciv-web-tileset-1.png" width="1" height="1">

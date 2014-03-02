@@ -477,3 +477,13 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 .blockUI h1 {
   font-size: 18px;
 }
+
+.tablesorter-dark {
+  font: 100% sans-serif; 
+}
+
+.tablesorter-dark thead td {
+  font: 100% sans-serif; 
+}
+
+

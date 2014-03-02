@@ -28,13 +28,11 @@ import javax.sql.*;
 import javax.naming.*;
 
 
-
+/** This class is responsible for finding an available freeciv-web server for clients
+ *  based on information in the metaserver database.
+ * */
 public class CivclientLauncher extends HttpServlet {
-	/**
-	 * Serialization UID.
-	 */
 	private static final long serialVersionUID = 1L;
-	private int restartTimeLimit = 5000;
 
 	@SuppressWarnings("unchecked")
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -67,7 +65,7 @@ public class CivclientLauncher extends HttpServlet {
 			  /* If user requested a new game, then get host and port for an available
 			   * server from the metaserver DB, and use that one. */
 
-			  String serverFetchSql = "select host, port from servers where state = 'Pregame' and type LIKE '%Singleplayer%' order by rand() limit 1";
+			  String serverFetchSql = "select host, port from servers where state = 'Pregame' and type = 'singleplayer' and humans = '0' order by rand() limit 1";
 
 			  PreparedStatement stmt = conn.prepareStatement(serverFetchSql);
 			  ResultSet rs = stmt.executeQuery();
@@ -91,13 +89,6 @@ public class CivclientLauncher extends HttpServlet {
 				"Invalid input values to civclient.");
 	    	   return;
 	       }
-	       
-	       PreparedStatement stmti = conn.prepareStatement("INSERT INTO player_game_list (username, host, port, timepoint) "
-	    		   + "VALUES (?,?,?,NOW()) ON DUPLICATE KEY UPDATE host = VALUES(host), port = VALUES(port), timepoint = VALUES(timepoint)");
-	        stmti.setString(1, username);
-	       	stmti.setString(2, civServerHost);
-	       	stmti.setInt(3, new Integer(civServerPort));
-	        stmti.executeUpdate();
 	       
 		} catch (Exception err) {
 			err.printStackTrace();

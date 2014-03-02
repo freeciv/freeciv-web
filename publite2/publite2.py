@@ -107,6 +107,13 @@ except Exception as e:
 finally:
   conn.close();
 
+for type in game_types:
+  for srv_num in range(server_capacity):
+    new_server = civserverproc(type, port)
+    new_server.start();
+    port += 1;
 
+print("Publite2 started!");
+time.sleep(10);
 metachecker().check();
 

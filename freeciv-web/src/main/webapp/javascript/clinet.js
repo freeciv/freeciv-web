@@ -49,17 +49,19 @@ function network_init()
      if (typeof client_handle_packet !== 'undefined') {
        client_handle_packet(jQuery.parseJSON(event.data));
      } else {
-       alert("Error, freeciv-web not compiled correctly. Please "
+       console.error("Error, freeciv-web not compiled correctly. Please "
              + "run sync.sh in freeciv-proxy correctly.");
      }
   };
 
   ws.onclose = function (event) {
-   console.log("WebSocket connection closed."); 
+   show_dialog_message("WebSocket connection closed", "Connection closed"); 
+   console.error("WebSocket connection closed."); 
   };
 
-  ws.onerror = function (errpr) {
-   show_dialog_message("Network error", errpr); 
+  ws.onerror = function (evt) {
+   show_dialog_message("Network error", "Unable to communicate with server using WebSockets. Error: " + evt); 
+   console.error("Unable to communicate with server using WebSockets. Error: " + evt);
   };
 
 

@@ -62,21 +62,6 @@ CREATE TABLE `js_breakpad` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `player_game_list`
---
-
-DROP TABLE IF EXISTS `player_game_list`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `player_game_list` (
-  `username` varchar(32) NOT NULL,
-  `host` varchar(249) DEFAULT NULL,
-  `port` int(11) DEFAULT NULL,
-  `timepoint` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`username`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `players`

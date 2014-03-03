@@ -22,6 +22,8 @@ var metamessage_changed = false;
 ****************************************************************************/
 function pregame_start_game()
 {
+  if (client.conn['player_num'] == null) return;
+      
   var test_packet = {"type" : packet_player_ready, "is_ready" : true,
                      "player_no": client.conn['player_num']};
   var myJSONText = JSON.stringify(test_packet);
@@ -203,14 +205,15 @@ function select_nation(nation_id)
 ****************************************************************************/
 function submit_nation_choise()
 {
-  if (chosen_nation == -1) return;
+  if (chosen_nation == -1 || client.conn['player_num'] == null) return;
 
   var test_packet = {"type" : packet_nation_select_req, 
                       "player_no" : client.conn['player_num'],
                       "nation_no" : chosen_nation,
                       "is_male" : true, /* FIXME */
                       "name" : client.conn['username'],
-                      "city_style" : nations[chosen_nation]['city_style']};
+                      "city_style" : nations[chosen_nation]['city_style'],
+                      "style" : nations[chosen_nation]['style']};
   var myJSONText = JSON.stringify(test_packet);
   send_request (myJSONText);
   clearInterval(nation_select_id);

@@ -1,34 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <meta charset="utf-8">
-    <title>Freeciv-web - strategy game playable online with HTML5</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Freeciv is a Free and Open Source empire-building strategy game made with HTML5 which you can play in your browser, tablet or mobile device!">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="The Freeciv project">
+    <meta name="description" content="Freeciv is a Free and Open Source empire-building strategy game made with HTML5 which you can play in your browser, tablet or mobile device!">
     <meta name="google-site-verification" content="Dz5U0ImteDS6QJqksSs6Nq7opQXZaHLntcSUkshCF8I" />
 
-    <!-- Le styles -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <style type="text/css">
-      body {
-        padding-top: 60px;
-        padding-bottom: 40px;
-	background-image:url('/images/bg.jpg');
+    
+    <title>Freeciv-web - strategy game playable online with HTML5</title>
 
-      }
-      #intro-message {
-        min-height: 120px;
-      }
-    </style>
-    <script type="text/javascript" src="/javascript/json2.js"></script>
-    <script type="text/javascript" src="/javascript-compressed/jquery.min.js"></script>
-    <script type="text/javascript" src="/javascript/jstorage.js"></script>
-    <script type="text/javascript" src="/javascript-compressed/menu.js"></script>
-
-    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
-    <link rel="shortcut icon" href="images/freeciv-shortcut-icon.png" />
+    <link rel="shortcut icon" href="images/freeciv-shortcut-icon.png">
     <link rel="apple-touch-icon" href="images/freeciv-splash2.png" />
+
+    <script type="text/javascript" src="javascript/json2.js"></script>
+    <script type="text/javascript" src="javascript-compressed/jquery.min.js"></script>
+    <script type="text/javascript" src="javascript/jstorage.js"></script>
+    <script type="text/javascript" src="javascript-compressed/menu.js"></script>
+    
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/frontpage.css" rel="stylesheet">
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -53,77 +49,64 @@
   });
 </script> 
 
-
   </head>
+
 
   <body>
 
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <button id="navbutton" type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"
-	onclick="window.location='/wireframe.jsp?do=menu';"
-	>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a href="/" style="padding: 3px; float: left;"><img src="/images/freeciv-web-logo.png" alt="The Freeciv Project"></a>
-          <div class="nav-collapse collapse">
-            <ul class="nav">
-              <li class="active"><a href="/">Play Freeciv!</a></li>
-              <li><a href="http://www.freeciv.org/wiki/">Wiki</a></li>
-              <li><a href="/meta/metaserver.php">Current Games</a></li>
-              <li><a href="http://forum.freeciv.org">Forum</a></li>
-              <li><a href="http://github.com/freeciv/freeciv-web">Development</a></li>
-              <li><a href="http://freeciv.wikia.com/wiki/Donations">Donate!</a></li>
-            </ul>
-           </div><!--/.nav-collapse -->
-        </div>
-      </div>
-    </div>
-
     <div class="container">
 
-      <!-- Main hero unit for a primary marketing message or call to action -->
+      <div class="masthead">
+        <h3>The Freeciv-Web Project</h3>
+        <ul class="nav nav-justified">
+          <li class="active"><a href="http://play.freeciv.org/">Play Freeciv!</a></li>
+          <li><a href="http://www.freeciv.org/wiki/">Wiki</a></li>
+          <li><a href="/meta/metaserver.php">Live Games</a></li>
+          <li><a href="http://forum.freeciv.org/">Forum</a></li>
+          <li><a href="http://github.com/freeciv/freeciv-web">Development</a></li>
+          <li><a href="http://freeciv.wikia.com/wiki/Donations">Donate</a></li>
+        </ul>
+      </div>
 
-      <div class="hero-unit" >
-        <h2>Freeciv HTML5 Online Version!</h2>  <div style="float: right; margin: 20px; margin-top: -30px;">	<a href="/preload.jsp?redir=/civclientlauncher?action=new"><img src="images/freeciv-splash2.png" alt="logo"></a></div>
+      <!-- Jumbotron -->
+      <div class="jumbotron">
+        <h1 id="freeciv_header_text">Freeciv HTML5 Online Version</h1>
+        <p class="lead">Freeciv is a Free and Open Source empire-building strategy game inspired by the history of human civilization. The game commences in prehistory and your mission is to lead your tribe from the Stone Age to the Space Age. Freeciv can be played online in your web-browser for free. Choose how you want to play: </p>
 
-        <p id="intro-message">Freeciv is a Free and Open Source empire-building strategy game inspired by the history of human civilization. The game commences in prehistory and your mission is to lead your tribe from the Stone Age to the Space Age. 
-	Freeciv can be played online in your web-browser for free. Choose how you want to play:
-	</p>
 
-	<p>
+	<p id="fc_button_group">
           <a href="/preload.jsp?redir=/civclientlauncher?action=new" 
-             id="single-button" class="btn btn-primary">Single-player game &raquo;</a>
+             id="single-button" class="btn btn-primary btn-lg">Single-player &raquo;</a>
           <a href="/preload.jsp?redir=/meta/metaserver.php%3Ftab%3Dmulti" 
-             id="multi-button" class="btn btn-info">Multi-player game &raquo;</a>
+             id="multi-button" class="btn btn-info btn-lg">Multi-player &raquo;</a>
           <a href="/preload.jsp?redir=/wireframe.jsp?do=scenarios" 
-             id="scenarios-button" class="btn btn-info">Scenarios &raquo;</a>
+             id="scenarios-button" class="btn btn-info btn-lg">Scenarios &raquo;</a>
           <a href="/preload.jsp?redir=/tutorial.jsp" 
-             id="tutorial-button" class="btn btn-info">Tutorial &raquo;</a>
+             id="tutorial-button" class="btn btn-info btn-lg">Tutorial &raquo;</a>
           <a href="/wireframe.jsp?do=load" 
-             id="load-button" class="btn">Load Savegame &raquo;</a>
+             id="load-button" class="btn btn-default btn-lg">Load Game &raquo;</a>
 
-        </p>
+
+     </p>
 
       </div>
-      
+
+
+
       <!-- Example row of columns -->
       <div class="row">
-        <div class="span4">
-          <h2>HTML5 browser game</h2>
+        <div class="col-lg-4">
+                  <h2>HTML5 browser game</h2>
+
           <p>Freeciv-web can be played online using a desktop computer, mobile phone or tablet. Freeciv-web has been optimized for the iPhone 5 on mobile and modern HTML5 browsers such as Chrome and Firefox.</p>
           <p><a class="btn btn-success" href="/preload.jsp?redir=/civclientlauncher?action=new">Play Freeciv now &raquo;</a>
           </p>
 	<br><br>
 
 
-		<div id="chromews"><a href="https://chrome.google.com/webstore/detail/freeciv/ldhdjhmbapbeafmhdoobnlldhfopfcgh" ><img src="/images/chrome-ws.png"></a></div>
-		<div id="mozws"><a href="https://marketplace.firefox.com/app/freeciv"><img src="/images/firefox-marketplace.png"></a></div>
+		<div id="chromews"><a href="https://chrome.google.com/webstore/detail/freeciv/ldhdjhmbapbeafmhdoobnlldhfopfcgh" ><img src="images/chrome-ws.png"></a></div>
+		<div id="mozws"><a href="https://marketplace.firefox.com/app/freeciv"><img src="images/firefox-marketplace.png"></a></div>
 <br><br>
-	<br><br>
 
 <!-- AddThis Button BEGIN -->
 <div class="addthis_toolbox addthis_default_style ">
@@ -138,51 +121,45 @@
 <script src="https://apis.google.com/js/plusone.js"></script>
 <g:plus action="share" data-action="share" data-annotation="bubble" data-height="15"></g:plus>
 
-
         </div>
-        <div class="span4">
-          <h3>"Freeciv is best 11 of top 50 free PC games!"</h3>
-<b><i>"a version of the classic turn-based strategy game that we can play in our browsers thanks to the witchcraft of HTML 5. There's an installable version, too"</i></b>
-<br>
-		<a href="http://www.pcgamer.com/2013/09/21/the-50-best-free-pc-games/4/" target="_new"><img src="/images/pcgamer.gif"></a>
-<br>
-<br>
-
-          <p><a class="btn" href="http://www.pcgamer.com/2013/09/21/the-50-best-free-pc-games/4/" target="_new">Read full article on pcgamer.com &raquo;</a></p>
-
-<br><br>
-
-	<div>	<p><img src="/images/html5logo.png"></p></div>
-
-
+        <div class="col-lg-4">
+		<h2>Free strategy game with isometric graphics</h2>
+			 
+                          <img src="images/freeciv-fp-logo.png"> 
        </div>
-        <div class="span4">
-
-
-          <h3>"Freeciv available in HTML5 browsers, worldwide productivity plummets"</h3>
-		<a href="http://www.pcgamer.com/2013/05/10/freeciv-available-in-html5-browsers-worldwide-productivity-plummets/" target="_new"><img src="/images/pcgamer.gif"></a>
+        <div class="col-lg-4">
+          <p style="text-align: right;">
+	    <h3>"Freeciv is best 11 of top 50 free PC games!"</h3>
+	    <b><i>"Freeciv available in HTML5 browsers, worldwide productivity plummets"
+		- "a version of the classic turn-based strategy game that we can play in our browsers thanks to the witchcraft of HTML 5. There's an installable version, too"</i></b>
+		<br>
+		<a href="http://www.pcgamer.com/2013/09/21/the-50-best-free-pc-games/4/" target="_new"><img src="images/pcgamer.gif"></a>
 		<br>
 		<br>
-          <p><a class="btn" href="http://www.pcgamer.com/2013/05/10/freeciv-available-in-html5-browsers-worldwide-productivity-plummets/" target="_new">Read full review on pcgamer.com &raquo;</a></p>
+	   <img src="images/html5logo.png">
 
-	<br><br>
-
-
-
+	  </p>
+ 
         </div>
+      </div>
 
+      <!-- Site footer -->
+      <div class="footer">
+        <p>&copy; The Freeciv Project 2013-2014. Freeciv-web is is free and open source software. The Freeciv C server is released under the GNU General Public License, while the Freeciv-web client is released under the GNU Affero General Public License.</p>
+
+  	<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+			<input type="hidden" name="cmd" value="_s-xclick">
+			<input type="hidden" name="hosted_button_id" value="QKGC4Q5FSMKLC">
+			<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" name="submit" alt="PayPal - The safer, easier way to pay online!">
+			<img alt="" style="border: 0;" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+		</form>
 
       </div>
 
-      <hr>
-
-      <footer>
-        <p>&copy; The Freeciv Project 2013-2014 </p>
-
-      </footer>
-
     </div> <!-- /container -->
 
+
   </body>
-</html>
+  
+  </html>
 

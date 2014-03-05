@@ -234,7 +234,7 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +		get_tile_output_text(ptile, pplayer));
 +  extra_type_by_cause_iterate(EC_HUT, pextra) {
 +    if (tile_has_extra(ptile, pextra)) {
-+      astr_add_line(&str, extra_name_translation(pextra));
++      astr_add_line(&str, "%s", extra_name_translation(pextra));
 +    }
 +  } extra_type_by_cause_iterate_end;
 +  if (BORDERS_DISABLED != game.info.borders && !pcity) {

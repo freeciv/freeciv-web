@@ -578,14 +578,6 @@ reqs	=
     }
 
 [effect_democracy_0]
-type    = "Unbribable_Units"
-value   = 1
-reqs	=
-    { "type",       "name",      "range"
-      "Gov", "Democracy", "Player"
-    }
-
-[effect_democracy_1]
 type    = "No_Incite"
 value   = 1
 reqs	=

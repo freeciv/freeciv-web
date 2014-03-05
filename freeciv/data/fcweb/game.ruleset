@@ -277,6 +277,7 @@ target_reqs    =
     { "type",   "name", "range", "present"
       "UnitFlag", "Unbribable", "Local", FALSE
       "CityTile", "Center", "Local", FALSE
+      "Gov", "Democracy", "Player", FALSE
     }
 
 [actionenabler_sabotage_unit]

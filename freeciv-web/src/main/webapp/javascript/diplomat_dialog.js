@@ -21,25 +21,44 @@ function popup_diplomat_dialog(pdiplomat, action_probabilities,
   $(id).remove();
   $("<div id='diplo_dialog_" + pdiplomat['id'] + "'></div>").appendTo("div#game_page");
 
+  var dhtml = "<center>";
+
   if (pcity != null) {
-    var dhtml = "<center>Your didplomat has arrived at " + pcity['name'] + ". What is your command?<br>"
-	    + "<input id='diplo_emb' class='diplo_button' type='button' value='Establish Embassy'>"
-	    + "<input id='diplo_inv' class='diplo_button' type='button' value='Investigate City'>"
-	    + "<input id='diplo_sab' class='diplo_button' type='button' value='Sabotage City'>"
-	    + "<input id='diplo_tech' class='diplo_button' type='button' value='Steal Technology'>"
-	    + "<input id='diplo_revo' class='diplo_button' type='button' value='Incite a revolt'>"
-            + "<input id='diplo_poi' class='diplo_button' type='button' value='Poison city'>"
-	    + "<input id='diplo_cancel' class='diplo_button' type='button' value='Cancel'>"
-	    + "</center>"
-    $(id).html(dhtml);
+    dhtml += "Your didplomat has arrived at " + pcity['name'] + ". What is your command?";
   } else {
-    var dhtml = "<center>The diplomat is waiting for your command"
-	    + "<input id='diplo_bribe' class='diplo_button' type='button' value='Bribe enemy unit'>"
-	    + "<input id='diplo_spy_sabo' class='diplo_button' type='button' value='Sabotage enemy unit'>"
-	    + "<input id='diplo_cancel' class='diplo_button' type='button' value='Cancel'>"
-	    + "</center>";	  
-    $(id).html(dhtml);
+    dhtml += "The diplomat is waiting for your command";
   }
+
+  dhtml += "<br>";
+
+  if (action_probabilities[ACTION_ESTABLISH_EMBASSY] != 0) {
+    dhtml += "<input id='diplo_emb' class='diplo_button' type='button' value='Establish Embassy'>";
+  }
+  if (action_probabilities[ACTION_SPY_INVESTIGATE_CITY] != 0) {
+    dhtml += "<input id='diplo_inv' class='diplo_button' type='button' value='Investigate City'>"
+  }
+  if (action_probabilities[ACTION_SPY_SABOTAGE_CITY] != 0) {
+    dhtml += "<input id='diplo_sab' class='diplo_button' type='button' value='Sabotage City'>"
+  }
+  if (action_probabilities[ACTION_SPY_STEAL_TECH] != 0) {
+    dhtml += "<input id='diplo_tech' class='diplo_button' type='button' value='Steal Technology'>"
+  }
+  if (action_probabilities[ACTION_SPY_INCITE_CITY] != 0) {
+    dhtml += "<input id='diplo_revo' class='diplo_button' type='button' value='Incite a revolt'>"
+  }
+  if (action_probabilities[ACTION_SPY_POISON] != 0) {
+    dhtml += "<input id='diplo_poi' class='diplo_button' type='button' value='Poison city'>"
+  }
+  if (action_probabilities[ACTION_SPY_BRIBE_UNIT] != 0) {
+    dhtml += "<input id='diplo_bribe' class='diplo_button' type='button' value='Bribe enemy unit'>"
+  }
+  if (action_probabilities[ACTION_SPY_SABOTAGE_UNIT] != 0) {
+    dhtml += "<input id='diplo_spy_sabo' class='diplo_button' type='button' value='Sabotage enemy unit'>"
+  }
+
+  dhtml += "<input id='diplo_cancel' class='diplo_button' type='button' value='Cancel'>"
+         + "</center>";
+  $(id).html(dhtml);
 
   $(id).attr("title", "Choose Your Diplomat's Strategy");
   $(id).dialog({
@@ -67,8 +86,6 @@ function popup_diplomat_dialog(pdiplomat, action_probabilities,
 
       $(id).remove();
     });
-  } else {
-    $("#diplo_emb").button( "option", "disabled", true);
   }
 
   if (action_probabilities[ACTION_SPY_INVESTIGATE_CITY] != 0) {
@@ -82,8 +99,6 @@ function popup_diplomat_dialog(pdiplomat, action_probabilities,
 
         $(id).remove();
     });
-  } else {
-    $("#diplo_inv").button( "option", "disabled", true);
   }
 
   if (action_probabilities[ACTION_SPY_SABOTAGE_CITY] != 0) {
@@ -97,8 +112,6 @@ function popup_diplomat_dialog(pdiplomat, action_probabilities,
 
         $(id).remove();
     });
-  } else {
-    $("#diplo_sab").button( "option", "disabled", true);
   }
 
   var last_tech = 0;
@@ -114,8 +127,6 @@ function popup_diplomat_dialog(pdiplomat, action_probabilities,
 
       $(id).remove();
     });
-  } else {
-    $("#diplo_tech").button( "option", "disabled", true);
   }
 
   if (action_probabilities[ACTION_SPY_INCITE_CITY] != 0) {
@@ -129,8 +140,6 @@ function popup_diplomat_dialog(pdiplomat, action_probabilities,
 
         $(id).remove();
     });
-  } else {
-    $("#diplo_revo").button( "option", "disabled", true);
   }
 
   if (action_probabilities[ACTION_SPY_POISON] != 0) {
@@ -144,8 +153,6 @@ function popup_diplomat_dialog(pdiplomat, action_probabilities,
 
         $(id).remove();
     });
-  } else {
-    $("#diplo_poi").button( "option", "disabled", true);
   }
 
   if (action_probabilities[ACTION_SPY_BRIBE_UNIT] != 0) {
@@ -159,8 +166,6 @@ function popup_diplomat_dialog(pdiplomat, action_probabilities,
 
         $(id).remove();
     });
-  } else {
-    $("#diplo_bribe").button( "option", "disabled", true);
   }
 
   if (action_probabilities[ACTION_SPY_SABOTAGE_UNIT] != 0) {
@@ -174,8 +179,6 @@ function popup_diplomat_dialog(pdiplomat, action_probabilities,
 
         $(id).remove();
     });
-  } else {
-    $("#diplo_spy_sabo").button( "option", "disabled", true);
   }
 }
 

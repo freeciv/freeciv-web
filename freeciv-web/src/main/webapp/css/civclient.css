@@ -156,8 +156,9 @@ button {
 }
 
 #city_button_pane {
-  clear: left; 
   margin: 20px;
+  position: absolute;
+  bottom: 30px;
 }
 
 
@@ -168,7 +169,7 @@ button {
 }
 
 #city_improvements_panel {
-  width: 100%;
+  width: 95%;
 }
 
 #city_right_panel {
@@ -366,6 +367,7 @@ button {
   overflow: auto; 
   background-color: #111111; 
   border: 1px solid #444444;
+  padding: 3px;
 }
 
 #city_improvements {

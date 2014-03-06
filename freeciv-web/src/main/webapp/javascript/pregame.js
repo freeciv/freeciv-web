@@ -87,12 +87,23 @@ function update_player_info()
     /* show player ready state in pregame dialog */
     for (id in players) {
       player = players[id];
-      var nation_text = player['nation'] in nations ? " - " + nations[player['nation']]['adjective'] : "";
+      var nation_text = "";; 
+      if (player['nation'] in nations) {
+        nation_text = " - " + nations[player['nation']]['adjective']; 
+        var sprite = get_player_fplag_sprite(player);
+	var flag_html = $("<div style='background: transparent url(" + sprite['image-src'] 
+           + "); background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y']
+           + "px;  width: " + sprite['width'] + "px;height: " + sprite['height']
+	   + "px; margin: 5px; float: left;'></div>");
+	$("#pregame_plr_"+id).prepend(flag_html);
+      }
       if (player['is_ready'] == true) {
         $("#pregame_plr_"+id).addClass("pregame_player_ready");
         $("#pregame_plr_"+id).attr("title", "Player ready" + nation_text);
+      } else if (player['name'].indexOf("AI") == -1) {
+          $("#pregame_plr_"+id).attr("title", "Player not ready" + nation_text);
       } else {
-        $("#pregame_plr_"+id).attr("title", "Player not ready" + nation_text);
+          $("#pregame_plr_"+id).attr("title", "AI Player (random nation)");
       }
     }
 

@@ -17,7 +17,7 @@ body {
 #pregame_options {
   background-color: #222222;
   width: 99%;
-  height: 30px;
+  min-height: 30px;
   padding: 10px;
   float: left;
 }
@@ -30,13 +30,14 @@ body {
 }
 
 .pregame_player_name {
-  padding: 5px;
-  margin: 5px;
+  padding: 3px;
+  margin: 3px;
   background-color: #111111;
   color: #ffffff;
   float: left;
-  height: 48px;
-  width: 80%;
+  min-height: 32px;
+  width: 85%;
+  border: 1px solid black;
 }
 
 .pregame_player_ready {
@@ -46,9 +47,11 @@ body {
 #pregame_message_area {
   background: #111111 url(/images/black-bg.png); 
   color: #ffffff;
-  width: 80%;
+  width: 78%;
   overflow: auto;
   float: left;
+  padding: 10px;
+  border: 1px solid black;
 }
 
 #pregame_player_icon {
@@ -79,6 +82,7 @@ body {
   width: 79%;
   padding: 5px;
   font-size: 16px;
+  background-color: #dddddd;
 }
 
 #pregame_metamessage {

@@ -41,6 +41,11 @@
   </servlet-mapping>
 
 
+  <context-param>
+    <param-name>buildTimeStamp</param-name>
+    <param-value>${timestamp}</param-value>
+  </context-param>
+
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.jsp</welcome-file>

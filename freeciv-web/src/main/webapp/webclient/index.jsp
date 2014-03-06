@@ -6,10 +6,10 @@
 
 <%--<script type="text/javascript" src="/javascript-compressed/waterbug.js"> </script> --%>
 
-<link rel="stylesheet" type="text/css" href="/css/webclient.min.css" />
+<link rel="stylesheet" type="text/css" href="/css/webclient.min.css?ts=${initParam.buildTimeStamp}" />
 
-<script type="text/javascript" src="/javascript-compressed/jquery.min.js"></script>
-<script type="text/javascript" src="/javascript-compressed/webclient.js"></script>
+<script type="text/javascript" src="/javascript-compressed/jquery.min.js?ts=${initParam.buildTimeStamp}"></script>
+<script type="text/javascript" src="/javascript-compressed/webclient.js?ts=${initParam.buildTimeStamp}"></script>
 <script type="text/javascript" src="/webclient/session.jsp"></script>
 
 <link rel="shortcut icon" href="/images/freeciv-shortcut-icon.png" />

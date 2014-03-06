@@ -10,6 +10,10 @@
    <name>Freeciv-Web Client</name>
 
 
+    <properties>
+      <timestamp>${maven.build.timestamp}</timestamp>
+    </properties>
+
     <repositories>
         <repository>
             <id>repo1.maven.org</id>
@@ -61,16 +65,34 @@
 
 
  <build>
-      <finalName>freeciv-web</finalName>
-    	<plugins>
-    		<plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                   <source>1.7</source>
-                   <target>1.7</target>
-                   <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
+    <finalName>freeciv-web</finalName>
+    <plugins>
+        <plugin>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+               <source>1.7</source>
+               <target>1.7</target>
+               <encoding>UTF-8</encoding>
+            </configuration>
+       </plugin>
+
+       <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-war-plugin</artifactId>
+          <version>2.4</version>
+          <configuration>
+            <webResources>
+               <resource>
+                  <directory>${basedir}/src/main/webapp/WEB-INF</directory>
+                  <filtering>true</filtering>
+                  <targetPath>WEB-INF</targetPath>
+                  <includes>
+                     <include>**/web.xml</include>	
+                  </includes>
+                </resource>
+              </webResources>
+           </configuration>
+      </plugin>
 
       <plugin>
         <groupId>com.samaxes.maven</groupId>

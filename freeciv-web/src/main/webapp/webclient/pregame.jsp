@@ -20,9 +20,9 @@
   <div id="pregame_message_area"></div>
   <div id="pregame_chat_box">
     <input id="pregame_text_input" type="text" name="text_input" onkeydown="javascript:return check_text_input(event,this);"
-    			value="Type your messages here." 
-    			onfocus="keyboard_input=false; if (this.value=='Type your messages here.') this.value='';" 
-    			onblur="keyboard_input=true; if (this.value=='') this.value='Type your messages here.'"
+    			value=">" 
+			onfocus="keyboard_input=false; if (this.value=='>') this.value='';" 
+			onblur="keyboard_input=true; if (this.value=='') this.value='>'"
     			/>
   </div>
 </div>

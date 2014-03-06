@@ -1,7 +1,5 @@
 #!/bin/bash
 
-export LANG=C
-
 if [ -d "/vagrant/" ]; then
   FREECIV_SAVE_PATH="/vagrant/resin/webapps/ROOT/savegames/"
 else

@@ -75,14 +75,3 @@ diff -Nurd -X.diff_ignore freeciv/server/sernet.c freeciv/server/sernet.c
      i++;
    } conn_list_iterate_end;
    packet.connections = i;
-diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
---- freeciv/server/unithand.c	2012-07-16 01:08:53.000000000 +0300
-+++ freeciv/server/unithand.c	2012-07-16 01:09:07.000000000 +0300
-@@ -705,6 +705,7 @@
- 		       "UTF-8",
- 		       (char*)result_buf, sizeof(result_buf));
-       city_build(pplayer, punit, result_buf);
-+      g_free(unescaped_text);
-     }
-   } else if (res == AB_ADD_OK) {
-     city_add_unit(pplayer, punit);

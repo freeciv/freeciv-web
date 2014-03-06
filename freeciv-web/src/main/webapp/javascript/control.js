@@ -229,7 +229,7 @@ function check_text_input(event,chatboxtextarea) {
 	 
   if (event.keyCode == 13 && event.shiftKey == 0)  {
     var message = $(chatboxtextarea).val();
-    message = escape(message.replace(/^\s+|\s+$/g,""));
+    message = encodeURIComponent(message.replace(/^\s+|\s+$/g,""));
 
     $(chatboxtextarea).val('');
     $(chatboxtextarea).focus();
@@ -1240,8 +1240,8 @@ function popup_caravan_dialog(punit, traderoute, wonder)
   var pcity = tile_city(ptile);
 
 
-  var dhtml = "<center>Your caravan from " + unescape(homecity['name']) + " reaches the city of "  
-	    + unescape(pcity['name']) + ". What now? <br>"
+  var dhtml = "<center>Your caravan from " + decodeURIComponent(homecity['name']) + " reaches the city of "  
+	    + decodeURIComponent(pcity['name']) + ". What now? <br>"
 	    + "<input id='car_trade' class='car_button' type='button' value='Establish Traderoute'>"
 	    + "<input id='car_wonder' class='car_button' type='button' value='Help build Wonder'>"
 	    + "<input id='car_cancel' class='car_button' type='button' value='Cancel'>"

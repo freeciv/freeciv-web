@@ -902,7 +902,7 @@ function get_select_sprite()
 ****************************************************************************/
 function get_city_info_text(pcity)
 {
-  return {"key" : "city_text", "text" : unescape(pcity['name']),
+  return {"key" : "city_text", "text" : decodeURIComponent(pcity['name']),
   		  "offset_x": citybar_offset_x, "offset_y" : citybar_offset_y}; 
 }
 

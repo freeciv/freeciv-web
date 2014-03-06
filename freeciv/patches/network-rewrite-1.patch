@@ -1235,42 +1235,29 @@ diff -Nurd -X.diff_ignore freeciv/server/handchat.c freeciv/server/handchat.c
  #include "fcintl.h"
  #include "log.h"
  #include "shared.h"
-@@ -319,19 +322,32 @@
+@@ -319,16 +322,19 @@
  void handle_chat_msg_req(struct connection *pconn, const char *message)
  {
    char real_message[MAX_LEN_MSG], *cp;
-+  char raw_message[MAX_LEN_MSG];
 +  char* unesc_message;
    bool double_colon;
  
 -  sz_strlcpy(real_message, message);
-+  sz_strlcpy(raw_message, message);
++  unesc_message = g_uri_unescape_string(message, NULL);
++  sz_strlcpy(real_message, unesc_message);
++  g_free(unesc_message);
  
    /* This loop to prevent players from sending multiple lines which can
     * be abused */
 -  for (cp = real_message; *cp != '\0'; cp++) {
 -    if (*cp == '\n' || *cp == '\r') {
-+  for (cp = raw_message; *cp != '\0'; cp++) {
++  for (cp = real_message; *cp != '\0'; cp++) {
 +    if (*cp == '\n' || *cp == '\r' || *cp == '<' || *cp == '>' || *cp == '"' || *cp == '\'') {
        *cp = '\0';
        break;
      }
    }
  
-+  unesc_message = g_uri_unescape_string(raw_message, NULL);
-+  if (unesc_message) {
-+      convert_string(unesc_message,
-+ 	  	       "latin1",
-+		       "UTF-8",
-+		       (char*)real_message, sizeof(real_message));
-+      g_free(unesc_message);
-+  } else {
-+    return;
-+  }
-+
-   /* Server commands are prefixed with '/', which is an obvious
-      but confusing choice: even before this feature existed,
-      novice players were trying /who, /nick etc.
 diff -Nurd -X.diff_ignore freeciv/server/plrhand.c freeciv/server/plrhand.c
 --- freeciv/server/plrhand.c	2014-02-09 06:02:23.528112369 +0200
 +++ freeciv/server/plrhand.c	2014-02-09 06:13:39.214599654 +0200

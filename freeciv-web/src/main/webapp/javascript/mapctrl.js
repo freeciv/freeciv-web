@@ -252,7 +252,7 @@ function popit()
 **************************************************************************/
 function handle_info_text_message(packet)
 {
-  var message = unescape(packet['message']);
+  var message = decodeURIComponent(packet['message']);
   var regxp = /\n/gi;
   message = message.replace(regxp, "<br>\n");
 

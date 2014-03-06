@@ -52,7 +52,7 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
  #include "mem.h"
  #include "rand.h"
  #include "shared.h"
-@@ -704,7 +707,18 @@
+@@ -704,7 +707,13 @@
    res = unit_add_or_build_city_test(punit);
  
    if (UAB_BUILD_OK == res) {
@@ -61,13 +61,8 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
 +    char* unescaped_text = g_uri_unescape_string(name, NULL);
 +
 +    if (unescaped_text) {
-+      char result_buf[MAX_LEN_NAME];
-+
-+      convert_string(unescaped_text,
-+                     "latin1",
-+                     "UTF-8",
-+                     (char *)result_buf, sizeof(result_buf));
-+      city_build(pplayer, punit, result_buf);
++      city_build(pplayer, punit, unescaped_text);
++      g_free(unescaped_text);
 +    }
    } else if (UAB_ADD_OK == res) {
      city_add_unit(pplayer, punit);

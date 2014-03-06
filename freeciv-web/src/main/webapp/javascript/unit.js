@@ -276,7 +276,7 @@ function reset_unit_anim_list()
 function get_unit_homecity_name(punit)
 {
   if (punit['homecity'] != 0 && cities[punit['homecity']] != null) {
-    return unescape(cities[punit['homecity']]['name']);
+    return decodeURIComponent(cities[punit['homecity']]['name']);
   } else {
     return null;
   }

@@ -248,7 +248,7 @@ function client_diplomacy_clause_string(counterpart, giver, type, value)
     var pcity = cities[value];
 
     if (pcity != null) {
-      return "The " + nation + " give " + unescape(pcity['name']);
+      return "The " + nation + " give " + decodeURIComponent(pcity['name']);
     } else {
       return "The " + nation + " give unknown city.";
     }
@@ -431,7 +431,7 @@ function create_diplomacy_dialog(counterpart) {
   for (city_id in cities) {
     var pcity = cities[city_id];
     if (!does_city_have_improvement(pcity, "Palace") && city_owner(pcity) == pplayer) {
-      $("<li><a href='#' onclick='create_clause_req(" + pplayer['playerno']+ "," + CLAUSE_CITY + "," + city_id + ");'>" + unescape(pcity['name']) + "</a></li>").appendTo("#self_cities");
+      $("<li><a href='#' onclick='create_clause_req(" + pplayer['playerno']+ "," + CLAUSE_CITY + "," + city_id + ");'>" + decodeURIComponent(pcity['name']) + "</a></li>").appendTo("#self_cities");
       city_count_self += 1;
     }
   }
@@ -488,7 +488,7 @@ function create_diplomacy_dialog(counterpart) {
   for (city_id in cities) {
     var pcity = cities[city_id];
     if (!does_city_have_improvement(pcity, "Palace") && city_owner(pcity) == counterpart) {
-      $("<li><a href='#' onclick='create_clause_req(" + counterpart['playerno']+ "," + CLAUSE_CITY + "," + city_id + ");'>" + unescape(pcity['name']) + "</a></li>").appendTo("#counterpart_cities");
+      $("<li><a href='#' onclick='create_clause_req(" + counterpart['playerno']+ "," + CLAUSE_CITY + "," + city_id + ");'>" + decodeURIComponent(pcity['name']) + "</a></li>").appendTo("#counterpart_cities");
       city_count_counterpart += 1;
     }
   }

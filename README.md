@@ -1,5 +1,6 @@
 THE FREECIV-WEB PROJECT
 -----------------------
+[![Build Status](https://api.travis-ci.org/freeciv/freeciv-web.png)](https://travis-ci.org/freeciv/freeciv-web)
 
 Freeciv-web is an open-source turn-based strategy game. It’s built entirely in HTML5 and features in-depth game-play and a wide variety of game modes and options. Your goal is to build cities, collect resources, organize your government, and build an army, with the ultimate goal of creating the best civilization. You can play online against other players (multiplayer) or play by yourself against the computer. 
 
@@ -158,12 +159,10 @@ manual installation procedure to setup Freeciv-web:
   scripts/stop-freeciv-web.sh       
   scripts/status-freeciv-web.sh     
 
+Freeciv-Web continuous integration on Travis CI 
+-----------------------------------------------
+Freeciv-Web is built on Travis CI on every commit. This is the current build status: [![Build Status](https://api.travis-ci.org/freeciv/freeciv-web.png)](https://travis-ci.org/freeciv/freeciv-web)
 
-
-
-Also: 
-Set ulimit -n 65535 in /etc/profile
-and add some TCP/IP tuning in /etc/sysctrl.conf
 
 Developers interested in Freeciv-web
 ------------------------------------

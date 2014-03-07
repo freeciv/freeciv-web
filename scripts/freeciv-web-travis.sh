@@ -59,6 +59,9 @@ wget ${resin_url}
 tar xvfz resin-${resin_version}.tar.gz
 rm -Rf resin
 mv resin-${resin_version} resin
+cd resin
+./configure --prefix=`pwd`; make; make install
+cd ..
 chmod -R 777 resin
 
 

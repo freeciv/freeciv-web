@@ -79,7 +79,7 @@ echo "==== Setting up MySQL ===="
 #mysql -u ${mysql_user} -p${mysql_pass} freeciv_web < ${basedir}/freeciv-web/src/main/webapp/meta/private/metaserver.sql
 
 echo "==== Building freeciv ===="
-cd ${basedir}/freeciv && ./prepare_freeciv.sh
+cd /home/travis/build/freeciv/freeciv-web/freeciv && ./prepare_freeciv.sh
 cd freeciv && make install
 cd ${basedir}/freeciv/data/ && cp -rf fcweb /usr/local/share/freeciv
 

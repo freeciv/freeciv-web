@@ -28,7 +28,7 @@ ${FREECIV_WEB_DIR}/resin/bin/resin.sh start && \
 echo "Resin starting.." && \
 
 # waiting for Resin to start, since it will take some time.
-until `curl --output /dev/null --silent --head --fail "http://localhost:8080/meta/metaserver.php"`; do
+until `curl --head --fail "http://127.0.0.1:8080/meta/metaserver.php"`; do
     printf ".."
     sleep 3
 done

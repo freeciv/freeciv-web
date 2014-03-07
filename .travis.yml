@@ -6,7 +6,6 @@ compiler:
 python:
   - "3.3"
 
-install: "pip install -r requirements.txt"
 
 before_script:
   - echo "USE mysql;\nUPDATE user SET password=PASSWORD('vagrant') WHERE user='root';\nFLUSH PRIVILEGES;\n" | mysql -u root

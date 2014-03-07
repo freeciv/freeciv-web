@@ -927,6 +927,11 @@ function handle_nation_availability(packet)
   /* TODO: Implement */
 }
 
+function handle_ruleset_music(packet)
+{
+  /* TODO: Implement */
+}
+
 function handle_endgame_player(packet)
 {
   endgame_player_info.push(packet);

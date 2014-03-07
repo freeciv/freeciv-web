@@ -32,7 +32,7 @@ resin_url="http://www.caucho.com/download/resin-${resin_version}.tar.gz"
 tornado_url="https://pypi.python.org/packages/source/t/tornado/tornado-3.2.tar.gz"
 
 # Based on fresh install of Ubuntu 12.04
-dependencies="maven2 mysql-server-5.5 openjdk-7-jdk libcurl4-openssl-dev nginx libjansson-dev subversion pngcrush libtool automake autoconf autotools-dev language-pack-en python3-setuptools libglib2.0-dev python3.2"
+dependencies="maven mysql-server-5.5 openjdk-7-jdk libcurl4-openssl-dev nginx libjansson-dev subversion pngcrush libtool automake autoconf autotools-dev language-pack-en python3-setuptools libglib2.0-dev python3.2"
 
 ## Setup
 mkdir -p ${basedir}
@@ -47,6 +47,7 @@ sudo debconf-set-selections <<< "mysql-server-5.5 mysql-server/root_password pas
 sudo debconf-set-selections <<< "mysql-server-5.5 mysql-server/root_password_again password ${mysql_pass}"
 echo "apt-get install dependencies"
 apt-get -y install ${dependencies}
+pip install Pillow
 
 ln -s /usr/bin/python3.2 /usr/bin/python3.3
 python3.3 --version
@@ -88,11 +89,7 @@ rm /etc/nginx/sites-enabled/default
 cp ${basedir}/publite2/nginx.conf /etc/nginx/
 cp ${basedir}/publite2/nginx/freeciv-web /etc/nginx/sites-enabled/
 
-if [ -d "/vagrant/" ]; then
-  echo "Starting Freeciv-web..."
-  service nginx start
-  cd ${basedir}/scripts/ && sudo -u vagrant ./start-freeciv-web.sh
-  echo "Freeciv-web started! Now try http://localhost/ on your host operating system."
-else
-  echo "Freeciv-web installed. Please start it manually."
-fi
+echo "Starting Freeciv-web..."
+#service nginx start
+cd ${basedir}/scripts/ && sudo -u travis ./start-freeciv-web.sh
+echo "Freeciv-web started on Travis CI environment!"

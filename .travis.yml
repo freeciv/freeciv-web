@@ -3,8 +3,8 @@ language: c
 
 compiler:
   - gcc
-before_install: 
-  - pwd
-script: "sudo ./scripts/freeciv-web-travis.sh"
+
+
+script: "sudo bash ./scripts/freeciv-web-travis.sh"
 
 

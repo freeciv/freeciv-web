@@ -10,7 +10,7 @@ rm -Rf freeciv
 
 . ./version.txt
 
-if ! svn export svn://svn.gna.org/svn/freeciv/$FCBRANCH -r $FCREV freeciv ; then
+if ! svn --quiet export svn://svn.gna.org/svn/freeciv/$FCBRANCH -r $FCREV freeciv ; then
   echo "Svn export failed" >&2
   exit 1
 fi

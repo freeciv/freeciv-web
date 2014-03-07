@@ -1,22 +1,13 @@
 #!/bin/bash
 
-# Freeciv-web Vagrant Bootstrap Script - play.freeciv.org 
-# 2014-02-17 - Andreas Røsdal
+# Freeciv-web Travis CI Bootstrap Script - play.freeciv.org 
 #
-# Setup script for Freeciv-web to be used on a Vagrant local developer image.
-# This script assumes that the source code in git has been checked out from
-# https://github.com/freeciv/freeciv-web to /vagrant 
-
-if [ -d "/vagrant/" ]; then
-  # script is run to install Freeciv-web under vagrant
-  basedir="/vagrant"
-  logfile="/vagrant/freeciv-web-vagrant.log"
-else
-  # script is run to install Freeciv-web on current system without vagrant
-  echo "Installing Freeciv-web on current system. Please run this script as root user."
-  basedir=$(pwd)"/.."
-  logfile="${basedir}/freeciv-web-vagrant.log"
-fi
+# https://travis-ci.org/freeciv/freeciv-web
+#
+# script is run to install Freeciv-web on Travis CI.
+echo "Installing Freeciv-web on Travis CI."
+basedir=$(pwd)"/.."
+logfile="${basedir}/freeciv-web-vagrant.log"
 
 
 # Redirect copy of output to a log file.
@@ -75,13 +66,13 @@ sudo python setup.py install
 
 ## mysql setup
 echo "==== Setting up MySQL ===="
-#mysqladmin -u ${mysql_user} -p${mysql_pass} create freeciv_web
-#mysql -u ${mysql_user} -p${mysql_pass} freeciv_web < ${basedir}/freeciv-web/src/main/webapp/meta/private/metaserver.sql
+mysqladmin -u ${mysql_user} -p${mysql_pass} create freeciv_web
+mysql -u ${mysql_user} -p${mysql_pass} freeciv_web < ${basedir}/freeciv-web/src/main/webapp/meta/private/metaserver.sql
 
 echo "==== Building freeciv ===="
 cd /home/travis/build/freeciv/freeciv-web/freeciv && ./prepare_freeciv.sh
 cd freeciv && make install
-cd ${basedir}/freeciv/data/ && cp -rf fcweb /usr/local/share/freeciv
+cd /home/travis/build/freeciv/freeciv-web/freeciv/freeciv/data/ && cp -rf fcweb /usr/local/share/freeciv
 
 echo "==== Building freeciv-web ===="
 sed -e "s/user>root/user>${mysql_user}/" -e "s/password>changeme/password>${mysql_pass}/" ${basedir}/freeciv-web/src/main/webapp/WEB-INF/resin-web.xml.dist > ${basedir}/freeciv-web/src/main/webapp/WEB-INF/resin-web.xml

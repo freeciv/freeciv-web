@@ -3,7 +3,8 @@ language: c
 
 compiler:
   - gcc
-
+python:
+  - "3.3"
 
 script: "sudo bash ./scripts/freeciv-web-travis.sh"
 

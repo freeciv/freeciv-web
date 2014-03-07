@@ -32,7 +32,7 @@ resin_url="http://www.caucho.com/download/resin-${resin_version}.tar.gz"
 tornado_url="https://pypi.python.org/packages/source/t/tornado/tornado-3.2.tar.gz"
 
 # Based on fresh install of Ubuntu 12.04
-dependencies="maven mysql-server-5.5 openjdk-7-jdk libcurl4-openssl-dev nginx libjansson-dev subversion pngcrush libtool automake autoconf autotools-dev language-pack-en python3-setuptools libglib2.0-dev python3.2 python3.2-pip"
+dependencies="maven mysql-server-5.5 openjdk-7-jdk libcurl4-openssl-dev nginx libjansson-dev subversion pngcrush libtool automake autoconf autotools-dev language-pack-en python3-setuptools libglib2.0-dev python3.2"
 
 ## dependencies
 echo "==== Installing Updates and Dependencies ===="
@@ -43,7 +43,7 @@ sudo debconf-set-selections <<< "mysql-server-5.5 mysql-server/root_password pas
 sudo debconf-set-selections <<< "mysql-server-5.5 mysql-server/root_password_again password ${mysql_pass}"
 echo "apt-get install dependencies"
 apt-get -y install ${dependencies}
-pip3 install Pillow
+easy_install Pillow
 
 ln -s /usr/bin/python3.2 /usr/bin/python3.3
 python3.3 --version

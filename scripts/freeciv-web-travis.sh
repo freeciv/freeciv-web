@@ -6,7 +6,7 @@
 #
 # script is run to install Freeciv-web on Travis CI.
 echo "Installing Freeciv-web on Travis CI."
-basedir=$(pwd)"/.."
+basedir=$(pwd)
 logfile="${basedir}/freeciv-web-vagrant.log"
 
 
@@ -70,9 +70,9 @@ mysqladmin -u ${mysql_user} -p${mysql_pass} create freeciv_web
 mysql -u ${mysql_user} -p${mysql_pass} freeciv_web < ${basedir}/freeciv-web/src/main/webapp/meta/private/metaserver.sql
 
 echo "==== Building freeciv ===="
-cd /home/travis/build/freeciv/freeciv-web/freeciv && ./prepare_freeciv.sh
+cd ${basedir}/freeciv && ./prepare_freeciv.sh
 cd freeciv && make install
-cd /home/travis/build/freeciv/freeciv-web/freeciv/freeciv/data/ && cp -rf fcweb /usr/local/share/freeciv
+cd ${basedir}/freeciv/freeciv/data/ && cp -rf fcweb /usr/local/share/freeciv
 
 echo "==== Building freeciv-web ===="
 sed -e "s/user>root/user>${mysql_user}/" -e "s/password>changeme/password>${mysql_pass}/" ${basedir}/freeciv-web/src/main/webapp/WEB-INF/resin-web.xml.dist > ${basedir}/freeciv-web/src/main/webapp/WEB-INF/resin-web.xml

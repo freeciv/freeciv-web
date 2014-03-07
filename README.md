@@ -147,8 +147,10 @@ manual installation procedure to setup Freeciv-web:
 
    - Run setup_links.sh and sync.sh in freeciv-img-extract 
    - Run sync-js-hand.sh in the scripts/ directory.
-   - Edit /freeciv-web/src/main/webapp/WEB-INF/resin-web.xml.dist, rename this
-     file to resin-web.xml, and update the values for your MySQL database.
+   - Copy freeciv-web/src/main/webapp/WEB-INF/resin-web.xml.dist as resin-web.xml
+     and update the values for your MySQL database.
+   - Copy freeciv-web/src/main/webapp/meta/php_code/local.php.dist as local.php
+     and edit to suit your needs.
    - Run 'build.sh' in the freeciv-web directory
    - Copy nginx configuration file from publite2/nginx/freeciv-web
      to /etc/nginx/sites-enabled/ and edit to suit your needs.

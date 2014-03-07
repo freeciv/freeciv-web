@@ -82,12 +82,4 @@ cd ${basedir}/scripts && ./sync-js-hand.sh
 cd ${basedir}/freeciv-web && ./build.sh
 
 echo "=============================="
-
-rm /etc/nginx/sites-enabled/default
-cp ${basedir}/publite2/nginx.conf /etc/nginx/
-cp ${basedir}/publite2/nginx/freeciv-web /etc/nginx/sites-enabled/
-
-echo "Starting Freeciv-web..."
-#service nginx start
-cd ${basedir}/scripts/ && sudo -u travis ./start-freeciv-web.sh
-echo "Freeciv-web started on Travis CI environment!"
+echo "Freeciv-web built and installed correctly: Build successful!"

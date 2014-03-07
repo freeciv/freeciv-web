@@ -7,7 +7,7 @@ compiler:
 before_install: 
   - pwd
   - sudo apt-get update
-  - sudo apt-get install maven2 mysql-server-5.5 openjdk-7-jdk libcurl4-openssl-dev nginx libjansson-dev subversion pngcrush python3-pillow libtool automake autoconf autotools-dev language-pack-en python3.3-dev python3-setuptools libglib2.0-dev
+  - sudo apt-get install maven2 mysql-server-5.5 openjdk-7-jdk libcurl4-openssl-dev nginx libjansson-dev subversion pngcrush libtool automake autoconf autotools-dev language-pack-en python3-setuptools libglib2.0-dev
 
 
 script: "./scripts/freeciv-web-bootstrap.sh"

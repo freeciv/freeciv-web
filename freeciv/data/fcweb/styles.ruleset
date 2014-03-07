@@ -37,3 +37,24 @@ name = _("?style:Babylonian")
 
 [style_celtic]
 name = _("?style:Celtic")
+
+
+; /* <-- avoid gettext warnings
+;
+; Music styles
+;
+; Order is important. The last one for which activation requirements
+; are fulfilled is the one that plays.
+;
+;
+; music_peaceful = Music to play when nation in peaceful mood
+; music_combat   = Music to play when nation in combat mood
+; reqs           = requirements to activate the style (see effects.ruleset
+;                  and README.effects for help on requirements)
+;
+; */ <-- avoid gettext warnings
+
+; Fallback music style for any nation that has nothing else
+[musicstyle_generic]
+music_peaceful     = "music_peace"
+music_combat       = "music_combat"

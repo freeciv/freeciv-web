@@ -59,8 +59,7 @@ wget ${resin_url}
 tar xvfz resin-${resin_version}.tar.gz
 rm -Rf resin
 mv resin-${resin_version} resin
-mkdir resin/log
-chmod -R 777 resin/log/ resin/webapps/
+chmod -R 777 resin
 
 
 echo "==== Fetching/Installing Tornado Web Server ===="

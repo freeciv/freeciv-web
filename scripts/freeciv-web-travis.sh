@@ -32,7 +32,7 @@ uname -a
 echo basedir  $basedir
 echo logfile $logfile
 
-which python3.2
+which python3
 
 # User will need permissions to create a database
 mysql_user="root"

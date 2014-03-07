@@ -50,12 +50,18 @@ python3.3 --version
 
 python3.2 -m easy_install Pillow
 
+java -version
+javac -version
+
 ## build/install resin
 echo "==== Fetching/Installing Resin ${resin_version} ===="
 wget ${resin_url}
 tar xvfz resin-${resin_version}.tar.gz
 rm -Rf resin
 mv resin-${resin_version} resin
+mkdir resin/log
+chmod -R 777 resin/log/ resin/webapps/
+
 
 echo "==== Fetching/Installing Tornado Web Server ===="
 wget ${tornado_url}
@@ -81,5 +87,10 @@ cd ${basedir}/freeciv-img-extract/ && ./setup_links.sh && ./sync.sh
 cd ${basedir}/scripts && ./sync-js-hand.sh
 cd ${basedir}/freeciv-web && ./build.sh
 
+
+echo "Starting Freeciv-web..."
+service nginx start
+cd ${basedir}/scripts/ && sudo -u travis ./start-freeciv-web.sh
+
 echo "=============================="
-echo "Freeciv-web built and installed correctly: Build successful!"
+echo "Freeciv-web built and started correctly: Build successful!"

@@ -32,8 +32,7 @@ uname -a
 echo basedir  $basedir
 echo logfile $logfile
 
-# FIXME
-alias python3.3='python3.2'
+which python3.2
 
 # User will need permissions to create a database
 mysql_user="root"
@@ -71,7 +70,7 @@ echo "==== Fetching/Installing Tornado Web Server ===="
 wget ${tornado_url}
 tar xvfz tornado-3.2.tar.gz
 cd tornado-3.2
-python3.3 setup.py install
+sudo python3.2 setup.py install
 
 
 ## mysql setup

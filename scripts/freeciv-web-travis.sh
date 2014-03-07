@@ -43,10 +43,12 @@ sudo debconf-set-selections <<< "mysql-server-5.5 mysql-server/root_password pas
 sudo debconf-set-selections <<< "mysql-server-5.5 mysql-server/root_password_again password ${mysql_pass}"
 echo "apt-get install dependencies"
 apt-get -y install ${dependencies}
-easy_install Pillow
 
+#Travis doesn't support Python 3.3 at the moment.
 ln -s /usr/bin/python3.2 /usr/bin/python3.3
 python3.3 --version
+
+python3.2 -m easy_install Pillow
 
 ## build/install resin
 echo "==== Fetching/Installing Resin ${resin_version} ===="

@@ -90,9 +90,6 @@ cd ${basedir}/scripts && ./sync-js-hand.sh
 cd ${basedir}/freeciv && rm -rf freeciv
 cd ${basedir}/freeciv-web && ./build.sh
 
-df -h
-top -n 1
-
 echo "Starting Freeciv-web..."
 service nginx start
 cd ${basedir}/scripts/ && sudo -u travis ./start-freeciv-web.sh

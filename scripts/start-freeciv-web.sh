@@ -31,7 +31,6 @@ echo "Resin starting.." && \
 until `curl --output /dev/null --silent --head --fail "http://localhost:8080/meta/metaserver.php"`; do
     printf ".."
     sleep 3
-    cat ${FREECIV_WEB_DIR}/resin/log/*.log
 done
 
 #3. publite2

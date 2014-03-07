@@ -4,7 +4,7 @@
 #
 # https://travis-ci.org/freeciv/freeciv-web
 #
-# script is run to install Freeciv-web on Travis CI.
+# script is run to install Freeciv-web on Travis CI continuous integration.
 echo "Installing Freeciv-web on Travis CI."
 basedir=$(pwd)
 logfile="${basedir}/freeciv-web-travis.log"
@@ -48,7 +48,7 @@ sudo debconf-set-selections <<< "mysql-server-5.5 mysql-server/root_password_aga
 echo "apt-get install dependencies"
 apt-get -y install ${dependencies}
 
-alias python3.3='python3.2'
+ln -s /usr/bin/python3.2 /usr/bin/python3.3
 python3.3 --version
 
 ## build/install resin

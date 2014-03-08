@@ -2,7 +2,7 @@ THE FREECIV-WEB PROJECT
 -----------------------
 [![Build Status](https://api.travis-ci.org/freeciv/freeciv-web.png)](https://travis-ci.org/freeciv/freeciv-web)
 
-Freeciv-web is an open-source turn-based strategy game. It’s built entirely in HTML5 and features in-depth game-play and a wide variety of game modes and options. Your goal is to build cities, collect resources, organize your government, and build an army, with the ultimate goal of creating the best civilization. You can play online against other players (multiplayer) or play by yourself against the computer. 
+Freeciv-web is an open-source turn-based strategy game. It's built entirely in HTML5 and features in-depth game-play and a wide variety of game modes and options. Your goal is to build cities, collect resources, organize your government, and build an army, with the ultimate goal of creating the best civilization. You can play online against other players (multiplayer) or play by yourself against the computer. 
 
 Freeciv-web is is free and open source software. The Freeciv C server is released under the GNU General Public License, while the Freeciv-web client is released
 under the GNU Affero General Public License. See LICENSE.txt for details.
@@ -19,25 +19,30 @@ https://mail.gna.org/listinfo/freeciv-dev
 Overview
 --------
 
-The Freeciv Web client consists of these components:
+Freeciv-Web consists of these components:
 
-* freeciv - a fork of the main Freeciv C client and server.
-
-* freeciv-proxy - a HTTP proxy which allows web client users
-  to connect to Freeciv civservers. The proxy is a HTTP and WebSocket
-  server, and proxy between web browsers and civservers.
-
-* freeciv-web - a Java web application for the Freeciv web client.
+* [Freeciv-web](freeciv-web) - a Java web application for the Freeciv web client.
   This application is a Java web application which consists of HTML,
   Javascript, images and JSP files which make up the application
-  viewed in each user's web browser. 
+  viewed in each user's web browser. The Metaserver is also a part of this module.
+  Implemented in Javascript, Java, JSP, PHP, HTML and CSS. Built with maven and runs 
+  on the Resin application server.
 
-* freeciv-img-extract - extracts the images of the Freeciv tileset,
+* [Freeciv](freeciv) - the Freeciv C server, which is checked out from the official
+  svn repository, and patched to work with a WebSocket/JSON protocol. Implemented in C.
+
+* [Freeciv-proxy](freeciv-proxy) - a WebSocket proxy which allows WebSocket clients in Freeciv-web
+  to send socket requests to Freeciv servers. WebSocket requests are sent from Javascript 
+  in Freeciv-web to nginx, which then proxies the WebSocket messages to freeciv-proxy, 
+  which finally sends Freeciv socket requests to the Freeciv servers. Implemented in Python.
+
+* [Publite2](publite2) - a process launcher for Freeciv C servers, which manages
+  multiple Freeciv server processes and checks capacity through the Metaserver. 
+  Implemented in Python.
+
+* [Freeciv-img-extract](freeciv-img-extraxt) - extracts the images of the Freeciv tileset,
   and generates a version for the web. This produces a tileset PNG 
-  and Javascript. Run this to sync with the upstream Freeciv SVN 
-  repository.
-
-* publite2 - a simple way to launch multiple civservers. 
+  and Javascript. 
 
 
 Running Freeciv-web with Vagrant on VirtualBox
@@ -78,6 +83,7 @@ To log in to your Vagrant server, run the command:
  vagrant ssh
  ```
 
+The Vagrant guest machine will mount the Freeciv-web source repository in the /vagrant directory.
 Note that running Freeciv-web using Vagrant requires about 4Gb of memory
 and 3 Gb of harddisk space.
 
@@ -98,7 +104,7 @@ Install this software if you are not running Freeciv-web with Vagrant:
 
 - Mysql 5.5.x - http://www.mysql.com/
 
-- Maven 2 - http://maven.apache.org/download.html
+- Maven 3 - http://maven.apache.org/download.html
 
 - Firebug for debugging - http://getfirebug.com/
 
@@ -127,7 +133,7 @@ manual installation procedure to setup Freeciv-web:
 
 0. Checkout Freeciv-web from github to ~/freeciv-build
 
-1. Install the system requirements.
+1. Install the system requirements from the previous chapter.
 
 2. Create mysql database called 'freeciv_web'
    Import mysql tables into a MySQL database from:
@@ -154,10 +160,11 @@ manual installation procedure to setup Freeciv-web:
      to /etc/nginx/sites-enabled/ and edit to suit your needs.
 
 
-6.  Start and stop Freeciv-web with the following commands:
-  scripts/start-freeciv-web.sh
-  scripts/stop-freeciv-web.sh       
-  scripts/status-freeciv-web.sh     
+6.  Start and stop Freeciv-web with the following commands:  
+  scripts/start-freeciv-web.sh  
+  scripts/stop-freeciv-web.sh  
+  scripts/status-freeciv-web.sh  
+(On Vagrant, these scripts are found on /vagrant/scripts)  
 
 Freeciv-Web continuous integration on Travis CI 
 -----------------------------------------------
@@ -167,13 +174,13 @@ Freeciv-Web is built on Travis CI on every commit. This is the current build sta
 Developers interested in Freeciv-web
 ------------------------------------
 
-If you want to contibute to Freeciv-web, see the TODO file for 
+If you want to contibute to Freeciv-web, see the [TODO file](TODO) for 
 some tasks you can work on.
 
 
 Contributors to Freeciv-web
 ---------------------------
-Andreas Røsdal  
-Marko Lindqvist  
-and the Freeciv.org project!
+[Andreas Røsdal](http://github.com/andreasrosdal)  
+[Marko Lindqvist](https://github.com/cazfi)  
+and the [Freeciv.org project](http://freeciv.wikia.com/wiki/People)!
 

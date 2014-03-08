@@ -21,9 +21,8 @@ Overview
 
 Freeciv-Web consists of these components:
 
-* [Freeciv-web](freeciv-web) - a Java web application for the Freeciv web client.
-  This application is a Java web application which consists of HTML,
-  Javascript, images and JSP files which make up the application
+* [Freeciv-web](freeciv-web) - a Java web application for the Freeciv-web client.
+  This application is a Java web application which make up the application
   viewed in each user's web browser. The Metaserver is also a part of this module.
   Implemented in Javascript, Java, JSP, PHP, HTML and CSS. Built with maven and runs 
   on the Resin application server.

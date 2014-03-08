@@ -40,7 +40,7 @@ Freeciv-Web consists of these components:
   multiple Freeciv server processes and checks capacity through the Metaserver. 
   Implemented in Python.
 
-* [Freeciv-img-extract](freeciv-img-extraxt) - extracts the images of the Freeciv tileset,
+* [Freeciv-img-extract](freeciv-img-extract) - extracts the images of the Freeciv tileset,
   and generates a version for the web. This produces a tileset PNG 
   and Javascript. 
 

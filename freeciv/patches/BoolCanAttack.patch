@@ -1,0 +1,59 @@
+diff -Nurd -X.diff_ignore freeciv/ai/default/advmilitary.c freeciv/ai/default/advmilitary.c
+--- freeciv/ai/default/advmilitary.c	2014-03-01 00:22:02.762955407 +0200
++++ freeciv/ai/default/advmilitary.c	2014-03-07 21:05:55.028227813 +0200
+@@ -1197,7 +1197,7 @@
+                                             &boattype, &move_time);
+   if (NULL == ptile
+       || ptile == unit_tile(myunit)
+-      || can_unit_attack_tile(myunit, ptile)) {
++      || !can_unit_attack_tile(myunit, ptile)) {
+     goto cleanup;
+   }
+ 
+diff -Nurd -X.diff_ignore freeciv/ai/default/aiair.c freeciv/ai/default/aiair.c
+--- freeciv/ai/default/aiair.c	2014-03-01 00:22:02.762955407 +0200
++++ freeciv/ai/default/aiair.c	2014-03-07 21:05:34.268278711 +0200
+@@ -129,7 +129,7 @@
+   int sortie_time;
+ #define PROB_MULTIPLIER 100 /* should unify with those in combat.c */
+ 
+-  if (can_unit_attack_tile(punit, dst_tile)
++  if (!can_unit_attack_tile(punit, dst_tile)
+       || !(pdefender = get_defender(punit, dst_tile))) {
+     return 0;
+   }
+diff -Nurd -X.diff_ignore freeciv/ai/default/aihunt.c freeciv/ai/default/aihunt.c
+--- freeciv/ai/default/aihunt.c	2014-03-07 01:52:11.614353937 +0200
++++ freeciv/ai/default/aihunt.c	2014-03-07 21:01:17.996906666 +0200
+@@ -436,7 +436,7 @@
+     }
+ 
+     if (tile_city(ptile)
+-        || can_unit_attack_tile(punit, ptile)) {
++        || !can_unit_attack_tile(punit, ptile)) {
+       continue;
+     }
+ 
+diff -Nurd -X.diff_ignore freeciv/ai/default/aiunit.c freeciv/ai/default/aiunit.c
+--- freeciv/ai/default/aiunit.c	2014-03-01 00:22:02.798955323 +0200
++++ freeciv/ai/default/aiunit.c	2014-03-07 21:07:11.732039716 +0200
+@@ -1467,8 +1467,8 @@
+       /* We have to assume the attack is diplomatically ok.
+        * We cannot use can_player_attack_tile, because we might not
+        * be at war with aplayer yet */
+-      if (can_unit_attack_tile(punit, atile)
+-          || !(aunit == get_defender(punit, atile))) {
++      if (!can_unit_attack_tile(punit, atile)
++          || aunit != get_defender(punit, atile)) {
+         /* We cannot attack it, or it is not the main defender. */
+         continue;
+       }
+@@ -1688,7 +1688,7 @@
+                            NULL, &ferryboat, NULL, NULL);
+     if (!same_pos(unit_tile(punit), dest_tile)) {
+       if (!is_tiles_adjacent(unit_tile(punit), dest_tile)
+-          || can_unit_attack_tile(punit, dest_tile)) {
++          || !can_unit_attack_tile(punit, dest_tile)) {
+ 
+         /* Adjacent and can't attack usually means we are not marines
+          * and on a ferry. This fixes the problem (usually). */

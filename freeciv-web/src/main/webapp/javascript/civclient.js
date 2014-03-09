@@ -121,15 +121,6 @@ function civclient_init()
       "You have now joined the game. " + 
       "Click the start game button to begin the game immediately");
 
-
-  } else if (civserverport == 5001) { 
-    show_intro_dialog("Welcome to the Freeciv-web Tournament", 
-      "You have now joined the game and are waiting for all 120 players to join the game. " +
-      "Before the game begins, you can chat with other players, pick your nation, and " +
-      "you can customize game options. <br><br>" +  
-      "Click the start game button now to indicate that you are ready to begin playing.");
-      $("#pregame_settings_button").hide();
-
   } else { 
     show_intro_dialog("Welcome to Freeciv-web", 
       "You have now joined the game. Before the game begins, " +
@@ -146,7 +137,7 @@ function civclient_init()
 function chatbox_resized()
 {
   if (is_small_screen()) {
-    $("#game_message_area").css("height", "79%");
+    $("#game_message_area").css("height", "75%");
 
   } else {
     var newheight = $("#game_chatbox_panel").parent().height() - 40;
@@ -187,7 +178,7 @@ function init_chatbox()
   if (is_small_screen()) {
     $("#game_chatbox_panel").css("position", "relative");
     $("#game_chatbox_panel").css("float", "left");
-    $("#game_chatbox_panel").css("height", "79%");
+    $("#game_chatbox_panel").css("height", "75%");
     $("#game_chatbox_panel").css("width", "99%");
     $("#game_chatbox_panel").show();
     chatbox_resized();
@@ -318,7 +309,9 @@ function show_intro_dialog(title, message) {
   if (is_small_screen()) {
     /* some fixes for pregame screen on small devices.*/
     $("#freeciv_logo").remove();
-    $("#pregame_options").height(105);
+    $("#pregame_message_area").css("width", "73%");
+    $("#leave_game_button").remove();
+    $("#observe_button").remove();
   }
 	
   $("#dialog").dialog('open');		

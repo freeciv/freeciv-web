@@ -17,7 +17,7 @@
 
 				<div id="turn_done_button_div">
             			  <button id="turn_done_button" type="button" 
-					  class="button">Turn Done</button>
+					  class="button" title="Ends your turn. (Shift+Enter)">Turn Done</button>
                 		</div>
 			</ul>
 			

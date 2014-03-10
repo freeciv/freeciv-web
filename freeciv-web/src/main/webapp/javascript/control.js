@@ -59,6 +59,8 @@ function control_init()
   $("#city_canvas").click(city_mapview_mouse_click);
   
   $("#turn_done_button").click(send_end_turn);
+  $("#turn_done_button").tooltip();
+
   $("#freeciv_logo").click(function(event) {
     window.open('http://play.freeciv.org/', '_new');
     });
@@ -752,6 +754,10 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift)
   };
   
   switch (key_code) {
+    case 13:
+      if (shift) send_end_turn();
+      break;
+
     case 35: //1
     case 97:
       key_unit_move(DIR8_SOUTH);

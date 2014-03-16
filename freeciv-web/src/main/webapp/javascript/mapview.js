@@ -21,6 +21,7 @@ var city_canvas = null;
 
 var tileset_images = []; 
 var sprites = {};
+var loaded_images = 0;
 
 var sprites_init = false;
 var mapview_slide = {};
@@ -258,18 +259,36 @@ function is_small_screen()
 }
 
 /**************************************************************************
-  ...
+  This will load the tileset, blocking the UI while loading.
 **************************************************************************/
 function init_sprites()
 {
-  var tileset_image = new Image();
-  tileset_image.src = '/tileset/freeciv-web-tileset-0.png';
-  tileset_images[0] = tileset_image;
+  $.blockUI({ message: "<h1>Freeciv-web is loading. Please wait..."
+	  + "<br><center><img src='/images/loading.gif'></center></h1>" });
 
-  var tileset_image = new Image();
-  tileset_image.src = '/tileset/freeciv-web-tileset-1.png';
-  tileset_images[1] = tileset_image;
+  var tileset_image_one = new Image();
+  tileset_image_one.onload = preload_check; 
+  tileset_image_one.src = '/tileset/freeciv-web-tileset-0.png';
+  tileset_images[0] = tileset_image_one;
+
+  var tileset_image_two = new Image();
+  tileset_image_two.onload = preload_check; 
+  tileset_image_two.src = '/tileset/freeciv-web-tileset-1.png';
+  tileset_images[1] = tileset_image_two;
   
+}
+
+/**************************************************************************
+  Determines when the whole tileset has been preloaded.
+**************************************************************************/
+function preload_check()
+{
+  loaded_images += 1;
+
+  if (loaded_images == 2) {
+    $.unblockUI();
+    init_common_intro_dialog();
+  }
 }
 
 /**************************************************************************

@@ -142,3 +142,38 @@ body {
   float:left;
   margin-left: 50px;
 }
+
+
+#savegame_note {
+  font-style:italic;
+  font-size: 70%;
+}
+
+#selectable .ui-selecting { 
+  background: #228822; 
+}
+
+#selectable .ui-selected { 
+  background: #117711; 
+  color: white; 
+}
+
+#selectable {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 100%; 
+  overflow: auto;
+  height: 300px;
+}
+
+#selectable li {
+  margin: 3px;
+  padding: 0.4em;
+}
+
+#username_validation_result {
+  font-weight: bold;
+  color: red; 
+  background-color: #220000; 
+}

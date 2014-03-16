@@ -10,7 +10,6 @@
 
 <script type="text/javascript" src="/javascript-compressed/jquery.min.js?ts=${initParam.buildTimeStamp}"></script>
 <script type="text/javascript" src="/javascript-compressed/webclient.js?ts=${initParam.buildTimeStamp}"></script>
-<script type="text/javascript" src="/webclient/session.jsp"></script>
 
 <link rel="shortcut icon" href="/images/freeciv-shortcut-icon.png" />
 <link rel="apple-touch-icon" href="/images/freeciv-splash2.png" />
@@ -25,15 +24,6 @@
 
 <body>
 	
-<%
-  
-  String username = "" + session.getAttribute("username");
-  if (username == null || "null".equals(username)) {
-	// User isn't logged in.
-	response.sendRedirect("/wireframe.jsp?do=login");
-  }
-%>
-
     <jsp:include page="pregame.jsp" flush="false"/>
     <jsp:include page="game.jsp" flush="false"/>
     

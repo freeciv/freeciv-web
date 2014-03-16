@@ -24,6 +24,8 @@ var phase_start_time = 0;
 
 var debug_active = false;
 
+var username = null;
+
 /**************************************************************************
  Main starting point for Freeciv-web 
 **************************************************************************/
@@ -59,9 +61,12 @@ function civclient_init()
 	}
   }
 
+  $.blockUI.defaults['css']['backgroundColor'] = "#222";
+  $.blockUI.defaults['css']['color'] = "#fff";
+  $.blockUI.defaults['theme'] = true;
 
   game_init();
-  network_init();
+  observe_game_check();
   init_mapview();
   control_init();
 
@@ -102,32 +107,42 @@ function civclient_init()
 	    }
   }
 
-  $.blockUI.defaults['css']['backgroundColor'] = "#222";
-  $.blockUI.defaults['css']['color'] = "#fff";
-  $.blockUI.defaults['theme'] = true;
 
   $('#tabs').tabs();
   $(".button").button();
+}
 
-  load_game_check();
-  observe_game_check();
-
+/**************************************************************************
+ ...
+**************************************************************************/
+function init_common_intro_dialog() {
   if (observing) {
-    $.blockUI({ message: '<h1>Please wait while you are being logged in as an observer in the game.</h1>' });
+    show_intro_dialog("Welcome to Freeciv-web", 
+      "You have joined the game as an observer. Please enter your name:");
     $("#turn_done_button").button( "option", "disabled", true); 
 
   } else if (is_small_screen()) {
     show_intro_dialog("Welcome to Freeciv-web", 
-      "You have now joined the game. " + 
-      "Click the start game button to begin the game immediately");
+      "You are about to join the game. Please enter your name:");
+  } else if ($.getUrlVar('action') == "load") {
+    show_intro_dialog("Welcome to Freeciv-web",
+      "You are about to join this game server, where you can " +
+      "load a savegame, tutorial or scenario. " +
+      "Please enter your name: ");
 
-  } else { 
-    show_intro_dialog("Welcome to Freeciv-web", 
-      "You have now joined the game. Before the game begins, " +
-      "you can customize game options or wait for more players " +
-      "to join the game.  <br><br>" +  
-      "Click the start game button to begin the game immediately, or click " +
-      "customize game to change the game settings.");
+  } else if ($.getUrlVar('action') == "multi") {
+    show_intro_dialog("Welcome to Freeciv-web",
+      "You are about to join this game server, where you can "  +
+      "participate in a multiplayer game. You can customize the game " +
+      "settings, and wait for the minimum number of players before " +
+      "the game can start. " +
+      "Please enter your name: ");
+  } else {
+    show_intro_dialog("Welcome to Freeciv-web",
+      "You are about to join this game server, where you can " +
+      "play a singleplayer game against the Freeciv AI. You can " +
+      "start the game directly, or customize the game settings. " +
+      "Please enter your name: ");
   } 
 }
 
@@ -278,6 +293,35 @@ function show_dialog_message(title, message) {
 
 }
 
+
+/**************************************************************************
+ ...
+**************************************************************************/
+function validate_username() {
+  username = $("#username_req").val();
+
+  var cleaned_username = username.replace(/[^a-zA-Z\s\-]/g,'');
+ 
+  if (username == null || username.length == 0) {
+    $("#username_validation_result").html("Your name can't be empty.");
+    return false;
+  } else if (username.length <= 3 ) {
+    $("#username_validation_result").html("Your name is too short.");
+    return false;
+  } else if (username.length >= 32) {
+    $("#username_validation_result").html("Your name is too long.");
+    return false;
+  } else if (username != cleaned_username) {
+    $("#username_validation_result").html("Your name contains invalid characters.");
+    return false;
+  }
+
+  $.jStorage.set("username", username);
+  network_init();
+
+  return true;
+}
+
 /**************************************************************************
  Shows the Freeciv intro dialog.
 **************************************************************************/
@@ -287,7 +331,10 @@ function show_intro_dialog(title, message) {
   $("#dialog").remove();
   $("<div id='dialog'></div>").appendTo("div#game_page");
 
-  $("#dialog").html(message);
+  var intro_html = message + "<br><br>Name: <input id='username_req' type='text' size='25'>"
+	  + " <br><br><span id='username_validation_result'></span>";
+  $("#dialog").html(intro_html);
+  $("#username_req").val($.jStorage.get("username", ""));
   $("#dialog").attr("title", title);
   $("#dialog").dialog({
 			bgiframe: true,
@@ -296,21 +343,27 @@ function show_intro_dialog(title, message) {
 			buttons: 
 			{
 				"Start Game" : function() {
-					pregame_start_game();
-					$(this).dialog('close');
+					if (validate_username()) {
+						$(this).dialog('close');
+						setTimeout("pregame_start_game();", 1000);
+					}
 				}, 
 				  "Customize Game": function() {
-					$(this).dialog('close');
+					if (validate_username()) $(this).dialog('close');
 				}
 			}	
 			
 		});
 
+  if (($.getUrlVar('action') == "load" || $.getUrlVar('action') == "multi") 
+         && $.getUrlVar('load') != "tutorial") {
+    $(".ui-dialog-buttonset button").first().hide();
+  }
+
   if (is_small_screen()) {
     /* some fixes for pregame screen on small devices.*/
     $("#freeciv_logo").remove();
     $("#pregame_message_area").css("width", "73%");
-    $("#leave_game_button").remove();
     $("#observe_button").remove();
   }
 	
@@ -375,8 +428,7 @@ function show_help()
 **************************************************************************/
 function observe_game_check()
 {
-  var mode_def = $.getUrlVar('mode');
-  if (mode_def != null && mode_def == 'observe') {
+  if ($.getUrlVar('action') == 'observe') {
     loadTimerId = setTimeout("request_observe_game();", 2000);
     observing = true;
   }

@@ -246,10 +246,11 @@ function pregame_settings()
 	  "<td><input type='number' name='mapsize' id='mapsize' size='4' length='3' min='1' max='15' step='1'></td></tr>" +
 	  "<tr><td>AI skill level:</td>" +
 	  "<td><select name='skill_level' id='skill_level'>" +
-	  "<option value='0'>Novice</option>" +
-	  "<option value='1'>Easy</option>" +
-          "<option value='2'>Normal</option>" +
-          "<option value='3'>Hard</option>" +
+	  "<option value='0'>Handicapped</option>" +
+	  "<option value='1'>Novice</option>" +
+	  "<option value='2'>Easy</option>" +
+          "<option value='3'>Normal</option>" +
+          "<option value='4'>Hard</option>" +
 	  "</select></td></tr>"+ 
 	  "<tr><td>Tech level:</td>" +
 	  "<td><input type='number' name='techlevel' id='techlevel' size='3' length='3' min='0' max='100' step='10'></td></tr>" +
@@ -354,12 +355,14 @@ function pregame_settings()
     ai_skill_level = parseFloat($('#skill_level').val());
     var test_packet = "";
     if (ai_skill_level == 0) {
-      test_packet = {"type" : packet_chat_msg_req, "message" : "/novice"};
+      test_packet = {"type" : packet_chat_msg_req, "message" : "/handicapped"};
     } else if (ai_skill_level == 1) {
-      test_packet = {"type" : packet_chat_msg_req, "message" : "/easy"};
+      test_packet = {"type" : packet_chat_msg_req, "message" : "/novice"};
     } else if (ai_skill_level == 2) {
-      test_packet = {"type" : packet_chat_msg_req, "message" : "/normal"};
+      test_packet = {"type" : packet_chat_msg_req, "message" : "/easy"};
     } else if (ai_skill_level == 3) {
+      test_packet = {"type" : packet_chat_msg_req, "message" : "/normal"};
+    } else if (ai_skill_level == 4) {
       test_packet = {"type" : packet_chat_msg_req, "message" : "/hard"};
     }
     var myJSONText = JSON.stringify(test_packet);

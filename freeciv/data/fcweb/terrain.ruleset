@@ -132,7 +132,8 @@ ocean_resources = FALSE
 ;                        the whole contiguous FreshWater area will be flooded
 ;                        with the non-FreshWater terrain.
 ;   - NotGenerated     = Map generator never places this terrain type. It can
-;                        be added from editor only, or by ingame events (lua scripting)
+;                        be added from editor only, or by ingame events (lua scripting
+;   - NoZoc            = Units on this terrain are not generating or subject to zoc
 ; property_*           = specific property % values used by mapgen.  Most
 ;                        terrains will have 0 for most values.
 ;  - mountainous       = degree to which this terrain is mountainous
@@ -225,7 +226,7 @@ warmer_drier_result  = "Swamp"
 cooler_wetter_result = "Glacier"
 cooler_drier_result  = "Tundra"
 native_to            = "Sea", "Air", "Missile", "Helicopter", "Trireme"
-flags                = "NoCities", "NoPollution", "FreshWater"
+flags                = "NoCities", "NoPollution", "FreshWater", "NoZoc"
 property_ocean_depth = 0
 color.r              = 46
 color.g              = 120
@@ -267,7 +268,7 @@ warmer_drier_result  = "Swamp"
 cooler_wetter_result = "Glacier"
 cooler_drier_result  = "Glacier"
 native_to            = "Sea", "Air", "Missile", "Helicopter", "Trireme"
-flags                = "NoCities", "NoPollution", "UnsafeCoast"
+flags                = "NoCities", "NoPollution", "UnsafeCoast", "NoZoc"
 property_ocean_depth = 32
 color.r              = 0
 color.g              = 46
@@ -310,7 +311,7 @@ warmer_drier_result  = "no"
 cooler_wetter_result = "no"
 cooler_drier_result  = "no"
 native_to            = "Sea", "Air", "Missile", "Helicopter"
-flags                = "NoCities", "NoPollution", "UnsafeCoast"
+flags                = "NoCities", "NoPollution", "UnsafeCoast", "NoZoc"
 property_ocean_depth = 87
 color.r              = 0
 color.g              = 33

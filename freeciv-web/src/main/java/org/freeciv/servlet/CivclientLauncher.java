@@ -40,6 +40,7 @@ public class CivclientLauncher extends HttpServlet {
 
 		/* Parse input parameters.. */
         String action = request.getParameter("action");
+        if (action == null) action = "new";
 
         String civServerPort = (String)request.getParameter("civserverport");
 
@@ -49,7 +50,7 @@ public class CivclientLauncher extends HttpServlet {
             DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
             conn = ds.getConnection();
 
-            if (action != null && !action.equals("multi") && (action.equals("new") || action.equals("load"))) {
+            if (!action.equals("multi") && (action.equals("new") || action.equals("load"))) {
 
 			  /* If user requested a new game, then get host and port for an available
                * server from the metaserver DB, and use that one. */

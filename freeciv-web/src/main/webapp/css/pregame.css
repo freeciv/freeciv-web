@@ -170,6 +170,7 @@ body {
 #selectable li {
   margin: 3px;
   padding: 0.4em;
+  cursor: pointer;
 }
 
 #username_validation_result {

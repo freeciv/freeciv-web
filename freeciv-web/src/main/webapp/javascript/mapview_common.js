@@ -463,10 +463,8 @@ function put_drawn_sprites(pcanvas, canvas_x, canvas_y, pdrawn, fog)
       offset_y += pdrawn[i]['offset_y'];
     }
     if (pdrawn[i]['key'] == "city_text" ) {
-      mapview_put_city_text(pcanvas, pdrawn[i]['text'], canvas_x + offset_x, canvas_y + offset_y);
+      mapview_put_city_bar(pcanvas, pdrawn[i]['city'], canvas_x + offset_x, canvas_y + offset_y);
       
-    } else if (pdrawn[i]['key'] == "unit_activity_text" ) {
-      mapview_put_unit_text(pcanvas, pdrawn[i]['text'], canvas_x + offset_x, canvas_y + offset_y);        
     } else if (pdrawn[i]['key'] == "border" ) {
       mapview_put_border_line(pcanvas, pdrawn[i]['dir'], pdrawn[i]['color'], canvas_x, canvas_y);
     } else {
@@ -644,7 +642,7 @@ function enable_mapview_slide(ptile)
   /* restore default mapview. */
   mapview_canvas = document.getElementById('canvas');
   mapview_canvas_ctx = mapview_canvas.getContext("2d");
-    
+
   mapview['store_width'] = old_width;
   mapview['store_height'] = old_height;
   mapview['width'] = old_width;

@@ -35,7 +35,7 @@ mapview_slide['slide_time'] = 600;
 var height_offset = 67;
 var width_offset = 10;
 
-var canvas_text_font = "12pt Arial"; // with canvas text support
+var canvas_text_font = "14pt Arial"; // with canvas text support
 var fontsize = 12;
 
 var fullfog = [];
@@ -66,6 +66,7 @@ function init_mapview()
   if (!dashedSupport) {
     mozDashSupport = ("mozDash" in mapview_canvas_ctx);
   }
+  
 
   setup_window_size();  
 
@@ -145,6 +146,10 @@ function setup_window_size ()
   mapview['height'] = winHeight - height_offset; 
   mapview['store_width'] = winWidth - width_offset;
   mapview['store_height'] = winHeight - height_offset;
+
+  mapview_canvas_ctx.font = canvas_text_font;
+  buffer_canvas_ctx.font = canvas_text_font;
+  city_canvas_ctx.font = canvas_text_font;
 
   $("#game_status_panel").css("width", mapview_canvas.width);
 
@@ -395,16 +400,51 @@ function canvas_put_rectangle(canvas_context, pcolor, canvas_x, canvas_y, width,
 /**************************************************************************
   Draw city text onto the canvas.
 **************************************************************************/
-function mapview_put_city_text(pcanvas, text, canvas_x, canvas_y) {
+function mapview_put_city_bar(pcanvas, city, canvas_x, canvas_y) {
 
-  pcanvas.font = canvas_text_font;
+  var text = decodeURIComponent(city['name']);
+  var size = city['size'];
+  var color = nations[city_owner(city)['nation']]['color'];
 
-  var width = pcanvas.measureText(text).width;
+  var txt_measure = pcanvas.measureText(text);
+  var size_measure = pcanvas.measureText(size);
+
   pcanvas.fillStyle = "rgba(0, 0, 0, 0.5)";
-  pcanvas.fillRect (canvas_x - Math.floor(width / 2) - 5, canvas_y - 14, width + 10, 20);
+  pcanvas.fillRect (canvas_x - Math.floor(txt_measure.width / 2) - 14, canvas_y - 17, 
+                    txt_measure.width + 20, 20);
+
+  pcanvas.fillStyle = color;
+  pcanvas.fillRect (canvas_x + Math.floor(txt_measure.width / 2) + 5, canvas_y - 17, 
+                    size_measure.width + 8, 20);
+
+  pcanvas.fillStyle = "rgba(0, 0, 0, 1)";
+  pcanvas.fillText(size, canvas_x + Math.floor(txt_measure.width / 2) + 10, canvas_y + 1);  
+
   pcanvas.fillStyle = "rgba(255, 255, 255, 1)";
-  pcanvas.fillText(text, canvas_x - Math.floor(width / 2), canvas_y);  
-    
+  pcanvas.fillText(text, canvas_x - Math.floor(txt_measure.width / 2), canvas_y - 1);  
+
+  pcanvas.fillText(size, canvas_x + Math.floor(txt_measure.width / 2) + 8, canvas_y - 1);  
+
+  var city_flag = get_city_flag_sprite(city);  
+  pcanvas.drawImage(sprites[city_flag['key']], 
+              canvas_x - Math.floor(txt_measure.width / 2) - 45, canvas_y - 17);
+
+  pcanvas.drawImage(sprites[get_city_occupied_sprite(city)], 
+              canvas_x - Math.floor(txt_measure.width / 2) - 12, canvas_y - 16);
+
+  pcanvas.strokeStyle = color;
+  pcanvas.lineWidth = 1.5;
+  pcanvas.beginPath(); 
+  pcanvas.moveTo(canvas_x - Math.floor(txt_measure.width / 2) - 46, canvas_y - 18);
+  pcanvas.lineTo(canvas_x + Math.floor(txt_measure.width / 2) + size_measure.width + 13, 
+                 canvas_y - 18);
+  pcanvas.moveTo(canvas_x + Math.floor(txt_measure.width / 2) + size_measure.width + 13, 
+                 canvas_y + 4);
+  pcanvas.lineTo(canvas_x - Math.floor(txt_measure.width / 2) - 46, canvas_y + 4);
+  pcanvas.lineTo(canvas_x - Math.floor(txt_measure.width / 2) - 46, canvas_y - 18);
+  pcanvas.moveTo(canvas_x - Math.floor(txt_measure.width / 2) - 15, canvas_y - 17);
+  pcanvas.lineTo(canvas_x - Math.floor(txt_measure.width / 2) - 15, canvas_y + 3);
+  pcanvas.stroke();
 }
 
 /**************************************************************************
@@ -465,15 +505,6 @@ function mapview_put_border_line(pcanvas, dir, color, canvas_x, canvas_y) {
 }
 
 
-/**************************************************************************
-  Draw unit activity text onto the canvas. (not in use?)
-**************************************************************************/
-function mapview_put_unit_text(pcanvas, text, canvas_x, canvas_y) {
-  pcanvas.font = canvas_text_font;
-  pcanvas.fillStyle = "rgba(255, 200, 70, 1)";
-  pcanvas.fillText(text, canvas_x, canvas_y);  
-    
-}
 
 /**************************************************************************
   Update the information label which gives info on the current unit and the
@@ -565,7 +596,7 @@ function update_select_unit_dialog(punits)
 function set_city_mapview_active()
 {
   mapview_canvas_ctx = city_canvas.getContext("2d");
-     
+
   mapview['width'] = 350;
   mapview['height'] = 175; 
   mapview['store_width'] = 350;
@@ -582,7 +613,7 @@ function set_city_mapview_active()
 function set_default_mapview_active()
 {
   mapview_canvas_ctx = mapview_canvas.getContext("2d");
-    
+
   city_dialog_remove();
 
   /* shows mapview elements */

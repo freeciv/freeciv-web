@@ -47,7 +47,6 @@ files = ["../freeciv/freeciv/data/amplio2.tilespec",
 #  "../freeciv/freeciv/data/misc/icons.spec",
 #  "../freeciv/freeciv/data/misc/chiefs.spec",  #not in use yet
   "../freeciv/freeciv/data/misc/overlays.spec",
-#  "../freeciv/freeciv/data/misc/citybar.spec",  #not in use yet
   "../freeciv/freeciv/data/misc/shields.spec",
   "../freeciv/freeciv/data/misc/small.spec",
   "../freeciv/freeciv/data/misc/governments.spec",
@@ -57,7 +56,8 @@ files = ["../freeciv/freeciv/data/amplio2.tilespec",
   "../freeciv/freeciv/data/misc/editor.spec",
   "../freeciv/freeciv/data/misc/techs.spec",
   "../freeciv/freeciv/data/misc/flags.spec",
-  "../freeciv/freeciv/data/misc/treaty.spec"]; 
+  "../freeciv/freeciv/data/misc/treaty.spec",
+  "../freeciv/freeciv/data/misc/citybar.spec"]; 
 
 global tileset;
 global curr_x;
@@ -98,6 +98,7 @@ def config_read(file):
     config_text = config_text.replace("\n\"", "\n \"");
     config_text = config_text.replace("\n}", "\n }");
     config_text = config_text.replace("\n1", "\n 1");
+    config_text = config_text.replace("grid_star", "grid_main");
     config.read_string(config_text);
     print((config.sections()));
     return config;

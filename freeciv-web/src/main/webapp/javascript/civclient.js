@@ -345,7 +345,7 @@ function show_intro_dialog(title, message) {
 				"Start Game" : function() {
 					if (validate_username()) {
 						$(this).dialog('close');
-						setTimeout("pregame_start_game();", 1000);
+						setTimeout("pregame_start_game();", 2000);
 					}
 				}, 
 				  "Customize Game": function() {

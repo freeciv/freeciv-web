@@ -184,12 +184,10 @@ function fill_sprite_array(layer, ptile, pedge, pcorner, punit, pcity, citymode)
     
     case LAYER_CITY1:
       if (pcity != null) {
-        sprite_array.push(get_city_flag_sprite(pcity));
         sprite_array.push(get_city_sprite(pcity));
 	if (pcity['unhappy']) {
           sprite_array.push({"key" : "city.disorder"});
 	}
-        sprite_array = sprite_array.concat(get_city_size_sprites(pcity));
       }
 
 
@@ -558,6 +556,28 @@ function get_city_flag_sprite(pcity) {
 }
 
 /**********************************************************************
+ Returns the sprite key for the number of defending units in a city.
+***********************************************************************/
+function get_city_occupied_sprite(pcity) {
+  var owner_id = pcity['owner'];
+  var ptile = city_tile(pcity);
+  var punits = tile_units(ptile);
+
+  if (!observing && owner_id != client.conn.playing.playerno && pcity['occupied']) {
+    return "citybar.occupied";
+  } else if (punits.length == 1) {
+    return "citybar.occupancy_1";
+  } else if (punits.length == 2) {
+    return "citybar.occupancy_2";
+  } else if (punits.length >= 3) {
+    return "citybar.occupancy_3";
+  } else {
+    return "citybar.occupancy_0";
+  }
+
+}
+
+/**********************************************************************
   Return the sprite for a active city worked tile.
 ***********************************************************************/
 function get_city_active_worked_sprite() {
@@ -603,39 +623,6 @@ function get_city_invalid_worked_sprite() {
           "offset_y" : 0};
 }
 
-
-/**********************************************************************
-  Return the size graphic to be used by the city.
-***********************************************************************/
-function get_city_size_sprites(pcity) {
-  var result = [];
-  
-  var size = pcity['size'];
-  var size_str = size + '';
-
-  var lsb = 0;
-  var msb = 0;
-
-  if (size_str.length == 1) {
-    lsb = size_str;
-    msb = 0;
-  } else if (size_str.length == 2) {
-    lsb = size_str.substring(1, 2);
-    msb = size_str.substring(0, 1);
-  }   
-  
-  result.push({"key" : "city.size_" + lsb, 
-            "offset_x" : city_size_offset_x, 
-            "offset_y" : - city_size_offset_y});
-
-  if (size_str.length == 2) {
-    result.push({"key" : "city.size_" + msb + "0", 
-            "offset_x" : city_size_offset_x, 
-            "offset_y" : - city_size_offset_y});
-  }
-  
-  return result;
-}
 
 /**********************************************************************
 ...
@@ -902,7 +889,7 @@ function get_select_sprite()
 ****************************************************************************/
 function get_city_info_text(pcity)
 {
-  return {"key" : "city_text", "text" : decodeURIComponent(pcity['name']),
+  return {"key" : "city_text", "city" : pcity,
   		  "offset_x": citybar_offset_x, "offset_y" : citybar_offset_y}; 
 }
 

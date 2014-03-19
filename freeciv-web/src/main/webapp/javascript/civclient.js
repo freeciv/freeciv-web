@@ -399,6 +399,7 @@ function update_timeout()
       } else {
         $("#turn_done_button").button("option", "label", "Turn Done (" + remaining + "s)");
       }
+       $("#turn_done_button").tooltip({ disabled: false });
     }
   } 
 }

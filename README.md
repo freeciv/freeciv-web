@@ -56,8 +56,7 @@ operating system such as Windows, OSX or Linux.
 3. Install Git: http://git-scm.com/ then check out Freeciv-web from git to 
 a directory on your computer, by running these two git commands:
  ```bash
- git config --global core.autocrlf false
- git clone https://github.com/freeciv/freeciv-web.git --depth=10
+  git clone https://github.com/freeciv/freeciv-web.git --depth=10
  ```
 
 4. Run Vagrant with the following commands in your Freeciv-web directory from step 3:

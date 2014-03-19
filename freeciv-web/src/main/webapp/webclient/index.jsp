@@ -4,10 +4,11 @@
 	
 <title>Freeciv-web</title>
 
-<%--<script type="text/javascript" src="/javascript-compressed/waterbug.js"> </script> --%>
-
 <link rel="stylesheet" type="text/css" href="/css/webclient.min.css?ts=${initParam.buildTimeStamp}" />
 
+<script type="text/javascript">
+var ts="${initParam.buildTimeStamp}";
+</script>
 <script type="text/javascript" src="/javascript-compressed/jquery.min.js?ts=${initParam.buildTimeStamp}"></script>
 <script type="text/javascript" src="/javascript-compressed/webclient.js?ts=${initParam.buildTimeStamp}"></script>
 

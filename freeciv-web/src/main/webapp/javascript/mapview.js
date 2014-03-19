@@ -273,12 +273,12 @@ function init_sprites()
 
   var tileset_image_one = new Image();
   tileset_image_one.onload = preload_check; 
-  tileset_image_one.src = '/tileset/freeciv-web-tileset-0.png';
+  tileset_image_one.src = '/tileset/freeciv-web-tileset-0.png?ts=' + ts;
   tileset_images[0] = tileset_image_one;
 
   var tileset_image_two = new Image();
   tileset_image_two.onload = preload_check; 
-  tileset_image_two.src = '/tileset/freeciv-web-tileset-1.png';
+  tileset_image_two.src = '/tileset/freeciv-web-tileset-1.png?ts=' + ts;
   tileset_images[1] = tileset_image_two;
   
 }
@@ -292,6 +292,7 @@ function preload_check()
 
   if (loaded_images == 2) {
     $.unblockUI();
+    init_cache_sprites();
     init_common_intro_dialog();
   }
 }

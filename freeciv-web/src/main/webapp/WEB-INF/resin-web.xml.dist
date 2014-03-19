@@ -18,7 +18,7 @@
 
   <error-page>
     <error-code>404</error-code>
-    <location>/file_not_found.jsp</location>
+    <location>/404.jsp</location>
   </error-page>
   <rewrite-dispatch>
 	  <forward regexp="/robots.txt" target="/robots.jsp"/>

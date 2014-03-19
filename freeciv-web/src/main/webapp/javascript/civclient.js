@@ -23,6 +23,7 @@ var previous_scroll = 0;
 var phase_start_time = 0;
 
 var debug_active = false;
+var autostart = false;
 
 var username = null;
 
@@ -65,8 +66,10 @@ function civclient_init()
   $.blockUI.defaults['css']['color'] = "#fff";
   $.blockUI.defaults['theme'] = true;
 
+
+  if ($.getUrlVar('action') == "observe") observing = true;
+
   game_init();
-  observe_game_check();
   init_mapview();
   control_init();
 
@@ -343,9 +346,9 @@ function show_intro_dialog(title, message) {
 			buttons: 
 			{
 				"Start Game" : function() {
+					autostart = true;
 					if (validate_username()) {
 						$(this).dialog('close');
-						setTimeout("pregame_start_game();", 2000);
 					}
 				}, 
 				  "Customize Game": function() {
@@ -358,6 +361,10 @@ function show_intro_dialog(title, message) {
   if (($.getUrlVar('action') == "load" || $.getUrlVar('action') == "multi") 
          && $.getUrlVar('load') != "tutorial") {
     $(".ui-dialog-buttonset button").first().hide();
+  }
+  if ($.getUrlVar('action') == "observe") {
+    $(".ui-dialog-buttonset button").first().remove();
+    $(".ui-dialog-buttonset button").first().button("option", "label", "Observe Game");
   }
 
   if (is_small_screen()) {
@@ -422,17 +429,6 @@ function show_help()
 
 }
 
-
-/**************************************************************************
- Determines if this is a observer game, and if so, sends an observer cmd.
-**************************************************************************/
-function observe_game_check()
-{
-  if ($.getUrlVar('action') == 'observe') {
-    loadTimerId = setTimeout("request_observe_game();", 2000);
-    observing = true;
-  }
-}
 
 /**************************************************************************
 ...

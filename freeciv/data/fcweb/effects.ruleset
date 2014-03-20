@@ -577,14 +577,6 @@ reqs	=
       "Gov", "Democracy", "Player"
     }
 
-[effect_democracy_0]
-type    = "No_Incite"
-value   = 1
-reqs	=
-    { "type",       "name",      "range"
-      "Gov", "Democracy", "Player"
-    }
-
 [effect_communism_0]
 type    = "Veteran_Build"
 value   = 1
@@ -1261,14 +1253,6 @@ reqs	=
     }
 
 [effect_palace_3]
-type    = "No_Incite"
-value	= 1
-reqs	=
-    { "type", "name", "range"
-      "Building", "Palace", "City"
-    }
-
-[effect_palace_4]
 type    = "Capital_City"
 value	= 1
 reqs	=

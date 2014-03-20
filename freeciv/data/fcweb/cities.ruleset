@@ -128,7 +128,9 @@ graphic     = "city.european"
 graphic_alt = "-"
 citizens_graphic     = "ancient"
 citizens_graphic_alt = "generic"
-; No reqs
+reqs = { "type", "name", "range"
+         "Style", "European", "Player"
+       }
 replaced_by = "Industrial"
 
 [citystyle_classical]
@@ -137,7 +139,9 @@ graphic     = "city.classical"
 graphic_alt = "-"
 citizens_graphic     = "ancient"
 citizens_graphic_alt = "generic"
-; No reqs
+reqs = { "type", "name", "range"
+         "Style", "Classical", "Player"
+       }
 replaced_by = "Industrial"
 
 [citystyle_tropical]
@@ -146,7 +150,9 @@ graphic     = "city.tropical"
 graphic_alt = "city.european"
 citizens_graphic     = "ancient"
 citizens_graphic_alt = "generic"
-; No reqs
+reqs = { "type", "name", "range"
+         "Style", "Tropical", "Player"
+       }
 replaced_by = "Industrial"
 
 [citystyle_asian]
@@ -155,7 +161,9 @@ graphic     = "city.asian"
 graphic_alt = "city.classical"
 citizens_graphic     = "ancient"
 citizens_graphic_alt = "generic"
-; No reqs
+reqs = { "type", "name", "range"
+         "Style", "Asian", "Player"
+       }
 replaced_by = "Industrial"
 
 [citystyle_babylonian]
@@ -164,7 +172,9 @@ graphic     = "city.babylonian"
 graphic_alt = "city.classical"
 citizens_graphic     = "ancient"
 citizens_graphic_alt = "generic"
-; No reqs
+reqs = { "type", "name", "range"
+         "Style", "Babylonian", "Player"
+       }
 replaced_by = "Industrial"
 
 [citystyle_celtic]
@@ -173,7 +183,9 @@ graphic     = "city.celtic"
 graphic_alt = "city.european"
 citizens_graphic     = "ancient"
 citizens_graphic_alt = "generic"
-; No reqs
+reqs = { "type", "name", "range"
+         "Style", "Celtic", "Player"
+       }
 replaced_by = "Industrial"
 
 [citystyle_industrial]

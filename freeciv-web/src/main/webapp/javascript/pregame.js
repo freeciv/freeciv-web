@@ -215,7 +215,6 @@ function submit_nation_choise()
                       "nation_no" : chosen_nation,
                       "is_male" : true, /* FIXME */
                       "name" : client.conn['username'],
-                      "city_style" : nations[chosen_nation]['city_style'],
                       "style" : nations[chosen_nation]['style']};
   var myJSONText = JSON.stringify(test_packet);
   send_request (myJSONText);

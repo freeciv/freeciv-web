@@ -25,6 +25,8 @@ var CLAUSE_EMBASSY = 9;
 var diplomacy_request_queue = [];
 var diplomacy_clause_map = {};
 var active_diplomacy_meeting_id = null;
+var self_gold = 0;
+var counterpart_gold = 0;
 
 /**************************************************************************
  ...
@@ -214,7 +216,6 @@ function remove_clause_req(clause_no)
 function remove_clause(remove_clause) 
 {	
   var clause_list = diplomacy_clause_map[remove_clause['counterpart']];
-
   for (var i = 0; i < clause_list.length; i++) {
     var check_clause = clause_list[i];
     if (remove_clause['counterpart'] == check_clause['counterpart']
@@ -257,6 +258,13 @@ function client_diplomacy_clause_string(counterpart, giver, type, value)
   case CLAUSE_GOLD:
     var pplayer = players[giver];
     var nation = nations[pplayer['nation']]['adjective']
+    if (giver == client.conn.playing['playerno']) {
+      $("#self_gold").val(value);
+      self_gold = value;
+    } else {
+      $("#counterpart_gold").val(value);
+      counterpart_gold = value;
+    } 
     return "The " + nation + " give " + value + " gold";
     break;
   case CLAUSE_MAP:
@@ -372,7 +380,7 @@ function create_diplomacy_dialog(counterpart) {
 			bgiframe: true,
 			modal: false,
 			width: is_small_screen() ? "90%" : "50%",
-			height: 435,
+			height: 500,
 			buttons: {
 				"Accept treaty": function() {
 				        accept_treaty_req();
@@ -402,7 +410,9 @@ function create_diplomacy_dialog(counterpart) {
   // Diplomacy menu for current player.
   $("<div id='self_dipl_div' ></div>").appendTo("#diplomacy_player_box_self");
 
-  var fg_menu_self_html = "<a tabindex='0' class='fg-button fg-button-icon-right ui-widget ui-state-default ui-corner-all' id='hierarchy_self'><span class='ui-icon ui-icon-triangle-1-s'></span>Add Clause...</a> <div id='self-items' class='hidden'></div>";
+  var fg_menu_self_html = "<a tabindex='0' class='fg-button fg-button-icon-right ui-widget ui-state-default ui-corner-all' id='hierarchy_self'>" + 
+	  "<span class='ui-icon ui-icon-triangle-1-s'></span>Add Clause...</a> " + 
+	  "<span class='diplomacy_gold'>Gold:<input id='self_gold' type='number' step='1' size='3' value='0'></span><div id='self-items' class='hidden'></div>";
   $(fg_menu_self_html).appendTo("#self_dipl_div");
 
 
@@ -458,7 +468,9 @@ function create_diplomacy_dialog(counterpart) {
   // Counterpart menu.
   $("<div id='counterpart_dipl_div'></div>").appendTo("#diplomacy_player_box_counterpart");
 
-  var fg_menu_counterpart_html = "<a tabindex='0' class='fg-button fg-button-icon-right ui-widget ui-state-default ui-corner-all' id='hierarchy_counterpart'><span class='ui-icon ui-icon-triangle-1-s'></span>Add Clause...</a> <div id='counterpart-items' class='hidden'> </div>";
+  var fg_menu_counterpart_html = "<a tabindex='0' class='fg-button fg-button-icon-right ui-widget ui-state-default ui-corner-all' id='hierarchy_counterpart'>" + 
+	  "<span class='ui-icon ui-icon-triangle-1-s'></span>Add Clause...</a> " + 
+	  "<span class='diplomacy_gold'>Gold:<input id='counterpart_gold' type='number' step='1' size='3' value='0'></span><div id='counterpart-items' class='hidden'> </div>";
   $(fg_menu_counterpart_html).appendTo("#counterpart_dipl_div");
 
 
@@ -506,8 +518,50 @@ function create_diplomacy_dialog(counterpart) {
     flyOut: true
   });
 
+  $("#self_gold").attr({
+       "max" : pplayer['gold'],       
+       "min" : 0       
+    });
 
+  $("#counterpart_gold").attr({
+       "max" : counterpart['gold'],       
+       "min" : 0       
+    });
 
+  $("#counterpart_gold").change(function() {
+    if (counterpart_gold != 0) {
+	  var packet = {"type" : packet_diplomacy_remove_clause_req, 
+	         "counterpart" : active_diplomacy_meeting_id,
+                 "giver": counterpart['playerno'],
+                 "clause_type" : CLAUSE_GOLD,
+                 "value": counterpart_gold};
+     send_request (JSON.stringify(packet)); 
+  }
+   var packet = {"type" : packet_diplomacy_create_clause_req, 
+	         "counterpart" : active_diplomacy_meeting_id,
+                 "giver" : counterpart['playerno'],
+                 "clause_type" : CLAUSE_GOLD,
+                 "value" : parseFloat($("#counterpart_gold").val())};
+    send_request (JSON.stringify(packet));
+
+  });
+
+   $("#self_gold").change(function() {
+   if (self_gold != 0) {
+	   var packet = {"type" : packet_diplomacy_remove_clause_req, 
+	         "counterpart" : active_diplomacy_meeting_id,
+                 "giver": pplayer['playerno'],
+                 "clause_type" : CLAUSE_GOLD,
+                 "value": self_gold};
+     send_request (JSON.stringify(packet)); 
+   }
+     var packet = {"type" : packet_diplomacy_create_clause_req, 
+	         "counterpart" : active_diplomacy_meeting_id,
+                 "giver" : pplayer['playerno'],
+                 "clause_type" : CLAUSE_GOLD,
+                 "value" : parseFloat($("#self_gold").val())};
+    send_request (JSON.stringify(packet));
+   });
 }
 
 

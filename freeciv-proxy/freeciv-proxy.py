@@ -98,7 +98,6 @@ class WSHandler(websocket.WebSocketHandler):
             civcom.start()
             civcoms[key] = civcom
 
-            time.sleep(0.4)
             return civcom
         else:
             usrcivcom = civcoms[key]

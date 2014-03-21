@@ -812,6 +812,7 @@ function get_city_sprite(pcity)
   var owner_id = pcity['owner'];
   var player = players[owner_id];
   var style_id = player['city_style'];
+  if (style_id == -1) style_id = 0;   /* sometimes a player has no city_style. */
   var city_rule = city_rules[style_id];
   
   var size = 0;

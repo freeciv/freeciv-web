@@ -18,7 +18,7 @@ logdir = "/tmp/"
 
 game_types = ["singleplayer", "multiplayer"]
 pubscript = "pubscript_"
-server_capacity = 3
+server_capacity = 6
 server_limit = 200  
 metachecker_interval = 60
 

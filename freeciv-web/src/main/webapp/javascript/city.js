@@ -746,3 +746,61 @@ function city_population(pcity)
   /*  Sum_{i=1}^{n} i  ==  n*(n+1)/2  */
   return pcity['size'] * (pcity['size'] + 1) * 5;
 }
+
+
+/**************************************************************************
+ Rename a city
+**************************************************************************/
+function rename_city()
+{
+  if (active_city == null) return;
+
+  // reset dialog page.
+  $("#city_name_dialog").remove();
+  $("<div id='city_name_dialog'></div>").appendTo("div#game_page");
+
+  $("#city_name_dialog").html($("<div>What should we call this city?</div>"
+		  	      + "<input id='city_name_req' type='text' value='" 
+			      + active_city['name'] + "'>"));
+  $("#city_name_dialog").attr("title", "Rename City");
+  $("#city_name_dialog").dialog({
+			bgiframe: true,
+			modal: true,
+			width: "300",
+			close: function() {
+				keyboard_input=true;
+			},
+			buttons: [	{
+					text: "Cancel",
+				        click: function() {
+						$("#city_name_dialog").remove();
+        					keyboard_input=true;
+					}
+				},{
+					text: "Ok",
+				        click: function() {
+						var name = $("#city_name_req").val();
+						var packet = {"type" : packet_city_rename, "name" : encodeURIComponent(name), "city_id" : active_city['id'] };
+						send_request (JSON.stringify(packet));
+						$("#city_name_dialog").remove();
+						keyboard_input=true;
+					}
+					}
+				]
+		});
+	
+  $("#city_name_dialog").dialog('open');		
+
+  $('#city_name_dialog').keyup(function(e) {
+    if (e.keyCode == 13) {
+      var name = $("#city_name_req").val();
+      var packet = {"type" : packet_city_rename, "name" : encodeURIComponent(name), "city_id" : active_city['id'] };
+      send_request (JSON.stringify(packet));
+      $("#city_name_dialog").remove();
+      keyboard_input=true;
+    }
+  });
+  keyboard_input=false;
+
+
+}

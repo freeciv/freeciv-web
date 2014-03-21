@@ -86,3 +86,9 @@ var VUT_LAST = 20;
 var RPT_POSSIBLE = 0; /* We want to know if it is possible that effect is active */
 var RPT_CERTAIN = 1;  /* We want to know if it is certain that effect is active  */
 
+var O_FOOD = 0;
+var O_SHIELD = 1;
+var O_TRADE = 2;
+var O_GOLD = 3;
+var O_LUXURY = 4;
+var O_SCIENCE = 5;

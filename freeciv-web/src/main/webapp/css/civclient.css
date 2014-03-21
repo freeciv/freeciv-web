@@ -488,4 +488,6 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
   font: 100% sans-serif; 
 }
 
-
+#city_stats tr {
+  line-height: 14px;
+}

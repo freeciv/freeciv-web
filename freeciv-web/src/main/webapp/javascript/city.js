@@ -189,6 +189,10 @@ function show_city_dialog(pcity)
   $("#city_luxury").html(pcity['prod'][4]);
   $("#city_science").html(pcity['prod'][5]);
 
+  $("#city_corruption").html(pcity['waste'][O_TRADE]);
+  $("#city_waste").html(pcity['waste'][O_SHIELD]);
+  $("#city_pollution").html(pcity['pollution']);
+
   /* Handle citizens and specialists */
   var specialist_html = "";
   var citizen_types = ["angry", "unhappy", "content", "happy"];

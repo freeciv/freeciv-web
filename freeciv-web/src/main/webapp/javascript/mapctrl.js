@@ -60,7 +60,7 @@ function mapview_mouse_down(e)
     /* Left mouse button is down */
     if (goto_active) return;
 
-    setTimeout("check_mouse_drag_unit(" + mouse_x + "," + mouse_y + ");", 100);
+    setTimeout("check_mouse_drag_unit(" + mouse_x + "," + mouse_y + ");", 200);
   } else if (middleclick) {
     popit(); 
   } else {
@@ -79,7 +79,7 @@ function mapview_touch_start(e)
   touch_start_x = e.originalEvent.touches[0].pageX - $('#canvas').position().left;
   touch_start_y = e.originalEvent.touches[0].pageY - $('#canvas').position().top;
 
-  setTimeout("check_mouse_drag_unit(" + touch_start_x + "," + touch_start_y + ");", 100);
+  setTimeout("check_mouse_drag_unit(" + touch_start_x + "," + touch_start_y + ");", 200);
 
 }
 
@@ -157,8 +157,8 @@ function check_mouse_drag_unit(canvas_x, canvas_y)
 
   if (sunit != null) {
     if (sunit['owner'] == client.conn.playing.playerno) {
-      set_unit_focus_and_redraw(sunit);
-      activate_goto();
+      set_unit_focus(sunit);
+      if (is_touch_device()) activate_goto();
     }
   }
 

@@ -494,7 +494,12 @@ function find_best_focus_candidate(accept_current)
 function set_unit_focus(punit)
 {
   current_focus = [];
-  current_focus[0] = punit;
+  if (punit == null) {
+    current_focus = [];
+  } else {
+    current_focus[0] = punit;
+  }
+  update_unit_info_label(current_focus);
 }
 
 /**************************************************************************

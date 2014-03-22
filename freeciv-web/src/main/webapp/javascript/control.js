@@ -1156,7 +1156,7 @@ function key_unit_auto_settle()
     var punit = funits[i]; 
     request_unit_autosettlers(punit);
   }  
-  update_unit_focus();
+  setTimeout(update_unit_focus, 1000);
 }
 
 

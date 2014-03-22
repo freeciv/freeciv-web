@@ -25,6 +25,7 @@ import json
 import uuid
 
 PROXY_PORT = 8002
+CONNECTION_LIMIT = 1000
 
 civcoms = {}
 
@@ -56,7 +57,7 @@ class WSHandler(websocket.WebSocketHandler):
         self.set_nodelay(True)
 
     def on_message(self, message):
-        if (not self.is_ready):
+        if (not self.is_ready and len(civcoms) <= CONNECTION_LIMIT):
             # called the first time the user connects.
             login_message = json.loads(message)
             self.username = login_message['username']
@@ -100,8 +101,7 @@ class WSHandler(websocket.WebSocketHandler):
 
             return civcom
         else:
-            usrcivcom = civcoms[key]
-            return usrcivcom
+            return civcoms[key]
 
 
 if __name__ == "__main__":

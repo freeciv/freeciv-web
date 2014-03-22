@@ -25,8 +25,6 @@ var CLAUSE_EMBASSY = 9;
 var diplomacy_request_queue = [];
 var diplomacy_clause_map = {};
 var active_diplomacy_meeting_id = null;
-var self_gold = 0;
-var counterpart_gold = 0;
 
 /**************************************************************************
  ...
@@ -260,10 +258,8 @@ function client_diplomacy_clause_string(counterpart, giver, type, value)
     var nation = nations[pplayer['nation']]['adjective']
     if (giver == client.conn.playing['playerno']) {
       $("#self_gold").val(value);
-      self_gold = value;
     } else {
       $("#counterpart_gold").val(value);
-      counterpart_gold = value;
     } 
     return "The " + nation + " give " + value + " gold";
     break;
@@ -528,40 +524,55 @@ function create_diplomacy_dialog(counterpart) {
        "min" : 0       
     });
 
+  var wto;
   $("#counterpart_gold").change(function() {
-    if (counterpart_gold != 0) {
-	  var packet = {"type" : packet_diplomacy_remove_clause_req, 
+    clearTimeout(wto);
+    wto = setTimeout(function() {
+    var clauses = diplomacy_clause_map[active_diplomacy_meeting_id];
+    for (var i = 0; i < clauses.length; i++) {
+      var clause = clauses[i];
+      if (clause['giver'] == counterpart['playerno'] && clause['clause_type'] == CLAUSE_GOLD) {
+	 var packet = {"type" : packet_diplomacy_remove_clause_req, 
 	         "counterpart" : active_diplomacy_meeting_id,
-                 "giver": counterpart['playerno'],
+                 "giver": clause['giver'],
                  "clause_type" : CLAUSE_GOLD,
-                 "value": counterpart_gold};
-     send_request (JSON.stringify(packet)); 
-  }
-   var packet = {"type" : packet_diplomacy_create_clause_req, 
+                 "value": clause['value']};
+       send_request (JSON.stringify(packet)); 
+      }
+    }
+  
+     var packet = {"type" : packet_diplomacy_create_clause_req, 
 	         "counterpart" : active_diplomacy_meeting_id,
                  "giver" : counterpart['playerno'],
                  "clause_type" : CLAUSE_GOLD,
                  "value" : parseFloat($("#counterpart_gold").val())};
     send_request (JSON.stringify(packet));
-
+    }, 500);
   });
 
    $("#self_gold").change(function() {
-   if (self_gold != 0) {
-	   var packet = {"type" : packet_diplomacy_remove_clause_req, 
+    clearTimeout(wto);
+    wto = setTimeout(function() {
+    var clauses = diplomacy_clause_map[active_diplomacy_meeting_id];
+    for (var i = 0; i < clauses.length; i++) {
+      var clause = clauses[i];
+      if (clause['giver'] == pplayer['playerno'] && clause['clause_type'] == CLAUSE_GOLD) {
+	var packet = {"type" : packet_diplomacy_remove_clause_req, 
 	         "counterpart" : active_diplomacy_meeting_id,
-                 "giver": pplayer['playerno'],
+                 "giver": clause['giver'],
                  "clause_type" : CLAUSE_GOLD,
-                 "value": self_gold};
-     send_request (JSON.stringify(packet)); 
-   }
+                 "value": clause['value']};
+       send_request (JSON.stringify(packet)); 
+      }
+    }
+
      var packet = {"type" : packet_diplomacy_create_clause_req, 
 	         "counterpart" : active_diplomacy_meeting_id,
                  "giver" : pplayer['playerno'],
                  "clause_type" : CLAUSE_GOLD,
                  "value" : parseFloat($("#self_gold").val())};
     send_request (JSON.stringify(packet));
+    }, 500);
    });
 }
-
 

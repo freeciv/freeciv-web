@@ -5,10 +5,11 @@ Major:
 - Update Freeciv-web to work with latest Freeciv.org SVN trunk version.
 - Integrate Freeciv-web into Freeciv.org codebase as much as possible.
 - Remove need for patches in /freeciv/patches directory.
-- Remove freeciv-proxy, integrate a WebSocket server into the freeciv C server.
+- Remove freeciv-proxy, integrate a WebSocket server into the freeciv C server. Integrate http://libwebsockets.org into the Freeciv C server. This is a lot of work.
 - Add better goto handling with display of the number of turns required for goto
 
 Medium:
+- Implement city production worklists. 
 - Make goto lines wrap in X direction of the map.
 - Show city revolt graphics
 - Playback of games.
@@ -20,13 +21,13 @@ Medium:
 - Better interface to load units into boats and transports.
 - Show more traderoute info in cities.
 - "Peace wonders" don't work.
-- Paratroopers can't move
-- Nukes can't move
 - Planes goto get blocked by ground units.
 - Nations dialog: Show who we are waiting on.
 - Show number of turns a diplomatic agreement will last.
-- not able to steal tech with diplomat.
+- not able to steal tech with diplomat. 
 - diplomats inside cities can't see units there.
+- Sometimes other countries won't "meet" even if you're in contact and are on good terms.
+- Cannot disband unit in city to gain half production back. However, disbanding on the map still seems to give you that bonus. It's just not clear/available in the city dialog. 
 
 
 Minor/Other:

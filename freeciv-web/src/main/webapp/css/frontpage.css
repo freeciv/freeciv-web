@@ -109,3 +109,12 @@ body {
     font-size: 48px;
 }
 }
+
+#logo {
+  padding: 10px;
+  margin: 5px;
+}
+
+#logo img {
+  width: 80%;
+}

@@ -308,7 +308,8 @@ function update_unit_focus()
 
     if (punit['movesleft'] > 0 
 	  && punit['done_moving'] == false
-	  && punit['ai'] == false) {
+	  && punit['ai'] == false
+	  && punit['activity'] == ACTIVITY_IDLE) {
       return;
     }
 
@@ -981,7 +982,7 @@ function key_unit_fortify()
     var punit = funits[i]; 
     request_new_unit_activity(punit, ACTIVITY_FORTIFYING, EXTRA_NONE);
   }
-  update_unit_focus();
+  setTimeout(update_unit_focus, 700);
 }
 
 /**************************************************************************
@@ -1161,7 +1162,7 @@ function key_unit_auto_settle()
     var punit = funits[i]; 
     request_unit_autosettlers(punit);
   }  
-  setTimeout(update_unit_focus, 1000);
+  setTimeout(update_unit_focus, 700);
 }
 
 

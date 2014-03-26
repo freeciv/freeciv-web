@@ -72,7 +72,8 @@ class WSHandler(websocket.WebSocketHandler):
             return
 
         # get the civcom instance which corresponds to this user.
-        self.civcom = self.get_civcom(self.username, self.civserverport, self)
+        if (self.is_ready): 
+            self.civcom = self.get_civcom(self.username, self.civserverport, self)
 
         if (self.civcom is None):
             self.write_message("Error: Could not authenticate user.")
@@ -95,7 +96,7 @@ class WSHandler(websocket.WebSocketHandler):
         if key not in list(civcoms.keys()):
             if (int(civserverport) < 5000):
                 return None
-            civcom = CivCom(username, int(civserverport), self)
+            civcom = CivCom(username, int(civserverport), key, self)
             civcom.start()
             civcoms[key] = civcom
 

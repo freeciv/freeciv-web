@@ -948,7 +948,7 @@ function key_unit_auto_explore()
     var punit = funits[i]; 
     request_new_unit_activity(punit, ACTIVITY_EXPLORE, EXTRA_NONE);
   }
-  update_unit_focus();
+  setTimeout(update_unit_focus, 700);
 }
 
 /**************************************************************************

@@ -41,7 +41,7 @@ resin_url="http://www.caucho.com/download/resin-${resin_version}.tar.gz"
 tornado_url="https://pypi.python.org/packages/source/t/tornado/tornado-3.2.tar.gz"
 
 # Based on fresh install of Ubuntu 12.04
-dependencies="maven2 mysql-server-5.5 openjdk-7-jdk libcurl4-openssl-dev nginx libjansson-dev subversion pngcrush python3-pillow libtool automake autoconf autotools-dev language-pack-en python3.3-dev python3-setuptools libglib2.0-dev libbz2-dev"
+dependencies="maven mysql-server-5.5 openjdk-7-jdk libcurl4-openssl-dev nginx libjansson-dev subversion pngcrush python3-pillow libtool automake autoconf autotools-dev language-pack-en python3.3-dev python3-setuptools libglib2.0-dev libbz2-dev"
 
 ## Setup
 mkdir -p ${basedir}

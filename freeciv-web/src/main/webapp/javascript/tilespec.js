@@ -197,19 +197,15 @@ function fill_sprite_array(layer, ptile, pedge, pcorner, punit, pcity, citymode)
     case LAYER_UNIT:
     case LAYER_FOCUS_UNIT:
       if (do_draw_unit && XOR(layer == LAYER_UNIT, unit_is_in_focus(punit)) && active_city == null) {
-        var stacked = true; /*ptile != null && (unit_list_size(ptile->units) > 1);*/
+        var stacked = (ptile['units'] != null && ptile['units'].length > 1);
         var backdrop = false; /* !pcity;*/
-      
-        var stacked = ptile;
-
 
         if (unit_is_in_focus(punit)) {
           sprite_array.push(get_select_sprite());
         } 
 
-
-	    /* TODO: Special case for drawing the selection rectangle.  The blinking
-	    * unit is handled separately, inside get_drawable_unit(). */
+        /* TODO: Special case for drawing the selection rectangle.  The blinking
+        * unit is handled separately, inside get_drawable_unit(). */
         sprite_array = sprite_array.concat(fill_unit_sprite_array(punit, stacked, backdrop));
      
     }
@@ -483,6 +479,8 @@ function fill_unit_sprite_array(punit, stacked, backdrop)
   }
   
   result.push(get_unit_hp_sprite(punit));
+  if (stacked) result.push(get_unit_stack_sprite());
+  if (punit['veteran'] > 0) result.push(get_unit_veteran_sprite(punit));
              
   return result;           
 
@@ -668,6 +666,16 @@ function get_unit_nation_flag_sprite(punit)
 /**********************************************************************
   ...
 ***********************************************************************/
+function get_unit_stack_sprite(punit)
+{
+  return {"key" : "unit.stack", 
+          "offset_x" : unit_flag_offset_x + -25, 
+          "offset_y" : - unit_flag_offset_y - 15};
+}
+
+/**********************************************************************
+  ...
+***********************************************************************/
 function get_unit_hp_sprite(punit)
 {
   var hp = punit['hp'];
@@ -680,6 +688,16 @@ function get_unit_hp_sprite(punit)
   return {"key" : "unit.hp_" + healthpercent, 
           "offset_x" : unit_flag_offset_x + -25 + unit_offset['x'], 
           "offset_y" : - unit_flag_offset_y - 15 + unit_offset['y']};
+}
+
+/**********************************************************************
+  ...
+***********************************************************************/
+function get_unit_veteran_sprite(punit)
+{
+  return {"key" : "unit.vet_" + punit['veteran'], 
+          "offset_x" : unit_activity_offset_x, 
+          "offset_y" : - unit_activity_offset_y - 5};
 }
 
 /**********************************************************************

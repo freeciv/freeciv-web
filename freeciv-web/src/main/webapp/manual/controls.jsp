@@ -145,7 +145,7 @@ friendly cities. </td>
     </tr>
     <tr>
       <td></td>
-      <td style="text-align: center;"><kbd>Ctrl-U</kbd></td>
+      <td style="text-align: center;"><kbd>U</kbd></td>
       <td>Upgrade Unit</td>
     </tr>
 

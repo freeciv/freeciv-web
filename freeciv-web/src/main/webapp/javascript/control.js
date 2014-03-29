@@ -776,9 +776,7 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift)
     break;      
 
    case 'U':
-      if (ctrl) {
-        key_unit_upgrade();
-      }
+      key_unit_upgrade();
     break;  
 
     case 'S':

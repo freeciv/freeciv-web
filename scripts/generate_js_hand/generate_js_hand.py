@@ -45,14 +45,8 @@ f.write("""
     update_map_canvas_full();
   }
 
- } catch(e) {
-   if (e.message != null && e.fileName != null && e.lineNumber != null) {
-     js_breakpad_report(e.message, e.fileName, e.lineNumber);
-   } else if (e.message != null) {
-     js_breakpad_report(e.message, "generate_js_hand.py", 0);
-   } else {
-     js_breakpad_report("unknown network error", "generate_js_hand.py", 0);
-   }
+ } catch(err) {
+   window.trackJs.track(err); 
  }
 
 }

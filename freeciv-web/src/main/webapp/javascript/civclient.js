@@ -45,27 +45,9 @@ $(document).ready(function() {
 function civclient_init() 
 {
 
-  setup_crash_reporting();
-
-  if (window['loadFirebugConsole']) {
-	window.loadFirebugConsole();
-  } else {
-	if (!window['console']) {
-         console = {
-            log: function() {},
-            debug: function() {},
-            info: function() {},
-            warn: function() {},
-            assert: function() {}
-          }
-
-	}
-  }
-
   $.blockUI.defaults['css']['backgroundColor'] = "#222";
   $.blockUI.defaults['css']['color'] = "#fff";
   $.blockUI.defaults['theme'] = true;
-
 
   if ($.getUrlVar('action') == "observe") observing = true;
 

@@ -115,9 +115,40 @@ friendly cities. </td>
     </tr>
     <tr>
       <td></td>
-      <td style="text-align: center;"><kbd>P</kbd></td>
+      <td style="text-align: center;"><kbd>Shift-P</kbd></td>
       <td>Pillage</td>
     </tr>
+    <tr>
+      <td></td>
+      <td style="text-align: center;"><kbd>P</kbd></td>
+      <td>Remove pollution</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td style="text-align: center;"><kbd>O</kbd></td>
+      <td>Transform terrain</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td style="text-align: center;"><kbd>N</kbd></td>
+      <td>Remove nuclear fallout</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td style="text-align: center;"><kbd>Shift-L</kbd></td>
+      <td>Airlift</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td style="text-align: center;"><kbd>Shift-N</kbd></td>
+      <td>Explode Nuke</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td style="text-align: center;"><kbd>U</kbd></td>
+      <td>Upgrade Unit</td>
+    </tr>
+
   </tbody>
 </table>
 <br>

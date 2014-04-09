@@ -70,22 +70,21 @@
 
       <!-- Jumbotron -->
       <div class="jumbotron">
-        <h1 id="freeciv_header_text">Freeciv HTML5 Online Version</h1>
+      <p id="logo"><img src="images/freeciv-fp-logo-2.png" title="Freeciv HTML5 Online version" alt="Freeciv HTML5 Online version"> </p>
         <p class="lead">Freeciv is a Free and Open Source empire-building strategy game inspired by the history of human civilization. The game commences in prehistory and your mission is to lead your tribe from the Stone Age to the Space Age. Freeciv can be played online in your web-browser for free. Choose how you want to play: </p>
 
 
 	<p id="fc_button_group">
-          <a href="/preload.jsp?redir=/civclientlauncher?action=new" 
+          <a href="/webclient/?action=new" 
              id="single-button" class="btn btn-primary btn-lg">Single-player &raquo;</a>
-          <a href="/preload.jsp?redir=/meta/metaserver.php%3Ftab%3Dmulti" 
+          <a href="/meta/metaserver.php?tab=multi" 
              id="multi-button" class="btn btn-info btn-lg">Multi-player &raquo;</a>
-          <a href="/preload.jsp?redir=/wireframe.jsp?do=scenarios" 
+          <a href="/webclient/?action=load&scenario=true" 
              id="scenarios-button" class="btn btn-info btn-lg">Scenarios &raquo;</a>
-          <a href="/preload.jsp?redir=/tutorial.jsp" 
+          <a href="/webclient/?action=load&load=tutorial&scenario=true" 
              id="tutorial-button" class="btn btn-info btn-lg">Tutorial &raquo;</a>
-          <a href="/wireframe.jsp?do=load" 
+         <a href="/webclient/?action=load"
              id="load-button" class="btn btn-default btn-lg">Load Game &raquo;</a>
-
 
      </p>
 
@@ -99,7 +98,7 @@
                   <h2>HTML5 browser game</h2>
 
           <p>Freeciv-web can be played online using a desktop computer, mobile phone or tablet. Freeciv-web has been optimized for the iPhone 5 on mobile and modern HTML5 browsers such as Chrome and Firefox.</p>
-          <p><a class="btn btn-success" href="/preload.jsp?redir=/civclientlauncher?action=new">Play Freeciv now &raquo;</a>
+          <p><a class="btn btn-success" href="/webclient?action=new">Play Freeciv now &raquo;</a>
           </p>
 	<br><br>
 
@@ -123,9 +122,18 @@
 
         </div>
         <div class="col-lg-4">
-		<h2>Free strategy game with isometric graphics</h2>
-			 
-                          <img src="images/freeciv-fp-logo.png"> 
+		<h2>Free strategy game with these features</h2>
+		<ul>
+			<li>Playable for free in your HTML5 capable browser, mobile or tablet</li>
+			<li>Isometric 2d graphics</li>
+			<li>Artificial Intelligence (AI) computer-controlled players. </li>
+			<li>More than 50 playable units and 541 nations.</li>
+			<li>Up to 126 players in one game!</li>
+			<li>Full Fog of War</li>
+			<li>Freeciv is open source software released under the GNU General Public License</li>
+
+		</ul>		
+                          
        </div>
         <div class="col-lg-4">
           <p style="text-align: right;">
@@ -145,7 +153,7 @@
 
       <!-- Site footer -->
       <div class="footer">
-        <p>&copy; The Freeciv Project 2013-2014. Freeciv-web is is free and open source software. The Freeciv C server is released under the GNU General Public License, while the Freeciv-web client is released under the GNU Affero General Public License.</p>
+	      <p>&copy; The Freeciv Project 2013-2014. Freeciv-web is is free and open source software. The Freeciv C server is released under the <a href="https://www.gnu.org/copyleft/gpl.html">GNU General Public License</a>, while the Freeciv-web client is released under the <a href="http://www.gnu.org/licenses/agpl-3.0.html">GNU Affero General Public License</a>.</p>
 
   	<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 			<input type="hidden" name="cmd" value="_s-xclick">

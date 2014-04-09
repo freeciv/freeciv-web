@@ -209,11 +209,15 @@ button {
 #diplomacy_messages {
   background-color: #222222;
   min-height: 120px;
-  max-height: 250px;
+  max-height: 200px;
   overflow: auto;
   border-color: 1px solid;
   border: 1px solid #555555
   width: 100%;
+}
+
+#diplomacy_dialog {
+  overflow: hidden;
 }
 
 #diplomacy_player_box_self {
@@ -488,4 +492,23 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
   font: 100% sans-serif; 
 }
 
+#city_stats tr {
+  line-height: 14px;
+}
 
+#self_gold {
+  height: 15px;
+  font-size: 14px;
+  width: 40px;
+}
+
+#counterpart_gold {
+  height: 15px;
+  font-size: 14px;
+  width: 40px;
+}
+
+.diplomacy_gold {
+  padding: 8px;
+  font-size: 80%;
+}

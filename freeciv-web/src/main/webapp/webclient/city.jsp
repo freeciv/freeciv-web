@@ -12,6 +12,7 @@
         <button type="button" class="button" onClick="close_city_dialog();" >Close</button>
         <button type="button" class="button" onClick="next_city();" >Next city</button>
         <button type="button" class="button" onClick="change_city_production_dialog();" >Change production</button>
+        <button type="button" class="button" onClick="rename_city();" >Rename</button>
         <button id="buy_button" type="button" class="button" onClick="request_city_buy();" >Buy</button>
       </div>
     </div>
@@ -25,13 +26,16 @@
 	  <div id='city_production_turns_overview'></div>
 	</div>
 	<div style="float: left; margin-top: -20px; padding-left: 20px;"> 
-	  <table>
+	  <table id="city_stats">
 	  <tr><td>Food: </td><td id="city_food"></td></tr>
 	  <tr><td>Prod: </td><td id="city_prod"></td></tr>
 	  <tr><td>Trade: </td><td id="city_trade"></td></tr>
 	  <tr><td>Gold:: </td><td id="city_gold"></td></tr>
 	  <tr><td>Luxury: </td><td id="city_luxury"></td></tr>
 	  <tr><td>Science: </td><td id="city_science"></td></tr>
+	  <tr><td>Corruption: </td><td id="city_corruption"></td></tr>
+	  <tr><td>Waste: </td><td id="city_waste"></td></tr>
+	  <tr><td>Pollution: </td><td id="city_pollution"></td></tr>
   	  </table>
         </div>
       </div>

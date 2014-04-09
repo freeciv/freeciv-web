@@ -15,7 +15,7 @@
     <a href="#" onclick="key_unit_fortify();"><img src="/images/orders/fortify_default.png" name="fortify_button" alt="" border="0" width="30" height="30"></a>
   </div>
  
-  <div id="order_pillage" class="order_button" title="Pillage (P)">
+  <div id="order_pillage" class="order_button" title="Pillage (Shift-P)">
     <a href="#" onclick="key_unit_pillage();"><img src="/images/orders/pillage.png" name="pillage_button" alt="" border="0" width="30" height="30"></a>
   </div>
 
@@ -50,8 +50,18 @@
     <a href="#" onclick="key_unit_mine();"><img src="/images/orders/mine_default.png" name="mine_button" alt="" border="0" width="30" height="30"></a>
   </div>
 
+  <div id="order_pollution" class="order_button" title="Remove pollution (P)">
+    <a href="#" onclick="key_unit_pollution();"><img src="/images/orders/pollution.png" name="pollution_button" alt="" border="0" width="30" height="30"></a>
+  </div>
+ 
+  <div id="order_paradrop" class="order_button" title="Paradrop">
+    <a href="#" onclick="key_unit_paradrop();"><img src="/images/orders/paradrop.png" name="paradrop_button" alt="" border="0" width="30" height="30"></a>
+  </div>
 
-  
+  <div id="order_nuke" class="order_button" title="Nuke (Shift-N)">
+    <a href="#" onclick="key_unit_nuke();"><img src="/images/orders/nuke.png" name="nuke_button" alt="" border="0" width="30" height="30"></a>
+  </div>
+
 </div>
 
 <div id="game_unit_orders_settlers" style="display: none;">

@@ -59,8 +59,10 @@ wget ${resin_url}
 tar xvfz resin-${resin_version}.tar.gz
 rm -Rf resin
 mv resin-${resin_version} resin
-mkdir resin/log
-chmod -R 777 resin/log/ resin/webapps/
+cd resin
+./configure --prefix=`pwd`; make; make install
+cd ..
+chmod -R 777 resin
 
 
 echo "==== Fetching/Installing Tornado Web Server ===="
@@ -85,8 +87,8 @@ echo "==== Building freeciv-web ===="
 sed -e "s/user>root/user>${mysql_user}/" -e "s/password>changeme/password>${mysql_pass}/" ${basedir}/freeciv-web/src/main/webapp/WEB-INF/resin-web.xml.dist > ${basedir}/freeciv-web/src/main/webapp/WEB-INF/resin-web.xml
 cd ${basedir}/freeciv-img-extract/ && ./setup_links.sh && ./sync.sh
 cd ${basedir}/scripts && ./sync-js-hand.sh
+cd ${basedir}/freeciv && rm -rf freeciv
 cd ${basedir}/freeciv-web && ./build.sh
-
 
 echo "Starting Freeciv-web..."
 service nginx start

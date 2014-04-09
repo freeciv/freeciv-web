@@ -23,6 +23,8 @@ var allow_right_click = false;
 var current_focus = [];
 var goto_active = false;
 var goto_preview_active = true;
+var paradrop_active = false;
+var airlift_active = false;
 
 /* Selecting unit from a stack without popup. */
 var SELECT_POPUP = 0;
@@ -59,6 +61,8 @@ function control_init()
   $("#city_canvas").click(city_mapview_mouse_click);
   
   $("#turn_done_button").click(send_end_turn);
+  $("#turn_done_button").tooltip();
+
   $("#freeciv_logo").click(function(event) {
     window.open('http://play.freeciv.org/', '_new');
     });
@@ -304,7 +308,8 @@ function update_unit_focus()
 
     if (punit['movesleft'] > 0 
 	  && punit['done_moving'] == false
-	  && punit['ai'] == false) {
+	  && punit['ai'] == false
+	  && punit['activity'] == ACTIVITY_IDLE) {
       return;
     }
 
@@ -382,6 +387,7 @@ function update_unit_order_commands()
       $("#order_sentry").hide();
       $("#order_explore").hide();
       $("#order_auto_settlers").show();
+      $("#order_pollution").show();
     } else {
       $("#order_road").hide();
       $("#order_railroad").hide();
@@ -391,13 +397,26 @@ function update_unit_order_commands()
       $("#order_auto_settlers").hide();
       $("#order_sentry").show();
       $("#order_explore").show();
+      $("#order_pollution").hide();
 
     }
 
-    if (ptype['name'] == "Settlers" || ptype['name'] == "Engineers") {
+    if (ptype['name'] == "Settlers") {
       $("#order_build_city").show();
     } else {
       $("#order_build_city").hide();
+    }
+
+    if (ptype['name'] == "Nuclear") {
+      $("#order_nuke").show();
+    } else {
+      $("#order_nuke").hide();
+    }
+
+    if (ptype['name'] == "Paratroopers") {
+      $("#order_paradrop").show();
+    } else {
+      $("#order_paradrop").hide();
     }
 
     if (ptype['attack_strength'] > 0) {
@@ -476,7 +495,12 @@ function find_best_focus_candidate(accept_current)
 function set_unit_focus(punit)
 {
   current_focus = [];
-  current_focus[0] = punit;
+  if (punit == null) {
+    current_focus = [];
+  } else {
+    current_focus[0] = punit;
+  }
+  update_unit_info_label(current_focus);
 }
 
 /**************************************************************************
@@ -632,7 +656,22 @@ function do_map_click(ptile, qtype)
   
     deactivate_goto();
     update_unit_focus();
-  
+
+  } else if (paradrop_active) {
+    var punit = current_focus[0];
+    var packet = {"type" : packet_unit_paradrop_to, "unit_id" : punit['id'], "tile": ptile['index'] };
+    send_request (JSON.stringify(packet));
+    paradrop_active = false;
+
+  } else if (airlift_active) {
+    var punit = current_focus[0];
+    var pcity = tile_city(ptile);
+    if (pcity != null) {
+      var packet = {"type" : packet_unit_airlift, "unit_id" : punit['id'], "city_id": pcity['id'] };
+      send_request (JSON.stringify(packet));
+    }
+    airlift_active = false;
+
   } else {
     var sunits = tile_units(ptile);
     
@@ -714,6 +753,12 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift)
       key_unit_auto_settle();
     break;
 
+    case 'L':
+      if (shift) {
+        key_unit_airlift();
+      }
+    break;
+
     case 'W':
       key_unit_wait();
     break;
@@ -730,17 +775,37 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift)
       key_unit_irrigate();
     break;      
 
+   case 'U':
+      key_unit_upgrade();
+    break;  
+
     case 'S':
       key_unit_sentry();
     break;         
     case 'P':
-      key_unit_pillage();
+      if (shift) {
+        key_unit_pillage();
+      } else {
+        key_unit_pollution();
+      }
     break;
     
     case 'M':
       key_unit_mine();
     break;
-    
+
+    case 'O':
+      key_unit_transform();
+    break; 
+
+    case 'N':
+      if (shift) {
+        key_unit_nuke();
+      } else {
+        key_unit_fallout();
+      }
+    break;        
+
     case 'Q':
       if (alt) civclient_benchmark(0); 
     break;
@@ -752,6 +817,10 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift)
   };
   
   switch (key_code) {
+    case 13:
+      if (shift) send_end_turn();
+      break;
+
     case 35: //1
     case 97:
       key_unit_move(DIR8_SOUTH);
@@ -861,6 +930,7 @@ function deactivate_goto()
 function send_end_turn()
 {
   $("#turn_done_button").button( "option", "disabled", true); 
+  $("#turn_done_button").tooltip({ disabled: true });
   var packet = {"type" : packet_player_phase_done, "turn" : game_info['turn']};
   send_request (JSON.stringify(packet));
 }
@@ -876,7 +946,7 @@ function key_unit_auto_explore()
     var punit = funits[i]; 
     request_new_unit_activity(punit, ACTIVITY_EXPLORE, EXTRA_NONE);
   }
-  update_unit_focus();
+  setTimeout(update_unit_focus, 700);
 }
 
 /**************************************************************************
@@ -910,7 +980,7 @@ function key_unit_fortify()
     var punit = funits[i]; 
     request_new_unit_activity(punit, ACTIVITY_FORTIFYING, EXTRA_NONE);
   }
-  update_unit_focus();
+  setTimeout(update_unit_focus, 700);
 }
 
 /**************************************************************************
@@ -924,6 +994,92 @@ function key_unit_irrigate()
     /* EXTRA_NONE -> server decides */
     request_new_unit_activity(punit, ACTIVITY_IRRIGATE, EXTRA_NONE);
   }
+  update_unit_focus();
+}
+
+/**************************************************************************
+ Tell the units to remove pollution.
+**************************************************************************/
+function key_unit_pollution()
+{
+  var funits = get_units_in_focus();
+  for (var i = 0; i < funits.length; i++) {
+    var punit = funits[i]; 
+    request_new_unit_activity(punit, ACTIVITY_POLLUTION, EXTRA_NONE);
+  }  
+  update_unit_focus();
+}
+
+
+/**************************************************************************
+ Tell the units to explode as a nuke.
+**************************************************************************/
+function key_unit_nuke()
+{
+  var funits = get_units_in_focus();
+  for (var i = 0; i < funits.length; i++) {
+    var punit = funits[i]; 
+    var packet = {"type" : packet_unit_nuke, "unit_id" : punit['id']};
+      send_request (JSON.stringify(packet));  
+  }  
+  update_unit_focus();
+}
+
+/**************************************************************************
+ Tell the units to upgrade.
+**************************************************************************/
+function key_unit_upgrade()
+{
+  var funits = get_units_in_focus();
+  for (var i = 0; i < funits.length; i++) {
+    var punit = funits[i]; 
+    var packet = {"type" : packet_unit_upgrade, "unit_id" : punit['id']};
+      send_request (JSON.stringify(packet));  
+  }  
+  update_unit_focus();
+}
+
+/**************************************************************************
+ Tell the units to paradrop.
+**************************************************************************/
+function key_unit_paradrop()
+{
+  paradrop_active = true;
+  add_chatbox_text("Click on the tile to send this paratrooper to.");
+}
+
+/**************************************************************************
+ Tell the units to airlift.
+**************************************************************************/
+function key_unit_airlift()
+{
+  airlift_active = true;
+  add_chatbox_text("Click on the city to airlift this unit to.");
+}
+
+/**************************************************************************
+ Tell the units to remove nuclear fallout.
+**************************************************************************/
+function key_unit_fallout()
+{
+  var funits = get_units_in_focus();
+  for (var i = 0; i < funits.length; i++) {
+    var punit = funits[i]; 
+    request_new_unit_activity(punit, ACTIVITY_FALLOUT, EXTRA_NONE);
+  }  
+  update_unit_focus();
+}
+
+/**************************************************************************
+ Tell the units to transform the terrain.
+**************************************************************************/
+function key_unit_transform()
+{
+  var funits = get_units_in_focus();
+  for (var i = 0; i < funits.length; i++) {
+    var punit = funits[i]; 
+    request_new_unit_activity(punit, ACTIVITY_TRANSFORM, EXTRA_NONE);
+  }  
   update_unit_focus();
 }
 
@@ -1004,7 +1160,7 @@ function key_unit_auto_settle()
     var punit = funits[i]; 
     request_unit_autosettlers(punit);
   }  
-  update_unit_focus();
+  setTimeout(update_unit_focus, 700);
 }
 
 

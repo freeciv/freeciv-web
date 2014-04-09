@@ -42,7 +42,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
    end
 
   # run the Freeciv bootstrap script on startup
-  config.vm.provision :shell, :path => "scripts/freeciv-web-bootstrap.sh"
+  config.vm.provision :shell, :path => "scripts/freeciv-web-vagrant.sh"
 
 
 end

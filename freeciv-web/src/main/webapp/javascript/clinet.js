@@ -19,12 +19,13 @@ var isWorking = false;
 var clinet_last_send = 0;
 var debug_client_speed_list = [];
 
-var freeciv_version = "+Freeciv.Web.Devel-2.6-2014.Mar.05b";
+var freeciv_version = "+Freeciv.Web.Devel-2.6-2014.Mar.24";
 
 var ws = null;
+var civserverport = null;
 
 /****************************************************************************
-  Initialized the Network communication with Websockets.
+  Initialized the Network communication, by requesting a valid server port.
 ****************************************************************************/
 function network_init()
 {
@@ -34,6 +35,39 @@ function network_init()
     return;
   }
 
+  var civclient_request_url = "/civclientlauncher";
+  if ($.getUrlVar('action') != null) civclient_request_url += "?action=" + $.getUrlVar('action');
+  if ($.getUrlVar('civserverport') != null) civclient_request_url += "&civserverport=" + $.getUrlVar('civserverport');
+
+  $.ajax({
+   type: 'POST',
+   url: civclient_request_url,
+   success: function(data, textStatus, request){
+       civserverport = request.getResponseHeader('port');
+       var connect_result = request.getResponseHeader('result');
+       if (civserverport != null && connect_result == "success") {
+         websocket_init(); 
+         load_game_check();
+
+       } else {
+         show_dialog_message("Network error", "Invalid server port. Error: " + connect_result);
+       }
+   },
+   error: function (request, textStatus, errorThrown) {
+	show_dialog_message("Network error", "Unable to communicate with civclientlauncher servlet . Error: " 
+		+ textStatus + " " + errorThrown + " " + request.getResponseHeader('result')); 
+   }
+  });
+
+
+
+}
+
+/****************************************************************************
+  Initialized the WebSocket connection.
+****************************************************************************/
+function websocket_init()
+{
   ws = new WebSocket("ws://" + window.location.hostname + "/civsocket");
 
   ws.onopen = function () {
@@ -63,13 +97,7 @@ function network_init()
    show_dialog_message("Network error", "Unable to communicate with server using WebSockets. Error: " + evt); 
    console.error("Unable to communicate with server using WebSockets. Error: " + evt);
   };
-
-
-
-
 }
-
-
 
 /****************************************************************************
   Stops network sync.

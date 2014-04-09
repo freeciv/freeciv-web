@@ -6,7 +6,6 @@
 *.o
 *.lo
 *.orig
-*.patch
 *.png
 *.pot
 *.pox
@@ -31,7 +30,6 @@ autom4te.cache
 cat-id-tbl.c
 charset.alias
 fcgui
-freeciv
 .vagrant
 freeciv-gtk2
 freeciv-gtk3

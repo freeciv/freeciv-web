@@ -12,28 +12,49 @@
 ***********************************************************************/
 var savename = "";
 
+
+var scenarios = [
+  {"img":"/images/world_large.png", "description":"The World - Classic-style 80x50 map of the Earth", "savegame":"earth-80x50-v3"},
+  {"img":"/images/hagworld.png", "description":"The World - Classic-style 120x60 map of the Earth", "savegame":"hagworld-120x60-v1.2"},
+  {"img":"/images/british.png", "description":"British Aisles - Medium (85x80)", "savegame":"british-isles-85x80-v2.80"},
+  {"img":"/images/iberian.png", "description":"Iberian Peninsula - 136x100 map of Spain and Portugal", "savegame":"iberian-peninsula-136x100-v1.0"},
+  {"img":"/images/france.png", "description":"France - Large (140x90)", "savegame":"france-140x90-v2"},
+  {"img":"/images/japan.png", "description":"Japan - Medium (88x100)", "savegame":"japan-88x100-v1.3"},
+  {"img":"/images/italy.png", "description":"Italy - Medium (100x100)", "savegame":"italy-100x100-v1.5"},
+  {"img":"/images/america.png", "description":"North America - 116x100 map of North America", "savegame":"north_america_116x100-v1.2"}
+];
+
 /**************************************************************************
  Send a load game command, if requested by user.
  uses HTML5 local storage.
 **************************************************************************/
 function load_game_check()
 {
-  var load_game_id = $.getUrlVar('load');
+  var load_game_id = $('#selectable .ui-selected').index();
   var scenario = $.getUrlVar('scenario');
- 
-  if (load_game_id != null) {
+
+  if ($.getUrlVar('load') == "tutorial") {
+    $.blockUI();
+    loadTimerId = setTimeout("load_game_real('tutorial');", 
+                                  1500);
+    setTimeout(load_game_toggle,3500);
+  } else if (load_game_id != -1) {
     $.blockUI();
 
     if (scenario == "true") {
-      loadTimerId = setTimeout("load_game_real('" + load_game_id + "');", 
-                             1500);
-      setTimeout(load_game_toggle,3500);
-    } else {
+      if (load_game_id == -1) {
+        show_scenario_dialog();
+      } else {
+        scenario_game_id = scenarios[load_game_id]['savegame'];
+        loadTimerId = setTimeout("load_game_real('" + scenario_game_id + "');", 
+                                  1500);
+        setTimeout(load_game_toggle,3500);
+      }
+    } else if (load_game_id != -1) {
 
-      var savefile = $.jStorage.get("savegame-file-" + load_game_id);
-      var savename = $.jStorage.get("savegame-savename-" + load_game_id);
-      var saveusr = $.jStorage.get("savegame-username-" + load_game_id);
-
+      var savefile = $.jStorage.get("savegame-file-" + (load_game_id + 1));
+      var savename = $.jStorage.get("savegame-savename-" + (load_game_id + 1));
+      var saveusr = $.jStorage.get("savegame-username-" + (load_game_id + 1));
       if (savefile != null && savename != null && username != null) {
 	$.ajax({
           url: "/loadservlet?username=" + saveusr + "&savename=" + savename,
@@ -43,11 +64,15 @@ function load_game_check()
     	}).done(function() {
           loadTimerId = setTimeout("load_game_real('" + username + "');", 
                              1000);
-        }).fail(function() { alert("Loading game failed"); });
+        }).fail(function() { alert("Loading game failed (ajax failed)"); });
       } else {
-        alert("Loading game failed");
+        alert("Loading game failed (jStorage)");
       }
     }
+  } else if (scenario == "true" && $.getUrlVar('load') != "tutorial") {
+    show_scenario_dialog();
+  } else if ($.getUrlVar('action') == "load") {
+    load_game_dialog();
   }
  
 }
@@ -100,7 +125,9 @@ function save_game()
   	  "<tr><td>Savegame name:</td>" +
 	  "<td><input type='text' name='savegamename' id='savegamename' size='32' maxlength='64'></td></tr>" +
 	  "</td></tr></table><br>" +
-	  "<span id='settings_info'><i>Freeciv-web allows you to save games. Games are stored in your web browser using HTML5 localstorage. Saved games will be stored in your browser until you clear your browser cache. Savegames are tied to your username " + username + ".</i></span>" 
+	  "<span id='settings_info'><i>Freeciv-web allows you to save games. Games are stored in your web " +
+	  "browser using HTML5 localstorage. Saved games will be stored in your browser until you clear" +
+	  " your browser cache. Savegames are tied to your username " + username + ".</i></span>" 
 
 
   $("#dialog").html(dhtml);
@@ -183,4 +210,111 @@ function save_game_fetch()
 	    alert("Failed saving game");
 	    $.unblockUI();
     });
+}
+
+
+/**************************************************************************
+ Load game
+**************************************************************************/
+function load_game_dialog()
+{
+
+  // reset dialog page.
+  $("#dialog").remove();
+  $("<div id='dialog'></div>").appendTo("div#game_page");
+
+  var saveHtml =  "<ol id='selectable'>";
+
+  var savegame_count = $.jStorage.get("savegame-count", 0);
+
+  if (savegame_count == 0) {
+      saveHtml = "<b>No savegames found. Please start a new game.</b>";
+
+  } else {
+    for (var i = 1; i <= savegame_count; i++) {
+      var savename = $.jStorage.get("savegame-savename-" + i);
+      var username = $.jStorage.get("savegame-username-" + i);
+      saveHtml += "<li class='ui-widget-content'>" + savename + " (" + username + ")</li>";
+    }
+  }
+
+
+  saveHtml += "</ol><span id='savegame_note'>Note: Savegames are stored using HTML5 local storage in your browser. "+
+	  "Clearing your browser cache will also clear your savegames. Savegames are stored with your username.</span>";
+
+  $("#dialog").html(saveHtml);
+  $("#dialog").attr("title", "Please select game to resume playing:");
+  $("#dialog").dialog({
+			bgiframe: true,
+			modal: true,
+			width: is_small_screen() ? "95%" : "70%",
+			buttons: {
+				"Delete Savegames": function() {
+					$(this).dialog('close');
+					$("#game_text_input").blur();
+					$.jStorage.set("savegame-count" , 0);
+				},
+	  	  		"Load Scenario": function() {
+					$(this).dialog('close');
+					$("#game_text_input").blur();
+					show_scenario_dialog();
+				},
+	  			"Load Savegame": function() {
+					load_game_check();
+					$(this).dialog('close');
+					$("#game_text_input").blur();
+				}
+			}
+		});
+  $("#selectable").selectable();
+  $("#dialog").dialog('open');		
+  $("#game_text_input").blur();
+
+
+
+}
+
+
+
+/**************************************************************************
+ Show the select scenario dialog.
+**************************************************************************/
+function show_scenario_dialog()
+{
+
+  // reset dialog page.
+  $("#dialog").remove();
+  $("<div id='dialog'></div>").appendTo("div#game_page");
+  $.unblockUI();
+
+  var saveHtml =  "<ol id='selectable'>";
+
+
+    for (var i = 0; i < scenarios.length; i++) {
+      saveHtml += "<li class='ui-widget-content'><img border='0' src='" + scenarios[i]['img'] +  "' style='padding: 4px;' ><br>" + scenarios[i]['description'] + "</li>";
+    }
+
+
+  saveHtml += "</ol>";
+
+  $("#dialog").html(saveHtml);
+  $("#dialog").attr("title", "Select a scenario to play:");
+  $("#dialog").dialog({
+			bgiframe: true,
+			modal: true,
+			width: is_small_screen() ? "90%" : "40%",
+			buttons: {
+	  			"Select scenario": function() {
+					load_game_check();
+					$(this).dialog('close');
+					$("#game_text_input").blur();
+				}
+			}
+		});
+  $("#selectable").selectable();
+  $("#dialog").dialog('open');		
+  $("#game_text_input").blur();
+
+
+
 }

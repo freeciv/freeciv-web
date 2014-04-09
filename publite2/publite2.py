@@ -15,12 +15,15 @@ metahost = "localhost:8080"
 metapath =  "/meta/metaserver.php"
 statuspath =  "/meta/status.php"
 logdir = "/tmp/"
-savesdir = "~/freeciv-build/resin/webapps/ROOT/savegames/"
+
 game_types = ["singleplayer", "multiplayer"]
 pubscript = "pubscript_"
-server_capacity = 3
+server_capacity = 6
 server_limit = 200  
 metachecker_interval = 60
+
+savesdir = "~/freeciv-build/freeciv-web/resin/webapps/ROOT/savegames/"
+if path.isdir("/vagrant"): savesdir = "/vagrant/resin/webapps/ROOT/savegames/"
 
 # The Metachecker class connects to the Freeciv-web metaserver, gets the number of available
 # Freeciv-web server instances, and launches new servers if needed.

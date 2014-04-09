@@ -431,10 +431,10 @@ if ( isset($port) ) {
 
 	print "</a>";
         if ($row["state"] == "Pregame") {
-          print "<div><a class='button' href='/civclientlauncher?civserverport=" . db2html($port) . "&amp;civserverhost=" . db2html($host)
+          print "<div><a class='button' href='/webclient/?civserverport=" . db2html($port) . "&amp;civserverhost=" . db2html($host)
              . "'>Join</a> <b>You can join this game now.</b></div>";
 	}
-        print "<div><a class='button' href='/civclientlauncher?action=observe&amp;civserverport=" . db2html($port) . "&amp;civserverhost=" . db2html($host)
+        print "<div><a class='button' href='/webclient?action=observe&amp;civserverport=" . db2html($port) . "&amp;civserverhost=" . db2html($host)
              . "'>Join/Observe</a> <b>You can observe this game now.</b></div>";
 
         print "<br/><br/>";
@@ -528,7 +528,7 @@ if ( isset($port) ) {
           $row = fcdb_fetch_array($res, $inx);
           print "<tr class='meta_row'><td>";
 
-	  print "<a  class='button' href=\"/civclientlauncher?action=observe&amp;civserverport=" 
+	  print "<a  class='button' href=\"/webclient?action=observe&amp;civserverport=" 
 		  . db2html($row["port"]) . "&amp;civserverhost=" . db2html($row["host"]) . "\">";
           print "Join/Observe";
           print "</a>";
@@ -555,7 +555,7 @@ if ( isset($port) ) {
         }
         print "</table><br><br><br><br>";
       } else {
-        print "<h3><a href='/wireframe.jsp?do=login'>Click here to start a new single player game!</a></h3><br><br><br>";
+        print "<h3><a href='/webclient/?action=new'>Click here to start a new single player game!</a></h3><br><br><br>";
       }
 ?>
 
@@ -582,11 +582,11 @@ if ( isset($port) ) {
 	  
   
           if ($mystate != "Running") {
-           print "<a  class='button' href=\"/civclientlauncher?civserverport=" . db2html($row["port"]) . "&amp;civserverhost=" . db2html($row["host"]) . "\">";
+           print "<a  class='button' href=\"/webclient?action=multi&civserverport=" . db2html($row["port"]) . "&amp;civserverhost=" . db2html($row["host"]) . "\">";
            print "Play";
 	   print "</a>";
 	  } else {
-	   print "<a  class='button' href=\"/civclientlauncher?action=observe&amp;civserverport=" . db2html($row["port"]) . "&amp;civserverhost=" . db2html($row["host"]) . "\">";
+	   print "<a  class='button' href=\"/webclient?action=observe&amp;civserverport=" . db2html($row["port"]) . "&amp;civserverhost=" . db2html($row["host"]) . "\">";
            print "Join/Observe";
            print "</a>";
 	  }

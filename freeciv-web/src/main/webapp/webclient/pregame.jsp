@@ -6,7 +6,7 @@
 			  onclick="window.open('http://play.freeciv.org/', '_new');">
 		</div>
 		<button id="start_game_button" type="button" class="button" onClick="pregame_start_game();">Start Game</button>
-		<button type="button" class="button" onClick="leave_pregame();" >Leave Game</button>
+		<button id="load_game_button" type="button" class="button" onClick="load_game_dialog();" >Load Game</button>
 		<button id="observe_button" type="button" class="button" onClick="observe();" >Observe Game</button>
 		<button id="pick_nation_button" type="button" class="button" onClick="pick_nation();" >Pick Nation</button>
 		<button id="pregame_settings_button" type="button" class="button" onClick="pregame_settings();" >Settings</button>

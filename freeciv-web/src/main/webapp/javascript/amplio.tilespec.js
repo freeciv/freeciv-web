@@ -184,7 +184,10 @@ ts_tiles['tundra']['is_blended'] = 1;
 ts_tiles['tundra']['num_layers'] = 1;
 ts_tiles['tundra']['layer0_match_type'] = "land";
 
-
+ts_tiles['inaccessible'] = {};
+ts_tiles['inaccessible']['is_blended'] = 0;
+ts_tiles['inaccessible']['num_layers'] = 1;
+ts_tiles['inaccessible']['layer0_match_type'] = "land";
 
 
 
@@ -209,7 +212,8 @@ var tile_types_setup =
 "l1.mountains":{"match_style":1,"sprite_type":0,"mine_tag":"tx.mine","match_indices":2,"match_index":[2,2],"dither":false},
 "l0.plains":{"match_style":0,"sprite_type":0,"mine_tag":"(null)","match_indices":1,"match_index":[2],"dither":true},
 "l0.swamp":{"match_style":0,"sprite_type":0,"mine_tag":"(null)","match_indices":1,"match_index":[2],"dither":true},
-"l0.tundra":{"match_style":0,"sprite_type":0,"mine_tag":"(null)","match_indices":1,"match_index":[2],"dither":true}
+"l0.tundra":{"match_style":0,"sprite_type":0,"mine_tag":"(null)","match_indices":1,"match_index":[2],"dither":true},
+"l0.inaccessible":{"match_style":0,"sprite_type":0,"mine_tag":"(null)","match_indices":1,"match_index":[2],"dither":false}
 
 };
 

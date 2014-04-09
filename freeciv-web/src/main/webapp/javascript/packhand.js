@@ -61,6 +61,11 @@ function handle_server_join_reply(packet)
     }
 
     set_client_state(C_S_PREPARING);
+    if (autostart) {
+      setTimeout("pregame_start_game();", 800);
+    } else if (observing) {
+      setTimeout("request_observe_game();", 800);
+    }
 
   } else {
 

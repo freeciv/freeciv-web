@@ -24,7 +24,7 @@ var ts="${initParam.buildTimeStamp}";
 </head>
 
 <body>
-    <script type="text/javascript" src="//dl1d2m8ri9v3j.cloudfront.net/releases/1.2.2/tracker.js" data-customer="ee5dba6fe2e048f79b422157b450947b"></script>
+    <script type="text/javascript" src="//dl1d2m8ri9v3j.cloudfront.net/releases/1.2.5/tracker.js" data-customer="ee5dba6fe2e048f79b422157b450947b"></script>
 
     <jsp:include page="pregame.jsp" flush="false"/>
     <jsp:include page="game.jsp" flush="false"/>

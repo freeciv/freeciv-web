@@ -301,7 +301,7 @@ function validate_username() {
     return false;
   }
 
-  $.jStorage.set("username", username);
+  simpleStorage.set("username", username);
   network_init();
 
   return true;
@@ -319,7 +319,7 @@ function show_intro_dialog(title, message) {
   var intro_html = message + "<br><br>Name: <input id='username_req' type='text' size='25'>"
 	  + " <br><br><span id='username_validation_result'></span>";
   $("#dialog").html(intro_html);
-  $("#username_req").val($.jStorage.get("username", ""));
+  $("#username_req").val(simpleStorage.get("username", ""));
   $("#dialog").attr("title", title);
   $("#dialog").dialog({
 			bgiframe: true,
@@ -475,7 +475,7 @@ function show_debug_info()
   console.log("Browser useragent: " + navigator.userAgent);
   console.log("jQuery version: " + $().jquery);
   console.log("jQuery UI version: " + $.ui.version);
-  console.log("jStorage version: " + $.jStorage.version);
+  console.log("simpleStorage version: " + simpleStorage.version);
   console.log("Touch device: " + is_touch_device());
 
   debug_active = true;

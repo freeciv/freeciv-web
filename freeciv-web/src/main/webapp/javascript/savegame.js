@@ -52,9 +52,9 @@ function load_game_check()
       }
     } else if (load_game_id != -1) {
 
-      var savefile = $.jStorage.get("savegame-file-" + (load_game_id + 1));
-      var savename = $.jStorage.get("savegame-savename-" + (load_game_id + 1));
-      var saveusr = $.jStorage.get("savegame-username-" + (load_game_id + 1));
+      var savefile = simpleStorage.get("savegame-file-" + (load_game_id + 1));
+      var savename = simpleStorage.get("savegame-savename-" + (load_game_id + 1));
+      var saveusr = simpleStorage.get("savegame-username-" + (load_game_id + 1));
       if (savefile != null && savename != null && username != null) {
 	$.ajax({
           url: "/loadservlet?username=" + saveusr + "&savename=" + savename,
@@ -66,7 +66,7 @@ function load_game_check()
                              1000);
         }).fail(function() { alert("Loading game failed (ajax failed)"); });
       } else {
-        alert("Loading game failed (jStorage)");
+        alert("Loading game failed (simpleStorage)");
       }
     }
   } else if (scenario == "true" && $.getUrlVar('load') != "tutorial") {
@@ -111,8 +111,8 @@ function load_game_toggle()
 ****************************************************************************/
 function save_game()
 {
-  if (!$.jStorage.storageAvailable()) {
-    alert("HTML5 Storage not available");
+  if (!simpleStorage.canUse()) {
+    show_dialog_message("Saving failed", "HTML5 Storage not available");
     return;
   }
 
@@ -155,9 +155,9 @@ function save_game()
 		});
   var pplayer = client.conn.playing;
   var suggest_savename = username + " of the " + nations[pplayer['nation']]['adjective'] + " in the year " + get_year_string() + " [" 
-                         + ($.jStorage.get("savegame-count", 0) + 1) + "]";
+                         + (simpleStorage.get("savegame-count", 0) + 1) + "]";
   if (suggest_savename.length >= 64) suggest_savename = username + " [" 
-                         + ($.jStorage.get("savegame-count", 0) + 1) + "]";
+                         + (simpleStorage.get("savegame-count", 0) + 1) + "]";
 
 
   $("#savegamename").val(suggest_savename);	
@@ -170,9 +170,9 @@ function save_game()
 **************************************************************************/
 function check_savegame_duplicate(new_savename)
 {
-  var savegame_count = $.jStorage.get("savegame-count", 0);
+  var savegame_count = simpleStorage.get("savegame-count", 0);
   for (var i = 1; i <= savegame_count; i++) {
-    var savename = $.jStorage.get("savegame-savename-" + i);
+    var savename = simpleStorage.get("savegame-savename-" + i);
     if (savename == new_savename) return true;
   }
   return false;
@@ -199,11 +199,11 @@ function save_game_fetch()
 {
   $.get("/saveservlet?username=" + username + "&savename=" + savename, 
     function(saved_file) {
-      var savegame_count = $.jStorage.get("savegame-count", 0) + 1;
-      $.jStorage.set("savegame-file-" + savegame_count, saved_file);
-      $.jStorage.set("savegame-savename-" + savegame_count, savename);
-      $.jStorage.set("savegame-username-" + savegame_count, username);
-      $.jStorage.set("savegame-count" , savegame_count);
+      var savegame_count = simpleStorage.get("savegame-count", 0) + 1;
+      simpleStorage.set("savegame-file-" + savegame_count, saved_file);
+      simpleStorage.set("savegame-savename-" + savegame_count, savename);
+      simpleStorage.set("savegame-username-" + savegame_count, username);
+      simpleStorage.set("savegame-count" , savegame_count);
       $.unblockUI();
       alert("Game saved successfully");
     }).fail(function() { 
@@ -225,15 +225,15 @@ function load_game_dialog()
 
   var saveHtml =  "<ol id='selectable'>";
 
-  var savegame_count = $.jStorage.get("savegame-count", 0);
+  var savegame_count = simpleStorage.get("savegame-count", 0);
 
   if (savegame_count == 0) {
       saveHtml = "<b>No savegames found. Please start a new game.</b>";
 
   } else {
     for (var i = 1; i <= savegame_count; i++) {
-      var savename = $.jStorage.get("savegame-savename-" + i);
-      var username = $.jStorage.get("savegame-username-" + i);
+      var savename = simpleStorage.get("savegame-savename-" + i);
+      var username = simpleStorage.get("savegame-username-" + i);
       saveHtml += "<li class='ui-widget-content'>" + savename + " (" + username + ")</li>";
     }
   }
@@ -252,7 +252,7 @@ function load_game_dialog()
 				"Delete Savegames": function() {
 					$("#dialog").dialog('close');
 					$("#game_text_input").blur();
-					$.jStorage.set("savegame-count" , 0);
+					simpleStorage.set("savegame-count" , 0);
 				},
 	  	  		"Load Scenario": function() {
 					$("#dialog").dialog('close');

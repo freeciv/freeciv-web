@@ -36,7 +36,7 @@ echo logfile $logfile
 mysql_user="root"
 mysql_pass="vagrant"
 
-resin_version="4.0.38"
+resin_version="4.0.39"
 resin_url="http://www.caucho.com/download/resin-${resin_version}.tar.gz"
 tornado_url="https://pypi.python.org/packages/source/t/tornado/tornado-3.2.tar.gz"
 

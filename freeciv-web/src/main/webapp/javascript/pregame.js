@@ -280,14 +280,16 @@ function pregame_settings()
 
   });
 
-  $("#aifill").val(game_info['aifill']);
-  $("#mapsize").val(game_info['mapsize']);
-  $("#timeout").val(game_info['timeout']);
-  $("#skill_level").val(ai_skill_level);
-  $("#metamessage").val(game_info['meta_message']);
-  $("#techlevel").val("0");
-  $("#landmass").val("30");
-  $("#specials").val("250");
+  if (game_info != null) {
+    $("#aifill").val(game_info['aifill']);
+    $("#mapsize").val(game_info['mapsize']);
+    $("#timeout").val(game_info['timeout']);
+    $("#skill_level").val(ai_skill_level);
+    $("#metamessage").val(game_info['meta_message']);
+    $("#techlevel").val("0");
+    $("#landmass").val("30");
+    $("#specials").val("250");
+  }
 
   $(id).dialog('open');		
 

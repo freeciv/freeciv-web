@@ -178,6 +178,7 @@ function update_nation_selection()
     var pnation = nations[nation_id];
     if (pnation['is_playable'] && pnation['adjective'].toLowerCase() == nation_name.toLowerCase()) {
       select_nation(nation_id);
+      return;
     }
   }
 }
@@ -185,23 +186,19 @@ function update_nation_selection()
 /****************************************************************************
   ...
 ****************************************************************************/
-function select_nation(nation_id)
+function select_nation(new_nation_id)
 {
-  var pnation = nations[nation_id];
+  var pnation = nations[new_nation_id];
   $("#nation_legend").html(pnation['legend']);
-
   $("#nation_autocomplete_box").val(pnation['adjective']);
-
   $("#nation_" + chosen_nation).css("background-color", "transparent");
-
   $("#nation_choice").html("Your Nation: " + pnation['adjective']);
 
-  if (chosen_nation != nation_id) {
-    document.getElementById("nation_" + nation_id).scrollIntoView()
+  if (chosen_nation != new_nation_id && $("#nation_" + new_nation_id).length > 0) {
+    $("#nation_" + new_nation_id).get(0).scrollIntoView();
   }
 
-  chosen_nation = parseFloat(nation_id);
-  
+  chosen_nation = parseFloat(new_nation_id);
   $("#nation_" + chosen_nation).css("background-color", "#555555");
 }
 

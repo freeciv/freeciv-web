@@ -56,14 +56,16 @@ function load_game_check()
       var savename = simpleStorage.get("savegame-savename-" + (load_game_id + 1));
       var saveusr = simpleStorage.get("savegame-username-" + (load_game_id + 1));
       if (savefile != null && savename != null && username != null) {
+        console.log("Loading " + savename);
 	$.ajax({
           url: "/loadservlet?username=" + saveusr + "&savename=" + savename,
           type: "POST",
           data: savefile,
           processData: false
     	}).done(function() {
+          console.log("Upload of savegame complete");
           loadTimerId = setTimeout("load_game_real('" + username + "');", 
-                             1000);
+                             1500);
         }).fail(function() { alert("Loading game failed (ajax failed)"); });
       } else {
         alert("Loading game failed (simpleStorage)");
@@ -83,6 +85,7 @@ function load_game_check()
 **************************************************************************/
 function load_game_real(filename)
 {
+      console.log("Server command: /load " + filename );
       var test_packet = {"type" : packet_chat_msg_req, 
                          "message" : "/load " + filename};
       var myJSONText = JSON.stringify(test_packet);
@@ -154,10 +157,12 @@ function save_game()
 			}
 		});
   var pplayer = client.conn.playing;
+  var save_cnt = simpleStorage.get("savegame-count");
+  if (save_cnt == null) save_cnt = 0;
   var suggest_savename = username + " of the " + nations[pplayer['nation']]['adjective'] + " in the year " + get_year_string() + " [" 
-                         + (simpleStorage.get("savegame-count", 0) + 1) + "]";
+                         + (save_cnt + 1) + "]";
   if (suggest_savename.length >= 64) suggest_savename = username + " [" 
-                         + (simpleStorage.get("savegame-count", 0) + 1) + "]";
+                         + (save_cnt + 1) + "]";
 
 
   $("#savegamename").val(suggest_savename);	
@@ -170,7 +175,8 @@ function save_game()
 **************************************************************************/
 function check_savegame_duplicate(new_savename)
 {
-  var savegame_count = simpleStorage.get("savegame-count", 0);
+  var savegame_count = simpleStorage.get("savegame-count");
+  if (savegame_count == null) savegame_count = 0;
   for (var i = 1; i <= savegame_count; i++) {
     var savename = simpleStorage.get("savegame-savename-" + i);
     if (savename == new_savename) return true;
@@ -199,7 +205,9 @@ function save_game_fetch()
 {
   $.get("/saveservlet?username=" + username + "&savename=" + savename, 
     function(saved_file) {
-      var savegame_count = simpleStorage.get("savegame-count", 0) + 1;
+      var savegame_count = simpleStorage.get("savegame-count");
+      if (savegame_count == null) savegame_count = 0;
+      savegame_count += 1;
       simpleStorage.set("savegame-file-" + savegame_count, saved_file);
       simpleStorage.set("savegame-savename-" + savegame_count, savename);
       simpleStorage.set("savegame-username-" + savegame_count, username);
@@ -225,9 +233,9 @@ function load_game_dialog()
 
   var saveHtml =  "<ol id='selectable'>";
 
-  var savegame_count = simpleStorage.get("savegame-count", 0);
+  var savegame_count = simpleStorage.get("savegame-count");
 
-  if (savegame_count == 0) {
+  if (savegame_count == 0 || savegame_count == null) {
       saveHtml = "<b>No savegames found. Please start a new game.</b>";
 
   } else {

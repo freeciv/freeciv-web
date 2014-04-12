@@ -476,6 +476,7 @@ function show_debug_info()
   console.log("jQuery version: " + $().jquery);
   console.log("jQuery UI version: " + $.ui.version);
   console.log("simpleStorage version: " + simpleStorage.version);
+  console.log("savegame count: " + simpleStorage.get("savegame-count"));
   console.log("Touch device: " + is_touch_device());
 
   debug_active = true;

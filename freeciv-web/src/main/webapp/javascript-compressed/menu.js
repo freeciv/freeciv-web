@@ -1,9 +1,9 @@
 
 $(document).ready(function() {
 
-  var savegame_count = simpleStorage.get("savegame-count", 0);
+  var savegame_count = simpleStorage.get("savegame-count");
 
-  if (savegame_count == 0) {  
+  if (savegame_count == null || savegame_count == 0) {  
     $('#load-button').addClass("disabled");
     $('#load-button').attr("href", "#");
   } else {

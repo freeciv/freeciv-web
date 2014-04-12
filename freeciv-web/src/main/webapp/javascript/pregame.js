@@ -125,13 +125,15 @@ function pick_nation()
   var nation_name_list = [];
   for (var nation_id in nations) {
     var pnation = nations[nation_id];
-    var sprite = get_nation_flag_sprite(pnation);
-    nations_html += "<div onclick='select_nation(" + nation_id + ");' style='background: transparent url("
-           + sprite['image-src'] 
-           + "); background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y'] 
-           + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px; margin: 5px; '>"
-           + "<div id='nation_" + nation_id + "' class='nation_choice'>" + pnation['adjective'] + "</div></div>";
-    nation_name_list.push(pnation['adjective']);
+    if (pnation['is_playable']) {
+      var sprite = get_nation_flag_sprite(pnation);
+      nations_html += "<div onclick='select_nation(" + nation_id + ");' style='background: transparent url("
+             + sprite['image-src'] 
+             + "); background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y'] 
+             + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px; margin: 5px; '>"
+             + "<div id='nation_" + nation_id + "' class='nation_choice'>" + pnation['adjective'] + "</div></div>";
+      nation_name_list.push(pnation['adjective']);
+    }
   }
 
   
@@ -174,7 +176,7 @@ function update_nation_selection()
 
   for (var nation_id in nations) {
     var pnation = nations[nation_id];
-    if (pnation['adjective'].toLowerCase() == nation_name.toLowerCase()) {
+    if (pnation['is_playable'] && pnation['adjective'].toLowerCase() == nation_name.toLowerCase()) {
       select_nation(nation_id);
     }
   }

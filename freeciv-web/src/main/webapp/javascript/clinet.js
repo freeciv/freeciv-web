@@ -90,7 +90,7 @@ function websocket_init()
 
   ws.onclose = function (event) {
    show_dialog_message("WebSocket connection closed", "Connection closed"); 
-   console.error("WebSocket connection closed."); 
+   console.error("WebSocket connection closed: " + event.code + ", " + event.reason); 
   };
 
   ws.onerror = function (evt) {

@@ -285,7 +285,7 @@ function show_dialog_message(title, message) {
 function validate_username() {
   username = $("#username_req").val();
 
-  var cleaned_username = username.replace(/[^a-zA-Z\s\-]/g,'');
+  var cleaned_username = username.replace(/[^a-zA-Z]/g,'');
  
   if (username == null || username.length == 0) {
     $("#username_validation_result").html("Your name can't be empty.");
@@ -297,7 +297,7 @@ function validate_username() {
     $("#username_validation_result").html("Your name is too long.");
     return false;
   } else if (username != cleaned_username) {
-    $("#username_validation_result").html("Your name contains invalid characters.");
+    $("#username_validation_result").html("Your name contains invalid characters, only the English alphabet is allowed.");
     return false;
   }
 

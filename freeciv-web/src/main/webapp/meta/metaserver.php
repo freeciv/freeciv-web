@@ -353,8 +353,6 @@ if ( isset($port) ) {
 
     <script type="text/javascript" src="/javascript/json2.js"></script>
     <script type="text/javascript" src="/javascript-compressed/jquery.min.js"></script>
-    <script type="text/javascript" src="/javascript/jstorage.js"></script>
-    <script type="text/javascript" src="/javascript-compressed/menu.js"></script>
     <script type="text/javascript" src="/javascript/jquery-ui.custom.min.js"></script>   
     <script type="text/javascript" src="/meta/js/meta.js"></script>
 

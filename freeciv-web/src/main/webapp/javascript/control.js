@@ -1369,6 +1369,7 @@ function show_goto_path(goto_packet)
   current_goto_path.push(ptile);
 
   for (var i = 0; i < goto_packet['dir'].length; i++) {
+    if (ptile == null) break;
     var dir = goto_packet['dir'][i];
     ptile = mapstep(ptile, dir);
     current_goto_path.push(ptile);

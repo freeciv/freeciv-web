@@ -147,7 +147,7 @@ function pick_nation()
 			width: "80%",
 			buttons: {
 				Ok: function() {
-					$(this).dialog('close');
+					$("#pick_nation_dialog").dialog('close');
 					submit_nation_choise();
 				}
 			}
@@ -274,7 +274,7 @@ function pregame_settings()
 			width: "550",
 			  buttons: {
 				Ok: function() {
-					$(this).dialog('close');
+					$("#pregame_settings").dialog('close');
 				}
 			  }
 

@@ -45,7 +45,7 @@ function show_revolution_dialog()
 			  buttons: {
 				"Start revolution!" : function() {
 					start_revolution();
-					$(this).dialog('close');
+					$("#revolution_dialog").dialog('close');
 				}
 			  }
 

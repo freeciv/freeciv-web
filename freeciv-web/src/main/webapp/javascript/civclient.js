@@ -267,7 +267,7 @@ function show_dialog_message(title, message) {
 			width: is_small_screen() ? "90%" : "40%",
 			buttons: {
 				Ok: function() {
-					$(this).dialog('close');
+					$("#dialog").dialog('close');
 					$("#game_text_input").blur();
 				}
 			}
@@ -330,11 +330,11 @@ function show_intro_dialog(title, message) {
 				"Start Game" : function() {
 					autostart = true;
 					if (validate_username()) {
-						$(this).dialog('close');
+						$("#dialog").dialog('close');
 					}
 				}, 
 				  "Customize Game": function() {
-					if (validate_username()) $(this).dialog('close');
+					if (validate_username()) $("#dialog").dialog('close');
 				}
 			}	
 			

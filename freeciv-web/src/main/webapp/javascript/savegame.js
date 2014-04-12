@@ -146,7 +146,7 @@ function save_game()
 						alert("Savegame name already in use. "
 						 + "Please use a new savegame name.");
 					} else {
-						$(this).dialog('close');
+						$("#dialog").dialog('close');
 						save_game_send();
                                                 $.blockUI();
 					}
@@ -250,18 +250,18 @@ function load_game_dialog()
 			width: is_small_screen() ? "95%" : "70%",
 			buttons: {
 				"Delete Savegames": function() {
-					$(this).dialog('close');
+					$("#dialog").dialog('close');
 					$("#game_text_input").blur();
 					$.jStorage.set("savegame-count" , 0);
 				},
 	  	  		"Load Scenario": function() {
-					$(this).dialog('close');
+					$("#dialog").dialog('close');
 					$("#game_text_input").blur();
 					show_scenario_dialog();
 				},
 	  			"Load Savegame": function() {
 					load_game_check();
-					$(this).dialog('close');
+					$("#dialog").dialog('close');
 					$("#game_text_input").blur();
 				}
 			}
@@ -306,7 +306,7 @@ function show_scenario_dialog()
 			buttons: {
 	  			"Select scenario": function() {
 					load_game_check();
-					$(this).dialog('close');
+					$("#dialog").dialog('close');
 					$("#game_text_input").blur();
 				}
 			}

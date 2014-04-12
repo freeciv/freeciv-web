@@ -338,10 +338,10 @@ function change_city_production_dialog()
 			buttons: {
 				"Buy": function() {
 						request_city_buy();
-						$(this).dialog('close');
+						$("#dialog").dialog('close');
 				},
 				"Close": function() {
-						$(this).dialog('close');
+						$("#dialog").dialog('close');
 
 				}
 			}
@@ -468,10 +468,10 @@ function request_city_buy()
 			buttons: {
 				"Yes": function() {
 						send_city_buy();
-						$(this).dialog('close');
+						$("#dialog").dialog('close');
 				},
 				"No": function() {
-						$(this).dialog('close');
+						$("#dialog").dialog('close');
 
 				}
 			}

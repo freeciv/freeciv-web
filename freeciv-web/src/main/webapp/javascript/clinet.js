@@ -23,6 +23,7 @@ var freeciv_version = "+Freeciv.Web.Devel-2.6-2014.Apr.02b";
 
 var ws = null;
 var civserverport = null;
+var wsport = 1337;
 
 /****************************************************************************
   Initialized the Network communication, by requesting a valid server port.
@@ -68,7 +69,10 @@ function network_init()
 ****************************************************************************/
 function websocket_init()
 {
-  ws = new WebSocket("ws://" + window.location.hostname + "/civsocket");
+  /* port 1337 - 1340 is used by the freeciv-proxy WebSocket server. */
+  wsport = 1337 + Math.floor(Math.random()*4);
+
+  ws = new WebSocket("ws://" + window.location.hostname + ":" + wsport + "/civsocket");
 
   ws.onopen = function () {
     var login_message = {"type":4, "username" : username,

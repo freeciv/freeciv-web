@@ -23,9 +23,9 @@ fi
 
 
 echo "checking freeciv-proxy"
-wget --quiet http://localhost:8002/status
+wget --quiet http://localhost:1337/status
 if [ "$?" != 0 ]; then
-  wget http://localhost:8002/status
+  wget http://localhost:1337/status
   echo "freeciv-proxy not running!"
   echo "\n\n\n"
 

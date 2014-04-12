@@ -36,6 +36,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.network :forwarded_port, guest: 80, host: 8080
   end
 
+  # WebSocket connections use ports 1337 - 1340
+  config.vm.network :forwarded_port, guest: 1337, host: 1337
+  config.vm.network :forwarded_port, guest: 1338, host: 1338
+  config.vm.network :forwarded_port, guest: 1339, host: 1339
+  config.vm.network :forwarded_port, guest: 1340, host: 1340
+
  
    config.vm.provider "virtualbox" do |v|
     v.memory = 4000

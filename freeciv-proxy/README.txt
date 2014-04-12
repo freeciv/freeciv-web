@@ -8,10 +8,10 @@ Start freeciv-proxy like this:
 python freeciv-proxy.py
 
 See status on this URL when proxy is running: 
-http://localhost:8002/status
+http://localhost:1337/status
 
 Software requirements:
 
 - Python 3.3.
-- Tornado 3.1 - http://www.tornadoweb.org/
+- Tornado 3.2 - http://www.tornadoweb.org/
 

@@ -561,7 +561,8 @@ function get_city_occupied_sprite(pcity) {
   var ptile = city_tile(pcity);
   var punits = tile_units(ptile);
 
-  if (!observing && owner_id != client.conn.playing.playerno && pcity['occupied']) {
+  if (!observing && client.conn.playing != null 
+      && owner_id != client.conn.playing.playerno && pcity['occupied']) {
     return "citybar.occupied";
   } else if (punits.length == 1) {
     return "citybar.occupancy_1";

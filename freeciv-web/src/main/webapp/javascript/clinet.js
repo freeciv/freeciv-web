@@ -72,7 +72,7 @@ function websocket_init()
   /* port 1337 - 1340 is used by the freeciv-proxy WebSocket server. */
   wsport = 1337 + Math.floor(Math.random()*4);
 
-  ws = new WebSocket("ws://" + window.location.hostname + ":" + wsport + "/civsocket");
+  ws = new ReconnectingWebSocket("ws://" + window.location.hostname + ":" + wsport + "/civsocket");
 
   ws.onopen = function () {
     var login_message = {"type":4, "username" : username,
@@ -93,8 +93,7 @@ function websocket_init()
   };
 
   ws.onclose = function (event) {
-   show_dialog_message("WebSocket connection closed", "Connection closed"); 
-   console.error("WebSocket connection closed: " + event.code + ", " + event.reason); 
+   console.debug("WebSocket connection closed, reconnecting: " + event.code + ", " + event.reason); 
   };
 
   ws.onerror = function (evt) {

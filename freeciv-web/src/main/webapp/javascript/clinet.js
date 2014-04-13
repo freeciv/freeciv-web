@@ -116,7 +116,9 @@ function network_stop()
 ****************************************************************************/
 function send_request(packet_payload) 
 {
-  ws.send(packet_payload);
+  if (ws != null) {
+    ws.send(packet_payload);
+  }
 
   if (debug_active) {
     clinet_last_send = new Date().getTime();

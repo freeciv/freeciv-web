@@ -64,9 +64,9 @@ function update_nation_screen()
 
       }
       nation_list_html = nation_list_html + "</td>";
-    } else if (client_is_observer() && pplayer['ai']) {
-      nation_list_html = nation_list_html + "<td>  <button type='button' class='nation_button' onClick='take_player(\"" 
-            + pplayer['name'] + "\");' >Play as " + pplayer['name'] + "</button></td>";
+    } else if (client_is_observer() && pplayer['ai'] && nations[pplayer['nation']]['is_playable']) {
+      nation_list_html = nation_list_html + "<td>-</td> <td><button type='button' class='nation_button' onClick='take_player(\"" 
+            + pplayer['name'] + "\");' >Play as this nation</button></td>";
     }
 
     nation_list_html = nation_list_html + "</tr>";

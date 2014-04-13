@@ -58,7 +58,7 @@ function remove_city(pcity_id)
 {
  if (pcity_id == null) return;
  
- delete cities[city_id];
+ delete cities[pcity_id];
  
 }
 

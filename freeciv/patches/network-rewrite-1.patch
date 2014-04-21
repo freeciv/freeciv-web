@@ -15,7 +15,7 @@ diff -Nurd -X.diff_ignore freeciv/common/connection.h freeciv/common/connection.
  
  /* Used in the network protocol. */
 -#define MAX_LEN_PACKET   4096
-+#define MAX_LEN_PACKET    65536
++#define MAX_LEN_PACKET    16384
  #define MAX_LEN_CAPSTR    512
  #define MAX_LEN_PASSWORD  512 /* do not change this under any circumstances */
  
@@ -1039,7 +1039,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.c freeciv/common/packets.c
  
    /* The non-compressed case */
    whole_packet_len = len_read;
-@@ -488,8 +490,39 @@
+@@ -488,8 +490,35 @@
      return NULL;
    }
  
@@ -1051,11 +1051,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.c freeciv/common/packets.c
 +  /* Parse JSON packet. */
 +  json_error_t error;
 +
-+  dio_get_uint16_old(&din, &utype.itype);
-+
-+  dio_get_string_old(&din, (char*)pc->buffer->data, pc->buffer->ndata);
-+
-+  pc->json_packet = json_loadb((char*)pc->buffer->data, whole_packet_len, 0, &error);
++  pc->json_packet = json_loadb((char*)pc->buffer->data + 4, whole_packet_len, 0, &error);
 +
 +  memmove(pc->buffer->data, pc->buffer->data, pc->buffer->ndata);
 +  pc->buffer->ndata = 0;

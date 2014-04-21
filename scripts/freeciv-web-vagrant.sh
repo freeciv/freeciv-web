@@ -41,7 +41,7 @@ resin_url="http://www.caucho.com/download/resin-${resin_version}.tar.gz"
 tornado_url="https://pypi.python.org/packages/source/t/tornado/tornado-3.2.tar.gz"
 
 # Based on fresh install of Ubuntu 12.04
-dependencies="maven mysql-server-5.5 openjdk-7-jdk libcurl4-openssl-dev nginx libjansson-dev subversion pngcrush python3-pillow libtool automake autoconf autotools-dev language-pack-en python3.3-dev python3-setuptools libglib2.0-dev libbz2-dev"
+dependencies="maven mysql-server-5.5 openjdk-7-jdk libcurl4-openssl-dev nginx libjansson-dev subversion pngcrush python3-pillow libtool automake autoconf autotools-dev language-pack-en python3.4-dev python3-setuptools libglib2.0-dev libbz2-dev"
 
 ## Setup
 mkdir -p ${basedir}
@@ -70,7 +70,7 @@ echo "==== Fetching/Installing Tornado Web Server ===="
 wget ${tornado_url}
 tar xvfz tornado-3.2.tar.gz
 cd tornado-3.2
-python3.3 setup.py install
+python3.4 setup.py install
 
 
 ## mysql setup
@@ -91,9 +91,9 @@ cd ${basedir}/freeciv-web && ./build.sh
 
 echo "=============================="
 
+service nginx stop
 rm /etc/nginx/sites-enabled/default
 cp ${basedir}/publite2/nginx.conf /etc/nginx/
-cp ${basedir}/publite2/nginx/freeciv-web /etc/nginx/sites-enabled/
 
 if [ -d "/vagrant/" ]; then
   echo "Starting Freeciv-web..."

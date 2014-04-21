@@ -44,9 +44,9 @@ sudo debconf-set-selections <<< "mysql-server-5.5 mysql-server/root_password_aga
 echo "apt-get install dependencies"
 apt-get -y install ${dependencies}
 
-#Travis doesn't support Python 3.3 at the moment.
-ln -s /usr/bin/python3.2 /usr/bin/python3.3
-python3.3 --version
+#Travis doesn't support Python 3.4 at the moment.
+ln -s /usr/bin/python3.2 /usr/bin/python3.4
+python3.4 --version
 
 python3.2 -m easy_install Pillow
 
@@ -69,7 +69,7 @@ echo "==== Fetching/Installing Tornado Web Server ===="
 wget ${tornado_url}
 tar xvfz tornado-3.2.tar.gz
 cd tornado-3.2
-python3.3 setup.py install
+python3.4 setup.py install
 
 
 ## mysql setup

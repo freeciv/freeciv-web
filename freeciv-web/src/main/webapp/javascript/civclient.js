@@ -478,7 +478,6 @@ function show_debug_info()
   console.log("simpleStorage version: " + simpleStorage.version);
   console.log("savegame count: " + simpleStorage.get("savegame-count"));
   console.log("Touch device: " + is_touch_device());
-  console.log("WebSocket Port: " + wsport);
 
   debug_active = true;
   /* Show average network latency PING (server to client, and back). */

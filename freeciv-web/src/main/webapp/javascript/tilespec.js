@@ -285,13 +285,9 @@ function fill_sprite_array(layer, ptile, pedge, pcorner, punit, pcity, citymode)
 ****************************************************************************/
 function fill_terrain_sprite_layer(layer_num, ptile, pterrain, tterrain_near)
 {
-  var result = [];
-  
-  result = result.concat(fill_terrain_sprite_array(layer_num, ptile, pterrain, tterrain_near));
-
   /* FIXME: handle blending and darkness. */
   
-  return result;
+  return fill_terrain_sprite_array(layer_num, ptile, pterrain, tterrain_near);
 
 }
 
@@ -344,11 +340,13 @@ function fill_terrain_sprite_array(l, ptile, pterrain, tterrain_near)
             if (ts_tiles[tterrain_near[i]['graphic_str']] == null) continue; 
             var that = ts_tiles[tterrain_near[i]['graphic_str']]['layer' + l + '_match_type'];
             if (that == this_match_type) {
-			  tileno |= 1 << i;
+              tileno |= 1 << i;
             }
           }
-          
-          return [ {"key" : "t.l" + l + "." + pterrain['graphic_str'] + "_" + cardinal_index_str(tileno)} ];
+          var gfx_key = "t.l" + l + "." + pterrain['graphic_str'] + "_" + cardinal_index_str(tileno);
+	  var y = tileset_tile_height - tileset[gfx_key][3];
+
+          return [ {"key" : gfx_key, "offset_x" : 0, "offset_y" : y} ];
           break;
         } 
       }

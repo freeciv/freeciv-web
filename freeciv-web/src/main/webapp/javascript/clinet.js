@@ -69,6 +69,7 @@ function network_init()
 function websocket_init()
 {
   ws = new ReconnectingWebSocket("ws://" + window.location.hostname + "/civsocket");
+  ws.reconnectInterval = 10000;
 
   ws.onopen = function () {
     var login_message = {"type":4, "username" : username,
@@ -93,8 +94,8 @@ function websocket_init()
   };
 
   ws.onerror = function (evt) {
-   show_dialog_message("Network error", "Unable to communicate with server using WebSockets. Error: " + evt); 
-   console.error("Unable to communicate with server using WebSockets. Error: " + evt);
+   show_dialog_message("Network error", "A problem occured with the WebSocket connection to the server. Error:" + evt); 
+   console.debug("Unable to communicate with server using WebSockets. Error: " + evt);
   };
 }
 

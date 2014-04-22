@@ -89,7 +89,7 @@ function websocket_init()
   };
 
   ws.onclose = function (event) {
-   console.error("WebSocket connection closed, code+reason: " + event.code + ", " + event.reason); 
+   console.debug("WebSocket connection closed, code+reason: " + event.code + ", " + event.reason); 
   };
 
   ws.onerror = function (evt) {

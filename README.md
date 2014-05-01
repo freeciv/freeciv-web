@@ -47,7 +47,7 @@ Freeciv-Web consists of these components:
 Running Freeciv-web with Vagrant on VirtualBox
 ----------------------------------------------
 Freeciv-web can be setup using Vagrant on VirtualBox to quickly create a 
-local developer image running Freeciv-web on Ubuntu 13.10 on your host 
+local developer image running Freeciv-web on Ubuntu 14.04 on your host 
 operating system such as Windows, OSX or Linux. 
 
 1. Install VirtualBox: https://www.virtualbox.org/
@@ -91,11 +91,11 @@ System Requirements for manual install
 
 Install this software if you are not running Freeciv-web with Vagrant:
 
-- Resin 4.0.38 - http://www.caucho.com/
+- Resin 4.0.39 - http://www.caucho.com/
 
 - Java 7 JDK - http://www.oracle.com/technetwork/java/javase/downloads/ 
 
-- Python 3.3 - http://www.python.org/
+- Python 3.4 - http://www.python.org/
 
 - Pillow v2.3.0 (PIL fork) - http://pillow.readthedocs.org/
   (required for freeciv-img-extract)

@@ -109,6 +109,7 @@ veteran_move_bonus = 0, 0, 0, 0
 ;                       "Marines"
 ; "KillCitizen"       = Upon successful attack against a city unit kills one citizen.
 ;                       There's server setting, as well as effects, to disable this.
+; "Airliftable"       = Unit may be airlifted
 ;
 ; */ <-- avoid gettext warnings
 
@@ -127,7 +128,7 @@ min_speed     = 1
 hp_loss_pct   = 0
 flags         = "TerrainSpeed", "DamageSlows", "CanOccupyCity", "BuildAnywhere",
                 "CollectRansom", "ZOC", "CanFortify", "CanPillage",
-                "TerrainDefense", "KillCitizen"
+                "TerrainDefense", "KillCitizen", "Airliftable"
 
 [unitclass_sea]
 ; /* TRANS: Unit class: used adjectivally */
@@ -248,8 +249,8 @@ flags         = "Unreachable", "DoesntOccupyTile"
 ; "HelpWonder"	= can help build wonders
 ; "TradeRoute"	= can establish trade routes
 ; "IgZOC"	= ignore Zones of Control (ZOC) even if unit class has "ZOC" flag
-; "HasNoZOC"    = unit has no Zone of Control (ZOC), thus any unit can move
-;                 around it freely
+; "HasNoZOC"	= unit has no Zone of Control (ZOC), thus any unit can move
+;		  around it freely
 ; "NonMil"	= a non-military unit: no attacks; no martial law; can enter
 ;                 peaceful borders; DoesntOccupyTile
 ; "IgTer"	= ignore terrain/road/rail, treat every tile as 1/3 move cost
@@ -261,7 +262,7 @@ flags         = "Unreachable", "DoesntOccupyTile"
 ;		  units other than missiles
 ; "Settlers"	= can irrigate and build roads
 ; "Diplomat"	= can do diplomat actions (see diplchance server option)
-; "Spy"         = enhanced diplomat actions. _Must_ be "Diplomat" also
+; "Spy"		= enhanced diplomat actions. _Must_ be "Diplomat" also
 ; "Trireme"	= (sea only) cannot leave shoreline
 ; "Nuclear"	= nuke!
 ; "Paratroopers"= (land only) can paradrop

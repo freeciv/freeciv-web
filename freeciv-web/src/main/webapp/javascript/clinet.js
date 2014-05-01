@@ -68,7 +68,8 @@ function network_init()
 ****************************************************************************/
 function websocket_init()
 {
-  ws = new WebSocket("ws://" + window.location.hostname + "/civsocket");
+  var proxyport = 1000 + parseFloat(civserverport);
+  ws = new WebSocket("ws://" + window.location.hostname + "/civsocket/" + proxyport);
 
   ws.onopen = function () {
     var login_message = {"type":4, "username" : username,

@@ -113,7 +113,7 @@ Install this software if you are not running Freeciv-web with Vagrant:
 
 - OpenSSL - http://www.openssl.org/
 
-- nginx 1.5.10 - http://nginx.org/
+- nginx 1.6.0 or later - http://nginx.org/
 
 - pngcrush, required for freeciv-img-extract.  http://pmt.sourceforge.net/pngcrush/
 

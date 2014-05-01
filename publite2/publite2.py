@@ -10,7 +10,7 @@ import sys
 import time
 import http.client
 
-port = 5556
+port = 6000
 metahost = "localhost:8080"
 metapath =  "/meta/metaserver.php"
 statuspath =  "/meta/status.php"
@@ -84,12 +84,14 @@ class civserverproc(Thread):
     def run(self):
         while 1:
             try:
-                print("Starting new Freeciv-web server at port " + str(port));
-                retcode = call("freeciv-web --port " + str(self.port) + " -q 20 -e " +
+                print("Starting new Freeciv-web server at port " + str(port) + 
+                      " and Freeciv-proxy server at port " + str(1000 + self.port) + ".");
+                retcode = call("python3.4 ../freeciv-proxy/freeciv-proxy.py " + str(1000 + self.port) + " & proxy_pid=$! && " +
+                               "freeciv-web --port " + str(self.port) + " -q 20 -e " +
                                " -m -M http://" + metahost + metapath  + " --type \"" + self.gametype +
                                "\" --read " + pubscript + self.gametype + ".serv" + 
                                " --log " + logdir + "fcweb-" + str(self.port) + ".log " +
-                               "--saves " + savesdir, shell=True)
+                               "--saves " + savesdir + " ; kill -9 $proxy_pid", shell=True)
                 if retcode < 0:
                     print("Freeciv-web was terminated by signal", -retcode, file=sys.stderr)
                 else:

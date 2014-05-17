@@ -638,7 +638,7 @@ function get_drawable_unit(ptile, citymode)
 **************************************************************************/
 function do_map_click(ptile, qtype)
 {
-  if (ptile == null) return;
+  if (ptile == null || client_is_observer()) return;
   
   if (goto_active) {
     if (current_focus.length > 0) {

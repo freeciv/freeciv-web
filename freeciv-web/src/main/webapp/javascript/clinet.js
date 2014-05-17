@@ -104,7 +104,7 @@ function websocket_init()
 ****************************************************************************/
 function network_stop()
 {
-  ws.close();
+  if (ws != null) ws.close();
   ws = null;
 }
 

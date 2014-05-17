@@ -581,11 +581,11 @@ if ( isset($port) ) {
 	  
   
           if ($mystate != "Running") {
-           print "<a  class='button' href=\"/webclient?action=multi&civserverport=" . db2html($row["port"]) . "&amp;civserverhost=" . db2html($row["host"]) . "\">";
+           print "<a  class='button' href=\"/webclient?action=multi&civserverport=" . db2html($row["port"]) . "&amp;civserverhost=" . db2html($row["host"]) . "&amp;multi=true\">";
            print "Play";
 	   print "</a>";
 	  } else {
-	   print "<a  class='button' href=\"/webclient?action=observe&amp;civserverport=" . db2html($row["port"]) . "&amp;civserverhost=" . db2html($row["host"]) . "\">";
+	   print "<a  class='button' href=\"/webclient?action=observe&amp;civserverport=" . db2html($row["port"]) . "&amp;civserverhost=" . db2html($row["host"]) . "&amp;multi=true\">";
            print "Join/Observe";
            print "</a>";
 	  }

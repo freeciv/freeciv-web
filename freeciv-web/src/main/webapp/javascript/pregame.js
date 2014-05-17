@@ -58,7 +58,7 @@ function observe()
 ****************************************************************************/
 function update_player_info()
 {
-  if (C_S_PREPARING <= client_state()) {
+  if (C_S_PREPARING == client_state()) {
     player_html = "";
     for (id in players) {
       player = players[id];

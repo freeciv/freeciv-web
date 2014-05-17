@@ -8,6 +8,7 @@
 <button id="wonders_report" class="button" type="button" onclick="request_report(REPORT_WONDERS_OF_THE_WORLD);">Wonders of the World</button><br>
 <button id="top_cities_report" class="button" type="button" onclick="request_report(REPORT_TOP_5_CITIES);">Top 5 Cities</button><br>
 <button id="demography_report" class="button" type="button" onclick="request_report(REPORT_DEMOGRAPHIC);">Demographics</button><br>
+<button id="demography_report" class="button" type="button" onclick="request_report(REPORT_ACHIEVEMENTS);">Achievements</button><br>
 
 
 </div>

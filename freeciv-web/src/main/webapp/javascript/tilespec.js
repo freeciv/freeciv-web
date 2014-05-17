@@ -1267,3 +1267,48 @@ function fill_irrigation_sprite_array(ptile, pcity)
   return result_sprites;
 }
 
+/****************************************************************************
+  Assigns the nation's color based on the color of the flag, currently
+  the most common color in the flag is chosen.
+****************************************************************************/
+function assign_nation_color(nation_id)
+{
+
+  var nation = nations[nation_id];
+  if (nation == null || nation['color'] != null) return;
+
+  var flag_key = "f." + nation['graphic_str'];
+  var flag_sprite = sprites[flag_key];
+  var c = flag_sprite.getContext('2d');
+  var width = tileset[flag_key][2];
+  var height = tileset[flag_key][3];
+  var color_counts = {};
+  /* gets the flag image data, except for the black border. */
+  var img_data = c.getImageData(1, 1, width-2, height-2).data;
+
+  /* count the number of each pixel's color */
+  for (var i = 0; i < img_data.length; i += 4) {
+    var current_color = "rgb(" + img_data[i] + "," + img_data[i+1] + "," 
+                        + img_data[i+2] + ")";
+    if (current_color in color_counts) {
+      color_counts[current_color] = color_counts[current_color] + 1;
+    } else {
+      color_counts[current_color] = 1;
+    }
+  }
+
+  var max = -1;
+  var max_color = null;
+
+  for (var current_color in color_counts) {
+    if (color_counts[current_color] > max) {
+      max = color_counts[current_color];
+      max_color = current_color;
+    }
+  }
+
+  nation['color'] = max_color;
+  color_counts = null;
+  img_data = null;
+
+}

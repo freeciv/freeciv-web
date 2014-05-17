@@ -31,6 +31,8 @@ var SPY_SABOTAGE_UNIT = 8;
 var DIPLOMAT_SABOTAGE_TARGET = 9;
 var DIPLOMAT_STEAL_TARGET = 10;
 var DIPLOMAT_ANY_ACTION = 11;   /* leave this one last */
+var anim_units_max = 30;
+var anim_units_count = 0;
 
 /****************************************************************************
  ...
@@ -168,7 +170,9 @@ function update_unit_anim_list(old_unit, new_unit)
   if (old_unit == null || new_unit == null) return;
   /* unit is in same position. */
   if (new_unit['tile'] == old_unit['tile']) return;
- 
+
+  if (anim_units_count > anim_units_max) return;
+
   if (!is_unit_visible(new_unit)) return;
  
   if (old_unit['anim_list'] == null) old_unit['anim_list'] = [];
@@ -179,6 +183,7 @@ function update_unit_anim_list(old_unit, new_unit)
     return;
   }
 
+  anim_units_count += 1;
   var has_old_pos = false;
   var has_new_pos = false;
   for (var i = 0; i <  old_unit['anim_list'].length; i++) {
@@ -255,6 +260,7 @@ function get_unit_anim_offset(punit)
   } else {
     offset['x'] = 0;
     offset['y'] = 0;
+    anim_units_count -= 1;
   }
   return offset;
 }
@@ -268,6 +274,7 @@ function reset_unit_anim_list()
     var punit = units[unit_id];
     punit['anim_list'] = [];
   }
+  anim_units_count = 0;
 }
 
 /**************************************************************************

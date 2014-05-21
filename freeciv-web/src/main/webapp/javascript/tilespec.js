@@ -36,9 +36,8 @@ var LAYER_SPECIAL1 = 4;
 var LAYER_CITY1 = 5;
 var LAYER_UNIT = 6;
 var LAYER_FOG = 7;
-var LAYER_FOCUS_UNIT = 8;
-var LAYER_CITYBAR = 9;
-var LAYER_COUNT = 10;
+var LAYER_CITYBAR = 8;
+var LAYER_COUNT = 9;
 
 // these layers are not used at the moment, for performance reasons.
 //var LAYER_BACKGROUND = ; (not in use)
@@ -195,8 +194,7 @@ function fill_sprite_array(layer, ptile, pedge, pcorner, punit, pcity, citymode)
     
     
     case LAYER_UNIT:
-    case LAYER_FOCUS_UNIT:
-      if (do_draw_unit && XOR(layer == LAYER_UNIT, unit_is_in_focus(punit)) && active_city == null) {
+      if (do_draw_unit && active_city == null) {
         var stacked = (ptile['units'] != null && ptile['units'].length > 1);
         var backdrop = false; /* !pcity;*/
 

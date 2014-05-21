@@ -390,24 +390,15 @@ function update_map_canvas(canvas_x, canvas_y, width, height)
         gui_x = Math.floor(ptile_xi * ptile_w / ptile_r2 - ptile_w / 2); 
         gui_y = Math.floor(ptile_yi * ptile_h / ptile_r2 - ptile_h / 2);
          
-        { // gui_rect_iterate begin_end
-
           var cx = gui_x - mapview['gui_x0'];
           var cy = gui_y - mapview['gui_y0'];
 
 
-          if (ptile != null) {
-            put_one_tile(mapview_canvas_ctx, layer, ptile, cx, cy, null);
-            
-          } else if (pedge != null) {
-            put_one_element(mapview_canvas_ctx, layer, null, pedge, null,
-                            null, null, cx, cy, null);
-          } else if (pcorner != null) {
-            put_one_element(mapview_canvas_ctx, layer, null, null, pcorner,
-                            null, null, cx, cy, null);
-          } else {
-            /* This can happen, for instance for unreal tiles. */
-          }
+        if (ptile != null) {
+          put_one_tile(mapview_canvas_ctx, layer, ptile, cx, cy, null);
+        } else if (pcorner != null) {
+          put_one_element(mapview_canvas_ctx, layer, null, null, pcorner,
+                          null, null, cx, cy, null);
         }
       } 
     } 

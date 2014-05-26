@@ -445,7 +445,7 @@ function init_game_unit_panel()
 			height: "auto",
 			resizable: false,
 			dialogClass: 'unit_dialog',
-			position: ["right", "bottom"],
+			position: {my: 'right bottom', at: 'right bottom', of: "#canvas_div"},
 			close: function(event, ui) { unitpanel_active = false;}
 
 		});

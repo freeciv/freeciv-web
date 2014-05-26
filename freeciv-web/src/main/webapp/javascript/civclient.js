@@ -167,7 +167,7 @@ function init_chatbox()
 			resizable: true,
 			dialogClass: 'chatbox_dialog',
 			resize: chatbox_resized,
-			position: ["center", "top"],
+			position: {my: 'center bottom', at: 'center bottom', of: window},
 			close: function(event, ui) { chatbox_active = false;}
 		});
 	

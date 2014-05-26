@@ -629,8 +629,14 @@ function set_default_mapview_active()
   chatbox_scroll_down();
 
   if (!is_small_screen()) {
-    if (overview_active) $("#game_overview_panel").parent().show();
-    if (unitpanel_active) $("#game_unit_panel").parent().show();
+    if (overview_active) {
+      $("#game_overview_panel").parent().show();
+      $(".overview_dialog").position({my: 'left bottom', at: 'left bottom', of: window});
+    }
+    if (unitpanel_active) {
+      $("#game_unit_panel").parent().show();
+      $(".unit_dialog").position({my: 'right bottom', at: 'right bottom', of: window});
+    }
     if (chatbox_active) $("#game_chatbox_panel").parent().show();
   }
 

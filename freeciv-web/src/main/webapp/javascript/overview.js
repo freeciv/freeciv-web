@@ -54,10 +54,9 @@ function init_overview()
 			bgiframe: true,
 			modal: false,
 			width: "auto",
-			height: "auto",
+			minHeight: 110,
 			resizable: false,
 			dialogClass: 'overview_dialog',
-			position: ["left", "bottom"],
 			close: function(event, ui) { overview_active = false;}
 		});
 	
@@ -85,7 +84,8 @@ function init_overview()
 
   palette_size = Object.keys(players).length;
 
-
+  $("#game_overview_panel").css("min-height",  map['ysize']);
+  $(".overview_dialog").position({my: 'left bottom', at: 'left bottom', of: window});
 }
 
 /****************************************************************************

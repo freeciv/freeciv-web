@@ -105,7 +105,7 @@
             <configuration>
               <cssSourceDir>css</cssSourceDir>
               <cssSourceFiles>
-	      <cssSourceFile>jquery-ui.custom.min.css</cssSourceFile>
+	      <cssSourceFile>jquery-ui.min.css</cssSourceFile>
 	      <cssSourceFile>bluecurve.css</cssSourceFile>
 	      <cssSourceFile>fg.menu.css</cssSourceFile>
 	      <cssSourceFile>theme.dark.css</cssSourceFile>

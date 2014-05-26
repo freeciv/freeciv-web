@@ -15,14 +15,10 @@ button {
   overflow:visible; 
 }
 
-.demoHeaders { 
-  margin-top: 0px; 
-}
-
 .ui-tabs .ui-tabs-panel {
   border-width:0;
   display:block;
-  height:92%;
+  height:88%;
   padding:0px;
 }
 
@@ -112,18 +108,6 @@ button {
   display: inline-block;
   height: 30px;
   width: 30px;
-}
-
-#ie_canvas {
-  overflow: hidden;
-  position: relative;
-}
-
-#city_ie_canvas {
-  overflow: hidden;
-  position: relative;
-  width: 300px;
-  height: 150px;
 }
 
 #turn_done_button_div {
@@ -451,6 +435,7 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 }
 
 #tabs_menu {
+  font-size: 0.9em;
   overflow: hidden;
 }
 

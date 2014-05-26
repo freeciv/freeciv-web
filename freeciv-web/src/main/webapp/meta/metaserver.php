@@ -353,13 +353,13 @@ if ( isset($port) ) {
 
     <script type="text/javascript" src="/javascript/json2.js"></script>
     <script type="text/javascript" src="/javascript-compressed/jquery.min.js"></script>
-    <script type="text/javascript" src="/javascript/jquery-ui.custom.min.js"></script>   
+    <script type="text/javascript" src="/javascript/jquery-ui.min.js"></script>   
     <script type="text/javascript" src="/meta/js/meta.js"></script>
 
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
 
-    <link type="text/css" href="/meta/css/jquery-ui.custom.min.css" rel="stylesheet" />
+    <link type="text/css" href="/meta/css/jquery-ui.min.css" rel="stylesheet" />
 
     <link href="/css/frontpage.css" rel="stylesheet">
 

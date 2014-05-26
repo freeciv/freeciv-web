@@ -91,7 +91,7 @@ System Requirements for manual install
 
 Install this software if you are not running Freeciv-web with Vagrant:
 
-- Resin 4.0.39 - http://www.caucho.com/
+- Resin 4.0.x - http://www.caucho.com/
 
 - Java 7 JDK - http://www.oracle.com/technetwork/java/javase/downloads/ 
 

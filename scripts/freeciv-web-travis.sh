@@ -27,9 +27,9 @@ echo logfile $logfile
 mysql_user="root"
 mysql_pass="vagrant"
 
-resin_version="4.0.39"
+resin_version="4.0.40"
 resin_url="http://www.caucho.com/download/resin-${resin_version}.tar.gz"
-tornado_url="https://pypi.python.org/packages/source/t/tornado/tornado-3.2.tar.gz"
+tornado_url="https://pypi.python.org/packages/source/t/tornado/tornado-3.2.1.tar.gz"
 
 # Based on fresh install of Ubuntu 12.04
 dependencies="maven mysql-server-5.5 openjdk-7-jdk libcurl4-openssl-dev nginx libjansson-dev subversion pngcrush libtool automake autoconf autotools-dev language-pack-en python3-setuptools libglib2.0-dev python3.2 python3.2-dev"

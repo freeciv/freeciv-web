@@ -614,15 +614,13 @@ function set_city_mapview_active()
 function set_default_mapview_active()
 {
   mapview_canvas_ctx = mapview_canvas.getContext("2d");
-
+  mapview_canvas_ctx.font = canvas_text_font;
   city_dialog_remove();
 
   /* shows mapview elements */
-  $("#tabs-map").removeClass("ui-tabs-hide");
   $("#tabs-map").show();
   $("#map_tab").addClass("ui-state-active");
   $("#map_tab").addClass("ui-tabs-selected");
-  $("#map_tab").removeClass("ui-state-default");
   $("#tabs-hel").hide();
 
   update_map_canvas_full();

@@ -137,14 +137,14 @@ function pick_nation()
   }
 
   
-  nations_html += "</div><div id='nation_legend'></div>";
+  nations_html += "</div><div id='nation_legend'></div><div id='select_nation_flag'></div>";
   
   $("#pick_nation_dialog").html(nations_html);
   $("#pick_nation_dialog").attr("title", "Which nation do you want to rule?");
   $("#pick_nation_dialog").dialog({
 			bgiframe: true,
 			modal: true,
-			width: "80%",
+			width: "90%",
 			buttons: {
 				Ok: function() {
 					$("#pick_nation_dialog").dialog('close');
@@ -193,6 +193,8 @@ function select_nation(new_nation_id)
   $("#nation_autocomplete_box").val(pnation['adjective']);
   $("#nation_" + chosen_nation).css("background-color", "transparent");
   $("#nation_choice").html("Your Nation: " + pnation['adjective']);
+  $("#select_nation_flag").html("<img src='/images/flags/" 
+		            + pnation['graphic_str'] + "-web.png' width='180'>");
 
   if (chosen_nation != new_nation_id && $("#nation_" + new_nation_id).length > 0) {
     $("#nation_" + new_nation_id).get(0).scrollIntoView();

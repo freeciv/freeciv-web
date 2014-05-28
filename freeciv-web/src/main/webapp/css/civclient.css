@@ -497,3 +497,7 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
   padding: 8px;
   font-size: 80%;
 }
+
+.govbutton {
+  width: 190px;
+}

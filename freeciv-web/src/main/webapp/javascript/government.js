@@ -74,13 +74,7 @@ function init_civ_dialog()
 	    + " with the form of government: " + governments[client.conn.playing['government']]['name']
 	    + "</div><br>"
     $("#nation_title").html("The " + nations[pplayer['nation']]['adjective'] + " nation");
-
     $("#civ_dialog_text").html(civ_description);
-    $("#revolution_button").css("width", 190);
-    $("#taxrates_button").css("width", 190);
-    $("#wonders_report").css("width", 190);
-    $("#top_cities_report").css("width", 190);
-    $("#demography_report").css("width", 190);
 
   } else {
     $("#civ_dialog_text").html("This dialog isn't available as observer.");

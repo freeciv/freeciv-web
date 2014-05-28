@@ -93,7 +93,7 @@ function civclient_init()
   }
 
 
-  $('#tabs').tabs();
+  $('#tabs').tabs({ heightStyle: "fill" });
   $(".button").button();
 }
 

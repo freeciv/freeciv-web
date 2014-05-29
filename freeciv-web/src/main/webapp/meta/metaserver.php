@@ -502,12 +502,21 @@ if ( isset($port) ) {
 
       }
     } else {
+
+      $stmt="select count(*) as count from servers s where type = 'singleplayer' and state = 'Running'";
+      $res = fcdb_exec($stmt);
+      $row = fcdb_fetch_array($res, 0);
+      $single_count = $row["count"];
+      $stmt="select count(*) as count from servers s where type = 'multiplayer' and state = 'Running'";
+      $res = fcdb_exec($stmt);
+      $row = fcdb_fetch_array($res, 0);
+      $multi_count = $row["count"];
 	?>
 
 <div id="tabs">
 <ul>
-<li><a id="singleplr" href="#tabs-1">Single-player Games</a></li>
-<li><a id="multiplr" href="#tabs-2">Multi-player Games</a></li>
+<li><a id="singleplr" href="#tabs-1">Single-player Games (<? print $single_count ?>)</a></li>
+<li><a id="multiplr" href="#tabs-2">Multi-player Games (<?  print $multi_count ?>)</a></li>
 <li><a id="freecivmeta" href="#tabs-3">Desktop Games</a></li>
 </ul>
 <div id="tabs-1">

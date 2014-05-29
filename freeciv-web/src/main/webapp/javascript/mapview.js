@@ -153,6 +153,7 @@ function setup_window_size ()
 
   $("#game_status_panel").css("width", mapview_canvas.width);
 
+  $('#tabs').css("height", $(window).height());
 
   $("#pregame_message_area").height( mapview['height'] - 80);
   $("#pregame_player_list").height( mapview['height'] - 80);

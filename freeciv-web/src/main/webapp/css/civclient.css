@@ -141,8 +141,7 @@ button {
 
 #city_button_pane {
   margin: 20px;
-  position: absolute;
-  bottom: 30px;
+  float: left;
 }
 
 
@@ -500,4 +499,44 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 
 .govbutton {
   width: 190px;
+}
+
+#nation_table {
+  cursor: pointer;    
+}
+
+#nations_button_div {
+  padding-bottom: 15px;
+}
+
+.ui-selected {
+  background-color: #eeeeee;
+  color: black;
+}
+
+.ui-selecting {
+  background-color: #bbbbbb;
+  color: black;
+}
+.tablesorter-dark td {
+	background-color: inherit;
+	color: inherit;
+}
+
+.tablesorter-dark tbody > tr:hover > td,
+.tablesorter-dark tbody > tr.even:hover > td,
+.tablesorter-dark tbody > tr.odd:hover > td {
+	background: inherit;
+}
+
+.nation_row_self {
+  color: blue;
+}
+
+.nation_row_war {
+  color: red;
+}
+
+.nation_row_dead {
+  color: #222222;
 }

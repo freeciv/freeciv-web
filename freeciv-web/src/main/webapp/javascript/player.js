@@ -111,3 +111,30 @@ function get_diplstate_text(state_id)
 
 }
 
+/**************************************************************************
+  ...
+**************************************************************************/
+function get_ai_level_text(player) 
+{
+  var ai_level = player['ai_skill_level'];
+  if (ai_level == 0) {
+    return "Away";
+  } else if (ai_level == 1) {
+    return "Handicapped";
+  } else if (ai_level == 2) {
+    return "Novice";
+  } else if (ai_level == 3) {
+    return "Easy";
+  } else if (ai_level == 4) {
+    return "Normal";
+  } else if (ai_level == 5) {
+    return "Hard";
+  } else if (ai_level == 6) {
+    return "Cheating";
+  } else if (ai_level == 6) {
+    return "Experimental";
+  } 
+
+  return "Unknown";
+
+}

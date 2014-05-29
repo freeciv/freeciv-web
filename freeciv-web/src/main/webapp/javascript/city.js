@@ -229,6 +229,10 @@ function show_city_dialog(pcity)
 
   $("#buy_button").button(city_can_buy(pcity) ? "enable" : "disable");
 
+
+  if (is_small_screen()) {
+    $("#city_dialog_info").hide();
+  }
 }
 
 /**************************************************************************

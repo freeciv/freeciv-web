@@ -638,6 +638,8 @@ function set_default_mapview_active()
     if (chatbox_active) $("#game_chatbox_panel").parent().show();
   }
 
+  $("#tabs").tabs("option", "active", 0);
+
   tech_dialog_active = false;
   allow_right_click = false;
 }

@@ -176,7 +176,7 @@ button {
 }
 
 #game_unit_orders_default {
-  bottom: 25px;
+  bottom: 55px;
   min-width: 300px;
   height: 40px;
   position: absolute;
@@ -321,9 +321,9 @@ button {
   color: #ffffff;
   height: 23px;
   text-align: center;
-  bottom: 0px;
-  background-color: #000000
+  bottom: 35px;
   overflow: hidden;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
 

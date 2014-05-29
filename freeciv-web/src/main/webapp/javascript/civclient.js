@@ -93,11 +93,8 @@ function civclient_init()
   }
 
 
-  if (is_small_screen()) {
-    $('#tabs').tabs();
-  } else {
-    $('#tabs').tabs({ heightStyle: "fill" });
-  }
+  $('#tabs').tabs({ heightStyle: "fill" });
+  $('#tabs').css("height", $(window).height());
   $(".button").button();
 }
 

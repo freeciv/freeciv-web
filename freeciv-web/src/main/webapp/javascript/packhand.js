@@ -664,7 +664,7 @@ function handle_thaw_client(packet)
 
 function handle_spaceship_info(packet) 
 {
-  /* TODO: implement*/
+  spaceship_info[packet['player_num']] = packet;
 }
 
 /* 100% complete */

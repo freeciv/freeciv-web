@@ -298,11 +298,11 @@ function change_city_production_dialog()
     }
 
     production_html = production_html 
-     + "<div id='production_list_item' style='" + (current_prod ? "background-color:#777777; text:#000000; border: 1px solid #ffffff;" : "") + "'" 
+     + "<div class='production_list_item' style='" + (current_prod ? "background-color:#777777; text:#000000; border: 1px solid #ffffff;" : "") + "'" 
      + " onclick='send_city_change(" + pcity['id'] + "," + production_list[a]['kind'] + "," + production_list[a]['value'] + ")' "
      + " title='" + production_list[a]['helptext'] + "'>"
      
-     + "<div id='production_list_item_sub' style=' background: transparent url(" 
+     + "<div class='production_list_item_sub' style=' background: transparent url(" 
            + sprite['image-src'] +
            ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y'] 
            + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px;'"

@@ -1,0 +1,40 @@
+diff --git freeciv/server/spacerace.c freeciv/server/spacerace.c
+index a96afc3..04d35f7 100644
+--- freeciv/server/spacerace.c
++++ freeciv/server/spacerace.c
+@@ -33,6 +33,8 @@
+ #include "notify.h"
+ #include "srv_main.h"
+ 
++#include "../ai/default/advspace.h"
++
+ #include "spacerace.h"
+ 
+ 
+@@ -135,7 +137,12 @@ void send_spaceship_info(struct player *src, struct conn_list *dest)
+     if (!src || pplayer == src) {
+       struct packet_spaceship_info info;
+       struct player_spaceship *ship = &pplayer->spaceship;
+-	  
++      
++      if (pplayer->spaceship.state == SSHIP_STARTED) { 
++        dai_spaceship_autoplace(pplayer, ship);
++      }
++
++
+       info.player_num = player_number(pplayer);
+       info.sship_state = ship->state;
+       info.structurals = ship->structurals;
+@@ -149,9 +156,9 @@ void send_spaceship_info(struct player *src, struct conn_list *dest)
+       info.launch_year = ship->launch_year;
+       info.population = ship->population;
+       info.mass = ship->mass;
+-      info.support_rate = ship->support_rate;
+-      info.energy_rate = ship->energy_rate;
+-      info.success_rate = ship->success_rate;
++      info.support_rate = ship->support_rate * 100;
++      info.energy_rate = ship->energy_rate * 100;
++      info.success_rate = ship->success_rate * 100;
+       info.travel_time = ship->travel_time;
+       info.structure = ship->structure;
+ 	  

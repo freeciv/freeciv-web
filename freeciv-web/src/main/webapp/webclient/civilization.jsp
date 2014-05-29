@@ -9,6 +9,7 @@
 <button id="top_cities_report" class="button govbutton" type="button" onclick="request_report(REPORT_TOP_5_CITIES);">Top 5 Cities</button><br>
 <button id="demography_report" class="button govbutton" type="button" onclick="request_report(REPORT_DEMOGRAPHIC);">Demographics</button><br>
 <button id="achievements_report" class="button govbutton" type="button" onclick="request_report(REPORT_ACHIEVEMENTS);">Achievements</button><br>
+<button id="spaceship_report" class="button govbutton" type="button" onclick="show_spaceship_dialog();">Spaceship</button><br>
 
 
 </div>

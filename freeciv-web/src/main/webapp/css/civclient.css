@@ -377,14 +377,15 @@ button {
 }
 
 
-#production_list_item {
+.production_list_item {
   float: left;
   text-align: center; 
   width: 80px;
   height: 90px;
+  font-size: 70%;
 }
 
-#production_list_item_sub {
+.production_list_item_sub {
   cursor:pointer;
   cursor:hand;
   float:left; 

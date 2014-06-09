@@ -103,22 +103,6 @@ diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/gene
  
  ################# END OF PARAMETERS ####################
  
-@@ -1640,6 +1640,7 @@
- 
- #include "packets.h"
- 
-+#if 0
- static genhash_val_t hash_const(const void *vkey, size_t num_buckets)
- {
-   return 0;
-@@ -1649,6 +1650,7 @@
- {
-   return TRUE;
- }
-+#endif /* 0 */
- 
- ''')
- 
 diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
 --- freeciv/common/packets.def	2014-02-09 06:02:23.508112415 +0200
 +++ freeciv/common/packets.def	2014-02-09 06:03:48.867916770 +0200

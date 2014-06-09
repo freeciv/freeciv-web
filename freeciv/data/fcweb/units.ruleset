@@ -19,12 +19,15 @@ description="Default unit_type data for Freeciv"
 options="+Freeciv-ruleset-Devel-2013.May.14"
 
 [control]
-; Names for custom unit type flags.
+; Names for custom unit type flags. There can be up to 16 of these.
+; name          = rule name; not translateable, but may be displayed in
+;                 some circumstances
+; helptxt       = displayed in the help for units with this flag
 flags =
   { "name", "helptxt"
     "Airbase", _("Can build Airbases.") 
     "Transform", _("Can transform terrain.")
-    "AirUnit", _("Very bad at attacking AEGIS.")
+    "AirAttacker", _("Very bad at attacking AEGIS.")
     "Horse", _("Attack value halved when attacking Pikemen.")
     "Helicopter", _("Defends very badly against Fighters.")
     "Unbribable", _("May not be bribed.")
@@ -46,8 +49,8 @@ veteran_work_raise_chance = 5, 3, 1, 0
 veteran_power_fact = 100, 150, 175, 200
 
 ; The additional number of movement points granted for different veteran
-; levels.  These are thirds of points, so to increase movement
-; by a whole point 3 must be specified.
+; levels. These are fractional move points as defined by move_fragments in
+; terrain.ruleset.
 veteran_move_bonus = 0, 0, 0, 0
 
 ; /* <-- avoid gettext warnings
@@ -76,24 +79,28 @@ veteran_move_bonus = 0, 0, 0, 0
 ;                 terrains. You need to set it only if you want to set move
 ;                 type "Both" for unit that has no native Land terrains or
 ;                 for unit that has no native Oceanic terrains.
-; min_speed     = Minimum speed after damage and effects
+; min_speed     = Minimum speed after damage and effects (whole movement points)
 ; hp_loss_pct   = Hitpoints lost each turn if unit not in city or native base
 ; non_native_def_pct = Defense power percentage applying when defending on
 ;                      non-native terrain (such as ship in harbour)
-; hut_behavior  = What happens to huts when unit enters tile: "Normal", "Nothing" or
-;                 "Frighten"
-; flags         = List of unit class flags
+; hut_behavior  = What happens to huts when unit enters tile:
+;                 "Normal", "Nothing" or "Frighten"
+; flags         = List of unit class flags (from the following list; you
+;                 cannot add custom unit class flags)
 ;
 ; ** Unit class Flags **
 ;
 ; "TerrainSpeed"   = Units use terrain specific speed
 ; "TerrainDefense" = Units gain defense bonus from terrain
-; "DamageSlows"   = Damages units are slowed down
+; "DamageSlows"   = Damaged units are slowed down
 ; "CanOccupyCity" = Military units of this class can occupy enemy cities
 ; "Missile"       = Unit is destroyed when it attacks
 ; "BuildAnywhere" = Unit can be built even in the middle of non-native terrain
-; "Unreachable"   = Unit can be attacked only by units explicitly listing this class as target
-;                   or on city or airbase
+; "Unreachable"   = Unit can be attacked only by units explicitly listing this
+;                   class in its 'targets', unless on a city or native base.
+;                   For class members which are transports, cargo cannot load/
+;                   unload except in a city or native base, unless that unit
+;                   explicitly lists this class in its 'embarks'/'disembarks'.
 ; "CollectRansom" = Unit can collect ransom when killing lone barbarian leader
 ; "ZOC"           = Unit is subject to ZOC rules. Unit type flag "IgZOC" can
 ;                   override this
@@ -101,14 +108,16 @@ veteran_move_bonus = 0, 0, 0, 0
 ; "CanPillage"    = Unit can pillage tile infrastructure
 ; "DoesntOccupyTile"  = Even if this kind of enemy unit is on tile, cities can
 ;                       still work that tile
-; "AttackNonNative"   = Unit can attack units on non-native tiles. Unit type flag
-;                       "Only_Native_Attack" can override this
-; "AttFromNonNative"  = Unit can launch attach from non-native tile (against native one)
-;                       This applies for both attacking from transport or cities. If only
-;                       some unit types of the class should get this property, use type flag
-;                       "Marines"
-; "KillCitizen"       = Upon successful attack against a city unit kills one citizen.
-;                       There's server setting, as well as effects, to disable this.
+; "AttackNonNative"   = Unit can attack units on non-native tiles. Unit type
+;                       flag "Only_Native_Attack" can override this
+; "AttFromNonNative"  = Unit can launch attach from non-native tile (against
+;                       native one)
+;                       This applies for both attacking from transport or
+;                       cities. If only some unit types of the class should
+;                       get this property, use type flag "Marines"
+; "KillCitizen"       = Upon successful attack against a city, unit kills one
+;                       citizen. The effect "Unit_No_Lose_Pop" and the server
+;                       setting 'killcitizen' can disable this.
 ; "Airliftable"       = Unit may be airlifted
 ;
 ; */ <-- avoid gettext warnings
@@ -181,7 +190,7 @@ flags         = "Unreachable", "DoesntOccupyTile"
 ;                 present, 'name' is used. Since the name used in savegames
 ;                 must not change, use this when renaming a unit after a
 ;                 ruleset has been released.
-; graphic       = tag specifing preferred graphic
+; graphic       = tag specifying preferred graphic
 ; graphic_alt	= tag for alternate garphic if preferred graphic is not 
 ;		  present; especially if preferred graphic is non-standard, 
 ;		  this should be a standard tag.  Otherwise can use eg "-" 
@@ -191,6 +200,16 @@ flags         = "Unreachable", "DoesntOccupyTile"
 ; impr_req	= required city improvement, names from buildings.ruleset
 ; gov_req       = required government, names from governments.ruleset
 ; obsolete_by   = can be upgraded to and made obsolete by another unit by name
+; build_cost    = production shields required to build
+; pop_cost      = population removed from city when built; for 'AddToCity'
+;                 units this is also the population added to the destination
+; attack        = base attack strength (0 = cannot attack)
+; defense       = base defense strength (0 = cannot defend)
+; hitpoints     = how much damage unit can withstand
+; firepower     = number of hitpoints removed per round of combat; at least 1
+; move_rate     = base move rate (whole movement points)
+; vision_radius_sq = base vision of unit: unit can see tile up to the square
+;                 root of this value away
 ; convert_to    = can be converted to another type of unit by name
 ; convert_time  = time it takes to convert to another unit type
 ; class         = One of the classes listed above
@@ -200,18 +219,22 @@ flags         = "Unreachable", "DoesntOccupyTile"
 ;                 the unit has unlimited fuel, despite flying.
 ; uk_*          = upkeep costs, these are used as base values in the game
 ; cargo         = Unit classes this unit can transport
-; city_size     = Initial size of the cities Settlers type unit builds
+; city_size     = Initial size of the cities built by 'Cities' type units
+;                 (but 'AddToCity' uses pop_cost)
 ; targets       = list of unit classes this unit can attack against even
 ;                 if they have Unreachable unit class flag
-; embarks       = list of unit classes this unit may embark upon even if they
-;                 have Unreachable unit class flag and are not in native base
-; disembarks    = list of unit classes this unit may disembark from even if they
-;                 have Unreachable unit class flag and are not in native base
+; embarks       = list of unit classes this unit may load into while not in
+;                 native base or city even if transporter has Unreachable unit
+;                 class flag
+; disembarks    = list of unit classes this unit may unload from while not in
+;                 native base or city even if transporter has Unreachable unit
+;                 class flag
 ; bonuses       = definitions of combat bonuses against specific other units
 ; bonuses.flag  = flag of the unit that bonus applies against
 ; bonuses.type  = type of the bonus. See below
 ; bonuses.value = value of the bonus. Sum of these is used if multiple apply.
-; flags         = special flag strings
+; flags         = special flag strings; list of built-in flags described below
+;                 and/or user flags defined above
 ;
 ; veteran_names = Special veteran level for this unit. See the definitions in
 ;                 game.ruleset. All of the veteran_* entries have to have the
@@ -248,12 +271,14 @@ flags         = "Unreachable", "DoesntOccupyTile"
 ;
 ; "HelpWonder"	= can help build wonders
 ; "TradeRoute"	= can establish trade routes
-; "IgZOC"	= ignore Zones of Control (ZOC) even if unit class has "ZOC" flag
+; "IgZOC"       = ignore Zones of Control (ZOC) even if unit class has
+;                 "ZOC" flag
 ; "HasNoZOC"	= unit has no Zone of Control (ZOC), thus any unit can move
 ;		  around it freely
 ; "NonMil"	= a non-military unit: no attacks; no martial law; can enter
 ;                 peaceful borders; DoesntOccupyTile
-; "IgTer"	= ignore terrain/road/rail, treat every tile as 1/3 move cost
+; "IgTer"       = ignore terrain/road etc, use constant move cost defined in
+;                 igter_cost (terrain.ruleset)
 ; "OneAttack"	= can only make a single attack, regardless of movement points
 ; "IgWall"	= ignore effect of city walls
 ; "FieldUnit"	= cause unhappiness even when not being aggressive
@@ -266,12 +291,13 @@ flags         = "Unreachable", "DoesntOccupyTile"
 ; "Trireme"	= (sea only) cannot leave shoreline
 ; "Nuclear"	= nuke!
 ; "Paratroopers"= (land only) can paradrop
-; "Cities"	= can disband to produce a city
-; "Only_Native_Attack" = cannot attack targets on non-native tiles even if unit class can
-; "AddToCity"	= can disband to add a single point of population to a city
-;		  (see cities.ruleset for limitation of this ability)
+; "Cities"      = can disband to produce a city (initial population city_size)
+; "Only_Native_Attack" = cannot attack targets on non-native tiles even if
+;                 unit class can
+; "AddToCity"   = can disband to add pop_cost population to a city
+;                 (see cities.ruleset for limitation of this ability)
 ; "Fanatic"	= can only be built by governments that allow them
-;		  (see data/civ2/governments.ruleset, Fanaticism government)
+;		  (see civ2/governments.ruleset, Fundamentalism government)
 ; "Unique"	= a player can only have one of these units in the game at
 ;		  the same time; barbarians cannot use this at present
 ; "GameLoss"	= losing one of these units means you lose the game, but it
@@ -309,8 +335,9 @@ flags         = "Unreachable", "DoesntOccupyTile"
 ;  "Paratroopers"
 ;   paratroopers_range = the maximal range the unit can be paradropped to
 ;   paratroopers_mr_req = the move rate which is required at least for
-;                         paradropping
+;                         paradropping (whole movement points)
 ;   paratroopers_mr_sub = the move rate which is subtracted after paradropping
+;                         (whole movement points)
 ;  "Bombarder"
 ;   bombard_rate = the number of shots fired at enemy units when attacking
 ;
@@ -1216,7 +1243,7 @@ bonuses       =
      "Helicopter", "DefenseDivider", 1
      "Helicopter", "Firepower1", 1
    }
-flags         = "AirUnit"
+flags         = "AirAttacker"
 roles         = ""
 helptext      = _("\
 Fighters are your first airborne units. They can\
@@ -1248,7 +1275,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "FieldUnit", "OneAttack", "AirUnit"
+flags         = "FieldUnit", "OneAttack", "AirAttacker"
 roles         = ""
 helptext      = _("\
 Bombers are specialized airborne units that may\
@@ -1282,7 +1309,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "FieldUnit", "OneAttack", "Helicopter", "AirUnit"
+flags         = "FieldUnit", "OneAttack", "Helicopter", "AirAttacker"
 roles         = ""
 helptext      = _("\
 The Helicopter is a very powerful unit, as it can both fly and\
@@ -1323,7 +1350,7 @@ bonuses       =
      "Helicopter", "DefenseDivider", 1
      "Helicopter", "Firepower1", 1
    }
-flags         = "Partial_Invis", "AirUnit"
+flags         = "Partial_Invis", "AirAttacker"
 roles         = ""
 helptext      = _("\
 An improved Fighter, with improved attack and a higher movement\
@@ -1355,7 +1382,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "Partial_Invis", "FieldUnit", "OneAttack", "AirUnit"
+flags         = "Partial_Invis", "FieldUnit", "OneAttack", "AirAttacker"
 roles         = ""
 helptext      = _("\
 An improved Bomber, with improved attack and a higher movement\
@@ -1623,7 +1650,7 @@ uk_food       = 0
 uk_gold       = 0
 bonuses       =
    { "flag", "type", "value"
-     "AirUnit", "DefenseMultiplier", 4
+     "AirAttacker", "DefenseMultiplier", 4
    }
 flags         = "BadCityDefender"
 roles         = "DefendGood"
@@ -1793,7 +1820,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "FieldUnit", "OneAttack", "AirUnit"
+flags         = "FieldUnit", "OneAttack", "AirAttacker"
 roles         = ""
 helptext      = _("\
 The Cruise Missile is a long-distance missile\
@@ -1828,7 +1855,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "FieldUnit", "OneAttack", "Nuclear", "AirUnit"
+flags         = "FieldUnit", "OneAttack", "Nuclear", "AirAttacker"
 roles         = ""
 helptext      = _("\
 You can build Nuclear units when you have the required advance, and\
@@ -2230,7 +2257,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "AirUnit"
+flags         = ""
 roles         = ""
 helptext      = _("\
 The AWACS (Airborne Warning and Control System) is an airplane with an \

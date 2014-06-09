@@ -1688,9 +1688,10 @@ sabotage	= 0
 sound		= "w_sun_tzus_war_academy"
 sound_alt	= "w_generic"
 helptext	= _("\
-All your new military land units start at the first veteran level. The\
- chance of a land unit getting the next veteran level after a battle\
- increases by half.\
+All your new military land units start with an additional veteran level\
+ (this is cumulative with any Barracks building in a city; with both, units\
+ are created as Hardened). The chance of a land unit getting the next\
+ veteran level after a battle increases by half.\
 ")
 
 [building_united_nations]

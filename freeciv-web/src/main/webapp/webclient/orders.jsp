@@ -37,6 +37,10 @@
     <a href="#" onclick="key_unit_irrigate();"><img src="/images/orders/irrigate_default.png" name="irrigate_button" alt="" border="0" width="30" height="30"></a>
   </div>
 
+  <div id="order_forest_remove" class="order_button" title="Cut down forest (I)" >
+    <a href="#" onclick="key_unit_irrigate();"><img src="/images/orders/forest_remove_default.png" name="forest_remove_button" alt="" border="0" width="30" height="30"></a>
+  </div>
+
   <div id="order_road" class="order_button" title="Build road (R)">
     <a href="#" onclick="key_unit_road();"><img src="/images/orders/road_default.png" name="road_button" alt="" border="0" width="30" height="30"></a>
   </div>
@@ -50,6 +54,10 @@
     <a href="#" onclick="key_unit_mine();"><img src="/images/orders/mine_default.png" name="mine_button" alt="" border="0" width="30" height="30"></a>
   </div>
 
+  <div id="order_transform" class="order_button" title="Transform terrain (O)">
+    <a href="#" onclick="key_unit_transform();"><img src="/images/orders/transform_default.png" name="transform_button" alt="" border="0" width="30" height="30"></a>
+  </div>
+
   <div id="order_pollution" class="order_button" title="Remove pollution (P)">
     <a href="#" onclick="key_unit_pollution();"><img src="/images/orders/pollution.png" name="pollution_button" alt="" border="0" width="30" height="30"></a>
   </div>
@@ -60,6 +68,10 @@
 
   <div id="order_nuke" class="order_button" title="Nuke (Shift-N)">
     <a href="#" onclick="key_unit_nuke();"><img src="/images/orders/nuke.png" name="nuke_button" alt="" border="0" width="30" height="30"></a>
+  </div>
+
+  <div id="order_change_homecity" class="order_button" title="Change homecity of unit (h)">
+    <a href="#" onclick="key_unit_homecity();"><img src="/images/orders/rehome_default.png" name="rehome_button" alt="" border="0" width="30" height="30"></a>
   </div>
 
 </div>

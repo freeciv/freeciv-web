@@ -382,12 +382,29 @@ function update_unit_order_commands()
         $("#order_railroad").hide();
       }
       $("#order_mine").show();
-      $("#order_irrigate").show();
       $("#order_fortify").hide();
       $("#order_sentry").hide();
       $("#order_explore").hide();
       $("#order_auto_settlers").show();
       $("#order_pollution").show();
+
+      if (tile_has_extra(ptile, EXTRA_POLLUTION)) {
+        $("#order_pollution").show();
+      } else {
+        $("#order_pollution").hide();
+      }
+
+      if (tile_terrain(ptile)['name'] == "Forest") {
+        $("#order_forest_remove").show(); 
+        $("#order_irrigate").hide();
+      } else if (!tile_has_extra(ptile, EXTRA_IRRIGATION)) {
+        $("#order_irrigate").show();
+        $("#order_forest_remove").hide(); 	
+      } else {
+        $("#order_forest_remove").hide(); 	
+        $("#order_irrigate").hide();
+      }
+
     } else {
       $("#order_road").hide();
       $("#order_railroad").hide();
@@ -407,6 +424,12 @@ function update_unit_order_commands()
       $("#order_build_city").hide();
     }
 
+    if (ptype['name'] == "Engineers") {
+      $("#order_transform").show();
+    } else {
+      $("#order_transform").hide();
+    }
+
     if (ptype['name'] == "Nuclear") {
       $("#order_nuke").show();
     } else {
@@ -423,6 +446,13 @@ function update_unit_order_commands()
       $("#order_pillage").show();
     } else {
       $("#order_pillage").hide();
+    }
+
+    var pcity = tile_city(ptile);
+    if (pcity == null || punit['homecity'] == 0 || (pcity != null && punit['homecity'] == pcity['id'])) {
+      $("#order_change_homecity").hide();
+    } else if (pcity != null && punit['homecity'] != pcity['id']) {
+      $("#order_change_homecity").show();
     }
 
   }
@@ -1143,6 +1173,7 @@ function key_unit_homecity()
       var packet = {"type" : packet_unit_change_homecity, "unit_id" : punit['id'],
                 "city_id" : pcity['id']};
       send_request (JSON.stringify(packet));
+      $("#order_change_homecity").hide();
     }
 
   }

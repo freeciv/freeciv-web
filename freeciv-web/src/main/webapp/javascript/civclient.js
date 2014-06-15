@@ -291,7 +291,7 @@ function validate_username() {
   if (username == null || username.length == 0) {
     $("#username_validation_result").html("Your name can't be empty.");
     return false;
-  } else if (username.length <= 3 ) {
+  } else if (username.length <= 2 ) {
     $("#username_validation_result").html("Your name is too short.");
     return false;
   } else if (username.length >= 32) {
@@ -317,7 +317,7 @@ function show_intro_dialog(title, message) {
   $("#dialog").remove();
   $("<div id='dialog'></div>").appendTo("div#game_page");
 
-  var intro_html = message + "<br><br>Name: <input id='username_req' type='text' size='25'>"
+  var intro_html = message + "<br><br>Player name: <input id='username_req' type='text' size='25'>"
 	  + " <br><br><span id='username_validation_result'></span>";
   $("#dialog").html(intro_html);
   $("#username_req").val(simpleStorage.get("username", ""));

@@ -541,3 +541,10 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 .nation_row_dead {
   color: #222222;
 }
+
+#city_disband_options {
+  float: right;
+  margin: 20px;
+  padding-right: 50px;
+  font-size: 80%;
+}

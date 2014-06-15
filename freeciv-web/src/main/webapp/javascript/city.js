@@ -229,6 +229,12 @@ function show_city_dialog(pcity)
 
   $("#buy_button").button(city_can_buy(pcity) ? "enable" : "disable");
 
+  $('#disbandable_city').off();
+  $('#disbandable_city').prop('checked', pcity['disbandable_city']);
+  $('#disbandable_city').click(function() {
+    var packet = {"type" : packet_city_disbandable_req, "city_id" : active_city['id']};
+    send_request (JSON.stringify(packet));
+  });
 
   if (is_small_screen()) {
     $("#city_dialog_info").hide();

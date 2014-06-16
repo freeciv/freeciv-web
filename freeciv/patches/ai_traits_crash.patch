@@ -1,0 +1,34 @@
+diff --git freeciv/ai/aitraits.c freeciv/ai/aitraits.c
+index c9022e1..a1b8d79 100644
+--- freeciv/ai/aitraits.c
++++ freeciv/ai/aitraits.c
+@@ -59,6 +59,8 @@ void ai_traits_close(struct player *pplayer)
+ **************************************************************************/
+ int ai_trait_get_value(enum trait tr, struct player *pplayer)
+ {
++  if (pplayer->ai_common.traits == NULL) return 1;
++  
+   int val = pplayer->ai_common.traits[tr].val + pplayer->ai_common.traits[tr].mod;
+ 
+   /* Clip so that vale is at least 1, and maximum is
+diff --git freeciv/server/savegame2.c freeciv/server/savegame2.c
+index b9be150..590f003 100644
+--- freeciv/server/savegame2.c
++++ freeciv/server/savegame2.c
+@@ -4083,10 +4083,12 @@ static void sg_save_player_main(struct savedata *saving,
+     int j;
+ 
+     for (tr = trait_begin(), j = 0; tr != trait_end(); tr = trait_next(tr), j++) {
+-      secfile_insert_int(saving->file, plr->ai_common.traits[tr].val,
+-                         "player%d.trait.val%d", plrno, j);
+-      secfile_insert_int(saving->file, plr->ai_common.traits[tr].mod,
+-                         "player%d.trait.mod%d", plrno, j);
++      if (plr->ai_common.traits != NULL) {
++        secfile_insert_int(saving->file, plr->ai_common.traits[tr].val,
++                           "player%d.trait.val%d", plrno, j);
++        secfile_insert_int(saving->file, plr->ai_common.traits[tr].mod,
++                           "player%d.trait.mod%d", plrno, j);
++      }
+     }
+   }
+ 

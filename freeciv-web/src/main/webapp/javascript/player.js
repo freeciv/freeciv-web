@@ -14,6 +14,8 @@
 
 
 var players = {};
+var research_data = {};
+
 var MAX_NUM_PLAYERS = 30;
 
 var MAX_AI_LOVE = 1000;
@@ -136,5 +138,20 @@ function get_ai_level_text(player)
   } 
 
   return "Unknown";
+
+}
+
+/**************************************************************************
+  Returns the research object related to the given player.
+**************************************************************************/
+function research_get(pplayer)
+{
+  if (player == null) return null;
+
+  if (game_info['team_pooled_research']) {
+    return research_data[pplayer['team']];
+  } else {
+    return research_data[pplayer['playerno']];
+  }
 
 }

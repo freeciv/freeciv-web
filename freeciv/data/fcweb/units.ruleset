@@ -42,7 +42,7 @@ veteran_raise_chance = 50, 33, 20, 0
 
 ; The percentage chance of a settler/engineer increasing level through
 ; performing useful work (per turn)
-veteran_work_raise_chance = 5, 3, 1, 0
+veteran_work_raise_chance = 0, 0, 0, 0
 
 ; Power factors are as a percentage.
 ; +50% is represented by 150
@@ -277,8 +277,9 @@ flags         = "Unreachable", "DoesntOccupyTile"
 ;		  around it freely
 ; "NonMil"	= a non-military unit: no attacks; no martial law; can enter
 ;                 peaceful borders; DoesntOccupyTile
-; "IgTer"       = ignore terrain/road etc, use constant move cost defined in
-;                 igter_cost (terrain.ruleset)
+; "IgTer"       = use constant move cost defined in igter_cost (terrain.ruleset)
+;                 rather than terrain/road etc cost, unless terrain cost is
+;                 less
 ; "OneAttack"	= can only make a single attack, regardless of movement points
 ; "IgWall"	= ignore effect of city walls
 ; "FieldUnit"	= cause unhappiness even when not being aggressive
@@ -313,7 +314,9 @@ flags         = "Unreachable", "DoesntOccupyTile"
 ; "NoHome"	= this unit has no homecity and will be free of all upkeep, and
 ;		  therefore will not revolt along with its city of origin should
 ;		  it be incited
-; "NoVeteran"   = this unit cannot become veteran
+; "NoVeteran"   = this unit cannot gain veteran levels through experience
+;                 (as if both raise_chance and work_raise_chance were zero);
+;                 it can still gain veterancy through Veteran_Build, etc
 ; "Bombarder"   = this unit cannot kill other units, only damage them, but
 ;                 also is not harmed by return fire when attacking; the field
 ;                 bombard_rate regulates its number of shots
@@ -399,7 +402,13 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 0
-flags         = "Settlers", "NonMil", "AddToCity", "Cities", "NoVeteran"
+flags         = "Settlers", "NonMil", "AddToCity", "Cities"
+; No veteran levels (level name is never displayed)
+veteran_names = _("green")
+veteran_raise_chance = 0
+veteran_work_raise_chance = 0
+veteran_power_fact = 100
+veteran_move_bonus = 0
 roles         = "Cities"
 helptext      = _("\
 Settlers are one of the key units in the game. As well as building new\
@@ -437,7 +446,13 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "Settlers", "NonMil", "Airbase", "NoVeteran"
+flags         = "Settlers", "NonMil", "Airbase"
+; No veteran levels (level name is never displayed)
+veteran_names = _("green")
+veteran_raise_chance = 0
+veteran_work_raise_chance = 0
+veteran_power_fact = 100
+veteran_move_bonus = 0
 roles         = "Settlers"
 helptext      = _("\
 Workers are similar to Settlers in that they can improve terrain --\
@@ -470,7 +485,13 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "Settlers", "NonMil", "Transform", "Airbase", "NoVeteran"
+flags         = "Settlers", "NonMil", "Transform", "Airbase"
+; No veteran levels (level name is never displayed)
+veteran_names = _("green")
+veteran_raise_chance = 0
+veteran_work_raise_chance = 0
+veteran_power_fact = 100
+veteran_move_bonus = 0
 roles         = "Settlers"
 helptext      = _("\
 Engineers are similar to Workers, but they work twice as fast and\
@@ -1856,6 +1877,12 @@ uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
 flags         = "FieldUnit", "OneAttack", "Nuclear", "AirAttacker"
+; No veteran levels (level name is never displayed)
+veteran_names = _("green")
+veteran_raise_chance = 0
+veteran_work_raise_chance = 0
+veteran_power_fact = 100
+veteran_move_bonus = 0
 roles         = ""
 helptext      = _("\
 You can build Nuclear units when you have the required advance, and\
@@ -2189,8 +2216,13 @@ uk_shield     = 0
 uk_food       = 0
 uk_gold       = 0
 flags         = "IgZOC", "NonMil", "NoBuild", "NoHome", "SuperSpy", 
-                "Undisbandable", "Unbribable", "GameLoss", "Unique",
-                "NoVeteran"
+                "Undisbandable", "Unbribable", "GameLoss", "Unique"
+; No veteran levels (level name is never displayed)
+veteran_names = _("green")
+veteran_raise_chance = 0
+veteran_work_raise_chance = 0
+veteran_power_fact = 100
+veteran_move_bonus = 0
 roles         = "GameLoss"
 helptext      = _("\
 This is you. If you lose this unit, you lose the game. So don't.\
@@ -2223,6 +2255,12 @@ uk_food       = 0
 uk_gold       = 0
 flags         = "IgZOC", "NonMil", "Unbribable",
                 "Undisbandable", "SuperSpy", "NoHome", "NoBuild"
+; No veteran levels (level name is never displayed)
+veteran_names = _("green")
+veteran_raise_chance = 0
+veteran_work_raise_chance = 0
+veteran_power_fact = 100
+veteran_move_bonus = 0
 roles         = "BarbarianLeader"
 helptext      = _("\
 One Barbarian Leader appears every time there is a barbarian uprising\

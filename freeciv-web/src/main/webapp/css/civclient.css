@@ -249,8 +249,8 @@ button {
 #tech_info_box {
   float: left; 
   border: 1px solid rgb(153, 153, 153); 
-  width: 1000px; 
-  height: 40px; 
+  min-width: 1000px; 
+  min-height: 40px; 
   padding: 4px; 
   margin: 2px; 
   margin-left: 0px; 
@@ -547,4 +547,29 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
   margin: 20px;
   padding-right: 50px;
   font-size: 80%;
+}
+
+#tech_advance_helptext span {
+  text-decoration:underline;
+}
+
+#tech_gained_choice {
+  float: left;
+  padding: 5px;
+}
+
+.specific_tech {
+  float: left;
+  background-color: rgba(2,2,2,0.6);
+  color: white;
+  border: 1px solid white;
+  padding: 3px;
+  margin: 4px;
+  cursor: pointer;
+
+}
+
+.tech_infobox_image {
+  float: left;
+  margin: 4px;
 }

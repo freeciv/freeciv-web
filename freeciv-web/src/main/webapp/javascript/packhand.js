@@ -797,7 +797,7 @@ function handle_ruleset_terrain_flag(packet)
 
 function handle_tech_gained(packet) 
 {
-  $("#tech_tab_item").css("color", "#ff0000");
+  show_tech_gained_dialog(packet['tech']);
 }
 
 function handle_scenario_info(packet) 

@@ -211,7 +211,7 @@ function setup_window_size ()
 
   if (is_small_screen()) {
     $(".ui-tabs-anchor").css("padding", "0px");
-    $(".ui-button-text").css("padding", "0px");
+    $(".ui-button-text").css("padding", "3px");
     $(".overview_dialog").hide();
     $(".unit_dialog").hide();
     $(".ui-dialog-titlebar").hide();

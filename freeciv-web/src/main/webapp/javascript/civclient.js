@@ -378,7 +378,7 @@ function update_timeout()
     if (remaining >= 0) {
       if (is_small_screen()) {
         $("#turn_done_button").button("option", "label", "Turn" + remaining);
-        $(".ui-button-text").css("padding", "0px");
+        $("#turn_done_button .ui-button-text").css("padding", "3px");
       } else {
         $("#turn_done_button").button("option", "label", "Turn Done (" + remaining + "s)");
       }

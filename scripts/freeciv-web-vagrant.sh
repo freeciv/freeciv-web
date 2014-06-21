@@ -41,7 +41,7 @@ resin_url="http://www.caucho.com/download/resin-${resin_version}.tar.gz"
 tornado_url="https://pypi.python.org/packages/source/t/tornado/tornado-3.2.1.tar.gz"
 
 # Based on fresh install of Ubuntu 12.04
-dependencies="maven mysql-server-5.5 openjdk-7-jdk libcurl4-openssl-dev nginx libjansson-dev subversion pngcrush python3-pillow libtool automake autoconf autotools-dev language-pack-en python3.4-dev python3-setuptools libglib2.0-dev libbz2-dev imagemagick"
+dependencies="maven mysql-server-5.5 openjdk-7-jdk libcurl4-openssl-dev nginx libjansson-dev subversion pngcrush python3-pillow libtool automake autoconf autotools-dev language-pack-en python3.4-dev python3-setuptools libglib2.0-dev libbz2-dev imagemagick python3-pip"
 
 ## Setup
 mkdir -p ${basedir}
@@ -72,6 +72,10 @@ tar xvfz tornado-3.2.1.tar.gz
 cd tornado-3.2.1
 python3.4 setup.py install
 
+echo "=== Updating summaries from Wikipedia ==="
+pip3 install wikipedia
+cd ${basedir}/scripts/
+python3.4 update-wikipedia-docs.py
 
 ## mysql setup
 echo "==== Setting up MySQL ===="

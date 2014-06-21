@@ -19,6 +19,7 @@ var is_tech_tree_init = false;
 var tech_dialog_active = false;
 
 var tech_xscale = 1.2;
+var wikipedia_url = "http://en.wikipedia.org/wiki/";
 
 /* TECH_KNOWN is self-explanatory, TECH_PREREQS_KNOWN are those for which all 
  * requirements are fulfilled; all others (including those which can never 
@@ -233,7 +234,8 @@ function update_tech_tree()
 }
 
 /**************************************************************************
- ...
+ Determines if the technology 'check_tech_id' is a requirement 
+ for reaching the technology 'goal_tech_id'.
 **************************************************************************/
 function is_tech_req_for_goal(check_tech_id, goal_tech_id)
 {
@@ -248,6 +250,29 @@ function is_tech_req_for_goal(check_tech_id, goal_tech_id)
       if (check_tech_id == rid) {
         return true;
       } else if (is_tech_req_for_goal(check_tech_id, rid)) {
+        return true;
+      }
+    }
+
+    return false;
+
+}
+
+/**************************************************************************
+ Determines if the technology 'check_tech_id' is a direct requirement 
+ for reaching the technology 'next_tech_id'.
+**************************************************************************/
+function is_tech_req_for_tech(check_tech_id, next_tech_id)
+{
+  if (check_tech_id == next_tech_id) return false;
+  if (next_tech_id == 0 || check_tech_id == 0) return false;
+
+    var next_tech = techs[next_tech_id];
+    if (next_tech == null) return false;
+
+    for (var i = 0; i < next_tech['req'].length; i++) {
+      var rid = next_tech['req'][i];
+      if (check_tech_id == rid) {
         return true;
       }
     }
@@ -273,7 +298,7 @@ function update_tech_screen()
     research_goal_text = "Researching: " + techs[client.conn.playing['researching']]['name'];
   }
   if (techs[client.conn.playing['tech_goal']] != null) {   
-    research_goal_text = research_goal_text + "<br>Goal: " 
+    research_goal_text = research_goal_text + "<br>Research Goal: " 
         + techs[client.conn.playing['tech_goal']]['name'];
   }
   $("#tech_goal_box").html(research_goal_text);
@@ -287,24 +312,8 @@ function update_tech_screen()
   $("#progress_fg").css("width", pct_progress  + "%");
 
   if (techs[client.conn.playing['researching']] != null) {
-    var adv_txt = "";
-    var prunits = get_units_from_tech(client.conn.playing['researching']);
-    var pimprovements = get_improvements_from_tech(client.conn.playing['researching']);
-
-    for (var i = 0; i < prunits.length; i++) {
-      var punit = prunits[i];
-      adv_txt += punit['name'] + ", "; 
-    }
-
-    for (var i = 0; i < pimprovements.length; i++) {
-      var pimpr = pimprovements[i];
-      adv_txt += pimpr['name'] + ", "; 
-    }
-
-  
-
-    $("#tech_result_text").html(techs[client.conn.playing['researching']]['name'] 
-		                + " gives these advances:<br>" + adv_txt);
+    $("#tech_result_text").html("<span id='tech_advance_helptext'>" + get_advances_text(client.conn.playing['researching']) + "</span>");
+    $("#tech_advance_helptext").tooltip({ disabled: false });
   }
   
   $("#tech_tab_item").css("color", "#ffffff");
@@ -320,6 +329,44 @@ function update_tech_screen()
  
 }
 
+/**************************************************************************
+ Returns for example "Bronze working allows building phalax".
+**************************************************************************/
+function get_advances_text(tech_id)
+{
+  var ptech = techs[tech_id];
+      
+  var adv_txt = ptech['name'] + " allows ";
+  var prunits = get_units_from_tech(tech_id);
+  var pimprovements = get_improvements_from_tech(tech_id);
+
+  for (var i = 0; i < prunits.length; i++) {
+    if (i == 0) adv_txt += "building unit ";
+    var punit = prunits[i];
+    adv_txt += "<span title='" + punit['helptext'] + "'>" + punit['name'] + "</span>, "; 
+  }
+
+  for (var i = 0; i < pimprovements.length; i++) {
+    if (i == 0) adv_txt += "building ";
+    var pimpr = pimprovements[i];
+    adv_txt += "<span title='" + pimpr['helptext'] + "'>" + pimpr['name'] + "</span>, "; 
+  }
+
+
+  for (var next_tech_id in techs) {
+    var ntech = techs[next_tech_id];
+    if (!(next_tech_id+'' in reqtree)) continue;
+
+    if (is_tech_req_for_tech(tech_id, next_tech_id)) {
+      if (adv_txt.indexOf("researching") == -1) adv_txt += "researching ";
+      adv_txt +=  "<span>" + ntech['name'] + "</span>, ";
+    }
+  }
+
+  if (adv_txt.length > 3) adv_txt = adv_txt.substring(0, adv_txt.length - 2) + ".";
+
+  return adv_txt;
+}
 
 /**************************************************************************
  ...
@@ -337,6 +384,7 @@ function send_player_research(tech_id)
 {
   var packet = {"type" : packet_player_research, "tech" : tech_id};
   send_request (JSON.stringify(packet));
+  $("#dialog").dialog('close');
 }
 
 /**************************************************************************
@@ -397,3 +445,141 @@ function tech_mapview_mouse_click(e)
 
 }
 
+/**************************************************************************
+ ...
+**************************************************************************/
+function get_tech_infobox_html(tech_id)
+{
+  var infobox_html = "";
+  var ptech = techs[tech_id];
+  var tag = ptech['graphic_str'];
+
+  if (tileset[tag] == null) return null;
+  var tileset_x = tileset[tag][0];
+  var tileset_y = tileset[tag][1];
+  var width = tileset[tag][2];
+  var height = tileset[tag][3];
+  var i = tileset[tag][4];  
+  var image_src = "/tileset/freeciv-web-tileset-" + i + ".png?ts=" + ts;
+  if (is_small_screen()) {
+    infobox_html += "<div class='specific_tech' onclick='send_player_research(" + tech_id + ");' title='" 
+	   + get_advances_text(tech_id).replace(/(<([^>]+)>)/ig,"") + "'>"   
+	   +  ptech['name']
+	   + "</div>";
+  } else {
+    infobox_html += "<div class='specific_tech' onclick='send_player_research(" + tech_id + ");' title='" 
+	   + get_advances_text(tech_id).replace(/(<([^>]+)>)/ig,"") + "'>"   
+           + "<div class='tech_infobox_image' style='background: transparent url(" 
+           + image_src 
+	   + ");background-position:-" + tileset_x + "px -" + tileset_y 
+           + "px;  width: " + width + "px;height: " + height + "px;'"
+           + "'></div>" 
+	   +  ptech['name']
+	   + "</div>";
+  }
+
+  return infobox_html;
+}
+
+
+/**************************************************************************
+ ...
+**************************************************************************/
+function show_tech_gained_dialog(tech_gained_id)
+{
+  if (client_is_observer()) return;
+
+  $("#tech_tab_item").css("color", "#ff0000");
+  var pplayer = client.conn.playing;
+  var pnation = nations[pplayer['nation']]; 
+  var tech = techs[tech_gained_id];
+  var title = tech['name'] + " discovered!";
+  var message = "The " + nations[pplayer['nation']]['adjective'] + " have discovered " + tech['name'] + ".<br>";
+  message += "<span id='tech_advance_helptext'>" + get_advances_text(tech_gained_id) + "</span>";
+
+  var tech_choices = [];
+  for (var next_tech_id in techs) {
+    var ntech = techs[next_tech_id];
+    if (!(next_tech_id+'' in reqtree)) continue;
+    if (player_invention_state(client.conn.playing, ntech['id']) == TECH_PREREQS_KNOWN) {
+      tech_choices.push(ntech);
+    }
+  }
+
+  message += "<br>You can now research:<br><div id='tech_gained_choice'>";
+  for (var i = 0; i < tech_choices.length; i++) {
+    message += get_tech_infobox_html(tech_choices[i]['id']);
+  }
+  message += "</div>";
+
+
+  // reset dialog page.
+  $("#dialog").remove();
+  $("<div id='dialog'></div>").appendTo("div#game_page");
+
+  $("#dialog").html(message);
+  $("#dialog").attr("title", title);
+  $("#dialog").dialog({
+			bgiframe: true,
+			modal: true,
+			width: is_small_screen() ? "90%" : "40%",
+			buttons: {
+				"Show Technology Tree" : function() {
+				  $("#tabs").tabs("option", "active", 2);
+				      city_dialog_remove(); 
+				      set_default_mapview_inactive(); 
+				      update_tech_screen();
+    				      $("#dialog").dialog('close');
+				},
+				"Wikipedia"  : function() {
+				   $("#dialog").dialog('close');
+				   show_wikipedia_dialog(tech_gained_id);
+				},
+				"Close": function() {
+					$("#dialog").dialog('close');
+					$("#game_text_input").blur();
+				}
+			}
+		});
+	
+  $("#dialog").dialog('open');		
+  $("#game_text_input").blur();
+  $("#tech_advance_helptext").tooltip({ disabled: false });
+  $(".specific_tech").tooltip({ disabled: false });
+}
+
+/**************************************************************************
+ ...
+**************************************************************************/
+function show_wikipedia_dialog(tech_gained_id)
+{
+  $("#tech_tab_item").css("color", "#ff0000");
+
+  var tech = techs[tech_gained_id];
+  var title = tech['name'];
+  var message = "<b>Wikipedia on <a href='" + wikipedia_url 
+	  + freeciv_wiki_docs[tech['name']]['title'] 
+	  + "' target='_new'>" + freeciv_wiki_docs[tech['name']]['title'] 
+	  + "</a></b><br>" + freeciv_wiki_docs[tech['name']]['summary'];
+
+  // reset dialog page.
+  $("#dialog").remove();
+  $("<div id='dialog'></div>").appendTo("div#game_page");
+
+  $("#dialog").html(message);
+  $("#dialog").attr("title", title);
+  $("#dialog").dialog({
+			bgiframe: true,
+			modal: true,
+			width: is_small_screen() ? "90%" : "40%",
+			buttons: {
+				Ok: function() {
+					$("#dialog").dialog('close');
+					$("#game_text_input").blur();
+				}
+			}
+		});
+	
+  $("#dialog").dialog('open');		
+  $("#game_text_input").blur();
+}

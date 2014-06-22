@@ -384,7 +384,7 @@ function send_player_research(tech_id)
 {
   var packet = {"type" : packet_player_research, "tech" : tech_id};
   send_request (JSON.stringify(packet));
-  $("#dialog").dialog('close');
+  $("#tech_dialog").dialog('close');
 }
 
 /**************************************************************************

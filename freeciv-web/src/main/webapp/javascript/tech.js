@@ -487,7 +487,7 @@ function get_tech_infobox_html(tech_id)
 **************************************************************************/
 function show_tech_gained_dialog(tech_gained_id)
 {
-  if (client_is_observer()) return;
+  if (client_is_observer() || C_S_RUNNING != client_state()) return;
 
   $("#tech_tab_item").css("color", "#ff0000");
   var pplayer = client.conn.playing;

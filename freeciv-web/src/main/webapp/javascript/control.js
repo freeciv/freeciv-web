@@ -367,6 +367,8 @@ function update_unit_order_commands()
     var punit = funits[i]; 
     var ptype = unit_type(punit);
     var ptile = index_to_tile(punit['tile']);
+    if (ptile == null) continue;
+
     if (ptype['name'] == "Settlers" || ptype['name'] == "Workers" 
         || ptype['name'] == "Engineers") {
       if (!tile_has_extra(ptile, ROAD_ROAD)) {

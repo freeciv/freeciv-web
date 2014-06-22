@@ -336,20 +336,20 @@ function get_advances_text(tech_id)
 {
   var ptech = techs[tech_id];
       
-  var adv_txt = ptech['name'] + " allows ";
+  var adv_txt = "<span onclick='show_wikipedia_dialog(\"" +ptech['name'] + "\")'>" + ptech['name'] + "</span> allows ";
   var prunits = get_units_from_tech(tech_id);
   var pimprovements = get_improvements_from_tech(tech_id);
 
   for (var i = 0; i < prunits.length; i++) {
     if (i == 0) adv_txt += "building unit ";
     var punit = prunits[i];
-    adv_txt += "<span title='" + punit['helptext'] + "'>" + punit['name'] + "</span>, "; 
+    adv_txt += "<span title='" + punit['helptext'] + "' onclick='show_wikipedia_dialog(\"" + punit['name'] + "\")'>" + punit['name'] + "</span>, "; 
   }
 
   for (var i = 0; i < pimprovements.length; i++) {
     if (i == 0) adv_txt += "building ";
     var pimpr = pimprovements[i];
-    adv_txt += "<span title='" + pimpr['helptext'] + "'>" + pimpr['name'] + "</span>, "; 
+    adv_txt += "<span title='" + pimpr['helptext'] + "' onclick='show_wikipedia_dialog(\"" + pimpr['name'] + "\")'>" + pimpr['name'] + "</span>, "; 
   }
 
 
@@ -359,7 +359,7 @@ function get_advances_text(tech_id)
 
     if (is_tech_req_for_tech(tech_id, next_tech_id)) {
       if (adv_txt.indexOf("researching") == -1) adv_txt += "researching ";
-      adv_txt +=  "<span>" + ntech['name'] + "</span>, ";
+      adv_txt +=  "<span onclick='show_wikipedia_dialog(\"" +ntech['name'] + "\")'>" + ntech['name'] + "</span>, ";
     }
   }
 
@@ -512,37 +512,32 @@ function show_tech_gained_dialog(tech_gained_id)
   }
   message += "</div>";
 
-
   // reset dialog page.
-  $("#dialog").remove();
-  $("<div id='dialog'></div>").appendTo("div#game_page");
+  $("#tech_dialog").remove();
+  $("<div id='tech_dialog'></div>").appendTo("div#game_page");
 
-  $("#dialog").html(message);
-  $("#dialog").attr("title", title);
-  $("#dialog").dialog({
+  $("#tech_dialog").html(message);
+  $("#tech_dialog").attr("title", title);
+  $("#tech_dialog").dialog({
 			bgiframe: true,
 			modal: true,
-			width: is_small_screen() ? "90%" : "40%",
+			width: is_small_screen() ? "90%" : "60%",
 			buttons: {
 				"Show Technology Tree" : function() {
 				  $("#tabs").tabs("option", "active", 2);
 				      city_dialog_remove(); 
 				      set_default_mapview_inactive(); 
 				      update_tech_screen();
-    				      $("#dialog").dialog('close');
-				},
-				"Wikipedia"  : function() {
-				   $("#dialog").dialog('close');
-				   show_wikipedia_dialog(tech_gained_id);
+    				      $("#tech_dialog").dialog('close');
 				},
 				"Close": function() {
-					$("#dialog").dialog('close');
+					$("#tech_dialog").dialog('close');
 					$("#game_text_input").blur();
 				}
 			}
 		});
 	
-  $("#dialog").dialog('open');		
+  $("#tech_dialog").dialog('open');		
   $("#game_text_input").blur();
   $("#tech_advance_helptext").tooltip({ disabled: false });
   $(".specific_tech").tooltip({ disabled: false });
@@ -551,35 +546,38 @@ function show_tech_gained_dialog(tech_gained_id)
 /**************************************************************************
  ...
 **************************************************************************/
-function show_wikipedia_dialog(tech_gained_id)
+function show_wikipedia_dialog(tech_name)
 {
   $("#tech_tab_item").css("color", "#ff0000");
 
-  var tech = techs[tech_gained_id];
-  var title = tech['name'];
   var message = "<b>Wikipedia on <a href='" + wikipedia_url 
-	  + freeciv_wiki_docs[tech['name']]['title'] 
-	  + "' target='_new'>" + freeciv_wiki_docs[tech['name']]['title'] 
-	  + "</a></b><br>" + freeciv_wiki_docs[tech['name']]['summary'];
+	  + freeciv_wiki_docs[tech_name]['title'] 
+	  + "' target='_new'>" + freeciv_wiki_docs[tech_name]['title'] 
+	  + "</a></b><br>";
+  if (freeciv_wiki_docs[tech_name]['image'] != null) {
+    message += "<img id='wiki_image' src='" + freeciv_wiki_docs[tech_name]['image'] + "'><br>";
+  }
+ 
+  message += freeciv_wiki_docs[tech_name]['summary'];
 
   // reset dialog page.
-  $("#dialog").remove();
-  $("<div id='dialog'></div>").appendTo("div#game_page");
+  $("#wiki_dialog").remove();
+  $("<div id='wiki_dialog'></div>").appendTo("div#game_page");
 
-  $("#dialog").html(message);
-  $("#dialog").attr("title", title);
-  $("#dialog").dialog({
+  $("#wiki_dialog").html(message);
+  $("#wiki_dialog").attr("title", tech_name);
+  $("#wiki_dialog").dialog({
 			bgiframe: true,
 			modal: true,
-			width: is_small_screen() ? "90%" : "40%",
+			width: is_small_screen() ? "90%" : "60%",
 			buttons: {
 				Ok: function() {
-					$("#dialog").dialog('close');
-					$("#game_text_input").blur();
+					$("#wiki_dialog").dialog('close');
 				}
 			}
 		});
 	
-  $("#dialog").dialog('open');		
+  $("#wiki_dialog").dialog('open');		
+  $("#wiki_dialog").css("max-height", $(window).height() - 100);
   $("#game_text_input").blur();
 }

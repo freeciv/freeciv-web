@@ -551,6 +551,7 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 
 #tech_advance_helptext span {
   text-decoration:underline;
+  cursor: pointer;
 }
 
 #tech_gained_choice {
@@ -573,3 +574,10 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
   float: left;
   margin: 4px;
 }
+
+#wiki_image {
+  max-width: 400px; 
+  max-height: 500px; 
+  float: right; 
+  margin: 5px;
+  }

@@ -72,10 +72,7 @@ tar xvfz tornado-3.2.1.tar.gz
 cd tornado-3.2.1
 python3.4 setup.py install
 
-echo "=== Updating summaries from Wikipedia ==="
 pip3 install wikipedia
-cd ${basedir}/scripts/
-python3.4 update-wikipedia-docs.py
 
 ## mysql setup
 echo "==== Setting up MySQL ===="

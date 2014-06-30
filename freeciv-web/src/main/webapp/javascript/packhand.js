@@ -954,3 +954,8 @@ function handle_research_info(packet)
   }
   if (is_tech_tree_init && tech_dialog_active) update_tech_screen();
 }
+
+function handle_worker_task(packet)
+{
+  /* TODO: Implement */
+}

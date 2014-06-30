@@ -132,8 +132,8 @@ graphic_alt	= "-"
 obsolete_by	=
     { "type", "name", "range"
       "Tech", "Gunpowder", "Player"
+      "Building", "Barracks II", "City"
     }
-replaced_by	= "Barracks II"
 build_cost	= 30
 upkeep		= 1
 sabotage	= 100
@@ -160,8 +160,8 @@ graphic_alt	= "b.barracks_i"
 obsolete_by	=
     { "type", "name", "range"
       "Tech", "Mobile Warfare", "Player"
+      "Building", "Barracks III", "City"
     }
-replaced_by	= "Barracks III"
 build_cost	= 30
 upkeep		= 1
 sabotage	= 100

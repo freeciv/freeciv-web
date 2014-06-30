@@ -25,7 +25,7 @@ options="+Freeciv-ruleset-Devel-2013.May.14"
 ; helptxt       = displayed in the help for units with this flag
 flags =
   { "name", "helptxt"
-    "Airbase", _("Can build Airbases.") 
+    "Airbase", _("Can build Airbases.")
     "Transform", _("Can transform terrain.")
     "AirAttacker", _("Very bad at attacking AEGIS.")
     "Horse", _("Attack value halved when attacking Pikemen.")
@@ -281,7 +281,6 @@ flags         = "Unreachable", "DoesntOccupyTile"
 ;                 rather than terrain/road etc cost, unless terrain cost is
 ;                 less
 ; "OneAttack"	= can only make a single attack, regardless of movement points
-; "IgWall"	= ignore effect of city walls
 ; "FieldUnit"	= cause unhappiness even when not being aggressive
 ; "Marines"	= can attack from non-native tile (from transport or city)
 ; "Partial_Invis" = visible only to adjancent units; does not hide transported
@@ -1226,11 +1225,12 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "IgWall"
+flags         = ""
 roles         = "AttackStrong"
 helptext      = _("\
 Howitzers are upgraded artillery with improved\
  defensive as well as offensive capabilities.\
+ They can shoot over city walls, ignoring their effect.\
 ")
 
 [unit_fighter]

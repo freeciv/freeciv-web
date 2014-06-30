@@ -493,6 +493,8 @@ function show_tech_gained_dialog(tech_gained_id)
   var pplayer = client.conn.playing;
   var pnation = nations[pplayer['nation']]; 
   var tech = techs[tech_gained_id];
+  if (tech == null) return;
+
   var title = tech['name'] + " discovered!";
   var message = "The " + nations[pplayer['nation']]['adjective'] + " have discovered " + tech['name'] + ".<br>";
   message += "<span id='tech_advance_helptext'>" + get_advances_text(tech_gained_id) + "</span>";

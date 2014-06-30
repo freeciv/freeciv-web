@@ -117,11 +117,11 @@ Install this software if you are not running Freeciv-web with Vagrant:
 
 - pngcrush, required for freeciv-img-extract.  http://pmt.sourceforge.net/pngcrush/
 
-- Tornado 3.2 - http://www.tornadoweb.org/
+- Tornado 4.x - http://www.tornadoweb.org/
 
 - GLib 2.16.0 or newer - http://ftp.gnome.org/pub/GNOME/sources/glib/2.16/
 
-- Jansson 2.5 - http://www.digip.org/jansson/
+- Jansson 2.6 - http://www.digip.org/jansson/
 
 
 Compiling and running the Freeciv Web client (old method)

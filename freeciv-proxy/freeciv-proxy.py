@@ -90,6 +90,10 @@ class WSHandler(websocket.WebSocketHandler):
             del(self.civcom)
             gc.collect()
 
+    # enables support for allowing alternate origins. See check_origin in websocket.py
+    def check_origin(self, origin):
+      return True;
+
     # get the civcom instance which corresponds to the requested user.
     def get_civcom(self, username, civserverport, ws_connection):
         key = username + str(civserverport) + ws_connection.id

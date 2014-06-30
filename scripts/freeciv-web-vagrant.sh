@@ -59,8 +59,6 @@ sudo debconf-set-selections <<< "mysql-server-5.5 mysql-server/root_password_aga
 echo "apt-get install dependencies"
 apt-get -y install ${dependencies}
 
-cd /tmp
-
 ## build/install resin
 echo "==== Fetching/Installing Resin ${resin_version} ===="
 wget ${resin_url}
@@ -69,6 +67,7 @@ rm -Rf resin
 mv resin-${resin_version} resin
 
 echo "==== Fetching/Installing Tornado Web Server ===="
+cd /tmp
 wget ${tornado_url}
 tar xvfz v4.0.0b1.tar.gz
 cd tornado-4.0.0b1

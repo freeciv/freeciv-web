@@ -67,7 +67,7 @@ def get_debug_info(civcoms):
         code += "Memory: " + str(memory() / 1048576) + " MB <br>"
         code += "Resident: " + str(resident() / 1048576) + " MB <br>"
         code += "Stacksize: " + str(stacksize() / 1048576) + " MB <br>"
-	try:
+        try:
           code += "Garabage collection stats: " + str(gc.get_stats()) + " <br>"
           code += "Garabage list: " + str(gc.garbage) + " <br>"
         except AttributeError:

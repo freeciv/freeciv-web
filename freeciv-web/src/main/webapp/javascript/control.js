@@ -233,7 +233,9 @@ function check_text_input(event,chatboxtextarea) {
 	 
   if (event.keyCode == 13 && event.shiftKey == 0)  {
     var message = $(chatboxtextarea).val();
-    message = encodeURIComponent(message.replace(/^\s+|\s+$/g,""));
+    message = message.replace(/^\s+|\s+$/g,"");
+    message = message.replace("'", "");
+    message = encodeURIComponent(message);
 
     $(chatboxtextarea).val('');
     $(chatboxtextarea).focus();

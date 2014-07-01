@@ -921,6 +921,10 @@ function activate_goto()
       intro_click_description = false;
     }
 
+  } else {
+    add_chatbox_text("First select a unit to move by clicking on it, then click on the"
+		     + " goto button or the 'G' key, then click on the position to move to.");
+    deactivate_goto();
   }
 
 }

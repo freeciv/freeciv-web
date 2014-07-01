@@ -235,16 +235,16 @@ function pregame_settings()
   $("<div id='pregame_settings'></div>").appendTo("div#pregame_page");
 
 
-  var dhtml = "<table>" +
-  	  "<tr><td>Game title:</td>" +
+  var dhtml = "<table id='settings_table'>" +
+  	  "<tr title='Set metaserver info line'><td>Game title:</td>" +
 	  "<td><input type='text' name='metamessage' id='metamessage' size='28' maxlength='42'></td></tr>" +
-	  "<tr><td>Number of Players (including AI):</td>" +
+	  "<tr title='Total number of players (including AI players)'><td>Number of Players (including AI):</td>" +
 	  "<td><input type='number' name='aifill' id='aifill' size='4' length='3' min='0' max='30' step='1'></td></tr>" +
-	  "<tr><td>Timeout (seconds per turn):</td>" +
+	  "<tr title='Maximum seconds per turn'><td>Timeout (seconds per turn):</td>" +
 	  "<td><input type='number' name='timeout' id='timeout' size='4' length='3' min='30' max='3600' step='1'></td></tr>" +
-	  "<tr><td>Map size:</td>" +
+	  "<tr title='Map size (in thousands of tiles)'><td>Map size:</td>" +
 	  "<td><input type='number' name='mapsize' id='mapsize' size='4' length='3' min='1' max='15' step='1'></td></tr>" +
-	  "<tr><td>AI skill level:</td>" +
+	  "<tr title='This setting sets the skill-level of the AI players'><td>AI skill level:</td>" +
 	  "<td><select name='skill_level' id='skill_level'>" +
 	  "<option value='0'>Handicapped</option>" +
 	  "<option value='1'>Novice</option>" +
@@ -252,13 +252,17 @@ function pregame_settings()
           "<option value='3'>Normal</option>" +
           "<option value='4'>Hard</option>" +
 	  "</select></td></tr>"+ 
-	  "<tr><td>Tech level:</td>" +
+	  "<tr title='Number of initial techs per player'><td>Tech level:</td>" +
 	  "<td><input type='number' name='techlevel' id='techlevel' size='3' length='3' min='0' max='100' step='10'></td></tr>" +
-	  "<tr><td>Landmass:</td>" +
+	  "<tr title='This setting gives the approximate percentage of the map that will be made into land.'><td>Landmass:</td>" +
 	  "<td><input type='number' name='landmass' id='landmass' size='3' length='3' min='15' max='85' step='10'></td></tr>" +
-	  "<tr><td>Specials:</td>" +
+	  "<tr title='Amount of special resource squares'><td>Specials:</td>" +
 	  "<td><input type='number' name='specials' id='specials' size='4' length='4' min='0' max='1000' step='50'></td></tr>" +
-	  "<tr><td>Map generator:</td>" +
+	  "<tr title='Minimum distance between cities'><td>City mindist :</td>" +
+	  "<td><input type='number' name='citymindist' id='citymindist' size='4' length='4' min='0' max='5' step='1'></td></tr>" +
+          "<tr title='The game will end at the end of the given turn.'><td>End turn:</td>" +
+	  "<td><input type='number' name='endturn' id='endturn' size='4' length='4' min='0' max='32767' step='1'></td></tr>" +
+	  "<tr title='Method used to generate map'><td>Map generator:</td>" +
 	  "<td><select name='generator' id='generator'>" +
 	  "<option value='random'>Fully random height</option>" +
 	  "<option value='fractal'>Pseudo-fractal height</option>" +
@@ -291,6 +295,8 @@ function pregame_settings()
     $("#techlevel").val("0");
     $("#landmass").val("30");
     $("#specials").val("250");
+    $("#citymindist").val("0");
+    $("#endturn").val("5000");
   }
 
   $(id).dialog('open');		
@@ -345,6 +351,18 @@ function pregame_settings()
     send_request (myJSONText);
   });
 
+  $('#citymindist').change(function() {
+    var test_packet = {"type" : packet_chat_msg_req, "message" : "/set citymindist " + $('#citymindist').val()};
+    var myJSONText = JSON.stringify(test_packet);
+    send_request (myJSONText);
+  });
+
+  $('#endturn').change(function() {
+    var test_packet = {"type" : packet_chat_msg_req, "message" : "/set endturn " + $('#endturn').val()};
+    var myJSONText = JSON.stringify(test_packet);
+    send_request (myJSONText);
+  });
+
   $('#generator').change(function() {
     var test_packet = {"type" : packet_chat_msg_req, "message" : "/set generator " + $('#generator').val()};
     var myJSONText = JSON.stringify(test_packet);
@@ -371,5 +389,6 @@ function pregame_settings()
     send_request (myJSONText);
   });
 
+  $("#settings_table").tooltip();
 }
 

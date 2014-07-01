@@ -259,7 +259,7 @@ function pregame_settings()
 	  "<tr title='Amount of special resource squares'><td>Specials:</td>" +
 	  "<td><input type='number' name='specials' id='specials' size='4' length='4' min='0' max='1000' step='50'></td></tr>" +
 	  "<tr title='Minimum distance between cities'><td>City mindist :</td>" +
-	  "<td><input type='number' name='citymindist' id='citymindist' size='4' length='4' min='0' max='5' step='1'></td></tr>" +
+	  "<td><input type='number' name='citymindist' id='citymindist' size='4' length='4' min='1' max='9' step='1'></td></tr>" +
           "<tr title='The game will end at the end of the given turn.'><td>End turn:</td>" +
 	  "<td><input type='number' name='endturn' id='endturn' size='4' length='4' min='0' max='32767' step='1'></td></tr>" +
 	  "<tr title='Method used to generate map'><td>Map generator:</td>" +
@@ -295,7 +295,7 @@ function pregame_settings()
     $("#techlevel").val("0");
     $("#landmass").val("30");
     $("#specials").val("250");
-    $("#citymindist").val("0");
+    $("#citymindist").val("2");
     $("#endturn").val("5000");
   }
 

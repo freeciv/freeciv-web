@@ -691,13 +691,13 @@ function do_map_click(ptile, qtype)
     deactivate_goto();
     update_unit_focus();
 
-  } else if (paradrop_active) {
+  } else if (paradrop_active && current_focus.length > 0) {
     var punit = current_focus[0];
     var packet = {"type" : packet_unit_paradrop_to, "unit_id" : punit['id'], "tile": ptile['index'] };
     send_request (JSON.stringify(packet));
     paradrop_active = false;
 
-  } else if (airlift_active) {
+  } else if (airlift_active && current_focus.length > 0) {
     var punit = current_focus[0];
     var pcity = tile_city(ptile);
     if (pcity != null) {
@@ -708,7 +708,6 @@ function do_map_click(ptile, qtype)
 
   } else {
     var sunits = tile_units(ptile);
-    
     var pcity = tile_city(ptile);
     
     if (pcity != null) {
@@ -736,6 +735,9 @@ function do_map_click(ptile, qtype)
     }
     
   }
+
+  paradrop_active = false;
+  airlift_active = false;
    
 }
 

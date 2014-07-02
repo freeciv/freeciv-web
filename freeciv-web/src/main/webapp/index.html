@@ -39,12 +39,19 @@
     if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1) {
       $("#chromews").show();
       $("#mozws").hide();
+      $("#windowsstore").hide();
     } else if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
       $("#mozws").show();
       $("#chromews").hide();
+      $("#windowsstore").hide();
+    } else if (navigator.userAgent.toLowerCase().indexOf('trident') > -1) {
+      $("#mozws").hide();
+      $("#chromews").hide();
+      $("#windowsstore").show();
     } else {
       $("#mozws").hide();
       $("#chromews").hide();
+      $("#windowsstore").hide();
     }
   });
 </script> 
@@ -105,6 +112,7 @@
 
 		<div id="chromews"><a href="https://chrome.google.com/webstore/detail/freeciv/ldhdjhmbapbeafmhdoobnlldhfopfcgh" ><img src="images/chrome-ws.png"></a></div>
 		<div id="mozws"><a href="https://marketplace.firefox.com/app/freeciv"><img src="images/firefox-marketplace.png"></a></div>
+		<div id="windowsstore"><a href="http://apps.microsoft.com/windows/app/freeciv/43da4eed-42cf-4105-87a2-e03f45ade081"><img src="images/windowsstore.png"></a></div>
 <br><br>
 
 <!-- AddThis Button BEGIN -->

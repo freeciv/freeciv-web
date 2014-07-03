@@ -14,14 +14,16 @@ var savename = "";
 
 
 var scenarios = [
-  {"img":"/images/world_large.png", "description":"The World - Classic-style 80x50 map of the Earth", "savegame":"earth-80x50-v3"},
-  {"img":"/images/hagworld.png", "description":"The World - Classic-style 120x60 map of the Earth", "savegame":"hagworld-120x60-v1.2"},
-  {"img":"/images/british.png", "description":"British Aisles - Medium (85x80)", "savegame":"british-isles-85x80-v2.80"},
+  {"img":"/images/world_small.png", "description":"The World - Small world map, 80x50 map of the Earth", "savegame":"earth-80x50-v3"},
+  {"img":"/images/world_big.png", "description":"The World - Large world map, 160x90 map of the Earth", "savegame":"earth-160x90-v2"},
   {"img":"/images/iberian.png", "description":"Iberian Peninsula - 136x100 map of Spain and Portugal", "savegame":"iberian-peninsula-136x100-v1.0"},
   {"img":"/images/france.png", "description":"France - Large (140x90)", "savegame":"france-140x90-v2"},
   {"img":"/images/japan.png", "description":"Japan - Medium (88x100)", "savegame":"japan-88x100-v1.3"},
   {"img":"/images/italy.png", "description":"Italy - Medium (100x100)", "savegame":"italy-100x100-v1.5"},
-  {"img":"/images/america.png", "description":"North America - 116x100 map of North America", "savegame":"north_america_116x100-v1.2"}
+  {"img":"/images/america.png", "description":"North America - 116x100 map of North America", "savegame":"north_america_116x100-v1.2"},
+  {"img":"/images/british.png", "description":"British Aisles - Medium (85x80)", "savegame":"british-isles-85x80-v2.80"},
+  {"img":"/images/hagworld.png", "description":"The World - Classic-style 120x60 map of the Earth", "savegame":"hagworld-120x60-v1.2"},
+  {"img":"/images/europe.png", "description":"Very large map of Europe, 200x100", "savegame":"europe-200x100-v2"}
 ];
 
 /**************************************************************************
@@ -296,21 +298,21 @@ function show_scenario_dialog()
   $.unblockUI();
 
   var saveHtml =  "<ol id='selectable'>";
-
-
     for (var i = 0; i < scenarios.length; i++) {
-      saveHtml += "<li class='ui-widget-content'><img border='0' src='" + scenarios[i]['img'] +  "' style='padding: 4px;' ><br>" + scenarios[i]['description'] + "</li>";
+      saveHtml += "<li class='ui-widget-content'><img border='0' src='" + scenarios[i]['img'] 
+	       +  "' style='padding: 4px;' ><br>" + scenarios[i]['description'] + "</li>";
     }
-
 
   saveHtml += "</ol>";
 
   $("#dialog").html(saveHtml);
   $("#dialog").attr("title", "Select a scenario to play:");
+  $("#selectable").css("height", $(window).height() - 180);
   $("#dialog").dialog({
 			bgiframe: true,
 			modal: true,
 			width: is_small_screen() ? "90%" : "40%",
+			position: {my: 'center bottom', at: 'center bottom', of: window},
 			buttons: {
 	  			"Select scenario": function() {
 					load_game_check();
@@ -322,7 +324,5 @@ function show_scenario_dialog()
   $("#selectable").selectable();
   $("#dialog").dialog('open');		
   $("#game_text_input").blur();
-
-
 
 }

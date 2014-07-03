@@ -76,11 +76,18 @@ pillage_select           = TRUE
 
 ; Whether one can steal a tech for which prereqs are not known
 tech_steal_allow_holes    = TRUE
-; Whether one can get a tech for which prereqs are not known via diplomatic trading
+; Whether one can get a tech for which prereqs are not known via
+; diplomatic trading
 tech_trade_allow_holes    = TRUE
-; Whether one can get a tech for which prereqs are not known via parasite effect
-; (Great Library)
+; ...and whether one can lose a tech which is prereq for another known
+; tech via trade, if techlost_donor is nonzero
+tech_trade_loss_allow_holes = TRUE
+; Whether one can get a tech for which prereqs are not known via
+; parasite effect (Great Library)
 tech_parasite_allow_holes = TRUE
+; Whether one can lose a tech which is prereq for another known tech
+; due to negative bulbs, if techlossforgiveness allows loss
+tech_loss_allow_holes     = TRUE
 
 ; Whether civil war is possible at all
 civil_war_enabled        = TRUE
@@ -400,7 +407,7 @@ effects        = "ReducePopulation", "Fallout"
 ;
 ; */ <-- avoid gettext warnings
 
-; No achievements in fcweb ruleset
+; No achievements in classic ruleset
 
 ;
 ; Trade settings
@@ -491,9 +498,3 @@ colorlist =
 ;       "int_set", 123, FALSE
 ;       "str_set", "test", FALSE
 ;     }
-set =
-  { "name", "value", "lock"
-    "autosaves", "", TRUE
-    "topology", "WRAPX", TRUE
-    "nationset", "all", TRUE
-  }

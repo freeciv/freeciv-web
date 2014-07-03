@@ -774,12 +774,6 @@ function handle_ruleset_effect(packet)
   effects[packet['effect_type']] = packet;
 }
  
- /* Done */
-function handle_ruleset_effect_req(packet) 
-{
-  requirements[packet['effect_id']] = packet;
-}
-
 function handle_ruleset_unit_flag(packet)
 {
   /* TODO: implement */

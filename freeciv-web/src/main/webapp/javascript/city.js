@@ -58,7 +58,7 @@ function remove_city(pcity_id)
 {
  if (pcity_id == null) return;
  
- delete cities[city_id];
+ delete cities[pcity_id];
  
 }
 
@@ -229,6 +229,16 @@ function show_city_dialog(pcity)
 
   $("#buy_button").button(city_can_buy(pcity) ? "enable" : "disable");
 
+  $('#disbandable_city').off();
+  $('#disbandable_city').prop('checked', pcity['disbandable_city']);
+  $('#disbandable_city').click(function() {
+    var packet = {"type" : packet_city_disbandable_req, "city_id" : active_city['id']};
+    send_request (JSON.stringify(packet));
+  });
+
+  if (is_small_screen()) {
+    $("#city_dialog_info").hide();
+  }
 }
 
 /**************************************************************************
@@ -294,11 +304,11 @@ function change_city_production_dialog()
     }
 
     production_html = production_html 
-     + "<div id='production_list_item' style='" + (current_prod ? "background-color:#777777; text:#000000; border: 1px solid #ffffff;" : "") + "'" 
+     + "<div class='production_list_item' style='" + (current_prod ? "background-color:#777777; text:#000000; border: 1px solid #ffffff;" : "") + "'" 
      + " onclick='send_city_change(" + pcity['id'] + "," + production_list[a]['kind'] + "," + production_list[a]['value'] + ")' "
      + " title='" + production_list[a]['helptext'] + "'>"
      
-     + "<div id='production_list_item_sub' style=' background: transparent url(" 
+     + "<div class='production_list_item_sub' style=' background: transparent url(" 
            + sprite['image-src'] +
            ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y'] 
            + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px;'"
@@ -338,10 +348,10 @@ function change_city_production_dialog()
 			buttons: {
 				"Buy": function() {
 						request_city_buy();
-						$(this).dialog('close');
+						$("#dialog").dialog('close');
 				},
 				"Close": function() {
-						$(this).dialog('close');
+						$("#dialog").dialog('close');
 
 				}
 			}
@@ -468,10 +478,10 @@ function request_city_buy()
 			buttons: {
 				"Yes": function() {
 						send_city_buy();
-						$(this).dialog('close');
+						$("#dialog").dialog('close');
 				},
 				"No": function() {
-						$(this).dialog('close');
+						$("#dialog").dialog('close');
 
 				}
 			}
@@ -558,11 +568,10 @@ function does_city_have_improvement(pcity, improvement_name)
 {
   if (pcity == null || pcity['improvements'] == null) return false;
 
-  for (var z = 0; z < pcity['improvements'].length; z ++) {
-    if (pcity['improvements'][z] == 1) {
-      if (improvements[z]['name'] == improvement_name) {
-        return true;
-      }
+  for (var z = 0; z < pcity['improvements'].length; z++) {
+    if (pcity['improvements'][z] == 1 && improvements[z] != null
+        && improvements[z]['name'] == improvement_name) {
+      return true;
     }
   }
   return false;

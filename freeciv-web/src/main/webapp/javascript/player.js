@@ -14,6 +14,8 @@
 
 
 var players = {};
+var research_data = {};
+
 var MAX_NUM_PLAYERS = 30;
 
 var MAX_AI_LOVE = 1000;
@@ -26,16 +28,6 @@ var DS_ALLIANCE = 4;
 var DS_NO_CONTACT = 5;
 var DS_TEAM = 6;
 var DS_LAST = 7;
-
-var player_colors = ["rgb(255,0,0)", "rgb(0,128,0)", "rgb(255,255,255)", "rgb(255,255,0)",
-    "rgb(138,  43, 226)", "rgb(255, 140, 0)", "rgb(0, 255, 255)", "rgb(139, 69, 19)",
-    "rgb(211, 211, 211)", "rgb(255, 215, 0)", "rgb(255,  20, 147)", "rgb(124, 252, 0)",
-    "rgb(218, 112, 214)", "rgb(30, 144, 255)", "rgb(250, 128, 114)", "rgb(154, 205,  50)",
-    "rgb(25,  25, 112)", "rgb(0, 255, 127)", "rgb(139, 0, 0)", "rgb(100, 149, 237)",
-    "rgb(0, 128, 128)", "rgb(255, 192, 203)", "rgb(255, 250, 205)", "rgb(119, 136, 153)",
-    "rgb(255, 127,  80)", "rgb(255, 0, 255)", "rgb(128, 128, 0)", "rgb(245, 222, 179)",
-    "rgb(184, 134,  11)", "rgb(173, 216, 230)", "rgb(102, 205, 170)", "rgb(255, 165, 0)"];
-
 
 function valid_player_by_number(playerno)
 {
@@ -121,3 +113,45 @@ function get_diplstate_text(state_id)
 
 }
 
+/**************************************************************************
+  ...
+**************************************************************************/
+function get_ai_level_text(player) 
+{
+  var ai_level = player['ai_skill_level'];
+  if (ai_level == 0) {
+    return "Away";
+  } else if (ai_level == 1) {
+    return "Handicapped";
+  } else if (ai_level == 2) {
+    return "Novice";
+  } else if (ai_level == 3) {
+    return "Easy";
+  } else if (ai_level == 4) {
+    return "Normal";
+  } else if (ai_level == 5) {
+    return "Hard";
+  } else if (ai_level == 6) {
+    return "Cheating";
+  } else if (ai_level == 6) {
+    return "Experimental";
+  } 
+
+  return "Unknown";
+
+}
+
+/**************************************************************************
+  Returns the research object related to the given player.
+**************************************************************************/
+function research_get(pplayer)
+{
+  if (player == null) return null;
+
+  if (game_info['team_pooled_research']) {
+    return research_data[pplayer['team']];
+  } else {
+    return research_data[pplayer['playerno']];
+  }
+
+}

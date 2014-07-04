@@ -61,7 +61,7 @@ function show_tax_rates_dialog()
 			  buttons: {
 				"Change tax rates" : function() {
 					submit_player_rates();
-					$(this).dialog('close');
+					$("#rates_dialog").dialog('close');
 				}
 			  }
 

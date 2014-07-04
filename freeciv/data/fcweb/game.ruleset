@@ -15,11 +15,14 @@ options="+Freeciv-ruleset-Devel-2013.May.14"
 
 [about]
 ; Ruleset name
-name = _("Default ruleset")
+name = _("Classic ruleset")
+
+; There's no separate versioning in rulesets part of main freeciv distribution
+;version = ""
 
 ; Description of the ruleset
 description = _("\
-You are playing Freeciv with default ruleset for single player games.\
+You are playing with classic Freeciv rules for single player games.\
 ")
 
 [options]
@@ -73,11 +76,18 @@ pillage_select           = TRUE
 
 ; Whether one can steal a tech for which prereqs are not known
 tech_steal_allow_holes    = TRUE
-; Whether one can get a tech for which prereqs are not known via diplomatic trading
+; Whether one can get a tech for which prereqs are not known via
+; diplomatic trading
 tech_trade_allow_holes    = TRUE
-; Whether one can get a tech for which prereqs are not known via parasite effect
-; (Great Library)
+; ...and whether one can lose a tech which is prereq for another known
+; tech via trade, if techlost_donor is nonzero
+tech_trade_loss_allow_holes = TRUE
+; Whether one can get a tech for which prereqs are not known via
+; parasite effect (Great Library)
 tech_parasite_allow_holes = TRUE
+; Whether one can lose a tech which is prereq for another known tech
+; due to negative bulbs, if techlossforgiveness allows loss
+tech_loss_allow_holes     = TRUE
 
 ; Whether civil war is possible at all
 civil_war_enabled        = TRUE
@@ -179,10 +189,12 @@ total_factor = 100
 slow_invasions = TRUE
 
 [combat_rules]
-; If tired_attack is set to TRUE, units that attack with only 1/3 or 2/3
-; moves left will have their attack power reduced by 2/3 or 1/3
-; respectively. If this is set to FALSE units will attack with full
-; strength even if they have only fractional moves left.
+; If tired_attack is set to TRUE, units that attack with less than a single
+; move point (per move_fragments in terrain.ruleset) will have their attack
+; power reduced accordingly. For instance, if move_fragments=3, a unit with
+; 2/3 move points will have attack power 2/3 of normal.
+; If this is set to FALSE units will attack with full strength even if they
+; have only fractional moves left.
 tired_attack = FALSE
 
 ; /* <-- avoid gettext warnings
@@ -344,7 +356,8 @@ negative_label = _("BCE")
 ; frequency               = how likely disaster is to occur
 ; effects
 ;   - "DestroyBuilding"   = Random building is destroyed
-;   - "ReducePopulation"  = Reduce city size by one
+;   - "ReducePopulation"  = Reduce city size by one unless it's already 1
+;   - "ReducePopDestroy"  = Reduce city size by one, possibly destroying the city
 ;   - "EmptyFoodStock"    = Remove all food from food stock
 ;   - "EmptyProdStock"    = Destroy current production
 ;   - "Pollution"         = One tile surrounding city polluted
@@ -394,7 +407,7 @@ effects        = "ReducePopulation", "Fallout"
 ;
 ; */ <-- avoid gettext warnings
 
-; No achievements in fcweb ruleset
+; No achievements in classic ruleset
 
 ;
 ; Trade settings
@@ -413,6 +426,12 @@ settings =
     "NationalIC", 200,   "Cancel"
     "IN",         200,   "Cancel"
     "INIC",       400,   "Cancel"
+    "Ally",       200,   "Cancel"
+    "AllyIC",     400,   "Cancel"
+    "Enemy",      200,   "Cancel"
+    "EnemyIC",    400,   "Cancel"
+    "Team",       200,   "Cancel"
+    "TeamIC",     400,   "Cancel"
   }
 
 [playercolors]
@@ -479,9 +498,3 @@ colorlist =
 ;       "int_set", 123, FALSE
 ;       "str_set", "test", FALSE
 ;     }
-set =
-  { "name", "value", "lock"
-    "autosaves", "", TRUE
-    "topology", "WRAPX", TRUE
-    "nationset", "all", TRUE
-  }

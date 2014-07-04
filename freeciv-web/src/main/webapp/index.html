@@ -16,7 +16,7 @@
 
     <script type="text/javascript" src="javascript/json2.js"></script>
     <script type="text/javascript" src="javascript-compressed/jquery.min.js"></script>
-    <script type="text/javascript" src="javascript/jstorage.js"></script>
+    <script type="text/javascript" src="javascript/simpleStorage.js"></script>
     <script type="text/javascript" src="javascript-compressed/menu.js"></script>
     
 
@@ -39,12 +39,19 @@
     if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1) {
       $("#chromews").show();
       $("#mozws").hide();
+      $("#windowsstore").hide();
     } else if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
       $("#mozws").show();
       $("#chromews").hide();
+      $("#windowsstore").hide();
+    } else if (navigator.userAgent.toLowerCase().indexOf('trident') > -1) {
+      $("#mozws").hide();
+      $("#chromews").hide();
+      $("#windowsstore").show();
     } else {
       $("#mozws").hide();
       $("#chromews").hide();
+      $("#windowsstore").hide();
     }
   });
 </script> 
@@ -53,6 +60,7 @@
 
 
   <body>
+  <script type="text/javascript" src="//dl1d2m8ri9v3j.cloudfront.net/releases/1.2.5/tracker.js" data-customer="ee5dba6fe2e048f79b422157b450947b"></script>
 
     <div class="container">
 
@@ -92,7 +100,6 @@
 
 
 
-      <!-- Example row of columns -->
       <div class="row">
         <div class="col-lg-4">
                   <h2>HTML5 browser game</h2>
@@ -105,6 +112,7 @@
 
 		<div id="chromews"><a href="https://chrome.google.com/webstore/detail/freeciv/ldhdjhmbapbeafmhdoobnlldhfopfcgh" ><img src="images/chrome-ws.png"></a></div>
 		<div id="mozws"><a href="https://marketplace.firefox.com/app/freeciv"><img src="images/firefox-marketplace.png"></a></div>
+		<div id="windowsstore"><a href="http://apps.microsoft.com/windows/app/freeciv/43da4eed-42cf-4105-87a2-e03f45ade081"><img src="images/windowsstore.png"></a></div>
 <br><br>
 
 <!-- AddThis Button BEGIN -->
@@ -127,6 +135,7 @@
 			<li>Playable for free in your HTML5 capable browser, mobile or tablet</li>
 			<li>Isometric 2d graphics</li>
 			<li>Artificial Intelligence (AI) computer-controlled players. </li>
+			<li>History lessons from Wikipedia of all technologies, units and buildings.</li>
 			<li>More than 50 playable units and 541 nations.</li>
 			<li>Up to 126 players in one game!</li>
 			<li>Full Fog of War</li>
@@ -150,6 +159,7 @@
  
         </div>
       </div>
+
 
       <!-- Site footer -->
       <div class="footer">

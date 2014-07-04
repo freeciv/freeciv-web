@@ -36,9 +36,8 @@ var LAYER_SPECIAL1 = 4;
 var LAYER_CITY1 = 5;
 var LAYER_UNIT = 6;
 var LAYER_FOG = 7;
-var LAYER_FOCUS_UNIT = 8;
-var LAYER_CITYBAR = 9;
-var LAYER_COUNT = 10;
+var LAYER_CITYBAR = 8;
+var LAYER_COUNT = 9;
 
 // these layers are not used at the moment, for performance reasons.
 //var LAYER_BACKGROUND = ; (not in use)
@@ -177,6 +176,10 @@ function fill_sprite_array(layer, ptile, pedge, pcorner, punit, pcity, citymode)
           sprite_array.push({"key" : "tx.pollution"}); 
         }
 
+	if (tile_has_extra(ptile, BASE_RUINS)) {
+          sprite_array.push({"key" : "base.ruins_mg"}); 
+        }
+
         sprite_array = sprite_array.concat(get_border_line_sprites(ptile));
 
       } 
@@ -195,8 +198,7 @@ function fill_sprite_array(layer, ptile, pedge, pcorner, punit, pcity, citymode)
     
     
     case LAYER_UNIT:
-    case LAYER_FOCUS_UNIT:
-      if (do_draw_unit && XOR(layer == LAYER_UNIT, unit_is_in_focus(punit)) && active_city == null) {
+      if (do_draw_unit && active_city == null) {
         var stacked = (ptile['units'] != null && ptile['units'].length > 1);
         var backdrop = false; /* !pcity;*/
 
@@ -285,13 +287,9 @@ function fill_sprite_array(layer, ptile, pedge, pcorner, punit, pcity, citymode)
 ****************************************************************************/
 function fill_terrain_sprite_layer(layer_num, ptile, pterrain, tterrain_near)
 {
-  var result = [];
-  
-  result = result.concat(fill_terrain_sprite_array(layer_num, ptile, pterrain, tterrain_near));
-
   /* FIXME: handle blending and darkness. */
   
-  return result;
+  return fill_terrain_sprite_array(layer_num, ptile, pterrain, tterrain_near);
 
 }
 
@@ -344,11 +342,13 @@ function fill_terrain_sprite_array(l, ptile, pterrain, tterrain_near)
             if (ts_tiles[tterrain_near[i]['graphic_str']] == null) continue; 
             var that = ts_tiles[tterrain_near[i]['graphic_str']]['layer' + l + '_match_type'];
             if (that == this_match_type) {
-			  tileno |= 1 << i;
+              tileno |= 1 << i;
             }
           }
-          
-          return [ {"key" : "t.l" + l + "." + pterrain['graphic_str'] + "_" + cardinal_index_str(tileno)} ];
+          var gfx_key = "t.l" + l + "." + pterrain['graphic_str'] + "_" + cardinal_index_str(tileno);
+	  var y = tileset_tile_height - tileset[gfx_key][3];
+
+          return [ {"key" : gfx_key, "offset_x" : 0, "offset_y" : y} ];
           break;
         } 
       }
@@ -561,7 +561,8 @@ function get_city_occupied_sprite(pcity) {
   var ptile = city_tile(pcity);
   var punits = tile_units(ptile);
 
-  if (!observing && owner_id != client.conn.playing.playerno && pcity['occupied']) {
+  if (!observing && client.conn.playing != null 
+      && owner_id != client.conn.playing.playerno && pcity['occupied']) {
     return "citybar.occupied";
   } else if (punits.length == 1) {
     return "citybar.occupancy_1";
@@ -827,9 +828,7 @@ function get_unit_activity_sprite(punit)
 ****************************************************************************/
 function get_city_sprite(pcity) 
 {
-  var owner_id = pcity['owner'];
-  var player = players[owner_id];
-  var style_id = player['city_style'];
+  var style_id = pcity['style'];
   if (style_id == -1) style_id = 0;   /* sometimes a player has no city_style. */
   var city_rule = city_rules[style_id];
   
@@ -1270,3 +1269,48 @@ function fill_irrigation_sprite_array(ptile, pcity)
   return result_sprites;
 }
 
+/****************************************************************************
+  Assigns the nation's color based on the color of the flag, currently
+  the most common color in the flag is chosen.
+****************************************************************************/
+function assign_nation_color(nation_id)
+{
+
+  var nation = nations[nation_id];
+  if (nation == null || nation['color'] != null) return;
+
+  var flag_key = "f." + nation['graphic_str'];
+  var flag_sprite = sprites[flag_key];
+  var c = flag_sprite.getContext('2d');
+  var width = tileset[flag_key][2];
+  var height = tileset[flag_key][3];
+  var color_counts = {};
+  /* gets the flag image data, except for the black border. */
+  var img_data = c.getImageData(1, 1, width-2, height-2).data;
+
+  /* count the number of each pixel's color */
+  for (var i = 0; i < img_data.length; i += 4) {
+    var current_color = "rgb(" + img_data[i] + "," + img_data[i+1] + "," 
+                        + img_data[i+2] + ")";
+    if (current_color in color_counts) {
+      color_counts[current_color] = color_counts[current_color] + 1;
+    } else {
+      color_counts[current_color] = 1;
+    }
+  }
+
+  var max = -1;
+  var max_color = null;
+
+  for (var current_color in color_counts) {
+    if (color_counts[current_color] > max) {
+      max = color_counts[current_color];
+      max_color = current_color;
+    }
+  }
+
+  nation['color'] = max_color;
+  color_counts = null;
+  img_data = null;
+
+}

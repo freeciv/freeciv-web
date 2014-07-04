@@ -194,13 +194,6 @@ function handle_city_short_info(packet)
 /* 100% complete */
 function handle_player_info(packet) 
 {
-
-  if (client != null && client.conn.playing != null 
-    && packet['playerno'] == client.conn.playing['playerno'] 
-    && packet['researching'] != client.conn.playing['researching']) {
-    $("#tech_tab_item").css("color", "#ff0000");
-  }
-
   players[packet['playerno']] = $.extend(players[packet['playerno']], packet);
   
   if (client.conn.playing != null) {
@@ -664,7 +657,7 @@ function handle_thaw_client(packet)
 
 function handle_spaceship_info(packet) 
 {
-  /* TODO: implement*/
+  spaceship_info[packet['player_num']] = packet;
 }
 
 /* 100% complete */
@@ -726,7 +719,7 @@ function handle_ruleset_nation_groups(packet)
 function handle_ruleset_nation(packet) 
 {
   nations[packet['id']] = packet;
-  nations[packet['id']]['color'] = player_colors[(packet['id'] % player_colors.length)];
+  assign_nation_color(packet['id']);
 }
 
 function handle_ruleset_city(packet) 
@@ -781,12 +774,6 @@ function handle_ruleset_effect(packet)
   effects[packet['effect_type']] = packet;
 }
  
- /* Done */
-function handle_ruleset_effect_req(packet) 
-{
-  requirements[packet['effect_id']] = packet;
-}
-
 function handle_ruleset_unit_flag(packet)
 {
   /* TODO: implement */
@@ -804,7 +791,7 @@ function handle_ruleset_terrain_flag(packet)
 
 function handle_tech_gained(packet) 
 {
-  /* TODO: implement*/
+  show_tech_gained_dialog(packet['tech']);
 }
 
 function handle_scenario_info(packet) 
@@ -940,4 +927,29 @@ function handle_ruleset_music(packet)
 function handle_endgame_player(packet)
 {
   endgame_player_info.push(packet);
+}
+
+function handle_research_info(packet)
+{
+  research_data[packet['id']] = packet;
+
+  if (game_info['team_pooled_research']) {
+    for (var player_id in players) {
+      var pplayer = players[player_id];
+      if (pplayer['team'] == packet['id']) {
+	pplayer = $.extend(pplayer, packet)
+        delete pplayer['id'];
+      }
+    }
+  } else {
+    var pplayer = players[packet['id']];
+    pplayer = $.extend(pplayer, packet)
+    delete pplayer['id'];
+  }
+  if (is_tech_tree_init && tech_dialog_active) update_tech_screen();
+}
+
+function handle_worker_task(packet)
+{
+  /* TODO: Implement */
 }

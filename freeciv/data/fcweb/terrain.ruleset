@@ -15,7 +15,10 @@ description="Default tile_type data for Freeciv"
 options="+Freeciv-ruleset-Devel-2013.May.14"
 
 [control]
-; Names for custom terrain flags.
+; Names for custom terrain flags. There can be up to 8 of these.
+; name          = rule name; not translateable, but may be displayed in
+;                 some circumstances
+; helptxt       = displayed in the help for terrains with this flag
 flags =
   { "name", "helptxt"
     "Oil", _("Has Oil Derrick instead of Mine")
@@ -43,7 +46,7 @@ min_start_native_area = 0
 ; For example road movement costs are relative to this.
 move_fragments = 3
 
-; How many move fragments IgTer unit movement costs
+; How many move_fragments IgTer unit movement costs
 igter_cost = 1
 
 ; There is no resources in the middle of the oceans, only near coast
@@ -74,19 +77,20 @@ ocean_resources = FALSE
 ;                        must be unique for each terrain, and changing it will
 ;                        break savegame compatibility.
 ; class                = Terrain class terrain belongs to: "Land" or "Oceanic"
-; movement_cost        = typically 1 to 3
+; movement_cost        = in whole movement points, not move_fragments;
+;                        typically 1 to 3
 ; defense_bonus        = percent added to defense; typically 0% to 200%
 ; food                 = normal food production
 ; shield               = normal shield production
 ; trade                = normal trade production
 ; resources            = list of possible resources on this terrain
-; road_food_incr_pct   = percent of road food increment applied
-; road_shield_incr_pct = percent of road shield increment applied
-; road_trade_incr_pct  = percent of road trade increment applied
-; base_time            = time to build bases, if 0, cannot build bases. See also build_time in
-;                        base definitions.
-; road_time            = time to build roads; if 0, cannot build roads. See also build_time in
-;                        road definitions.
+; road_food_incr_pct   = percent of road food_incr applied to this terrain
+; road_shield_incr_pct = percent of road shield_incr applied to this terrain
+; road_trade_incr_pct  = percent of road trade_incr applied to this terrain
+; base_time            = time to build bases; if 0, cannot build any bases.
+;                        Nonzero values only affect bases with build_time 0.
+; road_time            = time to build roads; if 0, cannot build any roads.
+;                        Nonzero values only affect roads with build_time 0.
 ; irrigation_result    = result of irrigation; one of:
 ;                        "no"  -- cannot irrigate
 ;                        "yes" -- can irrigate
@@ -101,7 +105,8 @@ ocean_resources = FALSE
 ; mining_time          = time to mine; if 0, cannot mine
 ; transform_result     = result of transformation; one of:
 ;                        "no"  -- cannot transform
-;                        terrain section -- transformation changes to that terrain
+;                        terrain section -- transformation changes to that
+;                          terrain
 ; transform_time       = time to transform; if 0, cannot transform
 ; animal               = unit type that can appear as animal on the terrain
 ; warmer_wetter_result = result of global warming for wet terrains; one of:
@@ -115,7 +120,8 @@ ocean_resources = FALSE
 ; cooler_drier_result  = result of nuclear winter for dry terrains;
 ;                        see warmer_wetter_result
 ; native_to            = List of unit classes that can move here
-; flags                = General flags for this terrain:
+; flags                = General flags for this terrain. List taken from the
+;                        following, and/or any user flags defined above:
 ;   - NoBarbs          = Barbarians will not be spawned here.
 ;   - NoCities         = Cities may not be built or found on this terrain.
 ;   - NoPollution      = Pollution and Fallout will not be put on this
@@ -132,8 +138,10 @@ ocean_resources = FALSE
 ;                        the whole contiguous FreshWater area will be flooded
 ;                        with the non-FreshWater terrain.
 ;   - NotGenerated     = Map generator never places this terrain type. It can
-;                        be added from editor only, or by ingame events (lua scripting
-;   - NoZoc            = Units on this terrain are not generating or subject to zoc
+;                        be added from editor only, or by ingame events
+;                        (lua scripting)
+;   - NoZoc            = Units on this terrain are not generating or subject
+;                        to zoc
 ; property_*           = specific property % values used by mapgen.  Most
 ;                        terrains will have 0 for most values.
 ;  - mountainous       = degree to which this terrain is mountainous
@@ -185,7 +193,7 @@ warmer_wetter_result = "no"
 warmer_drier_result  = "no"
 cooler_wetter_result = "no"
 cooler_drier_result  = "no"
-flags                = "NotGenerated", "NoPollution"
+flags                = "NotGenerated", "NoPollution", "NoCities", "UnsafeCoast"
 color.r              = 25
 color.g              = 25
 color.b              = 25
@@ -973,8 +981,8 @@ shield      = 3 ; glacier used to have 4
 ; name                    = translatable name as seen by user
 ; rule_name               = (optional) name for savegames, rulesets etc; if not
 ;                           present, 'name' is used. Since the name used in
-;                           savegames must not change, use this when renaming a
-;                           base after a ruleset has been released.
+;                           savegames must not change, use this when renaming
+;                           an extra after a ruleset has been released.
 ; category                = How UI should categorize this extra. One of
 ;                           "Infra", "Natural", "Nuisance", or "Bonus"
 ; causes                  = events that can create extra type.
@@ -982,18 +990,22 @@ shield      = 3 ; glacier used to have 4
 ;                           "Base", or "Road"
 ; rmcauses                = events that can remove extra type.
 ;                           "CleanPollution", "CleanFallout", or "Pillage"
-; graphic                 = tag specifing preferred graphic
-; graphic_alt             = tag for alternate graphic if preferred graphic is not
-;                           present. Can use eg "-" for no alternate graphic.
-; activity_gfx            = tag specifing graphic for unit building extra
+; graphic                 = tag specifying preferred graphic
+; graphic_alt             = tag for alternate graphic if preferred graphic is
+;                           not present. Can use eg "-" for no alternate
+;                           graphic
+; activity_gfx            = tag specifying graphic for unit building extra
+;                           (can be "none")
 ; act_gfx_alt             = tag for alternative graphic for unit building extra
-; rmact_gfx               = tag specifing graphic for unit removing extra
+; rmact_gfx               = tag specifying graphic for unit removing extra
+;                           (can be "none")
 ; rmact_gfx_alt           = tag for alternative graphic for unit removing extra
 ; reqs                    = requirements to build the extra (see effects.ruleset
 ;                           and README.effects for help on requirements)
 ; rmreqs                  = requirements to remove the extra
 ; buildable               = Can extra be built? Defaults to TRUE
 ; defense_bonus           = Percent added to defense when tile has the extra
+;                           (default none)
 ; native_to               = List of unit classes that are considered to
 ;                           be inside the extra when they are on same tile
 ; conflicts               = List of extras that cannot be on the same tile.
@@ -1002,17 +1014,18 @@ shield      = 3 ; glacier used to have 4
 ; hidden_by               = List of extra types that will make this extra
 ;                           type not to show on UI if both present.
 ; flags
-;   - "NativeTile"        = Native units consider tile native regardless of terrain
+;   - "NativeTile"        = Native units consider tile native regardless of
+;                           terrain
 ;   - "Refuel"            = Native units can use tile as refuel point
-;   - "TerrChangeRemoves" = Extra gets removed when ever terrain changes even if target
-;                           terrain could support it.
-;   - "AlwaysOnCityCenter" = City Center tiles always have this extra type no
-;                           matter about reqs.
-;   - "AutoOnCityCenter"  = City Center tiles will automatically have this
-;                           extra type if the player can build it.
-;   - "ConnectLand"       = Road style gfx on Oceanic tiles are drawn to connect to
-;                           adjacent. Land tiles even if they have no extra.
-;                           This affects appearance only
+;   - "TerrChangeRemoves" = Extra gets removed when ever terrain changes even
+;                           if target terrain could support it
+;   - "AlwaysOnCityCenter" = City center tiles always have this extra type
+;                           regardless of its other requirements
+;   - "AutoOnCityCenter"  = City center tiles will automatically have this
+;                           extra type if the player can build it
+;   - "ConnectLand"       = Road style gfx on Oceanic tiles are drawn to
+;                           connect to adjacent Land tiles even if they have
+;                           no extra. This affects appearance only
 ;   - "GlobalWarming"     = Instances of this extra on map count towards
 ;                           Global Warming
 ;   - "NuclearWinter"     = Instances of this extra on map count towards
@@ -1274,11 +1287,13 @@ native_to      = "Land"
 ;                           present, 'name' is used. Since the name used in
 ;                           savegames must not change, use this when renaming a
 ;                           base after a ruleset has been released.
-; gui_type                = How gui should handle this base. Fortress/Airbase/Other
-; build_time              = How long it takes for a unit to build this base. Value 0
-;                           means that terrain specific value is used instead.
+; gui_type                = How gui should handle this base.
+;                           Fortress/Airbase/Other
+; build_time              = how long it takes a unit to build this base.
+;                           Value of 0 (default) means that terrain-specific
+;                           base_time is used instead.
 ; border_sq               = Base will claim land ownership up to this radius,
-;                           -1 to disable.
+;                           -1 to disable. If enabled, base cannot exist in city tile.
 ; vision_main_sq          = Base will have main layer vision to this radius
 ; vision_invis_sq         = Base will have invisible layer vision to this radius
 ; flags
@@ -1339,39 +1354,55 @@ They have no effect on gameplay.\
 ; Road types:
 ;
 ; name                    = translatable name as seen by user
+; rule_name               = (optional) name for savegames, rulesets etc; if not
+;                           present, 'name' is used. Since the name used in
+;                           savegames must not change, use this when renaming a
+;                           road type after a ruleset has been released.
+; first_reqs              = additional requirements to build the first part of
+;                           the road, when none of the adjacent tiles have any
+;                           integrating roads (see effects.ruleset and
+;                           README.effects for help on requirements)
 ; move_cost               = how much movement it takes to travel
-;                           via this road.
+;                           via this road (in fractional move points, as
+;                           defined by move_fragments)
 ; move_mode               = how movement costs are applied
-;   - "NoBonus"    = Road gives no movement bonuses
+;   - "NoBonus"    = Road gives no movement bonuses (move_cost ignored)
 ;   - "Cardinal"   = Road cost applies only on cardinal moves
 ;   - "Relaxed"    = Road cost is normal for cardinal, double for diagonal moves
-;   - "FastAlways" = Road cost applies always between two tiles with the roads (default)
-; build_time              = how many movement points it takes to build this road. Value of
-;                           0 means that terrain specific value is used instead.
+;   - "FastAlways" = Road cost applies always between two tiles with the roads
+;                    (default)
+; build_time              = how long it takes a unit to build this road.
+;                           Value of 0 (default) means that terrain-specific
+;                           road_time is used instead.
 ; food_incr_const         = food production added to tile regardless of terrain
-; shield_incr_const       = shield production added to tile regardless of terrain
-; trade_incr_const        = trade production added to tile regardless of terrain
-; food_incr               = food production added to tile multiplied by terrain
-;                           specific factor
-; shield_incr             = shield production added to tile multiplied by terrain
-;                           specific factor
-; trade_incr              = trade production added to tile multiplied by terrain
-;                           specific factor
+; shield_incr_const       = shield production added to tile regardless of
+;                           terrain
+; trade_incr_const        = trade production added to tile regardless of
+;                           terrain
+; food_incr               = food production added to tile; multiplied by
+;                           terrain-specific road_food_incr_pct
+; shield_incr             = shield production added to tile; multiplied by
+;                           terrain-specific road_shield_incr_pct
+; trade_incr              = trade production added to tile; multiplied by
+;                           terrain-specific road_trade_incr_pct
 ; food_bonus              = percent added to food production
 ; shield_bonus            = percent added to shield production
 ; trade_bonus             = percent added to trade production
-; compat_special          = road type used in old savegames with just two road,
-;                           and one river specials:
-;                           "Road", "Railroad", "River, or "None"
+;   In summary, output bonuses from roads are given by the formula:
+;   (base_prod + roads.incr_const + roads.incr*terrain.incr_pct) * roads.bonus
+; compat_special          = what kind of pre-2.5 special this road corresponds
+;                           to, if any: "Road", "Railroad", "River, or "None".
+;                           Used for UI and loading old savegames
+; integrates              = list of road types that are suitable next steps
+;                           for travel from this road type
 ; flags
-;   - "RequiresBridge"    = Road cannot be built to river tiles without
-;                           appropriate technologies
-;   - "AlwaysOnCityCenter" = City Center tiles always have this road type no
-;                           matter about reqs.
-;   - "PreventsOtherRoads" = Other roads with "RequiresBridge" flag cannot be built
-;                            to same tile after this road.
-;   - "River"             = Always flows from land tiles to ocean, automatically
-;                           generated by map generator
+;   - "RequiresBridge"    = Technology with "Bridge" flag needed to build this
+;                           road on the same tile as another road with
+;                           "PreventsOtherRoads" flag (usually rivers)
+;   - "PreventsOtherRoads" = Prevents "RequiresBridge" roads being built on
+;                           the same tile as this one without appropriate tech
+;   - "River"             = Automatically generated by map generator, always
+;                           flowing from land tiles to ocean
 ;   - "UnrestrictedInfra" = Use of the enemy owned road is not restricted
 ;                           even if server setting 'restrictinfra' is set
 ; helptext                = optional help text string; should escape all raw

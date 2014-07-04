@@ -21,6 +21,7 @@ import os
 import platform
 import time
 from tornado import version as tornado_version
+import gc
 
 _proc_status = '/proc/%d/status' % os.getpid()
 
@@ -66,6 +67,11 @@ def get_debug_info(civcoms):
         code += "Memory: " + str(memory() / 1048576) + " MB <br>"
         code += "Resident: " + str(resident() / 1048576) + " MB <br>"
         code += "Stacksize: " + str(stacksize() / 1048576) + " MB <br>"
+        try:
+          code += "Garabage collection stats: " + str(gc.get_stats()) + " <br>"
+          code += "Garabage list: " + str(gc.garbage) + " <br>"
+        except AttributeError:
+          pass
 
         code += ("<h3>Logged in users  (count %i) :</h3>" % len(civcoms))
         for key in list(civcoms.keys()):

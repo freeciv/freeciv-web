@@ -21,6 +21,7 @@ var civclient_state = C_S_INITIAL;
 
 var endgame_player_info = [];
 
+
 /**************************************************************************
  Sets the client state (initial, pre, running, over etc).
 **************************************************************************/

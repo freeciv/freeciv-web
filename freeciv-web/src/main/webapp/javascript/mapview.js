@@ -153,6 +153,7 @@ function setup_window_size ()
 
   $("#game_status_panel").css("width", mapview_canvas.width);
 
+  $('#tabs').css("height", $(window).height());
 
   $("#pregame_message_area").height( mapview['height'] - 80);
   $("#pregame_player_list").height( mapview['height'] - 80);
@@ -210,7 +211,7 @@ function setup_window_size ()
 
   if (is_small_screen()) {
     $(".ui-tabs-anchor").css("padding", "0px");
-    $(".ui-button-text").css("padding", "0px");
+    $(".ui-button-text").css("padding", "3px");
     $(".overview_dialog").hide();
     $(".unit_dialog").hide();
     $(".ui-dialog-titlebar").hide();
@@ -614,25 +615,31 @@ function set_city_mapview_active()
 function set_default_mapview_active()
 {
   mapview_canvas_ctx = mapview_canvas.getContext("2d");
-
+  mapview_canvas_ctx.font = canvas_text_font;
   city_dialog_remove();
 
   /* shows mapview elements */
-  $("#tabs-map").removeClass("ui-tabs-hide");
   $("#tabs-map").show();
   $("#map_tab").addClass("ui-state-active");
   $("#map_tab").addClass("ui-tabs-selected");
-  $("#map_tab").removeClass("ui-state-default");
   $("#tabs-hel").hide();
 
   update_map_canvas_full();
   chatbox_scroll_down();
 
   if (!is_small_screen()) {
-    if (overview_active) $("#game_overview_panel").parent().show();
-    if (unitpanel_active) $("#game_unit_panel").parent().show();
+    if (overview_active) {
+      $("#game_overview_panel").parent().show();
+      $(".overview_dialog").position({my: 'left bottom', at: 'left bottom', of: window});
+    }
+    if (unitpanel_active) {
+      $("#game_unit_panel").parent().show();
+      $(".unit_dialog").position({my: 'right bottom', at: 'right bottom', of: window});
+    }
     if (chatbox_active) $("#game_chatbox_panel").parent().show();
   }
+
+  $("#tabs").tabs("option", "active", 0);
 
   tech_dialog_active = false;
   allow_right_click = false;

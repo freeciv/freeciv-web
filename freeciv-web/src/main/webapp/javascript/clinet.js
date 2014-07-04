@@ -19,7 +19,7 @@ var isWorking = false;
 var clinet_last_send = 0;
 var debug_client_speed_list = [];
 
-var freeciv_version = "+Freeciv.Web.Devel-2.6-2014.Mar.24";
+var freeciv_version = "+Freeciv.Web.Devel-2.6-2014.Jul.03";
 
 var ws = null;
 var civserverport = null;
@@ -68,7 +68,8 @@ function network_init()
 ****************************************************************************/
 function websocket_init()
 {
-  ws = new WebSocket("ws://" + window.location.hostname + "/civsocket");
+  var proxyport = 1000 + parseFloat(civserverport);
+  ws = new WebSocket("ws://" + window.location.hostname + "/civsocket/" + proxyport);
 
   ws.onopen = function () {
     var login_message = {"type":4, "username" : username,
@@ -89,13 +90,12 @@ function websocket_init()
   };
 
   ws.onclose = function (event) {
-   show_dialog_message("WebSocket connection closed", "Connection closed"); 
-   console.error("WebSocket connection closed."); 
+   console.debug("WebSocket connection closed, code+reason: " + event.code + ", " + event.reason); 
   };
 
   ws.onerror = function (evt) {
-   show_dialog_message("Network error", "Unable to communicate with server using WebSockets. Error: " + evt); 
-   console.error("Unable to communicate with server using WebSockets. Error: " + evt);
+   show_dialog_message("Network error", "A problem occured with the WebSocket connection to the server."); 
+   console.error("WebSocket error: Unable to communicate with server using WebSockets. Error: " + evt);
   };
 }
 
@@ -104,7 +104,8 @@ function websocket_init()
 ****************************************************************************/
 function network_stop()
 {
-  ws.close();
+  if (ws != null) ws.close();
+  ws = null;
 }
 
 /****************************************************************************
@@ -112,7 +113,9 @@ function network_stop()
 ****************************************************************************/
 function send_request(packet_payload) 
 {
-  ws.send(packet_payload);
+  if (ws != null) {
+    ws.send(packet_payload);
+  }
 
   if (debug_active) {
     clinet_last_send = new Date().getTime();

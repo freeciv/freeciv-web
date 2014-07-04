@@ -62,7 +62,8 @@ function mapview_mouse_down(e)
 
     setTimeout("check_mouse_drag_unit(" + mouse_x + "," + mouse_y + ");", 200);
   } else if (middleclick) {
-    popit(); 
+    popit();
+    return false; 
   } else {
     release_right_button(mouse_x, mouse_y);
   }
@@ -105,6 +106,8 @@ function mapview_touch_move(e)
  
   touch_start_x = mouse_x;
   touch_start_y = mouse_y;
+
+  check_mouse_drag_unit(mouse_x, mouse_y);
 
   if (!goto_active) {
     set_mapview_origin(mapview['gui_x0'] + diff_x, mapview['gui_y0'] + diff_y);
@@ -156,7 +159,7 @@ function check_mouse_drag_unit(canvas_x, canvas_y)
   var sunit = find_visible_unit(ptile);
 
   if (sunit != null) {
-    if (sunit['owner'] == client.conn.playing.playerno) {
+    if (client.conn.playing != null && sunit['owner'] == client.conn.playing.playerno) {
       set_unit_focus(sunit);
       if (is_touch_device()) activate_goto();
     }

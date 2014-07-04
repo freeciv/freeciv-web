@@ -22,3 +22,6 @@ killall -9 freeciv-web
 #4. freeciv-proxy
 
 ps aux | grep -ie freeciv-proxy | awk '{print $2}' | xargs kill -9 
+
+# Clean up server list in metaserver database.
+echo "delete from servers" | mysql -u root -pvagrant freeciv_web

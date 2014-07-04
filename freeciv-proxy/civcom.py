@@ -133,7 +133,7 @@ class CivCom(Thread):
         if (self.socket is not None):
             self.socket.close()
             self.socket = None
-
+        self.civwebserver = None
         self.stopped = True
 
     # queue messages to be sent to client.

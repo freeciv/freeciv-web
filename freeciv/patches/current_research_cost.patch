@@ -1,34 +1,39 @@
-diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2012-05-16 21:07:37.000000000 +0300
-+++ freeciv/common/packets.def	2012-05-16 21:18:07.000000000 +0300
-@@ -710,6 +710,7 @@
-   UINT16 bulbs_last_turn;
-   UINT32 bulbs_researched;
-   UINT32 techs_researched;
-+  UINT32 current_research_cost;  
-   UINT8 researching;
-   UINT16 science_cost;
+diff --git freeciv/common/packets.def freeciv/common/packets.def
+index 065062e..ae247ee 100644
+--- freeciv/common/packets.def
++++ freeciv/common/packets.def
+@@ -773,6 +773,7 @@ PACKET_PLAYER_INFO = 51; sc, is-info
+   UINT8 ai_skill_level;
+   UINT8 barbarian_type;
+   BV_PLAYER gives_shared_vision;
+   UINT32 love[MAX_NUM_PLAYER_SLOTS];
++  UINT32 current_research_cost;
  
-diff -Nurd -X.diff_ignore freeciv/server/plrhand.c freeciv/server/plrhand.c
---- freeciv/server/plrhand.c	2012-05-16 20:56:43.000000000 +0300
-+++ freeciv/server/plrhand.c	2012-05-16 21:18:07.000000000 +0300
-@@ -893,6 +893,11 @@
-     packet->science         = plr->economic.science;
-     packet->luxury          = plr->economic.luxury;
-     packet->bulbs_researched = research->bulbs_researched;
-+    if (research->researching != A_UNSET) {
-+      packet->current_research_cost = total_bulbs_required(plr);
-+    } else {
-+      packet->current_research_cost = 0;
-+    }
-     packet->techs_researched = research->techs_researched;
-     packet->researching = research->researching;
-     packet->future_tech = research->future_tech;
-@@ -905,6 +910,7 @@
-     packet->science         = 0;
-     packet->luxury          = 0;
-     packet->bulbs_researched= 0;
-+    packet->current_research_cost= 0;
-     packet->techs_researched= 0;
-     packet->researching     = A_UNKNOWN;
-     packet->future_tech     = 0;
+   UINT8 color_red;
+   UINT8 color_green;
+diff --git freeciv/server/plrhand.c freeciv/server/plrhand.c
+index ad373a9..41bbf15 100644
+--- freeciv/server/plrhand.c
++++ freeciv/server/plrhand.c
+@@ -1042,6 +1042,7 @@ static void package_player_info(struct player *plr,
+   enum plr_info_level info_level;
+   enum plr_info_level highest_team_level;
+   struct government *pgov = NULL;
++  struct research *presearch;
+ 
+   if (receiver) {
+     info_level = player_info_level(plr, receiver);
+@@ -1127,6 +1128,13 @@ static void package_player_info(struct player *plr,
+     }
+   }
+ 
++  presearch = research_get(plr);
++  if (presearch->researching != A_UNSET) {
++    packet->current_research_cost = total_bulbs_required(plr);
++  } else {
++    packet->current_research_cost = 0;
++  }
++
+   /* Make absolutely sure - in case you lose your embassy! */
+   if (info_level >= INFO_EMBASSY 
+       || (receiver

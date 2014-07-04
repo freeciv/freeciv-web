@@ -15,14 +15,10 @@ button {
   overflow:visible; 
 }
 
-.demoHeaders { 
-  margin-top: 0px; 
-}
-
 .ui-tabs .ui-tabs-panel {
   border-width:0;
   display:block;
-  height:92%;
+  height:88%;
   padding:0px;
 }
 
@@ -114,18 +110,6 @@ button {
   width: 30px;
 }
 
-#ie_canvas {
-  overflow: hidden;
-  position: relative;
-}
-
-#city_ie_canvas {
-  overflow: hidden;
-  position: relative;
-  width: 300px;
-  height: 150px;
-}
-
 #turn_done_button_div {
   position: absolute;
   padding: 5px;
@@ -157,8 +141,7 @@ button {
 
 #city_button_pane {
   margin: 20px;
-  position: absolute;
-  bottom: 30px;
+  float: left;
 }
 
 
@@ -193,7 +176,7 @@ button {
 }
 
 #game_unit_orders_default {
-  bottom: 25px;
+  bottom: 55px;
   min-width: 300px;
   height: 40px;
   position: absolute;
@@ -266,8 +249,8 @@ button {
 #tech_info_box {
   float: left; 
   border: 1px solid rgb(153, 153, 153); 
-  width: 1000px; 
-  height: 40px; 
+  min-width: 1000px; 
+  min-height: 40px; 
   padding: 4px; 
   margin: 2px; 
   margin-left: 0px; 
@@ -314,9 +297,9 @@ button {
 }
 
 #civ_dialog {
-  padding: 30px;
+  padding: 20px;
   margin: 20px;
-  height: 500px;
+  height: 550px;
   text-align: center;
 }
 
@@ -338,9 +321,9 @@ button {
   color: #ffffff;
   height: 23px;
   text-align: center;
-  bottom: 0px;
-  background-color: #000000
+  bottom: 35px;
   overflow: hidden;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
 
@@ -394,14 +377,15 @@ button {
 }
 
 
-#production_list_item {
+.production_list_item {
   float: left;
   text-align: center; 
   width: 80px;
   height: 90px;
+  font-size: 70%;
 }
 
-#production_list_item_sub {
+.production_list_item_sub {
   cursor:pointer;
   cursor:hand;
   float:left; 
@@ -451,6 +435,7 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 }
 
 #tabs_menu {
+  font-size: 0.9em;
   overflow: hidden;
 }
 
@@ -512,3 +497,87 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
   padding: 8px;
   font-size: 80%;
 }
+
+.govbutton {
+  width: 190px;
+}
+
+#nation_table {
+  cursor: pointer;    
+}
+
+#nations_button_div {
+  padding-bottom: 15px;
+}
+
+.ui-selected {
+  background-color: #eeeeee;
+  color: black;
+}
+
+.ui-selecting {
+  background-color: #bbbbbb;
+  color: black;
+}
+.tablesorter-dark td {
+	background-color: inherit;
+	color: inherit;
+}
+
+.tablesorter-dark tbody > tr:hover > td,
+.tablesorter-dark tbody > tr.even:hover > td,
+.tablesorter-dark tbody > tr.odd:hover > td {
+	background: inherit;
+}
+
+.nation_row_self {
+  color: blue;
+}
+
+.nation_row_war {
+  color: red;
+}
+
+.nation_row_dead {
+  color: #222222;
+}
+
+#city_disband_options {
+  float: right;
+  margin: 20px;
+  padding-right: 50px;
+  font-size: 80%;
+}
+
+#tech_advance_helptext span {
+  text-decoration:underline;
+  cursor: pointer;
+}
+
+#tech_gained_choice {
+  float: left;
+  padding: 5px;
+}
+
+.specific_tech {
+  float: left;
+  background-color: rgba(2,2,2,0.6);
+  color: white;
+  border: 1px solid white;
+  padding: 3px;
+  margin: 4px;
+  cursor: pointer;
+
+}
+
+.tech_infobox_image {
+  float: left;
+  margin: 4px;
+}
+
+#wiki_image {
+  max-width: 400px; 
+  max-height: 500px; 
+  float: right; 
+  margin: 5px;
+  }

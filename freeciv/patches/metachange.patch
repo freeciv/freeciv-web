@@ -1,12 +1,58 @@
-diff -Nurd -X.diff_ignore freeciv/server/meta.h freeciv/server/meta.h
---- freeciv/server/meta.h	2014-02-14 01:23:05.229580185 +0200
-+++ freeciv/server/meta.h	2014-02-14 01:58:50.480560440 +0200
-@@ -17,7 +17,7 @@
+Index: freeciv/server/connecthand.c
+===================================================================
+--- freeciv/server/connecthand.c	(revision 24891)
++++ freeciv/server/connecthand.c	(working copy)
+@@ -155,7 +155,7 @@
+     /* First connection
+      * Replace "restarting in x seconds" meta message */
+     maybe_automatic_meta_message(default_meta_message_string());
+-    (void) send_server_info_to_metaserver(META_INFO);
++    (void) send_server_info_to_metaserver(META_FORCE);
+   }
+ 
+   /* introduce the server to the connection */
+Index: freeciv/server/meta.c
+===================================================================
+--- freeciv/server/meta.c	(revision 24891)
++++ freeciv/server/meta.c	(working copy)
+@@ -349,6 +364,10 @@
+         }
+       } players_iterate_end;
+ 
++      if (S_S_INITIAL == server_state()) {
++        humans = conn_list_size(game.est_connections);
++      }
++
+       /* send the number of available players. */
+       netfile_add_form_int(post, "available", players);
+       netfile_add_form_int(post, "humans", humans);
+@@ -467,7 +486,7 @@
+   }
+ 
+   /* don't allow the user to spam the metaserver with updates */
+-  if (last_send_timer && (timer_read_seconds(last_send_timer)
++  if (flag != META_FORCE && last_send_timer && (timer_read_seconds(last_send_timer)
+                                           < METASERVER_MIN_UPDATE_INTERVAL)) {
+     if (flag == META_INFO) {
+       want_update = TRUE; /* we couldn't update now, but update a.s.a.p. */
+Index: freeciv/server/meta.h
+===================================================================
+--- freeciv/server/meta.h	(revision 24891)
++++ freeciv/server/meta.h	(working copy)
+@@ -17,13 +17,14 @@
  
  #define DEFAULT_META_SERVER_NO_SEND  TRUE
  #define DEFAULT_META_SERVER_ADDR     META_URL /* fc_config.h */
 -#define METASERVER_REFRESH_INTERVAL   (3*60)
-+#define METASERVER_REFRESH_INTERVAL   (30)
++#define METASERVER_REFRESH_INTERVAL   (60)
  #define METASERVER_MIN_UPDATE_INTERVAL 7   /* not too short, not too long */
  
  enum meta_flag {
+   META_INFO,
+   META_REFRESH,
+-  META_GOODBYE
++  META_GOODBYE,
++  META_FORCE
+ };
+ 
+ const char *default_meta_patches_string(void);

@@ -38,12 +38,6 @@ echo "Starting publite2" && \
 (cd ${FREECIV_WEB_DIR}/publite2/ && \
 sh run.sh) && \
 echo "Publite2 started" && \
-
-#4. freeciv-proxy
-echo "Starting freeciv-proxy" && \
-(cd  ${FREECIV_WEB_DIR}/freeciv-proxy/ && \
-sh run.sh) && \
-echo "freeciv-proxy started" &&\
 echo "Will sleep for 5 seconds, then do a status test..." && \
 sleep 5 && \
 sh ./status-freeciv-web.sh

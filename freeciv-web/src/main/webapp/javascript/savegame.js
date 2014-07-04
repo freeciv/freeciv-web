@@ -14,14 +14,16 @@ var savename = "";
 
 
 var scenarios = [
-  {"img":"/images/world_large.png", "description":"The World - Classic-style 80x50 map of the Earth", "savegame":"earth-80x50-v3"},
-  {"img":"/images/hagworld.png", "description":"The World - Classic-style 120x60 map of the Earth", "savegame":"hagworld-120x60-v1.2"},
-  {"img":"/images/british.png", "description":"British Aisles - Medium (85x80)", "savegame":"british-isles-85x80-v2.80"},
+  {"img":"/images/world_small.png", "description":"The World - Small world map, 80x50 map of the Earth", "savegame":"earth-80x50-v3"},
+  {"img":"/images/world_big.png", "description":"The World - Large world map, 160x90 map of the Earth", "savegame":"earth-160x90-v2"},
   {"img":"/images/iberian.png", "description":"Iberian Peninsula - 136x100 map of Spain and Portugal", "savegame":"iberian-peninsula-136x100-v1.0"},
   {"img":"/images/france.png", "description":"France - Large (140x90)", "savegame":"france-140x90-v2"},
   {"img":"/images/japan.png", "description":"Japan - Medium (88x100)", "savegame":"japan-88x100-v1.3"},
   {"img":"/images/italy.png", "description":"Italy - Medium (100x100)", "savegame":"italy-100x100-v1.5"},
-  {"img":"/images/america.png", "description":"North America - 116x100 map of North America", "savegame":"north_america_116x100-v1.2"}
+  {"img":"/images/america.png", "description":"North America - 116x100 map of North America", "savegame":"north_america_116x100-v1.2"},
+  {"img":"/images/british.png", "description":"British Aisles - Medium (85x80)", "savegame":"british-isles-85x80-v2.80"},
+  {"img":"/images/hagworld.png", "description":"The World - Classic-style 120x60 map of the Earth", "savegame":"hagworld-120x60-v1.2"},
+  {"img":"/images/europe.png", "description":"Very large map of Europe, 200x100", "savegame":"europe-200x100-v2"}
 ];
 
 /**************************************************************************
@@ -52,21 +54,23 @@ function load_game_check()
       }
     } else if (load_game_id != -1) {
 
-      var savefile = $.jStorage.get("savegame-file-" + (load_game_id + 1));
-      var savename = $.jStorage.get("savegame-savename-" + (load_game_id + 1));
-      var saveusr = $.jStorage.get("savegame-username-" + (load_game_id + 1));
+      var savefile = simpleStorage.get("savegame-file-" + (load_game_id + 1));
+      var savename = simpleStorage.get("savegame-savename-" + (load_game_id + 1));
+      var saveusr = simpleStorage.get("savegame-username-" + (load_game_id + 1));
       if (savefile != null && savename != null && username != null) {
+        console.log("Loading " + savename);
 	$.ajax({
           url: "/loadservlet?username=" + saveusr + "&savename=" + savename,
           type: "POST",
           data: savefile,
           processData: false
     	}).done(function() {
+          console.log("Upload of savegame complete");
           loadTimerId = setTimeout("load_game_real('" + username + "');", 
-                             1000);
+                             1500);
         }).fail(function() { alert("Loading game failed (ajax failed)"); });
       } else {
-        alert("Loading game failed (jStorage)");
+        alert("Loading game failed (simpleStorage)");
       }
     }
   } else if (scenario == "true" && $.getUrlVar('load') != "tutorial") {
@@ -83,6 +87,7 @@ function load_game_check()
 **************************************************************************/
 function load_game_real(filename)
 {
+      console.log("Server command: /load " + filename );
       var test_packet = {"type" : packet_chat_msg_req, 
                          "message" : "/load " + filename};
       var myJSONText = JSON.stringify(test_packet);
@@ -111,8 +116,8 @@ function load_game_toggle()
 ****************************************************************************/
 function save_game()
 {
-  if (!$.jStorage.storageAvailable()) {
-    alert("HTML5 Storage not available");
+  if (!simpleStorage.canUse()) {
+    show_dialog_message("Saving failed", "HTML5 Storage not available");
     return;
   }
 
@@ -146,7 +151,7 @@ function save_game()
 						alert("Savegame name already in use. "
 						 + "Please use a new savegame name.");
 					} else {
-						$(this).dialog('close');
+						$("#dialog").dialog('close');
 						save_game_send();
                                                 $.blockUI();
 					}
@@ -154,10 +159,12 @@ function save_game()
 			}
 		});
   var pplayer = client.conn.playing;
+  var save_cnt = simpleStorage.get("savegame-count");
+  if (save_cnt == null) save_cnt = 0;
   var suggest_savename = username + " of the " + nations[pplayer['nation']]['adjective'] + " in the year " + get_year_string() + " [" 
-                         + ($.jStorage.get("savegame-count", 0) + 1) + "]";
+                         + (save_cnt + 1) + "]";
   if (suggest_savename.length >= 64) suggest_savename = username + " [" 
-                         + ($.jStorage.get("savegame-count", 0) + 1) + "]";
+                         + (save_cnt + 1) + "]";
 
 
   $("#savegamename").val(suggest_savename);	
@@ -170,9 +177,10 @@ function save_game()
 **************************************************************************/
 function check_savegame_duplicate(new_savename)
 {
-  var savegame_count = $.jStorage.get("savegame-count", 0);
+  var savegame_count = simpleStorage.get("savegame-count");
+  if (savegame_count == null) savegame_count = 0;
   for (var i = 1; i <= savegame_count; i++) {
-    var savename = $.jStorage.get("savegame-savename-" + i);
+    var savename = simpleStorage.get("savegame-savename-" + i);
     if (savename == new_savename) return true;
   }
   return false;
@@ -199,11 +207,13 @@ function save_game_fetch()
 {
   $.get("/saveservlet?username=" + username + "&savename=" + savename, 
     function(saved_file) {
-      var savegame_count = $.jStorage.get("savegame-count", 0) + 1;
-      $.jStorage.set("savegame-file-" + savegame_count, saved_file);
-      $.jStorage.set("savegame-savename-" + savegame_count, savename);
-      $.jStorage.set("savegame-username-" + savegame_count, username);
-      $.jStorage.set("savegame-count" , savegame_count);
+      var savegame_count = simpleStorage.get("savegame-count");
+      if (savegame_count == null) savegame_count = 0;
+      savegame_count += 1;
+      simpleStorage.set("savegame-file-" + savegame_count, saved_file);
+      simpleStorage.set("savegame-savename-" + savegame_count, savename);
+      simpleStorage.set("savegame-username-" + savegame_count, username);
+      simpleStorage.set("savegame-count" , savegame_count);
       $.unblockUI();
       alert("Game saved successfully");
     }).fail(function() { 
@@ -225,15 +235,15 @@ function load_game_dialog()
 
   var saveHtml =  "<ol id='selectable'>";
 
-  var savegame_count = $.jStorage.get("savegame-count", 0);
+  var savegame_count = simpleStorage.get("savegame-count");
 
-  if (savegame_count == 0) {
+  if (savegame_count == 0 || savegame_count == null) {
       saveHtml = "<b>No savegames found. Please start a new game.</b>";
 
   } else {
     for (var i = 1; i <= savegame_count; i++) {
-      var savename = $.jStorage.get("savegame-savename-" + i);
-      var username = $.jStorage.get("savegame-username-" + i);
+      var savename = simpleStorage.get("savegame-savename-" + i);
+      var username = simpleStorage.get("savegame-username-" + i);
       saveHtml += "<li class='ui-widget-content'>" + savename + " (" + username + ")</li>";
     }
   }
@@ -250,18 +260,18 @@ function load_game_dialog()
 			width: is_small_screen() ? "95%" : "70%",
 			buttons: {
 				"Delete Savegames": function() {
-					$(this).dialog('close');
+					$("#dialog").dialog('close');
 					$("#game_text_input").blur();
-					$.jStorage.set("savegame-count" , 0);
+					simpleStorage.set("savegame-count" , 0);
 				},
 	  	  		"Load Scenario": function() {
-					$(this).dialog('close');
+					$("#dialog").dialog('close');
 					$("#game_text_input").blur();
 					show_scenario_dialog();
 				},
 	  			"Load Savegame": function() {
 					load_game_check();
-					$(this).dialog('close');
+					$("#dialog").dialog('close');
 					$("#game_text_input").blur();
 				}
 			}
@@ -288,25 +298,25 @@ function show_scenario_dialog()
   $.unblockUI();
 
   var saveHtml =  "<ol id='selectable'>";
-
-
     for (var i = 0; i < scenarios.length; i++) {
-      saveHtml += "<li class='ui-widget-content'><img border='0' src='" + scenarios[i]['img'] +  "' style='padding: 4px;' ><br>" + scenarios[i]['description'] + "</li>";
+      saveHtml += "<li class='ui-widget-content'><img border='0' src='" + scenarios[i]['img'] 
+	       +  "' style='padding: 4px;' ><br>" + scenarios[i]['description'] + "</li>";
     }
-
 
   saveHtml += "</ol>";
 
   $("#dialog").html(saveHtml);
   $("#dialog").attr("title", "Select a scenario to play:");
+  $("#selectable").css("height", $(window).height() - 180);
   $("#dialog").dialog({
 			bgiframe: true,
 			modal: true,
 			width: is_small_screen() ? "90%" : "40%",
+			position: {my: 'center bottom', at: 'center bottom', of: window},
 			buttons: {
 	  			"Select scenario": function() {
 					load_game_check();
-					$(this).dialog('close');
+					$("#dialog").dialog('close');
 					$("#game_text_input").blur();
 				}
 			}
@@ -314,7 +324,5 @@ function show_scenario_dialog()
   $("#selectable").selectable();
   $("#dialog").dialog('open');		
   $("#game_text_input").blur();
-
-
 
 }

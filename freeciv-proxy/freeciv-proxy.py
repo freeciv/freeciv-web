@@ -23,6 +23,7 @@ import logging
 from civcom import *
 import json
 import uuid
+import gc
 
 PROXY_PORT = 8002
 CONNECTION_LIMIT = 1000
@@ -47,11 +48,9 @@ class StatusHandler(web.RequestHandler):
 
 
 class WSHandler(websocket.WebSocketHandler):
-    clients = []
     logger = logging.getLogger("freeciv-proxy")
 
     def open(self):
-        self.clients.append(self)
         self.id = str(uuid.uuid4())
         self.is_ready = False
         self.set_nodelay(True)
@@ -83,12 +82,17 @@ class WSHandler(websocket.WebSocketHandler):
         self.civcom.queue_to_civserver(message)
 
     def on_close(self):
-        self.clients.remove(self)
         if hasattr(self, 'civcom') and self.civcom is not None:
             self.civcom.stopped = True
             self.civcom.close_connection()
             if self.civcom.key in list(civcoms.keys()):
                 del civcoms[self.civcom.key]
+            del(self.civcom)
+            gc.collect()
+
+    # enables support for allowing alternate origins. See check_origin in websocket.py
+    def check_origin(self, origin):
+      return True;
 
     # get the civcom instance which corresponds to the requested user.
     def get_civcom(self, username, civserverport, ws_connection):
@@ -119,7 +123,7 @@ if __name__ == "__main__":
         logger = logging.getLogger("freeciv-proxy")
 
         application = web.Application([
-            (r'/civsocket', WSHandler),
+            (r'/civsocket/' + str(PROXY_PORT), WSHandler),
             (r"/", IndexHandler),
             (r"/status", StatusHandler),
         ])

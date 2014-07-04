@@ -57,7 +57,7 @@
         <dependency>
            <groupId>mysql</groupId>
            <artifactId>mysql-connector-java</artifactId>
-           <version>5.1.29</version>
+           <version>5.1.31</version>
         </dependency>
     
 
@@ -80,7 +80,9 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-war-plugin</artifactId>
           <version>2.4</version>
-          <configuration>
+	  <configuration>
+	   <useCache>true</useCache>
+	   <recompressZippedFiles>false</recompressZippedFiles>
             <webResources>
                <resource>
                   <directory>${basedir}/src/main/webapp/WEB-INF</directory>
@@ -105,7 +107,7 @@
             <configuration>
               <cssSourceDir>css</cssSourceDir>
               <cssSourceFiles>
-	      <cssSourceFile>jquery-ui.custom.min.css</cssSourceFile>
+	      <cssSourceFile>jquery-ui.min.css</cssSourceFile>
 	      <cssSourceFile>bluecurve.css</cssSourceFile>
 	      <cssSourceFile>fg.menu.css</cssSourceFile>
 	      <cssSourceFile>theme.dark.css</cssSourceFile>

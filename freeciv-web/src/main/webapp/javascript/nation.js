@@ -14,7 +14,7 @@
 var nations = {};
 var nation_groups = [];
 var diplstates = {};
-
+var selected_player = -1;
 
 
 /**************************************************************************
@@ -22,62 +22,77 @@ var diplstates = {};
 **************************************************************************/
 function update_nation_screen()
 {
-  var nation_list_html = "<table class='tablesorter' id='nation_table' width=90% border=0 cellspacing=0 ><thead><td>Flag</td><td>Color</td><td>Player Name:</td>"
-	  + "<td>Nation:</td><td>Attitude</td><td>Score</td><td>AI/Human</td><td>Alive/Dead</td><td>Diplomatic state</td><td>Action</td></thead>";
+  var nation_list_html = "<table class='tablesorter' id='nation_table' width='95%' border=0 cellspacing=0 >"
+	  + "<thead><td>Flag</td><td>Color</td><td>Player Name:</td>"
+	  + "<td>Nation:</td><td>Attitude</td><td>Score</td><td>AI/Human</td><td>Alive?</td>"
+	  + "<td>Diplomatic state</td><td>Team</td><td>State</td></thead>";
   
   for (var player_id in players) {
     var pplayer = players[player_id];
     
     var sprite = get_player_fplag_sprite(pplayer);
     
-    nation_list_html = nation_list_html  
-           + "<tr><td><div style='background: transparent url("
+    var plr_class = "";
+    if (!client_is_observer() && player_id == client.conn.playing['playerno']) plr_class = "nation_row_self";
+    if (!pplayer['is_alive']) plr_class = "nation_row_dead";
+    if (!client_is_observer() && diplstates[player_id] != null && diplstates[player_id] == DS_WAR) plr_class = "nation_row_war";
+
+    nation_list_html += "<tr data-plrid='" + player_id + "' class='" + plr_class 
+	   + "'><td><div style='background: transparent url("
            + sprite['image-src'] 
            + "); background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y'] 
            + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px; margin: 5px; '>"
            + "</div></td>";
     
-   nation_list_html = nation_list_html  
-           + "<td><div style='background-color: " + nations[pplayer['nation']]['color'] 
+    nation_list_html += "<td><div style='background-color: " + nations[pplayer['nation']]['color'] 
            + "; margin: 5px; width: 25px; height: 25px;'>"
            + "</div></td>";
 
-
-    nation_list_html = nation_list_html 
-           + "<td>" + pplayer['name'] + "</td><td>" 
+    nation_list_html += "<td>" + pplayer['name'] + "</td><td>" 
            + nations[pplayer['nation']]['adjective']  + "</td><td>" 
 	   + col_love(pplayer) + "</td><td>" 
 	   + get_score_text(pplayer) + "</td><td>" 
-	   + (pplayer['ai'] ? "AI" : "Human") + "</td><td>"
+	   + (pplayer['ai'] ? get_ai_level_text(pplayer) + " AI" : "Human") + "</td><td>"
 	   + (pplayer['is_alive'] ? "Alive" : "Dead") +  "</td>";
 
-
-    if (!client_is_observer() && diplstates[player_id] != null) {
-      nation_list_html = nation_list_html + "<td>" + get_diplstate_text(diplstates[player_id]) + "</td><td>";
-      if (diplstates[player_id] != DS_NO_CONTACT) {
-        nation_list_html = nation_list_html + " <button type='button' class='nation_button' onClick='diplomacy_init_meeting_req(" 
-                           + player_id + ");' >Meet</button>";
-      }
-      if (diplstates[player_id] != DS_WAR && diplstates[player_id] != DS_NO_CONTACT) {
-        nation_list_html = nation_list_html + "  <button type='button' class='nation_button' onClick='diplomacy_cancel_treaty("
-                           + player_id + ");' >Cancel Treaty</button>";
-
-      }
-      nation_list_html = nation_list_html + "</td>";
-    } else if (client_is_observer() && pplayer['ai']) {
-      nation_list_html = nation_list_html + "<td>  <button type='button' class='nation_button' onClick='take_player(\"" 
-            + pplayer['name'] + "\");' >Play as " + pplayer['name'] + "</button></td>";
+    if (!client_is_observer() && diplstates[player_id] != null && player_id != client.conn.playing['playerno']) {
+      nation_list_html += "<td>" + get_diplstate_text(diplstates[player_id]) + "</td>";
+    } else {
+      nation_list_html += "<td>-</td>";
     }
 
-    nation_list_html = nation_list_html + "</tr>";
+    nation_list_html += "<td>Team " + pplayer['team'] + "</td>";
+    var pstate = " ";
+    if (pplayer['phase_done'] && !pplayer['ai']) {
+      pstate = "done";
+    } else if (!pplayer['phase_done'] && !pplayer['ai']) {
+      pstate = "moving";
+    }
+    nation_list_html += "<td>" + pstate + "</td>";
+    nation_list_html += "</tr>";
 
 
   }
-  nation_list_html = nation_list_html + "</table>";
+  nation_list_html += "</table>";
 
   $("#nations_list").html(nation_list_html);
   $(".nation_button").button();
   $("#nation_table").tablesorter({theme: "dark"});
+  $("#nation_table").selectable({ filter: "tr", 
+       selected: function( event, ui ) {handle_nation_table_select(ui); } });
+
+  selected_player = -1;
+  $('#view_player_button').button("disable");
+  $('#meet_player_button').button("disable");
+  $('#cancel_treaty_button').button("disable");
+  $('#take_player_button').button("disable");
+  $('#toggle_ai_button').button("disable");
+
+  $('#meet_player_button').click(nation_meet_clicked);
+  $('#view_player_button').click(center_on_player);
+  $('#cancel_treaty_button').click(cancel_treaty_clicked);
+  $('#take_player_button').click(take_player_clicked);
+  $('#toggle_ai_button').click(toggle_ai_clicked);
 }
 
 
@@ -93,6 +108,90 @@ function col_love(pplayer)
     return love_text(pplayer['love'][client.conn.playing['playerno']] - MAX_AI_LOVE);
   }
 
+}
+
+/**************************************************************************
+ ...
+**************************************************************************/
+function handle_nation_table_select( ui ) 
+{
+  selected_player = parseFloat($(ui.selected).data("plrid"));
+  var player_id = selected_player;
+  var pplayer = players[selected_player];
+
+  if (pplayer['is_alive'] && (client_is_observer() || player_id == client.conn.playing['playerno']
+      || (diplstates[player_id] != null && diplstates[player_id] != DS_NO_CONTACT))) {
+    $('#view_player_button').button("enable");
+  } else {
+    $('#view_player_button').button("disable");
+  }
+
+  if (!client_is_observer() && diplstates[player_id] != null 
+      && diplstates[player_id] != DS_NO_CONTACT) {
+    $('#meet_player_button').button("enable");
+  } else {
+    $('#meet_player_button').button("disable");
+  }
+
+  if (!client_is_observer() && player_id != client.conn.playing['playerno'] 
+      && diplstates[player_id] != null 
+      && diplstates[player_id] != DS_WAR && diplstates[player_id] != DS_NO_CONTACT) {
+    $('#cancel_treaty_button').button("enable");
+  } else {
+    $('#cancel_treaty_button').button("disable");
+  }
+
+  if (client_is_observer() && pplayer['ai'] && nations[pplayer['nation']]['is_playable']
+               && $.getUrlVar('multi') == "true") {
+    $('#take_player_button').button("enable");
+  } else {
+    $('#take_player_button').button("disable");
+  }
+
+  $('#toggle_ai_button').button("enable");
+
+}
+
+/**************************************************************************
+ ...
+**************************************************************************/
+function nation_meet_clicked()
+{
+  if (selected_player == -1) return;
+  diplomacy_init_meeting_req(selected_player);
+  set_default_mapview_active();
+}
+
+/**************************************************************************
+ ...
+**************************************************************************/
+function cancel_treaty_clicked()
+{
+  if (selected_player == -1) return;
+  diplomacy_cancel_treaty(selected_player);
+  set_default_mapview_active();
+}
+
+/**************************************************************************
+ ...
+**************************************************************************/
+function take_player_clicked()
+{
+  if (selected_player == -1) return;
+  var pplayer = players[selected_player];
+  take_player(pplayer['name']);
+  set_default_mapview_active();
+}
+
+/**************************************************************************
+ ...
+**************************************************************************/
+function toggle_ai_clicked()
+{
+  if (selected_player == -1) return;
+  var pplayer = players[selected_player];
+  aitoggle_player(pplayer['name']);
+  set_default_mapview_active();
 }
 
 /**************************************************************************
@@ -153,5 +252,34 @@ function take_player(player_name)
   var myJSONText = JSON.stringify(test_packet);
   send_request (myJSONText);
   observing = false;
-  setTimeout(update_nation_screen, 2000);
+}
+
+/**************************************************************************
+ ...
+**************************************************************************/
+function aitoggle_player(player_name)
+{
+  var test_packet = {"type" : packet_chat_msg_req, 
+                         "message" : "/ai " + player_name.substring(0,3)};
+  var myJSONText = JSON.stringify(test_packet);
+  send_request (myJSONText);
+  observing = false;
+}
+
+/**************************************************************************
+ ...
+**************************************************************************/
+function center_on_player()
+{
+  if (selected_player == -1) return;
+
+    /* find a city to focus on. */
+    for (city_id in cities) {
+      var pcity = cities[city_id];
+      if (city_owner_player_id(pcity) == selected_player) {
+        center_tile_mapcanvas(city_tile(pcity));
+        set_default_mapview_active();
+        return;
+      }
+    }  
 }

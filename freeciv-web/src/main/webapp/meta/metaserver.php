@@ -353,15 +353,13 @@ if ( isset($port) ) {
 
     <script type="text/javascript" src="/javascript/json2.js"></script>
     <script type="text/javascript" src="/javascript-compressed/jquery.min.js"></script>
-    <script type="text/javascript" src="/javascript/jstorage.js"></script>
-    <script type="text/javascript" src="/javascript-compressed/menu.js"></script>
-    <script type="text/javascript" src="/javascript/jquery-ui.custom.min.js"></script>   
+    <script type="text/javascript" src="/javascript/jquery-ui.min.js"></script>   
     <script type="text/javascript" src="/meta/js/meta.js"></script>
 
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
 
-    <link type="text/css" href="/meta/css/jquery-ui.custom.min.css" rel="stylesheet" />
+    <link type="text/css" href="/meta/css/jquery-ui.min.css" rel="stylesheet" />
 
     <link href="/css/frontpage.css" rel="stylesheet">
 
@@ -384,6 +382,7 @@ if ( isset($port) ) {
 
   <body>
 
+    <script type="text/javascript" src="//dl1d2m8ri9v3j.cloudfront.net/releases/1.2.5/tracker.js" data-customer="ee5dba6fe2e048f79b422157b450947b"></script>
 
     <div class="container">
 
@@ -503,12 +502,21 @@ if ( isset($port) ) {
 
       }
     } else {
+
+      $stmt="select count(*) as count from servers s where type = 'singleplayer' and state = 'Running'";
+      $res = fcdb_exec($stmt);
+      $row = fcdb_fetch_array($res, 0);
+      $single_count = $row["count"];
+      $stmt="select count(*) as count from servers s where type = 'multiplayer' and state = 'Running'";
+      $res = fcdb_exec($stmt);
+      $row = fcdb_fetch_array($res, 0);
+      $multi_count = $row["count"];
 	?>
 
 <div id="tabs">
 <ul>
-<li><a id="singleplr" href="#tabs-1">Single-player Games</a></li>
-<li><a id="multiplr" href="#tabs-2">Multi-player Games</a></li>
+<li><a id="singleplr" href="#tabs-1">Single-player Games (<? print $single_count ?>)</a></li>
+<li><a id="multiplr" href="#tabs-2">Multi-player Games (<?  print $multi_count ?>)</a></li>
 <li><a id="freecivmeta" href="#tabs-3">Desktop Games</a></li>
 </ul>
 <div id="tabs-1">
@@ -582,11 +590,11 @@ if ( isset($port) ) {
 	  
   
           if ($mystate != "Running") {
-           print "<a  class='button' href=\"/webclient?action=multi&civserverport=" . db2html($row["port"]) . "&amp;civserverhost=" . db2html($row["host"]) . "\">";
+           print "<a  class='button' href=\"/webclient?action=multi&civserverport=" . db2html($row["port"]) . "&amp;civserverhost=" . db2html($row["host"]) . "&amp;multi=true\">";
            print "Play";
 	   print "</a>";
 	  } else {
-	   print "<a  class='button' href=\"/webclient?action=observe&amp;civserverport=" . db2html($row["port"]) . "&amp;civserverhost=" . db2html($row["host"]) . "\">";
+	   print "<a  class='button' href=\"/webclient?action=observe&amp;civserverport=" . db2html($row["port"]) . "&amp;civserverhost=" . db2html($row["host"]) . "&amp;multi=true\">";
            print "Join/Observe";
            print "</a>";
 	  }

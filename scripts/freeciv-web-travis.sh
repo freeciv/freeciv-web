@@ -27,12 +27,12 @@ echo logfile $logfile
 mysql_user="root"
 mysql_pass="vagrant"
 
-resin_version="4.0.38"
+resin_version="4.0.40"
 resin_url="http://www.caucho.com/download/resin-${resin_version}.tar.gz"
-tornado_url="https://pypi.python.org/packages/source/t/tornado/tornado-3.2.tar.gz"
+tornado_url="https://github.com/tornadoweb/tornado/archive/v4.0.0b1.tar.gz"
 
 # Based on fresh install of Ubuntu 12.04
-dependencies="maven mysql-server-5.5 openjdk-7-jdk libcurl4-openssl-dev nginx libjansson-dev subversion pngcrush libtool automake autoconf autotools-dev language-pack-en python3-setuptools libglib2.0-dev python3.2 python3.2-dev"
+dependencies="maven mysql-server-5.5 openjdk-7-jdk libcurl4-openssl-dev nginx libjansson-dev subversion pngcrush libtool automake autoconf autotools-dev language-pack-en python3-setuptools libglib2.0-dev python3.2 python3.2-dev imagemagick"
 
 ## dependencies
 echo "==== Installing Updates and Dependencies ===="
@@ -44,9 +44,9 @@ sudo debconf-set-selections <<< "mysql-server-5.5 mysql-server/root_password_aga
 echo "apt-get install dependencies"
 apt-get -y install ${dependencies}
 
-#Travis doesn't support Python 3.3 at the moment.
-ln -s /usr/bin/python3.2 /usr/bin/python3.3
-python3.3 --version
+#Travis doesn't support Python 3.4 at the moment.
+ln -s /usr/bin/python3.2 /usr/bin/python3.4
+python3.4 --version
 
 python3.2 -m easy_install Pillow
 
@@ -67,10 +67,9 @@ chmod -R 777 resin
 
 echo "==== Fetching/Installing Tornado Web Server ===="
 wget ${tornado_url}
-tar xvfz tornado-3.2.tar.gz
-cd tornado-3.2
-python3.3 setup.py install
-
+tar xvfz v4.0.0b1.tar.gz
+cd tornado-4.0.0b1
+python3.4 setup.py install
 
 ## mysql setup
 echo "==== Setting up MySQL ===="

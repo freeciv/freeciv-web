@@ -93,7 +93,8 @@ function civclient_init()
   }
 
 
-  $('#tabs').tabs();
+  $('#tabs').tabs({ heightStyle: "fill" });
+  $('#tabs').css("height", $(window).height());
   $(".button").button();
 }
 
@@ -167,7 +168,7 @@ function init_chatbox()
 			resizable: true,
 			dialogClass: 'chatbox_dialog',
 			resize: chatbox_resized,
-			position: ["center", "top"],
+			position: {my: 'center bottom', at: 'center bottom', of: window},
 			close: function(event, ui) { chatbox_active = false;}
 		});
 	
@@ -267,7 +268,7 @@ function show_dialog_message(title, message) {
 			width: is_small_screen() ? "90%" : "40%",
 			buttons: {
 				Ok: function() {
-					$(this).dialog('close');
+					$("#dialog").dialog('close');
 					$("#game_text_input").blur();
 				}
 			}
@@ -285,23 +286,23 @@ function show_dialog_message(title, message) {
 function validate_username() {
   username = $("#username_req").val();
 
-  var cleaned_username = username.replace(/[^a-zA-Z\s\-]/g,'');
+  var cleaned_username = username.replace(/[^a-zA-Z]/g,'');
  
   if (username == null || username.length == 0) {
     $("#username_validation_result").html("Your name can't be empty.");
     return false;
-  } else if (username.length <= 3 ) {
+  } else if (username.length <= 2 ) {
     $("#username_validation_result").html("Your name is too short.");
     return false;
   } else if (username.length >= 32) {
     $("#username_validation_result").html("Your name is too long.");
     return false;
   } else if (username != cleaned_username) {
-    $("#username_validation_result").html("Your name contains invalid characters.");
+    $("#username_validation_result").html("Your name contains invalid characters, only the English alphabet is allowed.");
     return false;
   }
 
-  $.jStorage.set("username", username);
+  simpleStorage.set("username", username);
   network_init();
 
   return true;
@@ -316,10 +317,10 @@ function show_intro_dialog(title, message) {
   $("#dialog").remove();
   $("<div id='dialog'></div>").appendTo("div#game_page");
 
-  var intro_html = message + "<br><br>Name: <input id='username_req' type='text' size='25'>"
+  var intro_html = message + "<br><br>Player name: <input id='username_req' type='text' size='25'>"
 	  + " <br><br><span id='username_validation_result'></span>";
   $("#dialog").html(intro_html);
-  $("#username_req").val($.jStorage.get("username", ""));
+  $("#username_req").val(simpleStorage.get("username", ""));
   $("#dialog").attr("title", title);
   $("#dialog").dialog({
 			bgiframe: true,
@@ -330,11 +331,11 @@ function show_intro_dialog(title, message) {
 				"Start Game" : function() {
 					autostart = true;
 					if (validate_username()) {
-						$(this).dialog('close');
+						$("#dialog").dialog('close');
 					}
 				}, 
 				  "Customize Game": function() {
-					if (validate_username()) $(this).dialog('close');
+					if (validate_username()) $("#dialog").dialog('close');
 				}
 			}	
 			
@@ -377,7 +378,7 @@ function update_timeout()
     if (remaining >= 0) {
       if (is_small_screen()) {
         $("#turn_done_button").button("option", "label", "Turn" + remaining);
-        $(".ui-button-text").css("padding", "0px");
+        $("#turn_done_button .ui-button-text").css("padding", "3px");
       } else {
         $("#turn_done_button").button("option", "label", "Turn Done (" + remaining + "s)");
       }
@@ -475,7 +476,8 @@ function show_debug_info()
   console.log("Browser useragent: " + navigator.userAgent);
   console.log("jQuery version: " + $().jquery);
   console.log("jQuery UI version: " + $.ui.version);
-  console.log("jStorage version: " + $.jStorage.version);
+  console.log("simpleStorage version: " + simpleStorage.version);
+  console.log("savegame count: " + simpleStorage.get("savegame-count"));
   console.log("Touch device: " + is_touch_device());
 
   debug_active = true;

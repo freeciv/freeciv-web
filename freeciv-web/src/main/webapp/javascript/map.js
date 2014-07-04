@@ -273,27 +273,12 @@ function MAP_TO_NATURAL_POS(map_x, map_y)
 ****************************************************************************/
 function mapstep(ptile, dir)
 {
-  var x, y;
-  
   if (!is_valid_dir(dir)) {
     return null;
   }
 
-  var s = DIRSTEP(x, y, dir);
-  x = s['dest_x'] + ptile['x'];
-  y = s['dest_y'] + ptile['y'];
-
-  return map_pos_to_tile(x, y);
+  return map_pos_to_tile(DIR_DX[dir] + ptile['x'], DIR_DY[dir] + ptile['y']);
 }
-
-/****************************************************************************
-  ...
-****************************************************************************/
-function DIRSTEP(dest_x, dest_y, dir)	
-{
-    return { "dest_x" : DIR_DX[(dir)], "dest_y" : DIR_DY[(dir)]};
-}
-
 
 
 /**************************************************************************

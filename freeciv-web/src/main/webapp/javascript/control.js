@@ -233,7 +233,9 @@ function check_text_input(event,chatboxtextarea) {
 	 
   if (event.keyCode == 13 && event.shiftKey == 0)  {
     var message = $(chatboxtextarea).val();
-    message = encodeURIComponent(message.replace(/^\s+|\s+$/g,""));
+    message = message.replace(/^\s+|\s+$/g,"");
+    message = message.replace("'", "");
+    message = encodeURIComponent(message);
 
     $(chatboxtextarea).val('');
     $(chatboxtextarea).focus();
@@ -367,6 +369,8 @@ function update_unit_order_commands()
     var punit = funits[i]; 
     var ptype = unit_type(punit);
     var ptile = index_to_tile(punit['tile']);
+    if (ptile == null) continue;
+
     if (ptype['name'] == "Settlers" || ptype['name'] == "Workers" 
         || ptype['name'] == "Engineers") {
       if (!tile_has_extra(ptile, ROAD_ROAD)) {
@@ -382,12 +386,29 @@ function update_unit_order_commands()
         $("#order_railroad").hide();
       }
       $("#order_mine").show();
-      $("#order_irrigate").show();
       $("#order_fortify").hide();
       $("#order_sentry").hide();
       $("#order_explore").hide();
       $("#order_auto_settlers").show();
       $("#order_pollution").show();
+
+      if (tile_has_extra(ptile, EXTRA_POLLUTION)) {
+        $("#order_pollution").show();
+      } else {
+        $("#order_pollution").hide();
+      }
+
+      if (tile_terrain(ptile)['name'] == "Forest") {
+        $("#order_forest_remove").show(); 
+        $("#order_irrigate").hide();
+      } else if (!tile_has_extra(ptile, EXTRA_IRRIGATION)) {
+        $("#order_irrigate").show();
+        $("#order_forest_remove").hide(); 	
+      } else {
+        $("#order_forest_remove").hide(); 	
+        $("#order_irrigate").hide();
+      }
+
     } else {
       $("#order_road").hide();
       $("#order_railroad").hide();
@@ -407,6 +428,12 @@ function update_unit_order_commands()
       $("#order_build_city").hide();
     }
 
+    if (ptype['name'] == "Engineers") {
+      $("#order_transform").show();
+    } else {
+      $("#order_transform").hide();
+    }
+
     if (ptype['name'] == "Nuclear") {
       $("#order_nuke").show();
     } else {
@@ -423,6 +450,13 @@ function update_unit_order_commands()
       $("#order_pillage").show();
     } else {
       $("#order_pillage").hide();
+    }
+
+    var pcity = tile_city(ptile);
+    if (pcity == null || punit['homecity'] == 0 || (pcity != null && punit['homecity'] == pcity['id'])) {
+      $("#order_change_homecity").hide();
+    } else if (pcity != null && punit['homecity'] != pcity['id']) {
+      $("#order_change_homecity").show();
     }
 
   }
@@ -445,7 +479,7 @@ function init_game_unit_panel()
 			height: "auto",
 			resizable: false,
 			dialogClass: 'unit_dialog',
-			position: ["right", "bottom"],
+			position: {my: 'right bottom', at: 'right bottom', of: "#canvas_div"},
 			close: function(event, ui) { unitpanel_active = false;}
 
 		});
@@ -638,7 +672,7 @@ function get_drawable_unit(ptile, citymode)
 **************************************************************************/
 function do_map_click(ptile, qtype)
 {
-  if (ptile == null) return;
+  if (ptile == null || client_is_observer()) return;
   
   if (goto_active) {
     if (current_focus.length > 0) {
@@ -657,13 +691,13 @@ function do_map_click(ptile, qtype)
     deactivate_goto();
     update_unit_focus();
 
-  } else if (paradrop_active) {
+  } else if (paradrop_active && current_focus.length > 0) {
     var punit = current_focus[0];
     var packet = {"type" : packet_unit_paradrop_to, "unit_id" : punit['id'], "tile": ptile['index'] };
     send_request (JSON.stringify(packet));
     paradrop_active = false;
 
-  } else if (airlift_active) {
+  } else if (airlift_active && current_focus.length > 0) {
     var punit = current_focus[0];
     var pcity = tile_city(ptile);
     if (pcity != null) {
@@ -674,7 +708,6 @@ function do_map_click(ptile, qtype)
 
   } else {
     var sunits = tile_units(ptile);
-    
     var pcity = tile_city(ptile);
     
     if (pcity != null) {
@@ -702,6 +735,9 @@ function do_map_click(ptile, qtype)
     }
     
   }
+
+  paradrop_active = false;
+  airlift_active = false;
    
 }
 
@@ -889,6 +925,10 @@ function activate_goto()
       intro_click_description = false;
     }
 
+  } else {
+    add_chatbox_text("First select a unit to move by clicking on it, then click on the"
+		     + " goto button or the 'G' key, then click on the position to move to.");
+    deactivate_goto();
   }
 
 }
@@ -1143,6 +1183,7 @@ function key_unit_homecity()
       var packet = {"type" : packet_unit_change_homecity, "unit_id" : punit['id'],
                 "city_id" : pcity['id']};
       send_request (JSON.stringify(packet));
+      $("#order_change_homecity").hide();
     }
 
   }
@@ -1369,6 +1410,7 @@ function show_goto_path(goto_packet)
   current_goto_path.push(ptile);
 
   for (var i = 0; i < goto_packet['dir'].length; i++) {
+    if (ptile == null) break;
     var dir = goto_packet['dir'][i];
     ptile = mapstep(ptile, dir);
     current_goto_path.push(ptile);

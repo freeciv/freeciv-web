@@ -17,6 +17,7 @@ var requested_gov = -1;
 var REPORT_WONDERS_OF_THE_WORLD = 0;
 var REPORT_TOP_5_CITIES = 1;
 var REPORT_DEMOGRAPHIC = 2;
+var REPORT_ACHIEVEMENTS = 3;
 
 
 /**************************************************************************
@@ -45,7 +46,7 @@ function show_revolution_dialog()
 			  buttons: {
 				"Start revolution!" : function() {
 					start_revolution();
-					$(this).dialog('close');
+					$("#revolution_dialog").dialog('close');
 				}
 			  }
 
@@ -64,33 +65,16 @@ function init_civ_dialog()
   if (!client_is_observer() && client.conn.playing != null) {
     
     var pplayer = client.conn.playing;
+    var pnation = nations[pplayer['nation']]; 
+    var tag = pnation['graphic_str'];
+
     var civ_description = 
-	    "<canvas id='flag_canvas' width='100' height='70' moz-opaque='true'></canvas>"
+	    "<img src='/images/flags/" + tag + "-web.png' width='180'>"
 	    + "<br><div>" + pplayer['name'] + " rules the " + nations[pplayer['nation']]['adjective'] 
 	    + " with the form of government: " + governments[client.conn.playing['government']]['name']
-	    + "<br>Choose your command carefully:</div><br>"
-            
-
+	    + "</div><br>"
+    $("#nation_title").html("The " + nations[pplayer['nation']]['adjective'] + " nation");
     $("#civ_dialog_text").html(civ_description);
-
-
-    $("#revolution_button").css("width", 190);
-    $("#taxrates_button").css("width", 190);
-    $("#wonders_report").css("width", 190);
-    $("#top_cities_report").css("width", 190);
-    $("#demography_report").css("width", 190);
-
-    var pnation = nations[pplayer['nation']]; 
-    var tag = "f." + pnation['graphic_str'];
-
-    var flag_canvas = document.getElementById('flag_canvas');
-    var flag_canvas_ctx = flag_canvas.getContext("2d");
-    if ("mozImageSmoothingEnabled" in flag_canvas_ctx) {
-      flag_canvas_ctx.mozImageSmoothingEnabled = true;
-    } 
-
-    flag_canvas_ctx.drawImage(sprites[tag], 0, 0, 29, 20, 0, 0, 100, 70);
-
 
   } else {
     $("#civ_dialog_text").html("This dialog isn't available as observer.");

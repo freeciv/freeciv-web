@@ -24,8 +24,8 @@ var ts="${initParam.buildTimeStamp}";
 </head>
 
 <body>
-    <script type="text/javascript" src="//dl1d2m8ri9v3j.cloudfront.net/releases/1.2.5/tracker.js" data-customer="ee5dba6fe2e048f79b422157b450947b"></script>
 
+    <script type="text/javascript" src="//d2zah9y47r7bi2.cloudfront.net/releases/current/tracker.js" data-token="ee5dba6fe2e048f79b422157b450947b"></script>
     <jsp:include page="pregame.jsp" flush="false"/>
     <jsp:include page="game.jsp" flush="false"/>
     
@@ -35,9 +35,8 @@ var ts="${initParam.buildTimeStamp}";
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-40584174-1', 'freeciv.org');
+  ga('create', 'UA-40584174-1', 'auto');
   ga('send', 'pageview');
-
 </script> 
 </body>
 </html>

@@ -994,6 +994,12 @@ function key_unit_auto_explore()
 **************************************************************************/
 function key_unit_wait()
 {
+  var funits = get_units_in_focus();
+  for (var i = 0; i < funits.length; i++) {
+    var punit = funits[i]; 
+    punit['done_moving'] = true;
+  }
+
   advance_unit_focus();
 }
 
@@ -1007,7 +1013,7 @@ function key_unit_sentry()
     var punit = funits[i]; 
     request_new_unit_activity(punit, ACTIVITY_SENTRY, EXTRA_NONE);
   }
-  update_unit_focus();
+  setTimeout(update_unit_focus, 700); 
 }
 
 /**************************************************************************
@@ -1034,7 +1040,7 @@ function key_unit_irrigate()
     /* EXTRA_NONE -> server decides */
     request_new_unit_activity(punit, ACTIVITY_IRRIGATE, EXTRA_NONE);
   }
-  update_unit_focus();
+  setTimeout(update_unit_focus, 700);
 }
 
 /**************************************************************************
@@ -1147,7 +1153,7 @@ function key_unit_mine()
     /* EXTRA_NONE -> server decides */
     request_new_unit_activity(punit, ACTIVITY_MINE, EXTRA_NONE);
   }
-  update_unit_focus();
+  setTimeout(update_unit_focus, 700);
 }
 
 /**************************************************************************
@@ -1165,7 +1171,7 @@ function key_unit_road()
       request_new_unit_activity(punit, ACTIVITY_GEN_ROAD, extras['Railroad']['id']);
     }
   }
-  update_unit_focus();
+  setTimeout(update_unit_focus, 700);
 }
 
 /**************************************************************************
@@ -1271,6 +1277,7 @@ function key_unit_disband()
     client_remove_unit(punit);
 
   }  
+  setTimeout(update_unit_focus, 700);
 }
 
 /**************************************************************************

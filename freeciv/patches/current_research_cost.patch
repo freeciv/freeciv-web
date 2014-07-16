@@ -1,16 +1,3 @@
-diff --git freeciv/common/packets.def freeciv/common/packets.def
-index 065062e..ae247ee 100644
---- freeciv/common/packets.def
-+++ freeciv/common/packets.def
-@@ -773,6 +773,7 @@ PACKET_PLAYER_INFO = 51; sc, is-info
-   UINT8 ai_skill_level;
-   UINT8 barbarian_type;
-   BV_PLAYER gives_shared_vision;
-   UINT32 love[MAX_NUM_PLAYER_SLOTS];
-+  UINT32 current_research_cost;
- 
-   UINT8 color_red;
-   UINT8 color_green;
 diff --git freeciv/server/plrhand.c freeciv/server/plrhand.c
 index ad373a9..41bbf15 100644
 --- freeciv/server/plrhand.c
@@ -29,7 +16,7 @@ index ad373a9..41bbf15 100644
  
 +  presearch = research_get(plr);
 +  if (presearch->researching != A_UNSET) {
-+    packet->current_research_cost = total_bulbs_required(plr);
++    packet->current_research_cost = research_total_bulbs_required(presearch, presearch->researching, FALSE);
 +  } else {
 +    packet->current_research_cost = 0;
 +  }
@@ -37,3 +24,19 @@ index ad373a9..41bbf15 100644
    /* Make absolutely sure - in case you lose your embassy! */
    if (info_level >= INFO_EMBASSY 
        || (receiver
+diff --git freeciv/common/packets.def freeciv/common/packets.def
+index 496c34c..f68e617 100644
+--- freeciv/common/packets.def
++++ freeciv/common/packets.def
+@@ -784,8 +784,9 @@ PACKET_PLAYER_INFO = 51; sc, is-info
+   UINT8 ai_skill_level;
+   UINT8 barbarian_type;
+   BV_PLAYER gives_shared_vision;
+-  UINT16 culture;
+-  SINT16 love[MAX_NUM_PLAYER_SLOTS];
++  UINT32 culture;
++  UINT32 love[MAX_NUM_PLAYER_SLOTS];
++  UINT32 current_research_cost;
+ 
+   UINT8 color_red;
+   UINT8 color_green;

@@ -1,16 +1,3 @@
-diff --git freeciv/common/packets.def freeciv/common/packets.def
-index 41be296..065062e 100644
---- freeciv/common/packets.def
-+++ freeciv/common/packets.def
-@@ -772,7 +772,7 @@ PACKET_PLAYER_INFO = 51; sc, is-info
-   UINT8 ai_skill_level;
-   UINT8 barbarian_type;
-   BV_PLAYER gives_shared_vision;
--  SINT16 love[MAX_NUM_PLAYER_SLOTS];
-+  UINT32 love[MAX_NUM_PLAYER_SLOTS];
- 
-   UINT8 color_red;
-   UINT8 color_green;
 diff --git freeciv/server/plrhand.c freeciv/server/plrhand.c
 index 4a7c654..ad373a9 100644
 --- freeciv/server/plrhand.c

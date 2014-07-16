@@ -18,10 +18,10 @@ options="+Freeciv-ruleset-Devel-2013.May.14"
 ; Names for custom terrain flags. There can be up to 8 of these.
 ; name          = rule name; not translateable, but may be displayed in
 ;                 some circumstances
-; helptxt       = displayed in the help for terrains with this flag
+; helptxt       = displayed in the help for terrains with this flag (optional)
 flags =
   { "name", "helptxt"
-    "Oil", _("Has Oil Derrick instead of Mine")
+    "Oil", _("Has Oil Well instead of Mine.")
   }
 
 [parameters]
@@ -48,6 +48,10 @@ move_fragments = 3
 
 ; How many move_fragments IgTer unit movement costs
 igter_cost = 1
+
+; Whether diagonal movement has increased cost 
+; The cost increase is more accurate with larger values for move_fragments
+pythagorean_diagonal = FALSE
 
 ; There is no resources in the middle of the oceans, only near coast
 ocean_resources = FALSE
@@ -198,7 +202,7 @@ color.r              = 25
 color.g              = 25
 color.b              = 25
 helptext             = _("\
-No unit can enter this terrain, nor can city work the tile.\
+No unit can enter this terrain, nor can any city work its tiles.\
 ")
 
 [terrain_lake]
@@ -1364,9 +1368,9 @@ They have no effect on gameplay.\
 ;                           README.effects for help on requirements)
 ; move_cost               = how much movement it takes to travel
 ;                           via this road (in fractional move points, as
-;                           defined by move_fragments)
+;                           defined by move_fragments).
+;                           -1 means that road provides no speed bonus.
 ; move_mode               = how movement costs are applied
-;   - "NoBonus"    = Road gives no movement bonuses (move_cost ignored)
 ;   - "Cardinal"   = Road cost applies only on cardinal moves
 ;   - "Relaxed"    = Road cost is normal for cardinal, double for diagonal moves
 ;   - "FastAlways" = Road cost applies always between two tiles with the roads
@@ -1422,6 +1426,14 @@ shield_bonus   = 0
 trade_bonus    = 0
 compat_special = "Road"
 flags          = "RequiresBridge"
+helptext       = _("\
+Roads allow your land units to move more quickly, and on some terrain,\
+ also provide a trade bonus.\
+"), _("\
+Building roads on river tiles requires knowledge of Bridge Building.\
+ City center tiles automatically get roads (unless they are on a river\
+ tile and you do not yet know Bridge Building).\
+")
 
 [road_railroad]
 name           = _("Railroad")
@@ -1435,6 +1447,18 @@ shield_bonus   = 50
 trade_bonus    = 0
 compat_special = "Railroad"
 flags          = "RequiresBridge"
+helptext       = _("\
+Once you learn the Railroad technology, you may upgrade your roads\
+ to railroads. Units expend no movement points when moving along a\
+ railroad; you may ride a railroad indefinitely. (As may your enemies!)\
+"), _("\
+A railroad also increases any shield resources produced by a tile.\
+ A tile whose road is upgraded to a railroad retains any trade bonus\
+ from the road as well.\
+"), _("\
+City center tiles with roads are automatically upgraded to railroads\
+ when you learn the Railroad technology.\
+")
 
 [road_river]
 name           = _("River")

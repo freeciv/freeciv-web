@@ -505,11 +505,10 @@ colorlist =
 ; etc...
 
 [settings]
-; freeciv game settings for the default ruleset
-;
-; set =
-;     { "name", "value", "lock"
-;       "bool_set", TRUE, FALSE
-;       "int_set", 123, FALSE
-;       "str_set", "test", FALSE
-;     }
+; freeciv game settings for the freeciv-web ruleset
+set =
+  { "name", "value", "lock"
+    "autosaves", "", TRUE
+    "topology", "WRAPX", TRUE
+    "nationset", "all", TRUE
+  }

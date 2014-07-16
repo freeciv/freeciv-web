@@ -11,7 +11,7 @@
    GNU General Public License for more details.
 ***********************************************************************/
 var savename = "";
-
+var loadTimerId = -1;
 
 var scenarios = [
   {"img":"/images/world_small.png", "description":"The World - Small world map, 80x50 map of the Earth", "savegame":"earth-80x50-v3"},

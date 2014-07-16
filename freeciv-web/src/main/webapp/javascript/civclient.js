@@ -265,7 +265,7 @@ function show_dialog_message(title, message) {
   $("#dialog").dialog({
 			bgiframe: true,
 			modal: true,
-			width: is_small_screen() ? "90%" : "40%",
+			width: is_small_screen() ? "90%" : "50%",
 			buttons: {
 				Ok: function() {
 					$("#dialog").dialog('close');

@@ -106,7 +106,7 @@ Install this software if you are not running Freeciv-web with Vagrant:
 
 - Firebug for debugging - http://getfirebug.com/
 
-- Closure Compiler - http://code.google.com/intl/nb/closure/compiler/
+- Closure Compiler - https://github.com/google/closure-compiler 
   (Bundled in source code, no need to download.)
 
 - curl-7.19.7 - http://curl.haxx.se/

@@ -1,0 +1,15 @@
+--- freeciv/server/techtools.c
++++ freeciv/server/techtools.c
+@@ -924,7 +924,11 @@ void choose_random_tech(struct player *plr)
+ {
+   struct research* research = research_get(plr);
+   do {
+-    choose_tech(plr, pick_random_tech(plr));
++    Tech_type_id tech = pick_random_tech(plr);
++    choose_tech(plr, tech);
++    if (research_invention_state(research, tech) != TECH_PREREQS_KNOWN) {
++      break;
++    }
+   } while (research->researching == A_UNSET);
+ }
+

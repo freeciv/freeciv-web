@@ -18,6 +18,7 @@
 from os import path as op
 import time
 from tornado import web, websocket, ioloop, httpserver
+from tornado.ioloop import IOLoop
 from debugging import *
 import logging
 from civcom import *
@@ -49,6 +50,7 @@ class StatusHandler(web.RequestHandler):
 
 class WSHandler(websocket.WebSocketHandler):
     logger = logging.getLogger("freeciv-proxy")
+    io_loop = IOLoop.instance()
 
     def open(self):
         self.id = str(uuid.uuid4())

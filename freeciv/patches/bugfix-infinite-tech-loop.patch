@@ -1,15 +1,149 @@
---- freeciv/server/techtools.c
-+++ freeciv/server/techtools.c
-@@ -924,7 +924,11 @@ void choose_random_tech(struct player *plr)
+diff --git a/common/research.c b/common/research.c
+index 6bb08a1..aa7e9e0 100644
+--- a/common/research.c
++++ b/common/research.c
+@@ -210,7 +210,7 @@ research_advance_name_translation(const struct research *presearch,
+ /****************************************************************************
+   Returns state of the tech for current research.
+   This can be: TECH_KNOWN, TECH_UNKNOWN, or TECH_PREREQS_KNOWN
+-  Should be called with existing techs or A_FUTURE
++  Should be called with existing techs.
+ 
+   If 'presearch' is NULL this checks whether any player knows the tech
+   (used by the client).
+@@ -218,13 +218,11 @@ research_advance_name_translation(const struct research *presearch,
+ enum tech_state research_invention_state(const struct research *presearch,
+                                          Tech_type_id tech)
  {
-   struct research* research = research_get(plr);
-   do {
--    choose_tech(plr, pick_random_tech(plr));
-+    Tech_type_id tech = pick_random_tech(plr);
-+    choose_tech(plr, tech);
-+    if (research_invention_state(research, tech) != TECH_PREREQS_KNOWN) {
-+      break;
+-  fc_assert_ret_val(tech == A_FUTURE
+-                    || (tech >= 0 && tech < game.control.num_tech_types),
+-                    -1);
++  fc_assert_ret_val(NULL != valid_advance_by_number(tech), -1);
+ 
+   if (NULL != presearch) {
+     return presearch->inventions[tech].state;
+-  } else if (tech != A_FUTURE && game.info.global_advances[tech]) {
++  } else if (game.info.global_advances[tech]) {
+     return TECH_KNOWN;
+   } else {
+     return TECH_UNKNOWN;
+@@ -238,8 +236,11 @@ enum tech_state research_invention_set(struct research *presearch,
+                                        Tech_type_id tech,
+                                        enum tech_state value)
+ {
+-  enum tech_state old = presearch->inventions[tech].state;
++  enum tech_state old;
+ 
++  fc_assert_ret_val(NULL != valid_advance_by_number(tech), -1);
++
++  old = presearch->inventions[tech].state;
+   if (old == value) {
+     return old;
+   }
+@@ -481,6 +482,7 @@ int research_total_bulbs_required(const struct research *presearch,
+ 
+   if (!loss_value
+       && NULL != presearch
++      && !is_future_tech(tech)
+       && !research_invention_reachable(presearch, tech)
+       && research_invention_state(presearch, tech) == TECH_KNOWN) {
+     /* A non-future tech which is already known costs nothing. */
+diff --git a/common/tech.c b/common/tech.c
+index 8a22d1d..ca1df60 100644
+--- a/common/tech.c
++++ b/common/tech.c
+@@ -216,7 +216,6 @@ static void build_required_techs(struct player *pplayer, Tech_type_id goal)
+ /**************************************************************************
+   Mark as TECH_PREREQS_KNOWN each tech which is available, not known and
+   which has all requirements fullfiled.
+-  If there is no such a tech mark A_FUTURE as researchable.
+   
+   Recalculate research->num_known_tech_with_flag
+   Should always be called after research_invention_set()
+@@ -271,11 +270,6 @@ void player_research_update(struct player *pplayer)
+   } advance_index_iterate_end;
+ #endif /* DEBUG */
+ 
+-  /* No techs we can research? Mark A_FUTURE as researchable */
+-  if (researchable == 0) {
+-    research_invention_set(research, A_FUTURE, TECH_PREREQS_KNOWN);
+-  }
+-
+   for (flag = 0; flag <= tech_flag_id_max(); flag++) {
+     /* iterate over all possible tech flags (0..max) */
+     research->num_known_tech_with_flag[flag] = 0;
+diff --git a/server/diplomats.c b/server/diplomats.c
+index 54324c0..e2f5da6 100644
+--- a/server/diplomats.c
++++ b/server/diplomats.c
+@@ -521,8 +521,7 @@ void diplomat_get_tech(struct player *pplayer, struct unit *pdiplomat,
+   cresearch = research_get(cplayer);
+ 
+   if (technology == A_FUTURE) {
+-    if (research_invention_state(presearch, A_FUTURE) != TECH_PREREQS_KNOWN
+-        || (presearch->future_tech >= cresearch->future_tech)) {
++    if (presearch->future_tech >= cresearch->future_tech) {
+       return;
+     }
+   } else if (technology != A_UNSET) {
+diff --git a/server/scripting/api_server_edit.c b/server/scripting/api_server_edit.c
+index 6efab44..ca5d1ea 100644
+--- a/server/scripting/api_server_edit.c
++++ b/server/scripting/api_server_edit.c
+@@ -275,7 +275,8 @@ Tech_Type *api_edit_give_technology(lua_State *L, Player *pplayer,
+     }
+   }
+ 
+-  if (research_invention_state(research_get(pplayer), id) != TECH_KNOWN) {
++  if (is_future_tech(id)
++      || research_invention_state(research_get(pplayer), id) != TECH_KNOWN) {
+     do_free_cost(pplayer, id);
+     found_new_tech(pplayer, id, FALSE, TRUE);
+     result = advance_by_number(id);
+diff --git a/server/techtools.c b/server/techtools.c
+index 4c0fc77..c642f7c 100644
+--- a/server/techtools.c
++++ b/server/techtools.c
+@@ -384,8 +384,10 @@ void found_new_tech(struct player *plr, Tech_type_id tech_found,
+ 
+   /* Mark the tech as known in the research struct and update
+    * global_advances array */
+-  research_invention_set(research, tech_found, TECH_KNOWN);
+-  player_research_update(plr);
++  if (!is_future_tech(tech_found)) {
++    research_invention_set(research, tech_found, TECH_KNOWN);
++    player_research_update(plr);
++  }
+ 
+   /* Make proper changes for all players sharing the research */  
+   research_players_iterate(research, aplayer) {
+@@ -943,7 +945,8 @@ void choose_tech(struct player *plr, Tech_type_id tech)
+   if (research->researching == tech) {
+     return;
+   }
+-  if (research_invention_state(research, tech) != TECH_PREREQS_KNOWN) {
++  if (!is_future_tech(tech)
++      && research_invention_state(research, tech) != TECH_PREREQS_KNOWN) {
+     /* can't research this */
+     return;
+   }
+@@ -1191,12 +1194,13 @@ Tech_type_id steal_a_tech(struct player *pplayer, struct player *victim,
+       fc_assert(stolen_tech != A_NONE);
+     }
+   } else { /* preferred != A_UNSET */
+-    fc_assert((preferred == A_FUTURE
+-               && (research_invention_state(vresearch, A_FUTURE)
+-                   == TECH_PREREQS_KNOWN))
+-              || (valid_advance_by_number(preferred)
+-                  && (research_invention_state(vresearch, preferred)
+-                      == TECH_KNOWN)));
++#ifndef NDEBUG
++    if (!is_future_tech(preferred)) {
++      fc_assert(NULL != valid_advance_by_number(preferred));
++      fc_assert(TECH_KNOWN == research_invention_state(vresearch,
++                                                       preferred));
 +    }
-   } while (research->researching == A_UNSET);
- }
-
++#endif
+     stolen_tech = preferred;
+   }
+ 

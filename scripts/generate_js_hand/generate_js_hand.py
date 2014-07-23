@@ -46,7 +46,7 @@ f.write("""
   }
 
  } catch(err) {
-   window.trackJs.track(err); 
+   trackJs.track(err); 
  }
 
 }

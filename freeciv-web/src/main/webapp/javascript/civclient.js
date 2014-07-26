@@ -481,7 +481,7 @@ function show_debug_info()
   console.log("savegame count: " + simpleStorage.get("savegame-count"));
   console.log("Touch device: " + is_touch_device());
   console.log("HTTP protocol: " + document.location.protocol);
-  console.log("WebSocket URL: " + ws.url);
+  if (ws != null && ws.url != null) console.log("WebSocket URL: " + ws.url);
 
   debug_active = true;
   /* Show average network latency PING (server to client, and back). */

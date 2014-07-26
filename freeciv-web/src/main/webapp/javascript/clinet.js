@@ -98,7 +98,7 @@ function websocket_init()
    show_dialog_message("Network error", "A problem occured with the " 
                        + document.location.protocol + " WebSocket connection to the server: " + ws.url); 
    console.error("WebSocket error: Unable to communicate with server using " 
-                 + document.location.protocol + "WebSockets. Error: " + evt);
+                 + document.location.protocol + " WebSockets. Error: " + evt);
   };
 }
 

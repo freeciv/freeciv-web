@@ -86,9 +86,9 @@ function control_init()
   /* disable right clicks. */
   document.oncontextmenu = function(){return allow_right_click;};
  
-  $(window).bind('beforeunload', function(){
+  /*$(window).bind('beforeunload', function(){
     return "Do you really want to leave your nation behind now?";
-  });
+  });*/
 
   $(window).on('unload', function(){
     send_surrender_game();

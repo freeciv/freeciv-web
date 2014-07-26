@@ -32,6 +32,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Linux and OS X on port 80.
   if Vagrant::Util::Platform.windows?
     config.vm.network :forwarded_port, guest: 80, host: 80
+    config.vm.network :forwarded_port, guest: 443, host: 443
   else 
     config.vm.network :forwarded_port, guest: 80, host: 8080
   end

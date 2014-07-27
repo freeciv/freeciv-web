@@ -96,6 +96,10 @@ class WSHandler(websocket.WebSocketHandler):
     def check_origin(self, origin):
       return True;
 
+    # this enables WebSocket compression with default options.
+    def get_compression_options(self):
+      return {}
+
     # get the civcom instance which corresponds to the requested user.
     def get_civcom(self, username, civserverport, ws_connection):
         key = username + str(civserverport) + ws_connection.id

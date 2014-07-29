@@ -1,0 +1,18 @@
+diff -Nurd -X.diff_ignore freeciv/ai/default/aitech.c freeciv/ai/default/aitech.c
+--- freeciv/ai/default/aitech.c	2014-07-29 20:10:19.639269743 +0300
++++ freeciv/ai/default/aitech.c	2014-07-29 23:14:03.260696527 +0300
+@@ -210,12 +210,14 @@
+   struct adv_data *adv = adv_data_get(pplayer, NULL);
+   int orig_want = dai_city_want(pplayer, pcity, adv, NULL);
+   int final_want;
++  bool world_knew = game.info.global_advances[tech];
+ 
+   research_invention_set(pres, tech, TECH_KNOWN);
+ 
+   final_want = dai_city_want(pplayer, pcity, adv, NULL);
+ 
+   research_invention_set(pres, tech, old_state);
++  game.info.global_advances[tech] = world_knew;
+ 
+   return final_want - orig_want;
+ }

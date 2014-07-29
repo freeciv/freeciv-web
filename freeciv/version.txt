@@ -1,5 +1,5 @@
-FCREV=25697
+FCREV=25747
 FCBRANCH=trunk
 
-ORIGCAPSTR="+Freeciv.Devel-2.6-2014.Jul.20b"
-WEBCAPSTR="+Freeciv.Web.Devel-2.6-2014.Jul.20b"
+ORIGCAPSTR="+Freeciv.Devel-2.6-2014.Jul.27b"
+WEBCAPSTR="+Freeciv.Web.Devel-2.6-2014.Jul.27b"

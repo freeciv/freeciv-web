@@ -19,7 +19,7 @@ var isWorking = false;
 var clinet_last_send = 0;
 var debug_client_speed_list = [];
 
-var freeciv_version = "+Freeciv.Web.Devel-2.6-2014.Jul.20b";
+var freeciv_version = "+Freeciv.Web.Devel-2.6-2014.Jul.27b";
 
 var ws = null;
 var civserverport = null;

@@ -1309,8 +1309,64 @@ function assign_nation_color(nation_id)
     }
   }
 
+
+
   nation['color'] = max_color;
   color_counts = null;
   img_data = null;
 
 }
+
+/****************************************************************************
+...
+****************************************************************************/
+function deduplicate_player_colors()
+{
+  for (var player_id in players) {
+    var cplayer = players[player_id];
+    var cnation = nations[cplayer['nation']]
+    var pcolor = cnation['color'];
+    for (var splayer_id in players) {
+      var splayer = players[splayer_id];
+      var snation = nations[splayer['nation']]
+      var scolor = snation['color'];
+      if (splayer_id != player_id && is_color_collision(pcolor, scolor)) {
+        cnation['color'] = "rgb(" + get_random_int(80,255)  + "," + get_random_int(80,200) + "," 
+                          + get_random_int(80,200) + ")"; 
+	break;
+      }
+    }
+  }
+}
+
+/****************************************************************************
+...
+****************************************************************************/
+function is_color_collision(color_a, color_b)
+{
+  var distance_threshold = 20;
+
+  if (color_a == null || color_b == null) return false;
+
+  var pcolor_a = color_rbg_to_list(color_a);
+  var pcolor_b = color_rbg_to_list(color_b);
+ 
+  var color_distance = Math.sqrt( Math.pow(pcolor_a[0] - pcolor_b[0], 2) 
+		  + Math.pow(pcolor_a[1] - pcolor_b[1], 2)
+		  + Math.pow(pcolor_a[2] - pcolor_b[2], 2));
+
+  return (color_distance <= distance_threshold);
+}
+
+/****************************************************************************
+...
+****************************************************************************/
+function color_rbg_to_list(pcolor)
+{
+  var color_rgb = pcolor.match(/\d+/g);
+  color_rgb[0] = parseFloat(color_rgb[0]);
+  color_rgb[1] = parseFloat(color_rgb[1]);
+  color_rgb[2] = parseFloat(color_rgb[2]);
+  return color_rgb;
+}
+

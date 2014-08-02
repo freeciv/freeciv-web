@@ -213,11 +213,7 @@ function generate_palette() {
   for (var player_id in players) {
     var pplayer = players[player_id];
     var pcolor = nations[pplayer['nation']]['color'];
-    var color_rgb = pcolor.match(/\d+/g);
-    color_rgb[0] = parseFloat(color_rgb[0]);
-    color_rgb[1] = parseFloat(color_rgb[1]);
-    color_rgb[2] = parseFloat(color_rgb[2]);
-    palette[palette_color_offset+(player_id % player_count)] = color_rgb;
+    palette[palette_color_offset+(player_id % player_count)] = color_rbg_to_list(pcolor);
   }
   return palette;
 }

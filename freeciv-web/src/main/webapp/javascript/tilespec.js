@@ -1337,6 +1337,7 @@ function deduplicate_player_colors()
       }
     }
   }
+  palette = generate_palette();
 }
 
 /****************************************************************************

@@ -37,8 +37,7 @@
 			  <jsp:include page="city.jsp" flush="false"/>  
 			</div>
 
-			<div id="tabs-hel">
-				<jsp:include page="help.jsp" flush="false"/>
+			<div id="tabs-hel" class="manual_doc">
 			</div>
 			<div id="tabs-chat">
 			</div>

@@ -163,8 +163,6 @@ function setup_window_size ()
   $("#nations").height( mapview['height'] - 100);
   $("#nations").width( mapview['width']);
   
-  $(".manual-tab").height( mapview['height'] - 200);
-  
   $("#city_viewport").height( mapview['height'] - 20);
 
   var i = 0;
@@ -231,8 +229,6 @@ function setup_window_size ()
     $("#chat_tab").hide();
 
   }
-  $("#tabs-hel").hide();
-
 
   if (overview_active) init_overview();
   if (unitpanel_active) init_game_unit_panel(); 

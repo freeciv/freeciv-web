@@ -580,4 +580,39 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
   max-height: 500px; 
   float: right; 
   margin: 5px;
-  }
+}
+
+#help_menu {
+  float: left;
+  background-image: url('/images/bg.jpg');
+  color: black;
+
+}
+
+#help_info_page {
+  float: left;
+  padding-left: 30px;
+  max-width: 75%;
+}
+
+.help_submenu {
+  max-height:  600px;
+  overflow: auto;
+  min-width: 320px;
+  background-image: url('/images/bg.jpg');
+  color: black;
+}
+
+#tabs-hel.manual_doc {
+  background-image: url('/images/bg.jpg');
+  color: black;
+
+}
+
+#tabs-hel.manual_doc a {
+  color: darkgreen;
+}
+
+.ui-icon, .ui-widget-content .ui-icon {
+  background-image: url("images/ui-icons_222222_256x240.png");
+}

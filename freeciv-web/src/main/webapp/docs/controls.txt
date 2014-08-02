@@ -1,0 +1,53 @@
+<h1>Controls</h1>
+
+Unit Orders:
+============
+  a: (a)uto-settler  (settler/worker units)
+  b: (b)uild city  (settler units)
+  f: (f)ortify unit  (military units)
+  f: build (f)ortress  (settler/worker units)
+  g: (g)o to tile  (then left-click mouse to select target tile)
+  h: set unit's (h)omecity  (to city on current tile)
+  i: build (i)rrigation or convert terrain  (settler/worker units)
+  m: build (m)ine or convert terrain  (settler/worker units)
+  n: clean (n)uclear fallout
+  N: explode (N)uclear
+  o: transf(o)rm terrain  (engineer unit)
+  p: clean (p)ollution  (settler/worker units)
+  P: (P)illage  (destroy terrain alteration)
+  r: build (r)oad/railroad  (settler/worker units)
+  s: (s)entry unit
+  S: un(S)entry all units on tile
+  L: unit go (t)o/airlift to city
+  u: (u)nload unit from transporter
+  x: unit auto e(x)plore
+
+
+Unit Selection:
+==============
+  w: (w)ait: focus on next unit
+
+
+Unit Movement:
+==============
+  1: move south-west
+  2: move south
+  3: move south-east
+  4: move west
+  6: move east
+  7: move north-west
+  8: move north
+  9: move north-east
+
+Main Map (Mouse):
+=================
+  Left-click on city:            Pop up city dialog
+  Left-click on unit:            Select a single unit
+                                 (cancels any current activity if "clear
+                                 unit orders on selection" is set)
+  Center-click:  Show tile info
+  Right-click:                   Center tile in view
+
+
+Shift-Return: Turn done
+

@@ -336,7 +336,10 @@ function show_intro_dialog(title, message) {
 					}
 				}, 
 				  "Customize Game": function() {
-					if (validate_username()) $("#dialog").dialog('close');
+					if (validate_username()) {
+					  $("#pregame_text_input").focus();
+					  $("#dialog").dialog('close');
+					}
 				}
 			}	
 			
@@ -359,6 +362,17 @@ function show_intro_dialog(title, message) {
   }
 	
   $("#dialog").dialog('open');		
+
+  $('#dialog').keyup(function(e) {
+    if (e.keyCode == 13) {
+      autostart = true;
+      if (validate_username()) {
+        $("#dialog").dialog('close');
+        $("#dialog").remove();
+      }
+    }
+  });
+
 }
 
 

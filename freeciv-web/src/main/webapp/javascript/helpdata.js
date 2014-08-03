@@ -11,8 +11,9 @@
    GNU General Public License for more details.
 ***********************************************************************/
 
-var toplevel_menu_items = ["help_economy", "help_cities", "help_city_improvements", 
-    "help_wonders_of_the_world", "help_units", "help_combat", "help_technology"];
+var toplevel_menu_items = ["help_terrain", "help_economy", "help_cities", 
+    "help_city_improvements", "help_wonders_of_the_world", "help_units", 
+    "help_combat", "help_technology"];
 var hidden_menu_items = ["help_connecting", "help_languages", "help_governor", 
     "help_chatline", "help_about", "help_worklist_editor"];
 
@@ -46,6 +47,7 @@ function show_help()
  
   show_help_intro(); 
   $("#tabs-hel").css("height", $(window).height() - 60);
+  $("#help_info_page").css("max-width", $(window).width() - $("#help_menu").width() - 60);
 
 }
 
@@ -65,7 +67,6 @@ function show_help_intro()
 function generate_help_menu(key)
 {
   if (key == "help_gen_terrain") {
-    $("<ul id='help_terrain_ul'></ul>").appendTo("#help_terrain");
     for (var terrain_id in terrains) {
       var terrain = terrains[terrain_id];
       $("<li data-helptag='" + key + "_" + terrain['id'] + "'>" 
@@ -241,7 +242,7 @@ function generate_help_text(key)
 **************************************************************************/
 function helpdata_tag_to_title(tag) 
 {
-  var result = tag.replace("help_", "").replace("gen_", "").replace("misc_", "").replace(/_/g, " ");
+  var result = tag.replace("_of_the_world", "").replace("help_", "").replace("gen_", "").replace("misc_", "").replace(/_/g, " ");
   return to_title_case(result);
 
 }

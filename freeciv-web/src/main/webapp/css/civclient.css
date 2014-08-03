@@ -591,8 +591,7 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 
 #help_info_page {
   float: left;
-  padding-left: 30px;
-  max-width: 75%;
+  padding-left: 25px;
 }
 
 .help_submenu {

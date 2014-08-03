@@ -59,6 +59,9 @@ thedict = {}
 for section in parser.sections():
     thedict[section] = {}
     for key, val in parser.items(section):
+        # skip these hidden help sections, since they are not in use.
+        if (section in ["help_connecting", "help_languages", "help_governor", 
+    "help_chatline", "help_about", "help_worklist_editor", "help_copying"]): continue;
         thedict[section][key] = val
 
 f = open('freeciv-helpdata.js', 'w')

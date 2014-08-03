@@ -177,7 +177,7 @@ function fill_sprite_array(layer, ptile, pedge, pcorner, punit, pcity, citymode)
         }
 
 	if (tile_has_extra(ptile, BASE_RUINS)) {
-          sprite_array.push({"key" : "base.ruins_mg"}); 
+          sprite_array.push({"key" : "base.ruins_mg", "offset_x": 0, "offset_y" : -unit_offset_y}); 
         }
 
         sprite_array = sprite_array.concat(get_border_line_sprites(ptile));

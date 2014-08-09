@@ -1,15 +1,3 @@
-diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2012-08-08 00:18:50.000000000 +0300
-+++ freeciv/common/packets.def	2012-08-08 00:23:33.000000000 +0300
-@@ -805,6 +805,8 @@
-   BOOL has_orders;
-   UINT16 orders_length, orders_index;
-   BOOL orders_repeat, orders_vigilant;
-+  BOOL caravan_trade;
-+  BOOL caravan_wonder;
-   ORDERS orders[MAX_LEN_ROUTE:orders_length];
-   DIRECTION orders_dirs[MAX_LEN_ROUTE:orders_length];
-   ACTIVITY orders_activities[MAX_LEN_ROUTE:orders_length];
 diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
 --- freeciv/server/unithand.c	2012-08-08 00:18:29.000000000 +0300
 +++ freeciv/server/unithand.c	2012-08-08 00:23:33.000000000 +0300

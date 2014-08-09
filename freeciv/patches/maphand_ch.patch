@@ -1,29 +1,3 @@
-diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2014-02-14 03:50:30.577037199 +0200
-+++ freeciv/common/packets.def	2014-02-14 03:51:24.024912787 +0200
-@@ -406,7 +406,7 @@
- 
-   TERRAIN terrain;
-   RESOURCE resource;
--  BV_EXTRAS extras;
-+  STRING extras[MAX_EXTRA_TYPES];
-   STRING spec_sprite[MAX_LEN_NAME];
-   STRING label[MAX_LEN_NAME];
- end
-@@ -2015,3 +2015,13 @@
-   TILE dest;
-   UINT32 turns;
- end
-+
-+/*************** Webclient specific packets ****************/
-+PACKET_INFO_TEXT_REQ = 254; cs, dsend
-+  TILE loc;
-+  UNIT visible_unit;
-+end
-+
-+PACKET_INFO_TEXT_MESSAGE = 255; sc, dsend
-+  STRING message[MAX_LEN_MSG];
-+end
 diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 --- freeciv/server/maphand.c	2014-02-14 03:50:30.601037144 +0200
 +++ freeciv/server/maphand.c	2014-02-14 03:56:04.744259252 +0200

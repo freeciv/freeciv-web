@@ -1,0 +1,306 @@
+diff --git a/common/packets.def b/common/packets.def
+index 3d6b6a7..125472e 100644
+--- a/common/packets.def
++++ b/common/packets.def
+@@ -186,16 +186,16 @@ type SINT8              = sint8(int)
+ type SINT16             = sint16(int)
+ type SINT32             = sint32(int)
+ type UINT8              = uint8(int)
+-type UINT16             = uint16(int)
++type UINT16             = uint32(int)
+ type UINT32             = uint32(int)
+ 
+ # typedefs for arrays/structs
+ type MEMORY             = memory(unsigned char)
+ type REQUIREMENT        = requirement(struct requirement)
+ type STRING             = string(char)
+-type TECH_LIST          = tech_list(int)
+-type UNIT_LIST          = unit_list(int)
+-type BUILDING_LIST      = building_list(int)
++# type TECH_LIST          = tech_list(int)
++# type UNIT_LIST          = unit_list(int)
++# type BUILDING_LIST      = building_list(int)
+ type WORKLIST           = worklist(struct worklist)
+ 
+ # typedefs for enums
+@@ -212,7 +212,7 @@ type DIPLOMACY_MODE     = uint8(enum diplomacy_mode)
+ type DIPLOMAT_ACTION    = uint8(enum diplomat_actions)
+ type DIRECTION          = sint8(enum direction8)
+ type EFFECT_TYPE        = uint8(enum effect_type)
+-type EVENT              = sint16(enum event_type)
++type EVENT              = sint32(enum event_type)
+ type GUI_TYPE           = uint8(enum gui_type)
+ type IMPR_GENUS         = uint8(enum impr_genus_id)
+ type KNOWN              = uint8(enum known_type)
+@@ -268,7 +268,7 @@ type CONNECTION         = SINT16
+ type CONTINENT          = sint16(Continent_id)
+ type GOVERNMENT         = UINT8
+ type IMPROVEMENT        = uint8(Impr_type_id)
+-type NATION             = sint16(Nation_type_id)
++type NATION             = UINT32
+ type PLAYER             = UINT8
+ type RESEARCH           = UINT8
+ type RESOURCE           = uint8(Resource_type_id)
+@@ -281,14 +281,14 @@ type UNIT               = UINT16
+ type UNIT_TYPE          = uint8(Unit_type_id)
+ 
+ # other typedefs
+-type CITY_COORD         = UINT8
++type CITY_COORD         = UINT32
+ type GOLD               = UINT32
+-type HP                 = UINT8
+-type PERCENT            = UINT8
++type HP                 = UINT32
++type PERCENT            = UINT32
+ type PHASE              = SINT16
+ type TURN               = SINT16
+-type XYSIZE             = UINT16
+-type YEAR               = SINT16
++type XYSIZE             = UINT32
++type YEAR               = SINT32
+ type CITIZENS           = UINT8
+ 
+ /****************************************************
+@@ -410,7 +410,7 @@ PACKET_TILE_INFO = 15; sc, lsend, is-game-info
+ 
+   TERRAIN terrain;
+   RESOURCE resource;
+-  BV_EXTRAS extras;
++  STRING extras[MAX_EXTRA_TYPES];
+   STRING spec_sprite[MAX_LEN_NAME];
+   STRING label[MAX_LEN_NAME];
+ end
+@@ -422,7 +422,8 @@ end
+ # The variables in the packet are listed in alphabetical order.
+ PACKET_GAME_INFO = 16; sc
+   UINT8 add_to_size_limit;
+-  UINT8 aifill;
++  UINT32 aifill;
++  UINT32 mapsize;
+   AIRLIFTING_STYLE airlifting_style;
+   UINT8 angrycitizen;
+   SINT16 base_pollution;
+@@ -523,6 +524,7 @@ PACKET_GAME_INFO = 16; sc
+   BOOL year_0_hack;
+   BOOL civil_war_enabled;
+   BOOL paradrop_to_transport;
++  STRING meta_message[MAX_LEN_NAME];
+ end
+ 
+ PACKET_MAP_INFO = 17; sc, lsend
+@@ -600,6 +602,9 @@ PACKET_CITY_INFO = 31; sc, lsend, is-game-info, force, cancel(PACKET_CITY_SHORT_
+   SINT16 citizen_base[O_LAST];
+   SINT16 usage[O_LAST];
+   UINT16 food_stock, shield_stock;
++  UINT16 granary_size;
++  TURN granary_turns;
++  UINT16 buy_gold_cost;
+ 
+   UINT16 trade[MAX_TRADE_ROUTES];
+   UINT8 trade_value[MAX_TRADE_ROUTES];
+@@ -626,11 +631,19 @@ PACKET_CITY_INFO = 31; sc, lsend, is-game-info, force, cancel(PACKET_CITY_SHORT_
+   UINT8 walls;
+   SINT8 city_image;
+ 
+-  WORKLIST worklist;
++  #WORKLIST worklist;
+ 
+-  BV_IMPRS improvements;
+-  BV_CITY_OPTIONS city_options;
++  STRING can_build_unit[MAX_LEN_MSG];
++  STRING can_build_improvement[MAX_LEN_MSG];
++  STRING improvements[MAX_LEN_MSG];
++
++  STRING food_output[MAX_LEN_MSG];
++  STRING shield_output[MAX_LEN_MSG];
++  STRING trade_output[MAX_LEN_MSG];
++  #BV_CITY_OPTIONS city_options;
++  BOOL disbandable_city;
+   STRING name[MAX_LEN_NAME];
++  BOOL unhappy;
+ end
+ 
+ PACKET_CITY_SHORT_INFO = 32; sc, lsend, is-game-info, cancel(PACKET_CITY_INFO)
+@@ -649,7 +662,7 @@ PACKET_CITY_SHORT_INFO = 32; sc, lsend, is-game-info, cancel(PACKET_CITY_INFO)
+ 
+   SINT8 city_image;
+ 
+-  BV_IMPRS improvements;
++  STRING improvements[MAX_LEN_MSG];
+   STRING name[MAX_LEN_NAME];
+ end
+ 
+@@ -771,14 +784,16 @@ PACKET_PLAYER_INFO = 51; sc, is-info
+   UINT8 ai_skill_level;
+   UINT8 barbarian_type;
+   BV_PLAYER gives_shared_vision;
+-  UINT16 culture;
+-  SINT16 love[MAX_NUM_PLAYER_SLOTS];
++  UINT32 culture;
++  UINT32 love[MAX_NUM_PLAYER_SLOTS];
++  UINT32 current_research_cost;
+ 
+   UINT8 color_red;
+   UINT8 color_green;
+   UINT8 color_blue;
+ 
+   CITYSPE wonders[B_LAST]; diff
++  UINT32  net_income;
+   
+   UINT32 multiplier[MAX_MULTIPLIERS_COUNT];
+ end
+@@ -810,7 +825,7 @@ PACKET_PLAYER_DIPLSTATE = 59; sc
+   UINT32 diplstate_id; key
+   PLAYER plr1;
+   PLAYER plr2;
+-  UINT8 type;
++  UINT32 ds_type;
+   UINT16 turns_left;
+   UINT8 has_reason_to_cancel;
+   UINT16 contact_turns_left;
+@@ -882,6 +897,8 @@ PACKET_UNIT_INFO = 63; sc, lsend, is-game-info, cancel(PACKET_UNIT_SHORT_INFO)
+   BOOL has_orders;
+   UINT16 orders_length, orders_index;
+   BOOL orders_repeat, orders_vigilant;
++  BOOL caravan_trade;
++  BOOL caravan_wonder;
+   ORDERS orders[MAX_LEN_ROUTE:orders_length];
+   DIRECTION orders_dirs[MAX_LEN_ROUTE:orders_length];
+   ACTIVITY orders_activities[MAX_LEN_ROUTE:orders_length];
+@@ -1000,7 +1017,7 @@ end
+ PACKET_UNIT_DIPLOMAT_QUERY = 82; cs, handle-per-conn, dsend
+   UNIT diplomat_id;
+   UNIT target_id;   # city_id or unit_id
+-  SINT16 value;
++  UINT32 value;
+   DIPLOMAT_ACTION action_type;
+ end
+ 
+@@ -1068,25 +1085,25 @@ end
+ 
+ PACKET_DIPLOMACY_CREATE_CLAUSE_REQ = 99; cs, dsend
+   PLAYER counterpart, giver;
+-  CLAUSE type;
++  CLAUSE clause_type;
+   UINT32 value;
+ end
+ 
+ PACKET_DIPLOMACY_CREATE_CLAUSE = 100; sc, dsend, lsend
+   PLAYER counterpart, giver;
+-  CLAUSE type;
++  CLAUSE clause_type;
+   UINT32 value;
+ end
+ 
+ PACKET_DIPLOMACY_REMOVE_CLAUSE_REQ = 101; cs, dsend
+   PLAYER counterpart, giver;
+-  CLAUSE type;
++  CLAUSE clause_type;
+   UINT32 value;
+ end
+ 
+ PACKET_DIPLOMACY_REMOVE_CLAUSE = 102; sc, dsend, lsend
+   PLAYER counterpart, giver;
+-  CLAUSE type;
++  CLAUSE clause_type;
+   UINT32 value;
+ end
+ 
+@@ -1114,7 +1131,7 @@ PACKET_PAGE_MSG = 110; sc, lsend
+ end
+ 
+ PACKET_REPORT_REQ = 111; cs, handle-per-conn, dsend
+-  REPORT_TYPE type;
++  REPORT_TYPE report_type;
+ end
+ 
+ /************** Connection packets **********************/
+@@ -1139,9 +1156,9 @@ end
+ 
+ # Information about the ping times of the connections.
+ PACKET_CONN_PING_INFO = 116; sc, lsend
+-  UINT8 connections;
++  UINT32 connections;
+   CONNECTION conn_id[MAX_NUM_CONNECTIONS:connections];
+-  FLOAT10x7 ping_time[MAX_NUM_CONNECTIONS:connections];
++  UINT32 ping_time[MAX_NUM_CONNECTIONS:connections];
+ end
+ 
+ # For compatibility with older versions, this number cannot be changed.
+@@ -1304,8 +1321,9 @@ end
+ PACKET_RULESET_GAME = 141; sc, lsend
+   UINT8 default_specialist;
+ 
+-  TECH_LIST global_init_techs[MAX_NUM_TECH_LIST];
+-  BUILDING_LIST global_init_buildings[MAX_NUM_BUILDING_LIST];
++  # These are removed from freeciv-web
++  # TECH_LIST global_init_techs[MAX_NUM_TECH_LIST];
++  # BUILDING_LIST global_init_buildings[MAX_NUM_BUILDING_LIST];
+ 
+   UINT8 veteran_levels;
+   STRING veteran_name[MAX_VET_LEVELS:veteran_levels][MAX_LEN_NAME];
+@@ -1362,8 +1380,8 @@ end
+ PACKET_RULESET_GOVERNMENT = 145; sc, lsend
+   GOVERNMENT id;
+ 
+-  UINT8 reqs_count;
+-  REQUIREMENT reqs[MAX_NUM_REQS:reqs_count];
++  #UINT8 reqs_count;
++  #REQUIREMENT reqs[MAX_NUM_REQS:reqs_count];
+ 
+   STRING name[MAX_LEN_NAME];
+   STRING rule_name[MAX_LEN_NAME];
+@@ -1427,9 +1445,9 @@ PACKET_RULESET_NATION = 148; sc, lsend
+   UINT8 groups[MAX_NUM_NATION_GROUPS:ngroups];
+ 
+   GOVERNMENT init_government_id;
+-  TECH_LIST init_techs[MAX_NUM_TECH_LIST];
+-  UNIT_LIST init_units[MAX_NUM_UNIT_LIST];
+-  BUILDING_LIST init_buildings[MAX_NUM_BUILDING_LIST];
++  # TECH_LIST init_techs[MAX_NUM_TECH_LIST];
++  # UNIT_LIST init_units[MAX_NUM_UNIT_LIST];
++  # BUILDING_LIST init_buildings[MAX_NUM_BUILDING_LIST];
+ end
+ 
+ # Separate from PACKET_RULESET_NATION since it can change in pregame
+@@ -1706,7 +1724,7 @@ PACKET_SERVER_SETTING_CONST = 165; sc, handle-via-packet, is-info
+   UINT16 id; key
+   STRING name[MAX_LEN_NAME];
+   STRING short_help[MAX_LEN_PACKET]; /* untranslated */
+-  STRING extra_help[MAX_LEN_PACKET]; /* untranslated */
++  # STRING extra_help[MAX_LEN_PACKET]; /* untranslated */
+   UINT8 category;
+ end
+ 
+@@ -2055,3 +2073,31 @@ PACKET_EDIT_OBJECT_CREATED = 219; sc, dsend
+   SINT32 tag;
+   SINT32 id;
+ end
++
++PACKET_GOTO_PATH_REQ = 253; cs, dsend
++  UNIT unit_id;
++  TILE goal;
++end
++
++# used for showing GOTO path in web client.
++PACKET_GOTO_PATH = 252; sc, dsend
++  UNIT unit_id;
++  UINT16 length;
++  DIRECTION dir[MAX_LEN_ROUTE:length];
++  TILE dest;
++  UINT32 turns;
++end
++
++/*************** Webclient specific packets ****************/
++PACKET_INFO_TEXT_REQ = 254; cs, dsend
++  TILE loc;
++  UNIT visible_unit;
++end
++
++PACKET_INFO_TEXT_MESSAGE = 255; sc, dsend
++  STRING message[MAX_LEN_MSG];
++end
++
++PACKET_CITY_DISBANDABLE_REQ = 256; cs, dsend
++  CITY city_id;
++end

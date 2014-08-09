@@ -1103,44 +1103,6 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.c freeciv/common/packets.c
  
  /**************************************************************************
   Updates pplayer->attribute_block according to the given packet.
-diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2014-02-09 06:13:24.162632212 +0200
-+++ freeciv/common/packets.def	2014-02-09 06:13:39.182599723 +0200
-@@ -193,9 +193,9 @@
- type MEMORY             = memory(unsigned char)
- type REQUIREMENT        = requirement(struct requirement)
- type STRING             = string(char)
--type TECH_LIST          = tech_list(int)
--type UNIT_LIST          = unit_list(int)
--type BUILDING_LIST      = building_list(int)
-+# type TECH_LIST          = tech_list(int)
-+# type UNIT_LIST          = unit_list(int)
-+# type BUILDING_LIST      = building_list(int)
- type WORKLIST           = worklist(struct worklist)
- 
- # typedefs for enums
-@@ -799,7 +799,7 @@
-   UINT32 diplstate_id; key
-   PLAYER plr1;
-   PLAYER plr2;
--  UINT8 type;
-+  UINT32 ds_type;
-   UINT16 turns_left;
-   UINT8 has_reason_to_cancel;
-   UINT16 contact_turns_left;
-@@ -1356,9 +1356,9 @@
-   UINT8 groups[MAX_NUM_NATION_GROUPS:ngroups];
- 
-   GOVERNMENT init_government_id;
--  TECH_LIST init_techs[MAX_NUM_TECH_LIST];
--  UNIT_LIST init_units[MAX_NUM_UNIT_LIST];
--  BUILDING_LIST init_buildings[MAX_NUM_BUILDING_LIST];
-+  # TECH_LIST init_techs[MAX_NUM_TECH_LIST];
-+  # UNIT_LIST init_units[MAX_NUM_UNIT_LIST];
-+  # BUILDING_LIST init_buildings[MAX_NUM_BUILDING_LIST];
- end
- 
- PACKET_RULESET_CITY = 149; sc, lsend
 diff -Nurd -X.diff_ignore freeciv/common/packets.h freeciv/common/packets.h
 --- freeciv/common/packets.h	2014-02-09 04:40:18.983708808 +0200
 +++ freeciv/common/packets.h	2014-02-09 06:13:39.182599723 +0200

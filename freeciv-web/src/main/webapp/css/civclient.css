@@ -4,6 +4,7 @@ body
   margin: 0px;
   background: #000000;
   overflow: hidden;
+  width: 100%;
 }
 
 button { 

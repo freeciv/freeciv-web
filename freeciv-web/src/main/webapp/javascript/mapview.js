@@ -174,10 +174,10 @@ function setup_window_size ()
   $("#chat_tab").children().html("Chat")
 
   $("#opt_tab").show();
-  $("#tabs-hel").show();
   $("#players_tab").show(); 
   $("#freeciv_logo").show();
   $("#chat_tab").show();
+  $("#tabs-hel").hide();
 
 
   /* dynamically reduce content in top meny according to content*/

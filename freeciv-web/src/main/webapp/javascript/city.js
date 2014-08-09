@@ -817,3 +817,22 @@ function rename_city()
 
 
 }
+
+/**************************************************************************
+ Shows traderoutes of active city
+**************************************************************************/
+function show_city_traderoutes()
+{
+  if (active_city == null || active_city['trade'] == null) return;
+
+  var msg = "";
+  for (var i = 0; i < active_city['trade'].length; i++) {
+    var tcity_id = active_city['trade'][i];
+    if (tcity_id == 0) continue;
+    var tcity = cities[tcity_id];
+    msg += tcity['name'] + " (" + active_city['trade_value'][i] + ")" + "<br>";
+  }
+  if (msg == "") msg = "No traderoutes.";
+  show_dialog_message("Traderoutes of " + active_city['name'], msg);
+
+}

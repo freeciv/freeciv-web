@@ -22,6 +22,7 @@ var hidden_menu_items = ["help_connecting", "help_languages", "help_governor",
 **************************************************************************/
 function show_help()
 {
+  $("#tabs-hel").show();
   $("#help_menu").remove();
   $("#help_info_page").remove();
   $("<ul id='help_menu'></ul><div id='help_info_page'></div>").appendTo("#tabs-hel");

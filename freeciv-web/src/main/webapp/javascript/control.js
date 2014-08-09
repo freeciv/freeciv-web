@@ -119,6 +119,7 @@ function control_init()
   });
 
   $("#opt_tab").click(function(event) {
+    $("#tabs-hel").hide();
     city_dialog_remove();
     init_options_dialog(); 
     set_default_mapview_inactive();

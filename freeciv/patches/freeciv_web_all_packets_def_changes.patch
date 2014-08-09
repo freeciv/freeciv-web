@@ -1,5 +1,5 @@
 diff --git a/common/packets.def b/common/packets.def
-index 3d6b6a7..125472e 100644
+index 3d6b6a7..a2db36a 100644
 --- a/common/packets.def
 +++ b/common/packets.def
 @@ -186,16 +186,16 @@ type SINT8              = sint8(int)
@@ -80,6 +80,15 @@ index 3d6b6a7..125472e 100644
    AIRLIFTING_STYLE airlifting_style;
    UINT8 angrycitizen;
    SINT16 base_pollution;
+@@ -498,7 +499,7 @@ PACKET_GAME_INFO = 16; sc
+   BOOL restrictinfra;
+   BOOL unreachable_protects;
+   UINT32 sciencebox;
+-  FLOAT10x3 seconds_to_phasedone;
++  UINT32 seconds_to_phasedone;
+   UINT32 shieldbox;
+   UINT32 skill_level;
+   BOOL slow_invasions;
 @@ -523,6 +524,7 @@ PACKET_GAME_INFO = 16; sc
    BOOL year_0_hack;
    BOOL civil_war_enabled;
@@ -167,6 +176,29 @@ index 3d6b6a7..125472e 100644
    ORDERS orders[MAX_LEN_ROUTE:orders_length];
    DIRECTION orders_dirs[MAX_LEN_ROUTE:orders_length];
    ACTIVITY orders_activities[MAX_LEN_ROUTE:orders_length];
+@@ -899,15 +916,15 @@ PACKET_UNIT_SHORT_INFO = 64; sc, lsend, is-game-info, cancel(PACKET_UNIT_INFO)
+   BOOL occupied, transported;
+ 
+   UINT8 hp, activity;
+-  EXTRA activity_tgt;
+-  UNIT transported_by; /* Only valid if transported is set. */
++  #EXTRA activity_tgt;
++  #UNIT transported_by; /* Only valid if transported is set. */
+ 
+   /* in packet only, not in unit struct */
+-  UINT8 packet_use;	/* see enum unit_info_use */
+-  CITY info_city_id;	/* for UNIT_INFO_CITY_SUPPORTED
+-  			   and UNIT_INFO_CITY_PRESENT uses */
+-  UINT16 serial_num;	/* a 16-bit unsigned number, never zero
+-			   (not used by UNIT_INFO_IDENTITY) */
++  #UINT8 packet_use;	/* see enum unit_info_use */
++  #CITY info_city_id;	/* for UNIT_INFO_CITY_SUPPORTED
++  #			   and UNIT_INFO_CITY_PRESENT uses */
++  #UINT16 serial_num;	/* a 16-bit unsigned number, never zero
++  #			   (not used by UNIT_INFO_IDENTITY) */
+ end
+ 
+ PACKET_UNIT_COMBAT_INFO = 65; sc, lsend
 @@ -1000,7 +1017,7 @@ end
  PACKET_UNIT_DIPLOMAT_QUERY = 82; cs, handle-per-conn, dsend
    UNIT diplomat_id;

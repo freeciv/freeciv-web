@@ -1448,9 +1448,12 @@ function popup_caravan_dialog(punit, traderoute, wonder)
 
   var dhtml = "<center>Your caravan from " + decodeURIComponent(homecity['name']) + " reaches the city of "  
 	    + decodeURIComponent(pcity['name']) + ". What now? <br>"
-	    + "<input id='car_trade' class='car_button' type='button' value='Establish Traderoute'>"
-	    + "<input id='car_wonder' class='car_button' type='button' value='Help build Wonder'>"
-	    + "<input id='car_cancel' class='car_button' type='button' value='Cancel'>"
+	    + "<input id='car_trade" + punit['id'] 
+	    + "' class='car_button' type='button' value='Establish Traderoute'>"
+	    + "<input id='car_wonder" + punit['id'] 
+	    + "' class='car_button' type='button' value='Help build Wonder'>"
+	    + "<input id='car_cancel" + punit['id'] 
+	    + "' class='car_button' type='button' value='Cancel'>"
 	    + "</center>"
   $(id).html(dhtml);
 
@@ -1465,10 +1468,10 @@ function popup_caravan_dialog(punit, traderoute, wonder)
   $(".car_button").css("width", "250px");
 
 
-  if (!traderoute) $("#car_trade").button( "option", "disabled", true);
-  if (!wonder) $("#car_wonder").button( "option", "disabled", true);
+  if (!traderoute) $("#car_trade" + punit['id']).button( "option", "disabled", true);
+  if (!wonder) $("#car_wonder" + punit['id']).button( "option", "disabled", true);
 
-  $("#car_trade").click(function() {
+  $("#car_trade" + punit['id']).click(function() {
     var packet = {"type" : packet_unit_establish_trade, 
                    "unit_id": punit['id']};
     send_request (JSON.stringify(packet));		  
@@ -1476,7 +1479,7 @@ function popup_caravan_dialog(punit, traderoute, wonder)
     $(id).remove();	
   });
 
-  $("#car_wonder").click(function() {
+  $("#car_wonder" + punit['id']).click(function() {
     var packet = {"type" : packet_unit_help_build_wonder, 
                    "unit_id": punit['id']};
     send_request (JSON.stringify(packet));		  
@@ -1484,6 +1487,9 @@ function popup_caravan_dialog(punit, traderoute, wonder)
     $(id).remove();	
   });
 
+  $("#car_cancel" + punit['id']).click(function() {
+    $(id).remove();	
+  });
 
 }
 

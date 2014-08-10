@@ -6,9 +6,9 @@
 			<ul id="tabs_menu">
 			    <div id="freeciv_logo" ></div>
 				<li id="map_tab"><a href="#tabs-map">Map</a></li>
-				<li id="civ_tab"><a href="#tabs-civ">Nation</a></li>
+				<li id="civ_tab"><a href="#tabs-civ">Government</a></li>
 				<li id="tech_tab"><a id="tech_tab_item" href="#tabs-tec">Research</a></li>
-				<li id="players_tab"><a href="#tabs-nat">Players</a></li>
+				<li id="players_tab"><a href="#tabs-nat">Nations</a></li>
 				<li style="display: none;"><a href="#tabs-cit">City</a></li>
 				<li id="opt_tab"><a href="#tabs-opt">Options</a></li>
 				<li id="chat_tab" style="display:none;"><a href="#tabs-chat">Chat</a></li>

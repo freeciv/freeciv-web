@@ -1054,7 +1054,7 @@ function key_unit_pollution()
     var punit = funits[i]; 
     request_new_unit_activity(punit, ACTIVITY_POLLUTION, EXTRA_NONE);
   }  
-  update_unit_focus();
+  setTimeout(update_unit_focus, 700);
 }
 
 
@@ -1127,7 +1127,7 @@ function key_unit_transform()
     var punit = funits[i]; 
     request_new_unit_activity(punit, ACTIVITY_TRANSFORM, EXTRA_NONE);
   }  
-  update_unit_focus();
+  setTimeout(update_unit_focus, 700);
 }
 
 /**************************************************************************
@@ -1140,7 +1140,7 @@ function key_unit_pillage()
     var punit = funits[i]; 
     request_new_unit_activity(punit, ACTIVITY_PILLAGE, EXTRA_NONE);
   }  
-  update_unit_focus();
+  setTimeout(update_unit_focus, 700);
 }
 
 /**************************************************************************

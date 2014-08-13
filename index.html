@@ -41,72 +41,86 @@
         <h2>
 <a name="the-freeciv-web-project" class="anchor" href="#the-freeciv-web-project"><span class="octicon octicon-link"></span></a>THE FREECIV-WEB PROJECT</h2>
 
-<p>Freeciv-web is an open-source turn-based strategy game. It’s built entirely in HTML5 and features in-depth game-play and a wide variety of game modes and options. Your goal is to build cities, collect resources, organize your government, and build an army, with the ultimate goal of creating the best civilization. You can play online against other players (multiplayer) or play by yourself against the computer. </p>
+<p><a href="https://travis-ci.org/freeciv/freeciv-web"><img src="https://api.travis-ci.org/freeciv/freeciv-web.png" alt="Build Status"></a></p>
+
+<p>Freeciv-web is an open-source turn-based strategy game. It can be played in any HTML5 capable web-browser and features in-depth game-play and a wide variety of game modes and options. Your goal is to build cities, collect resources, organize your government, and build an army, with the ultimate goal of creating the best civilization. You can play online against other players (multiplayer) or play by yourself against the computer. </p>
 
 <p>Freeciv-web is is free and open source software. The Freeciv C server is released under the GNU General Public License, while the Freeciv-web client is released
 under the GNU Affero General Public License. See LICENSE.txt for details.</p>
 
 <p>Freeciv-web is now playable online at <a href="http://play.freeciv.org/">http://play.freeciv.org/</a></p>
 
-<p>Contact: The Freeciv Project - <a href="mailto:freeciv-dev@gna.org">freeciv-dev@gna.org</a>
-<a href="https://mail.gna.org/listinfo/freeciv-dev">https://mail.gna.org/listinfo/freeciv-dev</a></p>
+<p>Contact: The Freeciv Project - <a href="mailto:freeciv-dev@gna.org">freeciv-dev@gna.org</a><br><a href="https://mail.gna.org/listinfo/freeciv-dev">https://mail.gna.org/listinfo/freeciv-dev</a>  </p>
+
+<p><img src="https://raw.githubusercontent.com/freeciv/freeciv-web/master/freeciv-logos/freeciv-web-screenshot-2014.png" alt="Freeciv-web" title="Freeciv-web screenshot"></p>
 
 <h2>
 <a name="overview" class="anchor" href="#overview"><span class="octicon octicon-link"></span></a>Overview</h2>
 
-<p>The Freeciv Web client consists of these components:</p>
+<p>Freeciv-Web consists of these components:</p>
 
 <ul>
-<li><p>freeciv - a fork of the main Freeciv C client and server.</p></li>
-<li><p>freeciv-proxy - a HTTP proxy which allows web client users
-to connect to Freeciv civservers. The proxy is a HTTP and WebSocket
-server, and proxy between web browsers and civservers.</p></li>
-<li><p>freeciv-web - a Java web application for the Freeciv web client.
-This application is a Java web application which consists of HTML,
-Javascript, images and JSP files which make up the application
-viewed in each user's web browser. </p></li>
-<li><p>freeciv-img-extract - extracts the images of the Freeciv tileset,
+<li><p><a href="freeciv-web">Freeciv-web</a> - a Java web application for the Freeciv-web client.
+This application is a Java web application which make up the application
+viewed in each user's web browser. The Metaserver is also a part of this module.
+Implemented in Javascript, Java, JSP, PHP, HTML and CSS. Built with maven and runs 
+on the Resin application server.</p></li>
+<li><p><a href="freeciv">Freeciv</a> - the Freeciv C server, which is checked out from the official
+svn repository, and patched to work with a WebSocket/JSON protocol. Implemented in C.</p></li>
+<li><p><a href="freeciv-proxy">Freeciv-proxy</a> - a WebSocket proxy which allows WebSocket clients in Freeciv-web
+to send socket requests to Freeciv servers. WebSocket requests are sent from Javascript 
+in Freeciv-web to nginx, which then proxies the WebSocket messages to freeciv-proxy, 
+which finally sends Freeciv socket requests to the Freeciv servers. Implemented in Python.</p></li>
+<li><p><a href="publite2">Publite2</a> - a process launcher for Freeciv C servers, which manages
+multiple Freeciv server processes and checks capacity through the Metaserver. 
+Implemented in Python.</p></li>
+<li><p><a href="freeciv-img-extract">Freeciv-img-extract</a> - extracts the images of the Freeciv tileset,
 and generates a version for the web. This produces a tileset PNG 
-and Javascript. Run this to sync with the upstream Freeciv SVN 
-repository.</p></li>
-<li><p>publite2 - a simple way to launch multiple civservers. </p></li>
+and Javascript. </p></li>
 </ul><h2>
 <a name="running-freeciv-web-with-vagrant-on-virtualbox" class="anchor" href="#running-freeciv-web-with-vagrant-on-virtualbox"><span class="octicon octicon-link"></span></a>Running Freeciv-web with Vagrant on VirtualBox</h2>
 
 <p>Freeciv-web can be setup using Vagrant on VirtualBox to quickly create a 
-local developer image running Freeciv-web on Ubuntu 13.10 on your host operating 
-system such as Windows, OSX or Linux. </p>
+local developer image running Freeciv-web on Ubuntu 14.04 on your host 
+operating system such as Windows, OSX or Linux. </p>
 
 <ol>
 <li>Install VirtualBox: <a href="https://www.virtualbox.org/">https://www.virtualbox.org/</a>
 </li>
 <li><p>Install Vagrant: <a href="http://www.vagrantup.com/">http://www.vagrantup.com/</a></p></li>
-<li><p>Install Git: <a href="http://git-scm.com/">http://git-scm.com/</a> then check out Freeciv-web from git to 
-a directory on your computer, by running these two git commands:</p></li>
-</ol><p>git config --global core.autocrlf false</p>
+<li>
+<p>Install Git: <a href="http://git-scm.com/">http://git-scm.com/</a> then check out Freeciv-web from git to 
+a directory on your computer, by running this git command:</p>
 
-<p>git clone <a href="https://github.com/freeciv/freeciv-web.git">https://github.com/freeciv/freeciv-web.git</a></p>
+<div class="highlight highlight-bash"><pre>git clone https://github.com/freeciv/freeciv-web.git --depth<span class="o">=</span>10
+</pre></div>
+</li>
+<li>
+<p>Run Vagrant with the following commands in your Freeciv-web directory from step 3:</p>
 
-<ol>
-<li>Run Vagrant with the following commands in your Freeciv-web directory from step 3:</li>
-</ol><p>vagrant plugin install vagrant-vbguest</p>
+<div class="highlight highlight-bash"><pre>vagrant plugin install vagrant-vbguest
+vagrant up
+</pre></div>
 
-<p>vagrant up</p>
+<p>This will build, compile, install and run Freeciv-web on the virtual server image. Wait for the installation process to complete, watching for any error messages in the logs.</p>
+</li>
+<li>
+<p>(Skip this step if you run Windows) For Linux or OS X, then you 
+need to setup a SSH tunnel to port 80 like this:</p>
 
-<p>This will build, compile, install and run Freeciv-web on the virtual server image.
-Wait for the installation process to complete, watching for any error messages in the logs.</p>
-
-<ol>
-<li>(Skip this step if you run Windows) For Linux or OS X, then you 
-need to setup a SSH tunnel to port 80 like this:</li>
-</ol><p>ssh -p 2222 -gNfL 80:localhost:80 vagrant@localhost -i ~/.vagrant.d/insecure_private_key</p>
-
-<p>Then test Freeciv-web by pointing your browser to http://localhost/ on your
+<div class="highlight highlight-bash"><pre>sudo ssh -p <span class="m">2222</span> -gNfL 80:localhost:80 vagrant@localhost -i ~/.vagrant.d/insecure_private_key
+</pre></div>
+</li>
+</ol><p>Then test Freeciv-web by pointing your browser to http://localhost/ on your
 host operating system.</p>
 
-<p>To log in to your Vagrant server, run the command:  vagrant ssh</p>
+<p>To log in to your Vagrant server, run the command: </p>
 
-<p>Note that running Freeciv-web using Vagrant requires about 6Gb of memory
+<div class="highlight highlight-bash"><pre> vagrant ssh
+</pre></div>
+
+<p>The Vagrant guest machine will mount the Freeciv-web source repository in the /vagrant directory.
+Note that running Freeciv-web using Vagrant requires about 4Gb of memory
 and 3 Gb of harddisk space.</p>
 
 <h2>
@@ -115,25 +129,23 @@ and 3 Gb of harddisk space.</p>
 <p>Install this software if you are not running Freeciv-web with Vagrant:</p>
 
 <ul>
-<li><p>Resin 4.0.38 - <a href="http://www.caucho.com/">http://www.caucho.com/</a></p></li>
+<li><p>Resin 4.0.x - <a href="http://www.caucho.com/">http://www.caucho.com/</a></p></li>
 <li><p>Java 7 JDK - <a href="http://www.oracle.com/technetwork/java/javase/downloads/">http://www.oracle.com/technetwork/java/javase/downloads/</a> </p></li>
-<li><p>Python 3.3 - <a href="http://www.python.org/">http://www.python.org/</a>
-(freeciv-proxy uses Python 3.3, freeciv-img-extract uses Python 2.7
-due to PIL depenedency)</p></li>
-<li><p>Python Imaging Library (PIL) - <a href="http://www.pythonware.com/products/pil/">http://www.pythonware.com/products/pil/</a>
+<li><p>Python 3.4 - <a href="http://www.python.org/">http://www.python.org/</a></p></li>
+<li><p>Pillow v2.3.0 (PIL fork) - <a href="http://pillow.readthedocs.org/">http://pillow.readthedocs.org/</a>
 (required for freeciv-img-extract)</p></li>
 <li><p>Mysql 5.5.x - <a href="http://www.mysql.com/">http://www.mysql.com/</a></p></li>
-<li><p>Maven 2 - <a href="http://maven.apache.org/download.html">http://maven.apache.org/download.html</a></p></li>
+<li><p>Maven 3 - <a href="http://maven.apache.org/download.html">http://maven.apache.org/download.html</a></p></li>
 <li><p>Firebug for debugging - <a href="http://getfirebug.com/">http://getfirebug.com/</a></p></li>
-<li><p>Closure Compiler - <a href="http://code.google.com/intl/nb/closure/compiler/">http://code.google.com/intl/nb/closure/compiler/</a>
+<li><p>Closure Compiler - <a href="https://github.com/google/closure-compiler">https://github.com/google/closure-compiler</a> 
 (Bundled in source code, no need to download.)</p></li>
 <li><p>curl-7.19.7 - <a href="http://curl.haxx.se/">http://curl.haxx.se/</a></p></li>
 <li><p>OpenSSL - <a href="http://www.openssl.org/">http://www.openssl.org/</a></p></li>
-<li><p>nginx 1.5.10 - <a href="http://nginx.org/">http://nginx.org/</a></p></li>
+<li><p>nginx 1.6.0 or later - <a href="http://nginx.org/">http://nginx.org/</a></p></li>
 <li><p>pngcrush, required for freeciv-img-extract.  <a href="http://pmt.sourceforge.net/pngcrush/">http://pmt.sourceforge.net/pngcrush/</a></p></li>
-<li><p>Tornado 3.2 - <a href="http://www.tornadoweb.org/">http://www.tornadoweb.org/</a></p></li>
+<li><p>Tornado 4.x - <a href="http://www.tornadoweb.org/">http://www.tornadoweb.org/</a></p></li>
 <li><p>GLib 2.16.0 or newer - <a href="http://ftp.gnome.org/pub/GNOME/sources/glib/2.16/">http://ftp.gnome.org/pub/GNOME/sources/glib/2.16/</a></p></li>
-<li><p>Jansson 2.5 - <a href="http://www.digip.org/jansson/">http://www.digip.org/jansson/</a></p></li>
+<li><p>Jansson 2.6 - <a href="http://www.digip.org/jansson/">http://www.digip.org/jansson/</a></p></li>
 </ul><h2>
 <a name="compiling-and-running-the-freeciv-web-client-old-method" class="anchor" href="#compiling-and-running-the-freeciv-web-client-old-method"><span class="octicon octicon-link"></span></a>Compiling and running the Freeciv Web client (old method)</h2>
 
@@ -142,7 +154,7 @@ manual installation procedure to setup Freeciv-web:</p>
 
 <ol>
 <li><p>Checkout Freeciv-web from github to ~/freeciv-build</p></li>
-<li><p>Install the system requirements.</p></li>
+<li><p>Install the system requirements from the previous chapter.</p></li>
 <li><p>Create mysql database called 'freeciv_web'
 Import mysql tables into a MySQL database from:
 freeciv-web/src/main/webapp/meta/private/metaserver.sql</p></li>
@@ -158,8 +170,8 @@ freeciv-web/src/main/webapp/meta/private/metaserver.sql</p></li>
 <p>Install Freeciv. This involves running the following commands:</p>
 
 <blockquote>
-<p>cd freeciv/freeciv
-make install     (as root user)</p>
+<p>cd freeciv/freeciv<br>
+make install     (as root user)  </p>
 </blockquote>
 
 <p>copy freeciv-web/freeciv/data/fcweb to /usr/local/share/freeciv </p>
@@ -169,7 +181,7 @@ make install     (as root user)</p>
 
 <ul>
 <li>Run setup_links.sh and sync.sh in freeciv-img-extract </li>
-<li>Run sync-js-hand.sh in /freeciv-web/scripts/ directory.</li>
+<li>Run sync-js-hand.sh in the scripts/ directory.</li>
 <li>Edit /freeciv-web/src/main/webapp/WEB-INF/resin-web.xml.dist, rename this
 file to resin-web.xml, and update the values for your MySQL database.</li>
 <li>Run 'build.sh' in the freeciv-web directory</li>
@@ -178,29 +190,28 @@ to /etc/nginx/sites-enabled/ and edit to suit your needs.</li>
 </ul>
 </li>
 </ol><ol>
-<li> Start and stop Freeciv-web with the following commands:
-scripts/start-freeciv-web.sh
+<li> Start and stop Freeciv-web with the following commands:<br>
+scripts/start-freeciv-web.sh<br>
 scripts/stop-freeciv-web.sh<br>
 scripts/status-freeciv-web.sh<br>
+(On Vagrant, these scripts are found on /vagrant/scripts)<br>
 </li>
-</ol><p>Also: 
-Set ulimit -n 65535 in /etc/profile
-and add some TCP/IP tuning in /etc/sysctrl.conf</p>
+</ol><h2>
+<a name="freeciv-web-continuous-integration-on-travis-ci-" class="anchor" href="#freeciv-web-continuous-integration-on-travis-ci-"><span class="octicon octicon-link"></span></a>Freeciv-Web continuous integration on Travis CI </h2>
+
+<p>Freeciv-Web is built on Travis CI on every commit. This is the current build status: <a href="https://travis-ci.org/freeciv/freeciv-web"><img src="https://api.travis-ci.org/freeciv/freeciv-web.png" alt="Build Status"></a></p>
 
 <h2>
 <a name="developers-interested-in-freeciv-web" class="anchor" href="#developers-interested-in-freeciv-web"><span class="octicon octicon-link"></span></a>Developers interested in Freeciv-web</h2>
 
-<p>If you want to contibute to Freeciv-web, see the TODO file for 
+<p>If you want to contibute to Freeciv-web, see the <a href="TODO">TODO file</a> for 
 some tasks you can work on.</p>
 
 <h2>
 <a name="contributors-to-freeciv-web" class="anchor" href="#contributors-to-freeciv-web"><span class="octicon octicon-link"></span></a>Contributors to Freeciv-web</h2>
 
-<p>Andreas Røsdal</p>
-
-<p>Marko Lindqvist</p>
-
-<p>and the Freeciv.org project!</p>
+<p><a href="http://github.com/andreasrosdal">Andreas Røsdal</a>  <a href="http://www.twitter.com/andreasrosdal">@andreasrosdal</a><br><a href="https://github.com/cazfi">Marko Lindqvist</a><br>
+and the <a href="http://freeciv.wikia.com/wiki/People">Freeciv.org project</a>!</p>
       </section>
 
     </div>

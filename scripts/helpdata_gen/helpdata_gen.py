@@ -66,7 +66,7 @@ for section in parser.sections():
 
 f = open('freeciv-helpdata.js', 'w')
 
-f.write("var helpdata_order = " + json.dumps(parser.sections()) + ";  var helpdata = " + json.dumps(thedict, separators=(',',':')));
+f.write("var helpdata_order = " + json.dumps(parser.sections()) + ";  var helpdata = " + json.dumps(thedict, separators=(',',':')) + ";");
 
 
 print("done extracting helpdata.");

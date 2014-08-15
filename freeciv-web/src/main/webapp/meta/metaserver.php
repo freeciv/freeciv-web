@@ -352,7 +352,7 @@ if ( isset($port) ) {
     <link rel="apple-touch-icon" href="/images/freeciv-splash2.png" />
 
     <script type="text/javascript" src="/javascript/json2.js"></script>
-    <script type="text/javascript" src="/javascript-compressed/jquery.min.js"></script>
+    <script type="text/javascript" src="/javascript/jquery.min.js"></script>
     <script type="text/javascript" src="/javascript/jquery-ui.min.js"></script>   
     <script type="text/javascript" src="/meta/js/meta.js"></script>
 

@@ -179,7 +179,8 @@ tired_attack = FALSE
 ; target_reqs          = requirements that apply to the target.
 ;
 ; README.actions lists the possible actions and their hard coded
-; requirements.
+; requirements. Note that an action may append some of its hard
+; requirements to actor_reqs and target_reqs.
 ;
 ; An action enabler is active when its actor_reqs AND its target_reqs are
 ; satisfied.
@@ -190,18 +191,25 @@ action = "Sabotage City"
 actor_reqs    =
     { "type",   "name", "range", "present"
       "DiplRel", "War", "Local", TRUE
+      "UnitFlag", "Spy", "Local", FALSE
+      "UnitState", "TransportDependent", "Local", FALSE
     }
 
 [actionenabler_sabotage_city_target]
 action = "Targeted Sabotage City"
 actor_reqs    =
-    { "type",   "name", "range"
-      "DiplRel", "War", "Local"
-      "UnitFlag", "Spy", "Local"
+    { "type",   "name", "range", "present"
+      "DiplRel", "War", "Local", TRUE
+      "UnitFlag", "Spy", "Local", TRUE
+      "UnitState", "TransportDependent", "Local", FALSE
     }
 
 [actionenabler_establish_embassy]
 action       = "Establish Embassy"
+actor_reqs    =
+    { "type",   "name", "range", "present"
+      "UnitState", "TransportDependent", "Local", FALSE
+    }
 target_reqs  =
     { "type",   "name", "range", "present"
       "Nation", "Barbarian", "Player", FALSE
@@ -210,13 +218,18 @@ target_reqs  =
 
 [actionenabler_investigate_city]
 action       = "Investigate City"
+actor_reqs    =
+    { "type",   "name", "range", "present"
+      "UnitState", "TransportDependent", "Local", FALSE
+    }
 
 [actionenabler_poison_city]
 action = "Poison City"
 actor_reqs    =
-    { "type",   "name", "range"
-      "UnitFlag", "Spy", "Local"
-      "DiplRel", "War", "Local"
+    { "type",   "name", "range", "present"
+      "UnitFlag", "Spy", "Local", TRUE
+      "DiplRel", "War", "Local", TRUE
+      "UnitState", "TransportDependent", "Local", FALSE
     }
 target_reqs    =
     { "type",   "name", "range"
@@ -225,6 +238,11 @@ target_reqs    =
 
 [actionenabler_steal_tech_random]
 action = "Steal Tech"
+actor_reqs    =
+    { "type",   "name", "range", "present"
+      "UnitFlag", "Spy", "Local", FALSE
+      "UnitState", "TransportDependent", "Local", FALSE
+    }
 target_reqs  =
     { "type",   "name", "range", "present"
       "Nation", "Barbarian", "Player", FALSE
@@ -234,8 +252,9 @@ target_reqs  =
 [actionenabler_steal_tech_target]
 action = "Targeted Steal Tech"
 actor_reqs    =
-    { "type",   "name", "range"
-      "UnitFlag", "Spy", "Local"
+    { "type",   "name", "range", "present"
+      "UnitFlag", "Spy", "Local", TRUE
+      "UnitState", "TransportDependent", "Local", FALSE
     }
 target_reqs  =
     { "type",   "name", "range", "present"
@@ -249,6 +268,7 @@ actor_reqs    =
     { "type",   "name", "range", "present"
       "DiplRel", "Alliance", "Local", FALSE
       "DiplRel", "Team", "Local", FALSE
+      "UnitState", "TransportDependent", "Local", FALSE
     }
 target_reqs  =
     { "type",   "name", "range", "present"
@@ -262,6 +282,7 @@ actor_reqs    =
     { "type",   "name", "range", "present"
       "DiplRel", "Alliance", "Local", FALSE
       "DiplRel", "Team", "Local", FALSE
+      "UnitState", "TransportDependent", "Local", FALSE
     }
 target_reqs    =
     { "type",   "name", "range", "present"
@@ -274,9 +295,10 @@ target_reqs    =
 [actionenabler_sabotage_unit]
 action = "Sabotage Unit"
 actor_reqs    =
-    { "type",   "name", "range"
-      "Unitflag", "Spy", "Local"
-      "DiplRel", "War", "Local"
+    { "type",   "name", "range", "present"
+      "Unitflag", "Spy", "Local", TRUE
+      "DiplRel", "War", "Local", TRUE
+      "UnitState", "TransportDependent", "Local", FALSE
     }
 target_reqs    =
     { "type",   "name", "range", "present"

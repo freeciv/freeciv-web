@@ -5,12 +5,12 @@ This is the Freeciv web application, which consists of the Java servlets
 and filters for running the web client, JSP templates, javascript code
 and other web content.
 
-Requires Resin 4.0.x web server, and Maven 2 to build and deploy.
+Requires Resin 4.0.x web server, and Maven to build and deploy.
 
 Run and compile: 
 sh build.sh
 
 
-Copyright (C) 2007-2009 Andreas Røsdal. 
+Copyright (C) 2007-2014 Andreas Røsdal. 
 Released under the GNU AFFERO GENERAL PUBLIC LICENSE.
 

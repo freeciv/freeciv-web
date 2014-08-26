@@ -1,0 +1,45 @@
+diff --git a/server/unittools.c b/server/unittools.c
+index bce55be..1181d3a 100644
+--- a/server/unittools.c
++++ b/server/unittools.c
+@@ -2219,9 +2219,9 @@ void package_short_unit(struct unit *punit,
+       serial_num++;
+     }
+   }
+-  packet->serial_num = serial_num;
+-  packet->packet_use = packet_use;
+-  packet->info_city_id = info_city_id;
++  //packet->serial_num = serial_num;
++  //packet->packet_use = packet_use;
++  //packet->info_city_id = info_city_id;
+ 
+   packet->id = punit->id;
+   packet->owner = player_number(unit_owner(punit));
+@@ -2238,23 +2238,23 @@ void package_short_unit(struct unit *punit,
+     packet->activity = punit->activity;
+   }
+ 
+-  if (punit->activity_target == NULL) {
++  /*if (punit->activity_target == NULL) {
+     packet->activity_tgt = EXTRA_NONE;
+   } else {
+     packet->activity_tgt = extra_index(punit->activity_target);
+-  }
++  }*/
+ 
+   /* Transported_by information is sent to the client even for units that
+    * aren't fully known.  Note that for non-allied players, any transported
+    * unit can't be seen at all.  For allied players we have to know if
+    * transporters have room in them so that we can load units properly. */
+-  if (!unit_transported(punit)) {
++  /*if (!unit_transported(punit)) {
+     packet->transported = FALSE;
+     packet->transported_by = 0;
+   } else {
+     packet->transported = TRUE;
+     packet->transported_by = unit_transport_get(punit)->id;
+-  }
++  }*/
+ }
+ 
+ /**************************************************************************

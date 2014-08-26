@@ -54,6 +54,7 @@
         <button type="button" class="button" onClick="change_city_production_dialog();" >Change production</button>
         <button type="button" class="button" onClick="rename_city();" >Rename</button>
         <button id="buy_button" type="button" class="button" onClick="request_city_buy();" >Buy</button>
+        <button id="trade_button" type="button" class="button" onClick="show_city_traderoutes();" >Traderoutes</button>
       </div> 
 
     <div id="city_disband_options" >

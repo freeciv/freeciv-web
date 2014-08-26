@@ -20,6 +20,7 @@ var OVERVIEW_REFRESH = 4500;
 
 var palette = [];
 var palette_color_offset = 0;
+var palette_terrain_offset = 0;
 
 var overview_active = false;
 
@@ -30,12 +31,7 @@ var COLOR_OVERVIEW_ENEMY_CITY = 3; /* cyan */
 var COLOR_OVERVIEW_MY_UNIT = 4; /* yellow */
 var COLOR_OVERVIEW_ALLIED_UNIT = 5;
 var COLOR_OVERVIEW_ENEMY_UNIT = 6; /* red */
-var COLOR_OVERVIEW_OCEAN = 7; /* ocean/blue */
-var COLOR_OVERVIEW_GRASS = 8; /* ground/green */
-var COLOR_OVERVIEW_DESERT = 9; /* ground/green */
-var COLOR_OVERVIEW_MOUNTAINS = 10; /* ground/green */
-var COLOR_OVERVIEW_ARCTIC = 11; /* ground/green */
-var COLOR_OVERVIEW_VIEWRECT = 12; /* white */
+var COLOR_OVERVIEW_VIEWRECT = 7; /* white */
 
 
 /****************************************************************************
@@ -204,23 +200,20 @@ function generate_palette() {
   palette[COLOR_OVERVIEW_MY_UNIT] = [255,255,0];  
   palette[COLOR_OVERVIEW_ALLIED_UNIT] = [255,0,0];  
   palette[COLOR_OVERVIEW_ENEMY_UNIT] = [255,0,0];
-  palette[COLOR_OVERVIEW_OCEAN] = [30,65,195];  
-  palette[COLOR_OVERVIEW_GRASS] = [40,114,22];
-  palette[COLOR_OVERVIEW_DESERT] = [214,185,106];
-  palette[COLOR_OVERVIEW_MOUNTAINS] = [143,143,143];
-  palette[COLOR_OVERVIEW_ARCTIC] = [255,255,255];
   palette[COLOR_OVERVIEW_VIEWRECT] = [200,200,255];  
+  palette_terrain_offset = palette.length;
+  for (var terrain_id in terrains) {
+    var terrain = terrains[terrain_id];
+    palette.push([terrain['color_red'], terrain['color_green'], terrain['color_blue']]);
+  }
+
   palette_color_offset = palette.length;
   var player_count = Object.keys(players).length;
 
   for (var player_id in players) {
     var pplayer = players[player_id];
     var pcolor = nations[pplayer['nation']]['color'];
-    var color_rgb = pcolor.match(/\d+/g);
-    color_rgb[0] = parseFloat(color_rgb[0]);
-    color_rgb[1] = parseFloat(color_rgb[1]);
-    color_rgb[2] = parseFloat(color_rgb[2]);
-    palette[palette_color_offset+(player_id % player_count)] = color_rgb;
+    palette[palette_color_offset+(player_id % player_count)] = color_rbg_to_list(pcolor);
   }
   return palette;
 }
@@ -258,21 +251,10 @@ function overview_tile_color(map_x, map_y)
   }
   
   if (tile_get_known(ptile) != TILE_UNKNOWN) {
-
     if (ptile['owner'] != null && ptile['owner'] != 255) {
       return palette_color_offset + ptile['owner'];
-    }
-
-    if (is_ocean_tile(ptile)) {
-      return COLOR_OVERVIEW_OCEAN;
-    } else if (tile_terrain(ptile)['graphic_str'] == "desert") {
-      return COLOR_OVERVIEW_DESERT;
-    } else if (tile_terrain(ptile)['graphic_str'] == "mountains") {
-      return COLOR_OVERVIEW_MOUNTAINS;
-    } else if (tile_terrain(ptile)['name'] == "Glacier") {
-      return COLOR_OVERVIEW_ARCTIC;
-    } else { 
-      return COLOR_OVERVIEW_GRASS;      
+    } else {
+      return palette_terrain_offset + tile_terrain(ptile)['id'];
     }
   }
   

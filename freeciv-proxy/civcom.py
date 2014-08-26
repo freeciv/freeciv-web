@@ -154,7 +154,8 @@ class CivCom(Thread):
     def send_packets_to_client(self):
         packet = self.get_client_result_string()
         if (packet is not None and self.civwebserver is not None):
-            self.civwebserver.write_message(packet)
+            # Calls the write_message callback on the next Tornado I/O loop iteration (thread safely).
+            self.civwebserver.io_loop.add_callback(lambda: self.civwebserver.write_message(packet))
 
     def get_client_result_string(self):
         result = ""

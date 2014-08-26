@@ -22,15 +22,14 @@ options="+Freeciv-ruleset-Devel-2013.May.14"
 ; Names for custom unit type flags. There can be up to 16 of these.
 ; name          = rule name; not translateable, but may be displayed in
 ;                 some circumstances
-; helptxt       = displayed in the help for units with this flag
+; helptxt       = displayed in the help for units with this flag (optional)
 flags =
   { "name", "helptxt"
-    "Airbase", _("Can build Airbases.")
+    "Airbase", _("Can build airbases and buoys.")
     "Transform", _("Can transform terrain.")
     "AirAttacker", _("Very bad at attacking AEGIS.")
     "Horse", _("Attack value halved when attacking Pikemen.")
     "Helicopter", _("Defends very badly against Fighters.")
-    "Unbribable", _("May not be bribed.")
   }
 
 [veteran_system]
@@ -73,12 +72,6 @@ veteran_move_bonus = 0, 0, 0, 0
 ;                 present, 'name' is used. Since the name used in savegames
 ;                 must not change, use this when renaming a unit class after a
 ;                 ruleset has been released.
-; move_type     = Where unit moves; "Land", "Sea", or "Both".
-;                 This is optional field. If it's not
-;                 given, move type is automatically determined from native
-;                 terrains. You need to set it only if you want to set move
-;                 type "Both" for unit that has no native Land terrains or
-;                 for unit that has no native Oceanic terrains.
 ; min_speed     = Minimum speed after damage and effects (whole movement points)
 ; hp_loss_pct   = Hitpoints lost each turn if unit not in city or native base
 ; non_native_def_pct = Defense power percentage applying when defending on
@@ -290,7 +283,7 @@ flags         = "Unreachable", "DoesntOccupyTile"
 ; "Spy"		= enhanced diplomat actions. _Must_ be "Diplomat" also
 ; "Trireme"	= (sea only) cannot leave shoreline
 ; "Nuclear"	= nuke!
-; "Paratroopers"= (land only) can paradrop
+; "Paratroopers"= can paradrop
 ; "Cities"      = can disband to produce a city (initial population city_size)
 ; "Only_Native_Attack" = cannot attack targets on non-native tiles even if
 ;                 unit class can
@@ -401,7 +394,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 0
-flags         = "Settlers", "NonMil", "AddToCity", "Cities"
+flags         = "Settlers", "NonMil", "HasNoZOC", "AddToCity", "Cities"
 ; No veteran levels (level name is never displayed)
 veteran_names = _("green")
 veteran_raise_chance = 0
@@ -410,10 +403,11 @@ veteran_power_fact = 100
 veteran_move_bonus = 0
 roles         = "Cities"
 helptext      = _("\
-Settlers are one of the key units in the game. As well as building new\
- cities, they can also improve terrain, for instance by building\
- irrigation, mines, and roads. See the Terrain Alterations section of\
- the help for more details.\
+Settlers are one of the key units in the game, as they are your main\
+ means of founding new cities.\
+"), _("\
+Settlers can also perform the same terrain alterations as Workers,\
+ except for building airbases or buoys.\
 "), _("\
 Upkeep for Settlers is in food as well as production, and a Settler\
  can die if its supporting city runs out of food. Settlers in a\
@@ -445,7 +439,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "Settlers", "NonMil", "Airbase"
+flags         = "Settlers", "NonMil", "HasNoZOC", "Airbase"
 ; No veteran levels (level name is never displayed)
 veteran_names = _("green")
 veteran_raise_chance = 0
@@ -454,9 +448,32 @@ veteran_power_fact = 100
 veteran_move_bonus = 0
 roles         = "Settlers"
 helptext      = _("\
-Workers are similar to Settlers in that they can improve terrain --\
- see the Terrain Alterations section of the help for more details of\
- the available improvements. However, Workers cannot build new cities.\
+Workers have the ability to improve terrain tiles.\
+"), _("\
+On terrain which supports it, they may build an irrigation system to \
+produce some extra food each turn. This requires a nearby source of \
+water: an ocean, lake, or river tile, or another tile with an \
+irrigation system, must share an edge (not just a corner) with the \
+target tile. Once irrigated, land remains so even if the water source \
+is removed. When Refrigeration is known, irrigation systems can be \
+upgraded to Farmland by irrigating them a second time; this provides \
+more food to a city if it has a Supermarket.\
+"), _("\
+Workers can build mines on some types of terrain, which increases the \
+number of production points produced by that tile. However, it is not \
+possible to have an irrigation system and a mine on the same tile.\
+"), _("\
+On terrain unsuitable for irrigation systems or mines, issuing the \
+\"irrigate\" or \"mine\" order may permanently convert the terrain \
+to another type; this is usually more expensive. For instance, Swamp \
+may be \"irrigated\" to yield Grassland. (Terrain conversion with \
+the \"irrigate\" order does not require a water source.)\
+"), _("\
+Workers can also build roads, railroads, fortresses, airbases, or \
+buoys (when on board a ship).\
+"), _("\
+See the help on Terrain and Terrain Alterations for the effects of \
+these actions.\
 ")
 
 [unit_engineers]
@@ -484,7 +501,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "Settlers", "NonMil", "Transform", "Airbase"
+flags         = "Settlers", "NonMil", "HasNoZOC", "Transform", "Airbase"
 ; No veteran levels (level name is never displayed)
 veteran_names = _("green")
 veteran_raise_chance = 0
@@ -494,9 +511,11 @@ veteran_move_bonus = 0
 roles         = "Settlers"
 helptext      = _("\
 Engineers are similar to Workers, but they work twice as fast and\
- move twice as fast.  Engineers may also perform major terrain\
- transformations (for example, converting Tundra into Desert) which\
- are beyond the capabilities of Workers and Settlers; see the\
+ move twice as fast. Engineers may also perform major terrain\
+ transformations which are beyond the capabilities of Workers and\
+ Settlers, such as converting Tundra into Desert, or even Ocean into\
+ Swamp in some circumstances (when on board an ocean-going vessel,\
+ on a tile surrounded by sufficient existing land). See the\
  Terrain Alterations section for more details.\
 "), _("\
 TIP 1:  Upgrade Workers to Engineers when possible, as Engineers\
@@ -1296,7 +1315,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "FieldUnit", "OneAttack", "AirAttacker"
+flags         = "FieldUnit", "OneAttack", "AirAttacker", "HasNoZOC"
 roles         = ""
 helptext      = _("\
 Bombers are specialized airborne units that may\
@@ -1403,7 +1422,8 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "Partial_Invis", "FieldUnit", "OneAttack", "AirAttacker"
+flags         = "Partial_Invis", "FieldUnit", "OneAttack", "AirAttacker",
+                "HasNoZOC"
 roles         = ""
 helptext      = _("\
 An improved Bomber, with improved attack and a higher movement\
@@ -1841,7 +1861,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "FieldUnit", "OneAttack", "AirAttacker"
+flags         = "FieldUnit", "OneAttack", "AirAttacker", "HasNoZOC"
 roles         = ""
 helptext      = _("\
 The Cruise Missile is a long-distance missile\
@@ -1876,7 +1896,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "FieldUnit", "OneAttack", "Nuclear", "AirAttacker"
+flags         = "FieldUnit", "OneAttack", "Nuclear", "AirAttacker", "HasNoZOC"
 ; No veteran levels (level name is never displayed)
 veteran_names = _("green")
 veteran_raise_chance = 0
@@ -1935,7 +1955,7 @@ uk_happy      = 0
 uk_shield     = 0
 uk_food       = 0
 uk_gold       = 0
-flags         = "Diplomat", "IgZOC", "NonMil"
+flags         = "Diplomat", "IgZOC", "NonMil", "HasNoZOC"
 veteran_names =
 ; /* TRANS: diplomatic rank. */
 ; /* TRANS: Unless translated, the last character in "attache" should be */
@@ -2044,7 +2064,7 @@ uk_happy      = 0
 uk_shield     = 0
 uk_food       = 0
 uk_gold       = 0
-flags         = "Diplomat", "IgZOC", "NonMil", "Spy"
+flags         = "Diplomat", "IgZOC", "NonMil", "HasNoZOC", "Spy"
 veteran_names =
 ; /* TRANS: Spy veteran level */
   _("?spy_level:informant"),
@@ -2113,11 +2133,20 @@ uk_happy      = 0
 uk_shield     = 0
 uk_food       = 0
 uk_gold       = 0
-flags         = "TradeRoute", "HelpWonder", "IgZOC", "NonMil"
+flags         = "TradeRoute", "HelpWonder", "IgZOC", "NonMil", "HasNoZOC"
 roles         = ""
 helptext      = _("\
 A Caravan carries goods or material for trading with distant cities\
  and foreign countries, or to help build wonders in your cities.\
+"), _("\
+Caravans can establish trade routes with your own cities or those of other\
+ nations (even enemies) by traveling to them. A route's ongoing revenue\
+ is doubled if the two cities involved are on different continents, and\
+ doubled again if the cities are from different civilizations. This last\
+ condition means the net benefit to your civilization of a trade route\
+ is the same regardless of whether you own both cities or only one of\
+ them; if you only own one city, trade in each city is doubled, but you\
+ only get the benefit from one end of the route.\
 "), _("\
 Every Caravan that is used to build a wonder will add 50 shields\
  towards the production of the wonder.\
@@ -2152,7 +2181,7 @@ uk_happy      = 0
 uk_shield     = 0
 uk_food       = 0
 uk_gold       = 0
-flags         = "TradeRoute", "HelpWonder", "IgZOC", "NonMil"
+flags         = "TradeRoute", "HelpWonder", "IgZOC", "NonMil", "HasNoZOC"
 roles         = ""
 helptext      = _("\
 The Freight unit replaces the Caravan, and moves at twice the speed.\
@@ -2183,7 +2212,7 @@ uk_happy      = 0
 uk_shield     = 0
 uk_food       = 0
 uk_gold       = 0
-flags         = "IgTer", "IgZOC", "NonMil"
+flags         = "IgTer", "IgZOC", "NonMil", "HasNoZOC"
 roles         = "Explorer"
 helptext      = _("\
 Explorers are brave individuals that are very useful for\
@@ -2215,8 +2244,8 @@ uk_happy      = 0
 uk_shield     = 0
 uk_food       = 0
 uk_gold       = 0
-flags         = "IgZOC", "NonMil", "NoBuild", "NoHome", "SuperSpy", 
-                "Undisbandable", "Unbribable", "GameLoss", "Unique"
+flags         = "IgZOC", "NonMil", "HasNoZOC", "NoBuild", "NoHome", "SuperSpy", 
+                "Undisbandable", "GameLoss", "Unique"
 ; No veteran levels (level name is never displayed)
 veteran_names = _("green")
 veteran_raise_chance = 0
@@ -2253,7 +2282,7 @@ uk_happy      = 0
 uk_shield     = 0
 uk_food       = 0
 uk_gold       = 0
-flags         = "IgZOC", "NonMil", "Unbribable",
+flags         = "IgZOC", "NonMil", "HasNoZOC",
                 "Undisbandable", "SuperSpy", "NoHome", "NoBuild"
 ; No veteran levels (level name is never displayed)
 veteran_names = _("green")
@@ -2295,7 +2324,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = ""
+flags         = "HasNoZOC"
 roles         = ""
 helptext      = _("\
 The AWACS (Airborne Warning and Control System) is an airplane with an \

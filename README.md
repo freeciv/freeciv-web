@@ -2,16 +2,16 @@ THE FREECIV-WEB PROJECT
 -----------------------
 [![Build Status](https://api.travis-ci.org/freeciv/freeciv-web.png)](https://travis-ci.org/freeciv/freeciv-web)
 
-Freeciv-web is an open-source turn-based strategy game. It's built entirely in HTML5 and features in-depth game-play and a wide variety of game modes and options. Your goal is to build cities, collect resources, organize your government, and build an army, with the ultimate goal of creating the best civilization. You can play online against other players (multiplayer) or play by yourself against the computer. 
+Freeciv-web is an open-source turn-based strategy game. It can be played in any HTML5 capable web-browser and features in-depth game-play and a wide variety of game modes and options. Your goal is to build cities, collect resources, organize your government, and build an army, with the ultimate goal of creating the best civilization. You can play online against other players (multiplayer) or play by yourself against the computer. 
 
 Freeciv-web is is free and open source software. The Freeciv C server is released under the GNU General Public License, while the Freeciv-web client is released
 under the GNU Affero General Public License. See LICENSE.txt for details.
 
 Freeciv-web is now playable online at http://play.freeciv.org/
 
-Contact: The Freeciv Project - freeciv-dev@gna.org
-https://mail.gna.org/listinfo/freeciv-dev
-
+Contact: The Freeciv Project - freeciv-dev@gna.org  
+https://mail.gna.org/listinfo/freeciv-dev  
+  
 
 ![Freeciv-web](https://raw.githubusercontent.com/freeciv/freeciv-web/master/freeciv-logos/freeciv-web-screenshot-2014.png "Freeciv-web screenshot")
 
@@ -106,9 +106,6 @@ Install this software if you are not running Freeciv-web with Vagrant:
 
 - Firebug for debugging - http://getfirebug.com/
 
-- Closure Compiler - http://code.google.com/intl/nb/closure/compiler/
-  (Bundled in source code, no need to download.)
-
 - curl-7.19.7 - http://curl.haxx.se/
 
 - OpenSSL - http://www.openssl.org/
@@ -142,8 +139,8 @@ manual installation procedure to setup Freeciv-web:
    > ./prepare_freeciv.sh
 
 4. Install Freeciv. This involves running the following commands:
-   > cd freeciv/freeciv
-   > make install     (as root user)
+   > cd freeciv/freeciv  
+   > make install     (as root user)  
 
    copy freeciv-web/freeciv/data/fcweb to /usr/local/share/freeciv 
 
@@ -180,7 +177,7 @@ some tasks you can work on.
 
 Contributors to Freeciv-web
 ---------------------------
-[Andreas Røsdal](http://github.com/andreasrosdal)  
+[Andreas Røsdal](http://github.com/andreasrosdal)  [@andreasrosdal](http://www.twitter.com/andreasrosdal)  
 [Marko Lindqvist](https://github.com/cazfi)  
 and the [Freeciv.org project](http://freeciv.wikia.com/wiki/People)!
 

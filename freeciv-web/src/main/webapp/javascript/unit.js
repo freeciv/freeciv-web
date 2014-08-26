@@ -311,3 +311,29 @@ function is_unit_visible(punit)
   }
 
 }
+
+/**************************************************************************
+ Returns a list containing the unittype ids sorted by unittype name.
+**************************************************************************/
+function unittype_ids_alphabetic()
+{
+  var unittype_names = [];
+  for (var unit_id in unit_types) {
+    var punit_type = unit_types[unit_id];
+    unittype_names.push(punit_type['name']);
+  }
+
+  unittype_names.sort();
+
+  var unittype_id_list = [];
+  for (var n in unittype_names) {
+    var unit_name = unittype_names[n];
+    for (var unit_id in unit_types) {
+      var punit_type = unit_types[unit_id];
+      if (unit_name == punit_type['name']) {
+        unittype_id_list.push(unit_id);
+      }
+    }
+  }
+  return unittype_id_list;
+}

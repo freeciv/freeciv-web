@@ -163,23 +163,21 @@ function setup_window_size ()
   $("#nations").height( mapview['height'] - 100);
   $("#nations").width( mapview['width']);
   
-  $(".manual-tab").height( mapview['height'] - 200);
-  
   $("#city_viewport").height( mapview['height'] - 20);
 
   var i = 0;
 
   $("#opt_tab").children().html("Options")
-  $("#players_tab").children().html("Players")
-  $("#tech_tab").children().html("Technologies")
-  $("#civ_tab").children().html("Nation")
+  $("#players_tab").children().html("Nations")
+  $("#tech_tab").children().html("Research")
+  $("#civ_tab").children().html("Government")
   $("#chat_tab").children().html("Chat")
 
   $("#opt_tab").show();
-  $("#tabs-hel").show();
   $("#players_tab").show(); 
   $("#freeciv_logo").show();
   $("#chat_tab").show();
+  $("#tabs-hel").hide();
 
 
   /* dynamically reduce content in top meny according to content*/
@@ -188,15 +186,15 @@ function setup_window_size ()
     if (i == 1) $("#hel_tab").hide();
 
     if (i == 2) $("#opt_tab").children().html("Opts")
-    if (i == 3) $("#players_tab").children().html("Plrs")
-    if (i == 4) $("#tech_tab").children().html("Tech")
-    if (i == 5) $("#civ_tab").children().html("Nat")
+    if (i == 3) $("#players_tab").children().html("Nat")
+    if (i == 4) $("#tech_tab").children().html("Res")
+    if (i == 5) $("#civ_tab").children().html("Govt")
 
     if (i == 6) $("#freeciv_logo").hide();
     if (i == 7) $("#opt_tab").children().html("O")
-    if (i == 8) $("#players_tab").children().html("P")
-    if (i == 9) $("#tech_tab").children().html("T")
-    if (i == 10) $("#civ_tab").children().html("N")
+    if (i == 8) $("#players_tab").children().html("N")
+    if (i == 9) $("#tech_tab").children().html("R")
+    if (i == 10) $("#civ_tab").children().html("G")
     if (i == 11) $("#chat_tab").children().html("C")
     if (i == 12) $("#map_tab").children().html("M")
 
@@ -231,8 +229,6 @@ function setup_window_size ()
     $("#chat_tab").hide();
 
   }
-  $("#tabs-hel").hide();
-
 
   if (overview_active) init_overview();
   if (unitpanel_active) init_game_unit_panel(); 

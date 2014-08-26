@@ -19,7 +19,7 @@ var isWorking = false;
 var clinet_last_send = 0;
 var debug_client_speed_list = [];
 
-var freeciv_version = "+Freeciv.Web.Devel-2.6-2014.Jul.03";
+var freeciv_version = "+Freeciv.Web.Devel-2.6-2014.Aug.12";
 
 var ws = null;
 var civserverport = null;
@@ -69,7 +69,8 @@ function network_init()
 function websocket_init()
 {
   var proxyport = 1000 + parseFloat(civserverport);
-  ws = new WebSocket("ws://" + window.location.hostname + "/civsocket/" + proxyport);
+  var ws_protocol = ('https:' == document.location.protocol) ? "wss://" : "ws://";
+  ws = new WebSocket(ws_protocol + window.location.hostname + "/civsocket/" + proxyport);
 
   ws.onopen = function () {
     var login_message = {"type":4, "username" : username,
@@ -90,12 +91,14 @@ function websocket_init()
   };
 
   ws.onclose = function (event) {
-   console.debug("WebSocket connection closed, code+reason: " + event.code + ", " + event.reason); 
+   console.info("WebSocket connection closed, code+reason: " + event.code + ", " + event.reason); 
   };
 
   ws.onerror = function (evt) {
-   show_dialog_message("Network error", "A problem occured with the WebSocket connection to the server."); 
-   console.error("WebSocket error: Unable to communicate with server using WebSockets. Error: " + evt);
+   show_dialog_message("Network error", "A problem occured with the " 
+                       + document.location.protocol + " WebSocket connection to the server: " + ws.url); 
+   console.error("WebSocket error: Unable to communicate with server using " 
+                 + document.location.protocol + " WebSockets. Error: " + evt);
   };
 }
 

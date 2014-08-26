@@ -84,7 +84,7 @@ diff -Nurd -X.diff_ignore freeciv/server/stdinhand.c freeciv/server/stdinhand.c
  
 +  /* hack for web client: savegames are saved with username as proposed filename. */
 +  if (cmd == CMD_SAVE && caller) {
-+    sz_strlcpy(allargs, caller->username);
++    sz_strlcpy(arg, caller->username);
 +  }
 +
 +

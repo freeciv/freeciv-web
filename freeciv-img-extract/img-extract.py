@@ -383,7 +383,7 @@ print("MAX: " + str(max_width) + "  " + str(max_height) + "  " + str(sum_area));
 
 f = open('freeciv-web-tileset.js', 'w')
 
-f.write("var tileset = " + json.dumps(coords, separators=(',',':')));
+f.write("var tileset = " + json.dumps(coords, separators=(',',':')) + ";");
 
 
 print("done.");

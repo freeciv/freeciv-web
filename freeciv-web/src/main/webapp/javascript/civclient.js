@@ -44,7 +44,8 @@ $(document).ready(function() {
 **************************************************************************/
 function civclient_init() 
 {
-
+  https_redirect_check();
+   
   $.blockUI.defaults['css']['backgroundColor'] = "#222";
   $.blockUI.defaults['css']['color'] = "#fff";
   $.blockUI.defaults['theme'] = true;
@@ -265,7 +266,7 @@ function show_dialog_message(title, message) {
   $("#dialog").dialog({
 			bgiframe: true,
 			modal: true,
-			width: is_small_screen() ? "90%" : "40%",
+			width: is_small_screen() ? "90%" : "50%",
 			buttons: {
 				Ok: function() {
 					$("#dialog").dialog('close');
@@ -335,7 +336,10 @@ function show_intro_dialog(title, message) {
 					}
 				}, 
 				  "Customize Game": function() {
-					if (validate_username()) $("#dialog").dialog('close');
+					if (validate_username()) {
+					  $("#pregame_text_input").focus();
+					  $("#dialog").dialog('close');
+					}
 				}
 			}	
 			
@@ -358,6 +362,17 @@ function show_intro_dialog(title, message) {
   }
 	
   $("#dialog").dialog('open');		
+
+  $('#dialog').keyup(function(e) {
+    if (e.keyCode == 13) {
+      autostart = true;
+      if (validate_username()) {
+        $("#dialog").dialog('close');
+        $("#dialog").remove();
+      }
+    }
+  });
+
 }
 
 
@@ -394,25 +409,6 @@ function set_phase_start()
 {
   phase_start_time = new Date().getTime();
 }
-
-/**************************************************************************
- ...
-**************************************************************************/
-function show_help()
-{
-   $.ajax({url: "/manual",
-   	       async: false, 
-  		   success: function(msg){
-			     	$("#game_manual").html(msg);
-			     	$('#tabs_manual').tabs();
-			      	}
-  		});
-  		
-    	
-  $(".manual-tab").height( mapview['height'] - 200);   
-
-}
-
 
 /**************************************************************************
 ...
@@ -479,6 +475,8 @@ function show_debug_info()
   console.log("simpleStorage version: " + simpleStorage.version);
   console.log("savegame count: " + simpleStorage.get("savegame-count"));
   console.log("Touch device: " + is_touch_device());
+  console.log("HTTP protocol: " + document.location.protocol);
+  if (ws != null && ws.url != null) console.log("WebSocket URL: " + ws.url);
 
   debug_active = true;
   /* Show average network latency PING (server to client, and back). */
@@ -502,3 +500,31 @@ function show_debug_info()
   console.log("mozDash support: " + mozDashSupport);
 
 }
+
+/**************************************************************************
+ - HTTPS is the default, so redirect from HTTP to HTTPS. 
+ - HTTP default on localhost.
+ - Also prevent redirect loops. 
+**************************************************************************/
+function https_redirect_check()
+{
+  if ('http:' == document.location.protocol && document.location.hostname != "localhost"
+      && $.getUrlVar("http") != "true" && $.getUrlVar("https") != "true" ) {
+    https_redirect();
+  }
+
+}
+/**************************************************************************
+  Redirect between the HTTP and HTTPS urls of Freeciv-web.
+**************************************************************************/
+function https_redirect()
+{
+  if ('https:' == document.location.protocol) {
+    console.log("Redirecting from HTTPS to HTTP.");
+    window.location.href = "http:" + window.location.href.substring(window.location.protocol.length) + "&http=true";
+  } else if ('http:' == document.location.protocol) {
+    console.log("Redirecting from HTTP to HTTPS.");
+    window.location.href = "https:" + window.location.href.substring(window.location.protocol.length) + "&https=true";
+  }
+}
+

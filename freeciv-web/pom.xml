@@ -69,6 +69,7 @@
     <plugins>
         <plugin>
             <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.1</version>
             <configuration>
                <source>1.7</source>
                <target>1.7</target>
@@ -96,32 +97,40 @@
            </configuration>
       </plugin>
 
-      <plugin>
+    <plugin>
         <groupId>com.samaxes.maven</groupId>
-        <artifactId>maven-minify-plugin</artifactId>
-        <version>1.3.5.1</version>
+        <artifactId>minify-maven-plugin</artifactId>
+        <version>1.7.3</version>
         <executions>
           <execution>
             <id>default-minify</id>
-            <phase>process-resources</phase>
             <configuration>
-              <cssSourceDir>css</cssSourceDir>
-              <cssSourceFiles>
-	      <cssSourceFile>jquery-ui.min.css</cssSourceFile>
-	      <cssSourceFile>bluecurve.css</cssSourceFile>
-	      <cssSourceFile>fg.menu.css</cssSourceFile>
-	      <cssSourceFile>theme.dark.css</cssSourceFile>
-	      <cssSourceFile>pregame.css</cssSourceFile>
-	      <cssSourceFile>civclient.css</cssSourceFile>
-              </cssSourceFiles>
 	      <cssFinalFile>webclient.css</cssFinalFile>
-             </configuration>
+	      <cssSourceFiles>
+                <cssSourceFile>jquery-ui.min.css</cssSourceFile>
+	        <cssSourceFile>bluecurve.css</cssSourceFile>
+	        <cssSourceFile>fg.menu.css</cssSourceFile>
+	        <cssSourceFile>theme.dark.css</cssSourceFile>
+	        <cssSourceFile>pregame.css</cssSourceFile>
+	        <cssSourceFile>civclient.css</cssSourceFile>
+               </cssSourceFiles>
+	       <jsSourceDir>javascript</jsSourceDir>
+		<jsFinalFile>webclient.js</jsFinalFile>
+                <jsSourceIncludes>
+                  <jsSourceInclude>*.js</jsSourceInclude>
+                </jsSourceIncludes>
+	        <jsSourceExcludes>
+                  <jsSourceExclude>menu.js</jsSourceExclude>
+                  <jsSourceExclude>jquery.min.js</jsSourceExclude>
+                </jsSourceExcludes>
+		<jsEngine>CLOSURE</jsEngine>
+            </configuration>
             <goals>
               <goal>minify</goal>
             </goals>
           </execution>
         </executions>
-      </plugin>	    
+      </plugin> 
 
 
      </plugins>

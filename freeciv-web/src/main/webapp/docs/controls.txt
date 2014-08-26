@@ -1,0 +1,115 @@
+<h1>Controls</h1>
+<h2>Unit command buttons</h2>
+<img src="/images/orders/goto_default.png">
+Goto
+
+<img src="/images/orders/sentry_default.png">
+Sentry unit
+
+<img src="/images/orders/irrigation.png">
+Build Irrigation
+
+<img src="/images/orders/rehome_default.png">
+Change unit homecity
+
+<img src="/images/orders/auto_explore_default.png">
+Auto explore
+
+<img src="/images/orders/road_default.png">
+Build road
+
+<img src="/images/orders/auto_settlers_default.png">
+Auto settlers
+
+<img src="/images/orders/mine_default.png">
+Build mine
+
+<img src="/images/orders/build_city_default.png">
+Build city
+
+<img src="/images/orders/no_orders.png">
+No orders
+
+<img src="/images/orders/nuke.png">
+Nuke
+
+<img src="/images/orders/disband_default.png">
+Disband unit
+
+<img src="/images/orders/paradrop.png">
+Paradrop
+
+<img src="/images/orders/patrol.png">
+Patrol
+
+<img src="/images/orders/pillage.png">
+Pillage
+
+<img src="/images/orders/wait.png">
+Wait
+
+<img src="/images/orders/transform_default.png">
+Transform terrain
+
+<img src="/images/orders/pollution.png">
+Remove pollution
+
+<img src="/images/orders/fortify_default.png">
+Fortify
+
+<img src="/images/orders/railroad_default.png">
+Build railroad
+
+<img src="/images/orders/forest_add_default.png">
+Create forest
+
+<img src="/images/orders/forest_remove_default.png">
+Remove forest
+
+<h2>Keyboard Shortcuts for Unit Orders:</h2>
+  a: (a)uto-settler  (settler/worker units)
+  b: (b)uild city  (settler units)
+  f: (f)ortify unit  (military units)
+  f: build (f)ortress  (settler/worker units)
+  g: (g)o to tile  (then left-click mouse to select target tile)
+  h: set unit's (h)omecity  (to city on current tile)
+  i: build (i)rrigation or convert terrain  (settler/worker units)
+  m: build (m)ine or convert terrain  (settler/worker units)
+  n: clean (n)uclear fallout
+  N: explode (N)uclear
+  o: transf(o)rm terrain  (engineer unit)
+  p: clean (p)ollution  (settler/worker units)
+  P: (P)illage  (destroy terrain alteration)
+  r: build (r)oad/railroad  (settler/worker units)
+  s: (s)entry unit
+  S: un(S)entry all units on tile
+  L: unit go (t)o/airlift to city
+  u: (u)nload unit from transporter
+  x: unit auto e(x)plore
+
+
+<h2>Unit Selection:</h2>
+  w: (w)ait: focus on next unit
+
+
+<h2>Unit Movement:</h2>
+  1: move south-west
+  2: move south
+  3: move south-east
+  4: move west
+  6: move east
+  7: move north-west
+  8: move north
+  9: move north-east
+
+<h2>Main Map (Mouse):</h2>
+  Left-click on city:            Pop up city dialog
+  Left-click on unit:            Select a single unit
+                                 (cancels any current activity if "clear
+                                 unit orders on selection" is set)
+  Center-click:  Show tile info
+  Right-click:                   Center tile in view
+
+
+Shift-Return: Turn done
+

@@ -1,15 +1,3 @@
-diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2012-05-16 21:02:54.000000000 +0300
-+++ freeciv/common/packets.def	2012-05-16 21:05:34.000000000 +0300
-@@ -578,6 +578,8 @@
-   
-   #WORKLIST worklist;
- 
-+  STRING can_build_unit[MAX_LEN_MSG];
-+  STRING can_build_improvement[MAX_LEN_MSG];
-   STRING improvements[MAX_LEN_MSG];
-   #BV_CITY_OPTIONS city_options;
-   STRING name[MAX_LEN_NAME];
 diff -Nurd -X.diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
 --- freeciv/server/citytools.c	2012-05-16 21:02:54.000000000 +0300
 +++ freeciv/server/citytools.c	2012-05-16 21:05:39.000000000 +0300

@@ -14,20 +14,6 @@ diff -Nurd -X.diff_ignore freeciv/client/packhand.c freeciv/client/packhand.c
  
    names_set(&gov->name, p->name, p->rule_name);
    sz_strlcpy(gov->graphic_str, p->graphic_str);
-diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2012-08-08 00:54:55.000000000 +0300
-+++ freeciv/common/packets.def	2012-08-08 00:57:49.000000000 +0300
-@@ -1257,8 +1257,8 @@
- PACKET_RULESET_GOVERNMENT = 145; sc, lsend
-   GOVERNMENT id;
- 
--  UINT8 reqs_count;
--  REQUIREMENT reqs[MAX_NUM_REQS:reqs_count];
-+  #UINT8 reqs_count;
-+  #REQUIREMENT reqs[MAX_NUM_REQS:reqs_count];
- 
-   STRING name[MAX_LEN_NAME];
-   STRING rule_name[MAX_LEN_NAME];
 diff -Nurd -X.diff_ignore freeciv/server/ruleset.c freeciv/server/ruleset.c
 --- freeciv/server/ruleset.c	2012-08-08 00:18:29.000000000 +0300
 +++ freeciv/server/ruleset.c	2012-08-08 01:01:54.000000000 +0300

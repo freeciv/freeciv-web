@@ -267,7 +267,9 @@ function pregame_settings()
 	  "<option value='random'>Fully random height</option>" +
 	  "<option value='fractal'>Pseudo-fractal height</option>" +
           "<option value='island'>Island-based</option>" +
-	  "</select></td></tr>"+ 
+	  "</select></td></tr>"+
+	  "<tr title='HTTPS and Secure WebSockets is more secure and reliable, while HTTP and WebSockets has better performance. HTTPS is default.'><td>HTTPS and Secure WebSockets</td>" +
+	  "<td><input type='checkbox' name='https_setting' id='https_setting' checked>HTTPS enabled</td></tr>" + 
           "</table><br>" +
 	  "<span id='settings_info'><i>Freeciv-web can be customized using the command line in many other ways also. Type /help in the command line for more information.</i></span>" 
 	  ;
@@ -387,6 +389,14 @@ function pregame_settings()
     }
     var myJSONText = JSON.stringify(test_packet);
     send_request (myJSONText);
+  });
+
+  var https_setting = ('https:' == document.location.protocol);
+  $('#https_setting').prop('checked', https_setting == true);
+
+  $('#https_setting').change(function() {
+    alert("Restarting Freeciv-web with new HTTPS setting.");
+    https_redirect();
   });
 
   $("#settings_table").tooltip();

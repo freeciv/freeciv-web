@@ -86,9 +86,9 @@ function control_init()
   /* disable right clicks. */
   document.oncontextmenu = function(){return allow_right_click;};
  
-  $(window).bind('beforeunload', function(){
+  /*$(window).bind('beforeunload', function(){
     return "Do you really want to leave your nation behind now?";
-  });
+  });*/
 
   $(window).on('unload', function(){
     send_surrender_game();
@@ -119,6 +119,7 @@ function control_init()
   });
 
   $("#opt_tab").click(function(event) {
+    $("#tabs-hel").hide();
     city_dialog_remove();
     init_options_dialog(); 
     set_default_mapview_inactive();
@@ -994,6 +995,12 @@ function key_unit_auto_explore()
 **************************************************************************/
 function key_unit_wait()
 {
+  var funits = get_units_in_focus();
+  for (var i = 0; i < funits.length; i++) {
+    var punit = funits[i]; 
+    punit['done_moving'] = true;
+  }
+
   advance_unit_focus();
 }
 
@@ -1007,7 +1014,7 @@ function key_unit_sentry()
     var punit = funits[i]; 
     request_new_unit_activity(punit, ACTIVITY_SENTRY, EXTRA_NONE);
   }
-  update_unit_focus();
+  setTimeout(update_unit_focus, 700); 
 }
 
 /**************************************************************************
@@ -1034,7 +1041,7 @@ function key_unit_irrigate()
     /* EXTRA_NONE -> server decides */
     request_new_unit_activity(punit, ACTIVITY_IRRIGATE, EXTRA_NONE);
   }
-  update_unit_focus();
+  setTimeout(update_unit_focus, 700);
 }
 
 /**************************************************************************
@@ -1047,7 +1054,7 @@ function key_unit_pollution()
     var punit = funits[i]; 
     request_new_unit_activity(punit, ACTIVITY_POLLUTION, EXTRA_NONE);
   }  
-  update_unit_focus();
+  setTimeout(update_unit_focus, 700);
 }
 
 
@@ -1120,7 +1127,7 @@ function key_unit_transform()
     var punit = funits[i]; 
     request_new_unit_activity(punit, ACTIVITY_TRANSFORM, EXTRA_NONE);
   }  
-  update_unit_focus();
+  setTimeout(update_unit_focus, 700);
 }
 
 /**************************************************************************
@@ -1133,7 +1140,7 @@ function key_unit_pillage()
     var punit = funits[i]; 
     request_new_unit_activity(punit, ACTIVITY_PILLAGE, EXTRA_NONE);
   }  
-  update_unit_focus();
+  setTimeout(update_unit_focus, 700);
 }
 
 /**************************************************************************
@@ -1147,7 +1154,7 @@ function key_unit_mine()
     /* EXTRA_NONE -> server decides */
     request_new_unit_activity(punit, ACTIVITY_MINE, EXTRA_NONE);
   }
-  update_unit_focus();
+  setTimeout(update_unit_focus, 700);
 }
 
 /**************************************************************************
@@ -1165,7 +1172,7 @@ function key_unit_road()
       request_new_unit_activity(punit, ACTIVITY_GEN_ROAD, extras['Railroad']['id']);
     }
   }
-  update_unit_focus();
+  setTimeout(update_unit_focus, 700);
 }
 
 /**************************************************************************
@@ -1271,6 +1278,7 @@ function key_unit_disband()
     client_remove_unit(punit);
 
   }  
+  setTimeout(update_unit_focus, 700);
 }
 
 /**************************************************************************
@@ -1440,9 +1448,12 @@ function popup_caravan_dialog(punit, traderoute, wonder)
 
   var dhtml = "<center>Your caravan from " + decodeURIComponent(homecity['name']) + " reaches the city of "  
 	    + decodeURIComponent(pcity['name']) + ". What now? <br>"
-	    + "<input id='car_trade' class='car_button' type='button' value='Establish Traderoute'>"
-	    + "<input id='car_wonder' class='car_button' type='button' value='Help build Wonder'>"
-	    + "<input id='car_cancel' class='car_button' type='button' value='Cancel'>"
+	    + "<input id='car_trade" + punit['id'] 
+	    + "' class='car_button' type='button' value='Establish Traderoute'>"
+	    + "<input id='car_wonder" + punit['id'] 
+	    + "' class='car_button' type='button' value='Help build Wonder'>"
+	    + "<input id='car_cancel" + punit['id'] 
+	    + "' class='car_button' type='button' value='Cancel'>"
 	    + "</center>"
   $(id).html(dhtml);
 
@@ -1457,10 +1468,10 @@ function popup_caravan_dialog(punit, traderoute, wonder)
   $(".car_button").css("width", "250px");
 
 
-  if (!traderoute) $("#car_trade").button( "option", "disabled", true);
-  if (!wonder) $("#car_wonder").button( "option", "disabled", true);
+  if (!traderoute) $("#car_trade" + punit['id']).button( "option", "disabled", true);
+  if (!wonder) $("#car_wonder" + punit['id']).button( "option", "disabled", true);
 
-  $("#car_trade").click(function() {
+  $("#car_trade" + punit['id']).click(function() {
     var packet = {"type" : packet_unit_establish_trade, 
                    "unit_id": punit['id']};
     send_request (JSON.stringify(packet));		  
@@ -1468,7 +1479,7 @@ function popup_caravan_dialog(punit, traderoute, wonder)
     $(id).remove();	
   });
 
-  $("#car_wonder").click(function() {
+  $("#car_wonder" + punit['id']).click(function() {
     var packet = {"type" : packet_unit_help_build_wonder, 
                    "unit_id": punit['id']};
     send_request (JSON.stringify(packet));		  
@@ -1476,6 +1487,9 @@ function popup_caravan_dialog(punit, traderoute, wonder)
     $(id).remove();	
   });
 
+  $("#car_cancel" + punit['id']).click(function() {
+    $(id).remove();	
+  });
 
 }
 

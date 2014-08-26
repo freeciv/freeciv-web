@@ -42,6 +42,18 @@ options="+Freeciv-ruleset-Devel-2013.May.14"
 ; sabotage	= percent chance of diplomat sabotage being successful
 ; flags         = special flag strings
 ;
+; ** Building flags **
+; "VisibleByOthers"  = Anyone who can see your city knows whether it has
+;                      this improvement. (Great and small wonders are
+;                      always visible.)
+; "SaveSmallWonder"  = If you lose the city with this building in, and the
+;                      "savepalace" server setting is enabled, another will
+;                      be built for free in a random city.
+;                      Should only be used with genus "SmallWonder".
+; "Gold"             = Not a real building; production turned into gold
+;                      indefinitely (capitalization/coinage).
+;                      Genus should be "Special".
+;
 ; */ <-- avoid gettext warnings
 
 [building_airport]
@@ -323,10 +335,12 @@ sound		= "b_courthouse"
 sound_alt	= "b_generic"
 ; /* xgettext:no-c-format */
 helptext	= _("\
-Reduces the corruption in a city by 50%.  Under a Democracy, a\
- Courthouse also makes 1 unhappy citizen content (unless that citizen is\
- unhappy about military activity). \
- Also makes the revolt cost of the city 4 times bigger.\
+Reduces the corruption in a city by 50%, and makes the revolt cost\
+ of the city 4 times bigger. (These effects are redundant in your\
+ capital city.)\
+"), _("\
+Under a Democracy, a Courthouse also makes 1 unhappy citizen content\
+ (unless that citizen is unhappy about military activity).\
 ")
 
 [building_factory]
@@ -613,12 +627,18 @@ sabotage	= 0
 sound		= "b_palace"
 sound_alt	= "b_generic"
 helptext	= _("\
-Makes a city the capital and the center of your government. \
+Makes a city the capital and the center of your government.\
  Corruption in other cities is related to how far away from the\
  capital they are, except when the government is Democracy or\
- Communism.  The cost of inciting a revolt in a city also depends\
- upon the city's distance from the capital (under all forms of\
- government).\
+ Communism. On top of this, corruption in your capital itself is\
+ half of what it would otherwise be (as if it had a Courthouse).\
+"), _("\
+The cost to enemy Diplomats and Spies of inciting a revolt in a\
+ city also depends upon the city's distance from the capital\
+ (under all forms of government). Your capital city itself cannot\
+ be incited to revolt, and enjoys a bonus when enemy agents try\
+ to evade your own agents stationed in the city, or sabotage your\
+ buildings.\
 "), _("\
 Take good care of your capital, as its loss may result in your\
  empire plunging into civil war. Losing your current palace also\

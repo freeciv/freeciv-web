@@ -105,3 +105,19 @@ function civclient_benchmark(frame)
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
+
+/**************************************************************************
+...
+**************************************************************************/
+function to_title_case(str)
+{
+  return str.replace(/\w\S*/g, 
+         function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+}
+
+/**************************************************************************
+...
+**************************************************************************/
+function get_random_int(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}

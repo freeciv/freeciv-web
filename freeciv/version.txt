@@ -2,4 +2,8 @@ FCREV=26056
 FCBRANCH=trunk
 
 ORIGCAPSTR="+Freeciv.Devel-2.6-2014.Aug.27"
-WEBCAPSTR="+Freeciv.Web.Devel-2.6-2014.Aug.27b"
+
+# There's no need to bump this constantly as current freeciv-web
+# makes no connections to outside world - all connections are
+# internal to it. The server and client are always compatible.
+WEBCAPSTR="+Freeciv.Web.Devel-2.6"

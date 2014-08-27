@@ -114,6 +114,7 @@ ocean_resources = FALSE
 ;                        terrain section -- transformation changes to that
 ;                          terrain
 ; transform_time       = time to transform; if 0, cannot transform
+; pillage_time         = time to pillage extra from the tile
 ; clean_pollution_time = time to clean pollution
 ;                        Nonzero values only affect extras with removal_time 0.
 ; clean_fallout_time   = time to clean fallout
@@ -152,6 +153,7 @@ ocean_resources = FALSE
 ;                        (lua scripting)
 ;   - NoZoc            = Units on this terrain are not generating or subject
 ;                        to zoc
+;   - NoFortify        = Units cannot fortify on this terrain
 ; property_*           = specific property % values used by mapgen.  Most
 ;                        terrains will have 0 for most values.
 ;  - mountainous       = degree to which this terrain is mountainous
@@ -196,6 +198,7 @@ mining_shield_incr   = 0
 mining_time          = 0
 transform_result     = "no"
 transform_time       = 0
+pillage_time         = 0
 clean_pollution_time = 0
 clean_fallout_time   = 0
 animal               = "None"
@@ -236,6 +239,7 @@ mining_shield_incr   = 0
 mining_time          = 0
 transform_result     = "Swamp"
 transform_time       = 36
+pillage_time         = 1
 clean_pollution_time = 3
 clean_fallout_time   = 3
 animal               = "None"
@@ -244,7 +248,7 @@ warmer_drier_result  = "Swamp"
 cooler_wetter_result = "Glacier"
 cooler_drier_result  = "Tundra"
 native_to            = "Sea", "Air", "Missile", "Helicopter", "Trireme"
-flags                = "NoCities", "NoPollution", "FreshWater", "NoZoc"
+flags                = "NoCities", "NoPollution", "FreshWater", "NoZoc", "NoFortify"
 property_ocean_depth = 0
 color.r              = 46
 color.g              = 120
@@ -278,6 +282,7 @@ mining_shield_incr   = 0
 mining_time          = 0
 transform_result     = "Swamp"
 transform_time       = 36
+pillage_time         = 1
 clean_pollution_time = 3
 clean_fallout_time   = 3
 animal               = "None"
@@ -286,7 +291,7 @@ warmer_drier_result  = "Swamp"
 cooler_wetter_result = "Glacier"
 cooler_drier_result  = "Glacier"
 native_to            = "Sea", "Air", "Missile", "Helicopter", "Trireme"
-flags                = "NoCities", "NoPollution", "UnsafeCoast", "NoZoc"
+flags                = "NoCities", "NoPollution", "UnsafeCoast", "NoZoc", "NoFortify"
 property_ocean_depth = 32
 color.r              = 0
 color.g              = 46
@@ -321,6 +326,7 @@ mining_shield_incr   = 0
 mining_time          = 0
 transform_result     = "no"
 transform_time       = 0
+pillage_time         = 1
 clean_pollution_time = 3
 clean_fallout_time   = 3
 animal               = "None"
@@ -329,7 +335,7 @@ warmer_drier_result  = "no"
 cooler_wetter_result = "no"
 cooler_drier_result  = "no"
 native_to            = "Sea", "Air", "Missile", "Helicopter"
-flags                = "NoCities", "NoPollution", "UnsafeCoast", "NoZoc"
+flags                = "NoCities", "NoPollution", "UnsafeCoast", "NoZoc", "NoFortify"
 property_ocean_depth = 87
 color.r              = 0
 color.g              = 33
@@ -364,6 +370,7 @@ mining_shield_incr   = 1
 mining_time          = 10
 transform_result     = "Tundra"
 transform_time       = 24
+pillage_time         = 1
 clean_pollution_time = 3
 clean_fallout_time   = 3
 animal               = "None"
@@ -408,6 +415,7 @@ mining_shield_incr   = 1
 mining_time          = 5
 transform_result     = "Plains"
 transform_time       = 24
+pillage_time         = 1
 clean_pollution_time = 3
 clean_fallout_time   = 3
 animal               = "None"
@@ -453,6 +461,7 @@ mining_shield_incr   = 0
 mining_time          = 15
 transform_result     = "Grassland"
 transform_time       = 24
+pillage_time         = 1
 clean_pollution_time = 3
 clean_fallout_time   = 3
 animal               = "None"
@@ -499,6 +508,7 @@ mining_shield_incr   = 0
 mining_time          = 10
 transform_result     = "Hills"
 transform_time       = 24
+pillage_time         = 1
 clean_pollution_time = 3
 clean_fallout_time   = 3
 animal               = "None"
@@ -542,6 +552,7 @@ mining_shield_incr   = 3
 mining_time          = 10
 transform_result     = "Plains"
 transform_time       = 24
+pillage_time         = 1
 clean_pollution_time = 3
 clean_fallout_time   = 3
 animal               = "None"
@@ -586,6 +597,7 @@ mining_shield_incr   = 0
 mining_time          = 15
 transform_result     = "Plains"
 transform_time       = 24
+pillage_time         = 1
 clean_pollution_time = 3
 clean_fallout_time   = 3
 animal               = "None"
@@ -631,6 +643,7 @@ mining_shield_incr   = 1
 mining_time          = 10
 transform_result     = "Hills"
 transform_time       = 24
+pillage_time         = 1
 clean_pollution_time = 3
 clean_fallout_time   = 3
 animal               = "None"
@@ -674,6 +687,7 @@ mining_shield_incr   = 0
 mining_time          = 15
 transform_result     = "Grassland"
 transform_time       = 24
+pillage_time         = 1
 clean_pollution_time = 3
 clean_fallout_time   = 3
 animal               = "None"
@@ -718,6 +732,7 @@ mining_shield_incr   = 0
 mining_time          = 15
 transform_result     = "Lake"
 transform_time       = 36
+pillage_time         = 1
 clean_pollution_time = 3
 clean_fallout_time   = 3
 animal               = "None"
@@ -764,6 +779,7 @@ mining_shield_incr   = 0
 mining_time          = 0
 transform_result     = "Desert"
 transform_time       = 24
+pillage_time         = 1
 clean_pollution_time = 3
 clean_fallout_time   = 3
 animal               = "None"
@@ -1046,6 +1062,8 @@ shield      = 3 ; glacier used to have 4
 ;                           Global Warming
 ;   - "NuclearWinter"     = Instances of this extra on map count towards
 ;                           Nuclear Winter
+; helptext                = optional help text string; should escape all raw 
+;                           newlines so that xgettext parsing works
 ;
 ; */ <-- avoid gettext warnings
 
@@ -1190,6 +1208,12 @@ build_time     = 3
 removal_time   = 0
 defense_bonus  = 100
 native_to      = "Land"
+helptext       = _("\
+Fortresses improve defense for land units. Among other effects, a land \
+unit remaining in a fortress for a whole turn without moving recovers \
+a quarter of its hit points. With Invention, fortresses gain watchtowers \
+from which units can see further afield.\
+")
 
 [extra_airbase]
 name           = _("Airbase")
@@ -1213,6 +1237,10 @@ build_time     = 3
 removal_time   = 0
 native_to      = "Air", "Helicopter", "Missile"
 flags          = "Refuel"
+helptext       = _("\
+Airbases allow your air units to land and refuel. Air units in an \
+airbase may be attacked by land units.\
+")
 
 [extra_buoy]
 name           = _("Buoy")
@@ -1234,6 +1262,9 @@ reqs           =
     }
 build_time     = 3
 removal_time   = 0
+helptext       = _("\
+Buoys may be built in the ocean (by units on a sea-going vessel).\
+")
 
 [extra_ruins]
 name           = _("Ruins")
@@ -1254,6 +1285,10 @@ reqs           =
 buildable      = FALSE
 removal_time   = 0
 flags          = "TerrChangeRemoves"
+helptext       = _("\
+Ruins mark the former site of a city that was destroyed or abandoned. \
+They have no effect on gameplay.\
+")
 
 [extra_road]
 name           = _("Road")
@@ -1276,6 +1311,14 @@ removal_time   = 0
 native_to      = "Land"
 hidden_by      = "Railroad"
 flags          = "AutoOnCityCenter"
+helptext       = _("\
+Roads allow your land units to move more quickly, and on some terrain,\
+ also provide a trade bonus.\
+"), _("\
+Building roads on river tiles requires knowledge of Bridge Building.\
+ City center tiles automatically get roads (unless they are on a river\
+ tile and you do not yet know Bridge Building).\
+")
 
 [extra_railroad]
 name           = _("Railroad")
@@ -1299,6 +1342,18 @@ build_time     = 3
 removal_time   = 0
 native_to      = "Land"
 flags          = "AutoOnCityCenter"
+helptext       = _("\
+Once you learn the Railroad technology, you may upgrade your roads\
+ to railroads. Units expend no movement points when moving along a\
+ railroad; you may ride a railroad indefinitely. (As may your enemies!)\
+"), _("\
+A railroad also increases any shield resources produced by a tile.\
+ A tile whose road is upgraded to a railroad retains any trade bonus\
+ from the road as well.\
+"), _("\
+City center tiles with roads are automatically upgraded to railroads\
+ when you learn the Railroad technology.\
+")
 
 [extra_river]
 name           = _("River")
@@ -1314,6 +1369,15 @@ rmact_gfx_alt  = "-"
 buildable      = FALSE
 defense_bonus  = 50
 native_to      = "Land"
+helptext       = _("\
+Any land terrain type may have a River on it.  A River adds 1\
+ trade to the resources produced by that tile.  It also increases a tile's\
+ defense factor by 50%.  Finally, land units may move along a River (but\
+ not diagonally) for fast travel.\
+"), _("\
+Roads and railroads can only be built on River tiles if your\
+ civilization has learned Bridge Building technology.\
+")
 
 ; /* <-- avoid gettext warnings
 ;
@@ -1336,8 +1400,6 @@ native_to      = "Land"
 ;   - "DiplomatDefense"   = Diplomats inside get bonus to diplomatic defense
 ;   - "ParadropFrom"      = Paradrop can be initiated from base
 ;   - "ShowFlag"          = Draw owner's flag
-; helptext                = optional help text string; should escape all raw 
-;                           newlines so that xgettext parsing works
 ;
 ; */ <-- avoid gettext warnings
 
@@ -1346,38 +1408,20 @@ name           = _("Fortress")
 gui_type       = "Fortress"
 border_sq      = 5
 flags          = "NoAggressive", "NoStackDeath", "DiplomatDefense"
-helptext       = _("\
-Fortresses improve defense for land units. Among other effects, a land \
-unit remaining in a fortress for a whole turn without moving recovers \
-a quarter of its hit points. With Invention, fortresses gain watchtowers \
-from which units can see further afield.\
-")
 
 [base_airbase]
 name           = _("Airbase")
 gui_type       = "Airbase"
 flags          = "NoStackDeath", "ParadropFrom"
-helptext       = _("\
-Airbases allow your air units to land and refuel. Air units in an \
-airbase may be attacked by land units.\
-")
 
 [base_buoy]
 name           = _("Buoy")
 gui_type       = "Fortress"
 vision_main_sq = 5
-helptext       = _("\
-Buoys may be built in the ocean (by units on a sea-going vessel).\
-")
 
 [base_ruins]
 name           = _("Ruins")
 gui_type       = "Other"
-helptext       = _("\
-Ruins mark the former site of a city that was destroyed or abandoned. \
-They have no effect on gameplay.\
-")
-
 
 ; /* <-- avoid gettext warnings
 ;
@@ -1432,8 +1476,6 @@ They have no effect on gameplay.\
 ;                           flowing from land tiles to ocean
 ;   - "UnrestrictedInfra" = Use of the enemy owned road is not restricted
 ;                           even if server setting 'restrictinfra' is set
-; helptext                = optional help text string; should escape all raw
-;                           newlines so that xgettext parsing works
 ;
 ; */ <-- avoid gettext warnings
 
@@ -1448,14 +1490,6 @@ shield_bonus   = 0
 trade_bonus    = 0
 compat_special = "Road"
 flags          = "RequiresBridge"
-helptext       = _("\
-Roads allow your land units to move more quickly, and on some terrain,\
- also provide a trade bonus.\
-"), _("\
-Building roads on river tiles requires knowledge of Bridge Building.\
- City center tiles automatically get roads (unless they are on a river\
- tile and you do not yet know Bridge Building).\
-")
 
 [road_railroad]
 name           = _("Railroad")
@@ -1468,18 +1502,6 @@ shield_bonus   = 50
 trade_bonus    = 0
 compat_special = "Railroad"
 flags          = "RequiresBridge"
-helptext       = _("\
-Once you learn the Railroad technology, you may upgrade your roads\
- to railroads. Units expend no movement points when moving along a\
- railroad; you may ride a railroad indefinitely. (As may your enemies!)\
-"), _("\
-A railroad also increases any shield resources produced by a tile.\
- A tile whose road is upgraded to a railroad retains any trade bonus\
- from the road as well.\
-"), _("\
-City center tiles with roads are automatically upgraded to railroads\
- when you learn the Railroad technology.\
-")
 
 [road_river]
 name           = _("River")
@@ -1496,12 +1518,3 @@ shield_bonus      = 0
 trade_bonus       = 0
 compat_special = "River"
 flags          = "River", "PreventsOtherRoads", "UnrestrictedInfra"
-helptext       = _("\
-Any land terrain type may have a River on it.  A River adds 1\
- trade to the resources produced by that tile.  It also increases a tile's\
- defense factor by 50%.  Finally, land units may move along a River (but\
- not diagonally) for fast travel.\
-"), _("\
-Roads and railroads can only be built on River tiles if your\
- civilization has learned Bridge Building technology.\
-")

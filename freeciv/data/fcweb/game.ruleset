@@ -17,7 +17,7 @@ options="+Freeciv-ruleset-Devel-2013.May.14"
 ; Ruleset name
 name = _("Classic ruleset")
 
-; There's no separate versioning in rulesets part of main freeciv distribution
+; There`s no separate versioning in rulesets part of main freeciv distribution
 ;version = ""
 
 ; Description of the ruleset
@@ -193,6 +193,7 @@ actor_reqs    =
       "DiplRel", "War", "Local", TRUE
       "UnitFlag", "Spy", "Local", FALSE
       "UnitState", "TransportDependent", "Local", FALSE
+      "MinMoveFrags", "1", "Local", TRUE
     }
 
 [actionenabler_sabotage_city_target]
@@ -202,6 +203,7 @@ actor_reqs    =
       "DiplRel", "War", "Local", TRUE
       "UnitFlag", "Spy", "Local", TRUE
       "UnitState", "TransportDependent", "Local", FALSE
+      "MinMoveFrags", "1", "Local", TRUE
     }
 
 [actionenabler_establish_embassy]
@@ -209,6 +211,7 @@ action       = "Establish Embassy"
 actor_reqs    =
     { "type",   "name", "range", "present"
       "UnitState", "TransportDependent", "Local", FALSE
+      "MinMoveFrags", "1", "Local", TRUE
     }
 target_reqs  =
     { "type",   "name", "range", "present"
@@ -221,6 +224,7 @@ action       = "Investigate City"
 actor_reqs    =
     { "type",   "name", "range", "present"
       "UnitState", "TransportDependent", "Local", FALSE
+      "MinMoveFrags", "1", "Local", TRUE
     }
 
 [actionenabler_poison_city]
@@ -230,6 +234,7 @@ actor_reqs    =
       "UnitFlag", "Spy", "Local", TRUE
       "DiplRel", "War", "Local", TRUE
       "UnitState", "TransportDependent", "Local", FALSE
+      "MinMoveFrags", "1", "Local", TRUE
     }
 target_reqs    =
     { "type",   "name", "range"
@@ -242,6 +247,7 @@ actor_reqs    =
     { "type",   "name", "range", "present"
       "UnitFlag", "Spy", "Local", FALSE
       "UnitState", "TransportDependent", "Local", FALSE
+      "MinMoveFrags", "1", "Local", TRUE
     }
 target_reqs  =
     { "type",   "name", "range", "present"
@@ -255,6 +261,7 @@ actor_reqs    =
     { "type",   "name", "range", "present"
       "UnitFlag", "Spy", "Local", TRUE
       "UnitState", "TransportDependent", "Local", FALSE
+      "MinMoveFrags", "1", "Local", TRUE
     }
 target_reqs  =
     { "type",   "name", "range", "present"
@@ -269,6 +276,7 @@ actor_reqs    =
       "DiplRel", "Alliance", "Local", FALSE
       "DiplRel", "Team", "Local", FALSE
       "UnitState", "TransportDependent", "Local", FALSE
+      "MinMoveFrags", "1", "Local", TRUE
     }
 target_reqs  =
     { "type",   "name", "range", "present"
@@ -283,6 +291,7 @@ actor_reqs    =
       "DiplRel", "Alliance", "Local", FALSE
       "DiplRel", "Team", "Local", FALSE
       "UnitState", "TransportDependent", "Local", FALSE
+      "MinMoveFrags", "1", "Local", TRUE
     }
 target_reqs    =
     { "type",   "name", "range", "present"
@@ -299,6 +308,7 @@ actor_reqs    =
       "Unitflag", "Spy", "Local", TRUE
       "DiplRel", "War", "Local", TRUE
       "UnitState", "TransportDependent", "Local", FALSE
+      "MinMoveFrags", "1", "Local", TRUE
     }
 target_reqs    =
     { "type",   "name", "range", "present"
@@ -362,6 +372,10 @@ victory_min_points = 1000
 
 ; Lead needed relative to second best player
 victory_lead_pct   = 300
+
+; How much each culture point affects the migration
+; from/to the city.
+migration_pct = 50
 
 [calendar]
 ; Year in the beginning of the game

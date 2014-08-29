@@ -248,7 +248,7 @@ target_reqs    =
 action = "Steal Tech"
 actor_reqs    =
     { "type",   "name", "range", "present"
-      "UnitFlag", "Spy", "Local", FALSE
+      "UnitFlag", "Diplomat", "Local", FALSE
       "UnitState", "TransportDependent", "Local", FALSE
       "MinMoveFrags", "1", "Local", TRUE
     }

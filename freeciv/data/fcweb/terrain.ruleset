@@ -1151,6 +1151,19 @@ reqs           =
     { "type", "name", "range"
       "TerrainClass", "Land", "Local"
     }
+helptext = _("\
+Villages (also called \"huts\") are primitive communities spread \
+across the world at the beginning of the game. Any land unit can enter \
+a village, making the village disappear and deliver a random response. \
+If the village proves hostile, it could produce barbarians or the unit \
+entering may simply be destroyed. If they are friendly, the player \
+could receive gold, a new technology, a military unit (occasionally a \
+settler; and sometimes a unit that the player cannot yet create), or \
+even a new city.\
+"), _("\
+Later in the game, helicopters may also enter villages, but overflight \
+by other aircraft will cause the villagers to take fright and disband.\
+")
 
 [extra_farmland]
 name           = _("Farmland")

@@ -1,6 +1,6 @@
-diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
---- freeciv/server/maphand.c	2014-02-14 03:50:30.601037144 +0200
-+++ freeciv/server/maphand.c	2014-02-14 03:56:04.744259252 +0200
+diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
+--- freeciv/server/maphand.c	2014-08-30 02:19:49.888701819 +0300
++++ freeciv/server/maphand.c	2014-08-30 02:20:35.396625975 +0300
 @@ -26,6 +26,7 @@
  /* common */
  #include "base.h"
@@ -17,7 +17,7 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
  
  /* generator */
  #include "utilities.h"
-@@ -417,6 +419,20 @@
+@@ -457,6 +459,20 @@
  }
  
  /**************************************************************************
@@ -38,7 +38,7 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
    Send tile information to all the clients in dest which know and see
    the tile. If dest is NULL, sends to all clients (game.est_connections)
    which know and see tile.
-@@ -472,7 +488,7 @@
+@@ -512,7 +528,7 @@
                         ? resource_number(tile_resource(ptile))
                         : resource_count();
  
@@ -47,7 +47,7 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
  
        if (ptile->label != NULL) {
          strncpy(info.label, ptile->label, sizeof(info.label));
-@@ -504,7 +520,7 @@
+@@ -544,7 +560,7 @@
                         ? resource_number(plrtile->resource)
                         : resource_count();
  
@@ -56,7 +56,7 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
  
        /* Labels never change, so they are not subject to fog of war */
        if (ptile->label != NULL) {
-@@ -515,6 +531,8 @@
+@@ -555,6 +571,8 @@
  
        send_packet_tile_info(pconn, &info);
      } else if (send_unknown) {
@@ -65,7 +65,7 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
        info.known = TILE_UNKNOWN;
        info.continent = 0;
        info.owner = MAP_TILE_OWNER_NULL;
-@@ -524,7 +542,11 @@
+@@ -564,7 +582,11 @@
        info.terrain = terrain_count();
        info.resource = resource_count();
  
@@ -78,7 +78,7 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
  
        info.label[0] = '\0';
  
-@@ -2182,3 +2204,328 @@
+@@ -2233,3 +2255,328 @@
  
    unbuffer_shared_vision(pto);
  }
@@ -203,7 +203,7 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +  astr_add_line(&str, _("Native coordinates: (%d, %d)"),
 +                nat_x, nat_y);
 +
-+  astr_add_line(&str, _("Terrain: %s"),  tile_get_info_text(ptile, 0));
++  astr_add_line(&str, _("Terrain: %s"),  tile_get_info_text(ptile, TRUE, 0));
 +  astr_add_line(&str, _("Food/Prod/Trade: %s"),
 +		get_tile_output_text(ptile, pplayer));
 +  extra_type_by_cause_iterate(EC_HUT, pextra) {
@@ -407,9 +407,9 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +
 +}
 +
-diff -Nurd -X.diff_ignore freeciv/server/maphand.h freeciv/server/maphand.h
---- freeciv/server/maphand.h	2014-02-14 03:50:30.625037088 +0200
-+++ freeciv/server/maphand.h	2014-02-14 03:51:24.024912787 +0200
+diff -Nurd freeciv/server/maphand.h freeciv/server/maphand.h
+--- freeciv/server/maphand.h	2014-08-30 02:19:49.892701812 +0300
++++ freeciv/server/maphand.h	2014-08-30 02:20:16.972656798 +0300
 @@ -138,4 +138,6 @@
  void give_distorted_map(struct player *pfrom, struct player *pto, int good,
                          int bad, bool reveal_cities);

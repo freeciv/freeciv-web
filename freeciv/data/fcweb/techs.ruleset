@@ -60,8 +60,6 @@ options="+Freeciv-ruleset-Devel-2013.May.14"
 ; "Bonus_Tech" = player gets extra tech if reached first
 ; "Bridge"   = "Settler" unit types can build roads with "RequiresBridge" flag
 ;              over roads with "PreventsOtherRoads" flag (rivers)
-; "Population_Pollution_Inc" = Increase the pollution factor created by
-;                              population by one
 ; "Build_Airborne" = from now on can build air units (for use by AI)
 ; "Claim_Ocean"    = Player claims ocean tiles even if they are not
 ;                    adjacent to border source
@@ -112,9 +110,10 @@ graphic_alt = "-"
 name     = _("Automobile")
 req1     = "Combustion"
 req2     = "Steel"
-flags    = "Population_Pollution_Inc"
+flags    = ""
 graphic     = "a.automobile"
 graphic_alt = "-"
+helptext = _("Increases the population's contribution to pollution.")
 
 [advance_banking]
 name     = _("Banking")
@@ -356,9 +355,10 @@ graphic_alt = "-"
 name     = _("Industrialization")
 req1     = "Railroad"
 req2     = "Banking"
-flags    = "Population_Pollution_Inc"
+flags    = ""
 graphic     = "a.industrialization"
 graphic_alt = "-"
+helptext = _("Population will start contributing to pollution.")
 
 [advance_invention]
 name     = _("Invention")
@@ -446,9 +446,10 @@ graphic_alt = "-"
 name     = _("Mass Production")
 req1     = "Automobile"
 req2     = "The Corporation"
-flags    = "Population_Pollution_Inc"
+flags    = ""
 graphic     = "a.mass_production"
 graphic_alt = "-"
+helptext = _("Increases the population's contribution to pollution.")
 
 [advance_mathematics]
 name     = _("Mathematics")
@@ -562,9 +563,10 @@ graphic_alt = "-"
 name     = _("Plastics")
 req1     = "Refining"
 req2     = "Space Flight"
-flags    = "Population_Pollution_Inc"
+flags    = ""
 graphic     = "a.plastics"
 graphic_alt = "-"
+helptext = _("Increases the population's contribution to pollution.")
 
 [advance_polytheism]
 name     = _("Polytheism")

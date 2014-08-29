@@ -1093,6 +1093,43 @@ reqs	=
       "OutputType", "Luxury", "Local"
     }
 
+; No population pollution until certain techs researched
+[effect_pollu_pop_base]
+type    = "Pollu_Pop_Pct_2"
+value   = -100
+
+[effect_pollu_pop_automobile]
+type    = "Pollu_Pop_Pct_2"
+value	= 25
+reqs    =
+    { "type", "name", "range"
+      "Tech", "Automobile", "Player"
+    }
+
+[effect_pollu_pop_industrialization]
+type    = "Pollu_Pop_Pct_2"
+value	= 25
+reqs    =
+    { "type", "name", "range"
+      "Tech", "Industrialization", "Player"
+    }
+
+[effect_pollu_pop_mass_production]
+type    = "Pollu_Pop_Pct_2"
+value	= 25
+reqs    =
+    { "type", "name", "range"
+      "Tech", "Mass Production", "Player"
+    }
+
+[effect_pollu_pop_plastics]
+type    = "Pollu_Pop_Pct_2"
+value	= 25
+reqs    =
+    { "type", "name", "range"
+      "Tech", "Plastics", "Player"
+    }
+
 [effect_mass_transit]
 type    = "Pollu_Pop_Pct"
 value	= -100

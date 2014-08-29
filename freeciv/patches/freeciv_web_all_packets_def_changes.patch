@@ -1,6 +1,6 @@
 diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2014-08-27 00:41:49.438873528 +0300
-+++ freeciv/common/packets.def	2014-08-27 04:59:25.382017157 +0300
+--- freeciv/common/packets.def	2014-08-30 01:37:05.965686522 +0300
++++ freeciv/common/packets.def	2014-08-30 01:51:28.879710997 +0300
 @@ -186,16 +186,16 @@
  type SINT16             = sint16(int)
  type SINT32             = sint32(int)
@@ -96,7 +96,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  end
  
  PACKET_MAP_INFO = 17; sc, lsend
-@@ -601,6 +603,9 @@
+@@ -602,6 +604,9 @@
    SINT16 citizen_base[O_LAST];
    SINT16 usage[O_LAST];
    UINT16 food_stock, shield_stock;
@@ -106,7 +106,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  
    UINT16 trade[MAX_TRADE_ROUTES];
    UINT8 trade_value[MAX_TRADE_ROUTES];
-@@ -627,11 +632,19 @@
+@@ -628,11 +633,19 @@
    UINT8 walls;
    SINT8 city_image;
  
@@ -129,7 +129,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  end
  
  PACKET_CITY_SHORT_INFO = 32; sc, lsend, is-game-info, cancel(PACKET_CITY_INFO)
-@@ -650,7 +663,7 @@
+@@ -651,7 +664,7 @@
  
    SINT8 city_image;
  
@@ -138,7 +138,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    STRING name[MAX_LEN_NAME];
  end
  
-@@ -772,14 +785,16 @@
+@@ -773,14 +786,16 @@
    UINT8 ai_skill_level;
    UINT8 barbarian_type;
    BV_PLAYER gives_shared_vision;
@@ -157,7 +157,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    
    UINT32 multiplier[MAX_MULTIPLIERS_COUNT];
  end
-@@ -811,7 +826,7 @@
+@@ -812,7 +827,7 @@
    UINT32 diplstate_id; key
    PLAYER plr1;
    PLAYER plr2;
@@ -166,7 +166,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    UINT16 turns_left;
    UINT8 has_reason_to_cancel;
    UINT16 contact_turns_left;
-@@ -883,6 +898,8 @@
+@@ -880,6 +895,8 @@
    BOOL has_orders;
    UINT16 orders_length, orders_index;
    BOOL orders_repeat, orders_vigilant;
@@ -175,31 +175,28 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    ORDERS orders[MAX_LEN_ROUTE:orders_length];
    DIRECTION orders_dirs[MAX_LEN_ROUTE:orders_length];
    ACTIVITY orders_activities[MAX_LEN_ROUTE:orders_length];
-@@ -900,15 +917,15 @@
+@@ -897,13 +914,13 @@
    BOOL occupied, transported;
  
    UINT8 hp, activity;
 -  EXTRA activity_tgt;
 -  UNIT transported_by; /* Only valid if transported is set. */
-+  #EXTRA activity_tgt;
-+  #UNIT transported_by; /* Only valid if transported is set. */
++#  EXTRA activity_tgt;
++#  UNIT transported_by; /* Only valid if transported is set. */
  
-   /* in packet only, not in unit struct */
+-  /* in packet only, not in unit struct */
 -  UINT8 packet_use;	/* see enum unit_info_use */
 -  CITY info_city_id;	/* for UNIT_INFO_CITY_SUPPORTED
 -  			   and UNIT_INFO_CITY_PRESENT uses */
--  UINT16 serial_num;	/* a 16-bit unsigned number, never zero
--			   (not used by UNIT_INFO_IDENTITY) */
-+  #UINT8 packet_use;	/* see enum unit_info_use */
-+  #CITY info_city_id;	/* for UNIT_INFO_CITY_SUPPORTED
-+  #			   and UNIT_INFO_CITY_PRESENT uses */
-+  #UINT16 serial_num;	/* a 16-bit unsigned number, never zero
-+  #			   (not used by UNIT_INFO_IDENTITY) */
++#  /* in packet only, not in unit struct */
++#  UINT8 packet_use;	/* see enum unit_info_use */
++#  CITY info_city_id;	/* for UNIT_INFO_CITY_SUPPORTED
++#  			   and UNIT_INFO_CITY_PRESENT uses */
  end
  
  PACKET_UNIT_COMBAT_INFO = 65; sc, lsend
-@@ -1001,7 +1018,7 @@
- PACKET_UNIT_DIPLOMAT_QUERY = 82; cs, handle-per-conn, dsend
+@@ -1006,7 +1023,7 @@
+ PACKET_UNIT_DIPLOMAT_ACTION = 84; cs, dsend
    UNIT diplomat_id;
    UNIT target_id;   # city_id or unit_id
 -  SINT16 value;
@@ -207,7 +204,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    DIPLOMAT_ACTION action_type;
  end
  
-@@ -1069,25 +1086,25 @@
+@@ -1063,25 +1080,25 @@
  
  PACKET_DIPLOMACY_CREATE_CLAUSE_REQ = 99; cs, dsend
    PLAYER counterpart, giver;
@@ -237,7 +234,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    UINT32 value;
  end
  
-@@ -1115,7 +1132,7 @@
+@@ -1109,7 +1126,7 @@
  end
  
  PACKET_REPORT_REQ = 111; cs, handle-per-conn, dsend
@@ -246,7 +243,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  end
  
  /************** Connection packets **********************/
-@@ -1140,9 +1157,9 @@
+@@ -1134,9 +1151,9 @@
  
  # Information about the ping times of the connections.
  PACKET_CONN_PING_INFO = 116; sc, lsend
@@ -258,7 +255,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  end
  
  # For compatibility with older versions, this number cannot be changed.
-@@ -1305,8 +1322,9 @@
+@@ -1299,8 +1316,9 @@
  PACKET_RULESET_GAME = 141; sc, lsend
    UINT8 default_specialist;
  
@@ -270,7 +267,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  
    UINT8 veteran_levels;
    STRING veteran_name[MAX_VET_LEVELS:veteran_levels][MAX_LEN_NAME];
-@@ -1363,8 +1381,8 @@
+@@ -1357,8 +1375,8 @@
  PACKET_RULESET_GOVERNMENT = 145; sc, lsend
    GOVERNMENT id;
  
@@ -281,7 +278,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  
    STRING name[MAX_LEN_NAME];
    STRING rule_name[MAX_LEN_NAME];
-@@ -1428,9 +1446,9 @@
+@@ -1422,9 +1440,9 @@
    UINT8 groups[MAX_NUM_NATION_GROUPS:ngroups];
  
    GOVERNMENT init_government_id;
@@ -294,7 +291,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  end
  
  # Separate from PACKET_RULESET_NATION since it can change in pregame
-@@ -1708,7 +1726,7 @@
+@@ -1702,7 +1720,7 @@
    UINT16 id; key
    STRING name[MAX_LEN_NAME];
    STRING short_help[MAX_LEN_PACKET]; /* untranslated */
@@ -303,7 +300,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    UINT8 category;
  end
  
-@@ -2057,3 +2075,32 @@
+@@ -2051,3 +2069,32 @@
    SINT32 tag;
    SINT32 id;
  end

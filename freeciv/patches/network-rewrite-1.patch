@@ -1,6 +1,6 @@
-diff -Nurd -X.diff_ignore freeciv/common/connection.h freeciv/common/connection.h
---- freeciv/common/connection.h	2014-02-09 06:13:24.150632239 +0200
-+++ freeciv/common/connection.h	2014-02-09 06:13:39.138599820 +0200
+diff -Nurd -X/work/freeciv/fc_test/.diff_ignore freeciv/common/connection.h freeciv/common/connection.h
+--- freeciv/common/connection.h	2014-09-02 01:25:56.646835925 +0300
++++ freeciv/common/connection.h	2014-09-02 01:29:00.138426752 +0300
 @@ -26,6 +26,8 @@
  #include <sys/time.h>
  #endif
@@ -27,9 +27,9 @@ diff -Nurd -X.diff_ignore freeciv/common/connection.h freeciv/common/connection.
  
    double ping_time;
    
-diff -Nurd -X.diff_ignore freeciv/common/dataio.c freeciv/common/dataio.c
---- freeciv/common/dataio.c	2014-02-09 04:40:19.639707219 +0200
-+++ freeciv/common/dataio.c	2014-02-09 06:18:01.630030967 +0200
+diff -Nurd -X/work/freeciv/fc_test/.diff_ignore freeciv/common/dataio.c freeciv/common/dataio.c
+--- freeciv/common/dataio.c	2014-09-02 01:25:56.730835738 +0300
++++ freeciv/common/dataio.c	2014-09-02 01:29:00.138426752 +0300
 @@ -222,9 +222,17 @@
  }
  
@@ -108,7 +108,7 @@ diff -Nurd -X.diff_ignore freeciv/common/dataio.c freeciv/common/dataio.c
      return;
    case DIOT_LAST:
      break;
-@@ -413,11 +430,12 @@
+@@ -416,11 +433,12 @@
      }
    }
  }
@@ -122,7 +122,7 @@ diff -Nurd -X.diff_ignore freeciv/common/dataio.c freeciv/common/dataio.c
  {
    if (enough_space(dout, size)) {
      memcpy(ADD_TO_POINTER(dout->dest, dout->current), value, size);
-@@ -428,18 +446,18 @@
+@@ -431,18 +449,18 @@
  /**************************************************************************
    Insert NULL-terminated string. Conversion callback is used if set.
  **************************************************************************/
@@ -144,7 +144,7 @@ diff -Nurd -X.diff_ignore freeciv/common/dataio.c freeciv/common/dataio.c
    }
  }
  
-@@ -447,6 +465,7 @@
+@@ -450,6 +468,7 @@
    Insert tech numbers from value array as 8 bit values until there is value
    A_LAST or MAX_NUM_TECH_LIST tech numbers have been inserted.
  **************************************************************************/
@@ -152,7 +152,7 @@ diff -Nurd -X.diff_ignore freeciv/common/dataio.c freeciv/common/dataio.c
  void dio_put_tech_list(struct data_out *dout, const int *value)
  {
    int i;
-@@ -508,10 +527,105 @@
+@@ -511,10 +530,105 @@
    }
  }
  
@@ -259,7 +259,7 @@ diff -Nurd -X.diff_ignore freeciv/common/dataio.c freeciv/common/dataio.c
  {
    uint8_t x;
  
-@@ -530,9 +644,90 @@
+@@ -533,9 +647,90 @@
  }
  
  /**************************************************************************
@@ -351,7 +351,7 @@ diff -Nurd -X.diff_ignore freeciv/common/dataio.c freeciv/common/dataio.c
  {
    uint16_t x;
  
-@@ -553,6 +748,7 @@
+@@ -556,6 +751,7 @@
  /**************************************************************************
   Receive uint32 value to dest.
  **************************************************************************/
@@ -359,7 +359,7 @@ diff -Nurd -X.diff_ignore freeciv/common/dataio.c freeciv/common/dataio.c
  bool dio_get_uint32(struct data_in *din, int *dest)
  {
    uint32_t x;
-@@ -721,11 +917,12 @@
+@@ -727,11 +923,12 @@
    din->current += dest_size;
    return TRUE;
  }
@@ -373,7 +373,7 @@ diff -Nurd -X.diff_ignore freeciv/common/dataio.c freeciv/common/dataio.c
  {
    char *c;
    size_t offset, remaining;
-@@ -763,6 +960,7 @@
+@@ -769,6 +966,7 @@
    Take tech numbers until A_LAST encountered, or MAX_NUM_TECH_LIST techs
    retrieved.
  **************************************************************************/
@@ -381,7 +381,7 @@ diff -Nurd -X.diff_ignore freeciv/common/dataio.c freeciv/common/dataio.c
  bool dio_get_tech_list(struct data_in *din, int *dest)
  {
    int i;
-@@ -893,10 +1091,31 @@
+@@ -899,10 +1097,31 @@
  
    return TRUE;
  }
@@ -413,7 +413,7 @@ diff -Nurd -X.diff_ignore freeciv/common/dataio.c freeciv/common/dataio.c
  bool dio_get_uint16_vec8(struct data_in *din, int **values, int stop_value)
  {
    int count, inx;
-@@ -943,10 +1162,21 @@
+@@ -949,10 +1168,21 @@
  
    return TRUE;
  }
@@ -435,7 +435,7 @@ diff -Nurd -X.diff_ignore freeciv/common/dataio.c freeciv/common/dataio.c
  void dio_put_requirement(struct data_out *dout, const struct requirement *preq)
  {
    int type, range, value;
-@@ -960,3 +1190,233 @@
+@@ -966,3 +1196,233 @@
    dio_put_bool8(dout, survives);
    dio_put_bool8(dout, present);
  }
@@ -669,9 +669,9 @@ diff -Nurd -X.diff_ignore freeciv/common/dataio.c freeciv/common/dataio.c
 +
 +  return TRUE;
 +}
-diff -Nurd -X.diff_ignore freeciv/common/dataio.h freeciv/common/dataio.h
---- freeciv/common/dataio.h	2014-02-09 04:40:18.979708818 +0200
-+++ freeciv/common/dataio.h	2014-02-09 06:13:39.154599783 +0200
+diff -Nurd -X/work/freeciv/fc_test/.diff_ignore freeciv/common/dataio.h freeciv/common/dataio.h
+--- freeciv/common/dataio.h	2014-09-02 01:25:56.646835925 +0300
++++ freeciv/common/dataio.h	2014-09-02 01:42:20.892595751 +0300
 @@ -20,6 +20,8 @@
  #include "bitvector.h"
  #include "support.h"            /* bool type */
@@ -698,9 +698,9 @@ diff -Nurd -X.diff_ignore freeciv/common/dataio.h freeciv/common/dataio.h
  bool dio_get_uint8(struct data_in *din, int *dest)
      fc__attribute((nonnull (2)));
  bool dio_get_uint16(struct data_in *din, int *dest)
-@@ -112,11 +117,41 @@
- bool dio_get_uint16_vec8(struct data_in *din, int **values, int stop_value)
-     fc__attribute((nonnull (2)));
+@@ -118,7 +123,44 @@
+ 
+ #define DIO_GET(f, d, k, ...) dio_get_##f(d, ## __VA_ARGS__)
  
 +#else
 +
@@ -729,20 +729,23 @@ diff -Nurd -X.diff_ignore freeciv/common/dataio.h freeciv/common/dataio.h
 +
 +bool dio_get_uint8_vec8(json_t *json_packet, char *key, int **values, int stop_value);
 +bool dio_get_uint16_vec8(json_t *json_packet, char *key, int **values, int stop_value);
++
++/* Should be a function but we need some macro magic. */
++#define DIO_BV_GET(pdin, bv)                          \
++  dio_get_memory((pdin), (bv).vec, sizeof((bv).vec))
++
++#define DIO_GET(f, d, k, ...) dio_get_##f(pc->json_packet, k, ## __VA_ARGS__)
++
 +#endif
 +
- /* Should be a function but we need some macro magic. */
- #define DIO_BV_GET(pdin, bv) \
-   dio_get_memory((pdin), (bv).vec, sizeof((bv).vec))
- 
  /* puts */
 +#if 0
  void dio_put_type(struct data_out *dout, enum data_type type, int value);
  
  void dio_put_uint8(struct data_out *dout, int value);
-@@ -147,6 +182,51 @@
- #define DIO_BV_PUT(pdout, bv) \
-   dio_put_memory((pdout), (bv).vec, sizeof((bv).vec))
+@@ -151,6 +193,53 @@
+ 
+ #define DIO_PUT(f, d, k, ...) dio_put_##f(d, ## __VA_ARGS__)
  
 +#else
 +
@@ -787,14 +790,16 @@ diff -Nurd -X.diff_ignore freeciv/common/dataio.h freeciv/common/dataio.h
 +#define DIO_BV_PUT(pdout, type, bv) \
 +  dio_put_memory((pdout), type, (bv).vec, sizeof((bv).vec))
 +
++#define DIO_PUT(f, d, k, ...) dio_put_##f(d, k, ## __VA_ARGS__)
++
 +#endif
 +
  #ifdef __cplusplus
  }
  #endif /* __cplusplus */
-diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/generate_packets.py
---- freeciv/common/generate_packets.py	2014-02-09 06:13:24.158632220 +0200
-+++ freeciv/common/generate_packets.py	2014-02-09 06:13:39.170599750 +0200
+diff -Nurd -X/work/freeciv/fc_test/.diff_ignore freeciv/common/generate_packets.py freeciv/common/generate_packets.py
+--- freeciv/common/generate_packets.py	2014-09-02 01:25:56.722835756 +0300
++++ freeciv/common/generate_packets.py	2014-09-02 01:46:54.535971264 +0300
 @@ -249,7 +249,7 @@
          if self.is_array==1:
              tmp="real_packet->%(name)s[i] = %(name)s[i]"%self.__dict__
@@ -804,40 +809,18 @@ diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/gene
  
      for (i = 0; i < %(array_size_u) s; i++) {
        %(tmp)s;
-@@ -347,41 +347,36 @@
-     # Returns code which put this field.
-     def get_put(self):
-         if self.dataio_type=="bitvector":
--            return "DIO_BV_PUT(&dout, packet->%(name)s);"%self.__dict__
-+            return "DIO_BV_PUT(&dout, \"%(name)s\", packet->%(name)s);"%self.__dict__
- 
-         if self.struct_type=="float" and not self.is_array:
--            return "  dio_put_float(&dout, real_packet->%(name)s, %(float_factor)d);"%self.__dict__
-+            return "  dio_put_float(&dout, \"%(name)s\", real_packet->%(name)s, %(float_factor)d);"%self.__dict__
-         
-         if self.dataio_type in ["worklist"]:
--            return "  dio_put_%(dataio_type)s(&dout, &real_packet->%(name)s);"%self.__dict__
-+            return "  dio_put_%(dataio_type)s(&dout, \"%(name)s\", &real_packet->%(name)s);"%self.__dict__
- 
-         if self.dataio_type in ["memory"]:
--            return "  dio_put_%(dataio_type)s(&dout, &real_packet->%(name)s, %(array_size_u)s);"%self.__dict__
-+            return "  dio_put_%(dataio_type)s(&dout, \"%(name)s\", &real_packet->%(name)s, %(array_size_u)s);"%self.__dict__
-         
-         arr_types=["string","bit_string","city_map","tech_list",
-                    "unit_list","building_list"]
+@@ -363,25 +363,20 @@
          if (self.dataio_type in arr_types and self.is_array==1) or \
             (self.dataio_type not in arr_types and self.is_array==0):
--            return "  dio_put_%(dataio_type)s(&dout, real_packet->%(name)s);"%self.__dict__
+             return "  DIO_PUT(%(dataio_type)s, &dout, \"%(name)s\", real_packet->%(name)s);"%self.__dict__
 -        if self.is_struct:
 -            if self.is_array==2:
 -                c="dio_put_%(dataio_type)s(&dout, &real_packet->%(name)s[i][j]);"%self.__dict__
 -            else:
 -                c="dio_put_%(dataio_type)s(&dout, &real_packet->%(name)s[i]);"%self.__dict__
--        elif self.dataio_type=="string":
+         elif self.dataio_type=="string":
 -            c="dio_put_%(dataio_type)s(&dout, real_packet->%(name)s[i]);"%self.__dict__
-+            return "  dio_put_%(dataio_type)s(&dout, \"%(name)s\", real_packet->%(name)s);"%self.__dict__
-+        if self.dataio_type=="string":
-+            c="/* dio_put_%(dataio_type)s(&dout, \"%(name)s\", real_packet->%(name)s[i]); */"%self.__dict__
++            c="/* dio_put_%(dataio_type)s(&dout, \"%(name)s\", real_packet->%(name)s[i]);*/"%self.__dict__
              array_size_u=self.array_size1_u
 +            self.__dict__["array_size_u"] = array_size_u
  
@@ -871,12 +854,7 @@ diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/gene
      } '''%self.get_dict(vars())
          else:
              return '''
-@@ -441,36 +432,38 @@
-     # Returns code which get this field.
-     def get_get(self):
-         if self.struct_type=="float" and not self.is_array:
--            return '''if (!dio_get_float(&din, &real_packet->%(name)s, %(float_factor)d)) {
-+            return '''if (!dio_get_float(pc->json_packet, \"%(name)s\", &real_packet->%(name)s, %(float_factor)d)) {
+@@ -445,9 +436,11 @@
    RECEIVE_PACKET_FIELD_ERROR(%(name)s);
  }'''%self.__dict__
          if self.dataio_type=="bitvector":
@@ -889,94 +867,7 @@ diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/gene
 +#endif'''%self.__dict__
          if self.dataio_type in ["string","bit_string","city_map"] and \
             self.is_array!=2:
--            return '''if (!dio_get_%(dataio_type)s(&din, real_packet->%(name)s, sizeof(real_packet->%(name)s))) {
-+            return '''if (!dio_get_%(dataio_type)s(pc->json_packet, \"%(name)s\", real_packet->%(name)s, sizeof(real_packet->%(name)s))) {
-   RECEIVE_PACKET_FIELD_ERROR(%(name)s);
- }'''%self.__dict__
-         if self.is_struct and self.is_array==0:
--            return '''if (!dio_get_%(dataio_type)s(&din, &real_packet->%(name)s)) {
-+            return '''if (!dio_get_%(dataio_type)s(pc->json_packet, \"%(name)s\", &real_packet->%(name)s)) {
-   RECEIVE_PACKET_FIELD_ERROR(%(name)s);
- }'''%self.__dict__
-         if self.dataio_type in ["tech_list","unit_list","building_list"]:
--            return '''if (!dio_get_%(dataio_type)s(&din, real_packet->%(name)s)) {
-+            return '''if (!dio_get_%(dataio_type)s(pc->json_packet, \"%(name)s\", real_packet->%(name)s)) {
-   RECEIVE_PACKET_FIELD_ERROR(%(name)s);
- }'''%self.__dict__
-         if not self.is_array:
-             if self.struct_type in ["int","bool"]:
--                return '''if (!dio_get_%(dataio_type)s(&din, &real_packet->%(name)s)) {
-+                return '''if (!dio_get_%(dataio_type)s(pc->json_packet, \"%(name)s\", &real_packet->%(name)s)) {
-   RECEIVE_PACKET_FIELD_ERROR(%(name)s);
- }'''%self.__dict__
-             else:
-                 return '''{
-   int readin;
-   
--  if (!dio_get_%(dataio_type)s(&din, &readin)) {
-+  if (!dio_get_%(dataio_type)s(pc->json_packet, \"%(name)s\", &readin)) {
-     RECEIVE_PACKET_FIELD_ERROR(%(name)s);
-   }
-   real_packet->%(name)s = readin;
-@@ -478,49 +471,49 @@
- 
-         if self.is_struct:
-             if self.is_array==2:
--                c='''if (!dio_get_%(dataio_type)s(&din, &real_packet->%(name)s[i][j])) {
-+                c='''if (!dio_get_%(dataio_type)s(pc->json_packet, \"%(name)s\", &real_packet->%(name)s[i][j])) {
-       RECEIVE_PACKET_FIELD_ERROR(%(name)s);
-     }'''%self.__dict__
-             else:
--                c='''if (!dio_get_%(dataio_type)s(&din, &real_packet->%(name)s[i])) {
-+                c='''if (!dio_get_%(dataio_type)s(pc->json_packet, \"%(name)s\", &real_packet->%(name)s[i])) {
-       RECEIVE_PACKET_FIELD_ERROR(%(name)s);
-     }'''%self.__dict__
-         elif self.dataio_type=="string":
--            c='''if (!dio_get_%(dataio_type)s(&din, real_packet->%(name)s[i], sizeof(real_packet->%(name)s[i]))) {
-+            c='''if (!dio_get_%(dataio_type)s(pc->json_packet, \"%(name)s\", real_packet->%(name)s[i], sizeof(real_packet->%(name)s[i]))) {
-       RECEIVE_PACKET_FIELD_ERROR(%(name)s);
-     }'''%self.__dict__
-         elif self.struct_type=="float":
-             if self.is_array==2:
--                c='''if (!dio_get_float(&din, &real_packet->%(name)s[i][j], %(float_factor)d)) {
-+                c='''if (!dio_get_float(pc->json_packet, \"%(name)s\", &real_packet->%(name)s[i][j], %(float_factor)d)) {
-       RECEIVE_PACKET_FIELD_ERROR(%(name)s);
-     }'''%self.__dict__
-             else:
--                c='''if (!dio_get_float(&din, &real_packet->%(name)s[i], %(float_factor)d)) {
-+                c='''if (!dio_get_float(pc->json_packet, \"%(name)s\", &real_packet->%(name)s[i], %(float_factor)d)) {
-       RECEIVE_PACKET_FIELD_ERROR(%(name)s);
-     }'''%self.__dict__
-         elif self.is_array==2:
-             if self.struct_type in ["int","bool"]:
--                c='''if (!dio_get_%(dataio_type)s(&din, &real_packet->%(name)s[i][j])) {
-+                c='''if (!dio_get_%(dataio_type)s(pc->json_packet, \"%(name)s\", &real_packet->%(name)s[i][j])) {
-       RECEIVE_PACKET_FIELD_ERROR(%(name)s);
-     }'''%self.__dict__
-             else:
-                 c='''{
-       int readin;
-   
--      if (!dio_get_%(dataio_type)s(&din, &readin)) {
-+      if (!dio_get_%(dataio_type)s(pc->json_packet, \"%(name)s\", &readin)) {
-         RECEIVE_PACKET_FIELD_ERROR(%(name)s);
-       }
-       real_packet->%(name)s[i][j] = readin;
-     }'''%self.__dict__
-         elif self.struct_type in ["int","bool"]:
--            c='''if (!dio_get_%(dataio_type)s(&din, &real_packet->%(name)s[i])) {
-+            c='''if (!dio_get_%(dataio_type)s(pc->json_packet, \"%(name)s\", &real_packet->%(name)s[i])) {
-       RECEIVE_PACKET_FIELD_ERROR(%(name)s);
-     }'''%self.__dict__
-         else:
-             c='''{
-       int readin;
-   
--      if (!dio_get_%(dataio_type)s(&din, &readin)) {
-+      if (!dio_get_%(dataio_type)s(pc->json_packet, \"%(name)s\", &readin)) {
-         RECEIVE_PACKET_FIELD_ERROR(%(name)s);
-       }
-       real_packet->%(name)s[i] = readin;
+             return '''if (!DIO_GET(%(dataio_type)s, &din, \"%(name)s\", real_packet->%(name)s, sizeof(real_packet->%(name)s))) {
 @@ -542,10 +535,10 @@
              else:
                  extra=""
@@ -991,24 +882,6 @@ diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/gene
              elif self.is_array==2 and self.dataio_type!="string":
                  return '''
  {
-@@ -571,7 +564,7 @@
- for (;;) {
-   int i;
- 
--  if (!dio_get_uint8(&din, &i)) {
-+  if (!dio_get_uint8(pc->json_packet, \"%(name)s\", &i)) {
-     RECEIVE_PACKET_FIELD_ERROR(%(name)s);
-   }
-   if (i == 255) {
-@@ -880,7 +873,7 @@
- '''%self.get_dict(vars())
- 
-         body=body+'''
--  DIO_BV_PUT(&dout, fields);
-+  DIO_BV_PUT(&dout, \"fields\", fields);
- '''
- 
-         for field in self.key_fields:
 @@ -921,7 +914,7 @@
    struct %(packet_name)s *old;
    struct genhash **hash = pc->phs.received + %(type)s;
@@ -1018,9 +891,9 @@ diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/gene
              body1=""
              for field in self.key_fields:
                  body1=body1+prefix("  ",field.get_get())+"\n"
-diff -Nurd -X.diff_ignore freeciv/common/packets.c freeciv/common/packets.c
---- freeciv/common/packets.c	2014-02-09 04:40:19.227708218 +0200
-+++ freeciv/common/packets.c	2014-02-09 06:13:39.174599741 +0200
+diff -Nurd -X/work/freeciv/fc_test/.diff_ignore freeciv/common/packets.c freeciv/common/packets.c
+--- freeciv/common/packets.c	2014-09-02 01:25:56.646835925 +0300
++++ freeciv/common/packets.c	2014-09-02 01:29:00.142426743 +0300
 @@ -43,6 +43,8 @@
  #include "events.h"
  #include "map.h"
@@ -1075,7 +948,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.c freeciv/common/packets.c
  
    log_packet("got packet type=(%s)%d len=%d from %s",
               packet_name(utype.type), utype.itype, whole_packet_len,
-@@ -561,9 +594,9 @@
+@@ -561,9 +590,9 @@
  {
    struct data_in din;
    int len;
@@ -1087,7 +960,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.c freeciv/common/packets.c
    memmove(buffer->data, buffer->data + len, buffer->ndata - len);
    buffer->ndata -= len;
    log_debug("remove_packet_from_buffer: remove %d; remaining %d",
-@@ -624,6 +657,7 @@
+@@ -624,6 +653,7 @@
  /**************************************************************************
    Sanity check packet
  **************************************************************************/
@@ -1095,7 +968,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.c freeciv/common/packets.c
  bool packet_check(struct data_in *din, struct connection *pc)
  {
    size_t rem = dio_input_remaining(din);
-@@ -644,6 +678,7 @@
+@@ -644,6 +674,7 @@
    }
    return TRUE;
  }
@@ -1103,9 +976,9 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.c freeciv/common/packets.c
  
  /**************************************************************************
   Updates pplayer->attribute_block according to the given packet.
-diff -Nurd -X.diff_ignore freeciv/common/packets.h freeciv/common/packets.h
---- freeciv/common/packets.h	2014-02-09 04:40:18.983708808 +0200
-+++ freeciv/common/packets.h	2014-02-09 06:13:39.182599723 +0200
+diff -Nurd -X/work/freeciv/fc_test/.diff_ignore freeciv/common/packets.h freeciv/common/packets.h
+--- freeciv/common/packets.h	2014-09-02 01:25:56.646835925 +0300
++++ freeciv/common/packets.h	2014-09-02 01:29:00.142426743 +0300
 @@ -34,6 +34,7 @@
  #include "traderoutes.h"
  #include "unittype.h"
@@ -1114,7 +987,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.h freeciv/common/packets.h
  
  
  /* Used in network protocol. */
-@@ -112,42 +113,36 @@
+@@ -113,42 +114,36 @@
  
  #define SEND_PACKET_START(packet_type) \
    unsigned char buffer[MAX_LEN_PACKET]; \
@@ -1171,7 +1044,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.h freeciv/common/packets.h
    result = fc_malloc(sizeof(*result)); \
    *result = packet_buf; \
    return result;
-@@ -158,7 +153,6 @@
+@@ -159,7 +154,6 @@
  
  int send_packet_data(struct connection *pc, unsigned char *data, int len,
                       enum packet_type packet_type);
@@ -1179,9 +1052,9 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.h freeciv/common/packets.h
  
  /* Utilities to exchange strings and string vectors. */
  #define PACKET_STRVEC_SEPARATOR '\3'
-diff -Nurd -X.diff_ignore freeciv/server/handchat.c freeciv/server/handchat.c
---- freeciv/server/handchat.c	2014-02-09 04:40:20.971703996 +0200
-+++ freeciv/server/handchat.c	2014-02-09 06:13:39.202599680 +0200
+diff -Nurd -X/work/freeciv/fc_test/.diff_ignore freeciv/server/handchat.c freeciv/server/handchat.c
+--- freeciv/server/handchat.c	2014-09-02 01:25:56.970835202 +0300
++++ freeciv/server/handchat.c	2014-09-02 01:29:00.142426743 +0300
 @@ -19,7 +19,10 @@
  #include <stdio.h>
  #include <string.h>
@@ -1193,7 +1066,7 @@ diff -Nurd -X.diff_ignore freeciv/server/handchat.c freeciv/server/handchat.c
  #include "fcintl.h"
  #include "log.h"
  #include "shared.h"
-@@ -319,16 +322,19 @@
+@@ -319,14 +322,17 @@
  void handle_chat_msg_req(struct connection *pconn, const char *message)
  {
    char real_message[MAX_LEN_MSG], *cp;
@@ -1207,19 +1080,16 @@ diff -Nurd -X.diff_ignore freeciv/server/handchat.c freeciv/server/handchat.c
  
    /* This loop to prevent players from sending multiple lines which can
     * be abused */
--  for (cp = real_message; *cp != '\0'; cp++) {
+   for (cp = real_message; *cp != '\0'; cp++) {
 -    if (*cp == '\n' || *cp == '\r') {
-+  for (cp = real_message; *cp != '\0'; cp++) {
 +    if (*cp == '\n' || *cp == '\r' || *cp == '<' || *cp == '>' || *cp == '"' || *cp == '\'') {
        *cp = '\0';
        break;
      }
-   }
- 
-diff -Nurd -X.diff_ignore freeciv/server/plrhand.c freeciv/server/plrhand.c
---- freeciv/server/plrhand.c	2014-02-09 06:02:23.528112369 +0200
-+++ freeciv/server/plrhand.c	2014-02-09 06:13:39.214599654 +0200
-@@ -1190,12 +1190,12 @@
+diff -Nurd -X/work/freeciv/fc_test/.diff_ignore freeciv/server/plrhand.c freeciv/server/plrhand.c
+--- freeciv/server/plrhand.c	2014-09-02 01:25:56.970835202 +0300
++++ freeciv/server/plrhand.c	2014-09-02 01:29:00.142426743 +0300
+@@ -1226,12 +1226,12 @@
        || (receiver
            && player_diplstate_get(receiver, plr1)->contact_turns_left > 0)
        || (receiver && receiver == plr2)) {
@@ -1234,10 +1104,10 @@ diff -Nurd -X.diff_ignore freeciv/server/plrhand.c freeciv/server/plrhand.c
      packet_ds->turns_left           = 0;
      packet_ds->has_reason_to_cancel = 0;
      packet_ds->contact_turns_left   = 0;
-diff -Nurd -X.diff_ignore freeciv/server/ruleset.c freeciv/server/ruleset.c
---- freeciv/server/ruleset.c	2014-02-09 06:13:24.166632204 +0200
-+++ freeciv/server/ruleset.c	2014-02-09 06:13:39.218599645 +0200
-@@ -5917,6 +5917,8 @@
+diff -Nurd -X/work/freeciv/fc_test/.diff_ignore freeciv/server/ruleset.c freeciv/server/ruleset.c
+--- freeciv/server/ruleset.c	2014-09-02 01:25:56.970835202 +0300
++++ freeciv/server/ruleset.c	2014-09-02 01:29:00.142426743 +0300
+@@ -6126,6 +6126,8 @@
      packet.ngroups = i;
  
      packet.init_government_id = government_number(n->init_government);
@@ -1246,7 +1116,7 @@ diff -Nurd -X.diff_ignore freeciv/server/ruleset.c freeciv/server/ruleset.c
      fc_assert(ARRAY_SIZE(packet.init_techs) == ARRAY_SIZE(n->init_techs));
      for (i = 0; i < MAX_NUM_TECH_LIST; i++) {
        packet.init_techs[i] = n->init_techs[i];
-@@ -5932,6 +5934,7 @@
+@@ -6141,6 +6143,7 @@
        /* Impr_type_id to int */
        packet.init_buildings[i] = n->init_buildings[i];
      }
@@ -1254,9 +1124,9 @@ diff -Nurd -X.diff_ignore freeciv/server/ruleset.c freeciv/server/ruleset.c
  
      lsend_packet_ruleset_nation(dest, &packet);
    } nations_iterate_end;
-diff -Nurd -X.diff_ignore freeciv/server/sernet.c freeciv/server/sernet.c
---- freeciv/server/sernet.c	2014-02-09 04:40:20.723704596 +0200
-+++ freeciv/server/sernet.c	2014-02-09 06:13:39.218599645 +0200
+diff -Nurd -X/work/freeciv/fc_test/.diff_ignore freeciv/server/sernet.c freeciv/server/sernet.c
+--- freeciv/server/sernet.c	2014-09-02 01:25:56.894835372 +0300
++++ freeciv/server/sernet.c	2014-09-02 01:29:00.142426743 +0300
 @@ -129,7 +129,7 @@
  static void send_ping_times_to_all(void);
  
@@ -1266,7 +1136,7 @@ diff -Nurd -X.diff_ignore freeciv/server/sernet.c freeciv/server/sernet.c
  
  static bool no_input = FALSE;
  
-@@ -1361,9 +1361,6 @@
+@@ -1401,9 +1401,6 @@
  ********************************************************************/
  static void get_lanserver_announcement(void)
  {
@@ -1276,7 +1146,7 @@ diff -Nurd -X.diff_ignore freeciv/server/sernet.c freeciv/server/sernet.c
    fd_set readfs, exceptfs;
    struct timeval tv;
  
-@@ -1388,7 +1385,7 @@
+@@ -1432,7 +1429,7 @@
       * Generally we just want to run select again. */
    }
  
@@ -1285,7 +1155,7 @@ diff -Nurd -X.diff_ignore freeciv/server/sernet.c freeciv/server/sernet.c
      if (0 < recvfrom(socklan, msgbuf, sizeof(msgbuf), 0, NULL, NULL)) {
        dio_input_init(&din, msgbuf, 1);
        dio_get_uint8(&din, &type);
-@@ -1399,13 +1396,14 @@
+@@ -1443,13 +1440,14 @@
          log_debug("Received invalid request for server LAN announcement.");
        }
      }
@@ -1301,7 +1171,7 @@ diff -Nurd -X.diff_ignore freeciv/server/sernet.c freeciv/server/sernet.c
  static void send_lanserver_response(void)
  {
  #ifndef HAVE_WINSOCK
-@@ -1498,14 +1496,14 @@
+@@ -1542,14 +1540,14 @@
                srvarg.port );
  
    dio_output_init(&dout, buffer, sizeof(buffer));
@@ -1324,39 +1194,8 @@ diff -Nurd -X.diff_ignore freeciv/server/sernet.c freeciv/server/sernet.c
    size = dio_output_used(&dout);
  
    /* Sending packet to client with the information gathered above. */
-@@ -1518,3 +1516,4 @@
+@@ -1562,3 +1560,4 @@
  
    fc_closesocket(socksend);
  }
 +#endif /* 0 */
-diff -Nurd -X.diff_ignore freeciv/server/srv_main.c freeciv/server/srv_main.c
---- freeciv/server/srv_main.c	2014-02-09 05:59:31.576506147 +0200
-+++ freeciv/server/srv_main.c	2014-02-09 06:13:39.230599621 +0200
-@@ -1570,21 +1570,21 @@
-                conn_description(pconn));
- 
-     dio_output_init(&dout, buffer, sizeof(buffer));
--    dio_put_uint16(&dout, 0);
-+    dio_put_uint16(&dout, "msg", 0);
- 
-     /* 1 == PACKET_LOGIN_REPLY in the old client */
--    dio_put_uint8(&dout, 1);
-+    dio_put_uint8(&dout, "msg", 1);
- 
--    dio_put_bool32(&dout, FALSE);
--    dio_put_string(&dout, _("Your client is too old. To use this server, "
-+    dio_put_bool32(&dout, "msg", FALSE);
-+    dio_put_string(&dout, "msg", _("Your client is too old. To use this server, "
- 			    "please upgrade your client to a "
- 			    "Freeciv 2.2 or later."));
--    dio_put_string(&dout, "");
-+    dio_put_string(&dout, "msg", "");
- 
-     {
-       size_t size = dio_output_used(&dout);
-       dio_output_rewind(&dout);
--      dio_put_uint16(&dout, size);
-+      dio_put_uint16(&dout, "size",  size);
- 
-       /* 
-        * Use send_connection_data instead of send_packet_data to avoid

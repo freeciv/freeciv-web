@@ -267,6 +267,7 @@ function pregame_settings()
 	  "<option value='random'>Fully random height</option>" +
 	  "<option value='fractal'>Pseudo-fractal height</option>" +
           "<option value='island'>Island-based</option>" +
+          "<option value='fair'>Fair islands</option>" +
 	  "</select></td></tr>"+
 	  "<tr title='HTTPS and Secure WebSockets is more secure and reliable, while HTTP and WebSockets has better performance. HTTPS is default.'><td>HTTPS and Secure WebSockets</td>" +
 	  "<td><input type='checkbox' name='https_setting' id='https_setting' checked>HTTPS enabled</td></tr>" + 

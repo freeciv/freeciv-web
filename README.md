@@ -142,7 +142,7 @@ manual installation procedure to setup Freeciv-web:
 
 5. Build and configure freeciv-web. 
 
-   - Run setup_links.sh and sync.sh in freeciv-img-extract 
+   - Run setup_links.sh and sync.sh in the scripts/freeciv-img-extract directory.
    - Run sync-js-hand.sh in the scripts/ directory.
    - Copy freeciv-web/src/main/webapp/WEB-INF/resin-web.xml.dist as resin-web.xml
      and update the values for your MySQL database.

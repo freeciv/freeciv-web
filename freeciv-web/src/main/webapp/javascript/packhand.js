@@ -491,7 +491,7 @@ function handle_unit_combat_info(packet)
   }
 }
 
-function handle_unit_diplomat_answer(packet) 
+function handle_unit_action_answer(packet) 
 {
   var diplomat_id = packet['diplomat_id'];  
   var target_id = packet['target_id'];
@@ -793,11 +793,6 @@ function handle_ruleset_terrain_flag(packet)
   /* TODO: implement */
 }
 
-function handle_tech_gained(packet) 
-{
-  show_tech_gained_dialog(packet['tech']);
-}
-
 function handle_scenario_info(packet) 
 {
   /* TODO: implement*/
@@ -935,6 +930,9 @@ function handle_endgame_player(packet)
 
 function handle_research_info(packet)
 {
+  var old_inventions = null;
+  if (research_data[packet['id']] != null) old_inventions = research_data[packet['id']]['inventions'];
+
   research_data[packet['id']] = packet;
 
   if (game_info['team_pooled_research']) {
@@ -950,6 +948,16 @@ function handle_research_info(packet)
     pplayer = $.extend(pplayer, packet)
     delete pplayer['id'];
   }
+
+  if (!observing && old_inventions != null && client.conn.playing['playerno'] == packet['id']) {
+    for (var i = 0; i < packet['inventions'].length; i++) {
+      if (packet['inventions'][i] != old_inventions[i]) {
+        show_tech_gained_dialog(i);
+	break;
+      }
+    }
+  }
+
   if (is_tech_tree_init && tech_dialog_active) update_tech_screen();
 }
 

@@ -186,11 +186,11 @@ tired_attack = FALSE
 ; satisfied.
 ;
 ; */ <-- avoid gettext warnings
-
 [actionenabler_sabotage_city]
 action = "Sabotage City"
 actor_reqs    =
     { "type",   "name", "range", "present"
+      "UnitFlag", "Diplomat", "Local", TRUE
       "DiplRel", "War", "Local", TRUE
       "UnitFlag", "Spy", "Local", FALSE
       "UnitState", "TransportDependent", "Local", FALSE
@@ -248,6 +248,7 @@ target_reqs    =
 action = "Steal Tech"
 actor_reqs    =
     { "type",   "name", "range", "present"
+      "UnitFlag", "Diplomat", "Local", TRUE
       "UnitFlag", "Spy", "Local", FALSE
       "UnitState", "TransportDependent", "Local", FALSE
       "MinMoveFrags", "1", "Local", TRUE
@@ -310,7 +311,6 @@ target_reqs    =
 action = "Sabotage Unit"
 actor_reqs    =
     { "type",   "name", "range", "present"
-      "UnitFlag", "Diplomat", "Local", TRUE
       "Unitflag", "Spy", "Local", TRUE
       "DiplRel", "War", "Local", TRUE
       "UnitState", "TransportDependent", "Local", FALSE
@@ -319,6 +319,7 @@ actor_reqs    =
 target_reqs    =
     { "type",   "name", "range", "present"
       "CityTile", "Center", "Local", FALSE
+      "MinHitPoints", "2", "Local", TRUE
     }
 
 [borders]

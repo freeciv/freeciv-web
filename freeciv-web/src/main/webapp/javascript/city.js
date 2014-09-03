@@ -746,7 +746,7 @@ function city_can_buy(pcity)
 {
   var improvement = improvements[pcity['production_value']];
 
-  return (!pcity['did_buy'] && pcity['turn_founded'] != game_info['turn']
+  return (!pcity['did_buy'] && pcity['turn_founded'] != game_info['turn']
           && improvement['name'] != "Coinage");
 
 }

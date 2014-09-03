@@ -10,4 +10,5 @@ set scorelog disabled
 set size 4
 set landm 50
 set minp 2
+set barb huts_only
 metamessage New Freeciv-web Multiplayer Game

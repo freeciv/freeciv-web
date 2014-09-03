@@ -10,4 +10,5 @@ set scorelog disabled
 set size 4
 set landm 50
 set aifill 8
+set barb huts_only
 metamessage New Freeciv-web Singleplayer Game

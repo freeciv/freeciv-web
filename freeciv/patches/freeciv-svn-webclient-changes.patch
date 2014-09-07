@@ -1,6 +1,6 @@
 diff -Nurd -X.diff_ignore freeciv/common/connection.c freeciv/common/connection.c
---- freeciv/common/connection.c	2014-02-09 04:40:19.419707752 +0200
-+++ freeciv/common/connection.c	2014-02-09 06:02:29.328099079 +0200
+--- freeciv/common/connection.c	2014-09-07 06:49:02.026566151 +0300
++++ freeciv/common/connection.c	2014-09-07 06:49:38.902483845 +0300
 @@ -240,6 +240,7 @@
  /**************************************************************************
    flush'em
@@ -38,21 +38,9 @@ diff -Nurd -X.diff_ignore freeciv/common/connection.c freeciv/common/connection.
      flush_connection_send_buffer_all(pconn);
      if (!add_connection_data(pconn, data, len)) {
        log_verbose("cut connection %s due to huge send buffer (2)",
-diff -Nurd -X.diff_ignore freeciv/common/connection.h freeciv/common/connection.h
---- freeciv/common/connection.h	2014-02-09 04:40:19.135708440 +0200
-+++ freeciv/common/connection.h	2014-02-09 06:02:29.328099079 +0200
-@@ -26,7 +26,7 @@
- #include <sys/time.h>
- #endif
- 
--#define USE_COMPRESSION
-+//#define USE_COMPRESSION   /* webclient doesn't like compression*/
- 
- /**************************************************************************
-   The connection struct and related stuff.
 diff -Nurd -X.diff_ignore freeciv/common/featured_text.c freeciv/common/featured_text.c
---- freeciv/common/featured_text.c	2014-02-09 05:59:31.560506184 +0200
-+++ freeciv/common/featured_text.c	2014-02-09 06:02:29.328099079 +0200
+--- freeciv/common/featured_text.c	2014-09-07 06:49:02.010566187 +0300
++++ freeciv/common/featured_text.c	2014-09-07 06:49:38.902483845 +0300
 @@ -33,8 +33,8 @@
  
  #include "featured_text.h"
@@ -92,8 +80,8 @@ diff -Nurd -X.diff_ignore freeciv/common/featured_text.c freeciv/common/featured
        }
        if (ptag->color.background[0] != '\0') {
 diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/generate_packets.py
---- freeciv/common/generate_packets.py	2014-02-09 04:40:19.595707327 +0200
-+++ freeciv/common/generate_packets.py	2014-02-09 06:02:29.328099079 +0200
+--- freeciv/common/generate_packets.py	2014-09-07 06:49:02.030566142 +0300
++++ freeciv/common/generate_packets.py	2014-09-07 06:49:38.902483845 +0300
 @@ -27,7 +27,7 @@
  
  ### The following parameters CHANGE the protocol. You have been warned.
@@ -104,9 +92,9 @@ diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/gene
  ################# END OF PARAMETERS ####################
  
 diff -Nurd -X.diff_ignore freeciv/server/ruleset.c freeciv/server/ruleset.c
---- freeciv/server/ruleset.c	2014-02-09 05:30:38.812467260 +0200
-+++ freeciv/server/ruleset.c	2014-02-09 06:02:29.328099079 +0200
-@@ -5992,6 +5992,8 @@
+--- freeciv/server/ruleset.c	2014-09-07 06:49:02.214565731 +0300
++++ freeciv/server/ruleset.c	2014-09-07 06:49:38.922483800 +0300
+@@ -6272,6 +6272,8 @@
      misc_p.move_bonus[i] = vlevel->move_bonus;
    }
  
@@ -115,7 +103,7 @@ diff -Nurd -X.diff_ignore freeciv/server/ruleset.c freeciv/server/ruleset.c
    fc_assert(sizeof(misc_p.global_init_techs)
              == sizeof(game.rgame.global_init_techs));
    fc_assert(ARRAY_SIZE(misc_p.global_init_techs)
-@@ -6006,6 +6008,7 @@
+@@ -6286,6 +6288,7 @@
      misc_p.global_init_buildings[i] =
        game.rgame.global_init_buildings[i];
    }
@@ -124,9 +112,9 @@ diff -Nurd -X.diff_ignore freeciv/server/ruleset.c freeciv/server/ruleset.c
    misc_p.default_specialist = DEFAULT_SPECIALIST;
  
 diff -Nurd -X.diff_ignore freeciv/server/settings.c freeciv/server/settings.c
---- freeciv/server/settings.c	2014-02-09 04:40:20.643704789 +0200
-+++ freeciv/server/settings.c	2014-02-09 06:02:29.328099079 +0200
-@@ -4137,7 +4137,7 @@
+--- freeciv/server/settings.c	2014-09-07 06:49:02.130565918 +0300
++++ freeciv/server/settings.c	2014-09-07 06:49:38.922483800 +0300
+@@ -4364,7 +4364,7 @@
      sz_strlcpy(setting.name, setting_name(pset));
      /* Send untranslated strings to client */
      sz_strlcpy(setting.short_help, setting_short_help(pset));

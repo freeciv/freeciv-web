@@ -30,7 +30,7 @@ mapview_slide['dx'] = 0;
 mapview_slide['dy'] = 0;
 mapview_slide['i'] = 0;
 mapview_slide['max'] = 100; 
-mapview_slide['slide_time'] = 600;
+mapview_slide['slide_time'] = 700;
 
 var height_offset = 67;
 var width_offset = 10;
@@ -171,12 +171,10 @@ function setup_window_size ()
   $("#players_tab").children().html("Nations")
   $("#tech_tab").children().html("Research")
   $("#civ_tab").children().html("Government")
-  $("#chat_tab").children().html("Chat")
 
   $("#opt_tab").show();
   $("#players_tab").show(); 
   $("#freeciv_logo").show();
-  $("#chat_tab").show();
   $("#tabs-hel").hide();
 
 
@@ -195,14 +193,13 @@ function setup_window_size ()
     if (i == 8) $("#players_tab").children().html("N")
     if (i == 9) $("#tech_tab").children().html("R")
     if (i == 10) $("#civ_tab").children().html("G")
-    if (i == 11) $("#chat_tab").children().html("C")
-    if (i == 12) $("#map_tab").children().html("M")
+    if (i == 11) $("#map_tab").children().html("M")
 
-    if (i == 13) $("#opt_tab").hide();
-    if (i == 14) $("#tabs-hel").hide();
-    if (i == 15) $("#players_tab").hide(); 
+    if (i == 12) $("#opt_tab").hide();
+    if (i == 13) $("#tabs-hel").hide();
+    if (i == 14) $("#players_tab").hide(); 
 
-    if (i == 16) break;
+    if (i == 15) break;
 
     i++;
   }
@@ -214,20 +211,12 @@ function setup_window_size ()
     $(".unit_dialog").hide();
     $(".ui-dialog-titlebar").hide();
 
-    $(".chatbox_dialog").hide();
-    $("#game_chatbox_panel").detach().prependTo("#tabs-chat");
-    chatbox_resized(); 
-
     overview_active = false;
     unitpanel_active = false;
     $("#game_unit_orders_default").css("bottom", "3px");
     $("#game_status_panel").css("font-size", "0.8em");
     $(".order_button").css("padding-right", "5px");
-    $("#chat_tab").show();
     $("#freeciv_logo").height(22);
-  } else {
-    $("#chat_tab").hide();
-
   }
 
   if (overview_active) init_overview();

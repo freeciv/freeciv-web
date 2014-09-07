@@ -110,7 +110,8 @@ function mapview_touch_move(e)
   check_mouse_drag_unit(mouse_x, mouse_y);
 
   if (!goto_active) {
-    set_mapview_origin(mapview['gui_x0'] + diff_x, mapview['gui_y0'] + diff_y);
+    mapview['gui_x0'] += diff_x;
+    mapview['gui_y0'] += diff_y;
   }
 
   if (client.conn.playing == null) return;
@@ -221,7 +222,16 @@ function release_right_button(mouse_x, mouse_y)
 **************************************************************************/
 function recenter_button_pressed(canvas_x, canvas_y)
 {
+  var map_scroll_border = 8;
   var ptile = canvas_pos_to_tile(canvas_x, canvas_y);
+
+  /* Prevent the user from scrolling outside the map. */
+  if (ptile != null && ptile['y'] > (map['ysize'] - map_scroll_border)) {
+    ptile = map_pos_to_tile(ptile['x'], map['ysize'] - map_scroll_border);
+  }
+  if (ptile != null && ptile['y'] < map_scroll_border) {
+    ptile = map_pos_to_tile(ptile['x'], map_scroll_border);
+  }
 
   if (can_client_change_view() && ptile != null) {
     /* FIXME: Some actions here will need to check can_client_issue_orders.

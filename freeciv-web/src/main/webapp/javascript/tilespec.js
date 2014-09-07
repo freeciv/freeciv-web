@@ -869,7 +869,7 @@ function fill_fog_sprite_array(ptile, pedge, pcorner)
     var value = -1;
 
     if (pcorner['tile'][i] == null) {
-	  value = fogged;
+	  value = unknown;
     } else {
 	  switch (tile_get_known(pcorner['tile'][i])) {
 	    case TILE_KNOWN_SEEN:

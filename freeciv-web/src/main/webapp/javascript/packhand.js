@@ -949,7 +949,7 @@ function handle_research_info(packet)
     delete pplayer['id'];
   }
 
-  if (!observing && old_inventions != null && client.conn.playing['playerno'] == packet['id']) {
+  if (!client_is_observer() && old_inventions != null && client.conn.playing['playerno'] == packet['id']) {
     for (var i = 0; i < packet['inventions'].length; i++) {
       if (packet['inventions'][i] != old_inventions[i]) {
         show_tech_gained_dialog(i);

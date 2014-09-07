@@ -64,9 +64,11 @@ function update_nation_screen()
     nation_list_html += "<td>Team " + pplayer['team'] + "</td>";
     var pstate = " ";
     if (pplayer['phase_done'] && !pplayer['ai']) {
-      pstate = "done";
+      pstate = "Done";
+    } else if (!pplayer['ai'] && pplayer['nturns_idle'] > 1) {
+      pstate += "Idle for " + pplayer['nturns_idle'] + " turns";
     } else if (!pplayer['phase_done'] && !pplayer['ai']) {
-      pstate = "moving";
+      pstate = "Moving";
     }
     nation_list_html += "<td>" + pstate + "</td>";
     nation_list_html += "</tr>";

@@ -91,8 +91,6 @@ function set_mapview_origin(gui_x0, gui_y0)
   gui_x0 = r['gui_x'];
   gui_y0 = r['gui_y'];
   
-  /* TODO: add support for mapview scrolling here. */
-  
   base_set_mapview_origin(gui_x0, gui_y0);
   
 }
@@ -508,12 +506,12 @@ function update_map_canvas_full()
     // If city dialog is open, don't redraw default mapview.
     if (active_city != null) return;
     
-    if (!mapview_slide['active']) { 
+    if (mapview_slide['active']) { 
+      update_map_slide();
+    } else {
       update_map_canvas(0, 0, mapview['store_width'], mapview['store_height']);
       update_goto_path_lines(); 
       check_request_goto_path();
-    } else {
-      update_map_slide();
     }
 
     last_redraw_time = new Date().getTime();
@@ -590,7 +588,8 @@ function enable_mapview_slide(ptile)
   mapview_slide['i'] = mapview_slide['max'];
   mapview_slide['start'] = new Date().getTime();
 
-  if (Math.abs(dx) > mapview['width'] || Math.abs(dy) > mapview['height']) {
+  if ((dx == 0 && dy == 0) || mapview_slide['active'] 
+      || Math.abs(dx) > mapview['width'] || Math.abs(dy) > mapview['height']) {
     // sliding across map edge: don't slide, just go there directly.
     mapview_slide['active'] = false;
     update_map_canvas_full();
@@ -607,15 +606,11 @@ function enable_mapview_slide(ptile)
   mapview_canvas = buffer_canvas;
   mapview_canvas_ctx = buffer_canvas_ctx;
 
-  if (dx == 0 && dy == 0) {
-    mapview_slide['active'] = false;
-    return;
-  } else if (dx >= 0 && dy <= 0) {
+  if (dx >= 0 && dy <= 0) {
     mapview['gui_y0'] -= Math.abs(dy);
   } else if (dx >= 0 && dy >= 0) {
   } else if (dx <= 0 && dy >= 0) {
     mapview['gui_x0'] -= Math.abs(dx);
-
   }  else if (dx <= 0 && dy <= 0) {
     mapview['gui_x0'] -= Math.abs(dx);
     mapview['gui_y0'] -= Math.abs(dy);
@@ -627,13 +622,35 @@ function enable_mapview_slide(ptile)
   mapview['height'] = new_height;
 
   /* redraw mapview on large back buffer. */
-  update_map_canvas(0, 0, mapview['store_width'], mapview['store_height']);
+  if (dx >= 0 && dy >= 0) {
+    update_map_canvas(old_width, 0, dx, new_height);
+    update_map_canvas(0, old_height, old_width, dy);
+  } else if (dx <= 0 && dy <= 0) {
+    update_map_canvas(0, 0, Math.abs(dx), new_height);
+    update_map_canvas(Math.abs(dx), 0, old_width, Math.abs(dy));
+  } else if (dx <= 0 && dy >= 0) {
+    update_map_canvas(0, 0, Math.abs(dx), new_height);
+    update_map_canvas(Math.abs(dx), old_height, old_width, Math.abs(dy));
+  } else if (dx >= 0 && dy <= 0) {
+    update_map_canvas(0, 0, new_width, Math.abs(dy));
+    update_map_canvas(old_width, Math.abs(dy), Math.abs(dx), old_height);
+  }
+
   update_goto_path_lines(); 
 
   /* restore default mapview. */
   mapview_canvas = document.getElementById('canvas');
   mapview_canvas_ctx = mapview_canvas.getContext("2d");
 
+  if (dx >= 0 && dy >= 0) {
+    buffer_canvas_ctx.drawImage(mapview_canvas, 0, 0, old_width, old_height, 0, 0, old_width, old_height); 
+  } else if (dx <= 0 && dy <= 0) {
+    buffer_canvas_ctx.drawImage(mapview_canvas, 0, 0, old_width, old_height, Math.abs(dx), Math.abs(dy), old_width, old_height); 
+  } else if (dx <= 0 && dy >= 0) {
+    buffer_canvas_ctx.drawImage(mapview_canvas, 0, 0, old_width, old_height, Math.abs(dx), 0, old_width, old_height); 
+  } else if (dx >= 0 && dy <= 0) {
+    buffer_canvas_ctx.drawImage(mapview_canvas, 0, 0, old_width, old_height, 0, Math.abs(dy), old_width, old_height); 
+  }
   mapview['store_width'] = old_width;
   mapview['store_height'] = old_height;
   mapview['width'] = old_width;

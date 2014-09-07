@@ -11,7 +11,6 @@
 				<li id="players_tab"><a href="#tabs-nat">Nations</a></li>
 				<li style="display: none;"><a href="#tabs-cit">City</a></li>
 				<li id="opt_tab"><a href="#tabs-opt">Options</a></li>
-				<li id="chat_tab" style="display:none;"><a href="#tabs-chat">Chat</a></li>
 				<li id="hel_tab"><a href="#tabs-hel">Manual</a></li>
 
 

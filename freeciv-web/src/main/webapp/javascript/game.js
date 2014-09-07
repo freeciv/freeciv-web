@@ -69,11 +69,13 @@ function update_game_status_panel() {
   var status_html = "";
 
   if (client.conn.playing != null) {
+    var pplayer = client.conn.playing;
     if (is_small_screen()) {
-      status_html = chatbox_text;
-
+      status_html += "<b>" + nations[pplayer['nation']]['adjective'] + "</b> Pop: ";
+      status_html += "<b>" + civ_population(client.conn.playing.playerno) + "</b>  ";
+      status_html += "Year: <b>" + get_year_string() + "</b> ";
+      status_html += "Gold: <b>" + pplayer['gold'] + "</b>"; 
     } else {
-      var pplayer = client.conn.playing;
       var tax = client.conn.playing['tax'];
       var lux = client.conn.playing['luxury'];
       var sci = client.conn.playing['science'];
@@ -92,13 +94,14 @@ function update_game_status_panel() {
       status_html += "Sci: <b>" + sci + "</b> ";
     }
   } else {
-    status_html += "Observing - "; 
+    status_html += "Observing - " + game_info['meta_message'] + " - "; 
     status_html += "Turn: <b>" + game_info['turn'] + "</b>  ";
   }
   
   $("#game_status_panel").html(status_html); 
 
-  document.title = "Freeciv-web - " + username + "  (turn:" + game_info['turn'] + ", port:" + civserverport + ")";
+  document.title = "Freeciv-web - " + username + "  (turn:" + game_info['turn'] + ", port:" 
+                   + civserverport + ") " + game_info['meta_message'];
 
 
 }

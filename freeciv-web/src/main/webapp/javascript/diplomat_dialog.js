@@ -77,7 +77,7 @@ function popup_diplomat_dialog(pdiplomat, action_probabilities,
 
   if (action_probabilities[ACTION_ESTABLISH_EMBASSY] != 0) {
     $("#diplo_emb").click(function() {
-      var packet = {"type" : packet_unit_diplomat_action,
+      var packet = {"type" : packet_unit_do_action,
                      "diplomat_id" : pdiplomat['id'],
                      "target_id": pcity['id'],
                      "value" : 0,
@@ -90,7 +90,7 @@ function popup_diplomat_dialog(pdiplomat, action_probabilities,
 
   if (action_probabilities[ACTION_SPY_INVESTIGATE_CITY] != 0) {
     $("#diplo_inv").click(function() {
-      var packet = {"type" : packet_unit_diplomat_action,
+      var packet = {"type" : packet_unit_do_action,
         "diplomat_id" : pdiplomat['id'],
         "target_id": pcity['id'],
         "value" : 0,
@@ -103,7 +103,7 @@ function popup_diplomat_dialog(pdiplomat, action_probabilities,
 
   if (action_probabilities[ACTION_SPY_SABOTAGE_CITY] != 0) {
     $("#diplo_sab").click(function() {
-      var packet = {"type" : packet_unit_diplomat_action,
+      var packet = {"type" : packet_unit_do_action,
         "diplomat_id" : pdiplomat['id'],
         "target_id": pcity['id'],
         "value" : 0,
@@ -118,7 +118,7 @@ function popup_diplomat_dialog(pdiplomat, action_probabilities,
 
   if (action_probabilities[ACTION_SPY_STEAL_TECH] != 0) {
     $("#diplo_tech").click(function() {
-      var packet = {"type" : packet_unit_diplomat_action, 
+      var packet = {"type" : packet_unit_do_action, 
                      "diplomat_id" : pdiplomat['id'], 
                      "target_id": pcity['id'], 
                      "value" : last_tech, 
@@ -131,7 +131,7 @@ function popup_diplomat_dialog(pdiplomat, action_probabilities,
 
   if (action_probabilities[ACTION_SPY_INCITE_CITY] != 0) {
     $("#diplo_revo").click(function() {
-      var packet = {"type" : packet_unit_diplomat_action,
+      var packet = {"type" : packet_unit_do_action,
         "diplomat_id" : pdiplomat['id'],
         "target_id": pcity['id'],
         "value" : 0,
@@ -144,7 +144,7 @@ function popup_diplomat_dialog(pdiplomat, action_probabilities,
 
   if (action_probabilities[ACTION_SPY_POISON] != 0) {
     $("#diplo_poi").click(function() {
-      var packet = {"type" : packet_unit_diplomat_action,
+      var packet = {"type" : packet_unit_do_action,
         "diplomat_id" : pdiplomat['id'],
         "target_id": pcity['id'],
         "value" : 0,
@@ -157,7 +157,7 @@ function popup_diplomat_dialog(pdiplomat, action_probabilities,
 
   if (action_probabilities[ACTION_SPY_BRIBE_UNIT] != 0) {
     $("#diplo_bribe").click(function() {
-      var packet = {"type" : packet_unit_diplomat_action,
+      var packet = {"type" : packet_unit_do_action,
         "diplomat_id" : pdiplomat['id'],
         "target_id": punit['id'],
         "value" : 0,
@@ -170,7 +170,7 @@ function popup_diplomat_dialog(pdiplomat, action_probabilities,
 
   if (action_probabilities[ACTION_SPY_SABOTAGE_UNIT] != 0) {
     $("#diplo_spy_sabo").click(function() {
-      var packet = {"type" : packet_unit_diplomat_action,
+      var packet = {"type" : packet_unit_do_action,
         "diplomat_id" : pdiplomat['id'],
         "target_id": punit['id'],
         "value" : 0,

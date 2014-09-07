@@ -8,4 +8,4 @@ fi
 export FREECIV_SAVE_PATH
 
 
-nohup python3.4 publite2.py || tail -5 nohup.out && sleep 5  &
+nohup python3.4 -u publite2.py || tail -5 nohup.out && sleep 5  &

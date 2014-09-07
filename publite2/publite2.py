@@ -18,8 +18,8 @@ logdir = "/tmp/"
 
 game_types = ["singleplayer", "multiplayer"]
 pubscript = "pubscript_"
-server_capacity = 6
-server_limit = 200  
+server_capacity = 10
+server_limit = 250  
 metachecker_interval = 60
 
 savesdir = "~/freeciv-build/freeciv-web/resin/webapps/ROOT/savegames/"
@@ -50,6 +50,7 @@ class metachecker():
                     + ",multi=" + str(multi_servers) + "]");
 
               while (single_servers < server_capacity and total_servers <= server_limit):
+                time.sleep(1)
                 new_server = civserverproc(game_types[0], port);
                 new_server.start();
                 port += 1;
@@ -57,6 +58,7 @@ class metachecker():
                 single_servers += 1;
  
               while (multi_servers < server_capacity and total_servers <= server_limit):
+                time.sleep(1)
                 new_server = civserverproc(game_types[1], port)
                 new_server.start();
                 port += 1;
@@ -76,9 +78,9 @@ class metachecker():
 # separate thread and restarts the process when the game ends.
 class civserverproc(Thread):
 
-    def __init__ (self, gametype, port):
+    def __init__ (self, gametype, new_port):
         Thread.__init__(self)
-        self.port = port;
+        self.port = new_port;
         self.gametype = gametype;
 
     def run(self):
@@ -87,7 +89,7 @@ class civserverproc(Thread):
                 print("Starting new Freeciv-web server at port " + str(port) + 
                       " and Freeciv-proxy server at port " + str(1000 + self.port) + ".");
                 retcode = call("python3.4 ../freeciv-proxy/freeciv-proxy.py " + str(1000 + self.port) + " & proxy_pid=$! && " +
-                               "freeciv-web --port " + str(self.port) + " -q 20 -e " +
+                               "freeciv-web --port " + str(self.port) + " -q 20 --Announce none -e " +
                                " -m -M http://" + metahost + metapath  + " --type \"" + self.gametype +
                                "\" --read " + pubscript + self.gametype + ".serv" + 
                                " --log " + logdir + "fcweb-" + str(self.port) + ".log " +

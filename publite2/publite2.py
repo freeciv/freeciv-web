@@ -10,7 +10,6 @@ import sys
 import time
 import http.client
 
-port = 6000
 metahost = "localhost:8080"
 metapath =  "/meta/metaserver.php"
 statuspath =  "/meta/status.php"
@@ -31,8 +30,7 @@ class metachecker():
     def __init__(self):
       pass;
 
-    def check(self):
-      global port;
+    def check(self, port):
       while 1:
         try:
           time.sleep(1);
@@ -47,7 +45,7 @@ class metachecker():
               single_servers = int(meta_status[2]);
               multi_servers = int(meta_status[3]);
               print("status=[total=" + str(total_servers) + ",single=" + str(single_servers) 
-                    + ",multi=" + str(multi_servers) + "]");
+                    + ",multi=" + str(multi_servers) + ",port=" + str(port) + "]");
 
               while (single_servers < server_capacity and total_servers <= server_limit):
                 time.sleep(1)
@@ -80,19 +78,19 @@ class civserverproc(Thread):
 
     def __init__ (self, gametype, new_port):
         Thread.__init__(self)
-        self.port = new_port;
+        self.new_port = new_port;
         self.gametype = gametype;
 
     def run(self):
         while 1:
             try:
-                print("Starting new Freeciv-web server at port " + str(port) + 
-                      " and Freeciv-proxy server at port " + str(1000 + self.port) + ".");
-                retcode = call("python3.4 ../freeciv-proxy/freeciv-proxy.py " + str(1000 + self.port) + " & proxy_pid=$! && " +
-                               "freeciv-web --port " + str(self.port) + " -q 20 --Announce none -e " +
+                print("Starting new Freeciv-web server at port " + str(self.new_port) + 
+                      " and Freeciv-proxy server at port " + str(1000 + self.new_port) + ".");
+                retcode = call("python3.4 ../freeciv-proxy/freeciv-proxy.py " + str(1000 + self.new_port) + " & proxy_pid=$! && " +
+                               "freeciv-web --port " + str(self.new_port) + " -q 20 --Announce none -e " +
                                " -m -M http://" + metahost + metapath  + " --type \"" + self.gametype +
                                "\" --read " + pubscript + self.gametype + ".serv" + 
-                               " --log " + logdir + "fcweb-" + str(self.port) + ".log " +
+                               " --log " + logdir + "fcweb-" + str(self.new_port) + ".log " +
                                "--saves " + savesdir + " ; kill -9 $proxy_pid", shell=True)
                 if retcode < 0:
                     print("Freeciv-web was terminated by signal", -retcode, file=sys.stderr)
@@ -114,6 +112,7 @@ except Exception as e:
 finally:
   conn.close();
 
+port = 6000
 for type in game_types:
   for srv_num in range(server_capacity):
     new_server = civserverproc(type, port)
@@ -122,5 +121,5 @@ for type in game_types:
 
 print("Publite2 started!");
 time.sleep(10);
-metachecker().check();
+metachecker().check(port);
 

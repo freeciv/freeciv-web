@@ -83,6 +83,7 @@ class civserverproc(Thread):
 
     def run(self):
         while 1:
+            time.sleep(2)
             try:
                 print("Starting new Freeciv-web server at port " + str(self.new_port) + 
                       " and Freeciv-proxy server at port " + str(1000 + self.new_port) + ".");
@@ -98,7 +99,7 @@ class civserverproc(Thread):
                     print("Freeciv-web returned", retcode, file=sys.stderr)
             except OSError as e:
                 print("Execution failed:", e, file=sys.stderr)
-            time.sleep(5)
+            time.sleep(15)
 
 #perform a test-request to the Metaserver
 try:

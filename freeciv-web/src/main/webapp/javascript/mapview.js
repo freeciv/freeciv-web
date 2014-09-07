@@ -621,8 +621,8 @@ function set_default_mapview_active()
       $("#game_unit_panel").parent().show();
       $(".unit_dialog").position({my: 'right bottom', at: 'right bottom', of: window});
     }
-    if (chatbox_active) $("#game_chatbox_panel").parent().show();
   }
+  if (chatbox_active) $("#game_chatbox_panel").parent().show();
 
   $("#tabs").tabs("option", "active", 0);
 

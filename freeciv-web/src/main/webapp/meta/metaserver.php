@@ -46,6 +46,7 @@ $posts = array(
   "plt",
   "pll",
   "pln",
+  "plf",
   "plu",
   "plh",
   "dropplrs",
@@ -151,9 +152,9 @@ if ( isset($port) ) {
         $pln[$i] = addneededslashes($pln[$i]);
         $ins .= "nation=\"$pln[$i]\", ";
       }
-      if (isset($pln[$i]) ) {
-        $pln[$i] = addneededslashes($pln[$i]);
-        $ins .= "flag=\"$pln[$i]\", ";
+      if (isset($plf[$i]) ) {
+        $plf[$i] = addneededslashes($plf[$i]);
+        $ins .= "flag=\"$plf[$i]\", ";
       }
 
       if (isset($plt[$i]) ) {

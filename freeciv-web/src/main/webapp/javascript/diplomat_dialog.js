@@ -78,10 +78,10 @@ function popup_diplomat_dialog(pdiplomat, action_probabilities,
   if (action_probabilities[ACTION_ESTABLISH_EMBASSY] != 0) {
     $("#diplo_emb").click(function() {
       var packet = {"type" : packet_unit_do_action,
-                     "diplomat_id" : pdiplomat['id'],
+                     "actor_id" : pdiplomat['id'],
                      "target_id": pcity['id'],
                      "value" : 0,
-                     "action_type": DIPLOMAT_EMBASSY};
+                     "action_type": ACTION_ESTABLISH_EMBASSY};
       send_request (JSON.stringify(packet));
 
       $(id).remove();
@@ -91,10 +91,10 @@ function popup_diplomat_dialog(pdiplomat, action_probabilities,
   if (action_probabilities[ACTION_SPY_INVESTIGATE_CITY] != 0) {
     $("#diplo_inv").click(function() {
       var packet = {"type" : packet_unit_do_action,
-        "diplomat_id" : pdiplomat['id'],
+        "actor_id" : pdiplomat['id'],
         "target_id": pcity['id'],
         "value" : 0,
-        "action_type": DIPLOMAT_INVESTIGATE};
+        "action_type": ACTION_SPY_INVESTIGATE_CITY};
         send_request (JSON.stringify(packet));
 
         $(id).remove();
@@ -104,10 +104,10 @@ function popup_diplomat_dialog(pdiplomat, action_probabilities,
   if (action_probabilities[ACTION_SPY_SABOTAGE_CITY] != 0) {
     $("#diplo_sab").click(function() {
       var packet = {"type" : packet_unit_do_action,
-        "diplomat_id" : pdiplomat['id'],
+        "actor_id" : pdiplomat['id'],
         "target_id": pcity['id'],
         "value" : 0,
-        "action_type": DIPLOMAT_SABOTAGE};
+        "action_type": ACTION_SPY_SABOTAGE_CITY};
         send_request (JSON.stringify(packet));
 
         $(id).remove();
@@ -119,10 +119,10 @@ function popup_diplomat_dialog(pdiplomat, action_probabilities,
   if (action_probabilities[ACTION_SPY_STEAL_TECH] != 0) {
     $("#diplo_tech").click(function() {
       var packet = {"type" : packet_unit_do_action, 
-                     "diplomat_id" : pdiplomat['id'], 
+                     "actor_id" : pdiplomat['id'], 
                      "target_id": pcity['id'], 
                      "value" : last_tech, 
-                     "action_type": DIPLOMAT_STEAL};
+                     "action_type": ACTION_SPY_STEAL_TECH};
       send_request (JSON.stringify(packet));
 
       $(id).remove();
@@ -132,10 +132,10 @@ function popup_diplomat_dialog(pdiplomat, action_probabilities,
   if (action_probabilities[ACTION_SPY_INCITE_CITY] != 0) {
     $("#diplo_revo").click(function() {
       var packet = {"type" : packet_unit_do_action,
-        "diplomat_id" : pdiplomat['id'],
+        "actor_id" : pdiplomat['id'],
         "target_id": pcity['id'],
         "value" : 0,
-        "action_type": DIPLOMAT_INCITE};
+        "action_type": ACTION_SPY_INCITE_CITY};
         send_request (JSON.stringify(packet));
 
         $(id).remove();
@@ -145,10 +145,10 @@ function popup_diplomat_dialog(pdiplomat, action_probabilities,
   if (action_probabilities[ACTION_SPY_POISON] != 0) {
     $("#diplo_poi").click(function() {
       var packet = {"type" : packet_unit_do_action,
-        "diplomat_id" : pdiplomat['id'],
+        "actor_id" : pdiplomat['id'],
         "target_id": pcity['id'],
         "value" : 0,
-        "action_type": SPY_POISON};
+        "action_type": ACTION_SPY_POISON};
         send_request (JSON.stringify(packet));
 
         $(id).remove();
@@ -158,10 +158,10 @@ function popup_diplomat_dialog(pdiplomat, action_probabilities,
   if (action_probabilities[ACTION_SPY_BRIBE_UNIT] != 0) {
     $("#diplo_bribe").click(function() {
       var packet = {"type" : packet_unit_do_action,
-        "diplomat_id" : pdiplomat['id'],
+        "actor_id" : pdiplomat['id'],
         "target_id": punit['id'],
         "value" : 0,
-        "action_type": DIPLOMAT_BRIBE};
+        "action_type": ACTION_SPY_BRIBE_UNIT};
         send_request (JSON.stringify(packet));
 
         $(id).remove();
@@ -171,10 +171,10 @@ function popup_diplomat_dialog(pdiplomat, action_probabilities,
   if (action_probabilities[ACTION_SPY_SABOTAGE_UNIT] != 0) {
     $("#diplo_spy_sabo").click(function() {
       var packet = {"type" : packet_unit_do_action,
-        "diplomat_id" : pdiplomat['id'],
+        "actor_id" : pdiplomat['id'],
         "target_id": punit['id'],
         "value" : 0,
-        "action_type": SPY_SABOTAGE_UNIT};
+        "action_type": ACTION_SPY_SABOTAGE_UNIT};
         send_request (JSON.stringify(packet));
 
         $(id).remove();

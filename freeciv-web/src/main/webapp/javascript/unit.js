@@ -18,19 +18,6 @@ var SINGLE_MOVE = 3;
 
 var ANIM_STEPS = 6;
 
-/* Changing this enum will break network compatability. */
-var DIPLOMAT_MOVE = 0;	/* move onto city square - only for allied cities */
-var DIPLOMAT_EMBASSY = 1;
-var DIPLOMAT_BRIBE = 2;
-var DIPLOMAT_INCITE = 3;
-var DIPLOMAT_INVESTIGATE = 4;
-var DIPLOMAT_SABOTAGE = 5;
-var DIPLOMAT_STEAL = 6;
-var SPY_POISON = 7; 
-var SPY_SABOTAGE_UNIT = 8;
-var DIPLOMAT_SABOTAGE_TARGET = 9;
-var DIPLOMAT_STEAL_TARGET = 10;
-var DIPLOMAT_ANY_ACTION = 11;   /* leave this one last */
 var anim_units_max = 30;
 var anim_units_count = 0;
 

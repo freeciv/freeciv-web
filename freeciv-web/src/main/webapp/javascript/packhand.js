@@ -502,20 +502,7 @@ function handle_unit_action_answer(packet)
   var punit = game_find_unit_by_number(target_id);
   var pdiplomat = game_find_unit_by_number(diplomat_id);
   
-  
-  /*switch (action_type) {
-  case DIPLOMAT_BRIBE:
-    if (punit != null) {
-        //popup_bribe_dialog(punit, cost);
-    }
-    break;
-  case DIPLOMAT_INCITE:
-    if (pcity != null) {
-        //popup_incite_dialog(pcity, cost);
-    }
-    break;
-    break;
-  };*/
+ 
 
 }
 

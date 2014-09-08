@@ -215,11 +215,17 @@ function update_mouse_cursor()
   var punit = find_visible_unit(ptile);
   var pcity = tile_city(ptile);
 
-  if (goto_active) {
+  if (goto_active && current_goto_turns != null) {
+    /* show goto cursor */
     mapview_canvas.style.cursor = "crosshair";
+  } else if (goto_active && current_goto_turns == null) {
+    /* show invalid goto cursor*/
+    mapview_canvas.style.cursor = "not-allowed";
   } else if (pcity != null && city_owner_player_id(pcity) == client.conn.playing.playerno) { 
+    /* selecti city cursor*/
     mapview_canvas.style.cursor = "pointer";
   } else if (punit != null && punit['owner'] == client.conn.playing.playerno) {
+    /* move unit cursor */
     mapview_canvas.style.cursor = "move";
   } else {
     mapview_canvas.style.cursor = "default";

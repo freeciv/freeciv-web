@@ -562,6 +562,7 @@ function update_goto_path_lines()
     } else {
       $("#turns_to_target").html("-" );
     }
+    update_mouse_cursor();
 
   }
 

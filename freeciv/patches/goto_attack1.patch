@@ -1,14 +1,16 @@
-diff -Nurd -X.diff_ignore freeciv/server/unittools.c freeciv/server/unittools.c
---- freeciv/server/unittools.c	2012-08-07 16:22:29.000000000 +0300
-+++ freeciv/server/unittools.c	2012-08-07 16:39:11.000000000 +0300
-@@ -3317,12 +3317,14 @@
+diff --git a/server/unittools.c b/server/unittools.c
+index 5ebb1be..8f97caa 100644
+--- a/server/unittools.c
++++ b/server/unittools.c
+@@ -3517,6 +3517,7 @@ static void remove_transported_gone_out_of_sight(struct unit_list *units,
+   } unit_list_iterate_end;
+ }
+ 
++#if 0
  /**************************************************************************
    Maybe cancel the goto if there is an enemy in the way
  **************************************************************************/
-+#if 0
- static bool maybe_cancel_goto_due_to_enemy(struct unit *punit, 
-                                            struct tile *ptile)
- {
+@@ -3526,6 +3527,7 @@ static bool maybe_cancel_goto_due_to_enemy(struct unit *punit,
    return (is_non_allied_unit_tile(ptile, unit_owner(punit)) 
  	  || is_non_allied_city_tile(ptile, unit_owner(punit)));
  }
@@ -16,20 +18,21 @@ diff -Nurd -X.diff_ignore freeciv/server/unittools.c freeciv/server/unittools.c
  
  /**************************************************************************
    Maybe cancel the patrol as there is an enemy near.
-@@ -3506,6 +3508,8 @@
+@@ -3726,7 +3728,8 @@ bool execute_orders(struct unit *punit)
+                       unit_link(punit)); */
          return TRUE;
        }
- 
+-
 +      /* FIXME: the web client want gotos to result in attack. */
-+#if 0
-       if (!last_order
++      #if 0
+       if (order.order != ORDER_ACTION_MOVE
            && maybe_cancel_goto_due_to_enemy(punit, dst_tile)) {
-         cancel_orders(punit, "  orders canceled because of enemy");
-@@ -3515,6 +3519,7 @@
+         /* Plain move required: no attack, trade route etc. */
+@@ -3737,6 +3740,7 @@ bool execute_orders(struct unit *punit)
                        unit_link(punit));
          return TRUE;
        }
-+#endif /* web client */
++      #endif /* web client */
  
        log_debug("  moving to %d,%d", TILE_XY(dst_tile));
        res = unit_move_handling(punit, dst_tile, FALSE, !last_order);

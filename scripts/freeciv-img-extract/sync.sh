@@ -1,3 +1,4 @@
+#!/bin/bash
 echo "running Freeciv-img-extract..."
 python3.4 img-extract.py &&
 pngcrush pre-freeciv-web-tileset-0.png freeciv-web-tileset-0.png &&

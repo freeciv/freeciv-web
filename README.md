@@ -150,13 +150,14 @@ manual installation procedure to setup Freeciv-web:
      and edit to suit your needs.
    - Run 'build.sh' in the freeciv-web directory
    - Copy nginx configuration file from publite2/nginx/freeciv-web
-     to /etc/nginx/sites-enabled/ and edit to suit your needs.
+     to the nginx config directory, /usr/local/nginx/conf, /etc/nginx, or /usr/local/etc/nginx 
+     and edit it to suit your needs.
 
 
 6.  Start and stop Freeciv-web with the following commands:  
   scripts/start-freeciv-web.sh  
   scripts/stop-freeciv-web.sh  
-  scripts/status-freeciv-web.sh  
+  scripts/status-freeciv-web.sh        (this script is useful to debug if Freeciv-web is running correctly)
 (On Vagrant, these scripts are found on /vagrant/scripts)  
 
 Freeciv-Web continuous integration on Travis CI 

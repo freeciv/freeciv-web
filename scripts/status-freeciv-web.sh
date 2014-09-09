@@ -1,7 +1,8 @@
 #!/bin/bash
 # Checks status of various Freeciv-web processes
 
-echo "checking nginx"
+printf "Checking that Freeciv-web is running correctly... \n\n\n"
+printf "checking nginx on http://localhost\n"
 wget --quiet --spider http://localhost 
 if [ "$?" != 0 ]; then
   wget --spider http://localhost 
@@ -11,7 +12,9 @@ else
   echo "nginx OK!"
 fi
 
-echo "checking resin"
+printf "\n--------------------------------\n";
+
+printf "checking resin on http://localhost:8080/\n"
 wget --quiet --spider http://localhost:8080/
 if [ "$?" != 0 ]; then
   wget --spider http://localhost:8080/
@@ -21,11 +24,12 @@ else
   echo "resin OK!"
 fi
 
+printf "\n--------------------------------\n";
 
-echo "checking freeciv-proxy"
-wget --quiet http://localhost:7002/status
+echo "checking freeciv-proxy directly on http://localhost:7001/status"
+wget --quiet http://localhost:7001/status
 if [ "$?" != 0 ]; then
-  wget http://localhost:7002/status
+  wget http://localhost:7001/status
   echo "freeciv-proxy not running!"
   echo "\n\n\n"
 
@@ -33,6 +37,30 @@ else
   echo "freeciv-proxy OK!"
   rm status
 fi
+
+printf "\n--------------------------------\n";
+echo "checking freeciv-proxy through nginx on http://localhost/civsocket/7001/status"
+wget --quiet http://localhost/civsocket/7001/status
+if [ "$?" != 0 ]; then
+  wget http://localhost/civsocket/7001/status
+  echo "freeciv-proxy not running correctly through nginx!"
+  echo "\n\n\n"
+
+else
+  echo "freeciv-proxy OK!"
+  rm status
+fi
+
+printf "\n--------------------------------\n";
+
+echo "testing WebSocket connection directly to Tornado"
+echo "This should show \"HTTP/1.1 101 Switching Protocols\" and then timeout after 2 seconds."
+curl -i -N -H "Connection: Upgrade" -H "Upgrade: websocket" -H "Host: localhost" -H "Origin: http://localhost" -H "Sec-WebSocket-Version: 13" -H 'Sec-WebSocket-Key: +onQ3ZxjWlkNa0na6ydhNg==' --max-time 2  http://localhost:7002/civsocket/7002
+
+echo "testing WebSocket connection through nginx"
+echo "This should show \"HTTP/1.1 101 Switching Protocols\" and then timeout after 2 seconds."
+curl -i -N -H "Connection: Upgrade" -H "Upgrade: websocket" -H "Host: localhost" -H "Origin: http://localhost" -H "Sec-WebSocket-Version: 13" -H 'Sec-WebSocket-Key: +onQ3ZxjWlkNa0na6ydhNg==' --max-time 2  http://localhost/civsocket/7002
+printf "\n--------------------------------\n ";
 
 echo "checking freeciv-web / publite2"
 if [ "$(pidof freeciv-web)" ] 
@@ -42,5 +70,41 @@ else
   echo "freeciv-web not running"
 fi
 
+printf "\n--------------------------------\n";
 
-echo "Check done!"
+echo "checking that webclient.min.js has been generated..."
+wget --quiet --spider http://localhost/javascript/webclient.min.js
+if [ "$?" != 0 ]; then
+  wget --spider http://localhost/javascript/webclient.min.js 
+  echo "webclient.min.js is not OK"
+  echo "\n\n\n"
+else
+  echo "webclient.min.js is OK!"
+fi
+
+printf "\n--------------------------------\n";
+
+echo "checking that tileset has been generated..."
+wget --quiet --spider http://localhost/tileset/freeciv-web-tileset-0.png
+if [ "$?" != 0 ]; then
+  wget --spider http://localhost/tileset/freeciv-web-tileset-0.png 
+  echo "tileset is not OK"
+  echo "\n\n\n"
+else
+  echo "tileset is OK!"
+fi
+
+printf "\n--------------------------------\n";
+
+echo "checking metaserver..."
+wget --quiet --spider http://localhost/meta/metaserver.php
+if [ "$?" != 0 ]; then
+  wget --spider http://localhost/meta/metaserver.php 
+  echo "metaserver is not OK"
+  echo "\n\n\n"
+else
+  echo "metaserver is OK!"
+fi
+
+printf "\n--------------------------------\n";
+echo "Check of Freeciv-web is done!"

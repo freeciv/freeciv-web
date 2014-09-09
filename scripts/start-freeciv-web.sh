@@ -39,6 +39,6 @@ echo "Starting publite2" && \
 (cd ${FREECIV_WEB_DIR}/publite2/ && \
 sh run.sh) && \
 echo "Publite2 started" && \
-echo "Will sleep for 5 seconds, then do a status test..." && \
-sleep 5 && \
+echo "Will sleep for 8 seconds, then do a status test..." && \
+sleep 8 && \
 sh ./status-freeciv-web.sh

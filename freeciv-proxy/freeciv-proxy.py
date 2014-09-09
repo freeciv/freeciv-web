@@ -44,7 +44,7 @@ class StatusHandler(web.RequestHandler):
 
     """Serves the Freeciv-proxy status page, on the url:  /status """
 
-    def get(self):
+    def get(self, params):
         self.write(get_debug_info(civcoms))
 
 
@@ -131,7 +131,7 @@ if __name__ == "__main__":
         application = web.Application([
             (r'/civsocket/' + str(PROXY_PORT), WSHandler),
             (r"/", IndexHandler),
-            (r"/status", StatusHandler),
+            (r"(.*)status", StatusHandler),
         ])
 
         http_server = httpserver.HTTPServer(application)

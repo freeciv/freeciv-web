@@ -1,4 +1,4 @@
-FCREV=26289
+FCREV=26308
 FCBRANCH=trunk
 
 ORIGCAPSTR="+Freeciv.Devel-2.6-2014.Sep.07b"

@@ -1,18 +1,7 @@
 diff -Nurd -X.diff_ignore freeciv/common/connection.h freeciv/common/connection.h
---- freeciv/common/connection.h	2014-09-07 06:49:02.018566169 +0300
-+++ freeciv/common/connection.h	2014-09-07 06:52:34.646091880 +0300
-@@ -26,6 +26,10 @@
- #include <sys/time.h>
- #endif
- 
-+#ifdef JSON_CONNECTION
-+#include <jansson.h>
-+#endif  /* JSON_CONNECTION */
-+
- #ifndef JSON_CONNECTION
- #define USE_COMPRESSION
- #endif  /* JSON_CONNECTION */
-@@ -48,7 +52,7 @@
+--- freeciv/common/connection.h	2014-09-11 01:41:13.951730689 +0300
++++ freeciv/common/connection.h	2014-09-11 01:45:45.515145614 +0300
+@@ -52,7 +52,7 @@
  struct conn_pattern_list;
  
  /* Used in the network protocol. */
@@ -21,17 +10,9 @@ diff -Nurd -X.diff_ignore freeciv/common/connection.h freeciv/common/connection.
  #define MAX_LEN_CAPSTR    512
  #define MAX_LEN_PASSWORD  512 /* do not change this under any circumstances */
  
-@@ -152,6 +156,7 @@
-   struct socket_packet_buffer *buffer;
-   struct socket_packet_buffer *send_buffer;
-   struct timer *last_write;
-+  json_t *json_packet;
- 
-   double ping_time;
-   
 diff -Nurd -X.diff_ignore freeciv/common/dataio.c freeciv/common/dataio.c
---- freeciv/common/dataio.c	2014-09-07 06:49:02.034566133 +0300
-+++ freeciv/common/dataio.c	2014-09-07 06:50:56.182311427 +0300
+--- freeciv/common/dataio.c	2014-09-11 01:41:13.955730680 +0300
++++ freeciv/common/dataio.c	2014-09-11 01:43:42.751409948 +0300
 @@ -222,9 +222,17 @@
  }
  
@@ -672,8 +653,8 @@ diff -Nurd -X.diff_ignore freeciv/common/dataio.c freeciv/common/dataio.c
 +  return TRUE;
 +}
 diff -Nurd -X.diff_ignore freeciv/common/dataio.h freeciv/common/dataio.h
---- freeciv/common/dataio.h	2014-09-07 06:49:02.018566169 +0300
-+++ freeciv/common/dataio.h	2014-09-07 06:50:56.182311427 +0300
+--- freeciv/common/dataio.h	2014-09-11 01:41:13.951730689 +0300
++++ freeciv/common/dataio.h	2014-09-11 01:43:42.751409948 +0300
 @@ -20,6 +20,8 @@
  #include "bitvector.h"
  #include "support.h"            /* bool type */
@@ -800,8 +781,8 @@ diff -Nurd -X.diff_ignore freeciv/common/dataio.h freeciv/common/dataio.h
  }
  #endif /* __cplusplus */
 diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/generate_packets.py
---- freeciv/common/generate_packets.py	2014-09-07 06:50:35.198358235 +0300
-+++ freeciv/common/generate_packets.py	2014-09-07 06:50:56.182311427 +0300
+--- freeciv/common/generate_packets.py	2014-09-11 01:43:22.763453011 +0300
++++ freeciv/common/generate_packets.py	2014-09-11 01:43:42.751409948 +0300
 @@ -249,7 +249,7 @@
          if self.is_array==1:
              tmp="real_packet->%(name)s[i] = %(name)s[i]"%self.__dict__
@@ -894,8 +875,8 @@ diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/gene
              for field in self.key_fields:
                  body1=body1+prefix("  ",field.get_get())+"\n"
 diff -Nurd -X.diff_ignore freeciv/common/packets.c freeciv/common/packets.c
---- freeciv/common/packets.c	2014-09-07 06:49:02.022566160 +0300
-+++ freeciv/common/packets.c	2014-09-07 06:50:56.182311427 +0300
+--- freeciv/common/packets.c	2014-09-11 01:41:13.951730689 +0300
++++ freeciv/common/packets.c	2014-09-11 01:43:42.751409948 +0300
 @@ -43,6 +43,8 @@
  #include "events.h"
  #include "map.h"
@@ -979,8 +960,8 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.c freeciv/common/packets.c
  /**************************************************************************
   Updates pplayer->attribute_block according to the given packet.
 diff -Nurd -X.diff_ignore freeciv/common/packets.h freeciv/common/packets.h
---- freeciv/common/packets.h	2014-09-07 06:49:02.018566169 +0300
-+++ freeciv/common/packets.h	2014-09-07 06:50:56.182311427 +0300
+--- freeciv/common/packets.h	2014-09-11 01:41:13.951730689 +0300
++++ freeciv/common/packets.h	2014-09-11 01:43:42.751409948 +0300
 @@ -34,6 +34,7 @@
  #include "traderoutes.h"
  #include "unittype.h"
@@ -989,7 +970,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.h freeciv/common/packets.h
  
  
  /* Used in network protocol. */
-@@ -113,42 +114,36 @@
+@@ -103,42 +104,36 @@
  
  #define SEND_PACKET_START(packet_type) \
    unsigned char buffer[MAX_LEN_PACKET]; \
@@ -1046,7 +1027,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.h freeciv/common/packets.h
    result = fc_malloc(sizeof(*result)); \
    *result = packet_buf; \
    return result;
-@@ -159,7 +154,6 @@
+@@ -149,7 +144,6 @@
  
  int send_packet_data(struct connection *pc, unsigned char *data, int len,
                       enum packet_type packet_type);
@@ -1055,8 +1036,8 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.h freeciv/common/packets.h
  /* Utilities to exchange strings and string vectors. */
  #define PACKET_STRVEC_SEPARATOR '\3'
 diff -Nurd -X.diff_ignore freeciv/server/handchat.c freeciv/server/handchat.c
---- freeciv/server/handchat.c	2014-09-07 06:49:02.278565588 +0300
-+++ freeciv/server/handchat.c	2014-09-07 06:50:56.182311427 +0300
+--- freeciv/server/handchat.c	2014-09-11 01:41:13.963730662 +0300
++++ freeciv/server/handchat.c	2014-09-11 01:43:42.751409948 +0300
 @@ -19,7 +19,10 @@
  #include <stdio.h>
  #include <string.h>
@@ -1089,8 +1070,8 @@ diff -Nurd -X.diff_ignore freeciv/server/handchat.c freeciv/server/handchat.c
        break;
      }
 diff -Nurd -X.diff_ignore freeciv/server/plrhand.c freeciv/server/plrhand.c
---- freeciv/server/plrhand.c	2014-09-07 06:49:02.230565695 +0300
-+++ freeciv/server/plrhand.c	2014-09-07 06:50:56.186311418 +0300
+--- freeciv/server/plrhand.c	2014-09-11 01:41:13.963730662 +0300
++++ freeciv/server/plrhand.c	2014-09-11 01:43:42.751409948 +0300
 @@ -1224,12 +1224,12 @@
        || (receiver
            && player_diplstate_get(receiver, plr1)->contact_turns_left > 0)
@@ -1107,8 +1088,8 @@ diff -Nurd -X.diff_ignore freeciv/server/plrhand.c freeciv/server/plrhand.c
      packet_ds->has_reason_to_cancel = 0;
      packet_ds->contact_turns_left   = 0;
 diff -Nurd -X.diff_ignore freeciv/server/ruleset.c freeciv/server/ruleset.c
---- freeciv/server/ruleset.c	2014-09-07 06:50:35.198358235 +0300
-+++ freeciv/server/ruleset.c	2014-09-07 06:50:56.186311418 +0300
+--- freeciv/server/ruleset.c	2014-09-11 01:43:22.763453011 +0300
++++ freeciv/server/ruleset.c	2014-09-11 01:43:42.751409948 +0300
 @@ -6135,6 +6135,8 @@
      packet.ngroups = i;
  
@@ -1127,8 +1108,8 @@ diff -Nurd -X.diff_ignore freeciv/server/ruleset.c freeciv/server/ruleset.c
      lsend_packet_ruleset_nation(dest, &packet);
    } nations_iterate_end;
 diff -Nurd -X.diff_ignore freeciv/server/sernet.c freeciv/server/sernet.c
---- freeciv/server/sernet.c	2014-09-07 06:49:02.146565883 +0300
-+++ freeciv/server/sernet.c	2014-09-07 06:50:56.198311391 +0300
+--- freeciv/server/sernet.c	2014-09-11 01:41:13.955730680 +0300
++++ freeciv/server/sernet.c	2014-09-11 01:43:42.751409948 +0300
 @@ -129,7 +129,7 @@
  static void send_ping_times_to_all(void);
  

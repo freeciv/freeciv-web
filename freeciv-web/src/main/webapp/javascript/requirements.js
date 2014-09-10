@@ -15,15 +15,27 @@
 var requirements = {};
 
 
-/* Range of requirements.  This must correspond to req_range_names[]
- * in requirements.c. */
+/* Range of requirements.
+ * Used in the network protocol.
+ * Order is important -- wider ranges should come later -- some code
+ * assumes a total order, or tests for e.g. >= REQ_RANGE_PLAYER.
+ * Ranges of similar types should be supersets, for example:
+ *  - the set of Adjacent tiles contains the set of CAdjacent tiles,
+ *    and both contain the center Local tile (a requirement on the local
+ *    tile is also within Adjacent range);
+ *  - World contains Alliance contains Player (a requirement we ourselves
+ *    have is also within Alliance range). */
 var REQ_RANGE_LOCAL = 0;
-var REQ_RANGE_ADJACENT = 1;
-var REQ_RANGE_CITY = 2;
-var REQ_RANGE_CONTINENT = 3;
-var REQ_RANGE_PLAYER = 4;
-var REQ_RANGE_WORLD = 5;
-var REQ_RANGE_LAST = 6;   /* keep this last */
+var REQ_RANGE_CADJACENT = 1;
+var REQ_RANGE_ADJACENT = 2;
+var REQ_RANGE_CITY = 3;
+var REQ_RANGE_TRADEROUTE = 4;
+var REQ_RANGE_CONTINENT = 5;
+var REQ_RANGE_PLAYER = 6;
+var REQ_RANGE_TEAM = 7;
+var REQ_RANGE_ALLIANCE = 8;
+var REQ_RANGE_WORLD = 9;
+var REQ_RANGE_COUNT = 10;   /* keep this last */
 
 
 /****************************************************************************
@@ -235,15 +247,21 @@ function is_tech_in_range(target_player, range, tech)
   case REQ_RANGE_PLAYER:
     return (target_player != null
 	    && player_invention_state(target_player, tech) == TECH_KNOWN);
+  case REQ_RANGE_TEAM:
+  case REQ_RANGE_ALLIANCE:
+      /* FIXME: Add support. */
+      return false;
   case REQ_RANGE_WORLD:
     // FIXME! Add support for global advances.
     return false;
     //return game.info.global_advances[tech];
   case REQ_RANGE_LOCAL:
+  case REQ_RANGE_CADJACENT:
   case REQ_RANGE_ADJACENT:
   case REQ_RANGE_CITY:
+  case REQ_RANGE_TRADEROUTE:
   case REQ_RANGE_CONTINENT:
-  case REQ_RANGE_LAST:
+  case REQ_RANGE_COUNT:
     break;
   }
   return false;

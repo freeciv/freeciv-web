@@ -303,6 +303,7 @@ target_reqs    =
       "UnitType", "Barbarian Leader", "Local", FALSE
       "CityTile", "Center", "Local", FALSE
       "Gov", "Democracy", "Player", FALSE
+      "MaxUnitsOnTile", "1", "Local", TRUE
     }
 
 [actionenabler_sabotage_unit]
@@ -318,6 +319,7 @@ target_reqs    =
     { "type",   "name", "range", "present"
       "CityTile", "Center", "Local", FALSE
       "MinHitPoints", "2", "Local", TRUE
+      "MaxUnitsOnTile", "1", "Local", TRUE
     }
 
 [borders]

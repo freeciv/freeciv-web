@@ -525,16 +525,17 @@ function handle_unit_diplomat_wants_input(packet)
 function handle_unit_actions(packet)
 {
   var actor_unit_id = packet['actor_unit_id'];
+  var target_unit_id = packet['target_unit_id'];
+  var target_city_id = packet['target_city_id'];
   var target_tile_id = packet['target_tile_id'];
   var action_probabilities = packet['action_probabilities'];
 
   var pdiplomat = game_find_unit_by_number(actor_unit_id);
+  var target_unit = game_find_unit_by_number(target_unit_id);
+  var target_city = game_find_city_by_number(target_city_id);
   var ptile = index_to_tile(target_tile_id);
 
   var hasActions = false;
-
-  var target_city = tile_city(ptile);
-  var target_unit = tile_units(ptile)[0];
 
   /* The dead can't act. */
   if (pdiplomat != null && ptile != null) {

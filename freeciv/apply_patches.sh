@@ -2,9 +2,6 @@
 
 # Revert4971 & Revert4970 are workaround for bug #22567
 # metasrvflag is going to be part of upstream as patch #5199
-# spacerace should be changed, once possible, to use server code instead of jumping to AI code
-#           First step to enable that is in patch #5198, but I expect more code to move to
-#           be available from advisors/ after that
 
 PATCHLIST="freeciv_web_all_packets_def_changes caravan_fixes1 city_fixes city_impr_fix2 city_name_bugfix city-naming-change city_fixes2 citytools_changes goto_1 goto_attack1 goto_fix_1 goto_fix_2 govt-fix map-settings map_size_change metachange metasrvflag orders_aborted orders_invalid2 text_fixes unithand-change2 webclient-ai-attitude current_research_cost freeciv-svn-webclient-changes network-rewrite-1 fcnet_packets misc_devversion_sync scenario_ruleset savegame savegame2 maphand_ch serverside_extra_assign libtoolize_no_symlinks spacerace city_disbandable ai_traits_crash unittools Revert4971 Revert4970"
 

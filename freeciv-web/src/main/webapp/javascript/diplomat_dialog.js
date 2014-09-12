@@ -13,8 +13,55 @@
 
 
 
+/**************************************************************************
+  Returns true unless a situation were a regular move always would be
+  impossible is recognized.
+**************************************************************************/
+function can_actor_unit_move(pdiplomat, target_tile)
+{
+  var tgt_owner_id;
+
+  if (pdiplomat['tile'] == target_tile) {
+    /* The unit is already on this tile. */
+    return false;
+  }
+
+  for (var i = 0; i < tile_units(target_tile).length; i++) {
+    tgt_owner_id = unit_owner(tile_units(target_tile)[i])['playerno'];
+
+    if (tgt_owner_id != unit_owner(pdiplomat)['playerno']
+        && diplstates[tgt_owner_id] != DS_ALLIANCE
+        && diplstates[tgt_owner_id] != DS_TEAM) {
+      /* In current Freeciv acting units can't attack foreign units. */
+      return false;
+    }
+  };
+
+  if (tile_city(target_tile) != null) {
+    tgt_owner_id = city_owner(tile_city(target_tile))['playerno'];
+
+    if (tgt_owner_id == unit_owner(pdiplomat)['playerno']) {
+      /* This city isn't foreign. */
+      return true;
+    }
+
+    if (diplstates[tgt_owner_id] == DS_ALLIANCE
+        || diplstates[tgt_owner_id] == DS_TEAM) {
+      /* This city belongs to an ally. */
+      return true;
+    }
+
+    /* TODO: Support rulesets were actors can invade cities. */
+    return false;
+  }
+
+  /* It is better to show the "Keep moving" option one time to much than
+   * one time to little. */
+  return true;
+}
+
 function popup_diplomat_dialog(pdiplomat, action_probabilities,
-                               punit, pcity)
+                               target_tile, punit, pcity)
 {
  // reset dialog page.
   var id = "#diplo_dialog_" + pdiplomat['id'];
@@ -54,6 +101,9 @@ function popup_diplomat_dialog(pdiplomat, action_probabilities,
   }
   if (action_probabilities[ACTION_SPY_SABOTAGE_UNIT] != 0) {
     dhtml += "<input id='diplo_spy_sabo' class='diplo_button' type='button' value='Sabotage enemy unit'>"
+  }
+  if (can_actor_unit_move(pdiplomat, target_tile)) {
+    dhtml += "<input id='diplo_move' class='diplo_button' type='button' value='Keep moving'>"
   }
 
   dhtml += "<input id='diplo_cancel' class='diplo_button' type='button' value='Cancel'>"
@@ -175,6 +225,19 @@ function popup_diplomat_dialog(pdiplomat, action_probabilities,
         "target_id": punit['id'],
         "value" : 0,
         "action_type": ACTION_SPY_SABOTAGE_UNIT};
+        send_request (JSON.stringify(packet));
+
+        $(id).remove();
+    });
+  }
+
+  if (can_actor_unit_move(pdiplomat, target_tile)) {
+    $("#diplo_move").click(function() {
+      var packet = {"type" : packet_unit_do_action,
+        "actor_id" : pdiplomat['id'],
+        "target_id": target_tile['index'],
+        "value" : 0,
+        "action_type": ACTION_MOVE};
         send_request (JSON.stringify(packet));
 
         $(id).remove();

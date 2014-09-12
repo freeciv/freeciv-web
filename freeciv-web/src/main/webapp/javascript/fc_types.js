@@ -54,6 +54,8 @@ var ACTION_SPY_TARGETED_STEAL_TECH = 8;
 var ACTION_SPY_INVESTIGATE_CITY = 9;
 var ACTION_COUNT = 10;
 
+/* Used to signal a move without any action. */
+var ACTION_MOVE = ACTION_COUNT;
 
 /* The kind of universals_u (value_union_type was req_source_type).
  * Note: order must correspond to universal_names[] in requirements.c.

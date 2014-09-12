@@ -548,7 +548,7 @@ function handle_unit_actions(packet)
 
   if (hasActions) {
     popup_diplomat_dialog(pdiplomat, action_probabilities,
-                          target_unit, target_city);
+                          ptile, target_unit, target_city);
   }
 }
 

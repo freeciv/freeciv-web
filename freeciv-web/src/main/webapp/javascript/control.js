@@ -811,9 +811,13 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift)
     break;
 
     case 'F':
-      key_unit_fortify();
-    break;   
-      
+      if (shift) {
+        key_unit_fortress();
+      } else {
+        key_unit_fortify();
+      }
+    break;
+
     case 'I':
       key_unit_irrigate();
     break;      
@@ -1032,6 +1036,20 @@ function key_unit_fortify()
   for (var i = 0; i < funits.length; i++) {
     var punit = funits[i]; 
     request_new_unit_activity(punit, ACTIVITY_FORTIFYING, EXTRA_NONE);
+  }
+  setTimeout(update_unit_focus, 700);
+}
+
+/**************************************************************************
+ Tell the units in focus to build base.
+**************************************************************************/
+function key_unit_fortress()
+{
+  var funits = get_units_in_focus();
+  for (var i = 0; i < funits.length; i++) {
+    var punit = funits[i];
+    /* EXTRA_NONE -> server decides */
+    request_new_unit_activity(punit, ACTIVITY_BASE, EXTRA_NONE);
   }
   setTimeout(update_unit_focus, 700);
 }

@@ -34,10 +34,12 @@ var LAYER_TERRAIN3 = 2;
 var LAYER_ROADS = 3;
 var LAYER_SPECIAL1 = 4;
 var LAYER_CITY1 = 5;
-var LAYER_UNIT = 6;
-var LAYER_FOG = 7;
-var LAYER_CITYBAR = 8;
-var LAYER_COUNT = 9;
+var LAYER_SPECIAL2 = 6;
+var LAYER_UNIT = 7;
+var LAYER_FOG = 8;
+var LAYER_SPECIAL3 = 9;
+var LAYER_CITYBAR = 10;
+var LAYER_COUNT = 11;
 
 // these layers are not used at the moment, for performance reasons.
 //var LAYER_BACKGROUND = ; (not in use)
@@ -168,16 +170,14 @@ function fill_sprite_array(layer, ptile, pedge, pcorner, punit, pcity, citymode)
           sprite_array.push({"key" : "tx.oil_mine"});
         }
 
+        sprite_array = sprite_array.concat(fill_layer1_sprite_array(ptile, pcity));
+
         if (tile_has_extra(ptile, EXTRA_HUT)) {
           sprite_array.push({"key" : "tx.village"}); 
         }
         
         if (tile_has_extra(ptile, EXTRA_POLLUTION)) {
           sprite_array.push({"key" : "tx.pollution"}); 
-        }
-
-	if (tile_has_extra(ptile, BASE_RUINS)) {
-          sprite_array.push({"key" : "base.ruins_mg", "offset_x": 0, "offset_y" : -unit_offset_y}); 
         }
 
         sprite_array = sprite_array.concat(get_border_line_sprites(ptile));
@@ -195,8 +195,13 @@ function fill_sprite_array(layer, ptile, pedge, pcorner, punit, pcity, citymode)
 
 
     break;
-    
-    
+
+    case LAYER_SPECIAL2:
+      if (ptile != null) {
+        sprite_array = sprite_array.concat(fill_layer2_sprite_array(ptile, pcity));
+      }
+      break;
+
     case LAYER_UNIT:
       if (do_draw_unit && active_city == null) {
         var stacked = (ptile['units'] != null && ptile['units'].length > 1);
@@ -248,6 +253,12 @@ function fill_sprite_array(layer, ptile, pedge, pcorner, punit, pcity, citymode)
     case LAYER_FOG:
       sprite_array = sprite_array.concat(fill_fog_sprite_array(ptile, pedge, pcorner));
       
+      break;
+
+    case LAYER_SPECIAL3:
+      if (ptile != null) {
+        sprite_array = sprite_array.concat(fill_layer3_sprite_array(ptile, pcity));
+      }
       break;
 
     case LAYER_CITYBAR:
@@ -707,7 +718,7 @@ function get_unit_veteran_sprite(punit)
 function get_unit_activity_sprite(punit)
 {
   var activity = punit['activity'];
-  
+
   /* don't draw activity for enemy units */
   if (client.conn.playing == null || punit['owner'] != client.conn.playing.playerno) {
     return null;
@@ -744,12 +755,12 @@ function get_unit_activity_sprite(punit)
           "offset_y" : - unit_activity_offset_y}
     break;
     
-    case ACTIVITY_FORTRESS:
+    case ACTIVITY_BASE:
       return {"key" : "unit.fortress",
-          "offset_x" : unit_activity_offset_x, 
-          "offset_y" : - unit_activity_offset_y}
+              "offset_x" : unit_activity_offset_x, 
+              "offset_y" : - unit_activity_offset_y}
     break;
-    
+
     case ACTIVITY_SENTRY:
       return {"key" : "unit.sentry",
           "offset_x" : unit_activity_offset_x, 
@@ -1247,13 +1258,11 @@ function fill_road_rail_sprite_array(ptile, pcity)
   return result_sprites; 
 }
 
-
 /****************************************************************************
   ...
 ****************************************************************************/
 function fill_irrigation_sprite_array(ptile, pcity)
 {
-
   var result_sprites = [];
 
   /* We don't draw the irrigation if there's a city (it just gets overdrawn
@@ -1263,6 +1272,68 @@ function fill_irrigation_sprite_array(ptile, pcity)
       result_sprites.push({"key" : "tx.farmland"});
     } else {
       result_sprites.push({"key" : "tx.irrigation"});
+    }
+  }
+
+  return result_sprites;
+}
+
+/****************************************************************************
+  ...
+****************************************************************************/
+function fill_layer1_sprite_array(ptile, pcity)
+{
+  var result_sprites = [];
+
+  /* We don't draw the bases if there's a city */
+  if (pcity == null) {
+    if (tile_has_extra(ptile, BASE_FORTRESS)) {
+      result_sprites.push({"key" : "base.fortress_bg",
+                           "offset_y" : -normal_tile_height / 2});
+    }
+  }
+
+  return result_sprites;
+}
+
+/****************************************************************************
+  ...
+****************************************************************************/
+function fill_layer2_sprite_array(ptile, pcity)
+{
+  var result_sprites = [];
+
+  /* We don't draw the bases if there's a city */
+  if (pcity == null) {
+    if (tile_has_extra(ptile, BASE_AIRBASE)) {
+      result_sprites.push({"key" : "base.airbase_mg",
+                           "offset_y" : -normal_tile_height / 2});
+    }
+    if (tile_has_extra(ptile, BASE_BUOY)) {
+      result_sprites.push({"key" : "base.buoy_mg",
+                           "offset_y" : -normal_tile_height / 2});
+    }
+    if (tile_has_extra(ptile, BASE_RUINS)) {
+      result_sprites.push({"key" : "base.ruins_mg",
+                           "offset_y" : -normal_tile_height / 2});
+    }
+  }
+
+  return result_sprites;
+}
+
+/****************************************************************************
+  ...
+****************************************************************************/
+function fill_layer3_sprite_array(ptile, pcity)
+{
+  var result_sprites = [];
+
+  /* We don't draw the bases if there's a city */
+  if (pcity == null) {
+    if (tile_has_extra(ptile, BASE_FORTRESS)) {
+      result_sprites.push({"key" : "base.fortress_fg",
+                           "offset_y" : -normal_tile_height / 2});
     }
   }
 

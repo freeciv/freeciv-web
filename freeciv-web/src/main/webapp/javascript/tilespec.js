@@ -743,12 +743,6 @@ function get_unit_activity_sprite(punit)
           "offset_x" : unit_activity_offset_x, 
           "offset_y" : - unit_activity_offset_y}
     break;
-
-    case ACTIVITY_OLD_ROAD:
-      return {"key" : "unit.road",
-          "offset_x" : unit_activity_offset_x, 
-          "offset_y" : - unit_activity_offset_y}
-    break;
     
     case ACTIVITY_MINE:
       return {"key" : "unit.mine",
@@ -797,13 +791,7 @@ function get_unit_activity_sprite(punit)
           "offset_x" : unit_activity_offset_x, 
           "offset_y" : - unit_activity_offset_y}
     break;
-    
-    case ACTIVITY_OLD_RAILROAD:
-      return {"key" : "unit.road",
-          "offset_x" : unit_activity_offset_x, 
-          "offset_y" : - unit_activity_offset_y}
-    break;
-    
+
     case ACTIVITY_PILLAGE:
       return {"key" : "unit.pillage",
           "offset_x" : unit_activity_offset_x, 

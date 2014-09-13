@@ -1,6 +1,6 @@
 diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2014-09-07 06:29:53.277063936 +0300
-+++ freeciv/common/packets.def	2014-09-07 06:31:46.884829248 +0300
+--- freeciv/common/packets.def	2014-09-13 04:07:27.163618908 +0300
++++ freeciv/common/packets.def	2014-09-13 04:09:06.395409167 +0300
 @@ -188,16 +188,16 @@
  type SINT16             = sint16(int)
  type SINT32             = sint32(int)
@@ -175,13 +175,11 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    ORDERS orders[MAX_LEN_ROUTE:orders_length];
    DIRECTION orders_dirs[MAX_LEN_ROUTE:orders_length];
    ACTIVITY orders_activities[MAX_LEN_ROUTE:orders_length];
-@@ -898,13 +915,13 @@
-   BOOL occupied, transported;
+@@ -899,12 +916,12 @@
  
    UINT8 hp, activity;
--  EXTRA activity_tgt;
+   EXTRA activity_tgt;
 -  UNIT transported_by; /* Only valid if transported is set. */
-+#  EXTRA activity_tgt;
 +#  UNIT transported_by; /* Only valid if transported is set. */
  
 -  /* in packet only, not in unit struct */

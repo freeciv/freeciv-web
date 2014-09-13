@@ -1,6 +1,6 @@
-diff -Nurd freeciv/server/unittools.c freeciv/server/unittools.c
---- freeciv/server/unittools.c	2014-08-30 01:53:26.575475382 +0300
-+++ freeciv/server/unittools.c	2014-08-30 01:54:35.811373310 +0300
+diff -Nurd -X.diff_ignore freeciv/server/unittools.c freeciv/server/unittools.c
+--- freeciv/server/unittools.c	2014-09-13 04:10:46.083198276 +0300
++++ freeciv/server/unittools.c	2014-09-13 04:11:57.915046204 +0300
 @@ -2219,8 +2219,8 @@
  			struct packet_unit_short_info *packet,
                          enum unit_info_use packet_use, int info_city_id)
@@ -12,19 +12,7 @@ diff -Nurd freeciv/server/unittools.c freeciv/server/unittools.c
  
    packet->id = punit->id;
    packet->owner = player_number(unit_owner(punit));
-@@ -2237,23 +2237,23 @@
-     packet->activity = punit->activity;
-   }
- 
--  if (punit->activity_target == NULL) {
-+  /*if (punit->activity_target == NULL) {
-     packet->activity_tgt = EXTRA_NONE;
-   } else {
-     packet->activity_tgt = extra_index(punit->activity_target);
--  }
-+  }*/
- 
-   /* Transported_by information is sent to the client even for units that
+@@ -2247,13 +2247,13 @@
     * aren't fully known.  Note that for non-allied players, any transported
     * unit can't be seen at all.  For allied players we have to know if
     * transporters have room in them so that we can load units properly. */

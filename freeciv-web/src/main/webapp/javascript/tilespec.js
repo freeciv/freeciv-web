@@ -718,6 +718,7 @@ function get_unit_veteran_sprite(punit)
 function get_unit_activity_sprite(punit)
 {
   var activity = punit['activity'];
+  var act_tgt  = punit['activity_tgt'];
 
   /* don't draw activity for enemy units */
   if (client.conn.playing == null || punit['owner'] != client.conn.playing.playerno) {
@@ -756,6 +757,24 @@ function get_unit_activity_sprite(punit)
     break;
     
     case ACTIVITY_BASE:
+      switch (act_tgt) {
+        case BASE_FORTRESS:
+          return {"key" : "unit.fortress",
+                  "offset_x" : unit_activity_offset_x,
+                  "offset_y" : - unit_activity_offset_y}
+        break;
+        case BASE_AIRBASE:
+          return {"key" : "unit.airbase",
+                  "offset_x" : unit_activity_offset_x,
+                  "offset_y" : - unit_activity_offset_y}
+        break;
+        case BASE_BUOY:
+          return {"key" : "unit.buoy",
+                  "offset_x" : unit_activity_offset_x,
+                  "offset_y" : - unit_activity_offset_y}
+        break;
+      }
+
       return {"key" : "unit.fortress",
               "offset_x" : unit_activity_offset_x, 
               "offset_y" : - unit_activity_offset_y}

@@ -12,7 +12,7 @@
 
 [datafile]
 description="Default tile_type data for Freeciv"
-options="+Freeciv-ruleset-Devel-2013.May.14"
+options="+Freeciv-ruleset-Devel-2013.May.14 web-compatible"
 
 [control]
 ; Names for custom terrain flags. There can be up to 8 of these.

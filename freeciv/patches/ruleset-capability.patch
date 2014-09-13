@@ -1,0 +1,12 @@
+diff -Nurd -X.diff_ignore freeciv/server/ruleset.h freeciv/server/ruleset.h
+--- freeciv/server/ruleset.h	2014-09-13 21:41:44.272194754 +0300
++++ freeciv/server/ruleset.h	2014-09-13 21:43:27.235938124 +0300
+@@ -17,7 +17,7 @@
+ extern "C" {
+ #endif /* __cplusplus */
+ 
+-#define RULESET_CAPABILITIES "+Freeciv-ruleset-Devel-2013.May.14"
++#define RULESET_CAPABILITIES "+Freeciv-ruleset-Devel-2013.May.14 +web-compatible"
+ /*
+  * Ruleset capabilities acceptable to this program:
+  *

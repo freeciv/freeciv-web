@@ -11,7 +11,7 @@
 
 [datafile]
 description="Default effects data for Freeciv"
-options="+Freeciv-ruleset-Devel-2013.May.14"
+options="+Freeciv-ruleset-Devel-2013.May.14 web-compatible"
 
 ; /* <-- avoid gettext warnings
 ; */ <-- avoid gettext warnings

@@ -9,7 +9,7 @@ diff -Nurd -X.diff_ignore freeciv/common/map.h freeciv/common/map.h
 +#define MAP_DEFAULT_SIZE         3
  #define MAP_MIN_SIZE             0
 -#define MAP_MAX_SIZE             2048
-+#define MAP_MAX_SIZE             15
++#define MAP_MAX_SIZE             18
  
  FC_STATIC_ASSERT(MAP_MAX_SIZE * 1000 <= MAX_DBV_LENGTH,
                   map_too_big_for_bitvector);

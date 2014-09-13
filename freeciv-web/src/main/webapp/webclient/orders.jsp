@@ -1,6 +1,6 @@
 <div id="game_unit_orders_default">       
   <div id="order_goto" class="order_button" title="Go to tile (G)">
-    <a href="#" onclick="check_goto();"><img src="/images/orders/goto_default.png" name="goto_button" alt="" border="0" width="30" height="30"></a>
+    <a href="#" onclick="activate_goto();"><img src="/images/orders/goto_default.png" name="goto_button" alt="" border="0" width="30" height="30"></a>
   </div>
 
   <div id="order_sentry" class="order_button" title="Sentry unit (S)">

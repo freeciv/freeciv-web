@@ -5,7 +5,7 @@ THE FREECIV-WEB PROJECT
 Freeciv-web is an open-source turn-based strategy game. It can be played in any HTML5 capable web-browser and features in-depth game-play and a wide variety of game modes and options. Your goal is to build cities, collect resources, organize your government, and build an army, with the ultimate goal of creating the best civilization. You can play online against other players (multiplayer) or play by yourself against the computer. 
 
 Freeciv-web is is free and open source software. The Freeciv C server is released under the GNU General Public License, while the Freeciv-web client is released
-under the GNU Affero General Public License. See LICENSE.txt for details.
+under the GNU Affero General Public License. See [License](LICENSE.txt) for the full license document.
 
 Freeciv-web is now playable online at http://play.freeciv.org/
 
@@ -148,7 +148,7 @@ manual installation procedure to setup Freeciv-web:
      and update the values for your MySQL database.
    - Copy freeciv-web/src/main/webapp/meta/php_code/local.php.dist as local.php
      and edit to suit your needs.
-   - Run 'build.sh' in the freeciv-web directory
+   - Run 'setup.sh' in the freeciv-web directory
    - Copy nginx configuration file from publite2/nginx/freeciv-web
      to the nginx config directory, /usr/local/nginx/conf, /etc/nginx, or /usr/local/etc/nginx 
      and edit it to suit your needs.
@@ -168,13 +168,14 @@ Freeciv-Web is built on Travis CI on every commit. This is the current build sta
 Developers interested in Freeciv-web
 ------------------------------------
 
-If you want to contibute to Freeciv-web, see the [TODO file](TODO) for 
-some tasks you can work on.
+If you want to contibute to Freeciv-web, see the [Freeciv bugs on gna.org](https://gna.org/bugs/index.php?go_report=Apply&group=freeciv&func=browse&set=custom&msort=0&report_id=100&advsrch=0&status_id=1&resolution_id=0&assigned_to=0&category_id=117) and the [TODO file](TODO) for 
+some tasks you can work on. Pull requests on Github is welcome!
 
 
 Contributors to Freeciv-web
 ---------------------------
 [Andreas Røsdal](http://github.com/andreasrosdal)  [@andreasrosdal](http://www.twitter.com/andreasrosdal)  
 [Marko Lindqvist](https://github.com/cazfi)  
+[Sveinung Kvilhaugsvik](https://github.com/kvilhaugsvik)  
 and the [Freeciv.org project](http://freeciv.wikia.com/wiki/People)!
 

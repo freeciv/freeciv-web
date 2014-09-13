@@ -39,11 +39,11 @@ var LAYER_UNIT = 7;
 var LAYER_FOG = 8;
 var LAYER_SPECIAL3 = 9;
 var LAYER_CITYBAR = 10;
-var LAYER_COUNT = 11;
+var LAYER_GOTO = 11;
+var LAYER_COUNT = 12;
 
 // these layers are not used at the moment, for performance reasons.
 //var LAYER_BACKGROUND = ; (not in use)
-//var LAYER_GOTO = ; (not in use)
 //var LAYER_EDITOR = ; (not in use)
 //var LAYER_GRID* = ; (not in use)
 
@@ -281,9 +281,13 @@ function fill_sprite_array(layer, ptile, pedge, pcorner, punit, pcity, citymode)
       } else if (active_city != null && ptile != null && ptile['worked'] != 0) {
         sprite_array.push(get_city_invalid_worked_sprite());
       }
- 
-    break;
-    
+      break;
+
+    case LAYER_GOTO:
+      if (ptile != null && ptile['goto_dir'] != null) {
+        sprite_array = sprite_array.concat(fill_goto_line_sprite_array(ptile));
+      }
+      break;    
   }
   
   
@@ -633,6 +637,14 @@ function get_city_invalid_worked_sprite() {
           "offset_y" : 0};
 }
 
+
+/**********************************************************************
+...
+***********************************************************************/
+function fill_goto_line_sprite_array(ptile)
+{
+  return {"key" : "goto_line", "goto_dir" : ptile['goto_dir']};
+}
 
 /**********************************************************************
 ...

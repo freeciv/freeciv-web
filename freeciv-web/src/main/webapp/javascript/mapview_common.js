@@ -15,21 +15,17 @@
 var mapview = {};
 var mapdeco_highlight_table = {};
 var mapdeco_crosshair_table = {};
-var mapdeco_gotoline_table = {};
 var last_redraw_time = 0;
 var MAPVIEW_REFRESH_INTERVAL = 10;
-
 
 function mapdeco_init()
 {
   mapdeco_highlight_table = {};
   mapdeco_crosshair_table = {};
-  mapdeco_gotoline_table = {};
 
   init_game_unit_panel();
   init_chatbox();
   keyboard_input=true;
-
 
 }
 
@@ -410,7 +406,7 @@ function update_map_canvas(canvas_x, canvas_y, width, height)
 **************************************************************************/
 function put_one_tile(pcanvas, layer, ptile, canvas_x, canvas_y, citymode)
 {
-  if (tile_get_known(ptile) != TILE_UNKNOWN) {
+  if (tile_get_known(ptile) != TILE_UNKNOWN || layer == LAYER_GOTO) {
     put_one_element(pcanvas, layer, ptile, null, null,
 		    get_drawable_unit(ptile, citymode),
 		    tile_city(ptile), canvas_x, canvas_y, citymode);
@@ -456,6 +452,8 @@ function put_drawn_sprites(pcanvas, canvas_x, canvas_y, pdrawn, fog)
       
     } else if (pdrawn[i]['key'] == "border" ) {
       mapview_put_border_line(pcanvas, pdrawn[i]['dir'], pdrawn[i]['color'], canvas_x, canvas_y);
+    } else if (pdrawn[i]['key'] == "goto_line" ) {
+      mapview_put_goto_line(pcanvas, pdrawn[i]['goto_dir'], canvas_x, canvas_y);
     } else {
       mapview_put_tile(pcanvas, pdrawn[i]['key'], canvas_x + offset_x, canvas_y + offset_y);
 
@@ -510,7 +508,6 @@ function update_map_canvas_full()
       update_map_slide();
     } else {
       update_map_canvas(0, 0, mapview['store_width'], mapview['store_height']);
-      update_goto_path_lines(); 
       check_request_goto_path();
     }
 
@@ -529,42 +526,6 @@ function update_map_canvas_check()
     update_map_canvas_full();
   }
   requestAnimFrame(update_map_canvas_check);
-
-}
-
-/**************************************************************************
-  ...
-**************************************************************************/
-function update_goto_path_lines()
-{
-  if (goto_active && goto_preview_active) {
-    for (var i = 0; i < current_goto_path.length - 1; i++) {
-      var ptile = current_goto_path[i];
-      var ntile = current_goto_path[i+1];
-      if (ptile == null || ntile == null) continue;
-
-      if (ptile['x'] == (map['xsize'] - 1) && ntile['x'] == 0) continue;
-      if (ntile['x'] == (map['xsize'] - 1) && ptile['x'] == 0) continue;
-
-      var r = map_to_gui_pos(ptile['x'], ptile['y']);
-      var gui_x1 = r['gui_dx'] - mapview['gui_x0'] + (tileset_tile_width / 2);
-      var gui_y1 = r['gui_dy'] - mapview['gui_y0'] + (tileset_tile_height / 2); 
-
-      var s = map_to_gui_pos(ntile['x'], ntile['y']);
-      var gui_x2 = s['gui_dx'] - mapview['gui_x0'] + (tileset_tile_width / 2);
-      var gui_y2 = s['gui_dy'] - mapview['gui_y0'] + (tileset_tile_height / 2);
-
-      drawGotoLine(mapview_canvas_ctx, gui_x1, gui_y1, gui_x2, gui_y2);
-
-    }
-    if (current_goto_turns != undefined) {
-      $("#turns_to_target").html("Turns to target: " + current_goto_turns);
-    } else {
-      $("#turns_to_target").html("-" );
-    }
-    update_mouse_cursor();
-
-  }
 
 }
 
@@ -636,8 +597,6 @@ function enable_mapview_slide(ptile)
     update_map_canvas(0, 0, new_width, Math.abs(dy));
     update_map_canvas(old_width, Math.abs(dy), Math.abs(dx), old_height);
   }
-
-  update_goto_path_lines(); 
 
   /* restore default mapview. */
   mapview_canvas = document.getElementById('canvas');

@@ -121,7 +121,7 @@ function mapview_touch_move(e)
   if (goto_active && current_focus.length > 0) {
     var ptile = canvas_pos_to_tile(mouse_x, mouse_y);
     if (ptile != null && goto_request_map[ptile['x'] + "," + ptile['y']] == null) {
-      preview_goto_path(current_focus[0]['id'], ptile['x'], ptile['y']);
+      request_goto_path(current_focus[0]['id'], ptile['x'], ptile['y']);
     }
   }
 

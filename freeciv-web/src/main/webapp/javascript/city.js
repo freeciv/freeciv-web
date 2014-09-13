@@ -381,7 +381,7 @@ function can_city_build_unit_direct(pcity, punittype)
 **************************************************************************/
 function can_city_build_unit_now(pcity, punittype)
 {  
-  return (pcity['can_build_unit'][punittype['id']] == "1"); 
+  return (pcity != null && pcity['can_build_unit'][punittype['id']] == "1"); 
 }
 
 

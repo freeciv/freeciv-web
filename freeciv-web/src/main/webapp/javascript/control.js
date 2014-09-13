@@ -22,7 +22,6 @@ var allow_right_click = false;
 
 var current_focus = [];
 var goto_active = false;
-var goto_preview_active = true;
 var paradrop_active = false;
 var airlift_active = false;
 
@@ -36,7 +35,6 @@ var intro_click_description = true;
 
 var goto_request_map = {};
 var goto_turns_request_map = {};
-var current_goto_path = [];
 var current_goto_turns = 0;
 
 /****************************************************************************
@@ -188,14 +186,6 @@ function mouse_moved_cb(e)
   }
 
   if (client.conn.playing == null) return;
-
-  /* Request preview goto path */
-  if (goto_active && current_focus.length > 0) {
-    var ptile = canvas_pos_to_tile(mouse_x, mouse_y);
-    if (ptile != null && goto_request_map[ptile['x'] + "," + ptile['y']] == null) {
-      preview_goto_path(current_focus[0]['id'], ptile['x'], ptile['y']);
-    }
-  }
 
   if (C_S_RUNNING == client_state()) {
     update_mouse_cursor();
@@ -928,11 +918,6 @@ function activate_goto()
   mapview_canvas.style.cursor = "crosshair";
 
   if (current_focus.length > 0) {
-    var ptile = canvas_pos_to_tile(mouse_x, mouse_y);
-    if (ptile != null) {
-      preview_goto_path(current_focus[0]['id'], ptile['x'], ptile['y']);
-    }
-
     if (intro_click_description) {
       if (is_touch_device()) {
         add_chatbox_text("Carefully drag unit to the tile you want it to go to.");
@@ -953,27 +938,13 @@ function activate_goto()
 /**************************************************************************
  ...
 **************************************************************************/
-function check_goto()
-{
-  if (is_touch_device()) {
-    goto_preview_active = false;
-  }
-
-  activate_goto();
-
-}
-
-/**************************************************************************
- ...
-**************************************************************************/
 function deactivate_goto()
 {
   goto_active = false;
   mapview_canvas.style.cursor = "default";
   goto_request_map = {};
   goto_turns_request_map = {};
-  current_goto_path = [];
-  goto_preview_active = true;
+  clear_goto_tiles();
 
   // update focus to next unit after 600ms.
   setTimeout("update_unit_focus();", 600);
@@ -1367,51 +1338,6 @@ function process_diplomat_arrival(pdiplomat, target_tile_id)
   }
 }
 
-
-
-/****************************************************************************
-  Calculates a preview of the goto path, based on info in the client only.
-  FIXME: This doesn't support map wrapping.
-****************************************************************************/
-function preview_goto_path(unit_id, dst_x, dst_y)
-{
-  var start_tile = index_to_tile(units[unit_id]['tile']);
-  current_goto_path = [];
-  generate_preview_path(start_tile['x'], start_tile['y'], dst_x, dst_y);
-}
-
-/**************************************************************************
- ...
-**************************************************************************/
-function generate_preview_path(sx, sy, dx, dy)
-{
-
-  var ptile = map_pos_to_tile(sx, sy);
-  current_goto_path.push(ptile);
-	
-  /* Check if full path has been found*/
-  if (sx == dx && sy == dy) return;
-
-  if (sx < dx && sy == dy) {
-    generate_preview_path(sx+1, sy, dx, dy);
-  } else if (sx > dx && sy == dy) {
-    generate_preview_path(sx-1, sy, dx, dy);
-  } else if (sx == dx && sy < dy) {
-    generate_preview_path(sx, sy+1, dx, dy);
-  } else if (sx == dx && sy > dy) {
-    generate_preview_path(sx, sy-1, dx, dy);
-  } else if (sx > dx && sy > dy) {
-    generate_preview_path(sx-1, sy-1, dx, dy);
-  } else if (sx < dx && sy < dy) {
-    generate_preview_path(sx+1, sy+1, dx, dy);
-  } else if (sx < dx && sy > dy) {
-    generate_preview_path(sx+1, sy-1, dx, dy);
-  } else if (sx > dx && sy < dy) {
-    generate_preview_path(sx-1, sy+1, dx, dy);
-  }
-
-}
-
 /****************************************************************************
   Request GOTO path for unit with unit_id, and dst_x, dst_y in map coords.
 ****************************************************************************/
@@ -1423,10 +1349,12 @@ function request_goto_path(unit_id, dst_x, dst_y)
     var packet = {"type" : packet_goto_path_req, "unit_id" : unit_id,
                   "goal" : map_pos_to_tile(dst_x, dst_y)['index']};
     send_request (JSON.stringify(packet));
-  
+    clear_goto_tiles(); 
+    current_goto_turns = null;
+    $("#unit_text_details").html("Choose unit goto");
+    setTimeout(update_mouse_cursor, 700);
   } else {
-    current_goto_path = goto_request_map[dst_x + "," + dst_y];
-    current_goto_turns = goto_turns_request_map[dst_x + "," + dst_y];
+    update_goto_path(goto_request_map[dst_x + "," + dst_y]);
   }
 }
 
@@ -1451,28 +1379,32 @@ function check_request_goto_path()
 /****************************************************************************
   Show the GOTO path in the unit_goto_path packet.
 ****************************************************************************/
-function show_goto_path(goto_packet)
+function update_goto_path(goto_packet)
 {
+  clear_goto_tiles();
   var punit = units[goto_packet['unit_id']];
+  if (punit == null) return;
   var t0 =  index_to_tile(punit['tile']);
   var ptile = t0;
   var goaltile = index_to_tile(goto_packet['dest']);
-  current_goto_path = [];
-  current_goto_path.push(ptile);
 
   for (var i = 0; i < goto_packet['dir'].length; i++) {
     if (ptile == null) break;
     var dir = goto_packet['dir'][i];
+    ptile['goto_dir'] = dir; 
     ptile = mapstep(ptile, dir);
-    current_goto_path.push(ptile);
   }
 
   current_goto_turns = goto_packet['turns'];
 
-  goto_request_map[goaltile['x'] + "," + goaltile['y']] 
-	  = current_goto_path;
+  goto_request_map[goaltile['x'] + "," + goaltile['y']] = goto_packet;
   goto_turns_request_map[goaltile['x'] + "," + goaltile['y']] 
 	  = current_goto_turns;
+
+  if (current_goto_turns != undefined) {
+    $("#unit_text_details").html("Turns for goto: " + current_goto_turns);
+  } 
+  update_mouse_cursor();
 }
 
 /****************************************************************************

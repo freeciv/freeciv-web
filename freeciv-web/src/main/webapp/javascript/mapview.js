@@ -40,6 +40,9 @@ var fontsize = 12;
 
 var fullfog = [];
 
+var GOTO_DIR_DX = [0, 1, 2, -1, 1, -2, -1, 0];
+var GOTO_DIR_DY = [-2, -1, 0, -1, 1, 0, 1, 2];
+
 var dashedSupport = false;
 var mozDashSupport = false; 
 
@@ -350,20 +353,6 @@ function drawPath(ctx, x1, y1, x2, y2, x3, y3, x4, y4)
 /**************************************************************************
   ...
 **************************************************************************/
-function drawGotoLine(ctx, x1, y1, x2, y2)
-{
-    ctx.strokeStyle = '#f00';
-    ctx.lineWidth = 2;
-    ctx.beginPath(); 
-    ctx.moveTo(x1, y1);
-    ctx.lineTo(x2, y2);
-    ctx.stroke();
-}
-
-
-/**************************************************************************
-  ...
-**************************************************************************/
 function mapview_put_tile(pcanvas, tag, canvas_x, canvas_y) {
   if (sprites[tag] == null) {
     //console.log("Missing sprite " + tag);
@@ -491,7 +480,24 @@ function mapview_put_border_line(pcanvas, dir, color, canvas_x, canvas_y) {
     
 }
 
+/**************************************************************************
+...
+**************************************************************************/
+function mapview_put_goto_line(pcanvas, dir, canvas_x, canvas_y) {
 
+  var x0 = canvas_x + (tileset_tile_width / 2);
+  var y0 = canvas_y + (tileset_tile_height / 2);
+  var x1 = x0 + GOTO_DIR_DX[dir] * (tileset_tile_width / 2);
+  var y1 = y0 + GOTO_DIR_DY[dir] * (tileset_tile_height / 2);
+
+  pcanvas.strokeStyle = '#f00';
+  pcanvas.lineWidth = 2;
+  pcanvas.beginPath(); 
+  pcanvas.moveTo(x0, y0);
+  pcanvas.lineTo(x1, y1);
+  pcanvas.stroke();
+
+}
 
 /**************************************************************************
   Update the information label which gives info on the current unit and the
@@ -536,7 +542,7 @@ function update_unit_info_label(punits)
     + "</span> <span title='Firepower'>F:" + ptype['firepower']  
     + "</span> <span title='Health points'>H:" 
     + ptype['hp'] + "</span>";
-    unit_info_html += "</div><div id='turns_to_target'></div></div></div>";
+    unit_info_html += "</div></div></div>";
     
   }
   

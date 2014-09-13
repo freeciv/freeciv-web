@@ -107,7 +107,6 @@ function map_allocate()
 ****************************************************************************/
 function tile_init(tile)
 {
-  tile['continent'] = 0;
   tile['known'] = null;  /* tile_known in C side */ 
   tile['seen'] = {};     /* tile_seen in C side */
   tile['specials'] = [];
@@ -118,6 +117,7 @@ function tile_init(tile)
   tile['claimer'] = null;
   tile['worked'] = null;
   tile['spec_sprite'] = null;
+  tile['goto_dir'] = null;
   return tile;
 }
 
@@ -362,4 +362,16 @@ function dir_ccw(dir)
     return DIR8_WEST;
   }
   return -1;
+}
+
+/**************************************************************************
+ ...
+**************************************************************************/
+function clear_goto_tiles()
+{
+  for (var x = 0; x < map['xsize']; x++) {
+    for (var y = 0; y < map['ysize']; y++) {
+      tiles[x + y * map['xsize']]['goto_dir'] = null;
+    }
+  }
 }

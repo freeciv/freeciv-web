@@ -1,6 +1,6 @@
 <?php
 
-function img_html($pic, $alt, $extra) {
+function img_html($pic, $alt, $extra, $width) {
   global $pic_paths;
   $paths = array_keys($pic_paths);
   $pic_found = NULL;
@@ -16,6 +16,9 @@ function img_html($pic, $alt, $extra) {
 
   if ($pic_found != NULL) {
     echo "<IMG SRC=\"/" . $pic_paths[$pic_found] . $pic . "\"";
+    if ($width != NULL) {
+      echo " WIDTH=\"$width\"";
+    }
     if ($alt != NULL) {
       echo " ALT=\"$alt\"";
     }

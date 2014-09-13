@@ -24,7 +24,7 @@
 
 <?
 echo "<CENTER>";
-img_html("headers/clients.gif", "Client Statistics", NULL);
+img_html("headers/clients.gif", "Client Statistics", NULL, NULL);
 echo "</CENTER><BR><CENTER>";
 
 $start = "start";
@@ -78,7 +78,7 @@ foreach ($list as $type) {
     echo $count;
     echo "</TD><TD ALIGN=LEFT>";
     $img_tag_extra= "height=\"16\" width=\"" . strval($l*6+1) . "\"";
-    img_html("line.png", NULL, "$img_tag_extra");
+    img_html("line.png", NULL, "$img_tag_extra", NULL);
     echo "<TD ALIGN=RIGHT>$l%</TD></TR>\n";
   }
   echo "</TABLE><BR>";
@@ -95,7 +95,7 @@ foreach ($list as $type) {
 <BR><BR>
 <P ALIGN="center">
 <?
-img_html("hr.gif", "--------", NULL);
+img_html("hr.gif", "--------", NULL, NULL);
 ?>
 <BR><BR>
 

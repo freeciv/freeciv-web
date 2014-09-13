@@ -112,6 +112,7 @@ CREATE TABLE `servers` (
   `patches` varchar(255) DEFAULT 'none',
   `capability` varchar(255) DEFAULT NULL,
   `state` varchar(20) DEFAULT 'Pregame',
+  `ruleset` varchar(255) DEFAULT 'Unknown',
   `topic` varchar(255) DEFAULT 'none',
   `type` varchar(255) DEFAULT 'none',
   `humans` varchar(64) DEFAULT '0',

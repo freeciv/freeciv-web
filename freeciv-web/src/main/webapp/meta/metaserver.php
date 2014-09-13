@@ -35,6 +35,7 @@ $posts = array(
   "patches",
   "capability",
   "state",
+  "ruleset",
   "message",
   "type",
   "serverid",
@@ -65,6 +66,7 @@ $sqlvars = array(
   "patches",
   "capability",
   "state",
+  "ruleset",
   "message",
   "type",
   "available",
@@ -439,7 +441,7 @@ if ( isset($port) ) {
         print "<br/><br/>";
         $msg = db2html($row["message"]);
         print "<table><tr class='meta_header'><th>Version</th><th>Patches</th><th>Capabilities</th>";
-        print "<th>State</th>";
+        print "<th>State</th><th>Ruleset</th>";
         print "<th>Server ID</th></tr>\n";
         print "<tr class='meta_row'><td>";
         print db2html($row["version"]);
@@ -449,6 +451,8 @@ if ( isset($port) ) {
         print db2html($row["capability"]);
         print "</td><td>";
         print db2html($row["state"]);
+        print "</td><td>";
+        print db2html($row["ruleset"]);
         print "</td><td>";
         print db2html($row["serverid"]);
         print "</td></tr>\n</table></p>\n";

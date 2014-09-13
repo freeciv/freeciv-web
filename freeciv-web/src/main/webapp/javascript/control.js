@@ -810,6 +810,12 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift)
       key_unit_road();
     break;
 
+    case 'E':
+      if (shift) {
+        key_unit_airbase();
+      }
+    break;
+
     case 'F':
       if (shift) {
         key_unit_fortress();
@@ -1050,6 +1056,19 @@ function key_unit_fortress()
     var punit = funits[i];
     /* EXTRA_NONE -> server decides */
     request_new_unit_activity(punit, ACTIVITY_BASE, EXTRA_NONE);
+  }
+  setTimeout(update_unit_focus, 700);
+}
+
+/**************************************************************************
+ Tell the units in focus to build airbase.
+**************************************************************************/
+function key_unit_airbase()
+{
+  var funits = get_units_in_focus();
+  for (var i = 0; i < funits.length; i++) {
+    var punit = funits[i];
+    request_new_unit_activity(punit, ACTIVITY_BASE, BASE_AIRBASE);
   }
   setTimeout(update_unit_focus, 700);
 }

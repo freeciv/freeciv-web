@@ -1,7 +1,7 @@
 diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
---- freeciv/server/unithand.c	2014-09-13 02:17:46.502102902 +0300
-+++ freeciv/server/unithand.c	2014-09-13 02:20:45.953680334 +0300
-@@ -1214,6 +1214,63 @@
+--- freeciv/server/unithand.c	2014-09-13 04:35:03.723942718 +0300
++++ freeciv/server/unithand.c	2014-09-13 04:35:34.923870105 +0300
+@@ -1214,6 +1214,59 @@
      activity_target = extra_by_number(target_id);
    }
  
@@ -37,10 +37,6 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
 +      struct tile *ptile = unit_tile(punit);
 +      struct base_type *pbase =
 +        get_base_by_gui_type(BASE_GUI_FORTRESS, punit, ptile);
-+
-+      if (pbase == NULL) {
-+        pbase = get_base_by_gui_type(BASE_GUI_AIRBASE, punit, ptile);
-+      }
 +
 +      if (pbase != NULL) {
 +        activity_target = base_extra_get(pbase);

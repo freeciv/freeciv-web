@@ -61,6 +61,10 @@ function civclient_init()
   update_game_status_panel();
   statusTimerId = setInterval("update_game_status_panel()", 6000);
 
+  if (overviewTimerId == -1) {
+    overviewTimerId = setInterval("redraw_overview()", OVERVIEW_REFRESH);
+  }
+
   // Tells the browser that you wish to perform an animation; this 
   // requests that the browser schedule a repaint of the window for the 
   // next animation frame.

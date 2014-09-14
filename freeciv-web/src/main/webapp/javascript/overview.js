@@ -71,16 +71,6 @@ function init_overview()
   
   redraw_overview();
   
-  if (overviewTimerId == -1) {
-    overviewTimerId = setInterval("redraw_overview()", OVERVIEW_REFRESH);
-  }
-
-  $("#game_overview_map").click(function(e) {
-    var x = e.pageX - $(this).offset().left;
-    var y = e.pageY - $(this).offset().top;
-    overview_clicked (x, y)
-  });
-
   $("#game_overview_panel").css("min-height",  map['ysize']);
   $(".overview_dialog").position({my: 'left bottom', at: 'left bottom', of: window});
 }
@@ -90,7 +80,7 @@ function init_overview()
 ****************************************************************************/
 function redraw_overview()
 {
-  if (mapview_slide['active']) return;
+  if (mapview_slide['active'] || C_S_RUNNING > client_state()) return;
 
   bmp_lib.render('overview_map', 
                   generate_overview_grid(map['xsize'], map['ysize']), 

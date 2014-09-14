@@ -854,7 +854,11 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift)
     break;
 
     case 'D':
-      if (alt) show_debug_info(); 
+      if (alt) {
+        show_debug_info();
+      } else {
+        key_unit_action_select();
+      }
     break;
 
   };
@@ -1210,6 +1214,17 @@ function key_unit_homecity()
   }
 }
 
+/**************************************************************************
+  Show action selection dialog for unit(s).
+**************************************************************************/
+function key_unit_action_select()
+{
+  var funits = get_units_in_focus();
+  for (var i = 0; i < funits.length; i++) {
+    var punit = funits[i];
+    process_diplomat_arrival(punit, punit['tile']);
+  }
+}
 
 /**************************************************************************
   Call to request (from the server) that the focus unit is put into

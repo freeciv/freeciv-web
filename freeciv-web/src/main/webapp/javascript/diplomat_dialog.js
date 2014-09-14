@@ -21,7 +21,7 @@ function can_actor_unit_move(pdiplomat, target_tile)
 {
   var tgt_owner_id;
 
-  if (pdiplomat['tile'] == target_tile) {
+  if (index_to_tile(pdiplomat['tile']) == target_tile) {
     /* The unit is already on this tile. */
     return false;
   }

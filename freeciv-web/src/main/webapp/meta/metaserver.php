@@ -472,7 +472,7 @@ if ( isset($port) ) {
           for ( $inx = 0; $inx < $nr; $inx++ ) {
             $row = fcdb_fetch_array($res, $inx);
             print "<tr class='meta_row'><td class=\"left\">";
-            flag_html("f." . $row["flag"]);
+	    flag_html("f." . $row["flag"]);
             print "</td><td>";
             print db2html($row["name"]);
             print "</td><td>";
@@ -536,6 +536,7 @@ if ( isset($port) ) {
         print "<th>State</th><th>Players</th>";
         print "<th style='width:45%;'>Message</th>";
         print "<th>Player</th>\n";
+        print "<th>Flag</th>\n";
         print "<th>Turn:</th></tr>";
         for ( $inx = 0; $inx < $nr; $inx++ ) {
           $row = fcdb_fetch_array($res, $inx);
@@ -543,7 +544,7 @@ if ( isset($port) ) {
 
 	  print "<a  class='button' href=\"/webclient?action=observe&amp;civserverport=" 
 		  . db2html($row["port"]) . "&amp;civserverhost=" . db2html($row["host"]) . "\">";
-          print "Join/Observe";
+          print "Observe";
           print "</a>";
 
           print "<a class='button' href=\"/meta/metaserver.php?server_port=" . db2html($row["host"]) . ":" . db2html($row["port"]) . "\">";
@@ -562,6 +563,8 @@ if ( isset($port) ) {
           print "</td><td>";
 
           print db2html($row["player"]);
+	  print "</td><td>"
+	  flag_html("f." . $row["flag"]);
 	  print "</td><td>"
           print db2html($row["turn"]);
 	  print "</td></tr>\n";

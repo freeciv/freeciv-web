@@ -14,8 +14,8 @@ fi
 echo "<?php";
 echo "\$flags = array(";
 
-cat $1 | grep "\".*\".*,.*\".*\"" | grep -v ";.*\"" | grep -v "\"tag\"" | sed 's/;.*//' | sed -e 's/,/ => /' -e "s/\"[:space:\t ]*\$/.svg\",/" -e "s/\"/'/g" -e "s,flags/,,"
+cat $1 | grep "\".*\".*,.*\".*\"" | grep -v ";.*\"" | grep -v "\"tag\"" | sed 's/;.*//' | sed -e 's/,/ => /' -e "s/\"[:space:\t ]*\$/-web.png\",/" -e "s/\"/'/g" -e "s,flags/,,"
 
-echo "'unknown' => 'unknown.svg');";
+echo "'unknown' => 'unknown-web.png');";
 echo "?>";
 ) > ../php_code/flagspecs.php

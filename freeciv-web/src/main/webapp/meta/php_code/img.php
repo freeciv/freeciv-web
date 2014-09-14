@@ -9,11 +9,8 @@ function img_html($pic, $alt, $extra, $width) {
 
   foreach ($paths as $filepath) {
     $pic_file = $filepath . $pic;
-
-    if ($pic_found == NULL && file_exists($pic_file)) {
-      $pic_found = $filepath;
-      break;
-    }
+    $pic_found = $filepath;
+    break;
   }
 
   if ($pic_found != NULL) {
@@ -37,7 +34,7 @@ function flag_html($tag) {
   global $flags;
 
   if (!array_key_exists($tag, $flags)) {
-    $pic = "unknown.svg";
+    $pic = "unknown-web.png";
   } else {
     $pic = $flags["$tag"];
   }

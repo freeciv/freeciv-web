@@ -4,6 +4,10 @@ $fcdb_metaserver_db = "freeciv_web";
 $fcdb_username = ""; /* not in use */
 $fcdb_pw = ""; /* not in use */
 
+// Image directory (containing subdir "flags")
+// Filesystem path => URL
+$pic_paths = array("/images/" => "images/");
+
 $metaserver_header = "Servers on this freeciv-web server";
 
 ?>

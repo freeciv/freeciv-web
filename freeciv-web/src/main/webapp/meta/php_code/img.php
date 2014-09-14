@@ -1,5 +1,7 @@
 <?php
 
+include_once("php_code/flagspecs.php");
+
 function img_html($pic, $alt, $extra, $width) {
   global $pic_paths;
   $paths = array_keys($pic_paths);
@@ -29,6 +31,18 @@ function img_html($pic, $alt, $extra, $width) {
   } else if ($alt != NULL) {
     echo " $alt ";
   }
+}
+
+function flag_html($tag) {
+  global $flags;
+
+  if (!array_key_exists($tag, $flags)) {
+    $pic = "unknown.svg";
+  } else {
+    $pic = $flags["$tag"];
+  }
+
+  img_html("flags/" . $pic, $pic, NULL, 40);
 }
 
 ?>

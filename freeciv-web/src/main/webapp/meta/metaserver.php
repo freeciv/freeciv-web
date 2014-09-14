@@ -472,6 +472,7 @@ if ( isset($port) ) {
           for ( $inx = 0; $inx < $nr; $inx++ ) {
             $row = fcdb_fetch_array($res, $inx);
             print "<tr class='meta_row'><td class=\"left\">";
+            flag_html("f." . $row["flag"]);
             print "</td><td>";
             print db2html($row["name"]);
             print "</td><td>";

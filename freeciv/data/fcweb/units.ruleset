@@ -16,7 +16,7 @@
 
 [datafile]
 description="Default unit_type data for Freeciv"
-options="+Freeciv-ruleset-Devel-2013.May.14 web-compatible"
+options="+Freeciv-ruleset-Devel-2014.September.14c web-compatible"
 
 [control]
 ; Names for custom unit type flags. There can be up to 16 of these.

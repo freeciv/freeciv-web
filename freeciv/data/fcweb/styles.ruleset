@@ -9,7 +9,7 @@
 
 [datafile]
 description="Nation theme data for Freeciv"
-options="+Freeciv-ruleset-Devel-2013.May.14 web-compatible"
+options="+Freeciv-ruleset-Devel-2014.September.14c web-compatible"
 
 ; /* <-- avoid gettext warnings
 ;

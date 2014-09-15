@@ -9,7 +9,7 @@
 
 [datafile]
 description="Default technology data for Freeciv (as Civ2, minus a few)"
-options="+Freeciv-ruleset-Devel-2013.May.14 web-compatible"
+options="+Freeciv-ruleset-Devel-2014.September.14c web-compatible"
 
 [control]
 ; Names for custom tech flags. There can be up to 8 of these.

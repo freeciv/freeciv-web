@@ -62,7 +62,7 @@ function control_init()
   $("#turn_done_button").tooltip();
 
   $("#freeciv_logo").click(function(event) {
-    window.open('http://play.freeciv.org/', '_new');
+    window.open('/', '_new');
     });
 
 

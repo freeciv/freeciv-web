@@ -6,7 +6,7 @@ $fcdb_pw = ""; /* not in use */
 
 // Image directory (containing subdir "flags")
 // Filesystem path => URL
-$pic_paths = array("/images/" => "images/");
+$pic_paths = array("/vagrant/resin/webapps/ROOT/images/" => "images/");
 
 $metaserver_header = "Servers on this freeciv-web server";
 

@@ -9,8 +9,10 @@ function img_html($pic, $alt, $extra, $width) {
 
   foreach ($paths as $filepath) {
     $pic_file = $filepath . $pic;
-    $pic_found = $filepath;
-    break;
+    if ($pic_found == NULL && file_exists($pic_file)) {
+      $pic_found = $filepath;
+      break;
+    }
   }
 
   if ($pic_found != NULL) {

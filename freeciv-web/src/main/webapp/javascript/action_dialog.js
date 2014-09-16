@@ -132,7 +132,8 @@ function popup_diplomat_dialog(pdiplomat, action_probabilities,
   var dhtml = "<center>";
 
   if (pcity != null) {
-    dhtml += "Your didplomat has arrived at " + pcity['name'] + ". What is your command?";
+    dhtml += "Your didplomat has arrived at "
+        + decodeURIComponent(pcity['name']) + ". What is your command?";
   } else {
     dhtml += "The diplomat is waiting for your command";
   }

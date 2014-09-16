@@ -80,7 +80,8 @@ function init_overview()
 ****************************************************************************/
 function redraw_overview()
 {
-  if (mapview_slide['active'] || C_S_RUNNING > client_state()) return;
+  if (mapview_slide['active'] || C_S_RUNNING > client_state() 
+      || map['xsize'] == null || map['ysize'] == null) return;
 
   bmp_lib.render('overview_map', 
                   generate_overview_grid(map['xsize'], map['ysize']), 

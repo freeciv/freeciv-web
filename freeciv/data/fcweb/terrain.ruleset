@@ -11,7 +11,7 @@
 ; than minor changes.
 
 [datafile]
-description="Default tile_type data for Freeciv"
+description="Classic freeciv-web tile_type data for Freeciv"
 options="+Freeciv-ruleset-Devel-2014.September.14c web-compatible"
 
 [control]

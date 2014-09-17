@@ -15,7 +15,7 @@
 ; then the first unit with this role will be chosen.
 
 [datafile]
-description="Default unit_type data for Freeciv"
+description="Classic freeciv-web unit_type data for Freeciv"
 options="+Freeciv-ruleset-Devel-2014.September.14c web-compatible"
 
 [control]

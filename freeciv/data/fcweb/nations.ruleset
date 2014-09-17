@@ -8,7 +8,7 @@
 ; use your new customized file.
 
 [datafile]
-description="Default nations data for Freeciv"
+description="Classic freeciv-web nations data for Freeciv"
 options="+Freeciv-ruleset-Devel-2014.September.14c web-compatible"
 
 ; This section contains meta information for freeciv-ruledit to recreate the ruleset

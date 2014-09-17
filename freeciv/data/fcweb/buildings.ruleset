@@ -11,7 +11,7 @@
 ; than minor changes.
 
 [datafile]
-description="Default buildings data for Freeciv"
+description="Classic freeciv-web buildings data for Freeciv"
 options="+Freeciv-ruleset-Devel-2014.September.14c web-compatible"
 
 ; /* <-- avoid gettext warnings

@@ -10,7 +10,7 @@
 ; than minor changes.
 
 [datafile]
-description="Default effects data for Freeciv"
+description="Classic freeciv-web effects data for Freeciv"
 options="+Freeciv-ruleset-Devel-2014.September.14c web-compatible"
 
 ; /* <-- avoid gettext warnings

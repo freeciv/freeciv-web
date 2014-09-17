@@ -8,7 +8,7 @@
 ; use your new customized file.
 
 [datafile]
-description="Default technology data for Freeciv (as Civ2, minus a few)"
+description="Classic freeciv-web technology data for Freeciv"
 options="+Freeciv-ruleset-Devel-2014.September.14c web-compatible"
 
 [control]

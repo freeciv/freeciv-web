@@ -8,7 +8,7 @@
 ; use your new customized file.
 
 [datafile]
-description="Nation theme data for Freeciv"
+description="Classic freeciv-web nation theme data for Freeciv"
 options="+Freeciv-ruleset-Devel-2014.September.14c web-compatible"
 
 ; /* <-- avoid gettext warnings

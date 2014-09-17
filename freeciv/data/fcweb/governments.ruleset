@@ -11,7 +11,7 @@
 ; than minor changes.
 
 [datafile]
-description="Default governments data for Freeciv (as Civ2, minus fundamentalism)"
+description="Classic freeciv-web governments data for Freeciv"
 options="+Freeciv-ruleset-Devel-2014.September.14c web-compatible"
 
 [governments]

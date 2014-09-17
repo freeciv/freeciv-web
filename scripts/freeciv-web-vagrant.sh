@@ -80,6 +80,9 @@ echo "==== Setting up MySQL ===="
 mysqladmin -u ${mysql_user} -p${mysql_pass} create freeciv_web
 mysql -u ${mysql_user} -p${mysql_pass} freeciv_web < ${basedir}/freeciv-web/src/main/webapp/meta/private/metaserver.sql
 
+# script configuration setup
+sed -e "s/MYSQL_USER=root/MYSQL_USER=${mysql_user}/" -e "s/MYSQL_PASSWORD=changeme/MYSQL_PASSWORD=${mysql_pass}/" ${basedir}/scripts/configuration.sh.dist > ${basedir}/scripts/configuration.sh
+
 echo "==== Building freeciv ===="
 cd ${basedir}/freeciv && ./prepare_freeciv.sh
 cd freeciv && make install

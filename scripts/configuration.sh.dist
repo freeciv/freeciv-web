@@ -1,0 +1,5 @@
+# Configuration used by the scripts
+
+# Freeciv-web MySQL database
+MYSQL_USER=root
+MYSQL_PASSWORD=changeme

@@ -1,0 +1,103 @@
+
+; Modifying this file:
+; You should not modify this file except to make bugfixes or
+; for other "maintenance".  If you want to make custom changes
+; you should create a new datadir subdirectory and copy this file
+; into that directory, and then modify that copy.  Then use the
+; command "rulesetdir <mysubdir>" in the server to have freeciv
+; use your new customized file.
+
+[datafile]
+description="Experimental web-client city rules for Freeciv"
+options="+Freeciv-ruleset-Devel-2014.September.14c web-compatible"
+
+; /* <-- avoid gettext warnings
+;
+; A specialist is a city citizen who is not a tile worker.  Usually the
+; player can control what specialist each citizen is, so long as the
+; requirements for that specialist are met.
+;
+; Below are the entries for the specialists, one per specialist type.
+; The tag name (in [specialist_*]) doesn't matter so long as it's unique.
+; For each specialist the following fields may be set:
+;
+; 
+; name          = translatable (plural) name as seen by user
+; rule_name     = (optional) name for savegames, rulesets etc; if not
+;                 present, 'name' is used. Since the name used in savegames
+;                 must not change, this is used when renaming a specialist
+;                 after a ruleset has been released. (The original specialist
+;                 names in the default ruleset were not designed to be
+;                 user-visible.)
+; short_name    = one-character "short name" used (for instance) in cityrep;
+;                 should be first character/abbrevation of "name"
+; graphic_alt   = fallback graphic tag in case the specialist graphic isn't
+;                 found. Example value: "specialist.scientist_0"
+;                 The specialist graphic allow different images based on
+;                 citizen number. The alt tag don't. To use another
+;                 specialist's tag use specialist.<otherrulename>_<number>.
+; reqs		= requirements to have the specialist pick (see
+;		  effects.ruleset and README.effects for help on requirements)
+; helptext      = optional help text string; should escape all raw newlines
+;                 so that xgettext parsing works
+;
+; */ <-- avoid gettext warnings
+
+[specialist_elvis]
+name            = _("Entertainers")
+rule_name       = "elvis"
+short_name	= _("?Elvis:E")
+reqs		=
+    { "type", "name", "range"
+; Nothing
+    }
+helptext        = _("\
+Each entertainer produces two luxury points for their city per turn. \
+See the section on Happiness for the effects of luxury points.\
+")
+
+[specialist_scientist]
+name            = _("Scientists")
+rule_name       = "scientist"
+short_name	= _("?Scientist:S")
+reqs		=
+    { "type", "name", "range"
+; Nothing
+    }
+helptext        = _("\
+Each scientist adds three points to your empire's research output \
+per turn.\
+")
+
+[specialist_taxman]
+name            = _("Taxmen")
+rule_name       = "taxman"
+short_name	= _("?Taxman:T")
+reqs		=
+    { "type", "name", "range"
+; Nothing
+    }
+helptext        = _("\
+Each tax collector produces three extra gold for your treasury \
+per turn.\
+")
+
+[parameters]
+add_to_size_limit  = 8		; cities >= this cannot be added to.
+angry_citizens = TRUE           ; set to FALSE to disable angry citizens
+celebrate_size_limit = 3        ; cities >= can celebrate
+
+changable_tax = TRUE            ; set to FALSE to disallow changing of tax rates
+;forced_science = 0		; set these fields when changeable_tax is turned off
+;forced_luxury = 100
+;forced_gold = 0
+
+vision_reveal_tiles = TRUE      ; civ1 & 2 default FALSE
+
+pop_report_zeroes = 4           ; Population in reports in tens of thousands
+
+[citizen]
+nationality   = TRUE            ; account for the nationality of the citizens
+convert_speed = 50              ; base probability 50/1000 -> once every 20 turns
+partisans_pct = 0               ; percentage of own nationality to inspire partisans
+                                ; if 0, original city owner information is used instead

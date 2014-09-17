@@ -1,0 +1,36 @@
+
+; Modifying this file:
+; You should not modify this file except to make bugfixes or
+; for other "maintenance".  If you want to make custom changes
+; you should create a new datadir subdirectory and copy this file
+; into that directory, and then modify that copy.  Then use the
+; command "rulesetdir <mysubdir>" in the server to have freeciv
+; use your new customized file.
+
+[datafile]
+description="Experimental web-client nations data for Freeciv"
+options="+Freeciv-ruleset-Devel-2014.September.14c web-compatible"
+
+; This section contains meta information for freeciv-ruledit to recreate the ruleset
+; file in a form wanted. These have no in-game effect whatsoever
+[ruledit]
+
+; Nationlist to add include statement for. If this entry is omitted, all the nations
+; will be saved to nations.ruleset itself.
+nationlist = "default/nationlist.ruleset"
+
+[compatibility]
+; Initial government for all the nations that do not
+; have it explicitly defined
+default_government = "Despotism"
+
+[default_traits]
+;expansionist_min = 50
+;expansionist_max = 50
+;trader_min = 50
+;trader_max = 50
+;aggressive_min = 50
+;aggressive_max = 50
+
+; Please keep [ruledit] section in sync with this include line
+*include "default/nationlist.ruleset"

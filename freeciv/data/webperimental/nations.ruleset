@@ -25,12 +25,12 @@ nationlist = "default/nationlist.ruleset"
 default_government = "Despotism"
 
 [default_traits]
-;expansionist_min = 50
-;expansionist_max = 50
-;trader_min = 50
-;trader_max = 50
-;aggressive_min = 50
-;aggressive_max = 50
+expansionist_min = 30
+expansionist_max = 85
+trader_min = 30
+trader_max = 85
+aggressive_min = 30
+aggressive_max = 85
 
 ; Please keep [ruledit] section in sync with this include line
 *include "default/nationlist.ruleset"

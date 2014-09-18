@@ -153,6 +153,7 @@ manual installation procedure to setup Freeciv-web:
      to the nginx config directory, /usr/local/nginx/conf, /etc/nginx, or /usr/local/etc/nginx 
      and edit it to suit your needs.
    - Copy scripts/configuration.sh.dist to scripts/configuration.sh and edit it to suit your needs.
+   - Copy publite2/settings.ini.dist to publite2/settings.ini and edit it to suit your needs.
 
 
 6.  Start and stop Freeciv-web with the following commands:  

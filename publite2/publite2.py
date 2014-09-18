@@ -9,6 +9,7 @@ from threading import Thread
 import sys
 import time
 import http.client
+import configparser
 
 metahost = "localhost:8080"
 metapath =  "/meta/metaserver.php"
@@ -17,12 +18,16 @@ logdir = "/tmp/"
 
 game_types = ["singleplayer", "multiplayer"]
 pubscript = "pubscript_"
-server_capacity = 10
-server_limit = 250  
 metachecker_interval = 60
 
 savesdir = "~/freeciv-build/freeciv-web/resin/webapps/ROOT/savegames/"
 if path.isdir("/vagrant"): savesdir = "/vagrant/resin/webapps/ROOT/savegames/"
+
+settings = configparser.ConfigParser()
+settings.read("settings.ini")
+
+server_capacity = int(settings["Resource usage"]["server_capacity"])
+server_limit = int(settings["Resource usage"]["server_limit"])
 
 # The Metachecker class connects to the Freeciv-web metaserver, gets the number of available
 # Freeciv-web server instances, and launches new servers if needed.

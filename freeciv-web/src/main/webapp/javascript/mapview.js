@@ -157,6 +157,7 @@ function setup_window_size ()
   $("#game_status_panel").css("width", mapview_canvas.width);
 
   $('#tabs').css("height", $(window).height());
+  $("#tabs-map").height("auto");
 
   $("#pregame_message_area").height( mapview['height'] - 80);
   $("#pregame_player_list").height( mapview['height'] - 80);
@@ -631,6 +632,7 @@ function set_default_mapview_active()
   if (chatbox_active) $("#game_chatbox_panel").parent().show();
 
   $("#tabs").tabs("option", "active", 0);
+  $("#tabs-map").height("auto");
 
   tech_dialog_active = false;
   allow_right_click = false;

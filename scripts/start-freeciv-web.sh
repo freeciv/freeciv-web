@@ -10,12 +10,13 @@ export LANGUAGE=en_US.UTF-8
 echo "Starting up Freeciv-web: nginx, resin, publite2, freeciv-proxy."
 
 # 1. nginx
-echo "Starting nginx first. Please enter root password:"
+echo "Starting nginx first."
 
 if [ "$(pidof nginx)" ] 
 then
-  echo "nginx running!"
+  echo "nginx already running!"
 else
+  echo "Please enter root password:"
   sudo service nginx start && \
   echo "nginx started!" && \
   sleep 1 

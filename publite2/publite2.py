@@ -47,7 +47,16 @@ class metachecker():
               print("status=[total=" + str(total_servers) + ",single=" + str(single_servers) 
                     + ",multi=" + str(multi_servers) + ",port=" + str(port) + "]");
 
-              while (single_servers < server_capacity and total_servers <= server_limit):
+              fork_bomb_preventer = (total_servers == 0
+                                     and server_limit < civserverproc.existing_instances)
+              if fork_bomb_preventer:
+                print("Error: Have tried to start more than " + str(server_limit)
+                      + " servers (the server limit) but according to the"
+                      + " metaserver it has found none.");
+
+              while (single_servers < server_capacity
+                     and total_servers <= server_limit
+                     and not fork_bomb_preventer):
                 time.sleep(1)
                 new_server = civserverproc(game_types[0], port);
                 new_server.start();
@@ -55,7 +64,9 @@ class metachecker():
                 total_servers += 1;
                 single_servers += 1;
  
-              while (multi_servers < server_capacity and total_servers <= server_limit):
+              while (multi_servers < server_capacity
+                     and total_servers <= server_limit
+                     and not fork_bomb_preventer):
                 time.sleep(1)
                 new_server = civserverproc(game_types[1], port)
                 new_server.start();
@@ -75,11 +86,13 @@ class metachecker():
 # The Civserverproc class launches a new instance of a Freeciv-web server in a 
 # separate thread and restarts the process when the game ends.
 class civserverproc(Thread):
+    existing_instances = 0
 
     def __init__ (self, gametype, new_port):
         Thread.__init__(self)
         self.new_port = new_port;
         self.gametype = gametype;
+        civserverproc.existing_instances = civserverproc.existing_instances + 1
 
     def run(self):
         while 1:

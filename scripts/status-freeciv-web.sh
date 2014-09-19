@@ -3,9 +3,9 @@
 
 printf "Checking that Freeciv-web is running correctly... \n\n\n"
 printf "checking nginx on http://localhost\n"
-wget --quiet --spider http://localhost 
+wget -O /tmp/status1.log --quiet --spider http://localhost 
 if [ "$?" != 0 ]; then
-  wget --spider http://localhost 
+  wget -O /tmp/status1.log --spider http://localhost 
   echo "nginx not running!"
   echo "\n\n\n"
 else
@@ -15,9 +15,9 @@ fi
 printf "\n--------------------------------\n";
 
 printf "checking resin on http://localhost:8080/\n"
-wget --quiet --spider http://localhost:8080/
+wget -O /tmp/status2.log --quiet --spider http://localhost:8080/
 if [ "$?" != 0 ]; then
-  wget --spider http://localhost:8080/
+  wget -O /tmp/status2.log --spider http://localhost:8080/
   echo "resin not running!"
   echo "\n\n\n"
 else
@@ -27,28 +27,26 @@ fi
 printf "\n--------------------------------\n";
 
 echo "checking freeciv-proxy directly on http://localhost:7001/status"
-wget --quiet http://localhost:7001/status
+wget -O /tmp/status3.log --quiet http://localhost:7001/status
 if [ "$?" != 0 ]; then
-  wget http://localhost:7001/status
+  wget -O /tmp/status3.log http://localhost:7001/status
   echo "freeciv-proxy not running!"
   echo "\n\n\n"
 
 else
   echo "freeciv-proxy OK!"
-  rm status
 fi
 
 printf "\n--------------------------------\n";
 echo "checking freeciv-proxy through nginx on http://localhost/civsocket/7001/status"
-wget --quiet http://localhost/civsocket/7001/status
+wget -O /tmp/status4.log --quiet http://localhost/civsocket/7001/status
 if [ "$?" != 0 ]; then
-  wget http://localhost/civsocket/7001/status
+  wget -O /tmp/status4.log http://localhost/civsocket/7001/status
   echo "freeciv-proxy not running correctly through nginx!"
   echo "\n\n\n"
 
 else
   echo "freeciv-proxy OK!"
-  rm status
 fi
 
 printf "\n--------------------------------\n";
@@ -73,9 +71,9 @@ fi
 printf "\n--------------------------------\n";
 
 echo "checking that webclient.min.js has been generated..."
-wget --quiet --spider http://localhost/javascript/webclient.min.js
+wget -O /tmp/status5.log --quiet --spider http://localhost/javascript/webclient.min.js
 if [ "$?" != 0 ]; then
-  wget --spider http://localhost/javascript/webclient.min.js 
+  wget -O /tmp/status5.log --spider http://localhost/javascript/webclient.min.js 
   echo "webclient.min.js is not OK"
   echo "\n\n\n"
 else
@@ -85,9 +83,9 @@ fi
 printf "\n--------------------------------\n";
 
 echo "checking that tileset has been generated..."
-wget --quiet --spider http://localhost/tileset/freeciv-web-tileset-0.png
+wget -O /tmp/status6.log --quiet --spider http://localhost/tileset/freeciv-web-tileset-0.png
 if [ "$?" != 0 ]; then
-  wget --spider http://localhost/tileset/freeciv-web-tileset-0.png 
+  wget -O /tmp/status6.log --spider http://localhost/tileset/freeciv-web-tileset-0.png 
   echo "tileset is not OK"
   echo "\n\n\n"
 else
@@ -97,9 +95,9 @@ fi
 printf "\n--------------------------------\n";
 
 echo "checking metaserver..."
-wget --quiet --spider http://localhost/meta/metaserver.php
+wget -O /tmp/status7.log --quiet --spider http://localhost/meta/metaserver.php
 if [ "$?" != 0 ]; then
-  wget --spider http://localhost/meta/metaserver.php 
+  wget -O /tmp/status7.log --spider http://localhost/meta/metaserver.php 
   echo "metaserver is not OK"
   echo "\n\n\n"
 else

@@ -101,6 +101,10 @@ service nginx stop
 rm /etc/nginx/sites-enabled/default
 cp ${basedir}/publite2/nginx.conf /etc/nginx/
 
+# add Freeciv-web scripts to path
+export PATH=$PATH:/vagrant/scripts
+echo 'export PATH=$PATH:/vagrant/scripts' >> /home/vagrant/.bashrc
+
 if [ -d "/vagrant/" ]; then
   echo "Starting Freeciv-web..."
   service nginx start

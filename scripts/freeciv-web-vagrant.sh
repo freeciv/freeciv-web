@@ -41,7 +41,7 @@ resin_url="http://www.caucho.com/download/resin-${resin_version}.tar.gz"
 tornado_url="https://pypi.python.org/packages/source/t/tornado/tornado-4.0.tar.gz"
 
 # Based on fresh install of Ubuntu 12.04
-dependencies="maven mysql-server-5.5 openjdk-7-jdk libcurl4-openssl-dev nginx libjansson-dev subversion pngcrush python3-pillow libtool automake autoconf autotools-dev language-pack-en python3.4-dev python3-setuptools libglib2.0-dev libbz2-dev imagemagick python3-pip"
+dependencies="maven mysql-server-5.5 openjdk-7-jdk libcurl4-openssl-dev nginx libjansson-dev subversion pngcrush python3-pillow libtool automake autoconf autotools-dev language-pack-en python3.4-dev python3-setuptools libglib2.0-dev libbz2-dev imagemagick python3-pip dos2unix"
 
 ## Setup
 mkdir -p ${basedir}
@@ -81,6 +81,7 @@ mysqladmin -u ${mysql_user} -p${mysql_pass} create freeciv_web
 mysql -u ${mysql_user} -p${mysql_pass} freeciv_web < ${basedir}/freeciv-web/src/main/webapp/meta/private/metaserver.sql
 
 # configuration files
+dos2unix ${basedir}/scripts/configuration.sh.dist
 sed -e "s/MYSQL_USER=root/MYSQL_USER=${mysql_user}/" -e "s/MYSQL_PASSWORD=changeme/MYSQL_PASSWORD=${mysql_pass}/" ${basedir}/scripts/configuration.sh.dist > ${basedir}/scripts/configuration.sh
 cp ${basedir}/publite2/settings.ini.dist ${basedir}/publite2/settings.ini
 

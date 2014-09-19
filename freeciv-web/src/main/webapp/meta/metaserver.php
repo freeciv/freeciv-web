@@ -222,7 +222,7 @@ if ( isset($port) ) {
     /* we always want to update the timestamp */
     array_push($string, "stamp=now() ");
 
-    $stmt= " insert into servers set host=\"$host\", port=\"$port\", ";
+    $stmt = "insert into servers set host=\"$host\", port=\"$port\", ";
     $stmt .= join(", ", $string); /* put them all together */
   }
 

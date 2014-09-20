@@ -13,6 +13,7 @@ if test "x$REVTMP" != "x" ; then
   if ! test $(git diff | wc -l) -eq 0 ; then
     echo "It had local modifications." >> ${ROOTDIR}/freeciv-web/src/main/webapp/build.txt
   fi
+  date >> ${ROOTDIR}/freeciv-web/src/main/webapp/build.txt
 else
   rm -f ${ROOTDIR}/freeciv-web/src/main/webapp/build.txt
 fi

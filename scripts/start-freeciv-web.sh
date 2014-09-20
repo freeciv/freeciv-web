@@ -9,6 +9,8 @@ export LANGUAGE=en_US.UTF-8
 
 echo "Starting up Freeciv-web: nginx, resin, publite2, freeciv-proxy."
 
+mkdir -p ${FREECIV_WEB_DIR}/logs
+
 # 1. nginx
 echo "Starting nginx first."
 

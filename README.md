@@ -157,10 +157,12 @@ manual installation procedure to setup Freeciv-web:
 
 
 6.  Start and stop Freeciv-web with the following commands:  
-  scripts/start-freeciv-web.sh  
-  scripts/stop-freeciv-web.sh  
-  scripts/status-freeciv-web.sh        (this script is useful to debug if Freeciv-web is running correctly)
-(On Vagrant, these scripts are found on /vagrant/scripts)  
+  start-freeciv-web.sh  
+  stop-freeciv-web.sh  
+  status-freeciv-web.sh        (this script is useful to debug if Freeciv-web is running correctly)
+(On Vagrant, these scripts are found in PATH)  
+
+All software components in Freeciv-web will log to the /logs sub-directory of the Freeciv-web installation.
 
 Freeciv-Web continuous integration on Travis CI 
 -----------------------------------------------

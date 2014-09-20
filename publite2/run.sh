@@ -1,11 +1,3 @@
 #!/bin/bash
 
-if [ -d "/vagrant/" ]; then
-  FREECIV_SAVE_PATH="/vagrant/resin/webapps/ROOT/savegames/"
-else
-  FREECIV_SAVE_PATH="~/freeciv-build/freeciv-web/resin/webapps/ROOT/savegames/"
-fi
-export FREECIV_SAVE_PATH
-
-
-nohup python3.4 -u publite2.py || tail -5 nohup.out && sleep 5  &
+nohup python3.4 -u publite2.py > ../logs/publite2.log 2>&1 || tail -5 ../logs/publite2.log && sleep 5  &

@@ -11,6 +11,10 @@ Freeciv C server.
 Start it like this:
 ./run.sh
 
-Requires Python 3.3 and the Freeciv C server built for Freeciv-web
+Requires Python 3.4 and the Freeciv C server built for Freeciv-web
 This process logs to nohup.out log file.
+
+Publite2 has a HTTP status page which can be accessed at:
+http://localhost/pubstatus through nginx or 
+http://localhost:4002/pubstatus directly.
 

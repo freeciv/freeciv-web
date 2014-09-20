@@ -26,14 +26,15 @@ class StatusHandler(web.RequestHandler):
     self.metachecker = metachecker
 
   def get(self):
+    self.write("<html><body>");
     self.write("<h2>Freeciv-web Publite2 status</h2>" + 
-               "<table><tr><td>Server limit (total number of running servers):</td><td>" + str(self.metachecker.server_limit) + "</td></tr>" +
+               "<table><tr><td>Server limit (maximum number of running servers):</td><td>" + str(self.metachecker.server_limit) + "</td></tr>" +
                "<tr><td>Server capacity (number of servers in pregame):</td><td>" + str(self.metachecker.server_capacity) + "</td></tr>" +
-               "<tr><td>Number of running servers according to Publite2:</td><td>" + str(len(self.metachecker.server_list)) + "</td></tr>"
-               "<tr><td>Total servers running according to metaserver:</td><td>" + str(self.metachecker.total) + "</td></tr>" +
+               "<tr><td>Number of servers running according to Publite2:</td><td>" + str(len(self.metachecker.server_list)) + "</td></tr>"
+               "<tr><td>Number of servers running according to metaserver:</td><td>" + str(self.metachecker.total) + "</td></tr>" +
                "<tr><td>Available single-player pregame servers on metaserver:</td><td>" + str(self.metachecker.single) + "</td></tr>" +
                "<tr><td>Available multi-player pregame servers on metaserver:</td><td>" + str(self.metachecker.multi) + "</td></tr>" +
-               "<tr><td>Number of HTTP checks agains metaserver: </td><td>" + str(self.metachecker.check_count) + "</td></tr>" +
+               "<tr><td>Number of HTTP checks against metaserver: </td><td>" + str(self.metachecker.check_count) + "</td></tr>" +
                "<tr><td>Last response from metaserver: </td><td>" + str(self.metachecker.html_doc) + "</td></tr>" +
                "<tr><td>Last HTTP status from metaserver: </td><td>" + str(self.metachecker.last_http_status) + "</td></tr>" +
                "</table>")
@@ -54,4 +55,4 @@ class StatusHandler(web.RequestHandler):
         if line:
           code += (" <b>%s</b> <br>" % (line.strip()))
     self.write(code);
-
+    self.write("</body></html>");

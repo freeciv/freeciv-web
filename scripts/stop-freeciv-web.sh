@@ -4,6 +4,9 @@
 SCRIPT_DIR="$(dirname "$0")"
 export FREECIV_WEB_DIR="${SCRIPT_DIR}/.."
 
+if [ ! -f ${SCRIPT_DIR}/configuration.sh ]; then
+    echo "ERROR: configuration.sh not found. copy configuration.sh.dist to configuration.sh and update it with your settings."
+fi
 . configuration.sh
 
 echo "Shutting down Freeciv-web: nginx, resin, publite2, freeciv-proxy."

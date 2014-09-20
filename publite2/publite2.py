@@ -10,11 +10,12 @@ import http.client
 import configparser
 from pubstatus import *
 from civlauncher import Civlauncher
+import os.path
 
 metahost = "localhost:8080"
 metapath =  "/meta/metaserver.php"
 statuspath =  "/meta/status.php"
-
+settings_file = "settings.ini"
 game_types = ["singleplayer", "multiplayer"]
 
 metachecker_interval = 60
@@ -25,8 +26,12 @@ port = 6000
 class metachecker():
     def __init__(self):
       self.server_list = []
+      if not os.path.isfile(settings_file):
+        print("ERROR: Publite2 isn't setup correctly. Copy settings.ini.dist to settings.ini " +
+              "and update it do match your system.")
+        sys.exit(1)
       settings = configparser.ConfigParser()
-      settings.read("settings.ini")
+      settings.read(settings_file)
       self.server_capacity = int(settings["Resource usage"]["server_capacity"])
       self.server_limit = int(settings["Resource usage"]["server_limit"])
       self.savesdir = settings["Config"]["save_directory"]
@@ -86,12 +91,13 @@ class metachecker():
           else:
             print("Error: Invalid metaserver status");
 
-          time.sleep(metachecker_interval);
         except Exception as e:
-          print("Error: Publite2 is unable to connect to Freeciv-web metaserver on http://" 
-                + metahost + metapath + ", error" + str(e));
+          self.html_doc = ("Error: Publite2 is unable to connect to Freeciv-web metaserver on http://" + 
+                          metahost + metapath + ", error" + str(e));
+          print(self.html_doc);
         finally:
           conn.close();
+          time.sleep(metachecker_interval);
 
 
 if __name__ == '__main__':

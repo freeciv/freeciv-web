@@ -7,7 +7,7 @@ set nettimeout 20
 set maxconnectionsperhost 256
 set autosaves ""
 set scorelog disabled
-set size 4
+set size 5
 set landm 50
 set aifill 8
 metamessage New Freeciv-web Singleplayer Game

@@ -637,7 +637,9 @@ function show_observer_tech_dialog()
     if (pr == null) continue;
 
     var researching = pr['researching'];
-    msg += pname + ": " + techs[researching]['name'] + "<br>";
+    if (techs[researching] != null)  {
+      msg += pname + ": " + techs[researching]['name'] + "<br>";
+    }
   }
   $("#technologies").html(msg);
   $("#technologies").css("color", "black");

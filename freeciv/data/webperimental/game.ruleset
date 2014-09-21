@@ -22,7 +22,11 @@ name = _("Webperimental")
 
 ; Description of the ruleset
 description = _("\
-This ruleset has many experimental rules to be used with web-client.\
+This ruleset has experimental rules to be used with web-client.\n\
+Differences compared to default web-ruleset are:\n\
+- Diplomat available from Alphabet\n\
+- AI players are created with random trait values\n\
+- Known techs tree cannot have holes in it\
 ")
 
 [options]

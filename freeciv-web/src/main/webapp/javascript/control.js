@@ -59,7 +59,7 @@ function control_init()
   $("#city_canvas").click(city_mapview_mouse_click);
   
   $("#turn_done_button").click(send_end_turn);
-  $("#turn_done_button").tooltip();
+  if (!is_touch_device()) $("#turn_done_button").tooltip();
 
   $("#freeciv_logo").click(function(event) {
     window.open('/', '_new');
@@ -972,7 +972,7 @@ function deactivate_goto()
 function send_end_turn()
 {
   $("#turn_done_button").button( "option", "disabled", true); 
-  $("#turn_done_button").tooltip({ disabled: true });
+  if (!is_touch_device()) $("#turn_done_button").tooltip({ disabled: true });
   var packet = {"type" : packet_player_phase_done, "turn" : game_info['turn']};
   send_request (JSON.stringify(packet));
 }

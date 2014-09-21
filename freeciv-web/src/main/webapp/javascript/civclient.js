@@ -60,6 +60,8 @@ function civclient_init()
   
   update_game_status_panel();
   statusTimerId = setInterval("update_game_status_panel()", 6000);
+  
+  chatboxTimerId = setInterval("update_chatbox_reduce()", 8000);
 
   if (overviewTimerId == -1) {
     overviewTimerId = setInterval("redraw_overview()", OVERVIEW_REFRESH);
@@ -226,6 +228,42 @@ function add_chatbox_text(text)
 
 }
 
+/**************************************************************************
+ ...
+**************************************************************************/
+function update_chatbox_reduce()
+{
+  var scrollDiv;
+    
+  if (civclient_state <= C_S_PREPARING) {
+    scrollDiv = document.getElementById('pregame_message_area');
+  } else {
+    scrollDiv = document.getElementById('game_message_area');
+  }
+
+  if (C_S_RUNNING == client_state() && $("#game_message_area").length
+      && $("#game_message_area").is(":visible")  
+      && chatbox_text != null && chatbox_text.indexOf("<br>") != -1) {
+    chatbox_text = chatbox_text.substring(chatbox_text.indexOf("<br>") + 4, chatbox_text.length)
+    if (scrollDiv != null) {
+      scrollDiv.innerHTML = chatbox_text; 
+
+      var currentHeight = 0;
+        
+      if (scrollDiv.scrollHeight > 0) {
+        currentHeight = scrollDiv.scrollHeight;
+      } else if (scrollDiv.offsetHeight > 0) {
+        currentHeight = scrollDiv.offsetHeight;
+      }
+
+      if (previous_scroll < currentHeight) {
+        scrollDiv.scrollTop = currentHeight;
+      }
+
+      previous_scroll = currentHeight;
+    }
+  }
+}
 
 /**************************************************************************
  ...
@@ -396,12 +434,12 @@ function update_timeout()
     var remaining = game_info['timeout'] - Math.floor((now - phase_start_time) / 1000);
     if (remaining >= 0) {
       if (is_small_screen()) {
-        $("#turn_done_button").button("option", "label", "Turn" + remaining);
+        $("#turn_done_button").button("option", "label", "Turn " + remaining);
         $("#turn_done_button .ui-button-text").css("padding", "3px");
       } else {
         $("#turn_done_button").button("option", "label", "Turn Done (" + remaining + "s)");
       }
-       $("#turn_done_button").tooltip({ disabled: false });
+      if (!is_touch_device()) $("#turn_done_button").tooltip({ disabled: false });
     }
   } 
 }

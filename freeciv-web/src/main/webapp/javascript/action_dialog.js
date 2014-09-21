@@ -101,7 +101,8 @@ function popup_caravan_dialog(punit, traderoute, wonder)
 
   $("#car_trade" + punit['id']).click(function() {
     var packet = {"type" : packet_unit_establish_trade,
-                   "unit_id": punit['id']};
+                   "unit_id": punit['id'],
+                   "city_id" : pcity['id']};
     send_request (JSON.stringify(packet));
 
     $(id).remove();
@@ -109,7 +110,8 @@ function popup_caravan_dialog(punit, traderoute, wonder)
 
   $("#car_wonder" + punit['id']).click(function() {
     var packet = {"type" : packet_unit_help_build_wonder,
-                   "unit_id": punit['id']};
+                   "unit_id": punit['id'],
+                   "city_id" : pcity['id']};
     send_request (JSON.stringify(packet));
 
     $(id).remove();

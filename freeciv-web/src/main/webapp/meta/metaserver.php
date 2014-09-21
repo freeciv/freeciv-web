@@ -226,11 +226,23 @@ if ( isset($port) ) {
     $stmt .= join(", ", $string); /* put them all together */
   }
 
-  debug("\nSTMT = $stmt\n\n");
   print "$stmt\n"; /* server statement */
 
   /* Do all the processing above, we now hit the database */
   $res = fcdb_exec($stmt);
+
+  /* Start the log entry by logginhg the statement it self. */
+  debug("\nSTMT = $stmt");
+
+  /* Log the result. */
+  if ($res) {
+    debug("\nResult: OK");
+  } else {
+    debug("\n$error_msg_stderr");
+  }
+
+  /* Finish the log entry. */
+  debug("\n\n");
 
   for ($i = 0; $i < count($variablestmt); $i++) {
     print "$variablestmt[$i]\n";

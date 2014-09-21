@@ -168,6 +168,7 @@ function build_fcdb_error($what_error) {
   global $webmaster_html;
   global $webmaster_default;
   global $error_msg;
+  global $error_msg_stderr;
 
   if (! $webmaster_default) {
     $wmpart = ", $webmaster_html";
@@ -183,6 +184,7 @@ function build_fcdb_error($what_error) {
                "<tr><td>" .
                "Please contact the maintainer" . $wmpart .
                ".</td></tr>\n</table></font>\n";
+  $error_msg_stderr = $what_error . "\n" . mysql_error();
 }
 
 ?>

@@ -203,6 +203,11 @@ function mouse_moved_cb(e)
 ****************************************************************************/
 function update_mouse_cursor()
 {
+  if (tech_dialog_active) {
+    update_tech_dialog_cursor();
+    return;
+  }
+      
   var ptile = canvas_pos_to_tile(mouse_x, mouse_y);
 
   if (ptile == null) return;

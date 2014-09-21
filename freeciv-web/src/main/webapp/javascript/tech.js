@@ -70,6 +70,7 @@ var tech_canvas_ctx = null;
 var tech_item_width = 208;
 var tech_item_height = 52;
 var maxleft = 0;
+var clicked_tech_id = null;
 
 /**************************************************************************
   Returns state of the tech for current pplayer.
@@ -124,7 +125,7 @@ function init_tech_screen()
   }
 
   is_tech_tree_init = true;
-
+  clicked_tech_id = null;
 }
 
 /**************************************************************************
@@ -135,10 +136,7 @@ function update_tech_tree()
   var hy = 24;
   var hx = 48 + 160;
 
-
-  tech_canvas_ctx.fillStyle = 'rgb(0, 1, 26)';
-  tech_canvas_ctx.fillRect(0, 0, 5824, 726);
-
+  tech_canvas_ctx.clearRect(0, 0, 5824, 726);
 
   for (var tech_id in techs) {
     var ptech = techs[tech_id];
@@ -153,7 +151,7 @@ function update_tech_tree()
       var dx = Math.floor(reqtree[rid+'']['x'] * tech_xscale);  //scale in X direction.
       var dy = reqtree[rid+'']['y'];
       
-      tech_canvas_ctx.strokeStyle = 'rgb(255, 255, 255)';
+      tech_canvas_ctx.strokeStyle = 'rgb(0, 0, 0)';
       tech_canvas_ctx.lineWidth = 2;
 
       tech_canvas_ctx.beginPath();  
@@ -287,7 +285,10 @@ function is_tech_req_for_tech(check_tech_id, next_tech_id)
 function update_tech_screen()
 {
   
-  if (client_is_observer()) return;
+  if (client_is_observer()) {
+    show_observer_tech_dialog();
+    return;
+  }
 
   init_tech_screen();
   update_tech_tree();
@@ -311,7 +312,10 @@ function update_tech_screen()
 
   $("#progress_fg").css("width", pct_progress  + "%");
 
-  if (techs[client.conn.playing['researching']] != null) {
+  if (clicked_tech_id != null) {
+    $("#tech_result_text").html("<span id='tech_advance_helptext'>" + get_advances_text(clicked_tech_id) + "</span>");
+    $("#tech_advance_helptext").tooltip({ disabled: false });
+  } else if (techs[client.conn.playing['researching']] != null) {
     $("#tech_result_text").html("<span id='tech_advance_helptext'>" + get_advances_text(client.conn.playing['researching']) + "</span>");
     $("#tech_advance_helptext").tooltip({ disabled: false });
   }
@@ -435,6 +439,7 @@ function tech_mapview_mouse_click(e)
 	} else if (player_invention_state(client.conn.playing, ptech['id']) == TECH_UNKNOWN) {
           send_player_tech_goal(ptech['id']);
 	}
+	clicked_tech_id = ptech['id'];
       }
 
     }
@@ -582,4 +587,58 @@ function show_wikipedia_dialog(tech_name)
   $("#wiki_dialog").dialog('open');		
   $("#wiki_dialog").css("max-height", $(window).height() - 100);
   $("#game_text_input").blur();
+}
+
+/**************************************************************************
+ ...
+**************************************************************************/
+function update_tech_dialog_cursor()
+{
+    tech_canvas.style.cursor = "default";
+    var tech_mouse_x = mouse_x - $("#technologies").offset().left + $("#technologies").scrollLeft();
+    var tech_mouse_y = mouse_y - $("#technologies").offset().top + $("#technologies").scrollTop();
+
+    for (var tech_id in techs) {
+      var ptech = techs[tech_id];
+      if (!(tech_id+'' in reqtree)) continue;
+    
+      var x = Math.floor(reqtree[tech_id+'']['x'] * tech_xscale)+2;  //scale in X direction.
+      var y = reqtree[tech_id+'']['y']+2;  
+
+      if (is_small_screen()) {
+        x = x * 0.6;
+        y = y * 0.6;
+      }
+
+      if (tech_mouse_x > x && tech_mouse_x < x + tech_item_width
+          && tech_mouse_y > y && tech_mouse_y < y + tech_item_height) {
+        if (player_invention_state(client.conn.playing, ptech['id']) == TECH_PREREQS_KNOWN) {
+          tech_canvas.style.cursor = "pointer";
+	} else if (player_invention_state(client.conn.playing, ptech['id']) == TECH_UNKNOWN) {
+          tech_canvas.style.cursor = "pointer";
+        }
+      } 
+    }
+}
+
+
+/**************************************************************************
+ ...
+**************************************************************************/
+function show_observer_tech_dialog()
+{
+  $("#tech_info_box").hide();
+  $("#tech_canvas").hide();
+  var msg = "<h2>Research</h2>";
+  for (var player_id in players) {
+    var pplayer = players[player_id];
+    var pname = pplayer['name'];
+    var pr = research_get(pplayer);
+    if (pr == null) continue;
+
+    var researching = pr['researching'];
+    msg += pname + ": " + techs[researching]['name'] + "<br>";
+  }
+  $("#technologies").html(msg);
+  $("#technologies").css("color", "black");
 }

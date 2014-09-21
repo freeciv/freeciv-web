@@ -244,6 +244,7 @@ button {
   position: relative; 
   overflow: auto; 
   width: 100%;
+  background-image: url('/images/bg.jpg');
 }
 
 #tech_info_box {

@@ -226,6 +226,7 @@ if ( isset($port) ) {
     $stmt .= join(", ", $string); /* put them all together */
   }
 
+  debug("\nSTMT = $stmt\n\n");
   print "$stmt\n"; /* server statement */
 
   /* Do all the processing above, we now hit the database */

@@ -146,7 +146,8 @@ function popup_diplomat_dialog(pdiplomat, action_probabilities,
     dhtml += " has arrived at " + decodeURIComponent(pcity['name'])
              + ". What is your command?";
   } else {
-    dhtml += "The diplomat is waiting for your command";
+    dhtml += "The " + unit_types[pdiplomat['type']]['name']
+             + " is waiting for your command";
   }
 
   dhtml += "<br>";

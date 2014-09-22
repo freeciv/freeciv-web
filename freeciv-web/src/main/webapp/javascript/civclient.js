@@ -61,8 +61,6 @@ function civclient_init()
   update_game_status_panel();
   statusTimerId = setInterval("update_game_status_panel()", 6000);
   
-  chatboxTimerId = setInterval("update_chatbox_reduce()", 8000);
-
   if (overviewTimerId == -1) {
     overviewTimerId = setInterval("redraw_overview()", OVERVIEW_REFRESH);
   }
@@ -144,13 +142,9 @@ function init_common_intro_dialog() {
 **************************************************************************/
 function chatbox_resized()
 {
-  if (is_small_screen()) {
-    $("#game_message_area").css("height", "75%");
-
-  } else {
-    var newheight = $("#game_chatbox_panel").parent().height() - 40;
-    $("#game_message_area").css("height", newheight);
-  }
+  var newheight = $("#game_chatbox_panel").parent().height() - 50;
+  $("#game_message_area").css("height", newheight);
+  
 }
 
 
@@ -162,15 +156,11 @@ function init_chatbox()
 
   chatbox_active = true;
 
-  if (is_small_screen()) {
-    $("#game_chatbox_panel").detach().prependTo("#tabs-chat");
-  }
-
   $("#game_chatbox_panel").attr("title", "Messages");		
   $("#game_chatbox_panel").dialog({
 			bgiframe: true,
 			modal: false,
-			width: "60%",
+			width: "70%",
 			height: "auto",
 			resizable: true,
 			dialogClass: 'chatbox_dialog',
@@ -180,15 +170,14 @@ function init_chatbox()
 		});
 	
   $("#game_chatbox_panel").dialog('open');		
-  $(".chatbox_dialog").css("top", "60px");
+  $(".chatbox_dialog").css("top", "52px");
 
 
   if (is_small_screen()) {
-    $("#game_chatbox_panel").css("position", "relative");
-    $("#game_chatbox_panel").css("float", "left");
-    $("#game_chatbox_panel").css("height", "75%");
-    $("#game_chatbox_panel").css("width", "99%");
-    $("#game_chatbox_panel").show();
+    $(".chatbox_dialog").css("left", "2px");
+    $(".chatbox_dialog").css("top", "37px");
+    $("#game_chatbox_panel").parent().css("max-height", "25%");
+    $("#game_chatbox_panel").parent().css("width", "95%");
     chatbox_resized();
   }
 }
@@ -231,8 +220,9 @@ function add_chatbox_text(text)
 /**************************************************************************
  ...
 **************************************************************************/
-function update_chatbox_reduce()
+function chatbox_clip_messages()
 {
+  var max_chatbox_lines = 20;
   var scrollDiv;
     
   if (civclient_state <= C_S_PREPARING) {
@@ -241,28 +231,34 @@ function update_chatbox_reduce()
     scrollDiv = document.getElementById('game_message_area');
   }
 
-  if (C_S_RUNNING == client_state() && $("#game_message_area").length
-      && $("#game_message_area").is(":visible")  
-      && chatbox_text != null && chatbox_text.indexOf("<br>") != -1) {
-    chatbox_text = chatbox_text.substring(chatbox_text.indexOf("<br>") + 4, chatbox_text.length)
-    if (scrollDiv != null) {
-      scrollDiv.innerHTML = chatbox_text; 
+  var new_chatbox_text = "";
+  var chat_lines = chatbox_text.split("<br>");
+  if (chat_lines.length <=  max_chatbox_lines) return;
+  for (var i = chat_lines.length - max_chatbox_lines; i < chat_lines.length; i++) {
+    new_chatbox_text += chat_lines[i];
+    if ( i < chat_lines.length - 1) new_chatbox_text += "<br>";
+  }	  
 
-      var currentHeight = 0;
+  chatbox_text = new_chatbox_text;
+
+  if (scrollDiv != null) {
+    scrollDiv.innerHTML = chatbox_text; 
+
+    var currentHeight = 0;
         
-      if (scrollDiv.scrollHeight > 0) {
-        currentHeight = scrollDiv.scrollHeight;
-      } else if (scrollDiv.offsetHeight > 0) {
-        currentHeight = scrollDiv.offsetHeight;
-      }
-
-      if (previous_scroll < currentHeight) {
-        scrollDiv.scrollTop = currentHeight;
-      }
-
-      previous_scroll = currentHeight;
+    if (scrollDiv.scrollHeight > 0) {
+      currentHeight = scrollDiv.scrollHeight;
+    } else if (scrollDiv.offsetHeight > 0) {
+      currentHeight = scrollDiv.offsetHeight;
     }
+
+    if (previous_scroll < currentHeight) {
+      scrollDiv.scrollTop = currentHeight;
+    }
+
+    previous_scroll = currentHeight;
   }
+
 }
 
 /**************************************************************************

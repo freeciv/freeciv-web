@@ -616,3 +616,7 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 #tabs-hel.ui-icon, #tabs-hel.ui-widget-content .ui-icon {
   background-image: url("images/ui-icons_222222_256x240.png");
 }
+
+#game_chatbox_panel {
+  overflow: hidden;
+}

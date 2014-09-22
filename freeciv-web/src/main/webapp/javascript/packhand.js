@@ -613,7 +613,7 @@ function handle_conn_ping_info(packet)
 
 function handle_end_phase(packet) 
 {
-
+  chatbox_clip_messages();
 }
 
 /* Done. */

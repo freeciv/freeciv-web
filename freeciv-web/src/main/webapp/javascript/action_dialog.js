@@ -131,11 +131,19 @@ function popup_diplomat_dialog(pdiplomat, action_probabilities,
   $(id).remove();
   $("<div id='diplo_dialog_" + pdiplomat['id'] + "'></div>").appendTo("div#game_page");
 
+  var actor_homecity = cities[pdiplomat['homecity']];
+
   var dhtml = "<center>";
 
   if (pcity != null) {
-    dhtml += "Your " + unit_types[pdiplomat['type']]['name']
-             + " has arrived at " + decodeURIComponent(pcity['name'])
+    dhtml += "Your " + unit_types[pdiplomat['type']]['name'];
+
+    /* Some units don't have a home city. */
+    if (actor_homecity != null) {
+      dhtml += " from " + decodeURIComponent(actor_homecity['name']);
+    }
+
+    dhtml += " has arrived at " + decodeURIComponent(pcity['name'])
              + ". What is your command?";
   } else {
     dhtml += "The diplomat is waiting for your command";

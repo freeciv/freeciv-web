@@ -243,7 +243,8 @@ function popup_action_selection(actor_unit, action_probabilities,
     $("#act_sel_trade" + actor_unit['id']).click(function() {
         var packet = {"type" : packet_unit_establish_trade,
                        "unit_id": actor_unit['id'],
-                       "city_id" : target_city['id']};
+                       "city_id" : target_city['id'],
+                       "est_if_able" : true};
         send_request (JSON.stringify(packet));
 
         $(id).remove();

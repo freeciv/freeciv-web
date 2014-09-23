@@ -182,6 +182,10 @@ function handle_city_info(packet)
   if (packet['diplomat_investigate']) {
     show_city_dialog(cities[packet['id']]);
   }
+
+  if (worklist_dialog_active) {
+    city_worklist_dialog();
+  }
 }
 
 /* 99% complete 

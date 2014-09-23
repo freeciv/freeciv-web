@@ -620,3 +620,50 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 #game_chatbox_panel {
   overflow: hidden;
 }
+
+#city_current_worklist {
+  width: 100%;
+  float: left;
+  min-height: 200px;
+  max-height: 700px;
+  overflow: auto;
+}
+
+#worklist_production_choices {
+  width: 100%;
+  float: left;
+  min-height: 200px;
+  max-height: 700px;
+  overflow: auto;
+}
+
+#worklist_heading {
+  width: 100%
+  float: left;
+}
+
+#tasks_heading {
+  width: 100%;
+  float: left;
+}
+
+#worklist_left {
+  float: left;
+  width: 45%
+}
+
+#worklist_right {
+  float: right;
+  width: 45%;
+}
+
+.prod_choice_list_item {
+  text-align: left; 
+  font-size: 100%;
+  cursor:pointer;
+  cursor:hand;
+}
+
+.worklist_table {
+  width: 100%;
+}

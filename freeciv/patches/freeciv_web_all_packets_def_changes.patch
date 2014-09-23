@@ -1,7 +1,8 @@
-diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2014-09-13 04:07:27.163618908 +0300
-+++ freeciv/common/packets.def	2014-09-13 04:09:06.395409167 +0300
-@@ -188,16 +188,16 @@
+diff --git a/common/packets.def b/common/packets.def
+index 09cd61f..9dbfc89 100644
+--- a/common/packets.def
++++ b/common/packets.def
+@@ -188,17 +188,17 @@ type SINT8              = sint8(int)
  type SINT16             = sint16(int)
  type SINT32             = sint32(int)
  type UINT8              = uint8(int)
@@ -16,13 +17,15 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
 -type TECH_LIST          = tech_list(int)
 -type UNIT_LIST          = unit_list(int)
 -type BUILDING_LIST      = building_list(int)
+-type WORKLIST           = worklist(struct worklist)
 +# type TECH_LIST          = tech_list(int)
 +# type UNIT_LIST          = unit_list(int)
 +# type BUILDING_LIST      = building_list(int)
- type WORKLIST           = worklist(struct worklist)
++type WORKLIST           = string(char)
  
  # typedefs for enums
-@@ -213,7 +213,7 @@
+ type ACTIVITY           = uint8(enum unit_activity)
+@@ -213,7 +213,7 @@ type CMDLEVEL           = uint8(enum cmdlevel)
  type DIPLOMACY_MODE     = uint8(enum diplomacy_mode)
  type DIRECTION          = sint8(enum direction8)
  type EFFECT_TYPE        = uint8(enum effect_type)
@@ -31,7 +34,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  type GUI_TYPE           = uint8(enum gui_type)
  type IMPR_GENUS         = uint8(enum impr_genus_id)
  type KNOWN              = uint8(enum known_type)
-@@ -269,7 +269,7 @@
+@@ -272,7 +272,7 @@ type CONNECTION         = SINT16
  type CONTINENT          = sint16(Continent_id)
  type GOVERNMENT         = UINT8
  type IMPROVEMENT        = uint8(Impr_type_id)
@@ -40,7 +43,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  type PLAYER             = UINT8
  type RESEARCH           = UINT8
  type RESOURCE           = uint8(Resource_type_id)
-@@ -282,14 +282,14 @@
+@@ -285,14 +285,14 @@ type UNIT               = UINT16
  type UNIT_TYPE          = uint8(Unit_type_id)
  
  # other typedefs
@@ -60,7 +63,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  type CITIZENS           = UINT8
  
  /****************************************************
-@@ -411,7 +411,7 @@
+@@ -414,7 +414,7 @@ PACKET_TILE_INFO = 15; sc, lsend, is-game-info
  
    TERRAIN terrain;
    RESOURCE resource;
@@ -69,7 +72,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    STRING spec_sprite[MAX_LEN_NAME];
    STRING label[MAX_LEN_NAME];
  end
-@@ -423,7 +423,8 @@
+@@ -426,7 +426,8 @@ end
  # The variables in the packet are listed in alphabetical order.
  PACKET_GAME_INFO = 16; sc
    UINT8 add_to_size_limit;
@@ -79,7 +82,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    AIRLIFTING_STYLE airlifting_style;
    UINT8 angrycitizen;
    SINT16 base_pollution;
-@@ -500,7 +501,7 @@
+@@ -503,7 +504,7 @@ PACKET_GAME_INFO = 16; sc
    BOOL restrictinfra;
    BOOL unreachable_protects;
    UINT32 sciencebox;
@@ -88,15 +91,15 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    UINT32 shieldbox;
    UINT32 skill_level;
    BOOL slow_invasions;
-@@ -525,6 +526,7 @@
-   BOOL year_0_hack;
+@@ -530,6 +531,7 @@ PACKET_GAME_INFO = 16; sc
+   UINT16 fragment_count;
    BOOL civil_war_enabled;
    BOOL paradrop_to_transport;
 +  STRING meta_message[MAX_LEN_NAME];
  end
  
  PACKET_MAP_INFO = 17; sc, lsend
-@@ -603,6 +605,9 @@
+@@ -608,6 +610,9 @@ PACKET_CITY_INFO = 31; sc, lsend, is-game-info, force, cancel(PACKET_CITY_SHORT_
    SINT16 citizen_base[O_LAST];
    SINT16 usage[O_LAST];
    UINT16 food_stock, shield_stock;
@@ -106,12 +109,12 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  
    UINT16 trade[MAX_TRADE_ROUTES];
    UINT8 trade_value[MAX_TRADE_ROUTES];
-@@ -629,11 +634,19 @@
+@@ -634,11 +639,19 @@ PACKET_CITY_INFO = 31; sc, lsend, is-game-info, force, cancel(PACKET_CITY_SHORT_
    UINT8 walls;
    SINT8 city_image;
  
 -  WORKLIST worklist;
-+  #WORKLIST worklist;
++  WORKLIST worklist[MAX_LEN_WORKLIST_WEB];
  
 -  BV_IMPRS improvements;
 -  BV_CITY_OPTIONS city_options;
@@ -129,7 +132,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  end
  
  PACKET_CITY_SHORT_INFO = 32; sc, lsend, is-game-info, cancel(PACKET_CITY_INFO)
-@@ -652,7 +665,7 @@
+@@ -657,7 +670,7 @@ PACKET_CITY_SHORT_INFO = 32; sc, lsend, is-game-info, cancel(PACKET_CITY_INFO)
  
    SINT8 city_image;
  
@@ -138,7 +141,16 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    STRING name[MAX_LEN_NAME];
  end
  
-@@ -773,14 +786,16 @@
+@@ -678,7 +691,7 @@ end
+ 
+ PACKET_CITY_WORKLIST = 36; cs, dsend
+   CITY city_id;
+-  WORKLIST worklist;
++  #WORKLIST worklist[MAX_LEN_MSG];
+ end
+ 
+ PACKET_CITY_MAKE_SPECIALIST = 37; cs, dsend
+@@ -778,14 +791,16 @@ PACKET_PLAYER_INFO = 51; sc, is-info
    UINT8 ai_skill_level;
    UINT8 barbarian_type;
    BV_PLAYER gives_shared_vision;
@@ -157,7 +169,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    
    UINT32 multiplier[MAX_MULTIPLIERS_COUNT];
  end
-@@ -812,7 +827,7 @@
+@@ -817,7 +832,7 @@ PACKET_PLAYER_DIPLSTATE = 59; sc
    UINT32 diplstate_id; key
    PLAYER plr1;
    PLAYER plr2;
@@ -166,7 +178,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    UINT16 turns_left;
    UINT8 has_reason_to_cancel;
    UINT16 contact_turns_left;
-@@ -881,6 +896,8 @@
+@@ -886,6 +901,8 @@ PACKET_UNIT_INFO = 63; sc, lsend, is-game-info, cancel(PACKET_UNIT_SHORT_INFO)
    BOOL has_orders;
    UINT16 orders_length, orders_index;
    BOOL orders_repeat, orders_vigilant;
@@ -175,7 +187,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    ORDERS orders[MAX_LEN_ROUTE:orders_length];
    DIRECTION orders_dirs[MAX_LEN_ROUTE:orders_length];
    ACTIVITY orders_activities[MAX_LEN_ROUTE:orders_length];
-@@ -899,12 +916,12 @@
+@@ -904,12 +921,12 @@ PACKET_UNIT_SHORT_INFO = 64; sc, lsend, is-game-info, force, cancel(PACKET_UNIT_
  
    UINT8 hp, activity;
    EXTRA activity_tgt;
@@ -193,7 +205,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  end
  
  PACKET_UNIT_COMBAT_INFO = 65; sc, lsend
-@@ -1007,7 +1024,7 @@
+@@ -1016,7 +1033,7 @@ end
  PACKET_UNIT_DO_ACTION = 84; cs, dsend
    UNIT actor_id;
    SINT32 target_id;   # city_id, unit_id or tile_id
@@ -202,7 +214,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    GEN_ACTION action_type;
  end
  
-@@ -1066,25 +1083,25 @@
+@@ -1075,25 +1092,25 @@ end
  
  PACKET_DIPLOMACY_CREATE_CLAUSE_REQ = 99; cs, dsend
    PLAYER counterpart, giver;
@@ -232,7 +244,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    UINT32 value;
  end
  
-@@ -1112,7 +1129,7 @@
+@@ -1121,7 +1138,7 @@ PACKET_PAGE_MSG = 110; sc, lsend
  end
  
  PACKET_REPORT_REQ = 111; cs, handle-per-conn, dsend
@@ -241,7 +253,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  end
  
  /************** Connection packets **********************/
-@@ -1137,9 +1154,9 @@
+@@ -1146,9 +1163,9 @@ end
  
  # Information about the ping times of the connections.
  PACKET_CONN_PING_INFO = 116; sc, lsend
@@ -253,7 +265,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  end
  
  # For compatibility with older versions, this number cannot be changed.
-@@ -1302,8 +1319,9 @@
+@@ -1311,8 +1328,9 @@ end
  PACKET_RULESET_GAME = 141; sc, lsend
    UINT8 default_specialist;
  
@@ -265,7 +277,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  
    UINT8 veteran_levels;
    STRING veteran_name[MAX_VET_LEVELS:veteran_levels][MAX_LEN_NAME];
-@@ -1360,8 +1378,8 @@
+@@ -1369,8 +1387,8 @@ end
  PACKET_RULESET_GOVERNMENT = 145; sc, lsend
    GOVERNMENT id;
  
@@ -276,7 +288,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  
    STRING name[MAX_LEN_NAME];
    STRING rule_name[MAX_LEN_NAME];
-@@ -1425,9 +1443,9 @@
+@@ -1434,9 +1452,9 @@ PACKET_RULESET_NATION = 148; sc, lsend
    UINT8 groups[MAX_NUM_NATION_GROUPS:ngroups];
  
    GOVERNMENT init_government_id;
@@ -289,7 +301,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  end
  
  # Separate from PACKET_RULESET_NATION since it can change in pregame
-@@ -1705,7 +1723,7 @@
+@@ -1714,7 +1732,7 @@ PACKET_SERVER_SETTING_CONST = 165; sc, handle-via-packet, is-info
    UINT16 id; key
    STRING name[MAX_LEN_NAME];
    STRING short_help[MAX_LEN_PACKET]; /* untranslated */
@@ -298,7 +310,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    UINT8 category;
  end
  
-@@ -2054,3 +2072,32 @@
+@@ -2063,3 +2081,43 @@ PACKET_EDIT_OBJECT_CREATED = 219; sc, dsend
    SINT32 tag;
    SINT32 id;
  end
@@ -330,4 +342,15 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
 +
 +PACKET_CITY_DISBANDABLE_REQ = 260; cs, dsend
 +  CITY city_id;
++end
++
++PACKET_CITY_WORKLIST_ADD = 261; cs, dsend
++  CITY city_id;
++  STRING kind[MAX_LEN_MSG];
++  STRING value[MAX_LEN_MSG];
++end
++
++PACKET_CITY_WORKLIST_REMOVE = 262; cs, dsend
++  CITY city_id;
++  UINT32 index;
 +end

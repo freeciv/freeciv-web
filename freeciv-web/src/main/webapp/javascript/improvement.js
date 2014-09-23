@@ -14,6 +14,9 @@
 var improvements = {};
 
 
+var B_LAST = MAX_NUM_ITEMS;
+
+
 /**************************************************************************
  Returns a list containing improvements which are available from a tech.
 **************************************************************************/

@@ -624,17 +624,21 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 #city_current_worklist {
   width: 100%;
   float: left;
-  min-height: 200px;
-  max-height: 700px;
+  min-height: 300px;
+  max-height: 600px;
   overflow: auto;
+  background-color: rgba(40,40,40,0.6);
+  border: 1px solid black;
 }
 
 #worklist_production_choices {
   width: 100%;
   float: left;
-  min-height: 200px;
-  max-height: 700px;
+  min-height: 300px;
+  max-height: 600px;
   overflow: auto;
+  background-color: rgba(40,40,40,0.6);
+  border: 1px solid black;
 }
 
 #worklist_heading {
@@ -666,4 +670,17 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 
 .worklist_table {
   width: 100%;
+  border-spacing: 0px;
+  border-collapse: separate;
 }
+
+#worklist_dialog_headline {
+  width: 100%;
+  font-size: 120%;
+  padding-bottom: 5px;
+}
+
+.worklist_table .ui-selected {
+  background-color: white;
+}
+

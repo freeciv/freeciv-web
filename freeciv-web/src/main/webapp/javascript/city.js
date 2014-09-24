@@ -17,6 +17,8 @@ var city_rules = {};
 
 var active_city = null;
 var worklist_dialog_active = false;
+var selected_value = -1;
+var selected_kind = -1;
 
 var FEELING_BASE = 0;		/* before any of the modifiers below */
 var FEELING_LUXURY = 1;		/* after luxury */
@@ -230,8 +232,6 @@ function show_city_dialog(pcity)
   specialist_html += "<div style='clear: both;'></div>";
   $("#specialist_panel").html(specialist_html);
 
-  $("#buy_button").button(city_can_buy(pcity) ? "enable" : "disable");
-
   $('#disbandable_city').off();
   $('#disbandable_city').prop('checked', pcity['disbandable_city']);
   $('#disbandable_city').click(function() {
@@ -363,12 +363,14 @@ function generate_production_list(pcity)
   for (improvement_id in improvements) {
     var pimprovement = improvements[improvement_id];
     if (can_city_build_improvement_now(pcity, pimprovement)) {
+      var build_cost = pimprovement['build_cost'];
+      if (pimprovement['name'] == "Coinage") build_cost = "-";
       production_list.push({"kind": VUT_IMPROVEMENT, 
                             "value" : pimprovement['id'], 
                             "text" : pimprovement['name'],
 	                    "helptext" : pimprovement['helptext'],
                             "rule_name" : pimprovement['rule_name'],
-                            "build_cost" : pimprovement['build_cost'],
+                            "build_cost" : build_cost,
                             "sprite" : get_improvement_image_sprite(pimprovement) });
     }
   }
@@ -860,7 +862,8 @@ function city_worklist_dialog()
   $("#city_worklist_dialog").remove();
   $("<div id='city_worklist_dialog'></div>").appendTo("div#game_page");
 
-  var msg = "<div id='worklist_left'><div id='worklist_heading'>Target Worklist:</div><div id='city_current_worklist'></div></div>"
+  var msg = "<div id='worklist_dialog_headline'></div>"
+	  + "<div id='worklist_left'><div id='worklist_heading'>Target Worklist:</div><div id='city_current_worklist'></div></div>"
 	  + "<div id='worklist_right'><div id='tasks_heading'>Source tasks:</div><div id='worklist_production_choices'></div></div>";
 
   $("#city_worklist_dialog").html(msg);
@@ -875,9 +878,11 @@ function city_worklist_dialog()
       if (kind == null || value == null || work_item.length == 0) continue;
       if (kind == VUT_IMPROVEMENT) {
         var pimpr = improvements[value];
+	var build_cost = pimpr['build_cost'];
+	if (pimpr['name'] == "Coinage") build_cost = "-";
 	universals_list.push({"name" : pimpr['name'], 
 		"helptext" : pimpr['helptext'],
-		"build_cost" : pimpr['build_cost'],
+		"build_cost" : build_cost,
 		"sprite" : get_improvement_image_sprite(pimpr)});
       } else if (kind == VUT_UTYPE) {
         var putype = unit_types[value];
@@ -922,15 +927,11 @@ function city_worklist_dialog()
       console.log("Missing sprite for " + production_list[a]['value']);
       continue;
     }
-    var kind_string = "None";
-    if (production_list[a]['kind'] == VUT_IMPROVEMENT) kind_string = "Building"; 
-    if (production_list[a]['kind'] == VUT_UTYPE) kind_string = "UnitType"; 
-    var value_string = production_list[a]['rule_name'];
+    var kind = production_list[a]['kind'];
+    var value = production_list[a]['value'];
 
-    production_html += "<tr class='prod_choice_list_item' onclick='send_city_worklist_add(" 
-     + pcity['id'] + ",\"" + kind_string + "\",\"" + value_string + "\")' "
-     + " title='" + production_list[a]['helptext'] + "'>"
-     + "<td><div class='production_list_item_sub' style=' background: transparent url(" 
+    production_html += "<tr class='prod_choice_list_item kindvalue_item' data-value='" + value + "' data-kind='" + kind + "'>"
+     + "<td><div class='production_list_item_sub' title='" + production_list[a]['helptext'] + "' style=' background: transparent url(" 
            + sprite['image-src'] +
            ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y'] 
            + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px;'"
@@ -950,8 +951,34 @@ function city_worklist_dialog()
 			close: function() {
 				keyboard_input=true;
 			},
-			buttons: [	{
-					text: "Ok",
+			buttons: [
+					{
+					text: "Change production",
+	  				disabled: true,
+				        click: function() {
+					  if (selected_kind != -1 && selected_value != -1) {
+    					    send_city_change(pcity['id'], selected_kind, selected_value);
+					  }
+					}
+					},
+					{
+					text: "Add to worklist",
+	  				disabled: true,
+				        click: function() {
+					  if (selected_kind != -1 && selected_value != -1) {
+					    send_city_worklist_add(pcity['id'], selected_kind, selected_value);
+					  }
+					}
+					},	  
+	 				 {
+					text: "Buy",
+	  				disabled: !city_can_buy(pcity),
+				        click: function() {
+						request_city_buy();
+					}
+					}
+  					,{
+					text: "Close",
 				        click: function() {
 						$("#city_worklist_dialog").remove();
 						keyboard_input=true;
@@ -964,7 +991,51 @@ function city_worklist_dialog()
   $("#city_worklist_dialog").dialog('open');		
   keyboard_input=false;
   worklist_dialog_active = true;
+  var headline = "";
+  var turns_to_complete = "";
+  if (pcity['production_kind'] == VUT_UTYPE) {
+    var punit_type = unit_types[pcity['production_value']];
+    headline += "Producing: " + punit_type['name'];   
+    turns_to_complete = city_turns_to_build(pcity, punit_type, true); 
+  }
 
+  if (pcity['production_kind'] == VUT_IMPROVEMENT) {
+    var improvement = improvements[pcity['production_value']];
+    headline += "Producing: " + improvement['name'];
+    turns_to_complete = city_turns_to_build(pcity, improvement, true);
+    if (improvement['name'] == "Coinage") {
+      turns_to_complete = FC_INFINITY;
+    }
+  }
+  if (turns_to_complete != FC_INFINITY) {
+    headline += " - Turns to completion: " + turns_to_complete;
+  }
+
+  $("#worklist_dialog_headline").html(headline);
+
+  $(".production_list_item_sub").tooltip();
+ 
+  $(".worklist_table").selectable({ filter: "tr", 
+       selected: function( event, ui ) {handle_worklist_select(ui); }}); 
+
+  $(".kindvalue_item").dblclick(function() {
+    var value = parseFloat(jQuery(this).data('value'));
+    var kind = parseFloat(jQuery(this).data('kind'));
+    if (selected_kind >= 0 && selected_value >= 0) {
+      send_city_worklist_add(pcity['id'], kind, value);
+    }
+  });
+
+}
+
+/**************************************************************************
+ ...
+**************************************************************************/
+function handle_worklist_select( ui ) 
+{
+  selected_value = parseFloat($(ui.selected).data("value"));
+  selected_kind = parseFloat($(ui.selected).data("kind"));
+  $(".ui-button").removeAttr('disabled').removeClass( 'ui-state-disabled');
 }
 
 /**************************************************************************

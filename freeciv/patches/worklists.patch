@@ -39,14 +39,14 @@ index 3662501..c80aff5 100644
 +  Handle city worklist add request
 +**************************************************************************/
 +void handle_city_worklist_add(struct player *pplayer, int city_id,
-+                          const char *kind, const char *value)
++                              int kind, int value)
 +{
 +  struct city *pcity = player_city_by_number(pplayer, city_id);
 +
 +  if (!pcity) {
 +    return;
 +  }
-+  struct universal addme = universal_by_rule_name(kind, value);
++  struct universal addme = universal_by_number(kind, value);
 +  worklist_append(&pcity->worklist, addme);
  
    send_city_info(pplayer, pcity);

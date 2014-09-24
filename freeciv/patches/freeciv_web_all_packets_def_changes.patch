@@ -346,8 +346,8 @@ index 09cd61f..9dbfc89 100644
 +
 +PACKET_CITY_WORKLIST_ADD = 261; cs, dsend
 +  CITY city_id;
-+  STRING kind[MAX_LEN_MSG];
-+  STRING value[MAX_LEN_MSG];
++  UINT32 kind;
++  UINT32 value;
 +end
 +
 +PACKET_CITY_WORKLIST_REMOVE = 262; cs, dsend

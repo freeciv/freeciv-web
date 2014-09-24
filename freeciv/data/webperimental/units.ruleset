@@ -2034,6 +2034,10 @@ The actions available to Diplomats in a city are:\
  Incitement may be attempted in peacetime, but will cause a\
  diplomatic incident.\
 "), _("\
+ - \"Steal Gold\": Your unit attempts to steal gold from the city's owner\
+ and transfer most of it to you. This action may be attempted even when not\
+ at war, but will cause a diplomatic incident.\
+"), _("\
 In some game strategies, hordes of Diplomats can be used to wreak\
  havoc on the enemy.  Little wonder that Diplomats are often\
  viewed with suspicion and fear!\

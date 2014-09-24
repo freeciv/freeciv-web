@@ -116,6 +116,10 @@ function popup_action_selection(actor_unit, action_probabilities,
     dhtml += "<input id='act_sel_tech_tgt" + actor_unit['id']
     + "' class='act_sel_button' type='button' value='Industrial Espionage'>"
   }
+  if (action_probabilities[ACTION_SPY_STEAL_GOLD] != 0) {
+    dhtml += "<input id='act_sel_steal_gold" + actor_unit['id']
+    + "' class='act_sel_button' type='button' value='Steal Gold'>"
+  }
   if (action_probabilities[ACTION_SPY_INCITE_CITY] != 0) {
     dhtml += "<input id='act_sel_revo" + actor_unit['id']
     + "' class='act_sel_button' type='button' value='Incite a revolt'>"
@@ -243,6 +247,19 @@ function popup_action_selection(actor_unit, action_probabilities,
                      /* FIXME: Let the player choose the target. */
                      "value" : A_UNSET,
                      "action_type": ACTION_SPY_TARGETED_STEAL_TECH};
+      send_request (JSON.stringify(packet));
+
+      $(id).remove();
+    });
+  }
+
+  if (action_probabilities[ACTION_SPY_STEAL_GOLD] != 0) {
+    $("#act_sel_steal_gold" + actor_unit['id']).click(function() {
+      var packet = {"type" : packet_unit_do_action,
+                     "actor_id" : actor_unit['id'],
+                     "target_id": target_city['id'],
+                     "value" : A_UNSET,
+                     "action_type": ACTION_SPY_STEAL_GOLD};
       send_request (JSON.stringify(packet));
 
       $(id).remove();

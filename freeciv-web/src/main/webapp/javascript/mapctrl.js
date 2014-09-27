@@ -61,7 +61,7 @@ function mapview_mouse_down(e)
     if (goto_active) return;
 
     setTimeout("check_mouse_drag_unit(" + mouse_x + "," + mouse_y + ");", 200);
-  } else if (middleclick) {
+  } else if (middleclick || e['altKey']) {
     popit();
     return false; 
   } else {

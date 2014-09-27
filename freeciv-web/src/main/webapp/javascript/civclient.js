@@ -65,6 +65,8 @@ function civclient_init()
     overviewTimerId = setInterval("redraw_overview()", OVERVIEW_REFRESH);
   }
 
+  motd_init();
+
   // Tells the browser that you wish to perform an animation; this 
   // requests that the browser schedule a repaint of the window for the 
   // next animation frame.
@@ -552,6 +554,7 @@ function https_redirect_check()
   }
 
 }
+
 /**************************************************************************
   Redirect between the HTTP and HTTPS urls of Freeciv-web.
 **************************************************************************/
@@ -566,3 +569,14 @@ function https_redirect()
   }
 }
 
+/**************************************************************************
+  This function can be used to display a message of the day to users.
+  It is run on startup of the game, and every 30 minutes after that.
+  The /motd.js Javascript file is fetched using AJAX, and executed
+  so it can run any Javascript code. See motd.js also.
+**************************************************************************/
+function motd_init()
+{
+  $.getScript("/motd.js");
+  setTimeout("motd_init();", 1000*60*30);
+}

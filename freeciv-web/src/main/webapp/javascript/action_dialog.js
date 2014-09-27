@@ -85,9 +85,11 @@ function popup_action_selection(actor_unit, action_probabilities,
 
     dhtml += " has arrived at " + decodeURIComponent(target_city['name'])
              + ". What is your command?";
-  } else {
-    dhtml += "The " + unit_types[actor_unit['type']]['name']
-             + " is waiting for your command";
+  } else if (target_unit != null) {
+    dhtml += "Your " + unit_types[actor_unit['type']]['name']
+             + " is ready to act against "
+             + nations[unit_owner(target_unit)['nation']]['adjective']
+             + " " + unit_types[target_unit['type']]['name'] + ".";
   }
 
   dhtml += "<br>";

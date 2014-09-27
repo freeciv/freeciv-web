@@ -27,7 +27,8 @@ Differences compared to default web-ruleset are:\n\
 - Diplomat available from Alphabet\n\
 - AI players are created with random trait values\n\
 - Known techs tree cannot have holes in it\n\
-- Diplomats and spies can steal gold from enemy capitals (needs Banking)\
+- Diplomats and spies can steal gold from enemy capitals (needs Banking)\n\
+- Unit stacks don't protect against spy actions\
 ")
 
 [options]
@@ -325,7 +326,6 @@ target_reqs    =
       "UnitType", "Barbarian Leader", "Local", FALSE
       "CityTile", "Center", "Local", FALSE
       "Gov", "Democracy", "Player", FALSE
-      "MaxUnitsOnTile", "1", "Local", TRUE
     }
 
 [actionenabler_sabotage_unit]
@@ -341,7 +341,6 @@ target_reqs    =
     { "type",   "name", "range", "present"
       "CityTile", "Center", "Local", FALSE
       "MinHitPoints", "2", "Local", TRUE
-      "MaxUnitsOnTile", "1", "Local", TRUE
     }
 
 [borders]

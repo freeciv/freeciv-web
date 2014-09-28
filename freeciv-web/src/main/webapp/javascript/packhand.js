@@ -624,6 +624,8 @@ function handle_end_phase(packet)
 function handle_new_year(packet) 
 {
   game_info['year'] = packet['year'];
+  /* TODO: Support calender fragments. */
+  game_info['fragments'] = packet['fragments'];
   game_info['turn'] = packet['turn']; 
 }
 

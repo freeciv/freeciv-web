@@ -27,7 +27,12 @@ Differences compared to default web-ruleset are:\n\
 - Diplomat available from Alphabet\n\
 - AI players are created with random trait values\n\
 - Known techs tree cannot have holes in it\n\
-- Diplomats and spies can steal gold from enemy capitals (needs Banking)\n\
+- Diplomats can steal gold from enemy capitals (needs Banking)\n\
+- Spies can steal gold from enemy cities (needs Banking)\n\
+- A higher percentage of a nation's gold can be stolen from its capital \
+(unless it's in Anarchy).\n\
+- An even higher percentage of a nation's gold can be stolen from its \
+capital if it is communist.\n\
 - Unit stacks don't protect against spy actions\
 ")
 
@@ -251,20 +256,6 @@ target_reqs    =
       "MinSize", "2", "City"
     }
 
-[actionenabler_steal_gold]
-action = "Steal Gold"
-actor_reqs    =
-    { "type",   "name", "range", "present"
-      "UnitFlag", "Diplomat", "Local", TRUE
-      "UnitState", "TransportDependent", "Local", FALSE
-      "MinMoveFrags", "1", "Local", TRUE
-      "Tech", "Banking", "Player", TRUE
-    }
-target_reqs  =
-    { "type",   "name", "range", "present"
-      "Building", "Palace", "City", TRUE
-    }
-
 [actionenabler_steal_tech_random]
 action = "Steal Tech"
 actor_reqs    =
@@ -341,6 +332,30 @@ target_reqs    =
     { "type",   "name", "range", "present"
       "CityTile", "Center", "Local", FALSE
       "MinHitPoints", "2", "Local", TRUE
+    }
+
+[actionenabler_steal_gold_capital]
+action = "Steal Gold"
+actor_reqs    =
+    { "type",   "name", "range", "present"
+      "UnitFlag", "Diplomat", "Local", TRUE
+      "UnitState", "TransportDependent", "Local", FALSE
+      "MinMoveFrags", "1", "Local", TRUE
+      "Tech", "Banking", "Player", TRUE
+    }
+target_reqs  =
+    { "type",   "name", "range", "present"
+      "Building", "Palace", "City", TRUE
+    }
+
+[actionenabler_steal_gold_spy]
+action = "Steal Gold"
+actor_reqs    =
+    { "type",   "name", "range", "present"
+      "Unitflag", "Spy", "Local", TRUE
+      "UnitState", "TransportDependent", "Local", FALSE
+      "MinMoveFrags", "1", "Local", TRUE
+      "Tech", "Banking", "Player", TRUE
     }
 
 [borders]

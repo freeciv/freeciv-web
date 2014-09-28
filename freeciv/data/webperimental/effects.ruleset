@@ -2289,3 +2289,29 @@ reqs	=
     { "type", "name", "range"
       "UnitFlag", "Cities", "Local"
     }
+
+[effect_steal_gold_base]
+type    = "Max_Stolen_Gold_Pct"
+value   = 5
+
+[effect_steal_gold_capital]
+type    = "Max_Stolen_Gold_Pct"
+value   = 25
+reqs    =
+{ "type", "name", "range", "present"
+  "Building", "Palace", "City", TRUE
+  "Gov", "Anarchy", "Player", FALSE
+}
+
+[effect_central_planning_committee]
+type    = "Max_Stolen_Gold_Pct"
+value   = 20
+reqs    =
+{ "type", "name", "range"
+  "Building", "Palace", "City"
+  "Gov", "Communism", "Player"
+}
+
+[effect_thiefs_share_base]
+type    = "Thiefs_Share_Pct"
+value   = 1

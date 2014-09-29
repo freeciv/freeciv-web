@@ -22,6 +22,7 @@ options="+Freeciv-ruleset-Devel-2014.September.14c web-compatible"
 flags =
   { "name", "helptxt"
     "Oil", _("Has Oil Well instead of Mine.")
+    "NoPollution", _("No Pollution nor Fallout appear here.")
   }
 
 [parameters]
@@ -135,8 +136,6 @@ ocean_resources = FALSE
 ;                        following, and/or any user flags defined above:
 ;   - NoBarbs          = Barbarians will not be spawned here.
 ;   - NoCities         = Cities may not be built or found on this terrain.
-;   - NoPollution      = Pollution and Fallout will not be put on this
-;                        terrain type.
 ;   - Starter          = Players will only be started on "Starter" terrain.
 ;                        (Currently this cannot be Oceanic terrain.)
 ;   - CanHaveRiver     = Set to 1 if this terrain can have river on it (the
@@ -1132,6 +1131,10 @@ activity_gfx   = "None"
 act_gfx_alt    = "-"
 rmact_gfx      = "unit.pollution"
 rmact_gfx_alt  = "-"
+reqs           =
+    { "type", "name", "range", "present"
+      "TerrainFlag", "NoPollution", "Local", FALSE
+    }
 removal_time   = 0
 flags          = "GlobalWarming"
 
@@ -1196,6 +1199,10 @@ activity_gfx   = "None"
 act_gfx_alt    = "-"
 rmact_gfx      = "unit.fallout"
 rmact_gfx_alt  = "-"
+reqs           =
+    { "type", "name", "range", "present"
+      "TerrainFlag", "NoPollution", "Local", FALSE
+    }
 removal_time   = 0
 flags          = "NuclearWinter"
 

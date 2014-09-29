@@ -1,10 +1,9 @@
 #!/bin/sh
 
 # bribe_unit_battle.patch is patch #5300
-# bug22700fix is bug #22701
 # steal_gold_effects.patch is patch #5293
 
-PATCHLIST="freeciv_web_all_packets_def_changes caravan_fixes1 city_fixes city_impr_fix2 city_name_bugfix city-naming-change city_fixes2 citytools_changes goto_1 goto_attack1 goto_fix_1 goto_fix_2 govt-fix map-settings metachange orders_aborted orders_invalid2 text_fixes unithand-change2 webclient-ai-attitude current_research_cost freeciv-svn-webclient-changes network-rewrite-1 fcnet_packets misc_devversion_sync scenario_ruleset savegame savegame2 maphand_ch serverside_extra_assign libtoolize_no_symlinks spacerace city_disbandable ai_traits_crash unittools ruleset-capability worklists bug22700fix bribe_unit_battle steal_gold_effects"
+PATCHLIST="freeciv_web_all_packets_def_changes caravan_fixes1 city_fixes city_impr_fix2 city_name_bugfix city-naming-change city_fixes2 citytools_changes goto_1 goto_attack1 goto_fix_1 goto_fix_2 govt-fix map-settings metachange orders_aborted orders_invalid2 text_fixes unithand-change2 webclient-ai-attitude current_research_cost freeciv-svn-webclient-changes network-rewrite-1 fcnet_packets misc_devversion_sync scenario_ruleset savegame savegame2 maphand_ch serverside_extra_assign libtoolize_no_symlinks spacerace city_disbandable ai_traits_crash unittools ruleset-capability worklists bribe_unit_battle steal_gold_effects"
 
 apply_patch() {
   echo "*** Applying $1.patch ***"

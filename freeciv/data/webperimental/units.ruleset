@@ -2224,6 +2224,10 @@ roles         = "Explorer"
 helptext      = _("\
 Explorers are brave individuals that are very useful for\
  mapping unknown territory.\
+"), _("\
+An explorer can be ordered to remain in a foreign city as an ambassador\
+ after Writing is discovered. This gives permanent contact with the city's\
+ owner, as well as intelligence on their tax rates and technology.\
 ")
 
 [unit_leader]

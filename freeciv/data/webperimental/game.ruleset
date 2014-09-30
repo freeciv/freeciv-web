@@ -33,7 +33,9 @@ Differences compared to default web-ruleset are:\n\
 (unless it's in Anarchy).\n\
 - An even higher percentage of a nation's gold can be stolen from its \
 capital if it is communist.\n\
-- Unit stacks don't protect against spy actions\
+- Unit stacks don't protect against spy actions\n\
+- Explorers can establish embassies once Writing is discovered. \
+This action consumes the explorer.\
 ")
 
 [options]
@@ -224,6 +226,21 @@ action       = "Establish Embassy"
 actor_reqs    =
     { "type",   "name", "range", "present"
       "UnitFlag", "Diplomat", "Local", TRUE
+      "UnitState", "TransportDependent", "Local", FALSE
+      "MinMoveFrags", "1", "Local", TRUE
+    }
+target_reqs  =
+    { "type",   "name", "range", "present"
+      "Nation", "Barbarian", "Player", FALSE
+      "Nation", "Pirate", "Player", FALSE
+    }
+
+[actionenabler_explorer_establish_embassy]
+action       = "Establish Embassy"
+actor_reqs    =
+    { "type",   "name", "range", "present"
+      "UnitType", "Explorer", "Local", TRUE
+      "Tech", "Writing", "Player", TRUE
       "UnitState", "TransportDependent", "Local", FALSE
       "MinMoveFrags", "1", "Local", TRUE
     }

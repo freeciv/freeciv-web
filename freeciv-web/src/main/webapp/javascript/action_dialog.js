@@ -166,7 +166,6 @@ function popup_action_selection(actor_unit, action_probabilities,
 	
   $(id).dialog('open');		
   $(".act_sel_button").button();
-  $(".act_sel_button").css("width", "250px");
   
 
   $("#act_sel_cancel" + actor_unit['id']).click(function() {
@@ -408,7 +407,6 @@ function popup_bribe_dialog(actor_unit, target_unit, cost)
 
   $(id).dialog('open');
   $(".bribe_unit_button").button();
-  $(".bribe_unit_button").css("width", "150px");
 
   if (bribe_possible) {
     $("#bribe_unit_dialog_bribe" + actor_unit['id']).click(function() {
@@ -481,7 +479,6 @@ function popup_incite_dialog(actor_unit, target_city, cost)
 
   $(id).dialog('open');
   $(".incite_city_button").button();
-  $(".incite_city_button").css("width", "150px");
 
   if (incite_possible) {
     $("#incite_city_dialog_incite" + actor_unit['id']).click(function() {

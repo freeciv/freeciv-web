@@ -511,6 +511,18 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
   padding-bottom: 15px;
 }
 
+.act_sel_button {
+  width: 250px;
+}
+
+.bribe_unit_button {
+  width: 150px;
+}
+
+.incite_city_button {
+  width: 150px;
+}
+
 .ui-selected {
   background-color: #eeeeee;
   color: black;

@@ -516,10 +516,12 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 }
 
 .bribe_unit_button {
+  float: right;
   width: 150px;
 }
 
 .incite_city_button {
+  float: right;
   width: 150px;
 }
 

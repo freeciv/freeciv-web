@@ -270,15 +270,13 @@ function popup_action_selection(actor_unit, action_probabilities,
 
   if (action_probabilities[ACTION_SPY_INCITE_CITY] != 0) {
     $("#act_sel_revo" + actor_unit['id']).click(function() {
-      /* FIXME: Give the user a chance to decline based on price. */
-      var packet = {"type" : packet_unit_do_action,
-        "actor_id" : actor_unit['id'],
+      var packet = {"type" : packet_unit_action_query,
+        "diplomat_id" : actor_unit['id'],
         "target_id": target_city['id'],
-        "value" : 0,
         "action_type": ACTION_SPY_INCITE_CITY};
-        send_request (JSON.stringify(packet));
+      send_request (JSON.stringify(packet));
 
-        $(id).remove();
+      $(id).remove();
     });
   }
 
@@ -320,15 +318,13 @@ function popup_action_selection(actor_unit, action_probabilities,
 
   if (action_probabilities[ACTION_SPY_BRIBE_UNIT] != 0) {
     $("#act_sel_bribe" + actor_unit['id']).click(function() {
-      /* FIXME: Give the user a chance to decline based on price. */
-      var packet = {"type" : packet_unit_do_action,
-        "actor_id" : actor_unit['id'],
+      var packet = {"type" : packet_unit_action_query,
+        "diplomat_id" : actor_unit['id'],
         "target_id": target_unit['id'],
-        "value" : 0,
         "action_type": ACTION_SPY_BRIBE_UNIT};
-        send_request (JSON.stringify(packet));
+      send_request (JSON.stringify(packet));
 
-        $(id).remove();
+      $(id).remove();
     });
   }
 
@@ -359,3 +355,148 @@ function popup_action_selection(actor_unit, action_probabilities,
   }
 }
 
+/**************************************************************************
+  Show the player the price of bribing the unit and, if bribing is
+  possible, allow him to order it done.
+**************************************************************************/
+function popup_bribe_dialog(actor_unit, target_unit, cost)
+{
+  var bribe_possible;
+  var id;
+  var dhtml;
+
+  id = "#bribe_unit_dialog_" + actor_unit['id'];
+
+  /* Reset dialog page. */
+  $(id).remove();
+
+  $("<div id='bribe_unit_dialog_" + actor_unit['id'] + "'></div>")
+      .appendTo("div#game_page");
+
+  dhtml = "";
+
+  dhtml += "Treasury contains " + unit_owner(actor_unit)['gold'] + " gold."
+  dhtml += " ";
+  dhtml += "The price of bribing "
+              + nations[unit_owner(target_unit)['nation']]['adjective']
+              + " " + unit_types[target_unit['type']]['name']
+           + " is " + cost + ".";
+
+  bribe_possible = cost <= unit_owner(actor_unit)['gold'];
+
+  if (bribe_possible) {
+    dhtml += "<br>";
+    dhtml += "<input id='bribe_unit_dialog_bribe" + actor_unit['id']
+             + "' class='bribe_unit_button' type='button' value='Do it!'>";
+  } else {
+    dhtml += " ";
+    dhtml += "Traitors Demand Too Much!";
+    dhtml += "<br>";
+  }
+
+  dhtml += "<input id='bribe_unit_dialog_cancel" + actor_unit['id']
+           + "' class='bribe_unit_button' type='button' value='Cancel'>";
+
+  $(id).html(dhtml);
+
+  $(id).attr("title", "About that bribery you requested...");
+
+  $(id).dialog({bgiframe: true,
+                modal: true,
+                height: "auto",
+                width: "auto"});
+
+  $(id).dialog('open');
+  $(".bribe_unit_button").button();
+  $(".bribe_unit_button").css("width", "150px");
+
+  if (bribe_possible) {
+    $("#bribe_unit_dialog_bribe" + actor_unit['id']).click(function() {
+      var packet = {"type" : packet_unit_do_action,
+        "actor_id" : actor_unit['id'],
+        "target_id": target_unit['id'],
+        "value" : 0,
+        "action_type": ACTION_SPY_BRIBE_UNIT};
+        send_request (JSON.stringify(packet));
+
+        $(id).remove();
+    });
+  }
+
+  $("#bribe_unit_dialog_cancel" + actor_unit['id']).click(function() {
+    $(id).remove();
+  })
+}
+
+/**************************************************************************
+  Show the player the price of inviting the city and, if inciting is
+  possible, allow him to order it done.
+**************************************************************************/
+function popup_incite_dialog(actor_unit, target_city, cost)
+{
+  var incite_possible;
+  var id;
+  var dhtml;
+
+  id = "#incite_city_dialog_" + actor_unit['id'];
+
+  /* Reset dialog page. */
+  $(id).remove();
+
+  $("<div id='incite_city_dialog_" + actor_unit['id'] + "'></div>")
+      .appendTo("div#game_page");
+
+  dhtml = "";
+
+  dhtml += "Treasury contains " + unit_owner(actor_unit)['gold'] + " gold."
+  dhtml += " ";
+  dhtml += "The price of inciting "
+           + decodeURIComponent(target_city['name'])
+           + " is " + cost + ".";
+
+  incite_possible = cost != INCITE_IMPOSSIBLE_COST
+                    && cost <= unit_owner(actor_unit)['gold'];
+
+  if (incite_possible) {
+    dhtml += "<br>";
+    dhtml += "<input id='incite_city_dialog_incite" + actor_unit['id']
+             + "' class='incite_city_button' type='button' value='Do it!'>";
+  } else {
+    dhtml += " ";
+    dhtml += "Traitors Demand Too Much!";
+    dhtml += "<br>";
+  }
+
+  dhtml += "<input id='incite_city_dialog_cancel" + actor_unit['id']
+           + "' class='incite_city_button' type='button' value='Cancel'>";
+
+  $(id).html(dhtml);
+
+  $(id).attr("title", "About that incite you requested...");
+
+  $(id).dialog({bgiframe: true,
+                modal: true,
+                height: "auto",
+                width: "auto"});
+
+  $(id).dialog('open');
+  $(".incite_city_button").button();
+  $(".incite_city_button").css("width", "150px");
+
+  if (incite_possible) {
+    $("#incite_city_dialog_incite" + actor_unit['id']).click(function() {
+      var packet = {"type" : packet_unit_do_action,
+        "actor_id" : actor_unit['id'],
+        "target_id": target_city['id'],
+        "value" : 0,
+        "action_type": ACTION_SPY_INCITE_CITY};
+        send_request (JSON.stringify(packet));
+
+        $(id).remove();
+    });
+  }
+
+  $("#incite_city_dialog_cancel" + actor_unit['id']).click(function() {
+    $(id).remove();
+  })
+}

@@ -500,19 +500,49 @@ function handle_unit_combat_info(packet)
   }
 }
 
-function handle_unit_action_answer(packet) 
+/**************************************************************************
+  Handle the requested follow up question about an action
+**************************************************************************/
+function handle_unit_action_answer(packet)
 {
   var diplomat_id = packet['diplomat_id'];  
   var target_id = packet['target_id'];
   var cost = packet['cost'];
   var action_type = packet['action_type'];
   
-  var pcity = game_find_city_by_number(target_id);
-  var punit = game_find_unit_by_number(target_id);
-  var pdiplomat = game_find_unit_by_number(diplomat_id);
+  var target_city = game_find_city_by_number(target_id);
+  var target_unit = game_find_unit_by_number(target_id);
+  var actor_unit = game_find_unit_by_number(diplomat_id);
   
- 
+  if (actor_unit == null) {
+    console.log("Bad actor unit (" + diplomat_id
+                + ") in unit action answer.");
+    return;
+  }
 
+  if (action_type == ACTION_SPY_BRIBE_UNIT) {
+    if (target_unit == null) {
+      console.log("Bad target unit (" + target_id
+                  + ") in unit action answer.");
+      return;
+    } else {
+      popup_bribe_dialog(actor_unit, target_unit, cost);
+      return;
+    }
+  } else if (action_type == ACTION_SPY_INCITE_CITY) {
+    if (target_city == null) {
+      console.log("Bad target city (" + target_id
+                  + ") in unit action answer.");
+      return;
+    } else {
+      popup_incite_dialog(actor_unit, target_city, cost);
+      return;
+    }
+  } else if (action_type == ACTION_COUNT) {
+    console.log("unit_action_answer: Server refused to respond.");
+  } else {
+    console.log("unit_action_answer: Invalid answer.");
+  }
 }
 
 /**************************************************************************

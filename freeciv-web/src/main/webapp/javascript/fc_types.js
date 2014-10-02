@@ -53,8 +53,7 @@ var ACTION_COUNT = 11;
 var ACTION_MOVE = ACTION_COUNT;
 
 /* The kind of universals_u (value_union_type was req_source_type).
- * Note: order must correspond to universal_names[] in requirements.c.
- */
+ * Used in the network protocol. */
 var VUT_NONE = 0;
 var VUT_ADVANCE = 1;
 var VUT_GOVERNMENT = 2;
@@ -68,13 +67,28 @@ var VUT_UCFLAG = 9;
 var VUT_OTYPE = 10;
 var VUT_SPECIALIST = 11;
 var VUT_MINSIZE = 12;		/* Minimum size: at city range means city size */
-var VUT_AI_LEVEL = 14;		/* AI level of the player */
-var VUT_TERRAINCLASS = 15;	/* More generic terrain type, currently "Land" or "Ocean" */
-var VUT_BASE = 16;
-var VUT_MINYEAR = 17;
-var VUT_TERRAINALTER = 18;     /* Terrain alterations that are possible */
-var VUT_CITYTILE = 19;         /* Target tile is used by city */
-var VUT_LAST = 20;
+var VUT_AI_LEVEL = 13;		/* AI level of the player */
+var VUT_TERRAINCLASS = 14;	/* More generic terrain type, currently "Land" or "Ocean" */
+var VUT_MINYEAR = 15;
+var VUT_TERRAINALTER = 16;      /* Terrain alterations that are possible */
+var VUT_CITYTILE = 17;          /* Target tile is used by city. */
+var VUT_RESOURCE = 18;
+var VUT_TERRFLAG = 19;
+var VUT_NATIONALITY = 20;
+var VUT_BASEFLAG = 21;
+var VUT_ROADFLAG = 22;
+var VUT_EXTRA = 23;
+var VUT_TECHFLAG = 24;
+var VUT_ACHIEVEMENT = 25;
+var VUT_DIPLREL = 26;
+var VUT_MAXTILEUNITS = 27;
+var VUT_STYLE = 28;
+var VUT_MINCULTURE = 29;
+var VUT_UNITSTATE = 30;
+var VUT_MINMOVES = 31;
+var VUT_MINVETERAN = 32;
+var VUT_MINHP = 33;
+var VUT_COUNT = 34;             /* Keep this last. */
 
 /* Sometimes we don't know (or don't care) if some requirements for effect
  * are currently fulfilled or not. This enum tells lower level functions

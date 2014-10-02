@@ -32,9 +32,12 @@ class metachecker():
         sys.exit(1)
       settings = configparser.ConfigParser()
       settings.read(settings_file)
-      self.server_capacity = int(settings["Resource usage"]["server_capacity"])
-      self.server_limit = int(settings["Resource usage"]["server_limit"])
-      self.savesdir = settings["Config"]["save_directory"]
+      self.server_capacity = int(settings.get("Resource usage", "server_capacity",
+                                              fallback = 10))
+      self.server_limit = int(settings.get("Resource usage", "server_limit",
+                                           fallback = 250))
+      self.savesdir = settings.get("Config", "save_directory",
+                                   fallback = "/vagrant/resin/webapps/ROOT/savegames/")
       self.check_count = 0;
       self.total = 0;
       self.single = 0;

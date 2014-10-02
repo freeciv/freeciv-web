@@ -12,6 +12,30 @@
 ***********************************************************************/
 
 
+/*
+ * ACTPROB_IMPOSSIBLE is another way of saying that the probability is 0%.
+ */
+var ACTPROB_IMPOSSIBLE = 0;
+
+/*
+ * The special value ACTPROB_NA indicates that no probability should exist.
+ */
+var ACTPROB_NA = 253;
+
+/*
+ * The special value ACTPROB_NOT_IMPLEMENTED indicates that support
+ * for finding this probability currently is missing.
+ */
+var ACTPROB_NOT_IMPLEMENTED = 254;
+
+/*
+ * The special value ACTPROB_NOT_KNOWN indicates that the player don't know
+ * enough to find out. It is caused by the probability depending on a rule
+ * that depends on game state the player don't have access to. It may be
+ * possible for the player to later gain access to this game state.
+ */
+var ACTPROB_NOT_KNOWN = 255;
+
 
 /**************************************************************************
   Returns true unless a situation were a regular move always would be
@@ -61,6 +85,23 @@ function can_actor_unit_move(actor_unit, target_tile)
 }
 
 /****************************************************************************
+  Format the probability that an action will be a success.
+****************************************************************************/
+function format_action_probability(probability)
+{
+  if (probability <= 200) {
+    /* This is a regular chance of success. */
+    return " (" + (probability / 2) + "%)";
+  } else if (probability == ACTPROB_NOT_KNOWN) {
+    /* This is know to be unknown. */
+    return " (?%)";
+  } else {
+    /* The remaining action probabilities shouldn't be displayed. */
+    return "";
+  }
+}
+
+/****************************************************************************
   Ask the player to select an action.
 ****************************************************************************/
 function popup_action_selection(actor_unit, action_probabilities,
@@ -96,39 +137,66 @@ function popup_action_selection(actor_unit, action_probabilities,
 
   if (action_probabilities[ACTION_ESTABLISH_EMBASSY] != 0) {
     dhtml += "<input id='act_sel_emb" + actor_unit['id']
-             + "' class='act_sel_button' type='button' value='Establish Embassy'>";
+             + "' class='act_sel_button' type='button' value='"
+             + "Establish Embassy"
+             + format_action_probability(action_probabilities[ACTION_ESTABLISH_EMBASSY])
+             + "'>";
   }
   if (action_probabilities[ACTION_SPY_INVESTIGATE_CITY] != 0) {
     dhtml += "<input id='act_sel_inv" + actor_unit['id']
-    + "' class='act_sel_button' type='button' value='Investigate City'>"
+             + "' class='act_sel_button' type='button' value='"
+             + "Investigate City"
+             + format_action_probability(action_probabilities[ACTION_SPY_INVESTIGATE_CITY])
+             + "'>";
   }
   if (action_probabilities[ACTION_SPY_SABOTAGE_CITY] != 0) {
     dhtml += "<input id='act_sel_sab" + actor_unit['id']
-    + "' class='act_sel_button' type='button' value='Sabotage City'>"
+             + "' class='act_sel_button' type='button' value='"
+             + "Sabotage City"
+             + format_action_probability(action_probabilities[ACTION_SPY_SABOTAGE_CITY])
+             + "'>";
   }
   if (action_probabilities[ACTION_SPY_TARGETED_SABOTAGE_CITY] != 0) {
     dhtml += "<input id='act_sel_sab_tgt" + actor_unit['id']
-    + "' class='act_sel_button' type='button' value='Industrial Sabotage'>"
+             + "' class='act_sel_button' type='button' value='"
+             + "Industrial Sabotage"
+             + format_action_probability(action_probabilities[ACTION_SPY_TARGETED_SABOTAGE_CITY])
+             + "'>";
   }
   if (action_probabilities[ACTION_SPY_STEAL_TECH] != 0) {
     dhtml += "<input id='act_sel_tech" + actor_unit['id']
-    + "' class='act_sel_button' type='button' value='Steal Technology'>"
+             + "' class='act_sel_button' type='button' value='"
+             + "Steal Technology"
+             + format_action_probability(action_probabilities[ACTION_SPY_STEAL_TECH])
+             + "'>";
   }
   if (action_probabilities[ACTION_SPY_TARGETED_STEAL_TECH] != 0) {
     dhtml += "<input id='act_sel_tech_tgt" + actor_unit['id']
-    + "' class='act_sel_button' type='button' value='Industrial Espionage'>"
+             + "' class='act_sel_button' type='button' value='"
+             + "Industrial Espionage"
+             + format_action_probability(action_probabilities[ACTION_SPY_TARGETED_STEAL_TECH])
+             + "'>";
   }
   if (action_probabilities[ACTION_SPY_STEAL_GOLD] != 0) {
     dhtml += "<input id='act_sel_steal_gold" + actor_unit['id']
-    + "' class='act_sel_button' type='button' value='Steal Gold'>"
+             + "' class='act_sel_button' type='button' value='"
+             + "Steal Gold"
+             + format_action_probability(action_probabilities[ACTION_SPY_STEAL_GOLD])
+             + "'>";
   }
   if (action_probabilities[ACTION_SPY_INCITE_CITY] != 0) {
     dhtml += "<input id='act_sel_revo" + actor_unit['id']
-    + "' class='act_sel_button' type='button' value='Incite a revolt'>"
+             + "' class='act_sel_button' type='button' value='"
+             + "Incite a revolt"
+             + format_action_probability(action_probabilities[ACTION_SPY_INCITE_CITY])
+             + "'>";
   }
   if (action_probabilities[ACTION_SPY_POISON] != 0) {
     dhtml += "<input id='act_sel_poi" + actor_unit['id']
-    + "' class='act_sel_button' type='button' value='Poison city'>"
+             + "' class='act_sel_button' type='button' value='"
+             + "Poison city"
+             + format_action_probability(action_probabilities[ACTION_SPY_POISON])
+             + "'>";
   }
   if (actor_unit['caravan_trade']) {
     dhtml += "<input id='act_sel_trade" + actor_unit['id']
@@ -140,11 +208,17 @@ function popup_action_selection(actor_unit, action_probabilities,
   }
   if (action_probabilities[ACTION_SPY_BRIBE_UNIT] != 0) {
     dhtml += "<input id='act_sel_bribe" + actor_unit['id']
-    + "' class='act_sel_button' type='button' value='Bribe enemy unit'>"
+    + "' class='act_sel_button' type='button' value='"
+        + "Bribe enemy unit"
+        + format_action_probability(action_probabilities[ACTION_SPY_BRIBE_UNIT])
+        + "'>";
   }
   if (action_probabilities[ACTION_SPY_SABOTAGE_UNIT] != 0) {
     dhtml += "<input id='act_sel_spy_sabo" + actor_unit['id']
-    + "' class='act_sel_button' type='button' value='Sabotage enemy unit'>"
+             + "' class='act_sel_button' type='button' value='"
+             + "Sabotage enemy unit"
+             + format_action_probability(action_probabilities[ACTION_SPY_SABOTAGE_UNIT])
+             + "'>";
   }
   if (can_actor_unit_move(actor_unit, target_tile)) {
     dhtml += "<input id='act_sel_move" + actor_unit['id']

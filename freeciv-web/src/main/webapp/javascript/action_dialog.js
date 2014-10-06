@@ -460,8 +460,8 @@ function popup_bribe_dialog(actor_unit, target_unit, cost)
   $(id).html(dhtml);
 
   var close_button = {	Close: function() {$(id).dialog('close');}};
-  var bribe_close_button = {	Close: function() {$(id).dialog('close');},
-  				Bribe: function() {
+  var bribe_close_button = {	"Cancel": function() {$(id).dialog('close');},
+  				"Do it!": function() {
       var packet = {"type" : packet_unit_do_action,
         "actor_id" : actor_unit['id'],
         "target_id": target_unit['id'],

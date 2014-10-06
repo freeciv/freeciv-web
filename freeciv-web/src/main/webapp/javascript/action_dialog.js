@@ -434,11 +434,9 @@ function popup_action_selection(actor_unit, action_probabilities,
 **************************************************************************/
 function popup_bribe_dialog(actor_unit, target_unit, cost)
 {
-  var bribe_possible;
-  var id;
-  var dhtml;
-
-  id = "#bribe_unit_dialog_" + actor_unit['id'];
+  var bribe_possible = false;
+  var dhtml = "";
+  var id = "#bribe_unit_dialog_" + actor_unit['id'];
 
   /* Reset dialog page. */
   $(id).remove();
@@ -446,58 +444,44 @@ function popup_bribe_dialog(actor_unit, target_unit, cost)
   $("<div id='bribe_unit_dialog_" + actor_unit['id'] + "'></div>")
       .appendTo("div#game_page");
 
-  dhtml = "";
-
-  dhtml += "Treasury contains " + unit_owner(actor_unit)['gold'] + " gold."
-  dhtml += " ";
+  dhtml += "Treasury contains " + unit_owner(actor_unit)['gold'] + " gold. "
   dhtml += "The price of bribing "
               + nations[unit_owner(target_unit)['nation']]['adjective']
               + " " + unit_types[target_unit['type']]['name']
-           + " is " + cost + ".";
+           + " is " + cost + ". ";
 
   bribe_possible = cost <= unit_owner(actor_unit)['gold'];
 
-  if (bribe_possible) {
-    dhtml += "<br>";
-    dhtml += "<input id='bribe_unit_dialog_bribe" + actor_unit['id']
-             + "' class='bribe_unit_button' type='button' value='Do it!'>";
-  } else {
-    dhtml += " ";
+  if (!bribe_possible) {
     dhtml += "Traitors Demand Too Much!";
     dhtml += "<br>";
   }
 
-  dhtml += "<input id='bribe_unit_dialog_cancel" + actor_unit['id']
-           + "' class='bribe_unit_button' type='button' value='Cancel'>";
-
   $(id).html(dhtml);
 
-  $(id).attr("title", "About that bribery you requested...");
-
-  $(id).dialog({bgiframe: true,
-                modal: true,
-                height: "auto",
-                width: "auto"});
-
-  $(id).dialog('open');
-  $(".bribe_unit_button").button();
-
-  if (bribe_possible) {
-    $("#bribe_unit_dialog_bribe" + actor_unit['id']).click(function() {
+  var close_button = {	Close: function() {$(id).dialog('close');}};
+  var bribe_close_button = {	Close: function() {$(id).dialog('close');},
+  				Bribe: function() {
       var packet = {"type" : packet_unit_do_action,
         "actor_id" : actor_unit['id'],
         "target_id": target_unit['id'],
         "value" : 0,
         "action_type": ACTION_SPY_BRIBE_UNIT};
         send_request (JSON.stringify(packet));
+      $(id).dialog('close');
+    }
+  };
 
-        $(id).remove();
-    });
-  }
+  $(id).attr("title", "About that bribery you requested...");
 
-  $("#bribe_unit_dialog_cancel" + actor_unit['id']).click(function() {
-    $(id).remove();
-  })
+  $(id).dialog({bgiframe: true,
+                modal: true,
+                buttons: (bribe_possible ? bribe_close_button : close_button),
+                height: "auto",
+                width: "auto"});
+
+  $(id).dialog('open');
+
 }
 
 /**************************************************************************

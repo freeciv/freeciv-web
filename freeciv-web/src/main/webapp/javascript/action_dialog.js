@@ -513,45 +513,35 @@ function popup_incite_dialog(actor_unit, target_city, cost)
   incite_possible = cost != INCITE_IMPOSSIBLE_COST
                     && cost <= unit_owner(actor_unit)['gold'];
 
-  if (incite_possible) {
-    dhtml += "<br>";
-    dhtml += "<input id='incite_city_dialog_incite" + actor_unit['id']
-             + "' class='incite_city_button' type='button' value='Do it!'>";
-  } else {
+  if (!incite_possible) {
     dhtml += " ";
     dhtml += "Traitors Demand Too Much!";
     dhtml += "<br>";
   }
 
-  dhtml += "<input id='incite_city_dialog_cancel" + actor_unit['id']
-           + "' class='incite_city_button' type='button' value='Cancel'>";
-
   $(id).html(dhtml);
+
+  var close_button = {         Close:    function() {$(id).dialog('close');}};
+  var incite_close_buttons = { 'Cancel': function() {$(id).dialog('close');},
+                               'Do it!': function() {
+                                 var packet = {"type" : packet_unit_do_action,
+                                   "actor_id" : actor_unit['id'],
+                                   "target_id": target_city['id'],
+                                   "value" : 0,
+                                   "action_type": ACTION_SPY_INCITE_CITY};
+                                 send_request (JSON.stringify(packet));
+
+                                 $(id).dialog('close');
+                               }
+                             };
 
   $(id).attr("title", "About that incite you requested...");
 
   $(id).dialog({bgiframe: true,
                 modal: true,
+                buttons: (incite_possible ? incite_close_buttons : close_button),
                 height: "auto",
                 width: "auto"});
 
   $(id).dialog('open');
-  $(".incite_city_button").button();
-
-  if (incite_possible) {
-    $("#incite_city_dialog_incite" + actor_unit['id']).click(function() {
-      var packet = {"type" : packet_unit_do_action,
-        "actor_id" : actor_unit['id'],
-        "target_id": target_city['id'],
-        "value" : 0,
-        "action_type": ACTION_SPY_INCITE_CITY};
-        send_request (JSON.stringify(packet));
-
-        $(id).remove();
-    });
-  }
-
-  $("#incite_city_dialog_cancel" + actor_unit['id']).click(function() {
-    $(id).remove();
-  })
 }

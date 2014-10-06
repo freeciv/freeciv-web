@@ -502,6 +502,15 @@ name           = _("Fire")
 frequency      = 10
 effects        = "DestroyBuilding"
 
+[disaster_industrial_accident]
+name           = _("Industrial Accident")
+reqs           =
+    { "type", "name", "range"
+      "Building", "Mfg. Plant", "City"
+    }
+frequency      = 10
+effects        = "ReducePopulation", "Pollution"
+
 [disaster_nuclear_accident]
 name           = _("Nuclear Accident")
 reqs           =
@@ -528,6 +537,8 @@ effects        = "ReducePopulation", "Fallout"
 ;                           achievement type.
 ; culture                 = Amount of culture granted to player who gets achievement
 ;                           granted.
+; first_msg               = Message shown to first player gaining the achievement
+; cons_msg                = Message shown to consecutive players gaining the achievement
 ;
 ; */ <-- avoid gettext warnings
 

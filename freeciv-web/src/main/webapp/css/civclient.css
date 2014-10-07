@@ -628,8 +628,8 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 #city_current_worklist {
   width: 100%;
   float: left;
-  min-height: 300px;
-  max-height: 600px;
+  min-height: 350px;
+  max-height: 450px;
   overflow: auto;
   background-color: rgba(40,40,40,0.6);
   border: 1px solid black;
@@ -638,8 +638,8 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 #worklist_production_choices {
   width: 100%;
   float: left;
-  min-height: 300px;
-  max-height: 600px;
+  min-height: 350px;
+  max-height: 450px;
   overflow: auto;
   background-color: rgba(40,40,40,0.6);
   border: 1px solid black;

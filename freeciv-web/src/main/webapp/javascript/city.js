@@ -952,6 +952,7 @@ function city_worklist_dialog()
 			width: "80%",
 			close: function() {
 				keyboard_input=true;
+                                worklist_dialog_active = false;
 			},
 			buttons: [
 					{
@@ -1026,6 +1027,12 @@ function city_worklist_dialog()
     if (selected_kind >= 0 && selected_value >= 0) {
       send_city_worklist_add(pcity['id'], kind, value);
     }
+  });
+
+  $("#city_worklist_dialog").position({
+    my: "center",
+    at: "center",
+    of: window
   });
 
 }

@@ -366,7 +366,7 @@ function show_intro_dialog(title, message) {
   $("#dialog").dialog({
 			bgiframe: true,
 			modal: true,
-			width: is_small_screen() ? "90%" : "40%",
+			width: is_small_screen() ? "90%" : "60%",
 			buttons: 
 			{
 				"Start Game" : function() {

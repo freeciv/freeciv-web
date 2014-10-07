@@ -1,8 +1,6 @@
 from threading import Thread
 from tornado import web, websocket, ioloop, httpserver
 from tornado.ioloop import IOLoop
-import sys
-import traceback
 
 STATUS_PORT = 4002
 
@@ -45,14 +43,4 @@ class StatusHandler(web.RequestHandler):
                  + "/status'>status</a></td>" + "<td>" + str(server.gametype) 
                  +  "</td><td>" + str(server.started_time) + "</td></tr>");
     self.write("</table>");
-
-
-    code = "<h3>Thread dumps:</h3>"
-    for threadId, stack in list(sys._current_frames().items()):
-      code += ("<br><b><u># ThreadID: %s</u></b><br>" % threadId)
-      for filename, lineno, name, line in traceback.extract_stack(stack):
-        code += ('File: "%s", line %d, in %s: ' % (filename, lineno, name))
-        if line:
-          code += (" <b>%s</b> <br>" % (line.strip()))
-    self.write(code);
     self.write("</body></html>");

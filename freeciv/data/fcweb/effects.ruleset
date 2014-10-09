@@ -41,6 +41,26 @@ reqs    =
       "Nation", "Pirate", "Player"
     }
 
+; Barbarian disappearance
+
+[effect_barb_disappear]
+type    = "Retire_Pct"
+value   = 10
+reqs    =
+    { "type", "name", "range"
+      "Nation", "Barbarian", "Player"
+      "Age", "5", "Local"
+    }
+
+[effect_pirate_disappear]
+type    = "Retire_Pct"
+value   = 10
+reqs    =
+    { "type", "name", "range"
+      "Nation", "Pirate", "Player"
+      "Age", "5", "Local"
+    }
+
 ; Specialist output bonuses
 
 [effect_elvis]
@@ -1096,7 +1116,7 @@ reqs	=
 ; No population pollution until certain techs researched
 [effect_pollu_pop_base]
 type    = "Pollu_Pop_Pct_2"
-value   = -100
+value	= -100
 
 [effect_pollu_pop_automobile]
 type    = "Pollu_Pop_Pct_2"
@@ -2238,6 +2258,28 @@ reqs    =
 [effect_mining]
 type    = "Mining_Possible"
 value   = 1
+reqs    =
+    { "type", "name", "range", "present"
+      "TerrainFlag", "Oil", "Local", FALSE
+    }
+
+[effect_desert_oil]
+type    = "Mining_Possible"
+value   = 1
+reqs    =
+    { "type", "name", "range"
+      "Terrain", "Desert", "Local"
+      "Tech", "Construction", "Player"
+    }
+
+[effect_glacier_oil]
+type    = "Mining_Possible"
+value   = 1
+reqs    =
+    { "type", "name", "range"
+      "Terrain", "Glacier", "Local"
+      "Tech", "Refining", "Player"
+    }
 
 [effect_irrig_tf]
 type    = "Irrig_TF_Possible"

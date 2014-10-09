@@ -1,7 +1,7 @@
 diff -Nurd -X.diff_ignore freeciv/common/unit.c freeciv/common/unit.c
 --- freeciv/common/unit.c	2014-09-29 02:58:26.947569834 +0300
-+++ freeciv/common/unit.c	2014-10-03 04:46:28.698409702 +0300
-@@ -893,6 +893,16 @@
++++ freeciv/common/unit.c	2014-10-09 03:42:36.208468756 +0300
+@@ -893,6 +893,22 @@
        if (NULL == target) {
          return FALSE; /* No more mine available. */
        }
@@ -10,11 +10,17 @@ diff -Nurd -X.diff_ignore freeciv/common/unit.c freeciv/common/unit.c
 +                                   EC_ROAD,
 +                                   unit_owner(punit),
 +                                   punit);
++      if (NULL == target) {
++        return FALSE; /* No more roads available. */
++      }
 +    } else if (activity == ACTIVITY_BASE) {
 +      target = next_extra_for_tile(ptile,
 +                                   EC_BASE,
 +                                   unit_owner(punit),
 +                                   punit);
++      if (NULL == target) {
++        return FALSE; /* No more bases available. */
++      }
      }
    }
  

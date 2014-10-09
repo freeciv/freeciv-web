@@ -122,7 +122,7 @@ button {
 }
 
 .main_menu_buttons {
-  padding:20px
+  padding:10px
 }
 
 #city_canvas_div {
@@ -501,6 +501,10 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 
 .govbutton {
   width: 190px;
+}
+
+.setting_button {
+  width: 210px;
 }
 
 #nation_table {

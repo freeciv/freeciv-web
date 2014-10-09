@@ -31,7 +31,7 @@ function network_init()
 {
 
   if (!"WebSocket" in window) {
-    alert("WebSockets not supported");
+    swal("WebSockets not supported");
     return;
   }
 

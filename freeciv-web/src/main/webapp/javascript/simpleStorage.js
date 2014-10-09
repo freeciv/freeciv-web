@@ -84,25 +84,30 @@
     }
 
     function _load_storage(){
-        var source = localStorage.simpleStorage;
+        var source = localStorage.getItem("simpleStorage");
 
         try{
-            _storage = JSON.parse(source);
+            _storage = JSON.parse(source) || {};
         }catch(E){
             _storage = {};
         }
 
-        _storage_size = localStorage.simpleStorage ? String(localStorage.simpleStorage).length : 0;
+        _storage_size = _get_storage_size();
     }
 
     function _save(){
         try{
-            localStorage.simpleStorage = JSON.stringify(_storage);
-            _storage_size = localStorage.simpleStorage ? String(localStorage.simpleStorage).length : 0;
+            localStorage.setItem("simpleStorage", JSON.stringify(_storage));
+            _storage_size = _get_storage_size();
         }catch(E){
             return E;
         }
         return true;
+    }
+
+    function _get_storage_size() {
+        var source = localStorage.getItem("simpleStorage");
+        return source ? String(source).length : 0;
     }
 
     function _handleTTL(){

@@ -148,4 +148,6 @@ function init_options_dialog()
   });
 
 
+  $(".setting_button").tooltip();
+
 }

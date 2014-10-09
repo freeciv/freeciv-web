@@ -15,33 +15,33 @@
 </div>
 
 <div class="main_menu_buttons">
-  <button id="save_button" type="button" class="button" onClick="save_game();" >Save Game</button> 	
+  <button id="save_button" type="button" class="button setting_button" onClick="save_game();" title="Saves your current game so you can continue later.">Save Game</button> 	
 </div>	 	 	
 
 <div class="main_menu_buttons">
-  <button id="fullscreen_button" type="button" class="button" onClick="show_fullscreen_window();" >Fullscreen</button>
+  <button id="fullscreen_button" type="button" class="button setting_button" onClick="show_fullscreen_window();" title="Enables fullscreen window mode" >Fullscreen</button>
 </div>
 
 
 <div class="main_menu_buttons">
-  <button id="surrender_button" type="button" class="button" onClick="surrender_game();" >Surrender Game</button>
+  <button id="surrender_button" type="button" class="button setting_button" onClick="surrender_game();" title="Surrenders in multiplayer games and thus ends the game for you.">Surrender Game</button>
 </div>
 
 
 <div class="main_menu_buttons">
-  <button id="end_button" type="button" class="button" onClick="window.location='/';" >End Game</button>
+  <button id="end_button" type="button" class="button setting_button" onClick="window.location='/';" title="Ends the game, and returns to the main page of Freeciv-web." >End Game</button>
 </div>
 
 <div class="main_menu_buttons">
-  <button id="show_overview_button" type="button" class="button" onClick="init_overview();" >Show overview map</button>
+  <button id="show_overview_button" type="button" class="button setting_button" onClick="init_overview();" title="Shows the overview map.">Show overview map</button>
 </div>
 
 <div class="main_menu_buttons">
-  <button id="show_unit_button" type="button" class="button" onClick="init_game_unit_panel();" >Show unit info box</button>
+  <button id="show_unit_button" type="button" class="button setting_button" onClick="init_game_unit_panel();" title="Show the unit info box.">Show unit info box</button>
 </div>
 
 <div class="main_menu_buttons">
-  <button id="show_message_button" type="button" class="button" onClick="init_chatbox();" >Show message box</button>
+  <button id="show_message_button" type="button" class="button setting_button" onClick="init_chatbox();" title="Shows the box with chat messages on the main map.">Show message box</button>
 </div>
 
 <br>

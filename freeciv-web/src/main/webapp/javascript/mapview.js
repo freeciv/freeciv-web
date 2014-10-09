@@ -295,7 +295,7 @@ function init_cache_sprites()
  try {
 
   if (typeof tileset === 'undefined') {
-    alert("Tileset not generated correctly. Run sync.sh in "
+    swal("Tileset not generated correctly. Run sync.sh in "
           + "freeciv-img-extract and recompile.");
     return;
   }  

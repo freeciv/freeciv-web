@@ -864,7 +864,7 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift)
     break;
 
     case 'D':
-      if (alt) {
+      if (alt || ctrl) {
         show_debug_info();
       } else {
         key_unit_action_select();

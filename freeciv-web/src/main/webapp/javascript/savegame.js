@@ -12,6 +12,7 @@
 ***********************************************************************/
 var savename = "";
 var loadTimerId = -1;
+var scenario_activated = false;
 
 var scenarios = [
   {"img":"/images/world_small.png", "description":"The World - Small world map, 80x50 map of the Earth", "savegame":"earth-80x50-v3"},
@@ -43,7 +44,7 @@ function load_game_check()
   } else if (load_game_id != -1) {
     $.blockUI();
 
-    if (scenario == "true") {
+    if (scenario == "true" || scenario_activated) {
       if (load_game_id == -1) {
         show_scenario_dialog();
       } else {
@@ -53,31 +54,43 @@ function load_game_check()
         setTimeout(load_game_toggle,3500);
       }
     } else if (load_game_id != -1) {
-
+      console.log("Attempting to load savegame-file-" + (load_game_id + 1));
       var savefile = simpleStorage.get("savegame-file-" + (load_game_id + 1));
       var savename = simpleStorage.get("savegame-savename-" + (load_game_id + 1));
       var saveusr = simpleStorage.get("savegame-username-" + (load_game_id + 1));
-      if (savefile != null && savename != null && username != null) {
-        console.log("Loading " + savename);
-	$.ajax({
-          url: "/loadservlet?username=" + saveusr + "&savename=" + savename,
-          type: "POST",
-          data: savefile,
-          processData: false
-    	}).done(function() {
-          console.log("Upload of savegame complete");
-          loadTimerId = setTimeout("load_game_real('" + username + "');", 
-                             1500);
-        }).fail(function() { alert("Loading game failed (ajax failed)"); });
+      console.log("Saved filename: " + savename);
+      console.log("Saved user: " + saveusr); 
+      console.log("Logged in username: " + username);
+      if (savefile == null) {
+        swal("Loading game failed (savefile is null)");
+	return;
       } else {
-        alert("Loading game failed (simpleStorage)");
+        console.log("Savegame file length: " + savefile.length);
       }
+      if (savename == null) {
+        swal("Loading game failed (savename is null)");
+	return;
+      }
+      if (username == null) {
+        swal("Loading game failed (username is null)");
+	return;
+      }
+
+      $.ajax({
+        url: "/loadservlet?username=" + saveusr + "&savename=" + savename,
+        type: "POST",
+        data: savefile,
+        processData: false
+      }).done(function() {
+        console.log("Upload of savegame complete");
+        loadTimerId = setTimeout("load_game_real('" + username + "');", 1500);
+      }).fail(function() { swal("Loading game failed (ajax request failed)"); });
     }
   } else if (scenario == "true" && $.getUrlVar('load') != "tutorial") {
     show_scenario_dialog();
   } else if ($.getUrlVar('action') == "load") {
     load_game_dialog();
-  }
+  } 
  
 }
 
@@ -132,7 +145,7 @@ function save_game()
 	  "</td></tr></table><br>" +
 	  "<span id='settings_info'><i>Freeciv-web allows you to save games. Games are stored in your web " +
 	  "browser using HTML5 localstorage. Saved games will be stored in your browser until you clear" +
-	  " your browser cache. Savegames are tied to your username " + username + ".</i></span>" 
+	  " your browser cache. Savegames are tied to your username " + username + ".<br><br>" 
 
 
   $("#dialog").html(dhtml);
@@ -142,13 +155,13 @@ function save_game()
 			modal: true,
 			width: is_small_screen() ? "90%" : "40%",
 			buttons: {
-				Save: function() {
+				"Save Game": function() {
 					keyboard_input = true;
 					savename = $("#savegamename").val()
 					if (savename == null || savename.length < 4 || savename.length > 64) {
-						alert("Invalid savegame name.");
+						swal("Invalid savegame name.");
 					} else if (check_savegame_duplicate(savename)) {
-						alert("Savegame name already in use. "
+						swal("Savegame name already in use. "
 						 + "Please use a new savegame name.");
 					} else {
 						$("#dialog").dialog('close');
@@ -210,14 +223,20 @@ function save_game_fetch()
       var savegame_count = simpleStorage.get("savegame-count");
       if (savegame_count == null) savegame_count = 0;
       savegame_count += 1;
+      console.log("Storage size: " + simpleStorage.storageSize());
+      console.log("Savename: " + savename);
+      console.log("Username: " + username);
+      console.log("Savegame-count: " + savegame_count);
+      console.log("Savegame size: " + saved_file.length);
+
       simpleStorage.set("savegame-file-" + savegame_count, saved_file);
       simpleStorage.set("savegame-savename-" + savegame_count, savename);
       simpleStorage.set("savegame-username-" + savegame_count, username);
       simpleStorage.set("savegame-count" , savegame_count);
       $.unblockUI();
-      alert("Game saved successfully");
+      swal("Game saved successfully");
     }).fail(function() { 
-	    alert("Failed saving game");
+	    swal("Failed saving game");
 	    $.unblockUI();
     });
 }
@@ -259,20 +278,28 @@ function load_game_dialog()
 			modal: true,
 			width: is_small_screen() ? "95%" : "70%",
 			buttons: {
-				"Delete Savegames": function() {
-					$("#dialog").dialog('close');
-					$("#game_text_input").blur();
-					simpleStorage.set("savegame-count" , 0);
+	  			"Load Savegame": function() {
+  					var load_game_id = $('#selectable .ui-selected').index();
+					if (load_game_id == -1) {
+					  swal("Unable to load savegame: no game selected.");
+					} else {
+					  load_game_check();
+					  $("#dialog").dialog('close');
+					  $("#game_text_input").blur();
+					}
 				},
-	  	  		"Load Scenario": function() {
+	  	  		"Load Scenarios...": function() {
 					$("#dialog").dialog('close');
 					$("#game_text_input").blur();
 					show_scenario_dialog();
 				},
-	  			"Load Savegame": function() {
-					load_game_check();
-					$("#dialog").dialog('close');
-					$("#game_text_input").blur();
+	  			"Delete Savegames": function() {
+					var r = confirm("Do you really want to delete your savegames?");
+					if (r) {
+					  $("#dialog").dialog('close');
+					  $("#game_text_input").blur();
+					  simpleStorage.set("savegame-count" , 0);
+					}
 				}
 			}
 		});
@@ -315,6 +342,7 @@ function show_scenario_dialog()
 			position: {my: 'center bottom', at: 'center bottom', of: window},
 			buttons: {
 	  			"Select scenario": function() {
+					scenario_activated = true;
 					load_game_check();
 					$("#dialog").dialog('close');
 					$("#game_text_input").blur();

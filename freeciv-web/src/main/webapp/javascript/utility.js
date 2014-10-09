@@ -95,7 +95,7 @@ function civclient_benchmark(frame)
   
     var end = new Date().getTime();
     var time = (end - benchmark_start) / 25;
-    alert('Redraw time: ' + time);
+    swal('Redraw time: ' + time);
   }
 }
 

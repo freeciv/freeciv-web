@@ -396,7 +396,7 @@ function pregame_settings()
   $('#https_setting').prop('checked', https_setting == true);
 
   $('#https_setting').change(function() {
-    alert("Restarting Freeciv-web with new HTTPS setting.");
+    swal("Restarting Freeciv-web with new HTTPS setting.");
     https_redirect();
   });
 

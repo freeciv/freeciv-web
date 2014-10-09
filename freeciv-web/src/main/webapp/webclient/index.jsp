@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	
 <title>Freeciv-web</title>
-
 <link rel="stylesheet" type="text/css" href="/css/webclient.min.css?ts=${initParam.buildTimeStamp}" />
-
+<meta name="description" content="Freeciv-Web is a Free and Open Source empire-building strategy game inspired by the history of human civilization.">
 <script type="text/javascript">
 var ts="${initParam.buildTimeStamp}";
 </script>

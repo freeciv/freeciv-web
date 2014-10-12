@@ -47,18 +47,20 @@ reqs    =
 type    = "Retire_Pct"
 value   = 10
 reqs    =
-    { "type", "name", "range"
-      "Nation", "Barbarian", "Player"
-      "Age", "5", "Local"
+    { "type", "name", "range", "present"
+      "Nation", "Barbarian", "Player", TRUE
+      "Age", "5", "Local", TRUE
+      "CityTile", "Center", "Local", FALSE
     }
 
 [effect_pirate_disappear]
 type    = "Retire_Pct"
 value   = 10
 reqs    =
-    { "type", "name", "range"
-      "Nation", "Pirate", "Player"
-      "Age", "5", "Local"
+    { "type", "name", "range", "present"
+      "Nation", "Pirate", "Player", TRUE
+      "Age", "5", "Local", TRUE
+      "CityTile", "Center", "Local", FALSE
     }
 
 ; Specialist output bonuses

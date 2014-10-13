@@ -568,6 +568,7 @@ function handle_unit_actions(packet)
   var target_city_id = packet['target_city_id'];
   var target_tile_id = packet['target_tile_id'];
   var action_probabilities = packet['action_probabilities'];
+  var disturb_player = packet['disturb_player'];
 
   var pdiplomat = game_find_unit_by_number(actor_unit_id);
   var target_unit = game_find_unit_by_number(target_unit_id);
@@ -585,9 +586,14 @@ function handle_unit_actions(packet)
     });
   }
 
-  if (hasActions) {
+  if (hasActions && disturb_player) {
     popup_action_selection(pdiplomat, action_probabilities,
                            ptile, target_unit, target_city);
+  } else if (hasActions) {
+    /* This was a background request. */
+
+    /* No background requests are currently made. */
+    console.log("Received the reply to a background request I didn't do.");
   }
 }
 

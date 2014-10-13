@@ -1357,7 +1357,8 @@ function process_diplomat_arrival(pdiplomat, target_tile_id)
     var packet = {
       "type" : packet_unit_get_actions,
       "actor_unit_id" : pdiplomat['id'],
-      "target_tile_id": target_tile_id
+      "target_tile_id": target_tile_id,
+      "disturb_player": true
     };
     send_request (JSON.stringify(packet));
   }

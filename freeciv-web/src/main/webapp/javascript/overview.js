@@ -59,14 +59,9 @@ function init_overview()
 			close: function(event, ui) { overview_active = false;}
 		});
 	
-  $("#game_overview_panel").dialog('open');		
-  $(".overview_dialog div.ui-dialog-titlebar").css("height", "5px");
-  $(".overview_dialog div.ui-dialog-content").css("padding", "5px 0");
-  $("#ui-dialog-title-game_overview_panel").css("margin-top", "-5px");
-  $("#ui-dialog-title-game_overview_panel").css("font-size", "10px");
+  $("#game_overview_panel").dialog({ dialogClass: "overview_dialog" });		
   $("#game_overview_panel").parent().css("overflow", "hidden");		
 	  
-
   palette = generate_palette();
   
   redraw_overview();

@@ -8,14 +8,14 @@ body {
 
 #pregame_page {
   padding: 10px;
-  background-color: #222222;
+  background: url("/images/bg-dark.jpg") repeat scroll 0 0 ;
   width: 97%;
   float:left;
 }
 
 
 #pregame_options {
-  background-color: #222222;
+  background: url("/images/black-bg.png") repeat scroll 0 0 ;;
   width: 99%;
   min-height: 30px;
   padding: 10px;
@@ -23,7 +23,6 @@ body {
 }
 
 #pregame_player_list {
-  background-color: #222222;
   width: 18%;
   float: right;
   overflow: auto;
@@ -32,7 +31,7 @@ body {
 .pregame_player_name {
   padding: 3px;
   margin: 3px;
-  background-color: #111111;
+  background: #111111 url(/images/black-bg.png);
   color: #ffffff;
   float: left;
   min-height: 32px;
@@ -45,8 +44,8 @@ body {
 }
 
 #pregame_message_area {
-  background: #111111 url(/images/black-bg.png); 
-  color: #ffffff;
+  background: #111111 url(/images/bg.jpg); 
+  color: #000000;
   width: 78%;
   overflow: auto;
   float: left;
@@ -121,7 +120,7 @@ body {
 
 #nation_autocomplete_box {
   width: 210px; 
-  background-color: #333333; 
+  background:  #111111 url(/images/bg-dark.jpg); 
   border:1px solid #000000; 
   color: white;
 

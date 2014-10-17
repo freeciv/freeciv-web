@@ -1,6 +1,5 @@
 body
 {
-  font: 90% sans-serif; 
   margin: 0px;
   background: #000000;
   overflow: hidden;
@@ -25,8 +24,8 @@ button {
 #freeciv_logo {
   float:left; 
   background: #444444 url(/images/freeciv-web-logo.png);
-  width: 140px; 
-  height: 37px; 
+  width: 138px; 
+  height: 35px; 
   margin-right: 10px;
 }
 
@@ -38,12 +37,11 @@ button {
 
 
 #game_message_area {
-  /*background: #222222 url(/images/black-bg.png); */
-
   height: 70px;
   width: 98%;
   overflow: auto;
   border: 1px solid #111111;
+  color: white;
 }
 
 #game_chat_box {
@@ -75,7 +73,6 @@ button {
 
 #game_action_panel {
   float: right;
-  color: white;
   padding-left: 5px;
   padding-right: 10px;
   overflow: hidden;
@@ -83,7 +80,6 @@ button {
 
 #game_unit_info {
   float: left;
-  color: white;
   width: 100%;
   overflow: hidden;
   margin-top: -15px;
@@ -146,7 +142,7 @@ button {
 
 
 .city_panel {
-  background: url("/images/black-bg.png") repeat scroll 0 0 #222222;
+  background: url("/images/bg.jpg") repeat scroll 0 0 #222222;
   float: left; 
   padding-right: 30px;
 }
@@ -158,7 +154,7 @@ button {
 #city_right_panel {
   float: right; 
   width: 55%;
-  background: url("/images/black-bg.png") repeat scroll 0 0 #222222;
+  background: url("/images/bg.jpg") repeat scroll 0 0 #222222;
   height: 533px;
 }
 
@@ -185,7 +181,6 @@ button {
 }
 
 #city_viewport {
-  background: url("/images/black-bg.png") repeat scroll 0 0 #222222;
   overflow: auto;
 }
 
@@ -255,7 +250,8 @@ button {
   padding: 4px; 
   margin: 2px; 
   margin-left: 0px; 
-  background-color: rgb(34, 34, 34);
+  background: url("/images/bg-dark.jpg") repeat scroll 0 0 ; 
+  color: white;
 }
 
 #tech_goal_box {
@@ -312,7 +308,7 @@ button {
 }
 
 .ui-widget-content {
-  background: url("/images/black-bg.png") repeat scroll 50% 50%;
+  background: url("/images/bg.jpg") repeat scroll 50% 50%;
 
 }
 
@@ -353,7 +349,7 @@ button {
   height: 100px; 
   width: 90%; 
   overflow: auto; 
-  background-color: #111111; 
+  background:  url("/images/bg-dark.jpg") repeat scroll 0 0 ; 
   border: 1px solid #444444;
   padding: 3px;
 }
@@ -362,7 +358,7 @@ button {
   height: 100px; 
   width: 90%; 
   overflow: auto; 
-  background-color: #111111; 
+  background: url("/images/bg-dark.jpg") repeat scroll 0 0 ; 
   border: 1px solid #444444;
   padding: 3px;
 
@@ -428,13 +424,6 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
   float: none;
 }
 
-.ui-dialog .ui-dialog-titlebar {
-  padding-bottom: 14px;
-  padding-left: 10px;
-  padding-top: 3px;
-
-}
-
 #tabs_menu {
   font-size: 0.9em;
   overflow: hidden;
@@ -448,10 +437,6 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 #ui-dialog-title-game_chatbox_panel {
   margin-top: -5px;
   font-size: 10px;
-}
-
-.chatbox_dialog div.ui-dialog-titlebar {
-  height: 5px;
 }
 
 .chatbox_dialog div.ui-dialog-content {
@@ -472,6 +457,8 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 
 .tablesorter-dark {
   font: 100% sans-serif; 
+  background: url("/images/bg-dark.jpg") repeat scroll 0 0 ; 
+  color: white;
 }
 
 .tablesorter-dark thead td {
@@ -635,7 +622,7 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
   min-height: 350px;
   max-height: 450px;
   overflow: auto;
-  background-color: rgba(40,40,40,0.6);
+  background-color: rgba(40,40,40,0.4);
   border: 1px solid black;
 }
 
@@ -645,7 +632,7 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
   min-height: 350px;
   max-height: 450px;
   overflow: auto;
-  background-color: rgba(40,40,40,0.6);
+  background-color: rgba(40,40,40,0.4);
   border: 1px solid black;
 }
 
@@ -690,5 +677,30 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 
 .worklist_table .ui-selected {
   background-color: white;
+}
+
+.ui-widget-header {
+  background: #cb842e url("/images/ui-widget-header.png") 50% 50% repeat-x;
+}
+
+.ui-dialog .ui-dialog-title {
+  font-size: 140%;
+}
+
+.overview_dialog .ui-dialog-titlebar, .unit_dialog .ui-dialog-titlebar, .chatbox_dialog .ui-dialog-titlebar {
+  padding-bottom: 0px;
+  padding-left: 5px;
+  padding-top: 0px;
+  font-size: 85%;
+  margin-top: -5px;
+}
+
+.govt_button {
+  width: 60%;
+  margin: 6px;
+}
+
+#governments {
+  text-align: center;
 }
 

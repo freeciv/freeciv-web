@@ -201,7 +201,7 @@ function select_nation(new_nation_id)
   }
 
   chosen_nation = parseFloat(new_nation_id);
-  $("#nation_" + chosen_nation).css("background-color", "#555555");
+  $("#nation_" + chosen_nation).css("background-color", "#AAFFAA");
 }
 
 /****************************************************************************

@@ -367,7 +367,6 @@ if ( isset($port) ) {
     <link rel="shortcut icon" href="/images/freeciv-shortcut-icon.png">
     <link rel="apple-touch-icon" href="/images/freeciv-splash2.png" />
 
-    <script type="text/javascript" src="/javascript/json2.js"></script>
     <script type="text/javascript" src="/javascript/jquery.min.js"></script>
     <script type="text/javascript" src="/javascript/jquery-ui.min.js"></script>   
     <script type="text/javascript" src="/meta/js/meta.js"></script>
@@ -375,7 +374,7 @@ if ( isset($port) ) {
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
 
-    <link type="text/css" href="/meta/css/jquery-ui.min.css" rel="stylesheet" />
+    <link type="text/css" href="/css/jquery-ui.min.css" rel="stylesheet" />
 
     <link href="/css/frontpage.css" rel="stylesheet">
 

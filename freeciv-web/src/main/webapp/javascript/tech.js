@@ -320,7 +320,7 @@ function update_tech_screen()
     $("#tech_advance_helptext").tooltip({ disabled: false });
   }
   
-  $("#tech_tab_item").css("color", "#ffffff");
+  $("#tech_tab_item").css("color", "#000000");
 
   /* scroll the tech tree, so that the current research targets are on the screen..  */
   maxleft = maxleft - 280;
@@ -494,7 +494,7 @@ function show_tech_gained_dialog(tech_gained_id)
 {
   if (client_is_observer() || C_S_RUNNING != client_state()) return;
 
-  $("#tech_tab_item").css("color", "#ff0000");
+  $("#tech_tab_item").css("color", "#aa0000");
   var pplayer = client.conn.playing;
   var pnation = nations[pplayer['nation']]; 
   var tech = techs[tech_gained_id];
@@ -555,7 +555,7 @@ function show_tech_gained_dialog(tech_gained_id)
 **************************************************************************/
 function show_wikipedia_dialog(tech_name)
 {
-  $("#tech_tab_item").css("color", "#ff0000");
+  $("#tech_tab_item").css("color", "#aa0000");
 
   var message = "<b>Wikipedia on <a href='" + wikipedia_url 
 	  + freeciv_wiki_docs[tech_name]['title'] 

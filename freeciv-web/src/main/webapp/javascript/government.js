@@ -30,15 +30,14 @@ function show_revolution_dialog()
   $("<div id='revolution_dialog'></div>").appendTo("div#game_page");
 
 
-  var dhtml = "<h2>Start a revolution!</h2>" 
-  + "To start a revolution, select your nations new government:"
-  + "<p><div id='governments' style='height: 180px; width: 250px; overflow: auto;'>"
-  + "<div id='governments_list' style='cursor:pointer;cursor:hand'>"
+  var dhtml = "To start a revolution, select your nations new government:"
+  + "<p><div id='governments' >"
+  + "<div id='governments_list'>"
   + "</div></div><br> ";
   
   $(id).html(dhtml);
 
-  $(id).attr("title", "Revolution");
+  $(id).attr("title", "Start a Revolution!");
   $(id).dialog({
 			bgiframe: true,
 			modal: true,
@@ -96,27 +95,33 @@ function update_govt_dialog()
   
   for (var govt_id in governments) {
     var govt = governments[govt_id];
-    var bgcolor = "#111111;";   
-
-    if (!can_player_get_gov(govt_id)) {
-      bgcolor = "#000000; color:#333333;";
-    } else if (requested_gov == govt_id) {
-      bgcolor = "#53d000; color:#000000;";
-    }
-
-    if (client.conn.playing['government'] == govt_id) {
-      bgcolor = "#ffffff; color:#000000;";
-    } 
     
-    governments_list_html = governments_list_html + "<div style='margin:4px;background-color:" + bgcolor + "' " 
+    /*governments_list_html = governments_list_html + "<div  class='govt_choice " + govt_status + "' " 
                   + " onclick='set_req_government(" + govt['id'] + ");' "
                   + " title='" + govt['helptext'] + "'>" 
 		  + "<img src='/images/" + govt['graphic_str'] + ".png'>"
-		  + govt['name'] + "</div>";
+		  + govt['name'] + "</div>";*/
+    governments_list_html += "<input class='govt_button' id='govt_id_" + govt['id'] + "' " 
+	                  + "onclick='set_req_government(" + govt['id'] + ");' type='button' "
+			  + "title='" + govt['helptext'] + "' value='" + govt['name'] + "'>";
   }
 
   $("#governments_list").html(governments_list_html);
 
+  for (var govt_id in governments) {
+    var govt = governments[govt_id];
+    if (!can_player_get_gov(govt_id)) {
+      $("#govt_id_" + govt['id'] ).button({ disabled: true });
+    } else if (requested_gov == govt_id) {
+    $("#govt_id_" + govt['id'] ).button().css("background", "green");
+    } else if (client.conn.playing['government'] == govt_id) {
+      $("#govt_id_" + govt['id'] ).button({ disabled: true }).css("background", "green");
+    } else {
+      $("#govt_id_" + govt['id'] ).button();
+    }
+
+  }
+  $(".govt_button").tooltip();
 
 }
 

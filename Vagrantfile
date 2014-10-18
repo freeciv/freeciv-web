@@ -38,7 +38,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.provider "virtualbox" do |v|
-    v.memory = 4000
+    v.memory = 4600
   end
 
   # run the Freeciv bootstrap script on startup

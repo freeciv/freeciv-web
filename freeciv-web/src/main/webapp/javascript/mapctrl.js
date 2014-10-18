@@ -224,6 +224,7 @@ function recenter_button_pressed(canvas_x, canvas_y)
 {
   var map_scroll_border = 8;
   var ptile = canvas_pos_to_tile(canvas_x, canvas_y);
+  var orig_tile = ptile;
   
   /* Prevent the user from scrolling outside the map. */
   if (ptile != null && ptile['y'] > (map['ysize'] - map_scroll_border)) {
@@ -233,9 +234,9 @@ function recenter_button_pressed(canvas_x, canvas_y)
     ptile = map_pos_to_tile(ptile['x'], map_scroll_border);
   }
 
-  if (can_client_change_view() && ptile != null) {
+  if (can_client_change_view() && ptile != null && orig_tile != null) {
     var funits = get_units_in_focus();
-    var sunit = find_visible_unit(ptile);
+    var sunit = find_visible_unit(orig_tile);
     if (sunit != null && funits != null && funits[0] != null && funits[0]['id'] == sunit['id']) {
       /* the user right-clicked on the focus unit, show context menu instead of recenter. */
       $("#canvas").contextMenu(true);

@@ -15,7 +15,7 @@ body {
 
 
 #pregame_options {
-  background: url("/images/black-bg.png") repeat scroll 0 0 ;;
+  background: #cb842e url("/images/ui-widget-header.png") 50% 100% repeat-x;
   width: 99%;
   min-height: 30px;
   padding: 10px;
@@ -49,7 +49,7 @@ body {
   width: 78%;
   overflow: auto;
   float: left;
-  padding: 10px;
+  padding: 5px 5px;
   border: 1px solid black;
 }
 
@@ -78,7 +78,7 @@ body {
 }
 
 #pregame_text_input {
-  width: 79%;
+  width: 100%;
   padding: 5px;
   font-size: 16px;
   background-color: #dddddd;

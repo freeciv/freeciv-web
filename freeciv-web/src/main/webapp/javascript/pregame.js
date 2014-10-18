@@ -98,6 +98,7 @@ function update_player_info()
           $("#pregame_plr_"+id).attr("title", "AI Player (random nation)");
       }
     }
+    $(".pregame_player_name").tooltip();
 
     /* set state of Start game button depending on if user is ready. */
     if (client.conn['player_num'] != null  && client.conn['player_num'] in players

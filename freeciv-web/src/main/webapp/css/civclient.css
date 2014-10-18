@@ -82,7 +82,7 @@ button {
   float: left;
   width: 100%;
   overflow: hidden;
-  margin-top: -15px;
+  margin-top: -30px;
 }
 
 #unit_text_details {
@@ -185,13 +185,18 @@ button {
 }
 
 #diplomacy_messages {
-  background-color: #222222;
+  background: url("/images/bg-dark.jpg") repeat scroll 0 0 ; 
   min-height: 120px;
   max-height: 200px;
   overflow: auto;
   border-color: 1px solid;
   border: 1px solid #555555
   width: 100%;
+  font-size: 130%;
+}
+
+#diplomacy_messages a {
+  color: white;
 }
 
 #diplomacy_dialog {
@@ -695,6 +700,14 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
   margin-top: -5px;
 }
 
+.chatbox_dialog .ui-dialog-titlebar {
+  background: #cb842e url("/images/ui-widget-header.png") 100% 50% repeat-x;
+}
+
+.ui-widget-content a {
+  color: #FAE508;
+} 
+
 .govt_button {
   width: 60%;
   margin: 6px;
@@ -704,3 +717,41 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
   text-align: center;
 }
 
+.fg-menu a {
+  color: black;
+}
+
+.Democracy {
+  background-image: url(/images/gov.democracy.png) !important; 
+}
+
+.Anarchy {
+  background-image: url(/images/gov.anarchy.png) !important; 
+}
+
+.Republic {
+  background-image: url(/images/gov.republic.png) !important; 
+}
+
+.Despotism {
+  background-image: url(/images/gov.despotism.png) !important; 
+}
+
+.Communism {
+  background-image: url(/images/gov.communism.png) !important; 
+}
+
+.Monarchy {
+  background-image: url(/images/gov.monarchy.png) !important; 
+}
+
+#flag_self {
+  float: left;
+  width: 140px;
+}
+
+#flag_counterpart {
+  float: right;
+  width: 140px;
+
+}

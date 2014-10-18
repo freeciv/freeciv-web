@@ -30,7 +30,8 @@ function show_revolution_dialog()
   $("<div id='revolution_dialog'></div>").appendTo("div#game_page");
 
 
-  var dhtml = "To start a revolution, select your nations new government:"
+  var dhtml = "Current form of government: " + governments[client.conn.playing['government']]['name'] 
+	  + "<br>To start a revolution, select the new form of government:"
   + "<p><div id='governments' >"
   + "<div id='governments_list'>"
   + "</div></div><br> ";
@@ -95,15 +96,9 @@ function update_govt_dialog()
   
   for (var govt_id in governments) {
     var govt = governments[govt_id];
-    
-    /*governments_list_html = governments_list_html + "<div  class='govt_choice " + govt_status + "' " 
-                  + " onclick='set_req_government(" + govt['id'] + ");' "
-                  + " title='" + govt['helptext'] + "'>" 
-		  + "<img src='/images/" + govt['graphic_str'] + ".png'>"
-		  + govt['name'] + "</div>";*/
-    governments_list_html += "<input class='govt_button' id='govt_id_" + govt['id'] + "' " 
-	                  + "onclick='set_req_government(" + govt['id'] + ");' type='button' "
-			  + "title='" + govt['helptext'] + "' value='" + govt['name'] + "'>";
+    governments_list_html += "<button class='govt_button' id='govt_id_" + govt['id'] + "' " 
+	                  + "onclick='set_req_government(" + govt['id'] + ");' "
+			  + "title='" + govt['helptext'] + "'>" +  govt['name'] + "</button>";
   }
 
   $("#governments_list").html(governments_list_html);
@@ -111,13 +106,13 @@ function update_govt_dialog()
   for (var govt_id in governments) {
     var govt = governments[govt_id];
     if (!can_player_get_gov(govt_id)) {
-      $("#govt_id_" + govt['id'] ).button({ disabled: true });
+      $("#govt_id_" + govt['id'] ).button({ disabled: true, label: govt['name'], icons: {primary: govt['rule_name']} });
     } else if (requested_gov == govt_id) {
-    $("#govt_id_" + govt['id'] ).button().css("background", "green");
+    $("#govt_id_" + govt['id'] ).button({label: govt['name'], icons: {primary: govt['rule_name']}}).css("background", "green");
     } else if (client.conn.playing['government'] == govt_id) {
-      $("#govt_id_" + govt['id'] ).button({ disabled: true }).css("background", "green");
+      $("#govt_id_" + govt['id'] ).button({label: govt['name'], icons: {primary: govt['rule_name']}}).css("background", "#BBBBFF").css("font-weight", "bolder");
     } else {
-      $("#govt_id_" + govt['id'] ).button();
+      $("#govt_id_" + govt['id'] ).button({label: govt['name'], icons: {primary: govt['rule_name']}});
     }
 
   }

@@ -94,14 +94,14 @@ function accept_treaty(counterpart, I_accepted, other_accepted)
   var disagree_sprite = get_treaty_disagree_thumb_down();
 
 
-  var agree_self_html = "<div id='flag_self' style='float:right; background: transparent url("
+  var agree_self_html = "<div id='agreement' style='float:left; background: transparent url("
            + agree_sprite['image-src'] 
            + "); background-position:-" + agree_sprite['tileset-x'] + "px -" 
 	   + agree_sprite['tileset-y'] 
            + "px;  width: " + agree_sprite['width'] + "px;height: " 
 	   + agree_sprite['height'] + "px; margin: 5px; '>"
            + "</div>";
-  var disagree_self_html = "<div id='flag_self' style='float:right; background: transparent url("
+  var disagree_self_html = "<div id='agreement' style='float:left; background: transparent url("
            + disagree_sprite['image-src'] 
            + "); background-position:-" + disagree_sprite['tileset-x'] + "px -" 
 	   + disagree_sprite['tileset-y'] 
@@ -338,30 +338,19 @@ function create_diplomacy_dialog(counterpart) {
 	  + "<div id='diplomacy_player_box_counterpart'></div>"
 	  + "</div>");
 
-  var sprite_self = get_player_fplag_sprite(pplayer);
-  var sprite_counterpart = get_player_fplag_sprite(counterpart);
+  var self_nation = nations[pplayer['nation']]; 
+  var counterpart_nation = nations[counterpart['nation']]; 
 
-  var flag_self_html = "<div id='flag_self' style='float:left; background: transparent url("
-           + sprite_self['image-src'] 
-           + "); background-position:-" + sprite_self['tileset-x'] + "px -" 
-	   + sprite_self['tileset-y'] 
-           + "px;  width: " + sprite_self['width'] + "px;height: " 
-	   + sprite_self['height'] + "px; margin: 5px; '>"
-           + "</div>";
-  var flag_counterpart_html = "<div id='flag_counterpart' style='float:left; background: transparent url("
-           + sprite_counterpart['image-src'] 
-           + "); background-position:-" + sprite_counterpart['tileset-x'] + "px -" 
-	   + sprite_counterpart['tileset-y'] 
-           + "px;  width: " + sprite_counterpart['width'] + "px;height: " 
-	   + sprite_counterpart['height'] + "px; margin: 5px; '>"
-           + "</div>";
+  var flag_self_html = "<img src='/images/flags/" + self_nation['graphic_str'] + "-web.png' id='flag_self'>";
+  var flag_counterpart_html = "<img src='/images/flags/" + counterpart_nation['graphic_str'] 
+	  + "-web.png' id='flag_counterpart'>";
 
-  var player_info_html = "<div style='float:left; width: 70%;'>" 
-		  			+ nations[pplayer['nation']]['adjective'] + "<br>"
-		  			+ "<h3>" + pplayer['name'] + "</h3></div>"
-  var counterpart_info_html = "<div style='float:left; width: 70%;'>"  
-		  			      + nations[counterpart['nation']]['adjective'] + "<br>"
-		                              + "<h3>" + counterpart['name'] + "</h3></div>"
+  var player_info_html = "<div style='float:left; width: 70%;'><h3>" 
+		  			+ nations[pplayer['nation']]['adjective']  
+		  			+ " " + pplayer['name'] + "</h3></div>"
+  var counterpart_info_html = "<div style='float:left; width: 70%;'><h3>"  
+		  			      + nations[counterpart['nation']]['adjective'] 
+		                              + " " + counterpart['name'] + "</h3></div>"
 
 
   var agree_self_html = "<div id='agree_self' style='float':right;></div>";

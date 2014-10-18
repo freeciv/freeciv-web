@@ -268,7 +268,7 @@ function load_game_dialog()
   }
 
 
-  saveHtml += "</ol><span id='savegame_note'>Note: Savegames are stored using HTML5 local storage in your browser. "+
+  saveHtml += "</ol><br><span id='savegame_note'>Note: Savegames are stored using HTML5 local storage in your browser. "+
 	  "Clearing your browser cache will also clear your savegames. Savegames are stored with your username.</span>";
 
   $("#dialog").html(saveHtml);

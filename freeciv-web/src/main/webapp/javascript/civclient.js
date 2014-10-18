@@ -133,7 +133,7 @@ function init_common_intro_dialog() {
   } else {
     show_intro_dialog("Welcome to Freeciv-web",
       "You are about to join this game server, where you can " +
-      "play a singleplayer game against the Freeciv AI. You can " +
+      "play a singleplayer game against the Freeciv AI.<br> You can " +
       "start the game directly, or customize the game settings. " +
       "Please enter your name: ");
   } 
@@ -193,6 +193,7 @@ function add_chatbox_text(text)
     
     if (civclient_state <= C_S_PREPARING) {
       scrollDiv = document.getElementById('pregame_message_area');
+      text = text.replace(/#FFFFFF/g, '#000000');
     } else {
       scrollDiv = document.getElementById('game_message_area');
     }
@@ -366,7 +367,7 @@ function show_intro_dialog(title, message) {
   $("#dialog").dialog({
 			bgiframe: true,
 			modal: true,
-			width: is_small_screen() ? "90%" : "60%",
+			width: is_small_screen() ? "80%" : "60%",
 			buttons: 
 			{
 				"Start Game" : function() {

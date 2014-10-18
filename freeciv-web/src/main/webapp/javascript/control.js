@@ -794,7 +794,7 @@ function do_map_click(ptile, qtype)
         } 
 
         if (is_touch_device()) {
-          $("#canvas").contextMenu({x: mouse_x, y: mouse_y});
+          $("#canvas").contextMenu();
 	}
       }
     }

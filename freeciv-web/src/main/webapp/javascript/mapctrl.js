@@ -224,7 +224,7 @@ function recenter_button_pressed(canvas_x, canvas_y)
 {
   var map_scroll_border = 8;
   var ptile = canvas_pos_to_tile(canvas_x, canvas_y);
-
+  
   /* Prevent the user from scrolling outside the map. */
   if (ptile != null && ptile['y'] > (map['ysize'] - map_scroll_border)) {
     ptile = map_pos_to_tile(ptile['x'], map['ysize'] - map_scroll_border);
@@ -234,10 +234,18 @@ function recenter_button_pressed(canvas_x, canvas_y)
   }
 
   if (can_client_change_view() && ptile != null) {
-    /* FIXME: Some actions here will need to check can_client_issue_orders.
-     * But all we can check is the lowest common requirement. */
-    enable_mapview_slide(ptile);
-    center_tile_mapcanvas(ptile);
+    var funits = get_units_in_focus();
+    var sunit = find_visible_unit(ptile);
+    if (sunit != null && funits != null && funits[0] != null && funits[0]['id'] == sunit['id']) {
+      /* the user right-clicked on the focus unit, show context menu instead of recenter. */
+      $("#canvas").contextMenu(true);
+    } else {
+      $("#canvas").contextMenu(false);
+      /* FIXME: Some actions here will need to check can_client_issue_orders.
+       * But all we can check is the lowest common requirement. */
+      enable_mapview_slide(ptile);
+      center_tile_mapcanvas(ptile);
+    }
   }
 }
 
@@ -249,6 +257,16 @@ function popit()
   var ptile = canvas_pos_to_tile(mouse_x, mouse_y);
   if (ptile == null) return;
   
+  popit_req(ptile);
+
+}
+
+/**************************************************************************
+...
+**************************************************************************/
+function popit_req(ptile)
+{
+  if (ptile == null) return;
   var punit_id = 0;
   var punit = find_visible_unit(ptile);
   if (punit != null) punit_id = punit['id'];
@@ -256,8 +274,6 @@ function popit()
   var packet = {"type" : packet_info_text_req, "visible_unit" : punit_id,
                 "loc" : ptile['index']};
   send_request (JSON.stringify(packet));
-
-
 }
 
 /**************************************************************************

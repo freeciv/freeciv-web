@@ -3,10 +3,6 @@
     <a href="#" onclick="activate_goto();"><img src="/images/orders/goto_default.png" name="goto_button" alt="" border="0" width="30" height="30"></a>
   </div>
 
-  <div id="order_sentry" class="order_button" title="Sentry unit (S)">
-    <a href="#" onclick="key_unit_sentry();"><img src="/images/orders/sentry_default.png" name="sentry_button" alt="" border="0" width="30" height="30"></a>
-  </div>
-
   <div id="order_explore" class="order_button" title="Auto explore map (X)">
     <a href="#" onclick="key_unit_auto_explore();"><img src="/images/orders/auto_explore_default.png" name="auto_explore_button" alt="" border="0" width="30" height="30"></a>
   </div>  
@@ -18,12 +14,6 @@
   <div id="order_pillage" class="order_button" title="Pillage (Shift-P)">
     <a href="#" onclick="key_unit_pillage();"><img src="/images/orders/pillage.png" name="pillage_button" alt="" border="0" width="30" height="30"></a>
   </div>
-
-   
-  <div id="order_disband" class="order_button" title="Disband unit">
-    <a href="#" onclick="key_unit_disband();"><img src="/images/orders/disband_default.png" name="disband_button" alt="" border="0" width="30" height="30"></a>
-  </div>  
-  
 
   <div id="order_build_city" class="order_button" title="Build new city (B)">
     <a href="#" onclick="request_unit_build_city();"><img src="/images/orders/build_city_default.png" name="build_city_button" alt="" border="0" width="30" height="30"></a>
@@ -61,7 +51,11 @@
   <div id="order_pollution" class="order_button" title="Remove pollution (P)">
     <a href="#" onclick="key_unit_pollution();"><img src="/images/orders/pollution.png" name="pollution_button" alt="" border="0" width="30" height="30"></a>
   </div>
- 
+
+  <div id="order_sentry" class="order_button" title="Sentry unit (S)">
+    <a href="#" onclick="key_unit_sentry();"><img src="/images/orders/sentry_default.png" name="sentry_button" alt="" border="0" width="30" height="30"></a>
+  </div>
+
   <div id="order_paradrop" class="order_button" title="Paradrop">
     <a href="#" onclick="key_unit_paradrop();"><img src="/images/orders/paradrop.png" name="paradrop_button" alt="" border="0" width="30" height="30"></a>
   </div>
@@ -73,6 +67,10 @@
   <div id="order_change_homecity" class="order_button" title="Change homecity of unit (h)">
     <a href="#" onclick="key_unit_homecity();"><img src="/images/orders/rehome_default.png" name="rehome_button" alt="" border="0" width="30" height="30"></a>
   </div>
+
+  <div id="order_disband" class="order_button" title="Disband unit">
+    <a href="#" onclick="key_unit_disband();"><img src="/images/orders/disband_default.png" name="disband_button" alt="" border="0" width="30" height="30"></a>
+  </div>  
 
 </div>
 

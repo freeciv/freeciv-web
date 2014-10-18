@@ -82,7 +82,7 @@ button {
   float: left;
   width: 100%;
   overflow: hidden;
-  margin-top: -30px;
+  margin-top: -25px;
 }
 
 #unit_text_details {
@@ -754,4 +754,12 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
   float: right;
   width: 140px;
 
+}
+
+#tabs_menu {
+  background: #444 url("images/ui-bg_highlight-soft_44_444444_1x100.png") 50% 50% repeat-x;
+}
+
+.context-menu-item {
+  font-size: 120%;
 }

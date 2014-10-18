@@ -84,10 +84,6 @@ function control_init()
   /* disable right clicks. */
   document.oncontextmenu = function(){return allow_right_click;};
  
-  /*$(window).bind('beforeunload', function(){
-    return "Do you really want to leave your nation behind now?";
-  });*/
-
   $(window).on('unload', function(){
     send_surrender_game();
     network_stop();
@@ -147,7 +143,7 @@ function control_init()
     var y = e.pageY - $(this).offset().top;
     overview_clicked (x, y)
   });
-
+    
 }
 
 /****************************************************************************
@@ -371,23 +367,42 @@ function advance_unit_focus()
 **************************************************************************/
 function update_unit_order_commands()
 {
+  var unit_actions = {
+            "goto": {name: "Unit goto (G)"},
+	    "tile_info": {name: "Tile info"}
+        }
+
   var funits = get_units_in_focus();
   for (var i = 0; i < funits.length; i++) {
     var punit = funits[i]; 
     var ptype = unit_type(punit);
     var ptile = index_to_tile(punit['tile']);
     if (ptile == null) continue;
+    var pcity = tile_city(ptile);
+
+    if (pcity != null) {
+      unit_actions["show_city"] = {name: "Show city"};
+    }
+
+    if (ptype['name'] == "Settlers") {
+      $("#order_build_city").show();
+      unit_actions["build"] = {name: "Build city (B)"}
+    } else {
+      $("#order_build_city").hide();
+    }
 
     if (ptype['name'] == "Settlers" || ptype['name'] == "Workers" 
         || ptype['name'] == "Engineers") {
       if (!tile_has_extra(ptile, ROAD_ROAD)) {
         $("#order_road").show();
         $("#order_railroad").hide();
+	unit_actions["road"] = {name: "Build road (R)"};
       } else if (player_invention_state(client.conn.playing, 65) == TECH_KNOWN
                  && tile_has_extra(ptile, ROAD_ROAD) 
                && !tile_has_extra(ptile, ROAD_RAIL)) {
         $("#order_road").hide();
         $("#order_railroad").show();
+	unit_actions['railroad'] = {name: "Build railroad (R)"};
       } else {
         $("#order_road").hide();
         $("#order_railroad").hide();
@@ -398,9 +413,16 @@ function update_unit_order_commands()
       $("#order_explore").hide();
       $("#order_auto_settlers").show();
       $("#order_pollution").show();
+      unit_actions["mine"] = {name: "Build mine (M)"};
+      unit_actions["autosettlers"] = {name: "Auto settler (A)"};
+
+      if (tile_has_extra(ptile, EXTRA_FALLOUT)) {
+        unit_actions["fallout"] = {name: "Remove fallout (N)"};
+      }
 
       if (tile_has_extra(ptile, EXTRA_POLLUTION)) {
         $("#order_pollution").show();
+	unit_actions["pollution"] = {name: "Remove pollution (P)"};
       } else {
         $("#order_pollution").hide();
       }
@@ -408,13 +430,17 @@ function update_unit_order_commands()
       if (tile_terrain(ptile)['name'] == "Forest") {
         $("#order_forest_remove").show(); 
         $("#order_irrigate").hide();
+	unit_actions["forest"] = {name: "Cut down forest (I)"};
       } else if (!tile_has_extra(ptile, EXTRA_IRRIGATION)) {
         $("#order_irrigate").show();
-        $("#order_forest_remove").hide(); 	
+        $("#order_forest_remove").hide(); 
+        unit_actions["irrigation"] = {name: "Irrigation (I)"};	
       } else {
         $("#order_forest_remove").hide(); 	
         $("#order_irrigate").hide();
       }
+      unit_actions["fortress"] = {name: "Build fortress (Shift-F)"};
+      unit_actions["airbase"] = {name: "Build Airbase (E)"};
 
     } else {
       $("#order_road").hide();
@@ -429,45 +455,76 @@ function update_unit_order_commands()
 
     }
 
-    if (ptype['name'] == "Settlers") {
-      $("#order_build_city").show();
-    } else {
-      $("#order_build_city").hide();
+    if (ptype['name'] == "Spy" || ptype['name'] == "Diplomat") {
+      unit_actions["action_selection"] = {name: "Diplomatic action (D)"};
     }
 
     if (ptype['name'] == "Engineers") {
       $("#order_transform").show();
+      unit_actions["transform"] = {name: "Transform terrain (O)"};
     } else {
       $("#order_transform").hide();
     }
 
     if (ptype['name'] == "Nuclear") {
       $("#order_nuke").show();
+      unit_actions["nuke"] = {name: "Detonate Nuke (Shift-N)"};
     } else {
       $("#order_nuke").hide();
     }
 
     if (ptype['name'] == "Paratroopers") {
       $("#order_paradrop").show();
+      unit_actions["paradrop"] = {name: "Paradrop"};
     } else {
       $("#order_paradrop").hide();
     }
 
     if (ptype['attack_strength'] > 0) {
       $("#order_pillage").show();
+      unit_actions["pillage"] = {name: "Pillage (Shift-P)"};
     } else {
       $("#order_pillage").hide();
     }
 
-    var pcity = tile_city(ptile);
     if (pcity == null || punit['homecity'] == 0 || (pcity != null && punit['homecity'] == pcity['id'])) {
       $("#order_change_homecity").hide();
     } else if (pcity != null && punit['homecity'] != pcity['id']) {
       $("#order_change_homecity").show();
+      unit_actions["homecity"] = {name: "Change homecity of unit (H)"};
+    }
+
+    if (pcity != null) {
+      unit_actions["airlift"] = {name: "Airlift (Shift-L)"};
     }
 
   }
 
+  unit_actions = $.extend(unit_actions, {
+            "explore": {name: "Auto explore (X)"},
+            "fortify": {name: "Fortify (F)"},
+            "sentry": {name: "Sentry (S)"},
+            "wait": {name: "Wait (W)"},
+            "upgrade": {name: "Upgrade unit (U)"},
+            "disband": {name: "Disband (Shift-D)"}
+            });
+  $.contextMenu('destroy');
+  $.contextMenu({
+        selector: '#canvas', 
+	zIndex: 5000,
+        autoHide: true,
+        callback: function(key, options) {
+	  handle_context_menu_callback(key);
+        },
+        items: unit_actions 
+  });
+
+
+  if (is_touch_device()) {
+    $(".context-menu-list").css("width", "600px");
+    $(".context-menu-item").css("font-size", "160%");
+  }
+  $(".context-menu-list").css("z-index", 5000);
 }
 
 
@@ -735,6 +792,10 @@ function do_map_click(ptile, qtype)
           set_unit_focus_and_redraw(sunits[0]);
           update_select_unit_dialog(sunits);
         } 
+
+        if (is_touch_device()) {
+          $("#canvas").contextMenu({x: mouse_x, y: mouse_y});
+	}
       }
     }
     
@@ -861,7 +922,9 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift)
     break;
 
     case 'D':
-      if (alt || ctrl) {
+      if (shift) {
+        key_unit_disband();
+      } else if (alt || ctrl) {
         show_debug_info();
       } else {
         key_unit_action_select();
@@ -918,6 +981,128 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift)
   
   };
   
+}
+
+/**************************************************************************
+ Handles everything when the user clicked on the context menu
+**************************************************************************/
+function handle_context_menu_callback(key)
+{
+  switch (key) {
+    case "build":
+      request_unit_build_city();
+      break;
+
+    case "tile_info":
+      var ptile = find_a_focus_unit_tile_to_center_on();
+      if (ptile != null) popit_req(ptile);
+      break;
+
+    case "goto":
+      activate_goto();
+      break;
+
+    case "explore":
+      key_unit_auto_explore();
+      break;
+
+    case "fortify":
+      key_unit_fortify();
+      break;
+
+    case "road":
+      key_unit_road();
+      break;
+
+    case "railroad":
+      key_unit_road();
+      break;
+
+    case "mine":
+      key_unit_mine();
+      break;
+
+    case "autosettlers":
+      key_unit_auto_settle()
+      break;
+
+    case "fallout":
+      key_unit_fallout();
+      break;
+
+    case "pollution":
+      key_unit_pollution();
+      break;
+
+    case "forest":
+      key_unit_irrigate();
+      break;
+
+    case "irrigation":
+      key_unit_irrigate();
+      break;
+
+    case "fortress":
+      key_unit_fortress();
+      break;
+
+    case "airbase":
+      key_unit_airbase();
+      break;
+
+    case "transform":
+      key_unit_transform();
+      break;
+
+    case "nuke":
+      key_unit_nuke();
+      break;
+
+    case "paradrop":
+      key_unit_paradrop();
+      break;
+
+    case "pillage":
+      key_unit_pillage();
+      break;
+
+    case "homecity":
+      key_unit_homecity();
+      break;
+
+    case "airlift":
+      key_unit_airlift();
+      break;
+
+    case "sentry":
+      key_unit_sentry();
+      break;
+
+    case "wait": 
+      key_unit_wait();
+      break;
+
+    case "upgrade":
+      key_unit_upgrade();
+      break;
+
+    case "disband":
+      key_unit_disband();
+      break;
+
+    case "action_selection":
+      key_unit_action_select(); 
+      break;
+
+    case "show_city":
+      var ptile = find_a_focus_unit_tile_to_center_on();
+      var pcity = tile_city(ptile)
+      show_city_dialog(pcity);
+      break;
+  };
+  if (key != "goto" && is_touch_device()) {
+    deactivate_goto();
+  }
 }
 
 /**************************************************************************

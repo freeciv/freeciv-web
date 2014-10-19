@@ -522,7 +522,7 @@ function update_unit_order_commands()
 
   if (is_touch_device()) {
     $(".context-menu-list").css("width", "600px");
-    $(".context-menu-item").css("font-size", "160%");
+    $(".context-menu-item").css("font-size", "200%");
   }
   $(".context-menu-list").css("z-index", 5000);
 }
@@ -734,17 +734,17 @@ function get_drawable_unit(ptile, citymode)
 function do_map_click(ptile, qtype)
 {
   if (ptile == null || client_is_observer()) return;
-  
+ 
+  if (current_focus.length > 0 && current_focus[0]['tile'] == ptile['index']) {
+    /* clicked on unit at the same tile, then deactivate goto and show context menu. */
+    deactivate_goto();
+    $("#canvas").contextMenu();
+    return;
+  }
+
   if (goto_active) {
     if (current_focus.length > 0) {
       var punit = current_focus[0];
-
-      if (punit['tile'] == ptile['index']) {
-	/* if unit moved by click and drag to the same tile, then deactivate goto. */
-        deactivate_goto();
-        return;
-      }
-
       var packet = {"type" : packet_unit_move, "unit_id" : punit['id'], "tile": ptile['index'] };
       send_request (JSON.stringify(packet));
     }
@@ -770,10 +770,14 @@ function do_map_click(ptile, qtype)
   } else {
     var sunits = tile_units(ptile);
     var pcity = tile_city(ptile);
-    
+
     if (pcity != null) {
       if (pcity['owner'] == client.conn.playing.playerno) {
-        show_city_dialog(pcity);
+	if (sunits != null && sunits.length > 0 && is_touch_device()) {
+          $("#canvas").contextMenu();
+	} else {
+          show_city_dialog(pcity);
+	}
       }
       return;
     }

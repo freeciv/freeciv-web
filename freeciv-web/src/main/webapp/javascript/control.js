@@ -774,6 +774,7 @@ function do_map_click(ptile, qtype)
     if (pcity != null) {
       if (pcity['owner'] == client.conn.playing.playerno) {
 	if (sunits != null && sunits.length > 0 && is_touch_device()) {
+          set_unit_focus_and_redraw(sunits[0]);
           $("#canvas").contextMenu();
 	} else {
           show_city_dialog(pcity);

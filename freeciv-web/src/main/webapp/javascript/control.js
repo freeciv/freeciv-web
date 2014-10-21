@@ -1101,8 +1101,10 @@ function handle_context_menu_callback(key)
 
     case "show_city":
       var ptile = find_a_focus_unit_tile_to_center_on();
-      var pcity = tile_city(ptile)
-      show_city_dialog(pcity);
+      if (ptile != null) {
+        var pcity = tile_city(ptile)
+        show_city_dialog(pcity);
+      }
       break;
   };
   if (key != "goto" && is_touch_device()) {

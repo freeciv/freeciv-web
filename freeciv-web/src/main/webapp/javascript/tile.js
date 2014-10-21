@@ -79,6 +79,8 @@ function tile_set_worked(ptile, pwork)
 ****************************************************************************/
 function tile_city(ptile)
 {
+  if (ptile == null) return null;
+
   var city_id = ptile['worked'];
   var pcity = cities[city_id];
 

@@ -1559,24 +1559,24 @@ reqs	=
 type    = "Slow_Down_Timeline"
 value   = 1
 reqs    =
-    { "type", "name", "range"
-      "Tech", "Plastics", "World"
+    { "type", "name", "range", "survives"
+      "Tech", "Plastics", "World", TRUE
     }
 
 [effect_superconductor_slowdown]
 type    = "Slow_Down_Timeline"
 value   = 1
 reqs    =
-    { "type", "name", "range"
-      "Tech", "Superconductors", "World"
+    { "type", "name", "range", "survives"
+      "Tech", "Superconductors", "World", TRUE
     }
 
 [effect_spaceflight_slowdown]
 type    = "Slow_Down_Timeline"
 value   = 1
 reqs    =
-    { "type", "name", "range"
-      "Tech", "Space Flight", "World"
+    { "type", "name", "range", "survives"
+      "Tech", "Space Flight", "World", TRUE
     }
 
 [effect_stock_exchange]

@@ -1163,8 +1163,8 @@ reqs	=
 graphic	= "b.colossus"
 graphic_alt	= "-"
 obsolete_by	=
-    { "type", "name", "range"
-      "Tech", "Flight", "World"
+    { "type", "name", "range", "survives"
+      "Tech", "Flight", "World", TRUE
     }
 build_cost	= 100
 upkeep		= 0
@@ -1280,8 +1280,8 @@ reqs	=
 graphic	= "b.great_library"
 graphic_alt	= "-"
 obsolete_by	=
-    { "type", "name", "range"
-      "Tech", "Electricity", "World"
+    { "type", "name", "range", "survives"
+      "Tech", "Electricity", "World", TRUE
     }
 build_cost	= 300
 upkeep		= 0
@@ -1303,8 +1303,8 @@ reqs	=
 graphic	= "b.great_wall"
 graphic_alt	= "-"
 obsolete_by	=
-    { "type", "name", "range"
-      "Tech", "Metallurgy", "World"
+    { "type", "name", "range", "survives"
+      "Tech", "Metallurgy", "World", TRUE
     }
 build_cost	= 300
 upkeep		= 0
@@ -1328,8 +1328,8 @@ reqs	=
 graphic	= "b.hanging_gardens"
 graphic_alt	= "-"
 obsolete_by	=
-    { "type", "name", "range"
-      "Tech", "Railroad", "World"
+    { "type", "name", "range", "survives"
+      "Tech", "Railroad", "World", TRUE
     }
 build_cost	= 200
 upkeep		= 0
@@ -1423,8 +1423,8 @@ reqs	=
 graphic	= "b.king_richards_crusade"
 graphic_alt	= "-"
 obsolete_by	=
-    { "type", "name", "range"
-      "Tech", "Robotics", "World"
+    { "type", "name", "range", "survives"
+      "Tech", "Robotics", "World", TRUE
     }
 build_cost	= 150
 upkeep		= 0
@@ -1446,8 +1446,8 @@ reqs	=
 graphic	= "b.leonardos_workshop"
 graphic_alt	= "-"
 obsolete_by	=
-    { "type", "name", "range"
-      "Tech", "Automobile", "World"
+    { "type", "name", "range", "survives"
+      "Tech", "Automobile", "World", TRUE
     }
 build_cost	= 400
 upkeep		= 0
@@ -1469,8 +1469,8 @@ reqs	=
 graphic	= "b.lighthouse"
 graphic_alt	= "-"
 obsolete_by	=
-    { "type", "name", "range"
-      "Tech", "Magnetism", "World"
+    { "type", "name", "range", "survives"
+      "Tech", "Magnetism", "World", TRUE
     }
 build_cost	= 200
 upkeep		= 0
@@ -1534,8 +1534,8 @@ reqs	=
 graphic	= "b.marco_polos_embassy"
 graphic_alt	= "-"
 obsolete_by	=
-    { "type", "name", "range"
-      "Tech", "Communism", "World"
+    { "type", "name", "range", "survives"
+      "Tech", "Communism", "World", TRUE
     }
 build_cost	= 200
 upkeep		= 0
@@ -1583,8 +1583,8 @@ reqs	=
 graphic	= "b.oracle"
 graphic_alt	= "-"
 obsolete_by	=
-    { "type", "name", "range"
-      "Tech", "Theology", "World"
+    { "type", "name", "range", "survives"
+      "Tech", "Theology", "World", TRUE
     }
 build_cost	= 100
 upkeep		= 0
@@ -1699,8 +1699,8 @@ reqs	=
 graphic	= "b.sun_tzus_war_academy"
 graphic_alt	= "-"
 obsolete_by	=
-    { "type", "name", "range"
-      "Tech", "Mobile Warfare", "World"
+    { "type", "name", "range", "survives"
+      "Tech", "Mobile Warfare", "World", TRUE
     }
 build_cost	= 300
 upkeep		= 0

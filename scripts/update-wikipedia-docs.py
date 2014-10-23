@@ -53,6 +53,7 @@ def download_wiki_page(tech_name):
   if (len(page.images) > 2 and validate_image(page.images[2])): image = page.images[2];
   if (len(page.images) > 3 and validate_image(page.images[3])): image = page.images[3];
   if (len(page.images) > 4 and validate_image(page.images[4])): image = page.images[4];
+  image = image.replace("http:", "");  #protocol relative url
 
   freeciv_wiki_doc[tech_name] = {"title" : page.title, "summary" : page.summary, "image" : image};
 

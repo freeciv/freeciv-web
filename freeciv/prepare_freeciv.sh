@@ -22,5 +22,5 @@ fi
 
 ( cd freeciv
 
-  ./autogen.sh --enable-fcweb --disable-nls --disable-debug --disable-fcmp --disable-freeciv-manual --disable-ruledit --enable-ai-static=classic,threaded && make
+  ./autogen.sh --enable-fcweb --disable-nls --disable-debug --disable-fcmp --without-freeciv-manual --disable-ruledit --enable-ai-static=classic,threaded && make
 )

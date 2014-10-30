@@ -127,8 +127,12 @@ def parse_fields(str, types):
     assert mo,repr(type)
     typeinfo["dataio_type"],typeinfo["struct_type"]=mo.groups()
 
-    if typeinfo["struct_type"]=="float":
-        mo=re.search("^float(\d+)$",typeinfo["dataio_type"])
+    if typeinfo["struct_type"]=="ufloat":
+        mo=re.search("^ufloat(\d+)$",typeinfo["dataio_type"])
+        assert mo
+        typeinfo["float_factor"]=int(mo.group(1))
+    if typeinfo["struct_type"]=="sfloat":
+        mo=re.search("^sfloat(\d+)$",typeinfo["dataio_type"])
         assert mo
         typeinfo["float_factor"]=int(mo.group(1))
 

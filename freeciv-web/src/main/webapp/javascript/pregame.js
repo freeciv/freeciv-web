@@ -243,6 +243,8 @@ function pregame_settings()
 	  "<td><input type='number' name='aifill' id='aifill' size='4' length='3' min='0' max='30' step='1'></td></tr>" +
 	  "<tr title='Maximum seconds per turn'><td>Timeout (seconds per turn):</td>" +
 	  "<td><input type='number' name='timeout' id='timeout' size='4' length='3' min='30' max='3600' step='1'></td></tr>" +
+          "<tr title='Creates a private game where players need to know this password in order to join.'><td>Password for private game:</td>" +
+	  "<td><input type='text' name='password' id='password' size='10' length='10'></td></tr>" +
 	  "<tr title='Map size (in thousands of tiles)'><td>Map size:</td>" +
 	  "<td><input type='number' name='mapsize' id='mapsize' size='4' length='3' min='1' max='15' step='1'></td></tr>" +
 	  "<tr title='This setting sets the skill-level of the AI players'><td>AI skill level:</td>" +
@@ -372,6 +374,15 @@ function pregame_settings()
     var myJSONText = JSON.stringify(test_packet);
     send_request (myJSONText);
 
+  });
+
+  $('#password').change(function() {
+    var pwd_packet = {"type" : packet_authentication_reply, "password" : $('#password').val()};
+    send_request (JSON.stringify(pwd_packet));
+
+    var test_packet = {"type" : packet_chat_msg_req, "message" : "/metamessage Private password-protected game"};
+    send_request (JSON.stringify(test_packet));
+    metamessage_changed = true;
   });
 
 

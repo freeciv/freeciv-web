@@ -332,7 +332,7 @@ function update_client_state(value)
 
 function handle_authentication_req(packet) 
 {
-  /* Auth not supported. */
+  show_auth_dialog(packet);
 }
 
 function handle_server_shutdown(packet) 

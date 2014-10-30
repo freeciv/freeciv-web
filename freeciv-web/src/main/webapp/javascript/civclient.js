@@ -581,3 +581,40 @@ function motd_init()
   $.getScript("/motd.js");
   setTimeout("motd_init();", 1000*60*30);
 }
+
+/**************************************************************************
+ Shows the authentication and password dialog.
+**************************************************************************/
+function show_auth_dialog(packet) {
+
+  // reset dialog page.
+  $("#dialog").remove();
+  $("<div id='dialog'></div>").appendTo("div#game_page");
+
+  var intro_html = packet['message']
+      + "<br><br> Password: <input id='password_req' type='text' size='25'>";
+  $("#dialog").html(intro_html);
+  $("#dialog").attr("title", "Authentication");
+  $("#dialog").dialog({
+			bgiframe: true,
+			modal: true,
+			width: is_small_screen() ? "80%" : "60%",
+			buttons: 
+			{
+				"Ok" : function() {
+                                  var pwd_packet = {"type" : packet_authentication_reply, "password" : $('#password_req').val()};
+                                  var myJSONText = JSON.stringify(pwd_packet);
+                                  send_request (myJSONText);
+
+                                  $("#dialog").dialog('close');
+				}
+			}	
+			
+		});
+
+ 	
+  $("#dialog").dialog('open');		
+
+
+}
+

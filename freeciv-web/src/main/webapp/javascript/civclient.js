@@ -594,7 +594,7 @@ function show_auth_dialog(packet) {
   var intro_html = packet['message']
       + "<br><br> Password: <input id='password_req' type='text' size='25'>";
   $("#dialog").html(intro_html);
-  $("#dialog").attr("title", "Authentication");
+  $("#dialog").attr("title", "Private server needs password to enter");
   $("#dialog").dialog({
 			bgiframe: true,
 			modal: true,

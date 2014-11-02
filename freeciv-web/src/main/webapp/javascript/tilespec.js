@@ -266,7 +266,8 @@ function fill_sprite_array(layer, ptile, pedge, pcorner, punit, pcity, citymode)
         sprite_array.push(get_city_info_text(pcity));
       }   
 
-      if (active_city != null && ptile != null && ptile['worked'] != null && active_city['id'] == ptile['worked']) {
+      if (active_city != null && ptile != null && ptile['worked'] != null 
+          && active_city['id'] == ptile['worked'] && active_city['food_output'] != null) {
         sprite_array.push(get_city_active_worked_sprite());
 	var dx = city_tile(active_city)['x'] - ptile['x'];
 	var dy = city_tile(active_city)['y'] - ptile['y'];

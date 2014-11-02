@@ -44,8 +44,6 @@ $(document).ready(function() {
 **************************************************************************/
 function civclient_init() 
 {
-  https_redirect_check();
-   
   $.blockUI.defaults['css']['backgroundColor'] = "#222";
   $.blockUI.defaults['css']['color'] = "#fff";
   $.blockUI.defaults['theme'] = true;
@@ -540,34 +538,6 @@ function show_debug_info()
 
   console.log("mozDash support: " + mozDashSupport);
 
-}
-
-/**************************************************************************
- - HTTPS is the default, so redirect from HTTP to HTTPS. 
- - HTTP default on localhost.
- - Also prevent redirect loops. 
-**************************************************************************/
-function https_redirect_check()
-{
-  if ('http:' == document.location.protocol && document.location.hostname != "localhost"
-      && $.getUrlVar("http") != "true" && $.getUrlVar("https") != "true" ) {
-    https_redirect();
-  }
-
-}
-
-/**************************************************************************
-  Redirect between the HTTP and HTTPS urls of Freeciv-web.
-**************************************************************************/
-function https_redirect()
-{
-  if ('https:' == document.location.protocol) {
-    console.log("Redirecting from HTTPS to HTTP.");
-    window.location.href = "http:" + window.location.href.substring(window.location.protocol.length) + "&http=true";
-  } else if ('http:' == document.location.protocol) {
-    console.log("Redirecting from HTTP to HTTPS.");
-    window.location.href = "https:" + window.location.href.substring(window.location.protocol.length) + "&https=true";
-  }
 }
 
 /**************************************************************************

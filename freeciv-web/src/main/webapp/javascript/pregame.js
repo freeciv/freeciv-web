@@ -381,8 +381,9 @@ function pregame_settings()
     var test_packet = {"type" : packet_chat_msg_req, "message" : "/metamessage Private password-protected game"};
     send_request (JSON.stringify(test_packet));
     metamessage_changed = true;
-    $("#metamessage").remove();
-    $("#metamessage_setting").remove();
+    $("#metamessage").prop('readonly', true);
+    $("#metamessage_setting").prop('readonly', true);
+    $("#password").prop('readonly', true);
   });
 
 

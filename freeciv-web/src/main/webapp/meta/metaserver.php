@@ -444,11 +444,12 @@ if ( isset($port) ) {
 
 	print "</a>";
         if ($row["state"] == "Pregame") {
-          print "<div><a class='button' href='/webclient/?civserverport=" . db2html($port) . "&amp;civserverhost=" . db2html($host)
+          print "<div><a class='button' href='/webclient/?action=multi&civserverport=" . db2html($port) . "&amp;civserverhost=" . db2html($host)
              . "'>Join</a> <b>You can join this game now.</b></div>";
-	}
-        print "<div><a class='button' href='/webclient?action=observe&amp;civserverport=" . db2html($port) . "&amp;civserverhost=" . db2html($host)
+	} else {
+          print "<div><a class='button' href='/webclient?action=observe&amp;civserverport=" . db2html($port) . "&amp;civserverhost=" . db2html($host)
              . "'>Join/Observe</a> <b>You can observe this game now.</b></div>";
+	}
 
         print "<br/><br/>";
         $msg = db2html($row["message"]);

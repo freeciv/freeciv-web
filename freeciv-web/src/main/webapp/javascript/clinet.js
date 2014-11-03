@@ -37,6 +37,7 @@ function network_init()
 
   var civclient_request_url = "/civclientlauncher";
   if ($.getUrlVar('action') != null) civclient_request_url += "?action=" + $.getUrlVar('action');
+  if ($.getUrlVar('action') == null && $.getUrlVar('civserverport') != null) civclient_request_url += "?";
   if ($.getUrlVar('civserverport') != null) civclient_request_url += "&civserverport=" + $.getUrlVar('civserverport');
 
   $.ajax({

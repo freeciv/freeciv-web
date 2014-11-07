@@ -425,6 +425,17 @@ function mapview_put_city_bar(pcanvas, city, canvas_x, canvas_y) {
 }
 
 /**************************************************************************
+  Draw tile label onto the canvas.
+**************************************************************************/
+function mapview_put_tile_label(pcanvas, tile, canvas_x, canvas_y) {
+  var text = tile['label'];
+  var txt_measure = pcanvas.measureText(text);
+
+  pcanvas.fillStyle = "rgba(255, 255, 255, 1)";
+  pcanvas.fillText(text, canvas_x + normal_tile_width / 2 - Math.floor(txt_measure.width / 2), canvas_y - 1);
+}
+
+/**************************************************************************
   Renders the national border lines onto the canvas.
 **************************************************************************/
 function mapview_put_border_line(pcanvas, dir, color, canvas_x, canvas_y) {

@@ -9,15 +9,5 @@ $(document).ready(function() {
 	 } else { 
 		$( "#tabs" ).tabs();
 	}
-
-        if ($(window).width() <= 1024) {
-          // for small screens
-          $(".row").width("100%");
-          $(".span10").width("100%");
-          $(".span10").css("padding", "0px");
-          $("#singleplr").html("Singleplayer");
-          $("#multiplr").html("Multi");
-          $("#freecivmeta").html("Desktop");
-        }
 });
 

@@ -33,7 +33,7 @@ startTime = time.time()
 
 def get_debug_info(civcoms):
     code = "<html><head><meta http-equiv=\"refresh\" content=\"20\">" \
-       + "<link href='http://play.freeciv.org/css/bootstrap.min.css' rel='stylesheet'></head>" \
+       + "<link href='//play.freeciv.org/css/bootstrap.min.css' rel='stylesheet'></head>" \
        + "<body><div class='container'>" \
        + "<h2>Freeciv WebSocket Proxy Status</h2>" \
        + "<font color=\"green\">Process status: OK</font><br>"

@@ -25,7 +25,7 @@ class StatusHandler(web.RequestHandler):
 
   def get(self):
     self.write("<html><head><title>Publite2 status for Freeciv-web</title></head>" + 
-               "<link href='http://play.freeciv.org/css/bootstrap.min.css' rel='stylesheet'>" +
+               "<link href='//play.freeciv.org/css/bootstrap.min.css' rel='stylesheet'>" +
                "<meta http-equiv=\"refresh\" content=\"20\"><style>td { padding: 2px;}</style><body>");
     self.write("<div class='container'><h2>Freeciv-web Publite2 status</h2>" + 
                "<table><tr><td>Server limit (maximum number of running servers):</td><td>" + str(self.metachecker.server_limit) + "</td></tr>" +

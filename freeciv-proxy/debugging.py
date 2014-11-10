@@ -32,15 +32,16 @@ startTime = time.time()
 
 
 def get_debug_info(civcoms):
-    code = "<html><head><meta http-equiv=\"refresh\" content=\"20\"></head><body><h2>Freeciv WebSocket Proxy Status</h2>"
-    code += "<font color=\"green\">Process status: OK</font><br>"
+    code = "<html><head><meta http-equiv=\"refresh\" content=\"20\">" \
+       + "<link href='http://play.freeciv.org/css/bootstrap.min.css' rel='stylesheet'></head>" \
+       + "<body><div class='container'>" \
+       + "<h2>Freeciv WebSocket Proxy Status</h2>" \
+       + "<font color=\"green\">Process status: OK</font><br>"
 
-    code += "<h3>Process Uptime: " + \
-        str(int(time.time() - startTime)) + " s.</h3>"
-    current_time = strftime("%Y-%m-%d %H:%M:%S", gmtime())
-    code += "<b>Current time:</b><br> " + current_time
+    code += "<b>Process Uptime: " + \
+        str(int(time.time() - startTime)) + " s.</b><br>"
 
-    code += ("<br><br>Python version: %s %s (%s)<br>" % (
+    code += ("Python version: %s %s (%s)<br>" % (
         platform.python_implementation(),
         platform.python_version(),
         platform.python_build()[0],
@@ -96,6 +97,8 @@ def get_debug_info(civcoms):
     except:
         print(("Unexpected error:" + str(sys.exc_info()[0])))
         raise
+
+    code += "</div></body></html>"
 
     return code
 

@@ -24,8 +24,10 @@ class StatusHandler(web.RequestHandler):
     self.metachecker = metachecker
 
   def get(self):
-    self.write("<html><body>");
-    self.write("<h2>Freeciv-web Publite2 status</h2>" + 
+    self.write("<html><head><title>Publite2 status for Freeciv-web</title></head>" + 
+               "<link href='http://play.freeciv.org/css/bootstrap.min.css' rel='stylesheet'>" +
+               "<meta http-equiv=\"refresh\" content=\"20\"><style>td { padding: 2px;}</style><body>");
+    self.write("<div class='container'><h2>Freeciv-web Publite2 status</h2>" + 
                "<table><tr><td>Server limit (maximum number of running servers):</td><td>" + str(self.metachecker.server_limit) + "</td></tr>" +
                "<tr><td>Server capacity (number of servers in pregame):</td><td>" + str(self.metachecker.server_capacity) + "</td></tr>" +
                "<tr><td>Number of servers running according to Publite2:</td><td>" + str(len(self.metachecker.server_list)) + "</td></tr>"
@@ -37,10 +39,10 @@ class StatusHandler(web.RequestHandler):
                "<tr><td>Last HTTP status from metaserver: </td><td>" + str(self.metachecker.last_http_status) + "</td></tr>" +
                "</table>")
     self.write("<h3>Running Freeciv-web servers:</h3>");
-    self.write("<table><tr><td>Server Port</td><td>Proxy status</td><td>Type</td><td>Started time</td></tr>");
+    self.write("<table><tr><td>Server Port</td><td>Type</td><td>Started time</td><td>Restarts</td><td>Errors</td></tr>");
     for server in self.metachecker.server_list:
-      self.write("<tr><td>" + str(server.new_port) + "</td><td><a href='/civsocket/" + str(server.new_port + 1000) 
-                 + "/status'>status</a></td>" + "<td>" + str(server.gametype) 
-                 +  "</td><td>" + str(server.started_time) + "</td></tr>");
-    self.write("</table>");
+      self.write("<tr><td><a href='/civsocket/" + str(server.new_port + 1000) 
+                 + "/status'>" + str(server.new_port) + "</a></td>" + "<td>" + str(server.gametype) 
+                 +  "</td><td>" + str(server.started_time) + "</td><td>" + str(server.num_start) + "</td><td>" + str(server.num_error) +  "</td></tr>");
+    self.write("</table></div>");
     self.write("</body></html>");

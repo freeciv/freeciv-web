@@ -19,13 +19,16 @@ class Civlauncher(Thread):
         self.metahostpath = metahostpath;
         self.savesdir = savesdir;
         self.started_time = strftime("%Y-%m-%d %H:%M:%S", gmtime());
+        self.num_start = 0;
+        self.num_error = 0;
 
     def run(self):
         while 1:
             try:
                 print("Starting new Freeciv-web server at port " + str(self.new_port) + 
                       " and Freeciv-proxy server at port " + str(1000 + self.new_port) + ".");
-                retcode = call("export FREECIV_SAVE_PATH=\"" + self.savesdir + "\";" +
+                self.num_start += 1;
+                retcode = call("ulimit -t 10000 && export FREECIV_SAVE_PATH=\"" + self.savesdir + "\";" +
                                "python3.4 ../freeciv-proxy/freeciv-proxy.py " + 
                                str(1000 + self.new_port) + " > " + logdir + "freeciv-proxy-" + 
                                str(1000 + self.new_port) +".log 2>&1 " + 
@@ -41,10 +44,12 @@ class Civlauncher(Thread):
                 if retcode < 0:
                     print("Freeciv-web port " + str(self.new_port) + " was terminated by signal", 
                           -retcode, file=sys.stderr)
+                    self.num_error += 1;
                 else:
                     print("Freeciv-web port " + str(self.new_port) + " returned", 
                           retcode, file=sys.stderr)
             except OSError as e:
                 print("Execution failed:", e, file=sys.stderr)
+                self.num_error += 1;
             time.sleep(5)
 

@@ -24,9 +24,9 @@ class StatusHandler(web.RequestHandler):
     self.metachecker = metachecker
 
   def get(self):
-    self.write("<html><head><title>Publite2 status for Freeciv-web</title></head>" + 
+    self.write("<html><head><title>Publite2 status for Freeciv-web</title>" + 
                "<link href='//play.freeciv.org/css/bootstrap.min.css' rel='stylesheet'>" +
-               "<meta http-equiv=\"refresh\" content=\"20\"><style>td { padding: 2px;}</style><body>");
+               "<meta http-equiv=\"refresh\" content=\"20\"><style>td { padding: 2px;}</style></head><body>");
     self.write("<div class='container'><h2>Freeciv-web Publite2 status</h2>" + 
                "<table><tr><td>Server limit (maximum number of running servers):</td><td>" + str(self.metachecker.server_limit) + "</td></tr>" +
                "<tr><td>Server capacity (number of servers in pregame):</td><td>" + str(self.metachecker.server_capacity) + "</td></tr>" +

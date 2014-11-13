@@ -1,0 +1,20 @@
+diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
+--- freeciv/server/maphand.c	2014-11-12 05:03:07.313662889 +0200
++++ freeciv/server/maphand.c	2014-11-12 07:22:58.581644353 +0200
+@@ -1920,11 +1920,14 @@
+ {
+   struct player *base_loser = base_owner(ptile);
+ 
++  /* This MUST be before potentially recursive call to map_claim_base(),
++   * so that the recursive call will get new owner == base_loser and
++   * abort recursion. */
++  ptile->extras_owner = powner;
++
+   base_type_iterate(pbase) {
+     map_claim_base(ptile, pbase, powner, base_loser);
+   } base_type_iterate_end;
+-
+-  ptile->extras_owner = powner;
+ }
+ 
+ /*************************************************************************

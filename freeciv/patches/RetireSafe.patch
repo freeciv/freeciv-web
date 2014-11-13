@@ -1,0 +1,21 @@
+diff -Nurd -X.diff_ignore freeciv/server/srv_main.c freeciv/server/srv_main.c
+--- freeciv/server/srv_main.c	2014-11-12 05:03:07.313662889 +0200
++++ freeciv/server/srv_main.c	2014-11-12 19:17:20.777549673 +0200
+@@ -900,7 +900,7 @@
+ 
+     /* Retire useless barbarian units */
+     players_iterate(pplayer) {
+-      unit_list_iterate(pplayer->units, punit) {
++      unit_list_iterate_safe(pplayer->units, punit) {
+         struct tile *ptile = punit->tile;
+ 
+         if (unit_can_be_retired(punit)
+@@ -924,7 +924,7 @@
+             }
+           }
+         }
+-      } unit_list_iterate_end;
++      } unit_list_iterate_safe_end;
+     } players_iterate_end;
+   }
+ 

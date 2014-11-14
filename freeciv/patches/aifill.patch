@@ -1,0 +1,13 @@
+diff --git a/common/game.h b/common/game.h
+index 0928ece..4e22bec 100644
+--- a/common/game.h
++++ b/common/game.h
+@@ -324,7 +324,7 @@ extern struct civ_game game;
+ 
+ #define GAME_DEFAULT_AIFILL          5
+ #define GAME_MIN_AIFILL              0
+-#define GAME_MAX_AIFILL              GAME_MAX_MAX_PLAYERS
++#define GAME_MAX_AIFILL              32  // Freeciv-web needs to limit the number of AI players for public games.
+ 
+ #define GAME_DEFAULT_NATIONSET       ""
+ 

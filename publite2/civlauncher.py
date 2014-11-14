@@ -27,7 +27,6 @@ class Civlauncher(Thread):
             try:
                 print("Starting new Freeciv-web server at port " + str(self.new_port) + 
                       " and Freeciv-proxy server at port " + str(1000 + self.new_port) + ".");
-                self.num_start += 1;
                 retcode = call("ulimit -t 10000 && export FREECIV_SAVE_PATH=\"" + self.savesdir + "\";" +
                                "python3.4 ../freeciv-proxy/freeciv-proxy.py " + 
                                str(1000 + self.new_port) + " > " + logdir + "freeciv-proxy-" + 
@@ -40,8 +39,9 @@ class Civlauncher(Thread):
                                " --log " + logdir + "fcweb-" + str(self.new_port) + ".log " +
                                "--saves " + self.savesdir + " > " +  logdir + "freeciv-web-" +
                                str(self.new_port) + ".log  2>&1 " +
-                               " ; kill -9 $proxy_pid", shell=True)
-                if retcode < 0:
+                               " ; rc=$?; kill -9 $proxy_pid; exit $rc", shell=True)
+                self.num_start += 1;
+                if retcode > 0:
                     print("Freeciv-web port " + str(self.new_port) + " was terminated by signal", 
                           -retcode, file=sys.stderr)
                     self.num_error += 1;

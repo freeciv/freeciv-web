@@ -81,20 +81,20 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    AIRLIFTING_STYLE airlifting_style;
    UINT8 angrycitizen;
    SINT16 base_pollution;
-@@ -505,7 +506,7 @@
-   BOOL restrictinfra;
-   BOOL unreachable_protects;
-   UINT32 sciencebox;
--  SFLOAT10x3 seconds_to_phasedone;
-+  UINT32 seconds_to_phasedone;
-   UINT32 shieldbox;
-   UINT32 skill_level;
-   BOOL slow_invasions;
 @@ -533,6 +534,7 @@
    STRING calendar_fragment_name[MAX_CALENDAR_FRAGMENTS][MAX_LEN_NAME];
    BOOL civil_war_enabled;
    BOOL paradrop_to_transport;
 +  STRING meta_message[MAX_LEN_NAME];
+ end
+ 
+ PACKET_MAP_INFO = 17; sc, lsend
+@@ -535,7 +535,7 @@ end
+ # This cannot have is-info set. Sending the same value a second time after a
+ # while has passed means a completely reset timeout.
+ PACKET_TIMEOUT_INFO = 244; sc
+-  SFLOAT10x3 seconds_to_phasedone;
++  UINT32 seconds_to_phasedone;
  end
  
  PACKET_MAP_INFO = 17; sc, lsend

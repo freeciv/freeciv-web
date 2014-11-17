@@ -1001,3 +1001,8 @@ function handle_worker_task(packet)
 {
   /* TODO: Implement */
 }
+
+function handle_timeout_info(packet)
+{
+  /* TODO: Implement */
+}

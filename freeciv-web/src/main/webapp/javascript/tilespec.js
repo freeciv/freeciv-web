@@ -577,6 +577,23 @@ function get_city_flag_sprite(pcity) {
 }
 
 /**********************************************************************
+  Return the flag graphic to be used by the base on tile
+***********************************************************************/
+function get_base_flag_sprite(ptile) {
+  var owner_id = ptile['extras_owner'];
+  if (owner_id == null) return {};
+  var owner = players[owner_id];
+  if (owner == null) return {};
+  var nation_id = owner['nation'];
+  if (nation_id == null) return {};
+  var nation = nations[nation_id];
+  if (nation == null) return {};
+  return {"key" : "f." + nation['graphic_str'], 
+          "offset_x" : city_flag_offset_x, 
+          "offset_y" : - city_flag_offset_y};
+}
+
+/**********************************************************************
  Returns the sprite key for the number of defending units in a city.
 ***********************************************************************/
 function get_city_occupied_sprite(pcity) {
@@ -1346,6 +1363,7 @@ function fill_layer2_sprite_array(ptile, pcity)
                            "offset_y" : -normal_tile_height / 2});
     }
     if (tile_has_extra(ptile, BASE_BUOY)) {
+      result_sprites.push(get_base_flag_sprite(ptile));
       result_sprites.push({"key" : "base.buoy_mg",
                            "offset_y" : -normal_tile_height / 2});
     }

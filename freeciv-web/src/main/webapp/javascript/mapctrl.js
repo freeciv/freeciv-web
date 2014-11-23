@@ -233,7 +233,8 @@ function recenter_button_pressed(canvas_x, canvas_y)
 
   if (can_client_change_view() && ptile != null && orig_tile != null) {
     var sunit = find_visible_unit(orig_tile);
-    if (sunit != null && sunit['owner'] == client.conn.playing.playerno) {
+    if (!client_is_observer() && sunit != null 
+        && sunit['owner'] == client.conn.playing.playerno) {
       /* the user right-clicked on own unit, show context menu instead of recenter. */
       set_unit_focus(sunit);
       $("#canvas").contextMenu(true);

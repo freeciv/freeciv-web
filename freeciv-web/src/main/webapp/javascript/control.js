@@ -794,9 +794,6 @@ function do_map_click(ptile, qtype)
     activate_goto();
 
   } else {
-    var sunits = tile_units(ptile);
-    var pcity = tile_city(ptile);
-
     if (pcity != null) {
       if (pcity['owner'] == client.conn.playing.playerno) {
 	if (sunits != null && sunits.length > 0) {

@@ -761,6 +761,8 @@ function do_map_click(ptile, qtype)
     $("#canvas").contextMenu();
     return;
   }
+  var sunits = tile_units(ptile);
+  var pcity = tile_city(ptile);
 
   if (goto_active) {
     if (current_focus.length > 0) {
@@ -786,6 +788,10 @@ function do_map_click(ptile, qtype)
       send_request (JSON.stringify(packet));
     }
     airlift_active = false;
+
+  } else if (current_focus.length > 0 && sunits != null && sunits.length == 0 
+             && pcity == null && !is_touch_device()) {
+    activate_goto();
 
   } else {
     var sunits = tile_units(ptile);

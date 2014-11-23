@@ -83,6 +83,25 @@ function control_init()
 
   /* disable right clicks. */
   document.oncontextmenu = function(){return allow_right_click;};
+
+  $.contextMenu({
+        selector: '#canvas', 
+	zIndex: 5000,
+        autoHide: true,
+        callback: function(key, options) {
+	  handle_context_menu_callback(key);
+        },
+        build: function($trigger, e) {
+            var unit_actions = update_unit_order_commands();
+            return {
+                 callback: function(key, options) {
+                   handle_context_menu_callback(key);
+                  } ,
+                 items: unit_actions
+            };
+        }
+  });
+
  
   $(window).on('unload', function(){
     send_surrender_game();
@@ -367,11 +386,7 @@ function advance_unit_focus()
 **************************************************************************/
 function update_unit_order_commands()
 {
-  var unit_actions = {
-            "goto": {name: "Unit goto (G)"},
-	    "tile_info": {name: "Tile info"}
-        }
-
+  var unit_actions = { };
   var funits = get_units_in_focus();
   for (var i = 0; i < funits.length; i++) {
     var punit = funits[i]; 
@@ -383,6 +398,20 @@ function update_unit_order_commands()
     if (pcity != null) {
       unit_actions["show_city"] = {name: "Show city"};
     }
+
+  }
+
+  unit_actions = $.extend(unit_actions, {
+            "goto": {name: "Unit goto (G)"},
+	    "tile_info": {name: "Tile info"}
+            });
+
+  for (var i = 0; i < funits.length; i++) {
+    var punit = funits[i]; 
+    var ptype = unit_type(punit);
+    var ptile = index_to_tile(punit['tile']);
+    if (ptile == null) continue;
+    var pcity = tile_city(ptile);
 
     if (ptype['name'] == "Settlers") {
       $("#order_build_city").show();
@@ -499,7 +528,6 @@ function update_unit_order_commands()
     }
 
   }
-
   unit_actions = $.extend(unit_actions, {
             "explore": {name: "Auto explore (X)"},
             "fortify": {name: "Fortify (F)"},
@@ -508,23 +536,14 @@ function update_unit_order_commands()
             "upgrade": {name: "Upgrade unit (U)"},
             "disband": {name: "Disband (Shift-D)"}
             });
-  $.contextMenu('destroy');
-  $.contextMenu({
-        selector: '#canvas', 
-	zIndex: 5000,
-        autoHide: true,
-        callback: function(key, options) {
-	  handle_context_menu_callback(key);
-        },
-        items: unit_actions 
-  });
-
 
   if (is_touch_device()) {
     $(".context-menu-list").css("width", "600px");
     $(".context-menu-item").css("font-size", "200%");
   }
   $(".context-menu-list").css("z-index", 5000);
+
+  return unit_actions;
 }
 
 
@@ -596,6 +615,7 @@ function set_unit_focus(punit)
     current_focus[0] = punit;
   }
   update_unit_info_label(current_focus);
+  update_unit_order_commands();
 }
 
 /**************************************************************************

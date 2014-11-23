@@ -1,0 +1,12 @@
+diff --git a/server/barbarian.c b/server/barbarian.c
+index b85db39..67003ba 100644
+--- a/server/barbarian.c
++++ b/server/barbarian.c
+@@ -144,6 +144,7 @@ struct player *create_barbarian_player(enum barbarian_type type)
+   server.nbarbarians++;
+ 
+   sz_strlcpy(barbarians->username, ANON_USER_NAME);
++  server_player_set_name(barbarians, pick_random_player_name(nation));
+   barbarians->is_connected = FALSE;
+   barbarians->government = nation->init_government;
+   fc_assert(barbarians->revolution_finishes < 0);

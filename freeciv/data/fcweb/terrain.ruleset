@@ -1449,6 +1449,7 @@ flags          = "NoStackDeath", "ParadropFrom"
 name           = _("Buoy")
 gui_type       = "Fortress"
 vision_main_sq = 5
+flags          = "ShowFlag"
 
 [base_ruins]
 name           = _("Ruins")

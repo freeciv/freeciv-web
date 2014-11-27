@@ -115,10 +115,6 @@ function fill_sprite_array(layer, ptile, pedge, pcorner, punit, pcity, citymode)
 {
   var sprite_array = [];
   
-   var do_draw_unit = (punit != null && (draw_units || ptile == null || (draw_focus_unit
-				     && unit_is_in_focus(punit))));
-  
-  
   switch (layer) {
     case LAYER_TERRAIN1:
     if (ptile != null) {
@@ -204,6 +200,9 @@ function fill_sprite_array(layer, ptile, pedge, pcorner, punit, pcity, citymode)
       break;
 
     case LAYER_UNIT:
+      var do_draw_unit = (punit != null && (draw_units || ptile == null || (draw_focus_unit
+				     && unit_is_in_focus(punit))));
+
       if (do_draw_unit && active_city == null) {
         var stacked = (ptile['units'] != null && ptile['units'].length > 1);
         var backdrop = false; /* !pcity;*/

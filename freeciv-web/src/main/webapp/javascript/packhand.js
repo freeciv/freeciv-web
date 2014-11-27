@@ -1006,3 +1006,8 @@ function handle_timeout_info(packet)
 {
   /* TODO: Implement */
 }
+
+function handle_play_music(packet)
+{
+  /* TODO: Implement */
+}

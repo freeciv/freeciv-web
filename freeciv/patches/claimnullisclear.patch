@@ -1,0 +1,18 @@
+diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
+--- freeciv/server/maphand.c	2014-11-24 19:01:12.659261574 +0200
++++ freeciv/server/maphand.c	2014-11-27 05:46:56.242799858 +0200
+@@ -1957,6 +1957,14 @@
+     return;
+   }
+ 
++  if (owner == NULL) {
++    /* Clear the border instead of claiming. Code below this block
++     * cannot handle NULL owner. */
++    map_clear_border(ptile);
++
++    return;
++  }
++
+   circle_dxyr_iterate(ptile, radius_sq, dtile, dx, dy, dr) {
+     struct tile *dclaimer = tile_claimer(dtile);
+ 

@@ -27,6 +27,10 @@ class StatusHandler(web.RequestHandler):
     game_count = 0;
     for server in self.metachecker.server_list:
       game_count += server.num_start;
+    error_count = 0;
+    for server in self.metachecker.server_list:
+      error_count += server.num_error;
+
       
     self.write("<html><head><title>Publite2 status for Freeciv-web</title>" + 
                "<link href='//play.freeciv.org/css/bootstrap.min.css' rel='stylesheet'>" +
@@ -42,6 +46,7 @@ class StatusHandler(web.RequestHandler):
                "<tr><td>Number of HTTP checks against metaserver: </td><td>" + str(self.metachecker.check_count) + "</td></tr>" +
                "<tr><td>Last response from metaserver: </td><td>" + str(self.metachecker.html_doc) + "</td></tr>" +
                "<tr><td>Last HTTP status from metaserver: </td><td>" + str(self.metachecker.last_http_status) + "</td></tr>" +
+               "<tr><td>Number of Freeciv servers stopped by error:</td><td>" + str(error_count) + "</td></tr>" +
                "</table>")
     self.write("<h3>Running Freeciv-web servers:</h3>");
     self.write("<table><tr><td>Server Port</td><td>Type</td><td>Started time</td><td>Restarts</td><td>Errors</td></tr>");

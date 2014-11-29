@@ -27,6 +27,15 @@ var autostart = false;
 
 var username = null;
 
+var music_list = [ "battle-epic.ogg", 
+                   "andrewbeck-ancient.ogg", 
+                   "into_the_shadows.ogg",
+                   "andrewbeck-stings.ogg",
+                   "trap_a_space_odyssey_battle_for_the_planet.ogg",
+                   "elvish-theme.ogg",
+                   "cullambruce-lockhart-dawning_fanfare.ogg"];
+var audio = null;
+
 /**************************************************************************
  Main starting point for Freeciv-web 
 **************************************************************************/
@@ -101,6 +110,20 @@ function civclient_init()
   $('#tabs').tabs({ heightStyle: "fill" });
   $('#tabs').css("height", $(window).height());
   $(".button").button();
+
+  /* Initialze audio.js music player */
+  audiojs.events.ready(function() {
+    var as = audiojs.createAll({
+          trackEnded: function() {
+            audio.load("/music/" + music_list[Math.floor(Math.random() * music_list.length)]);
+            audio.play();
+          }
+        });
+    as[0].load("/music/" + music_list[Math.floor(Math.random() * music_list.length)]);
+    audio = as[0];
+ });
+
+
 }
 
 /**************************************************************************

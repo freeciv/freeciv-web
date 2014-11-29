@@ -9,6 +9,7 @@ var ts="${initParam.buildTimeStamp}";
 </script>
 <script type="text/javascript" src="/javascript/jquery.min.js?ts=${initParam.buildTimeStamp}"></script>
 <script type="text/javascript" src="/javascript/webclient.min.js?ts=${initParam.buildTimeStamp}"></script>
+<script type="text/javascript" src="/music/audio.min.js"></script>
 
 <link rel="shortcut icon" href="/images/freeciv-shortcut-icon.png" />
 <link rel="apple-touch-icon" href="/images/freeciv-splash2.png" />

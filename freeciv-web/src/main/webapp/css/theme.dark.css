@@ -83,10 +83,10 @@
 }
 
 /* Zebra Widget - row alternating colors */
-.tablesorter-dark tr.odd td {
+.tablesorter-dark tr.odd > td {
 	background-color: #202020;
 }
-.tablesorter-dark tr.even td {
+.tablesorter-dark tr.even > td {
 	background-color: #101010;
 }
 
@@ -146,7 +146,7 @@ caption {
 	line-height: 0;
 	cursor: pointer;
 }
-.tablesorter-dark .tablesorter-filter-row.hideme .tablesorter-filter {
+.tablesorter-dark .tablesorter-filter-row.hideme * {
 	height: 1px;
 	min-height: 0;
 	border: 0;
@@ -173,6 +173,10 @@ caption {
 	-moz-transition: height 0.1s ease;
 	-o-transition: height 0.1s ease;
 	transition: height 0.1s ease;
+}
+/* rows hidden by filtering (needed for child rows) */
+.tablesorter .filtered {
+	display: none;
 }
 
 /* ajax error row */

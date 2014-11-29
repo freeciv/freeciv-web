@@ -539,7 +539,7 @@ function update_unit_order_commands()
 
   if (is_touch_device()) {
     $(".context-menu-list").css("width", "600px");
-    $(".context-menu-item").css("font-size", "200%");
+    $(".context-menu-item").css("font-size", "220%");
   }
   $(".context-menu-list").css("z-index", 5000);
 

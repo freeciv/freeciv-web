@@ -27,13 +27,13 @@ var autostart = false;
 
 var username = null;
 
-var music_list = [ "battle-epic.ogg", 
-                   "andrewbeck-ancient.ogg", 
-                   "into_the_shadows.ogg",
-                   "andrewbeck-stings.ogg",
-                   "trap_a_space_odyssey_battle_for_the_planet.ogg",
-                   "elvish-theme.ogg",
-                   "cullambruce-lockhart-dawning_fanfare.ogg"];
+var music_list = [ "battle-epic", 
+                   "andrewbeck-ancient", 
+                   "into_the_shadows",
+                   "andrewbeck-stings",
+                   "trap_a_space_odyssey_battle_for_the_planet",
+                   "elvish-theme",
+                   "cullambruce-lockhart-dawning_fanfare"];
 var audio = null;
 
 /**************************************************************************
@@ -115,12 +115,21 @@ function civclient_init()
   audiojs.events.ready(function() {
     var as = audiojs.createAll({
           trackEnded: function() {
-            audio.load("/music/" + music_list[Math.floor(Math.random() * music_list.length)]);
+            if (!supports_mp3()) {
+              audio.load("/music/" + music_list[Math.floor(Math.random() * music_list.length)] + ".ogg");
+            } else {
+              audio.load("/music/" + music_list[Math.floor(Math.random() * music_list.length)] + ".mp3");
+            }
             audio.play();
           }
         });
-    as[0].load("/music/" + music_list[Math.floor(Math.random() * music_list.length)]);
     audio = as[0];
+    if (!supports_mp3()) {
+      audio.load("/music/" + music_list[Math.floor(Math.random() * music_list.length)] + ".ogg");
+    } else {
+      audio.load("/music/" + music_list[Math.floor(Math.random() * music_list.length)] + ".mp3");
+    }
+
  });
 
 

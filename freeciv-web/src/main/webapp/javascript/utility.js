@@ -121,3 +121,11 @@ function to_title_case(str)
 function get_random_int(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
+
+/**************************************************************************
+...
+**************************************************************************/
+function supports_mp3() {
+  var a = document.createElement('audio');
+  return !!(a.canPlayType && a.canPlayType('audio/mpeg;').replace(/no/, ''));
+}

@@ -35,6 +35,7 @@ var music_list = [ "battle-epic",
                    "elvish-theme",
                    "cullambruce-lockhart-dawning_fanfare"];
 var audio = null;
+var audio_enabled = false;
 
 /**************************************************************************
  Main starting point for Freeciv-web 
@@ -124,12 +125,7 @@ function civclient_init()
           }
         });
     audio = as[0];
-    if (!supports_mp3()) {
-      audio.load("/music/" + music_list[Math.floor(Math.random() * music_list.length)] + ".ogg");
-    } else {
-      audio.load("/music/" + music_list[Math.floor(Math.random() * music_list.length)] + ".mp3");
-    }
-
+ 
  });
 
 

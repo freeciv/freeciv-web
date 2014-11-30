@@ -239,6 +239,8 @@ function pregame_settings()
   var dhtml = "<table id='settings_table'>" +
   	  "<tr title='Set metaserver info line'><td>Game title:</td>" +
 	  "<td><input type='text' name='metamessage' id='metamessage' size='28' maxlength='42'></td></tr>" +
+	  "<tr title='Enables music'><td>Music</td>" +
+          "<td><input type='checkbox' name='music_setting' id='music_setting'>Play Music</td></tr>" + 
 	  "<tr title='Total number of players (including AI players)'><td>Number of Players (including AI):</td>" +
 	  "<td><input type='number' name='aifill' id='aifill' size='4' length='3' min='0' max='20' step='1'></td></tr>" +
 	  "<tr title='Maximum seconds per turn'><td>Timeout (seconds per turn):</td>" +
@@ -403,6 +405,25 @@ function pregame_settings()
     }
     var myJSONText = JSON.stringify(test_packet);
     send_request (myJSONText);
+  });
+
+  $('#music_setting').prop('checked', audio_enabled == true);
+
+  $('#music_setting').change(function() {
+    audio_enabled = !audio_enabled;
+    if (audio_enabled) {
+      if (!audio.source.src) {
+        if (!supports_mp3()) {
+          audio.load("/music/" + music_list[Math.floor(Math.random() * music_list.length)] + ".ogg");
+        } else {
+          audio.load("/music/" + music_list[Math.floor(Math.random() * music_list.length)] + ".mp3");
+        }
+      }
+      audio.play();
+    } else {
+      audio.pause();
+    }
+
   });
 
   $("#settings_table").tooltip();

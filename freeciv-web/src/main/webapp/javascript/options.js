@@ -147,6 +147,14 @@ function init_options_dialog()
     send_request (myJSONText);
   });
 
+  if (!audio.source.src) {
+    if (!supports_mp3()) {
+      audio.load("/music/" + music_list[Math.floor(Math.random() * music_list.length)] + ".ogg");
+    } else {
+      audio.load("/music/" + music_list[Math.floor(Math.random() * music_list.length)] + ".mp3");
+    }
+  }
+
 
   $(".setting_button").tooltip();
 

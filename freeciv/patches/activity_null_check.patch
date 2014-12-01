@@ -1,0 +1,17 @@
+diff --git a/server/unittools.c b/server/unittools.c
+index 8a166fb..0b9fdfa 100644
+--- a/server/unittools.c
++++ b/server/unittools.c
+@@ -3769,7 +3769,11 @@ bool execute_orders(struct unit *punit)
+           send_unit_info(NULL, punit);
+           break;
+         } else {
+-          if ((activity == ACTIVITY_BASE
++
++          if (pextra == NULL) {
++            log_error("No extra for ordered unit");
++            return TRUE;
++          } else if ((activity == ACTIVITY_BASE
+                || activity == ACTIVITY_GEN_ROAD
+                || activity == ACTIVITY_IRRIGATE
+                || activity == ACTIVITY_MINE)

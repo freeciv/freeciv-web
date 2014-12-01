@@ -145,7 +145,8 @@ function save_game()
 	  "</td></tr></table><br>" +
 	  "<span id='settings_info'><i>Freeciv-web allows you to save games. Games are stored in your web " +
 	  "browser using HTML5 localstorage. Saved games will be stored in your browser until you clear" +
-	  " your browser cache. Savegames are tied to your username " + username + ".<br><br>" 
+	  " your browser cache. Savegames are tied to your username " + username + ".<br><br>" +
+          "Savegame usage: " + simpleStorage.storageSize() + " of 5200000."; 
 
 
   $("#dialog").html(dhtml);
@@ -155,6 +156,13 @@ function save_game()
 			modal: true,
 			width: is_small_screen() ? "90%" : "40%",
 			buttons: {
+                                "Delete Savegames": function() {
+					var r = confirm("Do you really want to delete your savegames?");
+					if (r) {
+					  $("#dialog").dialog('close');
+					  simpleStorage.flush();
+					}
+				},
 				"Save Game": function() {
 					keyboard_input = true;
 					savename = $("#savegamename").val()
@@ -207,7 +215,7 @@ function save_game_send()
   var test_packet = {"type" : packet_chat_msg_req, "message" : "/save"};
   var myJSONText = JSON.stringify(test_packet);
   send_request(myJSONText);
-  sTimerId = setTimeout(save_game_fetch,  3000);
+  sTimerId = setTimeout(save_game_fetch,  3500);
 
 }
 
@@ -229,15 +237,19 @@ function save_game_fetch()
       console.log("Savegame-count: " + savegame_count);
       console.log("Savegame size: " + saved_file.length);
 
-      simpleStorage.set("savegame-file-" + savegame_count, saved_file);
-      simpleStorage.set("savegame-savename-" + savegame_count, savename);
-      simpleStorage.set("savegame-username-" + savegame_count, username);
-      simpleStorage.set("savegame-count" , savegame_count);
-      $.unblockUI();
-      swal("Game saved successfully");
+      if (simpleStorage.set("savegame-file-" + savegame_count, saved_file) === true 
+          && simpleStorage.set("savegame-savename-" + savegame_count, savename) === true
+          && simpleStorage.set("savegame-username-" + savegame_count, username) === true
+          && simpleStorage.set("savegame-count" , savegame_count) === true) {
+        $.unblockUI();
+        swal("Game saved successfully");
+      } else {
+        $.unblockUI();
+        swal("Failed saving game because of browser local storage error. Check savegame usage.");
+      }
     }).fail(function() { 
-	    swal("Failed saving game");
 	    $.unblockUI();
+	    swal("Failed saving game because of server error.");
     });
 }
 
@@ -267,9 +279,9 @@ function load_game_dialog()
     }
   }
 
-
-  saveHtml += "</ol><br><span id='savegame_note'>Note: Savegames are stored using HTML5 local storage in your browser. "+
-	  "Clearing your browser cache will also clear your savegames. Savegames are stored with your username.</span>";
+  saveHtml += "</ol><br><span id='savegame_note'>Savegame usage: " + simpleStorage.storageSize() 
+           + " of 5200000.<br>Note: Savegames are stored using HTML5 local storage in your browser."
+	   + " Clearing your browser cache will also clear your savegames. Savegames are stored with your username.</span>";
 
   $("#dialog").html(saveHtml);
   $("#dialog").attr("title", "Please select game to resume playing:");
@@ -298,7 +310,7 @@ function load_game_dialog()
 					if (r) {
 					  $("#dialog").dialog('close');
 					  $("#game_text_input").blur();
-					  simpleStorage.set("savegame-count" , 0);
+					  simpleStorage.flush();
 					}
 				}
 			}

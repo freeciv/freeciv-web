@@ -378,6 +378,9 @@ actor_reqs    =
 [actionenabler_traderoute]
 action = "Establish Trade Route"
 
+[actionenabler_marketplace]
+action = "Enter Marketplace"
+
 [borders]
 ; Base border radius from city.
 radius_sq_city = 17

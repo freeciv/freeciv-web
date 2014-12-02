@@ -205,6 +205,13 @@ function popup_action_selection(actor_unit, action_probabilities,
              + format_action_probability(action_probabilities[ACTION_TRADE_ROUTE])
              + "'>";
   }
+  if (action_probabilities[ACTION_MARKETPLACE] != 0) {
+    dhtml += "<input id='act_sel_market" + actor_unit['id']
+             + "' class='act_sel_button' type='button' value='"
+             + "Enter Marketplace"
+             + format_action_probability(action_probabilities[ACTION_MARKETPLACE])
+             + "'>";
+  }
   if (actor_unit['caravan_wonder']) {
     dhtml += "<input id='act_sel_wonder" + actor_unit['id']
     + "' class='act_sel_button' type='button' value='Help build Wonder'>"
@@ -376,6 +383,19 @@ function popup_action_selection(actor_unit, action_probabilities,
         "target_id": target_city['id'],
         "value" : 0,
         "action_type": ACTION_TRADE_ROUTE};
+        send_request (JSON.stringify(packet));
+
+        $(id).remove();
+    });
+  }
+
+  if (action_probabilities[ACTION_MARKETPLACE] != 0) {
+    $("#act_sel_market" + actor_unit['id']).click(function() {
+      var packet = {"type" : packet_unit_do_action,
+        "actor_id" : actor_unit['id'],
+        "target_id": target_city['id'],
+        "value" : 0,
+        "action_type": ACTION_MARKETPLACE};
         send_request (JSON.stringify(packet));
 
         $(id).remove();

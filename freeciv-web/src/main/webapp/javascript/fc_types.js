@@ -49,7 +49,8 @@ var ACTION_SPY_INVESTIGATE_CITY = 9;
 var ACTION_SPY_STEAL_GOLD = 10;
 var ACTION_TRADE_ROUTE = 11;
 var ACTION_MARKETPLACE = 12;
-var ACTION_COUNT = 13;
+var ACTION_HELP_WONDER = 13;
+var ACTION_COUNT = 14;
 
 /* Used to signal a move without any action. */
 var ACTION_MOVE = ACTION_COUNT;

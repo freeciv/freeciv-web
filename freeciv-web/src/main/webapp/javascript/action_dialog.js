@@ -212,9 +212,12 @@ function popup_action_selection(actor_unit, action_probabilities,
              + format_action_probability(action_probabilities[ACTION_MARKETPLACE])
              + "'>";
   }
-  if (actor_unit['caravan_wonder']) {
+  if (action_probabilities[ACTION_HELP_WONDER] != 0) {
     dhtml += "<input id='act_sel_wonder" + actor_unit['id']
-    + "' class='act_sel_button' type='button' value='Help build Wonder'>"
+             + "' class='act_sel_button' type='button' value='"
+             + "Help build Wonder"
+             + format_action_probability(action_probabilities[ACTION_HELP_WONDER])
+             + "'>";
   }
   if (action_probabilities[ACTION_SPY_BRIBE_UNIT] != 0) {
     dhtml += "<input id='act_sel_bribe" + actor_unit['id']
@@ -402,11 +405,13 @@ function popup_action_selection(actor_unit, action_probabilities,
     });
   }
 
-  if (actor_unit['caravan_wonder']) {
+  if (action_probabilities[ACTION_HELP_WONDER] != 0) {
     $("#act_sel_wonder" + actor_unit['id']).click(function() {
-        var packet = {"type" : packet_unit_help_build_wonder,
-                       "unit_id": actor_unit['id'],
-                       "city_id" : target_city['id']};
+      var packet = {"type" : packet_unit_do_action,
+        "actor_id" : actor_unit['id'],
+        "target_id": target_city['id'],
+        "value" : 0,
+        "action_type": ACTION_HELP_WONDER};
         send_request (JSON.stringify(packet));
 
         $(id).remove();

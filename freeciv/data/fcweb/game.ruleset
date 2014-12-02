@@ -331,6 +331,9 @@ action = "Establish Trade Route"
 [actionenabler_marketplace]
 action = "Enter Marketplace"
 
+[actionenabler_help_build_wonder]
+action = "Help Wonder"
+
 [borders]
 ; Base border radius from city.
 radius_sq_city = 17

@@ -472,16 +472,6 @@ function handle_unit_packet_common(packet_unit)
     }
   }
 
-  if (packet_unit['caravan_wonder']
-      && unit_owner(packet_unit) == client.conn.playing
-      && !client_is_observer()) {
-    var act_prob = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    var target_tile = index_to_tile(packet_unit['tile']);
-    popup_action_selection(packet_unit, act_prob,
-                           target_tile, null,
-                           tile_city(target_tile));
-  }
-
   /* TODO: update various dialogs and mapview. */
 }
 

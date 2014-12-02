@@ -198,9 +198,12 @@ function popup_action_selection(actor_unit, action_probabilities,
              + format_action_probability(action_probabilities[ACTION_SPY_POISON])
              + "'>";
   }
-  if (actor_unit['caravan_trade']) {
+  if (action_probabilities[ACTION_TRADE_ROUTE] != 0) {
     dhtml += "<input id='act_sel_trade" + actor_unit['id']
-    + "' class='act_sel_button' type='button' value='Establish Traderoute'>"
+             + "' class='act_sel_button' type='button' value='"
+             + "Establish Traderoute"
+             + format_action_probability(action_probabilities[ACTION_TRADE_ROUTE])
+             + "'>";
   }
   if (actor_unit['caravan_wonder']) {
     dhtml += "<input id='act_sel_wonder" + actor_unit['id']
@@ -366,12 +369,13 @@ function popup_action_selection(actor_unit, action_probabilities,
     });
   }
 
-  if (actor_unit['caravan_trade']) {
+  if (action_probabilities[ACTION_TRADE_ROUTE] != 0) {
     $("#act_sel_trade" + actor_unit['id']).click(function() {
-        var packet = {"type" : packet_unit_establish_trade,
-                       "unit_id": actor_unit['id'],
-                       "city_id" : target_city['id'],
-                       "est_if_able" : true};
+      var packet = {"type" : packet_unit_do_action,
+        "actor_id" : actor_unit['id'],
+        "target_id": target_city['id'],
+        "value" : 0,
+        "action_type": ACTION_TRADE_ROUTE};
         send_request (JSON.stringify(packet));
 
         $(id).remove();

@@ -375,6 +375,9 @@ actor_reqs    =
       "Tech", "Banking", "Player", TRUE
     }
 
+[actionenabler_traderoute]
+action = "Establish Trade Route"
+
 [borders]
 ; Base border radius from city.
 radius_sq_city = 17

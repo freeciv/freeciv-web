@@ -16,14 +16,10 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
 diff -Nurd -X.diff_ignore freeciv/server/unittools.c freeciv/server/unittools.c
 --- freeciv/server/unittools.c	2012-08-08 00:18:29.000000000 +0300
 +++ freeciv/server/unittools.c	2012-08-08 00:27:02.000000000 +0300
-@@ -2024,6 +2024,15 @@
+@@ -2024,6 +2024,11 @@
      packet->orders_repeat = packet->orders_vigilant = FALSE;
      /* No need to initialize array. */
    }
-+
-+  packet->caravan_trade = (unit_has_type_flag(punit, UTYF_TRADE_ROUTE)
-+	   && !unit_has_orders(punit)
-+	   && unit_can_est_trade_route_here(punit));
 +
 +  packet->caravan_wonder = (unit_has_type_flag(punit, UTYF_HELP_WONDER)
 +	   && !unit_has_orders(punit)

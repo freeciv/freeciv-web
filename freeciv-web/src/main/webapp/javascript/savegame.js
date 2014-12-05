@@ -146,7 +146,7 @@ function save_game()
 	  "<span id='settings_info'><i>Freeciv-web allows you to save games. Games are stored in your web " +
 	  "browser using HTML5 localstorage. Saved games will be stored in your browser until you clear" +
 	  " your browser cache. Savegames are tied to your username " + username + ".<br><br>" +
-          "Savegame usage: " + simpleStorage.storageSize() + " of 5200000."; 
+          "Savegame usage: " + Math.floor(simpleStorage.storageSize() / 1000) + " of 5200 kB."; 
 
 
   $("#dialog").html(dhtml);
@@ -279,8 +279,8 @@ function load_game_dialog()
     }
   }
 
-  saveHtml += "</ol><br><span id='savegame_note'>Savegame usage: " + simpleStorage.storageSize() 
-           + " of 5200000.<br>Note: Savegames are stored using HTML5 local storage in your browser."
+  saveHtml += "</ol><br><span id='savegame_note'>Savegame usage: " + Math.floor(simpleStorage.storageSize() / 1000)
+           + " of 5200 kB.<br>Note: Savegames are stored using HTML5 local storage in your browser."
 	   + " Clearing your browser cache will also clear your savegames. Savegames are stored with your username.</span>";
 
   $("#dialog").html(saveHtml);

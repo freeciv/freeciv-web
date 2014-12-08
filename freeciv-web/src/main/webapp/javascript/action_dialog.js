@@ -84,6 +84,17 @@ function can_actor_unit_move(actor_unit, target_tile)
   return true;
 }
 
+/**************************************************************************
+  Encode a building ID for transfer in the value field of
+  packet_unit_do_action for targeted sabotage city.
+**************************************************************************/
+function encode_building_id(building_id)
+{
+  /* Building ID is encoded in the value field by adding one so the
+   * building ID -1 (current production) can be transferred. */
+  return building_id + 1;
+}
+
 /****************************************************************************
   Format the probability that an action will be a success.
 ****************************************************************************/
@@ -304,7 +315,7 @@ function popup_action_selection(actor_unit, action_probabilities,
         "actor_id" : actor_unit['id'],
         "target_id": target_city['id'],
         /* FIXME: Let the player choose the target. */
-        "value" : B_LAST,
+        "value" : encode_building_id(B_LAST),
         "action_type": ACTION_SPY_TARGETED_SABOTAGE_CITY};
         send_request (JSON.stringify(packet));
 

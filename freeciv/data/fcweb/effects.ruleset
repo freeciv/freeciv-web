@@ -695,26 +695,30 @@ reqs	=
       "Gov", "Democracy", "Player"
     }
 
-[effect_partisan_0]
+[effect_partisans_communism]
 type    = "Inspire_Partisans"
 value   = 1
 reqs	=
-    { "type",       "name",      "range"
-      "Gov", "Communism", "Player"
-      "Tech", "Communism", "Player"
-      "Tech", "Gunpowder", "Player"
-      "Tech", "Guerilla Warfare", "World"
+    { "type", "name", "range", "present"
+      "Gov", "Communism", "Player", TRUE
+      "Tech", "Communism", "Player", TRUE
+      "Tech", "Gunpowder", "Player", TRUE
+      "Tech", "Guerilla Warfare", "World", TRUE
+      "Nation", "Barbarian", "Player", FALSE
+      "Nation", "Pirate", "Player", FALSE
     }
 
-[effect_partisan_1]
+[effect_partisans_democracy]
 type    = "Inspire_Partisans"
 value   = 1
 reqs	=
-    { "type",       "name",      "range"
-      "Gov", "Democracy", "Player"
-      "Tech", "Communism", "Player"
-      "Tech", "Gunpowder", "Player"
-      "Tech", "Guerilla Warfare", "World"
+    { "type", "name", "range", "present"
+      "Gov", "Democracy", "Player", TRUE
+      "Tech", "Communism", "Player", TRUE
+      "Tech", "Gunpowder", "Player", TRUE
+      "Tech", "Guerilla Warfare", "World", TRUE
+      "Nation", "Barbarian", "Player", FALSE
+      "Nation", "Pirate", "Player", FALSE
     }
 
 [effect_airport]

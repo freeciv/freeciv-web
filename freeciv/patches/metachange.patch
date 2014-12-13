@@ -39,12 +39,12 @@ Index: freeciv/server/meta.h
 ===================================================================
 --- freeciv/server/meta.h	(revision 24891)
 +++ freeciv/server/meta.h	(working copy)
-@@ -17,13 +17,14 @@
+@@ -19,13 +19,14 @@
  
  #define DEFAULT_META_SERVER_NO_SEND  TRUE
- #define DEFAULT_META_SERVER_ADDR     META_URL /* fc_config.h */
+ #define DEFAULT_META_SERVER_ADDR     FREECIV_META_URL
 -#define METASERVER_REFRESH_INTERVAL   (3*60)
-+#define METASERVER_REFRESH_INTERVAL   (60)
++#define METASERVER_REFRESH_INTERVAL   60
  #define METASERVER_MIN_UPDATE_INTERVAL 7   /* not too short, not too long */
  
  enum meta_flag {

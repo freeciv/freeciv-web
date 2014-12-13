@@ -21,8 +21,8 @@ options="+Freeciv-ruleset-Devel-2014.September.14c web-compatible"
 ; helptxt       = displayed in the help for terrains with this flag (optional)
 flags =
   { "name", "helptxt"
-    "Oil", _("Has Oil Well instead of Mine.")
-    "NoPollution", _("No Pollution nor Fallout appear here.")
+    _("Oil"), _("Has Oil Well instead of Mine.")
+    _("NoPollution"), _("No Pollution nor Fallout appear here.")
   }
 
 [parameters]

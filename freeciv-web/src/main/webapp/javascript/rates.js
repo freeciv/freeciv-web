@@ -294,8 +294,12 @@ function update_sci_rates ()
 **************************************************************************/
 function submit_player_rates()
 {
-  var packet = {"type" : packet_player_rates, 
-                "tax" : tax, "luxury" : lux, "science" : sci };
-  send_request (JSON.stringify(packet));
+  if (tax >= 0 && tax <= 100 && lux >= 0 && lux <= 100 && sci >= 0 && sci <= 100) {
+    var packet = {"type" : packet_player_rates, 
+                  "tax" : tax, "luxury" : lux, "science" : sci };
+    send_request (JSON.stringify(packet));
+  } else {
+    swal("Invalid tax rate values");
+  }
 }
 

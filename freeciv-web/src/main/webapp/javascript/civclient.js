@@ -58,7 +58,12 @@ function civclient_init()
   $.blockUI.defaults['css']['color'] = "#fff";
   $.blockUI.defaults['theme'] = true;
 
-  if ($.getUrlVar('action') == "observe") observing = true;
+  if ($.getUrlVar('action') == "observe") {
+    observing = true;
+    $("#civ_tab").remove();
+    $("#pregame_buttons").remove();
+    $("#game_unit_orders_default").remove();
+  }
 
   game_init();
   init_mapview();

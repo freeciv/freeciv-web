@@ -763,3 +763,8 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 .context-menu-item {
   font-size: 140%;
 }
+
+.chatbox_text_tileinfo {
+  cursor:pointer;
+  cursor:hand;
+}

@@ -45,6 +45,16 @@ function center_tile_mapcanvas(ptile)
   
 }
 
+/**************************************************************************
+  Centers the mapview around tile with given id.
+**************************************************************************/
+function center_tile_id(ptile_id)
+{
+  var ptile = tiles[ptile_id];
+  center_tile_mapcanvas(ptile);
+}
+
+
 /****************************************************************************
   Translate from a cartesian system to the GUI system.  This function works
   on vectors, meaning it can be passed a (dx,dy) pair and will return the

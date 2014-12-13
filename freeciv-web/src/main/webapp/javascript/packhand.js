@@ -148,6 +148,7 @@ function handle_chat_msg(packet)
   var message = packet['message'];
   var conn_id = packet['conn_id'];
   var event = packet['event'];
+  var ptile = packet['tile'];
   
   if (connections[conn_id] != null) {
     var username = connections[conn_id]['username'];
@@ -158,7 +159,12 @@ function handle_chat_msg(packet)
       message = message.replace(regxp, "<br>\n");
       show_dialog_message("Message for you:", message);
     } else {
-      add_chatbox_text(message);
+      if (ptile != null && ptile > 0) {
+        add_chatbox_text("<span class='chatbox_text_tileinfo' " 
+             + "onclick='center_tile_id(" + ptile + ");'>" + message + "</span>");
+      } else {
+        add_chatbox_text(message);
+      }
     }
   }
 }

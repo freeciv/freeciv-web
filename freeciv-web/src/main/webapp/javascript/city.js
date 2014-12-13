@@ -622,7 +622,8 @@ function city_name_dialog(suggested_name, unit_id) {
 					text: "Ok",
 				        click: function() {
 						var name = $("#city_name_req").val();
-						if (name.length == 0 || name.length >= MAX_LEN_NAME - 4) {
+						if (name.length == 0 || name.length >= MAX_LEN_NAME - 4 
+						    || encodeURIComponent(name).length  >= MAX_LEN_NAME - 4) {
 						  swal("City name is invalid");
 						  return;
 						}
@@ -815,7 +816,8 @@ function rename_city()
 					text: "Ok",
 				        click: function() {
 						var name = $("#city_name_req").val();
-						if (name.length == 0 || name.length >= MAX_LEN_NAME - 4) {
+						if (name.length == 0 || name.length >= MAX_LEN_NAME - 4 
+						    || encodeURIComponent(name).length  >= MAX_LEN_NAME - 4) {
 						  swal("City name is invalid");
 						  return;
 						}

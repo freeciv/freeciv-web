@@ -32,13 +32,13 @@ class Civlauncher(Thread):
                                str(1000 + self.new_port) + " > " + logdir + "freeciv-proxy-" + 
                                str(1000 + self.new_port) +".log 2>&1 " + 
                                "& proxy_pid=$! && " +
-                               "freeciv-web --port " + str(self.new_port) + 
+                               "freeciv-web --debug=1 --port " + str(self.new_port) + 
                                " -q 20 --Announce none -e " +
                                " -m -M http://" + self.metahostpath  + " --type \"" + self.gametype +
                                "\" --read " + pubscript + self.gametype + ".serv" + 
-                               " --log " + logdir + "fcweb-" + str(self.new_port) + ".log " +
-                               "--saves " + self.savesdir + " > " +  logdir + "freeciv-web-" +
-                               str(self.new_port) + ".log  2>&1 " +
+                               " --log " + logdir + "freeciv-web-log-" + str(self.new_port) + ".log " +
+                               "--saves " + self.savesdir + " > /dev/null " + 
+                               " 2> " +  logdir + "freeciv-web-stderr-" +  str(self.new_port) + ".log " +
                                " ; rc=$?; kill -9 $proxy_pid; exit $rc", shell=True)
                 self.num_start += 1;
                 if retcode > 0:

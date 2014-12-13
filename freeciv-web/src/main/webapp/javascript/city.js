@@ -622,6 +622,11 @@ function city_name_dialog(suggested_name, unit_id) {
 					text: "Ok",
 				        click: function() {
 						var name = $("#city_name_req").val();
+						if (name.length == 0 || name.length >= MAX_LEN_NAME - 4) {
+						  swal("City name is invalid");
+						  return;
+						}
+
 						var packet = {"type" : packet_unit_build_city, "name" : encodeURIComponent(name), "unit_id" : unit_id };
 						send_request (JSON.stringify(packet));
 						$("#city_name_dialog").remove();
@@ -630,6 +635,8 @@ function city_name_dialog(suggested_name, unit_id) {
 					}
 				]
 		});
+
+  $("#city_name_req").attr('maxlength', MAX_LEN_NAME);
 	
   $("#city_name_dialog").dialog('open');		
 
@@ -808,6 +815,11 @@ function rename_city()
 					text: "Ok",
 				        click: function() {
 						var name = $("#city_name_req").val();
+						if (name.length == 0 || name.length >= MAX_LEN_NAME - 4) {
+						  swal("City name is invalid");
+						  return;
+						}
+
 						var packet = {"type" : packet_city_rename, "name" : encodeURIComponent(name), "city_id" : active_city['id'] };
 						send_request (JSON.stringify(packet));
 						$("#city_name_dialog").remove();
@@ -816,6 +828,7 @@ function rename_city()
 					}
 				]
 		});
+  $("#city_name_req").attr('maxlength', MAX_LEN_NAME);
 	
   $("#city_name_dialog").dialog('open');		
 

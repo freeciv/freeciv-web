@@ -15,6 +15,7 @@ var TRUE = true;
 var FALSE = false;
 
 var MAX_NUM_ITEMS = 200;
+var MAX_LEN_NAME = 48;
 
 var FC_INFINITY = (1000 * 1000 * 1000);
 

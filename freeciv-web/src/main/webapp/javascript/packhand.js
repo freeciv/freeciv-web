@@ -983,7 +983,7 @@ function handle_research_info(packet)
 
   if (!client_is_observer() && old_inventions != null && client.conn.playing['playerno'] == packet['id']) {
     for (var i = 0; i < packet['inventions'].length; i++) {
-      if (packet['inventions'][i] != old_inventions[i]) {
+      if (packet['inventions'][i] != old_inventions[i] && packet['inventions'][i] == TECH_KNOWN) {
         show_tech_gained_dialog(i);
 	break;
       }

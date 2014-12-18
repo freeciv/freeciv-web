@@ -193,7 +193,6 @@ actor_reqs    =
     { "type",   "name", "range", "present"
       "UnitFlag", "Diplomat", "Local", TRUE
       "DiplRel", "War", "Local", TRUE
-      "UnitFlag", "Spy", "Local", FALSE
       "UnitState", "TransportDependent", "Local", FALSE
       "MinMoveFrags", "1", "Local", TRUE
     }
@@ -250,7 +249,6 @@ action = "Steal Tech"
 actor_reqs    =
     { "type",   "name", "range", "present"
       "UnitFlag", "Diplomat", "Local", TRUE
-      "UnitFlag", "Spy", "Local", FALSE
       "UnitState", "TransportDependent", "Local", FALSE
       "MinMoveFrags", "1", "Local", TRUE
     }

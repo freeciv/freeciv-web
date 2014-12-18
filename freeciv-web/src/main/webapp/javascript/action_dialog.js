@@ -167,25 +167,11 @@ function popup_action_selection(actor_unit, action_probabilities,
              + format_action_probability(action_probabilities[ACTION_SPY_SABOTAGE_CITY])
              + "'>";
   }
-  if (action_probabilities[ACTION_SPY_TARGETED_SABOTAGE_CITY] != 0) {
-    dhtml += "<input id='act_sel_sab_tgt" + actor_unit['id']
-             + "' class='act_sel_button' type='button' value='"
-             + "Industrial Sabotage"
-             + format_action_probability(action_probabilities[ACTION_SPY_TARGETED_SABOTAGE_CITY])
-             + "'>";
-  }
   if (action_probabilities[ACTION_SPY_STEAL_TECH] != 0) {
     dhtml += "<input id='act_sel_tech" + actor_unit['id']
              + "' class='act_sel_button' type='button' value='"
              + "Steal Technology"
              + format_action_probability(action_probabilities[ACTION_SPY_STEAL_TECH])
-             + "'>";
-  }
-  if (action_probabilities[ACTION_SPY_TARGETED_STEAL_TECH] != 0) {
-    dhtml += "<input id='act_sel_tech_tgt" + actor_unit['id']
-             + "' class='act_sel_button' type='button' value='"
-             + "Industrial Espionage"
-             + format_action_probability(action_probabilities[ACTION_SPY_TARGETED_STEAL_TECH])
              + "'>";
   }
   if (action_probabilities[ACTION_SPY_STEAL_GOLD] != 0) {
@@ -309,20 +295,6 @@ function popup_action_selection(actor_unit, action_probabilities,
     });
   }
 
-  if (action_probabilities[ACTION_SPY_TARGETED_SABOTAGE_CITY] != 0) {
-    $("#act_sel_sab_tgt" + actor_unit['id']).click(function() {
-      var packet = {"type" : packet_unit_do_action,
-        "actor_id" : actor_unit['id'],
-        "target_id": target_city['id'],
-        /* FIXME: Let the player choose the target. */
-        "value" : encode_building_id(B_LAST),
-        "action_type": ACTION_SPY_TARGETED_SABOTAGE_CITY};
-        send_request (JSON.stringify(packet));
-
-        $(id).remove();
-    });
-  }
-
   var last_tech = 0;
 
   if (action_probabilities[ACTION_SPY_STEAL_TECH] != 0) {
@@ -332,20 +304,6 @@ function popup_action_selection(actor_unit, action_probabilities,
                      "target_id": target_city['id'],
                      "value" : last_tech, 
                      "action_type": ACTION_SPY_STEAL_TECH};
-      send_request (JSON.stringify(packet));
-
-      $(id).remove();
-    });
-  }
-
-  if (action_probabilities[ACTION_SPY_TARGETED_STEAL_TECH] != 0) {
-    $("#act_sel_tech_tgt" + actor_unit['id']).click(function() {
-      var packet = {"type" : packet_unit_do_action,
-                     "actor_id" : actor_unit['id'],
-                     "target_id": target_city['id'],
-                     /* FIXME: Let the player choose the target. */
-                     "value" : A_UNSET,
-                     "action_type": ACTION_SPY_TARGETED_STEAL_TECH};
       send_request (JSON.stringify(packet));
 
       $(id).remove();

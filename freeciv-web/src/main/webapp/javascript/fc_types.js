@@ -36,6 +36,8 @@ var ACTIVITY_GEN_ROAD = 19;
 var ACTIVITY_CONVERT = 20;
 var ACTIVITY_LAST = 21;   /* leave this one last */
 
+var IDENTITY_NUMBER_ZERO = 0;
+
 /* Actions */
 var ACTION_SPY_POISON = 0;
 var ACTION_SPY_SABOTAGE_UNIT = 1;

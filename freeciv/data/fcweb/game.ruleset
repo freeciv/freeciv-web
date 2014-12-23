@@ -331,6 +331,10 @@ action = "Enter Marketplace"
 
 [actionenabler_help_build_wonder]
 action = "Help Wonder"
+actor_reqs    =
+    { "type",   "name", "range", "present"
+      "DiplRel", "Is foreign", "Local", FALSE
+    }
 
 [borders]
 ; Base border radius from city.

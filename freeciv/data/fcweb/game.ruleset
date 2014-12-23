@@ -325,9 +325,17 @@ target_reqs    =
 
 [actionenabler_traderoute]
 action = "Establish Trade Route"
+actor_reqs    =
+    { "type",   "name", "range", "present"
+      "Unitflag", "TradeRoute", "Local", TRUE
+    }
 
 [actionenabler_marketplace]
 action = "Enter Marketplace"
+actor_reqs    =
+    { "type",   "name", "range", "present"
+      "Unitflag", "TradeRoute", "Local", TRUE
+    }
 
 [actionenabler_help_build_wonder]
 action = "Help Wonder"

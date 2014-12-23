@@ -74,6 +74,20 @@ reqs    =
       "CityTile", "Center", "Local", FALSE
     }
 
+; Lone Leader might escape on coast (33% chance)
+; Complement of the two effects should be 0.9 * 0.66 = 0.594
+; (100 - 59) - 10 = 31
+[effect_leader_escape]
+type    = "Retire_Pct"
+value   = 31
+reqs    =
+    { "type", "name", "range"
+      "UnitType", "Barbarian Leader", "Local"
+      "Age", "5", "Local"
+      "TerrainClass", "Oceanic", "Adjacent"
+      "MaxUnitsOnTile", "1", "Local"
+    }
+
 ; Specialist output bonuses
 
 [effect_elvis]

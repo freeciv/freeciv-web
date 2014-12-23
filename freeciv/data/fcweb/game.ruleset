@@ -341,6 +341,7 @@ actor_reqs    =
 action = "Help Wonder"
 actor_reqs    =
     { "type",   "name", "range", "present"
+      "Unitflag", "HelpWonder", "Local", TRUE
       "DiplRel", "Is foreign", "Local", FALSE
     }
 

@@ -1,7 +1,7 @@
-FCREV=27324
+FCREV=27332
 FCBRANCH=trunk
 
-ORIGCAPSTR="+Freeciv.Devel-2.6-2014.Dec.17"
+ORIGCAPSTR="+Freeciv.Devel-2.6-2014.Dec.17b"
 
 # There's no need to bump this constantly as current freeciv-web
 # makes no connections to outside world - all connections are

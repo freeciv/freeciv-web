@@ -346,7 +346,7 @@ Deep oceans cover much of the world away from coastlines, and only\
 
 [terrain_glacier]
 name                 = _("Glacier")
-graphic              = "arctic"
+graphic              = "tundra"   ;FIXME: This is a cludge, because webclient isn't able to show arctic graphics.
 graphic_alt          = "-"
 identifier           = "a"
 class                = "Land"

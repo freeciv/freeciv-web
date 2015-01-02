@@ -22,7 +22,7 @@ name = _("Web-default")
 
 ; Description of the ruleset
 description = _("\
-You are playing with classic Freeciv rules for single player games.\
+You are playing with classic Freeciv-web rules.\
 ")
 
 [options]

@@ -687,7 +687,7 @@ if ( isset($port) ) {
 
       <!-- Site footer -->
       <div class="footer">
-        <p>&copy; The Freeciv Project 2013-2014. Freeciv-web is is free and open source software. The Freeciv C server is released under the GNU General Public License, while the Freeciv-web client is released under the GNU Affero General Public License.</p>
+        <p>&copy; The Freeciv Project 2013-<script type="text/javascript">document.write(new Date().getFullYear());</script>. Freeciv-web is is free and open source software. The Freeciv C server is released under the GNU General Public License, while the Freeciv-web client is released under the GNU Affero General Public License.</p>
 
 
       </div>

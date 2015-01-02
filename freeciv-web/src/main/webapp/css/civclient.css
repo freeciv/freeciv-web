@@ -760,8 +760,13 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
   background: #444 url("images/ui-bg_highlight-soft_44_444444_1x100.png") 50% 50% repeat-x;
 }
 
+.context-menu-list {
+  background: none;
+}
+
 .context-menu-item {
   font-size: 140%;
+  background-color: rgba(200,200,200,0.7);
 }
 
 .chatbox_text_tileinfo {

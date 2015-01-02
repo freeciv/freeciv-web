@@ -16,23 +16,3 @@ diff -Nurd -X.diff_ignore freeciv/ai/aitraits.c freeciv/ai/aitraits.c
  
    /* Clip so that value is at least 1, and maximum is
     * TRAIT_DEFAULT_VALUE as many times as TRAIT_DEFAULT value is
-diff -Nurd -X.diff_ignore freeciv/server/savegame2.c freeciv/server/savegame2.c
---- freeciv/server/savegame2.c	2014-08-22 02:29:53.410036515 +0300
-+++ freeciv/server/savegame2.c	2014-08-27 04:42:12.764373235 +0300
-@@ -4185,10 +4185,12 @@
-     int j;
- 
-     for (tr = trait_begin(), j = 0; tr != trait_end(); tr = trait_next(tr), j++) {
--      secfile_insert_int(saving->file, plr->ai_common.traits[tr].val,
--                         "player%d.trait.val%d", plrno, j);
--      secfile_insert_int(saving->file, plr->ai_common.traits[tr].mod,
--                         "player%d.trait.mod%d", plrno, j);
-+      if (plr->ai_common.traits != NULL) {
-+        secfile_insert_int(saving->file, plr->ai_common.traits[tr].val,
-+                           "player%d.trait.val%d", plrno, j);
-+        secfile_insert_int(saving->file, plr->ai_common.traits[tr].mod,
-+                           "player%d.trait.mod%d", plrno, j);
-+      }
-     }
-   }
- 

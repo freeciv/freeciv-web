@@ -1,15 +1,3 @@
-diff -Nurd -X.diff_ignore freeciv/configure.ac freeciv/configure.ac
---- freeciv/configure.ac	2012-09-02 02:20:50.000000000 +0300
-+++ freeciv/configure.ac	2012-09-02 02:27:38.000000000 +0300
-@@ -1007,7 +1007,7 @@
- 
- dnl Checks for additional server libraries:
- if test "x$server" = "xyes"; then
--    SERVER_LIBS="-lm ${SERVER_LIBS}"
-+    SERVER_LIBS="-lm ${SERVER_LIBS} -lssl"
- 
-     dnl Some systems (e.g., BeOS) need this lib
-     AC_CHECK_LIB(bind, gethostbyaddr, SERVER_LIBS="-lbind $SERVER_LIBS")
 diff -Nurd -X.diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
 --- freeciv/server/citytools.c	2012-09-02 02:19:14.000000000 +0300
 +++ freeciv/server/citytools.c	2012-09-02 02:27:38.000000000 +0300

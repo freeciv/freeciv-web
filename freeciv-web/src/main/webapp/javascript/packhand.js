@@ -1007,3 +1007,8 @@ function handle_play_music(packet)
 {
   /* TODO: Implement */
 }
+
+function handle_ruleset_action(packet)
+{
+  /* TODO: Implement */
+}

@@ -16,3 +16,24 @@ diff -Nurd -X.diff_ignore freeciv/ai/aitraits.c freeciv/ai/aitraits.c
  
    /* Clip so that value is at least 1, and maximum is
     * TRAIT_DEFAULT_VALUE as many times as TRAIT_DEFAULT value is
+diff --git a/server/savegame3.c b/server/savegame3.c
+index fec5263..cb34b61 100644
+--- a/server/savegame3.c
++++ b/server/savegame3.c
+@@ -4161,10 +4161,12 @@ static void sg_save_player_main(struct savedata *saving,
+     int j;
+ 
+     for (tr = trait_begin(), j = 0; tr != trait_end(); tr = trait_next(tr), j++) {
+-      secfile_insert_int(saving->file, plr->ai_common.traits[tr].val,
+-                         "player%d.trait.val%d", plrno, j);
+-      secfile_insert_int(saving->file, plr->ai_common.traits[tr].mod,
+-                         "player%d.trait.mod%d", plrno, j);
++      if (plr->ai_common.traits != NULL) {
++        secfile_insert_int(saving->file, plr->ai_common.traits[tr].val,
++                           "player%d.trait.val%d", plrno, j);
++        secfile_insert_int(saving->file, plr->ai_common.traits[tr].mod,
++                           "player%d.trait.mod%d", plrno, j);
++      }
+     }
+   }
+ 

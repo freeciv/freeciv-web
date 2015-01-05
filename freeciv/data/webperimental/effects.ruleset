@@ -1014,8 +1014,27 @@ reqs	=
 type    = "Incite_Cost_Pct"
 value	= 300
 reqs	=
-    { "type", "name", "range"
-      "Building", "Courthouse", "City"
+    { "type", "name", "range", "present"
+      "Building", "Courthouse", "City", TRUE
+      "MaxUnitsOnTile", "0", "Local", FALSE
+    }
+
+[effect_incite_cost_empty_courthouse]
+type = "Incite_Cost_Pct"
+value = 100
+reqs	=
+    { "type", "name", "range", "present"
+      "MaxUnitsOnTile", "0", "Local", TRUE
+      "Building", "Courthouse", "City", TRUE
+    }
+
+[effect_incite_cost_empty]
+type = "Incite_Cost_Pct"
+value = -50
+reqs	=
+    { "type", "name", "range", "present"
+      "MaxUnitsOnTile", "0", "Local", TRUE
+      "Building", "Courthouse", "City", FALSE
     }
 
 [effect_factory]

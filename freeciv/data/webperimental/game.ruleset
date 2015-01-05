@@ -184,6 +184,53 @@ slow_invasions = TRUE
 ; have only fractional moves left.
 tired_attack = FALSE
 
+[actions]
+; What each action should be called when showing them to the player.
+; The first %s should be before the mnemonic of the action.
+; The second %s marks were extra details should be insterted.
+
+; /* TRANS: _Poison City (3% chance of success). */
+ui_name_poison_city = _("%sPoison City%s")
+
+; /* TRANS: _Sabotage Enemy Unit (3% chance of success). */
+ui_name_sabotage_unit = _("%sSabotage Enemy Unit%s")
+
+; /* TRANS: _Bribe Enemy Unit (3% chance of success). */
+ui_name_bribe_unit = _("%sBribe Enemy Unit%s")
+
+; /* TRANS: _Sabotage City (3% chance of success). */
+ui_name_sabotage_city = _("%sSabotage City%s")
+
+; /* TRANS: Industria_l Sabotage (3% chance of success). */
+ui_name_targeted_sabotage_city = _("Industria%sl Sabotage%s")
+
+; /* TRANS: Incite a _Revolt (3% chance of success). */
+ui_name_incite_city = _("Incite a %sRevolt%s")
+
+; /* TRANS: Establish _Embassy (100% chance of success). */
+ui_name_establish_embassy = _("Establish %sEmbassy%s")
+
+; /* TRANS: Steal _Technology (3% chance of success). */
+ui_name_steal_tech = _("Steal %sTechnology%s")
+
+; /* TRANS: In_dustrial Espionage (3% chance of success). */
+ui_name_targeted_steal_tech = _("In%sdustrial Espionage%s")
+
+; /* TRANS: _Investigate City (100% chance of success). */
+ui_name_investigate_city = _("%sInvestigate City%s")
+
+; /* TRANS: Steal _Gold (100% chance of success). */
+ui_name_steal_gold = _("Steal %sGold%s")
+
+; /* TRANS: Establish Trade _Route (100% chance of success). */
+ui_name_establish_trade_route = _("Establish Trade %sRoute%s")
+
+; /* TRANS: Enter _Marketplace (100% chance of success). */
+ui_name_enter_marketplace = _("Enter %sMarketplace%s")
+
+; /* TRANS: Help _build Wonder (100% chance of success). */
+ui_name_help_wonder = _("Help %sbuild Wonder%s")
+
 ; /* <-- avoid gettext warnings
 ;
 ; Action enablers:

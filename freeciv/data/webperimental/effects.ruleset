@@ -41,15 +41,7 @@ type    = "No_Diplomacy"
 value   = 1
 reqs    =
     { "type",   "name", "range"
-      "Nation", "Barbarian", "Player"
-    }
-
-[effect_barb2]
-type    = "No_Diplomacy"
-value   = 1
-reqs    =
-    { "type",   "name", "range"
-      "Nation", "Pirate", "Player"
+      "NationGroup", "Barbarian", "Player"
     }
 
 ; Barbarian disappearance
@@ -59,17 +51,7 @@ type    = "Retire_Pct"
 value   = 10
 reqs    =
     { "type", "name", "range", "present"
-      "Nation", "Barbarian", "Player", TRUE
-      "Age", "5", "Local", TRUE
-      "CityTile", "Center", "Local", FALSE
-    }
-
-[effect_pirate_disappear]
-type    = "Retire_Pct"
-value   = 10
-reqs    =
-    { "type", "name", "range", "present"
-      "Nation", "Pirate", "Player", TRUE
+      "NationGroup", "Barbarian", "Player", TRUE
       "Age", "5", "Local", TRUE
       "CityTile", "Center", "Local", FALSE
     }
@@ -713,22 +695,24 @@ reqs	=
 type    = "Inspire_Partisans"
 value   = 1
 reqs	=
-    { "type",       "name",      "range"
-      "Gov", "Communism", "Player"
-      "Tech", "Communism", "Player"
-      "Tech", "Gunpowder", "Player"
-      "Tech", "Guerilla Warfare", "World"
+    { "type", "name", "range", "present"
+      "Gov", "Communism", "Player", TRUE
+      "Tech", "Communism", "Player", TRUE
+      "Tech", "Gunpowder", "Player", TRUE
+      "Tech", "Guerilla Warfare", "World", TRUE
+      "NationGroup", "Barbarian", "Player", FALSE
     }
 
 [effect_partisan_1]
 type    = "Inspire_Partisans"
 value   = 1
 reqs	=
-    { "type",       "name",      "range"
-      "Gov", "Democracy", "Player"
-      "Tech", "Communism", "Player"
-      "Tech", "Gunpowder", "Player"
-      "Tech", "Guerilla Warfare", "World"
+    { "type", "name", "range", "present"
+      "Gov", "Democracy", "Player", TRUE
+      "Tech", "Communism", "Player", TRUE
+      "Tech", "Gunpowder", "Player", TRUE
+      "Tech", "Guerilla Warfare", "World", TRUE
+      "NationGroup", "Barbarian", "Player", FALSE
     }
 
 [effect_airport]
@@ -2385,4 +2369,8 @@ reqs    =
 
 [effect_thiefs_share_base]
 type    = "Thiefs_Share_Pct"
+value   = 1
+
+[effect_illegal_action_move_cost_base]
+type    = "Illegal_Action_Move_Cost"
 value   = 1

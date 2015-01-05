@@ -21,8 +21,8 @@ options="+Freeciv-ruleset-Devel-2014.September.14c web-compatible"
 ; helptxt       = displayed in the help for terrains with this flag (optional)
 flags =
   { "name", "helptxt"
-    "Oil", _("Has Oil Well instead of Mine.")
-    "NoPollution", _("No Pollution nor Fallout appear here.")
+    _("Oil"), _("Has Oil Well instead of Mine.")
+    _("NoPollution"), _("No Pollution nor Fallout appear here.")
   }
 
 [parameters]
@@ -1414,11 +1414,7 @@ Roads and railroads can only be built on River tiles if your\
 ;
 ; Base types:
 ;
-; name                    = translatable name as seen by user
-; rule_name               = (optional) name for savegames, rulesets etc; if not
-;                           present, 'name' is used. Since the name used in
-;                           savegames must not change, use this when renaming a
-;                           base after a ruleset has been released.
+; extra                   = name of the extra this base section is part of
 ; gui_type                = How gui should handle this base.
 ;                           Fortress/Airbase/Other
 ; border_sq               = Base will claim land ownership up to this radius,
@@ -1435,35 +1431,31 @@ Roads and railroads can only be built on River tiles if your\
 ; */ <-- avoid gettext warnings
 
 [base_fortress]
-name           = _("Fortress")
+extra          = "Fortress"
 gui_type       = "Fortress"
 border_sq      = 5
 flags          = "NoAggressive", "NoStackDeath", "DiplomatDefense"
 
 [base_airbase]
-name           = _("Airbase")
+extra          = "Airbase"
 gui_type       = "Airbase"
 flags          = "NoStackDeath", "ParadropFrom"
 
 [base_buoy]
-name           = _("Buoy")
+extra          = "Buoy"
 gui_type       = "Fortress"
 vision_main_sq = 5
 flags          = "ShowFlag"
 
 [base_ruins]
-name           = _("Ruins")
+extra          = "Ruins"
 gui_type       = "Other"
 
 ; /* <-- avoid gettext warnings
 ;
 ; Road types:
 ;
-; name                    = translatable name as seen by user
-; rule_name               = (optional) name for savegames, rulesets etc; if not
-;                           present, 'name' is used. Since the name used in
-;                           savegames must not change, use this when renaming a
-;                           road type after a ruleset has been released.
+; extra                   = name of the extra this road section is part of
 ; first_reqs              = additional requirements to build the first part of
 ;                           the road, when none of the adjacent tiles have any
 ;                           integrating roads (see effects.ruleset and
@@ -1512,7 +1504,7 @@ gui_type       = "Other"
 ; */ <-- avoid gettext warnings
 
 [road_road]
-name           = _("Road")
+extra          = "Road"
 move_cost      = 1
 food_incr      = 0
 shield_incr    = 0
@@ -1524,7 +1516,7 @@ compat_special = "Road"
 flags          = "RequiresBridge"
 
 [road_railroad]
-name           = _("Railroad")
+extra          = "Railroad"
 move_cost      = 0
 food_incr      = 0
 shield_incr    = 0
@@ -1536,9 +1528,9 @@ compat_special = "Railroad"
 flags          = "RequiresBridge"
 
 [road_river]
-name           = _("River")
-move_cost      = 1
-move_mode      = "Cardinal"
+extra             = "River"
+move_cost         = 1
+move_mode         = "Cardinal"
 food_incr_const   = 0
 shield_incr_const = 0
 trade_incr_const  = 1
@@ -1548,5 +1540,5 @@ trade_incr        = 0
 food_bonus        = 0
 shield_bonus      = 0
 trade_bonus       = 0
-compat_special = "River"
-flags          = "River", "PreventsOtherRoads", "UnrestrictedInfra"
+compat_special    = "River"
+flags             = "River", "PreventsOtherRoads", "UnrestrictedInfra"

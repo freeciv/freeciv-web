@@ -352,17 +352,17 @@ flags         = "Unreachable", "DoesntOccupyTile"
 ; "AttackFast"	= AI hint: quick attacking unit (unused)
 ; "AttackStrong"= AI hint: strong attacker (unused)
 ; "Ferryboat"	= AI hint: useful for ferrying
-; "Barbarian"	= can be created as barbarian
-; "BarbarianTech" = can be created as barbarian, if someone has
-;		    researched its tech requirements
-; "BarbarianBoat" = can be created as barbarian
-; "BarbarianBuild" = can be built by barbarians
+; "Barbarian"	       = can be created as land barbarian
+; "BarbarianTech"      = can be created as land barbarian, if someone has
+;		         researched its tech requirements
+; "BarbarianBoat"      = can be created as boat for sea barbarian
+; "BarbarianBuild"     = can be built by barbarians
 ; "BarbarianBuildTech" = can be built by barbarians if someone has
 ;		         researched its tech requirements
-; "BarbarianLeader" = this unit is the barbarian leader (only one)
-; "BarbarianSea" = can be created as a sea barbarian
-; "BarbarianSeaTech" = can be created as a sea barbarian if someone
-;		       has researched its tech requirements
+; "BarbarianLeader"    = this unit is the barbarian leader (only one)
+; "BarbarianSea"       = can be created as a barbarian that disembarks from a barbarian boat
+; "BarbarianSeaTech"   = can be created as a barbarian that disembarks from a barbarian boat
+;                        if someone has researched its tech requirements
 ; "Cities"	= can disband to produce a city
 ; "Settlers"	= can irrigate and build roads
 ; "GameLoss"	= losing one of these units means you lose the game, but it

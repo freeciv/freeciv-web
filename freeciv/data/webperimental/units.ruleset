@@ -31,6 +31,7 @@ flags =
     _("Horse"), _("Attack value halved when attacking Pikemen.")
     _("Helicopter"), _("Defends very badly against Fighters.")
     _("TradeRoute"), _("Can establish trade routes (must travel to target city).")
+    _("HelpWonder"), _("Can help build wonders (adding its full shield cost).")
   }
 
 [veteran_system]
@@ -264,7 +265,6 @@ flags         = "Unreachable", "DoesntOccupyTile"
 ;
 ; ** Flags **
 ;
-; "HelpWonder"	= can help build wonders
 ; "IgZOC"       = ignore Zones of Control (ZOC) even if unit class has
 ;                 "ZOC" flag
 ; "HasNoZOC"	= unit has no Zone of Control (ZOC), thus any unit can move

@@ -308,14 +308,12 @@ function popup_action_selection(actor_unit, action_probabilities,
     });
   }
 
-  var last_tech = 0;
-
   if (action_probabilities[ACTION_SPY_STEAL_TECH] != 0) {
     $("#act_sel_tech" + actor_unit['id']).click(function() {
       var packet = {"type" : packet_unit_do_action, 
                      "actor_id" : actor_unit['id'],
                      "target_id": target_city['id'],
-                     "value" : last_tech, 
+                     "value" : encode_building_id(B_LAST),
                      "action_type": ACTION_SPY_STEAL_TECH};
       send_request (JSON.stringify(packet));
 

@@ -1008,7 +1008,8 @@ function handle_play_music(packet)
   /* TODO: Implement */
 }
 
+/* Receive a generalized action. */
 function handle_ruleset_action(packet)
 {
-  /* TODO: Implement */
+  actions[packet['id']] = packet;
 }

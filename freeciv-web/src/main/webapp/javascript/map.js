@@ -215,6 +215,9 @@ function is_cardinal_dir(dir)
 ****************************************************************************/
 function map_pos_to_tile(x, y)
 {
+  // FIXME: temporary workaround for map wrap bug.
+  if (x >= map['xsize']) y -= 1;  
+  if (x < 0) y += 1;
   return tiles[x + y * map['xsize']];
 }
 

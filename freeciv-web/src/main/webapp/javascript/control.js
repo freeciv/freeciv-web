@@ -796,7 +796,8 @@ function do_map_click(ptile, qtype)
   } else {
     if (pcity != null) {
       if (pcity['owner'] == client.conn.playing.playerno) {
-	if (sunits != null && sunits.length > 0) {
+	if (sunits != null && sunits.length > 0 
+            && sunits[0]['activity'] == ACTIVITY_IDLE) {
           set_unit_focus_and_redraw(sunits[0]);
           $("#canvas").contextMenu();
 	} else {

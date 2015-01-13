@@ -246,10 +246,10 @@ function map_to_gui_pos(map_x, map_y)
   Update (refresh) the map canvas starting at the given tile (in map
   coordinates) and with the given dimensions (also in map coordinates).
 
-  In non-iso view, this is easy.  In iso view, we have to use the
-  Painter's Algorithm to draw the tiles in back first.  When we draw
-  a tile, we tell the GUI which part of the tile to draw - which is
-  necessary unless we have an extra buffering step.
+  In iso view, we have to use the Painter's Algorithm to draw the tiles 
+  in back first.  When we draw a tile, we tell the GUI which part of 
+  the tile to draw - which is necessary unless we have an extra 
+  buffering step.
 
   After refreshing the backing store tile-by-tile, we write the store
   out to the display if write_to_screen is specified.
@@ -286,7 +286,7 @@ function update_map_canvas(canvas_x, canvas_y, width, height)
     }
   
   // mapview_layer_iterate
-  for (var layer = 0; layer < LAYER_COUNT; layer++) {
+  for (var layer = 0; layer <= LAYER_COUNT; layer++) {
   
     //gui_rect_iterate begin   
     var gui_x_0 = (gui_x0);
@@ -304,7 +304,6 @@ function update_map_canvas(canvas_x, canvas_y, width, height)
     } 
     
     if (gui_x_w > 0 && gui_y_h > 0) { 
-      var ptilepedge = {}; 
       var ptilepcorner = {}; 
       var ptile_xi, ptile_yi, ptile_si, ptile_di; 
       var gui_x, gui_y; 
@@ -322,80 +321,34 @@ function update_map_canvas(canvas_x, canvas_y, width, height)
       
       for (var ptile_index = 0; ptile_index < ptile_count; ptile_index++) { 
         var ptile = null; 
-        var pedge = null; 
         var pcorner = null; 
         ptile_xi = ptile_x0 + (ptile_index % (ptile_x1 - ptile_x0)); 
         ptile_yi = Math.floor(ptile_y0 + (ptile_index / (ptile_x1 - ptile_x0)));
         ptile_si = ptile_xi + ptile_yi; 
         ptile_di = ptile_yi - ptile_xi;
-        if (2 == ptile_r1 ) { 
-          if ((ptile_xi + ptile_yi) % 2 != 0) { 
-            continue; 
-          } 
-          if (ptile_xi % 2 == 0 && ptile_yi % 2 == 0) { 
-            if ((ptile_xi + ptile_yi) % 4 == 0) { 
-              /* Tile */
-              ptile = map_pos_to_tile((ptile_si >> 2) - 1, (ptile_di >> 2));
-            } else { 
-              /* Corner */
-              pcorner = ptilepcorner;
-              pcorner['tile'] = []; 
-              pcorner['tile'][0] = map_pos_to_tile(((ptile_si - 6) >> 2), ((ptile_di - 2) >> 2)); 
-              pcorner['tile'][1] = map_pos_to_tile(((ptile_si - 2) >> 2), ((ptile_di - 2) >> 2)); 
-              pcorner['tile'][2] = map_pos_to_tile(((ptile_si - 2) >> 2), ((ptile_di + 2) >> 2)); 
-              pcorner['tile'][3] = map_pos_to_tile(((ptile_si - 6) >> 2), ((ptile_di + 2) >> 2));              
-            } 
+        if ((ptile_xi + ptile_yi) % 2 != 0) { 
+          continue; 
+        } 
+        if (ptile_xi % 2 == 0 && ptile_yi % 2 == 0) { 
+          if ((ptile_xi + ptile_yi) % 4 == 0) { 
+            /* Tile */
+            ptile = map_pos_to_tile((ptile_si / 4) - 1, (ptile_di / 4));
           } else { 
-            /* Edge. */
-            pedge = ptilepedge; 
-            if (ptile_si % 4 == 0) { 
-              pedge['type'] = EDGE_NS;
-              pedge['tile'] = [];
-              pedge['tile'][0] = map_pos_to_tile(((ptile_si - 4) >> 2), ((ptile_di - 2) >> 2)); 
-              pedge['tile'][1] = map_pos_to_tile(((ptile_si - 4) >> 2), ((ptile_di + 2) >> 2));
-            } else { 
-              pedge['type'] = EDGE_WE;
-              pedge['tile'] = [];
-              pedge['tile'][0] = map_pos_to_tile(((ptile_si - 6) >> 2), (ptile_di >> 2)); 
-              pedge['tile'][1] = map_pos_to_tile(((ptile_si - 2) >> 2), (ptile_di >> 2));
-            } 
-          } 
-        } else { 
-          if (ptile_si % 2 == 0) { 
-            if (ptile_xi % 2 == 0) { 
-              /* Corner */
-              pcorner = ptilepcorner;
-              pcorner['tile'] = []; 
-              pcorner['tile'][0] = map_pos_to_tile((ptile_xi >> 1) - 1, (ptile_yi >> 1) - 1); 
-              pcorner['tile'][1] = map_pos_to_tile((ptile_xi >> 1), (ptile_yi >> 1) - 1); 
-              pcorner['tile'][2] = map_pos_to_tile((ptile_xi >> 1), (ptile_yi >> 1));
-              pcorner['tile'][3] = map_pos_to_tile((ptile_xi >> 1) - 1, (ptile_yi >> 1));
-            } else { 
-              /* Tile */
-              ptile = map_pos_to_tile(((ptile_xi - 1) >> 1), ((ptile_yi - 1) >> 1)); 
-            } 
-          } else {
-            /* Edge */ 
-            pedge = ptilepedge; 
-            if (ptile_yi % 2 == 0) { 
-              pedge['type'] = EDGE_NS;
-              pedge['tile'] = [];
-              pedge['tile'][0] = map_pos_to_tile(((ptile_xi - 1) >> 1), ((ptile_yi >> 1) - 1));
-              pedge['tile'][1] = map_pos_to_tile(((ptile_xi - 1) >> 1), (ptile_yi >> 1));
-            } else { 
-              pedge['type'] = EDGE_WE; 
-              pedge['tile'] = [];
-              pedge['tile'][0] = map_pos_to_tile(((ptile_xi >> 1) - 1), ((ptile_yi - 1) >> 1)); 
-              pedge['tile'][1] = map_pos_to_tile((ptile_xi >> 1), ((ptile_yi - 1) >> 1));
-            } 
+            /* Corner */
+            pcorner = ptilepcorner;
+            pcorner['tile'] = []; 
+            pcorner['tile'][0] = map_pos_to_tile(((ptile_si - 6) / 4), ((ptile_di - 2) / 4)); 
+            pcorner['tile'][1] = map_pos_to_tile(((ptile_si - 2) / 4), ((ptile_di - 2) / 4)); 
+            pcorner['tile'][2] = map_pos_to_tile(((ptile_si - 2) / 4), ((ptile_di + 2) / 4)); 
+            pcorner['tile'][3] = map_pos_to_tile(((ptile_si - 6) / 4), ((ptile_di + 2) / 4));              
           } 
         } 
 
         gui_x = Math.floor(ptile_xi * ptile_w / ptile_r2 - ptile_w / 2); 
         gui_y = Math.floor(ptile_yi * ptile_h / ptile_r2 - ptile_h / 2);
          
-          var cx = gui_x - mapview['gui_x0'];
-          var cy = gui_y - mapview['gui_y0'];
+        var cx = gui_x - mapview['gui_x0'];
+        var cy = gui_y - mapview['gui_y0'];
 
 
         if (ptile != null) {

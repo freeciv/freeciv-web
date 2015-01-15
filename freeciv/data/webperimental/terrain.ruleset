@@ -12,7 +12,8 @@
 
 [datafile]
 description="Experimental web-client tile_type data for Freeciv"
-options="+Freeciv-ruleset-Devel-2014.September.14c web-compatible"
+options="+Freeciv-ruleset-Devel-2015.January.14 web-compatible"
+format_version=10
 
 [control]
 ; Names for custom terrain flags. There can be up to 8 of these.
@@ -346,7 +347,7 @@ Deep oceans cover much of the world away from coastlines, and only\
 
 [terrain_glacier]
 name                 = _("Glacier")
-graphic              = "tundra"   ;FIXME: This is a cludge, because webclient isn't able to show arctic graphics.
+graphic              = "arctic"
 graphic_alt          = "-"
 identifier           = "a"
 class                = "Land"
@@ -1071,6 +1072,7 @@ shield      = 3 ; glacier used to have 4
 ;                           Global Warming
 ;   - "NuclearWinter"     = Instances of this extra on map count towards
 ;                           Nuclear Winter
+;   - "Spreads"           = This extra may spread to neighbor tiles.
 ; helptext                = optional help text string; should escape all raw
 ;                           newlines so that xgettext parsing works
 ;
@@ -1528,9 +1530,9 @@ compat_special = "Railroad"
 flags          = "RequiresBridge"
 
 [road_river]
-extra             = "River"
-move_cost         = 1
-move_mode         = "Cardinal"
+extra          = "River"
+move_cost      = 1
+move_mode      = "Cardinal"
 food_incr_const   = 0
 shield_incr_const = 0
 trade_incr_const  = 1
@@ -1540,5 +1542,5 @@ trade_incr        = 0
 food_bonus        = 0
 shield_bonus      = 0
 trade_bonus       = 0
-compat_special    = "River"
-flags             = "River", "PreventsOtherRoads", "UnrestrictedInfra"
+compat_special = "River"
+flags          = "River", "PreventsOtherRoads", "UnrestrictedInfra"

@@ -11,7 +11,8 @@
 
 [datafile]
 description="Experimental web-client effects data for Freeciv"
-options="+Freeciv-ruleset-Devel-2014.September.14c web-compatible"
+options="+Freeciv-ruleset-Devel-2015.January.14 web-compatible"
+format_version=10
 
 ; /* <-- avoid gettext warnings
 ;
@@ -1146,7 +1147,7 @@ reqs	=
 ; No population pollution until certain techs researched
 [effect_pollu_pop_base]
 type    = "Pollu_Pop_Pct_2"
-value   = -100
+value	= -100
 
 [effect_pollu_pop_automobile]
 type    = "Pollu_Pop_Pct_2"
@@ -2391,5 +2392,5 @@ type    = "Thiefs_Share_Pct"
 value   = 1
 
 [effect_illegal_action_move_cost_base]
-type    = "Illegal_Action_Move_Cost"
-value   = 1
+type	= "Illegal_Action_Move_Cost"
+value	= 1

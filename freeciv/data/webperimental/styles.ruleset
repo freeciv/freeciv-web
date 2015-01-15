@@ -9,7 +9,8 @@
 
 [datafile]
 description="Experimental web-client nation theme data for Freeciv"
-options="+Freeciv-ruleset-Devel-2014.September.14c web-compatible"
+options="+Freeciv-ruleset-Devel-2015.January.14 web-compatible"
+format_version=10
 
 ; /* <-- avoid gettext warnings
 ;

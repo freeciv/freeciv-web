@@ -9,7 +9,8 @@
 
 [datafile]
 description="Classic freeciv-web nations data for Freeciv"
-options="+Freeciv-ruleset-Devel-2014.September.14c web-compatible"
+options="+Freeciv-ruleset-Devel-2015.January.14 web-compatible"
+format_version=10
 
 ; This section contains meta information for freeciv-ruledit to recreate the ruleset
 ; file in a form wanted. These have no in-game effect whatsoever

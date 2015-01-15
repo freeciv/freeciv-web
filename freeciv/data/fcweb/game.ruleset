@@ -11,7 +11,8 @@
 
 [datafile]
 description="Classic freeciv-web game rules for Freeciv"
-options="+Freeciv-ruleset-Devel-2014.September.14c web-compatible"
+options="+Freeciv-ruleset-Devel-2015.January.14 web-compatible"
+format_version=10
 
 [about]
 ; Ruleset name
@@ -174,7 +175,7 @@ tired_attack = FALSE
 [actions]
 ; What each action should be called when showing them to the player.
 ; The first %s should be before the mnemonic of the action.
-; The secound %s marks were extra details should be insterted.
+; The second %s marks were extra details should be insterted.
 
 ; /* TRANS: _Poison City (3% chance of success). */
 ui_name_poison_city = _("%sPoison City%s")

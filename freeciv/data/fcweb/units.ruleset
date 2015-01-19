@@ -326,9 +326,6 @@ flags         = "Unreachable", "DoesntOccupyTile"
 ;                 rule)
 ; "BarbarianOnly" = only barbarians can build this unit
 ; "Shield2Gold" = Switch from shield upkeep to gold upkeep possible
-; "Capturable"  = can be captured by units with "Capturer" flag
-; "Capturer"    = can capture units with flag "Capturable" instead of
-;                 fighting them
 ;
 ; Following flag strings require extra fields:
 ;  "Paratroopers"

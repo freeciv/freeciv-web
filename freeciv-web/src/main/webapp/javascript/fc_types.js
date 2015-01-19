@@ -53,7 +53,8 @@ var ACTION_MARKETPLACE = 10;
 var ACTION_HELP_WONDER = 11;
 var ACTION_SPY_BRIBE_UNIT = 12;
 var ACTION_SPY_SABOTAGE_UNIT = 13;
-var ACTION_COUNT = 14;
+var ACTION_CAPTURE_UNITS = 14;
+var ACTION_COUNT = 15;
 
 /* Used to signal a move without any action. */
 var ACTION_MOVE = ACTION_COUNT;

@@ -243,6 +243,13 @@ function popup_action_selection(actor_unit, action_probabilities,
                                    action_probabilities)
              + "'>";
   }
+  if (action_probabilities[ACTION_CAPTURE_UNITS] != 0) {
+    dhtml += "<input id='act_sel_capture_units" + actor_unit['id']
+             + "' class='act_sel_button' type='button' value='"
+             + format_action_label(ACTION_CAPTURE_UNITS,
+                                   action_probabilities)
+             + "'>";
+  }
   if (can_actor_unit_move(actor_unit, target_tile)) {
     dhtml += "<input id='act_sel_move" + actor_unit['id']
     + "' class='act_sel_button' type='button' value='Keep moving'>"
@@ -417,6 +424,19 @@ function popup_action_selection(actor_unit, action_probabilities,
         "target_id": target_unit['id'],
         "value" : 0,
         "action_type": ACTION_SPY_SABOTAGE_UNIT};
+        send_request (JSON.stringify(packet));
+
+        $(id).remove();
+    });
+  }
+
+  if (action_probabilities[ACTION_CAPTURE_UNITS] != 0) {
+    $("#act_sel_capture_units" + actor_unit['id']).click(function() {
+      var packet = {"type" : packet_unit_do_action,
+        "actor_id" : actor_unit['id'],
+        "target_id": target_tile['index'],
+        "value" : 0,
+        "action_type": ACTION_CAPTURE_UNITS};
         send_request (JSON.stringify(packet));
 
         $(id).remove();

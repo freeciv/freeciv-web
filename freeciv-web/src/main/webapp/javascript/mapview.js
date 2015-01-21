@@ -232,14 +232,20 @@ function init_sprites()
 
   var tileset_image_one = new Image();
   tileset_image_one.onload = preload_check; 
-  tileset_image_one.src = '/tileset/freeciv-web-tileset-0.png?ts=' + ts;
+  tileset_image_one.src = '/tileset/freeciv-web-tileset-amplio2-0.png?ts=' + ts;
   tileset_images[0] = tileset_image_one;
 
   var tileset_image_two = new Image();
   tileset_image_two.onload = preload_check; 
-  tileset_image_two.src = '/tileset/freeciv-web-tileset-1.png?ts=' + ts;
+  tileset_image_two.src = '/tileset/freeciv-web-tileset-amplio2-1.png?ts=' + ts;
   tileset_images[1] = tileset_image_two;
-  
+
+  var tileset_image_three = new Image();
+  tileset_image_three.onload = preload_check; 
+  tileset_image_three.src = '/tileset/freeciv-web-tileset-amplio2-2.png?ts=' + ts;
+  tileset_images[2] = tileset_image_three;
+ 
+ 
 }
 
 /**************************************************************************
@@ -249,7 +255,7 @@ function preload_check()
 {
   loaded_images += 1;
 
-  if (loaded_images == 2) {
+  if (loaded_images == 3) {
     $.unblockUI();
     init_cache_sprites();
     init_common_intro_dialog();
@@ -262,6 +268,8 @@ function preload_check()
 function init_cache_sprites() 
 {
  try {
+
+  tileset = tileset_amplio2;
 
   if (typeof tileset === 'undefined') {
     swal("Tileset not generated correctly. Run sync.sh in "

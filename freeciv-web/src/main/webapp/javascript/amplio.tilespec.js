@@ -20,7 +20,7 @@ var tileset_tile_height = 48;
 var tileset_options = "+tilespec4+2007.Oct.26";
 
 // A simple name for the tileset specified by this file:
-var tileset_name = "amplio";
+var tileset_name = "amplio2";
 var priority = 20;
 
 var normal_tile_width  = 96;

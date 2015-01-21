@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: iso-8859-1 -*-
 ''' 
- Freeciv - Copyright (C) 2009-2014 - Andreas Røsdal   andrearo@pvv.ntnu.no
+ Freeciv - Copyright (C) 2009-2015 - Andreas Røsdal   andrearo@pvv.ntnu.no
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation; either version 2, or (at your option)
@@ -22,17 +22,15 @@ import json
 
 gfxdir = "";
 
-files = ["../../freeciv/freeciv/data/amplio2.tilespec",
+files = {"amplio2" : ["../../freeciv/freeciv/data/amplio2.tilespec",
   "../../freeciv/freeciv/data/amplio2/ancientcities.spec",
   "../../freeciv/freeciv/data/amplio2/explosions.spec",
   "../../freeciv/freeciv/data/amplio2/fog.spec",
   "../../freeciv/freeciv/data/amplio2/grid.spec",
-#  "../../freeciv/freeciv/data/amplio2/icons.spec",
   "../../freeciv/freeciv/data/amplio2/medievalcities.spec",
   "../../freeciv/freeciv/data/amplio2/moderncities.spec",
   "../../freeciv/freeciv/data/amplio2/mountains.spec",
   "../../freeciv/freeciv/data/amplio2/hills.spec",
-#  "../../freeciv/freeciv/data/amplio2/nuke.spec", #not in use yet
   "../../freeciv/freeciv/data/amplio2/ocean.spec",
   "../../freeciv/freeciv/data/amplio2/select.spec",
   "../../freeciv/freeciv/data/amplio2/terrain1.spec",
@@ -44,20 +42,42 @@ files = ["../../freeciv/freeciv/data/amplio2.tilespec",
   "../../freeciv/freeciv/data/misc/wonders-large.spec",
   "../../freeciv/freeciv/data/misc/colors.tilespec",
   "../../freeciv/freeciv/data/misc/buildings-large.spec",
-#  "../../freeciv/freeciv/data/misc/icons.spec",
-#  "../../freeciv/freeciv/data/misc/chiefs.spec",  #not in use yet
   "../../freeciv/freeciv/data/misc/overlays.spec",
   "../../freeciv/freeciv/data/misc/shields.spec",
   "../../freeciv/freeciv/data/misc/small.spec",
   "../../freeciv/freeciv/data/misc/governments.spec",
   "../../freeciv/freeciv/data/misc/specialists.spec",
-#  "../../freeciv/freeciv/data/misc/cursors.spec",
   "../../freeciv/freeciv/data/misc/space.spec",
   "../../freeciv/freeciv/data/misc/editor.spec",
   "../../freeciv/freeciv/data/misc/techs.spec",
   "../../freeciv/freeciv/data/misc/flags.spec",
   "../../freeciv/freeciv/data/misc/treaty.spec",
-  "../../freeciv/freeciv/data/misc/citybar.spec"]; 
+  "../../freeciv/freeciv/data/misc/citybar.spec"],
+  "trident" : [
+  "../../freeciv/freeciv/data/trident/auto_ll.spec",
+  "../../freeciv/freeciv/data/trident/fog.spec",
+  "../../freeciv/freeciv/data/trident/roads.spec",
+  "../../freeciv/freeciv/data/trident/tiles.spec",
+  "../../freeciv/freeciv/data/trident/cities.spec",
+  "../../freeciv/freeciv/data/trident/explosions.spec",
+  "../../freeciv/freeciv/data/trident/grid.spec",
+  "../../freeciv/freeciv/data/trident/select.spec",
+  "../../freeciv/freeciv/data/trident/units.spec",
+  "../../freeciv/freeciv/data/misc/wonders-large.spec",
+  "../../freeciv/freeciv/data/misc/colors.tilespec",
+  "../../freeciv/freeciv/data/misc/buildings-large.spec",
+  "../../freeciv/freeciv/data/misc/overlays.spec",
+  "../../freeciv/freeciv/data/misc/shields.spec",
+  "../../freeciv/freeciv/data/misc/small.spec",
+  "../../freeciv/freeciv/data/misc/governments.spec",
+  "../../freeciv/freeciv/data/misc/specialists.spec",
+  "../../freeciv/freeciv/data/misc/space.spec",
+  "../../freeciv/freeciv/data/misc/editor.spec",
+  "../../freeciv/freeciv/data/misc/techs.spec",
+  "../../freeciv/freeciv/data/misc/flags.spec",
+  "../../freeciv/freeciv/data/misc/treaty.spec",
+  "../../freeciv/freeciv/data/misc/citybar.spec"
+  ]}; 
 
 global tileset;
 global curr_x;
@@ -77,7 +97,7 @@ curr_y = 14;
 # Set size of tileset image manually depending on number of tiles.
 # Note!  Safari on iPhone doesn't support more than 3000000 pixels in a single image.
 tileset_height = 1000;
-tileset_width = 2700;
+tileset_width = 1800;
 
 dither_types = ["t.l0.desert1", "t.l0.plains1", "t.l0.grassland1", "t.l0.forest1", "t.l0.jungle1", "t.l0.hills1", "t.l0.mountains1", "t.l0.tundra1", "t.l0.swamp1"];
 print("Freeciv-img-extract running with PIL " + Image.VERSION);
@@ -85,8 +105,8 @@ tileset = Image.new('RGBA', (tileset_width, tileset_height), (0, 0, 0, 0));
 mask_image = Image.open("mask.png");
 dither_mask = Image.open("dither.png");
 dither_map = {};
+global tileset_inc;
 tileset_inc = 0;
-
 
 def config_read(file):
   print(("Parsing " + file ));
@@ -104,7 +124,7 @@ def config_read(file):
     print((config.sections()));
     return config;
 
-def increment_tileset_image():
+def increment_tileset_image(tileset_name):
   # save current tileset file.
   global tileset;
   global curr_x;
@@ -115,9 +135,9 @@ def increment_tileset_image():
   global tileset_inc;
 
   draw = ImageDraw.Draw(tileset)
-  draw.text((130, 0), "Freeciv-web -   GPL Licensed  - Copyright 2007-2014  Andreas Rosdal", fill="rgb(0,0,0)")
+  draw.text((130, 0), "Freeciv-web - http://play.freeciv.org/  GPL Licensed  - Copyright 2007-2015  Andreas Rosdal", fill="rgb(0,0,0)")
 
-  tileset.save("pre-freeciv-web-tileset-" + str(tileset_inc) + ".png");
+  tileset.save("pre-freeciv-web-tileset-" + tileset_name + "-" + str(tileset_inc) + ".png");
   tileset_inc += 1;
 
   tileset = Image.new('RGBA', (tileset_width, tileset_height), (0, 0, 0, 0));
@@ -128,111 +148,173 @@ def increment_tileset_image():
   max_width = 0;
   max_height = 0;
 
-for file in files:
-  config = config_read(file);
+for tile_file in files.keys():
+  tileset_inc = 0;
+  coords[tile_file] = {};
+  for file in files[tile_file]:
+    config = config_read(file);
+    
+    if "extra" in config.sections():
+      csprites = config.get("extra", "sprites");
+      sprites = csprites.replace("{","").replace("}", "").replace(" ", "").replace("\"","").split("\n");
+      for sprite in sprites:
+        rsprite = sprite.split(",");
+        if (len(rsprite) != 2 or rsprite[1] == "file"): continue;
   
-  if "extra" in config.sections():
-    csprites = config.get("extra", "sprites");
-    sprites = csprites.replace("{","").replace("}", "").replace(" ", "").replace("\"","").split("\n");
-    for sprite in sprites:
-      rsprite = sprite.split(",");
-      if (len(rsprite) != 2 or rsprite[1] == "file"): continue;
-
-      tag = rsprite[1];
-      if (tag.find(";")): tag = tag.split(";")[0]; 
-      tag = tag.strip();
-
-      im = Image.open(gfxdir + tag + ".png");
-      (w, h) = im.size;
-      if (w > max_width): max_width = w;
-      if (h > max_height): max_height = h;
-      sum_area += (h*w);
-
-      if (curr_y + h >= tileset_height):
-        increment_tileset_image();
-      tileset.paste(im, (curr_x, curr_y));
-      coords[rsprite[0]] = (curr_x, curr_y, w, h, tileset_inc);
-      curr_x += w;
-      if (h > max_row_height): max_row_height = h;
-      if (w + curr_x >= tileset_width): 
-        curr_x = 0;
-        curr_y += max_row_height;
-        max_row_height = 0;
-
-
-      #im.save(rsprite[0] + ".png");
-      
-
-  if "file" in config.sections():
-    gfx = config.get("file", "gfx") + ".png";
-    print(gfx);
-    im = Image.open(gfxdir + gfx.replace("\"", ""));
-
-    if "grid_main" in config.sections():
-      dx = int(config.get("grid_main", "dx"));
-      dy = int(config.get("grid_main", "dy"));
-      x_top_left = int(config.get("grid_main", "x_top_left"));
-      y_top_left = int(config.get("grid_main", "y_top_left"));
-      pixel_border = 0;
-      try:
-        pixel_border = int(config.get("grid_main", "pixel_border"));
-      except:
-        pass;
-
-      print("pixel_border " + str(pixel_border));
-      tag2 = None;
-
-      tiles_buf = config.get("grid_main", "tiles");
-      tiles = tiles_buf.replace("{","").replace("}", "").replace(" ", "").replace("\"","").split("\n");
-      for tile in tiles:
-        tmptile = tile.split(",");
-        if (tmptile[0] == "row" or tmptile[0] == "" or len(tmptile) < 3) : continue;
-        gx = int(tmptile[1]);
-        gy = int(tmptile[0]);
-        tag = str(tmptile[2]);
-
+        tag = rsprite[1];
         if (tag.find(";")): tag = tag.split(";")[0]; 
         tag = tag.strip();
-          
-        if len(tmptile) == 4: 
-          tag2 = tmptile[3];
-          if (tag2.find(";")): 
-            tag2 = tag2.split(";")[0]; 
-            tag2 = tag2.strip();
+  
+        im = Image.open(gfxdir + tag + ".png");
+        (w, h) = im.size;
+        if (w > max_width): max_width = w;
+        if (h > max_height): max_height = h;
+        sum_area += (h*w);
+  
+        if (curr_y + h >= tileset_height):
+          increment_tileset_image(tile_file);
+        tileset.paste(im, (curr_x, curr_y));
+        coords[tile_file][rsprite[0]] = (curr_x, curr_y, w, h, tileset_inc);
+        curr_x += w;
+        if (h > max_row_height): max_row_height = h;
+        if (w + curr_x >= tileset_width): 
+          curr_x = 0;
+          curr_y += max_row_height;
+          max_row_height = 0;
+  
+  
+    if "file" in config.sections():
+      gfx = config.get("file", "gfx") + ".png";
+      print(gfx);
+      im = Image.open(gfxdir + gfx.replace("\"", ""));
+ 
+      for current_section in ["grid_main", "grid_roads", "grid_rails", "grid_coasts"]: 
+        if current_section in config.sections():
+          dx = int(config.get(current_section, "dx"));
+          dy = int(config.get(current_section, "dy"));
+          x_top_left = int(config.get(current_section, "x_top_left"));
+          y_top_left = int(config.get(current_section, "y_top_left"));
+          pixel_border = 0;
+          try:
+            pixel_border = int(config.get(current_section, "pixel_border"));
+          except:
+            pass;
+  
+          print("pixel_border " + str(pixel_border));
+          tag2 = None;
+  
+          tiles_buf = config.get(current_section, "tiles");
+          tiles = tiles_buf.replace("{","").replace("}", "").replace(" ", "").replace("\"","").split("\n");
+          for tile in tiles:
+            tmptile = tile.split(",");
+            if (tmptile[0] == "row" or tmptile[0] == "" or len(tmptile) < 3) : continue;
+            gx = int(tmptile[1]);
+            gy = int(tmptile[0]);
+            tag = str(tmptile[2]);
+  
+            if (tag.find(";")): tag = tag.split(";")[0]; 
+            tag = tag.strip();
+              
+            if len(tmptile) == 4: 
+              tag2 = tmptile[3];
+              if (tag2.find(";")): 
+                tag2 = tag2.split(";")[0]; 
+                tag2 = tag2.strip();
+  
+            dims = (x_top_left + pixel_border*gx + gx*dx, 
+                                          y_top_left + pixel_border*gy + gy*dy, 
+                                          x_top_left + gx*dx + dx + pixel_border*gx, 
+                                          y_top_left + gy*dy + dy + pixel_border*gy)
+  
+            result_tile = im.copy().crop(dims); 
+  
+  
+            if (tag.find("cellgroup") != -1):
+              #handle a cell group (1 tile = 4 cells)
+              (WZ, HZ) = result_tile.size;
+              xf = [int(WZ / 4), int(WZ / 4), 0, int(WZ / 2)];
+              yf = [int(HZ / 2), 0, int(HZ / 4), int(HZ / 4)];
+              xo = [0, 0, int(-WZ / 2), int(WZ / 2)];
+              yo = [int(HZ / 2), int(-HZ / 2), 0, 0];
+  
+              for dir in range(4):
+                result_cell = result_tile.copy().crop((xf[dir], yf[dir], int(xf[dir] + (WZ / 2)), int(yf[dir] + (HZ / 2))));
+                mask = Image.new('RGBA', (int(WZ/2), int(HZ/2)), (255));
+                mask.paste(mask_image, (int(xo[dir] - xf[dir]), int(yo[dir] - yf[dir])));
+             
+                (w, h) = result_cell.size;
+                if (w > max_width): max_width = w;
+                if (h > max_height): max_height = h;
+                sum_area += (h*w);
+  
+                if (curr_y + h >= tileset_height):
+                  increment_tileset_image(tile_file);
+  
+                tileset.paste(result_cell, (int(curr_x), int(curr_y)), mask);
+                store_img = Image.new('RGBA', (w, h), (0, 0, 0, 0));
+                store_img.paste(result_cell, (0, 0), mask);
+                coords[tile_file][tag + "." + str(dir)] = (curr_x, curr_y, w, h, tileset_inc);
+                curr_x += w;
+                if (h > max_row_height): max_row_height = h;
+                if (w + curr_x >= tileset_width): 
+                  curr_x = 0;
+                  curr_y += max_row_height;
+                  max_row_height = 0;
+  
+            elif tag in dither_types:
+              # handle a dithered tile.
+              dither_map[tag] = result_tile.copy();
+  
+            else:
+              # handle a non-cellgroup tile.
+              (w, h) = result_tile.size;
+              if (w > max_width): max_width = w;
+              if (h > max_height): max_height = h;
+              sum_area += (h*w);
+  
+              if (curr_y + h >= tileset_height):
+                increment_tileset_image(tile_file);
+  
+              tileset.paste(result_tile, (curr_x, curr_y));
+  
+              coords[tile_file][tag] = (curr_x, curr_y, w, h, tileset_inc);
+              curr_x += w;
+              if (h > max_row_height): max_row_height = h;
+              if (w + curr_x >= tileset_width): 
+                curr_x = 0;
+                curr_y += max_row_height;
+                max_row_height = 0;
+  
+              if (tag2 != None and len(tag2) > 0): 
+                coords[tile_file][tag2] = (curr_x, curr_y, w, h, tileset_inc);
 
-        dims = (x_top_left + pixel_border*gx + gx*dx, 
-                                      y_top_left + pixel_border*gy + gy*dy, 
-                                      x_top_left + gx*dx + dx + pixel_border*gx, 
-                                      y_top_left + gy*dy + dy + pixel_border*gy)
-
-        result_tile = im.copy().crop(dims); 
-
-
-        if (tag.find("cellgroup") != -1):
-          #handle a cell group (1 tile = 4 cells)
-          (WZ, HZ) = result_tile.size;
-          xf = [int(WZ / 4), int(WZ / 4), 0, int(WZ / 2)];
-          yf = [int(HZ / 2), 0, int(HZ / 4), int(HZ / 4)];
-          xo = [0, 0, int(-WZ / 2), int(WZ / 2)];
-          yo = [int(HZ / 2), int(-HZ / 2), 0, 0];
-
+  if not tile_file == "amplio2":  
+    increment_tileset_image(tile_file);
+  else: 
+    for src_key in dither_map.keys():
+      for alt_key in dither_map.keys():
           for dir in range(4):
-            result_cell = result_tile.copy().crop((xf[dir], yf[dir], int(xf[dir] + (WZ / 2)), int(yf[dir] + (HZ / 2))));
-            mask = Image.new('RGBA', (int(WZ/2), int(HZ/2)), (255));
-            mask.paste(mask_image, (int(xo[dir] - xf[dir]), int(yo[dir] - yf[dir])));
-           
-            (w, h) = result_cell.size;
+            tag = str(dir) + src_key[5:].replace("1", "") + "_" + alt_key[5:].replace("1", "");
+            src_img = dither_map[src_key].copy();
+            alt_img = dither_map[alt_key].copy();
+            src_img.paste(alt_img, None, dither_mask);
+
+            (WZ, HZ) = src_img.size;
+            xf = [int(WZ / 2), 0, int(WZ / 2), 0];
+            yf = [0, int(HZ / 2), int(HZ / 2), 0];
+
+            result_cell = src_img.crop((xf[dir], yf[dir], int(xf[dir] + (WZ / 2)), int(yf[dir] + (HZ / 2))));
+
+            (w, h) = (int(WZ / 2) , int(HZ / 2));
             if (w > max_width): max_width = w;
             if (h > max_height): max_height = h;
             sum_area += (h*w);
-
             if (curr_y + h >= tileset_height):
-              increment_tileset_image();
+              increment_tileset_image(tile_file);
+            tileset.paste(result_cell, (curr_x, curr_y));
 
-            tileset.paste(result_cell, (int(curr_x), int(curr_y)), mask);
-            store_img = Image.new('RGBA', (w, h), (0, 0, 0, 0));
-            store_img.paste(result_cell, (0, 0), mask);
-            coords[tag + "." + str(dir)] = (curr_x, curr_y, w, h, tileset_inc);
+            coords[tile_file][tag] = (curr_x, curr_y, w, h, tileset_inc);
+
             curr_x += w;
             if (h > max_row_height): max_row_height = h;
             if (w + curr_x >= tileset_width): 
@@ -240,150 +322,26 @@ for file in files:
               curr_y += max_row_height;
               max_row_height = 0;
 
-        elif tag in dither_types:
-          # handle a dithered tile.
-          dither_map[tag] = result_tile.copy();
+    im = Image.open("city_active.png");
+    (w, h) = im.size;
+    curr_x += w;
+    tileset.paste(im, (curr_x, curr_y));
+    coords[tile_file]["city_active"] = (curr_x, curr_y, w, h, tileset_inc);
 
-        else:
-          # handle a non-cellgroup tile.
-          (w, h) = result_tile.size;
-          if (w > max_width): max_width = w;
-          if (h > max_height): max_height = h;
-          sum_area += (h*w);
-
-          if (curr_y + h >= tileset_height):
-            increment_tileset_image();
-
-          tileset.paste(result_tile, (curr_x, curr_y));
-
-          coords[tag] = (curr_x, curr_y, w, h, tileset_inc);
-          curr_x += w;
-          if (h > max_row_height): max_row_height = h;
-          if (w + curr_x >= tileset_width): 
-            curr_x = 0;
-            curr_y += max_row_height;
-            max_row_height = 0;
-
-          #if (tag2 != None): result_tile.save(tag2 + ".png"); 
-          if (tag2 != None and len(tag2) > 0): 
-            coords[tag2] = (curr_x, curr_y, w, h, tileset_inc);
- 
-    if "grid_coasts" in config.sections():
-      dx = int(config.get("grid_coasts", "dx"));
-      dy = int(config.get("grid_coasts", "dy"));
-      x_top_left = int(config.get("grid_coasts", "x_top_left"));
-      y_top_left = int(config.get("grid_coasts", "y_top_left"));
-      pixel_border = 0;
-      try:
-        pixel_border = int(config.get("grid_coasts", "pixel_border"));
-      except:
-        pass;
-
-      tag2 = None;
-
-      tiles_buf = config.get("grid_coasts", "tiles");
-      tiles = tiles_buf.replace("{","").replace("}", "").replace(" ", "").replace("\"","").split("\n");
-      for tile in tiles:
-        tmptile = tile.split(",");
-        if (tmptile[0] == "row"): continue;
-        if (tmptile[0] == ""): continue;
-        gx = int(tmptile[1]);
-        gy = int(tmptile[0]);
-        tag = str(tmptile[2]);
-
-        if (tag.find(";")): tag = tag.split(";")[0]; 
-        tag = tag.strip();
-          
-        if len(tmptile) == 4: 
-          tag2 = tmptile[3];
-          if (tag2.find(";")): 
-            tag2 = tag2.split(";")[0]; 
-            tag2 = tag2.strip();
-
-        dims = (x_top_left + pixel_border*gx + gx*dx, 
-                                      y_top_left + pixel_border*gy + gy*dy, 
-                                      x_top_left + gx*dx + dx + pixel_border*gx, 
-                                      y_top_left + gy*dy + dy + pixel_border*gy)
-
-        result_tile = im.copy().crop(dims); 
-        #result_tile.save(tag + ".png");
-        (w, h) = result_tile.size;
-        if (w > max_width): max_width = w;
-        if (h > max_height): max_height = h;
-        sum_area += (h*w);
-
-        if (curr_y + h >= tileset_height):
-          increment_tileset_image();
-
-        tileset.paste(result_tile, (curr_x, curr_y));
-
-        coords[tag] = (curr_x, curr_y, w, h, tileset_inc);
-        curr_x += w;
-        if (h > max_row_height): max_row_height = h;
-        if (w + curr_x >= tileset_width): 
-          curr_x = 0;
-          curr_y += max_row_height;
-          max_row_height = 0;
-
-        #if (tag2 != None): result_tile.save(tag2 + ".png"); 
-        if (tag2 != None): 
-          coords[tag2] = (curr_x, curr_y, w, h, tileset_inc);
-
-
-# handle dithered tiles.
-for src_key in dither_map.keys():
-  for alt_key in dither_map.keys():
-      for dir in range(4):
-        tag = str(dir) + src_key[5:].replace("1", "") + "_" + alt_key[5:].replace("1", "");
-        src_img = dither_map[src_key].copy();
-        alt_img = dither_map[alt_key].copy();
-        src_img.paste(alt_img, None, dither_mask);
-
-        (WZ, HZ) = src_img.size;
-        xf = [int(WZ / 2), 0, int(WZ / 2), 0];
-        yf = [0, int(HZ / 2), int(HZ / 2), 0];
-
-        result_cell = src_img.crop((xf[dir], yf[dir], int(xf[dir] + (WZ / 2)), int(yf[dir] + (HZ / 2))));
-
-        (w, h) = (int(WZ / 2) , int(HZ / 2));
-        if (w > max_width): max_width = w;
-        if (h > max_height): max_height = h;
-        sum_area += (h*w);
-        if (curr_y + h >= tileset_height):
-          increment_tileset_image();
-        tileset.paste(result_cell, (curr_x, curr_y));
-
-        coords[tag] = (curr_x, curr_y, w, h, tileset_inc);
-
-        curr_x += w;
-        if (h > max_row_height): max_row_height = h;
-        if (w + curr_x >= tileset_width): 
-          curr_x = 0;
-          curr_y += max_row_height;
-          max_row_height = 0;
-
-im = Image.open("city_active.png");
-(w, h) = im.size;
-curr_x += w;
-tileset.paste(im, (curr_x, curr_y));
-coords["city_active"] = (curr_x, curr_y, w, h, tileset_inc);
-
-#FIXME: the city_active and city_invalid graphics must not be drawn outside
-# of the full final tileset image.
-im = Image.open("city_invalid.png");
-(w, h) = im.size;
-curr_x += w;
-tileset.paste(im, (curr_x, curr_y));
-coords["city_invalid"] = (curr_x, curr_y, w, h, tileset_inc);
-
-
-increment_tileset_image();
+    #FIXME: the city_active and city_invalid graphics must not be drawn outside
+    # of the full final tileset image.
+    im = Image.open("city_invalid.png");
+    (w, h) = im.size;
+    curr_x += w;
+    tileset.paste(im, (curr_x, curr_y));
+    coords[tile_file]["city_invalid"] = (curr_x, curr_y, w, h, tileset_inc);
+    increment_tileset_image("amplio2");
 
 print("MAX: " + str(max_width) + "  " + str(max_height) + "  " + str(sum_area));
 
-f = open('freeciv-web-tileset.js', 'w')
-
-f.write("var tileset = " + json.dumps(coords, separators=(',',':')) + ";");
+for tile_file in files.keys():
+  f = open('web_tileset_' + tile_file + '.js', 'w')
+  f.write("var tileset_" + tile_file + " = " + json.dumps(coords[tile_file], separators=(',',':')) + ";");
 
 
 print("done.");

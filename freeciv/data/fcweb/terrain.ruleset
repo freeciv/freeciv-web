@@ -1017,7 +1017,7 @@ shield      = 3 ; glacier used to have 4
 ;                           "Infra", "Natural", "Nuisance", or "Bonus"
 ; causes                  = events that can create extra type.
 ;                           "Irrigation", "Mine", "Hut", "Pollution", "Fallout",
-;                           "Base", or "Road"
+;                           "Base", "Road", or "Spontaneous"
 ; rmcauses                = events that can remove extra type.
 ;                           "CleanPollution", "CleanFallout", or "Pillage"
 ; graphic                 = tag specifying preferred graphic
@@ -1072,7 +1072,6 @@ shield      = 3 ; glacier used to have 4
 ;                           Global Warming
 ;   - "NuclearWinter"     = Instances of this extra on map count towards
 ;                           Nuclear Winter
-;   - "Spreads"           = This extra may spread to neighbor tiles.
 ; helptext                = optional help text string; should escape all raw
 ;                           newlines so that xgettext parsing works
 ;

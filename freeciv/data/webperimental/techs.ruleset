@@ -132,6 +132,7 @@ req2     = "Construction"
 flags    = "Bridge"
 graphic     = "a.bridge_building"
 graphic_alt = "-"
+helptext = _("Allows roads to be built on river tiles.")
 
 [advance_bronze_working]
 name     = _("Bronze Working")

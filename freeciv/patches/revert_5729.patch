@@ -1,0 +1,120 @@
+diff -Nurd -X.diff_ignore freeciv/client/control.c freeciv/client/control.c
+--- freeciv/client/control.c	2015-01-25 05:51:33.355832388 +0200
++++ freeciv/client/control.c	2015-01-29 05:13:17.508300210 +0200
+@@ -1517,7 +1517,6 @@
+ **************************************************************************/
+ void request_move_unit_direction(struct unit *punit, int dir)
+ {
+-  struct packet_unit_orders p;
+   struct tile *dest_tile;
+ 
+   /* Catches attempts to move off map */
+@@ -1526,29 +1525,12 @@
+     return;
+   }
+ 
+-  /* The goto system isn't used to send the order because that would
+-   * prevent direction movement from overriding it.
+-   * Example of a situation when overriding the goto system is useful:
+-   * The goto system creates a longer path to make a move legal. The player
+-   * wishes to order the illegal move so the server will explain why the
+-   * short move is illegal. */
+-
+-  memset(&p, 0, sizeof(p));
+-
+-  p.repeat = FALSE;
+-  p.vigilant = FALSE;
+-
+-  p.unit_id = punit->id;
+-  p.src_tile = tile_index(unit_tile(punit));
+-  p.dest_tile = tile_index(dest_tile);
+-
+-  p.length = 1;
+-  p.orders[0] = ORDER_ACTION_MOVE;
+-  p.dir[0] = dir;
+-  p.activity[0] = ACTIVITY_LAST;
+-  p.target[0] = EXTRA_NONE;
+-
+-  send_packet_unit_orders(&client.conn, &p);
++  if (punit->moves_left > 0) {
++    dsend_packet_unit_move(&client.conn, punit->id, tile_index(dest_tile));
++  } else {
++    /* Initiate a "goto" with direction keys for exhausted units. */
++    send_goto_tile(punit, dest_tile);
++  }
+ }
+ 
+ /**************************************************************************
+diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
+--- freeciv/common/packets.def	2015-01-25 05:51:33.387832387 +0200
++++ freeciv/common/packets.def	2015-01-29 05:13:17.508300210 +0200
+@@ -925,6 +925,11 @@
+   BOOL make_winner_veteran;
+ end
+ 
++PACKET_UNIT_MOVE = 66;cs, dsend
++  UNIT unit_id;
++  TILE tile;
++end
++
+ PACKET_UNIT_BUILD_CITY = 67; cs, dsend
+   UNIT unit_id;
+   STRING name[MAX_LEN_NAME];
+diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
+--- freeciv/server/unithand.c	2015-01-27 22:26:06.942731860 +0200
++++ freeciv/server/unithand.c	2015-01-29 05:13:17.524300210 +0200
+@@ -1505,6 +1505,54 @@
+ }
+ 
+ /**************************************************************************
++  Handle unit move request.
++**************************************************************************/
++void handle_unit_move(struct player *pplayer, int unit_id, int tile)
++{
++  struct unit *punit = player_unit_by_number(pplayer, unit_id);
++  struct tile *ptile = index_to_tile(tile);
++
++  if (NULL == punit) {
++    /* Probably died or bribed. */
++    log_verbose("handle_unit_move() invalid unit %d", unit_id);
++    return;
++  }
++
++  if (NULL == ptile) {
++    /* Shouldn't happen */
++    log_error("handle_unit_move() invalid tile index (%d) for %s (%d)",
++              tile, unit_rule_name(punit), unit_id);
++    return;
++  }
++
++  if (!is_tiles_adjacent(unit_tile(punit), ptile)) {
++    /* Client is out of sync, ignore */
++    log_verbose("handle_unit_move() invalid %s (%d) move "
++                "from (%d, %d) to (%d, %d).",
++                unit_rule_name(punit), unit_id,
++                TILE_XY(unit_tile(punit)), TILE_XY(ptile));
++    return;
++  }
++
++  if (!is_player_phase(unit_owner(punit), game.info.phase)) {
++    /* Client is out of sync, ignore */
++    log_verbose("handle_unit_move() invalid %s (%d) %s != phase %d",
++                unit_rule_name(punit),
++                unit_id,
++                nation_rule_name(nation_of_unit(punit)),
++                game.info.phase);
++    return;
++  }
++
++  if (ACTIVITY_IDLE != punit->activity) {
++    /* Else, the unit cannot move. */
++    unit_activity_handling(punit, ACTIVITY_IDLE);
++  }
++
++  (void) unit_move_handling(punit, ptile, FALSE, FALSE);
++}
++
++/**************************************************************************
+  Make sure everyone who can see combat does.
+ **************************************************************************/
+ static void see_combat(struct unit *pattacker, struct unit *pdefender)

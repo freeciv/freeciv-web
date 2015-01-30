@@ -1,6 +1,6 @@
 diff -Nurd -X.diff_ignore freeciv/common/connection.h freeciv/common/connection.h
---- freeciv/common/connection.h	2015-01-29 05:54:17.072246247 +0200
-+++ freeciv/common/connection.h	2015-01-29 05:55:28.048244690 +0200
+--- freeciv/common/connection.h	2015-01-30 06:22:21.050313663 +0200
++++ freeciv/common/connection.h	2015-01-30 06:23:20.458312359 +0200
 @@ -53,7 +53,7 @@
  struct timer_list;
  
@@ -11,8 +11,8 @@ diff -Nurd -X.diff_ignore freeciv/common/connection.h freeciv/common/connection.
  #define MAX_LEN_PASSWORD  512 /* do not change this under any circumstances */
  
 diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/generate_packets.py
---- freeciv/common/generate_packets.py	2015-01-29 05:54:17.268246243 +0200
-+++ freeciv/common/generate_packets.py	2015-01-29 05:55:28.052244690 +0200
+--- freeciv/common/generate_packets.py	2015-01-30 06:22:20.674313671 +0200
++++ freeciv/common/generate_packets.py	2015-01-30 06:26:29.702308207 +0200
 @@ -250,7 +250,7 @@
          if self.is_array==1:
              tmp="real_packet->%(name)s[i] = %(name)s[i]"%self.__dict__
@@ -55,7 +55,43 @@ diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/gene
  
          if not self.diff:
              if self.is_array==2 and self.dataio_type!="string":
-@@ -452,9 +447,11 @@
+@@ -392,27 +387,18 @@
+ 
+       for (i = 0; i < %(array_size1_u)s; i++) {
+         for (j = 0; j < %(array_size2_u)s; j++) {
+-#ifndef FREECIV_JSON_CONNECTION
+           %(c)s
+-#endif /* FREECIV_JSON_CONNECTION */
+         }
+       }
+     } '''%self.get_dict(vars())
+             else:
+                 return '''
+     {
+-      int i;
+-
+-      for (i = 0; i < %(array_size_u)s; i++) {
+-#ifndef FREECIV_JSON_CONNECTION
+         %(c)s
+-#endif /* FREECIV_JSON_CONNECTION */
+-      }
+     } '''%self.get_dict(vars())
+         else:
+             return '''
+     {
+-#ifndef FREECIV_JSON_CONNECTION
+       int i;
+ 
+       fc_assert(%(array_size_u)s < 255);
+@@ -424,7 +410,6 @@
+         }
+       }
+       dio_put_uint8(&dout, 255);
+-#endif /* FREECIV_JSON_CONNECTION */
+     } '''%self.get_dict(vars())
+ 
+     # Returns a code fragement which will get the field if the
+@@ -452,9 +437,11 @@
    RECEIVE_PACKET_FIELD_ERROR(%(name)s);
  }'''%self.__dict__
          if self.dataio_type=="bitvector":
@@ -69,7 +105,21 @@ diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/gene
          if self.dataio_type in ["string","bit_string","city_map"] and \
             self.is_array!=2:
              return '''if (!DIO_GET(%(dataio_type)s, &din, \"%(name)s\", real_packet->%(name)s, sizeof(real_packet->%(name)s))) {
-@@ -937,7 +934,7 @@
+@@ -549,10 +536,10 @@
+             else:
+                 extra=""
+             if self.dataio_type=="memory":
+-                return '''%(extra)s
+-  if (!DIO_GET(%(dataio_type)s, &din, \"%(name)s\", real_packet->%(name)s, %(array_size_u)s)){
++                return ''' /* not supported yet. %(extra)s
++  if (!dio_get_%(dataio_type)s(pc->json_packet, \"%(name)s\", real_packet->%(name)s, %(array_size_u)s)){
+     RECEIVE_PACKET_FIELD_ERROR(%(name)s);
+-  }'''%self.get_dict(vars())
++  } */'''%self.get_dict(vars())
+             elif self.is_array==2 and self.dataio_type!="string":
+                 return '''
+ {
+@@ -937,7 +924,7 @@
    struct %(packet_name)s *old;
    struct genhash **hash = pc->phs.received + %(type)s;
  '''
@@ -79,8 +129,8 @@ diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/gene
              for field in self.key_fields:
                  body1=body1+prefix("  ",field.get_get())+"\n"
 diff -Nurd -X.diff_ignore freeciv/server/handchat.c freeciv/server/handchat.c
---- freeciv/server/handchat.c	2015-01-29 05:54:17.916246228 +0200
-+++ freeciv/server/handchat.c	2015-01-29 05:55:28.060244689 +0200
+--- freeciv/server/handchat.c	2015-01-30 06:22:22.514313631 +0200
++++ freeciv/server/handchat.c	2015-01-30 06:23:20.458312359 +0200
 @@ -19,7 +19,10 @@
  #include <stdio.h>
  #include <string.h>
@@ -113,8 +163,8 @@ diff -Nurd -X.diff_ignore freeciv/server/handchat.c freeciv/server/handchat.c
        break;
      }
 diff -Nurd -X.diff_ignore freeciv/server/plrhand.c freeciv/server/plrhand.c
---- freeciv/server/plrhand.c	2015-01-29 05:54:18.164246223 +0200
-+++ freeciv/server/plrhand.c	2015-01-29 05:55:28.060244689 +0200
+--- freeciv/server/plrhand.c	2015-01-30 06:22:22.714313626 +0200
++++ freeciv/server/plrhand.c	2015-01-30 06:23:20.458312359 +0200
 @@ -1243,12 +1243,12 @@
        || (receiver
            && player_diplstate_get(receiver, plr1)->contact_turns_left > 0)
@@ -131,8 +181,8 @@ diff -Nurd -X.diff_ignore freeciv/server/plrhand.c freeciv/server/plrhand.c
      packet_ds->has_reason_to_cancel = 0;
      packet_ds->contact_turns_left   = 0;
 diff -Nurd -X.diff_ignore freeciv/server/ruleset.c freeciv/server/ruleset.c
---- freeciv/server/ruleset.c	2015-01-29 05:54:17.916246228 +0200
-+++ freeciv/server/ruleset.c	2015-01-29 05:55:28.060244689 +0200
+--- freeciv/server/ruleset.c	2015-01-30 06:22:22.618313628 +0200
++++ freeciv/server/ruleset.c	2015-01-30 06:23:20.458312359 +0200
 @@ -6364,6 +6364,8 @@
      packet.ngroups = i;
  
@@ -151,8 +201,8 @@ diff -Nurd -X.diff_ignore freeciv/server/ruleset.c freeciv/server/ruleset.c
      lsend_packet_ruleset_nation(dest, &packet);
    } nations_iterate_end;
 diff -Nurd -X.diff_ignore freeciv/server/sernet.c freeciv/server/sernet.c
---- freeciv/server/sernet.c	2015-01-29 05:54:18.028246226 +0200
-+++ freeciv/server/sernet.c	2015-01-29 05:55:28.060244689 +0200
+--- freeciv/server/sernet.c	2015-01-30 06:22:22.642313628 +0200
++++ freeciv/server/sernet.c	2015-01-30 06:23:20.462312359 +0200
 @@ -1553,14 +1553,14 @@
                srvarg.port );
  

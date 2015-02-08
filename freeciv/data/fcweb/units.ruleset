@@ -887,7 +887,12 @@ uk_gold       = 0
 flags         = "Paratroopers"
 roles         = "DefendOk"
 helptext      = _("\
-Paratroopers are experts at airborne attacks.\
+Paratroopers are experts at airborne attacks. \
+From a friendly city or airbase, Paratroopers who have not expended any \
+movement points can paradrop directly to any tile in range, and be \
+immediately ready to act there. (Beware dropping into unseen territory, \
+as Paratroopers landing on a tile occupied by enemy units are easy \
+targets!)\
 ")
 
 paratroopers_range = 10

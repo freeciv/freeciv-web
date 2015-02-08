@@ -1,0 +1,12 @@
+diff -Nurd -X.diff_ignore freeciv/server/ruleset.c freeciv/server/ruleset.c
+--- freeciv/server/ruleset.c	2015-01-30 22:32:17.417036820 +0200
++++ freeciv/server/ruleset.c	2015-02-08 10:18:32.208942008 +0200
+@@ -6790,7 +6790,7 @@
+     ok = openload_script_file("script", rsdir, buffer);
+   }
+ 
+-  if (ok && buffer_script) {
++  if (ok && !buffer_script) {
+     ok = openload_script_file("default", rsdir, NULL);
+   }
+ 

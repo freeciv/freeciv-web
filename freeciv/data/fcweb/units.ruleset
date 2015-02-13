@@ -2154,6 +2154,10 @@ Caravans can establish trade routes with your own cities or those of other\
  them; if you only own one city, trade in each city is doubled, but you\
  only get the benefit from one end of the route.\
 "), _("\
+Initially cities can support a maximum of two trade routes. Knowledge of\
+ the technologies Magnetism and The Corporation each increase this limit\
+ by one; knowing both allows cities to support four trade routes each.\
+"), _("\
 Every Caravan that is used to build a wonder will add 50 shields\
  towards the production of the wonder.\
 "), _("\

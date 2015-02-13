@@ -23,6 +23,7 @@ import json
 gfxdir = "";
 
 files = {"amplio2" : ["../../freeciv/freeciv/data/amplio2.tilespec",
+  "../../freeciv/freeciv/data/amplio2/activities.spec",
   "../../freeciv/freeciv/data/amplio2/ancientcities.spec",
   "../../freeciv/freeciv/data/amplio2/explosions.spec",
   "../../freeciv/freeciv/data/amplio2/fog.spec",
@@ -37,6 +38,7 @@ files = {"amplio2" : ["../../freeciv/freeciv/data/amplio2.tilespec",
   "../../freeciv/freeciv/data/amplio2/terrain2.spec",
   "../../freeciv/freeciv/data/amplio2/tiles.spec",
   "../../freeciv/freeciv/data/amplio2/units.spec",
+  "../../freeciv/freeciv/data/amplio2/upkeep.spec",
   "../../freeciv/freeciv/data/amplio2/veterancy.spec",
   "../../freeciv/freeciv/data/amplio2/water.spec",
   "../../freeciv/freeciv/data/misc/wonders-large.spec",

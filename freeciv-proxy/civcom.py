@@ -91,15 +91,15 @@ class CivCom(Thread):
         try:
             if (self.socket is not None and not self.stopped):
                 if (self.packet_size == -1):
-                    self.header_buf += self.socket.recv(4 -
+                    self.header_buf += self.socket.recv(2 -
                                                         len(self.header_buf))
                     if (len(self.header_buf) == 0):
                         self.close_connection()
                         return None
-                    if (len(self.header_buf) == 4):
-                        header_pck = unpack('>HH', self.header_buf)
+                    if (len(self.header_buf) == 2):
+                        header_pck = unpack('>H', self.header_buf)
                         self.header_buf = bytearray(0)
-                        self.packet_size = header_pck[0] - 4
+                        self.packet_size = header_pck[0] - 2
                         if (self.packet_size <= 0 or self.packet_size > 32767):
                             logger.error("Invalid packet size.")
                     else:
@@ -181,7 +181,7 @@ class CivCom(Thread):
 
         try:
             for net_message in self.civserver_messages:
-                header = pack('>HH', len(net_message), 0)
+                header = pack('>H', len(net_message))
                 self.socket.sendall(
                     header +
                     net_message.encode('utf-8') +

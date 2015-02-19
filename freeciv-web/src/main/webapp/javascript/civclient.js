@@ -488,11 +488,10 @@ function set_phase_start()
 **************************************************************************/
 function request_observe_game()
 {
-  var test_packet = {"type" : packet_chat_msg_req, 
-                         "message" : "/observe "};
+  var test_packet = {"pid" : packet_chat_msg_req, 
+                     "message" : "/observe "};
   var myJSONText = JSON.stringify(test_packet);
-  send_request (myJSONText);
-
+  send_request(myJSONText);
 }
 
 /**************************************************************************
@@ -516,10 +515,10 @@ function surrender_game()
 function send_surrender_game()
 {
   if (!client_is_observer()) {
-    var test_packet = {"type" : packet_chat_msg_req, 
-                         "message" : "/surrender "};
+    var test_packet = {"pid" : packet_chat_msg_req, 
+                       "message" : "/surrender "};
     var myJSONText = JSON.stringify(test_packet);
-    send_request (myJSONText);
+    send_request(myJSONText);
   }
 }
 
@@ -604,14 +603,13 @@ function show_auth_dialog(packet) {
 			buttons: 
 			{
 				"Ok" : function() {
-                                  var pwd_packet = {"type" : packet_authentication_reply, "password" : $('#password_req').val()};
+                                  var pwd_packet = {"pid" : packet_authentication_reply, "password" : $('#password_req').val()};
                                   var myJSONText = JSON.stringify(pwd_packet);
-                                  send_request (myJSONText);
+                                  send_request(myJSONText);
 
                                   $("#dialog").dialog('close');
 				}
-			}	
-			
+			}
 		});
 
  	

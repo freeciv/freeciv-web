@@ -101,10 +101,10 @@ function load_game_check()
 function load_game_real(filename)
 {
       console.log("Server command: /load " + filename );
-      var test_packet = {"type" : packet_chat_msg_req, 
+      var test_packet = {"pid" : packet_chat_msg_req, 
                          "message" : "/load " + filename};
       var myJSONText = JSON.stringify(test_packet);
-      send_request (myJSONText);
+      send_request(myJSONText);
       $.unblockUI();
 }
 
@@ -113,13 +113,13 @@ function load_game_real(filename)
 **************************************************************************/
 function load_game_toggle()
 {
-  var test_packet = {"type" : packet_chat_msg_req, 
-                         "message" : "/aitoggle AI*1"};
+  var test_packet = {"pid" : packet_chat_msg_req, 
+                     "message" : "/aitoggle AI*1"};
 
-  send_request (JSON.stringify(test_packet));
-  test_packet = {"type" : packet_chat_msg_req, 
-                         "message" : "/take AI*1"};
-  send_request (JSON.stringify(test_packet));
+  send_request(JSON.stringify(test_packet));
+  test_packet = {"pid" : packet_chat_msg_req, 
+                 "message" : "/take AI*1"};
+  send_request(JSON.stringify(test_packet));
   $.unblockUI();
 
 }
@@ -212,7 +212,7 @@ function check_savegame_duplicate(new_savename)
 **************************************************************************/
 function save_game_send()
 {
-  var test_packet = {"type" : packet_chat_msg_req, "message" : "/save"};
+  var test_packet = {"pid" : packet_chat_msg_req, "message" : "/save"};
   var myJSONText = JSON.stringify(test_packet);
   send_request(myJSONText);
   sTimerId = setTimeout(save_game_fetch,  3500);

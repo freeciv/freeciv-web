@@ -129,9 +129,9 @@ function init_options_dialog()
 
 
   $('#metamessage_setting').change(function() {
-    var test_packet = {"type" : packet_chat_msg_req, "message" : "/metamessage " + $('#metamessage_setting').val()};
+    var test_packet = {"pid" : packet_chat_msg_req, "message" : "/metamessage " + $('#metamessage_setting').val()};
     var myJSONText = JSON.stringify(test_packet);
-    send_request (myJSONText);
+    send_request(myJSONText);
   });
 
   $('#metamessage_setting').bind('keyup blur',function(){ 
@@ -142,9 +142,9 @@ function init_options_dialog()
   );
 
   $('#timeout_setting').change(function() {
-    var test_packet = {"type" : packet_chat_msg_req, "message" : "/set timeout " + $('#timeout_setting').val()};
+    var test_packet = {"pid" : packet_chat_msg_req, "message" : "/set timeout " + $('#timeout_setting').val()};
     var myJSONText = JSON.stringify(test_packet);
-    send_request (myJSONText);
+    send_request(myJSONText);
   });
 
   if (!audio.source.src) {

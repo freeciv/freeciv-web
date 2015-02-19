@@ -273,9 +273,9 @@ function popit_req(ptile)
   var punit = find_visible_unit(ptile);
   if (punit != null) punit_id = punit['id'];
 
-  var packet = {"type" : packet_info_text_req, "visible_unit" : punit_id,
+  var packet = {"pid" : packet_info_text_req, "visible_unit" : punit_id,
                 "loc" : ptile['index']};
-  send_request (JSON.stringify(packet));
+  send_request(JSON.stringify(packet));
 }
 
 /**************************************************************************

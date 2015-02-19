@@ -146,11 +146,10 @@ function set_req_government(gov_id)
 **************************************************************************/
 function send_player_change_government(govt_id)
 {
-  var packet = {"type" : packet_player_change_government, 
+  var packet = {"pid" : packet_player_change_government,
                 "government" : govt_id };
-  send_request (JSON.stringify(packet));
+  send_request(JSON.stringify(packet));
 }
-
 
 /**************************************************************************
  Returns the max tax rate for a given government.
@@ -214,8 +213,7 @@ function can_player_get_gov(govt_id)
 **************************************************************************/
 function request_report(rtype)
 {
-  var packet = {"type" :  packet_report_req, 
+  var packet = {"pid" :  packet_report_req,
                 "report_type" : rtype};
-  send_request (JSON.stringify(packet));
-
+  send_request(JSON.stringify(packet));
 }

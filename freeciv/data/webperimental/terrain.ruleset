@@ -1243,7 +1243,7 @@ helptext       = _("\
 Fortresses improve defense for land units. Among other effects, a land \
 unit remaining in a fortress for a whole turn without moving recovers \
 a quarter of its hit points. With Invention, fortresses gain watchtowers \
-from which units can see further afield.\
+from which land units can see further afield.\
 ")
 
 [extra_airbase]

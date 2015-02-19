@@ -69,8 +69,8 @@ mv resin-${resin_version} resin
 echo "==== Fetching/Installing Tornado Web Server ===="
 cd /tmp
 wget ${tornado_url}
-tar xvfz tornado-4.0.tar.gz
-cd tornado-4.0
+tar xvfz tornado-4.1.tar.gz
+cd tornado-4.1
 python3.4 setup.py install
 
 pip3 install wikipedia

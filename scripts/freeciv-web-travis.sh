@@ -67,8 +67,8 @@ chmod -R 777 resin
 
 echo "==== Fetching/Installing Tornado Web Server ===="
 wget ${tornado_url}
-tar xvfz tornado-4.0.tar.gz
-cd tornado-4.0
+tar xvfz tornado-4.1.tar.gz
+cd tornado-4.1
 python3.4 setup.py install
 
 ## mysql setup

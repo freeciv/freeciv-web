@@ -46,8 +46,16 @@ Freeciv-web can be setup using Vagrant on VirtualBox to quickly create a
 local developer image running Freeciv-web on Ubuntu 14.04 on your host 
 operating system such as Windows, OSX or Linux. 
 
-1. Install VirtualBox: https://www.virtualbox.org/
-2. Install Vagrant: http://www.vagrantup.com/
+1. Install VirtualBox: https://www.virtualbox.org/ - Install manually on Windows, and with the following command on Linux:
+ ```bash
+sudo apt-get install virtualbox
+ ```
+
+2. Install Vagrant: http://www.vagrantup.com/ - Install manually on Windows
+, and with the following command on Linux:
+ ```bash
+sudo apt-get install vagrant
+ ```
 
 3. Install Git: http://git-scm.com/ then check out Freeciv-web from git to 
 a directory on your computer, by running this git command:

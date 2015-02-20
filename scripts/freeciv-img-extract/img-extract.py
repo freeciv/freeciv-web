@@ -22,7 +22,9 @@ import json
 
 gfxdir = "";
 
-files = {"amplio2" : ["../../freeciv/freeciv/data/amplio2.tilespec",
+files = {"amplio2" : [
+  "../../freeciv/freeciv/data/amplio2/terrain1.spec",
+  "../../freeciv/freeciv/data/amplio2.tilespec",
   "../../freeciv/freeciv/data/amplio2/activities.spec",
   "../../freeciv/freeciv/data/amplio2/ancientcities.spec",
   "../../freeciv/freeciv/data/amplio2/explosions.spec",
@@ -34,7 +36,6 @@ files = {"amplio2" : ["../../freeciv/freeciv/data/amplio2.tilespec",
   "../../freeciv/freeciv/data/amplio2/hills.spec",
   "../../freeciv/freeciv/data/amplio2/ocean.spec",
   "../../freeciv/freeciv/data/amplio2/select.spec",
-  "../../freeciv/freeciv/data/amplio2/terrain1.spec",
   "../../freeciv/freeciv/data/amplio2/terrain2.spec",
   "../../freeciv/freeciv/data/amplio2/tiles.spec",
   "../../freeciv/freeciv/data/amplio2/units.spec",
@@ -79,7 +80,35 @@ files = {"amplio2" : ["../../freeciv/freeciv/data/amplio2.tilespec",
   "../../freeciv/freeciv/data/misc/flags.spec",
   "../../freeciv/freeciv/data/misc/treaty.spec",
   "../../freeciv/freeciv/data/misc/citybar.spec"
-  ]}; 
+  ],
+  "isotrident" : [
+  "../../freeciv/freeciv/data/isotrident/terrain1.spec",
+  "../../freeciv/freeciv/data/isotrident/cities.spec",
+  "../../freeciv/freeciv/data/isotrident/fog.spec",
+  "../../freeciv/freeciv/data/isotrident/grid.spec",
+  "../../freeciv/freeciv/data/isotrident/morecities.spec",
+  "../../freeciv/freeciv/data/isotrident/nuke.spec",
+  "../../freeciv/freeciv/data/isotrident/select.spec",
+  "../../freeciv/freeciv/data/isotrident/terrain2.spec",
+  "../../freeciv/freeciv/data/isotrident/ocean.spec",
+  "../../freeciv/freeciv/data/isotrident/tiles.spec",
+  "../../freeciv/freeciv/data/isotrident/unitextras.spec",
+  "../../freeciv/freeciv/data/misc/wonders-large.spec",
+  "../../freeciv/freeciv/data/misc/colors.tilespec",
+  "../../freeciv/freeciv/data/misc/buildings-large.spec",
+  "../../freeciv/freeciv/data/misc/overlays.spec",
+  "../../freeciv/freeciv/data/misc/shields.spec",
+  "../../freeciv/freeciv/data/misc/small.spec",
+  "../../freeciv/freeciv/data/misc/governments.spec",
+  "../../freeciv/freeciv/data/misc/specialists.spec",
+  "../../freeciv/freeciv/data/misc/space.spec",
+  "../../freeciv/freeciv/data/misc/editor.spec",
+  "../../freeciv/freeciv/data/misc/techs.spec",
+  "../../freeciv/freeciv/data/misc/flags.spec",
+  "../../freeciv/freeciv/data/misc/treaty.spec",
+  "../../freeciv/freeciv/data/misc/citybar.spec"
+  ]
+}; 
 
 global tileset;
 global curr_x;
@@ -88,6 +117,9 @@ global max_row_height;
 global max_width;
 global max_height;
 global tileset_inc;
+global dither_map;
+global dither_mask;
+global mask_image;
 
 coords = {};
 max_width = 0;
@@ -104,10 +136,9 @@ tileset_width = 1800;
 dither_types = ["t.l0.desert1", "t.l0.plains1", "t.l0.grassland1", "t.l0.forest1", "t.l0.jungle1", "t.l0.hills1", "t.l0.mountains1", "t.l0.tundra1", "t.l0.swamp1"];
 print("Freeciv-img-extract running with PIL " + Image.VERSION);
 tileset = Image.new('RGBA', (tileset_width, tileset_height), (0, 0, 0, 0));
-mask_image = Image.open("mask.png");
-dither_mask = Image.open("dither.png");
+mask_image = None;
+dither_mask = None;
 dither_map = {};
-global tileset_inc;
 tileset_inc = 0;
 
 def config_read(file):
@@ -150,9 +181,12 @@ def increment_tileset_image(tileset_name):
   max_width = 0;
   max_height = 0;
 
-for tile_file in files.keys():
+for tile_file in sorted(files.keys()):
+  print("*** Extracting tileset: " + tile_file + "\n");
   tileset_inc = 0;
   coords[tile_file] = {};
+  dither_map = {};
+
   for file in files[tile_file]:
     config = config_read(file);
     
@@ -190,7 +224,7 @@ for tile_file in files.keys():
       print(gfx);
       im = Image.open(gfxdir + gfx.replace("\"", ""));
  
-      for current_section in ["grid_main", "grid_roads", "grid_rails", "grid_coasts"]: 
+      for current_section in ["grid_main", "grid_roads", "grid_rails", "grid_coasts", "grid_extra"]: 
         if current_section in config.sections():
           dx = int(config.get(current_section, "dx"));
           dy = int(config.get(current_section, "dy"));
@@ -229,7 +263,13 @@ for tile_file in files.keys():
                                           y_top_left + gy*dy + dy + pixel_border*gy)
   
             result_tile = im.copy().crop(dims); 
-  
+
+            if tag == "t.dither_tile":
+              dither_mask = result_tile.copy();
+
+            if tag == "mask.tile":
+              mask_image = result_tile.copy();
+
   
             if (tag.find("cellgroup") != -1):
               #handle a cell group (1 tile = 4 cells)
@@ -290,7 +330,7 @@ for tile_file in files.keys():
               if (tag2 != None and len(tag2) > 0): 
                 coords[tile_file][tag2] = (curr_x, curr_y, w, h, tileset_inc);
 
-  if not tile_file == "amplio2":  
+  if not (tile_file == "amplio2" or tile_file == "isotrident"):  
     increment_tileset_image(tile_file);
   else: 
     for src_key in dither_map.keys():
@@ -337,13 +377,13 @@ for tile_file in files.keys():
     curr_x += w;
     tileset.paste(im, (curr_x, curr_y));
     coords[tile_file]["city_invalid"] = (curr_x, curr_y, w, h, tileset_inc);
-    increment_tileset_image("amplio2");
+    increment_tileset_image(tile_file);
 
 print("MAX: " + str(max_width) + "  " + str(max_height) + "  " + str(sum_area));
 
 for tile_file in files.keys():
-  f = open('web_tileset_' + tile_file + '.js', 'w')
-  f.write("var tileset_" + tile_file + " = " + json.dumps(coords[tile_file], separators=(',',':')) + ";");
+  f = open('tileset_spec_' + tile_file + '.js', 'w')
+  f.write("var tileset = " + json.dumps(coords[tile_file], separators=(',',':')) + ";");
 
 
 print("done.");

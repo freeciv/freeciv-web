@@ -83,10 +83,6 @@ var DARKNESS_CARD_FULL = 3;
 /* Corner darkness & fog.  3^4 = 81 sprites. */
 var DARKNESS_CORNER = 4;
 
-var dither_offset_x = [normal_tile_width/2, 0, normal_tile_width/2, 0];
-var dither_offset_y = [0, normal_tile_height/2, normal_tile_height/2, 0];
-
-
 var terrain_match = {"t.l0.hills1" : MATCH_NONE, 
 "t.l0.mountains1" : MATCH_NONE, 
 "t.l0.plains1" : MATCH_NONE,

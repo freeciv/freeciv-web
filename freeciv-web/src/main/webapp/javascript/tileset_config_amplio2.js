@@ -23,6 +23,8 @@ var tileset_options = "+tilespec4+2007.Oct.26";
 var tileset_name = "amplio2";
 var priority = 20;
 
+var tileset_image_count = 3;
+
 var normal_tile_width  = 96;
 var normal_tile_height = 48;
 var small_tile_width   = 15;
@@ -73,7 +75,8 @@ var tilelabel_offset_x = 0
 var city_names_font_size = 10;
 var city_productions_font_size = 8;
 
-
+var dither_offset_x = [normal_tile_width/2, 0, normal_tile_width/2, 0];
+var dither_offset_y = [0, normal_tile_height/2, normal_tile_height/2, 0];
 
 var ts_layer = [];
 
@@ -198,26 +201,26 @@ ts_tiles['inaccessible']['layer0_match_type'] = "land";
 
 var tile_types_setup = 
 {
-"l0.lake":{"match_style":2,"sprite_type":1,"mine_tag":"(null)","match_indices":2,"match_index":[0,2],"dither":false},
-"l0.coast":{"match_style":3,"sprite_type":1,"mine_tag":"(null)","match_indices":3,"match_index":[0,1,2],"dither":false},
-"l1.coast":{"match_style":2,"sprite_type":1,"mine_tag":"(null)","match_indices":2,"match_index":[3,4],"dither":false},
-"l0.floor":{"match_style":3,"sprite_type":1,"mine_tag":"(null)","match_indices":3,"match_index":[1,0,2],"dither":false},
-"l1.floor":{"match_style":2,"sprite_type":1,"mine_tag":"(null)","match_indices":2,"match_index":[3,4],"dither":false},
-"l0.arctic":{"match_style":0,"sprite_type":0,"mine_tag":"tx.oil_mine","match_indices":1,"match_index":[0],"dither":false},
-"l0.desert":{"match_style":0,"sprite_type":0,"mine_tag":"tx.oil_mine","match_indices":1,"match_index":[2],"dither":true},
-"l0.forest":{"match_style":0,"sprite_type":0,"mine_tag":"(null)","match_indices":1,"match_index":[2],"dither":true},
-"l1.forest":{"match_style":1,"sprite_type":0,"mine_tag":"(null)","match_indices":2,"match_index":[0,0],"dither":false},
-"l0.grassland":{"match_style":0,"sprite_type":0,"mine_tag":"(null)","match_indices":1,"match_index":[2],"dither":true},
-"l0.hills":{"match_style":0,"sprite_type":0,"mine_tag":"tx.mine","match_indices":1,"match_index":[2],"dither":true},
-"l1.hills":{"match_style":1,"sprite_type":0,"mine_tag":"tx.mine","match_indices":2,"match_index":[1,1],"dither":false},
-"l0.jungle":{"match_style":0,"sprite_type":0,"mine_tag":"(null)","match_indices":1,"match_index":[5],"dither":true},
-"l1.jungle":{"match_style":1,"sprite_type":0,"mine_tag":"(null)","match_indices":2,"match_index":[5,5],"dither":false},
-"l0.mountains":{"match_style":0,"sprite_type":0,"mine_tag":"tx.mine","match_indices":1,"match_index":[2],"dither":true},
-"l1.mountains":{"match_style":1,"sprite_type":0,"mine_tag":"tx.mine","match_indices":2,"match_index":[2,2],"dither":false},
-"l0.plains":{"match_style":0,"sprite_type":0,"mine_tag":"(null)","match_indices":1,"match_index":[2],"dither":true},
-"l0.swamp":{"match_style":0,"sprite_type":0,"mine_tag":"(null)","match_indices":1,"match_index":[2],"dither":true},
-"l0.tundra":{"match_style":0,"sprite_type":0,"mine_tag":"(null)","match_indices":1,"match_index":[2],"dither":true},
-"l0.inaccessible":{"match_style":0,"sprite_type":0,"mine_tag":"(null)","match_indices":1,"match_index":[2],"dither":false}
+"l0.lake":	{"match_style":MATCH_PAIR,"sprite_type":CELL_CORNER,"mine_tag":"(null)","match_indices":2,"match_index":[0,2],"dither":false},
+"l0.coast":	{"match_style":MATCH_FULL,"sprite_type":CELL_CORNER,"mine_tag":"(null)","match_indices":3,"match_index":[0,1,2],"dither":false},
+"l1.coast":	{"match_style":MATCH_PAIR,"sprite_type":CELL_CORNER,"mine_tag":"(null)","match_indices":2,"match_index":[3,4],"dither":false},
+"l0.floor":	{"match_style":MATCH_FULL,"sprite_type":CELL_CORNER,"mine_tag":"(null)","match_indices":3,"match_index":[1,0,2],"dither":false},
+"l1.floor":	{"match_style":MATCH_PAIR,"sprite_type":CELL_CORNER,"mine_tag":"(null)","match_indices":2,"match_index":[3,4],"dither":false},
+"l0.arctic":	{"match_style":MATCH_NONE,"sprite_type":CELL_WHOLE,"mine_tag":"tx.oil_mine","match_indices":1,"match_index":[0],"dither":false},
+"l0.desert":	{"match_style":MATCH_NONE,"sprite_type":CELL_WHOLE,"mine_tag":"tx.oil_mine","match_indices":1,"match_index":[2],"dither":true},
+"l0.forest":	{"match_style":MATCH_NONE,"sprite_type":CELL_WHOLE,"mine_tag":"(null)","match_indices":1,"match_index":[2],"dither":true},
+"l1.forest":	{"match_style":MATCH_SAME,"sprite_type":CELL_WHOLE,"mine_tag":"(null)","match_indices":2,"match_index":[0,0],"dither":false},
+"l0.grassland":	{"match_style":MATCH_NONE,"sprite_type":CELL_WHOLE,"mine_tag":"(null)","match_indices":1,"match_index":[2],"dither":true},
+"l0.hills":	{"match_style":MATCH_NONE,"sprite_type":CELL_WHOLE,"mine_tag":"tx.mine","match_indices":1,"match_index":[2],"dither":true},
+"l1.hills":	{"match_style":MATCH_SAME,"sprite_type":CELL_WHOLE,"mine_tag":"tx.mine","match_indices":2,"match_index":[1,1],"dither":false},
+"l0.jungle":	{"match_style":MATCH_NONE,"sprite_type":CELL_WHOLE,"mine_tag":"(null)","match_indices":1,"match_index":[5],"dither":true},
+"l1.jungle":	{"match_style":MATCH_SAME,"sprite_type":CELL_WHOLE,"mine_tag":"(null)","match_indices":2,"match_index":[5,5],"dither":false},
+"l0.mountains":	{"match_style":MATCH_NONE,"sprite_type":CELL_WHOLE,"mine_tag":"tx.mine","match_indices":1,"match_index":[2],"dither":true},
+"l1.mountains":	{"match_style":MATCH_SAME,"sprite_type":CELL_WHOLE,"mine_tag":"tx.mine","match_indices":2,"match_index":[2,2],"dither":false},
+"l0.plains":	{"match_style":MATCH_NONE,"sprite_type":CELL_WHOLE,"mine_tag":"(null)","match_indices":1,"match_index":[2],"dither":true},
+"l0.swamp":	{"match_style":MATCH_NONE,"sprite_type":CELL_WHOLE,"mine_tag":"(null)","match_indices":1,"match_index":[2],"dither":true},
+"l0.tundra":	{"match_style":MATCH_NONE,"sprite_type":CELL_WHOLE,"mine_tag":"(null)","match_indices":1,"match_index":[2],"dither":true},
+"l0.inaccessible":{"match_style":MATCH_NONE,"sprite_type":CELL_WHOLE,"mine_tag":"(null)","match_indices":1,"match_index":[2],"dither":false}
 
 };
 

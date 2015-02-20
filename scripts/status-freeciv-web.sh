@@ -83,9 +83,9 @@ fi
 printf "\n--------------------------------\n";
 
 echo "checking that tileset has been generated..."
-wget -O /tmp/status6.log --quiet --spider http://localhost/tileset/freeciv-web-tileset-0.png
+wget -O /tmp/status6.log --quiet --spider http://localhost/tileset/freeciv-web-tileset-amplio2-0.png
 if [ "$?" != 0 ]; then
-  wget -O /tmp/status6.log --spider http://localhost/tileset/freeciv-web-tileset-0.png 
+  wget -O /tmp/status6.log --spider http://localhost/tileset/freeciv-web-tileset-amplio2-0.png 
   echo "tileset is not OK"
   echo "\n\n\n"
 else

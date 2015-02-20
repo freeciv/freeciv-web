@@ -6,9 +6,11 @@ pngcrush pre-freeciv-web-tileset-amplio2-1.png freeciv-web-tileset-amplio2-1.png
 pngcrush pre-freeciv-web-tileset-amplio2-2.png freeciv-web-tileset-amplio2-2.png &&
 pngcrush pre-freeciv-web-tileset-amplio2-3.png freeciv-web-tileset-amplio2-3.png &&
 pngcrush pre-freeciv-web-tileset-trident-0.png freeciv-web-tileset-trident-0.png &&
+pngcrush pre-freeciv-web-tileset-isotrident-0.png freeciv-web-tileset-isotrident-0.png &&
+pngcrush pre-freeciv-web-tileset-isotrident-1.png freeciv-web-tileset-isotrident-1.png &&
 mkdir -p ../../freeciv-web/src/main/webapp/tileset &&
 cp freeciv-web-tileset-*.png ../../freeciv-web/src/main/webapp/tileset/ &&
-cp web_tileset_*.js ../../freeciv-web/src/main/webapp/javascript/ && 
+cp tileset_spec_*.js ../../freeciv-web/src/main/webapp/javascript/ && 
 echo "converting flag svg files to png..." && 
 mkdir -p ../../freeciv-web/src/main/webapp/images/flags/ &&
 (for X in `find ../../freeciv/freeciv/data/flags/*.svg` 

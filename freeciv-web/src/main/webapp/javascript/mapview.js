@@ -51,6 +51,18 @@ var dashedSupport = false;
 **************************************************************************/
 function init_mapview()
 {
+
+  /* Loads the two tileset definition files */
+  $.ajax({
+    url: "/javascript/tileset_config_amplio2.js",
+    dataType: "script",
+    async: false
+  });
+  $.ajax({
+    url: "/javascript/tileset_spec_amplio2.js",
+    dataType: "script",
+    async: false
+  });
  
   mapview_canvas = document.getElementById('canvas');
   mapview_canvas_ctx = mapview_canvas.getContext("2d");
@@ -230,21 +242,13 @@ function init_sprites()
   $.blockUI({ message: "<h1>Freeciv-web is loading. Please wait..."
 	  + "<br><center><img src='/images/loading.gif'></center></h1>" });
 
-  var tileset_image_one = new Image();
-  tileset_image_one.onload = preload_check; 
-  tileset_image_one.src = '/tileset/freeciv-web-tileset-amplio2-0.png?ts=' + ts;
-  tileset_images[0] = tileset_image_one;
-
-  var tileset_image_two = new Image();
-  tileset_image_two.onload = preload_check; 
-  tileset_image_two.src = '/tileset/freeciv-web-tileset-amplio2-1.png?ts=' + ts;
-  tileset_images[1] = tileset_image_two;
-
-  var tileset_image_three = new Image();
-  tileset_image_three.onload = preload_check; 
-  tileset_image_three.src = '/tileset/freeciv-web-tileset-amplio2-2.png?ts=' + ts;
-  tileset_images[2] = tileset_image_three;
- 
+  for (var i = 0; i < tileset_image_count; i++) {
+    var tileset_image = new Image();
+    tileset_image.onload = preload_check; 
+    tileset_image.src = '/tileset/freeciv-web-tileset-' 
+                        + tileset_name + '-' + i + '.png?ts=' + ts;
+    tileset_images[i] = tileset_image;
+  }
  
 }
 
@@ -255,7 +259,7 @@ function preload_check()
 {
   loaded_images += 1;
 
-  if (loaded_images == 3) {
+  if (loaded_images == tileset_image_count) {
     $.unblockUI();
     init_cache_sprites();
     init_common_intro_dialog();
@@ -268,8 +272,6 @@ function preload_check()
 function init_cache_sprites() 
 {
  try {
-
-  tileset = tileset_amplio2;
 
   if (typeof tileset === 'undefined') {
     swal("Tileset not generated correctly. Run sync.sh in "

@@ -66,8 +66,8 @@ function civclient_init()
     $("#civ_dialog").remove();
   }
 
-  game_init();
   init_mapview();
+  game_init();
   control_init();
 
   timeoutTimerId = setInterval("update_timeout()", 1000);

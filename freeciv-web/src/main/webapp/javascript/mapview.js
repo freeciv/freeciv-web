@@ -57,11 +57,16 @@ function init_mapview()
     url: "/javascript/tileset_config_amplio2.js",
     dataType: "script",
     async: false
+  }).fail(function() {
+    console.error("Unable to load tileset config.");
   });
+
   $.ajax({
     url: "/javascript/tileset_spec_amplio2.js",
     dataType: "script",
     async: false
+  }).fail(function() {
+    console.error("Unable to load tileset spec. Run Freeciv-img-extract.");
   });
  
   mapview_canvas = document.getElementById('canvas');

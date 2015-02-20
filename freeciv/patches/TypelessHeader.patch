@@ -1,0 +1,23 @@
+diff -Nurd -X.diff_ignore freeciv/common/packets_json.c freeciv/common/packets_json.c
+--- freeciv/common/packets_json.c	2015-02-20 00:36:47.939094033 +0200
++++ freeciv/common/packets_json.c	2015-02-20 01:18:08.691039605 +0200
+@@ -326,7 +326,7 @@
+ 
+   /* Parse JSON packet. */
+ 
+-  pc->json_packet = json_loadb((char*)pc->buffer->data + 4, whole_packet_len, 0, &error);
++  pc->json_packet = json_loadb((char*)pc->buffer->data + 2, whole_packet_len, 0, &error);
+ 
+   memmove(pc->buffer->data, pc->buffer->data, pc->buffer->ndata);
+   pc->buffer->ndata = 0;
+diff -Nurd -X.diff_ignore freeciv/common/packets_json.h freeciv/common/packets_json.h
+--- freeciv/common/packets_json.h	2015-02-19 21:36:24.107331510 +0200
++++ freeciv/common/packets_json.h	2015-02-20 00:34:31.955097016 +0200
+@@ -30,7 +30,6 @@
+   \
+   dio_output_init(&(dout.raw), buffer, sizeof(buffer)); \
+   dio_put_uint16_raw(&(dout.raw), 0);                   \
+-  dio_put_uint16_raw(&(dout.raw), packet_type);         \
+   dio_put_uint8_json(&dout, "pid", packet_type);
+ 
+ #define SEND_PACKET_END(packet_type) \

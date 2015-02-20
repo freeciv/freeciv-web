@@ -237,8 +237,8 @@ function show_city_dialog(pcity)
   $('#disbandable_city').off();
   $('#disbandable_city').prop('checked', pcity['disbandable_city']);
   $('#disbandable_city').click(function() {
-    var packet = {"type" : packet_city_disbandable_req, "city_id" : active_city['id']};
-    send_request (JSON.stringify(packet));
+    var packet = {"pid" : packet_city_disbandable_req, "city_id" : active_city['id']};
+    send_request(JSON.stringify(packet));
   });
 
   if (is_small_screen()) {
@@ -514,8 +514,8 @@ function request_city_buy()
 function send_city_buy()
 {
   if (active_city != null) {
-    var packet = {"type" : packet_city_buy, "city_id" : active_city['id']};
-    send_request (JSON.stringify(packet));
+    var packet = {"pid" : packet_city_buy, "city_id" : active_city['id']};
+    send_request(JSON.stringify(packet));
   }
 }
 
@@ -524,9 +524,9 @@ function send_city_buy()
 **************************************************************************/
 function send_city_change(city_id, kind, value)
 {
-  var packet = {"type" : packet_city_change, "city_id" : city_id, 
+  var packet = {"pid" : packet_city_change, "city_id" : city_id, 
                 "production_kind": kind, "production_value" : value};
-  send_request (JSON.stringify(packet));
+  send_request(JSON.stringify(packet));
 
   
 }
@@ -562,17 +562,17 @@ function do_city_map_click(ptile)
   var packet = null;
   var c_tile = index_to_tile(active_city['tile']);
   if (ptile['worked'] == active_city['id']) {
-    packet = {"type" : packet_city_make_specialist, 
+    packet = {"pid" : packet_city_make_specialist, 
 	         "city_id" : active_city['id'], 
                  "worker_x" : ptile['x'], 
 		 "worker_y" : ptile['y']};
   } else {
-    packet = {"type" : packet_city_make_worker, 
+    packet = {"pid" : packet_city_make_worker, 
 	         "city_id" : active_city['id'], 
                  "worker_x" : ptile['x'], 
 		 "worker_y" : ptile['y']};
-  }    
-  send_request (JSON.stringify(packet));
+  }
+  send_request(JSON.stringify(packet));
 
 }
 
@@ -628,8 +628,8 @@ function city_name_dialog(suggested_name, unit_id) {
 						  return;
 						}
 
-						var packet = {"type" : packet_unit_build_city, "name" : encodeURIComponent(name), "unit_id" : unit_id };
-						send_request (JSON.stringify(packet));
+						var packet = {"pid" : packet_unit_build_city, "name" : encodeURIComponent(name), "unit_id" : unit_id };
+						send_request(JSON.stringify(packet));
 						$("#city_name_dialog").remove();
 						keyboard_input=true;
 					}
@@ -644,8 +644,8 @@ function city_name_dialog(suggested_name, unit_id) {
   $('#city_name_dialog').keyup(function(e) {
     if (e.keyCode == 13) {
     	var name = $("#city_name_req").val();
-	var packet = {"type" : packet_unit_build_city, "name" : encodeURIComponent(name), "unit_id" : unit_id };
-	send_request (JSON.stringify(packet));
+	var packet = {"pid" : packet_unit_build_city, "name" : encodeURIComponent(name), "unit_id" : unit_id };
+	send_request(JSON.stringify(packet));
 	$("#city_name_dialog").remove();
         keyboard_input=true;
     }
@@ -689,9 +689,9 @@ function city_sell_improvement(improvement_id)
   var agree=confirm("Are you sure you want to sell this building?");
   if (agree) {
 
-    var packet = {"type" : packet_city_sell, "city_id" : active_city['id'], 
+    var packet = {"pid" : packet_city_sell, "city_id" : active_city['id'], 
                   "build_id": improvement_id};
-    send_request (JSON.stringify(packet));
+    send_request(JSON.stringify(packet));
   }
 
 }
@@ -753,12 +753,11 @@ function get_city_dxy_to_index(dx, dy)
 **************************************************************************/
 function city_change_specialist(city_id, from_specialist_id)
 {
-  var city_message = {"type": packet_city_change_specialist, 
-                       "city_id" : city_id,
-                       "from" : from_specialist_id,
-                       "to" : (from_specialist_id + 1) % 3};
+  var city_message = {"pid": packet_city_change_specialist, 
+                      "city_id" : city_id,
+                      "from" : from_specialist_id,
+                      "to" : (from_specialist_id + 1) % 3};
   send_request(JSON.stringify(city_message));
-
 }
 
 
@@ -822,8 +821,8 @@ function rename_city()
 						  return;
 						}
 
-						var packet = {"type" : packet_city_rename, "name" : encodeURIComponent(name), "city_id" : active_city['id'] };
-						send_request (JSON.stringify(packet));
+						var packet = {"pid" : packet_city_rename, "name" : encodeURIComponent(name), "city_id" : active_city['id'] };
+						send_request(JSON.stringify(packet));
 						$("#city_name_dialog").remove();
 						keyboard_input=true;
 					}
@@ -837,8 +836,8 @@ function rename_city()
   $('#city_name_dialog').keyup(function(e) {
     if (e.keyCode == 13) {
       var name = $("#city_name_req").val();
-      var packet = {"type" : packet_city_rename, "name" : encodeURIComponent(name), "city_id" : active_city['id'] };
-      send_request (JSON.stringify(packet));
+      var packet = {"pid" : packet_city_rename, "name" : encodeURIComponent(name), "city_id" : active_city['id'] };
+      send_request(JSON.stringify(packet));
       $("#city_name_dialog").remove();
       keyboard_input=true;
     }
@@ -1072,10 +1071,10 @@ function send_city_worklist_add(city_id, kind, value)
     return;
   } 
 
-  var city_message = {"type": packet_city_worklist_add, 
-                       "city_id" : city_id,
-                       "kind" : kind,
-                       "value" : value};
+  var city_message = {"pid": packet_city_worklist_add, 
+                      "city_id" : city_id,
+                      "kind" : kind,
+                      "value" : value};
   send_request(JSON.stringify(city_message));
 }
 
@@ -1084,8 +1083,8 @@ function send_city_worklist_add(city_id, kind, value)
 **************************************************************************/
 function send_city_worklist_remove(city_id, index) 
 {
-  var city_message = {"type": packet_city_worklist_remove, 
-                       "city_id" : city_id,
-                       "index" : index};
+  var city_message = {"pid": packet_city_worklist_remove, 
+                      "city_id" : city_id,
+                      "index" : index};
   send_request(JSON.stringify(city_message));
 }

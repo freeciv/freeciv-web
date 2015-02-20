@@ -89,9 +89,9 @@ function show_spaceship_dialog()
 **************************************************************************/
 function launch_spaceship() 
 {
-  var test_packet = {"type" : packet_spaceship_launch};
+  var test_packet = {"pid" : packet_spaceship_launch};
   var myJSONText = JSON.stringify(test_packet);
-  send_request (myJSONText);
+  send_request(myJSONText);
 
 }
 

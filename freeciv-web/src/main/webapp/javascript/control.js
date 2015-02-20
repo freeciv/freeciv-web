@@ -262,9 +262,9 @@ function check_text_input(event,chatboxtextarea) {
     $(chatboxtextarea).val('');
     $(chatboxtextarea).focus();
     keyboard_input = true;
-    var test_packet = {"type" : packet_chat_msg_req, "message" : message};
+    var test_packet = {"pid" : packet_chat_msg_req, "message" : message};
     var myJSONText = JSON.stringify(test_packet);
-    send_request (myJSONText);
+    send_request(myJSONText);
     return false;
   }
 }
@@ -767,8 +767,8 @@ function do_map_click(ptile, qtype)
   if (goto_active) {
     if (current_focus.length > 0) {
       var punit = current_focus[0];
-      var packet = {"type" : packet_unit_move, "unit_id" : punit['id'], "tile": ptile['index'] };
-      send_request (JSON.stringify(packet));
+      var packet = {"pid" : packet_unit_move, "unit_id" : punit['id'], "tile": ptile['index'] };
+      send_request(JSON.stringify(packet));
     }
   
     deactivate_goto();
@@ -776,16 +776,16 @@ function do_map_click(ptile, qtype)
 
   } else if (paradrop_active && current_focus.length > 0) {
     var punit = current_focus[0];
-    var packet = {"type" : packet_unit_paradrop_to, "unit_id" : punit['id'], "tile": ptile['index'] };
-    send_request (JSON.stringify(packet));
+    var packet = {"pid" : packet_unit_paradrop_to, "unit_id" : punit['id'], "tile": ptile['index'] };
+    send_request(JSON.stringify(packet));
     paradrop_active = false;
 
   } else if (airlift_active && current_focus.length > 0) {
     var punit = current_focus[0];
     var pcity = tile_city(ptile);
     if (pcity != null) {
-      var packet = {"type" : packet_unit_airlift, "unit_id" : punit['id'], "city_id": pcity['id'] };
-      send_request (JSON.stringify(packet));
+      var packet = {"pid" : packet_unit_airlift, "unit_id" : punit['id'], "city_id": pcity['id'] };
+      send_request(JSON.stringify(packet));
     }
     airlift_active = false;
 
@@ -1186,8 +1186,8 @@ function send_end_turn()
 {
   $("#turn_done_button").button( "option", "disabled", true); 
   if (!is_touch_device()) $("#turn_done_button").tooltip({ disabled: true });
-  var packet = {"type" : packet_player_phase_done, "turn" : game_info['turn']};
-  send_request (JSON.stringify(packet));
+  var packet = {"pid" : packet_player_phase_done, "turn" : game_info['turn']};
+  send_request(JSON.stringify(packet));
 }
 
 
@@ -1307,8 +1307,8 @@ function key_unit_nuke()
   var funits = get_units_in_focus();
   for (var i = 0; i < funits.length; i++) {
     var punit = funits[i]; 
-    var packet = {"type" : packet_unit_nuke, "unit_id" : punit['id']};
-      send_request (JSON.stringify(packet));  
+    var packet = {"pid" : packet_unit_nuke, "unit_id" : punit['id']};
+      send_request(JSON.stringify(packet));  
   }  
   update_unit_focus();
 }
@@ -1321,8 +1321,8 @@ function key_unit_upgrade()
   var funits = get_units_in_focus();
   for (var i = 0; i < funits.length; i++) {
     var punit = funits[i]; 
-    var packet = {"type" : packet_unit_upgrade, "unit_id" : punit['id']};
-      send_request (JSON.stringify(packet));  
+    var packet = {"pid" : packet_unit_upgrade, "unit_id" : punit['id']};
+      send_request(JSON.stringify(packet));  
   }  
   update_unit_focus();
 }
@@ -1428,9 +1428,9 @@ function key_unit_homecity()
     var pcity = tile_city(ptile);
 
     if (pcity != null) {
-      var packet = {"type" : packet_unit_change_homecity, "unit_id" : punit['id'],
+      var packet = {"pid" : packet_unit_change_homecity, "unit_id" : punit['id'],
                 "city_id" : pcity['id']};
-      send_request (JSON.stringify(packet));
+      send_request(JSON.stringify(packet));
       $("#order_change_homecity").hide();
     }
 
@@ -1471,9 +1471,9 @@ function key_unit_auto_settle()
 function request_new_unit_activity(punit, activity, target)
 {
 
-  var packet = {"type" : packet_unit_change_activity, "unit_id" : punit['id'],
+  var packet = {"pid" : packet_unit_change_activity, "unit_id" : punit['id'],
                 "activity" : activity, "target" : target };
-  send_request (JSON.stringify(packet));
+  send_request(JSON.stringify(packet));
 }
 
 
@@ -1484,8 +1484,8 @@ function request_new_unit_activity(punit, activity, target)
 function request_unit_autosettlers(punit)
 {
   if (punit != null ) {
-    var packet = {"type" : packet_unit_autosettlers, "unit_id" : punit['id']};
-    send_request (JSON.stringify(packet));
+    var packet = {"pid" : packet_unit_autosettlers, "unit_id" : punit['id']};
+    send_request(JSON.stringify(packet));
   }
 }
 
@@ -1506,10 +1506,9 @@ function request_unit_build_city()
 
       var ptype = unit_type(punit);
       if (ptype['name'] == "Settlers" || ptype['name'] == "Engineers") {
-        var packet = {"type" : packet_city_name_suggestion_req, "unit_id" : punit['id'] };
-        send_request (JSON.stringify(packet));
-      } 
-
+        var packet = {"pid" : packet_city_name_suggestion_req, "unit_id" : punit['id'] };
+        send_request(JSON.stringify(packet));
+      }
     }
   }
 }
@@ -1522,8 +1521,8 @@ function key_unit_disband()
   var funits = get_units_in_focus();
   for (var i = 0; i < funits.length; i++) {
     var punit = funits[i]; 
-    var packet = {"type" : packet_unit_disband, "unit_id" : punit['id'] };
-    send_request (JSON.stringify(packet));
+    var packet = {"pid" : packet_unit_disband, "unit_id" : punit['id'] };
+    send_request(JSON.stringify(packet));
 
     /* Also remove unit immediately in client, to ensure it is removed. */
     clear_tile_unit(punit);
@@ -1540,21 +1539,25 @@ function key_unit_move(dir)
 {
   if (current_focus.length > 0) {
     var punit = current_focus[0];
-    if (punit == null) return;
+    if (punit == null) {
+      return;
+    }
     
     var ptile = index_to_tile(punit['tile']);
-    if (ptile == null) return;
-    
+    if (ptile == null) {
+      return;
+    }
+
     var newtile = mapstep(ptile, dir);
-    if (newtile == null) return;
-        
-    var packet = {"type" : packet_unit_move, "unit_id" : punit['id'], "tile": newtile['index'] };
-    send_request (JSON.stringify(packet));
-        
+    if (newtile == null) {
+      return;
+    }
+
+    var packet = {"pid" : packet_unit_move, "unit_id" : punit['id'], "tile": newtile['index'] };
+    send_request(JSON.stringify(packet));
   }
-  
-  deactivate_goto(); 
-  
+
+  deactivate_goto();
 }
 
 /**************************************************************************
@@ -1568,14 +1571,14 @@ function process_diplomat_arrival(pdiplomat, target_tile_id)
 
   if (pdiplomat != null && ptile != null) {
     var packet = {
-      "type" : packet_unit_get_actions,
+      "pid" : packet_unit_get_actions,
       "actor_unit_id" : pdiplomat['id'],
       "target_unit_id" : IDENTITY_NUMBER_ZERO,
       "target_city_id" : IDENTITY_NUMBER_ZERO,
       "target_tile_id": target_tile_id,
       "disturb_player": true
     };
-    send_request (JSON.stringify(packet));
+    send_request(JSON.stringify(packet));
   }
 }
 
@@ -1587,9 +1590,9 @@ function request_goto_path(unit_id, dst_x, dst_y)
   if (goto_request_map[dst_x + "," + dst_y] == null) {
     goto_request_map[dst_x + "," + dst_y] = true;
 
-    var packet = {"type" : packet_goto_path_req, "unit_id" : unit_id,
+    var packet = {"pid" : packet_goto_path_req, "unit_id" : unit_id,
                   "goal" : map_pos_to_tile(dst_x, dst_y)['index']};
-    send_request (JSON.stringify(packet));
+    send_request(JSON.stringify(packet));
     clear_goto_tiles(); 
     current_goto_turns = null;
     $("#unit_text_details").html("Choose unit goto");

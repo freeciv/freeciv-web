@@ -24,10 +24,10 @@ function pregame_start_game()
 {
   if (client.conn['player_num'] == null) return;
       
-  var test_packet = {"type" : packet_player_ready, "is_ready" : true,
+  var test_packet = {"pid" : packet_player_ready, "is_ready" : true,
                      "player_no": client.conn['player_num']};
   var myJSONText = JSON.stringify(test_packet);
-  send_request (myJSONText);
+  send_request(myJSONText);
 
   setup_window_size ();
 }
@@ -39,15 +39,15 @@ function observe()
 {
   if (observing) {
     $("#observe_button").button("option", "label", "Observe Game");
-    var test_packet = {"type" : packet_chat_msg_req, "message" : "/detach"};
+    var test_packet = {"pid" : packet_chat_msg_req, "message" : "/detach"};
     var myJSONText = JSON.stringify(test_packet);
-    send_request (myJSONText);
-    
+    send_request(myJSONText);
+
   } else {
     $("#observe_button").button("option", "label", "Don't observe");
-    var test_packet = {"type" : packet_chat_msg_req, "message" : "/observe"};
+    var test_packet = {"pid" : packet_chat_msg_req, "message" : "/observe"};
     var myJSONText = JSON.stringify(test_packet);
-    send_request (myJSONText);
+    send_request(myJSONText);
   }
   
   observing = !observing;
@@ -212,14 +212,14 @@ function submit_nation_choise()
 {
   if (chosen_nation == -1 || client.conn['player_num'] == null) return;
 
-  var test_packet = {"type" : packet_nation_select_req, 
-                      "player_no" : client.conn['player_num'],
-                      "nation_no" : chosen_nation,
-                      "is_male" : true, /* FIXME */
-                      "name" : client.conn['username'],
-                      "style" : nations[chosen_nation]['style']};
+  var test_packet = {"pid" : packet_nation_select_req, 
+                     "player_no" : client.conn['player_num'],
+                     "nation_no" : chosen_nation,
+                     "is_male" : true, /* FIXME */
+                     "name" : client.conn['username'],
+                     "style" : nations[chosen_nation]['style']};
   var myJSONText = JSON.stringify(test_packet);
-  send_request (myJSONText);
+  send_request(myJSONText);
   clearInterval(nation_select_id);
   $("#pick_nation_button").button( "option", "disabled", true); 
 }
@@ -308,15 +308,15 @@ function pregame_settings()
   $(id).dialog('open');		
 
   $('#aifill').change(function() {
-    var test_packet = {"type" : packet_chat_msg_req, "message" : "/set aifill " + $('#aifill').val()};
+    var test_packet = {"pid" : packet_chat_msg_req, "message" : "/set aifill " + $('#aifill').val()};
     var myJSONText = JSON.stringify(test_packet);
-    send_request (myJSONText);
+    send_request(myJSONText);
   });
 
   $('#metamessage').change(function() {
-    var test_packet = {"type" : packet_chat_msg_req, "message" : "/metamessage " + $('#metamessage').val()};
+    var test_packet = {"pid" : packet_chat_msg_req, "message" : "/metamessage " + $('#metamessage').val()};
     var myJSONText = JSON.stringify(test_packet);
-    send_request (myJSONText);
+    send_request(myJSONText);
     metamessage_changed = true;
   });
 
@@ -328,60 +328,60 @@ function pregame_settings()
   );
 
   $('#mapsize').change(function() {
-    var test_packet = {"type" : packet_chat_msg_req, "message" : "/set size " + $('#mapsize').val()};
+    var test_packet = {"pid" : packet_chat_msg_req, "message" : "/set size " + $('#mapsize').val()};
     var myJSONText = JSON.stringify(test_packet);
-    send_request (myJSONText);
+    send_request(myJSONText);
   });
 
   $('#timeout').change(function() {
-    var test_packet = {"type" : packet_chat_msg_req, "message" : "/set timeout " + $('#timeout').val()};
+    var test_packet = {"pid" : packet_chat_msg_req, "message" : "/set timeout " + $('#timeout').val()};
     var myJSONText = JSON.stringify(test_packet);
-    send_request (myJSONText);
+    send_request(myJSONText);
   });
 
   $('#techlevel').change(function() {
-    var test_packet = {"type" : packet_chat_msg_req, "message" : "/set techlevel " + $('#techlevel').val()};
+    var test_packet = {"pid" : packet_chat_msg_req, "message" : "/set techlevel " + $('#techlevel').val()};
     var myJSONText = JSON.stringify(test_packet);
-    send_request (myJSONText);
+    send_request(myJSONText);
   });
 
   $('#specials').change(function() {
-    var test_packet = {"type" : packet_chat_msg_req, "message" : "/set specials " + $('#specials').val()};
+    var test_packet = {"pid" : packet_chat_msg_req, "message" : "/set specials " + $('#specials').val()};
     var myJSONText = JSON.stringify(test_packet);
-    send_request (myJSONText);
+    send_request(myJSONText);
   });
 
   $('#landmass').change(function() {
-    var test_packet = {"type" : packet_chat_msg_req, "message" : "/set landmass " + $('#landmass').val()};
+    var test_packet = {"pid" : packet_chat_msg_req, "message" : "/set landmass " + $('#landmass').val()};
     var myJSONText = JSON.stringify(test_packet);
-    send_request (myJSONText);
+    send_request(myJSONText);
   });
 
   $('#citymindist').change(function() {
-    var test_packet = {"type" : packet_chat_msg_req, "message" : "/set citymindist " + $('#citymindist').val()};
+    var test_packet = {"pid" : packet_chat_msg_req, "message" : "/set citymindist " + $('#citymindist').val()};
     var myJSONText = JSON.stringify(test_packet);
-    send_request (myJSONText);
+    send_request(myJSONText);
   });
 
   $('#endturn').change(function() {
-    var test_packet = {"type" : packet_chat_msg_req, "message" : "/set endturn " + $('#endturn').val()};
+    var test_packet = {"pid" : packet_chat_msg_req, "message" : "/set endturn " + $('#endturn').val()};
     var myJSONText = JSON.stringify(test_packet);
-    send_request (myJSONText);
+    send_request(myJSONText);
   });
 
   $('#generator').change(function() {
-    var test_packet = {"type" : packet_chat_msg_req, "message" : "/set generator " + $('#generator').val()};
+    var test_packet = {"pid" : packet_chat_msg_req, "message" : "/set generator " + $('#generator').val()};
     var myJSONText = JSON.stringify(test_packet);
-    send_request (myJSONText);
+    send_request(myJSONText);
 
   });
 
   $('#password').change(function() {
-    var pwd_packet = {"type" : packet_authentication_reply, "password" : $('#password').val()};
-    send_request (JSON.stringify(pwd_packet));
+    var pwd_packet = {"pid" : packet_authentication_reply, "password" : $('#password').val()};
+    send_request(JSON.stringify(pwd_packet));
 
-    var test_packet = {"type" : packet_chat_msg_req, "message" : "/metamessage Private password-protected game"};
-    send_request (JSON.stringify(test_packet));
+    var test_packet = {"pid" : packet_chat_msg_req, "message" : "/metamessage Private password-protected game"};
+    send_request(JSON.stringify(test_packet));
     metamessage_changed = true;
     $("#metamessage").prop('readonly', true);
     $("#metamessage_setting").prop('readonly', true);
@@ -393,18 +393,18 @@ function pregame_settings()
     ai_skill_level = parseFloat($('#skill_level').val());
     var test_packet = "";
     if (ai_skill_level == 0) {
-      test_packet = {"type" : packet_chat_msg_req, "message" : "/handicapped"};
+      test_packet = {"pid" : packet_chat_msg_req, "message" : "/handicapped"};
     } else if (ai_skill_level == 1) {
-      test_packet = {"type" : packet_chat_msg_req, "message" : "/novice"};
+      test_packet = {"pid" : packet_chat_msg_req, "message" : "/novice"};
     } else if (ai_skill_level == 2) {
-      test_packet = {"type" : packet_chat_msg_req, "message" : "/easy"};
+      test_packet = {"pid" : packet_chat_msg_req, "message" : "/easy"};
     } else if (ai_skill_level == 3) {
-      test_packet = {"type" : packet_chat_msg_req, "message" : "/normal"};
+      test_packet = {"pid" : packet_chat_msg_req, "message" : "/normal"};
     } else if (ai_skill_level == 4) {
-      test_packet = {"type" : packet_chat_msg_req, "message" : "/hard"};
+      test_packet = {"pid" : packet_chat_msg_req, "message" : "/hard"};
     }
     var myJSONText = JSON.stringify(test_packet);
-    send_request (myJSONText);
+    send_request(myJSONText);
   });
 
   $('#music_setting').prop('checked', audio_enabled == true);

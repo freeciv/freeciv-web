@@ -274,6 +274,11 @@ function pregame_settings()
           "<option value='island'>Island-based</option>" +
           "<option value='fair'>Fair islands</option>" +
 	  "</select></td></tr>"+
+	  "<tr title='Ruleset version'><td>Ruleset:</td>" +
+	  "<td><select name='ruleset' id='ruleset'>" +
+	  "<option value='fcweb'>Default Fcweb</option>" +
+	  "<option value='webperimental'>Webperimental</option>" +
+	  "</select></td></tr>"+
           "</table><br>" +
 	  "<span id='settings_info'><i>Freeciv-web can be customized using the command line in many other ways also. Type /help in the command line for more information.</i></span>" 
 	  ;
@@ -373,6 +378,12 @@ function pregame_settings()
     var test_packet = {"pid" : packet_chat_msg_req, "message" : "/set generator " + $('#generator').val()};
     var myJSONText = JSON.stringify(test_packet);
     send_request(myJSONText);
+
+  });
+
+  $('#ruleset').change(function() {
+    var packet = {"pid" : packet_chat_msg_req, "message" : "/rulesetdir " + $('#ruleset').val()};
+    send_request(JSON.stringify(packet));
 
   });
 

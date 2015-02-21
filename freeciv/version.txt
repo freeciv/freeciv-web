@@ -1,7 +1,7 @@
 # I keep previous version easily available here so I don't need to check
 # version history constantly when handling ruleset differences.
 # Previous: 28120
-FCREV=28218
+FCREV=28259
 FCBRANCH=trunk
 
 ORIGCAPSTR="+Freeciv.Devel-3.0-2015.Feb.08"

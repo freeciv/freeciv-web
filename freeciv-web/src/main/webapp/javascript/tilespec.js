@@ -270,7 +270,6 @@ function fill_sprite_array(layer, ptile, pedge, pcorner, punit, pcity, citymode)
 
       if (active_city != null && ptile != null && ptile['worked'] != null 
           && active_city['id'] == ptile['worked'] && active_city['food_output'] != null) {
-        sprite_array.push(get_city_active_worked_sprite());
 	var dx = city_tile(active_city)['x'] - ptile['x'];
 	var dy = city_tile(active_city)['y'] - ptile['y'];
         var idx = get_city_dxy_to_index(dx, dy);
@@ -612,15 +611,6 @@ function get_city_occupied_sprite(pcity) {
 }
 
 /**********************************************************************
-  Return the sprite for a active city worked tile.
-***********************************************************************/
-function get_city_active_worked_sprite() {
-  return {"key" : "city_active", 
-          "offset_x" : 0, 
-          "offset_y" : 0};
-}
-
-/**********************************************************************
 ...
 ***********************************************************************/
 function get_city_food_output_sprite(num) {
@@ -652,7 +642,7 @@ function get_city_trade_output_sprite(num) {
   Return the sprite for an invalid city worked tile.
 ***********************************************************************/
 function get_city_invalid_worked_sprite() {
-  return {"key" : "city_invalid", 
+  return {"key" : "grid.unavailable", 
           "offset_x" : 0, 
           "offset_y" : 0};
 }

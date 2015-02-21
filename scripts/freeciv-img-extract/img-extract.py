@@ -364,19 +364,6 @@ for tile_file in sorted(files.keys()):
               curr_y += max_row_height;
               max_row_height = 0;
 
-    im = Image.open("city_active.png");
-    (w, h) = im.size;
-    curr_x += w;
-    tileset.paste(im, (curr_x, curr_y));
-    coords[tile_file]["city_active"] = (curr_x, curr_y, w, h, tileset_inc);
-
-    #FIXME: the city_active and city_invalid graphics must not be drawn outside
-    # of the full final tileset image.
-    im = Image.open("city_invalid.png");
-    (w, h) = im.size;
-    curr_x += w;
-    tileset.paste(im, (curr_x, curr_y));
-    coords[tile_file]["city_invalid"] = (curr_x, curr_y, w, h, tileset_inc);
     increment_tileset_image(tile_file);
 
 print("MAX: " + str(max_width) + "  " + str(max_height) + "  " + str(sum_area));

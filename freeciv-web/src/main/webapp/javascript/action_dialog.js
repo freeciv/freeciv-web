@@ -131,7 +131,7 @@ function format_action_label(action_id, action_probabilities)
 function popup_action_selection(actor_unit, action_probabilities,
                                 target_tile, target_unit, target_city)
 {
- // reset dialog page.
+  // reset dialog page.
   var id = "#act_sel_dialog_" + actor_unit['id'];
   $(id).remove();
   $("<div id='act_sel_dialog_" + actor_unit['id'] + "'></div>").appendTo("div#game_page");

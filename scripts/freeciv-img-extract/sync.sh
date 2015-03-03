@@ -6,6 +6,7 @@ pngcrush pre-freeciv-web-tileset-amplio2-1.png freeciv-web-tileset-amplio2-1.png
 pngcrush pre-freeciv-web-tileset-amplio2-2.png freeciv-web-tileset-amplio2-2.png &&
 pngcrush pre-freeciv-web-tileset-amplio2-3.png freeciv-web-tileset-amplio2-3.png &&
 pngcrush pre-freeciv-web-tileset-trident-0.png freeciv-web-tileset-trident-0.png &&
+pngcrush pre-freeciv-web-tileset-trident-1.png freeciv-web-tileset-trident-1.png &&
 pngcrush pre-freeciv-web-tileset-isotrident-0.png freeciv-web-tileset-isotrident-0.png &&
 pngcrush pre-freeciv-web-tileset-isotrident-1.png freeciv-web-tileset-isotrident-1.png &&
 mkdir -p ../../freeciv-web/src/main/webapp/tileset &&
@@ -18,4 +19,4 @@ do
  convert -density 80 -resize 180 $X ${X/.svg/-web.png}
 done) &&
 mv ../../freeciv/freeciv/data/flags/*-web.png ../../freeciv-web/src/main/webapp/images/flags/ &&	
-echo "Freeciv-img-extract done." || echo "Freeciv-img-extract failed!"
+echo "Freeciv-img-extract done." || >&2 echo "Freeciv-img-extract failed!"

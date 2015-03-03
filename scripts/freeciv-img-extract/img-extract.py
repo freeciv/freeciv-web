@@ -153,6 +153,7 @@ def config_read(file):
     config_text = config_text.replace("\n1", "\n 1");
     config_text = config_text.replace("grid_star", "grid_main");
     config_text = config_text.replace("         \"unit.auto_settler\"", "  3, 1, \"unit.auto_settler\"");
+    config_text = config_text.replace("\t  ;", "\n;");
     config.read_string(config_text);
     print((config.sections()));
     return config;
@@ -373,4 +374,4 @@ for tile_file in files.keys():
   f.write("var tileset = " + json.dumps(coords[tile_file], separators=(',',':')) + ";");
 
 
-print("done.");
+print("Freeciv-img-extract creating tilesets complete.");

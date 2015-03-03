@@ -2008,6 +2008,14 @@ reqs	=
       "Building", "Manhattan Project", "World", TRUE
     }
 
+[effect_marco_polos_contact]
+type    = "Have_Contacts"
+value	= 1
+reqs	=
+    { "type", "name", "range"
+      "Building", "Marco Polo's Embassy", "Player"
+    }
+
 [effect_marco_polos_embassy]
 type    = "Have_Embassies"
 value	= 1

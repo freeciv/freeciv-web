@@ -1,0 +1,12 @@
+diff -Nurd -X.diff_ignore freeciv/common/packets_json.c freeciv/common/packets_json.c
+--- freeciv/common/packets_json.c	2015-02-27 22:12:48.476118486 +0200
++++ freeciv/common/packets_json.c	2015-03-04 02:46:25.532175743 +0200
+@@ -332,7 +332,7 @@
+   pc->buffer->ndata = 0;
+ 
+   if (!pc->json_packet) {
+-    log_error("ERROR: Unable to parse packet: %s", pc->buffer->data);
++    log_error("ERROR: Unable to parse packet: %s", pc->buffer->data + 2);
+     return NULL;
+   }
+ 

@@ -19,4 +19,4 @@ do
  convert -density 80 -resize 180 $X ${X/.svg/-web.png}
 done) &&
 mv ../../freeciv/freeciv/data/flags/*-web.png ../../freeciv-web/src/main/webapp/images/flags/ &&	
-echo "Freeciv-img-extract done." || >&2 echo "Freeciv-img-extract failed!" && exit 1
+echo "Freeciv-img-extract done." || (>&2 echo "Freeciv-img-extract failed!" && exit 1)

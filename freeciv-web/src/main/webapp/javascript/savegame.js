@@ -54,37 +54,41 @@ function load_game_check()
         setTimeout(load_game_toggle,3500);
       }
     } else if (load_game_id != -1) {
-      console.log("Attempting to load savegame-file-" + (load_game_id + 1));
-      var savefile = simpleStorage.get("savegame-file-" + (load_game_id + 1));
-      var savename = simpleStorage.get("savegame-savename-" + (load_game_id + 1));
-      var saveusr = simpleStorage.get("savegame-username-" + (load_game_id + 1));
-      console.log("Saved filename: " + savename);
-      console.log("Saved user: " + saveusr); 
-      console.log("Logged in username: " + username);
-      if (savefile == null) {
-        swal("Loading game failed (savefile is null)");
-	return;
+      console.log("Attempting to load savegame-file-" + load_game_id);
+      var savegames = simpleStorage.get("savegames");
+      if (savegames == null || savegames.length == 0) {
+        console.error("Loading game failed (savenames is empty).");
+        swal("Loading game failed (savenames is empty).");
+        return;
       } else {
-        console.log("Savegame file length: " + savefile.length);
+        var savegame = savegames[load_game_id];
+        console.log("Saved title: " +  savegame["title"]);
+        console.log("Saved user: " + savegame["username"]); 
+        console.log("Logged in username: " + username);
+        if (savegame["file"] == null) {
+          swal("Loading game failed (savegame file is null)");
+  	return;
+        } else {
+          console.log("Savegame file length: " + savegame["file"].length);
+        }
+        if (savegame["title"] == null) {
+          swal("Loading game failed (savegame title is null)");
+          return;
+        }
+        if (username == null || savegame["username"] == null) {
+          swal("Loading game failed (username is null)");
+	  return;
+        }
+        $.ajax({
+          url: "/loadservlet?username=" + savegame["username"] + "&savename=" + savegame["title"],
+          type: "POST",
+          data: savegame["file"],
+          processData: false
+        }).done(function() {
+          console.log("Upload of savegame complete");
+          loadTimerId = setTimeout("load_game_real('" + username + "');", 1500);
+        }).fail(function() { swal("Loading game failed (ajax request failed)"); });
       }
-      if (savename == null) {
-        swal("Loading game failed (savename is null)");
-	return;
-      }
-      if (username == null) {
-        swal("Loading game failed (username is null)");
-	return;
-      }
-
-      $.ajax({
-        url: "/loadservlet?username=" + saveusr + "&savename=" + savename,
-        type: "POST",
-        data: savefile,
-        processData: false
-      }).done(function() {
-        console.log("Upload of savegame complete");
-        loadTimerId = setTimeout("load_game_real('" + username + "');", 1500);
-      }).fail(function() { swal("Loading game failed (ajax request failed)"); });
     }
   } else if (scenario == "true" && $.getUrlVar('load') != "tutorial") {
     show_scenario_dialog();
@@ -156,12 +160,8 @@ function save_game()
 			modal: true,
 			width: is_small_screen() ? "90%" : "40%",
 			buttons: {
-                                "Delete Savegames": function() {
-					var r = confirm("Do you really want to delete your savegames?");
-					if (r) {
-					  $("#dialog").dialog('close');
-					  simpleStorage.flush();
-					}
+                                "Manage Savegames": function() {
+				  load_game_dialog();
 				},
 				"Save Game": function() {
 					keyboard_input = true;
@@ -180,12 +180,8 @@ function save_game()
 			}
 		});
   var pplayer = client.conn.playing;
-  var save_cnt = simpleStorage.get("savegame-count");
-  if (save_cnt == null) save_cnt = 0;
-  var suggest_savename = username + " of the " + nations[pplayer['nation']]['adjective'] + " in the year " + get_year_string() + " [" 
-                         + (save_cnt + 1) + "]";
-  if (suggest_savename.length >= 64) suggest_savename = username + " [" 
-                         + (save_cnt + 1) + "]";
+  var suggest_savename = username + " of the " + nations[pplayer['nation']]['adjective'] + " in year: " + get_year_string();
+  if (suggest_savename.length >= 64) suggest_savename = username + " " + get_year_string();
 
 
   $("#savegamename").val(suggest_savename);	
@@ -198,10 +194,10 @@ function save_game()
 **************************************************************************/
 function check_savegame_duplicate(new_savename)
 {
-  var savegame_count = simpleStorage.get("savegame-count");
-  if (savegame_count == null) savegame_count = 0;
-  for (var i = 1; i <= savegame_count; i++) {
-    var savename = simpleStorage.get("savegame-savename-" + i);
+  var savegames = simpleStorage.get("savegames");
+  if (savegames == null) return false;
+  for (var i = 0; i < savegames.length; i++) {
+    var savename = savegames[i]['title'];
     if (savename == new_savename) return true;
   }
   return false;
@@ -221,26 +217,32 @@ function save_game_send()
 
 
 /**************************************************************************
- Get saved game from server.
- uses HTML5 local storage.
+  Saves the game, by transfering the savegame from the server to the 
+  client, and storing the result in HTML5 Local Storage.
 **************************************************************************/
 function save_game_fetch()
 {
   $.get("/saveservlet?username=" + username + "&savename=" + savename, 
     function(saved_file) {
-      var savegame_count = simpleStorage.get("savegame-count");
-      if (savegame_count == null) savegame_count = 0;
-      savegame_count += 1;
       console.log("Storage size: " + simpleStorage.storageSize());
       console.log("Savename: " + savename);
       console.log("Username: " + username);
-      console.log("Savegame-count: " + savegame_count);
       console.log("Savegame size: " + saved_file.length);
 
-      if (simpleStorage.set("savegame-file-" + savegame_count, saved_file) === true 
-          && simpleStorage.set("savegame-savename-" + savegame_count, savename) === true
-          && simpleStorage.set("savegame-username-" + savegame_count, username) === true
-          && simpleStorage.set("savegame-count" , savegame_count) === true) {
+      var savegames = simpleStorage.get("savegames");
+      if (savegames == null) savegames = [];
+
+      var currentdate = new Date(); 
+      var datetime = " " + currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear() + "  "  
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes();
+
+      savegames.push({"title" : savename, "username" : username, "file" : saved_file,
+                      "datetime" : datetime})
+
+      if (simpleStorage.set("savegames", savegames) === true) {
         $.unblockUI();
         swal("Game saved successfully");
       } else {
@@ -266,22 +268,28 @@ function load_game_dialog()
 
   var saveHtml =  "<ol id='selectable'>";
 
-  var savegame_count = simpleStorage.get("savegame-count");
+  var savegames = simpleStorage.get("savegames");
 
-  if (savegame_count == 0 || savegame_count == null) {
+  if (savegames == null || savegames.length == 0) {
       saveHtml = "<b>No savegames found. Please start a new game.</b>";
 
   } else {
-    for (var i = 1; i <= savegame_count; i++) {
-      var savename = simpleStorage.get("savegame-savename-" + i);
-      var username = simpleStorage.get("savegame-username-" + i);
-      saveHtml += "<li class='ui-widget-content'>" + savename + " (" + username + ")</li>";
+    for (var i = 0; i < savegames.length; i++) {
+      var savename = savegames[i]["title"];
+      var username = savegames[i]["username"];
+      var datetime = savegames[i]["datetime"];
+      if (savename != null && savegames[i]["file"] != null) {
+        saveHtml += "<li class='ui-widget-content'>" + savename + " " 
+                 + datetime + " (" + username + ") </li>";
+      }
     }
   }
 
-  saveHtml += "</ol><br><span id='savegame_note'>Savegame usage: " + Math.floor(simpleStorage.storageSize() / 1000)
+  saveHtml += "</ol><br><span id='savegame_note'>Savegame usage: " 
+           + Math.floor(simpleStorage.storageSize() / 1000)
            + " of 5200 kB.<br>Note: Savegames are stored using HTML5 local storage in your browser."
-	   + " Clearing your browser cache will also clear your savegames. Savegames are stored with your username.</span>";
+	   + " Clearing your browser cache will also clear your savegames."
+           + " Savegames are stored with your username.</span>";
 
   $("#dialog").html(saveHtml);
   $("#dialog").attr("title", "Please select game to resume playing:");
@@ -305,7 +313,24 @@ function load_game_dialog()
 					$("#game_text_input").blur();
 					show_scenario_dialog();
 				},
-	  			"Delete Savegames": function() {
+	  			"Download": function() {
+					var load_game_id = $('#selectable .ui-selected').index();
+					if (load_game_id == -1) {
+					  swal("Unable to download savegame: no game selected.");
+					} else {
+                                          download_savegame_locally(load_game_id);
+					}
+
+				},
+	  			"Upload": function() {
+				  upload_savegame_locally();
+				},
+	  			"Delete oldest": function() {
+                                   delete_oldest_savegame();
+				   $("#dialog").dialog('close');
+				   load_game_dialog();
+				},
+	  			"Delete ALL": function() {
 					var r = confirm("Do you really want to delete your savegames?");
 					if (r) {
 					  $("#dialog").dialog('close');
@@ -319,7 +344,14 @@ function load_game_dialog()
   $("#dialog").dialog('open');		
   $("#game_text_input").blur();
 
-
+  $('.ui-dialog-buttonpane button').eq(0).attr('title','Load the selected savegame and starts the game.');
+  $('.ui-dialog-buttonpane button').eq(0).focus();
+  $('.ui-dialog-buttonpane button').eq(1).attr('title','Shows the load scenadio dialog');
+  $('.ui-dialog-buttonpane button').eq(2).attr('title','Download the selected savegame to your local device');
+  $('.ui-dialog-buttonpane button').eq(3).attr('title','Upload a savegame from your local device to play online');
+  $('.ui-dialog-buttonpane button').eq(4).attr('title','Delete the oldest savegame');
+  $('.ui-dialog-buttonpane button').eq(5).attr('title','Delete all savegames.');
+  $('.ui-dialog-buttonpane button').tooltip();
 
 }
 
@@ -364,5 +396,104 @@ function show_scenario_dialog()
   $("#selectable").selectable();
   $("#dialog").dialog('open');		
   $("#game_text_input").blur();
+
+}
+
+/**************************************************************************
+ Deletes the oldest savegame
+**************************************************************************/
+function delete_oldest_savegame()
+{
+  var savegames = simpleStorage.get("savegames");
+  if (savegames == null || savegames.length == 0) {
+    swal("No savegames.");
+  } else {
+    savegames.shift();
+    simpleStorage.set("savegames", savegames);
+    swal("Savegame deleted.");
+  }
+
+}
+
+/**************************************************************************
+  Allows the user to download a savegame to their own computer
+**************************************************************************/
+function download_savegame_locally(game_id)
+{
+  var savegames = simpleStorage.get("savegames");
+  if (savegames == null || savegames.length == 0) {
+    swal("No savegames.");
+  } else {
+    var blob = new Blob([JSON.stringify(savegames[game_id])], 
+                        {type: "text/plain;charset=utf-8"});
+    saveAs(blob, "freecivweb-" + savegames[game_id]['title'] + ".js");
+  } 
+}
+
+/**************************************************************************
+  Allows the user to upload a savegame from their own computer
+**************************************************************************/
+function upload_savegame_locally()
+{
+
+  // reset dialog page.
+  $("#upload_dialog").remove();
+  $("<div id='upload_dialog'></div>").appendTo("div#game_page");
+  var html = "Select a savegame file: <input type='file' id='fileInput'>";
+  $("#upload_dialog").html(html);
+  $("#upload_dialog").attr("title", "Upload savegame:");
+  $("#upload_dialog").dialog({
+			bgiframe: true,
+			modal: true,
+			width: is_small_screen() ? "55%" : "40%",
+			buttons: {
+	  			"Upload": function() {
+				  handle_savegame_upload();
+   				}
+			}
+		});
+  $("#upload_dialog").dialog('open');		
+
+
+
+}
+
+/**************************************************************************
+ Handle uploded savegame (read savegame using FileReader API and create JSON)
+**************************************************************************/
+function handle_savegame_upload()
+{
+  var fileInput = document.getElementById('fileInput');
+  var file = fileInput.files[0];
+
+  if (file.type == 'application/javascript') {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+    var savegames = simpleStorage.get("savegames");
+    if (savegames == null) savegames = [];
+      var new_savegame = JSON.parse(reader.result);
+      if (new_savegame != null && new_savegame['file'] != null 
+          && new_savegame['title'] != null && new_savegame['username'] != null
+          && new_savegame['file'].length > 1000 
+          && new_savegame['file'].length < 10000000) {
+        console.log("Loading savegame: " + new_savegame['title'] 
+                    + " of length " + new_savegame['file'].length);
+        savegames.push(new_savegame);
+        simpleStorage.set("savegames", savegames);
+      } else {
+        swal("Savegame is invalid!");
+        console.error("Savegame is invalid: " + new_savegame);
+      }
+    }
+
+    reader.readAsText(file);	
+  } else {
+    swal("File not supported: " + file.type);
+    console.error("File not supported: " + file.type);
+  }
+
+  $("#upload_dialog").dialog('close');
+  $("#dialog").dialog('close');
+  setTimeout("load_game_dialog();", 1000);
 
 }

@@ -124,6 +124,8 @@ Install this software if you are not running Freeciv-web with Vagrant:
 
 - Jansson 2.6 - http://www.digip.org/jansson/
 
+- liblzma-dev - http://tukaani.org/xz/ - for XZ compressed savegames.
+
 
 Compiling and running the Freeciv Web client (old method)
 ---------------------------------------------------------

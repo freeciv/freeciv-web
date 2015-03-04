@@ -91,7 +91,7 @@ public class LoadServlet extends HttpServlet {
 				return;
 		  }
 
-		  String relativeWebPath = "/savegames/" + username + ".sav.bz2";
+		  String relativeWebPath = "/savegames/" + username + ".sav.xz";
 		  String absoluteDiskPath = getServletContext().getRealPath(relativeWebPath);
 		  File file = new File(absoluteDiskPath);
 		  FileUtils.writeByteArrayToFile(file, compressedFile);

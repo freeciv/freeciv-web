@@ -709,4 +709,5 @@ set =
     "autosaves", "", TRUE
     "topology", "WRAPX", TRUE
     "nationset", "all", TRUE
+    "compresstype", "xz", TRUE
   }

@@ -65,7 +65,7 @@ public class SaveServlet extends HttpServlet {
 		}
 
 
-		String relativeWebPath = "/savegames/" + username + ".sav.bz2";
+		String relativeWebPath = "/savegames/" + username + ".sav.xz";
 		String absoluteDiskPath = getServletContext().getRealPath(relativeWebPath);
 		File file = new File(absoluteDiskPath);
 		if (!file.exists()) {

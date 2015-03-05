@@ -25,7 +25,7 @@ var ws = null;
 var civserverport = null;
 
 var ping_last = new Date().getTime();
-var pingtime_check = 120000;
+var pingtime_check = 240000;
 
 /****************************************************************************
   Initialized the Network communication, by requesting a valid server port.
@@ -148,8 +148,7 @@ function ping_check()
 {
   var time_since_last_ping = new Date().getTime() - ping_last;
   if (time_since_last_ping > pingtime_check) {
-    swal("Error: Lost connection to server: Ping timeout.")
-    console.error("Error: Lost connection to server: Ping timeout.");
+    console.log("Error: Missing PING message from server, " 
+                + "indicates server connection problem.");
   }
-
 }

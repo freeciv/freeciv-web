@@ -14,6 +14,8 @@ var savename = "";
 var loadTimerId = -1;
 var scenario_activated = false;
 
+var FC_SAVEGAME_VER = 1;
+
 var scenarios = [
   {"img":"/images/world_small.png", "description":"The World - Small world map, 80x50 map of the Earth", "savegame":"earth-80x50-v3"},
   {"img":"/images/world_big.png", "description":"The World - Large world map, 160x90 map of the Earth", "savegame":"earth-160x90-v2"},
@@ -140,12 +142,12 @@ function save_game()
 
   keyboard_input = false;
   // reset dialog page.
-  $("#dialog").remove();
-  $("<div id='dialog'></div>").appendTo("div#game_page");
+  $("#save_dialog").remove();
+  $("<div id='save_dialog'></div>").appendTo("div#game_page");
 
   var dhtml = "<table>" +
   	  "<tr><td>Savegame name:</td>" +
-	  "<td><input type='text' name='savegamename' id='savegamename' size='32' maxlength='64'></td></tr>" +
+	  "<td><input type='text' name='savegamename' id='savegamename' size='38' maxlength='64'></td></tr>" +
 	  "</td></tr></table><br>" +
 	  "<span id='settings_info'><i>Freeciv-web allows you to save games. Games are stored in your web " +
 	  "browser using HTML5 localstorage. Saved games will be stored in your browser until you clear" +
@@ -153,14 +155,16 @@ function save_game()
           "Savegame usage: " + Math.floor(simpleStorage.storageSize() / 1000) + " of 5200 kB."; 
 
 
-  $("#dialog").html(dhtml);
-  $("#dialog").attr("title", "Save game");
-  $("#dialog").dialog({
+  $("#save_dialog").html(dhtml);
+  $("#save_dialog").attr("title", "Save game");
+  $("#save_dialog").dialog({
 			bgiframe: true,
 			modal: true,
 			width: is_small_screen() ? "90%" : "40%",
 			buttons: {
                                 "Manage Savegames": function() {
+				  $("#save_dialog").dialog('close');
+				  $("#save_dialog").parent().remove();
 				  load_game_dialog();
 				},
 				"Save Game": function() {
@@ -172,7 +176,7 @@ function save_game()
 						swal("Savegame name already in use. "
 						 + "Please use a new savegame name.");
 					} else {
-						$("#dialog").dialog('close');
+						$("#save_dialog").dialog('close');
 						save_game_send();
                                                 $.blockUI();
 					}
@@ -186,7 +190,7 @@ function save_game()
 
   $("#savegamename").val(suggest_savename);	
 
-  $("#dialog").dialog('open');		
+  $("#save_dialog").dialog('open');		
 
 }
 /**************************************************************************
@@ -240,7 +244,7 @@ function save_game_fetch()
                 + currentdate.getMinutes();
 
       savegames.push({"title" : savename, "username" : username, "file" : saved_file,
-                      "datetime" : datetime})
+                      "datetime" : datetime, "version" : FC_SAVEGAME_VER})
 
       if (simpleStorage.set("savegames", savegames) === true) {
         $.unblockUI();
@@ -328,7 +332,7 @@ function load_game_dialog()
 	  			"Delete oldest": function() {
                                    delete_oldest_savegame();
 				   $("#dialog").dialog('close');
-				   load_game_dialog();
+  				   load_game_dialog();
 				},
 	  			"Delete ALL": function() {
 					var r = confirm("Do you really want to delete your savegames?");
@@ -343,6 +347,11 @@ function load_game_dialog()
   $("#selectable").selectable();
   $("#dialog").dialog('open');		
   $("#game_text_input").blur();
+
+  if (C_S_RUNNING == client_state()) {
+    $('.ui-dialog-buttonpane button').eq(0).hide();
+    $('.ui-dialog-buttonpane button').eq(1).hide();
+  }
 
   $('.ui-dialog-buttonpane button').eq(0).attr('title','Load the selected savegame and starts the game.');
   $('.ui-dialog-buttonpane button').eq(0).focus();
@@ -410,7 +419,6 @@ function delete_oldest_savegame()
   } else {
     savegames.shift();
     simpleStorage.set("savegames", savegames);
-    swal("Savegame deleted.");
   }
 
 }
@@ -465,6 +473,11 @@ function handle_savegame_upload()
 {
   var fileInput = document.getElementById('fileInput');
   var file = fileInput.files[0];
+
+  if (!(window.FileReader)) {
+    swal("Uploading files not supported");
+    return;
+  }
 
   if (file.type == 'application/javascript') {
     var reader = new FileReader();

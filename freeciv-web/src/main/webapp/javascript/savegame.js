@@ -479,7 +479,10 @@ function handle_savegame_upload()
     return;
   }
 
-  if (file.type == 'application/javascript') {
+  var extension = file.name.substring(file.name.lastIndexOf('.'));
+  console.log("Loading savegame of type: " + file.type + " with extention " + extension);
+
+  if (extension == '.js') {
     var reader = new FileReader();
     reader.onload = function(e) {
     var savegames = simpleStorage.get("savegames");
@@ -501,8 +504,8 @@ function handle_savegame_upload()
 
     reader.readAsText(file);	
   } else {
-    swal("File not supported: " + file.type);
-    console.error("File not supported: " + file.type);
+    swal("Savegame file " + file.name + "  not supported: " + file.type);
+    console.error("Savegame file not supported: " + file.type);
   }
 
   $("#upload_dialog").dialog('close');

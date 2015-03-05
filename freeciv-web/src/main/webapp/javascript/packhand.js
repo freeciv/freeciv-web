@@ -231,9 +231,9 @@ function handle_player_remove(packet)
 /* 100% complete */
 function handle_conn_ping(packet) 
 {
-  var test_packet = {"pid" : packet_conn_pong};
-  var myJSONText = JSON.stringify(test_packet);
-  send_request(myJSONText);
+  ping_last = new Date().getTime();
+  var packet = {"pid" : packet_conn_pong};
+  send_request(JSON.stringify(packet));
 
 }
 

@@ -24,6 +24,9 @@ var freeciv_version = "+Freeciv.Web.Devel-3.0";
 var ws = null;
 var civserverport = null;
 
+var ping_last = new Date().getTime();
+var pingtime_check = 120000;
+
 /****************************************************************************
   Initialized the Network communication, by requesting a valid server port.
 ****************************************************************************/
@@ -60,7 +63,7 @@ function network_init()
    }
   });
 
-
+  setInterval("ping_check();", pingtime_check);
 
 }
 
@@ -135,4 +138,18 @@ function clinet_debug_collect()
   var time_elapsed = new Date().getTime() - clinet_last_send;
   debug_client_speed_list.push(time_elapsed);
   clinet_last_send = new Date().getTime();
+}
+
+/****************************************************************************
+  Detect server disconnections, by checking the time since the last
+  ping packet from the server.
+****************************************************************************/
+function ping_check()
+{
+  var time_since_last_ping = new Date().getTime() - ping_last;
+  if (time_since_last_ping > pingtime_check) {
+    swal("Error: Lost connection to server: Ping timeout.")
+    console.error("Error: Lost connection to server: Ping timeout.");
+  }
+
 }

@@ -20,6 +20,10 @@ format_version=10
 ; will be saved to nations.ruleset itself.
 nationlist = "default/nationlist.ruleset"
 
+; List of nations to embed to main nations.ruleset despite separate nationlist
+; being used for other nations.
+; embedded_nations = ""
+
 [compatibility]
 ; Initial government for all the nations that do not
 ; have it explicitly defined

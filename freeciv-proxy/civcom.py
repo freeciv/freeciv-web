@@ -181,10 +181,11 @@ class CivCom(Thread):
 
         try:
             for net_message in self.civserver_messages:
-                header = pack('>H', len(net_message))
+                utf8_encoded = net_message.encode('utf-8')
+                header = pack('>H', len(utf8_encoded))
                 self.socket.sendall(
                     header +
-                    net_message.encode('utf-8') +
+                    utf8_encoded +
                     b'\0')
         except:
             self.send_error_to_client(

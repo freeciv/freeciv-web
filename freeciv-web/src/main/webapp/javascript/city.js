@@ -595,7 +595,6 @@ function does_city_have_improvement(pcity, improvement_name)
 /**************************************************************************
   Shows the Request city name dialog to the user.
 **************************************************************************/
-
 function city_name_dialog(suggested_name, unit_id) {
   // reset dialog page.
   $("#city_name_dialog").remove();
@@ -632,6 +631,7 @@ function city_name_dialog(suggested_name, unit_id) {
 						send_request(JSON.stringify(packet));
 						$("#city_name_dialog").remove();
 						keyboard_input=true;
+                                                advance_unit_focus();
 					}
 					}
 				]
@@ -648,6 +648,7 @@ function city_name_dialog(suggested_name, unit_id) {
 	send_request(JSON.stringify(packet));
 	$("#city_name_dialog").remove();
         keyboard_input=true;
+        advance_unit_focus();
     }
   });
   keyboard_input=false;

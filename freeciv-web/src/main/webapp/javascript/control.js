@@ -36,6 +36,7 @@ var intro_click_description = true;
 var goto_request_map = {};
 var goto_turns_request_map = {};
 var current_goto_turns = 0;
+var current_focus_unit_index = 0;
 
 /****************************************************************************
 ...
@@ -533,6 +534,7 @@ function update_unit_order_commands()
             "fortify": {name: "Fortify (F)"},
             "sentry": {name: "Sentry (S)"},
             "wait": {name: "Wait (W)"},
+            "noorders": {name: "No orders (J)"},
             "upgrade": {name: "Upgrade unit (U)"},
             "disband": {name: "Disband (Shift-D)"}
             });
@@ -580,9 +582,21 @@ function init_game_unit_panel()
 function find_best_focus_candidate(accept_current)
 {
   if (client_is_observer()) return null;
-  
+ 
+  var sorted_units = [];
   for (unit_id in units) {
     var punit = units[unit_id];
+    if (punit['owner'] == client.conn.playing.playerno) {
+      sorted_units.push(punit);
+    }
+  } 
+  sorted_units.sort(unit_distance_compare);
+
+  if (current_focus_unit_index >= sorted_units.length - 1) {
+    current_focus_unit_index = 0;
+  }
+  for (var i = current_focus_unit_index; i < sorted_units.length; i++) {
+    var punit = sorted_units[i];
     if ((!unit_is_in_focus(punit) || accept_current)
 	  && punit['owner'] == client.conn.playing.playerno
 	  && punit['activity'] == ACTIVITY_IDLE
@@ -590,11 +604,28 @@ function find_best_focus_candidate(accept_current)
 	  && punit['done_moving'] == false
 	  && punit['ai'] == false
 	  && punit['transported'] == false) {
+          current_focus_unit_index = i;
 	  return punit;
     }
   }
 
   return null;
+}
+
+/**************************************************************************
+...
+**************************************************************************/
+function unit_distance_compare(unit_a, unit_b)
+{
+  if (unit_a == null || unit_b == null) return 0;
+  var ptile_a = index_to_tile(unit_a['tile']);
+  var ptile_b = index_to_tile(unit_b['tile']);
+
+  if (ptile_a['x'] > ptile_b['x'] || ptile_a['y'] > ptile_b['y']) {
+    return 1;
+  } else {
+    return -1;
+  }
 }
 
 
@@ -892,6 +923,10 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift)
     case 'W':
       key_unit_wait();
     break;
+
+    case 'J':
+      key_unit_noorders();
+    break;
      
     case 'R':
       key_unit_road();
@@ -1111,6 +1146,10 @@ function handle_context_menu_callback(key)
       key_unit_wait();
       break;
 
+    case "noorders": 
+      key_unit_noorders();
+      break;
+
     case "upgrade":
       key_unit_upgrade();
       break;
@@ -1209,6 +1248,14 @@ function key_unit_auto_explore()
 **************************************************************************/
 function key_unit_wait()
 {
+  advance_unit_focus();
+}
+
+/**************************************************************************
+ Tell the unit to have no orders this turn, set unit to done moving.
+**************************************************************************/
+function key_unit_noorders()
+{
   var funits = get_units_in_focus();
   for (var i = 0; i < funits.length; i++) {
     var punit = funits[i]; 
@@ -1217,6 +1264,7 @@ function key_unit_wait()
 
   advance_unit_focus();
 }
+
 
 /**************************************************************************
  Tell the units in focus to sentry.

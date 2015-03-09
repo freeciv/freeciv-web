@@ -82,7 +82,6 @@ echo "==== Checking out Freeciv from SVN and patching... ===="
 cd ${basedir}/freeciv && ./prepare_freeciv.sh
 echo "==== Building freeciv ===="
 cd freeciv && make install
-cd ${basedir}/freeciv/data/ && cp -rf fcweb webperimental /usr/local/share/freeciv
 
 echo "==== Building freeciv-web ===="
 sed -e "s/user>root/user>${mysql_user}/" -e "s/password>changeme/password>${mysql_pass}/" ${basedir}/freeciv-web/src/main/webapp/WEB-INF/resin-web.xml.dist > ${basedir}/freeciv-web/src/main/webapp/WEB-INF/resin-web.xml

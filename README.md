@@ -148,8 +148,6 @@ manual installation procedure to setup Freeciv-web:
    > cd freeciv/freeciv  
    > make install     (as root user)  
 
-   copy freeciv-web/freeciv/data/fcweb to /usr/local/share/freeciv 
-
 5. Build and configure freeciv-web. 
 
    - Run setup_links.sh and sync.sh in the scripts/freeciv-img-extract directory.

@@ -88,7 +88,6 @@ cp ${basedir}/publite2/settings.ini.dist ${basedir}/publite2/settings.ini
 echo "==== Building freeciv ===="
 cd ${basedir}/freeciv && ./prepare_freeciv.sh
 cd freeciv && make install
-cd ${basedir}/freeciv/data/ && cp -rf fcweb webperimental /usr/local/share/freeciv
 
 echo "==== Building freeciv-web ===="
 sed -e "s/user>root/user>${mysql_user}/" -e "s/password>changeme/password>${mysql_pass}/" ${basedir}/freeciv-web/src/main/webapp/WEB-INF/resin-web.xml.dist > ${basedir}/freeciv-web/src/main/webapp/WEB-INF/resin-web.xml

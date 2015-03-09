@@ -295,63 +295,68 @@ function load_game_dialog()
 	   + " Clearing your browser cache will also clear your savegames."
            + " Savegames are stored with your username.</span>";
 
+  var dialog_buttons = {};
+
+  if (C_S_RUNNING != client_state()) {
+    dialog_buttons = $.extend(dialog_buttons, 
+     {"Load Savegame": function() {
+		  var load_game_id = $('#selectable .ui-selected').index();
+		  if (load_game_id == -1) {
+		    swal("Unable to load savegame: no game selected.");
+		  } else {
+		    load_game_check();
+		    $("#dialog").dialog('close');
+		    $("#game_text_input").blur();
+		  }
+    },
+     "Load Scenarios...": function() {
+		  $("#dialog").dialog('close');
+		  $("#game_text_input").blur();
+		  show_scenario_dialog();
+		}
+    });
+  }
+
+
+  dialog_buttons = $.extend(dialog_buttons, 
+  {
+  "Download": function() {
+    var load_game_id = $('#selectable .ui-selected').index();
+    if (load_game_id == -1) {
+      swal("Unable to download savegame: no game selected.");
+    } else {
+      download_savegame_locally(load_game_id);
+    }
+  },
+  "Upload": function() {
+    upload_savegame_locally();
+  },
+  "Delete oldest": function() {
+    delete_oldest_savegame();
+    $("#dialog").dialog('close');
+    load_game_dialog();
+  },
+  "Delete ALL": function() {
+    var r = confirm("Do you really want to delete your savegames?");
+    if (r) {
+      $("#dialog").dialog('close');
+      $("#game_text_input").blur();
+      simpleStorage.flush();
+    }
+  }
+  });
+
   $("#dialog").html(saveHtml);
-  $("#dialog").attr("title", "Please select game to resume playing:");
+  $("#dialog").attr("title", "Savegames");
   $("#dialog").dialog({
 			bgiframe: true,
 			modal: true,
 			width: is_small_screen() ? "95%" : "70%",
-			buttons: {
-	  			"Load Savegame": function() {
-  					var load_game_id = $('#selectable .ui-selected').index();
-					if (load_game_id == -1) {
-					  swal("Unable to load savegame: no game selected.");
-					} else {
-					  load_game_check();
-					  $("#dialog").dialog('close');
-					  $("#game_text_input").blur();
-					}
-				},
-	  	  		"Load Scenarios...": function() {
-					$("#dialog").dialog('close');
-					$("#game_text_input").blur();
-					show_scenario_dialog();
-				},
-	  			"Download": function() {
-					var load_game_id = $('#selectable .ui-selected').index();
-					if (load_game_id == -1) {
-					  swal("Unable to download savegame: no game selected.");
-					} else {
-                                          download_savegame_locally(load_game_id);
-					}
-
-				},
-	  			"Upload": function() {
-				  upload_savegame_locally();
-				},
-	  			"Delete oldest": function() {
-                                   delete_oldest_savegame();
-				   $("#dialog").dialog('close');
-  				   load_game_dialog();
-				},
-	  			"Delete ALL": function() {
-					var r = confirm("Do you really want to delete your savegames?");
-					if (r) {
-					  $("#dialog").dialog('close');
-					  $("#game_text_input").blur();
-					  simpleStorage.flush();
-					}
-				}
-			}
+			buttons: dialog_buttons 
 		});
   $("#selectable").selectable();
   $("#dialog").dialog('open');		
   $("#game_text_input").blur();
-
-  if (C_S_RUNNING == client_state()) {
-    $('.ui-dialog-buttonpane button').eq(0).hide();
-    $('.ui-dialog-buttonpane button').eq(1).hide();
-  }
 
   $('.ui-dialog-buttonpane button').eq(0).attr('title','Load the selected savegame and starts the game.');
   $('.ui-dialog-buttonpane button').eq(0).focus();

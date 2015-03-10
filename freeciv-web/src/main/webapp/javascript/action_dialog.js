@@ -282,6 +282,7 @@ function popup_action_selection(actor_unit, action_probabilities,
                     "actor_id" : actor_unit['id'],
                     "target_id": target_city['id'],
                     "value" : 0,
+                    "name" : "",
                     "action_type": ACTION_ESTABLISH_EMBASSY};
       send_request(JSON.stringify(packet));
 
@@ -295,6 +296,7 @@ function popup_action_selection(actor_unit, action_probabilities,
                     "actor_id" : actor_unit['id'],
                     "target_id": target_city['id'],
                     "value" : 0,
+                    "name" : "",
                     "action_type": ACTION_SPY_INVESTIGATE_CITY};
         send_request(JSON.stringify(packet));
 
@@ -308,6 +310,7 @@ function popup_action_selection(actor_unit, action_probabilities,
                     "actor_id" : actor_unit['id'],
                     "target_id": target_city['id'],
                     "value" : 0,
+                    "name" : "",
                     "action_type": ACTION_SPY_SABOTAGE_CITY};
         send_request(JSON.stringify(packet));
 
@@ -321,6 +324,7 @@ function popup_action_selection(actor_unit, action_probabilities,
                     "actor_id" : actor_unit['id'],
                     "target_id": target_city['id'],
                     "value" : encode_building_id(B_LAST),
+                    "name" : "",
                     "action_type": ACTION_SPY_STEAL_TECH};
       send_request(JSON.stringify(packet));
 
@@ -334,6 +338,7 @@ function popup_action_selection(actor_unit, action_probabilities,
                     "actor_id" : actor_unit['id'],
                     "target_id": target_city['id'],
                     "value" : A_UNSET,
+                    "name" : "",
                     "action_type": ACTION_SPY_STEAL_GOLD};
       send_request(JSON.stringify(packet));
 
@@ -359,6 +364,7 @@ function popup_action_selection(actor_unit, action_probabilities,
                     "actor_id" : actor_unit['id'],
                     "target_id": target_city['id'],
                     "value" : 0,
+                    "name" : "",
                     "action_type": ACTION_SPY_POISON};
       send_request(JSON.stringify(packet));
 
@@ -372,6 +378,7 @@ function popup_action_selection(actor_unit, action_probabilities,
                     "actor_id" : actor_unit['id'],
                     "target_id": target_city['id'],
                     "value" : 0,
+                    "name" : "",
                     "action_type": ACTION_TRADE_ROUTE};
       send_request(JSON.stringify(packet));
 
@@ -385,6 +392,7 @@ function popup_action_selection(actor_unit, action_probabilities,
                     "actor_id" : actor_unit['id'],
                     "target_id": target_city['id'],
                     "value" : 0,
+                    "name" : "",
                     "action_type": ACTION_MARKETPLACE};
       send_request(JSON.stringify(packet));
 
@@ -398,6 +406,7 @@ function popup_action_selection(actor_unit, action_probabilities,
                     "actor_id" : actor_unit['id'],
                     "target_id": target_city['id'],
                     "value" : 0,
+                    "name" : "",
                     "action_type": ACTION_HELP_WONDER};
       send_request(JSON.stringify(packet));
 
@@ -423,6 +432,7 @@ function popup_action_selection(actor_unit, action_probabilities,
                     "actor_id" : actor_unit['id'],
                     "target_id": target_unit['id'],
                     "value" : 0,
+                    "name" : "",
                     "action_type": ACTION_SPY_SABOTAGE_UNIT};
       send_request(JSON.stringify(packet));
 
@@ -436,6 +446,7 @@ function popup_action_selection(actor_unit, action_probabilities,
                     "actor_id" : actor_unit['id'],
                     "target_id": target_tile['index'],
                     "value" : 0,
+                    "name" : "",
                     "action_type": ACTION_CAPTURE_UNITS};
       send_request(JSON.stringify(packet));
 
@@ -449,6 +460,7 @@ function popup_action_selection(actor_unit, action_probabilities,
                     "actor_id" : actor_unit['id'],
                     "target_id": target_tile['index'],
                     "value" : 0,
+                    "name" : "",
                     "action_type": ACTION_MOVE};
       send_request(JSON.stringify(packet));
 
@@ -495,6 +507,7 @@ function popup_bribe_dialog(actor_unit, target_unit, cost)
                     "actor_id" : actor_unit['id'],
                     "target_id": target_unit['id'],
                     "value" : 0,
+                    "name" : "",
                     "action_type": ACTION_SPY_BRIBE_UNIT};
       send_request(JSON.stringify(packet));
       $(id).dialog('close');
@@ -557,6 +570,7 @@ function popup_incite_dialog(actor_unit, target_city, cost)
                                                "actor_id" : actor_unit['id'],
                                                "target_id": target_city['id'],
                                                "value" : 0,
+                                               "name" : "",
                                                "action_type": ACTION_SPY_INCITE_CITY};
                                  send_request(JSON.stringify(packet));
 

@@ -195,12 +195,13 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  end
  
  PACKET_UNIT_COMBAT_INFO = 65; sc, lsend
-@@ -1020,7 +1037,7 @@
+@@ -1020,8 +1037,8 @@
  PACKET_UNIT_DO_ACTION = 84; cs, dsend
    UNIT actor_id;
    SINT32 target_id;   # city_id, unit_id or tile_id
 -  SINT16 value;
 +  UINT32 value;
+   STRING name[MAX_LEN_NAME];
    GEN_ACTION action_type;
  end
  

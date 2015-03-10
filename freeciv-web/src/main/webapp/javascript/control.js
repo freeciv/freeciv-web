@@ -1614,7 +1614,23 @@ function key_unit_move(dir)
       return;
     }
 
-    var packet = {"pid" : packet_unit_move, "unit_id" : punit['id'], "tile": newtile['index'] };
+    /* Send the order to move using the orders system. */
+    var packet = {
+      "pid"      : packet_unit_orders,
+      "unit_id"  : punit['id'],
+      "src_tile" : ptile['index'],
+      "length"   : 1,
+      "repeat"   : false,
+      "vigilant" : false,
+      /* The server don't support receiving regular json arrays. But it can
+       * understand the syntax "key_0" = val in stead of key = [val0]. */
+      "orders_0"   : ORDER_ACTION_MOVE,
+      "dir_0"      : dir,
+      "activity_0" : ACTIVITY_LAST,
+      "target_0"   : EXTRA_NONE,
+      "dest_tile": newtile['index']
+    };
+
     send_request(JSON.stringify(packet));
   }
 

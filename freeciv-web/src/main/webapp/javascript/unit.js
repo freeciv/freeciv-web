@@ -21,6 +21,18 @@ var ANIM_STEPS = 6;
 var anim_units_max = 30;
 var anim_units_count = 0;
 
+/* The unit_orders enum from unit.h */
+var ORDER_MOVE = 0;
+var ORDER_ACTIVITY = 1;
+var ORDER_FULL_MP = 2;
+var ORDER_BUILD_CITY = 3;
+var ORDER_DISBAND = 4;
+var ORDER_BUILD_WONDER = 5;
+var ORDER_TRADE_ROUTE = 6;
+var ORDER_HOMECITY = 7;
+var ORDER_ACTION_MOVE = 8;
+var ORDER_LAST = 9;
+
 /****************************************************************************
  ...
 ****************************************************************************/

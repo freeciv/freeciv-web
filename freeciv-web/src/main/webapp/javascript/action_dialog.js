@@ -323,7 +323,7 @@ function popup_action_selection(actor_unit, action_probabilities,
       var packet = {"pid" : packet_unit_do_action, 
                     "actor_id" : actor_unit['id'],
                     "target_id": target_city['id'],
-                    "value" : encode_building_id(B_LAST),
+                    "value" : 0,
                     "name" : "",
                     "action_type": ACTION_SPY_STEAL_TECH};
       send_request(JSON.stringify(packet));
@@ -337,7 +337,7 @@ function popup_action_selection(actor_unit, action_probabilities,
       var packet = {"pid" : packet_unit_do_action,
                     "actor_id" : actor_unit['id'],
                     "target_id": target_city['id'],
-                    "value" : A_UNSET,
+                    "value" : 0,
                     "name" : "",
                     "action_type": ACTION_SPY_STEAL_GOLD};
       send_request(JSON.stringify(packet));

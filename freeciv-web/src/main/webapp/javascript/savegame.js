@@ -358,13 +358,20 @@ function load_game_dialog()
   $("#dialog").dialog('open');		
   $("#game_text_input").blur();
 
-  $('.ui-dialog-buttonpane button').eq(0).attr('title','Load the selected savegame and starts the game.');
+  var tooltips = [];
+  if (C_S_RUNNING != client_state()) {
+    tooltips.push('Load the selected savegame and starts the game.');
+    tooltips.push('Shows the load scenadio dialog');
+  }
+  tooltips.push('Download the selected savegame to your local device');
+  tooltips.push('Upload a savegame from your local device to play online');
+  tooltips.push('Delete the oldest savegame');
+  tooltips.push('Delete all savegames.');
+
+  for (var i = 0; i <= 5; i++) {
+    $('.ui-dialog-buttonpane button').eq(i).attr('title', tooltips[i]);
+  }
   $('.ui-dialog-buttonpane button').eq(0).focus();
-  $('.ui-dialog-buttonpane button').eq(1).attr('title','Shows the load scenadio dialog');
-  $('.ui-dialog-buttonpane button').eq(2).attr('title','Download the selected savegame to your local device');
-  $('.ui-dialog-buttonpane button').eq(3).attr('title','Upload a savegame from your local device to play online');
-  $('.ui-dialog-buttonpane button').eq(4).attr('title','Delete the oldest savegame');
-  $('.ui-dialog-buttonpane button').eq(5).attr('title','Delete all savegames.');
   $('.ui-dialog-buttonpane button').tooltip();
 
 }

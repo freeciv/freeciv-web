@@ -182,7 +182,7 @@ class CivCom(Thread):
         try:
             for net_message in self.civserver_messages:
                 utf8_encoded = net_message.encode('utf-8')
-                header = pack('>H', len(utf8_encoded))
+                header = pack('>H', len(utf8_encoded) + 3)
                 self.socket.sendall(
                     header +
                     utf8_encoded +

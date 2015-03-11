@@ -32,7 +32,7 @@ flags =
     _("Horse"), _("Attack value halved when attacking Pikemen.")
     _("Helicopter"), _("Defends very badly against Fighters.")
     _("TradeRoute"), _("Can establish trade routes (must travel to target city).")
-    _("HelpWonder"), _("Can help build wonders (adding its full shield cost).")
+    _("HelpWonder")
   }
 
 [veteran_system]

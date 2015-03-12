@@ -36,7 +36,7 @@ var intro_click_description = true;
 var goto_request_map = {};
 var goto_turns_request_map = {};
 var current_goto_turns = 0;
-var current_focus_unit_index = 0;
+var waiting_units_list = [];
 
 /****************************************************************************
 ...
@@ -592,21 +592,27 @@ function find_best_focus_candidate(accept_current)
   } 
   sorted_units.sort(unit_distance_compare);
 
-  if (current_focus_unit_index >= sorted_units.length - 1) {
-    current_focus_unit_index = 0;
-  }
-  for (var i = current_focus_unit_index; i < sorted_units.length; i++) {
+  for (var i = 0; i < sorted_units.length; i++) {
     var punit = sorted_units[i];
     if ((!unit_is_in_focus(punit) || accept_current)
-	  && punit['owner'] == client.conn.playing.playerno
-	  && punit['activity'] == ACTIVITY_IDLE
-	  && punit['movesleft'] > 0
-	  && punit['done_moving'] == false
-	  && punit['ai'] == false
-	  && punit['transported'] == false) {
-          current_focus_unit_index = i;
-	  return punit;
+       && punit['owner'] == client.conn.playing.playerno
+       && punit['activity'] == ACTIVITY_IDLE
+       && punit['movesleft'] > 0
+       && punit['done_moving'] == false
+       && punit['ai'] == false
+       && waiting_units_list.indexOf(punit['id']) < 0
+       && punit['transported'] == false) {
+         return punit;
     }
+  }
+
+  /* check waiting units for focus candidates */
+  for (var i = 0; i < waiting_units_list.length; i++) {
+      var punit = game_find_unit_by_number(waiting_units_list[i]);
+      if (punit != null && punit['movesleft'] > 0) {
+        waiting_units_list.splice(i, 1);
+        return punit;
+      }
   }
 
   return null;
@@ -621,7 +627,9 @@ function unit_distance_compare(unit_a, unit_b)
   var ptile_a = index_to_tile(unit_a['tile']);
   var ptile_b = index_to_tile(unit_b['tile']);
 
-  if (ptile_a['x'] > ptile_b['x'] || ptile_a['y'] > ptile_b['y']) {
+  if (ptile_a['x'] == ptile_b['x'] && ptile_a['y'] == ptile_b['y']) {
+    return 0;
+  } else if (ptile_a['x'] > ptile_b['x'] || ptile_a['y'] > ptile_b['y']) {
     return 1;
   } else {
     return -1;
@@ -1248,6 +1256,11 @@ function key_unit_auto_explore()
 **************************************************************************/
 function key_unit_wait()
 {
+  var funits = get_units_in_focus();
+  for (var i = 0; i < funits.length; i++) {
+    var punit = funits[i]; 
+    waiting_units_list.push(punit['id']);
+  }
   advance_unit_focus();
 }
 

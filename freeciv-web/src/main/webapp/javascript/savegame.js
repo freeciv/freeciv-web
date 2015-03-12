@@ -368,7 +368,7 @@ function load_game_dialog()
   tooltips.push('Delete the oldest savegame');
   tooltips.push('Delete all savegames.');
 
-  for (var i = 0; i <= 5; i++) {
+  for (var i = 0; i < tooltips.length; i++) {
     $('.ui-dialog-buttonpane button').eq(i).attr('title', tooltips[i]);
   }
   $('.ui-dialog-buttonpane button').eq(0).focus();

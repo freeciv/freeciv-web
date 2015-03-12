@@ -631,7 +631,6 @@ function city_name_dialog(suggested_name, unit_id) {
 						send_request(JSON.stringify(packet));
 						$("#city_name_dialog").remove();
 						keyboard_input=true;
-                                                advance_unit_focus();
 					}
 					}
 				]
@@ -648,7 +647,6 @@ function city_name_dialog(suggested_name, unit_id) {
 	send_request(JSON.stringify(packet));
 	$("#city_name_dialog").remove();
         keyboard_input=true;
-        advance_unit_focus();
     }
   });
   keyboard_input=false;

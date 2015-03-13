@@ -494,7 +494,7 @@ function handle_savegame_upload()
   var extension = file.name.substring(file.name.lastIndexOf('.'));
   console.log("Loading savegame of type: " + file.type + " with extention " + extension);
 
-  if (extension == '.js') {
+  if (extension == '.js' || extension == '.txt') {
     var reader = new FileReader();
     reader.onload = function(e) {
     var savegames = simpleStorage.get("savegames");

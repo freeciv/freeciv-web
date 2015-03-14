@@ -26,7 +26,7 @@ format_version=10
 ; helptxt       = displayed in the help for units with this flag (optional)
 flags =
   { "name", "helptxt"
-    _("Airbase"), _("Can build airbases and buoys.")
+    _("Airbase")
     _("Transform"), _("Can transform terrain.")
     _("AirAttacker"), _("Very bad at attacking AEGIS.")
     _("Horse"), _("Attack value halved when attacking Pikemen.")
@@ -407,8 +407,8 @@ helptext      = _("\
 Settlers are one of the key units in the game, as they are your main\
  means of founding new cities.\
 "), _("\
-Settlers can also perform the same terrain alterations as Workers,\
- except for building airbases or buoys.\
+Settlers can also perform some of the same terrain alterations as\
+ Workers.\
 "), _("\
 Upkeep for Settlers is in food as well as production, and a Settler\
  can die if its supporting city runs out of food. Settlers in a\
@@ -451,7 +451,7 @@ roles         = "Settlers"
 helptext      = _("\
 Workers have the ability to improve terrain tiles.\
 "), _("\
-On terrain which supports it, they may build an irrigation system to \
+Building an irrigation system on a suitable tile causes it to \
 produce some extra food each turn. This requires a nearby source of \
 water: an ocean, lake, or river tile, or another tile with an \
 irrigation system, must share an edge (not just a corner) with the \
@@ -460,7 +460,7 @@ is removed. When Refrigeration is known, irrigation systems can be \
 upgraded to Farmland by irrigating them a second time; this provides \
 more food to a city if it has a Supermarket.\
 "), _("\
-Workers can build mines on some types of terrain, which increases the \
+Building a mine on suitable terrain increases the \
 number of production points produced by that tile. However, it is not \
 possible to have an irrigation system and a mine on the same tile.\
 "), _("\
@@ -470,8 +470,8 @@ to another type; this is usually more expensive. For instance, Swamp \
 may be \"irrigated\" to yield Grassland. (Terrain conversion with \
 the \"irrigate\" order does not require a water source.)\
 "), _("\
-Workers can also build roads, railroads, fortresses, airbases, or \
-buoys (when on board a ship).\
+Workers can build airbases and buoys, which Settlers cannot. \
+Workers must be on board a ship to build buoys.\
 "), _("\
 See the help on Terrain and Terrain Alterations for the effects of \
 these actions.\

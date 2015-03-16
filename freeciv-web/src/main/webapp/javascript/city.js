@@ -156,7 +156,7 @@ function show_city_dialog(pcity)
            + sprite['image-src'] +
            ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y'] 
            + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px;float:left; '"
-           + "title='" + improvements[z]['helptext'] + "' " 
+           + "title=\"" + improvements[z]['helptext'] + "\" " 
 	   + "onclick='city_sell_improvement(" + z + ");'>"
            +"</div>" + improvements[z]['name'] + "</div>";
     }
@@ -285,7 +285,7 @@ function change_city_production_dialog()
     production_html = production_html 
      + "<div class='production_list_item' style='" + (current_prod ? "background-color:#777777; text:#000000; border: 1px solid #ffffff;" : "") + "'" 
      + " onclick='send_city_change(" + pcity['id'] + "," + production_list[a]['kind'] + "," + production_list[a]['value'] + ")' "
-     + " title='" + production_list[a]['helptext'] + "'>"
+     + " title=\"" + production_list[a]['helptext'] + "\">"
      + "<div class='production_list_item_sub' style=' background: transparent url(" 
            + sprite['image-src'] +
            ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y'] 
@@ -922,7 +922,7 @@ function city_worklist_dialog()
  
     worklist_html += "<tr class='prod_choice_list_item' onclick='send_city_worklist_remove(" 
      + pcity['id'] + "," + j + ")' "
-     + " title='" + universal['helptext'] + "'>"
+     + " title=\"" + universal['helptext'] + "\">"
      + "<td><div class='production_list_item_sub' style=' background: transparent url(" 
            + sprite['image-src'] +
            ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y'] 
@@ -946,7 +946,7 @@ function city_worklist_dialog()
     var value = production_list[a]['value'];
 
     production_html += "<tr class='prod_choice_list_item kindvalue_item' data-value='" + value + "' data-kind='" + kind + "'>"
-     + "<td><div class='production_list_item_sub' title='" + production_list[a]['helptext'] + "' style=' background: transparent url(" 
+     + "<td><div class='production_list_item_sub' title=\"" + production_list[a]['helptext'] + "\" style=' background: transparent url(" 
            + sprite['image-src'] +
            ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y'] 
            + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px;'"

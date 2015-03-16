@@ -216,11 +216,11 @@ function generate_help_text(key)
     msg += "<br>Vision: " + punit_type['vision_radius_sq'];
 
     var ireq = get_improvement_requirements(punit_type['impr_requirement']);
-    if (ireq != null) {
+    if (ireq != null && techs[ireq] != null) {
       msg += "<br>Building Requirements: " + techs[ireq]['name'];
     }
     var treq = punit_type['tech_requirement'];
-    if (treq != null) {
+    if (treq != null && techs[treq] != null) {
       msg += "<br>Tech Requirements: " + techs[treq]['name'];
     }
     msg += "<br><br><button class='help_button' onclick=\"show_wikipedia_dialog('" + punit_type['name'] + "');\">Wikipedia on " 

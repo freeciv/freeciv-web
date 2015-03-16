@@ -13,7 +13,6 @@ if (! $config_problem) {
   // includes for support routines
   include_once(php_code_find("fcdb.php"));
   include_once(php_code_find("versions_file.php"));
-  include_once(php_code_find("img.php"));
   include_once(php_code_find("html.php"));
 
   fcdb_metaserver_connect();

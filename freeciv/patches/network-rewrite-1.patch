@@ -1,6 +1,6 @@
 diff -Nurd -X.diff_ignore freeciv/common/connection.h freeciv/common/connection.h
---- freeciv/common/connection.h	2015-02-13 05:26:05.535848800 +0200
-+++ freeciv/common/connection.h	2015-02-13 05:27:22.371847114 +0200
+--- freeciv/common/connection.h	2015-03-16 07:03:22.369089846 +0200
++++ freeciv/common/connection.h	2015-03-16 07:03:56.053089107 +0200
 @@ -53,7 +53,7 @@
  struct timer_list;
  
@@ -11,8 +11,8 @@ diff -Nurd -X.diff_ignore freeciv/common/connection.h freeciv/common/connection.
  #define MAX_LEN_PASSWORD  512 /* do not change this under any circumstances */
  
 diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/generate_packets.py
---- freeciv/common/generate_packets.py	2015-02-13 05:26:05.595848799 +0200
-+++ freeciv/common/generate_packets.py	2015-02-13 05:43:49.111825465 +0200
+--- freeciv/common/generate_packets.py	2015-03-16 07:03:22.401089845 +0200
++++ freeciv/common/generate_packets.py	2015-03-16 07:07:53.705083893 +0200
 @@ -250,7 +250,7 @@
          if self.is_array==1:
              tmp="real_packet->%(name)s[i] = %(name)s[i]"%self.__dict__
@@ -91,21 +91,7 @@ diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/gene
      } '''%self.get_dict(vars())
  
      # Returns a code fragement which will get the field if the
-@@ -452,9 +437,11 @@
-   RECEIVE_PACKET_FIELD_ERROR(%(name)s);
- }'''%self.__dict__
-         if self.dataio_type=="bitvector":
--            return '''if (!DIO_BV_GET(&din, real_packet->%(name)s)) {
-+            return '''#if 0
-+if (!DIO_BV_GET(&din, real_packet->%(name)s)) {
-   RECEIVE_PACKET_FIELD_ERROR(%(name)s);
--}'''%self.__dict__
-+}
-+#endif'''%self.__dict__
-         if self.dataio_type in ["string","bit_string","city_map"] and \
-            self.is_array!=2:
-             return '''if (!DIO_GET(%(dataio_type)s, &din, \"%(name)s\", real_packet->%(name)s, sizeof(real_packet->%(name)s))) {
-@@ -549,10 +536,10 @@
+@@ -549,10 +534,10 @@
              else:
                  extra=""
              if self.dataio_type=="memory":
@@ -119,18 +105,18 @@ diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/gene
              elif self.is_array==2 and self.dataio_type!="string":
                  return '''
  {
-@@ -937,7 +924,7 @@
+@@ -937,7 +922,7 @@
    struct %(packet_name)s *old;
    struct genhash **hash = pc->phs.received + %(type)s;
  '''
--            delta_body1="\n  DIO_BV_GET(&din, fields);\n"
-+            delta_body1="\n  DIO_BV_GET(pc->json_packet, fields);\n"
+-            delta_body1="\n  DIO_BV_GET(&din, \"fields\", fields);\n"
++            delta_body1="\n  DIO_BV_GET(pc->json_packet, \"fields\", fields);\n"
              body1=""
              for field in self.key_fields:
                  body1=body1+prefix("  ",field.get_get())+"\n"
 diff -Nurd -X.diff_ignore freeciv/server/handchat.c freeciv/server/handchat.c
---- freeciv/server/handchat.c	2015-02-13 05:26:05.815848794 +0200
-+++ freeciv/server/handchat.c	2015-02-13 05:27:22.383847114 +0200
+--- freeciv/server/handchat.c	2015-03-16 07:03:22.481089843 +0200
++++ freeciv/server/handchat.c	2015-03-16 07:03:56.053089107 +0200
 @@ -19,7 +19,10 @@
  #include <stdio.h>
  #include <string.h>
@@ -163,8 +149,8 @@ diff -Nurd -X.diff_ignore freeciv/server/handchat.c freeciv/server/handchat.c
        break;
      }
 diff -Nurd -X.diff_ignore freeciv/server/plrhand.c freeciv/server/plrhand.c
---- freeciv/server/plrhand.c	2015-02-13 05:26:06.051848789 +0200
-+++ freeciv/server/plrhand.c	2015-02-13 05:27:22.383847114 +0200
+--- freeciv/server/plrhand.c	2015-03-16 07:03:22.493089843 +0200
++++ freeciv/server/plrhand.c	2015-03-16 07:03:56.053089107 +0200
 @@ -1243,12 +1243,12 @@
        || (receiver
            && player_diplstate_get(receiver, plr1)->contact_turns_left > 0)
@@ -181,9 +167,9 @@ diff -Nurd -X.diff_ignore freeciv/server/plrhand.c freeciv/server/plrhand.c
      packet_ds->has_reason_to_cancel = 0;
      packet_ds->contact_turns_left   = 0;
 diff -Nurd -X.diff_ignore freeciv/server/ruleset.c freeciv/server/ruleset.c
---- freeciv/server/ruleset.c	2015-02-13 05:26:05.803848794 +0200
-+++ freeciv/server/ruleset.c	2015-02-13 05:27:22.383847114 +0200
-@@ -6364,6 +6364,8 @@
+--- freeciv/server/ruleset.c	2015-03-16 07:03:22.417089845 +0200
++++ freeciv/server/ruleset.c	2015-03-16 07:03:56.057089107 +0200
+@@ -6380,6 +6380,8 @@
      packet.ngroups = i;
  
      packet.init_government_id = government_number(n->init_government);
@@ -192,7 +178,7 @@ diff -Nurd -X.diff_ignore freeciv/server/ruleset.c freeciv/server/ruleset.c
      fc_assert(ARRAY_SIZE(packet.init_techs) == ARRAY_SIZE(n->init_techs));
      for (i = 0; i < MAX_NUM_TECH_LIST; i++) {
        packet.init_techs[i] = n->init_techs[i];
-@@ -6379,6 +6381,7 @@
+@@ -6395,6 +6397,7 @@
        /* Impr_type_id to int */
        packet.init_buildings[i] = n->init_buildings[i];
      }

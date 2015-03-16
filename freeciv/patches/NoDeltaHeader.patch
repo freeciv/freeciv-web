@@ -1,0 +1,12 @@
+diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/generate_packets.py
+--- freeciv/common/generate_packets.py	2015-03-16 06:58:35.081096149 +0200
++++ freeciv/common/generate_packets.py	2015-03-16 07:01:22.137092484 +0200
+@@ -896,7 +896,7 @@
+ '''%self.get_dict(vars())
+ 
+         body=body+'''
+-  DIO_BV_PUT(&dout, \"fields\", fields);
++/*  DIO_BV_PUT(&dout, \"fields\", fields); */
+ '''
+ 
+         for field in self.key_fields:

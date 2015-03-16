@@ -15,7 +15,6 @@
 
 
 import sys
-import traceback
 from time import gmtime, strftime
 import os
 import platform
@@ -83,16 +82,6 @@ def get_debug_info(civcoms):
                     civcoms[key].civserverport,
                     time.time() -
                     civcoms[key].connect_time))
-
-        code += "<h3>Thread dumps:</h3>"
-
-        for threadId, stack in list(sys._current_frames().items()):
-            code += ("<br><br><b><u># ThreadID: %s</u></b><br>" % threadId)
-            for filename, lineno, name, line in traceback.extract_stack(stack):
-                code += ('File: "%s", line %d, in %s: ' %
-                         (filename, lineno, name))
-                if line:
-                    code += (" <b>%s</b> <br>" % (line.strip()))
 
     except:
         print(("Unexpected error:" + str(sys.exc_info()[0])))

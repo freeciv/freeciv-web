@@ -10,5 +10,14 @@ $(document).ready(function() {
     $('#load-button').addClass("btn-success");
   }
 
+
+$.ajax({
+  url: "/meta/fpinfo.php",
+  cache: true
+})
+  .done(function( html ) {
+    $( "#metalink" ).html("Live Games: " +  html );
+  });
+
 });
 

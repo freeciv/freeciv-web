@@ -42,26 +42,6 @@ CREATE TABLE `auth` (
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `js_breakpad`
---
-
-DROP TABLE IF EXISTS `js_breakpad`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `js_breakpad` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `msg` varchar(1000) DEFAULT NULL,
-  `url` varchar(100) DEFAULT NULL,
-  `linenumber` int(11) DEFAULT NULL,
-  `stacktrace` varchar(4000) DEFAULT NULL,
-  `timepoint` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `ip` varchar(20) DEFAULT NULL,
-  `useragent` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
 
 --
 -- Table structure for table `players`

@@ -37,6 +37,7 @@ var goto_request_map = {};
 var goto_turns_request_map = {};
 var current_goto_turns = 0;
 var waiting_units_list = [];
+var show_citybar = true;
 
 /****************************************************************************
 ...
@@ -980,6 +981,13 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift)
     case 'O':
       key_unit_transform();
     break; 
+
+    case 'C':
+      if (ctrl) {
+        show_citybar = !show_citybar;
+      }
+    break; 
+
 
     case 'N':
       if (shift) {

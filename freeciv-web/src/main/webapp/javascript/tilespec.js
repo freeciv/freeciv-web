@@ -264,7 +264,7 @@ function fill_sprite_array(layer, ptile, pedge, pcorner, punit, pcity, citymode)
       break;
 
     case LAYER_CITYBAR:
-      if (pcity != null) {
+      if (pcity != null && show_citybar) {
         sprite_array.push(get_city_info_text(pcity));
       }   
 

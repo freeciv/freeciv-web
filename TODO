@@ -11,7 +11,6 @@ Major:
 - Add better goto handling with display of the number of turns required for goto
 
 Medium:
-- Implement city production worklists. 
 - Playback of games.
 - Show attack prompts. At the moment, gotos can result in unwanted attacks.
 - Show what city is a unit's homecity. 

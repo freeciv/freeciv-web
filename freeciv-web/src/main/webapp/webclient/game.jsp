@@ -32,9 +32,6 @@
 			<div id="tabs-nat">
 				<jsp:include page="nations.jsp" flush="false"/>
 			</div>
-			<div id="tabs-cit">
-			  <jsp:include page="city.jsp" flush="false"/>  
-			</div>
 
 			<div id="tabs-hel" class="manual_doc">
 			</div>

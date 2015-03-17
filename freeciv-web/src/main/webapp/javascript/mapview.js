@@ -73,8 +73,6 @@ function init_mapview()
   mapview_canvas_ctx = mapview_canvas.getContext("2d");
   buffer_canvas = document.createElement('canvas');
   buffer_canvas_ctx = buffer_canvas.getContext('2d');
-  city_canvas = document.getElementById('city_canvas');
-  city_canvas_ctx = city_canvas.getContext('2d');
 
   if ("mozImageSmoothingEnabled" in mapview_canvas_ctx) {
     // if this Boolean value is false, images won't be smoothed when scaled. This property is true by default.
@@ -138,7 +136,6 @@ function setup_window_size ()
 
   mapview_canvas_ctx.font = canvas_text_font;
   buffer_canvas_ctx.font = canvas_text_font;
-  city_canvas_ctx.font = canvas_text_font;
 
   $("#game_status_panel").css("width", mapview_canvas.width);
 
@@ -572,6 +569,10 @@ function update_select_unit_dialog(punits)
 **************************************************************************/
 function set_city_mapview_active()
 {
+  city_canvas = document.getElementById('city_canvas');
+  city_canvas_ctx = city_canvas.getContext('2d');
+  city_canvas_ctx.font = canvas_text_font;
+
   mapview_canvas_ctx = city_canvas.getContext("2d");
 
   mapview['width'] = 350;
@@ -591,7 +592,6 @@ function set_default_mapview_active()
 {
   mapview_canvas_ctx = mapview_canvas.getContext("2d");
   mapview_canvas_ctx.font = canvas_text_font;
-  city_dialog_remove();
 
   /* shows mapview elements */
   $("#tabs-map").show();

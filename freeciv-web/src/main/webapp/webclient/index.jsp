@@ -7,7 +7,7 @@
 <script type="text/javascript">
 var ts="${initParam.buildTimeStamp}";
 </script>
-<script type="text/javascript" src="/javascript/jquery.min.js?ts=${initParam.buildTimeStamp}"></script>
+<script type="text/javascript" src="/javascript/libs/jquery.min.js?ts=${initParam.buildTimeStamp}"></script>
 <script type="text/javascript" src="/javascript/webclient.min.js?ts=${initParam.buildTimeStamp}"></script>
 <script type="text/javascript" src="/music/audio.min.js"></script>
 

@@ -148,6 +148,7 @@ button {
 }
 
 #city_improvements_panel {
+  clear: left;
   width: 95%;
 }
 
@@ -351,22 +352,35 @@ button {
 }
 
 #city_present_units {
-  height: 100px; 
-  width: 90%; 
+  float: left;
+  height: 90px; 
   overflow: auto; 
   background:  url("/images/bg-dark.jpg") repeat scroll 0 0 ; 
   border: 1px solid #444444;
-  padding: 3px;
+  padding: 6px;
+  margin: 5px;
+  min-width: 300px;
 }
 
 #city_improvements {
-  height: 100px; 
-  width: 90%; 
+  float: left;
+  height: 90px; 
   overflow: auto; 
   background: url("/images/bg-dark.jpg") repeat scroll 0 0 ; 
   border: 1px solid #444444;
-  padding: 3px;
+  padding: 6px;
+  margin: 5px;
+  min-width: 200px;
 
+}
+
+#city_improvements_title, #city_present_units_title {
+  font-size: 90%;
+  font-weight: bold;
+  color: white;
+  background-color: black;
+  padding: 4px;
+  margin: -7px -6px 7px -6px;
 }
 
 #city_improvement_element {
@@ -544,10 +558,7 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 }
 
 #city_disband_options {
-  float: right;
-  margin: 20px;
-  padding-right: 50px;
-  font-size: 80%;
+  padding: 20px;
 }
 
 #tech_advance_helptext span {
@@ -772,4 +783,38 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 .chatbox_text_tileinfo {
   cursor:pointer;
   cursor:hand;
+}
+
+#city_overview_tab, #city_production_tab, #city_traderoutes_tab, #city_settings_tab {
+  min-height: 550px;
+}
+
+// city tabs will be on the bottom of the dialog.
+#city_tabs { 
+    position: relative; 
+    padding-bottom: 3em; 
+} 
+#city_tabs .ui-tabs-nav { 
+    position: absolute; 
+    left: 0.25em; 
+    right: 0.25em; 
+    bottom: 0.25em; 
+    padding: 0em 0.2em 0.2em; 
+} 
+#city_tabs .ui-tabs-nav li { 
+    border-top: none; 
+    border-bottom: 1px solid #ccc; 
+    -moz-border-radius: 0px 0px 4px 4px; 
+    -webkit-border-radius: 0px 0px 4px 4px; 
+    border-radius: 0px 0px 4px 4px; 
+} 
+#city_tabs .ui-tabs-nav li.ui-tabs-selected, 
+#city_tabs .ui-tabs-nav li.ui-state-active { 
+    top: -1px; 
+}
+
+
+#prod_buttons {
+  float: right;
+  padding-top: 15px;
 }

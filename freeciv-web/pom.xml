@@ -120,11 +120,12 @@
 		<jsFinalFile>webclient.js</jsFinalFile>
                 <jsSourceIncludes>
                   <jsSourceInclude>*.js</jsSourceInclude>
+                  <jsSourceInclude>libs/*.js</jsSourceInclude>
                 </jsSourceIncludes>
 	        <jsSourceExcludes>
                   <jsSourceExclude>menu.js</jsSourceExclude>
-                  <jsSourceExclude>jquery.min.js</jsSourceExclude>
-                  <jsSourceExclude>bootstrap.min.js</jsSourceExclude>
+                  <jsSourceExclude>libs/jquery.min.js</jsSourceExclude>
+                  <jsSourceExclude>libs/bootstrap.min.js</jsSourceExclude>
                   <jsSourceExclude>tileset_config*</jsSourceExclude>
                   <jsSourceExclude>tileset_spec*</jsSourceExclude>
                 </jsSourceExcludes>

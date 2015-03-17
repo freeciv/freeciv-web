@@ -1026,7 +1026,7 @@ function get_unit_image_sprite(punit)
   var tileset_x = tileset[tag][0];
   var tileset_y = tileset[tag][1];
   var width = tileset[tag][2];
-  var height = tileset[tag][3];
+  var height = (tileset[tag][3] - 2);
   var i = tileset[tag][4];
   return {"tag": tag, 
             "image-src" : "/tileset/freeciv-web-tileset-" + tileset_name + "-" + i + ".png?ts=" + ts,

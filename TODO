@@ -6,8 +6,9 @@ Basically you can help improve Freeciv-web in any way you like, as long at it ac
 Major:
 - Update Freeciv-web to work with latest Freeciv.org SVN trunk version.
 - Integrate Freeciv-web into Freeciv.org codebase as much as possible.
+- Merge all dialogs to use Handlebars templates. See city dialog for a starting example. http://handlebarsjs.com/
 - Remove need for patches in /freeciv/patches directory.
-- Remove freeciv-proxy, integrate a WebSocket server into the freeciv C server. Integrate http://libwebsockets.org into the Freeciv C server. This is a lot of work.
+- Remove freeciv-proxy, integrate a WebSocket server into the freeciv C server. Integrate http://libwebsockets.org into the Freeciv C server. This will be useful! 
 - Add better goto handling with display of the number of turns required for goto
 
 Medium:

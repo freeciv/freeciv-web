@@ -31,6 +31,8 @@ var MAX_LEN_WORKLIST = 64;
 
 var INCITE_IMPOSSIBLE_COST = (1000 * 1000 * 1000);
 
+var city_tab_index = 0;
+
 /**************************************************************************
  ...
 **************************************************************************/
@@ -93,7 +95,8 @@ function show_city_dialog_by_id(pcity_id)
 }
 
 /**************************************************************************
- ...
+ Show the city dialog, by loading a Handlebars template, and filling it
+ with data about the city.
 **************************************************************************/
 function show_city_dialog(pcity)
 {
@@ -101,21 +104,60 @@ function show_city_dialog(pcity)
   active_city = pcity;
   
   if (pcity == null) return;
-  $("#dialog").dialog('close');	 
+
+  // reset dialog page.
+  $("#city_dialog").remove();
+  $("<div id='city_dialog'></div>").appendTo("div#game_page");
+
+  var city_data = {};
+
+  $.ajax({
+    url: "/webclient/city.hbs",
+    dataType: "html",
+    cache: true,
+    async: false
+  }).fail(function() {
+    console.error("Unable to load city dialog template.");
+  }).done(function( data ) {
+    var template=Handlebars.compile(data);
+    $("#city_dialog").html(template(city_data));
+  });
+
+  city_worklist_dialog();
+  show_city_traderoutes();
+
+  $("#city_dialog").attr("title", decodeURIComponent(pcity['name']));
+  $("#city_dialog").dialog({
+			bgiframe: true,
+			modal: true,
+			width: "80%",
+                        close : function(){
+                          close_city_dialog();
+                        },   
+			buttons: {
+                                "Next city" : function() {
+                                   next_city();
+				},
+                                "Buy" : function() {
+                                  request_city_buy();
+				},
+                                "Rename" : function() {
+                                  rename_city();
+				},
+				"Close": function() {
+                                   close_city_dialog();
+				}
+                        }
+		});
+	
+  $("#city_dialog").dialog('open');		
+  $("#game_text_input").blur();
+  $("#city_tabs").tabs({ active: city_tab_index});
+
   set_city_mapview_active();
   center_tile_mapcanvas(city_tile(pcity));
   update_map_canvas(0, 0, mapview['store_width'], mapview['store_height']);
- 
-  $("#tabs-map").addClass("ui-tabs-hide");
-  $("#tabs-map").hide();
-  $("#tabs-cit").removeClass("ui-tabs-hide");
-  $("#tabs-cit").show();
-  $("#map_tab").removeClass("ui-state-active");
-  $("#map_tab").removeClass("ui-tabs-selected");
-  $("#map_tab").addClass("ui-state-default");
-  
-  
-  $("#city_heading").html(decodeURIComponent(pcity['name']));
+
   $("#city_size").html("Population: " + numberWithCommas(city_population(pcity)*1000) + "<br>" 
                        + "Size: " + pcity['size'] + "<br>"
                        + "Granary: " + pcity['food_stock'] + "/" + pcity['granary_size'] + "<br>"
@@ -140,7 +182,6 @@ function show_city_dialog(pcity)
   } else {
     $("#city_production_turns_overview").html("-");
   }
-
   
   var improvements_html = "";
   for (var z = 0; z < pcity['improvements'].length; z ++) {
@@ -162,8 +203,6 @@ function show_city_dialog(pcity)
     }
   }
   $("#city_improvements_list").html(improvements_html);
-  
-  
   
   var punits = tile_units(city_tile(pcity));
   if (punits != null) {
@@ -239,11 +278,11 @@ function show_city_dialog(pcity)
   $('#disbandable_city').click(function() {
     var packet = {"pid" : packet_city_disbandable_req, "city_id" : active_city['id']};
     send_request(JSON.stringify(packet));
+    city_tab_index = 3;
   });
 
-  if (is_small_screen()) {
-    $("#city_dialog_info").hide();
-  }
+  city_tab_index = 0;
+ 
 }
 
 /**************************************************************************
@@ -536,22 +575,16 @@ function send_city_change(city_id, kind, value)
 **************************************************************************/
 function close_city_dialog()
 {
+  $("#city_dialog").dialog('close');
   set_default_mapview_active();
-}
-
-/**************************************************************************
- Close city dialog, shows/hides appropriate widgets, hides city dialog UI. 
-**************************************************************************/
-function city_dialog_remove()
-{
   if (active_city != null) {
     setup_window_size (); 
     center_tile_mapcanvas(city_tile(active_city)); 
     active_city = null;
 
-    $("#tabs-cit").addClass("ui-tabs-hide");
-    $("#tabs-cit").hide();
-   }
+  }
+  keyboard_input=true;
+  worklist_dialog_active = false;
 }
 
 /**************************************************************************
@@ -861,27 +894,17 @@ function show_city_traderoutes()
     msg += tcity['name'] + " (" + active_city['trade_value'][i] + ")" + "<br>";
   }
   if (msg == "") msg = "No traderoutes.";
-  show_dialog_message("Traderoutes of " + active_city['name'], msg);
+  $("#city_traderoutes_tab").html(msg);
 
 }
 
 /**************************************************************************
-...
+ Populates data to the production tab in the city dialog.
 **************************************************************************/
 function city_worklist_dialog() 
 {
   if (active_city == null) return;
   var pcity = active_city;
-
-  // reset dialog page.
-  $("#city_worklist_dialog").remove();
-  $("<div id='city_worklist_dialog'></div>").appendTo("div#game_page");
-
-  var msg = "<div id='worklist_dialog_headline'></div>"
-	  + "<div id='worklist_left'><div id='worklist_heading'>Target Worklist:</div><div id='city_current_worklist'></div></div>"
-	  + "<div id='worklist_right'><div id='tasks_heading'>Source tasks:</div><div id='worklist_production_choices'></div></div>";
-
-  $("#city_worklist_dialog").html(msg);
 
   var universals_list = [];
   if (pcity['worklist'] != null && pcity['worklist'] != "-") {
@@ -958,53 +981,6 @@ function city_worklist_dialog()
 
   $("#worklist_production_choices").html(production_html);
 
-  $("#city_worklist_dialog").attr("title", "City Production Worklist");
-  $("#city_worklist_dialog").dialog({
-			bgiframe: true,
-			modal: true,
-			width: "80%",
-			close: function() {
-				keyboard_input=true;
-                                worklist_dialog_active = false;
-			},
-			buttons: [
-					{
-					text: "Change production",
-	  				disabled: true,
-				        click: function() {
-					  if (selected_kind != -1 && selected_value != -1) {
-    					    send_city_change(pcity['id'], selected_kind, selected_value);
-					  }
-					}
-					},
-					{
-					text: "Add to worklist",
-	  				disabled: true,
-				        click: function() {
-					  if (selected_kind != -1 && selected_value != -1) {
-					    send_city_worklist_add(pcity['id'], selected_kind, selected_value);
-					  }
-					}
-					},	  
-	 				 {
-					text: "Buy",
-	  				disabled: !city_can_buy(pcity),
-				        click: function() {
-						request_city_buy();
-					}
-					}
-  					,{
-					text: "Close",
-				        click: function() {
-						$("#city_worklist_dialog").remove();
-						keyboard_input=true;
-                                                worklist_dialog_active = false;
-					}
-					}
-				]
-		});
-	
-  $("#city_worklist_dialog").dialog('open');		
   keyboard_input=false;
   worklist_dialog_active = true;
   var headline = "";
@@ -1041,12 +1017,7 @@ function city_worklist_dialog()
       send_city_worklist_add(pcity['id'], kind, value);
     }
   });
-
-  $("#city_worklist_dialog").position({
-    my: "center",
-    at: "center",
-    of: window
-  });
+  $(".button").button();
 
 }
 
@@ -1057,7 +1028,6 @@ function handle_worklist_select( ui )
 {
   selected_value = parseFloat($(ui.selected).data("value"));
   selected_kind = parseFloat($(ui.selected).data("kind"));
-  $(".ui-button").removeAttr('disabled').removeClass( 'ui-state-disabled');
 }
 
 /**************************************************************************
@@ -1075,6 +1045,7 @@ function send_city_worklist_add(city_id, kind, value)
                       "kind" : kind,
                       "value" : value};
   send_request(JSON.stringify(city_message));
+  city_tab_index = 1;
 }
 
 /**************************************************************************
@@ -1086,4 +1057,29 @@ function send_city_worklist_remove(city_id, index)
                       "city_id" : city_id,
                       "index" : index};
   send_request(JSON.stringify(city_message));
+  city_tab_index = 1;
+}
+
+/**************************************************************************
+...
+**************************************************************************/
+function city_change_production() 
+{
+  if (selected_kind != -1 && selected_value != -1) {
+    send_city_change(active_city['id'], selected_kind, selected_value);
+    city_tab_index = 1;
+  }
+}
+
+
+/**************************************************************************
+...
+**************************************************************************/
+function city_add_to_worklist() 
+{
+  if (selected_kind != -1 && selected_value != -1) {
+    send_city_worklist_add(active_city['id'], selected_kind, selected_value);
+    city_tab_index = 1;
+  }
+
 }

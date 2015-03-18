@@ -351,7 +351,7 @@ button {
   
 }
 
-#city_present_units {
+#city_present_units, #city_supported_units {
   float: left;
   height: 90px; 
   overflow: auto; 
@@ -374,7 +374,7 @@ button {
 
 }
 
-#city_improvements_title, #city_present_units_title {
+#city_improvements_title, #city_present_units_title, #city_supported_units_title {
   font-size: 90%;
   font-weight: bold;
   color: white;
@@ -635,8 +635,7 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 #city_current_worklist {
   width: 100%;
   float: left;
-  min-height: 350px;
-  max-height: 450px;
+  height: 450px;
   overflow: auto;
   background-color: rgba(40,40,40,0.4);
   border: 1px solid black;
@@ -645,8 +644,7 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 #worklist_production_choices {
   width: 100%;
   float: left;
-  min-height: 350px;
-  max-height: 450px;
+  height: 450px;
   overflow: auto;
   background-color: rgba(40,40,40,0.4);
   border: 1px solid black;
@@ -785,8 +783,8 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
   cursor:hand;
 }
 
-#city_overview_tab, #city_production_tab, #city_traderoutes_tab, #city_settings_tab {
-  min-height: 550px;
+#city_overview_tab, #city_production_tab, #city_traderoutes_tab, #city_settings_tab, #city_info_tab, #city_units_tab {
+  min-height: 600px;
 }
 
 // city tabs will be on the bottom of the dialog.

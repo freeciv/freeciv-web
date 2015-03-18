@@ -112,7 +112,7 @@ function show_city_dialog(pcity)
   var city_data = {};
 
   $.ajax({
-    url: "/webclient/city.hbs",
+    url: "/webclient/city.hbs?ts=" + ts,
     dataType: "html",
     cache: true,
     async: false
@@ -123,35 +123,63 @@ function show_city_dialog(pcity)
     $("#city_dialog").html(template(city_data));
   });
 
+  $("#city_canvas").click(city_mapview_mouse_click);
+
   city_worklist_dialog();
   show_city_traderoutes();
+
+  var dialog_buttons = {};
+  if (!is_small_screen()) {
+    dialog_buttons = $.extend(dialog_buttons, 
+      {
+       "Previous city" : function() {
+         previous_city();
+       },
+       "Next city" : function() {
+         next_city();
+       }
+     });
+   }
+
+   dialog_buttons = $.extend(dialog_buttons, 
+   {
+     "Buy" : function() {
+       request_city_buy();
+      },
+      "Rename" : function() {
+       rename_city();
+      },
+      "Close": function() {
+       close_city_dialog();
+      }
+    });
 
   $("#city_dialog").attr("title", decodeURIComponent(pcity['name']));
   $("#city_dialog").dialog({
 			bgiframe: true,
 			modal: true,
-			width: "80%",
+			width: is_small_screen() ? "98%" : "80%",
                         close : function(){
                           close_city_dialog();
                         },   
-			buttons: {
-                                "Next city" : function() {
-                                   next_city();
-				},
-                                "Buy" : function() {
-                                  request_city_buy();
-				},
-                                "Rename" : function() {
-                                  rename_city();
-				},
-				"Close": function() {
-                                   close_city_dialog();
-				}
-                        }
-		});
+			buttons: dialog_buttons
+                     });
 	
   $("#city_dialog").dialog('open');		
   $("#game_text_input").blur();
+
+  /* prepare city dialog for small screens. */
+  if (!is_small_screen()) {
+    $("#city_tabs-5").remove();
+    $("#city_tabs-6").remove();
+    $(".extra_tabs_small").remove();
+  } else {
+    $("#city_tabs-4").remove();
+    $(".extra_tabs_big").remove();
+    var units_element = $("#city_improvements_panel").detach();
+    $('#city_units_tab').append(units_element);
+   }
+
   $("#city_tabs").tabs({ active: city_tab_index});
 
   set_city_mapview_active();
@@ -215,7 +243,6 @@ function show_city_dialog(pcity)
          console.log("Missing sprite for " + punit);
          continue;
        }
-
       
       present_units_html = present_units_html +
        "<div id='game_unit_list_item' style='cursor:pointer;cursor:hand; background: transparent url(" 
@@ -227,6 +254,30 @@ function show_city_dialog(pcity)
     }
     $("#city_present_units_list").html(present_units_html);
   }
+
+  var sunits = get_supported_units(pcity);
+  if (sunits != null) {
+    var supported_units_html = "";
+    for (var r = 0; r < sunits.length; r++) {
+      var punit = sunits[r];
+      var ptype = unit_type(punit);   
+      var sprite = get_unit_image_sprite(punit);
+      if (sprite == null) {
+         console.log("Missing sprite for " + punit);
+         continue;
+       }
+      
+      supported_units_html = supported_units_html +
+       "<div id='game_unit_list_item' style='cursor:pointer;cursor:hand; background: transparent url(" 
+           + sprite['image-src'] +
+           ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y'] 
+           + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px;float:left; '"
+           + " onclick='city_dialog_activate_unit(units[" + punit['id'] + "]);'"
+           +"></div>";
+    }
+    $("#city_supported_units_list").html(supported_units_html);
+  }
+
 
   $("#city_food").html(pcity['prod'][0]);
   $("#city_prod").html(pcity['prod'][1]);
@@ -282,7 +333,10 @@ function show_city_dialog(pcity)
   });
 
   city_tab_index = 0;
- 
+
+  if (is_small_screen()) {
+   $(".ui-tabs-anchor").css("padding", "2px");
+  }
 }
 
 /**************************************************************************
@@ -711,6 +765,33 @@ function next_city()
       return;
     }
   }
+}
+
+/**************************************************************************
+.. 
+**************************************************************************/
+function previous_city()
+{
+  if (!client.conn.playing) return;
+
+  var prev_city = null;
+  for (city_id in cities) {
+    var next_city = cities[city_id];
+    
+    if (prev_city != null && active_city['id'] == city_id 
+        && city_owner(next_city).playerno == client.conn.playing.playerno) {
+      show_city_dialog(prev_city);
+      return;
+    }
+    if (city_owner(next_city).playerno == client.conn.playing.playerno) {
+      prev_city = next_city;
+    }
+  }
+  if (prev_city != null) {
+    show_city_dialog(prev_city);
+  }
+
+	
 }
 
 /**************************************************************************

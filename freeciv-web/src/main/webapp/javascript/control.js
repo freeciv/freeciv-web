@@ -57,8 +57,6 @@ function control_init()
     $('#canvas').bind('touchend', mapview_touch_end);
     $('#canvas').bind('touchmove', mapview_touch_move);
   }
-
-  $("#city_canvas").click(city_mapview_mouse_click);
   
   $("#turn_done_button").click(send_end_turn);
   if (!is_touch_device()) $("#turn_done_button").tooltip();

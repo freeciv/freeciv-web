@@ -60,6 +60,23 @@ function tile_units(ptile)
 }
 
 /**************************************************************************
+ Returns a list of units supported by this city.
+**************************************************************************/
+function get_supported_units(pcity)
+{
+  if (pcity == null) return null;
+  var result = [];
+  for (unit_id in units) {
+    var punit = units[unit_id];
+    if (punit['homecity'] == pcity['id']) {
+      result.push(punit);
+    }
+  }
+  return result;
+}
+
+
+/**************************************************************************
  Updates the index of which units can be found on a tile.
  Note: This must be called after a unit has moved to a new tile.
  See: clear_tile_unit()

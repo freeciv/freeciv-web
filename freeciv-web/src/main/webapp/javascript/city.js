@@ -125,7 +125,7 @@ function show_city_dialog(pcity)
 
   $("#city_canvas").click(city_mapview_mouse_click);
 
-  city_worklist_dialog();
+  city_worklist_dialog(pcity);
   show_city_traderoutes();
 
   var dialog_buttons = {};
@@ -489,7 +489,8 @@ function can_city_build_unit_direct(pcity, punittype)
 **************************************************************************/
 function can_city_build_unit_now(pcity, punittype)
 {  
-  return (pcity != null && pcity['can_build_unit'][punittype['id']] == "1"); 
+  return (pcity != null && pcity['can_build_unit'] != null 
+          && pcity['can_build_unit'][punittype['id']] == "1"); 
 }
 
 
@@ -982,10 +983,9 @@ function show_city_traderoutes()
 /**************************************************************************
  Populates data to the production tab in the city dialog.
 **************************************************************************/
-function city_worklist_dialog() 
+function city_worklist_dialog(pcity) 
 {
-  if (active_city == null) return;
-  var pcity = active_city;
+  if (pcity == null) return;
 
   var universals_list = [];
   if (pcity['worklist'] != null && pcity['worklist'] != "-") {

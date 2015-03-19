@@ -189,8 +189,8 @@ function handle_city_info(packet)
     show_city_dialog(cities[packet['id']]);
   }
 
-  if (worklist_dialog_active) {
-    city_worklist_dialog();
+  if (worklist_dialog_active && active_city != null) {
+    city_worklist_dialog(active_city);
   }
 }
 

@@ -36,7 +36,8 @@ Differences compared to default web-ruleset are:\n\
 capital if it is communist.\n\
 - Unit stacks don't protect against spy actions\n\
 - Explorers can establish embassies once Writing is discovered. \
-This action consumes the explorer.\
+This action consumes the explorer.\n\
+- There's only one barbarian nation, attacking from both land and sea.\
 ")
 
 [options]
@@ -278,8 +279,7 @@ actor_reqs    =
     }
 target_reqs  =
     { "type",   "name", "range", "present"
-      "Nation", "Barbarian", "Player", FALSE
-      "Nation", "Pirate", "Player", FALSE
+      "NationGroup", "Barbarian", "Player", FALSE
     }
 
 [actionenabler_explorer_establish_embassy]
@@ -293,8 +293,7 @@ actor_reqs    =
     }
 target_reqs  =
     { "type",   "name", "range", "present"
-      "Nation", "Barbarian", "Player", FALSE
-      "Nation", "Pirate", "Player", FALSE
+      "NationGroup", "Barbarian", "Player", FALSE
     }
 
 [actionenabler_investigate_city]
@@ -330,8 +329,7 @@ actor_reqs    =
     }
 target_reqs  =
     { "type",   "name", "range", "present"
-      "Nation", "Barbarian", "Player", FALSE
-      "Nation", "Pirate", "Player", FALSE
+      "NationGroup", "Barbarian", "Player", FALSE
     }
 
 [actionenabler_steal_tech_target]
@@ -344,8 +342,7 @@ actor_reqs    =
     }
 target_reqs  =
     { "type",   "name", "range", "present"
-      "Nation", "Barbarian", "Player", FALSE
-      "Nation", "Pirate", "Player", FALSE
+      "NationGroup", "Barbarian", "Player", FALSE
     }
 
 [actionenabler_incite_city]

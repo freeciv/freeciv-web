@@ -22,7 +22,7 @@ nationlist = "default/nationlist.ruleset"
 
 ; List of nations to embed to main nations.ruleset despite separate nationlist
 ; being used for other nations.
-embedded_nations = "barbarian", "pirate"
+embedded_nations = "barbarian"
 
 [compatibility]
 ; Initial government for all the nations that do not
@@ -39,6 +39,40 @@ aggressive_max = 85
 
 ; Please keep [ruledit] section in sync with these includes
 *include "default/nationlist.ruleset"
-; This ruleset uses model of two separate barbarian nations
-*include "nation/barbarian.ruleset"
-*include "nation/pirate.ruleset"
+
+; This ruleset uses model of single LandAndSea barbarian nation
+
+[nation_barbarian]
+
+translation_domain="freeciv"
+
+name=_("Barbarian")
+plural=_("?plural:Barbarians")
+groups="Core", "Barbarian"
+legend=_("Since the dawn of civilization, barbarians have been a threat to\
+ cultured peoples everywhere.")
+
+leaders = {
+ "name",        "sex"
+ "Genseric",    "Male"
+ "Alaric",      "Male"
+ "Theodoric",   "Male"
+ "Stilicho",    "Male"
+ "Attila",      "Male"
+ "Boadicea",    "Female"
+}
+
+flag="barbarian"
+flag_alt = "-"
+style = "European"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+cities = "Barbaricum"
+
+is_playable = FALSE
+barbarian_type = "LandAndSea"
+
+; nothing more needed for barbarians

@@ -1,6 +1,6 @@
 diff -Nurd -X.diff_ignore freeciv/common/connection.h freeciv/common/connection.h
---- freeciv/common/connection.h	2015-03-16 07:03:22.369089846 +0200
-+++ freeciv/common/connection.h	2015-03-16 07:03:56.053089107 +0200
+--- freeciv/common/connection.h	2015-03-20 19:10:41.408549845 +0200
++++ freeciv/common/connection.h	2015-03-20 19:11:19.584549008 +0200
 @@ -53,7 +53,7 @@
  struct timer_list;
  
@@ -11,8 +11,8 @@ diff -Nurd -X.diff_ignore freeciv/common/connection.h freeciv/common/connection.
  #define MAX_LEN_PASSWORD  512 /* do not change this under any circumstances */
  
 diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/generate_packets.py
---- freeciv/common/generate_packets.py	2015-03-16 07:03:22.401089845 +0200
-+++ freeciv/common/generate_packets.py	2015-03-16 07:07:53.705083893 +0200
+--- freeciv/common/generate_packets.py	2015-03-20 19:10:42.396549824 +0200
++++ freeciv/common/generate_packets.py	2015-03-20 19:11:19.584549008 +0200
 @@ -250,7 +250,7 @@
          if self.is_array==1:
              tmp="real_packet->%(name)s[i] = %(name)s[i]"%self.__dict__
@@ -22,76 +22,7 @@ diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/gene
  
      for (i = 0; i < %(array_size_u) s; i++) {
        %(tmp)s;
-@@ -364,25 +364,20 @@
-         if (self.dataio_type in arr_types and self.is_array==1) or \
-            (self.dataio_type not in arr_types and self.is_array==0):
-             return "  DIO_PUT(%(dataio_type)s, &dout, \"%(name)s\", real_packet->%(name)s);"%self.__dict__
--        if self.is_struct:
--            if self.is_array==2:
--                c="dio_put_%(dataio_type)s_raw(&dout, &real_packet->%(name)s[i][j]);"%self.__dict__
--            else:
--                c="dio_put_%(dataio_type)s_raw(&dout, &real_packet->%(name)s[i]);"%self.__dict__
-         elif self.dataio_type=="string":
--            c="dio_put_%(dataio_type)s_raw(&dout, real_packet->%(name)s[i]);"%self.__dict__
-+            c="/* dio_put_%(dataio_type)s_raw(&dout, \"%(name)s\", real_packet->%(name)s[i]); */"%self.__dict__
-             array_size_u=self.array_size1_u
-+            self.__dict__["array_size_u"] = array_size_u
- 
-         elif self.struct_type=="float":
--            if self.is_array==2:
--                c="  dio_put_%(dataio_type)s_raw(&dout, real_packet->%(name)s[i][j], %(float_factor)d);"%self.__dict__
--            else:
--                c="  dio_put_%(dataio_type)s_raw(&dout, real_packet->%(name)s[i], %(float_factor)d);"%self.__dict__
-+            c="/*  dio_put_%(dataio_type)s_raw(&dout, \"%(name)s\", real_packet->%(name)s[i][j], %(float_factor)d); */"%self.__dict__
-+        elif self.dataio_type=="requirement":
-+            c="  DIO_PUT(%(dataio_type)s, &dout, \"%(name)s\", (struct requirement *)real_packet->%(name)s, %(array_size_u)s);"%self.__dict__
-         else:
-             if self.is_array==2:
--                c="dio_put_%(dataio_type)s_raw(&dout, real_packet->%(name)s[i][j]);"%self.__dict__
-+                c="/* dio_put_%(dataio_type)s_raw(&dout, \"%(name)s\", real_packet->%(name)s[i][j]);"%self.__dict__
-             else:
--                c="dio_put_%(dataio_type)s_raw(&dout, real_packet->%(name)s[i]);"%self.__dict__
-+                c="dio_put_array_%(dataio_type)s_json(&dout, \"%(name)s\", (void *)real_packet->%(name)s, %(array_size_u)s);"%self.__dict__
- 
-         if not self.diff:
-             if self.is_array==2 and self.dataio_type!="string":
-@@ -392,27 +387,18 @@
- 
-       for (i = 0; i < %(array_size1_u)s; i++) {
-         for (j = 0; j < %(array_size2_u)s; j++) {
--#ifndef FREECIV_JSON_CONNECTION
-           %(c)s
--#endif /* FREECIV_JSON_CONNECTION */
-         }
-       }
-     } '''%self.get_dict(vars())
-             else:
-                 return '''
-     {
--      int i;
--
--      for (i = 0; i < %(array_size_u)s; i++) {
--#ifndef FREECIV_JSON_CONNECTION
-         %(c)s
--#endif /* FREECIV_JSON_CONNECTION */
--      }
-     } '''%self.get_dict(vars())
-         else:
-             return '''
-     {
--#ifndef FREECIV_JSON_CONNECTION
-       int i;
- 
-       fc_assert(%(array_size_u)s < 255);
-@@ -424,7 +410,6 @@
-         }
-       }
-       dio_put_uint8_raw(&dout, 255);
--#endif /* FREECIV_JSON_CONNECTION */
-     } '''%self.get_dict(vars())
- 
-     # Returns a code fragement which will get the field if the
-@@ -549,10 +534,10 @@
+@@ -553,10 +553,10 @@
              else:
                  extra=""
              if self.dataio_type=="memory":
@@ -105,7 +36,7 @@ diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/gene
              elif self.is_array==2 and self.dataio_type!="string":
                  return '''
  {
-@@ -937,7 +922,7 @@
+@@ -950,7 +950,7 @@
    struct %(packet_name)s *old;
    struct genhash **hash = pc->phs.received + %(type)s;
  '''
@@ -115,8 +46,8 @@ diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/gene
              for field in self.key_fields:
                  body1=body1+prefix("  ",field.get_get())+"\n"
 diff -Nurd -X.diff_ignore freeciv/server/handchat.c freeciv/server/handchat.c
---- freeciv/server/handchat.c	2015-03-16 07:03:22.481089843 +0200
-+++ freeciv/server/handchat.c	2015-03-16 07:03:56.053089107 +0200
+--- freeciv/server/handchat.c	2015-03-20 19:10:42.932549812 +0200
++++ freeciv/server/handchat.c	2015-03-20 19:11:19.584549008 +0200
 @@ -19,7 +19,10 @@
  #include <stdio.h>
  #include <string.h>
@@ -149,8 +80,8 @@ diff -Nurd -X.diff_ignore freeciv/server/handchat.c freeciv/server/handchat.c
        break;
      }
 diff -Nurd -X.diff_ignore freeciv/server/plrhand.c freeciv/server/plrhand.c
---- freeciv/server/plrhand.c	2015-03-16 07:03:22.493089843 +0200
-+++ freeciv/server/plrhand.c	2015-03-16 07:03:56.053089107 +0200
+--- freeciv/server/plrhand.c	2015-03-20 19:10:43.052549809 +0200
++++ freeciv/server/plrhand.c	2015-03-20 19:11:19.584549008 +0200
 @@ -1243,12 +1243,12 @@
        || (receiver
            && player_diplstate_get(receiver, plr1)->contact_turns_left > 0)
@@ -167,8 +98,8 @@ diff -Nurd -X.diff_ignore freeciv/server/plrhand.c freeciv/server/plrhand.c
      packet_ds->has_reason_to_cancel = 0;
      packet_ds->contact_turns_left   = 0;
 diff -Nurd -X.diff_ignore freeciv/server/ruleset.c freeciv/server/ruleset.c
---- freeciv/server/ruleset.c	2015-03-16 07:03:22.417089845 +0200
-+++ freeciv/server/ruleset.c	2015-03-16 07:03:56.057089107 +0200
+--- freeciv/server/ruleset.c	2015-03-20 19:10:42.796549815 +0200
++++ freeciv/server/ruleset.c	2015-03-20 19:11:19.584549008 +0200
 @@ -6380,6 +6380,8 @@
      packet.ngroups = i;
  

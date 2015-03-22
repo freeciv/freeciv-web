@@ -109,23 +109,3 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
    City building function called from inside server itself - notably city
    name has not been transfered over network so network encodings and such
    do not apply.
-@@ -1003,14 +1104,16 @@
- 
-    if (!is_player_phase(unit_owner(punit), game.info.phase)
-       || execute_orders(punit)) {
--    /* Looks like the unit survived. */
-+     /* Looks like the unit survived. */
-      send_unit_info(NULL, punit);
-     }
- 
-     pf_path_destroy(path);
--    return ;
-+    return;
-   } else {
--    return ;
-+    notify_player(pplayer, punit->tile, E_BAD_COMMAND,
-+                  ftc_server, _("The unit can't go there."));
-+    return;
-   }
- 
- }

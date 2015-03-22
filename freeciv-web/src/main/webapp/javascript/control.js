@@ -797,9 +797,51 @@ function do_map_click(ptile, qtype)
   var pcity = tile_city(ptile);
 
   if (goto_active) {
-    if (current_focus.length > 0) {
+    /* Get the path the server sent using PACKET_GOTO_PATH. */
+    var goto_path = goto_request_map[ptile['x'] + "," + ptile['y']];
+
+    if (current_focus.length > 0
+        /* there is a path for this tile */
+        && goto_path != null
+        /* the path for this tile has been received */
+        && goto_path != true) {
       var punit = current_focus[0];
-      var packet = {"pid" : packet_unit_move, "unit_id" : punit['id'], "tile": ptile['index'] };
+
+      /* The tile the unit currently is standing on. */
+      var old_tile = index_to_tile(punit['tile']);
+
+      /* Create an order to move along the path. */
+      var packet = {
+        "pid"      : packet_unit_orders,
+        "unit_id"  : punit['id'],
+        "src_tile" : old_tile['index'],
+        "length"   : goto_path['length'],
+        "repeat"   : false,
+        "vigilant" : false,
+
+        /* Each individual order is added later. */
+
+        "dest_tile": ptile['index']
+      };
+
+      /* Add each individual order. */
+      for (var i = 0; i < goto_path['length']; i++) {
+        /* TODO: Have the server send the full orders in stead of just the
+         * dir part. Use that data in stead. */
+        if (i + 1 == goto_path['length']) {
+          /* Don't try to do an action in the middle of the path. */
+          packet['orders_' + i] = ORDER_MOVE;
+        } else {
+          /* It is OK to end the path in an action. */
+          packet['orders_' + i] = ORDER_ACTION_MOVE;
+        }
+
+        packet['dir_' + i] = goto_path['dir_' + i];
+        packet['activity_' + i] = ACTIVITY_LAST;
+        packet['target_' + i] = EXTRA_NONE;
+      }
+
+      /* Send the order to move using the orders system. */
       send_request(JSON.stringify(packet));
     }
   

@@ -1709,9 +1709,9 @@ function update_goto_path(goto_packet)
   var ptile = t0;
   var goaltile = index_to_tile(goto_packet['dest']);
 
-  for (var i = 0; i < goto_packet['dir'].length; i++) {
+  for (var i = 0; i < goto_packet['length']; i++) {
     if (ptile == null) break;
-    var dir = goto_packet['dir'][i];
+    var dir = goto_packet['dir_' + i];
     ptile['goto_dir'] = dir; 
     ptile = mapstep(ptile, dir);
   }

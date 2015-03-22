@@ -828,7 +828,7 @@ function do_map_click(ptile, qtype)
       for (var i = 0; i < goto_path['length']; i++) {
         /* TODO: Have the server send the full orders in stead of just the
          * dir part. Use that data in stead. */
-        if (i + 1 == goto_path['length']) {
+        if (i + 1 != goto_path['length']) {
           /* Don't try to do an action in the middle of the path. */
           packet['orders_' + i] = ORDER_MOVE;
         } else {

@@ -1,22 +1,25 @@
-diff -Nurd -X.diff_ignore freeciv/ai/default/aisettler.c freeciv/ai/default/aisettler.c
---- freeciv/ai/default/aisettler.c	2012-08-08 00:18:50.000000000 +0300
-+++ freeciv/ai/default/aisettler.c	2012-08-08 00:35:01.000000000 +0300
-@@ -1175,8 +1175,8 @@
+diff --git a/ai/default/aisettler.c b/ai/default/aisettler.c
+index cf17674..371346b 100644
+--- a/ai/default/aisettler.c
++++ b/ai/default/aisettler.c
+@@ -1242,9 +1242,8 @@ static bool dai_do_build_city(struct ai_type *ait, struct player *pplayer,
                player_name(pplayer), TILE_XY(ptile));
      return FALSE;
    }
--  handle_unit_build_city(pplayer, punit->id,
--                         city_name_suggestion(pplayer, ptile));
+-  handle_unit_do_action(pplayer, punit->id, ptile->index,
+-                        0, city_name_suggestion(pplayer, ptile),
+-                        ACTION_FOUND_CITY);
 +  ai_unit_build_city(pplayer, punit->id,
 +                     city_name_suggestion(pplayer, ptile));
    pcity = tile_city(ptile);
    if (!pcity) {
      log_error("%s: Failed to build city at (%d, %d)",
-diff -Nurd -X.diff_ignore freeciv/configure.ac freeciv/configure.ac
---- freeciv/configure.ac	2012-08-08 00:31:38.000000000 +0300
-+++ freeciv/configure.ac	2012-08-08 00:35:01.000000000 +0300
-@@ -700,6 +700,11 @@
-   AC_MSG_ERROR([No usable thread implementation available])
+diff --git a/configure.ac b/configure.ac
+index 1597d67..e62315d 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -751,6 +751,11 @@ if test "x$thread_cond" != "xtrue" ; then
+   feature_thr_cond=missing
  fi
  
 +AM_PATH_GLIB_2_0(2.29.0,,
@@ -27,7 +30,7 @@ diff -Nurd -X.diff_ignore freeciv/configure.ac freeciv/configure.ac
  dnl Check and choose clients
  if test "x$client" != "xno"; then
  
-@@ -1273,7 +1278,7 @@
+@@ -1357,7 +1362,7 @@ AC_CONFIG_COMMANDS([fc_default-5],[[if test x`uname -s` = xBeOS ; then
       fi
     fi]],[[]])
  
@@ -36,9 +39,10 @@ diff -Nurd -X.diff_ignore freeciv/configure.ac freeciv/configure.ac
  CXXFLAGS="$EXTRA_DEBUG_CXXFLAGS $CXXFLAGS"
  LDFLAGS="$EXTRA_DEBUG_LDFLAGS $LDFLAGS"
  
-diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
---- freeciv/server/unithand.c	2012-08-08 00:28:06.000000000 +0300
-+++ freeciv/server/unithand.c	2012-08-08 00:39:58.000000000 +0300
+diff --git a/server/unithand.c b/server/unithand.c
+index e5e294c..0cda06c 100644
+--- a/server/unithand.c
++++ b/server/unithand.c
 @@ -19,9 +19,12 @@
  #include <stdlib.h>
  #include <string.h>
@@ -52,22 +56,27 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
  #include "mem.h"
  #include "rand.h"
  #include "shared.h"
-@@ -704,7 +707,13 @@
-   res = unit_add_or_build_city_test(punit);
- 
-   if (UAB_BUILD_OK == res) {
--    city_build(pplayer, punit, name);
-+    /* Unescape city name, which has been escaped in Javascript. */
-+    char* unescaped_text = g_uri_unescape_string(name, NULL);
+@@ -1171,10 +1174,18 @@ void handle_unit_do_action(struct player *pplayer,
+   case ACTION_FOUND_CITY:
+     if (target_tile) {
+       if (is_action_enabled_unit_on_tile(action_type,
+                                           actor_unit, target_tile)) {
++        char* unescaped_text;
 +
-+    if (unescaped_text) {
-+      city_build(pplayer, punit, unescaped_text);
-+      g_free(unescaped_text);
-+    }
-   } else if (UAB_ADD_OK == res) {
-     city_add_unit(pplayer, punit);
-   } else {
-@@ -782,6 +796,36 @@
+         ACTION_STARTED_UNIT_TILE(action_type, actor_unit, target_tile);
+ 
+-        city_build(pplayer, actor_unit, name);
++        /* Unescape city name, which has been escaped in Javascript. */
++        unescaped_text = g_uri_unescape_string(name, NULL);
++
++        if (unescaped_text) {
++          city_build(pplayer, actor_unit, unescaped_text);
++          g_free(unescaped_text);
++        }
+       } else if (!unit_can_build_city(actor_unit)) {
+         /* Keep the rules like they was before action enabler control:
+          *  - !unit_can_build_city() won't punish the player.
+@@ -1561,6 +1572,36 @@ static void city_build(struct player *pplayer, struct unit *punit,
  }
  
  /**************************************************************************
@@ -77,37 +86,38 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
 +**************************************************************************/
 +void ai_unit_build_city(struct player *pplayer, int unit_id, const char *name)
 +{
-+  enum unit_add_build_city_result res;
 +  struct unit *punit = player_unit_by_number(pplayer, unit_id);
++  char* escaped_text;
 +
 +  if (NULL == punit) {
 +    /* Shouldn't happen */
-+    log_error("handle_unit_build_city()"
-+	      " invalid unit %d",
-+	      unit_id);
++    log_error("ai_unit_build_city()"
++              " invalid unit %d",
++              unit_id);
 +    return;
 +  }
 +
-+  res = unit_add_or_build_city_test(punit);
++  /* Escape city name so it can be treated like if it had been escaped in
++   * Javascript. */
++  escaped_text = g_uri_escape_string(name, NULL, TRUE);
 +
-+  if (res == UAB_BUILD_OK) {
-+    city_build(pplayer, punit, name);
-+  } else if (res == UAB_ADD_OK) {
-+    city_add_unit(pplayer, punit);
-+  } else {
-+    city_add_or_build_error(pplayer, punit, res);
++  if (escaped_text) {
++    handle_unit_do_action(pplayer, unit_id, unit_tile(punit)->index,
++                          0, name, ACTION_FOUND_CITY);
++    g_free(escaped_text);
 +  }
-+}
 +
++}
 +
 +/**************************************************************************
    Handle change in unit activity.
  **************************************************************************/
- void handle_unit_change_activity(struct player *pplayer, int unit_id,
-diff -Nurd -X.diff_ignore freeciv/server/unithand.h freeciv/server/unithand.h
---- freeciv/server/unithand.h	2012-08-08 00:18:29.000000000 +0300
-+++ freeciv/server/unithand.h	2012-08-08 00:38:31.000000000 +0300
-@@ -26,6 +26,7 @@
+ static void handle_unit_change_activity_real(struct player *pplayer,
+diff --git a/server/unithand.h b/server/unithand.h
+index 52020c4..f2c452c 100644
+--- a/server/unithand.h
++++ b/server/unithand.h
+@@ -26,6 +26,7 @@ void unit_change_homecity_handling(struct unit *punit, struct city *new_pcity);
  
  bool unit_move_handling(struct unit *punit, struct tile *pdesttile,
                          bool igzoc, bool move_diplomat_city);
@@ -115,17 +125,20 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.h freeciv/server/unithand.h
  
  void city_add_or_build_error(struct player *pplayer, struct unit *punit,
                               enum unit_add_build_city_result res);
-diff -Nurd -X.diff_ignore freeciv/server/unittools.c freeciv/server/unittools.c
---- freeciv/server/unittools.c	2012-08-08 00:28:06.000000000 +0300
-+++ freeciv/server/unittools.c	2012-08-08 00:35:01.000000000 +0300
-@@ -3418,8 +3418,8 @@
-       }
-       break;
-     case ORDER_BUILD_CITY:
--      handle_unit_build_city(pplayer, unitid,
--			     city_name_suggestion(pplayer, unit_tile(punit)));
-+      ai_unit_build_city(pplayer, unitid,
+diff --git a/server/unittools.c b/server/unittools.c
+index 433952b..f8b4646 100644
+--- a/server/unittools.c
++++ b/server/unittools.c
+@@ -3832,10 +3832,8 @@ bool execute_orders(struct unit *punit)
+                               ACTION_JOIN_CITY);
+         log_debug("  joining city");
+       } else {
+-        handle_unit_do_action(pplayer, unitid, unit_tile(punit)->index,
+-                              0, city_name_suggestion(pplayer,
+-                                                      unit_tile(punit)),
+-                              ACTION_FOUND_CITY);
++        ai_unit_build_city(pplayer, unitid,
 +                         city_name_suggestion(pplayer, unit_tile(punit)));
-       log_debug("  building city");
-       if (player_unit_by_number(pplayer, unitid)) {
- 	/* Build failed. */
+         log_debug("  building city");
+       }
+ 

@@ -33,6 +33,8 @@ flags =
     _("Helicopter"), _("Defends very badly against Fighters.")
     _("TradeRoute"), _("Can establish trade routes (must travel to target city).")
     _("HelpWonder")
+    _("Cities")
+    _("AddToCity")
   }
 
 [veteran_system]
@@ -198,7 +200,7 @@ flags         = "Unreachable", "DoesntOccupyTile"
 ; gov_req       = required government, names from governments.ruleset
 ; obsolete_by   = can be upgraded to and made obsolete by another unit by name
 ; build_cost    = production shields required to build
-; pop_cost      = population removed from city when built; for 'AddToCity'
+; pop_cost      = population removed from city when built; for 'Join City'
 ;                 units this is also the population added to the destination
 ; attack        = base attack strength (0 = cannot attack)
 ; defense       = base defense strength (0 = cannot defend)
@@ -216,8 +218,8 @@ flags         = "Unreachable", "DoesntOccupyTile"
 ;                 the unit has unlimited fuel, despite flying.
 ; uk_*          = upkeep costs, these are used as base values in the game
 ; cargo         = Unit classes this unit can transport
-; city_size     = Initial size of the cities built by 'Cities' type units
-;                 (but 'AddToCity' uses pop_cost)
+; city_size     = Initial size of the cities built by 'Found City' type units
+;                 (but 'Join City' uses pop_cost)
 ; targets       = list of unit classes this unit can attack against even
 ;                 if they have Unreachable unit class flag
 ; embarks       = list of unit classes this unit may load into while not in
@@ -287,12 +289,9 @@ flags         = "Unreachable", "DoesntOccupyTile"
 ; "Trireme"	= (sea only) cannot leave shoreline
 ; "Nuclear"	= nuke!
 ; "Paratroopers"= can paradrop
-; "Cities"      = can disband to produce a city (initial population city_size)
 ; "Only_Native_Attack" = cannot attack targets on non-native tiles even if
 ;                 unit class can
 ; "Cant_Fortify" =  cannot fortify even if unit class has "CanFortify" flag
-; "AddToCity"   = can disband to add pop_cost population to a city
-;                 (see cities.ruleset for limitation of this ability)
 ; "Fanatic"	= can only be built by governments that allow them
 ;		  (see civ2/governments.ruleset, Fundamentalism government)
 ; "Unique"	= a player can only have one of these units in the game at

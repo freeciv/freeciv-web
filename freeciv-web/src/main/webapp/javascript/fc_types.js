@@ -54,7 +54,9 @@ var ACTION_HELP_WONDER = 11;
 var ACTION_SPY_BRIBE_UNIT = 12;
 var ACTION_SPY_SABOTAGE_UNIT = 13;
 var ACTION_CAPTURE_UNITS = 14;
-var ACTION_COUNT = 15;
+var ACTION_FOUND_CITY = 15;
+var ACTION_JOIN_CITY = 16;
+var ACTION_COUNT = 17;
 
 /* Used to signal a move without any action. */
 var ACTION_MOVE = ACTION_COUNT;

@@ -1,0 +1,28 @@
+From 36ffb7ca0ed3d6de9f73292f437e2f31f265b4cd Mon Sep 17 00:00:00 2001
+From: Sveinung Kvilhaugsvik <sveinung84@users.sourceforge.net>
+Date: Sat, 21 Mar 2015 23:14:20 +0100
+Subject: Don't claim city founding is illegal when it may be legal.
+
+handle_city_name_suggestion_req(): Insert the missing return statement after
+sending the city name when it may be legal to found a new city.
+---
+ server/cityhand.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/server/cityhand.c b/server/cityhand.c
+index 0618edc..441cfc0 100644
+--- a/server/cityhand.c
++++ b/server/cityhand.c
+@@ -69,6 +69,9 @@ void handle_city_name_suggestion_req(struct player *pplayer, int unit_id)
+                 TILE_XY(unit_tile(punit)));
+     dlsend_packet_city_name_suggestion_info(pplayer->connections, unit_id,
+         city_name_suggestion(pplayer, unit_tile(punit)));
++
++    /* The rest of this function is error handling. */
++    return;
+   }
+ 
+   res = unit_add_or_build_city_test(punit);
+-- 
+2.1.4
+

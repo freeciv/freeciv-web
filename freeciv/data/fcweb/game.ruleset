@@ -216,6 +216,12 @@ ui_name_enter_marketplace = _("Enter %sMarketplace%s")
 ; /* TRANS: Help _build Wonder (100% chance of success). */
 ui_name_help_wonder = _("Help %sbuild Wonder%s")
 
+; /* TRANS: _Build City (100% chance of success). */
+ui_name_found_city = _("%sBuild City%s")
+
+; /* TRANS: _Add to City (100% chance of success). */
+ui_name_join_city = _("%sAdd to City%s")
+
 ; /* <-- avoid gettext warnings
 ;
 ; Action enablers:
@@ -388,6 +394,20 @@ actor_reqs    =
     { "type",   "name", "range", "present"
       "Unitflag", "HelpWonder", "Local", TRUE
       "DiplRel", "Is foreign", "Local", FALSE
+    }
+
+[actionenabler_build_city]
+action = "Found City"
+actor_reqs    =
+    { "type",   "name", "range", "present"
+      "Unitflag", "Cities", "Local", TRUE
+    }
+
+[actionenabler_join_city]
+action = "Join City"
+actor_reqs    =
+    { "type",   "name", "range", "present"
+      "Unitflag", "AddToCity", "Local", TRUE
     }
 
 [borders]

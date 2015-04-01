@@ -268,17 +268,6 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  
    UINT8 veteran_levels;
    STRING veteran_name[MAX_VET_LEVELS:veteran_levels][MAX_LEN_NAME];
-@@ -1378,8 +1396,8 @@
- PACKET_RULESET_GOVERNMENT = 145; sc, lsend
-   GOVERNMENT id;
- 
--  UINT8 reqs_count;
--  REQUIREMENT reqs[MAX_NUM_REQS:reqs_count];
-+  #UINT8 reqs_count;
-+  #REQUIREMENT reqs[MAX_NUM_REQS:reqs_count];
- 
-   STRING name[MAX_LEN_NAME];
-   STRING rule_name[MAX_LEN_NAME];
 @@ -1443,9 +1461,9 @@
    UINT8 groups[MAX_NUM_NATION_GROUPS:ngroups];
  

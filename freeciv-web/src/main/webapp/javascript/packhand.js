@@ -378,7 +378,23 @@ function handle_city_sabotage_list(packet)
 
 function handle_player_attribute_chunk(packet) 
 {
-  /* TODO: implement*/
+  /* The attribute block of the player structure is an area of Freeciv
+   * server memory that the client controls. The server will store it to
+   * savegames, send it when the client requests a copy and change it on
+   * the client's request. The server has no idea about its content. This
+   * is a chunk of it.
+   *
+   * The C clients can use the attribute block to store key-value pair
+   * attributes for the object types city, player, tile and unit. The
+   * format the they use to encode this data can be found in Freeciv's
+   * client/attribute.c.
+   *
+   * The C clients uses it to store parameters of cities for the (client
+   * side) CMA agent. */
+
+  /* TODO: Find out if putting something inside savegames is needed. If it
+   * is: decide if compatibility with the format of the Freeciv C clients
+   * is needed and implement the result of the decision. */
 }
 
 /**************************************************************************

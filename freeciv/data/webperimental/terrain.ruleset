@@ -1033,6 +1033,7 @@ shield      = 3 ; glacier used to have 4
 ; reqs                    = requirements to build the extra (see effects.ruleset
 ;                           and README.effects for help on requirements)
 ; rmreqs                  = requirements to remove the extra
+; spontaneous_reqs        = spontaneous appearance requirements
 ; buildable               = Can extra be built? Defaults to TRUE
 ; build_time              = how long it takes a unit to build this extra.
 ;                           Value of 0 (default) means that terrain- and

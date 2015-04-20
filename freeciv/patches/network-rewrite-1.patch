@@ -15,9 +15,9 @@ diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/gene
                  extra=""
              if self.dataio_type=="memory":
 -                return '''%(extra)s
--  if (!DIO_GET(%(dataio_type)s, &din, \"%(name)s\", real_packet->%(name)s, %(array_size_u)s)){
+-  if (!DIO_GET(%(dataio_type)s, &din, \"%(name)s\", NULL, real_packet->%(name)s, %(array_size_u)s)){
 +                return ''' /* not supported yet. %(extra)s
-+  if (!dio_get_%(dataio_type)s(pc->json_packet, \"%(name)s\", real_packet->%(name)s, %(array_size_u)s)){
++  if (!dio_get_%(dataio_type)s(pc->json_packet, \"%(name)s\", NULL, real_packet->%(name)s, %(array_size_u)s)){
      RECEIVE_PACKET_FIELD_ERROR(%(name)s);
 -  }'''%self.get_dict(vars())
 +  } */'''%self.get_dict(vars())
@@ -28,8 +28,8 @@ diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/gene
    struct %(packet_name)s *old;
    struct genhash **hash = pc->phs.received + %(type)s;
  '''
--            delta_body1="\n  DIO_BV_GET(&din, \"fields\", fields);\n"
-+            delta_body1="\n  DIO_BV_GET(pc->json_packet, \"fields\", fields);\n"
+-            delta_body1="\n  DIO_BV_GET(&din, \"fields\", NULL, fields);\n"
++            delta_body1="\n  DIO_BV_GET(pc->json_packet, \"fields\", NULL, fields);\n"
              body1=""
              for field in self.key_fields:
                  body1=body1+prefix("  ",field.get_get())+"\n"

@@ -5,8 +5,9 @@
 # proto_requirement_clean is Freeciv patch #6008
 # proto_clean_bitstring is Freeciv patch #6009
 # proto_clean_array_x_data_type is Freeciv patch #6010
+# proto_jarray_api is Freeciv patch #6017
 
-PATCHLIST="proto_requirement proto_requirement_clean proto_clean_bitstring proto_clean_array_x_data_type freeciv_web_all_packets_def_changes caravan_fixes1 city_fixes city_impr_fix2 city_name_bugfix city-naming-change city_fixes2 citytools_changes map-settings metachange text_fixes unithand-change2 webclient-ai-attitude current_research_cost freeciv-svn-webclient-changes network-rewrite-1 fcnet_packets misc_devversion_sync scenario_ruleset savegame savegame2 maphand_ch serverside_extra_assign libtoolize_no_symlinks spacerace city_disbandable ai_traits_crash unittools ruleset-capability worklists server_password aifill barbarian-names activity_null_check add_rulesets NoDeltaHeader"
+PATCHLIST="proto_requirement proto_requirement_clean proto_clean_bitstring proto_clean_array_x_data_type proto_jarray_api freeciv_web_all_packets_def_changes caravan_fixes1 city_fixes city_impr_fix2 city_name_bugfix city-naming-change city_fixes2 citytools_changes map-settings metachange text_fixes unithand-change2 webclient-ai-attitude current_research_cost freeciv-svn-webclient-changes network-rewrite-1 fcnet_packets misc_devversion_sync scenario_ruleset savegame savegame2 maphand_ch serverside_extra_assign libtoolize_no_symlinks spacerace city_disbandable ai_traits_crash unittools ruleset-capability worklists server_password aifill barbarian-names activity_null_check add_rulesets NoDeltaHeader"
 
 apply_patch() {
   echo "*** Applying $1.patch ***"

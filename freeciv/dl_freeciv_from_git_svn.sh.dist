@@ -1,0 +1,47 @@
+#!/bin/bash
+
+# Downloads the wanted revision of Freeciv from a git svn clone of Freeciv.
+#
+# This is more complicated than the default of using Subversion to download
+# it. Unless your Internet connection is slow, unstable, missing or billed
+# based on use, you rebuild the Freeciv server often and you already have
+# a git svn clone of Freeciv it may be a good idea to leave the default as
+# it is.
+#
+# To use this file copy it to dl_freeciv.sh. Then edit your copy so
+# FC_GIT_SVN points to the path of a git svn clone of Freeciv.
+#
+# If you decide to use this you will have to keep your git svn clone
+# updated your self. If you don't Freeciv-web won't find newer version of
+# Freeciv.
+
+# the path to a git svn clone of Freeciv
+# REMEMBER TO CHANGE THIS
+FC_GIT_SVN=change_me
+
+
+# You probably won't have to change anything below this comment.
+
+# location of the .git directory
+FCGIT=$FC_GIT_SVN/.git
+
+# The git revision that corresponds to the wanted Subversion revision
+GITREV=`git --git-dir=$FCGIT svn find-rev r$1`
+
+
+# Make sure that the wanted revision was found.
+if [ "x$GITREV" = "x" ] ; then
+  echo "Couldn't find r$1 in the Git repository $FC_GIT_SVN"
+  exit 1
+else
+  echo "Found r$1 in $FC_GIT_SVN as $GITREV"
+fi
+
+# Create the freeciv folder.
+if ! mkdir freeciv ; then
+  echo "Unable to create the folder freeciv"
+  exit 1
+fi
+
+# Copy the revision to the freeciv folder.
+git --git-dir=$FCGIT archive --format=tar $GITREV | tar x -C freeciv

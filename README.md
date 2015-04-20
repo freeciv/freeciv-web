@@ -162,7 +162,7 @@ manual installation procedure to setup Freeciv-web:
      and edit it to suit your needs.
    - Copy scripts/configuration.sh.dist to scripts/configuration.sh and edit it to suit your needs.
    - Copy publite2/settings.ini.dist to publite2/settings.ini and edit it to suit your needs.
-   - You may wish to create a freeciv/dl_freeciv.sh if you have trouble with your Internet connection and build the Freeciv server often. See freeciv/dl_freeciv_default.sh
+   - You may wish to create a freeciv/dl_freeciv.sh if you have trouble with your Internet connection and build the Freeciv server often. See freeciv/dl_freeciv_default.sh and freeciv/dl_freeciv_from_git_svn.sh.dist
 
 
 6.  Start and stop Freeciv-web with the following commands:  

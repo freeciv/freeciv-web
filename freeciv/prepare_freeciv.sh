@@ -10,7 +10,14 @@ rm -Rf freeciv
 
 . ./version.txt
 
-if ! svn --quiet export svn://svn.gna.org/svn/freeciv/$FCBRANCH -r $FCREV freeciv ; then
+# Allow the user to override how Freeciv is downloaded.
+if test -f dl_freeciv.sh ; then
+  FC_DL=dl_freeciv.sh
+else
+  FC_DL=dl_freeciv_default.sh
+fi
+
+if ! sh $FC_DL $FCREV $FCBRANCH ; then
   echo "Svn export failed" >&2
   exit 1
 fi

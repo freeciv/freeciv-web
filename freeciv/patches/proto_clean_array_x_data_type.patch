@@ -1,0 +1,172 @@
+From ef4d36efec7cbb2dca8d7bcf03b1a59e8d9264bb Mon Sep 17 00:00:00 2001
+From: sveinung <sveinung@a0f10bec-cc02-0410-94fc-a9cfff90b4cd>
+Date: Sun, 19 Apr 2015 14:21:30 +0000
+Subject: [PATCH 3/3] JSON protocol: Remove special dio_* functions for arrays.
+
+An old implementation of JSON arrays required a dio_* function for each
+combination of array level and data type.
+
+See patch #6010
+
+git-svn-id: svn://svn.gna.org/svn/freeciv/trunk@28813 a0f10bec-cc02-0410-94fc-a9cfff90b4cd
+---
+ common/dataio_json.c | 109 ---------------------------------------------------
+ common/dataio_json.h |   8 ----
+ 2 files changed, 117 deletions(-)
+
+diff --git a/common/dataio_json.c b/common/dataio_json.c
+index 3085f1d..7986f0d 100644
+--- a/common/dataio_json.c
++++ b/common/dataio_json.c
+@@ -155,97 +155,6 @@ void dio_put_worklist_json(struct json_data_out *dout, char *key,
+ }
+ 
+ /**************************************************************************
+-...
+-**************************************************************************/
+-void dio_put_array_uint8_json(struct json_data_out *dout, char *key,
+-                              int *values, int size)
+-{
+-  int i;
+-  json_t *array = json_array();
+-  for (i = 0; i < size; i++) {
+-    json_array_append_new(array, json_integer(values[i]));
+-  }
+-  
+-  json_object_set_new(dout->json, key, array);
+-}
+-
+-/**************************************************************************
+-...
+-**************************************************************************/
+-void dio_put_array_uint32_json(struct json_data_out *dout, char *key,
+-                               int *values, int size)
+-{
+-  int i;
+-  json_t *array = json_array();
+-
+-  for (i = 0; i < size; i++) {
+-    json_array_append_new(array, json_integer(values[i]));
+-  }
+-  
+-  json_object_set_new(dout->json, key, array);
+-}
+-
+-/**************************************************************************
+-...
+-**************************************************************************/
+-void dio_put_array_sint8_json(struct json_data_out *dout, char *key,
+-                              int *values, int size)
+-{
+-  int i;
+-  json_t *array = json_array();
+-  for (i = 0; i < size; i++) {
+-    json_array_append_new(array, json_integer(values[i]));
+-  }
+-  
+-  json_object_set_new(dout->json, key, array);
+-}
+-
+-/**************************************************************************
+-...
+-**************************************************************************/
+-void dio_put_array_sint16_json(struct json_data_out *dout, char *key,
+-                               int *values, int size)
+-{
+-  int i;
+-  json_t *array = json_array();
+-  for (i = 0; i < size; i++) {
+-    json_array_append_new(array, json_integer(values[i]));
+-  }
+-  
+-  json_object_set_new(dout->json, key, array);
+-}
+-
+-/**************************************************************************
+-...
+-**************************************************************************/
+-void dio_put_array_sint32_json(struct json_data_out *dout, char *key,
+-                               int *values, int size)
+-{
+-  int i;
+-  json_t *array = json_array();
+-  for (i = 0; i < size; i++) {
+-    json_array_append_new(array, json_integer(values[i]));
+-  }
+-  
+-  json_object_set_new(dout->json, key, array);
+-}
+-
+-/**************************************************************************
+-...
+-**************************************************************************/
+-void dio_put_array_bool8_json(struct json_data_out *dout, char *key,
+-                              bool *values, int size)
+-{
+-  int i;
+-  json_t *array = json_array();
+-  for (i = 0; i < size; i++) {
+-    json_array_append_new(array, values[i] ? json_true() : json_false());
+-  }
+-  
+-  json_object_set_new(dout->json, key, array);
+-}
+-
+-/**************************************************************************
+  Receive uint8 value to dest with json.
+ **************************************************************************/
+ bool dio_get_uint8_json(json_t *json_packet, char *key, int *dest)
+@@ -505,24 +414,6 @@ void dio_put_string_json(struct json_data_out *dout, char *key, const char *valu
+ /**************************************************************************
+ ...
+ **************************************************************************/
+-void dio_put_string_array_json(struct json_data_out *dout, char *key, 
+-                               const char *value, int size)
+-{
+-  int i;
+-
+-  json_t *array = json_array();
+-  for (i = 0; i < size; i++) {
+-    if (value != NULL) {
+-      json_array_append_new(array, json_string(value + i));
+-    }
+-  }
+-  
+-  json_object_set_new(dout->json, key, array);
+-}
+-
+-/**************************************************************************
+-...
+-**************************************************************************/
+ void dio_put_tech_list_json(struct json_data_out *dout, char *key, const int *value)
+ {
+   /* TODO: implement */
+diff --git a/common/dataio_json.h b/common/dataio_json.h
+index 6584f49..1359fc0 100644
+--- a/common/dataio_json.h
++++ b/common/dataio_json.h
+@@ -84,13 +84,6 @@ void dio_put_uint8_json(struct json_data_out *dout, char *key, int value);
+ void dio_put_uint16_json(struct json_data_out *dout, char *key, int value);
+ void dio_put_uint32_json(struct json_data_out *dout, char *key, int value);
+ 
+-void dio_put_array_uint8_json(struct json_data_out *dout, char *key, int *values, int size);
+-void dio_put_array_uint32_json(struct json_data_out *dout, char *key, int *values, int size);
+-void dio_put_array_sint8_json(struct json_data_out *dout, char *key, int *values, int size);
+-void dio_put_array_sint16_json(struct json_data_out *dout, char *key, int *values, int size);
+-void dio_put_array_sint32_json(struct json_data_out *dout, char *key, int *values, int size);
+-void dio_put_array_bool8_json(struct json_data_out *dout, char *key, bool *values, int size);
+-
+ #define dio_put_sint8_json(d,k,v) dio_put_uint8_json(d,k,v)
+ #define dio_put_sint16_json(d,k,v) dio_put_uint16_json(d,k,v)
+ #define dio_put_sint32_json(d,k,v) dio_put_uint32_json(d,k,v)
+@@ -112,7 +105,6 @@ void dio_put_requirement_json(struct json_data_out *dout, char *key,
+ 
+ void dio_put_uint8_vec8_json(struct json_data_out *dout, char *key, int *values, int stop_value);
+ void dio_put_uint16_vec8_json(struct json_data_out *dout, char *key, int *values, int stop_value);
+-void dio_put_string_array_json(struct json_data_out *dout, char *key, const char *value, int size);
+ 
+ /* Should be a function but we need some macro magic. */
+ #define DIO_BV_PUT(pdout, type, bv) \
+-- 
+2.1.4
+

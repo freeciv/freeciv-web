@@ -5,8 +5,8 @@ diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/gene
  '''%self.get_dict(vars())
  
          body=body+'''
--  DIO_BV_PUT(&dout, \"fields\", NULL, fields);
-+/*  DIO_BV_PUT(&dout, \"fields\", NULL, fields); */
+-  DIO_BV_PUT(&dout, \"fields\", &field_addr, fields);
++/*  DIO_BV_PUT(&dout, \"fields\", &field_addr, fields); */
  '''
  
          for field in self.key_fields:

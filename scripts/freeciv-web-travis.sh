@@ -30,9 +30,10 @@ mysql_pass="vagrant"
 resin_version="4.0.40"
 resin_url="http://www.caucho.com/download/resin-${resin_version}.tar.gz"
 tornado_url="https://pypi.python.org/packages/source/t/tornado/tornado-4.1.tar.gz"
+jansson_url="http://www.digip.org/jansson/releases/jansson-2.7.tar.bz2"
 
 # Based on fresh install of Ubuntu 12.04
-dependencies="maven mysql-server-5.5 openjdk-7-jdk libcurl4-openssl-dev nginx libjansson-dev subversion pngcrush libtool automake autoconf autotools-dev language-pack-en python3-setuptools libglib2.0-dev python3.2 python3.2-dev imagemagick liblzma-dev"
+dependencies="maven mysql-server-5.5 openjdk-7-jdk libcurl4-openssl-dev nginx subversion pngcrush libtool automake autoconf autotools-dev language-pack-en python3-setuptools libglib2.0-dev python3.2 python3.2-dev imagemagick liblzma-dev"
 
 ## dependencies
 echo "==== Installing Updates and Dependencies ===="
@@ -70,6 +71,14 @@ wget ${tornado_url}
 tar xvfz tornado-4.1.tar.gz
 cd tornado-4.1
 python3.4 setup.py install
+
+echo "==== Fetching/Installing Jansson ===="
+wget ${jansson_url}
+tar xvjf jansson-2.7.tar.bz2
+cd jansson-2.7
+./configure
+make && make install
+
 
 ## mysql setup
 echo "==== Setting up MySQL ===="

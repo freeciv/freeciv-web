@@ -825,20 +825,24 @@ function do_map_click(ptile, qtype)
       };
 
       /* Add each individual order. */
+      packet['orders'] = [];
+      packet['dir'] = [];
+      packet['activity'] = [];
+      packet['target'] = [];
       for (var i = 0; i < goto_path['length']; i++) {
         /* TODO: Have the server send the full orders in stead of just the
          * dir part. Use that data in stead. */
         if (i + 1 != goto_path['length']) {
           /* Don't try to do an action in the middle of the path. */
-          packet['orders_' + i] = ORDER_MOVE;
+          packet['orders'][i] = ORDER_MOVE;
         } else {
           /* It is OK to end the path in an action. */
-          packet['orders_' + i] = ORDER_ACTION_MOVE;
+          packet['orders'][i] = ORDER_ACTION_MOVE;
         }
 
-        packet['dir_' + i] = goto_path['dir_' + i];
-        packet['activity_' + i] = ACTIVITY_LAST;
-        packet['target_' + i] = EXTRA_NONE;
+        packet['dir'][i] = goto_path['dir'][i];
+        packet['activity'][i] = ACTIVITY_LAST;
+        packet['target'][i] = EXTRA_NONE;
       }
 
       /* Send the order to move using the orders system. */
@@ -1664,12 +1668,10 @@ function key_unit_move(dir)
       "length"   : 1,
       "repeat"   : false,
       "vigilant" : false,
-      /* The server don't support receiving regular json arrays. But it can
-       * understand the syntax "key_0" = val in stead of key = [val0]. */
-      "orders_0"   : ORDER_ACTION_MOVE,
-      "dir_0"      : dir,
-      "activity_0" : ACTIVITY_LAST,
-      "target_0"   : EXTRA_NONE,
+      "orders"   : [ORDER_ACTION_MOVE],
+      "dir"      : [dir],
+      "activity" : [ACTIVITY_LAST],
+      "target"   : [EXTRA_NONE],
       "dest_tile": newtile['index']
     };
 
@@ -1751,9 +1753,9 @@ function update_goto_path(goto_packet)
   var ptile = t0;
   var goaltile = index_to_tile(goto_packet['dest']);
 
-  for (var i = 0; i < goto_packet['length']; i++) {
+  for (var i = 0; i < goto_packet['dir'].length; i++) {
     if (ptile == null) break;
-    var dir = goto_packet['dir_' + i];
+    var dir = goto_packet['dir'][i];
     ptile['goto_dir'] = dir; 
     ptile = mapstep(ptile, dir);
   }

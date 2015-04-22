@@ -585,7 +585,7 @@ function handle_unit_actions(packet)
   var target_unit_id = packet['target_unit_id'];
   var target_city_id = packet['target_city_id'];
   var target_tile_id = packet['target_tile_id'];
-  var action_probabilities = [];
+  var action_probabilities = packet['action_probabilities'];
   var disturb_player = packet['disturb_player'];
 
   var pdiplomat = game_find_unit_by_number(actor_unit_id);
@@ -594,11 +594,6 @@ function handle_unit_actions(packet)
   var ptile = index_to_tile(target_tile_id);
 
   var hasActions = false;
-
-  /* Convert the packet's action_probabilities to an array. */
-  for (var i = 0; i < ACTION_COUNT; i++) {
-    action_probabilities[i] = packet['action_probabilities' + '_' + i];
-  }
 
   /* The dead can't act. */
   if (pdiplomat != null && ptile != null) {

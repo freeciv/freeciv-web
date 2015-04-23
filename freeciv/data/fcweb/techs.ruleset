@@ -42,6 +42,15 @@ format_version=10
 ;     means, inherited by all techs that require this tech in turn unless
 ;     "None" is given here explicitly; and you can make a tech available
 ;     only through the init_tech of a nation by making it root_req itself.
+; research_reqs = requirements before researching this one. Can have non
+;                 tech requirements because it is a requirement vector.
+;                 See doc/README.effects to learn more about requirement
+;                 vectors.
+;                 Requireing a tech here in stead of in req1, req2 or
+;                 root_req is not supported yet.
+;                 Requirements that may become fulfilled during the game
+;                 when they weren't at the start of the game is not
+;                 supported yet.
 ; flags         = special flag strings
 ; graphic       = icon for technology
 ; graphic_alt   = alternate icon

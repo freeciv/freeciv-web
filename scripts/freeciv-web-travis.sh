@@ -27,7 +27,7 @@ echo logfile $logfile
 mysql_user="root"
 mysql_pass="vagrant"
 
-resin_version="4.0.40"
+resin_version="4.0.44"
 resin_url="http://www.caucho.com/download/resin-${resin_version}.tar.gz"
 tornado_url="https://pypi.python.org/packages/source/t/tornado/tornado-4.1.tar.gz"
 jansson_url="http://www.digip.org/jansson/releases/jansson-2.7.tar.bz2"
@@ -100,8 +100,7 @@ echo "==== Building freeciv-web ===="
 sed -e "s/user>root/user>${mysql_user}/" -e "s/password>changeme/password>${mysql_pass}/" ${basedir}/freeciv-web/src/main/webapp/WEB-INF/resin-web.xml.dist > ${basedir}/freeciv-web/src/main/webapp/WEB-INF/resin-web.xml
 cd ${basedir}/scripts/freeciv-img-extract/ && ./setup_links.sh && ./sync.sh
 cd ${basedir}/scripts && ./sync-js-hand.sh
-cd ${basedir}/freeciv && rm -rf freeciv
-cd ${basedir}/freeciv-web && ./build.sh
+cd ${basedir}/freeciv-web && sudo -u travis ./setup.sh
 
 service nginx stop
 rm /etc/nginx/sites-enabled/default

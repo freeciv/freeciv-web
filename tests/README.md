@@ -12,3 +12,4 @@
  The tests can also be run manually like this:
  xvfb-run ./casperjs --engine=slimerjs test /vagrant/tests/freeciv-web-tests.js
 
+ Running the tests will also produce two screenshots in the tests directory.

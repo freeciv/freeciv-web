@@ -31,9 +31,12 @@ resin_version="4.0.40"
 resin_url="http://www.caucho.com/download/resin-${resin_version}.tar.gz"
 tornado_url="https://pypi.python.org/packages/source/t/tornado/tornado-4.1.tar.gz"
 jansson_url="http://www.digip.org/jansson/releases/jansson-2.7.tar.bz2"
+slimerjs_url="https://github.com/laurentj/slimerjs/archive/master.zip"
+casperjs_url="https://github.com/n1k0/casperjs/archive/1.1-beta3.zip"
+
 
 # Based on fresh install of Ubuntu 12.04
-dependencies="maven mysql-server-5.5 openjdk-7-jdk libcurl4-openssl-dev nginx subversion pngcrush libtool automake autoconf autotools-dev language-pack-en python3-setuptools libglib2.0-dev python3.2 python3.2-dev imagemagick liblzma-dev"
+dependencies="maven mysql-server-5.5 openjdk-7-jdk libcurl4-openssl-dev nginx subversion pngcrush libtool automake autoconf autotools-dev language-pack-en python3-setuptools libglib2.0-dev python3.2 python3.2-dev imagemagick liblzma-dev firefox xvfb"
 
 ## dependencies
 echo "==== Installing Updates and Dependencies ===="
@@ -99,9 +102,26 @@ cd ${basedir}/scripts && ./sync-js-hand.sh
 cd ${basedir}/freeciv && rm -rf freeciv
 cd ${basedir}/freeciv-web && ./build.sh
 
+echo "============================================"
+echo "Installing SlimerJS and CasperJS for testing"
+export SLIMERJSLAUNCHER=/usr/bin/firefox
+export SLIMERJS_EXECUTABLE=/vagrant/tests/slimerjs-master/src/slimerjs
+cd ${basedir}/tests
+wget ${slimerjs_url}
+unzip master.zip
+wget ${casperjs_url}
+unzip 1.1-beta3.zip
+
+
 echo "Starting Freeciv-web..."
 service nginx start
 cd ${basedir}/scripts/ && sudo -u travis ./start-freeciv-web.sh
+
+
+
+echo "Start testing of Freeciv-web using CasperJS:"
+cd ${basedir}/tests/casperjs-1.1-beta3/bin
+xvfb-run ./casperjs --engine=slimerjs test /vagrant/tests/freeciv-web-tests.js || (>&2 echo "Freeciv-web CasperJS tests failed!" && exit 1)
 
 echo "=============================="
 echo "Freeciv-web built and started correctly: Build successful!"

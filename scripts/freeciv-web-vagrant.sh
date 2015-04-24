@@ -39,9 +39,11 @@ mysql_pass="vagrant"
 resin_version="4.0.41"
 resin_url="http://www.caucho.com/download/resin-${resin_version}.tar.gz"
 tornado_url="https://pypi.python.org/packages/source/t/tornado/tornado-4.1.tar.gz"
+slimerjs_url="https://github.com/laurentj/slimerjs/archive/master.zip"
+casperjs_url="https://github.com/n1k0/casperjs/archive/1.1-beta3.zip"
 
 # Based on fresh install of Ubuntu 12.04
-dependencies="maven mysql-server openjdk-7-jdk libcurl4-openssl-dev nginx libjansson-dev subversion pngcrush python3-pillow libtool automake autoconf autotools-dev language-pack-en python3.4-dev python3-setuptools libglib2.0-dev libbz2-dev imagemagick python3-pip dos2unix liblzma-dev"
+dependencies="maven mysql-server openjdk-7-jdk libcurl4-openssl-dev nginx libjansson-dev subversion pngcrush python3-pillow libtool automake autoconf autotools-dev language-pack-en python3.4-dev python3-setuptools libglib2.0-dev libbz2-dev imagemagick python3-pip dos2unix liblzma-dev firefox xvfb"
 
 ## Setup
 mkdir -p ${basedir}
@@ -96,6 +98,16 @@ cd ${basedir}/scripts/freeciv-img-extract/ && ./setup_links.sh && ./sync.sh
 cd ${basedir}/scripts && ./sync-js-hand.sh
 cd ${basedir}/freeciv-web && sudo -u vagrant ./setup.sh
 
+echo "============================================"
+echo "Installing SlimerJS and CasperJS for testing"
+export SLIMERJSLAUNCHER=/usr/bin/firefox
+export SLIMERJS_EXECUTABLE=/vagrant/tests/slimerjs-master/src/slimerjs
+cd ${basedir}/tests
+wget ${slimerjs_url}
+unzip master.zip
+wget ${casperjs_url}
+unzip 1.1-beta3.zip
+
 echo "=============================="
 
 service nginx stop
@@ -110,7 +122,13 @@ if [ -d "/vagrant/" ]; then
   echo "Starting Freeciv-web..."
   service nginx start
   cd ${basedir}/scripts/ && sudo -u vagrant ./start-freeciv-web.sh
-  echo "Freeciv-web started! Now try http://localhost/ on your host operating system."
 else
   echo "Freeciv-web installed. Please start it manually."
 fi
+
+echo "Start testing of Freeciv-web using CasperJS:"
+cd ${basedir}/tests/casperjs-1.1-beta3/bin
+xvfb-run ./casperjs --engine=slimerjs test /vagrant/tests/freeciv-web-tests.js || (>&2 echo "Freeciv-web CasperJS tests failed!" && exit 1)
+
+echo "Freeciv-web started! Now try http://localhost/ on your host operating system."
+

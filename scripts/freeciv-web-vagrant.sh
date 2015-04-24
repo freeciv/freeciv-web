@@ -98,16 +98,6 @@ cd ${basedir}/scripts/freeciv-img-extract/ && ./setup_links.sh && ./sync.sh
 cd ${basedir}/scripts && ./sync-js-hand.sh
 cd ${basedir}/freeciv-web && sudo -u vagrant ./setup.sh
 
-echo "============================================"
-echo "Installing SlimerJS and CasperJS for testing"
-export SLIMERJSLAUNCHER=/usr/bin/firefox
-export SLIMERJS_EXECUTABLE=${basedir}/tests/slimerjs-master/src/slimerjs
-cd ${basedir}/tests
-wget ${slimerjs_url}
-unzip master.zip
-wget ${casperjs_url}
-unzip 1.1-beta3.zip
-
 echo "=============================="
 
 service nginx stop
@@ -125,6 +115,16 @@ if [ -d "/vagrant/" ]; then
 else
   echo "Freeciv-web installed. Please start it manually."
 fi
+
+echo "============================================"
+echo "Installing SlimerJS and CasperJS for testing"
+export SLIMERJSLAUNCHER=/usr/bin/firefox
+export SLIMERJS_EXECUTABLE=${basedir}/tests/slimerjs-master/src/slimerjs
+cd ${basedir}/tests
+wget ${slimerjs_url}
+unzip master.zip
+wget ${casperjs_url}
+unzip 1.1-beta3.zip
 
 echo "Start testing of Freeciv-web using CasperJS:"
 cd ${basedir}/tests/casperjs-1.1-beta3/bin

@@ -42,6 +42,7 @@ casper.test.begin('Test of Freeciv-web frontpage on localhost port 80 (nginx).',
 
 casper.test.begin('Test that Metaserver is responding.', 2, function suite(test) {
     casper.start("http://localhost/meta/metaserver.php", function() {
+        this.debugHTML();
         test.assertHttpStatus(200);
         test.assertTextExists('Freeciv-web Single-player games', 
                               'Test that Metaserver contains expected text.');

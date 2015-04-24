@@ -93,14 +93,15 @@ casper.test.begin('Test starting new Freeciv-web game', 10, function suite(test)
 
     casper.waitForText("Ok", function() {
       this.echo("Clicking Ok in Intro dialog.");
-      this.debugHTML();
       this.clickLabel('Ok');
       this.echo("Captured screenshot to be saved as screenshot-2.png");
       this.capture('../../screenshot-2.png', undefined, {
         format: 'png',
         quality: 100 
       });
-     }, undefined, 10000);
+     }, function() {
+      this.debugHTML();
+      }, 10000);
 
     casper.then(function() {
       this.echo("Checking that JavaScript objects in browser memory are as expected.");

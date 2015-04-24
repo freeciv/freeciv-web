@@ -113,12 +113,15 @@ unzip master.zip
 wget ${casperjs_url}
 unzip 1.1-beta3.zip
 
+service nginx stop
+rm /etc/nginx/sites-enabled/default
+cp ${basedir}/publite2/nginx.conf /etc/nginx/
 
 echo "Starting Freeciv-web..."
 service nginx start
 cd ${basedir}/scripts/ && sudo -u travis ./start-freeciv-web.sh
 
-sleep 20
+sleep 3  
 cat ${basedir}/logs/*.log 
 
 echo "Start testing of Freeciv-web using CasperJS:"

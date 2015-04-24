@@ -42,7 +42,6 @@ casper.test.begin('Test of Freeciv-web frontpage on localhost port 80 (nginx).',
 
 casper.test.begin('Test that Metaserver is responding.', 2, function suite(test) {
     casper.start("http://localhost/meta/metaserver.php", function() {
-        this.debugHTML();
         test.assertHttpStatus(200);
         test.assertTextExists('Freeciv-web Single-player games', 
                               'Test that Metaserver contains expected text.');
@@ -88,19 +87,20 @@ casper.test.begin('Test starting new Freeciv-web game', 10, function suite(test)
       /* Starting new game automatically from Javascript.*/
       if (validate_username()) {
         $("#dialog").dialog('close');
-        setTimeout("pregame_start_game();", 700);
+        setTimeout("pregame_start_game();", 2000);
       }
     });
 
     casper.waitForText("Ok", function() {
       this.echo("Clicking Ok in Intro dialog.");
+      this.debugHTML();
       this.clickLabel('Ok');
       this.echo("Captured screenshot to be saved as screenshot-2.png");
       this.capture('../../screenshot-2.png', undefined, {
         format: 'png',
         quality: 100 
       });
-     });
+     }, undefined, 10000);
 
     casper.then(function() {
       this.echo("Checking that JavaScript objects in browser memory are as expected.");
@@ -161,7 +161,7 @@ casper.test.begin('Test starting new Freeciv-web game', 10, function suite(test)
     });
 
     casper.run(function() {
-        this.echo("Tests are run successfully!");
+        this.echo("Freeciv-web CasperJS tests run successfully!");
         test.done();
     });
 });

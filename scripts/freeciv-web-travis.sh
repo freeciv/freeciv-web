@@ -134,5 +134,7 @@ echo "Start testing of Freeciv-web using CasperJS:"
 cd ${basedir}/tests/casperjs-1.1-beta3/bin
 xvfb-run ./casperjs --engine=slimerjs test ${basedir}/tests/freeciv-web-tests.js || (>&2 echo "Freeciv-web CasperJS tests failed!" && exit 1)
 
+echo "Freeciv-web CasperJS tests run successfully!"
+
 echo "=============================="
 echo "Freeciv-web built and started correctly: Build successful!"

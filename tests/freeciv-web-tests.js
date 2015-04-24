@@ -87,7 +87,7 @@ casper.test.begin('Test starting new Freeciv-web game', 10, function suite(test)
       /* Starting new game automatically from Javascript.*/
       if (validate_username()) {
         $("#dialog").dialog('close');
-        setTimeout("pregame_start_game();", 2000);
+        setTimeout("pregame_start_game();", 1000);
       }
     });
 
@@ -99,9 +99,7 @@ casper.test.begin('Test starting new Freeciv-web game', 10, function suite(test)
         format: 'png',
         quality: 100 
       });
-     }, function() {
-      this.debugHTML();
-      }, 10000);
+     });
 
     casper.then(function() {
       this.echo("Checking that JavaScript objects in browser memory are as expected.");
@@ -162,7 +160,6 @@ casper.test.begin('Test starting new Freeciv-web game', 10, function suite(test)
     });
 
     casper.run(function() {
-        this.echo("Freeciv-web CasperJS tests run successfully!");
         test.done();
     });
 });

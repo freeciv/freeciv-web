@@ -81,6 +81,7 @@ tar xvjf jansson-2.7.tar.bz2
 cd jansson-2.7
 ./configure
 make && make install
+ldconfig
 
 
 ## mysql setup

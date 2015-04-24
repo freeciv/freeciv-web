@@ -117,7 +117,11 @@ echo "Starting Freeciv-web..."
 service nginx start
 cd ${basedir}/scripts/ && sudo -u travis ./start-freeciv-web.sh
 
-
+sleep 10
+cat ${basedir}/logs/publite2.log 
+cd ${basedir}/publite2/  
+sudo -u travis python3.4 -u publite2.py
+sleep 10
 
 echo "Start testing of Freeciv-web using CasperJS:"
 cd ${basedir}/tests/casperjs-1.1-beta3/bin

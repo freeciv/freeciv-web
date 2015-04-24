@@ -101,7 +101,7 @@ cd ${basedir}/freeciv-web && sudo -u vagrant ./setup.sh
 echo "============================================"
 echo "Installing SlimerJS and CasperJS for testing"
 export SLIMERJSLAUNCHER=/usr/bin/firefox
-export SLIMERJS_EXECUTABLE=/vagrant/tests/slimerjs-master/src/slimerjs
+export SLIMERJS_EXECUTABLE=${basedir}/tests/slimerjs-master/src/slimerjs
 cd ${basedir}/tests
 wget ${slimerjs_url}
 unzip master.zip
@@ -128,7 +128,7 @@ fi
 
 echo "Start testing of Freeciv-web using CasperJS:"
 cd ${basedir}/tests/casperjs-1.1-beta3/bin
-xvfb-run ./casperjs --engine=slimerjs test /vagrant/tests/freeciv-web-tests.js || (>&2 echo "Freeciv-web CasperJS tests failed!" && exit 1)
+xvfb-run ./casperjs --engine=slimerjs test ${basedir}/tests/freeciv-web-tests.js || (>&2 echo "Freeciv-web CasperJS tests failed!" && exit 1)
 
 echo "Freeciv-web started! Now try http://localhost/ on your host operating system."
 

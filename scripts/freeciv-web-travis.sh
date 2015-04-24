@@ -33,10 +33,10 @@ tornado_url="https://pypi.python.org/packages/source/t/tornado/tornado-4.1.tar.g
 jansson_url="http://www.digip.org/jansson/releases/jansson-2.7.tar.bz2"
 slimerjs_url="https://github.com/laurentj/slimerjs/archive/master.zip"
 casperjs_url="https://github.com/n1k0/casperjs/archive/1.1-beta3.zip"
-
+nginx_url="http://nginx.org/download/nginx-1.8.0.tar.gz"
 
 # Based on fresh install of Ubuntu 12.04
-dependencies="maven mysql-server-5.5 openjdk-7-jdk libcurl4-openssl-dev nginx subversion pngcrush libtool automake autoconf autotools-dev language-pack-en python3-setuptools libglib2.0-dev python3.2 python3.2-dev imagemagick liblzma-dev firefox xvfb"
+dependencies="maven mysql-server-5.5 openjdk-7-jdk libcurl4-openssl-dev subversion pngcrush libtool automake autoconf autotools-dev language-pack-en python3-setuptools libglib2.0-dev python3.2 python3.2-dev imagemagick liblzma-dev firefox xvfb"
 
 ## dependencies
 echo "==== Installing Updates and Dependencies ===="
@@ -102,12 +102,19 @@ cd ${basedir}/scripts/freeciv-img-extract/ && ./setup_links.sh && ./sync.sh
 cd ${basedir}/scripts && ./sync-js-hand.sh
 cd ${basedir}/freeciv-web && sudo -u travis ./setup.sh
 
-service nginx stop
-rm /etc/nginx/sites-enabled/default
-cp ${basedir}/publite2/nginx.conf /etc/nginx/
+echo "==== Building nginx ===="
+cd ${basedir}
+wget ${nginx_url}
+tar xvzf nginx-1.8.0.tar.gz
+cd nginx-1.8.0
+./configure
+make
+make install
+
+cp ${basedir}/publite2/nginx.conf /usr/local/nginx/conf/
 
 echo "Starting Freeciv-web..."
-service nginx start
+/usr/local/nginx/sbin/nginx
 cd ${basedir}/scripts/ && sudo -u travis ./start-freeciv-web.sh
 
 sleep 6  

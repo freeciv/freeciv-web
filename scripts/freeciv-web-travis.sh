@@ -88,7 +88,7 @@ echo "==== Setting up MySQL ===="
 mysqladmin -u ${mysql_user} -p${mysql_pass} create freeciv_web
 mysql -u ${mysql_user} -p${mysql_pass} freeciv_web < ${basedir}/freeciv-web/src/main/webapp/meta/private/metaserver.sql
 
-sed -e "s/10/2" ${basedir}/publite2/settings.ini.dist > ${basedir}/publite2/settings.ini
+sed -e "s/10/2/" ${basedir}/publite2/settings.ini.dist > ${basedir}/publite2/settings.ini
 
 echo "==== Checking out Freeciv from SVN and patching... ===="
 cd ${basedir}/freeciv && ./prepare_freeciv.sh
@@ -118,7 +118,7 @@ service nginx start
 cd ${basedir}/scripts/ && sudo -u travis ./start-freeciv-web.sh
 
 sleep 20
-cat ${basedir}/logs/publite2.log 
+cat ${basedir}/logs/*.log 
 
 echo "Start testing of Freeciv-web using CasperJS:"
 cd ${basedir}/tests/casperjs-1.1-beta3/bin

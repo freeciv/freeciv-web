@@ -71,7 +71,7 @@ casper.test.begin('Test starting new Freeciv-web game', 10, function suite(test)
         test.assertTitleMatch(/Freeciv-web/, 'Freeciv-web title is present');
         test.assertExists('#username_req');
         this.echo("Captured screenshot to be saved as screenshot-1.png");
-        this.capture('../../screenshot-1.png', undefined, {
+        this.capture('screenshot-1.png', undefined, {
           format: 'png',
           quality: 100 
         });
@@ -95,7 +95,7 @@ casper.test.begin('Test starting new Freeciv-web game', 10, function suite(test)
       this.echo("Clicking Ok in Intro dialog.");
       this.clickLabel('Ok');
       this.echo("Captured screenshot to be saved as screenshot-2.png");
-      this.capture('../../screenshot-2.png', undefined, {
+      this.capture('screenshot-2.png', undefined, {
         format: 'png',
         quality: 100 
       });

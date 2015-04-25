@@ -31,7 +31,7 @@ resin_version="4.0.44"
 resin_url="http://www.caucho.com/download/resin-${resin_version}.tar.gz"
 tornado_url="https://pypi.python.org/packages/source/t/tornado/tornado-4.1.tar.gz"
 jansson_url="http://www.digip.org/jansson/releases/jansson-2.7.tar.bz2"
-slimerjs_url="https://github.com/laurentj/slimerjs/archive/master.zip"
+slimerjs_url="https://github.com/laurentj/slimerjs/archive/RELEASE_0.9.5.zip"   #Travis CI can use 0.9.5
 casperjs_url="https://github.com/n1k0/casperjs/archive/1.1-beta3.zip"
 nginx_url="http://nginx.org/download/nginx-1.8.0.tar.gz"
 
@@ -60,7 +60,7 @@ javac -version
 ## build/install resin
 echo "==== Fetching/Installing Resin ${resin_version} ===="
 wget ${resin_url}
-tar xvfz resin-${resin_version}.tar.gz
+tar xfz resin-${resin_version}.tar.gz
 rm -Rf resin
 mv resin-${resin_version} resin
 cd resin
@@ -71,13 +71,13 @@ chmod -R 777 resin
 
 echo "==== Fetching/Installing Tornado Web Server ===="
 wget ${tornado_url}
-tar xvfz tornado-4.1.tar.gz
+tar xfz tornado-4.1.tar.gz
 cd tornado-4.1
 python3.4 setup.py install
 
 echo "==== Fetching/Installing Jansson ===="
 wget ${jansson_url}
-tar xvjf jansson-2.7.tar.bz2
+tar xjf jansson-2.7.tar.bz2
 cd jansson-2.7
 ./configure
 make && make install
@@ -105,7 +105,7 @@ cd ${basedir}/freeciv-web && sudo -u travis ./setup.sh
 echo "==== Building nginx ===="
 cd ${basedir}
 wget ${nginx_url}
-tar xvzf nginx-1.8.0.tar.gz
+tar xzf nginx-1.8.0.tar.gz
 cd nginx-1.8.0
 ./configure
 make
@@ -123,18 +123,18 @@ cat ${basedir}/logs/*.log
 echo "============================================"
 echo "Installing SlimerJS and CasperJS for testing"
 export SLIMERJSLAUNCHER=/usr/bin/firefox
-export SLIMERJS_EXECUTABLE=${basedir}/tests/slimerjs-master/src/slimerjs
+export SLIMERJS_EXECUTABLE=${basedir}/tests/slimerjs-RELEASE_0.9.5/src/slimerjs
 cd ${basedir}/tests
 wget ${slimerjs_url}
-unzip master.zip
+unzip -q RELEASE_0.9.5.zip
 wget ${casperjs_url}
-unzip 1.1-beta3.zip
+unzip -q 1.1-beta3.zip
+cd casperjs-1.1-beta3
+ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs
 
 echo "Start testing of Freeciv-web using CasperJS:"
-cd ${basedir}/tests/casperjs-1.1-beta3/bin
-xvfb-run ./casperjs --engine=slimerjs test ${basedir}/tests/freeciv-web-tests.js || (>&2 echo "Freeciv-web CasperJS tests failed!" && exit 1)
-
-echo "Freeciv-web CasperJS tests run successfully!"
+cd ${basedir}/tests/
+xvfb-run casperjs --engine=slimerjs test freeciv-web-tests.js || (>&2 echo "Freeciv-web CasperJS tests failed!" && exit 1)
 
 echo "=============================="
-echo "Freeciv-web built and started correctly: Build successful!"
+echo "Freeciv-web built, tested and started correctly: Build successful!"

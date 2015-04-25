@@ -39,7 +39,7 @@ mysql_pass="vagrant"
 resin_version="4.0.44"
 resin_url="http://www.caucho.com/download/resin-${resin_version}.tar.gz"
 tornado_url="https://pypi.python.org/packages/source/t/tornado/tornado-4.1.tar.gz"
-slimerjs_url="https://github.com/laurentj/slimerjs/archive/master.zip"
+slimerjs_url="https://github.com/laurentj/slimerjs/archive/master.zip" #Vagrant must use master, because of Firefox version
 casperjs_url="https://github.com/n1k0/casperjs/archive/1.1-beta3.zip"
 
 # Based on fresh install of Ubuntu 12.04
@@ -125,10 +125,12 @@ wget ${slimerjs_url}
 unzip master.zip
 wget ${casperjs_url}
 unzip 1.1-beta3.zip
+cd casperjs-1.1-beta3
+ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs
 
 echo "Start testing of Freeciv-web using CasperJS:"
-cd ${basedir}/tests/casperjs-1.1-beta3/bin
-xvfb-run ./casperjs --engine=slimerjs test ${basedir}/tests/freeciv-web-tests.js || (>&2 echo "Freeciv-web CasperJS tests failed!" && exit 1)
+cd ${basedir}/tests/
+xvfb-run casperjs --engine=slimerjs test freeciv-web-tests.js || (>&2 echo "Freeciv-web CasperJS tests failed!" && exit 1)
 
 echo "Freeciv-web started! Now try http://localhost/ on your host operating system."
 

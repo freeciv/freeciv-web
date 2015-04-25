@@ -31,7 +31,7 @@ resin_version="4.0.44"
 resin_url="http://www.caucho.com/download/resin-${resin_version}.tar.gz"
 tornado_url="https://pypi.python.org/packages/source/t/tornado/tornado-4.1.tar.gz"
 jansson_url="http://www.digip.org/jansson/releases/jansson-2.7.tar.bz2"
-slimerjs_url="https://github.com/laurentj/slimerjs/archive/RELEASE_0.9.5.zip"   #Travis CI can use 0.9.5
+slimerjs_url="https://github.com/laurentj/slimerjs/archive/master.zip" #must use master, because 0.9.5 doesn't work. 
 casperjs_url="https://github.com/n1k0/casperjs/archive/1.1-beta3.zip"
 nginx_url="http://nginx.org/download/nginx-1.8.0.tar.gz"
 
@@ -117,16 +117,15 @@ echo "Starting Freeciv-web..."
 /usr/local/nginx/sbin/nginx
 cd ${basedir}/scripts/ && sudo -u travis ./start-freeciv-web.sh
 
-sleep 6  
 cat ${basedir}/logs/*.log 
 
 echo "============================================"
 echo "Installing SlimerJS and CasperJS for testing"
 export SLIMERJSLAUNCHER=/usr/bin/firefox
-export SLIMERJS_EXECUTABLE=${basedir}/tests/slimerjs-RELEASE_0.9.5/src/slimerjs
+export SLIMERJS_EXECUTABLE=${basedir}/tests/slimerjs-master/src/slimerjs
 cd ${basedir}/tests
 wget ${slimerjs_url}
-unzip -q RELEASE_0.9.5.zip
+unzip -q master.zip
 wget ${casperjs_url}
 unzip -q 1.1-beta3.zip
 cd casperjs-1.1-beta3

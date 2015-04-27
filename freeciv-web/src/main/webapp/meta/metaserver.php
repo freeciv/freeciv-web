@@ -405,6 +405,7 @@ if ( isset($port) ) {
         <h3 class="text-muted">The Freeciv-Web Project</h3>
         <ul class="nav nav-justified">
           <li><a href="/">Play Freeciv!</a></li>
+          <li><a href="http://play.freeciv.org/blog/">Blog</a></li>
           <li><a href="http://www.freeciv.org/wiki/">Wiki</a></li>
           <li class="active"><a href="/meta/metaserver.php">Live Games</a></li>
           <li><a href="http://forum.freeciv.org/f/viewforum.php?f=24">Forum</a></li>

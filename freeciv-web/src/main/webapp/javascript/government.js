@@ -186,26 +186,23 @@ function government_max_rate(govt_id)
 }
 
 /**************************************************************************
- ...
+  Returns true iff the player can get the specified governement.
+
+  Uses the JavaScript implementation of the requirement system. Is
+  therefore limited to the requirement types and ranges the JavaScript
+  requirement system can evaluate.
 **************************************************************************/
 function can_player_get_gov(govt_id)
 {
-  if (govt_id == 0) {	
-	  return true;
-  } else if (govt_id == 1) {
-	  return true;
-  } else if (govt_id == 2) {
-	  return (player_invention_state(client.conn.playing, 53) == TECH_KNOWN);
-  } else if (govt_id == 3) {
-	  return (player_invention_state(client.conn.playing, 16) == TECH_KNOWN);
-  } else if (govt_id == 4) {
-	  return (player_invention_state(client.conn.playing, 80) == TECH_KNOWN);
-  } else if (govt_id == 5) {
-	  return (player_invention_state(client.conn.playing, 21) == TECH_KNOWN);
-  } else {
-    return false;
-  }
-
+  return are_reqs_active(client.conn.playing,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null,
+                      governments[govt_id]["reqs"],
+                      RPT_CERTAIN);
 }
 
 /**************************************************************************

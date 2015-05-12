@@ -65,13 +65,13 @@ function is_req_active(target_player,
    * have a VUT_SPECIAL or VUT_TERRAIN may often be passed to this function
    * with a city as their target.  In this case the requirement is simply
    * not met. */
-  switch (req['source_type']) {
+  switch (req['kind']) {
   case VUT_NONE:
     eval = true;
     break;
   case VUT_ADVANCE:
     /* The requirement is filled if the player owns the tech. */
-    eval = is_tech_in_range(target_player, req['range'], req['source_value']);
+    eval = is_tech_in_range(target_player, req['range'], req['value']);
     break;
   case VUT_GOVERNMENT:
     /* The requirement is filled if the player is using the government. */

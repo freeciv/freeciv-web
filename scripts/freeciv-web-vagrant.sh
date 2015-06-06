@@ -38,7 +38,7 @@ mysql_pass="vagrant"
 
 resin_version="4.0.44"
 resin_url="http://www.caucho.com/download/resin-${resin_version}.tar.gz"
-tornado_url="https://pypi.python.org/packages/source/t/tornado/tornado-4.1.tar.gz"
+tornado_url="https://pypi.python.org/packages/source/t/tornado/tornado-4.2.tar.gz"
 slimerjs_url="https://github.com/laurentj/slimerjs/archive/master.zip" #must use master, because 0.9.5 doesn't work. 
 casperjs_url="https://github.com/n1k0/casperjs/archive/1.1-beta3.zip"
 
@@ -72,8 +72,8 @@ mv resin-${resin_version} resin
 echo "==== Fetching/Installing Tornado Web Server ===="
 cd /tmp
 wget ${tornado_url}
-tar xvfz tornado-4.1.tar.gz
-cd tornado-4.1
+tar xvfz tornado-4.2.tar.gz
+cd tornado-4.2
 python3.4 setup.py install
 
 pip3 install wikipedia

@@ -39,7 +39,7 @@ mysql_pass="vagrant"
 resin_version="4.0.44"
 resin_url="http://www.caucho.com/download/resin-${resin_version}.tar.gz"
 tornado_url="https://pypi.python.org/packages/source/t/tornado/tornado-4.2.tar.gz"
-slimerjs_url="https://github.com/laurentj/slimerjs/archive/master.zip" #must use master, because 0.9.5 doesn't work. 
+slimerjs_url="http://download.slimerjs.org/releases/0.9.6/slimerjs-0.9.6.zip"  
 casperjs_url="https://github.com/n1k0/casperjs/archive/1.1-beta3.zip"
 
 # Based on fresh install of Ubuntu 12.04
@@ -119,12 +119,12 @@ fi
 echo "============================================"
 echo "Installing SlimerJS and CasperJS for testing"
 export SLIMERJSLAUNCHER=/usr/bin/firefox
-export SLIMERJS_EXECUTABLE=${basedir}/tests/slimerjs-master/src/slimerjs
+export SLIMERJS_EXECUTABLE=${basedir}/tests/slimerjs-0.9.6/slimerjs
 cd ${basedir}/tests
 wget ${slimerjs_url}
-unzip master.zip
+unzip -o slimerjs-0.9.6.zip
 wget ${casperjs_url}
-unzip 1.1-beta3.zip
+unzip -o 1.1-beta3.zip
 cd casperjs-1.1-beta3
 ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs
 

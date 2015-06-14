@@ -34,9 +34,10 @@ jansson_url="http://www.digip.org/jansson/releases/jansson-2.7.tar.bz2"
 slimerjs_url="http://download.slimerjs.org/releases/0.9.6/slimerjs-0.9.6.zip"   
 casperjs_url="https://github.com/n1k0/casperjs/archive/1.1-beta3.zip"
 nginx_url="http://nginx.org/download/nginx-1.8.0.tar.gz"
+icu_url="http://download.icu-project.org/files/icu4c/55.1/icu4c-55_1-src.tgz"
 
 # Based on fresh install of Ubuntu 12.04
-dependencies="maven mysql-server-5.5 openjdk-7-jdk libcurl4-openssl-dev subversion pngcrush libtool automake autoconf autotools-dev language-pack-en python3-setuptools libglib2.0-dev python3.2 python3.2-dev imagemagick liblzma-dev firefox xvfb libicu-dev libicuuc-dev"
+dependencies="maven mysql-server-5.5 openjdk-7-jdk libcurl4-openssl-dev subversion pngcrush libtool automake autoconf autotools-dev language-pack-en python3-setuptools libglib2.0-dev python3.2 python3.2-dev imagemagick liblzma-dev firefox xvfb libicu-dev"
 
 ## dependencies
 echo "==== Installing Updates and Dependencies ===="
@@ -90,6 +91,15 @@ mysqladmin -u ${mysql_user} -p${mysql_pass} create freeciv_web
 mysql -u ${mysql_user} -p${mysql_pass} freeciv_web < ${basedir}/freeciv-web/src/main/webapp/meta/private/metaserver.sql
 
 sed -e "s/10/2/" ${basedir}/publite2/settings.ini.dist > ${basedir}/publite2/settings.ini
+
+echo "==== Download and install ICU.  ===="
+cd ${basedir}/
+wget ${icu_url}
+tar xvzf icu4c-55_1-src.tgz 
+cd icu/source/
+./configure
+make
+make install
 
 echo "==== Checking out Freeciv from SVN and patching... ===="
 cd ${basedir}/freeciv && ./prepare_freeciv.sh

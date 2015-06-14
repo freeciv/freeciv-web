@@ -81,7 +81,7 @@ wget ${jansson_url}
 tar xjf jansson-2.7.tar.bz2
 cd jansson-2.7
 ./configure
-make && make install
+make > jansson-log-file 2>&1  && make install > jansson-log-file 2>&1
 ldconfig
 
 
@@ -95,11 +95,10 @@ sed -e "s/10/2/" ${basedir}/publite2/settings.ini.dist > ${basedir}/publite2/set
 echo "==== Download and install ICU.  ===="
 cd ${basedir}/
 wget ${icu_url}
-tar xvzf icu4c-55_1-src.tgz 
+tar xzf icu4c-55_1-src.tgz 
 cd icu/source/
 ./configure
-make
-make install
+make > icu-log-file 2>&1  && make install > icu-log-file 2>&1
 
 echo "==== Checking out Freeciv from SVN and patching... ===="
 cd ${basedir}/freeciv && ./prepare_freeciv.sh
@@ -118,7 +117,7 @@ wget ${nginx_url}
 tar xzf nginx-1.8.0.tar.gz
 cd nginx-1.8.0
 ./configure
-make
+make > nginx-log-file 2>&1
 make install
 
 cp ${basedir}/publite2/nginx.conf /usr/local/nginx/conf/

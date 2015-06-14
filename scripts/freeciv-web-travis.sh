@@ -82,8 +82,6 @@ tar xjf jansson-2.7.tar.bz2
 cd jansson-2.7
 ./configure
 make > jansson-log-file 2>&1  && make install > jansson-log-file 2>&1
-ldconfig
-
 
 ## mysql setup
 echo "==== Setting up MySQL ===="
@@ -99,6 +97,7 @@ tar xzf icu4c-55_1-src.tgz
 cd icu/source/
 ./configure
 make > icu-log-file 2>&1  && make install > icu-log-file 2>&1
+ldconfig
 
 echo "==== Checking out Freeciv from SVN and patching... ===="
 cd ${basedir}/freeciv && ./prepare_freeciv.sh

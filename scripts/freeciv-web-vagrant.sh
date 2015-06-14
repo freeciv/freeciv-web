@@ -43,7 +43,7 @@ slimerjs_url="http://download.slimerjs.org/releases/0.9.6/slimerjs-0.9.6.zip"
 casperjs_url="https://github.com/n1k0/casperjs/archive/1.1-beta3.zip"
 
 # Based on fresh install of Ubuntu 12.04
-dependencies="maven mysql-server openjdk-7-jdk libcurl4-openssl-dev nginx libjansson-dev subversion pngcrush python3-pillow libtool automake autoconf autotools-dev language-pack-en python3.4-dev python3-setuptools libglib2.0-dev libbz2-dev imagemagick python3-pip dos2unix liblzma-dev firefox xvfb"
+dependencies="maven mysql-server openjdk-7-jdk libcurl4-openssl-dev nginx libjansson-dev subversion pngcrush python3-pillow libtool automake autoconf autotools-dev language-pack-en python3.4-dev python3-setuptools libglib2.0-dev libbz2-dev imagemagick python3-pip dos2unix liblzma-dev firefox xvfb libicu-dev"
 
 ## Setup
 mkdir -p ${basedir}

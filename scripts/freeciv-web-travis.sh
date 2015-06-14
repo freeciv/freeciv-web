@@ -36,7 +36,7 @@ casperjs_url="https://github.com/n1k0/casperjs/archive/1.1-beta3.zip"
 nginx_url="http://nginx.org/download/nginx-1.8.0.tar.gz"
 
 # Based on fresh install of Ubuntu 12.04
-dependencies="maven mysql-server-5.5 openjdk-7-jdk libcurl4-openssl-dev subversion pngcrush libtool automake autoconf autotools-dev language-pack-en python3-setuptools libglib2.0-dev python3.2 python3.2-dev imagemagick liblzma-dev firefox xvfb"
+dependencies="maven mysql-server-5.5 openjdk-7-jdk libcurl4-openssl-dev subversion pngcrush libtool automake autoconf autotools-dev language-pack-en python3-setuptools libglib2.0-dev python3.2 python3.2-dev imagemagick liblzma-dev firefox xvfb libicu-dev"
 
 ## dependencies
 echo "==== Installing Updates and Dependencies ===="

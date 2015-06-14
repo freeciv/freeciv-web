@@ -173,6 +173,11 @@ slow_invasions = TRUE
 tired_attack = FALSE
 
 [actions]
+; If force_trade_route is set to TRUE it is illegal for an actor unit to
+; enter the marketplace of a city if it can establish a trade route to it
+; in stead.
+force_trade_route = TRUE
+
 ; What each action should be called when showing them to the player.
 ; The first %s should be before the mnemonic of the action.
 ; The second %s marks were extra details should be insterted.
@@ -241,54 +246,53 @@ ui_name_join_city = _("%sAdd to City%s")
 [actionenabler_sabotage_city]
 action = "Sabotage City"
 actor_reqs    =
-    { "type",   "name", "range", "present"
-      "UnitFlag", "Diplomat", "Local", TRUE
-      "DiplRel", "War", "Local", TRUE
-      "UnitState", "TransportDependent", "Local", FALSE
-      "MinMoveFrags", "1", "Local", TRUE
+    { "type",   "name", "range"
+      "UnitFlag", "Diplomat", "Local"
+      "DiplRel", "War", "Local"
+      "UnitState", "OnLivableTile", "Local"
+      "MinMoveFrags", "1", "Local"
     }
 
 [actionenabler_sabotage_city_target]
 action = "Targeted Sabotage City"
 actor_reqs    =
-    { "type",   "name", "range", "present"
-      "DiplRel", "War", "Local", TRUE
-      "UnitFlag", "Spy", "Local", TRUE
-      "UnitState", "TransportDependent", "Local", FALSE
-      "MinMoveFrags", "1", "Local", TRUE
+    { "type",   "name", "range"
+      "DiplRel", "War", "Local"
+      "UnitFlag", "Spy", "Local"
+      "UnitState", "OnLivableTile", "Local"
+      "MinMoveFrags", "1", "Local"
     }
 
 [actionenabler_establish_embassy]
 action       = "Establish Embassy"
 actor_reqs    =
-    { "type",   "name", "range", "present"
-      "UnitFlag", "Diplomat", "Local", TRUE
-      "UnitState", "TransportDependent", "Local", FALSE
-      "MinMoveFrags", "1", "Local", TRUE
+    { "type",   "name", "range"
+      "UnitFlag", "Diplomat", "Local"
+      "UnitState", "OnLivableTile", "Local"
+      "MinMoveFrags", "1", "Local"
     }
 target_reqs  =
     { "type",   "name", "range", "present"
-      "Nation", "Barbarian", "Player", FALSE
-      "Nation", "Pirate", "Player", FALSE
+      "NationGroup", "Barbarian", "Player", FALSE
     }
 
 [actionenabler_investigate_city]
 action       = "Investigate City"
 actor_reqs    =
-    { "type",   "name", "range", "present"
-      "UnitFlag", "Diplomat", "Local", TRUE
-      "UnitState", "TransportDependent", "Local", FALSE
-      "MinMoveFrags", "1", "Local", TRUE
+    { "type",   "name", "range"
+      "UnitFlag", "Diplomat", "Local"
+      "UnitState", "OnLivableTile", "Local"
+      "MinMoveFrags", "1", "Local"
     }
 
 [actionenabler_poison_city]
 action = "Poison City"
 actor_reqs    =
-    { "type",   "name", "range", "present"
-      "UnitFlag", "Spy", "Local", TRUE
-      "DiplRel", "War", "Local", TRUE
-      "UnitState", "TransportDependent", "Local", FALSE
-      "MinMoveFrags", "1", "Local", TRUE
+    { "type",   "name", "range"
+      "UnitFlag", "Spy", "Local"
+      "DiplRel", "War", "Local"
+      "UnitState", "OnLivableTile", "Local"
+      "MinMoveFrags", "1", "Local"
     }
 target_reqs    =
     { "type",   "name", "range"
@@ -298,29 +302,27 @@ target_reqs    =
 [actionenabler_steal_tech_random]
 action = "Steal Tech"
 actor_reqs    =
-    { "type",   "name", "range", "present"
-      "UnitFlag", "Diplomat", "Local", TRUE
-      "UnitState", "TransportDependent", "Local", FALSE
-      "MinMoveFrags", "1", "Local", TRUE
+    { "type",   "name", "range"
+      "UnitFlag", "Diplomat", "Local"
+      "UnitState", "OnLivableTile", "Local"
+      "MinMoveFrags", "1", "Local"
     }
 target_reqs  =
     { "type",   "name", "range", "present"
-      "Nation", "Barbarian", "Player", FALSE
-      "Nation", "Pirate", "Player", FALSE
+      "NationGroup", "Barbarian", "Player", FALSE
     }
 
 [actionenabler_steal_tech_target]
 action = "Targeted Steal Tech"
 actor_reqs    =
-    { "type",   "name", "range", "present"
-      "UnitFlag", "Spy", "Local", TRUE
-      "UnitState", "TransportDependent", "Local", FALSE
-      "MinMoveFrags", "1", "Local", TRUE
+    { "type",   "name", "range"
+      "UnitFlag", "Spy", "Local"
+      "UnitState", "OnLivableTile", "Local"
+      "MinMoveFrags", "1", "Local"
     }
 target_reqs  =
     { "type",   "name", "range", "present"
-      "Nation", "Barbarian", "Player", FALSE
-      "Nation", "Pirate", "Player", FALSE
+      "NationGroup", "Barbarian", "Player", FALSE
     }
 
 [actionenabler_incite_city]
@@ -330,7 +332,7 @@ actor_reqs    =
       "UnitFlag", "Diplomat", "Local", TRUE
       "DiplRel", "Alliance", "Local", FALSE
       "DiplRel", "Team", "Local", FALSE
-      "UnitState", "TransportDependent", "Local", FALSE
+      "UnitState", "OnLivableTile", "Local", TRUE
       "MinMoveFrags", "1", "Local", TRUE
     }
 target_reqs  =
@@ -346,7 +348,7 @@ actor_reqs    =
       "UnitFlag", "Diplomat", "Local", TRUE
       "DiplRel", "Alliance", "Local", FALSE
       "DiplRel", "Team", "Local", FALSE
-      "UnitState", "TransportDependent", "Local", FALSE
+      "UnitState", "OnLivableTile", "Local", TRUE
       "MinMoveFrags", "1", "Local", TRUE
     }
 target_reqs    =
@@ -361,11 +363,11 @@ target_reqs    =
 [actionenabler_sabotage_unit]
 action = "Sabotage Unit"
 actor_reqs    =
-    { "type",   "name", "range", "present"
-      "Unitflag", "Spy", "Local", TRUE
-      "DiplRel", "War", "Local", TRUE
-      "UnitState", "TransportDependent", "Local", FALSE
-      "MinMoveFrags", "1", "Local", TRUE
+    { "type",   "name", "range"
+      "Unitflag", "Spy", "Local"
+      "DiplRel", "War", "Local"
+      "UnitState", "OnLivableTile", "Local"
+      "MinMoveFrags", "1", "Local"
     }
 target_reqs    =
     { "type",   "name", "range", "present"
@@ -399,8 +401,10 @@ actor_reqs    =
 [actionenabler_build_city]
 action = "Found City"
 actor_reqs    =
-    { "type",   "name", "range", "present"
-      "Unitflag", "Cities", "Local", TRUE
+    { "type",   "name", "range"
+      "Unitflag", "Cities", "Local"
+      "UnitState", "OnLivableTile", "Local"
+      "MinMoveFrags", "1", "Local"
     }
 
 [actionenabler_join_city]
@@ -408,6 +412,8 @@ action = "Join City"
 actor_reqs    =
     { "type",   "name", "range", "present"
       "Unitflag", "AddToCity", "Local", TRUE
+      "DiplRel", "Is foreign", "Local", FALSE
+      "MinMoveFrags", "1", "Local", TRUE
     }
 
 [borders]
@@ -416,6 +422,16 @@ radius_sq_city = 17
 
 ; Border radius square increased by this amount / point of city size
 size_effect    = 1
+
+; Difference between city workable area and area permanently claimed by
+; city (these tiles cannot be stolen by stronger border sources).
+; 0 means exactly city workable area is immune to border stealing.
+; Negative value means outer workable tiles can be stolen; highly negative
+; value (more than max city radius_sq) means any workable tile can be stolen.
+; If City_Radius_Sq is variable, so is the set of locked tiles; this is
+; a squared value, so the radius of the ring of tiles which are workable
+; but not locked (or vice versa) varies but the area is constant.
+radius_sq_city_permanent = 0
 
 [research]
 ; Method of calculating technology costs
@@ -613,6 +629,21 @@ settings =
     "Team",       200,   "Cancel",     "Both"
     "TeamIC",     400,   "Cancel",     "Both"
   }
+
+; /* <-- avoid gettext warnings
+;
+; Goods
+;
+; name                    = translatable name as seen by user
+; rule_name               = (optional) name for savegames, rulesets etc; if not
+;                           present, 'name' is used. Since the name used in
+;                           savegames must not change, use this when renaming
+;                           an good after a ruleset has been released.
+;
+; */ <-- avoid gettext warnings
+
+[goods_good]
+name = _("Goods")
 
 [playercolors]
 background.r = 86

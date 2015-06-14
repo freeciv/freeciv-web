@@ -34,9 +34,9 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  type IMPR_GENUS         = uint8(enum impr_genus_id)
  type KNOWN              = uint8(enum known_type)
 @@ -274,7 +274,7 @@
- type CONTINENT          = sint16(Continent_id)
  type GOVERNMENT         = UINT8
  type IMPROVEMENT        = uint8(Impr_type_id)
+ type MULTIPLIER         = uint8(Multiplier_type_id)
 -type NATION             = sint16(Nation_type_id)
 +type NATION             = UINT32
  type PLAYER             = UINT8
@@ -78,9 +78,9 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
 -  UINT8 aifill;
 +  UINT32 aifill;
 +  UINT32 mapsize;
+   PERSISTENT_READY persistent_ready;
    AIRLIFTING_STYLE airlifting_style;
    UINT8 angrycitizen;
-   SINT16 base_pollution;
 @@ -533,6 +534,7 @@
    STRING calendar_fragment_name[MAX_CALENDAR_FRAGMENTS][MAX_LEN_NAME];
    BOOL civil_war_enabled;

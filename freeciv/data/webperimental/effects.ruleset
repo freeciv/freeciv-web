@@ -692,7 +692,7 @@ reqs	=
       "Gov", "Democracy", "Player"
     }
 
-[effect_partisan_0]
+[effect_partisans_communism]
 type    = "Inspire_Partisans"
 value   = 1
 reqs	=
@@ -704,7 +704,7 @@ reqs	=
       "NationGroup", "Barbarian", "Player", FALSE
     }
 
-[effect_partisan_1]
+[effect_partisans_democracy]
 type    = "Inspire_Partisans"
 value   = 1
 reqs	=
@@ -2164,6 +2164,20 @@ reqs    =
       "Tech", "Railroad", "Player"
     }
 
+[effect_enter_marketplace_bonus_reduction]
+type	= "Trade_Revenue_Bonus"
+value	= -1585
+reqs	=
+    { "type", "name", "range"
+      "Action", "Enter Marketplace", "Local"
+    }
+
+; Fudge factor to more closely approximate Civ2 behavior. (Civ2 is
+; really very different -- this just fakes it a little better)
+[effect_bonus_fudge_factor]
+type	= "Trade_Revenue_Bonus"
+value	= 1585
+
 [effect_calendar_base]
 type    = "Turn_Years"
 value   = 50
@@ -2373,32 +2387,101 @@ reqs	=
       "UnitFlag", "Cities", "Local"
     }
 
-[effect_steal_gold_base]
-type    = "Max_Stolen_Gold_Pct"
-value   = 5
-
-[effect_steal_gold_capital]
-type    = "Max_Stolen_Gold_Pct"
-value   = 25
-reqs    =
-{ "type", "name", "range", "present"
-  "Building", "Palace", "City", TRUE
-  "Gov", "Anarchy", "Player", FALSE
-}
-
-[effect_central_planning_committee]
-type    = "Max_Stolen_Gold_Pct"
-value   = 20
-reqs    =
-{ "type", "name", "range"
-  "Building", "Palace", "City"
-  "Gov", "Communism", "Player"
-}
-
-[effect_thiefs_share_base]
-type    = "Thiefs_Share_Pct"
-value   = 1
-
 [effect_illegal_action_move_cost_base]
 type	= "Illegal_Action_Move_Cost"
 value	= 1
+reqs	=
+    { "type", "name", "range", "present"
+      "Action", "Found City", "Local", FALSE
+      "Action", "Join City", "Local", FALSE
+    }
+
+[effect_incident_caught_steal_tech]
+type	= "Casus_Belli_Caught"
+value	= 1
+reqs	=
+    { "type", "name", "range", "present"
+      "Action", "Steal Tech", "Local", TRUE
+      "DiplRel", "War", "Local", FALSE
+    }
+
+[effect_incident_success_steal_tech]
+type	= "Casus_Belli_Success"
+value	= 1
+reqs	=
+    { "type", "name", "range", "present"
+      "Action", "Steal Tech", "Local", TRUE
+      "DiplRel", "War", "Local", FALSE
+    }
+
+[effect_incident_caught_tgt_steal_tech]
+type	= "Casus_Belli_Caught"
+value	= 1
+reqs	=
+    { "type", "name", "range", "present"
+      "Action", "Targeted Steal Tech", "Local", TRUE
+      "DiplRel", "War", "Local", FALSE
+    }
+
+[effect_incident_success_tgt_steal_tech]
+type	= "Casus_Belli_Success"
+value	= 1
+reqs	=
+    { "type", "name", "range", "present"
+      "Action", "Targeted Steal Tech", "Local", TRUE
+      "DiplRel", "War", "Local", FALSE
+    }
+
+[effect_incident_success_bribe_unit]
+type	= "Casus_Belli_Success"
+value	= 1
+reqs	=
+    { "type", "name", "range", "present"
+      "Action", "Bribe Unit", "Local", TRUE
+      "DiplRel", "War", "Local", FALSE
+    }
+
+[effect_incident_success_sabotage_unit]
+type	= "Casus_Belli_Success"
+value	= 1
+reqs	=
+    { "type", "name", "range", "present"
+      "Action", "Sabotage Unit", "Local", TRUE
+      "DiplRel", "War", "Local", FALSE
+    }
+
+[effect_incident_success_incite]
+type	= "Casus_Belli_Success"
+value	= 1
+reqs	=
+    { "type", "name", "range", "present"
+      "Action", "Incite City", "Local", TRUE
+      "DiplRel", "War", "Local", FALSE
+    }
+
+[effect_incident_success_poison]
+type	= "Casus_Belli_Success"
+value	= 1
+reqs	=
+    { "type", "name", "range", "present"
+      "Action", "Poison City", "Local", TRUE
+      "DiplRel", "War", "Local", FALSE
+    }
+
+[effect_incident_success_sabotage_city]
+type	= "Casus_Belli_Success"
+value	= 1
+reqs	=
+    { "type", "name", "range", "present"
+      "Action", "Sabotage City", "Local", TRUE
+      "DiplRel", "War", "Local", FALSE
+    }
+
+[effect_incident_success_tgt_sabotage_city]
+type	= "Casus_Belli_Success"
+value	= 1
+reqs	=
+    { "type", "name", "range", "present"
+      "Action", "Targeted Sabotage City", "Local", TRUE
+      "DiplRel", "War", "Local", FALSE
+    }

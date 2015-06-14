@@ -186,17 +186,22 @@ Under Democracy, citizens govern directly by voting on issues.\
 
 ; /* <-- avoid gettext warnings
 ;
-; Multipliers
+; Multipliers (aka policies)
 ;
 ; name                    = translatable name as seen by user
 ; rule_name               = (optional) name for savegames, rulesets etc; if not
 ;                           present, 'name' is used. Since the name used in
 ;                           savegames must not change, use this when renaming
-;                           an extra after a ruleset has been released.
-; default                 = default value
-; start                   = minimal value
-; stop                    = maximum value
-; step                    = minimum increase/decrease
+;                           a multiplier after a ruleset has been released.
+; default                 = default value (as presented in UI)
+; start                   = minimum value (as presented in UI)
+; stop                    = maximum value (as presented in UI)
+; step                    = minimum increase/decrease (as presented in UI)
+; offset                  = offset/factor control how UI values are turned
+; factor                  =  into effect values for use in effects.ruleset.
+;                            effect_value = (ui_value + offset) * (factor/100)
+;                            Optional; by default offset=0, factor=100, so
+;                            that UI values are used as-is.
 ; helptext                = optional help text string; should escape all raw 
 ;                           newlines so that xgettext parsing works
 ;

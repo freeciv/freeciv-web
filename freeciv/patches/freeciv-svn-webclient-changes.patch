@@ -78,8 +78,8 @@ diff -Nurd -X.diff_ignore freeciv/server/settings.c freeciv/server/settings.c
      sz_strlcpy(setting.name, setting_name(pset));
      /* Send untranslated strings to client */
      sz_strlcpy(setting.short_help, setting_short_help(pset));
--    sz_strlcpy(setting.extra_help, setting_extra_help(pset));
-+    /* sz_strlcpy(setting.extra_help, setting_extra_help(pset)); */
+-    sz_strlcpy(setting.extra_help, setting_extra_help(pset, TRUE));
++    /* sz_strlcpy(setting.extra_help, setting_extra_help(pset, TRUE)); */
      setting.category = pset->scategory;
  
      send_packet_server_setting_const(pconn, &setting);

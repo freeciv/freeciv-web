@@ -121,6 +121,8 @@ ocean_resources = FALSE
 ;                        Nonzero values only affect extras with removal_time 0.
 ; clean_fallout_time   = time to clean fallout
 ;                        Nonzero values only affect extras with removal_time 0.
+; clean_fallout_time   = time to clean fallout (0 = impossible)
+;                        Nonzero values only affect extras with removal_time 0.
 ; animal               = unit type that can appear as animal on the terrain
 ; warmer_wetter_result = result of global warming for wet terrains; one of:
 ;                        "no"  -- no change; does not count for warming
@@ -1077,6 +1079,7 @@ shield      = 3 ; glacier used to have 4
 ;                           Global Warming
 ;   - "NuclearWinter"     = Instances of this extra on map count towards
 ;                           Nuclear Winter
+;   - "ShowFlag"          = Draw owner's flag
 ; helptext                = optional help text string; should escape all raw
 ;                           newlines so that xgettext parsing works
 ;
@@ -1298,6 +1301,7 @@ reqs           =
     }
 build_time     = 3
 removal_time   = 0
+flags          = "ShowFlag"
 helptext       = _("\
 Buoys may be built in the ocean (by units on a sea-going vessel).\
 ")
@@ -1432,7 +1436,6 @@ Roads and railroads can only be built on River tiles if your\
 ;   - "NoStackDeath"      = Units inside do not die all at once when attacked
 ;   - "DiplomatDefense"   = Diplomats inside get bonus to diplomatic defense
 ;   - "ParadropFrom"      = Paradrop can be initiated from base
-;   - "ShowFlag"          = Draw owner's flag
 ;
 ; */ <-- avoid gettext warnings
 
@@ -1451,7 +1454,6 @@ flags          = "NoStackDeath", "ParadropFrom"
 extra          = "Buoy"
 gui_type       = "Fortress"
 vision_main_sq = 5
-flags          = "ShowFlag"
 
 [base_ruins]
 extra          = "Ruins"

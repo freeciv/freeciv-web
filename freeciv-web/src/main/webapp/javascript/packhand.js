@@ -1036,3 +1036,9 @@ function handle_ruleset_action(packet)
 {
   actions[packet['id']] = packet;
 }
+
+function handle_ruleset_goods(packet)
+{
+  /* TODO: Implement */
+}
+

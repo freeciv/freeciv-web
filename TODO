@@ -1,7 +1,20 @@
 TODO:
 -----
 
-Basically you can help improve Freeciv-web in any way you like, as long at it actually makes the game better!
+Current TODO-list in prioritized order here:
+
+- In the city dialog, I don't know if my units are using up a production unit or not
+- City reports seem to be missing. I'd really love to have a list of my cities, what they are building, how many turns left for each item, the current state of citizens (unhappy, happy, taxmen, entertainers, scientists, etc)
+- On the "Production" Screen, it would be nice if we had the attack/defense/movements of each unit list
+- Units seem to get "stuck" if you try to move them beyond the number of moves they have remaining. They're not sentried, they're not moving, they're just forgotten and not cycled through on the next turn. They have the "G" next to them, but don't go anywhere.
+- On the City detail page, the citizen icons are too small to see what they mean, there also appears to be a black line around each block which appears unnecessary.
+- Three back-to-back (i.e same turn) successful spy/diplomat sabotages on the same city should not destroy production on the same item if the previous spy just destroyed the production.
+- There is no "Unload" hotkey for ships containing units to be unloaded. You have to click on the ship, then select each unit one by one, and it the ship has finished it's moves, the map recenters to the capital and then I have to go back and find the ship and repeat the process.
+- There doesn't appear to be a way to rearrange the items in the worklist. If I have a long worklist, I have to remove everything if I want to insert something, then re-add everything back in.
+- Upgrade doesn't provide me an option if I want to upgrade given the cost of the upgrade before it happens.
+
+
+Basically you can help improve Freeciv-web in any way you like, as long at it actually makes the game better! Other things to improve there:
 
 Major:
 - Update Freeciv-web to work with latest Freeciv.org SVN trunk version.

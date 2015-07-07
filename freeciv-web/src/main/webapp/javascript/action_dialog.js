@@ -194,6 +194,13 @@ function popup_action_selection(actor_unit, action_probabilities,
                                    action_probabilities)
              + "'>";
   }
+  if (action_probabilities[ACTION_STEAL_MAPS] != 0) {
+    dhtml += "<input id='act_sel_steal_maps" + actor_unit['id']
+             + "' class='act_sel_button' type='button' value='"
+             + format_action_label(ACTION_STEAL_MAPS,
+                                   action_probabilities)
+             + "'>";
+  }
   if (action_probabilities[ACTION_SPY_INCITE_CITY] != 0) {
     dhtml += "<input id='act_sel_revo" + actor_unit['id']
              + "' class='act_sel_button' type='button' value='"
@@ -354,6 +361,20 @@ function popup_action_selection(actor_unit, action_probabilities,
                     "value" : 0,
                     "name" : "",
                     "action_type": ACTION_SPY_STEAL_GOLD};
+      send_request(JSON.stringify(packet));
+
+      $(id).remove();
+    });
+  }
+
+  if (action_probabilities[ACTION_STEAL_MAPS] != 0) {
+    $("#act_sel_steal_maps" + actor_unit['id']).click(function() {
+      var packet = {"pid" : packet_unit_do_action,
+                    "actor_id" : actor_unit['id'],
+                    "target_id": target_city['id'],
+                    "value" : 0,
+                    "name" : "",
+                    "action_type": ACTION_STEAL_MAPS};
       send_request(JSON.stringify(packet));
 
       $(id).remove();

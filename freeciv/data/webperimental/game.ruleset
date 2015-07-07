@@ -35,6 +35,7 @@ Differences compared to default web-ruleset are:\n\
 - An even higher percentage of a nation's gold can be stolen from its \
 capital if it is communist.\n\
 - Unit stacks don't protect against spy actions\n\
+- Spies can steal parts of other player's world map. \n\
 - Explorers can establish embassies once Writing is discovered. \
 This action consumes the explorer.\n\
 - There's only one barbarian nation, attacking from both land and sea.\
@@ -427,6 +428,19 @@ actor_reqs    =
       "UnitState", "OnLivableTile", "Local"
       "MinMoveFrags", "1", "Local"
       "Tech", "Banking", "Player"
+    }
+
+[actionenabler_steal_maps]
+action = "Steal Maps"
+actor_reqs    =
+    { "type",   "name", "range"
+      "UnitFlag", "Spy", "Local"
+      "UnitState", "OnLivableTile", "Local"
+      "MinMoveFrags", "1", "Local"
+    }
+target_reqs  =
+    { "type",   "name", "range", "present"
+      "NationGroup", "Barbarian", "Player", FALSE
     }
 
 [actionenabler_traderoute]

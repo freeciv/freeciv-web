@@ -296,11 +296,11 @@ target_reqs  =
 [actionenabler_explorer_establish_embassy]
 action       = "Establish Embassy"
 actor_reqs    =
-    { "type",   "name", "range", "present"
-      "UnitType", "Explorer", "Local", TRUE
-      "Tech", "Writing", "Player", TRUE
-      "UnitState", "TransportDependent", "Local", FALSE
-      "MinMoveFrags", "1", "Local", TRUE
+    { "type",   "name", "range"
+      "UnitType", "Explorer", "Local"
+      "Tech", "Writing", "Player"
+      "UnitState", "OnLivableTile", "Local"
+      "MinMoveFrags", "1", "Local"
     }
 target_reqs  =
     { "type",   "name", "range", "present"
@@ -410,25 +410,25 @@ target_reqs    =
 [actionenabler_steal_gold_capital]
 action = "Steal Gold"
 actor_reqs    =
-    { "type",   "name", "range", "present"
-      "UnitFlag", "Diplomat", "Local", TRUE
-      "UnitState", "TransportDependent", "Local", FALSE
-      "MinMoveFrags", "1", "Local", TRUE
-      "Tech", "Banking", "Player", TRUE
+    { "type",   "name", "range"
+      "UnitFlag", "Diplomat", "Local"
+      "UnitState", "OnLivableTile", "Local"
+      "MinMoveFrags", "1", "Local"
+      "Tech", "Banking", "Player"
     }
 target_reqs  =
-    { "type",   "name", "range", "present"
-      "Building", "Palace", "City", TRUE
+    { "type",   "name", "range"
+      "Building", "Palace", "City"
     }
 
 [actionenabler_steal_gold_spy]
 action = "Steal Gold"
 actor_reqs    =
-    { "type",   "name", "range", "present"
-      "Unitflag", "Spy", "Local", TRUE
-      "UnitState", "TransportDependent", "Local", FALSE
-      "MinMoveFrags", "1", "Local", TRUE
-      "Tech", "Banking", "Player", TRUE
+    { "type",   "name", "range"
+      "Unitflag", "Spy", "Local"
+      "UnitState", "OnLivableTile", "Local"
+      "MinMoveFrags", "1", "Local"
+      "Tech", "Banking", "Player"
     }
 
 [actionenabler_traderoute]

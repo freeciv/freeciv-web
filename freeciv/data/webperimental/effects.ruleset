@@ -2387,6 +2387,41 @@ reqs	=
       "UnitFlag", "Cities", "Local"
     }
 
+[effect_steal_gold_base]
+type    = "Max_Stolen_Gold_Pm"
+value   = 50
+
+[effect_steal_gold_capital]
+type    = "Max_Stolen_Gold_Pm"
+value   = 250
+reqs	=
+{ "type", "name", "range", "present"
+  "Building", "Palace", "City", TRUE
+  "Gov", "Anarchy", "Player", FALSE
+}
+
+[effect_central_planning_committee]
+type    = "Max_Stolen_Gold_Pm"
+value   = 200
+reqs	=
+{ "type", "name", "range"
+  "Building", "Palace", "City"
+  "Gov", "Communism", "Player"
+}
+
+[effect_thiefs_share_base]
+type    = "Thiefs_Share_Pm"
+value	= 10
+
+[effect_incident_success_steal_gold]
+type	= "Casus_Belli_Success"
+value	= 1
+reqs	=
+    { "type", "name", "range", "present"
+      "Action", "Steal Gold", "Local", TRUE
+      "DiplRel", "War", "Local", FALSE
+    }
+
 [effect_illegal_action_move_cost_base]
 type	= "Illegal_Action_Move_Cost"
 value	= 1

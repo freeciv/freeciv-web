@@ -1938,7 +1938,7 @@ TIP 2:  You may be involved in a situation where you've invaded an\
 [unit_diplomat]
 name          = _("Diplomat")
 class         = "Land"
-tech_req      = "Writing"
+tech_req      = "Alphabet"
 obsolete_by   = "Spy"
 graphic       = "u.diplomat"
 graphic_alt   = "-"

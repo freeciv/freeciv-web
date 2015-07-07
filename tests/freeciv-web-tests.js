@@ -162,4 +162,44 @@ casper.test.begin('Test starting new Freeciv-web game', 10, function suite(test)
     casper.run(function() {
         test.done();
     });
+
+  casper.test.begin('Test webperimental', 1, function suite(test) {
+    casper.start("http://localhost/webclient/?action=new");
+
+    casper.waitForSelector('#username_req', function() {
+      this.echo("Filling in username in new game dialog.");
+      this.sendKeys('#username_req', 'CasperJS');
+
+      this.echo("Selecting to customize game in new game dialog.");
+      this.clickLabel("Customize Game");
+    });
+
+    casper.waitForSelector('#pregame_settings_button', function() {
+      this.echo("Opening pre game settings dialog.");
+      this.clickLabel("Settings");
+    });
+
+    casper.waitForSelector('#ruleset', function() {
+      this.echo("Loading webperimental.");
+    });
+
+    casper.thenEvaluate(function() {
+      /* Change to webperimental. */
+      $('#ruleset').val('webperimental').change();
+    });
+
+    casper.waitForText(
+          '/rulesetdir: Ruleset directory set to "webperimental"',
+          function() {
+            test.pass("Loaded webperimental.");
+          },
+          function() {
+            test.fail("Failed to load webperimental.");
+          },
+          7000);
+
+    casper.run(function() {
+      test.done();
+    });
+  });
 });

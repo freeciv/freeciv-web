@@ -2422,6 +2422,15 @@ reqs	=
       "DiplRel", "War", "Local", FALSE
     }
 
+[effect_incident_success_steal_maps]
+type	= "Casus_Belli_Success"
+value	= 1
+reqs	=
+    { "type", "name", "range", "present"
+      "Action", "Steal Maps", "Local", TRUE
+      "DiplRel", "War", "Local", FALSE
+    }
+
 [effect_illegal_action_move_cost_base]
 type	= "Illegal_Action_Move_Cost"
 value	= 1

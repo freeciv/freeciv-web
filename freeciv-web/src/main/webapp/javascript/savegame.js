@@ -14,7 +14,7 @@ var savename = "";
 var loadTimerId = -1;
 var scenario_activated = false;
 
-var FC_SAVEGAME_VER = 1;
+var FC_SAVEGAME_VER = 2;
 
 var scenarios = [
   {"img":"/images/world_small.png", "description":"The World - Small world map, 80x50 map of the Earth", "savegame":"earth-80x50-v3"},

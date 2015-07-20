@@ -190,10 +190,12 @@ function mouse_moved_cb(e)
       mouse_y = e.clientY;
     }
   }
-  if (active_city == null && mapview_canvas != null) {
+  if (active_city == null && mapview_canvas != null 
+      && $("#canvas").length) {
     mouse_x = mouse_x - $("#canvas").offset().left;
     mouse_y = mouse_y - $("#canvas").offset().top;
-  } else if (active_city != null && city_canvas != null) {
+  } else if (active_city != null && city_canvas != null 
+             && $("#city_canvas").length) {
     mouse_x = mouse_x - $("#city_canvas").offset().left;
     mouse_y = mouse_y - $("#city_canvas").offset().top;
 

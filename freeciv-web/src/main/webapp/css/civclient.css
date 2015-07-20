@@ -816,3 +816,7 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
   float: right;
   padding-top: 15px;
 }
+
+.ui-tooltip {
+    white-space: pre-line;
+}

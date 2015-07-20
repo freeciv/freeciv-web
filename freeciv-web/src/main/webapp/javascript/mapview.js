@@ -516,7 +516,7 @@ function update_unit_info_label(punits)
       unit_info_html += "<br>";
     }
 
-    unit_info_html += get_unit_moves_left(punit) ;
+    unit_info_html += get_unit_moves_left(punit);
     unit_info_html += "<br>";
     unit_info_html += "<div style='font-size: 80%;'><span title='Attack strength'>A:" + ptype['attack_strength'] 
     + "</span> <span title='Defense strength'>D:" + ptype['defense_strength'] 

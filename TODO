@@ -3,7 +3,6 @@ TODO:
 
 Current TODO-list in prioritized order here:
 
-- In the city dialog, I don't know if my units are using up a production unit or not
 - City reports seem to be missing. I'd really love to have a list of my cities, what they are building, how many turns left for each item, the current state of citizens (unhappy, happy, taxmen, entertainers, scientists, etc)
 - On the "Production" Screen, it would be nice if we had the attack/defense/movements of each unit list
 - Units seem to get "stuck" if you try to move them beyond the number of moves they have remaining. They're not sentried, they're not moving, they're just forgotten and not cycled through on the next turn. They have the "G" next to them, but don't go anywhere.

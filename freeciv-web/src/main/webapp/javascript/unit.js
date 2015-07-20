@@ -353,3 +353,31 @@ function unittype_ids_alphabetic()
   }
   return unittype_id_list;
 }
+
+/**************************************************************************
+ Returns a text about the unit to be shown in the city dialog, containing
+ unit type name, home city, upkeep.
+**************************************************************************/
+function get_unit_city_info(punit)
+{
+  var result = "";
+
+  var ptype = unit_type(punit);
+
+  result += ptype['name'] + "\nFood/Shield/Gold: ";
+
+  if (punit['upkeep'] != null) { 
+    result += punit['upkeep'][O_FOOD] + "/" 
+           + punit['upkeep'][O_SHIELD] + "/" 
+           + punit['upkeep'][O_GOLD]; 
+  }
+
+  result += "\n" + get_unit_moves_left(punit) + "\n";
+
+  if (get_unit_homecity_name(punit) != null) {
+    result += get_unit_homecity_name(punit);
+  }
+
+  return result;
+}
+

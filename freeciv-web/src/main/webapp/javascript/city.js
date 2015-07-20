@@ -245,7 +245,8 @@ function show_city_dialog(pcity)
        }
       
       present_units_html = present_units_html +
-       "<div id='game_unit_list_item' style='cursor:pointer;cursor:hand; background: transparent url(" 
+       "<div class='game_unit_list_item' title='" + get_unit_city_info(punit) 
+           + "' style='cursor:pointer;cursor:hand; background: transparent url(" 
            + sprite['image-src'] +
            ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y'] 
            + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px;float:left; '"
@@ -268,7 +269,8 @@ function show_city_dialog(pcity)
        }
       
       supported_units_html = supported_units_html +
-       "<div id='game_unit_list_item' style='cursor:pointer;cursor:hand; background: transparent url(" 
+       "<div class='game_unit_list_item' title='" + get_unit_city_info(punit)  
+           + "' style='cursor:pointer;cursor:hand; background: transparent url(" 
            + sprite['image-src'] +
            ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y'] 
            + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px;float:left; '"
@@ -277,7 +279,7 @@ function show_city_dialog(pcity)
     }
     $("#city_supported_units_list").html(supported_units_html);
   }
-
+  $(".game_unit_list_item").tooltip();
 
   $("#city_food").html(pcity['prod'][0]);
   $("#city_prod").html(pcity['prod'][1]);

@@ -38,7 +38,7 @@ mysql_pass="vagrant"
 
 resin_version="4.0.44"
 resin_url="http://www.caucho.com/download/resin-${resin_version}.tar.gz"
-tornado_url="https://pypi.python.org/packages/source/t/tornado/tornado-4.2.tar.gz"
+tornado_url="https://pypi.python.org/packages/source/t/tornado/tornado-4.2.1.tar.gz"
 slimerjs_url="http://download.slimerjs.org/releases/0.9.6/slimerjs-0.9.6.zip"  
 casperjs_url="https://github.com/n1k0/casperjs/archive/1.1-beta3.zip"
 

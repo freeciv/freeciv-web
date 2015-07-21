@@ -36,6 +36,7 @@ Differences compared to default web-ruleset are:\n\
 capital if it is communist.\n\
 - Unit stacks don't protect against spy actions\n\
 - Spies can steal parts of other player's world map. \n\
+- Spies belonging to the owner of the Manhattan Project can nuke cities.\n\
 - Explorers can establish embassies once Writing is discovered. \
 This action consumes the explorer.\n\
 - There's only one barbarian nation, attacking from both land and sea.\
@@ -441,6 +442,17 @@ actor_reqs    =
 target_reqs  =
     { "type",   "name", "range", "present"
       "NationGroup", "Barbarian", "Player", FALSE
+    }
+
+[actionenabler_suitcase_nuke]
+action = "Suitcase Nuke"
+actor_reqs    =
+    { "type",   "name", "range"
+      "UnitFlag", "Spy", "Local"
+      "DiplRel", "War", "Local"
+      "UnitState", "OnLivableTile", "Local"
+      "MinMoveFrags", "1", "Local"
+      "Building", "Manhattan Project", "Player"
     }
 
 [actionenabler_traderoute]

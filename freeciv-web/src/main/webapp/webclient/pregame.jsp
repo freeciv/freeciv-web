@@ -3,7 +3,7 @@
   <div id="pregame_options">
 	<div id="pregame_buttons">
 		<div id="freeciv_logo" style="cursor:pointer;cursor:hand" 
-                          onclick="window.open('http:///', '_new');">
+                          onclick="window.open('/', '_new');">
 		</div>
 		<button id="start_game_button" type="button" class="button" onClick="pregame_start_game();">Start Game</button>
 		<button id="load_game_button" type="button" class="button" onClick="load_game_dialog();" >Load Game</button>

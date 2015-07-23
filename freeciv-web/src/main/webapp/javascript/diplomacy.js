@@ -318,6 +318,7 @@ function create_diplomacy_dialog(counterpart) {
   var pplayer = client.conn.playing;
 
   // reset diplomacy_dialog div.
+  $("#dialog").remove();
   $("#diplomacy_dialog").remove();
   $("#self-items").remove();
   $("#counterpart-items").remove();

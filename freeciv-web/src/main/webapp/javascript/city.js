@@ -502,7 +502,8 @@ function can_city_build_unit_now(pcity, punittype)
 **************************************************************************/
 function can_city_build_improvement_now(pcity, pimprove)
 {  
-  return (pcity['can_build_improvement'][pimprove['id']] == "1"); 
+  return (pcity != null && pcity['can_build_improvement'] != null
+          && pcity['can_build_improvement'][pimprove['id']] == "1"); 
 }
 
 

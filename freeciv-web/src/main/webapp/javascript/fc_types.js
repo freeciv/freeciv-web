@@ -59,7 +59,8 @@ var ACTION_JOIN_CITY = 16;
 var ACTION_STEAL_MAPS = 17;
 var ACTION_BOMBARD = 18;
 var ACTION_SPY_NUKE = 19;
-var ACTION_COUNT = 20;
+var ACTION_NUKE = 20;
+var ACTION_COUNT = 21;
 
 /* Used to signal a move without any action. */
 var ACTION_MOVE = ACTION_COUNT;

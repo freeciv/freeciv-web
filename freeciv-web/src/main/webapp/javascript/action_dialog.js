@@ -278,6 +278,13 @@ function popup_action_selection(actor_unit, action_probabilities,
                                    action_probabilities)
              + "'>";
   }
+  if (action_probabilities[ACTION_NUKE] != 0) {
+    dhtml += "<input id='act_sel_nuke" + actor_unit['id']
+             + "' class='act_sel_button' type='button' value='"
+             + format_action_label(ACTION_NUKE,
+                                   action_probabilities)
+             + "'>";
+  }
   if (action_probabilities[ACTION_BOMBARD] != 0) {
     dhtml += "<input id='act_sel_bombard" + actor_unit['id']
              + "' class='act_sel_button' type='button' value='"
@@ -536,6 +543,20 @@ function popup_action_selection(actor_unit, action_probabilities,
       /* Ask the server to suggest a city name. */
       var packet = {"pid"     : packet_city_name_suggestion_req,
                     "unit_id" : actor_unit['id'] };
+      send_request(JSON.stringify(packet));
+
+      $(id).remove();
+    });
+  }
+
+  if (action_probabilities[ACTION_NUKE] != 0) {
+    $("#act_sel_nuke" + actor_unit['id']).click(function() {
+      var packet = {"pid" : packet_unit_do_action,
+                    "actor_id" : actor_unit['id'],
+                    "target_id": target_tile['index'],
+                    "value" : 0,
+                    "name" : "",
+                    "action_type": ACTION_NUKE};
       send_request(JSON.stringify(packet));
 
       $(id).remove();

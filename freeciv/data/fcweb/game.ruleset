@@ -227,6 +227,9 @@ ui_name_found_city = _("%sBuild City%s")
 ; /* TRANS: _Add to City (100% chance of success). */
 ui_name_join_city = _("%sAdd to City%s")
 
+; /* TRANS: Explode _Nuclear (100% chance of success). */
+ui_name_explode_nuclear = _("Explode %sNuclear%s")
+
 ; /* <-- avoid gettext warnings
 ;
 ; Action enablers:
@@ -414,6 +417,13 @@ actor_reqs    =
       "Unitflag", "AddToCity", "Local", TRUE
       "DiplRel", "Is foreign", "Local", FALSE
       "MinMoveFrags", "1", "Local", TRUE
+    }
+
+[actionenabler_nuke]
+action = "Explode Nuclear"
+actor_reqs    =
+    { "type",   "name", "range", "present"
+      "Unitflag", "Nuclear", "Local", TRUE
     }
 
 [borders]

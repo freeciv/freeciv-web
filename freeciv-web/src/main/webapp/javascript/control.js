@@ -1416,7 +1416,12 @@ function key_unit_nuke()
   var funits = get_units_in_focus();
   for (var i = 0; i < funits.length; i++) {
     var punit = funits[i]; 
-    var packet = {"pid" : packet_unit_nuke, "unit_id" : punit['id']};
+    var packet = {"pid" : packet_unit_do_action,
+                  "actor_id" : punit['id'],
+                  "target_id": punit['tile'],
+                  "value" : 0,
+                  "name" : "",
+                  "action_type": ACTION_NUKE};
       send_request(JSON.stringify(packet));  
   }  
   update_unit_focus();

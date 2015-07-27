@@ -991,7 +991,7 @@ function show_city_traderoutes()
     var tcity_id = active_city['trade'][i];
     if (tcity_id == 0) continue;
     var tcity = cities[tcity_id];
-    msg += tcity['name'] + " (" + active_city['trade_value'][i] + ")" + "<br>";
+    msg += "Trade with " + tcity['name'] + " gives " + active_city['trade_value'][i] + " gold each turn." + "<br>";
   }
   if (msg == "") msg = "No traderoutes.";
   $("#city_traderoutes_tab").html(msg);

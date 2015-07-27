@@ -154,7 +154,8 @@ function show_city_dialog(pcity)
       }
     });
 
-  $("#city_dialog").attr("title", decodeURIComponent(pcity['name']));
+  $("#city_dialog").attr("title", decodeURIComponent(pcity['name']) 
+                         + " (" + pcity['size'] + ")");
   $("#city_dialog").dialog({
 			bgiframe: true,
 			modal: true,

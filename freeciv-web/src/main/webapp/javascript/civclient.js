@@ -27,6 +27,8 @@ var autostart = false;
 
 var username = null;
 
+var fc_seedrandom = null;
+
 var music_list = [ "battle-epic", 
                    "andrewbeck-ancient", 
                    "into_the_shadows",
@@ -65,6 +67,9 @@ function civclient_init()
     $("#game_unit_orders_default").remove();
     $("#civ_dialog").remove();
   }
+
+  //initialize a seeded random number generator
+  fc_seedrandom = new Math.seedrandom('freeciv-web');
 
   init_mapview();
   game_init();

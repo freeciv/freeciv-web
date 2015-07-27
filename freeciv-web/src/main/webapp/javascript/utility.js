@@ -119,7 +119,7 @@ function to_title_case(str)
 ...
 **************************************************************************/
 function get_random_int(min, max) {
-  return Math.floor(Math.random() * (max - min)) + min;
+  return Math.floor(fc_seedrandom() * (max - min)) + min;
 }
 
 /**************************************************************************

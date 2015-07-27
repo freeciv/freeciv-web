@@ -847,6 +847,14 @@ function do_map_click(ptile, qtype)
         packet['target'][i] = EXTRA_NONE;
       }
 
+      if (punit['id'] != goto_path['unit_id']) {
+        /* Shouldn't happen. Maybe an old path wasn't cleared out. */
+        console.log("Error: Tried to order unit " + punit['id']
+                    + " to move along a path made for unit "
+                    + goto_path['unit_id']);
+        return;
+      }
+
       /* Send the order to move using the orders system. */
       send_request(JSON.stringify(packet));
     }

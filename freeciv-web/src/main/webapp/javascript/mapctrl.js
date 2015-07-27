@@ -104,9 +104,9 @@ function mapview_touch_move(e)
   touch_start_x = mouse_x;
   touch_start_y = mouse_y;
 
-  check_mouse_drag_unit(mouse_x, mouse_y);
-
   if (!goto_active) {
+    check_mouse_drag_unit(mouse_x, mouse_y);
+
     mapview['gui_x0'] += diff_x;
     mapview['gui_y0'] += diff_y;
   }
@@ -147,7 +147,8 @@ function city_mapview_mouse_click(e)
 }
 
 /****************************************************************************
-...
+ This function checks if there is a visible unit on the given canvas position,
+ and selects that visible unit, and activates goto for touch devices.
 ****************************************************************************/
 function check_mouse_drag_unit(canvas_x, canvas_y)
 {

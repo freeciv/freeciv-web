@@ -834,6 +834,16 @@ function do_map_click(ptile, qtype)
       for (var i = 0; i < goto_path['length']; i++) {
         /* TODO: Have the server send the full orders in stead of just the
          * dir part. Use that data in stead. */
+
+        if (goto_path['dir'][i] == -1) {
+          /* Shouldn't happen. This non direction is probably from a non
+           * move order. See the TODO above. */
+          console.log("Error: Tried to order unit " + punit['id']
+                      + " to move but the server sent an invalid"
+                      + " direction in path step " + i + ".");
+          return;
+        }
+
         if (i + 1 != goto_path['length']) {
           /* Don't try to do an action in the middle of the path. */
           packet['orders'][i] = ORDER_MOVE;

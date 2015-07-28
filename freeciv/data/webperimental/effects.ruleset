@@ -2529,3 +2529,19 @@ reqs	=
       "Action", "Targeted Sabotage City", "Local", TRUE
       "DiplRel", "War", "Local", FALSE
     }
+
+[effect_incident_success_explode_nuke]
+type	= "Casus_Belli_Success"
+value	= 1
+reqs	=
+    { "type", "name", "range", "present"
+      "Action", "Explode Nuclear", "Local", TRUE
+    }
+
+[effect_incident_success_suitcase_nuke]
+type	= "Casus_Belli_Success"
+value	= 1
+reqs	=
+    { "type", "name", "range", "present"
+      "Action", "Suitcase Nuke", "Local", TRUE
+    }

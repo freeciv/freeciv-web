@@ -836,15 +836,9 @@ function do_map_click(ptile, qtype)
          * dir part. Use that data in stead. */
 
         if (goto_path['dir'][i] == -1) {
-          /* Shouldn't happen. This non direction is probably from a non
-           * move order. See the TODO above. */
-          console.log("Error: Tried to order unit " + punit['id']
-                      + " to move but the server sent an invalid"
-                      + " direction in path step " + i + ".");
-          return;
-        }
-
-        if (i + 1 != goto_path['length']) {
+          /* Assume that this means refuel. */
+          packet['orders'][i] = ORDER_FULL_MP;
+        } else if (i + 1 != goto_path['length']) {
           /* Don't try to do an action in the middle of the path. */
           packet['orders'][i] = ORDER_MOVE;
         } else {

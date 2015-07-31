@@ -1,0 +1,22 @@
+diff --git a/server/savegame3.c b/server/savegame3.c
+index cc0c0b2..8b98e4e 100644
+--- a/server/savegame3.c
++++ b/server/savegame3.c
+@@ -5091,7 +5091,7 @@ static bool sg_load_player_unit(struct loaddata *loading,
+         struct unit_order *order = &punit->orders.list[j];
+ 
+         if (orders_unitstr[j] == '\0' || dir_unitstr[j] == '\0'
+-            || act_unitstr[j] == '\0' || action_unitstr == '\0') {
++            || act_unitstr[j] == '\0') {
+           log_sg("Invalid unit orders.");
+           free_unit_orders(punit);
+           break;
+@@ -5100,7 +5100,7 @@ static bool sg_load_player_unit(struct loaddata *loading,
+         order->dir = char2dir(dir_unitstr[j]);
+         order->activity = char2activity(act_unitstr[j]);
+ 
+-        order->action = (action_unitstr[j] == '?'
++        order->action = (action_unitstr == '\0' || action_unitstr[j] == '?'
+                          ? ACTION_COUNT
+                          : char2num(action_unitstr[j]));
+ 

@@ -831,6 +831,7 @@ function do_map_click(ptile, qtype)
       packet['dir'] = [];
       packet['activity'] = [];
       packet['target'] = [];
+      packet['action'] = [];
       for (var i = 0; i < goto_path['length']; i++) {
         /* TODO: Have the server send the full orders in stead of just the
          * dir part. Use that data in stead. */
@@ -849,6 +850,7 @@ function do_map_click(ptile, qtype)
         packet['dir'][i] = goto_path['dir'][i];
         packet['activity'][i] = ACTIVITY_LAST;
         packet['target'][i] = EXTRA_NONE;
+        packet['action'][i] = ACTION_COUNT;
       }
 
       if (punit['id'] != goto_path['unit_id']) {
@@ -1691,6 +1693,7 @@ function key_unit_move(dir)
       "dir"      : [dir],
       "activity" : [ACTIVITY_LAST],
       "target"   : [EXTRA_NONE],
+      "action"   : [ACTION_COUNT],
       "dest_tile": newtile['index']
     };
 

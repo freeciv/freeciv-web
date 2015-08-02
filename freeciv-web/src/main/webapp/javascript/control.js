@@ -1778,6 +1778,12 @@ function update_goto_path(goto_packet)
   for (var i = 0; i < goto_packet['dir'].length; i++) {
     if (ptile == null) break;
     var dir = goto_packet['dir'][i];
+
+    if (dir == -1) {
+      /* Assume that this means refuel. */
+      continue;
+    }
+
     ptile['goto_dir'] = dir; 
     ptile = mapstep(ptile, dir);
   }

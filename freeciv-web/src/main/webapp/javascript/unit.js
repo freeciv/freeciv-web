@@ -31,7 +31,8 @@ var ORDER_BUILD_WONDER = 5;
 var ORDER_TRADE_ROUTE = 6;
 var ORDER_HOMECITY = 7;
 var ORDER_ACTION_MOVE = 8;
-var ORDER_LAST = 9;
+var ORDER_PERFORM_ACTION = 9;
+var ORDER_LAST = 10;
 
 /****************************************************************************
  ...

@@ -1,0 +1,26 @@
+From 67bfbf52e2c2b466726b289f6025e8734a892ec7 Mon Sep 17 00:00:00 2001
+From: Sveinung Kvilhaugsvik <sveinung84@users.sourceforge.net>
+Date: Sun, 2 Aug 2015 00:36:00 +0200
+Subject: [PATCH] Fix the unit-order-has-an-action save game loading
+ validation
+
+---
+ server/savegame3.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/server/savegame3.c b/server/savegame3.c
+index cc0c0b2..906853c 100644
+--- a/server/savegame3.c
++++ b/server/savegame3.c
+@@ -5091,7 +5091,7 @@ static bool sg_load_player_unit(struct loaddata *loading,
+         struct unit_order *order = &punit->orders.list[j];
+ 
+         if (orders_unitstr[j] == '\0' || dir_unitstr[j] == '\0'
+-            || act_unitstr[j] == '\0' || action_unitstr == '\0') {
++            || act_unitstr[j] == '\0' || action_unitstr[j] == '\0') {
+           log_sg("Invalid unit orders.");
+           free_unit_orders(punit);
+           break;
+-- 
+2.1.4
+

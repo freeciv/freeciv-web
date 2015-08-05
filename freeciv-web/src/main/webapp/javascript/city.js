@@ -14,6 +14,7 @@
 
 var cities = {};
 var city_rules = {};
+var city_trade_routes = {};
 
 var active_city = null;
 var worklist_dialog_active = false;
@@ -985,16 +986,44 @@ function rename_city()
 **************************************************************************/
 function show_city_traderoutes()
 {
-  if (active_city == null || active_city['trade'] == null) return;
+  var msg;
+  var routes;
 
-  var msg = "";
-  for (var i = 0; i < active_city['trade'].length; i++) {
-    var tcity_id = active_city['trade'][i];
-    if (tcity_id == 0) continue;
-    var tcity = cities[tcity_id];
-    msg += "Trade with " + tcity['name'] + " gives " + active_city['trade_value'][i] + " gold each turn." + "<br>";
+  if (active_city == null) {
+    /* No city to show. */
+    return;
   }
-  if (msg == "") msg = "No traderoutes.";
+
+  routes = city_trade_routes[active_city['id']];
+
+  if (active_city['traderoute_count'] != 0
+      && routes == null) {
+    /* This city is supposed to have trade routes. It doesn't.  */
+    console.log("Can't find the trade routes " + active_city['name']
+                + " is said to have");
+    return;
+  }
+
+  msg = "";
+  for (var i = 0; i < active_city['traderoute_count']; i++) {
+    var tcity_id;
+    var tcity;
+
+    tcity_id = routes[i]['partner'];
+
+    if (tcity_id == 0) {
+      continue;
+    }
+
+    tcity = cities[tcity_id];
+    msg += "Trade with " + tcity['name'] + " gives "
+        + routes[i]['value'] + " gold each turn." + "<br>";
+  }
+
+  if (msg == "") {
+    msg = "No traderoutes.";
+  }
+
   $("#city_traderoutes_tab").html(msg);
 
 }

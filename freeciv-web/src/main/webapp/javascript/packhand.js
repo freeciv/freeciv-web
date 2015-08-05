@@ -205,6 +205,20 @@ function handle_city_short_info(packet)
   } 
 }
 
+/**************************************************************************
+  A traderoute-info packet contains information about one end of a
+  traderoute
+**************************************************************************/
+function handle_traderoute_info(packet)
+{
+  if (city_trade_routes[packet['city']] == null) {
+    /* This is the first trade route received for this city. */
+    city_trade_routes[packet['city']] = {};
+  }
+
+  city_trade_routes[packet['city']][packet['index']] = packet;
+}
+
 /* 100% complete */
 function handle_player_info(packet) 
 {

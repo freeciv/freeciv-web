@@ -334,6 +334,8 @@ flags         = "Unreachable", "DoesntOccupyTile"
 ; Following actions require extra fields:
 ;  "Bombard"
 ;   bombard_rate = the number of shots fired at enemy units when attacking
+;  "Join City"
+;   pop_cost = the number of population added to the target city
 ;
 ; ** Roles **
 ;

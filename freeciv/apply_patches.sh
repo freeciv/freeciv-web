@@ -8,8 +8,9 @@
 # dev_save_compat is Freeciv patch #6154.
 # action_order_savegame_compat is Freeciv patch #6171. It makes pre patch #6153 savegames work.
 # TraderoutePackets is Freeciv patch #6146. I didn't upgrade the Freeciv server it self because of Freeciv bug #23729.
+# FirstTurnTimeout is Freeciv bug #23324
 
-PATCHLIST="freeciv_web_all_packets_def_changes caravan_fixes1 city_fixes city_impr_fix2 city_name_bugfix city-naming-change city_fixes2 citytools_changes map-settings metachange text_fixes unithand-change2 webclient-ai-attitude current_research_cost freeciv-svn-webclient-changes network-rewrite-1 fcnet_packets misc_devversion_sync scenario_ruleset savegame maphand_ch serverside_extra_assign libtoolize_no_symlinks spacerace city_disbandable ai_traits_crash unittools ruleset-capability worklists server_password aifill barbarian-names activity_null_check add_rulesets NoDeltaHeader city_traderoute_hotfix order_validation_feed_back action_order fix_unit_order_action_validation dev_save_compat action_order_savegame_compat TraderoutePackets"
+PATCHLIST="freeciv_web_all_packets_def_changes caravan_fixes1 city_fixes city_impr_fix2 city_name_bugfix city-naming-change city_fixes2 citytools_changes map-settings metachange text_fixes unithand-change2 webclient-ai-attitude current_research_cost freeciv-svn-webclient-changes network-rewrite-1 fcnet_packets misc_devversion_sync scenario_ruleset savegame maphand_ch serverside_extra_assign libtoolize_no_symlinks spacerace city_disbandable ai_traits_crash unittools ruleset-capability worklists server_password aifill barbarian-names activity_null_check add_rulesets NoDeltaHeader city_traderoute_hotfix order_validation_feed_back action_order fix_unit_order_action_validation dev_save_compat action_order_savegame_compat TraderoutePackets FirstTurnTimeout"
 
 apply_patch() {
   echo "*** Applying $1.patch ***"

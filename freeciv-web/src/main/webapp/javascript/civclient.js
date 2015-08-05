@@ -466,8 +466,10 @@ function is_server()
 function update_timeout()
 {
   var now = new Date().getTime();
-  if (game_info != null && game_info['timeout'] != null && game_info['timeout'] > 0) {
-    var remaining = game_info['timeout'] - Math.floor((now - phase_start_time) / 1000);
+  if (game_info != null
+      && current_turn_timeout() != null && current_turn_timeout() > 0) {
+    var remaining = current_turn_timeout()
+                    - Math.floor((now - phase_start_time) / 1000);
     if (remaining >= 0) {
       if (is_small_screen()) {
         $("#turn_done_button").button("option", "label", "Turn " + remaining);

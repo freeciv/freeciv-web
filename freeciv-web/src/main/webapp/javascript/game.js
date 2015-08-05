@@ -117,3 +117,15 @@ function get_year_string()
   year_string += "(T" + game_info['turn'] + ")";
   return year_string;
 }
+
+/**************************************************************************
+  Return timeout value for the current turn.
+**************************************************************************/
+function current_turn_timeout()
+{
+  if (game_info['turn'] == 0 && game_info['first_timeout'] != -1) {
+    return game_info['first_timeout'];
+  } else {
+    return game_info['timeout'];
+  }
+}

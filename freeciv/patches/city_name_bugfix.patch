@@ -73,9 +73,9 @@ index e5e294c..0cda06c 100644
 +          city_build(pplayer, actor_unit, unescaped_text);
 +          g_free(unescaped_text);
 +        }
-       } else if (!unit_can_build_city(actor_unit)) {
+       } else if (unit_can_do_action(actor_unit, ACTION_FOUND_CITY)
+                  && !unit_can_build_city(actor_unit)) {
          /* Keep the rules like they was before action enabler control:
-          *  - !unit_can_build_city() won't punish the player.
 @@ -1561,6 +1572,36 @@ static void city_build(struct player *pplayer, struct unit *punit,
  }
  

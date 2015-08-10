@@ -294,6 +294,9 @@ function handle_ruleset_control(packet)
 
   update_client_state(C_S_PREPARING);
 
+  /* Clear out any effects belonging to the previous ruleset. */
+  effects = {};
+
   /* TODO: implement rest*/
 
 }
@@ -842,7 +845,12 @@ function handle_game_load(packet)
  /* Done */
 function handle_ruleset_effect(packet) 
 {
-  effects[packet['effect_type']] = packet;
+  if (effects[packet['effect_type']] == null) {
+    /* This is the first effect of this type. */
+    effects[packet['effect_type']] = [];
+  }
+
+  effects[packet['effect_type']].push(packet);
 }
  
 function handle_ruleset_unit_flag(packet)

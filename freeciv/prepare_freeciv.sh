@@ -29,5 +29,5 @@ fi
 
 ( cd freeciv
 
-  ./autogen.sh --enable-fcweb --enable-json --disable-nls --disable-debug --disable-fcmp --without-freeciv-manual --disable-ruledit --enable-ai-static=classic,threaded && make
+  ./autogen.sh --with-project-definition=../freeciv-web.project --enable-fcweb --enable-json --disable-nls --disable-debug --disable-fcmp --without-freeciv-manual --disable-ruledit --enable-ai-static=classic,threaded && make
 )

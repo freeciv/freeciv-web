@@ -89,15 +89,6 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  end
  
  PACKET_MAP_INFO = 17; sc, lsend
-@@ -535,7 +535,7 @@ end
- # This cannot have is-info set. Sending the same value a second time after a
- # while has passed means a completely reset timeout.
- PACKET_TIMEOUT_INFO = 244; sc
--  SFLOAT10x3 seconds_to_phasedone;
-+  UINT32 seconds_to_phasedone;
- end
- 
- PACKET_MAP_INFO = 17; sc, lsend
 @@ -611,6 +613,9 @@
    SINT16 citizen_base[O_LAST];
    SINT16 usage[O_LAST];

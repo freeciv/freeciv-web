@@ -123,6 +123,8 @@ export SLIMERJS_EXECUTABLE=${basedir}/tests/slimerjs-0.9.6/slimerjs
 cd ${basedir}/tests
 wget ${slimerjs_url}
 unzip -o slimerjs-0.9.6.zip
+# hack to make SlimerJS support newer Firefox versions.
+sed -i.bak -e "s/39/50/"  ${basedir}/tests/slimerjs-0.9.6/application.ini
 wget ${casperjs_url}
 unzip -o 1.1-beta3.zip
 cd casperjs-1.1-beta3

@@ -56,7 +56,7 @@ index e5e294c..0cda06c 100644
  #include "mem.h"
  #include "rand.h"
  #include "shared.h"
-@@ -1171,10 +1174,18 @@ void handle_unit_do_action(struct player *pplayer,
+@@ -1171,10 +1174,20 @@ void handle_unit_do_action(struct player *pplayer,
    case ACTION_FOUND_CITY:
      if (target_tile) {
        if (is_action_enabled_unit_on_tile(action_type,
@@ -65,13 +65,15 @@ index e5e294c..0cda06c 100644
 +
          ACTION_STARTED_UNIT_TILE(action_type, actor_unit, target_tile);
  
--        city_build(pplayer, actor_unit, name);
+-        return city_build(pplayer, actor_unit, name);
 +        /* Unescape city name, which has been escaped in Javascript. */
 +        unescaped_text = g_uri_unescape_string(name, NULL);
 +
 +        if (unescaped_text) {
-+          city_build(pplayer, actor_unit, unescaped_text);
++          return city_build(pplayer, actor_unit, unescaped_text);
 +          g_free(unescaped_text);
++        } else {
++          return FALSE;
 +        }
        } else if (unit_can_do_action(actor_unit, ACTION_FOUND_CITY)
                   && !unit_can_build_city(actor_unit)) {

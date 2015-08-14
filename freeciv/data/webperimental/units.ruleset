@@ -137,7 +137,7 @@ name          = _("?unitclass:Land")
 min_speed     = 1
 hp_loss_pct   = 0
 flags         = "TerrainSpeed", "DamageSlows", "CanOccupyCity", "BuildAnywhere",
-                "CollectRansom", "ZOC", "CanFortify", "CanPillage",
+                "CollectRansom", "CanFortify", "CanPillage",
                 "TerrainDefense", "KillCitizen", "Airliftable"
 
 [unitclass_sea]

@@ -12,6 +12,12 @@ Current TODO-list in prioritized order here:
 - There doesn't appear to be a way to rearrange the items in the worklist. If I have a long worklist, I have to remove everything if I want to insert something, then re-add everything back in.
 - Upgrade doesn't provide me an option if I want to upgrade given the cost of the upgrade before it happens.
 
+Various:
+- Show if a city is another player's capital. Could be based on solution to Freevic bug #23790
+- Draw fallout extras on the map
+- The trade route tab of the city tab should show if there is room for more trade routes
+- Support the spy action targeted sabotage
+- Support the spy action targeted steal tech
 
 Basically you can help improve Freeciv-web in any way you like, as long at it actually makes the game better! Other things to improve there:
 

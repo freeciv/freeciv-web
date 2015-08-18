@@ -14,7 +14,6 @@ Current TODO-list in prioritized order here:
 
 Various:
 - Show if a city is another player's capital. Could be based on solution to Freevic bug #23790
-- Draw fallout extras on the map
 - The trade route tab of the city tab should show if there is room for more trade routes
 - Support the spy action targeted sabotage
 - Support the spy action targeted steal tech

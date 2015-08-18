@@ -173,6 +173,10 @@ function fill_sprite_array(layer, ptile, pedge, pcorner, punit, pcity, citymode)
           sprite_array.push({"key" : "tx.pollution"}); 
         }
 
+        if (tile_has_extra(ptile, EXTRA_FALLOUT)) {
+          sprite_array.push({"key" : "tx.fallout"});
+        }
+
         sprite_array = sprite_array.concat(get_border_line_sprites(ptile));
 
       } 

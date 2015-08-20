@@ -31,7 +31,7 @@ resin_version="4.0.44"
 resin_url="http://www.caucho.com/download/resin-${resin_version}.tar.gz"
 tornado_url="https://pypi.python.org/packages/source/t/tornado/tornado-4.2.1.tar.gz"
 jansson_url="http://www.digip.org/jansson/releases/jansson-2.7.tar.bz2"
-slimerjs_url="http://download.slimerjs.org/releases/0.9.6/slimerjs-0.9.6.zip"   
+slimerjs_url="https://download.slimerjs.org/nightlies/0.10.0pre/slimerjs-0.10.0pre.zip"   
 casperjs_url="https://github.com/n1k0/casperjs/archive/1.1-beta3.zip"
 nginx_url="http://nginx.org/download/nginx-1.8.0.tar.gz"
 icu_url="http://download.icu-project.org/files/icu4c/55.1/icu4c-55_1-src.tgz"
@@ -130,12 +130,10 @@ cat ${basedir}/logs/*.log
 echo "============================================"
 echo "Installing SlimerJS and CasperJS for testing"
 export SLIMERJSLAUNCHER=/usr/bin/firefox
-export SLIMERJS_EXECUTABLE=${basedir}/tests/slimerjs-0.9.6/slimerjs
+export SLIMERJS_EXECUTABLE=${basedir}/tests/slimerjs-0.10.0pre/slimerjs
 cd ${basedir}/tests
 wget ${slimerjs_url}
-unzip -q slimerjs-0.9.6.zip
-# hack to make SlimerJS support newer Firefox versions.
-sed -i.bak -e "s/39/50/"  ${basedir}/tests/slimerjs-0.9.6/application.ini
+unzip -q slimerjs-0.10.0pre.zip
 wget ${casperjs_url}
 unzip -q 1.1-beta3.zip
 cd casperjs-1.1-beta3

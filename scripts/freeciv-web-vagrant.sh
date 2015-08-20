@@ -39,7 +39,7 @@ mysql_pass="vagrant"
 resin_version="4.0.44"
 resin_url="http://www.caucho.com/download/resin-${resin_version}.tar.gz"
 tornado_url="https://pypi.python.org/packages/source/t/tornado/tornado-4.2.1.tar.gz"
-slimerjs_url="http://download.slimerjs.org/releases/0.9.6/slimerjs-0.9.6.zip"  
+slimerjs_url="https://download.slimerjs.org/nightlies/0.10.0pre/slimerjs-0.10.0pre.zip"  
 casperjs_url="https://github.com/n1k0/casperjs/archive/1.1-beta3.zip"
 
 # Based on fresh install of Ubuntu 12.04
@@ -119,12 +119,11 @@ fi
 echo "============================================"
 echo "Installing SlimerJS and CasperJS for testing"
 export SLIMERJSLAUNCHER=/usr/bin/firefox
-export SLIMERJS_EXECUTABLE=${basedir}/tests/slimerjs-0.9.6/slimerjs
+export SLIMERJS_EXECUTABLE=${basedir}/tests/slimerjs-0.10.0pre/slimerjs
 cd ${basedir}/tests
-wget ${slimerjs_url}
-unzip -o slimerjs-0.9.6.zip
-# hack to make SlimerJS support newer Firefox versions.
-sed -i.bak -e "s/39/50/"  ${basedir}/tests/slimerjs-0.9.6/application.ini
+wget --no-check-certificate ${slimerjs_url}
+unzip -q slimerjs-0.10.0pre.zip
+
 wget ${casperjs_url}
 unzip -o 1.1-beta3.zip
 cd casperjs-1.1-beta3

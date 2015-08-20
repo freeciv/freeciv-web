@@ -132,7 +132,7 @@ echo "Installing SlimerJS and CasperJS for testing"
 export SLIMERJSLAUNCHER=/usr/bin/firefox
 export SLIMERJS_EXECUTABLE=${basedir}/tests/slimerjs-0.10.0pre/slimerjs
 cd ${basedir}/tests
-wget ${slimerjs_url}
+wget --no-check-certificate ${slimerjs_url}
 unzip -q slimerjs-0.10.0pre.zip
 wget ${casperjs_url}
 unzip -q 1.1-beta3.zip

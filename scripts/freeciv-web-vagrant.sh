@@ -89,6 +89,7 @@ sed -e "s/MYSQL_USER=root/MYSQL_USER=${mysql_user}/" -e "s/MYSQL_PASSWORD=change
 cp ${basedir}/publite2/settings.ini.dist ${basedir}/publite2/settings.ini
 
 echo "==== Building freeciv ===="
+dos2unix ${basedir}/freeciv/freeciv-web.project
 cd ${basedir}/freeciv && ./prepare_freeciv.sh
 cd freeciv && make install
 

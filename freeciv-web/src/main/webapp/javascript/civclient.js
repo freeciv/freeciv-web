@@ -1,14 +1,20 @@
-/********************************************************************** 
- Freeciv - Copyright (C) 2009 - Andreas Røsdal   andrearo@pvv.ntnu.no
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
+/**********************************************************************
+    Freeciv-web - the web version of Freeciv. http://play.freeciv.org/
+    Copyright (C) 2009-2015  The Freeciv-web project
 
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 ***********************************************************************/
 
 
@@ -29,8 +35,8 @@ var username = null;
 
 var fc_seedrandom = null;
 
-var music_list = [ "battle-epic", 
-                   "andrewbeck-ancient", 
+var music_list = [ "battle-epic",
+                   "andrewbeck-ancient",
                    "into_the_shadows",
                    "andrewbeck-stings",
                    "trap_a_space_odyssey_battle_for_the_planet",
@@ -40,7 +46,7 @@ var audio = null;
 var audio_enabled = false;
 
 /**************************************************************************
- Main starting point for Freeciv-web 
+ Main starting point for Freeciv-web
 **************************************************************************/
 $(document).ready(function() {
 
@@ -52,9 +58,9 @@ $(document).ready(function() {
 });
 
 /**************************************************************************
- This function is called on page load. 
+ This function is called on page load.
 **************************************************************************/
-function civclient_init() 
+function civclient_init()
 {
   $.blockUI.defaults['css']['backgroundColor'] = "#222";
   $.blockUI.defaults['css']['color'] = "#fff";
@@ -76,30 +82,30 @@ function civclient_init()
   control_init();
 
   timeoutTimerId = setInterval("update_timeout()", 1000);
-  
+
   update_game_status_panel();
   statusTimerId = setInterval("update_game_status_panel()", 6000);
-  
+
   if (overviewTimerId == -1) {
     overviewTimerId = setInterval("redraw_overview()", OVERVIEW_REFRESH);
   }
 
   motd_init();
 
-  // Tells the browser that you wish to perform an animation; this 
-  // requests that the browser schedule a repaint of the window for the 
+  // Tells the browser that you wish to perform an animation; this
+  // requests that the browser schedule a repaint of the window for the
   // next animation frame.
   window.requestAnimFrame = (function(){
-      return  window.requestAnimationFrame       || 
-              window.webkitRequestAnimationFrame || 
-              window.mozRequestAnimationFrame    || 
-              window.oRequestAnimationFrame      || 
-              window.msRequestAnimationFrame     || 
+      return  window.requestAnimationFrame       ||
+              window.webkitRequestAnimationFrame ||
+              window.mozRequestAnimationFrame    ||
+              window.oRequestAnimationFrame      ||
+              window.msRequestAnimationFrame     ||
               function(/* function */ callback, /* DOMElement */ element){
                 window.setTimeout(callback, MAPVIEW_REFRESH_INTERVAL);
               };
     })();
- 
+
   requestAnimFrame(update_map_canvas_check, mapview_canvas);
 
 
@@ -136,7 +142,7 @@ function civclient_init()
           }
         });
     audio = as[0];
- 
+
  });
 
 
@@ -147,12 +153,12 @@ function civclient_init()
 **************************************************************************/
 function init_common_intro_dialog() {
   if (observing) {
-    show_intro_dialog("Welcome to Freeciv-web", 
+    show_intro_dialog("Welcome to Freeciv-web",
       "You have joined the game as an observer. Please enter your name:");
-    $("#turn_done_button").button( "option", "disabled", true); 
+    $("#turn_done_button").button( "option", "disabled", true);
 
   } else if (is_small_screen()) {
-    show_intro_dialog("Welcome to Freeciv-web", 
+    show_intro_dialog("Welcome to Freeciv-web",
       "You are about to join the game. Please enter your name:");
   } else if ($.getUrlVar('action') == "load") {
     show_intro_dialog("Welcome to Freeciv-web",
@@ -173,7 +179,7 @@ function init_common_intro_dialog() {
       "play a singleplayer game against the Freeciv AI.<br> You can " +
       "start the game directly, or customize the game settings. " +
       "Please enter your name: ");
-  } 
+  }
 }
 
 /**************************************************************************
@@ -183,7 +189,7 @@ function chatbox_resized()
 {
   var newheight = $("#game_chatbox_panel").parent().height() - 50;
   $("#game_message_area").css("height", newheight);
-  
+
 }
 
 
@@ -195,7 +201,7 @@ function init_chatbox()
 
   chatbox_active = true;
 
-  $("#game_chatbox_panel").attr("title", "Messages");		
+  $("#game_chatbox_panel").attr("title", "Messages");
   $("#game_chatbox_panel").dialog({
 			bgiframe: true,
 			modal: false,
@@ -207,8 +213,8 @@ function init_chatbox()
 			position: {my: 'center bottom', at: 'center bottom', of: window},
 			close: function(event, ui) { chatbox_active = false;}
 		});
-	
-  $("#game_chatbox_panel").dialog('open');		
+
+  $("#game_chatbox_panel").dialog('open');
   $(".chatbox_dialog").css("top", "52px");
 
 
@@ -227,7 +233,7 @@ function init_chatbox()
 function add_chatbox_text(text)
 {
     var scrollDiv;
-    
+
     if (civclient_state <= C_S_PREPARING) {
       scrollDiv = document.getElementById('pregame_message_area');
       text = text.replace(/#FFFFFF/g, '#000000');
@@ -238,10 +244,10 @@ function add_chatbox_text(text)
     chatbox_text += text + "<br>";
 
     if (scrollDiv != null) {
-      scrollDiv.innerHTML = chatbox_text; 
+      scrollDiv.innerHTML = chatbox_text;
 
       var currentHeight = 0;
-        
+
       if (scrollDiv.scrollHeight > 0) {
         currentHeight = scrollDiv.scrollHeight;
       } else if (scrollDiv.offsetHeight > 0) {
@@ -264,7 +270,7 @@ function chatbox_clip_messages()
 {
   var max_chatbox_lines = 20;
   var scrollDiv;
-    
+
   if (civclient_state <= C_S_PREPARING) {
     scrollDiv = document.getElementById('pregame_message_area');
   } else {
@@ -277,15 +283,15 @@ function chatbox_clip_messages()
   for (var i = chat_lines.length - max_chatbox_lines; i < chat_lines.length; i++) {
     new_chatbox_text += chat_lines[i];
     if ( i < chat_lines.length - 1) new_chatbox_text += "<br>";
-  }	  
+  }
 
   chatbox_text = new_chatbox_text;
 
   if (scrollDiv != null) {
-    scrollDiv.innerHTML = chatbox_text; 
+    scrollDiv.innerHTML = chatbox_text;
 
     var currentHeight = 0;
-        
+
     if (scrollDiv.scrollHeight > 0) {
       currentHeight = scrollDiv.scrollHeight;
     } else if (scrollDiv.offsetHeight > 0) {
@@ -304,10 +310,10 @@ function chatbox_clip_messages()
 /**************************************************************************
  ...
 **************************************************************************/
-function chatbox_scroll_down () 
+function chatbox_scroll_down ()
 {
     var scrollDiv;
-    
+
     if (civclient_state <= C_S_PREPARING) {
       scrollDiv = document.getElementById('pregame_message_area');
     } else {
@@ -316,7 +322,7 @@ function chatbox_scroll_down ()
 
     if (scrollDiv != null) {
       var currentHeight = 0;
-        
+
       if (scrollDiv.scrollHeight > 0) {
         currentHeight = scrollDiv.scrollHeight;
       } else if (scrollDiv.offsetHeight > 0) {
@@ -352,8 +358,8 @@ function show_dialog_message(title, message) {
 				}
 			}
 		});
-	
-  $("#dialog").dialog('open');		
+
+  $("#dialog").dialog('open');
   $("#game_text_input").blur();
 
 }
@@ -366,7 +372,7 @@ function validate_username() {
   username = $("#username_req").val();
 
   var cleaned_username = username.replace(/[^a-zA-Z]/g,'');
- 
+
   if (username == null || username.length == 0) {
     $("#username_validation_result").html("Your name can't be empty.");
     return false;
@@ -405,25 +411,25 @@ function show_intro_dialog(title, message) {
 			bgiframe: true,
 			modal: true,
 			width: is_small_screen() ? "80%" : "60%",
-			buttons: 
+			buttons:
 			{
 				"Start Game" : function() {
 					autostart = true;
 					if (validate_username()) {
 						$("#dialog").dialog('close');
 					}
-				}, 
+				},
 				  "Customize Game": function() {
 					if (validate_username()) {
 					  $("#pregame_text_input").focus();
 					  $("#dialog").dialog('close');
 					}
 				}
-			}	
-			
+			}
+
 		});
 
-  if (($.getUrlVar('action') == "load" || $.getUrlVar('action') == "multi") 
+  if (($.getUrlVar('action') == "load" || $.getUrlVar('action') == "multi")
          && $.getUrlVar('load') != "tutorial") {
     $(".ui-dialog-buttonset button").first().hide();
   }
@@ -438,8 +444,8 @@ function show_intro_dialog(title, message) {
     $("#pregame_message_area").css("width", "73%");
     $("#observe_button").remove();
   }
-	
-  $("#dialog").dialog('open');		
+
+  $("#dialog").dialog('open');
 
   $('#dialog').keyup(function(e) {
     if (e.keyCode == 13) {
@@ -479,7 +485,7 @@ function update_timeout()
       }
       if (!is_touch_device()) $("#turn_done_button").tooltip({ disabled: false });
     }
-  } 
+  }
 }
 
 /**************************************************************************
@@ -495,7 +501,7 @@ function set_phase_start()
 **************************************************************************/
 function request_observe_game()
 {
-  var test_packet = {"pid" : packet_chat_msg_req, 
+  var test_packet = {"pid" : packet_chat_msg_req,
                      "message" : "/observe "};
   var myJSONText = JSON.stringify(test_packet);
   send_request(myJSONText);
@@ -522,7 +528,7 @@ function surrender_game()
 function send_surrender_game()
 {
   if (!client_is_observer()) {
-    var test_packet = {"pid" : packet_chat_msg_req, 
+    var test_packet = {"pid" : packet_chat_msg_req,
                        "message" : "/surrender "};
     var myJSONText = JSON.stringify(test_packet);
     send_request(myJSONText);
@@ -609,7 +615,7 @@ function show_auth_dialog(packet) {
 			bgiframe: true,
 			modal: true,
 			width: is_small_screen() ? "80%" : "60%",
-			buttons: 
+			buttons:
 			{
 				"Ok" : function() {
                                   var pwd_packet = {"pid" : packet_authentication_reply, "password" : $('#password_req').val()};
@@ -621,8 +627,8 @@ function show_auth_dialog(packet) {
 			}
 		});
 
- 	
-  $("#dialog").dialog('open');		
+
+  $("#dialog").dialog('open');
 
 
 }

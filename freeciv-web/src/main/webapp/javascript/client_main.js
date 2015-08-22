@@ -1,14 +1,20 @@
-/********************************************************************** 
- Freeciv - Copyright (C) 2009 - Andreas Røsdal   andrearo@pvv.ntnu.no
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
+/**********************************************************************
+    Freeciv-web - the web version of Freeciv. http://play.freeciv.org/
+    Copyright (C) 2009-2015  The Freeciv-web project
 
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 ***********************************************************************/
 
 
@@ -37,9 +43,9 @@ function set_client_state(newstate)
     switch (civclient_state) {
     case C_S_RUNNING:
       chatbox_text = " ";
-      $.unblockUI(); 
+      $.unblockUI();
       show_new_game_message();
-      
+
       set_client_page(PAGE_GAME);
       setup_window_size();
 
@@ -76,7 +82,7 @@ function can_client_change_view()
 {
   return ((client.conn.playing != null || client_is_observer())
       && (C_S_RUNNING == client_state()
-	      || C_S_OVER == client_state())); 
+	      || C_S_OVER == client_state()));
 }
 
 /**************************************************************************
@@ -97,14 +103,14 @@ function show_new_game_message()
     /* do nothing. */
 
   } else if (is_small_screen()) {
-    show_dialog_message("Welcome to Freeciv-web", 
+    show_dialog_message("Welcome to Freeciv-web",
       "You lead a great civilization. Your task is to conquer the world!\n" +
       "Click on units for giving them orders, and drag units on the map to move them.\n" +
       "Good luck, and have a lot of fun!");
 
   } else  {
     if (is_touch_device()) {
-      show_dialog_message("Welcome to Freeciv-web", 
+      show_dialog_message("Welcome to Freeciv-web",
       "Welcome to Freeciv-web.  You lead a great civilization.  Your\n" +
       "task is to conquer the world!  You should start by\n" +
       "exploring the land around you with your explorer,\n" +
@@ -115,7 +121,7 @@ function show_new_game_message()
       "Good luck, and have a lot of fun!");
 
     } else {
-      show_dialog_message("Welcome to Freeciv-web", 
+      show_dialog_message("Welcome to Freeciv-web",
       "Welcome to Freeciv-web.  You lead a great civilization.  Your\n" +
       "task is to conquer the world!  You should start by\n" +
       "exploring the land around you with your explorer,\n" +
@@ -126,7 +132,7 @@ function show_new_game_message()
 
     }
 
-  } 
+  }
 }
 
 /**************************************************************************
@@ -135,7 +141,7 @@ function show_new_game_message()
 function alert_war(player_no)
 {
   var pplayer = players[player_no];
-  show_dialog_message("War!", "You are now at war with the " 
+  show_dialog_message("War!", "You are now at war with the "
 	+ nations[pplayer['nation']]['adjective']
     + " leader " + pplayer['name'] + "!");
 }
@@ -158,7 +164,7 @@ function show_endgame_dialog()
 
 
 /**************************************************************************
- 
+
 **************************************************************************/
 function update_metamessage_on_gamestart()
 {

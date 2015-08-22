@@ -1,14 +1,20 @@
-/********************************************************************** 
- Freeciv - Copyright (C) 2009 - Andreas Røsdal   andrearo@pvv.ntnu.no
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
+/**********************************************************************
+    Freeciv-web - the web version of Freeciv. http://play.freeciv.org/
+    Copyright (C) 2009-2015  The Freeciv-web project
 
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 ***********************************************************************/
 
 
@@ -21,8 +27,8 @@ var tech_dialog_active = false;
 var tech_xscale = 1.2;
 var wikipedia_url = "http://en.wikipedia.org/wiki/";
 
-/* TECH_KNOWN is self-explanatory, TECH_PREREQS_KNOWN are those for which all 
- * requirements are fulfilled; all others (including those which can never 
+/* TECH_KNOWN is self-explanatory, TECH_PREREQS_KNOWN are those for which all
+ * requirements are fulfilled; all others (including those which can never
  * be reached) are TECH_UNKNOWN */
 var TECH_UNKNOWN = 0;
 var TECH_PREREQS_KNOWN = 1;
@@ -50,8 +56,8 @@ typedef int Tech_type_id;
   use Tech_type_id very widely, and don't use (-1) flag values. (?)
 */
 /* [more accurately]
- * Unlike most other indices, the Tech_type_id is widely used, because it 
- * so frequently passed to packet and scripting.  The client menu routines 
+ * Unlike most other indices, the Tech_type_id is widely used, because it
+ * so frequently passed to packet and scripting.  The client menu routines
  * sometimes add and substract these numbers.
  */
 var A_NONE = 0;
@@ -108,7 +114,7 @@ function player_invention_state(pplayer, tech_id)
 function init_tech_screen()
 {
   $("#technologies").width($(window).width() - 20);
-  
+
   if (is_tech_tree_init) return;
 
   tech_canvas = document.getElementById('tech_canvas');
@@ -116,7 +122,7 @@ function init_tech_screen()
   if ("mozImageSmoothingEnabled" in tech_canvas_ctx) {
     // if this Boolean value is false, images won't be smoothed when scaled. This property is true by default.
     tech_canvas_ctx.mozImageSmoothingEnabled = true;
-  } 
+  }
 
   if (is_small_screen()) {
     tech_canvas.width = Math.floor(tech_canvas.width * 0.6);
@@ -141,27 +147,27 @@ function update_tech_tree()
   for (var tech_id in techs) {
     var ptech = techs[tech_id];
     if (!(tech_id+'' in reqtree)) continue;
-    
+
     var sx = Math.floor(reqtree[tech_id+'']['x'] * tech_xscale);  //scale in X direction.
     var sy = reqtree[tech_id+'']['y'];
     for (var i = 0; i < ptech['req'].length; i++) {
       var rid = ptech['req'][i];
       if (rid == 0) continue;
-      
+
       var dx = Math.floor(reqtree[rid+'']['x'] * tech_xscale);  //scale in X direction.
       var dy = reqtree[rid+'']['y'];
-      
+
       tech_canvas_ctx.strokeStyle = 'rgb(0, 0, 0)';
       tech_canvas_ctx.lineWidth = 2;
 
-      tech_canvas_ctx.beginPath();  
-      tech_canvas_ctx.moveTo(sx, sy + hy);  
-      tech_canvas_ctx.lineTo(dx + hx, dy + hy);  
+      tech_canvas_ctx.beginPath();
+      tech_canvas_ctx.moveTo(sx, sy + hy);
+      tech_canvas_ctx.lineTo(dx + hx, dy + hy);
       tech_canvas_ctx.stroke();
-  
+
 
     }
-  
+
   }
 
   tech_canvas_ctx.lineWidth = 1;
@@ -169,32 +175,32 @@ function update_tech_tree()
   for (var tech_id in techs) {
     var ptech = techs[tech_id];
     if (!(tech_id+'' in reqtree)) continue;
-    
+
     var x = Math.floor(reqtree[tech_id+'']['x'] * tech_xscale)+2;  //scale in X direction.
-    var y = reqtree[tech_id+'']['y']+2;  
-    
+    var y = reqtree[tech_id+'']['y']+2;
+
     /* KNOWN TECHNOLOGY */
-    if (player_invention_state(client.conn.playing, ptech['id']) == TECH_KNOWN) {   
-        
+    if (player_invention_state(client.conn.playing, ptech['id']) == TECH_KNOWN) {
+
       var tag = ptech['graphic_str'];
       tech_canvas_ctx.fillStyle = 'rgb(255, 255, 255)';
       tech_canvas_ctx.fillRect(x-2, y-2, tech_item_width, tech_item_height);
       tech_canvas_ctx.strokeStyle = 'rgb(225, 225, 225)';
       tech_canvas_ctx.strokeRect(x-2, y-2, tech_item_width, tech_item_height);
       mapview_put_tile(tech_canvas_ctx, tag, x+1, y)
-           
+
       tech_canvas_ctx.font = canvas_text_font;
       tech_canvas_ctx.fillStyle = "rgba(0, 0, 0, 1)";
-      tech_canvas_ctx.fillText(ptech['name'], x + 50, y + 30);  
+      tech_canvas_ctx.fillText(ptech['name'], x + 50, y + 30);
 
       if (x > maxleft) maxleft = x;
-       
-      
+
+
     /* TECH WITH KNOWN PREREQS. */
     } else if (player_invention_state(client.conn.playing, ptech['id']) == TECH_PREREQS_KNOWN) {
       var bgcolor = is_tech_req_for_goal(ptech['id'], client.conn.playing['tech_goal']) ? "rgb(149, 37, 37)" : "rgb(70, 70, 70)";
       if (client.conn.playing['researching'] == ptech['id']) bgcolor = "rgb(255, 43, 0)";
-        
+
       var tag = ptech['graphic_str'];
       tech_canvas_ctx.fillStyle = bgcolor;
       tech_canvas_ctx.fillRect(x-2, y-2, tech_item_width, tech_item_height);
@@ -204,13 +210,13 @@ function update_tech_tree()
 
       tech_canvas_ctx.font = canvas_text_font;
       tech_canvas_ctx.fillStyle = "rgba(255, 255, 255, 1)";
-      tech_canvas_ctx.fillText(ptech['name'], x + 50, y + 30);  
-         
- 
+      tech_canvas_ctx.fillText(ptech['name'], x + 50, y + 30);
+
+
     /* UNKNOWN TECHNOLOGY. */
-    } else if (player_invention_state(client.conn.playing, ptech['id']) == TECH_UNKNOWN) { 
+    } else if (player_invention_state(client.conn.playing, ptech['id']) == TECH_UNKNOWN) {
       var bgcolor = is_tech_req_for_goal(ptech['id'], client.conn.playing['tech_goal']) ? "rgb(149, 37, 37)" : "rgb(70, 70, 70)";
-        
+
       var tag = ptech['graphic_str'];
       tech_canvas_ctx.fillStyle =  bgcolor;
       tech_canvas_ctx.fillRect(x-2, y-2, tech_item_width, tech_item_height);
@@ -218,21 +224,21 @@ function update_tech_tree()
       tech_canvas_ctx.strokeRect(x-2, y-2, tech_item_width, tech_item_height);
 
       mapview_put_tile(tech_canvas_ctx, tag, x+1, y)
-           
+
       tech_canvas_ctx.font = canvas_text_font;
       tech_canvas_ctx.fillStyle = "rgba(255, 255, 255, 1)";
-      tech_canvas_ctx.fillText(ptech['name'], x + 50, y + 30);  
- 
-    
+      tech_canvas_ctx.fillText(ptech['name'], x + 50, y + 30);
+
+
     }
-    
-    
+
+
   }
 
 }
 
 /**************************************************************************
- Determines if the technology 'check_tech_id' is a requirement 
+ Determines if the technology 'check_tech_id' is a requirement
  for reaching the technology 'goal_tech_id'.
 **************************************************************************/
 function is_tech_req_for_goal(check_tech_id, goal_tech_id)
@@ -257,7 +263,7 @@ function is_tech_req_for_goal(check_tech_id, goal_tech_id)
 }
 
 /**************************************************************************
- Determines if the technology 'check_tech_id' is a direct requirement 
+ Determines if the technology 'check_tech_id' is a direct requirement
  for reaching the technology 'next_tech_id'.
 **************************************************************************/
 function is_tech_req_for_tech(check_tech_id, next_tech_id)
@@ -284,7 +290,7 @@ function is_tech_req_for_tech(check_tech_id, next_tech_id)
 **************************************************************************/
 function update_tech_screen()
 {
-  
+
   if (client_is_observer()) {
     show_observer_tech_dialog();
     return;
@@ -298,14 +304,14 @@ function update_tech_screen()
   if (techs[client.conn.playing['researching']] != null) {
     research_goal_text = "Researching: " + techs[client.conn.playing['researching']]['name'];
   }
-  if (techs[client.conn.playing['tech_goal']] != null) {   
-    research_goal_text = research_goal_text + "<br>Research Goal: " 
+  if (techs[client.conn.playing['tech_goal']] != null) {
+    research_goal_text = research_goal_text + "<br>Research Goal: "
         + techs[client.conn.playing['tech_goal']]['name'];
   }
   $("#tech_goal_box").html(research_goal_text);
-  
-  $("#tech_progress_text").html("Research progress: " 
-		         + client.conn.playing['bulbs_researched'] 
+
+  $("#tech_progress_text").html("Research progress: "
+		         + client.conn.playing['bulbs_researched']
 			 + " / " + client.conn.playing['current_research_cost']);
 
   var pct_progress = 100 * (client.conn.playing['bulbs_researched'] / client.conn.playing['current_research_cost']);
@@ -319,7 +325,7 @@ function update_tech_screen()
     $("#tech_result_text").html("<span id='tech_advance_helptext'>" + get_advances_text(client.conn.playing['researching']) + "</span>");
     $("#tech_advance_helptext").tooltip({ disabled: false });
   }
-  
+
   $("#tech_tab_item").css("color", "#000000");
 
   /* scroll the tech tree, so that the current research targets are on the screen..  */
@@ -328,9 +334,9 @@ function update_tech_screen()
   if (!tech_dialog_active) {
     setTimeout("scroll_tech_tree();",10);
   }
- 
+
   tech_dialog_active = true;
- 
+
 }
 
 /**************************************************************************
@@ -339,7 +345,7 @@ function update_tech_screen()
 function get_advances_text(tech_id)
 {
   var ptech = techs[tech_id];
-      
+
   var adv_txt = "<span onclick='show_wikipedia_dialog(\"" +ptech['name'] + "\")'>" + ptech['name'] + "</span> allows ";
   var prunits = get_units_from_tech(tech_id);
   var pimprovements = get_improvements_from_tech(tech_id);
@@ -347,13 +353,13 @@ function get_advances_text(tech_id)
   for (var i = 0; i < prunits.length; i++) {
     if (i == 0) adv_txt += "building unit ";
     var punit = prunits[i];
-    adv_txt += "<span title='" + punit['helptext'] + "' onclick='show_wikipedia_dialog(\"" + punit['name'] + "\")'>" + punit['name'] + "</span>, "; 
+    adv_txt += "<span title='" + punit['helptext'] + "' onclick='show_wikipedia_dialog(\"" + punit['name'] + "\")'>" + punit['name'] + "</span>, ";
   }
 
   for (var i = 0; i < pimprovements.length; i++) {
     if (i == 0) adv_txt += "building ";
     var pimpr = pimprovements[i];
-    adv_txt += "<span title='" + pimpr['helptext'] + "' onclick='show_wikipedia_dialog(\"" + pimpr['name'] + "\")'>" + pimpr['name'] + "</span>, "; 
+    adv_txt += "<span title='" + pimpr['helptext'] + "' onclick='show_wikipedia_dialog(\"" + pimpr['name'] + "\")'>" + pimpr['name'] + "</span>, ";
   }
 
 
@@ -414,17 +420,17 @@ function tech_mapview_mouse_click(e)
   } else if (e.button) {
     rightclick = (e.button == 2);
   }
-  
+
    if (tech_canvas != null) {
     var tech_mouse_x = mouse_x - $("#technologies").offset().left + $("#technologies").scrollLeft();
     var tech_mouse_y = mouse_y - $("#technologies").offset().top + $("#technologies").scrollTop();
-    
+
     for (var tech_id in techs) {
       var ptech = techs[tech_id];
       if (!(tech_id+'' in reqtree)) continue;
-    
+
       var x = Math.floor(reqtree[tech_id+'']['x'] * tech_xscale)+2;  //scale in X direction.
-      var y = reqtree[tech_id+'']['y']+2;  
+      var y = reqtree[tech_id+'']['y']+2;
 
       if (is_small_screen()) {
         x = x * 0.6;
@@ -444,7 +450,7 @@ function tech_mapview_mouse_click(e)
     }
 
   }
- 
+
   update_tech_screen();
 
 }
@@ -463,21 +469,21 @@ function get_tech_infobox_html(tech_id)
   var tileset_y = tileset[tag][1];
   var width = tileset[tag][2];
   var height = tileset[tag][3];
-  var i = tileset[tag][4];  
+  var i = tileset[tag][4];
   var image_src = "/tileset/freeciv-web-tileset-" + tileset_name + "-" + i + ".png?ts=" + ts;
   if (is_small_screen()) {
-    infobox_html += "<div class='specific_tech' onclick='send_player_research(" + tech_id + ");' title='" 
-	   + get_advances_text(tech_id).replace(/(<([^>]+)>)/ig,"") + "'>"   
+    infobox_html += "<div class='specific_tech' onclick='send_player_research(" + tech_id + ");' title='"
+	   + get_advances_text(tech_id).replace(/(<([^>]+)>)/ig,"") + "'>"
 	   +  ptech['name']
 	   + "</div>";
   } else {
-    infobox_html += "<div class='specific_tech' onclick='send_player_research(" + tech_id + ");' title='" 
-	   + get_advances_text(tech_id).replace(/(<([^>]+)>)/ig,"") + "'>"   
-           + "<div class='tech_infobox_image' style='background: transparent url(" 
-           + image_src 
-	   + ");background-position:-" + tileset_x + "px -" + tileset_y 
+    infobox_html += "<div class='specific_tech' onclick='send_player_research(" + tech_id + ");' title='"
+	   + get_advances_text(tech_id).replace(/(<([^>]+)>)/ig,"") + "'>"
+           + "<div class='tech_infobox_image' style='background: transparent url("
+           + image_src
+	   + ");background-position:-" + tileset_x + "px -" + tileset_y
            + "px;  width: " + width + "px;height: " + height + "px;'"
-           + "'></div>" 
+           + "'></div>"
 	   +  ptech['name']
 	   + "</div>";
   }
@@ -495,7 +501,7 @@ function show_tech_gained_dialog(tech_gained_id)
 
   $("#tech_tab_item").css("color", "#aa0000");
   var pplayer = client.conn.playing;
-  var pnation = nations[pplayer['nation']]; 
+  var pnation = nations[pplayer['nation']];
   var tech = techs[tech_gained_id];
   if (tech == null) return;
 
@@ -531,7 +537,7 @@ function show_tech_gained_dialog(tech_gained_id)
 			buttons: {
 				"Show Technology Tree" : function() {
 				  $("#tabs").tabs("option", "active", 2);
-				      set_default_mapview_inactive(); 
+				      set_default_mapview_inactive();
 				      update_tech_screen();
     				      $("#tech_dialog").dialog('close');
 				},
@@ -541,8 +547,8 @@ function show_tech_gained_dialog(tech_gained_id)
 				}
 			}
 		});
-	
-  $("#tech_dialog").dialog('open');		
+
+  $("#tech_dialog").dialog('open');
   $("#game_text_input").blur();
   $("#tech_advance_helptext").tooltip({ disabled: false });
   $(".specific_tech").tooltip({ disabled: false });
@@ -555,14 +561,14 @@ function show_wikipedia_dialog(tech_name)
 {
   $("#tech_tab_item").css("color", "#aa0000");
 
-  var message = "<b>Wikipedia on <a href='" + wikipedia_url 
-	  + freeciv_wiki_docs[tech_name]['title'] 
-	  + "' target='_new'>" + freeciv_wiki_docs[tech_name]['title'] 
+  var message = "<b>Wikipedia on <a href='" + wikipedia_url
+	  + freeciv_wiki_docs[tech_name]['title']
+	  + "' target='_new'>" + freeciv_wiki_docs[tech_name]['title']
 	  + "</a></b><br>";
   if (freeciv_wiki_docs[tech_name]['image'] != null) {
     message += "<img id='wiki_image' src='" + freeciv_wiki_docs[tech_name]['image'] + "'><br>";
   }
- 
+
   message += freeciv_wiki_docs[tech_name]['summary'];
 
   // reset dialog page.
@@ -581,8 +587,8 @@ function show_wikipedia_dialog(tech_name)
 				}
 			}
 		});
-	
-  $("#wiki_dialog").dialog('open');		
+
+  $("#wiki_dialog").dialog('open');
   $("#wiki_dialog").css("max-height", $(window).height() - 100);
   $("#game_text_input").blur();
 }
@@ -599,9 +605,9 @@ function update_tech_dialog_cursor()
     for (var tech_id in techs) {
       var ptech = techs[tech_id];
       if (!(tech_id+'' in reqtree)) continue;
-    
+
       var x = Math.floor(reqtree[tech_id+'']['x'] * tech_xscale)+2;  //scale in X direction.
-      var y = reqtree[tech_id+'']['y']+2;  
+      var y = reqtree[tech_id+'']['y']+2;
 
       if (is_small_screen()) {
         x = x * 0.6;
@@ -615,7 +621,7 @@ function update_tech_dialog_cursor()
 	} else if (player_invention_state(client.conn.playing, ptech['id']) == TECH_UNKNOWN) {
           tech_canvas.style.cursor = "pointer";
         }
-      } 
+      }
     }
 }
 

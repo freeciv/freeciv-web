@@ -1,14 +1,20 @@
-/********************************************************************** 
- Freeciv - Copyright (C) 2009 - Andreas Røsdal   andrearo@pvv.ntnu.no
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
+/**********************************************************************
+    Freeciv-web - the web version of Freeciv. http://play.freeciv.org/
+    Copyright (C) 2009-2015  The Freeciv-web project
 
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 ***********************************************************************/
 
 
@@ -28,7 +34,7 @@ function set_client_page(page)
 {
 
   var new_page = page;
-  
+
 
   /* If the page remains the same, don't do anything. */
   if (old_page == new_page) {
@@ -37,7 +43,7 @@ function set_client_page(page)
 
   switch (old_page) {
   case -1:
-    $("#pregame_page").remove(); 
+    $("#pregame_page").remove();
     break;
   case PAGE_SCENARIO:
     break;
@@ -69,7 +75,7 @@ function set_client_page(page)
   case PAGE_NATION:
     break;
   case PAGE_GAME:
-    $("#game_page").show(); 
+    $("#game_page").show();
     /*reset_unit_table();
     enable_menus(TRUE);*/
     break;

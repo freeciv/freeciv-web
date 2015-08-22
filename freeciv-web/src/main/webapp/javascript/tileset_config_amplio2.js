@@ -1,14 +1,20 @@
-/********************************************************************** 
- Freeciv - Copyright (C) 2009 - Andreas Røsdal   andrearo@pvv.ntnu.no
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
+/**********************************************************************
+    Freeciv-web - the web version of Freeciv. http://play.freeciv.org/
+    Copyright (C) 2009-2015  The Freeciv-web project
 
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 ***********************************************************************/
 
 /* Amplio.tilespec ported to Javascript. */
@@ -43,7 +49,7 @@ var roadstyle = 0;
 // Fogstyle 2, darkness_style 4 : blended fog
 var fogstyle = 2;
 var darkness_style = 4;
- 
+
 // offset the flags by this amount when drawing units
 var unit_flag_offset_x = 25;
 var unit_flag_offset_y = 16;
@@ -153,7 +159,7 @@ ts_tiles['grassland']['is_blended'] = 1;
 ts_tiles['grassland']['num_layers'] = 1;
 ts_tiles['grassland']['layer0_match_type'] = "land";
 
-ts_tiles['hills'] = {}; 
+ts_tiles['hills'] = {};
 ts_tiles['hills']['is_blended'] = 1;
 ts_tiles['hills']['num_layers'] = 2;
 ts_tiles['hills']['layer0_match_type'] = "land";
@@ -199,7 +205,7 @@ ts_tiles['inaccessible']['layer0_match_type'] = "land";
 
 
 
-var tile_types_setup = 
+var tile_types_setup =
 {
 "l0.lake":	{"match_style":MATCH_PAIR,"sprite_type":CELL_CORNER,"mine_tag":"(null)","match_indices":2,"match_index":[0,2],"dither":false},
 "l0.coast":	{"match_style":MATCH_FULL,"sprite_type":CELL_CORNER,"mine_tag":"(null)","match_indices":3,"match_index":[0,1,2],"dither":false},
@@ -226,7 +232,7 @@ var tile_types_setup =
 
 
 
-var cellgroup_map = 
+var cellgroup_map =
 {"coast.0":"t.l0.cellgroup_s_s_s_s",
 "coast.1":"t.l0.cellgroup_s_s_s_s",
 "coast.2":"t.l0.cellgroup_s_s_s_s",

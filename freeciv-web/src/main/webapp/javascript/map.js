@@ -1,14 +1,20 @@
-/********************************************************************** 
- Freeciv - Copyright (C) 2009 - Andreas Røsdal   andrearo@pvv.ntnu.no
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
+/**********************************************************************
+    Freeciv-web - the web version of Freeciv. http://play.freeciv.org/
+    Copyright (C) 2009-2015  The Freeciv-web project
 
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 ***********************************************************************/
 
 
@@ -59,7 +65,7 @@ var DIR_DY = [ -1, -1, -1, 0, 0, 1, 1, 1 ];
 /****************************************************************************
   ...
 ****************************************************************************/
-function topo_has_flag(flag) 
+function topo_has_flag(flag)
 {
   return ((map['topology_id'] & (flag)) != 0);
 }
@@ -98,7 +104,7 @@ function map_allocate()
   /* TODO: generate_map_indices(); */
 
   map['startpos_table'] = {};
-  
+
   init_overview();
 }
 
@@ -107,7 +113,7 @@ function map_allocate()
 ****************************************************************************/
 function tile_init(tile)
 {
-  tile['known'] = null;  /* tile_known in C side */ 
+  tile['known'] = null;  /* tile_known in C side */
   tile['seen'] = {};     /* tile_seen in C side */
   tile['specials'] = [];
   tile['resource'] = null;
@@ -131,7 +137,7 @@ function map_init_topology(set_sizes)
   if (!set_sizes && is_server()) {
     /* skip this, since webclient is a client. */
   }
-  
+
   /* sanity check for iso topologies*/
   /*assert(!MAP_IS_ISOMETRIC || (map.ysize % 2) == 0);*/
 
@@ -215,7 +221,7 @@ function is_cardinal_dir(dir)
 ****************************************************************************/
 function map_pos_to_tile(x, y)
 {
-  if (x >= map['xsize']) y -= 1;  
+  if (x >= map['xsize']) y -= 1;
   else if (x < 0) y += 1;
   return tiles[x + y * map['xsize']];
 }
@@ -229,44 +235,44 @@ function index_to_tile(index)
 }
 
 /****************************************************************************
-  Obscure math.  See explanation in doc/HACKING. 
+  Obscure math.  See explanation in doc/HACKING.
 ****************************************************************************/
-function NATIVE_TO_MAP_POS(nat_x, nat_y)                     
-{  							    
+function NATIVE_TO_MAP_POS(nat_x, nat_y)
+{
     var pmap_x = Math.floor(((nat_y) + ((nat_y) & 1)) / 2 + (nat_x));
     var pmap_y = Math.floor(nat_y - pmap_x + map['xsize']);
-    return {'map_x' : pmap_x, 'map_y' : pmap_y};                           
+    return {'map_x' : pmap_x, 'map_y' : pmap_y};
 }
 
 /****************************************************************************
   ...
 ****************************************************************************/
-function MAP_TO_NATIVE_POS(map_x, map_y)                     
-{   
+function MAP_TO_NATIVE_POS(map_x, map_y)
+{
    var pnat_y = Math.floor(map_x + map_y - map['xsize']);
    var pnat_x = Math.floor((2 * map_x - pnat_y - (pnat_y & 1)) / 2);
-   return {'nat_y': pnat_y, 'nat_x': pnat_x};          
-}  
+   return {'nat_y': pnat_y, 'nat_x': pnat_x};
+}
 
 /****************************************************************************
   ...
 ****************************************************************************/
-function NATURAL_TO_MAP_POS(nat_x, nat_y)                    
-{   
-   var pmap_x = Math.floor(((nat_y) + (nat_x)) / 2);                                  
+function NATURAL_TO_MAP_POS(nat_x, nat_y)
+{
+   var pmap_x = Math.floor(((nat_y) + (nat_x)) / 2);
    var pmap_y = Math.floor(nat_y - pmap_x + map['xsize']);
-   return {'map_x' : pmap_x, 'map_y' : pmap_y};                          
-}  
+   return {'map_x' : pmap_x, 'map_y' : pmap_y};
+}
 
 /****************************************************************************
   ...
 ****************************************************************************/
-function MAP_TO_NATURAL_POS(map_x, map_y)                    
-{							    
-    var pnat_y = Math.floor((map_x) + (map_y) - map['xsize']);                            
+function MAP_TO_NATURAL_POS(map_x, map_y)
+{
+    var pnat_y = Math.floor((map_x) + (map_y) - map['xsize']);
     var pnat_x = Math.floor(2 * (map_x) - pnat_y);
-    
-    return {'nat_y' : pnat_y, 'nat_x' : pnat_x};                                  
+
+    return {'nat_y' : pnat_y, 'nat_x' : pnat_x};
 }
 
 /****************************************************************************
@@ -307,7 +313,7 @@ function dir_get_name(dir)
   case DIR8_NORTHWEST:
     return "NW";
   };
-  
+
   return "[Undef]";
 }
 
@@ -335,7 +341,7 @@ function dir_cw(dir)
   case DIR8_NORTHWEST:
     return DIR8_NORTH;
   };
-  
+
   return -1;
 }
 

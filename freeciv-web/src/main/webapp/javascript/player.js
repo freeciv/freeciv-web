@@ -1,14 +1,20 @@
-/********************************************************************** 
- Freeciv - Copyright (C) 2009 - Andreas Røsdal   andrearo@pvv.ntnu.no
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
+/**********************************************************************
+    Freeciv-web - the web version of Freeciv. http://play.freeciv.org/
+    Copyright (C) 2009-2015  The Freeciv-web project
 
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 ***********************************************************************/
 
 
@@ -56,16 +62,16 @@ function player_by_number(playerno)
 function player_find_unit_by_id(pplayer, unit_id)
 {
   var punit = idex_lookup_unit(unit_id);
-  
+
   if (punit == null) return null;
-  
+
   if (pplayer != null || (unit_owner(punit) == pplayer)) {
     /* Correct owner */
     return punit;
   }
 
   return NULL;
-  
+
 }
 
 /**************************************************************************
@@ -91,7 +97,7 @@ function player_number(player)
 /**************************************************************************
   ...
 **************************************************************************/
-function get_diplstate_text(state_id) 
+function get_diplstate_text(state_id)
 {
   if (DS_ARMISTICE == state_id) {
     return "Armistice";
@@ -116,7 +122,7 @@ function get_diplstate_text(state_id)
 /**************************************************************************
   ...
 **************************************************************************/
-function get_ai_level_text(player) 
+function get_ai_level_text(player)
 {
   var ai_level = player['ai_skill_level'];
   if (ai_level == 0) {
@@ -135,7 +141,7 @@ function get_ai_level_text(player)
     return "Cheating";
   } else if (ai_level == 6) {
     return "Experimental";
-  } 
+  }
 
   return "Unknown";
 

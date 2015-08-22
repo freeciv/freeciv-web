@@ -1,14 +1,20 @@
-/********************************************************************** 
- Freeciv - Copyright (C) 2009 - Andreas Røsdal   andrearo@pvv.ntnu.no
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
+/**********************************************************************
+    Freeciv-web - the web version of Freeciv. http://play.freeciv.org/
+    Copyright (C) 2009-2015  The Freeciv-web project
 
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 ***********************************************************************/
 
 
@@ -50,7 +56,7 @@ function network_init()
        civserverport = request.getResponseHeader('port');
        var connect_result = request.getResponseHeader('result');
        if (civserverport != null && connect_result == "success") {
-         websocket_init(); 
+         websocket_init();
          load_game_check();
 
        } else {
@@ -58,8 +64,8 @@ function network_init()
        }
    },
    error: function (request, textStatus, errorThrown) {
-	show_dialog_message("Network error", "Unable to communicate with civclientlauncher servlet . Error: " 
-		+ textStatus + " " + errorThrown + " " + request.getResponseHeader('result')); 
+	show_dialog_message("Network error", "Unable to communicate with civclientlauncher servlet . Error: "
+		+ textStatus + " " + errorThrown + " " + request.getResponseHeader('result'));
    }
   });
 
@@ -95,13 +101,13 @@ function websocket_init()
   };
 
   ws.onclose = function (event) {
-   console.info("WebSocket connection closed, code+reason: " + event.code + ", " + event.reason); 
+   console.info("WebSocket connection closed, code+reason: " + event.code + ", " + event.reason);
   };
 
   ws.onerror = function (evt) {
-   show_dialog_message("Network error", "A problem occured with the " 
-                       + document.location.protocol + " WebSocket connection to the server: " + ws.url); 
-   console.error("WebSocket error: Unable to communicate with server using " 
+   show_dialog_message("Network error", "A problem occured with the "
+                       + document.location.protocol + " WebSocket connection to the server: " + ws.url);
+   console.error("WebSocket error: Unable to communicate with server using "
                  + document.location.protocol + " WebSockets. Error: " + evt);
   };
 }
@@ -118,7 +124,7 @@ function network_stop()
 /****************************************************************************
   Sends a request to the server, with a JSON packet.
 ****************************************************************************/
-function send_request(packet_payload) 
+function send_request(packet_payload)
 {
   if (ws != null) {
     ws.send(packet_payload);
@@ -148,7 +154,7 @@ function ping_check()
 {
   var time_since_last_ping = new Date().getTime() - ping_last;
   if (time_since_last_ping > pingtime_check) {
-    console.log("Error: Missing PING message from server, " 
+    console.log("Error: Missing PING message from server, "
                 + "indicates server connection problem.");
   }
 }

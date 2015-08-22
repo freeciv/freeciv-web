@@ -1,14 +1,20 @@
-/********************************************************************** 
- Freeciv - Copyright (C) 2009 - Andreas Røsdal   andrearo@pvv.ntnu.no
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
+/**********************************************************************
+    Freeciv-web - the web version of Freeciv. http://play.freeciv.org/
+    Copyright (C) 2009-2015  The Freeciv-web project
 
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 ***********************************************************************/
 
 
@@ -31,11 +37,11 @@ function mapview_mouse_click(e)
     rightclick = (e.button == 2);
     middleclick = (e.button == 1 || e.button == 4);
   }
-  
+
   if (!rightclick && !middleclick) {
     /* Left mouse button*/
     action_button_pressed(mouse_x, mouse_y, SELECT_POPUP);
-  } 
+  }
 
 }
 
@@ -63,7 +69,7 @@ function mapview_mouse_down(e)
     setTimeout("check_mouse_drag_unit(" + mouse_x + "," + mouse_y + ");", 200);
   } else if (middleclick || e['altKey']) {
     popit();
-    return false; 
+    return false;
   } else {
     release_right_button(mouse_x, mouse_y);
   }
@@ -75,7 +81,7 @@ function mapview_mouse_down(e)
 ****************************************************************************/
 function mapview_touch_start(e)
 {
-  e.preventDefault(); 
+  e.preventDefault();
 
   touch_start_x = e.originalEvent.touches[0].pageX - $('#canvas').position().left;
   touch_start_y = e.originalEvent.touches[0].pageY - $('#canvas').position().top;
@@ -100,7 +106,7 @@ function mapview_touch_move(e)
 
   var diff_x = (touch_start_x - mouse_x) * 2;
   var diff_y = (touch_start_y - mouse_y) * 2;
- 
+
   touch_start_x = mouse_x;
   touch_start_y = mouse_y;
 
@@ -138,7 +144,7 @@ function city_mapview_mouse_click(e)
   } else if (e.button) {
     rightclick = (e.button == 2);
   }
-  
+
   if (!rightclick) {
     city_action_button_pressed(mouse_x, mouse_y);
   }
@@ -224,7 +230,7 @@ function recenter_button_pressed(canvas_x, canvas_y)
   var big_map_size = 24;
   var ptile = canvas_pos_to_tile(canvas_x, canvas_y);
   var orig_tile = ptile;
-  
+
   /* Prevent the user from scrolling outside the map. */
   if (ptile != null && ptile['y'] > (map['ysize'] - map_scroll_border)
       && map['xsize'] > big_map_size && map['ysize'] > big_map_size) {
@@ -237,7 +243,7 @@ function recenter_button_pressed(canvas_x, canvas_y)
 
   if (can_client_change_view() && ptile != null && orig_tile != null) {
     var sunit = find_visible_unit(orig_tile);
-    if (!client_is_observer() && sunit != null 
+    if (!client_is_observer() && sunit != null
         && sunit['owner'] == client.conn.playing.playerno) {
       /* the user right-clicked on own unit, show context menu instead of recenter. */
       set_unit_focus(sunit);
@@ -259,7 +265,7 @@ function popit()
 {
   var ptile = canvas_pos_to_tile(mouse_x, mouse_y);
   if (ptile == null) return;
-  
+
   popit_req(ptile);
 
 }

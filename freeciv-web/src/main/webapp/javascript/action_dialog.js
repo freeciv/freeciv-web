@@ -1,14 +1,20 @@
-/********************************************************************** 
- Freeciv - Copyright (C) 2009-2010 - Andreas Røsdal   andrearo@pvv.ntnu.no
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
+/**********************************************************************
+    Freeciv-web - the web version of Freeciv. http://play.freeciv.org/
+    Copyright (C) 2009-2015  The Freeciv-web project
 
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 ***********************************************************************/
 
 
@@ -309,13 +315,13 @@ function popup_action_selection(actor_unit, action_probabilities,
 			bgiframe: true,
 			modal: true,
 			width: "350"});
-	
-  $(id).dialog('open');		
+
+  $(id).dialog('open');
   $(".act_sel_button").button();
-  
+
 
   $("#act_sel_cancel" + actor_unit['id']).click(function() {
-    $(id).remove();		
+    $(id).remove();
   });
 
   if (action_probabilities[ACTION_ESTABLISH_EMBASSY] != 0) {
@@ -362,7 +368,7 @@ function popup_action_selection(actor_unit, action_probabilities,
 
   if (action_probabilities[ACTION_SPY_STEAL_TECH] != 0) {
     $("#act_sel_tech" + actor_unit['id']).click(function() {
-      var packet = {"pid" : packet_unit_do_action, 
+      var packet = {"pid" : packet_unit_do_action,
                     "actor_id" : actor_unit['id'],
                     "target_id": target_city['id'],
                     "value" : 0,

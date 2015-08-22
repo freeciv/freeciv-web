@@ -1,25 +1,31 @@
-/********************************************************************** 
- Freeciv - Copyright (C) 2009 - Andreas Røsdal   andrearo@pvv.ntnu.no
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
+/**********************************************************************
+    Freeciv-web - the web version of Freeciv. http://play.freeciv.org/
+    Copyright (C) 2009-2015  The Freeciv-web project
 
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 ***********************************************************************/
 
 
 var mapview_canvas_ctx = null;
-var mapview_canvas = null; 
+var mapview_canvas = null;
 var buffer_canvas_ctx = null;
-var buffer_canvas = null; 
+var buffer_canvas = null;
 var city_canvas_ctx = null;
-var city_canvas = null; 
+var city_canvas = null;
 
-var tileset_images = []; 
+var tileset_images = [];
 var sprites = {};
 var loaded_images = 0;
 
@@ -29,7 +35,7 @@ mapview_slide['active'] = false;
 mapview_slide['dx'] = 0;
 mapview_slide['dy'] = 0;
 mapview_slide['i'] = 0;
-mapview_slide['max'] = 100; 
+mapview_slide['max'] = 100;
 mapview_slide['slide_time'] = 700;
 
 var height_offset = 67;
@@ -68,7 +74,7 @@ function init_mapview()
   }).fail(function() {
     console.error("Unable to load tileset spec. Run Freeciv-img-extract.");
   });
- 
+
   mapview_canvas = document.getElementById('canvas');
   mapview_canvas_ctx = mapview_canvas.getContext("2d");
   buffer_canvas = document.createElement('canvas');
@@ -77,15 +83,15 @@ function init_mapview()
   if ("mozImageSmoothingEnabled" in mapview_canvas_ctx) {
     // if this Boolean value is false, images won't be smoothed when scaled. This property is true by default.
     mapview_canvas_ctx.mozImageSmoothingEnabled = false;
-  } 
-  
+  }
+
   dashedSupport = ("setLineDash" in mapview_canvas_ctx);
 
-  setup_window_size();  
+  setup_window_size();
 
   mapview['gui_x0'] = 0;
   mapview['gui_y0'] = 0;
-    
+
 
 
   /* Initialize fog array. */
@@ -102,7 +108,7 @@ function init_mapview()
 	  k = Math.floor(k / 3);
 
       buf += "_" + ids[values[j]];
-	
+
     }
 
     fullfog[i] = buf;
@@ -110,7 +116,7 @@ function init_mapview()
 
 
   orientation_changed();
-  
+
   init_sprites();
 
 }
@@ -119,10 +125,10 @@ function init_mapview()
 /**************************************************************************
   ...
 **************************************************************************/
-function setup_window_size () 
+function setup_window_size ()
 {
-  var winWidth = $(window).width(); 
-  var winHeight = $(window).height(); 
+  var winWidth = $(window).width();
+  var winHeight = $(window).height();
 
   mapview_canvas.width = winWidth - width_offset;
   mapview_canvas.height = winHeight - height_offset;
@@ -130,7 +136,7 @@ function setup_window_size ()
   buffer_canvas.height = Math.floor(mapview_canvas.height * 1.5);
 
   mapview['width'] = winWidth - width_offset;
-  mapview['height'] = winHeight - height_offset; 
+  mapview['height'] = winHeight - height_offset;
   mapview['store_width'] = winWidth - width_offset;
   mapview['store_height'] = winHeight - height_offset;
 
@@ -146,10 +152,10 @@ function setup_window_size ()
   $("#pregame_player_list").height( mapview['height'] - 80);
   $("#technologies").height( mapview['height'] - 50);
   $("#technologies").width( mapview['width'] - 20);
-  
+
   $("#nations").height( mapview['height'] - 100);
   $("#nations").width( mapview['width']);
-  
+
   $("#city_viewport").height( mapview['height'] - 20);
 
   var i = 0;
@@ -160,7 +166,7 @@ function setup_window_size ()
   $("#civ_tab").children().html("Government")
 
   $("#opt_tab").show();
-  $("#players_tab").show(); 
+  $("#players_tab").show();
   $("#freeciv_logo").show();
   $("#tabs-hel").hide();
 
@@ -184,7 +190,7 @@ function setup_window_size ()
 
     if (i == 12) $("#opt_tab").hide();
     if (i == 13) $("#tabs-hel").hide();
-    if (i == 14) $("#players_tab").hide(); 
+    if (i == 14) $("#players_tab").hide();
 
     if (i == 15) break;
 
@@ -207,9 +213,9 @@ function setup_window_size ()
   }
 
   if (overview_active) init_overview();
-  if (unitpanel_active) init_game_unit_panel(); 
+  if (unitpanel_active) init_game_unit_panel();
 
-	
+
 }
 
 function sum_width()
@@ -223,10 +229,10 @@ function sum_width()
 /**************************************************************************
   ...
 **************************************************************************/
-function is_small_screen() 
+function is_small_screen()
 {
-  var winWidth = $(window).width(); 
-  var winHeight = $(window).height(); 
+  var winWidth = $(window).width();
+  var winHeight = $(window).height();
 
   if (winWidth <= 640 || winHeight <= 640) {
     return true;
@@ -246,12 +252,12 @@ function init_sprites()
 
   for (var i = 0; i < tileset_image_count; i++) {
     var tileset_image = new Image();
-    tileset_image.onload = preload_check; 
-    tileset_image.src = '/tileset/freeciv-web-tileset-' 
+    tileset_image.onload = preload_check;
+    tileset_image.src = '/tileset/freeciv-web-tileset-'
                         + tileset_name + '-' + i + '.png?ts=' + ts;
     tileset_images[i] = tileset_image;
   }
- 
+
 }
 
 /**************************************************************************
@@ -271,7 +277,7 @@ function preload_check()
 /**************************************************************************
   ...
 **************************************************************************/
-function init_cache_sprites() 
+function init_cache_sprites()
 {
  try {
 
@@ -279,7 +285,7 @@ function init_cache_sprites()
     swal("Tileset not generated correctly. Run sync.sh in "
           + "freeciv-img-extract and recompile.");
     return;
-  }  
+  }
 
   for (var tile_tag in tileset) {
     var x = tileset[tile_tag][0];
@@ -293,7 +299,7 @@ function init_cache_sprites()
     newCanvas.width = w;
     var newCtx = newCanvas.getContext('2d');
 
-    newCtx.drawImage(tileset_images[i], x, y, 
+    newCtx.drawImage(tileset_images[i], x, y,
                        w, h, 0, 0, w, h);
     sprites[tile_tag] = newCanvas;
 
@@ -339,10 +345,10 @@ function mapview_put_tile(pcanvas, tag, canvas_x, canvas_y) {
   if (sprites[tag] == null) {
     //console.log("Missing sprite " + tag);
     return;
-  } 
+  }
 
   pcanvas.drawImage(sprites[tag], canvas_x, canvas_y);
-             
+
 }
 
 /****************************************************************************
@@ -368,35 +374,35 @@ function mapview_put_city_bar(pcanvas, city, canvas_x, canvas_y) {
   var size_measure = pcanvas.measureText(size);
 
   pcanvas.fillStyle = "rgba(0, 0, 0, 0.5)";
-  pcanvas.fillRect (canvas_x - Math.floor(txt_measure.width / 2) - 14, canvas_y - 17, 
+  pcanvas.fillRect (canvas_x - Math.floor(txt_measure.width / 2) - 14, canvas_y - 17,
                     txt_measure.width + 20, 20);
 
   pcanvas.fillStyle = color;
-  pcanvas.fillRect (canvas_x + Math.floor(txt_measure.width / 2) + 5, canvas_y - 17, 
+  pcanvas.fillRect (canvas_x + Math.floor(txt_measure.width / 2) + 5, canvas_y - 17,
                     size_measure.width + 8, 20);
 
   pcanvas.fillStyle = "rgba(0, 0, 0, 1)";
-  pcanvas.fillText(size, canvas_x + Math.floor(txt_measure.width / 2) + 10, canvas_y + 1);  
+  pcanvas.fillText(size, canvas_x + Math.floor(txt_measure.width / 2) + 10, canvas_y + 1);
 
   pcanvas.fillStyle = "rgba(255, 255, 255, 1)";
-  pcanvas.fillText(text, canvas_x - Math.floor(txt_measure.width / 2), canvas_y - 1);  
+  pcanvas.fillText(text, canvas_x - Math.floor(txt_measure.width / 2), canvas_y - 1);
 
-  pcanvas.fillText(size, canvas_x + Math.floor(txt_measure.width / 2) + 8, canvas_y - 1);  
+  pcanvas.fillText(size, canvas_x + Math.floor(txt_measure.width / 2) + 8, canvas_y - 1);
 
-  var city_flag = get_city_flag_sprite(city);  
-  pcanvas.drawImage(sprites[city_flag['key']], 
+  var city_flag = get_city_flag_sprite(city);
+  pcanvas.drawImage(sprites[city_flag['key']],
               canvas_x - Math.floor(txt_measure.width / 2) - 45, canvas_y - 17);
 
-  pcanvas.drawImage(sprites[get_city_occupied_sprite(city)], 
+  pcanvas.drawImage(sprites[get_city_occupied_sprite(city)],
               canvas_x - Math.floor(txt_measure.width / 2) - 12, canvas_y - 16);
 
   pcanvas.strokeStyle = color;
   pcanvas.lineWidth = 1.5;
-  pcanvas.beginPath(); 
+  pcanvas.beginPath();
   pcanvas.moveTo(canvas_x - Math.floor(txt_measure.width / 2) - 46, canvas_y - 18);
-  pcanvas.lineTo(canvas_x + Math.floor(txt_measure.width / 2) + size_measure.width + 13, 
+  pcanvas.lineTo(canvas_x + Math.floor(txt_measure.width / 2) + size_measure.width + 13,
                  canvas_y - 18);
-  pcanvas.moveTo(canvas_x + Math.floor(txt_measure.width / 2) + size_measure.width + 13, 
+  pcanvas.moveTo(canvas_x + Math.floor(txt_measure.width / 2) + size_measure.width + 13,
                  canvas_y + 4);
   pcanvas.lineTo(canvas_x - Math.floor(txt_measure.width / 2) - 46, canvas_y + 4);
   pcanvas.lineTo(canvas_x - Math.floor(txt_measure.width / 2) - 46, canvas_y - 18);
@@ -458,7 +464,7 @@ function mapview_put_border_line(pcanvas, dir, color, canvas_x, canvas_y) {
   if (dashedSupport) {
     pcanvas.setLineDash([]);
   }
-    
+
 }
 
 /**************************************************************************
@@ -473,7 +479,7 @@ function mapview_put_goto_line(pcanvas, dir, canvas_x, canvas_y) {
 
   pcanvas.strokeStyle = '#f00';
   pcanvas.lineWidth = 2;
-  pcanvas.beginPath(); 
+  pcanvas.beginPath();
   pcanvas.moveTo(x0, y0);
   pcanvas.lineTo(x1, y1);
   pcanvas.stroke();
@@ -492,18 +498,18 @@ function mapview_put_goto_line(pcanvas, dir, canvas_x, canvas_y) {
 **************************************************************************/
 function update_unit_info_label(punits)
 {
-  
+
   var unit_info_html = "";
-  
+
   for (var i = 0; i < punits.length; i++) {
     var punit = punits[i];
     var ptype = unit_type(punit);
     var sprite = get_unit_image_sprite(punit);
-    
+
     unit_info_html += "<div id='unit_info_div'><div id='unit_info_image' onclick='set_unit_focus_and_redraw(units[" + punit['id'] + "])' "
-	   + " style='background: transparent url(" 
+	   + " style='background: transparent url("
            + sprite['image-src'] +
-           ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y'] 
+           ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y']
            + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px;'"
            + "'></div>";
     unit_info_html += "<div id='unit_text_details'><b>" + ptype['name'] + "</b><br>"
@@ -518,17 +524,17 @@ function update_unit_info_label(punits)
 
     unit_info_html += get_unit_moves_left(punit);
     unit_info_html += "<br>";
-    unit_info_html += "<div style='font-size: 80%;'><span title='Attack strength'>A:" + ptype['attack_strength'] 
-    + "</span> <span title='Defense strength'>D:" + ptype['defense_strength'] 
-    + "</span> <span title='Firepower'>F:" + ptype['firepower']  
-    + "</span> <span title='Health points'>H:" 
+    unit_info_html += "<div style='font-size: 80%;'><span title='Attack strength'>A:" + ptype['attack_strength']
+    + "</span> <span title='Defense strength'>D:" + ptype['defense_strength']
+    + "</span> <span title='Firepower'>F:" + ptype['firepower']
+    + "</span> <span title='Health points'>H:"
     + ptype['hp'] + "</span>";
     unit_info_html += "</div></div></div>";
-    
+
   }
-  
+
   $("#game_unit_info").html(unit_info_html);
-  
+
 }
 
 
@@ -545,22 +551,22 @@ function update_unit_info_label(punits)
 function update_select_unit_dialog(punits)
 {
   var unit_info_html = "<div><b>Select a unit:</b></div>";
-  
+
   for (var i = 0; i < punits.length; i++) {
     var punit = punits[i];
-    
+
     var sprite = get_unit_image_sprite(punit);
-    
-    unit_info_html += "<div id='game_unit_list_item' style='cursor: pointer; background: transparent url(" 
+
+    unit_info_html += "<div id='game_unit_list_item' style='cursor: pointer; background: transparent url("
     + sprite['image-src'] +
-    ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y'] 
+    ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y']
        + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px;float:left; '"
        + " onclick='set_unit_focus_and_activate(units[" + punit['id'] + "])'"
        +"></div>";
   }
-  
+
   $("#game_unit_info").html(unit_info_html);
-  
+
   $("#game_unit_orders_default").hide();
 }
 
@@ -576,7 +582,7 @@ function set_city_mapview_active()
   mapview_canvas_ctx = city_canvas.getContext("2d");
 
   mapview['width'] = 350;
-  mapview['height'] = 175; 
+  mapview['height'] = 175;
   mapview['store_width'] = 350;
   mapview['store_height'] = 175;
 

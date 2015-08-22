@@ -3,7 +3,8 @@
 
  This test is run automatically when setting up Vagrant or TravisCI installation. 
 
- Freeciv-web requires CasperJS 1.1-beta3, SlimerJS git master (version 0.9.5 will not work), xvfb (for headless tests).
+ Freeciv-web requires CasperJS 1.1-beta3, SlimerJS version 0.10.0pre, 
+ xvfb (for headless tests) and Firefox 40. 
 
  PhantomJS 2.0 is also supported, but not run automatically since there is no
  Ubuntu package for PhantomJS 2 yet.

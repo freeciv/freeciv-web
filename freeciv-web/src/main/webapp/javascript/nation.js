@@ -1,14 +1,20 @@
-/********************************************************************** 
- Freeciv - Copyright (C) 2009 - Andreas Røsdal   andrearo@pvv.ntnu.no
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
+/**********************************************************************
+    Freeciv-web - the web version of Freeciv. http://play.freeciv.org/
+    Copyright (C) 2009-2015  The Freeciv-web project
 
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 ***********************************************************************/
 
 var nations = {};
@@ -26,32 +32,32 @@ function update_nation_screen()
 	  + "<thead><td>Flag</td><td>Color</td><td>Player Name:</td>"
 	  + "<td>Nation:</td><td>Attitude</td><td>Score</td><td>AI/Human</td><td>Alive?</td>"
 	  + "<td>Diplomatic state</td><td>Team</td><td>State</td></thead>";
-  
+
   for (var player_id in players) {
     var pplayer = players[player_id];
-    
+
     var sprite = get_player_fplag_sprite(pplayer);
-    
+
     var plr_class = "";
     if (!client_is_observer() && player_id == client.conn.playing['playerno']) plr_class = "nation_row_self";
     if (!pplayer['is_alive']) plr_class = "nation_row_dead";
     if (!client_is_observer() && diplstates[player_id] != null && diplstates[player_id] == DS_WAR) plr_class = "nation_row_war";
 
-    nation_list_html += "<tr data-plrid='" + player_id + "' class='" + plr_class 
+    nation_list_html += "<tr data-plrid='" + player_id + "' class='" + plr_class
 	   + "'><td><div style='background: transparent url("
-           + sprite['image-src'] 
-           + "); background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y'] 
+           + sprite['image-src']
+           + "); background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y']
            + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px; margin: 5px; '>"
            + "</div></td>";
-    
-    nation_list_html += "<td><div style='background-color: " + nations[pplayer['nation']]['color'] 
+
+    nation_list_html += "<td><div style='background-color: " + nations[pplayer['nation']]['color']
            + "; margin: 5px; width: 25px; height: 25px;'>"
            + "</div></td>";
 
-    nation_list_html += "<td>" + pplayer['name'] + "</td><td>" 
-           + nations[pplayer['nation']]['adjective']  + "</td><td>" 
-	   + col_love(pplayer) + "</td><td>" 
-	   + get_score_text(pplayer) + "</td><td>" 
+    nation_list_html += "<td>" + pplayer['name'] + "</td><td>"
+           + nations[pplayer['nation']]['adjective']  + "</td><td>"
+	   + col_love(pplayer) + "</td><td>"
+	   + get_score_text(pplayer) + "</td><td>"
 	   + (pplayer['ai'] ? get_ai_level_text(pplayer) + " AI" : "Human") + "</td><td>"
 	   + (pplayer['is_alive'] ? "Alive" : "Dead") +  "</td>";
 
@@ -80,7 +86,7 @@ function update_nation_screen()
   $("#nations_list").html(nation_list_html);
   $(".nation_button").button();
   $("#nation_table").tablesorter({theme: "dark"});
-  $("#nation_table").selectable({ filter: "tr", 
+  $("#nation_table").selectable({ filter: "tr",
        selected: function( event, ui ) {handle_nation_table_select(ui); } });
 
   selected_player = -1;
@@ -103,7 +109,7 @@ function update_nation_screen()
 **************************************************************************/
 function col_love(pplayer)
 {
-  if (client_is_observer() || pplayer['playerno'] == client.conn.playing['playerno'] 
+  if (client_is_observer() || pplayer['playerno'] == client.conn.playing['playerno']
       || pplayer['ai'] == false) {
     return "-";
   } else {
@@ -115,7 +121,7 @@ function col_love(pplayer)
 /**************************************************************************
  ...
 **************************************************************************/
-function handle_nation_table_select( ui ) 
+function handle_nation_table_select( ui )
 {
   selected_player = parseFloat($(ui.selected).data("plrid"));
   var player_id = selected_player;
@@ -128,15 +134,15 @@ function handle_nation_table_select( ui )
     $('#view_player_button').button("disable");
   }
 
-  if (!client_is_observer() && diplstates[player_id] != null 
+  if (!client_is_observer() && diplstates[player_id] != null
       && diplstates[player_id] != DS_NO_CONTACT) {
     $('#meet_player_button').button("enable");
   } else {
     $('#meet_player_button').button("disable");
   }
 
-  if (!client_is_observer() && player_id != client.conn.playing['playerno'] 
-      && diplstates[player_id] != null 
+  if (!client_is_observer() && player_id != client.conn.playing['playerno']
+      && diplstates[player_id] != null
       && diplstates[player_id] != DS_WAR && diplstates[player_id] != DS_NO_CONTACT) {
     $('#cancel_treaty_button').button("enable");
   } else {
@@ -202,7 +208,7 @@ function toggle_ai_clicked()
 function get_score_text(player)
 {
 
-  if (player['score'] > 0 || client_is_observer() 
+  if (player['score'] > 0 || client_is_observer()
       || player['playerno'] == client.conn.playing['playerno']) {
     return player['score'];
   } else {
@@ -249,7 +255,7 @@ function love_text(love)
 **************************************************************************/
 function take_player(player_name)
 {
-  var test_packet = {"pid" : packet_chat_msg_req, 
+  var test_packet = {"pid" : packet_chat_msg_req,
                      "message" : "/take " + player_name.substring(0,3)};
   var myJSONText = JSON.stringify(test_packet);
   send_request(myJSONText);
@@ -261,7 +267,7 @@ function take_player(player_name)
 **************************************************************************/
 function aitoggle_player(player_name)
 {
-  var test_packet = {"pid" : packet_chat_msg_req, 
+  var test_packet = {"pid" : packet_chat_msg_req,
                      "message" : "/ai " + player_name.substring(0,3)};
   var myJSONText = JSON.stringify(test_packet);
   send_request(myJSONText);
@@ -283,5 +289,5 @@ function center_on_player()
         set_default_mapview_active();
         return;
       }
-    }  
+    }
 }

@@ -1,14 +1,20 @@
-/********************************************************************** 
- Freeciv - Copyright (C) 2009 - Andreas Røsdal   andrearo@pvv.ntnu.no
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
+/**********************************************************************
+    Freeciv-web - the web version of Freeciv. http://play.freeciv.org/
+    Copyright (C) 2009-2015  The Freeciv-web project
 
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 ***********************************************************************/
 
 /****************************************************************************
@@ -39,10 +45,10 @@ function DIVIDE (n, d) {
 /****************************************************************************
  ...
 ****************************************************************************/
-function FC_WRAP(value, range)                                               
-{    
-    return ((value) < 0                                                            
-     ? ((value) % (range) != 0 ? (value) % (range) + (range) : 0)           
+function FC_WRAP(value, range)
+{
+    return ((value) < 0
+     ? ((value) % (range) != 0 ? (value) % (range) + (range) : 0)
      : ((value) >= (range) ? (value) % (range) : (value)));
 }
 
@@ -84,15 +90,15 @@ function civclient_benchmark(frame)
 {
 
   if (frame == 0) benchmark_start = new Date().getTime();
-  
-  
+
+
   var ptile = map_pos_to_tile(frame+5, frame+5)
   center_tile_mapcanvas(ptile);
 
   if (frame < 30) {
     setTimeout("civclient_benchmark(" + (frame + 1) + ");", 10);
-  } else {    
-  
+  } else {
+
     var end = new Date().getTime();
     var time = (end - benchmark_start) / 25;
     swal('Redraw time: ' + time);
@@ -111,7 +117,7 @@ function numberWithCommas(x) {
 **************************************************************************/
 function to_title_case(str)
 {
-  return str.replace(/\w\S*/g, 
+  return str.replace(/\w\S*/g,
          function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 }
 

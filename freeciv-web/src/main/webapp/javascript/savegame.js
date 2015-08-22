@@ -1,14 +1,20 @@
-/********************************************************************** 
- Freeciv - Copyright (C) 2010 - Andreas Røsdal   andrearo@pvv.ntnu.no
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
+/**********************************************************************
+    Freeciv-web - the web version of Freeciv. http://play.freeciv.org/
+    Copyright (C) 2009-2015  The Freeciv-web project
 
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 ***********************************************************************/
 var savename = "";
 var loadTimerId = -1;
@@ -40,7 +46,7 @@ function load_game_check()
 
   if ($.getUrlVar('load') == "tutorial") {
     $.blockUI();
-    loadTimerId = setTimeout("load_game_real('tutorial');", 
+    loadTimerId = setTimeout("load_game_real('tutorial');",
                                   1500);
     setTimeout(load_game_toggle,3500);
   } else if (load_game_id != -1) {
@@ -51,7 +57,7 @@ function load_game_check()
         show_scenario_dialog();
       } else {
         scenario_game_id = scenarios[load_game_id]['savegame'];
-        loadTimerId = setTimeout("load_game_real('" + scenario_game_id + "');", 
+        loadTimerId = setTimeout("load_game_real('" + scenario_game_id + "');",
                                   1500);
         setTimeout(load_game_toggle,3500);
       }
@@ -65,7 +71,7 @@ function load_game_check()
       } else {
         var savegame = savegames[load_game_id];
         console.log("Saved title: " +  savegame["title"]);
-        console.log("Saved user: " + savegame["username"]); 
+        console.log("Saved user: " + savegame["username"]);
         console.log("Logged in username: " + username);
         if (savegame["file"] == null) {
           swal("Loading game failed (savegame file is null)");
@@ -96,8 +102,8 @@ function load_game_check()
     show_scenario_dialog();
   } else if ($.getUrlVar('action') == "load") {
     load_game_dialog();
-  } 
- 
+  }
+
 }
 
 
@@ -107,7 +113,7 @@ function load_game_check()
 function load_game_real(filename)
 {
       console.log("Server command: /load " + filename );
-      var test_packet = {"pid" : packet_chat_msg_req, 
+      var test_packet = {"pid" : packet_chat_msg_req,
                          "message" : "/load " + filename};
       var myJSONText = JSON.stringify(test_packet);
       send_request(myJSONText);
@@ -119,11 +125,11 @@ function load_game_real(filename)
 **************************************************************************/
 function load_game_toggle()
 {
-  var test_packet = {"pid" : packet_chat_msg_req, 
+  var test_packet = {"pid" : packet_chat_msg_req,
                      "message" : "/aitoggle AI*1"};
 
   send_request(JSON.stringify(test_packet));
-  test_packet = {"pid" : packet_chat_msg_req, 
+  test_packet = {"pid" : packet_chat_msg_req,
                  "message" : "/take AI*1"};
   send_request(JSON.stringify(test_packet));
   $.unblockUI();
@@ -152,7 +158,7 @@ function save_game()
 	  "<span id='settings_info'><i>Freeciv-web allows you to save games. Games are stored in your web " +
 	  "browser using HTML5 localstorage. Saved games will be stored in your browser until you clear" +
 	  " your browser cache. Savegames are tied to your username " + username + ".<br><br>" +
-          "Savegame usage: " + Math.floor(simpleStorage.storageSize() / 1000) + " of 5200 kB."; 
+          "Savegame usage: " + Math.floor(simpleStorage.storageSize() / 1000) + " of 5200 kB.";
 
 
   $("#save_dialog").html(dhtml);
@@ -188,9 +194,9 @@ function save_game()
   if (suggest_savename.length >= 64) suggest_savename = username + " " + get_year_string();
 
 
-  $("#savegamename").val(suggest_savename);	
+  $("#savegamename").val(suggest_savename);
 
-  $("#save_dialog").dialog('open');		
+  $("#save_dialog").dialog('open');
 
 }
 /**************************************************************************
@@ -221,12 +227,12 @@ function save_game_send()
 
 
 /**************************************************************************
-  Saves the game, by transfering the savegame from the server to the 
+  Saves the game, by transfering the savegame from the server to the
   client, and storing the result in HTML5 Local Storage.
 **************************************************************************/
 function save_game_fetch()
 {
-  $.get("/saveservlet?username=" + username + "&savename=" + savename, 
+  $.get("/saveservlet?username=" + username + "&savename=" + savename,
     function(saved_file) {
       console.log("Storage size: " + simpleStorage.storageSize());
       console.log("Savename: " + savename);
@@ -236,11 +242,11 @@ function save_game_fetch()
       var savegames = simpleStorage.get("savegames");
       if (savegames == null) savegames = [];
 
-      var currentdate = new Date(); 
+      var currentdate = new Date();
       var datetime = " " + currentdate.getDate() + "/"
-                + (currentdate.getMonth()+1)  + "/" 
-                + currentdate.getFullYear() + "  "  
-                + currentdate.getHours() + ":"  
+                + (currentdate.getMonth()+1)  + "/"
+                + currentdate.getFullYear() + "  "
+                + currentdate.getHours() + ":"
                 + currentdate.getMinutes();
 
       savegames.push({"title" : savename, "username" : username, "file" : saved_file,
@@ -253,7 +259,7 @@ function save_game_fetch()
         $.unblockUI();
         swal("Failed saving game because of browser local storage error. Check savegame usage.");
       }
-    }).fail(function() { 
+    }).fail(function() {
 	    $.unblockUI();
 	    swal("Failed saving game because of server error.");
     });
@@ -283,13 +289,13 @@ function load_game_dialog()
       var username = savegames[i]["username"];
       var datetime = savegames[i]["datetime"];
       if (savename != null && savegames[i]["file"] != null) {
-        saveHtml += "<li class='ui-widget-content'>" + savename + " " 
+        saveHtml += "<li class='ui-widget-content'>" + savename + " "
                  + datetime + " (" + username + ") </li>";
       }
     }
   }
 
-  saveHtml += "</ol><br><span id='savegame_note'>Savegame usage: " 
+  saveHtml += "</ol><br><span id='savegame_note'>Savegame usage: "
            + Math.floor(simpleStorage.storageSize() / 1000)
            + " of 5200 kB.<br>Note: Savegames are stored using HTML5 local storage in your browser."
 	   + " Clearing your browser cache will also clear your savegames."
@@ -298,7 +304,7 @@ function load_game_dialog()
   var dialog_buttons = {};
 
   if (C_S_RUNNING != client_state()) {
-    dialog_buttons = $.extend(dialog_buttons, 
+    dialog_buttons = $.extend(dialog_buttons,
      {"Load Savegame": function() {
 		  var load_game_id = $('#selectable .ui-selected').index();
 		  if (load_game_id == -1) {
@@ -318,7 +324,7 @@ function load_game_dialog()
   }
 
 
-  dialog_buttons = $.extend(dialog_buttons, 
+  dialog_buttons = $.extend(dialog_buttons,
   {
   "Download": function() {
     var load_game_id = $('#selectable .ui-selected').index();
@@ -352,10 +358,10 @@ function load_game_dialog()
 			bgiframe: true,
 			modal: true,
 			width: is_small_screen() ? "95%" : "70%",
-			buttons: dialog_buttons 
+			buttons: dialog_buttons
 		});
   $("#selectable").selectable();
-  $("#dialog").dialog('open');		
+  $("#dialog").dialog('open');
   $("#game_text_input").blur();
 
   var tooltips = [];
@@ -391,7 +397,7 @@ function show_scenario_dialog()
 
   var saveHtml =  "<ol id='selectable'>";
     for (var i = 0; i < scenarios.length; i++) {
-      saveHtml += "<li class='ui-widget-content'><img border='0' src='" + scenarios[i]['img'] 
+      saveHtml += "<li class='ui-widget-content'><img border='0' src='" + scenarios[i]['img']
 	       +  "' style='padding: 4px;' ><br>" + scenarios[i]['description'] + "</li>";
     }
 
@@ -415,7 +421,7 @@ function show_scenario_dialog()
 			}
 		});
   $("#selectable").selectable();
-  $("#dialog").dialog('open');		
+  $("#dialog").dialog('open');
   $("#game_text_input").blur();
 
 }
@@ -444,10 +450,10 @@ function download_savegame_locally(game_id)
   if (savegames == null || savegames.length == 0) {
     swal("No savegames.");
   } else {
-    var blob = new Blob([JSON.stringify(savegames[game_id])], 
+    var blob = new Blob([JSON.stringify(savegames[game_id])],
                         {type: "text/plain;charset=utf-8"});
     saveAs(blob, "freecivweb-" + savegames[game_id]['title'] + ".js");
-  } 
+  }
 }
 
 /**************************************************************************
@@ -472,7 +478,7 @@ function upload_savegame_locally()
    				}
 			}
 		});
-  $("#upload_dialog").dialog('open');		
+  $("#upload_dialog").dialog('open');
 
 
 
@@ -500,11 +506,11 @@ function handle_savegame_upload()
     var savegames = simpleStorage.get("savegames");
     if (savegames == null) savegames = [];
       var new_savegame = JSON.parse(reader.result);
-      if (new_savegame != null && new_savegame['file'] != null 
+      if (new_savegame != null && new_savegame['file'] != null
           && new_savegame['title'] != null && new_savegame['username'] != null
-          && new_savegame['file'].length > 1000 
+          && new_savegame['file'].length > 1000
           && new_savegame['file'].length < 10000000) {
-        console.log("Loading savegame: " + new_savegame['title'] 
+        console.log("Loading savegame: " + new_savegame['title']
                     + " of length " + new_savegame['file'].length);
         savegames.push(new_savegame);
         simpleStorage.set("savegames", savegames);
@@ -514,7 +520,7 @@ function handle_savegame_upload()
       }
     }
 
-    reader.readAsText(file);	
+    reader.readAsText(file);
   } else {
     swal("Savegame file " + file.name + "  not supported: " + file.type);
     console.error("Savegame file not supported: " + file.type);

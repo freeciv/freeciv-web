@@ -1,14 +1,20 @@
-/********************************************************************** 
- Freeciv - Copyright (C) 2009 - Andreas Røsdal   andrearo@pvv.ntnu.no
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
+/**********************************************************************
+    Freeciv-web - the web version of Freeciv. http://play.freeciv.org/
+    Copyright (C) 2009-2015  The Freeciv-web project
 
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 ***********************************************************************/
 
 
@@ -37,12 +43,12 @@ function center_tile_mapcanvas(ptile)
   var r = map_to_gui_pos(ptile['x'], ptile['y']);
   var gui_x = r['gui_dx'];
   var gui_y = r['gui_dy'];
-  
+
   gui_x -= (mapview['width'] - tileset_tile_width) >> 1 ;
   gui_y -= (mapview['height'] - tileset_tile_height) >> 1;
-  
+
   set_mapview_origin(gui_x, gui_y);
-  
+
 }
 
 /**************************************************************************
@@ -71,7 +77,7 @@ function map_to_gui_vector(map_dx, map_dy)
      * Convert the map coordinates to isometric GUI
      * coordinates.  We'll make tile map(0,0) be the origin, and
      * transform like this:
-     * 
+     *
      *                     3
      * 123                2 6
      * 456 -> becomes -> 1 5 9
@@ -91,14 +97,14 @@ function map_to_gui_vector(map_dx, map_dy)
 function set_mapview_origin(gui_x0, gui_y0)
 {
   var xmin, xmax, ymin, ymax, xsize, ysize;
-  
+
   /* Normalize (wrap) the mapview origin. */
   var r = normalize_gui_pos(gui_x0, gui_y0);
   gui_x0 = r['gui_x'];
   gui_y0 = r['gui_y'];
-  
+
   base_set_mapview_origin(gui_x0, gui_y0);
-  
+
 }
 
 /****************************************************************************
@@ -115,10 +121,10 @@ function base_set_mapview_origin(gui_x0, gui_y0)
   var g = normalize_gui_pos(gui_x0, gui_y0);
   gui_x0 = g['gui_x'];
   gui_y0 = g['gui_y'];
-  
+
   mapview['gui_x0'] = gui_x0;
   mapview['gui_y0'] = gui_y0;
-        
+
 }
 
 /****************************************************************************
@@ -128,39 +134,39 @@ function base_set_mapview_origin(gui_x0, gui_y0)
 function normalize_gui_pos(gui_x, gui_y)
 {
   var map_x, map_y, nat_x, nat_y, gui_x0, gui_y0, diff_x, diff_y;
-  
+
   /* Convert the (gui_x, gui_y) into a (map_x, map_y) plus a GUI offset
    * from this tile. */
   var r = gui_to_map_pos(gui_x, gui_y);
   map_x = r['map_x'];
   map_y = r['map_y'];
 
-  
+
   var s = map_to_gui_pos(map_x, map_y);
   gui_x0 = s['gui_dx'];
   gui_y0 = s['gui_dy'];
-  
+
   diff_x = gui_x - gui_x0;
   diff_y = gui_y - gui_y0;
-  
-  
+
+
   /* Perform wrapping without any realness check.  It's important that
    * we wrap even if the map position is unreal, which normalize_map_pos
    * doesn't necessarily do. */
   var t = MAP_TO_NATIVE_POS(map_x, map_y);
   nat_x = t['nat_x'];
   nat_y = t['nat_y'];
-  
+
   if (topo_has_flag(TF_WRAPX)) {
     nat_x = FC_WRAP(nat_x, map['xsize']);
   }
   if (topo_has_flag(TF_WRAPY)) {
     nat_y = FC_WRAP(nat_y, map['ysize']);
   }
-  
+
   var u = NATIVE_TO_MAP_POS(nat_x, nat_y);
   map_x = u['map_x'];
-  map_y = u['map_y']; 
+  map_y = u['map_y'];
 
   /* Now convert the wrapped map position back to a GUI position and add the
    * offset back on. */
@@ -171,7 +177,7 @@ function normalize_gui_pos(gui_x, gui_y)
   gui_x += diff_x;
   gui_y += diff_y;
 
-  return {'gui_x' : gui_x, 'gui_y' : gui_y}; 
+  return {'gui_x' : gui_x, 'gui_y' : gui_y};
 }
 
 /****************************************************************************
@@ -217,7 +223,7 @@ function gui_to_map_pos(gui_x, gui_y)
      *
      * For another example of this math, see canvas_to_city_pos().
      */
-    
+
     gui_x -= W >> 1;
     var map_x = DIVIDE(gui_x * H + gui_y * W, W * H);
     var map_y = DIVIDE(gui_y * W - gui_x * H, W * H);
@@ -246,9 +252,9 @@ function map_to_gui_pos(map_x, map_y)
   Update (refresh) the map canvas starting at the given tile (in map
   coordinates) and with the given dimensions (also in map coordinates).
 
-  In iso view, we have to use the Painter's Algorithm to draw the tiles 
-  in back first.  When we draw a tile, we tell the GUI which part of 
-  the tile to draw - which is necessary unless we have an extra 
+  In iso view, we have to use the Painter's Algorithm to draw the tiles
+  in back first.  When we draw a tile, we tell the GUI which part of
+  the tile to draw - which is necessary unless we have an extra
   buffering step.
 
   After refreshing the backing store tile-by-tile, we write the store
@@ -265,7 +271,7 @@ function update_map_canvas(canvas_x, canvas_y, width, height)
   gui_x0 = mapview['gui_x0'] + canvas_x;
   gui_y0 = mapview['gui_y0'] + canvas_y;
 
-  /* Clear the area, if the mapview extends beyond map borders.  
+  /* Clear the area, if the mapview extends beyond map borders.
    *
    * This is necessary since some parts of the rectangle
    * may not actually have any tiles drawn on them.  This will happen when
@@ -284,69 +290,69 @@ function update_map_canvas(canvas_x, canvas_y, width, height)
 	 || u['map_x'] < 0 || u['map_x'] > map['xsize'] || u['map_y'] < 0 || u['map_y'] > map['ysize']) {
       canvas_put_rectangle(mapview_canvas_ctx, "rgb(0,0,0)", canvas_x, canvas_y, width, height);
     }
-  
+
   // mapview_layer_iterate
   for (var layer = 0; layer <= LAYER_COUNT; layer++) {
-  
-    //gui_rect_iterate begin   
+
+    //gui_rect_iterate begin
     var gui_x_0 = (gui_x0);
-    var gui_y_0 = (gui_y0); 
+    var gui_y_0 = (gui_y0);
     var gui_x_w = width + (tileset_tile_width >> 1);
     var gui_y_h = height + (tileset_tile_height >> 1);
-    if (gui_x_w < 0) { 
-      gui_x_0 += gui_x_w; 
-      gui_x_w = -gui_x_w; 
-    } 
-    
-    if (gui_y_h < 0) { 
-      gui_y_0 += gui_y_h; 
-      gui_y_h = -gui_y_h; 
-    } 
-    
-    if (gui_x_w > 0 && gui_y_h > 0) { 
-      var ptilepcorner = {}; 
-      var ptile_xi, ptile_yi, ptile_si, ptile_di; 
-      var gui_x, gui_y; 
+    if (gui_x_w < 0) {
+      gui_x_0 += gui_x_w;
+      gui_x_w = -gui_x_w;
+    }
+
+    if (gui_y_h < 0) {
+      gui_y_0 += gui_y_h;
+      gui_y_h = -gui_y_h;
+    }
+
+    if (gui_x_w > 0 && gui_y_h > 0) {
+      var ptilepcorner = {};
+      var ptile_xi, ptile_yi, ptile_si, ptile_di;
+      var gui_x, gui_y;
       var ptile_r1 = 2;
-      var ptile_r2 = ptile_r1 * 2; 
-      var ptile_w = tileset_tile_width; 
-      var ptile_h = tileset_tile_height; 
+      var ptile_r2 = ptile_r1 * 2;
+      var ptile_w = tileset_tile_width;
+      var ptile_h = tileset_tile_height;
       var ptile_x0 = Math.floor(( (gui_x_0 * ptile_r2) / (ptile_w) - (( (gui_x_0 * ptile_r2) < 0 && (gui_x_0 * ptile_r2) % (ptile_w) < 0 ) ? 1 : 0) ) - ptile_r1 / 2);
-      var ptile_y0 = Math.floor(( (gui_y_0 * ptile_r2) / (ptile_h) - (( (gui_y_0 * ptile_r2) < 0 && (gui_y_0 * ptile_r2) % (ptile_h) < 0 ) ? 1 : 0) ) - ptile_r1 / 2); 
-      var ptile_x1 = Math.floor(( ((gui_x_0 + gui_x_w) * ptile_r2 + ptile_w - 1) / (ptile_w) - (( ((gui_x_0 + gui_x_w) * ptile_r2 + ptile_w - 1) < 0 
+      var ptile_y0 = Math.floor(( (gui_y_0 * ptile_r2) / (ptile_h) - (( (gui_y_0 * ptile_r2) < 0 && (gui_y_0 * ptile_r2) % (ptile_h) < 0 ) ? 1 : 0) ) - ptile_r1 / 2);
+      var ptile_x1 = Math.floor(( ((gui_x_0 + gui_x_w) * ptile_r2 + ptile_w - 1) / (ptile_w) - (( ((gui_x_0 + gui_x_w) * ptile_r2 + ptile_w - 1) < 0
                        && ((gui_x_0 + gui_x_w) * ptile_r2 + ptile_w - 1) % (ptile_w) < 0 ) ? 1 : 0) ) + ptile_r1);
-      var ptile_y1 = Math.floor(( ((gui_y_0 + gui_y_h) * ptile_r2 + ptile_h - 1) / (ptile_h) - (( ((gui_y_0 + gui_y_h) * ptile_r2 + ptile_h - 1) < 0 
-                       && ((gui_y_0 + gui_y_h) * ptile_r2 + ptile_h - 1) % (ptile_h) < 0 ) ? 1 : 0) ) + ptile_r1); 
+      var ptile_y1 = Math.floor(( ((gui_y_0 + gui_y_h) * ptile_r2 + ptile_h - 1) / (ptile_h) - (( ((gui_y_0 + gui_y_h) * ptile_r2 + ptile_h - 1) < 0
+                       && ((gui_y_0 + gui_y_h) * ptile_r2 + ptile_h - 1) % (ptile_h) < 0 ) ? 1 : 0) ) + ptile_r1);
       var ptile_count = (ptile_x1 - ptile_x0) * (ptile_y1 - ptile_y0);
-      
-      for (var ptile_index = 0; ptile_index < ptile_count; ptile_index++) { 
-        var ptile = null; 
-        var pcorner = null; 
-        ptile_xi = ptile_x0 + (ptile_index % (ptile_x1 - ptile_x0)); 
+
+      for (var ptile_index = 0; ptile_index < ptile_count; ptile_index++) {
+        var ptile = null;
+        var pcorner = null;
+        ptile_xi = ptile_x0 + (ptile_index % (ptile_x1 - ptile_x0));
         ptile_yi = Math.floor(ptile_y0 + (ptile_index / (ptile_x1 - ptile_x0)));
-        ptile_si = ptile_xi + ptile_yi; 
+        ptile_si = ptile_xi + ptile_yi;
         ptile_di = ptile_yi - ptile_xi;
-        if ((ptile_xi + ptile_yi) % 2 != 0) { 
-          continue; 
-        } 
-        if (ptile_xi % 2 == 0 && ptile_yi % 2 == 0) { 
-          if ((ptile_xi + ptile_yi) % 4 == 0) { 
+        if ((ptile_xi + ptile_yi) % 2 != 0) {
+          continue;
+        }
+        if (ptile_xi % 2 == 0 && ptile_yi % 2 == 0) {
+          if ((ptile_xi + ptile_yi) % 4 == 0) {
             /* Tile */
             ptile = map_pos_to_tile((ptile_si / 4) - 1, (ptile_di / 4));
-          } else { 
+          } else {
             /* Corner */
             pcorner = ptilepcorner;
-            pcorner['tile'] = []; 
-            pcorner['tile'][0] = map_pos_to_tile(((ptile_si - 6) / 4), ((ptile_di - 2) / 4)); 
-            pcorner['tile'][1] = map_pos_to_tile(((ptile_si - 2) / 4), ((ptile_di - 2) / 4)); 
-            pcorner['tile'][2] = map_pos_to_tile(((ptile_si - 2) / 4), ((ptile_di + 2) / 4)); 
-            pcorner['tile'][3] = map_pos_to_tile(((ptile_si - 6) / 4), ((ptile_di + 2) / 4));              
-          } 
-        } 
+            pcorner['tile'] = [];
+            pcorner['tile'][0] = map_pos_to_tile(((ptile_si - 6) / 4), ((ptile_di - 2) / 4));
+            pcorner['tile'][1] = map_pos_to_tile(((ptile_si - 2) / 4), ((ptile_di - 2) / 4));
+            pcorner['tile'][2] = map_pos_to_tile(((ptile_si - 2) / 4), ((ptile_di + 2) / 4));
+            pcorner['tile'][3] = map_pos_to_tile(((ptile_si - 6) / 4), ((ptile_di + 2) / 4));
+          }
+        }
 
-        gui_x = Math.floor(ptile_xi * ptile_w / ptile_r2 - ptile_w / 2); 
+        gui_x = Math.floor(ptile_xi * ptile_w / ptile_r2 - ptile_w / 2);
         gui_y = Math.floor(ptile_yi * ptile_h / ptile_r2 - ptile_h / 2);
-         
+
         var cx = gui_x - mapview['gui_x0'];
         var cy = gui_y - mapview['gui_y0'];
 
@@ -357,10 +363,10 @@ function update_map_canvas(canvas_x, canvas_y, width, height)
           put_one_element(mapview_canvas_ctx, layer, null, null, pcorner,
                           null, null, cx, cy, null);
         }
-      } 
-    } 
+      }
+    }
   }
- 
+
 }
 
 
@@ -381,18 +387,18 @@ function put_one_tile(pcanvas, layer, ptile, canvas_x, canvas_y, citymode)
   Draw one layer of a tile, edge, corner, unit, and/or city onto the
   canvas at the given position.
 **************************************************************************/
-function put_one_element(pcanvas, layer, ptile, pedge, pcorner, punit, 
+function put_one_element(pcanvas, layer, ptile, pedge, pcorner, punit,
                          pcity, canvas_x, canvas_y, citymode)
 {
 
   var tile_sprs = fill_sprite_array(layer, ptile, pedge, pcorner, punit, pcity, citymode);
-				                    
+
   var fog = (ptile != null && draw_fog_of_war
-	      && TILE_KNOWN_UNSEEN == tile_get_known(ptile));				                    
+	      && TILE_KNOWN_UNSEEN == tile_get_known(ptile));
 
   put_drawn_sprites(pcanvas, canvas_x, canvas_y, tile_sprs, fog);
-   
-  
+
+
 }
 
 
@@ -401,7 +407,7 @@ function put_one_element(pcanvas, layer, ptile, pedge, pcorner, punit,
   Draw an array of drawn sprites onto the canvas.
 **************************************************************************/
 function put_drawn_sprites(pcanvas, canvas_x, canvas_y, pdrawn, fog)
-{ 
+{
   for (var i = 0; i < pdrawn.length; i++) {
     var offset_x = 0, offset_y = 0;
     if ('offset_x' in pdrawn[i]) {
@@ -432,7 +438,7 @@ function put_drawn_sprites(pcanvas, canvas_x, canvas_y, pdrawn, fog)
 function base_canvas_to_map_pos(canvas_x, canvas_y)
 {
   return gui_to_map_pos(canvas_x + mapview.gui_x0,
-                        canvas_y + mapview.gui_y0);		 
+                        canvas_y + mapview.gui_y0);
 }
 
 /**************************************************************************
@@ -462,11 +468,11 @@ function update_map_canvas_full()
   if (tiles != null && civclient_state >= C_S_RUNNING) {
     //var start = new Date().getTime();
     if (!sprites_init) init_cache_sprites();
-  
+
     // If city dialog is open, don't redraw default mapview.
     if (active_city != null) return;
-    
-    if (mapview_slide['active']) { 
+
+    if (mapview_slide['active']) {
       update_map_slide();
     } else {
       update_map_canvas(0, 0, mapview['store_width'], mapview['store_height']);
@@ -474,9 +480,9 @@ function update_map_canvas_full()
     }
 
     last_redraw_time = new Date().getTime();
-    
+
   }
-} 
+}
 
 /**************************************************************************
   Possibly update the entire mapview, if some conditions apply..
@@ -493,7 +499,7 @@ function update_map_canvas_check()
 
 /**************************************************************************
  Initializes mapview sliding. This is done by rendering the area to scroll
- across to a new canvas (buffer_canvas), and clip a region of this 
+ across to a new canvas (buffer_canvas), and clip a region of this
  buffer_canvas to the mapview canvas so it looks like scrolling.
 **************************************************************************/
 function enable_mapview_slide(ptile)
@@ -501,7 +507,7 @@ function enable_mapview_slide(ptile)
   var r = map_to_gui_pos(ptile['x'], ptile['y']);
   var gui_x = r['gui_dx'];
   var gui_y = r['gui_dy'];
-  
+
   gui_x -= (mapview['width'] - tileset_tile_width) >> 1;
   gui_y -= (mapview['height'] - tileset_tile_height) >> 1;
 
@@ -512,7 +518,7 @@ function enable_mapview_slide(ptile)
   mapview_slide['i'] = mapview_slide['max'];
   mapview_slide['start'] = new Date().getTime();
 
-  if ((dx == 0 && dy == 0) || mapview_slide['active'] 
+  if ((dx == 0 && dy == 0) || mapview_slide['active']
       || Math.abs(dx) > mapview['width'] || Math.abs(dy) > mapview['height']) {
     // sliding across map edge: don't slide, just go there directly.
     mapview_slide['active'] = false;
@@ -521,7 +527,7 @@ function enable_mapview_slide(ptile)
   }
 
   mapview_slide['active'] = true;
- 
+
   var new_width = mapview['width'] + Math.abs(dx);
   var new_height = mapview['height'] + Math.abs(dy);
   var old_width = mapview['store_width'];
@@ -565,13 +571,13 @@ function enable_mapview_slide(ptile)
   mapview_canvas_ctx = mapview_canvas.getContext("2d");
 
   if (dx >= 0 && dy >= 0) {
-    buffer_canvas_ctx.drawImage(mapview_canvas, 0, 0, old_width, old_height, 0, 0, old_width, old_height); 
+    buffer_canvas_ctx.drawImage(mapview_canvas, 0, 0, old_width, old_height, 0, 0, old_width, old_height);
   } else if (dx <= 0 && dy <= 0) {
-    buffer_canvas_ctx.drawImage(mapview_canvas, 0, 0, old_width, old_height, Math.abs(dx), Math.abs(dy), old_width, old_height); 
+    buffer_canvas_ctx.drawImage(mapview_canvas, 0, 0, old_width, old_height, Math.abs(dx), Math.abs(dy), old_width, old_height);
   } else if (dx <= 0 && dy >= 0) {
-    buffer_canvas_ctx.drawImage(mapview_canvas, 0, 0, old_width, old_height, Math.abs(dx), 0, old_width, old_height); 
+    buffer_canvas_ctx.drawImage(mapview_canvas, 0, 0, old_width, old_height, Math.abs(dx), 0, old_width, old_height);
   } else if (dx >= 0 && dy <= 0) {
-    buffer_canvas_ctx.drawImage(mapview_canvas, 0, 0, old_width, old_height, 0, Math.abs(dy), old_width, old_height); 
+    buffer_canvas_ctx.drawImage(mapview_canvas, 0, 0, old_width, old_height, 0, Math.abs(dy), old_width, old_height);
   }
   mapview['store_width'] = old_width;
   mapview['store_height'] = old_height;
@@ -586,15 +592,15 @@ function enable_mapview_slide(ptile)
 **************************************************************************/
 function update_map_slide()
 {
-  var elapsed = 1 + new Date().getTime() - mapview_slide['start'];  
-  mapview_slide['i'] = Math.floor(mapview_slide['max'] 
-                        * (mapview_slide['slide_time'] 
+  var elapsed = 1 + new Date().getTime() - mapview_slide['start'];
+  mapview_slide['i'] = Math.floor(mapview_slide['max']
+                        * (mapview_slide['slide_time']
                         - elapsed) / mapview_slide['slide_time']);
 
   if (mapview_slide['i'] <= 0) {
     mapview_slide['active'] = false;
     return;
-  } 
+  }
 
   var dx = mapview_slide['dx'];
   var dy = mapview_slide['dy'];
@@ -615,7 +621,7 @@ function update_map_slide()
     sy = Math.floor((dy * ( -1 * mapview_slide['i'] / mapview_slide['max'])));
   }
 
-  mapview_canvas_ctx.drawImage(buffer_canvas, sx, sy, 
+  mapview_canvas_ctx.drawImage(buffer_canvas, sx, sy,
       mapview['width'], mapview['height'],
       0,0, mapview['width'], mapview['height']);
 

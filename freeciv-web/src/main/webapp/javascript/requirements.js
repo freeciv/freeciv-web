@@ -1,14 +1,20 @@
-/********************************************************************** 
- Freeciv - Copyright (C) 2009 - Andreas Røsdal   andrearo@pvv.ntnu.no
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
+/**********************************************************************
+    Freeciv-web - the web version of Freeciv. http://play.freeciv.org/
+    Copyright (C) 2009-2015  The Freeciv-web project
 
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 ***********************************************************************/
 
 
@@ -77,7 +83,7 @@ function is_req_active(target_player,
     /* The requirement is filled if the player is using the government. */
     //FIXME: implement
     //eval = (government_of_player(target_player) == req->source.value.govern);
-    
+
     break;
   case VUT_IMPROVEMENT:
     /* The requirement is filled if there's at least one of the building
@@ -183,7 +189,7 @@ function is_req_active(target_player,
           eval = tile_city(target_tile) != NULL;
         }
       } else {
-         Not implemented 
+         Not implemented
         assert(FALSE);
       }
     } else {
@@ -200,8 +206,8 @@ function is_req_active(target_player,
     return eval;
   }
 }
-  
-  
+
+
 /****************************************************************************
   Checks the requirement(s) to see if they are active on the given target.
 
@@ -226,18 +232,18 @@ function are_reqs_active(target_player,
              prob_type)
 {
 
-  for (var i = 0; i < reqs.length; i++) { 
+  for (var i = 0; i < reqs.length; i++) {
     if (!is_req_active(target_player, target_city, target_building,
 		       target_tile, target_unittype, target_output,
 		       target_specialist,
 		       reqs[i], prob_type)) {
       return false;
     }
-  } 
+  }
   return true;
 }
-  
-  
+
+
 /****************************************************************************
   Is there a source tech within range of the target?
 ****************************************************************************/
@@ -266,12 +272,12 @@ function is_tech_in_range(target_player, range, tech)
   }
   return false;
 }
-  
-  
+
+
 /**************************************************************************
   Return the number of shields it takes to build this universal.
 **************************************************************************/
 function universal_build_shield_cost(target)
 {
-  return target['build_cost']; 
-}  
+  return target['build_cost'];
+}

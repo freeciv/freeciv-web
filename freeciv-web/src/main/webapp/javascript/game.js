@@ -1,14 +1,20 @@
-/********************************************************************** 
- Freeciv - Copyright (C) 2009 - Andreas Røsdal   andrearo@pvv.ntnu.no
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
+/**********************************************************************
+    Freeciv-web - the web version of Freeciv. http://play.freeciv.org/
+    Copyright (C) 2009-2015  The Freeciv-web project
 
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 ***********************************************************************/
 
 var game_info = null;
@@ -44,11 +50,11 @@ function game_find_unit_by_number(id)
 }
 
 /**************************************************************************
- Count the # of thousand citizen in a civilisation. 
+ Count the # of thousand citizen in a civilisation.
 **************************************************************************/
 function civ_population(playerno) {
   var population = 0;
-  
+
   for (city_id in cities) {
     var pcity = cities[city_id];
     if (playerno == pcity['owner']) {
@@ -63,9 +69,9 @@ function civ_population(playerno) {
   ...
 **************************************************************************/
 function update_game_status_panel() {
-  
+
   if (C_S_RUNNING != client_state()) return;
-  
+
   var status_html = "";
 
   if (client.conn.playing != null) {
@@ -74,33 +80,33 @@ function update_game_status_panel() {
       status_html += "<b>" + nations[pplayer['nation']]['adjective'] + "</b> Pop: ";
       status_html += "<b>" + civ_population(client.conn.playing.playerno) + "</b>  ";
       status_html += "Year: <b>" + get_year_string() + "</b> ";
-      status_html += "Gold: <b>" + pplayer['gold'] + "</b>"; 
+      status_html += "Gold: <b>" + pplayer['gold'] + "</b>";
     } else {
       var tax = client.conn.playing['tax'];
       var lux = client.conn.playing['luxury'];
       var sci = client.conn.playing['science'];
-  
+
       var net_income = pplayer['net_income'];
       if (pplayer['net_income'] > 0) {
         net_income = "+" + pplayer['net_income'];
-      } 
+      }
 
       status_html += "<b>" + nations[pplayer['nation']]['adjective'] + "</b> Population: ";
       status_html += "<b>" + civ_population(client.conn.playing.playerno) + "</b>  ";
       status_html += "Year: <b>" + get_year_string() + "</b> ";
-      status_html += "Gold: <b>" + pplayer['gold'] + " (" + net_income + ")</b>  "; 
+      status_html += "Gold: <b>" + pplayer['gold'] + " (" + net_income + ")</b>  ";
       status_html += "Tax: <b>" + tax + "</b> ";
       status_html += "Lux: <b>" + lux + "</b> ";
       status_html += "Sci: <b>" + sci + "</b> ";
     }
   } else {
-    status_html += "Observing - " + game_info['meta_message'] + " - "; 
+    status_html += "Observing - " + game_info['meta_message'] + " - ";
     status_html += "Turn: <b>" + game_info['turn'] + "</b>  ";
   }
-  
-  $("#game_status_panel").html(status_html); 
 
-  document.title = "Freeciv-web - " + username + "  (turn:" + game_info['turn'] + ", port:" 
+  $("#game_status_panel").html(status_html);
+
+  document.title = "Freeciv-web - " + username + "  (turn:" + game_info['turn'] + ", port:"
                    + civserverport + ") " + game_info['meta_message'];
 
 

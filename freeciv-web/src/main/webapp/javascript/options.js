@@ -1,14 +1,20 @@
-/********************************************************************** 
- Freeciv - Copyright (C) 2009 - Andreas Røsdal   andrearo@pvv.ntnu.no
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
+/**********************************************************************
+    Freeciv-web - the web version of Freeciv. http://play.freeciv.org/
+    Copyright (C) 2009-2015  The Freeciv-web project
 
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 ***********************************************************************/
 
 
@@ -102,7 +108,7 @@ var gui_gtk2_metaserver_tab_first = FALSE;
 var gui_gtk2_allied_chat_only = FALSE;
 var gui_gtk2_small_display_layout = FALSE;
 
-function init_options_dialog() 
+function init_options_dialog()
 {
   if (overview_active) {
     $("#show_overview_button").hide();
@@ -134,7 +140,7 @@ function init_options_dialog()
     send_request(myJSONText);
   });
 
-  $('#metamessage_setting').bind('keyup blur',function(){ 
+  $('#metamessage_setting').bind('keyup blur',function(){
     var cleaned_text = $(this).val().replace(/[^a-zA-Z\s\-]/g,'');
     if ($(this).val() != cleaned_text) {
       $(this).val( cleaned_text ); }

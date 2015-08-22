@@ -1,14 +1,20 @@
-/********************************************************************** 
- Freeciv - Copyright (C) 2009 - Andreas Røsdal   andrearo@pvv.ntnu.no
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
+/**********************************************************************
+    Freeciv-web - the web version of Freeciv. http://play.freeciv.org/
+    Copyright (C) 2009-2015  The Freeciv-web project
 
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 ***********************************************************************/
 
 
@@ -97,18 +103,18 @@ function get_supported_units(pcity)
 function update_tile_unit(punit)
 {
   if (punit == null) return;
-  
+
   var found = false;
   var ptile = index_to_tile(punit['tile']);
-  
+
   if (ptile == null || ptile['units'] == null) return;
-  
+
   for (var i = 0; i <  ptile['units'].length; i++) {
     if (ptile['units'][i]['id'] == punit['id']) {
       found = true;
     }
   }
-  
+
   if (!found) {
     ptile['units'].push(punit);
   }
@@ -128,7 +134,7 @@ function clear_tile_unit(punit)
   if (ptile['units'].indexOf(punit) >= 0) {
     ptile['units'].splice(ptile['units'].indexOf(punit), 1);
   }
-  
+
 }
 
 /**************************************************************************
@@ -157,12 +163,12 @@ function get_unit_moves_left(punit)
   if ((punit['movesleft'] % SINGLE_MOVE) != 0) {
     if (Math.floor(punit['movesleft'] / SINGLE_MOVE) > 0) {
       result = "Moves: " + Math.floor(punit['movesleft'] / SINGLE_MOVE)
-               + " " + Math.floor(punit['movesleft'] % SINGLE_MOVE) 
-               + "/" + SINGLE_MOVE;          
+               + " " + Math.floor(punit['movesleft'] % SINGLE_MOVE)
+               + "/" + SINGLE_MOVE;
     } else {
-      result = "Moves: "  
-               + Math.floor(punit['movesleft'] % SINGLE_MOVE) 
-               + "/" + SINGLE_MOVE;          
+      result = "Moves: "
+               + Math.floor(punit['movesleft'] % SINGLE_MOVE)
+               + "/" + SINGLE_MOVE;
     }
   } else {
     result = "Moves: "  + Math.floor(punit['movesleft'] / SINGLE_MOVE);
@@ -191,12 +197,12 @@ function update_unit_anim_list(old_unit, new_unit)
   if (anim_units_count > anim_units_max) return;
 
   if (!is_unit_visible(new_unit)) return;
- 
+
   if (old_unit['anim_list'] == null) old_unit['anim_list'] = [];
 
   if (new_unit['transported'] == true) {
     /* don't show transported units animated. */
-    old_unit['anim_list'] = [];	  
+    old_unit['anim_list'] = [];
     return;
   }
 
@@ -229,7 +235,7 @@ function update_unit_anim_list(old_unit, new_unit)
 }
 
 /**************************************************************************
-  Determines the pixel offset for the specified unit, based on the units 
+  Determines the pixel offset for the specified unit, based on the units
   anim list. This is how Freeciv.net does unit animations.
 **************************************************************************/
 function get_unit_anim_offset(punit)
@@ -267,7 +273,7 @@ function get_unit_anim_offset(punit)
       if (punit['anim_list'].length == 1) {
         punit['anim_list'].splice(0, 1);
       }
-    } 
+    }
 
 
     offset['x'] = - gui_dx ;
@@ -295,7 +301,7 @@ function reset_unit_anim_list()
 }
 
 /**************************************************************************
-  Returns the name of the unit's homecity. 
+  Returns the name of the unit's homecity.
 **************************************************************************/
 function get_unit_homecity_name(punit)
 {
@@ -308,7 +314,7 @@ function get_unit_homecity_name(punit)
 }
 
 /**************************************************************************
-  Determines if unit is visible 
+  Determines if unit is visible
 **************************************************************************/
 function is_unit_visible(punit)
 {
@@ -320,7 +326,7 @@ function is_unit_visible(punit)
   var unit_gui_y = r['gui_dy'];
 
   if (unit_gui_x < mapview['gui_x0'] || unit_gui_y < mapview['gui_y0']
-      || unit_gui_x > mapview['gui_x0'] + mapview['width'] 
+      || unit_gui_x > mapview['gui_x0'] + mapview['width']
       || unit_gui_y > mapview['gui_y0'] + mapview['height']) {
     return false;
   } else {
@@ -367,10 +373,10 @@ function get_unit_city_info(punit)
 
   result += ptype['name'] + "\nFood/Shield/Gold: ";
 
-  if (punit['upkeep'] != null) { 
-    result += punit['upkeep'][O_FOOD] + "/" 
-           + punit['upkeep'][O_SHIELD] + "/" 
-           + punit['upkeep'][O_GOLD]; 
+  if (punit['upkeep'] != null) {
+    result += punit['upkeep'][O_FOOD] + "/"
+           + punit['upkeep'][O_SHIELD] + "/"
+           + punit['upkeep'][O_GOLD];
   }
 
   result += "\n" + get_unit_moves_left(punit) + "\n";

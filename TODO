@@ -13,7 +13,7 @@ Current TODO-list in prioritized order here:
 - Upgrade doesn't provide me an option if I want to upgrade given the cost of the upgrade before it happens.
 
 Various:
-- Show if a city is another player's capital. Could be based on solution to Freevic bug #23790
+- Let the player find another player's (known) capital without having to middle click every visible city he owns. Could be based on solution to Freeciv bug #23790
 - The trade route tab of the city tab should show if there is room for more trade routes
 - Support the spy action targeted sabotage
 - Support the spy action targeted steal tech

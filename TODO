@@ -15,8 +15,6 @@ Current TODO-list in prioritized order here:
 Various:
 - Let the player find another player's (known) capital without having to middle click every visible city he owns. Could be based on solution to Freeciv bug #23790
 - The trade route tab of the city tab should show if there is room for more trade routes
-- Support the spy action targeted sabotage
-- Support the spy action targeted steal tech
 
 Basically you can help improve Freeciv-web in any way you like, as long at it actually makes the game better! Other things to improve there:
 
@@ -51,3 +49,5 @@ Unimplemented Freeciv client features:
 - advanced unit selection
 - the auto generated part of the help texts
 - the nuclear explosion animation
+- the spy action targeted sabotage
+- the spy action targeted steal tech

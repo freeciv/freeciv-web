@@ -371,7 +371,8 @@ function handle_server_shutdown(packet)
 
 function handle_nuke_tile_info(packet)
 {
-  /* TODO: implement*/
+  var ptile = index_to_tile(packet['tile']);
+  ptile['nuke'] = 60;
 }
 
 /* done */

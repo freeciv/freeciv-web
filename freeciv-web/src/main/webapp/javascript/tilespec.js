@@ -299,6 +299,14 @@ function fill_sprite_array(layer, ptile, pedge, pcorner, punit, pcity, citymode)
       if (ptile != null && ptile['goto_dir'] != null) {
         sprite_array = sprite_array.concat(fill_goto_line_sprite_array(ptile));
       }
+
+      if (ptile != null && ptile['nuke'] > 0) {
+        ptile['nuke'] = ptile['nuke'] - 1;
+        sprite_array.push({"key" : "explode.nuke",
+               "offset_x" : -45,
+               "offset_y" : -45});
+      }
+ 
       break;
   }
 

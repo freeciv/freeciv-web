@@ -128,19 +128,44 @@ index 52020c4..f2c452c 100644
  void city_add_or_build_error(struct player *pplayer, struct unit *punit,
                               enum unit_add_build_city_result res);
 diff --git a/server/unittools.c b/server/unittools.c
-index 433952b..f8b4646 100644
+index ca86109..858b279 100644
 --- a/server/unittools.c
 +++ b/server/unittools.c
-@@ -3832,10 +3832,8 @@ bool execute_orders(struct unit *punit)
-                               ACTION_JOIN_CITY);
-         log_debug("  joining city");
-       } else {
--        handle_unit_do_action(pplayer, unitid, unit_tile(punit)->index,
--                              0, city_name_suggestion(pplayer,
--                                                      unit_tile(punit)),
--                              ACTION_FOUND_CITY);
-+        ai_unit_build_city(pplayer, unitid,
-+                         city_name_suggestion(pplayer, unit_tile(punit)));
-         log_debug("  building city");
-       }
+@@ -19,6 +19,8 @@
+ #include <stdlib.h>
+ #include <string.h>
  
++#include <glib.h>
++
+ /* utility */
+ #include "bitvector.h"
+ #include "fcintl.h"
+@@ -3765,7 +3767,7 @@ bool execute_orders(struct unit *punit, const bool fresh)
+   action_probability prob;
+   int tgt_id;
+   bool performed;
+-  const char *name;
++  char *name;
+   bool res, last_order;
+   int unitid = punit->id;
+   struct player *pplayer = unit_owner(punit);
+@@ -4110,7 +4112,7 @@ bool execute_orders(struct unit *punit, const bool fresh)
+ 
+       if (order.action == ACTION_FOUND_CITY) {
+         /* This action needs a name. */
+-        name = city_name_suggestion(pplayer, unit_tile(punit));
++        name = g_uri_escape_string(city_name_suggestion(pplayer, unit_tile(punit)), NULL, TRUE);
+       } else {
+         /* This action doesn't need a name. */
+         name = "";
+@@ -4122,6 +4124,10 @@ bool execute_orders(struct unit *punit, const bool fresh)
+                                       0, name,
+                                       order.action);
+ 
++      if (order.action == ACTION_FOUND_CITY) {
++        g_free(name);
++      }
++
+       if (!player_unit_by_number(pplayer, unitid)) {
+         /* The unit "died" while performing the action. */
+         return FALSE;

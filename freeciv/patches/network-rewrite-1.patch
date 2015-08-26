@@ -10,7 +10,7 @@ diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/gene
  
      for (i = 0; i < %(array_size_u) s; i++) {
        %(tmp)s;
-@@ -553,10 +553,10 @@
+@@ -553,11 +553,11 @@
              else:
                  extra=""
              if self.dataio_type=="memory":
@@ -21,7 +21,8 @@ diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/gene
      RECEIVE_PACKET_FIELD_ERROR(%(name)s);
 -  }'''%self.get_dict(vars())
 +  } */'''%self.get_dict(vars())
-             elif self.is_array==2 and self.dataio_type!="string":
+             elif self.is_array==2 and self.dataio_type!="string" \
+                  and self.dataio_type!="estring":
                  return '''
  {
 @@ -950,7 +950,7 @@

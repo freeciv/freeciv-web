@@ -1,0 +1,290 @@
+From 1491eda3eaa2501ba4f26127c6bf445a01fb38e5 Mon Sep 17 00:00:00 2001
+From: Sveinung Kvilhaugsvik <sveinung84@users.sourceforge.net>
+Date: Wed, 26 Aug 2015 00:57:19 +0200
+Subject: [PATCH 1/2] JSON protocol: support URI encoded strings
+
+Freeciv-web escapes some, but not all, strings using URI encoding.
+
+Introduce a new dataio type estring. In the JSON protocol the estring is an
+URI encoded string. In the raw protocol it forwards to the string dataio
+type without encoding anything at all. Should the need to escape something,
+like the C string terminator, appear a raw protocol implementation can be
+added later.
+---
+ common/dataio.h            |  4 +++
+ common/dataio_json.c       | 75 ++++++++++++++++++++++++++++++++++++++++++++++
+ common/dataio_json.h       |  6 ++++
+ common/generate_packets.py | 22 +++++++-------
+ configure.ac               |  1 +
+ m4/web-client.m4           |  4 +++
+ 6 files changed, 102 insertions(+), 10 deletions(-)
+
+diff --git a/common/dataio.h b/common/dataio.h
+index aa839a3..cb0ea66 100644
+--- a/common/dataio.h
++++ b/common/dataio.h
+@@ -148,6 +148,10 @@ bool dio_get_uint8_vec8_raw(struct data_in *din, int **values, int stop_value)
+ bool dio_get_uint16_vec8_raw(struct data_in *din, int **values, int stop_value)
+     fc__attribute((nonnull (2)));
+ 
++/* There is currently no need to escape strings in the binary protocol. */
++#define dio_get_estring_raw dio_get_string_raw
++#define dio_put_estring_raw dio_put_string_raw
++
+ #ifndef FREECIV_JSON_CONNECTION
+ 
+ /* Should be a function but we need some macro magic. */
+diff --git a/common/dataio_json.c b/common/dataio_json.c
+index af9a64c..ad7f6d9 100644
+--- a/common/dataio_json.c
++++ b/common/dataio_json.c
+@@ -25,6 +25,8 @@
+ 
+ #ifdef FREECIV_JSON_CONNECTION
+ 
++#include <curl/curl.h>
++
+ #include <limits.h>
+ #include <math.h>
+ #include <stdint.h>
+@@ -89,6 +91,24 @@ static DIO_GET_CONV_FUN get_conv_callback = get_conv;
+   }
+ #endif
+ 
++/* Please use get_curl() rather than accessing this directly. */
++static CURL *curl_easy_handle = NULL;
++
++/**************************************************************************
++  Returns a CURL easy handle for name encoding and decoding
++**************************************************************************/
++static CURL *get_curl(void)
++{
++  if (curl_easy_handle == NULL) {
++    curl_easy_handle = curl_easy_init();
++  } else {
++    /* Reuse the existing CURL easy handle */
++    curl_easy_reset(curl_easy_handle);
++  }
++
++  return curl_easy_handle;
++}
++
+ /**************************************************************************
+  Returns FALSE if the destination isn't large enough or the source was
+  bad. This is default get_conv_callback.
+@@ -582,6 +602,25 @@ void dio_put_string_json(struct json_data_out *dout, char *key,
+ }
+ 
+ /**************************************************************************
++  Encode and write the specified string to the specified location.
++**************************************************************************/
++void dio_put_estring_json(struct json_data_out *dout, char *key,
++                          const struct plocation* location,
++                          const char *value)
++{
++  char *escaped_value;
++
++  /* Let CURL find the length it self by passing 0 */
++  escaped_value = curl_easy_escape(get_curl(), value, 0);
++
++  /* Handle as a regular string from now on. */
++  dio_put_string_json(dout, key, location, escaped_value);
++
++  /* CURL's memory management wants to free this it self. */
++  curl_free(escaped_value);
++}
++
++/**************************************************************************
+ ...
+ **************************************************************************/
+ void dio_put_tech_list_json(struct json_data_out *dout, char *key,
+@@ -798,4 +837,40 @@ bool dio_get_string_json(json_t *json_packet, char *key,
+   return TRUE;
+ }
+ 
++/**************************************************************************
++  Read and decode the string in the specified location.
++
++  max_dest_size applies to both the encoded and to the decoded string.
++**************************************************************************/
++bool dio_get_estring_json(json_t *json_packet, char *key,
++                          const struct plocation* location,
++                          char *dest, size_t max_dest_size)
++{
++  char *escaped_value;
++  char *unescaped_value;
++
++  /* The encoded string has the same size limit as the decoded string. */
++  escaped_value = fc_malloc(max_dest_size);
++
++  if (!dio_get_string_json(json_packet, key, location,
++                           escaped_value, max_dest_size)) {
++    /* dio_get_string_json() has logged this already. */
++    return FALSE;
++  }
++
++  /* Let CURL find the length it self by passing 0 */
++  unescaped_value = curl_easy_unescape(get_curl(), escaped_value, 0, NULL);
++
++  /* Done with the escaped value. */
++  FC_FREE(escaped_value);
++
++  /* Copy the unescaped value so CURL can free its own copy. */
++  memcpy(dest, unescaped_value, max_dest_size);
++
++  /* CURL's memory management wants to free this it self. */
++  curl_free(unescaped_value);
++
++  return TRUE;
++}
++
+ #endif /* FREECIV_JSON_CONNECTION */
+diff --git a/common/dataio_json.h b/common/dataio_json.h
+index aa5c676..240e310 100644
+--- a/common/dataio_json.h
++++ b/common/dataio_json.h
+@@ -77,6 +77,9 @@ bool dio_get_memory_json(json_t *json_packet, char *key,
+ bool dio_get_string_json(json_t *json_packet, char *key,
+                          const struct plocation* location,
+                          char *dest, size_t max_dest_size);
++bool dio_get_estring_json(json_t *json_packet, char *key,
++                          const struct plocation* location,
++                          char *dest, size_t max_dest_size);
+ bool dio_get_tech_list_json(json_t *json_packet, char *key,
+                             const struct plocation* location, int *dest);
+ bool dio_get_unit_list_json(json_t *json_packet, char *key,
+@@ -142,6 +145,9 @@ void dio_put_memory_json(struct json_data_out *dout, char *key,
+ void dio_put_string_json(struct json_data_out *dout, char *key,
+                          const struct plocation* location,
+                          const char *value);
++void dio_put_estring_json(struct json_data_out *dout, char *key,
++                          const struct plocation* location,
++                          const char *value);
+ void dio_put_city_map_json(struct json_data_out *dout, char *key,
+                            const struct plocation* location,
+                            const char *value);
+diff --git a/common/generate_packets.py b/common/generate_packets.py
+index 3022af7..3b33849 100755
+--- a/common/generate_packets.py
++++ b/common/generate_packets.py
+@@ -220,7 +220,7 @@ class Field:
+         return result
+ 
+     def get_handle_type(self):
+-        if self.dataio_type=="string":
++        if self.dataio_type=="string" or self.dataio_type=="estring":
+             return "const char *"
+         if self.dataio_type=="worklist":
+             return "const %s *"%self.struct_type
+@@ -245,7 +245,7 @@ class Field:
+             return "  worklist_copy(&real_packet->%(name)s, %(name)s);"%self.__dict__
+         if self.is_array==0:
+             return "  real_packet->%(name)s = %(name)s;"%self.__dict__
+-        if self.dataio_type=="string":
++        if self.dataio_type=="string" or self.dataio_type=="estring":
+             return "  sz_strlcpy(real_packet->%(name)s, %(name)s);"%self.__dict__
+         if self.is_array==1:
+             tmp="real_packet->%(name)s[i] = %(name)s[i]"%self.__dict__
+@@ -266,14 +266,14 @@ class Field:
+             return "  differ = (memcmp(old->%(name)s, real_packet->%(name)s, %(array_size_d)s) != 0);"%self.__dict__
+         if self.dataio_type=="bitvector":
+             return "  differ = !BV_ARE_EQUAL(old->%(name)s, real_packet->%(name)s);"%self.__dict__
+-        if self.dataio_type in ["string"] and self.is_array==1:
++        if self.dataio_type in ["string", "estring"] and self.is_array==1:
+             return "  differ = (strcmp(old->%(name)s, real_packet->%(name)s) != 0);"%self.__dict__
+         if self.is_struct and self.is_array==0:
+             return "  differ = !are_%(dataio_type)ss_equal(&old->%(name)s, &real_packet->%(name)s);"%self.__dict__
+         if not self.is_array:
+             return "  differ = (old->%(name)s != real_packet->%(name)s);"%self.__dict__
+         
+-        if self.dataio_type=="string":
++        if self.dataio_type=="string" or self.dataio_type=="estring":
+             c="strcmp(old->%(name)s[i], real_packet->%(name)s[i]) != 0"%self.__dict__
+             array_size_u=self.array_size1_u
+             array_size_o=self.array_size1_o
+@@ -367,7 +367,7 @@ class Field:
+         if self.dataio_type in ["memory"]:
+             return "  DIO_PUT(%(dataio_type)s, &dout, \"%(name)s\", &field_addr, &real_packet->%(name)s, %(array_size_u)s);"%self.__dict__
+ 
+-        arr_types=["string","city_map","tech_list",
++        arr_types=["string","estring","city_map","tech_list",
+                    "unit_list","building_list"]
+         if (self.dataio_type in arr_types and self.is_array==1) or \
+            (self.dataio_type not in arr_types and self.is_array==0):
+@@ -377,7 +377,7 @@ class Field:
+                 c="DIO_PUT(%(dataio_type)s, &dout, namestr, &field_addr, &real_packet->%(name)s[i][j]);"%self.__dict__
+             else:
+                 c="DIO_PUT(%(dataio_type)s, &dout, namestr, &field_addr, &real_packet->%(name)s[i]);"%self.__dict__
+-        elif self.dataio_type=="string":
++        elif self.dataio_type=="string" or self.dataio_type=="estring":
+             c="DIO_PUT(%(dataio_type)s, &dout, namestr, &field_addr, real_packet->%(name)s[i]);"%self.__dict__
+             array_size_u=self.array_size1_u
+ 
+@@ -393,7 +393,8 @@ class Field:
+                 c="DIO_PUT(%(dataio_type)s, &dout, namestr, &field_addr, real_packet->%(name)s[i]);"%self.__dict__
+ 
+         if not self.diff:
+-            if self.is_array==2 and self.dataio_type!="string":
++            if self.is_array==2 and self.dataio_type!="string" \
++               and self.dataio_type!="estring":
+                 return '''
+     {
+       int i, j;
+@@ -576,7 +577,7 @@ field_addr.name = \"%(name)s\";
+             return '''if (!DIO_BV_GET(&din, \"%(name)s\", &field_addr, real_packet->%(name)s)) {
+   RECEIVE_PACKET_FIELD_ERROR(%(name)s);
+ }'''%self.__dict__
+-        if self.dataio_type in ["string","city_map"] and \
++        if self.dataio_type in ["string","estring","city_map"] and \
+            self.is_array!=2:
+             return '''if (!DIO_GET(%(dataio_type)s, &din, \"%(name)s\", &field_addr, real_packet->%(name)s, sizeof(real_packet->%(name)s))) {
+   RECEIVE_PACKET_FIELD_ERROR(%(name)s);
+@@ -613,7 +614,7 @@ field_addr.name = \"%(name)s\";
+                 c='''if (!DIO_GET(%(dataio_type)s, &din, namestr, &field_addr, &real_packet->%(name)s[i])) {
+       RECEIVE_PACKET_FIELD_ERROR(%(name)s);
+     }'''%self.__dict__
+-        elif self.dataio_type=="string":
++        elif self.dataio_type=="string" or self.dataio_type=="estring":
+             c='''if (!DIO_GET(%(dataio_type)s, &din, namestr, &field_addr, real_packet->%(name)s[i], sizeof(real_packet->%(name)s[i]))) {
+       RECEIVE_PACKET_FIELD_ERROR(%(name)s);
+     }'''%self.__dict__
+@@ -674,7 +675,8 @@ field_addr.name = \"%(name)s\";
+   if (!DIO_GET(%(dataio_type)s, &din, \"%(name)s\", &field_addr, real_packet->%(name)s, %(array_size_u)s)){
+     RECEIVE_PACKET_FIELD_ERROR(%(name)s);
+   }'''%self.get_dict(vars())
+-            elif self.is_array==2 and self.dataio_type!="string":
++            elif self.is_array==2 and self.dataio_type!="string" \
++                 and self.dataio_type!="estring":
+                 return '''
+ {
+   int i, j;
+diff --git a/configure.ac b/configure.ac
+index bf85fa7..9269a70 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -543,6 +543,7 @@ PKG_PROG_PKG_CONFIG
+ if test "x$PKG_CONFIG" = "x" ; then
+   AC_MSG_ERROR([pkg-config not found])
+ fi
++dnl TODO: remove check in web-client.m4 when requesting version >= 7.15.4
+ PKG_CHECK_MODULES([CURL], [libcurl >= 7.9.7],,
+     [AC_MSG_ERROR([libcurl development files required])])
+ UTILITY_CFLAGS="${UTILITY_CFLAGS} ${CURL_CFLAGS}"
+diff --git a/m4/web-client.m4 b/m4/web-client.m4
+index 80447bf..5138889 100644
+--- a/m4/web-client.m4
++++ b/m4/web-client.m4
+@@ -26,6 +26,10 @@ if test "x$json_enabled" = "xyes" ; then
+   AC_CHECK_HEADER([jansson.h], [],
+ [AC_MSG_ERROR([libjansson found but not jansson.h])])
+ 
++  dnl the check in configure.ac tolerates older curl versions
++  PKG_CHECK_MODULES([CURL], [libcurl >= 7.15.4],,
++    [AC_MSG_ERROR([libcurl development files required])])
++
+   AC_DEFINE([FREECIV_JSON_CONNECTION], [1], [jansson network protocol in use])
+ fi
+ ])
+-- 
+2.1.4
+

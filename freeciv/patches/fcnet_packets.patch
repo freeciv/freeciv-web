@@ -115,6 +115,6 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
 +}
 +
 +/**************************************************************************
-   City building function called from inside server itself - notably city
-   name has not been transfered over network so network encodings and such
-   do not apply.
+   Handle change in unit activity.
+ **************************************************************************/
+ static void handle_unit_change_activity_real(struct player *pplayer,

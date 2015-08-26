@@ -1,0 +1,81 @@
+From e834d4ed100264e3efefec42e9367475722541fb Mon Sep 17 00:00:00 2001
+From: Sveinung Kvilhaugsvik <sveinung84@users.sourceforge.net>
+Date: Wed, 26 Aug 2015 00:57:19 +0200
+Subject: [PATCH 2/2] protocol: change city name type to estring
+
+Freeciv-web escapes city names using URI encoding. Set the type of all city
+name fields to estring.
+---
+ common/packets.def | 14 ++++++++------
+ 1 file changed, 8 insertions(+), 6 deletions(-)
+
+diff --git a/common/packets.def b/common/packets.def
+index 26b93e4..6e52ef0 100644
+--- a/common/packets.def
++++ b/common/packets.def
+@@ -200,6 +200,8 @@ type TECH_LIST          = tech_list(int)
+ type UNIT_LIST          = unit_list(int)
+ type BUILDING_LIST      = building_list(int)
+ type WORKLIST           = worklist(struct worklist)
++# string that is URI encoded in the JSON protocol
++type ESTRING            = estring(char)
+ 
+ # typedefs for enums
+ type ACTIVITY           = uint8(enum unit_activity)
+@@ -652,7 +654,7 @@ PACKET_CITY_INFO = 31; sc, lsend, is-game-info, force, cancel(PACKET_CITY_SHORT_
+ 
+   BV_IMPRS improvements;
+   BV_CITY_OPTIONS city_options;
+-  STRING name[MAX_LEN_NAME];
++  ESTRING name[MAX_LEN_NAME];
+ end
+ 
+ PACKET_CITY_SHORT_INFO = 32; sc, lsend, is-game-info, cancel(PACKET_CITY_INFO)
+@@ -672,7 +674,7 @@ PACKET_CITY_SHORT_INFO = 32; sc, lsend, is-game-info, cancel(PACKET_CITY_INFO)
+   SINT8 city_image;
+ 
+   BV_IMPRS improvements;
+-  STRING name[MAX_LEN_NAME];
++  ESTRING name[MAX_LEN_NAME];
+ end
+ 
+ PACKET_TRADEROUTE_INFO = 249; sc, lsend, handle-via-packet
+@@ -720,7 +722,7 @@ end
+ 
+ PACKET_CITY_RENAME = 40; cs, dsend
+   CITY city_id;
+-  STRING name[MAX_LEN_NAME];
++  ESTRING name[MAX_LEN_NAME];
+ end
+ 
+ PACKET_CITY_OPTIONS_REQ = 41; cs, dsend
+@@ -744,7 +746,7 @@ end
+ 
+ PACKET_CITY_NAME_SUGGESTION_INFO = 44; sc, dsend, lsend
+   UNIT unit_id;
+-  STRING name[MAX_LEN_NAME];
++  ESTRING name[MAX_LEN_NAME];
+ end
+ 
+ PACKET_CITY_SABOTAGE_LIST = 45; sc, lsend
+@@ -1017,7 +1019,7 @@ PACKET_UNIT_DO_ACTION = 84; cs, dsend
+   UNIT actor_id;
+   SINT32 target_id;   # city_id, unit_id or tile_id
+   SINT16 value;
+-  STRING name[MAX_LEN_NAME];
++  ESTRING name[MAX_LEN_NAME];
+   GEN_ACTION action_type;
+ end
+ 
+@@ -2021,7 +2023,7 @@ end
+ 
+ PACKET_EDIT_CITY = 213; cs, handle-per-conn, handle-via-packet
+   CITY id; key
+-  STRING name[MAX_LEN_NAME];
++  ESTRING name[MAX_LEN_NAME];
+   PLAYER owner;
+   PLAYER original;
+   UINT8 size;
+-- 
+2.1.4
+

@@ -1,7 +1,7 @@
 diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
 --- freeciv/common/packets.def	2014-11-01 12:31:53.278633440 +0200
 +++ freeciv/common/packets.def	2014-11-01 12:34:12.482345375 +0200
-@@ -189,11 +189,11 @@
+@@ -189,13 +189,13 @@
  # typedefs for arrays/structs
  type MEMORY             = memory(unsigned char)
  type REQUIREMENT        = requirement(struct requirement)
@@ -14,6 +14,8 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
 +# type UNIT_LIST          = unit_list(int)
 +# type BUILDING_LIST      = building_list(int)
 +type WORKLIST           = string(char)
+ # string that is URI encoded in the JSON protocol
+ type ESTRING            = estring(char)
  
  # typedefs for enums
  type ACTIVITY           = uint8(enum unit_activity)
@@ -110,7 +112,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
 +  STRING trade_output[MAX_LEN_MSG];
 +  #BV_CITY_OPTIONS city_options;
 +  BOOL disbandable_city;
-   STRING name[MAX_LEN_NAME];
+   ESTRING name[MAX_LEN_NAME];
 +  BOOL unhappy;
  end
  
@@ -121,7 +123,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  
 -  BV_IMPRS improvements;
 +  STRING improvements[MAX_LEN_MSG];
-   STRING name[MAX_LEN_NAME];
+   ESTRING name[MAX_LEN_NAME];
  end
  
 @@ -681,7 +694,7 @@

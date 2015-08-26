@@ -178,6 +178,9 @@ function handle_chat_msg(packet)
 /* 100% complete */
 function handle_city_info(packet)
 {
+  /* Decode the city name. */
+  packet['name'] = decodeURIComponent(packet['name']);
+
   if (cities[packet['id']] == null) {
     cities[packet['id']] = packet;
   } else {
@@ -204,6 +207,9 @@ function handle_city_info(packet)
    TODO: does this loose information? */
 function handle_city_short_info(packet)
 {
+  /* Decode the city name. */
+  packet['name'] = decodeURIComponent(packet['name']);
+
   if (cities[packet['id']] == null) {
     cities[packet['id']] = packet;
   } else {
@@ -392,6 +398,9 @@ function handle_connect_msg(packet)
 /* done */
 function handle_city_name_suggestion_info(packet)
 {
+  /* Decode the city name. */
+  packet['name'] = decodeURIComponent(packet['name']);
+
   city_name_dialog(packet['name'], packet['unit_id']);
 }
 

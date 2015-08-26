@@ -59,7 +59,6 @@ Simplify Freeciv server upgrade:
     - negative: may train the updater to ignore its output
 - get rid of the worst merge conflict causes
   - city_name_bugfix:
-    - create a less invasive alternative
     - get it into Freeciv
   - freeciv_web_all_packets_def_changes:
     - find and get rid of pointless changes

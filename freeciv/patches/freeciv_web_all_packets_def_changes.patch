@@ -1,14 +1,7 @@
 diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
 --- freeciv/common/packets.def	2014-11-01 12:31:53.278633440 +0200
 +++ freeciv/common/packets.def	2014-11-01 12:34:12.482345375 +0200
-@@ -189,17 +189,17 @@
- type UFLOAT10x3         = ufloat100(float)
- type UFLOAT             = ufloat10000(float)
- type UINT8              = uint8(int)
--type UINT16             = uint16(int)
-+type UINT16             = uint32(int)
- type UINT32             = uint32(int)
- 
+@@ -189,11 +189,11 @@
  # typedefs for arrays/structs
  type MEMORY             = memory(unsigned char)
  type REQUIREMENT        = requirement(struct requirement)

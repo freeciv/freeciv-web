@@ -497,8 +497,8 @@ free_tech_method = "Goal"
 ; Minimum culture points for cultural domination victory
 victory_min_points = 1000
 
-; Lead needed relative to second best player
-victory_lead_pct   = 300
+; How big lead relative to second best player is needed for victory
+victory_lead_pct   = 200
 
 ; How much each culture point affects the migration
 ; from/to the city.

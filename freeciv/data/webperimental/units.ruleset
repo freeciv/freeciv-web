@@ -282,6 +282,8 @@ flags         = "Unreachable", "DoesntOccupyTile"
 ; "OneAttack"	= can only make a single attack, regardless of movement points
 ; "FieldUnit"	= cause unhappiness even when not being aggressive
 ; "Marines"	= can attack from non-native tile (from transport or city)
+; "BeachLander" = won't lose all its movement when moving from non-native
+;                 terrain to native terrain even if slow_invasions is on.
 ; "Partial_Invis" = visible only to adjancent units; does not hide transported
 ;		  units other than missiles
 ; "Settlers"	= can irrigate and build roads

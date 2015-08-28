@@ -123,10 +123,10 @@ export SLIMERJSLAUNCHER=/usr/bin/firefox
 export SLIMERJS_EXECUTABLE=${basedir}/tests/slimerjs-0.10.0pre/slimerjs
 cd ${basedir}/tests
 wget --no-check-certificate ${slimerjs_url}
-unzip -q slimerjs-0.10.0pre.zip
+unzip -qo slimerjs-0.10.0pre.zip
 
 wget ${casperjs_url}
-unzip -o 1.1-beta3.zip
+unzip -qo 1.1-beta3.zip
 cd casperjs-1.1-beta3
 ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs
 

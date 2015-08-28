@@ -262,6 +262,7 @@ function pregame_settings()
 	  "<option value='2'>Easy</option>" +
           "<option value='3'>Normal</option>" +
           "<option value='4'>Hard</option>" +
+          "<option value='5'>Cheating</option>" +
 	  "</select></td></tr>"+
 	  "<tr title='Number of initial techs per player'><td>Tech level:</td>" +
 	  "<td><input type='number' name='techlevel' id='techlevel' size='3' length='3' min='0' max='100' step='10'></td></tr>" +
@@ -419,6 +420,8 @@ function pregame_settings()
       test_packet = {"pid" : packet_chat_msg_req, "message" : "/normal"};
     } else if (ai_skill_level == 4) {
       test_packet = {"pid" : packet_chat_msg_req, "message" : "/hard"};
+    } else if (ai_skill_level == 5) {
+      test_packet = {"pid" : packet_chat_msg_req, "message" : "/cheating"};
     }
     var myJSONText = JSON.stringify(test_packet);
     send_request(myJSONText);

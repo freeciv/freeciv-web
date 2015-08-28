@@ -1,7 +1,7 @@
-From febce638ac7f913cdea34ecb785f60a40b46df45 Mon Sep 17 00:00:00 2001
-From: Sveinung Kvilhaugsvik <sveinung84@users.sourceforge.net>
-Date: Mon, 24 Aug 2015 20:31:59 +0200
-Subject: [PATCH 5/7] Add a common check if a city is occupied
+From 49240acdc39a064e6a0690df66d5f905a2150919 Mon Sep 17 00:00:00 2001
+From: sveinung <sveinung@a0f10bec-cc02-0410-94fc-a9cfff90b4cd>
+Date: Wed, 26 Aug 2015 11:37:46 +0000
+Subject: [PATCH] Add a common check if a city is occupied
 
 Where to look when checking if a city is occupied depends on who is doing
 it. The server is supposed to check units at the tile. The client has the
@@ -15,7 +15,12 @@ before looking in the correct place.
 Use it in the popup info text generation so Freeciv-web won't start claiming
 that occupied cities are unoccupied if it is copied again.
 
+Reported by Nook in his Let's Play Freeciv Youtube video at
+https://youtu.be/NzJhIDeVEnE?t=29m21s
+
 See bug #23813
+
+git-svn-id: svn://svn.gna.org/svn/freeciv/trunk@29682 a0f10bec-cc02-0410-94fc-a9cfff90b4cd
 ---
  client/text.c |  2 +-
  common/city.c | 14 ++++++++++++++

@@ -1,10 +1,14 @@
-From e834d4ed100264e3efefec42e9367475722541fb Mon Sep 17 00:00:00 2001
-From: Sveinung Kvilhaugsvik <sveinung84@users.sourceforge.net>
-Date: Wed, 26 Aug 2015 00:57:19 +0200
-Subject: [PATCH 2/2] protocol: change city name type to estring
+From 2f7da12a17fbf8cacdc5c8feee819b81a03e96e3 Mon Sep 17 00:00:00 2001
+From: sveinung <sveinung@a0f10bec-cc02-0410-94fc-a9cfff90b4cd>
+Date: Fri, 28 Aug 2015 10:54:26 +0000
+Subject: [PATCH 3/4] protocol: change city name type to estring
 
 Freeciv-web escapes city names using URI encoding. Set the type of all city
 name fields to estring.
+
+See patch #6296
+
+git-svn-id: svn://svn.gna.org/svn/freeciv/trunk@29704 a0f10bec-cc02-0410-94fc-a9cfff90b4cd
 ---
  common/packets.def | 14 ++++++++------
  1 file changed, 8 insertions(+), 6 deletions(-)

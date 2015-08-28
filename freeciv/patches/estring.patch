@@ -1,7 +1,10 @@
-From 1491eda3eaa2501ba4f26127c6bf445a01fb38e5 Mon Sep 17 00:00:00 2001
-From: Sveinung Kvilhaugsvik <sveinung84@users.sourceforge.net>
-Date: Wed, 26 Aug 2015 00:57:19 +0200
-Subject: [PATCH 1/2] JSON protocol: support URI encoded strings
+From f3c5e97f18fe2a53a6d2c6b6d526cd468f9265da Mon Sep 17 00:00:00 2001
+From: sveinung <sveinung@a0f10bec-cc02-0410-94fc-a9cfff90b4cd>
+Date: Fri, 28 Aug 2015 10:54:21 +0000
+Subject: [PATCH 2/4] JSON protocol: support URI encoded strings
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
 Freeciv-web escapes some, but not all, strings using URI encoding.
 
@@ -10,14 +13,19 @@ URI encoded string. In the raw protocol it forwards to the string dataio
 type without encoding anything at all. Should the need to escape something,
 like the C string terminator, appear a raw protocol implementation can be
 added later.
+
+Thanks to Andreas Røsdal <andreasr> for pointing out that CURL does URI
+encoding and decoding.
+
+See patch #6295
+
+git-svn-id: svn://svn.gna.org/svn/freeciv/trunk@29703 a0f10bec-cc02-0410-94fc-a9cfff90b4cd
 ---
  common/dataio.h            |  4 +++
- common/dataio_json.c       | 75 ++++++++++++++++++++++++++++++++++++++++++++++
+ common/dataio_json.c       | 74 ++++++++++++++++++++++++++++++++++++++++++++++
  common/dataio_json.h       |  6 ++++
  common/generate_packets.py | 22 +++++++-------
- configure.ac               |  1 +
- m4/web-client.m4           |  4 +++
- 6 files changed, 102 insertions(+), 10 deletions(-)
+ 4 files changed, 96 insertions(+), 10 deletions(-)
 
 diff --git a/common/dataio.h b/common/dataio.h
 index aa839a3..cb0ea66 100644
@@ -35,7 +43,7 @@ index aa839a3..cb0ea66 100644
  
  /* Should be a function but we need some macro magic. */
 diff --git a/common/dataio_json.c b/common/dataio_json.c
-index af9a64c..ad7f6d9 100644
+index af9a64c..6d5a370 100644
 --- a/common/dataio_json.c
 +++ b/common/dataio_json.c
 @@ -25,6 +25,8 @@
@@ -47,18 +55,16 @@ index af9a64c..ad7f6d9 100644
  #include <limits.h>
  #include <math.h>
  #include <stdint.h>
-@@ -89,6 +91,24 @@ static DIO_GET_CONV_FUN get_conv_callback = get_conv;
-   }
+@@ -90,6 +92,23 @@ static DIO_GET_CONV_FUN get_conv_callback = get_conv;
  #endif
  
-+/* Please use get_curl() rather than accessing this directly. */
-+static CURL *curl_easy_handle = NULL;
-+
-+/**************************************************************************
+ /**************************************************************************
 +  Returns a CURL easy handle for name encoding and decoding
 +**************************************************************************/
 +static CURL *get_curl(void)
 +{
++  static CURL *curl_easy_handle = NULL;
++
 +  if (curl_easy_handle == NULL) {
 +    curl_easy_handle = curl_easy_init();
 +  } else {
@@ -69,10 +75,11 @@ index af9a64c..ad7f6d9 100644
 +  return curl_easy_handle;
 +}
 +
- /**************************************************************************
++/**************************************************************************
   Returns FALSE if the destination isn't large enough or the source was
   bad. This is default get_conv_callback.
-@@ -582,6 +602,25 @@ void dio_put_string_json(struct json_data_out *dout, char *key,
+ **************************************************************************/
+@@ -582,6 +601,25 @@ void dio_put_string_json(struct json_data_out *dout, char *key,
  }
  
  /**************************************************************************
@@ -98,7 +105,7 @@ index af9a64c..ad7f6d9 100644
  ...
  **************************************************************************/
  void dio_put_tech_list_json(struct json_data_out *dout, char *key,
-@@ -798,4 +837,40 @@ bool dio_get_string_json(json_t *json_packet, char *key,
+@@ -798,4 +836,40 @@ bool dio_get_string_json(json_t *json_packet, char *key,
    return TRUE;
  }
  
@@ -258,33 +265,6 @@ index 3022af7..3b33849 100755
                  return '''
  {
    int i, j;
-diff --git a/configure.ac b/configure.ac
-index bf85fa7..9269a70 100644
---- a/configure.ac
-+++ b/configure.ac
-@@ -543,6 +543,7 @@ PKG_PROG_PKG_CONFIG
- if test "x$PKG_CONFIG" = "x" ; then
-   AC_MSG_ERROR([pkg-config not found])
- fi
-+dnl TODO: remove check in web-client.m4 when requesting version >= 7.15.4
- PKG_CHECK_MODULES([CURL], [libcurl >= 7.9.7],,
-     [AC_MSG_ERROR([libcurl development files required])])
- UTILITY_CFLAGS="${UTILITY_CFLAGS} ${CURL_CFLAGS}"
-diff --git a/m4/web-client.m4 b/m4/web-client.m4
-index 80447bf..5138889 100644
---- a/m4/web-client.m4
-+++ b/m4/web-client.m4
-@@ -26,6 +26,10 @@ if test "x$json_enabled" = "xyes" ; then
-   AC_CHECK_HEADER([jansson.h], [],
- [AC_MSG_ERROR([libjansson found but not jansson.h])])
- 
-+  dnl the check in configure.ac tolerates older curl versions
-+  PKG_CHECK_MODULES([CURL], [libcurl >= 7.15.4],,
-+    [AC_MSG_ERROR([libcurl development files required])])
-+
-   AC_DEFINE([FREECIV_JSON_CONNECTION], [1], [jansson network protocol in use])
- fi
- ])
 -- 
 2.1.4
 

@@ -32,13 +32,13 @@ files = {"amplio2" : [
   "../../freeciv/freeciv/data/amplio2/grid.spec",
   "../../freeciv/freeciv/data/amplio2/medievalcities.spec",
   "../../freeciv/freeciv/data/amplio2/moderncities.spec",
+  "../../freeciv/freeciv/data/amplio2/nuke.spec",
   "../../freeciv/freeciv/data/amplio2/mountains.spec",
   "../../freeciv/freeciv/data/amplio2/hills.spec",
   "../../freeciv/freeciv/data/amplio2/ocean.spec",
   "../../freeciv/freeciv/data/amplio2/select.spec",
   "../../freeciv/freeciv/data/amplio2/terrain2.spec",
   "../../freeciv/freeciv/data/amplio2/tiles.spec",
-  "../../freeciv/freeciv/data/amplio2/nuke.spec",
   "../../freeciv/freeciv/data/amplio2/units.spec",
   "../../freeciv/freeciv/data/amplio2/upkeep.spec",
   "../../freeciv/freeciv/data/amplio2/veterancy.spec",
@@ -131,7 +131,7 @@ curr_x = 0;
 curr_y = 14;
 # Set size of tileset image manually depending on number of tiles.
 # Note!  Safari on iPhone doesn't support more than 3000000 pixels in a single image.
-tileset_height = 1050;
+tileset_height = 1020;
 tileset_width = 1800;
 
 dither_types = ["t.l0.desert1", "t.l0.plains1", "t.l0.grassland1", "t.l0.forest1", "t.l0.jungle1", "t.l0.hills1", "t.l0.mountains1", "t.l0.tundra1", "t.l0.swamp1"];
@@ -309,6 +309,8 @@ for tile_file in sorted(files.keys()):
               # handle a dithered tile.
               dither_map[tag] = result_tile.copy();
   
+            elif tag.find("explode.nuke_") > -1:
+              continue; #skip old nuke tiles.
             else:
               # handle a non-cellgroup tile.
               (w, h) = result_tile.size;

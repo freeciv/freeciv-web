@@ -309,8 +309,13 @@ for tile_file in sorted(files.keys()):
               # handle a dithered tile.
               dither_map[tag] = result_tile.copy();
   
-            elif tag.find("explode.nuke_") > -1:
-              continue; #skip old nuke tiles.
+            elif tag.find("explode.nuke_") > -1 \
+                 or tag.find("grid.borders") > -1 \
+                 or tag.find("grid.selected") > -1 \
+                 or tag.find("grid.main") > -1 \
+                 or tag.find("grid.city") > -1 \
+                 or tag.find("grid.coastline") > -1:
+              continue; #skip unused tiles.
             else:
               # handle a non-cellgroup tile.
               (w, h) = result_tile.size;

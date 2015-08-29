@@ -199,20 +199,11 @@ function show_city_dialog(pcity)
                        + "Granary: " + pcity['food_stock'] + "/" + pcity['granary_size'] + "<br>"
                        + "Change in: " + city_turns_to_growth_text(pcity));
 
-  if (pcity['production_kind'] == VUT_UTYPE) {
-    var punit_type = unit_types[pcity['production_value']];
-    $("#city_production_overview").html("Producing: " + punit_type['name']);
-    turns_to_complete = city_turns_to_build(pcity, punit_type, true);
-  }
+  var prod_name = get_city_production_name(pcity);
+  $("#city_production_overview").html("Producing: " + (prod_name != null ? prod_name : "None"));
 
-  if (pcity['production_kind'] == VUT_IMPROVEMENT) {
-    var improvement = improvements[pcity['production_value']];
-    $("#city_production_overview").html("Producing: " + improvement['name']);
-    turns_to_complete = city_turns_to_build(pcity, improvement, true);
-    if (improvement['name'] == "Coinage") {
-      turns_to_complete = FC_INFINITY;
-    }
-  }
+  turns_to_complete = get_city_production_time(pcity);
+
   if (turns_to_complete != FC_INFINITY) {
     $("#city_production_turns_overview").html("Turns to completion: " + turns_to_complete);
   } else {
@@ -349,96 +340,48 @@ function show_city_dialog(pcity)
   }
 }
 
+
 /**************************************************************************
-...
+ Returns the name of the current city production.
 **************************************************************************/
-function change_city_production_dialog()
+function get_city_production_name(pcity)
 {
-
-  var pcity = active_city;
-  var turns_to_complete = FC_INFINITY;
-
-  // reset dialog page.
-  $("#dialog").remove();
-  $("<div id='dialog'></div>").appendTo("div#game_page");
-
-  var dhtml = " <div id='city_production_change'></div>" +
-	"  <div id='city_production_turns_change'></div>" +
-	"  <div id='city_change_production'>" +
-	"  <div id='city_production_choices'>" +
-	"  </div>" +
-	"  </div>"
-
-
-
-  $("#dialog").html(dhtml);
-
-  var production_list = generate_production_list(pcity);
-
-  var production_html = "";
-  for (var a = 0; a < production_list.length; a++) {
-    var current_prod = (pcity['production_kind'] == production_list[a]['kind']
-	&& pcity['production_value'] == production_list[a]['value']);
-    var sprite = production_list[a]['sprite'];
-    if (sprite == null) {
-      console.log("Missing sprite for " + production_list[a]['value']);
-      continue;
-    }
-
-    production_html = production_html
-     + "<div class='production_list_item' style='" + (current_prod ? "background-color:#777777; text:#000000; border: 1px solid #ffffff;" : "") + "'"
-     + " onclick='send_city_change(" + pcity['id'] + "," + production_list[a]['kind'] + "," + production_list[a]['value'] + ")' "
-     + " title=\"" + production_list[a]['helptext'] + "\">"
-     + "<div class='production_list_item_sub' style=' background: transparent url("
-           + sprite['image-src'] +
-           ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y']
-           + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px;'"
-           +"></div>"
-     + production_list[a]['text'] + "</div>";
-  }
-  $("#city_production_choices").html(production_html);
-
-
+  if (pcity == null) return null; 
   if (pcity['production_kind'] == VUT_UTYPE) {
     var punit_type = unit_types[pcity['production_value']];
-    $("#city_production").html("Producing: " + punit_type['name']);
-    turns_to_complete = city_turns_to_build(pcity, punit_type, true);
+    return punit_type['name'];
   }
 
   if (pcity['production_kind'] == VUT_IMPROVEMENT) {
     var improvement = improvements[pcity['production_value']];
-    $("#city_production").html("Producing: " + improvement['name']);
-    turns_to_complete = city_turns_to_build(pcity, improvement, true);
+    return improvement['name'];
+  }
+
+  return null;
+}
+
+/**************************************************************************
+ Returns the number of turns to complete current city production. 
+**************************************************************************/
+function get_city_production_time(pcity)
+{
+  if (pcity == null) return FC_INFINITY;
+ 
+  if (pcity['production_kind'] == VUT_UTYPE) {
+    var punit_type = unit_types[pcity['production_value']];
+    return city_turns_to_build(pcity, punit_type, true);
+  }
+
+  if (pcity['production_kind'] == VUT_IMPROVEMENT) {
+    var improvement = improvements[pcity['production_value']];
     if (improvement['name'] == "Coinage") {
-      turns_to_complete = FC_INFINITY;
+      return FC_INFINITY;
     }
-  }
-  if (turns_to_complete != FC_INFINITY) {
-    $("#city_production_turns_change").html("Turns to completion: " + turns_to_complete);
-  } else {
-    $("#city_production_turns_change").html("-");
+
+    return city_turns_to_build(pcity, improvement, true);
   }
 
-  $("#dialog").attr("title", "Change city production");
-  $("#dialog").dialog({
-			bgiframe: true,
-			modal: true,
-			width: is_small_screen() ? "95%" : "60%",
-			buttons: {
-				"Buy": function() {
-						request_city_buy();
-						$("#dialog").dialog('close');
-				},
-				"Close": function() {
-						$("#dialog").dialog('close');
-
-				}
-			}
-		});
-
-  $("#dialog").dialog('open');
-
-  if (!city_can_buy(pcity)) $(".ui-dialog-buttonpane button:contains('Buy')").button("disable");
+  return FC_INFINITY;
 
 }
 
@@ -447,7 +390,6 @@ function change_city_production_dialog()
 **************************************************************************/
 function generate_production_list(pcity)
 {
-
   var production_list = [];
   for (unit_type_id in unit_types) {
     var punit_type = unit_types[unit_type_id];

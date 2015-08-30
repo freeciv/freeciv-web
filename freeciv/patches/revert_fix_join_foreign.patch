@@ -1,0 +1,94 @@
+From 191fa40204b9e7536c88261006b618ae41e35e78 Mon Sep 17 00:00:00 2001
+From: Sveinung Kvilhaugsvik <sveinung84@users.sourceforge.net>
+Date: Sun, 30 Aug 2015 16:59:49 +0200
+Subject: [PATCH] Revert "Fix join foreign city order upgrade"
+
+This reverts commit 4f47262f232c281db91af7421e445bbeb80aec54.
+---
+ server/savecompat.c |  5 -----
+ server/savegame3.c  | 45 +++++++++++++++++----------------------------
+ 2 files changed, 17 insertions(+), 33 deletions(-)
+
+diff --git a/server/savecompat.c b/server/savecompat.c
+index 2a51e37..9be6892 100644
+--- a/server/savecompat.c
++++ b/server/savecompat.c
+@@ -1120,12 +1120,7 @@ int sg_order_to_action(enum unit_orders order, struct unit *act_unit,
+   switch (order) {
+   case ORDER_OLD_BUILD_CITY:
+     if (tile_city(tgt_tile)
+-#ifdef FREECIV_DEV_SAVE_COMPAT
+-        /* Freeciv 3.0 allows joining foreign cities. */
+-        ) {
+-#else /* FREECIV_DEV_SAVE_COMPAT */
+         && city_owner(tile_city(tgt_tile)) == unit_owner(act_unit)) {
+-#endif /* FREECIV_DEV_SAVE_COMPAT */
+       /* The player's cities are loaded right before his units. It wasn't
+        * possible for rulesets to allow joining foreign cities before 3.0.
+        * This means that a converted build city order only can be a Join
+diff --git a/server/savegame3.c b/server/savegame3.c
+index ee0dc9c..dbe9c1b 100644
+--- a/server/savegame3.c
++++ b/server/savegame3.c
+@@ -3303,34 +3303,6 @@ static void sg_load_players(struct loaddata *loading)
+     sg_load_player_units_transport(loading, pplayer);
+   } players_iterate_end;
+ 
+-#ifdef FREECIV_DEV_SAVE_COMPAT
+-  /* Upgrade unit orders */
+-  players_iterate(pplayer) {
+-    unit_list_iterate(pplayer->units, punit) {
+-      int i;
+-
+-      for (i = 0; i < punit->orders.length; i++) {
+-        struct unit_order *order = &punit->orders.list[i];
+-
+-        if (order->order != ORDER_PERFORM_ACTION
+-            && order->action == ACTION_COUNT) {
+-          /* This order may have been replaced by the perform action
+-           * order */
+-
+-          /* See if a corresponding action exists. */
+-          order->action = sg_order_to_action(order->order, punit,
+-                                             punit->goto_tile);
+-
+-          if (order->action != ACTION_COUNT) {
+-            /* The order should be upgraded. */
+-            order->order = ORDER_PERFORM_ACTION;
+-          }
+-        }
+-      }
+-    } unit_list_iterate_end;
+-  } players_iterate_end;
+-#endif /* FREECIV_DEV_SAVE_COMPAT */
+-
+   /* Savegame may contain nation assignments that are incompatible with the
+    * current nationset -- for instance, if it predates the introduction of
+    * nationsets. Ensure they are compatible, one way or another. */
+@@ -5184,6 +5156,23 @@ static bool sg_load_player_unit(struct loaddata *loading,
+                          ? ACTION_COUNT
+                          : char2num(action_unitstr[j]));
+ 
++#ifdef FREECIV_DEV_SAVE_COMPAT
++        if (order->order != ORDER_PERFORM_ACTION
++            && order->action == ACTION_COUNT) {
++          /* This order may have been replaced by the perform action
++           * order */
++
++          /* See if a corresponding action exists. */
++          order->action = sg_order_to_action(order->order, punit,
++                                             punit->goto_tile);
++
++          if (order->action != ACTION_COUNT) {
++            /* The order should be upgraded. */
++            order->order = ORDER_PERFORM_ACTION;
++          }
++        }
++#endif /* FREECIV_DEV_SAVE_COMPAT */
++
+         if (order->order == ORDER_LAST
+             || (order->order == ORDER_MOVE && !direction8_is_valid(order->dir))
+             || (order->order == ORDER_PERFORM_ACTION
+-- 
+2.1.4
+

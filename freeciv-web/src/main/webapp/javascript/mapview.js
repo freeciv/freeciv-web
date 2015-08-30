@@ -369,6 +369,7 @@ function mapview_put_city_bar(pcanvas, city, canvas_x, canvas_y) {
   var text = decodeURIComponent(city['name']);
   var size = city['size'];
   var color = nations[city_owner(city)['nation']]['color'];
+  var prod_type = get_city_production_type(city);
 
   var txt_measure = pcanvas.measureText(text);
   var size_measure = pcanvas.measureText(size);
@@ -378,8 +379,8 @@ function mapview_put_city_bar(pcanvas, city, canvas_x, canvas_y) {
                     txt_measure.width + 20, 20);
 
   pcanvas.fillStyle = color;
-  pcanvas.fillRect (canvas_x + Math.floor(txt_measure.width / 2) + 5, canvas_y - 17,
-                    size_measure.width + 8, 20);
+  pcanvas.fillRect(canvas_x + Math.floor(txt_measure.width / 2) + 5, canvas_y - 19,
+               (prod_type != null) ? size_measure.width + 35 : size_measure.width + 8, 24);
 
   pcanvas.fillStyle = "rgba(0, 0, 0, 1)";
   pcanvas.fillText(size, canvas_x + Math.floor(txt_measure.width / 2) + 10, canvas_y + 1);
@@ -409,6 +410,15 @@ function mapview_put_city_bar(pcanvas, city, canvas_x, canvas_y) {
   pcanvas.moveTo(canvas_x - Math.floor(txt_measure.width / 2) - 15, canvas_y - 17);
   pcanvas.lineTo(canvas_x - Math.floor(txt_measure.width / 2) - 15, canvas_y + 3);
   pcanvas.stroke();
+
+  if (prod_type != null) {
+    var tag = prod_type['graphic_str'];
+    if (tileset[tag] == null) return;
+    pcanvas.drawImage(sprites[tag],
+              canvas_x + Math.floor(txt_measure.width / 2) + size_measure.width + 13, 
+              canvas_y - 19, 28, 24);
+  }
+
 }
 
 /**************************************************************************

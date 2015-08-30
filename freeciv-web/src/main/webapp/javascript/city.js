@@ -199,8 +199,8 @@ function show_city_dialog(pcity)
                        + "Granary: " + pcity['food_stock'] + "/" + pcity['granary_size'] + "<br>"
                        + "Change in: " + city_turns_to_growth_text(pcity));
 
-  var prod_name = get_city_production_name(pcity);
-  $("#city_production_overview").html("Producing: " + (prod_name != null ? prod_name : "None"));
+  var prod_type = get_city_production_type(pcity);
+  $("#city_production_overview").html("Producing: " + (prod_type != null ? prod_type['name'] : "None"));
 
   turns_to_complete = get_city_production_time(pcity);
 
@@ -344,17 +344,17 @@ function show_city_dialog(pcity)
 /**************************************************************************
  Returns the name of the current city production.
 **************************************************************************/
-function get_city_production_name(pcity)
+function get_city_production_type(pcity)
 {
   if (pcity == null) return null; 
   if (pcity['production_kind'] == VUT_UTYPE) {
     var punit_type = unit_types[pcity['production_value']];
-    return punit_type['name'];
+    return punit_type;
   }
 
   if (pcity['production_kind'] == VUT_IMPROVEMENT) {
     var improvement = improvements[pcity['production_value']];
-    return improvement['name'];
+    return improvement;
   }
 
   return null;
@@ -1070,22 +1070,10 @@ function city_worklist_dialog(pcity)
 
   keyboard_input=false;
   worklist_dialog_active = true;
-  var headline = "";
-  var turns_to_complete = "";
-  if (pcity['production_kind'] == VUT_UTYPE) {
-    var punit_type = unit_types[pcity['production_value']];
-    headline += "Producing: " + punit_type['name'];
-    turns_to_complete = city_turns_to_build(pcity, punit_type, true);
-  }
+  var turns_to_complete = get_city_production_time(pcity);;
+  var prod_type = get_city_production_type(pcity);
+  var headline = "Producing: " + (prod_type != null ? prod_type['name'] : "None")
 
-  if (pcity['production_kind'] == VUT_IMPROVEMENT) {
-    var improvement = improvements[pcity['production_value']];
-    headline += "Producing: " + improvement['name'];
-    turns_to_complete = city_turns_to_build(pcity, improvement, true);
-    if (improvement['name'] == "Coinage") {
-      turns_to_complete = FC_INFINITY;
-    }
-  }
   if (turns_to_complete != FC_INFINITY) {
     headline += " - Turns to completion: " + turns_to_complete;
   }

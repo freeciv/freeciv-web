@@ -1,0 +1,13 @@
+diff --git a/server/savegame3.c b/server/savegame3.c
+index 692f16d..fee496b 100644
+--- a/server/savegame3.c
++++ b/server/savegame3.c
+@@ -3305,7 +3305,7 @@ static void sg_load_players(struct loaddata *loading)
+       for (i = 0; i < punit->orders.length; i++) {
+         struct unit_order *order = &punit->orders.list[i];
+ 
+-        if (order->order != ORDER_PERFORM_ACTION
++        if (order != NULL && order->order != ORDER_PERFORM_ACTION
+             && order->action == ACTION_COUNT) {
+           /* This order may have been replaced by the perform action
+            * order */

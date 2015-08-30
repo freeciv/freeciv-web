@@ -642,8 +642,18 @@ function city_name_dialog(suggested_name, unit_id) {
   $("<div id='city_name_dialog'></div>").appendTo("div#game_page");
 
   $("#city_name_dialog").html($("<div>What should we call our new city?</div>"
-		  	      + "<input id='city_name_req' type='text' value='"
-			      + suggested_name + "'>"));
+                              + "<input id='city_name_req' type='text'>"));
+
+  /* A suggested city name can contain an apostrophe ("'"). That character
+   * is also used for single quotes. It shouldn't be added unescaped to a
+   * string that later is interpreted as HTML. */
+  /* TODO: Forbid city names containing an apostrophe or make sure that all
+   * JavaScript using city names handles it correctly. Look for places
+   * where a city name string is added to a string that later is
+   * interpreted as HTML. Avoid the situation by directly using JavaScript
+   * like below or by escaping the string. */
+  $("#city_name_req").attr("value", suggested_name);
+
   $("#city_name_dialog").attr("title", "Build New City");
   $("#city_name_dialog").dialog({
 			bgiframe: true,

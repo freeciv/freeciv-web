@@ -201,16 +201,15 @@ function init_chatbox()
 
   chatbox_active = true;
 
-  $("#game_chatbox_panel").attr("title", "Messages");
   $("#game_chatbox_panel").dialog({
 			bgiframe: true,
 			modal: false,
-			width: "70%",
+			width: "25%",
 			height: "auto",
 			resizable: true,
 			dialogClass: 'chatbox_dialog',
 			resize: chatbox_resized,
-			position: {my: 'center bottom', at: 'center bottom', of: window},
+			position: {my: 'left bottom', at: 'left bottom', of: window},
 			close: function(event, ui) { chatbox_active = false;}
 		});
 

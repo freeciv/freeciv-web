@@ -49,7 +49,6 @@ Unimplemented Freeciv client features:
 - advanced unit selection
 - the auto generated part of the help texts
 - the spy action targeted sabotage
-- the spy action targeted steal tech
 
 Simplify Freeciv server upgrade:
 - document what changes in Freeciv to be extra aware of and what they can break

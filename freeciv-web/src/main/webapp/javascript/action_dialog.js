@@ -193,6 +193,13 @@ function popup_action_selection(actor_unit, action_probabilities,
                                    action_probabilities)
              + "'>";
   }
+  if (action_probabilities[ACTION_SPY_TARGETED_STEAL_TECH] != 0) {
+    dhtml += "<input id='act_sel_tgt_tech" + actor_unit['id']
+             + "' class='act_sel_button' type='button' value='"
+             + format_action_label(ACTION_SPY_TARGETED_STEAL_TECH,
+                                   action_probabilities)
+             + "'>";
+  }
   if (action_probabilities[ACTION_SPY_STEAL_GOLD] != 0) {
     dhtml += "<input id='act_sel_steal_gold" + actor_unit['id']
              + "' class='act_sel_button' type='button' value='"
@@ -375,6 +382,15 @@ function popup_action_selection(actor_unit, action_probabilities,
                     "name" : "",
                     "action_type": ACTION_SPY_STEAL_TECH};
       send_request(JSON.stringify(packet));
+
+      $(id).remove();
+    });
+  }
+
+  if (action_probabilities[ACTION_SPY_TARGETED_STEAL_TECH] != 0) {
+    $("#act_sel_tgt_tech" + actor_unit['id']).click(function() {
+      popup_steal_tech_selection_dialog(actor_unit, target_city,
+                                        action_probabilities);
 
       $(id).remove();
     });
@@ -716,4 +732,90 @@ function popup_incite_dialog(actor_unit, target_city, cost)
                 width: "auto"});
 
   $(id).dialog('open');
+}
+
+/**************************************************************************
+  Create a button that steals a tech.
+
+  Needed because of JavaScript's scoping rules.
+**************************************************************************/
+function create_steal_tech_button(parent_id, tech,
+                                  actor_unit_id, target_city_id)
+{
+  /* Create the initial button with this tech */
+  var button = {
+    text : tech['name'],
+    click : function() {
+      var packet = {"pid" : packet_unit_do_action,
+        "actor_id" : actor_unit_id,
+        "target_id": target_city_id,
+        "value" : tech['id'],
+        "name" : "",
+        "action_type": ACTION_SPY_TARGETED_STEAL_TECH};
+
+      send_request(JSON.stringify(packet));
+
+      $("#" + parent_id).remove();
+    }
+  };
+
+  /* The button is ready. */
+  return button;
+}
+
+/**************************************************************************
+  Select what tech to steal when doing targeted tech theft.
+**************************************************************************/
+function popup_steal_tech_selection_dialog(actor_unit, target_city,
+                                           act_probs)
+{
+  var id = "stealtech_dialog_" + actor_unit['id'];
+  var buttons = [];
+
+  /* Reset dialog page. */
+  $("#" + id).remove();
+  $("<div id='" + id + "'></div>").appendTo("div#game_page");
+
+  /* Set dialog title */
+  $("#" + id).attr("title", "Select Advance to Steal");
+
+  /* List the alternatives */
+  for (var tech_id in techs) {
+    /* JavaScript for each iterates over keys. */
+    var tech = techs[tech_id];
+
+    /* Actor and target player tech known state. */
+    var act_kn = player_invention_state(client.conn.playing, tech_id);
+    var tgt_kn = player_invention_state(city_owner(target_city), tech_id);
+
+    /* Can steal a tech if the target player knows it and the actor player
+     * has the pre requirements. Some rulesets allows the player to steal
+     * techs the player don't know the prereqs of. */
+    if ((tgt_kn == TECH_KNOWN)
+        && ((act_kn == TECH_PREREQS_KNOWN)
+            || (game_info['tech_steal_allow_holes']
+                && (act_kn == TECH_TECH_UNKNOWN)))) {
+      /* Add a button for stealing this tech to the dialog. */
+      buttons.push(create_steal_tech_button(id, tech,
+                                            actor_unit['id'],
+                                            target_city['id']));
+    }
+  }
+
+  /* Allow the user to cancel. */
+  buttons.push({
+                 text : 'Cancel',
+                 click : function() {
+                   $("#" + id).remove();
+                 }
+               });
+
+  /* Create the dialog. */
+  $("#" + id).dialog({
+                       modal: true,
+                       buttons: buttons,
+                       width: "90%"});
+
+  /* Show the dialog. */
+  $("#" + id).dialog('open');
 }

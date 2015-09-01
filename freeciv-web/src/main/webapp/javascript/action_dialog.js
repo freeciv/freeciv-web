@@ -802,6 +802,27 @@ function popup_steal_tech_selection_dialog(actor_unit, target_city,
     }
   }
 
+  /* The player may change his mind after selecting targeted tech theft. */
+  if (act_probs[ACTION_SPY_STEAL_TECH] != 0) {
+    /* Untargeted tech theft may be legal. Add it as an alternative. */
+    buttons.push({
+                   text  : "At " + unit_types[actor_unit['type']]['name']
+                           + "'s Discretion",
+                   click : function() {
+                     var packet = {
+                       "pid" : packet_unit_do_action,
+                       "actor_id" : actor_unit['id'],
+                       "target_id": target_city['id'],
+                       "value" : 0,
+                       "name" : "",
+                       "action_type": ACTION_SPY_STEAL_TECH};
+                     send_request(JSON.stringify(packet));
+
+                     $("#" + id).remove();
+                   }
+                 });
+  }
+
   /* Allow the user to cancel. */
   buttons.push({
                  text : 'Cancel',

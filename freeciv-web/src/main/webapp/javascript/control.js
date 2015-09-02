@@ -110,6 +110,9 @@ function control_init()
         }
   });
 
+  $(window).bind('beforeunload', function(){
+    return "Do you really want to leave your nation behind now?";
+  });
 
   $(window).on('unload', function(){
     send_surrender_game();
@@ -931,10 +934,6 @@ function do_map_click(ptile, qtype)
     }
     airlift_active = false;
 
-  } else if (current_focus.length > 0 && sunits != null && sunits.length == 0
-             && pcity == null && !is_touch_device()) {
-    activate_goto();
-
   } else {
     if (pcity != null) {
       if (pcity['owner'] == client.conn.playing.playerno) {
@@ -1158,6 +1157,10 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift)
     case 33: // 9
     case 105:
       key_unit_move(DIR8_NORTH);
+      break;
+
+    case 27:
+      deactivate_goto();
       break;
 
 

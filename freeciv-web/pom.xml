@@ -108,7 +108,7 @@
 	      <cssFinalFile>webclient.css</cssFinalFile>
 	      <cssSourceFiles>
                 <cssSourceFile>jquery-ui.min.css</cssSourceFile>
-	        <cssSourceFile>sweet-alert.css</cssSourceFile>
+	        <cssSourceFile>sweetalert.css</cssSourceFile>
 	        <cssSourceFile>bluecurve.css</cssSourceFile>
 	        <cssSourceFile>fg.menu.css</cssSourceFile>
 	        <cssSourceFile>theme.dark.css</cssSourceFile>

@@ -488,8 +488,13 @@ function update_unit_order_commands()
 
     }
 
-    if (ptype['name'] == "Spy" || ptype['name'] == "Diplomat") {
-      unit_actions["action_selection"] = {name: "Diplomatic action (D)"};
+    /* Bring up the action selection dialog against current tile. */
+    if (ptype['name'] == "Spy" || ptype['name'] == "Diplomat"
+        || ptype['name'] == "Caravan" || ptype['name'] == "Freight"
+        || ptype['name'] == "Settlers"
+        || ptype['name'] == "Nuclear") {
+      /* This unit type can perform an enabler controlled action. */
+      unit_actions["action_selection"] = {name: "Do... (D)"};
     }
 
     if (ptype['name'] == "Engineers") {

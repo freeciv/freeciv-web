@@ -60,7 +60,7 @@
     <a href="#" onclick="key_unit_paradrop();"><img src="/images/orders/paradrop.png" name="paradrop_button" alt="" border="0" width="30" height="30"></a>
   </div>
 
-  <div id="order_nuke" class="order_button" title="Nuke (Shift-N)">
+  <div id="order_nuke" class="order_button" title="Detonate Nuke At (Shift-N)">
     <a href="#" onclick="key_unit_nuke();"><img src="/images/orders/nuke.png" name="nuke_button" alt="" border="0" width="30" height="30"></a>
   </div>
 

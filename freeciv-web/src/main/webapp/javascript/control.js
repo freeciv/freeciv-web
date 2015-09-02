@@ -28,6 +28,8 @@ var allow_right_click = false;
 
 var current_focus = [];
 var goto_active = false;
+var goto_last_order = ORDER_LAST;
+var goto_last_action = ACTION_COUNT;
 var paradrop_active = false;
 var airlift_active = false;
 
@@ -499,7 +501,7 @@ function update_unit_order_commands()
 
     if (ptype['name'] == "Nuclear") {
       $("#order_nuke").show();
-      unit_actions["nuke"] = {name: "Detonate Nuke (Shift-N)"};
+      unit_actions["nuke"] = {name: "Detonate Nuke At (Shift-N)"};
     } else {
       $("#order_nuke").hide();
     }
@@ -858,6 +860,41 @@ function do_map_click(ptile, qtype)
         packet['target'][i] = EXTRA_NONE;
         packet['action'][i] = ACTION_COUNT;
       }
+
+      if (goto_last_order != ORDER_LAST) {
+        /* The final order is specified. */
+        var pos;
+
+        /* Append the order unless there are targets at the tile. */
+        if (tile_city(ptile) == null
+            && tile_units(ptile).length == 0) {
+          /* Append the final order. */
+          pos = packet['length'];
+
+          /* Increase orders length */
+          packet['length'] = packet['length'] + 1;
+
+          /* Initialize the order to "empthy" values. */
+          packet['orders'][pos] = ORDER_LAST;
+          packet['dir'][pos] = -1;
+          packet['activity'][pos] = ACTIVITY_LAST;
+          packet['target'][pos] = EXTRA_NONE;
+          packet['action'][pos] = ACTION_COUNT;
+        } else {
+          /* Replace the existing last order with the final order */
+          pos = packet['length'] - 1;
+        }
+
+        /* Set the final order. */
+        packet['orders'][pos] = goto_last_order;
+
+        /* Perform the final action. */
+        packet['action'][pos] = goto_last_action;
+      }
+
+      /* The last order has now been used. Clear it. */
+      goto_last_order = ORDER_LAST;
+      goto_last_action = ACTION_COUNT;
 
       if (punit['id'] != goto_path['unit_id']) {
         /* Shouldn't happen. Maybe an old path wasn't cleared out. */
@@ -1288,6 +1325,10 @@ function deactivate_goto()
   goto_turns_request_map = {};
   clear_goto_tiles();
 
+  /* Clear the order this action would have performed. */
+  goto_last_order = ORDER_LAST;
+  goto_last_action = ACTION_COUNT;
+
   // update focus to next unit after 600ms.
   setTimeout("update_unit_focus();", 600);
 
@@ -1429,22 +1470,17 @@ function key_unit_pollution()
 
 
 /**************************************************************************
- Tell the units to explode as a nuke.
+  Start a goto that will end in the unit(s) detonating in a nuclear
+  exlosion.
 **************************************************************************/
 function key_unit_nuke()
 {
-  var funits = get_units_in_focus();
-  for (var i = 0; i < funits.length; i++) {
-    var punit = funits[i];
-    var packet = {"pid" : packet_unit_do_action,
-                  "actor_id" : punit['id'],
-                  "target_id": punit['tile'],
-                  "value" : 0,
-                  "name" : "",
-                  "action_type": ACTION_NUKE};
-      send_request(JSON.stringify(packet));
-  }
-  update_unit_focus();
+  /* The last order is the nuclear detonation. */
+  goto_last_order = ORDER_PERFORM_ACTION;
+  goto_last_action = ACTION_NUKE;
+
+  /* Don't explode in place. */
+  activate_goto();
 }
 
 /**************************************************************************

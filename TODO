@@ -47,6 +47,8 @@ Minor/Other:
 Unimplemented Freeciv client features:
 - global work lists
 - advanced unit selection
+- rearranging items in the city production work list
+- the cities tab
 - the auto generated part of the help texts
 - the spy action targeted sabotage
 

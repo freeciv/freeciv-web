@@ -122,6 +122,23 @@ function to_title_case(str)
 }
 
 /**************************************************************************
+  Remove a string's translation qualifier.
+
+  The Freeciv server qualifies some strings for translation purposes. The
+  qualifiers shouldn't be shown to the user.
+**************************************************************************/
+function string_unqualify(str)
+{
+  if (str.charAt(0) == "?" && str.indexOf(":") != -1) {
+    /* This string is qualified. Remove it. */
+    return str.substr(str.indexOf(":") + 1);
+  } else {
+    /* This string isn't qualified. */
+    return str;
+  }
+}
+
+/**************************************************************************
 ...
 **************************************************************************/
 function get_random_int(min, max) {

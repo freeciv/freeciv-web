@@ -191,7 +191,7 @@ force_bombard = FALSE
 ; If force_explode_nuclear is set to TRUE it is illegal for an actor unit
 ; to perform a regular attack against a tile if it can do explode nuclear
 ; in stead.
-force_explode_nuclear = FALSE
+force_explode_nuclear = TRUE
 
 ; What each action should be called when showing them to the player.
 ; The first %s should be before the mnemonic of the action.

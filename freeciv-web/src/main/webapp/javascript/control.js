@@ -475,8 +475,8 @@ function update_unit_order_commands()
         $("#order_forest_remove").hide();
         $("#order_irrigate").hide();
       }
-      unit_actions["fortress"] = {name: "Build fortress (Shift-F)"};
-      unit_actions["airbase"] = {name: "Build Airbase (E)"};
+      unit_actions["fortress"] = {name: string_unqualify(terrain_control['gui_type_base0']) + " (Shift-F)"};
+      unit_actions["airbase"] = {name: string_unqualify(terrain_control['gui_type_base1']) + " (E)"};
 
     } else {
       $("#order_road").hide();

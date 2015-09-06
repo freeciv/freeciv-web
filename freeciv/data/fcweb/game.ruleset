@@ -178,6 +178,21 @@ tired_attack = FALSE
 ; in stead.
 force_trade_route = TRUE
 
+; If force_capture_units is set to TRUE it is illegal for an actor unit to
+; bombard, explode nuclear or perform a regular attack against a tile if
+; it can capture units on it in stead.
+force_capture_units = FALSE
+
+; If force_capture_units is set to TRUE it is illegal for an actor unit to
+; explode nuclear or perform a regular attack against a tile if it can
+; bombard it in stead.
+force_bombard = FALSE
+
+; If force_explode_nuclear is set to TRUE it is illegal for an actor unit
+; to perform a regular attack against a tile if it can do explode nuclear
+; in stead.
+force_explode_nuclear = FALSE
+
 ; What each action should be called when showing them to the player.
 ; The first %s should be before the mnemonic of the action.
 ; The second %s marks were extra details should be insterted.

@@ -313,6 +313,16 @@ function handle_ruleset_control(packet)
 
 }
 
+/**************************************************************************
+  Receive next part of the ruleset description.
+
+  0% complete
+**************************************************************************/
+function handle_ruleset_description_part(packet)
+{
+  /* TODO */
+}
+
 function handle_endgame_report(packet)
 {
 

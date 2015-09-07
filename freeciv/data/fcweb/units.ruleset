@@ -31,6 +31,7 @@ flags =
     _("AirAttacker"), _("Very bad at attacking AEGIS.")
     _("Horse"), _("Attack value halved when attacking Pikemen.")
     _("Helicopter"), _("Defends very badly against Fighters.")
+    _("Unbribable")
     _("TradeRoute"), _("Can establish trade routes (must travel to target city).")
     _("HelpWonder")
     _("Cities")
@@ -2257,7 +2258,7 @@ uk_shield     = 0
 uk_food       = 0
 uk_gold       = 0
 flags         = "IgZOC", "NonMil", "HasNoZOC", "NoBuild", "NoHome", "SuperSpy", 
-                "Undisbandable", "GameLoss", "Unique"
+                "Undisbandable", "Unbribable", "GameLoss", "Unique"
 ; No veteran levels (level name is never displayed)
 veteran_names = _("green")
 veteran_raise_chance = 0
@@ -2294,7 +2295,7 @@ uk_happy      = 0
 uk_shield     = 0
 uk_food       = 0
 uk_gold       = 0
-flags         = "IgZOC", "NonMil", "HasNoZOC",
+flags         = "IgZOC", "NonMil", "HasNoZOC", "Unbribable",
                 "Undisbandable", "SuperSpy", "NoHome", "NoBuild"
 ; No veteran levels (level name is never displayed)
 veteran_names = _("green")

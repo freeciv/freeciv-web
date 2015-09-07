@@ -370,8 +370,7 @@ actor_reqs    =
     }
 target_reqs    =
     { "type",   "name", "range", "present"
-      "UnitType", "Leader", "Local", FALSE
-      "UnitType", "Barbarian Leader", "Local", FALSE
+      "UnitFlag", "Unbribable", "Local", FALSE
       "CityTile", "Center", "Local", FALSE
       "Gov", "Democracy", "Player", FALSE
       "MaxUnitsOnTile", "1", "Local", TRUE

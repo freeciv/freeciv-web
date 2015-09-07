@@ -183,7 +183,7 @@ force_trade_route = TRUE
 ; it can capture units on it in stead.
 force_capture_units = FALSE
 
-; If force_capture_units is set to TRUE it is illegal for an actor unit to
+; If force_bombard is set to TRUE it is illegal for an actor unit to
 ; explode nuclear or perform a regular attack against a tile if it can
 ; bombard it in stead.
 force_bombard = FALSE

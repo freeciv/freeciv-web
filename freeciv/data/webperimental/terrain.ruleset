@@ -1027,7 +1027,8 @@ ui_name_base_airbase = _("?gui_type:Build Airbase")
 ;                           "Irrigation", "Mine", "Hut", "Pollution", "Fallout",
 ;                           "Base", "Road", or "Appear"
 ; rmcauses                = events that can remove extra type.
-;                           "CleanPollution", "CleanFallout", or "Pillage"
+;                           "CleanPollution", "CleanFallout", "Pillage", or
+;                           "Disappear"
 ; graphic                 = tag specifying preferred graphic
 ; graphic_alt             = tag for alternate graphic if preferred graphic is
 ;                           not present. Can use eg "-" for no alternate
@@ -1042,6 +1043,7 @@ ui_name_base_airbase = _("?gui_type:Build Airbase")
 ;                           and README.effects for help on requirements)
 ; rmreqs                  = requirements to remove the extra
 ; appearance_reqs         = spontaneous appearance requirements
+; disappearance_reqs      = spontaneous disappearance requirements
 ; buildable               = Can extra be built? Defaults to TRUE
 ; build_time              = how long it takes a unit to build this extra.
 ;                           Value of 0 (default) means that terrain- and
@@ -1060,6 +1062,10 @@ ui_name_base_airbase = _("?gui_type:Build Airbase")
 ; appearance_chance       = If extra has cause "Appear" and other requirements
 ;                           for its appearance are fulfilled, this tells how big
 ;                           chance it has to appear each turn. The chance is 1/1000
+;                           times this value.
+; disappearance_chance    = If extra has rmcause "Disappear" and other requirements
+;                           for its disappearance are fulfilled, this tells how big
+;                           chance it has to disappear each turn. The chance is 1/1000
 ;                           times this value.
 ; native_to               = List of unit classes that are considered to
 ;                           be inside the extra when they are on same tile

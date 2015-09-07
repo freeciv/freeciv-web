@@ -88,6 +88,8 @@ veteran_move_bonus = 0, 0, 0, 0
 ;                 "Normal", "Nothing" or "Frighten"
 ; flags         = List of unit class flags (from the following list; you
 ;                 cannot add custom unit class flags)
+; helptext	= optional help text string; should escape all raw newlines 
+;		  so that xgettext parsing works
 ;
 ; ** Unit class Flags **
 ;

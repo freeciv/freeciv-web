@@ -414,7 +414,7 @@ actor_reqs    =
       "DiplRel", "Is foreign", "Local", FALSE
     }
 
-[actionenabler_build_city_pinoneer]
+[actionenabler_build_city_pioneer]
 action = "Found City"
 actor_reqs    =
     { "type",   "name", "range"

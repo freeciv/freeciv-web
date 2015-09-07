@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # activity_null_check is for Freeciv bug #22700.
-# city_traderoute_hotfix is for Freeciv bug #23708.
+# city_traderoute_hotfix is for missing city save game crashes. Some were fixed in Freeciv SVN r29600. Others remain. (See Freeciv bug #23614)
 # city_occupied_fix is Freeciv bug #23813. Committed in Freeciv SVN r29682
 # min_curl is Freeciv bug #23824. Committed in Freeciv SVN r29702
 # estring is Freeciv patch #6295. Committed in Freeciv SVN r29703

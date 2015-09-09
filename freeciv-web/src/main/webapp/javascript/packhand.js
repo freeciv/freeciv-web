@@ -694,14 +694,48 @@ function handle_diplomacy_accept_treaty(packet)
 		packet['other_accepted']);
 }
 
+/* Assemble incoming page_msg here. */
+var page_msg = {};
+
+/**************************************************************************
+  Page_msg header handler.
+**************************************************************************/
 function handle_page_msg(packet)
 {
-  var headline = packet['headline'];
-  var message = packet['lines'];
-  var regxp = /\n/gi;
-  message = message.replace(regxp, "<br>\n");
-  show_dialog_message(headline, message);
+  /* Message information */
+  page_msg['headline'] = packet['headline'];
+  page_msg['caption'] = packet['caption'];
+  page_msg['event'] = packet['event'];
 
+  /* How many fragments to expect. */
+  page_msg['missing_parts'] = packet['parts'];
+
+  /* Will come in follow up packets. */
+  page_msg['message'] = "";
+}
+
+/**************************************************************************
+  Page_msg part handler.
+**************************************************************************/
+function handle_page_msg_part(packet)
+{
+  /* Add the new parts of the message content. */
+  page_msg['message'] = page_msg['message'] + packet['lines'];
+
+  /* Register that it was received. */
+  page_msg['missing_parts']--;
+
+  if (page_msg['missing_parts'] == 0) {
+    /* This was the last part. */
+
+    var regxp = /\n/gi;
+
+    page_msg['message'] = page_msg['message'].replace(regxp, "<br>\n");
+    show_dialog_message(page_msg['headline'], page_msg['message']);
+
+    /* Clear the message. */
+    page_msg = {};
+  }
 }
 
 function handle_conn_ping_info(packet)

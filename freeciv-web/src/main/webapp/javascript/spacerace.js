@@ -48,20 +48,24 @@ function show_spaceship_dialog()
   var spaceship = spaceship_info[client.conn.playing['playerno']];
 
   message += "Spaceship progress: " + get_spaceship_state_text(spaceship['sship_state']) + "<br>";
-  message += "Success rate: " + (spaceship['success_rate'] / 100) + "<br>";
-  message += "Travel time: " + spaceship['travel_time'] + "<br>";
+  message += "Success probability: " + Math.floor(spaceship['success_rate']) + "%<br>";
+  message += "Travel time: " + Math.floor(spaceship['travel_time']) + " years<br>";
   message += "Components: " + spaceship['components'] + "<br>";
-  message += "Energy Rate: " + (spaceship['energy_rate'] / 100) + "<br>";
-  message += "Support rate: " + (spaceship['support_rate'] / 100) + "<br>";
+  message += "Energy Rate: " + Math.floor(spaceship['energy_rate']) + "%<br>";
+  message += "Support Rate: " + Math.floor(spaceship['support_rate']) + "%<br>";
   message += "Habitation: " + spaceship['habitation'] + "<br>";
   message += "Life Support: " + spaceship['life_support'] + "<br>";
-  message += "Mass: " + spaceship['mass'] + "<br>";
+  message += "Mass: " + spaceship['mass'] + " tons<br>";
   message += "Modules: " + spaceship['modules'] + "<br>";
   message += "Population: " + spaceship['population'] + "<br>";
   message += "Propulsion: " + spaceship['propulsion'] + "<br>";
   message += "Solar Panels: " + spaceship['solar_panels'] + "<br>";
   message += "Structurals: " + spaceship['structurals'] + "<br>";
   if (spaceship['launch_year'] != 9999) message += "Launch year: " + spaceship['launch_year'] + "<br>";
+
+  if (game_info['victory_conditions'] == 0) message = "Spaceship victory disabled.<br>"
+
+  message += "<br>For help, see the Space Race page in the manual.<br>"
 
   $("#dialog").remove();
   $("<div id='dialog'></div>").appendTo("div#game_page");

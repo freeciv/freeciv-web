@@ -120,8 +120,6 @@ Install this software if you are not running Freeciv-web with Vagrant:
 
 - Tornado 4.2 or later - http://www.tornadoweb.org/
 
-- GLib 2.16.0 or newer - http://ftp.gnome.org/pub/GNOME/sources/glib/2.16/
-
 - Jansson 2.6 - http://www.digip.org/jansson/
 
 - liblzma-dev - http://tukaani.org/xz/ - for XZ compressed savegames.

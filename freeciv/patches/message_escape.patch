@@ -1,0 +1,26 @@
+diff --git a/common/packets.def b/common/packets.def
+index 1117870..de3c27f 100644
+--- a/common/packets.def
++++ b/common/packets.def
+@@ -582,7 +582,7 @@ PACKET_CHAT_MSG = 25; sc, lsend
+ end
+ 
+ PACKET_CHAT_MSG_REQ = 26; cs, handle-per-conn, dsend
+-  STRING message[MAX_LEN_MSG];
++  ESTRING message[MAX_LEN_MSG];
+ end
+ 
+ # Used in initial protocol.
+diff --git a/server/handchat.c b/server/handchat.c
+index fcbd198..1cdbc3e 100644
+--- a/server/handchat.c
++++ b/server/handchat.c
+@@ -326,7 +326,7 @@ void handle_chat_msg_req(struct connection *pconn, const char *message)
+   /* This loop to prevent players from sending multiple lines which can
+    * be abused */
+   for (cp = real_message; *cp != '\0'; cp++) {
+-    if (*cp == '\n' || *cp == '\r') {
++    if (*cp == '\n' || *cp == '\r' || *cp == '<' || *cp == '>' || *cp == '"' || *cp == '\'') {
+       *cp = '\0';
+       break;
+     }

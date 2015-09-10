@@ -74,4 +74,6 @@ target/
 *.class
 tornado*
 resin*
+freeciv-web.project
+configuration.sh.dist
 

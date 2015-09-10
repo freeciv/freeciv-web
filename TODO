@@ -51,6 +51,7 @@ Unimplemented Freeciv client features:
 - the cities tab
 - the auto generated part of the help texts
 - the spy action targeted sabotage
+- between turns timer count down
 
 Simplify Freeciv server upgrade:
 - document what changes in Freeciv to be extra aware of and what they can break

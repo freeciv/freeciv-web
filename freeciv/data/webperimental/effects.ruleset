@@ -1725,6 +1725,14 @@ reqs	=
       "OutputType", "Science", "Local"
     }
 
+[effect_telegraph_border_vision]
+type    = "Border_Vision"
+value   = 1
+reqs   =
+    { "type", "name", "range"
+      "Tech", "Electricity", "Player"
+    }
+
 [effect_apollo_program]
 type    = "Reveal_Map"
 value	= 1

@@ -69,6 +69,7 @@ Remove forest
 <h2>Keyboard Shortcuts for Unit Orders:</h2>
   a: (a)uto-settler  (settler/worker units)
   b: (b)uild city  (settler units)
+  c: (c)enter map on active unit
   f: (f)ortify unit  (military units)
   f: build (f)ortress  (settler/worker units)
   g: (g)o to tile  (then left-click mouse to select target tile)

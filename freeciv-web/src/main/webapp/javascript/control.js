@@ -1086,7 +1086,10 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift)
     case 'C':
       if (ctrl) {
         show_citybar = !show_citybar;
+      } else if (current_focus.length > 0) {
+        auto_center_on_focus_unit();
       }
+
     break;
 
 

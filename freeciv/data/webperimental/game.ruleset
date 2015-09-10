@@ -40,7 +40,12 @@ capital if it is communist.\n\
 - Explorers can establish embassies once Writing is discovered. \
 This action consumes the explorer.\n\
 - The Zone of Control rules have been turned off.\n\
-- There's only one barbarian nation, attacking from both land and sea.\
+- There's only one barbarian nation, attacking from both land and sea.\n\
+\n\
+This ruleset is still in development. If playing it makes you think that \
+a rule should change go to the Freeciv-web board at \
+http://forum.freeciv.org/ and tell us in the \
+webperimental ruleset feed back and suggestion thread.\
 ")
 
 [options]

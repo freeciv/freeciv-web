@@ -19,7 +19,8 @@
 
 var observing = false;
 var chosen_nation = -1;
-var ai_skill_level = 1;
+var choosing_player = -1;
+var ai_skill_level = 2;
 var nation_select_id = -1;
 var metamessage_changed = false;
 
@@ -85,7 +86,7 @@ function update_player_info()
     /* show player ready state in pregame dialog */
     for (id in players) {
       player = players[id];
-      var nation_text = "";;
+      var nation_text = "";
       if (player['nation'] in nations) {
         nation_text = " - " + nations[player['nation']]['adjective'];
         var sprite = get_player_fplag_sprite(player);
@@ -103,8 +104,55 @@ function update_player_info()
       } else {
           $("#pregame_plr_"+id).attr("title", "AI Player (random nation)");
       }
+      $("#pregame_plr_"+id).attr("name", player['name']);
+      $("#pregame_plr_"+id).attr("playerid", player['playerno']);
+
     }
     $(".pregame_player_name").tooltip();
+
+    $("#pregame_player_list").contextMenu({
+        selector: '.pregame_player_name', 
+        callback: function(key, options) {
+            var name = $(this).attr('name');
+            var playerid = parseInt($(this).attr('playerid'));
+            if (key == "take_player") {
+              var msg_packet = {"pid" : packet_chat_msg_req, "message" : "/take " + name};
+              send_request(JSON.stringify(msg_packet));
+            } else if (key == "pick_nation") {
+              pick_nation(playerid);
+            } else if (key == "aitoggle_player") {
+              var msg_packet = {"pid" : packet_chat_msg_req, "message" : "/ai " + name};
+              send_request(JSON.stringify(msg_packet));
+            } else if (key == "observe_player") {
+              var msg_packet = {"pid" : packet_chat_msg_req, "message" : "/observe " + name};
+              send_request(JSON.stringify(msg_packet));
+            } else if (key == "novice") {
+              var msg_packet = {"pid" : packet_chat_msg_req, "message" : "/novice " + name};
+              send_request(JSON.stringify(msg_packet));
+            } else if (key == "easy") {
+              var msg_packet = {"pid" : packet_chat_msg_req, "message" : "/easy " + name};
+              send_request(JSON.stringify(msg_packet));
+            } else if (key == "normal") {
+              var msg_packet = {"pid" : packet_chat_msg_req, "message" : "/normal " + name};
+              send_request(JSON.stringify(msg_packet));
+            } else if (key == "hard") {
+              var msg_packet = {"pid" : packet_chat_msg_req, "message" : "/hard " + name};
+              send_request(JSON.stringify(msg_packet));
+            }  
+        },
+        items: {
+            "pick_nation": {name: "Pick nation"},
+            "observe_player": {name: "Observe this player"},
+            "take_player": {name: "Take this player"},
+            "aitoggle_player": {name: "Aitoggle player"},
+            "sep1": "---------",
+            "novice": {name: "Novice"},
+            "easy": {name: "Easy"},
+            "normal": {name: "Normal"},
+            "hard": {name: "Hard"},
+            "sep2": "---------"
+        }
+    });
 
     /* set state of Start game button depending on if user is ready. */
     if (client.conn['player_num'] != null  && client.conn['player_num'] in players
@@ -123,10 +171,13 @@ function update_player_info()
 /****************************************************************************
   ...
 ****************************************************************************/
-function pick_nation()
+function pick_nation(player_id)
 {
+  if (player_id == null) player_id = client.conn['player_num'];
+  var pplayer = players[player_id]; 
+  choosing_player = player_id;
 
-  var nations_html = "<div id='nation_heading'><span>Select your nation:</span> <br>"
+  var nations_html = "<div id='nation_heading'><span>Select nation for " + pplayer['name'] + ":</span> <br>"
                   + "<input id='nation_autocomplete_box' type='text' size='20'>"
 		  + "<div id='nation_choice'></div></div> <div id='nation_list'> ";
   var nation_name_list = [];
@@ -143,11 +194,10 @@ function pick_nation()
     }
   }
 
-
   nations_html += "</div><div id='nation_legend'></div><div id='select_nation_flag'></div>";
 
   $("#pick_nation_dialog").html(nations_html);
-  $("#pick_nation_dialog").attr("title", "Which nation do you want to rule?");
+  $("#pick_nation_dialog").attr("title", "Pick nation");
   $("#pick_nation_dialog").dialog({
 			bgiframe: true,
 			modal: true,
@@ -155,12 +205,12 @@ function pick_nation()
 			buttons: {
 				Ok: function() {
 					$("#pick_nation_dialog").dialog('close');
-					submit_nation_choise();
+					submit_nation_choice();
 				}
 			}
 		});
 
-  $("#nation_legend").html("Please choose your nation carefully.");
+  $("#nation_legend").html("Please choose nation for " + pplayer['name'] + " carefully.");
 
 
   $("#nation_autocomplete_box").autocomplete({
@@ -199,7 +249,7 @@ function select_nation(new_nation_id)
   $("#nation_legend").html(pnation['legend']);
   $("#nation_autocomplete_box").val(pnation['adjective']);
   $("#nation_" + chosen_nation).css("background-color", "transparent");
-  $("#nation_choice").html("Your Nation: " + pnation['adjective']);
+  $("#nation_choice").html("Chosen nation: " + pnation['adjective']);
   $("#select_nation_flag").html("<img src='/images/flags/"
 		            + pnation['graphic_str'] + "-web.png' width='180'>");
 
@@ -214,20 +264,24 @@ function select_nation(new_nation_id)
 /****************************************************************************
   ...
 ****************************************************************************/
-function submit_nation_choise()
+function submit_nation_choice()
 {
-  if (chosen_nation == -1 || client.conn['player_num'] == null) return;
+  if (chosen_nation == -1 || client.conn['player_num'] == null 
+      || choosing_player == null || choosing_player < 0) return;
+
+  var leader_name = nations[chosen_nation]['leader_name'][0];
+  if (choosing_player == client.conn['player_num']) {
+    leader_name = client.conn['username'];
+  }
 
   var test_packet = {"pid" : packet_nation_select_req,
-                     "player_no" : client.conn['player_num'],
+                     "player_no" : choosing_player,
                      "nation_no" : chosen_nation,
                      "is_male" : true, /* FIXME */
-                     "name" : client.conn['username'],
+                     "name" : leader_name,
                      "style" : nations[chosen_nation]['style']};
-  var myJSONText = JSON.stringify(test_packet);
-  send_request(myJSONText);
+  send_request(JSON.stringify(test_packet));
   clearInterval(nation_select_id);
-  $("#pick_nation_button").button( "option", "disabled", true);
 }
 
 

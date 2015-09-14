@@ -100,13 +100,15 @@ Also see the [Dockerfile](Dockerfile) for more information.
   git clone https://github.com/freeciv/freeciv-web.git --depth=10
  ```
 
-2. Build the Freeciv-web docker container by giving the following command:
+2. Build the Freeciv-web docker container by giving the following command: 
  ```bash
  docker build -t="freeciv-web" .
  ```
-3. Then run the Freeciv-web docker container with this command:
+3. Then run the Freeciv-web docker container with this command: 
+
+ 
  ```bash
- docker run -d -p 80:80 -t freeciv-web 
+ docker run -d -p 80:80 -t freeciv-web
  ```
 
 System Requirements for manual install

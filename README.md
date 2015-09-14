@@ -89,6 +89,25 @@ The Vagrant guest machine will mount the Freeciv-web source repository in the /v
 Note that running Freeciv-web using Vagrant requires about 4Gb of memory
 and 3 Gb of harddisk space.
 
+Running Freeciv-web with Docker
+-------------------------------
+Freeciv-web can be built automatically using Docker https://www.docker.com/
+This was tested using Docker 1.8.2 with Ubuntu 14.04 as the base image.
+Also see the [Dockerfile](Dockerfile) for more information.
+
+1. Install Docker, then get the Freeciv-web source code like this:
+ ```bash
+  git clone https://github.com/freeciv/freeciv-web.git --depth=10
+ ```
+
+2. Build the Freeciv-web docker container by giving the following command:
+ ```bash
+ docker build -t="freeciv-web" .
+ ```
+3. Then run the Freeciv-web docker container with this command:
+ ```bash
+ docker run -d -p 80:80 -t freeciv-web 
+ ```
 
 System Requirements for manual install
 --------------------------------------

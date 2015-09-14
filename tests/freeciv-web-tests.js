@@ -2,6 +2,7 @@
  CasperJS tests for Freeciv-web.
 ***********************************************************************/
 
+casper.options.waitTimeout = 20000;
 
 casper.test.begin('Test of Resin running on localhost port 8080.', 2, function suite(test) {
     casper.start("http://localhost:8080/", function() {
@@ -87,7 +88,7 @@ casper.test.begin('Test starting new Freeciv-web game', 10, function suite(test)
       /* Starting new game automatically from Javascript.*/
       if (validate_username()) {
         $("#dialog").dialog('close');
-        setTimeout("pregame_start_game();", 1000);
+        setTimeout("pregame_start_game();", 3000);
       }
     });
 
@@ -196,7 +197,7 @@ casper.test.begin('Test starting new Freeciv-web game', 10, function suite(test)
           function() {
             test.fail("Failed to load webperimental.");
           },
-          7000);
+          12000);
 
     casper.run(function() {
       test.done();

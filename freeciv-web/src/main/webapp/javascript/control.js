@@ -28,10 +28,12 @@ var allow_right_click = false;
 
 var current_focus = [];
 var goto_active = false;
-var goto_last_order = ORDER_LAST;
-var goto_last_action = ACTION_COUNT;
 var paradrop_active = false;
 var airlift_active = false;
+
+/* Will be set when the goto is activated. */
+var goto_last_order = -1;
+var goto_last_action = -1;
 
 /* Selecting unit from a stack without popup. */
 var SELECT_POPUP = 0;
@@ -1300,12 +1302,24 @@ function handle_context_menu_callback(key)
 }
 
 /**************************************************************************
- ...
+  Activate a regular goto.
 **************************************************************************/
 function activate_goto()
 {
+  activate_goto_last(ORDER_LAST, ACTION_COUNT);
+}
+
+/**************************************************************************
+  Activate a goto and specify what to do once there.
+**************************************************************************/
+function activate_goto_last(last_order, last_action)
+{
   goto_active = true;
   mapview_canvas.style.cursor = "crosshair";
+
+  /* Set what the unit should do on arrival. */
+  goto_last_order = last_order;
+  goto_last_action = last_action;
 
   if (current_focus.length > 0) {
     if (intro_click_description) {
@@ -1486,12 +1500,8 @@ function key_unit_pollution()
 **************************************************************************/
 function key_unit_nuke()
 {
-  /* The last order is the nuclear detonation. */
-  goto_last_order = ORDER_PERFORM_ACTION;
-  goto_last_action = ACTION_NUKE;
-
-  /* Don't explode in place. */
-  activate_goto();
+  /* The last order of the goto is the nuclear detonation. */
+  activate_goto_last(ORDER_PERFORM_ACTION, ACTION_NUKE);
 }
 
 /**************************************************************************

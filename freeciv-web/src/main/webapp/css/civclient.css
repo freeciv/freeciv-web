@@ -82,7 +82,7 @@ button {
   float: left;
   width: 100%;
   overflow: hidden;
-  margin-top: -25px;
+  margin-top: -15px;
 }
 
 #unit_text_details {
@@ -416,7 +416,7 @@ button {
 #unit_info_image {
   cursor:pointer; 
   float: left; 
-  padding-right: 10px;  
+  margin-right: 5px;  
 }
 
 #city_production_overview {
@@ -819,4 +819,8 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 
 .ui-tooltip {
     white-space: pre-line;
+}
+
+.no-close .ui-dialog-titlebar-close {
+  display: none 
 }

@@ -207,8 +207,9 @@ function init_chatbox()
 			width: "25%",
 			height: "auto",
 			resizable: true,
-			dialogClass: 'chatbox_dialog',
+			dialogClass: 'chatbox_dialog no-close',
 			resize: chatbox_resized,
+			closeOnEscape: false,
 			position: {my: 'left bottom', at: 'left bottom', of: window},
 			close: function(event, ui) { chatbox_active = false;}
 		});

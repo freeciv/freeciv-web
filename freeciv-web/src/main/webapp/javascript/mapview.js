@@ -560,7 +560,7 @@ function update_unit_info_label(punits)
 **************************************************************************/
 function update_select_unit_dialog(punits)
 {
-  var unit_info_html = "<div><b>Select a unit:</b></div>";
+  var unit_info_html = "";
 
   for (var i = 0; i < punits.length; i++) {
     var punit = punits[i];

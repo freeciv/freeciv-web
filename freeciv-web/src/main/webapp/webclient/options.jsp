@@ -37,21 +37,6 @@
   <button id="end_button" type="button" class="button setting_button" onClick="window.location='/';" title="Ends the game, and returns to the main page of Freeciv-web." >End Game</button>
 </div>
 
-<div class="main_menu_buttons">
-  <button id="show_overview_button" type="button" class="button setting_button" onClick="init_overview();" title="Shows the overview map.">Show overview map</button>
-</div>
-
-<div class="main_menu_buttons">
-  <button id="show_unit_button" type="button" class="button setting_button" onClick="init_game_unit_panel();" title="Show the unit info box.">Show unit info box</button>
-</div>
-
-<div class="main_menu_buttons">
-  <button id="show_message_button" type="button" class="button setting_button" onClick="init_chatbox();" title="Shows the box with chat messages on the main map.">Show message box</button>
-</div>
-
-<br>
-
-<div id="map_image"></div>
 
 </div>
 

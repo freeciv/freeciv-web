@@ -573,10 +573,11 @@ function init_game_unit_panel()
   $("#game_unit_panel").dialog({
 			bgiframe: true,
 			modal: false,
-			width: "250px",
+			width: "270px",
 			height: "auto",
-			resizable: false,
-			dialogClass: 'unit_dialog',
+			resizable: true,
+			closeOnEscape: false,
+			dialogClass: 'unit_dialog  no-close',
 			position: {my: 'right bottom', at: 'right bottom', of: "#canvas_div"},
 			close: function(event, ui) { unitpanel_active = false;}
 

@@ -61,11 +61,11 @@ function init_overview()
 			width: "auto",
 			minHeight: 110,
 			resizable: false,
-			dialogClass: 'overview_dialog',
+			closeOnEscape: false,
+			dialogClass: 'overview_dialog no-close',
 			close: function(event, ui) { overview_active = false;}
 		});
 
-  $("#game_overview_panel").dialog({ dialogClass: "overview_dialog" });
   $("#game_overview_panel").parent().css("overflow", "hidden");
 
   palette = generate_palette();

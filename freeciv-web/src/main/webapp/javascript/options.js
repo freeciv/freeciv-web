@@ -110,24 +110,6 @@ var gui_gtk2_small_display_layout = FALSE;
 
 function init_options_dialog()
 {
-  if (overview_active) {
-    $("#show_overview_button").hide();
-  } else {
-    $("#show_overview_button").show();
-  }
-
-  if (unitpanel_active) {
-    $("#show_unit_button").hide();
-  } else {
-    $("#show_unit_button").show();
-  }
-
-  if (chatbox_active) {
-    $("#show_message_button").hide();
-  } else {
-    $("#show_message_button").show();
-  }
-
   $("#save_button").button("option", "label", "Save Game");
 
   $("#timeout_setting").val(game_info['timeout']);
@@ -160,7 +142,6 @@ function init_options_dialog()
       audio.load("/music/" + music_list[Math.floor(Math.random() * music_list.length)] + ".mp3");
     }
   }
-
 
   $(".setting_button").tooltip();
 

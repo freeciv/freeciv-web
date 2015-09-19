@@ -169,7 +169,7 @@ if ( isset($port) ) {
       $row = fcdb_fetch_array($res, 0);
       if ($row["value"] < $vv[8]) {
         $myincrease = intval($vv[8]) - intval($row["value"]);
-        if ($myincrease > 0 && $myincrease < 60) {
+        if ($myincrease > 0 && $myincrease < 10) {
           $stmt="update turncount set count = count + " . addneededslashes($myincrease);
           $res = fcdb_exec($stmt);
         }

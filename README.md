@@ -45,6 +45,7 @@ Running Freeciv-web with Vagrant on VirtualBox
 Freeciv-web can be setup using Vagrant on VirtualBox to quickly create a 
 local developer image running Freeciv-web on Ubuntu 14.04 on your host 
 operating system such as Windows, OSX or Linux. 
+This is the recommended way to build Freeciv-web on your computer.
 
 1. Install VirtualBox: https://www.virtualbox.org/ - Install manually on Windows, and with the following command on Linux:
  ```bash
@@ -92,6 +93,7 @@ and 3 Gb of harddisk space.
 Running Freeciv-web with Docker
 -------------------------------
 Freeciv-web can be built automatically using Docker https://www.docker.com/
+Note that building Freeciv-web with Docker is still in beta and testing.
 This was tested using Docker 1.8.2 with Ubuntu 14.04 as the base image.
 Also see the [Dockerfile](Dockerfile) for more information.
 

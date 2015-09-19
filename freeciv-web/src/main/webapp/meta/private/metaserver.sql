@@ -136,4 +136,10 @@ CREATE EVENT freeciv_web_server_cleanup
     DO
       DELETE FROM servers where stamp <= DATE_SUB(NOW(), INTERVAL 30 MINUTE);
 
+DROP TABLE IF EXISTS `turncount`;
+CREATE TABLE `turncount` (
+  `count` BIGINT NOT NULL DEFAULT 0
+);
+INSERT INTO turncount (count) VALUES (0);
+
 -- Dump completed on 2013-05-25 11:32:48

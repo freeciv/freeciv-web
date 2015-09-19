@@ -18,7 +18,6 @@
 ***********************************************************************/
 
 $(document).ready(function() {
-
   var savegames = simpleStorage.get("savegames");
 
   if (savegames == null || savegames.length == 0) {
@@ -59,15 +58,27 @@ $(document).ready(function() {
       $("#playws").hide();
     }
 
+  update_game_count();
+  setInterval("update_game_count();", 8000);
 
-
-$.ajax({
-  url: "/meta/fpinfo.php",
-  cache: true
-})
-  .done(function( html ) {
+  $.ajax({
+    url: "/meta/fpinfo.php",
+    cache: true
+  }).done(function( html ) {
     $( "#metalink" ).html("Live Games: " +  html );
   });
 
 });
 
+
+
+function update_game_count()
+{
+$.ajax({
+  url: "/meta/turnstats.php",
+  cache: false
+})
+  .done(function( html ) {
+    $( "#turncount" ).html(html);
+  });
+}

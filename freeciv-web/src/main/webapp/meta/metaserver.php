@@ -89,26 +89,17 @@ if ( isset($port) ) {
   /* All responses to the server will be text */
   header("Content-Type: text/plain; charset=\"utf-8\"");
 
+  if ($_SERVER['SERVER_ADDR'] != $_SERVER['REMOTE_ADDR']){
+    $this->output->set_status_header(400, 'No Remote Access Allowed');
+    exit; //just for good measure
+  }
+
   /* garbage port */
   if (!is_numeric($port) || $port < 1024 || $port > 65535) {
     print "exiting, garbage port \"$port\"\n";
     exit(1);
   }
 
-  /* This is to check if the name they have supplied matches their IP */
-    /* Maybe they have a proxy they can't get around */
-  /* FIXME: these don't work.  - Andreas
-  if ( isset($_SERVER["HTTP_X_FORWARDED_FOR"]) ) {
-    $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
-  } elseif ( isset($_SERVER["HTTP_CLIENT_IP"]) ) {
-    $ip = $_SERVER["HTTP_CLIENT_IP"];
-  } else {
-    $ip = $_SERVER["REMOTE_ADDR"];
-  }
-
-  if (gethostbyname($host) != $ip) {
-    $host = @gethostbyaddr($ip);
-  }*/
 
   /* is this server going away? */
   if (isset($bye)) {
@@ -169,6 +160,21 @@ if ( isset($port) ) {
       array_push($playerstmt, $ins); 
     }
   }
+
+  /* increment total turn count.  */
+    $stmt = "select value from variables where name = 'turn' and hostport=\"$host:$port\"";
+    $res = fcdb_exec($stmt);
+    $nr = fcdb_num_rows($res);
+    if ( $nr == 1 ) {
+      $row = fcdb_fetch_array($res, 0);
+      if ($row["value"] < $vv[8]) {
+        $myincrease = intval($vv[8]) - intval($row["value"]);
+        if ($myincrease > 0 && $myincrease < 60) {
+          $stmt="update turncount set count = count + " . addneededslashes($myincrease);
+          $res = fcdb_exec($stmt);
+        }
+      }
+    }
 
   /* delete this variables that this server might have already set. */
   $stmt="delete from variables where hostport=\"$host:$port\"";
@@ -272,79 +278,6 @@ if ( isset($port) ) {
 
   /* We've done the database so we're done */
 
-} elseif ( isset($client_cap) || isset($client) ) {
-  global $freeciv_versions;
-  $output = "";
-  $output .= "[versions]\n";
-  $output .= "latest_stable=\"" . version_by_tag("stable") . "\"\n";
-  $verkeys = array_keys($freeciv_versions);
-  foreach ($verkeys as $key) {
-    $output .= "$key=\"" . version_by_Tag("$key") . "\"\n";
-  }
-  $stmt="select * from servers order by host,port asc";
-  $res = fcdb_exec($stmt);
-  $nr = fcdb_num_rows($res);
-  $nservers=0;
-  if ( $nr > 0 ) {
-    for ($inx = 0; $inx < $nr; $inx++) {
-      $row = fcdb_fetch_array($res, $inx);
-      // debug("db = \"".$row["capability"]." \" vs \"$client_cap\"\n");
-      /* we only want to show compatable servers */
-      if ( $client == "all"  || 
-           (has_all_capabilities(mandatory_capabilities($row["capability"]),$client_cap) &&
-            has_all_capabilities(mandatory_capabilities($client_cap),$row["capability"]) ) ) {
-        $output .= "[server$nservers]\n";
-        $nservers++;
-        $output .= sprintf("host = \"%s\"\n", $row["host"]);
-        $output .= sprintf("port = \"%s\"\n", $row["port"]);
-        /* the rest of the vars from the database */
-        foreach($sqlvars as $var) {
-          $noquote=str_replace("\"","",$row[$var]); /* some " were messing it up */
-          $output .= "$var = \"$noquote\"\n";
-        }
-
-        $stmt="select * from players where hostport=\"".$row["host"].":".$row["port"]."\" order by name";
-        $res1 = fcdb_exec($stmt);
-        $nr1 = fcdb_num_rows($res1);
-        $output .= "nplayers = \"$nr1\"\n";
-        if ($nr1 > 0) {
-          $output .= "player = { \"name\", \"user\", \"nation\", \"type\", \"host\"\n";
-          for ($i = 0; $i < $nr1; $i++) {
-            $prow = fcdb_fetch_array($res1, $i);
-            $output .= sprintf(" \"%s\", ", stripslashes($prow["name"]));
-            $output .= sprintf("\"%s\", ", stripslashes($prow["user"]));
-            $output .= sprintf("\"%s\", ", stripslashes($prow["nation"]));
-            $output .= sprintf("\"%s\", ", stripslashes($prow["type"]));
-            $output .= sprintf("\"%s\"\n", stripslashes($prow["host"]));
-          }
-          $output .= "}\n";
-        }
-
-        $stmt="select * from variables where hostport=\"".$row["host"].":".$row["port"]."\"";
-        $res2 = fcdb_exec($stmt);
-        $nr2 = fcdb_num_rows($res2);
-        if ($nr2 > 0) {
-          $output .= "vars = { \"name\", \"value\"\n";
-          for ($i = 0; $i < $nr2; $i++) {
-            $vrow = fcdb_fetch_array($res2, $i);
-            $output .= sprintf(" \"%s\", ", $vrow["name"]);
-            $output .= sprintf("\"%s\"\n ", $vrow["value"]);
-          }
-          $output .= "}\n";
-        }
-        $output .= "\n";
-      }
-    }
-    $output .= "[main]\n";
-    $output .= "nservers = $nservers\n\r\n";
-
-    /* All responses to the client will be in Freeciv's ini format */
-    //header("Content-Type: text/x-ini");
-    header("Content-Type: text/plain; charset=\"utf-8\"");
-
-    header("Content-Length: " . strlen($output));
-    print $output;
-  }
 } else {
 
   header("Content-Type: text/html; charset=\"utf-8\"");

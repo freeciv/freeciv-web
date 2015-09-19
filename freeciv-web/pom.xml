@@ -123,7 +123,7 @@
                   <jsSourceInclude>libs/*.js</jsSourceInclude>
                 </jsSourceIncludes>
 	        <jsSourceExcludes>
-                  <jsSourceExclude>menu.js</jsSourceExclude>
+                  <jsSourceExclude>frontpage.js</jsSourceExclude>
                   <jsSourceExclude>libs/jquery.min.js</jsSourceExclude>
                   <jsSourceExclude>libs/bootstrap.min.js</jsSourceExclude>
                   <jsSourceExclude>tileset_config*</jsSourceExclude>

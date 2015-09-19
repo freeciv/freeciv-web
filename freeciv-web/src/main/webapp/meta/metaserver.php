@@ -169,7 +169,7 @@ if ( isset($port) ) {
       $row = fcdb_fetch_array($res, 0);
       if ($row["value"] < $vv[8]) {
         $myincrease = intval($vv[8]) - intval($row["value"]);
-        if ($myincrease > 0 && $myincrease < 10) {
+        if ($myincrease > 0 && $myincrease <= 5) {
           $stmt="update turncount set count = count + " . addneededslashes($myincrease);
           $res = fcdb_exec($stmt);
         }
@@ -544,12 +544,16 @@ if ( isset($port) ) {
  	  $row = fcdb_fetch_array($res, $inx);
 	  $mystate = db2html($row["state"]);
 
+          $stmt="select * from players where type='Human' and hostport=\"".$row['host'].":".$row['port']."\"";
+	  $res1 = fcdb_exec($stmt);
+
 	  print "<tr class='meta_row ";
 	  if (strpos($row["message"],'password-protected') !== false) {  
             print " private_game ";
-          }
-          if ($mystate == "Running") {
+          } else if ($mystate == "Running") {
             print " running_game ";
+	  } else if (fcdb_num_rows($res1) != 0) {
+	    print " pregame_with_players ";
 	  }
 	  print "'><td> "; 
 
@@ -573,8 +577,6 @@ if ( isset($port) ) {
 
           print db2html($row["state"]);
           print "</td>";
-          $stmt="select * from players where type='Human' and hostport=\"".$row['host'].":".$row['port']."\"";
-	  $res1 = fcdb_exec($stmt);
 	  if (fcdb_num_rows($res1) == 0) {
 		  print ("<td>None" );
 	  } else if (fcdb_num_rows($res1) == 1) {

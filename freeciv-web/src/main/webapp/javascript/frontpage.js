@@ -59,7 +59,7 @@ $(document).ready(function() {
     }
 
   update_game_count();
-  setInterval("update_game_count();", 8000);
+  setInterval("update_game_count();", 4000);
 
   $.ajax({
     url: "/meta/fpinfo.php",

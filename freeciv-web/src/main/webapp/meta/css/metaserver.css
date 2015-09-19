@@ -32,3 +32,8 @@ table, th, td
 .running_game {
   font-weight: bold;
 }
+
+.pregame_with_players {
+  color: green;
+  font-weight: bold;
+}

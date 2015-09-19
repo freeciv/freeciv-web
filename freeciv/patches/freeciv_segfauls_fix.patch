@@ -1,0 +1,39 @@
+diff --git a/ai/default/aidiplomat.c b/ai/default/aidiplomat.c
+index 10eeaf4..3f8ce79 100644
+--- a/ai/default/aidiplomat.c
++++ b/ai/default/aidiplomat.c
+@@ -799,6 +799,8 @@ void dai_manage_diplomat(struct ai_type *ait, struct player *pplayer,
+       || unit_data->task == AIUNIT_DEFEND_HOME) {
+     bool failure = FALSE;
+ 
++    if (punit == NULL || punit->goto_tile == NULL) return;
++
+     ctarget = tile_city(punit->goto_tile);
+     if (pf_map_position(pfm, punit->goto_tile, &pos)
+         && ctarget) {
+diff --git a/ai/default/aiunit.c b/ai/default/aiunit.c
+index 59ce307..1f8e5cb 100644
+--- a/ai/default/aiunit.c
++++ b/ai/default/aiunit.c
+@@ -2162,7 +2162,7 @@ static void dai_manage_caravan(struct ai_type *ait, struct player *pplayer,
+   }
+ 
+   if ((unit_data->task == AIUNIT_TRADE || 
+-       unit_data->task == AIUNIT_WONDER)) {
++       unit_data->task == AIUNIT_WONDER) && punit->goto_tile != NULL) {
+     /* we are moving to our destination */
+     /* we check to see if our current goal is feasible */
+     struct city *city_dest = tile_city(punit->goto_tile);
+diff --git a/common/unit.c b/common/unit.c
+index 41d69e5..643fb46 100644
+--- a/common/unit.c
++++ b/common/unit.c
+@@ -897,7 +897,7 @@ bool can_unit_do_activity_targeted_at(const struct unit *punit,
+    *        change that destroys the target of the other activity */
+   if (target != NULL && is_build_activity(activity, ptile)) {
+     unit_list_iterate(ptile->units, tunit) {
+-      if (is_build_activity(tunit->activity, ptile)
++      if (tunit != NULL && tunit->activity_target != NULL && is_build_activity(tunit->activity, ptile)
+           && !can_extras_coexist(target, tunit->activity_target)) {
+         return FALSE;
+       }

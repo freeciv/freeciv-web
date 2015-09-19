@@ -554,8 +554,11 @@ if ( isset($port) ) {
         print "<th>Turn:</th></tr>";
         for ( $inx = 0; $inx < $nr; $inx++ ) {
           $row = fcdb_fetch_array($res, $inx);
-          print "<tr class='meta_row'><td>";
-
+          if (strpos($row["message"],'password-protected') !== false) {  
+            print "<tr class='meta_row private_game'><td>";
+          } else {
+            print "<tr class='meta_row'><td>";
+          }
 	  print "<a  class='button' href=\"/webclient?action=observe&amp;civserverport=" 
 		  . db2html($row["port"]) . "&amp;civserverhost=" . db2html($row["host"]) . "\">";
           print "Observe";
@@ -608,9 +611,15 @@ if ( isset($port) ) {
  	  $row = fcdb_fetch_array($res, $inx);
 	  $mystate = db2html($row["state"]);
 
-          print "<tr class='meta_row'><td>";
-	  
-  
+	  print "<tr class='meta_row ";
+	  if (strpos($row["message"],'password-protected') !== false) {  
+            print " private_game ";
+          }
+          if ($mystate == "Running") {
+            print " running_game ";
+	  }
+	  print "'><td> "; 
+
           if ($mystate != "Running") {
            print "<a  class='button' href=\"/webclient?action=multi&civserverport=" . db2html($row["port"]) . "&amp;civserverhost=" . db2html($row["host"]) . "&amp;multi=true\">";
            print "Play";
@@ -627,11 +636,7 @@ if ( isset($port) ) {
           print "</a>";
 
 	  print "</td>";
-          if ($mystate == "Running") {
-  	    print "<td style='color: green;'>";
-	  } else {
-  	    print "<td>";
-  	  }
+	  print "<td>";
 
           print db2html($row["state"]);
           print "</td>";
@@ -640,9 +645,9 @@ if ( isset($port) ) {
 	  if (fcdb_num_rows($res1) == 0) {
 		  print ("<td>None" );
 	  } else if (fcdb_num_rows($res1) == 1) {
-		  print ("<td style='color: green;'>" . fcdb_num_rows($res1 ) . " player");
+		  print ("<td>" . fcdb_num_rows($res1 ) . " player");
 	  } else {
-		  print ("<td style='color: green;'>" . fcdb_num_rows($res1 ) . " players");
+		  print ("<td>" . fcdb_num_rows($res1 ) . " players");
 	  }
           print "</td><td style=\"width: 30%\" >";
           print db2html($row["message"]);
@@ -661,8 +666,9 @@ if ( isset($port) ) {
 
 
 <div id="tabs-3">
-  <h2>Desktop version of Freeciv - meta.freeciv.org </h2>
-<iframe src="http://meta.freeciv.org" width="100%" height="1500" frameborder="0"></iframe>
+  <b>Public servers for desktop Freeciv clients hosted on <a href="http://meta.freeciv.org">meta.freeciv.org</a></b>:
+  <? include 'freeciv_org_metaserver.html'; ?>
+
 </div>
 
 </div>

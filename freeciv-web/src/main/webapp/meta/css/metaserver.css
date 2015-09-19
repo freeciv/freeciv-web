@@ -24,3 +24,11 @@ table, th, td
 {
   border: 1px solid white;
 }
+
+.private_game {
+  color: grey;
+}
+
+.running_game {
+  font-weight: bold;
+}

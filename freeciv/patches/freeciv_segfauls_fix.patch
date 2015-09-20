@@ -1,34 +1,50 @@
-diff --git a/ai/default/aidiplomat.c b/ai/default/aidiplomat.c
-index 10eeaf4..3f8ce79 100644
---- a/ai/default/aidiplomat.c
-+++ b/ai/default/aidiplomat.c
-@@ -799,6 +799,8 @@ void dai_manage_diplomat(struct ai_type *ait, struct player *pplayer,
+diff -Nurd -X.diff_ignore freeciv/ai/default/aidiplomat.c freeciv/ai/default/aidiplomat.c
+--- freeciv/ai/default/aidiplomat.c	2015-09-13 09:24:18.526991459 +0300
++++ freeciv/ai/default/aidiplomat.c	2015-09-20 11:53:24.168231697 +0300
+@@ -799,6 +799,11 @@
        || unit_data->task == AIUNIT_DEFEND_HOME) {
      bool failure = FALSE;
  
-+    if (punit == NULL || punit->goto_tile == NULL) return;
++    if (punit->goto_tile == NULL) {
++      dai_unit_new_task(ait, punit, AIUNIT_NONE, NULL);
++      return;
++    }
 +
      ctarget = tile_city(punit->goto_tile);
      if (pf_map_position(pfm, punit->goto_tile, &pos)
          && ctarget) {
-diff --git a/ai/default/aiunit.c b/ai/default/aiunit.c
-index 59ce307..1f8e5cb 100644
---- a/ai/default/aiunit.c
-+++ b/ai/default/aiunit.c
-@@ -2162,7 +2162,7 @@ static void dai_manage_caravan(struct ai_type *ait, struct player *pplayer,
+diff -Nurd -X.diff_ignore freeciv/ai/default/aiunit.c freeciv/ai/default/aiunit.c
+--- freeciv/ai/default/aiunit.c	2015-09-17 23:10:14.875926360 +0300
++++ freeciv/ai/default/aiunit.c	2015-09-20 10:47:39.225177018 +0300
+@@ -2161,13 +2161,20 @@
+     }
    }
  
-   if ((unit_data->task == AIUNIT_TRADE || 
+-  if ((unit_data->task == AIUNIT_TRADE || 
 -       unit_data->task == AIUNIT_WONDER)) {
-+       unit_data->task == AIUNIT_WONDER) && punit->goto_tile != NULL) {
++  if (unit_data->task == AIUNIT_TRADE
++      || unit_data->task == AIUNIT_WONDER) {
      /* we are moving to our destination */
      /* we check to see if our current goal is feasible */
-     struct city *city_dest = tile_city(punit->goto_tile);
-diff --git a/common/unit.c b/common/unit.c
-index 41d69e5..643fb46 100644
---- a/common/unit.c
-+++ b/common/unit.c
-@@ -897,7 +897,7 @@ bool can_unit_do_activity_targeted_at(const struct unit *punit,
+-    struct city *city_dest = tile_city(punit->goto_tile);
++    struct city *city_dest = NULL;
+ 
+-    if ((city_dest == NULL) 
++    if (punit->goto_tile != NULL) {
++      city_dest = tile_city(punit->goto_tile);
++    } else {
++      dai_unit_new_task(ait, punit, AIUNIT_NONE, NULL);
++      city_dest = NULL;
++    }
++
++    if (city_dest == NULL
+         || !pplayers_allied(unit_owner(punit), city_dest->owner)
+         || (unit_data->task == AIUNIT_TRADE
+             && !(can_cities_trade(homecity, city_dest)
+diff -Nurd -X.diff_ignore freeciv/common/unit.c freeciv/common/unit.c
+--- freeciv/common/unit.c	2015-09-18 17:28:05.372371817 +0300
++++ freeciv/common/unit.c	2015-09-20 10:44:21.217612180 +0300
+@@ -890,7 +890,7 @@
     *        change that destroys the target of the other activity */
    if (target != NULL && is_build_activity(activity, ptile)) {
      unit_list_iterate(ptile->units, tunit) {

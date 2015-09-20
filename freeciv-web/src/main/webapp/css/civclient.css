@@ -784,7 +784,7 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 }
 
 #city_overview_tab, #city_production_tab, #city_traderoutes_tab, #city_settings_tab, #city_info_tab, #city_units_tab {
-  min-height: 600px;
+  min-height: 550px;
 }
 
 // city tabs will be on the bottom of the dialog.

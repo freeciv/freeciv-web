@@ -63,7 +63,7 @@ function observe()
 /****************************************************************************
   ...
 ****************************************************************************/
-function update_player_info()
+function update_player_info_pregame()
 {
   if (C_S_PREPARING == client_state()) {
     player_html = "";

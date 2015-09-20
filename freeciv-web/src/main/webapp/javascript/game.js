@@ -95,9 +95,9 @@ function update_game_status_panel() {
       status_html += "<b>" + civ_population(client.conn.playing.playerno) + "</b>  ";
       status_html += "Year: <b>" + get_year_string() + "</b> ";
       status_html += "Gold: <b>" + pplayer['gold'] + " (" + net_income + ")</b>  ";
-      status_html += "Tax: <b>" + tax + "</b> ";
-      status_html += "Lux: <b>" + lux + "</b> ";
-      status_html += "Sci: <b>" + sci + "</b> ";
+      status_html += "Tax: <b>" + tax + "</b>% ";
+      status_html += "Lux: <b>" + lux + "</b>% ";
+      status_html += "Sci: <b>" + sci + "</b>% ";
     }
   } else {
     status_html += "Observing - " + game_info['meta_message'] + " - ";

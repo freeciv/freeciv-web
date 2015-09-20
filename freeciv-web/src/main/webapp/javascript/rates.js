@@ -55,7 +55,7 @@ function show_tax_rates_dialog()
     + "</td><td><INPUT TYPE='CHECKBOX' NAME='lock'>Lock</td></tr>"
     + "</table></form>"
     + "<div id='max_tax_rate' style='margin:10px;'>"
-    + "</div>";
+    + "</div><span id='rates_info' style='margin:10px;'></div>";
 
   $(id).html(dhtml);
 
@@ -65,8 +65,7 @@ function show_tax_rates_dialog()
 			modal: true,
 			width: "450",
 			  buttons: {
-				"Change tax rates" : function() {
-					submit_player_rates();
+				"Close" : function() {
 					$("#rates_dialog").dialog('close');
 				}
 			  }
@@ -98,6 +97,19 @@ function update_rates_dialog()
   var govt = governments[client.conn.playing['government']];
 
   $("#max_tax_rate").html("<i>" + govt['name'] + " max rate: " + maxrate + "</i>");
+  update_net_income();
+}
+
+/**************************************************************************
+  ...
+**************************************************************************/
+function update_net_income()
+{
+  var net_income = client.conn.playing['net_income'];
+  if (client.conn.playing['net_income'] > 0) {
+    net_income = "+" + client.conn.playing['net_income'];
+  }
+  $("#rates_info").html("Net income: " + net_income);
 }
 
 /**************************************************************************
@@ -201,7 +213,7 @@ function update_tax_rates ()
   $("#sci_result").html(sci + "%");
 
   freeze = false;
-
+  submit_player_rates();
 }
 
 /**************************************************************************
@@ -247,6 +259,7 @@ function update_lux_rates ()
 
 
   freeze = false;
+  submit_player_rates();
 
 }
 
@@ -292,6 +305,7 @@ function update_sci_rates ()
   $("#sci_result").html(sci + "%");
 
   freeze = false;
+  submit_player_rates();
 
 }
 

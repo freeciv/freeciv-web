@@ -239,9 +239,11 @@ function handle_player_info(packet)
   if (client.conn.playing != null) {
     if (packet['playerno'] == client.conn.playing['playerno']) {
       client.conn.playing = players[packet['playerno']];
+      update_game_status_panel();
+      update_net_income();
     }
   }
-  update_player_info();
+  update_player_info_pregame();
 
   if (is_tech_tree_init && tech_dialog_active) update_tech_screen();
 }
@@ -250,7 +252,7 @@ function handle_player_info(packet)
 function handle_player_remove(packet)
 {
   delete players[packet['playerno']];
-  update_player_info();
+  update_player_info_pregame();
 
 }
 

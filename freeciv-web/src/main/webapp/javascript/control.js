@@ -121,11 +121,6 @@ function control_init()
     network_stop();
   });
 
-  /* Click callbacks for main tabs. */
-  $("#map_tab").click(function(event) {
-    set_default_mapview_active();
-  });
-
   $("#civ_tab").click(function(event) {
     set_default_mapview_inactive();
     init_civ_dialog();

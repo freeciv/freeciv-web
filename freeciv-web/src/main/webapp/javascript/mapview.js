@@ -609,13 +609,6 @@ function set_default_mapview_active()
   mapview_canvas_ctx = mapview_canvas.getContext("2d");
   mapview_canvas_ctx.font = canvas_text_font;
 
-  /* shows mapview elements */
-  $("#tabs-map").show();
-  $("#map_tab").addClass("ui-state-active");
-  $("#map_tab").addClass("ui-tabs-selected");
-  $("#tabs-hel").hide();
-
-  update_map_canvas_full();
   chatbox_scroll_down();
 
   if (!is_small_screen()) {

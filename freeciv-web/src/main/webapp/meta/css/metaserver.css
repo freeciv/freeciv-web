@@ -53,3 +53,34 @@ table, th, td
 .freeciv_game_info_box {
   background: rgba(0,0,0,0.1);
 }
+
+
+@media (max-width: 600px) {
+ table.singleplayer th:nth-child(2) {
+   display: none;
+ }
+  table.singleplayer td:nth-child(2) {
+   display: none;
+ }
+
+ table.singleplayer th:nth-child(3) {
+   display: none;
+ }
+  table.singleplayer td:nth-child(3) {
+   display: none;
+ }
+ table.multiplayer th:nth-child(3) {
+   display: none;
+ }
+  table.multiplayer td:nth-child(3) {
+   display: none;
+ }
+ table.multiplayer th:nth-child(5) {
+   display: none;
+ }
+  table.multiplayer td:nth-child(5) {
+   display: none;
+ }
+
+
+}

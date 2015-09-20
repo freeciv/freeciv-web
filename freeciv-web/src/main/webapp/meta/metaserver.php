@@ -472,9 +472,9 @@ if ( isset($port) ) {
       $res = fcdb_exec($stmt);
       $nr = fcdb_num_rows($res);
       if ( $nr > 0 ) {
-        print "<br /><table class='metatable'>\n";
+        print "<br /><table class='metatable singleplayer'>\n";
         print "<tr class='meta_header'><th>Game Action:</th>";
-        print "<th>State</th><th>Players</th>";
+        print "<th>Players</th>";
         print "<th style='width:45%;'>Message</th>";
         print "<th>Player</th>\n";
         print "<th>Flag</th>\n";
@@ -494,11 +494,7 @@ if ( isset($port) ) {
           print "<a class='button' href=\"/meta/metaserver.php?server_port=" . db2html($row["host"]) . ":" . db2html($row["port"]) . "\">";
 	  	  print "Info";
           print "</a>";
-
-
 	  print "</td><td>";
-          print db2html($row["state"]);
-          print "</td><td>";
           $stmt="select * from players where hostport=\"".$row['host'].":".$row['port']."\"";
           $res1 = fcdb_exec($stmt);
           print fcdb_num_rows($res1);
@@ -513,7 +509,7 @@ if ( isset($port) ) {
           print db2html($row["turn"]);
 	  print "</td></tr>\n";
         }
-        print "</table><br><br><br><br>";
+        print "</table><br><br><br>";
       } else {
         print "<h3><a href='/webclient/?action=new'>Click here to start a new single player game!</a></h3><br><br><br>";
       }
@@ -528,7 +524,7 @@ if ( isset($port) ) {
       $res = fcdb_exec($stmt);
       $nr = fcdb_num_rows($res);
       if ( $nr > 0 ) {
-	print "<table class='metatable'>\n";
+	print "<table class='metatable multiplayer'>\n";
         print "<tr class='meta_header'><th>Game Action:</th>";
         print "<th>State</th><th>Players</th>";
         print "<th style='width:45%;'>Message</th>";

@@ -44,5 +44,5 @@ sh run.sh) && \
 echo "Publite2 started" && \
 echo "Will sleep for 8 seconds, then do a status test..." && \
 sleep 8 && \
-sh ${FREECIV_WEB_DIR}/scripts/meta-sync.sh && \
+cd ${FREECIV_WEB_DIR}/scripts/ && bash meta-sync.sh && \
 sh ${FREECIV_WEB_DIR}/scripts/status-freeciv-web.sh

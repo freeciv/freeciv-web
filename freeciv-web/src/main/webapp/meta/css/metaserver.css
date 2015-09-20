@@ -5,6 +5,7 @@ body {
 
 .metatable {
   width: 100%;
+  text-align: left;
 }
 
 .metaspan {

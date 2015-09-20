@@ -349,11 +349,9 @@ if ( isset($port) ) {
 
 <div id="body_content">
 
- <div class="row" >
- <div class="span10 metaspan">
+ <div class="row span10 metaspan">
 
 
-<div>
 <?php
 
   if ($error_msg != NULL) {
@@ -364,9 +362,7 @@ if ( isset($port) ) {
 
       $port = substr(strrchr($server_port, ":"), 1);
       $host = substr($server_port, 0, strlen($server_port) - strlen($port) - 1);
-      print "<h1>Freeciv-web server id: " . db2html($port) . "</h1>\n";
-      print "Freeciv-web is an Open Source strategy game which can be played online against other players, or in single player mode against AI opponents.<br><br>";
-
+      print "<div class='freeciv_game_info_box'><h1>Freeciv-web server id: " . db2html($port) . "</h1>\n";
       
       $stmt = "select * from servers where host=\"$host\" and port=\"$port\"";
       $res = fcdb_exec($stmt);
@@ -375,19 +371,23 @@ if ( isset($port) ) {
         print "Cannot find the specified server";
       } else {
         $row = fcdb_fetch_array($res, 0);
-
-	print "</a>";
+  
+        print "<br/><center>";
+        $msg = db2html($row["message"]);
+        if ($msg != "") {
+          print "<p>";
+          print "<table class='server_message'><tr class='meta_header'><th>Message</th></tr>\n";
+          print "<tr><td class='message_box'>" . $msg . "</td></tr>";
+          print "</table></p>\n";
+        }
         if ($row["state"] == "Pregame") {
           print "<div><a class='button' href='/webclient/?action=multi&civserverport=" . db2html($port) . "&amp;civserverhost=" . db2html($host)
-             . "'>Join</a> <b>You can join this game now.</b></div>";
+             . "'>Join</a> <b>You can join this game now.</b></div><br>";
 	} else {
           print "<div><a class='button' href='/webclient?action=observe&amp;civserverport=" . db2html($port) . "&amp;civserverhost=" . db2html($host)
-             . "'>Join/Observe</a> <b>You can observe this game now.</b></div>";
+             . "'>Join/Observe</a> <b>You can observe this game now.</b></div><br>";
 	}
-
-        print "<br/><br/>";
-        $msg = db2html($row["message"]);
-        print "<table><tr class='meta_header'><th>Version</th><th>Patches</th><th>Capabilities</th>";
+        print "<table class='server_stats'><tr class='meta_header'><th>Version</th><th>Patches</th><th>Capabilities</th>";
         print "<th>State</th><th>Ruleset</th>";
         print "<th>Server ID</th></tr>\n";
         print "<tr class='meta_row'><td>";
@@ -403,13 +403,7 @@ if ( isset($port) ) {
         print "</td><td>";
         print db2html($row["serverid"]);
         print "</td></tr>\n</table></p>\n";
-        if ($msg != "") {
-          print "<p>";
-          print "<table><tr class='meta_header'><th>Message</th></tr>\n";
-          print "<tr><td>" . $msg . "</td></tr>";
-          print "</table></p>\n";
-        }
-        $stmt="select * from players where hostport=\"$server_port\" order by name";
+          $stmt="select * from players where hostport=\"$server_port\" order by name";
         $res = fcdb_exec($stmt);
         $nr = fcdb_num_rows($res);
         if ( $nr > 0 ) {
@@ -438,7 +432,7 @@ if ( isset($port) ) {
         $res = fcdb_exec($stmt);
         $nr = fcdb_num_rows($res);
         if ( $nr > 0 ) {
-          print "<div><table>\n";
+          print "<table class='variables_table'>\n";
           print "<tr><th class=\"left\">Option</th><th>Value</th></tr>\n";
           for ( $inx = 0; $inx < $nr; $inx++ ) {
             $row = fcdb_fetch_array($res, $inx);
@@ -448,8 +442,8 @@ if ( isset($port) ) {
             print db2html($row["value"]);
             print "</td></tr>\n";
           }
-          print "</table></div>";
-          print "<P><a class='button' href=\"".$_SERVER["PHP_SELF"]."\">Return to games list</a>";
+          print "</table></center>";
+          print "<P><a class='button' href=\"".$_SERVER["PHP_SELF"]."\">Return to games list</a></div>";
         }
 
       }
@@ -607,7 +601,6 @@ if ( isset($port) ) {
 </div>
 
 </div>
-</div>
 
 
 
@@ -624,8 +617,6 @@ if ( isset($port) ) {
 
 
 </div>
-
-<hr>
 
       <!-- Site footer -->
       <div class="footer">

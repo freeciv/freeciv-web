@@ -177,6 +177,8 @@ function pick_nation(player_id)
   var pplayer = players[player_id]; 
   choosing_player = player_id;
 
+  if (pplayer == null) return; 
+
   var nations_html = "<div id='nation_heading'><span>Select nation for " + pplayer['name'] + ":</span> <br>"
                   + "<input id='nation_autocomplete_box' type='text' size='20'>"
 		  + "<div id='nation_choice'></div></div> <div id='nation_list'> ";

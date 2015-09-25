@@ -145,8 +145,17 @@ function handle_nation_table_select( ui )
       && diplstates[player_id] != null
       && diplstates[player_id] != DS_WAR && diplstates[player_id] != DS_NO_CONTACT) {
     $('#cancel_treaty_button').button("enable");
+
   } else {
     $('#cancel_treaty_button').button("disable");
+  }
+  
+  if (!client_is_observer() && player_id != client.conn.playing['playerno']) {
+    if (diplstates[player_id] == DS_CEASEFIRE || diplstates[player_id] == DS_ARMISTICE) {
+      $("#cancel_treaty_button").button("option", "label", "Declare war");
+    } else {
+      $("#cancel_treaty_button").button("option", "label", "Cancel treaty");
+    }
   }
 
   if (client_is_observer() && pplayer['ai'] && nations[pplayer['nation']]['is_playable']

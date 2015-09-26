@@ -44,16 +44,16 @@ function set_client_page(page)
   switch (old_page) {
   case -1:
     $("#pregame_page").remove();
+    $("#pick_nation_dialog").remove();
+    $("#pregame_settings").remove();
     break;
   case PAGE_SCENARIO:
     break;
   case PAGE_LOAD:
     break;
   case PAGE_NETWORK:
-    /*destroy_server_scans();*/
     break;
   case PAGE_GAME:
-    /*enable_menus(FALSE);*/
     break;
   default:
     break;

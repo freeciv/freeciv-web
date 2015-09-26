@@ -36,7 +36,8 @@ function update_nation_screen()
   for (var player_id in players) {
     var pplayer = players[player_id];
 
-    var sprite = get_player_fplag_sprite(pplayer);
+    var flag_url = get_player_flag_url(pplayer);
+    var flag_html = "<img class='nation_flags' src='" + flag_url +"'>"
 
     var plr_class = "";
     if (!client_is_observer() && player_id == client.conn.playing['playerno']) plr_class = "nation_row_self";
@@ -44,12 +45,7 @@ function update_nation_screen()
     if (!client_is_observer() && diplstates[player_id] != null && diplstates[player_id] == DS_WAR) plr_class = "nation_row_war";
 
     nation_list_html += "<tr data-plrid='" + player_id + "' class='" + plr_class
-	   + "'><td><div style='background: transparent url("
-           + sprite['image-src']
-           + "); background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y']
-           + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px; margin: 5px; '>"
-           + "</div></td>";
-
+	   + "'><td>" + flag_html + "</td>";
     nation_list_html += "<td><div style='background-color: " + nations[pplayer['nation']]['color']
            + "; margin: 5px; width: 25px; height: 25px;'>"
            + "</div></td>";

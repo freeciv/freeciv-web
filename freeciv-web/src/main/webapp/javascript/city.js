@@ -403,6 +403,9 @@ function generate_production_list(pcity)
 	                    "helptext" : punit_type['helptext'],
                             "rule_name" : punit_type['rule_name'],
                             "build_cost" : punit_type['build_cost'],
+                            "unit_details" : punit_type['attack_strength'] + ", " 
+                                             + punit_type['defense_strength'] + ", " 
+                                             + punit_type['firepower'],
                             "sprite" : get_unit_type_image_sprite(punit_type)});
     }
   }
@@ -418,6 +421,7 @@ function generate_production_list(pcity)
 	                    "helptext" : pimprovement['helptext'],
                             "rule_name" : pimprovement['rule_name'],
                             "build_cost" : build_cost,
+                            "unit_details" : "-",
                             "sprite" : get_improvement_image_sprite(pimprovement) });
     }
   }
@@ -1045,7 +1049,7 @@ function city_worklist_dialog(pcity)
   $("#city_current_worklist").html(worklist_html);
 
   var production_list = generate_production_list(pcity);
-  var production_html = "<table class='worklist_table'><tr><td>Type</td><td>Name</td><td>Cost</td></tr>";
+  var production_html = "<table class='worklist_table'><tr><td>Type</td><td>Name</td><td title='Attack/Defense/Firepower'>Info</td><td>Cost</td></tr>";
   for (var a = 0; a < production_list.length; a++) {
     var sprite = production_list[a]['sprite'];
     if (sprite == null) {
@@ -1062,6 +1066,7 @@ function city_worklist_dialog(pcity)
            + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px;'"
            +"></div></td>"
      + "<td class='prod_choice_name'>" + production_list[a]['text'] + "</td>"
+     + "<td class='prod_choice_name'>" + production_list[a]['unit_details'] + "</td>"
      + "<td class='prod_choice_cost'>" + production_list[a]['build_cost'] + "</td></tr>";
   }
   production_html += "</table>";

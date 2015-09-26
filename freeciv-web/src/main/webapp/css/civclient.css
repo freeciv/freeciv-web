@@ -824,3 +824,8 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 .no-close .ui-dialog-titlebar-close {
   display: none 
 }
+
+.nation_flags {
+  width: 45px;
+}
+

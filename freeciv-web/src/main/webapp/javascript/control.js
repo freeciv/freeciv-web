@@ -123,7 +123,7 @@ function control_init()
 
   /* Click callbacks for main tabs. */
   $("#map_tab").click(function(event) {
-    setTimeout("set_default_mapview_active();", 30);
+    setTimeout("set_default_mapview_active();", 5);
   });
 
 

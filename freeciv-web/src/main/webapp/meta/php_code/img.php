@@ -41,7 +41,7 @@ function flag_html($tag) {
     $pic = $flags["$tag"];
   }
 
-  img_html("flags/" . $pic, $pic, NULL, 40);
+  img_html("flags/" . $pic, $pic, NULL, 50);
 }
 
 ?>

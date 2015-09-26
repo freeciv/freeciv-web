@@ -101,20 +101,20 @@ body {
   height: 380px; 
   overflow: auto; 
   padding: 10px; 
-  width: 40%;
+  width: 35%;
 }
 
 #select_nation_flag {
   float: right;
-  width: 15%;
 }
 
 .nation_choice {
   width: 260px; 
-  margin-left: 45px; 
+  margin-left: 5px; 
   cursor:pointer;
   cursor:hand;
   font-weight: bold;
+  font-size: 1.1em; 
 
 }
 
@@ -181,4 +181,20 @@ body {
   font-weight: bold;
   color: red; 
   background-color: #220000; 
+}
+
+.pregame_flags {
+  width: 50px;
+  float: left;
+}
+
+.pick_nation_flags {
+  width: 40px;
+  float: left;
+  padding-right: 3px;
+}
+
+.nation_pickme_line {
+  float: left;
+  padding: 2px;
 }

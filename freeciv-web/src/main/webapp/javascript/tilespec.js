@@ -1153,27 +1153,20 @@ function get_technology_image_sprite(ptech)
 /****************************************************************************
  ...
 ****************************************************************************/
-function get_player_fplag_sprite(pplayer)
+function get_player_flag_url(pplayer)
 {
   var pnation = nations[pplayer['nation']];
-  var tag = "f." + pnation['graphic_str'];
 
-  if (tileset[tag] == null) return null;
-
-  var tileset_x = tileset[tag][0];
-  var tileset_y = tileset[tag][1];
-  var width = tileset[tag][2];
-  var height = tileset[tag][3];
-  var i = tileset[tag][4];
-  return {"tag": tag,
-            "image-src" : "/tileset/freeciv-web-tileset-" + tileset_name + "-" + i + ".png?ts=" + ts,
-            "tileset-x" : tileset_x,
-            "tileset-y" : tileset_y,
-            "width" : width,
-            "height" : height
-            };
+  return "/images/flags/" + pnation['graphic_str'] + "-web.png"
 }
 
+/****************************************************************************
+ ...
+****************************************************************************/
+function get_nation_flag_url(pnation)
+{
+  return "/images/flags/" + pnation['graphic_str'] + "-web.png"
+}
 
 /****************************************************************************
  ...

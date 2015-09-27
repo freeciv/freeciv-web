@@ -199,7 +199,7 @@ function show_city_dialog(pcity)
                        + "Granary: " + pcity['food_stock'] + "/" + pcity['granary_size'] + "<br>"
                        + "Change in: " + city_turns_to_growth_text(pcity));
 
-  var prod_type = get_city_production_type(pcity);
+  var prod_type = get_city_production_type_sprite(pcity);
   $("#city_production_overview").html("Producing: " + (prod_type != null ? prod_type['type']['name'] : "None"));
 
   turns_to_complete = get_city_production_time(pcity);
@@ -342,9 +342,9 @@ function show_city_dialog(pcity)
 
 
 /**************************************************************************
- Returns the name of the current city production.
+ Returns the name and sprite of the current city production.
 **************************************************************************/
-function get_city_production_type(pcity)
+function get_city_production_type_sprite(pcity)
 {
   if (pcity == null) return null; 
   if (pcity['production_kind'] == VUT_UTYPE) {
@@ -359,6 +359,26 @@ function get_city_production_type(pcity)
 
   return null;
 }
+
+/**************************************************************************
+ Returns the name of the current city production.
+**************************************************************************/
+function get_city_production_type(pcity)
+{
+  if (pcity == null) return null; 
+  if (pcity['production_kind'] == VUT_UTYPE) {
+    var punit_type = unit_types[pcity['production_value']];
+    return punit_type;
+  }
+
+  if (pcity['production_kind'] == VUT_IMPROVEMENT) {
+    var improvement = improvements[pcity['production_value']];
+    return improvement;
+  }
+
+  return null;
+}
+
 
 /**************************************************************************
  Returns the number of turns to complete current city production. 
@@ -1076,7 +1096,7 @@ function city_worklist_dialog(pcity)
   keyboard_input=false;
   worklist_dialog_active = true;
   var turns_to_complete = get_city_production_time(pcity);;
-  var prod_type = get_city_production_type(pcity);
+  var prod_type = get_city_production_type_sprite(pcity);
   var prod_img_html = "";
   if (prod_type != null) { 
     sprite = prod_type['sprite'];
@@ -1087,11 +1107,11 @@ function city_worklist_dialog(pcity)
            +"</div>"
   }
 
-  var headline = prod_img_html + "<div id='prod_descr'>Producing: " 
+  var headline = prod_img_html + "<div id='prod_descr'>Production: " 
     + (prod_type != null ? prod_type['type']['name'] : "None")
 
   if (turns_to_complete != FC_INFINITY) {
-    headline += " - Turns to completion: " + turns_to_complete;
+    headline += " - Turns: " + turns_to_complete;
   }
 
   $("#worklist_dialog_headline").html(headline + "</div>");

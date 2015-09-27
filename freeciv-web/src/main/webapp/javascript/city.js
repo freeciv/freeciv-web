@@ -200,7 +200,7 @@ function show_city_dialog(pcity)
                        + "Change in: " + city_turns_to_growth_text(pcity));
 
   var prod_type = get_city_production_type(pcity);
-  $("#city_production_overview").html("Producing: " + (prod_type != null ? prod_type['name'] : "None"));
+  $("#city_production_overview").html("Producing: " + (prod_type != null ? prod_type['type']['name'] : "None"));
 
   turns_to_complete = get_city_production_time(pcity);
 
@@ -349,12 +349,12 @@ function get_city_production_type(pcity)
   if (pcity == null) return null; 
   if (pcity['production_kind'] == VUT_UTYPE) {
     var punit_type = unit_types[pcity['production_value']];
-    return punit_type;
+    return {"type":punit_type,"sprite":get_unit_type_image_sprite(punit_type)};
   }
 
   if (pcity['production_kind'] == VUT_IMPROVEMENT) {
     var improvement = improvements[pcity['production_value']];
-    return improvement;
+    return {"type":improvement,"sprite":get_improvement_image_sprite(improvement)};
   }
 
   return null;
@@ -1077,13 +1077,24 @@ function city_worklist_dialog(pcity)
   worklist_dialog_active = true;
   var turns_to_complete = get_city_production_time(pcity);;
   var prod_type = get_city_production_type(pcity);
-  var headline = "Producing: " + (prod_type != null ? prod_type['name'] : "None")
+  var prod_img_html = "";
+  if (prod_type != null) { 
+    sprite = prod_type['sprite'];
+    prod_img_html = "<div style='background: transparent url("
+           + sprite['image-src'] +
+           ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y']
+           + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px;float: left; '>"
+           +"</div>"
+  }
+
+  var headline = prod_img_html + "<div id='prod_descr'>Producing: " 
+    + (prod_type != null ? prod_type['type']['name'] : "None")
 
   if (turns_to_complete != FC_INFINITY) {
     headline += " - Turns to completion: " + turns_to_complete;
   }
 
-  $("#worklist_dialog_headline").html(headline);
+  $("#worklist_dialog_headline").html(headline + "</div>");
 
   $(".production_list_item_sub").tooltip();
 

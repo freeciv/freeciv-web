@@ -635,7 +635,7 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 #city_current_worklist {
   width: 100%;
   float: left;
-  height: 450px;
+  height: 400px;
   overflow: auto;
   background-color: rgba(40,40,40,0.4);
   border: 1px solid black;
@@ -685,8 +685,10 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 
 #worklist_dialog_headline {
   width: 100%;
+  height: 48px;
   font-size: 120%;
   padding-bottom: 5px;
+  background-color: rgba(40,40,40,0.2);
 }
 
 .worklist_table .ui-selected {
@@ -784,7 +786,7 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 }
 
 #city_overview_tab, #city_production_tab, #city_traderoutes_tab, #city_settings_tab, #city_info_tab, #city_units_tab {
-  min-height: 550px;
+  min-height: 560px;
 }
 
 // city tabs will be on the bottom of the dialog.
@@ -814,7 +816,7 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 
 #prod_buttons {
   float: right;
-  padding-top: 15px;
+  padding-top: 10px;
 }
 
 .ui-tooltip {
@@ -827,5 +829,11 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 
 .nation_flags {
   width: 45px;
+}
+
+
+#prod_descr{
+  padding: 10px;
+  margin-left: 65px;
 }
 

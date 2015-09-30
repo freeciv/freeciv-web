@@ -4,3 +4,8 @@ META_URL="http://localhost:8080/meta/metaserver.php"
 # We don't have use for MODPACK_LIST_URL at the moment.
 # This is just an example.
 # MODPACK_LIST_URL="http://modpack.freeciv.org/${DATASUBDIR}/modpack.list"
+
+# Where to store user files. Note that changing this after user has already stored
+# something to the old dir with older version of the projects means that those
+# files won't be used any more.
+FREECIV_HOME_DIR="~/.freeciv-web"

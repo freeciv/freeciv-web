@@ -911,8 +911,11 @@ function rename_city()
   $("<div id='city_name_dialog'></div>").appendTo("div#game_page");
 
   $("#city_name_dialog").html($("<div>What should we call this city?</div>"
-		  	      + "<input id='city_name_req' type='text' value='"
-			      + active_city['name'] + "'>"));
+                                + "<input id='city_name_req' type='text'>"));
+  /* The city name can contain an apostrophe ("'"). That character is also
+   * used for single quotes. It shouldn't be added unescaped to a
+   * string that later is interpreted as HTML. */
+  $("#city_name_req").attr("value", active_city['name']);
   $("#city_name_dialog").attr("title", "Rename City");
   $("#city_name_dialog").dialog({
 			bgiframe: true,

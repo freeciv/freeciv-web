@@ -1,0 +1,52 @@
+diff --git a/server/report.c b/server/report.c
+index 8a3951e..eeaf2ec 100644
+--- a/server/report.c
++++ b/server/report.c
+@@ -1289,6 +1289,10 @@ void log_civ_score_init(void)
+     return;
+   }
+ 
++  fc_snprintf(game.server.scorefile, MAX_LEN_NAME, 
++              _("../resin/webapps/ROOT/scorelogs/score-%d.log"),
++              srvarg.port);
++
+   score_log = fc_calloc(1, sizeof(*score_log));
+   score_log->fp = NULL;
+   score_log->last_turn = -1;
+@@ -1348,35 +1352,21 @@ void log_civ_score_now(void)
+     char *name;
+     int (*get_value) (const struct player *);
+   } score_tags[] = {
++    {"score",           get_total_score}, /* New 2.1.10 tag end here. */
+     {"pop",             get_pop},
+     {"bnp",             get_economics},
+     {"mfg",             get_production},
+     {"cities",          get_cities},
+     {"techs",           get_techs},
+     {"munits",          get_munits},
+-    {"settlers",        get_settlers},  /* "original" tags end here */
+ 
+     {"wonders",         get_wonders},
+     {"techout",         get_techout},
+     {"landarea",        get_landarea},
+     {"settledarea",     get_settledarea},
+-    {"pollution",       get_pollution},
+-    {"literacy",        get_literacy2},
+-    {"spaceship",       get_spaceship}, /* new 1.8.2 tags end here */
+ 
+     {"gold",            get_gold},
+-    {"taxrate",         get_taxrate},
+-    {"scirate",         get_scirate},
+-    {"luxrate",         get_luxrate},
+-    {"riots",           get_riots},
+-    {"happypop",        get_happypop},
+-    {"contentpop",      get_contentpop},
+-    {"unhappypop",      get_unhappypop},
+-    {"specialists",     get_specialists},
+     {"gov",             get_gov},
+-    {"corruption",      get_corruption}, /* new 1.11.5 tags end here */
+-
+-    {"score",           get_total_score}, /* New 2.1.10 tag end here. */
+ 
+     {"unitsbuilt",      get_units_built}, /* New tags since 2.3.0. */
+     {"unitskilled",     get_units_killed},

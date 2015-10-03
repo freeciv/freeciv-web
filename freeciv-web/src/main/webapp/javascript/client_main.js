@@ -159,7 +159,31 @@ function show_endgame_dialog()
     message += (i+1) + ": The " + nation_adj + " ruler " + pplayer['name'] + " scored " + endgame_player_info[i]['score'] + " points" + "<br>";
   }
 
-  show_dialog_message(title, message);
+  // reset dialog page.
+  $("#dialog").remove();
+  $("<div id='dialog'></div>").appendTo("div#game_page");
+
+  $("#dialog").html(message);
+  $("#dialog").attr("title", title);
+  $("#dialog").dialog({
+			bgiframe: true,
+			modal: true,
+			width: is_small_screen() ? "90%" : "50%",
+			buttons: {
+				"Show Scores" : function() {
+					$("#dialog").dialog('close');
+					view_game_scores();
+				},
+				Ok: function() {
+					$("#dialog").dialog('close');
+					$("#game_text_input").blur();
+				}
+			}
+		});
+
+  $("#dialog").dialog('open');
+  $("#game_text_input").blur();
+
 }
 
 

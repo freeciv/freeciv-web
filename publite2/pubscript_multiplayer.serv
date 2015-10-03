@@ -7,7 +7,7 @@ set nettimeout 40
 set pingtime 60
 set maxconnectionsperhost 256
 set autosaves ""
-set scorelog disabled
+set scorelog enabled
 set size 4
 set landm 50
 set minp 2

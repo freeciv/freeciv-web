@@ -6,6 +6,7 @@
     <button id="cancel_treaty_button" type="button" class="button" title="">Cancel Treaty</button>
     <button id="take_player_button" type="button" class="button" title="">Play as this nation</button>
     <button id="toggle_ai_button" type="button" class="button" title="">Toggle AI mode</button>
+    <button id="game_scores_button" type="button" class="button" title="">Game Scores</button>
   </div> 
 
   <div id="nations">

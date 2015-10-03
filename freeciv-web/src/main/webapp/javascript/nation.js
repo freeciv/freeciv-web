@@ -92,11 +92,6 @@ function update_nation_screen()
   $('#take_player_button').button("disable");
   $('#toggle_ai_button').button("disable");
 
-  $('#meet_player_button').click(nation_meet_clicked);
-  $('#view_player_button').click(center_on_player);
-  $('#cancel_treaty_button').click(cancel_treaty_clicked);
-  $('#take_player_button').click(take_player_clicked);
-  $('#toggle_ai_button').click(toggle_ai_clicked);
 }
 
 

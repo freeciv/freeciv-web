@@ -846,3 +846,6 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 
 }
 
+#scores_dialog {
+  overflow: hidden;
+}

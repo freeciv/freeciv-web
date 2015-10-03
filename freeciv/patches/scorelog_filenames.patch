@@ -1,5 +1,5 @@
 diff --git a/server/report.c b/server/report.c
-index 8a3951e..eeaf2ec 100644
+index 8a3951e..181e5d3 100644
 --- a/server/report.c
 +++ b/server/report.c
 @@ -1289,6 +1289,10 @@ void log_civ_score_init(void)
@@ -13,7 +13,7 @@ index 8a3951e..eeaf2ec 100644
    score_log = fc_calloc(1, sizeof(*score_log));
    score_log->fp = NULL;
    score_log->last_turn = -1;
-@@ -1348,35 +1352,21 @@ void log_civ_score_now(void)
+@@ -1348,41 +1352,25 @@ void log_civ_score_now(void)
      char *name;
      int (*get_value) (const struct player *);
    } score_tags[] = {
@@ -43,10 +43,16 @@ index 8a3951e..eeaf2ec 100644
 -    {"contentpop",      get_contentpop},
 -    {"unhappypop",      get_unhappypop},
 -    {"specialists",     get_specialists},
-     {"gov",             get_gov},
+-    {"gov",             get_gov},
 -    {"corruption",      get_corruption}, /* new 1.11.5 tags end here */
 -
 -    {"score",           get_total_score}, /* New 2.1.10 tag end here. */
  
      {"unitsbuilt",      get_units_built}, /* New tags since 2.3.0. */
      {"unitskilled",     get_units_killed},
+     {"unitslost",       get_units_lost},
+ 
+-    {"culture",         get_culture}      /* New tag in 2.6.0. */
+   };
+ 
+   if (!game.server.scorelog) {

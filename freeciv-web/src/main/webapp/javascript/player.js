@@ -50,6 +50,17 @@ function player_by_number(playerno)
   return players[playerno];
 }
 
+
+function player_by_name(pname)
+{
+  for (var player_id in players) {
+    var pplayer = players[player_id];
+    if (pname == pplayer['name']) return pplayer;
+  }
+  return null;
+}
+
+
 /***************************************************************
  If the specified player owns the unit with the specified id,
  return pointer to the unit struct.  Else return NULL.

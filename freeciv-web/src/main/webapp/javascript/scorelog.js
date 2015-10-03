@@ -36,7 +36,7 @@ function view_game_scores() {
 			bgiframe: true,
 			modal: true,
 			width: is_small_screen() ? "95%" : "80%",
-                        height: 740,
+                        height: is_small_screen() ? 520 : 710,
 			buttons: {
 				Ok: function() {
 					$("#scores_dialog").dialog('close');
@@ -73,14 +73,25 @@ function handle_scorelog(scorelog) {
   var playernames = [];
   var scoretags = {};
   var resultdata = {};
+  var scorecolors = [];
   for (var i = 0; i < scoreitems.length; i++) {
     var scoreitem = scoreitems[i];
     var scoredata = scoreitem.split(" ");
     if (scoredata.length >= 3) {
       if (scoredata[0] == "addplayer") {
-        scoreplayers[scoredata[2]] = scoredata[3];
+        var pname = scoredata[3];
+        for (var s = 4; s < scoredata.length; s++) {
+          pname += " " + scoredata[s];
+        }
+        scoreplayers[scoredata[2]] = pname;
         playerslist.push(scoredata[2]);
-        playernames.push(scoredata[3]);
+        playernames.push(pname);
+        var pplayer = player_by_name(pname);
+        if (pplayer == null) {
+          scorecolors.push("#ff0000"); 
+        } else {
+          scorecolors.push(nations[pplayer['nation']]['color']); 
+        }
 
       } else if (scoredata[0] == "tag") {
         scoretags[scoredata[1]] = scoredata[2];
@@ -107,6 +118,7 @@ function handle_scorelog(scorelog) {
       }
     }
   }
+  if (is_small_screen()) scoretags = {"0" : "score"};
 
   for (var key in scoretags) {
     var tagname = scoretags[key];
@@ -123,7 +135,8 @@ function handle_scorelog(scorelog) {
       xkey: 'turn',
       ykeys: playerslist,
       labels: playernames,
-      parseTime: false
+      parseTime: false,
+      lineColors : scorecolors
     });
   }
 

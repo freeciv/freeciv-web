@@ -127,6 +127,9 @@ function handle_scorelog(scorelog) {
       + "<center><b>" + get_scorelog_name(tagname) + "</b></center></div>");
   }
 
+  var ps = 4;
+  if (scoreitems.length >1000) ps = 0;
+
   for (var key in scoretags) {
     var tagname = scoretags[key];
     Morris.Line({
@@ -136,7 +139,8 @@ function handle_scorelog(scorelog) {
       ykeys: playerslist,
       labels: playernames,
       parseTime: false,
-      lineColors : scorecolors
+      lineColors : scorecolors,
+      pointSize: ps
     });
   }
 

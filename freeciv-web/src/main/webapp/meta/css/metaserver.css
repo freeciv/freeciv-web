@@ -89,5 +89,5 @@ table, th, td
   background-color: white;
   height: 400px;
   width: 80%;
-
+  display: none;
 }

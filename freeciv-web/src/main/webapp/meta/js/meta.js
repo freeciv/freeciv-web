@@ -80,6 +80,10 @@ function handle_scorelog(scorelog) {
     }
   }
 
+  var ps = 4;
+  if (scoreitems.length >1000) ps = 0;
+
+  $("#scores").show();
   var tagname = scoretags[0];
   Morris.Line({
       element: 'scores',
@@ -87,7 +91,8 @@ function handle_scorelog(scorelog) {
       xkey: 'turn',
       ykeys: playerslist,
       labels: playernames,
-      parseTime: false
+      parseTime: false,
+      pointSize: ps
   });
 
   $("#scores_tabs").tabs();

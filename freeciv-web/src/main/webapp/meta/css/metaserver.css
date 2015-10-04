@@ -16,7 +16,7 @@ body {
 }
 
 .metainfotable {
-  width:  60%;
+  width:  80%;
   background: rgba(1,1,1,0.1);
 }
 
@@ -82,5 +82,12 @@ table, th, td
    display: none;
  }
 
+
+}
+
+#scores {
+  background-color: white;
+  height: 400px;
+  width: 80%;
 
 }

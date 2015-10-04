@@ -36,7 +36,7 @@ function view_game_scores() {
 			bgiframe: true,
 			modal: true,
 			width: is_small_screen() ? "95%" : "80%",
-                        height: is_small_screen() ? 520 : 710,
+                        height: is_small_screen() ? 560 : 710,
 			buttons: {
 				Ok: function() {
 					$("#scores_dialog").dialog('close');
@@ -122,9 +122,9 @@ function handle_scorelog(scorelog) {
 
   for (var key in scoretags) {
     var tagname = scoretags[key];
-    $("#scores_ul").append("<li><a href='#scores-tabs-" + key + "' class='scores_tabber'>" + tagname + "</a></li>");
+    $("#scores_ul").append("<li><a href='#scores-tabs-" + key + "' class='scores_tabber'>" + get_scorelog_name(tagname) + "</a></li>");
     $("#scores_tabs").append("<div id='scores-tabs-" + key + "'><div id='scoreschart-" + key +  "' class='scorechart'></div>"
-      + "<center><b>" + tagname + "</b></center></div>");
+      + "<center><b>" + get_scorelog_name(tagname) + "</b></center></div>");
   }
 
   for (var key in scoretags) {
@@ -141,6 +141,34 @@ function handle_scorelog(scorelog) {
   }
 
   $("#scores_tabs").tabs();
-  $(".scores_tabber").css("padding", "2px");
+  $(".scores_tabber").css("padding", "1px");
   $("#scores_wait").hide();
+  if (is_small_screen()) {
+    $(".scorechart").height($("#scores_dialog").height() - 10);
+  }
 }
+
+/****************************************************************************
+...
+****************************************************************************/
+function get_scorelog_name(tag) {
+  var names = {
+  "score" : "Score",
+  "pop" : "Population",
+  "bnp" : "Economics",
+  "mfg" : "Production",
+  "cities" : "Cities",
+  "techs" : "Techs",
+  "munits" : "Military units", 
+  "wonders" : "Wonders",
+  "techout" : "Tech output", 
+  "landarea" : "Land area",
+  "settledarea" : "Settled area",
+  "gold" : "Gold",
+  "unitsbuilt" : "Units built",
+  "unitskilled" : "Units killed",
+  "unitslost" : "Units lost" 
+  };
+  return names[tag];
+}
+

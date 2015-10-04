@@ -414,25 +414,27 @@ if ( isset($port) ) {
           print "<tr class='meta_header'><th class=\"left\">Flag</th><th>Leader</th><th>Nation</th>";
           print "<th>User</th><th>Type</th></tr>\n";
           for ( $inx = 0; $inx < $nr; $inx++ ) {
-            $row = fcdb_fetch_array($res, $inx);
+            $prow = fcdb_fetch_array($res, $inx);
             print "<tr class='meta_row'><td class=\"left\">";
-	    flag_html("f." . $row["flag"]);
+	    flag_html("f." . $prow["flag"]);
             print "</td><td>";
-            print db2html($row["name"]);
+            print db2html($prow["name"]);
             print "</td><td>";
-            print db2html($row["nation"]);
+            print db2html($prow["nation"]);
             print "</td><td>";
-            print db2html($row["user"]);
+            print db2html($prow["user"]);
             print "</td><td>";
-            print db2html($row["type"]);
+            print db2html($prow["type"]);
             print "</td></tr>\n";
           }
           print "</table></div><p>\n";
         } else {
           print "<p>No players</p>\n";
         }
-        print("<br><b>Scores:</b><div id='scores'></div><br><br><b>Settings:</b><br>");
-        print("<script type='text/javascript'>show_scores(" . $port . ")</script>");
+        if ($row["state"] == "Running") {
+          print("<br><b>Scores:</b><div id='scores'></div><br><br><b>Settings:</b><br>");
+          print("<script type='text/javascript'>show_scores(" . $port . ")</script>");
+        }
         $stmt="select * from variables where hostport=\"$server_port\"";
         $res = fcdb_exec($stmt);
         $nr = fcdb_num_rows($res);

@@ -118,3 +118,48 @@ body {
 #logo img {
   width: 80%;
 }
+
+
+@media (max-width: 600px) {
+ table.multiplayer th:nth-child(3) {
+   display: none;
+ }
+  table.multiplayer td:nth-child(3) {
+   display: none;
+ }
+ table.multiplayer th:nth-child(5) {
+   display: none;
+ }
+  table.multiplayer td:nth-child(5) {
+   display: none;
+ }
+}
+
+
+.running_game {
+  font-weight: bold;
+}
+
+.pregame_with_players {
+  color: green;
+  font-weight: bold;
+}
+
+.private_game {
+  color: grey;
+}
+
+table, th, td
+{
+  border: 1px solid white;
+}
+
+
+.metatable {
+  width:  70%;
+  background-color: rgba(255,255,255,0.2);
+}
+
+.btn-info {
+  margin: 6px;
+}

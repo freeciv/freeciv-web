@@ -458,7 +458,7 @@ if ( isset($port) ) {
       $res = fcdb_exec($stmt);
       $row = fcdb_fetch_array($res, 0);
       $single_count = $row["count"];
-      $stmt="select count(*) as count from servers s where type = 'multiplayer' and state = 'Running'";
+      $stmt="select count(*) as count from servers s where type = 'multiplayer' and (state = 'Running' or (state = 'Pregame' and CONCAT(s.host ,':',s.port) in (select hostport from players where type <> 'A.I.')))";
       $res = fcdb_exec($stmt);
       $row = fcdb_fetch_array($res, 0);
       $multi_count = $row["count"];

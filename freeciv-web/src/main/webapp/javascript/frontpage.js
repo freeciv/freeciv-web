@@ -68,6 +68,15 @@ $(document).ready(function() {
     $( "#metalink" ).html("Live Games: " +  html );
   });
 
+
+$.ajax({
+  url: "/meta/fpmultimeta.php",
+  cache: false
+})
+  .done(function( html ) {
+    $( "#fpmultimeta" ).html(html);
+  });
+
 });
 
 

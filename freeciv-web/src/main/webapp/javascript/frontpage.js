@@ -73,22 +73,15 @@ $.ajax({
     $( "#fpmultimeta" ).html(html);
   });
 
-
        var count= 5;
-	var blog = 'http://play.freeciv.org/blog/?feed=json';
-
-	$.getJSON(blog + "&callback=?", function(data){		
-		$.each(data, function(i,item){	
-			if(i < count) {	
-			$("#myUL").append("<li><a href='"+item.permalink+"'>"+item.title+"</a></li>");		
-			}			   
-		});
-	});
-
-
+        $.getJSON("/fpfeed.json", function(data){
+                $.each(data, function(i,item){
+                        if(i < count) {
+                        $("#myUL").append("<li><a href='"+item.permalink+"'>"+item.title+"</a></li>");
+                        }
+                });
+        });
 });
-
-
 
 function update_game_count()
 {

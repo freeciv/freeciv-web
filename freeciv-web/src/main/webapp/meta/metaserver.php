@@ -344,8 +344,8 @@ if ( isset($port) ) {
       </div>
       <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="/">Home</a></li>
-          <li><a id="metalink" href="/meta/metaserver.php">Online Games</a></li>
+          <li><a href="/">Home</a></li>
+          <li class="active"><a id="metalink" href="/meta/metaserver.php">Online Games</a></li>
           <li><a href="http://forum.freeciv.org/">Forum</a></li>
           <li><a href="https://github.com/freeciv/freeciv-web">Github</a></li>
           <li><a href="http://play.freeciv.org/blog/">Blog</a></li>

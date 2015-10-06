@@ -198,3 +198,8 @@ body {
   float: left;
   padding: 2px;
 }
+
+#pregame_top_content {
+  height: 92px;
+  width: 100%;
+}

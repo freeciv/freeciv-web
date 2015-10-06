@@ -285,7 +285,7 @@ if ( isset($port) ) {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -293,66 +293,74 @@ if ( isset($port) ) {
     <meta name="author" content="The Freeciv project">
     <meta name="description" content="Freeciv is a Free and Open Source empire-building strategy game made with HTML5 which you can play in your browser, tablet or mobile device!">
     <meta name="google-site-verification" content="Dz5U0ImteDS6QJqksSs6Nq7opQXZaHLntcSUkshCF8I" />
-
+    <meta property="og:image" content="/images/freeciv-fp-logo-2.png" />
     
     <title>Freeciv-web - strategy game playable online with HTML5</title>
 
     <link rel="shortcut icon" href="/images/freeciv-shortcut-icon.png">
     <link rel="apple-touch-icon" href="/images/freeciv-splash2.png" />
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/morris.css" rel="stylesheet">
+    <link type="text/css" href="/css/jquery-ui.min.css" rel="stylesheet" />
+    <link href="/css/frontpage.css" rel="stylesheet">
+    <link href="/meta/css/metaserver.css" rel="stylesheet">
 
-    <script type="text/javascript" src="/javascript/libs/jquery.min.js"></script>
+
+
+    <script src="/javascript/libs/jquery.min.js"></script>
     <script type="text/javascript" src="/javascript/libs/jquery-ui.min.js"></script>   
     <script type="text/javascript" src="/javascript/libs/raphael-min.js"></script>   
     <script type="text/javascript" src="/javascript/libs/morris.min.js"></script>   
     <script type="text/javascript" src="/meta/js/meta.js"></script>
 
-    <!-- Bootstrap core CSS -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/morris.css" rel="stylesheet">
-
-    <link type="text/css" href="/css/jquery-ui.min.css" rel="stylesheet" />
-
-    <link href="/css/frontpage.css" rel="stylesheet">
-
-    <link href="/meta/css/metaserver.css" rel="stylesheet">
-
-
 <script>
-   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
   ga('create', 'UA-40584174-1', 'auto');
-  ga('send', 'pageview'); 
+  ga('send', 'pageview');  
+
 </script> 
-
   </head>
-
-
   <body>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-553240ed5ba009c1" async="async"></script>
+  <script type="text/javascript" src="//d2zah9y47r7bi2.cloudfront.net/releases/current/tracker.js" data-token="ee5dba6fe2e048f79b422157b450947b"></script>
 
-    <script type="text/javascript" src="//dl1d2m8ri9v3j.cloudfront.net/releases/1.2.5/tracker.js" data-customer="ee5dba6fe2e048f79b422157b450947b"></script>
-
+  <!-- Fixed navbar -->
+  <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
-
-
-      <div class="masthead">
-        <h3 class="text-muted">The Freeciv-Web Project</h3>
-        <ul class="nav nav-justified">
-          <li><a href="/">Play Freeciv!</a></li>
-          <li><a href="http://play.freeciv.org/blog/">Blog</a></li>
-          <li><a href="http://www.freeciv.org/wiki/">Wiki</a></li>
-          <li class="active"><a href="/meta/metaserver.php">Live Games</a></li>
-          <li><a href="http://forum.freeciv.org/f/viewforum.php?f=24">Forum</a></li>
-          <li><a href="http://github.com/freeciv/freeciv-web">Development</a></li>
-          <li><a href="http://freeciv.wikia.com/wiki/Donations">Donate</a></li>
-        </ul>
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/"><img id="top_logo" alt="Freeciv.org" src="/images/logo-top.png"></a> <!--Logo font is: Liberation Sans Bold Italic -->
       </div>
-
-<div id="body_content">
-
- <div class="row span10 metaspan">
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="/">Home</a></li>
+          <li><a id="metalink" href="/meta/metaserver.php">Online Games</a></li>
+          <li><a href="http://forum.freeciv.org/">Forum</a></li>
+          <li><a href="https://github.com/freeciv/freeciv-web">Github</a></li>
+          <li><a href="http://play.freeciv.org/blog/">Blog</a></li>
+          <li><a href="http://www.freeciv.org/donate.html">Donate</a></li>
+          <li><a href="http://www.freeciv.org/">Freeciv.org</a></li>
+        </ul>
+        <form class="navbar-form navbar-right searchbox">
+		<iframe src="https://duckduckgo.com/search.html?width=170&amp;site=www.freeciv.org,forum.freeciv.org,freeciv.wikia.com,play.freeciv.org&amp;prefill=Search Freeciv.org" style="overflow:hidden;margin:0;padding:0;width:228px;height:40px;" frameborder="0"></iframe>
+        </form>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Begin page content -->
+  <div id="content" class="container">
+      <div class="row span12 metaspan">
 
 
 <?php
@@ -465,6 +473,21 @@ if ( isset($port) ) {
       $row = fcdb_fetch_array($res, 0);
       $multi_count = $row["count"];
 	?>
+
+<div class="row">
+    <div class="col-lg-12">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-5520523052926214"
+     data-ad-slot="7043279885"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+    </div>
+</div>
+
 
 <div id="tabs">
 <ul>
@@ -619,7 +642,6 @@ if ( isset($port) ) {
  ?>
 
 
-</div>
 
       <!-- Site footer -->
       <div class="footer">

@@ -25,9 +25,8 @@ if (! $config_problem) {
   fcdb_metaserver_connect();
 }
 
-?> </div>
- <div id="tabs-2">
- <h2>Freeciv-web Multiplayer Games</h2>
+?> 
+ <h3>Multiplayer Games</h3>
 
 <?
       $stmt="(select host,port,version,patches,state,message,unix_timestamp()-unix_timestamp(stamp), (select value from variables where name = 'turn' and hostport = CONCAT(s.host ,':',s.port)) as turn from servers s where message not like '%Private%' and type = 'multiplayer' and state = 'Running' order by state desc) UNION (select host,port,version,patches,state,message,unix_timestamp()-unix_timestamp(stamp), (select value from variables where message not like '%Private%' and name = 'turn' and hostport = CONCAT(s.host ,':',s.port)) as turn from servers s where message not like '%Private%' and type = 'multiplayer' and state = 'Pregame' and CONCAT(s.host ,':',s.port) in (select hostport from players where type <> 'A.I.') limit 1) UNION (select host,port,version,patches,state,message,unix_timestamp()-unix_timestamp(stamp), (select value from variables where name = 'turn' and hostport = CONCAT(s.host ,':',s.port)) as turn from servers s where type = 'multiplayer' and state = 'Pregame' limit 2)";
@@ -92,7 +91,7 @@ if (! $config_problem) {
 
 
         }
-        print "</table> </div> ";
+        print "</table>  ";
       } else {
         print "<h2>No servers currently listed</h2>";
       }

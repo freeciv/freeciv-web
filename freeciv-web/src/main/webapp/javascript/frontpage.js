@@ -27,10 +27,6 @@ $(document).ready(function() {
     $('#load-button').addClass("btn-success");
   }
 
-  if ($(window).width() <= 768) {
-    $(".nav").hide();
-  }
-
     if (navigator.userAgent.toLowerCase().indexOf('android') > -1) {
       $("#chromews").hide();
       $("#mozws").hide();
@@ -65,7 +61,7 @@ $(document).ready(function() {
     url: "/meta/fpinfo.php",
     cache: true
   }).done(function( html ) {
-    $( "#metalink" ).html("Live Games: " +  html );
+    $( "#metalink" ).html("Online Games: " +  html );
   });
 
 
@@ -76,6 +72,19 @@ $.ajax({
   .done(function( html ) {
     $( "#fpmultimeta" ).html(html);
   });
+
+
+       var count= 5;
+	var blog = 'http://play.freeciv.org/blog/?feed=json';
+
+	$.getJSON(blog + "&callback=?", function(data){		
+		$.each(data, function(i,item){	
+			if(i < count) {	
+			$("#myUL").append("<li><a href='"+item.permalink+"'>"+item.title+"</a></li>");		
+			}			   
+		});
+	});
+
 
 });
 

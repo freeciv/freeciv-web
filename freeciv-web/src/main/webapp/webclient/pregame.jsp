@@ -1,5 +1,17 @@
 
 <div id="pregame_page">
+  <div id="pregame_top_content">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-5520523052926214"
+     data-ad-slot="7043279885"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+  </div>
   <div id="pregame_options">
 	<div id="pregame_buttons">
 		<div id="freeciv_logo" style="cursor:pointer;cursor:hand" 

@@ -110,7 +110,7 @@ Also see the [Dockerfile](Dockerfile) for more information.
 
  
  ```bash
- docker run -d -p 80:80 -t freeciv-web
+ docker run -d -p 80:80 --expose=80 -t freeciv-web /bin/sh -c "/docker/scripts/docker-run.sh && sleep infinity"
  ```
 
 System Requirements for manual install

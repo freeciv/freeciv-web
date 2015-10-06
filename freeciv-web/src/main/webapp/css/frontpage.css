@@ -30,13 +30,6 @@ code {
   font-size: 80%;
 }
 
-
-.container {
-  width: 95%;
-  min-width: 500px;
-}
-
-
 .jumbotron {
   text-align: center;
   padding: 0px 0px 10px 0px;
@@ -71,7 +64,7 @@ code {
   width: 80%;
 }
 
-@media (max-width: 1060px) and (min-width: 768px) {
+@media (max-width: 1160px) and (min-width: 768px) {
   .searchbox {
     display:none;
   }

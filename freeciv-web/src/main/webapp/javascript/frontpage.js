@@ -93,3 +93,8 @@ $.ajax({
     $( "#turncount" ).html(html);
   });
 }
+
+$( window ).resize(function() {
+  $("#mysearchform").get(0).scrollIntoView();
+});
+

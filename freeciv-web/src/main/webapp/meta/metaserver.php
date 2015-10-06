@@ -313,6 +313,8 @@ if ( isset($port) ) {
     <script type="text/javascript" src="/javascript/libs/raphael-min.js"></script>   
     <script type="text/javascript" src="/javascript/libs/morris.min.js"></script>   
     <script type="text/javascript" src="/meta/js/meta.js"></script>
+    <script src="/javascript/libs/bootstrap.min.js"></script>
+
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

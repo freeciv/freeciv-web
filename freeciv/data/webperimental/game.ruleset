@@ -39,6 +39,8 @@ capital if it is communist.\n\
 - Spies belonging to the owner of the Manhattan Project can nuke cities.\n\
 - Explorers can establish embassies once Writing is discovered. \
 This action consumes the explorer.\n\
+- Cities can be founded within enemy borders during war and \
+before contact.\n\
 - The Zone of Control rules have been turned off.\n\
 - There's only one barbarian nation, attacking from both land and sea.\n\
 - A player that knows Electricity has no fog of war inside his borders.\n\
@@ -513,14 +515,18 @@ target_reqs    =
       "CityTile", "Claimed", "Local", FALSE
     }
 
-[actionenabler_build_city_domestic]
+[actionenabler_build_city_occupied]
 action = "Found City"
 actor_reqs    =
     { "type",   "name", "range", "present"
       "UnitFlag", "Cities", "Local", TRUE
       "UnitState", "OnLivableTile", "Local", TRUE
       "MinMoveFrags", "1", "Local", TRUE
-      "DiplRel", "Is foreign", "Local", FALSE
+      "DiplRel", "Armistice", "Local", FALSE
+      "DiplRel", "Cease-fire", "Local", FALSE
+      "DiplRel", "Peace", "Local", FALSE
+      "DiplRel", "Alliance", "Local", FALSE
+      "DiplRel", "Team", "Local", FALSE
     }
 
 [actionenabler_join_city]

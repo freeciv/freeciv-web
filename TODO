@@ -42,6 +42,42 @@ Medium:
 Minor/Other:
 - Separate chat box from other messages.
 
+User Interface:
+- Does the Go To And Do X user interaction style fit Freeciv-web's UI design?
+  - The goto system handles "must have moves left to perform this action" rules
+    - Could perhaps avoid some user confusion? See https://youtu.be/tNYqzg2HwRE?t=5m46s
+  - Allows the user to specify the order before the unit moves into harms way
+  - Example: Freeciv-web's Detonate Nuke At menu item and unit order button
+  - Example: The Qt client's auto generated go to and... sub menu
+  - Where should it live?
+    - In a Go To And... sub menu of the unit context menu?
+    - Should unit order buttons change? How?
+  - How to handle stuff that may have changed its legality when the unit reaches its target?
+    - Example: Join the city that will be built at the target tile next turn.
+    - Example: Build a city at the tile where the enemy will build a city next turn.
+    - The Qt client currently shows everything a unit type can do in case it will become legal.
+      - Automatically finding all actions a unit may become able to perform in the future is non trivial in Freeciv-web
+- How should known illegal actions be handled?
+  - An action is known illegal when:
+    - the unit can perform it
+    - the unit can't perform it right now
+    - the player has enough information to known this
+  - A known illegal action can be shown and sent to the server
+    - The server often tries to explain why the failed action was illegal. The explanation helps the player to discover the rules.
+    - Offering to perform it can annoy and confuse the player. See https://youtu.be/tNYqzg2HwRE?t=6m31s
+  - A known illegal action can be hidden
+    - This could lead the player to assume that the unit can't perform the action at all
+  - A known illegal action can be "grayed out"
+    - the player sees that the unit can do the action but not right now
+    - many "grayed out" actions cluttering the view can be messy and confusing
+  - How much effort should be spent on discovering known illegal actions?
+    - Is requesting a list of legal actions from the server on each menu update too expensive?
+  - Current situation:
+    - the action selection dialog doesn't show known illegal actions
+    - some menu items show and allows the player to order known illegal actions
+    - Automatically finding all actions a unit may become able to perform in the future is non trivial in Freeciv-web
+    - PACKET_UNIT_GET_ACTIONS has the disturb_player field for background queries
+
 Unimplemented Freeciv client features:
 - global work lists
 - advanced unit selection

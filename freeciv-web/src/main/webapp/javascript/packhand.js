@@ -843,6 +843,10 @@ function handle_ruleset_government(packet)
 function handle_ruleset_terrain_control(packet)
 {
   terrain_control = packet;
+
+  /* Separate since it is easier understand what SINGLE_MOVE means than to
+   * understand what terrain_control['move_fragments'] means. */
+  SINGLE_MOVE = terrain_control['move_fragments'];
 }
 
 /* 100% complete */

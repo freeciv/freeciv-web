@@ -20,7 +20,9 @@
 
 var units = {};
 
-var SINGLE_MOVE = 3;
+/* Depends on the ruleset. Comes in the packet ruleset_terrain_control.
+ * Set in handle_ruleset_terrain_control(). */
+var SINGLE_MOVE;
 
 var ANIM_STEPS = 6;
 

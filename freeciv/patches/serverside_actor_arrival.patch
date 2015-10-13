@@ -1,0 +1,186 @@
+From d3010a774c495908e1d3104541d9dccefb3cb5ec Mon Sep 17 00:00:00 2001
+From: Sveinung Kvilhaugsvik <sveinung84@users.sourceforge.net>
+Date: Mon, 12 Oct 2015 18:30:31 +0200
+Subject: [PATCH] Move the actor unit arrival pop up server side
+
+The client can pop up the action selection dialog when an actor unit in a
+transport is moved inside a city it can act against. (Think of a Freight in
+a Transport) If this happens is controlled by a client setting.
+
+Move the code that detects actor unit arrival to the server. This will
+allow it to share more code with the "is this move an action" test.
+---
+ client/packhand.c  | 33 ++++++-------------------
+ common/packets.def |  2 ++
+ server/unithand.c  |  3 ++-
+ server/unittools.c | 72 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 84 insertions(+), 26 deletions(-)
+
+diff --git a/client/packhand.c b/client/packhand.c
+index 20b2ee0..1cc556f 100644
+--- a/client/packhand.c
++++ b/client/packhand.c
+@@ -1665,30 +1665,6 @@ static bool handle_unit_packet_common(struct unit *packet_unit)
+         } else {
+           refresh_city_dialog(ccity);
+         }
+-
+-        if (options.popup_actor_arrival
+-            && client_has_player()
+-            && client_player() == unit_owner(punit)
+-            && !client_player()->ai_controlled
+-            && can_client_issue_orders()
+-            && !unit_has_orders(punit)
+-             /* the server handles non transported units */
+-            && NULL != unit_transport_get(punit)
+-            && utype_may_act_at_all(unit_type(punit))) {
+-          /* Open action dialog only if 'punit' and all its transporters
+-           * (recursively) don't have orders. */
+-          struct unit *ptrans;
+-
+-          for (ptrans = unit_transport_get(punit);;
+-               ptrans = unit_transport_get(ptrans)) {
+-            if (NULL == ptrans) {
+-              process_diplomat_arrival(punit, unit_tile(punit)->index);
+-              break;
+-            } else if (unit_has_orders(ptrans)) {
+-              break;
+-            }
+-          }
+-        }
+       }
+ 
+     }  /*** End of Change position. ***/
+@@ -4129,11 +4105,18 @@ void handle_unit_action_answer(int diplomat_id, int target_id, int cost,
+ /**************************************************************************
+   Handle request for user input on what diplomat action to do.
+ **************************************************************************/
+-void handle_unit_diplomat_wants_input(int diplomat_id, int target_tile_id)
++void handle_unit_diplomat_wants_input(int diplomat_id, int target_tile_id,
++                                      bool is_arrival)
+ {
+   struct unit *pdiplomat = player_unit_by_number(client_player(),
+                                                      diplomat_id);
+ 
++  if (is_arrival && !options.popup_actor_arrival) {
++    /* The player isn't interested in getting a pop up for a mere
++     * arrival. */
++    return;
++  }
++
+   if (can_client_issue_orders()) {
+     process_diplomat_arrival(pdiplomat, target_tile_id);
+   }
+diff --git a/common/packets.def b/common/packets.def
+index 0928fc5..b0856f6 100644
+--- a/common/packets.def
++++ b/common/packets.def
+@@ -1035,6 +1035,8 @@ end
+ PACKET_UNIT_DIPLOMAT_WANTS_INPUT = 86; sc, dsend, lsend
+   UNIT diplomat_id;
+   TILE target_tile_id;
++
++  BOOL is_arrival;
+ end
+ 
+ PACKET_UNIT_GET_ACTIONS = 87; cs, handle-per-conn, dsend
+diff --git a/server/unithand.c b/server/unithand.c
+index f368432..23ee28e 100644
+--- a/server/unithand.c
++++ b/server/unithand.c
+@@ -3000,7 +3000,8 @@ bool unit_move_handling(struct unit *punit, struct tile *pdesttile,
+ 
+         dlsend_packet_unit_diplomat_wants_input(player_reply_dest(pplayer),
+                                                 punit->id,
+-                                                pdesttile->index);
++                                                pdesttile->index,
++                                                FALSE);
+         return FALSE;
+       } else if (!may_non_act_move(punit, pcity, pdesttile, igzoc)) {
+         /* No action can be done. No regular move can be done. Attack isn't
+diff --git a/server/unittools.c b/server/unittools.c
+index 4fd3421..b66516c 100644
+--- a/server/unittools.c
++++ b/server/unittools.c
+@@ -3641,6 +3641,78 @@ bool unit_move(struct unit *punit, struct tile *pdesttile, int move_cost)
+     } players_iterate_end;
+   } unit_move_data_list_iterate_rev_end;
+ 
++  /* Inform the owner's client about actor unit arrival. Can, depending on
++   * the client settings, cause the client to start the process that makes
++   * the action selection dialog pop up. */
++  if ((pcity = tile_city(pdesttile))) {
++    /* Arrival in a city counts. */
++
++    unit_move_data_list_iterate(plist, pmove_data) {
++      struct unit *ptrans;
++      bool ok;
++      struct unit *act_unit;
++      struct player *act_player;
++
++      act_unit = pmove_data->punit;
++      act_player = unit_owner(act_unit);
++
++      if (act_unit == NULL
++          || !unit_alive(act_unit->id)) {
++        /* The unit died before reaching this point. */
++        continue;
++      }
++
++      if (unit_tile(act_unit) != pdesttile) {
++        /* The unit didn't arrive at the destination tile. */
++        continue;
++      }
++
++      if (act_player->ai_controlled) {
++        /* The AI doesn't need reminders. */
++        continue;
++      }
++
++      if (!unit_transported(act_unit)) {
++        /* Don't show the action selection dialog again. Non transported
++         * units are handled before they move to the tile.  */
++        continue;
++      }
++
++      /* Open action dialog only if 'act_unit' and all its transporters
++       * (recursively) don't have orders. */
++      if (unit_has_orders(act_unit)) {
++        /* The unit it self has orders. */
++        continue;
++      }
++
++      for (ptrans = unit_transport_get(act_unit);;
++           ptrans = unit_transport_get(ptrans)) {
++        if (NULL == ptrans) {
++          /* No (recursive) transport has orders. */
++          ok = TRUE;
++          break;
++        } else if (unit_has_orders(ptrans)) {
++          /* A unit transporting the unit has orders */
++          ok = FALSE;
++          break;
++        }
++      }
++
++      if (!ok) {
++        /* A unit transporting act_unit has orders. */
++        continue;
++      }
++
++      if (action_tgt_city(act_unit, pdesttile)) {
++        /* There is a valid target. */
++
++        dlsend_packet_unit_diplomat_wants_input(
++              player_reply_dest(act_player), act_unit->id,
++              pdesttile->index, TRUE);
++      }
++    } unit_move_data_list_iterate_end;
++  }
++
+   unit_move_data_list_destroy(plist);
+ 
+   /* Check cities at source and destination. */
+-- 
+2.1.4
+

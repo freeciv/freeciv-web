@@ -615,8 +615,15 @@ function handle_unit_diplomat_wants_input(packet)
 {
   var diplomat_id = packet['diplomat_id'];
   var target_tile_id = packet['target_tile_id'];
+  var is_arrival = packet['is_arrival'];
 
   var pdiplomat = game_find_unit_by_number(diplomat_id);
+
+  if (is_arrival && !popup_actor_arrival) {
+    /* The player isn't interested in getting a pop up for a mere
+     * arrival. */
+    return;
+  }
 
   process_diplomat_arrival(pdiplomat, target_tile_id);
 }

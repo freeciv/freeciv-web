@@ -1,0 +1,55 @@
+From 5799b6b94a4fb335026cd31124ca8894d931c7a0 Mon Sep 17 00:00:00 2001
+From: Sveinung Kvilhaugsvik <sveinung84@users.sourceforge.net>
+Date: Mon, 5 Oct 2015 10:16:26 +0200
+Subject: [PATCH 3/4] Stricter move as tile action heuristics
+
+A move can be interpreted as an attempt at doing an action. The player is
+then showed the action selection dialog where he can choose an action,
+cancel or keep moving.
+
+Be more conservative about when a potentially legal action against a tile
+will pop up the action selection dialog. It used to pop up if another
+target kind existed at the tile. Add the restriction that the actor unit
+must be unable to move to the target tile.
+---
+ server/unithand.c | 24 ++++++++++++++++++------
+ 1 file changed, 18 insertions(+), 6 deletions(-)
+
+diff --git a/server/unithand.c b/server/unithand.c
+index beeee25..a8aa1c0 100644
+--- a/server/unithand.c
++++ b/server/unithand.c
+@@ -2931,12 +2931,24 @@ bool unit_move_handling(struct unit *punit, struct tile *pdesttile,
+        * targeted it otherwise. */
+       if (tcity || tunit
+           || may_unit_act_vs_tile_units(punit, pdesttile)
+-          /* Pop up the action selection dialog even if the tile target is
+-           * the only target that, from the point of view of the player,
+-           * may be acted against. This is to avoid confusion for players
+-           * that don't remember the rules or aren't looking at the data
+-           * the rules depend on. */
+-          || may_unit_act_vs_tile(punit, pdesttile)) {
++          /* If the tile target is the only target that, from the point of
++           * view of the player, may be acted against the action selection
++           * dialog will only pop up when the actor can't move to the target
++           * tile.
++           *
++           * The goal is to minimize confusion and annoyance. Getting a pop
++           * up every time a unit moves is annoying. Not getting the action
++           * selection dialog when expected is confusing. So is having the
++           * actions selection dialog pop up when it is unexpected. The
++           * last case can lead the player to perform the wrong action by
++           * reflex. Example: Offered to nuke his own units rather than
++           * moving to their tile.
++           *
++           * The confusion isn't limited to new players. An experienced
++           * player can forget a rule or accidentally ignore a piece of
++           * relevant data he has access to. */
++          || (may_unit_act_vs_tile(punit, pdesttile)
++              && !unit_can_move_to_tile(punit, pdesttile, igzoc))) {
+         if (pplayer->ai_controlled) {
+           return FALSE;
+         }
+-- 
+2.1.4
+

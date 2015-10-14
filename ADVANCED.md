@@ -28,6 +28,16 @@ The Freeciv server has other responsibilities too.
 It creates, starts and manages the AI players.
 It is responsible for the beginning of saving and the end of loading a game.
 
+# The AI
+
+Freeciv-web uses the Freeciv AI.
+Most of it lives in the [ai](http://repo.or.cz/freeciv.git/tree/HEAD:/ai)
+folder of Freeciv.
+More information about the Freeciv AI can be found at the
+[Freeciv wiki](http://freeciv.wikia.com/wiki/Category:AI).
+Freeciv has AI related
+[introduction tasks](http://freeciv.wikia.com/wiki/Introduction_tasks).
+
 # Upgrading Freeciv-web's Freeciv version
 
 Freeciv-web's Freeciv version is set in

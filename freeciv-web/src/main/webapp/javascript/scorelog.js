@@ -69,6 +69,7 @@ function view_game_scores() {
  Handles the scorelog file
 ****************************************************************************/
 function handle_scorelog(scorelog) {
+  var start_turn = 0;
   var scoreitems = scorelog.split("\n");
   var scoreplayers = {};
   var playerslist = [];
@@ -95,6 +96,9 @@ function handle_scorelog(scorelog) {
           scorecolors.push(nations[pplayer['nation']]['color']); 
         }
 
+      } else if (scoredata[0] == "turn") {
+        if (start_turn==0) start_turn = scoredata[1];
+
       } else if (scoredata[0] == "tag") {
         scoretags[scoredata[1]] = scoredata[2];
 
@@ -108,14 +112,14 @@ function handle_scorelog(scorelog) {
           s["turn"] = turn;
           s[player] = parseInt(value);
           resultdata[tag] = [];
-          resultdata[tag][turn] = s;
-        } else if (resultdata[tag] != null && resultdata[tag][turn] == null) {
+          resultdata[tag][turn - start_turn] = s;
+        } else if (resultdata[tag] != null && resultdata[tag][turn - start_turn] == null) {
           var s = {};
           s["turn"] = turn;
           s[player] = parseInt(value);
-          resultdata[tag][turn] = s;
-        } else if (resultdata[tag][turn] != null) {
-          resultdata[tag][turn][player] = parseInt(value);
+          resultdata[tag][turn - start_turn] = s;
+        } else if (resultdata[tag][turn - start_turn] != null) {
+          resultdata[tag][turn - start_turn][player] = parseInt(value);
         }
       }
     }
@@ -133,7 +137,6 @@ function handle_scorelog(scorelog) {
   if (scoreitems.length >1000) ps = 0;
 
   for (var key in scoretags) {
-    var tagname = scoretags[key];
     Morris.Line({
       element: 'scoreschart-' + key,
       data: resultdata[key],

@@ -332,6 +332,9 @@ function pregame_settings()
 	  "<td><input type='number' name='citymindist' id='citymindist' size='4' length='4' min='1' max='9' step='1'></td></tr>" +
           "<tr title='The game will end at the end of the given turn.'><td>End turn:</td>" +
 	  "<td><input type='number' name='endturn' id='endturn' size='4' length='4' min='0' max='32767' step='1'></td></tr>" +
+	  "<tr title='Enables score graphs for all players, showing score, population, techs and more."+
+          " This will lead to information leakage about other players.'><td>Score graphs</td>" +
+          "<td><input type='checkbox' name='scorelog_setting' id='scorelog_setting' checked>Enable score graphs</td></tr>" +
 	  "<tr title='Method used to generate map'><td>Map generator:</td>" +
 	  "<td><select name='generator' id='generator'>" +
 	  "<option value='random'>Fully random height</option>" +
@@ -339,7 +342,7 @@ function pregame_settings()
           "<option value='island'>Island-based</option>" +
           "<option value='fair'>Fair islands</option>" +
 	  "</select></td></tr>"+
-	  "<tr title='Ruleset version'><td>Ruleset:</td>" +
+  	  "<tr title='Ruleset version'><td>Ruleset:</td>" +
 	  "<td><select name='ruleset' id='ruleset'>" +
 	  "<option value='fcweb'>Default Fcweb</option>" +
 	  "<option value='webperimental'>Webperimental</option>" +
@@ -501,8 +504,19 @@ function pregame_settings()
     } else {
       audio.pause();
     }
-
   });
+
+  $('#scorelog_setting').change(function() {
+    var scorelog_enabled = $('#scorelog_setting').prop('checked');  
+    if (scorelog_enabled) {
+      var net_packet = {"pid" : packet_chat_msg_req, "message" : "/set scorelog enabled"};
+      send_request(JSON.stringify(net_packet));
+    } else {
+      var net_packet = {"pid" : packet_chat_msg_req, "message" : "/set scorelog disabled"};
+      send_request(JSON.stringify(net_packet));
+    }
+  });
+
 
   $("#settings_table").tooltip();
 }

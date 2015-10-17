@@ -55,7 +55,9 @@ function view_game_scores() {
     cache: false,
     async: true
   }).fail(function() {
-    swal("Unable to load scorelog file.");
+    $("#scores_wait").html("Score graphs not shown, because server 'scorelog' variable is disabled,"
+      + " or because of problem loading the score file.");
+    $("#game_scores_button").button( "option", "disabled", true);
   }).done(function( data ) {
     handle_scorelog(data);
   });

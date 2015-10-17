@@ -1,0 +1,13 @@
+diff --git a/server/settings.c b/server/settings.c
+index 4acc585..8b05a98 100644
+--- a/server/settings.c
++++ b/server/settings.c
+@@ -2619,7 +2619,7 @@ static struct setting settings[] = {
+              savename_validate, NULL, GAME_DEFAULT_SAVE_NAME)
+ 
+   GEN_BOOL("scorelog", game.server.scorelog,
+-           SSET_META, SSET_INTERNAL, SSET_SITUATIONAL, SSET_SERVER_ONLY,
++           SSET_META, SSET_INTERNAL, SSET_SITUATIONAL, SSET_TO_CLIENT,
+            N_("Whether to log player statistics"),
+            /* TRANS: The string between single quotes is a setting name and
+             * should not be translated. */

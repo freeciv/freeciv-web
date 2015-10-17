@@ -19,6 +19,7 @@ function show_scores(port) {
     cache: false,
     async: true
   }).fail(function() {
+    $("#scores_heading").html("Score graphs not enabled.")
     console.log("Unable to load scorelog file.");
   }).done(function( data ) {
     handle_scorelog(data);

@@ -28,6 +28,7 @@ class Civlauncher(Thread):
                 print("Starting new Freeciv-web server at port " + str(self.new_port) + 
                       " and Freeciv-proxy server at port " + str(1000 + self.new_port) + ".");
                 retcode = call("ulimit -t 10000 && export FREECIV_SAVE_PATH=\"" + self.savesdir + "\";" +
+                               "rm -f ../resin/webapps/ROOT/scorelogs/score-" + str(self.new_port) + ".log; " +
                                "python3.4 ../freeciv-proxy/freeciv-proxy.py " + 
                                str(1000 + self.new_port) + " > " + logdir + "freeciv-proxy-" + 
                                str(1000 + self.new_port) +".log 2>&1 " + 

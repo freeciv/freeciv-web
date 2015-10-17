@@ -441,7 +441,7 @@ if ( isset($port) ) {
           print "<p>No players</p>\n";
         }
         if ($row["state"] == "Running") {
-          print("<br><b>Scores:</b><div id='scores'></div><br><br><b>Settings:</b><br>");
+          print("<br><b id='scores_heading'>Scores:</b><div id='scores'></div><br><br><b>Settings:</b><br>");
           print("<script type='text/javascript'>show_scores(" . $port . ")</script>");
         }
         $stmt="select * from variables where hostport=\"$server_port\"";

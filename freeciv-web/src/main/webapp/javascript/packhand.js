@@ -336,45 +336,7 @@ function handle_endgame_report(packet)
 
 function update_client_state(value)
 {
-  var changed = (client_state() != value);
-
-  if (C_S_PREPARING == client_state()
-      && C_S_RUNNING == value) {
-    /*FIXME: popdown_races_dialog();*/
-  }
-
   set_client_state(value);
-
-  if (C_S_RUNNING == client_state()) {
-    /*FIXME: refresh_overview_canvas();
-
-    /*update_info_label();	 //get initial population right
-    update_unit_focus();
-    update_unit_info_label(get_units_in_focus());
-
-    if (auto_center_each_turn) {
-      center_on_something();
-    }*/
-  }
-
-  if (C_S_OVER == client_state()) {
-    /*refresh_overview_canvas();
-
-    update_info_label();
-    update_unit_focus();
-    update_unit_info_label(NULL); */
-  }
-
-  //if (changed) {
-    /*if (can_client_change_view()) {
-      update_map_canvas_visible();
-    }
-
-    // If turn was going to change, that is now aborted.
-    set_server_busy(FALSE);*/
-  //}
-
-
 }
 
 function handle_authentication_req(packet)
@@ -537,8 +499,7 @@ function handle_unit_packet_common(packet_unit)
 
 
   if (current_focus.length > 0 && current_focus[0]['id'] == packet_unit['id']) {
-
-    update_unit_info_label(current_focus);
+    update_active_units_dialog();
 
     if (current_focus[0]['done_moving'] != packet_unit['done_moving']) {
       update_unit_focus();
@@ -775,11 +736,9 @@ function handle_begin_turn(packet)
   waiting_units_list = [];
   update_unit_focus();
   auto_center_on_focus_unit();
-  update_unit_info_label(current_focus);
+  update_active_units_dialog();
   update_game_status_panel();
   if (is_tech_tree_init && tech_dialog_active) update_tech_screen();
-
-  // FIXME: update_client_state(C_S_RUNNING);
 }
 
 function handle_end_turn(packet)

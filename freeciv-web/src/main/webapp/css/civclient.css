@@ -70,19 +70,10 @@ button {
   height: 140px;
 }
 
-
-#game_action_panel {
-  float: right;
-  padding-left: 5px;
-  padding-right: 10px;
-  overflow: hidden;
-}
-
 #game_unit_info {
   float: left;
   width: 100%;
   overflow: hidden;
-  margin-top: -15px;
 }
 
 #unit_text_details {
@@ -409,8 +400,6 @@ button {
 
 #unit_info_div {
   float:left; 
-  padding-top: 10px; 
-  padding-right: 20px;
 }
 
 #unit_info_image {
@@ -848,4 +837,25 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 
 #scores_dialog {
   overflow: hidden;
+}
+
+.current_focus_unit {
+  border: 2px solid white;
+  background-color: rgba(240,240,240,0.5);
+ 
+}
+
+#active_unit_info {
+  float: left;
+  width: 100%;
+  color: white;
+  background-color: rgba(0,0,0,0.6);
+}
+
+#active_unit_info span {
+  font-size: 80%;
+}
+
+#game_unit_panel {
+  margin-left: -8px;
 }

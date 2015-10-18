@@ -384,7 +384,7 @@ function advance_unit_focus()
   } else {
     /* Couldn't center on a unit, then try to center on a city... */
     current_focus = []; /* Reset focus units. */
-    update_unit_info_label(current_focus);
+    update_active_units_dialog();
     $("#game_unit_orders_default").hide();
     /* find a city to focus on. */
     for (city_id in cities) {
@@ -581,9 +581,9 @@ function init_game_unit_panel()
   $("#game_unit_panel").dialog({
 			bgiframe: true,
 			modal: false,
-			width: "270px",
+			width: "370px",
 			height: "auto",
-			resizable: true,
+			resizable: false,
 			closeOnEscape: false,
 			dialogClass: 'unit_dialog  no-close',
 			position: {my: 'right bottom', at: 'right bottom', of: "#canvas_div"},
@@ -592,7 +592,6 @@ function init_game_unit_panel()
 		});
 
   $("#game_unit_panel").dialog('open');
-  $("#ui-dialog-title-game_unit_panel").css("margin-top", "-5px");
   $("#game_unit_panel").parent().css("overflow", "hidden");
 }
 
@@ -675,7 +674,7 @@ function set_unit_focus(punit)
   } else {
     current_focus[0] = punit;
   }
-  update_unit_info_label(current_focus);
+  update_active_units_dialog();
   update_unit_order_commands();
 }
 
@@ -693,7 +692,7 @@ function set_unit_focus_and_redraw(punit)
   }
 
   auto_center_on_focus_unit();
-  update_unit_info_label(current_focus);
+  update_active_units_dialog();
   update_unit_order_commands();
   $("#game_unit_orders_default").show();
 
@@ -971,7 +970,7 @@ function do_map_click(ptile, qtype)
         } else {
           /* more than one unit is on the selected tile. */
           set_unit_focus_and_redraw(sunits[0]);
-          update_select_unit_dialog(sunits);
+          update_active_units_dialog();
         }
 
         if (is_touch_device()) {
@@ -1867,7 +1866,7 @@ function update_goto_path(goto_packet)
 	  = current_goto_turns;
 
   if (current_goto_turns != undefined) {
-    $("#unit_text_details").html("Turns for goto: " + current_goto_turns);
+    $("#active_unit_info").html("Turns for goto: " + current_goto_turns);
   }
   update_mouse_cursor();
 }

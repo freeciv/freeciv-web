@@ -164,16 +164,16 @@ function get_unit_moves_left(punit)
   var result = "";
   if ((punit['movesleft'] % SINGLE_MOVE) != 0) {
     if (Math.floor(punit['movesleft'] / SINGLE_MOVE) > 0) {
-      result = "Moves: " + Math.floor(punit['movesleft'] / SINGLE_MOVE)
+      result = "Moves:" + Math.floor(punit['movesleft'] / SINGLE_MOVE)
                + " " + Math.floor(punit['movesleft'] % SINGLE_MOVE)
                + "/" + SINGLE_MOVE;
     } else {
-      result = "Moves: "
+      result = "Moves:"
                + Math.floor(punit['movesleft'] % SINGLE_MOVE)
                + "/" + SINGLE_MOVE;
     }
   } else {
-    result = "Moves: "  + Math.floor(punit['movesleft'] / SINGLE_MOVE);
+    result = "Moves:"  + Math.floor(punit['movesleft'] / SINGLE_MOVE);
   }
   return result;
 }

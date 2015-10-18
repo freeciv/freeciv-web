@@ -31,10 +31,8 @@
 
     <%-- Unit orders and info panel --%>
     <div id="game_unit_panel">
-	<div id="game_action_panel">&nbsp;
-		<div id="game_unit_info">&nbsp;
-		</div>
-	</div>   
+	<div id="game_unit_info">&nbsp;
+	</div>
     </div>
 
 

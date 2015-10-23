@@ -84,6 +84,15 @@ Unimplemented Freeciv client features:
 - rearranging items in the city production work list
 - the cities tab
 - the auto generated part of the help texts
+  - the code is big (it also refers to other Freeciv C code)
+  - "just rewrite the code in JavaScript"
+    - would be much work
+    - keeping it updated as the corresponding code changes in Freeciv would be a nightmare
+    - high probability of it ending up telling lies
+  - make freeciv-manual output something Freeciv-web can read
+    - could be done during the Freeciv-web build
+    - have Freeciv-web look up the correct file given the current ruleset
+    - mark the parts Freeciv-web wants (like the list of facts about a unit type)
 - the spy action targeted sabotage
 - between turns timer count down
 

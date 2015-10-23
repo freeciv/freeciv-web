@@ -219,6 +219,7 @@ function generate_help_text(key)
     msg += "<br>Defense: " + punit_type['defense_strength'];
     msg += "<br>Firepower: " + punit_type['firepower'];
     msg += "<br>Hitpoints: " + punit_type['hp'];
+    msg += "<br>Moves: " + move_points_text(punit_type['move_rate']);
     msg += "<br>Vision: " + punit_type['vision_radius_sq'];
 
     var ireq = get_improvement_requirements(punit_type['impr_requirement']);

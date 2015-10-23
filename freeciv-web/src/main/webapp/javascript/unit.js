@@ -156,25 +156,37 @@ function unit_type(unit)
 }
 
 /**************************************************************************
-  Returns the type of the unit.
+  Returns a string saying how many moves a unit has left.
 **************************************************************************/
 function get_unit_moves_left(punit)
 {
-  if (punit == null) return 0;
+  if (punit == null) {
+    return 0;
+  }
+
+  return "Moves:" + move_points_text(punit['movesleft']);
+}
+
+/**************************************************************************
+  Returns an amount of movement formated for player readability.
+**************************************************************************/
+function move_points_text(moves)
+{
   var result = "";
-  if ((punit['movesleft'] % SINGLE_MOVE) != 0) {
-    if (Math.floor(punit['movesleft'] / SINGLE_MOVE) > 0) {
-      result = "Moves:" + Math.floor(punit['movesleft'] / SINGLE_MOVE)
-               + " " + Math.floor(punit['movesleft'] % SINGLE_MOVE)
+
+  if ((moves % SINGLE_MOVE) != 0) {
+    if (Math.floor(moves / SINGLE_MOVE) > 0) {
+      result = Math.floor(moves / SINGLE_MOVE)
+               + " " + Math.floor(moves % SINGLE_MOVE)
                + "/" + SINGLE_MOVE;
     } else {
-      result = "Moves:"
-               + Math.floor(punit['movesleft'] % SINGLE_MOVE)
+      result = Math.floor(moves % SINGLE_MOVE)
                + "/" + SINGLE_MOVE;
     }
   } else {
-    result = "Moves:"  + Math.floor(punit['movesleft'] / SINGLE_MOVE);
+    result = Math.floor(moves / SINGLE_MOVE);
   }
+
   return result;
 }
 

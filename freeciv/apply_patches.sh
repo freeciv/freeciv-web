@@ -3,6 +3,7 @@
 # activity_null_check is for Freeciv bug #22700.
 # city_traderoute_hotfix is for missing city save game crashes. Some were fixed in Freeciv SVN r29600. Others remain. (See Freeciv bug #23614)
 # freeciv_segfauls_fix is a workaround some segfaults in the Freeciv server. Freeciv bug #23884.
+# message_escape was partially committed to the Freeciv SVN in r29876 (Freeciv patch #6343)
 # GetTokensExactMax is for Freeciv bug #23887.
 # MapPosToTileOptimize is Freeciv patch #6380.
 # serverside_actor_arrival is Freeciv patch #6412.

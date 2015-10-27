@@ -39,18 +39,6 @@ diff -Nurd -X.diff_ignore freeciv/common/featured_text.c freeciv/common/featured
                             ptag->color.foreground);
        }
        if (ptag->color.background[0] != '\0') {
-diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/generate_packets.py
---- freeciv/common/generate_packets.py	2014-09-11 01:41:13.951730689 +0300
-+++ freeciv/common/generate_packets.py	2014-09-11 01:41:34.951685399 +0300
-@@ -27,7 +27,7 @@
- 
- ### The following parameters CHANGE the protocol. You have been warned.
- fold_bool_into_header=1
--disable_delta=0
-+disable_delta=1
- 
- ################# END OF PARAMETERS ####################
- 
 diff -Nurd -X.diff_ignore freeciv/server/ruleset.c freeciv/server/ruleset.c
 --- freeciv/server/ruleset.c	2014-09-11 01:41:13.955730680 +0300
 +++ freeciv/server/ruleset.c	2014-09-11 01:41:34.951685399 +0300

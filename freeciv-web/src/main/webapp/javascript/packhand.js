@@ -1096,3 +1096,9 @@ function handle_ruleset_goods(packet)
   /* TODO: Implement */
 }
 
+function handle_ruleset_summary(packet)
+{
+  /* TODO: Implement */
+}
+
+

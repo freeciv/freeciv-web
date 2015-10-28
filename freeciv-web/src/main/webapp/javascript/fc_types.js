@@ -68,7 +68,8 @@ var ACTION_SPY_NUKE = 19;
 var ACTION_NUKE = 20;
 var ACTION_DESTROY_CITY = 21;
 var ACTION_EXPEL_UNIT = 22;
-var ACTION_COUNT = 23;
+var ACTION_RECYCLE_UNIT = 23;
+var ACTION_COUNT = 24;
 
 /* Used to signal a move without any action. */
 var ACTION_MOVE = ACTION_COUNT;

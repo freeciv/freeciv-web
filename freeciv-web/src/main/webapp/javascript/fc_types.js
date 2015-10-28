@@ -113,8 +113,9 @@ var VUT_MINHP = 33;
 var VUT_AGE = 34
 var VUT_NATIONGROUP = 35;
 var VUT_TOPO = 36;
-var VUT_ACTION = 37;
-var VUT_COUNT = 38;             /* Keep this last. */
+var VUT_IMPR_GENUS = 37;
+var VUT_ACTION = 38;
+var VUT_COUNT = 39;             /* Keep this last. */
 
 /* Sometimes we don't know (or don't care) if some requirements for effect
  * are currently fulfilled or not. This enum tells lower level functions

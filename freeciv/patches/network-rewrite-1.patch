@@ -25,15 +25,6 @@ diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/gene
                   and self.dataio_type!="estring":
                  return '''
  {
-@@ -950,7 +950,7 @@
-   struct %(packet_name)s *old;
-   struct genhash **hash = pc->phs.received + %(type)s;
- '''
--            delta_body1="\n  DIO_BV_GET(&din, \"fields\", &field_addr, fields);\n"
-+            delta_body1="\n  DIO_BV_GET(pc->json_packet, \"fields\", &field_addr, fields);\n"
-             body1=""
-             for field in self.key_fields:
-                 body1=body1+prefix("  ",field.get_get())+"\n"
 diff -Nurd -X.diff_ignore freeciv/server/plrhand.c freeciv/server/plrhand.c
 --- freeciv/server/plrhand.c	2015-03-20 19:10:43.052549809 +0200
 +++ freeciv/server/plrhand.c	2015-03-20 19:11:19.584549008 +0200

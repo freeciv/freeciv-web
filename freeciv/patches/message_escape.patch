@@ -1,16 +1,3 @@
-diff --git a/common/packets.def b/common/packets.def
-index 1117870..de3c27f 100644
---- a/common/packets.def
-+++ b/common/packets.def
-@@ -582,7 +582,7 @@ PACKET_CHAT_MSG = 25; sc, lsend
- end
- 
- PACKET_CHAT_MSG_REQ = 26; cs, handle-per-conn, dsend
--  STRING message[MAX_LEN_MSG];
-+  ESTRING message[MAX_LEN_MSG];
- end
- 
- # Used in initial protocol.
 diff --git a/server/handchat.c b/server/handchat.c
 index fcbd198..1cdbc3e 100644
 --- a/server/handchat.c

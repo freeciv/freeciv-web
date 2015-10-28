@@ -1,14 +1,3 @@
-diff -Nurd -X.diff_ignore freeciv/data/scenarios/tutorial.sav freeciv/data/scenarios/tutorial.sav
---- freeciv/data/scenarios/tutorial.sav	2014-02-08 13:31:28.249133865 +0200
-+++ freeciv/data/scenarios/tutorial.sav	2014-02-08 13:35:56.928457672 +0200
-@@ -234,7 +234,6 @@
- "aifill",2,2
- "mapsize","FULLSIZE","FULLSIZE"
- "size",1,1
--"topology","WRAPX|ISO","WRAPX|ISO"
- }
- set_count=4
- gamestart_valid=TRUE
 diff -Nurd -X.diff_ignore freeciv/server/commands.c freeciv/server/commands.c
 --- freeciv/server/commands.c	2014-02-08 13:21:39.126571890 +0200
 +++ freeciv/server/commands.c	2014-02-08 13:35:04.168590439 +0200

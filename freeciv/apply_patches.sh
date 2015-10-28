@@ -3,17 +3,13 @@
 # activity_null_check is for Freeciv bug #22700.
 # city_traderoute_hotfix is for missing city save game crashes. Some were fixed in Freeciv SVN r29600. Others remain. (See Freeciv bug #23614)
 # freeciv_segfauls_fix is a workaround some segfaults in the Freeciv server. Freeciv bug #23884.
-# message_escape was partially committed to the Freeciv SVN in r29876 (Freeciv patch #6343)
-# GetTokensExactMax is for Freeciv bug #23887.
-# MapPosToTileOptimize is Freeciv patch #6380.
-# serverside_actor_arrival is Freeciv patch #6412.
-# do_not_offer_to_nuke_own_transport is Freeciv patch #6392.
+# message_escape is a patch for protecting against script injection in the message texts.
 # spacerace.patch will be get partly obsoleted by Freeciv bug #22934
 # PlainFileBufSize1024.patch is Freeciv bug #23966
 # ignore-argument-position is Freeciv patch 6500
 # disable-delta-protocol is Freeciv patch 6501
 
-PATCHLIST="freeciv_web_all_packets_def_changes caravan_fixes1 city_fixes city_impr_fix2 city-naming-change city_fixes2 citytools_changes map-settings metachange text_fixes unithand-change2 webclient-ai-attitude current_research_cost freeciv-svn-webclient-changes network-rewrite-1 fcnet_packets misc_devversion_sync scenario_ruleset savegame maphand_ch serverside_extra_assign libtoolize_no_symlinks spacerace city_disbandable ai_traits_crash unittools ruleset-capability worklists server_password aifill barbarian-names activity_null_check add_rulesets city_traderoute_hotfix message_escape freeciv_segfauls_fix GetTokensExactMax MapPosToTileOptimize scorelog_filenames serverside_actor_arrival do_not_offer_to_nuke_own_transport scorelog_set_to_client PlainFileBufSize1024 ignore-argument-position disable-delta-protocol"
+PATCHLIST="freeciv_web_all_packets_def_changes caravan_fixes1 city_fixes city_impr_fix2 city-naming-change city_fixes2 citytools_changes map-settings metachange text_fixes unithand-change2 webclient-ai-attitude current_research_cost freeciv-svn-webclient-changes network-rewrite-1 fcnet_packets misc_devversion_sync scenario_ruleset savegame maphand_ch serverside_extra_assign libtoolize_no_symlinks spacerace city_disbandable ai_traits_crash unittools ruleset-capability worklists server_password aifill barbarian-names activity_null_check add_rulesets city_traderoute_hotfix message_escape freeciv_segfauls_fix scorelog_filenames scorelog_set_to_client PlainFileBufSize1024 ignore-argument-position disable-delta-protocol"
 
 apply_patch() {
   echo "*** Applying $1.patch ***"

@@ -329,7 +329,7 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +  }
 +  if (punit && !pcity) {
 +    struct player *owner = unit_owner(punit);
-+    struct unit_type *ptype = unit_type(punit);
++    struct unit_type *ptype = unit_type_get(punit);
 +
 +    get_full_username(username, sizeof(username), owner);
 +    get_full_nation(nation, sizeof(nation), owner);

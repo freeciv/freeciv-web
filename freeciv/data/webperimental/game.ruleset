@@ -22,7 +22,7 @@ name = _("Webperimental")
 ;version = ""
 
 ; Description of the ruleset
-description = _("\
+summary = _("\
 This ruleset has experimental rules to be used with web-client.\n\
 Differences compared to default web-ruleset are:\n\
 - Diplomat available from Alphabet\n\
@@ -50,6 +50,9 @@ a rule should change go to the Freeciv-web board at \
 http://forum.freeciv.org/ and tell us in the \
 webperimental ruleset feed back and suggestion thread.\
 ")
+
+; Detailed description
+; description = ""
 
 [options]
 global_init_techs=""
@@ -263,6 +266,9 @@ ui_name_enter_marketplace = _("Enter %sMarketplace%s")
 
 ; /* TRANS: Help _build Wonder (100% chance of success). */
 ui_name_help_wonder = _("Help %sbuild Wonder%s")
+
+; /* TRANS: Rec_ycle Unit (100% chance of success). */
+ui_name_recycle_unit = _("Rec%sycle Unit%s")
 
 ; /* TRANS: _Build City (100% chance of success). */
 ui_name_found_city = _("%sBuild City%s")
@@ -500,6 +506,29 @@ actor_reqs    =
     { "type",   "name", "range", "present"
       "UnitFlag", "HelpWonder", "Local", TRUE
       "DiplRel", "Is foreign", "Local", FALSE
+    }
+target_reqs    =
+    { "type",   "name", "range"
+      "BuildingGenus", "GreatWonder", "Local"
+    }
+
+[actionenabler_help_build_small_wonder]
+action = "Help Wonder"
+actor_reqs    =
+    { "type",   "name", "range", "present"
+      "UnitFlag", "HelpWonder", "Local", TRUE
+      "DiplRel", "Is foreign", "Local", FALSE
+    }
+target_reqs    =
+    { "type",   "name", "range"
+      "BuildingGenus", "SmallWonder", "Local"
+    }
+
+[actionenabler_recycle_unit]
+action = "Recycle Unit"
+actor_reqs    =
+    { "type",   "name", "range", "present"
+      "UnitFlag", "Undisbandable", "Local", FALSE
     }
 
 [actionenabler_build_city_pioneer]

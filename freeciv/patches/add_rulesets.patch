@@ -15,12 +15,12 @@ diff --git a/data/Makefile.am b/data/Makefile.am
 index 6b198f4..5600588 100644
 --- a/data/Makefile.am
 +++ b/data/Makefile.am
-@@ -87,7 +87,7 @@ CLIENTDATADIRS =
+@@ -90,7 +90,7 @@ else
+ CLIENTDATADIRS = 
  endif
  
+-SRV_RE_DATADIRS = default classic civ1 civ2 experimental multiplayer alien civ2civ3 nation
++SRV_RE_DATADIRS = default classic civ1 civ2 experimental multiplayer alien civ2civ3 fcweb webperimental nation
  if SERVER
--SERVERDATADIRS = default classic civ1 civ2 experimental multiplayer alien civ2civ3 scenarios nation
-+SERVERDATADIRS = default classic civ1 civ2 experimental multiplayer alien civ2civ3 fcweb webperimental scenarios nation
+ SERVERDATADIRS = $(SRV_RE_DATADIRS) scenarios
  else
- SERVERDATADIRS = 
- endif

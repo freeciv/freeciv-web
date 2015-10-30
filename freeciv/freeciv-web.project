@@ -9,6 +9,3 @@ META_URL="http://localhost:8080/meta/metaserver.php"
 # something to the old dir with older version of the projects means that those
 # files won't be used any more.
 FREECIV_STORAGE_DIR="~/.freeciv-web"
-
-# Hack to support older revisions of freeciv, until it gets updated
-FREECIV_HOME_DIR="$FREECIV_STORAGE_DIR"

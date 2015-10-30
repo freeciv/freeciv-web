@@ -558,8 +558,9 @@ victory_min_points = 1000
 victory_lead_pct   = 200
 
 ; How much each culture point affects the migration
-; from/to the city.
-migration_pct = 50
+; from/to the city. Each culture point count as this many permilles
+; of a migration point.
+migration_pml = 50
 
 [calendar]
 ; Year in the beginning of the game

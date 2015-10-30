@@ -572,7 +572,7 @@ function handle_unit_action_answer(packet)
 /**************************************************************************
   Handle server request for user input about diplomat action to do.
 **************************************************************************/
-function handle_unit_diplomat_wants_input(packet)
+function handle_unit_actor_wants_input(packet)
 {
   var diplomat_id = packet['diplomat_id'];
   var target_tile_id = packet['target_tile_id'];

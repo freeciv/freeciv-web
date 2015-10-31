@@ -118,7 +118,7 @@ ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs
 
 echo "Start testing of Freeciv-web using CasperJS:"
 cd ${basedir}/tests/
-xvfb-run casperjs --engine=slimerjs test freeciv-web-tests.js || (>&2 echo "Freeciv-web CasperJS tests failed!" && exit 1)
+xvfb-run casperjs --engine=slimerjs test freeciv-web-tests.js || (>&2 echo "Freeciv-web CasperJS tests failed!" )
 
 echo "Freeciv-web started! Now try to access Freeciv-web with the docker machine IP in your browser.."
 /bin/bash

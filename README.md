@@ -113,6 +113,12 @@ Also see the [Dockerfile](Dockerfile) for more information.
  docker run -d -p 80:80 --expose=80 -t freeciv-web /bin/sh -c "/docker/scripts/docker-run.sh && sleep infinity"
  ```
 
+Note: For users running Freeciv-web on Docker on Windows/msys-git, if the the command in step 3 above fails with an error message, try replacing the slash character with double-slashes like this: 
+ ```bash
+ docker run -d -p 80:80 --expose=80 -t freeciv-web //bin//sh -c "//docker//scripts//docker-run.sh && sleep infinity"
+ ```
+    
+
 System Requirements for manual install
 --------------------------------------
 

@@ -104,26 +104,30 @@ function show_new_game_message()
 
   } else if (is_small_screen()) {
     show_dialog_message("Welcome to Freeciv-web",
-      "You lead a great civilization. Your task is to conquer the world!\n" +
+      "Welcome " + username + "! You lead a great civilization. Your task is to conquer the world!\n" +
       "Click on units for giving them orders, and drag units on the map to move them.\n" +
       "Good luck, and have a lot of fun!");
 
   } else  {
+    var pplayer = client.conn.playing;
+    var player_nation_text = "Welcome, " + username + " ruler of the " 
+        + nations[pplayer['nation']]['adjective'] + " empire.";
+
     if (is_touch_device()) {
       show_dialog_message("Welcome to Freeciv-web",
-      "Welcome to Freeciv-web.  You lead a great civilization.  Your\n" +
-      "task is to conquer the world!  You should start by\n" +
+      player_nation_text + " Your\n" +
+      "task is to create a great empire! You should start by\n" +
       "exploring the land around you with your explorer,\n" +
       "and using your settlers to find a good place to build\n" +
-      "a city. Click on units for giving them orders. \n" +
-      "To move your units around, carefully use your \n" +
-      "finger to drag units to the place you want it to go.\n" +
+      "a city. Click on units to get a list of available orders. \n" +
+      "To move your units around, carefully drag the units to the \n" +
+      "place you want it to go.\n" +
       "Good luck, and have a lot of fun!");
 
     } else {
       show_dialog_message("Welcome to Freeciv-web",
-      "Welcome to Freeciv-web.  You lead a great civilization.  Your\n" +
-      "task is to conquer the world!  You should start by\n" +
+      player_nation_text + " Your\n" +
+      "task is to create a great empire! You should start by\n" +
       "exploring the land around you with your explorer,\n" +
       "and using your settlers to find a good place to build\n" +
       "a city. Right-click with the mouse on your units for a list of available \n" +

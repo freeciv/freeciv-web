@@ -26,6 +26,7 @@ var scenarios = [
   {"img":"/images/world_small.png", "description":"The World - Small world map, 80x50 map of the Earth", "savegame":"earth-80x50-v3"},
   {"img":"/images/world_big.png", "description":"The World - Large world map, 160x90 map of the Earth", "savegame":"earth-160x90-v2"},
   {"img":"/images/iberian.png", "description":"Iberian Peninsula - 136x100 map of Spain and Portugal", "savegame":"iberian-peninsula-136x100-v1.0"},
+  {"img":"/images/europe1901.png", "description":"Europe WWI scenario 1901", "savegame":"europe_1901"},
   {"img":"/images/france.png", "description":"France - Large (140x90)", "savegame":"france-140x90-v2"},
   {"img":"/images/japan.png", "description":"Japan - Medium (88x100)", "savegame":"japan-88x100-v1.3"},
   {"img":"/images/italy.png", "description":"Italy - Medium (100x100)", "savegame":"italy-100x100-v1.5"},
@@ -48,7 +49,7 @@ function load_game_check()
     $.blockUI();
     loadTimerId = setTimeout("load_game_real('tutorial');",
                                   1500);
-    setTimeout(load_game_toggle,3500);
+    setTimeout(load_game_toggle,2500);
   } else if (load_game_id != -1) {
     $.blockUI();
 
@@ -59,7 +60,7 @@ function load_game_check()
         scenario_game_id = scenarios[load_game_id]['savegame'];
         loadTimerId = setTimeout("load_game_real('" + scenario_game_id + "');",
                                   1500);
-        setTimeout(load_game_toggle,3500);
+        setTimeout(load_game_toggle,2500);
       }
     } else if (load_game_id != -1) {
       console.log("Attempting to load savegame-file-" + load_game_id);
@@ -121,18 +122,25 @@ function load_game_real(filename)
 }
 
 /**************************************************************************
-...
+ Aitoggle and take first player.
 **************************************************************************/
 function load_game_toggle()
 {
-  var test_packet = {"pid" : packet_chat_msg_req,
-                     "message" : "/aitoggle AI*1"};
+  if (players[0] == null) {
+    setTimeout(load_game_toggle,1000);
+  } else {
 
-  send_request(JSON.stringify(test_packet));
-  test_packet = {"pid" : packet_chat_msg_req,
-                 "message" : "/take AI*1"};
-  send_request(JSON.stringify(test_packet));
-  $.unblockUI();
+    var firstplayer = players[0]['name'].split(" ")[0];
+
+    var test_packet = {"pid" : packet_chat_msg_req,
+                       "message" : "/aitoggle " + firstplayer};
+
+    send_request(JSON.stringify(test_packet));
+    test_packet = {"pid" : packet_chat_msg_req,
+                   "message" : "/take " + firstplayer};
+    send_request(JSON.stringify(test_packet));
+    $.unblockUI();
+  }
 
 }
 

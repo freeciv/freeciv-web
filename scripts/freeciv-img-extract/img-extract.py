@@ -27,6 +27,7 @@ files = {"amplio2" : [
   "../../freeciv/freeciv/data/amplio2.tilespec",
   "../../freeciv/freeciv/data/amplio2/activities.spec",
   "../../freeciv/freeciv/data/amplio2/ancientcities.spec",
+  "../../freeciv/freeciv/data/amplio2/bases.spec",
   "../../freeciv/freeciv/data/amplio2/explosions.spec",
   "../../freeciv/freeciv/data/amplio2/fog.spec",
   "../../freeciv/freeciv/data/amplio2/grid.spec",
@@ -131,7 +132,7 @@ curr_x = 0;
 curr_y = 14;
 # Set size of tileset image manually depending on number of tiles.
 # Note!  Safari on iPhone doesn't support more than 3000000 pixels in a single image.
-tileset_height = 1020;
+tileset_height = 1030;
 tileset_width = 1800;
 
 dither_types = ["t.l0.desert1", "t.l0.plains1", "t.l0.grassland1", "t.l0.forest1", "t.l0.jungle1", "t.l0.hills1", "t.l0.mountains1", "t.l0.tundra1", "t.l0.swamp1"];

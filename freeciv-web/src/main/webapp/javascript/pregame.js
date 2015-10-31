@@ -111,6 +111,7 @@ function update_player_info_pregame()
         selector: '.pregame_player_name', 
         callback: function(key, options) {
             var name = $(this).attr('name');
+            if (name != null && name.indexOf(" ") != -1) name = name.split(" ")[0]
             var playerid = parseInt($(this).attr('playerid'));
             if (key == "take_player") {
               var msg_packet = {"pid" : packet_chat_msg_req, "message" : "/take " + name};
@@ -456,16 +457,28 @@ function pregame_settings()
   });
 
   $('#password').change(function() {
-    var pwd_packet = {"pid" : packet_authentication_reply, "password" : $('#password').val()};
-    send_request(JSON.stringify(pwd_packet));
 
-    var test_packet = {"pid" : packet_chat_msg_req, "message" : "/metamessage Private password-protected game"};
-    send_request(JSON.stringify(test_packet));
-    metamessage_changed = true;
-    $("#metamessage").prop('readonly', true);
-    $("#metamessage_setting").prop('readonly', true);
-    $("#password").prop('readonly', true);
-  });
+    swal({   
+      title: "Really set game password?",   
+      text: "Setting a password on this game means that other players can not join this game " +
+            "unless they know this password. In multiplayer games, be sure to ask the other players " +
+            "about setting a password.",   
+      type: "warning",   showCancelButton: true,   
+      confirmButtonColor: "#DD6B55",   
+      confirmButtonText: "Yes, set game password",   
+      closeOnConfirm: false }, 
+      function(){   
+        var pwd_packet = {"pid" : packet_authentication_reply, "password" : $('#password').val()};
+        send_request(JSON.stringify(pwd_packet));
+
+        var pwd_packet = {"pid" : packet_chat_msg_req, "message" : "/metamessage Private password-protected game"};
+        send_request(JSON.stringify(pwd_packet));
+        metamessage_changed = true;
+        $("#metamessage").prop('readonly', true);
+        $("#metamessage_setting").prop('readonly', true);
+        $("#password").prop('readonly', true);
+     });
+   });
 
 
   $('#skill_level').change(function() {

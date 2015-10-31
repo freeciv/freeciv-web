@@ -405,7 +405,10 @@ function show_intro_dialog(title, message) {
   var intro_html = message + "<br><br>Player name: <input id='username_req' type='text' size='25'>"
 	  + " <br><br><span id='username_validation_result'></span>";
   $("#dialog").html(intro_html);
-  $("#username_req").val(simpleStorage.get("username", ""));
+  var stored_username = simpleStorage.get("username", "");
+  if (stored_username != null && stored_username != false) {
+    $("#username_req").val(stored_username);
+  }
   $("#dialog").attr("title", title);
   $("#dialog").dialog({
 			bgiframe: true,

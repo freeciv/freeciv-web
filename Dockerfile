@@ -3,7 +3,7 @@ FROM ubuntu:14.04
 
 MAINTAINER The Freeciv Project version: 2.5
 
-RUN apt-get update && apt-get -y upgrade && apt-get install -y maven mysql-server openjdk-7-jdk libcurl4-openssl-dev nginx libjansson-dev subversion pngcrush python3-pillow libtool automake autoconf autotools-dev language-pack-en python3.4-dev python3-setuptools libbz2-dev imagemagick python3-pip dos2unix liblzma-dev firefox xvfb libicu-dev pkg-config zlib1g-dev wget curl
+RUN apt-get update && apt-get -y upgrade && apt-get install -y maven mysql-server openjdk-7-jdk libcurl4-openssl-dev nginx libjansson-dev subversion pngcrush python3-pillow libtool automake autoconf autotools-dev language-pack-en python3.4-dev python3-setuptools libbz2-dev imagemagick python3-pip dos2unix liblzma-dev firefox xvfb libicu-dev pkg-config zlib1g-dev wget curl libsdl1.2-dev
 
 RUN locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8

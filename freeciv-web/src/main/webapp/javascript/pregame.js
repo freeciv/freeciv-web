@@ -466,7 +466,7 @@ function pregame_settings()
       type: "warning",   showCancelButton: true,   
       confirmButtonColor: "#DD6B55",   
       confirmButtonText: "Yes, set game password",   
-      closeOnConfirm: false }, 
+      closeOnConfirm: true }, 
       function(){   
         var pwd_packet = {"pid" : packet_authentication_reply, "password" : $('#password').val()};
         send_request(JSON.stringify(pwd_packet));

@@ -104,7 +104,7 @@ function col_love(pplayer)
       || pplayer['ai'] == false) {
     return "-";
   } else {
-    return love_text(pplayer['love'][client.conn.playing['playerno']] - MAX_AI_LOVE);
+    return love_text(pplayer['love'][client.conn.playing['playerno']]);
   }
 
 }

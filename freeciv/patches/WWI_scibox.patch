@@ -1,0 +1,25 @@
+commit 59369fdc1f2d779d560d961f8d1f3d29ba5fa89c
+Author: sveinung <sveinung@a0f10bec-cc02-0410-94fc-a9cfff90b4cd>
+Date:   Wed Oct 28 09:25:07 2015 +0000
+
+    Europa 1901: increase default sciencebox
+    
+    to decrease the chance of having a Stealth Bomber show up during WWI.
+    
+    See patch #6492
+    
+    git-svn-id: svn://svn.gna.org/svn/freeciv/trunk@30266 a0f10bec-cc02-0410-94fc-a9cfff90b4cd
+
+diff --git a/data/scenarios/europe_1901.sav b/data/scenarios/europe_1901.sav
+index d5cf28b..152e9c6 100644
+--- a/data/scenarios/europe_1901.sav
++++ b/data/scenarios/europe_1901.sav
+@@ -145,7 +145,7 @@ set={"name","value","gamestart"
+ "savepalace",TRUE,TRUE
+ "saveturns",1,1
+ "saveversion","CURRENT","CURRENT"
+-"sciencebox",100,100
++"sciencebox",400,400
+ "scorefile","freeciv-score.log","freeciv-score.log"
+ "scorelog",FALSE,FALSE
+ "separatepoles",TRUE,TRUE

@@ -48,11 +48,11 @@ function show_spaceship_dialog()
   var spaceship = spaceship_info[client.conn.playing['playerno']];
 
   message += "Spaceship progress: " + get_spaceship_state_text(spaceship['sship_state']) + "<br>";
-  message += "Success probability: " + Math.floor(spaceship['success_rate']) + "%<br>";
+  message += "Success probability: " + Math.floor(spaceship['success_rate'] * 100) + "%<br>";
   message += "Travel time: " + Math.floor(spaceship['travel_time']) + " years<br>";
   message += "Components: " + spaceship['components'] + "<br>";
-  message += "Energy Rate: " + Math.floor(spaceship['energy_rate']) + "%<br>";
-  message += "Support Rate: " + Math.floor(spaceship['support_rate']) + "%<br>";
+  message += "Energy Rate: " + Math.floor(spaceship['energy_rate'] * 100) + "%<br>";
+  message += "Support Rate: " + Math.floor(spaceship['support_rate'] * 100) + "%<br>";
   message += "Habitation: " + spaceship['habitation'] + "<br>";
   message += "Life Support: " + spaceship['life_support'] + "<br>";
   message += "Mass: " + spaceship['mass'] + " tons<br>";

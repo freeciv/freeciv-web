@@ -14,16 +14,3 @@ diff -Nurd -X.diff_ignore freeciv/server/spacerace.c freeciv/server/spacerace.c
        info.player_num = player_number(pplayer);
        info.sship_state = ship->state;
        info.structurals = ship->structurals;
-@@ -150,9 +154,9 @@
-       info.launch_year = ship->launch_year;
-       info.population = ship->population;
-       info.mass = ship->mass;
--      info.support_rate = ship->support_rate;
--      info.energy_rate = ship->energy_rate;
--      info.success_rate = ship->success_rate;
-+      info.support_rate = ship->support_rate * 100;
-+      info.energy_rate = ship->energy_rate * 100;
-+      info.success_rate = ship->success_rate * 100;
-       info.travel_time = ship->travel_time;
-       info.structure = ship->structure;
- 	  

@@ -234,7 +234,7 @@ function is_small_screen()
   var winWidth = $(window).width();
   var winHeight = $(window).height();
 
-  if (winWidth <= 640 || winHeight <= 640) {
+  if (winWidth <= 640 || winHeight <= 590) {
     return true;
   } else {
     return false;

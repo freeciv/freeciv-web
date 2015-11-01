@@ -140,9 +140,8 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    UINT8 barbarian_type;
    BV_PLAYER gives_shared_vision;
 -  UINT16 culture;
--  SINT16 love[MAX_NUM_PLAYER_SLOTS];
 +  UINT32 culture;
-+  UINT32 love[MAX_NUM_PLAYER_SLOTS];
+   SINT16 love[MAX_NUM_PLAYER_SLOTS];
 +  UINT32 current_research_cost;
  
    UINT8 color_red;

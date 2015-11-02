@@ -77,6 +77,14 @@ function update_game_info_pregame()
     game_info_html += "<p>";
     game_info_html += scenario_info['description'].replace(/\n/g, "<br>");
     game_info_html += "</p>";
+
+    if (scenario_info['prevent_new_cities']) {
+      /* Make sure that the player is aware that cities can't be built. */
+      game_info_html += "<p>";
+      game_info_html += scenario_info['name']
+                        + " forbids the founding of new cities.";
+      game_info_html += "</p>";
+    }
   }
 
   $("#pregame_game_info").html(game_info_html);

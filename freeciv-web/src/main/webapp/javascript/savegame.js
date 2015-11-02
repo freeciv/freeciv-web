@@ -36,6 +36,8 @@ var scenarios = [
   {"img":"/images/europe.png", "description":"Very large map of Europe, 200x100", "savegame":"europe-200x100-v2"}
 ];
 
+var scenario_info = null;
+
 /**************************************************************************
  Send a load game command, if requested by user.
  uses HTML5 local storage.

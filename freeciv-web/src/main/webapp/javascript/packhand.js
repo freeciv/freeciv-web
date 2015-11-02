@@ -900,9 +900,15 @@ function handle_ruleset_terrain_flag(packet)
   /* TODO: implement */
 }
 
+/**************************************************************************
+  Receive scenario information about the current game.
+
+  The current game is a scenario game if scenario_info's 'is_scenario'
+  field is set to true.
+**************************************************************************/
 function handle_scenario_info(packet)
 {
-  /* TODO: implement*/
+  scenario_info = packet;
 }
 
 function handle_vote_new(packet)

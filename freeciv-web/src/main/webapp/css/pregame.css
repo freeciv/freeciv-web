@@ -43,8 +43,25 @@ body {
   color: green;
 }
 
-#pregame_message_area {
+#pregame_game_info:empty {
+  display: none;
+  padding: 0px 0px;
+  border: 0px;
+}
+
+#pregame_game_info:not(:empty) {
   background: #111111 url(/images/bg.jpg); 
+  color: #000000;
+  max-height: 15%;
+  width: 78%;
+  overflow: auto;
+  float: left;
+  padding: 5px 5px;
+  border: 1px solid black;
+}
+
+#pregame_message_area {
+  background: #111111 url(/images/bg.jpg);
   color: #000000;
   width: 78%;
   overflow: auto;

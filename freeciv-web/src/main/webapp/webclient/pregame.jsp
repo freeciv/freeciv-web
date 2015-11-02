@@ -28,6 +28,7 @@
   
    
   <div id="pregame_player_list"></div> 
+  <div id="pregame_game_info"></div>
   <div id="pregame_message_area"></div>
   <div id="pregame_chat_box">
     <input id="pregame_text_input" type="text" name="text_input" onkeydown="javascript:return check_text_input(event,this);"

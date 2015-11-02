@@ -61,6 +61,24 @@ function observe()
 }
 
 /****************************************************************************
+  Show information about the current game
+****************************************************************************/
+function update_game_info_pregame()
+{
+  var game_info_html = "";
+
+  if (C_S_PREPARING != client_state()) {
+    /* The game has already started. */
+    return;
+  }
+
+  $("#pregame_game_info").html(game_info_html);
+
+  /* Update pregame_message_area's height. */
+  setup_window_size();
+}
+
+/****************************************************************************
   ...
 ****************************************************************************/
 function update_player_info_pregame()

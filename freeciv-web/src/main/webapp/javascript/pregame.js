@@ -72,6 +72,13 @@ function update_game_info_pregame()
     return;
   }
 
+  if (scenario_info != null && scenario_info['is_scenario']) {
+    /* Show the scenario description. */
+    game_info_html += "<p>";
+    game_info_html += scenario_info['description'].replace(/\n/g, "<br>");
+    game_info_html += "</p>";
+  }
+
   $("#pregame_game_info").html(game_info_html);
 
   /* Update pregame_message_area's height. */

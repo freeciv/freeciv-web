@@ -915,6 +915,9 @@ function handle_ruleset_terrain_flag(packet)
 function handle_scenario_info(packet)
 {
   scenario_info = packet;
+
+  /* This changes the game information. */
+  update_game_info_pregame();
 }
 
 function handle_vote_new(packet)

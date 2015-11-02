@@ -19,6 +19,7 @@
 
 var game_info = null;
 var game_rules = null;
+var ruleset_control = null;
 
 var IDENTITY_NUMBER_ZERO = 0;
 

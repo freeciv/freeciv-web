@@ -303,8 +303,14 @@ function handle_start_phase(packet)
 
 }
 
+/**************************************************************************
+  Handle the ruleset control packet.
+
+  This is the first ruleset packet the server sends.
+**************************************************************************/
 function handle_ruleset_control(packet)
 {
+  ruleset_control = packet;
 
   update_client_state(C_S_PREPARING);
 

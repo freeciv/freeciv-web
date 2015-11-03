@@ -26,7 +26,7 @@ var scenarios = [
   {"img":"/images/world_small.png", "description":"The World - Small world map, 80x50 map of the Earth", "savegame":"earth-80x50-v3"},
   {"img":"/images/world_big.png", "description":"The World - Large world map, 160x90 map of the Earth", "savegame":"earth-160x90-v2"},
   {"img":"/images/iberian.png", "description":"Iberian Peninsula - 136x100 map of Spain and Portugal", "savegame":"iberian-peninsula-136x100-v1.0"},
-  {"img":"/images/europe1901.png", "description":"Europe WWI scenario 1901", "savegame":"europe_1901"},
+  /*{"img":"/images/europe1901.png", "description":"Europe WWI scenario 1901", "savegame":"europe_1901"},*/
   {"img":"/images/france.png", "description":"France - Large (140x90)", "savegame":"france-140x90-v2"},
   {"img":"/images/japan.png", "description":"Japan - Medium (88x100)", "savegame":"japan-88x100-v1.3"},
   {"img":"/images/italy.png", "description":"Italy - Medium (100x100)", "savegame":"italy-100x100-v1.5"},

@@ -1720,7 +1720,23 @@ function key_unit_disband()
   var funits = get_units_in_focus();
   for (var i = 0; i < funits.length; i++) {
     var punit = funits[i];
-    var packet = {"pid" : packet_unit_disband, "unit_id" : punit['id'] };
+    var packet = null;
+    var target_city = tile_city(index_to_tile(punit['tile']));
+
+    /* Do Recycle Unit if located inside a city. */
+    /* FIXME: Only rulesets where the player can do Recycle Unit to all
+     * domestic and allied cities are supported here. */
+    if (target_city == null) {
+      packet = {"pid" : packet_unit_disband, "unit_id" : punit['id'] };
+    } else {
+      packet = {"pid" : packet_unit_do_action,
+        "actor_id"    : punit['id'],
+        "target_id"   : target_city['id'],
+        "value"       : 0,
+        "name"        : "",
+        "action_type" : ACTION_RECYCLE_UNIT};
+    }
+
     send_request(JSON.stringify(packet));
 
     /* Also remove unit immediately in client, to ensure it is removed. */

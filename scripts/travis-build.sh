@@ -29,11 +29,9 @@ mysql_user="root"
 resin_version="4.0.44"
 resin_url="http://www.caucho.com/download/resin-${resin_version}.tar.gz"
 tornado_url="https://pypi.python.org/packages/source/t/tornado/tornado-4.2.1.tar.gz"
-jansson_url="http://www.digip.org/jansson/releases/jansson-2.7.tar.bz2"
-nginx_url="http://nginx.org/download/nginx-1.8.0.tar.gz"
 
 # Based on fresh install of Ubuntu 12.04
-dependencies="maven mysql-server-5.5 openjdk-7-jdk libcurl4-openssl-dev subversion pngcrush libtool automake autoconf autotools-dev language-pack-en python3-setuptools python3.4 python3.4-dev imagemagick liblzma-dev firefox xvfb libicu-dev libsdl1.2-dev"
+dependencies="maven mysql-server-5.5 openjdk-7-jdk libcurl4-openssl-dev subversion pngcrush libtool automake autoconf autotools-dev language-pack-en python3-setuptools python3.4 python3.4-dev imagemagick liblzma-dev firefox xvfb libicu-dev libsdl1.2-dev libjansson-dev nginx"
 
 ## dependencies
 echo "==== Installing Updates and Dependencies ===="
@@ -65,13 +63,6 @@ tar xfz tornado-4.2.1.tar.gz
 cd tornado-4.2.1
 python3.4 setup.py install
 
-echo "==== Fetching/Installing Jansson ===="
-wget ${jansson_url}
-tar xjf jansson-2.7.tar.bz2
-cd jansson-2.7
-./configure
-make > jansson-log-file 2>&1  && make install > jansson-log-file 2>&1
-
 ## mysql setup
 echo "==== Setting up MySQL ===="
 mysqladmin -u ${mysql_user}  create freeciv_web
@@ -90,19 +81,10 @@ cd ${basedir}/scripts/freeciv-img-extract/ && ./setup_links.sh && ./sync.sh
 cd ${basedir}/scripts && ./sync-js-hand.sh
 cd ${basedir}/freeciv-web && sudo -u travis ./setup.sh
 
-echo "==== Building nginx ===="
-cd ${basedir}
-wget ${nginx_url}
-tar xzf nginx-1.8.0.tar.gz
-cd nginx-1.8.0
-./configure
-make > nginx-log-file 2>&1
-make install
-
-cp ${basedir}/publite2/nginx.conf /usr/local/nginx/conf/
+cp ${basedir}/publite2/nginx.conf /etc/nginx/
 
 echo "Starting Freeciv-web..."
-/usr/local/nginx/sbin/nginx
+service nginx start
 cd ${basedir}/scripts/ && sudo -u travis ./start-freeciv-web.sh
 
 cat ${basedir}/logs/*.log 

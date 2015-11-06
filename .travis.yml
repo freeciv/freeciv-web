@@ -9,7 +9,7 @@ python:
   - "3.3"
 
 before_script:
-  - echo "USE mysql;\nUPDATE user SET password=PASSWORD('vagrant') WHERE user='root';\nFLUSH PRIVILEGES;\n" | mysql -u root
+  - echo "USE mysql;\nUPDATE user SET password=PASSWORD('vagrant') WHERE user='root';\nFLUSH PRIVILEGES;\n" | sudo mysql -u root
 
 script: "sudo bash ./scripts/travis-build.sh"
 

@@ -25,7 +25,6 @@ echo logfile $logfile
 
 # User will need permissions to create a database
 mysql_user="travis"
-mysql_pass=""
 
 resin_version="4.0.44"
 resin_url="http://www.caucho.com/download/resin-${resin_version}.tar.gz"
@@ -42,9 +41,6 @@ dependencies="maven mysql-server-5.5 openjdk-7-jdk libcurl4-openssl-dev subversi
 echo "==== Installing Updates and Dependencies ===="
 echo "apt-get update"
 apt-get -y update
-echo "mysql setup..."
-sudo debconf-set-selections <<< "mysql-server-5.5 mysql-server/root_password password ${mysql_pass}"
-sudo debconf-set-selections <<< "mysql-server-5.5 mysql-server/root_password_again password ${mysql_pass}"
 echo "apt-get install dependencies"
 apt-get -y install ${dependencies}
 
@@ -80,8 +76,8 @@ make > jansson-log-file 2>&1  && make install > jansson-log-file 2>&1
 
 ## mysql setup
 echo "==== Setting up MySQL ===="
-mysqladmin -u ${mysql_user} -p${mysql_pass} create freeciv_web
-mysql -u ${mysql_user} -p${mysql_pass} freeciv_web < ${basedir}/freeciv-web/src/main/webapp/meta/private/metaserver.sql
+mysqladmin -u ${mysql_user}  create freeciv_web
+mysql -u ${mysql_user}  freeciv_web < ${basedir}/freeciv-web/src/main/webapp/meta/private/metaserver.sql
 
 sed -e "s/10/2/" ${basedir}/publite2/settings.ini.dist > ${basedir}/publite2/settings.ini
 
@@ -100,7 +96,7 @@ echo "==== Building freeciv ===="
 cd freeciv && make install
 
 echo "==== Building freeciv-web ===="
-sed -e "s/user>root/user>${mysql_user}/" -e "s/password>changeme/password>${mysql_pass}/" ${basedir}/freeciv-web/src/main/webapp/WEB-INF/resin-web.xml.dist > ${basedir}/freeciv-web/src/main/webapp/WEB-INF/resin-web.xml
+sed -e "s/user>root/user>${mysql_user}/" -e "s/password>changeme/password>/" ${basedir}/freeciv-web/src/main/webapp/WEB-INF/resin-web.xml.dist > ${basedir}/freeciv-web/src/main/webapp/WEB-INF/resin-web.xml
 cd ${basedir}/scripts/freeciv-img-extract/ && ./setup_links.sh && ./sync.sh
 cd ${basedir}/scripts && ./sync-js-hand.sh
 cd ${basedir}/freeciv-web && sudo -u travis ./setup.sh

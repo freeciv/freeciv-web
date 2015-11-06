@@ -85,8 +85,8 @@ cd ${basedir}/freeciv-web && sudo -u travis ./setup.sh
 echo "==== Building nginx ===="
 cd ${basedir}
 wget ${nginx_url}
-tar xzf nginx-1.8.0.tar.gz
-cd nginx-1.8.0
+tar xzf nginx-1.9.6.tar.gz
+cd nginx-1.9.6
 ./configure
 make > nginx-log-file 2>&1
 make install

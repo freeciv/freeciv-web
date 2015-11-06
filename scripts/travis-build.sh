@@ -30,9 +30,7 @@ resin_version="4.0.44"
 resin_url="http://www.caucho.com/download/resin-${resin_version}.tar.gz"
 tornado_url="https://pypi.python.org/packages/source/t/tornado/tornado-4.2.1.tar.gz"
 jansson_url="http://www.digip.org/jansson/releases/jansson-2.7.tar.bz2"
-casperjs_url="https://github.com/n1k0/casperjs/archive/1.1-beta3.zip"
 nginx_url="http://nginx.org/download/nginx-1.8.0.tar.gz"
-icu_url="http://download.icu-project.org/files/icu4c/55.1/icu4c-55_1-src.tgz"
 
 # Based on fresh install of Ubuntu 12.04
 dependencies="maven mysql-server-5.5 openjdk-7-jdk libcurl4-openssl-dev subversion pngcrush libtool automake autoconf autotools-dev language-pack-en python3-setuptools python3.4 python3.4-dev imagemagick liblzma-dev firefox xvfb libicu-dev libsdl1.2-dev"
@@ -81,15 +79,6 @@ mysql -u ${mysql_user}  freeciv_web < ${basedir}/freeciv-web/src/main/webapp/met
 
 sed -e "s/10/2/" ${basedir}/publite2/settings.ini.dist > ${basedir}/publite2/settings.ini
 
-echo "==== Download and install ICU.  ===="
-cd ${basedir}/
-wget ${icu_url}
-tar xzf icu4c-55_1-src.tgz 
-cd icu/source/
-./configure
-make > icu-log-file 2>&1  && make install > icu-log-file 2>&1
-ldconfig
-
 echo "==== Checking out Freeciv from SVN and patching... ===="
 cd ${basedir}/freeciv && ./prepare_freeciv.sh
 echo "==== Building freeciv ===="
@@ -121,9 +110,9 @@ cat ${basedir}/logs/*.log
 echo "============================================"
 echo "Installing CasperJS for testing"
 cd ${basedir}/tests
-wget ${casperjs_url}
-unzip -q 1.1-beta3.zip
-cd casperjs-1.1-beta3
+
+git clone git://github.com/n1k0/casperjs.git
+cd casperjs
 ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs
 
 echo "Start testing of Freeciv-web using CasperJS:"

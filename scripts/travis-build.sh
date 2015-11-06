@@ -48,11 +48,7 @@ sudo debconf-set-selections <<< "mysql-server-5.5 mysql-server/root_password_aga
 echo "apt-get install dependencies"
 apt-get -y install ${dependencies}
 
-#Travis doesn't support Python 3.4 at the moment.
-ln -s /usr/bin/python3.2 /usr/bin/python3.4
-python3.4 --version
-
-python3.2 -m easy_install Pillow
+python3.4 -m easy_install Pillow
 
 java -version
 javac -version

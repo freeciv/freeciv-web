@@ -24,7 +24,7 @@ echo basedir  $basedir
 echo logfile $logfile
 
 # User will need permissions to create a database
-mysql_user="travis"
+mysql_user="root"
 
 resin_version="4.0.44"
 resin_url="http://www.caucho.com/download/resin-${resin_version}.tar.gz"

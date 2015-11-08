@@ -52,6 +52,7 @@ cd ${basedir}
 ## dependencies
 echo "==== Installing Updates and Dependencies ===="
 export DEBIAN_FRONTEND=noninteractive
+apt-mark hold firefox
 echo "apt-get update"
 apt-get -y update
 echo "apt-get upgrade"

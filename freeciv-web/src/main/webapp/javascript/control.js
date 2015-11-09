@@ -1705,7 +1705,22 @@ function request_unit_build_city()
 
       var ptype = unit_type(punit);
       if (ptype['name'] == "Settlers" || ptype['name'] == "Engineers") {
-        var packet = {"pid" : packet_city_name_suggestion_req, "unit_id" : punit['id'] };
+        var packet = null;
+        var target_city = tile_city(index_to_tile(punit['tile']));
+
+        /* Do Join City if located inside a city. */
+        if (target_city == null) {
+          packet = {"pid" : packet_city_name_suggestion_req,
+            "unit_id"     : punit['id'] };
+        } else {
+          packet = {"pid" : packet_unit_do_action,
+            "actor_id"    : punit['id'],
+            "target_id"   : target_city['id'],
+            "value"       : 0,
+            "name"        : "",
+            "action_type" : ACTION_JOIN_CITY };
+        }
+
         send_request(JSON.stringify(packet));
       }
     }

@@ -1753,11 +1753,6 @@ function key_unit_disband()
     }
 
     send_request(JSON.stringify(packet));
-
-    /* Also remove unit immediately in client, to ensure it is removed. */
-    clear_tile_unit(punit);
-    client_remove_unit(punit);
-
   }
   setTimeout(update_unit_focus, 700);
 }

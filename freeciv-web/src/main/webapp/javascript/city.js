@@ -743,6 +743,7 @@ function city_name_dialog(suggested_name, unit_id) {
     }
   });
   keyboard_input=false;
+  blur_input_on_touchdevice();
 }
 
 /**************************************************************************

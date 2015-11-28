@@ -424,7 +424,7 @@ function show_intro_dialog(title, message) {
 				},
 				  "Customize Game": function() {
 					if (validate_username()) {
-					  $("#pregame_text_input").focus();
+					  if (!is_touch_device()) $("#pregame_text_input").focus();
 					  $("#dialog").dialog('close');
 					}
 				}
@@ -460,6 +460,7 @@ function show_intro_dialog(title, message) {
     }
   });
 
+  blur_input_on_touchdevice();
 }
 
 

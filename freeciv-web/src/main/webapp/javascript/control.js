@@ -183,12 +183,24 @@ function control_init()
 /****************************************************************************
  determined if this is a touch enabled device, such as iPhone, iPad.
 ****************************************************************************/
-function is_touch_device() {
+function is_touch_device() 
+{
   if(('ontouchstart' in window) || 'onmsgesturechange' in window
       || window.DocumentTouch && document instanceof DocumentTouch) {
     return true;
   } else {
     return false;
+  }
+}
+
+/****************************************************************************
+ Remove focus from all input elements on touch devices, since the mobile
+ keyboard can be annoying to constantly popup and resize screen etc.  
+****************************************************************************/
+function blur_input_on_touchdevice() 
+{
+  if (is_touch_device() || is_small_screen()) {
+    $('input[type=text], textarea').blur();
   }
 }
 
@@ -277,7 +289,7 @@ function check_text_input(event,chatboxtextarea) {
     message = encodeURIComponent(message);
 
     $(chatboxtextarea).val('');
-    $(chatboxtextarea).focus();
+    if (!is_touch_device()) $(chatboxtextarea).focus();
     keyboard_input = true;
     var test_packet = {"pid" : packet_chat_msg_req, "message" : message};
     var myJSONText = JSON.stringify(test_packet);

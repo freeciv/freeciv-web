@@ -173,7 +173,7 @@ function setup_window_size ()
 
 
   /* dynamically reduce content in top meny according to content*/
-  while ($(window).width() - sum_width() < 10) {
+  while ($(window).width() - sum_width() < 35) {
     if (i == 0) $("#freeciv_logo").hide();
     if (i == 1) $("#hel_tab").hide();
 

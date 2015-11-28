@@ -136,7 +136,7 @@ function init_options_dialog()
     send_request(myJSONText);
   });
 
-  if (!audio.source.src) {
+  if (audio != null && !audio.source.src) {
     if (!supports_mp3()) {
       audio.load("/music/" + music_list[Math.floor(Math.random() * music_list.length)] + ".ogg");
     } else {

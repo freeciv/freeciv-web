@@ -35,7 +35,7 @@ until `curl --output /dev/null --silent --head --fail "http://localhost:8080/met
     printf ".."
     sleep 3
 done
-sleep 4
+sleep 8
 
 #3. publite2
 echo "Starting publite2" && \

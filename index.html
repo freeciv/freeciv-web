@@ -1,34 +1,44 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <meta charset='utf-8'>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
-
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
     <title>Freeciv-web by freeciv</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
   </head>
-
   <body>
-    <header>
-      <div class="inner">
-        <h1>Freeciv-web</h1>
-        <h2>Freeciv-web is an Open Source strategy game implemented in HTML5, which can be played online against other players, or in single player mode against AI opponents.</h2>
-        <a href="https://github.com/freeciv/freeciv-web" class="button"><small>View project on</small> GitHub</a>
-      </div>
-    </header>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/freeciv/freeciv-web">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/freeciv/freeciv-web/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/freeciv/freeciv-web/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
 
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
-          <h2>
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>Freeciv-web</h1>
+          <p>Freeciv-web is an Open Source strategy game implemented in HTML5, which can be played online against other players, or in single player mode against AI opponents.</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/freeciv">freeciv</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
+
+        <h2>
 <a id="the-freeciv-web-project" class="anchor" href="#the-freeciv-web-project" aria-hidden="true"><span class="octicon octicon-link"></span></a>THE FREECIV-WEB PROJECT</h2>
 
 <p><a href="https://travis-ci.org/freeciv/freeciv-web"><img src="https://api.travis-ci.org/freeciv/freeciv-web.png" alt="Build Status"></a></p>
@@ -72,30 +82,31 @@ Implemented in Python.</p></li>
 
 <p>Freeciv-web can be setup using Vagrant on VirtualBox to quickly create a 
 local developer image running Freeciv-web on Ubuntu 14.04 on your host 
-operating system such as Windows, OSX or Linux. </p>
+operating system such as Windows, OSX or Linux. 
+This is the recommended way to build Freeciv-web on your computer.</p>
 
 <ol>
 <li>
 <p>Install VirtualBox: <a href="https://www.virtualbox.org/">https://www.virtualbox.org/</a> - Install manually on Windows, and with the following command on Linux:</p>
 
-<div class="highlight highlight-bash"><pre>sudo apt-get install virtualbox</pre></div>
+<div class="highlight highlight-source-shell"><pre>sudo apt-get install virtualbox</pre></div>
 </li>
 <li>
 <p>Install Vagrant: <a href="http://www.vagrantup.com/">http://www.vagrantup.com/</a> - Install manually on Windows
 , and with the following command on Linux:</p>
 
-<div class="highlight highlight-bash"><pre>sudo apt-get install vagrant</pre></div>
+<div class="highlight highlight-source-shell"><pre>sudo apt-get install vagrant</pre></div>
 </li>
 <li>
 <p>Install Git: <a href="http://git-scm.com/">http://git-scm.com/</a> then check out Freeciv-web from git to 
 a directory on your computer, by running this git command:</p>
 
-<div class="highlight highlight-bash"><pre>git clone https://github.com/freeciv/freeciv-web.git --depth=10</pre></div>
+<div class="highlight highlight-source-shell"><pre>git clone https://github.com/freeciv/freeciv-web.git --depth=10</pre></div>
 </li>
 <li>
 <p>Run Vagrant with the following commands in your Freeciv-web directory from step 3:</p>
 
-<div class="highlight highlight-bash"><pre>vagrant plugin install vagrant-vbguest
+<div class="highlight highlight-source-shell"><pre>vagrant plugin install vagrant-vbguest
 vagrant up</pre></div>
 
 <p>This will build, compile, install and run Freeciv-web on the virtual server image. Wait for the installation process to complete, watching for any error messages in the logs.</p>
@@ -104,7 +115,7 @@ vagrant up</pre></div>
 <p>(Skip this step if you run Windows) For Linux or OS X, then you 
 need to setup a SSH tunnel to port 80 like this:</p>
 
-<div class="highlight highlight-bash"><pre>sudo ssh -p 2222 -gNfL 80:localhost:80 vagrant@localhost -i <span class="pl-k">~</span>/.vagrant.d/insecure_private_key</pre></div>
+<div class="highlight highlight-source-shell"><pre>sudo ssh -p 2222 -gNfL 80:localhost:80 vagrant@localhost -i <span class="pl-k">~</span>/.vagrant.d/insecure_private_key</pre></div>
 </li>
 </ol>
 
@@ -113,11 +124,41 @@ host operating system.</p>
 
 <p>To log in to your Vagrant server, run the command: </p>
 
-<div class="highlight highlight-bash"><pre> vagrant ssh</pre></div>
+<div class="highlight highlight-source-shell"><pre> vagrant ssh</pre></div>
 
 <p>The Vagrant guest machine will mount the Freeciv-web source repository in the /vagrant directory.
 Note that running Freeciv-web using Vagrant requires about 4Gb of memory
 and 3 Gb of harddisk space.</p>
+
+<h2>
+<a id="running-freeciv-web-with-docker" class="anchor" href="#running-freeciv-web-with-docker" aria-hidden="true"><span class="octicon octicon-link"></span></a>Running Freeciv-web with Docker</h2>
+
+<p>Freeciv-web can be built automatically using Docker <a href="https://www.docker.com/">https://www.docker.com/</a>
+Note that building Freeciv-web with Docker is still in beta and testing.
+This was tested using Docker 1.8.2 with Ubuntu 14.04 as the base image.
+Also see the <a href="Dockerfile">Dockerfile</a> for more information.</p>
+
+<ol>
+<li>
+<p>Install Docker, then get the Freeciv-web source code like this:</p>
+
+<div class="highlight highlight-source-shell"><pre>git clone https://github.com/freeciv/freeciv-web.git --depth=10</pre></div>
+</li>
+<li>
+<p>Build the Freeciv-web docker container by giving the following command: </p>
+
+<div class="highlight highlight-source-shell"><pre>docker build -t=<span class="pl-s"><span class="pl-pds">"</span>freeciv-web<span class="pl-pds">"</span></span> <span class="pl-c1">.</span></pre></div>
+</li>
+<li>
+<p>Then run the Freeciv-web docker container with this command: </p>
+
+<div class="highlight highlight-source-shell"><pre>docker run -d -p 80:80 --expose=80 -t freeciv-web /bin/sh -c <span class="pl-s"><span class="pl-pds">"</span>/docker/scripts/docker-run.sh &amp;&amp; sleep infinity<span class="pl-pds">"</span></span></pre></div>
+</li>
+</ol>
+
+<p>Note: For users running Freeciv-web on Docker on Windows/msys-git, if the the command in step 3 above fails with an error message, try replacing the slash character with double-slashes like this: </p>
+
+<div class="highlight highlight-source-shell"><pre> docker run -d -p 80:80 --expose=80 -t freeciv-web //bin//sh -c <span class="pl-s"><span class="pl-pds">"</span>//docker//scripts//docker-run.sh &amp;&amp; sleep infinity<span class="pl-pds">"</span></span></pre></div>
 
 <h2>
 <a id="system-requirements-for-manual-install" class="anchor" href="#system-requirements-for-manual-install" aria-hidden="true"><span class="octicon octicon-link"></span></a>System Requirements for manual install</h2>
@@ -137,8 +178,7 @@ and 3 Gb of harddisk space.</p>
 <li><p>OpenSSL - <a href="http://www.openssl.org/">http://www.openssl.org/</a></p></li>
 <li><p>nginx 1.6.0 or later - <a href="http://nginx.org/">http://nginx.org/</a></p></li>
 <li><p>pngcrush, required for freeciv-img-extract.  <a href="http://pmt.sourceforge.net/pngcrush/">http://pmt.sourceforge.net/pngcrush/</a></p></li>
-<li><p>Tornado 4.1 or later - <a href="http://www.tornadoweb.org/">http://www.tornadoweb.org/</a></p></li>
-<li><p>GLib 2.16.0 or newer - <a href="http://ftp.gnome.org/pub/GNOME/sources/glib/2.16/">http://ftp.gnome.org/pub/GNOME/sources/glib/2.16/</a></p></li>
+<li><p>Tornado 4.2 or later - <a href="http://www.tornadoweb.org/">http://www.tornadoweb.org/</a></p></li>
 <li><p>Jansson 2.6 - <a href="http://www.digip.org/jansson/">http://www.digip.org/jansson/</a></p></li>
 <li><p>liblzma-dev - <a href="http://tukaani.org/xz/">http://tukaani.org/xz/</a> - for XZ compressed savegames.</p></li>
 </ul>
@@ -170,8 +210,6 @@ freeciv-web/src/main/webapp/meta/private/metaserver.sql</p></li>
 <p>cd freeciv/freeciv<br>
 make install     (as root user)  </p>
 </blockquote>
-
-<p>copy freeciv-web/freeciv/data/fcweb to /usr/local/share/freeciv </p>
 </li>
 <li>
 <p>Build and configure freeciv-web. </p>
@@ -189,6 +227,7 @@ to the nginx config directory, /usr/local/nginx/conf, /etc/nginx, or /usr/local/
 and edit it to suit your needs.</li>
 <li>Copy scripts/configuration.sh.dist to scripts/configuration.sh and edit it to suit your needs.</li>
 <li>Copy publite2/settings.ini.dist to publite2/settings.ini and edit it to suit your needs.</li>
+<li>You may wish to create a freeciv/dl_freeciv.sh if you have trouble with your Internet connection and build the Freeciv server often. See freeciv/dl_freeciv_default.sh and freeciv/dl_freeciv_from_git_svn.sh.dist</li>
 </ul>
 </li>
 <li><p>Start and stop Freeciv-web with the following commands:<br>
@@ -205,6 +244,8 @@ status-freeciv-web.sh        (this script is useful to debug if Freeciv-web is r
 
 <p>Freeciv-Web is built on Travis CI on every commit. This is the current build status: <a href="https://travis-ci.org/freeciv/freeciv-web"><img src="https://api.travis-ci.org/freeciv/freeciv-web.png" alt="Build Status"></a></p>
 
+<p>Freeciv-web has CasperJS tests which are run by Travis CI on every commit, and by Vagrant when creating a new image. The tests can be found in tests/freeciv-web-tests.js. Please make sure that patches and commits for Freeciv-web don't break the CasperJS tests. Thanks!</p>
+
 <h2>
 <a id="developers-interested-in-freeciv-web" class="anchor" href="#developers-interested-in-freeciv-web" aria-hidden="true"><span class="octicon octicon-link"></span></a>Developers interested in Freeciv-web</h2>
 
@@ -218,26 +259,11 @@ some tasks you can work on. Pull requests on Github is welcome!</p>
 <a href="https://github.com/cazfi">Marko Lindqvist</a><br>
 <a href="https://github.com/kvilhaugsvik">Sveinung Kvilhaugsvik</a><br>
 and the <a href="http://freeciv.wikia.com/wiki/People">Freeciv.org project</a>!</p>
-        </section>
+      </section>
 
-        <aside id="sidebar">
-          <a href="https://github.com/freeciv/freeciv-web/zipball/master" class="button">
-            <small>Download</small>
-            .zip file
-          </a>
-          <a href="https://github.com/freeciv/freeciv-web/tarball/master" class="button">
-            <small>Download</small>
-            .tar.gz file
-          </a>
-
-          <p class="repo-owner"><a href="https://github.com/freeciv/freeciv-web"></a> is maintained by <a href="https://github.com/freeciv">freeciv</a>.</p>
-
-          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
-        </aside>
-      </div>
     </div>
-
-            <script type="text/javascript">
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+              <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
           </script>

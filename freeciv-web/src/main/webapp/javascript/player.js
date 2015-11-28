@@ -172,3 +172,17 @@ function research_get(pplayer)
   }
 
 }
+
+/**************************************************************************
+  returns true if the given player has the given wonder (improvement)
+**************************************************************************/
+function player_has_wonder(playerno, improvement_id)
+{
+  for (city_id in cities) {
+    var pcity = cities[city_id];
+    if (city_owner(pcity).playerno == playerno && city_has_building(pcity, improvement_id)) {
+      return true;
+    }
+  }
+  return false;
+}

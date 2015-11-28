@@ -484,10 +484,13 @@ function can_city_build_improvement_now(pcity, pimprove)
 /**************************************************************************
   Return TRUE iff the city has this building in it.
 **************************************************************************/
-function city_has_building(pcity,
-		                   pimprove)
+function city_has_building(pcity, improvement_id)
 {
-  /* TODO: implement. */
+  for (var z = 0; z < pcity['improvements'].length; z ++) {
+    if (pcity['improvements'][z] == 1 && z == improvement_id) {
+      return true;
+    }
+  }
   return false;
 }
 

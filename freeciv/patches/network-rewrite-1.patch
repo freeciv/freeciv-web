@@ -10,21 +10,6 @@ diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/gene
  
      for (i = 0; i < %(array_size_u) s; i++) {
        %(tmp)s;
-@@ -553,11 +553,11 @@
-             else:
-                 extra=""
-             if self.dataio_type=="memory":
--                return '''%(extra)s
--  if (!DIO_GET(%(dataio_type)s, &din, \"%(name)s\", &field_addr, real_packet->%(name)s, %(array_size_u)s)){
-+                return ''' /* not supported yet. %(extra)s
-+  if (!dio_get_%(dataio_type)s(pc->json_packet, \"%(name)s\", &field_addr, real_packet->%(name)s, %(array_size_u)s)){
-     RECEIVE_PACKET_FIELD_ERROR(%(name)s);
--  }'''%self.get_dict(vars())
-+  } */'''%self.get_dict(vars())
-             elif self.is_array==2 and self.dataio_type!="string" \
-                  and self.dataio_type!="estring":
-                 return '''
- {
 diff -Nurd -X.diff_ignore freeciv/server/plrhand.c freeciv/server/plrhand.c
 --- freeciv/server/plrhand.c	2015-03-20 19:10:43.052549809 +0200
 +++ freeciv/server/plrhand.c	2015-03-20 19:11:19.584549008 +0200

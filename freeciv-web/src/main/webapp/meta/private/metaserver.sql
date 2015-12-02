@@ -25,21 +25,13 @@ DROP TABLE IF EXISTS `auth`;
 CREATE TABLE `auth` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(32) DEFAULT NULL,
-  `name` varchar(32) DEFAULT NULL,
   `password` varchar(32) DEFAULT NULL,
   `email` varchar(128) DEFAULT NULL,
-  `createtime` int(11) DEFAULT NULL,
-  `accesstime` int(11) DEFAULT NULL,
-  `address` varchar(255) DEFAULT NULL,
-  `createaddress` varchar(255) DEFAULT NULL,
-  `logincount` int(11) DEFAULT '0',
-  `fb_uid` bigint(20) DEFAULT NULL,
-  `email_hash` varchar(64) DEFAULT NULL,
-  `openid_user` varchar(512) DEFAULT NULL,
+  `activated` int(1) DEFAULT 1,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
-  KEY `id_fb_uid` (`fb_uid`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  UNIQUE KEY `email` (`email`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 

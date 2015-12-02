@@ -52,6 +52,9 @@ function set_client_state(newstate)
       if (observing) center_tile_mapcanvas(map_pos_to_tile(15,15));
       update_metamessage_on_gamestart();
       deduplicate_player_colors();
+      if (is_pbem()) {
+        setTimeout("set_human_pbem_players();advance_unit_focus();", 1500);
+      }
 
       break;
     case C_S_OVER:

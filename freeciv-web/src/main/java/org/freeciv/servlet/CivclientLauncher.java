@@ -56,12 +56,15 @@ public class CivclientLauncher extends HttpServlet {
             DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
             conn = ds.getConnection();
 
-            if (!action.equals("multi") && (action.equals("new") || action.equals("load"))) {
+            if (!action.equals("multi") && (action.equals("new") || action.equals("load") || action.equals("pbem"))) {
+               String gametype = "singleplayer";
+               if (action.equals("pbem")) gametype = "pbem"; 
 
-			  /* If user requested a new game, then get host and port for an available
+               /* If user requested a new game, then get host and port for an available
                * server from the metaserver DB, and use that one. */
 
-                String serverFetchSql = "select port from servers where state = 'Pregame' and type = 'singleplayer' and humans = '0' order by rand() limit 1";
+                String serverFetchSql = "select port from servers where state = 'Pregame' and type = '" 
+                                         + gametype + "' and humans = '0' order by rand() limit 1";
 
                 PreparedStatement stmt = conn.prepareStatement(serverFetchSql);
                 ResultSet rs = stmt.executeQuery();

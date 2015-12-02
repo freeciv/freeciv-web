@@ -41,6 +41,51 @@
   </servlet-mapping>
 
 
+  <!-- /create_pbem_user   (new useraccount) -->
+  <servlet>
+    <servlet-name>NewPBEMUser</servlet-name>
+    <servlet-class>org.freeciv.servlet.NewPBEMUser</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>NewPBEMUser</servlet-name>
+    <url-pattern>/create_pbem_user</url-pattern>
+  </servlet-mapping>
+
+  <!-- /login_user   -->
+  <servlet>
+    <servlet-name>LoginUser</servlet-name>
+    <servlet-class>org.freeciv.servlet.LoginUser</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>LoginUser</servlet-name>
+    <url-pattern>/login_user</url-pattern>
+  </servlet-mapping>
+
+  <!-- /validate_user   -->
+  <servlet>
+    <servlet-name>ValidateUser</servlet-name>
+    <servlet-class>org.freeciv.servlet.ValidateUser</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>ValidateUser</servlet-name>
+    <url-pattern>/validate_user</url-pattern>
+  </servlet-mapping>
+
+  <!-- /random_user   -->
+  <servlet>
+    <servlet-name>RandomUser</servlet-name>
+    <servlet-class>org.freeciv.servlet.RandomUser</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>RandomUser</servlet-name>
+    <url-pattern>/random_user</url-pattern>
+  </servlet-mapping>
+
+
   <context-param>
     <param-name>buildTimeStamp</param-name>
     <param-value>${timestamp}</param-value>

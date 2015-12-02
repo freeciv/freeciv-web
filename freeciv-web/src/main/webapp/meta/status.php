@@ -20,10 +20,11 @@ if (! $config_problem) {
       
 $stmt = "select count(*) as count from servers UNION ALL select count(*) as count from servers where "
 	. "type = 'singleplayer' and state = 'Pregame' and stamp >= DATE_SUB(NOW(), INTERVAL 1 MINUTE) "
-	. "UNION ALL select count(*) as count from servers where type = 'multiplayer' and state = 'Pregame' and stamp >= DATE_SUB(NOW(), INTERVAL 1 MINUTE)";
+	. "UNION ALL select count(*) as count from servers where type = 'multiplayer' and state = 'Pregame' and stamp >= DATE_SUB(NOW(), INTERVAL 1 MINUTE) "
+        . "UNION ALL select count(*) as count from servers where type = 'pbem' and state = 'Pregame' and stamp >= DATE_SUB(NOW(), INTERVAL 1 MINUTE)";
 $res = fcdb_exec($stmt);
 $nr = fcdb_num_rows($res);
-if ( $nr != 3 ) {
+if ( $nr != 4 ) {
   print "error";
 } else {
   $row = fcdb_fetch_array($res, 0);
@@ -34,5 +35,9 @@ if ( $nr != 3 ) {
   print (";");
   $row = fcdb_fetch_array($res, 2);
   print db2html($row["count"]);
+  print (";");
+  $row = fcdb_fetch_array($res, 3);
+  print db2html($row["count"]);
+
 } 
 ?>

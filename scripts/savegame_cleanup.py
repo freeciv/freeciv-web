@@ -18,6 +18,7 @@ scenario_list = ['british-isles-85x80-v2.80.sav.gz', 'iberian-peninsula-136x100-
 
 
 keeptime = 60*60;
+keeptime_pbem = 60*60*24*30;
 
 for root, subFolders, files in os.walk(rootdir):
     for file in files:
@@ -25,7 +26,10 @@ for root, subFolders, files in os.walk(rootdir):
 	ftime = os.path.getmtime(f)
         curtime = time.time()
         difftime = curtime - ftime
-        if difftime > keeptime and (file.endswith("sav.gz") or file.endswith("sav.bz2")) and file not in scenario_list:
+        if difftime > keeptime and file.endswith("sav.xz") and not file.startswith("pbem") and file not in scenario_list:
+          print("rm file: " + file);
+          os.unlink(f)
+        if difftime > keeptime_pbem and file.endswith("sav.xz") and file.startswith("pbem") and file not in scenario_list:
           print("rm file: " + file);
           os.unlink(f)
 

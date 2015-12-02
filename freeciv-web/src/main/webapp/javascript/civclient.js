@@ -173,6 +173,9 @@ function init_common_intro_dialog() {
       "settings, and wait for the minimum number of players before " +
       "the game can start. " +
       "Please enter your name: ");
+  } else if ($.getUrlVar('action') == "pbem") {
+    show_pbem_dialog();
+
   } else {
     show_intro_dialog("Welcome to Freeciv-web",
       "You are about to join this game server, where you can " +
@@ -393,6 +396,7 @@ function validate_username() {
   return true;
 }
 
+
 /**************************************************************************
  Shows the Freeciv intro dialog.
 **************************************************************************/
@@ -462,6 +466,7 @@ function show_intro_dialog(title, message) {
 
   blur_input_on_touchdevice();
 }
+
 
 
 /* Webclient is always client. */

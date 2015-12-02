@@ -10,24 +10,6 @@ diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/gene
  
      for (i = 0; i < %(array_size_u) s; i++) {
        %(tmp)s;
-diff -Nurd -X.diff_ignore freeciv/server/plrhand.c freeciv/server/plrhand.c
---- freeciv/server/plrhand.c	2015-03-20 19:10:43.052549809 +0200
-+++ freeciv/server/plrhand.c	2015-03-20 19:11:19.584549008 +0200
-@@ -1243,12 +1243,12 @@
-       || (receiver
-           && player_diplstate_get(receiver, plr1)->contact_turns_left > 0)
-       || (receiver && receiver == plr2)) {
--    packet_ds->type                 = ds->type;
-+    packet_ds->ds_type              = ds->type;
-     packet_ds->turns_left           = ds->turns_left;
-     packet_ds->has_reason_to_cancel = ds->has_reason_to_cancel;
-     packet_ds->contact_turns_left   = ds->contact_turns_left;
-   } else {
--    packet_ds->type                 = DS_WAR;
-+    packet_ds->ds_type              = DS_WAR;
-     packet_ds->turns_left           = 0;
-     packet_ds->has_reason_to_cancel = 0;
-     packet_ds->contact_turns_left   = 0;
 diff -Nurd -X.diff_ignore freeciv/server/ruleset.c freeciv/server/ruleset.c
 --- freeciv/server/ruleset.c	2015-03-20 19:10:42.796549815 +0200
 +++ freeciv/server/ruleset.c	2015-03-20 19:11:19.584549008 +0200

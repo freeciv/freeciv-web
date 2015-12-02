@@ -117,15 +117,6 @@ index b0e07fc..e0ab80b 100644
    
    SINT32 multiplier[MAX_NUM_MULTIPLIERS];
    SINT32 multiplier_target[MAX_NUM_MULTIPLIERS];
-@@ -846,7 +861,7 @@ PACKET_PLAYER_DIPLSTATE = 59; sc
-   UINT32 diplstate_id; key
-   PLAYER plr1;
-   PLAYER plr2;
--  UINT8 type;
-+  UINT8 ds_type;
-   UINT16 turns_left;
-   UINT8 has_reason_to_cancel;
-   UINT16 contact_turns_left;
 @@ -1089,25 +1104,25 @@ end
  
  PACKET_DIPLOMACY_CREATE_CLAUSE_REQ = 99; cs, dsend

@@ -991,20 +991,19 @@ function handle_player_diplstate(packet)
 {
   if (client == null || client.conn.playing == null) return;
 
-  if (packet['ds_type'] == DS_WAR && packet['plr2'] == client.conn.playing['playerno']
+  if (packet['type'] == DS_WAR && packet['plr2'] == client.conn.playing['playerno']
       && diplstates[packet['plr1']] != DS_WAR && diplstates[packet['plr1']] != DS_NO_CONTACT) {
      alert_war(packet['plr1']);
-  } else if (packet['ds_type'] == DS_WAR && packet['plr1'] == client.conn.playing['playerno']
+  } else if (packet['type'] == DS_WAR && packet['plr1'] == client.conn.playing['playerno']
       && diplstates[packet['plr2']] != DS_WAR && diplstates[packet['plr2']] != DS_NO_CONTACT)  {
      alert_war(packet['plr2']);
   }
 
   if (packet['plr1'] == client.conn.playing['playerno']) {
-    diplstates[packet['plr2']] = packet['ds_type'];
+    diplstates[packet['plr2']] = packet['type'];
   } else if (packet['plr2'] == client.conn.playing['playerno']) {
-    diplstates[packet['plr1']] = packet['ds_type'];
+    diplstates[packet['plr1']] = packet['type'];
   }
-
 }
 
 function handle_ruleset_extra(packet)

@@ -1,8 +1,8 @@
-diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2014-11-01 12:31:53.278633440 +0200
-+++ freeciv/common/packets.def	2014-11-01 12:34:12.482345375 +0200
-@@ -189,13 +189,13 @@
- # typedefs for arrays/structs
+diff --git a/common/packets.def b/common/packets.def
+index b0e07fc..e0ab80b 100644
+--- a/common/packets.def
++++ b/common/packets.def
+@@ -196,10 +196,10 @@ type UINT32             = uint32(int)
  type MEMORY             = memory(unsigned char)
  type REQUIREMENT        = requirement(struct requirement)
  type STRING             = string(char)
@@ -17,47 +17,16 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  # string that is URI encoded in the JSON protocol
  type ESTRING            = estring(char)
  
- # typedefs for enums
- type ACTIVITY           = uint8(enum unit_activity)
-@@ -214,7 +214,7 @@
- type DIPLOMACY_MODE     = uint8(enum diplomacy_mode)
- type DIRECTION          = sint8(enum direction8)
- type EFFECT_TYPE        = uint8(enum effect_type)
--type EVENT              = sint16(enum event_type)
-+type EVENT              = sint32(enum event_type)
- type GUI_TYPE           = uint8(enum gui_type)
- type IMPR_GENUS         = uint8(enum impr_genus_id)
- type KNOWN              = uint8(enum known_type)
-@@ -274,7 +274,7 @@
- type GOVERNMENT         = UINT8
- type IMPROVEMENT        = uint8(Impr_type_id)
- type MULTIPLIER         = uint8(Multiplier_type_id)
--type NATION             = sint16(Nation_type_id)
-+type NATION             = UINT32
- type PLAYER             = UINT8
- type RESEARCH           = UINT8
- type RESOURCE           = uint8(Resource_type_id)
-@@ -287,14 +287,14 @@
+@@ -293,7 +293,7 @@ type UNIT               = UINT16
  type UNIT_TYPE          = uint8(Unit_type_id)
  
  # other typedefs
 -type CITY_COORD         = UINT8
 +type CITY_COORD         = UINT32
  type GOLD               = UINT32
--type HP                 = UINT8
--type PERCENT            = UINT8
-+type HP                 = UINT32
-+type PERCENT            = UINT32
- type PHASE              = SINT16
- type TURN               = SINT16
--type XYSIZE             = UINT16
--type YEAR               = SINT16
-+type XYSIZE             = UINT32
-+type YEAR               = SINT32
- type CITIZENS           = UINT8
- 
- /****************************************************
-@@ -416,7 +416,7 @@
+ type HP                 = UINT8
+ type PERCENT            = UINT8
+@@ -422,7 +422,7 @@ PACKET_TILE_INFO = 15; sc, lsend, is-game-info
  
    TERRAIN terrain;
    RESOURCE resource;
@@ -66,25 +35,23 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    STRING spec_sprite[MAX_LEN_NAME];
    STRING label[MAX_LEN_NAME];
  end
-@@ -428,7 +428,8 @@
- # The variables in the packet are listed in alphabetical order.
- PACKET_GAME_INFO = 16; sc
+@@ -431,6 +431,7 @@ end
+ PACKET_GAME_INFO = 16; sc, is-info
    UINT8 add_to_size_limit;
--  UINT8 aifill;
-+  UINT32 aifill;
+   UINT8 aifill;
 +  UINT32 mapsize;
    PERSISTENT_READY persistent_ready;
    AIRLIFTING_STYLE airlifting_style;
    UINT8 angrycitizen;
-@@ -533,6 +534,7 @@
+@@ -542,6 +543,7 @@ PACKET_GAME_INFO = 16; sc, is-info
    STRING calendar_fragment_name[MAX_CALENDAR_FRAGMENTS][MAX_LEN_NAME];
    BOOL civil_war_enabled;
    BOOL paradrop_to_transport;
 +  STRING meta_message[MAX_LEN_NAME];
  end
  
- PACKET_MAP_INFO = 17; sc, lsend
-@@ -611,6 +613,9 @@
+ # This cannot have is-info set. Sending the same value a second time after a
+@@ -627,6 +629,9 @@ PACKET_CITY_INFO = 31; sc, lsend, is-game-info, force, cancel(PACKET_CITY_SHORT_
    SINT16 citizen_base[O_LAST];
    SINT16 usage[O_LAST];
    UINT16 food_stock, shield_stock;
@@ -92,9 +59,9 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
 +  TURN granary_turns;
 +  UINT16 buy_gold_cost;
  
-   UINT16 trade[MAX_TRADE_ROUTES];
-   UINT8 trade_value[MAX_TRADE_ROUTES];
-@@ -637,11 +642,19 @@
+   UINT8 traderoute_count;
+ 
+@@ -652,11 +657,19 @@ PACKET_CITY_INFO = 31; sc, lsend, is-game-info, force, cancel(PACKET_CITY_SHORT_
    UINT8 walls;
    SINT8 city_image;
  
@@ -117,7 +84,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  end
  
  PACKET_CITY_SHORT_INFO = 32; sc, lsend, is-game-info, cancel(PACKET_CITY_INFO)
-@@ -660,7 +673,7 @@
+@@ -675,7 +688,7 @@ PACKET_CITY_SHORT_INFO = 32; sc, lsend, is-game-info, cancel(PACKET_CITY_INFO)
  
    SINT8 city_image;
  
@@ -126,7 +93,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    ESTRING name[MAX_LEN_NAME];
  end
  
-@@ -681,7 +694,7 @@
+@@ -704,7 +717,7 @@ end
  
  PACKET_CITY_WORKLIST = 36; cs, dsend
    CITY city_id;
@@ -135,12 +102,9 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  end
  
  PACKET_CITY_MAKE_SPECIALIST = 37; cs, dsend
-@@ -782,14 +795,16 @@
-   UINT8 ai_skill_level;
-   UINT8 barbarian_type;
+@@ -808,12 +821,14 @@ PACKET_PLAYER_INFO = 51; sc, is-info
    BV_PLAYER gives_shared_vision;
--  UINT16 culture;
-+  UINT32 culture;
+   UINT16 culture;
    SINT16 love[MAX_NUM_PLAYER_SLOTS];
 +  UINT32 current_research_cost;
  
@@ -151,18 +115,18 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    CITYSPE wonders[B_LAST]; diff
 +  UINT32  net_income;
    
-   UINT32 multiplier[MAX_MULTIPLIERS_COUNT];
- end
-@@ -821,7 +836,7 @@
+   SINT32 multiplier[MAX_NUM_MULTIPLIERS];
+   SINT32 multiplier_target[MAX_NUM_MULTIPLIERS];
+@@ -846,7 +861,7 @@ PACKET_PLAYER_DIPLSTATE = 59; sc
    UINT32 diplstate_id; key
    PLAYER plr1;
    PLAYER plr2;
 -  UINT8 type;
-+  UINT32 ds_type;
++  UINT8 ds_type;
    UINT16 turns_left;
    UINT8 has_reason_to_cancel;
    UINT16 contact_turns_left;
-@@ -908,12 +925,12 @@
+@@ -934,12 +949,12 @@ PACKET_UNIT_SHORT_INFO = 64; sc, lsend, is-game-info, force, cancel(PACKET_UNIT_
  
    UINT8 hp, activity;
    EXTRA activity_tgt;
@@ -180,7 +144,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  end
  
  PACKET_UNIT_COMBAT_INFO = 65; sc, lsend
-@@ -1083,25 +1100,25 @@
+@@ -1089,25 +1104,25 @@ end
  
  PACKET_DIPLOMACY_CREATE_CLAUSE_REQ = 99; cs, dsend
    PLAYER counterpart, giver;
@@ -210,7 +174,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    UINT32 value;
  end
  
-@@ -1129,7 +1146,7 @@
+@@ -1140,7 +1155,7 @@ PACKET_PAGE_MSG_PART = 250; sc, lsend
  end
  
  PACKET_REPORT_REQ = 111; cs, handle-per-conn, dsend
@@ -219,19 +183,16 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  end
  
  /************** Connection packets **********************/
-@@ -1154,9 +1171,9 @@
- 
- # Information about the ping times of the connections.
+@@ -1167,7 +1182,7 @@ end
  PACKET_CONN_PING_INFO = 116; sc, lsend
--  UINT8 connections;
-+  UINT32 connections;
+   UINT8 connections;
    CONNECTION conn_id[MAX_NUM_CONNECTIONS:connections];
 -  SFLOAT10x7 ping_time[MAX_NUM_CONNECTIONS:connections];
 +  UINT32 ping_time[MAX_NUM_CONNECTIONS:connections];
  end
  
  # For compatibility with older versions, this number cannot be changed.
-@@ -1320,8 +1337,9 @@
+@@ -1331,8 +1346,9 @@ end
  PACKET_RULESET_GAME = 141; sc, lsend
    UINT8 default_specialist;
  
@@ -243,7 +204,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  
    UINT8 veteran_levels;
    STRING veteran_name[MAX_VET_LEVELS:veteran_levels][MAX_LEN_NAME];
-@@ -1443,9 +1461,9 @@
+@@ -1459,9 +1475,9 @@ PACKET_RULESET_NATION = 148; sc, lsend
    UINT8 groups[MAX_NUM_NATION_GROUPS:ngroups];
  
    GOVERNMENT init_government_id;
@@ -256,7 +217,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  end
  
  # Separate from PACKET_RULESET_NATION since it can change in pregame
-@@ -1726,7 +1744,7 @@
+@@ -1773,7 +1789,7 @@ PACKET_SERVER_SETTING_CONST = 165; sc, handle-via-packet, is-info
    UINT16 id; key
    STRING name[MAX_LEN_NAME];
    STRING short_help[MAX_LEN_PACKET]; /* untranslated */
@@ -265,9 +226,9 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
    UINT8 category;
  end
  
-@@ -2075,3 +2093,43 @@
-   SINT32 tag;
-   SINT32 id;
+@@ -2136,3 +2152,43 @@ end
+ PACKET_PLAY_MUSIC = 245; sc, lsend
+   STRING tag[MAX_LEN_NAME];
  end
 +
 +/*************** Webclient specific packets ****************/

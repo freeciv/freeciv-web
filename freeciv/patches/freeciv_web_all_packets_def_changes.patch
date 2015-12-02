@@ -126,24 +126,6 @@ index b0e07fc..e0ab80b 100644
    UINT16 turns_left;
    UINT8 has_reason_to_cancel;
    UINT16 contact_turns_left;
-@@ -934,12 +949,12 @@ PACKET_UNIT_SHORT_INFO = 64; sc, lsend, is-game-info, force, cancel(PACKET_UNIT_
- 
-   UINT8 hp, activity;
-   EXTRA activity_tgt;
--  UNIT transported_by; /* Only valid if transported is set. */
-+#  UNIT transported_by; /* Only valid if transported is set. */
- 
--  /* in packet only, not in unit struct */
--  UINT8 packet_use;	/* see enum unit_info_use */
--  CITY info_city_id;	/* for UNIT_INFO_CITY_SUPPORTED
--  			   and UNIT_INFO_CITY_PRESENT uses */
-+#  /* in packet only, not in unit struct */
-+#  UINT8 packet_use;	/* see enum unit_info_use */
-+#  CITY info_city_id;	/* for UNIT_INFO_CITY_SUPPORTED
-+#  			   and UNIT_INFO_CITY_PRESENT uses */
- end
- 
- PACKET_UNIT_COMBAT_INFO = 65; sc, lsend
 @@ -1089,25 +1104,25 @@ end
  
  PACKET_DIPLOMACY_CREATE_CLAUSE_REQ = 99; cs, dsend

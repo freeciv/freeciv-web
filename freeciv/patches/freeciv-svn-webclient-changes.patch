@@ -59,15 +59,3 @@ diff -Nurd -X.diff_ignore freeciv/server/ruleset.c freeciv/server/ruleset.c
  
    misc_p.default_specialist = DEFAULT_SPECIALIST;
  
-diff -Nurd -X.diff_ignore freeciv/server/settings.c freeciv/server/settings.c
---- freeciv/server/settings.c	2014-09-11 01:41:13.955730680 +0300
-+++ freeciv/server/settings.c	2014-09-11 01:41:34.951685399 +0300
-@@ -4364,7 +4364,7 @@
-     sz_strlcpy(setting.name, setting_name(pset));
-     /* Send untranslated strings to client */
-     sz_strlcpy(setting.short_help, setting_short_help(pset));
--    sz_strlcpy(setting.extra_help, setting_extra_help(pset, TRUE));
-+    /* sz_strlcpy(setting.extra_help, setting_extra_help(pset, TRUE)); */
-     setting.category = pset->scategory;
- 
-     send_packet_server_setting_const(pconn, &setting);

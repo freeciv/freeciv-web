@@ -190,15 +190,6 @@ index b0e07fc..e0ab80b 100644
  end
  
  # Separate from PACKET_RULESET_NATION since it can change in pregame
-@@ -1773,7 +1789,7 @@ PACKET_SERVER_SETTING_CONST = 165; sc, handle-via-packet, is-info
-   UINT16 id; key
-   STRING name[MAX_LEN_NAME];
-   STRING short_help[MAX_LEN_PACKET]; /* untranslated */
--  STRING extra_help[MAX_LEN_PACKET]; /* untranslated */
-+  # STRING extra_help[MAX_LEN_PACKET]; /* untranslated */
-   UINT8 category;
- end
- 
 @@ -2136,3 +2152,43 @@ end
  PACKET_PLAY_MUSIC = 245; sc, lsend
    STRING tag[MAX_LEN_NAME];

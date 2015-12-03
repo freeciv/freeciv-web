@@ -876,7 +876,7 @@ function popup_steal_tech_selection_dialog(actor_unit, target_city,
     if ((tgt_kn == TECH_KNOWN)
         && ((act_kn == TECH_PREREQS_KNOWN)
             || (game_info['tech_steal_allow_holes']
-                && (act_kn == TECH_TECH_UNKNOWN)))) {
+                && (act_kn == TECH_UNKNOWN)))) {
       /* Add a button for stealing this tech to the dialog. */
       buttons.push(create_steal_tech_button(id, tech,
                                             actor_unit['id'],

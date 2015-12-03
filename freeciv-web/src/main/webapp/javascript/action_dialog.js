@@ -186,6 +186,13 @@ function popup_action_selection(actor_unit, action_probabilities,
                                    action_probabilities)
              + "'>";
   }
+  if (action_probabilities[ACTION_SPY_TARGETED_SABOTAGE_CITY] != 0) {
+    dhtml += "<input id='act_sel_tgt_sab" + actor_unit['id']
+             + "' class='act_sel_button' type='button' value='"
+             + format_action_label(ACTION_SPY_TARGETED_SABOTAGE_CITY,
+                                   action_probabilities)
+             + "'>";
+  }
   if (action_probabilities[ACTION_SPY_STEAL_TECH] != 0) {
     dhtml += "<input id='act_sel_tech" + actor_unit['id']
              + "' class='act_sel_button' type='button' value='"
@@ -391,6 +398,18 @@ function popup_action_selection(actor_unit, action_probabilities,
         send_request(JSON.stringify(packet));
 
         $(id).remove();
+    });
+  }
+
+  if (action_probabilities[ACTION_SPY_TARGETED_SABOTAGE_CITY] != 0) {
+    $("#act_sel_tgt_sab" + actor_unit['id']).click(function() {
+      var packet = {"pid" : packet_unit_action_query,
+                    "diplomat_id" : actor_unit['id'],
+                    "target_id": target_city['id'],
+                    "action_type": ACTION_SPY_TARGETED_SABOTAGE_CITY};
+      send_request(JSON.stringify(packet));
+
+      $(id).remove();
     });
   }
 
@@ -884,6 +903,83 @@ function popup_steal_tech_selection_dialog(actor_unit, target_city,
                      $("#" + id).remove();
                    }
                  });
+  }
+
+  /* Allow the user to cancel. */
+  buttons.push({
+                 text : 'Cancel',
+                 click : function() {
+                   $("#" + id).remove();
+                 }
+               });
+
+  /* Create the dialog. */
+  $("#" + id).dialog({
+                       modal: true,
+                       buttons: buttons,
+                       width: "90%"});
+
+  /* Show the dialog. */
+  $("#" + id).dialog('open');
+}
+
+/**************************************************************************
+  Create a button that orders a spy to try to sabotage an improvement.
+
+  Needed because of JavaScript's scoping rules.
+**************************************************************************/
+function create_sabotage_impr_button(improvement, parent_id,
+                                     actor_unit_id, target_city_id)
+{
+  /* Create the initial button with this tech */
+  var button = {
+    text : improvement['name'],
+    click : function() {
+      var packet = {
+        "pid"          : packet_unit_do_action,
+        "actor_id"     : actor_unit_id,
+        "target_id"    : target_city_id,
+        "value"        : encode_building_id(improvement['id']),
+        "name"         : "",
+        "action_type"  : ACTION_SPY_TARGETED_SABOTAGE_CITY
+      };
+      send_request(JSON.stringify(packet));
+
+      $("#" + parent_id).remove();
+    }
+  };
+
+  /* The button is ready. */
+  return button;
+}
+
+/**************************************************************************
+  Select what improvement to sabotage when doing targeted sabotage city.
+**************************************************************************/
+function popup_sabotage_dialog(actor_unit, target_city, city_imprs)
+{
+  var id = "sabotage_impr_dialog_" + actor_unit['id'];
+  var buttons = [];
+
+  /* Reset dialog page. */
+  $("#" + id).remove();
+  $("<div id='" + id + "'></div>").appendTo("div#game_page");
+
+  /* Set dialog title */
+  $("#" + id).attr("title", "Select Improvement to Sabotage");
+
+  /* List the alternatives */
+  for (var i = 0; i < ruleset_control['num_impr_types']; i++) {
+    var improvement = improvements[i];
+
+    if (city_imprs.isSet(i)
+        && improvement['sabotage'] > 0) {
+      /* The building is in the city. The probability of successfully
+       * sabotaging it as above zero. */
+      buttons.push(create_sabotage_impr_button(improvement, id,
+                                               actor_unit['id'],
+                                               target_city['id']));
+    }
   }
 
   /* Allow the user to cancel. */

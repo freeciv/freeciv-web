@@ -384,9 +384,15 @@ function handle_city_name_suggestion_info(packet)
   city_name_dialog(packet['name'], packet['unit_id']);
 }
 
+/**************************************************************************
+  Handle the response the a request asking what buildings a potential
+  victim of targeted sabotage city victim.
+**************************************************************************/
 function handle_city_sabotage_list(packet)
 {
-  /* TODO: implement*/
+  popup_sabotage_dialog(game_find_unit_by_number(packet['diplomat_id']),
+                        game_find_city_by_number(packet['city_id']),
+                        new BitVector(packet['improvements']));
 }
 
 function handle_player_attribute_chunk(packet)

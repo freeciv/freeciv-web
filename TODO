@@ -94,7 +94,6 @@ Unimplemented Freeciv client features:
     - could be done during the Freeciv-web build
     - have Freeciv-web look up the correct file given the current ruleset
     - mark the parts Freeciv-web wants (like the list of facts about a unit type)
-- the spy action targeted sabotage
 - between turns timer count down
 
 Simplify Freeciv server upgrade:

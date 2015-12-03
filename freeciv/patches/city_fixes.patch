@@ -22,11 +22,10 @@ diff -Nurd -X.diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
    packet->shield_stock = pcity->shield_stock;
    packet->pollution = pcity->pollution;
    packet->illness_trade = pcity->illness_trade;
--  packet->city_options = pcity->city_options;
 +  packet->granary_size = city_granary_size(city_size_get(pcity));
 +  packet->granary_turns = city_turns_to_grow(pcity);
 +  packet->buy_gold_cost = city_production_buy_gold_cost(pcity);
-+  /* packet->city_options = pcity->city_options; */
+   packet->city_options = pcity->city_options;
  
    packet->production_kind = pcity->production.kind;
    packet->production_value = universal_number(&pcity->production);

@@ -181,6 +181,8 @@ function handle_city_info(packet)
   /* Decode the city name. */
   packet['name'] = decodeURIComponent(packet['name']);
 
+  packet['city_options'] = new BitVector(packet['city_options']);
+
   if (cities[packet['id']] == null) {
     cities[packet['id']] = packet;
   } else {

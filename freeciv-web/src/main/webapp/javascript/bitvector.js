@@ -43,6 +43,16 @@ function BitVector(raw)
   };
 
   /************************************************************************
+    Set the specified bit to false.
+  ************************************************************************/
+  this.unset = function(bitNumber, value) {
+    var byteNumber = Math.floor(bitNumber / 8);
+
+    this.raw[byteNumber] = (this.raw[byteNumber]
+                            & ~(1 << (bitNumber % 8)));
+  };
+
+  /************************************************************************
     Show 1 or zero for each bit.
 
     Note that the last 7 bits may be unused.

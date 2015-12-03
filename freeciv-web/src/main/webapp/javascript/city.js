@@ -27,6 +27,12 @@ var worklist_dialog_active = false;
 var selected_value = -1;
 var selected_kind = -1;
 
+/* The city_options enum. */
+var CITYO_DISBAND      = 0;
+var CITYO_NEW_EINSTEIN = 1;
+var CITYO_NEW_TAXMAN   = 2;
+var CITYO_LAST         = 3;
+
 var FEELING_BASE = 0;		/* before any of the modifiers below */
 var FEELING_LUXURY = 1;		/* after luxury */
 var FEELING_EFFECT = 2;		/* after building effects */
@@ -326,10 +332,26 @@ function show_city_dialog(pcity)
   $("#specialist_panel").html(specialist_html);
 
   $('#disbandable_city').off();
-  $('#disbandable_city').prop('checked', pcity['disbandable_city']);
+  $('#disbandable_city').prop('checked',
+                              pcity['city_options'].isSet(CITYO_DISBAND));
   $('#disbandable_city').click(function() {
-    var packet = {"pid" : packet_city_disbandable_req, "city_id" : active_city['id']};
+    var options = pcity['city_options'];
+    var packet = {
+      "pid"     : packet_city_options_req,
+      "city_id" : active_city['id'],
+      "options" : options.raw
+    };
+
+    /* Change the option value referred to by the packet. */
+    if ($('#disbandable_city').prop('checked')) {
+      options.set(CITYO_DISBAND);
+    } else {
+      options.unset(CITYO_DISBAND);
+    }
+
+    /* Send the (now updated) city options. */
     send_request(JSON.stringify(packet));
+
     city_tab_index = 3;
   });
 

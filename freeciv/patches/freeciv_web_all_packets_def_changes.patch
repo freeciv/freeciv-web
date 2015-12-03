@@ -61,7 +61,7 @@ index b0e07fc..e0ab80b 100644
  
    UINT8 traderoute_count;
  
-@@ -652,11 +657,19 @@ PACKET_CITY_INFO = 31; sc, lsend, is-game-info, force, cancel(PACKET_CITY_SHORT_
+@@ -652,11 +657,18 @@ PACKET_CITY_INFO = 31; sc, lsend, is-game-info, force, cancel(PACKET_CITY_SHORT_
    UINT8 walls;
    SINT8 city_image;
  
@@ -69,7 +69,6 @@ index b0e07fc..e0ab80b 100644
 +  WORKLIST worklist[MAX_LEN_WORKLIST_WEB];
  
 -  BV_IMPRS improvements;
--  BV_CITY_OPTIONS city_options;
 +  STRING can_build_unit[MAX_LEN_MSG];
 +  STRING can_build_improvement[MAX_LEN_MSG];
 +  STRING improvements[MAX_LEN_MSG];
@@ -77,8 +76,7 @@ index b0e07fc..e0ab80b 100644
 +  STRING food_output[MAX_LEN_MSG];
 +  STRING shield_output[MAX_LEN_MSG];
 +  STRING trade_output[MAX_LEN_MSG];
-+  #BV_CITY_OPTIONS city_options;
-+  BOOL disbandable_city;
+   BV_CITY_OPTIONS city_options;
    ESTRING name[MAX_LEN_NAME];
 +  BOOL unhappy;
  end
@@ -190,7 +188,7 @@ index b0e07fc..e0ab80b 100644
  end
  
  # Separate from PACKET_RULESET_NATION since it can change in pregame
-@@ -2136,3 +2152,43 @@ end
+@@ -2136,3 +2152,39 @@ end
  PACKET_PLAY_MUSIC = 245; sc, lsend
    STRING tag[MAX_LEN_NAME];
  end
@@ -218,10 +216,6 @@ index b0e07fc..e0ab80b 100644
 +
 +PACKET_INFO_TEXT_MESSAGE = 259; sc, dsend
 +  STRING message[MAX_LEN_MSG];
-+end
-+
-+PACKET_CITY_DISBANDABLE_REQ = 260; cs, dsend
-+  CITY city_id;
 +end
 +
 +PACKET_CITY_WORKLIST_ADD = 261; cs, dsend

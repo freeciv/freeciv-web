@@ -217,7 +217,7 @@ function can_player_get_gov(govt_id)
 **************************************************************************/
 function request_report(rtype)
 {
-  var packet = {"pid" :  packet_report_req,
-                "report_type" : rtype};
+  var packet = {"pid"  : packet_report_req,
+                "type" : rtype};
   send_request(JSON.stringify(packet));
 }

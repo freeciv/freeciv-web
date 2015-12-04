@@ -145,15 +145,6 @@ index b0e07fc..e0ab80b 100644
    UINT32 value;
  end
  
-@@ -1140,7 +1155,7 @@ PACKET_PAGE_MSG_PART = 250; sc, lsend
- end
- 
- PACKET_REPORT_REQ = 111; cs, handle-per-conn, dsend
--  REPORT_TYPE type;
-+  REPORT_TYPE report_type;
- end
- 
- /************** Connection packets **********************/
 @@ -1167,7 +1182,7 @@ end
  PACKET_CONN_PING_INFO = 116; sc, lsend
    UINT8 connections;

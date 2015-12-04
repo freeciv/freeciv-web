@@ -333,6 +333,13 @@ function popup_action_selection(actor_unit, action_probabilities,
                                    action_probabilities)
              + "'>";
   }
+  if (action_probabilities[ACTION_DISBAND_UNIT] != 0) {
+    dhtml += "<input id='act_sel_disb_unit" + actor_unit['id']
+             + "' class='act_sel_button' type='button' value=\""
+             + format_action_label(ACTION_DISBAND_UNIT,
+                                   action_probabilities)
+             + "\">";
+  }
   if (can_actor_unit_move(actor_unit, target_tile)) {
     dhtml += "<input id='act_sel_move" + actor_unit['id']
     + "' class='act_sel_button' type='button' value='Keep moving'>"
@@ -675,6 +682,22 @@ function popup_action_selection(actor_unit, action_probabilities,
                     "value" : 0,
                     "name" : "",
                     "action_type": ACTION_BOMBARD};
+      send_request(JSON.stringify(packet));
+
+      $(id).remove();
+    });
+  }
+
+  if (action_probabilities[ACTION_DISBAND_UNIT] != 0) {
+    $("#act_sel_disb_unit" + actor_unit['id']).click(function() {
+      var packet = {
+        "pid"         : packet_unit_do_action,
+        "actor_id"    : actor_unit['id'],
+        "target_id"   : actor_unit['id'],
+        "value"       : 0,
+        "name"        : "",
+        "action_type" : ACTION_DISBAND_UNIT
+      };
       send_request(JSON.stringify(packet));
 
       $(id).remove();

@@ -1,0 +1,52 @@
+commit 88af49f732c3dedba64bd328e02725a34d74ff37
+Author: sveinung <sveinung@a0f10bec-cc02-0410-94fc-a9cfff90b4cd>
+Date:   Fri Nov 6 12:33:57 2015 +0000
+
+    Stop assuming the unit survived a failed disband
+    
+    Traditional disband orders the ways it tries to disband a unit so it
+    matches the pre 3.0 disband unit command. Stop assuming that a failed
+    disband action means that the unit survived. It may have failed because the
+    unit was killed in Lua before the action started.
+    
+    See bug #24026
+    
+    git-svn-id: svn://svn.gna.org/svn/freeciv/trunk@30437 a0f10bec-cc02-0410-94fc-a9cfff90b4cd
+
+diff --git a/server/unittools.c b/server/unittools.c
+index 7856bb1..dd533dc 100644
+--- a/server/unittools.c
++++ b/server/unittools.c
+@@ -3761,6 +3761,8 @@ bool unit_move(struct unit *punit, struct tile *pdesttile, int move_cost)
+ **************************************************************************/
+ void unit_do_disband_trad(struct player *owner, struct unit *punit)
+ {
++  const int punit_id_stored = punit->id;
++
+   fc_assert_ret(owner == unit_owner(punit));
+ 
+   /* Help Wonder gives 100% of the shields used to produce the unit to the
+@@ -3782,6 +3784,11 @@ void unit_do_disband_trad(struct player *owner, struct unit *punit)
+     }
+   }
+ 
++  if (!unit_alive(punit_id_stored)) {
++    /* The unit is gone. Maybe it was killed in Lua? */
++    return;
++  }
++
+   /* Disbanding a unit inside a city gives it 50% of the shields used to
+    * produce the unit. */
+   if (unit_can_do_action(punit, ACTION_RECYCLE_UNIT)) {
+@@ -3801,6 +3808,11 @@ void unit_do_disband_trad(struct player *owner, struct unit *punit)
+     }
+   }
+ 
++  if (!unit_alive(punit_id_stored)) {
++    /* The unit is gone. Maybe it was killed in Lua? */
++    return;
++  }
++
+   /* All shields will be wasted. */
+   do_unit_disband(owner, punit);
+ }

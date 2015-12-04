@@ -13,8 +13,10 @@
 # WWI_ai.patch is Freeciv patch #6493
 # WWI_description is Freeciv patch #6521
 # json_memory is Freeciv patch #6634
+# may_die_during_fail is Freeciv bug #24026
+# disband_enabler is Freeciv patch #6573
 
-PATCHLIST="freeciv_web_all_packets_def_changes caravan_fixes1 city_fixes city_impr_fix2 city-naming-change city_fixes2 citytools_changes map-settings metachange text_fixes unithand-change2 current_research_cost freeciv-svn-webclient-changes network-rewrite-1 fcnet_packets misc_devversion_sync scenario_ruleset savegame maphand_ch serverside_extra_assign libtoolize_no_symlinks spacerace ai_traits_crash ruleset-capability worklists server_password aifill barbarian-names activity_null_check add_rulesets city_traderoute_hotfix message_escape freeciv_segfauls_fix scorelog_filenames scorelog_set_to_client PlainFileBufSize1024 ignore-argument-position disable-delta-protocol WWI_closest WWI_scibox WWI_ai WWI_description json_memory"
+PATCHLIST="freeciv_web_all_packets_def_changes caravan_fixes1 city_fixes city_impr_fix2 city-naming-change city_fixes2 citytools_changes map-settings metachange text_fixes unithand-change2 current_research_cost freeciv-svn-webclient-changes network-rewrite-1 fcnet_packets misc_devversion_sync scenario_ruleset savegame maphand_ch serverside_extra_assign libtoolize_no_symlinks spacerace ai_traits_crash ruleset-capability worklists server_password aifill barbarian-names activity_null_check add_rulesets city_traderoute_hotfix message_escape freeciv_segfauls_fix scorelog_filenames scorelog_set_to_client PlainFileBufSize1024 ignore-argument-position disable-delta-protocol WWI_closest WWI_scibox WWI_ai WWI_description json_memory may_die_during_fail disband_enabler"
 
 apply_patch() {
   echo "*** Applying $1.patch ***"

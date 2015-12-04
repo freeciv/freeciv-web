@@ -1753,16 +1753,16 @@ function key_unit_disband()
     /* Do Recycle Unit if located inside a city. */
     /* FIXME: Only rulesets where the player can do Recycle Unit to all
      * domestic and allied cities are supported here. */
-    if (target_city == null) {
-      packet = {"pid" : packet_unit_disband, "unit_id" : punit['id'] };
-    } else {
-      packet = {"pid" : packet_unit_do_action,
-        "actor_id"    : punit['id'],
-        "target_id"   : target_city['id'],
-        "value"       : 0,
-        "name"        : "",
-        "action_type" : ACTION_RECYCLE_UNIT};
-    }
+    packet = {
+      "pid"         : packet_unit_do_action,
+      "actor_id"    : punit['id'],
+      "target_id"   : (target_city == null ? punit['id']
+                                           : target_city['id']),
+      "value"       : 0,
+      "name"        : "",
+      "action_type" : (target_city == null ? ACTION_DISBAND_UNIT
+                                           : ACTION_RECYCLE_UNIT)
+    };
 
     send_request(JSON.stringify(packet));
   }

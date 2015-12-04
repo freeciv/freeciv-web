@@ -1,0 +1,630 @@
+commit b9923d3f9891695a3dbe2f14e48f25512604810c
+Author: sveinung <sveinung@a0f10bec-cc02-0410-94fc-a9cfff90b4cd>
+Date:   Thu Nov 12 14:53:52 2015 +0000
+
+    Make unit disbanding action enabler controlled
+    
+    "Disband Unit" action enabler rules controls the player ordering a unit to
+    disband without getting anything in return. The unit type flag
+    Undisbandable still has hard coded control over who the game won't try to
+    auto disband to save a city and who it will work extra hard to save from
+    drowning.
+    
+    Patch #6536 temporarily broke the client's ability to order a unit to
+    disband when Recycle Unit is illegal but the player don't have enough
+    information to know that it is. This patch makes it possible again.
+    
+    Patch #6389 temporarily made it impossible to put a non "Recycle Unit"
+    disband order in a units orders. This patch makes it possible again.
+    
+    See patch #6573
+    
+    git-svn-id: svn://svn.gna.org/svn/freeciv/trunk@30568 a0f10bec-cc02-0410-94fc-a9cfff90b4cd
+
+diff --git a/ai/default/aicity.c b/ai/default/aicity.c
+index 478ca5c..0ffc0b5 100644
+--- a/ai/default/aicity.c
++++ b/ai/default/aicity.c
+@@ -1106,6 +1106,7 @@ static int action_target_neg_util(int action_id,
+   case ACTION_SPY_BRIBE_UNIT:
+   case ACTION_SPY_SABOTAGE_UNIT:
+   case ACTION_EXPEL_UNIT:
++  case ACTION_DISBAND_UNIT:
+   case ACTION_CAPTURE_UNITS:
+   case ACTION_BOMBARD:
+   case ACTION_FOUND_CITY:
+diff --git a/common/actions.c b/common/actions.c
+index 02e0d0b..ec11dfb 100644
+--- a/common/actions.c
++++ b/common/actions.c
+@@ -137,6 +137,9 @@ void actions_init(void)
+   actions[ACTION_RECYCLE_UNIT] =
+       action_new(ACTION_RECYCLE_UNIT, ATK_CITY,
+                  FALSE, FALSE, TRUE);
++  actions[ACTION_DISBAND_UNIT] =
++      action_new(ACTION_DISBAND_UNIT, ATK_SELF,
++                 FALSE, FALSE, TRUE);
+ 
+   /* Initialize the action enabler list */
+   action_iterate(act) {
+@@ -730,16 +733,13 @@ static bool recycle_unit_blocks(const struct unit *actor_unit,
+ }
+ 
+ /**************************************************************************
+-  Returns the action that blocks regular regular disband or NULL if
+-  disband isn't blocked.
++  Returns the action that blocks Disband Unit or NULL if Disband Unit
++  isn't blocked.
+ 
+   An action that can block disband blocks disband when it is forced and
+   possible.
+-
+-  TODO: Make regular disband action enabler controlled and delete this
+-  function.
+ **************************************************************************/
+-struct action *action_blocks_disband(const struct unit *actor_unit)
++static struct action *action_blocks_disband(const struct unit *actor_unit)
+ {
+   struct city *target_city;
+ 
+@@ -833,6 +833,9 @@ struct action *action_is_blocked_by(const int action_id,
+     /* Not blocked. */
+     return NULL;
+     break;
++  case ACTION_DISBAND_UNIT:
++    return action_blocks_disband(actor_unit);
++    break;
+   default:
+     /* Not able to be blocked. */
+     return NULL;
+@@ -1882,6 +1885,10 @@ action_prob(const enum gen_action wanted_action,
+     /* No battle is fought first. */
+     chance = 200;
+     break;
++  case ACTION_DISBAND_UNIT:
++    /* No battle is fought first. */
++    chance = 200;
++    break;
+   case ACTION_COUNT:
+     fc_assert(FALSE);
+     break;
+diff --git a/common/actions.h b/common/actions.h
+index be1c167..bb95d10 100644
+--- a/common/actions.h
++++ b/common/actions.h
+@@ -94,6 +94,8 @@ extern "C" {
+ #define SPECENUM_VALUE22NAME N_("Expel Unit")
+ #define SPECENUM_VALUE23 ACTION_RECYCLE_UNIT
+ #define SPECENUM_VALUE23NAME N_("Recycle Unit")
++#define SPECENUM_VALUE24 ACTION_DISBAND_UNIT
++#define SPECENUM_VALUE24NAME N_("Disband Unit")
+ /* Limited by what values num2char() can store in unit orders in
+  * savegames. */
+ #define SPECENUM_COUNT ACTION_COUNT
+@@ -258,7 +260,6 @@ void action_enabler_add(struct action_enabler *enabler);
+ 
+ struct action *action_blocks_attack(const struct unit *actor_unit,
+                                     const struct tile *target_tile);
+-struct action *action_blocks_disband(const struct unit *actor_unit);
+ struct action *action_is_blocked_by(const int action_id,
+                                     const struct unit *actor_unit,
+                                     const struct tile *target_tile,
+diff --git a/common/packets.def b/common/packets.def
+index 65a6ce2..9d7d22d 100644
+--- a/common/packets.def
++++ b/common/packets.def
+@@ -950,10 +950,6 @@ PACKET_UNIT_COMBAT_INFO = 65; sc, lsend
+   BOOL make_winner_veteran;
+ end
+ 
+-PACKET_UNIT_DISBAND = 68; cs, dsend
+-  UNIT unit_id;
+-end
+-
+ PACKET_UNIT_CHANGE_HOMECITY = 69; cs, dsend
+   UNIT unit_id;
+   CITY city_id;
+diff --git a/data/alien/game.ruleset b/data/alien/game.ruleset
+index ad564c7..96473af 100644
+--- a/data/alien/game.ruleset
++++ b/data/alien/game.ruleset
+@@ -227,6 +227,9 @@ ui_name_help_wonder = _("Help %sbuild Wonder%s")
+ ; /* TRANS: Rec_ycle Unit (100% chance of success). */
+ ui_name_recycle_unit = _("Rec%sycle Unit%s")
+ 
++; /* TRANS: _You're Fired (100% chance of success). */
++ui_name_disband_unit = _("%sYou're Fired%s")
++
+ ; /* TRANS: _Capture Units (100% chance of success). */
+ ui_name_capture_units = _("%sCapture Units%s")
+ 
+@@ -363,6 +366,13 @@ actor_reqs    =
+       "UnitFlag", "Undisbandable", "Local", FALSE
+     }
+ 
++[actionenabler_disband_unit]
++action = "Disband Unit"
++actor_reqs    =
++    { "type",   "name", "range", "present"
++      "UnitFlag", "Undisbandable", "Local", FALSE
++    }
++
+ [actionenabler_capture]
+ action = "Capture Units"
+ actor_reqs    =
+diff --git a/data/alien/units.ruleset b/data/alien/units.ruleset
+index af6bb26..21a8b6d 100644
+--- a/data/alien/units.ruleset
++++ b/data/alien/units.ruleset
+@@ -295,7 +295,7 @@ flags         = "Missile", "DoesntOccupyTile"
+ ;		  the same time; barbarians cannot use this at present
+ ; "GameLoss"	= losing one of these units means you lose the game, but it
+ ;		  is produced without homecity and upkeep
+-; "Undisbandable" = this unit cannot be disbanded, will not drown, and will not
++; "Undisbandable" = this unit is protected. It will not drown and will not
+ ;		  disband due to lack of shields to upkeep it in homecity;
+ ;		  if not given enough food to upkeep it, homecity will shrink 
+ ;		  every turn it cannot do so, however
+diff --git a/data/civ1/game.ruleset b/data/civ1/game.ruleset
+index 919b552..e6f1866 100644
+--- a/data/civ1/game.ruleset
++++ b/data/civ1/game.ruleset
+@@ -215,6 +215,9 @@ ui_name_help_wonder = _("Help %sbuild Wonder%s")
+ ; /* TRANS: Rec_ycle Unit (100% chance of success). */
+ ui_name_recycle_unit = _("Rec%sycle Unit%s")
+ 
++; /* TRANS: _You're Fired (100% chance of success). */
++ui_name_disband_unit = _("%sYou're Fired%s")
++
+ ; /* TRANS: _Build City (100% chance of success). */
+ ui_name_found_city = _("%sBuild City%s")
+ 
+@@ -362,6 +365,13 @@ actor_reqs    =
+       "UnitFlag", "Undisbandable", "Local", FALSE
+     }
+ 
++[actionenabler_disband_unit]
++action = "Disband Unit"
++actor_reqs    =
++    { "type",   "name", "range", "present"
++      "UnitFlag", "Undisbandable", "Local", FALSE
++    }
++
+ [actionenabler_build_city_pioneer]
+ action = "Found City"
+ actor_reqs    =
+diff --git a/data/civ2/game.ruleset b/data/civ2/game.ruleset
+index 4dd9318..22416d9 100644
+--- a/data/civ2/game.ruleset
++++ b/data/civ2/game.ruleset
+@@ -243,6 +243,9 @@ ui_name_help_wonder = _("Help %sbuild Wonder%s")
+ ; /* TRANS: Rec_ycle Unit (100% chance of success). */
+ ui_name_recycle_unit = _("Rec%sycle Unit%s")
+ 
++; /* TRANS: _You're Fired (100% chance of success). */
++ui_name_disband_unit = _("%sYou're Fired%s")
++
+ ; /* TRANS: _Build City (100% chance of success). */
+ ui_name_found_city = _("%sBuild City%s")
+ 
+@@ -441,6 +444,13 @@ actor_reqs    =
+       "UnitFlag", "Undisbandable", "Local", FALSE
+     }
+ 
++[actionenabler_disband_unit]
++action = "Disband Unit"
++actor_reqs    =
++    { "type",   "name", "range", "present"
++      "UnitFlag", "Undisbandable", "Local", FALSE
++    }
++
+ [actionenabler_build_city_pioneer]
+ action = "Found City"
+ actor_reqs    =
+diff --git a/data/civ2civ3/game.ruleset b/data/civ2civ3/game.ruleset
+index 18d3b61..5ff34b1 100644
+--- a/data/civ2civ3/game.ruleset
++++ b/data/civ2civ3/game.ruleset
+@@ -250,6 +250,9 @@ ui_name_help_wonder = _("Help %sbuild Wonder%s")
+ ; /* TRANS: Rec_ycle Unit (100% chance of success). */
+ ui_name_recycle_unit = _("Rec%sycle Unit%s")
+ 
++; /* TRANS: _You're Fired (100% chance of success). */
++ui_name_disband_unit = _("%sYou're Fired%s")
++
+ ; /* TRANS: _Capture Units (100% chance of success). */
+ ui_name_capture_units = _("%sCapture Units%s")
+ 
+@@ -460,6 +463,13 @@ actor_reqs    =
+       "UnitFlag", "Undisbandable", "Local", FALSE
+     }
+ 
++[actionenabler_disband_unit]
++action = "Disband Unit"
++actor_reqs    =
++    { "type",   "name", "range", "present"
++      "UnitFlag", "Undisbandable", "Local", FALSE
++    }
++
+ [actionenabler_capture]
+ action = "Capture Units"
+ actor_reqs    =
+diff --git a/data/civ2civ3/units.ruleset b/data/civ2civ3/units.ruleset
+index 4b287f1..518e116 100644
+--- a/data/civ2civ3/units.ruleset
++++ b/data/civ2civ3/units.ruleset
+@@ -335,7 +335,7 @@ flags         = "Unreachable", "DoesntOccupyTile", "CanPillage", "Airliftable"
+ ;		  the same time; barbarians cannot use this at present
+ ; "GameLoss"	= losing one of these units means you lose the game, but it
+ ;		  is produced without homecity and upkeep
+-; "Undisbandable" = this unit cannot be disbanded, will not drown, and will not
++; "Undisbandable" = this unit is protected. It will not drown and will not
+ ;		  disband due to lack of shields to upkeep it in homecity;
+ ;		  if not given enough food to upkeep it, homecity will shrink 
+ ;		  every turn it cannot do so, however
+diff --git a/data/classic/game.ruleset b/data/classic/game.ruleset
+index 69770f5..14701ad 100644
+--- a/data/classic/game.ruleset
++++ b/data/classic/game.ruleset
+@@ -243,6 +243,9 @@ ui_name_help_wonder = _("Help %sbuild Wonder%s")
+ ; /* TRANS: Rec_ycle Unit (100% chance of success). */
+ ui_name_recycle_unit = _("Rec%sycle Unit%s")
+ 
++; /* TRANS: _You're Fired (100% chance of success). */
++ui_name_disband_unit = _("%sYou're Fired%s")
++
+ ; /* TRANS: _Build City (100% chance of success). */
+ ui_name_found_city = _("%sBuild City%s")
+ 
+@@ -444,6 +447,13 @@ actor_reqs    =
+       "UnitFlag", "Undisbandable", "Local", FALSE
+     }
+ 
++[actionenabler_disband_unit]
++action = "Disband Unit"
++actor_reqs    =
++    { "type",   "name", "range", "present"
++      "UnitFlag", "Undisbandable", "Local", FALSE
++    }
++
+ [actionenabler_build_city_pioneer]
+ action = "Found City"
+ actor_reqs    =
+diff --git a/data/classic/units.ruleset b/data/classic/units.ruleset
+index ba4fb71..683ee68 100644
+--- a/data/classic/units.ruleset
++++ b/data/classic/units.ruleset
+@@ -309,7 +309,7 @@ flags         = "Unreachable", "DoesntOccupyTile"
+ ;		  the same time; barbarians cannot use this at present
+ ; "GameLoss"	= losing one of these units means you lose the game, but it
+ ;		  is produced without homecity and upkeep
+-; "Undisbandable" = this unit cannot be disbanded, will not drown, and will not
++; "Undisbandable" = this unit is protected. It will not drown and will not
+ ;		  disband due to lack of shields to upkeep it in homecity;
+ ;		  if not given enough food to upkeep it, homecity will shrink 
+ ;		  every turn it cannot do so, however
+diff --git a/data/experimental/game.ruleset b/data/experimental/game.ruleset
+index 0242ba5..2896218 100644
+--- a/data/experimental/game.ruleset
++++ b/data/experimental/game.ruleset
+@@ -248,6 +248,9 @@ ui_name_help_wonder = _("Help %sbuild Wonder%s")
+ ; /* TRANS: Rec_ycle Unit (100% chance of success). */
+ ui_name_recycle_unit = _("Rec%sycle Unit%s")
+ 
++; /* TRANS: _You're Fired (100% chance of success). */
++ui_name_disband_unit = _("%sYou're Fired%s")
++
+ ; /* TRANS: _Build City (100% chance of success). */
+ ui_name_found_city = _("%sBuild City%s")
+ 
+@@ -461,6 +464,13 @@ actor_reqs    =
+       "UnitFlag", "Undisbandable", "Local", FALSE
+     }
+ 
++[actionenabler_disband_unit]
++action = "Disband Unit"
++actor_reqs    =
++    { "type",   "name", "range", "present"
++      "UnitFlag", "Undisbandable", "Local", FALSE
++    }
++
+ [actionenabler_build_city_pioneer]
+ action = "Found City"
+ actor_reqs    =
+diff --git a/data/experimental/units.ruleset b/data/experimental/units.ruleset
+index 46128cd..0229c2a 100644
+--- a/data/experimental/units.ruleset
++++ b/data/experimental/units.ruleset
+@@ -323,7 +323,7 @@ flags         = "Unreachable", "DoesntOccupyTile"
+ ;		  the same time; barbarians cannot use this at present
+ ; "GameLoss"	= losing one of these units means you lose the game, but it
+ ;		  is produced without homecity and upkeep
+-; "Undisbandable" = this unit cannot be disbanded, will not drown, and will not
++; "Undisbandable" = this unit is protected. It will not drown and will not
+ ;		  disband due to lack of shields to upkeep it in homecity;
+ ;		  if not given enough food to upkeep it, homecity will shrink 
+ ;		  every turn it cannot do so, however
+diff --git a/data/multiplayer/game.ruleset b/data/multiplayer/game.ruleset
+index 36aefb3..75be984 100644
+--- a/data/multiplayer/game.ruleset
++++ b/data/multiplayer/game.ruleset
+@@ -240,6 +240,9 @@ ui_name_help_wonder = _("Help %sbuild Wonder%s")
+ ; /* TRANS: Rec_ycle Unit (100% chance of success). */
+ ui_name_recycle_unit = _("Rec%sycle Unit%s")
+ 
++; /* TRANS: _You're Fired (100% chance of success). */
++ui_name_disband_unit = _("%sYou're Fired%s")
++
+ ; /* TRANS: _Build City (100% chance of success). */
+ ui_name_found_city = _("%sBuild City%s")
+ 
+@@ -427,6 +430,13 @@ actor_reqs    =
+       "UnitFlag", "Undisbandable", "Local", FALSE
+     }
+ 
++[actionenabler_disband_unit]
++action = "Disband Unit"
++actor_reqs    =
++    { "type",   "name", "range", "present"
++      "UnitFlag", "Undisbandable", "Local", FALSE
++    }
++
+ [actionenabler_build_city_pioneer]
+ action = "Found City"
+ actor_reqs    =
+diff --git a/data/multiplayer/units.ruleset b/data/multiplayer/units.ruleset
+index 5fd92cf..fd11a8d 100644
+--- a/data/multiplayer/units.ruleset
++++ b/data/multiplayer/units.ruleset
+@@ -308,7 +308,7 @@ flags         = "Unreachable", "DoesntOccupyTile"
+ ;		  the same time; barbarians cannot use this at present
+ ; "GameLoss"	= losing one of these units means you lose the game, but it
+ ;		  is produced without homecity and upkeep
+-; "Undisbandable" = this unit cannot be disbanded, will not drown, and will not
++; "Undisbandable" = this unit is protected. It will not drown and will not
+ ;		  disband due to lack of shields to upkeep it in homecity;
+ ;		  if not given enough food to upkeep it, homecity will shrink 
+ ;		  every turn it cannot do so, however
+diff --git a/data/stub/units.ruleset b/data/stub/units.ruleset
+index 5067178..3970a1c 100644
+--- a/data/stub/units.ruleset
++++ b/data/stub/units.ruleset
+@@ -227,7 +227,7 @@ flags         = ""
+ ;		  the same time; barbarians cannot use this at present
+ ; "GameLoss"	= losing one of these units means you lose the game, but it
+ ;		  is produced without homecity and upkeep
+-; "Undisbandable" = this unit cannot be disbanded, will not drown, and will not
++; "Undisbandable" = this unit is protected. It will not drown and will not
+ ;		  disband due to lack of shields to upkeep it in homecity;
+ ;		  if not given enough food to upkeep it, homecity will shrink 
+ ;		  every turn it cannot do so, however
+diff --git a/doc/README.actions b/doc/README.actions
+index 04308c5..ff1a50b 100644
+--- a/doc/README.actions
++++ b/doc/README.actions
+@@ -305,3 +305,7 @@ Actions done by a unit against a tile
+ 
+ Actions done by a unit to it self
+ =================================
++"Disband Unit" - Disband the unit. Gives nothing in return.
++ * UI name can be set using ui_name_disband_unit
++ * "Help Wonder" must be impossible
++ * "Recycle Unit" must be impossible
+diff --git a/server/advisors/advdata.c b/server/advisors/advdata.c
+index 15c0cdc..755ce0f 100644
+--- a/server/advisors/advdata.c
++++ b/server/advisors/advdata.c
+@@ -867,6 +867,7 @@ void adv_best_government(struct player *pplayer)
+ 
+           case ACTION_MARKETPLACE:
+           case ACTION_FOUND_CITY:
++          case ACTION_DISBAND_UNIT:
+             /* Wants the ability to do this to it self. Don't want others
+              * to target it. Do nothing since action_immune_government()
+              * doesn't separate based on who the actor is. */
+diff --git a/server/rscompat.c b/server/rscompat.c
+index b601cf4..bee6fff 100644
+--- a/server/rscompat.c
++++ b/server/rscompat.c
+@@ -422,6 +422,21 @@ void rscompat_postprocess(struct rscompat_info *info)
+ 
+     action_enabler_add(enabler);
+ 
++    /* Disbanding a unit (without getting anything in return) is now action
++     * enabler controlled. */
++
++    enabler = action_enabler_new();
++
++    enabler->action = ACTION_DISBAND_UNIT;
++
++    /* The actor unit can't have the unit type flag Undisbandable. */
++    requirement_vector_append(&enabler->actor_reqs,
++                              req_from_str("UnitFlag", "Local",
++                                           FALSE, FALSE, TRUE,
++                                           "Undisbandable"));
++
++    action_enabler_add(enabler);
++
+     /* Update action enablers. */
+     action_enablers_iterate(ae) {
+       /* The rule that Help Wonder only can help wonders now lives in the
+diff --git a/server/ruleset.c b/server/ruleset.c
+index b29c01e..95bb7e6 100644
+--- a/server/ruleset.c
++++ b/server/ruleset.c
+@@ -5543,6 +5543,13 @@ static bool load_ruleset_game(struct section_file *file, bool act,
+           "actions.ui_name_recycle_unit");
+       sz_strlcpy(action_by_number(ACTION_RECYCLE_UNIT)->ui_name,
+                  text);
++
++      text = secfile_lookup_str_default(file,
++          /* TRANS: _You're Fired (100% chance of success). */
++          N_("%sYou're Fired%s"),
++          "actions.ui_name_disband_unit");
++      sz_strlcpy(action_by_number(ACTION_DISBAND_UNIT)->ui_name,
++                 text);
+     }
+ 
+     if (ok) {
+diff --git a/server/unithand.c b/server/unithand.c
+index da0e670..1dbc220 100644
+--- a/server/unithand.c
++++ b/server/unithand.c
+@@ -151,6 +151,7 @@ static bool unit_nuke(struct player *pplayer, struct unit *punit,
+ static bool unit_do_destroy_city(struct player *act_player,
+                                  struct unit *act_unit,
+                                  struct city *tgt_city);
++static bool do_unit_disband(struct player *pplayer, struct unit *punit);
+ 
+ /**************************************************************************
+   Handle airlift request.
+@@ -1051,13 +1052,6 @@ void illegal_action_msg(struct player *pplayer,
+     {
+       struct astring astr = ASTRING_INIT;
+ 
+-      /* This shouldn't happen with the current users unless the client is
+-       * buggy. */
+-      fc_assert_msg(expl->kind != ANEK_ACTOR_UNIT,
+-                    "Asked why a %s can't do %s. It never can.",
+-                    unit_name_translation(actor),
+-                    gen_action_translated_name(stopped_action));
+-
+       if (role_units_translations(&astr,
+                                   action_get_role(stopped_action),
+                                   TRUE)) {
+@@ -1494,6 +1488,19 @@ bool unit_perform_action(struct player *pplayer,
+       }
+     }
+     break;
++  case ACTION_DISBAND_UNIT:
++    if (actor_unit) {
++      if (is_action_enabled_unit_on_self(action_type,
++                                         actor_unit)) {
++        ACTION_STARTED_UNIT_SELF(action_type, actor_unit);
++
++        return do_unit_disband(pplayer, actor_unit);
++      } else {
++        illegal_action(pplayer, actor_unit, action_type,
++                       unit_owner(actor_unit), NULL, NULL, actor_unit);
++      }
++    }
++    break;
+   case ACTION_SPY_SABOTAGE_CITY:
+     if (pcity) {
+       if (is_action_enabled_unit_on_city(action_type, actor_unit, pcity)) {
+@@ -1910,22 +1917,6 @@ void handle_unit_change_homecity(struct player *pplayer, int unit_id,
+ }
+ 
+ /**************************************************************************
+-  Handle an incoming packet ordering a unit to disband.
+-**************************************************************************/
+-void handle_unit_disband(struct player *pplayer, int unit_id)
+-{
+-  struct unit *punit = player_unit_by_number(pplayer, unit_id);
+-
+-  if (NULL == punit) {
+-    /* Probably died or bribed. */
+-    log_verbose("handle_unit_disband() invalid unit %d", unit_id);
+-    return;
+-  }
+-
+-  (void)do_unit_disband(pplayer, punit);
+-}
+-
+-/**************************************************************************
+   Disband a unit.
+ 
+   No shields spent to build the unit is added to the shield stock of any
+@@ -1934,33 +1925,12 @@ void handle_unit_disband(struct player *pplayer, int unit_id)
+   Returns TRUE iff the action could be done, FALSE if it couldn't. Even if
+   this returns TRUE, the unit may have died during the action.
+ **************************************************************************/
+-bool do_unit_disband(struct player *pplayer, struct unit *punit)
++static bool do_unit_disband(struct player *pplayer, struct unit *punit)
+ {
+-  struct action *blocker;
+-
+   /* Sanity check: The actor still exists. */
+   fc_assert_ret_val(pplayer, FALSE);
+   fc_assert_ret_val(punit, FALSE);
+ 
+-  if (unit_has_type_flag(punit, UTYF_UNDISBANDABLE)) {
+-    /* refuse to kill ourselves */
+-    notify_player(unit_owner(punit), unit_tile(punit),
+-                  E_BAD_COMMAND, ftc_server,
+-                  _("%s refuses to disband!"),
+-                  unit_link(punit));
+-    return FALSE;
+-  }
+-
+-  if ((blocker = action_blocks_disband(punit))) {
+-    /* Disband is blocked by the fact that another action is legal. */
+-    notify_player(unit_owner(punit), unit_tile(punit),
+-                  E_BAD_COMMAND, ftc_server,
+-                  /* TRANS: ... Help Wonder ... */
+-                  _("Regular disband not allowed. Try %s in stead."),
+-                  action_get_ui_name(blocker->id));
+-    return FALSE;
+-  }
+-
+   wipe_unit(punit, ULR_DISBANDED, NULL);
+ 
+   /* The unit is now disbanded. */
+@@ -3955,6 +3925,7 @@ void handle_unit_orders(struct player *pplayer,
+       case ACTION_DESTROY_CITY:
+       case ACTION_EXPEL_UNIT:
+       case ACTION_RECYCLE_UNIT:
++      case ACTION_DISBAND_UNIT:
+         /* No validation required. */
+         break;
+       /* Invalid action. Should have been caught above. */
+diff --git a/server/unithand.h b/server/unithand.h
+index 7572092..c904ba3 100644
+--- a/server/unithand.h
++++ b/server/unithand.h
+@@ -37,8 +37,6 @@ bool unit_perform_action(struct player *pplayer,
+                          const char *name,
+                          const enum gen_action action_type);
+ 
+-bool do_unit_disband(struct player *pplayer, struct unit *punit);
+-
+ void illegal_action_msg(struct player *pplayer,
+                         const enum event_type event,
+                         struct unit *actor,
+diff --git a/server/unittools.c b/server/unittools.c
+index 91fb062..c493358 100644
+--- a/server/unittools.c
++++ b/server/unittools.c
+@@ -3813,8 +3813,16 @@ void unit_do_disband_trad(struct player *owner, struct unit *punit)
+     return;
+   }
+ 
+-  /* All shields will be wasted. */
+-  do_unit_disband(owner, punit);
++  /* Try to disband even if all shields will be wasted. */
++  if (unit_can_do_action(punit, ACTION_DISBAND_UNIT)) {
++    if (is_action_enabled_unit_on_self(ACTION_DISBAND_UNIT, punit)) {
++      if (unit_perform_action(owner, punit->id, punit->id,
++                              0, NULL, ACTION_DISBAND_UNIT)) {
++        /* All shields wasted. The unit did Disband Unit. */
++        return;
++      }
++    }
++  }
+ }
+ 
+ /**************************************************************************
+diff --git a/tools/ruledit/rulesave.c b/tools/ruledit/rulesave.c
+index 8378ae7..4bd4b79 100644
+--- a/tools/ruledit/rulesave.c
++++ b/tools/ruledit/rulesave.c
+@@ -883,6 +883,9 @@ static bool save_game_ruleset(const char *filename, const char *name)
+   secfile_insert_str(sfile,
+                      action_by_number(ACTION_RECYCLE_UNIT)->ui_name,
+                      "actions.ui_name_recycle_unit");
++  secfile_insert_str(sfile,
++                     action_by_number(ACTION_DISBAND_UNIT)->ui_name,
++                     "actions.ui_name_disband_unit");
+ 
+   sect_idx = 0;
+   action_enablers_iterate(pae) {

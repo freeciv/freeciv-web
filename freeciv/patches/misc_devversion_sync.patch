@@ -63,15 +63,3 @@ diff -Nurd -X.diff_ignore freeciv/server/plrhand.c freeciv/server/plrhand.c
    if (info_level >= INFO_MEETING) {
      packet->gold = plr->economic.gold;
      pgov = government_of_player(plr);
-diff -Nurd -X.diff_ignore freeciv/server/sernet.c freeciv/server/sernet.c
---- freeciv/server/sernet.c	2012-07-16 01:02:18.000000000 +0300
-+++ freeciv/server/sernet.c	2012-07-16 01:09:07.000000000 +0300
-@@ -1268,7 +1268,7 @@
-     }
-     fc_assert(i < ARRAY_SIZE(packet.conn_id));
-     packet.conn_id[i] = pconn->id;
--    packet.ping_time[i] = pconn->ping_time;
-+    packet.ping_time[i] = pconn->ping_time * 1000;
-     i++;
-   } conn_list_iterate_end;
-   packet.connections = i;

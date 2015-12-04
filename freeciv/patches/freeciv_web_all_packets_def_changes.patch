@@ -145,15 +145,6 @@ index b0e07fc..e0ab80b 100644
    UINT32 value;
  end
  
-@@ -1167,7 +1182,7 @@ end
- PACKET_CONN_PING_INFO = 116; sc, lsend
-   UINT8 connections;
-   CONNECTION conn_id[MAX_NUM_CONNECTIONS:connections];
--  SFLOAT10x7 ping_time[MAX_NUM_CONNECTIONS:connections];
-+  UINT32 ping_time[MAX_NUM_CONNECTIONS:connections];
- end
- 
- # For compatibility with older versions, this number cannot be changed.
 @@ -1331,8 +1346,9 @@ end
  PACKET_RULESET_GAME = 141; sc, lsend
    UINT8 default_specialist;

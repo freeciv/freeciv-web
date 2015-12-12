@@ -19,8 +19,10 @@ Required configuration:
    and Google ReCaptcha client sitekey here:
     freeciv-web/src/main/webapp/javascript/pbem.js
 
- 2. Update settings.ini.dist with smtp username, password,
-      and mysql username and password, 
-    and rename this settings-file to settings.ini.
+ 2. Update settings.ini.dist with
+     - SMTP username, password, host,port. The SMTP authentication can be gotten by creating an account at http://www.mailgun.com
+     - MySQL username and password for the local MySQL instance. 
+    then rename this settings-file to settings.ini.
+    
 
 

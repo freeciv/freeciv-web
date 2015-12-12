@@ -48,9 +48,9 @@ public class RandomUser extends HttpServlet {
             DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
             conn = ds.getConnection();
 
-            String pwdSQL = "SELECT username FROM `auth` WHERE id >= (SELECT FLOOR( MAX(id) * RAND()) FROM `auth` ) ORDER BY id LIMIT 1;";
+            String pwdSQL = "SELECT username FROM `auth` WHERE activated='1' and id >= (SELECT FLOOR( MAX(id) * RAND()) FROM `auth` ) ORDER BY id LIMIT 1;";
             PreparedStatement preparedStatement = conn.prepareStatement(pwdSQL);
-  	    ResultSet rs = preparedStatement.executeQuery();
+            ResultSet rs = preparedStatement.executeQuery();
             rs.next();
             if (rs != null) {
               response.getOutputStream().print(rs.getString(1));

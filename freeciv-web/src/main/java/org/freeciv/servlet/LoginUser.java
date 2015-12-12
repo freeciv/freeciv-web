@@ -52,7 +52,7 @@ public class LoginUser extends HttpServlet {
             DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
             conn = ds.getConnection();
 
-            String pwdSQL = "SELECT count(*) from auth where username = ? and password = ?";
+            String pwdSQL = "SELECT count(*) from auth where username = ? and password = ? and activated='1'";
             PreparedStatement preparedStatement = conn.prepareStatement(pwdSQL);
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, password);

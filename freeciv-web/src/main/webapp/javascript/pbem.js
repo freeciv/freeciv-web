@@ -31,7 +31,11 @@ function show_pbem_dialog()
   } else {
     message = "You are about to start a Play-by-Email game, where you "
     + "can challenge another player, and each player will be notified when "
-    + "it is their turn to play through e-mail. "; 
+    + "it is their turn to play through e-mail. These are the rules:<br>" 
+    + "<ul><li>The game will have two human players playing alternating turns, competing to win using standard Freeciv-web rules.</li>"
+    + "<li>Each player will get an e-mail when it is their turn to play.</li>"
+    + "<li>Please complete your turn as soon as possible, and use at no longer than 7 days until you complete your turn.</li>"
+    + "<li>This is a beta-feature. Please post feedback on the <a href='http://forum.freeciv.org/f/viewforum.php?f=24'>forum</a>.</li></ul>"; 
   }
 
   // reset dialog page.
@@ -45,12 +49,20 @@ function show_pbem_dialog()
 			width: is_small_screen() ? "80%" : "60%",
 			buttons:
 			{
+				"Create new user": function() {
+                                    create_new_pbem_user();
+				},
 				"Login existing user" : function() {
                                     login_pbem_user();
 				},
-				  "Create new user": function() {
-                                    create_new_pbem_user();
+				  "Close account": function() {
+                                    close_pbem_account();
+				}, 
+				  "Forgot password?": function() {
+                                    forgot_pbem_password();
 				}
+
+
 			}
 
 		});
@@ -387,5 +399,96 @@ function activate_pbem_player()
                  "message" : "/start"};
   send_request(JSON.stringify(test_packet));
 
+
+}
+
+
+/**************************************************************************
+ Dialog for the user to close their user accounts.
+**************************************************************************/
+function close_pbem_account() 
+{
+
+  var title = "Close account";
+  var message = "To deactivate your account, please enter your username and password:<br><br>"
+                + "<table><tr><td>Username:</td><td><input id='username' type='text' size='25' onkeyup='return forceLower(this);'></td></tr>"  
+                + "<tr><td>Password:</td><td><input id='password' type='password' size='25'></td></tr></table><br><br>"
+                + "<div id='username_validation_result'></div>";   
+
+  // reset dialog page.
+  $("#dialog").remove();
+  $("<div id='dialog'></div>").appendTo("div#game_page");
+
+  $("#dialog").html(message);
+  $("#dialog").attr("title", title);
+  $("#dialog").dialog({
+			bgiframe: true,
+			modal: true,
+			width: is_small_screen() ? "80%" : "60%",
+			buttons:
+			{
+				"Unsubscribe" : function() {
+                                  request_deactivate_account();
+				}
+			}
+		});
+
+  $("#dialog").dialog('open');
+}
+
+
+/**************************************************************************
+ Send password link to user. TODO: This method is not complete yet.
+**************************************************************************/
+function forgot_pbem_password() 
+{
+
+  var title = "Forgot your password?";
+  var message = "Please enter your e-mail address to get your password:<br><br>"
+                + "<table><tr><td>E-mail address:</td><td><input id='email' type='text' size='25'></td></tr>"  
+                + "</table><br><br>"
+                + "<div id='username_validation_result'></div>";   
+
+  // reset dialog page.
+  $("#dialog").remove();
+  $("<div id='dialog'></div>").appendTo("div#game_page");
+
+  $("#dialog").html(message);
+  $("#dialog").attr("title", title);
+  $("#dialog").dialog({
+			bgiframe: true,
+			modal: true,
+			width: is_small_screen() ? "80%" : "60%",
+			buttons:
+			{
+				"Send password" : function() {
+                                  //login_pbem_user_request();
+				}
+			}
+		});
+
+  $("#dialog").dialog('open');
+}
+
+
+/**************************************************************************
+ Will request the user to be deactivated  (activated='0' in DB).
+**************************************************************************/
+function request_deactivate_account()
+{
+  var usr = $("#username").val().trim();
+  var password = $("#password").val().trim();
+
+  $.ajax({
+   type: 'POST',
+   url: "/deactivate_user?username=" + usr + "&password=" + password ,
+   success: function(data, textStatus, request){
+       swal("User account has been deactivated!");
+
+     },
+   error: function (request, textStatus, errorThrown) {
+     swal("deactivate user failed.");
+   }
+  });
 
 }

@@ -85,6 +85,16 @@
     <url-pattern>/random_user</url-pattern>
   </servlet-mapping>
 
+  <!-- /deactivate_user   -->
+  <servlet>
+    <servlet-name>DeactivateUser</servlet-name>
+    <servlet-class>org.freeciv.servlet.DeactivateUser</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>DeactivateUser</servlet-name>
+    <url-pattern>/deactivate_user</url-pattern>
+  </servlet-mapping>
 
   <context-param>
     <param-name>buildTimeStamp</param-name>

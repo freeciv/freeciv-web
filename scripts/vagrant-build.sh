@@ -102,6 +102,9 @@ cd ${basedir}/freeciv-web && sudo -u vagrant ./setup.sh
 
 echo "=============================="
 
+pip3 install --allow-external mysql-connector-python mysql-connector-python
+cp ${basedir}/pbem/settings.ini.dist ${basedir}/pbem/settings.ini
+
 service nginx stop
 rm /etc/nginx/sites-enabled/default
 cp ${basedir}/publite2/nginx.conf /etc/nginx/

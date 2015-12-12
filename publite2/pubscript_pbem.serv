@@ -1,5 +1,4 @@
 cmdlevel ctrl first
-set autotoggle enabled
 set netwait 15
 set nettimeout 40
 set pingtime 60
@@ -9,9 +8,10 @@ set scorelog enabled
 set size 5
 set landm 50
 set aifill 1
+set barbarians 0
 set minp 2
+set maxp 2
 set phasemode player
-set allowtake=""
 set ec_chat=enabled
 set ec_info=enabled 
 set ec_max_size=5000

@@ -23,45 +23,141 @@ import os
 import sys
 import time
 import lzma
+import datetime
+import mysql.connector
+from mailsender import MailSender
+from mailstatus import *
+import shutil
+import random
+import configparser
 
-rootdir = "/vagrant/resin/webapps/ROOT/savegames/" 
+savedir = "../resin/webapps/ROOT/savegames/" 
+rankdir = "../resin/webapps/ROOT/ranklogs/" 
 
-def handle_savegame(filename):
-  print("Handling " + filename);
-  with lzma.open(filename) as f:
-    txt =str(f.read());
-    phase = find_phase(txt);
-    print(phase);
-    print(txt);
+settings = configparser.ConfigParser()
+settings.read("settings.ini")
 
+mysql_user=settings.get("Config", "mysql_user")
+mysql_database=settings.get("Config", "mysql_database");
+mysql_password=settings.get("Config", "mysql_password");
+
+status = MailStatus()
+status.savegames_read = 0;
+status.emails_sent = 0;
+status.ranklog_emails_sent = 0;
+status.start();
+
+
+def handle_savegame(root, file):
+  filename = os.path.join(root,file)
+  print("Handling savegame: " + filename);
+  txt = None;
+  with lzma.open(filename,  mode="rt") as f:
+    txt = f.read().split("\n");
+    status.savegames_read += 1;
+
+  new_filename = "pbem_processed_" + str(random.randint(0,10000000000)) + ".xz";
+  f.close();
+  shutil.move(filename, os.path.join(root,new_filename))
+  print("New filename will be: " + new_filename);
+  players = list_players(txt);
+  phase = find_phase(txt);
+  print("phase=" + str(phase));
+  print("players=" + str(players));
+
+  active_player = players[phase];
+  print("active_player=" + active_player);    
+  active_email = find_email_address(active_player);
+  if (active_email != None):
+    print("active email=" + active_email);
+    m = MailSender();
+    m.send_email(active_player, players, active_email, new_filename.replace(".xz", ""));
+    status.emails_sent += 1;
+
+
+#Returns the phase (active player number), eg 1
 def find_phase(lines):
   for l in lines:
-    if ("phase=" in str(l)): return l;
+    if ("phase=" in l): return int(l[6:]);
   return None;
- 
+
+# Returns a list of active players
+def list_players(lines):
+  players = [];
+  for l in lines:
+    if (l[:4] == "name"): players.append(l[5:].replace("\"", ""));
+  return players;
+
+# Returns the emailaddress of the given username
+def find_email_address(user_to_find):
+  result = None;
+  cursor = None;
+  cnx = None;
+  try:
+    cnx = mysql.connector.connect(user=mysql_user, database=mysql_database, password=mysql_password)
+    cursor = cnx.cursor()
+    query = ("select email from auth where username=%(usr)s and activated='1' limit 1")
+    cursor.execute(query, {'usr' : user_to_find})
+    for email in cursor:
+      result = email[0];
+  finally:
+    cursor.close()
+    cnx.close()
+  return result;
+
+
 def process_savegames():
-  for root, subFolders, files in os.walk(rootdir):
+  for root, subFolders, files in os.walk(savedir):
     for file in files:
-      if (file.endswith(".xz")):
-        f = os.path.join(root,file)
-        handle_savegame(f);
+      if (file.endswith(".xz") and not file.startswith("pbem_processed")):
+        handle_savegame(root, file);
         
+
+def handle_ranklog(root, file):
+  filename = os.path.join(root,file)
+  print("Handling ranklog: " + filename);
+  openfile = open(filename, 'r')
+  lines = openfile.readlines()
+  winner = None;
+  winner_score = None;
+  winner_email = None;
+  losers = None;
+  losers_score = None;
+  losers_email = None;  
+
+  turns = None;
+  for line in lines:
+    if (line[:7]=='winners'):
+      winner = line[9:].split(",")[1];
+      winner_score = line[9:].split(",")[3];
+      winner_email = find_email_address(winner);
+    if (line[:6]=='losers'):
+      losers = line[8:].split(",")[1];
+      losers_score = line[8:].split(",")[3];
+      losers_email = find_email_address(losers);
+
+  m = MailSender();
+  m.send_game_result_mail(winner, winner_score, winner_email, losers, losers_score, losers_email);
+  status.ranklog_emails_sent += 1;
+  openfile.close();
+
+  os.remove(filename);
+  
+
+def process_ranklogs():
+  for root, subFolders, files in os.walk(rankdir):
+    for file in files:
+      if (file.endswith(".log")):
+        handle_ranklog(root, file);
         
 if __name__ == '__main__':
   print("Freeciv-PBEM processing savegames");
-  process_savegames();
 
-  # TODO:
-  # The idea of PDEM is that this script handles play-by-emailgames like this:
-  # 1. parse freeciv savegames starting with the filename pbem*
-  # 2. based on each savegame, determine which player name is next.
-  # 3. look up the email-address of that player in the auth database table
-  # 4. send the email to that player informing them that it is their turn.
-  # 5. optionally, send an email to all players that the game is over.
-
-  # TODO 2:
-  # 1. add activation of email addreses (each new player will receive an activation-email with a 
-  # link to activate their account. this will prevent spam.
-  # 2. unsubscribe.
-
-
+  while (1):
+    try:
+      time.sleep(1);
+      process_savegames();
+      process_ranklogs();
+      time.sleep(60);
+    except Exception as e:
+      print(e);

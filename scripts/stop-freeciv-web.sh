@@ -9,7 +9,7 @@ if [ ! -f ${SCRIPT_DIR}/configuration.sh ]; then
 fi
 . configuration.sh
 
-echo "Shutting down Freeciv-web: nginx, resin, publite2, freeciv-proxy."
+echo "Shutting down Freeciv-web: nginx, resin, publite2, freeciv-proxy, freeciv-pbem."
 
 # 1. nginx
 if [ "$(pidof nginx)" ] ; then
@@ -27,6 +27,10 @@ killall -9 freeciv-web
 #4. freeciv-proxy
 
 ps aux | grep -ie freeciv-proxy | awk '{print $2}' | xargs kill -9 
+
+#5 Freeciv-PBEM
+ps aux | grep -ie freeciv-pbem | awk '{print $2}' | xargs kill -9 
+
 
 # Clean up server list in metaserver database.
 echo "delete from servers" | mysql -u ${MYSQL_USER} -p${MYSQL_PASSWORD} freeciv_web

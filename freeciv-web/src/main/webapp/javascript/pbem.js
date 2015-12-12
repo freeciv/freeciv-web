@@ -25,9 +25,15 @@ var opponent = null;
 function show_pbem_dialog() 
 {
   var title = "Welcome to Freeciv-web";
-  var message = "You are about to start a Play-by-Email game, where you "
+  var message = "";
+  if ($.getUrlVar('savegame') != null) {
+    message = "It is now your turn to play this Play-by-Email game. Please login to play your turn.";
+  } else {
+    message = "You are about to start a Play-by-Email game, where you "
     + "can challenge another player, and each player will be notified when "
     + "it is their turn to play through e-mail. "; 
+  }
+
   // reset dialog page.
   $("#dialog").remove();
   $("<div id='dialog'></div>").appendTo("div#game_page");
@@ -103,8 +109,9 @@ function create_new_pbem_user()
   var message = "Create a new Freeciv-web user account:<br><br>"
                 + "<table><tr><td>Username:</td><td><input id='username' type='text' size='25' onkeyup='return forceLower(this);'></td></tr>"  
                 + "<tr><td>Email:</td><td><input id='email' type='email' size='25'></td></tr>"  
-                + "<tr><td>Password:</td><td><input id='password' type='password' size='25'></td></tr></table><br><br>"
-                + "<div id='username_validation_result'></div>";   
+                + "<tr><td>Password:</td><td><input id='password' type='password' size='25'></td></tr></table><br>"
+                + "<div id='username_validation_result'></div><br>"
+                + "<div id='captcha_element'></div>";   
 
   // reset dialog page.
   $("#dialog").remove();
@@ -125,6 +132,9 @@ function create_new_pbem_user()
 		});
 
   $("#dialog").dialog('open');
+  grecaptcha.render('captcha_element', {
+          'sitekey' : '6LfpcgMTAAAAAPRAOqYy6ZUhuX6bOJ7-7-_1V0FL'
+        });
 }
 
 /**************************************************************************
@@ -136,6 +146,7 @@ function create_new_pbem_user_request()
   username = $("#username").val().trim();
   var password = $("#password").val().trim();
   var email = $("#email").val().trim();
+  var captcha = $("#g-recaptcha-response").val();
 
   var cleaned_username = username.replace(/[^a-zA-Z]/g,'');
 
@@ -163,7 +174,7 @@ function create_new_pbem_user_request()
 
   $.ajax({
    type: 'POST',
-   url: "/create_pbem_user?username=" + username + "&email=" + email + "&password=" + password ,
+   url: "/create_pbem_user?username=" + username + "&email=" + email + "&password=" + password + "&captcha=" + captcha,
    success: function(data, textStatus, request){
        simpleStorage.set("username", username);
        challenge_pbem_player_dialog();
@@ -189,7 +200,11 @@ function login_pbem_user_request()
    url: "/login_user?username=" + username + "&password=" + password ,
    success: function(data, textStatus, request){
        simpleStorage.set("username", username);
-       challenge_pbem_player_dialog();
+       if ($.getUrlVar('savegame') != null) {
+         handle_pbem_load();
+       } else {
+         challenge_pbem_player_dialog();
+       }
      },
    error: function (request, textStatus, errorThrown) {
      swal("login user failed.");
@@ -269,7 +284,7 @@ function create_new_pbem_game(check_opponent)
  
     show_dialog_message("Play-by-Email game ready", 
       "You will now play the first turn in this play-by-email game. "
-      + "Press the Start Game button to begin your turn.");
+      + "The game will now start.");
 
       },
    error: function (request, textStatus, errorThrown) {
@@ -287,8 +302,8 @@ function create_pbem_players()
   if (opponent != null) {
     var packet = {"pid" : packet_chat_msg_req, 
                      "message" : "/create " + opponent};
-   send_request(JSON.stringify(packet));
-   set_human_pbem_players();
+    send_request(JSON.stringify(packet));
+    setTimeout("pbem_init_game();", 500);
   }
 }
 
@@ -296,10 +311,15 @@ function create_pbem_players()
 ...
 **************************************************************************/
 function set_human_pbem_players()
- {
-    var packet = {"pid" : packet_chat_msg_req, 
+{
+  for (var player_id in players) {
+    var pplayer = players[player_id];
+    if (pplayer['ai'] == true && pplayer['name'].toUpperCase() != username.toUpperCase()) {
+      var packet = {"pid" : packet_chat_msg_req, 
                      "message" : "/ai " + opponent};
-    send_request(JSON.stringify(packet));
+      send_request(JSON.stringify(packet));
+    }
+  }
 }
 
 /**************************************************************************
@@ -313,7 +333,8 @@ function is_pbem()
 /**************************************************************************
 ...
 **************************************************************************/
-function pbem_end_phase() {
+function pbem_end_phase() 
+{
   var test_packet = {"pid" : packet_chat_msg_req, "message" : "/save"};
   var myJSONText = JSON.stringify(test_packet);
   send_request(myJSONText);
@@ -323,4 +344,48 @@ function pbem_end_phase() {
       "will get an email with information about how to complete their turn. " +
       "You will also get an email about when it is your turn to play again. " +
       "See you again soon!"  );
-} 
+}
+
+/**************************************************************************
+...
+**************************************************************************/
+function handle_pbem_load()
+{
+  network_init();
+  var savegame = $.getUrlVar('savegame');
+  $("#dialog").dialog('close');
+  loadTimerIdA = setTimeout("load_game_real('" + savegame + "');", 1500);
+  loadTimerIdB = setTimeout("activate_pbem_player();", 2500);
+
+ 
+}
+
+/**************************************************************************
+ called when starting a new PBEM game.
+**************************************************************************/
+function pbem_init_game()
+{
+  set_human_pbem_players();
+
+  test_packet = {"pid" : packet_chat_msg_req,
+                  "message" : "/start"};
+  send_request(JSON.stringify(test_packet));
+
+}
+
+
+/**************************************************************************
+ called when loading a PBEM game.
+**************************************************************************/
+function activate_pbem_player()
+{
+  test_packet = {"pid" : packet_chat_msg_req,
+                 "message" : "/take " + username};
+  send_request(JSON.stringify(test_packet));
+
+  test_packet = {"pid" : packet_chat_msg_req,
+                 "message" : "/start"};
+  send_request(JSON.stringify(test_packet));
+
+
+}

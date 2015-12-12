@@ -20,7 +20,8 @@
 
 package org.freeciv.servlet;
 
-import java.util.regex.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import java.io.*;
 import javax.servlet.*;
@@ -29,6 +30,16 @@ import javax.servlet.http.*;
 import java.sql.*;
 
 import javax.sql.*;
+
+import org.apache.commons.io.IOUtils;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.message.BasicNameValuePair;
+
 import javax.naming.*;
 
 
@@ -37,7 +48,14 @@ import javax.naming.*;
  */
 public class NewPBEMUser extends HttpServlet {
     private static final long serialVersionUID = 1L;
+    private String captcha_secret;
+    private String captcha_url = "https://www.google.com/recaptcha/api/siteverify";
 
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        captcha_secret = getServletContext().getInitParameter("captcha-secret");
+    }
+    
     @SuppressWarnings("unchecked")
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
@@ -45,7 +63,24 @@ public class NewPBEMUser extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String email = request.getParameter("email");
-       
+        String captcha = request.getParameter("captcha");
+        
+    	HttpClient client = HttpClientBuilder.create().build();
+    	HttpPost post = new HttpPost(captcha_url);
+
+    	List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+    	urlParameters.add(new BasicNameValuePair("secret", captcha_secret));
+    	urlParameters.add(new BasicNameValuePair("response", captcha));
+    	post.setEntity(new UrlEncodedFormEntity(urlParameters));
+
+    	HttpResponse captcha_response = client.execute(post);
+    	
+    	InputStream in = captcha_response.getEntity().getContent();
+    	String body = IOUtils.toString(in, "UTF-8");
+    	if (!(body.contains("success") && body.contains("true"))) {
+    		response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Captcha failed!");
+    		return;
+    	}
 
        Connection conn = null;
         try {

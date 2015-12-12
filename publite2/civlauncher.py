@@ -27,6 +27,8 @@ class Civlauncher(Thread):
             try:
                 print("Starting new Freeciv-web server at port " + str(self.new_port) + 
                       " and Freeciv-proxy server at port " + str(1000 + self.new_port) + ".");
+                rank_cmd = "";
+                if (self.gametype=="pbem"): rank_cmd = " --Ranklog ../resin/webapps/ROOT/ranklogs/rank_"+str(self.new_port)+".log ";
                 retcode = call("ulimit -t 10000 && export FREECIV_SAVE_PATH=\"" + self.savesdir + "\";" +
                                "rm -f ../resin/webapps/ROOT/scorelogs/score-" + str(self.new_port) + ".log; " +
                                "python3.4 ../freeciv-proxy/freeciv-proxy.py " + 
@@ -38,7 +40,7 @@ class Civlauncher(Thread):
                                " -m -M http://" + self.metahostpath  + " --type \"" + self.gametype +
                                "\" --read " + pubscript + self.gametype + ".serv" + 
                                " --log " + logdir + "freeciv-web-log-" + str(self.new_port) + ".log " +
-                               "--saves " + self.savesdir + " > /dev/null " + 
+                               rank_cmd + "--saves " + self.savesdir + " > /dev/null " + 
                                " 2> " +  logdir + "freeciv-web-stderr-" +  str(self.new_port) + ".log " +
                                " ; rc=$?; kill -9 $proxy_pid; exit $rc", shell=True)
                 self.num_start += 1;

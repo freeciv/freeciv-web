@@ -24,6 +24,13 @@
 	  <forward regexp="/robots.txt" target="/robots.jsp"/>
   </rewrite-dispatch> 
 
+  <!-- this is the secret key from Google Recaptcha. --!>
+  <context-param>
+    <param-name>captcha-secret</param-name>
+    <param-value>google captcha secret goes here!</param-value>
+  </context-param>
+
+
   <session-config>
      <session-timeout>720</session-timeout>
   </session-config>

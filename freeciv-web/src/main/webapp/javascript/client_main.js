@@ -105,6 +105,12 @@ function show_new_game_message()
   if (observing) {
     /* do nothing. */
 
+  } else if (is_pbem()) {
+    show_dialog_message("Welcome to Freeciv-web: Play-By-Email.",
+      "Welcome " + username + "! It is now your turn to play. Each player will " + 
+      "get an e-mail when it is their turn to play, and can only play one turn at a time. " +
+      "Click the end turn button to end your turn and let the next opponent play.");
+
   } else if (is_small_screen()) {
     show_dialog_message("Welcome to Freeciv-web",
       "Welcome " + username + "! You lead a great civilization. Your task is to conquer the world!\n" +

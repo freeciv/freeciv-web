@@ -1,0 +1,11 @@
+[Config]
+smtp_login = postmaster@freeciv.mailgun.org
+smtp_password = password
+smtp_host = smtp.mailgun.org
+smtp_port = 587
+
+mysql_user = root
+mysql_database = freeciv_web
+mysql_password = vagrant
+
+

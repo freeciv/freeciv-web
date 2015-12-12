@@ -42,6 +42,9 @@ echo "Starting publite2" && \
 (cd ${FREECIV_WEB_DIR}/publite2/ && \
 sh run.sh) && \
 echo "Publite2 started" && \
+echo "Starting Freeciv-PBEM" && \
+cd ${FREECIV_WEB_DIR}/pbem/ && nohup python3.4 freeciv-pbem.py > ../logs/freeciv-pbem.log 2>&1 || echo "unable to start freeciv-pbem" & 
+
 echo "Will sleep for 8 seconds, then do a status test..." && \
 sleep 8 && \
 cd ${FREECIV_WEB_DIR}/scripts/ && bash meta-sync.sh && \

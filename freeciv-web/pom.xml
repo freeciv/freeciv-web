@@ -59,7 +59,12 @@
            <artifactId>mysql-connector-java</artifactId>
            <version>5.1.37</version>
         </dependency>
-    
+   
+	<dependency>
+	  <groupId>org.apache.httpcomponents</groupId>
+	  <artifactId>httpclient</artifactId>
+	  <version>4.5.1</version>
+	</dependency> 
 
     </dependencies>
 

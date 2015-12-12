@@ -92,6 +92,8 @@ make > nginx-log-file 2>&1
 make install
 
 cp ${basedir}/publite2/nginx.conf /usr/local/nginx/conf/
+pip3 install --allow-external mysql-connector-python mysql-connector-python
+cp ${basedir}/pbem/settings.ini.dist ${basedir}/pbem/settings.ini
 
 echo "Starting Freeciv-web..."
 /usr/local/nginx/sbin/nginx

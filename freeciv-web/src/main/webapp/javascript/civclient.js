@@ -157,6 +157,9 @@ function init_common_intro_dialog() {
       "You have joined the game as an observer. Please enter your name:");
     $("#turn_done_button").button( "option", "disabled", true);
 
+  } else if ($.getUrlVar('action') == "pbem") {
+    show_pbem_dialog();
+
   } else if (is_small_screen()) {
     show_intro_dialog("Welcome to Freeciv-web",
       "You are about to join the game. Please enter your name:");
@@ -173,9 +176,6 @@ function init_common_intro_dialog() {
       "settings, and wait for the minimum number of players before " +
       "the game can start. " +
       "Please enter your name: ");
-  } else if ($.getUrlVar('action') == "pbem") {
-    show_pbem_dialog();
-
   } else {
     show_intro_dialog("Welcome to Freeciv-web",
       "You are about to join this game server, where you can " +

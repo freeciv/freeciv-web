@@ -18,4 +18,7 @@ else
   rm -f ${ROOTDIR}/freeciv-web/src/main/webapp/build.txt
 fi
 
+#backup pbem savegames
+cp ${ROOTDIR}/resin/webapps/ROOT/savegames/pbem* /tmp
+
 mvn install && cp target/freeciv-web.war "${ROOTDIR}/resin/webapps/ROOT.war"

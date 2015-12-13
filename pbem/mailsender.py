@@ -59,7 +59,7 @@ class MailSender():
     for p in players:
       msg += p + ", ";
     msg += "\n\n";
-    msg += "Please complete your turn within 7 days, the other player will we waiting for you. ";
+    msg += "Please complete your turn within 7 days, the other player will be waiting for you. ";
     msg += "Play-By-Email is currently a Beta-feature, please report any problems playing " +\
             "here: http://forum.freeciv.org/f/viewforum.php?f=24\n\n";
     msg += "Freeciv-Web is a free and open source empire-building strategy game inspired by the history of human civilization.\n\n";

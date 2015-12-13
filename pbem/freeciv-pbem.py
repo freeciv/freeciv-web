@@ -109,7 +109,7 @@ def find_email_address(user_to_find):
 def process_savegames():
   for root, subFolders, files in os.walk(savedir):
     for file in files:
-      if (file.endswith(".xz") and not file.startswith("pbem_processed")):
+      if (file.endswith(".xz") and file.startswith("pbem") and not file.startswith("pbem_processed")):
         handle_savegame(root, file);
         
 

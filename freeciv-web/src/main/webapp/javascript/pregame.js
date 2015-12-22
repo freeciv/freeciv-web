@@ -46,15 +46,11 @@ function observe()
 {
   if (observing) {
     $("#observe_button").button("option", "label", "Observe Game");
-    var test_packet = {"pid" : packet_chat_msg_req, "message" : "/detach"};
-    var myJSONText = JSON.stringify(test_packet);
-    send_request(myJSONText);
+    send_message("/detach");
 
   } else {
     $("#observe_button").button("option", "label", "Don't observe");
-    var test_packet = {"pid" : packet_chat_msg_req, "message" : "/observe"};
-    var myJSONText = JSON.stringify(test_packet);
-    send_request(myJSONText);
+    send_message("/observe");
   }
 
   observing = !observing;
@@ -147,28 +143,21 @@ function update_player_info_pregame()
             if (name != null && name.indexOf(" ") != -1) name = name.split(" ")[0]
             var playerid = parseInt($(this).attr('playerid'));
             if (key == "take_player") {
-              var msg_packet = {"pid" : packet_chat_msg_req, "message" : "/take " + name};
-              send_request(JSON.stringify(msg_packet));
+              send_message("/take " + name);
             } else if (key == "pick_nation") {
               pick_nation(playerid);
             } else if (key == "aitoggle_player") {
-              var msg_packet = {"pid" : packet_chat_msg_req, "message" : "/ai " + name};
-              send_request(JSON.stringify(msg_packet));
+              send_message("/ai " + name);
             } else if (key == "observe_player") {
-              var msg_packet = {"pid" : packet_chat_msg_req, "message" : "/observe " + name};
-              send_request(JSON.stringify(msg_packet));
+              send_message("/observe " + name);
             } else if (key == "novice") {
-              var msg_packet = {"pid" : packet_chat_msg_req, "message" : "/novice " + name};
-              send_request(JSON.stringify(msg_packet));
+              send_message("/novice " + name);
             } else if (key == "easy") {
-              var msg_packet = {"pid" : packet_chat_msg_req, "message" : "/easy " + name};
-              send_request(JSON.stringify(msg_packet));
+              send_message("/easy " + name);
             } else if (key == "normal") {
-              var msg_packet = {"pid" : packet_chat_msg_req, "message" : "/normal " + name};
-              send_request(JSON.stringify(msg_packet));
+              send_message("/normal " + name);
             } else if (key == "hard") {
-              var msg_packet = {"pid" : packet_chat_msg_req, "message" : "/hard " + name};
-              send_request(JSON.stringify(msg_packet));
+              send_message("/hard " + name);
             }  
         },
         items: {
@@ -415,15 +404,11 @@ function pregame_settings()
   $(id).dialog('open');
 
   $('#aifill').change(function() {
-    var test_packet = {"pid" : packet_chat_msg_req, "message" : "/set aifill " + $('#aifill').val()};
-    var myJSONText = JSON.stringify(test_packet);
-    send_request(myJSONText);
+    send_message("/set aifill " + $('#aifill').val());
   });
 
   $('#metamessage').change(function() {
-    var test_packet = {"pid" : packet_chat_msg_req, "message" : "/metamessage " + $('#metamessage').val()};
-    var myJSONText = JSON.stringify(test_packet);
-    send_request(myJSONText);
+    send_message("/metamessage " + $('#metamessage').val());
     metamessage_changed = true;
   });
 
@@ -435,58 +420,39 @@ function pregame_settings()
   );
 
   $('#mapsize').change(function() {
-    var test_packet = {"pid" : packet_chat_msg_req, "message" : "/set size " + $('#mapsize').val()};
-    var myJSONText = JSON.stringify(test_packet);
-    send_request(myJSONText);
+    send_message("/set size " + $('#mapsize').val());
   });
 
   $('#timeout').change(function() {
-    var test_packet = {"pid" : packet_chat_msg_req, "message" : "/set timeout " + $('#timeout').val()};
-    var myJSONText = JSON.stringify(test_packet);
-    send_request(myJSONText);
+    send_message("/set timeout " + $('#timeout').val());
   });
 
   $('#techlevel').change(function() {
-    var test_packet = {"pid" : packet_chat_msg_req, "message" : "/set techlevel " + $('#techlevel').val()};
-    var myJSONText = JSON.stringify(test_packet);
-    send_request(myJSONText);
+    send_message("/set techlevel " + $('#techlevel').val());
   });
 
   $('#specials').change(function() {
-    var test_packet = {"pid" : packet_chat_msg_req, "message" : "/set specials " + $('#specials').val()};
-    var myJSONText = JSON.stringify(test_packet);
-    send_request(myJSONText);
+    send_message("/set specials " + $('#specials').val());
   });
 
   $('#landmass').change(function() {
-    var test_packet = {"pid" : packet_chat_msg_req, "message" : "/set landmass " + $('#landmass').val()};
-    var myJSONText = JSON.stringify(test_packet);
-    send_request(myJSONText);
+    send_message("/set landmass " + $('#landmass').val());
   });
 
   $('#citymindist').change(function() {
-    var test_packet = {"pid" : packet_chat_msg_req, "message" : "/set citymindist " + $('#citymindist').val()};
-    var myJSONText = JSON.stringify(test_packet);
-    send_request(myJSONText);
+    send_message("/set citymindist " + $('#citymindist').val());
   });
 
   $('#endturn').change(function() {
-    var test_packet = {"pid" : packet_chat_msg_req, "message" : "/set endturn " + $('#endturn').val()};
-    var myJSONText = JSON.stringify(test_packet);
-    send_request(myJSONText);
+    send_message("/set endturn " + $('#endturn').val());
   });
 
   $('#generator').change(function() {
-    var test_packet = {"pid" : packet_chat_msg_req, "message" : "/set generator " + $('#generator').val()};
-    var myJSONText = JSON.stringify(test_packet);
-    send_request(myJSONText);
-
+    send_message("/set generator " + $('#generator').val());
   });
 
   $('#ruleset').change(function() {
-    var packet = {"pid" : packet_chat_msg_req, "message" : "/rulesetdir " + $('#ruleset').val()};
-    send_request(JSON.stringify(packet));
-
+    send_message("/rulesetdir " + $('#ruleset').val());
   });
 
   $('#password').change(function() {
@@ -503,9 +469,7 @@ function pregame_settings()
       function(){   
         var pwd_packet = {"pid" : packet_authentication_reply, "password" : $('#password').val()};
         send_request(JSON.stringify(pwd_packet));
-
-        var pwd_packet = {"pid" : packet_chat_msg_req, "message" : "/metamessage Private password-protected game"};
-        send_request(JSON.stringify(pwd_packet));
+        send_message("/metamessage Private password-protected game");
         metamessage_changed = true;
         $("#metamessage").prop('readonly', true);
         $("#metamessage_setting").prop('readonly', true);
@@ -516,22 +480,19 @@ function pregame_settings()
 
   $('#skill_level').change(function() {
     ai_skill_level = parseFloat($('#skill_level').val());
-    var test_packet = "";
     if (ai_skill_level == 0) {
-      test_packet = {"pid" : packet_chat_msg_req, "message" : "/handicapped"};
+      send_message("/handicapped");
     } else if (ai_skill_level == 1) {
-      test_packet = {"pid" : packet_chat_msg_req, "message" : "/novice"};
+      send_message("/novice");
     } else if (ai_skill_level == 2) {
-      test_packet = {"pid" : packet_chat_msg_req, "message" : "/easy"};
+      send_message("/easy");
     } else if (ai_skill_level == 3) {
-      test_packet = {"pid" : packet_chat_msg_req, "message" : "/normal"};
+      send_message("/normal");
     } else if (ai_skill_level == 4) {
-      test_packet = {"pid" : packet_chat_msg_req, "message" : "/hard"};
+      send_message("/hard");
     } else if (ai_skill_level == 5) {
-      test_packet = {"pid" : packet_chat_msg_req, "message" : "/cheating"};
+      send_message("/cheating");
     }
-    var myJSONText = JSON.stringify(test_packet);
-    send_request(myJSONText);
   });
 
   $('#music_setting').prop('checked', audio_enabled == true);
@@ -555,11 +516,9 @@ function pregame_settings()
   $('#scorelog_setting').change(function() {
     var scorelog_enabled = $('#scorelog_setting').prop('checked');  
     if (scorelog_enabled) {
-      var net_packet = {"pid" : packet_chat_msg_req, "message" : "/set scorelog enabled"};
-      send_request(JSON.stringify(net_packet));
+      send_message("/set scorelog enabled");
     } else {
-      var net_packet = {"pid" : packet_chat_msg_req, "message" : "/set scorelog disabled"};
-      send_request(JSON.stringify(net_packet));
+      send_message("/set scorelog disabled");
     }
   });
 

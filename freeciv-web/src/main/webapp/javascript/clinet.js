@@ -158,3 +158,21 @@ function ping_check()
                 + "indicates server connection problem.");
   }
 }
+
+/****************************************************************************
+  send the chat message to the server after a delay.
+****************************************************************************/
+function send_message_delayed(message, delay)
+{
+  setTimeout("send_message('" + message + "');", delay);
+}
+
+/****************************************************************************
+  sends a chat message to the server.
+****************************************************************************/
+function send_message(message)
+{
+  var packet = {"pid" : packet_chat_msg_req, 
+                "message" : message};
+  send_request(JSON.stringify(packet));
+}

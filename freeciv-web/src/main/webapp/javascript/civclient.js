@@ -510,10 +510,7 @@ function set_phase_start()
 **************************************************************************/
 function request_observe_game()
 {
-  var test_packet = {"pid" : packet_chat_msg_req,
-                     "message" : "/observe "};
-  var myJSONText = JSON.stringify(test_packet);
-  send_request(myJSONText);
+  send_message("/observe ");
 }
 
 /**************************************************************************
@@ -537,10 +534,7 @@ function surrender_game()
 function send_surrender_game()
 {
   if (!client_is_observer()) {
-    var test_packet = {"pid" : packet_chat_msg_req,
-                       "message" : "/surrender "};
-    var myJSONText = JSON.stringify(test_packet);
-    send_request(myJSONText);
+    send_message("/surrender ");
   }
 }
 

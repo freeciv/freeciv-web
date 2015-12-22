@@ -291,9 +291,7 @@ function check_text_input(event,chatboxtextarea) {
     $(chatboxtextarea).val('');
     if (!is_touch_device()) $(chatboxtextarea).focus();
     keyboard_input = true;
-    var test_packet = {"pid" : packet_chat_msg_req, "message" : message};
-    var myJSONText = JSON.stringify(test_packet);
-    send_request(myJSONText);
+    send_message(message);
     return false;
   }
 }

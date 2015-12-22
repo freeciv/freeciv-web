@@ -209,10 +209,7 @@ function update_metamessage_on_gamestart()
       && client.conn.playing['pid'] == players[0]['pid']) {
     var pplayer = client.conn.playing;
     var metasuggest = username + " ruler of the " + nations[pplayer['nation']]['adjective'] + " empire.";
-
-    var test_packet = {"pid" : packet_chat_msg_req, "message" : "/metamessage " + metasuggest};
-    var myJSONText = JSON.stringify(test_packet);
-    send_request(myJSONText);
+    send_message("/metamessage " + metasuggest);
     setTimeout("chatbox_text = ' '; add_chatbox_text('');", 500);
   }
 }

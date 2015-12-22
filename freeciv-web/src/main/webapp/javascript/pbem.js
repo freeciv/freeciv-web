@@ -292,11 +292,9 @@ function create_new_pbem_game(check_opponent)
       opponent = check_opponent;
       network_init();
       $("#dialog").dialog('close');
-      setTimeout("create_pbem_players();", 2500);
- 
-    show_dialog_message("Play-by-Email game ready", 
-      "You will now play the first turn in this play-by-email game. "
-      + "The game will now start.");
+      setTimeout("create_pbem_players();", 3500);
+      $.blockUI({ message: "You will now play the first turn in this play-by-email game. "
+        + "The game will now start."}); 
 
       },
    error: function (request, textStatus, errorThrown) {
@@ -312,10 +310,10 @@ function create_new_pbem_game(check_opponent)
 function create_pbem_players()
 {
   if (opponent != null) {
-    var packet = {"pid" : packet_chat_msg_req, 
-                     "message" : "/create " + opponent};
-    send_request(JSON.stringify(packet));
-    setTimeout("pbem_init_game();", 500);
+    send_message("/create " + opponent);
+    setTimeout("pbem_init_game();", 1200);
+  } else {
+    swal("Error: invalid opponent selected.");
   }
 }
 
@@ -326,10 +324,9 @@ function set_human_pbem_players()
 {
   for (var player_id in players) {
     var pplayer = players[player_id];
-    if (pplayer['ai'] == true && pplayer['name'].toUpperCase() != username.toUpperCase()) {
-      var packet = {"pid" : packet_chat_msg_req, 
-                     "message" : "/ai " + opponent};
-      send_request(JSON.stringify(packet));
+    if (pplayer['ai'] == true 
+        && pplayer['name'].toUpperCase() != username.toUpperCase()) {
+      send_message("/ai " + opponent);
     }
   }
 }
@@ -347,15 +344,15 @@ function is_pbem()
 **************************************************************************/
 function pbem_end_phase() 
 {
-  var test_packet = {"pid" : packet_chat_msg_req, "message" : "/save"};
-  var myJSONText = JSON.stringify(test_packet);
-  send_request(myJSONText);
- 
+  send_message("/save");
+
   show_dialog_message("Play By Email turn over", 
       "Your turn is now over in this Play By Email game. Now the next player " +
       "will get an email with information about how to complete their turn. " +
       "You will also get an email about when it is your turn to play again. " +
       "See you again soon!"  );
+  $(window).unbind('beforeunload');
+  setTimeout("window.location.href ='https://play.freeciv.org';", 6000);
 }
 
 /**************************************************************************
@@ -366,6 +363,7 @@ function handle_pbem_load()
   network_init();
   var savegame = $.getUrlVar('savegame');
   $("#dialog").dialog('close');
+  $.blockUI();
   loadTimerIdA = setTimeout("load_game_real('" + savegame + "');", 1500);
   loadTimerIdB = setTimeout("activate_pbem_player();", 2500);
 
@@ -378,11 +376,8 @@ function handle_pbem_load()
 function pbem_init_game()
 {
   set_human_pbem_players();
-
-  test_packet = {"pid" : packet_chat_msg_req,
-                  "message" : "/start"};
-  send_request(JSON.stringify(test_packet));
-
+  send_message_delayed("/start", 200);
+  $.unblockUI();
 }
 
 
@@ -391,15 +386,8 @@ function pbem_init_game()
 **************************************************************************/
 function activate_pbem_player()
 {
-  test_packet = {"pid" : packet_chat_msg_req,
-                 "message" : "/take " + username};
-  send_request(JSON.stringify(test_packet));
-
-  test_packet = {"pid" : packet_chat_msg_req,
-                 "message" : "/start"};
-  send_request(JSON.stringify(test_packet));
-
-
+  send_message_delayed("/take " + username, 100);
+  send_message_delayed("/start", 200);
 }
 
 

@@ -255,10 +255,7 @@ function love_text(love)
 **************************************************************************/
 function take_player(player_name)
 {
-  var test_packet = {"pid" : packet_chat_msg_req,
-                     "message" : "/take " + player_name.substring(0,3)};
-  var myJSONText = JSON.stringify(test_packet);
-  send_request(myJSONText);
+  send_message("/take " + player_name.substring(0,3));
   observing = false;
 }
 
@@ -267,10 +264,7 @@ function take_player(player_name)
 **************************************************************************/
 function aitoggle_player(player_name)
 {
-  var test_packet = {"pid" : packet_chat_msg_req,
-                     "message" : "/ai " + player_name.substring(0,3)};
-  var myJSONText = JSON.stringify(test_packet);
-  send_request(myJSONText);
+  send_message("/ai " + player_name.substring(0,3));
   observing = false;
 }
 

@@ -31,5 +31,6 @@ class StatusHandler(web.RequestHandler):
                "<table><tr><td>Number of e-mails sent:</td><td>" + str(self.mailchecker.emails_sent) + "</td></tr>" +
                "<tr><td>Number of savegames read:</td><td>" + str(self.mailchecker.savegames_read) + "</td></tr>" +
                "<tr><td>Number of ranklog emails sent:</td><td>" + str(self.mailchecker.ranklog_emails_sent) + "</td></tr>" +
+               "<tr><td>Status of games:</td><td>" + str(list(self.mailchecker.games.values())) + "</td></tr>" +
                "</table>")
     self.write("</body></html>");

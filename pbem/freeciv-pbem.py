@@ -45,6 +45,7 @@ status = MailStatus()
 status.savegames_read = 0;
 status.emails_sent = 0;
 status.ranklog_emails_sent = 0;
+status.games = {};
 status.start();
 
 
@@ -62,12 +63,17 @@ def handle_savegame(root, file):
   print("New filename will be: " + new_filename);
   players = list_players(txt);
   phase = find_phase(txt);
+  turn = find_turn(txt);
+  game_id = find_game_id(txt);
+  print("game_id=" + str(game_id));
   print("phase=" + str(phase));
+  print("turn=" + str(turn));
   print("players=" + str(players));
 
   active_player = players[phase];
   print("active_player=" + active_player);    
   active_email = find_email_address(active_player);
+  status.games[game_id] = [turn, phase, players, time.ctime()];
   if (active_email != None):
     print("active email=" + active_email);
     m = MailSender();
@@ -80,6 +86,19 @@ def find_phase(lines):
   for l in lines:
     if ("phase=" in l): return int(l[6:]);
   return None;
+
+#Returns the current turn
+def find_turn(lines):
+  for l in lines:
+    if ("turn=" == l[0:5]): return int(l[5:]);
+  return None;
+
+#Returns the game id
+def find_game_id(lines):
+  for l in lines:
+    if ("id=" == l[0:3]): return l[4:];
+  return None;
+
 
 # Returns a list of active players
 def list_players(lines):

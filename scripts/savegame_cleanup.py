@@ -8,7 +8,7 @@ import time
 import os
 import sys
 
-rootdir = "/home/andreas/freeciv-build/freeciv-web/resin/webapps/ROOT/savegames/" 
+rootdir = "/home/andreas/freeciv-build/freeciv-web/resin/webapps/data/savegames/" 
 scenario_list = ['british-isles-85x80-v2.80.sav.gz', 'iberian-peninsula-136x100-v1.0.sav.gz',
     'earth-160x90-v2.sav.gz', 'italy-100x100-v1.5.sav.gz',
     'earth-80x50-v3.sav.gz','japan-88x100-v1.3.sav.gz',

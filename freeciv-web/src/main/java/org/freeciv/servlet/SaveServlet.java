@@ -72,7 +72,7 @@ public class SaveServlet extends HttpServlet {
 
 
 		String relativeWebPath = "/savegames/" + username + ".sav.xz";
-		String absoluteDiskPath = getServletContext().getRealPath(relativeWebPath);
+		String absoluteDiskPath = getServletContext().getRealPath(relativeWebPath).replaceAll("ROOT", "data");
 		File file = new File(absoluteDiskPath);
 		if (!file.exists()) {
 	    	   response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,

@@ -50,7 +50,7 @@ function view_game_scores() {
 
 
   $.ajax({
-    url: "/scorelogs/score-" + civserverport + ".log",
+    url: "/data/scorelogs/score-" + civserverport + ".log",
     dataType: "html",
     cache: false,
     async: true

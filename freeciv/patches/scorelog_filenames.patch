@@ -7,7 +7,7 @@ index 8a3951e..181e5d3 100644
    }
  
 +  fc_snprintf(game.server.scorefile, MAX_LEN_NAME, 
-+              _("../resin/webapps/ROOT/scorelogs/score-%d.log"),
++              _("../resin/webapps/data/scorelogs/score-%d.log"),
 +              srvarg.port);
 +
    score_log = fc_calloc(1, sizeof(*score_log));

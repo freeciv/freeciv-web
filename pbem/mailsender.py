@@ -30,7 +30,7 @@ class MailSender():
   smtp_password=settings.get("Config", "smtp_password")
   smtp_host=settings.get("Config", "smtp_host")
   smtp_port=settings.get("Config", "smtp_port")
-
+  smtp_sender="Freeciv-web <postmaster@freeciv.mailgun.org>"
 
   def send_message_via_smtp(self, from_, to, mime_string):
     smtp = smtplib.SMTP(self.smtp_host, int(self.smtp_port))
@@ -39,12 +39,12 @@ class MailSender():
     smtp.quit()
 
 
-  def send_mailgun_message(self, from_, to, subject, text):
+  def send_mailgun_message(self, to, subject, text):
     msg = MIMEText(text, _charset='utf-8')
     msg['Subject'] = subject
-    msg['From'] = from_
+    msg['From'] = self.smtp_sender; 
     msg['To'] = to
-    self.send_message_via_smtp(from_, to, msg.as_string())
+    self.send_message_via_smtp(self.smtp_sender, to, msg.as_string())
 
 
   #Send the actual PBEM e-mail turn invitation message.
@@ -64,8 +64,7 @@ class MailSender():
             "here: http://forum.freeciv.org/f/viewforum.php?f=24\n\n";
     msg += "Freeciv-Web is a free and open source empire-building strategy game inspired by the history of human civilization.\n\n";
     msg += "The Freeciv-web project - https://play.freeciv.org\n\n";
-    self.send_mailgun_message("postmaster@freeciv.mailgun.org", email_address, 
-      "Freeciv-Web: It's your turn", msg);
+    self.send_mailgun_message(email_address, "Freeciv-Web: It's your turn", msg);
 
 
   # send email with ranking after game is over.
@@ -80,5 +79,4 @@ class MailSender():
     msg_loser = "To " + losers + "\nYou have lost the game of Freeciv-web against " + winner + ".\n";
     msg_loser += "Winner score: " + winner_score + "\n\n"
     msg_loser += "The Freeciv-web project - https://play.freeciv.org";
-    self.send_mailgun_message("postmaster@freeciv.mailgun.org", losers_email, 
-      "Freeciv-Web: You lost!", msg_loser);
+    self.send_mailgun_message(losers_email, "Freeciv-Web: You lost!", msg_loser);

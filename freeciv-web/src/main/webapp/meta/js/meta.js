@@ -14,7 +14,7 @@ $(document).ready(function() {
 
 function show_scores(port) {
   $.ajax({
-    url: "/scorelogs/score-" + port + ".log",
+    url: "/data/scorelogs/score-" + port + ".log",
     dataType: "html",
     cache: false,
     async: true

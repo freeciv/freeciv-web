@@ -11,6 +11,10 @@ set aifill 1
 set barbarians 0
 set minp 2
 set maxp 2
+set gold 500
+set sciencebox 50
+set startunits=ccccccwwwwwx
+set contactturns=0
 set phasemode player
 set ec_chat=enabled
 set ec_info=enabled 

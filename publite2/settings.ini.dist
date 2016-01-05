@@ -1,5 +1,5 @@
 [Config]
-save_directory = /vagrant/resin/webapps/ROOT/savegames/
+save_directory = /vagrant/resin/webapps/data/savegames/
 
 [Resource usage]
 server_capacity = 10

@@ -31,8 +31,8 @@ import shutil
 import random
 import configparser
 
-savedir = "../resin/webapps/ROOT/savegames/" 
-rankdir = "../resin/webapps/ROOT/ranklogs/" 
+savedir = "../resin/webapps/data/savegames/" 
+rankdir = "../resin/webapps/data/ranklogs/" 
 
 settings = configparser.ConfigParser()
 settings.read("settings.ini")

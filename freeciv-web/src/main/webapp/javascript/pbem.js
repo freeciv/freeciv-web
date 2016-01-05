@@ -31,11 +31,11 @@ function show_pbem_dialog()
   } else {
     message = "You are about to start a Play-by-Email game, where you "
     + "can challenge another player, and each player will be notified when "
-    + "it is their turn to play through e-mail. These are the rules:<br>" 
-    + "<ul><li>The game will have two human players playing alternating turns, competing to win using standard Freeciv-web rules.</li>"
-    + "<li>Each player will get an e-mail when it is their turn to play.</li>"
+    + "it is their turn to play through e-mail. If you are a new player, then click the create new user button below. These are the game rules:<br>" 
+    + "<ul><li>The game will have two human players playing alternating turns. Each player will get an e-mail when it is their turn to play.</li>" 
+    + "<li>Standard Freeciv-web rules are used with some changes to research speed, start units and gold to speed up games.</li>"  
     + "<li>Please complete your turn as soon as possible, and use at no longer than 7 days until you complete your turn.</li>"
-    + "<li>This is a beta-feature. Please post feedback on the <a href='http://forum.freeciv.org/f/viewforum.php?f=24'>forum</a>.</li></ul>"; 
+    + "<li>Please post feedback and arrange new games on the <a href='http://forum.freeciv.org/f/viewforum.php?f=24' style='color: black;' target='_new'>forum</a>.</li></ul>"; 
   }
 
   // reset dialog page.
@@ -91,7 +91,7 @@ function login_pbem_user()
   $("#dialog").dialog({
 			bgiframe: true,
 			modal: true,
-			width: is_small_screen() ? "80%" : "60%",
+			width: is_small_screen() ? "50%" : "40%",
 			buttons:
 			{
 				"Login" : function() {
@@ -243,7 +243,7 @@ function challenge_pbem_player_dialog()
   $("#dialog").dialog({
 			bgiframe: true,
 			modal: true,
-			width: is_small_screen() ? "80%" : "60%",
+			width: is_small_screen() ? "60%" : "40%",
 			buttons: {
 			"Invite random opponent": function() {
 			  $.ajax({

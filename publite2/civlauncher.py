@@ -28,9 +28,9 @@ class Civlauncher(Thread):
                 print("Starting new Freeciv-web server at port " + str(self.new_port) + 
                       " and Freeciv-proxy server at port " + str(1000 + self.new_port) + ".");
                 rank_cmd = "";
-                if (self.gametype=="pbem"): rank_cmd = " --Ranklog ../resin/webapps/ROOT/ranklogs/rank_"+str(self.new_port)+".log ";
+                if (self.gametype=="pbem"): rank_cmd = " --Ranklog ../resin/webapps/data/ranklogs/rank_"+str(self.new_port)+".log ";
                 retcode = call("ulimit -t 10000 && export FREECIV_SAVE_PATH=\"" + self.savesdir + "\";" +
-                               "rm -f ../resin/webapps/ROOT/scorelogs/score-" + str(self.new_port) + ".log; " +
+                               "rm -f ../resin/webapps/data/scorelogs/score-" + str(self.new_port) + ".log; " +
                                "python3.4 ../freeciv-proxy/freeciv-proxy.py " + 
                                str(1000 + self.new_port) + " > " + logdir + "freeciv-proxy-" + 
                                str(1000 + self.new_port) +".log 2>&1 " + 

@@ -10,6 +10,7 @@ Requires Resin 4.0.x web server, and Maven to build and deploy.
 Run and compile: 
 sh build.sh
 
+The build script will also create a data webapp directory where savegames and scorelogs are stored.
 
 Copyright (C) 2007-2014 Andreas Røsdal. 
 Released under the GNU AFFERO GENERAL PUBLIC LICENSE.

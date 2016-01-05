@@ -2,6 +2,8 @@
 # builds Freeciv-web and copies the war file to resin.
 
 ROOTDIR="$(pwd)/.."
+DATADIR="${ROOTDIR}/resin/webapps/data/"
+
 ( cd src/main/webapp/meta/private
   ./build_flagspec.sh ${ROOTDIR}/freeciv/freeciv/data/misc/flags.spec )
 
@@ -18,7 +20,9 @@ else
   rm -f ${ROOTDIR}/freeciv-web/src/main/webapp/build.txt
 fi
 
-#backup pbem savegames
-cp ${ROOTDIR}/resin/webapps/ROOT/savegames/pbem* /tmp
+#create data webapp for savegames.
+mkdir -p $DATADIR/savegames
+mkdir -p $DATADIR/scorelogs
+mkdir -p $DATADIR/ranklogs
 
 mvn install && cp target/freeciv-web.war "${ROOTDIR}/resin/webapps/ROOT.war"

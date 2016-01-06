@@ -48,13 +48,14 @@ class MailSender():
 
 
   #Send the actual PBEM e-mail turn invitation message.
-  def send_email(self, player_name, players, email_address, filename):
+  def send_email(self, player_name, players, email_address, filename, turn):
     print("Sending e-mail to: " + email_address);
 
     msg = "To " + player_name +"\n\n" + \
       "It is now your turn to play Freeciv-Web. You are receiving this e-mail because you " + \
       "are participating in a Play-By-Email game of Freeciv-web.\n\n" + \
-      "Please follow this link to play your turn: https://play.freeciv.org/webclient/?action=pbem&savegame="+ filename + "\n\n";
+      "Please follow this link to play your turn: " + \
+      "https://play.freeciv.org/webclient/?action=pbem&savegame="+ filename + "\n\n";
     msg += "Players in game: ";
     for p in players:
       msg += p + ", ";
@@ -62,9 +63,11 @@ class MailSender():
     msg += "Please complete your turn within 7 days, the other player will be waiting for you. ";
     msg += "Play-By-Email is currently a Beta-feature, please report any problems playing " +\
             "here: http://forum.freeciv.org/f/viewforum.php?f=24\n\n";
-    msg += "Freeciv-Web is a free and open source empire-building strategy game inspired by the history of human civilization.\n\n";
+    msg += "Freeciv-Web is a free and open source empire-building strategy game " + \
+             "inspired by the history of human civilization.\n\n";
     msg += "The Freeciv-web project - https://play.freeciv.org\n\n";
-    self.send_mailgun_message(email_address, "Freeciv-Web: It's your turn", msg);
+    self.send_mailgun_message(email_address, "Freeciv-Web: It's your turn to play! Turn: " \
+        + str(turn), msg);
 
 
   # send email with ranking after game is over.

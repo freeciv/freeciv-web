@@ -31,9 +31,9 @@ function show_pbem_dialog()
   } else {
     message = "You are about to start a Play-by-Email game, where you "
     + "can challenge another player, and each player will be notified when "
-    + "it is their turn to play through e-mail. If you are a new player, then click the create new user button below. These are the game rules:<br>" 
+    + "it is their turn to play through e-mail. If you are a new player, then click the sign up button below. These are the game rules:<br>" 
     + "<ul><li>The game will have two human players playing alternating turns. Each player will get an e-mail when it is their turn to play.</li>" 
-    + "<li>Standard Freeciv-web rules are used with some changes to research speed, start units and gold to speed up games.</li>"  
+    + "<li>Standard Freeciv-web rules are used with some changes to map size, research speed, start units and gold to speed up games.</li>"  
     + "<li>Please complete your turn as soon as possible, and use at no longer than 7 days until you complete your turn.</li>"
     + "<li>Please post feedback and arrange new games on the <a href='http://forum.freeciv.org/f/viewforum.php?f=24' style='color: black;' target='_new'>forum</a>.</li></ul>"; 
   }
@@ -49,7 +49,7 @@ function show_pbem_dialog()
 			width: is_small_screen() ? "80%" : "60%",
 			buttons:
 			{
-				"Create new user": function() {
+				"Sign up new user": function() {
                                     create_new_pbem_user();
 				},
 				"Login existing user" : function() {
@@ -118,12 +118,17 @@ function create_new_pbem_user()
 {
 
   var title = "New user account";
-  var message = "Create a new Freeciv-web user account:<br><br>"
+  var message = "Create a new Freeciv-web user account with information about yourself:<br><br>"
                 + "<table><tr><td>Username:</td><td><input id='username' type='text' size='25' onkeyup='return forceLower(this);'></td></tr>"  
                 + "<tr><td>Email:</td><td><input id='email' type='email' size='25'></td></tr>"  
                 + "<tr><td>Password:</td><td><input id='password' type='password' size='25'></td></tr></table><br>"
                 + "<div id='username_validation_result'></div><br>"
-                + "<div id='captcha_element'></div>";   
+                + "<div id='captcha_element'></div><br><br>"
+                + "<div><small><ul><li>It is free and safe to create a new account on Freeciv-web.</li>"
+                + "<li>Other players can use your username to start Play-by-email games.</li>"
+                + "<li>You will not receive any spam and your e-mail address will be kept safe.</li>"
+                + "<li>You can cancel your account at any time if you want.</li>"
+                + "</ul></small></div>";   
 
   // reset dialog page.
   $("#dialog").remove();
@@ -134,10 +139,10 @@ function create_new_pbem_user()
   $("#dialog").dialog({
 			bgiframe: true,
 			modal: true,
-			width: is_small_screen() ? "80%" : "60%",
+			width: is_small_screen() ? "60%" : "60%",
 			buttons:
 			{
-				"Create" : function() {
+				"Sign up new user" : function() {
                                   create_new_pbem_user_request();
 				}
 			}
@@ -253,7 +258,7 @@ function challenge_pbem_player_dialog()
 				$("#opponent").val(data)
 			      }  });
 			},
-			"Choose opponent": function() {
+			"Start game": function() {
                                     create_new_pbem_game($("#opponent").val());
 			 }
 			}

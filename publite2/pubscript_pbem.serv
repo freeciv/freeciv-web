@@ -5,7 +5,7 @@ set pingtime 60
 set maxconnectionsperhost 256
 set autosaves ""
 set scorelog enabled
-set size 5
+set size 4
 set landm 50
 set aifill 1
 set barbarians 0

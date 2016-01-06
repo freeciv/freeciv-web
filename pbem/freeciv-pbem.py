@@ -77,7 +77,7 @@ def handle_savegame(root, file):
   if (active_email != None):
     print("active email=" + active_email);
     m = MailSender();
-    m.send_email(active_player, players, active_email, new_filename.replace(".xz", ""));
+    m.send_email(active_player, players, active_email, new_filename.replace(".xz", ""), turn);
     status.emails_sent += 1;
 
 

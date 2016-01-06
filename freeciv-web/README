@@ -12,6 +12,6 @@ sh build.sh
 
 The build script will also create a data webapp directory where savegames and scorelogs are stored.
 
-Copyright (C) 2007-2014 Andreas Røsdal. 
+Copyright (C) 2007-2016 Andreas Røsdal. 
 Released under the GNU AFFERO GENERAL PUBLIC LICENSE.
 

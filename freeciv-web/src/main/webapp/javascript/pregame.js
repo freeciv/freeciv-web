@@ -378,8 +378,8 @@ function pregame_settings()
   $(id).attr("title", "Game Settings");
   $(id).dialog({
 			bgiframe: true,
-			modal: false,
-			width: "680",
+			modal: true,
+			width: is_small_screen() ? "98%" : "60%",
 			  buttons: {
 				Ok: function() {
 					$("#pregame_settings").dialog('close');

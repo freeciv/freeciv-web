@@ -138,7 +138,6 @@ function show_city_dialog(pcity)
 
   $("#city_canvas").click(city_mapview_mouse_click);
 
-  city_worklist_dialog(pcity);
   show_city_traderoutes();
 
   var dialog_buttons = {};
@@ -173,6 +172,7 @@ function show_city_dialog(pcity)
 			bgiframe: true,
 			modal: true,
 			width: is_small_screen() ? "98%" : "80%",
+                        height: is_small_screen() ? $(window).height() + 30 : $(window).height() - 80,
                         close : function(){
                           close_city_dialog();
                         },
@@ -195,6 +195,10 @@ function show_city_dialog(pcity)
    }
 
   $("#city_tabs").tabs({ active: city_tab_index});
+
+  $(".citydlg_tabs").height(is_small_screen() ? $(window).height() - 110 : $(window).height() - 220);
+
+  city_worklist_dialog(pcity);
 
   set_city_mapview_active();
   center_tile_mapcanvas(city_tile(pcity));
@@ -1147,18 +1151,29 @@ function city_worklist_dialog(pcity)
 
   $(".production_list_item_sub").tooltip();
 
-  $(".worklist_table").selectable({ filter: "tr",
+  if (!is_touch_device()) {
+    $(".worklist_table").selectable({ filter: "tr",
        selected: function( event, ui ) {handle_worklist_select(ui); }});
 
-  $(".kindvalue_item").dblclick(function() {
-    var value = parseFloat(jQuery(this).data('value'));
-    var kind = parseFloat(jQuery(this).data('kind'));
-    if (selected_kind >= 0 && selected_value >= 0) {
+    $(".kindvalue_item").dblclick(function() {
+      var value = parseFloat($(this).data('value'));
+      var kind = parseFloat($(this).data('kind'));
+      if (selected_kind >= 0 && selected_value >= 0) {
+        send_city_worklist_add(pcity['id'], kind, value);
+      }
+    });
+  } else {
+    $(".kindvalue_item").click(function() {
+      var value = parseFloat($(this).data('value'));
+      var kind = parseFloat($(this).data('kind'));
       send_city_worklist_add(pcity['id'], kind, value);
-    }
-  });
-  $(".button").button();
+    });
+    $("#prod_buttons").hide();
+  }
 
+  $(".button").button();
+  $("#city_current_worklist").height($("#city_production_tab").height() - 140);
+  $("#worklist_production_choices").height($("#city_production_tab").height() - 100);
 }
 
 /**************************************************************************

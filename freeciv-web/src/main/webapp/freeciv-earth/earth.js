@@ -77,9 +77,9 @@ function get_map_terrain_type(pixel)
   if (pixel_color(204, 99, 40, pixel, 100)) return "d"; //desert
   if (pixel_color(67, 72, 31, pixel, 10)) return "m"; //mountains
   if (pixel_color(61, 79, 31, pixel, 10)) return "h"; //hills
-  if (pixel_color(4, 10, 20, pixel, 10)) return ":";  //ocean
-  if (pixel_color(8, 20, 36, pixel, 10)) return " ";  //coast
-  if (pixel_color(39, 57, 61, pixel, 30)) return " ";  //coast
+  if (pixel_color(4, 10, 20, pixel, 15)) return ":";  //ocean
+  if (pixel_color(8, 20, 36, pixel, 15)) return " ";  //coast
+  if (pixel_color(39, 57, 61, pixel, 35)) return " ";  //coast
 
   if (rnd < 3) return "p"; //plains
   if (rnd >= 3 && rnd <= 5) return "h";  //hills

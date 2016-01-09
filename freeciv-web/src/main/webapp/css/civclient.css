@@ -654,7 +654,7 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 
 #worklist_right {
   float: right;
-  width: 45%;
+  width: 50%;
 }
 
 .prod_choice_list_item {
@@ -816,7 +816,7 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 
 #prod_descr {
   padding: 10px;
-  margin-left: 65px;
+  margin-left: 55px;
 }
 
 

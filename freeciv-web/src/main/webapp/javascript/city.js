@@ -45,6 +45,7 @@ var MAX_LEN_WORKLIST = 64;
 var INCITE_IMPOSSIBLE_COST = (1000 * 1000 * 1000);
 
 var city_tab_index = 0;
+var city_prod_clicks = 0;
 
 /**************************************************************************
  ...
@@ -114,6 +115,7 @@ function show_city_dialog_by_id(pcity_id)
 function show_city_dialog(pcity)
 {
   var turns_to_complete = FC_INFINITY;
+  if (active_city != pcity || active_city == null) city_prod_clicks = 0;
   active_city = pcity;
 
   if (pcity == null) return;
@@ -172,7 +174,7 @@ function show_city_dialog(pcity)
 			bgiframe: true,
 			modal: true,
 			width: is_small_screen() ? "98%" : "80%",
-                        height: is_small_screen() ? $(window).height() + 30 : $(window).height() - 80,
+                        height: is_small_screen() ? $(window).height() + 10 : $(window).height() - 80,
                         close : function(){
                           close_city_dialog();
                         },
@@ -1049,8 +1051,8 @@ function show_city_traderoutes()
 function city_worklist_dialog(pcity)
 {
   if (pcity == null) return;
-
   var universals_list = [];
+
   if (pcity['worklist'] != null && pcity['worklist'] != "-") {
     var work_list = pcity['worklist'].split(";");
     for (var i = 0; i < work_list.length; i++) {
@@ -1166,13 +1168,20 @@ function city_worklist_dialog(pcity)
     $(".kindvalue_item").click(function() {
       var value = parseFloat($(this).data('value'));
       var kind = parseFloat($(this).data('kind'));
-      send_city_worklist_add(pcity['id'], kind, value);
+      if (city_prod_clicks == 0) {
+        send_city_change(pcity['id'], kind, value);
+      } else {
+        send_city_worklist_add(pcity['id'], kind, value);
+      }
+      city_tab_index = 1;
+      city_prod_clicks += 1;
+
     });
-    $("#prod_buttons").hide();
+    $("#prod_buttons").html("<x-small>Click to change production, next clicks will add to worklist on mobile.</x-small>");
   }
 
   $(".button").button();
-  $("#city_current_worklist").height($("#city_production_tab").height() - 140);
+  $("#city_current_worklist").height($("#city_production_tab").height() - 150);
   $("#worklist_production_choices").height($("#city_production_tab").height() - 100);
 }
 

@@ -104,9 +104,19 @@ function login_pbem_user()
   if (stored_username != null && stored_username != false) {
     $("#username").val(stored_username);
   }
-
+  var stored_password = simpleStorage.get("password", "");
+  if (stored_password != null && stored_password != false) {
+    $("#password").val(stored_password);
+  }
 
   $("#dialog").dialog('open');
+
+  $('#dialog').keyup(function(e) {
+    if (e.keyCode == 13) {
+      login_pbem_user_request();
+    }
+  });
+
 }
 
 
@@ -194,6 +204,7 @@ function create_new_pbem_user_request()
    url: "/create_pbem_user?username=" + username + "&email=" + email + "&password=" + password + "&captcha=" + captcha,
    success: function(data, textStatus, request){
        simpleStorage.set("username", username);
+       simpleStorage.set("password", password);
        challenge_pbem_player_dialog();
       },
    error: function (request, textStatus, errorThrown) {
@@ -217,6 +228,7 @@ function login_pbem_user_request()
    url: "/login_user?username=" + username + "&password=" + password ,
    success: function(data, textStatus, request){
        simpleStorage.set("username", username);
+       simpleStorage.set("password", password);
        if ($.getUrlVar('savegame') != null) {
          handle_pbem_load();
        } else {

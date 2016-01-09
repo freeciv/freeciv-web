@@ -31,6 +31,8 @@ ps aux | grep -ie freeciv-proxy | awk '{print $2}' | xargs kill -9
 #5 Freeciv-PBEM
 ps aux | grep -ie freeciv-pbem | awk '{print $2}' | xargs kill -9 
 
+#5 Freeciv-Earth
+ps aux | grep -ie freeciv-earth | awk '{print $2}' | xargs kill -9 
 
 # Clean up server list in metaserver database.
 echo "delete from servers" | mysql -u ${MYSQL_USER} -p${MYSQL_PASSWORD} freeciv_web

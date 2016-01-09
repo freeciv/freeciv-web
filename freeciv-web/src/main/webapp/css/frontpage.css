@@ -112,8 +112,9 @@ table, th, td
 }
 
 
-.btn-info {
-  margin: 6px;
+.btn {
+  margin: 4px;
+  padding: 8px;
 }
 
 .footer {

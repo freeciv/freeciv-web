@@ -163,6 +163,11 @@ function init_common_intro_dialog() {
   } else if (is_small_screen()) {
     show_intro_dialog("Welcome to Freeciv-web",
       "You are about to join the game. Please enter your name:");
+  } else if ($.getUrlVar('action') == "earthload") {
+    show_intro_dialog("Welcome to Freeciv-web",
+      "You can now play Freeciv-web on the earth map you have chosen. " +
+      "Please enter your name: ");
+
   } else if ($.getUrlVar('action') == "load") {
     show_intro_dialog("Welcome to Freeciv-web",
       "You are about to join this game server, where you can " +
@@ -436,7 +441,7 @@ function show_intro_dialog(title, message) {
 
 		});
 
-  if (($.getUrlVar('action') == "load" || $.getUrlVar('action') == "multi")
+  if (($.getUrlVar('action') == "load" || $.getUrlVar('action') == "multi" || $.getUrlVar('action') == "earthload")
          && $.getUrlVar('load') != "tutorial") {
     $(".ui-dialog-buttonset button").first().hide();
   }

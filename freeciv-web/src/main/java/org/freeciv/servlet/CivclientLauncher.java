@@ -56,7 +56,8 @@ public class CivclientLauncher extends HttpServlet {
             DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
             conn = ds.getConnection();
 
-            if (!action.equals("multi") && (action.equals("new") || action.equals("load") || action.equals("pbem"))) {
+            if (!action.equals("multi") && (action.equals("new") || action.equals("load") || action.equals("pbem") 
+                || action.equals("earthload"))) {
                String gametype = "singleplayer";
                if (action.equals("pbem")) gametype = "pbem"; 
 

@@ -45,6 +45,9 @@ echo "Publite2 started" && \
 echo "Starting Freeciv-PBEM" && \
 cd ${FREECIV_WEB_DIR}/pbem/ && nohup python3.4 -u freeciv-pbem.py > ../logs/freeciv-pbem.log 2>&1 || echo "unable to start freeciv-pbem" & 
 
+echo "Starting Freeciv-Earth-mapgen." && \
+cd ${FREECIV_WEB_DIR}/freeciv-earth/ && nohup python3.4 -u freeciv-earth-mapgen.py > ../logs/freeciv-earth.log 2>&1 || echo "unable to start freeciv-earth-mapgen" & 
+
 echo "Will sleep for 8 seconds, then do a status test..." && \
 sleep 8 && \
 cd ${FREECIV_WEB_DIR}/scripts/ && bash meta-sync.sh && \

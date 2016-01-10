@@ -17,67 +17,6 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
  
  /* generator */
  #include "utilities.h"
-@@ -457,6 +459,20 @@
- }
- 
- /**************************************************************************
-+  Fill bases string describing tile extras to web-client.
-+**************************************************************************/
-+static void build_extras_string(char *buffer, bv_extras *extras)
-+{
-+  int i = 0;
-+
-+  extra_type_iterate(pextra) {
-+    buffer[i++] = BV_ISSET(*extras, extra_index(pextra)) ? '1' : '0';
-+  } extra_type_iterate_end;
-+
-+  buffer[i] = '\0';
-+}
-+
-+/**************************************************************************
-   Send tile information to all the clients in dest which know and see
-   the tile. If dest is NULL, sends to all clients (game.est_connections)
-   which know and see tile.
-@@ -512,7 +528,7 @@
-                        ? resource_number(tile_resource(ptile))
-                        : resource_count();
- 
--      info.extras = ptile->extras;
-+      build_extras_string(info.extras, &ptile->extras);
- 
-       if (ptile->label != NULL) {
-         strncpy(info.label, ptile->label, sizeof(info.label));
-@@ -544,7 +560,7 @@
-                        ? resource_number(plrtile->resource)
-                        : resource_count();
- 
--      info.extras = plrtile->extras;
-+      build_extras_string(info.extras, &plrtile->extras);
- 
-       /* Labels never change, so they are not subject to fog of war */
-       if (ptile->label != NULL) {
-@@ -555,6 +571,8 @@
- 
-       send_packet_tile_info(pconn, &info);
-     } else if (send_unknown) {
-+      int i;
-+
-       info.known = TILE_UNKNOWN;
-       info.continent = 0;
-       info.owner = MAP_TILE_OWNER_NULL;
-@@ -564,7 +582,11 @@
-       info.terrain = terrain_count();
-       info.resource = resource_count();
- 
--      BV_CLR_ALL(info.extras);
-+      i = 0;
-+      for (i = 0; i < game.control.num_extra_types; i++) {
-+        info.extras[i++] = '0';
-+      }
-+      info.extras[i] = '\0';
- 
-       info.label[0] = '\0';
- 
 @@ -2233,3 +2255,328 @@
  
    unbuffer_shared_vision(pto);

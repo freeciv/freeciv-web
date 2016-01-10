@@ -39,13 +39,17 @@ function tile_get_known(ptile)
 
 }
 
+/**************************************************************************
+  Returns true iff the specified tile has the extra with the specified
+  extra number.
+**************************************************************************/
 function tile_has_extra(ptile, extra)
 {
-  if (ptile['extras'] == null || ptile['extras'][extra] == null) {
+  if (ptile['extras'] == null) {
     return false;
   }
 
-  return ptile['extras'][extra] == 1;
+  return ptile['extras'].isSet(extra);
 }
 
 function tile_resource(tile)

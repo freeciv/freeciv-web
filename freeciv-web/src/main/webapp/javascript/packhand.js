@@ -144,6 +144,7 @@ function handle_ruleset_resource(packet)
 function handle_tile_info(packet)
 {
   if (tiles != null) {
+    packet['extras'] = new BitVector(packet['extras']);
     tiles[packet['tile']] = $.extend(tiles[packet['tile']], packet);
   }
 }

@@ -26,15 +26,6 @@ index b0e07fc..e0ab80b 100644
  type GOLD               = UINT32
  type HP                 = UINT8
  type PERCENT            = UINT8
-@@ -422,7 +422,7 @@ PACKET_TILE_INFO = 15; sc, lsend, is-game-info
- 
-   TERRAIN terrain;
-   RESOURCE resource;
--  BV_EXTRAS extras;
-+  STRING extras[MAX_EXTRA_TYPES];
-   STRING spec_sprite[MAX_LEN_NAME];
-   STRING label[MAX_LEN_NAME];
- end
 @@ -431,6 +431,7 @@ end
  PACKET_GAME_INFO = 16; sc, is-info
    UINT8 add_to_size_limit;

@@ -182,6 +182,8 @@ function handle_city_info(packet)
   /* Decode the city name. */
   packet['name'] = decodeURIComponent(packet['name']);
 
+  /* Decode bit vectors. */
+  packet['improvements'] = new BitVector(packet['improvements']);
   packet['city_options'] = new BitVector(packet['city_options']);
 
   if (cities[packet['id']] == null) {
@@ -214,6 +216,9 @@ function handle_city_short_info(packet)
 {
   /* Decode the city name. */
   packet['name'] = decodeURIComponent(packet['name']);
+
+  /* Decode bit vectors. */
+  packet['improvements'] = new BitVector(packet['improvements']);
 
   if (cities[packet['id']] == null) {
     cities[packet['id']] = packet;

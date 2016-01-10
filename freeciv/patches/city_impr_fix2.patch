@@ -1,19 +1,18 @@
 diff -Nurd -X.diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
 --- freeciv/server/citytools.c	2012-05-16 21:02:54.000000000 +0300
 +++ freeciv/server/citytools.c	2012-05-16 21:05:39.000000000 +0300
-@@ -1801,6 +1801,8 @@
+@@ -1801,5 +1801,7 @@
    int i;
    int ppl = 0;
-   char impr_buf[MAX_NUM_ITEMS + 1];
 +  char can_build_impr_buf[MAX_NUM_ITEMS + 1];
 +  char can_build_unit_buf[MAX_NUM_ITEMS + 1];
  
    packet->id=pcity->id;
    packet->owner = player_number(city_owner(pcity));
 @@ -1898,6 +1900,23 @@
-   packet->walls = city_got_citywalls(pcity);
+   packet->city_image = get_city_bonus(pcity, EFT_CITY_IMAGE);
  
-   improvement_iterate(pimprove) {
++  improvement_iterate(pimprove) {
 +    can_build_impr_buf[improvement_index(pimprove)] = 
 +	    can_city_build_improvement_now(pcity, pimprove)
 +      ? '1' : '0';
@@ -30,7 +29,7 @@ diff -Nurd -X.diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
 +  sz_strlcpy(packet->can_build_unit, can_build_unit_buf);
 +
 +
-+  improvement_iterate(pimprove) {
-     impr_buf[improvement_index(pimprove)] = city_has_building(pcity, pimprove)
-       ? '1' : '0';
-   } improvement_iterate_end;
+   BV_CLR_ALL(packet->improvements);
+   improvement_iterate(pimprove) {
+     if (city_has_building(pcity, pimprove)) {
+       BV_SET(packet->improvements, improvement_index(pimprove));

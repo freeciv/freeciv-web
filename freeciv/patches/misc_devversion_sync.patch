@@ -1,8 +1,7 @@
 diff -Nurd -X.diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
 --- freeciv/server/citytools.c	2012-07-16 00:05:33.000000000 +0300
 +++ freeciv/server/citytools.c	2012-07-16 01:09:07.000000000 +0300
-@@ -1887,6 +1887,11 @@
-   char impr_buf[MAX_NUM_ITEMS + 1];
+@@ -1887,5 +1887,10 @@
    char can_build_impr_buf[MAX_NUM_ITEMS + 1];
    char can_build_unit_buf[MAX_NUM_ITEMS + 1];
 +  char food_output_buf[MAX_NUM_ITEMS + 1];
@@ -21,11 +20,10 @@ diff -Nurd -X.diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
  
    packet->walls = city_got_citywalls(pcity);
  
-@@ -2007,7 +2013,28 @@
+@@ -2007,6 +2013,28 @@
+       BV_SET(packet->improvements, improvement_index(pimprove));
+     }
    } improvement_iterate_end;
-   impr_buf[improvement_count()] = '\0';
-   sz_strlcpy(packet->improvements, impr_buf);
--  
 +
 +  city_tile_iterate(city_map_radius_sq_get(pcity), pcenter, ptile) {
 +    char f[2];

@@ -223,8 +223,8 @@ function show_city_dialog(pcity)
   }
 
   var improvements_html = "";
-  for (var z = 0; z < pcity['improvements'].length; z ++) {
-    if (pcity['improvements'][z] == 1) {
+  for (var z = 0; z < ruleset_control.num_impr_types; z ++) {
+    if (pcity['improvements'].isSet(z)) {
        var sprite = get_improvement_image_sprite(improvements[z]);
        if (sprite == null) {
          console.log("Missing sprite for improvement " + z);
@@ -514,8 +514,8 @@ function can_city_build_improvement_now(pcity, pimprove)
 **************************************************************************/
 function city_has_building(pcity, improvement_id)
 {
-  for (var z = 0; z < pcity['improvements'].length; z ++) {
-    if (pcity['improvements'][z] == 1 && z == improvement_id) {
+  for (var z = 0; z < ruleset_control.num_impr_types; z ++) {
+    if (pcity['improvements'].isSet(z) && z == improvement_id) {
       return true;
     }
   }
@@ -679,8 +679,8 @@ function does_city_have_improvement(pcity, improvement_name)
 {
   if (pcity == null || pcity['improvements'] == null) return false;
 
-  for (var z = 0; z < pcity['improvements'].length; z++) {
-    if (pcity['improvements'][z] == 1 && improvements[z] != null
+  for (var z = 0; z < ruleset_control.num_impr_types; z++) {
+    if (pcity['improvements'].isSet(z) && improvements[z] != null
         && improvements[z]['name'] == improvement_name) {
       return true;
     }

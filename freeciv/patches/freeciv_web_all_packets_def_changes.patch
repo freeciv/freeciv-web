@@ -59,10 +59,9 @@ index b0e07fc..e0ab80b 100644
 -  WORKLIST worklist;
 +  WORKLIST worklist[MAX_LEN_WORKLIST_WEB];
  
--  BV_IMPRS improvements;
 +  STRING can_build_unit[MAX_LEN_MSG];
 +  STRING can_build_improvement[MAX_LEN_MSG];
-+  STRING improvements[MAX_LEN_MSG];
+   BV_IMPRS improvements;
 +
 +  STRING food_output[MAX_LEN_MSG];
 +  STRING shield_output[MAX_LEN_MSG];
@@ -73,15 +72,6 @@ index b0e07fc..e0ab80b 100644
  end
  
  PACKET_CITY_SHORT_INFO = 32; sc, lsend, is-game-info, cancel(PACKET_CITY_INFO)
-@@ -675,7 +688,7 @@ PACKET_CITY_SHORT_INFO = 32; sc, lsend, is-game-info, cancel(PACKET_CITY_INFO)
- 
-   SINT8 city_image;
- 
--  BV_IMPRS improvements;
-+  STRING improvements[MAX_LEN_MSG];
-   ESTRING name[MAX_LEN_NAME];
- end
- 
 @@ -704,7 +717,7 @@ end
  
  PACKET_CITY_WORKLIST = 36; cs, dsend

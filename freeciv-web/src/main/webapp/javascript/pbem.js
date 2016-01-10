@@ -47,13 +47,13 @@ function show_pbem_dialog()
   $("#dialog").dialog({
 			bgiframe: true,
 			modal: true,
-			width: is_small_screen() ? "80%" : "60%",
+			width: is_small_screen() ? "95%" : "60%",
 			buttons:
 			{
 				"Sign up new user": function() {
                                     create_new_pbem_user();
 				},
-				"Login existing user" : function() {
+				"Log In" : function() {
                                     login_pbem_user();
 				},
 				  "Close account": function() {
@@ -101,7 +101,7 @@ function login_pbem_user()
   $("#dialog").dialog({
 			bgiframe: true,
 			modal: true,
-			width: is_small_screen() ? "50%" : "40%",
+			width: is_small_screen() ? "80%" : "40%",
 			buttons:
 			{
 				"Login" : function() {
@@ -159,7 +159,7 @@ function create_new_pbem_user()
   $("#dialog").dialog({
 			bgiframe: true,
 			modal: true,
-			width: is_small_screen() ? "60%" : "60%",
+			width: is_small_screen() ? "90%" : "60%",
 			buttons:
 			{
 				"Sign up new user" : function() {
@@ -270,7 +270,7 @@ function challenge_pbem_player_dialog()
   $("#dialog").dialog({
 			bgiframe: true,
 			modal: true,
-			width: is_small_screen() ? "60%" : "40%",
+			width: is_small_screen() ? "80%" : "40%",
 			buttons: {
 			"Invite random opponent": function() {
 			  $.ajax({

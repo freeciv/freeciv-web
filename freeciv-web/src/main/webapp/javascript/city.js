@@ -1028,7 +1028,7 @@ function show_city_traderoutes()
 
     tcity_id = routes[i]['partner'];
 
-    if (tcity_id == 0) {
+    if (tcity_id == 0 || tcity_id == null) {
       continue;
     }
 

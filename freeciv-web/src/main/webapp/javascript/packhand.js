@@ -190,7 +190,9 @@ function handle_city_info(packet)
   }
 
   /* manually update tile relation.*/
-  tiles[packet['tile']]['worked'] = packet['id'];
+  if (tiles[packet['tile']] != null) {
+    tiles[packet['tile']]['worked'] = packet['id'];
+  }
 
   if (active_city != null) {
     show_city_dialog(active_city);

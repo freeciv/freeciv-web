@@ -117,7 +117,7 @@ function show_new_game_message()
       "Click on units for giving them orders, and drag units on the map to move them.\n" +
       "Good luck, and have a lot of fun!");
 
-  } else  {
+  } else if (client.conn.playing != null) {
     var pplayer = client.conn.playing;
     var player_nation_text = "Welcome, " + username + " ruler of the " 
         + nations[pplayer['nation']]['adjective'] + " empire.";

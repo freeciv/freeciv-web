@@ -120,6 +120,10 @@ function init_tech_screen()
   if (is_tech_tree_init) return;
 
   tech_canvas = document.getElementById('tech_canvas');
+  if (tech_canvas == null) {
+    console.log("unable to find tech canvas.");
+    return;
+  }
   tech_canvas_ctx = tech_canvas.getContext("2d");
   if ("mozImageSmoothingEnabled" in tech_canvas_ctx) {
     // if this Boolean value is false, images won't be smoothed when scaled. This property is true by default.

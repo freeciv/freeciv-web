@@ -102,7 +102,8 @@ cd ${basedir}/freeciv-web && sudo -u vagrant ./setup.sh
 
 echo "=============================="
 
-pip3 install --allow-external mysql-connector-python mysql-connector-python
+# FIXME: this command fails.
+#pip3 install --allow-external mysql-connector-python mysql-connector-python
 cp ${basedir}/pbem/settings.ini.dist ${basedir}/pbem/settings.ini
 
 service nginx stop

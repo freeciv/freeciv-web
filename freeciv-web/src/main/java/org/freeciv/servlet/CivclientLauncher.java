@@ -72,11 +72,19 @@ public class CivclientLauncher extends HttpServlet {
                 } else {
                     response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
                             "No servers available for creating a new game on.");
+                    return;
                 }
             }
 
 		  /* Validate port */
             PreparedStatement stmt = conn.prepareStatement("SELECT count(*) FROM servers WHERE port = ?");
+            if (civServerPort == null) {
+              response.setHeader("result", "invalid port validation");
+              response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
+                            "Unable to find a valid Freeciv server to play on. Please try again later.");
+              return;
+            }
+
             stmt.setInt(1, Integer.parseInt(civServerPort));
             ResultSet rs = stmt.executeQuery();
             rs.next();

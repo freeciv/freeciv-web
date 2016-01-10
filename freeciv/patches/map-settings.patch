@@ -5,9 +5,9 @@ diff -Nurd -X.diff_ignore freeciv/server/gamehand.c freeciv/server/gamehand.c
      ginfo.seconds_to_phasedone = -1.0;
    }
  
-+  ginfo.mapsize = map.server.size;
++  ginfo.mapsize = game.map.server.size;
 +
-+  ginfo.mapsize = map.server.size;
++  ginfo.mapsize = game.map.server.size;
 +  sz_strlcpy(ginfo.meta_message, game.server.meta_info.user_message);
 +
    conn_list_iterate(dest, pconn) {

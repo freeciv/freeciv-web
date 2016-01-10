@@ -31,18 +31,14 @@ import javax.naming.*;
 
 
 /**
- * Deactivate a user account.
+ * Counts number of users.
  */
-public class DeactivateUser extends HttpServlet {
+public class UserCount extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @SuppressWarnings("unchecked")
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
-
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-       
 
        Connection conn = null;
         try {
@@ -50,22 +46,20 @@ public class DeactivateUser extends HttpServlet {
             DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
             conn = ds.getConnection();
 
-            String pwdSQL = "UPDATE auth set activated='0' where username = ? and password = ?";
-            PreparedStatement preparedStatement = conn.prepareStatement(pwdSQL);
-            preparedStatement.setString(1, username);
-            preparedStatement.setString(2, password);
-            int no_updated = preparedStatement.executeUpdate();
-            if (no_updated == 1) { 
-            	response.getOutputStream().print("OK!");
-            } else {
-            	response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Unable to deactivate user.");
+            String countSQL = "SELECT count(*) FROM `auth`";
+            PreparedStatement preparedStatement = conn.prepareStatement(countSQL);
+            ResultSet rs = preparedStatement.executeQuery();
+            rs.next();
+            if (rs != null) {
+              response.getOutputStream().print(rs.getString(1));
+              return;
             }
 
 
       } catch (Exception err) {
             response.setHeader("result", "error");
             err.printStackTrace();
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Unable to login");
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Unable to count users");
             return;
         } finally {
             if (conn != null)

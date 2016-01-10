@@ -35,7 +35,8 @@ function show_pbem_dialog()
     + "<ul><li>The game will have two human players playing alternating turns. Each player will get an e-mail when it is their turn to play.</li>" 
     + "<li>Standard Freeciv-web rules are used with some changes to map size, research speed, start units and gold to speed up games.</li>"  
     + "<li>Please complete your turn as soon as possible, and use at no longer than 7 days until you complete your turn.</li>"
-    + "<li>Please post feedback and arrange new games on the <a href='http://forum.freeciv.org/f/viewforum.php?f=24' style='color: black;' target='_new'>forum</a>.</li></ul>"; 
+    + "<li>Please post feedback and arrange new games on the <a href='http://forum.freeciv.org/f/viewforum.php?f=24' style='color: black;' target='_new'>forum</a>.</li>"
+    + "<li id='user_count'></li></ul>"; 
   }
 
   // reset dialog page.
@@ -68,6 +69,15 @@ function show_pbem_dialog()
 		});
 
   $("#dialog").dialog('open');
+
+  $.ajax({
+   type: 'POST',
+   url: "/user_count" ,
+   success: function(data, textStatus, request){
+	$("#user_count").html("We are now " + data + " players available for Play-By-Email games.");
+   }  });
+
+
 }
 
 /**************************************************************************
@@ -135,7 +145,7 @@ function create_new_pbem_user()
                 + "<div id='username_validation_result'></div><br>"
                 + "<div id='captcha_element'></div><br><br>"
                 + "<div><small><ul><li>It is free and safe to create a new account on Freeciv-web.</li>"
-                + "<li>Other players can use your username to start Play-by-email games.</li>"
+                + "<li>Other players can use your username to start Play-by-email games with you.</li>"
                 + "<li>You will not receive any spam and your e-mail address will be kept safe.</li>"
                 + "<li>You can cancel your account at any time if you want.</li>"
                 + "</ul></small></div>";   

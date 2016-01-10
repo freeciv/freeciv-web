@@ -51,12 +51,12 @@ function load_game_check()
     $.blockUI();
     loadTimerId = setTimeout("load_game_real('tutorial');",
                                   1500);
-    setTimeout(load_game_toggle,2500);
+    setTimeout(load_game_toggle,3500);
   } else if ($.getUrlVar('action') == "earthload") {
     $.blockUI();
     loadTimerId = setTimeout("load_game_real('" + $.getUrlVar('savegame') + "');",
                                   1500);
-    setTimeout(load_game_toggle,2500);
+    setTimeout(load_game_toggle,3500);
 
   } else if (load_game_id != -1) {
     $.blockUI();

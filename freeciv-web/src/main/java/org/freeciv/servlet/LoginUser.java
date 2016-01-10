@@ -20,8 +20,6 @@
 
 package org.freeciv.servlet;
 
-import java.util.regex.*;
-
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;

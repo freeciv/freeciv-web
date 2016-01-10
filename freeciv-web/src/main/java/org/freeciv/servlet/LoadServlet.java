@@ -20,9 +20,6 @@
 
 package org.freeciv.servlet;
 
-import java.security.MessageDigest;
-
-
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -34,7 +31,6 @@ import java.util.regex.*;
 import javax.sql.*;
 import javax.naming.*;
 
-import java.io.StringWriter;
 import org.apache.commons.io.*;
 import org.apache.commons.codec.digest.DigestUtils;
 import java.nio.charset.Charset;

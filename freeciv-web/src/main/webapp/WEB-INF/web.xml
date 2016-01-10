@@ -85,6 +85,18 @@
     <url-pattern>/random_user</url-pattern>
   </servlet-mapping>
 
+  <!-- /user_count   -->
+  <servlet>
+    <servlet-name>UserCount</servlet-name>
+    <servlet-class>org.freeciv.servlet.UserCount</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>UserCount</servlet-name>
+    <url-pattern>/user_count</url-pattern>
+  </servlet-mapping>
+
+
   <!-- /deactivate_user   -->
   <servlet>
     <servlet-name>DeactivateUser</servlet-name>

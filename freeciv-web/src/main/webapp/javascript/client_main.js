@@ -206,10 +206,11 @@ function show_endgame_dialog()
 function update_metamessage_on_gamestart()
 {
   if (!observing && !metamessage_changed && client.conn.playing != null
-      && client.conn.playing['pid'] == players[0]['pid']) {
+      && client.conn.playing['pid'] == players[0]['pid'] 
+      && $.getUrlVar('action') == "new") {
     var pplayer = client.conn.playing;
     var metasuggest = username + " ruler of the " + nations[pplayer['nation']]['adjective'] + " empire.";
     send_message("/metamessage " + metasuggest);
-    setTimeout("chatbox_text = ' '; add_chatbox_text('');", 500);
+    setTimeout("chatbox_text = ' '; add_chatbox_text('');", 800);
   }
 }

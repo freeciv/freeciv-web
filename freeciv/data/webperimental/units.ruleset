@@ -237,6 +237,11 @@ flags         = "Unreachable", "DoesntOccupyTile"
 ; bonuses.flag  = flag of the unit that bonus applies against
 ; bonuses.type  = type of the bonus. See below
 ; bonuses.value = value of the bonus. Sum of these is used if multiple apply.
+; bonuses.quiet = don't auto generate help text for this bonus. Use this if
+;                 the bonus is documented in the unit type's help text.
+;                 This is useful when the combination of a unit's bonuses
+;                 becomes complex enough to make the auto generated help
+;                 ugly or inaccurate.
 ; flags         = special flag strings; list of built-in flags described below
 ;                 and/or user flags defined above
 ;

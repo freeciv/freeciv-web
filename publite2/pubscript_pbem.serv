@@ -8,7 +8,8 @@ set scorelog enabled
 set size 4
 set landm 50
 set aifill 1
-set barbarians 0
+set onsetbarbs 5000
+set barbarians disabled
 set minp 2
 set maxp 2
 set gold 500

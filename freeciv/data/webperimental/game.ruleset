@@ -237,8 +237,8 @@ ui_name_bribe_unit = _("%sBribe Enemy Unit%s")
 ; /* TRANS: _Sabotage City (3% chance of success). */
 ui_name_sabotage_city = _("%sSabotage City%s")
 
-; /* TRANS: Industria_l Sabotage (3% chance of success). */
-ui_name_targeted_sabotage_city = _("Industria%sl Sabotage%s")
+; /* TRANS: Industrial _Sabotage (3% chance of success). */
+ui_name_targeted_sabotage_city = _("Industrial %sSabotage%s")
 
 ; /* TRANS: Incite a _Revolt (3% chance of success). */
 ui_name_incite_city = _("Incite a %sRevolt%s")
@@ -249,8 +249,8 @@ ui_name_establish_embassy = _("Establish %sEmbassy%s")
 ; /* TRANS: Steal _Technology (3% chance of success). */
 ui_name_steal_tech = _("Steal %sTechnology%s")
 
-; /* TRANS: In_dustrial Espionage (3% chance of success). */
-ui_name_targeted_steal_tech = _("In%sdustrial Espionage%s")
+; /* TRANS: Indus_trial Espionage (3% chance of success). */
+ui_name_targeted_steal_tech = _("Indus%strial Espionage%s")
 
 ; /* TRANS: _Investigate City (100% chance of success). */
 ui_name_investigate_city = _("%sInvestigate City%s")

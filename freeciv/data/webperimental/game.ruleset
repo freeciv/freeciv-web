@@ -877,4 +877,5 @@ set =
     "topology", "WRAPX", TRUE
     "nationset", "all", TRUE
     "compresstype", "xz", TRUE
+    "traitdistribution", "EVEN", FALSE
   }

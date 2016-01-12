@@ -32,10 +32,13 @@ default_government = "Despotism"
 [default_traits]
 expansionist_min = 30
 expansionist_max = 85
+expansionist_default = 50
 trader_min = 30
 trader_max = 85
+trader_default = 50
 aggressive_min = 30
 aggressive_max = 85
+aggressive_default = 50
 
 ; Please keep [ruledit] section in sync with these includes
 *include "default/nationlist.ruleset"

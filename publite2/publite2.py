@@ -36,7 +36,7 @@ statuspath =  "/meta/status.php"
 settings_file = "settings.ini"
 game_types = ["singleplayer", "multiplayer", "pbem"]
 
-metachecker_interval = 60
+metachecker_interval = 40
 port = 6000
 
 # The Metachecker class connects to the Freeciv-web metaserver, gets the number of available
@@ -50,12 +50,17 @@ class metachecker():
         sys.exit(1)
       settings = configparser.ConfigParser()
       settings.read(settings_file)
-      self.server_capacity = int(settings.get("Resource usage", "server_capacity",
-                                              fallback = 10))
+      self.server_capacity_single = int(settings.get("Resource usage", "server_capacity_single",
+                                              fallback = 5))
+      self.server_capacity_multi = int(settings.get("Resource usage", "server_capacity_multi",
+                                              fallback = 2))
+      self.server_capacity_pbem = int(settings.get("Resource usage", "server_capacity_pbem",
+                                              fallback = 2))
+
       self.server_limit = int(settings.get("Resource usage", "server_limit",
                                            fallback = 250))
       self.savesdir = settings.get("Config", "save_directory",
-                                   fallback = "/vagrant/resin/webapps/ROOT/savegames/")
+                                   fallback = "/vagrant/resin/webapps/data/savegames/")
       self.check_count = 0;
       self.total = 0;
       self.single = 0;
@@ -90,7 +95,7 @@ class metachecker():
                       + " servers (the server limit) but according to the"
                       + " metaserver it has found none.");
 
-              while (self.single < self.server_capacity
+              while (self.single < self.server_capacity_single
                      and self.total <= self.server_limit
                      and not fork_bomb_preventer):
                 time.sleep(1)
@@ -101,7 +106,7 @@ class metachecker():
                 self.total += 1;
                 self.single += 1;
  
-              while (self.multi < self.server_capacity
+              while (self.multi < self.server_capacity_multi
                      and self.total <= self.server_limit
                      and not fork_bomb_preventer):
                 time.sleep(1)
@@ -112,7 +117,7 @@ class metachecker():
                 self.total += 1;
                 self.multi += 1;
 
-              while (self.pbem < self.server_capacity
+              while (self.pbem < self.server_capacity_pbem
                      and self.total <= self.server_limit
                      and not fork_bomb_preventer):
                 time.sleep(1)
@@ -152,11 +157,10 @@ if __name__ == '__main__':
   # start the initial Freeciv-web servers
   mc = metachecker()
   for type in game_types:
-    for srv_num in range(mc.server_capacity):
-      new_server = Civlauncher(type, port, metahost + metapath, mc.savesdir)
-      mc.server_list.append(new_server);
-      new_server.start();
-      port += 1;
+    new_server = Civlauncher(type, port, metahost + metapath, mc.savesdir)
+    mc.server_list.append(new_server);
+    new_server.start();
+    port += 1;
 
   print("Publite2 started!");
   time.sleep(20);

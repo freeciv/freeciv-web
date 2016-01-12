@@ -28,6 +28,8 @@ function show_pbem_dialog()
   var message = "";
   if ($.getUrlVar('savegame') != null) {
     message = "It is now your turn to play this Play-by-Email game. Please login to play your turn.";
+    if (pbem_duplicate_turn_play_check()) return;
+  
   } else {
     message = "You are about to start a Play-by-Email game, where you "
     + "can challenge another player, and each player will be notified when "
@@ -378,6 +380,9 @@ function pbem_end_phase()
       "will get an email with information about how to complete their turn. " +
       "You will also get an email about when it is your turn to play again. " +
       "See you again soon!"  );
+  if ($.getUrlVar('savegame') != null) {
+    simpleStorage.set("pbem_" + $.getUrlVar('savegame'), "true");
+  }
   $(window).unbind('beforeunload');
   setTimeout("window.location.href ='https://play.freeciv.org';", 6000);
 }
@@ -505,5 +510,24 @@ function request_deactivate_account()
      swal("deactivate user failed.");
    }
   });
+
+}
+
+/**************************************************************************
+ Checks for user playing same turn twice.
+**************************************************************************/
+function pbem_duplicate_turn_play_check()
+{
+  var pbem_savegame = $.getUrlVar('savegame');
+  if (pbem_savegame != null) {
+    var previously_played = simpleStorage.get("pbem_" + pbem_savegame, "");
+    if (previously_played != null) {
+      swal("This Play-By-Email turn has already been played and can't be played again. Sorry!");
+      return true;
+    } else {
+      return false;
+    }
+    
+  }
 
 }

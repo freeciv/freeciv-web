@@ -2,5 +2,7 @@
 save_directory = /vagrant/resin/webapps/data/savegames/
 
 [Resource usage]
-server_capacity = 10
+server_capacity_single = 5
+server_capacity_multi = 2
+server_capacity_pbem = 2
 server_limit = 250

@@ -19,7 +19,7 @@ if (! $config_problem) {
 }
       
 $stmt = "select count(*) as count from servers UNION ALL select count(*) as count from servers where "
-	. "type = 'singleplayer' and state = 'Pregame' and stamp >= DATE_SUB(NOW(), INTERVAL 1 MINUTE) "
+	. "type = 'singleplayer' and state = 'Pregame' and humans = '0' and stamp >= DATE_SUB(NOW(), INTERVAL 1 MINUTE) "
 	. "UNION ALL select count(*) as count from servers where type = 'multiplayer' and state = 'Pregame' and stamp >= DATE_SUB(NOW(), INTERVAL 1 MINUTE) "
         . "UNION ALL select count(*) as count from servers where type = 'pbem' and state = 'Pregame' and stamp >= DATE_SUB(NOW(), INTERVAL 1 MINUTE)";
 $res = fcdb_exec($stmt);

@@ -26,7 +26,7 @@ import re
 STATUS_PORT = 3999
 savedir = "../resin/webapps/data/savegames/";
 savegame_filename = "freeciv-earth-savegame-";
-savecounter = 1337;
+savecounter = 10000;
 savetemplate = "";
 with open('template_map.sav', 'r') as myfile:
     savetemplate=myfile.read();
@@ -47,7 +47,8 @@ class MapGen():
 class MapHandler(web.RequestHandler):
 
   def get(self):
-    self.write("Freeciv-Earth map generator!");
+    global savecounter;
+    self.write("Freeciv-Earth map generator! (" + str(savecounter) + ")");
 
   def post(self):
     global savecounter;

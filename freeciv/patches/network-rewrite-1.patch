@@ -1,15 +1,3 @@
-diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/generate_packets.py
---- freeciv/common/generate_packets.py	2015-03-20 19:10:42.396549824 +0200
-+++ freeciv/common/generate_packets.py	2015-03-20 19:11:19.584549008 +0200
-@@ -250,7 +250,7 @@
-         if self.is_array==1:
-             tmp="real_packet->%(name)s[i] = %(name)s[i]"%self.__dict__
-             return '''  {
--    int i;
-+    int i; /* this is for put. */
- 
-     for (i = 0; i < %(array_size_u) s; i++) {
-       %(tmp)s;
 diff -Nurd -X.diff_ignore freeciv/server/ruleset.c freeciv/server/ruleset.c
 --- freeciv/server/ruleset.c	2015-03-20 19:10:42.796549815 +0200
 +++ freeciv/server/ruleset.c	2015-03-20 19:11:19.584549008 +0200

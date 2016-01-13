@@ -401,6 +401,18 @@ function pregame_settings()
     $("#endturn").val("5000");
   }
 
+  if (ruleset_control != null) {
+    /* HACK: find current ruleset based on its name. */
+    switch (ruleset_control['name']) {
+    case "Web-default":
+      $("#ruleset").val("fcweb");
+      break;
+    case "Webperimental":
+      $("#ruleset").val("webperimental");
+      break;
+    }
+  }
+
   $(id).dialog('open');
 
   $('#aifill').change(function() {

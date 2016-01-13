@@ -972,34 +972,69 @@ function handle_goto_path(packet)
   }
 }
 
+/**************************************************************************
+  Receive general information about a server setting.
+
+  Setting data type specific information comes in a follow up packet.
+**************************************************************************/
 function handle_server_setting_const(packet)
 {
-  /* TODO: implement */
+  /* The data type specific follow up packets needs to look up a setting by
+   * its id. */
+  server_settings[packet['id']] = packet;
+
+  /* Make it possible to look up a setting by its name. */
+  server_settings[packet['name']] = packet;
 }
 
+/**************************************************************************
+  Receive general information about a server setting.
+
+  This is a follow up packet with data type specific information.
+**************************************************************************/
 function handle_server_setting_int(packet)
 {
-  /* TODO: implement */
+  $.extend(server_settings[packet['id']], packet);
 }
 
+/**************************************************************************
+  Receive general information about a server setting.
+
+  This is a follow up packet with data type specific information.
+**************************************************************************/
 function handle_server_setting_enum(packet)
 {
-  /* TODO: implement */
+  $.extend(server_settings[packet['id']], packet);
 }
 
+/**************************************************************************
+  Receive general information about a server setting.
+
+  This is a follow up packet with data type specific information.
+**************************************************************************/
 function handle_server_setting_bitwise(packet)
 {
-  /* TODO: implement */
+  $.extend(server_settings[packet['id']], packet);
 }
 
+/**************************************************************************
+  Receive general information about a server setting.
+
+  This is a follow up packet with data type specific information.
+**************************************************************************/
 function handle_server_setting_bool(packet)
 {
-  /* TODO: implement */
+  $.extend(server_settings[packet['id']], packet);
 }
 
+/**************************************************************************
+  Receive general information about a server setting.
+
+  This is a follow up packet with data type specific information.
+**************************************************************************/
 function handle_server_setting_str(packet)
 {
-  /* TODO: implement */
+  $.extend(server_settings[packet['id']], packet);
 }
 
 function handle_server_setting_control(packet)

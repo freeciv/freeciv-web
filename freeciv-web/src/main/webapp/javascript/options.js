@@ -17,6 +17,9 @@
 
 ***********************************************************************/
 
+/* The server will send information about its settings. It is stored here.
+ * You can look up a setting by its name or by its id number. */
+var server_settings = {};
 
 /****************************************************************
  The "options" file handles actual "options", and also view options,

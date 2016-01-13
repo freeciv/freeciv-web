@@ -96,36 +96,6 @@ index b0e07fc..e0ab80b 100644
    
    SINT32 multiplier[MAX_NUM_MULTIPLIERS];
    SINT32 multiplier_target[MAX_NUM_MULTIPLIERS];
-@@ -1089,25 +1104,25 @@ end
- 
- PACKET_DIPLOMACY_CREATE_CLAUSE_REQ = 99; cs, dsend
-   PLAYER counterpart, giver;
--  CLAUSE type;
-+  CLAUSE clause_type;
-   UINT32 value;
- end
- 
- PACKET_DIPLOMACY_CREATE_CLAUSE = 100; sc, dsend, lsend
-   PLAYER counterpart, giver;
--  CLAUSE type;
-+  CLAUSE clause_type;
-   UINT32 value;
- end
- 
- PACKET_DIPLOMACY_REMOVE_CLAUSE_REQ = 101; cs, dsend
-   PLAYER counterpart, giver;
--  CLAUSE type;
-+  CLAUSE clause_type;
-   UINT32 value;
- end
- 
- PACKET_DIPLOMACY_REMOVE_CLAUSE = 102; sc, dsend, lsend
-   PLAYER counterpart, giver;
--  CLAUSE type;
-+  CLAUSE clause_type;
-   UINT32 value;
- end
- 
 @@ -1331,8 +1346,9 @@ end
  PACKET_RULESET_GAME = 141; sc, lsend
    UINT8 default_specialist;

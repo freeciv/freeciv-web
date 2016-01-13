@@ -26,14 +26,6 @@ index b0e07fc..e0ab80b 100644
  type GOLD               = UINT32
  type HP                 = UINT8
  type PERCENT            = UINT8
-@@ -431,6 +431,7 @@ end
- PACKET_GAME_INFO = 16; sc, is-info
-   UINT8 add_to_size_limit;
-   UINT8 aifill;
-+  UINT32 mapsize;
-   PERSISTENT_READY persistent_ready;
-   AIRLIFTING_STYLE airlifting_style;
-   UINT8 angrycitizen;
 @@ -542,6 +543,7 @@ PACKET_GAME_INFO = 16; sc, is-info
    STRING calendar_fragment_name[MAX_CALENDAR_FRAGMENTS][MAX_LEN_NAME];
    BOOL civil_war_enabled;

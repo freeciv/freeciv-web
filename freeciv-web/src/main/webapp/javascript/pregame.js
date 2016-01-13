@@ -390,7 +390,6 @@ function pregame_settings()
 
   if (game_info != null) {
     $("#aifill").val(game_info['aifill']);
-    $("#mapsize").val(game_info['mapsize']);
     $("#timeout").val(game_info['timeout']);
     $("#skill_level").val(ai_skill_level);
     $("#metamessage").val(game_info['meta_message']);
@@ -399,6 +398,11 @@ function pregame_settings()
     $("#specials").val("250");
     $("#citymindist").val("2");
     $("#endturn").val("5000");
+  }
+
+  if (server_settings['size'] != null
+      && server_settings['size']['val'] != null) {
+    $("#mapsize").val(server_settings['size']['val']);
   }
 
   if (ruleset_control != null) {

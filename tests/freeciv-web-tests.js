@@ -66,7 +66,7 @@ casper.test.begin('Test of Freeciv-web frontpage', 3, function suite(test) {
     });
 });
 
-casper.test.begin('Test starting new Freeciv-web game', 10, function suite(test) {
+casper.test.begin('Test starting new Freeciv-web game', 11, function suite(test) {
     casper.start("http://localhost/webclient/?action=new", function() {
         test.assertHttpStatus(200);
         test.assertTitleMatch(/Freeciv-web/, 'Freeciv-web title is present');
@@ -142,9 +142,12 @@ casper.test.begin('Test starting new Freeciv-web game', 10, function suite(test)
             && game_info['year'] == -4000
             && game_info['timeout'] == 0
             && game_info['gold'] > 0
-            && game_info['aifill'] > 0
-            && game_info['mapsize'] > 0;
+            && game_info['aifill'] > 0;
       }, "Checks some properties of the game_info object.");
+
+      test.assertEval(function() {
+            return server_settings['size']['val'] > 0;
+      }, "Checking some server settings.");
 
       test.assertEval(function() {
             return unit_types[0]['name'].length > 0

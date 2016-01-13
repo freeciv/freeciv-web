@@ -1,13 +1,10 @@
 diff -Nurd -X.diff_ignore freeciv/server/gamehand.c freeciv/server/gamehand.c
 --- freeciv/server/gamehand.c	2014-02-08 13:48:27.118570612 +0200
 +++ freeciv/server/gamehand.c	2014-02-08 14:07:10.355748594 +0200
-@@ -510,6 +510,11 @@
+@@ -510,6 +510,8 @@
      ginfo.seconds_to_phasedone = -1.0;
    }
  
-+  ginfo.mapsize = game.map.server.size;
-+
-+  ginfo.mapsize = game.map.server.size;
 +  sz_strlcpy(ginfo.meta_message, game.server.meta_info.user_message);
 +
    conn_list_iterate(dest, pconn) {

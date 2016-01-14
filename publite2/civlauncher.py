@@ -5,9 +5,6 @@ import sys
 from time import gmtime, strftime
 import time
 
-pubscript = "pubscript_"
-logdir = "../logs/"
-
 # The Civlauncher class launches a new instance of a Freeciv-web server in a 
 # separate thread and restarts the process when the game ends.
 class Civlauncher(Thread):
@@ -25,24 +22,14 @@ class Civlauncher(Thread):
     def run(self):
         while 1:
             try:
-                print("Starting new Freeciv-web server at port " + str(self.new_port) + 
-                      " and Freeciv-proxy server at port " + str(1000 + self.new_port) + ".");
-                rank_cmd = "";
-                if (self.gametype=="pbem"): rank_cmd = " --Ranklog ../resin/webapps/data/ranklogs/rank_"+str(self.new_port)+".log ";
-                retcode = call("ulimit -t 10000 && export FREECIV_SAVE_PATH=\"" + self.savesdir + "\";" +
-                               "rm -f ../resin/webapps/data/scorelogs/score-" + str(self.new_port) + ".log; " +
-                               "python3.4 ../freeciv-proxy/freeciv-proxy.py " + 
-                               str(1000 + self.new_port) + " > " + logdir + "freeciv-proxy-" + 
-                               str(1000 + self.new_port) +".log 2>&1 " + 
-                               "& proxy_pid=$! && " +
-                               "freeciv-web --debug=1 --port " + str(self.new_port) + 
-                               " -q 20 --Announce none -e " +
-                               " -m -M http://" + self.metahostpath  + " --type \"" + self.gametype +
-                               "\" --read " + pubscript + self.gametype + ".serv" + 
-                               " --log " + logdir + "freeciv-web-log-" + str(self.new_port) + ".log " +
-                               rank_cmd + "--saves " + self.savesdir + " > /dev/null " + 
-                               " 2> " +  logdir + "freeciv-web-stderr-" +  str(self.new_port) + ".log " +
-                               " ; rc=$?; kill -9 $proxy_pid; exit $rc", shell=True)
+                print("Start freeciv-web on port " + str(self.new_port) + 
+                      " and freeciv-proxy on port " + str(1000 + self.new_port) + ".");
+                retcode = call("../publite2/init-freeciv-web.sh " 
+                               + self.savesdir + " " 
+                               + str(self.new_port) + " " 
+                               + str(1000 + self.new_port) + " " 
+                               + self.metahostpath + " "
+                               + self.gametype, shell=True)
                 self.num_start += 1;
                 if retcode > 0:
                     print("Freeciv-web port " + str(self.new_port) + " was terminated by signal", 

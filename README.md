@@ -128,7 +128,7 @@ Install this software if you are not running Freeciv-web with Vagrant:
 
 - Java 7 JDK - http://www.oracle.com/technetwork/java/javase/downloads/ 
 
-- Python 3.4 - http://www.python.org/
+- Python 3.5 - http://www.python.org/
 
 - Pillow v2.3.0 (PIL fork) - http://pillow.readthedocs.org/
   (required for freeciv-img-extract)

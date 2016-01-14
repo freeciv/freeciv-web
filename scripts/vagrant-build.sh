@@ -38,12 +38,12 @@ mysql_pass="vagrant"
 
 resin_version="4.0.44"
 resin_url="http://www.caucho.com/download/resin-${resin_version}.tar.gz"
-tornado_url="https://pypi.python.org/packages/source/t/tornado/tornado-4.2.1.tar.gz"
+tornado_url="https://pypi.python.org/packages/source/t/tornado/tornado-4.3.tar.gz"
 slimerjs_url="https://download.slimerjs.org/nightlies/0.10.0pre/slimerjs-0.10.0pre.zip"  
 casperjs_url="https://github.com/n1k0/casperjs/archive/1.1-beta3.zip"
 
 # Based on fresh install of Ubuntu 12.04
-dependencies="maven mysql-server openjdk-7-jdk libcurl4-openssl-dev nginx libjansson-dev subversion pngcrush python3-pillow libtool automake autoconf autotools-dev language-pack-en python3.4-dev python3-setuptools libbz2-dev imagemagick python3-pip dos2unix liblzma-dev firefox xvfb libicu-dev pkg-config zlib1g-dev libsdl1.2-dev"
+dependencies="maven mysql-server openjdk-7-jdk libcurl4-openssl-dev nginx libjansson-dev subversion pngcrush python3-pillow libtool automake autoconf autotools-dev language-pack-en python3.5-dev python3-setuptools libbz2-dev imagemagick python3-pip dos2unix liblzma-dev firefox xvfb libicu-dev pkg-config zlib1g-dev libsdl1.2-dev"
 
 ## Setup
 mkdir -p ${basedir}
@@ -73,9 +73,9 @@ mv resin-${resin_version} resin
 echo "==== Fetching/Installing Tornado Web Server ===="
 cd /tmp
 wget ${tornado_url}
-tar xvfz tornado-4.2.1.tar.gz
-cd tornado-4.2.1
-python3.4 setup.py install
+tar xvfz tornado-4.3.tar.gz
+cd tornado-4.3
+python3.5 setup.py install
 
 pip3 install wikipedia
 

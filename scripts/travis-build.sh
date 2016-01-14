@@ -32,7 +32,7 @@ tornado_url="https://pypi.python.org/packages/source/t/tornado/tornado-4.2.1.tar
 nginx_url="http://nginx.org/download/nginx-1.9.6.tar.gz"
 
 # Based on fresh install of Ubuntu 12.04
-dependencies="maven mysql-server-5.5 openjdk-7-jdk libcurl4-openssl-dev subversion pngcrush libtool automake autoconf autotools-dev language-pack-en python3-setuptools python3.4 python3.4-dev imagemagick liblzma-dev firefox xvfb libicu-dev libsdl1.2-dev libjansson-dev"
+dependencies="maven mysql-server-5.5 openjdk-7-jdk libcurl4-openssl-dev subversion pngcrush libtool automake autoconf autotools-dev language-pack-en python3-setuptools python3.5 python3.5-dev imagemagick liblzma-dev firefox xvfb libicu-dev libsdl1.2-dev libjansson-dev"
 
 ## dependencies
 echo "==== Installing Updates and Dependencies ===="
@@ -41,7 +41,7 @@ apt-get -y update
 echo "apt-get install dependencies"
 apt-get -y install ${dependencies}
 
-python3.4 -m easy_install Pillow
+python3.5 -m easy_install Pillow
 
 java -version
 javac -version
@@ -62,7 +62,7 @@ echo "==== Fetching/Installing Tornado Web Server ===="
 wget ${tornado_url}
 tar xfz tornado-4.2.1.tar.gz
 cd tornado-4.2.1
-python3.4 setup.py install
+python3.5 setup.py install
 
 ## mysql setup
 echo "==== Setting up MySQL ===="

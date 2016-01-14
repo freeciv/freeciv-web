@@ -11,6 +11,6 @@ Freeciv-proxy is started by Publite2.
 
 Software requirements:
 
-- Python 3.4 or later.
-- Tornado 4.2 - http://www.tornadoweb.org/
+- Python 3.5 or later.
+- Tornado 4.3 - http://www.tornadoweb.org/
 

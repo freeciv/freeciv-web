@@ -10,7 +10,7 @@ Freeciv C server.
 
 Publite2 is started automatically by the start-freeciv-web.sh script.
 
-Requires Python 3.4 and the Freeciv C server built for Freeciv-web
+Requires Python 3.5 and the Freeciv C server built for Freeciv-web
 This process logs to logs/publite2.log file.
 
 Publite2 has a HTTP status page which can be accessed at:

@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "running Freeciv-img-extract..."
-python3.4 img-extract.py &&
+python3.5 img-extract.py &&
 pngcrush pre-freeciv-web-tileset-amplio2-0.png freeciv-web-tileset-amplio2-0.png &&
 pngcrush pre-freeciv-web-tileset-amplio2-1.png freeciv-web-tileset-amplio2-1.png &&
 pngcrush pre-freeciv-web-tileset-amplio2-2.png freeciv-web-tileset-amplio2-2.png &&

@@ -58,7 +58,7 @@ cd /tmp
 wget ${tornado_url}
 tar xvfz tornado-4.2.1.tar.gz
 cd tornado-4.2.1
-python3.4 setup.py install
+python3.5 setup.py install
 
 pip3 install wikipedia
 

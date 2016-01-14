@@ -1,12 +1,13 @@
 #! /bin/bash
 # starts freeciv-proxy and freeciv-web.
 # This script is started by civlauncher.py in publite2.
-echo "init-freeciv-web.sh port ${2}"
 
 if [ "$#" -ne 5 ]; then
   echo "init-freeciv-web.sh error: incorrect number of parameters." >&2
   exit 1
 fi
+
+echo "init-freeciv-web.sh port ${2}"
 
 if [ $5 = "pbem" ]; then
    pbemcmd="--Ranklog ../resin/webapps/data/ranklogs/rank_${2}.log "

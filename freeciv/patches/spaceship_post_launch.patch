@@ -1,0 +1,35 @@
+From 70eb2f45f37fbb2b080df18a157f1801a91bb965 Mon Sep 17 00:00:00 2001
+From: Sveinung Kvilhaugsvik <sveinung84@users.sourceforge.net>
+Date: Fri, 15 Jan 2016 02:42:45 +0100
+Subject: [PATCH] Don't autoplace spaceship parts after launch.
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Reported by: Andreas Røsdal <andreasr>
+
+See bug #24309
+---
+ server/advisors/advspace.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/server/advisors/advspace.c b/server/advisors/advspace.c
+index 44f14b0..45169b5 100644
+--- a/server/advisors/advspace.c
++++ b/server/advisors/advspace.c
+@@ -35,6 +35,12 @@ bool adv_spaceship_autoplace(struct player *pplayer,
+   bool retval = FALSE;
+   bool placed;
+ 
++  if (ship->state == SSHIP_LAUNCHED
++      || ship->state == SSHIP_ARRIVED) {
++    /* Part can't reach ship. */
++    return FALSE;
++  }
++
+   do {
+     placed = next_spaceship_component(pplayer, ship, &place);
+ 
+-- 
+2.6.4
+

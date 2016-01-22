@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="The Freeciv project">
-    <meta name="description" content="Freeciv is a Free and Open Source empire-building strategy game made with HTML5 which you can play in your browser, tablet or mobile device!">
+    <meta name="author" content="Freeciv 計劃">
+    <meta name="description" content="Freeciv 是以 HTML5 製作，讓您可以在網頁瀏覽器、平板電腦或行動裝置上遊玩的自由且開放源碼帝國建設戰略遊戲！">
     <meta name="google-site-verification" content="Dz5U0ImteDS6QJqksSs6Nq7opQXZaHLntcSUkshCF8I" />
     <meta property="og:image" content="/images/freeciv-fp-logo-2.png" />
     
-    <title>Freeciv-web - free empire-building strategy game playable online in web browser</title>
+    <title>Freeciv 網頁版 - 可在網頁瀏覽器中免費線上遊玩的帝國建設戰略遊戲</title>
 
     <link rel="shortcut icon" href="images/freeciv-shortcut-icon.png">
     <link rel="apple-touch-icon" href="images/freeciv-splash2.png" />
@@ -40,7 +40,7 @@
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
+            <span class="sr-only">切換導覽列</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -49,12 +49,12 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="/">Home</a></li>
-            <li><a id="metalink" href="/meta/metaserver.php">Online Games</a></li>
-            <li><a href="http://forum.freeciv.org/f/viewforum.php?f=24">Forum</a></li>
+            <li class="active"><a href="/">首頁</a></li>
+            <li><a id="metalink" href="/meta/metaserver.php">線上遊戲</a></li>
+            <li><a href="http://forum.freeciv.org/f/viewforum.php?f=24">論壇</a></li>
             <li><a href="https://github.com/freeciv/freeciv-web">Github</a></li>
-            <li><a href="http://play.freeciv.org/blog/">Blog</a></li>
-            <li><a href="http://www.freeciv.org/donate.html">Donate</a></li>
+            <li><a href="http://play.freeciv.org/blog/">網誌</a></li>
+            <li><a href="http://www.freeciv.org/donate.html">捐款</a></li>
             <li><a href="http://www.freeciv.org/">Freeciv.org</a></li>
           </ul>
 	  <form id="mysearchform" class="navbar-form navbar-right searchbox">
@@ -84,25 +84,25 @@
 
    <!-- Jumbotron -->
       <div class="jumbotron">
-      <p id="logo"><img src="images/freeciv-fp-logo-2.png" title="Freeciv HTML5 Online version" alt="Freeciv HTML5 Online version"> </p>
-        <p class="lead">Freeciv is a Free and Open Source empire-building strategy game inspired by the history of human civilization. The game commences in prehistory and your mission is to lead your tribe from the Stone Age to the Space Age. Freeciv can be played online in your web-browser for free. Choose how you want to play: </p>
+      <p id="logo"><img src="images/freeciv-fp-logo-2.png" title="Freeciv HTML5 線上版" alt="Freeciv HTML5 線上版"> </p>
+        <p class="lead">Freeciv 是靈感來自人文歷史的自由且開放帝國建設戰略遊戲。遊戲在史前發源，您的任務則是要從石器時代帶領著您的部落發展到太空時代。可以用網頁瀏覽器在線上免費地遊玩 Freeciv。請選擇您想遊戲的方式：</p>
 
 
 	<p id="fc_button_group">
           <a href="/webclient/?action=new" 
-             id="single-button" class="btn btn-primary btn-lg" title="Start a new single-player game against the Freeciv AI players.">Single-player &raquo;</a>
+             id="single-button" class="btn btn-primary btn-lg" title="開始一個單人遊戲與 Freeciv 人工智慧玩家對戰。">單人遊戲 &raquo;</a>
           <a href="/meta/metaserver.php?tab=multi" 
-             id="multi-button" class="btn btn-info btn-lg" title="Start or join a game with multiple human or AI players.">Multi-player &raquo;</a>
+             id="multi-button" class="btn btn-info btn-lg" title="加入多人或人工智慧玩家的遊戲。">多人遊戲 &raquo;</a>
           <a href="/webclient/?action=pbem" 
-             id="pbem-button" class="btn btn-info btn-lg" title="Start a two-player game where you get an e-mail when it is your turn to play, up to 7 days turns.">Play By Email &raquo;</a>
+             id="pbem-button" class="btn btn-info btn-lg" title="在七天的回合內，兩位玩家以電子郵件交流的對戰。">以電子郵件遊玩 &raquo;</a>
           <a href="/webclient/?action=load&amp;scenario=true" 
-             id="scenarios-button" class="btn btn-info btn-lg" title="Start a new game on a scenario map, such as world map, America, Italy or Japan.">Scenarios &raquo;</a>
+             id="scenarios-button" class="btn btn-info btn-lg" title="從場景地圖開始一個新的遊戲，像是世界地圖、美洲、義大利或日本。">場景 &raquo;</a>
           <a href="/freeciv-earth/" 
-             id="pbem-button" class="btn btn-info btn-lg" title="Start a new game by choosing your map from a real earth map.">Freeciv-Earth &raquo;</a>
+             id="pbem-button" class="btn btn-info btn-lg" title="在現實的地球地圖上選擇您要的地圖開始遊戲。">Freeciv 地球 &raquo;</a>
           <a href="/webclient/?action=load&amp;load=tutorial&amp;scenario=true" 
-             id="tutorial-button" class="btn btn-info btn-lg" title="New players should try the tutorial to learn how to play the game.">Tutorial &raquo;</a>
+             id="tutorial-button" class="btn btn-info btn-lg" title="新玩家應該先試試看教學模式來熟悉如何參與遊戲。">教學模式 &raquo;</a>
          <a href="/webclient/?action=load"
-             id="load-button" class="btn btn-default btn-lg" title="Load a savegame">Load Game &raquo;</a>
+             id="load-button" class="btn btn-default btn-lg" title="讀取遊戲">讀取遊戲 &raquo;</a>
 
       </p>
 
@@ -129,15 +129,15 @@
 	</center>
 	</div>
        <div class="col-lg-5">
-		<h3>New Tutorial video of Freeciv-web!</h3>
+		<h3>Freeciv 網頁版新教學影片！</h3>
 		<div class="videoWrapper">
 			<iframe width="410" height="260" src="//www.youtube.com/embed/K6xBi2JWyZU" frameborder="0" allowfullscreen></iframe>
 		</div>
-		<br><a href="https://www.youtube.com/user/NeptunesNookGames/">NeptunesNookGames</a> has created an awesome <a href="https://www.youtube.com/watch?v=K6xBi2JWyZU">Freeciv-web Tutorial</a>, as well as <a href="https://www.youtube.com/watch?v=30mY2rfhXR8&list=PL3Hfqo2_KOle1KpdgMwF4PJxzfh8P311j">Let's Play Freeciv</a> video on Youtube.<br><br>
+		<br><a href="https://www.youtube.com/user/NeptunesNookGames/">NeptunesNookGames</a> 在 Youtube 上創作了一段完美的 <a href="https://www.youtube.com/watch?v=K6xBi2JWyZU">Freeciv 網頁版教學</a>，跟 <a href="https://www.youtube.com/watch?v=30mY2rfhXR8&list=PL3Hfqo2_KOle1KpdgMwF4PJxzfh8P311j">Let's Play Freeciv</a> 所作的影片比毫不遜色。<br><br>
 
 	</div>
         <div class="col-lg-3">
-	 <h3>Latest news from Blog:</h3>
+	 <h3>來自網誌的最新消息：</h3>
          <ul id="myUL" class="blogposts"></ul>
         </div>
     </div>
@@ -159,18 +159,18 @@
 
   <div class="row">
         <div class="col-lg-4">
-                  <h2>HTML5 browser game</h2>
+                  <h2>HTML5 瀏覽器遊戲</h2>
 
-          <p>Freeciv-web can be played online using a desktop computer, mobile phone or tablet. Freeciv-web has been optimized for the iPhone on mobile and modern HTML5 browsers such as Chrome, Firefox, Safari and Internet Explorer.</p>
-          <p><a class="btn btn-success" href="/webclient?action=new">Play Freeciv now &raquo;</a>
+          <p>可以用桌上型電腦、手機或平板電腦來線上遊玩 Freeciv 網頁版。已為 iPhone 及各種主流的 HTML5 瀏覽器（包括 Chrome、Firefox、Safari 及 IE）最佳化了 Freeciv 網頁版。 </p>
+          <p><a class="btn btn-success" href="/webclient?action=new">現在就開始進行 Freeciv &raquo;</a>
           </p>
 	<br><br>
 
 
-		<div id="playws"><a href="https://play.google.com/store/apps/details?id=org.freeciv.play" ><img src="images/play-store-freeciv.png" style="width:100%;" alt="Get Freeciv-web for free in the Google Play Store"></a></div>
-		<div id="chromews"><a href="https://chrome.google.com/webstore/detail/freeciv/ldhdjhmbapbeafmhdoobnlldhfopfcgh" ><img src="images/chrome-ws.png" alt="Get Freeciv-web for free in the Chrome Web Store"></a></div>
-		<div id="mozws"><a href="https://marketplace.firefox.com/app/freeciv"><img src="images/firefox-marketplace.png" alt="Get Freeciv-web for free in the Firefox Marketplace"></a></div>
-		<div id="windowsstore"><a href="http://apps.microsoft.com/windows/app/freeciv/43da4eed-42cf-4105-87a2-e03f45ade081"><img src="images/windowsstore.png" alt="Get Freeciv-web for free in the Windows Store"></a></div>
+		<div id="playws"><a href="https://play.google.com/store/apps/details?id=org.freeciv.play" ><img src="images/play-store-freeciv.png" style="width:100%;" alt="從 Google Play 商店獲得免費的 Freeciv 網頁版"></a></div>
+		<div id="chromews"><a href="https://chrome.google.com/webstore/detail/freeciv/ldhdjhmbapbeafmhdoobnlldhfopfcgh" ><img src="images/chrome-ws.png" alt="從 Chrome 線上應用程式商店獲得免費的 Freeciv 網頁版"></a></div>
+		<div id="mozws"><a href="https://marketplace.firefox.com/app/freeciv"><img src="images/firefox-marketplace.png" alt="從 Firefox Marketplace 獲得免費的 Freeciv 網頁版"></a></div>
+		<div id="windowsstore"><a href="http://apps.microsoft.com/windows/app/freeciv/43da4eed-42cf-4105-87a2-e03f45ade081"><img src="images/windowsstore.png" alt="從 Microsoft 線上商店獲得 Freeciv 網頁版"></a></div>
 <br><br>
 
 <div class="addthis_sharing_toolbox"></div>
@@ -179,29 +179,29 @@
 
         </div>
         <div class="col-lg-4">
-		<h2>Free strategy game with these features</h2>
+		<h2>自由戰略遊戲擁有下列優點</h2>
 		<ul>
-			<li>Playable for free in your HTML5 capable browser, mobile or tablet</li>
-			<li>Isometric 2d graphics</li>
-			<li>Artificial Intelligence (AI) computer-controlled players. </li>
-			<li>History lessons from Wikipedia of all technologies, units and buildings.</li>
-			<li>More than 50 playable units and 541 nations.</li>
-			<li>Full Fog of War</li>
-			<li>Freeciv is open source software released under the GNU General Public License</li>
+			<li>可以在 HTML5 相容的瀏覽器、手機或平板電腦裡遊玩</li>
+			<li>2D 俯視視角圖型</li>
+			<li>人工智慧電腦玩家。 </li>
+			<li>所有科技、單位和建築都有來自維基百科的歷史課程。</li>
+			<li>50 多種可用單位和 541 種民族可用。</li>
+			<li>全戰場迷霧</li>
+			<li>Freeciv 是以 GNU 通用公開授權條款發行的開放源碼軟體</li>
 
 		</ul>		
                           
        </div>
         <div class="col-lg-4">
-	  <h3>"Freeciv is best 11 of top 50 free PC games!"</h3>
+	  <h3>「Freeciv 是世界最佳 50 名內第 11 名的免費單機遊戲！」</h3>
           <span style="text-align: right;">
-	    <b><i>"Freeciv available in HTML5 browsers, worldwide productivity plummets"
-		- "a version of the classic turn-based strategy game that we can play in our browsers thanks to the witchcraft of HTML 5. There's an installable version, too"</i></b>
+	    <b>「可以在 HTML5 瀏覽器遊玩 Freeciv，讓全世界的生產力驟降」
+		- 「感謝 HTML5 的巫術讓經典的回合制戰略遊戲可以在我們的瀏覽器遊玩。當然也有桌面安裝版可以玩哦！」</b>
 		<br>
-		<a href="http://www.pcgamer.com/freeciv-available-in-html5-browsers-worldwide-productivity-plummets/" target="new"><img src="images/pcgamer.gif" alt="Freeciv reviewed by pcgamer.com"></a>
+		<a href="http://www.pcgamer.com/freeciv-available-in-html5-browsers-worldwide-productivity-plummets/" target="new"><img src="images/pcgamer.gif" alt="pcgamer.com 已認可 Freeciv"></a>
 		<br>
 		<br>
-	   <img src="images/html5logo.png" alt="Freeciv-web uses HTML5!">
+	   <img src="images/html5logo.png" alt="Freeciv 網頁版擁抱 HTML5！">
 
 	  </span>
  
@@ -211,8 +211,8 @@
      <div class="row">
         <div class="col-lg-10">
 	<center>
-          <h3>Turns played: <b id="turncount"></b> </h3>
-	(Total number of turns played with Freeciv-web since 20th September 2015)
+          <h3>總回合數：<b id="turncount"></b> </h3>
+	（自2015年9月20日開始的 Freeciv 網頁版總遊玩回合數）
 		<br><br>
 	</center>
 	</div> 
@@ -220,14 +220,14 @@
 
       <div class="row" style="padding: 10px; margin-top: 40px; background-color:rgba(250,250,250,0.45);">
         <div class="col-lg-12">
-          Affiliate: <a href="http://apolyton.net/">Apolyton.net</a>
+          合作夥伴：<a href="http://apolyton.net/">Apolyton.net</a>
         </div>
       </div>
 
       <!-- Site footer -->
       <div class="footer">
-	      <p>&copy; The Freeciv Project 2013-<script type="text/javascript">document.write(new Date().getFullYear());</script>. 
-              Freeciv-web is free and open source software. The Freeciv C server is released under the <a href="https://www.gnu.org/copyleft/gpl.html">GNU General Public License</a>, while the Freeciv-web client is released under the <a href="http://www.gnu.org/licenses/agpl-3.0.html">GNU Affero General Public License</a>.</p>
+	      <p>&copy; Freeciv 計劃 2013-<script type="text/javascript">document.write(new Date().getFullYear());</script>。
+              Freeciv 網頁版是自由且開放源碼的軟體。Freeciv C 伺服器以 <a href="https://www.gnu.org/copyleft/gpl.html">GNU 通用公共授權條款</a>發行，而 Freeciv 網頁版用戶端是以 <a href="http://www.gnu.org/licenses/agpl-3.0.html">GNU Affero 通用公共許可證</a>發行。</p>
 
       </div>
 
@@ -239,4 +239,3 @@
 
   </body>
 </html>
-

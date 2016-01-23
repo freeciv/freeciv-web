@@ -154,12 +154,13 @@ def handle_ranklog(root, file):
       losers = line[8:].split(",")[1];
       losers_score = line[8:].split(",")[3];
       losers_email = find_email_address(losers);
-
-  m = MailSender();
-  m.send_game_result_mail(winner, winner_score, winner_email, losers, losers_score, losers_email);
-  status.ranklog_emails_sent += 1;
+  if (losers_email != None and winner_email != None):
+    m = MailSender();
+    m.send_game_result_mail(winner, winner_score, winner_email, losers, losers_score, losers_email);
+    status.ranklog_emails_sent += 1;
+  else:
+    print("error: game with winner without email in " + file);
   openfile.close();
-
   os.remove(filename);
   
 
@@ -174,7 +175,7 @@ if __name__ == '__main__':
 
   while (1):
     try:
-      time.sleep(1);
+      time.sleep(5);
       process_savegames();
       process_ranklogs();
       time.sleep(60);

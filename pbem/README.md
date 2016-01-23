@@ -7,9 +7,9 @@ Requires:
 https://github.com/mysql/mysql-connector-python
 
 Run like this:
-python3.4 freeciv-pbem.py
+python3.5 freeciv-pbem.py
 
-(also automatically started by start-freeciv-web.sh script)
+Freeciv-pbem is automatically started by start-freeciv-web.sh script
 
 
 Required configuration:

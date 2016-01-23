@@ -79,6 +79,14 @@ python3.5 setup.py install
 
 pip3 install wikipedia
 
+## build and install mysql-connector-python
+cd /tmp
+wget https://github.com/mysql/mysql-connector-python/archive/2.1.3.zip
+unzip 2.1.3.zip
+cd mysql-connector-python-2.1.3
+sudo python3.5 setup.py install
+
+
 ## mysql setup
 echo "==== Setting up MySQL ===="
 mysqladmin -u ${mysql_user} -p${mysql_pass} create freeciv_web

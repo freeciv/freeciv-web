@@ -26,10 +26,10 @@ for root, subFolders, files in os.walk(rootdir):
 	ftime = os.path.getmtime(f)
         curtime = time.time()
         difftime = curtime - ftime
-        if difftime > keeptime and file.endswith("sav.xz") and not file.startswith("pbem") and file not in scenario_list:
+        if difftime > keeptime and (file.endswith("sav.xz") or file.endswith(".sav")) and not file.startswith("pbem") and file not in scenario_list:
           print("rm file: " + file);
           os.unlink(f)
-        if difftime > keeptime_pbem and file.endswith("sav.xz") and file.startswith("pbem") and file not in scenario_list:
+        if difftime > keeptime_pbem and (file.endswith("sav.xz") or file.endswith(".sav")) and file.startswith("pbem") and file not in scenario_list:
           print("rm file: " + file);
           os.unlink(f)
 

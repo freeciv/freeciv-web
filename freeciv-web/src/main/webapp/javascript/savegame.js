@@ -81,6 +81,7 @@ function load_game_check()
         var savegame = savegames[load_game_id];
         console.log("Saved title: " +  savegame["title"]);
         console.log("Saved user: " + savegame["username"]);
+        console.log("Game type: " + savegame["game_type"]);
         console.log("Logged in username: " + username);
         if (savegame["file"] == null) {
           swal("Loading game failed (savegame file is null)");
@@ -104,6 +105,7 @@ function load_game_check()
         }).done(function() {
           console.log("Upload of savegame complete");
           loadTimerId = setTimeout("load_game_real('" + username + "');", 1500);
+          set_metamessage_on_loaded_game(savegame["game_type"]);
         }).fail(function() { swal("Loading game failed (ajax request failed)"); });
       }
     }
@@ -124,6 +126,18 @@ function load_game_real(filename)
       console.log("Server command: /load " + filename );
       send_message("/load " + filename);
       $.unblockUI();
+}
+
+/**************************************************************************
+...
+**************************************************************************/
+function set_metamessage_on_loaded_game(game_type)
+{
+  if (game_type == "multi") {
+    metamessage_changed = true;
+    send_message("/metamessage Multiplayer game loaded by " + username);
+  }
+
 }
 
 /**************************************************************************
@@ -200,9 +214,13 @@ function save_game()
   var pplayer = client.conn.playing;
   var suggest_savename = username + " of the " + nations[pplayer['nation']]['adjective'] + " in year: " + get_year_string();
   if (suggest_savename.length >= 64) suggest_savename = username + " " + get_year_string();
-
-
+  if ($.getUrlVar('action') == "multi") suggest_savename = "Multiplayer game, saved by " + username + " " + get_year_string(); 
   $("#savegamename").val(suggest_savename);
+  
+  if (is_pbem()) {
+    swal("Play-By-Email games can not be saved.");
+    return;
+  }
 
   $("#save_dialog").dialog('open');
 
@@ -245,6 +263,9 @@ function save_game_fetch()
       console.log("Username: " + username);
       console.log("Savegame size: " + saved_file.length);
 
+      var game_type = $.getUrlVar('action');
+      console.log("Game type: " + game_type);
+
       var savegames = simpleStorage.get("savegames");
       if (savegames == null) savegames = [];
 
@@ -256,7 +277,7 @@ function save_game_fetch()
                 + currentdate.getMinutes();
 
       savegames.push({"title" : savename, "username" : username, "file" : saved_file,
-                      "datetime" : datetime, "version" : FC_SAVEGAME_VER})
+                      "datetime" : datetime, "version" : FC_SAVEGAME_VER, "game_type": game_type})
 
       if (simpleStorage.set("savegames", savegames) === true) {
         $.unblockUI();

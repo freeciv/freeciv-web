@@ -30,7 +30,7 @@ class MailSender():
   smtp_password=settings.get("Config", "smtp_password")
   smtp_host=settings.get("Config", "smtp_host")
   smtp_port=settings.get("Config", "smtp_port")
-  smtp_sender="Freeciv-web <postmaster@freeciv.mailgun.org>"
+  smtp_sender=settings.get("Config", "smtp_sender")
 
   def send_message_via_smtp(self, from_, to, mime_string):
     smtp = smtplib.SMTP(self.smtp_host, int(self.smtp_port))

@@ -26,7 +26,14 @@ function show_pbem_dialog()
 {
   var title = "Welcome to Freeciv-web";
   var message = "";
-  if ($.getUrlVar('savegame') != null) {
+
+  if ($.getUrlVar('invited_by') != null) {
+    var invited = $.getUrlVar('invited_by').replace(/[^a-zA-Z]/g,'');
+    message = "You have been invited by " + invited + " for a Play-by-Email game of Freeciv-web. "
+    + "You and " + invited + " will play alternating turns, and you will get an e-mail every time "
+    + "it is your turn to play. First you can create a new user or log-in, then you will play "
+    + "the first turn.";
+  } else if ($.getUrlVar('savegame') != null) {
     message = "It is now your turn to play this Play-by-Email game. Please login to play your turn.";
     if (pbem_duplicate_turn_play_check()) return;
   
@@ -260,7 +267,7 @@ function login_pbem_user_request()
 function challenge_pbem_player_dialog() 
 {
 
-  var title = "Choose opponent";
+  var title = "Find other players to play with!";
   var message = "Enter the username of your opponent: "
    + "<table><tr><td>Username:</td><td><input id='opponent' type='text' size='25'"
    +" onkeyup='return forceLower(this);'></td></tr></table>"; 
@@ -274,6 +281,9 @@ function challenge_pbem_player_dialog()
 			modal: true,
 			width: is_small_screen() ? "80%" : "40%",
 			buttons: {
+                        "Invite friends on Twitter": function() {
+                          pbem_social_media_invite();
+			},
 			"Invite random opponent": function() {
 			  $.ajax({
 			   type: 'POST',
@@ -288,6 +298,59 @@ function challenge_pbem_player_dialog()
 			}
 
 		});
+
+  var invited = $.getUrlVar('invited_by');
+  if (invited != null) {
+    $("#opponent").val(invited);
+    $(".ui-dialog-buttonset button").first().hide();
+    $(".ui-dialog-buttonset button").first().next().hide();
+  }
+
+  $("#dialog").dialog('open');
+}
+
+/**************************************************************************
+ Invite other players using Twitter.
+**************************************************************************/
+function pbem_social_media_invite() 
+{
+
+  var title = "Invite other players for a Play-by-email game";
+  var message = "Message to invite other players:<br> "
+   + "<textarea class='tweetmsg' rows='3' cols='40'>"
+   + "Join me in a Freeciv Play-By-Email game here: https://play.freeciv.org/pbem?u="
+   + username
+   + " #freeciv"
+   + "</textarea><br><br>"
+   + "Invite your friends of Twitter for a Play-By-Email game here. It works like this:<br>"
+   + "1. You share a Twitter message with a link inviting other players to your game.<br>"
+   + "2. Someone clicks on the link and starts a new Play-By-Email game with you.<br>"
+   + "3. You will then get an e-mail every time it is your turn to play.<br><br>"
+   + "Remember that after you send the tweet it can take some time before someone clicks on your link."; 
+
+  // reset dialog page.
+  $("#dialog").remove();
+  $("<div id='dialog'></div>").appendTo("div#game_page");
+  $("#dialog").html(message);
+  $("#dialog").attr("title", title);
+  $("#dialog").dialog({
+			bgiframe: true,
+			modal: true,
+			width: is_small_screen() ? "80%" : "40%",
+			buttons: 
+			{ "Share on Twitter": function() {
+                          $(window).unbind('beforeunload');
+                          var tweetmsg = $('textarea.tweetmsg').val();
+                          var newurl = "https://twitter.com/share?url=/&text=" + tweetmsg;
+                          window.location = newurl;
+		        },
+                        "Cancel" : function() {
+                          challenge_pbem_player_dialog();
+			}
+			}
+
+		});
+
 
   $("#dialog").dialog('open');
 }

@@ -371,7 +371,8 @@ function pregame_settings()
 	  "<option value='webperimental'>Webperimental</option>" +
 	  "</select></td></tr>"+
           "</table><br>" +
-	  "<span id='settings_info'><i>Freeciv-web can be customized using the command line in many other ways also. Type /help in the command line for more information.</i></span>"
+	  "<span id='settings_info'><i>Freeciv-web can be customized using the command line in many " +
+          "other ways also. Type /help in the command line for more information.</i></span>"
 	  ;
   $(id).html(dhtml);
 

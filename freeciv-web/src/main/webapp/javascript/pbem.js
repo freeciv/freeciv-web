@@ -341,7 +341,7 @@ function pbem_social_media_invite()
 			{ "Share on Twitter": function() {
                           $(window).unbind('beforeunload');
                           var tweetmsg = $('textarea.tweetmsg').val();
-                          var newurl = "https://twitter.com/share?url=/&text=" + tweetmsg;
+                          var newurl = "https://twitter.com/share?url=/&text=" + encodeURIComponent(tweetmsg);
                           window.location = newurl;
 		        },
                         "Cancel" : function() {

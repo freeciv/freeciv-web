@@ -22,6 +22,8 @@ var scenario_activated = false;
 
 var FC_SAVEGAME_VER = 2;
 
+var loaded_game_type = null;
+
 var scenarios = [
   {"img":"/images/world_small.png", "description":"The World - Small world map, 80x50 map of the Earth", "savegame":"earth-80x50-v3"},
   {"img":"/images/world_big.png", "description":"The World - Large world map, 160x90 map of the Earth", "savegame":"earth-160x90-v2"},
@@ -136,6 +138,7 @@ function set_metamessage_on_loaded_game(game_type)
   if (game_type == "multi") {
     metamessage_changed = true;
     send_message("/metamessage Multiplayer game loaded by " + username);
+    loaded_game_type = game_type;
   }
 
 }
@@ -214,7 +217,9 @@ function save_game()
   var pplayer = client.conn.playing;
   var suggest_savename = username + " of the " + nations[pplayer['nation']]['adjective'] + " in year: " + get_year_string();
   if (suggest_savename.length >= 64) suggest_savename = username + " " + get_year_string();
-  if ($.getUrlVar('action') == "multi") suggest_savename = "Multiplayer game, saved by " + username + " " + get_year_string(); 
+  if ($.getUrlVar('action') == "multi" || loaded_game_type == "multi") {
+    suggest_savename = "Multiplayer game, saved by " + username + " " + get_year_string(); 
+  }
   $("#savegamename").val(suggest_savename);
   
   if (is_pbem()) {
@@ -264,6 +269,7 @@ function save_game_fetch()
       console.log("Savegame size: " + saved_file.length);
 
       var game_type = $.getUrlVar('action');
+      if (loaded_game_type != null) game_type = loaded_game_type;
       console.log("Game type: " + game_type);
 
       var savegames = simpleStorage.get("savegames");

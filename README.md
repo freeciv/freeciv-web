@@ -39,6 +39,9 @@ Freeciv-Web consists of these components:
   multiple Freeciv server processes and checks capacity through the Metaserver. 
   Implemented in Python.
 
+* [pbem](pbem) is play-by-email support. 
+
+* [freeciv-earth](freeciv-earth) is code to generate Freeciv savegames from a map captured from mapbox.
 
 Running Freeciv-web with Vagrant on VirtualBox
 ----------------------------------------------
@@ -154,49 +157,10 @@ Install this software if you are not running Freeciv-web with Vagrant:
 - liblzma-dev - http://tukaani.org/xz/ - for XZ compressed savegames.
 
 
-Compiling and running the Freeciv Web client (old method)
----------------------------------------------------------
-When not using Vagrant, or with other Linux distributions, follow this 
-manual installation procedure to setup Freeciv-web:
-
-0. Checkout Freeciv-web from github to ~/freeciv-build
-
-1. Install the system requirements from the previous chapter.
-
-2. Create mysql database called 'freeciv_web'
-   Import mysql tables into a MySQL database from:
-    freeciv-web/src/main/webapp/meta/private/metaserver.sql
-
-3. Get, prepare, and build freeciv server:
-   > cd freeciv
-   > ./prepare_freeciv.sh
-
-4. Install Freeciv. This involves running the following commands:
-   > cd freeciv/freeciv  
-   > make install     (as root user)  
-
-5. Build and configure freeciv-web. 
-
-   - Run setup_links.sh and sync.sh in the scripts/freeciv-img-extract directory.
-   - Run sync-js-hand.sh in the scripts/ directory.
-   - Copy freeciv-web/src/main/webapp/WEB-INF/resin-web.xml.dist as resin-web.xml
-     and update the values for your MySQL database.
-   - Copy freeciv-web/src/main/webapp/meta/php_code/local.php.dist as local.php
-     and edit to suit your needs.
-   - Run 'setup.sh' in the freeciv-web directory
-   - Copy nginx configuration file from publite2/nginx/freeciv-web
-     to the nginx config directory, /usr/local/nginx/conf, /etc/nginx, or /usr/local/etc/nginx 
-     and edit it to suit your needs.
-   - Copy scripts/configuration.sh.dist to scripts/configuration.sh and edit it to suit your needs.
-   - Copy publite2/settings.ini.dist to publite2/settings.ini and edit it to suit your needs.
-   - You may wish to create a freeciv/dl_freeciv.sh if you have trouble with your Internet connection and build the Freeciv server often. See freeciv/dl_freeciv_default.sh and freeciv/dl_freeciv_from_git_svn.sh.dist
-
-
-6.  Start and stop Freeciv-web with the following commands:  
+Start and stop Freeciv-web with the following commands:  
   start-freeciv-web.sh  
   stop-freeciv-web.sh  
-  status-freeciv-web.sh        (this script is useful to debug if Freeciv-web is running correctly)
-(On Vagrant, these scripts are found in PATH)  
+  status-freeciv-web.sh
 
 All software components in Freeciv-web will log to the /logs sub-directory of the Freeciv-web installation.
 

@@ -40,8 +40,8 @@ public class ValidateUser extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
 
-        String username = request.getParameter("username");
-       
+       String userstring = request.getParameter("userstring");
+       String invited_by = request.getParameter("invited_by");
 
        Connection conn = null;
         try {
@@ -49,17 +49,25 @@ public class ValidateUser extends HttpServlet {
             DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
             conn = ds.getConnection();
 
-            String pwdSQL = "SELECT count(*) from auth where username = ? ";
-            PreparedStatement preparedStatement = conn.prepareStatement(pwdSQL);
-            preparedStatement.setString(1, username);
+            String usrSQL = "SELECT username, activated from auth where username = ? or email = ?";
+            PreparedStatement preparedStatement = conn.prepareStatement(usrSQL);
+            preparedStatement.setString(1, userstring);
+            preparedStatement.setString(2, userstring);
   	    ResultSet rs = preparedStatement.executeQuery();
-            rs.next();
-            if (rs.getInt(1) != 1) {
-              response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid user.");
+            if (rs.next()) {
+              String username = (String)rs.getString(1);
+              int activated = (Integer)rs.getInt(2);
+              if (activated == 1) {
+                response.getOutputStream().print(username);
+              } else {
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid user");
+              }
+  
+            } else if (userstring != null && userstring.contains("@")) {
+                response.getOutputStream().print("invitation");
+            } else {
+              response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid user");
             }
-
-            response.getOutputStream().print("OK!");
-
 
       } catch (Exception err) {
             response.setHeader("result", "error");

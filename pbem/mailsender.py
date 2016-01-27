@@ -18,6 +18,7 @@
 import smtplib
 import json
 import configparser
+import re
 
 from email.mime.text import MIMEText
 
@@ -68,6 +69,20 @@ class MailSender():
     msg += "The Freeciv-web project - https://play.freeciv.org\n\n";
     self.send_mailgun_message(email_address, "Freeciv-Web: It's your turn to play! Turn: " \
         + str(turn), msg);
+
+  def send_invitation(self, invitation_from, invitation_to):
+    sender = re.sub(r'\W+', '', invitation_from);
+    msg = "Hello! You have been invited by " + sender + " to a " \
+    "multiplayer game on Freeciv-web. This is a play-by-email game that you can play " \
+    "in your browser for free.\n\nFollow this link to play against " + sender + ": " \
+     "https://play.freeciv.org/pbem?u=" + sender + "\n\n\n"; 
+    msg += "Play-By-Email is currently a Beta-feature, please report any problems playing " +\
+            "here: http://forum.freeciv.org/f/viewforum.php?f=24\n\n";
+    msg += "Freeciv-Web is a free and open source empire-building strategy game " + \
+             "inspired by the history of human civilization.\n\n";
+    msg += "The Freeciv-web project - https://play.freeciv.org\n\n";
+
+    self.send_mailgun_message(invitation_to, "Freeciv-Web: Join my game!" , msg);
 
 
   # send email with ranking after game is over.

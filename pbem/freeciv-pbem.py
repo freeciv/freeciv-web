@@ -45,6 +45,7 @@ status = MailStatus()
 status.savegames_read = 0;
 status.emails_sent = 0;
 status.ranklog_emails_sent = 0;
+status.invitation_emails_sent = 0;
 status.games = {};
 status.start();
 

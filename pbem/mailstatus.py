@@ -47,7 +47,7 @@ class StatusHandler(web.RequestHandler):
                "<tr><td>Number of savegames read:</td><td>" + str(self.mailchecker.savegames_read) + "</td></tr>" +
                "<tr><td>Number of ranklog emails sent:</td><td>" + str(self.mailchecker.ranklog_emails_sent) + "</td></tr>" +
                "<tr><td>Number of invitation emails sent:</td><td>" + str(self.mailchecker.invitation_emails_sent) + "</td></tr>" +
-               "<tr><td>Status of games:</td><td>" + json.dumps(self.mailchecker.games) + "</td></tr>" +
+               "<tr><td>Status of games:</td><td>" + json.dumps(list(self.mailchecker.games.values())) + "</td></tr>" +
                "</table>")
     self.write("</body></html>");
 

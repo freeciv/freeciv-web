@@ -30,9 +30,9 @@ function handle_pbem(data)
   if (data.indexOf("[[") != -1) {
     var gamestats_txt = data.substring(data.indexOf("[["), data.indexOf("]]") + 2);
     var gamestats = jQuery.parseJSON(gamestats_txt);
-    console.log(gamestats);
+    $("#pbemplr").html($("#pbemplr").html()+" ("+gamestats.length+")");
     for (var i = 0; i < gamestats.length; i++) {
-      var game = gamestats[i];
+      var game = gamestats[gamestats.length - i - 1];
       var turn = game[0];
       var phase = game[1];
       var player_one = game[2][0];

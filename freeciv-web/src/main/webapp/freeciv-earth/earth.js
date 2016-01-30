@@ -70,27 +70,38 @@ function pixel_color(colorRed,colorGreen,colorBlue,pixel, threshold)
     return (Math.sqrt(diffR*diffR + diffG*diffG + diffB*diffB) < threshold);
 }
 
-function get_map_terrain_type(pixel) 
+function get_map_terrain_type(x, y, pixel) 
 {
+  var lat_1 = map.getBounds().getNorthEast().lat;
+  var lat_2 = map.getBounds().getSouthWest().lat;
+
+  var near_equator = false;
+
+  var dy = (90 - lat_1) / 180 + (y / height) * Math.abs(lat_1 - lat_2) / 180;
+  // near_equator is used to create desert tiles near equator and tundra near
+  // the poles, since these have similar colors.
+  if (dy > 0.25 && dy < 0.75) near_equator = true; 
+
   var rnd = Math.random();
   if (pixel_color(255,255,255, pixel, 20)) return "a";  //arctic
   if (pixel_color(64, 83, 3538, pixel, 40)) return "g"; //grassland
-  if (pixel_color(84, 73, 38, pixel, 20)) return "t";   //tundra
-  if (pixel_color(240, 220, 155, pixel, 100)) return "d"; //desert
+  if (pixel_color(84, 73, 38, pixel, 20) && !near_equator) return "t";   //tundra
+  if (pixel_color(240, 220, 155, pixel, 100) && near_equator) return "d"; //desert
   if (pixel_color(44, 52, 28, pixel, 10)) return "f"; //forest
   if (pixel_color(37, 64, 27, pixel, 10)) return "g"; //jungle
   if (pixel_color(60, 89, 38, pixel, 30)) return "g"; //jungle
-  if (pixel_color(204, 99, 40, pixel, 100)) return "d"; //desert
+  if (pixel_color(204, 99, 40, pixel, 100) && near_equator) return "d"; //desert
   if (pixel_color(67, 72, 31, pixel, 10)) return "m"; //mountains
   if (pixel_color(61, 79, 31, pixel, 10)) return "h"; //hills
   if (pixel_color(4, 10, 20, pixel, 15)) return ":";  //ocean
   if (pixel_color(8, 20, 36, pixel, 15)) return " ";  //coast
   if (pixel_color(39, 57, 61, pixel, 35)) return " ";  //coast
 
-  if (rnd < 3) return "p"; //plains
-  if (rnd >= 3 && rnd <= 5) return "h";  //hills
-  if (rnd >= 5 && rnd < 8) return "t";  //tundra 
-  if (rnd >= 8) return "g";  //grassland 
+  if (rnd < 4) return "p"; //plains
+  if (rnd >= 4 && rnd <= 6) return "h";  //hills
+  if (rnd >= 6 && rnd < 7) return "t";  //tundra 
+  if (rnd >= 7) return "g";  //grassland 
+
 }
 
 function zeroFill( number, width )
@@ -111,7 +122,7 @@ function process_image(ctx)
     mapline += "t" + zeroFill(y, 4) + '="';
     for (var x = 0; x < width; x++) {
       var pixel = ctx.getImageData(x, y, 1, 1);
-      mapline += get_map_terrain_type(pixel.data);
+      mapline += get_map_terrain_type(x, y, pixel.data);
     }
     mapline += '"\n';
   }

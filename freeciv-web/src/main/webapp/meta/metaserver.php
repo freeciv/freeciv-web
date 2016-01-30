@@ -492,10 +492,10 @@ if ( isset($port) ) {
 
 <div id="tabs">
 <ul>
-<li><a id="singleplr" href="#tabs-1">Single-player Games (<? print $single_count ?>)</a></li>
-<li><a id="multiplr" href="#tabs-2">Multi-player Games (<?  print $multi_count ?>)</a></li>
-<li><a id="pbemplr" href="#tabs-3">Play-By-Email Games</a></li>
-<li><a id="freecivmeta" href="#tabs-4">Desktop Games</a></li>
+<li><a id="singleplr" href="#tabs-1">Single-player (<? print $single_count ?>)</a></li>
+<li><a id="multiplr" href="#tabs-2">Multiplayer (<?  print $multi_count ?>)</a></li>
+<li><a id="pbemplr" href="#tabs-3">Play-By-Email</a></li>
+<li><a id="freecivmeta" href="#tabs-4">Desktop</a></li>
 </ul>
 <div id="tabs-1">
 <h2>Freeciv-web Single-player games</h2>

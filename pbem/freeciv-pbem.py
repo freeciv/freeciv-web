@@ -33,6 +33,7 @@ import configparser
 
 savedir = "../resin/webapps/data/savegames/" 
 rankdir = "../resin/webapps/data/ranklogs/" 
+game_expire_time = 60 * 60 * 24 * 7;  # 7 days until games are expired.
 
 settings = configparser.ConfigParser()
 settings.read("settings.ini")
@@ -46,11 +47,21 @@ status.savegames_read = 0;
 status.emails_sent = 0;
 status.ranklog_emails_sent = 0;
 status.invitation_emails_sent = 0;
+status.retired = 0;
 status.games = {};
 status.start();
 
+# remove old games 
+def cleanup_stats():
+  for key, value in status.games.copy().items():
+    if ((value[4] + game_expire_time)< (time.time())):
+      print("Expiring game: " + key);
+      del status.games[key];
+      status.retired += 1;
 
+# parse Freeciv savegame and collect information to include in e-mail.
 def handle_savegame(root, file):
+  time.sleep(1);
   filename = os.path.join(root,file)
   print("Handling savegame: " + filename);
   txt = None;
@@ -66,15 +77,17 @@ def handle_savegame(root, file):
   phase = find_phase(txt);
   turn = find_turn(txt);
   game_id = find_game_id(txt);
+  state = find_state(txt);
   print("game_id=" + str(game_id));
   print("phase=" + str(phase));
   print("turn=" + str(turn));
+  print("state=" + str(state));
   print("players=" + str(players));
 
   active_player = players[phase];
   print("active_player=" + active_player);    
   active_email = find_email_address(active_player);
-  status.games[game_id] = [turn, phase, players, time.ctime()];
+  status.games[game_id] = [turn, phase, players, time.ctime(), int(time.time()), state];
   if (active_email != None):
     print("active email=" + active_email);
     m = MailSender();
@@ -93,6 +106,13 @@ def find_turn(lines):
   for l in lines:
     if ("turn=" == l[0:5]): return int(l[5:]);
   return None;
+
+#Returns the current server state
+def find_state(lines):
+  for l in lines:
+    if ("server_state=" == l[0:13]): return l[18:].replace("\"","");
+  return None;
+
 
 #Returns the game id
 def find_game_id(lines):
@@ -179,6 +199,7 @@ if __name__ == '__main__':
       time.sleep(5);
       process_savegames();
       process_ranklogs();
+      cleanup_stats();
       time.sleep(60);
     except Exception as e:
       print(e);

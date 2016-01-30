@@ -37,16 +37,16 @@ class StatusHandler(web.RequestHandler):
   def get(self):
     req_ip = self.request.headers.get("X-Real-IP", "missing");
     print("request from " + req_ip);
-    self.ratelimit();
  
     self.write("<html><head><title>Mail status for Freeciv-web</title>" + 
                "<link href='//play.freeciv.org/css/bootstrap.min.css' rel='stylesheet'>" +
                "<meta http-equiv=\"refresh\" content=\"20\"><style>td { padding: 2px;}</style></head><body>");
     self.write("<div class='container'><h2>Freeciv-web PBEM status</h2>" + 
-               "<table><tr><td>Number of e-mails sent:</td><td>" + str(self.mailchecker.emails_sent) + "</td></tr>" +
-               "<tr><td>Number of savegames read:</td><td>" + str(self.mailchecker.savegames_read) + "</td></tr>" +
-               "<tr><td>Number of ranklog emails sent:</td><td>" + str(self.mailchecker.ranklog_emails_sent) + "</td></tr>" +
-               "<tr><td>Number of invitation emails sent:</td><td>" + str(self.mailchecker.invitation_emails_sent) + "</td></tr>" +
+               "<table><tr><td>PBEM E-mails sent:</td><td>" + str(self.mailchecker.emails_sent) + "</td></tr>" +
+               "<tr><td>Savegames read:</td><td>" + str(self.mailchecker.savegames_read) + "</td></tr>" +
+               "<tr><td>Ranklog emails sent:</td><td>" + str(self.mailchecker.ranklog_emails_sent) + "</td></tr>" +
+               "<tr><td>Invitation emails sent:</td><td>" + str(self.mailchecker.invitation_emails_sent) + "</td></tr>" +
+               "<tr><td>Games expired:</td><td>" + str(self.mailchecker.retired) + "</td></tr>" +
                "<tr><td>Status of games:</td><td>" + json.dumps(list(self.mailchecker.games.values())) + "</td></tr>" +
                "</table>")
     self.write("</body></html>");

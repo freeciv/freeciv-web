@@ -494,7 +494,8 @@ if ( isset($port) ) {
 <ul>
 <li><a id="singleplr" href="#tabs-1">Single-player Games (<? print $single_count ?>)</a></li>
 <li><a id="multiplr" href="#tabs-2">Multi-player Games (<?  print $multi_count ?>)</a></li>
-<li><a id="freecivmeta" href="#tabs-3">Desktop Games</a></li>
+<li><a id="pbemplr" href="#tabs-3">Play-By-Email Games</a></li>
+<li><a id="freecivmeta" href="#tabs-4">Desktop Games</a></li>
 </ul>
 <div id="tabs-1">
 <h2>Freeciv-web Single-player games</h2>
@@ -549,7 +550,7 @@ if ( isset($port) ) {
  </div>
  <div id="tabs-2">
  <h2>Freeciv-web Multiplayer games around the world</h2>
-
+ <b>Freeciv-web multiplayer games where you can play against players online. Multiplayer games have simultaneous movement.</b><br><br>
 <?
       $stmt="select host,port,version,patches,state,message,unix_timestamp()-unix_timestamp(stamp), (select value from variables where name = 'turn' and hostport = CONCAT(s.host ,':',s.port)) as turn from servers s where type = 'multiplayer' or message LIKE '%Multiplayer%' order by humans desc, state desc";
       $res = fcdb_exec($stmt);
@@ -620,8 +621,20 @@ if ( isset($port) ) {
 
 ?>
 
-
 <div id="tabs-3">
+  <h2>Play-By-Email Games</h2>
+  <b>Play-By-Email games allows players to play alternating turns, and get an e-mail every time it is their turn to play. These games are
+     often played over a long time period, each turn can take up to 7 days.</b><br><br>
+  <table id="pbem_table" class='metatable pbem'>
+    <tr class='meta_header'><th>Players</th><th>Current player</th><th>Turn</th><th>Last played</th><th>State</th></tr>
+  </table>
+  <br>
+  To start a new Play-By-Email game, <a href="/webclient/?action=pbem">log in here</a>. To play your turn in a running Play-By-Email game,
+  click on the link in the last e-mail you got from Freeciv-web. Games are expired after 7 days if you don't play your turn. <br><br>
+  <small>Note: if you don't see your game in this list, it could be that the server has been restarted. You can still join the game by clicking on the link in your email.</small> 
+</div>
+
+<div id="tabs-4">
   <b>Public servers for desktop Freeciv clients hosted on <a href="http://meta.freeciv.org">meta.freeciv.org</a></b>:
   <? include 'freeciv_org_metaserver.html'; ?>
 

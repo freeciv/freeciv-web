@@ -22,6 +22,7 @@ from threading import Thread
 from tornado import web, websocket, ioloop, httpserver
 from tornado.ioloop import IOLoop
 import re
+import time
 
 STATUS_PORT = 3999
 savedir = "../resin/webapps/data/savegames/";
@@ -52,6 +53,7 @@ class MapHandler(web.RequestHandler):
 
   def post(self):
     global savecounter;
+    time.sleep(1);
     print("handling request " + str(savecounter) + " to generate savegame for Freeciv-Earth.");
     self.set_header("Content-Type", "text/plain")
     users_map_string = self.request.body.decode("utf-8");

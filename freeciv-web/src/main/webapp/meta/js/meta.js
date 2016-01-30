@@ -9,9 +9,49 @@ $(document).ready(function() {
 	 } else { 
 		$( "#tabs" ).tabs();
 	}
+
+  $.ajax({
+    url: "/mailstatus",
+    dataType: "html",
+    cache: true,
+    async: true
+  }).done(function( data ) {
+    handle_pbem(data);
+  });
+
+
 });
 
+/****************************************************************************
+  Updates metaserver with information about running games
+****************************************************************************/
+function handle_pbem(data)
+{
+  if (data.indexOf("[[") != -1) {
+    var gamestats_txt = data.substring(data.indexOf("[["), data.indexOf("]]") + 2);
+    var gamestats = jQuery.parseJSON(gamestats_txt);
+    console.log(gamestats);
+    for (var i = 0; i < gamestats.length; i++) {
+      var game = gamestats[i];
+      var turn = game[0];
+      var phase = game[1];
+      var player_one = game[2][0];
+      var player_two = game[2][1];
+      var current_player = game[2][phase];
+      var last_played = game[3];
+      var state = game[5];
+      $("#pbem_table").append("<tr><td>" + player_one + " - " + player_two + "</td><td>" + current_player 
+           + "</td><td>" + turn + "</td><td>" + last_played + "</td><td>" + toTitleCase(state) + "</td></tr>");
+    }
+  } else {
+    $("#pbem_table").hide();
+  }
+}
 
+
+/****************************************************************************
+  Shows scores on the game details page.
+****************************************************************************/
 function show_scores(port) {
   $.ajax({
     url: "/data/scorelogs/score-" + port + ".log",
@@ -24,13 +64,7 @@ function show_scores(port) {
   }).done(function( data ) {
     handle_scorelog(data);
   });
-
-
-
 }
-
-
-
 
 /****************************************************************************
  Handles the scorelog file
@@ -126,3 +160,7 @@ function get_scorelog_name(tag) {
   return names[tag];
 }
 
+function toTitleCase(str)
+{
+  return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+}

@@ -19,6 +19,7 @@ import smtplib
 import json
 import configparser
 import re
+import time
 
 from email.mime.text import MIMEText
 
@@ -34,6 +35,7 @@ class MailSender():
   smtp_sender=settings.get("Config", "smtp_sender")
 
   def send_message_via_smtp(self, from_, to, mime_string):
+    time.sleep(2);
     smtp = smtplib.SMTP(self.smtp_host, int(self.smtp_port))
     smtp.login(self.smtp_login, self.smtp_password);
     smtp.sendmail(from_, to, mime_string)

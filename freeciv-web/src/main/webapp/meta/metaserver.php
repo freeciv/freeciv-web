@@ -623,8 +623,7 @@ if ( isset($port) ) {
 
 <div id="tabs-3">
   <h2>Play-By-Email Games</h2>
-  <b>Play-By-Email games allows players to play alternating turns, and get an e-mail every time it is their turn to play. These games are
-     often played over a long time period, each turn can take up to 7 days.</b><br><br>
+  <b>A Play-By-Email game is a 1v1 deathmatch on a small map, with alternating turns, and players get an e-mail every time it is their turn to play. These games are often played over a long time period, each turn can take up to 7 days.</b><br><br>
   <table id="pbem_table" class='metatable pbem'>
     <tr class='meta_header'><th>Players</th><th>Current player</th><th>Turn</th><th>Last played</th><th>State</th></tr>
   </table>

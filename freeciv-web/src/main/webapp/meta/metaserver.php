@@ -74,7 +74,7 @@ $sqlvars = array(
   "serverid"
 );
 
-/* this little block of code "changes" the namespace of the variables 
+/* this little block of code "changes" the namespace of the variables
  * we got from the $_REQUEST variable to a local scope */
 $assoc_array = array();
 foreach($posts as $val) {
@@ -117,15 +117,17 @@ if ( isset($port) ) {
   }
 
   if (isset($message)) {
-    $message = addneededslashes($message); /* escape stuff to go into the database */
+    $message = addneededslashes_db($message); /* escape stuff to go into the database */
   }
   if (isset($type)) {
-    $type = addneededslashes($type); /* escape stuff going to database */
+    $type = addneededslashes_db($type); /* escape stuff going to database */
   }
   if (isset($serverid)) {
-    $serverid = addneededslashes($serverid); /* escape stuff to go into the database */
+    $serverid = addneededslashes_db($serverid); /* escape stuff to go into the database */
   }
-
+  if (isset($ruleset)) {
+    $ruleset = addneededslashes_db($ruleset);
+  }
 
   /* lets get the player information arrays if we were given any */
   $playerstmt = array();
@@ -134,30 +136,30 @@ if ( isset($port) ) {
       $ins = "insert into players set hostport=\"$host:$port\", ";
 
       if (isset($plu[$i]) ) {
-        $plu[$i] = addneededslashes($plu[$i]);
+        $plu[$i] = addneededslashes_db($plu[$i]);
         $ins .= "user=\"$plu[$i]\", ";
       }
       if (isset($pll[$i]) ) {
-        $pll[$i] = addneededslashes($pll[$i]);
+        $pll[$i] = addneededslashes_db($pll[$i]);
         $ins .= "name=\"$pll[$i]\", ";
       }
       if (isset($pln[$i]) ) {
-        $pln[$i] = addneededslashes($pln[$i]);
+        $pln[$i] = addneededslashes_db($pln[$i]);
         $ins .= "nation=\"$pln[$i]\", ";
       }
       if (isset($plf[$i]) ) {
-        $plf[$i] = addneededslashes($plf[$i]);
+        $plf[$i] = addneededslashes_db($plf[$i]);
         $ins .= "flag=\"$plf[$i]\", ";
       }
 
       if (isset($plt[$i]) ) {
-        $plt[$i] = addneededslashes($plt[$i]);
+        $plt[$i] = addneededslashes_db($plt[$i]);
         $ins .= "type=\"$plt[$i]\", ";
       }
       $ins .= "host=\"$plh[$i]\"";
       /* an array of all the sql statements; save actual db access to the end */
       debug("\nINS = $ins\n\n");
-      array_push($playerstmt, $ins); 
+      array_push($playerstmt, $ins);
     }
   }
 
@@ -170,7 +172,7 @@ if ( isset($port) ) {
       if ($row["value"] < $vv[8]) {
         $myincrease = intval($vv[8]) - intval($row["value"]);
         if ($myincrease > 0 && $myincrease <= 5) {
-          $stmt="update turncount set count = count + " . addneededslashes($myincrease);
+          $stmt="update turncount set count = count + " . addneededslashes_db($myincrease);
           $res = fcdb_exec($stmt);
         }
       }
@@ -184,8 +186,8 @@ if ( isset($port) ) {
   $variablestmt = array();
   if (isset($vn)) {
     for ($i = 0; $i < count($vn); $i++) { /* run through all the names */
-      $vn[$i] = addneededslashes($vn[$i]);
-      $vv[$i] = addneededslashes($vv[$i]);
+      $vn[$i] = addneededslashes_db($vn[$i]);
+      $vv[$i] = addneededslashes_db($vv[$i]);
       $ins = "insert into variables set hostport=\"$host:$port\", ";
       $ins .= "name=\"$vn[$i]\", ";
       $ins .= "value=\"$vv[$i]\"";
@@ -257,7 +259,7 @@ if ( isset($port) ) {
 
   /* if we have a playerstmt array we want to zero out the players
    * and if the server wants to explicitly tell us to drop them all */
-  if (count($playerstmt) > 0 || isset($dropplrs)) { 
+  if (count($playerstmt) > 0 || isset($dropplrs)) {
     $delstmt = "delete from players where hostport=\"$host:$port\"";
 
     print "$delstmt\n";
@@ -294,7 +296,7 @@ if ( isset($port) ) {
     <meta name="description" content="Freeciv is a Free and Open Source empire-building strategy game made with HTML5 which you can play in your browser, tablet or mobile device!">
     <meta name="google-site-verification" content="Dz5U0ImteDS6QJqksSs6Nq7opQXZaHLntcSUkshCF8I" />
     <meta property="og:image" content="/images/freeciv-fp-logo-2.png" />
-    
+
     <title>Freeciv-web - strategy game playable online with HTML5</title>
 
     <link rel="shortcut icon" href="/images/freeciv-shortcut-icon.png">
@@ -310,9 +312,9 @@ if ( isset($port) ) {
 
     <script src="/javascript/libs/jquery.min.js"></script>
     <script src="/javascript/libs/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/javascript/libs/jquery-ui.min.js"></script>   
-    <script type="text/javascript" src="/javascript/libs/raphael-min.js"></script>   
-    <script type="text/javascript" src="/javascript/libs/morris.min.js"></script>   
+    <script type="text/javascript" src="/javascript/libs/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/javascript/libs/raphael-min.js"></script>
+    <script type="text/javascript" src="/javascript/libs/morris.min.js"></script>
     <script type="text/javascript" src="/meta/js/meta.js"></script>
 
 <script>
@@ -322,9 +324,9 @@ if ( isset($port) ) {
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
   ga('create', 'UA-40584174-1', 'auto');
-  ga('send', 'pageview');  
+  ga('send', 'pageview');
 
-</script> 
+</script>
   </head>
   <body>
   <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-553240ed5ba009c1" async="async"></script>
@@ -358,9 +360,9 @@ if ( isset($port) ) {
       </div>
     </div>
   </nav>
-  
+
   <!-- Begin page content -->
-  <div id="content" class="container">
+  <div id="content" class="container">
       <div class="row span12 metaspan">
 
 
@@ -370,12 +372,12 @@ if ( isset($port) ) {
     echo $error_msg;
   } else {
     if (isset($server_port)) {
- 
+
 
       $port = substr(strrchr($server_port, ":"), 1);
       $host = substr($server_port, 0, strlen($server_port) - strlen($port) - 1);
       print "<div class='freeciv_game_info_box'><h1>Freeciv-web server id: " . db2html($port) . "</h1>\n";
-      
+
       $stmt = "select * from servers where host=\"$host\" and port=\"$port\"";
       $res = fcdb_exec($stmt);
       $nr = fcdb_num_rows($res);
@@ -383,9 +385,9 @@ if ( isset($port) ) {
         print "Cannot find the specified server";
       } else {
         $row = fcdb_fetch_array($res, 0);
-  
+
         print "<br/><center>";
-        $msg = db2html($row["message"]);
+        $msg = stripslashes(db2html($row["message"]));
         if ($msg != "") {
           print "<p>";
           print "<table class='server_message'><tr class='meta_header'><th>Message</th></tr>\n";
@@ -405,15 +407,15 @@ if ( isset($port) ) {
         print "<tr class='meta_row'><td>";
         print db2html($row["version"]);
         print "</td><td>";
-        print db2html($row["patches"]);
+        print stripslashes(db2html($row["patches"]));
         print "</td><td>";
         print db2html($row["capability"]);
         print "</td><td>";
         print db2html($row["state"]);
         print "</td><td>";
-        print db2html($row["ruleset"]);
+        print stripslashes(db2html($row["ruleset"]));
         print "</td><td>";
-        print db2html($row["serverid"]);
+        print stripslashes(db2html($row["serverid"]));
         print "</td></tr>\n</table></p>\n";
           $stmt="select * from players where hostport=\"$server_port\" order by name";
         $res = fcdb_exec($stmt);
@@ -513,25 +515,25 @@ if ( isset($port) ) {
         print "<th>Turn:</th></tr>";
         for ( $inx = 0; $inx < $nr; $inx++ ) {
           $row = fcdb_fetch_array($res, $inx);
-          if (strpos($row["message"],'password-protected') !== false) {  
+          if (strpos($row["message"],'password-protected') !== false) {
             print "<tr class='meta_row private_game'><td>";
           } else {
             print "<tr class='meta_row'><td>";
           }
-	  print "<a  class='button' href=\"/webclient?action=observe&amp;civserverport=" 
+	  print "<a  class='button' href=\"/webclient?action=observe&amp;civserverport="
 		  . db2html($row["port"]) . "&amp;civserverhost=" . db2html($row["host"]) . "\">";
           print "Observe";
           print "</a>";
 
           print "<a class='button' href=\"/meta/metaserver.php?server_port=" . db2html($row["host"]) . ":" . db2html($row["port"]) . "\">";
-	  	  print "Info";
+          print "Info";
           print "</a>";
 	  print "</td><td>";
           $stmt="select * from players where hostport=\"".$row['host'].":".$row['port']."\"";
           $res1 = fcdb_exec($stmt);
           print fcdb_num_rows($res1);
           print "</td><td style=\"width: 30%\" >";
-          print db2html($row["message"]);
+          print stripslashes(db2html($row["message"]));
           print "</td><td>";
 
           print db2html($row["player"]);
@@ -563,21 +565,21 @@ if ( isset($port) ) {
         print "<th>Turn:</th></tr>";
 
         for ( $inx = 0; $inx < $nr; $inx++ ) {
- 	  $row = fcdb_fetch_array($res, $inx);
+          $row = fcdb_fetch_array($res, $inx);
 	  $mystate = db2html($row["state"]);
 
           $stmt="select * from players where type='Human' and hostport=\"".$row['host'].":".$row['port']."\"";
 	  $res1 = fcdb_exec($stmt);
 
 	  print "<tr class='meta_row ";
-	  if (strpos($row["message"],'password-protected') !== false) {  
+	  if (strpos($row["message"],'password-protected') !== false) {
             print " private_game ";
           } else if ($mystate == "Running") {
             print " running_game ";
 	  } else if (fcdb_num_rows($res1) != 0) {
 	    print " pregame_with_players ";
 	  }
-	  print "'><td> "; 
+	  print "'><td> ";
 
           if ($mystate != "Running") {
            print "<a  class='button' href=\"/webclient?action=multi&civserverport=" . db2html($row["port"]) . "&amp;civserverhost=" . db2html($row["host"]) . "&amp;multi=true\">";
@@ -591,7 +593,7 @@ if ( isset($port) ) {
 
 
           print "<a class='button' href=\"/meta/metaserver.php?server_port=" . db2html($row["host"]) . ":" . db2html($row["port"]) . "\">";
-	  	  print "Info";
+          print "Info";
           print "</a>";
 
 	  print "</td>";
@@ -607,7 +609,7 @@ if ( isset($port) ) {
 		  print ("<td>" . fcdb_num_rows($res1 ) . " players");
 	  }
           print "</td><td style=\"width: 30%\" >";
-          print db2html($row["message"]);
+          print stripslashes(db2html($row["message"]));
 	  print "</td><td>"
           print db2html($row["turn"]);
 	  print "</td></tr>\n";
@@ -630,7 +632,7 @@ if ( isset($port) ) {
   <br>
   To start a new Play-By-Email game, <a href="/webclient/?action=pbem">log in here</a>. To play your turn in a running Play-By-Email game,
   click on the link in the last e-mail you got from Freeciv-web. Games are expired after 7 days if you don't play your turn. <br><br>
-  <small>Note: if you don't see your game in this list, it could be that the server has been restarted. You can still join the game by clicking on the link in your email.</small> 
+  <small>Note: if you don't see your game in this list, it could be that the server has been restarted. You can still join the game by clicking on the link in your email.</small>
 </div>
 
 <div id="tabs-4">
@@ -649,8 +651,8 @@ if ( isset($port) ) {
 
 <?
     }
-    
-    
+
+
   }
  ?>
 
@@ -667,16 +669,16 @@ if ( isset($port) ) {
 
 
   </body>
-  
+
   </html>
 
 
 
-<?php 
-} 
+<?php
+}
 
 /* This returns a list of the capabilities that are mandatory in a given capstring
- * i.e. those that begin with a + 
+ * i.e. those that begin with a +
  */
 function mandatory_capabilities($capstr) {
   $return=array();
@@ -722,5 +724,5 @@ function debug($output) {
     fclose($stderr);
   }
 }
-      
+
 ?>

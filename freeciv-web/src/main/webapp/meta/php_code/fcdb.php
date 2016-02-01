@@ -163,6 +163,17 @@ function fcdb_mktime($time_str) {
   return ($time_sec);
 }
 
+function addneededslashes_db($str) {
+  global $fcdb_conn;
+
+  if (get_magic_quotes_gpc()) {
+    // Get rid of automatically added slashes first. We want to set them correctly!
+    $str = stripslashes($str);
+  }
+
+  return mysql_real_escape_string($str);
+}
+
 // Store error message. Don't send it yet as HTTP headers must be sent first.
 function build_fcdb_error($what_error) {
   global $webmaster_html;

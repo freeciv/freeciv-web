@@ -6,7 +6,7 @@ function db2html($orig) {
   return htmlentities(stripslashes($orig), ENT_COMPAT, "UTF-8");
 }
 
-function addneededslashes($orig) {
+function addneededslashes_php($orig) {
   // Only add slashes if not automagically added
   if (!get_magic_quotes_gpc()) {
     return addslashes($orig);

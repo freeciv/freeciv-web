@@ -81,6 +81,9 @@ table, th, td
   table.multiplayer td:nth-child(5) {
    display: none;
  }
+  table.pbem td:nth-child(5) {
+   display: none;
+ }
 
 
 }

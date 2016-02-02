@@ -365,13 +365,16 @@ function update_active_units_dialog()
   if (current_focus.length > 0) {
     /* reposition and resize unit dialog. */
     var newwidth = 32 + punits.length * (width + 10);
-    if (newwidth < 200) newwidth = 200;
+    if (newwidth < 100) newwidth = 100;
     var newheight = 75 + normal_tile_height;
+    $("#game_unit_panel").parent().show();
     $("#game_unit_panel").parent().width(newwidth);
     $("#game_unit_panel").parent().height(newheight);
     $("#game_unit_panel").parent().css("left", ($( window ).width() - newwidth) + "px");
     $("#game_unit_panel").parent().css("top", ($( window ).height() - newheight - 30) + "px");
     $("#game_unit_panel").parent().css("background", "rgba(50,50,40,0.5)");
+  } else {
+    $("#game_unit_panel").parent().hide();
   }
   $("#active_unit_info").tooltip();
 }

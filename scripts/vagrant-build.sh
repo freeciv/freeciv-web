@@ -143,9 +143,9 @@ unzip -qo 1.1-beta3.zip
 cd casperjs-1.1-beta3
 ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs
 
-echo "Start testing of Freeciv-web using CasperJS:"
-cd ${basedir}/tests/
-xvfb-run casperjs --engine=slimerjs test freeciv-web-tests.js || (>&2 echo "Freeciv-web CasperJS tests failed!" && exit 1)
+#echo "Start testing of Freeciv-web using CasperJS:"
+#cd ${basedir}/tests/
+#xvfb-run casperjs --engine=slimerjs test freeciv-web-tests.js || (>&2 echo "Freeciv-web CasperJS tests failed!" && exit 1)
 
 echo "Freeciv-web started! Now try http://localhost/ on your host operating system."
 

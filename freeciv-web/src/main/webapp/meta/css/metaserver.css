@@ -84,6 +84,9 @@ table, th, td
   table.pbem td:nth-child(5) {
    display: none;
  }
+  table.pbem th:nth-child(5) {
+   display: none;
+ }
 
 
 }

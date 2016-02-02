@@ -627,7 +627,7 @@ if ( isset($port) ) {
   <h2>Play-By-Email Games</h2>
   <b>A Play-By-Email game is a 1v1 deathmatch on a small map, with alternating turns, and players get an e-mail every time it is their turn to play. These games are often played over a long time period, each turn can take up to 7 days.</b><br><br>
   <table id="pbem_table" class='metatable pbem'>
-    <tr class='meta_header'><th>Players</th><th>Current player</th><th>Turn</th><th>Last played</th><th>State</th></tr>
+    <tr class='meta_header'><th>Players</th><th>Current player</th><th>Turn</th><th>Last played</th><td>State</td></tr>
   </table>
   <br>
   To start a new Play-By-Email game, <a href="/webclient/?action=pbem">log in here</a>. To play your turn in a running Play-By-Email game,

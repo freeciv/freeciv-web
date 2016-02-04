@@ -136,7 +136,7 @@ def find_email_address(user_to_find):
   try:
     cnx = mysql.connector.connect(user=mysql_user, database=mysql_database, password=mysql_password)
     cursor = cnx.cursor()
-    query = ("select email from auth where username=%(usr)s and activated='1' limit 1")
+    query = ("select email from auth where lower(username)=lower(%(usr)s) and activated='1' limit 1")
     cursor.execute(query, {'usr' : user_to_find})
     for email in cursor:
       result = email[0];

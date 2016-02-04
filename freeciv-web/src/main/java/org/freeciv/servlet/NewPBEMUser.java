@@ -73,14 +73,17 @@ public class NewPBEMUser extends HttpServlet {
     	urlParameters.add(new BasicNameValuePair("response", captcha));
     	post.setEntity(new UrlEncodedFormEntity(urlParameters));
 
-    	HttpResponse captcha_response = client.execute(post);
-    	
-    	InputStream in = captcha_response.getEntity().getContent();
-    	String body = IOUtils.toString(in, "UTF-8");
-    	if (!(body.contains("success") && body.contains("true"))) {
+        if (!captcha_secret.contains("secret goes here")) {
+          /* Validate captcha against google api. skip validation for localhost 
+             where captcha_secret still has default value. */
+          HttpResponse captcha_response = client.execute(post);
+          InputStream in = captcha_response.getEntity().getContent();
+          String body = IOUtils.toString(in, "UTF-8");
+    	  if (!(body.contains("success") && body.contains("true"))) {
     		response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Captcha failed!");
     		return;
-    	}
+    	  }
+       }
 
        Connection conn = null;
         try {
@@ -92,7 +95,7 @@ public class NewPBEMUser extends HttpServlet {
  
             String insertTableSQL = "INSERT INTO auth (username, email, password, activated) VALUES (?,?,?,?)";
             PreparedStatement preparedStatement = conn.prepareStatement(insertTableSQL);
-            preparedStatement.setString(1, username);
+            preparedStatement.setString(1, username.toLowerCase());
             preparedStatement.setString(2, email);
             preparedStatement.setString(3, password);
             preparedStatement.setInt(4, 1);

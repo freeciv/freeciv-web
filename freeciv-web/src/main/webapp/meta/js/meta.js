@@ -32,11 +32,12 @@ function handle_pbem(data)
     var gamestats = jQuery.parseJSON(gamestats_txt);
     $("#pbemplr").html($("#pbemplr").html()+" ("+gamestats.length+")");
     for (var i = 0; i < gamestats.length; i++) {
-      var game = gamestats[gamestats.length - i - 1];
+      var game = gamestats[gamestats.length-i-1];
       var turn = game[0];
       var phase = game[1];
       var player_one = game[2][0];
       var player_two = game[2][1];
+      if (player_one.indexOf("@") != -1 || player_two.indexOf("@") != -1) continue;
       var current_player = game[2][phase];
       var last_played = game[3];
       var state = game[5];

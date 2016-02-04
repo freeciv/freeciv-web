@@ -500,6 +500,7 @@ function mapview_put_goto_line(pcanvas, dir, canvas_x, canvas_y) {
 function set_city_mapview_active()
 {
   city_canvas = document.getElementById('city_canvas');
+  if (city_canvas == null) return;
   city_canvas_ctx = city_canvas.getContext('2d');
   city_canvas_ctx.font = canvas_text_font;
 

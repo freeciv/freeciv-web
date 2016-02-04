@@ -49,7 +49,7 @@ public class ValidateUser extends HttpServlet {
             DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
             conn = ds.getConnection();
 
-            String usrSQL = "SELECT username, activated from auth where username = ? or email = ?";
+            String usrSQL = "SELECT username, activated from auth where lower(username) = lower(?) or lower(email) = lower(?)";
             PreparedStatement preparedStatement = conn.prepareStatement(usrSQL);
             preparedStatement.setString(1, userstring);
             preparedStatement.setString(2, userstring);

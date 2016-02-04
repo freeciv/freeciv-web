@@ -351,6 +351,9 @@ function update_unit_focus()
 {
   if (active_city != null) return; /* don't change focus while city dialog is active.*/
 
+  if (C_S_RUNNING != client_state()) return;
+
+
   /* iterate zero times for no units in focus,
    * otherwise quit for any of the conditions. */
   var funits = get_units_in_focus();
@@ -1003,6 +1006,8 @@ function keyboard_listener(ev)
 {
   // Check if focus is in chat field, where these keyboard events are ignored.
   if (!keyboard_input) return;
+
+  if (C_S_RUNNING != client_state()) return;
 
   if (!ev) ev = window.event;
   var keyboard_key = String.fromCharCode(ev.keyCode);

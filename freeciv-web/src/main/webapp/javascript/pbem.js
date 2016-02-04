@@ -59,7 +59,7 @@ function show_pbem_dialog()
 			width: is_small_screen() ? "95%" : "60%",
 			buttons:
 			{
-				"Sign up new user": function() {
+				"Signup new user": function() {
                                     create_new_pbem_user();
 				},
 				"Log In" : function() {
@@ -113,6 +113,9 @@ function login_pbem_user()
 			width: is_small_screen() ? "80%" : "40%",
 			buttons:
 			{
+                                "Cancel" : function() {
+	                          show_pbem_dialog();
+				},
 				"Login" : function() {
                                   login_pbem_user_request();
 				}
@@ -149,7 +152,7 @@ function create_new_pbem_user()
   var title = "New user account";
   var message = "Create a new Freeciv-web user account with information about yourself:<br><br>"
                 + "<table><tr><td>Username:</td><td><input id='username' type='text' size='25' maxlength='30' onkeyup='return forceLower(this);'></td></tr>"  
-                + "<tr><td>Email:</td><td><input id='email' type='email' size='25' maxlength='30' ></td></tr>"  
+                + "<tr><td>Email:</td><td><input id='email' type='email' size='25' maxlength='64' ></td></tr>"  
                 + "<tr><td>Password:</td><td><input id='password' type='password' size='25'></td></tr></table><br>"
                 + "<div id='username_validation_result'></div><br>"
                 + "<div id='captcha_element'></div><br><br>"
@@ -171,7 +174,10 @@ function create_new_pbem_user()
 			width: is_small_screen() ? "90%" : "60%",
 			buttons:
 			{
-				"Sign up new user" : function() {
+                                "Cancel" : function() {
+	                          show_pbem_dialog();
+				},
+				"Signup new user" : function() {
                                   create_new_pbem_user_request();
 				}
 			}
@@ -189,7 +195,7 @@ function create_new_pbem_user()
 function create_new_pbem_user_request() 
 {
 
-  username = $("#username").val().trim();
+  username = $("#username").val().trim().toLowerCase();
   var password = $("#password").val().trim();
   var email = $("#email").val().trim();
   var captcha = $("#g-recaptcha-response").val();
@@ -269,7 +275,7 @@ function challenge_pbem_player_dialog()
 
   var title = "Find other players to play with!";
   var message = "Enter the username or e-mail address of the other player: "
-   + "<table><tr><td>Username/E-Mail:</td><td><input id='opponent' type='text' size='25' maxlength='32'"
+   + "<table><tr><td>Username/E-Mail:</td><td><input id='opponent' type='text' size='25' maxlength='64'"
    + " onkeyup='return forceLower(this);'></td></tr>"
    + "</table><br>"
    + "If the other player already has an account, then you will play the first turn. If you enter the e-mail " 
@@ -388,8 +394,8 @@ function create_new_pbem_game(check_opponent)
       if (data == "invitation") {
         send_pbem_invitation(check_opponent);
  
-      } else {
-        opponent = check_opponent;
+      } else if (data != null && data.length > 3) {
+        opponent = data;
         network_init();
         $("#dialog").dialog('close');
         setTimeout("create_pbem_players();", 3500);
@@ -397,9 +403,10 @@ function create_new_pbem_game(check_opponent)
           + ". You will now play the first turn in this play-by-email game. "
           + "The game will now start."}); 
 
+      } else {
+        swal("Problem starting new pbem game.");
       }
-
-      },
+    },
    error: function (request, textStatus, errorThrown) {
      swal("Opponent does not exist. Please try another username.");
    }
@@ -542,6 +549,9 @@ function close_pbem_account()
 			width: is_small_screen() ? "80%" : "60%",
 			buttons:
 			{
+				"Cancel" : function() {
+	                          show_pbem_dialog();
+				},
 				"Unsubscribe" : function() {
                                   request_deactivate_account();
 				}
@@ -575,9 +585,12 @@ function forgot_pbem_password()
 			modal: true,
 			width: is_small_screen() ? "80%" : "60%",
 			buttons:
-			{
+			{ 
+                                "Cancel" : function() {
+	                          show_pbem_dialog();
+				},
 				"Send password" : function() {
-                                  //login_pbem_user_request();
+                                  /* TODO. */
 				}
 			}
 		});

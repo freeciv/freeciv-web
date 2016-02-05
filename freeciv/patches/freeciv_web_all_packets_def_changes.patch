@@ -26,14 +26,6 @@ index b0e07fc..e0ab80b 100644
  type GOLD               = UINT32
  type HP                 = UINT8
  type PERCENT            = UINT8
-@@ -542,6 +543,7 @@ PACKET_GAME_INFO = 16; sc, is-info
-   STRING calendar_fragment_name[MAX_CALENDAR_FRAGMENTS][MAX_LEN_NAME];
-   BOOL civil_war_enabled;
-   BOOL paradrop_to_transport;
-+  STRING meta_message[MAX_LEN_NAME];
- end
- 
- # This cannot have is-info set. Sending the same value a second time after a
 @@ -627,6 +629,9 @@ PACKET_CITY_INFO = 31; sc, lsend, is-game-info, force, cancel(PACKET_CITY_SHORT_
    SINT16 citizen_base[O_LAST];
    SINT16 usage[O_LAST];

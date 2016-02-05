@@ -101,14 +101,17 @@ function update_game_status_panel() {
       status_html += "Sci: <b>" + sci + "</b>% ";
     }
   } else {
-    status_html += "Observing - " + game_info['meta_message'] + " - ";
+    status_html += "Observing - " + server_settings['metamessage']['val']
+                   + " - ";
     status_html += "Turn: <b>" + game_info['turn'] + "</b>  ";
   }
 
   $("#game_status_panel").html(status_html);
 
-  document.title = "Freeciv-web - " + username + "  (turn:" + game_info['turn'] + ", port:"
-                   + civserverport + ") " + game_info['meta_message'];
+  document.title = "Freeciv-web - " + username
+                   + "  (turn:" + game_info['turn'] + ", port:"
+                   + civserverport + ") "
+                   + server_settings['metamessage']['val'];
 
 
 }

@@ -393,7 +393,6 @@ function pregame_settings()
     $("#aifill").val(game_info['aifill']);
     $("#timeout").val(game_info['timeout']);
     $("#skill_level").val(ai_skill_level);
-    $("#metamessage").val(game_info['meta_message']);
     $("#techlevel").val("0");
     $("#landmass").val("30");
     $("#specials").val("250");
@@ -404,6 +403,11 @@ function pregame_settings()
   if (server_settings['size'] != null
       && server_settings['size']['val'] != null) {
     $("#mapsize").val(server_settings['size']['val']);
+  }
+
+  if (server_settings['metamessage'] != null
+      && server_settings['metamessage']['val'] != null) {
+    $("#metamessage").val(server_settings['metamessage']['val']);
   }
 
   if (ruleset_control != null) {

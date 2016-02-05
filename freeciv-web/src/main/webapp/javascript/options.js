@@ -119,7 +119,7 @@ function init_options_dialog()
   $("#save_button").button("option", "label", "Save Game");
 
   $("#timeout_setting").val(game_info['timeout']);
-  $("#metamessage_setting").val(game_info['meta_message']);
+  $("#metamessage_setting").val(server_settings['metamessage']['val']);
 
 
   $('#metamessage_setting').change(function() {

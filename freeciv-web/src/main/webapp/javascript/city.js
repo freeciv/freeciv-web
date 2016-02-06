@@ -1033,6 +1033,7 @@ function show_city_traderoutes()
     }
 
     tcity = cities[tcity_id];
+    if (tcity == null) continue;
     msg += "Trade with " + tcity['name'] + " gives "
         + routes[i]['value'] + " gold each turn." + "<br>";
   }

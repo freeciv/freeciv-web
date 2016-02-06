@@ -18,6 +18,14 @@
 ***********************************************************************/
 
 $(document).ready(function() {
+  $("#feedback_submit").click(function() {
+    $.ajax({
+      url: "/feedbackform.php?feedback=" + $("#feedback_form").val()
+    }).done(function( html ) {
+      alert("Thanks for your feedback!");
+    });
+  });
+
   var savegames = simpleStorage.get("savegames");
 
   if (savegames == null || savegames.length == 0) {

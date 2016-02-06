@@ -38,6 +38,8 @@ var default_tileset_name = "";
 var default_sound_set_name = "stdsounds";
 var default_sound_plugin_name = "";
 
+var sounds_enabled = true;
+
 var save_options_on_exit = TRUE;
 var fullscreen_mode = FALSE;
 
@@ -144,5 +146,12 @@ function init_options_dialog()
   }
 
   $(".setting_button").tooltip();
+
+  $('#play_sounds_setting').prop('checked', sounds_enabled);
+
+  $('#play_sounds_setting').change(function() {
+    sounds_enabled = !sounds_enabled;
+  });
+
 
 }

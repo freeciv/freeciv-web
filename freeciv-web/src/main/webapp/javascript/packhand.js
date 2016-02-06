@@ -514,6 +514,7 @@ function handle_unit_packet_common(packet_unit)
     units[packet_unit['id']] = packet_unit;
   } else {
     update_unit_anim_list(units[packet_unit['id']], packet_unit);
+    check_unit_sound_play(units[packet_unit['id']], packet_unit);
     units[packet_unit['id']] = $.extend(units[packet_unit['id']], packet_unit);
   }
 
@@ -544,6 +545,7 @@ function handle_unit_combat_info(packet)
   if (defender_hp == 0 && is_unit_visible(defender)) {
     explosion_anim_map[defender['tile']] = 25;
   }
+  play_combat_sound(attacker);
 }
 
 /**************************************************************************

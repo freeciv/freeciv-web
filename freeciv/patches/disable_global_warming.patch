@@ -1,0 +1,12 @@
+diff --git a/server/maphand.c b/server/maphand.c
+index b59b525..ed90244 100644
+--- a/server/maphand.c
++++ b/server/maphand.c
+@@ -99,6 +99,7 @@ static bool is_terrain_ecologically_wet(struct tile *ptile)
+ **************************************************************************/
+ void global_warming(int effect)
+ {
++  return; //disabled, causes problems.
+   climate_change(TRUE, effect);
+   notify_player(NULL, NULL, E_GLOBAL_ECO, ftc_server,
+                 _("Global warming has occurred!"));

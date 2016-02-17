@@ -12,6 +12,10 @@ sh build.sh
 
 The build script will also create a data webapp directory where savegames and scorelogs are stored.
 
+Flyway migrations of the database is supported. To migrate the database to the latest version, run this Maven command:
+mvn compile flyway:migrate
+
+
 Copyright (C) 2007-2016 Andreas Røsdal. 
 Released under the GNU AFFERO GENERAL PUBLIC LICENSE.
 

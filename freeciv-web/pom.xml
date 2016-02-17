@@ -66,15 +66,32 @@
 	  <version>4.5.1</version>
 	</dependency> 
 
+	<dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>3.2.1</version>
+        </dependency>
+
     </dependencies>
 
 
  <build>
     <finalName>freeciv-web</finalName>
     <plugins>
+       <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>3.2.1</version>
+                <configuration>
+                    <url>jdbc:mysql://localhost:3306/freeciv_web</url>
+                    <user>root</user>
+                    <password>vagrant</password>
+                </configuration>
+        </plugin>
+
         <plugin>
             <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.1</version>
+            <version>3.5.1</version>
             <configuration>
                <source>1.7</source>
                <target>1.7</target>
@@ -85,7 +102,7 @@
        <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-war-plugin</artifactId>
-          <version>2.4</version>
+          <version>2.6</version>
 	  <configuration>
 	   <useCache>true</useCache>
 	   <recompressZippedFiles>false</recompressZippedFiles>

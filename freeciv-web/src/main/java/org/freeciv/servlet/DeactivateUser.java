@@ -50,7 +50,7 @@ public class DeactivateUser extends HttpServlet {
             DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
             conn = ds.getConnection();
 
-            String pwdSQL = "UPDATE auth set activated='0' where username = ? and password = ?";
+            String pwdSQL = "UPDATE auth set activated='0' where username = ? and password = MD5(?)";
             PreparedStatement preparedStatement = conn.prepareStatement(pwdSQL);
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, password);

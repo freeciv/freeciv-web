@@ -224,6 +224,8 @@ function create_new_pbem_user_request()
 
   $("#username_validation_result").html("");
 
+  $("#dialog").parent().hide();
+
   $.ajax({
    type: 'POST',
    url: "/create_pbem_user?username=" + username + "&email=" + email + "&password=" + password + "&captcha=" + captcha,
@@ -233,6 +235,7 @@ function create_new_pbem_user_request()
        challenge_pbem_player_dialog();
       },
    error: function (request, textStatus, errorThrown) {
+     $("#dialog").parent().show();
      swal("Creating new user failed.");
    }
   });

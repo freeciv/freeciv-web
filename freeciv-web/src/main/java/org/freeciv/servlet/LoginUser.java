@@ -50,7 +50,7 @@ public class LoginUser extends HttpServlet {
             DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
             conn = ds.getConnection();
 
-            String pwdSQL = "SELECT count(*) from auth where lower(username) = lower(?) and password = ? and activated='1'";
+            String pwdSQL = "SELECT count(*) from auth where lower(username) = lower(?) and password = MD5(?) and activated='1'";
             PreparedStatement preparedStatement = conn.prepareStatement(pwdSQL);
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, password);
@@ -58,6 +58,7 @@ public class LoginUser extends HttpServlet {
             rs.next();
             if (rs.getInt(1) != 1) {
               response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Unable to login");
+              return;
             }
 
             response.getOutputStream().print("OK!");

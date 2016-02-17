@@ -12,7 +12,7 @@ sh build.sh
 
 The build script will also create a data webapp directory where savegames and scorelogs are stored.
 
-Flyway migrations of the database is supported. To migrate the database to the latest version, run this Maven command:
+Flyway migrations of the database is supported. Remember to set the mysql password in pom.xml. To migrate the database to the latest version, run this Maven command:
 mvn compile flyway:migrate
 
 

@@ -510,9 +510,17 @@ function handle_unit_packet_common(packet_unit)
   }
 
   if (units[packet_unit['id']] == null) {
+    /* This is a new unit. */
+    unit_actor_wants_input(packet_unit);
     packet_unit['anim_list'] = [];
     units[packet_unit['id']] = packet_unit;
   } else {
+    if (units[packet_unit['id']]['action_decision_want']
+        != packet_unit['action_decision_want']) {
+      /* The unit's action_decision_want has changed. */
+      unit_actor_wants_input(packet_unit);
+    }
+
     update_unit_anim_list(units[packet_unit['id']], packet_unit);
     check_unit_sound_play(units[packet_unit['id']], packet_unit);
     units[packet_unit['id']] = $.extend(units[packet_unit['id']], packet_unit);
@@ -596,21 +604,27 @@ function handle_unit_action_answer(packet)
 /**************************************************************************
   Handle server request for user input about diplomat action to do.
 **************************************************************************/
-function handle_unit_actor_wants_input(packet)
+function unit_actor_wants_input(pdiplomat)
 {
-  var diplomat_id = packet['diplomat_id'];
-  var target_tile_id = packet['target_tile_id'];
-  var is_arrival = packet['is_arrival'];
+  if (pdiplomat['action_decision_want'] == null
+      || pdiplomat['owner'] != client.conn.playing['playerno']) {
+    /* No authority to decide for this unit. */
+    return;
+  }
 
-  var pdiplomat = game_find_unit_by_number(diplomat_id);
+  if (pdiplomat['action_decision_want'] == ACT_DEC_NOTHING) {
+    /* The unit doesn't want a decision. */
+    return;
+  }
 
-  if (is_arrival && !popup_actor_arrival) {
+  if (pdiplomat['action_decision_want'] == ACT_DEC_PASSIVE
+      && !popup_actor_arrival) {
     /* The player isn't interested in getting a pop up for a mere
      * arrival. */
     return;
   }
 
-  process_diplomat_arrival(pdiplomat, target_tile_id);
+  process_diplomat_arrival(pdiplomat, pdiplomat['action_decision_tile']);
 }
 
 /**************************************************************************

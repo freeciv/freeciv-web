@@ -75,6 +75,11 @@ var ACTION_COUNT = 25;
 /* Used to signal a move without any action. */
 var ACTION_MOVE = ACTION_COUNT;
 
+/* The action_decision enum */
+var ACT_DEC_NOTHING = 0;
+var ACT_DEC_PASSIVE = 1;
+var ACT_DEC_ACTIVE = 2;
+
 /* The kind of universals_u (value_union_type was req_source_type).
  * Used in the network protocol. */
 var VUT_NONE = 0;

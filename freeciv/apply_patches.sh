@@ -9,9 +9,17 @@
 # metamessage is Freeciv patch #6876 (SVN r31682)
 # settings_access_level_metamessage is replaced by Freeciv patch #6967
 # metamessage_setting is Freeciv bug #24415
-# disable_global_warming is Freeciv bug #24418.
+# disable_global_warming is Freeciv bug #24418
+# 0001-JSON-specify-delta-vector-field-address is Freeciv bug #24354 (SVN r31707), included
+#     here just to provide baseline that other patches apply directly to
+# fragement is comment changes like SVN r31952, included here just to provide baseline that
+#     other patches apply directly to
+# GenericPacketsGen24421 is json protocol change, backported from Freeciv bug #24421
+# ArrayDimensions is json protocol change, backported from Freeciv bug #24419
+#
+#
 
-PATCHLIST="freeciv_web_all_packets_def_changes caravan_fixes1 city_fixes city_impr_fix2 city-naming-change city_fixes2 citytools_changes metachange text_fixes unithand-change2 current_research_cost freeciv-svn-webclient-changes network-rewrite-1 fcnet_packets misc_devversion_sync scenario_ruleset savegame maphand_ch serverside_extra_assign libtoolize_no_symlinks ai_traits_crash ruleset-capability worklists server_password aifill barbarian-names activity_null_check add_rulesets message_escape freeciv_segfauls_fix scorelog_filenames scorelog_set_to_client json_memory missing_trade_partner spaceship_post_launch metamessage settings_access_level_metamessage metamessage_setting disable_global_warming"
+PATCHLIST="freeciv_web_all_packets_def_changes caravan_fixes1 city_fixes city_impr_fix2 city-naming-change city_fixes2 citytools_changes metachange text_fixes unithand-change2 current_research_cost freeciv-svn-webclient-changes network-rewrite-1 fcnet_packets misc_devversion_sync scenario_ruleset savegame maphand_ch serverside_extra_assign libtoolize_no_symlinks ai_traits_crash ruleset-capability worklists server_password aifill barbarian-names activity_null_check add_rulesets message_escape freeciv_segfauls_fix scorelog_filenames scorelog_set_to_client json_memory missing_trade_partner spaceship_post_launch metamessage settings_access_level_metamessage metamessage_setting disable_global_warming 0001-JSON-specify-delta-vector-field-address fragement GenericPacketsGen24421 ArrayDimensions"
 
 apply_patch() {
   echo "*** Applying $1.patch ***"

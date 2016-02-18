@@ -101,7 +101,7 @@ class CivCom(Thread):
                         self.header_buf = bytearray(0)
                         self.packet_size = header_pck[0] - 2
                         if (self.packet_size <= 0 or self.packet_size > 32767):
-                            logger.error("Invalid packet size.")
+                            logger.error("Invalid packet size " + str(self.packet_size))
                     else:
                         # complete header not read yet. return now, and read
                         # the rest next time.

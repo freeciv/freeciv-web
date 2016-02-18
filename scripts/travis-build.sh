@@ -29,7 +29,8 @@ mysql_user="root"
 resin_version="4.0.44"
 resin_url="http://www.caucho.com/download/resin-${resin_version}.tar.gz"
 tornado_url="https://pypi.python.org/packages/source/t/tornado/tornado-4.2.1.tar.gz"
-nginx_url="http://nginx.org/download/nginx-1.9.6.tar.gz"
+nginx_url="http://nginx.org/download/nginx-1.9.11.tar.gz"
+casperjs_url="https://github.com/n1k0/casperjs/archive/1.1-beta5.zip"
 
 # Based on fresh install of Ubuntu 12.04
 dependencies="maven mysql-server-5.5 openjdk-7-jdk libcurl4-openssl-dev subversion pngcrush libtool automake autoconf autotools-dev language-pack-en python3-setuptools python3.4 python3.4-dev imagemagick liblzma-dev firefox xvfb libicu-dev libsdl1.2-dev libjansson-dev"
@@ -86,8 +87,8 @@ cd ${basedir}/freeciv-web && sudo -u travis ./setup.sh
 echo "==== Building nginx ===="
 cd ${basedir}
 wget ${nginx_url}
-tar xzf nginx-1.9.6.tar.gz
-cd nginx-1.9.6
+tar xzf nginx-1.9.11.tar.gz
+cd nginx-1.9.11
 ./configure
 make > nginx-log-file 2>&1
 make install
@@ -105,9 +106,12 @@ echo "============================================"
 echo "Installing CasperJS for testing"
 cd ${basedir}/tests
 
-git clone git://github.com/n1k0/casperjs.git
-cd casperjs
+wget ${casperjs_url}
+unzip -qo 1.1-beta5.zip
+cd casperjs-1.1-beta5
 ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs
+
+sleep 10
 
 echo "Start testing of Freeciv-web using CasperJS:"
 cd ${basedir}/tests/

@@ -189,13 +189,14 @@ function setup_window_size ()
     if (i == 8) $("#players_tab").children().html("N")
     if (i == 9) $("#tech_tab").children().html("R")
     if (i == 10) $("#civ_tab").children().html("G")
-    if (i == 11) $("#map_tab").children().html("M")
+    if (i == 11) $("#cities_tab").children().html("C")
+    if (i == 12) $("#map_tab").children().html("M")
 
-    if (i == 12) $("#opt_tab").hide();
-    if (i == 13) $("#tabs-hel").hide();
-    if (i == 14) $("#players_tab").hide();
+    if (i == 13) $("#opt_tab").hide();
+    if (i == 14) $("#tabs-hel").hide();
+    if (i == 15) $("#players_tab").hide();
 
-    if (i == 15) break;
+    if (i == 16) break;
 
     i++;
   }

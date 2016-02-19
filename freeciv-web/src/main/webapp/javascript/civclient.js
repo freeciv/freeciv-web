@@ -69,6 +69,7 @@ function civclient_init()
   if ($.getUrlVar('action') == "observe") {
     observing = true;
     $("#civ_tab").remove();
+    $("#cities_tab").remove();
     $("#pregame_buttons").remove();
     $("#game_unit_orders_default").remove();
     $("#civ_dialog").remove();

@@ -858,3 +858,13 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 #game_unit_panel {
   margin-left: -8px;
 }
+
+#city_table {
+  width: 100%;
+}
+
+#cities_row {
+  cursor:pointer; 
+  cursor:hand;
+}
+

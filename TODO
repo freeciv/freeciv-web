@@ -5,9 +5,6 @@ Current TODO-list in prioritized order here:
 
 - Bugs are often reported to Freeciv-web on Github here: https://github.com/freeciv/freeciv-web/issues - any fixes to these bugs is very welcome. Some of the bugs are also well suited for new developers interested in contributing to Freeciv-web.
 
-- City reports seem to be missing. I'd really love to have a list of my cities, what they are building, how many turns left for each item, the current state of citizens (unhappy, happy, taxmen, entertainers, scientists, etc)
-- On the "Production" Screen, it would be nice if we had the attack/defense/movements of each unit list
-- Units seem to get "stuck" if you try to move them beyond the number of moves they have remaining. They're not sentried, they're not moving, they're just forgotten and not cycled through on the next turn. They have the "G" next to them, but don't go anywhere.
 - On the City detail page, the citizen icons are too small to see what they mean, there also appears to be a black line around each block which appears unnecessary.
 - Three back-to-back (i.e same turn) successful spy/diplomat sabotages on the same city should not destroy production on the same item if the previous spy just destroyed the production.
 - There is no "Unload" hotkey for ships containing units to be unloaded. You have to click on the ship, then select each unit one by one, and it the ship has finished it's moves, the map recenters to the capital and then I have to go back and find the ship and repeat the process.

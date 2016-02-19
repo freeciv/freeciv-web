@@ -1822,9 +1822,22 @@ function process_diplomat_arrival(pdiplomat, target_tile_id)
 {
   var ptile = index_to_tile(target_tile_id);
 
-  /* No queue. */
+  /* No queue. An action selection dialog is opened at once. If multiple
+   * action selection dialogs are open at once one will hide all others.
+   * The hidden dialogs are based on information from the time they
+   * were opened. It is therefore more outdated than it would have been if
+   * the server was asked the moment before the action selection dialog
+   * was shown.
+   *
+   * The C client's bundled with Freeciv asks right before showing the
+   * action selection dialog. They used to have a custom queue for it.
+   * Freeciv patch #6601 (SVN r30682) made the desire for an action
+   * decision a part of a unit's data. They used it to drop their custom
+   * queue and move unit action decisions to the unit focus queue. */
 
   if (pdiplomat != null && ptile != null) {
+    /* Ask the server about what actions pdiplomat can do. The server's
+     * reply will pop up an action selection dialog for it. */
     var packet = {
       "pid" : packet_unit_get_actions,
       "actor_unit_id" : pdiplomat['id'],

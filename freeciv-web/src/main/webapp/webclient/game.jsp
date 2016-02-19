@@ -9,6 +9,7 @@
 				<li id="civ_tab"><a href="#tabs-civ">Government</a></li>
 				<li id="tech_tab"><a id="tech_tab_item" href="#tabs-tec">Research</a></li>
 				<li id="players_tab"><a href="#tabs-nat">Nations</a></li>
+				<li id="cities_tab"><a href="#tabs-cities">Cities</a></li>
 				<li style="display: none;"><a href="#tabs-cit">City</a></li>
 				<li id="opt_tab"><a href="#tabs-opt">Options</a></li>
 				<li id="hel_tab"><a href="#tabs-hel">Manual</a></li>
@@ -32,6 +33,9 @@
 			<div id="tabs-nat">
 				<jsp:include page="nations.jsp" flush="false"/>
 			</div>
+			<div id="tabs-cities">
+				<jsp:include page="cities.jsp" flush="false"/>
+			</div>
 
 			<div id="tabs-hel" class="manual_doc">
 			</div>
@@ -42,7 +46,7 @@
 			</div>
 			
 		</div>
-	
+	</div>
       
       
     <div id="dialog" ></div>

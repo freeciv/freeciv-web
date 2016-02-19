@@ -1248,3 +1248,36 @@ function city_add_to_worklist()
   }
 
 }
+
+/**************************************************************************
+ Updates the Cities tab when clicked, populating the table.
+ **************************************************************************/
+function update_city_screen()
+{
+   var city_list_html = "<table class='tablesorter' id='city_table' width='950' border=0 cellspacing=0>"
+        + "<thead><td>Name</td><td>Population</td><td>Size</td>"
+        + "<td>Granary</td><td>Grow In</td><td>Producing</td><td>Done In</td></thead>";
+
+    for (city_id in cities){
+
+        var pcity = cities[city_id];
+        if(city_owner(pcity).playerno == client.conn.playing.playerno){
+
+            var prod_type = get_city_production_type(pcity);
+            var turns_to_complete = get_city_production_time(pcity);
+
+
+            city_list_html += "<tr><td>" + pcity['name'] + "</td><td>" + numberWithCommas(city_population(pcity)*1000) +
+                "</td><td>" + pcity['size'] + "</td><td>" + pcity['food_stock'] + "/" + pcity['granary_size'] +
+                "</td><td>" + city_turns_to_growth_text(pcity) + "</td><td>" + prod_type['name'] +
+                "</td><td>" + turns_to_complete + " turns</td>";
+
+            city_list_html += "</tr>";
+        }
+
+    }
+
+    city_list_html += "</table>";
+    $("#cities_list").html(city_list_html);
+    $("#city_table").tablesorter({theme:"dark"});
+}

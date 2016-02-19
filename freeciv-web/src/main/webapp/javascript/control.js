@@ -142,6 +142,11 @@ function control_init()
     update_nation_screen();
   });
 
+  $("#cities_tab").click(function(event) {
+    set_default_mapview_inactive();
+    update_city_screen();
+  });
+
   $("#opt_tab").click(function(event) {
     $("#tabs-hel").hide();
     init_options_dialog();

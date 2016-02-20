@@ -214,7 +214,8 @@ function update_metamessage_on_gamestart()
     setTimeout("chatbox_text = ' '; add_chatbox_text('');", 800);
   }
 
-  if ($.getUrlVar('action') == "new") {
+  if ($.getUrlVar('action') == "new" || $.getUrlVar('action') == "earthload" 
+      || $.getUrlVar('scenario') == "true") {
     $.post("/freeciv_time_played_stats?type=single").fail(function() {});
   }
   if ($.getUrlVar('action') == "multi" && client.conn.playing != null

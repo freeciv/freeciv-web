@@ -163,21 +163,6 @@ if ( isset($port) ) {
     }
   }
 
-  /* increment total turn count.  */
-    $stmt = "select value from variables where name = 'turn' and hostport=\"$host:$port\"";
-    $res = fcdb_exec($stmt);
-    $nr = fcdb_num_rows($res);
-    if ( $nr == 1 ) {
-      $row = fcdb_fetch_array($res, 0);
-      if ($row["value"] < $vv[8]) {
-        $myincrease = intval($vv[8]) - intval($row["value"]);
-        if ($myincrease > 0 && $myincrease <= 5) {
-          $stmt="update turncount set count = count + " . addneededslashes_db($myincrease);
-          $res = fcdb_exec($stmt);
-        }
-      }
-    }
-
   /* delete this variables that this server might have already set. */
   $stmt="delete from variables where hostport=\"$host:$port\"";
   $res = fcdb_exec($stmt);

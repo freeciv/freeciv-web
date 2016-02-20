@@ -107,6 +107,17 @@
     <servlet-name>DeactivateUser</servlet-name>
     <url-pattern>/deactivate_user</url-pattern>
   </servlet-mapping>
+  
+   <!-- /freeciv_time_played_stats   -->
+  <servlet>
+    <servlet-name>FreecivStatsServlet</servlet-name>
+    <servlet-class>org.freeciv.servlet.FreecivStatsServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>FreecivStatsServlet</servlet-name>
+    <url-pattern>/freeciv_time_played_stats</url-pattern>
+  </servlet-mapping>
 
   <context-param>
     <param-name>buildTimeStamp</param-name>

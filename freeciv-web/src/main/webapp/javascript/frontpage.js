@@ -62,14 +62,19 @@ $(document).ready(function() {
       $("#playws").hide();
     }
 
-  update_game_count();
-  setInterval("update_game_count();", 8000);
 
   $.ajax({
     url: "/meta/fpinfo.php",
     cache: true
-  }).done(function( html ) {
-    $( "#metalink" ).html("Online Games: " +  html );
+  }).done(function( game_stats ) {
+    var stats = game_stats.split(";");
+    if (stats.length = 5) {
+      $( "#metalink" ).html("Online Games: " +  stats[0]);
+      $( "#hours_played" ).html(Math.floor((parseFloat(stats[4]))/60));
+      $( "#single_count" ).html(stats[1]);
+      $( "#multi_count" ).html(stats[2]);
+      $( "#pbem_count" ).html(stats[3]);
+    }
   });
 
 
@@ -91,16 +96,6 @@ $.ajax({
         });
 });
 
-function update_game_count()
-{
-$.ajax({
-  url: "/meta/turnstats.php",
-  cache: false
-})
-  .done(function( html ) {
-    $( "#turncount" ).html(html);
-  });
-}
 
 $( window ).resize(function() {
   $("#mysearchform").get(0).scrollIntoView();

@@ -763,9 +763,15 @@ function handle_begin_turn(packet)
   if (!observing) $("#turn_done_button").button( "option", "disabled", false);
   waiting_units_list = [];
   update_unit_focus();
-  auto_center_on_focus_unit();
   update_active_units_dialog();
   update_game_status_panel();
+
+  var funits = get_units_in_focus();
+  if (funits != null && funits.length == 0) {
+    /* auto-center if there is no unit in focus. */
+    auto_center_on_focus_unit();
+  }
+
   if (is_tech_tree_init && tech_dialog_active) update_tech_screen();
 }
 

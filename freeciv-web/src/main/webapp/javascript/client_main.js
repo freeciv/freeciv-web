@@ -213,4 +213,14 @@ function update_metamessage_on_gamestart()
     send_message("/metamessage " + metasuggest);
     setTimeout("chatbox_text = ' '; add_chatbox_text('');", 800);
   }
+
+  if ($.getUrlVar('action') == "new") {
+    $.post("/freeciv_time_played_stats?type=single").fail(function() {});
+  }
+  if ($.getUrlVar('action') == "multi" && client.conn.playing != null
+      && client.conn.playing['pid'] == players[0]['pid']) {
+    $.post("/freeciv_time_played_stats?type=multi").fail(function() {});
+  }
+
+
 }

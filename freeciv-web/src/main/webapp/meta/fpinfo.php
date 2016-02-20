@@ -18,13 +18,16 @@ if (! $config_problem) {
   fcdb_metaserver_connect();
 }
       
-$stmt = "select count(*) as count from servers where state = 'Running'";
+$stmt = "select (select count(*) from servers where state = 'Running') as running_count, (select SUM(gameCount) from games_played_stats where gametype = 0) as single_count, (select SUM(gameCount) from games_played_stats where gametype = 1) as multi_count, (select sum(gameCount) from games_played_stats where gametype = 2) as pbem_count, (select SUM(timePlayed) from time_played_stats) as minutes_played";
 $res = fcdb_exec($stmt);
-$nr = fcdb_num_rows($res);
-if ( $nr != 1 ) {
-  print "error";
-} else {
-  $row = fcdb_fetch_array($res, 0);
-  print db2html($row["count"]);
-} 
+$row = fcdb_fetch_array($res, 0);
+print db2html($row["running_count"]);
+print(";");
+print db2html($row["single_count"]);
+print(";");
+print db2html($row["multi_count"]);
+print(";");
+print db2html($row["pbem_count"]);
+print(";");
+print db2html($row["minutes_played"]);
 ?>

@@ -1397,6 +1397,7 @@ function send_end_turn()
   if (!is_touch_device()) $("#turn_done_button").tooltip({ disabled: true });
   var packet = {"pid" : packet_player_phase_done, "turn" : game_info['turn']};
   send_request(JSON.stringify(packet));
+  update_turn_change_timer();
 }
 
 

@@ -45,6 +45,9 @@ var music_list = [ "battle-epic",
 var audio = null;
 var audio_enabled = false;
 
+var last_turn_change_time = 0;
+var turn_change_elapsed = 0;
+
 /**************************************************************************
  Main starting point for Freeciv-web
 **************************************************************************/
@@ -491,7 +494,7 @@ function update_timeout()
       && current_turn_timeout() != null && current_turn_timeout() > 0) {
     var remaining = current_turn_timeout()
                     - Math.floor((now - phase_start_time) / 1000);
-    if (remaining >= 0) {
+    if (remaining >= 0 && turn_change_elapsed == 0) {
       if (is_small_screen()) {
         $("#turn_done_button").button("option", "label", "Turn " + remaining);
         $("#turn_done_button .ui-button-text").css("padding", "3px");
@@ -500,6 +503,22 @@ function update_timeout()
       }
       if (!is_touch_device()) $("#turn_done_button").tooltip({ disabled: false });
     }
+  }
+}
+
+/**************************************************************************
+ shows the remaining time of the turn change on the turn done button.
+**************************************************************************/
+function update_turn_change_timer()
+{
+  turn_change_elapsed += 1;
+  if (turn_change_elapsed < last_turn_change_time) {
+    setTimeout("update_turn_change_timer()", 1000);
+    $("#turn_done_button").button("option", "label", "Please wait (" 
+        + (last_turn_change_time - turn_change_elapsed) + ")");
+  } else {
+    turn_change_elapsed = 0;
+    $("#turn_done_button").button("option", "label", "Turn Done"); 
   }
 }
 

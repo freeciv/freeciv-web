@@ -746,7 +746,6 @@ function handle_end_phase(packet)
   if (is_pbem()) {
     pbem_end_phase();
   }
-
 }
 
 /* Done. */
@@ -760,7 +759,10 @@ function handle_new_year(packet)
 
 function handle_begin_turn(packet)
 {
-  if (!observing) $("#turn_done_button").button( "option", "disabled", false);
+  if (!observing) {
+    $("#turn_done_button").button("option", "disabled", false);
+    $("#turn_done_button").button("option", "label", "Turn Done");
+  }
   waiting_units_list = [];
   update_unit_focus();
   update_active_units_dialog();
@@ -778,7 +780,9 @@ function handle_begin_turn(packet)
 function handle_end_turn(packet)
 {
   reset_unit_anim_list();
-  if (!observing) $("#turn_done_button").button( "option", "disabled", true);
+  if (!observing) {
+    $("#turn_done_button").button( "option", "disabled", true);
+  }
 }
 
 function handle_freeze_client(packet)
@@ -1154,7 +1158,7 @@ function handle_worker_task(packet)
 
 function handle_timeout_info(packet)
 {
-  /* TODO: Implement */
+  last_turn_change_time = Math.ceil(packet['last_turn_change_time']);
 }
 
 function handle_play_music(packet)

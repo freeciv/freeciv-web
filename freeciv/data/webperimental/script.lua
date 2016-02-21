@@ -46,7 +46,7 @@ function place_map_labels()
 
   -- Decide if a label should be included and, in case it should, where.
   if random(1, 100) <= 75 then
-    selected_mountains = random(1, mountains)
+    selected_mountain = random(1, mountains)
   end
   if random(1, 100) <= 75 then
     selected_ocean = random(1, deep_oceans)

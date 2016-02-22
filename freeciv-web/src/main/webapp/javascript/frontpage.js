@@ -68,12 +68,11 @@ $(document).ready(function() {
     cache: true
   }).done(function( game_stats ) {
     var stats = game_stats.split(";");
-    if (stats.length = 5) {
+    if (stats.length = 4) {
       $( "#metalink" ).html("Online Games: " +  stats[0]);
-      $( "#hours_played" ).html(Math.floor((parseFloat(stats[4]))/60));
+      $( "#hours_played" ).html(Math.floor((parseFloat(stats[3]))/60));
       $( "#single_count" ).html(stats[1]);
       $( "#multi_count" ).html(stats[2]);
-      $( "#pbem_count" ).html(stats[3]);
     }
   });
 

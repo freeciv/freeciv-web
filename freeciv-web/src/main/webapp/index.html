@@ -16,6 +16,8 @@
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+
     <!-- Custom styles for this template -->
     <link href="css/frontpage.css" rel="stylesheet">
 
@@ -70,24 +72,24 @@
    <!-- Jumbotron -->
       <div class="jumbotron">
       <p id="logo"><img src="images/freeciv-fp-logo-3.png" title="Freeciv HTML5 Online version" alt="Freeciv HTML5 Online version"> </p>
-        <p class="lead">Freeciv is a Free and Open Source empire-building strategy game inspired by the history of human civilization. The game commences in prehistory and your mission is to lead your tribe from the Stone Age to the Space Age. Freeciv can be played online in your web-browser for free. Choose how you want to play: </p>
+        <p class="lead">Freeciv is a Free and Open Source empire-building strategy game inspired by the history of human civilization. The game commences in prehistory and your mission is to lead your tribe from the Stone Age to the Space Age. Freeciv can be played online in your web-browser for free. </p>
 
 
 	<p id="fc_button_group">
           <a href="/webclient/?action=new" 
-             id="single-button" class="btn btn-primary btn-lg" title="Start a new single-player game against the Freeciv AI players.">Single-player &raquo;</a>
+             id="single-button" class="btn btn-primary btn-lg" title="Start a new single-player game against the Freeciv AI players."><i class="fa fa-user" style="font-size: 130%;"></i> Single-player vs AI &raquo;</a>
           <a href="/meta/metaserver.php?tab=multi" 
-             id="multi-button" class="btn btn-info btn-lg" title="Start or join a game with multiple human or AI players.">Multi-player &raquo;</a>
+             id="multi-button" class="btn btn-info btn-lg" title="Start or join a game with multiple human or AI players."><i class="fa fa-users" style="font-size: 130%;"></i> Multiplayer vs Humans &raquo;</a>
           <a href="/webclient/?action=pbem" 
-             id="pbem-button" class="btn btn-info btn-lg" title="Start a two-player game where you get an e-mail when it is your turn to play, up to 7 days turns.">Play By Email &raquo;</a>
+             id="pbem-button" class="btn btn-info btn-lg" title="Start a two-player play-by-email game where you get an e-mail when it is your turn to play."><i class="fa fa-envelope-o" style="font-size: 130%;"></i> 2 Player by Email &raquo;</a>
           <a href="/webclient/?action=load&amp;scenario=true" 
-             id="scenarios-button" class="btn btn-info btn-lg" title="Start a new game on a scenario map, such as world map, America, Italy or Japan.">Scenarios &raquo;</a>
+             id="scenarios-button" class="btn btn-info btn-lg" title="Start a new game on a scenario map, such as world map, America, Italy or Japan."><i class="fa fa-map-o" style="font-size: 130%;"></i> Scenarios &raquo;</a>
           <a href="/freeciv-earth/" 
-             id="pbem-button" class="btn btn-info btn-lg" title="Start a new game by choosing your map from a real earth map.">Freeciv-Earth &raquo;</a>
+             id="pbem-button" class="btn btn-info btn-lg" title="Start a new game by choosing your map from a real earth map."><i class="fa fa-globe" style="font-size: 130%;"></i> Real-Earth Map &raquo;</a>
           <a href="/webclient/?action=load&amp;load=tutorial&amp;scenario=true" 
-             id="tutorial-button" class="btn btn-info btn-lg" title="New players should try the tutorial to learn how to play the game.">Tutorial &raquo;</a>
+             id="tutorial-button" class="btn btn-info btn-lg" title="New players should try the tutorial to learn how to play the game."><i class="fa fa-life-ring" style="font-size: 130%;"></i> Tutorial &raquo;</a>
          <a href="/webclient/?action=load"
-             id="load-button" class="btn btn-default btn-lg" title="Load a savegame">Load Game &raquo;</a>
+             id="load-button" class="btn btn-default btn-lg" title="Load a savegame"><i class="fa fa-file" style="font-size: 130%;"></i> Load Game &raquo;</a>
 
       </p>
 
@@ -130,8 +132,8 @@
     <div class="row">
         <div class="col-lg-12">
 	<center>
-          <h3><b id="hours_played"></b> hours played globally, <b id="single_count"></b> singleplayer games, <b id="multi_count"></b> multiplayer, <b id="pbem_count"></b> play-by-email.</h3> 
-	<small>Total number of hours played Freeciv-web for all players, number of singleplayer, multiplayer and play-by-email games played for all players globally since 20th February 2016</small>
+          <h3><b id="hours_played"></b> hours played globally, <b id="single_count"></b> singleplayer games and <b id="multi_count"></b> multiplayer games.</h3> 
+	<small>Total number of hours played Freeciv-web for all players, number of singleplayer and multiplayer games played for all players globally since 20th February 2016</small>
 
 		<br><br><br>
 

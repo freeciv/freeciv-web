@@ -34,6 +34,17 @@ class MailSender():
   smtp_port=settings.get("Config", "smtp_port")
   smtp_sender=settings.get("Config", "smtp_sender")
 
+  template_next_turn = "";
+  with open('email_template_next_turn.html', 'r') as content_file:
+    template_next_turn = content_file.read();
+  template_invitation = "";
+  with open('email_template_invitation.html', 'r') as content_file:
+    template_invitation = content_file.read();
+  template_generic = "";
+  with open('email_template_generic.html', 'r') as content_file:
+    template_generic = content_file.read();
+
+
   def send_message_via_smtp(self, from_, to, mime_string):
     time.sleep(2);
     smtp = smtplib.SMTP(self.smtp_host, int(self.smtp_port))
@@ -43,46 +54,32 @@ class MailSender():
 
 
   def send_mailgun_message(self, to, subject, text):
-    msg = MIMEText(text, _charset='utf-8')
+    msg = MIMEText(text, _subtype='html', _charset='utf-8', )
     msg['Subject'] = subject
     msg['From'] = self.smtp_sender; 
     msg['To'] = to
     self.send_message_via_smtp(self.smtp_sender, to, msg.as_string())
 
 
-  #Send the actual PBEM e-mail turn invitation message.
+  #Send the actual PBEM e-mail next turn invitation message.
   def send_email(self, player_name, players, email_address, filename, turn):
     print("Sending e-mail to: " + email_address);
-
-    msg = "To " + player_name +"\n\n" + \
-      "It is now your turn to play Freeciv-Web. You are receiving this e-mail because you " + \
-      "are participating in a Play-By-Email game of Freeciv-web.\n\n" + \
-      "Please follow this link to play your turn: " + \
-      "https://play.freeciv.org/webclient/?action=pbem&savegame="+ filename + "\n\n";
-    msg += "Players in game: ";
+    msg = self.template_next_turn;
+    msg = msg.replace("{player_name}", player_name);
+    msg = msg.replace("{filename}", filename);
+    msg = msg.replace("{turn}", str(turn));
+    plrs_txt = "";
     for p in players:
-      msg += p + ", ";
-    msg += "\n\n";
-    msg += "Please complete your turn within 7 days, the other player will be waiting for you. ";
-    msg += "Play-By-Email is currently a Beta-feature, please report any problems playing " +\
-            "here: http://forum.freeciv.org/f/viewforum.php?f=24\n\n";
-    msg += "Freeciv-Web is a free and open source empire-building strategy game " + \
-             "inspired by the history of human civilization.\n\n";
-    msg += "The Freeciv-web project - https://play.freeciv.org\n\n";
+       plrs_txt += p + ", ";
+    msg = msg.replace("{players}", plrs_txt);
+
     self.send_mailgun_message(email_address, "Freeciv-Web: It's your turn to play! Turn: " \
         + str(turn), msg);
 
   def send_invitation(self, invitation_from, invitation_to):
     sender = re.sub(r'\W+', '', invitation_from);
-    msg = "Hello! You have been invited by " + sender + " to a " \
-    "multiplayer game on Freeciv-web. This is a play-by-email game that you can play " \
-    "in your browser for free.\n\nFollow this link to play against " + sender + ": " \
-     "https://play.freeciv.org/pbem?u=" + sender + "\n\n\n"; 
-    msg += "Play-By-Email is currently a Beta-feature, please report any problems playing " +\
-            "here: http://forum.freeciv.org/f/viewforum.php?f=24\n\n";
-    msg += "Freeciv-Web is a free and open source empire-building strategy game " + \
-             "inspired by the history of human civilization.\n\n";
-    msg += "The Freeciv-web project - https://play.freeciv.org\n\n";
+    msg = self.template_invitation;
+    msg = msg.replace("{sender}", sender);
 
     self.send_mailgun_message(invitation_to, "Freeciv-Web: Join my game!" , msg);
 
@@ -90,13 +87,14 @@ class MailSender():
   # send email with ranking after game is over.
   def send_game_result_mail(self, winner, winner_score, winner_email, losers, losers_score, losers_email):
     print("Sending ranklog result to " + winner_email + " and " + losers_email);
-    msg_winner = "To " + winner + "\nYou have won the game of Freeciv-web against " + losers + ".\n";
-    msg_winner += "Winner score: " + winner_score + "\n\n"
-    msg_winner += "The Freeciv-web project - https://play.freeciv.org";
-    self.send_mailgun_message("postmaster@freeciv.mailgun.org", winner_email, 
-      "Freeciv-Web: You won!", msg_winner);
+    msg_winner = "To " + winner + "<br>You have won the game of Freeciv-web against " + losers + ".<br>";
+    msg_winner += "Winner score: " + winner_score + "<br>"
+    msg_winner += "Loser score: " + losers_score + "<br>"
+    msg = self.template_generic.replace("{message}", msg_winner);
+    self.send_mailgun_message(winner_email, "Freeciv-Web: You won!", msg);
 
-    msg_loser = "To " + losers + "\nYou have lost the game of Freeciv-web against " + winner + ".\n";
-    msg_loser += "Winner score: " + winner_score + "\n\n"
-    msg_loser += "The Freeciv-web project - https://play.freeciv.org";
-    self.send_mailgun_message(losers_email, "Freeciv-Web: You lost!", msg_loser);
+    msg_loser = "To " + losers + "<br>You have lost the game of Freeciv-web against " + winner + ".<br>";
+    msg_loser += "Winner score: " + winner_score + "<br>"
+    msg_loser += "Loser score: " + losers_score + "<br>"
+    msg = self.template_generic.replace("{message}", msg_loser);
+    self.send_mailgun_message(losers_email, "Freeciv-Web: You lost!", msg);

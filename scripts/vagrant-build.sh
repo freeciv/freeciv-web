@@ -107,6 +107,7 @@ sed -e "s/user>root/user>${mysql_user}/" -e "s/password>changeme/password>${mysq
 cd ${basedir}/scripts/freeciv-img-extract/ && ./setup_links.sh && ./sync.sh
 cd ${basedir}/scripts && ./sync-js-hand.sh
 cd ${basedir}/freeciv-web && sudo -u vagrant ./setup.sh
+sudo -u vagrant mvn compile flyway:migrate
 
 echo "=============================="
 

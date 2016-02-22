@@ -167,11 +167,11 @@ def handle_ranklog(root, file):
 
   turns = None;
   for line in lines:
-    if (line[:7]=='winners'):
-      winner = line[9:].split(",")[1];
+    if (len(line) > 9 and line[:7]=='winners' and ',' in line):
+      winner = line[9:].split(",")[1];  #FIXME: this is not always correct, if there are multiple winners.
       winner_score = line[9:].split(",")[3];
       winner_email = find_email_address(winner);
-    if (line[:6]=='losers'):
+    if (len(line) > 8 and line[:6]=='losers' and ',' in line):
       losers = line[8:].split(",")[1];
       losers_score = line[8:].split(",")[3];
       losers_email = find_email_address(losers);

@@ -40,7 +40,10 @@ if test "x$1" != "x" ; then
   for patch in $PATCHLIST
   do
     if test "x$patch" = "x$APPLY_UNTIL" ; then
-      au_found=true
+        au_found=true
+        APPLY_UNTIL="${APPLY_UNTIL}.patch"
+    elif test "x${patch}.patch" = "x$APPLY_UNTIL" ; then
+        au_found=true
     fi
   done
   if test "x$au_found" != "xtrue" ; then
@@ -64,7 +67,7 @@ chmod a+x freeciv/fc_version
 
 for patch in $PATCHLIST
 do
-  if test "x$patch" = "x$APPLY_UNTIL" ; then
+  if test "x${patch}.patch" = "x$APPLY_UNTIL" ; then
     echo "$patch not applied as requested to stop"
     break
   fi

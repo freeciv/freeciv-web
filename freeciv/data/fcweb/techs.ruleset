@@ -602,7 +602,7 @@ graphic_alt = "-"
 helptext = _("Allows Workers and Engineers to build airbases and buoys.")
 
 [advance_railroad]
-name     = _("Railroad")
+name     = _("?tech:Railroad")
 req1     = "Steam Engine"
 req2     = "Bridge Building"
 flags    = ""

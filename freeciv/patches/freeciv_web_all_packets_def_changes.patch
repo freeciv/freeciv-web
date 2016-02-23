@@ -1,11 +1,10 @@
-diff --git a/common/packets.def b/common/packets.def
-index b0e07fc..e0ab80b 100644
---- a/common/packets.def
-+++ b/common/packets.def
-@@ -196,10 +196,10 @@ type UINT32             = uint32(int)
- type MEMORY             = memory(unsigned char)
- type REQUIREMENT        = requirement(struct requirement)
- type STRING             = string(char)
+diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
+--- freeciv/common/packets.def	2016-02-24 00:36:52.946368017 +0200
++++ freeciv/common/packets.def	2016-02-24 00:38:11.130306360 +0200
+@@ -200,10 +200,10 @@
+ # Marking it this way is useful as documentation. The marking can also be
+ # used in non vanilla generate_packets.py packet generators.
+ type STRVEC             = STRING
 -type TECH_LIST          = tech_list(int)
 -type UNIT_LIST          = unit_list(int)
 -type BUILDING_LIST      = building_list(int)
@@ -17,7 +16,7 @@ index b0e07fc..e0ab80b 100644
  # string that is URI encoded in the JSON protocol
  type ESTRING            = estring(char)
  
-@@ -293,7 +293,7 @@ type UNIT               = UINT16
+@@ -297,7 +297,7 @@
  type UNIT_TYPE          = uint8(Unit_type_id)
  
  # other typedefs
@@ -26,7 +25,7 @@ index b0e07fc..e0ab80b 100644
  type GOLD               = UINT32
  type HP                 = UINT8
  type PERCENT            = UINT8
-@@ -627,6 +629,9 @@ PACKET_CITY_INFO = 31; sc, lsend, is-game-info, force, cancel(PACKET_CITY_SHORT_
+@@ -632,6 +632,9 @@
    SINT16 citizen_base[O_LAST];
    SINT16 usage[O_LAST];
    UINT16 food_stock, shield_stock;
@@ -36,7 +35,7 @@ index b0e07fc..e0ab80b 100644
  
    UINT8 traderoute_count;
  
-@@ -652,11 +657,18 @@ PACKET_CITY_INFO = 31; sc, lsend, is-game-info, force, cancel(PACKET_CITY_SHORT_
+@@ -657,11 +660,18 @@
    UINT8 walls;
    SINT8 city_image;
  
@@ -56,7 +55,7 @@ index b0e07fc..e0ab80b 100644
  end
  
  PACKET_CITY_SHORT_INFO = 32; sc, lsend, is-game-info, cancel(PACKET_CITY_INFO)
-@@ -704,7 +717,7 @@ end
+@@ -709,7 +719,7 @@
  
  PACKET_CITY_WORKLIST = 36; cs, dsend
    CITY city_id;
@@ -65,7 +64,7 @@ index b0e07fc..e0ab80b 100644
  end
  
  PACKET_CITY_MAKE_SPECIALIST = 37; cs, dsend
-@@ -808,12 +821,14 @@ PACKET_PLAYER_INFO = 51; sc, is-info
+@@ -813,12 +823,14 @@
    BV_PLAYER gives_shared_vision;
    UINT16 culture;
    SINT16 love[MAX_NUM_PLAYER_SLOTS];
@@ -80,7 +79,7 @@ index b0e07fc..e0ab80b 100644
    
    SINT32 multiplier[MAX_NUM_MULTIPLIERS];
    SINT32 multiplier_target[MAX_NUM_MULTIPLIERS];
-@@ -1331,8 +1346,9 @@ end
+@@ -1334,8 +1346,9 @@
  PACKET_RULESET_GAME = 141; sc, lsend
    UINT8 default_specialist;
  
@@ -92,7 +91,7 @@ index b0e07fc..e0ab80b 100644
  
    UINT8 veteran_levels;
    STRING veteran_name[MAX_VET_LEVELS:veteran_levels][MAX_LEN_NAME];
-@@ -1459,9 +1475,9 @@ PACKET_RULESET_NATION = 148; sc, lsend
+@@ -1462,9 +1475,9 @@
    UINT8 groups[MAX_NUM_NATION_GROUPS:ngroups];
  
    GOVERNMENT init_government_id;
@@ -105,7 +104,7 @@ index b0e07fc..e0ab80b 100644
  end
  
  # Separate from PACKET_RULESET_NATION since it can change in pregame
-@@ -2136,3 +2152,39 @@ end
+@@ -2139,3 +2152,39 @@
  PACKET_PLAY_MUSIC = 245; sc, lsend
    STRING tag[MAX_LEN_NAME];
  end

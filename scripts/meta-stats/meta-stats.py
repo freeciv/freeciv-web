@@ -18,6 +18,9 @@
 
 ***********************************************************************'''
 
+# meta-stats.py is a Python script to poll meta.freeciv.org 
+# and update the games_played_stats mysql database table.
+
 
 import os
 import sys
@@ -76,6 +79,6 @@ if __name__ == '__main__':
     try:
       time.sleep(1);
       poll_metaserver();
-      time.sleep(120);
+      time.sleep(60*5); #poll every 5 minutes.
     except Exception as e:
       print(e);

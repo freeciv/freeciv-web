@@ -20,7 +20,11 @@ function handle_stats(data)
   for (var i = 0; i < rows.length; i++) {
     var cells = rows[i].split(",");
     if (cells[0].length == 0) continue;
-    var data_item = {y : cells[0], a : cells[1], b : cells[2], c : cells[3], d : cells[4]};
+    if (cells[1] == "") cells[1] = 0;
+    if (cells[2] == "") cells[2] = 0;
+    if (cells[3] == "") cells[3] = 0;
+    if (cells[4] == "") cells[4] = 0;
+    var data_item = {y : cells[0], a : parseInt(cells[1]), b : parseInt(cells[2]), c : parseInt(cells[3]), d : parseInt(cells[4])};
     mydata.push(data_item);
   }
 
@@ -31,5 +35,4 @@ Morris.Line({
   ykeys: ['a', 'b', 'c', 'd'],
   labels: ['Freeciv-web singleplayer', 'Freeciv-web multiplayer', 'Freeciv-web PBEM', 'Freeciv desktop multiplayer']
 });
-
 }

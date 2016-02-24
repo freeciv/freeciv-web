@@ -4,6 +4,8 @@
 # freeciv_segfauls_fix is a workaround some segfaults in the Freeciv server. Freeciv bug #23884.
 # message_escape is a patch for protecting against script injection in the message texts.
 # json_memory is Freeciv patch #6634 (SVN r30802)
+# scenario_ruleset will get obsolete by Freeciv patch #6589 (SVN r30871)
+# ruleset-capability will get obsolete by Freeciv patch #6791 (SVN r31448)
 # missing_trade_partner is Freeciv patch #6814 (SVN r31453)
 # spaceship_post_launch is Freeciv bug #24309 (SVN r31476)
 # metamessage is Freeciv patch #6876 (SVN r31682)
@@ -15,12 +17,14 @@
 # fragement is comment changes like SVN r31952, included here just to provide baseline that
 #     other patches apply directly to
 # GenericPacketsGen24421 is json protocol change, backported from Freeciv bug #24421 (SVN r31996)
+# WarningsBase fixes compiler warning from the code that gets properly replaced by GenericPacketsGen24421
 # ArrayDimensions is json protocol change, backported from Freeciv bug #24419 (SVN r32001)
 # CommentLineOfItsOwn is backport of Freeciv patch #7000
+# libtoolize_no_symlinks will get obsolete by Freeciv patch #7001
 #
 #
 
-PATCHLIST="freeciv_web_all_packets_def_changes caravan_fixes1 city_fixes city_impr_fix2 city-naming-change city_fixes2 citytools_changes metachange text_fixes unithand-change2 current_research_cost freeciv-svn-webclient-changes network-rewrite-1 fcnet_packets misc_devversion_sync scenario_ruleset savegame maphand_ch serverside_extra_assign libtoolize_no_symlinks ai_traits_crash ruleset-capability worklists server_password aifill barbarian-names activity_null_check add_rulesets message_escape freeciv_segfauls_fix scorelog_filenames scorelog_set_to_client json_memory missing_trade_partner spaceship_post_launch metamessage settings_access_level_metamessage metamessage_setting disable_global_warming 0001-JSON-specify-delta-vector-field-address fragement GenericPacketsGen24421 ArrayDimensions CommentLineOfItsOwn"
+PATCHLIST="WarningsBase freeciv_web_packets_def_changes caravan_fixes1 city_fixes city_impr_fix2 city-naming-change city_fixes2 citytools_changes metachange text_fixes unithand-change2 current_research_cost freeciv-svn-webclient-changes init_lists_disable goto_fcweb misc_devversion_sync scenario_ruleset savegame maphand_ch serverside_extra_assign libtoolize_no_symlinks ai_traits_crash ruleset-capability worklists server_password aifill barbarian-names activity_null_check add_rulesets message_escape freeciv_segfauls_fix scorelog_filenames scorelog_set_to_client json_memory missing_trade_partner spaceship_post_launch metamessage settings_access_level_metamessage metamessage_setting disable_global_warming 0001-JSON-specify-delta-vector-field-address fragement GenericPacketsGen24421 ArrayDimensions CommentLineOfItsOwn"
 
 apply_patch() {
   echo "*** Applying $1.patch ***"

@@ -1,21 +1,82 @@
-diff --git a/common/worklist.h b/common/worklist.h
-index b148427..b4ced48 100644
---- a/common/worklist.h
-+++ b/common/worklist.h
-@@ -22,6 +22,8 @@ extern "C" {
+diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
+--- freeciv/common/packets.def	2016-02-24 02:47:13.117158150 +0200
++++ freeciv/common/packets.def	2016-02-24 02:56:43.539526073 +0200
+@@ -203,7 +203,7 @@
+ type TECH_LIST          = tech_list(int)
+ type UNIT_LIST          = unit_list(int)
+ type BUILDING_LIST      = building_list(int)
+-type WORKLIST           = worklist(struct worklist)
++type WORKLIST           = string(char)
+ # string that is URI encoded in the JSON protocol
+ type ESTRING            = estring(char)
+ 
+@@ -660,7 +660,7 @@
+   UINT8 walls;
+   SINT8 city_image;
+ 
+-  WORKLIST worklist;
++  WORKLIST worklist[MAX_LEN_WORKLIST_WEB];
+ 
+   STRING can_build_unit[MAX_LEN_MSG];
+   STRING can_build_improvement[MAX_LEN_MSG];
+@@ -719,7 +719,7 @@
+ 
+ PACKET_CITY_WORKLIST = 36; cs, dsend
+   CITY city_id;
+-  WORKLIST worklist;
++  # WORKLIST worklist;
+ end
+ 
+ PACKET_CITY_MAKE_SPECIALIST = 37; cs, dsend
+@@ -2178,3 +2178,14 @@
+ PACKET_INFO_TEXT_MESSAGE = 259; sc, dsend
+   STRING message[MAX_LEN_MSG];
+ end
++
++PACKET_CITY_WORKLIST_ADD = 260; cs, dsend
++  CITY city_id;
++  UINT32 kind;
++  UINT32 value;
++end
++
++PACKET_CITY_WORKLIST_REMOVE = 261; cs, dsend
++  CITY city_id;
++  UINT32 index;
++end
+diff -Nurd -X.diff_ignore freeciv/common/worklist.h freeciv/common/worklist.h
+--- freeciv/common/worklist.h	2016-02-24 02:40:28.870661317 +0200
++++ freeciv/common/worklist.h	2016-02-24 02:56:09.587614879 +0200
+@@ -1,4 +1,4 @@
+-/********************************************************************** 
++/**********************************************************************
+  Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+@@ -17,13 +17,20 @@
+ extern "C" {
+ #endif /* __cplusplus */
+ 
++/* utility */
+ #include "registry.h"
+ 
++/* common */
  #include "fc_types.h"
  
  #define MAX_LEN_WORKLIST 64
-+#define MAX_LEN_WORKLIST_ITEM 8
-+#define MAX_LEN_WORKLIST_WEB 64*MAX_LEN_WORKLIST_ITEM
  #define MAX_NUM_WORKLISTS 16
  
++#ifdef FREECIV_WEB
++#define MAX_LEN_WORKLIST_ITEM 8
++#define MAX_LEN_WORKLIST_WEB (64 * MAX_LEN_WORKLIST_ITEM)
++#endif /* FREECIV_WEB */
++
  /* a worklist */
-diff --git a/server/cityhand.c b/server/cityhand.c
-index 3662501..c80aff5 100644
---- a/server/cityhand.c
-+++ b/server/cityhand.c
-@@ -395,8 +395,7 @@ void really_handle_city_buy(struct player *pplayer, struct city *pcity)
+ struct worklist {
+   int length;
+diff -Nurd -X.diff_ignore freeciv/server/cityhand.c freeciv/server/cityhand.c
+--- freeciv/server/cityhand.c	2016-02-24 02:40:28.886661246 +0200
++++ freeciv/server/cityhand.c	2016-02-24 02:50:22.124576311 +0200
+@@ -374,8 +374,7 @@
  /**************************************************************************
    Handle city worklist update request
  **************************************************************************/
@@ -25,7 +86,7 @@ index 3662501..c80aff5 100644
  {
    struct city *pcity = player_city_by_number(pplayer, city_id);
  
-@@ -404,12 +403,44 @@ void handle_city_worklist(struct player *pplayer, int city_id,
+@@ -383,12 +382,44 @@
      return;
    }
  
@@ -71,11 +132,10 @@ index 3662501..c80aff5 100644
    Handle buying request. This function does properly check its input as
    it may come from untrusted source over the network.
  **************************************************************************/
-diff --git a/server/citytools.c b/server/citytools.c
-index ba037e6..bd3251a 100644
---- a/server/citytools.c
-+++ b/server/citytools.c
-@@ -2162,6 +2162,7 @@ void package_city(struct city *pcity, struct packet_city_info *packet,
+diff -Nurd -X.diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
+--- freeciv/server/citytools.c	2016-02-24 02:40:28.898661194 +0200
++++ freeciv/server/citytools.c	2016-02-24 02:50:22.124576311 +0200
+@@ -2299,6 +2299,7 @@
    char food_output_buf[MAX_NUM_ITEMS + 1];
    char shield_output_buf[MAX_NUM_ITEMS + 1];
    char trade_output_buf[MAX_NUM_ITEMS + 1];
@@ -83,7 +143,7 @@ index ba037e6..bd3251a 100644
    struct tile *pcenter = city_tile(pcity);
    int c = 0;
  
-@@ -2284,7 +2285,20 @@ void package_city(struct city *pcity, struct packet_city_info *packet,
+@@ -2431,7 +2432,20 @@
    packet->caravan_shields=pcity->caravan_shields;
    packet->last_turns_shield_surplus = pcity->last_turns_shield_surplus;
  

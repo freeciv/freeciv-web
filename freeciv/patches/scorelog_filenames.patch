@@ -1,8 +1,61 @@
-diff --git a/server/report.c b/server/report.c
-index 8a3951e..181e5d3 100644
---- a/server/report.c
-+++ b/server/report.c
-@@ -1289,6 +1289,10 @@ void log_civ_score_init(void)
+diff -Nurd -X.diff_ignore freeciv/server/report.c freeciv/server/report.c
+--- freeciv/server/report.c	2016-02-24 02:40:28.882661265 +0200
++++ freeciv/server/report.c	2016-02-24 03:09:09.614518755 +0200
+@@ -1,4 +1,4 @@
+-/********************************************************************** 
++/**********************************************************************
+  Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+@@ -599,6 +599,7 @@
+   return result;
+ }
+ 
++#if 0
+ /****************************************************************************
+   Number of city building units.
+ ****************************************************************************/
+@@ -617,6 +618,7 @@
+ 
+   return result;
+ }
++#endif
+ 
+ /****************************************************************************
+   Wonder scpre
+@@ -634,6 +636,7 @@
+   return pplayer->score.techout;
+ }
+ 
++#if 0
+ /****************************************************************************
+   Literacy score calculated one way. See also get_literacy() to see
+   alternative way.
+@@ -642,6 +645,7 @@
+ {
+   return pplayer->score.literacy;
+ }
++#endif
+ 
+ /****************************************************************************
+   Spaceship score
+@@ -683,6 +687,7 @@
+   return pplayer->economic.gold;
+ }
+ 
++#if 0
+ /****************************************************************************
+   Tax rate
+ ****************************************************************************/
+@@ -782,6 +787,7 @@
+ 
+   return result;
+ }
++#endif
+ 
+ /****************************************************************************
+   Total score
+@@ -1288,6 +1294,10 @@
      return;
    }
  
@@ -13,7 +66,7 @@ index 8a3951e..181e5d3 100644
    score_log = fc_calloc(1, sizeof(*score_log));
    score_log->fp = NULL;
    score_log->last_turn = -1;
-@@ -1348,41 +1352,25 @@ void log_civ_score_now(void)
+@@ -1347,41 +1357,25 @@
      char *name;
      int (*get_value) (const struct player *);
    } score_tags[] = {

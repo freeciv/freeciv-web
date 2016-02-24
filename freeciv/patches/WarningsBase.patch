@@ -1,0 +1,13 @@
+diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/generate_packets.py
+--- freeciv/common/generate_packets.py	2016-02-24 01:30:52.178367420 +0200
++++ freeciv/common/generate_packets.py	2016-02-24 01:38:43.374466225 +0200
+@@ -1939,7 +1939,8 @@
+ #include "packets.h"
+ ''')
+     output_c.write(get_packet_functional_capability(packets))
+-    output_c.write('''
++    if not is_delta_disabled():
++        output_c.write('''
+ static genhash_val_t hash_const(const void *vkey)
+ {
+   return 0;

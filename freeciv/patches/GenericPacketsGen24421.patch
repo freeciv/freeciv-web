@@ -1,6 +1,6 @@
 diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/generate_packets.py
---- freeciv/common/generate_packets.py	2016-02-24 00:40:54.918170498 +0200
-+++ freeciv/common/generate_packets.py	2016-02-24 00:41:19.826149171 +0200
+--- freeciv/common/generate_packets.py	2016-02-24 03:21:23.846311767 +0200
++++ freeciv/common/generate_packets.py	2016-02-24 03:23:21.990172575 +0200
 @@ -38,9 +38,6 @@
  
  lazy_overwrite=0
@@ -770,15 +770,18 @@ diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/gene
              result=result+v.get_receive()
              result=result+v.get_send()
          return result
-@@ -1948,6 +1964,7 @@
+@@ -1947,8 +1963,8 @@
+ #include "packets.h"
  ''')
      output_c.write(get_packet_functional_capability(packets))
-     output_c.write('''
+-    if not is_delta_disabled():
+-        output_c.write('''
++    output_c.write('''
 +#ifdef FREECIV_DELTA_PROTOCOL
  static genhash_val_t hash_const(const void *vkey)
  {
    return 0;
-@@ -1957,7 +1974,7 @@
+@@ -1958,7 +1974,7 @@
  {
    return TRUE;
  }
@@ -788,8 +791,8 @@ diff -Nurd -X.diff_ignore freeciv/common/generate_packets.py freeciv/common/gene
  
      if generate_stats:
 diff -Nurd -X.diff_ignore freeciv/common/Makefile.am freeciv/common/Makefile.am
---- freeciv/common/Makefile.am	2016-02-24 00:40:54.922170495 +0200
-+++ freeciv/common/Makefile.am	2016-02-24 00:41:19.826149171 +0200
+--- freeciv/common/Makefile.am	2016-02-24 02:40:28.870661317 +0200
++++ freeciv/common/Makefile.am	2016-02-24 03:23:21.990172575 +0200
 @@ -159,7 +159,7 @@
  packets_gen.h packets_gen.c: packets_generate
  .INTERMEDIATE: packets_generate
@@ -800,8 +803,8 @@ diff -Nurd -X.diff_ignore freeciv/common/Makefile.am freeciv/common/Makefile.am
  
  # These files are not generated to builddir, but to srcdir */
 diff -Nurd -X.diff_ignore freeciv/configure.ac freeciv/configure.ac
---- freeciv/configure.ac	2016-02-24 00:40:54.914170502 +0200
-+++ freeciv/configure.ac	2016-02-24 00:41:19.826149171 +0200
+--- freeciv/configure.ac	2016-02-24 03:05:51.914190447 +0200
++++ freeciv/configure.ac	2016-02-24 03:23:21.990172575 +0200
 @@ -268,9 +268,6 @@
  dnl sets MAPIMG_WAND_CFLAGS, MAPIMG_WAND_LIBS
  FC_MAPIMG_MAGICKWAND
@@ -824,8 +827,8 @@ diff -Nurd -X.diff_ignore freeciv/configure.ac freeciv/configure.ac
  dnl done setting arguments for the packet generator
  AC_SUBST([GENERATE_PACKETS_ARGS])
 diff -Nurd -X.diff_ignore freeciv/gen_headers/freeciv_config.h.in freeciv/gen_headers/freeciv_config.h.in
---- freeciv/gen_headers/freeciv_config.h.in	2016-02-24 00:40:54.926170491 +0200
-+++ freeciv/gen_headers/freeciv_config.h.in	2016-02-24 00:42:01.306113319 +0200
+--- freeciv/gen_headers/freeciv_config.h.in	2016-02-24 02:40:28.878661281 +0200
++++ freeciv/gen_headers/freeciv_config.h.in	2016-02-24 03:23:21.990172575 +0200
 @@ -83,6 +83,9 @@
  /* jansson network protocol in use */
  #undef FREECIV_JSON_CONNECTION

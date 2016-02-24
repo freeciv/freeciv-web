@@ -1,41 +1,7 @@
-From f8d400810eb41cb8c3bc678f7125cfecd3fdc69f Mon Sep 17 00:00:00 2001
-From: sveinung <sveinung@a0f10bec-cc02-0410-94fc-a9cfff90b4cd>
-Date: Sun, 31 Jan 2016 06:06:14 +0000
-Subject: [PATCH] Make user meta server message a setting.
-
-This gives it access to various setting features like the /show command and
-the client side server setting GUI.
-
-Freeciv-web has a GUI for setting the user meta server message. At the
-moment it has to patch Freeciv to transfer the current metamessage value to
-the client. The value of server settings are transfered to the client.
-
-Don't remove the old metamessage command. Reasons:
-* it can set a message with quotation marks
-* consistency with the other meta server settings
-* old scripts may rely on it
-* server administrators are used to it
-
-See patch #6876
-
-git-svn-id: svn://svn.gna.org/svn/freeciv/trunk@31682 a0f10bec-cc02-0410-94fc-a9cfff90b4cd
----
- common/game.c       |  1 -
- common/game.h       |  3 ++-
- fc_version          |  2 +-
- server/legacysave.c |  6 +++---
- server/meta.c       |  5 ++---
- server/savecompat.c | 50 ++++++++++++++++++++++++++++++++++++++++++++++++++
- server/savegame2.c  |  9 ---------
- server/savegame3.c  | 16 ----------------
- server/settings.c   | 28 ++++++++++++++++++++++++++++
- 9 files changed, 86 insertions(+), 34 deletions(-)
-
-diff --git a/common/game.c b/common/game.c
-index ee16948..1ff2c4d 100644
---- a/common/game.c
-+++ b/common/game.c
-@@ -391,7 +391,6 @@ static void game_defaults(void)
+diff -Nurd -X.diff_ignore freeciv/common/game.c freeciv/common/game.c
+--- freeciv/common/game.c	2016-02-24 02:40:28.870661317 +0200
++++ freeciv/common/game.c	2016-02-24 03:12:52.866631507 +0200
+@@ -387,7 +387,6 @@
      game.server.last_ping         = 0;
      game.server.max_players       = GAME_DEFAULT_MAX_PLAYERS;
      game.server.meta_info.user_message[0] = '\0';
@@ -43,11 +9,10 @@ index ee16948..1ff2c4d 100644
      /* Do not clear meta_info.type here as it's already set to correct value */
      game.server.mgr_distance      = GAME_DEFAULT_MGR_DISTANCE;
      game.server.mgr_foodneeded    = GAME_DEFAULT_MGR_FOODNEEDED;
-diff --git a/common/game.h b/common/game.h
-index 1731f32..cd52012 100644
---- a/common/game.h
-+++ b/common/game.h
-@@ -245,7 +245,6 @@ struct civ_game {
+diff -Nurd -X.diff_ignore freeciv/common/game.h freeciv/common/game.h
+--- freeciv/common/game.h	2016-02-24 03:04:07.462414447 +0200
++++ freeciv/common/game.h	2016-02-24 03:12:52.866631507 +0200
+@@ -242,7 +242,6 @@
        } save_options;
  
        struct {
@@ -55,37 +20,19 @@ index 1731f32..cd52012 100644
          char user_message[256];
          char type[20];
        } meta_info;
-@@ -594,6 +593,8 @@ extern struct civ_game game;
+@@ -589,6 +588,8 @@
  
- #define GAME_DEFAULT_THREADED_SAVE   FALSE
+ #define GAME_DEFAULT_AUTOSAVES       (1 << AS_TURN | 1 << AS_GAME_OVER | 1 << AS_QUITIDLE | 1 << AS_INTERRUPT)
  
 +#define GAME_DEFAULT_USER_META_MESSAGE ""
 +
  #define GAME_DEFAULT_SKILL_LEVEL     AI_LEVEL_EASY
  #define GAME_HARDCODED_DEFAULT_SKILL_LEVEL 3 /* that was 'easy' in old saves */
  #define GAME_OLD_DEFAULT_SKILL_LEVEL 5  /* normal; for oldest save games */
-diff --git a/server/savegame.c b/server/savegame.c
-index 683e708..4d0ddf5 100644
---- a/server/savegame.c
-+++ b/server/savegame.c
-@@ -3289,9 +3289,9 @@ static void game_load_internal(struct section_file *file)
-     set_meta_patches_string(secfile_lookup_str_default(file, 
-                                                 default_meta_patches_string(),
-                                                 "game.metapatches"));
--    game.server.meta_info.user_message_set =
--      secfile_lookup_bool_default(file, FALSE, "game.user_metamessage");
--    if (game.server.meta_info.user_message_set) {
-+
-+    if (secfile_lookup_bool_default(file, FALSE,
-+                                    "game.user_metamessage")) {
-       set_user_meta_message_string(secfile_lookup_str_default(file, 
-                                                 default_meta_message_string(),
-                                                 "game.metamessage"));
-diff --git a/server/meta.c b/server/meta.c
-index 16ee0be..884be8d 100644
---- a/server/meta.c
-+++ b/server/meta.c
-@@ -134,7 +134,8 @@ static const char *get_meta_type_string(void)
+diff -Nurd -X.diff_ignore freeciv/server/meta.c freeciv/server/meta.c
+--- freeciv/server/meta.c	2016-02-24 02:40:28.882661265 +0200
++++ freeciv/server/meta.c	2016-02-24 03:12:52.866631507 +0200
+@@ -137,7 +137,8 @@
  *************************************************************************/
  const char *get_user_meta_message_string(void)
  {
@@ -95,7 +42,7 @@ index 16ee0be..884be8d 100644
      return game.server.meta_info.user_message;
    }
  
-@@ -187,12 +188,10 @@ void set_user_meta_message_string(const char *string)
+@@ -190,12 +191,10 @@
  {
    if (string != NULL && string[0] != '\0') {
      sz_strlcpy(game.server.meta_info.user_message, string);
@@ -108,19 +55,20 @@ index 16ee0be..884be8d 100644
      set_meta_message_string(default_meta_message_string());    
    }
  }
-diff --git a/server/savecompat.c b/server/savecompat.c
-index 2f68c90..1447ab6 100644
---- a/server/savecompat.c
-+++ b/server/savecompat.c
-@@ -1149,4 +1149,5 @@ static void compat_load_030000(struct loaddata *loading)
+diff -Nurd -X.diff_ignore freeciv/server/savecompat.c freeciv/server/savecompat.c
+--- freeciv/server/savecompat.c	2016-02-24 02:40:28.886661246 +0200
++++ freeciv/server/savecompat.c	2016-02-24 03:12:52.866631507 +0200
+@@ -1102,6 +1102,7 @@
+ static void compat_load_030000(struct loaddata *loading)
+ {
    bool randsaved;
 +  int num_settings;
    
    /* Check status and return if not OK (sg_success != TRUE). */
    sg_check_ret();
-@@ -1175,6 +1176,30 @@ static void compat_load_030000(struct loaddata *loading)
-                              "player%d.flags", plrno);
-     }
+@@ -1114,6 +1115,30 @@
+   } else {
+     log_sg("random.save: %s", secfile_error());
    }
 +
 +  /* Settings */
@@ -149,7 +97,7 @@ index 2f68c90..1447ab6 100644
  }
  
  #ifdef FREECIV_DEV_SAVE_COMPAT
-@@ -1213,6 +1238,7 @@ static void compat_load_dev(struct loaddata *loading)
+@@ -1151,6 +1176,7 @@
    int plrno;
    int nplayers;
    size_t diplstate_type_size;
@@ -157,8 +105,8 @@ index 2f68c90..1447ab6 100644
  
    /* Check status and return if not OK (sg_success != TRUE). */
    sg_check_ret();
-@@ -1443,6 +1469,30 @@ static void compat_load_dev(struct loaddata *loading)
-       }
+@@ -1316,6 +1342,30 @@
+                              plrno, unit);
      }
    }
 +
@@ -188,11 +136,10 @@ index 2f68c90..1447ab6 100644
  }
  #endif /* FREECIV_DEV_SAVE_COMPAT */
  
-diff --git a/server/savegame2.c b/server/savegame2.c
-index 58daea4..da2dbd7 100644
---- a/server/savegame2.c
-+++ b/server/savegame2.c
-@@ -1464,15 +1464,6 @@ static void sg_load_game(struct loaddata *loading)
+diff -Nurd -X.diff_ignore freeciv/server/savegame2.c freeciv/server/savegame2.c
+--- freeciv/server/savegame2.c	2016-02-24 02:40:28.886661246 +0200
++++ freeciv/server/savegame2.c	2016-02-24 03:12:52.866631507 +0200
+@@ -1466,15 +1466,6 @@
                                        default_meta_patches_string(),
                                        "game.meta_patches");
    set_meta_patches_string(string);
@@ -208,11 +155,10 @@ index 58daea4..da2dbd7 100644
  
    if (0 == strcmp(DEFAULT_META_SERVER_ADDR, srvarg.metaserver_addr)) {
      /* Do not overwrite this if the user requested a specific metaserver
-diff --git a/server/savegame3.c b/server/savegame3.c
-index fc47a57..e7d299e 100644
---- a/server/savegame3.c
-+++ b/server/savegame3.c
-@@ -1780,15 +1780,6 @@ static void sg_load_game(struct loaddata *loading)
+diff -Nurd -X.diff_ignore freeciv/server/savegame3.c freeciv/server/savegame3.c
+--- freeciv/server/savegame3.c	2016-02-24 02:48:28.492919533 +0200
++++ freeciv/server/savegame3.c	2016-02-24 03:16:04.958581672 +0200
+@@ -1795,15 +1795,6 @@
                                        default_meta_patches_string(),
                                        "game.meta_patches");
    set_meta_patches_string(string);
@@ -228,7 +174,15 @@ index fc47a57..e7d299e 100644
  
    if (0 == strcmp(DEFAULT_META_SERVER_ADDR, srvarg.metaserver_addr)) {
      /* Do not overwrite this if the user requested a specific metaserver
-@@ -1954,12 +1944,6 @@ static void sg_save_game(struct savedata *saving)
+@@ -1949,7 +1940,6 @@
+ static void sg_save_game(struct savedata *saving)
+ {
+   int game_version;
+-  const char *user_message;
+   enum server_states srv_state;
+   char global_advances[game.control.num_tech_types + 1];
+   int i;
+@@ -1973,12 +1963,6 @@
  
    secfile_insert_str(saving->file, get_meta_patches_string(),
                       "game.meta_patches");
@@ -241,10 +195,25 @@ index fc47a57..e7d299e 100644
    secfile_insert_str(saving->file, meta_addr_port(), "game.meta_server");
  
    secfile_insert_str(saving->file, server.game_identifier, "game.id");
-diff --git a/server/settings.c b/server/settings.c
-index a2789e3..d4832a6 100644
---- a/server/settings.c
-+++ b/server/settings.c
+diff -Nurd -X.diff_ignore freeciv/server/savegame.c freeciv/server/savegame.c
+--- freeciv/server/savegame.c	2016-02-24 02:40:28.886661246 +0200
++++ freeciv/server/savegame.c	2016-02-24 03:12:52.866631507 +0200
+@@ -3274,9 +3274,9 @@
+     set_meta_patches_string(secfile_lookup_str_default(file, 
+                                                 default_meta_patches_string(),
+                                                 "game.metapatches"));
+-    game.server.meta_info.user_message_set =
+-      secfile_lookup_bool_default(file, FALSE, "game.user_metamessage");
+-    if (game.server.meta_info.user_message_set) {
++
++    if (secfile_lookup_bool_default(file, FALSE,
++                                    "game.user_metamessage")) {
+       set_user_meta_message_string(secfile_lookup_str_default(file, 
+                                                 default_meta_message_string(),
+                                                 "game.metamessage"));
+diff -Nurd -X.diff_ignore freeciv/server/settings.c freeciv/server/settings.c
+--- freeciv/server/settings.c	2016-02-24 03:11:30.778615303 +0200
++++ freeciv/server/settings.c	2016-02-24 03:12:52.866631507 +0200
 @@ -31,6 +31,7 @@
  /* server */
  #include "gamehand.h"
@@ -253,7 +222,7 @@ index a2789e3..d4832a6 100644
  #include "notify.h"
  #include "plrhand.h"
  #include "report.h"
-@@ -744,6 +745,23 @@ static void topology_action(const struct setting *pset)
+@@ -699,6 +700,23 @@
  }
  
  /*************************************************************************
@@ -277,9 +246,9 @@ index a2789e3..d4832a6 100644
    Validation callback functions.
  *************************************************************************/
  
-@@ -2754,6 +2772,16 @@ static struct setting settings[] = {
+@@ -2676,6 +2694,16 @@
               "\"kick\" command may reconnect. Changing this setting will "
-              "affect users kicked in the past."), NULL, NULL, NULL,
+              "affect users kicked in the past."), NULL, NULL,
            GAME_MIN_KICK_TIME, GAME_MAX_KICK_TIME, GAME_DEFAULT_KICK_TIME)
 +
 +  GEN_STRING("metamessage", game.server.meta_info.user_message,
@@ -294,6 +263,3 @@ index a2789e3..d4832a6 100644
  };
  
  #undef GEN_BOOL
--- 
-2.7.0.rc3
-

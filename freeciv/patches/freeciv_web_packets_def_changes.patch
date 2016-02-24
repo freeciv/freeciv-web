@@ -1,0 +1,69 @@
+diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
+--- freeciv/common/packets.def	2016-02-24 01:30:52.178367420 +0200
++++ freeciv/common/packets.def	2016-02-24 02:07:55.184096429 +0200
+@@ -297,7 +297,7 @@
+ type UNIT_TYPE          = uint8(Unit_type_id)
+ 
+ # other typedefs
+-type CITY_COORD         = UINT8
++type CITY_COORD         = UINT32
+ type GOLD               = UINT32
+ type HP                 = UINT8
+ type PERCENT            = UINT8
+@@ -632,6 +632,9 @@
+   SINT16 citizen_base[O_LAST];
+   SINT16 usage[O_LAST];
+   UINT16 food_stock, shield_stock;
++  UINT16 granary_size;
++  TURN granary_turns;
++  UINT16 buy_gold_cost;
+ 
+   UINT8 traderoute_count;
+ 
+@@ -659,9 +662,16 @@
+ 
+   WORKLIST worklist;
+ 
++  STRING can_build_unit[MAX_LEN_MSG];
++  STRING can_build_improvement[MAX_LEN_MSG];
+   BV_IMPRS improvements;
++
++  STRING food_output[MAX_LEN_MSG];
++  STRING shield_output[MAX_LEN_MSG];
++  STRING trade_output[MAX_LEN_MSG];
+   BV_CITY_OPTIONS city_options;
+   ESTRING name[MAX_LEN_NAME];
++  BOOL unhappy;
+ end
+ 
+ PACKET_CITY_SHORT_INFO = 32; sc, lsend, is-game-info, cancel(PACKET_CITY_INFO)
+@@ -813,12 +823,14 @@
+   BV_PLAYER gives_shared_vision;
+   UINT16 culture;
+   SINT16 love[MAX_NUM_PLAYER_SLOTS];
++  UINT32 current_research_cost;
+ 
+   UINT8 color_red;
+   UINT8 color_green;
+   UINT8 color_blue;
+ 
+   CITYSPE wonders[B_LAST]; diff
++  UINT32  net_income;
+   
+   SINT32 multiplier[MAX_NUM_MULTIPLIERS];
+   SINT32 multiplier_target[MAX_NUM_MULTIPLIERS];
+@@ -1334,6 +1346,7 @@
+ PACKET_RULESET_GAME = 141; sc, lsend
+   UINT8 default_specialist;
+ 
++  # These are removed from freeciv-web
+   TECH_LIST global_init_techs[MAX_NUM_TECH_LIST];
+   BUILDING_LIST global_init_buildings[MAX_NUM_BUILDING_LIST];
+ 
+@@ -2139,3 +2152,6 @@
+ PACKET_PLAY_MUSIC = 245; sc, lsend
+   STRING tag[MAX_LEN_NAME];
+ end
++
++/*************** Webclient specific packets ****************/
++/* Use range 256:511 for these                             */

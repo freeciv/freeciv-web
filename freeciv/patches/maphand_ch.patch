@@ -1,6 +1,22 @@
-diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
---- freeciv/server/maphand.c	2014-08-30 02:19:49.888701819 +0300
-+++ freeciv/server/maphand.c	2014-08-30 02:20:35.396625975 +0300
+diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
+--- freeciv/common/packets.def	2016-02-24 02:40:28.870661317 +0200
++++ freeciv/common/packets.def	2016-02-24 02:44:18.405753877 +0200
+@@ -2169,3 +2169,12 @@
+   TILE dest;
+   UINT32 turns;
+ end
++
++PACKET_INFO_TEXT_REQ = 258; cs, dsend
++  TILE loc;
++  UNIT visible_unit;
++end
++
++PACKET_INFO_TEXT_MESSAGE = 259; sc, dsend
++  STRING message[MAX_LEN_MSG];
++end
+diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
+--- freeciv/server/maphand.c	2016-02-24 02:40:28.886661246 +0200
++++ freeciv/server/maphand.c	2016-02-24 02:44:00.509818898 +0200
 @@ -26,6 +26,7 @@
  /* common */
  #include "base.h"
@@ -17,7 +33,7 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
  
  /* generator */
  #include "utilities.h"
-@@ -2233,3 +2255,328 @@
+@@ -2326,3 +2328,324 @@
  
    unbuffer_shared_vision(pto);
  }
@@ -266,7 +282,7 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +  if (strlen(activity_text) > 0) {
 +    astr_add_line(&str, _("Activity: %s"), activity_text);
 +  }
-+  if (punit && !pcity) {
++  if (punit != NULL && pcity == NULL) {
 +    struct player *owner = unit_owner(punit);
 +    struct unit_type *ptype = unit_type_get(punit);
 +
@@ -274,14 +290,14 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +    get_full_nation(nation, sizeof(nation), owner);
 +
 +    if (!pplayer || owner == pplayer) {
-+      struct city *pcity = player_city_by_number(owner, punit->homecity);
++      struct city *hcity = player_city_by_number(owner, punit->homecity);
 +
-+      if (pcity) {
++      if (hcity != NULL) {
 +        /* TRANS: "Unit: <unit type> | <username>
 +         * (<nation + team>, <homecity>)" */
 +        astr_add_line(&str, _("Unit: %s | %s (%s, %s)"),
 +                      utype_name_translation(ptype), username,
-+                      nation, city_name(pcity));
++                      nation, city_name(hcity));
 +      } else {
 +        /* TRANS: "Unit: <unit type> | <username> (<nation + team>)" */
 +        astr_add_line(&str, _("Unit: %s | %s (%s)"),
@@ -329,10 +345,8 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +  return astr_str(&str);
 +}
 +
-+
-+
 +/****************************************************************************
-+...
++  Handle client request for tile information text.
 +****************************************************************************/
 +void handle_info_text_req(struct player *pplayer, int loc, int visible_unit_id)
 +{
@@ -343,13 +357,11 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +  conn_list_iterate(pplayer->connections, pconn) {
 +    dsend_packet_info_text_message(pconn, info_text);
 +  } conn_list_iterate_end;
-+
 +}
-+
-diff -Nurd freeciv/server/maphand.h freeciv/server/maphand.h
---- freeciv/server/maphand.h	2014-08-30 02:19:49.892701812 +0300
-+++ freeciv/server/maphand.h	2014-08-30 02:20:16.972656798 +0300
-@@ -138,4 +138,6 @@
+diff -Nurd -X.diff_ignore freeciv/server/maphand.h freeciv/server/maphand.h
+--- freeciv/server/maphand.h	2016-02-24 02:40:28.882661265 +0200
++++ freeciv/server/maphand.h	2016-02-24 02:41:05.794503294 +0200
+@@ -140,4 +140,6 @@
  void give_distorted_map(struct player *pfrom, struct player *pto, int good,
                          int bad, bool reveal_cities);
  

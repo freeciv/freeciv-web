@@ -86,7 +86,7 @@ function civclient_init()
   control_init();
 
   timeoutTimerId = setInterval("update_timeout()", 1000);
-  statsTimerId = setInterval("update_time_played_stats()", 60000);
+  statsTimerId = setInterval("update_time_played_stats()", 120000);
 
   update_game_status_panel();
   statusTimerId = setInterval("update_game_status_panel()", 6000);

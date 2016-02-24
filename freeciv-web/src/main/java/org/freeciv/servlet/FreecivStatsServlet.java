@@ -37,7 +37,7 @@ public class FreecivStatsServlet extends HttpServlet {
 
 	            if (type.equals("time")) {
 	            	String insertTableSQL = "INSERT INTO time_played_stats (statsDate, timePlayed) VALUES (CURDATE(), 1) "+
-	            		"ON DUPLICATE KEY UPDATE timePlayed = timePlayed + 1";
+	            		"ON DUPLICATE KEY UPDATE timePlayed = timePlayed + 2";
 	            	PreparedStatement preparedStatement = conn.prepareStatement(insertTableSQL);
 	            	preparedStatement.executeUpdate();
 	            } else if (type.equals("single")) {

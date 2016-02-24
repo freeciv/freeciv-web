@@ -38,6 +38,7 @@ mysql_database=settings.get("Config", "mysql_database");
 mysql_password=settings.get("Config", "mysql_password");
 
 server_map = {};
+is_first_check = True;
 
 def increment_metaserver_stats():
   result = None;
@@ -54,7 +55,8 @@ def increment_metaserver_stats():
     cnx.close()
 
 def poll_metaserver():
-  print("polling metaserver. server list size=" + str(len(server_map.keys())));
+  global is_first_check;
+  global server_map;
   conn = http.client.HTTPConnection("meta.freeciv.org")
   conn.request("GET", "/");
   r1 = conn.getresponse();
@@ -68,9 +70,16 @@ def poll_metaserver():
     if (hostname_port in server_map):
       old_state = server_map[hostname_port];
       if ("Pregame" in old_state and "Running" in state):
+        # new game: existing server transitions from pregame to running state.
         print("new game started for: " + hostname_port);
         increment_metaserver_stats();
+    elif "Running" in state and not is_first_check and not hostname_port in server_map:
+      # new game: new server starts directly in running state.
+      print("new game started for: " + hostname_port);
+      increment_metaserver_stats();
+      
     server_map[hostname_port] = state;
+  is_first_check = False;
 
 if __name__ == '__main__':
   print("Freeciv-web meta.freeciv.org stats");

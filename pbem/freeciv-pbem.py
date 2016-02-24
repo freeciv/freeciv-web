@@ -19,7 +19,7 @@
 ***********************************************************************'''
 
 
-import os
+import os, os.path
 import sys
 import time
 import lzma
@@ -30,6 +30,7 @@ from mailstatus import *
 import shutil
 import random
 import configparser
+import json
 
 savedir = "../resin/webapps/data/savegames/" 
 rankdir = "../resin/webapps/data/ranklogs/" 
@@ -42,13 +43,22 @@ mysql_user=settings.get("Config", "mysql_user")
 mysql_database=settings.get("Config", "mysql_database");
 mysql_password=settings.get("Config", "mysql_password");
 
+# load game status from file.
+loaded_games = {};
+try:
+  if (os.path.isfile('pbem-games.json')):
+    with open('pbem-games.json') as data_file:    
+      loaded_games = json.load(data_file)
+except Exception as e:
+  print(e);
+
 status = MailStatus()
 status.savegames_read = 0;
 status.emails_sent = 0;
 status.ranklog_emails_sent = 0;
 status.invitation_emails_sent = 0;
 status.retired = 0;
-status.games = {};
+status.games = loaded_games;
 status.start();
 
 # remove old games 
@@ -94,6 +104,9 @@ def handle_savegame(root, file):
     m.send_email(active_player, players, active_email, new_filename.replace(".xz", ""), turn);
     status.emails_sent += 1;
 
+  #store games status in file
+  with open('pbem-games.json', 'w') as outfile:
+    json.dump(status.games, outfile);
 
 #Returns the phase (active player number), eg 1
 def find_phase(lines):

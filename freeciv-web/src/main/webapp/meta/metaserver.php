@@ -617,7 +617,6 @@ if ( isset($port) ) {
   <br>
   To start a new Play-By-Email game, <a href="/webclient/?action=pbem">log in here</a>. To play your turn in a running Play-By-Email game,
   click on the link in the last e-mail you got from Freeciv-web. Games are expired after 7 days if you don't play your turn. <br><br>
-  <small>Note: if you don't see your game in this list, it could be that the server has been restarted. You can still join the game by clicking on the link in your email.</small>
 </div>
 
 <div id="tabs-4">

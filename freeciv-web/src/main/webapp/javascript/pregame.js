@@ -338,12 +338,12 @@ function pregame_settings()
 	  "<td><input type='number' name='mapsize' id='mapsize' size='4' length='3' min='1' max='18' step='1'></td></tr>" +
 	  "<tr title='This setting sets the skill-level of the AI players'><td>AI skill level:</td>" +
 	  "<td><select name='skill_level' id='skill_level'>" +
-	  "<option value='0'>Handicapped</option>" +
-	  "<option value='1'>Novice</option>" +
-	  "<option value='2'>Easy</option>" +
-          "<option value='3'>Normal</option>" +
-          "<option value='4'>Hard</option>" +
-          "<option value='5'>Cheating</option>" +
+	  "<option value='1'>Handicapped</option>" +
+	  "<option value='2'>Novice</option>" +
+	  "<option value='3'>Easy</option>" +
+          "<option value='4'>Normal</option>" +
+          "<option value='5'>Hard</option>" +
+          "<option value='6'>Cheating</option>" +
 	  "</select></td></tr>"+
 	  "<tr title='Number of initial techs per player'><td>Tech level:</td>" +
 	  "<td><input type='number' name='techlevel' id='techlevel' size='3' length='3' min='0' max='100' step='10'></td></tr>" +
@@ -501,17 +501,17 @@ function pregame_settings()
 
   $('#skill_level').change(function() {
     ai_skill_level = parseFloat($('#skill_level').val());
-    if (ai_skill_level == 0) {
+    if (ai_skill_level == 1) {
       send_message("/handicapped");
-    } else if (ai_skill_level == 1) {
-      send_message("/novice");
     } else if (ai_skill_level == 2) {
-      send_message("/easy");
+      send_message("/novice");
     } else if (ai_skill_level == 3) {
-      send_message("/normal");
+      send_message("/easy");
     } else if (ai_skill_level == 4) {
-      send_message("/hard");
+      send_message("/normal");
     } else if (ai_skill_level == 5) {
+      send_message("/hard");
+    } else if (ai_skill_level == 6) {
       send_message("/cheating");
     }
   });

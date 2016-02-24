@@ -150,7 +150,7 @@ function get_ai_level_text(player)
     return "Hard";
   } else if (ai_level == 6) {
     return "Cheating";
-  } else if (ai_level == 6) {
+  } else if (ai_level == 7) {
     return "Experimental";
   }
 

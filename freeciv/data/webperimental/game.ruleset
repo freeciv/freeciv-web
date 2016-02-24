@@ -878,4 +878,5 @@ set =
     "nationset", "all", TRUE
     "compresstype", "xz", TRUE
     "traitdistribution", "EVEN", FALSE
+    "maxplayers", 32, TRUE
   }

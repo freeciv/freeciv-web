@@ -785,4 +785,5 @@ set =
     "topology", "WRAPX", TRUE
     "nationset", "all", TRUE
     "compresstype", "xz", TRUE
+    "maxplayers", 32, TRUE
   }

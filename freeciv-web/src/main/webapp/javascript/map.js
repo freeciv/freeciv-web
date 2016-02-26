@@ -232,11 +232,6 @@ function map_pos_to_tile(x, y)
 ****************************************************************************/
 function index_to_tile(index)
 {
-  if (!Number.isInteger(index)) {
-    /* Non integer tile index is undefined. */
-    console.log("Invalid tile index " + index);
-  }
-
   return tiles[index];
 }
 

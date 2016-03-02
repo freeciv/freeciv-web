@@ -35,6 +35,10 @@ var DS_NO_CONTACT = 5;
 var DS_TEAM = 6;
 var DS_LAST = 7;
 
+/* The plr_flag_id enum. */
+var PLRF_AI = 0
+var PLRF_COUNT = 1;
+
 function valid_player_by_number(playerno)
 {
   /*  TODO:

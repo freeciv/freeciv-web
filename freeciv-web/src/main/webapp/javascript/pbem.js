@@ -458,7 +458,7 @@ function set_human_pbem_players()
 {
   for (var player_id in players) {
     var pplayer = players[player_id];
-    if (pplayer['ai'] == true 
+    if (pplayer['flags'].isSet(PLRF_AI) == true 
         && pplayer['name'].toUpperCase() != username.toUpperCase()) {
       send_message("/ai " + opponent);
     }

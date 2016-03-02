@@ -117,7 +117,7 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +    return;
 +  }
 +
-+  if (pplayer->ai_controlled) {
++  if (is_ai(pplayer)) {
 +    /* TRANS: "AI <player name>" */
 +    fc_snprintf(buf, buflen, _("AI %s"), pplayer->name);
 +  } else {

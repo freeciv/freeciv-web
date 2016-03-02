@@ -56,7 +56,7 @@ diff -Nurd -X.diff_ignore freeciv/server/srv_main.c freeciv/server/srv_main.c
  
    if (set_name) {
 -    server_player_set_name(pplayer, pick_random_player_name(pnation));
-+    if (pplayer->ai_controlled) {
++    if (is_ai(pplayer)) {
 +      server_player_set_name(pplayer, pick_random_player_name(pnation));
 +    } else {
 +      /* FIXME: in Web client, connection username == player name.*/

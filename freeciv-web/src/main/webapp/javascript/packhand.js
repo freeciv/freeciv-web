@@ -244,6 +244,9 @@ function handle_traderoute_info(packet)
 /* 100% complete */
 function handle_player_info(packet)
 {
+  /* Interpret player flags. */
+  packet['flags'] = new BitVector(packet['flags']);
+
   players[packet['playerno']] = $.extend(players[packet['playerno']], packet);
 
   if (client.conn.playing != null) {

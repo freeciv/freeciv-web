@@ -54,7 +54,8 @@ function update_nation_screen()
            + nations[pplayer['nation']]['adjective']  + "</td><td>"
 	   + col_love(pplayer) + "</td><td>"
 	   + get_score_text(pplayer) + "</td><td>"
-	   + (pplayer['ai'] ? get_ai_level_text(pplayer) + " AI" : "Human") + "</td><td>"
+     + (pplayer['flags'].isSet(PLRF_AI) ?
+          get_ai_level_text(pplayer) + " AI" : "Human") + "</td><td>"
 	   + (pplayer['is_alive'] ? "Alive" : "Dead") +  "</td>";
 
     if (!client_is_observer() && diplstates[player_id] != null && player_id != client.conn.playing['playerno']) {
@@ -65,11 +66,13 @@ function update_nation_screen()
 
     nation_list_html += "<td>Team " + pplayer['team'] + "</td>";
     var pstate = " ";
-    if (pplayer['phase_done'] && !pplayer['ai']) {
+    if (pplayer['phase_done'] && !pplayer['flags'].isSet(PLRF_AI)) {
       pstate = "Done";
-    } else if (!pplayer['ai'] && pplayer['nturns_idle'] > 1) {
+    } else if (!pplayer['flags'].isSet(PLRF_AI)
+               && pplayer['nturns_idle'] > 1) {
       pstate += "Idle for " + pplayer['nturns_idle'] + " turns";
-    } else if (!pplayer['phase_done'] && !pplayer['ai']) {
+    } else if (!pplayer['phase_done']
+               && !pplayer['flags'].isSet(PLRF_AI)) {
       pstate = "Moving";
     }
     nation_list_html += "<td>" + pstate + "</td>";
@@ -101,7 +104,7 @@ function update_nation_screen()
 function col_love(pplayer)
 {
   if (client_is_observer() || pplayer['playerno'] == client.conn.playing['playerno']
-      || pplayer['ai'] == false) {
+      || pplayer['flags'].isSet(PLRF_AI) == false) {
     return "-";
   } else {
     return love_text(pplayer['love'][client.conn.playing['playerno']]);
@@ -149,7 +152,8 @@ function handle_nation_table_select( ui )
     }
   }
 
-  if (client_is_observer() && pplayer['ai'] && nations[pplayer['nation']]['is_playable']
+  if (client_is_observer() && pplayer['flags'].isSet(PLRF_AI)
+      && nations[pplayer['nation']]['is_playable']
                && $.getUrlVar('multi') == "true") {
     $('#take_player_button').button("enable");
   } else {

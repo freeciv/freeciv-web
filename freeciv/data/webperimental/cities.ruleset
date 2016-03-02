@@ -102,3 +102,26 @@ nationality   = TRUE            ; account for the nationality of the citizens
 convert_speed = 50              ; base probability 50/1000 -> once every 20 turns
 partisans_pct = 0               ; percentage of own nationality to inspire partisans
                                 ; if 0, original city owner information is used instead
+
+[missing_unit_upkeep]
+; Get rid of a unit the city is unable to pay the X upkeep of.
+; X_protected  - never get rid of a unit with any of the listed unit type
+;                flags.
+; X_unit_act   - have the unit perform the listed actions until success,
+;                death or the list ends.
+; X_wipe       - wipe the unit if it survived performing the actions listed
+;                above.
+
+food_protected    = "Undisbandable"
+; food_unit_act   =
+food_wipe         = TRUE
+
+; TODO: Should missing gold upkeep really be able to kill units with the
+; Undisbandable unit type flag?
+; gold_protected  =
+; gold_unit_act   =
+gold_wipe         = TRUE
+
+shield_protected  = "Undisbandable"
+shield_unit_act   = "Help Wonder", "Recycle Unit", "Disband Unit"
+shield_wipe       = FALSE

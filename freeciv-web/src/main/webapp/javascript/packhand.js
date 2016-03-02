@@ -1189,6 +1189,14 @@ function handle_ruleset_action(packet)
   actions[packet['id']] = packet;
 }
 
+/**************************************************************************
+  Handle an action auto performer rule.
+**************************************************************************/
+function handle_ruleset_action_auto(packet)
+{
+  /* Not stored. The web client doesn't use this rule knowledge (yet). */
+}
+
 function handle_ruleset_goods(packet)
 {
   /* TODO: Implement */

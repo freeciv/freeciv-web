@@ -3,7 +3,6 @@
 # activity_null_check is for Freeciv bug #22700.
 # freeciv_segfauls_fix is a workaround some segfaults in the Freeciv server. Freeciv bug #23884.
 # message_escape is a patch for protecting against script injection in the message texts.
-# json_memory is Freeciv patch #6634 (SVN r30802)
 # scenario_ruleset will get obsolete by Freeciv patch #6589 (SVN r30871)
 # ruleset-capability will get obsolete by Freeciv patch #6791 (SVN r31448)
 # missing_trade_partner is Freeciv patch #6814 (SVN r31453)
@@ -25,7 +24,7 @@
 #
 #
 
-PATCHLIST="WarningsBase freeciv_web_packets_def_changes caravan_fixes1 city_fixes city_impr_fix2 city-naming-change city_fixes2 citytools_changes metachange text_fixes unithand-change2 current_research_cost freeciv-svn-webclient-changes init_lists_disable goto_fcweb misc_devversion_sync scenario_ruleset savegame maphand_ch serverside_extra_assign libtoolize_no_symlinks ai_traits_crash ruleset-capability worklists server_password barbarian-names activity_null_check add_rulesets message_escape freeciv_segfauls_fix scorelog_filenames scorelog_set_to_client json_memory missing_trade_partner spaceship_post_launch metamessage settings_access_level_metamessage metamessage_setting disable_global_warming 0001-JSON-specify-delta-vector-field-address fragement GenericPacketsGen24421 ArrayDimensions CommentLineOfItsOwn Remove-redundant-canceled-orders-notification"
+PATCHLIST="WarningsBase freeciv_web_packets_def_changes caravan_fixes1 city_fixes city_impr_fix2 city-naming-change city_fixes2 citytools_changes metachange text_fixes unithand-change2 current_research_cost freeciv-svn-webclient-changes init_lists_disable goto_fcweb misc_devversion_sync scenario_ruleset savegame maphand_ch serverside_extra_assign libtoolize_no_symlinks ai_traits_crash ruleset-capability worklists server_password barbarian-names activity_null_check add_rulesets message_escape freeciv_segfauls_fix scorelog_filenames scorelog_set_to_client missing_trade_partner spaceship_post_launch metamessage settings_access_level_metamessage metamessage_setting disable_global_warming 0001-JSON-specify-delta-vector-field-address fragement GenericPacketsGen24421 ArrayDimensions CommentLineOfItsOwn Remove-redundant-canceled-orders-notification"
 
 apply_patch() {
   echo "*** Applying $1.patch ***"

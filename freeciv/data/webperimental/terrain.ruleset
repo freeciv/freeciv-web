@@ -1061,11 +1061,11 @@ ui_name_base_airbase = _("?gui_type:Build Airbase")
 ;                           (default none)
 ; appearance_chance       = If extra has cause "Appear" and other requirements
 ;                           for its appearance are fulfilled, this tells how big
-;                           chance it has to appear each turn. The chance is 1/1000
+;                           chance it has to appear each turn. The chance is 1/10000
 ;                           times this value.
 ; disappearance_chance    = If extra has rmcause "Disappear" and other requirements
 ;                           for its disappearance are fulfilled, this tells how big
-;                           chance it has to disappear each turn. The chance is 1/1000
+;                           chance it has to disappear each turn. The chance is 1/10000
 ;                           times this value.
 ; native_to               = List of unit classes that are considered to
 ;                           be inside the extra when they are on same tile

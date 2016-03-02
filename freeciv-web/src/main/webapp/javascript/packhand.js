@@ -609,6 +609,8 @@ function handle_unit_action_answer(packet)
 **************************************************************************/
 function unit_actor_wants_input(pdiplomat)
 {
+  if (observing) return;
+
   if (pdiplomat['action_decision_want'] == null
       || pdiplomat['owner'] != client.conn.playing['playerno']) {
     /* No authority to decide for this unit. */

@@ -848,6 +848,7 @@ function handle_ruleset_government_ruler_title(packet)
 /* 100% complete */
 function handle_ruleset_tech(packet)
 {
+  packet['name'] = packet['name'].replace("?tech:", "");
   techs[packet['id']] = packet;
 }
 

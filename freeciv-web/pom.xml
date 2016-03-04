@@ -169,6 +169,53 @@
       </plugin> 
 
 
+      <plugin>
+        <groupId>com.cj.jshintmojo</groupId>
+        <artifactId>jshint-maven-plugin</artifactId>
+        <version>1.6.0</version>
+        <executions>
+          <execution>
+            <id>jshint</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>lint</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+           <version>2.9.1</version>
+           <options>maxparams:5,indent,forin,immed,latedef,noarg,noempty,nonew,sub,eqnull</options>
+           <globals>$</globals>
+           <directories>
+               <directory>src/main/webapp/javascript</directory>
+           </directories>
+           <excludes>
+              <exclude>src/main/webapp/javascript/libs/bigscreen.min.js</exclude>
+              <exclude>src/main/webapp/javascript/libs/FileSaver.min.js</exclude>
+              <exclude>src/main/webapp/javascript/libs/bmp_lib.js</exclude>
+              <exclude>src/main/webapp/javascript/libs/bootstrap.min.js</exclude>
+              <exclude>src/main/webapp/javascript/libs/fg.menu.js</exclude>
+              <exclude>src/main/webapp/javascript/libs/handlebars-v3.0.3.js</exclude>
+              <exclude>src/main/webapp/javascript/libs/jquery.blockUI.js</exclude>
+              <exclude>src/main/webapp/javascript/libs/jquery.contextMenu.min.js</exclude>
+              <exclude>src/main/webapp/javascript/libs/jquery.min.js</exclude>
+              <exclude>src/main/webapp/javascript/libs/jquery.tablesorter.min.js</exclude>
+              <exclude>src/main/webapp/javascript/libs/jquery-ui.min.js</exclude>
+              <exclude>src/main/webapp/javascript/libs/json3.min.js</exclude>
+              <exclude>src/main/webapp/javascript/libs/morris.min.js</exclude>
+              <exclude>src/main/webapp/javascript/libs/raphael-min.js</exclude>
+              <exclude>src/main/webapp/javascript/libs/seedrandom.min.js</exclude>
+              <exclude>src/main/webapp/javascript/libs/simpleStorage.min.js</exclude>
+              <exclude>src/main/webapp/javascript/libs/slider.js</exclude>
+              <exclude>src/main/webapp/javascript/libs/sweetalert.min.js</exclude>
+           </excludes>
+           <reporter>jslint</reporter>
+           <reportFile>target/jshint.xml</reportFile>
+           <failOnError>false</failOnError>
+         </configuration>
+       </plugin>
+
+
      </plugins>
     </build>
 

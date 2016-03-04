@@ -25,4 +25,4 @@ mkdir -p $DATADIR/savegames
 mkdir -p $DATADIR/scorelogs
 mkdir -p $DATADIR/ranklogs
 
-mvn install && cp target/freeciv-web.war "${ROOTDIR}/resin/webapps/ROOT.war"
+mvn package && cp target/freeciv-web.war "${ROOTDIR}/resin/webapps/ROOT.war"

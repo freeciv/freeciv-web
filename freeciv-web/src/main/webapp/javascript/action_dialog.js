@@ -69,7 +69,7 @@ function can_actor_unit_move(actor_unit, target_tile)
       /* In current Freeciv acting units can't attack foreign units. */
       return false;
     }
-  };
+  }
 
   if (tile_city(target_tile) != null) {
     tgt_owner_id = city_owner(tile_city(target_tile))['playerno'];
@@ -128,7 +128,7 @@ function format_action_probability(probability)
 function format_action_label(action_id, action_probabilities)
 {
   return actions[action_id]['ui_name'].replace("%s", "").replace("%s",
-      format_action_probability(action_probabilities[action_id]))
+      format_action_probability(action_probabilities[action_id]));
 }
 
 /****************************************************************************
@@ -342,7 +342,7 @@ function popup_action_selection(actor_unit, action_probabilities,
   }
   if (can_actor_unit_move(actor_unit, target_tile)) {
     dhtml += "<input id='act_sel_move" + actor_unit['id']
-    + "' class='act_sel_button' type='button' value='Keep moving'>"
+    + "' class='act_sel_button' type='button' value='Keep moving'>";
   }
 
   dhtml += "<input id='act_sel_cancel" + actor_unit['id']
@@ -735,7 +735,7 @@ function popup_bribe_dialog(actor_unit, target_unit, cost)
   $("<div id='bribe_unit_dialog_" + actor_unit['id'] + "'></div>")
       .appendTo("div#game_page");
 
-  dhtml += "Treasury contains " + unit_owner(actor_unit)['gold'] + " gold. "
+  dhtml += "Treasury contains " + unit_owner(actor_unit)['gold'] + " gold. ";
   dhtml += "The price of bribing "
               + nations[unit_owner(target_unit)['nation']]['adjective']
               + " " + unit_types[target_unit['type']]['name']
@@ -796,7 +796,7 @@ function popup_incite_dialog(actor_unit, target_city, cost)
 
   dhtml = "";
 
-  dhtml += "Treasury contains " + unit_owner(actor_unit)['gold'] + " gold."
+  dhtml += "Treasury contains " + unit_owner(actor_unit)['gold'] + " gold.";
   dhtml += " ";
   dhtml += "The price of inciting "
            + decodeURIComponent(target_city['name'])
@@ -871,7 +871,7 @@ function create_steal_tech_button(parent_id, tech,
 /**************************************************************************
   Select what tech to steal when doing targeted tech theft.
 **************************************************************************/
-function popup_steal_tech_selection_dialog(actor_unit, target_city,
+function popup_steal_tech_selection_dialog(actor_unit, target_city, 
                                            act_probs)
 {
   var id = "stealtech_dialog_" + actor_unit['id'];

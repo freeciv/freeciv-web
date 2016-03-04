@@ -85,14 +85,14 @@ function civclient_init()
   game_init();
   control_init();
 
-  timeoutTimerId = setInterval("update_timeout()", 1000);
-  statsTimerId = setInterval("update_time_played_stats()", 120000);
+  timeoutTimerId = setInterval(update_timeout, 1000);
+  statsTimerId = setInterval(update_time_played_stats, 120000);
 
   update_game_status_panel();
-  statusTimerId = setInterval("update_game_status_panel()", 6000);
+  statusTimerId = setInterval(update_game_status_panel, 6000);
 
   if (overviewTimerId == -1) {
-    overviewTimerId = setInterval("redraw_overview()", OVERVIEW_REFRESH);
+    overviewTimerId = setInterval(redraw_overview, OVERVIEW_REFRESH);
   }
 
   motd_init();
@@ -126,7 +126,7 @@ function civclient_init()
 	            }
 	        }
 	        return -1;
-	    }
+	    };
   }
 
 
@@ -513,7 +513,7 @@ function update_turn_change_timer()
 {
   turn_change_elapsed += 1;
   if (turn_change_elapsed < last_turn_change_time) {
-    setTimeout("update_turn_change_timer()", 1000);
+    setTimeout(update_turn_change_timer, 1000);
     $("#turn_done_button").button("option", "label", "Please wait (" 
         + (last_turn_change_time - turn_change_elapsed) + ")");
   } else {
@@ -606,9 +606,9 @@ function show_debug_info()
   /* Show average network latency PING (client to server, and back). */
   sum = 0;
   max = 0;
-  for (var i = 0; i < debug_client_speed_list.length; i++) {
-    sum += debug_client_speed_list[i];
-    if (debug_client_speed_list[i] > max) max = debug_client_speed_list[i];
+  for (var j = 0; j < debug_client_speed_list.length; j++) {
+    sum += debug_client_speed_list[j];
+    if (debug_client_speed_list[j] > max) max = debug_client_speed_list[j];
   }
   console.log("Network PING average (client): " + (sum / debug_client_speed_list.length) + " ms.  (Max: " + max +"ms.)");
 
@@ -623,7 +623,7 @@ function show_debug_info()
 function motd_init()
 {
   $.getScript("/motd.js");
-  setTimeout("motd_init();", 1000*60*30);
+  setTimeout(motd_init, 1000*60*30);
 }
 
 /**************************************************************************

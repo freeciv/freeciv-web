@@ -39,7 +39,7 @@ var pingtime_check = 240000;
 function network_init()
 {
 
-  if (!"WebSocket" in window) {
+  if (typeof(WebSocket) != "function") {
     swal("WebSockets not supported");
     return;
   }
@@ -69,7 +69,7 @@ function network_init()
    }
   });
 
-  setInterval("ping_check();", pingtime_check);
+  setInterval(ping_check, pingtime_check);
 
 }
 

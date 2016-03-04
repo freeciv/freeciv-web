@@ -184,7 +184,7 @@
         </executions>
         <configuration>
            <version>2.9.1</version>
-           <options>maxparams:5,indent,forin,immed,latedef,noarg,noempty,nonew,sub,eqnull</options>
+           <options>maxparams:5,indent,immed,noarg,noempty,nonew,sub,eqnull,laxbreak,eqeqeq:false,-W041:false</options>
            <globals>$</globals>
            <directories>
                <directory>src/main/webapp/javascript</directory>

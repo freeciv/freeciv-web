@@ -123,7 +123,7 @@ function control_init()
 
   /* Click callbacks for main tabs. */
   $("#map_tab").click(function(event) {
-    setTimeout("set_default_mapview_active();", 5);
+    setTimeout(set_default_mapview_active, 5);
   });
 
 
@@ -1319,7 +1319,7 @@ function handle_context_menu_callback(key)
     case "show_city":
       var ptile = find_a_focus_unit_tile_to_center_on();
       if (ptile != null) {
-        var pcity = tile_city(ptile)
+        var pcity = tile_city(ptile);
         show_city_dialog(pcity);
       }
       break;
@@ -1383,7 +1383,7 @@ function deactivate_goto()
   goto_last_action = ACTION_COUNT;
 
   // update focus to next unit after 600ms.
-  setTimeout("update_unit_focus();", 600);
+  setTimeout(update_unit_focus, 600);
 
 
 }

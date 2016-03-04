@@ -53,7 +53,10 @@ function set_client_state(newstate)
       update_metamessage_on_gamestart();
       deduplicate_player_colors();
       if (is_pbem()) {
-        setTimeout("set_human_pbem_players();advance_unit_focus();", 1500);
+        setTimeout(function () {
+          set_human_pbem_players();
+          advance_unit_focus();
+        }, 1500);
       }
 
       break;
@@ -103,7 +106,7 @@ function show_new_game_message()
 {
 
   if (observing) {
-    /* do nothing. */
+    return;
 
   } else if (is_pbem()) {
     show_dialog_message("Welcome to Freeciv-web: Play-By-Email.",
@@ -211,7 +214,10 @@ function update_metamessage_on_gamestart()
     var pplayer = client.conn.playing;
     var metasuggest = username + " ruler of the " + nations[pplayer['nation']]['adjective'] + " empire.";
     send_message("/metamessage " + metasuggest);
-    setTimeout("chatbox_text = ' '; add_chatbox_text('');", 800);
+    setTimeout(function () {
+                 chatbox_text = ' ';
+                 add_chatbox_text('');
+               }, 800);
   }
 
   if ($.getUrlVar('action') == "new" || $.getUrlVar('action') == "earthload" 

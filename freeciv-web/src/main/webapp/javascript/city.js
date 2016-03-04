@@ -54,7 +54,7 @@ function city_tile(pcity)
 {
   if (pcity == null) return null;
 
-  return index_to_tile(pcity['tile'])
+  return index_to_tile(pcity['tile']);
 }
 
 /**************************************************************************
@@ -115,6 +115,10 @@ function show_city_dialog_by_id(pcity_id)
 function show_city_dialog(pcity)
 {
   var turns_to_complete = FC_INFINITY;
+  var sprite;
+  var punit;
+  var ptype;
+
   if (active_city != pcity || active_city == null) city_prod_clicks = 0;
   active_city = pcity;
 
@@ -225,7 +229,7 @@ function show_city_dialog(pcity)
   var improvements_html = "";
   for (var z = 0; z < ruleset_control.num_impr_types; z ++) {
     if (pcity['improvements'].isSet(z)) {
-       var sprite = get_improvement_image_sprite(improvements[z]);
+       sprite = get_improvement_image_sprite(improvements[z]);
        if (sprite == null) {
          console.log("Missing sprite for improvement " + z);
          continue;
@@ -247,9 +251,9 @@ function show_city_dialog(pcity)
   if (punits != null) {
     var present_units_html = "";
     for (var r = 0; r < punits.length; r++) {
-      var punit = punits[r];
-      var ptype = unit_type(punit);
-      var sprite = get_unit_image_sprite(punit);
+      punit = punits[r];
+      ptype = unit_type(punit);
+      sprite = get_unit_image_sprite(punit);
       if (sprite == null) {
          console.log("Missing sprite for " + punit);
          continue;
@@ -270,10 +274,10 @@ function show_city_dialog(pcity)
   var sunits = get_supported_units(pcity);
   if (sunits != null) {
     var supported_units_html = "";
-    for (var r = 0; r < sunits.length; r++) {
-      var punit = sunits[r];
-      var ptype = unit_type(punit);
-      var sprite = get_unit_image_sprite(punit);
+    for (var t = 0; t < sunits.length; t++) {
+      punit = sunits[t];
+      ptype = unit_type(punit);
+      sprite = get_unit_image_sprite(punit);
       if (sprite == null) {
          console.log("Missing sprite for " + punit);
          continue;
@@ -308,10 +312,10 @@ function show_city_dialog(pcity)
   var citizen_types = ["angry", "unhappy", "content", "happy"];
   for (var s = 0; s < citizen_types.length; s++) {
     for (var i = 0; i < pcity['ppl_' + citizen_types[s]][FEELING_FINAL]; i ++) {
-     var sprite = get_specialist_image_sprite("citizen." + citizen_types[s] + "_"
+      sprite = get_specialist_image_sprite("citizen." + citizen_types[s] + "_"
          + (i % 2));
-     specialist_html = specialist_html +
-     "<div class='specialist_item' style='background: transparent url("
+      specialist_html = specialist_html +
+      "<div class='specialist_item' style='background: transparent url("
            + sprite['image-src'] +
            ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y']
            + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px;float:left; '"
@@ -319,17 +323,17 @@ function show_city_dialog(pcity)
     }
   }
 
-  for (var i = 0; i < pcity['specialists_size']; i++) {
-    var spec_type_name = specialists[i]['plural_name'];
-    var spec_gfx_key = "specialist." + specialists[i]['rule_name'] + "_0";
-    for (var s = 0; s < pcity['specialists'][i]; s++) {
-     var sprite = get_specialist_image_sprite(spec_gfx_key);
-     specialist_html = specialist_html +
-     "<div class='specialist_item' style='cursor:pointer;cursor:hand; background: transparent url("
+  for (var u = 0; u < pcity['specialists_size']; u++) {
+    var spec_type_name = specialists[u]['plural_name'];
+    var spec_gfx_key = "specialist." + specialists[u]['rule_name'] + "_0";
+    for (var j = 0; j < pcity['specialists'][u]; j++) {
+      sprite = get_specialist_image_sprite(spec_gfx_key);
+      specialist_html = specialist_html +
+      "<div class='specialist_item' style='cursor:pointer;cursor:hand; background: transparent url("
            + sprite['image-src'] +
            ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y']
            + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px;float:left; '"
-           + " onclick='city_change_specialist(" + pcity['id'] + "," + specialists[i]['id'] + ");'"
+           + " onclick='city_change_specialist(" + pcity['id'] + "," + specialists[u]['id'] + ");'"
            +" title='" + spec_type_name + " (click to change)'></div>";
 
     }
@@ -439,7 +443,7 @@ function get_city_production_time(pcity)
 function generate_production_list(pcity)
 {
   var production_list = [];
-  for (unit_type_id in unit_types) {
+  for (var unit_type_id in unit_types) {
     var punit_type = unit_types[unit_type_id];
 
     /* FIXME: web client doesn't support unit flags yet, so this is a hack: */
@@ -458,7 +462,7 @@ function generate_production_list(pcity)
     }
   }
 
-  for (improvement_id in improvements) {
+  for (var improvement_id in improvements) {
     var pimprovement = improvements[improvement_id];
     if (can_city_build_improvement_now(pcity, pimprovement)) {
       var build_cost = pimprovement['build_cost'];
@@ -780,6 +784,7 @@ function city_name_dialog(suggested_name, unit_id) {
 function next_city()
 {
   if (!client.conn.playing) return;
+  var city_id;
 
   var is_next = false;
   for (city_id in cities) {
@@ -794,9 +799,9 @@ function next_city()
   }
 
   for (city_id in cities) {
-    var pcity = cities[city_id];
-    if (is_next && city_owner(pcity).playerno == client.conn.playing.playerno) {
-      show_city_dialog(pcity)
+    var scity = cities[city_id];
+    if (is_next && city_owner(scity).playerno == client.conn.playing.playerno) {
+      show_city_dialog(scity);
       return;
     }
   }
@@ -810,7 +815,7 @@ function previous_city()
   if (!client.conn.playing) return;
 
   var prev_city = null;
-  for (city_id in cities) {
+  for (var city_id in cities) {
     var next_city = cities[city_id];
 
     if (prev_city != null && active_city['id'] == city_id
@@ -1053,13 +1058,15 @@ function city_worklist_dialog(pcity)
 {
   if (pcity == null) return;
   var universals_list = [];
+  var kind;
+  var value;
 
   if (pcity['worklist'] != null && pcity['worklist'] != "-") {
     var work_list = pcity['worklist'].split(";");
     for (var i = 0; i < work_list.length; i++) {
       var work_item = work_list[i].split(",");
-      var kind = work_item[0];
-      var value = work_item[1];
+      kind = work_item[0];
+      value = work_item[1];
       if (kind == null || value == null || work_item.length == 0) continue;
       if (kind == VUT_IMPROVEMENT) {
         var pimpr = improvements[value];
@@ -1084,7 +1091,7 @@ function city_worklist_dialog(pcity)
   var worklist_html = "<table class='worklist_table'><tr><td>Type</td><td>Name</td><td>Cost</td></tr>";
   for (var j = 0; j < universals_list.length; j++) {
     var universal = universals_list[j];
-    var sprite = universal['sprite'];
+    sprite = universal['sprite'];
     if (sprite == null) {
       console.log("Missing sprite for " + universal[j]['name']);
       continue;
@@ -1107,13 +1114,13 @@ function city_worklist_dialog(pcity)
   var production_list = generate_production_list(pcity);
   var production_html = "<table class='worklist_table'><tr><td>Type</td><td>Name</td><td title='Attack/Defense/Firepower'>Info</td><td>Cost</td></tr>";
   for (var a = 0; a < production_list.length; a++) {
-    var sprite = production_list[a]['sprite'];
+    sprite = production_list[a]['sprite'];
     if (sprite == null) {
       console.log("Missing sprite for " + production_list[a]['value']);
       continue;
     }
-    var kind = production_list[a]['kind'];
-    var value = production_list[a]['value'];
+    kind = production_list[a]['kind'];
+    value = production_list[a]['value'];
 
     production_html += "<tr class='prod_choice_list_item kindvalue_item' data-value='" + value + "' data-kind='" + kind + "'>"
      + "<td><div class='production_list_item_sub' title=\"" + production_list[a]['helptext'] + "\" style=' background: transparent url("
@@ -1131,20 +1138,20 @@ function city_worklist_dialog(pcity)
 
   keyboard_input=false;
   worklist_dialog_active = true;
-  var turns_to_complete = get_city_production_time(pcity);;
+  var turns_to_complete = get_city_production_time(pcity);
   var prod_type = get_city_production_type_sprite(pcity);
   var prod_img_html = "";
   if (prod_type != null) { 
     sprite = prod_type['sprite'];
     prod_img_html = "<div style='background: transparent url("
-           + sprite['image-src'] +
-           ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y']
+           + sprite['image-src']
+           + ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y']
            + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px;float: left; '>"
-           +"</div>"
+           +"</div>";
   }
 
   var headline = prod_img_html + "<div id='prod_descr'>Production: " 
-    + (prod_type != null ? prod_type['type']['name'] : "None")
+    + (prod_type != null ? prod_type['type']['name'] : "None");
 
   if (turns_to_complete != FC_INFINITY) {
     headline += " - Turns: " + turns_to_complete;
@@ -1159,16 +1166,16 @@ function city_worklist_dialog(pcity)
        selected: function( event, ui ) {handle_worklist_select(ui); }});
 
     $(".kindvalue_item").dblclick(function() {
-      var value = parseFloat($(this).data('value'));
-      var kind = parseFloat($(this).data('kind'));
+      value = parseFloat($(this).data('value'));
+      kind = parseFloat($(this).data('kind'));
       if (selected_kind >= 0 && selected_value >= 0) {
         send_city_worklist_add(pcity['id'], kind, value);
       }
     });
   } else {
     $(".kindvalue_item").click(function() {
-      var value = parseFloat($(this).data('value'));
-      var kind = parseFloat($(this).data('kind'));
+      value = parseFloat($(this).data('value'));
+      kind = parseFloat($(this).data('kind'));
       if (city_prod_clicks == 0) {
         send_city_change(pcity['id'], kind, value);
       } else {
@@ -1260,7 +1267,7 @@ function update_city_screen()
         + "<thead><td>Name</td><td>Population</td><td>Size</td>"
         + "<td>Granary</td><td>Grow In</td><td>Producing</td><td>Done In</td></thead>";
   var count = 0;
-  for (city_id in cities){
+  for (var city_id in cities){
     var pcity = cities[city_id];
     if (city_owner(pcity).playerno == client.conn.playing.playerno) {
       count++; 

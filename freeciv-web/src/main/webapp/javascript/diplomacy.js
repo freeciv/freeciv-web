@@ -209,14 +209,14 @@ function remove_clause_req(clause_no)
 /**************************************************************************
  ...
 **************************************************************************/
-function remove_clause(remove_clause)
+function remove_clause(remove_clause_obj)
 {
-  var clause_list = diplomacy_clause_map[remove_clause['counterpart']];
+  var clause_list = diplomacy_clause_map[remove_clause_obj['counterpart']];
   for (var i = 0; i < clause_list.length; i++) {
     var check_clause = clause_list[i];
-    if (remove_clause['counterpart'] == check_clause['counterpart']
-	&& remove_clause['giver'] == check_clause['giver']
-        && remove_clause['type'] == check_clause['type']) {
+    if (remove_clause_obj['counterpart'] == check_clause['counterpart']
+	&& remove_clause_obj['giver'] == check_clause['giver']
+        && remove_clause_obj['type'] == check_clause['type']) {
 
       clause_list.splice(i, 1);
       break;

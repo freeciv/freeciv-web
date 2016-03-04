@@ -69,12 +69,12 @@ function handle_server_join_reply(packet)
     set_client_state(C_S_PREPARING);
     if (autostart) {
       if (loadTimerId == -1) {
-        setTimeout("pregame_start_game();", 800);
+        setTimeout(pregame_start_game, 800);
       } else {
-        setTimeout("pregame_start_game();", 3800);
+        setTimeout(pregame_start_game, 3800);
       }
     } else if (observing) {
-      setTimeout("request_observe_game();", 800);
+      setTimeout(request_observe_game, 800);
     }
 
   } else {
@@ -1149,13 +1149,13 @@ function handle_research_info(packet)
     for (var player_id in players) {
       var pplayer = players[player_id];
       if (pplayer['team'] == packet['id']) {
-	pplayer = $.extend(pplayer, packet)
+	pplayer = $.extend(pplayer, packet);
         delete pplayer['id'];
       }
     }
   } else {
     var pplayer = players[packet['id']];
-    pplayer = $.extend(pplayer, packet)
+    pplayer = $.extend(pplayer, packet);
     delete pplayer['id'];
   }
 

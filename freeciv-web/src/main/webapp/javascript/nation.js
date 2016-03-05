@@ -89,11 +89,21 @@ function update_nation_screen()
        selected: function( event, ui ) {handle_nation_table_select(ui); } });
 
   selected_player = -1;
-  $('#view_player_button').button("disable");
-  $('#meet_player_button').button("disable");
-  $('#cancel_treaty_button').button("disable");
-  $('#take_player_button').button("disable");
-  $('#toggle_ai_button').button("disable");
+
+  if (is_pbem()) {
+    /* TODO: PBEM games do not support diplomacy.*/
+    $('#meet_player_button').hide();
+    $('#cancel_treaty_button').hide();
+    $('#take_player_button').hide();
+    $('#toggle_ai_button').hide();
+    $('#game_scores_button').hide();
+  } else {
+    $('#view_player_button').button("disable");
+    $('#meet_player_button').button("disable");
+    $('#cancel_treaty_button').button("disable");
+    $('#take_player_button').button("disable");
+    $('#toggle_ai_button').button("disable");
+  }
 
 }
 

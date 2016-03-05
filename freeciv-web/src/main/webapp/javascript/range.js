@@ -76,7 +76,7 @@ Range.prototype.setMinimum = function (minimum) {
 		if (minimum > this._maximum) {
 			this._extent = 0;
 			this.setMaximum(minimum);
-			this.setValue(minimum)
+			this.setValue(minimum);
 		}
 		if (minimum + this._extent > this._maximum)
 			this._extent = this._maximum - this._minimum;

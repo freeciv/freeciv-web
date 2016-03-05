@@ -94,6 +94,7 @@ function update_game_info_pregame()
 ****************************************************************************/
 function update_player_info_pregame()
 {
+  var id;
   if (C_S_PREPARING == client_state()) {
     player_html = "";
     for (id in players) {
@@ -140,7 +141,7 @@ function update_player_info_pregame()
         selector: '.pregame_player_name', 
         callback: function(key, options) {
             var name = $(this).attr('name');
-            if (name != null && name.indexOf(" ") != -1) name = name.split(" ")[0]
+            if (name != null && name.indexOf(" ") != -1) name = name.split(" ")[0];
             var playerid = parseInt($(this).attr('playerid'));
             if (key == "take_player") {
               send_message("/take " + name);
@@ -207,7 +208,7 @@ function pick_nation(player_id)
     var pnation = nations[nation_id];
     if (pnation['is_playable']) {
       var flag_url = get_nation_flag_url(pnation);
-      var flag_html = "<img class='pick_nation_flags' src='" + flag_url +"'>"
+      var flag_html = "<img class='pick_nation_flags' src='" + flag_url +"'>";
       nations_html += "<div class='nation_pickme_line' onclick='select_nation(" + nation_id + ");'>"
              + flag_html + "<div id='nation_" + nation_id + "' class='nation_choice'>" + pnation['adjective'] + "</div></div>";
       nation_name_list.push(pnation['adjective']);
@@ -243,7 +244,7 @@ function pick_nation(player_id)
     $("#nation_list").width("80%");
   }
 
-  nation_select_id = setTimeout ("update_nation_selection();", 200);
+  nation_select_id = setTimeout (update_nation_selection, 200);
   $("#pick_nation_dialog").dialog('open');
 
 }
@@ -264,7 +265,7 @@ function update_nation_selection()
       return;
     }
   }
-  nation_select_id = setTimeout ("update_nation_selection();", 200);
+  nation_select_id = setTimeout (update_nation_selection, 200);
 }
 
 /****************************************************************************

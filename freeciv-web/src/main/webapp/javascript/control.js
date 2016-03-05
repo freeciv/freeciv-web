@@ -89,7 +89,7 @@ function control_init()
 
   /* disable text-selection, as this gives wrong mouse cursor
    * during drag to goto units. */
-  document.onselectstart = function(){ return false; }
+  document.onselectstart = function(){ return false; };
 
   /* disable right clicks. */
   document.oncontextmenu = function(){return allow_right_click;};
@@ -173,7 +173,7 @@ function control_init()
   $("#game_overview_map").click(function(e) {
     var x = e.pageX - $(this).offset().left;
     var y = e.pageY - $(this).offset().top;
-    overview_clicked (x, y)
+    overview_clicked (x, y);
   });
 
   $('#meet_player_button').click(nation_meet_clicked);
@@ -217,7 +217,7 @@ function mouse_moved_cb(e)
   mouse_x = 0;
   mouse_y = 0;
   if (!e) {
-    var e = window.event;
+    e = window.event;
   }
   if (e.pageX || e.pageY) {
     mouse_x = e.pageX;
@@ -405,7 +405,7 @@ function advance_unit_focus()
     update_active_units_dialog();
     $("#game_unit_orders_default").hide();
     /* find a city to focus on. */
-    for (city_id in cities) {
+    for (var city_id in cities) {
       var pcity = cities[city_id];
       if (city_owner_player_id(pcity) == client.conn.playing.playerno) {
         center_tile_mapcanvas(city_tile(pcity));
@@ -421,14 +421,18 @@ function advance_unit_focus()
 **************************************************************************/
 function update_unit_order_commands()
 {
-  var unit_actions = { };
+  var i;
+  var punit;
+  var ptype;
+  var pcity;
+  var unit_actions = {};
   var funits = get_units_in_focus();
-  for (var i = 0; i < funits.length; i++) {
-    var punit = funits[i];
-    var ptype = unit_type(punit);
-    var ptile = index_to_tile(punit['tile']);
+  for (i = 0; i < funits.length; i++) {
+    punit = funits[i];
+    ptype = unit_type(punit);
+    ptile = index_to_tile(punit['tile']);
     if (ptile == null) continue;
-    var pcity = tile_city(ptile);
+    pcity = tile_city(ptile);
 
     if (pcity != null) {
       unit_actions["show_city"] = {name: "Show city"};
@@ -441,16 +445,16 @@ function update_unit_order_commands()
 	    "tile_info": {name: "Tile info"}
             });
 
-  for (var i = 0; i < funits.length; i++) {
-    var punit = funits[i];
-    var ptype = unit_type(punit);
-    var ptile = index_to_tile(punit['tile']);
+  for (i = 0; i < funits.length; i++) {
+    punit = funits[i];
+    ptype = unit_type(punit);
+    ptile = index_to_tile(punit['tile']);
     if (ptile == null) continue;
-    var pcity = tile_city(ptile);
+    pcity = tile_city(ptile);
 
     if (ptype['name'] == "Settlers") {
       $("#order_build_city").show();
-      unit_actions["build"] = {name: "Build city (B)"}
+      unit_actions["build"] = {name: "Build city (B)"};
     } else {
       $("#order_build_city").hide();
     }
@@ -620,19 +624,21 @@ function init_game_unit_panel()
 **************************************************************************/
 function find_best_focus_candidate(accept_current)
 {
+  var punit;
+  var i;
   if (client_is_observer()) return null;
 
   var sorted_units = [];
-  for (unit_id in units) {
-    var punit = units[unit_id];
+  for (var unit_id in units) {
+    punit = units[unit_id];
     if (punit['owner'] == client.conn.playing.playerno) {
       sorted_units.push(punit);
     }
   }
   sorted_units.sort(unit_distance_compare);
 
-  for (var i = 0; i < sorted_units.length; i++) {
-    var punit = sorted_units[i];
+  for (i = 0; i < sorted_units.length; i++) {
+    punit = sorted_units[i];
     if ((!unit_is_in_focus(punit) || accept_current)
        && punit['owner'] == client.conn.playing.playerno
        && punit['activity'] == ACTIVITY_IDLE
@@ -646,8 +652,8 @@ function find_best_focus_candidate(accept_current)
   }
 
   /* check waiting units for focus candidates */
-  for (var i = 0; i < waiting_units_list.length; i++) {
-      var punit = game_find_unit_by_number(waiting_units_list[i]);
+  for (i = 0; i < waiting_units_list.length; i++) {
+      punit = game_find_unit_by_number(waiting_units_list[i]);
       if (punit != null && punit['movesleft'] > 0) {
         waiting_units_list.splice(i, 1);
         return punit;
@@ -771,6 +777,7 @@ function find_visible_unit(ptile)
   var panyother = null;
   var ptptother = null;
   var pfocus = null;
+  var i;
 
   /* If no units here, return nothing. */
   if (unit_list_size(tile_units(ptile))==0) {
@@ -778,7 +785,7 @@ function find_visible_unit(ptile)
   }
 
   /* If the unit in focus is at this tile, show that on top */
-  var pfocus = get_focus_unit_on_tile(ptile);
+  pfocus = get_focus_unit_on_tile(ptile);
   if (pfocus != null) {
     return pfocus;
   }
@@ -790,14 +797,14 @@ function find_visible_unit(ptile)
 
   /* TODO: add missing C logic here.*/
   var vunits = tile_units(ptile);
-  for (var i = 0; i < vunits.length; i++) {
+  for (i = 0; i < vunits.length; i++) {
     var aunit = vunits[i];
     if (aunit['anim_list'] != null && aunit['anim_list'].length > 0) {
       return aunit;
     }
   }
 
-  for (var i = 0; i < vunits.length; i++) {
+  for (i = 0; i < vunits.length; i++) {
     var tunit = vunits[i];
     if (tunit['transported'] == false) {
       return tunit;
@@ -831,6 +838,9 @@ function get_drawable_unit(ptile, citymode)
 **************************************************************************/
 function do_map_click(ptile, qtype)
 {
+  var punit;
+  var packet;
+  var pcity;
   if (ptile == null || client_is_observer()) return;
 
   if (current_focus.length > 0 && current_focus[0]['tile'] == ptile['index']) {
@@ -840,7 +850,7 @@ function do_map_click(ptile, qtype)
     return;
   }
   var sunits = tile_units(ptile);
-  var pcity = tile_city(ptile);
+  pcity = tile_city(ptile);
 
   if (goto_active) {
     /* Get the path the server sent using PACKET_GOTO_PATH. */
@@ -851,13 +861,13 @@ function do_map_click(ptile, qtype)
         && goto_path != null
         /* the path for this tile has been received */
         && goto_path != true) {
-      var punit = current_focus[0];
+      punit = current_focus[0];
 
       /* The tile the unit currently is standing on. */
       var old_tile = index_to_tile(punit['tile']);
 
       /* Create an order to move along the path. */
-      var packet = {
+      packet = {
         "pid"      : packet_unit_orders,
         "unit_id"  : punit['id'],
         "src_tile" : old_tile['index'],
@@ -948,16 +958,16 @@ function do_map_click(ptile, qtype)
     update_unit_focus();
 
   } else if (paradrop_active && current_focus.length > 0) {
-    var punit = current_focus[0];
-    var packet = {"pid" : packet_unit_paradrop_to, "unit_id" : punit['id'], "tile": ptile['index'] };
+    punit = current_focus[0];
+    packet = {"pid" : packet_unit_paradrop_to, "unit_id" : punit['id'], "tile": ptile['index'] };
     send_request(JSON.stringify(packet));
     paradrop_active = false;
 
   } else if (airlift_active && current_focus.length > 0) {
-    var punit = current_focus[0];
-    var pcity = tile_city(ptile);
+    punit = current_focus[0];
+    pcity = tile_city(ptile);
     if (pcity != null) {
-      var packet = {"pid" : packet_unit_airlift, "unit_id" : punit['id'], "city_id": pcity['id'] };
+      packet = {"pid" : packet_unit_airlift, "unit_id" : punit['id'], "city_id": pcity['id'] };
       send_request(JSON.stringify(packet));
     }
     airlift_active = false;
@@ -1145,7 +1155,7 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift)
       }
     break;
 
-  };
+  }
 
   switch (key_code) {
     case 13:
@@ -1197,7 +1207,7 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift)
       break;
 
 
-  };
+  }
 
 }
 
@@ -1241,7 +1251,7 @@ function handle_context_menu_callback(key)
       break;
 
     case "autosettlers":
-      key_unit_auto_settle()
+      key_unit_auto_settle();
       break;
 
     case "fallout":
@@ -1317,13 +1327,12 @@ function handle_context_menu_callback(key)
       break;
 
     case "show_city":
-      var ptile = find_a_focus_unit_tile_to_center_on();
-      if (ptile != null) {
-        var pcity = tile_city(ptile);
-        show_city_dialog(pcity);
+      var stile = find_a_focus_unit_tile_to_center_on();
+      if (stile != null) {
+        show_city_dialog(tile_city(stile));
       }
       break;
-  };
+  }
   if (key != "goto" && is_touch_device()) {
     deactivate_goto();
   }

@@ -106,7 +106,7 @@ function generate_overview_grid(cols, rows) {
   for (var x = 0; x < rows ; x++) {
     for (var y = 0; y < cols; y++) {
       var ocolor = overview_tile_color(y, x);
-      render_multipixel(grid, x, y, ocolor)
+      render_multipixel(grid, x, y, ocolor);
     }
   }
 

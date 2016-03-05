@@ -56,7 +56,7 @@ function game_find_unit_by_number(id)
 function civ_population(playerno) {
   var population = 0;
 
-  for (city_id in cities) {
+  for (var city_id in cities) {
     var pcity = cities[city_id];
     if (playerno == pcity['owner']) {
       population += city_population(pcity);

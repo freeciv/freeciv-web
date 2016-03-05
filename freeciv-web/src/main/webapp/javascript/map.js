@@ -135,26 +135,12 @@ function map_init_topology(set_sizes)
 {
   var dir;
 
-  if (!set_sizes && is_server()) {
-    /* skip this, since webclient is a client. */
-  }
-
-  /* sanity check for iso topologies*/
-  /*assert(!MAP_IS_ISOMETRIC || (map.ysize % 2) == 0);*/
-
-  /* The size and ratio must satisfy the minimum and maximum *linear*
-   * restrictions on width */
-  /*assert(MAP_WIDTH >= MAP_MIN_LINEAR_SIZE);
-  assert(MAP_HEIGHT >= MAP_MIN_LINEAR_SIZE);
-  assert(MAP_WIDTH <= MAP_MAX_LINEAR_SIZE);
-  assert(MAP_HEIGHT <= MAP_MAX_LINEAR_SIZE);*/
-
   map.valid_dirs = {};
   map.cardinal_dirs = {};
 
   map.num_valid_dirs = 0;
   map.num_cardinal_dirs = 0;
-  for (var dir = 0; dir < 8; dir++) {
+  for (dir = 0; dir < 8; dir++) {
     if (is_valid_dir(dir)) {
       map.valid_dirs[map.num_valid_dirs] = dir;
       map.num_valid_dirs++;
@@ -164,9 +150,6 @@ function map_init_topology(set_sizes)
       map.num_cardinal_dirs++;
     }
   }
-  /*assert(map.num_valid_dirs > 0 && map.num_valid_dirs <= 8);
-  assert(map.num_cardinal_dirs > 0
-	 && map.num_cardinal_dirs <= map.num_valid_dirs);*/
 
 }
 
@@ -313,7 +296,7 @@ function dir_get_name(dir)
     return "W";
   case DIR8_NORTHWEST:
     return "NW";
-  };
+  }
 
   return "[Undef]";
 }
@@ -341,7 +324,7 @@ function dir_cw(dir)
     return DIR8_NORTHWEST;
   case DIR8_NORTHWEST:
     return DIR8_NORTH;
-  };
+  }
 
   return -1;
 }

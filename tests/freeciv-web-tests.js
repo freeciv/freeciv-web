@@ -3,10 +3,6 @@
 ***********************************************************************/
 
 casper.options.waitTimeout = 20000;
-casper.options.onWaitTimeout = function() {
-    this.echo("Testcase timed out!");
-    this.capture('timeout-error.png');
-}
 
 casper.test.begin('Test of Resin running on localhost port 8080.', 2, function suite(test) {
     casper.start("http://localhost:8080/", function() {

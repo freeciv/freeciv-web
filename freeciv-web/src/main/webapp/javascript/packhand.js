@@ -273,8 +273,8 @@ function handle_player_remove(packet)
 function handle_conn_ping(packet)
 {
   ping_last = new Date().getTime();
-  var packet = {"pid" : packet_conn_pong};
-  send_request(JSON.stringify(packet));
+  var pong_packet = {"pid" : packet_conn_pong};
+  send_request(JSON.stringify(pong_packet));
 
 }
 
@@ -673,7 +673,7 @@ function handle_unit_actions(packet)
 
 function handle_diplomacy_init_meeting(packet)
 {
-  if (!(diplomacy_request_queue.indexOf(packet['counterpart']) >= 0)) {
+  if (diplomacy_request_queue.indexOf(packet['counterpart']) < 0) {
     diplomacy_request_queue.push(packet['counterpart']);
   }
   diplomacy_clause_map[packet['counterpart']] = [];

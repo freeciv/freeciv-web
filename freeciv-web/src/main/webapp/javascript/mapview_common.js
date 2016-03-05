@@ -538,7 +538,6 @@ function enable_mapview_slide(ptile)
 
   if (dx >= 0 && dy <= 0) {
     mapview['gui_y0'] -= Math.abs(dy);
-  } else if (dx >= 0 && dy >= 0) {
   } else if (dx <= 0 && dy >= 0) {
     mapview['gui_x0'] -= Math.abs(dx);
   }  else if (dx <= 0 && dy <= 0) {

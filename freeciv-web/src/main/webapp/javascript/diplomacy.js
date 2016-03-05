@@ -122,7 +122,7 @@ function accept_treaty(counterpart, I_accepted, other_accepted)
     }
   }
 
-  setTimeout("refresh_diplomacy_request_queue();", 1000);
+  setTimeout(refresh_diplomacy_request_queue, 1000);
 
 }
 
@@ -164,7 +164,7 @@ function cancel_meeting(counterpart)
     diplomacy_request_queue.splice(diplomacy_request_queue.indexOf(counterpart), 1);
   }
 
-  setTimeout("refresh_diplomacy_request_queue();", 1000);
+  setTimeout(refresh_diplomacy_request_queue, 1000);
 }
 
 /**************************************************************************
@@ -235,13 +235,12 @@ function client_diplomacy_clause_string(counterpart, giver, type, value)
   switch (type) {
     case CLAUSE_ADVANCE:
       var pplayer = players[giver];
-      var nation = nations[pplayer['nation']]['adjective']
+      var nation = nations[pplayer['nation']]['adjective'];
       var ptech = techs[value];
       return "The " + nation + " give " + ptech['name'];
-    break;
   case CLAUSE_CITY:
     var pplayer = players[giver];
-    var nation = nations[pplayer['nation']]['adjective']
+    var nation = nations[pplayer['nation']]['adjective'];
     var pcity = cities[value];
 
     if (pcity != null) {
@@ -249,48 +248,39 @@ function client_diplomacy_clause_string(counterpart, giver, type, value)
     } else {
       return "The " + nation + " give unknown city.";
     }
-
     break;
+
   case CLAUSE_GOLD:
     var pplayer = players[giver];
-    var nation = nations[pplayer['nation']]['adjective']
+    var nation = nations[pplayer['nation']]['adjective'];
     if (giver == client.conn.playing['playerno']) {
       $("#self_gold").val(value);
     } else {
       $("#counterpart_gold").val(value);
     }
     return "The " + nation + " give " + value + " gold";
-    break;
   case CLAUSE_MAP:
     var pplayer = players[giver];
     var nation = nations[pplayer['nation']]['adjective']
     return "The " + nation + " give their worldmap";
-    break;
   case CLAUSE_SEAMAP:
     var pplayer = players[giver];
     var nation = nations[pplayer['nation']]['adjective']
     return "The " + nation + " give their seamap";
-    break;
   case CLAUSE_CEASEFIRE:
     return "The parties agree on a cease-fire";
-    break;
   case CLAUSE_PEACE:
     return "The parties agree on a peace";
-    break;
   case CLAUSE_ALLIANCE:
     return "The parties create an alliance";
-    break;
   case CLAUSE_VISION:
     var pplayer = players[giver];
     var nation = nations[pplayer['nation']]['adjective']
     return "The " + nation + " give shared vision";
-    break;
   case CLAUSE_EMBASSY:
     var pplayer = players[giver];
     var nation = nations[pplayer['nation']]['adjective']
     return "The " + nation + " give an embassy";
-    break;
-
   }
 
   return "";
@@ -310,8 +300,8 @@ function diplomacy_cancel_treaty(player_id)
 
   update_nation_screen();
 
-  setTimeout("update_nation_screen();", 500);
-  setTimeout("update_nation_screen();", 1500);
+  setTimeout(update_nation_screen, 500);
+  setTimeout(update_nation_screen, 1500);
 }
 
 
@@ -322,6 +312,7 @@ function diplomacy_cancel_treaty(player_id)
 function create_diplomacy_dialog(counterpart) {
 
   var pplayer = client.conn.playing;
+  var city_id;
 
   // reset diplomacy_dialog div.
   $("#dialog").remove();

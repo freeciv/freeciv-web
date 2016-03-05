@@ -63,9 +63,9 @@ function show_spaceship_dialog()
   message += "Structurals: " + spaceship['structurals'] + "<br>";
   if (spaceship['launch_year'] != 9999) message += "Launch year: " + spaceship['launch_year'] + "<br>";
 
-  if (game_info['victory_conditions'] == 0) message = "Spaceship victory disabled.<br>"
+  if (game_info['victory_conditions'] == 0) message = "Spaceship victory disabled.<br>";
 
-  message += "<br>For help, see the Space Race page in the manual.<br>"
+  message += "<br>For help, see the Space Race page in the manual.<br>";
 
   $("#dialog").remove();
   $("<div id='dialog'></div>").appendTo("div#game_page");

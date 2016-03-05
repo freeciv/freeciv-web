@@ -87,7 +87,7 @@ function get_supported_units(pcity)
 {
   if (pcity == null) return null;
   var result = [];
-  for (unit_id in units) {
+  for (var unit_id in units) {
     var punit = units[unit_id];
     if (punit['homecity'] == pcity['id']) {
       result.push(punit);
@@ -204,6 +204,7 @@ function unit_has_goto(punit)
 **************************************************************************/
 function update_unit_anim_list(old_unit, new_unit)
 {
+  var anim_tuple;
   if (old_unit == null || new_unit == null) return;
   /* unit is in same position. */
   if (new_unit['tile'] == old_unit['tile']) return;
@@ -224,7 +225,7 @@ function update_unit_anim_list(old_unit, new_unit)
   var has_old_pos = false;
   var has_new_pos = false;
   for (var i = 0; i <  old_unit['anim_list'].length; i++) {
-    var anim_tuple = old_unit['anim_list'][i];
+    anim_tuple = old_unit['anim_list'][i];
     if (anim_tuple['tile'] == old_unit['tile']) {
       has_old_pos = true;
     }
@@ -234,14 +235,14 @@ function update_unit_anim_list(old_unit, new_unit)
   }
 
   if (!has_old_pos) {
-    var anim_tuple = {};
+    anim_tuple = {};
     anim_tuple['tile'] = old_unit['tile'];
     anim_tuple['i'] = ANIM_STEPS;
     old_unit['anim_list'].push(anim_tuple);
   }
 
   if (!has_new_pos) {
-    var anim_tuple = {};
+    anim_tuple = {};
     anim_tuple['tile'] = new_unit['tile'];
     anim_tuple['i'] = ANIM_STEPS;
     old_unit['anim_list'].push(anim_tuple);
@@ -307,7 +308,7 @@ function get_unit_anim_offset(punit)
 **************************************************************************/
 function reset_unit_anim_list()
 {
- for (unit_id in units) {
+ for (var unit_id in units) {
     var punit = units[unit_id];
     punit['anim_list'] = [];
   }
@@ -355,8 +356,10 @@ function is_unit_visible(punit)
 function unittype_ids_alphabetic()
 {
   var unittype_names = [];
-  for (var unit_id in unit_types) {
-    var punit_type = unit_types[unit_id];
+  var unit_type;
+  var unit_id;
+  for (unit_id in unit_types) {
+    punit_type = unit_types[unit_id];
     unittype_names.push(punit_type['name']);
   }
 
@@ -365,8 +368,8 @@ function unittype_ids_alphabetic()
   var unittype_id_list = [];
   for (var n in unittype_names) {
     var unit_name = unittype_names[n];
-    for (var unit_id in unit_types) {
-      var punit_type = unit_types[unit_id];
+    for (unit_id in unit_types) {
+      punit_type = unit_types[unit_id];
       if (unit_name == punit_type['name']) {
         unittype_id_list.push(unit_id);
       }

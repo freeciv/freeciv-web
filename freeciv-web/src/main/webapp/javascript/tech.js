@@ -353,7 +353,7 @@ function update_tech_screen()
   maxleft = maxleft - 280;
   if (maxleft < 0) maxleft = 0;
   if (!tech_dialog_active) {
-    setTimeout("scroll_tech_tree();",10);
+    setTimeout(scroll_tech_tree,10);
   }
 
   tech_dialog_active = true;

@@ -161,11 +161,11 @@ function setup_window_size ()
 
   var i = 0;
 
-  $("#opt_tab").children().html("Options")
-  $("#players_tab").children().html("Nations")
-  $("#cities_tab").children().html("Cities")
-  $("#tech_tab").children().html("Research")
-  $("#civ_tab").children().html("Government")
+  $("#opt_tab").children().html("Options");
+  $("#players_tab").children().html("Nations");
+  $("#cities_tab").children().html("Cities");
+  $("#tech_tab").children().html("Research");
+  $("#civ_tab").children().html("Government");
 
   $("#opt_tab").show();
   $("#players_tab").show();
@@ -179,18 +179,18 @@ function setup_window_size ()
     if (i == 0) $("#freeciv_logo").hide();
     if (i == 1) $("#hel_tab").hide();
 
-    if (i == 2) $("#opt_tab").children().html("Opts")
-    if (i == 3) $("#players_tab").children().html("Nat")
-    if (i == 4) $("#tech_tab").children().html("Res")
-    if (i == 5) $("#civ_tab").children().html("Govt")
+    if (i == 2) $("#opt_tab").children().html("Opts");
+    if (i == 3) $("#players_tab").children().html("Nat");
+    if (i == 4) $("#tech_tab").children().html("Res");
+    if (i == 5) $("#civ_tab").children().html("Govt");
 
     if (i == 6) $("#freeciv_logo").hide();
-    if (i == 7) $("#opt_tab").children().html("O")
-    if (i == 8) $("#players_tab").children().html("N")
-    if (i == 9) $("#tech_tab").children().html("R")
-    if (i == 10) $("#civ_tab").children().html("G")
-    if (i == 11) $("#cities_tab").children().html("C")
-    if (i == 12) $("#map_tab").children().html("M")
+    if (i == 7) $("#opt_tab").children().html("O");
+    if (i == 8) $("#players_tab").children().html("N");
+    if (i == 9) $("#tech_tab").children().html("R");
+    if (i == 10) $("#civ_tab").children().html("G");
+    if (i == 11) $("#cities_tab").children().html("C");
+    if (i == 12) $("#map_tab").children().html("M");
 
     if (i == 13) $("#opt_tab").hide();
     if (i == 14) $("#tabs-hel").hide();
@@ -309,7 +309,7 @@ function init_cache_sprites()
   sprites_init = true;
   tileset_images[0] = null;
   tileset_images[1] = null;
-  delete tileset_images;
+  tileset_images = null;
 
  }  catch(e) {
   console.log("Problem caching sprite: " + tile_tag);

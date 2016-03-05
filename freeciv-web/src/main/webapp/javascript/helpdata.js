@@ -32,7 +32,7 @@ function show_help()
   $("#help_menu").remove();
   $("#help_info_page").remove();
   $("<ul id='help_menu'></ul><div id='help_info_page'></div>").appendTo("#tabs-hel");
-  for (sec_id in helpdata_order) {
+  for (var sec_id in helpdata_order) {
     var key = helpdata_order[sec_id];
     var sec_name = helpdata[key]['name'];
     if (hidden_menu_items.indexOf(key) > -1) {
@@ -73,6 +73,8 @@ function show_help_intro()
 **************************************************************************/
 function generate_help_menu(key)
 {
+  var impr_id;
+  var improvement;
   if (key == "help_gen_terrain") {
     for (var terrain_id in terrains) {
       var terrain = terrains[terrain_id];
@@ -80,15 +82,15 @@ function generate_help_menu(key)
         + terrain['name'] + "</li>").appendTo("#help_terrain_ul");
     }
   } else if (key == "help_gen_improvements") {
-    for (var impr_id in improvements) {
-      var improvement = improvements[impr_id];
+    for (impr_id in improvements) {
+      improvement = improvements[impr_id];
       if (is_wonder(improvement)) continue;
       $("<li data-helptag='" + key + "_" + improvement['id'] + "'>"
         + improvement['name'] + "</li>").appendTo("#help_city_improvements_ul");
     }
   } else if (key == "help_gen_wonders") {
-    for (var impr_id in improvements) {
-      var improvement = improvements[impr_id];
+    for (impr_id in improvements) {
+      improvement = improvements[impr_id];
       if (!is_wonder(improvement)) continue;
       $("<li data-helptag='" + key + "_" + improvement['id'] + "'>"
         + improvement['name'] + "</li>").appendTo("#help_wonders_of_the_world_ul");
@@ -121,7 +123,7 @@ function render_sprite(sprite)
            + sprite['image-src'] +
            ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y']
            + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px;'"
-           +"></div>"
+           +"></div>";
   return msg;
 }
 

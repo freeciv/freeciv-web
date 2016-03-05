@@ -36,7 +36,7 @@ var DS_TEAM = 6;
 var DS_LAST = 7;
 
 /* The plr_flag_id enum. */
-var PLRF_AI = 0
+var PLRF_AI = 0;
 var PLRF_COUNT = 1;
 
 function valid_player_by_number(playerno)
@@ -182,7 +182,7 @@ function research_get(pplayer)
 **************************************************************************/
 function player_has_wonder(playerno, improvement_id)
 {
-  for (city_id in cities) {
+  for (var city_id in cities) {
     var pcity = cities[city_id];
     if (city_owner(pcity).playerno == playerno && city_has_building(pcity, improvement_id)) {
       return true;

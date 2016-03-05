@@ -91,8 +91,7 @@ function civclient_benchmark(frame)
 
   if (frame == 0) benchmark_start = new Date().getTime();
 
-
-  var ptile = map_pos_to_tile(frame+5, frame+5)
+  var ptile = map_pos_to_tile(frame+5, frame+5);
   center_tile_mapcanvas(ptile);
 
   if (frame < 30) {

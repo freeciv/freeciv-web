@@ -769,110 +769,94 @@ function get_unit_activity_sprite(punit)
     case ACTIVITY_POLLUTION:
       return {"key" : "unit.fallout",
           "offset_x" : unit_activity_offset_x,
-          "offset_y" : - unit_activity_offset_y}
-    break;
+          "offset_y" : - unit_activity_offset_y};
 
     case ACTIVITY_MINE:
       return {"key" : "unit.mine",
           "offset_x" : unit_activity_offset_x,
-          "offset_y" : - unit_activity_offset_y}
-    break;
+          "offset_y" : - unit_activity_offset_y};
 
     case ACTIVITY_IRRIGATE:
       return {"key" : "unit.irrigate",
           "offset_x" : unit_activity_offset_x,
-          "offset_y" : - unit_activity_offset_y}
-    break;
+          "offset_y" : - unit_activity_offset_y};
 
     case ACTIVITY_FORTIFIED:
       return {"key" : "unit.fortified",
           "offset_x" : unit_activity_offset_x,
-          "offset_y" : - unit_activity_offset_y}
-    break;
+          "offset_y" : - unit_activity_offset_y};
 
     case ACTIVITY_BASE:
       switch (act_tgt) {
         case BASE_FORTRESS:
           return {"key" : "unit.fortress",
                   "offset_x" : unit_activity_offset_x,
-                  "offset_y" : - unit_activity_offset_y}
-        break;
+                  "offset_y" : - unit_activity_offset_y};
         case BASE_AIRBASE:
           return {"key" : "unit.airbase",
                   "offset_x" : unit_activity_offset_x,
-                  "offset_y" : - unit_activity_offset_y}
-        break;
+                  "offset_y" : - unit_activity_offset_y};
         case BASE_BUOY:
           return {"key" : "unit.buoy",
                   "offset_x" : unit_activity_offset_x,
-                  "offset_y" : - unit_activity_offset_y}
-        break;
+                  "offset_y" : - unit_activity_offset_y};
       }
 
       return {"key" : "unit.fortress",
               "offset_x" : unit_activity_offset_x,
-              "offset_y" : - unit_activity_offset_y}
-    break;
+              "offset_y" : - unit_activity_offset_y};
 
     case ACTIVITY_SENTRY:
       return {"key" : "unit.sentry",
           "offset_x" : unit_activity_offset_x,
-          "offset_y" : - unit_activity_offset_y}
-    break;
+          "offset_y" : - unit_activity_offset_y};
 
     case ACTIVITY_PILLAGE:
       return {"key" : "unit.pillage",
           "offset_x" : unit_activity_offset_x,
-          "offset_y" : - unit_activity_offset_y}
-    break;
+          "offset_y" : - unit_activity_offset_y};
 
     case ACTIVITY_GOTO:
       return {"key" : "unit.goto",
           "offset_x" : unit_activity_offset_x,
-          "offset_y" : - unit_activity_offset_y}
-    break;
+          "offset_y" : - unit_activity_offset_y};
 
     case ACTIVITY_EXPLORE:
       return {"key" : "unit.auto_explore",
           "offset_x" : unit_activity_offset_x,
-          "offset_y" : - unit_activity_offset_y}
-    break;
+          "offset_y" : - unit_activity_offset_y};
 
     case ACTIVITY_TRANSFORM:
       return {"key" : "unit.transform",
           "offset_x" : unit_activity_offset_x,
-          "offset_y" : - unit_activity_offset_y}
-    break;
+          "offset_y" : - unit_activity_offset_y};
 
     case ACTIVITY_FORTIFYING:
       return {"key" : "unit.fortifying",
           "offset_x" : unit_activity_offset_x,
-          "offset_y" : - unit_activity_offset_y}
-    break;
+          "offset_y" : - unit_activity_offset_y};
 
     case ACTIVITY_GEN_ROAD:
       return {"key" : "unit.road",
           "offset_x" : unit_activity_offset_x,
-          "offset_y" : - unit_activity_offset_y}
-    break;
+          "offset_y" : - unit_activity_offset_y};
 
     case ACTIVITY_CONVERT:
       return {"key" : "unit.convert",
           "offset_x" : unit_activity_offset_x,
-          "offset_y" : - unit_activity_offset_y}
-    break;
+          "offset_y" : - unit_activity_offset_y};
   }
 
   if (unit_has_goto(punit)) {
       return {"key" : "unit.goto",
           "offset_x" : unit_activity_offset_x,
-          "offset_y" : - unit_activity_offset_y}
+          "offset_y" : - unit_activity_offset_y};
   }
 
   if (punit['ai'] == true) {
       return {"key" : "unit.auto_settler",
           "offset_x" : unit_activity_offset_x,
-          "offset_y" : - unit_activity_offset_y}
+          "offset_y" : - unit_activity_offset_y};
   }
 
   return null;

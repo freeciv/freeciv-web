@@ -78,7 +78,7 @@ function init_civ_dialog()
 	    "<img src='/images/flags/" + tag + "-web.png' width='180'>"
 	    + "<br><div>" + pplayer['name'] + " rules the " + nations[pplayer['nation']]['adjective']
 	    + " with the form of government: " + governments[client.conn.playing['government']]['name']
-	    + "</div><br>"
+	    + "</div><br>";
     $("#nation_title").html("The " + nations[pplayer['nation']]['adjective'] + " nation");
     $("#civ_dialog_text").html(civ_description);
 
@@ -95,13 +95,14 @@ function init_civ_dialog()
 **************************************************************************/
 function update_govt_dialog()
 {
-
+  var govt;
+  var govt_id;
   if (client_is_observer()) return;
 
   var governments_list_html = "";
 
-  for (var govt_id in governments) {
-    var govt = governments[govt_id];
+  for (govt_id in governments) {
+    govt = governments[govt_id];
     governments_list_html += "<button class='govt_button' id='govt_id_" + govt['id'] + "' "
 	                  + "onclick='set_req_government(" + govt['id'] + ");' "
 			  + "title='" + govt['helptext'] + "'>" +  govt['name'] + "</button>";
@@ -109,8 +110,8 @@ function update_govt_dialog()
 
   $("#governments_list").html(governments_list_html);
 
-  for (var govt_id in governments) {
-    var govt = governments[govt_id];
+  for (govt_id in governments) {
+    govt = governments[govt_id];
     if (!can_player_get_gov(govt_id)) {
       $("#govt_id_" + govt['id'] ).button({ disabled: true, label: govt['name'], icons: {primary: govt['rule_name']} });
     } else if (requested_gov == govt_id) {

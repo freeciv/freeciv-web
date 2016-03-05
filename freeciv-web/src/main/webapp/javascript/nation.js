@@ -37,7 +37,7 @@ function update_nation_screen()
     var pplayer = players[player_id];
 
     var flag_url = get_player_flag_url(pplayer);
-    var flag_html = "<img class='nation_flags' src='" + flag_url +"'>"
+    var flag_html = "<img class='nation_flags' src='" + flag_url +"'>";
 
     var plr_class = "";
     if (!client_is_observer() && player_id == client.conn.playing['playerno']) plr_class = "nation_row_self";
@@ -280,7 +280,7 @@ function center_on_player()
   if (selected_player == -1) return;
 
     /* find a city to focus on. */
-    for (city_id in cities) {
+    for (var city_id in cities) {
       var pcity = cities[city_id];
       if (city_owner_player_id(pcity) == selected_player) {
         center_tile_mapcanvas(city_tile(pcity));

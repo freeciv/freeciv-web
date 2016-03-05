@@ -74,8 +74,8 @@ var citybar_offset_y = 55;
 var citybar_offset_x = 45;
 
 // offset the tile label by this amount (from the city tile origin)
-var tilelabel_offset_y = 15
-var tilelabel_offset_x = 0
+var tilelabel_offset_y = 15;
+var tilelabel_offset_x = 0;
 
 // Font size (points) to use to draw city names and productions:
 var city_names_font_size = 10;

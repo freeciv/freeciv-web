@@ -415,7 +415,7 @@ function show_intro_dialog(title, message) {
   $("#dialog").remove();
   $("<div id='dialog'></div>").appendTo("div#game_page");
 
-  var intro_html = message + "<br><br>Player name: <input id='username_req' type='text' size='25'>"
+  var intro_html = message + "<br><br>Player name: <input id='username_req' type='text' size='25' maxlength='31'>"
 	  + " <br><br><span id='username_validation_result'></span>";
   $("#dialog").html(intro_html);
   var stored_username = simpleStorage.get("username", "");

@@ -39,8 +39,8 @@ var pingtime_check = 240000;
 function network_init()
 {
 
-  if (typeof(WebSocket) != "function") {
-    swal("WebSockets not supported");
+  if (!("WebSocket" in window)) {
+    swal("WebSockets not supported", "", "error");
     return;
   }
 

@@ -3,6 +3,10 @@
 ***********************************************************************/
 
 casper.options.waitTimeout = 20000;
+casper.options.onWaitTimeout = function() {
+    this.echo("Testcase timed out!");
+    this.capture('timeout-error.png');
+}
 
 casper.test.begin('Test of Resin running on localhost port 8080.', 2, function suite(test) {
     casper.start("http://localhost:8080/", function() {
@@ -81,7 +85,7 @@ casper.test.begin('Test starting new Freeciv-web game', 11, function suite(test)
 
     casper.then(function() {
       this.echo("Filling in username in new game dialog.");
-      this.sendKeys('#username_req', 'CasperJS');
+      this.sendKeys('#username_req', 'CasperJS', {reset : true});
     });
 
     casper.thenEvaluate(function() {

@@ -172,7 +172,8 @@ function show_endgame_dialog()
   for (var i = 0; i < endgame_player_info.length; i++) {
     var pplayer = players[endgame_player_info[i]['player_id']];
     var nation_adj = nations[pplayer['nation']]['adjective'];
-    message += (i+1) + ": The " + nation_adj + " ruler " + pplayer['name'] + " scored " + endgame_player_info[i]['score'] + " points" + "<br>";
+    message += (i+1) + ": The " + nation_adj + " ruler " + pplayer['name'] 
+      + " scored " + endgame_player_info[i]['score'] + " points" + "<br>";
   }
 
   // reset dialog page.

@@ -39,7 +39,7 @@ mysql_pass="vagrant"
 resin_version="4.0.44"
 resin_url="http://www.caucho.com/download/resin-${resin_version}.tar.gz"
 tornado_url="https://pypi.python.org/packages/source/t/tornado/tornado-4.3.tar.gz"
-slimerjs_url="https://download.slimerjs.org/nightlies/0.10.0pre/slimerjs-0.10.0pre.zip"  
+phantomjs_url="https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2"  
 casperjs_url="https://github.com/n1k0/casperjs/archive/1.1-beta5.zip"
 
 # Based on fresh install of Ubuntu 12.04
@@ -132,21 +132,21 @@ else
 fi
 
 echo "============================================"
-echo "Installing SlimerJS and CasperJS for testing"
-export SLIMERJSLAUNCHER=/usr/bin/firefox
-export SLIMERJS_EXECUTABLE=${basedir}/tests/slimerjs-0.10.0pre/slimerjs
-cd ${basedir}/tests
-wget --no-check-certificate ${slimerjs_url}
-unzip -qo slimerjs-0.10.0pre.zip
+echo "Installing CasperJS for testing"
+cd /tmp
+wget --no-check-certificate ${phantomjs_url}
+tar xvjf phantomjs-2.1.1-linux-x86_64.tar.bz2
+sudo cp phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/local/bin/
 
+cd ${basedir}/tests/
 wget ${casperjs_url}
 unzip -qo 1.1-beta5.zip
 cd casperjs-1.1-beta5
 ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs
 
-#echo "Start testing of Freeciv-web using CasperJS:"
-#cd ${basedir}/tests/
-#xvfb-run casperjs --engine=slimerjs test freeciv-web-tests.js || (>&2 echo "Freeciv-web CasperJS tests failed!" && exit 1)
+echo "Start testing of Freeciv-web using CasperJS:"
+cd ${basedir}/tests/
+xvfb-run casperjs --engine=phantomjs test freeciv-web-tests.js || (>&2 echo "Freeciv-web CasperJS tests failed!" && exit 1)
 
 echo "Freeciv-web started! Now try http://localhost/ on your host operating system."
 

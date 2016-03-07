@@ -222,7 +222,7 @@ function init_chatbox()
 			dialogClass: 'chatbox_dialog no-close',
 			resize: chatbox_resized,
 			closeOnEscape: false,
-			position: {my: 'left bottom', at: 'left bottom', of: window},
+			position: {my: 'left bottom', at: 'left bottom', of: window, within: $("#game_page")},
 			close: function(event, ui) { chatbox_active = false;}
 		});
 

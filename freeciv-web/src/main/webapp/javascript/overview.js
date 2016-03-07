@@ -73,7 +73,7 @@ function init_overview()
   redraw_overview();
 
   $("#game_overview_panel").css("min-height",  map['ysize']);
-  $(".overview_dialog").position({my: 'left bottom', at: 'left bottom', of: window});
+  $(".overview_dialog").position({my: 'left bottom', at: 'left bottom', of: window, within: $("#game_page")});
 }
 
 /****************************************************************************

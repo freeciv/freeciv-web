@@ -535,8 +535,7 @@ function set_default_mapview_active()
   }
 
   if (unitpanel_active) {
-    $("#game_unit_panel").parent().show();
-    $("#game_unit_panel").parent().position({my: 'right bottom', at: 'right bottom', of: window, within: $("#game_page")});
+    update_active_units_dialog();
   }
 
   if (chatbox_active) $("#game_chatbox_panel").parent().show();

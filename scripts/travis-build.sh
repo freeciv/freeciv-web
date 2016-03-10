@@ -52,7 +52,7 @@ wget http://apache.uib.no/tomcat/tomcat-8/v8.0.32/bin/apache-tomcat-8.0.32.tar.g
 tar -xvzf apache-tomcat-8.0.32.tar.gz
 mv apache-tomcat-8.0.32 tomcat8
 echo "export CATALINA_HOME=\"/var/lib/tomcat8\"" >> ~/.bashrc
-cd bin
+cd tomcat8/bin
 ./startup.sh
 
 

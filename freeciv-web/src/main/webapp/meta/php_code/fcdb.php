@@ -39,7 +39,7 @@ function fcdb_connect($db, $un, $pw) {
       $ok = false;
       break;
     case "MySQL":
-      $fcdb_conn = mysql_connect("java:comp/env/jdbc/freeciv_mysql");
+      $fcdb_conn = mysql_pconnect('localhost', $un, $pw);
       if (!$fcdb_conn) {
 	build_fcdb_error("I cannot make a connection to the database server.");
 	$ok = false;

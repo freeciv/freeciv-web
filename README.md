@@ -25,7 +25,7 @@ Freeciv-Web consists of these components:
   This application is a Java web application which make up the application
   viewed in each user's web browser. The Metaserver is also a part of this module.
   Implemented in Javascript, Java, JSP, PHP, HTML and CSS. Built with maven and runs 
-  on the Resin application server.
+  on Tomcat 8, nginx and php-fpm.
 
 * [Freeciv](freeciv) - the Freeciv C server, which is checked out from the official
   svn repository, and patched to work with a WebSocket/JSON protocol. Implemented in C.
@@ -127,9 +127,9 @@ System Requirements for manual install
 
 Install this software if you are not running Freeciv-web with Vagrant:
 
-- Resin 4.0.x - http://www.caucho.com/
+- Tomcat 8 - https://tomcat.apache.org/ 
 
-- Java 7 JDK - http://www.oracle.com/technetwork/java/javase/downloads/ 
+- Java 8 JDK - http://www.oracle.com/technetwork/java/javase/downloads/ 
 
 - Python 3.5 - http://www.python.org/
 
@@ -146,7 +146,9 @@ Install this software if you are not running Freeciv-web with Vagrant:
 
 - OpenSSL - http://www.openssl.org/
 
-- nginx 1.6.0 or later - http://nginx.org/
+- nginx 1.9.0 or later - http://nginx.org/
+
+- PHP-FPM - FastCGI Process Manager for PHP - http://php-fpm.org/
 
 - pngcrush, required for freeciv-img-extract.  http://pmt.sourceforge.net/pngcrush/
 

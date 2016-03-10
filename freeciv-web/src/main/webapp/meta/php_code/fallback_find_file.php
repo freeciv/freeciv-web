@@ -7,7 +7,7 @@
 // not the inode or an internal list of included files,
 // so it doesn't actually work.  grr.
 //
-if ($included_fallback_find_file_php) {
+if (isset($included_fallback_find_file_php)) {
   return(true);
 }
 $included_fallback_find_file_php = true;

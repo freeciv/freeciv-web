@@ -1,5 +1,5 @@
 [Config]
-save_directory = /vagrant/resin/webapps/data/savegames/
+save_directory = /var/lib/tomcat8/webapps/data/savegames/
 
 [Resource usage]
 server_capacity_single = 5

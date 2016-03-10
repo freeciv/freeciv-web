@@ -26,8 +26,6 @@ echo logfile $logfile
 # User will need permissions to create a database
 mysql_user="root"
 
-resin_version="4.0.44"
-resin_url="http://www.caucho.com/download/resin-${resin_version}.tar.gz"
 tornado_url="https://pypi.python.org/packages/source/t/tornado/tornado-4.2.1.tar.gz"
 nginx_url="http://nginx.org/download/nginx-1.9.11.tar.gz"
 casperjs_url="https://github.com/n1k0/casperjs/archive/1.1-beta5.zip"
@@ -47,17 +45,6 @@ python3.5 -m easy_install Pillow
 
 java -version
 javac -version
-
-## build/install resin
-echo "==== Fetching/Installing Resin ${resin_version} ===="
-wget ${resin_url}
-tar xfz resin-${resin_version}.tar.gz
-rm -Rf resin
-mv resin-${resin_version} resin
-cd resin
-./configure --prefix=`pwd`; make; make install
-cd ..
-chmod -R 777 resin
 
 
 echo "==== Fetching/Installing Tornado Web Server ===="
@@ -79,6 +66,7 @@ echo "==== Building freeciv ===="
 cd freeciv && make install
 
 echo "==== Building freeciv-web ===="
+cd /var/lib/tomcat8 && sudo chmod -R 777 webapps logs && setfacl -d -m g::rwx webapps && sudo chown -R www-data:www-data webapps/
 sed -e "s/user>root/user>${mysql_user}/" -e "s/password>changeme/password>/" ${basedir}/freeciv-web/src/main/webapp/WEB-INF/resin-web.xml.dist > ${basedir}/freeciv-web/src/main/webapp/WEB-INF/resin-web.xml
 cd ${basedir}/scripts/freeciv-img-extract/ && ./setup_links.sh && ./sync.sh
 cd ${basedir}/scripts && ./sync-js-hand.sh

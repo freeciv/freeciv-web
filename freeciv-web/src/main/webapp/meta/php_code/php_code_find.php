@@ -9,7 +9,7 @@
 
 function php_code_find($name, $reldir = ".") {
 
-  $file = dirname($_SERVER[SCRIPT_FILENAME]) . "/$reldir/php_code/$name";
+  $file = dirname($_SERVER['SCRIPT_FILENAME']) . "/$reldir/php_code/$name";
   if (my_file_exists($file)) {
     return $file;
   }

@@ -14,7 +14,7 @@ if ($error_msg != NULL) {
   $config_problem = true;
 }
 
-if (! $config_problem) {
+if (!isset($config_problem)) {
   include_once("php_code/php_code_find.php");
   // includes for support routines
   include_once(php_code_find("fcdb.php"));
@@ -28,7 +28,7 @@ if (! $config_problem) {
 ?> 
  <h3>Multiplayer Games</h3>
 
-<?
+<?php
       $stmt="(select host,port,version,patches,state,message,unix_timestamp()-unix_timestamp(stamp), (select value from variables where name = 'turn' and hostport = CONCAT(s.host ,':',s.port)) as turn from servers s where message not like '%Private%' and type = 'multiplayer' and state = 'Running' order by state desc) UNION (select host,port,version,patches,state,message,unix_timestamp()-unix_timestamp(stamp), (select value from variables where message not like '%Private%' and name = 'turn' and hostport = CONCAT(s.host ,':',s.port)) as turn from servers s where message not like '%Private%' and type = 'multiplayer' and state = 'Pregame' and CONCAT(s.host ,':',s.port) in (select hostport from players where type <> 'A.I.') limit 1) UNION (select host,port,version,patches,state,message,unix_timestamp()-unix_timestamp(stamp), (select value from variables where name = 'turn' and hostport = CONCAT(s.host ,':',s.port)) as turn from servers s where type = 'multiplayer' and state = 'Pregame' limit 2)";
       $res = fcdb_exec($stmt);
       $nr = fcdb_num_rows($res);
@@ -85,7 +85,7 @@ if (! $config_problem) {
 	  }
           print "</td><td style=\"width: 30%\" >";
           print db2html($row["message"]);
-	  print "</td><td>"
+	  print "</td><td>";
           print db2html($row["turn"]);
 	  print "</td></tr>\n";
 

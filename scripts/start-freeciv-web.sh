@@ -7,7 +7,7 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 
-echo "Starting up Freeciv-web: nginx, resin, publite2, freeciv-proxy."
+echo "Starting up Freeciv-web: nginx, tomcat, publite2, freeciv-proxy."
 
 mkdir -p ${FREECIV_WEB_DIR}/logs
 
@@ -24,14 +24,20 @@ else
   sleep 1 
 fi
 
+#1.1 PHP-FPM
+echo "starting php5-fpm"
+sudo service php5-fpm start
 
+# 2. Tomcat
+echo "Starting up Tomcat" && \
+sudo service tomcat8 start
 # 2. Resin
-echo "Starting up Resin" && \
-${FREECIV_WEB_DIR}/resin/bin/resin.sh start && \
-echo "Resin starting.." && \
+#echo "Starting up Resin" && \
+#${FREECIV_WEB_DIR}/resin/bin/resin.sh start && \
+#echo "Resin starting.." && \
 
-# waiting for Resin to start, since it will take some time.
-until `curl --output /dev/null --silent --head --fail "http://localhost:8080/meta/metaserver.php"`; do
+# waiting for Tomcat to start, since it will take some time.
+until `curl --output /dev/null --silent --head --fail "http://localhost:8080/"`; do
     printf ".."
     sleep 3
 done
@@ -53,5 +59,4 @@ cd ${FREECIV_WEB_DIR}/freeciv-earth/ && nohup python3.5 -u freeciv-earth-mapgen.
 
 echo "Will sleep for 8 seconds, then do a status test..." && \
 sleep 8 && \
-cd ${FREECIV_WEB_DIR}/scripts/ && bash meta-sync.sh && \
 sh ${FREECIV_WEB_DIR}/scripts/status-freeciv-web.sh

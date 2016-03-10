@@ -30,7 +30,7 @@ from pubstatus import *
 from civlauncher import Civlauncher
 import os.path
 
-metahost = "localhost:8080"
+metahost = "localhost"
 metapath =  "/meta/metaserver.php"
 statuspath =  "/meta/status.php"
 settings_file = "settings.ini"

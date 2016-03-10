@@ -5,6 +5,15 @@
 
   <display-name>Freeciv-web Client</display-name>
 
+
+  <resource-ref>
+      <description>MySQL DB Connection</description>
+      <res-ref-name>jdbc/freeciv_mysql</res-ref-name>
+      <res-type>javax.sql.DataSource</res-type>
+      <res-auth>Container</res-auth>
+  </resource-ref>
+
+
   <!-- /civclientlauncher   (game launcher servlet) -->
   <servlet>
     <servlet-name>CivclientLauncher</servlet-name>
@@ -45,6 +54,12 @@
   <servlet>
     <servlet-name>NewPBEMUser</servlet-name>
     <servlet-class>org.freeciv.servlet.NewPBEMUser</servlet-class>
+    <!-- this is the secret key from Google Recaptcha. -->
+    <init-param>
+       <param-name>captcha-secret</param-name>
+       <param-value>google captcha secret goes here!</param-value>
+    </init-param>
+
   </servlet>
 
   <servlet-mapping>

@@ -1,8 +1,9 @@
 #!/bin/bash
-# builds Freeciv-web and copies the war file to resin.
+# builds Freeciv-web and copies the war file to Tomcat.
 
+TOMCATDIR="/var/lib/tomcat8"
+DATADIR="/var/lib/tomcat8/webapps/data/"
 ROOTDIR="$(pwd)/.."
-DATADIR="${ROOTDIR}/resin/webapps/data/"
 
 ( cd src/main/webapp/meta/private
   ./build_flagspec.sh ${ROOTDIR}/freeciv/freeciv/data/misc/flags.spec )
@@ -25,4 +26,4 @@ mkdir -p $DATADIR/savegames
 mkdir -p $DATADIR/scorelogs
 mkdir -p $DATADIR/ranklogs
 
-mvn package && cp target/freeciv-web.war "${ROOTDIR}/resin/webapps/ROOT.war"
+mvn package && cp target/freeciv-web.war "${TOMCATDIR}/webapps/ROOT.war"

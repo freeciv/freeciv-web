@@ -53,7 +53,7 @@ public class NewPBEMUser extends HttpServlet {
 
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        captcha_secret = getServletContext().getInitParameter("captcha-secret");
+        captcha_secret = getInitParameter("captcha-secret");
     }
     
     @SuppressWarnings("unchecked")

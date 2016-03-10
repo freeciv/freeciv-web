@@ -14,7 +14,7 @@ if ($error_msg != NULL) {
   $config_problem = true;
 }
 
-if (! $config_problem) {
+if (!isset($config_problem)) {
   include_once("php_code/php_code_find.php");
   // includes for support routines
   include_once(php_code_find("fcdb.php"));
@@ -479,14 +479,13 @@ if ( isset($port) ) {
 
 <div id="tabs">
 <ul>
-<li><a id="singleplr" href="#tabs-1">Single-player (<? print $single_count ?>)</a></li>
-<li><a id="multiplr" href="#tabs-2">Multiplayer (<?  print $multi_count ?>)</a></li>
+<li><a id="singleplr" href="#tabs-1">Single-player (<?php print $single_count ?>)</a></li>
+<li><a id="multiplr" href="#tabs-2">Multiplayer (<?php  print $multi_count ?>)</a></li>
 <li><a id="pbemplr" href="#tabs-3">Play-By-Email</a></li>
-<li><a id="freecivmeta" href="#tabs-4">Desktop</a></li>
 </ul>
 <div id="tabs-1">
 <h2>Freeciv-web Single-player games</h2>
-<?
+<?php
       $stmt="select host,port,version,patches,state,message,unix_timestamp()-unix_timestamp(stamp), IFNULL((select user from players p where p.hostport =  CONCAT(s.host ,':',s.port) and p.type = 'Human' Limit 1 ), 'none') as player, IFNULL((select flag from players p where p.hostport =  CONCAT(s.host ,':',s.port) and p.type = 'Human' Limit 1 ), 'none') as flag, (select value from variables where name = 'turn' and hostport = CONCAT(s.host ,':',s.port)) as turn, (select value from variables where name = 'turn' and hostport = CONCAT(s.host ,':',s.port)) + 0 as turnsort from servers s where type = 'singleplayer' and state = 'Running' and message NOT LIKE '%Multiplayer%' order by turnsort desc";
       $res = fcdb_exec($stmt);
       $nr = fcdb_num_rows($res);
@@ -522,9 +521,9 @@ if ( isset($port) ) {
           print "</td><td>";
 
           print db2html($row["player"]);
-	  print "</td><td>"
+	  print "</td><td>";
 	  flag_html("f." . $row["flag"]);
-	  print "</td><td>"
+	  print "</td><td>";
           print db2html($row["turn"]);
 	  print "</td></tr>\n";
         }
@@ -538,7 +537,7 @@ if ( isset($port) ) {
  <div id="tabs-2">
  <h2>Freeciv-web Multiplayer games around the world</h2>
  <b>Freeciv-web multiplayer games where you can play against players online. Multiplayer games have simultaneous movement.</b><br><br>
-<?
+<?php
       $stmt="select host,port,version,patches,state,message,unix_timestamp()-unix_timestamp(stamp), (select value from variables where name = 'turn' and hostport = CONCAT(s.host ,':',s.port)) as turn from servers s where type = 'multiplayer' or message LIKE '%Multiplayer%' order by humans desc, state desc";
       $res = fcdb_exec($stmt);
       $nr = fcdb_num_rows($res);
@@ -595,7 +594,7 @@ if ( isset($port) ) {
 	  }
           print "</td><td style=\"width: 30%\" >";
           print stripslashes(db2html($row["message"]));
-	  print "</td><td>"
+	  print "</td><td>";
           print db2html($row["turn"]);
 	  print "</td></tr>\n";
 
@@ -619,12 +618,6 @@ if ( isset($port) ) {
   click on the link in the last e-mail you got from Freeciv-web. Games are expired after 7 days if you don't play your turn. <br><br>
 </div>
 
-<div id="tabs-4">
-  <b>Public servers for desktop Freeciv clients hosted on <a href="http://meta.freeciv.org">meta.freeciv.org</a></b>:
-  <? include 'freeciv_org_metaserver.html'; ?>
-
-</div>
-
 </div>
 
 
@@ -633,7 +626,7 @@ if ( isset($port) ) {
 
 
 
-<?
+<?php
     }
 
 

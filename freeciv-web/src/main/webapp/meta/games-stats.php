@@ -11,7 +11,7 @@ if ($error_msg != NULL) {
   $config_problem = true;
 }
 
-if (! $config_problem) {
+if (!isset($config_problem)) {
   include_once("php_code/php_code_find.php");
   // includes for support routines
   include_once(php_code_find("fcdb.php"));
@@ -31,15 +31,15 @@ if (! $config_problem) {
  	  $row = fcdb_fetch_array($res, $inx);
 
           print db2html($row["sd"]);
-          print ","
+          print ",";
           print db2html($row["web_single"]);
-          print ","
+          print ",";
           print db2html($row["web_multi"]);
-          print ","
+          print ",";
           print db2html($row["web_pbem"]);
-          print ","
+          print ",";
           print db2html($row["desktop_multi"]);
-          print ";"
+          print ";";
 
 
         }

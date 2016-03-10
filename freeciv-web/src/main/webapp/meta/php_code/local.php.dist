@@ -1,13 +1,15 @@
 <?php
 
 $fcdb_metaserver_db = "freeciv_web";
-$fcdb_username = ""; /* not in use */
-$fcdb_pw = ""; /* not in use */
+$fcdb_username = "root"; 
+$fcdb_pw = "vagrant"; 
 
 // Image directory (containing subdir "flags")
 // Filesystem path => URL
-$pic_paths = array("/vagrant/resin/webapps/ROOT/images/" => "images/");
+$pic_paths = array("/var/lib/tomcat8/webapps/ROOT/images/" => "images/");
 
 $metaserver_header = "Servers on this freeciv-web server";
+
+$metaserver_url_path = NULL;
 
 ?>

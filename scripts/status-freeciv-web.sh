@@ -94,7 +94,7 @@ fi
 
 printf "\n--------------------------------\n";
 
-echo "checking metaserver..."
+echo "checking metaserver on PHP server..."
 wget -O /tmp/status7.log --quiet --spider --no-check-certificate http://localhost/meta/metaserver.php
 if [ "$?" != 0 ]; then
   wget -O /tmp/status7.log --spider --no-check-certificate http://localhost/meta/metaserver.php 

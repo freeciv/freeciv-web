@@ -36,14 +36,12 @@ echo logfile $logfile
 mysql_user="root"
 mysql_pass="vagrant"
 
-resin_version="4.0.44"
-resin_url="http://www.caucho.com/download/resin-${resin_version}.tar.gz"
 tornado_url="https://pypi.python.org/packages/source/t/tornado/tornado-4.3.tar.gz"
 phantomjs_url="https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2"  
 casperjs_url="https://github.com/n1k0/casperjs/archive/1.1-beta5.zip"
 
 # Based on fresh install of Ubuntu 12.04
-dependencies="maven mysql-server openjdk-7-jdk libcurl4-openssl-dev nginx libjansson-dev subversion pngcrush python3-pillow libtool automake autoconf autotools-dev language-pack-en python3.5-dev python3-setuptools libbz2-dev imagemagick python3-pip dos2unix liblzma-dev firefox xvfb libicu-dev pkg-config zlib1g-dev libsdl1.2-dev"
+dependencies="maven mysql-server openjdk-7-jdk libcurl4-openssl-dev nginx libjansson-dev subversion pngcrush python3-pillow libtool automake autoconf autotools-dev language-pack-en python3.5-dev python3-setuptools libbz2-dev imagemagick python3-pip dos2unix liblzma-dev firefox xvfb libicu-dev pkg-config zlib1g-dev libsdl1.2-dev tomcat8 tomcat8-admin php5-common php5-cli php5-fpm php5-mysql"
 
 ## Setup
 mkdir -p ${basedir}
@@ -62,13 +60,6 @@ sudo debconf-set-selections <<< "mysql-server mysql-server/root_password passwor
 sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again password ${mysql_pass}"
 echo "apt-get install dependencies"
 apt-get -y install ${dependencies}
-
-## build/install resin
-echo "==== Fetching/Installing Resin ${resin_version} ===="
-wget ${resin_url}
-tar xvfz resin-${resin_version}.tar.gz
-rm -Rf resin
-mv resin-${resin_version} resin
 
 echo "==== Fetching/Installing Tornado Web Server ===="
 cd /tmp
@@ -105,6 +96,7 @@ cd freeciv && make install
 echo "==== Building freeciv-web ===="
 sed -e "s/user>root/user>${mysql_user}/" -e "s/password>changeme/password>${mysql_pass}/" ${basedir}/freeciv-web/src/main/webapp/WEB-INF/resin-web.xml.dist > ${basedir}/freeciv-web/src/main/webapp/WEB-INF/resin-web.xml
 cd ${basedir}/scripts/freeciv-img-extract/ && ./setup_links.sh && ./sync.sh
+cd /var/lib/tomcat8 && sudo chmod -R 777 webapps logs && setfacl -d -m g::rwx webapps && sudo chown -R www-data:www-data webapps/
 cd ${basedir}/scripts && ./sync-js-hand.sh
 cd ${basedir}/freeciv-web && sudo -u vagrant ./setup.sh
 sudo -u vagrant mvn compile flyway:migrate

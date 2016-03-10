@@ -10,32 +10,32 @@ if ($localsettings != NULL) {
   include_once('php_code/local.php');
 }
 
-if ($metaserver_url_path == NULL) {
+if (!isset($metaserver_url_path)) {
   // Server root
   $metaserver_url_path = '';
 }
 
-if ($metaserver_root == NULL) {
+if (!isset($metaserver_root)) {
   $metaserver_root = '.' . $metaserver_url_path;
 }
 
-if ($versions_file == NULL) {
+if (!isset($versions_file)) {
   $versions_file = $metaserver_root . 'versions';
 }
 
-if ($fcdb_default_db == NULL) {
+if (!isset($fcdb_default_db)) {
   $fcdb_default_db = 'freecivmetaserver';
 }
 
-if ($fcdb_metaserver_db == NULL) {
+if (!isset($fcdb_metaserver_db)) {
   $fcdb_metaserver_db = 'freecivmetaserver';
 }
 
-if ($fcdb_username == NULL) {
+if (!isset($fcdb_username)) {
   $fcdb_username = 'root';
 }
 
-if ($fcdb_pw == NULL) {
+if (!isset($fcdb_pw)) {
   $fcdb_pw = 'changeme';
 }
 
@@ -45,23 +45,23 @@ if ($pic_paths == NULL) {
                      $_SERVER[DOCUMENT_ROOT] . 'pics/' => 'pics/');
 }
 
-if ($webmaster_name == NULL) {
+if (!isset($webmaster_name)) {
   $webmaster_name = 'Webmaster';
   $webmaster_default = true;
 }
 
-if ($webmaster_addr == NULL && $webmaster_email != NULL) {
-  $webmaster_addr = "mailto:$webmaster_email";
-}
+//if (!isset($webmaster_addr) && !isset($webmaster_email)) {
+//  $webmaster_addr = "mailto:$webmaster_email";
+//}
 
-if ($webmaster_addr == NULL) {
+if (!isset($webmaster_addr)) {
   $webmaster_html = $webmaster_name;
 } else {
   $webmaster_html = "<A HREF=\"$webmaster_addr\">$webmaster_name</A>";
 }
 
-if ($bugs_addr == NULL) {
-  $bugs_html = $bugs_name;
+if (!isset($bugs_addr)) {
+  //$bugs_html = $bugs_name;
 } else {
   if ($bugs_name == NULL) {
     $bugs_link = 'to this address';

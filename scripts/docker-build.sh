@@ -43,16 +43,6 @@ mysql_install_db
 sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password ${mysql_pass}"
 sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again password ${mysql_pass}"
 
-## build/install resin
-echo "==== Fetching/Installing Resin ${resin_version} ===="
-wget ${resin_url}
-tar xvfz resin-${resin_version}.tar.gz
-rm -Rf resin
-mv resin-${resin_version} resin
-mkdir -p resin/log
-touch resin/log/watchdog-manager.log
-chmod -R 777 resin
-
 
 echo "==== Fetching/Installing Tornado Web Server ===="
 cd /tmp
@@ -81,6 +71,7 @@ cd freeciv && make install
 
 echo "==== Building freeciv-web ===="
 sed -e "s/user>root/user>${mysql_user}/" -e "s/password>changeme/password>${mysql_pass}/" ${basedir}/freeciv-web/src/main/webapp/WEB-INF/resin-web.xml.dist > ${basedir}/freeciv-web/src/main/webapp/WEB-INF/resin-web.xml
+cd /var/lib/tomcat8 && sudo chmod -R 777 webapps logs && setfacl -d -m g::rwx webapps && sudo chown -R www-data:www-data webapps/
 cd ${basedir}/scripts/freeciv-img-extract/ && ./setup_links.sh && ./sync.sh
 cd ${basedir}/scripts && ./sync-js-hand.sh
 cd ${basedir}/freeciv-web && sudo ./setup.sh

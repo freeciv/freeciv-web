@@ -78,6 +78,7 @@ echo "==== Building freeciv-web ===="
 cd /var/lib/tomcat8 && sudo chmod -R 777 webapps logs && setfacl -d -m g::rwx webapps && sudo chown -R www-data:www-data webapps/
 sed -e "s/user>root/user>${mysql_user}/" -e "s/password>changeme/password>/" ${basedir}/freeciv-web/src/main/webapp/WEB-INF/resin-web.xml.dist > ${basedir}/freeciv-web/src/main/webapp/WEB-INF/resin-web.xml
 sed -e "s/vagrant//" ${basedir}/freeciv-web/src/main/webapp/meta/php_code/local.php.dist > ${basedir}/freeciv-web/src/main/webapp/meta/php_code/local.php
+sed -e "s/vagrant//" ${basedir}/freeciv-web/src/main/webapp/META-INF/context.xml > ${basedir}/freeciv-web/src/main/webapp/META-INF/context.xml
 cd ${basedir}/scripts/freeciv-img-extract/ && ./setup_links.sh && ./sync.sh
 cd ${basedir}/scripts && ./sync-js-hand.sh
 cd ${basedir}/freeciv-web && sudo -u travis ./setup.sh

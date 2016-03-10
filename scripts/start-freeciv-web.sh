@@ -30,7 +30,8 @@ sudo service php5-fpm start
 
 # 2. Tomcat
 echo "Starting up Tomcat" && \
-sudo service tomcat8 start
+sudo service tomcat8 start || echo "unable to start tomcat8 service"
+
 # 2. Resin
 #echo "Starting up Resin" && \
 #${FREECIV_WEB_DIR}/resin/bin/resin.sh start && \

@@ -31,7 +31,7 @@ nginx_url="http://nginx.org/download/nginx-1.9.11.tar.gz"
 casperjs_url="https://github.com/n1k0/casperjs/archive/1.1-beta5.zip"
 
 # Based on fresh install of Ubuntu 12.04
-dependencies="maven mysql-server-5.5 openjdk-7-jdk libcurl4-openssl-dev subversion pngcrush libtool automake autoconf autotools-dev language-pack-en python3-setuptools python3.4 python3.4-dev imagemagick liblzma-dev firefox xvfb libicu-dev libsdl1.2-dev libjansson-dev tomcat8 tomcat8-admin php5-common php5-cli php5-fpm php5-mysql"
+dependencies="maven mysql-server-5.5 openjdk-7-jdk libcurl4-openssl-dev subversion pngcrush libtool automake autoconf autotools-dev language-pack-en python3-setuptools python3.4 python3.4-dev imagemagick liblzma-dev firefox xvfb libicu-dev libsdl1.2-dev libjansson-dev php5-common php5-cli php5-fpm php5-mysql"
 
 ## dependencies
 echo "==== Installing Updates and Dependencies ===="
@@ -45,6 +45,15 @@ python3.5 -m easy_install Pillow
 
 java -version
 javac -version
+
+echo "===== Install Tomcat 8 ======="
+cd /var/lib
+wget http://apache.uib.no/tomcat/tomcat-8/v8.0.32/bin/apache-tomcat-8.0.32.tar.gz
+tar -xvzf apache-tomcat-8.0.32.tar.gz
+mv apache-tomcat-8.0.32 tomcat8
+echo "export CATALINA_HOME=\"/var/lib/tomcat8\"" >> ~/.bashrc
+cd bin
+./startup.sh
 
 
 echo "==== Fetching/Installing Tornado Web Server ===="

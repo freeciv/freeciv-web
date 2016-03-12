@@ -32,8 +32,8 @@ import random
 import configparser
 import json
 
-savedir = "../resin/webapps/data/savegames/" 
-rankdir = "../resin/webapps/data/ranklogs/" 
+savedir = "/var/lib/tomcat8/webapps/data/savegames/" 
+rankdir = "/var/lib/tomcat8/webapps/data/ranklogs/" 
 game_expire_time = 60 * 60 * 24 * 7;  # 7 days until games are expired.
 
 settings = configparser.ConfigParser()

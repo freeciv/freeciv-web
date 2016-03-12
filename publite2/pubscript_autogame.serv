@@ -1,0 +1,20 @@
+cmdlevel ctrl first
+set allowtake H1Ah1adOo
+set autotoggle enabled
+set netwait 20
+set nettimeout 60
+set pingtime 300
+set maxconnectionsperhost 256
+set autosaves ""
+set scorelog enabled
+set size 5
+set landm 50
+set aifill 8
+metamessage New Freeciv-web Singleplayer Game
+
+set timeout -1
+set endt 200
+set gameseed 42
+set mapseed 42
+hard
+set minp 0

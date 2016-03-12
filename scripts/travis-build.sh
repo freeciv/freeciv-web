@@ -94,8 +94,6 @@ make install
 
 cp ${basedir}/publite2/nginx.conf /usr/local/nginx/conf/
 cp ${basedir}/pbem/settings.ini.dist ${basedir}/pbem/settings.ini
-# use special server script for autogame testing.
-cp ${basedir}/publite2/pubscript_autogame.serv ${basedir}/publite2/pubscript_singleplayer.serv
 
 echo "Starting Freeciv-web..."
 /usr/local/nginx/sbin/nginx
@@ -119,6 +117,9 @@ cd ${basedir}/tests/
 xvfb-run casperjs --engine=phantomjs test freeciv-web-tests.js || (>&2 echo "Freeciv-web CasperJS tests failed!" && exit 1)
 
 echo "Running Freeciv-web server in autogame mode."
+killall freeciv-web
+sleep 10
+cp ${basedir}/publite2/pubscript_autogame.serv ${basedir}/publite2/pubscript_singleplayer.serv
 xvfb-run casperjs --engine=phantomjs test freeciv-web-autogame.js || (>&2 echo "Freeciv-web CasperJS autogame tests failed!" && exit 1)
 
 echo "=============================="

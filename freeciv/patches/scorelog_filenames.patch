@@ -59,7 +59,7 @@ diff -Nurd -X.diff_ignore freeciv/server/report.c freeciv/server/report.c
      return;
    }
  
-+  fc_snprintf(game.server.scorefile, MAX_LEN_NAME, 
++  fc_snprintf(game.server.scorefile, 100, 
 +              _("/var/lib/tomcat8/webapps/data/scorelogs/score-%d.log"),
 +              srvarg.port);
 +

@@ -33,8 +33,7 @@ echo "Starting up Tomcat" && \
 if service --status-all | grep -Fq 'tomcat8'; then    
  sudo service tomcat8 start || echo "unable to start tomcat8 service"
 else
- cd /var/lib/tomcat8/bin/
- ./catalina.sh start
+  /var/lib/tomcat8/bin/catalina.sh start
 
 fi
 

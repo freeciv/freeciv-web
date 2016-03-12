@@ -23,8 +23,7 @@ sudo service php5-fpm stop
 if service --status-all | grep -Fq 'tomcat8'; then    
  sudo service tomcat8 stop || echo "unable to stop tomcat8 service"
 else
- cd /var/lib/tomcat8/bin/
- ./catalina.sh stop
+ /var/lib/tomcat8/bin/catalina.sh stop
 
 fi
 

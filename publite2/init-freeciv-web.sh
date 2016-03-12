@@ -10,12 +10,12 @@ fi
 echo "init-freeciv-web.sh port ${2}"
 
 if [ $5 = "pbem" ]; then
-   pbemcmd="--Ranklog ../resin/webapps/data/ranklogs/rank_${2}.log "
+   pbemcmd="--Ranklog /var/lib/tomcat8/webapps/data/ranklogs/rank_${2}.log "
 fi
 
 ulimit -t 10000 && ulimit -Sv 500000 && \
 export FREECIV_SAVE_PATH=${1};
-rm -f ../resin/webapps/data/scorelogs/score-${2}.log; 
+rm -f /var/lib/tomcat8/webapps/data/scorelogs/score-${2}.log; 
 
 python3.5 ../freeciv-proxy/freeciv-proxy.py ${3} > ../logs/freeciv-proxy-${3}.log 2>&1 & 
 proxy_pid=$! && 

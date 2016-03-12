@@ -116,5 +116,7 @@ echo "Start testing of Freeciv-web using CasperJS:"
 cd ${basedir}/tests/
 xvfb-run casperjs --engine=phantomjs test freeciv-web-tests.js || (>&2 echo "Freeciv-web CasperJS tests failed!" && exit 1)
 
+bash run-autogame.sh
+
 echo "=============================="
 echo "Freeciv-web built, tested and started correctly: Build successful!"

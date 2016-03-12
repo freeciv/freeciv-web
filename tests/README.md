@@ -16,3 +16,5 @@
  Running the tests will also produce two screenshots.
 
  The automatic build by Travis-CI uses PhantomJS, while Vagrant and Docker uses SlimerJS.
+
+run-autogame.sh will start a server autogame for 200 turns. This is run by Travis-CI also.

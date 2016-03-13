@@ -1,8 +1,9 @@
 /********************************************************************** 
  Autogame tests for Freeciv-web.
+ Use publite2/pubscript_autogame.serv for testing.
 ***********************************************************************/
 
-casper.options.waitTimeout = 30 * 60 * 1000;
+casper.options.waitTimeout = 60 * 60 * 1000;
 
 casper.test.begin('Test starting new Freeciv-web autogame', 4, function suite(test) {
     casper.start("http://localhost/webclient/?action=new", function() {
@@ -15,7 +16,7 @@ casper.test.begin('Test starting new Freeciv-web autogame', 4, function suite(te
     casper.then(function() {
       this.echo("Filling in username in new game dialog.");
       this.sendKeys('#username_req', 'CasperJS', {reset : true});
-      this.echo("Starting Freeciv-web autogame for 200 turns! (this can take some minutes!)");
+      this.echo("Starting Freeciv-web autogame for 300 turns! (this can take a long time! 30 minutes+)");
     });
 
     casper.thenEvaluate(function() {
@@ -40,8 +41,8 @@ casper.test.begin('Test starting new Freeciv-web autogame', 4, function suite(te
       this.echo("Checking number of turns completed.");
 
       test.assertEval(function() {
-            return game_info['turn'] == 201;
-      }, "Checks that 200 turns has past.");
+            return game_info['turn'] == 301;
+      }, "Checks that 300 turns has past.");
 
     });
  

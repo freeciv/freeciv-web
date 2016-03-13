@@ -3,17 +3,17 @@ set allowtake H1Ah1adOo
 set autotoggle enabled
 set netwait 20
 set nettimeout 60
-set pingtime 300
+set pingtime 600
 set maxconnectionsperhost 256
 set autosaves ""
 set scorelog enabled
 set size 5
 set landm 50
 set aifill 8
-metamessage New Freeciv-web Singleplayer Game
+metamessage Freeciv-web autogame testing
 
 set timeout -1
-set endt 200
+set endt 300
 set gameseed 42
 set mapseed 42
 hard

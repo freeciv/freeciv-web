@@ -4,6 +4,10 @@
 
 casper.options.waitTimeout = 20000;
 
+casper.on('remote.message', function(message) {
+    this.echo('JavaScript console: ' + message);
+});
+
 casper.test.begin('Test of Resin running on localhost port 8080.', 2, function suite(test) {
     casper.start("http://localhost:8080/", function() {
         test.assertHttpStatus(200);

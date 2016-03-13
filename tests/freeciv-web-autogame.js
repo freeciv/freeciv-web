@@ -2,6 +2,9 @@
  Autogame tests for Freeciv-web.
  Use publite2/pubscript_autogame.serv for testing.
 ***********************************************************************/
+casper.on('remote.message', function(message) {
+    this.echo('JavaScript console: ' + message);
+});
 
 casper.options.waitTimeout = 60 * 60 * 1000;
 
@@ -25,6 +28,7 @@ casper.test.begin('Test starting new Freeciv-web autogame', 4, function suite(te
         $("#dialog").dialog('close');
         setTimeout("send_message('/ai CasperJs');", 3000);
         setTimeout("send_message('/start');", 3100);
+        setInterval("console.log('Running autogame...');", 30000);
       }
     });
 

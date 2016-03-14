@@ -137,6 +137,24 @@ function update_player_info_pregame()
     }
     $(".pregame_player_name").tooltip();
 
+    var pregame_context_items = {
+            "pick_nation": {name: "Pick nation"},
+            "observe_player": {name: "Observe this player"},
+            "take_player": {name: "Take this player"},
+            "aitoggle_player": {name: "Aitoggle player"},
+            "sep1": "---------",
+            "novice": {name: "Novice"},
+            "easy": {name: "Easy"},
+            "normal": {name: "Normal"},
+            "hard": {name: "Hard"},
+            "sep2": "---------"
+       };
+
+    if (is_pbem()) {
+      pregame_context_items = {
+            "pick_nation": {name: "Pick nation"}};
+    }
+
     $("#pregame_player_list").contextMenu({
         selector: '.pregame_player_name', 
         callback: function(key, options) {
@@ -161,18 +179,7 @@ function update_player_info_pregame()
               send_message("/hard " + name);
             }  
         },
-        items: {
-            "pick_nation": {name: "Pick nation"},
-            "observe_player": {name: "Observe this player"},
-            "take_player": {name: "Take this player"},
-            "aitoggle_player": {name: "Aitoggle player"},
-            "sep1": "---------",
-            "novice": {name: "Novice"},
-            "easy": {name: "Easy"},
-            "normal": {name: "Normal"},
-            "hard": {name: "Hard"},
-            "sep2": "---------"
-        }
+        items: pregame_context_items 
     });
 
     /* set state of Start game button depending on if user is ready. */
@@ -297,9 +304,12 @@ function submit_nation_choice()
   if (chosen_nation == -1 || client.conn['player_num'] == null 
       || choosing_player == null || choosing_player < 0) return;
 
-  var leader_name = nations[chosen_nation]['leader_name'][0];
-  if (choosing_player == client.conn['player_num']) {
-    leader_name = client.conn['username'];
+  var pplayer = players[choosing_player];
+
+  var leader_name = pplayer['name']; 
+
+  if (pplayer['flags'].isSet(PLRF_AI)) {
+    leader_name = nations[chosen_nation]['leader_name'][0];
   }
 
   var test_packet = {"pid" : packet_nation_select_req,
@@ -329,15 +339,15 @@ function pregame_settings()
 	  "<td><input type='text' name='metamessage' id='metamessage' size='28' maxlength='42'></td></tr>" +
 	  "<tr title='Enables music'><td>Music</td>" +
           "<td><input type='checkbox' name='music_setting' id='music_setting'>Play Music</td></tr>" +
-	  "<tr title='Total number of players (including AI players)'><td>Number of Players (including AI):</td>" +
+	  "<tr class='not_pbem' title='Total number of players (including AI players)'><td>Number of Players (including AI):</td>" +
 	  "<td><input type='number' name='aifill' id='aifill' size='4' length='3' min='0' max='20' step='1'></td></tr>" +
-	  "<tr title='Maximum seconds per turn'><td>Timeout (seconds per turn):</td>" +
+	  "<tr class='not_pbem' title='Maximum seconds per turn'><td>Timeout (seconds per turn):</td>" +
 	  "<td><input type='number' name='timeout' id='timeout' size='4' length='3' min='30' max='3600' step='1'></td></tr>" +
-          "<tr title='Creates a private game where players need to know this password in order to join.'><td>Password for private game:</td>" +
+          "<tr class='not_pbem' title='Creates a private game where players need to know this password in order to join.'><td>Password for private game:</td>" +
 	  "<td><input type='text' name='password' id='password' size='10' length='10'></td></tr>" +
 	  "<tr title='Map size (in thousands of tiles)'><td>Map size:</td>" +
 	  "<td><input type='number' name='mapsize' id='mapsize' size='4' length='3' min='1' max='18' step='1'></td></tr>" +
-	  "<tr title='This setting sets the skill-level of the AI players'><td>AI skill level:</td>" +
+	  "<tr class='not_pbem' title='This setting sets the skill-level of the AI players'><td>AI skill level:</td>" +
 	  "<td><select name='skill_level' id='skill_level'>" +
 	  "<option value='1'>Handicapped</option>" +
 	  "<option value='2'>Novice</option>" +
@@ -356,7 +366,7 @@ function pregame_settings()
 	  "<td><input type='number' name='citymindist' id='citymindist' size='4' length='4' min='1' max='9' step='1'></td></tr>" +
           "<tr title='The game will end at the end of the given turn.'><td>End turn:</td>" +
 	  "<td><input type='number' name='endturn' id='endturn' size='4' length='4' min='0' max='32767' step='1'></td></tr>" +
-	  "<tr title='Enables score graphs for all players, showing score, population, techs and more."+
+	  "<tr class='not_pbem' title='Enables score graphs for all players, showing score, population, techs and more."+
           " This will lead to information leakage about other players.'><td>Score graphs</td>" +
           "<td><input type='checkbox' name='scorelog_setting' id='scorelog_setting' checked>Enable score graphs</td></tr>" +
 	  "<tr title='Method used to generate map'><td>Map generator:</td>" +
@@ -366,7 +376,7 @@ function pregame_settings()
           "<option value='island'>Island-based</option>" +
           "<option value='fair'>Fair islands</option>" +
 	  "</select></td></tr>"+
-  	  "<tr title='Ruleset version'><td>Ruleset:</td>" +
+  	  "<tr class='not_pbem' title='Ruleset version'><td>Ruleset:</td>" +
 	  "<td><select name='ruleset' id='ruleset'>" +
 	  "<option value='fcweb'>Default Fcweb</option>" +
 	  "<option value='webperimental'>Webperimental</option>" +
@@ -544,6 +554,9 @@ function pregame_settings()
     }
   });
 
+  if (is_pbem()) {
+    $(".not_pbem").hide();
+  }
 
   $("#settings_table").tooltip();
 }

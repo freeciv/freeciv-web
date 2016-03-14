@@ -18,6 +18,7 @@
 ***********************************************************************/
 
 var opponent = null;
+var pbem_phase_ended = false;
 
 /**************************************************************************
  Shows the Freeciv play-by-email dialog.
@@ -293,11 +294,7 @@ function challenge_pbem_player_dialog()
 			bgiframe: true,
 			modal: true,
 			width: is_small_screen() ? "80%" : "40%",
-			buttons: {
-                        "Invite players on Twitter": function() {
-                          pbem_social_media_invite();
-			},
-			"Invite random player": function() {
+			buttons: {"Invite random player": function() {
 			  $.ajax({
 			   type: 'POST',
 			   url: "/random_user" ,
@@ -321,53 +318,6 @@ function challenge_pbem_player_dialog()
 
   $("#dialog").dialog('open');
 }
-
-/**************************************************************************
- Invite other players using Twitter.
-**************************************************************************/
-function pbem_social_media_invite() 
-{
-
-  var title = "Invite other players for a Play-by-email game";
-  var message = "Message to invite other players:<br> "
-   + "<textarea class='tweetmsg' rows='3' cols='40'>"
-   + "Join me in a Freeciv Play-By-Email game here: https://play.freeciv.org/pbem?u="
-   + username
-   + " #freeciv"
-   + "</textarea><br><br>"
-   + "Invite your friends of Twitter for a Play-By-Email game here. It works like this:<br>"
-   + "1. You share a Twitter message with a link inviting other players to your game.<br>"
-   + "2. Someone clicks on the link and starts a new Play-By-Email game with you.<br>"
-   + "3. You will then get an e-mail every time it is your turn to play.<br><br>"
-   + "Remember that after you send the tweet it can take some time before someone clicks on your link."; 
-
-  // reset dialog page.
-  $("#dialog").remove();
-  $("<div id='dialog'></div>").appendTo("div#game_page");
-  $("#dialog").html(message);
-  $("#dialog").attr("title", title);
-  $("#dialog").dialog({
-			bgiframe: true,
-			modal: true,
-			width: is_small_screen() ? "80%" : "40%",
-			buttons: 
-			{ "Share on Twitter": function() {
-                          $(window).unbind('beforeunload');
-                          var tweetmsg = $('textarea.tweetmsg').val();
-                          var newurl = "https://twitter.com/share?url=/&text=" + encodeURIComponent(tweetmsg);
-                          window.location = newurl;
-		        },
-                        "Cancel" : function() {
-                          challenge_pbem_player_dialog();
-			}
-			}
-
-		});
-
-
-  $("#dialog").dialog('open');
-}
-
 
 /**************************************************************************
  Determines if the email is valid
@@ -402,9 +352,15 @@ function create_new_pbem_game(check_opponent)
         network_init();
         $("#dialog").dialog('close');
         setTimeout("create_pbem_players();", 3500);
-        $.blockUI({ message: "Created game against " + opponent 
-          + ". You will now play the first turn in this play-by-email game. "
-          + "The game will now start."}); 
+        show_dialog_message("Game ready", "Play-By-Email game is now ready to start. " +
+        "Click the start game button to play the first turn. You can also configure some " +
+        "game settings before the game begins. The default settings are recommended. " +
+        "Some settings are not supported in PBEM games, " +
+        "such as more than two players, AI players or diplomacy. " +
+        "As the first player, you can choose nation for both players. " + 
+        "Have a fun Play-By-Email game!"
+        );
+
 
       } else {
         swal("Problem starting new pbem game.");
@@ -478,6 +434,7 @@ function is_pbem()
 **************************************************************************/
 function pbem_end_phase() 
 {
+  pbem_phase_ended = true;
   send_message("/save");
 
   show_dialog_message("Play By Email turn over", 
@@ -489,7 +446,7 @@ function pbem_end_phase()
     simpleStorage.set("pbem_" + $.getUrlVar('savegame'), "true");
   }
   $(window).unbind('beforeunload');
-  setTimeout("window.location.href ='/';", 6000);
+  setTimeout("window.location.href ='/';", 5000);
 }
 
 /**************************************************************************
@@ -513,8 +470,6 @@ function handle_pbem_load()
 function pbem_init_game()
 {
   set_human_pbem_players();
-  send_message_delayed("/start", 200);
-  $.unblockUI();
   $.post("/freeciv_time_played_stats?type=pbem").fail(function() {});
 }
 
@@ -642,4 +597,12 @@ function pbem_duplicate_turn_play_check()
     
   }
 
+}
+
+/**************************************************************************
+...
+**************************************************************************/
+function get_pbem_game_key()
+{
+  return "pbem_tech_" + client.conn.username + players[0]['name'] + players[1]['name'];
 }

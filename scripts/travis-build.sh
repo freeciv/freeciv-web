@@ -31,7 +31,7 @@ nginx_url="http://nginx.org/download/nginx-1.9.11.tar.gz"
 casperjs_url="https://github.com/n1k0/casperjs/archive/1.1-beta5.zip"
 
 # Based on fresh install of Ubuntu 12.04
-dependencies="maven mysql-server-5.5 openjdk-7-jdk libcurl4-openssl-dev subversion pngcrush libtool automake autoconf autotools-dev language-pack-en python3-setuptools python3.4 python3.4-dev imagemagick liblzma-dev firefox xvfb libicu-dev libsdl1.2-dev libjansson-dev php5-common php5-cli php5-fpm php5-mysql"
+dependencies="maven mysql-server-5.5 openjdk-7-jdk libcurl4-openssl-dev subversion pngcrush libtool automake autoconf autotools-dev language-pack-en python3-setuptools python3.4 python3.4-dev imagemagick liblzma-dev firefox xvfb libicu-dev libsdl1.2-dev libjansson-dev php5-common php5-cli php5-fpm php5-mysql dos2unix"
 
 ## dependencies
 echo "==== Installing Updates and Dependencies ===="
@@ -68,6 +68,8 @@ mysqladmin -u ${mysql_user}  create freeciv_web
 mysql -u ${mysql_user}  freeciv_web < ${basedir}/freeciv-web/src/main/webapp/meta/private/metaserver.sql
 
 sed -e "s/10/2/" ${basedir}/publite2/settings.ini.dist > ${basedir}/publite2/settings.ini
+dos2unix ${basedir}/scripts/configuration.sh.dist
+sed -e "s/MYSQL_USER=root/MYSQL_USER=${mysql_user}/" -e "s/MYSQL_PASSWORD=changeme/MYSQL_PASSWORD=/" ${basedir}/scripts/configuration.sh.dist > ${basedir}/scripts/configuration.sh
 
 echo "==== Checking out Freeciv from SVN and patching... ===="
 cd ${basedir}/freeciv && ./prepare_freeciv.sh

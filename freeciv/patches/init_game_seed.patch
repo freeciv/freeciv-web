@@ -1,0 +1,23 @@
+diff --git freeciv/server/srv_main.c freeciv/server/srv_main.c
+index ef52cdf..888da15 100644
+--- freeciv/server/srv_main.c
++++ freeciv/server/srv_main.c
+@@ -200,7 +200,8 @@ static struct timer *between_turns = NULL;
+ **************************************************************************/
+ void init_game_seed(void)
+ {
+-  if (game.server.seed == 0) {
++  // FIXME: game.server.seed == 26479, but should be 0. 
++  //if (game.server.seed == 0) {
+     /* We strip the high bit for now because neither game file nor
+        server options can handle unsigned ints yet. - Cedric */
+     game.server.seed = time(NULL) & (MAX_UINT32 >> 1);
+@@ -210,7 +211,7 @@ void init_game_seed(void)
+ #else  /* TESTMATIC_ENABLED */
+     log_debug("Setting game.seed:%d", game.server.seed);
+ #endif /* TESTMATIC_ENABLED */
+-  }
++  //}
+ 
+   if (!fc_rand_is_init()) {
+     fc_srand(game.server.seed);

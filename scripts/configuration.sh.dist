@@ -4,3 +4,6 @@
 MYSQL_USER=root
 MYSQL_PASSWORD=changeme
 
+# Dependency service configuration
+DEPENDENCY_SERVICES_START="./dependency-services-default-start.sh"
+DEPENDENCY_SERVICES_STOP="./dependency-services-default-stop.sh"

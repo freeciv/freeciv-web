@@ -7,47 +7,22 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 
+if [ ! -f ${SCRIPT_DIR}/configuration.sh ]; then
+    echo "ERROR: configuration.sh not found. copy configuration.sh.dist to configuration.sh and update it with your settings."
+fi
+. ${SCRIPT_DIR}/configuration.sh
+
+if [ "x$DEPENDENCY_SERVICES_START" = x ] ; then
+  DEPENDENCY_SERVICES_START="./dependency-services-default-start.sh"
+fi
+
 echo "Starting up Freeciv-web: nginx, tomcat, publite2, freeciv-proxy."
 
 mkdir -p ${FREECIV_WEB_DIR}/logs
 
-# 1. nginx
-echo "Starting nginx first."
-
-if [ "$(pidof nginx)" ] 
-then
-  echo "nginx already running!"
-else
-  echo "Please enter root password:"
-  sudo service nginx start && \
-  echo "nginx started!" && \
-  sleep 1 
-fi
-
-#1.1 PHP-FPM
-echo "starting php5-fpm"
-sudo service php5-fpm start
-
-# 2. Tomcat
-echo "Starting up Tomcat" && \
-if service --status-all | grep -Fq 'tomcat8'; then    
- sudo service tomcat8 start || echo "unable to start tomcat8 service"
-else
-  /var/lib/tomcat8/bin/catalina.sh start
-
-fi
-
-# 2. Resin
-#echo "Starting up Resin" && \
-#${FREECIV_WEB_DIR}/resin/bin/resin.sh start && \
-#echo "Resin starting.." && \
-
-# waiting for Tomcat to start, since it will take some time.
-until `curl --output /dev/null --silent --head --fail "http://localhost:8080/"`; do
-    printf ".."
-    sleep 3
-done
-sleep 8
+# Start Freeciv-web's dependency services according to the users
+# configuration.
+$DEPENDENCY_SERVICES_START
 
 #3. publite2
 echo "Starting publite2" && \

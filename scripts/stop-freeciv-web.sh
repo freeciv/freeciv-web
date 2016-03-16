@@ -9,26 +9,15 @@ if [ ! -f ${SCRIPT_DIR}/configuration.sh ]; then
 fi
 . configuration.sh
 
+if [ "x$DEPENDENCY_SERVICES_STOP" = x ] ; then
+  DEPENDENCY_SERVICES_STOP="./dependency-services-default-stop.sh"
+fi
+
 echo "Shutting down Freeciv-web: nginx, tomcat, publite2, freeciv-proxy, freeciv-pbem."
 
-# 1. nginx
-if [ "$(pidof nginx)" ] ; then
-  sudo killall nginx
-fi
-
-# 1.1 PHP5-FPM
-sudo service php5-fpm stop 
-
-# 2. Tomcat
-if service --status-all | grep -Fq 'tomcat8'; then    
- sudo service tomcat8 stop || echo "unable to stop tomcat8 service"
-else
- /var/lib/tomcat8/bin/catalina.sh stop
-
-fi
-
-# 2. Resin
-#${FREECIV_WEB_DIR}/resin/bin/resin.sh stop 
+# Shutdown Freeciv-web's dependency services according to the users
+# configuration.
+$DEPENDENCY_SERVICES_STOP
 
 #3. publite2
 ps aux | grep -ie publite2 | awk '{print $2}' | xargs kill -9 

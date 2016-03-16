@@ -13,7 +13,7 @@ set aifill 8
 metamessage Freeciv-web autogame testing
 
 set timeout -1
-set endt 300
+set endt 200
 set gameseed 42
 set mapseed 42
 hard

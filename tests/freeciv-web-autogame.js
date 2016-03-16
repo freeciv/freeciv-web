@@ -45,8 +45,8 @@ casper.test.begin('Test starting new Freeciv-web autogame', 4, function suite(te
       this.echo("Checking number of turns completed.");
 
       test.assertEval(function() {
-            return game_info['turn'] == 301;
-      }, "Checks that 300 turns has past.");
+            return game_info['turn'] == 201;
+      }, "Checks that 200 turns has past.");
 
     });
  

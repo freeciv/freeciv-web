@@ -2,6 +2,7 @@
 # Shutdown script for Freeciv-web
 
 SCRIPT_DIR="$(dirname "$0")"
+cd "$(dirname "$0")"
 export FREECIV_WEB_DIR="${SCRIPT_DIR}/.."
 
 if [ ! -f ${SCRIPT_DIR}/configuration.sh ]; then

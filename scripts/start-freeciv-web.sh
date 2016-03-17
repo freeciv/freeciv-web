@@ -2,6 +2,7 @@
 # Startup script for running all processes of Freeciv-web
 
 SCRIPT_DIR="$(dirname "$0")"
+cd "$(dirname "$0")"
 export FREECIV_WEB_DIR="${SCRIPT_DIR}/.."
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8

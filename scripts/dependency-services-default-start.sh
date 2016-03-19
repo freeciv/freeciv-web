@@ -6,6 +6,10 @@
 # your set up? Create a script that starts them and put it in
 # configuration.sh's DEPENDENCY_SERVICES_START variable.
 
+
+export JAVA_OPTS="-Djava.security.egd=file:/dev/urandom"
+export CATALINA_HOME=/var/lib/tomcat8
+
 # 1. nginx
 echo "Starting nginx first."
 
@@ -31,11 +35,6 @@ else
   /var/lib/tomcat8/bin/catalina.sh start
 
 fi
-
-# 2. Resin
-#echo "Starting up Resin" && \
-#${FREECIV_WEB_DIR}/resin/bin/resin.sh start && \
-#echo "Resin starting.." && \
 
 # waiting for Tomcat to start, since it will take some time.
 until `curl --output /dev/null --silent --head --fail "http://localhost:8080/"`; do

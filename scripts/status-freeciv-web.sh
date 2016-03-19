@@ -14,14 +14,14 @@ fi
 
 printf "\n--------------------------------\n";
 
-printf "checking resin on http://localhost:8080/\n"
+printf "checking Tomcat on http://localhost:8080/\n"
 wget -O /tmp/status2.log --quiet --spider --no-check-certificate http://localhost:8080/
 if [ "$?" != 0 ]; then
   wget -O /tmp/status2.log --spider --no-check-certificate http://localhost:8080/
-  echo "resin not running!"
+  echo "Tomcat not running!"
   echo "\n\n\n"
 else
-  echo "resin OK!"
+  echo "Tomcat OK!"
 fi
 
 printf "\n--------------------------------\n";

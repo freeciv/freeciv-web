@@ -23,9 +23,14 @@ else
   sleep 1
 fi
 
-#1.1 PHP-FPM
-echo "starting php5-fpm"
-sudo service php5-fpm start
+echo "Starting php5-fpm"
+if [ "$(pidof php5-fpm)" ]
+then
+  echo "php5-fpm already running!"
+else
+  echo "starting php5-fpm"
+  service php5-fpm start
+fi
 
 # 2. Tomcat
 echo "Starting up Tomcat" && \

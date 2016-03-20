@@ -7,6 +7,7 @@ casper.on('remote.message', function(message) {
 });
 
 casper.options.waitTimeout = 60 * 60 * 1000;
+casper.options.viewportSize = {width: 1024, height: 768};
 
 casper.test.begin('Test starting new Freeciv-web autogame', 4, function suite(test) {
     casper.start("http://localhost/webclient/?action=new", function() {
@@ -19,7 +20,7 @@ casper.test.begin('Test starting new Freeciv-web autogame', 4, function suite(te
     casper.then(function() {
       this.echo("Filling in username in new game dialog.");
       this.sendKeys('#username_req', 'CasperJS', {reset : true});
-      this.echo("Starting Freeciv-web autogame for 300 turns! (this can take a long time! 30 minutes+)");
+      this.echo("Starting Freeciv-web autogame for 200 turns! (this can take a long time! 30 minutes+)");
     });
 
     casper.thenEvaluate(function() {
@@ -32,7 +33,7 @@ casper.test.begin('Test starting new Freeciv-web autogame', 4, function suite(te
       }
     });
 
-    casper.waitForText("The Greatest Civilizations in the world", function() {
+    casper.waitForText("T200", function() {
       this.clickLabel('Ok');
       this.echo("Captured screenshot to be saved as screenshot-autogame.png");
       this.capture('screenshot-autogame.png', undefined, {
@@ -45,7 +46,7 @@ casper.test.begin('Test starting new Freeciv-web autogame', 4, function suite(te
       this.echo("Checking number of turns completed.");
 
       test.assertEval(function() {
-            return game_info['turn'] == 201;
+            return game_info['turn'] >= 200;
       }, "Checks that 200 turns has past.");
 
     });

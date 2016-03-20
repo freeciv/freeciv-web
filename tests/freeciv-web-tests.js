@@ -3,6 +3,7 @@
 ***********************************************************************/
 
 casper.options.waitTimeout = 20000;
+casper.options.viewportSize = {width: 1024, height: 768};
 
 casper.on('remote.message', function(message) {
     this.echo('JavaScript console: ' + message);

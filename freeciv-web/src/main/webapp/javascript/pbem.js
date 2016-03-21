@@ -313,7 +313,6 @@ function challenge_pbem_player_dialog()
   if (invited != null) {
     $("#opponent").val(invited);
     $(".ui-dialog-buttonset button").first().hide();
-    $(".ui-dialog-buttonset button").first().next().hide();
   }
 
   $("#dialog").dialog('open');

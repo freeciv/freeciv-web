@@ -29,7 +29,7 @@ then
   echo "php5-fpm already running!"
 else
   echo "starting php5-fpm"
-  service php5-fpm start
+  sudo service php5-fpm start
 fi
 
 # 2. Tomcat

@@ -1,0 +1,105 @@
+diff --git a/common/packets.def b/common/packets.def
+index 5891d00..e8fdc54 100644
+--- a/common/packets.def
++++ b/common/packets.def
+@@ -2193,6 +2193,7 @@ end
+ PACKET_INFO_TEXT_REQ = 258; cs, dsend
+   TILE loc;
+   UNIT visible_unit;
++  UNIT focus_unit;
+ end
+ 
+ PACKET_INFO_TEXT_MESSAGE = 259; sc, dsend
+diff --git a/server/maphand.c b/server/maphand.c
+index f1f8ba2..adf5c5e 100644
+--- a/server/maphand.c
++++ b/server/maphand.c
+@@ -27,6 +27,7 @@
+ #include "base.h"
+ #include "borders.h"
+ #include "clientutils.h"
++#include "combat.h"
+ #include "events.h"
+ #include "game.h"
+ #include "map.h"
+@@ -2423,7 +2424,7 @@ static inline void get_full_username(char *buf, int buflen,
+   - copied from /client/text.c
+ ****************************************************************************/
+ static const char *popup_info_text(struct tile *ptile, struct player *pplayer,
+-  	 	                   struct unit *punit)
++  	 	                   struct unit *punit, struct unit *funit)
+ {
+   const char *activity_text;
+   struct city *pcity = tile_city(ptile);
+@@ -2616,6 +2617,42 @@ static const char *popup_info_text(struct tile *ptile, struct player *pplayer,
+                       diplo_city_adjectives[ds->type]);
+       }
+     }
++    if (funit) {
++      int att_chance = FC_INFINITY, def_chance = FC_INFINITY;
++      bool found = FALSE;
++
++      unit_list_iterate(ptile->units, tile_unit) {
++	if (unit_owner(tile_unit) != unit_owner(funit)) {
++	  int att = unit_win_chance(funit, tile_unit) * 100;
++	  int def = (1.0 - unit_win_chance(tile_unit, funit)) * 100;
++
++	  found = TRUE;
++
++	  /* Presumably the best attacker and defender will be used. */
++	  att_chance = MIN(att, att_chance);
++	  def_chance = MIN(def, def_chance);
++	}
++      } unit_list_iterate_end;
++
++      if (found) {
++	/* TRANS: "Chance to win: A:95% D:46%  (%%25 is HTML encoding for '%' character.)" */
++	astr_add_line(&str, _("Chance to win: A:%d%%25 D:%d%%25"),
++		      att_chance, def_chance);	
++      }
++    }
++
++    /* TRANS: A is attack power, D is defense power, FP is firepower,
++     * HP is hitpoints (current and max). */
++    astr_add_line(&str, _("A:%d D:%d FP:%d HP:%d/%d"),
++                  ptype->attack_strength, ptype->defense_strength,
++                  ptype->firepower, punit->hp, ptype->hp);
++    {
++      const char *veteran_name =
++        utype_veteran_name_translation(ptype, punit->veteran);
++      if (veteran_name) {
++        astr_add(&str, " (%s)", veteran_name);
++      }
++    }
+ 
+     if (unit_owner(punit) == pplayer) {
+       /* Show bribe cost for own units. */
+@@ -2640,11 +2677,13 @@ static const char *popup_info_text(struct tile *ptile, struct player *pplayer,
+ /****************************************************************************
+   Handle client request for tile information text.
+ ****************************************************************************/
+-void handle_info_text_req(struct player *pplayer, int loc, int visible_unit_id)
++void handle_info_text_req(struct player *pplayer, int loc, int visible_unit_id,
++                          int focus_unit_id)
+ {
+   struct tile *ptile = index_to_tile(loc);
+   struct unit *punit = (visible_unit_id == 0) ? NULL : game_unit_by_number(visible_unit_id);
+-  const char *info_text = popup_info_text(ptile, pplayer, punit);
++  struct unit *funit = (focus_unit_id == 0) ? NULL : game_unit_by_number(focus_unit_id);
++  const char *info_text = popup_info_text(ptile, pplayer, punit, funit);
+ 
+   conn_list_iterate(pplayer->connections, pconn) {
+     dsend_packet_info_text_message(pconn, info_text);
+diff --git a/server/maphand.h b/server/maphand.h
+index d2e242c..b3263cf 100644
+--- a/server/maphand.h
++++ b/server/maphand.h
+@@ -140,6 +140,7 @@ void create_road(struct tile *ptile, struct road_type *proad);
+ void give_distorted_map(struct player *pfrom, struct player *pto, int good,
+                         int bad, bool reveal_cities);
+ 
+-void handle_info_text_req(struct player *pplayer, int loc, int visible_unit_id);
++void handle_info_text_req(struct player *pplayer, int loc, int visible_unit_id,
++                          int focus_unit_id);
+ 
+ #endif  /* FC__MAPHAND_H */

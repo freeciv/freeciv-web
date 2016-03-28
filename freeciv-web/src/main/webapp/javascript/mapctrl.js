@@ -280,8 +280,13 @@ function popit_req(ptile)
   var punit = find_visible_unit(ptile);
   if (punit != null) punit_id = punit['id'];
 
+  var focus_unit_id = 0;
+  if (current_focus.length > 0) {
+    focus_unit_id = current_focus[0]['id'];
+  }
+
   var packet = {"pid" : packet_info_text_req, "visible_unit" : punit_id,
-                "loc" : ptile['index']};
+                "loc" : ptile['index'], "focus_unit": focus_unit_id};
   send_request(JSON.stringify(packet));
 }
 

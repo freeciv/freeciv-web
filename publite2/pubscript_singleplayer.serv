@@ -3,7 +3,8 @@ set allowtake H1Ah1adOo
 set autotoggle enabled
 set netwait 30
 set nettimeout 60
-set pingtime 120
+set pingtime 30
+set pingtimeout 120
 set maxconnectionsperhost 256
 set autosaves ""
 set scorelog enabled

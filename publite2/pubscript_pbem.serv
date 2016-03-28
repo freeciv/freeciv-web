@@ -1,7 +1,8 @@
 cmdlevel ctrl first
 set netwait 15
 set nettimeout 40
-set pingtime 60
+set pingtime 30
+set pingtimeout 120
 set maxconnectionsperhost 256
 set autosaves ""
 set scorelog enabled

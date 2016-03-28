@@ -47,10 +47,11 @@ java -version
 javac -version
 
 echo "===== Install Tomcat 8 ======="
+echo "if you get a download error 404 here, then there could be a new Tomcat version released, so update the URL below."
 cd /var/lib
-wget http://apache.uib.no/tomcat/tomcat-8/v8.0.32/bin/apache-tomcat-8.0.32.tar.gz
-tar -xvzf apache-tomcat-8.0.32.tar.gz
-mv apache-tomcat-8.0.32 tomcat8
+wget https://www-eu.apache.org/dist/tomcat/tomcat-8/v8.0.33/bin/apache-tomcat-8.0.33.tar.gz
+tar -xvzf apache-tomcat-8.0.33.tar.gz
+mv apache-tomcat-8.0.33 tomcat8
 echo "export CATALINA_HOME=\"/var/lib/tomcat8\"" >> ~/.bashrc
 cd tomcat8/bin
 ./startup.sh

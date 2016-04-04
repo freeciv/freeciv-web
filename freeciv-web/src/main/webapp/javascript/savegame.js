@@ -192,8 +192,12 @@ function save_game()
 			bgiframe: true,
 			modal: true,
 			width: is_small_screen() ? "90%" : "40%",
+			close : function(){
+			  keyboard_input = true;
+                        },
 			buttons: {
                                 "Manage Savegames": function() {
+				  keyboard_input = true;
 				  $("#save_dialog").dialog('close');
 				  $("#save_dialog").parent().remove();
 				  load_game_dialog();

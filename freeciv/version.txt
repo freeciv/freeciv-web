@@ -1,10 +1,10 @@
 # I keep previous version easily available here so I don't need to check
 # version history constantly when handling ruleset differences.
-# Previous:30901
-FCREV=30923
+# Previous:30923
+FCREV=30926
 FCBRANCH=trunk
 
-ORIGCAPSTR="+Freeciv.Devel-3.0-2015.Dec.09"
+ORIGCAPSTR="+Freeciv.Devel-3.0-2015.Dec.10"
 
 # There's no need to bump this constantly as current freeciv-web
 # makes no connections to outside world - all connections are

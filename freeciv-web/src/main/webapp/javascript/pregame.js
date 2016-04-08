@@ -77,7 +77,7 @@ function update_game_info_pregame()
     if (scenario_info['authors']) {
       /* Show the scenario authors. */
       game_info_html += "<p>";
-      game_info_html += "Created by ";
+      game_info_html += "Scenario by ";
       game_info_html += scenario_info['authors'].replace(/\n/g, "<br>");
       game_info_html += "</p>";
     }

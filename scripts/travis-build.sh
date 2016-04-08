@@ -84,7 +84,7 @@ sed -e "s/vagrant//" ${basedir}/freeciv-web/src/main/webapp/meta/php_code/local.
 sed -i.bak -e "s/vagrant//" ${basedir}/freeciv-web/src/main/webapp/META-INF/context.xml 
 cd ${basedir}/scripts/freeciv-img-extract/ && ./setup_links.sh && ./sync.sh
 cd ${basedir}/scripts && ./sync-js-hand.sh
-cd ${basedir}/freeciv-web && sudo -u travis ./setup.sh
+cd ${basedir}/freeciv-web && sudo -u travis ./build.sh
 
 echo "==== Building nginx ===="
 cd ${basedir}

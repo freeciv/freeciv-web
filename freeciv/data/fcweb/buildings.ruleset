@@ -548,6 +548,9 @@ helptext	= _("\
 Together with a Factory, a Manufacturing Plant increases the shield\
  production in a city by 100%. A Manufacturing Plant on its own\
  increases shield production by 50%.\
+"), _("\
+A Manufacturing Plant also has a small risk of suffering an industrial\
+ accident, which can lead to pollution and reduce the city's population.\
 ")
 
 [building_nuclear_plant]
@@ -579,6 +582,9 @@ Increases the effect of Factory and Mfg. Plant on the shield\
  Nuclear Plant, Factory, and Mfg. Plant together give a 150%\
  production bonus with pollution only 50% of the equivalent\
  combination with a Power Plant.\
+"), _("\
+A Nuclear Plant has a small risk of suffering a nuclear accident, which\
+ can lead to fallout and reduce the city's population.\
 "), _("\
 In each city, only one Power Plant, Hydro Plant, Nuclear Plant, or\
  Solar Plant can take effect at any one time.\

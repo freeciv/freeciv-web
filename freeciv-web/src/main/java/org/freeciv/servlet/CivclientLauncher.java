@@ -96,7 +96,7 @@ public class CivclientLauncher extends HttpServlet {
             }
 
         } catch (Exception err) {
-            response.setHeader("result", "error");
+            response.setHeader("result", err.getMessage());
             err.printStackTrace();
             return;
         } finally {

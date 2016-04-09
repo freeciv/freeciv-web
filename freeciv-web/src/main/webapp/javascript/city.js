@@ -1283,8 +1283,9 @@ function update_city_screen()
   if (observing) return;
 
   var city_list_html = "<table class='tablesorter' id='city_table' border=0 cellspacing=0>"
-        + "<thead><td>Name</td><td>Population</td><td>Size</td>"
-        + "<td>Granary</td><td>Grow In</td><td>Producing</td><td>Done In</td></thead>";
+        + "<thead><td>Name</td><td>Population</td><td>Size</td><td>State</td>"
+        + "<td>Granary</td><td>Grows In</td><td>Producing</td>"  
+        + "<td>Surplus<br>Food/Prod/Trade</td><td>Economy<br>Gold/Luxury/Science</td></thead>";
   var count = 0;
   for (var city_id in cities){
     var pcity = cities[city_id];
@@ -1300,9 +1301,11 @@ function update_city_screen()
 
       city_list_html += "<tr id='cities_row' onclick='javascript:show_city_dialog_by_id(" + pcity['id'] + ");'><td>" 
               + pcity['name'] + "</td><td>" + numberWithCommas(city_population(pcity)*1000) +
-              "</td><td>" + pcity['size'] + "</td><td>" + pcity['food_stock'] + "/" + pcity['granary_size'] +
-              "</td><td>" + city_turns_to_growth_text(pcity) + "</td><td>" + prod_type['name'] +
-              "</td><td>" + turns_to_complete_str + "</td>";
+              "</td><td>" + pcity['size'] + "</td><td>" + get_city_state(pcity) + "</td><td>" + pcity['food_stock'] + "/" + pcity['granary_size'] +
+              "</td><td>" + city_turns_to_growth_text(pcity) + "</td>" + 
+              "<td>" + prod_type['name'] + " (" + turns_to_complete_str + ")" +
+              "</td><td>" + pcity['surplus'][O_FOOD] + "/" + pcity['surplus'][O_SHIELD] + "/" + pcity['surplus'][O_TRADE] + "</td>" +
+              "<td>" + pcity['prod'][O_GOLD] + "/" + pcity['prod'][O_LUXURY] + "/" + pcity['prod'][O_SCIENCE] + "<td>"; 
 
       city_list_html += "</tr>";
     }
@@ -1319,4 +1322,20 @@ function update_city_screen()
 
 
   $("#city_table").tablesorter({theme:"dark"});
+}
+
+/**************************************************************************
+ Returns the city state: Celebrating, Disorder og Peace.
+**************************************************************************/
+function get_city_state(pcity) 
+{
+  if (pcity == null) return;
+
+  if (pcity['was_happy'] && pcity['size'] >= 3) {
+    return "Celebrating";
+  } else if (pcity['uhappy']) {
+    return "Disorder";
+  } else {
+    return "Peace";
+  }
 }

@@ -31,10 +31,12 @@ import shutil
 import random
 import configparser
 import json
+import traceback
 
 savedir = "/var/lib/tomcat8/webapps/data/savegames/" 
 rankdir = "/var/lib/tomcat8/webapps/data/ranklogs/" 
 game_expire_time = 60 * 60 * 24 * 7;  # 7 days until games are expired.
+game_remind_time = 60 * 60 * 24 * 6;  # 6 days until games are sent a reminder.
 
 settings = configparser.ConfigParser()
 settings.read("settings.ini")
@@ -52,22 +54,36 @@ try:
 except Exception as e:
   print(e);
 
+mail = MailSender();
+
 status = MailStatus()
 status.savegames_read = 0;
 status.emails_sent = 0;
+status.reminders_sent = 0;
 status.ranklog_emails_sent = 0;
 status.invitation_emails_sent = 0;
 status.retired = 0;
+# status.games is a dict with following values: 
+# [turn, phase, players, time as sting, time as int, game state, game_url, active player email, reminder sent]
 status.games = loaded_games;
 status.start();
 
+# send reminder where game is about to expire 
+def remind_old_games():
+  for key, value in status.games.items():
+    if (len(value) > 8 and value[8] == False and (value[4] + game_remind_time) < (time.time())):
+      status.games[key][8] = True;
+      status.reminders_sent += 1;
+      mail.send_game_reminder(status.games[key][7], status.games[key][6]);
+
 # remove old games 
-def cleanup_stats():
+def cleanup_expired_games():
   for key, value in status.games.copy().items():
-    if ((value[4] + game_expire_time)< (time.time())):
+    if ((value[4] + game_expire_time) < (time.time())):
       print("Expiring game: " + key);
       del status.games[key];
       status.retired += 1;
+      #TODO: expired games should also call save_game_result().
 
 # parse Freeciv savegame and collect information to include in e-mail.
 def handle_savegame(root, file):
@@ -97,11 +113,11 @@ def handle_savegame(root, file):
   active_player = players[phase];
   print("active_player=" + active_player);    
   active_email = find_email_address(active_player);
-  status.games[game_id] = [turn, phase, players, time.ctime(), int(time.time()), state];
+  game_url = "https://play.freeciv.org/webclient/?action=pbem&savegame=" + new_filename.replace(".xz", "");
   if (active_email != None):
+    status.games[game_id] = [turn, phase, players, time.ctime(), int(time.time()), state, game_url, active_email, False];
     print("active email=" + active_email);
-    m = MailSender();
-    m.send_email(active_player, players, active_email, new_filename.replace(".xz", ""), turn);
+    mail.send_email_next_turn(active_player, players, active_email, game_url, turn);
     status.emails_sent += 1;
 
   #store games status in file
@@ -158,6 +174,23 @@ def find_email_address(user_to_find):
     cnx.close()
   return result;
 
+# store game result in database table 'game_results'
+def save_game_result(winner, playerOne, playerTwo):
+  print("saving result: " + winner + "," + playerOne + "," + playerTwo);
+  result = None;
+  cursor = None;
+  cnx = None;
+  try:
+    cnx = mysql.connector.connect(user=mysql_user, database=mysql_database, password=mysql_password)
+    cursor = cnx.cursor()
+    query = ("insert into game_results (playerOne, playerTwo, winner, endDate) values (%(playerOne), %(playerTwo), %(winner), NOW())");
+    cursor.execute(query, {'playerOne' : playerOne, 'playerTwo' : playerTwo, 'winner' : winner})
+    cnx.commit()
+  finally:
+    cursor.close()
+    cnx.close()
+  return result;
+
 
 def process_savegames():
   for root, subFolders, files in os.walk(savedir):
@@ -189,14 +222,15 @@ def handle_ranklog(root, file):
       losers_score = line[8:].split(",")[3];
       losers_email = find_email_address(losers);
   if (losers_email != None and winner_email != None):
-    m = MailSender();
-    m.send_game_result_mail(winner, winner_score, winner_email, losers, losers_score, losers_email);
+    mail.send_game_result_mail(winner, winner_score, winner_email, losers, losers_score, losers_email);
+    if (winner != None and len(winner) > 3 and losers != None and len(losers) > 3):
+      save_game_result(winner, losers, winner); 
     status.ranklog_emails_sent += 1;
+
   else:
     print("error: game with winner without email in " + file);
   openfile.close();
   os.remove(filename);
-  
 
 def process_ranklogs():
   for root, subFolders, files in os.walk(rankdir):
@@ -212,7 +246,9 @@ if __name__ == '__main__':
       time.sleep(5);
       process_savegames();
       process_ranklogs();
-      cleanup_stats();
+      remind_old_games();
+      cleanup_expired_games();
       time.sleep(60);
     except Exception as e:
       print(e);
+      traceback.print_exc();

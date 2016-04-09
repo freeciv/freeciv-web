@@ -62,11 +62,11 @@ class MailSender():
 
 
   #Send the actual PBEM e-mail next turn invitation message.
-  def send_email(self, player_name, players, email_address, filename, turn):
+  def send_email_next_turn(self, player_name, players, email_address, game_url, turn):
     print("Sending e-mail to: " + email_address);
     msg = self.template_next_turn;
     msg = msg.replace("{player_name}", player_name);
-    msg = msg.replace("{filename}", filename);
+    msg = msg.replace("{game_url}", game_url);
     msg = msg.replace("{turn}", str(turn));
     plrs_txt = "";
     for p in players:
@@ -98,3 +98,13 @@ class MailSender():
     msg_loser += "Loser score: " + losers_score + "<br>"
     msg = self.template_generic.replace("{message}", msg_loser);
     self.send_mailgun_message(losers_email, "Freeciv-Web: You lost!", msg);
+
+  # send email with reminder that game is about to expire
+  def send_game_reminder(self, email, game_url):
+    print("Sending game reminder email to " + email);
+    msg = "Hello! This is a reminder that it is your turn to play Freeciv-web!<br><br>";
+    msg += "<a href='" + game_url + "'>Click here to play your turn now</a> <br><br>";
+    msg += "Your game will expire in 24 hours.<br>"
+    msg = self.template_generic.replace("{message}", msg);
+    self.send_mailgun_message(email, "Freeciv-Web: Remember to play your turn!", msg);
+

@@ -36,8 +36,16 @@ class StatusHandler(web.RequestHandler):
 
   def get(self):
     req_ip = self.request.headers.get("X-Real-IP", "missing");
-    print("request from " + req_ip);
-    games = sorted(list(self.mailchecker.games.values()), key=lambda tup: tup[4]);
+
+    # prepare games list for display: hide some information, then sort the list.
+    gamestatus = self.mailchecker.games.copy();
+    for key, value in gamestatus.items():
+      if (len(gamestatus[key]) >= 9):
+        del gamestatus[key][8];
+        del gamestatus[key][7];
+        del gamestatus[key][6];
+    games = sorted(list(gamestatus.values()), key=lambda tup: tup[4]);
+
     self.write("<html><head><title>Mail status for Freeciv-web</title>" + 
                "<link href='//play.freeciv.org/css/bootstrap.min.css' rel='stylesheet'>" +
                "<meta http-equiv=\"refresh\" content=\"20\"><style>td { padding: 2px;}</style></head><body>");
@@ -46,6 +54,7 @@ class StatusHandler(web.RequestHandler):
                "<tr><td>Savegames read:</td><td>" + str(self.mailchecker.savegames_read) + "</td></tr>" +
                "<tr><td>Ranklog emails sent:</td><td>" + str(self.mailchecker.ranklog_emails_sent) + "</td></tr>" +
                "<tr><td>Invitation emails sent:</td><td>" + str(self.mailchecker.invitation_emails_sent) + "</td></tr>" +
+               "<tr><td>Reminder emails sent:</td><td>" + str(self.mailchecker.reminders_sent) + "</td></tr>" +
                "<tr><td>Games expired:</td><td>" + str(self.mailchecker.retired) + "</td></tr>" +
                "<tr><td>Status of games:</td><td>" + json.dumps(games) + "</td></tr>" +
                "</table>")

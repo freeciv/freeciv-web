@@ -37,26 +37,17 @@ $(document).ready(function() {
 
     if (navigator.userAgent.toLowerCase().indexOf('android') > -1) {
       $("#chromews").hide();
-      $("#mozws").hide();
       $("#windowsstore").hide();
       $("#playws").show();
     } else if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1) {
       $("#chromews").show();
-      $("#mozws").hide();
-      $("#windowsstore").hide();
-      $("#playws").hide();
-    } else if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
-      $("#mozws").show();
-      $("#chromews").hide();
       $("#windowsstore").hide();
       $("#playws").hide();
     } else if (navigator.userAgent.toLowerCase().indexOf('trident') > -1) {
-      $("#mozws").hide();
       $("#chromews").hide();
       $("#windowsstore").show();
       $("#playws").hide();
     } else {
-      $("#mozws").hide();
       $("#chromews").hide();
       $("#windowsstore").hide();
       $("#playws").hide();

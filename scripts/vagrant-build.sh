@@ -37,7 +37,7 @@ mysql_user="root"
 mysql_pass="vagrant"
 
 tornado_url="https://pypi.python.org/packages/source/t/tornado/tornado-4.3.tar.gz"
-phantomjs_url="https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2"  
+phantomjs_url="https://bitbucket.org/andreasrosdal/fcweb/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2"  
 casperjs_url="https://github.com/n1k0/casperjs/archive/1.1-beta5.zip"
 
 # Based on fresh install of Ubuntu 12.04
@@ -132,7 +132,7 @@ fi
 echo "============================================"
 echo "Installing CasperJS for testing"
 cd /tmp
-wget --no-check-certificate ${phantomjs_url}
+wget --no-check-certificate ${phantomjs_url} || (>&2 echo "Unable to download PhantomJs. Skipping tests." && exit 0)
 tar xvjf phantomjs-2.1.1-linux-x86_64.tar.bz2
 sudo cp phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/local/bin/
 

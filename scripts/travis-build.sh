@@ -29,6 +29,7 @@ mysql_user="root"
 tornado_url="https://pypi.python.org/packages/source/t/tornado/tornado-4.2.1.tar.gz"
 nginx_url="http://nginx.org/download/nginx-1.9.11.tar.gz"
 casperjs_url="https://github.com/n1k0/casperjs/archive/1.1-beta5.zip"
+tomcat_url="https://bitbucket.org/andreasrosdal/fcweb/downloads/apache-tomcat-8.0.33.tar.gz"
 
 # Based on fresh install of Ubuntu 12.04
 dependencies="maven mysql-server-5.5 openjdk-7-jdk libcurl4-openssl-dev subversion pngcrush libtool automake autoconf autotools-dev language-pack-en python3-setuptools python3.4 python3.4-dev imagemagick liblzma-dev firefox xvfb libicu-dev libsdl1.2-dev libjansson-dev php5-common php5-cli php5-fpm php5-mysql dos2unix"
@@ -49,7 +50,7 @@ javac -version
 echo "===== Install Tomcat 8 ======="
 echo "if you get a download error 404 here, then there could be a new Tomcat version released, so update the URL below."
 cd /var/lib
-wget https://www-eu.apache.org/dist/tomcat/tomcat-8/v8.0.33/bin/apache-tomcat-8.0.33.tar.gz
+wget ${tomcat_url} || (>&2 echo "Unable to download Tomcat. Check download url in travis-build.sh." && exit 1)
 tar -xvzf apache-tomcat-8.0.33.tar.gz
 mv apache-tomcat-8.0.33 tomcat8
 echo "export CATALINA_HOME=\"/var/lib/tomcat8\"" >> ~/.bashrc

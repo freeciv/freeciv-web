@@ -20,6 +20,6 @@ set contactturns=0
 set phasemode player
 set ec_chat=enabled
 set ec_info=enabled 
-set ec_max_size=5000
-set ec_turns=9
+set ec_max_size=20000
+set ec_turns=32768
 metamessage New Freeciv-web Play-By-Email Game

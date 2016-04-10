@@ -20,6 +20,8 @@
 var opponent = null;
 var pbem_phase_ended = false;
 
+var invited_players = [];
+
 /**************************************************************************
  Shows the Freeciv play-by-email dialog.
 **************************************************************************/
@@ -339,6 +341,15 @@ function forceLower(strInput)
 **************************************************************************/
 function create_new_pbem_game(check_opponent) 
 {
+
+  if (invited_players.indexOf(check_opponent) != -1) {
+    swal("You have already invited " + check_opponent + ". There is no "
+        + "need to invite multiple times. It can take some time before " 
+        + "the invitation email arrives to " + check_opponent); 
+    return;
+  }
+  invited_players.push(check_opponent);
+
   $.ajax({
    type: 'POST',
    url: "/validate_user?userstring=" + check_opponent + "&invited_by=" + username,
@@ -382,7 +393,8 @@ function send_pbem_invitation(email)
    url: "/mailstatus?action=invite&to=" + email + "&from=" + username,
    success: function(data, textStatus, request){
        swal(email + " has been invited to Freeciv-web. You will "
-             + "receive an e-mail when it is your turn to play.");
+             + "receive an e-mail when it is your turn to play. Now "  
+             + "you can wait for the other player.");
        $("#opponent").val("")
       },
    error: function (request, textStatus, errorThrown) {

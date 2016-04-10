@@ -76,14 +76,17 @@ def remind_old_games():
       status.reminders_sent += 1;
       mail.send_game_reminder(status.games[key][7], status.games[key][6]);
 
-# remove old games 
+# expire old games 
 def cleanup_expired_games():
-  for key, value in status.games.copy().items():
-    if ((value[4] + game_expire_time) < (time.time())):
-      print("Expiring game: " + key);
+  for key, game in status.games.copy().items():
+    if ((game[4] + game_expire_time) < (time.time())):
+      looser = game[2][game[1]];
+      winner = game[2][(game[1]+1) % len(game[2])];
+      print("Expiring game: " + key + " winner:" + winner + ", looser:" + looser);
+      # at least 3 turns must be completed before it will effect ranking.
+      if (game[0] > 3): save_game_result(winner, winner, looser);
       del status.games[key];
       status.retired += 1;
-      #TODO: expired games should also call save_game_result().
 
 # parse Freeciv savegame and collect information to include in e-mail.
 def handle_savegame(root, file):
@@ -110,6 +113,9 @@ def handle_savegame(root, file):
   print("state=" + str(state));
   print("players=" + str(players));
 
+  if (len(players) <= phase):
+    print("skipping savegame, game is over.");
+    return;
   active_player = players[phase];
   print("active_player=" + active_player);    
   active_email = find_email_address(active_player);
@@ -176,14 +182,14 @@ def find_email_address(user_to_find):
 
 # store game result in database table 'game_results'
 def save_game_result(winner, playerOne, playerTwo):
-  print("saving result: " + winner + "," + playerOne + "," + playerTwo);
+  print("saving game result: " + winner + "," + playerOne + "," + playerTwo);
   result = None;
   cursor = None;
   cnx = None;
   try:
     cnx = mysql.connector.connect(user=mysql_user, database=mysql_database, password=mysql_password)
     cursor = cnx.cursor()
-    query = ("insert into game_results (playerOne, playerTwo, winner, endDate) values (%(playerOne), %(playerTwo), %(winner), NOW())");
+    query = ("insert into game_results (playerOne, playerTwo, winner, endDate) values (%(playerOne)s, %(playerTwo)s, %(winner)s, NOW())");
     cursor.execute(query, {'playerOne' : playerOne, 'playerTwo' : playerTwo, 'winner' : winner})
     cnx.commit()
   finally:

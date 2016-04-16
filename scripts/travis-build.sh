@@ -114,16 +114,16 @@ unzip -qo 1.1.0
 cd casperjs-casperjs-b5c59e1
 ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs
 
-sleep 15
+sleep 10
 
 echo "Start testing of Freeciv-web using CasperJS:"
 cd ${basedir}/tests/
 xvfb-run casperjs --engine=phantomjs test freeciv-web-tests.js || (>&2 echo "Freeciv-web CasperJS tests failed!" && exit 1)
 
 echo "Running Freeciv-web server in autogame mode."
-killall freeciv-web
-sleep 15
 cp ${basedir}/publite2/pubscript_autogame.serv ${basedir}/publite2/pubscript_singleplayer.serv
+killall freeciv-web
+sleep 10
 xvfb-run casperjs --engine=phantomjs test freeciv-web-autogame.js || (>&2 echo "Freeciv-web CasperJS autogame tests failed!" && exit 1)
 
 echo "=============================="

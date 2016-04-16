@@ -27,9 +27,9 @@ casper.test.begin('Test starting new Freeciv-web autogame', 4, function suite(te
       /* Starting new game automatically from Javascript.*/
       if (validate_username()) {
         $("#dialog").dialog('close');
-        setTimeout("send_message('/ai CasperJs');", 3000);
-        setTimeout("send_message('/start');", 3100);
-        setInterval("eval(\"console.log('Running autogame... Current turn: ' + game_info['turn']);\");", 30000);
+        setTimeout("send_message('/ai CasperJs');", 4000);
+        setTimeout("send_message('/start');", 4200);
+        setInterval("eval(\"console.log('Running autogame... Current turn: ' + game_info['turn'] + ' - chat messages: ' + chatbox_text);\");", 30000);
       }
     });
 

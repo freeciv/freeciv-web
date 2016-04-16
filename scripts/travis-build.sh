@@ -28,7 +28,7 @@ mysql_user="root"
 
 tornado_url="https://pypi.python.org/packages/source/t/tornado/tornado-4.2.1.tar.gz"
 nginx_url="http://nginx.org/download/nginx-1.9.11.tar.gz"
-casperjs_url="https://github.com/n1k0/casperjs/archive/1.1-beta5.zip"
+casperjs_url="https://github.com/casperjs/casperjs/zipball/1.1.0"
 tomcat_url="https://bitbucket.org/andreasrosdal/fcweb/downloads/apache-tomcat-8.0.33.tar.gz"
 
 # Based on fresh install of Ubuntu 12.04
@@ -110,11 +110,11 @@ echo "Installing CasperJS for testing"
 cd ${basedir}/tests
 
 wget ${casperjs_url}
-unzip -qo 1.1-beta5.zip
-cd casperjs-1.1-beta5
+unzip -qo 1.1.0
+cd casperjs-casperjs-b5c59e1
 ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs
 
-sleep 10
+sleep 15
 
 echo "Start testing of Freeciv-web using CasperJS:"
 cd ${basedir}/tests/

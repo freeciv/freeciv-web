@@ -38,7 +38,7 @@ mysql_pass="vagrant"
 
 tornado_url="https://pypi.python.org/packages/source/t/tornado/tornado-4.3.tar.gz"
 phantomjs_url="https://bitbucket.org/andreasrosdal/fcweb/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2"  
-casperjs_url="https://github.com/n1k0/casperjs/archive/1.1-beta5.zip"
+casperjs_url="https://github.com/casperjs/casperjs/zipball/1.1.0"
 
 # Based on fresh install of Ubuntu 12.04
 dependencies="maven mysql-server openjdk-7-jdk libcurl4-openssl-dev nginx libjansson-dev subversion pngcrush python3-pillow libtool automake autoconf autotools-dev language-pack-en python3.5-dev python3-setuptools libbz2-dev imagemagick python3-pip dos2unix liblzma-dev firefox xvfb libicu-dev pkg-config zlib1g-dev libsdl1.2-dev tomcat8 tomcat8-admin php5-common php5-cli php5-fpm php5-mysql"
@@ -138,8 +138,8 @@ sudo cp phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/local/bin/
 
 cd ${basedir}/tests/
 wget ${casperjs_url}
-unzip -qo 1.1-beta5.zip
-cd casperjs-1.1-beta5
+unzip -qo 1.1.0
+cd casperjs-casperjs-b5c59e1
 ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs
 
 echo "Start testing of Freeciv-web using CasperJS:"

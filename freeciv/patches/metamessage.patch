@@ -55,87 +55,6 @@ diff -Nurd -X.diff_ignore freeciv/server/meta.c freeciv/server/meta.c
      set_meta_message_string(default_meta_message_string());    
    }
  }
-diff -Nurd -X.diff_ignore freeciv/server/savecompat.c freeciv/server/savecompat.c
---- freeciv/server/savecompat.c	2016-02-24 02:40:28.886661246 +0200
-+++ freeciv/server/savecompat.c	2016-02-24 03:12:52.866631507 +0200
-@@ -1102,6 +1102,7 @@
- static void compat_load_030000(struct loaddata *loading)
- {
-   bool randsaved;
-+  int num_settings;
-   
-   /* Check status and return if not OK (sg_success != TRUE). */
-   sg_check_ret();
-@@ -1114,6 +1115,30 @@
-   } else {
-     log_sg("random.save: %s", secfile_error());
-   }
-+
-+  /* Settings */
-+  num_settings = secfile_lookup_int_default(loading->file, 0,
-+                                            "settings.set_count");
-+
-+  /* User meta server message is now a setting. */
-+  if (secfile_lookup_bool_default(loading->file, FALSE,
-+                                  "game.meta_usermessage")) {
-+    const char *metamessage;
-+
-+    metamessage = secfile_lookup_str_default(loading->file, "",
-+                                             "game.meta_message");
-+
-+    /* Insert the meta message as a setting */
-+    secfile_insert_str(loading->file, "metamessage",
-+                       "settings.set%d.name", num_settings);
-+    secfile_insert_str(loading->file, metamessage,
-+                       "settings.set%d.value", num_settings);
-+    secfile_insert_str(loading->file, "",
-+                       "settings.set%d.gamestart", num_settings);
-+    num_settings++;
-+  }
-+
-+  secfile_replace_int(loading->file, num_settings, "settings.set_count");
- }
- 
- #ifdef FREECIV_DEV_SAVE_COMPAT
-@@ -1151,6 +1176,7 @@
-   int plrno;
-   int nplayers;
-   size_t diplstate_type_size;
-+  int num_settings;
- 
-   /* Check status and return if not OK (sg_success != TRUE). */
-   sg_check_ret();
-@@ -1316,6 +1342,30 @@
-                              plrno, unit);
-     }
-   }
-+
-+  /* Settings */
-+  num_settings = secfile_lookup_int_default(loading->file, 0,
-+                                            "settings.set_count");
-+
-+  /* User meta server message is now a setting. */
-+  if (secfile_lookup_bool_default(loading->file, FALSE,
-+                                  "game.meta_usermessage")) {
-+    const char *metamessage;
-+
-+    metamessage = secfile_lookup_str_default(loading->file, "",
-+                                             "game.meta_message");
-+
-+    /* Insert the meta message as a setting */
-+    secfile_insert_str(loading->file, "metamessage",
-+                       "settings.set%d.name", num_settings);
-+    secfile_insert_str(loading->file, metamessage,
-+                       "settings.set%d.value", num_settings);
-+    secfile_insert_str(loading->file, "",
-+                       "settings.set%d.gamestart", num_settings);
-+    num_settings++;
-+  }
-+
-+  secfile_replace_int(loading->file, num_settings, "settings.set_count");
- }
- #endif /* FREECIV_DEV_SAVE_COMPAT */
- 
 diff -Nurd -X.diff_ignore freeciv/server/savegame2.c freeciv/server/savegame2.c
 --- freeciv/server/savegame2.c	2016-02-24 02:40:28.886661246 +0200
 +++ freeciv/server/savegame2.c	2016-02-24 03:12:52.866631507 +0200
@@ -195,9 +114,9 @@ diff -Nurd -X.diff_ignore freeciv/server/savegame3.c freeciv/server/savegame3.c
    secfile_insert_str(saving->file, meta_addr_port(), "game.meta_server");
  
    secfile_insert_str(saving->file, server.game_identifier, "game.id");
-diff -Nurd -X.diff_ignore freeciv/server/savegame.c freeciv/server/savegame.c
---- freeciv/server/savegame.c	2016-02-24 02:40:28.886661246 +0200
-+++ freeciv/server/savegame.c	2016-02-24 03:12:52.866631507 +0200
+diff -Nurd -X.diff_ignore freeciv/server/legacysave.c freeciv/server/legacysave.c
+--- freeciv/server/legacysave.c	2016-02-24 02:40:28.886661246 +0200
++++ freeciv/server/legacysave.c	2016-02-24 03:12:52.866631507 +0200
 @@ -3274,9 +3274,9 @@
      set_meta_patches_string(secfile_lookup_str_default(file, 
                                                  default_meta_patches_string(),

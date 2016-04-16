@@ -810,8 +810,7 @@ Tundra are broad, cold regions, fit for some agriculture and little\
 ;
 ; Notes:
 ;
-; name                 = name as seen by user; if "unused", it is not used,
-;                        but is included for conversion and/or the editor.
+; extra                = name of the extra this resource section is part of
 ; graphic              = preferred graphic [tile_*] in tilespec.
 ; graphic_alt          = alternate graphic [tile_*] when preferred is not found;
 ;                        otherwise may be "-"
@@ -823,7 +822,7 @@ Tundra are broad, cold regions, fit for some agriculture and little\
 ; trade                = increased trade production
 
 [resource_gold]
-name        = _("Gold")
+extra       = "Gold"
 graphic     = "ts.gold"
 graphic_alt = "-"
 identifier  = "$"
@@ -831,7 +830,7 @@ trade       = 6
 # glacier, hills, mountains.
 
 [resource_iron]
-name        = _("Iron")
+extra       = "Iron"
 graphic     = "ts.iron"
 graphic_alt = "-"
 identifier  = "/"
@@ -839,7 +838,7 @@ shield      = 3
 # mountains.
 
 [resource_game]
-name        = _("?animals:Game")
+extra       = "Game"
 graphic     = "ts.tundra_game"
 graphic_alt = "-"
 identifier  = "e"
@@ -848,7 +847,7 @@ shield      = 1
 # tundra.
 
 [resource_furs]
-name        = _("Furs")
+extra       = "Furs"
 graphic     = "ts.furs"
 graphic_alt = "-"
 identifier  = "u"
@@ -857,7 +856,7 @@ trade       = 3
 # tundra-only (beaver pelts).
 
 [resource_coal]
-name        = _("Coal")
+extra       = "Coal"
 graphic     = "ts.coal"
 graphic_alt = "-"
 identifier  = "c"
@@ -865,7 +864,7 @@ shield      = 2
 # hills.
 
 [resource_fish]
-name        = _("Fish")
+extra       = "Fish"
 graphic     = "ts.fish"
 graphic_alt = "-"
 identifier  = "y"
@@ -873,7 +872,7 @@ food        = 2
 # ocean.
 
 [resource_fruit]
-name        = _("Fruit")
+extra       = "Fruit"
 graphic     = "ts.fruit"
 graphic_alt = "-"
 identifier  = "f"
@@ -882,7 +881,7 @@ trade       = 1
 # jungle.
 
 [resource_gems]
-name        = _("Gems")
+extra       = "Gems"
 graphic     = "ts.gems"
 graphic_alt = "-"
 identifier  = "g"
@@ -892,7 +891,7 @@ trade       = 4
 ; "h" reserved for strategic horses
 
 [resource_buffalo]
-name        = _("Buffalo")
+extra       = "Buffalo"
 graphic     = "ts.buffalo"
 graphic_alt = "-"
 identifier  = "b"
@@ -900,7 +899,7 @@ shield      = 2
 # plains (horses => buffalo => cattle).
 
 [resource_wheat]
-name        = _("Wheat")
+extra       = "Wheat"
 graphic     = "ts.wheat"
 graphic_alt = "-"
 identifier  = "j"
@@ -914,7 +913,7 @@ food        = 2
 ; "m" reserved for marble
 
 [resource_oasis]
-name        = _("Oasis")
+extra       = "Oasis"
 graphic     = "ts.oasis"
 graphic_alt = "-"
 identifier  = "o"
@@ -922,7 +921,7 @@ food        = 3
 # desert.
 
 [resource_peat]
-name        = _("Peat")
+extra       = "Peat"
 graphic     = "ts.peat"
 graphic_alt = "-"
 identifier  = "a"
@@ -930,7 +929,7 @@ shield      = 4
 # swamp (petroleum => peat => petroleum).
 
 [resource_pheasant]
-name        = _("Pheasant")
+extra       = "Pheasant"
 graphic     = "ts.pheasant"
 graphic_alt = "-"
 identifier  = "p"
@@ -940,7 +939,7 @@ food        = 2
 ; "r" reserved for rubber
 
 [resource_bonus]
-name        = _("Resources")
+extra       = "Resources"
 graphic     = "ts.grassland_resources"
 graphic_alt = "-"
 identifier  = "r"
@@ -948,7 +947,7 @@ shield      = 1
 # grassland.
 
 [resource_icy_ivory]
-name        = _("Ivory")
+extra       = "Ivory"
 graphic     = "ts.arctic_ivory"
 graphic_alt = "-"
 identifier  = "i"
@@ -958,7 +957,7 @@ trade       = 4
 # glacier (seals => walrus).
 
 [resource_silk]
-name        = _("Silk")
+extra       = "Silk"
 graphic     = "ts.silk"
 graphic_alt = "-"
 identifier  = "s"
@@ -966,7 +965,7 @@ trade       = 3
 # forest, wooded.
 
 [resource_spice]
-name        = _("Spice")
+extra       = "Spice"
 graphic     = "ts.spice"
 graphic_alt = "-"
 identifier  = "t"
@@ -977,7 +976,7 @@ trade       = 4
 ; "u" reserved for uranium
 
 [resource_whales]
-name        = _("Whales")
+extra       = "Whales"
 graphic     = "ts.whales"
 graphic_alt = "-"
 identifier  = "v"
@@ -986,7 +985,7 @@ shield      = 1
 # ocean (sea).
 
 [resource_wine]
-name        = _("Wine")
+extra       = "Wine"
 graphic     = "ts.wine"
 graphic_alt = "-"
 identifier  = "w"
@@ -994,7 +993,7 @@ trade       = 4
 # hills-only.
 
 [resource_oil]
-name        = _("Oil")
+extra       = "Oil"
 graphic     = "ts.oil"
 graphic_alt = "-"
 identifier  = "x"
@@ -1010,8 +1009,8 @@ ui_name_base_airbase = _("?gui_type:Build Airbase")
 
 ; /* <-- avoid gettext warnings
 ;
-; Each extra, including bases and roads, must have a section here.
-; Bases and roads have additional sections for their specific features below.
+; Each extra, including bases, roads, and resource, must have a section here.
+; Bases, roads, and resources have additional sections for their specific features.
 ;
 ;
 ; Extra types:
@@ -1022,10 +1021,10 @@ ui_name_base_airbase = _("?gui_type:Build Airbase")
 ;                           savegames must not change, use this when renaming
 ;                           an extra after a ruleset has been released.
 ; category                = How UI should categorize this extra. One of
-;                           "Infra", "Natural", "Nuisance", or "Bonus"
+;                           "Infra", "Natural", "Nuisance", "Resource", or "Bonus"
 ; causes                  = events that can create extra type.
 ;                           "Irrigation", "Mine", "Hut", "Pollution", "Fallout",
-;                           "Base", "Road", or "Appear"
+;                           "Base", "Road", "Resource", or "Appear"
 ; rmcauses                = events that can remove extra type.
 ;                           "CleanPollution", "CleanFallout", "Pillage", or
 ;                           "Disappear"
@@ -1438,6 +1437,246 @@ Any land terrain type may have a River on it.  A River adds 1\
 Roads and railroads can only be built on River tiles if your\
  civilization has learned Bridge Building technology.\
 ")
+
+[extra_gold]
+name           = _("Gold")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "None"
+graphic_alt    = "-"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_iron]
+name           = _("Iron")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "None"
+graphic_alt    = "-"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_game]
+name           = _("?animals:Game")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "None"
+graphic_alt    = "-"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_furs]
+name           = _("Furs")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "None"
+graphic_alt    = "-"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_coal]
+name           = _("Coal")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "None"
+graphic_alt    = "-"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_fish]
+name           = _("Fish")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "None"
+graphic_alt    = "-"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_fruit]
+name           = _("Fruit")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "None"
+graphic_alt    = "-"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_gems]
+name           = _("Gems")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "None"
+graphic_alt    = "-"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_buffalo]
+name           = _("Buffalo")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "None"
+graphic_alt    = "-"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_wheat]
+name           = _("Wheat")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "None"
+graphic_alt    = "-"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_oasis]
+name           = _("Oasis")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "None"
+graphic_alt    = "-"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_peat]
+name           = _("Peat")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "None"
+graphic_alt    = "-"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_pheasant]
+name           = _("Pheasant")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "None"
+graphic_alt    = "-"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_bonus]
+name           = _("Resources")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "None"
+graphic_alt    = "-"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_ivory]
+name           = _("Ivory")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "None"
+graphic_alt    = "-"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_silk]
+name           = _("Silk")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "None"
+graphic_alt    = "-"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_spice]
+name           = _("Spice")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "None"
+graphic_alt    = "-"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_whales]
+name           = _("Whales")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "None"
+graphic_alt    = "-"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_wine]
+name           = _("Wine")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "None"
+graphic_alt    = "-"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_oil]
+name           = _("Oil")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "None"
+graphic_alt    = "-"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
 
 ; /* <-- avoid gettext warnings
 ;

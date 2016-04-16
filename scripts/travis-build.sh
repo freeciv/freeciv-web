@@ -122,7 +122,7 @@ xvfb-run casperjs --engine=phantomjs test freeciv-web-tests.js || (>&2 echo "Fre
 
 echo "Running Freeciv-web server in autogame mode."
 killall freeciv-web
-sleep 10
+sleep 15
 cp ${basedir}/publite2/pubscript_autogame.serv ${basedir}/publite2/pubscript_singleplayer.serv
 xvfb-run casperjs --engine=phantomjs test freeciv-web-autogame.js || (>&2 echo "Freeciv-web CasperJS autogame tests failed!" && exit 1)
 

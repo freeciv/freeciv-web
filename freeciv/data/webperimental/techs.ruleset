@@ -556,7 +556,7 @@ req1     = "Mysticism"
 req2     = "Literacy"
 flags    = "Bonus_Tech"
 bonus_message = _("Great philosophers from all the world join \
-your civilization: you get an immediate advance.")
+your civilization: you learn %s immediately.")
 graphic     = "a.philosophy"
 graphic_alt = "-"
 

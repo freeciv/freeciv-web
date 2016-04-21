@@ -11,8 +11,8 @@ if [ "$(pidof nginx)" ] ; then
   sudo killall nginx
 fi
 
-# 1.1 PHP5-FPM
-sudo service php5-fpm stop
+# 1.1 PHP7-FPM
+sudo service php7-fpm stop
 
 # 2. Tomcat
 if service --status-all | grep -Fq 'tomcat8'; then

@@ -23,13 +23,13 @@ else
   sleep 1
 fi
 
-echo "Starting php5-fpm"
-if [ "$(pidof php5-fpm)" ]
+echo "Starting php7.0-fpm"
+if [ "$(pidof php7.0-fpm)" ]
 then
-  echo "php5-fpm already running!"
+  echo "php7.0-fpm already running!"
 else
-  echo "starting php5-fpm"
-  sudo service php5-fpm start
+  echo "starting php7.0-fpm"
+  sudo service php7.0-fpm start
 fi
 
 # 2. Tomcat

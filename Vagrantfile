@@ -1,7 +1,8 @@
+# coding: iso-8859-1
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-# Freeciv-web Vagrant Vagrantfile - play.freeciv.org 
+# Freeciv-web Vagrant Vagrantfile - play.freeciv.org
 # 2014-02-17 - Andreas Røsdal
 #
 # Run 'vagrant up' in this directory, which will create a VirtualBox image,
@@ -18,11 +19,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "mywily-amd64"
+  config.vm.box = "fcweb-amd64"
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
-  config.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/wily/current/wily-server-cloudimg-amd64-vagrant-disk1.box"
+  config.vm.box_url = "https://cloud-images.ubuntu.com/xenial/current/xenial-server-cloudimg-amd64-vagrant.box"
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
@@ -41,6 +42,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     v.memory = 6000
     v.cpus = "2"
   end
+
+  config.vm.synced_folder "./", "/vagrant"
 
   # run the Freeciv bootstrap script on startup
   config.vm.provision :shell, :path => "scripts/vagrant-build.sh"

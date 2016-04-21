@@ -31,8 +31,8 @@ nginx_url="http://nginx.org/download/nginx-1.9.11.tar.gz"
 casperjs_url="https://github.com/casperjs/casperjs/zipball/1.1.0"
 tomcat_url="https://bitbucket.org/andreasrosdal/fcweb/downloads/apache-tomcat-8.0.33.tar.gz"
 
-# Based on fresh install of Ubuntu 12.04
-dependencies="maven mysql-server-5.5 openjdk-7-jdk libcurl4-openssl-dev subversion pngcrush libtool automake autoconf autotools-dev language-pack-en python3-setuptools python3.4 python3.4-dev imagemagick liblzma-dev firefox xvfb libicu-dev libsdl1.2-dev libjansson-dev php5-common php5-cli php5-fpm php5-mysql dos2unix"
+# Based on fresh install of Ubuntu 16.04
+dependencies="maven mysql-server-5.7 openjdk-9-jdk-headless libcurl4-openssl-dev subversion pngcrush libtool automake autoconf autotools-dev language-pack-en python3-setuptools python3.5 python3.5-dev imagemagick liblzma-dev firefox xvfb libicu-dev libsdl1.2-dev libjansson-dev php7.0-common php7.0-cli php7.0-fpm php7.0-mysql dos2unix"
 
 ## dependencies
 echo "==== Installing Updates and Dependencies ===="

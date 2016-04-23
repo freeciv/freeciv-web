@@ -12,7 +12,7 @@ if [ "$(pidof nginx)" ] ; then
 fi
 
 # 1.1 PHP7-FPM
-sudo service php7-fpm stop
+sudo service php7-fpm stop || sudo service php5-fpm stop || echo "unable to stop php"
 
 # 2. Tomcat
 if service --status-all | grep -Fq 'tomcat8'; then

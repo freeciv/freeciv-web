@@ -115,7 +115,7 @@ cd ${basedir}/tests
 
 wget ${casperjs_url}
 unzip -qo 1.1.1
-cd casperjs-casperjs-1.1.1-0-gb4f7669
+cd casperjs-casperjs-b4f7669
 ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs
 
 sleep 10

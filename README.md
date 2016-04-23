@@ -46,7 +46,7 @@ Freeciv-Web consists of these components:
 Running Freeciv-web with Vagrant on VirtualBox
 ----------------------------------------------
 Freeciv-web can be setup using Vagrant on VirtualBox to quickly create a 
-local developer image running Freeciv-web on Ubuntu 14.04 on your host 
+local developer image running Freeciv-web on Ubuntu 16.04 on your host 
 operating system such as Windows, OSX or Linux. 
 This is the recommended way to build Freeciv-web on your computer.
 

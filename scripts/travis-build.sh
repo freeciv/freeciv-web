@@ -30,11 +30,11 @@ mysql_user="root"
 
 tornado_url="https://pypi.python.org/packages/source/t/tornado/tornado-4.2.1.tar.gz"
 nginx_url="http://nginx.org/download/nginx-1.9.11.tar.gz"
-casperjs_url="https://github.com/casperjs/casperjs/zipball/1.1.0"
+casperjs_url="https://github.com/casperjs/casperjs/zipball/1.1.1"
 tomcat_url="https://bitbucket.org/andreasrosdal/fcweb/downloads/apache-tomcat-8.0.33.tar.gz"
 
 # Based on fresh install of Ubuntu 14.04
-dependencies="maven mysql-server-5.5 openjdk-7-jdk libcurl4-openssl-dev subversion pngcrush libtool automake autoconf autotools-dev language-pack-en python3-setuptools python3.4 python3.4-dev imagemagick liblzma-dev firefox xvfb libicu-dev libsdl1.2-dev libjansson-dev php5-common php5-cli php5-fpm php5-mysql dos2unix"
+dependencies="maven mysql-server-5.5 openjdk-7-jdk libcurl4-openssl-dev subversion pngcrush libtool automake autoconf autotools-dev language-pack-en python3-setuptools python3.4 python3.4-dev imagemagick liblzma-dev xvfb libicu-dev libsdl1.2-dev libjansson-dev php5-common php5-cli php5-fpm php5-mysql dos2unix"
 
 ## dependencies
 echo "==== Installing Updates and Dependencies ===="
@@ -114,8 +114,8 @@ echo "Installing CasperJS for testing"
 cd ${basedir}/tests
 
 wget ${casperjs_url}
-unzip -qo 1.1.0
-cd casperjs-casperjs-b5c59e1
+unzip -qo 1.1.1
+cd casperjs-casperjs-1.1.1-0-gb4f7669
 ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs
 
 sleep 10

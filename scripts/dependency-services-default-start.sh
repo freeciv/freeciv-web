@@ -23,7 +23,7 @@ else
   sleep 1
 fi
 
-if  type php7 > /dev/null; then
+if  type php7.0 > /dev/null; then
   echo "Starting php7.0-fpm"
   if [ "$(pidof php7.0-fpm)" ]
   then

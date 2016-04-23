@@ -56,8 +56,8 @@ apt-get -y update
 echo "apt-get upgrade"
 apt-get -y upgrade
 echo "mysql setup..."
-sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password ${mysql_pass}"
-sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again password ${mysql_pass}"
+debconf-set-selections <<< "mysql-server mysql-server/root_password password ${mysql_pass}"
+debconf-set-selections <<< "mysql-server mysql-server/root_password_again password ${mysql_pass}"
 echo "apt-get install dependencies"
 apt-get -y install ${dependencies}
 
@@ -75,7 +75,7 @@ cd /tmp
 wget https://github.com/mysql/mysql-connector-python/archive/2.1.3.zip
 unzip 2.1.3.zip
 cd mysql-connector-python-2.1.3
-sudo python3.5 setup.py install
+python3.5 setup.py install
 
 
 ## mysql setup
@@ -102,10 +102,10 @@ cd freeciv && make install
 echo "==== Building freeciv-web ===="
 sed -e "s/user>root/user>${mysql_user}/" -e "s/password>changeme/password>${mysql_pass}/" ${basedir}/freeciv-web/src/main/webapp/WEB-INF/resin-web.xml.dist > ${basedir}/freeciv-web/src/main/webapp/WEB-INF/resin-web.xml
 cd ${basedir}/scripts/freeciv-img-extract/ && ./setup_links.sh && ./sync.sh
-cd /var/lib/tomcat8 && sudo chmod -R 777 webapps logs && setfacl -d -m g::rwx webapps && sudo chown -R www-data:www-data webapps/
+cd /var/lib/tomcat8 && chmod -R 777 webapps logs && setfacl -d -m g::rwx webapps && chown -R www-data:www-data webapps/
 cd ${basedir}/scripts && ./sync-js-hand.sh
-cd ${basedir}/freeciv-web && sudo -u vagrant ./setup.sh
-sudo -u vagrant mvn compile flyway:migrate
+cd ${basedir}/freeciv-web && sudo -u ubuntu ./setup.sh
+sudo -u ubuntu mvn compile flyway:migrate
 
 echo "=============================="
 
@@ -115,16 +115,17 @@ cp ${basedir}/pbem/settings.ini.dist ${basedir}/pbem/settings.ini
 
 service nginx stop
 rm /etc/nginx/sites-enabled/default
+sed -i.bak -e "s/php7/php\/php7.0/" ${basedir}/publite2/nginx.conf 
 cp ${basedir}/publite2/nginx.conf /etc/nginx/
 
 # add Freeciv-web scripts to path
 export PATH=$PATH:/vagrant/scripts
-echo 'export PATH=$PATH:/vagrant/scripts' >> /home/vagrant/.bashrc
+echo 'export PATH=$PATH:/vagrant/scripts' >> /home/ubuntu/.bashrc
 
 if [ -d "/vagrant/" ]; then
   echo "Starting Freeciv-web..."
   service nginx start
-  cd ${basedir}/scripts/ && sudo -u vagrant ./start-freeciv-web.sh
+  cd ${basedir}/scripts/ && sudo -u ubuntu ./start-freeciv-web.sh
 else
   echo "Freeciv-web installed. Please start it manually."
 fi
@@ -134,7 +135,7 @@ echo "Installing CasperJS for testing"
 cd /tmp
 wget --no-check-certificate ${phantomjs_url} || (>&2 echo "Unable to download PhantomJs. Skipping tests." && exit 0)
 tar xvjf phantomjs-2.1.1-linux-x86_64.tar.bz2
-sudo cp phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/local/bin/
+cp phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/local/bin/
 
 cd ${basedir}/tests/
 wget ${casperjs_url}

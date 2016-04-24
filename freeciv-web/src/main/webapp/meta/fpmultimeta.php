@@ -40,7 +40,7 @@ if (!isset($config_problem)) {
         print "<th>Turn:</th></tr>";
 
         for ( $inx = 0; $inx < $nr; $inx++ ) {
- 	  $row = fcdb_fetch_array($res, $inx);
+ 	  $row = fcdb_fetch_next_row($res, $inx);
 	  $mystate = db2html($row["state"]);
 
           $stmt="select * from players where type='Human' and hostport=\"".$row['host'].":".$row['port']."\"";

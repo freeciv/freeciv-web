@@ -24,7 +24,7 @@ $res = fcdb_exec($stmt);
 $nr = fcdb_num_rows($res);
 if ( $nr > 0 ) {
   for ( $inx = 0; $inx < $nr; $inx++ ) {
-    $row = fcdb_fetch_array($res, $inx);
+    $row = fcdb_fetch_next_row($res, $inx);
     $endDate = db2html($row["endDate"]);
     $winner = db2html($row["winner"]);
     $one = db2html($row["one"]);

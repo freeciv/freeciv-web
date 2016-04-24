@@ -20,7 +20,7 @@ if (!isset($config_problem)) {
       
 $stmt = "select (select count(*) from servers where state = 'Running') as running_count, (select SUM(gameCount) from games_played_stats where gametype = 0) as single_count, (select SUM(gameCount) from games_played_stats where gametype IN (1, 2)) as multi_count, (select SUM(timePlayed) from time_played_stats) as minutes_played";
 $res = fcdb_exec($stmt);
-$row = fcdb_fetch_array($res, 0);
+$row = fcdb_fetch_next_row($res, 0);
 print db2html($row["running_count"]);
 print(";");
 print db2html($row["single_count"]);

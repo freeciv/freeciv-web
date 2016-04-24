@@ -39,17 +39,13 @@ function fcdb_connect($db, $un, $pw) {
       $ok = false;
       break;
     case "MySQL":
-      $fcdb_conn = mysql_pconnect('localhost', $un, $pw);
+      $fcdb_conn = new PDO("mysql:host=$dbhost;dbname=$db;charset=utf8",
+                           "$un", "$pw", 
+                           array(PDO::ATTR_EMULATE_PREPARES => false,
+                                 PDO::ATTR_ERRMODE => PDO::ERRMODE_SILENT));
       if (!$fcdb_conn) {
-	build_fcdb_error("I cannot make a connection to the database server.");
+        build_fcdb_error("I cannot open the database.");
 	$ok = false;
-      }
-      else
-      {
-        $ok = mysql_select_db($db, $fcdb_conn);
-        if (!$ok) {
-	  build_fcdb_error("I cannot open the database." . $db . "  -- " . $fcdb_conn);
-        }
       }
       break;
   }
@@ -69,7 +65,7 @@ function fcdb_exec($stmt) {
       }
       break;
     case "MySQL":
-      $res = mysql_query($stmt, $fcdb_conn);
+      $res = $fcdb_conn->query($stmt);
       if (!$res) {
 	build_fcdb_error("I cannot run a statement: '$stmt'.");
       }
@@ -91,11 +87,12 @@ function fcdb_query_single_value($stmt) {
       $val = pg_Result($res, 0, 0);
       break;
     case "MySQL":
-      $res = mysql_query($stmt, $fcdb_conn);
+      $res = $fcdb_conn->query($stmt);
       if (!$res) {
 	build_fcdb_error("I cannot run a query: '$stmt'.");
       }
-      $val = mysql_result($res, 0, 0);
+      $res->bindColumn(0, $val);
+      $res->fetch(PDO::FETCH_BOUND);
       break;
   }
   restore_error_handler();
@@ -110,14 +107,14 @@ function fcdb_num_rows($res) {
       $rows = pg_NumRows($res);
       break;
     case "MySQL":
-      $rows = mysql_num_rows($res);
+      $rows = $res->rowCount();
       break;
   }
   restore_error_handler();
   return ($rows);
 }
 
-function fcdb_fetch_array($res, $inx) {
+function fcdb_fetch_next_row($res, $inx) {
   global $fcdb_sel, $fcdb_conn;
   set_error_handler("fcdb_error_handler");
   switch ($fcdb_sel) {
@@ -125,11 +122,7 @@ function fcdb_fetch_array($res, $inx) {
       $arr = pg_Fetch_Array($res, $inx);
       break;
     case "MySQL":
-      $ok = mysql_data_seek($res, $inx);
-      if (!$ok) {
-	build_fcdb_error("I couldn't seek to given row.");
-      }
-      $arr = mysql_fetch_array($res);
+      $arr = $res->fetch(PDO::FETCH_ASSOC);
       break;
   }
   restore_error_handler();
@@ -171,7 +164,7 @@ function addneededslashes_db($str) {
     $str = stripslashes($str);
   }
 
-  return mysql_real_escape_string($str);
+  return $fcdb_conn->quote($str);
 }
 
 // Store error message. Don't send it yet as HTTP headers must be sent first.
@@ -179,7 +172,7 @@ function build_fcdb_error($what_error) {
   global $webmaster_html;
   global $webmaster_default;
   global $error_msg;
-  global $error_msg_stderr;
+  global $fcdb_conn;
 
   if (! $webmaster_default) {
     $wmpart = ", $webmaster_html";
@@ -191,11 +184,10 @@ function build_fcdb_error($what_error) {
   //        some other db engine.
   $error_msg = "<table border=\"1\" style=\"font-size:xx-small\">\n" .
                "<tr><th>$what_error</th><tr>\n" .
-               "<tr><td>" . mysql_error() . "</td></tr>" .
+               "<tr><td>" . $fcdb_conn->errorInfo() . "</td></tr>" .
                "<tr><td>" .
                "Please contact the maintainer" . $wmpart .
                ".</td></tr>\n</table></font>\n";
-  $error_msg_stderr = $what_error . "\n" . mysql_error();
 }
 
 ?>

@@ -28,7 +28,7 @@ if (!isset($config_problem)) {
       if ( $nr > 0 ) {
 
         for ( $inx = 0; $inx < $nr; $inx++ ) {
- 	  $row = fcdb_fetch_array($res, $inx);
+ 	  $row = fcdb_fetch_next_row($res, $inx);
 
           print db2html($row["sd"]);
           print ",";

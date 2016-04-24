@@ -369,7 +369,7 @@ if ( isset($port) ) {
       if ( $nr != 1 ) {
         print "Cannot find the specified server";
       } else {
-        $row = fcdb_fetch_array($res, 0);
+        $row = fcdb_fetch_next_row($res, 0);
 
         print "<br/><center>";
         $msg = stripslashes(db2html($row["message"]));
@@ -410,7 +410,7 @@ if ( isset($port) ) {
           print "<tr class='meta_header'><th class=\"left\">Flag</th><th>Leader</th><th>Nation</th>";
           print "<th>User</th><th>Type</th></tr>\n";
           for ( $inx = 0; $inx < $nr; $inx++ ) {
-            $prow = fcdb_fetch_array($res, $inx);
+            $prow = fcdb_fetch_next_row($res, $inx);
             print "<tr class='meta_row'><td class=\"left\">";
 	    flag_html("f." . $prow["flag"]);
             print "</td><td>";
@@ -438,7 +438,7 @@ if ( isset($port) ) {
           print "<table class='variables_table'>\n";
           print "<tr><th class=\"left\">Option</th><th>Value</th></tr>\n";
           for ( $inx = 0; $inx < $nr; $inx++ ) {
-            $row = fcdb_fetch_array($res, $inx);
+            $row = fcdb_fetch_next_row($res, $inx);
             print "<tr><td>";
             print db2html($row["name"]);
             print "</td><td>";
@@ -454,11 +454,11 @@ if ( isset($port) ) {
 
       $stmt="select count(*) as count from servers s where type = 'singleplayer' and state = 'Running'";
       $res = fcdb_exec($stmt);
-      $row = fcdb_fetch_array($res, 0);
+      $row = fcdb_fetch_next_row($res, 0);
       $single_count = $row["count"];
       $stmt="select count(*) as count from servers s where type = 'multiplayer' and (state = 'Running' or (state = 'Pregame' and CONCAT(s.host ,':',s.port) in (select hostport from players where type <> 'A.I.')))";
       $res = fcdb_exec($stmt);
-      $row = fcdb_fetch_array($res, 0);
+      $row = fcdb_fetch_next_row($res, 0);
       $multi_count = $row["count"];
 	?>
 
@@ -498,7 +498,7 @@ if ( isset($port) ) {
         print "<th>Flag</th>\n";
         print "<th>Turn:</th></tr>";
         for ( $inx = 0; $inx < $nr; $inx++ ) {
-          $row = fcdb_fetch_array($res, $inx);
+          $row = fcdb_fetch_next_row($res, $inx);
           if (strpos($row["message"],'password-protected') !== false) {
             print "<tr class='meta_row private_game'><td>";
           } else {
@@ -549,7 +549,7 @@ if ( isset($port) ) {
         print "<th>Turn:</th></tr>";
 
         for ( $inx = 0; $inx < $nr; $inx++ ) {
-          $row = fcdb_fetch_array($res, $inx);
+          $row = fcdb_fetch_next_row($res, $inx);
 	  $mystate = db2html($row["state"]);
 
           $stmt="select * from players where type='Human' and hostport=\"".$row['host'].":".$row['port']."\"";

@@ -27,16 +27,16 @@ $nr = fcdb_num_rows($res);
 if ( $nr != 4 ) {
   print "error";
 } else {
-  $row = fcdb_fetch_array($res, 0);
+  $row = fcdb_fetch_next_row($res, 0);
   print db2html($row["count"]);
   print (";");      
-  $row = fcdb_fetch_array($res, 1);
+  $row = fcdb_fetch_next_row($res, 1);
   print db2html($row["count"]);
   print (";");
-  $row = fcdb_fetch_array($res, 2);
+  $row = fcdb_fetch_next_row($res, 2);
   print db2html($row["count"]);
   print (";");
-  $row = fcdb_fetch_array($res, 3);
+  $row = fcdb_fetch_next_row($res, 3);
   print db2html($row["count"]);
 
 } 

@@ -14,7 +14,7 @@ if [ "x$DEPENDENCY_SERVICES_STOP" = x ] ; then
   DEPENDENCY_SERVICES_STOP="./dependency-services-default-stop.sh"
 fi
 
-echo "Shutting down Freeciv-web: nginx, tomcat, publite2, freeciv-proxy, freeciv-pbem."
+echo "Shutting down Freeciv-web: nginx, tomcat, publite2, freeciv-proxy, pbem."
 
 # Shutdown Freeciv-web's dependency services according to the users
 # configuration.
@@ -30,7 +30,7 @@ killall -9 freeciv-web
 ps aux | grep -ie freeciv-proxy | awk '{print $2}' | xargs kill -9 
 
 #5.1 Freeciv-PBEM
-ps aux | grep -ie freeciv-pbem | awk '{print $2}' | xargs kill -9 
+ps aux | grep -ie pbem | awk '{print $2}' | xargs kill -9 
 
 #5.2 meta-stats
 ps aux | grep -ie meta-stats | awk '{print $2}' | xargs kill -9 

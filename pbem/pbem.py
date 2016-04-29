@@ -18,7 +18,6 @@
 
 ***********************************************************************'''
 
-
 import os, os.path
 import sys
 import time
@@ -37,6 +36,7 @@ savedir = "/var/lib/tomcat8/webapps/data/savegames/"
 rankdir = "/var/lib/tomcat8/webapps/data/ranklogs/" 
 game_expire_time = 60 * 60 * 24 * 7;  # 7 days until games are expired.
 game_remind_time = 60 * 60 * 24 * 6;  # 6 days until games are sent a reminder.
+testmode = False;
 
 settings = configparser.ConfigParser()
 settings.read("settings.ini")
@@ -64,7 +64,6 @@ status.ranklog_emails_sent = 0;
 status.invitation_emails_sent = 0;
 status.retired = 0;
 status.games = loaded_games;
-status.start();
 
 # send reminder where game is about to expire 
 def remind_old_games():
@@ -98,7 +97,7 @@ def handle_savegame(root, file):
 
   new_filename = "pbem_processed_" + str(random.randint(0,10000000000)) + ".xz";
   f.close();
-  shutil.move(filename, os.path.join(root,new_filename))
+  if not testmode: shutil.move(filename, os.path.join(root,new_filename))
   print("New filename will be: " + new_filename);
   players = list_players(txt);
   phase = find_phase(txt);
@@ -246,6 +245,8 @@ def process_ranklogs():
         
 if __name__ == '__main__':
   print("Freeciv-PBEM processing savegames");
+
+  status.start();
 
   while (1):
     try:

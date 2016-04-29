@@ -27,6 +27,7 @@ class MailSender():
 
   settings = configparser.ConfigParser()
   settings.read("settings.ini")
+  testmode = False;
 
   smtp_login=settings.get("Config", "smtp_login")
   smtp_password=settings.get("Config", "smtp_password")
@@ -47,10 +48,13 @@ class MailSender():
 
   def send_message_via_smtp(self, from_, to, mime_string):
     time.sleep(2);
-    smtp = smtplib.SMTP(self.smtp_host, int(self.smtp_port))
-    smtp.login(self.smtp_login, self.smtp_password);
-    smtp.sendmail(from_, to, mime_string)
-    smtp.quit()
+    if not self.testmode:
+      smtp = smtplib.SMTP(self.smtp_host, int(self.smtp_port))
+      smtp.login(self.smtp_login, self.smtp_password);
+      smtp.sendmail(from_, to, mime_string)
+      smtp.quit()
+    else:
+      print("Test: this message would be sent: " + mime_string);
 
 
   def send_mailgun_message(self, to, subject, text):

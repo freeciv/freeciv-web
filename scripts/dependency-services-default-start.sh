@@ -34,12 +34,12 @@ if  type php7.0 > /dev/null; then
   fi
 else
   echo "Starting php5.0-fpm"
-  if [ "$(pidof php5.0-fpm)" ]
+  if [ "$(pidof php5-fpm)" ]
   then
     echo "php5.0-fpm already running!"
   else
-    echo "starting php5.0-fpm"
-    sudo service php5.0-fpm start
+    echo "starting php5-fpm"
+    sudo service php5-fpm start
   fi
 fi
 

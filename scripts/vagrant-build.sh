@@ -28,6 +28,14 @@ echo "================================="
 echo "Running Freeciv-web setup script."
 echo "================================="
 
+# if Freeciv-web already built with Vagrant, then start it instead.
+if [ -f "/vagrant/freeciv-web/target/freeciv-web.war" ]; then
+  printf "\n\nFreeciv-web already built, starting it.\n\n-----";
+  cd ${basedir}/scripts/ && sudo -u ubuntu ./start-freeciv-web.sh
+  printf "Freeciv-web started. Now login with 'vagrant ssh' and point your browser to http://localhost";
+  exit 0;
+fi
+
 uname -a
 echo basedir  $basedir
 echo logfile $logfile

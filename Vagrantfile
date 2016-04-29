@@ -46,7 +46,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.synced_folder "./", "/vagrant"
 
   # run the Freeciv bootstrap script on startup
-  config.vm.provision :shell, :path => "scripts/vagrant-build.sh"
+  config.vm.provision :shell, :path => "scripts/vagrant-build.sh", run: "always"
 
 
 end

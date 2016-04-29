@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 
 '''**********************************************************************
-    Copyright (C) 2009-2015  The Freeciv-web project
+    Copyright (C) 2009-2016  The Freeciv-web project
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as published by
@@ -63,28 +63,26 @@ status.reminders_sent = 0;
 status.ranklog_emails_sent = 0;
 status.invitation_emails_sent = 0;
 status.retired = 0;
-# status.games is a dict with following values: 
-# [turn, phase, players, time as sting, time as int, game state, game_url, active player email, reminder sent]
 status.games = loaded_games;
 status.start();
 
 # send reminder where game is about to expire 
 def remind_old_games():
   for key, value in status.games.items():
-    if (len(value) > 8 and value[8] == False and (value[4] + game_remind_time) < (time.time())):
-      status.games[key][8] = True;
+    if (value['reminder_sent'] == False and (value['time_int'] + game_remind_time) < (time.time())):
+      status.games[key]['reminder_sent'] = True;
       status.reminders_sent += 1;
-      mail.send_game_reminder(status.games[key][7], status.games[key][6]);
+      mail.send_game_reminder(status.games[key]['active_player_email'], status.games[key]['url']);
 
 # expire old games 
 def cleanup_expired_games():
   for key, game in status.games.copy().items():
-    if ((game[4] + game_expire_time) < (time.time())):
-      looser = game[2][game[1]];
-      winner = game[2][(game[1]+1) % len(game[2])];
+    if ((game['time_int'] + game_expire_time) < (time.time())):
+      looser = game['players'][game['phase']];
+      winner = game['players'][(game['phase']+1) % len(game['players'])];
       print("Expiring game: " + key + " winner:" + winner + ", looser:" + looser);
       # at least 3 turns must be completed before it will effect ranking.
-      if (game[0] > 3): save_game_result(winner, winner, looser);
+      if (game['turn'] > 3): save_game_result(winner, winner, looser);
       del status.games[key];
       status.retired += 1;
 
@@ -121,7 +119,9 @@ def handle_savegame(root, file):
   active_email = find_email_address(active_player);
   game_url = "https://play.freeciv.org/webclient/?action=pbem&savegame=" + new_filename.replace(".xz", "");
   if (active_email != None):
-    status.games[game_id] = [turn, phase, players, time.ctime(), int(time.time()), state, game_url, active_email, False];
+    status.games[game_id] = {'turn' : turn, 'phase': phase, 'players' : players, 'time_str' : time.ctime(), 
+                             'time_int' : int(time.time()), 'state' : state, 'url' : game_url, 
+                             'active_player_email' : active_email, 'reminder_sent' : False};
     print("active email=" + active_email);
     mail.send_email_next_turn(active_player, players, active_email, game_url, turn);
     status.emails_sent += 1;
@@ -189,7 +189,7 @@ def save_game_result(winner, playerOne, playerTwo):
   try:
     cnx = mysql.connector.connect(user=mysql_user, database=mysql_database, password=mysql_password)
     cursor = cnx.cursor()
-    query = ("insert into game_results (playerOne, playerTwo, winner, endDate) values (%(playerOne)s, %(playerTwo)s, %(winner)s, NOW())");
+    query = ("insert ignore into game_results (playerOne, playerTwo, winner, endDate) values (%(playerOne)s, %(playerTwo)s, %(winner)s, NOW())");
     cursor.execute(query, {'playerOne' : playerOne, 'playerTwo' : playerTwo, 'winner' : winner})
     cnx.commit()
   finally:

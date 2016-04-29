@@ -109,7 +109,7 @@ make install
 
 sed -i.bak -e "s/php7/php5/" ${basedir}/publite2/nginx.conf 
 cp ${basedir}/publite2/nginx.conf /usr/local/nginx/conf/
-cp ${basedir}/pbem/settings.ini.dist ${basedir}/pbem/settings.ini
+sed -e "s/vagrant//" ${basedir}/pbem/settings.ini.dist > ${basedir}/pbem/settings.ini
 
 echo "Starting Freeciv-web..."
 /usr/local/nginx/sbin/nginx

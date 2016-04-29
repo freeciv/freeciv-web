@@ -109,8 +109,6 @@ sudo -u ubuntu mvn compile flyway:migrate
 
 echo "=============================="
 
-# FIXME: this command fails.
-#pip3 install --allow-external mysql-connector-python mysql-connector-python
 cp ${basedir}/pbem/settings.ini.dist ${basedir}/pbem/settings.ini
 
 service nginx stop

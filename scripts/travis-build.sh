@@ -52,7 +52,7 @@ javac -version
 echo "===== Install Tomcat 8 ======="
 echo "if you get a download error 404 here, then there could be a new Tomcat version released, so update the URL below."
 cd /var/lib
-wget ${tomcat_url} || (>&2 echo "Unable to download Tomcat. Check download url in travis-build.sh." && exit 1)
+wget --quiet ${tomcat_url} || (>&2 echo "Unable to download Tomcat. Check download url in travis-build.sh." && exit 1)
 tar -xvzf apache-tomcat-8.0.33.tar.gz
 mv apache-tomcat-8.0.33 tomcat8
 echo "export CATALINA_HOME=\"/var/lib/tomcat8\"" >> ~/.bashrc
@@ -61,9 +61,16 @@ cd tomcat8/bin
 
 
 echo "==== Fetching/Installing Tornado Web Server ===="
-wget ${tornado_url}
+wget --quiet ${tornado_url}
 tar xfz tornado-4.2.1.tar.gz
 cd tornado-4.2.1
+python3.5 setup.py install
+
+## build and install mysql-connector-python
+cd /tmp
+wget --quiet https://github.com/mysql/mysql-connector-python/archive/2.1.3.zip
+unzip 2.1.3.zip
+cd mysql-connector-python-2.1.3
 python3.5 setup.py install
 
 ## mysql setup
@@ -91,7 +98,7 @@ cd ${basedir}/freeciv-web && sudo -u travis ./build.sh
 
 echo "==== Building nginx ===="
 cd ${basedir}
-wget ${nginx_url}
+wget --quiet ${nginx_url}
 tar xzf nginx-1.9.11.tar.gz
 cd nginx-1.9.11
 ./configure
@@ -113,7 +120,7 @@ echo "============================================"
 echo "Installing CasperJS for testing"
 cd ${basedir}/tests
 
-wget ${casperjs_url}
+wget --quiet ${casperjs_url}
 unzip -qo 1.1.1
 cd casperjs-casperjs-b4f7669
 ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs

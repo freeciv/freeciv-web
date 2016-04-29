@@ -138,5 +138,9 @@ killall freeciv-web
 sleep 10
 xvfb-run casperjs --engine=phantomjs test freeciv-web-autogame.js || (>&2 echo "Freeciv-web CasperJS autogame tests failed!" && exit 1)
 
+echo "running pbem unit tests."
+cd ${basedir}/pbem
+python3.5 test_pbem.py
+
 echo "=============================="
 echo "Freeciv-web built, tested and started correctly: Build successful!"

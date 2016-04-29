@@ -150,6 +150,8 @@ Install this software if you are not running Freeciv-web with Vagrant:
 
 - PHP-FPM - FastCGI Process Manager for PHP - http://php-fpm.org/
 
+- MySQL Connector/Python - https://github.com/mysql/mysql-connector-python
+
 - pngcrush, required for freeciv-img-extract.  http://pmt.sourceforge.net/pngcrush/
 
 - Tornado 4.2 or later - http://www.tornadoweb.org/

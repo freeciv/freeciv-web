@@ -137,24 +137,24 @@ if ( isset($port) ) {
 
       if (isset($plu[$i]) ) {
         $plu[$i] = addneededslashes_db($plu[$i]);
-        $ins .= "user=\"$plu[$i]\", ";
+        $ins .= "user=$plu[$i], ";
       }
       if (isset($pll[$i]) ) {
         $pll[$i] = addneededslashes_db($pll[$i]);
-        $ins .= "name=\"$pll[$i]\", ";
+        $ins .= "name=$pll[$i], ";
       }
       if (isset($pln[$i]) ) {
         $pln[$i] = addneededslashes_db($pln[$i]);
-        $ins .= "nation=\"$pln[$i]\", ";
+        $ins .= "nation=$pln[$i], ";
       }
       if (isset($plf[$i]) ) {
         $plf[$i] = addneededslashes_db($plf[$i]);
-        $ins .= "flag=\"$plf[$i]\", ";
+        $ins .= "flag=$plf[$i], ";
       }
 
       if (isset($plt[$i]) ) {
         $plt[$i] = addneededslashes_db($plt[$i]);
-        $ins .= "type=\"$plt[$i]\", ";
+        $ins .= "type=$plt[$i], ";
       }
       $ins .= "host=\"$plh[$i]\"";
       /* an array of all the sql statements; save actual db access to the end */
@@ -174,8 +174,8 @@ if ( isset($port) ) {
       $vn[$i] = addneededslashes_db($vn[$i]);
       $vv[$i] = addneededslashes_db($vv[$i]);
       $ins = "insert into variables set hostport=\"$host:$port\", ";
-      $ins .= "name=\"$vn[$i]\", ";
-      $ins .= "value=\"$vv[$i]\"";
+      $ins .= "name=$vn[$i], ";
+      $ins .= "value=$vv[$i]";
       /* an array of all the sql statements; save actual db access to the end */
       array_push($variablestmt, $ins);
     }
@@ -609,7 +609,7 @@ if ( isset($port) ) {
 
 <div id="tabs-3">
   <h2>Play-By-Email Games</h2>
-  <b>A Play-By-Email game is a 1v1 deathmatch on a small map, with alternating turns, and players get an e-mail every time it is their turn to play. These games are often played over a long time period, each player has 7 days to complete their turn. <br> - <a href="/meta/pbem-results/">Game results</a> -</b><br><br>
+  <b>A Play-By-Email game is a 1v1 deathmatch on a small map, with alternating turns, and players get an e-mail every time it is their turn to play. These games are often played over a long time period, each player has 7 days to complete their turn. <br><a href="/meta/pbem-results/">Game results</a></b><br><br>
   <table id="pbem_table" class='metatable pbem'>
     <tr class='meta_header'><th>Players</th><th>Current player</th><th>Turn</th><th>Last played</th></tr>
   </table>

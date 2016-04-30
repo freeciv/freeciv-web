@@ -64,6 +64,7 @@ status.ranklog_emails_sent = 0;
 status.invitation_emails_sent = 0;
 status.retired = 0;
 status.games = loaded_games;
+status.expiry = game_expire_time;
 
 # send reminder where game is about to expire 
 def remind_old_games():

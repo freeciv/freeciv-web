@@ -40,8 +40,9 @@ function handle_pbem(data)
       if (player_one.indexOf("@") != -1 || player_two.indexOf("@") != -1) continue;
       var current_player = game[2][phase];
       var last_played = game[3];
+      var time_left = game[4];
       $("#pbem_table").append("<tr><td>" + player_one + " - " + player_two + "</td><td>" + current_player 
-           + "</td><td>" + turn + "</td><td>" + last_played + "</td></tr>");
+           + "</td><td>" + turn + "</td><td>" + last_played + "</td><td>" + time_left + " hours</td></tr>");
     }
   } else {
     $("#pbem_table").hide();

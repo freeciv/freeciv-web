@@ -57,7 +57,7 @@ class StatusHandler(web.RequestHandler):
 
     games = [];
     for key, value in self.mailchecker.games.items():
-      games.append([value['turn'], value['phase'], value['players'], value['time_str'], value['time_int']]);
+      games.append([value['turn'], value['phase'], value['players'], value['time_str'], int((value['time_int'] + self.mailchecker.expiry - time.time()) / (60*60))]);
     games_sorted = sorted(games, key=lambda tup: tup[4]);
 
     self.write("<html><head><title>Mail status for Freeciv-web</title>" + 

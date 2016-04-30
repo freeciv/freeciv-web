@@ -269,9 +269,9 @@ function preload_check()
   loaded_images += 1;
 
   if (loaded_images == tileset_image_count) {
-    $.unblockUI();
     init_cache_sprites();
     init_common_intro_dialog();
+    $.unblockUI();
   }
 }
 

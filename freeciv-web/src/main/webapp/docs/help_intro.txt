@@ -19,9 +19,9 @@ the game!
 <br><br>
 
 Freeciv-web and the server you are playing this game on right now, is made
-possible by <a href="http://freeciv.wikia.com/wiki/Donations"
+possible by <a href="http://www.freeciv.org/donate.html"
 target="_new">donations</a> from users. <br>
-<i><b>Please support this volunteer effort by <a href="http://freeciv.wikia.com/wiki/Donations"
+<i><b>Please support this volunteer effort by <a href="http://www.freeciv.org/donate.html"
 target="_new">donating to Freeciv now!</a></b></i>. Thanks!
 
 <br><br>

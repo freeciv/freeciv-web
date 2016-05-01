@@ -22,6 +22,7 @@ body {
 
 .meta_header th {
   text-align: left;
+  background-color: white;
 }
 
 table, th, td

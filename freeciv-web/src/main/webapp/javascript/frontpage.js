@@ -76,6 +76,17 @@ $.ajax({
     $( "#fpmultimeta" ).html(html);
   });
 
+
+  $.ajax({
+    url: "/meta/pbem_top_players.php",
+    dataType: "html",
+    cache: true,
+    async: true
+  }).done(function( data ) {
+    handle_top_pbem_players(data);
+  });
+
+
        var count= 5;
         $.getJSON("/fpfeed.json", function(data){
                 $.each(data, function(i,item){
@@ -90,4 +101,17 @@ $.ajax({
 $( window ).resize(function() {
   $("#mysearchform").get(0).scrollIntoView();
 });
+
+
+function handle_top_pbem_players(data)
+{
+  var games = data.split(";");
+  for (var i = 0; i < games.length -1; i++) {
+    var player = games[i].split(",");
+    $("#pbem_top_players").append("<tr style='background-color: rgba(230,230,230, 0.5);'><td>" 
+      + player[0] + "</td><td>" + player[1]
+      + "</td></tr>");
+  }
+
+}
 

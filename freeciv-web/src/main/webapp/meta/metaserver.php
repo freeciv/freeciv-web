@@ -609,11 +609,21 @@ if ( isset($port) ) {
 
 <div id="tabs-3">
   <h2>Play-By-Email Games</h2>
-  <b>A Play-By-Email game is a 1v1 deathmatch on a small map, with alternating turns, and players get an e-mail every time it is their turn to play. These games are often played over a long time period, each player has 7 days to complete their turn. <br>- <a href="/meta/pbem-results/">Game results</a></b> -<br><br>
+  <b>A Play-By-Email game is a 1v1 deathmatch on a small map, with alternating turns, and players get an e-mail every time it is their turn to play. These games are often played over a long time period, each player has 7 days to complete their turn. <br>
+
+  <h3>Current running games:</h3>
+
   <table id="pbem_table" class='metatable pbem'>
     <tr class='meta_header'><th>Players</th><th>Current player</th><th>Turn</th><th>Last played</th><th>Time left</th></tr>
   </table>
   <br>
+  <h3>Results of completed games:</h3>
+
+  <table id="pbem_result_table" class='metatable pbem'>
+	    <tr class='meta_header'><th>Winner</th><th>Game Date:</th><th>Player 1:</th><th>Player 2:</th></tr>
+  </table>
+  <br><br>
+
   To start a new Play-By-Email game, <a href="/webclient/?action=pbem">log in here</a>. To play your turn in a running Play-By-Email game,
   click on the link in the last e-mail you got from Freeciv-web. Games are expired after 7 days if you don't play your turn. <br><br>
 </div>

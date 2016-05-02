@@ -22,8 +22,9 @@
 # libtoolize_no_symlinks will get obsolete by Freeciv patch #7001
 # Remove-redundant-canceled-orders-notification is Freeciv bug #24414 (SVN r31956)
 # win_chance includes 'Chance to win' in Freeciv-web map tile popup.
+# ScorefileWeb is Freeciv patch #7177
 
-PATCHLIST="WarningsBase freeciv_web_packets_def_changes caravan_fixes1 city_fixes city_impr_fix2 city-naming-change city_fixes2 citytools_changes metachange text_fixes unithand-change2 current_research_cost freeciv-svn-webclient-changes init_lists_disable goto_fcweb misc_devversion_sync tutorial_ruleset savegame maphand_ch serverside_extra_assign libtoolize_no_symlinks ai_traits_crash ruleset-capability worklists server_password barbarian-names activity_null_check add_rulesets message_escape freeciv_segfauls_fix scorelog_filenames scorelog_set_to_client missing_trade_partner spaceship_post_launch metamessage settings_access_level_metamessage metamessage_setting disable_global_warming 0001-JSON-specify-delta-vector-field-address fragement GenericPacketsGen24421 ArrayDimensions CommentLineOfItsOwn Remove-redundant-canceled-orders-notification win_chance"
+PATCHLIST="WarningsBase freeciv_web_packets_def_changes caravan_fixes1 city_fixes city_impr_fix2 city-naming-change city_fixes2 citytools_changes metachange text_fixes unithand-change2 current_research_cost freeciv-svn-webclient-changes init_lists_disable goto_fcweb misc_devversion_sync tutorial_ruleset savegame maphand_ch serverside_extra_assign libtoolize_no_symlinks ai_traits_crash ruleset-capability worklists server_password barbarian-names activity_null_check add_rulesets message_escape freeciv_segfauls_fix scorelog_filenames scorelog_set_to_client missing_trade_partner spaceship_post_launch metamessage settings_access_level_metamessage metamessage_setting disable_global_warming 0001-JSON-specify-delta-vector-field-address fragement GenericPacketsGen24421 ArrayDimensions CommentLineOfItsOwn Remove-redundant-canceled-orders-notification win_chance ScorefileWeb"
 
 apply_patch() {
   echo "*** Applying $1.patch ***"

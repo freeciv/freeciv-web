@@ -1,9 +1,21 @@
+diff -Nurd -X.diff_ignore freeciv/common/game.h freeciv/common/game.h
+--- freeciv/common/game.h	2016-05-02 13:03:18.357230715 +0300
++++ freeciv/common/game.h	2016-05-02 13:03:40.033167249 +0300
+@@ -209,7 +209,7 @@
+       char save_name[MAX_LEN_NAME];
+       bool scorelog;
+       enum scorelog_level scoreloglevel;
+-      char scorefile[MAX_LEN_NAME];
++      char scorefile[100];
+       int scoreturn;    /* next make_history_report() */
+       int seed;
+ 
 diff -Nurd -X.diff_ignore freeciv/server/report.c freeciv/server/report.c
---- freeciv/server/report.c	2016-02-24 02:40:28.882661265 +0200
-+++ freeciv/server/report.c	2016-02-24 03:09:09.614518755 +0200
+--- freeciv/server/report.c	2016-05-02 13:03:18.413230550 +0300
++++ freeciv/server/report.c	2016-05-02 13:04:38.892996083 +0300
 @@ -1,4 +1,4 @@
 -/********************************************************************** 
-+/**********************************************************************
++/***********************************************************************
   Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -60,7 +72,7 @@ diff -Nurd -X.diff_ignore freeciv/server/report.c freeciv/server/report.c
    }
  
 +  fc_snprintf(game.server.scorefile, 100, 
-+              _("/var/lib/tomcat8/webapps/data/scorelogs/score-%d.log"),
++              "/var/lib/tomcat8/webapps/data/scorelogs/score-%d.log",
 +              srvarg.port);
 +
    score_log = fc_calloc(1, sizeof(*score_log));
@@ -109,16 +121,3 @@ diff -Nurd -X.diff_ignore freeciv/server/report.c freeciv/server/report.c
    };
  
    if (!game.server.scorelog) {
-diff --git freeciv/common/game.h freeciv/common/game.h
-index 0f64395..267496b 100644
---- freeciv/common/game.h
-+++ freeciv/common/game.h
-@@ -209,7 +209,7 @@ struct civ_game {
-       char save_name[MAX_LEN_NAME];
-       bool scorelog;
-       enum scorelog_level scoreloglevel;
--      char scorefile[MAX_LEN_NAME];
-+      char scorefile[100];
-       int scoreturn;    /* next make_history_report() */
-       int seed;
- 

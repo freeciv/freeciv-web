@@ -32,8 +32,6 @@ import configparser
 import json
 import traceback
 
-savedir = "/var/lib/tomcat8/webapps/data/savegames/" 
-rankdir = "/var/lib/tomcat8/webapps/data/ranklogs/" 
 game_expire_time = 60 * 60 * 24 * 7;  # 7 days until games are expired.
 game_remind_time = 60 * 60 * 24 * 6;  # 6 days until games are sent a reminder.
 testmode = False;
@@ -41,9 +39,13 @@ testmode = False;
 settings = configparser.ConfigParser()
 settings.read("settings.ini")
 
-mysql_user=settings.get("Config", "mysql_user")
+mysql_user=settings.get("Config", "mysql_user");
 mysql_database=settings.get("Config", "mysql_database");
 mysql_password=settings.get("Config", "mysql_password");
+
+savedir = settings.get("Config", "savegame_directory"); 
+rankdir = settings.get("Config", "ranklog_directory");
+
 
 # load game status from file.
 loaded_games = {};
@@ -183,19 +185,33 @@ def find_email_address(user_to_find):
 # store game result in database table 'game_results'
 def save_game_result(winner, playerOne, playerTwo):
   print("saving game result: " + winner + "," + playerOne + "," + playerTwo);
-  result = None;
+
+  if (playerOne == playerTwo):
+    print("Ignoring game result.");
+    return;
+
   cursor = None;
   cnx = None;
   try:
     cnx = mysql.connector.connect(user=mysql_user, database=mysql_database, password=mysql_password)
     cursor = cnx.cursor()
+
+    # check if game result has already been stored, for example expiring game when ranklog already read in previously.
+    query = ("select count(*) as count from game_results where playerOne=%(one)s and playerTwo=%(two)s and endDate>= NOW() - INTERVAL 7 DAY")
+    cursor.execute(query, {'one' : playerOne, 'two' : playerTwo});
+    for count in cursor:
+      if (count[0] != 0):
+        print("game result already exists.");
+        return;
+
+    # insert new game result
     query = ("insert ignore into game_results (playerOne, playerTwo, winner, endDate) values (%(playerOne)s, %(playerTwo)s, %(winner)s, NOW())");
     cursor.execute(query, {'playerOne' : playerOne, 'playerTwo' : playerTwo, 'winner' : winner})
     cnx.commit()
   finally:
     cursor.close()
     cnx.close()
-  return result;
+  return;
 
 
 def process_savegames():
@@ -246,7 +262,6 @@ def process_ranklogs():
         
 if __name__ == '__main__':
   print("Freeciv-PBEM processing savegames");
-
   status.start();
 
   while (1):

@@ -348,6 +348,12 @@ function create_new_pbem_game(check_opponent)
         + "the invitation email arrives to " + check_opponent); 
     return;
   }
+
+  if (check_opponent == username) {
+    swal("No playing with yourself please.");
+    return;
+  }
+
   invited_players.push(check_opponent);
 
   $.ajax({

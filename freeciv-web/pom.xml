@@ -153,6 +153,7 @@
                   <jsSourceExclude>libs/Projector.js</jsSourceExclude>
                   <jsSourceExclude>libs/three.min.js</jsSourceExclude>
                   <jsSourceExclude>libs/Detector.js</jsSourceExclude>
+                  <jsSourceExclude>libs/FlyControls.js</jsSourceExclude>
                   <jsSourceExclude>tileset_config*</jsSourceExclude>
                   <jsSourceExclude>tileset_spec*</jsSourceExclude>
                 </jsSourceExcludes>

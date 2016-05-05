@@ -21,11 +21,24 @@ var container;
 var camera, scene, renderer;
 var group;
 var mouseX = 0, mouseY = 0;
+var controls;
+var clock = null;
+var dirLight;
 
 var windowHalfX = window.innerWidth / 2;
 var windowHalfY = window.innerHeight / 2;
 var active_globeview = false;
 var fullmap_canvas = null;
+
+/**************************************************************************
+  Renders the world map on a globe using Three.js, with a loading message.
+**************************************************************************/
+function init_globe_view()
+{
+  $.blockUI({ message: "<h2>Creating 3D globe view of map. Please wait.</h2>" });
+  setTimeout(show_globe_view, 100);
+}
+
 
 /**************************************************************************
   Renders the world map on a globe using Three.js.
@@ -36,6 +49,7 @@ function show_globe_view()
   $("#globe_view_dialog").remove();
   $("<div id='globe_view_dialog'></div>").appendTo("div#game_page");
 
+  // load Three.js dynamically. 
   $.ajax({
     async: false,
     url: "/javascript/libs/three.min.js",
@@ -54,6 +68,11 @@ function show_globe_view()
   $.ajax({
     async: false,
     url: "/javascript/libs/Detector.js",
+    dataType: "script"
+  });
+  $.ajax({
+    async: false,
+    url: "/javascript/libs/FlyControls.js",
     dataType: "script"
   });
 
@@ -130,6 +149,8 @@ function show_globe_view()
   globe_view_init();
   globe_view_animate();
 
+  $.unblockUI();
+
 }
 
 
@@ -151,20 +172,28 @@ function close_globe_view_dialog()
 **************************************************************************/
 function globe_view_init() {
 
+  clock = new THREE.Clock();
+
   container = document.getElementById( 'globe_container' );
   var width = $("#globe_view_dialog").width() - 20;
   var height = $("#globe_view_dialog").height() - 20;
-  if (width > height + 200) width = height + 200; 
+  if (width > height + 350) width = height + 350; 
 
   camera = new THREE.PerspectiveCamera( 60, width / height, 1, 2000 );
-  camera.position.z = 500;
+  camera.position.z = 580;
+
+  controls = new THREE.FlyControls(camera);
+  controls.movementSpeed = 80;
+  controls.domElement = container;
+  controls.rollSpeed = Math.PI / 24;
+  controls.autoForward = false;
+  controls.dragToLook = false;
 
   scene = new THREE.Scene();
+  scene.fog = new THREE.FogExp2( 0x000000, 0.00000025 );
 
   group = new THREE.Group();
   scene.add( group );
-
-  var loader = new THREE.TextureLoader();
 
   var geometry = new THREE.SphereGeometry( 300, 36, 36 );
 
@@ -177,14 +206,15 @@ function globe_view_init() {
 
 
   renderer = Detector.webgl? new THREE.WebGLRenderer(): new THREE.CanvasRenderer();
-  renderer.setClearColor( 0x000000 );
-  renderer.setPixelRatio( window.devicePixelRatio );
+  renderer.setClearColor(0x000000);
+  renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(width, height);
-  container.appendChild( renderer.domElement );
 
-  document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+  container.appendChild(renderer.domElement);
 
-  window.addEventListener( 'resize', onWindowResize, false );
+  document.addEventListener('mousemove', onDocumentMouseMove, false);
+
+  window.addEventListener('resize', onWindowResize, false);
 
 }
 
@@ -195,7 +225,7 @@ function onWindowResize() {
 
   var width = $("#globe_view_dialog").width() - 20;
   var height = $("#globe_view_dialog").height() - 20;
-  if (width > height + 200) width = height + 200;
+  if (width > height + 350) width = height + 350;
 
   windowHalfX = $("#globe_view_dialog").width() / 2;
   windowHalfY = $("#globe_view_dialog").height() / 2;
@@ -235,11 +265,15 @@ function globe_view_animate() {
 **************************************************************************/
 function globe_view_render() {
 
-  camera.position.x += ( mouseX - camera.position.x ) * 0.05;
-  camera.position.y += ( - mouseY - camera.position.y ) * 0.05;
-  camera.lookAt( scene.position );
+  var delta = clock.getDelta();
+
+  //camera.position.x += ( mouseX - camera.position.x ) * 0.05;
+  //camera.position.y += ( - mouseY - camera.position.y ) * 0.05;
+  //camera.lookAt( scene.position );
 
   group.rotation.y -= 0.001;
+
+  controls.update( delta );
 
   renderer.render( scene, camera );
 

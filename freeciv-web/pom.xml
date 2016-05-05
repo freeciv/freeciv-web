@@ -149,6 +149,10 @@
                   <jsSourceExclude>frontpage.js</jsSourceExclude>
                   <jsSourceExclude>libs/jquery.min.js</jsSourceExclude>
                   <jsSourceExclude>libs/bootstrap.min.js</jsSourceExclude>
+                  <jsSourceExclude>libs/CanvasRenderer.js</jsSourceExclude>
+                  <jsSourceExclude>libs/Projector.js</jsSourceExclude>
+                  <jsSourceExclude>libs/three.min.js</jsSourceExclude>
+                  <jsSourceExclude>libs/Detector.js</jsSourceExclude>
                   <jsSourceExclude>tileset_config*</jsSourceExclude>
                   <jsSourceExclude>tileset_spec*</jsSourceExclude>
                 </jsSourceExcludes>

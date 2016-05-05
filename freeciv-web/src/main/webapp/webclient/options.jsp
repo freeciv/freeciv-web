@@ -41,6 +41,10 @@
   <button id="end_button" type="button" class="button setting_button" onClick="window.location='/';" title="Ends the game, and returns to the main page of Freeciv-web." >End Game</button>
 </div>
 
+<div class="main_menu_buttons">
+  <button id="globeview_button" type="button" class="button setting_button" onClick="show_globe_view();" title="Shows the current map in a 3d sphere view using WebGL. (experimental beta-feature!)">Show globe view</button> 	
+</div>	
+
 
 </div>
 

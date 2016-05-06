@@ -76,7 +76,9 @@ function show_globe_view()
     dataType: "script"
   });
 
-  $("#globe_view_dialog").html("<center><div id='globe_container' style='width: 100%; background-color: black;'></div></center>");
+  $("#globe_view_dialog").html("<center><div id='globe_container' style='width: 100%; background-color: black;'></div></center>"
+                               + "<small>Controls: <b>WASD</b> move, <b>R|F</b> up | down, "
+                               + "<b>Q|E</b> roll, <b>up|down</b> pitch, <b>left|right</b> yaw</small>");
 
   $("#globe_view_dialog").attr("title", server_settings['metamessage']['val']);
   $("#globe_view_dialog").dialog({
@@ -176,7 +178,7 @@ function globe_view_init() {
 
   container = document.getElementById( 'globe_container' );
   var width = $("#globe_view_dialog").width() - 20;
-  var height = $("#globe_view_dialog").height() - 20;
+  var height = $("#globe_view_dialog").height() - 26;
   if (width > height + 350) width = height + 350; 
 
   camera = new THREE.PerspectiveCamera( 60, width / height, 1, 2000 );
@@ -224,7 +226,7 @@ function globe_view_init() {
 function onWindowResize() {
 
   var width = $("#globe_view_dialog").width() - 20;
-  var height = $("#globe_view_dialog").height() - 20;
+  var height = $("#globe_view_dialog").height() - 26;
   if (width > height + 350) width = height + 350;
 
   windowHalfX = $("#globe_view_dialog").width() / 2;

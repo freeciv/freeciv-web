@@ -99,7 +99,7 @@ Freeciv-web can be built automatically using Docker https://www.docker.com/
 Note that building Freeciv-web with Docker is still in beta, and not actually working at the moment.
 This was tested using Docker v1.10.0 with Ubuntu 14.04 as the base image.
 Also see the [Dockerfile](Dockerfile) for more information.
-(Update: As of May 2006 the Docker setup is out of date. please use Vagrant instead.)
+(Update: As of May 2016 the Docker setup is out of date. please use Vagrant instead.)
 
 1. Install Docker Toolbox version v1.10.0 or later, then get the Freeciv-web source code like this:
  ```bash

@@ -836,10 +836,10 @@ sound		= "b_sdi_defense"
 sound_alt	= "b_generic"
 helptext	= _("\
 Protects a city and its environs (up to 2 tiles away) from attacks\
- by Nuclear units. A Nuclear unit attacking a city with SDI Defense,\
- or attacking a unit (or deliberately exploded) within range, is shot\
- down and simply has no effect. Also, doubles defense for units in\
- the city against non-nuclear missiles.\
+ by other nations' Nuclear units. A Nuclear unit not owned by you or a\
+ teammate which attacks a city with SDI Defense, or attacks a unit (or is\
+ deliberately exploded) within range, is shot down and simply has no effect.\
+ Also, doubles defense for units in the city against non-nuclear missiles.\
 ")
 ; NOTE:
 ; Civ2 does not document the "Unit_Defend"/"Missile" aspect; does it apply or not?

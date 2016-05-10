@@ -37,7 +37,8 @@ var DS_LAST = 7;
 
 /* The plr_flag_id enum. */
 var PLRF_AI = 0;
-var PLRF_COUNT = 1;
+var PLRF_SCENARIO_RESERVED = 1;
+var PLRF_COUNT = 2;
 
 function valid_player_by_number(playerno)
 {

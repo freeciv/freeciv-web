@@ -2017,9 +2017,10 @@ If a foreign unit is alone on a tile, you may attempt to bribe it\
 Diplomats can also perform a number of actions in another player's\
  city, although each Diplomat may attempt only one action. Most of\
  these actions have a chance of failure. Also, any enemy Diplomats or\
- Spies in the city will oppose hostile actions; in this case, either\
- your unit or the defending unit will die. If the defending unit dies,\
- you lose one movement point and may try again.\
+ Spies in the city will oppose hostile actions, as will the enemy Leader\
+ in games with leaders; in this case, either your unit or the defending\
+ unit will die (if you go up against the Leader you will always die). If\
+ the defending unit dies, you lose one movement point and may try again.\
 "), _("\
 The actions available to Diplomats in a city are:\
 "), _("\

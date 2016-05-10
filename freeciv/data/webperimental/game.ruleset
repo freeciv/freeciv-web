@@ -45,6 +45,7 @@ before contact.\n\
 - There's only one barbarian nation, attacking from both land and sea.\n\
 - A player that knows Electricity has no fog of war inside his borders.\n\
 - Foot soldiers can peacefully expel foreign civilian units from your terrain.\n\
+- It is possible to establish an embassy while inside a ship.\n\
 \n\
 This ruleset is still in development. If playing it makes you think that \
 a rule should change go to the Freeciv-web board at \
@@ -323,7 +324,6 @@ action       = "Establish Embassy"
 actor_reqs    =
     { "type",   "name", "range"
       "UnitFlag", "Diplomat", "Local"
-      "UnitState", "OnLivableTile", "Local"
       "MinMoveFrags", "1", "Local"
     }
 target_reqs  =
@@ -337,7 +337,6 @@ actor_reqs    =
     { "type",   "name", "range"
       "UnitType", "Explorer", "Local"
       "Tech", "Writing", "Player"
-      "UnitState", "OnLivableTile", "Local"
       "MinMoveFrags", "1", "Local"
     }
 target_reqs  =

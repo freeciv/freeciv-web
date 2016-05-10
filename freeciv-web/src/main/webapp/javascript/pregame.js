@@ -424,7 +424,10 @@ function pregame_settings()
   if (server_settings['size'] != null
       && server_settings['size']['val'] != null) {
     $("#mapsize").val(server_settings['size']['val']);
+  }
 
+  if (server_settings['killstack'] != null
+      && server_settings['killstack']['val'] != null) {
     $("#killstack_setting").prop("checked",
                                  server_settings['killstack']['val']);
     $("#killstack_area").prop("title",

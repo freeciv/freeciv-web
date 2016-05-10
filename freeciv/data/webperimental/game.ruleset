@@ -44,6 +44,7 @@ before contact.\n\
 - The Zone of Control rules have been turned off.\n\
 - There's only one barbarian nation, attacking from both land and sea.\n\
 - A player that knows Electricity has no fog of war inside his borders.\n\
+- Foot soldiers can peacefully expel foreign civilian units from your terrain.\n\
 \n\
 This ruleset is still in development. If playing it makes you think that \
 a rule should change go to the Freeciv-web board at \
@@ -575,6 +576,24 @@ actor_reqs    =
       "UnitFlag", "AddToCity", "Local", TRUE
       "DiplRel", "Is foreign", "Local", FALSE
       "MinMoveFrags", "1", "Local", TRUE
+    }
+
+[actionenabler_border_police]
+action = "Expel Unit"
+actor_reqs    =
+    { "type",          "name",           "range", "present"
+      "UnitFlag",      "BorderPolice",   "Local", TRUE
+      "UnitState",     "OnDomesticTile", "Local", TRUE
+      "DiplRel",       "Is foreign",     "Local", TRUE
+      "DiplRel",       "Team",           "Local", FALSE
+      "DiplRel",       "Alliance",       "Local", FALSE
+      "DiplRel",       "War",            "Local", FALSE
+      "MinMoveFrags",  "1",              "Local", TRUE
+    }
+target_reqs    =
+    { "type",          "name",           "range", "present"
+      "UnitFlag",      "Expellable",     "Local", TRUE
+      "UnitState",     "OnDomesticTile", "Local", FALSE
     }
 
 [actionenabler_nuke]

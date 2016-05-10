@@ -26,6 +26,8 @@ format_version=10
 ; helptxt       = displayed in the help for units with this flag (optional)
 flags =
   { "name", "helptxt"
+    _("BorderPolice"), _("Can peacefully expel certain foreign units.")
+    _("Expellable"), _("Can be peacefully expelled from foreign tiles.")
     _("Airbase")
     _("Transform")
     _("AirAttacker"), _("Very bad at attacking AEGIS.")
@@ -412,7 +414,8 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 0
-flags         = "Settlers", "Infra", "Cant_Fortify", "NonMil", "HasNoZOC", "AddToCity", "Cities"
+flags         = "Settlers", "Infra", "Cant_Fortify", "NonMil", "HasNoZOC",
+                "AddToCity", "Cities", "Expellable"
 ; No veteran levels (level name is never displayed)
 veteran_names = _("green")
 veteran_raise_chance = 0
@@ -457,7 +460,8 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "Settlers", "Infra", "Cant_Fortify", "NonMil", "HasNoZOC", "Airbase"
+flags         = "Settlers", "Infra", "Cant_Fortify", "NonMil", "HasNoZOC",
+                "Airbase", "Expellable"
 ; No veteran levels (level name is never displayed)
 veteran_names = _("green")
 veteran_raise_chance = 0
@@ -519,7 +523,8 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "Settlers", "Infra", "Cant_Fortify", "NonMil", "HasNoZOC", "Transform", "Airbase"
+flags         = "Settlers", "Infra", "Cant_Fortify", "NonMil", "HasNoZOC",
+                "Transform", "Airbase", "Expellable"
 ; No veteran levels (level name is never displayed)
 veteran_names = _("green")
 veteran_raise_chance = 0
@@ -569,7 +574,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = ""
+flags         = "BorderPolice"
 roles         = "DefendOk", "DefendOkStartUnit", "FirstBuild"
 helptext      = _("\
 This unit may be built from the start of the game.  It is the\
@@ -601,7 +606,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = ""
+flags         = "BorderPolice"
 roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild"
 helptext      = _("\
 The Phalanx is armored infantry, suitable for defending your cities.\
@@ -632,7 +637,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = ""
+flags         = "BorderPolice"
 roles         = "DefendOk", "DefendOkStartUnit"
 helptext      = _("\
 Archers fight with bows and arrows and have a good offensive\
@@ -664,7 +669,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = ""
+flags         = "BorderPolice"
 roles         = "DefendOk", "DefendOkStartUnit", "Hut", "BarbarianBuild", "BarbarianSea"
 helptext      = _("\
 Legions are heavily armed and well disciplined infantry\
@@ -700,7 +705,7 @@ bonuses       =
    { "flag", "type", "value"
      "Horse", "DefenseMultiplier", 1
    }
-flags         = ""
+flags         = "BorderPolice"
 roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild"
 helptext      = _("\
 Equipped with long pikes, Pikemen replaces Phalanx\
@@ -732,7 +737,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = ""
+flags         = "BorderPolice"
 roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild", "HutTech",
                 "BarbarianTech", "BarbarianBuildTech", "BarbarianSeaTech"
 helptext      = _("\
@@ -766,7 +771,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "IgTer", "IgZOC"
+flags         = "IgTer", "IgZOC", "BorderPolice"
 roles         = "DefendGood", "DefendGoodStartUnit", "Partisan", "BarbarianTech"
 helptext      = _("\
 Partisans are guerilla fighters who are experts\
@@ -806,7 +811,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "IgTer"
+flags         = "IgTer", "BorderPolice"
 roles         = "DefendGood", "DefendGoodStartUnit"
 helptext      = _("\
 Alpine Troops are highly mobile units as well as\
@@ -838,7 +843,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = ""
+flags         = "BorderPolice"
 roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild"
 helptext      = _("\
 Riflemen are World War-era infantry, very good\
@@ -870,7 +875,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "Marines"
+flags         = "Marines", "BorderPolice"
 roles         = "DefendOk", "DefendOkStartUnit", "BarbarianSeaTech"
 helptext      = _("\
 Marines are infantry who are experts at marine warfare.\
@@ -901,7 +906,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "Paratroopers"
+flags         = "Paratroopers", "BorderPolice"
 roles         = "DefendOk", "DefendOkStartUnit"
 helptext      = _("\
 Paratroopers are experts at airborne attacks. \
@@ -1978,7 +1983,7 @@ uk_happy      = 0
 uk_shield     = 0
 uk_food       = 0
 uk_gold       = 0
-flags         = "Diplomat", "IgZOC", "NonMil", "HasNoZOC"
+flags         = "Diplomat", "IgZOC", "NonMil", "HasNoZOC", "Expellable"
 veteran_names =
 ; /* TRANS: diplomatic rank. */
 ; /* TRANS: Unless translated, the last character in "attache" should be */
@@ -2088,7 +2093,8 @@ uk_happy      = 0
 uk_shield     = 0
 uk_food       = 0
 uk_gold       = 0
-flags         = "Diplomat", "IgZOC", "NonMil", "HasNoZOC", "Spy"
+flags         = "Diplomat", "IgZOC", "NonMil", "HasNoZOC", "Spy",
+                "Expellable"
 veteran_names =
 ; /* TRANS: Spy veteran level */
   _("?spy_level:informant"),
@@ -2157,7 +2163,8 @@ uk_happy      = 0
 uk_shield     = 0
 uk_food       = 0
 uk_gold       = 0
-flags         = "TradeRoute", "HelpWonder", "IgZOC", "NonMil", "HasNoZOC"
+flags         = "TradeRoute", "HelpWonder", "IgZOC", "NonMil", "HasNoZOC",
+                "Expellable"
 roles         = ""
 helptext      = _("\
 A Caravan carries goods or material for trading with distant cities\
@@ -2209,7 +2216,8 @@ uk_happy      = 0
 uk_shield     = 0
 uk_food       = 0
 uk_gold       = 0
-flags         = "TradeRoute", "HelpWonder", "IgZOC", "NonMil", "HasNoZOC"
+flags         = "TradeRoute", "HelpWonder", "IgZOC", "NonMil", "HasNoZOC",
+                "Expellable"
 roles         = ""
 helptext      = _("\
 The Freight unit replaces the Caravan, and moves at twice the speed.\
@@ -2240,7 +2248,7 @@ uk_happy      = 0
 uk_shield     = 0
 uk_food       = 0
 uk_gold       = 0
-flags         = "IgTer", "IgZOC", "NonMil", "HasNoZOC"
+flags         = "IgTer", "IgZOC", "NonMil", "HasNoZOC", "Expellable"
 roles         = "Explorer", "ExplorerStartUnit"
 helptext      = _("\
 Explorers are brave individuals that are very useful for\

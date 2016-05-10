@@ -377,6 +377,8 @@ function pregame_settings()
 	  "<tr class='not_pbem' title='Enables score graphs for all players, showing score, population, techs and more."+
           " This will lead to information leakage about other players.'><td>Score graphs</td>" +
           "<td><input type='checkbox' name='scorelog_setting' id='scorelog_setting' checked>Enable score graphs</td></tr>" +
+    "<tr id='killstack_area'><td id='killstack_label'></td>" +
+          "<td><input type='checkbox' id='killstack_setting'>Enable killstack</td></tr>" +
 	  "<tr title='Method used to generate map'><td>Map generator:</td>" +
 	  "<td><select name='generator' id='generator'>" +
 	  "<option value='random'>Fully random height</option>" +
@@ -422,6 +424,13 @@ function pregame_settings()
   if (server_settings['size'] != null
       && server_settings['size']['val'] != null) {
     $("#mapsize").val(server_settings['size']['val']);
+
+    $("#killstack_setting").prop("checked",
+                                 server_settings['killstack']['val']);
+    $("#killstack_area").prop("title",
+                              server_settings['killstack']['extra_help']);
+    $("#killstack_label").prop("innerHTML",
+                              server_settings['killstack']['short_help']);
   }
 
   if (server_settings['metamessage'] != null
@@ -559,6 +568,14 @@ function pregame_settings()
       send_message("/set scorelog enabled");
     } else {
       send_message("/set scorelog disabled");
+    }
+  });
+
+  $('#killstack_setting').change(function() {
+    if ($('#killstack_setting').prop('checked')) {
+      send_message("/set killstack enabled");
+    } else {
+      send_message("/set killstack disabled");
     }
   });
 

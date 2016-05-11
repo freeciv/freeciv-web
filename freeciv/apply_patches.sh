@@ -26,10 +26,10 @@
 # CardinalityCheckOnDemand is backport of Freeciv patch #7126 (SVN r32462)
 # TileExtrasSafe is backport of Freeciv patch #7127 (SVN r32475)
 # NoNonnull is backport of Freeciv patch #7156 (SVN r32514)
+# ScorefileWeb is Freeciv patch #7177 (SVN r32570)
+# serverside_extra_assign is Freeciv patch #7178 (SVN r32585)
 # ClassBonusRoadsCache is backport of Freeciv patch #7176 (SVN r32612)
 # win_chance includes 'Chance to win' in Freeciv-web map tile popup.
-# ScorefileWeb is Freeciv patch #7177
-# serverside_extra_assign is Freeciv patch #7178
 # metamessage_setting is Freeciv bug #24415
 # disable_global_warming is Freeciv bug #24418
 

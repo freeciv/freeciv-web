@@ -1,0 +1,18 @@
+diff -Nurd -X.diff_ignore freeciv/m4/debug.m4 freeciv/m4/debug.m4
+--- freeciv/m4/debug.m4	2015-12-17 08:22:29.600455666 +0200
++++ freeciv/m4/debug.m4	2016-04-26 09:36:26.383033390 +0300
+@@ -49,12 +49,12 @@
+   AC_DEFINE([LUA_USE_APICHECK], [1], [Lua Api checks])
+ 
+   FC_C_FLAGS([-Werror -Wmissing-prototypes -Wmissing-declarations \
+-              -Wformat -Wformat-security -Wnested-externs \
++              -Wformat -Wformat-security -Wnested-externs -Wno-nonnull-compare \
+               -Wshadow],
+              [], [EXTRA_DEBUG_CFLAGS])
+   if test "x$cxx_works" = "xyes" ; then
+     FC_CXX_FLAGS([-Werror -Wmissing-prototypes -Wmissing-declarations \
+-                  -Wformat -Wformat-security],
++                  -Wformat -Wformat-security -Wno-nonnull-compare],
+                  [], [EXTRA_DEBUG_CXXFLAGS])
+   fi
+ 

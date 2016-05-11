@@ -1,0 +1,99 @@
+diff -Nurd -X.diff_ignore freeciv/common/map.c freeciv/common/map.c
+--- freeciv/common/map.c	2016-04-25 02:24:06.411661577 +0300
++++ freeciv/common/map.c	2016-04-25 12:33:13.695079321 +0300
+@@ -807,7 +807,7 @@
+   cost = tile_terrain(t2)->movement_cost * SINGLE_MOVE;
+   ri = restrict_infra(pplayer, t1, t2);
+ 
+-  extra_type_by_cause_iterate(EC_ROAD, pextra) {
++  extra_type_list_iterate(pclass->cache.bonus_roads, pextra) {
+     struct road_type *proad = extra_road_get(pextra);
+ 
+     /* We check the destination tile first, as that's
+@@ -815,18 +815,14 @@
+      * If can avoid inner loop about integrating roads
+      * completely if the destination road has too high cost. */
+ 
+-    if (road_provides_move_bonus(proad)
+-        && cost > proad->move_cost
++    if (cost > proad->move_cost
+         && (!ri || road_has_flag(proad, RF_UNRESTRICTED_INFRA))
+-        && tile_has_extra(t2, pextra)
+-        && (!pclass
+-            || is_native_extra_to_uclass(pextra, pclass))) {
++        && tile_has_extra(t2, pextra)) {
+       extra_type_list_iterate(proad->integrators, iextra) {
+         /* We have no unrestricted infra related check here,
+          * destination road is the one that counts. */
+         if (tile_has_extra(t1, iextra)
+-            && (!pclass
+-                || is_native_extra_to_uclass(iextra, pclass))) {
++            && is_native_extra_to_uclass(iextra, pclass)) {
+           if (proad->move_mode == RMM_FAST_ALWAYS) {
+             cost = proad->move_cost;
+           } else {
+@@ -866,7 +862,7 @@
+         }
+       } extra_type_list_iterate_end;
+     }
+-  } extra_type_by_cause_iterate_end;
++  } extra_type_list_iterate_end;
+ 
+   /* UTYF_IGTER units have a maximum move cost per step. */
+   if (utype_has_flag(punittype, UTYF_IGTER) && MOVE_COST_IGTER < cost) {
+diff -Nurd -X.diff_ignore freeciv/common/unittype.c freeciv/common/unittype.c
+--- freeciv/common/unittype.c	2016-04-22 16:32:51.660829281 +0300
++++ freeciv/common/unittype.c	2016-04-25 12:34:16.126944671 +0300
+@@ -1568,6 +1568,7 @@
+     unit_classes[i].item_number = i;
+     unit_classes[i].cache.refuel_bases = NULL;
+     unit_classes[i].cache.native_tile_extras = NULL;
++    unit_classes[i].cache.bonus_roads = NULL;
+     unit_classes[i].cache.subset_movers = NULL;
+     unit_classes[i].helptext = NULL;
+   }
+@@ -1589,6 +1590,10 @@
+       extra_type_list_destroy(unit_classes[i].cache.native_tile_extras);
+       unit_classes[i].cache.native_tile_extras = NULL;
+     }
++    if (unit_classes[i].cache.bonus_roads != NULL) {
++      extra_type_list_destroy(unit_classes[i].cache.bonus_roads);
++      unit_classes[i].cache.bonus_roads = NULL;
++    }
+     if (unit_classes[i].cache.subset_movers != NULL) {
+       unit_class_list_destroy(unit_classes[i].cache.subset_movers);
+     }
+@@ -1750,16 +1755,22 @@
+ {
+   pclass->cache.refuel_bases = extra_type_list_new();
+   pclass->cache.native_tile_extras = extra_type_list_new();
++  pclass->cache.bonus_roads = extra_type_list_new();
+   pclass->cache.subset_movers = unit_class_list_new();
+ 
+   extra_type_iterate(pextra) {
+     if (is_native_extra_to_uclass(pextra, pclass)) {
++      struct road_type *proad = extra_road_get(pextra);
++
+       if (extra_has_flag(pextra, EF_REFUEL)) {
+         extra_type_list_append(pclass->cache.refuel_bases, pextra);
+       }
+       if (extra_has_flag(pextra, EF_NATIVE_TILE)) {
+         extra_type_list_append(pclass->cache.native_tile_extras, pextra);
+       }
++      if (proad != NULL && road_provides_move_bonus(proad)) {
++        extra_type_list_append(pclass->cache.bonus_roads, pextra);
++      }
+     }
+   } extra_type_iterate_end;
+ 
+diff -Nurd -X.diff_ignore freeciv/common/unittype.h freeciv/common/unittype.h
+--- freeciv/common/unittype.h	2016-04-20 22:13:55.171649559 +0300
++++ freeciv/common/unittype.h	2016-04-25 12:22:57.436449803 +0300
+@@ -139,6 +139,7 @@
+   struct {
+     struct extra_type_list *refuel_bases;
+     struct extra_type_list *native_tile_extras;
++    struct extra_type_list *bonus_roads;
+     struct unit_class_list *subset_movers;
+   } cache;
+ };

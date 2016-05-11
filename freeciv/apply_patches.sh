@@ -4,28 +4,35 @@
 # freeciv_segfauls_fix is a workaround some segfaults in the Freeciv server. Freeciv bug #23884.
 # message_escape is a patch for protecting against script injection in the message texts.
 # tutorial_ruleset changes the ruleset of the tutorial to one supported by Freeciv-web.
+# MoveCostsFuncHasRoadToHasExtra is backport of Freeciv patch #6722 (SVN r31220)
 # ruleset-capability will get obsolete by Freeciv patch #6791 (SVN r31448)
 # missing_trade_partner is Freeciv patch #6814 (SVN r31453)
 # spaceship_post_launch is Freeciv bug #24309 (SVN r31476)
 # metamessage is Freeciv patch #6876 (SVN r31682)
 # 0001-JSON-specify-delta-vector-field-address is Freeciv bug #24354 (SVN r31707), included
 #     here just to provide baseline that other patches apply directly to
+# MapMoveCostInline is backport of Freeciv patch #6934 (SVN r31886)
 # fragement is comment changes like SVN r31952, included here just to provide baseline that
 #     other patches apply directly to
 # Remove-redundant-canceled-orders-notification is Freeciv bug #24414 (SVN r31956)
 # settings_access_level_metamessage is replaced by Freeciv patch #6967 (SVN r31962)
+# AllowIextraInBetween is Freeciv bug #24395 (SVN r31970)
 # GenericPacketsGen24421 is json protocol change, backported from Freeciv bug #24421 (SVN r31996)
 # WarningsBase fixes compiler warnings from the code that gets properly replaced by GenericPacketsGen24421
 # ArrayDimensions is json protocol change, backported from Freeciv bug #24419 (SVN r32001)
+# InlineGenlistNavigation is backport of Freeciv patch #6992 (SVN r32006)
 # libtoolize_no_symlinks will get obsolete by Freeciv patch #7001 (SVN r32156)
 # CommentLineOfItsOwn is backport of Freeciv patch #7000 (SVN r32307)
+# CardinalityCheckOnDemand is backport of Freeciv patch #7126 (SVN r32462)
+# TileExtrasSafe is backport of Freeciv patch #7127 (SVN r32475)
+# ClassBonusRoadsCache is backport of Freeciv patch #7176 (SVN r32612)
 # win_chance includes 'Chance to win' in Freeciv-web map tile popup.
 # ScorefileWeb is Freeciv patch #7177
 # serverside_extra_assign is Freeciv patch #7178
 # metamessage_setting is Freeciv bug #24415
 # disable_global_warming is Freeciv bug #24418
 
-PATCHLIST="WarningsBase freeciv_web_packets_def_changes caravan_fixes1 city_fixes city_impr_fix2 city-naming-change city_fixes2 citytools_changes metachange text_fixes unithand-change2 current_research_cost freeciv-svn-webclient-changes init_lists_disable goto_fcweb misc_devversion_sync tutorial_ruleset savegame maphand_ch serverside_extra_assign libtoolize_no_symlinks ai_traits_crash ruleset-capability worklists server_password barbarian-names activity_null_check add_rulesets message_escape freeciv_segfauls_fix scorelog_filenames scorelog_set_to_client missing_trade_partner spaceship_post_launch metamessage settings_access_level_metamessage metamessage_setting disable_global_warming 0001-JSON-specify-delta-vector-field-address fragement GenericPacketsGen24421 ArrayDimensions CommentLineOfItsOwn Remove-redundant-canceled-orders-notification win_chance ScorefileWeb"
+PATCHLIST="WarningsBase freeciv_web_packets_def_changes caravan_fixes1 city_fixes city_impr_fix2 city-naming-change city_fixes2 citytools_changes metachange text_fixes unithand-change2 current_research_cost freeciv-svn-webclient-changes init_lists_disable goto_fcweb misc_devversion_sync tutorial_ruleset savegame maphand_ch serverside_extra_assign libtoolize_no_symlinks ai_traits_crash ruleset-capability worklists server_password barbarian-names activity_null_check add_rulesets message_escape freeciv_segfauls_fix scorelog_filenames scorelog_set_to_client missing_trade_partner spaceship_post_launch metamessage settings_access_level_metamessage metamessage_setting disable_global_warming 0001-JSON-specify-delta-vector-field-address fragement GenericPacketsGen24421 ArrayDimensions CommentLineOfItsOwn Remove-redundant-canceled-orders-notification win_chance ScorefileWeb MoveCostsFuncHasRoadToHasExtra MapMoveCostInline AllowIextraInBetween CardinalityCheckOnDemand ClassBonusRoadsCache InlineGenlistNavigation TileExtrasSafe"
 
 apply_patch() {
   echo "*** Applying $1.patch ***"

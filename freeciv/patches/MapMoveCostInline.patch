@@ -1,0 +1,92 @@
+diff -Nurd -X.diff_ignore freeciv/common/map.c freeciv/common/map.c
+--- freeciv/common/map.c	2016-02-03 19:10:05.573725387 +0200
++++ freeciv/common/map.c	2016-02-09 07:39:59.317252656 +0200
+@@ -699,13 +699,13 @@
+   the tiles are assumed to be adjacent, and the (x,y)
+   values are used only to get the river bonus correct.
+ 
+-  May also be used with punit==NULL, in which case punit
++  May also be used with punit == NULL, in which case punit
+   tests are not done (for unit-independent results).
+ ***************************************************************/
+-static int tile_move_cost_ptrs(const struct unit *punit,
+-                               const struct unit_type *punittype,
+-                               const struct player *pplayer,
+-                               const struct tile *t1, const struct tile *t2)
++int tile_move_cost_ptrs(const struct unit *punit,
++                        const struct unit_type *punittype,
++                        const struct player *pplayer,
++                        const struct tile *t1, const struct tile *t2)
+ {
+   const struct unit_class *pclass = utype_class(punittype);
+   int cost;
+@@ -835,26 +835,6 @@
+ }
+ 
+ /***************************************************************
+-  The cost to move punit from where it is to tile x,y.
+-  It is assumed the move is a valid one, e.g. the tiles are adjacent.
+-***************************************************************/
+-int map_move_cost_unit(struct unit *punit, const struct tile *ptile)
+-{
+-  return tile_move_cost_ptrs(punit, unit_type_get(punit), unit_owner(punit),
+-                             unit_tile(punit), ptile);
+-}
+-
+-/***************************************************************
+-  Move cost between two tiles
+-***************************************************************/
+-int map_move_cost(const struct player *pplayer,
+-                  const struct unit_type *punittype,
+-                  const struct tile *src_tile, const struct tile *dst_tile)
+-{
+-  return tile_move_cost_ptrs(NULL, punittype, pplayer, src_tile, dst_tile);
+-}
+-
+-/***************************************************************
+   Are two tiles adjacent to each other.
+ ***************************************************************/
+ bool is_tiles_adjacent(const struct tile *tile0, const struct tile *tile1)
+diff -Nurd -X.diff_ignore freeciv/common/map.h freeciv/common/map.h
+--- freeciv/common/map.h	2016-02-03 19:10:05.573725387 +0200
++++ freeciv/common/map.h	2016-02-09 07:42:51.956917684 +0200
+@@ -268,11 +268,34 @@
+ bool is_tiles_adjacent(const struct tile *ptile0, const struct tile *ptile1);
+ bool is_move_cardinal(const struct tile *src_tile,
+ 		      const struct tile *dst_tile);
+-int map_move_cost_unit(struct unit *punit, const struct tile *ptile);
+-int map_move_cost(const struct player *pplayer,
+-                  const struct unit_type *punittype,
+-                  const struct tile *src_tile,
+-                  const struct tile *dst_tile);
++
++int tile_move_cost_ptrs(const struct unit *punit,
++                        const struct unit_type *punittype,
++                        const struct player *pplayer,
++                        const struct tile *t1, const struct tile *t2);
++
++/***************************************************************
++  The cost to move punit from where it is to tile x,y.
++  It is assumed the move is a valid one, e.g. the tiles are adjacent.
++***************************************************************/
++static inline int map_move_cost_unit(struct unit *punit,
++                                     const struct tile *ptile)
++{
++  return tile_move_cost_ptrs(punit, unit_type_get(punit), unit_owner(punit),
++                             unit_tile(punit), ptile);
++}
++
++/***************************************************************
++  Move cost between two tiles
++***************************************************************/
++static inline int map_move_cost(const struct player *pplayer,
++                                const struct unit_type *punittype,
++                                const struct tile *src_tile,
++                                const struct tile *dst_tile)
++{
++  return tile_move_cost_ptrs(NULL, punittype, pplayer, src_tile, dst_tile);
++}
++
+ bool is_safe_ocean(const struct tile *ptile);
+ bv_extras get_tile_infrastructure_set(const struct tile *ptile,
+                                       int *count);

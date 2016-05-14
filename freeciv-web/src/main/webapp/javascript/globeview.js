@@ -37,6 +37,7 @@ function init_globe_view()
 {
   $.blockUI({ message: "<h2>Creating 3D globe view of map. Please wait.</h2>" });
   setTimeout(show_globe_view, 100);
+  keyboard_input = false;
 }
 
 
@@ -76,7 +77,7 @@ function show_globe_view()
     dataType: "script"
   });
 
-  $("#globe_view_dialog").html("<center><div id='globe_container' style='width: 100%; background-color: black;'></div></center>"
+  $("#globe_view_dialog").html("<center><div id='globe_container' style='width: 100%; background-color: #0a0a0a;'></div></center>"
                                + "<small>Controls: <b>WASD</b> move, <b>R|F</b> up | down, "
                                + "<b>Q|E</b> roll, <b>up|down</b> pitch, <b>left|right</b> yaw</small>");
 
@@ -153,6 +154,13 @@ function show_globe_view()
 
   $.unblockUI();
 
+  // prevent array keys from scrolling window. 
+  window.addEventListener("keydown", function(e) {
+    if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+        e.preventDefault();
+    }
+  }, false);
+
 }
 
 
@@ -166,7 +174,8 @@ function close_globe_view_dialog()
   set_default_mapview_active();
   center_tile_mapcanvas(map_pos_to_tile(map['xsize']/2, map['ysize']/2));
   setTimeout(set_default_mapview_active, 1000);
-
+  keyboard_input = true;
+  $(".setting_button").tooltip("destroy");
 }
 
 /**************************************************************************
@@ -208,7 +217,7 @@ function globe_view_init() {
 
 
   renderer = Detector.webgl? new THREE.WebGLRenderer(): new THREE.CanvasRenderer();
-  renderer.setClearColor(0x000000);
+  renderer.setClearColor(0x0a0a0a);
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(width, height);
 
@@ -268,10 +277,6 @@ function globe_view_animate() {
 function globe_view_render() {
 
   var delta = clock.getDelta();
-
-  //camera.position.x += ( mouseX - camera.position.x ) * 0.05;
-  //camera.position.y += ( - mouseY - camera.position.y ) * 0.05;
-  //camera.lookAt( scene.position );
 
   group.rotation.y -= 0.001;
 

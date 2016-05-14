@@ -35,10 +35,12 @@ casper.test.begin('Test of Freeciv-proxy on port 7001.', 2, function suite(test)
 
 
 casper.test.begin('Test of Freeciv-web frontpage on localhost port 80 (nginx).', 3, function suite(test) {
-    casper.start("http://localhost", function() {
-        test.assertHttpStatus(200);
-        test.assertTitleMatch(/Freeciv-web/, 'Freeciv-web title is present');
-        test.assertExists('#single-button');
+    casper.start("http://localhost", function() {});
+
+    casper.waitForText("Freeciv-web", function() {
+       test.assertHttpStatus(200);
+       test.assertTitleMatch(/Freeciv-web/, 'Freeciv-web title is present');
+       test.assertExists('#single-button');
     });
 
     casper.run(function() {
@@ -91,6 +93,7 @@ casper.test.begin('Test starting new Freeciv-web game', 11, function suite(test)
 
     casper.thenEvaluate(function() {
       /* Starting new game automatically from Javascript.*/
+      dialog_close_trigger = "button";
       if (validate_username()) {
         $("#dialog").dialog('close');
         setTimeout("pregame_start_game();", 3000);

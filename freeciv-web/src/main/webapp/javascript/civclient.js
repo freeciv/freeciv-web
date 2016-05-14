@@ -47,6 +47,7 @@ var audio_enabled = false;
 
 var last_turn_change_time = 0;
 var turn_change_elapsed = 0;
+var dialog_close_trigger = "";
 
 /**************************************************************************
  Main starting point for Freeciv-web
@@ -427,15 +428,28 @@ function show_intro_dialog(title, message) {
 			bgiframe: true,
 			modal: true,
 			width: is_small_screen() ? "80%" : "60%",
+			beforeClose: function( event, ui ) {
+			  // if intro dialog is closed, then check the username and connect to the server.
+			  if (dialog_close_trigger != "button") {
+			    if (validate_username()) {
+			      if (!is_touch_device()) $("#pregame_text_input").focus();
+			      return true;
+			    } else {
+			      return false;
+			    }
+			  }
+			},
 			buttons:
 			{
 				"Start Game" : function() {
+					dialog_close_trigger = "button";
 					autostart = true;
 					if (validate_username()) {
 						$("#dialog").dialog('close');
 					}
 				},
 				  "Customize Game": function() {
+					dialog_close_trigger = "button";
 					if (validate_username()) {
 					  if (!is_touch_device()) $("#pregame_text_input").focus();
 					  $("#dialog").dialog('close');

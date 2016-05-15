@@ -278,7 +278,7 @@ function globe_view_render() {
 
   var delta = clock.getDelta();
 
-  group.rotation.y -= 0.0005;
+  group.rotation.y -= 0.0001;
 
   controls.update(delta);
 

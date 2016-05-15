@@ -108,21 +108,36 @@ body {
 
 #nation_list {
   float: left; 
-  height:400px; 
+  height:590px; 
   overflow: auto; 
-  width: 35%;
+  width: 29%;
 }
 
 #nation_legend {
   float: left; 
-  height: 380px; 
+  height: 500px; 
   overflow: auto; 
   padding: 10px; 
-  width: 35%;
+  width: 22%;
+  font-size: 120%;
+  margin-left: 10px;
 }
 
 #select_nation_flag {
   float: right;
+}
+
+#nation_flag_choice {
+  width = 25%;
+}
+
+#nation_style_choices {
+  width: 13%;
+  padding-left: 20px;
+  height: 590px;
+  overflow: auto;
+  float: left;
+  background-color: rgba(100,100,100,0.3);
 }
 
 .nation_choice {
@@ -132,7 +147,7 @@ body {
   cursor:hand;
   font-weight: bold;
   font-size: 1.1em; 
-
+  min-height: 33px;
 }
 
 #nation_autocomplete_box {
@@ -206,7 +221,7 @@ body {
 }
 
 .pick_nation_flags {
-  width: 40px;
+  width: 50px;
   float: left;
   padding-right: 3px;
 }
@@ -219,4 +234,8 @@ body {
 #pregame_top_content {
   height: 92px;
   width: 100%;
+}
+
+#pick_nation_dialog {
+  overflow: auto;
 }

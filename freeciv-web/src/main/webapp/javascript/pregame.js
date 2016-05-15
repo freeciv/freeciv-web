@@ -19,6 +19,7 @@
 
 var observing = false;
 var chosen_nation = -1;
+var chosen_style = -1;
 var choosing_player = -1;
 var ai_skill_level = 2;
 var nation_select_id = -1;
@@ -205,7 +206,7 @@ function update_player_info_pregame()
 
 
 /****************************************************************************
-  ...
+  Shows the pick nation dialog.
 ****************************************************************************/
 function pick_nation(player_id)
 {
@@ -218,6 +219,8 @@ function pick_nation(player_id)
   var nations_html = "<div id='nation_heading'><span>Select nation for " + pplayer['name'] + ":</span> <br>"
                   + "<input id='nation_autocomplete_box' type='text' size='20'>"
 		  + "<div id='nation_choice'></div></div> <div id='nation_list'> ";
+
+  /* prepare a list of flags and nations. */
   var nation_name_list = [];
   for (var nation_id in nations) {
     var pnation = nations[nation_id];
@@ -230,14 +233,16 @@ function pick_nation(player_id)
     }
   }
 
-  nations_html += "</div><div id='nation_legend'></div><div id='select_nation_flag'></div>";
+  nations_html += "</div><div id='nation_style_choices'></div>"
+               + "<div id='nation_legend'></div><div id='select_nation_flag'></div>";
 
   $("#pick_nation_dialog").html(nations_html);
-  $("#pick_nation_dialog").attr("title", "Pick nation");
+  $("#pick_nation_dialog").attr("title", "What Nation Will You Be?");
   $("#pick_nation_dialog").dialog({
 			bgiframe: true,
 			modal: true,
-			width: is_small_screen() ? "90%" : "60%",
+			width: is_small_screen() ? "99%" : "80%",
+                        height: $(window).height() - 40,
 			buttons: {
 				Ok: function() {
 					$("#pick_nation_dialog").dialog('close');
@@ -246,26 +251,37 @@ function pick_nation(player_id)
 			}
 		});
 
-  $("#nation_legend").html("Please choose nation for " + pplayer['name'] + " carefully.");
+  $("#nation_legend").html("Please choose nation for " + pplayer['name'] + ".");
 
 
   $("#nation_autocomplete_box").autocomplete({
       source: nation_name_list
   });
 
+  $("#nation_autocomplete_box").change(function() {
+    setTimeout(update_nation_selection, 150);
+  });
+
   if (is_small_screen()) {
     $("#select_nation_flag").hide();
     $("#nation_legend").hide();
+    $("#nation_style_choices").hide();
     $("#nation_list").width("80%");
   }
 
-  nation_select_id = setTimeout (update_nation_selection, 200);
+  nation_select_id = setTimeout (update_nation_selection, 150);
   $("#pick_nation_dialog").dialog('open');
+
+  if (!is_small_screen()) {
+    render_city_style_list();
+  }
+
 
 }
 
 /****************************************************************************
-  ...
+ This function is called when the nation select autocomplete box has been used,
+ and it will call select_nation based on the user's choice.
 ****************************************************************************/
 function update_nation_selection()
 {
@@ -280,11 +296,47 @@ function update_nation_selection()
       return;
     }
   }
-  nation_select_id = setTimeout (update_nation_selection, 200);
 }
 
 /****************************************************************************
-  ...
+ Renders a list of city styles in the choose nation dialog.
+****************************************************************************/
+function render_city_style_list()
+{
+  /* prepare a list of city styles. */
+  var city_style_html = "<b>City Styles:</b><br>";
+  for (var style_id in city_rules) {
+    if (style_id > 5) continue;
+    var pstyle = city_rules[style_id];
+    city_style_html += "<canvas id='city_style_" + style_id 
+          + "' data-style-id='" + style_id + "' width='96' height='72' style='cursor: pointer;'></canvas><br>"
+          + pstyle['rule_name'] + "<br>";
+  }
+  $("#nation_style_choices").html(city_style_html);
+  for (var style_id in city_rules) {
+    if (style_id > 5) continue;
+    var pstyle = city_rules[style_id];
+    var pcitystyle_canvas = document.getElementById('city_style_' + style_id);
+    var ctx = pcitystyle_canvas.getContext("2d");
+    var tag = pstyle['graphic'] + "_city_4";
+    if (style_id == chosen_style) {
+      ctx.fillStyle="#FFFFFF";
+      ctx.fillRect(0,0, 96, 72);
+    }
+    ctx.drawImage(sprites[tag], 0, 0);
+
+    $("#city_style_" + style_id).click(function() {
+      chosen_style = parseFloat($(this).attr("data-style-id"));
+      render_city_style_list();
+    });
+
+  }
+
+
+}
+
+/****************************************************************************
+  Updates the choose nation dialog with the selected nation.
 ****************************************************************************/
 function select_nation(new_nation_id)
 {
@@ -293,15 +345,15 @@ function select_nation(new_nation_id)
   $("#nation_autocomplete_box").val(pnation['adjective']);
   $("#nation_" + chosen_nation).css("background-color", "transparent");
   $("#nation_choice").html("Chosen nation: " + pnation['adjective']);
-  $("#select_nation_flag").html("<img src='/images/flags/"
-		            + pnation['graphic_str'] + "-web.png' width='180'>");
+  $("#select_nation_flag").html("<img style='nation_flag_choice' src='/images/flags/"
+		            + pnation['graphic_str'] + "-web.png'>");
 
   if (chosen_nation != new_nation_id && $("#nation_" + new_nation_id).length > 0) {
     $("#nation_" + new_nation_id).get(0).scrollIntoView();
   }
 
   chosen_nation = parseFloat(new_nation_id);
-  $("#nation_" + chosen_nation).css("background-color", "#AAFFAA");
+  $("#nation_" + chosen_nation).css("background-color", "#FFFFFF");
 }
 
 /****************************************************************************
@@ -320,12 +372,17 @@ function submit_nation_choice()
     leader_name = nations[chosen_nation]['leader_name'][0];
   }
 
+  var style = nations[chosen_nation]['style'];
+  if (chosen_style != -1) {
+    style = chosen_style;
+  }
+
   var test_packet = {"pid" : packet_nation_select_req,
                      "player_no" : choosing_player,
                      "nation_no" : chosen_nation,
                      "is_male" : true, /* FIXME */
                      "name" : leader_name,
-                     "style" : nations[chosen_nation]['style']};
+                     "style" : style};
   send_request(JSON.stringify(test_packet));
   clearInterval(nation_select_id);
 }

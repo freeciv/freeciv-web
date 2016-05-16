@@ -1027,7 +1027,7 @@ function keyboard_listener(ev)
   if (!ev) ev = window.event;
   var keyboard_key = String.fromCharCode(ev.keyCode);
 
-  civclient_handle_key(keyboard_key, ev.keyCode, ev['ctrlKey'],  ev['altKey'], ev['shiftKey']  );
+  civclient_handle_key(keyboard_key, ev.keyCode, ev['ctrlKey'],  ev['altKey'], ev['shiftKey'], ev);
 
 
 
@@ -1037,7 +1037,7 @@ function keyboard_listener(ev)
  Handles everything when the user typed on the keyboard.
 **************************************************************************/
 function
-civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift)
+civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift, the_event)
 {
 
   switch (keyboard_key) {
@@ -1105,7 +1105,12 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift)
     break;
 
     case 'S':
-      key_unit_sentry();
+      if (ctrl) {
+        the_event.preventDefault();
+        quicksave();
+      } else {
+        key_unit_sentry();
+      }
     break;
     case 'P':
       if (shift) {

@@ -227,7 +227,7 @@ function save_game()
   $("#savegamename").val(suggest_savename);
   
   if (is_pbem()) {
-    swal("Play-By-Email games can not be saved.");
+    swal("Play-By-Email games can not be saved. Please use the end turn button.");
     return;
   }
 
@@ -566,5 +566,28 @@ function handle_savegame_upload()
   $("#upload_dialog").dialog('close');
   $("#dialog").dialog('close');
   setTimeout("load_game_dialog();", 1000);
+
+}
+
+/**************************************************************************
+ Press Ctrl-S to quickly save the game.
+**************************************************************************/
+function quicksave()
+{
+  if (is_pbem()) {
+    swal("Play-By-Email games can not be saved. Please use the end turn button.");
+    return;
+  }
+
+  var pplayer = client.conn.playing;
+  var suggest_savename = username + " of the " + nations[pplayer['nation']]['adjective'] + " in year: " + get_year_string();
+  if (suggest_savename.length >= 64) suggest_savename = username + " " + get_year_string();
+  if ($.getUrlVar('action') == "multi" || loaded_game_type == "multi") {
+    suggest_savename = "Multiplayer game, saved by " + username + " " + get_year_string(); 
+  }
+
+  savename = suggest_savename;
+
+  save_game_send();
 
 }

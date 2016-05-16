@@ -116,7 +116,7 @@ var gui_gtk2_small_display_layout = FALSE;
 
 function init_options_dialog()
 {
-  $("#save_button").button("option", "label", "Save Game");
+  $("#save_button").button("option", "label", "Save Game (Ctrl+S)");
 
   $("#timeout_setting").val(game_info['timeout']);
   $("#metamessage_setting").val(server_settings['metamessage']['val']);

@@ -189,7 +189,7 @@ function action_button_pressed(canvas_x, canvas_y, qtype)
   if (can_client_change_view() && ptile != null) {
     /* FIXME: Some actions here will need to check can_client_issue_orders.
      * But all we can check is the lowest common requirement. */
-    do_map_click(ptile, qtype);
+    do_map_click(ptile, qtype, true);
   }
 }
 

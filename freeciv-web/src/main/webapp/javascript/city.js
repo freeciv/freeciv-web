@@ -1169,11 +1169,12 @@ function city_worklist_dialog(pcity)
            +"</div>";
   }
 
-  var headline = prod_img_html + "<div id='prod_descr'>Production: " 
+  var headline = prod_img_html + "<div id='prod_descr'>" 
+    + (is_small_screen() ? " " : " Production: ") 
     + (prod_type != null ? prod_type['type']['name'] : "None");
 
   if (turns_to_complete != FC_INFINITY) {
-    headline += " - Turns: " + turns_to_complete;
+    headline += ", turns: " + turns_to_complete;
   }
 
   $("#worklist_dialog_headline").html(headline + "</div>");

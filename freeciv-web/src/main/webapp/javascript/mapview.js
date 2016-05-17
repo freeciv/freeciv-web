@@ -216,7 +216,6 @@ function setup_window_size ()
   if (overview_active) init_overview();
   if (unitpanel_active) init_game_unit_panel();
 
-
 }
 
 function sum_width()
@@ -322,7 +321,7 @@ function init_cache_sprites()
 **************************************************************************/
 function mapview_window_resized ()
 {
-  if (active_city != null) return;
+  if (active_city != null || !resize_enabled) return;
   setup_window_size();
   update_map_canvas_full();
 }

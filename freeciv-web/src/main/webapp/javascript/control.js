@@ -42,7 +42,7 @@ var SELECT_LAND = 2;
 var SELECT_APPEND = 3;
 
 var intro_click_description = true;
-
+var resize_enabled = true;
 var goto_request_map = {};
 var goto_turns_request_map = {};
 var current_goto_turns = 0;
@@ -78,14 +78,16 @@ function control_init()
 
   $("#game_text_input").keydown(function(event) {
 	  return check_text_input(event, $("#game_text_input"));
-    });
+  });
   $("#game_text_input").focus(function(event) {
-	keyboard_input=false;
-    });
+    keyboard_input=false;
+    resize_enabled = false;
+  });
 
   $("#game_text_input").blur(function(event) {
-	  keyboard_input=true;
-    });
+    keyboard_input=true;
+    resize_enabled = true;
+  });
 
   /* disable text-selection, as this gives wrong mouse cursor
    * during drag to goto units. */
@@ -297,6 +299,7 @@ function check_text_input(event,chatboxtextarea) {
     if (!is_touch_device()) $(chatboxtextarea).focus();
     keyboard_input = true;
     send_message(message);
+    $("#game_text_input").blur();
     return false;
   }
 }
@@ -597,6 +600,7 @@ function update_unit_order_commands()
 **************************************************************************/
 function init_game_unit_panel()
 {
+  if (observing) return;
   unitpanel_active = true;
 
   $("#game_unit_panel").attr("title", "Units");
@@ -836,7 +840,7 @@ function get_drawable_unit(ptile, citymode)
 /**************************************************************************
  Handles everything when the user clicked a tile
 **************************************************************************/
-function do_map_click(ptile, qtype)
+function do_map_click(ptile, qtype, first_time_called)
 {
   var punit;
   var packet;
@@ -952,6 +956,22 @@ function do_map_click(ptile, qtype)
 
       /* Send the order to move using the orders system. */
       send_request(JSON.stringify(packet));
+
+    } else if (is_touch_device()) {
+      /* this is to handle the case where a mobile touch device user chooses
+      GOTO from the context menu or clicks the goto icon. Then the goto path
+      has to be requested first, and then do_map_click will be called again
+      to issue the unit order based on the goto path. */
+      if (ptile != null && current_focus.length > 0) {
+        request_goto_path(current_focus[0]['id'], ptile['x'], ptile['y']);
+        if (first_time_called) {
+          setTimeout(function(){
+            do_map_click(ptile, qtype, false)}
+          , 250);
+        }
+        return;
+
+      }
     }
 
     deactivate_goto();

@@ -234,7 +234,7 @@ function init_chatbox()
   if (is_small_screen()) {
     $(".chatbox_dialog").css("left", "2px");
     $(".chatbox_dialog").css("top", "37px");
-    $("#game_chatbox_panel").parent().css("max-height", "25%");
+    $("#game_chatbox_panel").parent().css("max-height", "22%");
     $("#game_chatbox_panel").parent().css("width", "95%");
     chatbox_resized();
   }
@@ -281,7 +281,7 @@ function add_chatbox_text(text)
 **************************************************************************/
 function chatbox_clip_messages()
 {
-  var max_chatbox_lines = 20;
+  var max_chatbox_lines = 24;
   var scrollDiv;
 
   if (civclient_state <= C_S_PREPARING) {

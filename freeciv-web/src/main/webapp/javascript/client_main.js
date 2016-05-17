@@ -214,7 +214,7 @@ function update_metamessage_on_gamestart()
       && client.conn.playing['pid'] == players[0]['pid'] 
       && $.getUrlVar('action') == "new") {
     var pplayer = client.conn.playing;
-    var metasuggest = username + " ruler of the " + nations[pplayer['nation']]['adjective'] + " empire.";
+    var metasuggest = username + " ruler of the " + nations[pplayer['nation']]['adjective'] + ".";
     send_message("/metamessage " + metasuggest);
     setTimeout(function () {
                  chatbox_text = ' ';

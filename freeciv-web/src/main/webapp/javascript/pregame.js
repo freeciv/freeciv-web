@@ -390,7 +390,7 @@ function submit_nation_choice()
 
 
 /****************************************************************************
-  ...
+ Shows the pregame settings dialog.
 ****************************************************************************/
 function pregame_settings()
 {
@@ -459,6 +459,7 @@ function pregame_settings()
 			bgiframe: true,
 			modal: true,
 			width: is_small_screen() ? "98%" : "60%",
+                        height: $(window).height() - 40,
 			  buttons: {
 				Ok: function() {
 					$("#pregame_settings").dialog('close');

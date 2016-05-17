@@ -239,3 +239,7 @@ body {
 #pick_nation_dialog {
   overflow: auto;
 }
+
+#pregame_settings {
+  overflow: auto;
+}

@@ -72,9 +72,6 @@ var ACTION_RECYCLE_UNIT = 23;
 var ACTION_DISBAND_UNIT = 24;
 var ACTION_COUNT = 25;
 
-/* Used to signal a move without any action. */
-var ACTION_MOVE = ACTION_COUNT;
-
 /* The action_decision enum */
 var ACT_DEC_NOTHING = 0;
 var ACT_DEC_PASSIVE = 1;

@@ -272,6 +272,24 @@ function mapstep(ptile, dir)
   return map_pos_to_tile(DIR_DX[dir] + ptile['x'], DIR_DY[dir] + ptile['y']);
 }
 
+/****************************************************************************
+  Return the direction which is needed for a step on the map from
+  start_tile to end_tile.
+****************************************************************************/
+function get_direction_for_step(start_tile, end_tile)
+{
+  var dir;
+
+  for (dir = DIR8_NORTHWEST; dir < DIR8_LAST; dir++) {
+    var test_tile = mapstep(start_tile, dir);
+
+    if (test_tile == end_tile) {
+      return dir;
+    }
+  }
+
+  return -1;
+}
 
 /**************************************************************************
 Return the debugging name of the direction.

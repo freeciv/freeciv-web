@@ -706,13 +706,29 @@ function popup_action_selection(actor_unit, action_probabilities,
 
   if (can_actor_unit_move(actor_unit, target_tile)) {
     $("#act_sel_move" + actor_unit['id']).click(function() {
-      var packet = {"pid" : packet_unit_do_action,
-                    "actor_id" : actor_unit['id'],
-                    "target_id": target_tile['index'],
-                    "value" : 0,
-                    "name" : "",
-                    "action_type": ACTION_MOVE};
-      send_request(JSON.stringify(packet));
+      var dir = get_direction_for_step(tiles[actor_unit['tile']],
+                                       target_tile);
+      var packet = {
+        "pid"       : packet_unit_orders,
+        "unit_id"   : actor_unit['id'],
+        "src_tile"  : actor_unit['tile'],
+        "length"    : 1,
+        "repeat"    : false,
+        "vigilant"  : false,
+        "orders"    : [ORDER_MOVE],
+        "dir"       : [dir],
+        "activity"  : [ACTIVITY_LAST],
+        "target"    : [EXTRA_NONE],
+        "action"    : [ACTION_COUNT],
+        "dest_tile" : target_tile['index']
+      };
+
+      if (dir == -1) {
+        /* Non adjacent target tile? */
+        console.log("Action slection move: bad target tile");
+      } else {
+        send_request(JSON.stringify(packet));
+      }
 
       $(id).remove();
     });

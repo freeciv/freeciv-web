@@ -46,6 +46,8 @@ before contact.\n\
 - A player that knows Electricity has no fog of war inside his borders.\n\
 - Foot soldiers can peacefully expel foreign civilian units from your terrain.\n\
 - It is possible to establish an embassy while inside a ship.\n\
+- The Leader unit can destroy a domestic city. (Be careful when you scorch \
+the earth. If your Leader dies you lose he game.)\n\
 \n\
 This ruleset is still in development. If playing it makes you think that \
 a rule should change go to the Freeciv-web board at \
@@ -593,6 +595,31 @@ target_reqs    =
     { "type",          "name",           "range", "present"
       "UnitFlag",      "Expellable",     "Local", TRUE
       "UnitState",     "OnDomesticTile", "Local", FALSE
+    }
+
+; The GameLoss unit requirement makes sending units on a suicide mission to
+; capture and destroy cities deep inside enemy terrain national suicide.
+; The risk of moving a GameLoss unit to the target city increases the cost
+; of the action. Rationalization for the requirement: the physical presence
+; of the Leader makes it easier to comply with the order to destroy the
+; city. (See the "orders by phone" Milgram experiment variation)
+;
+; The domestic city requirement forces the player to invade a city before
+; he can destroy it. If this limit is weakened by allowing the destruction
+; of undefended (MaxUnitsOnTile) foreign cities during war it will lead to
+; situations where a player can destroy a city but is unable to occupy it.
+; Rationalization: the resistance must be crushed before the destruction.
+;
+; TODO: create an international incident (set the Casus_Belli_Success
+; effect value to 1000) if "Destroy City" still is overpowered.
+[actionenabler_scorched_earth]
+action = "Destroy City"
+actor_reqs    =
+    { "type",         "name",          "range", "present"
+      "UnitFlag",     "GameLoss",      "Local", TRUE
+      "DiplRel",      "Is foreign",    "Local", FALSE
+      "MinMoveFrags", "1",             "Local", TRUE
+      "UnitState",    "OnLivableTile", "Local", TRUE
     }
 
 [actionenabler_nuke]

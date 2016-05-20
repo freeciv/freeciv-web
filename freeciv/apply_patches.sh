@@ -21,7 +21,9 @@
 # ArrayDimensions is json protocol change, backported from Freeciv bug #24419 (SVN r32001)
 # InlineGenlistNavigation is backport of Freeciv patch #6992 (SVN r32006)
 # libtoolize_no_symlinks will get obsolete by Freeciv patch #7001 (SVN r32156)
+# FairResourceExtra1 is Freeciv bug #24533 (SVN r32262)
 # SaveInvalidResource is Freeciv bug #24534 (SVN r32263)
+# FairResourceExtra2 is Freeciv bug #24537 (SVN r32268)
 # CommentLineOfItsOwn is backport of Freeciv patch #7000 (SVN r32307)
 # CardinalityCheckOnDemand is backport of Freeciv patch #7126 (SVN r32462)
 # TileExtrasSafe is backport of Freeciv patch #7127 (SVN r32475)
@@ -33,7 +35,7 @@
 # metamessage_setting is Freeciv bug #24415
 # disable_global_warming is Freeciv bug #24418
 
-PATCHLIST="WarningsBase freeciv_web_packets_def_changes caravan_fixes1 city_fixes city_impr_fix2 city-naming-change city_fixes2 citytools_changes metachange text_fixes unithand-change2 current_research_cost freeciv-svn-webclient-changes init_lists_disable goto_fcweb misc_devversion_sync tutorial_ruleset savegame maphand_ch serverside_extra_assign libtoolize_no_symlinks ai_traits_crash ruleset-capability worklists server_password barbarian-names activity_null_check add_rulesets message_escape freeciv_segfauls_fix scorelog_filenames scorelog_set_to_client missing_trade_partner spaceship_post_launch metamessage settings_access_level_metamessage metamessage_setting disable_global_warming 0001-JSON-specify-delta-vector-field-address fragement GenericPacketsGen24421 ArrayDimensions CommentLineOfItsOwn Remove-redundant-canceled-orders-notification win_chance ScorefileWeb MapMoveCostInline AllowIextraInBetween CardinalityCheckOnDemand ClassBonusRoadsCache InlineGenlistNavigation TileExtrasSafe NoNonnull SaveInvalidResource"
+PATCHLIST="WarningsBase freeciv_web_packets_def_changes caravan_fixes1 city_fixes city_impr_fix2 city-naming-change city_fixes2 citytools_changes metachange text_fixes unithand-change2 current_research_cost freeciv-svn-webclient-changes init_lists_disable goto_fcweb misc_devversion_sync tutorial_ruleset savegame maphand_ch serverside_extra_assign libtoolize_no_symlinks ai_traits_crash ruleset-capability worklists server_password barbarian-names activity_null_check add_rulesets message_escape freeciv_segfauls_fix scorelog_filenames scorelog_set_to_client missing_trade_partner spaceship_post_launch metamessage settings_access_level_metamessage metamessage_setting disable_global_warming 0001-JSON-specify-delta-vector-field-address fragement GenericPacketsGen24421 ArrayDimensions CommentLineOfItsOwn Remove-redundant-canceled-orders-notification win_chance ScorefileWeb MapMoveCostInline AllowIextraInBetween CardinalityCheckOnDemand ClassBonusRoadsCache InlineGenlistNavigation TileExtrasSafe NoNonnull SaveInvalidResource FairResourceExtra1 FairResourceExtra2"
 
 apply_patch() {
   echo "*** Applying $1.patch ***"

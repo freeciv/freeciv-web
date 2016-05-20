@@ -1,0 +1,35 @@
+commit 074649dea2ef82d320d058141efbba4148a352cd
+Author: sveinung <sveinung@a0f10bec-cc02-0410-94fc-a9cfff90b4cd>
+Date:   Tue Mar 22 05:07:32 2016 +0000
+
+    Fair islands: generate valid resources.
+    
+    Fix the way the fair island map generator resource placement interacts with
+    Resource as Extra.
+    
+    See bug #24533
+    
+    git-svn-id: svn://svn.gna.org/svn/freeciv/trunk@32262 a0f10bec-cc02-0410-94fc-a9cfff90b4cd
+
+diff --git a/server/generator/mapgen.c b/server/generator/mapgen.c
+index 7d7e3d1..e00819e 100644
+--- a/server/generator/mapgen.c
++++ b/server/generator/mapgen.c
+@@ -2958,6 +2958,7 @@ static void fair_map_make_resources(struct fair_tile *pmap)
+     for (r = pftile->pterrain->resources; *r != NULL; r++) {
+       if (fc_rand(++j) == 0) {
+         pftile->presource = *r;
++        BV_SET(pftile->extras, extra_index((*r)->self));
+       }
+     }
+     /* Note that 'pftile->presource' might be NULL if there is no suitable
+@@ -3677,8 +3678,8 @@ static bool map_generate_fair_islands(void)
+ 
+     fc_assert(pftile->pterrain != NULL);
+     tile_set_terrain(ptile, pftile->pterrain);
+-    tile_set_resource(ptile, pftile->presource);
+     ptile->extras = pftile->extras;
++    tile_set_resource(ptile, pftile->presource);
+     if (pftile->flags & FTF_STARTPOS) {
+       struct startpos *psp = map_startpos_new(ptile);
+ 

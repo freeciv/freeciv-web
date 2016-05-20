@@ -1,0 +1,38 @@
+commit 716548d7177b7b639965fcce00fcd36a58f74e4c
+Author: sveinung <sveinung@a0f10bec-cc02-0410-94fc-a9cfff90b4cd>
+Date:   Thu Mar 24 14:15:51 2016 +0000
+
+    Fair Islands: one resource extra per tile.
+    
+    My fix for bug #24533 caused the Fair Islands map generator to set the extra
+    at once a resource is placed at a tile. It can later be overwritten by
+    another resource. The result is that the final resource is valid while those
+    that were overwritten by it remain as invalid resources.
+    
+    Remove this accidental change.
+    
+    See bug #24537
+    
+    git-svn-id: svn://svn.gna.org/svn/freeciv/trunk@32268 a0f10bec-cc02-0410-94fc-a9cfff90b4cd
+
+diff --git a/server/generator/mapgen.c b/server/generator/mapgen.c
+index e00819e..7c21d2e 100644
+--- a/server/generator/mapgen.c
++++ b/server/generator/mapgen.c
+@@ -2958,7 +2958,6 @@ static void fair_map_make_resources(struct fair_tile *pmap)
+     for (r = pftile->pterrain->resources; *r != NULL; r++) {
+       if (fc_rand(++j) == 0) {
+         pftile->presource = *r;
+-        BV_SET(pftile->extras, extra_index((*r)->self));
+       }
+     }
+     /* Note that 'pftile->presource' might be NULL if there is no suitable
+@@ -2971,6 +2970,8 @@ static void fair_map_make_resources(struct fair_tile *pmap)
+           pftile2->flags |= FTF_NO_RESOURCE;
+         }
+       }
++
++      BV_SET(pftile->extras, extra_index(pftile->presource->self));
+     }
+   }
+ }

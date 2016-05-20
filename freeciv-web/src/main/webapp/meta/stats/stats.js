@@ -24,7 +24,8 @@ function handle_stats(data)
     if (cells[2] == "") cells[2] = 0;
     if (cells[3] == "") cells[3] = 0;
     if (cells[4] == "") cells[4] = 0;
-    var data_item = {y : cells[0], a : parseInt(cells[1]), b : parseInt(cells[2]), c : parseInt(cells[3]), d : parseInt(cells[4])};
+    if (cells[5] == "") cells[5] = 0;
+    var data_item = {y : cells[0], a : parseInt(cells[1]), b : parseInt(cells[2]), c : parseInt(cells[3]), d : parseInt(cells[4]), e: parseInt(cells[5])};
     mydata.push(data_item);
   }
 
@@ -32,7 +33,7 @@ Morris.Line({
   element: 'myfirstchart',
   data: mydata,
   xkey: 'y',
-  ykeys: ['a', 'b', 'c', 'd'],
-  labels: ['Freeciv-web singleplayer', 'Freeciv-web multiplayer', 'Freeciv-web PBEM', 'Freeciv desktop multiplayer']
+  ykeys: ['a', 'b', 'c', 'd','e'],
+  labels: ['Freeciv-web singleplayer', 'Freeciv-web multiplayer', 'Freeciv-web PBEM', 'Freeciv desktop multiplayer', 'Freeciv-web hotseat']
 });
 }

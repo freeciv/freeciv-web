@@ -90,7 +90,7 @@ function update_nation_screen()
 
   selected_player = -1;
 
-  if (is_pbem()) {
+  if (is_pbem() || is_hotseat()) {
     /* TODO: PBEM games do not support diplomacy.*/
     $('#meet_player_button').hide();
     $('#cancel_treaty_button').hide();
@@ -103,6 +103,9 @@ function update_nation_screen()
     $('#cancel_treaty_button').button("disable");
     $('#take_player_button').button("disable");
     $('#toggle_ai_button').button("disable");
+  }
+  if (is_hotseat()) {
+    $('#game_scores_button').show();
   }
 
 }

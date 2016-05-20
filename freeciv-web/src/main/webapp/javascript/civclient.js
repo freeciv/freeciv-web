@@ -154,7 +154,7 @@ function civclient_init()
 }
 
 /**************************************************************************
- ...
+ Shows a intro dialog depending on game type.
 **************************************************************************/
 function init_common_intro_dialog() {
   if (observing) {
@@ -164,6 +164,9 @@ function init_common_intro_dialog() {
 
   } else if ($.getUrlVar('action') == "pbem") {
     show_pbem_dialog();
+
+  } else if ($.getUrlVar('action') == "hotseat") {
+    show_hotseat_dialog();
 
   } else if (is_small_screen()) {
     show_intro_dialog("Welcome to Freeciv-web",

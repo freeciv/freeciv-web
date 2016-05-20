@@ -765,6 +765,9 @@ function handle_end_phase(packet)
   if (is_pbem()) {
     pbem_end_phase();
   }
+  if (is_hotseat())  {
+    hotseat_next_player();
+  }
 }
 
 /* Done. */

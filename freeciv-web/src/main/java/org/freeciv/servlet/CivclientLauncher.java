@@ -55,7 +55,7 @@ public class CivclientLauncher extends HttpServlet {
             conn = ds.getConnection();
 
             if (!action.equals("multi") && (action.equals("new") || action.equals("load") || action.equals("pbem") 
-                || action.equals("earthload"))) {
+                || action.equals("earthload") || action.equals("hotseat"))) {
                String gametype = "singleplayer";
                if (action.equals("pbem")) gametype = "pbem"; 
 

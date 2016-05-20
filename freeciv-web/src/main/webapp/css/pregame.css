@@ -243,3 +243,11 @@ body {
 #pregame_settings {
   overflow: auto;
 }
+
+.hotseat_player {
+  padding-top: 4px;
+}
+
+#hotseat_dialog {
+  overflow: auto;
+}

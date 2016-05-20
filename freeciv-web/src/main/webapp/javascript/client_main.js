@@ -58,6 +58,12 @@ function set_client_state(newstate)
           advance_unit_focus();
         }, 1500);
       }
+      if (is_hotseat()) {
+         setTimeout(function () {
+          advance_unit_focus();
+        }, 1000);
+
+      }
 
       break;
     case C_S_OVER:
@@ -108,6 +114,8 @@ function show_new_game_message()
   if (observing) {
     return;
 
+  } else if (is_hotseat()) {
+    show_hotseat_new_phase();
   } else if (is_pbem()) {
     show_dialog_message("Welcome to Freeciv-web: Play-By-Email.",
       "Welcome " + username + "! It is now your turn to play. Each player will " + 
@@ -229,6 +237,10 @@ function update_metamessage_on_gamestart()
   if ($.getUrlVar('action') == "multi" && client.conn.playing != null
       && client.conn.playing['pid'] == players[0]['pid']) {
     $.post("/freeciv_time_played_stats?type=multi").fail(function() {});
+  }
+  if ($.getUrlVar('action') == "hotseat") {
+    $.post("/freeciv_time_played_stats?type=hotseat").fail(function() {});
+    send_message("/metamessage hotseat game" );
   }
 
 

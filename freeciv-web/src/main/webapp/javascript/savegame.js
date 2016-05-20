@@ -139,6 +139,9 @@ function set_metamessage_on_loaded_game(game_type)
     metamessage_changed = true;
     send_message("/metamessage Multiplayer game loaded by " + username);
     loaded_game_type = game_type;
+  } else if (game_type == "hotseat") {
+    hotseat_enabled = true;
+    loaded_game_type = game_type;
   }
 
 }
@@ -157,6 +160,7 @@ function load_game_toggle()
     send_message("/aitoggle " + firstplayer);
     send_message("/take " + firstplayer);
     $.unblockUI();
+
   }
 
 }
@@ -224,6 +228,10 @@ function save_game()
   if ($.getUrlVar('action') == "multi" || loaded_game_type == "multi") {
     suggest_savename = "Multiplayer game, saved by " + username + " " + get_year_string(); 
   }
+  if ($.getUrlVar('action') == "hotseat" || loaded_game_type == "hotseat") {
+    suggest_savename = "Hotseat game, in the year: " + get_year_string(); 
+  }
+
   $("#savegamename").val(suggest_savename);
   
   if (is_pbem()) {

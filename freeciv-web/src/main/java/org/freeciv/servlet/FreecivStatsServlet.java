@@ -53,7 +53,13 @@ public class FreecivStatsServlet extends HttpServlet {
 		            PreparedStatement preparedStatement = conn.prepareStatement(insertTableSQL);
 		            preparedStatement.executeUpdate();
 		            
+	            } else if (type.equals("hotseat")) {
+	            	String insertTableSQL = "INSERT INTO games_played_stats (statsDate, gameType, gameCount) VALUES (CURDATE(), 4, 1)  ON DUPLICATE KEY UPDATE gameCount = gameCount + 1";
+		            PreparedStatement preparedStatement = conn.prepareStatement(insertTableSQL);
+		            preparedStatement.executeUpdate();
+		            
 	            }
+
 	            
 
 	      } catch (Exception err) {

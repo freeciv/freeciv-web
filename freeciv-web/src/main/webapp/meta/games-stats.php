@@ -39,7 +39,7 @@ if (!isset($config_problem)) {
           print db2html($row["web_pbem"]);
           print ",";
           print db2html($row["desktop_multi"]);
-          print ";";
+          print ",";
           print db2html($row["web_hotseat"]);
           print ";";
 

@@ -21,6 +21,7 @@ var num_hotseat_players = 2;
 var hotseat_players = [];
 var hotseat_active_player = 0;
 var hotseat_enabled = false;
+var hotseat_pwd = {};
 
 /**************************************************************************
  Shows the new hotseat game dialog.
@@ -183,29 +184,107 @@ function show_hotseat_new_phase()
   var message = "It is now " + hotseat_players[hotseat_active_player] 
                  + "'s turn to play in this hotseat game.";
 
+  if (hotseat_pwd[hotseat_players[hotseat_active_player]] != null) {
+    message += "<br><br>Player password: <input id='hotseat_pwd' type='password' size='25' maxlength='31'>";
+  }
   // reset dialog page.
+  dialog_close_trigger = "";
   $("#hotseat_dialog").remove();
-  $("<div id='hotseat_dialog'></div>").appendTo("div#game_page");
+  $("<div id='hotseat_dialog'></div>").appendTo("body");
   $("#hotseat_dialog").html(message);
   $("#hotseat_dialog").attr("title", "Hotseat game");
   $("#hotseat_dialog").dialog({
-			bgiframe: true,
 			modal: true,
-			width: is_small_screen() ? "95%" : "55%",
+			width: "50%",
+                        beforeClose: function(event, ui) 
+                        {
+                          if (dialog_close_trigger != "button") {
+                            return false;
+                          } else {
+                            return true;
+                          }
+                         },
 			buttons:
 			{
-                                 "Ok" : function() {
+                                 "Add password" : function() {
+                                   dialog_close_trigger = "button";
+                                   add_hotseat_password();
+                                 },
+                                 "Play turn" : function() {
+                                   if (hotseat_pwd[hotseat_players[hotseat_active_player]] != null
+                                       && hotseat_pwd[hotseat_players[hotseat_active_player]] != $("#hotseat_pwd").val()) {
+                                     swal("Invalid password.");
+                                     return;
+                                   }
+                                   dialog_close_trigger = "button";
                                    $("#hotseat_dialog").dialog('close');
                                    $("#game_text_input").blur();
+                                   keyboard_input = true;
+                                   $("#game_page").show();
+                                   set_default_mapview_active();
+                                   advance_unit_focus();
                                  }
 			}
-
 		});
 
   $("#hotseat_dialog").dialog('open');
 
+  if (overview_active) $("#game_overview_panel").parent().hide();
+  $("#game_unit_panel").parent().hide();
+  setTimeout("$('#game_unit_panel').parent().hide();", 1000);
+  if (chatbox_active) $("#game_chatbox_panel").parent().hide();
+  $("#game_page").hide();
+  keyboard_input = false;
+}
+
+/**************************************************************************
+...
+**************************************************************************/
+function add_hotseat_password() 
+{
+  var message = "Set player password in this hotseat game for " + hotseat_players[hotseat_active_player] 
+                 + ":<br><br><input id='new_hotseat_pwd' type='password' size='25' maxlength='31'>";
+
+  if (hotseat_pwd[hotseat_players[hotseat_active_player]] != null) {
+    swal("Password already set.");
+    return;
+  }
+  keyboard_input = false;
+  // reset dialog page.
+  $("#hotseatpwd_dialog").remove();
+  $("<div id='hotseatpwd_dialog'></div>").appendTo("body");
+  $("#hotseatpwd_dialog").html(message);
+  $("#hotseatpwd_dialog").attr("title", "Hotseat game");
+  $("#hotseatpwd_dialog").dialog({
+			bgiframe: true,
+			modal: true,
+			width: is_small_screen() ? "95%" : "50%",
+			buttons:
+			{
+                              "Cancel" : function() {
+                                   $("#hotseatpwd_dialog").dialog('close');
+                                   keyboard_input = true;
+                               },
+                               "Set password, start turn" : function() {
+                                   var pwd = $("#new_hotseat_pwd").val();
+                                   hotseat_pwd[hotseat_players[hotseat_active_player]] = pwd;
+                                   keyboard_input = true;
+                                   $("#hotseatpwd_dialog").dialog('close');
+                                   $("#hotseat_dialog").dialog('close');
+                                   $("#game_text_input").blur();
+                                   keyboard_input = true;
+                                   $("#game_page").show();
+                                   set_default_mapview_active();
+                                   advance_unit_focus();
+
+                                 }			
+                        }
+		});
+
+  $("#hotseatpwd_dialog").dialog('open');
 
 }
+
 
 /**************************************************************************
  Initialize hotseat data after loading a hotseat savegame.

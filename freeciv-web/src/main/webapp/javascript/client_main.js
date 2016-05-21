@@ -58,12 +58,6 @@ function set_client_state(newstate)
           advance_unit_focus();
         }, 1500);
       }
-      if (is_hotseat()) {
-         setTimeout(function () {
-          advance_unit_focus();
-        }, 1000);
-
-      }
 
       break;
     case C_S_OVER:

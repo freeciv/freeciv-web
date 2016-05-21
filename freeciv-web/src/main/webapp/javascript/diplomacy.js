@@ -557,5 +557,8 @@ function create_diplomacy_dialog(counterpart) {
     send_request(JSON.stringify(packet));
     }, 500);
    });
+
+  $("#diplomacy_dialog").parent().css("z-index", 2);
+
 }
 

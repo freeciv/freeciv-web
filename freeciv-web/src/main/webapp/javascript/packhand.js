@@ -673,6 +673,9 @@ function handle_unit_actions(packet)
 
 function handle_diplomacy_init_meeting(packet)
 {
+  // for hotseat games, only activate diplomacy if the player is playing.
+  if (is_hotseat() && packet['initiated_from'] != client.conn.playing['playerno']) return;   
+
   if (diplomacy_request_queue.indexOf(packet['counterpart']) < 0) {
     diplomacy_request_queue.push(packet['counterpart']);
   }

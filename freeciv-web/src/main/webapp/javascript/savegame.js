@@ -364,7 +364,12 @@ function load_game_dialog()
 		  $("#dialog").dialog('close');
 		  $("#game_text_input").blur();
 		  show_scenario_dialog();
-		}
+    },
+    "Map from image..." : function() {
+		  $("#dialog").dialog('close');
+		  $("#game_text_input").blur();
+                  show_map_from_image_dialog();
+    }
     });
   }
 
@@ -457,6 +462,13 @@ function show_scenario_dialog()
 			width: is_small_screen() ? "90%" : "40%",
 			position: {my: 'center bottom', at: 'center bottom', of: window},
 			buttons: {
+                                "Cancel" : function() {
+					$("#dialog").dialog('close');
+                                },
+                                "Create map from image upload.." : function() {
+                                  $("#dialog").dialog('close');
+                                  show_map_from_image_dialog();
+                                },
 	  			"Select scenario": function() {
 					scenario_activated = true;
 					load_game_check();
@@ -599,3 +611,4 @@ function quicksave()
   save_game_send();
 
 }
+

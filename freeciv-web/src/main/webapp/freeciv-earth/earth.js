@@ -84,7 +84,7 @@ function get_map_terrain_type(x, y, pixel)
 
   var rnd = Math.random();
   if (pixel_color(255,255,255, pixel, 20)) return "a";  //arctic
-  if (pixel_color(64, 83, 3538, pixel, 40)) return "g"; //grassland
+  if (pixel_color(64, 124, 38, pixel, 40)) return "g"; //grassland
   if (pixel_color(84, 73, 38, pixel, 20) && !near_equator) return "t";   //tundra
   if (pixel_color(240, 220, 155, pixel, 100) && near_equator) return "d"; //desert
   if (pixel_color(44, 52, 28, pixel, 10)) return "f"; //forest

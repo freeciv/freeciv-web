@@ -136,6 +136,7 @@
 	        <cssSourceFile>theme.dark.css</cssSourceFile>
 	        <cssSourceFile>jquery.contextMenu.min.css</cssSourceFile>
 	        <cssSourceFile>morris.css</cssSourceFile>
+	        <cssSourceFile>spectrum.css</cssSourceFile>
 	        <cssSourceFile>pregame.css</cssSourceFile>
 	        <cssSourceFile>civclient.css</cssSourceFile>
                </cssSourceFiles>

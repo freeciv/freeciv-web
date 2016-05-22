@@ -179,7 +179,7 @@ function init_common_intro_dialog() {
   } else if ($.getUrlVar('action') == "load") {
     show_intro_dialog("Welcome to Freeciv-web",
       "You are about to join this game server, where you can " +
-      "load a savegame, tutorial or scenario. " +
+      "load a savegame, tutorial, custom map generated from an image or a historical scenario map. " +
       "Please enter your name: ");
 
   } else if ($.getUrlVar('action') == "multi") {

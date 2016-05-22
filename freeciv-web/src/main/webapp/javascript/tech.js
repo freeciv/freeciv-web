@@ -367,20 +367,23 @@ function get_advances_text(tech_id)
 {
   var ptech = techs[tech_id];
 
-  var adv_txt = "<span onclick='show_wikipedia_dialog(\"" +ptech['name'] + "\")'>" + ptech['name'] + "</span> allows ";
+  var adv_txt = "<span onclick='show_tech_info_dialog(\"" +ptech['name'] + "\", null, null);'>" + ptech['name'] + "</span> allows ";
   var prunits = get_units_from_tech(tech_id);
   var pimprovements = get_improvements_from_tech(tech_id);
 
   for (var i = 0; i < prunits.length; i++) {
     if (i == 0) adv_txt += "building unit ";
     var punit = prunits[i];
-    adv_txt += "<span title='" + punit['helptext'] + "' onclick='show_wikipedia_dialog(\"" + punit['name'] + "\")'>" + punit['name'] + "</span>, ";
+    adv_txt += "<span title='" + punit['helptext'] 
+            + "' onclick='show_tech_info_dialog(\"" + punit['name'] + "\", " + punit['id'] + ", null)'>" 
+            + punit['name'] + "</span>, ";
   }
 
   for (var i = 0; i < pimprovements.length; i++) {
     if (i == 0) adv_txt += "building ";
     var pimpr = pimprovements[i];
-    adv_txt += "<span title='" + pimpr['helptext'] + "' onclick='show_wikipedia_dialog(\"" + pimpr['name'] + "\")'>" + pimpr['name'] + "</span>, ";
+    adv_txt += "<span title='" + pimpr['helptext'] 
+            + "' onclick='show_tech_info_dialog(\"" + pimpr['name'] + "\", null, " + pimpr['id'] + ")'>" + pimpr['name'] + "</span>, ";
   }
 
 
@@ -390,7 +393,7 @@ function get_advances_text(tech_id)
 
     if (is_tech_req_for_tech(tech_id, next_tech_id)) {
       if (adv_txt.indexOf("researching") == -1) adv_txt += "researching ";
-      adv_txt +=  "<span onclick='show_wikipedia_dialog(\"" +ntech['name'] + "\")'>" + ntech['name'] + "</span>, ";
+      adv_txt +=  "<span onclick='show_tech_info_dialog(\"" +ntech['name'] + "\", null, null)'>" + ntech['name'] + "</span>, ";
     }
   }
 
@@ -646,6 +649,63 @@ function show_wikipedia_dialog(tech_name)
   $("#wiki_dialog").css("max-height", $(window).height() - 100);
   $("#game_text_input").blur();
 }
+
+/**************************************************************************
+ Shows info about a tech, unit or improvement based on helptext and wikipedia.
+**************************************************************************/
+function show_tech_info_dialog(tech_name, unit_type_id, improvement_id)
+{
+  $("#tech_tab_item").css("color", "#aa0000");
+
+  var message = "";
+
+  if (unit_type_id != null) {
+     var punit_type = unit_types[unit_type_id];
+     message += "<b>Unit info</b>: " + punit_type['helptext'] + "<br><br>"
+     + "Cost: " + punit_type['build_cost']
+     + "<br>Attack: " + punit_type['attack_strength']
+     + "<br>Defense: " + punit_type['defense_strength']
+     + "<br>Firepower: " + punit_type['firepower']
+     + "<br>Hitpoints: " + punit_type['hp']
+     + "<br>Moves: " + move_points_text(punit_type['move_rate'])
+     + "<br>Vision: " + punit_type['vision_radius_sq']
+     + "<br><br>";
+  }
+
+  if (improvement_id != null) message += "<b>Improvement info</b>: " + improvements[improvement_id]['helptext'] + "<br><br>";
+
+  message += "<b>Wikipedia on <a href='" + wikipedia_url
+	  + freeciv_wiki_docs[tech_name]['title']
+	  + "' target='_new' style='color: black;'>" + freeciv_wiki_docs[tech_name]['title']
+	  + "</a>:</b><br>";
+  if (freeciv_wiki_docs[tech_name]['image'] != null) {
+    message += "<img id='wiki_image' src='" + freeciv_wiki_docs[tech_name]['image'] + "'><br>";
+  }
+
+  message += freeciv_wiki_docs[tech_name]['summary'];
+
+  // reset dialog page.
+  $("#wiki_dialog").remove();
+  $("<div id='wiki_dialog'></div>").appendTo("div#game_page");
+
+  $("#wiki_dialog").html(message);
+  $("#wiki_dialog").attr("title", tech_name);
+  $("#wiki_dialog").dialog({
+			bgiframe: true,
+			modal: true,
+			width: is_small_screen() ? "95%" : "70%",
+			height: $(window).height() - 60,
+			buttons: {
+				Ok: function() {
+					$("#wiki_dialog").dialog('close');
+				}
+			}
+		});
+
+  $("#wiki_dialog").dialog('open');
+  $("#game_text_input").blur();
+}
+
 
 /**************************************************************************
  ...

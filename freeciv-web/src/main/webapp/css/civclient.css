@@ -583,10 +583,10 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 }
 
 #wiki_image {
-  max-width: 400px; 
+  max-width: 600px; 
   max-height: 500px; 
-  float: right; 
   margin: 5px;
+  float: right;
 }
 
 #help_menu {
@@ -868,3 +868,6 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
   cursor:hand;
 }
 
+#wiki_dialog {
+  overflow: auto;
+}

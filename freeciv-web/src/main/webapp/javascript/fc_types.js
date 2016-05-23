@@ -70,7 +70,8 @@ var ACTION_DESTROY_CITY = 21;
 var ACTION_EXPEL_UNIT = 22;
 var ACTION_RECYCLE_UNIT = 23;
 var ACTION_DISBAND_UNIT = 24;
-var ACTION_COUNT = 25;
+var ACTION_HOME_CITY = 25;
+var ACTION_COUNT = 26;
 
 /* The action_decision enum */
 var ACT_DEC_NOTHING = 0;

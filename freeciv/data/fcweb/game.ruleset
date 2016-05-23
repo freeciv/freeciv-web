@@ -716,6 +716,8 @@ settings =
 ;                           present, 'name' is used. Since the name used in
 ;                           savegames must not change, use this when renaming
 ;                           an good after a ruleset has been released.
+; reqs                    = requirements for a city to provide goods (see effects.ruleset
+;                           and README.effects for help on requirements)
 ;
 ; */ <-- avoid gettext warnings
 

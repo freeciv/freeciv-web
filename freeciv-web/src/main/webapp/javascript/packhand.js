@@ -1101,6 +1101,7 @@ function handle_player_diplstate(packet)
 
 function handle_ruleset_extra(packet)
 {
+  extras[packet['id']] = packet;
   extras[packet['name']] = packet;
 }
 

@@ -978,7 +978,15 @@ function get_tile_specials_sprite(ptile)
 
   if (resource == null) return null;
 
-  return  {"key" : resource['graphic_str']} ;
+  var extra = extras[resource['extra']];
+
+  if (extra == null) {
+    console.log("No extra for tile resource.");
+    console.log(resource);
+    return null;
+  }
+
+  return  {"key" : extra['graphic_str']} ;
 }
 
 /****************************************************************************

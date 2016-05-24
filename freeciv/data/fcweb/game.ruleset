@@ -254,6 +254,9 @@ ui_name_join_city = _("%sAdd to City%s")
 ; /* TRANS: Explode _Nuclear (100% chance of success). */
 ui_name_explode_nuclear = _("Explode %sNuclear%s")
 
+; /* TRANS: Set _Home City (100% chance of success). */
+ui_name_home_city = _("Set %sHome City%s")
+
 ; /* <-- avoid gettext warnings
 ;
 ; Action enablers:
@@ -492,6 +495,13 @@ actor_reqs    =
       "UnitFlag", "Nuclear", "Local", TRUE
     }
 
+[actionenabler_change_home_city]
+action = "Home City"
+actor_reqs    =
+    { "type",   "name", "range", "present"
+      "DiplRel", "Is foreign", "Local", FALSE
+    }
+
 [borders]
 ; Base border radius from city.
 radius_sq_city = 17
@@ -716,6 +726,8 @@ settings =
 ;                           present, 'name' is used. Since the name used in
 ;                           savegames must not change, use this when renaming
 ;                           an good after a ruleset has been released.
+; reqs                    = requirements for a city to provide goods (see effects.ruleset
+;                           and README.effects for help on requirements)
 ;
 ; */ <-- avoid gettext warnings
 

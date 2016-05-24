@@ -1682,8 +1682,12 @@ function key_unit_homecity()
     var pcity = tile_city(ptile);
 
     if (pcity != null) {
-      var packet = {"pid" : packet_unit_change_homecity, "unit_id" : punit['id'],
-                "city_id" : pcity['id']};
+      var packet = {"pid" : packet_unit_do_action,
+                    "actor_id" : punit['id'],
+                    "target_id": pcity['id'],
+                    "value" : 0,
+                    "name" : "",
+                    "action_type": ACTION_HOME_CITY};
       send_request(JSON.stringify(packet));
       $("#order_change_homecity").hide();
     }

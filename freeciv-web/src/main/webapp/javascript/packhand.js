@@ -851,11 +851,40 @@ function handle_ruleset_government_ruler_title(packet)
   /* TODO: implement*/
 }
 
+/**************************************************************************
+  Recreate the old req[] field of ruleset_tech packets.
+
+  This makes it possible to delay research_reqs support.
+**************************************************************************/
+function recreate_old_tech_req(packet)
+{
+  var i;
+
+  /* Recreate the field it self. */
+  packet['req'] = [];
+
+  /* Add all techs in research_reqs. */
+  for (i = 0; i < packet['research_reqs'].length; i++) {
+    var requirement = packet['research_reqs'][i];
+
+    if (requirement.kind == VUT_ADVANCE) {
+      packet['req'].push(requirement.value);
+    }
+  }
+
+  /* Fill in A_NONE just in case Freeciv-web assumes its size is 2. */
+  while (packet['req'].length < 2) {
+    packet['req'].push(A_NONE);
+  }
+}
+
 /* 100% complete */
 function handle_ruleset_tech(packet)
 {
   packet['name'] = packet['name'].replace("?tech:", "");
   techs[packet['id']] = packet;
+
+  recreate_old_tech_req(packet);
 }
 
 function handle_ruleset_tech_flag(packet)
@@ -1101,6 +1130,7 @@ function handle_player_diplstate(packet)
 
 function handle_ruleset_extra(packet)
 {
+  extras[packet['id']] = packet;
   extras[packet['name']] = packet;
 }
 

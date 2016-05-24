@@ -284,6 +284,13 @@ function popup_action_selection(actor_unit, action_probabilities,
                                    action_probabilities)
              + "'>";
   }
+  if (action_probabilities[ACTION_HOME_CITY] != 0) {
+    dhtml += "<input id='act_sel_home" + actor_unit['id']
+             + "' class='act_sel_button' type='button' value='"
+             + format_action_label(ACTION_HOME_CITY,
+                                   action_probabilities)
+             + "'>";
+  }
   if (action_probabilities[ACTION_SPY_BRIBE_UNIT] != 0) {
     dhtml += "<input id='act_sel_bribe" + actor_unit['id']
         + "' class='act_sel_button' type='button' value='"
@@ -589,6 +596,20 @@ function popup_action_selection(actor_unit, action_probabilities,
                     "value"       : 0,
                     "name"        : "",
                     "action_type" : ACTION_RECYCLE_UNIT};
+      send_request(JSON.stringify(packet));
+
+      $(id).remove();
+    });
+  }
+
+  if (action_probabilities[ACTION_HOME_CITY] != 0) {
+    $("#act_sel_home" + actor_unit['id']).click(function() {
+      var packet = {"pid"         : packet_unit_do_action,
+                    "actor_id"    : actor_unit['id'],
+                    "target_id"   : target_city['id'],
+                    "value"       : 0,
+                    "name"        : "",
+                    "action_type" : ACTION_HOME_CITY};
       send_request(JSON.stringify(packet));
 
       $(id).remove();

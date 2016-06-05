@@ -752,7 +752,7 @@ function city_name_dialog(suggested_name, unit_id) {
 						var name = $("#city_name_req").val();
 						if (name.length == 0 || name.length >= MAX_LEN_NAME - 4
 						    || encodeURIComponent(name).length  >= MAX_LEN_NAME - 4) {
-						  swal("City name is invalid");
+						  swal("City name is invalid. Please try a different shorter name.");
 						  return;
 						}
 
@@ -793,8 +793,8 @@ function city_name_dialog(suggested_name, unit_id) {
         keyboard_input=true;
     }
   });
-  keyboard_input=false;
   blur_input_on_touchdevice();
+  keyboard_input=false;
 }
 
 /**************************************************************************

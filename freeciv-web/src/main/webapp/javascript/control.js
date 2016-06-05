@@ -185,6 +185,16 @@ function control_init()
   $('#toggle_ai_button').click(toggle_ai_clicked);
   $('#game_scores_button').click(view_game_scores);
 
+  /* prevents keyboard input from changing tabs. */
+  $('#tabs').tabs({
+    activate: function (event, ui) {
+        ui.newTab.blur();
+    }
+  });
+  $('#tabs a').click(function () {
+    $(this).blur();
+  });
+
 }
 
 /****************************************************************************

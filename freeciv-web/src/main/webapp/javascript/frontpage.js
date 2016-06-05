@@ -70,7 +70,7 @@ $(document).ready(function() {
 
 $.ajax({
   url: "/meta/fpmultimeta.php",
-  cache: false
+  cache: true
 })
   .done(function( html ) {
     $( "#fpmultimeta" ).html(html);

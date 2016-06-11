@@ -259,7 +259,7 @@ function add_chatbox_text(text)
 
     chatbox_text += text + "<br>";
 
-    if (scrollDiv != null) {
+    if (scrollDiv != null && chatbox_text != null) {
       scrollDiv.innerHTML = chatbox_text;
 
       var currentHeight = 0;

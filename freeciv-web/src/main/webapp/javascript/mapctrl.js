@@ -21,6 +21,11 @@
 var touch_start_x;
 var touch_start_y;
 
+var map_select_check = false;
+var map_select_active = false;
+var map_select_x;
+var map_select_y;
+
 /****************************************************************************
   Triggered when the mouse button is clicked UP on the mapview canvas.
 ****************************************************************************/
@@ -37,8 +42,19 @@ function mapview_mouse_click(e)
     rightclick = (e.button == 2);
     middleclick = (e.button == 1 || e.button == 4);
   }
+  if (rightclick) {
+    /* right click to recenter. */
+    if (!map_select_active) {
+      recenter_button_pressed(mouse_x, mouse_y);
+      context_menu_active = true;
+    } else {
+      context_menu_active = false;
+      map_select_units(mouse_x, mouse_y);
+    }
+    map_select_active = false;
+    map_select_check = false;
 
-  if (!rightclick && !middleclick) {
+  } else if (!rightclick && !middleclick) {
     /* Left mouse button*/
     action_button_pressed(mouse_x, mouse_y, SELECT_POPUP);
   }
@@ -70,8 +86,11 @@ function mapview_mouse_down(e)
   } else if (middleclick || e['altKey']) {
     popit();
     return false;
-  } else {
-    release_right_button(mouse_x, mouse_y);
+  } else if (!map_select_active) {
+    map_select_check = true;
+    map_select_x = mouse_x;
+    map_select_y = mouse_y;
+
   }
 
 }
@@ -123,8 +142,13 @@ function mapview_touch_move(e)
   goto_preview_active = true;
   if (goto_active && current_focus.length > 0) {
     var ptile = canvas_pos_to_tile(mouse_x, mouse_y);
-    if (ptile != null && goto_request_map[ptile['x'] + "," + ptile['y']] == null) {
-      request_goto_path(current_focus[0]['id'], ptile['x'], ptile['y']);
+    if (ptile != null) {
+      for (var i = 0; i < current_focus.length; i++) {
+        if (i >= 20) return;  // max 20 units goto a time.
+        if (goto_request_map[current_focus[i]['id'] + "," + ptile['x'] + "," + ptile['y']] == null) {
+          request_goto_path(current_focus[i]['id'], ptile['x'], ptile['y']);
+        }
+      }
     }
   }
 
@@ -210,15 +234,49 @@ function city_action_button_pressed(canvas_x, canvas_y)
   }
 }
 
-/**************************************************************************
- Action depends on whether the mouse pointer moved
- a tile between press and release.
-**************************************************************************/
-function release_right_button(mouse_x, mouse_y)
-{
-  recenter_button_pressed(mouse_x, mouse_y);
-}
 
+/**************************************************************************
+  This will select and set focus to all the units which are in the 
+  selected rectangle on the map when the mouse is selected using the right
+  mouse button. 
+  [canvas_x, canvas_y, map_select_x, map_select_y].
+**************************************************************************/
+function map_select_units(canvas_x, canvas_y)
+{
+  var selected_tiles = {};
+  var selected_units = [];
+  if (client_is_observer()) return;
+
+  var start_x = (map_select_x < canvas_x) ? map_select_x : canvas_x; 
+  var start_y = (map_select_y < canvas_y) ? map_select_y : canvas_y; 
+  var end_x = (map_select_x < canvas_x) ? canvas_x : map_select_x; 
+  var end_y = (map_select_y < canvas_y) ? canvas_y : map_select_y; 
+
+
+  for (var x = start_x; x < end_x; x += 15) {
+    for (var y = start_y; y < end_y; y += 15) {
+      var ptile = canvas_pos_to_tile(x, y);
+      if (ptile != null) {
+        selected_tiles[ptile['tile']] = ptile;
+      }
+    }
+  }
+
+  for (var tile_id in selected_tiles) {
+    var ptile = selected_tiles[tile_id];
+    var cunits = tile_units(ptile);
+    if (cunits == null) continue;
+    for (var i = 0; i < cunits.length; i++) {
+      var aunit = cunits[i];
+      if (aunit['owner'] == client.conn.playing.playerno) {
+        selected_units.push(aunit);
+      }
+    }
+  }
+
+  current_focus = selected_units;
+  update_active_units_dialog();
+}
 
 /**************************************************************************
   Recenter the map on the canvas location, on user request.  Usually this
@@ -313,7 +371,7 @@ function update_active_units_dialog()
   var punits = [];
   var width = 0;
 
-  if (current_focus.length > 0) {
+  if (current_focus.length == 1) {
     ptile = index_to_tile(current_focus[0]['tile']);
     punits.push(current_focus[0]);
     var tmpunits = tile_units(ptile); 
@@ -322,13 +380,15 @@ function update_active_units_dialog()
       if (kunit['id'] == current_focus[0]['id']) continue;
       punits.push(kunit);
     }
+  } else if (current_focus.length > 1) {
+    punits = current_focus;
   }
 
   for (var i = 0; i < punits.length; i++) {
     var punit = punits[i];
     var ptype = unit_type(punit);
     var sprite = get_unit_image_sprite(punit);
-    var active = (current_focus[0]['id'] == punit['id']);
+    var active = (current_focus.length > 1 || current_focus[0]['id'] == punit['id']);
 
     unit_info_html += "<div id='unit_info_div' class='" + (active ? "current_focus_unit" : "")
            + "'><div id='unit_info_image' onclick='set_unit_focus_and_redraw(units[" + punit['id'] + "])' "
@@ -340,7 +400,7 @@ function update_active_units_dialog()
     width = sprite['width'];
   }
 
-  if (current_focus.length > 0) {
+  if (current_focus.length == 1) {
     /* show info about the active focus unit. */
     var aunit = current_focus[0];
     var ptype = unit_type(aunit);
@@ -363,6 +423,8 @@ function update_active_units_dialog()
     }
 
     unit_info_html += "</div>";
+  } else if (current_focus.length > 1) {
+    unit_info_html += "<div id='active_unit_info'>" + current_focus.length + " units selected.</div> ";
   }
 
   $("#game_unit_info").html(unit_info_html);

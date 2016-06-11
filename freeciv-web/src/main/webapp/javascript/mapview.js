@@ -361,6 +361,19 @@ function canvas_put_rectangle(canvas_context, pcolor, canvas_x, canvas_y, width,
 
 }
 
+/****************************************************************************
+  Draw a colored rectangle onto the mapview.
+****************************************************************************/
+function canvas_put_select_rectangle(canvas_context, canvas_x, canvas_y, width, height)
+{
+  canvas_context.beginPath();
+  canvas_context.strokeStyle = "rgb(255,0,0)";
+  canvas_context.rect(canvas_x, canvas_y, width, height);
+  canvas_context.stroke();
+
+}
+
+
 /**************************************************************************
   Draw city text onto the canvas.
 **************************************************************************/

@@ -367,6 +367,11 @@ function update_map_canvas(canvas_x, canvas_y, width, height)
     }
   }
 
+  if (map_select_active) {
+    canvas_put_select_rectangle(mapview_canvas_ctx, map_select_x, map_select_y, 
+                                mouse_x - map_select_x, mouse_y - map_select_y);
+  }
+
 }
 
 

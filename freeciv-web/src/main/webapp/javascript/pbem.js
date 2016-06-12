@@ -214,7 +214,7 @@ function create_new_pbem_user_request()
   } else if (username.length <= 2 ) {
     $("#username_validation_result").html("Your name is too short.");
     return false;
-  } else if (password.length <= 2 ) {
+  } else if (password == null || password.length <= 2 ) {
     $("#username_validation_result").html("Your password is too short.");
     return false;
   } else if (username.length >= 32) {
@@ -231,7 +231,8 @@ function create_new_pbem_user_request()
 
   $.ajax({
    type: 'POST',
-   url: "/create_pbem_user?username=" + username + "&email=" + email + "&password=" + password + "&captcha=" + captcha,
+   url: "/create_pbem_user?username=" + encodeURIComponent(username) + "&email=" + encodeURIComponent(email)
+            + "&password=" + encodeURIComponent(password) + "&captcha=" + encodeURIComponent(captcha),
    success: function(data, textStatus, request){
        simpleStorage.set("username", username);
        simpleStorage.set("password", password);
@@ -256,7 +257,7 @@ function login_pbem_user_request()
 
   $.ajax({
    type: 'POST',
-   url: "/login_user?username=" + username + "&password=" + password ,
+   url: "/login_user?username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(password),
    success: function(data, textStatus, request){
        simpleStorage.set("username", username);
        simpleStorage.set("password", password);
@@ -267,7 +268,7 @@ function login_pbem_user_request()
        }
      },
    error: function (request, textStatus, errorThrown) {
-     swal("login user failed.");
+     swal("Login user failed. Please check your username and password. ");
    }
   });
 }

@@ -41,7 +41,6 @@ public class ValidateUser extends HttpServlet {
             throws IOException, ServletException {
 
        String userstring = request.getParameter("userstring");
-       String invited_by = request.getParameter("invited_by");
 
        Connection conn = null;
         try {
@@ -53,7 +52,7 @@ public class ValidateUser extends HttpServlet {
             PreparedStatement preparedStatement = conn.prepareStatement(usrSQL);
             preparedStatement.setString(1, userstring);
             preparedStatement.setString(2, userstring);
-  	    ResultSet rs = preparedStatement.executeQuery();
+            ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) {
               String username = (String)rs.getString(1);
               int activated = (Integer)rs.getInt(2);

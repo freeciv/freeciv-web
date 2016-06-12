@@ -40,8 +40,8 @@ public class LoginUser extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
 
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
+        String username = java.net.URLDecoder.decode(request.getParameter("username"), "UTF-8");
+        String password = java.net.URLDecoder.decode(request.getParameter("password"), "UTF-8");
        
 
        Connection conn = null;
@@ -57,7 +57,7 @@ public class LoginUser extends HttpServlet {
   	    ResultSet rs = preparedStatement.executeQuery();
             rs.next();
             if (rs.getInt(1) != 1) {
-              response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Unable to login");
+              response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Unable to login. Please check your username and password.");
               return;
             }
 

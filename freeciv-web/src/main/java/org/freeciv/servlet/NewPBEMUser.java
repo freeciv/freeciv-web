@@ -60,11 +60,26 @@ public class NewPBEMUser extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
 
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        String email = request.getParameter("email");
-        String captcha = request.getParameter("captcha");
-        
+        String username = java.net.URLDecoder.decode(request.getParameter("username"), "UTF-8");
+        String password = java.net.URLDecoder.decode(request.getParameter("password"), "UTF-8");
+        String email = java.net.URLDecoder.decode(request.getParameter("email"), "UTF-8");
+        String captcha = java.net.URLDecoder.decode(request.getParameter("captcha"), "UTF-8");
+
+        if (password == null || password.length() <= 2) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST,
+                    "Invalid password. Please try again with another password.");
+            return;
+        }
+        if (username == null || username.length() <= 2) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST,
+                    "Invalid username. Please try again with another username.");
+            return;
+        }
+        if (email == null || email.length() <= 4) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST,
+                    "Invalid e-mail address. Please try again with another username.");
+            return;
+        }
     	HttpClient client = HttpClientBuilder.create().build();
     	HttpPost post = new HttpPost(captcha_url);
 

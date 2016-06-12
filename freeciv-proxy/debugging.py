@@ -22,10 +22,6 @@ import time
 from tornado import version as tornado_version
 import gc
 
-_proc_status = '/proc/%d/status' % os.getpid()
-
-_scale = {'kB': 1024.0, 'mB': 1024.0 * 1024.0,
-          'KB': 1024.0, 'MB': 1024.0 * 1024.0}
 
 startTime = time.time()
 
@@ -63,26 +59,16 @@ def get_debug_info(civcoms):
         print("Cannot open uptime file: /proc/uptime")
 
     try:
-        code += "<h3>Memory usage:</h3>"
-        code += "Memory: " + str(memory() / 1048576) + " MB <br>"
-        code += "Resident: " + str(resident() / 1048576) + " MB <br>"
-        code += "Stacksize: " + str(stacksize() / 1048576) + " MB <br>"
-        try:
-          code += "Garabage collection stats: " + str(gc.get_stats()) + " <br>"
-          code += "Garabage list: " + str(gc.garbage) + " <br>"
-        except AttributeError:
-          pass
-
         code += ("<h3>Logged in users  (count %i) :</h3>" % len(civcoms))
         for key in list(civcoms.keys()):
             code += (
-                "username: <b>%s</b> <br>IP:%s <br>Civserver: (%d)<br>Connect time: %d<br><br>" %
+                "username: <b>%s</b> <br>IP:%s <br>Civserver: %d<br>Connect time: %d<br>Tx to civserver: %d<br>Rx from civserver: %d<br><br>" %
                 (civcoms[key].username,
                  civcoms[key].civwebserver.ip,
-                    civcoms[key].civserverport,
-                    time.time() -
-                    civcoms[key].connect_time))
-
+                 civcoms[key].civserverport,
+                 time.time() - civcoms[key].connect_time,
+                 civcoms[key].tx,
+                 civcoms[key].rx))
     except:
         print(("Unexpected error:" + str(sys.exc_info()[0])))
         raise
@@ -92,39 +78,3 @@ def get_debug_info(civcoms):
     return code
 
 
-def _VmB(VmKey):
-    '''Private.
-    '''
-    global _proc_status, _scale
-     # get pseudo file  /proc/<pid>/status
-    try:
-        t = open(_proc_status)
-        v = t.read()
-        t.close()
-    except:
-        return 0.0  # non-Linux?
-     # get VmKey line e.g. 'VmRSS:  9999  kB\n ...'
-    i = v.index(VmKey)
-    v = v[i:].split(None, 3)  # whitespace
-    if len(v) < 3:
-        return 0.0  # invalid format?
-     # convert Vm value to bytes
-    return float(v[1]) * _scale[v[2]]
-
-
-def memory(since=0.0):
-    '''Return memory usage in bytes.
-    '''
-    return _VmB('VmSize:') - since
-
-
-def resident(since=0.0):
-    '''Return resident memory usage in bytes.
-    '''
-    return _VmB('VmRSS:') - since
-
-
-def stacksize(since=0.0):
-    '''Return stack size in bytes.
-    '''
-    return _VmB('VmStk:') - since

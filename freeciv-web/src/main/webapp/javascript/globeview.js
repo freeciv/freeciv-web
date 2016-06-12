@@ -231,7 +231,6 @@ function show_2d_globe_view()
   tmp_canvas = null;
 
   // step 3: rotate the image -41 degrees and render the result on a new canvas.
-  // The canvas width and height must be a size in the power of 2, eg. 4096 and 2048.
   fullmap_canvas = document.createElement('canvas');
   fullmap_canvas.width = 4096;
   fullmap_canvas.height = 2048;
@@ -244,9 +243,6 @@ function show_2d_globe_view()
   fullmap_ctx.rotate(41 * Math.PI / 180);
   fullmap_ctx.translate(-x, -y);
 
-  // step 4: clip away left and right part of image, to make it look better.
-  fullmap_ctx.drawImage(fullmap_canvas, 4096 * 0.1, 0, 4096 - 4096 * 0.1, 2048, 0, 0, 4096 * 1.22, 2048);
-
   var rheight = $("#2d_globeview_canvas").parent().parent().parent().height() - 5;
   var rwidth = $("#2d_globeview_canvas").parent().width() - 5;
 
@@ -254,7 +250,7 @@ function show_2d_globe_view()
   finalmap_canvas.width = rwidth;
   finalmap_canvas.height = rheight;
   var finalmap_ctx = finalmap_canvas.getContext("2d");
-  finalmap_ctx.drawImage(fullmap_canvas, 0, 0, 4096, 2048, 0, 0, rwidth, rheight);
+  finalmap_ctx.drawImage(fullmap_canvas, 4096 * 0.1, 0, 4096 - 4096 * 0.1, 2048, 0, 0, rwidth * 1.22, rheight);
 
   scaledmap_canvas = null;
   fullmap_canvas = null;

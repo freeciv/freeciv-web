@@ -42,7 +42,11 @@
 </div>
 
 <div class="main_menu_buttons">
-  <button id="globeview_button" type="button" class="button setting_button" onClick="init_globe_view();" title="Shows the current map in a 3d sphere view using WebGL. (experimental beta-feature!)">Show globe view</button> 	
+  <button id="globeview_button" type="button" class="button setting_button" onClick="init_2d_globe_view();" title="Shows the whole current map as a single image.">Show 2D map view</button>
+</div>
+
+<div class="main_menu_buttons">
+  <button id="globeview_button" type="button" class="button setting_button" onClick="init_3d_globe_view();" title="Shows the current map in a 3d sphere view using WebGL. (experimental beta-feature!)">Show globe 3D view</button>
 </div>	
 
 

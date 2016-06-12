@@ -33,18 +33,27 @@ var fullmap_canvas = null;
 /**************************************************************************
   Renders the world map on a globe using Three.js, with a loading message.
 **************************************************************************/
-function init_globe_view()
+function init_3d_globe_view()
 {
   $.blockUI({ message: "<h2>Creating 3D globe view of map. Please wait.</h2>" });
-  setTimeout(show_globe_view, 100);
+  setTimeout(show_3d_globe_view, 100);
   keyboard_input = false;
 }
 
+/**************************************************************************
+  Renders the world map on a 2d canvas.
+**************************************************************************/
+function init_2d_globe_view()
+{
+  $.blockUI({ message: "<h2>Creating 2D map view of the world map. Please wait.</h2>" });
+  setTimeout(show_2d_globe_view, 100);
+  keyboard_input = false;
+}
 
 /**************************************************************************
   Renders the world map on a globe using Three.js.
 **************************************************************************/
-function show_globe_view()
+function show_3d_globe_view()
 {
   // reset dialog page.
   $("#globe_view_dialog").remove();
@@ -163,6 +172,98 @@ function show_globe_view()
 
 }
 
+
+/**************************************************************************
+  Renders the world map to a canvas
+**************************************************************************/
+function show_2d_globe_view()
+{
+  // reset dialog page.
+  $("#globe_view_dialog").remove();
+  $("<div id='globe_view_dialog'></div>").appendTo("div#game_page");
+
+
+  $("#globe_view_dialog").html("<center><div id='globe_container' style='width: 100%; background-color: #0a0a0a;'>"
+        + "<canvas id='2d_globeview_canvas'></canvas></div></center>");
+
+  $("#globe_view_dialog").attr("title", server_settings['metamessage']['val']);
+  $("#globe_view_dialog").dialog({
+			bgiframe: true,
+			modal: true,
+			width: "98%",
+                        height: $(window).height()-30,
+                        close : function(){
+                          close_globe_view_dialog();
+                        }
+                     });
+
+  $("#globe_view_dialog").dialog('open');
+
+  // step 1: render whole map on a canvas using the Freeciv-web renderer.
+  var tmpmap_canvas = document.createElement('canvas');
+  var w = map['xsize'] * tileset_tile_width * 0.9;
+  var h = map['ysize'] * tileset_tile_height * 1.4;
+
+  tmpmap_canvas.width = w;
+  tmpmap_canvas.height = h;
+
+  mapview['width'] = w;
+  mapview['height'] = h;
+  mapview['store_width'] = w;
+  mapview['store_height'] = h;
+
+  center_tile_mapcanvas(map_pos_to_tile(map['xsize']/2, map['ysize']/2));
+
+  mapview_canvas = tmpmap_canvas;
+  mapview_canvas_ctx = mapview_canvas.getContext("2d");
+  mapview_canvas_ctx.font = canvas_text_font;
+
+  update_map_canvas_full();
+
+  // step 2: change aspect ratio of map so that width = height,
+  // rendering the result on a new canvas.
+  var scaledmap_canvas = document.createElement('canvas');
+  scaledmap_canvas.width = w;
+  scaledmap_canvas.height = w;
+  var scaledmap_ctx = scaledmap_canvas.getContext("2d");
+  scaledmap_ctx.drawImage(tmpmap_canvas, 0,0, w, h, 0, 0, w, w);
+
+  tmp_canvas = null;
+
+  // step 3: rotate the image -41 degrees and render the result on a new canvas.
+  // The canvas width and height must be a size in the power of 2, eg. 4096 and 2048.
+  fullmap_canvas = document.createElement('canvas');
+  fullmap_canvas.width = 4096;
+  fullmap_canvas.height = 2048;
+  fullmap_ctx = fullmap_canvas.getContext("2d");
+  var x = fullmap_canvas.width * 0.5;
+  var y = fullmap_canvas.height * 0.48;
+  fullmap_ctx.translate(x, y);
+  fullmap_ctx.rotate(-41 * Math.PI / 180);
+  fullmap_ctx.drawImage(scaledmap_canvas, 0, 0, w, w, -4096 * 0.52, -2048 * 0.5 - 850, 4096, 4096 - 400);
+  fullmap_ctx.rotate(41 * Math.PI / 180);
+  fullmap_ctx.translate(-x, -y);
+
+  // step 4: clip away left and right part of image, to make it look better.
+  fullmap_ctx.drawImage(fullmap_canvas, 4096 * 0.1, 0, 4096 - 4096 * 0.1, 2048, 0, 0, 4096 * 1.22, 2048);
+
+  var rheight = $("#2d_globeview_canvas").parent().parent().parent().height() - 5;
+  var rwidth = $("#2d_globeview_canvas").parent().width() - 5;
+
+  var finalmap_canvas = document.getElementById('2d_globeview_canvas');
+  finalmap_canvas.width = rwidth;
+  finalmap_canvas.height = rheight;
+  var finalmap_ctx = finalmap_canvas.getContext("2d");
+  finalmap_ctx.drawImage(fullmap_canvas, 0, 0, 4096, 2048, 0, 0, rwidth, rheight);
+
+  scaledmap_canvas = null;
+  fullmap_canvas = null;
+
+  active_globeview = true;
+
+  $.unblockUI();
+
+}
 
 /**************************************************************************
   ...

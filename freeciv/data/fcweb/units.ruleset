@@ -336,6 +336,15 @@ flags         = "Unreachable", "DoesntOccupyTile"
 ; "NewCityGamesOnly" = unit can't be built on scenarios where founding new cities
 ;                 is not allowed. Give this flag to units that would make no sense
 ;                 to have in a game with such a scenario
+; "CanEscape"   = this unit has, given that certain conditions are
+;                 fulfilled, a 50% chance to escape rather than being
+;                 killed when killstack is enabled and the defender of its
+;                 tile is defeated. The condtions are that it has more move
+;                 points than required to move to an adjacent tile plus the
+;                 attackers move points and that the attacker doesn't have
+;                 the "CanKillEscaping" unit type flag.
+; "CanKillEscaping" = an attack from this unit ignores the "CanEscape" unit
+;                 type flag.
 ;
 ; Following flag strings require extra fields:
 ;  "Paratroopers"

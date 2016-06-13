@@ -25,6 +25,7 @@ var client_frozen = false;
 var chatbox_active = true;
 
 var chatbox_text = " ";
+var chatbox_text_dirty = false;
 var previous_scroll = 0;
 var phase_start_time = 0;
 
@@ -91,6 +92,7 @@ function civclient_init()
 
   update_game_status_panel();
   statusTimerId = setInterval(update_game_status_panel, 6000);
+  chatboxTimerId = setInterval(update_chatbox, 500);
 
   if (overviewTimerId == -1) {
     overviewTimerId = setInterval(redraw_overview, OVERVIEW_REFRESH);
@@ -244,22 +246,37 @@ function init_chatbox()
 }
 
 /**************************************************************************
- ...
+ This adds new text to the main message chatbox. See update_chatbox() which
+ does the actual update to the screen.
 **************************************************************************/
 function add_chatbox_text(text)
 {
     var scrollDiv;
 
     if (civclient_state <= C_S_PREPARING) {
-      scrollDiv = document.getElementById('pregame_message_area');
       text = text.replace(/#FFFFFF/g, '#000000');
-    } else {
-      scrollDiv = document.getElementById('game_message_area');
     }
 
     chatbox_text += text + "<br>";
+    chatbox_text_dirty = true;
 
-    if (scrollDiv != null && chatbox_text != null) {
+}
+
+
+/**************************************************************************
+ This is called at regular time intervals to update the chatbox text window
+ with new messages. It is updated at interals for performance reasons
+ when many messages appear.
+**************************************************************************/
+function update_chatbox()
+{
+  if (civclient_state <= C_S_PREPARING) {
+      scrollDiv = document.getElementById('pregame_message_area');
+  } else {
+      scrollDiv = document.getElementById('game_message_area');
+  }
+
+  if (chatbox_text_dirty && scrollDiv != null && chatbox_text != null) {
       scrollDiv.innerHTML = chatbox_text;
 
       var currentHeight = 0;
@@ -275,23 +292,17 @@ function add_chatbox_text(text)
       }
 
       previous_scroll = currentHeight;
-    }
+      chatbox_text_dirty = false;
+  }
 
 }
 
 /**************************************************************************
- ...
+ Clips the chatbox text to a maximum number of lines.
 **************************************************************************/
 function chatbox_clip_messages()
 {
   var max_chatbox_lines = 24;
-  var scrollDiv;
-
-  if (civclient_state <= C_S_PREPARING) {
-    scrollDiv = document.getElementById('pregame_message_area');
-  } else {
-    scrollDiv = document.getElementById('game_message_area');
-  }
 
   var new_chatbox_text = "";
   var chat_lines = chatbox_text.split("<br>");
@@ -303,23 +314,7 @@ function chatbox_clip_messages()
 
   chatbox_text = new_chatbox_text;
 
-  if (scrollDiv != null) {
-    scrollDiv.innerHTML = chatbox_text;
-
-    var currentHeight = 0;
-
-    if (scrollDiv.scrollHeight > 0) {
-      currentHeight = scrollDiv.scrollHeight;
-    } else if (scrollDiv.offsetHeight > 0) {
-      currentHeight = scrollDiv.offsetHeight;
-    }
-
-    if (previous_scroll < currentHeight) {
-      scrollDiv.scrollTop = currentHeight;
-    }
-
-    previous_scroll = currentHeight;
-  }
+  update_chatbox();
 
 }
 

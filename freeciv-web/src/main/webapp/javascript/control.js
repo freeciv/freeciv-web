@@ -1599,8 +1599,15 @@ function key_unit_upgrade()
   var funits = get_units_in_focus();
   for (var i = 0; i < funits.length; i++) {
     var punit = funits[i];
-    var packet = {"pid" : packet_unit_upgrade, "unit_id" : punit['id']};
-      send_request(JSON.stringify(packet));
+    var packet = {
+      "pid"         : packet_unit_do_action,
+      "actor_id"    : punit['id'],
+      "target_id"   : tile_city(index_to_tile(punit['tile']))['id'],
+      "value"       : 0,
+      "name"        : "",
+      "action_type" : ACTION_UPGRADE_UNIT
+    };
+    send_request(JSON.stringify(packet));
   }
   update_unit_focus();
 }

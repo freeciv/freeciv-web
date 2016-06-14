@@ -1,0 +1,519 @@
+commit 94e05822de1e6e6633c99c8049119ab6618b82be
+Author: sveinung <sveinung@a0f10bec-cc02-0410-94fc-a9cfff90b4cd>
+Date:   Thu Jan 21 14:45:49 2016 +0000
+
+    Action enabler control upgrade.
+    
+    Introduce the "Upgrade Unit" action enabler.
+    
+    See patch #6830
+    
+    git-svn-id: svn://svn.gna.org/svn/freeciv/trunk@31525 a0f10bec-cc02-0410-94fc-a9cfff90b4cd
+
+diff --git a/ai/default/aicity.c b/ai/default/aicity.c
+index fb98524..6b5f16e 100644
+--- a/ai/default/aicity.c
++++ b/ai/default/aicity.c
+@@ -425,7 +425,8 @@ static void dai_upgrade_units(struct city *pcity, int limit, bool military)
+                    utype_rule_name(punittype),
+                    cost,
+                    military ? "military" : "civilian");
+-          handle_unit_upgrade(city_owner(pcity), punit->id);
++          handle_unit_do_action(city_owner(pcity), punit->id,
++                                pcity->id, 0, "", ACTION_UPGRADE_UNIT);
+         } else {
+           increase_maxbuycost(pplayer, cost);
+         }
+@@ -1171,6 +1172,7 @@ static int action_target_neg_util(int action_id,
+   case ACTION_JOIN_CITY:
+   case ACTION_RECYCLE_UNIT:
+   case ACTION_HOME_CITY:
++  case ACTION_UPGRADE_UNIT:
+     /* TODO: Individual and well balanced values */
+     return -1;
+ 
+diff --git a/client/control.c b/client/control.c
+index 9bf3363..b039cce 100644
+--- a/client/control.c
++++ b/client/control.c
+@@ -1865,7 +1865,7 @@ void request_unit_upgrade(struct unit *punit)
+   struct city *pcity=tile_city(unit_tile(punit));
+ 
+   if (pcity) {
+-    dsend_packet_unit_upgrade(&client.conn, punit->id);
++    request_do_action(ACTION_UPGRADE_UNIT, punit->id, pcity->id, 0, "");
+   }
+ }
+ 
+diff --git a/common/actions.c b/common/actions.c
+index c718975..b170bbf 100644
+--- a/common/actions.c
++++ b/common/actions.c
+@@ -188,6 +188,12 @@ void actions_init(void)
+                  /* Illegal to perform to a target on another tile to
+                   * keep the rules exactly as they were for now. */
+                  0, 0);
++  actions[ACTION_UPGRADE_UNIT] =
++      action_new(ACTION_UPGRADE_UNIT, ATK_CITY,
++                 FALSE, FALSE, TRUE,
++                 /* Illegal to perform to a target on another tile to
++                  * keep the rules exactly as they were for now. */
++                 0, 0);
+ 
+   /* Initialize the action enabler list */
+   action_iterate(act) {
+@@ -1302,6 +1308,14 @@ is_action_possible(const enum gen_action wanted_action,
+     }
+   }
+ 
++  if (wanted_action == ACTION_UPGRADE_UNIT) {
++    /* Reason: Keep the old rules. */
++    /* Info leak: */
++    if (unit_upgrade_test(actor_unit, FALSE) != UU_OK) {
++      return TRI_NO;
++    }
++  }
++
+   return TRI_YES;
+ }
+ 
+@@ -2025,6 +2039,10 @@ action_prob(const enum gen_action wanted_action,
+     /* No battle is fought first. */
+     chance = 200;
+     break;
++  case ACTION_UPGRADE_UNIT:
++    /* No battle is fought first. */
++    chance = 200;
++    break;
+   case ACTION_COUNT:
+     fc_assert(FALSE);
+     break;
+diff --git a/common/actions.h b/common/actions.h
+index dddec78..d20ed3e 100644
+--- a/common/actions.h
++++ b/common/actions.h
+@@ -98,6 +98,8 @@ extern "C" {
+ #define SPECENUM_VALUE24NAME N_("Disband Unit")
+ #define SPECENUM_VALUE25 ACTION_HOME_CITY
+ #define SPECENUM_VALUE25NAME N_("Home City")
++#define SPECENUM_VALUE26 ACTION_UPGRADE_UNIT
++#define SPECENUM_VALUE26NAME N_("Upgrade Unit")
+ /* Limited by what values num2char() can store in unit orders in
+  * savegames. */
+ #define SPECENUM_COUNT ACTION_COUNT
+diff --git a/common/packets.def b/common/packets.def
+index 1032303..4ba4e2e 100644
+--- a/common/packets.def
++++ b/common/packets.def
+@@ -1014,10 +1014,6 @@ PACKET_UNIT_UNLOAD = 76; cs, dsend
+   UNIT cargo_id, transporter_id;
+ end
+ 
+-PACKET_UNIT_UPGRADE = 77; cs, dsend
+-  UNIT unit_id;
+-end
+-
+ PACKET_UNIT_PARADROP_TO = 80; cs, dsend
+   UNIT unit_id;
+   TILE tile;
+diff --git a/data/alien/game.ruleset b/data/alien/game.ruleset
+index 351635d..288ab29 100644
+--- a/data/alien/game.ruleset
++++ b/data/alien/game.ruleset
+@@ -245,6 +245,9 @@ ui_name_bombard = _("%sBombard%s")
+ ; /* TRANS: Set _Home City (100% chance of success). */
+ ui_name_home_city = _("Set %sHome City%s")
+ 
++; /* TRANS: _Upgrade Unit (100% chance of success). */
++ui_upgrade_unit = _("%sUpgrade Unit%s")
++
+ ; /* <-- avoid gettext warnings
+ ;
+ ; Action enablers:
+@@ -442,6 +445,9 @@ actor_reqs    =
+       "DiplRel", "Is foreign", "Local", FALSE
+     }
+ 
++[actionenabler_upgrade_unit]
++action = "Upgrade Unit"
++
+ [borders]
+ ; Base border radius from city.
+ radius_sq_city = 4
+diff --git a/data/civ1/game.ruleset b/data/civ1/game.ruleset
+index c85126c..095b791 100644
+--- a/data/civ1/game.ruleset
++++ b/data/civ1/game.ruleset
+@@ -230,6 +230,9 @@ ui_name_explode_nuclear = _("Explode %sNuclear%s")
+ ; /* TRANS: Set _Home City (100% chance of success). */
+ ui_name_home_city = _("Set %sHome City%s")
+ 
++; /* TRANS: _Upgrade Unit (100% chance of success). */
++ui_upgrade_unit = _("%sUpgrade Unit%s")
++
+ ; /* <-- avoid gettext warnings
+ ;
+ ; Action enablers:
+@@ -421,6 +424,9 @@ actor_reqs    =
+       "DiplRel", "Is foreign", "Local", FALSE
+     }
+ 
++[actionenabler_upgrade_unit]
++action = "Upgrade Unit"
++
+ [borders]
+ ; Base border radius from city.
+ radius_sq_city = 17
+diff --git a/data/civ2/game.ruleset b/data/civ2/game.ruleset
+index e8d1a9c..920bfe8 100644
+--- a/data/civ2/game.ruleset
++++ b/data/civ2/game.ruleset
+@@ -259,6 +259,9 @@ ui_name_explode_nuclear = _("Explode %sNuclear%s")
+ ; /* TRANS: Set _Home City (100% chance of success). */
+ ui_name_home_city = _("Set %sHome City%s")
+ 
++; /* TRANS: _Upgrade Unit (100% chance of success). */
++ui_upgrade_unit = _("%sUpgrade Unit%s")
++
+ ; /* <-- avoid gettext warnings
+ ;
+ ; Action enablers:
+@@ -501,6 +504,9 @@ actor_reqs    =
+       "DiplRel", "Is foreign", "Local", FALSE
+     }
+ 
++[actionenabler_upgrade_unit]
++action = "Upgrade Unit"
++
+ [borders]
+ ; Base border radius from city.
+ radius_sq_city = 17
+diff --git a/data/civ2civ3/game.ruleset b/data/civ2civ3/game.ruleset
+index 5fc9bde..1947380 100644
+--- a/data/civ2civ3/game.ruleset
++++ b/data/civ2civ3/game.ruleset
+@@ -271,6 +271,9 @@ ui_name_explode_nuclear = _("Explode %sNuclear%s")
+ ; /* TRANS: Set _Home City (100% chance of success). */
+ ui_name_home_city = _("Set %sHome City%s")
+ 
++; /* TRANS: _Upgrade Unit (100% chance of success). */
++ui_upgrade_unit = _("%sUpgrade Unit%s")
++
+ ; /* <-- avoid gettext warnings
+ ;
+ ; Action enablers:
+@@ -546,6 +549,9 @@ actor_reqs    =
+       "DiplRel", "Is foreign", "Local", FALSE
+     }
+ 
++[actionenabler_upgrade_unit]
++action = "Upgrade Unit"
++
+ [borders]
+ ; Base border radius from city.
+ radius_sq_city = 5
+diff --git a/data/classic/game.ruleset b/data/classic/game.ruleset
+index 3cfbfc3..d6641d7 100644
+--- a/data/classic/game.ruleset
++++ b/data/classic/game.ruleset
+@@ -258,6 +258,9 @@ ui_name_explode_nuclear = _("Explode %sNuclear%s")
+ ; /* TRANS: Set _Home City (100% chance of success). */
+ ui_name_home_city = _("Set %sHome City%s")
+ 
++; /* TRANS: _Upgrade Unit (100% chance of success). */
++ui_upgrade_unit = _("%sUpgrade Unit%s")
++
+ ; /* <-- avoid gettext warnings
+ ;
+ ; Action enablers:
+@@ -503,6 +506,9 @@ actor_reqs    =
+       "DiplRel", "Is foreign", "Local", FALSE
+     }
+ 
++[actionenabler_upgrade_unit]
++action = "Upgrade Unit"
++
+ [borders]
+ ; Base border radius from city.
+ radius_sq_city = 17
+diff --git a/data/experimental/game.ruleset b/data/experimental/game.ruleset
+index cd2944f..4b243ba 100644
+--- a/data/experimental/game.ruleset
++++ b/data/experimental/game.ruleset
+@@ -263,6 +263,9 @@ ui_name_explode_nuclear = _("Explode %sNuclear%s")
+ ; /* TRANS: Set _Home City (100% chance of success). */
+ ui_name_home_city = _("Set %sHome City%s")
+ 
++; /* TRANS: _Upgrade Unit (100% chance of success). */
++ui_upgrade_unit = _("%sUpgrade Unit%s")
++
+ ; /* <-- avoid gettext warnings
+ ;
+ ; Action enablers:
+@@ -520,6 +523,9 @@ actor_reqs    =
+       "DiplRel", "Is foreign", "Local", FALSE
+     }
+ 
++[actionenabler_upgrade_unit]
++action = "Upgrade Unit"
++
+ [borders]
+ ; Base border radius from city.
+ radius_sq_city = 17
+diff --git a/data/multiplayer/game.ruleset b/data/multiplayer/game.ruleset
+index d8d4c95..2c0f48b 100644
+--- a/data/multiplayer/game.ruleset
++++ b/data/multiplayer/game.ruleset
+@@ -255,6 +255,9 @@ ui_name_explode_nuclear = _("Explode %sNuclear%s")
+ ; /* TRANS: Set _Home City (100% chance of success). */
+ ui_name_home_city = _("Set %sHome City%s")
+ 
++; /* TRANS: _Upgrade Unit (100% chance of success). */
++ui_upgrade_unit = _("%sUpgrade Unit%s")
++
+ ; /* <-- avoid gettext warnings
+ ;
+ ; Action enablers:
+@@ -486,6 +489,9 @@ actor_reqs    =
+       "DiplRel", "Is foreign", "Local", FALSE
+     }
+ 
++[actionenabler_upgrade_unit]
++action = "Upgrade Unit"
++
+ [borders]
+ ; Base border radius from city.
+ radius_sq_city = 17
+diff --git a/data/sandbox/game.ruleset b/data/sandbox/game.ruleset
+index ac1ef60..7c00a2a 100644
+--- a/data/sandbox/game.ruleset
++++ b/data/sandbox/game.ruleset
+@@ -271,6 +271,9 @@ ui_name_explode_nuclear = _("Explode %sNuclear%s")
+ ; /* TRANS: Set _Home City (100% chance of success). */
+ ui_name_home_city = _("Set %sHome City%s")
+ 
++; /* TRANS: _Upgrade Unit (100% chance of success). */
++ui_upgrade_unit = _("%sUpgrade Unit%s")
++
+ ; /* <-- avoid gettext warnings
+ ;
+ ; Action enablers:
+@@ -583,6 +586,9 @@ actor_reqs    =
+       "DiplRel", "Is foreign", "Local", FALSE
+     }
+ 
++[actionenabler_upgrade_unit]
++action = "Upgrade Unit"
++
+ [borders]
+ ; Base border radius from city.
+ radius_sq_city = 5
+diff --git a/doc/README.actions b/doc/README.actions
+index b45ca11..da1a9a7 100644
+--- a/doc/README.actions
++++ b/doc/README.actions
+@@ -253,6 +253,17 @@ Actions done by a unit against a city
+    homeless is a big benefit)
+  * can't set existing home city as new home city
+ 
++"Upgrade Unit" - Upgrade the actor unit using the target's facilities.
++ * UI name can be set using ui_upgrade_unit.
++ * actor must be on the same tile as the target.
++ * actor player must have enough gold to pay for the upgrade.
++ * actor unit must have a type to upgrade to (obsoleted_by).
++ * actor unit's upgraded form must be able to exist at its current
++   location.
++ * actor unit's upgraded form must have room in its current transport.
++ * target player must be able to build the unit upgraded to
++ * target city must be domestic.
++
+ Actions done by a unit against another unit
+ ===========================================
+ "Sabotage Unit" - Halve the target unit's hit points.
+diff --git a/server/advisors/advdata.c b/server/advisors/advdata.c
+index 4b6817f..c2819ef 100644
+--- a/server/advisors/advdata.c
++++ b/server/advisors/advdata.c
+@@ -879,6 +879,7 @@ void adv_best_government(struct player *pplayer)
+           case ACTION_HELP_WONDER:
+           case ACTION_RECYCLE_UNIT:
+           case ACTION_HOME_CITY:
++          case ACTION_UPGRADE_UNIT:
+             /* Could be good. An embassy gives permanent contact. A trade
+              * route gives gold per turn. Join city gives population. Help
+              * wonder gives shields. */
+diff --git a/server/rscompat.c b/server/rscompat.c
+index 7ae99f0..d0522b0 100644
+--- a/server/rscompat.c
++++ b/server/rscompat.c
+@@ -472,6 +472,14 @@ void rscompat_postprocess(struct rscompat_info *info)
+ 
+     action_enabler_add(enabler);
+ 
++    /* User initiated unit upgrade is now action enabler controlled. */
++
++    enabler = action_enabler_new();
++
++    enabler->action = ACTION_UPGRADE_UNIT;
++
++    action_enabler_add(enabler);
++
+     /* Update action enablers. */
+     action_enablers_iterate(ae) {
+       /* The rule that Help Wonder only can help wonders now lives in the
+diff --git a/server/ruleset.c b/server/ruleset.c
+index 841e431..d8d48ce 100644
+--- a/server/ruleset.c
++++ b/server/ruleset.c
+@@ -5726,6 +5726,13 @@ static bool load_ruleset_game(struct section_file *file, bool act,
+           "actions.ui_name_home_city");
+       sz_strlcpy(action_by_number(ACTION_HOME_CITY)->ui_name,
+                  text);
++
++      text = secfile_lookup_str_default(file,
++          /* TRANS: _Upgrade Unit (100% chance of success). */
++          N_("%sUpgrade Unit%s"),
++          "actions.ui_upgrade_unit");
++      sz_strlcpy(action_by_number(ACTION_UPGRADE_UNIT)->ui_name,
++                 text);
+     }
+ 
+     if (ok) {
+diff --git a/server/unithand.c b/server/unithand.c
+index 28e5823..d3cac1b 100644
+--- a/server/unithand.c
++++ b/server/unithand.c
+@@ -161,6 +161,9 @@ static bool unit_do_destroy_city(struct player *act_player,
+ static bool do_unit_disband(struct player *pplayer, struct unit *punit);
+ static bool do_unit_change_homecity(struct unit *punit,
+                                     struct city *pcity);
++static bool do_unit_upgrade(struct player *pplayer,
++                            struct unit *punit, struct city *pcity,
++                            enum action_requester ordered_by);
+ 
+ /**************************************************************************
+   Handle airlift request.
+@@ -215,12 +218,13 @@ void handle_unit_type_upgrade(struct player *pplayer, Unit_type_id uti)
+   conn_list_do_buffer(pplayer->connections);
+   unit_list_iterate(pplayer->units, punit) {
+     if (unit_type_get(punit) == from_unittype) {
+-      enum unit_upgrade_result result = unit_upgrade_test(punit, FALSE);
++      struct city *pcity = tile_city(unit_tile(punit));
+ 
+-      if (UU_OK == result) {
++      if (is_action_enabled_unit_on_city(ACTION_UPGRADE_UNIT, punit, pcity)
++          && unit_perform_action(pplayer, punit->id, pcity->id, 0, "",
++                                 ACTION_UPGRADE_UNIT, ACT_REQ_SS_AGENT)) {
+         number_of_upgraded_units++;
+-        transform_unit(punit, to_unittype, FALSE);
+-      } else if (UU_NO_MONEY == result) {
++      } else if (UU_NO_MONEY == unit_upgrade_test(punit, FALSE)) {
+         break;
+       }
+     }
+@@ -250,35 +254,43 @@ void handle_unit_type_upgrade(struct player *pplayer, Unit_type_id uti)
+ }
+ 
+ /**************************************************************************
+- Upgrade a single unit.
++  Upgrade the unit to a newer unit type.
++
++  Returns TRUE iff action could be done, FALSE if it couldn't. Even if
++  this returns TRUE, unit may have died during the action.
+ **************************************************************************/
+-void handle_unit_upgrade(struct player *pplayer, int unit_id)
++static bool do_unit_upgrade(struct player *pplayer,
++                            struct unit *punit, struct city *pcity,
++                            enum action_requester ordered_by)
+ {
+   char buf[512];
+-  struct unit *punit = player_unit_by_number(pplayer, unit_id);
+-
+-  if (NULL == punit) {
+-    /* Probably died or bribed. */
+-    log_verbose("handle_unit_upgrade() invalid unit %d", unit_id);
+-    return;
+-  }
+ 
+   if (UU_OK == unit_upgrade_info(punit, buf, sizeof(buf))) {
+     struct unit_type *from_unit = unit_type_get(punit);
+     struct unit_type *to_unit = can_upgrade_unittype(pplayer, from_unit);
+-    int cost = unit_upgrade_price(pplayer, from_unit, to_unit);
+ 
+     transform_unit(punit, to_unit, FALSE);
+     send_player_info_c(pplayer, pplayer->connections);
+-    notify_player(pplayer, unit_tile(punit), E_UNIT_UPGRADED, ftc_server,
+-                  PL_("%s upgraded to %s for %d gold.",
+-                      "%s upgraded to %s for %d gold.", cost),
+-                  utype_name_translation(from_unit),
+-                  unit_link(punit),
+-                  cost);
++
++    if (ordered_by == ACT_REQ_PLAYER) {
++      int cost = unit_upgrade_price(pplayer, from_unit, to_unit);
++
++      notify_player(pplayer, unit_tile(punit), E_UNIT_UPGRADED, ftc_server,
++                    PL_("%s upgraded to %s for %d gold.",
++                        "%s upgraded to %s for %d gold.", cost),
++                    utype_name_translation(from_unit),
++                    unit_link(punit),
++                    cost);
++    }
++
++    return TRUE;
+   } else {
+-    notify_player(pplayer, unit_tile(punit), E_UNIT_UPGRADED, ftc_server,
+-                  "%s", buf);
++    if (ordered_by == ACT_REQ_PLAYER) {
++      notify_player(pplayer, unit_tile(punit), E_UNIT_UPGRADED, ftc_server,
++                    "%s", buf);
++    }
++
++    return FALSE;
+   }
+ }
+ 
+@@ -1869,6 +1881,21 @@ bool unit_perform_action(struct player *pplayer,
+       }
+     }
+     break;
++  case ACTION_UPGRADE_UNIT:
++    if (pcity) {
++      if (is_action_enabled_unit_on_city(action_type,
++                                         actor_unit, pcity)) {
++        ACTION_STARTED_UNIT_CITY(action_type, actor_unit, pcity);
++
++        return do_unit_upgrade(pplayer, actor_unit, pcity,
++                               requester);
++      } else {
++        illegal_action(pplayer, actor_unit, action_type,
++                       city_owner(pcity), NULL, pcity, NULL,
++                       requester);
++      }
++    }
++    break;
+   case ACTION_CAPTURE_UNITS:
+     if (target_tile) {
+       if (is_action_enabled_unit_on_units(action_type,
+@@ -4121,6 +4148,7 @@ void handle_unit_orders(struct player *pplayer,
+       case ACTION_RECYCLE_UNIT:
+       case ACTION_DISBAND_UNIT:
+       case ACTION_HOME_CITY:
++      case ACTION_UPGRADE_UNIT:
+         /* No validation required. */
+         break;
+       /* Invalid action. Should have been caught above. */
+diff --git a/tools/ruledit/rulesave.c b/tools/ruledit/rulesave.c
+index 5396a96..1719ab1 100644
+--- a/tools/ruledit/rulesave.c
++++ b/tools/ruledit/rulesave.c
+@@ -974,6 +974,9 @@ static bool save_game_ruleset(const char *filename, const char *name)
+   secfile_insert_str(sfile,
+                      action_by_number(ACTION_HOME_CITY)->ui_name,
+                      "actions.ui_name_home_city");
++  secfile_insert_str(sfile,
++                     action_by_number(ACTION_UPGRADE_UNIT)->ui_name,
++                     "actions.ui_upgrade_unit");
+ 
+   sect_idx = 0;
+   action_enablers_iterate(pae) {

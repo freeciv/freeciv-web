@@ -262,8 +262,8 @@ function mouse_moved_cb(e)
     update_mouse_cursor();
   }
 
-  if (map_select_check && Math.abs(mouse_x - map_select_x) > 15 
-      && Math.abs(mouse_y - map_select_y) > 15) {
+  if (map_select_check && Math.abs(mouse_x - map_select_x) > 45 
+      && Math.abs(mouse_y - map_select_y) > 45) {
     map_select_active = true;
   }
 

@@ -110,7 +110,7 @@ Remove forest
                                  unit orders on selection" is set)
   Center-click:  Show tile info
   Right-click:                   Center tile in view
+  Right-click-and-drag:          Select units by area
 
-
-Shift-Return: Turn done
+  Shift-Return: Turn done
 

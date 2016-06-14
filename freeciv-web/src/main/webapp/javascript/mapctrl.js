@@ -86,7 +86,7 @@ function mapview_mouse_down(e)
   } else if (middleclick || e['altKey']) {
     popit();
     return false;
-  } else if (!map_select_active) {
+  } else if (rightclick && !map_select_active) {
     map_select_check = true;
     map_select_x = mouse_x;
     map_select_y = mouse_y;

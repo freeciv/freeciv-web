@@ -62,13 +62,11 @@ def get_debug_info(civcoms):
         code += ("<h3>Logged in users  (count %i) :</h3>" % len(civcoms))
         for key in list(civcoms.keys()):
             code += (
-                "username: <b>%s</b> <br>IP:%s <br>Civserver: %d<br>Connect time: %d<br>Tx to civserver: %d<br>Rx from civserver: %d<br><br>" %
+                "username: <b>%s</b> <br>IP:%s <br>Civserver: %d<br>Connect time: %d<br><br>" %
                 (civcoms[key].username,
                  civcoms[key].civwebserver.ip,
                  civcoms[key].civserverport,
-                 time.time() - civcoms[key].connect_time,
-                 civcoms[key].tx,
-                 civcoms[key].rx))
+                 time.time() - civcoms[key].connect_time))
     except:
         print(("Unexpected error:" + str(sys.exc_info()[0])))
         raise

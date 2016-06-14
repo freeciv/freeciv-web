@@ -44,8 +44,6 @@ class CivCom(Thread):
         self.header_buf = bytearray(0)
         self.daemon = True
         self.civwebserver = civwebserver
-        self.tx = 0
-        self.rx = 0
 
     def run(self):
         # setup connection to civserver
@@ -84,7 +82,6 @@ class CivCom(Thread):
                     self.send_buffer_append(self.net_buf[:-1])
                     self.packet_size = -1
                     self.net_buf = bytearray(0)
-                    self.rx += 1
                     continue
 
             time.sleep(0.01)
@@ -199,4 +196,3 @@ class CivCom(Thread):
     # queue message for the civserver
     def queue_to_civserver(self, message):
         self.civserver_messages.append(message)
-        self.tx += 1

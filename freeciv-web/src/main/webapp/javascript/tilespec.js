@@ -96,6 +96,45 @@ var terrain_match = {"t.l0.hills1" : MATCH_NONE,
 
 };
 
+/**************************************************************************
+  Returns true iff the tileset has graphics for the specified tag.
+**************************************************************************/
+function tileset_has_tag(tagname)
+{
+  return (sprites[tagname] != null);
+}
+
+/**************************************************************************
+  Returns the tag name of the graphic showing the specified Extra on the
+  map.
+**************************************************************************/
+function tileset_extra_graphic_tag(extra)
+{
+  if (extra == null) {
+    console.log("No extra to return tag for.");
+    return null;
+  }
+
+  if (tileset_has_tag(extra['graphic_str'])) {
+    return extra['graphic_str'];
+  }
+
+  if (tileset_has_tag(extra['graphic_alt'])) {
+    return extra['graphic_alt'];
+  }
+
+  console.log("No graphic for extra " + extra['name']);
+  return null;
+}
+
+/**************************************************************************
+  Returns the tag name of the graphic showing the Extra specified by ID on
+  the map.
+**************************************************************************/
+function tileset_extra_id_graphic_tag(extra_id)
+{
+  return tileset_extra_graphic_tag(extras[extra_id]);
+}
 
 /****************************************************************************
   Fill in the sprite array for the given tile, city, and unit.
@@ -163,24 +202,29 @@ function fill_sprite_array(layer, ptile, pedge, pcorner, punit, pcity, citymode)
 
 
         if (tile_has_extra(ptile, EXTRA_MINE)) {
-          sprite_array.push({"key" : "tx.mine"});
+          sprite_array.push({"key" :
+                              tileset_extra_id_graphic_tag(EXTRA_MINE)});
         }
         if (tile_has_extra(ptile, EXTRA_OIL_WELL)) {
-          sprite_array.push({"key" : "tx.oil_mine"});
+          sprite_array.push({"key" :
+                              tileset_extra_id_graphic_tag(EXTRA_OIL_WELL)});
         }
 
         sprite_array = sprite_array.concat(fill_layer1_sprite_array(ptile, pcity));
 
         if (tile_has_extra(ptile, EXTRA_HUT)) {
-          sprite_array.push({"key" : "tx.village"});
+          sprite_array.push({"key" :
+                              tileset_extra_id_graphic_tag(EXTRA_HUT)});
         }
 
         if (tile_has_extra(ptile, EXTRA_POLLUTION)) {
-          sprite_array.push({"key" : "tx.pollution"});
+          sprite_array.push({"key" :
+                              tileset_extra_id_graphic_tag(EXTRA_POLLUTION)});
         }
 
         if (tile_has_extra(ptile, EXTRA_FALLOUT)) {
-          sprite_array.push({"key" : "tx.fallout"});
+          sprite_array.push({"key" :
+                              tileset_extra_id_graphic_tag(EXTRA_FALLOUT)});
         }
 
         sprite_array = sprite_array.concat(get_border_line_sprites(ptile));
@@ -1315,9 +1359,11 @@ function fill_irrigation_sprite_array(ptile, pcity)
    * anyway, and ends up looking bad). */
   if (tile_has_extra(ptile, EXTRA_IRRIGATION) && pcity == null) {
     if (tile_has_extra(ptile, EXTRA_FARMLAND)) {
-      result_sprites.push({"key" : "tx.farmland"});
+      result_sprites.push({"key" :
+                            tileset_extra_id_graphic_tag(EXTRA_FARMLAND)});
     } else {
-      result_sprites.push({"key" : "tx.irrigation"});
+      result_sprites.push({"key" :
+                            tileset_extra_id_graphic_tag(EXTRA_IRRIGATION)});
     }
   }
 

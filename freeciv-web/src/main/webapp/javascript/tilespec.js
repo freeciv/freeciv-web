@@ -857,7 +857,7 @@ function get_unit_activity_sprite(punit)
 
     case ACTIVITY_MINE:
       return {"key"      : -1 == act_tgt ?
-                             "unit.mine" :
+                             "unit.plant" :
                              tileset_extra_id_activity_graphic_tag(act_tgt),
               "offset_x" : unit_activity_offset_x,
               "offset_y" : - unit_activity_offset_y};

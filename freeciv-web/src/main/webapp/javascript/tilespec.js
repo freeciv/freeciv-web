@@ -856,14 +856,18 @@ function get_unit_activity_sprite(punit)
           "offset_y" : - unit_activity_offset_y};
 
     case ACTIVITY_MINE:
-      return {"key" : "unit.mine",
-          "offset_x" : unit_activity_offset_x,
-          "offset_y" : - unit_activity_offset_y};
+      return {"key"      : -1 == act_tgt ?
+                             "unit.mine" :
+                             tileset_extra_id_activity_graphic_tag(act_tgt),
+              "offset_x" : unit_activity_offset_x,
+              "offset_y" : - unit_activity_offset_y};
 
     case ACTIVITY_IRRIGATE:
-      return {"key" : "unit.irrigate",
-          "offset_x" : unit_activity_offset_x,
-          "offset_y" : - unit_activity_offset_y};
+      return {"key" : -1 == act_tgt ?
+                        "unit.irrigate" :
+                        tileset_extra_id_activity_graphic_tag(act_tgt),
+              "offset_x" : unit_activity_offset_x,
+              "offset_y" : - unit_activity_offset_y};
 
     case ACTIVITY_FORTIFIED:
       return {"key" : "unit.fortified",
@@ -906,9 +910,9 @@ function get_unit_activity_sprite(punit)
           "offset_y" : - unit_activity_offset_y};
 
     case ACTIVITY_GEN_ROAD:
-      return {"key" : "unit.road",
-          "offset_x" : unit_activity_offset_x,
-          "offset_y" : - unit_activity_offset_y};
+      return {"key" : tileset_extra_id_activity_graphic_tag(act_tgt),
+              "offset_x" : unit_activity_offset_x,
+              "offset_y" : - unit_activity_offset_y};
 
     case ACTIVITY_CONVERT:
       return {"key" : "unit.convert",

@@ -262,8 +262,12 @@ function mouse_moved_cb(e)
     update_mouse_cursor();
   }
 
-  if (map_select_check && Math.abs(mouse_x - map_select_x) > 45 
-      && Math.abs(mouse_y - map_select_y) > 45) {
+  /* determine if Right-click-and-drag to select multiple units should be activated,
+     only if more than an area of 45 pixels has been selected and more than 400ms has past.
+     See mapview_mouse_click and mapview_mouse_down. */
+  if (map_select_check && Math.abs(mouse_x - map_select_x) > 45
+      && Math.abs(mouse_y - map_select_y) > 45
+      && (new Date().getTime() - map_select_check_started) > 400)  {
     map_select_active = true;
   }
 
@@ -1254,6 +1258,16 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift, the_event)
       deactivate_goto();
       break;
 
+    case 32: // space, will clear selection and goto.
+      current_focus = [];
+      goto_active = false;
+      mapview_canvas.style.cursor = "default";
+      goto_request_map = {};
+      goto_turns_request_map = {};
+      clear_goto_tiles();
+      update_active_units_dialog();
+
+      break;
 
   }
 

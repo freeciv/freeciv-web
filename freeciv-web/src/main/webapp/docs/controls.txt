@@ -112,5 +112,7 @@ Remove forest
   Right-click:                   Center tile in view
   Right-click-and-drag:          Select units by area
 
+  Spacebar:                      Clear selected units.
+
   Shift-Return: Turn done
 

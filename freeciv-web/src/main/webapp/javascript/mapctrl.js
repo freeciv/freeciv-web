@@ -22,6 +22,7 @@ var touch_start_x;
 var touch_start_y;
 
 var map_select_check = false;
+var map_select_check_started = 0;
 var map_select_active = false;
 var map_select_x;
 var map_select_y;
@@ -86,10 +87,11 @@ function mapview_mouse_down(e)
   } else if (middleclick || e['altKey']) {
     popit();
     return false;
-  } else if (rightclick && !map_select_active) {
+  } else if (rightclick && !map_select_active && !is_touch_device()) {
     map_select_check = true;
     map_select_x = mouse_x;
     map_select_y = mouse_y;
+    map_select_check_started = new Date().getTime();
 
   }
 

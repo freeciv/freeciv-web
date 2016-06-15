@@ -136,6 +136,41 @@ function tileset_extra_id_graphic_tag(extra_id)
   return tileset_extra_graphic_tag(extras[extra_id]);
 }
 
+/**************************************************************************
+  Returns the tag name of the graphic showing that a unit is building the
+  specified Extra.
+**************************************************************************/
+function tileset_extra_activity_graphic_tag(extra)
+{
+  if (extra == null) {
+    console.log("No extra to return tag for.");
+    return null;
+  }
+
+  if (tileset_has_tag(extra['activity_gfx'])) {
+    return extra['activity_gfx'];
+  }
+
+  if (tileset_has_tag(extra['act_gfx_alt'])) {
+    return extra['act_gfx_alt'];
+  }
+
+  /* TODO: Freeciv server r31630 adds the act_gfx_alt2 alternative. Support
+   * it once the Freeciv server reaches it. */
+
+  console.log("No activity graphic for extra " + extra['name']);
+  return null;
+}
+
+/**************************************************************************
+  Returns the tag name of the graphic showing that a unit is building the
+  Extra specified by the id.
+**************************************************************************/
+function tileset_extra_id_activity_graphic_tag(extra_id)
+{
+  return tileset_extra_activity_graphic_tag(extras[extra_id]);
+}
+
 /****************************************************************************
   Fill in the sprite array for the given tile, city, and unit.
 
@@ -836,22 +871,7 @@ function get_unit_activity_sprite(punit)
           "offset_y" : - unit_activity_offset_y};
 
     case ACTIVITY_BASE:
-      switch (act_tgt) {
-        case BASE_FORTRESS:
-          return {"key" : "unit.fortress",
-                  "offset_x" : unit_activity_offset_x,
-                  "offset_y" : - unit_activity_offset_y};
-        case BASE_AIRBASE:
-          return {"key" : "unit.airbase",
-                  "offset_x" : unit_activity_offset_x,
-                  "offset_y" : - unit_activity_offset_y};
-        case BASE_BUOY:
-          return {"key" : "unit.buoy",
-                  "offset_x" : unit_activity_offset_x,
-                  "offset_y" : - unit_activity_offset_y};
-      }
-
-      return {"key" : "unit.fortress",
+      return {"key" : tileset_extra_id_activity_graphic_tag(act_tgt),
               "offset_x" : unit_activity_offset_x,
               "offset_y" : - unit_activity_offset_y};
 

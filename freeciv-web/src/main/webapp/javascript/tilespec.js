@@ -155,8 +155,9 @@ function tileset_extra_activity_graphic_tag(extra)
     return extra['act_gfx_alt'];
   }
 
-  /* TODO: Freeciv server r31630 adds the act_gfx_alt2 alternative. Support
-   * it once the Freeciv server reaches it. */
+  if (tileset_has_tag(extra['act_gfx_alt2'])) {
+    return extra['act_gfx_alt2'];
+  }
 
   console.log("No activity graphic for extra " + extra['name']);
   return null;

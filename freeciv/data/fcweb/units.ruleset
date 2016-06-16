@@ -349,7 +349,7 @@ flags         = "Unreachable", "DoesntOccupyTile"
 ; Following flag strings require extra fields:
 ;  "Paratroopers"
 ;   paratroopers_range  = the maximal range the unit can be paradropped to.
-;                         Max range is 255.
+;                         Max range is 65534.
 ;   paratroopers_mr_req = the move rate which is required at least for
 ;                         paradropping (whole movement points)
 ;   paratroopers_mr_sub = the move rate which is subtracted after paradropping

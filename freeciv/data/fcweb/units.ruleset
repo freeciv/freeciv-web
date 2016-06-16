@@ -923,7 +923,6 @@ immediately ready to act there. (Beware dropping into unseen territory, \
 as Paratroopers landing on a tile occupied by enemy units are easy \
 targets!)\
 ")
-
 paratroopers_range = 10
 paratroopers_mr_req = 1
 paratroopers_mr_sub = 0

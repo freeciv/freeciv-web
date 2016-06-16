@@ -278,6 +278,16 @@ function handle_conn_ping(packet)
 
 }
 
+/**************************************************************************
+  Server requested topology change.
+
+  0% complete.
+**************************************************************************/
+function handle_set_topology(packet)
+{
+  /* TODO */
+}
+
 /* 50% complete */
 function handle_map_info(packet)
 {

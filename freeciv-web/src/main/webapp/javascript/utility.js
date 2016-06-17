@@ -151,3 +151,18 @@ function supports_mp3() {
   var a = document.createElement('audio');
   return !!(a.canPlayType && a.canPlayType('audio/mpeg;').replace(/no/, ''));
 }
+
+/****************************************************************************
+  Mac OS X and Chrome OS does not support the right-click-and-drag to select
+  units on the map in Freeciv-web at the moment.
+****************************************************************************/
+function is_right_mouse_selection_supported()
+{
+  if (is_touch_device() || platform.description.indexOf("Mac OS X") > 0 || platform.description.indexOf("Chrome OS") > 0
+      || platform.description.indexOf("CrOS") > 0 ) {
+    return false;
+  } else {
+    return true;
+  }
+
+}

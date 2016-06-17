@@ -87,7 +87,7 @@ function mapview_mouse_down(e)
   } else if (middleclick || e['altKey']) {
     popit();
     return false;
-  } else if (rightclick && !map_select_active && !is_touch_device()) {
+  } else if (rightclick && !map_select_active && is_right_mouse_selection_supported()) {
     map_select_check = true;
     map_select_x = mouse_x;
     map_select_y = mouse_y;
@@ -96,6 +96,7 @@ function mapview_mouse_down(e)
   }
 
 }
+
 /****************************************************************************
   This function is triggered when beginning a touch event on a touch device,
   eg. finger down on screen.

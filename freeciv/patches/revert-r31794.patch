@@ -1,0 +1,380 @@
+From 6ab01ad42a937193878585758960db6e45c83398 Mon Sep 17 00:00:00 2001
+From: Sveinung Kvilhaugsvik <sveinung84@users.sourceforge.net>
+Date: Mon, 20 Jun 2016 23:49:26 +0200
+Subject: [PATCH] Revert "First turn is now T1, and T0 is only pre-game."
+
+---
+ common/game.c                        |  2 +-
+ common/game.h                        |  2 +-
+ common/mapimg.c                      |  2 +-
+ common/scriptcore/api_game_methods.c | 14 ---------
+ common/scriptcore/api_game_methods.h |  1 -
+ common/scriptcore/tolua_game.pkg     |  4 ---
+ data/alien/script.lua                |  4 +--
+ data/scenarios/tutorial.sav          |  4 +--
+ server/cityturn.c                    |  2 +-
+ server/legacysave.c                  | 14 +++------
+ server/savecompat.c                  | 57 ------------------------------------
+ server/scripting/script_server.c     |  6 ----
+ server/settings.c                    | 10 +++----
+ server/srv_main.c                    |  7 +----
+ 14 files changed, 18 insertions(+), 111 deletions(-)
+
+diff --git a/common/game.c b/common/game.c
+index ac3e4ef..1ff2c4d 100644
+--- a/common/game.c
++++ b/common/game.c
+@@ -811,7 +811,7 @@ void user_flag_free(struct user_flag *flag)
+ ****************************************************************************/
+ int current_turn_timeout(void)
+ {
+-  if (game.info.turn == 1 && game.info.first_timeout != -1) {
++  if (game.info.turn == 0 && game.info.first_timeout != -1) {
+     return game.info.first_timeout;
+   } else {
+     return game.info.timeout;
+diff --git a/common/game.h b/common/game.h
+index 0c277ae..cd52012 100644
+--- a/common/game.h
++++ b/common/game.h
+@@ -566,7 +566,7 @@ extern struct civ_game game;
+ #define GAME_DEFAULT_BARBARIANRATE   BARBS_NORMAL
+ 
+ #define GAME_DEFAULT_ONSETBARBARIAN  60
+-#define GAME_MIN_ONSETBARBARIAN      1
++#define GAME_MIN_ONSETBARBARIAN      0
+ #define GAME_MAX_ONSETBARBARIAN      GAME_MAX_END_TURN
+ 
+ #define GAME_DEFAULT_OCCUPYCHANCE    0
+diff --git a/common/mapimg.c b/common/mapimg.c
+index 9c2bd1b..6183d06 100644
+--- a/common/mapimg.c
++++ b/common/mapimg.c
+@@ -1343,7 +1343,7 @@ bool mapimg_create(struct mapdef *pmapdef, bool force, const char *savename,
+    * - it is the first turn
+    * - turns is set to a value not zero and the current turn can be devided
+    *   by this number */
+-  if (!force && game.info.turn != 1
++  if (!force && game.info.turn != 0
+       && !(pmapdef->turns != 0 && game.info.turn % pmapdef->turns == 0)) {
+     return TRUE;
+   }
+diff --git a/common/scriptcore/api_game_methods.c b/common/scriptcore/api_game_methods.c
+index 8470eaa..2477f52 100644
+--- a/common/scriptcore/api_game_methods.c
++++ b/common/scriptcore/api_game_methods.c
+@@ -50,20 +50,6 @@ int api_methods_game_turn(lua_State *L)
+ }
+ 
+ /*****************************************************************************
+-  Return the current turn, as if real turns started from 0.
+-*****************************************************************************/
+-int api_methods_game_turn_deprecated(lua_State *L)
+-{
+-  LUASCRIPT_CHECK_STATE(L, FALSE);
+-
+-  if (game.info.turn > 0) {
+-    return game.info.turn - 1;
+-  }
+-
+-  return game.info.turn;
+-}
+-
+-/*****************************************************************************
+   Return TRUE if pbuilding is a wonder.
+ *****************************************************************************/
+ bool api_methods_building_type_is_wonder(lua_State *L,
+diff --git a/common/scriptcore/api_game_methods.h b/common/scriptcore/api_game_methods.h
+index 42930ca..96bfc66 100644
+--- a/common/scriptcore/api_game_methods.h
++++ b/common/scriptcore/api_game_methods.h
+@@ -25,7 +25,6 @@ struct lua_State;
+ 
+ /* Game */
+ int api_methods_game_turn(lua_State *L);
+-int api_methods_game_turn_deprecated(lua_State *L);
+ 
+ /* Building Type */
+ bool api_methods_building_type_is_wonder(lua_State *L,
+diff --git a/common/scriptcore/tolua_game.pkg b/common/scriptcore/tolua_game.pkg
+index ba7a311..351fb0b 100644
+--- a/common/scriptcore/tolua_game.pkg
++++ b/common/scriptcore/tolua_game.pkg
+@@ -113,10 +113,6 @@ struct City_List_Link {
+ /* Module Game */
+ module game {
+   int api_methods_game_turn
+-    @ current_turn (lua_State *L);
+-
+-  /* Deprecated. Use current_turn() to get the real turn number */
+-  int api_methods_game_turn_deprecated
+     @ turn (lua_State *L);
+ }
+ 
+diff --git a/data/alien/script.lua b/data/alien/script.lua
+index 83d4816..3ec2a96 100644
+--- a/data/alien/script.lua
++++ b/data/alien/script.lua
+@@ -119,10 +119,10 @@ signal.connect("hut_enter", "alien_hut_enter_callback")
+ 
+ -- Show a pop up telling the beginning of the story when the game starts.
+ function turn_callback(turn, year)
+-  if turn == 1 then
++  if turn == 0 then
+     notify.event(nil, nil, E.SCRIPT,
+ _("Deneb 7 was known to have strange force field surrounding it\nthat made it impossible to get near planet with year\n250 Galactic Era Earth technology. However, when you were\nflying past, that field suddenly reverted and sucked you\nto the planet.\n\nYou find yourself in a strange world, probably touched\nby superior technology, where big portion of Earth science\nis invalid. You have to learn new rules,\nrules of this world.\n\nThere's deadly radiation that no known shielding works against.\nThere's alien life, but more surprisingly also some\nedible plants just like on Earth.\n\nRadio doesn't work,\nair doesn't allow flying, some basic Physics does\nnot apply here.\n\nYou struggle to live on this planet, and read\nRoadside Picnic by Strugatsky brothers once more."))
+   end
+ end
+ 
+-signal.connect('turn_begin', 'turn_callback')
++signal.connect('turn_started', 'turn_callback')
+diff --git a/data/scenarios/tutorial.sav b/data/scenarios/tutorial.sav
+index 5a72ace..081d626 100644
+--- a/data/scenarios/tutorial.sav
++++ b/data/scenarios/tutorial.sav
+@@ -98,12 +98,12 @@ end
+ -- Hint to build workers?
+ 
+ function turn_callback(turn, year)
+-  if turn == 1 then
++  if turn == 0 then
+     notify.event(nil, nil, E.SCRIPT,
+ _("Welcome to Freeciv.  You lead a civilization.  Your\ntask is to conquer the world!  You should start by\nexploring the land around you with your explorer,\nand using your settlers to find a good place to build\na city.  Use the number pad to move units around."))
+   end
+ end
+-signal.connect('turn_begin', 'turn_callback')
++signal.connect('turn_started', 'turn_callback')
+ 
+ -- Check for and warn about vulnerable stacks.
+ function check_stacks(tile, player)
+diff --git a/server/cityturn.c b/server/cityturn.c
+index 38a83b2..508f2a5 100644
+--- a/server/cityturn.c
++++ b/server/cityturn.c
+@@ -3545,7 +3545,7 @@ static bool do_city_migration(struct city *pcity_from,
+ 
+   'game.server.mgr_turninterval' controls the number of turns between
+   migration checks for one city (counted from the founding). If this
+-  setting is zero, or it is the first turn (T1), migration does no occur.
++  setting is zero, or it is the first turn (T0), migration does no occur.
+ 
+   'game.server.mgr_distance' is the maximal distance for migration.
+ 
+diff --git a/server/legacysave.c b/server/legacysave.c
+index 508fb65..4d0ddf5 100644
+--- a/server/legacysave.c
++++ b/server/legacysave.c
+@@ -1271,7 +1271,7 @@ static void player_load_units(struct player *plr, int plrno,
+     }
+ 
+     punit->server.birth_turn = secfile_lookup_int_default(file, game.info.turn,
+-                                                          "player%d.u%d.born", plrno, i) + 1;
++                                                   "player%d.u%d.born", plrno, i);
+     base = secfile_lookup_int_default(file, -1,
+                                       "player%d.u%d.activity_base", plrno, i);
+     if (base >= 0 && base < num_base_types) {
+@@ -2391,7 +2391,7 @@ static void player_load_cities(struct player *plr, int plrno,
+     /* before did_buy for undocumented hack */
+     pcity->turn_founded =
+       secfile_lookup_int_default(file, -2, "player%d.c%d.turn_founded",
+-                                 plrno, i) + 1;
++                                 plrno, i);
+     fc_assert_exit_msg(secfile_lookup_int(file, &j, "player%d.c%d.did_buy",
+                                           plrno, i),
+                        "%s", secfile_error());
+@@ -3354,11 +3354,8 @@ static void game_load_internal(struct section_file *file)
+       = secfile_lookup_int_default(file, GAME_DEFAULT_UNITWAITTIME,
+                                    "game.unitwaittime");
+ 
+-    game.server.end_turn
+-      = secfile_lookup_int_default(file, 5000 - 1, "game.end_turn") + 1;
+-    if (game.server.end_turn > GAME_MAX_END_TURN) {
+-      game.server.end_turn = GAME_MAX_END_TURN;
+-    }
++    game.server.end_turn      = secfile_lookup_int_default(file, 5000,
++                                                         "game.end_turn");
+     game.info.shieldbox
+       = secfile_lookup_int_default(file, GAME_DEFAULT_SHIELDBOX,
+ 				   "game.box_shield");
+@@ -3388,9 +3385,6 @@ static void game_load_internal(struct section_file *file)
+          * (I_DESTROYED) are used at turn number for the city improvements,
+          * we cannot use that strange hack anymore. */
+         game.info.turn = 0;
+-      } else if (!game.info.is_new_game) {
+-        /* Game start at T1 nowadays */
+-        game.info.turn++;
+       }
+     } else {
+       game.info.turn = 0;
+diff --git a/server/savecompat.c b/server/savecompat.c
+index a495a8b..1447ab6 100644
+--- a/server/savecompat.c
++++ b/server/savecompat.c
+@@ -1139,24 +1139,6 @@ static void compat_load_020600(struct loaddata *loading)
+ }
+ 
+ /****************************************************************************
+-  Increase turn value in secfile by one.
+-****************************************************************************/
+-static int increase_secfile_turn_int(struct loaddata *loading, const char *key,
+-                                     int old_def, bool keep_default)
+-{
+-  int value;
+-
+-  value = secfile_lookup_int_default(loading->file, old_def, "%s", key);
+-
+-  if (value != old_def || !keep_default) {
+-    value++;
+-    secfile_replace_int(loading->file, value, "%s", key);
+-  }
+-
+-  return value;
+-}
+-
+-/****************************************************************************
+   Translate savegame secfile data from 2.6.x to 3.0.0 format.
+   Note that even after 2.6 savegame has gone through this compatibility
+   function, it's still 2.6 savegame in the sense that savegame2.c, and not
+@@ -1168,8 +1150,6 @@ static void compat_load_030000(struct loaddata *loading)
+   int plrno;
+   int nplayers;
+   int num_settings;
+-  bool started;
+-  int old_turn;
+ 
+   /* Check status and return if not OK (sg_success != TRUE). */
+   sg_check_ret();
+@@ -1183,17 +1163,6 @@ static void compat_load_030000(struct loaddata *loading)
+     log_sg("random.save: %s", secfile_error());
+   }
+ 
+-  /* Already started games should have their turn counts increased by 1 */
+-  if (secfile_lookup_bool_default(loading->file, TRUE, "game.save_players")) {
+-    started = TRUE;
+-
+-    old_turn = increase_secfile_turn_int(loading, "game.turn", 0, FALSE) - 1;
+-    increase_secfile_turn_int(loading, "game.scoreturn", old_turn + GAME_DEFAULT_SCORETURN, FALSE);
+-    increase_secfile_turn_int(loading, "history.turn", -2, TRUE);
+-  } else {
+-    started = FALSE;
+-  }
+-
+   nplayers = secfile_lookup_int_default(loading->file, 0, "players.nplayers");
+ 
+   for (plrno = 0; plrno < nplayers; plrno++) {
+@@ -1206,32 +1175,6 @@ static void compat_load_030000(struct loaddata *loading)
+       secfile_insert_str_vec(loading->file, flag_names, 1,
+                              "player%d.flags", plrno);
+     }
+-
+-    if (started) {
+-      int num = secfile_lookup_int_default(loading->file, 0,
+-                                           "player%d.nunits",
+-                                           plrno);
+-      int i;
+-
+-      for (i = 0; i < num; i++) {
+-        char buf[64];
+-
+-        fc_snprintf(buf, sizeof(buf), "player%d.u%d.born", plrno, i);
+-
+-        increase_secfile_turn_int(loading, buf, old_turn, FALSE);
+-      }
+-
+-      num = secfile_lookup_int_default(loading->file, 0,
+-                                       "player%d.ncities", plrno);
+-
+-      for (i = 0; i < num; i++) {
+-        char buf[64];
+-
+-        fc_snprintf(buf, sizeof(buf), "player%d.c%d.turn_founded", plrno, i);
+-
+-        increase_secfile_turn_int(loading, buf, -2, TRUE);
+-      }
+-    }
+   }
+ 
+   /* Settings */
+diff --git a/server/scripting/script_server.c b/server/scripting/script_server.c
+index 6ff6004..d6fd305 100644
+--- a/server/scripting/script_server.c
++++ b/server/scripting/script_server.c
+@@ -344,14 +344,8 @@ void script_server_signal_emit(const char *signal_name, int nargs, ...)
+ *****************************************************************************/
+ static void script_server_signal_create(void)
+ {
+-  luascript_signal_create(fcl_main, "turn_begin", 2,
+-                          API_TYPE_INT, API_TYPE_INT);
+-
+-  /* Deprecated form of the 'turn_begin' signal that counts real turns
+-   * starting from 0. */
+   luascript_signal_create(fcl_main, "turn_started", 2,
+                           API_TYPE_INT, API_TYPE_INT);
+-
+   luascript_signal_create(fcl_main, "unit_moved", 3,
+                           API_TYPE_UNIT, API_TYPE_TILE, API_TYPE_TILE);
+ 
+diff --git a/server/settings.c b/server/settings.c
+index 91c773f..d4832a6 100644
+--- a/server/settings.c
++++ b/server/settings.c
+@@ -693,7 +693,7 @@ static void timeout_action(const struct setting *pset)
+   if (S_S_RUNNING == server_state()) {
+     int timeout = *pset->integer.pvalue;
+ 
+-    if (game.info.turn != 1 || game.info.first_timeout == -1) {
++    if (game.info.turn != 0 || game.info.first_timeout == -1) {
+       /* This may cause the current turn to end immediately. */
+       game.tinfo.seconds_to_phasedone = timeout;
+     }
+@@ -710,7 +710,7 @@ static void first_timeout_action(const struct setting *pset)
+   if (S_S_RUNNING == server_state()) {
+     int timeout = *pset->integer.pvalue;
+ 
+-    if (game.info.turn == 1) {
++    if (game.info.turn == 0) {
+       /* This may cause the current turn to end immediately. */
+       if (timeout != -1) {
+         game.tinfo.seconds_to_phasedone = timeout;
+@@ -2512,9 +2512,9 @@ static struct setting settings[] = {
+           N_("First turn timeout"),
+           /* TRANS: The strings between single quotes are setting names and
+            * should not be translated. */
+-          N_("If greater than 0, T1 will last for 'first_timeout' seconds.\n"
+-             "If set to 0, T1 will not have a timeout.\n"
+-             "If set to -1, the special treatment of T1 will be disabled.\n"
++          N_("If greater than 0, T0 will last for 'first_timeout' seconds.\n"
++             "If set to 0, T0 will not have a timeout.\n"
++             "If set to -1, the special treatment of T0 will be disabled.\n"
+              "See also 'timeout'."),
+           NULL, first_timeout_callback, first_timeout_action,
+           GAME_MIN_FIRST_TIMEOUT, GAME_MAX_FIRST_TIMEOUT,
+diff --git a/server/srv_main.c b/server/srv_main.c
+index 903c86c..5fa2c90 100644
+--- a/server/srv_main.c
++++ b/server/srv_main.c
+@@ -973,11 +973,8 @@ static void begin_turn(bool is_new_turn)
+   send_game_info(NULL);
+ 
+   if (is_new_turn) {
+-    script_server_signal_emit("turn_begin", 2,
+-                              API_TYPE_INT, game.info.turn,
+-                              API_TYPE_INT, game.info.year);
+     script_server_signal_emit("turn_started", 2,
+-                              API_TYPE_INT, game.info.turn > 0 ? game.info.turn - 1: game.info.turn,
++                              API_TYPE_INT, game.info.turn,
+                               API_TYPE_INT, game.info.year);
+ 
+     /* We build scores at the beginning of every turn.  We have to
+@@ -2813,8 +2810,6 @@ static void srv_ready(void)
+ #endif
+ 
+   if (game.info.is_new_game) {
+-    game.info.turn++; /* pregame T0 -> game T1 */
+-    fc_assert(game.info.turn == 1);
+     game.info.year = game.server.start_year;
+     /* Must come before assign_player_colors() */
+     generate_players();
+-- 
+2.1.4
+

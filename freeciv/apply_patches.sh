@@ -4,6 +4,8 @@
 # freeciv_segfauls_fix is a workaround some segfaults in the Freeciv server. Freeciv bug #23884.
 # message_escape is a patch for protecting against script injection in the message texts.
 # tutorial_ruleset changes the ruleset of the tutorial to one supported by Freeciv-web.
+# revert-r31794 reverts Freeciv patch #6599 (SVN r31794)
+#     TODO: port Freeciv-web to turn 1 as the first turn and remove it.
 # MapMoveCostInline is backport of Freeciv patch #6934 (SVN r31886)
 # fragement is comment changes like SVN r31952, included here just to provide baseline that
 #     other patches apply directly to
@@ -33,7 +35,7 @@
 # disable_global_warming is Freeciv bug #24418
 # navajo-remove-long-city-names is a quick-fix to remove city names which would be longer than MAX_LEN_NAME when the name is url encoded in json protocol. A possibly better solution is to increase MAX_LEN_NAME.
 
-PATCHLIST="WarningsBase freeciv_web_packets_def_changes city_fixes city_impr_fix2 city-naming-change city_fixes2 citytools_changes metachange text_fixes unithand-change2 current_research_cost freeciv-svn-webclient-changes init_lists_disable goto_fcweb misc_devversion_sync tutorial_ruleset savegame maphand_ch serverside_extra_assign libtoolize_no_symlinks ai_traits_crash worklists server_password barbarian-names activity_null_check add_rulesets message_escape freeciv_segfauls_fix scorelog_filenames scorelog_set_to_client settings_access_level_metamessage metamessage_setting disable_global_warming fragement GenericPacketsGen24421 ArrayDimensions CommentLineOfItsOwn Remove-redundant-canceled-orders-notification win_chance ScorefileWeb MapMoveCostInline AllowIextraInBetween CardinalityCheckOnDemand ClassBonusRoadsCache InlineGenlistNavigation TileExtrasSafe NoNonnull SaveInvalidResource FairResourceExtra1 FairResourceExtra2 navajo-remove-long-city-names"
+PATCHLIST="revert-r31794 WarningsBase freeciv_web_packets_def_changes city_fixes city_impr_fix2 city-naming-change city_fixes2 citytools_changes metachange text_fixes unithand-change2 current_research_cost freeciv-svn-webclient-changes init_lists_disable goto_fcweb misc_devversion_sync tutorial_ruleset savegame maphand_ch serverside_extra_assign libtoolize_no_symlinks ai_traits_crash worklists server_password barbarian-names activity_null_check add_rulesets message_escape freeciv_segfauls_fix scorelog_filenames scorelog_set_to_client settings_access_level_metamessage metamessage_setting disable_global_warming fragement GenericPacketsGen24421 ArrayDimensions CommentLineOfItsOwn Remove-redundant-canceled-orders-notification win_chance ScorefileWeb MapMoveCostInline AllowIextraInBetween CardinalityCheckOnDemand ClassBonusRoadsCache InlineGenlistNavigation TileExtrasSafe NoNonnull SaveInvalidResource FairResourceExtra1 FairResourceExtra2 navajo-remove-long-city-names"
 
 apply_patch() {
   echo "*** Applying $1.patch ***"

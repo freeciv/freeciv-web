@@ -26,6 +26,9 @@
 # ScorefileWeb is Freeciv patch #7177 (SVN r32570)
 # serverside_extra_assign is Freeciv patch #7178 (SVN r32585)
 # ClassBonusRoadsCache is backport of Freeciv patch #7176 (SVN r32612)
+# (SVN r32928): freeciv_web_packets_def_changes and city_fixes need to be adjusted
+#               for the fact that freeciv-web specific part of the packet_city_info
+#               is in a new packet. Also receiving web-client side needs changes
 # win_chance includes 'Chance to win' in Freeciv-web map tile popup.
 # disable_global_warming is Freeciv bug #24418
 # navajo-remove-long-city-names is a quick-fix to remove city names which would be longer than MAX_LEN_NAME when the name is url encoded in json protocol. A possibly better solution is to increase MAX_LEN_NAME.

@@ -339,7 +339,7 @@ flags         = "Unreachable", "DoesntOccupyTile"
 ; "CanEscape"   = this unit has, given that certain conditions are
 ;                 fulfilled, a 50% chance to escape rather than being
 ;                 killed when killstack is enabled and the defender of its
-;                 tile is defeated. The condtions are that it has more move
+;                 tile is defeated. The conditions are that it has more move
 ;                 points than required to move to an adjacent tile plus the
 ;                 attackers move points and that the attacker doesn't have
 ;                 the "CanKillEscaping" unit type flag.

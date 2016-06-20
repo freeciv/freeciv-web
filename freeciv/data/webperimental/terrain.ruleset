@@ -155,6 +155,8 @@ ocean_resources = FALSE
 ;   - NoZoc            = Units on this terrain are not generating or subject
 ;                        to zoc
 ;   - NoFortify        = Units cannot fortify on this terrain
+;   - Frozen           = Frozen/polar terrain. Currently this just affects
+;                        how the terrain is shown on the overview map.
 ; property_*           = specific property % values used by mapgen.  Most
 ;                        terrains will have 0 for most values.
 ;  - mountainous       = degree to which this terrain is mountainous
@@ -164,6 +166,7 @@ ocean_resources = FALSE
 ;  - temperate         = how "temperate" the terrain is (med temperature)
 ;  - cold              = how "cold" the terrain is (low temperature)
 ;  - frozen            = how "frozen" the terrain is (very low temperature)
+;                        (does not necessarily have to have the "Frozen" flag)
 ;  - wet               = how "wet" the terrain is (moisture)
 ;  - dry               = how "dry" the terrain is (moisture)
 ;  - ocean_depth       = the depth of an ocean, as an average level
@@ -380,7 +383,7 @@ warmer_drier_result  = "Tundra"
 cooler_wetter_result = "no"
 cooler_drier_result  = "no"
 native_to            = "Land", "Air", "Missile", "Helicopter"
-flags                = "NoBarbs", "NoCities", "CanHaveRiver", "Oil"
+flags                = "NoBarbs", "NoCities", "CanHaveRiver", "Oil", "Frozen"
 property_frozen      = 100
 color.r              = 232
 color.g              = 232

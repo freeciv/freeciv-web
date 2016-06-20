@@ -76,9 +76,11 @@ ocean_resources = FALSE
 ;                        present, 'name' is used. Since the name used in
 ;                        savegames must not change, use this when renaming a
 ;                        terrain after a ruleset has been released.
-; graphic              = preferred graphic [tile_*] in tilespec.
-; graphic_alt          = alternate graphic [tile_*] when preferred is not found;
-;                        otherwise may be "-"
+; graphic              = preferred graphic; Tilespec [tile_*] section
+;                        with 'tag' matching this will be used. 
+; graphic_alt          = alternate graphic. When no tilespec 'tag' matching
+;                        preferred graphic is not found, this will be used.
+;                        Otherwise may be "-"
 ; identifier           = single-character identifier used in savegames.  This
 ;                        must be unique for each terrain, and changing it will
 ;                        break savegame compatibility.

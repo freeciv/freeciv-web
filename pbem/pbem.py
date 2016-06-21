@@ -84,7 +84,7 @@ def cleanup_expired_games():
       winner = game['players'][(game['phase']+1) % len(game['players'])];
       print("Expiring game: " + key + " winner:" + winner + ", looser:" + looser);
       # at least 3 turns must be completed before it will effect ranking.
-      if (game['turn'] > 3): save_game_result(winner, winner, looser);
+      if (game['turn'] > 4): save_game_result(winner, winner, looser);
       del status.games[key];
       status.retired += 1;
 

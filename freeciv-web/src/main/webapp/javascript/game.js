@@ -135,7 +135,7 @@ function get_year_string()
 **************************************************************************/
 function current_turn_timeout()
 {
-  if (game_info['turn'] == 0 && game_info['first_timeout'] != -1) {
+  if (game_info['turn'] == 1 && game_info['first_timeout'] != -1) {
     return game_info['first_timeout'];
   } else {
     return game_info['timeout'];

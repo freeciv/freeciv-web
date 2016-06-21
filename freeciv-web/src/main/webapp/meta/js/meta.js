@@ -80,7 +80,7 @@ function show_scores(port) {
  Handles the scorelog file
 ****************************************************************************/
 function handle_scorelog(scorelog) {
-  var start_turn = 0;
+  var start_turn = 1;
   var scoreitems = scorelog.split("\n");
   var scoreplayers = {};
   var playerslist = [];

@@ -146,7 +146,7 @@ casper.test.begin('Test starting new Freeciv-web game', 11, function suite(test)
       }, "Checks some properties of the player object.");
 
       test.assertEval(function() {
-            return game_info['turn'] == 0 
+            return game_info['turn'] == 1 
             && game_info['year'] == -4000
             && game_info['timeout'] == 0
             && game_info['gold'] > 0

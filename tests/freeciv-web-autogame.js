@@ -35,7 +35,7 @@ casper.test.begin('Test starting new Freeciv-web autogame', 4, function suite(te
     });
 
     casper.waitForText("T200", function() {
-      this.clickLabel('Ok');
+      //this.clickLabel('Ok');
       this.echo("Captured screenshot to be saved as screenshot-autogame.png");
       this.capture('screenshot-autogame.png', undefined, {
         format: 'png',

@@ -13,4 +13,5 @@ set scorelog enabled
 set size 4
 set landm 50
 set minp 2
+metaconnection persistent
 metamessage New Freeciv-web Multiplayer Game

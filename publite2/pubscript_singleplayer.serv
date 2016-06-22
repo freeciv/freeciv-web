@@ -12,4 +12,5 @@ set scorelog enabled
 set size 5
 set landm 50
 set aifill 8
+metaconnection persistent
 metamessage New Freeciv-web Singleplayer Game

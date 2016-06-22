@@ -1613,10 +1613,12 @@ function key_unit_upgrade()
   var funits = get_units_in_focus();
   for (var i = 0; i < funits.length; i++) {
     var punit = funits[i];
+    var pcity = tile_city(index_to_tile(punit['tile']));
+    var target_id = (pcity != null) ? pcity['id'] : 0;
     var packet = {
       "pid"         : packet_unit_do_action,
       "actor_id"    : punit['id'],
-      "target_id"   : tile_city(index_to_tile(punit['tile']))['id'],
+      "target_id"   : target_id,
       "value"       : 0,
       "name"        : "",
       "action_type" : ACTION_UPGRADE_UNIT

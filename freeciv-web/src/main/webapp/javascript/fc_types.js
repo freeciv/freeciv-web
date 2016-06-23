@@ -72,7 +72,8 @@ var ACTION_RECYCLE_UNIT = 23;
 var ACTION_DISBAND_UNIT = 24;
 var ACTION_HOME_CITY = 25;
 var ACTION_UPGRADE_UNIT = 26;
-var ACTION_COUNT = 27;
+var ACTION_PARADROP = 27;
+var ACTION_COUNT = 28;
 
 /* The action_decision enum */
 var ACT_DEC_NOTHING = 0;

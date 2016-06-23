@@ -38,6 +38,7 @@ flags =
     _("AddToCity")
     _("Nuclear")
     _("Infra"), _("Can build infrastructure.")
+    _("Paratroopers")
   }
 
 [veteran_system]
@@ -299,7 +300,6 @@ flags         = "Unreachable", "DoesntOccupyTile"
 ;                 server option)
 ; "Spy"		= enhanced diplomat actions. _Must_ be "Diplomat" also
 ; "Trireme"	= (sea only) cannot leave shoreline
-; "Paratroopers"= can paradrop
 ; "Only_Native_Attack" = cannot attack targets on non-native tiles even if
 ;                 unit class can
 ; "Cant_Fortify" =  cannot fortify even if unit class has "CanFortify" flag
@@ -346,15 +346,14 @@ flags         = "Unreachable", "DoesntOccupyTile"
 ; "CanKillEscaping" = an attack from this unit ignores the "CanEscape" unit
 ;                 type flag.
 ;
-; Following flag strings require extra fields:
-;  "Paratroopers"
+; Following actions require extra fields:
+;  "Paradrop Unit"
 ;   paratroopers_range  = the maximal range the unit can be paradropped to.
 ;                         Max range is 65534.
 ;   paratroopers_mr_req = the move rate which is required at least for
 ;                         paradropping (whole movement points)
 ;   paratroopers_mr_sub = the move rate which is subtracted after paradropping
 ;                         (whole movement points)
-; Following actions require extra fields:
 ;  "Bombard"
 ;   bombard_rate = the number of shots fired at enemy units when attacking
 ;  "Join City"

@@ -1006,7 +1006,14 @@ function do_map_click(ptile, qtype, first_time_called)
 
   } else if (paradrop_active && current_focus.length > 0) {
     punit = current_focus[0];
-    packet = {"pid" : packet_unit_paradrop_to, "unit_id" : punit['id'], "tile": ptile['index'] };
+    packet = {
+      "pid"         : packet_unit_do_action,
+      "actor_id"    : punit['id'],
+      "target_id"   : ptile['index'],
+      "value"       : 0,
+      "name"        : "",
+      "action_type" : ACTION_PARADROP
+    };
     send_request(JSON.stringify(packet));
     paradrop_active = false;
 

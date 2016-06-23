@@ -292,6 +292,9 @@ ui_name_home_city = _("Set %sHome City%s")
 ; /* TRANS: _Upgrade Unit (100% chance of success). */
 ui_upgrade_unit = _("%sUpgrade Unit%s")
 
+; /* TRANS: Drop _Paratrooper (100% chance of success). */
+ui_paradrop_unit = _("Drop %sParatrooper%s")
+
 ; /* <-- avoid gettext warnings
 ;
 ; Action enablers:
@@ -640,6 +643,13 @@ action = "Home City"
 actor_reqs    =
     { "type",   "name", "range", "present"
       "DiplRel", "Is foreign", "Local", FALSE
+    }
+
+[actionenabler_paradrop]
+action = "Paradrop Unit"
+actor_reqs    =
+    { "type",   "name", "range"
+      "UnitFlag", "Paratroopers", "Local"
     }
 
 [actionenabler_upgrade_unit]

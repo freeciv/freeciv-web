@@ -44,7 +44,8 @@ var ORDER_LAST = 10;
 
 /* The unit_ss_data_type enum from unit.h */
 var USSDT_QUEUE = 0;
-var USSDT_BATTLE_GROUP = 1;
+var USSDT_UNQUEUE = 1;
+var USSDT_BATTLE_GROUP = 2;
 
 /****************************************************************************
  ...

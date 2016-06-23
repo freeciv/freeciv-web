@@ -670,6 +670,22 @@ function handle_unit_actions(packet)
     });
   }
 
+  if (disturb_player) {
+    /* Clear the unit's action_decision_want. This was the reply to a
+     * foreground request caused by it. Freeciv-web doesn't save open
+     * action selection dialogs. It doesn't even wait for any other action
+     * selection dialog to be answered before requesting data for the next
+     * one. This lack of a queue allows it to be cleared here. */
+
+    var unqueue = {
+      "pid"     : packet_unit_sscs_set,
+      "unit_id" : actor_unit_id,
+      "type"    : USSDT_UNQUEUE,
+      "value"   : IDENTITY_NUMBER_ZERO
+    };
+    send_request(JSON.stringify(unqueue));
+  }
+
   if (hasActions && disturb_player) {
     popup_action_selection(pdiplomat, action_probabilities,
                            ptile, target_unit, target_city);

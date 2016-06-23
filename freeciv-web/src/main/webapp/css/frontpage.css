@@ -8,6 +8,7 @@ html {
   position: relative;
   min-height: 100%;
 }
+
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
@@ -17,6 +18,7 @@ body {
 body > .container {
   padding: 60px 15px 0;
 }
+
 .container .text-muted {
   margin: 20px 0;
 }
@@ -32,7 +34,7 @@ code {
 
 .jumbotron {
   text-align: center;
-  padding: 0px 0px 10px 0px;
+  padding-bottom: 10px;
   background:rgba(0,0,0,0.1);
   min-height: 350px;
   padding-top: 5px;
@@ -43,7 +45,8 @@ code {
 }
 
 #top_logo {
-  max-width:212px; margin-top: -12px;
+  max-width: 212px;
+  margin-top: -12px;
 }
 
 .searchbox {
@@ -91,19 +94,18 @@ code {
   color: grey;
 }
 
-table, th, td
-{
+table, th, td {
   border: 1px solid white;
 }
 
 
 .metatable {
-  width:  90%;
-  background-color: rgba(255,255,255,0.1);
+  width: 90%;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .blogposts {
-  background-color: rgba(0,0,0,0.2);
+  background-color: rgba(0, 0, 0, 0.2);
   min-height: 200px;
 }
 
@@ -125,15 +127,20 @@ table, th, td
 }
 
 .videoWrapper {
-	position: relative;
-	padding-bottom: 56.25%; /* 16:9 */
-	padding-top: 25px;
-	height: 0;
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  padding-top: 25px;
+  height: 0;
 }
+
 .videoWrapper iframe {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#feedback_form {
+  max-width: 100%;
 }

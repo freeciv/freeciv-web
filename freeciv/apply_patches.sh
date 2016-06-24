@@ -4,10 +4,10 @@
 # freeciv_segfauls_fix is a workaround some segfaults in the Freeciv server. Freeciv bug #23884.
 # message_escape is a patch for protecting against script injection in the message texts.
 # tutorial_ruleset changes the ruleset of the tutorial to one supported by Freeciv-web.
-# InlineGenlistNavigation is backport of Freeciv patch #6992 (SVN r32006)
 # libtoolize_no_symlinks will get obsolete by Freeciv patch #7001 (SVN r32156)
 # FairResourceExtra1 is Freeciv bug #24533 (SVN r32262)
 # SaveInvalidResource is Freeciv bug #24534 (SVN r32263)
+# InlineGenlistNavigation is backport of Freeciv patch #6992 (SVN r32066)
 # FairResourceExtra2 is Freeciv bug #24537 (SVN r32268)
 # CommentLineOfItsOwn is backport of Freeciv patch #7000 (SVN r32307)
 # CardinalityCheckOnDemand is backport of Freeciv patch #7126 (SVN r32462)

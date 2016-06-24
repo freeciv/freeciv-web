@@ -220,9 +220,9 @@ flags         = "Unreachable", "DoesntOccupyTile"
 ; convert_time  = time it takes to convert to another unit type
 ; class         = One of the classes listed above
 ; transport_cap = Number of units (ground, or air/missiles, depending on flags)
-; fuel          = number of turns air units can fly before they crash. For
-;                 barbarians this is used as lifetime instead. If this is zero,
-;                 the unit has unlimited fuel, despite flying.
+; fuel          = Number of turns unit can spend outside refuel points.
+;                 If more time passes without unit refueling over turn change,
+;                 they are lost. If this is zero, unit has no need to refuel
 ; uk_*          = upkeep costs, these are used as base values in the game
 ; cargo         = Unit classes this unit can transport
 ; city_size     = Initial size of the cities built by 'Found City' type units

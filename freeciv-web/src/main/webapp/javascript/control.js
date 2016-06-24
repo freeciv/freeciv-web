@@ -874,7 +874,9 @@ function do_map_click(ptile, qtype, first_time_called)
 
   if (current_focus.length > 0 && current_focus[0]['tile'] == ptile['index']) {
     /* clicked on unit at the same tile, then deactivate goto and show context menu. */
-    deactivate_goto();
+    if (goto_active && !is_touch_device()) {
+      deactivate_goto();
+    }
     $("#canvas").contextMenu();
     return;
   }

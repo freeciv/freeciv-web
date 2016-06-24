@@ -84,7 +84,13 @@ function update_nation_screen()
 
   $("#nations_list").html(nation_list_html);
   $(".nation_button").button();
-  $("#nation_table").tablesorter({theme: "dark"});
+  if (!is_touch_device()) {
+    $("#nation_table").tablesorter({theme: "dark"});
+  } else if (is_small_screen()) {
+    $("#nations").height( mapview['height'] - 150);
+    $("#nations").width( mapview['width']);
+  }
+
   $("#nation_table").selectable({ filter: "tr",
        selected: function( event, ui ) {handle_nation_table_select(ui); } });
 
@@ -103,6 +109,10 @@ function update_nation_screen()
     $('#cancel_treaty_button').button("disable");
     $('#take_player_button').button("disable");
     $('#toggle_ai_button').button("disable");
+  }
+
+  if (is_small_screen) {
+    $('#take_player_button').hide();
   }
 
 }

@@ -17,8 +17,9 @@ format_version=10
 
 [control]
 ; Names for custom terrain flags. There can be up to 8 of these.
-; name          = rule name; not translatable, but may be displayed in
-;                 some circumstances
+; name          = rule name; In some circumstances user may see this
+;                 as part of some sentences, so try to make it descriptive
+;                 and sensible.
 ; helptxt       = displayed in the help for terrains with this flag (optional)
 flags =
   { "name", "helptxt"

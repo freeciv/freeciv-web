@@ -95,12 +95,6 @@ function is_req_active(target_player,
 				     req->range, req->survives,
 				     req->source.value.building) > 0);*/
     break;
-  case VUT_SPECIAL:
-    //FIXME: implement
-    /*eval = is_special_in_range(target_tile,
-			       req->range, req->survives,
-			       req->source.value.special);*/
-    break;
   case VUT_TERRAIN:
     //FIXME: implement
     /*eval = is_terrain_in_range(target_tile,
@@ -162,12 +156,6 @@ function is_req_active(target_player,
     /*eval = is_terrain_class_in_range(target_tile,
                                      req->range, req->survives,
                                      req->source.value.terrainclass);*/
-    break;
-  case VUT_BASE:
-    //FIXME: implement
-    /*eval = is_base_type_in_range(target_tile,
-                                 req->range, req->survives,
-                                 req->source.value.base);*/
     break;
   case VUT_MINYEAR:
     //FIXME: implement

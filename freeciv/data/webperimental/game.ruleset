@@ -55,6 +55,7 @@ before contact.\n\
 - It is possible to establish an embassy while inside a ship.\n\
 - The Leader unit can destroy a domestic city. (Be careful when you scorch \
 the earth. If your Leader dies you lose he game.)\n\
+- Labels the year using AD/BC.\n\
 \n\
 This ruleset is still in development. If playing it makes you think that \
 a rule should change go to the Freeciv-web board at \
@@ -762,10 +763,10 @@ fragments = 0
 ; ...
 
 ; What labels are used for positive and negative years.
-; /* TRANS: year label (Common Era) */
-positive_label = _("CE")
-; /* TRANS: year label (Before Common Era) */
-negative_label = _("BCE")
+; /* TRANS: year label (Anno Domini) */
+positive_label = _("AD")
+; /* TRANS: year label (Before Christ) */
+negative_label = _("BC")
 
 ; /* <-- avoid gettext warnings
 ;

@@ -125,8 +125,13 @@ function update_game_status_panel() {
 function get_year_string()
 {
   var year_string = "";
-  if (game_info['year'] < 0) year_string = Math.abs(game_info['year']) + "BCE ";
-  if (game_info['year'] >= 0) year_string = game_info['year'] + "CE ";
+  if (game_info['year'] < 0) {
+    year_string = Math.abs(game_info['year'])
+                  + calendar_info['negative_year_label'] + " ";
+  } else if (game_info['year'] >= 0) {
+    year_string = game_info['year']
+                  + calendar_info['positive_year_label'] + " ";
+  }
   year_string += "(T" + game_info['turn'] + ")";
   return year_string;
 }

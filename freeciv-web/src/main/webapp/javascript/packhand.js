@@ -315,6 +315,14 @@ function handle_game_info(packet)
   game_info = packet;
 }
 
+/**************************************************************************
+  Handle the calendar info packet.
+**************************************************************************/
+function handle_calendar_info(packet)
+{
+  calendar_info = packet;
+}
+
 /* 30% complete */
 function handle_start_phase(packet)
 {

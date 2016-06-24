@@ -14,6 +14,13 @@ description="Experimental web-client game rules for Freeciv"
 options="+Freeciv-ruleset-Devel-2015.January.14 web-compatible"
 format_version=10
 
+; This section contains meta information for freeciv-ruledit to recreate the ruleset
+; file in a form wanted. These have no in-game effect whatsoever
+[ruledit]
+
+; Which file to read description in from.
+;description_file = ""
+
 [about]
 ; Ruleset name
 name = _("Webperimental")
@@ -56,6 +63,7 @@ webperimental ruleset feed back and suggestion thread.\
 ")
 
 ; Detailed description
+; When updating this, update also desciption_file in [ruledit] section to match
 ; description = ""
 
 [options]

@@ -34,6 +34,7 @@ Morris.Line({
   data: mydata,
   xkey: 'y',
   pointSize: 0,
+  lineWidth: 1,
   ykeys: ['a', 'b', 'c', 'd','e'],
   labels: ['Freeciv-web singleplayer', 'Freeciv-web multiplayer', 'Freeciv-web PBEM', 'Freeciv desktop multiplayer', 'Freeciv-web hotseat']
 });

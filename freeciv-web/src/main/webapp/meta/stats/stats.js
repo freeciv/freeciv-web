@@ -33,6 +33,7 @@ Morris.Line({
   element: 'myfirstchart',
   data: mydata,
   xkey: 'y',
+  pointSize: 0,
   ykeys: ['a', 'b', 'c', 'd','e'],
   labels: ['Freeciv-web singleplayer', 'Freeciv-web multiplayer', 'Freeciv-web PBEM', 'Freeciv desktop multiplayer', 'Freeciv-web hotseat']
 });

@@ -21,10 +21,12 @@
 #               is in a new packet. Also receiving web-client side needs changes
 # BuildingCrucial is backport of Freeciv bug #24526 (SVN r32955)
 # MetaconnectionPersistent is Freeciv patch #7300 (SVN r32991) implementing persistent metaserver connections.
+# navajo-remove-long-city-names is a quick-fix to remove city names which would be longer than MAX_LEN_NAME
+#     when the name is url encoded in json protocol.
+#     MAX_LEN_CITYNAME gets increased in patch #7305 (SVN r33048)
 # win_chance includes 'Chance to win' in Freeciv-web map tile popup.
 # disable_global_warming is Freeciv bug #24418
 # fcweb_scorelog is Freeciv patch #7313
-# navajo-remove-long-city-names is a quick-fix to remove city names which would be longer than MAX_LEN_NAME when the name is url encoded in json protocol. A possibly better solution is to increase MAX_LEN_NAME.
 
 PATCHLIST="freeciv_web_packets_def_changes city_fixes city_impr_fix2 city-naming-change city_fixes2 metachange text_fixes unithand-change2 current_research_cost freeciv-svn-webclient-changes init_lists_disable goto_fcweb misc_devversion_sync tutorial_ruleset savegame maphand_ch serverside_extra_assign libtoolize_no_symlinks ai_traits_crash worklists server_password barbarian-names activity_null_check add_rulesets message_escape freeciv_segfauls_fix scorelog_filenames fcweb_scorelog disable_global_warming CommentLineOfItsOwn win_chance ScorefileWeb CardinalityCheckOnDemand ClassBonusRoadsCache InlineGenlistNavigation TileExtrasSafe NoNonnull SaveInvalidResource FairResourceExtra1 FairResourceExtra2 BuildingCrucial navajo-remove-long-city-names MetaconnectionPersistent"
 

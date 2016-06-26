@@ -374,6 +374,8 @@ function update_active_units_dialog()
   var punits = [];
   var width = 0;
 
+  if (client_is_observer()) return;
+
   if (current_focus.length == 1) {
     ptile = index_to_tile(current_focus[0]['tile']);
     punits.push(current_focus[0]);

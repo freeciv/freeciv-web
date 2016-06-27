@@ -37,6 +37,14 @@ ocean_reclaim_requirement = 30
 ; it may be "channeled" into a water tile (0-101; 0=anywhere, default 101=nowhere)
 land_channel_requirement = 10
 
+; Percentage of unfrozen tiles (no "Frozen" flag) required to be adjacent
+; to a frozen tile before it can thaw (0-101; 0=anywhere, default 101=nowhere)
+thaw_requirement = 0
+
+; Percentage of frozen tiles ("Frozen" flag) required to be adjacent to an
+; unfrozen tile before it can freeze (0-101; 0=anywhere, default 101=nowhere)
+freeze_requirement = 0
+
 ; Bodies of water up to this size are considered freshwater lakes, if there is
 ; also terrain type(s) with flag "FreshWater" in the ruleset.
 lake_max_size = 14
@@ -158,8 +166,10 @@ ocean_resources = FALSE
 ;   - NoZoc            = Units on this terrain are not generating or subject
 ;                        to zoc
 ;   - NoFortify        = Units cannot fortify on this terrain
-;   - Frozen           = Frozen/polar terrain. Currently this just affects
-;                        how the terrain is shown on the overview map.
+;   - Frozen           = Frozen/polar terrain. Conversion between frozen and
+;                        unfrozen terrain can be controlled with
+;                        thaw_requirement/freeze_requirement, and Frozen
+;                        terrain is shown differently on the overview map.
 ; property_*           = specific property % values used by mapgen.  Most
 ;                        terrains will have 0 for most values.
 ;  - mountainous       = degree to which this terrain is mountainous

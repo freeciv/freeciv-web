@@ -25,8 +25,8 @@
 #     when the name is url encoded in json protocol.
 #     MAX_LEN_CITYNAME gets increased in patch #7305 (SVN r33048)
 # win_chance includes 'Chance to win' in Freeciv-web map tile popup.
+# fcweb_scorelog is Freeciv patch #7313 (SVN r33062)
 # disable_global_warming is Freeciv bug #24418
-# fcweb_scorelog is Freeciv patch #7313
 
 PATCHLIST="freeciv_web_packets_def_changes city_fixes city_impr_fix2 city-naming-change city_fixes2 metachange text_fixes unithand-change2 current_research_cost freeciv-svn-webclient-changes init_lists_disable goto_fcweb misc_devversion_sync tutorial_ruleset savegame maphand_ch serverside_extra_assign libtoolize_no_symlinks ai_traits_crash worklists server_password barbarian-names activity_null_check add_rulesets message_escape freeciv_segfauls_fix scorelog_filenames fcweb_scorelog disable_global_warming CommentLineOfItsOwn win_chance ScorefileWeb CardinalityCheckOnDemand ClassBonusRoadsCache InlineGenlistNavigation TileExtrasSafe NoNonnull SaveInvalidResource FairResourceExtra1 FairResourceExtra2 BuildingCrucial navajo-remove-long-city-names MetaconnectionPersistent"
 

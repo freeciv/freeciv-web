@@ -26,7 +26,6 @@ var loaded_game_type = null;
 
 var scenarios = [
   {"img":"/images/world_small.png", "description":"The World - Small world map, 80x50 map of the Earth", "savegame":"earth-80x50-v3"},
-  {"img":"/images/brexit.png", "description":"Brexit - United Kingdom withdrawal from the European Union", "savegame":"brexit"},
   {"img":"/images/world_big.png", "description":"The World - Large world map, 160x90 map of the Earth", "savegame":"earth-160x90-v2"},
   {"img":"/images/iberian.png", "description":"Iberian Peninsula - 136x100 map of Spain and Portugal", "savegame":"iberian-peninsula-136x100-v1.0"},
   /*{"img":"/images/europe1901.png", "description":"Europe WWI scenario 1901", "savegame":"europe_1901"},*/
@@ -129,15 +128,6 @@ function load_game_real(filename)
       console.log("Server command: /load " + filename );
       send_message("/load " + filename);
       $.unblockUI();
-      if (filename != null && filename == "brexit") {
-         var net_packet = {"pid" : packet_nation_select_req,
-                             "player_no" : 0,
-                             "nation_no" : 71,
-                             "is_male" : true,
-                             "name" : "David Cameron",
-                             "style" : nations[71]['style']};
-          send_request(JSON.stringify(net_packet));
-      }
 }
 
 /**************************************************************************

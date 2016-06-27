@@ -73,8 +73,8 @@ function play_combat_sound(unit)
 **************************************************************************/
 function play_sound(sound_file) 
 {
-  if (!sounds_enabled || !(document.createElement('audio').canPlayType)) return;
   try {
+    if (!sounds_enabled || !(document.createElement('audio').canPlayType) || Audio == null) return;
     var audio = new Audio(sound_path + sound_file);
     audio.play();
 

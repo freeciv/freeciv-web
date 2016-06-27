@@ -122,7 +122,8 @@ var VUT_TOPO = 36;
 var VUT_IMPR_GENUS = 37;
 var VUT_ACTION = 38;
 var VUT_MINTECHS = 39;
-var VUT_COUNT = 40;             /* Keep this last. */
+var VUT_EXTRAFLAG = 40;
+var VUT_COUNT = 41;             /* Keep this last. */
 
 /* Sometimes we don't know (or don't care) if some requirements for effect
  * are currently fulfilled or not. This enum tells lower level functions

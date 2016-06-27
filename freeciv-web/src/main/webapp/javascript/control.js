@@ -1023,7 +1023,14 @@ function do_map_click(ptile, qtype, first_time_called)
     punit = current_focus[0];
     pcity = tile_city(ptile);
     if (pcity != null) {
-      packet = {"pid" : packet_unit_airlift, "unit_id" : punit['id'], "city_id": pcity['id'] };
+      packet = {
+        "pid"         : packet_unit_do_action,
+        "actor_id"    : punit['id'],
+        "target_id"   : pcity['id'],
+        "value"       : 0,
+        "name"        : "",
+        "action_type" : ACTION_AIRLIFT
+      };
       send_request(JSON.stringify(packet));
     }
     airlift_active = false;

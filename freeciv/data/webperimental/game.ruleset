@@ -304,6 +304,9 @@ ui_upgrade_unit = _("%sUpgrade Unit%s")
 ; /* TRANS: Drop _Paratrooper (100% chance of success). */
 ui_paradrop_unit = _("Drop %sParatrooper%s")
 
+; /* TRANS: _Airlift to City (100% chance of success). */
+ui_airlift_unit = _("%sAirlift to City%s")
+
 ; /* <-- avoid gettext warnings
 ;
 ; Action enablers:
@@ -663,6 +666,13 @@ actor_reqs    =
 
 [actionenabler_upgrade_unit]
 action = "Upgrade Unit"
+
+[actionenabler_airlift_unit]
+action = "Airlift Unit"
+actor_reqs    =
+    { "type",          "name",        "range"
+      "UnitClassFlag", "Airliftable", "Local"
+    }
 
 [borders]
 ; Base border radius from city.

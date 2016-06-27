@@ -48,9 +48,10 @@ flags =
 ;                 and sensible.
 ; helptxt       = displayed in the help for unit type belonging to a class
 ;                 with this flag (optional)
-;class_flags =
-;  { "name", "helptxt"
-;  }
+class_flags =
+  { "name", "helptxt"
+    _("Airliftable"), _("Can be airlifted from a suitable city.")
+  }
 
 [veteran_system]
 ; What are the names of the levels?
@@ -134,7 +135,6 @@ veteran_move_bonus = 0, 0, 0, 0
 ; "KillCitizen"       = Upon successful attack against a city, unit kills one
 ;                       citizen. The effect "Unit_No_Lose_Pop" and the server
 ;                       setting 'killcitizen' can disable this.
-; "Airliftable"       = Unit may be airlifted
 ;
 ; */ <-- avoid gettext warnings
 

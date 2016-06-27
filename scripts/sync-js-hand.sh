@@ -12,7 +12,6 @@ cp packhand_gen.js ../freeciv-web/src/main/webapp/javascript/ && \
 cp packets.js ../freeciv-web/src/main/webapp/javascript/ && \
 mkdir -p ${DATADIR}savegames/ && \
 cp ../freeciv/freeciv/data/scenarios/*.sav ${DATADIR}savegames/ && \
-cp ../freeciv/data/*.sav ${DATADIR}savegames/ && \
 python3.5 helpdata_gen/helpdata_gen.py &&\
 cp freeciv-helpdata.js ../freeciv-web/src/main/webapp/javascript/ && \
 cp ../LICENSE.txt ../freeciv-web/src/main/webapp/docs/ &&

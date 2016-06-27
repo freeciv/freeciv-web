@@ -654,6 +654,10 @@ The cost to enemy Diplomats and Spies of inciting a revolt in a\
 Take good care of your capital, as its loss may result in your\
  empire plunging into civil war. Losing your current palace also\
  results in losing whatever spaceship you might have.\
+"), _("\
+If the city with palace is in dangerous location, or making some\
+ more central city your capital would give better corruption distribution,\
+ you can move Palace by rebuilding it to an other city.\
 "),
 ; /* xgettext:no-c-format */
 _("\

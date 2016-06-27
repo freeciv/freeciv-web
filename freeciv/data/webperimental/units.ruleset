@@ -44,6 +44,16 @@ flags =
     _("Paratroopers")
   }
 
+; Names for custom unit class flags. There can be up to 8 of these.
+; name          = rule name; In some circumstances user may see this
+;                 as part of some sentences, so try to make it descriptive
+;                 and sensible.
+; helptxt       = displayed in the help for unit type belonging to a class
+;                 with this flag (optional)
+;class_flags =
+;  { "name", "helptxt"
+;  }
+
 [veteran_system]
 ; What are the names of the levels?
 veteran_names = _("green"), _("veteran"), _("hardened"), _("elite")

@@ -1017,6 +1017,14 @@ function handle_ruleset_unit_flag(packet)
   /* TODO: implement */
 }
 
+/***************************************************************************
+  Packet ruleset_unit_class_flag handler.
+***************************************************************************/
+function handle_ruleset_unit_class_flag(packet)
+{
+  /* TODO: implement */
+}
+
 function handle_ruleset_unit_bonus(packet)
 {
   /* TODO: implement */

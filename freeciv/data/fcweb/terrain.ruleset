@@ -167,12 +167,14 @@ ocean_resources = FALSE
 ;   - NoZoc            = Units on this terrain are not generating or subject
 ;                        to zoc
 ;   - NoFortify        = Units cannot fortify on this terrain
-;   - Frozen           = Frozen/polar terrain. Conversion between frozen and
-;                        unfrozen terrain can be controlled with
+;   - Frozen           = Frozen/polar terrain. For water tiles, Frozen terrain
+;                        is generated near poles. Conversion between frozen
+;                        and unfrozen terrain can be controlled with
 ;                        thaw_requirement/freeze_requirement, and Frozen
 ;                        terrain is shown differently on the overview map.
 ; property_*           = specific property % values used by mapgen.  Most
-;                        terrains will have 0 for most values.
+;                        terrains will have 0 for most values. Properties
+;                        other than ocean_depth are only used for land tiles.
 ;  - mountainous       = degree to which this terrain is mountainous
 ;  - green             = how much life this terrain has
 ;  - foliage           = how much thick undergrowth the terrain has 

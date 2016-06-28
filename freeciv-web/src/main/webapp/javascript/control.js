@@ -944,6 +944,11 @@ function do_map_click(ptile, qtype, first_time_called)
           var pos;
 
           /* Append the order unless there are targets at the tile. */
+          /* FIXME: units and cities shouldn't always make actions be
+           * performed from the neighbor tile. */
+          /* FIXME: consider the minimum and maximum distance an action can
+           * be performed from. Needs Freeciv patch #7348 or hard coded
+           * values. */
           if (tile_city(ptile) == null
               && tile_units(ptile).length == 0) {
             /* Append the final order. */

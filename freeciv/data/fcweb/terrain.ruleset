@@ -27,6 +27,16 @@ flags =
     _("NoPollution"), _("No Pollution nor Fallout appear here.")
   }
 
+; Names for custom extra flags. There can be up to 8 of these.
+; name          = rule name; In some circumstances user may see this
+;                 as part of some sentences, so try to make it descriptive
+;                 and sensible.
+; helptxt       = displayed in the help for extra types with this flag
+;                 (optional)
+;extra_flags =
+;  { "name", "helptxt"
+;  }
+
 [parameters]
 
 ; Percentage of "land" tiles required to be adjacent to a water tile before

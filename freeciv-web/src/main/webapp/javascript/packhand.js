@@ -1187,6 +1187,14 @@ function handle_ruleset_extra(packet)
   extras[packet['name']] = packet;
 }
 
+/**************************************************************************
+  Packet ruleset_extra_flag handler.
+**************************************************************************/
+function handle_ruleset_extra_flag(packet)
+{
+  /* TODO: implement */
+}
+
 function handle_ruleset_base(packet)
 {
   /* TODO: Implement */

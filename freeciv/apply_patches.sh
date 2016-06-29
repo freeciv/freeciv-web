@@ -4,7 +4,6 @@
 # freeciv_segfauls_fix is a workaround some segfaults in the Freeciv server. Freeciv bug #23884.
 # message_escape is a patch for protecting against script injection in the message texts.
 # tutorial_ruleset changes the ruleset of the tutorial to one supported by Freeciv-web.
-# CommentLineOfItsOwn is backport of Freeciv patch #7000 (SVN r32307)
 # CardinalityCheckOnDemand is backport of Freeciv patch #7126 (SVN r32462)
 # TileExtrasSafe is backport of Freeciv patch #7127 (SVN r32475)
 # NoNonnull is backport of Freeciv patch #7156 (SVN r32514)
@@ -23,7 +22,7 @@
 # fcweb_scorelog is Freeciv patch #7313 (SVN r33062)
 # disable_global_warming is Freeciv bug #24418
 
-PATCHLIST="freeciv_web_packets_def_changes city_fixes city_impr_fix2 city-naming-change city_fixes2 metachange text_fixes unithand-change2 current_research_cost freeciv-svn-webclient-changes init_lists_disable goto_fcweb misc_devversion_sync tutorial_ruleset savegame maphand_ch serverside_extra_assign ai_traits_crash worklists server_password barbarian-names activity_null_check add_rulesets message_escape freeciv_segfauls_fix scorelog_filenames fcweb_scorelog disable_global_warming CommentLineOfItsOwn win_chance ScorefileWeb CardinalityCheckOnDemand ClassBonusRoadsCache TileExtrasSafe NoNonnull BuildingCrucial navajo-remove-long-city-names MetaconnectionPersistent"
+PATCHLIST="freeciv_web_packets_def_changes city_fixes city_impr_fix2 city-naming-change city_fixes2 metachange text_fixes unithand-change2 current_research_cost freeciv-svn-webclient-changes init_lists_disable goto_fcweb misc_devversion_sync tutorial_ruleset savegame maphand_ch serverside_extra_assign ai_traits_crash worklists server_password barbarian-names activity_null_check add_rulesets message_escape freeciv_segfauls_fix scorelog_filenames fcweb_scorelog disable_global_warming win_chance ScorefileWeb CardinalityCheckOnDemand ClassBonusRoadsCache TileExtrasSafe NoNonnull BuildingCrucial navajo-remove-long-city-names MetaconnectionPersistent"
 
 apply_patch() {
   echo "*** Applying $1.patch ***"

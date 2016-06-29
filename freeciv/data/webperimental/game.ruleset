@@ -710,7 +710,7 @@ radius_sq_city_permanent = 0
 
 [research]
 ; Method of calculating technology costs
-;   "Civ I|II"      - Civ (I|II) style. Every new tech add researchcost to
+;   "Civ I|II"      - Civ (I|II) style. Every new tech add base_tech_cost to
 ;                     cost of next tech.
 ;   "Classic"       - Cost of technology is:
 ;                       base_tech_cost * (1 + reqs) * sqrt(1 + reqs) / 2

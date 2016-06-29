@@ -274,6 +274,12 @@ ui_paradrop_unit = _("Drop %sParatrooper%s")
 ; /* TRANS: _Airlift to City (100% chance of success). */
 ui_airlift_unit = _("%sAirlift to City%s")
 
+; Suppress automatic help text generation about what enables and/or
+; disables the following actions.
+;
+; Can make the help text less redundant when you document it your self.
+;quiet_actions = "Targeted Sabotage City", "Targeted Steal Tech"
+
 ; /* <-- avoid gettext warnings
 ;
 ; Action enablers:

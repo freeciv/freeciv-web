@@ -1045,7 +1045,18 @@ function handle_scenario_info(packet)
 {
   scenario_info = packet;
 
-  /* This changes the game information. */
+  /* Don't call update_game_info_pregame() yet. Wait for the scenario
+   * description. */
+}
+
+/**************************************************************************
+  Receive scenario description of the current scenario.
+**************************************************************************/
+function handle_scenario_description(packet)
+{
+  scenario_info['description'] = packet['description'];
+
+  /* Show the updated game information. */
   update_game_info_pregame();
 }
 

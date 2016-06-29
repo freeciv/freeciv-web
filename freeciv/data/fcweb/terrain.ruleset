@@ -36,6 +36,7 @@ flags =
 extra_flags =
   { "name", "helptxt"
     _("ParadropFrom"), _("Units can paradrop from this tile.")
+    _("DiplomatDefense"), _("Diplomatic units get a 25% defense bonus in diplomatic fights.")
   }
 
 [parameters]
@@ -1261,6 +1262,7 @@ build_time     = 3
 removal_time   = 0
 defense_bonus  = 100
 native_to      = "Land"
+flags          = "DiplomatDefense"
 helptext       = _("\
 Fortresses improve defense for land units. Among other effects, a land \
 unit remaining in a fortress for a whole turn without moving recovers \
@@ -1714,7 +1716,6 @@ rmact_gfx_alt  = "-"
 ; flags
 ;   - "NoAggressive"      = Units inside are not considered aggressive
 ;   - "NoStackDeath"      = Units inside do not die all at once when attacked
-;   - "DiplomatDefense"   = Diplomats inside get bonus to diplomatic defense
 ;
 ; */ <-- avoid gettext warnings
 
@@ -1722,7 +1723,7 @@ rmact_gfx_alt  = "-"
 extra          = "Fortress"
 gui_type       = "Fortress"
 border_sq      = 5
-flags          = "NoAggressive", "NoStackDeath", "DiplomatDefense"
+flags          = "NoAggressive", "NoStackDeath"
 
 [base_airbase]
 extra          = "Airbase"

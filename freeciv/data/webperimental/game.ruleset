@@ -679,6 +679,7 @@ action = "Airlift Unit"
 actor_reqs    =
     { "type",          "name",        "range"
       "UnitClassFlag", "Airliftable", "Local"
+      "MinMoveFrags",  "1",           "Local"
     }
 
 [borders]

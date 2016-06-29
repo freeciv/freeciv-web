@@ -522,6 +522,7 @@ actor_reqs    =
 action = "Home City"
 actor_reqs    =
     { "type",   "name", "range", "present"
+      "UnitState", "HasHomeCity", "Local", TRUE
       "DiplRel", "Is foreign", "Local", FALSE
     }
 

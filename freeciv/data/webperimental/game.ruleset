@@ -664,11 +664,20 @@ actor_reqs    =
       "DiplRel", "Is foreign", "Local", FALSE
     }
 
-[actionenabler_paradrop]
+[actionenabler_paradrop_base]
 action = "Paradrop Unit"
 actor_reqs    =
     { "type",   "name", "range"
       "UnitFlag", "Paratroopers", "Local"
+      "ExtraFlag", "ParadropFrom", "Local"
+    }
+
+[actionenabler_paradrop_city]
+action = "Paradrop Unit"
+actor_reqs    =
+    { "type",     "name",         "range"
+      "UnitFlag", "Paratroopers", "Local"
+      "CityTile", "Center", "Local"
     }
 
 [actionenabler_upgrade_unit]

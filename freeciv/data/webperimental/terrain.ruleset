@@ -33,9 +33,10 @@ flags =
 ;                 and sensible.
 ; helptxt       = displayed in the help for extra types with this flag
 ;                 (optional)
-;extra_flags =
-;  { "name", "helptxt"
-;  }
+extra_flags =
+  { "name", "helptxt"
+    _("ParadropFrom"), _("Units can paradrop from this tile.")
+  }
 
 [parameters]
 
@@ -1288,7 +1289,7 @@ reqs           =
 build_time     = 3
 removal_time   = 0
 native_to      = "Air", "Helicopter", "Missile"
-flags          = "Refuel"
+flags          = "Refuel", "ParadropFrom"
 helptext       = _("\
 Airbases allow your air units to land and refuel. Air units in an \
 airbase may be attacked by land units.\
@@ -1713,7 +1714,6 @@ rmact_gfx_alt  = "-"
 ;   - "NoAggressive"      = Units inside are not considered aggressive
 ;   - "NoStackDeath"      = Units inside do not die all at once when attacked
 ;   - "DiplomatDefense"   = Diplomats inside get bonus to diplomatic defense
-;   - "ParadropFrom"      = Paradrop can be initiated from base
 ;
 ; */ <-- avoid gettext warnings
 
@@ -1726,7 +1726,7 @@ flags          = "NoAggressive", "NoStackDeath", "DiplomatDefense"
 [base_airbase]
 extra          = "Airbase"
 gui_type       = "Airbase"
-flags          = "NoStackDeath", "ParadropFrom"
+flags          = "NoStackDeath"
 
 [base_buoy]
 extra          = "Buoy"

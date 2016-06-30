@@ -1,9 +1,7 @@
 #!/bin/sh
 
-# activity_null_check is for Freeciv bug #22700.
-# freeciv_segfauls_fix is a workaround some segfaults in the Freeciv server. Freeciv bug #23884.
-# message_escape is a patch for protecting against script injection in the message texts.
-# tutorial_ruleset changes the ruleset of the tutorial to one supported by Freeciv-web.
+# Freeciv server version upgrade notes
+# ------------------------------------
 # CardinalityCheckOnDemand is backport of Freeciv patch #7126 (SVN r32462)
 # TileExtrasSafe is backport of Freeciv patch #7127 (SVN r32475)
 # NoNonnull is backport of Freeciv patch #7156 (SVN r32514)
@@ -19,8 +17,15 @@
 # navajo-remove-long-city-names is a quick-fix to remove city names which would be longer than MAX_LEN_NAME
 #     when the name is url encoded in json protocol.
 #     MAX_LEN_CITYNAME gets increased in patch #7305 (SVN r33048)
-# win_chance includes 'Chance to win' in Freeciv-web map tile popup.
 # fcweb_scorelog is Freeciv patch #7313 (SVN r33062)
+
+# Not in the upstream Freeciv server
+# ----------------------------------
+# activity_null_check is for Freeciv bug #22700.
+# freeciv_segfauls_fix is a workaround some segfaults in the Freeciv server. Freeciv bug #23884.
+# message_escape is a patch for protecting against script injection in the message texts.
+# tutorial_ruleset changes the ruleset of the tutorial to one supported by Freeciv-web.
+# win_chance includes 'Chance to win' in Freeciv-web map tile popup.
 # disable_global_warming is Freeciv bug #24418
 
 PATCHLIST="freeciv_web_packets_def_changes city_fixes city_impr_fix2 city-naming-change city_fixes2 metachange text_fixes unithand-change2 current_research_cost freeciv-svn-webclient-changes init_lists_disable goto_fcweb misc_devversion_sync tutorial_ruleset savegame maphand_ch serverside_extra_assign ai_traits_crash worklists server_password barbarian-names activity_null_check add_rulesets message_escape freeciv_segfauls_fix scorelog_filenames fcweb_scorelog disable_global_warming win_chance ScorefileWeb CardinalityCheckOnDemand ClassBonusRoadsCache TileExtrasSafe NoNonnull BuildingCrucial navajo-remove-long-city-names MetaconnectionPersistent border_vision_fix"

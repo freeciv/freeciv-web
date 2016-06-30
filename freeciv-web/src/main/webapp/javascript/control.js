@@ -863,6 +863,52 @@ function get_drawable_unit(ptile, citymode)
 }
 
 /**************************************************************************
+  Returns true if the order preferably should be performed from an
+  adjacent tile.
+**************************************************************************/
+function order_wants_direction(order, act_id, ptile) {
+  var action = actions[act_id];
+
+  if (order == ORDER_PERFORM_ACTION && action == null) {
+    /* Bad action id or action rule data not received and stored
+     * properly. */
+    console.log("Asked to put invalid action " + act_id + " in an order.");
+    return false;
+  }
+
+  switch (order) {
+  case ORDER_MOVE:
+  case ORDER_ACTION_MOVE:
+    /* Not only is it legal. It is mandatory. A move is always done in a
+     * direction. */
+    return true;
+  case ORDER_PERFORM_ACTION:
+    if (action['min_distance'] > 0) {
+      /* Always illegal to do to a target on the actor's own tile. */
+      return true;
+    }
+
+    if (action['max_distance'] < 1) {
+      /* Always illegal to perform to a target on a neighbor tile. */
+      return false;
+    }
+
+    /* FIXME: allied units and cities shouldn't always make actions be
+     * performed from the neighbor tile. */
+    if (tile_city(ptile) != null
+        || tile_units(ptile).length != 0) {
+      /* Won't be able to move to the target tile to perform the action on
+       * top of it. */
+      return true;
+    }
+
+    return false;
+  default:
+    return false;
+  }
+}
+
+/**************************************************************************
  Handles everything when the user clicked a tile
 **************************************************************************/
 function do_map_click(ptile, qtype, first_time_called)
@@ -943,14 +989,10 @@ function do_map_click(ptile, qtype, first_time_called)
           /* The final order is specified. */
           var pos;
 
-          /* Append the order unless there are targets at the tile. */
-          /* FIXME: units and cities shouldn't always make actions be
-           * performed from the neighbor tile. */
-          /* FIXME: consider the minimum and maximum distance an action can
-           * be performed from. Needs Freeciv patch #7348 or hard coded
-           * values. */
-          if (tile_city(ptile) == null
-              && tile_units(ptile).length == 0) {
+          /* Should the final order be performed from the final tile or
+           * from the tile before it? In some cases both are legal. */
+          if (!order_wants_direction(goto_last_order, goto_last_action,
+                                     ptile)) {
             /* Append the final order. */
             pos = packet['length'];
 

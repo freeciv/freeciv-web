@@ -197,7 +197,7 @@
                         <exclude>src/main/webapp/javascript/libs/fg.menu.js</exclude>
                         <exclude>src/main/webapp/javascript/libs/handlebars-v4.0.5.js</exclude>
                         <exclude>src/main/webapp/javascript/libs/jquery.blockUI.js</exclude>
-                        <exclude>src/main/webapp/javascript/libs/jquery.contextMenu.min.js</exclude>
+                        <exclude>src/main/webapp/javascript/libs/jquery.contextMenu.js</exclude>
                         <exclude>src/main/webapp/javascript/libs/jquery.min.js</exclude>
                         <exclude>src/main/webapp/javascript/libs/jquery.tablesorter.min.js</exclude>
                         <exclude>src/main/webapp/javascript/libs/jquery-ui.min.js</exclude>

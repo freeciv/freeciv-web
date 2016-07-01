@@ -78,18 +78,12 @@ function network_init()
 ****************************************************************************/
 function websocket_init()
 {
+  $.blockUI({ message: "<h2>Please wait while connecting to the server.</h2>" });
   var proxyport = 1000 + parseFloat(civserverport);
   var ws_protocol = ('https:' == document.location.protocol) ? "wss://" : "ws://";
   ws = new WebSocket(ws_protocol + window.location.hostname + "/civsocket/" + proxyport);
 
-  ws.onopen = function () {
-    var login_message = {"pid":4, "username" : username,
-    "capability": freeciv_version, "version_label": "-dev",
-    "major_version" : 2, "minor_version" : 5, "patch_version" : 99,
-    "port": civserverport};
-    ws.send(JSON.stringify(login_message));
-  };
-
+  ws.onopen = check_websocket_ready;
 
   ws.onmessage = function (event) {
      if (typeof client_handle_packet !== 'undefined') {
@@ -110,6 +104,25 @@ function websocket_init()
    console.error("WebSocket error: Unable to communicate with server using "
                  + document.location.protocol + " WebSockets. Error: " + evt);
   };
+}
+
+/****************************************************************************
+  When the WebSocket connection is open and ready to communicate, then
+  send the first login message to the server.
+****************************************************************************/
+function check_websocket_ready()
+{
+  if (ws.readyState === 1) {
+    var login_message = {"pid":4, "username" : username,
+    "capability": freeciv_version, "version_label": "-dev",
+    "major_version" : 2, "minor_version" : 5, "patch_version" : 99,
+    "port": civserverport};
+    ws.send(JSON.stringify(login_message));
+    $.unblockUI();
+  } else {
+    setTimeout(check_websocket_ready, 500);
+  }
+
 }
 
 /****************************************************************************

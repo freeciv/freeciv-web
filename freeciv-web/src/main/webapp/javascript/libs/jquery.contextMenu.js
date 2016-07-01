@@ -485,7 +485,7 @@
                         });
                     }
 
-                    root.$menu.trigger('contextmenu:hide');
+                    if (root != null && root.$menu != null) root.$menu.trigger('contextmenu:hide');
                 }, 50);
             },
             // key handled :hover

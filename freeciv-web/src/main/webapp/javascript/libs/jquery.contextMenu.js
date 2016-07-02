@@ -974,7 +974,7 @@
                         if (opt.$layer && !opt.hovering && (!(e.pageX >= pos.left && e.pageX <= pos.right) || !(e.pageY >= pos.top && e.pageY <= pos.bottom))) {
                             /* Additional hover check after short time, you might just miss the edge of the menu */
                             setTimeout(function () {
-                                if (!opt.hovering) { opt.$menu.trigger('contextmenu:hide'); }
+                                if (!opt.hovering && opt.$menu != null) { opt.$menu.trigger('contextmenu:hide'); }
                             }, 50);
                         }
                     });

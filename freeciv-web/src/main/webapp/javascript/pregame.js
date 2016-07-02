@@ -434,8 +434,10 @@ function pregame_settings()
 	  "<tr class='not_pbem' title='Enables score graphs for all players, showing score, population, techs and more."+
           " This will lead to information leakage about other players.'><td>Score graphs</td>" +
           "<td><input type='checkbox' name='scorelog_setting' id='scorelog_setting' checked>Enable score graphs</td></tr>" +
-    "<tr id='killstack_area'><td id='killstack_label'></td>" +
+      "<tr id='killstack_area'><td id='killstack_label'></td>" +
           "<td><input type='checkbox' id='killstack_setting'>Enable killstack</td></tr>" +
+      "<tr id='selct_multiple_units_area'><td id='select_multiple_units_label'></td>" +
+          "<td><input type='checkbox' id='select_multiple_units_setting'>Right-click selects units</td></tr>" +
 	  "<tr title='Method used to generate map'><td>Map generator:</td>" +
 	  "<td><select name='generator' id='generator'>" +
 	  "<option value='random'>Fully random height</option>" +
@@ -493,6 +495,10 @@ function pregame_settings()
     $("#killstack_label").prop("innerHTML",
                               server_settings['killstack']['short_help']);
   }
+
+  $("#select_multiple_units_setting").prop("checked", map_select_setting_enabled);
+  $("#select_multiple_units_area").prop("title", "Select multiple units with right-click and drag");
+  $("#select_multiple_units_label").prop("innerHTML", "Select multiple units with right-click and drag");
 
   if (server_settings['metamessage'] != null
       && server_settings['metamessage']['val'] != null) {
@@ -638,6 +644,14 @@ function pregame_settings()
     } else {
       send_message("/set killstack disabled");
     }
+  });
+
+  $('#select_multiple_units_setting').change(function() {
+      if ($('#select_multiple_units_setting').prop('checked')) {
+        map_select_setting_enabled = true;
+      } else {
+        map_select_setting_enabled = false;
+      }
   });
 
   if (is_pbem()) {

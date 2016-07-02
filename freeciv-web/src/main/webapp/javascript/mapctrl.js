@@ -21,6 +21,7 @@
 var touch_start_x;
 var touch_start_y;
 
+var map_select_setting_enabled = true;
 var map_select_check = false;
 var map_select_check_started = 0;
 var map_select_active = false;
@@ -45,7 +46,7 @@ function mapview_mouse_click(e)
   }
   if (rightclick) {
     /* right click to recenter. */
-    if (!map_select_active) {
+    if (!map_select_active || !map_select_setting_enabled) {
       recenter_button_pressed(mouse_x, mouse_y);
       context_menu_active = true;
     } else {

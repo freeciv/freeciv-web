@@ -83,7 +83,7 @@ function new_hotseat_game()
   simpleStorage.set("username", username);
   hotseat_enabled = true;
   network_init();
-  setTimeout(setup_hotseat_game, 800);
+  setTimeout(setup_hotseat_game, 900);
 }
 
 /**************************************************************************
@@ -91,21 +91,25 @@ function new_hotseat_game()
 **************************************************************************/
 function setup_hotseat_game() 
 {
-  send_message("/set phasemode player");
-  send_message("/set minp 2");
-  send_message("/set ec_chat=enabled");
-  send_message("/set ec_info=enabled"); 
-  send_message("/set ec_max_size=20000");
-  send_message("/set ec_turns=32768");
-  send_message("/set autotoggle disabled");
-  hotseat_players.push($("#username_req_1").val());
-  for (var i = 2; i <= num_hotseat_players; i++) {
-    send_message("/create " + $("#username_req_" + i).val());
-    send_message("/ai " + $("#username_req_" + i).val());
-    hotseat_players.push($("#username_req_" + i).val());
+  if (ws.readyState === 1) {
+    send_message("/set phasemode player");
+    send_message("/set minp 2");
+    send_message("/set ec_chat=enabled");
+    send_message("/set ec_info=enabled");
+    send_message("/set ec_max_size=20000");
+    send_message("/set ec_turns=32768");
+    send_message("/set autotoggle disabled");
+    hotseat_players.push($("#username_req_1").val());
+    for (var i = 2; i <= num_hotseat_players; i++) {
+      send_message("/create " + $("#username_req_" + i).val());
+      send_message("/ai " + $("#username_req_" + i).val());
+      hotseat_players.push($("#username_req_" + i).val());
+    }
+    $("#hotseat_dialog").dialog('close');
+    send_message("Press Start Game to begin.");
+  } else {
+    setTimeout(setup_hotseat_game, 500);
   }
-  $("#hotseat_dialog").dialog('close');
-  send_message("Press Start Game to begin.");
 }
 
 /**************************************************************************

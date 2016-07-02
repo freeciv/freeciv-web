@@ -49,7 +49,6 @@ import javax.naming.*;
 public class NewPBEMUser extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private String captcha_secret;
-    private String captcha_url = "https://www.google.com/recaptcha/api/siteverify";
 
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
@@ -81,9 +80,10 @@ public class NewPBEMUser extends HttpServlet {
             return;
         }
     	HttpClient client = HttpClientBuilder.create().build();
-    	HttpPost post = new HttpPost(captcha_url);
+        String captcha_url = "https://www.google.com/recaptcha/api/siteverify";
+        HttpPost post = new HttpPost(captcha_url);
 
-    	List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+    	List<NameValuePair> urlParameters = new ArrayList<>();
     	urlParameters.add(new BasicNameValuePair("secret", captcha_secret));
     	urlParameters.add(new BasicNameValuePair("response", captcha));
     	post.setEntity(new UrlEncodedFormEntity(urlParameters));
@@ -127,7 +127,6 @@ public class NewPBEMUser extends HttpServlet {
             response.setHeader("result", "error");
             err.printStackTrace();
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Unable to create user: " + err);
-            return;
         } finally {
             if (conn != null)
                 try {
@@ -136,7 +135,6 @@ public class NewPBEMUser extends HttpServlet {
                     e.printStackTrace();
                 }
         }
-
 
     }
 

@@ -44,8 +44,8 @@ public class SaveServlet extends HttpServlet {
 	 * Serialization UID.
 	 */
 	private static final long serialVersionUID = 1L;
-	String PATTERN_VALIDATE_ALPHA_NUMERIC = "[0-9a-zA-Z\\.]*";
-	Pattern p = Pattern.compile(PATTERN_VALIDATE_ALPHA_NUMERIC);
+	private String PATTERN_VALIDATE_ALPHA_NUMERIC = "[0-9a-zA-Z\\.]*";
+	private Pattern p = Pattern.compile(PATTERN_VALIDATE_ALPHA_NUMERIC);
 
 	@SuppressWarnings("unchecked")
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -86,7 +86,7 @@ public class SaveServlet extends HttpServlet {
 		InputStream in = new FileInputStream(file);
 		byte[] compressedFile = IOUtils.toByteArray(in);
 		String encodedFile = new String(Base64.encodeBase64(compressedFile));
-		String savegameHash = DigestUtils.shaHex(username + savename + encodedFile);
+		String savegameHash = DigestUtils.sha1Hex(username + savename + encodedFile);
 
 
 		Connection conn = null;

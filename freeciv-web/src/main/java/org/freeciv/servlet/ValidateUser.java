@@ -54,8 +54,8 @@ public class ValidateUser extends HttpServlet {
             preparedStatement.setString(2, userstring);
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) {
-              String username = (String)rs.getString(1);
-              int activated = (Integer)rs.getInt(2);
+              String username = rs.getString(1);
+              int activated = rs.getInt(2);
               if (activated == 1) {
                 response.getOutputStream().print(username);
               } else {
@@ -72,7 +72,6 @@ public class ValidateUser extends HttpServlet {
             response.setHeader("result", "error");
             err.printStackTrace();
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Unable to login");
-            return;
         } finally {
             if (conn != null)
                 try {

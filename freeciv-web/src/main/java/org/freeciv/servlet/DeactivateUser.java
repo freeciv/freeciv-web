@@ -66,7 +66,6 @@ public class DeactivateUser extends HttpServlet {
             response.setHeader("result", "error");
             err.printStackTrace();
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Unable to login");
-            return;
         } finally {
             if (conn != null)
                 try {

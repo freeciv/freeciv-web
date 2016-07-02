@@ -45,8 +45,8 @@ public class LoadServlet extends HttpServlet {
 	 * Serialization UID.
 	 */
 	private static final long serialVersionUID = 1L;
-	String PATTERN_VALIDATE_ALPHA_NUMERIC = "[0-9a-zA-Z\\.]*";
-	Pattern p = Pattern.compile(PATTERN_VALIDATE_ALPHA_NUMERIC);
+	private String PATTERN_VALIDATE_ALPHA_NUMERIC = "[0-9a-zA-Z\\.]*";
+	private Pattern p = Pattern.compile(PATTERN_VALIDATE_ALPHA_NUMERIC);
 
 	@SuppressWarnings("unchecked")
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -60,7 +60,7 @@ public class LoadServlet extends HttpServlet {
 
 		String savename = "" + request.getParameter("savename");
 		String username = "" + request.getParameter("username");
-		String savegameHash = DigestUtils.shaHex(username + savename + encodedFile);
+		String savegameHash = DigestUtils.sha1Hex(username + savename + encodedFile);
 
 		if (!p.matcher(username).matches()) {
 	    	   response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,

@@ -49,8 +49,7 @@ public class RandomUser extends HttpServlet {
             String pwdSQL = "SELECT username FROM `auth` WHERE activated='1' and id >= (SELECT FLOOR( MAX(id) * RAND()) FROM `auth` ) ORDER BY id LIMIT 1;";
             PreparedStatement preparedStatement = conn.prepareStatement(pwdSQL);
             ResultSet rs = preparedStatement.executeQuery();
-            rs.next();
-            if (rs != null) {
+            if (rs.next()) {
               response.getOutputStream().print(rs.getString(1));
               return;
             }
@@ -62,7 +61,6 @@ public class RandomUser extends HttpServlet {
             response.setHeader("result", "error");
             err.printStackTrace();
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Unable to login");
-            return;
         } finally {
             if (conn != null)
                 try {
@@ -71,8 +69,6 @@ public class RandomUser extends HttpServlet {
                     e.printStackTrace();
                 }
         }
-
-
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)

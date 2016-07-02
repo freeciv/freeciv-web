@@ -35,37 +35,47 @@ public class FreecivStatsServlet extends HttpServlet {
 	            DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
 	            conn = ds.getConnection();
 
-	            if (type.equals("time")) {
-	            	String insertTableSQL = "INSERT INTO time_played_stats (statsDate, timePlayed) VALUES (CURDATE(), 2) "+
-	            		"ON DUPLICATE KEY UPDATE timePlayed = timePlayed + 2";
-	            	PreparedStatement preparedStatement = conn.prepareStatement(insertTableSQL);
-	            	preparedStatement.executeUpdate();
-	            } else if (type.equals("single")) {
-	            	String insertTableSQL = "INSERT INTO games_played_stats (statsDate, gameType, gameCount) VALUES (CURDATE(), 0, 1)  ON DUPLICATE KEY UPDATE gameCount = gameCount + 1";
-		            PreparedStatement preparedStatement = conn.prepareStatement(insertTableSQL);
-		            preparedStatement.executeUpdate();
-	            } else if (type.equals("multi")) {
-	            	String insertTableSQL = "INSERT INTO games_played_stats (statsDate, gameType, gameCount) VALUES (CURDATE(), 1, 1)  ON DUPLICATE KEY UPDATE gameCount = gameCount + 1";
-		            PreparedStatement preparedStatement = conn.prepareStatement(insertTableSQL);
-		            preparedStatement.executeUpdate();
-	            } else if (type.equals("pbem")) {
-	            	String insertTableSQL = "INSERT INTO games_played_stats (statsDate, gameType, gameCount) VALUES (CURDATE(), 2, 1)  ON DUPLICATE KEY UPDATE gameCount = gameCount + 1";
-		            PreparedStatement preparedStatement = conn.prepareStatement(insertTableSQL);
-		            preparedStatement.executeUpdate();
-		            
-	            } else if (type.equals("hotseat")) {
-	            	String insertTableSQL = "INSERT INTO games_played_stats (statsDate, gameType, gameCount) VALUES (CURDATE(), 4, 1)  ON DUPLICATE KEY UPDATE gameCount = gameCount + 1";
-		            PreparedStatement preparedStatement = conn.prepareStatement(insertTableSQL);
-		            preparedStatement.executeUpdate();
-		            
-	            }
+				switch (type) {
+					case "time": {
+						String insertTableSQL = "INSERT INTO time_played_stats (statsDate, timePlayed) VALUES (CURDATE(), 2) " +
+								"ON DUPLICATE KEY UPDATE timePlayed = timePlayed + 2";
+						PreparedStatement preparedStatement = conn.prepareStatement(insertTableSQL);
+						preparedStatement.executeUpdate();
+						break;
+					}
+					case "single": {
+						String insertTableSQL = "INSERT INTO games_played_stats (statsDate, gameType, gameCount) VALUES (CURDATE(), 0, 1)  ON DUPLICATE KEY UPDATE gameCount = gameCount + 1";
+						PreparedStatement preparedStatement = conn.prepareStatement(insertTableSQL);
+						preparedStatement.executeUpdate();
+						break;
+					}
+					case "multi": {
+						String insertTableSQL = "INSERT INTO games_played_stats (statsDate, gameType, gameCount) VALUES (CURDATE(), 1, 1)  ON DUPLICATE KEY UPDATE gameCount = gameCount + 1";
+						PreparedStatement preparedStatement = conn.prepareStatement(insertTableSQL);
+						preparedStatement.executeUpdate();
+						break;
+					}
+					case "pbem": {
+						String insertTableSQL = "INSERT INTO games_played_stats (statsDate, gameType, gameCount) VALUES (CURDATE(), 2, 1)  ON DUPLICATE KEY UPDATE gameCount = gameCount + 1";
+						PreparedStatement preparedStatement = conn.prepareStatement(insertTableSQL);
+						preparedStatement.executeUpdate();
+
+						break;
+					}
+					case "hotseat": {
+						String insertTableSQL = "INSERT INTO games_played_stats (statsDate, gameType, gameCount) VALUES (CURDATE(), 4, 1)  ON DUPLICATE KEY UPDATE gameCount = gameCount + 1";
+						PreparedStatement preparedStatement = conn.prepareStatement(insertTableSQL);
+						preparedStatement.executeUpdate();
+
+						break;
+					}
+				}
 
 	            
 
 	      } catch (Exception err) {
 	            response.setHeader("result", "error");
 	            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Error...");
-	            return;
 	        } finally {
 	            if (conn != null)
 	                try {

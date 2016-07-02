@@ -36,7 +36,6 @@ import javax.naming.*;
  */
 public class CivclientLauncher extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private static String PATTERN_VALIDATE_ALPHA_NUMERIC = "[0-9a-zA-Z\\.]*";
 
     @SuppressWarnings("unchecked")
     public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -46,7 +45,7 @@ public class CivclientLauncher extends HttpServlet {
         String action = request.getParameter("action");
         if (action == null) action = "new";
 
-        String civServerPort = (String)request.getParameter("civserverport");
+        String civServerPort = request.getParameter("civserverport");
 
         Connection conn = null;
         try {

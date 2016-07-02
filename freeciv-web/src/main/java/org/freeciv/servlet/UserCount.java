@@ -49,18 +49,14 @@ public class UserCount extends HttpServlet {
             String countSQL = "SELECT count(*) FROM `auth`";
             PreparedStatement preparedStatement = conn.prepareStatement(countSQL);
             ResultSet rs = preparedStatement.executeQuery();
-            rs.next();
-            if (rs != null) {
+            if (rs.next()) {
               response.getOutputStream().print(rs.getString(1));
-              return;
             }
-
 
       } catch (Exception err) {
             response.setHeader("result", "error");
             err.printStackTrace();
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Unable to count users");
-            return;
         } finally {
             if (conn != null)
                 try {

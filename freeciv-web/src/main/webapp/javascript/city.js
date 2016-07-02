@@ -296,35 +296,37 @@ function show_city_dialog(pcity)
   }
   $(".game_unit_list_item").tooltip();
 
-  var food_txt = pcity['prod'][O_FOOD] + " ( ";
-  if (pcity['surplus'][O_FOOD] > 0) food_txt += "+";
-  food_txt += pcity['surplus'][O_FOOD] + ")";
+  if (pcity['prod'] != null && pcity['surplus'] != null) {
+    var food_txt = pcity['prod'][O_FOOD] + " ( ";
+    if (pcity['surplus'][O_FOOD] > 0) food_txt += "+";
+    food_txt += pcity['surplus'][O_FOOD] + ")";
 
-  var shield_txt = pcity['prod'][O_SHIELD] + " ( ";
-  if (pcity['surplus'][O_SHIELD] > 0) shield_txt += "+";
-  shield_txt += pcity['surplus'][O_SHIELD] + ")";
+    var shield_txt = pcity['prod'][O_SHIELD] + " ( ";
+    if (pcity['surplus'][O_SHIELD] > 0) shield_txt += "+";
+    shield_txt += pcity['surplus'][O_SHIELD] + ")";
 
-  var trade_txt = pcity['prod'][O_TRADE] + " ( ";
-  if (pcity['surplus'][O_TRADE] > 0) trade_txt += "+";
-  trade_txt += pcity['surplus'][O_TRADE] + ")";
+    var trade_txt = pcity['prod'][O_TRADE] + " ( ";
+    if (pcity['surplus'][O_TRADE] > 0) trade_txt += "+";
+    trade_txt += pcity['surplus'][O_TRADE] + ")";
 
-  var gold_txt = pcity['prod'][O_GOLD] + " ( ";
-  if (pcity['surplus'][O_GOLD] > 0) gold_txt += "+";
-  gold_txt += pcity['surplus'][O_GOLD] + ")";
+    var gold_txt = pcity['prod'][O_GOLD] + " ( ";
+    if (pcity['surplus'][O_GOLD] > 0) gold_txt += "+";
+    gold_txt += pcity['surplus'][O_GOLD] + ")";
 
-  var luxury_txt = pcity['prod'][O_LUXURY]; 
-  var science_txt = pcity['prod'][O_SCIENCE]; 
+    var luxury_txt = pcity['prod'][O_LUXURY];
+    var science_txt = pcity['prod'][O_SCIENCE];
 
-  $("#city_food").html(food_txt);
-  $("#city_prod").html(shield_txt);
-  $("#city_trade").html(trade_txt);
-  $("#city_gold").html(gold_txt);
-  $("#city_luxury").html(luxury_txt);
-  $("#city_science").html(science_txt);
+    $("#city_food").html(food_txt);
+    $("#city_prod").html(shield_txt);
+    $("#city_trade").html(trade_txt);
+    $("#city_gold").html(gold_txt);
+    $("#city_luxury").html(luxury_txt);
+    $("#city_science").html(science_txt);
 
-  $("#city_corruption").html(pcity['waste'][O_TRADE]);
-  $("#city_waste").html(pcity['waste'][O_SHIELD]);
-  $("#city_pollution").html(pcity['pollution']);
+    $("#city_corruption").html(pcity['waste'][O_TRADE]);
+    $("#city_waste").html(pcity['waste'][O_SHIELD]);
+    $("#city_pollution").html(pcity['pollution']);
+  }
 
   /* Handle citizens and specialists */
   var specialist_html = "";

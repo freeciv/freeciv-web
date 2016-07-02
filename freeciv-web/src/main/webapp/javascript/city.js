@@ -296,7 +296,7 @@ function show_city_dialog(pcity)
   }
   $(".game_unit_list_item").tooltip();
 
-  if (pcity['prod'] != null && pcity['surplus'] != null) {
+  if ('prod' in pcity && 'surplus' in pcity) {
     var food_txt = pcity['prod'][O_FOOD] + " ( ";
     if (pcity['surplus'][O_FOOD] > 0) food_txt += "+";
     food_txt += pcity['surplus'][O_FOOD] + ")";

@@ -148,9 +148,9 @@ function setup_window_size ()
   $('#tabs').css("height", $(window).height());
   $("#tabs-map").height("auto");
 
-  $("#pregame_message_area").height( mapview['height'] - 80 - 92
+  $("#pregame_message_area").height( mapview['height'] - 80
                                     - $("#pregame_game_info").getTotalHeight());
-  $("#pregame_player_list").height( mapview['height'] - 80 - 92);
+  $("#pregame_player_list").height( mapview['height'] - 80);
   $("#technologies").height( mapview['height'] - 50);
   $("#technologies").width( mapview['width'] - 20);
 

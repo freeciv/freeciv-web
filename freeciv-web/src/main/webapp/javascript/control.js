@@ -90,6 +90,37 @@ function control_init()
     resize_enabled = true;
   });
 
+  $("#pregame_text_input").keydown(function(event) {
+   return check_text_input(event, $("#pregame_text_input"));
+  });
+
+  $("#pregame_text_input").blur(function(event) {
+      keyboard_input=true;
+      if (this.value=='') {
+        $("#pregame_text_input").value='>'
+      }
+  });
+
+  $("#pregame_text_input").focus(function(event) {
+    keyboard_input=false; if (this.value=='>') this.value='';
+  });
+
+  $("#start_game_button").click(function(event) {
+    pregame_start_game();
+  });
+
+  $("#load_game_button").click(function(event) {
+    load_game_dialog();
+  });
+
+  $("#pick_nation_button").click(function(event) {
+    pick_nation(null);
+  });
+
+  $("#pregame_settings_button").click(function(event) {
+    pregame_settings();
+  });
+
   /* disable text-selection, as this gives wrong mouse cursor
    * during drag to goto units. */
   document.onselectstart = function(){ return false; };

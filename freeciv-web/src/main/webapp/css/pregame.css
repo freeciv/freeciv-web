@@ -231,11 +231,6 @@ body {
   padding: 2px;
 }
 
-#pregame_top_content {
-  height: 92px;
-  width: 100%;
-}
-
 #pick_nation_dialog {
   overflow: auto;
 }

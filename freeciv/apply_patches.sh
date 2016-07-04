@@ -26,6 +26,8 @@
 # freeciv_segfauls_fix is a workaround some segfaults in the Freeciv server. Freeciv bug #23884.
 # message_escape is a patch for protecting against script injection in the message texts.
 # tutorial_ruleset changes the ruleset of the tutorial to one supported by Freeciv-web.
+#      - This should be replaced by modification of the tutorial scenario that allows it to
+#        work with multiple rulesets (Requires patch #7362 / SVN r33159)
 # win_chance includes 'Chance to win' in Freeciv-web map tile popup.
 # disable_global_warming is Freeciv bug #24418
 

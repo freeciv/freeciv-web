@@ -20,8 +20,8 @@ format_version=10
 ; Below: The individual buildings, one per section.
 ; (Buildings = City Improvements and Wonders)
 ;
-; The actual tag used (the * in [building_*]) does not matter, except 
-; it must be unique within this file, and it may be used in debug 
+; The actual tag used (the * in [building_*]) does not matter, except
+; it must be unique within this file, and it may be used in debug
 ; output when reading this file.
 ;
 ; Notes:

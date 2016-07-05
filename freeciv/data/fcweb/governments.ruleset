@@ -22,35 +22,33 @@ during_revolution="Anarchy"
 ;
 ; Below: The individual government types, one per section.
 ;
-; The actual tag used (the * in [government_*]) does not matter, except 
-; it must be unique within this file, and it may be used in debug 
+; The actual tag used (the * in [government_*]) does not matter, except
+; it must be unique within this file, and it may be used in debug
 ; output when reading this file.
 ;
 ; For the "official" rulesets, the order of these sections should not
-; be changed because that would break backward compatability with 
+; be changed because that would break backward compatability with
 ; savegames.  (In particular, if Fundamentalism is added to default
 ; ruleset, should be added at end.)
 ;
 ; Notes on fields:
-
-; name        = translatable name as seen by user
-; rule_name   = (optional) name for savegames, rulesets etc; if not
-;               present, 'name' is used. Since the name used in savegames
-;               must not change, use this when renaming a government after a
-;               ruleset has been released.
-; reqs        = requirements for this government (see README.effects)
-; graphic     = tag specifing preferred graphic
-; graphic_alt = alternate graphics tag if preferred is not found;
-;               should be a standard tag if preferred is not;
-;		otherwise may be "-"
-; ai_better   = AI will not consider this government for use if the
-;               government listed here is available
-
-; ruler_titles = ruler titles by nation, "-" is default, and non-matched 
-;	         nations are ignored 
-
-; helptext = optional help text string; should escape all raw newlines 
-;	     so that xgettext parsing works
+;
+; name         = translatable name as seen by user
+; rule_name    = (optional) name for savegames, rulesets etc; if not
+;                present, 'name' is used. Since the name used in savegames
+;                must not change, use this when renaming a government after a
+;                ruleset has been released.
+; reqs         = requirements for this government (see README.effects)
+; graphic      = tag specifing preferred graphic
+; graphic_alt  = alternate graphics tag if preferred is not found;
+;                should be a standard tag if preferred is not;
+;                otherwise may be "-"
+; ai_better    = AI will not consider this government for use if the
+;                government listed here is available
+; ruler_titles = ruler titles by nation, "-" is default, and non-matched
+;                nations are ignored
+; helptext     = optional help text string; should escape all raw newlines
+;                so that xgettext parsing works
 ;
 ; */ <-- avoid gettext warnings
 

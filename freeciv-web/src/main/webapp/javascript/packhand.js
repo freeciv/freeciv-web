@@ -176,6 +176,22 @@ function handle_chat_msg(packet)
   }
 }
 
+/**************************************************************************
+  Handle an early message packet. Thease have format like other chat
+  messages but server sends them only about events related to establishing
+  the connection and other setup in the early phase. They are a separate
+  packet just so that client knows thse to be already relevant when it's
+  only setting itself up - other chat messages might be just something
+  sent to all clients, and we might want to still consider ourselves
+  "not connected" (not receivers of those messages) until we are fully
+  in the game.
+**************************************************************************/
+function handle_early_chat_msg(packet)
+{
+  /* Handle as a regular chat message for now. */
+  handle_chat_msg(packet);
+}
+
 /* 100% complete */
 function handle_city_info(packet)
 {

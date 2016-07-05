@@ -139,10 +139,9 @@ ocean_resources = FALSE
 ;                        terrain section -- transformation changes to that
 ;                          terrain
 ; transform_time       = time to transform; if 0, cannot transform
-; pillage_time         = time to pillage extra from the tile
-; clean_pollution_time = time to clean pollution
+; pillage_time         = time to pillage extra from the tile (0 = impossible)
 ;                        Nonzero values only affect extras with removal_time 0.
-; clean_fallout_time   = time to clean fallout
+; clean_pollution_time = time to clean pollution (0 = impossible)
 ;                        Nonzero values only affect extras with removal_time 0.
 ; clean_fallout_time   = time to clean fallout (0 = impossible)
 ;                        Nonzero values only affect extras with removal_time 0.

@@ -56,8 +56,9 @@ format_version=10
 ; graphic       = icon for technology
 ; graphic_alt   = alternate icon
 ; helptext	= optional help text string (set units ruleset for examples)
-; bonus_message = text seen when a player is the first to 
-;                 discover an bonus tech.
+; bonus_message = text seen when a player is the first to discover
+;                 an bonus tech. Must contain '%s' to mark place of the tech
+;                 gained.
 ; cost          = if tech_cost_style is set to "Classic+" or "Experimental+",
 ;                 this field is read for information on how much a tech
 ;                 costs.
@@ -73,8 +74,10 @@ format_version=10
 ; "Bridge"   = "Settler" unit types can build roads with "RequiresBridge" flag
 ;              over roads with "PreventsOtherRoads" flag (rivers)
 ; "Build_Airborne" = from now on can build air units (for use by AI)
-; "Claim_Ocean"    = Player claims ocean tiles even if they are not
-;                    adjacent to border source
+; "Claim_Ocean"         = Player claims ocean tiles even if they are not
+;                         adjacent to border source
+; "Claim_Ocean_Limited" = Oceanic border sources claim ocean tiles even if
+;                         they are not adjacent to border source
 ;
 ; */ <-- avoid gettext warnings
 

@@ -24,7 +24,7 @@ format_version=10
 ; name          = rule name; In some circumstances user may see this
 ;                 as part of some sentences, so try to make it descriptive
 ;                 and sensible.
-; helptxt       = displayed in the help for units with this flag (optional)
+; helptxt       = displayed in the help for unit types with this flag (optional)
 flags =
   { "name", "helptxt"
     _("Airbase")
@@ -46,7 +46,7 @@ flags =
 ; name          = rule name; In some circumstances user may see this
 ;                 as part of some sentences, so try to make it descriptive
 ;                 and sensible.
-; helptxt       = displayed in the help for unit type belonging to a class
+; helptxt       = displayed in the help for unit types belonging to a class
 ;                 with this flag (optional)
 class_flags =
   { "name", "helptxt"

@@ -2,7 +2,6 @@
 
 # Freeciv server version upgrade notes
 # ------------------------------------
-# TileExtrasSafe is backport of Freeciv patch #7127 (SVN r32475)
 # NoNonnull is backport of Freeciv patch #7156 (SVN r32514)
 # ScorefileWeb is Freeciv patch #7177 (SVN r32570)
 # serverside_extra_assign is Freeciv patch #7178 (SVN r32585)
@@ -30,7 +29,7 @@
 # win_chance includes 'Chance to win' in Freeciv-web map tile popup.
 # disable_global_warming is Freeciv bug #24418
 
-PATCHLIST="freeciv_web_packets_def_changes city_fixes city_impr_fix2 city-naming-change city_fixes2 metachange text_fixes unithand-change2 current_research_cost freeciv-svn-webclient-changes init_lists_disable goto_fcweb misc_devversion_sync tutorial_ruleset savegame maphand_ch serverside_extra_assign ai_traits_crash worklists server_password barbarian-names activity_null_check add_rulesets message_escape freeciv_segfauls_fix scorelog_filenames fcweb_scorelog disable_global_warming win_chance ScorefileWeb ClassBonusRoadsCache TileExtrasSafe NoNonnull BuildingCrucial navajo-remove-long-city-names MetaconnectionPersistent border_vision_fix action_range"
+PATCHLIST="freeciv_web_packets_def_changes city_fixes city_impr_fix2 city-naming-change city_fixes2 metachange text_fixes unithand-change2 current_research_cost freeciv-svn-webclient-changes init_lists_disable goto_fcweb misc_devversion_sync tutorial_ruleset savegame maphand_ch serverside_extra_assign ai_traits_crash worklists server_password barbarian-names activity_null_check add_rulesets message_escape freeciv_segfauls_fix scorelog_filenames fcweb_scorelog disable_global_warming win_chance ScorefileWeb ClassBonusRoadsCache NoNonnull BuildingCrucial navajo-remove-long-city-names MetaconnectionPersistent border_vision_fix action_range"
 
 apply_patch() {
   echo "*** Applying $1.patch ***"

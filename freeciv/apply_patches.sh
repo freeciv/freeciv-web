@@ -2,7 +2,7 @@
 
 # Freeciv server version upgrade notes
 # ------------------------------------
-# NoNonnull is backport of Freeciv patch #7156 (SVN r32514)
+# NoNonnull is backport of Freeciv patch #7156 (SVN r32513)
 # ScorefileWeb is Freeciv patch #7177 (SVN r32570)
 # serverside_extra_assign is Freeciv patch #7178 (SVN r32585)
 # ClassBonusRoadsCache is backport of Freeciv patch #7176 (SVN r32612)

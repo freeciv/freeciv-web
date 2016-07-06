@@ -186,17 +186,17 @@ flags         = "Unreachable", "DoesntOccupyTile"
 
 ; /* <-- avoid gettext warnings
 ;
-; Below: The individual units, one per section.
+; Below: The individual unit types, one per section.
 ;
-; The number can be variable, up to 200.  
-; However for the "official" rulesets, units should not be removed 
+; The number can be variable, up to 200.
+; However for the "official" rulesets, units should not be removed
 ; because that would break backward compatability with savegames.
 ;
 ; The order here matters: later units are considered "better" for
-; a given flag or role.  
+; a given flag or role.
 ;
-; The actual tag used (the * in [unit_*]) does not matter, except 
-; it must be unique within this file, and it may be used in debug 
+; The actual tag used (the * in [unit_*]) does not matter, except
+; it must be unique within this file, and it may be used in debug
 ; output when reading this file.
 ;
 ; ** Fields **
@@ -207,9 +207,9 @@ flags         = "Unreachable", "DoesntOccupyTile"
 ;                 must not change, use this when renaming a unit after a
 ;                 ruleset has been released.
 ; graphic       = tag specifying preferred graphic
-; graphic_alt	= tag for alternate garphic if preferred graphic is not 
-;		  present; especially if preferred graphic is non-standard, 
-;		  this should be a standard tag.  Otherwise can use eg "-" 
+; graphic_alt	= tag for alternate garphic if preferred graphic is not
+;		  present; especially if preferred graphic is non-standard,
+;		  this should be a standard tag.  Otherwise can use eg "-"
 ;		  for no alternate graphic.
 ; tech_req      = required advance, names from techs.ruleset, or special:
 ;                 "None" => available from start
@@ -265,15 +265,15 @@ flags         = "Unreachable", "DoesntOccupyTile"
 ; veteran_power_fact =
 ; veteran_move_bonus =
 ;
-; roles         = special role strings
-; sound_move	= optional sound effect when the unit moves
-; sound_move_alt= optional alternative sound effect if above not
-;		  supported in client
-; sound_fight	= optional sound effect when the unit fights
-; sound_fight_alt= optional alternative sound effect if above not
-;		   supported in client
-; helptext	= optional help text string; should escape all raw newlines 
-;		  so that xgettext parsing works
+; roles           = special role strings
+; sound_move      = optional sound effect when the unit moves
+; sound_move_alt  = optional alternative sound effect if above not
+;                   supported in client
+; sound_fight     = optional sound effect when the unit fights
+; sound_fight_alt = optional alternative sound effect if above not
+;	            supported in client
+; helptext        = optional help text string; should escape all raw newlines
+;                   so that xgettext parsing works
 ;
 ;
 ; ** Bonuses **
@@ -374,28 +374,28 @@ flags         = "Unreachable", "DoesntOccupyTile"
 ;
 ; ** Roles **
 ;
-; "FirstBuild"	= first to be built when city founded
-; "Explorer"	= unit to use for exploring
-; "Hut"		= can be found in a hut
-; "HutTech"	= can be found in a hut, but its techs required
-; "Partisan"	= can be created as a partisan (only one unit can have this 
-;                 flag), see end of this file for its tech requirements option
-; "DefendOk"	= AI hint: ok for defending with
-; "DefendGood"	= AI hint: good for defending with
-; "Ferryboat"	= AI hint: useful for ferrying
-; "Barbarian"	       = can be created as land barbarian
-; "BarbarianTech"      = can be created as land barbarian, if someone has
-;		         researched its tech requirements
-; "BarbarianBoat"      = can be created as boat for sea barbarian
-; "BarbarianBuild"     = can be built by barbarians
-; "BarbarianBuildTech" = can be built by barbarians if someone has
-;		         researched its tech requirements
-; "BarbarianLeader"    = this unit is the barbarian leader (only one)
-; "BarbarianSea"       = can be created as a barbarian that disembarks from a barbarian boat
-; "BarbarianSeaTech"   = can be created as a barbarian that disembarks from a barbarian boat
-;                        if someone has researched its tech requirements
-; "Settlers"	= can irrigate and build roads
-; "Hunter"      = AI hint: good for hunting other units
+; "FirstBuild"            = first to be built when city founded
+; "Explorer"              = unit to use for exploring
+; "Hut"                   = can be found in a hut
+; "HutTech"               = can be found in a hut, but its techs required
+; "Partisan"              = can be created as a partisan (only one unit can have this
+;                           flag), see end of this file for its tech requirements option
+; "DefendOk"              = AI hint: ok for defending with
+; "DefendGood"            = AI hint: good for defending with
+; "Ferryboat"             = AI hint: useful for ferrying
+; "Barbarian"             = can be created as land barbarian
+; "BarbarianTech"         = can be created as land barbarian, if someone has
+;                           researched its tech requirements
+; "BarbarianBoat"         = can be created as boat for sea barbarian
+; "BarbarianBuild"        = can be built by barbarians
+; "BarbarianBuildTech"    = can be built by barbarians if someone has
+;                        researched its tech requirements
+; "BarbarianLeader"       = this unit is the barbarian leader (only one)
+; "BarbarianSea"          = can be created as a barbarian that disembarks from a barbarian boat
+; "BarbarianSeaTech"      = can be created as a barbarian that disembarks from a barbarian boat
+;                           if someone has researched its tech requirements
+; "Settlers"              = can irrigate and build roads
+; "Hunter"                = AI hint: good for hunting other units
 ; "CitiesStartUnit"       = Gets granted as 'c' startunit
 ; "WorkerStartUnit"       = Gets granted as 'w' startunit
 ; "ExplorerStartUnit"     = Gets granted as 'x' startunit

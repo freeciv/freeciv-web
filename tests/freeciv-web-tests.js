@@ -73,11 +73,13 @@ casper.test.begin('Test of Freeciv-web frontpage', 3, function suite(test) {
     });
 });
 
-casper.test.begin('Test starting new Freeciv-web game', 11, function suite(test) {
+casper.test.begin('Test starting new Freeciv-web game', 10, function suite(test) {
     casper.start("http://localhost/webclient/?action=new", function() {
         test.assertHttpStatus(200);
         test.assertTitleMatch(/Freeciv-web/, 'Freeciv-web title is present');
-        test.assertExists('#username_req');
+    });
+
+    casper.waitForSelector('#username_req', function() {
         this.echo("Captured screenshot to be saved as screenshot-1.png");
         this.capture('screenshot-1.png', undefined, {
           format: 'png',

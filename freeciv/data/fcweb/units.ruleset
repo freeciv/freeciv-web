@@ -127,7 +127,7 @@ veteran_move_bonus = 0, 0, 0, 0
 ;                       still work that tile
 ; "AttackNonNative"   = Unit can attack units on non-native tiles. Unit type
 ;                       flag "Only_Native_Attack" can override this
-; "AttFromNonNative"  = Unit can launch attach from non-native tile (against
+; "AttFromNonNative"  = Unit can launch attack from non-native tile (against
 ;                       native one)
 ;                       This applies for both attacking from transport or
 ;                       cities. If only some unit types of the class should

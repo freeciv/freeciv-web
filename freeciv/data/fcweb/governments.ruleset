@@ -196,11 +196,11 @@ Under Democracy, citizens govern directly by voting on issues.\
 ; stop                    = maximum value (as presented in UI)
 ; step                    = minimum increase/decrease (as presented in UI)
 ; offset                  = offset/factor control how UI values are turned
-; factor                  =  into effect values for use in effects.ruleset.
-;                            effect_value = (ui_value + offset) * (factor/100)
-;                            Optional; by default offset=0, factor=100, so
-;                            that UI values are used as-is.
-; helptext                = optional help text string; should escape all raw 
+; factor                  = into effect values for use in effects.ruleset.
+;                           effect_value = (ui_value + offset) * (factor/100)
+;                           Optional; by default offset=0, factor=100, so
+;                           that UI values are used as-is.
+; helptext                = optional help text string; should escape all raw
 ;                           newlines so that xgettext parsing works
 ;
 ; */ <-- avoid gettext warnings

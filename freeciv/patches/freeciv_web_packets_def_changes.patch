@@ -53,7 +53,7 @@ diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
  
    CITYSPE wonders[B_LAST]; diff
 +  UINT32  net_income;
-   
+ 
    SINT32 multiplier[MAX_NUM_MULTIPLIERS];
    SINT32 multiplier_target[MAX_NUM_MULTIPLIERS];
 @@ -1334,6 +1346,7 @@

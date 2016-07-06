@@ -82,47 +82,47 @@ veteran_move_bonus = 0, 0, 0, 0
 ; want add effect giving City Walls defence bonus against new class
 ; too.
 ;
-; The actual tag used (the * in [unitclass_*]) does not matter, except 
-; it must be unique within this file, and it may be used in debug 
+; The actual tag used (the * in [unitclass_*]) does not matter, except
+; it must be unique within this file, and it may be used in debug
 ; output when reading this file.
 ;
 ; ** Fields **
 ;
-; name          = translatable name as seen by user
-; rule_name     = (optional) name for savegames, rulesets etc; if not
-;                 present, 'name' is used. Since the name used in savegames
-;                 must not change, use this when renaming a unit class after a
-;                 ruleset has been released.
-; min_speed     = Minimum speed after damage and effects (whole movement points)
-; hp_loss_pct   = Hitpoints lost each turn if unit not in city or native base
-; non_native_def_pct = Defense power percentage applying when defending on
-;                      non-native terrain (such as ship in harbour)
-; hut_behavior  = What happens to huts when unit enters tile:
-;                 "Normal", "Nothing" or "Frighten"
-; flags         = List of unit class flags (from the following list; you
-;                 cannot add custom unit class flags)
-; helptext	= optional help text string; should escape all raw newlines 
-;		  so that xgettext parsing works
+; name                = translatable name as seen by user
+; rule_name           = (optional) name for savegames, rulesets etc; if not
+;                       present, 'name' is used. Since the name used in savegames
+;                       must not change, use this when renaming a unit class after a
+;                       ruleset has been released.
+; min_speed           = Minimum speed after damage and effects (whole movement points)
+; hp_loss_pct         = Hitpoints lost each turn if unit not in city or native base
+; non_native_def_pct  = Defense power percentage applying when defending on
+;                       non-native terrain (such as ship in harbour)
+; hut_behavior        = What happens to huts when unit enters tile:
+;                       "Normal", "Nothing", or "Frighten"
+; flags               = List of unit class flags (from the following list; you
+;                       cannot add custom unit class flags)
+; helptext            = optional help text string; should escape all raw newlines
+;                       so that xgettext parsing works
 ;
 ; ** Unit class Flags **
 ;
-; "TerrainSpeed"   = Units use terrain specific speed
-; "TerrainDefense" = Units gain defense bonus from terrain
-; "DamageSlows"   = Damaged units are slowed down
-; "CanOccupyCity" = Military units of this class can occupy enemy cities
-; "Missile"       = Unit is destroyed when it attacks
-; "BuildAnywhere" = Unit can be built even in the middle of non-native terrain
-; "Unreachable"   = Unit can be attacked only by units explicitly listing this
-;                   class in its 'targets', unless on a city or native base.
-;                   For class members which are transports, cargo cannot load/
-;                   unload except in a city or native base, unless that unit
-;                   explicitly lists this class in its 'embarks'/'disembarks'.
-; "CollectRansom" = Unit can collect ransom when killing lone barbarian leader
-; "ZOC"           = Unit is subject to ZOC rules. Unit type flag "IgZOC" can
-;                   override this
-; "CanFortify"    = Unit can fortify at land tiles. Unit type flag
-;                   "Cant_Fortify" can override this
-; "CanPillage"    = Unit can pillage tile infrastructure
+; "TerrainSpeed"      = Units use terrain specific speed
+; "TerrainDefense"    = Units gain defense bonus from terrain
+; "DamageSlows"       = Damaged units are slowed down
+; "CanOccupyCity"     = Military units of this class can occupy enemy cities
+; "Missile"           = Unit is destroyed when it attacks
+; "BuildAnywhere"     = Unit can be built even in the middle of non-native terrain
+; "Unreachable"       = Unit can be attacked only by units explicitly listing this
+;                       class in its 'targets', unless on a city or native base.
+;                       For class members which are transports, cargo cannot load/
+;                       unload except in a city or native base, unless that unit
+;                       explicitly lists this class in its 'embarks'/'disembarks'.
+; "CollectRansom"     = Unit can collect ransom when killing lone barbarian leader
+; "ZOC"               = Unit is subject to ZOC rules. Unit type flag "IgZOC" can
+;                       override this
+; "CanFortify"        = Unit can fortify at land tiles. Unit type flag
+;                       "Cant_Fortify" can override this
+; "CanPillage"        = Unit can pillage tile infrastructure
 ; "DoesntOccupyTile"  = Even if this kind of enemy unit is on tile, cities can
 ;                       still work that tile
 ; "AttackNonNative"   = Unit can attack units on non-native tiles. Unit type

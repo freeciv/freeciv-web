@@ -13,12 +13,6 @@ diff -Nurd -X.diff_ignore freeciv/common/game.h freeciv/common/game.h
 diff -Nurd -X.diff_ignore freeciv/server/report.c freeciv/server/report.c
 --- freeciv/server/report.c	2016-05-02 13:03:18.413230550 +0300
 +++ freeciv/server/report.c	2016-05-02 13:04:38.892996083 +0300
-@@ -1,4 +1,4 @@
--/********************************************************************** 
-+/***********************************************************************
-  Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
 @@ -599,6 +599,7 @@
    return result;
  }

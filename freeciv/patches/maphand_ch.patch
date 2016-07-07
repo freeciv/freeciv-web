@@ -217,7 +217,7 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +    if (NULL == pplayer || owner == pplayer) {
 +      /* TRANS: "City: <city name> | <username> (<nation + team>)" */
 +      astr_add_line(&str, _("City: %s | %s (%s)"),
-+                    city_name(pcity), username, nation);
++                    city_name_get(pcity), username, nation);
 +    } else {
 +      struct player_diplstate *ds
 +        = player_diplstate_get(pplayer, owner);
@@ -229,12 +229,12 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +        astr_add_line(&str, PL_("City: %s | %s (%s, %d turn cease-fire)",
 +                                "City: %s | %s (%s, %d turn cease-fire)",
 +                                turns),
-+                      city_name(pcity), username, nation, turns);
++                      city_name_get(pcity), username, nation, turns);
 +      } else {
 +        /* TRANS: "City: <city name> | <username>
 +         * (<nation + team>, <diplomatic state>)" */
 +        astr_add_line(&str, _("City: %s | %s (%s, %s)"),
-+                      city_name(pcity), username, nation,
++                      city_name_get(pcity), username, nation,
 +                      diplo_city_adjectives[ds->type]);
 +      }
 +    }
@@ -297,7 +297,7 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +         * (<nation + team>, <homecity>)" */
 +        astr_add_line(&str, _("Unit: %s | %s (%s, %s)"),
 +                      utype_name_translation(ptype), username,
-+                      nation, city_name(hcity));
++                      nation, city_name_get(hcity));
 +      } else {
 +        /* TRANS: "Unit: <unit type> | <username> (<nation + team>)" */
 +        astr_add_line(&str, _("Unit: %s | %s (%s)"),

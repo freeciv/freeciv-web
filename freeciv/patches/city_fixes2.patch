@@ -18,7 +18,7 @@ diff -Nurd -X.diff_ignore freeciv/server/cityhand.c freeciv/server/cityhand.c
 -  city_radius_sq = city_map_radius_sq_get(pcity);
 -  if (!is_valid_city_coords(city_radius_sq, worker_x, worker_y)) {
 -    log_error("handle_city_make_specialist() invalid city map {%d,%d} "
--              "\"%s\".", worker_x, worker_y, city_name(pcity));
+-              "\"%s\".", worker_x, worker_y, city_name_get(pcity));
 -    return;
 -  }
 -  pcenter = city_tile(pcity);
@@ -27,7 +27,7 @@ diff -Nurd -X.diff_ignore freeciv/server/cityhand.c freeciv/server/cityhand.c
 -                                        worker_y))) {
 +  if (NULL == (ptile = map_pos_to_tile(worker_x, worker_y))) {
      log_error("handle_city_make_specialist() unavailable city map {%d,%d} "
-               "\"%s\".", worker_x, worker_y, city_name(pcity));
+               "\"%s\".", worker_x, worker_y, city_name_get(pcity));
      return;
 @@ -185,9 +174,7 @@
  			     int worker_x, int worker_y)
@@ -45,7 +45,7 @@ diff -Nurd -X.diff_ignore freeciv/server/cityhand.c freeciv/server/cityhand.c
  
 -  if (!is_valid_city_coords(city_radius_sq, worker_x, worker_y)) {
 -    log_error("handle_city_make_worker() invalid city map {%d,%d} "
--              "\"%s\".", worker_x, worker_y, city_name(pcity));
+-              "\"%s\".", worker_x, worker_y, city_name_get(pcity));
 -    return;
 -  }
 -  pcenter = city_tile(pcity);
@@ -54,5 +54,5 @@ diff -Nurd -X.diff_ignore freeciv/server/cityhand.c freeciv/server/cityhand.c
 -                                        worker_y))) {
 +  if (NULL == (ptile = map_pos_to_tile(worker_x, worker_y))) {
      log_error("handle_city_make_worker() unavailable city map {%d,%d} "
-               "\"%s\".", worker_x, worker_y, city_name(pcity));
+               "\"%s\".", worker_x, worker_y, city_name_get(pcity));
      return;

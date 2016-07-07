@@ -26,10 +26,10 @@ diff -Nurd -X.diff_ignore freeciv/common/featured_text.c freeciv/common/featured
 -  fc_snprintf(buf, sizeof(buf), "%c%s tgt=\"%s\" id=%d name=\"%s\" %c%c",
 -              SEQ_START, text_tag_type_short_name(TTT_LINK),
 -              text_link_type_name(TLT_CITY), pcity->id,
--              city_name(pcity), SEQ_END, SEQ_STOP);
+-              city_name_get(pcity), SEQ_END, SEQ_STOP);
 +  fc_snprintf(buf, sizeof(buf), "<a href=\"#\" onclick=\"show_city_dialog_by_id(%d);\">%s</a>",
 +              pcity->id,
-+              city_name(pcity));
++              city_name_get(pcity));
    return buf;
  }
  

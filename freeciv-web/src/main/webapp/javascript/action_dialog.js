@@ -48,6 +48,15 @@ var ACTPROB_NOT_KNOWN = 255;
 
 
 /**************************************************************************
+  Returns true iff the given action probability belongs to an action that
+  may be possible.
+**************************************************************************/
+function action_prob_possible(aprob)
+{
+  return aprob != ACTPROB_IMPOSSIBLE && aprob != ACTPROB_NA;
+}
+
+/**************************************************************************
   Returns true unless a situation were a regular move always would be
   impossible is recognized.
 **************************************************************************/
@@ -165,189 +174,216 @@ function popup_action_selection(actor_unit, action_probabilities,
 
   dhtml += "<br>";
 
-  if (action_probabilities[ACTION_ESTABLISH_EMBASSY] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_ESTABLISH_EMBASSY])) {
     dhtml += "<input id='act_sel_emb" + actor_unit['id']
              + "' class='act_sel_button' type='button' value='"
              + format_action_label(ACTION_ESTABLISH_EMBASSY,
                                    action_probabilities)
              + "'>";
   }
-  if (action_probabilities[ACTION_SPY_INVESTIGATE_CITY] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_SPY_INVESTIGATE_CITY])) {
     dhtml += "<input id='act_sel_inv" + actor_unit['id']
              + "' class='act_sel_button' type='button' value='"
              + format_action_label(ACTION_SPY_INVESTIGATE_CITY,
                                    action_probabilities)
              + "'>";
   }
-  if (action_probabilities[ACTION_SPY_SABOTAGE_CITY] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_SPY_SABOTAGE_CITY])) {
     dhtml += "<input id='act_sel_sab" + actor_unit['id']
              + "' class='act_sel_button' type='button' value='"
              + format_action_label(ACTION_SPY_SABOTAGE_CITY,
                                    action_probabilities)
              + "'>";
   }
-  if (action_probabilities[ACTION_SPY_TARGETED_SABOTAGE_CITY] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_SPY_TARGETED_SABOTAGE_CITY])) {
     dhtml += "<input id='act_sel_tgt_sab" + actor_unit['id']
              + "' class='act_sel_button' type='button' value='"
              + format_action_label(ACTION_SPY_TARGETED_SABOTAGE_CITY,
                                    action_probabilities)
              + "'>";
   }
-  if (action_probabilities[ACTION_SPY_STEAL_TECH] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_SPY_STEAL_TECH])) {
     dhtml += "<input id='act_sel_tech" + actor_unit['id']
              + "' class='act_sel_button' type='button' value='"
              + format_action_label(ACTION_SPY_STEAL_TECH,
                                    action_probabilities)
              + "'>";
   }
-  if (action_probabilities[ACTION_SPY_TARGETED_STEAL_TECH] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_SPY_TARGETED_STEAL_TECH])) {
     dhtml += "<input id='act_sel_tgt_tech" + actor_unit['id']
              + "' class='act_sel_button' type='button' value='"
              + format_action_label(ACTION_SPY_TARGETED_STEAL_TECH,
                                    action_probabilities)
              + "'>";
   }
-  if (action_probabilities[ACTION_SPY_STEAL_GOLD] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_SPY_STEAL_GOLD])) {
     dhtml += "<input id='act_sel_steal_gold" + actor_unit['id']
              + "' class='act_sel_button' type='button' value='"
              + format_action_label(ACTION_SPY_STEAL_GOLD,
                                    action_probabilities)
              + "'>";
   }
-  if (action_probabilities[ACTION_STEAL_MAPS] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_STEAL_MAPS])) {
     dhtml += "<input id='act_sel_steal_maps" + actor_unit['id']
              + "' class='act_sel_button' type='button' value='"
              + format_action_label(ACTION_STEAL_MAPS,
                                    action_probabilities)
              + "'>";
   }
-  if (action_probabilities[ACTION_SPY_INCITE_CITY] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_SPY_INCITE_CITY])) {
     dhtml += "<input id='act_sel_revo" + actor_unit['id']
              + "' class='act_sel_button' type='button' value='"
              + format_action_label(ACTION_SPY_INCITE_CITY,
                                    action_probabilities)
              + "'>";
   }
-  if (action_probabilities[ACTION_SPY_POISON] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_SPY_POISON])) {
     dhtml += "<input id='act_sel_poi" + actor_unit['id']
              + "' class='act_sel_button' type='button' value='"
              + format_action_label(ACTION_SPY_POISON,
                                    action_probabilities)
              + "'>";
   }
-  if (action_probabilities[ACTION_TRADE_ROUTE] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_TRADE_ROUTE])) {
     dhtml += "<input id='act_sel_trade" + actor_unit['id']
              + "' class='act_sel_button' type='button' value='"
              + format_action_label(ACTION_TRADE_ROUTE,
                                    action_probabilities)
              + "'>";
   }
-  if (action_probabilities[ACTION_MARKETPLACE] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_MARKETPLACE])) {
     dhtml += "<input id='act_sel_market" + actor_unit['id']
              + "' class='act_sel_button' type='button' value='"
              + format_action_label(ACTION_MARKETPLACE,
                               action_probabilities)
              + "'>";
   }
-  if (action_probabilities[ACTION_HELP_WONDER] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_HELP_WONDER])) {
     dhtml += "<input id='act_sel_wonder" + actor_unit['id']
              + "' class='act_sel_button' type='button' value='"
              + format_action_label(ACTION_HELP_WONDER,
                                    action_probabilities)
              + "'>";
   }
-  if (action_probabilities[ACTION_JOIN_CITY] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_JOIN_CITY])) {
     dhtml += "<input id='act_sel_join_city" + actor_unit['id']
              + "' class='act_sel_button' type='button' value='"
              + format_action_label(ACTION_JOIN_CITY,
                                    action_probabilities)
              + "'>";
   }
-  if (action_probabilities[ACTION_SPY_NUKE] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_SPY_NUKE])) {
     dhtml += "<input id='act_sel_spy_nuke" + actor_unit['id']
              + "' class='act_sel_button' type='button' value='"
              + format_action_label(ACTION_SPY_NUKE,
                                    action_probabilities)
              + "'>";
   }
-  if (action_probabilities[ACTION_DESTROY_CITY] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_DESTROY_CITY])) {
     dhtml += "<input id='act_sel_destroy_city" + actor_unit['id']
              + "' class='act_sel_button' type='button' value='"
              + format_action_label(ACTION_DESTROY_CITY,
                                    action_probabilities)
              + "'>";
   }
-  if (action_probabilities[ACTION_RECYCLE_UNIT] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_RECYCLE_UNIT])) {
     dhtml += "<input id='act_sel_recycle_unit" + actor_unit['id']
              + "' class='act_sel_button' type='button' value='"
              + format_action_label(ACTION_RECYCLE_UNIT,
                                    action_probabilities)
              + "'>";
   }
-  if (action_probabilities[ACTION_HOME_CITY] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_HOME_CITY])) {
     dhtml += "<input id='act_sel_home" + actor_unit['id']
              + "' class='act_sel_button' type='button' value='"
              + format_action_label(ACTION_HOME_CITY,
                                    action_probabilities)
              + "'>";
   }
-  if (action_probabilities[ACTION_UPGRADE_UNIT] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_UPGRADE_UNIT])) {
     dhtml += "<input id='act_sel_upgr" + actor_unit['id']
              + "' class='act_sel_button' type='button' value='"
              + format_action_label(ACTION_UPGRADE_UNIT,
                                    action_probabilities)
              + "'>";
   }
-  if (action_probabilities[ACTION_SPY_BRIBE_UNIT] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_SPY_BRIBE_UNIT])) {
     dhtml += "<input id='act_sel_bribe" + actor_unit['id']
         + "' class='act_sel_button' type='button' value='"
         + format_action_label(ACTION_SPY_BRIBE_UNIT,
                               action_probabilities)
         + "'>";
   }
-  if (action_probabilities[ACTION_SPY_SABOTAGE_UNIT] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_SPY_SABOTAGE_UNIT])) {
     dhtml += "<input id='act_sel_spy_sabo" + actor_unit['id']
              + "' class='act_sel_button' type='button' value='"
              + format_action_label(ACTION_SPY_SABOTAGE_UNIT,
                                    action_probabilities)
              + "'>";
   }
-  if (action_probabilities[ACTION_EXPEL_UNIT] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_EXPEL_UNIT])) {
     dhtml += "<input id='act_sel_expel_unit" + actor_unit['id']
              + "' class='act_sel_button' type='button' value='"
              + format_action_label(ACTION_EXPEL_UNIT,
                                    action_probabilities)
              + "'>";
   }
-  if (action_probabilities[ACTION_CAPTURE_UNITS] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_CAPTURE_UNITS])) {
     dhtml += "<input id='act_sel_capture_units" + actor_unit['id']
              + "' class='act_sel_button' type='button' value='"
              + format_action_label(ACTION_CAPTURE_UNITS,
                                    action_probabilities)
              + "'>";
   }
-  if (action_probabilities[ACTION_FOUND_CITY] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_FOUND_CITY])) {
     dhtml += "<input id='act_sel_found_city" + actor_unit['id']
              + "' class='act_sel_button' type='button' value='"
              + format_action_label(ACTION_FOUND_CITY,
                                    action_probabilities)
              + "'>";
   }
-  if (action_probabilities[ACTION_NUKE] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_NUKE])) {
     dhtml += "<input id='act_sel_nuke" + actor_unit['id']
              + "' class='act_sel_button' type='button' value='"
              + format_action_label(ACTION_NUKE,
                                    action_probabilities)
              + "'>";
   }
-  if (action_probabilities[ACTION_BOMBARD] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_BOMBARD])) {
     dhtml += "<input id='act_sel_bombard" + actor_unit['id']
              + "' class='act_sel_button' type='button' value='"
              + format_action_label(ACTION_BOMBARD,
                                    action_probabilities)
              + "'>";
   }
-  if (action_probabilities[ACTION_DISBAND_UNIT] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_DISBAND_UNIT])) {
     dhtml += "<input id='act_sel_disb_unit" + actor_unit['id']
              + "' class='act_sel_button' type='button' value=\""
              + format_action_label(ACTION_DISBAND_UNIT,
@@ -380,7 +416,8 @@ function popup_action_selection(actor_unit, action_probabilities,
     $(id).remove();
   });
 
-  if (action_probabilities[ACTION_ESTABLISH_EMBASSY] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_ESTABLISH_EMBASSY])) {
     $("#act_sel_emb" + actor_unit['id']).click(function() {
       var packet = {"pid" : packet_unit_do_action,
                     "actor_id" : actor_unit['id'],
@@ -394,7 +431,8 @@ function popup_action_selection(actor_unit, action_probabilities,
     });
   }
 
-  if (action_probabilities[ACTION_SPY_INVESTIGATE_CITY] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_SPY_INVESTIGATE_CITY])) {
     $("#act_sel_inv" + actor_unit['id']).click(function() {
       var packet = {"pid" : packet_unit_do_action,
                     "actor_id" : actor_unit['id'],
@@ -408,7 +446,8 @@ function popup_action_selection(actor_unit, action_probabilities,
     });
   }
 
-  if (action_probabilities[ACTION_SPY_SABOTAGE_CITY] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_SPY_SABOTAGE_CITY])) {
     $("#act_sel_sab" + actor_unit['id']).click(function() {
       var packet = {"pid" : packet_unit_do_action,
                     "actor_id" : actor_unit['id'],
@@ -422,7 +461,8 @@ function popup_action_selection(actor_unit, action_probabilities,
     });
   }
 
-  if (action_probabilities[ACTION_SPY_TARGETED_SABOTAGE_CITY] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_SPY_TARGETED_SABOTAGE_CITY])) {
     $("#act_sel_tgt_sab" + actor_unit['id']).click(function() {
       var packet = {"pid" : packet_unit_action_query,
                     "diplomat_id" : actor_unit['id'],
@@ -434,7 +474,8 @@ function popup_action_selection(actor_unit, action_probabilities,
     });
   }
 
-  if (action_probabilities[ACTION_SPY_STEAL_TECH] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_SPY_STEAL_TECH])) {
     $("#act_sel_tech" + actor_unit['id']).click(function() {
       var packet = {"pid" : packet_unit_do_action,
                     "actor_id" : actor_unit['id'],
@@ -448,7 +489,8 @@ function popup_action_selection(actor_unit, action_probabilities,
     });
   }
 
-  if (action_probabilities[ACTION_SPY_TARGETED_STEAL_TECH] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_SPY_TARGETED_STEAL_TECH])) {
     $("#act_sel_tgt_tech" + actor_unit['id']).click(function() {
       popup_steal_tech_selection_dialog(actor_unit, target_city,
                                         action_probabilities);
@@ -457,7 +499,8 @@ function popup_action_selection(actor_unit, action_probabilities,
     });
   }
 
-  if (action_probabilities[ACTION_SPY_STEAL_GOLD] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_SPY_STEAL_GOLD])) {
     $("#act_sel_steal_gold" + actor_unit['id']).click(function() {
       var packet = {"pid" : packet_unit_do_action,
                     "actor_id" : actor_unit['id'],
@@ -471,7 +514,8 @@ function popup_action_selection(actor_unit, action_probabilities,
     });
   }
 
-  if (action_probabilities[ACTION_STEAL_MAPS] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_STEAL_MAPS])) {
     $("#act_sel_steal_maps" + actor_unit['id']).click(function() {
       var packet = {"pid" : packet_unit_do_action,
                     "actor_id" : actor_unit['id'],
@@ -485,7 +529,8 @@ function popup_action_selection(actor_unit, action_probabilities,
     });
   }
 
-  if (action_probabilities[ACTION_SPY_INCITE_CITY] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_SPY_INCITE_CITY])) {
     $("#act_sel_revo" + actor_unit['id']).click(function() {
       var packet = {"pid" : packet_unit_action_query,
                     "diplomat_id" : actor_unit['id'],
@@ -497,7 +542,8 @@ function popup_action_selection(actor_unit, action_probabilities,
     });
   }
 
-  if (action_probabilities[ACTION_SPY_POISON] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_SPY_POISON])) {
     $("#act_sel_poi" + actor_unit['id']).click(function() {
       var packet = {"pid" : packet_unit_do_action,
                     "actor_id" : actor_unit['id'],
@@ -511,7 +557,8 @@ function popup_action_selection(actor_unit, action_probabilities,
     });
   }
 
-  if (action_probabilities[ACTION_TRADE_ROUTE] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_TRADE_ROUTE])) {
     $("#act_sel_trade" + actor_unit['id']).click(function() {
       var packet = {"pid" : packet_unit_do_action,
                     "actor_id" : actor_unit['id'],
@@ -525,7 +572,8 @@ function popup_action_selection(actor_unit, action_probabilities,
     });
   }
 
-  if (action_probabilities[ACTION_MARKETPLACE] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_MARKETPLACE])) {
     $("#act_sel_market" + actor_unit['id']).click(function() {
       var packet = {"pid" : packet_unit_do_action,
                     "actor_id" : actor_unit['id'],
@@ -539,7 +587,8 @@ function popup_action_selection(actor_unit, action_probabilities,
     });
   }
 
-  if (action_probabilities[ACTION_HELP_WONDER] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_HELP_WONDER])) {
     $("#act_sel_wonder" + actor_unit['id']).click(function() {
       var packet = {"pid" : packet_unit_do_action,
                     "actor_id" : actor_unit['id'],
@@ -553,7 +602,8 @@ function popup_action_selection(actor_unit, action_probabilities,
     });
   }
 
-  if (action_probabilities[ACTION_JOIN_CITY] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_JOIN_CITY])) {
     $("#act_sel_join_city" + actor_unit['id']).click(function() {
       var packet = {"pid"         : packet_unit_do_action,
                     "actor_id"    : actor_unit['id'],
@@ -567,7 +617,8 @@ function popup_action_selection(actor_unit, action_probabilities,
     });
   }
 
-  if (action_probabilities[ACTION_SPY_NUKE] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_SPY_NUKE])) {
     $("#act_sel_spy_nuke" + actor_unit['id']).click(function() {
       var packet = {"pid"         : packet_unit_do_action,
                     "actor_id"    : actor_unit['id'],
@@ -581,7 +632,8 @@ function popup_action_selection(actor_unit, action_probabilities,
     });
   }
 
-  if (action_probabilities[ACTION_DESTROY_CITY] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_DESTROY_CITY])) {
     $("#act_sel_destroy_city" + actor_unit['id']).click(function() {
       var packet = {"pid"         : packet_unit_do_action,
                     "actor_id"    : actor_unit['id'],
@@ -595,7 +647,8 @@ function popup_action_selection(actor_unit, action_probabilities,
     });
   }
 
-  if (action_probabilities[ACTION_RECYCLE_UNIT] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_RECYCLE_UNIT])) {
     $("#act_sel_recycle_unit" + actor_unit['id']).click(function() {
       var packet = {"pid"         : packet_unit_do_action,
                     "actor_id"    : actor_unit['id'],
@@ -609,7 +662,8 @@ function popup_action_selection(actor_unit, action_probabilities,
     });
   }
 
-  if (action_probabilities[ACTION_HOME_CITY] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_HOME_CITY])) {
     $("#act_sel_home" + actor_unit['id']).click(function() {
       var packet = {"pid"         : packet_unit_do_action,
                     "actor_id"    : actor_unit['id'],
@@ -623,7 +677,8 @@ function popup_action_selection(actor_unit, action_probabilities,
     });
   }
 
-  if (action_probabilities[ACTION_UPGRADE_UNIT] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_UPGRADE_UNIT])) {
     $("#act_sel_upgr" + actor_unit['id']).click(function() {
       var packet = {"pid"         : packet_unit_do_action,
                     "actor_id"    : actor_unit['id'],
@@ -637,7 +692,8 @@ function popup_action_selection(actor_unit, action_probabilities,
     });
   }
 
-  if (action_probabilities[ACTION_SPY_BRIBE_UNIT] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_SPY_BRIBE_UNIT])) {
     $("#act_sel_bribe" + actor_unit['id']).click(function() {
       var packet = {"pid" : packet_unit_action_query,
                     "diplomat_id" : actor_unit['id'],
@@ -649,7 +705,8 @@ function popup_action_selection(actor_unit, action_probabilities,
     });
   }
 
-  if (action_probabilities[ACTION_SPY_SABOTAGE_UNIT] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_SPY_SABOTAGE_UNIT])) {
     $("#act_sel_spy_sabo" + actor_unit['id']).click(function() {
       var packet = {"pid" : packet_unit_do_action,
                     "actor_id" : actor_unit['id'],
@@ -663,7 +720,8 @@ function popup_action_selection(actor_unit, action_probabilities,
     });
   }
 
-  if (action_probabilities[ACTION_EXPEL_UNIT] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_EXPEL_UNIT])) {
     $("#act_sel_expel_unit" + actor_unit['id']).click(function() {
       var packet = {"pid" : packet_unit_do_action,
                     "actor_id" : actor_unit['id'],
@@ -677,7 +735,8 @@ function popup_action_selection(actor_unit, action_probabilities,
     });
   }
 
-  if (action_probabilities[ACTION_CAPTURE_UNITS] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_CAPTURE_UNITS])) {
     $("#act_sel_capture_units" + actor_unit['id']).click(function() {
       var packet = {"pid" : packet_unit_do_action,
                     "actor_id" : actor_unit['id'],
@@ -691,7 +750,8 @@ function popup_action_selection(actor_unit, action_probabilities,
     });
   }
 
-  if (action_probabilities[ACTION_FOUND_CITY] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_FOUND_CITY])) {
     $("#act_sel_found_city" + actor_unit['id']).click(function() {
       /* Ask the server to suggest a city name. */
       var packet = {"pid"     : packet_city_name_suggestion_req,
@@ -702,7 +762,8 @@ function popup_action_selection(actor_unit, action_probabilities,
     });
   }
 
-  if (action_probabilities[ACTION_NUKE] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_NUKE])) {
     $("#act_sel_nuke" + actor_unit['id']).click(function() {
       var packet = {"pid" : packet_unit_do_action,
                     "actor_id" : actor_unit['id'],
@@ -716,7 +777,8 @@ function popup_action_selection(actor_unit, action_probabilities,
     });
   }
 
-  if (action_probabilities[ACTION_BOMBARD] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_BOMBARD])) {
     $("#act_sel_bombard" + actor_unit['id']).click(function() {
       var packet = {"pid" : packet_unit_do_action,
                     "actor_id" : actor_unit['id'],
@@ -730,7 +792,8 @@ function popup_action_selection(actor_unit, action_probabilities,
     });
   }
 
-  if (action_probabilities[ACTION_DISBAND_UNIT] != 0) {
+  if (action_prob_possible(
+        action_probabilities[ACTION_DISBAND_UNIT])) {
     $("#act_sel_disb_unit" + actor_unit['id']).click(function() {
       var packet = {
         "pid"         : packet_unit_do_action,
@@ -966,7 +1029,8 @@ function popup_steal_tech_selection_dialog(actor_unit, target_city,
   }
 
   /* The player may change his mind after selecting targeted tech theft. */
-  if (act_probs[ACTION_SPY_STEAL_TECH] != 0) {
+  if (action_prob_possible(
+        act_probs[ACTION_SPY_STEAL_TECH])) {
     /* Untargeted tech theft may be legal. Add it as an alternative. */
     buttons.push({
                    text  : "At " + unit_types[actor_unit['type']]['name']

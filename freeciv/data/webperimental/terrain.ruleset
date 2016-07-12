@@ -1708,13 +1708,14 @@ rmact_gfx_alt  = "-"
 ;
 ; extra                   = name of the extra this base section is part of
 ; gui_type                = How gui should handle this base.
-;                           Fortress/Airbase/Other
+;                           Value can be "Fortress", "Airbase", or "Other"
 ; border_sq               = Base will claim land ownership up to this radius,
 ;                           -1 to disable. If enabled, base cannot exist in city tile.
 ; vision_main_sq          = Base will have main layer vision to this radius
 ; vision_invis_sq         = Base will have invisible layer vision to this radius
 ; flags
-;   - "NoAggressive"      = Units inside are not considered aggressive
+;   - "NoAggressive"      = Units inside are not considered aggressive if there`s
+;                           friendly city within 3 tiles
 ;   - "NoStackDeath"      = Units inside do not die all at once when attacked
 ;
 ; */ <-- avoid gettext warnings

@@ -655,9 +655,9 @@ Take good care of your capital, as its loss may result in your\
  empire plunging into civil war. Losing your current palace also\
  results in losing whatever spaceship you might have.\
 "), _("\
-If the city with palace is in dangerous location, or making some\
- more central city your capital would give better corruption distribution,\
- you can move Palace by rebuilding it to an other city.\
+If the capital is in a dangerous location, or a more central capital\
+ would give a better corruption distribution, you can move your palace\
+ by rebuilding it in another city.\
 "),
 ; /* xgettext:no-c-format */
 _("\

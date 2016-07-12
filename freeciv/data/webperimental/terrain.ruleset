@@ -830,6 +830,8 @@ Tundra are broad, cold regions, fit for some agriculture and little\
  else.\
 ")
 
+; /* <-- avoid gettext warnings
+;
 ; The individual resource types, one per section.
 ; Roughly sorted by identifier.
 ; The actual tag used (the * in [resource_*]) must be unique for each resource,
@@ -838,12 +840,14 @@ Tundra are broad, cold regions, fit for some agriculture and little\
 ; Notes:
 ;
 ; extra                = name of the extra this resource section is part of
-; identifier           = single-character identifier used in savegames.  This
+; identifier           = single-character identifier used in old savegames. This
 ;                        must be unique for each resource, and changing it will
-;                        break savegame compatibility.
+;                        break loading those old savegames.
 ; food                 = increased food production
 ; shield               = increased shield production
 ; trade                = increased trade production
+;
+; */ <-- avoid gettext warnings
 
 [resource_gold]
 extra       = "Gold"

@@ -686,7 +686,7 @@ frequency      = 10
 effects        = "DestroyBuilding"
 
 [disaster_plague]
-name           = _("Plague")
+name           = _("Pestilence")
 frequency      = 10
 effects        = "ReducePopulation"
 

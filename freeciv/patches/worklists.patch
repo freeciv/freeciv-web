@@ -102,7 +102,7 @@ diff -Nurd -X.diff_ignore freeciv/server/cityhand.c freeciv/server/cityhand.c
 +    return;
 +  }
 +  struct universal addme = universal_by_number(kind, value);
-+  worklist_append(&pcity->worklist, addme);
++  worklist_append(&pcity->worklist, &addme);
  
    send_city_info(pplayer, pcity);
  }

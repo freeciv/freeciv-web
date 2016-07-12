@@ -20,8 +20,8 @@ diff -Nurd -X.diff_ignore freeciv/ai/default/aiunit.c freeciv/ai/default/aiunit.
      }
    }
  
--  if ((unit_data->task == AIUNIT_TRADE || 
--       unit_data->task == AIUNIT_WONDER)) {
+-  if ((unit_data->task == AIUNIT_TRADE
+-       || unit_data->task == AIUNIT_WONDER)) {
 +  if (unit_data->task == AIUNIT_TRADE
 +      || unit_data->task == AIUNIT_WONDER) {
      /* we are moving to our destination */

@@ -207,7 +207,7 @@ flags         = "Unreachable", "DoesntOccupyTile"
 ;                 must not change, use this when renaming a unit after a
 ;                 ruleset has been released.
 ; graphic       = tag specifying preferred graphic
-; graphic_alt	= tag for alternate garphic if preferred graphic is not
+; graphic_alt	= tag for alternate graphic if preferred graphic is not
 ;		  present; especially if preferred graphic is non-standard,
 ;		  this should be a standard tag.  Otherwise can use eg "-"
 ;		  for no alternate graphic.

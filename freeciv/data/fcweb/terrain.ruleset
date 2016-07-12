@@ -84,9 +84,7 @@ ocean_resources = FALSE
 ; The individual terrain types, one per section.
 ; Roughly sorted by identifier.
 ; The actual tag used (the * in [terrain_*]) must be unique for each terrain,
-; should contain the specific strings found in the nation city_name lists,
 ; and may be used in debug output when reading this file.
-; Some have been chosen to avoid the city_name lists (_peaks, _water).
 ;
 ; Notes:
 ;
@@ -98,13 +96,12 @@ ocean_resources = FALSE
 ;                        savegames must not change, use this when renaming a
 ;                        terrain after a ruleset has been released.
 ; graphic              = preferred graphic; Tilespec [tile_*] section
-;                        with 'tag' matching this will be used. 
+;                        with 'tag' matching this will be used.
 ; graphic_alt          = alternate graphic. When no tilespec 'tag' matching
 ;                        preferred graphic is not found, this will be used.
 ;                        Otherwise may be "-"
-; identifier           = single-character identifier used in savegames.  This
-;                        must be unique for each terrain, and changing it will
-;                        break savegame compatibility.
+; identifier           = single-character identifier used in savegames. This
+;                        must be unique for each terrain.
 ; class                = Terrain class terrain belongs to: "Land" or "Oceanic"
 ; movement_cost        = in whole movement points, not move_fragments;
 ;                        typically 1 to 3
@@ -167,7 +164,7 @@ ocean_resources = FALSE
 ;                        actual chance of river generation is controlled
 ;                        separately).
 ;   - UnsafeCoast      = This terrain does not provide a safe voyage for
-;                        F_TRIRIEME units.
+;                        units with flag "Trireme"
 ;   - FreshWater       = This terrain is used for small bodies of water.
 ;                        If this becomes adjacent to non-FreshWater terrain,
 ;                        the whole contiguous FreshWater area will be flooded
@@ -183,12 +180,12 @@ ocean_resources = FALSE
 ;                        and unfrozen terrain can be controlled with
 ;                        thaw_requirement/freeze_requirement, and Frozen
 ;                        terrain is shown differently on the overview map.
-; property_*           = specific property % values used by mapgen.  Most
+; property_*           = specific property % values used by mapgen. Most
 ;                        terrains will have 0 for most values. Properties
 ;                        other than ocean_depth are only used for land tiles.
 ;  - mountainous       = degree to which this terrain is mountainous
 ;  - green             = how much life this terrain has
-;  - foliage           = how much thick undergrowth the terrain has 
+;  - foliage           = how much thick undergrowth the terrain has
 ;  - tropical          = how "tropical" the terrain is (high temperature)
 ;  - temperate         = how "temperate" the terrain is (med temperature)
 ;  - cold              = how "cold" the terrain is (low temperature)
@@ -200,7 +197,7 @@ ocean_resources = FALSE
 ; color.r              = color of the terrain (red value)
 ; color.g              = color of the terrain (green value)
 ; color.b              = color of the terrain (blue value)
-; helptext             = optional help text string; should escape all raw 
+; helptext             = optional help text string; should escape all raw
 ;                        newlines so that xgettext parsing works
 ;
 ; */ <-- avoid gettext warnings

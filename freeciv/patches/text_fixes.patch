@@ -33,16 +33,14 @@ diff -Nurd -X.diff_ignore freeciv/common/featured_text.c freeciv/common/featured
    return buf;
  }
  
-@@ -1103,12 +1102,8 @@
+@@ -1103,10 +1102,8 @@
  {
    static char buf[MAX_LEN_LINK];
  
--  /* We use the rule name of the unit, it will be translated in every
--   * local sides in the function text_tag_replace_text(). */
 -  fc_snprintf(buf, sizeof(buf), "%c%s tgt=\"%s\" id=%d name=\"%s\" %c%c",
 -              SEQ_START, text_tag_type_short_name(TTT_LINK),
 -              text_link_type_name(TLT_UNIT), punit->id,
--              unit_rule_name(punit), SEQ_END, SEQ_STOP);
+-              unit_name_translation(punit), SEQ_END, SEQ_STOP);
 +  fc_snprintf(buf, sizeof(buf), "%s", unit_name_translation(punit));
 +
    return buf;

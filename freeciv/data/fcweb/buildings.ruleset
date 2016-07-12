@@ -106,11 +106,11 @@ sabotage	= 100
 sound		= "b_aqueduct"
 sound_alt	= "b_generic"
 helptext	= _("\
-Allows a city to grow larger than size 8 and reduces the chance of plague\
- within the city. A Sewer System is required for a city to grow larger\
- than size 12.\
+Allows a city to grow larger than size 8.  A Sewer System is also\
+ required for a city to grow larger than size 12.\
 ")
-; NB: plague (illness) has to be activated in the ruleset
+; There's also an effect to reduce the chance of plague, but you have to
+; enable illness in game.ruleset for that to be relevant.
 
 [building_bank]
 name		= _("Bank")
@@ -868,11 +868,11 @@ sabotage	= 100
 sound		= "b_sewer_system"
 sound_alt	= "b_generic"
 helptext	= _("\
-Allows a city to grow larger than size 12. Pre-requirement is an Aqueduct\
- for a city to grow larger than size 8. The Sewer System further reduces\
- the chance of a plague.\
+Allows a city to grow larger than size 12.  An Aqueduct is first\
+ required for a city to grow larger than size 8.\
 ")
-; NB: plague (illness) has to be activated in the ruleset
+; There's also an effect to reduce the chance of plague, but you have to
+; enable illness in game.ruleset for that to be relevant.
 
 [building_solar_plant]
 name		= _("Solar Plant")
@@ -1233,11 +1233,11 @@ sound_alt	= "w_generic"
 helptext	= _("\
 This stunning technological achievement makes one unhappy\
  citizen content in each of your cities (including citizens unhappy\
- about military activity). It further reduces the possibility for\
- an illness in the city.\
+ about military activity).\
 ")
+; There's also an effect to reduce the chance of plague, but you have to
+; enable illness in game.ruleset for that to be relevant.
 ; NB: In Civ2 this makes 1 content citizen happy in all cities.
-; NB: plague (illness) has to be activated in the ruleset
 
 [building_darwins_voyage]
 name		= _("Darwin's Voyage")

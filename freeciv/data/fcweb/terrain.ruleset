@@ -1087,6 +1087,7 @@ ui_name_base_airbase = _("?gui_type:Build Airbase")
 ;                           on the default "Fortification" defense layer multiplied
 ;                           by the 1 + sum of bonuses from the extras on the
 ;                           "Natural" layer.
+;   - "NoStackDeath"      = Units inside do not die all at once when attacked
 ; helptext                = optional help text string; should escape all raw
 ;                           newlines so that xgettext parsing works
 ;
@@ -1262,7 +1263,7 @@ build_time     = 3
 removal_time   = 0
 defense_bonus  = 100
 native_to      = "Land"
-flags          = "DiplomatDefense"
+flags          = "DiplomatDefense", "NoStackDeath"
 helptext       = _("\
 Fortresses improve defense for land units. Among other effects, a land \
 unit remaining in a fortress for a whole turn without moving recovers \
@@ -1292,7 +1293,7 @@ reqs           =
 build_time     = 3
 removal_time   = 0
 native_to      = "Air", "Helicopter", "Missile"
-flags          = "Refuel", "ParadropFrom"
+flags          = "Refuel", "ParadropFrom", "NoStackDeath"
 helptext       = _("\
 Airbases allow your air units to land and refuel. Air units in an \
 airbase may be attacked by land units.\
@@ -1716,7 +1717,6 @@ rmact_gfx_alt  = "-"
 ; flags
 ;   - "NoAggressive"      = Units inside are not considered aggressive if there`s
 ;                           friendly city within 3 tiles
-;   - "NoStackDeath"      = Units inside do not die all at once when attacked
 ;
 ; */ <-- avoid gettext warnings
 
@@ -1724,12 +1724,11 @@ rmact_gfx_alt  = "-"
 extra          = "Fortress"
 gui_type       = "Fortress"
 border_sq      = 5
-flags          = "NoAggressive", "NoStackDeath"
+flags          = "NoAggressive"
 
 [base_airbase]
 extra          = "Airbase"
 gui_type       = "Airbase"
-flags          = "NoStackDeath"
 
 [base_buoy]
 extra          = "Buoy"

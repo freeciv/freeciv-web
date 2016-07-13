@@ -556,6 +556,10 @@ actor_reqs    =
 
 [actionenabler_upgrade_unit]
 action = "Upgrade Unit"
+actor_reqs    =
+    { "type",    "name",       "range", "present"
+      "DiplRel", "Is foreign", "Local", FALSE
+    }
 
 [actionenabler_airlift_unit]
 action = "Airlift Unit"

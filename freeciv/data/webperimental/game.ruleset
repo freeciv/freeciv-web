@@ -837,7 +837,7 @@ name           = _("Earthquake")
 frequency      = 10
 effects        = "DestroyBuilding"
 
-[disaster_plague]
+[disaster_pestilence]
 name           = _("Pestilence")
 frequency      = 10
 effects        = "ReducePopulation"

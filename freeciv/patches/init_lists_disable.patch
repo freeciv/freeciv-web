@@ -1,6 +1,6 @@
-diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2016-02-24 02:14:06.343479857 +0200
-+++ freeciv/common/packets.def	2016-02-24 02:20:02.270903922 +0200
+diff -Nurd -X.diff_ignore freeciv/common/networking/packets.def freeciv/common/networking/packets.def
+--- freeciv/common/networking/packets.def	2016-02-24 02:14:06.343479857 +0200
++++ freeciv/common/networking/packets.def	2016-02-24 02:20:02.270903922 +0200
 @@ -1347,8 +1347,8 @@
    UINT8 default_specialist;
  

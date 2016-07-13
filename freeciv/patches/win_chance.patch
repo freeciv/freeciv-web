@@ -1,7 +1,7 @@
-diff --git a/common/packets.def b/common/packets.def
+diff --git a/common/networking/packets.def b/common/networking/packets.def
 index 5891d00..e8fdc54 100644
---- a/common/packets.def
-+++ b/common/packets.def
+--- a/common/networking/packets.def
++++ b/common/networking/packets.def
 @@ -2193,6 +2193,7 @@ end
  PACKET_INFO_TEXT_REQ = 258; cs, dsend
    TILE loc;

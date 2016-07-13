@@ -1,6 +1,6 @@
-diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2016-02-24 02:23:44.690548067 +0200
-+++ freeciv/common/packets.def	2016-02-24 02:27:54.434150635 +0200
+diff -Nurd -X.diff_ignore freeciv/common/networking/packets.def freeciv/common/networking/packets.def
+--- freeciv/common/networking/packets.def	2016-02-24 02:23:44.690548067 +0200
++++ freeciv/common/networking/packets.def	2016-02-24 02:27:54.434150635 +0200
 @@ -2155,3 +2155,17 @@
  
  /*************** Webclient specific packets ****************/

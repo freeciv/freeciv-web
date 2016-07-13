@@ -26,10 +26,10 @@ index d7f3e61..34c9ae5 100644
    act->blocked_by = p->blocked_by;
  }
  
-diff --git a/common/packets.def b/common/packets.def
+diff --git a/common/networking/packets.def b/common/networking/packets.def
 index 2844d88..c3f457f 100644
---- a/common/packets.def
-+++ b/common/packets.def
+--- a/common/networking/packets.def
++++ b/common/networking/packets.def
 @@ -1716,6 +1716,9 @@ PACKET_RULESET_ACTION = 246; sc, lsend
  
    STRING ui_name[MAX_LEN_NAME];

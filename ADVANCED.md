@@ -16,7 +16,7 @@ Freeciv features.
 
 Graphics, static help texts and scenarios are extracted from Freeciv.
 Parts of The Freeciv-web client's Freeciv protocol support is auto generated
-from Freeciv's [common/packets.def](http://svn.gna.org/viewcvs/freeciv/trunk/common/packets.def).
+from Freeciv's [common/networking/packets.def](http://svn.gna.org/viewcvs/freeciv/trunk/common/networking/packets.def).
 
 The Freeciv server is responsible for running the game.
 It makes sure that the rules are followed.
@@ -60,7 +60,7 @@ The new Freeciv version could have new bugs.
 Freeciv-web [patches](freeciv/apply_patches.sh) may have been accepted.
 
 Be careful when Freeciv changes
-`bootstrap/freeciv.project configure.ac m4/ data/ common/dataio_json.* common/packets.def fc_version server/save*`
+`bootstrap/freeciv.project configure.ac m4/ data/ common/networking/dataio_json.* common/networking/packets.def fc_version server/save*`
 
 ### Check: Freeciv commit log messages
 
@@ -117,7 +117,7 @@ Does Freeciv-web use it?
 Has there been changes to save game handling?
 Is there development version save game compatibility for format changes?
 
-### Check: common/packets.def
+### Check: common/networking/packets.def
 
 Did a packet change?
 Does Freeciv-web send it?

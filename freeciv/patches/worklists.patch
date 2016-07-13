@@ -1,6 +1,6 @@
-diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2016-02-24 02:47:13.117158150 +0200
-+++ freeciv/common/packets.def	2016-02-24 02:56:43.539526073 +0200
+diff -Nurd -X.diff_ignore freeciv/common/networking/packets.def freeciv/common/networking/packets.def
+--- freeciv/common/networking/packets.def	2016-02-24 02:47:13.117158150 +0200
++++ freeciv/common/networking/packets.def	2016-02-24 02:56:43.539526073 +0200
 @@ -203,7 +203,7 @@
  type TECH_LIST          = tech_list(int)
  type UNIT_LIST          = unit_list(int)

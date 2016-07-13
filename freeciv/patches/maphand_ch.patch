@@ -1,6 +1,6 @@
-diff -Nurd -X.diff_ignore freeciv/common/packets.def freeciv/common/packets.def
---- freeciv/common/packets.def	2016-02-24 02:40:28.870661317 +0200
-+++ freeciv/common/packets.def	2016-02-24 02:44:18.405753877 +0200
+diff -Nurd -X.diff_ignore freeciv/common/networking/packets.def freeciv/common/networking/packets.def
+--- freeciv/common/networking/packets.def	2016-02-24 02:40:28.870661317 +0200
++++ freeciv/common/networking/packets.def	2016-02-24 02:44:18.405753877 +0200
 @@ -2169,3 +2169,12 @@
    TILE dest;
    UINT32 turns;

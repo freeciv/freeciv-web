@@ -360,6 +360,7 @@ actor_reqs    =
     { "type",   "name", "range"
       "UnitFlag", "Diplomat", "Local"
       "MinMoveFrags", "1", "Local"
+      "DiplRel", "Is foreign", "Local"
     }
 target_reqs  =
     { "type",   "name", "range", "present"
@@ -373,6 +374,7 @@ actor_reqs    =
       "UnitType", "Explorer", "Local"
       "Tech", "Writing", "Player"
       "MinMoveFrags", "1", "Local"
+      "DiplRel", "Is foreign", "Local"
     }
 target_reqs  =
     { "type",   "name", "range", "present"
@@ -386,6 +388,7 @@ actor_reqs    =
       "UnitFlag", "Diplomat", "Local"
       "UnitState", "OnLivableTile", "Local"
       "MinMoveFrags", "1", "Local"
+      "DiplRel", "Is foreign", "Local"
     }
 
 [actionenabler_poison_city]
@@ -409,6 +412,7 @@ actor_reqs    =
       "UnitFlag", "Diplomat", "Local"
       "UnitState", "OnLivableTile", "Local"
       "MinMoveFrags", "1", "Local"
+      "DiplRel", "Is foreign", "Local"
     }
 target_reqs  =
     { "type",   "name", "range", "present"
@@ -422,6 +426,7 @@ actor_reqs    =
       "UnitFlag", "Spy", "Local"
       "UnitState", "OnLivableTile", "Local"
       "MinMoveFrags", "1", "Local"
+      "DiplRel", "Is foreign", "Local"
     }
 target_reqs  =
     { "type",   "name", "range", "present"
@@ -437,6 +442,7 @@ actor_reqs    =
       "DiplRel", "Team", "Local", FALSE
       "UnitState", "OnLivableTile", "Local", TRUE
       "MinMoveFrags", "1", "Local", TRUE
+      "DiplRel", "Is foreign", "Local", TRUE
     }
 target_reqs  =
     { "type",   "name", "range", "present"
@@ -453,6 +459,7 @@ actor_reqs    =
       "DiplRel", "Team", "Local", FALSE
       "UnitState", "OnLivableTile", "Local", TRUE
       "MinMoveFrags", "1", "Local", TRUE
+      "DiplRel", "Is foreign", "Local", TRUE
     }
 target_reqs    =
     { "type",   "name", "range", "present"
@@ -484,6 +491,7 @@ actor_reqs    =
       "UnitState", "OnLivableTile", "Local"
       "MinMoveFrags", "1", "Local"
       "Tech", "Banking", "Player"
+      "DiplRel", "Is foreign", "Local"
     }
 target_reqs  =
     { "type",   "name", "range"
@@ -498,6 +506,7 @@ actor_reqs    =
       "UnitState", "OnLivableTile", "Local"
       "MinMoveFrags", "1", "Local"
       "Tech", "Banking", "Player"
+      "DiplRel", "Is foreign", "Local"
     }
 
 [actionenabler_steal_maps]
@@ -507,6 +516,7 @@ actor_reqs    =
       "UnitFlag", "Spy", "Local"
       "UnitState", "OnLivableTile", "Local"
       "MinMoveFrags", "1", "Local"
+      "DiplRel", "Is foreign", "Local"
     }
 target_reqs  =
     { "type",   "name", "range", "present"

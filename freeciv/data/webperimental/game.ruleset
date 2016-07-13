@@ -280,8 +280,8 @@ ui_name_steal_gold = _("Steal %sGold%s")
 ; /* TRANS: Establish Trade _Route (100% chance of success). */
 ui_name_establish_trade_route = _("Establish Trade %sRoute%s")
 
-; /* TRANS: Enter _Marketplace (100% chance of success). */
-ui_name_enter_marketplace = _("Enter %sMarketplace%s")
+; /* TRANS: Sell _Goods (100% chance of success). */
+ui_name_enter_marketplace = _("Sell %sGoods%s")
 
 ; /* TRANS: Help _build Wonder (100% chance of success). */
 ui_name_help_wonder = _("Help %sbuild Wonder%s")

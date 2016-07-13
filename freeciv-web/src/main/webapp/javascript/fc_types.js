@@ -74,7 +74,8 @@ var ACTION_HOME_CITY = 25;
 var ACTION_UPGRADE_UNIT = 26;
 var ACTION_PARADROP = 27;
 var ACTION_AIRLIFT = 28;
-var ACTION_COUNT = 29;
+var ACTION_ATTACK = 29;
+var ACTION_COUNT = 30;
 
 /* The action_decision enum */
 var ACT_DEC_NOTHING = 0;

@@ -1,0 +1,90 @@
+commit 8e9cd03862080466cc4d633d59e477d858fa2b46
+Author: sveinung <sveinung@a0f10bec-cc02-0410-94fc-a9cfff90b4cd>
+Date:   Tue Jun 28 10:39:55 2016 +0000
+
+    Action not enabled explain hard war requirements.
+    
+    Some hard war requirements can't be put in an action enabler because it
+    isn't against the target. Examples are a city blocking an action with a unit
+    stack target or a unit blocking an action with a tile target.
+    
+    Reported by Marko Lindqvist <cazfi>
+    
+    See bug #24797
+    
+    git-svn-id: svn://svn.gna.org/svn/freeciv/trunk@33082 a0f10bec-cc02-0410-94fc-a9cfff90b4cd
+
+diff --git a/server/unithand.c b/server/unithand.c
+index a3c9cdc..5a4adc6 100644
+--- a/server/unithand.c
++++ b/server/unithand.c
+@@ -514,6 +514,69 @@ static struct player *need_war_player_hlp(const struct unit *actor,
+     return NULL;
+   }
+ 
++  /* Look for hard coded war requirements that can't be an action enabler
++   * requirement. */
++  switch ((enum gen_action)act) {
++  case ACTION_BOMBARD:
++  case ACTION_NUKE:
++  case ACTION_ATTACK:
++    /* Target is tile or unit stack but a city (or unit) can block it. */
++    if ((act != ACTION_NUKE || unit_tile(actor) != target_tile)
++        && target_tile) {
++      /* This isn't nuking the actor's own tile so hard coded restrictions
++       * do apply. */
++
++      struct city *tcity;
++      struct unit *tunit;
++
++      if ((tcity = tile_city(target_tile))
++          && player_diplstate_get(unit_owner(actor),
++                                  city_owner(tcity))->type != DS_WAR) {
++        return city_owner(tcity);
++      }
++
++      if ((tunit = is_non_attack_unit_tile(target_tile, unit_owner(actor)))
++          && player_diplstate_get(unit_owner(actor),
++                                  unit_owner(tunit))->type != DS_WAR) {
++        return unit_owner(tunit);
++      }
++    }
++    break;
++  case ACTION_ESTABLISH_EMBASSY:
++  case ACTION_SPY_INVESTIGATE_CITY:
++  case ACTION_SPY_POISON:
++  case ACTION_SPY_STEAL_GOLD:
++  case ACTION_SPY_SABOTAGE_CITY:
++  case ACTION_SPY_TARGETED_SABOTAGE_CITY:
++  case ACTION_SPY_STEAL_TECH:
++  case ACTION_SPY_TARGETED_STEAL_TECH:
++  case ACTION_SPY_INCITE_CITY:
++  case ACTION_TRADE_ROUTE:
++  case ACTION_MARKETPLACE:
++  case ACTION_HELP_WONDER:
++  case ACTION_SPY_BRIBE_UNIT:
++  case ACTION_SPY_SABOTAGE_UNIT:
++  case ACTION_CAPTURE_UNITS: /* Only foreign is a hard req. */
++  case ACTION_FOUND_CITY:
++  case ACTION_JOIN_CITY:
++  case ACTION_STEAL_MAPS:
++  case ACTION_SPY_NUKE:
++  case ACTION_DESTROY_CITY:
++  case ACTION_EXPEL_UNIT:
++  case ACTION_RECYCLE_UNIT:
++  case ACTION_DISBAND_UNIT:
++  case ACTION_HOME_CITY:
++  case ACTION_UPGRADE_UNIT:
++  case ACTION_PARADROP:
++  case ACTION_AIRLIFT:
++    /* No special help. */
++    break;
++  case ACTION_COUNT:
++    /* Invalid. */
++    break;
++  }
++
++  /* Look for war requirements from the action enablers. */
+   if (can_utype_do_act_if_tgt_diplrel(unit_type_get(actor),
+                                       act, DS_WAR, FALSE)) {
+     /* The unit can do the action even if there isn't war. */

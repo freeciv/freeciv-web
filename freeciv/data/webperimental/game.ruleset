@@ -313,6 +313,9 @@ ui_paradrop_unit = _("Drop %sParatrooper%s")
 ; /* TRANS: _Airlift to City (100% chance of success). */
 ui_airlift_unit = _("%sAirlift to City%s")
 
+; /* TRANS: _Attack (100% chance of success). */
+ui_name_attack = _("%sAttack%s")
+
 ; Suppress automatic help text generation about what enables and/or
 ; disables the following actions.
 ;
@@ -670,6 +673,14 @@ action = "Explode Nuclear"
 actor_reqs    =
     { "type",   "name", "range", "present"
       "UnitFlag", "Nuclear", "Local", TRUE
+    }
+
+[actionenabler_attack]
+action = "Attack"
+actor_reqs    =
+    { "type",         "name",   "range", "present"
+      "UnitFlag",     "NonMil", "Local", FALSE
+      "MinMoveFrags", "1",      "Local", TRUE
     }
 
 [actionenabler_change_home_city]

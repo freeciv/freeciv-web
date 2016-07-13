@@ -75,7 +75,7 @@ function can_actor_unit_move(actor_unit, target_tile)
     if (tgt_owner_id != unit_owner(actor_unit)['playerno']
         && diplstates[tgt_owner_id] != DS_ALLIANCE
         && diplstates[tgt_owner_id] != DS_TEAM) {
-      /* In current Freeciv acting units can't attack foreign units. */
+      /* Can't move to a non allied foreign unit's tile. */
       return false;
     }
   }
@@ -94,7 +94,8 @@ function can_actor_unit_move(actor_unit, target_tile)
       return true;
     }
 
-    /* TODO: Support rulesets were actors can invade cities. */
+    /* TODO: Support rulesets were an actor can invade a city OR do another
+     * action to it. */
     return false;
   }
 
@@ -379,6 +380,14 @@ function popup_action_selection(actor_unit, action_probabilities,
     dhtml += "<input id='act_sel_bombard" + actor_unit['id']
              + "' class='act_sel_button' type='button' value='"
              + format_action_label(ACTION_BOMBARD,
+                                   action_probabilities)
+             + "'>";
+  }
+  if (action_prob_possible(
+        action_probabilities[ACTION_ATTACK])) {
+    dhtml += "<input id='act_sel_attack" + actor_unit['id']
+             + "' class='act_sel_button' type='button' value='"
+             + format_action_label(ACTION_ATTACK,
                                    action_probabilities)
              + "'>";
   }
@@ -786,6 +795,21 @@ function popup_action_selection(actor_unit, action_probabilities,
                     "value" : 0,
                     "name" : "",
                     "action_type": ACTION_BOMBARD};
+      send_request(JSON.stringify(packet));
+
+      $(id).remove();
+    });
+  }
+
+  if (action_prob_possible(
+        action_probabilities[ACTION_ATTACK])) {
+    $("#act_sel_attack" + actor_unit['id']).click(function() {
+      var packet = {"pid" : packet_unit_do_action,
+                    "actor_id" : actor_unit['id'],
+                    "target_id": target_tile['index'],
+                    "value" : 0,
+                    "name" : "",
+                    "action_type": ACTION_ATTACK};
       send_request(JSON.stringify(packet));
 
       $(id).remove();

@@ -28,11 +28,6 @@ Major:
 
 Medium:
 - Playback of games.
-- Show attack prompts. At the moment, gotos can result in unwanted attacks.
-  - Freeciv patch #7260 will result in the action selection dialog becoming
-    an attack prompt. It may be a good idea to allow Freeciv-web players to
-    disable it like the popup_attack_actions client setting (patch #7253)
-    does for the C clients.
 - Show what city is a unit's homecity. 
 - Statue of liberty doesn't allow all governments.
 - Better interface to load units into boats and transports.
@@ -83,6 +78,7 @@ User Interface:
     - PACKET_UNIT_GET_ACTIONS has the disturb_player field for background queries
 
 Unimplemented Freeciv client features:
+- the popup_attack_actions client setting (so attack pop up can be avoided)
 - global work lists
 - advanced unit selection
 - rearranging items in the city production work list

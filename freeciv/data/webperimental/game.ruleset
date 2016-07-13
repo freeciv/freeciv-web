@@ -236,6 +236,10 @@ force_bombard = FALSE
 ; in stead.
 force_explode_nuclear = TRUE
 
+; If poison_empties_food_stock is set to TRUE a successful "Poison City"
+; will empty the food stock.
+poison_empties_food_stock = FALSE
+
 ; What each action should be called when showing them to the player.
 ; The first %s should be before the mnemonic of the action.
 ; The second %s marks were extra details should be insterted.

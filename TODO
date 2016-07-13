@@ -78,6 +78,10 @@ User Interface:
     - PACKET_UNIT_GET_ACTIONS has the disturb_player field for background queries
 
 Unimplemented Freeciv client features:
+- action selection dialog pops up and down based on unit focus rather than
+  opening all at once. This makes turn change less confusing when many units
+  on a goto reaches their targets. Freeciv-web's Freeciv server has the
+  required server side changes to support it.
 - the popup_attack_actions client setting (so attack pop up can be avoided)
 - global work lists
 - advanced unit selection

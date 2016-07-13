@@ -1,0 +1,35 @@
+commit c0aae1c5193c27b198e13a9d6b840f0399360969
+Author: sveinung <sveinung@a0f10bec-cc02-0410-94fc-a9cfff90b4cd>
+Date:   Tue Jun 28 10:38:51 2016 +0000
+
+    Stop "Attack" action probability info leak.
+    
+    A unit in a city isn't seen by the attacking player.
+    
+    See bug #24801
+    
+    git-svn-id: svn://svn.gna.org/svn/freeciv/trunk@33080 a0f10bec-cc02-0410-94fc-a9cfff90b4cd
+
+diff --git a/common/actions.c b/common/actions.c
+index d293a74..e599b78 100644
+--- a/common/actions.c
++++ b/common/actions.c
+@@ -2418,10 +2418,15 @@ action_prob(const enum gen_action wanted_action,
+   case ACTION_ATTACK:
+     {
+       struct unit *defender_unit = get_defender(actor_unit,
+-                                                target_tile);
+-      double unconverted = unit_win_chance(actor_unit, defender_unit);
++                                   target_tile);
+ 
+-      chance = (int)((double)200 * unconverted);
++      if (can_player_see_unit(actor_player, defender_unit)) {
++        double unconverted = unit_win_chance(actor_unit, defender_unit);
++
++        chance = (int)((double)200 * unconverted);
++      } else if (known == TRI_YES) {
++        known = TRI_MAYBE;
++      }
+     }
+     break;
+   case ACTION_COUNT:

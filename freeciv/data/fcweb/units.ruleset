@@ -2137,7 +2137,7 @@ A Spy can also be used to:\n\
  - sabotage an enemy unit (reducing its hit points to half), if it is\
  alone on a tile and the players are at war;\n\
  - poison the water supply of an enemy city (reducing the population\
- by one and emptying the granary);\n\
+ by one);\n\
  - steal specific technology (with a reduced chance of success);\n\
  - steal further technologies from a city which has already been\
  stolen from (although cities become more resistant each time they\

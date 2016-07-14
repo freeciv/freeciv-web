@@ -1082,12 +1082,12 @@ function city_worklist_dialog(pcity)
   var kind;
   var value;
 
-  if (pcity['worklist'] != null && pcity['worklist'] != "-") {
-    var work_list = pcity['worklist'].split(";");
+  if (pcity['worklist'] != null && pcity['worklist'].length != 0) {
+    var work_list = pcity['worklist'];
     for (var i = 0; i < work_list.length; i++) {
-      var work_item = work_list[i].split(",");
-      kind = work_item[0];
-      value = work_item[1];
+      var work_item = work_list[i];
+      kind = work_item['kind'];
+      value = work_item['value'];
       if (kind == null || value == null || work_item.length == 0) continue;
       if (kind == VUT_IMPROVEMENT) {
         var pimpr = improvements[value];
@@ -1230,14 +1230,15 @@ function handle_worklist_select( ui )
 function send_city_worklist_add(city_id, kind, value)
 {
   var pcity = cities[city_id];
-  if (pcity['worklist'].split(";").length >= MAX_LEN_WORKLIST) {
+  if (pcity['worklist'].length >= MAX_LEN_WORKLIST) {
     return;
   }
 
-  var city_message = {"pid": packet_city_worklist_add,
-                      "city_id" : city_id,
-                      "kind" : kind,
-                      "value" : value};
+  pcity['worklist'].push({"kind" : kind, "value" : value});
+
+  var city_message = {"pid"      : packet_city_worklist,
+                      "city_id"  : city_id,
+                      "worklist" : pcity['worklist']};
   send_request(JSON.stringify(city_message));
   city_tab_index = 1;
 }
@@ -1247,9 +1248,13 @@ function send_city_worklist_add(city_id, kind, value)
 **************************************************************************/
 function send_city_worklist_remove(city_id, index)
 {
-  var city_message = {"pid": packet_city_worklist_remove,
-                      "city_id" : city_id,
-                      "index" : index};
+  var pcity = cities[city_id];
+
+  pcity['worklist'].splice(index, 1);
+
+  var city_message = {"pid"      : packet_city_worklist,
+                      "city_id"  : city_id,
+                      "worklist" : pcity['worklist']};
   send_request(JSON.stringify(city_message));
   city_tab_index = 1;
 }

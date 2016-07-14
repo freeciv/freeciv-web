@@ -12,12 +12,3 @@ diff -Nurd -X.diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
  
    packet->production_kind = pcity->production.kind;
    packet->production_value = universal_number(&pcity->production);
-@@ -2057,7 +2058,7 @@
-   packet->caravan_shields=pcity->caravan_shields;
-   packet->last_turns_shield_surplus = pcity->last_turns_shield_surplus;
- 
--  worklist_copy(&packet->worklist, &pcity->worklist);
-+  //worklist_copy(&packet->worklist, &pcity->worklist);
-   packet->diplomat_investigate=dipl_invest;
- 
-   packet->airlift = pcity->airlift;

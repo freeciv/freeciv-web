@@ -29,9 +29,9 @@ diff -Nurd -X.diff_ignore freeciv/server/ruleset.c freeciv/server/ruleset.c
 --- freeciv/server/ruleset.c	2016-02-24 02:18:56.395009804 +0200
 +++ freeciv/server/ruleset.c	2016-02-24 02:19:01.371001797 +0200
 @@ -6786,6 +6786,8 @@
-     packet.ngroups = i;
  
-     packet.init_government_id = government_number(n->init_government);
+     packet.init_government_id = n->init_government
+       ? government_number(n->init_government) : government_count();
 +
 +#if 0
      fc_assert(ARRAY_SIZE(packet.init_techs) == ARRAY_SIZE(n->init_techs));

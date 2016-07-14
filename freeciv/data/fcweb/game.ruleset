@@ -544,9 +544,10 @@ actor_reqs    =
 [actionenabler_change_home_city]
 action = "Home City"
 actor_reqs    =
-    { "type",   "name", "range", "present"
+    { "type",      "name",        "range", "present"
+      "UnitFlag",  "NoHome",      "Local", FALSE
       "UnitState", "HasHomeCity", "Local", TRUE
-      "DiplRel", "Is foreign", "Local", FALSE
+      "DiplRel",   "Is foreign",  "Local", FALSE
     }
 
 [actionenabler_paradrop_base]

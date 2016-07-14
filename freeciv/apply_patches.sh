@@ -14,8 +14,8 @@
 # attack_leak is Freeciv bug #24801 (SVN r33080)
 # attack_allow_unlikely is Freeciv bug #24802 (SVN r33081)
 # anek_hard_war is Freeciv bug #24797 (SVN 33082)
-# no_self_tgt is Freeciv bug #24798 (SVN r33120)
 # action_range is a back port of patch #7348 (SVN r33114)
+# no_self_tgt is Freeciv bug #24798 (SVN r33120)
 
 # Not in the upstream Freeciv server
 # ----------------------------------

@@ -16,6 +16,7 @@
 # anek_hard_war is Freeciv bug #24797 (SVN 33082)
 # action_range is a back port of patch #7348 (SVN r33114)
 # no_self_tgt is Freeciv bug #24798 (SVN r33120)
+# json_wl is Freeciv patch #7469 (SVN r33248)
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -27,7 +28,6 @@
 #        work with multiple rulesets (Requires patch #7362 / SVN r33159)
 # win_chance includes 'Chance to win' in Freeciv-web map tile popup.
 # disable_global_warming is Freeciv bug #24418
-# json_wl is Freeciv patch #7469
 
 PATCHLIST="freeciv_web_packets_def_changes city_fixes city_impr_fix2 city-naming-change city_fixes2 metachange text_fixes unithand-change2 current_research_cost freeciv-svn-webclient-changes init_lists_disable goto_fcweb misc_devversion_sync tutorial_ruleset savegame maphand_ch ai_traits_crash server_password barbarian-names activity_null_check add_rulesets message_escape freeciv_segfauls_fix scorelog_filenames fcweb_scorelog disable_global_warming win_chance BuildingCrucial navajo-remove-long-city-names MetaconnectionPersistent attack_leak attack_allow_unlikely anek_hard_war no_self_tgt action_range json_wl"
 

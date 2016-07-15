@@ -5,7 +5,6 @@
 # (SVN r32928): freeciv_web_packets_def_changes and city_fixes need to be adjusted
 #               for the fact that freeciv-web specific part of the packet_city_info
 #               is in a new packet. Also receiving web-client side needs changes
-# MetaconnectionPersistent is Freeciv patch #7300 (SVN r32991) implementing persistent metaserver connections.
 # navajo-remove-long-city-names is a quick-fix to remove city names which would be longer than MAX_LEN_NAME
 #     when the name is url encoded in json protocol.
 #     MAX_LEN_CITYNAME gets increased in patch #7305 (SVN r33048)
@@ -29,7 +28,7 @@
 # win_chance includes 'Chance to win' in Freeciv-web map tile popup.
 # disable_global_warming is Freeciv bug #24418
 
-PATCHLIST="0001-Revert-Added-packet-type-web_city_info_addition-to-b freeciv_web_packets_def_changes city_fixes city_impr_fix2 city-naming-change city_fixes2 metachange text_fixes unithand-change2 current_research_cost freeciv-svn-webclient-changes init_lists_disable goto_fcweb misc_devversion_sync tutorial_ruleset savegame maphand_ch ai_traits_crash server_password barbarian-names activity_null_check add_rulesets message_escape freeciv_segfauls_fix scorelog_filenames fcweb_scorelog disable_global_warming win_chance navajo-remove-long-city-names MetaconnectionPersistent attack_leak attack_allow_unlikely anek_hard_war no_self_tgt action_range json_wl"
+PATCHLIST="0001-Revert-Added-packet-type-web_city_info_addition-to-b freeciv_web_packets_def_changes city_fixes city_impr_fix2 city-naming-change city_fixes2 metachange text_fixes unithand-change2 current_research_cost freeciv-svn-webclient-changes init_lists_disable goto_fcweb misc_devversion_sync tutorial_ruleset savegame maphand_ch ai_traits_crash server_password barbarian-names activity_null_check add_rulesets message_escape freeciv_segfauls_fix scorelog_filenames fcweb_scorelog disable_global_warming win_chance navajo-remove-long-city-names attack_leak attack_allow_unlikely anek_hard_war no_self_tgt action_range json_wl"
 
 apply_patch() {
   echo "*** Applying $1.patch ***"

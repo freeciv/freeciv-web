@@ -20,6 +20,7 @@
 
 # Not in the upstream Freeciv server
 # ----------------------------------
+# 0001-Revert-Added-packet-type-web_city_info_addition-to-b reverts SVN r32928
 # activity_null_check is for Freeciv bug #22700.
 # freeciv_segfauls_fix is a workaround some segfaults in the Freeciv server. Freeciv bug #23884.
 # message_escape is a patch for protecting against script injection in the message texts.
@@ -29,7 +30,7 @@
 # win_chance includes 'Chance to win' in Freeciv-web map tile popup.
 # disable_global_warming is Freeciv bug #24418
 
-PATCHLIST="freeciv_web_packets_def_changes city_fixes city_impr_fix2 city-naming-change city_fixes2 metachange text_fixes unithand-change2 current_research_cost freeciv-svn-webclient-changes init_lists_disable goto_fcweb misc_devversion_sync tutorial_ruleset savegame maphand_ch ai_traits_crash server_password barbarian-names activity_null_check add_rulesets message_escape freeciv_segfauls_fix scorelog_filenames fcweb_scorelog disable_global_warming win_chance BuildingCrucial navajo-remove-long-city-names MetaconnectionPersistent attack_leak attack_allow_unlikely anek_hard_war no_self_tgt action_range json_wl"
+PATCHLIST="0001-Revert-Added-packet-type-web_city_info_addition-to-b freeciv_web_packets_def_changes city_fixes city_impr_fix2 city-naming-change city_fixes2 metachange text_fixes unithand-change2 current_research_cost freeciv-svn-webclient-changes init_lists_disable goto_fcweb misc_devversion_sync tutorial_ruleset savegame maphand_ch ai_traits_crash server_password barbarian-names activity_null_check add_rulesets message_escape freeciv_segfauls_fix scorelog_filenames fcweb_scorelog disable_global_warming win_chance BuildingCrucial navajo-remove-long-city-names MetaconnectionPersistent attack_leak attack_allow_unlikely anek_hard_war no_self_tgt action_range json_wl"
 
 apply_patch() {
   echo "*** Applying $1.patch ***"

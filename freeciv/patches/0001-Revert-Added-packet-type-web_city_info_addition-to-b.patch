@@ -1,0 +1,236 @@
+From 048a9fabb7427d2bf6f255592b7d7dcfe21bb65f Mon Sep 17 00:00:00 2001
+From: Sveinung Kvilhaugsvik <sveinung84@users.sourceforge.net>
+Date: Fri, 15 Jul 2016 17:46:03 +0200
+Subject: [PATCH] Revert "Added packet type web_city_info_addition to be sent
+ on freeciv-web mode."
+
+This reverts commit de046d46742d937486b16702911790da6da25443.
+---
+ client/packhand.c             | 10 ----------
+ common/networking/packets.def |  9 ---------
+ common/networking/packets.h   | 19 +++----------------
+ fc_version                    |  2 +-
+ server/citytools.c            | 21 ++++-----------------
+ server/citytools.h            |  1 -
+ server/diplomats.c            |  4 +---
+ 7 files changed, 9 insertions(+), 57 deletions(-)
+
+diff --git a/client/packhand.c b/client/packhand.c
+index 4ad643f..7a5daee 100644
+--- a/client/packhand.c
++++ b/client/packhand.c
+@@ -882,16 +882,6 @@ void handle_city_info(const struct packet_city_info *packet)
+ }
+ 
+ /****************************************************************************
+-  This is packet that only the web-client needs. Regular client has no use
+-  for it.
+-  TODO: Do not generate code calling this in C-client.
+-****************************************************************************/
+-void handle_web_city_info_addition(int granary_size, int granary_turns,
+-                                   int buy_gold_cost)
+-{
+-}
+-
+-/****************************************************************************
+   A helper function for handling city-info and city-short-info packets.
+   Naturally, both require many of the same operations to be done on the
+   data.
+diff --git a/common/networking/packets.def b/common/networking/packets.def
+index fa41b06..111a035 100644
+--- a/common/networking/packets.def
++++ b/common/networking/packets.def
+@@ -2192,12 +2192,3 @@ end
+ PACKET_PLAY_MUSIC = 245; sc, lsend
+   STRING tag[MAX_LEN_NAME];
+ end
+-
+-/*************** Webclient specific packets ****************/
+-/* Use range 256:511 for these                             */
+-
+-PACKET_WEB_CITY_INFO_ADDITION = 256; sc, lsend, is-game-info, force, cancel(PACKET_CITY_SHORT_INFO)
+-  UINT16 granary_size;
+-  TURN granary_turns;
+-  UINT16 buy_gold_cost;
+-end
+diff --git a/common/networking/packets.h b/common/networking/packets.h
+index 646e0d1..d13a703 100644
+--- a/common/networking/packets.h
++++ b/common/networking/packets.h
+@@ -1,4 +1,4 @@
+-/***********************************************************************
++/********************************************************************** 
+  Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+@@ -20,10 +20,6 @@ extern "C" {
+ struct connection;
+ struct data_in;
+ 
+-/* utility */
+-#include "shared.h"		/* MAX_LEN_ADDR */
+-
+-/* common */
+ #include "connection.h"		/* struct connection, MAX_LEN_* */
+ #include "diptreaty.h"
+ #include "effects.h"
+@@ -31,6 +27,7 @@ struct data_in;
+ #include "improvement.h"	/* bv_imprs */
+ #include "player.h"
+ #include "requirements.h"
++#include "shared.h"		/* MAX_LEN_ADDR */
+ #include "spaceship.h"
+ #include "team.h"
+ #include "tile.h"
+@@ -41,17 +38,7 @@ struct data_in;
+ 
+ /* Used in network protocol. */
+ #define MAX_LEN_MSG             1536
+-#define MAX_LEN_ROUTE		2000	  /* MAX_LEN_PACKET / 2 - header */
+-
+-#ifdef FREECIV_WEB
+-#define web_send_packet(packetname, ...) \
+-  send_packet_web_ ##packetname( __VA_ARGS__ )
+-#define web_lsend_packet(packetname, ...) \
+-  lsend_packet_web_ ##packetname( __VA_ARGS__ )
+-#else  /* FREECIV_WEB */
+-#define web_send_packet(packetname, ...)
+-#define web_lsend_packet(packetname, ...)
+-#endif /* FREECIV_WEB */
++#define MAX_LEN_ROUTE		2000	  /* MAX_LEN_PACKET/2 - header */
+ 
+ /* The size of opaque (void *) data sent in the network packet.  To avoid
+  * fragmentation issues, this SHOULD NOT be larger than the standard
+diff --git a/server/citytools.c b/server/citytools.c
+index 3403430..ab87cac 100644
+--- a/server/citytools.c
++++ b/server/citytools.c
+@@ -2098,19 +2098,17 @@ void refresh_dumb_city(struct city *pcity)
+ static void broadcast_city_info(struct city *pcity)
+ {
+   struct packet_city_info packet;
+-  struct packet_web_city_info_addition web_packet;
+   struct packet_city_short_info sc_pack;
+   struct player *powner = city_owner(pcity);
+   struct traderoute_packet_list *routes = traderoute_packet_list_new();
+ 
+   /* Send to everyone who can see the city. */
+-  package_city(pcity, &packet, &web_packet, routes, FALSE);
++  package_city(pcity, &packet, routes, FALSE);
+   players_iterate(pplayer) {
+     if (can_player_see_city_internals(pplayer, pcity)) {
+       if (!send_city_suppressed || pplayer != powner) {
+         update_dumb_city(powner, pcity);
+         lsend_packet_city_info(powner->connections, &packet, FALSE);
+-        web_lsend_packet(city_info_addition, powner->connections, &web_packet, FALSE);
+         traderoute_packet_list_iterate(routes, route_packet) {
+           lsend_packet_traderoute_info(powner->connections, route_packet);
+         } traderoute_packet_list_iterate_end;
+@@ -2130,7 +2128,6 @@ static void broadcast_city_info(struct city *pcity)
+   conn_list_iterate(game.est_connections, pconn) {
+     if (conn_is_global_observer(pconn)) {
+       send_packet_city_info(pconn, &packet, FALSE);
+-      web_send_packet(city_info_addition, pconn, &web_packet, FALSE);
+     }
+   } conn_list_iterate_end;
+ 
+@@ -2240,7 +2237,6 @@ void send_city_info_at_tile(struct player *pviewer, struct conn_list *dest,
+ 			    struct city *pcity, struct tile *ptile)
+ {
+   struct packet_city_info packet;
+-  struct packet_web_city_info_addition web_packet;
+   struct packet_city_short_info sc_pack;
+   struct player *powner = NULL;
+   struct traderoute_packet_list *routes = NULL;
+@@ -2259,9 +2255,8 @@ void send_city_info_at_tile(struct player *pviewer, struct conn_list *dest,
+ 
+       /* send all info to the owner */
+       update_dumb_city(powner, pcity);
+-      package_city(pcity, &packet, &web_packet, routes, FALSE);
++      package_city(pcity, &packet, routes, FALSE);
+       lsend_packet_city_info(dest, &packet, FALSE);
+-      web_lsend_packet(city_info_addition, dest, &web_packet, FALSE);
+       traderoute_packet_list_iterate(routes, route_packet) {
+         lsend_packet_traderoute_info(dest, route_packet);
+       } traderoute_packet_list_iterate_end;
+@@ -2283,9 +2278,8 @@ void send_city_info_at_tile(struct player *pviewer, struct conn_list *dest,
+       if (pcity) {
+         routes = traderoute_packet_list_new();
+ 
+-	package_city(pcity, &packet, &web_packet, routes, FALSE);   /* should be dumb_city info? */
++	package_city(pcity, &packet, routes, FALSE);   /* should be dumb_city info? */
+         lsend_packet_city_info(dest, &packet, FALSE);
+-        web_lsend_packet(city_info_addition, dest, &web_packet, FALSE);
+         traderoute_packet_list_iterate(routes, route_packet) {
+           lsend_packet_traderoute_info(dest, route_packet);
+         } traderoute_packet_list_iterate_end;
+@@ -2322,7 +2316,6 @@ void send_city_info_at_tile(struct player *pviewer, struct conn_list *dest,
+   Fill city info packet with information about given city.
+ **************************************************************************/
+ void package_city(struct city *pcity, struct packet_city_info *packet,
+-                  struct packet_web_city_info_addition *web_packet,
+                   struct traderoute_packet_list *routes,
+ 		  bool dipl_invest)
+ {
+@@ -2406,7 +2399,7 @@ void package_city(struct city *pcity, struct packet_city_info *packet,
+ 
+       /* And repackage */
+       recursion = TRUE;
+-      package_city(pcity, packet, web_packet, routes, dipl_invest);
++      package_city(pcity, packet, routes, dipl_invest);
+       recursion = FALSE;
+ 
+       return;
+@@ -2480,12 +2473,6 @@ void package_city(struct city *pcity, struct packet_city_info *packet,
+       BV_SET(packet->improvements, improvement_index(pimprove));
+     }
+   } improvement_iterate_end;
+-
+-#ifdef FREECIV_WEB
+-  web_packet->granary_size = city_granary_size(city_size_get(pcity));
+-  web_packet->granary_turns = city_turns_to_grow(pcity);
+-  web_packet->buy_gold_cost = city_production_buy_gold_cost(pcity);
+-#endif /* FREECIV_WEB */
+ }
+ 
+ /**************************************************************************
+diff --git a/server/citytools.h b/server/citytools.h
+index ba12d5f..b10b1c5 100644
+--- a/server/citytools.h
++++ b/server/citytools.h
+@@ -51,7 +51,6 @@ void send_city_info_at_tile(struct player *pviewer, struct conn_list *dest,
+ void send_all_known_cities(struct conn_list *dest);
+ void send_player_cities(struct player *pplayer);
+ void package_city(struct city *pcity, struct packet_city_info *packet,
+-                  struct packet_web_city_info_addition *web_packet,
+                   struct traderoute_packet_list *routes,
+ 		  bool dipl_invest);
+ 
+diff --git a/server/diplomats.c b/server/diplomats.c
+index fd71d28..66714fc 100644
+--- a/server/diplomats.c
++++ b/server/diplomats.c
+@@ -178,7 +178,6 @@ bool diplomat_investigate(struct player *pplayer, struct unit *pdiplomat,
+   struct player *cplayer;
+   struct packet_unit_short_info unit_packet;
+   struct packet_city_info city_packet;
+-  struct packet_web_city_info_addition web_packet;
+   struct traderoute_packet_list *routes;
+ 
+   /* Fetch target city's player.  Sanity checks. */
+@@ -222,11 +221,10 @@ bool diplomat_investigate(struct player *pplayer, struct unit *pdiplomat,
+   /* Send city info to investigator's player.
+      As this is a special case we bypass send_city_info. */
+   routes = traderoute_packet_list_new();
+-  package_city(pcity, &city_packet, &web_packet, routes, TRUE);
++  package_city(pcity, &city_packet, routes, TRUE);
+   /* We need to force to send the packet to ensure the client will receive
+    * something and popup the city dialog. */
+   lsend_packet_city_info(pplayer->connections, &city_packet, TRUE);
+-  web_lsend_packet(city_info_addition, pplayer->connections, &web_packet, TRUE);
+   traderoute_packet_list_iterate(routes, route_packet) {
+     lsend_packet_traderoute_info(pplayer->connections, route_packet);
+     FC_FREE(route_packet);
+-- 
+2.1.4
+

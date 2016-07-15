@@ -444,6 +444,7 @@ function pregame_settings()
 	  "<option value='fractal'>Pseudo-fractal height</option>" +
           "<option value='island'>Island-based</option>" +
           "<option value='fair'>Fair islands</option>" +
+          "<option value='fracture'>Fracture map</option>" +
 	  "</select></td></tr>"+
   	  "<tr class='not_pbem' title='Ruleset version'><td>Ruleset:</td>" +
 	  "<td><select name='ruleset' id='ruleset'>" +

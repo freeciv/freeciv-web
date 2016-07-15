@@ -212,7 +212,7 @@ poison_empties_food_stock = FALSE
 
 ; What each action should be called when showing them to the player.
 ; The first %s should be before the mnemonic of the action.
-; The second %s marks were extra details should be insterted.
+; The second %s marks where extra details should be inserted.
 
 ; /* TRANS: _Poison City (3% chance of success). */
 ui_name_poison_city = _("%sPoison City%s")

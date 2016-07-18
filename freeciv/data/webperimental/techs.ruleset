@@ -22,6 +22,11 @@ format_version=10
 ;  { "name", "helptxt"
 ;  }
 
+; Names of the tech classes. Leave empty to have no tech classes.
+; First one is the default one.
+[classes]
+; names =
+
 ; /* <-- avoid gettext warnings
 ;
 ; Below: The individual advances, one per section.
@@ -38,6 +43,8 @@ format_version=10
 ;                 present, 'name' is used. Since the name used in savegames
 ;                 must not change, use this when renaming a tech after a
 ;                 ruleset has been released.
+; class         = tech class this tech belongs to, if they have been defined.
+;                 Default is first one defined above.
 ; req1, req2    = advances required before researching this one
 ; root_req      = tech required before acquiring this tech, by any
 ;                 means, inherited by all techs that require this tech in turn

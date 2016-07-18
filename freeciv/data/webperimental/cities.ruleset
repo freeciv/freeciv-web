@@ -22,7 +22,7 @@ format_version=10
 ; The tag name (in [specialist_*]) doesn't matter so long as it's unique.
 ; For each specialist the following fields may be set:
 ;
-; 
+;
 ; name          = translatable (plural) name as seen by user
 ; rule_name     = (optional) name for savegames, rulesets etc; if not
 ;                 present, 'name' is used. Since the name used in savegames
@@ -37,8 +37,8 @@ format_version=10
 ;                 The specialist graphic allow different images based on
 ;                 citizen number. The alt tag don't. To use another
 ;                 specialist's tag use specialist.<otherrulename>_<number>.
-; reqs		= requirements to have the specialist pick (see
-;		  effects.ruleset and README.effects for help on requirements)
+; reqs          = requirements to have the specialist pick (see
+;                 effects.ruleset and README.effects for help on requirements)
 ; helptext      = optional help text string; should escape all raw newlines
 ;                 so that xgettext parsing works
 ;

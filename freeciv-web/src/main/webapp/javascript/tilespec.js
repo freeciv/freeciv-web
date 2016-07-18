@@ -1043,15 +1043,9 @@ function get_tile_specials_sprite(ptile)
 {
   if (ptile == null || ptile['resource'] == null) return null;
 
-  var resource = resources[ptile['resource']];
-
-  if (resource == null) return null;
-
-  var extra = extras[resource['extra']];
+  var extra = extras[ptile['resource']];
 
   if (extra == null) {
-    console.log("No extra for tile resource.");
-    console.log(resource);
     return null;
   }
 

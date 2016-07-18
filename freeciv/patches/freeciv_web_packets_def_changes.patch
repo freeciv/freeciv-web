@@ -32,7 +32,7 @@ diff -Nurd -X.diff_ignore freeciv/common/networking/packets.def freeciv/common/n
 +  STRING shield_output[MAX_LEN_MSG];
 +  STRING trade_output[MAX_LEN_MSG];
    BV_CITY_OPTIONS city_options;
-   ESTRING name[MAX_LEN_NAME];
+   ESTRING name[MAX_LEN_CITYNAME];
 +  BOOL unhappy;
  end
  

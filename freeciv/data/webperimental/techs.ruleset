@@ -38,7 +38,7 @@ format_version=10
 ;                 present, 'name' is used. Since the name used in savegames
 ;                 must not change, use this when renaming a tech after a
 ;                 ruleset has been released.
-; req1, req2	= advances required before researching this one
+; req1, req2    = advances required before researching this one
 ; root_req      = tech required before acquiring this tech, by any
 ;                 means, inherited by all techs that require this tech in turn
 ;                 unless "None" is given here explicitly; and you can make
@@ -56,7 +56,7 @@ format_version=10
 ; flags         = special flag strings
 ; graphic       = icon for technology
 ; graphic_alt   = alternate icon
-; helptext	= optional help text string (set units ruleset for examples)
+; helptext      = optional help text string (set units ruleset for examples)
 ; bonus_message = text seen when a player is the first to discover
 ;                 an bonus tech. Must contain '%s' to mark place of the tech
 ;                 gained.

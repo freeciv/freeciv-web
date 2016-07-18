@@ -2,14 +2,14 @@
 
 # Freeciv server version upgrade notes
 # ------------------------------------
-# (SVN r32928): freeciv_web_packets_def_changes and city_fixes need to be adjusted
-#               for the fact that freeciv-web specific part of the packet_city_info
-#               is in a new packet. Also receiving web-client side needs changes
 # json_wl is Freeciv patch #7469 (SVN r33248)
 
 # Not in the upstream Freeciv server
 # ----------------------------------
 # 0001-Revert-Added-packet-type-web_city_info_addition-to-b reverts SVN r32928
+#               freeciv_web_packets_def_changes and city_fixes need to be adjusted
+#               for the fact that freeciv-web specific part of the packet_city_info
+#               is in a new packet. Also receiving web-client side needs changes
 # activity_null_check is for Freeciv bug #22700.
 # freeciv_segfauls_fix is a workaround some segfaults in the Freeciv server. Freeciv bug #23884.
 # message_escape is a patch for protecting against script injection in the message texts.

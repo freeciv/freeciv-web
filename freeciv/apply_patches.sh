@@ -2,7 +2,10 @@
 
 # Freeciv server version upgrade notes
 # ------------------------------------
+# act_range_context_1 is Freeciv SVN r33238
+# act_range_context_2 is Freeciv patch #7466 (SVN r33241)
 # json_wl is Freeciv patch #7469 (SVN r33248)
+# act_range is Freeciv patch #7238 (SVN r33249)
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -23,7 +26,7 @@
 #     MAX_LEN_CITYNAME was increased in patch #7305 (SVN r33048)
 #     Giving one of the longer removed city names to a new city still causes problems.
 
-PATCHLIST="0001-Revert-Added-packet-type-web_city_info_addition-to-b freeciv_web_packets_def_changes city_fixes city_impr_fix2 city-naming-change city_fixes2 metachange text_fixes unithand-change2 current_research_cost freeciv-svn-webclient-changes init_lists_disable goto_fcweb misc_devversion_sync tutorial_ruleset savegame maphand_ch ai_traits_crash server_password barbarian-names activity_null_check add_rulesets message_escape freeciv_segfauls_fix scorelog_filenames disable_global_warming win_chance navajo-remove-long-city-names json_wl"
+PATCHLIST="0001-Revert-Added-packet-type-web_city_info_addition-to-b freeciv_web_packets_def_changes city_fixes city_impr_fix2 city-naming-change city_fixes2 metachange text_fixes unithand-change2 current_research_cost freeciv-svn-webclient-changes init_lists_disable goto_fcweb misc_devversion_sync tutorial_ruleset savegame maphand_ch ai_traits_crash server_password barbarian-names activity_null_check add_rulesets message_escape freeciv_segfauls_fix scorelog_filenames disable_global_warming win_chance navajo-remove-long-city-names json_wl act_range_context_1 act_range_context_2 act_range"
 
 apply_patch() {
   echo "*** Applying $1.patch ***"

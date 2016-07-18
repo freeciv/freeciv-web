@@ -22,38 +22,23 @@
 var actions = {};
 
 
-/*
- * ACTPROB_IMPOSSIBLE is another way of saying that the probability is 0%.
- */
-var ACTPROB_IMPOSSIBLE = 0;
-
-/*
- * The special value ACTPROB_NA indicates that no probability should exist.
- */
-var ACTPROB_NA = 253;
-
-/*
- * The special value ACTPROB_NOT_IMPLEMENTED indicates that support
- * for finding this probability currently is missing.
- */
-var ACTPROB_NOT_IMPLEMENTED = 254;
-
-/*
- * The special value ACTPROB_NOT_KNOWN indicates that the player don't know
- * enough to find out. It is caused by the probability depending on a rule
- * that depends on game state the player don't have access to. It may be
- * possible for the player to later gain access to this game state.
- */
-var ACTPROB_NOT_KNOWN = 255;
-
-
 /**************************************************************************
   Returns true iff the given action probability belongs to an action that
   may be possible.
 **************************************************************************/
 function action_prob_possible(aprob)
 {
-  return aprob != ACTPROB_IMPOSSIBLE && aprob != ACTPROB_NA;
+  return 0 < aprob['max'] || action_prob_not_impl(aprob);
+}
+
+/**************************************************************************
+  Returns TRUE iff the given action probability represents that support
+  for finding this action probability currently is missing from Freeciv.
+**************************************************************************/
+function action_prob_not_impl(probability)
+{
+  return probability['min'] == 254
+         && probability['max'] == 0;
 }
 
 /**************************************************************************
@@ -120,12 +105,13 @@ function encode_building_id(building_id)
 ****************************************************************************/
 function format_action_probability(probability)
 {
-  if (probability <= 200) {
-    /* This is a regular chance of success. */
-    return " (" + (probability / 2) + "%)";
-  } else if (probability == ACTPROB_NOT_KNOWN) {
-    /* This is know to be unknown. */
-    return " (?%)";
+  if (probability['min'] == probability['max']) {
+    /* This is a regular and simple chance of success. */
+    return " (" + (probability['max'] / 2) + "%)";
+  } else if (probability['min'] < probability['max']) {
+    /* This is a regular chance of success range. */
+    return " ([" + (probability['min'] / 2) + "%, "
+           + (probability['max'] / 2) + "%])";
   } else {
     /* The remaining action probabilities shouldn't be displayed. */
     return "";

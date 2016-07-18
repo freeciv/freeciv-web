@@ -233,6 +233,8 @@ flags         = "Unreachable", "DoesntOccupyTile"
 ; fuel          = Number of turns unit can spend outside refuel points.
 ;                 If more time passes without unit refueling over turn change,
 ;                 they are lost. If this is zero, unit has no need to refuel
+;                 Units with "Coast" flag set consider any tile next to coast
+;                 refuel point
 ; uk_*          = upkeep costs, these are used as base values in the game
 ; cargo         = Unit classes this unit can transport
 ; city_size     = Initial size of the cities built by 'Found City' type units
@@ -310,7 +312,9 @@ flags         = "Unreachable", "DoesntOccupyTile"
 ; "Diplomat"	= can defend against diplomat actions (see diplchance
 ;                 server option)
 ; "Spy"		= enhanced diplomat actions. _Must_ be "Diplomat" also
-; "Trireme"	= (sea only) cannot leave shoreline
+; "CoastStrict" = (sea only) cannot leave coast
+; "Coast"       = (sea only) can refuel on coast. Set fuel to force unit
+;                 to regularly end turn on coast
 ; "Only_Native_Attack" = cannot attack targets on non-native tiles even if
 ;                 unit class can
 ; "Cant_Fortify" =  cannot fortify even if unit class has "CanFortify" flag

@@ -688,7 +688,7 @@ function handle_unit_actions(packet)
   /* The dead can't act. */
   if (pdiplomat != null && ptile != null) {
     action_probabilities.forEach(function(prob) {
-      if (prob != 0) {
+      if (action_prob_possible(prob)) {
         hasActions = true;
       }
     });

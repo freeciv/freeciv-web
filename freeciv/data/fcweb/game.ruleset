@@ -304,6 +304,7 @@ ui_name_attack = _("%sAttack%s")
 ; satisfied.
 ;
 ; */ <-- avoid gettext warnings
+
 [actionenabler_sabotage_city]
 action = "Sabotage City"
 actor_reqs    =
@@ -800,7 +801,7 @@ settings =
 
 ; /* <-- avoid gettext warnings
 ;
-; Goods
+; Goods types:
 ;
 ; name                    = translatable name as seen by user
 ; rule_name               = (optional) name for savegames, rulesets etc; if not

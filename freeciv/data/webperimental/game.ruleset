@@ -696,17 +696,19 @@ actor_reqs    =
 [actionenabler_paradrop_base]
 action = "Paradrop Unit"
 actor_reqs    =
-    { "type",   "name", "range"
-      "UnitFlag", "Paratroopers", "Local"
-      "ExtraFlag", "ParadropFrom", "Local"
+    { "type",      "name",         "range", "present"
+      "UnitFlag",  "Paratroopers", "Local", TRUE
+      "UnitState", "Transporting", "Local", FALSE
+      "ExtraFlag", "ParadropFrom", "Local", TRUE
     }
 
 [actionenabler_paradrop_city]
 action = "Paradrop Unit"
 actor_reqs    =
-    { "type",     "name",         "range"
-      "UnitFlag", "Paratroopers", "Local"
-      "CityTile", "Center", "Local"
+    { "type",      "name",         "range", "present"
+      "UnitFlag",  "Paratroopers", "Local", TRUE
+      "UnitState", "Transporting", "Local", FALSE
+      "CityTile",  "Center",       "Local", TRUE
     }
 
 [actionenabler_upgrade_unit]
@@ -719,9 +721,10 @@ actor_reqs    =
 [actionenabler_airlift_unit]
 action = "Airlift Unit"
 actor_reqs    =
-    { "type",          "name",        "range"
-      "UnitClassFlag", "Airliftable", "Local"
-      "MinMoveFrags",  "1",           "Local"
+    { "type",          "name",         "range", "present"
+      "UnitClassFlag", "Airliftable",  "Local", TRUE
+      "UnitState",     "Transporting", "Local", FALSE
+      "MinMoveFrags",  "1",            "Local", TRUE
     }
 
 [borders]

@@ -1032,7 +1032,9 @@ ui_name_base_airbase = _("?gui_type:Build Airbase")
 ; rmreqs                  = requirements to remove the extra
 ; appearance_reqs         = spontaneous appearance requirements
 ; disappearance_reqs      = spontaneous disappearance requirements
-; buildable               = Can extra be built? Defaults to TRUE
+; buildable               = Can extra be built? Defaults to TRUE if extra has
+;                           any causes indicating it can result from worker
+;                           activity.
 ; build_time              = how long it takes a unit to build this extra.
 ;                           Value of 0 (default) means that terrain- and
 ;                           build activity specific time is used instead.

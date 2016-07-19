@@ -832,8 +832,8 @@ Tundra are broad, cold regions, fit for some agriculture and little\
 
 ; /* <-- avoid gettext warnings
 ;
-; The individual resource types, one per section.
-; Roughly sorted by identifier.
+; Resource types:
+;
 ; The actual tag used (the * in [resource_*]) must be unique for each resource,
 ; and may be used in debug output when reading this file.
 ;
@@ -1772,7 +1772,7 @@ vision_main_sq = 5
 ;   In summary, output bonuses from roads are given by the formula:
 ;   (base_prod + roads.incr_const + roads.incr*terrain.incr_pct) * roads.bonus
 ; compat_special          = what kind of pre-2.5 special this road corresponds
-;                           to, if any: "Road", "Railroad", "River, or "None".
+;                           to, if any: "Road", "Railroad", "River", or "None".
 ;                           Used for UI and loading old savegames
 ; integrates              = list of road types that are suitable next steps
 ;                           for travel from this road type

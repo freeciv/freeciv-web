@@ -45,6 +45,14 @@ var ACTIVITY_LAST = 21;   /* leave this one last */
 
 var IDENTITY_NUMBER_ZERO = 0;
 
+/* Corresponds to the enum action_target_kind */
+var ATK_CITY  = 0;
+var ATK_UNIT  = 1;
+var ATK_UNITS = 2;
+var ATK_TILE  = 3;
+var ATK_SELF  = 4;
+var ATK_COUNT = 5;
+
 /* Actions */
 var ACTION_ESTABLISH_EMBASSY = 0;
 var ACTION_SPY_INVESTIGATE_CITY = 1;

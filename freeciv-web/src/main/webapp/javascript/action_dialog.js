@@ -161,230 +161,25 @@ function popup_action_selection(actor_unit, action_probabilities,
 
   dhtml += "<br>";
 
-  if (action_prob_possible(
-        action_probabilities[ACTION_ESTABLISH_EMBASSY])) {
-    dhtml += "<input id='act_sel_emb" + actor_unit['id']
-             + "' class='act_sel_button' type='button' value='"
-             + format_action_label(ACTION_ESTABLISH_EMBASSY,
-                                   action_probabilities)
-             + "'>";
+  /* Show a button for each enabled action. The buttons are sorted by
+   * target kind first and then by action id number. */
+  for (var tgt_kind = ATK_CITY; tgt_kind < ATK_COUNT; tgt_kind++) {
+    for (var action_id in actions) {
+      if (actions[action_id]['tgt_kind'] == tgt_kind
+          /* Don't show long range actions. The user may expect the ability
+           * to choose a new and distant target tile for them. */
+          && actions[action_id]['max_distance'] < 2
+          && action_prob_possible(
+              action_probabilities[action_id])) {
+        dhtml += "<input id='act_sel_" + action_id + "_" + actor_unit['id']
+              + "' class='act_sel_button' type='button' value=\""
+              + format_action_label(action_id,
+                                    action_probabilities)
+              + "\">";
+      }
+    }
   }
-  if (action_prob_possible(
-        action_probabilities[ACTION_SPY_INVESTIGATE_CITY])) {
-    dhtml += "<input id='act_sel_inv" + actor_unit['id']
-             + "' class='act_sel_button' type='button' value='"
-             + format_action_label(ACTION_SPY_INVESTIGATE_CITY,
-                                   action_probabilities)
-             + "'>";
-  }
-  if (action_prob_possible(
-        action_probabilities[ACTION_SPY_SABOTAGE_CITY])) {
-    dhtml += "<input id='act_sel_sab" + actor_unit['id']
-             + "' class='act_sel_button' type='button' value='"
-             + format_action_label(ACTION_SPY_SABOTAGE_CITY,
-                                   action_probabilities)
-             + "'>";
-  }
-  if (action_prob_possible(
-        action_probabilities[ACTION_SPY_TARGETED_SABOTAGE_CITY])) {
-    dhtml += "<input id='act_sel_tgt_sab" + actor_unit['id']
-             + "' class='act_sel_button' type='button' value='"
-             + format_action_label(ACTION_SPY_TARGETED_SABOTAGE_CITY,
-                                   action_probabilities)
-             + "'>";
-  }
-  if (action_prob_possible(
-        action_probabilities[ACTION_SPY_STEAL_TECH])) {
-    dhtml += "<input id='act_sel_tech" + actor_unit['id']
-             + "' class='act_sel_button' type='button' value='"
-             + format_action_label(ACTION_SPY_STEAL_TECH,
-                                   action_probabilities)
-             + "'>";
-  }
-  if (action_prob_possible(
-        action_probabilities[ACTION_SPY_TARGETED_STEAL_TECH])) {
-    dhtml += "<input id='act_sel_tgt_tech" + actor_unit['id']
-             + "' class='act_sel_button' type='button' value='"
-             + format_action_label(ACTION_SPY_TARGETED_STEAL_TECH,
-                                   action_probabilities)
-             + "'>";
-  }
-  if (action_prob_possible(
-        action_probabilities[ACTION_SPY_STEAL_GOLD])) {
-    dhtml += "<input id='act_sel_steal_gold" + actor_unit['id']
-             + "' class='act_sel_button' type='button' value='"
-             + format_action_label(ACTION_SPY_STEAL_GOLD,
-                                   action_probabilities)
-             + "'>";
-  }
-  if (action_prob_possible(
-        action_probabilities[ACTION_STEAL_MAPS])) {
-    dhtml += "<input id='act_sel_steal_maps" + actor_unit['id']
-             + "' class='act_sel_button' type='button' value='"
-             + format_action_label(ACTION_STEAL_MAPS,
-                                   action_probabilities)
-             + "'>";
-  }
-  if (action_prob_possible(
-        action_probabilities[ACTION_SPY_INCITE_CITY])) {
-    dhtml += "<input id='act_sel_revo" + actor_unit['id']
-             + "' class='act_sel_button' type='button' value='"
-             + format_action_label(ACTION_SPY_INCITE_CITY,
-                                   action_probabilities)
-             + "'>";
-  }
-  if (action_prob_possible(
-        action_probabilities[ACTION_SPY_POISON])) {
-    dhtml += "<input id='act_sel_poi" + actor_unit['id']
-             + "' class='act_sel_button' type='button' value='"
-             + format_action_label(ACTION_SPY_POISON,
-                                   action_probabilities)
-             + "'>";
-  }
-  if (action_prob_possible(
-        action_probabilities[ACTION_TRADE_ROUTE])) {
-    dhtml += "<input id='act_sel_trade" + actor_unit['id']
-             + "' class='act_sel_button' type='button' value='"
-             + format_action_label(ACTION_TRADE_ROUTE,
-                                   action_probabilities)
-             + "'>";
-  }
-  if (action_prob_possible(
-        action_probabilities[ACTION_MARKETPLACE])) {
-    dhtml += "<input id='act_sel_market" + actor_unit['id']
-             + "' class='act_sel_button' type='button' value='"
-             + format_action_label(ACTION_MARKETPLACE,
-                              action_probabilities)
-             + "'>";
-  }
-  if (action_prob_possible(
-        action_probabilities[ACTION_HELP_WONDER])) {
-    dhtml += "<input id='act_sel_wonder" + actor_unit['id']
-             + "' class='act_sel_button' type='button' value='"
-             + format_action_label(ACTION_HELP_WONDER,
-                                   action_probabilities)
-             + "'>";
-  }
-  if (action_prob_possible(
-        action_probabilities[ACTION_JOIN_CITY])) {
-    dhtml += "<input id='act_sel_join_city" + actor_unit['id']
-             + "' class='act_sel_button' type='button' value='"
-             + format_action_label(ACTION_JOIN_CITY,
-                                   action_probabilities)
-             + "'>";
-  }
-  if (action_prob_possible(
-        action_probabilities[ACTION_SPY_NUKE])) {
-    dhtml += "<input id='act_sel_spy_nuke" + actor_unit['id']
-             + "' class='act_sel_button' type='button' value='"
-             + format_action_label(ACTION_SPY_NUKE,
-                                   action_probabilities)
-             + "'>";
-  }
-  if (action_prob_possible(
-        action_probabilities[ACTION_DESTROY_CITY])) {
-    dhtml += "<input id='act_sel_destroy_city" + actor_unit['id']
-             + "' class='act_sel_button' type='button' value='"
-             + format_action_label(ACTION_DESTROY_CITY,
-                                   action_probabilities)
-             + "'>";
-  }
-  if (action_prob_possible(
-        action_probabilities[ACTION_RECYCLE_UNIT])) {
-    dhtml += "<input id='act_sel_recycle_unit" + actor_unit['id']
-             + "' class='act_sel_button' type='button' value='"
-             + format_action_label(ACTION_RECYCLE_UNIT,
-                                   action_probabilities)
-             + "'>";
-  }
-  if (action_prob_possible(
-        action_probabilities[ACTION_HOME_CITY])) {
-    dhtml += "<input id='act_sel_home" + actor_unit['id']
-             + "' class='act_sel_button' type='button' value='"
-             + format_action_label(ACTION_HOME_CITY,
-                                   action_probabilities)
-             + "'>";
-  }
-  if (action_prob_possible(
-        action_probabilities[ACTION_UPGRADE_UNIT])) {
-    dhtml += "<input id='act_sel_upgr" + actor_unit['id']
-             + "' class='act_sel_button' type='button' value='"
-             + format_action_label(ACTION_UPGRADE_UNIT,
-                                   action_probabilities)
-             + "'>";
-  }
-  if (action_prob_possible(
-        action_probabilities[ACTION_SPY_BRIBE_UNIT])) {
-    dhtml += "<input id='act_sel_bribe" + actor_unit['id']
-        + "' class='act_sel_button' type='button' value='"
-        + format_action_label(ACTION_SPY_BRIBE_UNIT,
-                              action_probabilities)
-        + "'>";
-  }
-  if (action_prob_possible(
-        action_probabilities[ACTION_SPY_SABOTAGE_UNIT])) {
-    dhtml += "<input id='act_sel_spy_sabo" + actor_unit['id']
-             + "' class='act_sel_button' type='button' value='"
-             + format_action_label(ACTION_SPY_SABOTAGE_UNIT,
-                                   action_probabilities)
-             + "'>";
-  }
-  if (action_prob_possible(
-        action_probabilities[ACTION_EXPEL_UNIT])) {
-    dhtml += "<input id='act_sel_expel_unit" + actor_unit['id']
-             + "' class='act_sel_button' type='button' value='"
-             + format_action_label(ACTION_EXPEL_UNIT,
-                                   action_probabilities)
-             + "'>";
-  }
-  if (action_prob_possible(
-        action_probabilities[ACTION_CAPTURE_UNITS])) {
-    dhtml += "<input id='act_sel_capture_units" + actor_unit['id']
-             + "' class='act_sel_button' type='button' value='"
-             + format_action_label(ACTION_CAPTURE_UNITS,
-                                   action_probabilities)
-             + "'>";
-  }
-  if (action_prob_possible(
-        action_probabilities[ACTION_FOUND_CITY])) {
-    dhtml += "<input id='act_sel_found_city" + actor_unit['id']
-             + "' class='act_sel_button' type='button' value='"
-             + format_action_label(ACTION_FOUND_CITY,
-                                   action_probabilities)
-             + "'>";
-  }
-  if (action_prob_possible(
-        action_probabilities[ACTION_NUKE])) {
-    dhtml += "<input id='act_sel_nuke" + actor_unit['id']
-             + "' class='act_sel_button' type='button' value='"
-             + format_action_label(ACTION_NUKE,
-                                   action_probabilities)
-             + "'>";
-  }
-  if (action_prob_possible(
-        action_probabilities[ACTION_BOMBARD])) {
-    dhtml += "<input id='act_sel_bombard" + actor_unit['id']
-             + "' class='act_sel_button' type='button' value='"
-             + format_action_label(ACTION_BOMBARD,
-                                   action_probabilities)
-             + "'>";
-  }
-  if (action_prob_possible(
-        action_probabilities[ACTION_ATTACK])) {
-    dhtml += "<input id='act_sel_attack" + actor_unit['id']
-             + "' class='act_sel_button' type='button' value='"
-             + format_action_label(ACTION_ATTACK,
-                                   action_probabilities)
-             + "'>";
-  }
-  if (action_prob_possible(
-        action_probabilities[ACTION_DISBAND_UNIT])) {
-    dhtml += "<input id='act_sel_disb_unit" + actor_unit['id']
-             + "' class='act_sel_button' type='button' value=\""
-             + format_action_label(ACTION_DISBAND_UNIT,
-                                   action_probabilities)
-             + "\">";
-  }
+
   if (can_actor_unit_move(actor_unit, target_tile)) {
     dhtml += "<input id='act_sel_move" + actor_unit['id']
     + "' class='act_sel_button' type='button' value='Keep moving'>";
@@ -413,7 +208,8 @@ function popup_action_selection(actor_unit, action_probabilities,
 
   if (action_prob_possible(
         action_probabilities[ACTION_ESTABLISH_EMBASSY])) {
-    $("#act_sel_emb" + actor_unit['id']).click(function() {
+    $("#act_sel_" + ACTION_ESTABLISH_EMBASSY + "_"
+      + actor_unit['id']).click(function() {
       var packet = {"pid" : packet_unit_do_action,
                     "actor_id" : actor_unit['id'],
                     "target_id": target_city['id'],
@@ -428,7 +224,8 @@ function popup_action_selection(actor_unit, action_probabilities,
 
   if (action_prob_possible(
         action_probabilities[ACTION_SPY_INVESTIGATE_CITY])) {
-    $("#act_sel_inv" + actor_unit['id']).click(function() {
+    $("#act_sel_" + ACTION_SPY_INVESTIGATE_CITY + "_"
+      + actor_unit['id']).click(function() {
       var packet = {"pid" : packet_unit_do_action,
                     "actor_id" : actor_unit['id'],
                     "target_id": target_city['id'],
@@ -443,7 +240,8 @@ function popup_action_selection(actor_unit, action_probabilities,
 
   if (action_prob_possible(
         action_probabilities[ACTION_SPY_SABOTAGE_CITY])) {
-    $("#act_sel_sab" + actor_unit['id']).click(function() {
+    $("#act_sel_" + ACTION_SPY_SABOTAGE_CITY + "_"
+      + actor_unit['id']).click(function() {
       var packet = {"pid" : packet_unit_do_action,
                     "actor_id" : actor_unit['id'],
                     "target_id": target_city['id'],
@@ -458,7 +256,8 @@ function popup_action_selection(actor_unit, action_probabilities,
 
   if (action_prob_possible(
         action_probabilities[ACTION_SPY_TARGETED_SABOTAGE_CITY])) {
-    $("#act_sel_tgt_sab" + actor_unit['id']).click(function() {
+    $("#act_sel_" + ACTION_SPY_TARGETED_SABOTAGE_CITY + "_"
+      + actor_unit['id']).click(function() {
       var packet = {"pid" : packet_unit_action_query,
                     "diplomat_id" : actor_unit['id'],
                     "target_id": target_city['id'],
@@ -471,7 +270,8 @@ function popup_action_selection(actor_unit, action_probabilities,
 
   if (action_prob_possible(
         action_probabilities[ACTION_SPY_STEAL_TECH])) {
-    $("#act_sel_tech" + actor_unit['id']).click(function() {
+    $("#act_sel_" + ACTION_SPY_STEAL_TECH + "_"
+      + actor_unit['id']).click(function() {
       var packet = {"pid" : packet_unit_do_action,
                     "actor_id" : actor_unit['id'],
                     "target_id": target_city['id'],
@@ -486,7 +286,8 @@ function popup_action_selection(actor_unit, action_probabilities,
 
   if (action_prob_possible(
         action_probabilities[ACTION_SPY_TARGETED_STEAL_TECH])) {
-    $("#act_sel_tgt_tech" + actor_unit['id']).click(function() {
+    $("#act_sel_" + ACTION_SPY_TARGETED_STEAL_TECH + "_"
+      + actor_unit['id']).click(function() {
       popup_steal_tech_selection_dialog(actor_unit, target_city,
                                         action_probabilities);
 
@@ -496,7 +297,8 @@ function popup_action_selection(actor_unit, action_probabilities,
 
   if (action_prob_possible(
         action_probabilities[ACTION_SPY_STEAL_GOLD])) {
-    $("#act_sel_steal_gold" + actor_unit['id']).click(function() {
+    $("#act_sel_" + ACTION_SPY_STEAL_GOLD + "_"
+      + actor_unit['id']).click(function() {
       var packet = {"pid" : packet_unit_do_action,
                     "actor_id" : actor_unit['id'],
                     "target_id": target_city['id'],
@@ -511,7 +313,8 @@ function popup_action_selection(actor_unit, action_probabilities,
 
   if (action_prob_possible(
         action_probabilities[ACTION_STEAL_MAPS])) {
-    $("#act_sel_steal_maps" + actor_unit['id']).click(function() {
+    $("#act_sel_" + ACTION_STEAL_MAPS + "_"
+      + actor_unit['id']).click(function() {
       var packet = {"pid" : packet_unit_do_action,
                     "actor_id" : actor_unit['id'],
                     "target_id": target_city['id'],
@@ -526,7 +329,8 @@ function popup_action_selection(actor_unit, action_probabilities,
 
   if (action_prob_possible(
         action_probabilities[ACTION_SPY_INCITE_CITY])) {
-    $("#act_sel_revo" + actor_unit['id']).click(function() {
+    $("#act_sel_" + ACTION_SPY_INCITE_CITY + "_"
+      + actor_unit['id']).click(function() {
       var packet = {"pid" : packet_unit_action_query,
                     "diplomat_id" : actor_unit['id'],
                     "target_id": target_city['id'],
@@ -539,7 +343,8 @@ function popup_action_selection(actor_unit, action_probabilities,
 
   if (action_prob_possible(
         action_probabilities[ACTION_SPY_POISON])) {
-    $("#act_sel_poi" + actor_unit['id']).click(function() {
+    $("#act_sel_" + ACTION_SPY_POISON + "_"
+      + actor_unit['id']).click(function() {
       var packet = {"pid" : packet_unit_do_action,
                     "actor_id" : actor_unit['id'],
                     "target_id": target_city['id'],
@@ -554,7 +359,8 @@ function popup_action_selection(actor_unit, action_probabilities,
 
   if (action_prob_possible(
         action_probabilities[ACTION_TRADE_ROUTE])) {
-    $("#act_sel_trade" + actor_unit['id']).click(function() {
+    $("#act_sel_" + ACTION_TRADE_ROUTE + "_"
+      + actor_unit['id']).click(function() {
       var packet = {"pid" : packet_unit_do_action,
                     "actor_id" : actor_unit['id'],
                     "target_id": target_city['id'],
@@ -569,7 +375,8 @@ function popup_action_selection(actor_unit, action_probabilities,
 
   if (action_prob_possible(
         action_probabilities[ACTION_MARKETPLACE])) {
-    $("#act_sel_market" + actor_unit['id']).click(function() {
+    $("#act_sel_" + ACTION_MARKETPLACE + "_"
+      + actor_unit['id']).click(function() {
       var packet = {"pid" : packet_unit_do_action,
                     "actor_id" : actor_unit['id'],
                     "target_id": target_city['id'],
@@ -584,7 +391,8 @@ function popup_action_selection(actor_unit, action_probabilities,
 
   if (action_prob_possible(
         action_probabilities[ACTION_HELP_WONDER])) {
-    $("#act_sel_wonder" + actor_unit['id']).click(function() {
+    $("#act_sel_" + ACTION_HELP_WONDER + "_"
+      + actor_unit['id']).click(function() {
       var packet = {"pid" : packet_unit_do_action,
                     "actor_id" : actor_unit['id'],
                     "target_id": target_city['id'],
@@ -599,7 +407,8 @@ function popup_action_selection(actor_unit, action_probabilities,
 
   if (action_prob_possible(
         action_probabilities[ACTION_JOIN_CITY])) {
-    $("#act_sel_join_city" + actor_unit['id']).click(function() {
+    $("#act_sel_" + ACTION_JOIN_CITY + "_"
+      + actor_unit['id']).click(function() {
       var packet = {"pid"         : packet_unit_do_action,
                     "actor_id"    : actor_unit['id'],
                     "target_id"   : target_city['id'],
@@ -614,7 +423,8 @@ function popup_action_selection(actor_unit, action_probabilities,
 
   if (action_prob_possible(
         action_probabilities[ACTION_SPY_NUKE])) {
-    $("#act_sel_spy_nuke" + actor_unit['id']).click(function() {
+    $("#act_sel_" + ACTION_SPY_NUKE + "_"
+      + actor_unit['id']).click(function() {
       var packet = {"pid"         : packet_unit_do_action,
                     "actor_id"    : actor_unit['id'],
                     "target_id"   : target_city['id'],
@@ -629,7 +439,8 @@ function popup_action_selection(actor_unit, action_probabilities,
 
   if (action_prob_possible(
         action_probabilities[ACTION_DESTROY_CITY])) {
-    $("#act_sel_destroy_city" + actor_unit['id']).click(function() {
+    $("#act_sel_" + ACTION_DESTROY_CITY + "_"
+      + actor_unit['id']).click(function() {
       var packet = {"pid"         : packet_unit_do_action,
                     "actor_id"    : actor_unit['id'],
                     "target_id"   : target_city['id'],
@@ -644,7 +455,8 @@ function popup_action_selection(actor_unit, action_probabilities,
 
   if (action_prob_possible(
         action_probabilities[ACTION_RECYCLE_UNIT])) {
-    $("#act_sel_recycle_unit" + actor_unit['id']).click(function() {
+    $("#act_sel_" + ACTION_RECYCLE_UNIT + "_"
+      + actor_unit['id']).click(function() {
       var packet = {"pid"         : packet_unit_do_action,
                     "actor_id"    : actor_unit['id'],
                     "target_id"   : target_city['id'],
@@ -659,7 +471,8 @@ function popup_action_selection(actor_unit, action_probabilities,
 
   if (action_prob_possible(
         action_probabilities[ACTION_HOME_CITY])) {
-    $("#act_sel_home" + actor_unit['id']).click(function() {
+    $("#act_sel_" + ACTION_HOME_CITY + "_"
+      + actor_unit['id']).click(function() {
       var packet = {"pid"         : packet_unit_do_action,
                     "actor_id"    : actor_unit['id'],
                     "target_id"   : target_city['id'],
@@ -674,7 +487,8 @@ function popup_action_selection(actor_unit, action_probabilities,
 
   if (action_prob_possible(
         action_probabilities[ACTION_UPGRADE_UNIT])) {
-    $("#act_sel_upgr" + actor_unit['id']).click(function() {
+    $("#act_sel_" + ACTION_UPGRADE_UNIT + "_"
+      + actor_unit['id']).click(function() {
       var packet = {"pid"         : packet_unit_do_action,
                     "actor_id"    : actor_unit['id'],
                     "target_id"   : target_city['id'],
@@ -689,7 +503,8 @@ function popup_action_selection(actor_unit, action_probabilities,
 
   if (action_prob_possible(
         action_probabilities[ACTION_SPY_BRIBE_UNIT])) {
-    $("#act_sel_bribe" + actor_unit['id']).click(function() {
+    $("#act_sel_" + ACTION_SPY_BRIBE_UNIT + "_"
+      + actor_unit['id']).click(function() {
       var packet = {"pid" : packet_unit_action_query,
                     "diplomat_id" : actor_unit['id'],
                     "target_id": target_unit['id'],
@@ -702,7 +517,8 @@ function popup_action_selection(actor_unit, action_probabilities,
 
   if (action_prob_possible(
         action_probabilities[ACTION_SPY_SABOTAGE_UNIT])) {
-    $("#act_sel_spy_sabo" + actor_unit['id']).click(function() {
+    $("#act_sel_" + ACTION_SPY_SABOTAGE_UNIT + "_"
+      + actor_unit['id']).click(function() {
       var packet = {"pid" : packet_unit_do_action,
                     "actor_id" : actor_unit['id'],
                     "target_id": target_unit['id'],
@@ -717,7 +533,8 @@ function popup_action_selection(actor_unit, action_probabilities,
 
   if (action_prob_possible(
         action_probabilities[ACTION_EXPEL_UNIT])) {
-    $("#act_sel_expel_unit" + actor_unit['id']).click(function() {
+    $("#act_sel_" + ACTION_EXPEL_UNIT + "_"
+      + actor_unit['id']).click(function() {
       var packet = {"pid" : packet_unit_do_action,
                     "actor_id" : actor_unit['id'],
                     "target_id": target_unit['id'],
@@ -732,7 +549,8 @@ function popup_action_selection(actor_unit, action_probabilities,
 
   if (action_prob_possible(
         action_probabilities[ACTION_CAPTURE_UNITS])) {
-    $("#act_sel_capture_units" + actor_unit['id']).click(function() {
+    $("#act_sel_" + ACTION_CAPTURE_UNITS + "_"
+      + actor_unit['id']).click(function() {
       var packet = {"pid" : packet_unit_do_action,
                     "actor_id" : actor_unit['id'],
                     "target_id": target_tile['index'],
@@ -747,7 +565,8 @@ function popup_action_selection(actor_unit, action_probabilities,
 
   if (action_prob_possible(
         action_probabilities[ACTION_FOUND_CITY])) {
-    $("#act_sel_found_city" + actor_unit['id']).click(function() {
+    $("#act_sel_" + ACTION_FOUND_CITY + "_"
+      + actor_unit['id']).click(function() {
       /* Ask the server to suggest a city name. */
       var packet = {"pid"     : packet_city_name_suggestion_req,
                     "unit_id" : actor_unit['id'] };
@@ -759,7 +578,8 @@ function popup_action_selection(actor_unit, action_probabilities,
 
   if (action_prob_possible(
         action_probabilities[ACTION_NUKE])) {
-    $("#act_sel_nuke" + actor_unit['id']).click(function() {
+    $("#act_sel_" + ACTION_NUKE + "_"
+      + actor_unit['id']).click(function() {
       var packet = {"pid" : packet_unit_do_action,
                     "actor_id" : actor_unit['id'],
                     "target_id": target_tile['index'],
@@ -774,7 +594,8 @@ function popup_action_selection(actor_unit, action_probabilities,
 
   if (action_prob_possible(
         action_probabilities[ACTION_BOMBARD])) {
-    $("#act_sel_bombard" + actor_unit['id']).click(function() {
+    $("#act_sel_" + ACTION_BOMBARD + "_"
+      + actor_unit['id']).click(function() {
       var packet = {"pid" : packet_unit_do_action,
                     "actor_id" : actor_unit['id'],
                     "target_id": target_tile['index'],
@@ -789,7 +610,8 @@ function popup_action_selection(actor_unit, action_probabilities,
 
   if (action_prob_possible(
         action_probabilities[ACTION_ATTACK])) {
-    $("#act_sel_attack" + actor_unit['id']).click(function() {
+    $("#act_sel_" + ACTION_ATTACK + "_"
+      + actor_unit['id']).click(function() {
       var packet = {"pid" : packet_unit_do_action,
                     "actor_id" : actor_unit['id'],
                     "target_id": target_tile['index'],
@@ -804,7 +626,8 @@ function popup_action_selection(actor_unit, action_probabilities,
 
   if (action_prob_possible(
         action_probabilities[ACTION_DISBAND_UNIT])) {
-    $("#act_sel_disb_unit" + actor_unit['id']).click(function() {
+    $("#act_sel_" + ACTION_DISBAND_UNIT + "_"
+      + actor_unit['id']).click(function() {
       var packet = {
         "pid"         : packet_unit_do_action,
         "actor_id"    : actor_unit['id'],

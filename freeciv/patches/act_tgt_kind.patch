@@ -1,0 +1,67 @@
+From 6a9905b0624bb33338f8a954fe0c213681f58261 Mon Sep 17 00:00:00 2001
+From: Sveinung Kvilhaugsvik <sveinung84@users.sourceforge.net>
+Date: Tue, 19 Jul 2016 03:21:40 +0200
+Subject: [PATCH] protocol: send action's actor and target kind.
+
+Transfer the action's actor kind and target kind in PACKET_RULESET_ACTION.
+This makes them available to clients that don't use Freeciv's C code.
+---
+ client/packhand.c             | 3 +++
+ common/networking/packets.def | 5 +++++
+ server/ruleset.c              | 3 +++
+ 3 files changed, 11 insertions(+)
+
+diff --git a/client/packhand.c b/client/packhand.c
+index 9c3e7cc..0fd778c 100644
+--- a/client/packhand.c
++++ b/client/packhand.c
+@@ -3952,6 +3952,9 @@ void handle_ruleset_action(const struct packet_ruleset_action *p)
+   sz_strlcpy(act->ui_name, p->ui_name);
+   act->quiet = p->quiet;
+ 
++  act->actor_kind  = p->act_kind;
++  act->target_kind = p->tgt_kind;
++
+   act->min_distance = p->min_distance;
+   act->max_distance = p->max_distance;
+   act->blocked_by = p->blocked_by;
+diff --git a/common/networking/packets.def b/common/networking/packets.def
+index 6594b7a..cbb08c8 100644
+--- a/common/networking/packets.def
++++ b/common/networking/packets.def
+@@ -249,6 +249,8 @@ type MOVE_MODE          = uint8(enum road_move_mode)
+ type GEN_ACTION         = uint8(enum gen_action)
+ type ACTION_AUTO_CAUSE  = uint8(enum action_auto_perf_cause)
+ type ACTION_DECISION    = uint8(enum action_decision)
++type ACTOR_KIND         = uint8(enum action_actor_kind)
++type TARGET_KIND        = uint8(enum action_target_kind)
+ type UNIT_DATA_TYPE     = uint8(enum unit_ss_data_type)
+ type REVOLENTYPE        = uint8(enum revolen_type)
+ type HAPPYBORDERSTYPE   = uint8(enum happyborders_type)
+@@ -1724,6 +1726,9 @@ PACKET_RULESET_ACTION = 246; sc, lsend
+   STRING ui_name[MAX_LEN_NAME];
+   BOOL   quiet;
+ 
++  ACTOR_KIND  act_kind;
++  TARGET_KIND tgt_kind;
++
+   SINT32 min_distance;
+   SINT32 max_distance;
+   BV_ACTIONS blocked_by;
+diff --git a/server/ruleset.c b/server/ruleset.c
+index 4ebea8e..4648fb1 100644
+--- a/server/ruleset.c
++++ b/server/ruleset.c
+@@ -7193,6 +7193,9 @@ static void send_ruleset_actions(struct conn_list *dest)
+     sz_strlcpy(packet.ui_name, action_by_number(act)->ui_name);
+     packet.quiet = action_by_number(act)->quiet;
+ 
++    packet.act_kind = action_by_number(act)->actor_kind;
++    packet.tgt_kind = action_by_number(act)->target_kind;
++
+     packet.min_distance = action_by_number(act)->min_distance;
+     packet.max_distance = action_by_number(act)->max_distance;
+     packet.blocked_by = action_by_number(act)->blocked_by;
+-- 
+2.1.4
+

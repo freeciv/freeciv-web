@@ -937,6 +937,14 @@ function handle_ruleset_tech(packet)
   recreate_old_tech_req(packet);
 }
 
+/**************************************************************************
+  Packet ruleset_tech_class handler.
+**************************************************************************/
+function handle_ruleset_tech_class(packet)
+{
+  /* TODO: implement*/
+}
+
 function handle_ruleset_tech_flag(packet)
 {
   /* TODO: implement*/

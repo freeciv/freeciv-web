@@ -262,6 +262,9 @@ function popup_action_selection(actor_unit, action_probabilities,
              + " is ready to act against "
              + nations[unit_owner(target_unit)['nation']]['adjective']
              + " " + unit_types[target_unit['type']]['name'] + ".";
+  } else {
+    dhtml += "Your " + unit_types[actor_unit['type']]['name']
+             + " is waiting for your command."
   }
 
   $(id).html(dhtml);

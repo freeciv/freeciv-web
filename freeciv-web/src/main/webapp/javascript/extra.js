@@ -32,7 +32,7 @@ var EXTRA_FALLOUT = 6;
 var BASE_FORTRESS = 7;
 var BASE_AIRBASE = 8;
 var BASE_BUOY = 9;
-var BASE_RUINS = 10;
+var EXTRA_RUINS = 10;
 
 var ROAD_ROAD  = 11;
 var ROAD_RAIL  = 12;

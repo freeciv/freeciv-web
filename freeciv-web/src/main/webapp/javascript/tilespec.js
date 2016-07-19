@@ -1425,8 +1425,8 @@ function fill_layer2_sprite_array(ptile, pcity)
       result_sprites.push({"key" : "base.buoy_mg",
                            "offset_y" : -normal_tile_height / 2});
     }
-    if (tile_has_extra(ptile, BASE_RUINS)) {
-      result_sprites.push({"key" : "base.ruins_mg",
+    if (tile_has_extra(ptile, EXTRA_RUINS)) {
+      result_sprites.push({"key" : "extra.ruins_mg",
                            "offset_y" : -normal_tile_height / 2});
     }
   }

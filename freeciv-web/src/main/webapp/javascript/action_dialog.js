@@ -127,6 +127,109 @@ function format_action_label(action_id, action_probabilities)
       format_action_probability(action_probabilities[action_id]));
 }
 
+/**************************************************************************
+  Returns the function to run when an action is selected.
+**************************************************************************/
+function act_sel_click_function(parent_id,
+                                actor_unit_id, tgt_id, action_id,
+                                action_probabilities)
+{
+  switch (action_id) {
+  case ACTION_SPY_TARGETED_SABOTAGE_CITY:
+    return function() {
+      var packet = {
+        "pid"         : packet_unit_action_query,
+        "diplomat_id" : actor_unit_id,
+        "target_id"   : tgt_id,
+        "action_type" : action_id
+      };
+      send_request(JSON.stringify(packet));
+
+      $(parent_id).remove();
+    };
+  case ACTION_SPY_TARGETED_STEAL_TECH:
+    return function() {
+      popup_steal_tech_selection_dialog(units[actor_unit_id],
+                                        cities[tgt_id],
+                                        action_probabilities);
+
+      $(parent_id).remove();
+    };
+  case ACTION_SPY_INCITE_CITY:
+    return function() {
+      var packet = {
+        "pid"         : packet_unit_action_query,
+        "diplomat_id" : actor_unit_id,
+        "target_id"   : tgt_id,
+        "action_type" : action_id
+      };
+      send_request(JSON.stringify(packet));
+
+      $(parent_id).remove();
+    };
+  case ACTION_SPY_BRIBE_UNIT:
+    return function() {
+      var packet = {
+        "pid"         : packet_unit_action_query,
+        "diplomat_id" : actor_unit_id,
+        "target_id"   : tgt_id,
+        "action_type" : action_id
+      };
+      send_request(JSON.stringify(packet));
+
+      $(parent_id).remove();
+    };
+  case ACTION_FOUND_CITY:
+    return function() {
+      /* Ask the server to suggest a city name. */
+      var packet = {
+        "pid"     : packet_city_name_suggestion_req,
+        "unit_id" : actor_unit_id
+      };
+      send_request(JSON.stringify(packet));
+
+      $(parent_id).remove();
+    };
+  default:
+    return function() {
+      var packet = {
+        "pid"         : packet_unit_do_action,
+        "actor_id"    : actor_unit_id,
+        "target_id"   : tgt_id,
+        "value"       : 0,
+        "name"        : "",
+        "action_type" : action_id
+      };
+      send_request(JSON.stringify(packet));
+
+      $(parent_id).remove();
+    };
+  }
+}
+
+/**************************************************************************
+  Create a button that selects an action.
+
+  Needed because of JavaScript's scoping rules.
+**************************************************************************/
+function create_act_sel_button(parent_id,
+                               actor_unit_id, tgt_id, action_id,
+                               action_probabilities)
+{
+  /* Create the initial button with this action */
+  var button = {
+    id      : "act_sel_" + action_id + "_" + actor_unit_id,
+    "class" : 'act_sel_button',
+    text    : format_action_label(action_id,
+                                  action_probabilities),
+    click   : act_sel_click_function(parent_id,
+                                     actor_unit_id, tgt_id, action_id,
+                                     action_probabilities) };
+
+  /* The button is ready. */
+  return button;
+}
+
 /****************************************************************************
   Ask the player to select an action.
 ****************************************************************************/
@@ -140,7 +243,9 @@ function popup_action_selection(actor_unit, action_probabilities,
 
   var actor_homecity = cities[actor_unit['homecity']];
 
-  var dhtml = "<center>";
+  var buttons = [];
+
+  var dhtml = "";
 
   if (target_city != null) {
     dhtml += "Your " + unit_types[actor_unit['type']]['name'];
@@ -159,518 +264,111 @@ function popup_action_selection(actor_unit, action_probabilities,
              + " " + unit_types[target_unit['type']]['name'] + ".";
   }
 
-  dhtml += "<br>";
+  $(id).html(dhtml);
 
   /* Show a button for each enabled action. The buttons are sorted by
    * target kind first and then by action id number. */
   for (var tgt_kind = ATK_CITY; tgt_kind < ATK_COUNT; tgt_kind++) {
-    for (var action_id in actions) {
+    var tgt_id = -1;
+
+    switch (tgt_kind) {
+    case ATK_CITY:
+      if (target_city != null) {
+        tgt_id = target_city['id'];
+      }
+      break;
+    case ATK_UNIT:
+      if (target_unit != null) {
+        tgt_id = target_unit['id'];
+      }
+      break;
+    case ATK_UNITS:
+      if (target_tile != null) {
+        tgt_id = target_tile['index'];
+      }
+      break;
+    case ATK_TILE:
+      if (target_tile != null) {
+        tgt_id = target_tile['index'];
+      }
+      break;
+    case ATK_SELF:
+      if (actor_unit != null) {
+        tgt_id = actor_unit['id'];
+      }
+      break;
+    default:
+      console.log("Unsupported action target kind " + tgt_kind);
+      break;
+    }
+
+    for (var action_id = 0; action_id < ACTION_COUNT; action_id++) {
       if (actions[action_id]['tgt_kind'] == tgt_kind
           /* Don't show long range actions. The user may expect the ability
            * to choose a new and distant target tile for them. */
           && actions[action_id]['max_distance'] < 2
           && action_prob_possible(
               action_probabilities[action_id])) {
-        dhtml += "<input id='act_sel_" + action_id + "_" + actor_unit['id']
-              + "' class='act_sel_button' type='button' value=\""
-              + format_action_label(action_id,
-                                    action_probabilities)
-              + "\">";
+        buttons.push(create_act_sel_button(id, actor_unit['id'], tgt_id,
+                                           action_id,
+                                           action_probabilities));
       }
     }
   }
 
   if (can_actor_unit_move(actor_unit, target_tile)) {
-    dhtml += "<input id='act_sel_move" + actor_unit['id']
-    + "' class='act_sel_button' type='button' value='Keep moving'>";
+    buttons.push({
+        id      : "act_sel_move" + actor_unit['id'],
+        "class" : 'act_sel_button',
+        text    : 'Keep moving',
+        click   : function() {
+          var dir = get_direction_for_step(tiles[actor_unit['tile']],
+                                           target_tile);
+          var packet = {
+            "pid"       : packet_unit_orders,
+            "unit_id"   : actor_unit['id'],
+            "src_tile"  : actor_unit['tile'],
+            "length"    : 1,
+            "repeat"    : false,
+            "vigilant"  : false,
+            "orders"    : [ORDER_MOVE],
+            "dir"       : [dir],
+            "activity"  : [ACTIVITY_LAST],
+            "target"    : [EXTRA_NONE],
+            "action"    : [ACTION_COUNT],
+            "dest_tile" : target_tile['index']
+          };
+
+          if (dir == -1) {
+            /* Non adjacent target tile? */
+            console.log("Action slection move: bad target tile");
+          } else {
+            send_request(JSON.stringify(packet));
+          }
+
+          $(id).remove();
+        } });
   }
 
-  dhtml += "<input id='act_sel_cancel" + actor_unit['id']
-          + "' class='act_sel_button' type='button' value='Cancel'>"
-         + "</center>";
-  $(id).html(dhtml);
+
+  buttons.push({
+      id      : "act_sel_cancel" + actor_unit['id'],
+      "class" : 'act_sel_button',
+      text    : 'Cancel',
+      click   : function() {
+        $(id).remove();
+      } });
 
   $(id).attr("title",
              "Choose Your " + unit_types[actor_unit['type']]['name']
              + "'s Strategy");
   $(id).dialog({
-			bgiframe: true,
-			modal: true,
-			width: "350"});
+      bgiframe: true,
+      modal: true,
+      width: "350",
+      buttons: buttons });
 
   $(id).dialog('open');
-  $(".act_sel_button").button();
-
-
-  $("#act_sel_cancel" + actor_unit['id']).click(function() {
-    $(id).remove();
-  });
-
-  if (action_prob_possible(
-        action_probabilities[ACTION_ESTABLISH_EMBASSY])) {
-    $("#act_sel_" + ACTION_ESTABLISH_EMBASSY + "_"
-      + actor_unit['id']).click(function() {
-      var packet = {"pid" : packet_unit_do_action,
-                    "actor_id" : actor_unit['id'],
-                    "target_id": target_city['id'],
-                    "value" : 0,
-                    "name" : "",
-                    "action_type": ACTION_ESTABLISH_EMBASSY};
-      send_request(JSON.stringify(packet));
-
-      $(id).remove();
-    });
-  }
-
-  if (action_prob_possible(
-        action_probabilities[ACTION_SPY_INVESTIGATE_CITY])) {
-    $("#act_sel_" + ACTION_SPY_INVESTIGATE_CITY + "_"
-      + actor_unit['id']).click(function() {
-      var packet = {"pid" : packet_unit_do_action,
-                    "actor_id" : actor_unit['id'],
-                    "target_id": target_city['id'],
-                    "value" : 0,
-                    "name" : "",
-                    "action_type": ACTION_SPY_INVESTIGATE_CITY};
-        send_request(JSON.stringify(packet));
-
-        $(id).remove();
-    });
-  }
-
-  if (action_prob_possible(
-        action_probabilities[ACTION_SPY_SABOTAGE_CITY])) {
-    $("#act_sel_" + ACTION_SPY_SABOTAGE_CITY + "_"
-      + actor_unit['id']).click(function() {
-      var packet = {"pid" : packet_unit_do_action,
-                    "actor_id" : actor_unit['id'],
-                    "target_id": target_city['id'],
-                    "value" : 0,
-                    "name" : "",
-                    "action_type": ACTION_SPY_SABOTAGE_CITY};
-        send_request(JSON.stringify(packet));
-
-        $(id).remove();
-    });
-  }
-
-  if (action_prob_possible(
-        action_probabilities[ACTION_SPY_TARGETED_SABOTAGE_CITY])) {
-    $("#act_sel_" + ACTION_SPY_TARGETED_SABOTAGE_CITY + "_"
-      + actor_unit['id']).click(function() {
-      var packet = {"pid" : packet_unit_action_query,
-                    "diplomat_id" : actor_unit['id'],
-                    "target_id": target_city['id'],
-                    "action_type": ACTION_SPY_TARGETED_SABOTAGE_CITY};
-      send_request(JSON.stringify(packet));
-
-      $(id).remove();
-    });
-  }
-
-  if (action_prob_possible(
-        action_probabilities[ACTION_SPY_STEAL_TECH])) {
-    $("#act_sel_" + ACTION_SPY_STEAL_TECH + "_"
-      + actor_unit['id']).click(function() {
-      var packet = {"pid" : packet_unit_do_action,
-                    "actor_id" : actor_unit['id'],
-                    "target_id": target_city['id'],
-                    "value" : 0,
-                    "name" : "",
-                    "action_type": ACTION_SPY_STEAL_TECH};
-      send_request(JSON.stringify(packet));
-
-      $(id).remove();
-    });
-  }
-
-  if (action_prob_possible(
-        action_probabilities[ACTION_SPY_TARGETED_STEAL_TECH])) {
-    $("#act_sel_" + ACTION_SPY_TARGETED_STEAL_TECH + "_"
-      + actor_unit['id']).click(function() {
-      popup_steal_tech_selection_dialog(actor_unit, target_city,
-                                        action_probabilities);
-
-      $(id).remove();
-    });
-  }
-
-  if (action_prob_possible(
-        action_probabilities[ACTION_SPY_STEAL_GOLD])) {
-    $("#act_sel_" + ACTION_SPY_STEAL_GOLD + "_"
-      + actor_unit['id']).click(function() {
-      var packet = {"pid" : packet_unit_do_action,
-                    "actor_id" : actor_unit['id'],
-                    "target_id": target_city['id'],
-                    "value" : 0,
-                    "name" : "",
-                    "action_type": ACTION_SPY_STEAL_GOLD};
-      send_request(JSON.stringify(packet));
-
-      $(id).remove();
-    });
-  }
-
-  if (action_prob_possible(
-        action_probabilities[ACTION_STEAL_MAPS])) {
-    $("#act_sel_" + ACTION_STEAL_MAPS + "_"
-      + actor_unit['id']).click(function() {
-      var packet = {"pid" : packet_unit_do_action,
-                    "actor_id" : actor_unit['id'],
-                    "target_id": target_city['id'],
-                    "value" : 0,
-                    "name" : "",
-                    "action_type": ACTION_STEAL_MAPS};
-      send_request(JSON.stringify(packet));
-
-      $(id).remove();
-    });
-  }
-
-  if (action_prob_possible(
-        action_probabilities[ACTION_SPY_INCITE_CITY])) {
-    $("#act_sel_" + ACTION_SPY_INCITE_CITY + "_"
-      + actor_unit['id']).click(function() {
-      var packet = {"pid" : packet_unit_action_query,
-                    "diplomat_id" : actor_unit['id'],
-                    "target_id": target_city['id'],
-                    "action_type": ACTION_SPY_INCITE_CITY};
-      send_request(JSON.stringify(packet));
-
-      $(id).remove();
-    });
-  }
-
-  if (action_prob_possible(
-        action_probabilities[ACTION_SPY_POISON])) {
-    $("#act_sel_" + ACTION_SPY_POISON + "_"
-      + actor_unit['id']).click(function() {
-      var packet = {"pid" : packet_unit_do_action,
-                    "actor_id" : actor_unit['id'],
-                    "target_id": target_city['id'],
-                    "value" : 0,
-                    "name" : "",
-                    "action_type": ACTION_SPY_POISON};
-      send_request(JSON.stringify(packet));
-
-      $(id).remove();
-    });
-  }
-
-  if (action_prob_possible(
-        action_probabilities[ACTION_TRADE_ROUTE])) {
-    $("#act_sel_" + ACTION_TRADE_ROUTE + "_"
-      + actor_unit['id']).click(function() {
-      var packet = {"pid" : packet_unit_do_action,
-                    "actor_id" : actor_unit['id'],
-                    "target_id": target_city['id'],
-                    "value" : 0,
-                    "name" : "",
-                    "action_type": ACTION_TRADE_ROUTE};
-      send_request(JSON.stringify(packet));
-
-      $(id).remove();
-    });
-  }
-
-  if (action_prob_possible(
-        action_probabilities[ACTION_MARKETPLACE])) {
-    $("#act_sel_" + ACTION_MARKETPLACE + "_"
-      + actor_unit['id']).click(function() {
-      var packet = {"pid" : packet_unit_do_action,
-                    "actor_id" : actor_unit['id'],
-                    "target_id": target_city['id'],
-                    "value" : 0,
-                    "name" : "",
-                    "action_type": ACTION_MARKETPLACE};
-      send_request(JSON.stringify(packet));
-
-      $(id).remove();
-    });
-  }
-
-  if (action_prob_possible(
-        action_probabilities[ACTION_HELP_WONDER])) {
-    $("#act_sel_" + ACTION_HELP_WONDER + "_"
-      + actor_unit['id']).click(function() {
-      var packet = {"pid" : packet_unit_do_action,
-                    "actor_id" : actor_unit['id'],
-                    "target_id": target_city['id'],
-                    "value" : 0,
-                    "name" : "",
-                    "action_type": ACTION_HELP_WONDER};
-      send_request(JSON.stringify(packet));
-
-      $(id).remove();
-    });
-  }
-
-  if (action_prob_possible(
-        action_probabilities[ACTION_JOIN_CITY])) {
-    $("#act_sel_" + ACTION_JOIN_CITY + "_"
-      + actor_unit['id']).click(function() {
-      var packet = {"pid"         : packet_unit_do_action,
-                    "actor_id"    : actor_unit['id'],
-                    "target_id"   : target_city['id'],
-                    "value"       : 0,
-                    "name"        : "",
-                    "action_type" : ACTION_JOIN_CITY};
-      send_request(JSON.stringify(packet));
-
-      $(id).remove();
-    });
-  }
-
-  if (action_prob_possible(
-        action_probabilities[ACTION_SPY_NUKE])) {
-    $("#act_sel_" + ACTION_SPY_NUKE + "_"
-      + actor_unit['id']).click(function() {
-      var packet = {"pid"         : packet_unit_do_action,
-                    "actor_id"    : actor_unit['id'],
-                    "target_id"   : target_city['id'],
-                    "value"       : 0,
-                    "name"        : "",
-                    "action_type" : ACTION_SPY_NUKE};
-      send_request(JSON.stringify(packet));
-
-      $(id).remove();
-    });
-  }
-
-  if (action_prob_possible(
-        action_probabilities[ACTION_DESTROY_CITY])) {
-    $("#act_sel_" + ACTION_DESTROY_CITY + "_"
-      + actor_unit['id']).click(function() {
-      var packet = {"pid"         : packet_unit_do_action,
-                    "actor_id"    : actor_unit['id'],
-                    "target_id"   : target_city['id'],
-                    "value"       : 0,
-                    "name"        : "",
-                    "action_type" : ACTION_DESTROY_CITY};
-      send_request(JSON.stringify(packet));
-
-      $(id).remove();
-    });
-  }
-
-  if (action_prob_possible(
-        action_probabilities[ACTION_RECYCLE_UNIT])) {
-    $("#act_sel_" + ACTION_RECYCLE_UNIT + "_"
-      + actor_unit['id']).click(function() {
-      var packet = {"pid"         : packet_unit_do_action,
-                    "actor_id"    : actor_unit['id'],
-                    "target_id"   : target_city['id'],
-                    "value"       : 0,
-                    "name"        : "",
-                    "action_type" : ACTION_RECYCLE_UNIT};
-      send_request(JSON.stringify(packet));
-
-      $(id).remove();
-    });
-  }
-
-  if (action_prob_possible(
-        action_probabilities[ACTION_HOME_CITY])) {
-    $("#act_sel_" + ACTION_HOME_CITY + "_"
-      + actor_unit['id']).click(function() {
-      var packet = {"pid"         : packet_unit_do_action,
-                    "actor_id"    : actor_unit['id'],
-                    "target_id"   : target_city['id'],
-                    "value"       : 0,
-                    "name"        : "",
-                    "action_type" : ACTION_HOME_CITY};
-      send_request(JSON.stringify(packet));
-
-      $(id).remove();
-    });
-  }
-
-  if (action_prob_possible(
-        action_probabilities[ACTION_UPGRADE_UNIT])) {
-    $("#act_sel_" + ACTION_UPGRADE_UNIT + "_"
-      + actor_unit['id']).click(function() {
-      var packet = {"pid"         : packet_unit_do_action,
-                    "actor_id"    : actor_unit['id'],
-                    "target_id"   : target_city['id'],
-                    "value"       : 0,
-                    "name"        : "",
-                    "action_type" : ACTION_UPGRADE_UNIT};
-      send_request(JSON.stringify(packet));
-
-      $(id).remove();
-    });
-  }
-
-  if (action_prob_possible(
-        action_probabilities[ACTION_SPY_BRIBE_UNIT])) {
-    $("#act_sel_" + ACTION_SPY_BRIBE_UNIT + "_"
-      + actor_unit['id']).click(function() {
-      var packet = {"pid" : packet_unit_action_query,
-                    "diplomat_id" : actor_unit['id'],
-                    "target_id": target_unit['id'],
-                    "action_type": ACTION_SPY_BRIBE_UNIT};
-      send_request(JSON.stringify(packet));
-
-      $(id).remove();
-    });
-  }
-
-  if (action_prob_possible(
-        action_probabilities[ACTION_SPY_SABOTAGE_UNIT])) {
-    $("#act_sel_" + ACTION_SPY_SABOTAGE_UNIT + "_"
-      + actor_unit['id']).click(function() {
-      var packet = {"pid" : packet_unit_do_action,
-                    "actor_id" : actor_unit['id'],
-                    "target_id": target_unit['id'],
-                    "value" : 0,
-                    "name" : "",
-                    "action_type": ACTION_SPY_SABOTAGE_UNIT};
-      send_request(JSON.stringify(packet));
-
-      $(id).remove();
-    });
-  }
-
-  if (action_prob_possible(
-        action_probabilities[ACTION_EXPEL_UNIT])) {
-    $("#act_sel_" + ACTION_EXPEL_UNIT + "_"
-      + actor_unit['id']).click(function() {
-      var packet = {"pid" : packet_unit_do_action,
-                    "actor_id" : actor_unit['id'],
-                    "target_id": target_unit['id'],
-                    "value" : 0,
-                    "name" : "",
-                    "action_type": ACTION_EXPEL_UNIT};
-      send_request(JSON.stringify(packet));
-
-      $(id).remove();
-    });
-  }
-
-  if (action_prob_possible(
-        action_probabilities[ACTION_CAPTURE_UNITS])) {
-    $("#act_sel_" + ACTION_CAPTURE_UNITS + "_"
-      + actor_unit['id']).click(function() {
-      var packet = {"pid" : packet_unit_do_action,
-                    "actor_id" : actor_unit['id'],
-                    "target_id": target_tile['index'],
-                    "value" : 0,
-                    "name" : "",
-                    "action_type": ACTION_CAPTURE_UNITS};
-      send_request(JSON.stringify(packet));
-
-      $(id).remove();
-    });
-  }
-
-  if (action_prob_possible(
-        action_probabilities[ACTION_FOUND_CITY])) {
-    $("#act_sel_" + ACTION_FOUND_CITY + "_"
-      + actor_unit['id']).click(function() {
-      /* Ask the server to suggest a city name. */
-      var packet = {"pid"     : packet_city_name_suggestion_req,
-                    "unit_id" : actor_unit['id'] };
-      send_request(JSON.stringify(packet));
-
-      $(id).remove();
-    });
-  }
-
-  if (action_prob_possible(
-        action_probabilities[ACTION_NUKE])) {
-    $("#act_sel_" + ACTION_NUKE + "_"
-      + actor_unit['id']).click(function() {
-      var packet = {"pid" : packet_unit_do_action,
-                    "actor_id" : actor_unit['id'],
-                    "target_id": target_tile['index'],
-                    "value" : 0,
-                    "name" : "",
-                    "action_type": ACTION_NUKE};
-      send_request(JSON.stringify(packet));
-
-      $(id).remove();
-    });
-  }
-
-  if (action_prob_possible(
-        action_probabilities[ACTION_BOMBARD])) {
-    $("#act_sel_" + ACTION_BOMBARD + "_"
-      + actor_unit['id']).click(function() {
-      var packet = {"pid" : packet_unit_do_action,
-                    "actor_id" : actor_unit['id'],
-                    "target_id": target_tile['index'],
-                    "value" : 0,
-                    "name" : "",
-                    "action_type": ACTION_BOMBARD};
-      send_request(JSON.stringify(packet));
-
-      $(id).remove();
-    });
-  }
-
-  if (action_prob_possible(
-        action_probabilities[ACTION_ATTACK])) {
-    $("#act_sel_" + ACTION_ATTACK + "_"
-      + actor_unit['id']).click(function() {
-      var packet = {"pid" : packet_unit_do_action,
-                    "actor_id" : actor_unit['id'],
-                    "target_id": target_tile['index'],
-                    "value" : 0,
-                    "name" : "",
-                    "action_type": ACTION_ATTACK};
-      send_request(JSON.stringify(packet));
-
-      $(id).remove();
-    });
-  }
-
-  if (action_prob_possible(
-        action_probabilities[ACTION_DISBAND_UNIT])) {
-    $("#act_sel_" + ACTION_DISBAND_UNIT + "_"
-      + actor_unit['id']).click(function() {
-      var packet = {
-        "pid"         : packet_unit_do_action,
-        "actor_id"    : actor_unit['id'],
-        "target_id"   : actor_unit['id'],
-        "value"       : 0,
-        "name"        : "",
-        "action_type" : ACTION_DISBAND_UNIT
-      };
-      send_request(JSON.stringify(packet));
-
-      $(id).remove();
-    });
-  }
-
-  if (can_actor_unit_move(actor_unit, target_tile)) {
-    $("#act_sel_move" + actor_unit['id']).click(function() {
-      var dir = get_direction_for_step(tiles[actor_unit['tile']],
-                                       target_tile);
-      var packet = {
-        "pid"       : packet_unit_orders,
-        "unit_id"   : actor_unit['id'],
-        "src_tile"  : actor_unit['tile'],
-        "length"    : 1,
-        "repeat"    : false,
-        "vigilant"  : false,
-        "orders"    : [ORDER_MOVE],
-        "dir"       : [dir],
-        "activity"  : [ACTIVITY_LAST],
-        "target"    : [EXTRA_NONE],
-        "action"    : [ACTION_COUNT],
-        "dest_tile" : target_tile['index']
-      };
-
-      if (dir == -1) {
-        /* Non adjacent target tile? */
-        console.log("Action slection move: bad target tile");
-      } else {
-        send_request(JSON.stringify(packet));
-      }
-
-      $(id).remove();
-    });
-  }
 }
 
 /**************************************************************************

@@ -364,18 +364,32 @@ function handle_ruleset_control(packet)
   /* Clear out any effects belonging to the previous ruleset. */
   effects = {};
 
+  /* Clear out the description of the previous ruleset. */
+  ruleset_summary = null;
+  ruleset_description = null;
+
   /* TODO: implement rest*/
 
 }
 
 /**************************************************************************
-  Receive next part of the ruleset description.
+  Ruleset summary.
+**************************************************************************/
+function handle_ruleset_summary(packet)
+{
+  ruleset_summary = packet['text'];
+}
 
-  0% complete
+/**************************************************************************
+  Receive next part of the ruleset description.
 **************************************************************************/
 function handle_ruleset_description_part(packet)
 {
-  /* TODO */
+  if (ruleset_description == null) {
+    ruleset_description = packet['text'];
+  } else {
+    ruleset_description += packet['text'];
+  }
 }
 
 function handle_endgame_report(packet)
@@ -1325,10 +1339,3 @@ function handle_ruleset_goods(packet)
 {
   /* TODO: Implement */
 }
-
-function handle_ruleset_summary(packet)
-{
-  /* TODO: Implement */
-}
-
-

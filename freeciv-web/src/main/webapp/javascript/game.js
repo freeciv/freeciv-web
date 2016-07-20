@@ -21,6 +21,8 @@ var game_info = null;
 var calendar_info = null;
 var game_rules = null;
 var ruleset_control = null;
+var ruleset_summary = null;
+var ruleset_description = null;
 
 var IDENTITY_NUMBER_ZERO = 0;
 

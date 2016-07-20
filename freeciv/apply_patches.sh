@@ -2,6 +2,7 @@
 
 # Freeciv server version upgrade notes
 # ------------------------------------
+# act_tgt_kind is Freeciv patch #7478 (SVN r33282)
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -21,7 +22,6 @@
 #     when the name is url encoded in json protocol.
 #     MAX_LEN_CITYNAME was increased in patch #7305 (SVN r33048)
 #     Giving one of the longer removed city names to a new city still causes problems.
-# act_tgt_kind is Freeciv patch #7478
 
 PATCHLIST="0001-Revert-Added-packet-type-web_city_info_addition-to-b freeciv_web_packets_def_changes city_fixes city_impr_fix2 city-naming-change city_fixes2 metachange text_fixes unithand-change2 current_research_cost freeciv-svn-webclient-changes init_lists_disable goto_fcweb misc_devversion_sync tutorial_ruleset savegame maphand_ch ai_traits_crash server_password barbarian-names activity_null_check add_rulesets message_escape freeciv_segfauls_fix scorelog_filenames disable_global_warming win_chance navajo-remove-long-city-names act_tgt_kind"
 

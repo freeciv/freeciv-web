@@ -1,0 +1,17 @@
+===================
+Web-default Ruleset
+===================
+
+Freeciv-web's fcweb ruleset is trying to stay as close to Freeciv's classic
+ruleset as Freeciv-web can handle. Its rules are therefore familiar to old
+Freeciv players.
+
+A change to Freeciv's classic ruleset can break a strategy a player has
+relied on for a decade. Its development is therefore rather conservative.
+The fcweb rules inherits this stability.
+
+Main differences to Freeciv's Classic Ruleset
+---------------------------------------------
+
+- the map topology is locked to "WRAPX". (Freeciv-web still displays it
+  using an isometric tileset)

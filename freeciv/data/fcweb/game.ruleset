@@ -19,7 +19,7 @@ format_version=10
 [ruledit]
 
 ; Which file to read description in from.
-;description_file = ""
+description_file = "fcweb/README.fcweb"
 
 [about]
 ; Ruleset name
@@ -35,7 +35,7 @@ You are playing with classic Freeciv-web rules.\
 
 ; Detailed description
 ; When updating this, update also desciption_file in [ruledit] section to match
-; description = ""
+description = *fcweb/README.fcweb*
 
 [options]
 global_init_techs=""

@@ -516,6 +516,14 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
   padding-bottom: 15px;
 }
 
+.act_sel_dialog .ui-dialog-content {
+  text-align: center;
+}
+
+.act_sel_dialog .ui-dialog-buttonpane {
+  text-align: center;
+}
+
 .act_sel_button {
   width: 250px;
   margin-bottom: auto !important;

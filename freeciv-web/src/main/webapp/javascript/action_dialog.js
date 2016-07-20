@@ -368,6 +368,7 @@ function popup_action_selection(actor_unit, action_probabilities,
   $(id).dialog({
       bgiframe: true,
       modal: true,
+      dialogClass: "act_sel_dialog",
       width: "350",
       buttons: buttons });
 

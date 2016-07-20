@@ -110,8 +110,11 @@ function generate_help_menu(key)
       $("<li data-helptag='" + key + "_" + tech['id'] + "'>"
           + tech['name'] + "</li>").appendTo("#help_technology_ul");
     }
+  } else if (key == "help_gen_ruleset") {
+    $("<li id='" + key +  "' data-helptag='" + key +  "'>"
+       + "About Current Ruleset" + "</li>").appendTo(
+          find_parent_help_key(key));
   }
-
 }
 
 /**************************************************************************
@@ -241,6 +244,14 @@ function generate_help_text(key)
 	    + get_advances_text(tech['id']);
     msg += "<br><br><button class='help_button' onclick=\"show_wikipedia_dialog('" + tech['name'] + "');\">Wikipedia on "
 	    + tech['name'] +  "</button>";
+  } else if (key == "help_gen_ruleset") {
+    msg = "<h1>" + ruleset_control['name'] + "</h1>";
+    if (ruleset_summary != null) {
+      msg += "<p>" + ruleset_summary.replace(/\n/g, "<br>") + "</p>";
+    }
+    if (ruleset_description != null) {
+      msg += "<p>" + ruleset_description.replace(/\n/g, "<br>") + "</p>";
+    }
   }
 
   $("#help_info_page").html(msg);

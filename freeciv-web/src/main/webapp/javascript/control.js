@@ -1350,6 +1350,10 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift, the_event)
 
     case 27:
       deactivate_goto();
+
+      /* Abort started multiple unit selection. */
+      map_select_active = false;
+      map_select_check = false;
       break;
 
     case 32: // space, will clear selection and goto.

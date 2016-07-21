@@ -87,8 +87,11 @@ var ACTION_ATTACK = 29;
 var ACTION_COUNT = 30;
 
 /* The action_decision enum */
+/* Doesn't need the player to decide what action to take. */
 var ACT_DEC_NOTHING = 0;
+/* Wants a decision because of something done to the actor. */
 var ACT_DEC_PASSIVE = 1;
+/* Wants a decision because of something the actor did. */
 var ACT_DEC_ACTIVE = 2;
 
 /* The kind of universals_u (value_union_type was req_source_type).

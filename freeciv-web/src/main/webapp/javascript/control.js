@@ -1848,7 +1848,16 @@ function key_unit_action_select()
   var funits = get_units_in_focus();
   for (var i = 0; i < funits.length; i++) {
     var punit = funits[i];
-    process_diplomat_arrival(punit, punit['tile']);
+    var packet = {
+      "pid"     : packet_unit_sscs_set,
+      "unit_id" : punit['id'],
+      "type"    : USSDT_QUEUE,
+      "value"   : punit['tile']
+    };
+
+    /* Have the server record that an action decision is wanted for this
+     * unit. */
+    send_request(JSON.stringify(packet));
   }
 }
 

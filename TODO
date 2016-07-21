@@ -87,8 +87,15 @@ Unimplemented Freeciv client features:
 - global work lists
 - advanced unit selection
 - rearranging items in the city production worklist
-  - see also point near the top
-  - server side support added. Needs UI work. Maybe allow rearranging items by drag and drop?
+  - see also item near the top
+  - Needs UI work. Maybe allow rearranging items by drag and drop?
+  - Implementation hints:
+    - A worklist is an array of universals.
+    - A universal has two fields: kind and value.
+    - Sending the packet PACKET_CITY_WORKLIST(city_id, worklist) to the
+      server replaces the city's current worklist with the sent worklist.
+    - A client can therefore take a city's worklist and rearrange the order
+      of its items (or perform other changes to it) before sending back.
 - the cities tab
 - the auto generated part of the help texts
   - the code is big (it also refers to other Freeciv C code)

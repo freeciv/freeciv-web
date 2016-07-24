@@ -154,7 +154,9 @@ function handle_nation_table_select( ui )
   } else {
     $('#meet_player_button').button("disable");
   }
-  if (!is_hotseat() && !pplayer['flags'].isSet(PLRF_AI)) {
+  if (!is_hotseat()
+      && !pplayer['flags'].isSet(PLRF_AI)
+      && (diplstates[player_id] != null && diplstates[player_id] == DS_NO_CONTACT)) {
     $('#meet_player_button').button("disable");
   }
 

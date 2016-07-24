@@ -61,8 +61,8 @@ cd tomcat8/bin
 
 
 echo "==== Fetching/Installing Tornado Web Server ===="
-wget --quiet ${tornado_url}
-tar xfz tornado-4.4.1.tar.gz
+wget ${tornado_url}
+tar xfz v4.4.1.tar.gz
 cd tornado-4.4.1
 python3.5 setup.py install
 

@@ -71,7 +71,7 @@ apt-get -y install ${dependencies}
 echo "==== Fetching/Installing Tornado Web Server ===="
 cd /tmp
 wget ${tornado_url}
-tar xvfz tornado-4.4.1.tar.gz
+tar xvfz v4.4.1.tar.gz
 cd tornado-4.4.1
 python3.5 setup.py install
 

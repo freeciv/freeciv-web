@@ -372,6 +372,8 @@ function show_dialog_message(title, message) {
 
   $("#dialog").dialog('open');
   $("#game_text_input").blur();
+  //quick fix to put the dialog on top of everything else.
+  setTimeout("$('#dialog').parent().css('z-index', 2000)", 50);
 
 }
 

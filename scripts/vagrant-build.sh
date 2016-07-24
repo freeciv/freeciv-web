@@ -44,7 +44,7 @@ echo logfile $logfile
 mysql_user="root"
 mysql_pass="vagrant"
 
-tornado_url="https://pypi.python.org/packages/source/t/tornado/tornado-4.4.1.tar.gz"
+tornado_url="https://github.com/tornadoweb/tornado/archive/v4.4.1.tar.gz"
 casperjs_url="https://github.com/casperjs/casperjs/zipball/1.1.2"
 
 # Based on fresh install of Ubuntu 16.04

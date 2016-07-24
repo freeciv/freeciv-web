@@ -28,7 +28,7 @@ echo logfile $logfile
 # User will need permissions to create a database
 mysql_user="root"
 
-tornado_url="https://pypi.python.org/packages/source/t/tornado/tornado-4.4.1.tar.gz"
+tornado_url="https://github.com/tornadoweb/tornado/archive/v4.4.1.tar.gz"
 nginx_url="http://nginx.org/download/nginx-1.9.11.tar.gz"
 casperjs_url="https://github.com/casperjs/casperjs/zipball/1.1.2"
 tomcat_url="https://bitbucket.org/andreasrosdal/fcweb/downloads/apache-tomcat-8.0.33.tar.gz"

@@ -44,7 +44,7 @@ echo logfile $logfile
 mysql_user="root"
 mysql_pass="vagrant"
 
-tornado_url="https://pypi.python.org/packages/source/t/tornado/tornado-4.3.tar.gz"
+tornado_url="https://pypi.python.org/packages/source/t/tornado/tornado-4.4.1.tar.gz"
 casperjs_url="https://github.com/casperjs/casperjs/zipball/1.1.2"
 
 # Based on fresh install of Ubuntu 16.04
@@ -71,8 +71,8 @@ apt-get -y install ${dependencies}
 echo "==== Fetching/Installing Tornado Web Server ===="
 cd /tmp
 wget ${tornado_url}
-tar xvfz tornado-4.3.tar.gz
-cd tornado-4.3
+tar xvfz tornado-4.4.1.tar.gz
+cd tornado-4.4.1
 python3.5 setup.py install
 
 pip3 install wikipedia

@@ -489,7 +489,7 @@ uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
 flags         = "Settlers", "Infra", "Cant_Fortify", "NonMil", "HasNoZOC",
-                "Airbase", "Expellable", "MediumWeight"
+                "Airbase", "Expellable", "LightWeight"
 ; No veteran levels (level name is never displayed)
 veteran_names = _("green")
 veteran_raise_chance = 0
@@ -552,7 +552,7 @@ uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
 flags         = "Settlers", "Infra", "Cant_Fortify", "NonMil", "HasNoZOC",
-                "Transform", "Airbase", "Expellable", "LightWeight"
+                "Transform", "Airbase", "Expellable", "MediumWeight"
 ; No veteran levels (level name is never displayed)
 veteran_names = _("green")
 veteran_raise_chance = 0
@@ -1919,7 +1919,7 @@ uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
 flags         = "FieldUnit", "OneAttack", "AirAttacker", "HasNoZOC",
-                  "MediumWeight"
+                "MediumWeight"
 roles         = ""
 helptext      = _("\
 The Cruise Missile is a long-distance missile\
@@ -1955,7 +1955,7 @@ uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
 flags         = "FieldUnit", "OneAttack", "Nuclear", "HasNoZOC",
-                  "MediumWeight"
+                "MediumWeight"
 ; No veteran levels (level name is never displayed)
 veteran_names = _("green")
 veteran_raise_chance = 0
@@ -2015,7 +2015,7 @@ uk_shield     = 0
 uk_food       = 0
 uk_gold       = 0
 flags         = "Diplomat", "IgZOC", "NonMil", "HasNoZOC", "Expellable",
-                  "LightWeight"
+                "LightWeight"
 veteran_names =
 ; /* TRANS: diplomatic rank. */
 ; /* TRANS: Unless translated, the last character in "attache" should be */
@@ -2281,7 +2281,7 @@ uk_shield     = 0
 uk_food       = 0
 uk_gold       = 0
 flags         = "IgTer", "IgZOC", "NonMil", "HasNoZOC", "Expellable",
-                  "LightWeight"
+                "LightWeight"
 roles         = "Explorer", "ExplorerStartUnit"
 helptext      = _("\
 Explorers are brave individuals that are very useful for\

@@ -776,6 +776,14 @@ reqs	=
       "Building", "Airport", "City"
     }
 
+[effect_airlift_basic]
+type    = "Airlift"
+value   = 1
+reqs    =
+    { "type", "name",   "range"
+      "Tech", "Flight", "Player"
+    }
+
 ; Base max city size of 8
 [effect_aqueduct_size]
 type    = "Size_Adj"

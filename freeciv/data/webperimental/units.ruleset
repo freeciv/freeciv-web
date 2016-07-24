@@ -29,6 +29,9 @@ flags =
   { "name", "helptxt"
     _("BorderPolice"), _("Can peacefully expel certain foreign units.")
     _("Expellable"), _("Can be peacefully expelled from foreign tiles.")
+    _("LightWeight"), _("Airliftable once you learn Flight.")
+    _("MediumWeight"), _("Airliftable from Airport after you learn Advanced Flight.")
+    _("HeavyWeight"), _("Airliftable from Airport after you learn Fusion Power.")
     _("Airbase")
     _("Transform")
     _("AirAttacker"), _("Very bad at attacking AEGIS.")
@@ -50,10 +53,9 @@ flags =
 ;                 and sensible.
 ; helptxt       = displayed in the help for unit types belonging to a class
 ;                 with this flag (optional)
-class_flags =
-  { "name", "helptxt"
-    _("Airliftable"), _("Can be airlifted from a suitable city.")
-  }
+;class_flags =
+;  { "name", "helptxt"
+;  }
 
 [veteran_system]
 ; What are the names of the levels?
@@ -155,7 +157,7 @@ min_speed     = 1
 hp_loss_pct   = 0
 flags         = "TerrainSpeed", "DamageSlows", "CanOccupyCity", "BuildAnywhere",
                 "CollectRansom", "CanFortify", "CanPillage",
-                "TerrainDefense", "KillCitizen", "Airliftable"
+                "TerrainDefense", "KillCitizen"
 
 [unitclass_sea]
 ; /* TRANS: Unit class: used adjectivally */
@@ -441,7 +443,7 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 0
 flags         = "Settlers", "Infra", "Cant_Fortify", "NonMil", "HasNoZOC",
-                "AddToCity", "Cities", "Expellable"
+                "AddToCity", "Cities", "Expellable", "LightWeight"
 ; No veteran levels (level name is never displayed)
 veteran_names = _("green")
 veteran_raise_chance = 0
@@ -487,7 +489,7 @@ uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
 flags         = "Settlers", "Infra", "Cant_Fortify", "NonMil", "HasNoZOC",
-                "Airbase", "Expellable"
+                "Airbase", "Expellable", "MediumWeight"
 ; No veteran levels (level name is never displayed)
 veteran_names = _("green")
 veteran_raise_chance = 0
@@ -550,7 +552,7 @@ uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
 flags         = "Settlers", "Infra", "Cant_Fortify", "NonMil", "HasNoZOC",
-                "Transform", "Airbase", "Expellable"
+                "Transform", "Airbase", "Expellable", "LightWeight"
 ; No veteran levels (level name is never displayed)
 veteran_names = _("green")
 veteran_raise_chance = 0
@@ -600,7 +602,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "BorderPolice"
+flags         = "BorderPolice", "LightWeight"
 roles         = "DefendOk", "DefendOkStartUnit", "FirstBuild"
 helptext      = _("\
 This unit may be built from the start of the game.  It is the\
@@ -632,7 +634,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "BorderPolice"
+flags         = "BorderPolice", "LightWeight"
 roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild"
 helptext      = _("\
 The Phalanx is armored infantry, suitable for defending your cities.\
@@ -663,7 +665,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "BorderPolice"
+flags         = "BorderPolice", "LightWeight"
 roles         = "DefendOk", "DefendOkStartUnit"
 helptext      = _("\
 Archers fight with bows and arrows and have a good offensive\
@@ -695,7 +697,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "BorderPolice"
+flags         = "BorderPolice", "LightWeight"
 roles         = "DefendOk", "DefendOkStartUnit", "Hut", "BarbarianBuild", "BarbarianSea"
 helptext      = _("\
 Legions are heavily armed and well disciplined infantry\
@@ -731,7 +733,7 @@ bonuses       =
    { "flag", "type", "value"
      "Horse", "DefenseMultiplier", 1
    }
-flags         = "BorderPolice"
+flags         = "BorderPolice", "LightWeight"
 roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild"
 helptext      = _("\
 Equipped with long pikes, Pikemen replaces Phalanx\
@@ -763,7 +765,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "BorderPolice"
+flags         = "BorderPolice", "LightWeight"
 roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild", "HutTech",
                 "BarbarianTech", "BarbarianBuildTech", "BarbarianSeaTech"
 helptext      = _("\
@@ -797,7 +799,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "IgTer", "IgZOC", "BorderPolice"
+flags         = "IgTer", "IgZOC", "BorderPolice", "LightWeight"
 roles         = "DefendGood", "DefendGoodStartUnit", "Partisan", "BarbarianTech"
 helptext      = _("\
 Partisans are guerilla fighters who are experts\
@@ -837,7 +839,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "IgTer", "BorderPolice"
+flags         = "IgTer", "BorderPolice", "LightWeight"
 roles         = "DefendGood", "DefendGoodStartUnit"
 helptext      = _("\
 Alpine Troops are highly mobile units as well as\
@@ -869,7 +871,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "BorderPolice"
+flags         = "BorderPolice", "LightWeight"
 roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild"
 helptext      = _("\
 Riflemen are World War-era infantry, very good\
@@ -901,7 +903,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "Marines", "BorderPolice"
+flags         = "Marines", "BorderPolice", "LightWeight"
 roles         = "DefendOk", "DefendOkStartUnit", "BarbarianSeaTech"
 helptext      = _("\
 Marines are infantry who are experts at marine warfare.\
@@ -932,7 +934,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "Paratroopers", "BorderPolice"
+flags         = "Paratroopers", "BorderPolice", "LightWeight"
 roles         = "DefendOk", "DefendOkStartUnit"
 helptext      = _("\
 Paratroopers are experts at airborne attacks. \
@@ -971,7 +973,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = ""
+flags         = "MediumWeight"
 roles         = "DefendGood", "DefendGoodStartUnit"
 helptext      = _("\
 The Mechanized Infantry has the strongest defensive strength\
@@ -1004,7 +1006,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "Horse"
+flags         = "Horse", "MediumWeight"
 roles         = "AttackFastStartUnit", "Hut", "Barbarian", "Hunter"
 helptext      = _("\
 Horsemen are mounted warriors and an early\
@@ -1037,7 +1039,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "Horse"
+flags         = "Horse", "MediumWeight"
 roles         = "AttackFastStartUnit", "Hut", "Hunter"
 helptext      = _("\
 Chariots are horse-pulled war wagons, stronger\
@@ -1069,7 +1071,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "Horse"
+flags         = "Horse", "MediumWeight"
 roles         = "AttackFastStartUnit", "HutTech", "BarbarianTech",
                 "BarbarianBuildTech", "BarbarianSeaTech", "Hunter"
 helptext      = _("\
@@ -1101,7 +1103,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "Horse"
+flags         = "Horse", "MediumWeight"
 roles         = "AttackFastStartUnit", "BarbarianBuildTech", "BarbarianSeaTech",
                 "Hunter"
 helptext      = _("\
@@ -1133,7 +1135,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = ""
+flags         = "MediumWeight"
 roles         = "AttackFastStartUnit", "Hunter"
 helptext      = _("\
 Cavalry are mounted and highly trained soldiers.\
@@ -1164,7 +1166,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = ""
+flags         = "MediumWeight"
 roles         = "AttackFastStartUnit", "Hunter"
 helptext      = _("\
 Armors are motorized war wagons that are faster,\
@@ -1197,7 +1199,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = ""
+flags         = "MediumWeight"
 roles         = "AttackStrongStartUnit"
 helptext      = _("\
 Catapults are large rock-throwing machines of war.\
@@ -1230,7 +1232,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = ""
+flags         = "MediumWeight"
 roles         = "AttackStrongStartUnit", "BarbarianTech", "BarbarianBuildTech"
 helptext      = _("\
 Cannons are large firearms that can fire heavy\
@@ -1264,7 +1266,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = ""
+flags         = "MediumWeight"
 roles         = "AttackStrongStartUnit"
 helptext      = _("\
 The artillery is an upgraded cannon. It is a very\
@@ -1297,7 +1299,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = ""
+flags         = "MediumWeight"
 roles         = "AttackStrongStartUnit"
 helptext      = _("\
 Howitzers are upgraded artillery with improved\
@@ -1336,7 +1338,7 @@ bonuses       =
      "Helicopter", "DefenseDivider", 1
      "Helicopter", "Firepower1", 1
    }
-flags         = "AirAttacker"
+flags         = "AirAttacker", "MediumWeight"
 roles         = ""
 helptext      = _("\
 Fighters are your first airborne units. They can\
@@ -1368,7 +1370,8 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "FieldUnit", "OneAttack", "AirAttacker", "HasNoZOC"
+flags         = "FieldUnit", "OneAttack", "AirAttacker", "HasNoZOC",
+                  "MediumWeight"
 roles         = ""
 helptext      = _("\
 Bombers are specialized airborne units that may\
@@ -1402,7 +1405,8 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "FieldUnit", "OneAttack", "Helicopter", "AirAttacker"
+flags         = "FieldUnit", "OneAttack", "Helicopter", "AirAttacker",
+                  "MediumWeight"
 roles         = ""
 helptext      = _("\
 The Helicopter is a very powerful unit, as it can both fly and\
@@ -1443,7 +1447,7 @@ bonuses       =
      "Helicopter", "DefenseDivider", 1
      "Helicopter", "Firepower1", 1
    }
-flags         = "Partial_Invis", "AirAttacker"
+flags         = "Partial_Invis", "AirAttacker", "MediumWeight"
 roles         = ""
 helptext      = _("\
 An improved Fighter, with improved attack and a higher movement\
@@ -1476,7 +1480,7 @@ uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
 flags         = "Partial_Invis", "FieldUnit", "OneAttack", "AirAttacker",
-                "HasNoZOC"
+                "HasNoZOC", "MediumWeight"
 roles         = ""
 helptext      = _("\
 An improved Bomber, with improved attack and a higher movement\
@@ -1510,7 +1514,7 @@ uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
 cargo         = "Land"
-flags         = "BadCityDefender"
+flags         = "BadCityDefender", "MediumWeight"
 roles         = "Ferryboat", "FerryStartUnit"
 helptext      = _("\
 The Trireme is your first boat unit. It can act\
@@ -1544,7 +1548,7 @@ uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
 cargo         = "Land"
-flags         = "BadCityDefender"
+flags         = "BadCityDefender", "HeavyWeight"
 roles         = "Ferryboat", "FerryStartUnit", "BarbarianBoat"
 helptext      = _("\
 The Caravel replaces the Trireme and can enter\
@@ -1577,7 +1581,7 @@ uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
 cargo         = "Land"
-flags         = "BadCityDefender"
+flags         = "BadCityDefender", "HeavyWeight"
 roles         = "Ferryboat", "FerryStartUnit", "BarbarianBoat"
 helptext      = _("\
 The Galleon is a pure transport ship and cannot\
@@ -1611,7 +1615,7 @@ uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
 cargo         = "Land"
-flags         = "BadCityDefender"
+flags         = "BadCityDefender", "HeavyWeight"
 roles         = "Hunter"
 helptext      = _("\
 The Frigate is a highly versatile boat unit,\
@@ -1644,7 +1648,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "BadCityDefender"
+flags         = "BadCityDefender", "HeavyWeight"
 roles         = "Hunter"
 helptext      = _("\
 The Ironclad is an armored ship that is\
@@ -1677,7 +1681,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "BadCityDefender"
+flags         = "BadCityDefender", "HeavyWeight"
 roles         = "Hunter"
 helptext      = _("\
 An improved Ironclad, with better move rate and vision.\
@@ -1711,7 +1715,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "BadCityDefender"
+flags         = "BadCityDefender", "HeavyWeight"
 roles         = "DefendGood", "DefendGoodStartUnit"
 helptext      = _("\
 The Cruiser is a strong offensive boat unit.\
@@ -1746,7 +1750,7 @@ bonuses       =
    { "flag", "type", "value"
      "AirAttacker", "DefenseMultiplier", 4
    }
-flags         = "BadCityDefender"
+flags         = "BadCityDefender", "HeavyWeight"
 roles         = "DefendGood", "DefendGoodStartUnit"
 helptext      = _("\
 The AEGIS Cruiser is equipped with an advanced\
@@ -1778,7 +1782,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "BadCityDefender"
+flags         = "BadCityDefender", "HeavyWeight"
 roles         = ""
 helptext      = _("\
 The Battleship is the supreme naval unit with\
@@ -1812,7 +1816,7 @@ uk_food       = 0
 uk_gold       = 0
 cargo         = "Missile"
 flags         = "Partial_Invis", "BadCityDefender",
-	        "Only_Native_Attack"
+	        "Only_Native_Attack", "HeavyWeight"
 roles         = "Hunter"
 helptext      = _("\
 Traveling under the surface of the ocean, Submarines have\
@@ -1846,7 +1850,7 @@ uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
 cargo         = "Air", "Missile", "Helicopter"
-flags         = "BadCityDefender", "Only_Native_Attack"
+flags         = "BadCityDefender", "Only_Native_Attack", "HeavyWeight"
 roles         = ""
 helptext      = _("\
 The Carrier is a mobile airport.\
@@ -1882,7 +1886,7 @@ uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
 cargo         = "Land"
-flags         = "BadCityDefender"
+flags         = "BadCityDefender", "HeavyWeight"
 roles         = "Ferryboat", "FerryStartUnit"
 helptext      = _("\
 The Transport cannot attack on its own but\
@@ -1914,7 +1918,8 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "FieldUnit", "OneAttack", "AirAttacker", "HasNoZOC"
+flags         = "FieldUnit", "OneAttack", "AirAttacker", "HasNoZOC",
+                  "MediumWeight"
 roles         = ""
 helptext      = _("\
 The Cruise Missile is a long-distance missile\
@@ -1949,7 +1954,8 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "FieldUnit", "OneAttack", "Nuclear", "HasNoZOC"
+flags         = "FieldUnit", "OneAttack", "Nuclear", "HasNoZOC",
+                  "MediumWeight"
 ; No veteran levels (level name is never displayed)
 veteran_names = _("green")
 veteran_raise_chance = 0
@@ -2008,7 +2014,8 @@ uk_happy      = 0
 uk_shield     = 0
 uk_food       = 0
 uk_gold       = 0
-flags         = "Diplomat", "IgZOC", "NonMil", "HasNoZOC", "Expellable"
+flags         = "Diplomat", "IgZOC", "NonMil", "HasNoZOC", "Expellable",
+                  "LightWeight"
 veteran_names =
 ; /* TRANS: diplomatic rank. */
 ; /* TRANS: Unless translated, the last character in "attache" should be */
@@ -2119,7 +2126,7 @@ uk_shield     = 0
 uk_food       = 0
 uk_gold       = 0
 flags         = "Diplomat", "IgZOC", "NonMil", "HasNoZOC", "Spy",
-                "Expellable"
+                "Expellable", "LightWeight"
 veteran_names =
 ; /* TRANS: Spy veteran level */
   _("?spy_level:informant"),
@@ -2189,7 +2196,7 @@ uk_shield     = 0
 uk_food       = 0
 uk_gold       = 0
 flags         = "TradeRoute", "HelpWonder", "IgZOC", "NonMil", "HasNoZOC",
-                "Expellable"
+                "Expellable", "MediumWeight"
 roles         = ""
 helptext      = _("\
 A Caravan carries goods or material for trading with distant cities\
@@ -2242,7 +2249,7 @@ uk_shield     = 0
 uk_food       = 0
 uk_gold       = 0
 flags         = "TradeRoute", "HelpWonder", "IgZOC", "NonMil", "HasNoZOC",
-                "Expellable"
+                "Expellable", "MediumWeight"
 roles         = ""
 helptext      = _("\
 The Freight unit replaces the Caravan, and moves at twice the speed.\
@@ -2273,7 +2280,8 @@ uk_happy      = 0
 uk_shield     = 0
 uk_food       = 0
 uk_gold       = 0
-flags         = "IgTer", "IgZOC", "NonMil", "HasNoZOC", "Expellable"
+flags         = "IgTer", "IgZOC", "NonMil", "HasNoZOC", "Expellable",
+                  "LightWeight"
 roles         = "Explorer", "ExplorerStartUnit"
 helptext      = _("\
 Explorers are brave individuals that are very useful for\
@@ -2306,7 +2314,7 @@ uk_shield     = 0
 uk_food       = 0
 uk_gold       = 0
 flags         = "IgZOC", "NonMil", "HasNoZOC", "NoBuild", "NoHome", "SuperSpy", 
-                "Undisbandable", "Unbribable", "GameLoss", "Unique"
+                "Undisbandable", "Unbribable", "GameLoss", "Unique", "LightWeight"
 ; No veteran levels (level name is never displayed)
 veteran_names = _("green")
 veteran_raise_chance = 0
@@ -2344,7 +2352,8 @@ uk_shield     = 0
 uk_food       = 0
 uk_gold       = 0
 flags         = "IgZOC", "NonMil", "HasNoZOC", "Unbribable",
-                "Undisbandable", "SuperSpy", "NoHome", "NoBuild"
+                "Undisbandable", "SuperSpy", "NoHome", "NoBuild",
+                "LightWeight"
 ; No veteran levels (level name is never displayed)
 veteran_names = _("green")
 veteran_raise_chance = 0
@@ -2385,7 +2394,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 0
-flags         = "HasNoZOC"
+flags         = "HasNoZOC", "MediumWeight"
 roles         = ""
 helptext      = _("\
 The AWACS (Airborne Warning and Control System) is an airplane with an \

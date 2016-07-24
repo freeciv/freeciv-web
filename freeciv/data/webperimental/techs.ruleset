@@ -97,6 +97,7 @@ req2     = "Machine Tools"
 flags    = ""
 graphic     = "a.advanced_flight"
 graphic_alt = "-"
+helptext = _("Enables airlift of medium weight units.")
 
 [advance_alphabet]
 name     = _("Alphabet")
@@ -333,7 +334,8 @@ req2     = "Theory of Gravity"
 flags    = "Build_Airborne"
 graphic     = "a.flight"
 graphic_alt = "-"
-helptext = _("Decreases one-time revenue from new trade routes.")
+helptext = _("Decreases one-time revenue from new trade routes."),
+           _("Enables airlift of light weight units.")
 
 [advance_fusion_power]
 name     = _("Fusion Power")
@@ -342,6 +344,7 @@ req2     = "Superconductors"
 flags    = ""
 graphic     = "a.fusion_power"
 graphic_alt = "-"
+helptext = _("Enables airlift of heavy weight units.")
 
 [advance_genetic_engineering]
 name     = _("Genetic Engineering")

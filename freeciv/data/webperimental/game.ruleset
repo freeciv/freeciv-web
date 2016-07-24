@@ -56,6 +56,14 @@ before contact.\n\
 - The Leader unit can destroy a domestic city. (Be careful when you scorch \
 the earth. If your Leader dies you lose he game.)\n\
 - Labels the year using AD/BC.\n\
+- All units can be airlifted:\n\
+  - Light weight units can be airlifted once Flight is known.\n\
+  - Medium weight units can be airlifted once Advanced Flight is known.\n\
+  - Heavy weight units can be airlifted once Fusion Power is known.\n\
+  - To airlift heavy and medium weight units an airport is required both \
+in the source and in the destination city.\n\
+- Cities that know Flight can airlift one (light weight) unit per turn. An \
+Airport allows a city to airlift one more unit per turn.\n\
 \n\
 This ruleset is still in development. If playing it makes you think that \
 a rule should change go to the Freeciv-web board at \
@@ -718,13 +726,43 @@ actor_reqs    =
       "DiplRel", "Is foreign", "Local", FALSE
     }
 
-[actionenabler_airlift_unit]
+[actionenabler_airlift_light_unit]
 action = "Airlift Unit"
 actor_reqs    =
     { "type",          "name",         "range", "present"
-      "UnitClassFlag", "Airliftable",  "Local", TRUE
+      "UnitFlag",      "LightWeight",  "Local", TRUE
       "UnitState",     "Transporting", "Local", FALSE
       "MinMoveFrags",  "1",            "Local", TRUE
+    }
+
+[actionenabler_airlift_medium_unit]
+action = "Airlift Unit"
+actor_reqs    =
+    { "type",          "name",            "range",  "present"
+      "UnitFlag",      "MediumWeight",    "Local",  TRUE
+      "UnitState",     "Transporting",    "Local",  FALSE
+      "Tech",          "Advanced Flight", "Player", TRUE
+      "Building",      "Airport",         "City",   TRUE
+      "MinMoveFrags",  "1",               "Local",  TRUE
+    }
+target_reqs    =
+    { "type",     "name",    "range"
+      "Building", "Airport", "City"
+    }
+
+[actionenabler_airlift_heavy_unit]
+action = "Airlift Unit"
+actor_reqs    =
+    { "type",          "name",         "range",  "present"
+      "UnitFlag",      "HeavyWeight",  "Local",  TRUE
+      "UnitState",     "Transporting", "Local",  FALSE
+      "Tech",          "Fusion Power", "Player", TRUE
+      "Building",      "Airport",      "City",   TRUE
+      "MinMoveFrags",  "1",            "Local",  TRUE
+    }
+target_reqs    =
+    { "type",     "name",    "range"
+      "Building", "Airport", "City"
     }
 
 [borders]

@@ -82,10 +82,14 @@ Allows a city to produce veteran air units (including helicopters). \
  Also, damaged air units (again, including helicopters) which stay in\
  town for one full turn without moving are completely restored.\
 "), _("\
-Two cities with Airports can airlift one unit per turn. \
- Airlifting instantly transports the unit from one city to another\
- and will use all of the unit's movement points.  A unit must have\
- some movement points left to be airlifted.\
+A city with an Airport can airlift an extra unit per turn. Airlifting \
+ instantly transports the unit from one city\
+ to another and will use all of the unit's movement points. A unit\
+ must have some movement points left to be airlifted, and cannot\
+ carry cargo.\
+"), _("\
+Two cities with Airports can airlift medium and heavy weight units once\
+ Advanced Flight and Fusion Power are discovered.\
 ")
 
 [building_aqueduct]

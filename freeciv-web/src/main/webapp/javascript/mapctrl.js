@@ -47,8 +47,8 @@ function mapview_mouse_click(e)
   if (rightclick) {
     /* right click to recenter. */
     if (!map_select_active || !map_select_setting_enabled) {
-      recenter_button_pressed(mouse_x, mouse_y);
       context_menu_active = true;
+      recenter_button_pressed(mouse_x, mouse_y);
     } else {
       context_menu_active = false;
       map_select_units(mouse_x, mouse_y);
@@ -56,6 +56,10 @@ function mapview_mouse_click(e)
     map_select_active = false;
     map_select_check = false;
 
+    /* The context menu can be triggered without right mouse button down.
+     * Make it able to pop up again. */
+    context_menu_active = true;
+    $("#canvas").contextMenu(true);
   } else if (!rightclick && !middleclick) {
     /* Left mouse button*/
     action_button_pressed(mouse_x, mouse_y, SELECT_POPUP);
@@ -94,8 +98,10 @@ function mapview_mouse_down(e)
     map_select_y = mouse_y;
     map_select_check_started = new Date().getTime();
 
+    /* The context menu blocks the right click mouse up event on some
+     * browsers. */
+    context_menu_active = false;
   }
-
 }
 
 /****************************************************************************
@@ -310,6 +316,7 @@ function recenter_button_pressed(canvas_x, canvas_y)
       /* the user right-clicked on own unit, show context menu instead of recenter. */
       if (current_focus.length <= 1) set_unit_focus(sunit);
       $("#canvas").contextMenu(true);
+      $("#canvas").contextmenu();
     } else {
       $("#canvas").contextMenu(false);
       /* FIXME: Some actions here will need to check can_client_issue_orders.

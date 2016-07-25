@@ -1,0 +1,44 @@
+From 8ae020b7e45eeeaf8875fd73c9993572680daf7a Mon Sep 17 00:00:00 2001
+From: Sveinung Kvilhaugsvik <sveinung84@users.sourceforge.net>
+Date: Mon, 25 Jul 2016 08:01:02 +0200
+Subject: [PATCH] Act sel dlg: pop up on long move to target city.
+
+A Caravan that is airlifted to a city where it can establish a trade route
+should pop up an action selection dialog when the popup_actor_arrival client
+setting is enabled.
+
+Reported by Frank <dunnoob>
+
+See bug #24876
+---
+ server/unittools.c | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+
+diff --git a/server/unittools.c b/server/unittools.c
+index 90d6997..e231ee2 100644
+--- a/server/unittools.c
++++ b/server/unittools.c
+@@ -3512,6 +3512,20 @@ bool unit_move(struct unit *punit, struct tile *pdesttile, int move_cost,
+   punit->action_decision_tile = NULL;
+   punit->action_decision_want = ACT_DEC_NOTHING;
+ 
++  if (!adj
++      && action_tgt_city(punit, pdesttile, FALSE)) {
++    /* The unit can perform an action to the city at the destination tile.
++     * A long distance move (like an airlift) doesn't ask what action to
++     * perform before moving. Ask now. */
++
++    punit->action_decision_want = ACT_DEC_PASSIVE;
++    punit->action_decision_tile = pdesttile;
++
++    /* Let the client know that this unit wants the player to decide
++     * what to do. */
++    send_unit_info(player_reply_dest(pplayer), punit);
++  }
++
+   /* Claim ownership of fortress? */
+   bowner = extra_owner(pdesttile);
+   if ((bowner == NULL || pplayers_at_war(bowner, pplayer))
+-- 
+2.1.4
+

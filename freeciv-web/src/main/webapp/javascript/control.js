@@ -1354,6 +1354,10 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift, the_event)
       /* Abort started multiple unit selection. */
       map_select_active = false;
       map_select_check = false;
+
+      /* Abort any context menu blocking. */
+      context_menu_active = true;
+      $("#canvas").contextMenu(true);
       break;
 
     case 32: // space, will clear selection and goto.

@@ -56,10 +56,6 @@ function mapview_mouse_click(e)
     map_select_active = false;
     map_select_check = false;
 
-    /* The context menu can be triggered without right mouse button down.
-     * Make it able to pop up again. */
-    context_menu_active = true;
-    $("#canvas").contextMenu(true);
   } else if (!rightclick && !middleclick) {
     /* Left mouse button*/
     action_button_pressed(mouse_x, mouse_y, SELECT_POPUP);

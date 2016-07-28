@@ -1,0 +1,31 @@
+diff --git a/common/game.h b/common/game.h
+index 0c4b7b1..2d4bfb7 100644
+--- a/common/game.h
++++ b/common/game.h
+@@ -587,7 +587,7 @@ extern struct civ_game game;
+ #define GAME_DEFAULT_AUTOATTACK      FALSE
+ 
+ #ifdef FREECIV_WEB
+-#define GAME_DEFAULT_RULESETDIR      "fcweb"
++#define GAME_DEFAULT_RULESETDIR      "classic"
+ #else  /* FREECIV_WEB */
+ #define GAME_DEFAULT_RULESETDIR      "civ2civ3"
+ #endif /* FREECIV_WEB */
+diff --git a/server/ruleset.h b/server/ruleset.h
+index 49318e4..c8a5d6f 100644
+--- a/server/ruleset.h
++++ b/server/ruleset.h
+@@ -17,12 +17,7 @@
+ extern "C" {
+ #endif /* __cplusplus */
+ 
+-#define RULESET_CAPABILITIES_BASE "+Freeciv-ruleset-Devel-2015.January.14"
+-#ifdef FREECIV_WEB
+-#define RULESET_CAPABILITIES RULESET_CAPABILITIES_BASE " +web-compatible"
+-#else  /* FREECIV_WEB */
+-#define RULESET_CAPABILITIES RULESET_CAPABILITIES_BASE
+-#endif /* FREECIV_WEB */
++#define RULESET_CAPABILITIES "+Freeciv-ruleset-Devel-2015.January.14"
+ /*
+  * Ruleset capabilities acceptable to this program:
+  *

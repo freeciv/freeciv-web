@@ -48,7 +48,9 @@ function is_wonder(improvement)
 }
 
 /**************************************************************************
-
+  FIXME: This hardcoding prevents Freeciv-web from supporting other rulesets
+  such as Civ2Civ3.
+  
    //printf("\"%d\":%d,\n", pimprove->item_number, node->tech);
 **************************************************************************/
 function get_improvement_requirements(improvement_id)

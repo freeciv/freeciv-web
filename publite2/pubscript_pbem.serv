@@ -1,4 +1,8 @@
 cmdlevel ctrl first
+set topology WRAPX
+set nationset all
+set compresstype xs
+set maxplayers 32
 set netwait 15
 set nettimeout 40
 set pingtime 30

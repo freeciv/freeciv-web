@@ -46,7 +46,9 @@ function handle_thaw_hint(packet)
 /* 100% */
 function handle_ruleset_terrain(packet)
 {
+  /* FIXME: These two hacks are there since Freeciv-web doesn't support rendering Lake and Glacier correctly. */
   if (packet['name'] == "Lake") packet['graphic_str'] = packet['graphic_alt'];
+  if (packet['name'] == "Glacier") packet['graphic_str'] = "tundra";
   terrains[packet['id']] = packet;
 }
 
@@ -1338,4 +1340,9 @@ function handle_ruleset_action_auto(packet)
 function handle_ruleset_goods(packet)
 {
   /* TODO: Implement */
+}
+
+function handle_ruleset_achievement(packet)
+{
+  /* TODO: Implement. */
 }

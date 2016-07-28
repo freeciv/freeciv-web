@@ -448,8 +448,7 @@ function pregame_settings()
 	  "</select></td></tr>"+
   	  "<tr class='not_pbem' title='Ruleset version'><td>Ruleset:</td>" +
 	  "<td><select name='ruleset' id='ruleset'>" +
-	  "<option value='fcweb'>Default Fcweb</option>" +
-	  "<option value='webperimental'>Webperimental</option>" +
+	  "<option value='classic'>Classic</option>" +
 	  "</select></td></tr>"+
           "</table><br>" +
 	  "<span id='settings_info'><i>Freeciv-web can be customized using the command line in many " +
@@ -509,11 +508,8 @@ function pregame_settings()
   if (ruleset_control != null) {
     /* HACK: find current ruleset based on its name. */
     switch (ruleset_control['name']) {
-    case "Web-default":
-      $("#ruleset").val("fcweb");
-      break;
-    case "Webperimental":
-      $("#ruleset").val("webperimental");
+    case "Classic":
+      $("#ruleset").val("classic");
       break;
     }
   }

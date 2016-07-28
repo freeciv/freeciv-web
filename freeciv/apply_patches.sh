@@ -83,6 +83,3 @@ do
     exit 1
   fi
 done
-
-# have Freeciv's "make install" add the Freeciv-web rulesets
-cp -Rf data/fcweb data/webperimental freeciv/data/

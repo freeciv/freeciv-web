@@ -61,7 +61,7 @@ def poll_metaserver():
   conn.request("GET", "/");
   r1 = conn.getresponse();
   html_doc = r1.read();
-  all_rows = html_doc.decode('ascii').split("<tr>");
+  all_rows = html_doc.decode('utf-8').split("<tr>");
   rows = all_rows[2:len(all_rows)-1];
   for row in rows:
     cells = row.split("<");
@@ -88,6 +88,6 @@ if __name__ == '__main__':
     try:
       time.sleep(1);
       poll_metaserver();
-      time.sleep(60*5); #poll every 5 minutes.
+      time.sleep(60*10); #poll every 10 minutes.
     except Exception as e:
       print(e);

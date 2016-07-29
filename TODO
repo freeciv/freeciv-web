@@ -152,10 +152,6 @@ Unimplemented Freeciv client features:
 - between turns timer count down
 
 Simplify Freeciv server upgrade:
-- add automatic ruleset upgrade sanity checks.
-  - should they run automatically?
-    - positive: forces the updater to review stuff
-    - negative: may train the updater to ignore its output
 - get rid of the worst merge conflict causes
   - freeciv_web_all_packets_def_changes:
     - find and get rid of pointless changes

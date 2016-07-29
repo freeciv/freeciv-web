@@ -243,13 +243,19 @@ function update_tech_tree()
     var prunits = get_units_from_tech(tech_id);
     for (var i = 0; i < prunits.length; i++) {
       var punit = prunits[i];
-      tech_canvas_ctx.drawImage(sprites[punit['graphic_str']], x + 50 + ((tech_things++) * 30), y + 23, 28, 24);
+      var sprite = sprites[punit['graphic_str']];
+      if (sprite != null) {
+        tech_canvas_ctx.drawImage(sprite, x + 50 + ((tech_things++) * 30), y + 23, 28, 24);
+      }
     }
 
     var primprovements = get_improvements_from_tech(tech_id);
     for (var i = 0; i < primprovements.length; i++) {
       var pimpr = primprovements[i];
-      tech_canvas_ctx.drawImage(sprites[pimpr['graphic_str']], x + 50 + ((tech_things++) * 30), y + 23, 28, 24);
+      var sprite = sprites[pimpr['graphic_str']];
+      if (sprite != null) {
+        tech_canvas_ctx.drawImage(sprite, x + 50 + ((tech_things++) * 30), y + 23, 28, 24);
+      }
     }
 
 

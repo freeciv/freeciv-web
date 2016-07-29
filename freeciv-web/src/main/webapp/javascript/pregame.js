@@ -449,6 +449,7 @@ function pregame_settings()
   	  "<tr class='not_pbem' title='Ruleset version'><td>Ruleset:</td>" +
 	  "<td><select name='ruleset' id='ruleset'>" +
 	  "<option value='classic'>Classic</option>" +
+	  "<option value='civ2civ3'>Civ2Civ3</option>" +
 	  "</select></td></tr>"+
           "</table><br>" +
 	  "<span id='settings_info'><i>Freeciv-web can be customized using the command line in many " +
@@ -511,6 +512,9 @@ function pregame_settings()
     case "Classic":
       $("#ruleset").val("classic");
       break;
+    case "Civ2Civ3":
+      $("#ruleset").val("civ2civ3");
+      break;
     }
   }
 
@@ -566,6 +570,9 @@ function pregame_settings()
 
   $('#ruleset').change(function() {
     send_message("/rulesetdir " + $('#ruleset').val());
+    // reset some ruleset defined settings.
+    send_message("/set topology wrapx"); //this is needed since Freeciv-web only supports Wrapx topology.
+    send_message("/set nationset all");
   });
 
   $('#password').change(function() {

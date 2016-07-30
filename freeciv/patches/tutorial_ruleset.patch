@@ -5,7 +5,7 @@ index 09e4614..c13385a 100644
 @@ -15,3 +15,3 @@ reason="Scenario"
  revision="2.5.99-alpha"
 -rulesetdir="civ2civ3"
-+rulesetdir="fcweb"
++rulesetdir="classic"
  improvement_size=68
 @@ -313,3 +313,2 @@ set={"name","value","gamestart"
  "size",1,1

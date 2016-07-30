@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: iso-8859-1 -*-
 ''' 
- Freeciv - Copyright (C) 2009-2015 - Andreas Røsdal   andrearo@pvv.ntnu.no
+ Freeciv - Copyright (C) 2009-2016 - Andreas Røsdal   andrearo@pvv.ntnu.no
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation; either version 2, or (at your option)
@@ -26,13 +26,11 @@ files = {"amplio2" : [
   "../../freeciv/freeciv/data/amplio2/terrain1.spec",
   "../../freeciv/freeciv/data/amplio2.tilespec",
   "../../freeciv/freeciv/data/amplio2/activities.spec",
-  "../../freeciv/freeciv/data/amplio2/ancientcities.spec",
+  "../../freeciv/freeciv/data/amplio2/cities.spec",
   "../../freeciv/freeciv/data/amplio2/bases.spec",
   "../../freeciv/freeciv/data/amplio2/explosions.spec",
   "../../freeciv/freeciv/data/amplio2/fog.spec",
   "../../freeciv/freeciv/data/amplio2/grid.spec",
-  "../../freeciv/freeciv/data/amplio2/medievalcities.spec",
-  "../../freeciv/freeciv/data/amplio2/moderncities.spec",
   "../../freeciv/freeciv/data/amplio2/nuke.spec",
   "../../freeciv/freeciv/data/amplio2/mountains.spec",
   "../../freeciv/freeciv/data/amplio2/hills.spec",

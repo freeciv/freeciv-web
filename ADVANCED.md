@@ -93,13 +93,13 @@ extract the new version?
 Has the bundled scenarios changed?
 Does the change conflict with Freeciv-web's modifications?
 
-### Check: data/classic/
+### Check: data/classic/ data/civ2civ3
 
 Was the ruleset format changed?
-Was the classic rules changed?
-Update [fcweb](freeciv/data/fcweb/) and
-[webperimental](freeciv/data/webperimental/).
-(The webperimental ruleset is based on fcweb is based on Freeciv's classic)
+Did the classic rules change?
+Did the civciv3 rules change?
+Is Freeciv-web able to handle the modifications?
+Be aware that the client may have hard coded the old rule.
 
 ### Check: data/
 

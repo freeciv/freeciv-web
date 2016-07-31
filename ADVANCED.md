@@ -100,6 +100,7 @@ Did the classic rules change?
 Did the civciv3 rules change?
 Is Freeciv-web able to handle the modifications?
 Be aware that the client may have hard coded the old rule.
+(The webperimental ruleset is supposed to be web-compatible)
 
 ### Check: data/
 

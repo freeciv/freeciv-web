@@ -450,6 +450,7 @@ function pregame_settings()
 	  "<td><select name='ruleset' id='ruleset'>" +
 	  "<option value='classic'>Classic</option>" +
 	  "<option value='civ2civ3'>Civ2Civ3</option>" +
+    "<option value='webperimental'>Webperimental</option>" +
 	  "</select></td></tr>"+
           "</table><br>" +
 	  "<span id='settings_info'><i>Freeciv-web can be customized using the command line in many " +
@@ -514,6 +515,9 @@ function pregame_settings()
       break;
     case "Civ2Civ3":
       $("#ruleset").val("civ2civ3");
+      break;
+    case "Webperimental":
+      $("#ruleset").val("webperimental");
       break;
     }
   }

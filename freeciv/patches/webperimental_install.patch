@@ -1,0 +1,86 @@
+From 3ca968c6948555c939dd2dd6f38c05168329f6ed Mon Sep 17 00:00:00 2001
+From: Sveinung Kvilhaugsvik <sveinung84@users.sourceforge.net>
+Date: Sun, 31 Jul 2016 04:29:54 +0200
+Subject: [PATCH] Add webperimental to distribution tarball.
+
+---
+ configure.ac                   |  1 +
+ data/Makefile.am               |  2 +-
+ data/webperimental/Makefile.am | 19 +++++++++++++++++++
+ translations/core/POTFILES.in  |  9 +++++++++
+ 4 files changed, 30 insertions(+), 1 deletion(-)
+ create mode 100644 data/webperimental/Makefile.am
+
+diff --git a/configure.ac b/configure.ac
+index 46458cd..b372531 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -1640,6 +1640,7 @@ AC_CONFIG_FILES([Makefile
+           data/civ2civ3/Makefile
+ 	  data/civ1/Makefile
+ 	  data/civ2/Makefile
++	  data/webperimental/Makefile
+ 	  data/scenarios/Makefile
+ 	  data/nation/Makefile
+           data/ruledit/Makefile
+diff --git a/data/Makefile.am b/data/Makefile.am
+index 6415a34..58bb1d5 100644
+--- a/data/Makefile.am
++++ b/data/Makefile.am
+@@ -89,7 +89,7 @@ else
+ CLIENTDATADIRS = 
+ endif
+ 
+-SRV_RE_DATADIRS = default classic civ1 civ2 sandbox experimental multiplayer alien civ2civ3 nation
++SRV_RE_DATADIRS = default classic civ1 civ2 sandbox experimental multiplayer alien civ2civ3 webperimental nation
+ if SERVER
+ SERVERDATADIRS = $(SRV_RE_DATADIRS) scenarios
+ else
+diff --git a/data/webperimental/Makefile.am b/data/webperimental/Makefile.am
+new file mode 100644
+index 0000000..ff5b433
+--- /dev/null
++++ b/data/webperimental/Makefile.am
+@@ -0,0 +1,19 @@
++## Process this file with automake to produce Makefile.in
++
++## Override automake so that "make install" puts these in proper place:
++pkgdatadir = $(datadir)/$(PACKAGE)/webperimental
++
++pkgdata_DATA =			\
++	buildings.ruleset	\
++	cities.ruleset		\
++	effects.ruleset		\
++	game.ruleset		\
++	governments.ruleset	\
++	nations.ruleset		\
++	script.lua		\
++	styles.ruleset		\
++	techs.ruleset		\
++	terrain.ruleset		\
++	units.ruleset
++
++EXTRA_DIST = $(pkgdata_DATA)
+diff --git a/translations/core/POTFILES.in b/translations/core/POTFILES.in
+index a80e0de..583e296 100644
+--- a/translations/core/POTFILES.in
++++ b/translations/core/POTFILES.in
+@@ -293,6 +293,15 @@ data/alien/nation/madmen.ruleset
+ data/alien/nation/mathclub.ruleset
+ data/alien/nation/secretsociety.ruleset
+ data/alien/nation/teamgladiators.ruleset
++data/webperimental/buildings.ruleset
++data/webperimental/cities.ruleset
++data/webperimental/game.ruleset
++data/webperimental/governments.ruleset
++data/webperimental/script.lua
++data/webperimental/styles.ruleset
++data/webperimental/techs.ruleset
++data/webperimental/terrain.ruleset
++data/webperimental/units.ruleset
+ data/helpdata.txt
+ data/multiplayer/buildings.ruleset
+ data/multiplayer/cities.ruleset
+-- 
+2.1.4
+

@@ -4,6 +4,7 @@
 # ------------------------------------
 # act_sel_long_move is Freeciv bug #24876 (SVN r33337)
 # webperimental_it_self is Freeciv patch #7517 (SVN r33388)
+# SellInEmergency-2 is Freeciv patch #7522. 
 
 # Not in the upstream Freeciv server
 # ----------------------------------

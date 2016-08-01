@@ -929,7 +929,7 @@ function get_unit_activity_sprite(punit)
 
   if (punit['ai'] == true) {
       return {"key" : "unit.auto_settler",
-          "offset_x" : unit_activity_offset_x,
+          "offset_x" : 20, //FIXME.
           "offset_y" : - unit_activity_offset_y};
   }
 

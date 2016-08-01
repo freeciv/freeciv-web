@@ -353,6 +353,19 @@ function popup_action_selection(actor_unit, action_probabilities,
         } });
   }
 
+  if (target_unit != null
+      && tile_units(target_tile).length > 1) {
+    buttons.push({
+        id      : "act_sel_tgt_unit_switch" + actor_unit['id'],
+        "class" : 'act_sel_button',
+        text    : 'Change unit target',
+        click   : function() {
+          select_tgt_unit(actor_unit,
+                          target_tile, tile_units(target_tile));
+
+          $(id).remove();
+        } });
+  }
 
   buttons.push({
       id      : "act_sel_cancel" + actor_unit['id'],
@@ -678,4 +691,86 @@ function popup_sabotage_dialog(actor_unit, target_city, city_imprs)
 
   /* Show the dialog. */
   $("#" + id).dialog('open');
+}
+
+/**************************************************************************
+  Create a button that selects a target unit.
+
+  Needed because of JavaScript's scoping rules.
+**************************************************************************/
+function create_select_tgt_unit_button(parent_id, actor_unit_id,
+                                       target_tile_id, target_unit_id)
+{
+  var text = "";
+  var target_unit = units[target_unit_id];
+  var button = {};
+
+  text += unit_types[target_unit['type']]['name'];
+
+  if (get_unit_homecity_name(target_unit) != null) {
+    text += " from " + get_unit_homecity_name(target_unit);
+  }
+
+  text += " (";
+  text += nations[unit_owner(target_unit)['nation']]['adjective'];
+  text += ")";
+
+  button = {
+    text  : text,
+    click : function() {
+      var packet = {
+        "pid"            : packet_unit_get_actions,
+        "actor_unit_id"  : actor_unit_id,
+        "target_unit_id" : target_unit_id,
+        /* Let the server choose the target city. */
+        "target_city_id" : IDENTITY_NUMBER_ZERO,
+        "target_tile_id" : target_tile_id,
+        "disturb_player" : true
+      };
+      send_request(JSON.stringify(packet));
+
+      $(parent_id).remove();
+    }
+  };
+
+  /* The button is ready. */
+  return button;
+}
+
+/**************************************************************************
+  Create a dialog where a unit select what other unit to act on.
+**************************************************************************/
+function select_tgt_unit(actor_unit, target_tile, potential_tgt_units)
+{
+  var i;
+
+  var rid     = "sel_tgt_unit_dialog_" + actor_unit['id'];
+  var id      = "#" + rid;
+  var dhtml   = "";
+  var buttons = [];
+
+  /* Reset dialog page. */
+  $(id).remove();
+  $("<div id='" + rid + "'></div>").appendTo("div#game_page");
+
+  dhtml += "Select target unit for your ";
+  dhtml += unit_types[actor_unit['type']]['name'];
+
+  $(id).html(dhtml);
+
+  for (var i = 0; i < potential_tgt_units.length; i++) {
+    var tgt_unit = potential_tgt_units[i];
+
+    buttons.push(create_select_tgt_unit_button(id, actor_unit['id'],
+                                               target_tile['index'],
+                                               tgt_unit['id']));
+  }
+
+  $(id).dialog({
+      title    : "Target unit selection",
+      bgiframe : true,
+      modal    : true,
+      buttons  : buttons });
+
+  $(id).dialog('open');
 }

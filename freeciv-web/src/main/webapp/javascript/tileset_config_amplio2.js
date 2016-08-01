@@ -59,7 +59,7 @@ var city_flag_offset_y = 9;
 var city_size_offset_x = 0;
 var city_size_offset_y = 20;
 
-var unit_activity_offset_x = 10;
+var unit_activity_offset_x = 55;
 var unit_activity_offset_y = 25;
 
 // offset the units by this amount when drawing units

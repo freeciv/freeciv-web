@@ -152,7 +152,7 @@ def config_read(file):
     config_text = config_text.replace("\n}", "\n }");
     config_text = config_text.replace("\n1", "\n 1");
     config_text = config_text.replace("grid_star", "grid_main");
-    config_text = config_text.replace("         \"unit.auto_settler\"", "  3, 1, \"unit.auto_settler\"");
+    config_text = config_text.replace("         \"unit.auto_settler\"", "  4, 10, \"unit.auto_settler\"");
     config_text = config_text.replace("\t  ;", "\n;");
     config.read_string(config_text);
     print((config.sections()));

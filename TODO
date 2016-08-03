@@ -151,6 +151,13 @@ Unimplemented Freeciv client features:
     - mark the parts Freeciv-web wants (like the list of facts about a unit type)
 - between turns timer count down
 
+Unimplemented rule variation support:
+- The topology server setting
+  The Freeciv-web client can only display the TF_WRAPX and the non wrapping
+  topology. Isometric, hex and WRAP_Y maps are unsupported.
+- The ID of certain extras are hard coded.
+- The graphic tags of certain extras are hard coded.
+
 Simplify Freeciv server upgrade:
 - get rid of the worst merge conflict causes
   - freeciv_web_all_packets_def_changes:

@@ -22,7 +22,7 @@
 #     when the name is url encoded in json protocol.
 #     MAX_LEN_CITYNAME was increased in patch #7305 (SVN r33048)
 #     Giving one of the longer removed city names to a new city still causes problems.
-# freeciv_web_ruleset sets classic as the default ruleset to Freeciv-web. See patch #7514.
+# freeciv_web_ruleset allows Freeciv-web to load rulesets not marked as web-compatible (civ2civ3). See discussion in patch #7514.
 # webperimental_install make "make install" install webperimental.
 # fcweb_to_classic converts fcweb save games to classic. See patch #7532.
 

@@ -155,6 +155,9 @@ Unimplemented rule variation support:
 - The topology server setting
   The Freeciv-web client can only display the TF_WRAPX and the non wrapping
   topology. Isometric, hex and WRAP_Y maps are unsupported.
+  Testing: to test new topology support the Freeciv server must be changed.
+  Open server/settings.c. Find topology_callback(). Remove the blocking of
+  the toplogy you are working to support.
 - The ID of certain extras are hard coded.
 - The graphic tags of certain extras are hard coded.
 

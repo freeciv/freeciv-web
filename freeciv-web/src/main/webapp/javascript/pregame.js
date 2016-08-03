@@ -672,6 +672,5 @@ function pregame_settings()
 function change_ruleset(to) {
     send_message("/rulesetdir " + to);
     // reset some ruleset defined settings.
-    send_message("/set topology wrapx"); //this is needed since Freeciv-web only supports Wrapx topology.
     send_message("/set nationset all");
   }

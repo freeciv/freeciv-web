@@ -1,0 +1,52 @@
+From fc7e1e2bc3eaef970c16ad9623e4d61b54666662 Mon Sep 17 00:00:00 2001
+From: Sveinung Kvilhaugsvik <sveinung84@users.sourceforge.net>
+Date: Mon, 1 Aug 2016 21:28:54 +0200
+Subject: [PATCH] Freeciv-web: load fcweb saves using classic.
+
+The fcweb ruleset was classic with some Freeciv-web client specific
+workarounds. It has now been replaced with the classic ruleset in
+Freeciv-web.
+
+Freeciv-web uses trunk. Its savegames will therefore be upgraded with the
+development version compatibility code.
+
+Have the savegame compatibility code upgrade fcweb savegames to classic
+savegames when the server is Freeciv-web. (A regular Freeciv server build
+that encounters a fcweb savegame may have a ruleset names fcweb installed
+locally)
+---
+ server/savecompat.c | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+
+diff --git a/server/savecompat.c b/server/savecompat.c
+index 99695ae..22697a6 100644
+--- a/server/savecompat.c
++++ b/server/savecompat.c
+@@ -1567,6 +1567,24 @@ static void compat_load_dev(struct loaddata *loading)
+ 
+   /* Since version number bump to 2.91.99 */
+ 
++#ifdef FREECIV_WEB
++  {
++    /* Freeciv-web has replaced fcweb with classic. Only done for
++     * Freeciv-web because a regular Freeciv server build that encounters a
++     * fcweb savegame may have a ruleset names fcweb installed locally. */
++
++    const char *ruleset;
++
++    ruleset = secfile_lookup_str_default(loading->file,
++                                         GAME_DEFAULT_RULESETDIR,
++                                         "savefile.rulesetdir");
++
++    if (strcmp("fcweb", ruleset) == 0) {
++      secfile_replace_str(loading->file, "classic", "savefile.rulesetdir");
++    }
++  }
++#endif /* FREECIV_WEB */
++
+   /* Idle turns */
+   player_slots_iterate(pslot) {
+     int plrno = player_slot_index(pslot);
+-- 
+2.1.4
+

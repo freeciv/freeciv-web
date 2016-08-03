@@ -573,10 +573,7 @@ function pregame_settings()
   });
 
   $('#ruleset').change(function() {
-    send_message("/rulesetdir " + $('#ruleset').val());
-    // reset some ruleset defined settings.
-    send_message("/set topology wrapx"); //this is needed since Freeciv-web only supports Wrapx topology.
-    send_message("/set nationset all");
+    change_ruleset($('#ruleset').val());
   });
 
   $('#password').change(function() {
@@ -669,3 +666,12 @@ function pregame_settings()
   $("#settings_table").tooltip();
 }
 
+/**************************************************************************
+  Change the ruleset to
+**************************************************************************/
+function change_ruleset(to) {
+    send_message("/rulesetdir " + to);
+    // reset some ruleset defined settings.
+    send_message("/set topology wrapx"); //this is needed since Freeciv-web only supports Wrapx topology.
+    send_message("/set nationset all");
+  }

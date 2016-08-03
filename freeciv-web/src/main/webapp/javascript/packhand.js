@@ -69,6 +69,12 @@ function handle_server_join_reply(packet)
     }
 
     set_client_state(C_S_PREPARING);
+
+    if ($.getUrlVar('action') == "new"
+        && $.getUrlVar('ruleset') != null) {
+      change_ruleset($.getUrlVar('ruleset'));
+    }
+
     if (autostart) {
       if (loadTimerId == -1) {
         setTimeout(pregame_start_game, 800);

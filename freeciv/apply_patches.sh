@@ -2,7 +2,7 @@
 
 # Freeciv server version upgrade notes
 # ------------------------------------
-# SellInEmergency-2 is Freeciv patch #7522. 
+# SellInEmergency-2 is Freeciv patch #7522. (SVN r33429)
 
 # Not in the upstream Freeciv server
 # ----------------------------------

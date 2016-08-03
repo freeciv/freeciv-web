@@ -1,16 +1,28 @@
-diff -Nurd -X.diff_ignore freeciv/ai/default/aicity.c freeciv/ai/default/aicity.c
---- freeciv/ai/default/aicity.c	2016-07-22 10:16:28.714938425 +0300
-+++ freeciv/ai/default/aicity.c	2016-07-31 12:41:40.382906963 +0300
-@@ -127,7 +127,7 @@
-   } while(FALSE);
- #endif /* FREECIV_NDEBUG */
+commit 98efe36c73bf4c79addc4242f50a481482ec7e8e
+Author: cazfi <cazfi@a0f10bec-cc02-0410-94fc-a9cfff90b4cd>
+Date:   Tue Aug 2 23:19:40 2016 +0000
+
+    Make AI not to constantly sell almost all its buildings.
+    
+    See patch #7522
+    
+    
+    git-svn-id: svn://svn.gna.org/svn/freeciv/trunk@33429 a0f10bec-cc02-0410-94fc-a9cfff90b4cd
+
+diff --git a/ai/default/aicity.c b/ai/default/aicity.c
+index c4def35..05be80d 100644
+--- a/ai/default/aicity.c
++++ b/ai/default/aicity.c
+@@ -110,7 +110,7 @@
+  (pcity->surplus[O_SHIELD] < 0 || city_unhappy(pcity)			\
+   || pcity->food_stock + pcity->surplus[O_FOOD] < 0)
  
 -static void dai_sell_obsolete_buildings(struct city *pcity);
 +static void dai_city_sell_noncritical(struct city *pcity, bool redundant_only);
  static void resolve_city_emergency(struct ai_type *ait, struct player *pplayer,
                                     struct city *pcity);
  
-@@ -761,9 +761,34 @@
+@@ -824,9 +824,35 @@ void dai_manage_cities(struct ai_type *ait, struct player *pplayer)
        /* Fix critical shortages or unhappiness */
        resolve_city_emergency(ait, pplayer, pcity);
      }
@@ -18,7 +30,8 @@ diff -Nurd -X.diff_ignore freeciv/ai/default/aicity.c freeciv/ai/default/aicity.
 +    dai_city_sell_noncritical(pcity, TRUE);
      sync_cities();
    } city_list_iterate_end;
-+  if (player_get_expected_income(pplayer) < -(pplayer->economic.gold)) {
++  if (pplayer->economic.tax >= 30 /* Otherwise expect it to increase tax */
++      && player_get_expected_income(pplayer) < -(pplayer->economic.gold)) {
 +    int count = city_list_size(pplayer->cities);
 +    struct city *sellers[count + 1];
 +    int i;
@@ -46,7 +59,7 @@ diff -Nurd -X.diff_ignore freeciv/ai/default/aicity.c freeciv/ai/default/aicity.
    TIMING_LOG(AIT_EMERGENCY, TIMER_STOP);
  
    TIMING_LOG(AIT_BUILDINGS, TIMER_START);
-@@ -844,18 +869,20 @@
+@@ -911,18 +937,20 @@ static bool building_crucial(const struct player *plr,
  }
  
  /**************************************************************************

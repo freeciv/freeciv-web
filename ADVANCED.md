@@ -14,7 +14,8 @@ This makes it easier to get Freeciv-web related changes into Freeciv.
 It also makes it easier for Freeciv-web to take advantage of the newest
 Freeciv features.
 
-Graphics, static help texts and scenarios are extracted from Freeciv.
+Graphics, static help texts, rulesets and scenarios are extracted from
+Freeciv.
 Parts of The Freeciv-web client's Freeciv protocol support is auto generated
 from Freeciv's [common/networking/packets.def](http://svn.gna.org/viewcvs/freeciv/trunk/common/networking/packets.def).
 

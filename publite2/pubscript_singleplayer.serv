@@ -10,7 +10,6 @@ set nettimeout 60
 set pingtime 30
 set pingtimeout 120
 set maxconnectionsperhost 256
-set autosaves ""
 set threaded_save enabled
 set scorelog enabled
 set size 5

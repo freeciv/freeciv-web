@@ -378,6 +378,9 @@ function show_dialog_message(title, message) {
   // automatically close dialog after 9 seconds, because sometimes the dilaog can't be closed manually.
   setTimeout("$('#dialog').dialog('close'); $('#game_text_input').blur();", 9000);
 
+  speak(title);
+  speak(message);
+
 }
 
 

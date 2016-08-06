@@ -153,5 +153,13 @@ function init_options_dialog()
     sounds_enabled = !sounds_enabled;
   });
 
+  if (is_speech_supported()) {
+    $('#speech_enabled_setting').prop('checked', speech_enabled);
+    $('#speech_enabled_setting').change(function() {
+      speech_enabled = !speech_enabled;
+    });
+  } else {
+    $('#speech_enabled_setting').attr('disabled', true);
+  }
 
 }

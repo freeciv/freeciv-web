@@ -402,7 +402,7 @@ function pregame_settings()
   var dhtml = "<table id='settings_table'>" +
   	  "<tr title='Set metaserver info line'><td>Game title:</td>" +
 	  "<td><input type='text' name='metamessage' id='metamessage' size='28' maxlength='42'></td></tr>" +
-	  "<tr title='Enables music'><td>Music</td>" +
+	  "<tr title='Enables music'><td>Music:</td>" +
           "<td><input type='checkbox' name='music_setting' id='music_setting'>Play Music</td></tr>" +
 	  "<tr class='not_pbem' title='Total number of players (including AI players)'><td>Number of Players (including AI):</td>" +
 	  "<td><input type='number' name='aifill' id='aifill' size='4' length='3' min='0' max='20' step='1'></td></tr>" +
@@ -450,8 +450,12 @@ function pregame_settings()
 	  "<td><select name='ruleset' id='ruleset'>" +
 	  "<option value='classic'>Classic</option>" +
 	  "<option value='civ2civ3'>Civ2Civ3</option>" +
-    "<option value='webperimental'>Webperimental</option>" +
+      "<option value='webperimental'>Webperimental</option>" +
 	  "</select></td></tr>"+
+	  "<tr id='speech_enabled'><td id='speech_label'></td>" +
+               "<td><input type='checkbox' id='speech_setting'>Enable speech audio messages</td></tr>" +
+	  "<tr id='voice_row'><td id='voice_label'></td>" +
+               "<td><select name='voice' id='voice'></select></td></tr>" +
           "</table><br>" +
 	  "<span id='settings_info'><i>Freeciv-web can be customized using the command line in many " +
           "other ways also. Type /help in the command line for more information.</i></span>"
@@ -501,6 +505,15 @@ function pregame_settings()
   $("#select_multiple_units_setting").prop("checked", map_select_setting_enabled);
   $("#select_multiple_units_area").prop("title", "Select multiple units with right-click and drag");
   $("#select_multiple_units_label").prop("innerHTML", "Select multiple units with right-click and drag");
+
+  if (is_speech_supported()) {
+    $("#speech_setting").prop("checked", speech_enabled);
+    $("#speech_label").prop("innerHTML", "Speech messages:");
+    $("#voice_label").prop("innerHTML", "Voice:");
+  } else {
+    $("#speech_label").prop("innerHTML", "Speech messages:");
+    $("#speech_setting").parent().html("Speech Synthesis API is not supported or enabled in your browser.");
+  }
 
   if (server_settings['metamessage'] != null
       && server_settings['metamessage']['val'] != null) {
@@ -658,6 +671,23 @@ function pregame_settings()
         map_select_setting_enabled = false;
       }
   });
+
+  $('#speech_setting').change(function() {
+    if ($('#speech_setting').prop('checked')) {
+      speech_enabled = true;
+      speak_unfiltered("Speech enabled.");
+    } else {
+      speech_enabled = false;
+    }
+  });
+
+  $('#voice').change(function() {
+    voice = $('#voice').val();
+  });
+  load_voices();
+  window.speechSynthesis.onvoiceschanged = function(e) {
+    load_voices();
+  };
 
   if (is_pbem()) {
     $(".not_pbem").hide();

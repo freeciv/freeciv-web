@@ -180,6 +180,9 @@ function handle_chat_msg(packet)
       } else {
         add_chatbox_text(message);
       }
+
+      if (is_speech_supported()) speak(message);
+
     }
   }
 }
@@ -1351,4 +1354,9 @@ function handle_ruleset_goods(packet)
 function handle_ruleset_achievement(packet)
 {
   /* TODO: Implement. */
+}
+
+function handle_achievement_info(packet)
+{
+  /* TODO: implement */
 }

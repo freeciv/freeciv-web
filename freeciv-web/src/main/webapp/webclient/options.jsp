@@ -20,6 +20,10 @@
 </div>
 
 <div class="main_menu_buttons">
+  <b>Speech messages:</b> <input type='checkbox' name='speech_enabled_setting' id='speech_enabled_setting'>
+</div>
+
+<div class="main_menu_buttons">
   <b>Timeout (seconds per turn):</b> <input type='number' name='timeout_setting' id='timeout_setting' size='6' length='3' min='30' max='3600' step='1'>
 </div>
 

@@ -146,7 +146,7 @@ function show_new_game_message()
       "exploring the land around you with your explorer,\n" +
       "and using your settlers to find a good place to build\n" +
       "a city. Right-click with the mouse on your units for a list of available \n" +
-      "orders such as move, explore, build cities and attack.\n" +
+      "orders such as move, explore, build cities and attack. \n" +
       "Good luck, and have a lot of fun!");
 
     }

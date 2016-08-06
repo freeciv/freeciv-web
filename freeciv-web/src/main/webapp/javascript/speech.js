@@ -22,15 +22,6 @@
 var speech_enabled = false;
 var voice = null;
 
-
-/**************************************************************************
- Load the ResponsiveVoice JS.
-**************************************************************************/
-function init_responsivevoice()
-{
-  jQuery.getScript("https://code.responsivevoice.org/responsivevoice.js");
-}
-
 /**************************************************************************
  is Speech Synthesis API enabled?
 **************************************************************************/

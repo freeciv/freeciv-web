@@ -684,10 +684,13 @@ function pregame_settings()
   $('#voice').change(function() {
     voice = $('#voice').val();
   });
-  load_voices();
-  window.speechSynthesis.onvoiceschanged = function(e) {
+
+  if (is_speech_supported()) {
     load_voices();
-  };
+    window.speechSynthesis.onvoiceschanged = function(e) {
+      load_voices();
+    };
+  }
 
   if (is_pbem()) {
     $(".not_pbem").hide();

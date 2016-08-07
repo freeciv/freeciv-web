@@ -65,8 +65,9 @@ function speech_synth(text, filter_enabled) {
  	msg.text = text_filtered;
 
 	msg.volume = parseFloat(1);
-	msg.rate = parseFloat(1);
+	msg.rate = parseFloat(1.1);
 	msg.pitch = parseFloat(1);
+	msg.lang = 'en-US';
 
 	if (voice == null) {
       var voices = speechSynthesis.getVoices();

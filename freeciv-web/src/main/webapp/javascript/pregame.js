@@ -481,8 +481,12 @@ function pregame_settings()
     $("#timeout").val(game_info['timeout']);
     $("#skill_level").val(ai_skill_level);
     $("#techlevel").val("0");
-    $("#landmass").val("30");
     $("#endturn").val("5000");
+  }
+
+  if (server_settings['landmass'] != null
+      && server_settings['landmass']['val'] != null) {
+    $("#landmass").val(server_settings['landmass']['val']);
   }
 
   if (server_settings['specials'] != null

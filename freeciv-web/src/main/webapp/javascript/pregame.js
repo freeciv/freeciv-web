@@ -440,11 +440,11 @@ function pregame_settings()
           "<td><input type='checkbox' id='select_multiple_units_setting'>Right-click selects units</td></tr>" +
 	  "<tr title='Method used to generate map'><td>Map generator:</td>" +
 	  "<td><select name='generator' id='generator'>" +
-	  "<option value='random'>Fully random height</option>" +
-	  "<option value='fractal'>Pseudo-fractal height</option>" +
-          "<option value='island'>Island-based</option>" +
-          "<option value='fair'>Fair islands</option>" +
-          "<option value='fracture'>Fracture map</option>" +
+          "<option value='RANDOM'>Fully random height</option>" +
+          "<option value='FRACTAL'>Pseudo-fractal height</option>" +
+          "<option value='ISLAND'>Island-based</option>" +
+          "<option value='FAIR'>Fair islands</option>" +
+          "<option value='FRACTURE'>Fracture map</option>" +
 	  "</select></td></tr>"+
   	  "<tr class='not_pbem' title='Ruleset version'><td>Ruleset:</td>" +
 	  "<td><select name='ruleset' id='ruleset'>" +
@@ -480,11 +480,31 @@ function pregame_settings()
     $("#aifill").val(game_info['aifill']);
     $("#timeout").val(game_info['timeout']);
     $("#skill_level").val(ai_skill_level);
-    $("#techlevel").val("0");
-    $("#landmass").val("30");
-    $("#specials").val("250");
-    $("#citymindist").val("2");
-    $("#endturn").val("5000");
+  }
+
+  if (server_settings['techlevel'] != null
+      && server_settings['techlevel']['val'] != null) {
+    $("#techlevel").val(server_settings['techlevel']['val']);
+  }
+
+  if (server_settings['landmass'] != null
+      && server_settings['landmass']['val'] != null) {
+    $("#landmass").val(server_settings['landmass']['val']);
+  }
+
+  if (server_settings['specials'] != null
+      && server_settings['specials']['val'] != null) {
+    $("#specials").val(server_settings['specials']['val']);
+  }
+
+  if (server_settings['citymindist'] != null
+      && server_settings['citymindist']['val'] != null) {
+    $("#citymindist").val(server_settings['citymindist']['val']);
+  }
+
+  if (server_settings['endturn'] != null
+      && server_settings['endturn']['val'] != null) {
+    $("#endturn").val(server_settings['endturn']['val']);
   }
 
   if (server_settings['size'] != null
@@ -500,6 +520,14 @@ function pregame_settings()
                               server_settings['killstack']['extra_help']);
     $("#killstack_label").prop("innerHTML",
                               server_settings['killstack']['short_help']);
+  }
+
+  if (server_settings['generator'] != null
+      && server_settings['generator']['val'] != null) {
+    /* TODO: Should probably be auto generated from setting so help text,
+     * alternatives etc is kept up to date. */
+    $("#generator").val(server_settings['generator']['support_names'][
+                        server_settings['generator']['val']]);
   }
 
   $("#select_multiple_units_setting").prop("checked", map_select_setting_enabled);
@@ -523,10 +551,10 @@ function pregame_settings()
   if (ruleset_control != null) {
     /* HACK: find current ruleset based on its name. */
     switch (ruleset_control['name']) {
-    case "Classic":
+    case "Classic ruleset":
       $("#ruleset").val("classic");
       break;
-    case "Civ2Civ3":
+    case "Civ2Civ3 ruleset":
       $("#ruleset").val("civ2civ3");
       break;
     case "Webperimental":

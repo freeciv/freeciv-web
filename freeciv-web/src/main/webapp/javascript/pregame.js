@@ -440,11 +440,11 @@ function pregame_settings()
           "<td><input type='checkbox' id='select_multiple_units_setting'>Right-click selects units</td></tr>" +
 	  "<tr title='Method used to generate map'><td>Map generator:</td>" +
 	  "<td><select name='generator' id='generator'>" +
-	  "<option value='random'>Fully random height</option>" +
-	  "<option value='fractal'>Pseudo-fractal height</option>" +
-          "<option value='island'>Island-based</option>" +
-          "<option value='fair'>Fair islands</option>" +
-          "<option value='fracture'>Fracture map</option>" +
+          "<option value='RANDOM'>Fully random height</option>" +
+          "<option value='FRACTAL'>Pseudo-fractal height</option>" +
+          "<option value='ISLAND'>Island-based</option>" +
+          "<option value='FAIR'>Fair islands</option>" +
+          "<option value='FRACTURE'>Fracture map</option>" +
 	  "</select></td></tr>"+
   	  "<tr class='not_pbem' title='Ruleset version'><td>Ruleset:</td>" +
 	  "<td><select name='ruleset' id='ruleset'>" +
@@ -504,6 +504,14 @@ function pregame_settings()
                               server_settings['killstack']['extra_help']);
     $("#killstack_label").prop("innerHTML",
                               server_settings['killstack']['short_help']);
+  }
+
+  if (server_settings['generator'] != null
+      && server_settings['generator']['val'] != null) {
+    /* TODO: Should probably be auto generated from setting so help text,
+     * alternatives etc is kept up to date. */
+    $("#generator").val(server_settings['generator']['support_names'][
+                        server_settings['generator']['val']]);
   }
 
   $("#select_multiple_units_setting").prop("checked", map_select_setting_enabled);

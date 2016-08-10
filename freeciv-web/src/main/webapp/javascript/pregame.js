@@ -482,8 +482,12 @@ function pregame_settings()
     $("#skill_level").val(ai_skill_level);
     $("#techlevel").val("0");
     $("#landmass").val("30");
-    $("#specials").val("250");
     $("#endturn").val("5000");
+  }
+
+  if (server_settings['specials'] != null
+      && server_settings['specials']['val'] != null) {
+    $("#specials").val(server_settings['specials']['val']);
   }
 
   if (server_settings['citymindist'] != null

@@ -480,7 +480,6 @@ function pregame_settings()
     $("#aifill").val(game_info['aifill']);
     $("#timeout").val(game_info['timeout']);
     $("#skill_level").val(ai_skill_level);
-    $("#endturn").val("5000");
   }
 
   if (server_settings['techlevel'] != null
@@ -501,6 +500,11 @@ function pregame_settings()
   if (server_settings['citymindist'] != null
       && server_settings['citymindist']['val'] != null) {
     $("#citymindist").val(server_settings['citymindist']['val']);
+  }
+
+  if (server_settings['endturn'] != null
+      && server_settings['endturn']['val'] != null) {
+    $("#endturn").val(server_settings['endturn']['val']);
   }
 
   if (server_settings['size'] != null

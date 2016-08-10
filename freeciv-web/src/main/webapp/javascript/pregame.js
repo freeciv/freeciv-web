@@ -523,10 +523,10 @@ function pregame_settings()
   if (ruleset_control != null) {
     /* HACK: find current ruleset based on its name. */
     switch (ruleset_control['name']) {
-    case "Classic":
+    case "Classic ruleset":
       $("#ruleset").val("classic");
       break;
-    case "Civ2Civ3":
+    case "Civ2Civ3 ruleset":
       $("#ruleset").val("civ2civ3");
       break;
     case "Webperimental":

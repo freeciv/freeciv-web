@@ -483,8 +483,12 @@ function pregame_settings()
     $("#techlevel").val("0");
     $("#landmass").val("30");
     $("#specials").val("250");
-    $("#citymindist").val("2");
     $("#endturn").val("5000");
+  }
+
+  if (server_settings['citymindist'] != null
+      && server_settings['citymindist']['val'] != null) {
+    $("#citymindist").val(server_settings['citymindist']['val']);
   }
 
   if (server_settings['size'] != null

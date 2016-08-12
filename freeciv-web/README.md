@@ -22,12 +22,6 @@ Also see the suggested nginx.conf file in publite2/nginx.conf
 
 Instead of serving PHP files with PHP-FPM, possibly also Apache2 with mod_php can be used. 
 
-Resin
-=====
-The Resin 4 webapp server can also host Freeciv-web, both the Java webapp,
-JSP and PHP files. This setup is deprecated, but could work with some manual config.
-  http://caucho.com/
-
 Build script
 ============
 Use maven to build and deploy, by running this build script: 
@@ -35,7 +29,7 @@ sh build.sh
 
 The build script will also create a data webapp directory where savegames and scorelogs are stored.
 
-Flyway migrations of the database is supported. Remember to set the mysql password in pom.xml. To migrate the database to the latest version, run this Maven command:
+Flyway migrations of the database is supported. Remember to set the mysql password in flyway.properties.dist and rename the file to flyway.properties. To migrate the database to the latest version, run this Maven command:
 mvn compile flyway:migrate
 
 

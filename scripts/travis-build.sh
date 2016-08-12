@@ -91,10 +91,12 @@ echo "==== Building freeciv-web ===="
 cd /var/lib/tomcat8 && sudo chmod -R 777 webapps logs && setfacl -d -m g::rwx webapps && sudo chown -R www-data:www-data webapps/
 sed -e "s/vagrant//" ${basedir}/freeciv-web/src/main/webapp/meta/php_code/local.php.dist > ${basedir}/freeciv-web/src/main/webapp/meta/php_code/local.php
 sed -e "s/vagrant//" ${basedir}/freeciv-web/src/main/webapp/META-INF/context.xml.dist > ${basedir}/freeciv-web/src/main/webapp/META-INF/context.xml
-sed -i.bak -e "s/vagrant//" ${basedir}/freeciv-web/pom.xml
+cp ${basedir}/freeciv-web/src/main/webapp/WEB-INF/config.properties.dist ${basedir}/freeciv-web/src/main/webapp/WEB-INF/config.properties
+sed -i.bak -e "s/vagrant//" ${basedir}/freeciv-web/flyway.properties.dist
 cd ${basedir}/scripts/freeciv-img-extract/ && ./setup_links.sh && ./sync.sh
 cd ${basedir}/scripts && ./sync-js-hand.sh
 cd ${basedir}/freeciv-web && sudo -u travis ./build.sh
+cp flyway.properties.dist flyway.properties
 sudo -u travis mvn compile flyway:migrate
 
 echo "==== Building nginx ===="

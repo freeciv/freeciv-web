@@ -54,12 +54,6 @@
   <servlet>
     <servlet-name>NewPBEMUser</servlet-name>
     <servlet-class>org.freeciv.servlet.NewPBEMUser</servlet-class>
-    <!-- this is the secret key from Google Recaptcha. -->
-    <init-param>
-       <param-name>captcha-secret</param-name>
-       <param-value>google captcha secret goes here!</param-value>
-    </init-param>
-
   </servlet>
 
   <servlet-mapping>

@@ -28,6 +28,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 
 import java.sql.*;
+import java.util.Properties;
 
 import javax.sql.*;
 
@@ -52,7 +53,14 @@ public class NewPBEMUser extends HttpServlet {
 
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        captcha_secret = getInitParameter("captcha-secret");
+
+        try {
+            Properties prop = new Properties();
+            prop.load(getServletContext().getResourceAsStream("/WEB-INF/config.properties"));
+            captcha_secret = prop.getProperty("captcha_secret");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     
     @SuppressWarnings("unchecked")

@@ -1,0 +1,3 @@
+flyway.user=root
+flyway.password=vagrant
+flyway.url=jdbc:mysql://localhost:3306/freeciv_web

@@ -74,12 +74,7 @@
             <plugin>
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
-                <version>3.2.1</version>
-                <configuration>
-                    <url>jdbc:mysql://localhost:3306/freeciv_web</url>
-                    <user>root</user>
-                    <password>vagrant</password>
-                </configuration>
+                <version>4.0.3</version>
             </plugin>
 
             <plugin>

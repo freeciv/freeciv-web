@@ -18,3 +18,5 @@ Freeciv-web scripts
 * status-freeciv-web.sh - checks if Freeciv-web is running.
 
 * update-wikipedia-docs.py - generates docs from wikipedia about techs, units and buildings.
+
+* autodeploy-freeciv-web.sh - script to build Freeciv-web nightly for a live server.

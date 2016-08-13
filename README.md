@@ -43,6 +43,7 @@ Freeciv-Web consists of these components:
 
 * [freeciv-earth](freeciv-earth) is code to generate Freeciv savegames from a map captured from mapbox.
 
+
 Running Freeciv-web with Vagrant on VirtualBox
 ----------------------------------------------
 Freeciv-web can be setup using Vagrant on VirtualBox to quickly create a 
@@ -93,34 +94,10 @@ The Vagrant guest machine will mount the Freeciv-web source repository in the /v
 Note that running Freeciv-web using Vagrant requires about 4Gb of memory
 and 3 Gb of harddisk space.
 
-Running Freeciv-web with Docker
--------------------------------
-Freeciv-web can be built automatically using Docker https://www.docker.com/
-Note that building Freeciv-web with Docker is still in beta, and not actually working at the moment.
-This was tested using Docker v1.10.0 with Ubuntu 14.04 as the base image.
-Also see the [Dockerfile](Dockerfile) for more information.
-(Update: As of May 2016 the Docker setup is out of date. please use Vagrant instead.)
+Development and git branches
+----------------------------
+Freeciv-web has two branches: master and develop. Master is the main branch with production-ready code, while develop contains the latest development changes. The master branch is deployed to the live server nightly if there are updates. Develop is where development should happen, so please submit changes and pull-requests to the develop branch. We will merge from develop to master when we think that the develop branch is ready for the production server. This banching model is based on [A successful Git branching model](http://nvie.com/posts/a-successful-git-branching-model/).
 
-1. Install Docker Toolbox version v1.10.0 or later, then get the Freeciv-web source code like this:
- ```bash
-  git clone https://github.com/freeciv/freeciv-web.git --depth=10
- ```
-
-2. Build the Freeciv-web docker container by giving the following command: 
- ```bash
- docker build -t="freeciv-web" .
- ```
-3. Then run the Freeciv-web docker container with this command: 
-
- 
- ```bash
- docker run -d -p 80:80 --expose=80 -t freeciv-web /bin/sh -c "/docker/scripts/docker-run.sh && sleep infinity"
- ```
-
-Note: For users running Freeciv-web on Docker on Windows/msys-git, if the the command in step 3 above fails with an error message, try replacing the slash character with double-slashes like this: 
- ```bash
- docker run -d -p 80:80 --expose=80 -t freeciv-web //bin//sh -c "//docker//scripts//docker-run.sh && sleep infinity"
- ```
     
 
 System Requirements for manual install

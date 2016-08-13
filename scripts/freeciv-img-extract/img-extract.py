@@ -14,6 +14,7 @@
 '''
 
 import os, sys
+os.environ['PYTHON_EGG_CACHE'] = '/tmp'
 
 import configparser
 from PIL import Image

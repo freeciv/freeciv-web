@@ -6,6 +6,8 @@
 
 #Requires: https://github.com/travis-ci/travis.rb
 
+set -e
+
 SCRIPT_DIR="$(dirname "$0")"
 SCRIPT_USER="freeciv"
 cd "$(dirname "$0")"

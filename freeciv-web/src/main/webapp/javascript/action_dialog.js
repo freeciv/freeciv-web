@@ -54,6 +54,12 @@ function can_actor_unit_move(actor_unit, target_tile)
     return false;
   }
 
+  if (-1 == get_direction_for_step(tiles[actor_unit['tile']],
+                                   target_tile)) {
+    /* The target tile is too far away. */
+    return FALSE;
+  }
+
   for (var i = 0; i < tile_units(target_tile).length; i++) {
     tgt_owner_id = unit_owner(tile_units(target_tile)[i])['playerno'];
 
@@ -307,9 +313,6 @@ function popup_action_selection(actor_unit, action_probabilities,
 
     for (var action_id = 0; action_id < ACTION_COUNT; action_id++) {
       if (actions[action_id]['tgt_kind'] == tgt_kind
-          /* Don't show long range actions. The user may expect the ability
-           * to choose a new and distant target tile for them. */
-          && actions[action_id]['max_distance'] < 2
           && action_prob_possible(
               action_probabilities[action_id])) {
         buttons.push(create_act_sel_button(id, actor_unit['id'], tgt_id,

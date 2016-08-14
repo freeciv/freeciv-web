@@ -1362,6 +1362,11 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift, the_event)
       /* Abort any context menu blocking. */
       context_menu_active = true;
       $("#canvas").contextMenu(true);
+
+      /* Abort target tile selection. */
+      paradrop_active = false;
+      airlift_active = false;
+      action_tgt_sel_active = false;
       break;
 
     case 32: // space, will clear selection and goto.

@@ -12,6 +12,10 @@ SCRIPT_DIR="$(dirname "$0")"
 SCRIPT_USER="freeciv"
 cd "$(dirname "$0")"
 export FREECIV_WEB_DIR="${SCRIPT_DIR}/.."
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/freeciv/freeciv-web/freeciv-web/scripts:/usr/local/apache-maven-3.2.3/bin
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
 
 . configuration.sh
 
@@ -25,12 +29,12 @@ date
 if travis status -qpx ; then
   echo "Travis CI build passed!"
 else
-  echo "Travis CI build failed!";
+  echo "Travis CI build failed! (or build is in progress)";
   exit 1;
 fi 
 
 cd ${FREECIV_WEB_DIR} && \
-sudo -u ${SCRIPT_USER} git pull origin master | grep -q "up-to-date" && \
+git pull origin master | grep -q "up-to-date" && \
 echo "Freeciv-web is already updated, nothing to build." && exit 1
 
 echo "Freeciv-web updated. Start to rebuild." && \
@@ -41,12 +45,12 @@ cd .. && chmod -R 777 freeciv && \
 echo "Freeciv installed!" && \
 
 echo "Running sync scripts." && \
-cd ../scripts/ && sudo -u ${SCRIPT_USER} ./sync-js-hand.sh && \
-cd freeciv-img-extract && sudo -u ${SCRIPT_USER} ./sync.sh && \
+cd ../scripts/ && ./sync-js-hand.sh && \
+cd freeciv-img-extract && ./sync.sh && \
 
 echo "Building Freeciv-web." && \
-cd ../../freeciv-web && sudo -u ${SCRIPT_USER} sh build.sh && \
-sudo -u ${SCRIPT_USER} mvn compile flyway:migrate && \
+cd ../../freeciv-web && sh build.sh && \
+mvn compile flyway:migrate && \
 
 echo "Restarting Freeciv C servers." && \
 killall -9 freeciv-web
@@ -54,8 +58,7 @@ ps aux | grep -ie publite2 | awk '{print $2}' | xargs kill -9 &&
 ps aux | grep -ie freeciv-proxy | awk '{print $2}' | xargs kill -9  
 echo "delete from servers" | mysql -u ${MYSQL_USER} -p${MYSQL_PASSWORD} freeciv_web
 echo "Starting publite2" && \
-cd ../publite2/ && \
-sudo -u ${SCRIPT_USER} ./run.sh && \
+cd ../publite2/ && ./run.sh && \
 
 
 echo "Autodeploy of Freeciv-web is complete."

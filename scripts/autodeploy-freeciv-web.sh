@@ -16,6 +16,7 @@ export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/ga
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
+export CATALINA_HOME=/var/lib/tomcat8
 
 . configuration.sh
 
@@ -48,7 +49,8 @@ echo "Running sync scripts." && \
 cd ../scripts/ && ./sync-js-hand.sh && \
 cd freeciv-img-extract && ./sync.sh && \
 
-echo "Building Freeciv-web." && \
+echo "Stop Tomcat and building Freeciv-web." && \
+/var/lib/tomcat8/bin/catalina.sh stop && \
 cd ../../freeciv-web && sh build.sh && \
 mvn compile flyway:migrate && \
 
@@ -57,6 +59,7 @@ killall -9 freeciv-web
 ps aux | grep -ie publite2 | awk '{print $2}' | xargs kill -9 && 
 ps aux | grep -ie freeciv-proxy | awk '{print $2}' | xargs kill -9  
 echo "delete from servers" | mysql -u ${MYSQL_USER} -p${MYSQL_PASSWORD} freeciv_web
+/var/lib/tomcat8/bin/catalina.sh start && sleep 5 && \
 echo "Starting publite2" && \
 cd ../publite2/ && ./run.sh && \
 

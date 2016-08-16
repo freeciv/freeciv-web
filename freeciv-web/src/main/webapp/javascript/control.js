@@ -30,6 +30,7 @@ var current_focus = [];
 var goto_active = false;
 var paradrop_active = false;
 var airlift_active = false;
+var action_tgt_sel_active = false;
 
 /* Will be set when the goto is activated. */
 var goto_last_order = -1;
@@ -582,14 +583,8 @@ function update_unit_order_commands()
 
     }
 
-    /* Bring up the action selection dialog against current tile. */
-    if (ptype['name'] == "Spy" || ptype['name'] == "Diplomat"
-        || ptype['name'] == "Caravan" || ptype['name'] == "Freight"
-        || ptype['name'] == "Settlers"
-        || ptype['name'] == "Nuclear") {
-      /* This unit type can perform an enabler controlled action. */
-      unit_actions["action_selection"] = {name: "Do... (D)"};
-    }
+    /* Practically all unit types can currently perform some action. */
+    unit_actions["action_selection"] = {name: "Do... (D)"};
 
     if (ptype['name'] == "Engineers") {
       $("#order_transform").show();
@@ -1113,6 +1108,9 @@ function do_map_click(ptile, qtype, first_time_called)
     }
     airlift_active = false;
 
+  } else if (action_tgt_sel_active && current_focus.length > 0) {
+    request_unit_act_sel_vs(ptile);
+    action_tgt_sel_active = false;
   } else {
     if (pcity != null) {
       if (pcity['owner'] == client.conn.playing.playerno) {
@@ -1152,7 +1150,7 @@ function do_map_click(ptile, qtype, first_time_called)
 
   paradrop_active = false;
   airlift_active = false;
-
+  action_tgt_sel_active = false;
 }
 
 /**************************************************************************
@@ -1358,6 +1356,11 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift, the_event)
       /* Abort any context menu blocking. */
       context_menu_active = true;
       $("#canvas").contextMenu(true);
+
+      /* Abort target tile selection. */
+      paradrop_active = false;
+      airlift_active = false;
+      action_tgt_sel_active = false;
       break;
 
     case 32: // space, will clear selection and goto.
@@ -1848,6 +1851,48 @@ function key_unit_homecity()
   Show action selection dialog for unit(s).
 **************************************************************************/
 function key_unit_action_select()
+{
+  if (action_tgt_sel_active == true) {
+    /* The 2nd key press means that the actor should target its own
+     * tile. */
+    action_tgt_sel_active = false;
+
+    /* Target tile selected. Clean up hover state. */
+    request_unit_act_sel_vs_own_tile();
+  } else {
+    action_tgt_sel_active = true;
+    add_chatbox_text("Click on a tile to act against it. "
+                     + "Press 'd' again to act against own tile.");
+  }
+}
+
+/**************************************************************************
+  An action selection dialog for the selected units against the specified
+  tile is wanted.
+**************************************************************************/
+function request_unit_act_sel_vs(ptile)
+{
+  var funits = get_units_in_focus();
+
+  for (var i = 0; i < funits.length; i++) {
+    var punit = funits[i];
+    var packet = {
+      "pid"     : packet_unit_sscs_set,
+      "unit_id" : punit['id'],
+      "type"    : USSDT_QUEUE,
+      "value"   : ptile['index']
+    };
+
+    /* Have the server record that an action decision is wanted for this
+     * unit. */
+    send_request(JSON.stringify(packet));
+  }
+}
+
+/**************************************************************************
+  An action selection dialog for the selected units against its own tile.
+**************************************************************************/
+function request_unit_act_sel_vs_own_tile()
 {
   var funits = get_units_in_focus();
   for (var i = 0; i < funits.length; i++) {

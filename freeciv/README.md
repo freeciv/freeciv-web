@@ -10,3 +10,4 @@ apply_patches.sh - applies patches against the Freeciv C source code.
 
 version.txt - contains the SVN revision of Freeciv to check out from SVN.
 
+The Freeciv C server is installed to $HOME/freeciv.

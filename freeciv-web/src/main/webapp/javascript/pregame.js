@@ -563,6 +563,11 @@ function pregame_settings()
     }
   }
 
+  if (scenario_info != null && scenario_info['is_scenario']) {
+    /* A scenario may be bound to a ruleset. */
+    $("#ruleset").prop("disabled", scenario_info['ruleset_locked']);
+  }
+
   $(id).dialog('open');
 
   $('#aifill').change(function() {

@@ -583,14 +583,8 @@ function update_unit_order_commands()
 
     }
 
-    /* Bring up the action selection dialog against current tile. */
-    if (ptype['name'] == "Spy" || ptype['name'] == "Diplomat"
-        || ptype['name'] == "Caravan" || ptype['name'] == "Freight"
-        || ptype['name'] == "Settlers"
-        || ptype['name'] == "Nuclear") {
-      /* This unit type can perform an enabler controlled action. */
-      unit_actions["action_selection"] = {name: "Do... (D)"};
-    }
+    /* Practically all unit types can currently perform some action. */
+    unit_actions["action_selection"] = {name: "Do... (D)"};
 
     if (ptype['name'] == "Engineers") {
       $("#order_transform").show();

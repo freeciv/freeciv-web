@@ -9,12 +9,12 @@ casper.on('remote.message', function(message) {
 casper.options.waitTimeout = 60 * 60 * 1000;
 casper.options.viewportSize = {width: 1024, height: 768};
 
-casper.test.begin('Test starting new Freeciv-web autogame', 4, function suite(test) {
-    casper.start("http://localhost/webclient/?action=new", function() {
+casper.test.begin('Test starting new Freeciv-web autogame', 3, function suite(test) {
+    casper.start("http://localhost/webclient/?action=new");
+
+    casper.waitForSelector('#username_req', function() {
         test.assertHttpStatus(200);
         test.assertTitleMatch(/Freeciv-web/, 'Freeciv-web title is present');
-        test.assertExists('#username_req');
-
     });
 
     casper.then(function() {

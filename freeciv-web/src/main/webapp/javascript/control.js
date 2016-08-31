@@ -1056,6 +1056,7 @@ function do_map_click(ptile, qtype, first_time_called)
         }
         /* Send the order to move using the orders system. */
         send_request(JSON.stringify(packet));
+        unit_move_sound_play(punit);
       }
       clear_goto_tiles();
 
@@ -2057,6 +2058,7 @@ function key_unit_move(dir)
     };
 
     send_request(JSON.stringify(packet));
+    unit_move_sound_play(punit);
   }
 
   deactivate_goto();

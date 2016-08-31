@@ -1,7 +1,7 @@
 /*!
- * jQuery contextMenu v2.2.3 - Plugin for simple contextMenu handling
+ * jQuery contextMenu v2.2.4 - Plugin for simple contextMenu handling
  *
- * Version: v2.2.3
+ * Version: v2.2.4
  *
  * Authors: Björn Brala (SWIS.nl), Rodney Rehm, Addy Osmani (patches for FF)
  * Web: http://swisnl.github.io/jQuery-contextMenu/
@@ -12,7 +12,7 @@
  *   MIT License http://www.opensource.org/licenses/mit-license
  *   GPL v3 http://opensource.org/licenses/GPL-3.0
  *
- * Date: 2016-07-17T19:36:02.968Z
+ * Date: 2016-08-26T13:44:56.511Z
  */
 
 (function (factory) {
@@ -1469,6 +1469,7 @@
 
     // manage contextMenu instances
     $.contextMenu = function (operation, options) {
+
         if (typeof operation !== 'string') {
             options = operation;
             operation = 'create';
@@ -1492,7 +1493,7 @@
             // you never know what they throw at you...
             $context = $(o.context).first();
             o.context = $context.get(0);
-            _hasContext = o.context !== document;
+            _hasContext = !$(o.context).is(document);
         }
 
         switch (operation) {
@@ -1591,7 +1592,9 @@
                     // get proper options
                     var context = o.context;
                     $.each(menus, function (ns, o) {
-                        if (o.context !== context) {
+
+                        // Is this menu equest to the context called from
+                        if (!$(context).is(o.selector)) {
                             return true;
                         }
 

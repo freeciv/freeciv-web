@@ -45,6 +45,28 @@ function check_unit_sound_play(old_unit, new_unit)
 }
 
 /**************************************************************************
+ Plays the unit sound for movement.
+**************************************************************************/
+function unit_move_sound_play(unit)
+{
+  if (!sounds_enabled) return;
+  if (unit == null) return;
+
+  if (soundset == null) {
+    console.error("soundset not found.");
+    return;
+  }
+
+  var ptype = unit_type(unit);
+  if (soundset[ptype['sound_move']] != null) {
+    play_sound(soundset[ptype['sound_move']]);
+  } else if (soundset[ptype['sound_move_alt']] != null) {
+    play_sound(soundset[ptype['sound_move_alt']]);
+  }
+
+}
+
+/**************************************************************************
  Plays the combat sound for the unit if visible.
 **************************************************************************/
 function play_combat_sound(unit) 
@@ -79,6 +101,6 @@ function play_sound(sound_file)
     audio.play();
 
   } catch(err) {
-    console.log(err.message);
+    /* ignore sound error message. */
   }
 }

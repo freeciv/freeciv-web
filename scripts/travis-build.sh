@@ -83,9 +83,9 @@ dos2unix ${basedir}/scripts/configuration.sh.dist
 sed -e "s/MYSQL_USER=root/MYSQL_USER=${mysql_user}/" -e "s/MYSQL_PASSWORD=changeme/MYSQL_PASSWORD=/" ${basedir}/scripts/configuration.sh.dist > ${basedir}/scripts/configuration.sh
 
 echo "==== Checking out Freeciv from SVN and patching... ===="
-cd ${basedir}/freeciv && ./prepare_freeciv.sh
+cd ${basedir}/freeciv && sudo -u travis ./prepare_freeciv.sh
 echo "==== Building freeciv ===="
-cd freeciv && make install
+cd freeciv && sudo -u travis make install
 
 echo "==== Building freeciv-web ===="
 cd /var/lib/tomcat8 && sudo chmod -R 777 webapps logs && setfacl -d -m g::rwx webapps && sudo chown -R www-data:www-data webapps/

@@ -103,7 +103,7 @@ sed -e "s/MYSQL_USER=root/MYSQL_USER=${mysql_user}/" -e "s/MYSQL_PASSWORD=change
 
 echo "==== Building freeciv ===="
 dos2unix ${basedir}/freeciv/freeciv-web.project
-cd ${basedir}/freeciv && sudo -u ubuntu ./prepare_freeciv.sh
+cd ${basedir}/freeciv && sudo -Hu ubuntu ./prepare_freeciv.sh
 cd freeciv && sudo -u ubuntu make install
 
 echo "==== Building freeciv-web ===="

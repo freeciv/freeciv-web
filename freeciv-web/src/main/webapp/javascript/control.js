@@ -1056,7 +1056,13 @@ function do_map_click(ptile, qtype, first_time_called)
         }
         /* Send the order to move using the orders system. */
         send_request(JSON.stringify(packet));
-        unit_move_sound_play(punit);
+        if (punit['movesleft'] > 0) {
+          unit_move_sound_play(punit);
+        } else {
+          var ptype = unit_type(punit);
+          add_chatbox_text(ptype['name'] + " has no moves left. Press turn done for the next turn.");
+        }
+
       }
       clear_goto_tiles();
 

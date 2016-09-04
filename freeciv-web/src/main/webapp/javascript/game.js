@@ -113,10 +113,13 @@ function update_game_status_panel() {
     $("#game_status_panel").html(status_html);
   }
 
-  document.title = "Freeciv-web - " + username
-                   + "  (turn:" + game_info['turn'] + ", port:"
-                   + civserverport + ") "
-                   + server_settings['metamessage']['val'];
+  var page_title = "Freeciv-web - " + username
+                                    + "  (turn:" + game_info['turn'] + ", port:"
+                                    + civserverport + ") ";
+  if (server_settings['metamessage'] != null) {
+    page_title += server_settings['metamessage']['val'];
+  }
+  document.title = page_title;
 
 
 }

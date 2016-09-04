@@ -131,7 +131,7 @@ echo 'export PATH=$PATH:/vagrant/scripts' >> /home/ubuntu/.bashrc
 if [ -d "/vagrant/" ]; then
   echo "Starting Freeciv-web..."
   service nginx start
-  cd ${basedir}/scripts/ && sudo -u ubuntu ./start-freeciv-web.sh
+  cd ${basedir}/scripts/ && sudo -Hu ubuntu ./start-freeciv-web.sh
 else
   echo "Freeciv-web installed. Please start it manually."
 fi

@@ -333,7 +333,7 @@ if ( isset($port) ) {
         <ul class="nav navbar-nav">
           <li><a href="/">Home</a></li>
           <li class="active"><a id="metalink" href="/meta/metaserver.php">Online Games</a></li>
-          <li><a href="http://forum.freeciv.org/f/viewforum.php?f=24">Forum</a></li>
+          <li><a href="https://gitter.im/freeciv/freeciv-web">Chat</a></li>
           <li><a href="https://github.com/freeciv/freeciv-web">Github</a></li>
           <li><a href="http://play.freeciv.org/blog/">Blog</a></li>
           <li><a href="http://www.freeciv.org/donate.html">Donate</a></li>

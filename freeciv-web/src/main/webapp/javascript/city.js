@@ -1066,6 +1066,8 @@ function show_city_traderoutes()
 
   if (msg == "") {
     msg = "No traderoutes.";
+    msg += " (Open the Manual, select Economy and then Trade ";
+    msg += "if you want to learn more about trade and trade routes.)";
   }
 
   $("#city_traderoutes_tab").html(msg);

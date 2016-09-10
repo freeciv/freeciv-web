@@ -242,7 +242,7 @@ function pick_nation(player_id)
 			bgiframe: true,
 			modal: true,
 			width: is_small_screen() ? "99%" : "80%",
-                        height: $(window).height() - 40,
+            height: $(window).height() - 40,
 			buttons: {
 				Ok: function() {
 					$("#pick_nation_dialog").dialog('close');

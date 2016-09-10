@@ -464,12 +464,15 @@ function advance_unit_focus()
     current_focus = []; /* Reset focus units. */
     update_active_units_dialog();
     $("#game_unit_orders_default").hide();
-    /* find a city to focus on. */
-    for (var city_id in cities) {
-      var pcity = cities[city_id];
-      if (city_owner_player_id(pcity) == client.conn.playing.playerno) {
-        center_tile_mapcanvas(city_tile(pcity));
-        break;
+
+    /* find a city to focus on if new game. consider removing this.  */
+    if (game_info['turn'] <= 1) {
+      for (var city_id in cities) {
+        var pcity = cities[city_id];
+        if (city_owner_player_id(pcity) == client.conn.playing.playerno) {
+          center_tile_mapcanvas(city_tile(pcity));
+          break;
+        }
       }
     }
   }

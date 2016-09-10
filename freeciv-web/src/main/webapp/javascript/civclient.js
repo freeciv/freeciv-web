@@ -49,6 +49,7 @@ var audio_enabled = false;
 var last_turn_change_time = 0;
 var turn_change_elapsed = 0;
 var dialog_close_trigger = "";
+var chatbox_panel_toggle = false;
 
 /**************************************************************************
  Main starting point for Freeciv-web
@@ -242,6 +243,18 @@ function init_chatbox()
     $("#game_chatbox_panel").parent().css("max-height", "22%");
     $("#game_chatbox_panel").parent().css("width", "95%");
     chatbox_resized();
+
+    $("#game_message_area").click(function(e) {
+      if (chatbox_panel_toggle) {
+        $("#game_chatbox_panel").parent().css("max-height", "22%");
+        $("#game_chatbox_panel").parent().css("height", "22%");
+      } else {
+        $("#game_chatbox_panel").parent().css("max-height", "65%");
+        $("#game_chatbox_panel").parent().css("height", "65%");
+      }
+      chatbox_resized();
+      chatbox_panel_toggle = !chatbox_panel_toggle;
+    });
   }
 }
 

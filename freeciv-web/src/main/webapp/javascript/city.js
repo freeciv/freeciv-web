@@ -157,6 +157,13 @@ function show_city_dialog(pcity)
          next_city();
        }
      });
+   } else {
+       dialog_buttons = $.extend(dialog_buttons,
+         {
+          "Next" : function() {
+            next_city();
+          }
+        });
    }
 
    dialog_buttons = $.extend(dialog_buttons,

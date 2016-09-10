@@ -4,6 +4,8 @@
 <title>Freeciv-web</title>
 <link rel="stylesheet" type="text/css" href="/css/webclient.min.css?ts=${initParam.buildTimeStamp}" />
 <meta name="description" content="Freeciv-Web is a Free and Open Source empire-building strategy game inspired by the history of human civilization.">
+<script type="text/javascript">window._trackJs = { token: 'ee5dba6fe2e048f79b422157b450947b' };</script>
+<script type="text/javascript" src="https://cdn.trackjs.com/releases/current/tracker.js"></script>
 <script type="text/javascript">
 var ts="${initParam.buildTimeStamp}";
 </script>
@@ -14,7 +16,6 @@ var ts="${initParam.buildTimeStamp}";
 <link rel="shortcut icon" href="/images/freeciv-shortcut-icon.png" />
 <link rel="apple-touch-icon" href="/images/freeciv-splash2.png" />
 
-<%--  iPhone setup --%>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, minimal-ui" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -25,8 +26,6 @@ var ts="${initParam.buildTimeStamp}";
 </head>
 
 <body>
-
-    <script type="text/javascript" src="//d2zah9y47r7bi2.cloudfront.net/releases/current/tracker.js" data-token="ee5dba6fe2e048f79b422157b450947b"></script>
     <jsp:include page="pregame.jsp" flush="false"/>
     <jsp:include page="game.jsp" flush="false"/>
     

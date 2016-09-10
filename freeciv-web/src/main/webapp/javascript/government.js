@@ -48,7 +48,8 @@ function show_revolution_dialog()
   $(id).dialog({
 			bgiframe: true,
 			modal: true,
-			width: "450",
+			width: is_small_screen() ? "99%" : "450",
+			height: $(window).height() - 40,
 			  buttons: {
 				"Start revolution!" : function() {
 					start_revolution();

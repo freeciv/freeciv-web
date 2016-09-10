@@ -27,6 +27,7 @@ var map_select_check_started = 0;
 var map_select_active = false;
 var map_select_x;
 var map_select_y;
+var mouse_touch_started_on_unit = false;
 
 /****************************************************************************
   Triggered when the mouse button is clicked UP on the mapview canvas.
@@ -110,6 +111,16 @@ function mapview_touch_start(e)
 
   touch_start_x = e.originalEvent.touches[0].pageX - $('#canvas').position().left;
   touch_start_y = e.originalEvent.touches[0].pageY - $('#canvas').position().top;
+
+  var ptile = canvas_pos_to_tile(touch_start_x, touch_start_y);
+  if (ptile == null) return;
+  var sunit = find_visible_unit(ptile);
+  if (sunit != null && client.conn.playing != null && sunit['owner'] == client.conn.playing.playerno) {
+    mouse_touch_started_on_unit = true;
+  } else {
+    mouse_touch_started_on_unit = false;
+  }
+
 }
 
 /****************************************************************************
@@ -189,7 +200,7 @@ function city_mapview_mouse_click(e)
 function check_mouse_drag_unit(canvas_x, canvas_y)
 {
   var ptile = canvas_pos_to_tile(canvas_x, canvas_y);
-  if (ptile == null) return;
+  if (ptile == null || !mouse_touch_started_on_unit) return;
 
   var sunit = find_visible_unit(ptile);
 

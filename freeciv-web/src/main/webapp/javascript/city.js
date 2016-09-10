@@ -1334,9 +1334,10 @@ function update_city_screen()
   $("#cities_list").html(city_list_html);
 
   if (count == 0) {
-    $("#city_table").html("You have no cities.");
+    $("#city_table").html("You have no cities. Build new cities with the Settlers unit.");
   }
 
+  $('#cities_scroll').css("height", $(window).height() - 200);
 
   $("#city_table").tablesorter({theme:"dark"});
 }

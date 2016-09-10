@@ -274,6 +274,8 @@ function pick_nation(player_id)
 
   if (!is_small_screen()) {
     render_city_style_list();
+  } else {
+    $("#nation_autocomplete_box").blur();
   }
 
 

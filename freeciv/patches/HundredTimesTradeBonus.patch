@@ -1,0 +1,14 @@
+diff -Nurd -X.diff_ignore freeciv/common/traderoutes.c freeciv/common/traderoutes.c
+--- freeciv/common/traderoutes.c	2016-08-20 16:15:21.483098276 +0300
++++ freeciv/common/traderoutes.c	2016-09-09 20:21:02.727243812 +0300
+@@ -327,8 +327,8 @@
+       && NULL != pc2 && NULL != pc2->tile) {
+     int real_dist = real_map_distance(pc1->tile, pc2->tile);
+     int weighted_distance
+-      = (100 - game.info.trade_world_rel_pct) * real_dist
+-        + game.info.trade_world_rel_pct * (real_dist * 40 / MAX(wld.map.xsize, wld.map.ysize));
++      = ((100 - game.info.trade_world_rel_pct) * real_dist
++         + game.info.trade_world_rel_pct * (real_dist * 40 / MAX(wld.map.xsize, wld.map.ysize))) / 100;
+ 
+     bonus = weighted_distance
+             + city_size_get(pc1) + city_size_get(pc2);

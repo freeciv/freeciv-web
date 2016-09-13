@@ -59,9 +59,8 @@ $(document).ready(function() {
     cache: true
   }).done(function( game_stats ) {
     var stats = game_stats.split(";");
-    if (stats.length == 4) {
+    if (stats.length == 3) {
       $( "#metalink" ).html("Online Games: " +  stats[0]);
-      $( "#hours_played" ).html(Math.floor((parseFloat(stats[3]))/60));
       $( "#single_count" ).html(stats[1]);
       $( "#multi_count" ).html(stats[2]);
     }

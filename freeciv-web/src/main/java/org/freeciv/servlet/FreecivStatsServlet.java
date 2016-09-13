@@ -36,13 +36,6 @@ public class FreecivStatsServlet extends HttpServlet {
 	            conn = ds.getConnection();
 
 				switch (type) {
-					case "time": {
-						String insertTableSQL = "INSERT INTO time_played_stats (statsDate, timePlayed) VALUES (CURDATE(), 2) " +
-								"ON DUPLICATE KEY UPDATE timePlayed = timePlayed + 2";
-						PreparedStatement preparedStatement = conn.prepareStatement(insertTableSQL);
-						preparedStatement.executeUpdate();
-						break;
-					}
 					case "single": {
 						String insertTableSQL = "INSERT INTO games_played_stats (statsDate, gameType, gameCount) VALUES (CURDATE(), 0, 1)  ON DUPLICATE KEY UPDATE gameCount = gameCount + 1";
 						PreparedStatement preparedStatement = conn.prepareStatement(insertTableSQL);
@@ -74,9 +67,8 @@ public class FreecivStatsServlet extends HttpServlet {
 	            
 
 	      } catch (Exception err) {
-	            response.setHeader("result", "error");
-	            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Error...");
-	        } finally {
+				System.err.println("Error in FreecivStatsServlet" + err.getMessage());
+	      } finally {
 	            if (conn != null)
 	                try {
 	                    conn.close();

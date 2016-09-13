@@ -89,7 +89,6 @@ function civclient_init()
   control_init();
 
   timeoutTimerId = setInterval(update_timeout, 1000);
-  statsTimerId = setInterval(update_time_played_stats, 120000);
 
   update_game_status_panel();
   statusTimerId = setInterval(update_game_status_panel, 6000);
@@ -692,11 +691,4 @@ function show_auth_dialog(packet) {
   $("#dialog").dialog('open');
 
 
-}
-
-/**************************************************************************
- Updates the time played statistics.
-**************************************************************************/
-function update_time_played_stats() {
-  $.post("/freeciv_time_played_stats?type=time").fail(function() {});
 }

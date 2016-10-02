@@ -1346,7 +1346,7 @@ function handle_ruleset_action_auto(packet)
 
 function handle_ruleset_goods(packet)
 {
-  /* TODO: Implement */
+  goods[packet['id']] = packet;
 }
 
 function handle_ruleset_achievement(packet)

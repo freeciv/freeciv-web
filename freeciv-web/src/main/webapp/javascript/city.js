@@ -22,6 +22,8 @@ var cities = {};
 var city_rules = {};
 var city_trade_routes = {};
 
+var goods = {};
+
 var active_city = null;
 var worklist_dialog_active = false;
 var selected_value = -1;
@@ -1058,6 +1060,7 @@ function show_city_traderoutes()
   for (var i = 0; i < active_city['traderoute_count']; i++) {
     var tcity_id;
     var tcity;
+    var good;
 
     tcity_id = routes[i]['partner'];
 
@@ -1065,10 +1068,16 @@ function show_city_traderoutes()
       continue;
     }
 
+    good = goods[routes[i]['goods']];
+    if (good == null) {
+      console.log("Missing good type " + routes[i]['goods']);
+      good = {'name': "Unknown"};
+    }
+
     tcity = cities[tcity_id];
     if (tcity == null) continue;
-    msg += "Trade with " + tcity['name'] + " gives "
-        + routes[i]['value'] + " gold each turn." + "<br>";
+    msg += good['name'] + " trade with " + tcity['name'];
+    msg += " gives " + routes[i]['value'] + " gold each turn." + "<br>";
   }
 
   if (msg == "") {

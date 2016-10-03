@@ -37,3 +37,4 @@ var EXTRA_RUINS = 10;
 var ROAD_ROAD  = 11;
 var ROAD_RAIL  = 12;
 var ROAD_RIVER = 13;
+var ROAD_RIVER_CIV2CIV3 = 14; /* FIXME: This can probably be done better. */

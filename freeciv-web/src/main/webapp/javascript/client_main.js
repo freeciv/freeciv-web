@@ -59,6 +59,10 @@ function set_client_state(newstate)
         }, 1500);
       }
 
+      if (ruleset_control['name'] == "Civ2Civ3 ruleset") {
+        ROAD_RIVER = ROAD_RIVER_CIV2CIV3;
+      }
+
       break;
     case C_S_OVER:
       setTimeout(show_endgame_dialog, 500);

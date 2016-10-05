@@ -85,8 +85,6 @@ function can_actor_unit_move(actor_unit, target_tile)
       return true;
     }
 
-    /* TODO: Support rulesets were an actor can invade a city OR do another
-     * action to it. */
     return false;
   }
 

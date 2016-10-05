@@ -1,12 +1,13 @@
-diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
---- freeciv/server/unithand.c	2012-07-17 19:39:33.000000000 +0300
-+++ freeciv/server/unithand.c	2012-07-17 20:10:38.000000000 +0300
-@@ -1511,7 +1511,7 @@
-         || (victim = is_non_attack_unit_tile(pdesttile, pplayer))) {
-       notify_player(pplayer, unit_tile(punit), E_BAD_COMMAND, ftc_server,
-                     _("You must declare war on %s first.  Try using "
--                      "the Nations report (F3)."),
-+                      "the Nations report."),
-                     victim == NULL
-                     ? player_name(city_owner(pcity))
-                     : player_name(unit_owner(victim)));
+diff --git a/server/unithand.c b/server/unithand.c
+index 03f3ff6..bbf1e6d 100644
+--- a/server/unithand.c
++++ b/server/unithand.c
+@@ -1193,7 +1193,7 @@ static void explain_why_no_action_enabled(struct unit *punit,
+   case ANEK_NO_WAR:
+     notify_player(pplayer, unit_tile(punit), E_BAD_COMMAND, ftc_server,
+                   _("You must declare war on %s first.  Try using "
+-                    "the Nations report (F3)."),
++                    "the Nations report."),
+                   player_name(explnat->no_war_with));
+     break;
+   case ANEK_DOMESTIC:

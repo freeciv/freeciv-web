@@ -84,7 +84,9 @@ var ACTION_UPGRADE_UNIT = 26;
 var ACTION_PARADROP = 27;
 var ACTION_AIRLIFT = 28;
 var ACTION_ATTACK = 29;
-var ACTION_COUNT = 30;
+var ACTION_CONQUER_CITY = 30;
+var ACTION_HEAL_UNIT = 31;
+var ACTION_COUNT = 32;
 
 /* The action_decision enum */
 /* Doesn't need the player to decide what action to take. */
@@ -137,7 +139,8 @@ var VUT_IMPR_GENUS = 37;
 var VUT_ACTION = 38;
 var VUT_MINTECHS = 39;
 var VUT_EXTRAFLAG = 40;
-var VUT_COUNT = 41;             /* Keep this last. */
+var VUT_MINCALFRAG = 41;
+var VUT_COUNT = 42;             /* Keep this last. */
 
 /* Sometimes we don't know (or don't care) if some requirements for effect
  * are currently fulfilled or not. This enum tells lower level functions

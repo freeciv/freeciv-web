@@ -85,7 +85,8 @@ var ACTION_PARADROP = 27;
 var ACTION_AIRLIFT = 28;
 var ACTION_ATTACK = 29;
 var ACTION_CONQUER_CITY = 30;
-var ACTION_COUNT = 31;
+var ACTION_HEAL_UNIT = 31;
+var ACTION_COUNT = 32;
 
 /* The action_decision enum */
 /* Doesn't need the player to decide what action to take. */

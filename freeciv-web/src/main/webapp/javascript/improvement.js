@@ -59,7 +59,9 @@ function get_improvement_requirements(improvement_id)
   var improvement = improvements[improvement_id];
   if (improvement != null && improvement['reqs'] != null) {
     for (var i = 0; i < improvement['reqs'].length; i++) {
-      result.push(improvement['reqs'][i]['value']);
+      if (improvement['reqs'][i]['kind'] == 1) {
+        result.push(improvement['reqs'][i]['value']);
+      }
     }
   }
 

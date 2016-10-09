@@ -680,15 +680,18 @@ function show_tech_info_dialog(tech_name, unit_type_id, improvement_id)
 
   if (improvement_id != null) message += "<b>Improvement info</b>: " + improvements[improvement_id]['helptext'] + "<br><br>";
 
-  message += "<b>Wikipedia on <a href='" + wikipedia_url
+  if (freeciv_wiki_docs[tech_name] != null) {
+    message += "<b>Wikipedia on <a href='" + wikipedia_url
 	  + freeciv_wiki_docs[tech_name]['title']
 	  + "' target='_new' style='color: black;'>" + freeciv_wiki_docs[tech_name]['title']
 	  + "</a>:</b><br>";
-  if (freeciv_wiki_docs[tech_name]['image'] != null) {
-    message += "<img id='wiki_image' src='" + freeciv_wiki_docs[tech_name]['image'] + "'><br>";
-  }
 
-  message += freeciv_wiki_docs[tech_name]['summary'];
+    if (freeciv_wiki_docs[tech_name]['image'] != null) {
+      message += "<img id='wiki_image' src='" + freeciv_wiki_docs[tech_name]['image'] + "'><br>";
+    }
+
+    message += freeciv_wiki_docs[tech_name]['summary'];
+  }
 
   // reset dialog page.
   $("#wiki_dialog").remove();

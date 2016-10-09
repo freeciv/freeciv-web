@@ -207,9 +207,12 @@ function generate_help_text(key)
 	    + improvement['helptext']
             + "<br><br>Cost: " + improvement['build_cost']
             + "<br>Upkeep: " + improvement['upkeep'];
-    var req = get_improvement_requirements(improvement['id']);
-    if (req != null) {
-      msg += "<br>Requirements: " + techs[req]['name'];
+    var reqs = get_improvement_requirements(improvement['id']);
+    if (reqs != null) {
+      msg += "<br>Requirements: ";
+      for (var n = 0; n < reqs.length; n++) {
+       msg += techs[reqs[n]]['name'] + " ";
+      }
     }
     msg += "<br><br><button class='help_button' onclick=\"show_wikipedia_dialog('" + improvement['name'] + "');\">Wikipedia on "
 	    + improvement['name'] +  "</button>";
@@ -227,9 +230,12 @@ function generate_help_text(key)
     msg += "<br>Moves: " + move_points_text(punit_type['move_rate']);
     msg += "<br>Vision: " + punit_type['vision_radius_sq'];
 
-    var ireq = get_improvement_requirements(punit_type['impr_requirement']);
-    if (ireq != null && techs[ireq] != null) {
-      msg += "<br>Building Requirements: " + techs[ireq]['name'];
+    var ireqs = get_improvement_requirements(punit_type['impr_requirement']);
+    if (ireqs != null && techs[ireqs] != null) {
+      msg += "<br>Building Requirements: ";
+      for (var m = 0; m < ireqs.length; m++) {
+        msg += techs[ireqs[m]]['name'] + " ";
+      }
     }
     var treq = punit_type['tech_requirement'];
     if (treq != null && techs[treq] != null) {

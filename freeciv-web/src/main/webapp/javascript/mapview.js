@@ -386,7 +386,7 @@ function mapview_put_city_bar(pcanvas, city, canvas_x, canvas_y) {
 
   var txt_measure = pcanvas.measureText(text);
   var size_measure = pcanvas.measureText(size);
-
+  pcanvas.globalAlpha = 0.65;
   pcanvas.fillStyle = "rgba(0, 0, 0, 0.5)";
   pcanvas.fillRect (canvas_x - Math.floor(txt_measure.width / 2) - 14, canvas_y - 17,
                     txt_measure.width + 20, 20);
@@ -394,14 +394,6 @@ function mapview_put_city_bar(pcanvas, city, canvas_x, canvas_y) {
   pcanvas.fillStyle = color;
   pcanvas.fillRect(canvas_x + Math.floor(txt_measure.width / 2) + 5, canvas_y - 19,
                (prod_type != null) ? size_measure.width + 35 : size_measure.width + 8, 24);
-
-  pcanvas.fillStyle = "rgba(0, 0, 0, 1)";
-  pcanvas.fillText(size, canvas_x + Math.floor(txt_measure.width / 2) + 10, canvas_y + 1);
-
-  pcanvas.fillStyle = "rgba(255, 255, 255, 1)";
-  pcanvas.fillText(text, canvas_x - Math.floor(txt_measure.width / 2), canvas_y - 1);
-
-  pcanvas.fillText(size, canvas_x + Math.floor(txt_measure.width / 2) + 8, canvas_y - 1);
 
   var city_flag = get_city_flag_sprite(city);
   pcanvas.drawImage(sprites[city_flag['key']],
@@ -424,13 +416,21 @@ function mapview_put_city_bar(pcanvas, city, canvas_x, canvas_y) {
   pcanvas.lineTo(canvas_x - Math.floor(txt_measure.width / 2) - 15, canvas_y + 3);
   pcanvas.stroke();
 
+  pcanvas.globalAlpha = 1.0;
+
   if (prod_type != null) {
     var tag = prod_type['graphic_str'];
     if (tileset[tag] == null) return;
     pcanvas.drawImage(sprites[tag],
-              canvas_x + Math.floor(txt_measure.width / 2) + size_measure.width + 13, 
+              canvas_x + Math.floor(txt_measure.width / 2) + size_measure.width + 13,
               canvas_y - 19, 28, 24);
   }
+
+  pcanvas.fillStyle = "rgba(0, 0, 0, 1)";
+  pcanvas.fillText(size, canvas_x + Math.floor(txt_measure.width / 2) + 10, canvas_y + 1);
+  pcanvas.fillStyle = "rgba(255, 255, 255, 1)";
+  pcanvas.fillText(text, canvas_x - Math.floor(txt_measure.width / 2), canvas_y - 1);
+  pcanvas.fillText(size, canvas_x + Math.floor(txt_measure.width / 2) + 8, canvas_y - 1);
 
 }
 

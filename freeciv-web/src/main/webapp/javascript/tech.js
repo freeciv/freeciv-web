@@ -21,7 +21,7 @@
 var techs = {};
 var techcoststyle1 = {};
 
-var tech_canvas_text_font = "13pt Arial"; 
+var tech_canvas_text_font = "17px Arial";
 
 var is_tech_tree_init = false;
 var tech_dialog_active = false;

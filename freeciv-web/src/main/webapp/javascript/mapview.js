@@ -41,8 +41,7 @@ mapview_slide['slide_time'] = 700;
 var height_offset = 67;
 var width_offset = 10;
 
-var canvas_text_font = "14pt Arial"; // with canvas text support
-var fontsize = 12;
+var canvas_text_font = "17px Arial"; // with canvas text support
 
 var fullfog = [];
 
@@ -429,7 +428,7 @@ function mapview_put_city_bar(pcanvas, city, canvas_x, canvas_y) {
   pcanvas.fillStyle = "rgba(0, 0, 0, 1)";
   pcanvas.fillText(size, canvas_x + Math.floor(txt_measure.width / 2) + 10, canvas_y + 1);
   pcanvas.fillStyle = "rgba(255, 255, 255, 1)";
-  pcanvas.fillText(text, canvas_x - Math.floor(txt_measure.width / 2), canvas_y - 1);
+  pcanvas.fillText(text, canvas_x - Math.floor(txt_measure.width / 2) - 2, canvas_y - 1);
   pcanvas.fillText(size, canvas_x + Math.floor(txt_measure.width / 2) + 8, canvas_y - 1);
 
 }

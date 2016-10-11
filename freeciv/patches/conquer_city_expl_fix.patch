@@ -1,0 +1,43 @@
+From 8b5a4af26da2290e7d31a27d1af64bc852e52da9 Mon Sep 17 00:00:00 2001
+From: Sveinung Kvilhaugsvik <sveinung84@users.sourceforge.net>
+Date: Tue, 11 Oct 2016 20:09:07 +0200
+Subject: [PATCH 10/10] Explanation: "Conquer City" is city targeted.
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Check the target city's tile rather than a potentially missing target tile
+when trying to explain why the "Conquer City" action was illegal.
+
+Reported by Andreas Røsdal <andreasr>
+
+See bug #25170
+---
+ server/unithand.c | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
+
+diff --git a/server/unithand.c b/server/unithand.c
+index 81bd0cc..1a4265b 100644
+--- a/server/unithand.c
++++ b/server/unithand.c
+@@ -865,9 +865,14 @@ static struct ane_expl *expl_act_not_enabl(struct unit *punit,
+     action_custom = unit_attack_units_at_tile_result(punit, target_tile);
+     break;
+   case ACTION_CONQUER_CITY:
+-    action_custom = unit_move_to_tile_test(punit, punit->activity,
+-                                           unit_tile(punit), target_tile,
+-                                           FALSE, NULL, TRUE);
++    if (target_city) {
++      action_custom = unit_move_to_tile_test(punit, punit->activity,
++                                             unit_tile(punit),
++                                             city_tile(target_city),
++                                             FALSE, NULL, TRUE);
++    } else {
++      action_custom = MR_OK;
++    }
+     break;
+   default:
+     action_custom = 0;
+-- 
+2.1.4
+

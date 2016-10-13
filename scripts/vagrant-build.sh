@@ -68,6 +68,8 @@ debconf-set-selections <<< "mysql-server mysql-server/root_password_again passwo
 echo "apt-get install dependencies"
 apt-get -y install ${dependencies}
 
+cp /usr/bin/python3.5 /usr/bin/python
+
 echo "==== Fetching/Installing Tornado Web Server ===="
 cd /tmp
 wget ${tornado_url}

@@ -1021,7 +1021,7 @@ class Packet:
         self.want_force="force" in arr
         if self.want_force: arr.remove("force")
 
- 	self.cancel=[]
+        self.cancel=[]
         removes=[]
         remaining=[]
         for i in arr:

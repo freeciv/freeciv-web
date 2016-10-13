@@ -33,14 +33,9 @@ var anim_units_count = 0;
 var ORDER_MOVE = 0;
 var ORDER_ACTIVITY = 1;
 var ORDER_FULL_MP = 2;
-var ORDER_OLD_BUILD_CITY = 3;
-var ORDER_OLD_DISBAND = 4;
-var ORDER_OLD_BUILD_WONDER = 5;
-var ORDER_OLD_TRADE_ROUTE = 6;
-var ORDER_OLD_HOMECITY = 7;
-var ORDER_ACTION_MOVE = 8;
-var ORDER_PERFORM_ACTION = 9;
-var ORDER_LAST = 10;
+var ORDER_ACTION_MOVE = 3;
+var ORDER_PERFORM_ACTION = 4;
+var ORDER_LAST = 5;
 
 /* The unit_ss_data_type enum from unit.h */
 var USSDT_QUEUE = 0;

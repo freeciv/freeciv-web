@@ -191,7 +191,7 @@ casper.test.begin('Test webperimental', 1, function suite(test) {
 
   casper.waitForSelector('#pregame_settings_button', function() {
     this.echo("Opening pre game settings dialog.");
-    this.clickLabel("Settings");
+    this.clickLabel("Game Settings");
   });
 
   casper.waitForSelector('#ruleset', function() {

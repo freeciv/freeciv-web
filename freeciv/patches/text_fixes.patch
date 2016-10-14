@@ -6,7 +6,7 @@ diff -Nurd -X.diff_ignore freeciv/common/featured_text.c freeciv/common/featured
  const struct ft_color ftc_warning       = FT_COLOR("#FF0000",   NULL);
  const struct ft_color ftc_log           = FT_COLOR("#7F7F7F",   NULL);
 -const struct ft_color ftc_server        = FT_COLOR("#8B0000",   NULL);
-+const struct ft_color ftc_server        = FT_COLOR("#FF0000",   NULL);
++const struct ft_color ftc_server        = FT_COLOR("#FFFFFF",   NULL);
  const struct ft_color ftc_client        = FT_COLOR("#EF7F00",   NULL);
  const struct ft_color ftc_editor        = FT_COLOR("#0000FF",   NULL);
  const struct ft_color ftc_command       = FT_COLOR("#006400",   NULL);

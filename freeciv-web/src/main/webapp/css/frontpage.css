@@ -144,3 +144,18 @@ table, th, td {
 #feedback_form {
   max-width: 100%;
 }
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: #0b527a !important;
+    border-color: black;
+}
+
+.btn-info, .btn-info:hover, .btn-info:active, .btn-info:visited {
+    background-color: #052c42 !important;
+    border-color: black;
+}
+
+.btn-default, .btn-default:hover, .btn-default:active, .btn-default:visited {
+    background-color: #005445 !important;
+    border-color: black;
+}

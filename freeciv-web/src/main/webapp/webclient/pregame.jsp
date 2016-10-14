@@ -7,7 +7,7 @@
 		<button id="start_game_button" type="button" class="button">Start Game</button>
 		<button id="load_game_button" type="button" class="button">Load Game</button>
 		<button id="pick_nation_button" type="button" class="button">Pick Nation</button>
-		<button id="pregame_settings_button" type="button" class="button">Settings</button>
+		<button id="pregame_settings_button" type="button" class="button">Game Settings</button>
 	</div>
 
   </div>

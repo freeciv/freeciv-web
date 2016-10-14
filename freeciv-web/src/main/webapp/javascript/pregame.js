@@ -732,6 +732,11 @@ function pregame_settings()
   }
 
   $("#settings_table").tooltip();
+
+  if (is_touch_device() || is_small_screen()) {
+      $('#metamessage').blur();
+  }
+
 }
 
 /**************************************************************************

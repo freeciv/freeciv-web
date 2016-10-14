@@ -246,3 +246,9 @@ body {
 #hotseat_dialog {
   overflow: auto;
 }
+
+@media (max-width: 700px) {
+  #pregame_buttons button {
+    width: 21%;
+  }
+}

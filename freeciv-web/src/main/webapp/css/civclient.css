@@ -108,6 +108,7 @@ button {
   padding: 5px;
   right: 0;
   top: 0;
+  z-index: 9000;
 }
 
 #turn_done_button {
@@ -724,8 +725,8 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 }
 
 .ui-widget-content a {
-  color: #FAE508;
-} 
+  color: #f8ff8a;
+}
 
 .govt_button {
   width: 60%;
@@ -784,8 +785,15 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 }
 
 .context-menu-item {
-  font-size: 120%;
-  background-color: rgba(200,200,200,0.7);
+  font-size: 125%;
+  background-color: rgba(200,200,200,0.75);
+}
+
+@media (max-width: 900px) {
+  .context-menu-item {
+    font-size: 150%;
+    background-color: rgba(200,200,200,0.75);
+  }
 }
 
 .chatbox_text_tileinfo {

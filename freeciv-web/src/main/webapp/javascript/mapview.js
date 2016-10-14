@@ -38,7 +38,7 @@ mapview_slide['i'] = 0;
 mapview_slide['max'] = 100;
 mapview_slide['slide_time'] = 700;
 
-var height_offset = 67;
+var height_offset = 52;
 var width_offset = 10;
 
 var canvas_text_font = "17px Arial"; // with canvas text support
@@ -173,7 +173,15 @@ function setup_window_size ()
   $("#tabs-hel").hide();
 
 
-  /* dynamically reduce content in top meny according to content*/
+  if (is_small_screen() && $(window).width() - sum_width() < 35) {
+    // not enough space for turn done button, move it down.
+    var myelement = $("#turn_done_button_div").detach();
+    $('#game_page').append(myelement);
+    $("#turn_done_button_div").css("top", "30px");
+    $("#turn_done_button").css("padding", "3px");
+  }
+
+  /* dynamically reduce content in top menu according to content*/
   while ($(window).width() - sum_width() < 35) {
     if (i == 0) $("#freeciv_logo").hide();
     if (i == 1) $("#hel_tab").hide();
@@ -233,7 +241,7 @@ function is_small_screen()
   var winWidth = $(window).width();
   var winHeight = $(window).height();
 
-  if (winWidth <= 640 || winHeight <= 590) {
+  if (winWidth <= 700 || winHeight <= 650) {
     return true;
   } else {
     return false;
@@ -499,8 +507,9 @@ function mapview_put_goto_line(pcanvas, dir, canvas_x, canvas_y) {
   var x1 = x0 + GOTO_DIR_DX[dir] * (tileset_tile_width / 2);
   var y1 = y0 + GOTO_DIR_DY[dir] * (tileset_tile_height / 2);
 
-  pcanvas.strokeStyle = '#f00';
-  pcanvas.lineWidth = 2;
+  pcanvas.strokeStyle = 'rgba(0,168,255,0.7)';
+  pcanvas.lineWidth = 10;
+  pcanvas.lineCap = "round";
   pcanvas.beginPath();
   pcanvas.moveTo(x0, y0);
   pcanvas.lineTo(x1, y1);

@@ -21,7 +21,7 @@
 var techs = {};
 var techcoststyle1 = {};
 
-var tech_canvas_text_font = "17px Arial";
+var tech_canvas_text_font = "18px Arial";
 
 var is_tech_tree_init = false;
 var tech_dialog_active = false;
@@ -115,6 +115,7 @@ function player_invention_state(pplayer, tech_id)
 **************************************************************************/
 function init_tech_screen()
 {
+  if (is_small_screen()) tech_canvas_text_font = "20px Arial";
   $("#technologies").width($(window).width() - 20);
 
   if (is_tech_tree_init) return;

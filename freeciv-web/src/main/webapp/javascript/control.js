@@ -50,6 +50,7 @@ var current_goto_turns = 0;
 var waiting_units_list = [];
 var show_citybar = true;
 var context_menu_active = true;
+var has_movesleft_warning_been_shown = false;
 
 /****************************************************************************
 ...
@@ -125,6 +126,9 @@ function control_init()
   /* disable text-selection, as this gives wrong mouse cursor
    * during drag to goto units. */
   document.onselectstart = function(){ return false; };
+
+  /* remove context menu from pregame. */
+  $(".context-menu-root").remove();
 
   /* disable right clicks. */
   document.oncontextmenu = function(){return allow_right_click;};
@@ -1061,7 +1065,8 @@ function do_map_click(ptile, qtype, first_time_called)
         send_request(JSON.stringify(packet));
         if (punit['movesleft'] > 0) {
           unit_move_sound_play(punit);
-        } else {
+        } else if (!has_movesleft_warning_been_shown) {
+          has_movesleft_warning_been_shown = true;
           var ptype = unit_type(punit);
           add_chatbox_text(ptype['name'] + " has no moves left. Press turn done for the next turn.");
         }

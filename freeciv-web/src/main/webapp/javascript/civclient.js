@@ -387,8 +387,8 @@ function show_dialog_message(title, message) {
   //quick fix to put the dialog on top of everything else.
   setTimeout("$('#dialog').parent().css('z-index', 2000)", 50);
 
-  // automatically close dialog after 9 seconds, because sometimes the dilaog can't be closed manually.
-  setTimeout("$('#dialog').dialog('close'); $('#game_text_input').blur();", 9000);
+  // automatically close dialog after 12 seconds, because sometimes the dilaog can't be closed manually.
+  setTimeout("$('#dialog').dialog('close'); $('#game_text_input').blur();", 12000);
 
   speak(title);
   speak(message);
@@ -464,6 +464,7 @@ function show_intro_dialog(title, message) {
 					autostart = true;
 					if (validate_username()) {
 						$("#dialog").dialog('close');
+						if (is_touch_device() || is_small_screen()) BigScreen.toggle();
 					}
 				},
 				  "Customize Game": function() {
@@ -471,6 +472,7 @@ function show_intro_dialog(title, message) {
 					if (validate_username()) {
 					  if (!is_touch_device()) $("#pregame_text_input").focus();
 					  $("#dialog").dialog('close');
+					  if (is_touch_device() || is_small_screen()) BigScreen.toggle();
 					}
 				}
 			}

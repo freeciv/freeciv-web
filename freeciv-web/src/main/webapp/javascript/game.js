@@ -80,29 +80,22 @@ function update_game_status_panel() {
 
   if (client.conn.playing != null) {
     var pplayer = client.conn.playing;
-    if (is_small_screen()) {
-      status_html += "<b>" + nations[pplayer['nation']]['adjective'] + "</b> Pop: ";
-      status_html += "<b>" + civ_population(client.conn.playing.playerno) + "</b>  ";
-      status_html += "Year: <b>" + get_year_string() + "</b> ";
-      status_html += "Gold: <b>" + pplayer['gold'] + "</b>";
-    } else {
-      var tax = client.conn.playing['tax'];
-      var lux = client.conn.playing['luxury'];
-      var sci = client.conn.playing['science'];
+    var tax = client.conn.playing['tax'];
+    var lux = client.conn.playing['luxury'];
+    var sci = client.conn.playing['science'];
 
-      var net_income = pplayer['net_income'];
-      if (pplayer['net_income'] > 0) {
-        net_income = "+" + pplayer['net_income'];
-      }
-
-      status_html += "<b>" + nations[pplayer['nation']]['adjective'] + "</b> Population: ";
-      status_html += "<b>" + civ_population(client.conn.playing.playerno) + "</b>  ";
-      status_html += "Year: <b>" + get_year_string() + "</b> ";
-      status_html += "Gold: <b>" + pplayer['gold'] + " (" + net_income + ")</b>  ";
-      status_html += "Tax: <b>" + tax + "</b>% ";
-      status_html += "Lux: <b>" + lux + "</b>% ";
-      status_html += "Sci: <b>" + sci + "</b>% ";
+    var net_income = pplayer['net_income'];
+    if (pplayer['net_income'] > 0) {
+      net_income = "+" + pplayer['net_income'];
     }
+
+    if (!is_small_screen()) status_html += "<b>" + nations[pplayer['nation']]['adjective'] + "</b> &nbsp;&nbsp; <i class='fa fa-child' aria-hidden='true' title='Population'></i>: ";
+    if (!is_small_screen()) status_html += "<b>" + civ_population(client.conn.playing.playerno) + "</b>  &nbsp;&nbsp;";
+    if (!is_small_screen()) status_html += "<i class='fa fa-calendar' aria-hidden='true' title='Year (turn)'></i>: <b>" + get_year_string() + "</b> &nbsp;&nbsp;";
+    status_html += "<i class='fa fa-money' aria-hidden='true' title='Gold (net income)'></i>: <b>" + pplayer['gold'] + " (" + net_income + ")</b>  &nbsp;&nbsp;";
+    status_html += "<i class='fa fa-btc' aria-hidden='true' title='Tax rate'></i>: <b>" + tax + "</b>% ";
+    status_html += "<i class='fa fa-music' aria-hidden='true' title='Luxury rate'></i>: <b>" + lux + "</b>% ";
+    status_html += "<i class='fa fa-flask' aria-hidden='true' title='Science rate'></i>: <b>" + sci + "</b>% ";
   } else if (server_settings != null && server_settings['metamessage'] != null) {
     status_html += "Observing - " + server_settings['metamessage']['val']
                    + " - ";

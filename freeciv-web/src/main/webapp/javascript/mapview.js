@@ -160,11 +160,13 @@ function setup_window_size ()
 
   var i = 0;
 
-  $("#opt_tab").children().html("Options");
-  $("#players_tab").children().html("Nations");
-  $("#cities_tab").children().html("Cities");
-  $("#tech_tab").children().html("Research");
-  $("#civ_tab").children().html("Government");
+  if (is_small_screen()) {
+    $("#opt_tab").children().html("Options");
+    $("#players_tab").children().html("Nations");
+    $("#cities_tab").children().html("Cities");
+    $("#tech_tab").children().html("Research");
+    $("#civ_tab").children().html("Government");
+  }
 
   $("#opt_tab").show();
   $("#players_tab").show();
@@ -238,10 +240,7 @@ function sum_width()
 **************************************************************************/
 function is_small_screen()
 {
-  var winWidth = $(window).width();
-  var winHeight = $(window).height();
-
-  if (winWidth <= 700 || winHeight <= 650) {
+  if ($(window).width() <= 640 || $(window).height() <= 590) {
     return true;
   } else {
     return false;

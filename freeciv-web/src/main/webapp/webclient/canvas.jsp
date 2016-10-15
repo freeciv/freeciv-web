@@ -8,6 +8,7 @@
      <div id="game_chatbox_panel">
 	<div id="game_message_area"></div>
 	<div id="game_chat_box">
+		<i class="fa fa-commenting-o fa-2" aria-hidden="true" style="color: #7b7b7b; "></i>
 		<input id="game_text_input" type="text" name="text_input" />
 	</div>
      </div>

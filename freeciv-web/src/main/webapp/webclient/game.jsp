@@ -5,14 +5,13 @@
 		    
 			<ul id="tabs_menu">
 			    <div id="freeciv_logo" ></div>
-				<li id="map_tab"><a href="#tabs-map">Map</a></li>
-				<li id="civ_tab"><a href="#tabs-civ">Government</a></li>
-				<li id="tech_tab"><a id="tech_tab_item" href="#tabs-tec">Research</a></li>
-				<li id="players_tab"><a href="#tabs-nat">Nations</a></li>
-				<li id="cities_tab"><a href="#tabs-cities">Cities</a></li>
-				<li style="display: none;"><a href="#tabs-cit">City</a></li>
-				<li id="opt_tab"><a href="#tabs-opt">Options</a></li>
-				<li id="hel_tab"><a href="#tabs-hel">Manual</a></li>
+				<li id="map_tab"><a href="#tabs-map"><i class="fa fa-globe" aria-hidden="true"></i> Map</a></li>
+				<li id="civ_tab"><a href="#tabs-civ"><i class="fa fa-university" aria-hidden="true"></i> Government</a></li>
+				<li id="tech_tab"><a id="tech_tab_item" href="#tabs-tec"><i class="fa fa-flask" aria-hidden="true"></i> Research</a></li>
+				<li id="players_tab"><a href="#tabs-nat"><i class="fa fa-flag" aria-hidden="true"></i> Nations</a></li>
+				<li id="cities_tab"><a href="#tabs-cities"><i class="fa fa-fort-awesome" aria-hidden="true"></i> Cities</a></li>
+				<li id="opt_tab"><a href="#tabs-opt"><i class="fa fa-cogs" aria-hidden="true"></i> Options</a></li>
+				<li id="hel_tab"><a href="#tabs-hel"><i class="fa fa-question-circle-o" aria-hidden="true"></i> Manual</a></li>
 
 
 				<div id="turn_done_button_div">

@@ -458,24 +458,32 @@ function show_intro_dialog(title, message) {
 			  }
 			},
 			buttons:
-			{
-				"Start Game" : function() {
+			[
+			  {
+				  text : "Start Game",
+				  click : function() {
 					dialog_close_trigger = "button";
 					autostart = true;
 					if (validate_username()) {
 						$("#dialog").dialog('close');
 						if (is_touch_device() || is_small_screen()) BigScreen.toggle();
 					}
-				},
-				  "Customize Game": function() {
+				  },
+				  icons: { primary: "ui-icon-play" }
+			  },
+			  {
+				  text : "Customize Game",
+				  click : function() {
 					dialog_close_trigger = "button";
 					if (validate_username()) {
 					  if (!is_touch_device()) $("#pregame_text_input").focus();
 					  $("#dialog").dialog('close');
 					  if (is_touch_device() || is_small_screen()) BigScreen.toggle();
 					}
+				},
+				icons : { primary: "ui-icon-gear" }
 				}
-			}
+			]
 
 		});
 

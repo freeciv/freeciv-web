@@ -833,8 +833,8 @@ function get_unit_hp_sprite(punit)
 function get_unit_veteran_sprite(punit)
 {
   return {"key" : "unit.vet_" + punit['veteran'],
-          "offset_x" : unit_activity_offset_x,
-          "offset_y" : - unit_activity_offset_y - 5};
+          "offset_x" : unit_activity_offset_x - 20,
+          "offset_y" : - unit_activity_offset_y - 10};
 }
 
 /**********************************************************************

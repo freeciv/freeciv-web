@@ -127,9 +127,6 @@ function control_init()
    * during drag to goto units. */
   document.onselectstart = function(){ return false; };
 
-  /* remove context menu from pregame. */
-  $(".context-menu-root").remove();
-
   /* disable right clicks. */
   document.oncontextmenu = function(){return allow_right_click;};
 

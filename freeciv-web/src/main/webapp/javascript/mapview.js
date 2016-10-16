@@ -48,8 +48,6 @@ var fullfog = [];
 var GOTO_DIR_DX = [0, 1, 2, -1, 1, -2, -1, 0];
 var GOTO_DIR_DY = [-2, -1, 0, -1, 1, 0, 1, 2];
 
-var dashedSupport = false;
-
 
 /**************************************************************************
   ...
@@ -83,8 +81,6 @@ function init_mapview()
     // if this Boolean value is false, images won't be smoothed when scaled. This property is true by default.
     mapview_canvas_ctx.mozImageSmoothingEnabled = false;
   }
-
-  dashedSupport = ("setLineDash" in mapview_canvas_ctx);
 
   setup_window_size();
 
@@ -457,42 +453,24 @@ function mapview_put_tile_label(pcanvas, tile, canvas_x, canvas_y) {
 function mapview_put_border_line(pcanvas, dir, color, canvas_x, canvas_y) {
   var x = canvas_x + 47;
   var y = canvas_y + 3;
-
   pcanvas.strokeStyle = color;
-  pcanvas.lineWidth = 2;
-
-  pcanvas.lineCap = 'butt';
-  if (dashedSupport) {
-    pcanvas.setLineDash([4,4]);
-  }
-
   pcanvas.beginPath();
+
   if (dir == DIR8_NORTH) {
-    if (dashedSupport) {
-      pcanvas.moveTo(x, y - 2, x + (tileset_tile_width / 2));
-      pcanvas.lineTo(x + (tileset_tile_width / 2),  y + (tileset_tile_height / 2) - 2);
-    }
+    pcanvas.moveTo(x, y - 2, x + (tileset_tile_width / 2));
+    pcanvas.lineTo(x + (tileset_tile_width / 2),  y + (tileset_tile_height / 2) - 2);
   } else if (dir == DIR8_EAST) {
-    if (dashedSupport) {
-      pcanvas.moveTo(x - 3, y + tileset_tile_height - 3);
-      pcanvas.lineTo(x + (tileset_tile_width / 2) - 3,  y + (tileset_tile_height / 2) - 3);
-    }
+    pcanvas.moveTo(x - 3, y + tileset_tile_height - 3);
+    pcanvas.lineTo(x + (tileset_tile_width / 2) - 3,  y + (tileset_tile_height / 2) - 3);
   } else if (dir == DIR8_SOUTH) {
-    if (dashedSupport) {
-      pcanvas.moveTo(x - (tileset_tile_width / 2) + 3, y + (tileset_tile_height / 2) - 3);
-      pcanvas.lineTo(x + 3,  y + tileset_tile_height - 3);
-    }
+    pcanvas.moveTo(x - (tileset_tile_width / 2) + 3, y + (tileset_tile_height / 2) - 3);
+    pcanvas.lineTo(x + 3,  y + tileset_tile_height - 3);
   } else if (dir == DIR8_WEST) {
-    if (dashedSupport) {
-      pcanvas.moveTo(x - (tileset_tile_width / 2) + 3, y + (tileset_tile_height / 2) - 3);
-      pcanvas.lineTo(x + 3,  y - 3);
-    }
+    pcanvas.moveTo(x - (tileset_tile_width / 2) + 3, y + (tileset_tile_height / 2) - 3);
+    pcanvas.lineTo(x + 3,  y - 3);
   }
   pcanvas.closePath();
   pcanvas.stroke();
-  if (dashedSupport) {
-    pcanvas.setLineDash([]);
-  }
 
 }
 

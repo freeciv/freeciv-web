@@ -62,12 +62,18 @@ function set_client_state(newstate)
       if (ruleset_control['name'] == "Civ2Civ3 ruleset") {
         ROAD_ROAD = ROAD_ROAD_CIV2CIV3;
       }
+      /* remove context menu from pregame. */
+      $(".context-menu-root").remove();
 
       break;
     case C_S_OVER:
       setTimeout(show_endgame_dialog, 500);
       break;
     case C_S_PREPARING:
+      if (is_small_screen() && $.getUrlVar('action') == "new") {
+        // disable borders on mobile devices for performance reasons.
+        send_message_delayed("/set borders disabled", 200);
+      }
       break;
     default:
       break;

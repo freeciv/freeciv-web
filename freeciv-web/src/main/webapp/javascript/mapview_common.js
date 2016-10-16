@@ -294,6 +294,15 @@ function update_map_canvas(canvas_x, canvas_y, width, height)
   // mapview_layer_iterate
   for (var layer = 0; layer <= LAYER_COUNT; layer++) {
 
+    // set layer-specific canvas properties here.
+    if (layer == LAYER_SPECIAL1) {
+      mapview_canvas_ctx.lineWidth = 2;
+      mapview_canvas_ctx.lineCap = 'butt';
+      mapview_canvas_ctx.setLineDash([4,4]);
+    } else if (layer == LAYER_CITY1) {
+      mapview_canvas_ctx.setLineDash([]);
+    }
+
     //gui_rect_iterate begin
     var gui_x_0 = (gui_x0);
     var gui_y_0 = (gui_y0);

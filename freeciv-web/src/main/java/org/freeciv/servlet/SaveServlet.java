@@ -71,7 +71,21 @@ public class SaveServlet extends HttpServlet {
 		String relativeWebPath = "/savegames/" + username + ".sav.xz";
 		String absoluteDiskPath = getServletContext().getRealPath(relativeWebPath).replaceAll("ROOT", "data");
 		File file = new File(absoluteDiskPath);
-		if (!file.exists()) {
+
+		boolean found = false;
+		for (int i = 0; i < 10; i++) {
+			if (file.exists() && System.currentTimeMillis() - file.lastModified() < 10000) {
+				found = true;
+				break;
+			}
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+
+		if (!found) {
 	    	   response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
 				"Savegame file not found!");
   		   return;

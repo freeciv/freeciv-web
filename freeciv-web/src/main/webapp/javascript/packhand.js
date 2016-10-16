@@ -592,6 +592,7 @@ function handle_unit_packet_common(packet_unit)
 
   if (current_focus.length > 0 && current_focus[0]['id'] == packet_unit['id']) {
     update_active_units_dialog();
+    update_unit_order_commands();
 
     if (current_focus[0]['done_moving'] != packet_unit['done_moving']) {
       update_unit_focus();

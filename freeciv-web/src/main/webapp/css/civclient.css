@@ -872,10 +872,11 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
   width: 100%;
   color: white;
   background-color: rgba(0,0,0,0.6);
+  font-size: 86%;
 }
 
 #active_unit_info span {
-  font-size: 80%;
+  font-size: 75%;
 }
 
 #game_unit_panel {

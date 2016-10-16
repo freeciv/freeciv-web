@@ -262,7 +262,7 @@ function check_savegame_duplicate(new_savename)
 function save_game_send()
 {
   send_message("/save");
-  sTimerId = setTimeout(save_game_fetch,  3500);
+  save_game_fetch();
 
 }
 

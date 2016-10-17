@@ -74,7 +74,8 @@ public class SaveServlet extends HttpServlet {
 
 		boolean found = false;
 		for (int i = 0; i < 10; i++) {
-			if (file.exists() && System.currentTimeMillis() - file.lastModified() < 10000) {
+			long fileAge = System.currentTimeMillis() - file.lastModified();
+			if (file.exists() && fileAge > 400 && fileAge < 8000) {
 				found = true;
 				break;
 			}

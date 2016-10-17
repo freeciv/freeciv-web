@@ -298,9 +298,9 @@ function update_map_canvas(canvas_x, canvas_y, width, height)
     if (layer == LAYER_SPECIAL1) {
       mapview_canvas_ctx.lineWidth = 2;
       mapview_canvas_ctx.lineCap = 'butt';
-      mapview_canvas_ctx.setLineDash([4,4]);
+      if (dashedSupport) mapview_canvas_ctx.setLineDash([4,4]);
     } else if (layer == LAYER_CITY1) {
-      mapview_canvas_ctx.setLineDash([]);
+      if (dashedSupport) mapview_canvas_ctx.setLineDash([]);
     }
 
     //gui_rect_iterate begin

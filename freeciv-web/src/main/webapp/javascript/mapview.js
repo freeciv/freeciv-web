@@ -47,7 +47,7 @@ var fullfog = [];
 
 var GOTO_DIR_DX = [0, 1, 2, -1, 1, -2, -1, 0];
 var GOTO_DIR_DY = [-2, -1, 0, -1, 1, 0, 1, 2];
-
+var dashedSupport = false;
 
 /**************************************************************************
   ...
@@ -81,6 +81,7 @@ function init_mapview()
     // if this Boolean value is false, images won't be smoothed when scaled. This property is true by default.
     mapview_canvas_ctx.mozImageSmoothingEnabled = false;
   }
+  dashedSupport = ("setLineDash" in mapview_canvas_ctx);
 
   setup_window_size();
 

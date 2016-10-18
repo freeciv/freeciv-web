@@ -142,6 +142,20 @@ var VUT_EXTRAFLAG = 40;
 var VUT_MINCALFRAG = 41;
 var VUT_COUNT = 42;             /* Keep this last. */
 
+/* Freeciv's gui_type enum */
+/* Used for options which do not belong to any gui. */
+var GUI_STUB    = 0;
+var GUI_GTK2    = 1;
+var GUI_GTK3    = 2;
+var GUI_GTK3_22 = 3;
+/* GUI_SDL remains for now for keeping client options alive until
+ * user has migrated them to sdl2-client */
+var GUI_SDL     = 4;
+var GUI_QT      = 5;
+var GUI_SDL2    = 6;
+var GUI_WEB     = 7;
+var GUI_GTK3x   = 8;
+
 /* Sometimes we don't know (or don't care) if some requirements for effect
  * are currently fulfilled or not. This enum tells lower level functions
  * how to handle uncertain requirements.

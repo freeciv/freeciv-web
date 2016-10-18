@@ -145,10 +145,12 @@ Unimplemented Freeciv client features:
     - would be much work
     - keeping it updated as the corresponding code changes in Freeciv would be a nightmare
     - high probability of it ending up telling lies
-  - make freeciv-manual output something Freeciv-web can read
+  - parts of the freeciv-manual output is now marked. This makes it more
+    machine readable.
     - could be done during the Freeciv-web build
     - have Freeciv-web look up the correct file given the current ruleset
-    - mark the parts Freeciv-web wants (like the list of facts about a unit type)
+    - have freeciv-manual output more auto generated help texts in a form
+      Freeciv-web can use.
 - between turns timer count down
 
 Unimplemented rule variation support:

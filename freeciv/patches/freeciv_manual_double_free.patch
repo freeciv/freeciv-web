@@ -1,0 +1,28 @@
+From 4ee19038b17acfae564c05fd783c6f0b098d74ab Mon Sep 17 00:00:00 2001
+From: Sveinung Kvilhaugsvik <sveinung84@users.sourceforge.net>
+Date: Tue, 18 Oct 2016 22:40:51 +0200
+Subject: [PATCH] Fix double free in freeciv-manual.
+
+The ruleset option is set to be garbage collected. Don't free the variable
+pointing to it.
+
+---
+ tools/civmanual.c | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/tools/civmanual.c b/tools/civmanual.c
+index fef9045..108c386 100644
+--- a/tools/civmanual.c
++++ b/tools/civmanual.c
+@@ -762,8 +762,6 @@ int main(int argc, char **argv)
+     retval = EXIT_FAILURE;
+   }
+ 
+-  FC_FREE(ruleset);
+-
+   con_log_close();
+   registry_module_close();
+   free_libfreeciv();
+-- 
+2.1.4
+

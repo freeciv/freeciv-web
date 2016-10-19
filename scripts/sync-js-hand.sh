@@ -14,6 +14,7 @@ mkdir -p ${DATADIR}savegames/ && \
 cp ../freeciv/freeciv/data/scenarios/*.sav ${DATADIR}savegames/ && \
 python3.5 helpdata_gen/helpdata_gen.py &&\
 cp freeciv-helpdata.js ../freeciv-web/src/main/webapp/javascript/ && \
+sh helpdata_gen/ruleset_auto_gen.sh && \
 cp ../LICENSE.txt ../freeciv-web/src/main/webapp/docs/ &&
 mkdir -p ../freeciv-web/src/main/webapp/sounds/  && \
 cp ../freeciv/freeciv/data/stdsounds/*.ogg ../freeciv-web/src/main/webapp/sounds/ && \

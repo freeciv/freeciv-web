@@ -172,6 +172,7 @@ button {
 
 .helptext {
   white-space: pre-wrap;
+  font-size: 85%;
 }
 
 #game_unit_orders_default {

@@ -170,6 +170,10 @@ button {
   overflow: auto;
 }
 
+.helptext {
+  white-space: pre-wrap;
+}
+
 #game_unit_orders_default {
   bottom: 55px;
   min-width: 300px;

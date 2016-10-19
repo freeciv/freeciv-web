@@ -389,7 +389,25 @@ function submit_nation_choice()
   clearInterval(nation_select_id);
 }
 
-
+/***************************************************************************
+  Returns the ruleset directory of the ruleset based on its name.
+***************************************************************************/
+function ruledir_from_ruleset_name(ruleset_name, fall_back_dir)
+{
+  /* HACK: find current ruleset dir based on its name. */
+  switch (ruleset_name) {
+  case "Classic ruleset":
+    return "classic";
+  case "Civ2Civ3 ruleset":
+    return "civ2civ3";
+  case "Webperimental":
+    return "webperimental";
+  default:
+    console.log("Don't know the ruleset dir of \"" + ruleset_name
+                + "\". Guessing " + fall_back_dir + ".");
+    return fall_back_dir;
+  }
+}
 
 /****************************************************************************
  Shows the pregame settings dialog.
@@ -551,18 +569,8 @@ function pregame_settings()
   }
 
   if (ruleset_control != null) {
-    /* HACK: find current ruleset based on its name. */
-    switch (ruleset_control['name']) {
-    case "Classic ruleset":
-      $("#ruleset").val("classic");
-      break;
-    case "Civ2Civ3 ruleset":
-      $("#ruleset").val("civ2civ3");
-      break;
-    case "Webperimental":
-      $("#ruleset").val("webperimental");
-      break;
-    }
+    $("#ruleset").val(ruledir_from_ruleset_name(ruleset_control['name'],
+                                                "classic"));
   }
 
   if (scenario_info != null && scenario_info['is_scenario']) {

@@ -219,7 +219,7 @@ function generate_help_text(key)
   } else if (key.indexOf("help_gen_units") != -1) {
     var punit_type = unit_types[parseInt(key.replace("help_gen_units_", ""))];
     msg = "<h1>" + punit_type['name'] + "</h1>";
-    msg = render_sprite(get_unit_type_image_sprite(punit_type));
+    msg += render_sprite(get_unit_type_image_sprite(punit_type));
     msg += "<p id='helptext'>" + punit_type['helptext'] + "</p>";
     msg += "Cost: " + punit_type['build_cost'];
             /*+ "<br>Upkeep: " + improvement['upkeep'];*/

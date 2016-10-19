@@ -267,6 +267,32 @@ function generate_help_text(key)
   }
 
   $("#help_info_page").html(msg);
+
+  /* Freeciv has code that generates certain help texts based on the
+   * ruleset. This code is written in C. It is huge. Replicating it in
+   * JavaScript would be a huge task and probably introduce bugs. Even if
+   * someone did it it would be hard to keep the replicated code in sync as
+   * the corresponding Freeciv C code kept evolving.
+   *
+   * Freeciv has the tool freeciv-manual. It can use the ruleset based auto
+   * help text generation. It can output HTML. Some of its HTML output is
+   * machine readable enough to be usable for Freeciv-web.
+   *
+   * Use the machine readable and wanted parts of freeciv-manual's output to
+   * add auto generated help texts for the current ruleset. */
+  if (ruledir_from_ruleset_name(ruleset_control['name'], "").length =! 0) {
+    var rulesetdir = ruledir_from_ruleset_name(ruleset_control['name'], "");
+
+    if (key.indexOf("help_gen_units") != -1) {
+      var utype_id = parseInt(key.replace("help_gen_units_", ""));
+
+      /* Add the auto generated unit type facts freeciv-manual prepends to
+       * the unit type's help text. */
+      $("#helptext").load("../man/" + rulesetdir + "7.html #utype"
+                          + utype_id + " .helptext");
+    }
+  }
+
   $(".help_button").button();
 }
 

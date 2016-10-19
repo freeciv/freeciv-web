@@ -152,7 +152,6 @@ Unimplemented Freeciv client features:
       - needs a different Freeciv build than provided by
         freeciv/prepare_freeciv.sh
       - isn't done during the Freeciv-web build
-    - have Freeciv-web look up the correct file given the current ruleset
     - have freeciv-manual output more auto generated help texts in a form
       Freeciv-web can use.
 - between turns timer count down

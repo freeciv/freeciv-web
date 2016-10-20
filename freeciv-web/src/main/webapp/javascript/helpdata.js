@@ -192,7 +192,9 @@ function handle_help_menu_select( ui )
 **************************************************************************/
 function generate_help_text(key)
 {
+  var rulesetdir = ruledir_from_ruleset_name(ruleset_control['name'], "");
   var msg = "";
+
   if (key.indexOf("help_gen_terrain") != -1) {
     var terrain = terrains[parseInt(key.replace("help_gen_terrain_", ""))];
     msg = "<h1>" + terrain['name'] + "</h1>" + terrain['helptext']
@@ -280,9 +282,7 @@ function generate_help_text(key)
    *
    * Use the machine readable and wanted parts of freeciv-manual's output to
    * add auto generated help texts for the current ruleset. */
-  if (ruledir_from_ruleset_name(ruleset_control['name'], "").length =! 0) {
-    var rulesetdir = ruledir_from_ruleset_name(ruleset_control['name'], "");
-
+  if (rulesetdir.length =! 0) {
     if (key.indexOf("help_gen_units") != -1) {
       var utype_id = parseInt(key.replace("help_gen_units_", ""));
 

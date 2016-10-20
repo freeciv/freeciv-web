@@ -217,3 +217,14 @@ casper.test.begin('Test webperimental', 1, function suite(test) {
     test.done();
   });
 });
+
+casper.test.begin('Test auto generated manual text extraction.',
+                  1, function suite(test) {
+  casper.start("http://localhost/man/classic7.html", function() {
+    test.assertHttpStatus(200);
+  });
+
+  casper.run(function() {
+    test.done();
+  });
+});

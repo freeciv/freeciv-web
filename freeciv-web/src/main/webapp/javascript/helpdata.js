@@ -282,7 +282,7 @@ function generate_help_text(key)
    *
    * Use the machine readable and wanted parts of freeciv-manual's output to
    * add auto generated help texts for the current ruleset. */
-  if (rulesetdir.length =! 0) {
+  if (rulesetdir.length != 0) {
     if (key.indexOf("help_gen_units") != -1) {
       var utype_id = parseInt(key.replace("help_gen_units_", ""));
 

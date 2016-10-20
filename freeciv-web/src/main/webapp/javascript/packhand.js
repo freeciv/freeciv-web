@@ -59,6 +59,8 @@ function handle_ruleset_terrain(packet)
 function handle_server_join_reply(packet)
 {
   if (packet['you_can_join']) {
+    var client_info;
+
     client.conn.established = true;
     client.conn.id = packet['conn_id'];
 
@@ -67,6 +69,13 @@ function handle_server_join_reply(packet)
 	|| get_client_page() == PAGE_GGZ) {
       set_client_page(PAGE_START);
     }
+
+    client_info = {
+      "pid"          : packet_client_info,
+      "gui"          : GUI_WEB,
+      "distribution" : ""
+    };
+    send_request(JSON.stringify(client_info));
 
     set_client_state(C_S_PREPARING);
 

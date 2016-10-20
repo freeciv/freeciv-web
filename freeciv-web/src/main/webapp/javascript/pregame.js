@@ -404,7 +404,7 @@ function ruledir_from_ruleset_name(ruleset_name, fall_back_dir)
     return "webperimental";
   default:
     console.log("Don't know the ruleset dir of \"" + ruleset_name
-                + "\". Guessing " + fall_back_dir + ".");
+                + "\". Guessing \"" + fall_back_dir + "\".");
     return fall_back_dir;
   }
 }

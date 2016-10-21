@@ -192,7 +192,9 @@ function handle_help_menu_select( ui )
 **************************************************************************/
 function generate_help_text(key)
 {
+  var rulesetdir = ruledir_from_ruleset_name(ruleset_control['name'], "");
   var msg = "";
+
   if (key.indexOf("help_gen_terrain") != -1) {
     var terrain = terrains[parseInt(key.replace("help_gen_terrain_", ""))];
     msg = "<h1>" + terrain['name'] + "</h1>" + terrain['helptext']
@@ -220,7 +222,8 @@ function generate_help_text(key)
     var punit_type = unit_types[parseInt(key.replace("help_gen_units_", ""))];
     msg = "<h1>" + punit_type['name'] + "</h1>";
     msg += render_sprite(get_unit_type_image_sprite(punit_type));
-    msg += "<p id='helptext'>" + punit_type['helptext'] + "</p>";
+    msg += "<br>";
+    msg += "<div id='manual_non_helptext_facts'>"
     msg += "Cost: " + punit_type['build_cost'];
             /*+ "<br>Upkeep: " + improvement['upkeep'];*/
     msg += "<br>Attack: " + punit_type['attack_strength'];
@@ -241,8 +244,13 @@ function generate_help_text(key)
     if (treq != null && techs[treq] != null) {
       msg += "<br>Tech Requirements: " + techs[treq]['name'];
     }
-    msg += "<br><br><button class='help_button' onclick=\"show_wikipedia_dialog('" + punit_type['name'] + "');\">Wikipedia on "
-	    + punit_type['name'] +  "</button>";
+    msg += "</div>"
+
+    msg += "<div id='helptext'><p>" + punit_type['helptext'] + "</p></div>";
+
+    msg += "<button class='help_button' onclick=\"show_wikipedia_dialog('"
+        + punit_type['name'] + "');\">Wikipedia on " + punit_type['name']
+        +  "</button>";
   } else if (key.indexOf("help_gen_techs") != -1) {
     var tech = techs[parseInt(key.replace("help_gen_techs_", ""))];
     msg = "<h1>" + tech['name'] + "</h1>"
@@ -261,6 +269,30 @@ function generate_help_text(key)
   }
 
   $("#help_info_page").html(msg);
+
+  /* Freeciv has code that generates certain help texts based on the
+   * ruleset. This code is written in C. It is huge. Replicating it in
+   * JavaScript would be a huge task and probably introduce bugs. Even if
+   * someone did it it would be hard to keep the replicated code in sync as
+   * the corresponding Freeciv C code kept evolving.
+   *
+   * Freeciv has the tool freeciv-manual. It can use the ruleset based auto
+   * help text generation. It can output HTML. Some of its HTML output is
+   * machine readable enough to be usable for Freeciv-web.
+   *
+   * Use the machine readable and wanted parts of freeciv-manual's output to
+   * add auto generated help texts for the current ruleset. */
+  if (rulesetdir.length != 0) {
+    if (key.indexOf("help_gen_units") != -1) {
+      var utype_id = parseInt(key.replace("help_gen_units_", ""));
+
+      /* Add the auto generated unit type facts freeciv-manual prepends to
+       * the unit type's help text. */
+      $("#helptext").load("../man/" + rulesetdir + "7.html #utype"
+                          + utype_id + " .helptext");
+    }
+  }
+
   $(".help_button").button();
 }
 

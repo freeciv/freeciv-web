@@ -147,8 +147,6 @@ Unimplemented Freeciv client features:
     - high probability of it ending up telling lies
   - parts of the freeciv-manual output is now marked. This makes it more
     machine readable.
-    - could be done during the Freeciv-web build
-    - have Freeciv-web look up the correct file given the current ruleset
     - have freeciv-manual output more auto generated help texts in a form
       Freeciv-web can use.
 - between turns timer count down

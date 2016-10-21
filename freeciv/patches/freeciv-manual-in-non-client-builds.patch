@@ -1,0 +1,47 @@
+From 6dd0e36cd25d5474bee0f31e604b64fe29877704 Mon Sep 17 00:00:00 2001
+From: Sveinung Kvilhaugsvik <sveinung84@users.sourceforge.net>
+Date: Wed, 19 Oct 2016 00:35:36 +0200
+Subject: [PATCH] Permit freeciv-manual in non client builds.
+
+The build system is able to compile the client source files freeciv-manual
+needs to compile.
+
+WARNING: this corrupts the setting and the command help. Remove them.
+---
+ tools/Makefile.am | 2 --
+ tools/civmanual.c | 2 +-
+ 2 files changed, 1 insertion(+), 3 deletions(-)
+
+diff --git a/tools/Makefile.am b/tools/Makefile.am
+index 6f939fc..1a41d11 100644
+--- a/tools/Makefile.am
++++ b/tools/Makefile.am
+@@ -13,12 +13,10 @@ include $(top_srcdir)/bootstrap/Makerules.mk
+ bin_PROGRAMS = freeciv-ruleup
+ 
+ if SERVER
+-if CLIENT
+ if FCMANUAL
+ bin_PROGRAMS += freeciv-manual
+ endif
+ endif
+-endif
+ 
+ if MODINST_CLI
+ bin_PROGRAMS += freeciv-mp-cli
+diff --git a/tools/civmanual.c b/tools/civmanual.c
+index 108c386..8e937a6 100644
+--- a/tools/civmanual.c
++++ b/tools/civmanual.c
+@@ -225,7 +225,7 @@ static bool manual_command(void)
+     return FALSE;
+   }
+ 
+-  for (manuals = 0; manuals < MANUAL_COUNT; manuals++) {
++  for (manuals = 2; manuals < MANUAL_COUNT; manuals++) {
+     int i;
+     int ri;
+ 
+-- 
+2.1.4
+

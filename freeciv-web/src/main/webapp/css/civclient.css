@@ -170,6 +170,20 @@ button {
   overflow: auto;
 }
 
+.helptext {
+  white-space: pre-wrap;
+  font-size: 85%;
+}
+
+#manual_non_helptext_facts {
+  -moz-column-width: 20em;
+  -webkit-column-width: 20em;
+  column-width: 20em;
+  -moz-column-count: 2;
+  -webkit-column-count: 2;
+  column-count: 2;
+}
+
 #game_unit_orders_default {
   bottom: 55px;
   min-width: 300px;

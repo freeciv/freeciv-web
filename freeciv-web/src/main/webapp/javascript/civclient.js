@@ -53,7 +53,7 @@ var chatbox_panel_toggle = false;
 
 var RENDERER_2DCANVAS = 1;      // default HTML5 Canvas
 var RENDERER_WEBGL = 2;         // WebGL + Three.js
-var renderer = RENDERER_2DCANVAS;  // This variable specifies which map renderer to use, 2d Canvas or WebGL.
+var renderer = RENDERER_WEBGL;  // This variable specifies which map renderer to use, 2d Canvas or WebGL.
 
 
 /**************************************************************************

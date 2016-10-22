@@ -1182,7 +1182,7 @@ function keyboard_listener(ev)
 
   civclient_handle_key(keyboard_key, ev.keyCode, ev['ctrlKey'],  ev['altKey'], ev['shiftKey'], ev);
 
-  $("#canvas").contextMenu('hide');
+  if (renderer == RENDERER_2DCANVAS) $("#canvas").contextMenu('hide');
 
 }
 

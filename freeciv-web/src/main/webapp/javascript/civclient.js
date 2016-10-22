@@ -53,7 +53,7 @@ var chatbox_panel_toggle = false;
 
 var RENDERER_2DCANVAS = 1;      // default HTML5 Canvas
 var RENDERER_WEBGL = 2;         // WebGL + Three.js
-var renderer = RENDERER_WEBGL;  // This variable specifies which map renderer to use, 2d Canvas or WebGL.
+var renderer = RENDERER_2DCANVAS;  // This variable specifies which map renderer to use, 2d Canvas or WebGL.
 
 
 /**************************************************************************
@@ -84,6 +84,9 @@ function civclient_init()
   //initialize a seeded random number generator
   fc_seedrandom = new Math.seedrandom('freeciv-web');
 
+  if ($.getUrlVar('renderer') == "webgl") {
+    renderer = RENDERER_WEBGL;
+  }
   if (renderer == RENDERER_2DCANVAS) init_mapview();
   if (renderer == RENDERER_WEBGL) init_webgl_renderer();
 
@@ -140,6 +143,7 @@ function civclient_init()
 
  init_common_intro_dialog();
  setup_window_size();
+
 
 }
 
@@ -417,6 +421,14 @@ function validate_username() {
  Shows the Freeciv intro dialog.
 **************************************************************************/
 function show_intro_dialog(title, message) {
+
+
+  if ($.getUrlVar('autostart') == "true") {
+    autostart = true;
+    username = "autostart";
+    network_init();
+    return;
+  }
 
   // reset dialog page.
   $("#dialog").remove();

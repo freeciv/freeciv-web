@@ -312,6 +312,8 @@ function mouse_moved_cb(e)
 ****************************************************************************/
 function update_mouse_cursor()
 {
+  if (renderer != RENDERER_2DCANVAS) return;
+
   if (tech_dialog_active) {
     update_tech_dialog_cursor();
     return;

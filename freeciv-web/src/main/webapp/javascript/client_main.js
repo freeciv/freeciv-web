@@ -83,6 +83,116 @@ function set_client_state(newstate)
 
 }
 
+/**************************************************************************
+  Refreshes the size of UI elements based on new window and screen size.
+**************************************************************************/
+function setup_window_size ()
+{
+  var winWidth = $(window).width();
+  var winHeight = $(window).height();
+  var new_mapview_width = winWidth - width_offset;
+  var new_mapview_height = winHeight - height_offset;
+
+  if (renderer == RENDERER_2DCANVAS) {
+    mapview_canvas.width = new_mapview_width;
+    mapview_canvas.height = new_mapview_height;
+    buffer_canvas.width = Math.floor(new_mapview_width * 1.5);
+    buffer_canvas.height = Math.floor(new_mapview_height * 1.5);
+
+    mapview['width'] = new_mapview_width;
+    mapview['height'] = new_mapview_height;
+    mapview['store_width'] = new_mapview_width;
+    mapview['store_height'] = new_mapview_height;
+
+    mapview_canvas_ctx.font = canvas_text_font;
+    buffer_canvas_ctx.font = canvas_text_font;
+  }
+
+  $("#game_status_panel").css("width", new_mapview_width);
+  $("#pregame_message_area").height( new_mapview_height - 80
+                                        - $("#pregame_game_info").getTotalHeight());
+  $("#pregame_player_list").height( new_mapview_height - 80);
+  $("#technologies").height( new_mapview_height - 50);
+  $("#technologies").width( new_mapview_width - 20);
+
+  $("#nations").height( new_mapview_height - 100);
+  $("#nations").width( new_mapview_width);
+
+  $('#tabs').css("height", $(window).height());
+  $("#tabs-map").height("auto");
+
+
+  $("#city_viewport").height( new_mapview_height - 20);
+
+  var i = 0;
+
+  if (is_small_screen()) {
+    $("#opt_tab").children().html("Options");
+    $("#players_tab").children().html("Nations");
+    $("#cities_tab").children().html("Cities");
+    $("#tech_tab").children().html("Research");
+    $("#civ_tab").children().html("Government");
+  }
+
+  $("#opt_tab").show();
+  $("#players_tab").show();
+  $("#cities_tab").show();
+  $("#freeciv_logo").show();
+  $("#tabs-hel").hide();
+
+
+  if (is_small_screen() && $(window).width() - sum_width() < 35) {
+    // not enough space for turn done button, move it down.
+    var myelement = $("#turn_done_button_div").detach();
+    $('#game_page').append(myelement);
+    $("#turn_done_button_div").css("top", "30px");
+    $("#turn_done_button").css("padding", "3px");
+  }
+
+  /* dynamically reduce content in top menu according to content*/
+  while ($(window).width() - sum_width() < 35) {
+    if (i == 0) $("#freeciv_logo").hide();
+    if (i == 1) $("#hel_tab").hide();
+
+    if (i == 2) $("#opt_tab").children().html("Opts");
+    if (i == 3) $("#players_tab").children().html("Nat");
+    if (i == 4) $("#tech_tab").children().html("Res");
+    if (i == 5) $("#civ_tab").children().html("Govt");
+
+    if (i == 6) $("#freeciv_logo").hide();
+    if (i == 7) $("#opt_tab").children().html("O");
+    if (i == 8) $("#players_tab").children().html("N");
+    if (i == 9) $("#tech_tab").children().html("R");
+    if (i == 10) $("#civ_tab").children().html("G");
+    if (i == 11) $("#cities_tab").children().html("C");
+    if (i == 12) $("#map_tab").children().html("M");
+
+    if (i == 13) $("#opt_tab").hide();
+    if (i == 14) $("#tabs-hel").hide();
+    if (i == 15) $("#players_tab").hide();
+
+    if (i == 16) break;
+
+    i++;
+  }
+
+  if (is_small_screen()) {
+    $(".ui-tabs-anchor").css("padding", "3px");
+    $(".ui-button-text").css("padding", "5px");
+    $(".overview_dialog").hide();
+    $(".ui-dialog-titlebar").hide();
+
+    overview_active = false;
+    $("#game_unit_orders_default").css("bottom", "-5px");
+    $("#game_status_panel").css("font-size", "0.8em");
+    $(".order_button").css("padding-right", "5px");
+  }
+
+  if (overview_active) init_overview();
+  if (unitpanel_active) init_game_unit_panel();
+
+}
+
 function client_state()
 {
   return civclient_state;

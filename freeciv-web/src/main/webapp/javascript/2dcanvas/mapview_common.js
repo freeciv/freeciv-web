@@ -504,10 +504,10 @@ function update_map_canvas_full()
 function update_map_canvas_check()
 {
   var time = new Date().getTime() - last_redraw_time;
-  if (time > MAPVIEW_REFRESH_INTERVAL) {
+  if (time > MAPVIEW_REFRESH_INTERVAL && renderer == RENDERER_2DCANVAS) {
     update_map_canvas_full();
   }
-  requestAnimFrame(update_map_canvas_check);
+  requestAnimationFrame(update_map_canvas_check);
 
 }
 

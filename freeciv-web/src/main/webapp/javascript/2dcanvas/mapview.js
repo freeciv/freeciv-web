@@ -57,7 +57,7 @@ function init_mapview()
 
   /* Loads the two tileset definition files */
   $.ajax({
-    url: "/javascript/tileset_config_amplio2.js",
+    url: "/javascript/2dcanvas/tileset_config_amplio2.js",
     dataType: "script",
     async: false
   }).fail(function() {
@@ -65,7 +65,7 @@ function init_mapview()
   });
 
   $.ajax({
-    url: "/javascript/tileset_spec_amplio2.js",
+    url: "/javascript/2dcanvas/tileset_spec_amplio2.js",
     dataType: "script",
     async: false
   }).fail(function() {

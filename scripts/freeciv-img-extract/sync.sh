@@ -11,7 +11,7 @@ pngcrush pre-freeciv-web-tileset-isotrident-0.png freeciv-web-tileset-isotrident
 pngcrush pre-freeciv-web-tileset-isotrident-1.png freeciv-web-tileset-isotrident-1.png &&
 mkdir -p ../../freeciv-web/src/main/webapp/tileset &&
 cp freeciv-web-tileset-*.png ../../freeciv-web/src/main/webapp/tileset/ &&
-cp tileset_spec_*.js ../../freeciv-web/src/main/webapp/javascript/ && 
+cp tileset_spec_*.js ../../freeciv-web/src/main/webapp/javascript/2dcanvas/ && 
 echo "converting flag svg files to png..." && 
 mkdir -p ../../freeciv-web/src/main/webapp/images/flags/ &&
 (for X in `find ../../freeciv/freeciv/data/flags/*.svg` 

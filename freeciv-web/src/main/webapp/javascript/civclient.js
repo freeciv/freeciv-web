@@ -230,7 +230,7 @@ function init_chatbox()
 
   if (is_small_screen()) {
     $(".chatbox_dialog").css("left", "2px");
-    $(".chatbox_dialog").css("top", "37px");
+    $(".chatbox_dialog").css("top", "40px");
     $("#game_chatbox_panel").parent().css("max-height", "22%");
     $("#game_chatbox_panel").parent().css("width", "95%");
     chatbox_resized();

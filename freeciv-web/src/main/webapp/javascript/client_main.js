@@ -124,63 +124,26 @@ function setup_window_size ()
 
   $("#city_viewport").height( new_mapview_height - 20);
 
-  var i = 0;
-
-  if (is_small_screen()) {
-    $("#opt_tab").children().html("Options");
-    $("#players_tab").children().html("Nations");
-    $("#cities_tab").children().html("Cities");
-    $("#tech_tab").children().html("Research");
-    $("#civ_tab").children().html("Government");
-  }
-
   $("#opt_tab").show();
   $("#players_tab").show();
   $("#cities_tab").show();
   $("#freeciv_logo").show();
   $("#tabs-hel").hide();
 
-
-  if (is_small_screen() && $(window).width() - sum_width() < 35) {
-    // not enough space for turn done button, move it down.
-    var myelement = $("#turn_done_button_div").detach();
-    $('#game_page').append(myelement);
-    $("#turn_done_button_div").css("top", "30px");
-    $("#turn_done_button").css("padding", "3px");
-  }
-
-  /* dynamically reduce content in top menu according to content*/
-  while ($(window).width() - sum_width() < 35) {
-    if (i == 0) $("#freeciv_logo").hide();
-    if (i == 1) $("#hel_tab").hide();
-
-    if (i == 2) $("#opt_tab").children().html("Opts");
-    if (i == 3) $("#players_tab").children().html("Nat");
-    if (i == 4) $("#tech_tab").children().html("Res");
-    if (i == 5) $("#civ_tab").children().html("Govt");
-
-    if (i == 6) $("#freeciv_logo").hide();
-    if (i == 7) $("#opt_tab").children().html("O");
-    if (i == 8) $("#players_tab").children().html("N");
-    if (i == 9) $("#tech_tab").children().html("R");
-    if (i == 10) $("#civ_tab").children().html("G");
-    if (i == 11) $("#cities_tab").children().html("C");
-    if (i == 12) $("#map_tab").children().html("M");
-
-    if (i == 13) $("#opt_tab").hide();
-    if (i == 14) $("#tabs-hel").hide();
-    if (i == 15) $("#players_tab").hide();
-
-    if (i == 16) break;
-
-    i++;
-  }
-
   if (is_small_screen()) {
-    $(".ui-tabs-anchor").css("padding", "3px");
-    $(".ui-button-text").css("padding", "5px");
+    $("#map_tab").children().html("<i class='fa fa-globe' aria-hidden='true'></i>");
+    $("#opt_tab").children().html("<i class='fa fa-cogs' aria-hidden='true'></i>");
+    $("#players_tab").children().html("<i class='fa fa-flag' aria-hidden='true'></i>");
+    $("#cities_tab").children().html("<i class='fa fa-fort-awesome' aria-hidden='true'></i>");
+    $("#tech_tab").children().html("<i class='fa fa-flask' aria-hidden='true'></i>");
+    $("#civ_tab").children().html("<i class='fa fa-university' aria-hidden='true'></i>");
+    $("#hel_tab").children().html("<i class='fa fa-question-circle-o' aria-hidden='true'></i>");
+
+
+    $(".ui-tabs-anchor").css("padding", "7px");
     $(".overview_dialog").hide();
     $(".ui-dialog-titlebar").hide();
+    $("#freeciv_logo").hide();
 
     overview_active = false;
     $("#game_unit_orders_default").css("bottom", "-5px");

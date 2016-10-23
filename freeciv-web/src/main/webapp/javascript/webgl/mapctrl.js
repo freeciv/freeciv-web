@@ -21,7 +21,7 @@
 /****************************************************************************
 ...
 ****************************************************************************/
-function onWindowResize() {
+function webglOnWindowResize() {
 
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
@@ -33,7 +33,7 @@ function onWindowResize() {
 /****************************************************************************
 ...
 ****************************************************************************/
-function onDocumentMouseMove( event ) {
+function webglOnDocumentMouseMove( event ) {
 
   event.preventDefault();
   mouse.set( ( event.clientX / window.innerWidth ) * 2 - 1, - ( event.clientY / window.innerHeight ) * 2 + 1 );
@@ -56,7 +56,7 @@ function onDocumentMouseMove( event ) {
 /****************************************************************************
 ...
 ****************************************************************************/
-function onDocumentMouseDown( event ) {
+function webglOnDocumentMouseDown( event ) {
 
   event.preventDefault();
 
@@ -101,7 +101,7 @@ function onDocumentMouseDown( event ) {
 /****************************************************************************
 ...
 ****************************************************************************/
-function onDocumentKeyDown( event ) {
+function webglOnDocumentKeyDown( event ) {
 
   switch( event.keyCode ) {
      case 16: isShiftDown = true; break;
@@ -113,7 +113,7 @@ function onDocumentKeyDown( event ) {
 /****************************************************************************
 ...
 ****************************************************************************/
-function onDocumentKeyUp( event ) {
+function webglOnDocumentKeyUp( event ) {
   switch ( event.keyCode ) {
     case 16: isShiftDown = false; break;
 

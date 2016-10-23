@@ -79,8 +79,8 @@ function webgl_start_renderer()
   container = document.getElementById('canvas_div');
 
   camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 10000 );
-  camera.position.set( 1250, 1600, 1900 );
-  camera.lookAt( new THREE.Vector3(60, 0, 500) );
+  camera.position.set( 800, 1000, 1200 );
+  camera.lookAt( new THREE.Vector3(600, 0, 900) );
 
   scene = new THREE.Scene();
 
@@ -146,19 +146,19 @@ function webgl_start_renderer()
   maprenderer.setSize( window.innerWidth, window.innerHeight );
   container.appendChild( maprenderer.domElement );
 
-  document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-  document.addEventListener( 'mousedown', onDocumentMouseDown, false );
-  document.addEventListener( 'keydown', onDocumentKeyDown, false );
-  document.addEventListener( 'keyup', onDocumentKeyUp, false );
-
-  //
-
-  window.addEventListener( 'resize', onWindowResize, false );
+  document.addEventListener( 'mousemove', webglOnDocumentMouseMove, false );
+  document.addEventListener( 'mousedown', webglOnDocumentMouseDown, false );
+  document.addEventListener( 'keydown', webglOnDocumentKeyDown, false );
+  document.addEventListener( 'keyup', webglOnDocumentKeyUp, false );
+  window.addEventListener( 'resize', webglOnWindowResize, false );
 
   animate();
 
   send_message_delayed("/observe", 200);
-  setTimeout(render_testmap, 2000);
+  setTimeout(render_testmap, 1000);
+
+
+
 
 }
 
@@ -166,18 +166,88 @@ function webgl_start_renderer()
 /****************************************************************************
 ...
 ****************************************************************************/
+function generateTexture( width, height, color ) {
+
+    var canvas, context, image, imageData,
+    level, diff, vector3, sun, shade;
+
+    vector3 = new THREE.Vector3( 0, 0, 0 );
+
+    sun = new THREE.Vector3( 1, 1, 1 );
+    sun.normalize();
+
+    canvas = document.createElement( 'canvas' );
+    canvas.width = width;
+    canvas.height = height;
+
+    context = canvas.getContext( '2d' );
+    context.fillStyle = color;
+    context.fillRect( 0, 0, width, height );
+    return canvas;
+
+}
+
+
+
+
+/****************************************************************************
+...
+****************************************************************************/
 function render_testmap() {
-  for (var x = 0; x < map['xsize']; x++) {
+
+    var texture = new THREE.CanvasTexture( generateTexture( 1024, 1024 , '#00a') );
+    var material = new THREE.MeshBasicMaterial( { map: texture, overdraw: 0.5 } );
+
+    var quality = 16, step = 1024 / quality;
+
+    var geometry = new THREE.PlaneGeometry( 2000, 2000, quality - 1, quality - 1 );
+    geometry.rotateX( - Math.PI / 2 );
+    geometry.translate(1000, 0, 1000);
+
+    for ( var i = 0, l = geometry.vertices.length; i < l; i ++ ) {
+
+        var x = i % quality, y = Math.floor( i / quality );
+        geometry.vertices[ i ].y = 50;
+
+    }
+
+    mesh = new THREE.Mesh( geometry, material );
+    scene.add( mesh );
+
+
+    var landMaterial = new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load( "/textures/grasslight-big.jpg" ), overdraw: 0.5 } );
+
+    var quality = map['xsize'], step = 1024 / quality;
+
+    var landGeometry = new THREE.PlaneGeometry( 2000, 2000, quality - 1, quality - 1 );
+    landGeometry.rotateX( - Math.PI / 2 );
+    landGeometry.translate(1000, 0, 1000);
+
+    for ( var i = 0, l = landGeometry.vertices.length; i < l; i ++ ) {
+
+        var x = i % quality, y = Math.floor( i / quality );
+        var ptile = map_pos_to_tile(Math.floor(map['xsize']*x/quality), Math.floor(map['ysize']*y/quality));
+        if (ptile != null) {
+          landGeometry.vertices[ i ].y = !is_ocean_tile(ptile) ? 100 : -300;
+        }
+
+    }
+
+    landMesh = new THREE.Mesh( landGeometry, landMaterial );
+    scene.add( landMesh );
+
+
+/*  for (var x = 0; x < map['xsize']; x++) {
     for (var y = 0; y < map['ysize']; y++) {
       var ptile = map_pos_to_tile(x, y);
       if (!is_ocean_tile(ptile)) {
         var voxel = new THREE.Mesh( cubeGeo, cubeMaterial );
-        voxel.position.set( x*50, 300, y*50 );
+        voxel.position.set( x*50, 0, y*50 );
         scene.add( voxel );
         objects.push( voxel );
       }
     }
-  }
+  }*/
 }
 
 /****************************************************************************

@@ -68,7 +68,7 @@ def download_wiki_page(tech_name):
 # name that don't appear in classic may still appear in another supported
 # ruleset.
 
-f = open('../freeciv/data/classic/techs.ruleset')
+f = open('../freeciv/freeciv/data/classic/techs.ruleset')
 lines = f.readlines()
 f.close()
 
@@ -78,7 +78,7 @@ for line in lines:
     tech_line = line.split("\"");
     techs.append(tech_line[1]);
 
-f = open('../freeciv/data/classic/units.ruleset')
+f = open('../freeciv/freeciv/data/classic/units.ruleset')
 lines = f.readlines()
 f.close()
 
@@ -89,7 +89,7 @@ for line in lines:
     result_tech = tech_line[1].replace("?unit:", "");
     techs.append(result_tech);
 
-f = open('../freeciv/data/classic/buildings.ruleset')
+f = open('../freeciv/freeciv/data/classic/buildings.ruleset')
 lines = f.readlines()
 f.close()
 

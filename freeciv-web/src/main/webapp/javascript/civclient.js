@@ -51,16 +51,16 @@ var turn_change_elapsed = 0;
 var dialog_close_trigger = "";
 var chatbox_panel_toggle = false;
 
+var RENDERER_2DCANVAS = 1;      // default HTML5 Canvas
+var RENDERER_WEBGL = 2;         // WebGL + Three.js
+var renderer = RENDERER_2DCANVAS;  // This variable specifies which map renderer to use, 2d Canvas or WebGL.
+
+
 /**************************************************************************
  Main starting point for Freeciv-web
 **************************************************************************/
 $(document).ready(function() {
-
-  if ($("#canvas").length == 1) {
-    civclient_init();
-  } else {
-    console.log("Freeciv-web not started. missing canvas element in body.");
-  }
+  civclient_init();
 });
 
 /**************************************************************************
@@ -84,7 +84,12 @@ function civclient_init()
   //initialize a seeded random number generator
   fc_seedrandom = new Math.seedrandom('freeciv-web');
 
-  init_mapview();
+  if ($.getUrlVar('renderer') == "webgl") {
+    renderer = RENDERER_WEBGL;
+  }
+  if (renderer == RENDERER_2DCANVAS) init_mapview();
+  if (renderer == RENDERER_WEBGL) init_webgl_renderer();
+
   game_init();
   control_init();
 
@@ -99,23 +104,6 @@ function civclient_init()
   }
 
   motd_init();
-
-  // Tells the browser that you wish to perform an animation; this
-  // requests that the browser schedule a repaint of the window for the
-  // next animation frame.
-  window.requestAnimFrame = (function(){
-      return  window.requestAnimationFrame       ||
-              window.webkitRequestAnimationFrame ||
-              window.mozRequestAnimationFrame    ||
-              window.oRequestAnimationFrame      ||
-              window.msRequestAnimationFrame     ||
-              function(/* function */ callback, /* DOMElement */ element){
-                window.setTimeout(callback, MAPVIEW_REFRESH_INTERVAL);
-              };
-    })();
-
-  requestAnimFrame(update_map_canvas_check, mapview_canvas);
-
 
   /*
    * Interner Explorer doesn't support Array.indexOf
@@ -152,6 +140,10 @@ function civclient_init()
     audio = as[0];
 
  });
+
+ init_common_intro_dialog();
+ setup_window_size();
+
 
 }
 
@@ -238,7 +230,7 @@ function init_chatbox()
 
   if (is_small_screen()) {
     $(".chatbox_dialog").css("left", "2px");
-    $(".chatbox_dialog").css("top", "37px");
+    $(".chatbox_dialog").css("top", "40px");
     $("#game_chatbox_panel").parent().css("max-height", "22%");
     $("#game_chatbox_panel").parent().css("width", "95%");
     chatbox_resized();
@@ -429,6 +421,14 @@ function validate_username() {
  Shows the Freeciv intro dialog.
 **************************************************************************/
 function show_intro_dialog(title, message) {
+
+
+  if ($.getUrlVar('autostart') == "true") {
+    autostart = true;
+    username = "autostart";
+    network_init();
+    return;
+  }
 
   // reset dialog page.
   $("#dialog").remove();

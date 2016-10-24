@@ -160,6 +160,8 @@ Unimplemented rule variation support:
   the toplogy you are working to support.
 - The ID of certain extras are hard coded.
 - The graphic tags of certain extras are hard coded.
+- Wikipedia help is only extracted for items that appear in the classic
+  ruleset.
 
 Simplify Freeciv server upgrade:
 - get rid of the worst merge conflict causes

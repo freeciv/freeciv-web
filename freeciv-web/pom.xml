@@ -140,6 +140,8 @@
                             <jsSourceIncludes>
                                 <jsSourceInclude>*.js</jsSourceInclude>
                                 <jsSourceInclude>libs/*.js</jsSourceInclude>
+                                <jsSourceInclude>2dcanvas/*.js</jsSourceInclude>
+                                <jsSourceInclude>webgl/*.js</jsSourceInclude>
                             </jsSourceIncludes>
                             <jsSourceExcludes>
                                 <jsSourceExclude>frontpage.js</jsSourceExclude>

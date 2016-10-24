@@ -73,7 +73,7 @@ public class SaveServlet extends HttpServlet {
 		File file = new File(absoluteDiskPath);
 
 		boolean found = false;
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 6; i++) {
 			long fileAge = System.currentTimeMillis() - file.lastModified();
 			if (file.exists() && fileAge > 400 && fileAge < 8000) {
 				found = true;

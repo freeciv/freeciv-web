@@ -6,7 +6,6 @@
 *.o
 *.lo
 *.orig
-*.png
 *.pot
 *.pox
 *.rej

@@ -76,8 +76,9 @@ function set_client_page(page)
     break;
   case PAGE_GAME:
     $("#game_page").show();
-    /*reset_unit_table();
-    enable_menus(TRUE);*/
+
+    if (renderer == RENDERER_WEBGL) webgl_start_renderer();
+
     break;
   case PAGE_LOAD:
     /*update_load_page();*/

@@ -312,6 +312,8 @@ function mouse_moved_cb(e)
 ****************************************************************************/
 function update_mouse_cursor()
 {
+  if (renderer != RENDERER_2DCANVAS) return;
+
   if (tech_dialog_active) {
     update_tech_dialog_cursor();
     return;
@@ -1180,7 +1182,7 @@ function keyboard_listener(ev)
 
   civclient_handle_key(keyboard_key, ev.keyCode, ev['ctrlKey'],  ev['altKey'], ev['shiftKey'], ev);
 
-  $("#canvas").contextMenu('hide');
+  if (renderer == RENDERER_2DCANVAS) $("#canvas").contextMenu('hide');
 
 }
 

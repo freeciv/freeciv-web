@@ -55,9 +55,11 @@ var dashedSupport = false;
 function init_mapview()
 {
 
+  $("#canvas_div").append($('<canvas/>', { id: 'canvas'}));
+
   /* Loads the two tileset definition files */
   $.ajax({
-    url: "/javascript/tileset_config_amplio2.js",
+    url: "/javascript/2dcanvas/tileset_config_amplio2.js",
     dataType: "script",
     async: false
   }).fail(function() {
@@ -65,7 +67,7 @@ function init_mapview()
   });
 
   $.ajax({
-    url: "/javascript/tileset_spec_amplio2.js",
+    url: "/javascript/2dcanvas/tileset_spec_amplio2.js",
     dataType: "script",
     async: false
   }).fail(function() {
@@ -112,117 +114,11 @@ function init_mapview()
 
 
   orientation_changed();
-
   init_sprites();
+  requestAnimationFrame(update_map_canvas_check, mapview_canvas);
 
 }
 
-
-/**************************************************************************
-  ...
-**************************************************************************/
-function setup_window_size ()
-{
-  var winWidth = $(window).width();
-  var winHeight = $(window).height();
-
-  mapview_canvas.width = winWidth - width_offset;
-  mapview_canvas.height = winHeight - height_offset;
-  buffer_canvas.width = Math.floor(mapview_canvas.width * 1.5);
-  buffer_canvas.height = Math.floor(mapview_canvas.height * 1.5);
-
-  mapview['width'] = winWidth - width_offset;
-  mapview['height'] = winHeight - height_offset;
-  mapview['store_width'] = winWidth - width_offset;
-  mapview['store_height'] = winHeight - height_offset;
-
-  mapview_canvas_ctx.font = canvas_text_font;
-  buffer_canvas_ctx.font = canvas_text_font;
-
-  $("#game_status_panel").css("width", mapview_canvas.width);
-
-  $('#tabs').css("height", $(window).height());
-  $("#tabs-map").height("auto");
-
-  $("#pregame_message_area").height( mapview['height'] - 80
-                                    - $("#pregame_game_info").getTotalHeight());
-  $("#pregame_player_list").height( mapview['height'] - 80);
-  $("#technologies").height( mapview['height'] - 50);
-  $("#technologies").width( mapview['width'] - 20);
-
-  $("#nations").height( mapview['height'] - 100);
-  $("#nations").width( mapview['width']);
-
-  $("#city_viewport").height( mapview['height'] - 20);
-
-  var i = 0;
-
-  if (is_small_screen()) {
-    $("#opt_tab").children().html("Options");
-    $("#players_tab").children().html("Nations");
-    $("#cities_tab").children().html("Cities");
-    $("#tech_tab").children().html("Research");
-    $("#civ_tab").children().html("Government");
-  }
-
-  $("#opt_tab").show();
-  $("#players_tab").show();
-  $("#cities_tab").show();
-  $("#freeciv_logo").show();
-  $("#tabs-hel").hide();
-
-
-  if (is_small_screen() && $(window).width() - sum_width() < 35) {
-    // not enough space for turn done button, move it down.
-    var myelement = $("#turn_done_button_div").detach();
-    $('#game_page').append(myelement);
-    $("#turn_done_button_div").css("top", "30px");
-    $("#turn_done_button").css("padding", "3px");
-  }
-
-  /* dynamically reduce content in top menu according to content*/
-  while ($(window).width() - sum_width() < 35) {
-    if (i == 0) $("#freeciv_logo").hide();
-    if (i == 1) $("#hel_tab").hide();
-
-    if (i == 2) $("#opt_tab").children().html("Opts");
-    if (i == 3) $("#players_tab").children().html("Nat");
-    if (i == 4) $("#tech_tab").children().html("Res");
-    if (i == 5) $("#civ_tab").children().html("Govt");
-
-    if (i == 6) $("#freeciv_logo").hide();
-    if (i == 7) $("#opt_tab").children().html("O");
-    if (i == 8) $("#players_tab").children().html("N");
-    if (i == 9) $("#tech_tab").children().html("R");
-    if (i == 10) $("#civ_tab").children().html("G");
-    if (i == 11) $("#cities_tab").children().html("C");
-    if (i == 12) $("#map_tab").children().html("M");
-
-    if (i == 13) $("#opt_tab").hide();
-    if (i == 14) $("#tabs-hel").hide();
-    if (i == 15) $("#players_tab").hide();
-
-    if (i == 16) break;
-
-    i++;
-  }
-
-  if (is_small_screen()) {
-    $(".ui-tabs-anchor").css("padding", "3px");
-    $(".ui-button-text").css("padding", "5px");
-    $(".overview_dialog").hide();
-    $(".ui-dialog-titlebar").hide();
-
-    overview_active = false;
-    $("#game_unit_orders_default").css("bottom", "-5px");
-    $("#game_status_panel").css("font-size", "0.8em");
-    $(".order_button").css("padding-right", "5px");
-  }
-
-  if (overview_active) init_overview();
-  if (unitpanel_active) init_game_unit_panel();
-
-}
 
 function sum_width()
 {
@@ -272,7 +168,6 @@ function preload_check()
 
   if (loaded_images == tileset_image_count) {
     init_cache_sprites();
-    init_common_intro_dialog();
     $.unblockUI();
   }
 }
@@ -326,7 +221,7 @@ function mapview_window_resized ()
 {
   if (active_city != null || !resize_enabled) return;
   setup_window_size();
-  update_map_canvas_full();
+  if (renderer == RENDERER_2DCANVAS) update_map_canvas_full();
 }
 
 /**************************************************************************
@@ -522,6 +417,7 @@ function set_city_mapview_active()
 **************************************************************************/
 function set_default_mapview_active()
 {
+  if (renderer != RENDERER_2DCANVAS) return;
   mapview_canvas_ctx = mapview_canvas.getContext("2d");
   mapview_canvas_ctx.font = canvas_text_font;
 

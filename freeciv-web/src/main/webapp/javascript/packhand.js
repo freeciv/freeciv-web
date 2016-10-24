@@ -869,7 +869,11 @@ function handle_begin_turn(packet)
 {
   if (!observing) {
     $("#turn_done_button").button("option", "disabled", false);
-    $("#turn_done_button").button("option", "label", "<i class='fa fa-check-circle-o' style='color: green;'aria-hidden='true'></i> Turn Done");
+    if (is_small_screen()) {
+      $("#turn_done_button").button("option", "label", "Turn Done");
+    } else {
+      $("#turn_done_button").button("option", "label", "<i class='fa fa-check-circle-o' style='color: green;'aria-hidden='true'></i> Turn Done");
+    }
   }
   waiting_units_list = [];
   update_unit_focus();

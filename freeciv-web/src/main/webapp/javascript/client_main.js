@@ -83,6 +83,79 @@ function set_client_state(newstate)
 
 }
 
+/**************************************************************************
+  Refreshes the size of UI elements based on new window and screen size.
+**************************************************************************/
+function setup_window_size ()
+{
+  var winWidth = $(window).width();
+  var winHeight = $(window).height();
+  var new_mapview_width = winWidth - width_offset;
+  var new_mapview_height = winHeight - height_offset;
+
+  if (renderer == RENDERER_2DCANVAS) {
+    mapview_canvas.width = new_mapview_width;
+    mapview_canvas.height = new_mapview_height;
+    buffer_canvas.width = Math.floor(new_mapview_width * 1.5);
+    buffer_canvas.height = Math.floor(new_mapview_height * 1.5);
+
+    mapview['width'] = new_mapview_width;
+    mapview['height'] = new_mapview_height;
+    mapview['store_width'] = new_mapview_width;
+    mapview['store_height'] = new_mapview_height;
+
+    mapview_canvas_ctx.font = canvas_text_font;
+    buffer_canvas_ctx.font = canvas_text_font;
+  }
+
+  $("#game_status_panel").css("width", new_mapview_width);
+  $("#pregame_message_area").height( new_mapview_height - 80
+                                        - $("#pregame_game_info").getTotalHeight());
+  $("#pregame_player_list").height( new_mapview_height - 80);
+  $("#technologies").height( new_mapview_height - 50);
+  $("#technologies").width( new_mapview_width - 20);
+
+  $("#nations").height( new_mapview_height - 100);
+  $("#nations").width( new_mapview_width);
+
+  $('#tabs').css("height", $(window).height());
+  $("#tabs-map").height("auto");
+
+
+  $("#city_viewport").height( new_mapview_height - 20);
+
+  $("#opt_tab").show();
+  $("#players_tab").show();
+  $("#cities_tab").show();
+  $("#freeciv_logo").show();
+  $("#tabs-hel").hide();
+
+  if (is_small_screen()) {
+    $("#map_tab").children().html("<i class='fa fa-globe' aria-hidden='true'></i>");
+    $("#opt_tab").children().html("<i class='fa fa-cogs' aria-hidden='true'></i>");
+    $("#players_tab").children().html("<i class='fa fa-flag' aria-hidden='true'></i>");
+    $("#cities_tab").children().html("<i class='fa fa-fort-awesome' aria-hidden='true'></i>");
+    $("#tech_tab").children().html("<i class='fa fa-flask' aria-hidden='true'></i>");
+    $("#civ_tab").children().html("<i class='fa fa-university' aria-hidden='true'></i>");
+    $("#hel_tab").children().html("<i class='fa fa-question-circle-o' aria-hidden='true'></i>");
+
+
+    $(".ui-tabs-anchor").css("padding", "7px");
+    $(".overview_dialog").hide();
+    $(".ui-dialog-titlebar").hide();
+    $("#freeciv_logo").hide();
+
+    overview_active = false;
+    $("#game_unit_orders_default").css("bottom", "-5px");
+    $("#game_status_panel").css("font-size", "0.8em");
+    $(".order_button").css("padding-right", "5px");
+  }
+
+  if (overview_active) init_overview();
+  if (unitpanel_active) init_game_unit_panel();
+
+}
+
 function client_state()
 {
   return civclient_state;

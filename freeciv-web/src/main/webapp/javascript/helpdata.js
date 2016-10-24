@@ -186,6 +186,22 @@ function handle_help_menu_select( ui )
   $("#help_info_page").focus();
 }
 
+/**************************************************************************
+  Returns a button that shows the extracted Wikipedia data about an item.
+
+  Returns an empty string ("") if no such data exists.
+**************************************************************************/
+function wiki_on_item_button(item_name)
+{
+  if (freeciv_wiki_docs[item_name] == null) {
+    console.log("No wiki data about " + item_name);
+    return "";
+  }
+
+  return ("<button class='help_button' onclick=\"show_wikipedia_dialog('"
+          + item_name + "');\">Wikipedia on " + item_name
+          +  "</button>");
+}
 
 /**************************************************************************
 ...
@@ -216,8 +232,8 @@ function generate_help_text(key)
        msg += techs[reqs[n]]['name'] + " ";
       }
     }
-    msg += "<br><br><button class='help_button' onclick=\"show_wikipedia_dialog('" + improvement['name'] + "');\">Wikipedia on "
-	    + improvement['name'] +  "</button>";
+    msg += "<br><br>"
+    msg += wiki_on_item_button(improvement['name']);
   } else if (key.indexOf("help_gen_units") != -1) {
     var punit_type = unit_types[parseInt(key.replace("help_gen_units_", ""))];
     msg = "<h1>" + punit_type['name'] + "</h1>";
@@ -248,16 +264,14 @@ function generate_help_text(key)
 
     msg += "<div id='helptext'><p>" + punit_type['helptext'] + "</p></div>";
 
-    msg += "<button class='help_button' onclick=\"show_wikipedia_dialog('"
-        + punit_type['name'] + "');\">Wikipedia on " + punit_type['name']
-        +  "</button>";
+    msg += wiki_on_item_button(punit_type['name']);
   } else if (key.indexOf("help_gen_techs") != -1) {
     var tech = techs[parseInt(key.replace("help_gen_techs_", ""))];
     msg = "<h1>" + tech['name'] + "</h1>"
 	    + render_sprite(get_technology_image_sprite(tech)) + "<br>"
 	    + get_advances_text(tech['id']);
-    msg += "<br><br><button class='help_button' onclick=\"show_wikipedia_dialog('" + tech['name'] + "');\">Wikipedia on "
-	    + tech['name'] +  "</button>";
+    msg += "<br><br>"
+    msg += wiki_on_item_button(tech['name']);
   } else if (key == "help_gen_ruleset") {
     msg = "<h1>" + ruleset_control['name'] + "</h1>";
     if (ruleset_summary != null) {

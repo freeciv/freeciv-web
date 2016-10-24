@@ -293,6 +293,8 @@ function generate_help_text(key)
 
     msg = "<h1>" + pgov['name'] + "</h1>";
     msg += "<div id='helptext'><p>" + pgov['helptext'] + "</p></div>";
+
+    msg += wiki_on_item_button(pgov['name']);
   }
 
   $("#help_info_page").html(msg);

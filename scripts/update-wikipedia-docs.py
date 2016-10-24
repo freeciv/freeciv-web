@@ -98,6 +98,15 @@ for line in lines:
     tech_line = line.split("\"");
     techs.append(tech_line[1]);
 
+f = open('../freeciv/freeciv/data/classic/governments.ruleset')
+lines = f.readlines()
+f.close()
+
+for line in lines:
+  if line.startswith("name"):
+    tech_line = line.split("\"");
+    techs.append(tech_line[1]);
+
 for tech in techs:
   download_wiki_page(tech);
 

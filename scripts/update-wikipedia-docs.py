@@ -64,6 +64,9 @@ def download_wiki_page(tech_name):
   freeciv_wiki_doc[tech_name] = {"title" : page.title, "summary" : page.summary, "image" : image};
 
 
+# FIXME: extract item names from the other supported rulesets too. An item
+# name that don't appear in classic may still appear in another supported
+# ruleset.
 
 f = open('../freeciv/data/classic/techs.ruleset')
 lines = f.readlines()

@@ -19,4 +19,4 @@ Freeciv-web scripts
 
 * update-wikipedia-docs.py - generates docs from wikipedia about techs, units and buildings.
 
-* autodeploy-freeciv-web.sh - script to build Freeciv-web nightly for a live server.
+* autodeploy.sh - script to build Freeciv-web nightly for a live server.

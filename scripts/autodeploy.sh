@@ -55,13 +55,12 @@ cd ../../freeciv-web && sh build.sh && \
 mvn compile flyway:migrate && \
 
 echo "Restarting Freeciv C servers." && \
-killall -9 freeciv-web
-ps aux | grep -ie publite2 | awk '{print $2}' | xargs kill -9 
-ps aux | grep -ie freeciv-proxy | awk '{print $2}' | xargs kill -9  
-echo "delete from servers" | mysql -u ${MYSQL_USER} -p${MYSQL_PASSWORD} freeciv_web
-/var/lib/tomcat8/bin/catalina.sh start && sleep 5 && \
-echo "Starting publite2" && \
-cd ../publite2/ && ./run.sh && \
+echo "Killing freeciv-web processes." && ps aux | grep -ie "freeciv/bin/freeciv-web" | awk '{print $2}' | xargs kill -9 
+echo "Killing init-freeciv-web.sh processes." && ps aux | grep -ie "init-freeciv-web.sh" | awk '{print $2}' | xargs kill -9 
+echo "Killing publite2 processes." && ps aux | grep -ie publite2 | awk '{print $2}' | xargs kill -9 
+echo "Killing freeciv-proxy processes." && ps aux | grep -ie freeciv-proxy | awk '{print $2}' | xargs kill -9  
+echo "Clearing games in DB." && echo "delete from servers" | mysql -u ${MYSQL_USER} -p${MYSQL_PASSWORD} freeciv_web
+echo "Starting publite2" && cd ../publite2/ && ./run.sh && \
 
 
 echo "Autodeploy of Freeciv-web is complete."

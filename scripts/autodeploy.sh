@@ -49,8 +49,7 @@ echo "Running sync scripts." && \
 cd ../scripts/ && ./sync-js-hand.sh && \
 cd freeciv-img-extract && ./sync.sh && \
 
-echo "Stop Tomcat and building Freeciv-web." && \
-/var/lib/tomcat8/bin/catalina.sh stop && \
+echo "Building Freeciv-web." && \
 cd ../../freeciv-web && sh build.sh && \
 mvn compile flyway:migrate && \
 

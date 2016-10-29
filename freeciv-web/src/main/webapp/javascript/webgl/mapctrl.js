@@ -64,35 +64,12 @@ function webglOnDocumentMouseDown( event ) {
 
   raycaster.setFromCamera( mouse, camera );
 
-  var intersects = raycaster.intersectObjects( objects );
+  var intersects = raycaster.intersectObjects( scene.children );
 
   if ( intersects.length > 0 ) {
 
     var intersect = intersects[ 0 ];
-
-    // delete cube
-
-    if ( isShiftDown ) {
-
-      if ( intersect.object != plane ) {
-
-        scene.remove( intersect.object );
-
-        objects.splice( objects.indexOf( intersect.object ), 1 );
-
-      }
-
-        // create cube
-
-    } else {
-
-        var voxel = new THREE.Mesh( cubeGeo, cubeMaterial );
-        voxel.position.copy( intersect.point ).add( intersect.face.normal );
-        voxel.position.divideScalar( 50 ).floor().multiplyScalar( 50 ).addScalar( 25 );
-        scene.add( voxel );
-
-        objects.push( voxel );
-    }
+    camera_look_at(intersect.point.x, 0, intersect.point.z);
 
   }
 

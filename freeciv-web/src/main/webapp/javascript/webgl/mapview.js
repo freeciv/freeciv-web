@@ -18,7 +18,8 @@
 ***********************************************************************/
 
 var container, stats;
-var camera, scene, maprenderer;
+var scene, maprenderer;
+
 var plane, cube;
 var mouse, raycaster, isShiftDown = false;
 
@@ -85,8 +86,7 @@ function webgl_start_renderer()
   container = document.getElementById('canvas_div');
 
   camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 10000 );
-  camera.position.set( 800, 1000, 1200 );
-  camera.lookAt( new THREE.Vector3(600, 0, 900) );
+  camera_look_at(1000, 0, 1000);
 
   scene = new THREE.Scene();
 

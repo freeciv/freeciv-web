@@ -53,12 +53,13 @@ echo "Building Freeciv-web." && \
 cd ../../freeciv-web && sh build.sh && \
 mvn compile flyway:migrate && \
 
+set +e
 echo "Restarting Freeciv C servers." && \
-echo "Killing freeciv-web processes." && ps aux | grep -ie "freeciv/bin/freeciv-web" | awk '{print $2}' | xargs kill -9 
-echo "Killing init-freeciv-web.sh processes." && ps aux | grep -ie "init-freeciv-web.sh" | awk '{print $2}' | xargs kill -9 
-echo "Killing publite2 processes." && ps aux | grep -ie publite2 | awk '{print $2}' | xargs kill -9 
-echo "Killing freeciv-proxy processes." && ps aux | grep -ie freeciv-proxy | awk '{print $2}' | xargs kill -9  
+echo "Killing freeciv-web processes." && ps aux | grep -ie "[f]reeciv/bin/freeciv-web" | awk '{print $2}' | xargs kill -9 || echo "unable to stop process" 
+echo "Killing init-freeciv-web.sh processes." && ps aux | grep -ie "[i]nit-freeciv-web.sh" | awk '{print $2}' | xargs kill -9 || echo "unable to stop process" 
+echo "Killing freeciv-proxy processes." && ps aux | grep -ie "[f]reeciv-proxy" | awk '{print $2}' | xargs kill -9  || echo "unable to stop process" 
 echo "Clearing games in DB." && echo "delete from servers" | mysql -u ${MYSQL_USER} -p${MYSQL_PASSWORD} freeciv_web
+echo "Killing publite2 processes." && ps aux | grep -ie "[p]ublite2" | awk '{print $2}' | xargs kill -9 
 echo "Starting publite2" && cd ../publite2/ && ./run.sh && \
 
 

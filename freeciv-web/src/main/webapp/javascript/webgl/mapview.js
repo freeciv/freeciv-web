@@ -147,7 +147,7 @@ function webgl_start_renderer()
   scene.add( directionalLight );
 
   maprenderer = new THREE.WebGLRenderer( { antialias: false } ); /* TODO: make antialias configurable. */
-  maprenderer.setClearColor( 0xf0f0f0 );
+  maprenderer.setClearColor( 0x000000 );
   maprenderer.setPixelRatio( window.devicePixelRatio );
   maprenderer.setSize( window.innerWidth, window.innerHeight );
   container.appendChild( maprenderer.domElement );
@@ -164,7 +164,7 @@ function webgl_start_renderer()
   animate();
 
   send_message_delayed("/observe", 200);
-  setTimeout(render_testmap, 1000);
+  setTimeout(render_testmap, 1500);
 
 
 
@@ -188,7 +188,7 @@ function render_testmap() {
 
   var quality = 32, step = 1024 / quality;
 
-  var geometry = new THREE.PlaneGeometry( 2000, 2000, quality - 1, quality - 1 );
+  var geometry = new THREE.PlaneGeometry( 3000, 2000, quality - 1, quality - 1 );
   geometry.rotateX( - Math.PI / 2 );
   geometry.translate(1000, 0, 1000);
 
@@ -239,13 +239,13 @@ function render_testmap() {
   var quality = map['xsize'], step = 1024 / quality;
 
   /* LandGeometry is a plane representing the landscape of the map. */
-  var landGeometry = new THREE.PlaneGeometry( 2000, 2000, quality - 1, quality - 1 );
+  var landGeometry = new THREE.PlaneGeometry( 3000, 2000, quality - 1, quality - 1 );
   landGeometry.rotateX( - Math.PI / 2 );
   landGeometry.translate(1000, 0, 1000);
 
   for ( var i = 0, l = landGeometry.vertices.length; i < l; i ++ ) {
         var x = i % quality, y = Math.floor( i / quality );
-        var ptile = map_pos_to_tile(Math.floor((map['ysize'] / map['xsize'])*map['xsize']*x/quality), Math.floor(map['ysize']*y/quality));
+        var ptile = map_pos_to_tile(Math.floor(map['xsize']*x/quality), Math.floor(map['ysize']*y/quality));
         if (ptile != null) {
           landGeometry.vertices[ i ].y = !is_ocean_tile(ptile) ? 70 : 20;
         }

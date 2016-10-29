@@ -34,8 +34,8 @@ function generate_map_tiletype_grid() {
 
   for (var x = 0; x < map_tiletype_resolution ; x++) {
     for (var y = 0; y < map_tiletype_resolution; y++) {
-      var gx = Math.floor((map['ysize'] / map['xsize'])*x*map['xsize']/map_tiletype_resolution);
-      var gy = Math.floor(y*map['ysize']/map_tiletype_resolution);
+      var gx = Math.floor((map['ysize'] / map['xsize']) * x * map['xsize'] / map_tiletype_resolution);
+      var gy = Math.floor((map['xsize'] / map['ysize']) * y * map['ysize'] / map_tiletype_resolution);
       grid[x][y] = map_tiletype_tile_color(gy, gx);
     }
   }

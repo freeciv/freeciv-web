@@ -5,7 +5,7 @@ THE FREECIV-WEB PROJECT
 
 Freeciv-web is an open-source turn-based strategy game. It can be played in any HTML5 capable web-browser and features in-depth game-play and a wide variety of game modes and options. Your goal is to build cities, collect resources, organize your government, and build an army, with the ultimate goal of creating the best civilization. You can play online against other players (multiplayer) or play by yourself against the computer. 
 
-Freeciv-web is is free and open source software. The Freeciv C server is released under the GNU General Public License, while the Freeciv-web client is released
+Freeciv-web is free and open source software. The Freeciv C server is released under the GNU General Public License, while the Freeciv-web client is released
 under the GNU Affero General Public License. See [License](LICENSE.txt) for the full license document.
 
 Freeciv-web is now playable online at http://play.freeciv.org/
@@ -15,6 +15,12 @@ https://mail.gna.org/listinfo/freeciv-dev
   
 
 ![Freeciv-web](https://raw.githubusercontent.com/freeciv/freeciv-web/master/scripts/freeciv-web-screenshot.png "Freeciv-web screenshot")
+
+
+News
+----
+We are currently working on a adding support for 3D WebGL rendering to Freeciv-web. The source code for that 
+can be found [here](https://github.com/freeciv/freeciv-web/tree/develop/freeciv-web/src/main/webapp/javascript/webgl).
 
 
 Overview

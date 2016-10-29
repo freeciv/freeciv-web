@@ -17,7 +17,7 @@
 
 ***********************************************************************/
 
-var container;
+var container, stats;
 var camera, scene, maprenderer;
 var plane, cube;
 var mouse, raycaster, isShiftDown = false;
@@ -26,6 +26,10 @@ var rollOverMesh, rollOverMaterial;
 var cubeGeo, cubeMaterial;
 
 var objects = [];
+var vertShader;
+var fragShader;
+
+var tiletype_terrains = ["lake","coast","floor","arctic","desert","forest","grassland","hills","jungle","mountains","plains","swamp","tundra"];
 
 
 /****************************************************************************
@@ -65,8 +69,10 @@ function init_webgl_renderer()
     console.error("Unable to load tileset spec. Run Freeciv-img-extract.");
   });
 
-  init_sprites();
+  vertShader = document.getElementById('vertex_shh').innerHTML;
+  fragShader = document.getElementById('fragment_shh').innerHTML;
 
+  init_sprites();
 
 }
 
@@ -140,7 +146,7 @@ function webgl_start_renderer()
   directionalLight.position.set( 1, 0.75, 0.5 ).normalize();
   scene.add( directionalLight );
 
-  maprenderer = new THREE.WebGLRenderer( { antialias: true } );
+  maprenderer = new THREE.WebGLRenderer( { antialias: false } ); /* TODO: make antialias configurable. */
   maprenderer.setClearColor( 0xf0f0f0 );
   maprenderer.setPixelRatio( window.devicePixelRatio );
   maprenderer.setSize( window.innerWidth, window.innerHeight );
@@ -151,6 +157,9 @@ function webgl_start_renderer()
   document.addEventListener( 'keydown', webglOnDocumentKeyDown, false );
   document.addEventListener( 'keyup', webglOnDocumentKeyUp, false );
   window.addEventListener( 'resize', webglOnWindowResize, false );
+
+  stats = new Stats();
+  container.appendChild( stats.dom );
 
   animate();
 
@@ -163,31 +172,6 @@ function webgl_start_renderer()
 }
 
 
-/****************************************************************************
-...
-****************************************************************************/
-function generateTexture( width, height, color ) {
-
-    var canvas, context, image, imageData,
-    level, diff, vector3, sun, shade;
-
-    vector3 = new THREE.Vector3( 0, 0, 0 );
-
-    sun = new THREE.Vector3( 1, 1, 1 );
-    sun.normalize();
-
-    canvas = document.createElement( 'canvas' );
-    canvas.width = width;
-    canvas.height = height;
-
-    context = canvas.getContext( '2d' );
-    context.fillStyle = color;
-    context.fillRect( 0, 0, width, height );
-    return canvas;
-
-}
-
-
 
 
 /****************************************************************************
@@ -195,66 +179,91 @@ function generateTexture( width, height, color ) {
 ****************************************************************************/
 function render_testmap() {
 
-    var texture = new THREE.CanvasTexture( generateTexture( 1024, 1024 , '#00a') );
-    var material = new THREE.MeshBasicMaterial( { map: texture, overdraw: 0.5 } );
+  /* blue ocean rectangle. TODO: Make it semi-transparant. */
+  var texture = new THREE.TextureLoader().load( "/textures/water_overlay_texture.png" )
+  texture.wrapS = THREE.RepeatWrapping;
+  texture.wrapT = THREE.RepeatWrapping;
+  texture.repeat.set( 5, 5);
+  var material = new THREE.MeshBasicMaterial( { map: texture, overdraw: 0.5, transparent: true, opacity: 0.75, color: 0x5555ff } );
 
-    var quality = 16, step = 1024 / quality;
+  var quality = 32, step = 1024 / quality;
 
-    var geometry = new THREE.PlaneGeometry( 2000, 2000, quality - 1, quality - 1 );
-    geometry.rotateX( - Math.PI / 2 );
-    geometry.translate(1000, 0, 1000);
+  var geometry = new THREE.PlaneGeometry( 2000, 2000, quality - 1, quality - 1 );
+  geometry.rotateX( - Math.PI / 2 );
+  geometry.translate(1000, 0, 1000);
 
-    for ( var i = 0, l = geometry.vertices.length; i < l; i ++ ) {
+  for ( var i = 0, l = geometry.vertices.length; i < l; i ++ ) {
+      var x = i % quality, y = Math.floor( i / quality );
+      geometry.vertices[ i ].y = 50;
+  }
 
+  mesh = new THREE.Mesh( geometry, material );
+  scene.add( mesh );
+
+  /* create a texture which contains one pixel for each map tile, where the color of each pixel
+    indicates which Freeciv tile type the pixel is. */
+  for (var terrain_id in terrains) {
+    tiletype_palette.push([terrain_id * 10, 0, 0]);
+  }
+  bmp_lib.render('map_tiletype_grid',
+                    generate_map_tiletype_grid(),
+                    tiletype_palette);
+  var overview_map_texture = document.getElementById("map_tiletype_grid");
+  var map_texture = new THREE.Texture();
+  map_texture.image = overview_map_texture;
+  map_texture.needsUpdate = true;
+
+  /* uniforms are variables which are used in the fragment shader fragment.js */
+  var uniforms = {
+    map: { type: "t", value: map_texture },
+    mapWidth: { type: "i", value: map['xsize'] },
+    mapHeight: { type: "i", value: map['ysize'] }
+  };
+
+  /* create a texture for each map tile type. */
+  for (var i = 0; i < tiletype_terrains.length; i++) {
+    /* TODO: load these during preloading of Freeciv-web. */
+    var texture = new THREE.TextureLoader().load( "/textures/" + tiletype_terrains[i] + ".png" )
+    texture.wrapS = THREE.RepeatWrapping;
+    texture.wrapT = THREE.RepeatWrapping;
+    uniforms[tiletype_terrains[i]] = {type: "t", value: texture};
+  }
+
+  /* create a WebGL shader for terrain. */
+  var terrain_material = new THREE.ShaderMaterial({
+    uniforms: uniforms,
+    vertexShader: vertShader,
+    fragmentShader: fragShader
+  });
+
+  var quality = map['xsize'], step = 1024 / quality;
+
+  /* LandGeometry is a plane representing the landscape of the map. */
+  var landGeometry = new THREE.PlaneGeometry( 2000, 2000, quality - 1, quality - 1 );
+  landGeometry.rotateX( - Math.PI / 2 );
+  landGeometry.translate(1000, 0, 1000);
+
+  for ( var i = 0, l = landGeometry.vertices.length; i < l; i ++ ) {
         var x = i % quality, y = Math.floor( i / quality );
-        geometry.vertices[ i ].y = 50;
-
-    }
-
-    mesh = new THREE.Mesh( geometry, material );
-    scene.add( mesh );
-
-
-    var landMaterial = new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load( "/textures/grasslight-big.jpg" ), overdraw: 0.5 } );
-
-    var quality = map['xsize'], step = 1024 / quality;
-
-    var landGeometry = new THREE.PlaneGeometry( 2000, 2000, quality - 1, quality - 1 );
-    landGeometry.rotateX( - Math.PI / 2 );
-    landGeometry.translate(1000, 0, 1000);
-
-    for ( var i = 0, l = landGeometry.vertices.length; i < l; i ++ ) {
-
-        var x = i % quality, y = Math.floor( i / quality );
-        var ptile = map_pos_to_tile(Math.floor(map['xsize']*x/quality), Math.floor(map['ysize']*y/quality));
+        var ptile = map_pos_to_tile(Math.floor((map['ysize'] / map['xsize'])*map['xsize']*x/quality), Math.floor(map['ysize']*y/quality));
         if (ptile != null) {
-          landGeometry.vertices[ i ].y = !is_ocean_tile(ptile) ? 100 : -300;
+          landGeometry.vertices[ i ].y = !is_ocean_tile(ptile) ? 70 : 20;
         }
-
     }
 
-    landMesh = new THREE.Mesh( landGeometry, landMaterial );
-    scene.add( landMesh );
+  landMesh = new THREE.Mesh( landGeometry, terrain_material );
+  scene.add( landMesh );
 
-
-/*  for (var x = 0; x < map['xsize']; x++) {
-    for (var y = 0; y < map['ysize']; y++) {
-      var ptile = map_pos_to_tile(x, y);
-      if (!is_ocean_tile(ptile)) {
-        var voxel = new THREE.Mesh( cubeGeo, cubeMaterial );
-        voxel.position.set( x*50, 0, y*50 );
-        scene.add( voxel );
-        objects.push( voxel );
-      }
-    }
-  }*/
 }
+
 
 /****************************************************************************
 ...
 ****************************************************************************/
 function animate() {
+  stats.begin();
   maprenderer.render( scene, camera );
+  stats.end();
   requestAnimationFrame( animate );
 
 }

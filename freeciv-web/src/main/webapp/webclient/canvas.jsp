@@ -1,3 +1,5 @@
+ <image id="map_tiletype_grid" style="display:none;">
+
  <div id="mapview_canvas_div">
     <%-- The main mapview canvas --%>  
     <div id="canvas_div">

@@ -40,4 +40,6 @@ var ts="${initParam.buildTimeStamp}";
   ga('send', 'pageview');
 </script> 
 </body>
+<jsp:include page="/javascript/webgl/shaders/fragment.js" flush="false"/>
+<jsp:include page="/javascript/webgl/shaders/vertex.js" flush="false"/>
 </html>

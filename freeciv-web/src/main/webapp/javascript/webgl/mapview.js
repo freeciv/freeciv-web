@@ -32,50 +32,7 @@ var fragShader;
 
 var tiletype_terrains = ["lake","coast","floor","arctic","desert","forest","grassland","hills","jungle","mountains","plains","swamp","tundra"];
 
-
-/****************************************************************************
-  Init the Freeciv-web WebGL renderer
-****************************************************************************/
-function init_webgl_renderer()
-{
-  // load Three.js dynamically.
-  $.ajax({
-    async: false,
-    url: "/javascript/libs/three.min.js",
-    dataType: "script"
-  });
-
-  $.ajax({
-    async: false,
-    url: "/javascript/libs/Detector.js",
-    dataType: "script"
-  });
-
-  if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
-
-  /* Loads the two tileset definition files */
-  $.ajax({
-    url: "/javascript/2dcanvas/tileset_config_amplio2.js",
-    dataType: "script",
-    async: false
-  }).fail(function() {
-    console.error("Unable to load tileset config.");
-  });
-
-  $.ajax({
-    url: "/javascript/2dcanvas/tileset_spec_amplio2.js",
-    dataType: "script",
-    async: false
-  }).fail(function() {
-    console.error("Unable to load tileset spec. Run Freeciv-img-extract.");
-  });
-
-  vertShader = document.getElementById('vertex_shh').innerHTML;
-  fragShader = document.getElementById('fragment_shh').innerHTML;
-
-  init_sprites();
-
-}
+var dae;
 
 
 /****************************************************************************
@@ -254,8 +211,25 @@ function render_testmap() {
   landMesh = new THREE.Mesh( landGeometry, terrain_material );
   scene.add( landMesh );
 
-}
+  /* Load a settler model. This is a Collada file which has been exported from Blender. */
+  var loader = new THREE.ColladaLoader();
+  loader.options.convertUpAxis = true;
 
+
+  loader.load( '/3d-models/settler3.dae', function ( collada ) {
+
+    dae = collada.scene;
+    dae.updateMatrix();
+
+    dae.scale.x = dae.scale.y = dae.scale.z = 11;
+    dae.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), 100);
+    dae.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), 1000);
+
+
+    scene.add( dae );
+  });
+
+}
 
 /****************************************************************************
 ...

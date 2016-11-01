@@ -247,25 +247,43 @@ function generate_help_text(key)
     msg += render_sprite(get_unit_type_image_sprite(punit_type));
     msg += "<br>";
     msg += "<div id='manual_non_helptext_facts'>"
+    msg += "<div id='utype_fact_cost'>";
     msg += "Cost: " + punit_type['build_cost'];
-            /*+ "<br>Upkeep: " + improvement['upkeep'];*/
-    msg += "<br>Attack: " + punit_type['attack_strength'];
-    msg += "<br>Defense: " + punit_type['defense_strength'];
-    msg += "<br>Firepower: " + punit_type['firepower'];
-    msg += "<br>Hitpoints: " + punit_type['hp'];
-    msg += "<br>Moves: " + move_points_text(punit_type['move_rate']);
-    msg += "<br>Vision: " + punit_type['vision_radius_sq'];
+    msg += "</div>";
+            /*+ "Upkeep: " + improvement['upkeep'];*/
+    msg += "<div id='utype_fact_attack_str'>";
+    msg += "Attack: " + punit_type['attack_strength'];
+    msg += "</div>";
+    msg += "<div id='utype_fact_defense_str'>";
+    msg += "Defense: " + punit_type['defense_strength'];
+    msg += "</div>";
+    msg += "<div id='utype_fact_firepower'>";
+    msg += "Firepower: " + punit_type['firepower'];
+    msg += "</div>";
+    msg += "<div id='utype_fact_hp'>";
+    msg += "Hitpoints: " + punit_type['hp'];
+    msg += "</div>";
+    msg += "<div id='utype_fact_move_rate'>";
+    msg += "Moves: " + move_points_text(punit_type['move_rate']);
+    msg += "</div>";
+    msg += "<div id='utype_fact_vision'>";
+    msg += "Vision: " + punit_type['vision_radius_sq'];
+    msg += "</div>";
 
     var ireqs = get_improvement_requirements(punit_type['impr_requirement']);
     if (ireqs != null && techs[ireqs] != null) {
-      msg += "<br>Building Requirements: ";
+      msg += "<div id='utype_fact_req_building'>";
+      msg += "Building Requirements: ";
       for (var m = 0; m < ireqs.length; m++) {
         msg += techs[ireqs[m]]['name'] + " ";
       }
+      msg += "</div>";
     }
     var treq = punit_type['tech_requirement'];
     if (treq != null && techs[treq] != null) {
-      msg += "<br>Tech Requirements: " + techs[treq]['name'];
+      msg += "<div id='utype_fact_req_tech'>";
+      msg += "Tech Requirements: " + techs[treq]['name'];
+      msg += "</div>";
     }
     msg += "</div>"
 

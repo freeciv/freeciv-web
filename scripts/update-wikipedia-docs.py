@@ -117,6 +117,6 @@ for tech in techs:
 
 f = open('../freeciv-web/src/main/webapp/javascript/freeciv-wiki-doc.js' ,'w');
 f.write("var freeciv_wiki_docs = "
-        + json.dumps(freeciv_wiki_doc, sort_keys=True, indent=2) + ";");
+        + json.dumps(freeciv_wiki_doc, sort_keys=True, indent=2) + ";\n");
 f.close();
 print("Downloading tech summaries from Wikipedia complete!");

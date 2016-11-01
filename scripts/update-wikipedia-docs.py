@@ -47,6 +47,9 @@ def fix_tech(tech_name):
   if (tech_name == "SETI Program"): tech_name = "Search for extraterrestrial intelligence";
   if (tech_name == "Mass Transit"): tech_name = "Public transport";
   if (tech_name == "Spy"): tech_name = "Espionage";
+  if (tech_name == "Space Component"): tech_name = "Spacecraft propulsion";
+  if (tech_name == "Space Module"): tech_name = "Life support system";
+  if (tech_name == "Space Structural"): tech_name = "Spacecraft design";
   return tech_name;
 
 def validate_image(image_url):

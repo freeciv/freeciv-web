@@ -247,31 +247,52 @@ function generate_help_text(key)
     msg += render_sprite(get_unit_type_image_sprite(punit_type));
     msg += "<br>";
     msg += "<div id='manual_non_helptext_facts'>"
+    msg += "<div id='utype_fact_cost'>";
     msg += "Cost: " + punit_type['build_cost'];
-            /*+ "<br>Upkeep: " + improvement['upkeep'];*/
-    msg += "<br>Attack: " + punit_type['attack_strength'];
-    msg += "<br>Defense: " + punit_type['defense_strength'];
-    msg += "<br>Firepower: " + punit_type['firepower'];
-    msg += "<br>Hitpoints: " + punit_type['hp'];
-    msg += "<br>Moves: " + move_points_text(punit_type['move_rate']);
-    msg += "<br>Vision: " + punit_type['vision_radius_sq'];
+    msg += "</div>";
+    msg += "<div id='utype_fact_upkeep'>";
+    msg += "</div>";
+    msg += "<div id='utype_fact_attack_str'>";
+    msg += "Attack: " + punit_type['attack_strength'];
+    msg += "</div>";
+    msg += "<div id='utype_fact_defense_str'>";
+    msg += "Defense: " + punit_type['defense_strength'];
+    msg += "</div>";
+    msg += "<div id='utype_fact_firepower'>";
+    msg += "Firepower: " + punit_type['firepower'];
+    msg += "</div>";
+    msg += "<div id='utype_fact_hp'>";
+    msg += "Hitpoints: " + punit_type['hp'];
+    msg += "</div>";
+    msg += "<div id='utype_fact_move_rate'>";
+    msg += "Moves: " + move_points_text(punit_type['move_rate']);
+    msg += "</div>";
+    msg += "<div id='utype_fact_vision'>";
+    msg += "Vision: " + punit_type['vision_radius_sq'];
+    msg += "</div>";
 
     var ireqs = get_improvement_requirements(punit_type['impr_requirement']);
     if (ireqs != null && techs[ireqs] != null) {
-      msg += "<br>Building Requirements: ";
+      msg += "<div id='utype_fact_req_building'>";
+      msg += "Building Requirements: ";
       for (var m = 0; m < ireqs.length; m++) {
         msg += techs[ireqs[m]]['name'] + " ";
       }
+      msg += "</div>";
     }
     var treq = punit_type['tech_requirement'];
     if (treq != null && techs[treq] != null) {
-      msg += "<br>Tech Requirements: " + techs[treq]['name'];
+      msg += "<div id='utype_fact_req_tech'>";
+      msg += "Tech Requirements: " + techs[treq]['name'];
+      msg += "</div>";
     }
     msg += "</div>"
 
     msg += "<div id='helptext'><p>" + punit_type['helptext'] + "</p></div>";
 
     msg += wiki_on_item_button(punit_type['name']);
+
+    msg += "<div id='datastore' hidden='true'></div>";
   } else if (key.indexOf("help_gen_techs") != -1) {
     var tech = techs[parseInt(key.replace("help_gen_techs_", ""))];
     msg = "<h1>" + tech['name'] + "</h1>"
@@ -319,6 +340,13 @@ function generate_help_text(key)
        * the unit type's help text. */
       $("#helptext").load("../man/" + rulesetdir + "7.html #utype"
                           + utype_id + " .helptext");
+
+      /* Add the utype upkeep from freeciv-manual. */
+      $("#datastore").load("../man/" + rulesetdir + "7.html #utype"
+                           + utype_id + " .upkeep", function() {
+                             $("#utype_fact_upkeep")[0].innerHTML
+                                 = $("#datastore")[0].children[0].innerHTML;
+                           });
     } else if (key.indexOf("help_gen_governments") != -1) {
       var gov_id = parseInt(key.replace("help_gen_governments_", ""));
 

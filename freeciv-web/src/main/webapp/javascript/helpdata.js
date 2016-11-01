@@ -250,7 +250,8 @@ function generate_help_text(key)
     msg += "<div id='utype_fact_cost'>";
     msg += "Cost: " + punit_type['build_cost'];
     msg += "</div>";
-            /*+ "Upkeep: " + improvement['upkeep'];*/
+    msg += "<div id='utype_fact_upkeep'>";
+    msg += "</div>";
     msg += "<div id='utype_fact_attack_str'>";
     msg += "Attack: " + punit_type['attack_strength'];
     msg += "</div>";
@@ -290,6 +291,8 @@ function generate_help_text(key)
     msg += "<div id='helptext'><p>" + punit_type['helptext'] + "</p></div>";
 
     msg += wiki_on_item_button(punit_type['name']);
+
+    msg += "<div id='datastore' hidden='true'></div>";
   } else if (key.indexOf("help_gen_techs") != -1) {
     var tech = techs[parseInt(key.replace("help_gen_techs_", ""))];
     msg = "<h1>" + tech['name'] + "</h1>"
@@ -337,6 +340,13 @@ function generate_help_text(key)
        * the unit type's help text. */
       $("#helptext").load("../man/" + rulesetdir + "7.html #utype"
                           + utype_id + " .helptext");
+
+      /* Add the utype upkeep from freeciv-manual. */
+      $("#datastore").load("../man/" + rulesetdir + "7.html #utype"
+                           + utype_id + " .upkeep", function() {
+                             $("#utype_fact_upkeep")[0].innerHTML
+                                 = $("#datastore")[0].children[0].innerHTML;
+                           });
     } else if (key.indexOf("help_gen_governments") != -1) {
       var gov_id = parseInt(key.replace("help_gen_governments_", ""));
 

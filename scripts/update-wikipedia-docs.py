@@ -7,6 +7,9 @@ from subprocess import call
 freeciv_wiki_doc = {};
 
 def fix_tech(tech_name):
+  if (tech_name.startswith("?")):
+    tech_name = tech_name.partition(':')[2];
+
   if (tech_name == "Advanced Flight"): tech_name = "Aeronautics";
   if (tech_name == "Rocketry"): tech_name = "Rocket";
   if (tech_name == "Stealth"): tech_name = "Stealth technology";

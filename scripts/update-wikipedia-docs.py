@@ -46,6 +46,7 @@ def fix_tech(tech_name):
   if (tech_name == "Leonardo's Workshop"): tech_name = "Leonardo da Vinci";
   if (tech_name == "SETI Program"): tech_name = "Search for extraterrestrial intelligence";
   if (tech_name == "Mass Transit"): tech_name = "Public transport";
+  if (tech_name == "Spy"): tech_name = "Espionage";
   return tech_name;
 
 def validate_image(image_url):

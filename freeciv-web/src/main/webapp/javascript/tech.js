@@ -630,7 +630,7 @@ function show_wikipedia_dialog(tech_name)
 	  + "' target='_new'>" + freeciv_wiki_docs[tech_name]['title']
 	  + "</a></b><br>";
   if (freeciv_wiki_docs[tech_name]['image'] != null) {
-    message += "<img id='wiki_image' src='" + freeciv_wiki_docs[tech_name]['image'] + "'><br>";
+    message += "<img id='wiki_image' src='/images/wiki/" + freeciv_wiki_docs[tech_name]['image'] + "'><br>";
   }
 
   message += freeciv_wiki_docs[tech_name]['summary'];
@@ -688,7 +688,7 @@ function show_tech_info_dialog(tech_name, unit_type_id, improvement_id)
 	  + "</a>:</b><br>";
 
     if (freeciv_wiki_docs[tech_name]['image'] != null) {
-      message += "<img id='wiki_image' src='" + freeciv_wiki_docs[tech_name]['image'] + "'><br>";
+      message += "<img id='wiki_image' src='/images/wiki/" + freeciv_wiki_docs[tech_name]['image'] + "'><br>";
     }
 
     message += freeciv_wiki_docs[tech_name]['summary'];

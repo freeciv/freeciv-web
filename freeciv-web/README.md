@@ -27,6 +27,8 @@ Build script
 Use maven to build and deploy, by running this build script: 
 sh build.sh
 
+There is also a build-js.sh script to build just JavaScript quickly for development work.
+
 The build script will also create a data webapp directory where savegames and scorelogs are stored.
 
 Flyway migrations of the database is supported. Remember to set the mysql password in flyway.properties.dist and rename the file to flyway.properties. To migrate the database to the latest version, run this Maven command:

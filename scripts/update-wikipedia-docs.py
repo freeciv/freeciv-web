@@ -46,7 +46,7 @@ def fix_tech(tech_name):
   if (tech_name == "Copernicus' Observatory"): tech_name = "Space observatory";
   if (tech_name == "Mech. Inf."): tech_name = "Mechanized infantry";
   if (tech_name == "Sun Tzu's War Academy"): tech_name = "Sun Tzu";
-  if (tech_name == "Mobile Warfare"): tech_name = "Mobile_Warfare";
+  if (tech_name == "Mobile Warfare"): tech_name = "Maneuver warfare";
   if (tech_name == "Leonardo's Workshop"): tech_name = "Leonardo da Vinci";
   if (tech_name == "SETI Program"): tech_name = "Search for extraterrestrial intelligence";
   if (tech_name == "J.S. Bach's Cathedral"): tech_name = "Johann Sebastian Bach";
@@ -70,8 +70,8 @@ def validate_image(image_url):
                   and "Writing_systems_worldwide" not in image_url);
 
 def download_wiki_page(tech_name):
-  image_width = 600;
-  max_height = 500;
+  image_width = 500;
+  max_height = 450;
 
   print(tech_name + " -> " + fix_tech(tech_name));
   page = wikipedia.page(fix_tech(tech_name), auto_suggest=True, redirect=True);
@@ -91,8 +91,8 @@ def download_wiki_page(tech_name):
     if (hsize > max_height):
       hsize = max_height;
     img = img.resize((image_width,hsize), Image.ANTIALIAS)
-    img.save("../freeciv-web/src/main/webapp/images/wiki/" + page.title + ".png");
-    image = page.title + ".png";
+    img.convert('RGB').save("../freeciv-web/src/main/webapp/images/wiki/" + page.title + ".jpg");
+    image = page.title + ".jpg";
 
   freeciv_wiki_doc[tech_name] = {"title" : page.title, "summary" : page.summary, "image" : image};
 

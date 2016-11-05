@@ -65,7 +65,7 @@ public class ValidateUser extends HttpServlet {
             } else if (userstring != null && userstring.contains("@")) {
                 response.getOutputStream().print("invitation");
             } else {
-                response.getOutputStream().print("user_does_not_exists");
+                response.getOutputStream().print("user_does_not_exist");
             }
 
       } catch (Exception err) {

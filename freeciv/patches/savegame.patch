@@ -89,7 +89,7 @@ index 4762171..4b0eb15 100644
 +  if (strncmp(game.server.meta_info.type, "pbem", 4) == 0 
 +      && cmd == CMD_SAVE && caller) {
 +    char pbemfile[200];
-+    fc_snprintf(pbemfile, sizeof(pbemfile), "%s/pbem-%s-%u", srvarg.saves_pathname, caller->username, (unsigned)time(NULL));
++    fc_snprintf(pbemfile, sizeof(pbemfile), "%s/pbem/pbem-%s-%u", srvarg.saves_pathname, caller->username, (unsigned)time(NULL));
 +    sz_strlcpy(arg, pbemfile);
 +  } else if (cmd == CMD_SAVE && caller) {
 +    char savefile[300];
@@ -99,9 +99,9 @@ index 4762171..4b0eb15 100644
 +
 +    time(&timer);
 +    tm_info = localtime(&timer);
-+    strftime(buffer, 30, "%Y-%m-%d-%H%M", tm_info);
-+    fc_snprintf(savefile, sizeof(savefile), "%s/%s/%s-%s", srvarg.saves_pathname, 
-+                caller->username, caller->username, buffer);
++    strftime(buffer, 30, "%Y-%m-%d-%H_%M", tm_info);
++    fc_snprintf(savefile, sizeof(savefile), "%s/%s/%s_T%u_%s", srvarg.saves_pathname, 
++                caller->username, caller->username, game.info.turn, buffer);
 +    sz_strlcpy(arg, savefile);
 +
 +    /* create sub-directory from players username in saves directory. */

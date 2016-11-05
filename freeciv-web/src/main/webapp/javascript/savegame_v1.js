@@ -197,7 +197,7 @@ function old_load_game_dialog()
   $("#dialog").remove();
   $("<div id='dialog'></div>").appendTo("div#game_page");
 
-  var saveHtml =  "<h3>This is the old savegame system. It will be removed in some days.</h3>"
+  var saveHtml =  "<h3>This is the old savegame system. It will be removed November 12th 2016.</h3>"
   + "From now on savegames will be stored on the server rather than in the HTML5 localstorage. New savegames will be in the new format.<br><ol id='selectable'>";
 
   var savegames = simpleStorage.get("savegames");

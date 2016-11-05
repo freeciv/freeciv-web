@@ -11,6 +11,7 @@ python generate_js_hand/generate_js_hand.py && \
 cp packhand_gen.js ../freeciv-web/src/main/webapp/javascript/ && \
 cp packets.js ../freeciv-web/src/main/webapp/javascript/ && \
 mkdir -p ${DATADIR}savegames/ && \
+mkdir -p ${DATADIR}savegames/pbem/ && \
 cp ../freeciv/freeciv/data/scenarios/*.sav ${DATADIR}savegames/ && \
 python3.5 helpdata_gen/helpdata_gen.py &&\
 cp freeciv-helpdata.js ../freeciv-web/src/main/webapp/javascript/ && \

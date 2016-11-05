@@ -366,6 +366,8 @@ function handle_start_phase(packet)
 
   set_phase_start();
 
+  saved_this_turn = false;
+
   /* TODO: implement rest*/
 
 }

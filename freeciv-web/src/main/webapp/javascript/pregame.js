@@ -24,6 +24,7 @@ var choosing_player = -1;
 var ai_skill_level = 2;
 var nation_select_id = -1;
 var metamessage_changed = false;
+var logged_in_with_password = false;
 
 /****************************************************************************
   ...
@@ -901,6 +902,7 @@ function validate_username_callback()
                    $("#dialog").dialog('close');
                    if (is_touch_device() || is_small_screen()) BigScreen.toggle();
                }
+               logged_in_with_password = true;
 
              },
            error: function (request, textStatus, errorThrown) {
@@ -923,7 +925,7 @@ function validate_username_callback()
 
 
 /**************************************************************************
-...
+ Shows the create new user account with password dialog.
 **************************************************************************/
 function show_new_user_account_dialog()
 {
@@ -970,7 +972,7 @@ function show_new_user_account_dialog()
 }
 
 /**************************************************************************
-...
+  This will try to create a new Freeciv-web user account with password.
 **************************************************************************/
 function create_new_freeciv_user_account_request()
 {
@@ -1015,6 +1017,7 @@ function create_new_freeciv_user_account_request()
        simpleStorage.set("password", password);
        $("#dialog").dialog('close');
        network_init();
+       logged_in_with_password = true;
 
       },
    error: function (request, textStatus, errorThrown) {

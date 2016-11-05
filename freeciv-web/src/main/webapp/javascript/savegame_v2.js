@@ -17,18 +17,30 @@
 
 ***********************************************************************/
 
+var saved_this_turn = false;
+
 /****************************************************************************
-  ...
+  Shows the save game dialog.
 ****************************************************************************/
 function save_game()
 {
 
+  if (saved_this_turn) {
+    swal("You have already saved this turn, and you can only save once every turn.");
+    return;
+  }
   // reset dialog page.
   $("#save_dialog").remove();
   $("<div id='save_dialog'></div>").appendTo("div#game_page");
 
-  var dhtml = "<span id='settings_info'><i>Savegames are stored on the server, and deleted after 14 days.</i></span>";
+  var dhtml = "<span id='settings_info'><i>You can save your current game here. "
+    + "Savegames are stored on the server, and deleted after 14 days.</i></span>";
 
+  if (!logged_in_with_password) {
+    dhtml += "<br><br>You have not logged in using a user account with password. Please "
+    + "create a new user account with password next time you want save, so you are sure"
+    + " you can load the savegame.<br>"
+  }
 
   $("#save_dialog").html(dhtml);
   $("#save_dialog").attr("title", "Save game");
@@ -48,17 +60,13 @@ function save_game()
 				}
 			});
 
-
-    /* TODO: check if user is logged in. */
-
-
   if (is_pbem()) {
     swal("Play-By-Email games can not be saved. Please use the end turn button.");
     return;
   }
 
   $("#save_dialog").dialog('open');
-
+  saved_this_turn = true;
 }
 
 /**************************************************************************
@@ -70,9 +78,15 @@ function quicksave()
     swal("Play-By-Email games can not be saved. Please use the end turn button.");
     return;
   }
-  /* TODO: check if user is logged in. */
+
+  if (saved_this_turn) {
+    swal("You have already saved this turn, and you can only save once every turn.");
+    return;
+  }
+
   send_message("/save");
   add_chatbox_text("Game saved.");
+  saved_this_turn = true;
 
 }
 
@@ -154,7 +168,7 @@ function show_load_game_dialog_cb(savegames_data)
   $("#dialog").dialog({
 			bgiframe: true,
 			modal: true,
-			width: is_small_screen() ? "95%" : "70%",
+			width: is_small_screen() ? "90%" : "50%",
 			buttons: dialog_buttons
 		});
   $("#selectable").selectable();

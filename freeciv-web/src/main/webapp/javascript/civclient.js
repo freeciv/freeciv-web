@@ -417,106 +417,6 @@ function validate_username() {
 }
 
 
-/**************************************************************************
- Shows the Freeciv intro dialog.
-**************************************************************************/
-function show_intro_dialog(title, message) {
-
-
-  if ($.getUrlVar('autostart') == "true") {
-    autostart = true;
-    username = "autostart";
-    network_init();
-    return;
-  }
-
-  // reset dialog page.
-  $("#dialog").remove();
-  $("<div id='dialog'></div>").appendTo("div#game_page");
-
-  var intro_html = message + "<br><br>Player name: <input id='username_req' type='text' size='25' maxlength='31'>"
-	  + " <br><br><span id='username_validation_result'></span>";
-  $("#dialog").html(intro_html);
-  var stored_username = simpleStorage.get("username", "");
-  if (stored_username != null && stored_username != false) {
-    $("#username_req").val(stored_username);
-  }
-  $("#dialog").attr("title", title);
-  $("#dialog").dialog({
-			bgiframe: true,
-			modal: true,
-			width: is_small_screen() ? "80%" : "60%",
-			beforeClose: function( event, ui ) {
-			  // if intro dialog is closed, then check the username and connect to the server.
-			  if (dialog_close_trigger != "button") {
-			    if (validate_username()) {
-			      if (!is_touch_device()) $("#pregame_text_input").focus();
-			      return true;
-			    } else {
-			      return false;
-			    }
-			  }
-			},
-			buttons:
-			[
-			  {
-				  text : "Start Game",
-				  click : function() {
-					dialog_close_trigger = "button";
-					autostart = true;
-					if (validate_username()) {
-						$("#dialog").dialog('close');
-						if (is_touch_device() || is_small_screen()) BigScreen.toggle();
-					}
-				  },
-				  icons: { primary: "ui-icon-play" }
-			  },
-			  {
-				  text : "Customize Game",
-				  click : function() {
-					dialog_close_trigger = "button";
-					if (validate_username()) {
-					  if (!is_touch_device()) $("#pregame_text_input").focus();
-					  $("#dialog").dialog('close');
-					  if (is_touch_device() || is_small_screen()) BigScreen.toggle();
-					}
-				},
-				icons : { primary: "ui-icon-gear" }
-				}
-			]
-
-		});
-
-  if (($.getUrlVar('action') == "load" || $.getUrlVar('action') == "multi" || $.getUrlVar('action') == "earthload")
-         && $.getUrlVar('load') != "tutorial") {
-    $(".ui-dialog-buttonset button").first().hide();
-  }
-  if ($.getUrlVar('action') == "observe") {
-    $(".ui-dialog-buttonset button").first().remove();
-    $(".ui-dialog-buttonset button").first().button("option", "label", "Observe Game");
-  }
-
-  if (is_small_screen()) {
-    /* some fixes for pregame screen on small devices.*/
-    $("#freeciv_logo").remove();
-    $("#pregame_message_area").css("width", "73%");
-    $("#observe_button").remove();
-  }
-
-  $("#dialog").dialog('open');
-
-  $('#dialog').keyup(function(e) {
-    if (e.keyCode == 13) {
-      autostart = true;
-      if (validate_username()) {
-        $("#dialog").dialog('close');
-        $("#dialog").remove();
-      }
-    }
-  });
-
-  blur_input_on_touchdevice();
-}
 
 
 
@@ -547,6 +447,7 @@ function update_timeout()
     }
   }
 }
+
 
 /**************************************************************************
  shows the remaining time of the turn change on the turn done button.

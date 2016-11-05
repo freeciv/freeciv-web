@@ -112,7 +112,7 @@ function control_init()
   });
 
   $("#load_game_button").click(function(event) {
-    load_game_dialog();
+      show_load_game_dialog();
   });
 
   $("#pick_nation_button").click(function(event) {

@@ -1,8 +1,8 @@
 diff --git a/server/commands.c b/server/commands.c
-index 05f89d6..742f9b9 100644
+index 2dd987d..df88735 100644
 --- a/server/commands.c
 +++ b/server/commands.c
-@@ -548,7 +548,7 @@ static struct command commands[] = {
+@@ -549,7 +549,7 @@ static struct command commands[] = {
        "all cities and units etc. Use with care!"), NULL,
     CMD_ECHO_ALL, VCF_NONE, 50
    },
@@ -12,7 +12,7 @@ index 05f89d6..742f9b9 100644
     N_("save\n"
        "save <file-name>"),
 diff --git a/server/savegame.c b/server/savegame.c
-index 2a85039..1a81b68 100644
+index afbf376..db62262 100644
 --- a/server/savegame.c
 +++ b/server/savegame.c
 @@ -130,8 +130,8 @@ void save_game(const char *orig_filename, const char *save_reason,
@@ -41,10 +41,18 @@ index 2a85039..1a81b68 100644
    timer_start(timer_cpu);
    timer_user = timer_new(TIMER_USER, TIMER_ACTIVE);
 diff --git a/server/stdinhand.c b/server/stdinhand.c
-index 5dc62fa..b9e37df 100644
+index 4762171..4b0eb15 100644
 --- a/server/stdinhand.c
 +++ b/server/stdinhand.c
-@@ -642,11 +642,6 @@ Save the game, with filename=arg, provided server state is ok.
+@@ -19,6 +19,7 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
++#include <time.h>
+ 
+ #ifdef FREECIV_HAVE_LIBREADLINE
+ #include <readline/readline.h>
+@@ -654,11 +655,6 @@ Save the game, with filename=arg, provided server state is ok.
  **************************************************************************/
  static bool save_command(struct connection *caller, char *arg, bool check)
  {
@@ -56,18 +64,50 @@ index 5dc62fa..b9e37df 100644
    if (!check) {
      save_game(arg, "User request", FALSE);
    }
-@@ -4134,6 +4129,16 @@ static bool handle_stdin_input_real(struct connection *caller, char *str,
+@@ -3641,10 +3637,15 @@ bool load_command(struct connection *caller, const char *filename, bool check,
+   }
+ 
+   {
++    char websave[300];
++    fc_snprintf(websave, sizeof(websave), "%s/%s", srvarg.saves_pathname, caller->username);
++    struct strvec *webdirs = strvec_new();
++    strvec_append(webdirs, websave);
++
+     /* it is a normal savegame or maybe a scenario */
+     char testfile[MAX_LEN_PATH];
+     const struct strvec *pathes[] = {
+-      get_save_dirs(), get_scenario_dirs(), NULL
++      get_save_dirs(), get_scenario_dirs(), webdirs, NULL
+     };
+     const char *exts[] = {
+       "sav", "gz", "bz2", "xz", "sav.gz", "sav.bz2", "sav.xz", NULL
+@@ -4191,6 +4192,31 @@ static bool handle_stdin_input_real(struct connection *caller, char *str,
  
    level = command_level(command_by_number(cmd));
  
-+  /* hack for web client: savegames are saved with username as proposed filename. */
++  /* Special savegame handling for Freeciv-web. */
 +  if (strncmp(game.server.meta_info.type, "pbem", 4) == 0 
 +      && cmd == CMD_SAVE && caller) {
 +    char pbemfile[200];
-+    fc_snprintf(pbemfile, sizeof(pbemfile), "pbem-%s-%u", caller->username, (unsigned)time(NULL));
++    fc_snprintf(pbemfile, sizeof(pbemfile), "%s/pbem-%s-%u", srvarg.saves_pathname, caller->username, (unsigned)time(NULL));
 +    sz_strlcpy(arg, pbemfile);
 +  } else if (cmd == CMD_SAVE && caller) {
-+    sz_strlcpy(arg, caller->username);
++    char savefile[300];
++    char buffer[30];
++    time_t timer;
++    struct tm* tm_info;
++
++    time(&timer);
++    tm_info = localtime(&timer);
++    strftime(buffer, 30, "%Y-%m-%d-%H%M", tm_info);
++    fc_snprintf(savefile, sizeof(savefile), "%s/%s/%s-%s", srvarg.saves_pathname, 
++                caller->username, caller->username, buffer);
++    sz_strlcpy(arg, savefile);
++
++    /* create sub-directory from players username in saves directory. */
++    char savedir[300];
++    fc_snprintf(savedir, sizeof(savedir), "%s/%s", srvarg.saves_pathname, caller->username);
++    make_dir(savedir);
 +  }
 +
    if (conn_can_vote(caller, NULL) && level == ALLOW_CTRL

@@ -26,15 +26,6 @@ $(document).ready(function() {
     });
   });
 
-  var savegames = simpleStorage.get("savegames");
-
-  if (savegames == null || savegames.length == 0) {
-    $('#load-button').addClass("disabled");
-    $('#load-button').attr("href", "#");
-  } else {
-    $('#load-button').addClass("btn-success");
-  }
-
     if (navigator.userAgent.toLowerCase().indexOf('android') > -1) {
       $("#chromews").hide();
       $("#windowsstore").hide();

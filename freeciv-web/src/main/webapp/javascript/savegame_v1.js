@@ -16,6 +16,11 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ***********************************************************************/
+
+/**
+ * Save game support versjon 1 - DEPRECATED!
+ */
+
 var savename = "";
 var loadTimerId = -1;
 var scenario_activated = false;
@@ -114,7 +119,7 @@ function load_game_check()
   } else if (scenario == "true" && $.getUrlVar('load') != "tutorial") {
     show_scenario_dialog();
   } else if ($.getUrlVar('action') == "load") {
-    load_game_dialog();
+    show_load_game_dialog();
   }
 
 }
@@ -165,83 +170,7 @@ function load_game_toggle()
 
 }
 
-/****************************************************************************
-  ...
-****************************************************************************/
-function save_game()
-{
-  if (!simpleStorage.canUse()) {
-    show_dialog_message("Saving failed", "HTML5 Storage not available");
-    return;
-  }
 
-  keyboard_input = false;
-  // reset dialog page.
-  $("#save_dialog").remove();
-  $("<div id='save_dialog'></div>").appendTo("div#game_page");
-
-  var dhtml = "<table>" +
-  	  "<tr><td>Savegame name:</td>" +
-	  "<td><input type='text' name='savegamename' id='savegamename' size='38' maxlength='64'></td></tr>" +
-	  "</td></tr></table><br>" +
-	  "<span id='settings_info'><i>Freeciv-web allows you to save games. Games are stored in your web " +
-	  "browser using HTML5 localstorage. Saved games will be stored in your browser until you clear" +
-	  " your browser cache. Savegames are tied to your username " + username + ".<br><br>" +
-          "Savegame usage: " + Math.floor(simpleStorage.storageSize() / 1000) + " of 5200 kB.";
-
-
-  $("#save_dialog").html(dhtml);
-  $("#save_dialog").attr("title", "Save game");
-  $("#save_dialog").dialog({
-			bgiframe: true,
-			modal: true,
-			width: is_small_screen() ? "90%" : "40%",
-			close : function(){
-			  keyboard_input = true;
-                        },
-			buttons: {
-                                "Manage Savegames": function() {
-				  keyboard_input = true;
-				  $("#save_dialog").dialog('close');
-				  $("#save_dialog").parent().remove();
-				  load_game_dialog();
-				},
-				"Save Game": function() {
-					keyboard_input = true;
-					savename = $("#savegamename").val()
-					if (savename == null || savename.length < 4 || savename.length > 64) {
-						swal("Invalid savegame name.");
-					} else if (check_savegame_duplicate(savename)) {
-						swal("Savegame name already in use. "
-						 + "Please use a new savegame name.");
-					} else {
-						$("#save_dialog").dialog('close');
-						save_game_send();
-                                                $.blockUI();
-					}
-				}
-			}
-		});
-  var pplayer = client.conn.playing;
-  var suggest_savename = username + " of the " + nations[pplayer['nation']]['adjective'] + " in year: " + get_year_string();
-  if (suggest_savename.length >= 64) suggest_savename = username + " " + get_year_string();
-  if ($.getUrlVar('action') == "multi" || loaded_game_type == "multi") {
-    suggest_savename = "Multiplayer game, saved by " + username + " " + get_year_string(); 
-  }
-  if ($.getUrlVar('action') == "hotseat" || loaded_game_type == "hotseat") {
-    suggest_savename = "Hotseat game, in the year: " + get_year_string(); 
-  }
-
-  $("#savegamename").val(suggest_savename);
-  
-  if (is_pbem()) {
-    swal("Play-By-Email games can not be saved. Please use the end turn button.");
-    return;
-  }
-
-  $("#save_dialog").dialog('open');
-
-}
 /**************************************************************************
  Check for duplicate savegame name
 **************************************************************************/
@@ -256,71 +185,20 @@ function check_savegame_duplicate(new_savename)
   return false;
 }
 
-/**************************************************************************
- Save the game
-**************************************************************************/
-function save_game_send()
-{
-  send_message("/save");
-  sTimerId = setTimeout(save_game_fetch,  2500);
-}
-
-
-/**************************************************************************
-  Saves the game, by transfering the savegame from the server to the
-  client, and storing the result in HTML5 Local Storage.
-**************************************************************************/
-function save_game_fetch()
-{
-  $.get("/saveservlet?username=" + username + "&savename=" + savename,
-    function(saved_file) {
-      console.log("Storage size: " + simpleStorage.storageSize());
-      console.log("Savename: " + savename);
-      console.log("Username: " + username);
-      console.log("Savegame size: " + saved_file.length);
-
-      var game_type = $.getUrlVar('action');
-      if (loaded_game_type != null) game_type = loaded_game_type;
-      console.log("Game type: " + game_type);
-
-      var savegames = simpleStorage.get("savegames");
-      if (savegames == null) savegames = [];
-
-      var currentdate = new Date();
-      var datetime = " " + currentdate.getDate() + "/"
-                + (currentdate.getMonth()+1)  + "/"
-                + currentdate.getFullYear() + "  "
-                + currentdate.getHours() + ":"
-                + currentdate.getMinutes();
-
-      savegames.push({"title" : savename, "username" : username, "file" : saved_file,
-                      "datetime" : datetime, "version" : FC_SAVEGAME_VER, "game_type": game_type})
-
-      if (simpleStorage.set("savegames", savegames) === true) {
-        $.unblockUI();
-        swal("Game saved successfully");
-      } else {
-        $.unblockUI();
-        swal("Failed saving game because of browser local storage error. Check savegame usage.");
-      }
-    }).fail(function() {
-	    $.unblockUI();
-	    swal("Failed saving game because of server error.");
-    });
-}
-
 
 /**************************************************************************
  Load game
+ (deprecated)
 **************************************************************************/
-function load_game_dialog()
+function old_load_game_dialog()
 {
 
   // reset dialog page.
   $("#dialog").remove();
   $("<div id='dialog'></div>").appendTo("div#game_page");
 
-  var saveHtml =  "<ol id='selectable'>";
+  var saveHtml =  "<h3>This is the old savegame system. It will be removed in some days.</h3>"
+  + "From now on savegames will be stored on the server rather than in the HTML5 localstorage. New savegames will be in the new format.<br><ol id='selectable'>";
 
   var savegames = simpleStorage.get("savegames");
 
@@ -389,7 +267,7 @@ function load_game_dialog()
   "Delete oldest": function() {
     delete_oldest_savegame();
     $("#dialog").dialog('close');
-    load_game_dialog();
+    old_load_game_dialog();
   },
   "Delete ALL": function() {
     var r = confirm("Do you really want to delete your savegames?");
@@ -588,30 +466,7 @@ function handle_savegame_upload()
 
   $("#upload_dialog").dialog('close');
   $("#dialog").dialog('close');
-  setTimeout("load_game_dialog();", 1000);
-
-}
-
-/**************************************************************************
- Press Ctrl-S to quickly save the game.
-**************************************************************************/
-function quicksave()
-{
-  if (is_pbem()) {
-    swal("Play-By-Email games can not be saved. Please use the end turn button.");
-    return;
-  }
-
-  var pplayer = client.conn.playing;
-  var suggest_savename = username + " of the " + nations[pplayer['nation']]['adjective'] + " in year: " + get_year_string();
-  if (suggest_savename.length >= 64) suggest_savename = username + " " + get_year_string();
-  if ($.getUrlVar('action') == "multi" || loaded_game_type == "multi") {
-    suggest_savename = "Multiplayer game, saved by " + username + " " + get_year_string(); 
-  }
-
-  savename = suggest_savename;
-
-  save_game_send();
+  setTimeout("old_load_game_dialog();", 1000);
 
 }
 

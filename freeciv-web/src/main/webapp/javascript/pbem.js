@@ -363,7 +363,10 @@ function create_new_pbem_game(check_opponent)
    success: function(data, textStatus, request){
       if (data == "invitation") {
         send_pbem_invitation(check_opponent);
- 
+
+      } else if (data == "user_does_not_exist") {
+        swal("Opponent does not exist. Please try another username.");
+
       } else if (data != null && data.length > 3) {
         opponent = data;
         network_init();

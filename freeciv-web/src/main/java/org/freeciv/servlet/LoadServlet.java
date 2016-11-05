@@ -40,6 +40,7 @@ import org.apache.commons.codec.binary.Base64;
   from the client's localstorage to freeciv-web server,
   saving SHA1 hash for security.
 */
+@Deprecated
 public class LoadServlet extends HttpServlet {
 	/**
 	 * Serialization UID.

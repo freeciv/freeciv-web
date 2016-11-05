@@ -25,19 +25,6 @@
     <url-pattern>/civclientlauncher</url-pattern>
   </servlet-mapping>
 
-
-  <!-- /saveservlet -->
-  <servlet>
-    <servlet-name>SaveServlet</servlet-name>
-    <servlet-class>org.freeciv.servlet.SaveServlet</servlet-class>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>SaveServlet</servlet-name>
-    <url-pattern>/saveservlet</url-pattern>
-  </servlet-mapping>
-
-
   <!-- /loadservlet -->
   <servlet>
     <servlet-name>LoadServlet</servlet-name>
@@ -49,6 +36,16 @@
     <url-pattern>/loadservlet</url-pattern>
   </servlet-mapping>
 
+  <!-- /listsavegames -->
+  <servlet>
+    <servlet-name>ListSaveGames</servlet-name>
+    <servlet-class>org.freeciv.servlet.ListSaveGames</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>ListSaveGames</servlet-name>
+    <url-pattern>/listsavegames</url-pattern>
+  </servlet-mapping>
 
   <!-- /create_pbem_user   (new useraccount) -->
   <servlet>

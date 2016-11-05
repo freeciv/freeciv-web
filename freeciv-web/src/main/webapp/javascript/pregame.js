@@ -755,3 +755,271 @@ function change_ruleset(to) {
     // reset some ruleset defined settings.
     send_message("/set nationset all");
   }
+
+
+/**************************************************************************
+ Shows the Freeciv intro dialog.
+**************************************************************************/
+function show_intro_dialog(title, message) {
+
+
+  if ($.getUrlVar('autostart') == "true") {
+    autostart = true;
+    username = "autostart";
+    network_init();
+    return;
+  }
+
+  // reset dialog page.
+  $("#dialog").remove();
+  $("<div id='dialog'></div>").appendTo("div#game_page");
+
+  var intro_html = message + "<br><br><table><tr><td>Player name:</td><td><input id='username_req' type='text' size='25' maxlength='31'></td></tr>"
+      +  "<tr id='password_row' style='display:none;'><td>Password:</td><td><input id='password_req' type='password' size='25' maxlength='200'></td></tr></table>"
+	  + " <br><br><span id='username_validation_result'></span>";
+  $("#dialog").html(intro_html);
+  var stored_username = simpleStorage.get("username", "");
+  if (stored_username != null && stored_username != false) {
+    $("#username_req").val(stored_username);
+  }
+  var stored_password = simpleStorage.get("password", "");
+  if (stored_password != null && stored_password != false) {
+    $("#password_req").val(stored_password);
+  }
+  $("#dialog").attr("title", title);
+  $("#dialog").dialog({
+			bgiframe: true,
+			modal: true,
+			width: is_small_screen() ? "80%" : "60%",
+			beforeClose: function( event, ui ) {
+			  // if intro dialog is closed, then check the username and connect to the server.
+			  if (dialog_close_trigger != "button") {
+			    if (validate_username()) {
+			      if (!is_touch_device()) $("#pregame_text_input").focus();
+			      return true;
+			    } else {
+			      return false;
+			    }
+			  }
+			},
+			buttons:
+			[
+			  {
+				  text : "Start Game",
+				  click : function() {
+					dialog_close_trigger = "button";
+					autostart = true;
+					validate_username_callback();
+				  },
+				  icons: { primary: "ui-icon-play" }
+			  },
+			  {
+				  text : $.getUrlVar('action') == "load" ? "Load games" : "Customize Game",
+				  click : function() {
+					dialog_close_trigger = "button";
+					validate_username_callback();
+				},
+				icons : { primary: "ui-icon-gear" }
+			  },
+              {
+                  text : "New user account",
+                  click : function() {
+                    show_new_user_account_dialog();
+                },
+                icons : { primary: "ui-icon-person" }
+              }
+			]
+
+		});
+
+  if (($.getUrlVar('action') == "load" || $.getUrlVar('action') == "multi" || $.getUrlVar('action') == "earthload")
+         && $.getUrlVar('load') != "tutorial") {
+    $(".ui-dialog-buttonset button").first().hide();
+  }
+  if ($.getUrlVar('action') == "observe") {
+    $(".ui-dialog-buttonset button").first().remove();
+    $(".ui-dialog-buttonset button").first().button("option", "label", "Observe Game");
+  }
+
+  if (is_small_screen()) {
+    /* some fixes for pregame screen on small devices.*/
+    $("#freeciv_logo").remove();
+    $("#pregame_message_area").css("width", "73%");
+    $("#observe_button").remove();
+  }
+
+  $("#dialog").dialog('open');
+
+  $('#dialog').keyup(function(e) {
+    if (e.keyCode == 13) {
+      autostart = true;
+      validate_username_callback();
+    }
+  });
+
+  blur_input_on_touchdevice();
+}
+
+
+/**************************************************************************
+  Validate username callback
+**************************************************************************/
+function validate_username_callback()
+{
+  var check_username = $("#username_req").val();
+  var result = false;
+  $.ajax({
+   type: 'POST',
+   url: "/validate_user?userstring=" + check_username,
+   success: function(data, textStatus, request){
+      if (data == "user_does_not_exist") {
+        var savegames = simpleStorage.get("savegames");  // get savegames from the old and deprecated savegame system.
+
+        if ($.getUrlVar('action') == "load" && (savegames == null || savegames.length == 0)) {
+          swal("User does not exist. Unable to load any savegames.");
+        } else {
+          if (validate_username()) {
+              if (!is_touch_device()) $("#pregame_text_input").focus();
+              $("#dialog").dialog('close');
+              if (is_touch_device() || is_small_screen()) BigScreen.toggle();
+          }
+        }
+      } else {
+        username = $("#username_req").val().trim();
+        var password = $("#password_req").val().trim();
+
+        if (password != null && password.length > 2) {
+          $.ajax({
+           type: 'POST',
+           url: "/login_user?username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(password),
+           success: function(data, textStatus, request){
+               simpleStorage.set("username", username);
+               simpleStorage.set("password", password);
+               /* Login OK! */
+               if (validate_username()) {
+                   if (!is_touch_device()) $("#pregame_text_input").focus();
+                   $("#dialog").dialog('close');
+                   if (is_touch_device() || is_small_screen()) BigScreen.toggle();
+               }
+
+             },
+           error: function (request, textStatus, errorThrown) {
+             swal("Login user failed. Please check your username and password. ");
+           }
+          });
+        }
+
+        $("#password_row").show();
+        $("#password_req").focus();
+        $("#username_validation_result").html("Please enter your password or create a new user account.");
+      }
+    },
+   error: function (request, textStatus, errorThrown) {
+     swal("Error. Please try again with a different name.");
+   }
+  });
+
+}
+
+
+/**************************************************************************
+...
+**************************************************************************/
+function show_new_user_account_dialog()
+{
+
+  var title = "New user account";
+  var message = "Create a new Freeciv-web user account with information about yourself:<br><br>"
+                + "<table><tr><td>Username:</td><td><input id='username' type='text' size='25' maxlength='30' onkeyup='return forceLower(this);'></td></tr>"
+                + "<tr><td>Email:</td><td><input id='email' type='email' size='25' maxlength='64' ></td></tr>"
+                + "<tr><td>Password:</td><td><input id='password' type='password' size='25'></td></tr></table><br>"
+                + "<div id='username_validation_result'></div><br>"
+                + "<div id='captcha_element'></div><br><br>"
+                + "<div><small><ul><li>It is free and safe to create a new account on Freeciv-web.</li>"
+                + "<li>A user account allows you to save and load games.</li>"
+                + "<li>Other players can use your username to start Play-by-email games with you.</li>"
+                + "<li>You will not receive any spam and your e-mail address will be kept safe.</li>"
+                + "<li>You can cancel your account at any time if you want.</li>"
+                + "</ul></small></div>";
+
+  // reset dialog page.
+  $("#dialog").remove();
+  $("<div id='dialog'></div>").appendTo("div#game_page");
+
+  $("#dialog").html(message);
+  $("#dialog").attr("title", title);
+  $("#dialog").dialog({
+			bgiframe: true,
+			modal: true,
+			width: is_small_screen() ? "90%" : "60%",
+			buttons:
+			{
+                         "Cancel" : function() {
+	                      init_common_intro_dialog();
+				},
+				"Signup new user" : function() {
+                                  create_new_freeciv_user_account_request();
+				}
+			}
+		});
+
+  $("#dialog").dialog('open');
+  grecaptcha.render('captcha_element', {
+          'sitekey' : '6LfpcgMTAAAAAPRAOqYy6ZUhuX6bOJ7-7-_1V0FL'
+        });
+}
+
+/**************************************************************************
+...
+**************************************************************************/
+function create_new_freeciv_user_account_request()
+{
+
+  username = $("#username").val().trim().toLowerCase();
+  var password = $("#password").val().trim();
+  var email = $("#email").val().trim();
+  var captcha = $("#g-recaptcha-response").val();
+
+  var cleaned_username = username.replace(/[^a-zA-Z]/g,'');
+
+  if (!validateEmail(email)) {
+    $("#username_validation_result").html("Invalid email address.");
+    return false;
+  } else if (username == null || username.length == 0) {
+    $("#username_validation_result").html("Your name can't be empty.");
+    return false;
+  } else if (username.length <= 2 ) {
+    $("#username_validation_result").html("Your name is too short.");
+    return false;
+  } else if (password == null || password.length <= 2 ) {
+    $("#username_validation_result").html("Your password is too short.");
+    return false;
+  } else if (username.length >= 32) {
+    $("#username_validation_result").html("Your name is too long.");
+    return false;
+  } else if (username != cleaned_username) {
+    $("#username_validation_result").html("Your name contains invalid characters, only the English alphabet is allowed.");
+    return false;
+  }
+
+  $("#username_validation_result").html("");
+
+  $("#dialog").parent().hide();
+
+  $.ajax({
+   type: 'POST',
+   url: "/create_pbem_user?username=" + encodeURIComponent(username) + "&email=" + encodeURIComponent(email)
+            + "&password=" + encodeURIComponent(password) + "&captcha=" + encodeURIComponent(captcha),
+   success: function(data, textStatus, request){
+       simpleStorage.set("username", username);
+       simpleStorage.set("password", password);
+       $("#dialog").dialog('close');
+       network_init();
+
+      },
+   error: function (request, textStatus, errorThrown) {
+     $("#dialog").parent().show();
+     swal("Creating new user failed.");
+   }
+  });
+}

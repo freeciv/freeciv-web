@@ -990,10 +990,11 @@ function show_new_user_account_dialog()
             type: 'POST',
             url: "/validate_user?userstring=" + $("#email").val(),
             success: function(data, textStatus, request) {
-               if (data != "user_does_not_exist") {
-                 $("#username_validation_result").html("The e-mail is already registered. Please choose another.");
-               } else {
+               if (data == "invitation") {
                  $("#username_validation_result").html("");
+               } else {
+                 $("#username_validation_result").html("The e-mail is already registered. Please choose another.");
+
                }
              }
            });

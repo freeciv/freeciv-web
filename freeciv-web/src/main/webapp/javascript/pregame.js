@@ -973,9 +973,14 @@ function show_new_user_account_dialog()
 		});
 
   $("#dialog").dialog('open');
-  grecaptcha.render('captcha_element', {
+
+  if (grecaptcha != null) {
+    grecaptcha.render('captcha_element', {
           'sitekey' : '6LfpcgMTAAAAAPRAOqYy6ZUhuX6bOJ7-7-_1V0FL'
         });
+  } else {
+    swal("Captcha not available. This could be caused by a browser plugin.");
+  }
 
   $("#username").blur(function() {
    $.ajax({

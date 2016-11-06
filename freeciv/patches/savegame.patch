@@ -68,7 +68,7 @@ index 4762171..4b0eb15 100644
    }
  
    {
-+    char websave[300], pbem[6];
++    char websave[300], pbem[300];
 +    fc_snprintf(websave, sizeof(websave), "%s/%s", srvarg.saves_pathname, caller->username); fc_snprintf(pbem, sizeof(pbem), "%s/pbem", srvarg.saves_pathname);
 +    struct strvec *webdirs = strvec_new(); strvec_append(webdirs, websave);
 +    struct strvec *pbemdirs = strvec_new(); strvec_append(pbemdirs, pbem);

@@ -25,17 +25,6 @@
     <url-pattern>/civclientlauncher</url-pattern>
   </servlet-mapping>
 
-  <!-- /loadservlet -->
-  <servlet>
-    <servlet-name>LoadServlet</servlet-name>
-    <servlet-class>org.freeciv.servlet.LoadServlet</servlet-class>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>LoadServlet</servlet-name>
-    <url-pattern>/loadservlet</url-pattern>
-  </servlet-mapping>
-
   <!-- /listsavegames -->
   <servlet>
     <servlet-name>ListSaveGames</servlet-name>

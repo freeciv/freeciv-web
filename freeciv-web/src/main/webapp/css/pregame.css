@@ -212,7 +212,7 @@ body {
 #username_validation_result {
   font-weight: bold;
   color: red; 
-  background-color: #220000; 
+  background-color: #000000;
 }
 
 .pregame_flags {

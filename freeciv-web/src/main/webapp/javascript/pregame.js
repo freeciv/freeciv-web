@@ -776,7 +776,7 @@ function show_intro_dialog(title, message) {
   $("<div id='dialog'></div>").appendTo("div#game_page");
 
   var intro_html = message + "<br><br><table><tr><td>Player name:</td><td><input id='username_req' type='text' size='25' maxlength='31'></td></tr>"
-      +  "<tr id='password_row' style='display:none;'><td>Password:</td><td><input id='password_req' type='password' size='25' maxlength='200'></td></tr></table>"
+      +  "<tr id='password_row' style='display:none;'><td>Password:</td><td id='password_td'></td></tr></table>"
 	  + " <br><br><span id='username_validation_result'></span>";
   $("#dialog").html(intro_html);
   var stored_username = simpleStorage.get("username", "");
@@ -881,33 +881,45 @@ function validate_username_callback()
         }
       } else {
         username = $("#username_req").val().trim();
-        var password = $("#password_req").val().trim();
+        var password = $("#password_req").val();
+        if (password == null) {
+          var stored_password = simpleStorage.get("password", "");
+          if (stored_password != null && stored_password != false) {
+            password = stored_password;
+          }
+        }
 
         if (password != null && password.length > 2) {
           $.ajax({
            type: 'POST',
            url: "/login_user?username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(password),
            success: function(data, textStatus, request){
-               simpleStorage.set("username", username);
-               simpleStorage.set("password", password);
-               /* Login OK! */
-               if (validate_username()) {
+               if (data != null && data == "OK") {
+                 simpleStorage.set("username", username);
+                 simpleStorage.set("password", password);
+                 /* Login OK! */
+                 if (validate_username()) {
                    if (!is_touch_device()) $("#pregame_text_input").focus();
                    $("#dialog").dialog('close');
                    if (is_touch_device() || is_small_screen()) BigScreen.toggle();
+                 }
+                 logged_in_with_password = true;
+               } else {
+                 $("#username_validation_result").html("Incorrect username or password. Please try again!");
                }
-               logged_in_with_password = true;
 
              },
            error: function (request, textStatus, errorThrown) {
-             swal("Login user failed. Please check your username and password. ");
+             swal("Login user failed.");
            }
           });
+        } else {
+          $("#username_validation_result").html("Please enter your password or create a new user account.");
         }
 
         $("#password_row").show();
         $("#password_req").focus();
-        $("#username_validation_result").html("Please enter your password or create a new user account.");
+        $("#password_td").html("<input id='password_req' type='password' size='25' maxlength='200'>");
       }
     },
    error: function (request, textStatus, errorThrown) {
@@ -928,7 +940,8 @@ function show_new_user_account_dialog()
   var message = "Create a new Freeciv-web user account with information about yourself:<br><br>"
                 + "<table><tr><td>Username:</td><td><input id='username' type='text' size='25' maxlength='30' onkeyup='return forceLower(this);'></td></tr>"
                 + "<tr><td>Email:</td><td><input id='email' type='email' size='25' maxlength='64' ></td></tr>"
-                + "<tr><td>Password:</td><td><input id='password' type='password' size='25'></td></tr></table><br>"
+                + "<tr><td>Password:</td><td><input id='password' type='password' size='25'></td></tr>"
+                + "<tr><td>Confim password:</td><td><input id='confirm_password' type='password' size='25'></td></tr></table><br>"
                 + "<div id='username_validation_result'></div><br>"
                 + "<div id='captcha_element'></div><br><br>"
                 + "<div><small><ul><li>It is free and safe to create a new account on Freeciv-web.</li>"
@@ -950,11 +963,11 @@ function show_new_user_account_dialog()
 			width: is_small_screen() ? "90%" : "60%",
 			buttons:
 			{
-                         "Cancel" : function() {
-	                      init_common_intro_dialog();
+                "Cancel" : function() {
+	                init_common_intro_dialog();
 				},
 				"Signup new user" : function() {
-                                  create_new_freeciv_user_account_request();
+                    create_new_freeciv_user_account_request("normal");
 				}
 			}
 		});
@@ -963,16 +976,43 @@ function show_new_user_account_dialog()
   grecaptcha.render('captcha_element', {
           'sitekey' : '6LfpcgMTAAAAAPRAOqYy6ZUhuX6bOJ7-7-_1V0FL'
         });
+
+  $("#username").blur(function() {
+   $.ajax({
+     type: 'POST',
+     url: "/validate_user?userstring=" + $("#username").val(),
+     success: function(data, textStatus, request) {
+        if (data != "user_does_not_exist") {
+          $("#username_validation_result").html("The username is already taken. Please choose another username.");
+        } else {
+          $("#email").blur(function() {
+          $.ajax({
+            type: 'POST',
+            url: "/validate_user?userstring=" + $("#email").val(),
+            success: function(data, textStatus, request) {
+               if (data != "user_does_not_exist") {
+                 $("#username_validation_result").html("The e-mail is already registered. Please choose another.");
+               } else {
+                 $("#username_validation_result").html("");
+               }
+             }
+           });
+         });
+        }
+      }
+    });
+  });
 }
 
 /**************************************************************************
   This will try to create a new Freeciv-web user account with password.
 **************************************************************************/
-function create_new_freeciv_user_account_request()
+function create_new_freeciv_user_account_request(action_type)
 {
 
   username = $("#username").val().trim().toLowerCase();
   var password = $("#password").val().trim();
+  var confirm_password = $("#confirm_password").val().trim();
   var email = $("#email").val().trim();
   var captcha = $("#g-recaptcha-response").val();
 
@@ -996,6 +1036,9 @@ function create_new_freeciv_user_account_request()
   } else if (username != cleaned_username) {
     $("#username_validation_result").html("Your name contains invalid characters, only the English alphabet is allowed.");
     return false;
+  } else if (password != confirm_password) {
+    $("#username_validation_result").html("The passwords do not match.");
+    return false;
   }
 
   $("#username_validation_result").html("");
@@ -1009,9 +1052,13 @@ function create_new_freeciv_user_account_request()
    success: function(data, textStatus, request){
        simpleStorage.set("username", username);
        simpleStorage.set("password", password);
-       $("#dialog").dialog('close');
-       network_init();
-       logged_in_with_password = true;
+       if (action_type == "pbem") {
+         challenge_pbem_player_dialog();
+       } else {
+         $("#dialog").dialog('close');
+         network_init();
+         logged_in_with_password = true;
+       }
 
       },
    error: function (request, textStatus, errorThrown) {

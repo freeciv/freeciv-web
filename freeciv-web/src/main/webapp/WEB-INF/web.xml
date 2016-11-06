@@ -113,7 +113,19 @@
     <servlet-name>DeactivateUser</servlet-name>
     <url-pattern>/deactivate_user</url-pattern>
   </servlet-mapping>
-  
+
+
+  <!-- /deletesavegame -->
+  <servlet>
+    <servlet-name>DeleteSaveGame</servlet-name>
+    <servlet-class>org.freeciv.servlet.DeleteSaveGame</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>DeleteSaveGame</servlet-name>
+    <url-pattern>/deletesavegame</url-pattern>
+  </servlet-mapping>
+
    <!-- /freeciv_time_played_stats   -->
   <servlet>
     <servlet-name>FreecivStatsServlet</servlet-name>

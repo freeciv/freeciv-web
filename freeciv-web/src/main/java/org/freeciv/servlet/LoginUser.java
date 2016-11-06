@@ -44,7 +44,7 @@ public class LoginUser extends HttpServlet {
         String password = java.net.URLDecoder.decode(request.getParameter("password"), "UTF-8");
        
 
-       Connection conn = null;
+        Connection conn = null;
         try {
             Context env = (Context) (new InitialContext().lookup("java:comp/env"));
             DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
@@ -54,15 +54,13 @@ public class LoginUser extends HttpServlet {
             PreparedStatement preparedStatement = conn.prepareStatement(pwdSQL);
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, password);
-  	    ResultSet rs = preparedStatement.executeQuery();
+            ResultSet rs = preparedStatement.executeQuery();
             rs.next();
             if (rs.getInt(1) != 1) {
-              response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Unable to login. Please check your username and password.");
-              return;
+              response.getOutputStream().print("Failed");
+            } else {
+                response.getOutputStream().print("OK");
             }
-
-            response.getOutputStream().print("OK!");
-
 
       } catch (Exception err) {
             response.setHeader("result", "error");
@@ -76,8 +74,6 @@ public class LoginUser extends HttpServlet {
                     e.printStackTrace();
                 }
         }
-
-
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)

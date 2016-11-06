@@ -151,6 +151,14 @@ function show_load_game_dialog_cb(savegames_data)
 		    $("#game_text_input").blur();
 		  }
     },
+    "Delete" : function() {
+      var load_game_id = $('#selectable .ui-selected').index();
+      if (load_game_id != -1) {
+        delete_savegame($('#selectable .ui-selected').text());
+      }
+      $('#selectable .ui-selected').remove();
+    }
+     ,
      "Load Scenarios...": function() {
 		  $("#dialog").dialog('close');
 		  $("#game_text_input").blur();
@@ -177,5 +185,17 @@ function show_load_game_dialog_cb(savegames_data)
 
 
   $('.ui-dialog-buttonpane button').eq(0).focus();
+
+}
+
+/**************************************************************************
+ Deletes a savegame
+**************************************************************************/
+function delete_savegame(filename)
+{
+  $.ajax({
+   type: 'POST',
+   url: "/deletesavegame?username=" + encodeURIComponent(username) + "&savegame=" + encodeURIComponent(filename)
+  });
 
 }

@@ -156,7 +156,8 @@ function create_new_pbem_user()
   var message = "Create a new Freeciv-web user account with information about yourself:<br><br>"
                 + "<table><tr><td>Username:</td><td><input id='username' type='text' size='25' maxlength='30' onkeyup='return forceLower(this);'></td></tr>"  
                 + "<tr><td>Email:</td><td><input id='email' type='email' size='25' maxlength='64' ></td></tr>"  
-                + "<tr><td>Password:</td><td><input id='password' type='password' size='25'></td></tr></table><br>"
+                + "<tr><td>Password:</td><td><input id='password' type='password' size='25'></td></tr>"
+                + "<tr><td>Confirm password:</td><td><input id='confirm_password' type='password' size='25'></td></tr></table><br>"
                 + "<div id='username_validation_result'></div><br>"
                 + "<div id='captcha_element'></div><br><br>"
                 + "<div><small><ul><li>It is free and safe to create a new account on Freeciv-web.</li>"
@@ -181,7 +182,7 @@ function create_new_pbem_user()
 	                          show_pbem_dialog();
 				},
 				"Signup new user" : function() {
-                                  create_new_pbem_user_request();
+                                  create_new_freeciv_user_account_request("pbem");
 				}
 			}
 		});
@@ -190,59 +191,33 @@ function create_new_pbem_user()
   grecaptcha.render('captcha_element', {
           'sitekey' : '6LfpcgMTAAAAAPRAOqYy6ZUhuX6bOJ7-7-_1V0FL'
         });
-}
 
-/**************************************************************************
-...
-**************************************************************************/
-function create_new_pbem_user_request() 
-{
-
-  username = $("#username").val().trim().toLowerCase();
-  var password = $("#password").val().trim();
-  var email = $("#email").val().trim();
-  var captcha = $("#g-recaptcha-response").val();
-
-  var cleaned_username = username.replace(/[^a-zA-Z]/g,'');
-
-  if (!validateEmail(email)) {
-    $("#username_validation_result").html("Invalid email address.");
-    return false;
-  } else if (username == null || username.length == 0) {
-    $("#username_validation_result").html("Your name can't be empty.");
-    return false;
-  } else if (username.length <= 2 ) {
-    $("#username_validation_result").html("Your name is too short.");
-    return false;
-  } else if (password == null || password.length <= 2 ) {
-    $("#username_validation_result").html("Your password is too short.");
-    return false;
-  } else if (username.length >= 32) {
-    $("#username_validation_result").html("Your name is too long.");
-    return false;
-  } else if (username != cleaned_username) {
-    $("#username_validation_result").html("Your name contains invalid characters, only the English alphabet is allowed.");
-    return false;
-  }
-
-  $("#username_validation_result").html("");
-
-  $("#dialog").parent().hide();
-
-  $.ajax({
-   type: 'POST',
-   url: "/create_pbem_user?username=" + encodeURIComponent(username) + "&email=" + encodeURIComponent(email)
-            + "&password=" + encodeURIComponent(password) + "&captcha=" + encodeURIComponent(captcha),
-   success: function(data, textStatus, request){
-       simpleStorage.set("username", username);
-       simpleStorage.set("password", password);
-       challenge_pbem_player_dialog();
-      },
-   error: function (request, textStatus, errorThrown) {
-     $("#dialog").parent().show();
-     swal("Creating new user failed.");
-   }
+  $("#username").blur(function() {
+   $.ajax({
+     type: 'POST',
+     url: "/validate_user?userstring=" + $("#username").val(),
+     success: function(data, textStatus, request) {
+        if (data != "user_does_not_exist") {
+          $("#username_validation_result").html("The username is already taken. Please choose another username.");
+        } else {
+          $("#email").blur(function() {
+          $.ajax({
+            type: 'POST',
+            url: "/validate_user?userstring=" + $("#email").val(),
+            success: function(data, textStatus, request) {
+               if (data != "user_does_not_exist") {
+                 $("#username_validation_result").html("The e-mail is already registered. Please choose another.");
+               } else {
+                 $("#username_validation_result").html("");
+               }
+             }
+           });
+         });
+        }
+      }
+    });
   });
+
 }
 
 
@@ -259,16 +234,20 @@ function login_pbem_user_request()
    type: 'POST',
    url: "/login_user?username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(password),
    success: function(data, textStatus, request){
-       simpleStorage.set("username", username);
-       simpleStorage.set("password", password);
-       if ($.getUrlVar('savegame') != null) {
-         handle_pbem_load();
+       if (data != null && data == "OK") {
+         simpleStorage.set("username", username);
+         simpleStorage.set("password", password);
+         if ($.getUrlVar('savegame') != null) {
+           handle_pbem_load();
+         } else {
+           challenge_pbem_player_dialog();
+         }
        } else {
-         challenge_pbem_player_dialog();
+         $("#username_validation_result").html("Incorrect username or password. Please try again!");
        }
      },
    error: function (request, textStatus, errorThrown) {
-     swal("Login user failed. Please check your username and password. ");
+     swal("Login user failed. ");
    }
   });
 }

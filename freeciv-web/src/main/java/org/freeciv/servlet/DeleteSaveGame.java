@@ -67,7 +67,6 @@ public class DeleteSaveGame extends HttpServlet {
         }
 
         try {
-            System.out.println(savegame_dir + username + "/" + savegame + ".sav.xz");
             File savegameFile = new File(savegame_dir + username + "/" + savegame + ".sav.xz");
             if (savegameFile.exists() && savegameFile.isFile() && savegameFile.getName().endsWith(".sav.xz")) {
                 Files.delete(savegameFile.toPath());

@@ -30,7 +30,7 @@ var objects = [];
 var vertShader;
 var fragShader;
 
-var tiletype_terrains = ["lake","coast","floor","arctic","desert","forest","grassland","hills","jungle","mountains","plains","swamp","tundra"];
+var tiletype_terrains = ["lake","coast","floor","arctic","desert","forest","grassland","hills","jungle","mountains","plains","swamp","tundra", "beach"];
 
 var dae;
 
@@ -165,14 +165,25 @@ function render_testmap() {
   bmp_lib.render('map_tiletype_grid',
                     generate_map_tiletype_grid(),
                     tiletype_palette);
-  var overview_map_texture = document.getElementById("map_tiletype_grid");
   var map_texture = new THREE.Texture();
-  map_texture.image = overview_map_texture;
+  map_texture.image = document.getElementById("map_tiletype_grid");
   map_texture.needsUpdate = true;
+
+  /* heightmap image */
+  for (var i = 0; i < 10; i++) {
+    heightmap_palette.push([i * 10, 0, 0]);
+  }
+  bmp_lib.render('map_heightmap_grid',
+                    generate_map_heightmap_grid(),
+                    heightmap_palette);
+  var heightmap_texture = new THREE.Texture();
+  heightmap_texture.image = document.getElementById("map_heightmap_grid");
+  heightmap_texture.needsUpdate = true;
 
   /* uniforms are variables which are used in the fragment shader fragment.js */
   var uniforms = {
-    map: { type: "t", value: map_texture },
+    maptiles: { type: "t", value: map_texture },
+    heightmap: { type: "t", value: heightmap_texture },
     mapWidth: { type: "i", value: map['xsize'] },
     mapHeight: { type: "i", value: map['ysize'] }
   };
@@ -200,13 +211,17 @@ function render_testmap() {
   landGeometry.rotateX( - Math.PI / 2 );
   landGeometry.translate(1000, 0, 1000);
 
+  create_heightmap();
+
   for ( var i = 0, l = landGeometry.vertices.length; i < l; i ++ ) {
-        var x = i % quality, y = Math.floor( i / quality );
-        var ptile = map_pos_to_tile(Math.floor(map['xsize']*x/quality), Math.floor(map['ysize']*y/quality));
-        if (ptile != null) {
-          landGeometry.vertices[ i ].y = !is_ocean_tile(ptile) ? 70 : 20;
-        }
+    var x = i % quality, y = Math.floor( i / quality );
+    var gx = Math.floor(map['xsize']*x/quality);
+    var gy = Math.floor(map['ysize']*y/quality);
+    if (heightmap[gx] != null && heightmap[gx][gy] != null) {
+      landGeometry.vertices[ i ].y = heightmap[gx][gy] * 100;
     }
+
+  }
 
   landMesh = new THREE.Mesh( landGeometry, terrain_material );
   scene.add( landMesh );
@@ -214,7 +229,6 @@ function render_testmap() {
   /* Load a settler model. This is a Collada file which has been exported from Blender. */
   var loader = new THREE.ColladaLoader();
   loader.options.convertUpAxis = true;
-
 
   loader.load( '/3d-models/settler3.dae', function ( collada ) {
 
@@ -224,7 +238,6 @@ function render_testmap() {
     dae.scale.x = dae.scale.y = dae.scale.z = 11;
     dae.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), 100);
     dae.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), 1000);
-
 
     scene.add( dae );
   });

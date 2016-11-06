@@ -874,16 +874,10 @@ function validate_username_callback()
    url: "/validate_user?userstring=" + check_username,
    success: function(data, textStatus, request){
       if (data == "user_does_not_exist") {
-        var savegames = simpleStorage.get("savegames");  // get savegames from the old and deprecated savegame system.
-
-        if ($.getUrlVar('action') == "load" && (savegames == null || savegames.length == 0)) {
-          swal("User does not exist. Unable to load any savegames.");
-        } else {
-          if (validate_username()) {
-              if (!is_touch_device()) $("#pregame_text_input").focus();
-              $("#dialog").dialog('close');
-              if (is_touch_device() || is_small_screen()) BigScreen.toggle();
-          }
+        if (validate_username()) {
+          if (!is_touch_device()) $("#pregame_text_input").focus();
+          $("#dialog").dialog('close');
+          if (is_touch_device() || is_small_screen()) BigScreen.toggle();
         }
       } else {
         username = $("#username_req").val().trim();

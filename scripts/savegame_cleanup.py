@@ -17,7 +17,7 @@ scenario_list = ['british-isles-85x80-v2.80.sav.gz', 'iberian-peninsula-136x100-
     'hagworld-120x60-v1.2.sav.gz']
 
 
-keeptime = 60*60*24*14;
+keeptime = 60*60*24*365;
 keeptime_pbem = 60*60*24*10;
 
 for root, subFolders, files in os.walk(rootdir):

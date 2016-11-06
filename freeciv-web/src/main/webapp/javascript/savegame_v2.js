@@ -34,7 +34,7 @@ function save_game()
   $("<div id='save_dialog'></div>").appendTo("div#game_page");
 
   var dhtml = "<span id='settings_info'><i>You can save your current game here. "
-    + "Savegames are stored on the server, and deleted after 14 days.</i></span>";
+    + "Savegames are stored on the server, and deleted after 365 days.</i></span>";
 
   if (!logged_in_with_password) {
     dhtml += "<br><br>You have not logged in using a user account with password. Please "

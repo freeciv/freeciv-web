@@ -68,16 +68,16 @@ index 4762171..4b0eb15 100644
    }
  
    {
-+    char websave[300];
-+    fc_snprintf(websave, sizeof(websave), "%s/%s", srvarg.saves_pathname, caller->username);
-+    struct strvec *webdirs = strvec_new();
-+    strvec_append(webdirs, websave);
++    char websave[300], pbem[6];
++    fc_snprintf(websave, sizeof(websave), "%s/%s", srvarg.saves_pathname, caller->username); fc_snprintf(pbem, sizeof(pbem), "%s/pbem", srvarg.saves_pathname);
++    struct strvec *webdirs = strvec_new(); strvec_append(webdirs, websave);
++    struct strvec *pbemdirs = strvec_new(); strvec_append(pbemdirs, pbem);
 +
      /* it is a normal savegame or maybe a scenario */
      char testfile[MAX_LEN_PATH];
      const struct strvec *pathes[] = {
 -      get_save_dirs(), get_scenario_dirs(), NULL
-+      get_save_dirs(), get_scenario_dirs(), webdirs, NULL
++      get_save_dirs(), get_scenario_dirs(), webdirs, pbem, NULL
      };
      const char *exts[] = {
        "sav", "gz", "bz2", "xz", "sav.gz", "sav.bz2", "sav.xz", NULL

@@ -1010,7 +1010,6 @@ function show_new_user_account_dialog()
 **************************************************************************/
 function create_new_freeciv_user_account_request(action_type)
 {
-
   username = $("#username").val().trim().toLowerCase();
   var password = $("#password").val().trim();
   var confirm_password = $("#confirm_password").val().trim();
@@ -1036,6 +1035,9 @@ function create_new_freeciv_user_account_request(action_type)
     return false;
   } else if (username != cleaned_username) {
     $("#username_validation_result").html("Your name contains invalid characters, only the English alphabet is allowed.");
+    return false;
+  } else if (password.indexOf("%") != -1 || password.indexOf("#") != -1 || password.indexOf("&") != -1 || password.indexOf("?") != -1) {
+    $("#username_validation_result").html("Please don't use these characters in passwords: % # & ?");
     return false;
   } else if (password != confirm_password) {
     $("#username_validation_result").html("The passwords do not match.");

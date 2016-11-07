@@ -222,6 +222,9 @@ function render_testmap() {
     }
 
   }
+  landGeometry.computeVertexNormals();
+  landGeometry.computeMorphNormals();
+
 
   landMesh = new THREE.Mesh( landGeometry, terrain_material );
   scene.add( landMesh );

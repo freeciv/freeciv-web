@@ -49,7 +49,7 @@ function create_heightmap()
   /* smooth */
   for (var x = 1; x < heightmap_resolution -1 ; x++) {
     for (var y = 1; y < heightmap_resolution -1; y++) {
-      heightmap[x][y] = (heightmap_init[x][y] + heightmap_init[x+1][y] + heightmap_init[x-1][y] + heightmap_init[x][y+1] + heightmap_init[x][y-1]) / 5;
+      heightmap[x][y] = (heightmap_init[x][y] * 0.5 + heightmap_init[x+1][y] * 0.125 + heightmap_init[x-1][y] * 0.125 + heightmap_init[x][y+1] * 0.125 + heightmap_init[x][y-1] * 0.125);
     }
   }
 

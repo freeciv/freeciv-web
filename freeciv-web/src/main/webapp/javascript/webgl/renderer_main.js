@@ -26,7 +26,7 @@ function init_webgl_renderer()
   // load Three.js dynamically.
   $.ajax({
     async: false,
-    url: "/javascript/libs/three.min.js",
+    url: "/javascript/webgl/libs/three.min.js",
     dataType: "script"
   });
 

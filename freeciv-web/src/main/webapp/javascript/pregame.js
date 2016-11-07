@@ -989,6 +989,7 @@ function show_new_user_account_dialog()
      success: function(data, textStatus, request) {
         if (data != "user_does_not_exist") {
           $("#username_validation_result").html("The username is already taken. Please choose another username.");
+          $(".ui-dialog-buttonset button").button("disable");
         } else {
           $("#email").blur(function() {
           $.ajax({
@@ -997,8 +998,10 @@ function show_new_user_account_dialog()
             success: function(data, textStatus, request) {
                if (data == "invitation") {
                  $("#username_validation_result").html("");
+                 $(".ui-dialog-buttonset button").button("enable");
                } else {
                  $("#username_validation_result").html("The e-mail is already registered. Please choose another.");
+                 $(".ui-dialog-buttonset button").button("disable");
 
                }
              }

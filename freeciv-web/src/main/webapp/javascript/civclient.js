@@ -188,7 +188,7 @@ function init_common_intro_dialog() {
       "You are about to join this game server, where you can " +
       "play a singleplayer game against the Freeciv AI.<br> You can " +
       "start the game directly, or customize the game settings. " +
-      "Savegame support requires that you create a user account. " +
+      "Savegame support requires that you create a user account.<br>" +
       "Please enter your username: ");
   }
 }

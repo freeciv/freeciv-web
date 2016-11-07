@@ -55,9 +55,10 @@ function save_game()
     + "Savegames are stored on the server, and deleted after 365 days. You can save once every turn in each game session.</i></span>";
 
   if (!logged_in_with_password) {
-    dhtml += "<br><br>Waring: You have not logged in using a user account with password. Please "
+    dhtml += "<br><br>Warning: You have not logged in using a user account with password. Please "
     + "create a new user account with password next time you want save, so you are sure"
-    + " you can load the savegame with a username and password. <br>"
+    + " you can load the savegame with a username and password. <a href='/webclient/?action=new'>Click here</a> "
+    + "to start a new game, then click on the \"New User Account\" button to create a new account.<br>"
   }
 
   $("#save_dialog").html(dhtml);

@@ -23,6 +23,8 @@
     precision highp float;
     #endif
 
+    varying vec3 vNormal;
+
     uniform sampler2D lake;
     uniform sampler2D coast;
     uniform sampler2D floor;
@@ -131,8 +133,13 @@
           c = Cb.rgb;
         }*/
 
+        vec3 light = vec3(0.8, 0.6, 0.7);
+        light = normalize(light);
 
-        gl_FragColor= vec4(c, 1.0);
+        float dProd = max(0.0, dot(vNormal, light));
+
+
+        gl_FragColor= vec4(c.r * dProd * 1.1, c.g * dProd * 1.1, c.b * dProd * 1.1, 1.0);
 
     }
 

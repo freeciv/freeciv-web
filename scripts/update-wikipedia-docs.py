@@ -50,6 +50,7 @@ def fix_tech(tech_name):
   if (tech_name == "Leonardo's Workshop"): tech_name = "Leonardo da Vinci";
   if (tech_name == "SETI Program"): tech_name = "Search for extraterrestrial intelligence";
   if (tech_name == "J.S. Bach's Cathedral"): tech_name = "Johann Sebastian Bach";
+  if (tech_name == "Marco Polo's Embassy"): tech_name = "Marco Polo";
   if (tech_name == "Mass Transit"): tech_name = "Public transport";
   if (tech_name == "Spy"): tech_name = "Espionage";
   if (tech_name == "Space Component"): tech_name = "Spacecraft propulsion";

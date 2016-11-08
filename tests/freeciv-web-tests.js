@@ -63,9 +63,11 @@ casper.test.begin('Test that Metaserver is responding.', 2, function suite(test)
 
 casper.test.begin('Test of Freeciv-web frontpage', 3, function suite(test) {
     casper.start("http://localhost", function() {
+      casper.wait(5000, function() {
         test.assertHttpStatus(200);
         test.assertTitleMatch(/Freeciv-web/, 'Freeciv-web title is present');
         test.assertExists('#single-button');
+      });
     });
 
     casper.run(function() {

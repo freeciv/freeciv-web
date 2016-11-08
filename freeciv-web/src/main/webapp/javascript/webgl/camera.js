@@ -20,7 +20,7 @@
 var camera;
 
 var camera_dx = 330;
-var camera_dy = 900;
+var camera_dy = 700;
 var camera_dz = 330;
 
 

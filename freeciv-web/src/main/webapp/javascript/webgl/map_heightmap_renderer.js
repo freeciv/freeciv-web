@@ -25,38 +25,22 @@ var heightmap_palette = [];
 ****************************************************************************/
 function generate_map_heightmap_grid() {
   var row, col;
+  var heightmap_resolution_x = map['xsize'] * 4;
+  var heightmap_resolution_y = map['ysize'] * 4;
 
-  var grid = Array(map_tiletype_resolution);
-  for (row = 0; row < map_tiletype_resolution ; row++) {
-    grid[row] = Array(map_tiletype_resolution);
+  var grid = Array(heightmap_resolution_x);
+  for (row = 0; row < heightmap_resolution_x ; row++) {
+    grid[row] = Array(heightmap_resolution_y);
   }
 
-  for (var x = 0; x < map_tiletype_resolution ; x++) {
-    for (var y = 0; y < map_tiletype_resolution; y++) {
-      var gx = Math.floor((map['ysize'] / map['xsize']) * x * map['xsize'] / map_tiletype_resolution);
-      var gy = Math.floor((map['xsize'] / map['ysize']) * y * map['ysize'] / map_tiletype_resolution);
-      grid[x][y] = map_height_tile_color(gy, gx);
+  for (var x = 0; x < heightmap_resolution_x ; x++) {
+    for (var y = 0; y < heightmap_resolution_y; y++) {
+      var gx = Math.floor((map['ysize'] / map['xsize']) * x * map['xsize'] / heightmap_resolution_x);
+      var gy = Math.floor((map['xsize'] / map['ysize']) * y * map['ysize'] / heightmap_resolution_y);
+      grid[x][y] = Math.floor(heightmap[gy][gx] * 100);
     }
   }
   return grid;
-}
-
-
-/****************************************************************************
-  Returns the height (color) of the tile at the given tile height.
-****************************************************************************/
-function map_height_tile_color(map_x, map_y)
-{
-  var ptile = map_pos_to_tile(map_x, map_y);
-
-  if (ptile != null && tile_get_known(ptile) != TILE_UNKNOWN) {
-      if (is_ocean_tile(ptile)) return 0;
-      if (tile_terrain(ptile)['name'] == "Hills") return 2;
-      if (tile_terrain(ptile)['name'] == "Mountains") return 3;
-  }
-
-  return 1;
-
 }
 
 /****************************************************************************

@@ -17,7 +17,7 @@
 
 ***********************************************************************/
 
-var heightmap_resolution = 2048;
+
 var heightmap = null;
 
 /****************************************************************************
@@ -25,16 +25,18 @@ var heightmap = null;
 ****************************************************************************/
 function create_heightmap()
 {
+  var heightmap_resolution_x = map['xsize'] * 4 + 1;
+  var heightmap_resolution_y = map['ysize'] * 4 + 1;
   var row, col;
-  var heightmap_init = new Array(heightmap_resolution);
-  for (var i = 0; i < heightmap_resolution; i++) {
-    heightmap_init[i] = new Array(heightmap_resolution);
+  var heightmap_init = new Array(heightmap_resolution_x);
+  for (var i = 0; i <= heightmap_resolution_x; i++) {
+    heightmap_init[i] = new Array(heightmap_resolution_y);
   }
 
-  for (var x = 0; x < heightmap_resolution ; x++) {
-    for (var y = 0; y < heightmap_resolution; y++) {
-      var gx = Math.floor((map['ysize'] / map['xsize']) * x * map['xsize'] / heightmap_resolution);
-      var gy = Math.floor((map['xsize'] / map['ysize']) * y * map['ysize'] / heightmap_resolution);
+  for (var x = 0; x < heightmap_resolution_x ; x++) {
+    for (var y = 0; y < heightmap_resolution_y; y++) {
+      var gx = Math.floor(x * map['xsize'] / heightmap_resolution_x);
+      var gy = Math.floor((map['xsize'] / map['ysize']) * y * map['ysize'] / heightmap_resolution_y) - 1;
       var ptile = map_pos_to_tile(gx, gy);
       if (ptile != null) {
         heightmap_init[gx][gy] = map_tile_height(ptile);
@@ -42,14 +44,18 @@ function create_heightmap()
     }
   }
 
-  heightmap = new Array(heightmap_resolution);
-  for (var i = 0; i < heightmap_resolution; i++) {
-    heightmap[i] = new Array(heightmap_resolution);
+  heightmap = new Array(heightmap_resolution_x);
+  for (var i = 0; i < heightmap_resolution_x; i++) {
+    heightmap[i] = new Array(heightmap_resolution_y);
   }
   /* smooth */
-  for (var x = 1; x < heightmap_resolution -1 ; x++) {
-    for (var y = 1; y < heightmap_resolution -1; y++) {
-      heightmap[x][y] = (heightmap_init[x][y] * 0.5 + heightmap_init[x+1][y] * 0.125 + heightmap_init[x-1][y] * 0.125 + heightmap_init[x][y+1] * 0.125 + heightmap_init[x][y-1] * 0.125);
+  for (var x = 0; x < heightmap_resolution_x; x++) {
+    for (var y = 0; y < heightmap_resolution_y; y++) {
+      if (x == 0 || y == 0 || x >= heightmap_resolution_x || y >= heightmap_resolution_y) {
+        heightmap[x][y] = heightmap_init[x][y];
+      } else {
+        heightmap[x][y] = (heightmap_init[x][y] * 0.5 + heightmap_init[x+1][y] * 0.125 + heightmap_init[x-1][y] * 0.125 + heightmap_init[x][y+1] * 0.125 + heightmap_init[x][y-1] * 0.125);
+      }
     }
   }
 

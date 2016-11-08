@@ -170,8 +170,9 @@ function render_testmap() {
   map_texture.needsUpdate = true;
 
   /* heightmap image */
-  for (var i = 0; i < 10; i++) {
-    heightmap_palette.push([i * 10, 0, 0]);
+  create_heightmap();
+  for (var i = 0; i < 255; i++) {
+    heightmap_palette.push([i, 0, 0]);
   }
   bmp_lib.render('map_heightmap_grid',
                     generate_map_heightmap_grid(),
@@ -204,14 +205,14 @@ function render_testmap() {
     fragmentShader: fragShader
   });
 
-  var quality = map['xsize'], step = 1024 / quality;
+  var quality = map['xsize'] * 2, step = 1024 / quality;
 
   /* LandGeometry is a plane representing the landscape of the map. */
   var landGeometry = new THREE.PlaneGeometry( 3000, 2000, quality - 1, quality - 1 );
   landGeometry.rotateX( - Math.PI / 2 );
   landGeometry.translate(1000, 0, 1000);
 
-  create_heightmap();
+
 
   for ( var i = 0, l = landGeometry.vertices.length; i < l; i ++ ) {
     var x = i % quality, y = Math.floor( i / quality );
@@ -219,6 +220,8 @@ function render_testmap() {
     var gy = Math.floor(map['ysize']*y/quality);
     if (heightmap[gx] != null && heightmap[gx][gy] != null) {
       landGeometry.vertices[ i ].y = heightmap[gx][gy] * 100;
+    } else {
+      //console.log("x: " + gx + ", y: " + gy + " not found in heightmap.");
     }
 
   }
@@ -234,10 +237,8 @@ function render_testmap() {
   loader.options.convertUpAxis = true;
 
   loader.load( '/3d-models/settler3.dae', function ( collada ) {
-
     dae = collada.scene;
     dae.updateMatrix();
-
     dae.scale.x = dae.scale.y = dae.scale.z = 11;
     dae.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), 100);
     dae.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), 1000);

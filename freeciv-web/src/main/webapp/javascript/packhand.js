@@ -956,7 +956,9 @@ function recreate_old_tech_req(packet)
   for (i = 0; i < packet['research_reqs'].length; i++) {
     var requirement = packet['research_reqs'][i];
 
-    if (requirement.kind == VUT_ADVANCE) {
+    if (requirement.kind == VUT_ADVANCE
+        && requirement.range == REQ_RANGE_PLAYER
+        && requirement.present) {
       packet['req'].push(requirement.value);
     }
   }

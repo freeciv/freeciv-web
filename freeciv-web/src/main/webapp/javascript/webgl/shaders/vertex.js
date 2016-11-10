@@ -20,16 +20,19 @@
 
 ***********************************************************************/
 
-    varying vec2 vUv;
+varying vec2 vUv;
+varying vec3 vNormal;
+varying vec3 vPosition;
+varying vec3 vPosition_camera;
 
-    varying vec3 vNormal;
-
-    void main()
-    {
-        vUv = uv;
-        vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
-        gl_Position = projectionMatrix * mvPosition;
-        vNormal = normal;
-    }
+void main()
+{
+  vUv = uv;
+  vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+  gl_Position = projectionMatrix * mvPosition;
+  vPosition_camera = gl_Position.xyz;
+  vNormal = normal;
+  vPosition = position;
+}
 
 </script>

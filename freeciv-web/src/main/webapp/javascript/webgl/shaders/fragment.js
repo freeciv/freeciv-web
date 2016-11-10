@@ -76,14 +76,29 @@ void main(void)
 
     /* Set pixel color based on tile type. */
     if (terrain_type.r + 0.02 > terrain_lake && terrain_type.r - 0.02 < terrain_lake) {
-      vec4 Ca = texture2D(lake, vec2(vUv.x * 50.0, vUv.y * 50.0));
-      c = Ca.rgb;
+        if (vPosition.y < 53. ) {
+          vec4 Cb = texture2D(lake, vec2(vUv.x * 50.0, vUv.y * 50.0));
+          c = Cb.rgb;
+        } else {
+          vec4 Cb = texture2D(grassland, vec2(vUv.x * 50.0, vUv.y * 50.0));
+          c = Cb.rgb;
+        }
     } else if (terrain_type.r == terrain_coast) {
-      vec4 Cb = texture2D(coast, vec2(vUv.x * 50.0, vUv.y * 50.0));
-      c = Cb.rgb;
+        if (vPosition.y < 53. ) {
+          vec4 Cb = texture2D(coast, vec2(vUv.x * 50.0, vUv.y * 50.0));
+          c = Cb.rgb;
+        } else {
+          vec4 Cb = texture2D(grassland, vec2(vUv.x * 50.0, vUv.y * 50.0));
+          c = Cb.rgb;
+        }
     } else if (terrain_type.r == terrain_floor) {
-      vec4 Cb = texture2D(floor, vec2(vUv.x * 50.0, vUv.y * 50.0));
-      c = Cb.rgb;
+        if (vPosition.y < 53. ) {
+          vec4 Cb = texture2D(floor, vec2(vUv.x * 50.0, vUv.y * 50.0));
+          c = Cb.rgb;
+        } else {
+          vec4 Cb = texture2D(grassland, vec2(vUv.x * 50.0, vUv.y * 50.0));
+          c = Cb.rgb;
+        }
     } else if (terrain_type.r == terrain_arctic) {
       vec4 Cb = texture2D(arctic, vec2(vUv.x * 50.0, vUv.y * 50.0));
       c = Cb.rgb;
@@ -120,7 +135,7 @@ void main(void)
     }
 
   /* render the beach. */
-  if (vPosition.y < 55. && vPosition.y > 49.) {
+  if (vPosition.y < 54. && vPosition.y > 49.) {
     vec4 Cb = texture2D(beach, vec2(vUv.x * 50.0, vUv.y * 50.0));
     c = Cb.rgb;
   }

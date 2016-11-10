@@ -60,3 +60,18 @@ function create_heightmap()
   }
 
 }
+
+/****************************************************************************
+  Returns the tile height from 0 to 1.0
+****************************************************************************/
+function map_tile_height(ptile)
+{
+  if (ptile != null && tile_get_known(ptile) != TILE_UNKNOWN) {
+      if (is_ocean_tile(ptile)) return 0.2;
+      if (tile_terrain(ptile)['name'] == "Hills") return 0.8;
+      if (tile_terrain(ptile)['name'] == "Mountains") return 1.0;
+  }
+
+  return 0.7;
+
+}

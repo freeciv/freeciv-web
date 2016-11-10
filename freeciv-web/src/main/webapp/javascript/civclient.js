@@ -397,7 +397,7 @@ function validate_username() {
 
   var cleaned_username = username.replace(/[^a-zA-Z]/g,'');
 
-  if (username == null || username.length == 0) {
+  if (username == null || username.length == 0 || username == "pbem") {
     $("#username_validation_result").html("Your name can't be empty.");
     return false;
   } else if (username.length <= 2 ) {

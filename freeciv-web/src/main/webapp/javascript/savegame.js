@@ -209,11 +209,13 @@ function show_load_game_dialog_cb(savegames_data)
 **************************************************************************/
 function delete_savegame(filename)
 {
-  $.ajax({
-   type: 'POST',
-   url: "/deletesavegame?username=" + encodeURIComponent(username) + "&savegame=" + encodeURIComponent(filename)
-  });
-
+  var stored_password = simpleStorage.get("password", "");
+  if (stored_password != null && stored_password != false) {
+    $.ajax({
+     type: 'POST',
+     url: "/deletesavegame?username=" + encodeURIComponent(username) + "&savegame=" + encodeURIComponent(filename) + "&password=" + encodeURIComponent(stored_password)
+    });
+  }
 }
 
 

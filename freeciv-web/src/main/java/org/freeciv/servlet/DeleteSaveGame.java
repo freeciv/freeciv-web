@@ -21,14 +21,21 @@ package org.freeciv.servlet;
 
 import java.io.*;
 import java.nio.file.Files;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Properties;
 import java.util.regex.Pattern;
+import javax.naming.Context;
+import javax.naming.InitialContext;
 import javax.servlet.*;
 import javax.servlet.http.*;
+import javax.sql.DataSource;
 
 
 /**
- * Returns a list of savegames for the given user
+ * Deletes a savegame.
  */
 public class DeleteSaveGame extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -55,7 +62,9 @@ public class DeleteSaveGame extends HttpServlet {
 
         String username = request.getParameter("username");
         String savegame = request.getParameter("savegame");
-        if (!p.matcher(username).matches()) {
+        String password = java.net.URLDecoder.decode(request.getParameter("password"), "UTF-8");
+
+        if (!p.matcher(username).matches() || username.toLowerCase().equals("pbem")) {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
                     "Invalid username");
             return;
@@ -64,6 +73,36 @@ public class DeleteSaveGame extends HttpServlet {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
                     "Invalid savegame");
             return;
+        }
+
+        Connection conn = null;
+        try {
+            Context env = (Context) (new InitialContext().lookup("java:comp/env"));
+            DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
+            conn = ds.getConnection();
+
+            String pwdSQL = "SELECT count(*) from auth where lower(username) = lower(?) and password = MD5(?) and activated='1'";
+            PreparedStatement preparedStatement = conn.prepareStatement(pwdSQL);
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, password);
+            ResultSet rs = preparedStatement.executeQuery();
+            rs.next();
+            if (rs.getInt(1) != 1) {
+                /* Invalid password*/
+                return;
+            }
+
+        } catch (Exception err) {
+            response.setHeader("result", "error");
+            err.printStackTrace();
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Unable to login");
+        } finally {
+            if (conn != null)
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
         }
 
         try {

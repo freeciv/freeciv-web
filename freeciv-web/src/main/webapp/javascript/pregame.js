@@ -1029,7 +1029,7 @@ function create_new_freeciv_user_account_request(action_type)
   if (!validateEmail(email)) {
     $("#username_validation_result").html("Invalid email address.");
     return false;
-  } else if (username == null || username.length == 0) {
+  } else if (username == null || username.length == 0 || username == "pbem") {
     $("#username_validation_result").html("Your name can't be empty.");
     return false;
   } else if (username.length <= 2 ) {

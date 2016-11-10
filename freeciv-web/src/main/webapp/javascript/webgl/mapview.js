@@ -171,20 +171,10 @@ function render_testmap() {
 
   /* heightmap image */
   create_heightmap();
-  for (var i = 0; i < 255; i++) {
-    heightmap_palette.push([i, 0, 0]);
-  }
-  bmp_lib.render('map_heightmap_grid',
-                    generate_map_heightmap_grid(),
-                    heightmap_palette);
-  var heightmap_texture = new THREE.Texture();
-  heightmap_texture.image = document.getElementById("map_heightmap_grid");
-  heightmap_texture.needsUpdate = true;
 
   /* uniforms are variables which are used in the fragment shader fragment.js */
   var uniforms = {
     maptiles: { type: "t", value: map_texture },
-    heightmap: { type: "t", value: heightmap_texture },
     mapWidth: { type: "i", value: map['xsize'] },
     mapHeight: { type: "i", value: map['ysize'] }
   };

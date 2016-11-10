@@ -40,9 +40,7 @@ uniform sampler2D swamp;
 uniform sampler2D tundra;
 uniform sampler2D beach;
 
-
 uniform sampler2D maptiles;
-uniform sampler2D heightmap;
 
 uniform int mapWidth;
 uniform int mapHeight;
@@ -121,20 +119,13 @@ void main(void)
       c = Cb.rgb;
     }
 
-    /* Render beach based on heightmap. */
-    /*
-    FIXME: this does not work yet.
-    vec4 height_current = texture2D(heightmap, vec2(vUv.x, vUv.y));
-    vec4 height_north = texture2D(heightmap, vec2(vUv.x, vUv.y + 10.0));
-    vec4 height_south = texture2D(heightmap, vec2(vUv.x, vUv.y - 10.0));
-    vec4 height_west = texture2D(heightmap, vec2(vUv.x + 10.0, vUv.y));
-    vec4 height_east = texture2D(heightmap, vec2(vUv.x - 10.0, vUv.y));
+  /* render the beach. */
+  if (vPosition.y < 55. && vPosition.y > 49.) {
+    vec4 Cb = texture2D(beach, vec2(vUv.x * 50.0, vUv.y * 50.0));
+    c = Cb.rgb;
+  }
 
-    if (height_current.r == heightmap_land && height_south.r == heightmap_ocean) {
-      vec4 Cb = texture2D(beach, vec2(vUv.x * 50.0, vUv.y * 50.0));
-      c = Cb.rgb;
-    }*/
-
+  /* specular component, ambient occlusion and fade out underwater terrain */
   float x = clamp((vPosition.y - 30.) / 15., 0., 1.);
   vec4 Cb = texture2D(beach, vec2(vUv.x * 50.0, vUv.y * 50.0));
   c = Cb.rgb * (1. - x) + c * x;

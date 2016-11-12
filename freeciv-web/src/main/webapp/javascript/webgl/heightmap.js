@@ -25,36 +25,96 @@ var heightmap = null;
 ****************************************************************************/
 function create_heightmap()
 {
-  var heightmap_resolution_x = map['xsize'] * 4 + 1;
-  var heightmap_resolution_y = map['ysize'] * 4 + 1;
-  var row, col;
-  var heightmap_init = new Array(heightmap_resolution_x);
-  for (var i = 0; i <= heightmap_resolution_x; i++) {
-    heightmap_init[i] = new Array(heightmap_resolution_y);
+  var heightmap_resolution_x = map.xsize * 4 + 1;
+  var heightmap_resolution_y = map.ysize * 4 + 1;
+
+  var heightmap_tiles = new Array(map.xsize);
+  var distance_from_coast_map = new Array(map.xsize);
+  for (var x = 0; x < map.xsize; x++) {
+    heightmap_tiles[x] = new Array(map.ysize);
+    distance_from_coast_map[x] = new Array(map.ysize);
   }
 
-  for (var x = 0; x < heightmap_resolution_x ; x++) {
-    for (var y = 0; y < heightmap_resolution_y; y++) {
-      var gx = Math.floor(x * map['xsize'] / heightmap_resolution_x);
-      var gy = Math.floor((map['xsize'] / map['ysize']) * y * map['ysize'] / heightmap_resolution_y) - 1;
-      var ptile = map_pos_to_tile(gx, gy);
+  /* Here we look at every tile and determine its distance from the sea. */
+  /* First of all we set non-sea tiles' distance to be very big. */
+  for (var x = 0; x < map.xsize ; x++) {
+    for (var y = 0; y < map.ysize; y++) {
+      var ptile = map_pos_to_tile(x, y);
+      if (ptile != null &&
+          tile_get_known(ptile) != TILE_UNKNOWN &&
+          !is_ocean_tile(ptile)) {
+        distance_from_coast_map[x][y] = 100000;
+      } else {
+        distance_from_coast_map[x][y] = 0;
+      }
+    }
+  }
+  /* Then, for each sea tile, we propagate the distance information to the inner
+   * land. */
+  for (var x = 0; x < map.xsize; x++) {
+    for (var y = 0; y < map.ysize; y++) {
+      var ptile = map_pos_to_tile(x, y);
+      if (ptile != null &&
+          tile_get_known(ptile) != TILE_UNKNOWN &&
+          is_ocean_tile(ptile)) {
+        propagate_distance_from_coast(distance_from_coast_map, x, y);
+      }
+    }
+  }
+
+  for (var x = 0; x < map.xsize; x++) {
+    for (var y = 0; y < map.ysize; y++) {
+      var ptile = map_pos_to_tile(x, y);
       if (ptile != null) {
-        heightmap_init[gx][gy] = map_tile_height(ptile);
+        heightmap_tiles[x][y] = 0.5;
+        heightmap_tiles[x][y] += 0.4 * map_tile_height(ptile);
+        heightmap_tiles[x][y] += 0.1 * distance_from_coast_map[x][y];
       }
     }
   }
 
   heightmap = new Array(heightmap_resolution_x);
-  for (var i = 0; i < heightmap_resolution_x; i++) {
-    heightmap[i] = new Array(heightmap_resolution_y);
+  for (var hx = 0; hx < heightmap_resolution_x; hx++) {
+    heightmap[hx] = new Array(heightmap_resolution_y);
   }
+
   /* smooth */
   for (var x = 0; x < heightmap_resolution_x; x++) {
     for (var y = 0; y < heightmap_resolution_y; y++) {
-      if (x == 0 || y == 0 || x >= heightmap_resolution_x || y >= heightmap_resolution_y) {
-        heightmap[x][y] = heightmap_init[x][y];
+      var gx = x / 4 - 0.5;
+      var gy = y / 4 - 0.5;
+
+      if (Math.round(gx) == gx && Math.round(gy) == gy) {
+        /* On tile center */
+        heightmap[x][y] = heightmap_tiles[gx][gy];
       } else {
-        heightmap[x][y] = (heightmap_init[x][y] * 0.5 + heightmap_init[x+1][y] * 0.125 + heightmap_init[x-1][y] * 0.125 + heightmap_init[x][y+1] * 0.125 + heightmap_init[x][y-1] * 0.125);
+        /* Interpolate between neighbouring tiles, with each tile having weight:
+         *  weight = 1 / (distance to the tile + 1).
+         * The +1 is there to avoid divergence.
+         */
+        var neighbours = [
+          { "x": Math.floor(gx), "y": Math.floor(gy) },
+          { "x": Math.floor(gx), "y": Math.ceil(gy) },
+          { "x": Math.ceil(gx),  "y": Math.floor(gy) },
+          { "x": Math.ceil(gx),  "y": Math.ceil(gy) }];
+
+        var norm = 0;
+        var sum = 0;
+        for (var i = 0; i < 4; i++) {
+          var coords = neighbours[i];
+          if (coords.x < 0 || coords.x >= map.xsize ||
+              coords.y < 0 || coords.y >= map.ysize) {
+            /* Outside of map, don't use in the sum */
+            continue;
+          }
+          var dx = gx - coords.x;
+          var dy = gy - coords.y;
+          var distance = Math.sqrt(dx*dx + dy*dy);
+          var D = 0.;
+          sum += heightmap_tiles[coords.x][coords.y] / (distance + D) / (distance + D);
+          norm += 1. / (distance + D) / (distance + D);
+        }
+        heightmap[x][y] = sum / norm;
       }
     }
   }
@@ -62,16 +122,36 @@ function create_heightmap()
 }
 
 /****************************************************************************
-  Returns the tile height from 0 to 1.0
+  ...
+****************************************************************************/
+function propagate_distance_from_coast(distance_from_coast_map, x, y)
+{
+  var current_distance = distance_from_coast_map[x][y];
+
+  for (var dir = 0; dir < DIR8_LAST; dir++) {
+    var dir_x = x + DIR_DX[dir];
+    var dir_y = y + DIR_DY[dir];
+    if (dir_x < 0 || dir_x >= map.xsize || dir_y < 0 || dir_y >= map.ysize) {
+      /* Outside of the map */
+      continue;
+    }
+    if (distance_from_coast_map[dir_x][dir_y] > current_distance + 1) {
+      distance_from_coast_map[dir_x][dir_y] = current_distance + 1;
+      propagate_distance_from_coast(distance_from_coast_map, dir_x, dir_y);
+    }
+  }
+}
+
+/****************************************************************************
+  Returns the tile height from -1.0 to 1.0
 ****************************************************************************/
 function map_tile_height(ptile)
 {
   if (ptile != null && tile_get_known(ptile) != TILE_UNKNOWN) {
-      if (is_ocean_tile(ptile)) return 0.2;
-      if (tile_terrain(ptile)['name'] == "Hills") return 0.8;
+      if (is_ocean_tile(ptile)) return -0.1;
+      if (tile_terrain(ptile)['name'] == "Hills") return 0.6;
       if (tile_terrain(ptile)['name'] == "Mountains") return 1.0;
   }
 
-  return 0.7;
-
+  return 0.0;
 }

@@ -195,23 +195,25 @@ function render_testmap() {
     fragmentShader: fragShader
   });
 
-  var quality = map['xsize'] * 2, step = 1024 / quality;
+  var xquality = map.xsize * 4 + 1;
+  var yquality = map.ysize * 4 + 1;
+  var step = 1024 / quality;
 
   /* LandGeometry is a plane representing the landscape of the map. */
-  var landGeometry = new THREE.PlaneGeometry( 3000, 2000, quality - 1, quality - 1 );
+  var landGeometry = new THREE.PlaneGeometry(3000, 2000, xquality - 1, yquality - 1);
   landGeometry.rotateX( - Math.PI / 2 );
   landGeometry.translate(1000, 0, 1000);
 
 
 
   for ( var i = 0, l = landGeometry.vertices.length; i < l; i ++ ) {
-    var x = i % quality, y = Math.floor( i / quality );
-    var gx = Math.floor(map['xsize']*x/quality);
-    var gy = Math.floor(map['ysize']*y/quality);
-    if (heightmap[gx] != null && heightmap[gx][gy] != null) {
-      landGeometry.vertices[ i ].y = heightmap[gx][gy] * 100;
+    var x = i % xquality, y = Math.floor( i / xquality );
+    var gx = Math.floor(map.xsize*x/xquality);
+    var gy = Math.floor(map.ysize*y/yquality);
+    if (heightmap[x] != null && heightmap[x][y] != null) {
+      landGeometry.vertices[ i ].y = heightmap[x][y] * 100;
     } else {
-      //console.log("x: " + gx + ", y: " + gy + " not found in heightmap.");
+      console.log("x: " + x + ", y: " + y + " not found in heightmap.");
     }
 
   }

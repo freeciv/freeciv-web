@@ -89,8 +89,7 @@ function create_heightmap()
         heightmap[x][y] = heightmap_tiles[gx][gy];
       } else {
         /* Interpolate between neighbouring tiles, with each tile having weight:
-         *  weight = 1 / (distance to the tile + 1).
-         * The +1 is there to avoid divergence.
+         * 1 / (distance to the tile)^2.
          */
         var neighbours = [
           { "x": Math.floor(gx), "y": Math.floor(gy) },
@@ -110,9 +109,8 @@ function create_heightmap()
           var dx = gx - coords.x;
           var dy = gy - coords.y;
           var distance = Math.sqrt(dx*dx + dy*dy);
-          var D = 0.;
-          sum += heightmap_tiles[coords.x][coords.y] / (distance + D) / (distance + D);
-          norm += 1. / (distance + D) / (distance + D);
+          sum += heightmap_tiles[coords.x][coords.y] / distance / distance;
+          norm += 1. / distance / distance;
         }
         heightmap[x][y] = sum / norm;
       }

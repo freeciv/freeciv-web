@@ -88,7 +88,7 @@ function handle_server_join_reply(packet)
       /*FIXME: WebGL renderer currently depends on map being revealed. */
       if (renderer == RENDERER_WEBGL) send_message_delayed("/set revealmap start", 100);
       if (loadTimerId == -1) {
-        setTimeout(pregame_start_game, 800);
+        setTimeout(pregame_start_game, 1500);
       } else {
         setTimeout(pregame_start_game, 3800);
       }

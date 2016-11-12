@@ -1464,11 +1464,13 @@ function assign_nation_color(nation_id)
 
   var flag_key = "f." + nation['graphic_str'];
   var flag_sprite = sprites[flag_key];
+  if (flag_sprite == null) return;
   var c = flag_sprite.getContext('2d');
   var width = tileset[flag_key][2];
   var height = tileset[flag_key][3];
   var color_counts = {};
   /* gets the flag image data, except for the black border. */
+  if (c == null) return;
   var img_data = c.getImageData(1, 1, width-2, height-2).data;
 
   /* count the number of each pixel's color */

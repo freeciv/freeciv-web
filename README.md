@@ -74,8 +74,11 @@ a directory on your computer, by running this git command:
  ```bash
   git clone https://github.com/freeciv/freeciv-web.git --depth=10
  ```
+4. Review memory usage in Vagrantfile. This is configured by the v.memory variable in the
+  Vagrantfile. The default is 6 Gb of memory allocated to the server. This value should
+  be less than the total free amount of RAM you have. 
 
-4. Run Vagrant with the following commands in your Freeciv-web directory from step 3:
+5. Run Vagrant with the following commands in your Freeciv-web directory from step 3:
  ```bash
  vagrant plugin install vagrant-vbguest
  vagrant up
@@ -83,7 +86,7 @@ a directory on your computer, by running this git command:
 
   This will build, compile, install and run Freeciv-web on the virtual server image. Wait for the installation process to complete, watching for any error messages in the logs.
 
-5. (Skip this step if you run Windows) For Linux or OS X, then you 
+6. (Skip this step if you run Windows) For Linux or OS X, then you 
 need to setup a SSH tunnel to port 80 like this:
  ```bash
  sudo ssh -p 2222 -gNfL 80:localhost:80 vagrant@localhost -i ~/.vagrant.d/insecure_private_key

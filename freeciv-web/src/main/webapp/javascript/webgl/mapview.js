@@ -208,12 +208,10 @@ function render_testmap() {
 
   for ( var i = 0, l = landGeometry.vertices.length; i < l; i ++ ) {
     var x = i % xquality, y = Math.floor( i / xquality );
-    var gx = Math.floor(map.xsize*x/xquality);
-    var gy = Math.floor(map.ysize*y/yquality);
     if (heightmap[x] != null && heightmap[x][y] != null) {
       landGeometry.vertices[ i ].y = heightmap[x][y] * 100;
     } else {
-      console.log("x: " + x + ", y: " + y + " not found in heightmap.");
+      //console.log("x: " + x + ", y: " + y + " not found in heightmap.");
     }
 
   }

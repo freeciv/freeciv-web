@@ -21,13 +21,14 @@ var webgl_textures = {};
 var webgl_models = {};
 
 /****************************************************************************
-  Start the Freeciv-web WebGL renderer
+  Preload textures and models
 ****************************************************************************/
 function webgl_preload()
 {
   var loadingManager = new THREE.LoadingManager();
   loadingManager.onLoad = function () {
-    setTimeout(render_testmap, 500);
+    webgl_preload_models();
+
   };
 
   var textureLoader = new THREE.ImageLoader( loadingManager );
@@ -58,8 +59,14 @@ function webgl_preload()
     );
   }
 
+}
+/****************************************************************************
+  Preload models.
+****************************************************************************/
+function webgl_preload_models()
+{
   /* Load a settler model. This is a Collada file which has been exported from Blender. */
-  var colladaloader = new THREE.ColladaLoader(loadingManager);
+  var colladaloader = new THREE.ColladaLoader();
   colladaloader.options.convertUpAxis = true;
   colladaloader.load( '/3d-models/settler3.dae', function ( collada ) {
       dae = collada.scene;
@@ -68,7 +75,7 @@ function webgl_preload()
       dae.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), 100);
       dae.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), 1000);
       webgl_models["settler"] = dae;
-
+      setTimeout(render_testmap, 500);
   });
 
 }

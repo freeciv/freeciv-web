@@ -210,7 +210,7 @@ function render_testmap() {
   landMesh = new THREE.Mesh( landGeometry, terrain_material );
   scene.add( landMesh );
 
-  scene.add(webgl_models["settler"]);
+  if (webgl_models["settler"] != null) scene.add(webgl_models["settler"]);
 
   console.log("WebGL render_testmap took: " + (new Date().getTime() - start_webgl) + " ms.");
 }

@@ -1549,6 +1549,7 @@ function is_color_collision(color_a, color_b)
 ****************************************************************************/
 function color_rbg_to_list(pcolor)
 {
+  if (pcolor == null) return null;
   var color_rgb = pcolor.match(/\d+/g);
   color_rgb[0] = parseFloat(color_rgb[0]);
   color_rgb[1] = parseFloat(color_rgb[1]);

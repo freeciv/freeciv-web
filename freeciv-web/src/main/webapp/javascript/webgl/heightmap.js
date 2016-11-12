@@ -25,6 +25,7 @@ var heightmap = null;
 ****************************************************************************/
 function create_heightmap()
 {
+  var start_heightmap = new Date().getTime();
   var heightmap_resolution_x = map.xsize * 4 + 1;
   var heightmap_resolution_y = map.ysize * 4 + 1;
 
@@ -116,6 +117,7 @@ function create_heightmap()
       }
     }
   }
+  console.log("create_heightmap took: " + (new Date().getTime() - start_heightmap) + " ms.");
 
 }
 

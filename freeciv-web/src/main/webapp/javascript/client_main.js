@@ -188,7 +188,7 @@ function client_is_observer()
 function show_new_game_message()
 {
 
-  if (observing) {
+  if (observing || $.getUrlVar('autostart') == "true") {
     return;
 
   } else if (is_hotseat()) {

@@ -86,7 +86,7 @@ void main(void)
           vec4 Cb = texture2D(grassland, vec2(vUv.x * 50.0, vUv.y * 50.0));
           c = Cb.rgb;
         }
-    } else if (terrain_type.r == terrain_coast) {
+    } else if (terrain_type.r + 0.02 > terrain_coast && terrain_type.r - 0.02 < terrain_coast) {
         if (vPosition.y < beach_high ) {
           vec4 Cb = texture2D(coast, vec2(vUv.x * 50.0, vUv.y * 50.0));
           c = Cb.rgb;
@@ -94,7 +94,7 @@ void main(void)
           vec4 Cb = texture2D(grassland, vec2(vUv.x * 50.0, vUv.y * 50.0));
           c = Cb.rgb;
         }
-    } else if (terrain_type.r == terrain_floor) {
+    } else if (terrain_type.r + 0.02 > terrain_floor && terrain_type.r - 0.02 < terrain_floor) {
         if (vPosition.y < beach_high ) {
           vec4 Cb = texture2D(floor, vec2(vUv.x * 50.0, vUv.y * 50.0));
           c = Cb.rgb;
@@ -129,7 +129,7 @@ void main(void)
         vec4 Cb = texture2D(coast, vec2(vUv.x * 50.0, vUv.y * 50.0));
         c = Cb.rgb;
       }
-    } else if (terrain_type.r == terrain_hills) {
+    } else if (terrain_type.r + 0.02 > terrain_hills && terrain_type.r - 0.02 < terrain_hills) {
       if (vPosition.y > beach_high ) {
         vec4 Cb = texture2D(hills, vec2(vUv.x * 50.0, vUv.y * 50.0));
         c = Cb.rgb;
@@ -137,7 +137,7 @@ void main(void)
         vec4 Cb = texture2D(coast, vec2(vUv.x * 50.0, vUv.y * 50.0));
         c = Cb.rgb;
       }
-    } else if (terrain_type.r == terrain_jungle) {
+    } else if (terrain_type.r + 0.02 > terrain_jungle && terrain_type.r - 0.02 < terrain_jungle) {
       if (vPosition.y > beach_high ) {
         vec4 Cb = texture2D(jungle, vec2(vUv.x * 50.0, vUv.y * 50.0));
         c = Cb.rgb;
@@ -161,7 +161,7 @@ void main(void)
         vec4 Cb = texture2D(coast, vec2(vUv.x * 50.0, vUv.y * 50.0));
         c = Cb.rgb;
       }
-    } else if (terrain_type.r == terrain_swamp) {
+    } else if (terrain_type.r + 0.02 > terrain_swamp && terrain_type.r - 0.02 < terrain_swamp) {
       if (vPosition.y > beach_high ) {
         vec4 Cb = texture2D(swamp, vec2(vUv.x * 50.0, vUv.y * 50.0));
         c = Cb.rgb;
@@ -169,7 +169,7 @@ void main(void)
         vec4 Cb = texture2D(coast, vec2(vUv.x * 50.0, vUv.y * 50.0));
         c = Cb.rgb;
       }
-    } else if (terrain_type.r == terrain_tundra) {
+    } else if (terrain_type.r + 0.02 > terrain_tundra && terrain_type.r - 0.02 < terrain_tundra) {
       if (vPosition.y > beach_high ) {
         vec4 Cb = texture2D(tundra, vec2(vUv.x * 50.0, vUv.y * 50.0));
         c = Cb.rgb;

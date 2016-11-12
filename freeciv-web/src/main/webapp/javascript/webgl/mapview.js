@@ -33,6 +33,7 @@ var fragShader;
 var tiletype_terrains = ["lake","coast","floor","arctic","desert","forest","grassland","hills","jungle","mountains","plains","swamp","tundra", "beach"];
 
 var dae;
+var start_webgl;
 
 
 /****************************************************************************
@@ -103,7 +104,7 @@ function webgl_start_renderer()
   directionalLight.position.set( 1, 0.75, 0.5 ).normalize();
   scene.add( directionalLight );
 
-  maprenderer = new THREE.WebGLRenderer( { antialias: false } ); /* TODO: make antialias configurable. */
+  maprenderer = new THREE.WebGLRenderer( { antialias: true } ); /* TODO: make antialias configurable. */
   maprenderer.setClearColor( 0x000000 );
   maprenderer.setPixelRatio( window.devicePixelRatio );
   maprenderer.setSize( window.innerWidth, window.innerHeight );
@@ -115,16 +116,13 @@ function webgl_start_renderer()
   document.addEventListener( 'keyup', webglOnDocumentKeyUp, false );
   window.addEventListener( 'resize', webglOnWindowResize, false );
 
-  stats = new Stats();
-  container.appendChild( stats.dom );
+  if (location.hostname === "localhost") {
+    stats = new Stats();
+    container.appendChild( stats.dom );
+  }
 
   animate();
-
-  send_message_delayed("/observe", 200);
-  setTimeout(render_testmap, 1500);
-
-
-
+  webgl_preload();
 
 }
 
@@ -135,13 +133,8 @@ function webgl_start_renderer()
 ...
 ****************************************************************************/
 function render_testmap() {
-
-  /* blue ocean rectangle. TODO: Make it semi-transparant. */
-  var texture = new THREE.TextureLoader().load( "/textures/water_overlay_texture.png" )
-  texture.wrapS = THREE.RepeatWrapping;
-  texture.wrapT = THREE.RepeatWrapping;
-  texture.repeat.set( 5, 5);
-  var material = new THREE.MeshBasicMaterial( { map: texture, overdraw: 0.5, transparent: true, opacity: 0.75, color: 0x5555ff } );
+  start_webgl = new Date().getTime();
+  var material = new THREE.MeshBasicMaterial( { map: webgl_textures["water_overlay"], overdraw: 0.5, transparent: true, opacity: 0.75, color: 0x5555ff } );
 
   var quality = 32, step = 1024 / quality;
 
@@ -181,11 +174,7 @@ function render_testmap() {
 
   /* create a texture for each map tile type. */
   for (var i = 0; i < tiletype_terrains.length; i++) {
-    /* TODO: load these during preloading of Freeciv-web. */
-    var texture = new THREE.TextureLoader().load( "/textures/" + tiletype_terrains[i] + ".png" )
-    texture.wrapS = THREE.RepeatWrapping;
-    texture.wrapT = THREE.RepeatWrapping;
-    uniforms[tiletype_terrains[i]] = {type: "t", value: texture};
+    uniforms[tiletype_terrains[i]] = {type: "t", value: webgl_textures[tiletype_terrains[i]]};
   }
 
   /* create a WebGL shader for terrain. */
@@ -205,7 +194,6 @@ function render_testmap() {
   landGeometry.translate(1000, 0, 1000);
 
 
-
   for ( var i = 0, l = landGeometry.vertices.length; i < l; i ++ ) {
     var x = i % xquality, y = Math.floor( i / xquality );
     if (heightmap[x] != null && heightmap[x][y] != null) {
@@ -222,29 +210,18 @@ function render_testmap() {
   landMesh = new THREE.Mesh( landGeometry, terrain_material );
   scene.add( landMesh );
 
-  /* Load a settler model. This is a Collada file which has been exported from Blender. */
-  var loader = new THREE.ColladaLoader();
-  loader.options.convertUpAxis = true;
+  scene.add(webgl_models["settler"]);
 
-  loader.load( '/3d-models/settler3.dae', function ( collada ) {
-    dae = collada.scene;
-    dae.updateMatrix();
-    dae.scale.x = dae.scale.y = dae.scale.z = 11;
-    dae.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), 100);
-    dae.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), 1000);
-
-    scene.add( dae );
-  });
-
+  console.log("WebGL render_testmap took: " + (new Date().getTime() - start_webgl) + " ms.");
 }
 
 /****************************************************************************
 ...
 ****************************************************************************/
 function animate() {
-  stats.begin();
+  if (stats != null) stats.begin();
   maprenderer.render( scene, camera );
-  stats.end();
+  if (stats != null) stats.end();
   requestAnimationFrame( animate );
 
 }

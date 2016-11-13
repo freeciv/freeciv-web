@@ -25,6 +25,7 @@ var webgl_models = {};
 ****************************************************************************/
 function webgl_preload()
 {
+  $.blockUI({ message: "<h2>Downloading textures and models...</h2>" });
   var loadingManager = new THREE.LoadingManager();
   loadingManager.onLoad = function () {
     webgl_preload_models();
@@ -76,6 +77,7 @@ function webgl_preload_models()
       dae.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), 1000);
       webgl_models["settler"] = dae;
       webgl_preload_complete();
+      $.unblockUI();
   });
 
 }

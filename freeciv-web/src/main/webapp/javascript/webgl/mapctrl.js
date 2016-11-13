@@ -19,6 +19,19 @@
 
 
 /****************************************************************************
+ Init WebGL mapctrl.
+****************************************************************************/
+function init_webgl_mapctrl()
+{
+  document.addEventListener('mousemove', webglOnDocumentMouseMove, false );
+  document.addEventListener('mousedown', webglOnDocumentMouseDown, false );
+  document.addEventListener('keydown', webglOnDocumentKeyDown, false );
+  document.addEventListener('keyup', webglOnDocumentKeyUp, false );
+  window.addEventListener('resize', webglOnWindowResize, false );
+}
+
+
+/****************************************************************************
 ...
 ****************************************************************************/
 function webglOnWindowResize() {
@@ -70,7 +83,7 @@ function webglOnDocumentMouseDown( event ) {
 
     var intersect = intersects[ 0 ];
     camera_look_at(intersect.point.x, 0, intersect.point.z);
-
+    //console.log("X: " + intersect.point.x + ", Y: " + intersect.point.z);
   }
 
 }

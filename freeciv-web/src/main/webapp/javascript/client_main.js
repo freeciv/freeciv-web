@@ -66,7 +66,7 @@ function set_client_state(newstate)
       $(".context-menu-root").remove();
 
       if (renderer == RENDERER_WEBGL) {
-        render_testmap();
+        render_map_terrain();
       }
 
       break;

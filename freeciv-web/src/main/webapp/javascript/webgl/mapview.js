@@ -82,8 +82,6 @@ function webgl_start_renderer()
   var line = new THREE.LineSegments( geometry, material );
   scene.add( line );
 
-  //
-
   raycaster = new THREE.Raycaster();
   mouse = new THREE.Vector2();
 
@@ -110,17 +108,12 @@ function webgl_start_renderer()
   maprenderer.setSize( window.innerWidth, window.innerHeight );
   container.appendChild( maprenderer.domElement );
 
-  document.addEventListener( 'mousemove', webglOnDocumentMouseMove, false );
-  document.addEventListener( 'mousedown', webglOnDocumentMouseDown, false );
-  document.addEventListener( 'keydown', webglOnDocumentKeyDown, false );
-  document.addEventListener( 'keyup', webglOnDocumentKeyUp, false );
-  window.addEventListener( 'resize', webglOnWindowResize, false );
-
   if (location.hostname === "localhost") {
     stats = new Stats();
     container.appendChild( stats.dom );
   }
 
+  init_webgl_mapctrl();
   animate();
 
 }
@@ -129,9 +122,9 @@ function webgl_start_renderer()
 
 
 /****************************************************************************
-...
+ This will render the map terrain mesh.
 ****************************************************************************/
-function render_testmap() {
+function render_map_terrain() {
   start_webgl = new Date().getTime();
   var material = new THREE.MeshBasicMaterial( { map: webgl_textures["water_overlay"], overdraw: 0.5, transparent: true, opacity: 0.75, color: 0x5555ff } );
 
@@ -209,7 +202,7 @@ function render_testmap() {
   landMesh = new THREE.Mesh( landGeometry, terrain_material );
   scene.add( landMesh );
 
-  if (webgl_models["settler"] != null) scene.add(webgl_models["settler"]);
+  add_all_units_to_scene();
 
   prerender(landGeometry, xquality);
   scene.add(meshes['trees']);
@@ -218,7 +211,7 @@ function render_testmap() {
 }
 
 /****************************************************************************
-...
+  Main animation method
 ****************************************************************************/
 function animate() {
   if (stats != null) stats.begin();
@@ -229,3 +222,13 @@ function animate() {
 }
 
 
+/****************************************************************************
+  FIXME: Incorrect. This needs to be fixed!
+****************************************************************************/
+function map_to_scene_coords(x, y)
+{
+  var result = {};
+  result['x'] = Math.floor(-446 + x * 3000 / map['xsize']);
+  result['y'] = Math.floor(50 + y * 1920 / map['ysize']);
+  return result;
+}

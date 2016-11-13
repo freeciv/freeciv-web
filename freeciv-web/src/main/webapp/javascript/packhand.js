@@ -586,6 +586,7 @@ function handle_unit_packet_common(packet_unit)
      * by simply deleting the old one and creating a new one. */
     handle_unit_remove(packet_unit['id']);
   }
+  if (punit != null && renderer == RENDERER_WEBGL) update_unit_position(index_to_tile(punit['tile']));
 
   if (units[packet_unit['id']] == null) {
     /* This is a new unit. */
@@ -605,6 +606,9 @@ function handle_unit_packet_common(packet_unit)
 
   update_tile_unit(units[packet_unit['id']]);
 
+  if (renderer == RENDERER_WEBGL) {
+    update_unit_position(index_to_tile(units[packet_unit['id']]['tile']));
+  }
 
   if (current_focus.length > 0 && current_focus[0]['id'] == packet_unit['id']) {
     update_active_units_dialog();

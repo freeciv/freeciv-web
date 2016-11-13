@@ -763,11 +763,8 @@ function change_ruleset(to) {
 **************************************************************************/
 function show_intro_dialog(title, message) {
 
-
   if ($.getUrlVar('autostart') == "true") {
     autostart = true;
-    username = "autostart";
-    network_init();
     return;
   }
 

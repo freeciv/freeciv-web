@@ -149,8 +149,8 @@ function map_tile_height(ptile)
 {
   if (ptile != null && tile_get_known(ptile) != TILE_UNKNOWN) {
       if (is_ocean_tile(ptile)) return -0.1;
-      if (tile_terrain(ptile)['name'] == "Hills") return 0.6;
-      if (tile_terrain(ptile)['name'] == "Mountains") return 1.0;
+      if (tile_terrain(ptile)['name'] == "Hills") return 0.4;
+      if (tile_terrain(ptile)['name'] == "Mountains") return 1.3;
   }
 
   return 0.0;

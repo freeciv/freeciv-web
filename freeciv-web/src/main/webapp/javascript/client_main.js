@@ -65,6 +65,10 @@ function set_client_state(newstate)
       /* remove context menu from pregame. */
       $(".context-menu-root").remove();
 
+      if (renderer == RENDERER_WEBGL) {
+        render_testmap();
+      }
+
       break;
     case C_S_OVER:
       setTimeout(show_endgame_dialog, 500);

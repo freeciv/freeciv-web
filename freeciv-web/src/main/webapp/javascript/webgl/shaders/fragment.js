@@ -70,6 +70,8 @@ float heightmap_ocean = 0.0;
 float beach_low = 49.0;
 float beach_high = 54.0;
 
+float mountains_low = 100.0;
+
 
 void main(void)
 {
@@ -191,6 +193,12 @@ void main(void)
   if (vPosition.y < beach_high && vPosition.y > beach_low) {
     vec4 Cb = texture2D(beach, vec2(vUv.x * 50.0, vUv.y * 50.0));
     c = Cb.rgb;
+  }
+
+  /* render the mountains. */
+  if (vPosition.y > mountains_low) {
+      vec4 Cb = texture2D(mountains, vec2(vUv.x * 50.0, vUv.y * 50.0));
+      c = Cb.rgb;
   }
 
   /* specular component, ambient occlusion and fade out underwater terrain */

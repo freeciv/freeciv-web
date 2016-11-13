@@ -72,5 +72,18 @@ function init_webgl_renderer()
   fragShader = document.getElementById('fragment_shh').innerHTML;
 
   init_sprites();
+  webgl_preload();
 
+}
+
+
+/****************************************************************************
+  Preload is complete.
+****************************************************************************/
+function webgl_preload_complete()
+{
+  if ($.getUrlVar('autostart') == "true") {
+    username = "autostart";
+    network_init();
+  }
 }

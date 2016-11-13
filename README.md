@@ -22,6 +22,8 @@ News
 We are currently working on a adding support for 3D WebGL rendering to Freeciv-web. The source code for that 
 can be found [here](https://github.com/freeciv/freeciv-web/tree/develop/freeciv-web/src/main/webapp/javascript/webgl).
 
+![Freeciv-web](https://raw.githubusercontent.com/freeciv/freeciv-web/develop/freeciv-web/src/main/webapp/javascript/webgl/freeciv-webgl.png "Freeciv-web WebGL screenshot")
+
 
 Overview
 --------

@@ -20,6 +20,8 @@
 package org.freeciv.servlet;
 
 import java.io.*;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Properties;
 import java.util.regex.Pattern;
 import javax.servlet.*;
@@ -66,6 +68,11 @@ public class ListSaveGames extends HttpServlet {
                 response.getOutputStream().print(";");
             } else {
                 File[] files = folder.listFiles();
+                Arrays.sort(files, new Comparator<File>() {
+                    public int compare(File f1, File f2) {
+                        return Long.compare(f1.lastModified(), f2.lastModified());
+                    }
+                });
                 String result = "";
                 for (int i = 0; i < files.length; i++) {
                     if (files[i].isFile()) {

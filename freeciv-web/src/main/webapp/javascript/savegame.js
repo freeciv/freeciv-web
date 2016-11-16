@@ -147,7 +147,11 @@ function show_load_game_dialog_cb(savegames_data)
     var savegames = savegames_data.split(";");
     for (var i = 0; i < savegames.length; i++) {
         if (savegames[i].length > 2) {
-          saveHtml += "<li class='ui-widget-content'>" + savegames[i] + "</li>";
+          if (i < savegames.length - 2) {
+            saveHtml += "<li class='ui-widget-content'>" + savegames[i] + "</li>";
+          } else {
+            saveHtml += "<li class='ui-selected ui-widget-content'>" + savegames[i] + "</li>";
+          }
         }
 
     }
@@ -193,6 +197,7 @@ function show_load_game_dialog_cb(savegames_data)
 			bgiframe: true,
 			modal: true,
 			width: is_small_screen() ? "90%" : "50%",
+			height: is_small_screen() ? $(window).height() - 20 : $(window).height() - 80,
 			buttons: dialog_buttons
 		});
   $("#selectable").selectable();

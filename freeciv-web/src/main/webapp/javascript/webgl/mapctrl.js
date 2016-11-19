@@ -62,9 +62,6 @@ function webglOnDocumentMouseMove( event ) {
 
     var intersect = intersects[ 0 ];
 
-    rollOverMesh.position.copy( intersect.point ).add( intersect.face.normal );
-    rollOverMesh.position.divideScalar( 50 ).floor().multiplyScalar( 50 ).addScalar( 25 );
-
   }
 
 }
@@ -86,7 +83,6 @@ function webglOnDocumentMouseDown( event ) {
 
     var intersect = intersects[ 0 ];
     camera_look_at(intersect.point.x, 0, intersect.point.z);
-    //console.log("X: " + intersect.point.x + ", Y: " + intersect.point.z);
   }
 
 }

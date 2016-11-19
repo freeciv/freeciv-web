@@ -28,8 +28,8 @@ function init_webgl_mapctrl()
   document.addEventListener('keyup', webglOnDocumentKeyUp, false );
   window.addEventListener('resize', webglOnWindowResize, false );
 
-  //$("#canvas_div").mouseup(mapview_mouse_click);
   $("#canvas_div").mousedown(webglOnDocumentMouseDown);
+  $('#canvas_div').bind('mousewheel', webglOnMouseWheel);
 
 }
 
@@ -114,4 +114,34 @@ function webglOnDocumentKeyUp( event ) {
 
 }
 
+/****************************************************************************
+  Mouse wheel scrolling for map zoom in and zoom out.
+****************************************************************************/
+function webglOnMouseWheel(e) {
+  var new_camera_dx;
+  var new_camera_dy;
+  var new_camera_dz;
 
+  if(e.originalEvent.wheelDelta /120 > 0) {
+    // zoom in
+    new_camera_dy = camera_dy - 60;
+    new_camera_dx = camera_dx - 15;
+    new_camera_dz = camera_dz - 15;
+  } else{
+    // zoom out
+    new_camera_dy = camera_dy + 60;
+    new_camera_dx = camera_dx + 15;
+    new_camera_dz = camera_dz + 15;
+  }
+
+  if (new_camera_dy < 180 || new_camera_dy > 2000) {
+    return;
+  } else {
+    camera_dx = new_camera_dx;
+    camera_dy = new_camera_dy;
+    camera_dz = new_camera_dz;
+  }
+
+  camera_look_at(camera_currect_x, camera_currect_y, camera_currect_z);
+
+}

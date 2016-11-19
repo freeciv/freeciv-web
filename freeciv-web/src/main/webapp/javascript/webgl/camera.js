@@ -22,6 +22,9 @@ var camera;
 var camera_dx = 330;
 var camera_dy = 700;
 var camera_dz = 330;
+var camera_currect_x = 0;
+var camera_currect_y = 0;
+var camera_currect_z = 0;
 
 
 /****************************************************************************
@@ -29,6 +32,10 @@ var camera_dz = 330;
 ****************************************************************************/
 function camera_look_at(x, y, z)
 {
+  camera_currect_x = x;
+  camera_currect_y = y;
+  camera_currect_z = z;
+
   camera.position.set( x + camera_dx, y + camera_dy, z + camera_dz);
   camera.lookAt( new THREE.Vector3(x , 0, z));
 

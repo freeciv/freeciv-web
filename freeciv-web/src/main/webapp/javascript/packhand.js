@@ -84,10 +84,13 @@ function handle_server_join_reply(packet)
       change_ruleset($.getUrlVar('ruleset'));
     }
 
-    if (autostart) {
+    if (renderer == RENDERER_WEBGL) {
       /*FIXME: WebGL renderer currently depends on map being revealed. */
+      send_message_delayed("/set revealmap start", 100);
+    }
+
+    if (autostart) {
       if (renderer == RENDERER_WEBGL) {
-        send_message_delayed("/set revealmap start", 100);
         $.blockUI({ message: '<h2>Generating terrain map model...</h2>' });
       }
       if (loadTimerId == -1) {
@@ -586,7 +589,8 @@ function handle_unit_packet_common(packet_unit)
      * by simply deleting the old one and creating a new one. */
     handle_unit_remove(packet_unit['id']);
   }
-  if (punit != null && renderer == RENDERER_WEBGL) update_unit_position(index_to_tile(punit['tile']));
+  var old_tile = null;
+  if (punit != null) old_tile = index_to_tile(punit['tile']);
 
   if (units[packet_unit['id']] == null) {
     /* This is a new unit. */
@@ -606,10 +610,6 @@ function handle_unit_packet_common(packet_unit)
 
   update_tile_unit(units[packet_unit['id']]);
 
-  if (renderer == RENDERER_WEBGL) {
-    update_unit_position(index_to_tile(units[packet_unit['id']]['tile']));
-  }
-
   if (current_focus.length > 0 && current_focus[0]['id'] == packet_unit['id']) {
     update_active_units_dialog();
     update_unit_order_commands();
@@ -617,6 +617,11 @@ function handle_unit_packet_common(packet_unit)
     if (current_focus[0]['done_moving'] != packet_unit['done_moving']) {
       update_unit_focus();
     }
+  }
+
+  if (renderer == RENDERER_WEBGL) {
+    if (punit != null) update_unit_position(old_tile);
+    update_unit_position(index_to_tile(units[packet_unit['id']]['tile']));
   }
 
   /* TODO: update various dialogs and mapview. */

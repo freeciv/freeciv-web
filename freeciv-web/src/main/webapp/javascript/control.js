@@ -814,6 +814,7 @@ function auto_center_on_focus_unit()
 
   if (ptile != null && auto_center_on_unit) {
     center_tile_mapcanvas(ptile);
+    update_unit_position(ptile);
   }
 }
 

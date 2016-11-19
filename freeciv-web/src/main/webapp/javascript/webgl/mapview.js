@@ -45,43 +45,8 @@ function webgl_start_renderer()
   container = document.getElementById('canvas_div');
 
   camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 10000 );
-  camera_look_at(1000, 0, 1000);
 
   scene = new THREE.Scene();
-
-  // roll-over helpers
-
-  rollOverGeo = new THREE.BoxGeometry( 50, 50, 50 );
-  rollOverMaterial = new THREE.MeshBasicMaterial( { color: 0xff0000, opacity: 0.5, transparent: true } );
-  rollOverMesh = new THREE.Mesh( rollOverGeo, rollOverMaterial );
-  scene.add( rollOverMesh );
-
-    // cubes
-
-  cubeGeo = new THREE.BoxGeometry( 50, 50, 50 );
-  cubeMaterial = new THREE.MeshLambertMaterial( { color: 0xfeb74c, map: new THREE.TextureLoader().load( "/textures/square-outline-textured.png" ) } );
-
-  // grid
-
-  var step = 50;
-  var size = step * (map['xsize'] / 2);
-
-  var geometry = new THREE.Geometry();
-
-  for ( var i = 0; i <= size; i += step ) {
-
-    geometry.vertices.push( new THREE.Vector3( 0, 0, i ) );
-    geometry.vertices.push( new THREE.Vector3(   size, 0, i ) );
-
-    geometry.vertices.push( new THREE.Vector3( i, 0, 0 ) );
-    geometry.vertices.push( new THREE.Vector3( i, 0,   size ) );
-
-  }
-
-  var material = new THREE.LineBasicMaterial( { color: 0x000000, opacity: 0.2, transparent: true } );
-
-  var line = new THREE.LineSegments( geometry, material );
-  scene.add( line );
 
   raycaster = new THREE.Raycaster();
   mouse = new THREE.Vector2();

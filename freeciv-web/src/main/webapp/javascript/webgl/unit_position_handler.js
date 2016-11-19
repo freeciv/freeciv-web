@@ -23,8 +23,10 @@ var unit_positions = {};  // tile index is key, unit 3d model is value.
 ...
 ****************************************************************************/
 function update_unit_position(ptile) {
+  if (renderer != RENDERER_WEBGL) return;
+
   var visible_unit = find_visible_unit(ptile);
-  var height = 100 + map_tile_height(ptile) * 15;
+  var height = 77 + map_tile_height(ptile) * 44;
 
   if (unit_positions[ptile['index']] != null && visible_unit == null) {
     // tile has no visible units, remove it from unit_positions.

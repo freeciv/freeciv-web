@@ -70,7 +70,7 @@ var total_model_count = 3;
 ****************************************************************************/
 function webgl_preload_models()
 {
-  var model_files = ["settler", "worker", "explorer"];
+  var model_files = ["Settlers", "Workers", "Explorer"];
 
   for (var i = 0; i < total_model_count; i++) {
     load_model(model_files[i]);

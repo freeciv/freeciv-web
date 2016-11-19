@@ -33,11 +33,13 @@ function update_unit_position(ptile) {
 
   if (unit_positions[ptile['index']] == null && visible_unit != null) {
     // add new unit to the unit_positions
-    if (webgl_models["worker"] == null) {
-      console.log("Modele not loaded correcly.");
+    var unit_type_name = unit_type(visible_unit)['name'];
+    if (unit_type_name == null || webgl_models[unit_type_name] == null) {
+      console.log(unit_type_name + " model not loaded correcly.");
       return;
     }
-    var new_unit = webgl_models["explorer"].clone()
+
+    var new_unit = webgl_models[unit_type_name].clone()
     unit_positions[ptile['index']] = new_unit;
 
     var pos = map_to_scene_coords(ptile['x'], ptile['y']);

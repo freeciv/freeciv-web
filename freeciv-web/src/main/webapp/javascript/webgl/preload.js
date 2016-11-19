@@ -61,36 +61,37 @@ function webgl_preload()
   }
 
 }
+
+var load_count = 0;
+var total_model_count = 3;
+
 /****************************************************************************
   Preload models.
 ****************************************************************************/
 function webgl_preload_models()
 {
-  var load_count = 0;
-  var total_model_count = 2;
-  /* Load a settler model. This is a Collada file which has been exported from Blender. */
-  var colladaloader_1 = new THREE.ColladaLoader();
-  colladaloader_1.options.convertUpAxis = true;
-  colladaloader_1.load( '/3d-models/settler3.dae', function ( collada ) {
-      dae = collada.scene;
-      dae.updateMatrix();
-      dae.scale.x = dae.scale.y = dae.scale.z = 11;
-      webgl_models["settler"] = dae;
-      load_count++;
-      if (load_count == total_model_count) webgl_preload_complete();
+  var model_files = ["settler", "worker", "explorer"];
 
-  });
+  for (var i = 0; i < total_model_count; i++) {
+    load_model(model_files[i]);
+  }
 
-  var colladaloader_2 = new THREE.ColladaLoader();
-  colladaloader_2.options.convertUpAxis = true;
-  colladaloader_2.load( '/3d-models/worker.dae', function ( collada ) {
+}
+
+/****************************************************************************
+ ...
+****************************************************************************/
+function load_model(filename)
+{
+   var colladaloader = new THREE.ColladaLoader();
+    colladaloader.options.convertUpAxis = true;
+    colladaloader.load( '/3d-models/' + filename + '.dae', function ( collada ) {
         dae = collada.scene;
         dae.updateMatrix();
         dae.scale.x = dae.scale.y = dae.scale.z = 11;
-        webgl_models["worker"] = dae;
+        webgl_models[filename] = dae;
         load_count++;
         if (load_count == total_model_count) webgl_preload_complete();
-
-  });
+    });
 
 }

@@ -25,6 +25,7 @@ var mouse, raycaster, isShiftDown = false;
 
 var rollOverMesh, rollOverMaterial;
 var cubeGeo, cubeMaterial;
+var directionalLight;
 
 var objects = [];
 var vertShader;
@@ -95,10 +96,10 @@ function webgl_start_renderer()
 
   // Lights
 
-  var ambientLight = new THREE.AmbientLight( 0x606060 );
+  var ambientLight = new THREE.AmbientLight( 0x606060, 1.0 );
   scene.add( ambientLight );
 
-  var directionalLight = new THREE.DirectionalLight( 0xffffff );
+  directionalLight = new THREE.DirectionalLight( 0xffffff, 2.5 );
   directionalLight.position.set( 1, 0.75, 0.5 ).normalize();
   scene.add( directionalLight );
 

@@ -31,6 +31,9 @@ function camera_look_at(x, y, z)
 {
   camera.position.set( x + camera_dx, y + camera_dy, z + camera_dz);
   camera.lookAt( new THREE.Vector3(x , 0, z));
+
+  if (directionalLight != null) directionalLight.position.set( x + camera_dx, y + camera_dy, z + camera_dz ).normalize();
+
 }
 
 

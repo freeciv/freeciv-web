@@ -33,7 +33,7 @@ function update_unit_position(ptile) {
 
   if (unit_positions[ptile['index']] == null && visible_unit != null) {
     // add new unit to the unit_positions
-    var new_unit = webgl_models["settler"].clone()
+    var new_unit = webgl_models["worker"].clone()
     unit_positions[ptile['index']] = new_unit;
 
     var pos = map_to_scene_coords(ptile['x'], ptile['y']);

@@ -82,6 +82,7 @@ function init_webgl_renderer()
 ****************************************************************************/
 function webgl_preload_complete()
 {
+  $.unblockUI();
   if ($.getUrlVar('autostart') == "true") {
     username = "autostart";
     network_init();

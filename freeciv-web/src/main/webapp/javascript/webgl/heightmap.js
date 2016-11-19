@@ -143,7 +143,7 @@ function propagate_distance_from_coast(distance_from_coast_map, x, y)
 }
 
 /****************************************************************************
-  Returns the tile height from -1.0 to 1.0
+  Returns the tile height from -1.0 to 1.3
 ****************************************************************************/
 function map_tile_height(ptile)
 {

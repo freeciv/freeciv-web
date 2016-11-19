@@ -5,8 +5,10 @@
 <link rel="stylesheet" href="/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="/css/webclient.min.css?ts=${initParam.buildTimeStamp}" />
 <meta name="description" content="Freeciv-Web is a Free and Open Source empire-building strategy game inspired by the history of human civilization.">
+<% if (request.getServerName() != "localhost" ) { %>
 <script type="text/javascript">window._trackJs = { token: 'ee5dba6fe2e048f79b422157b450947b' };</script>
 <script type="text/javascript" src="https://cdn.trackjs.com/releases/current/tracker.js"></script>
+<% } %>
 <script type="text/javascript">
 var ts="${initParam.buildTimeStamp}";
 </script>

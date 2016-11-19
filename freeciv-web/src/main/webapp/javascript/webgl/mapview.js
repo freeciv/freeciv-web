@@ -231,7 +231,7 @@ function animate() {
 function map_to_scene_coords(x, y)
 {
   var result = {};
-  result['x'] = Math.floor(-446 + x * 3000 / map['xsize']);
-  result['y'] = Math.floor(50 + y * 1920 / map['ysize']);
+  result['x'] = Math.floor(-470 + x * 3000 / map['xsize']);
+  result['y'] = Math.floor(30 + y * 2000 / map['ysize']);
   return result;
 }

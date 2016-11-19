@@ -38,7 +38,7 @@ function mapdeco_init()
 /**************************************************************************
   Centers the mapview around (map_x, map_y).
 **************************************************************************/
-function center_tile_mapcanvas(ptile)
+function center_tile_mapcanvas_2d(ptile)
 {
   var r = map_to_gui_pos(ptile['x'], ptile['y']);
   var gui_x = r['gui_dx'];

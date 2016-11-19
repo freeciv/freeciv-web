@@ -31,7 +31,16 @@ function camera_look_at(x, y, z)
 {
   camera.position.set( x + camera_dx, y + camera_dy, z + camera_dz);
   camera.lookAt( new THREE.Vector3(x , 0, z));
+}
 
 
+
+/**************************************************************************
+  Centers the mapview around the given tile..
+**************************************************************************/
+function center_tile_mapcanvas_3d(ptile)
+{
+  var pos = map_to_scene_coords(ptile['x'], ptile['y']);
+  camera_look_at(pos['x'], 0, pos['y']);
 
 }

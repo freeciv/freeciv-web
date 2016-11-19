@@ -27,6 +27,7 @@ function update_unit_position(ptile) {
 
   if (unit_positions[ptile['index']] != null && visible_unit == null) {
     // tile has no visible units, remove it from unit_positions.
+    if (scene != null) scene.remove(unit_positions[ptile['index']]);
     delete unit_positions[ptile['index']];
   }
 
@@ -34,11 +35,15 @@ function update_unit_position(ptile) {
     // add new unit to the unit_positions
     var new_unit = webgl_models["settler"].clone()
     unit_positions[ptile['index']] = new_unit;
-    //ptile['x']
+
     var pos = map_to_scene_coords(ptile['x'], ptile['y']);
-    new_unit.position = new THREE.Vector3(pos['x'], 100, pos['y']);
-    //new_unit.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), 100);
-    //new_unit.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), 1000);
+    new_unit.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
+    new_unit.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), 100);
+    new_unit.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
+
+    if (scene != null && new_unit != null) {
+      scene.add(new_unit);
+    }
   }
 
 }

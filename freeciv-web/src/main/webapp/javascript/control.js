@@ -1564,7 +1564,7 @@ function activate_goto_last(last_order, last_action)
 function deactivate_goto()
 {
   goto_active = false;
-  mapview_canvas.style.cursor = "default";
+  if (mapview_canvas != null) mapview_canvas.style.cursor = "default";
   goto_request_map = {};
   goto_turns_request_map = {};
   clear_goto_tiles();
@@ -2188,3 +2188,17 @@ function update_goto_path(goto_packet)
   update_mouse_cursor();
 }
 
+
+
+/**************************************************************************
+  Centers the mapview around the given tile..
+**************************************************************************/
+function center_tile_mapcanvas(ptile)
+{
+  if (renderer == RENDERER_2DCANVAS) {
+    center_tile_mapcanvas_2d(ptile);
+  } else {
+    center_tile_mapcanvas_3d(ptile);
+  }
+
+}

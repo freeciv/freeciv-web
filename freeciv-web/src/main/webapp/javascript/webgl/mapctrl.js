@@ -24,10 +24,13 @@
 function init_webgl_mapctrl()
 {
   document.addEventListener('mousemove', webglOnDocumentMouseMove, false );
-  document.addEventListener('mousedown', webglOnDocumentMouseDown, false );
   document.addEventListener('keydown', webglOnDocumentKeyDown, false );
   document.addEventListener('keyup', webglOnDocumentKeyUp, false );
   window.addEventListener('resize', webglOnWindowResize, false );
+
+  //$("#canvas_div").mouseup(mapview_mouse_click);
+  $("#canvas_div").mousedown(webglOnDocumentMouseDown);
+
 }
 
 

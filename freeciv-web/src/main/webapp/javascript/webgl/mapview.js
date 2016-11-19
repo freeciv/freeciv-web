@@ -111,6 +111,8 @@ function webgl_start_renderer()
   if (location.hostname === "localhost") {
     stats = new Stats();
     container.appendChild( stats.dom );
+
+    console.log("MAX_FRAGMENT_UNIFORM_VECTORS:" + maprenderer.context.getParameter(maprenderer.context.MAX_FRAGMENT_UNIFORM_VECTORS));
   }
 
   init_webgl_mapctrl();
@@ -223,7 +225,7 @@ function animate() {
 
 
 /****************************************************************************
-  FIXME: Incorrect. This needs to be fixed!
+  Converts from map to scene coordinates.
 ****************************************************************************/
 function map_to_scene_coords(x, y)
 {

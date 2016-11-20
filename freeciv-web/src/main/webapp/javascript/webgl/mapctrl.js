@@ -83,11 +83,16 @@ function webglOnDocumentMouseUp( e ) {
     rightclick = (e.button == 2);
     middleclick = (e.button == 1 || e.button == 4);
   }
+
+  var ptile = webgl_canvas_pos_to_tile(e.clientX, e.clientY);
+  if (ptile == null) return;
+
   if (rightclick) {
     /* right click to recenter. */
     if (!map_select_active || !map_select_setting_enabled) {
-      context_menu_active = true;
-      //recenter_button_pressed(mouse_x, mouse_y);
+      center_tile_mapcanvas_3d(ptile);
+      context_menu_active = false;
+
     } else {
       context_menu_active = false;
       //map_select_units(mouse_x, mouse_y);
@@ -97,16 +102,9 @@ function webglOnDocumentMouseUp( e ) {
 
   } else if (!rightclick && !middleclick) {
     /* Left mouse button*/
-    action_button_pressed(mouse_x, mouse_y, SELECT_POPUP);
+    do_map_click(ptile, SELECT_POPUP, true);
   }
-
   e.preventDefault();
-
-  var ptile = webgl_canvas_pos_to_tile(e.clientX, e.clientY);
-
-  if (ptile != null) {
-    center_tile_mapcanvas_3d(ptile);
-  }
 
 }
 

@@ -17,8 +17,10 @@
 
 ***********************************************************************/
 
-var unit_positions = {};  // tile index is key, unit 3d model is value.
-var city_positions = {};  // tile index is key, unit 3d model is value.
+// stores unit positions on the map. tile index is key, unit 3d model is value.
+var unit_positions = {};
+// stores city positions on the map. tile index is key, unit 3d model is value.
+var city_positions = {};
 
 /****************************************************************************
   Handles unit positions
@@ -126,13 +128,18 @@ function update_city_position(ptile) {
 }
 
 /****************************************************************************
-...
+  Adds all units and cities to the map.
 ****************************************************************************/
-function add_all_units_to_scene()
+function add_all_objects_to_scene()
 {
   for (var tile_index in unit_positions) {
     var punit = unit_positions[tile_index];
     scene.add(punit);
+  }
+
+  for (var tile_index in city_positions) {
+    var pcity = city_positions[tile_index];
+    scene.add(pcity);
   }
 
 }

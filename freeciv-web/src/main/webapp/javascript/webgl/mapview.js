@@ -168,7 +168,7 @@ function render_map_terrain() {
   landMesh = new THREE.Mesh( landGeometry, terrain_material );
   scene.add( landMesh );
 
-  add_all_units_to_scene();
+  add_all_objects_to_scene();
 
   prerender(landGeometry, xquality);
   scene.add(meshes['trees']);

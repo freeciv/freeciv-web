@@ -956,7 +956,11 @@ function do_map_click(ptile, qtype, first_time_called)
     if (goto_active && !is_touch_device()) {
       deactivate_goto();
     }
-    $("#canvas").contextMenu();
+    if (renderer == RENDERER_2DCANVAS) {
+      $("#canvas").contextMenu();
+    } else {
+      $("#canvas_div").contextMenu();
+    }
     return;
   }
   var sunits = tile_units(ptile);

@@ -803,6 +803,22 @@ function get_unit_nation_flag_sprite(punit)
 /**********************************************************************
   ...
 ***********************************************************************/
+function get_unit_nation_flag_normal_sprite(punit)
+{
+  var owner_id = punit['owner'];
+  var owner = players[owner_id];
+  var nation_id = owner['nation'];
+  var nation = nations[nation_id];
+  var unit_offset = get_unit_anim_offset(punit);
+
+  return {"key" : "f." + nation['graphic_str'],
+          "offset_x" : unit_flag_offset_x + unit_offset['x'],
+          "offset_y" : - unit_flag_offset_y + unit_offset['y']};
+}
+
+/**********************************************************************
+  ...
+***********************************************************************/
 function get_unit_stack_sprite(punit)
 {
   return {"key" : "unit.stack",

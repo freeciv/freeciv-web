@@ -179,13 +179,13 @@ function webglOnMouseWheel(e) {
   if(e.originalEvent.wheelDelta /120 > 0) {
     // zoom in
     new_camera_dy = camera_dy - 60;
-    new_camera_dx = camera_dx - 15;
-    new_camera_dz = camera_dz - 15;
+    new_camera_dx = camera_dx - 45;
+    new_camera_dz = camera_dz - 45;
   } else{
     // zoom out
     new_camera_dy = camera_dy + 60;
-    new_camera_dx = camera_dx + 15;
-    new_camera_dz = camera_dz + 15;
+    new_camera_dx = camera_dx + 45;
+    new_camera_dz = camera_dz + 45;
   }
 
   if (new_camera_dy < 220 || new_camera_dy > 2000) {

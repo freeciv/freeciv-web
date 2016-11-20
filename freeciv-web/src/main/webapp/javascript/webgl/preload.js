@@ -104,10 +104,13 @@ function load_model(filename)
 ****************************************************************************/
 function create_flags()
 {
-  var flagGeometry = new THREE.PlaneGeometry( 14, 8 );
-  // FIXME: Don't hardcode to one nation flag.
-  var texture = new THREE.CanvasTexture(sprites['f.norway']);
-  var material = new THREE.MeshBasicMaterial( { map: texture, overdraw: 0.5 } );
-  meshes['flag'] = new THREE.Mesh(flagGeometry, material);
+  for (var sprite_key in sprites) {
+    if (sprite_key.substring(0,2) == "f.") {
+      var flagGeometry = new THREE.PlaneGeometry( 14, 8 );
+      var texture = new THREE.CanvasTexture(sprites[sprite_key]);
+      var material = new THREE.MeshBasicMaterial( { map: texture, overdraw: 0.5 } );
+      meshes[sprite_key] = new THREE.Mesh(flagGeometry, material);
+    }
+  }
 
 }

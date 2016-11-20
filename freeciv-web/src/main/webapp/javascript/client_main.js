@@ -326,3 +326,35 @@ function update_metamessage_on_gamestart()
 
 
 }
+
+
+/**************************************************************************
+  ...
+**************************************************************************/
+function set_default_mapview_active()
+{
+  if (renderer == RENDERER_2DCANVAS) {
+    mapview_canvas_ctx = mapview_canvas.getContext("2d");
+    mapview_canvas_ctx.font = canvas_text_font;
+  }
+
+  chatbox_scroll_down();
+
+  if (!is_small_screen() && overview_active) {
+    $("#game_overview_panel").parent().show();
+    $(".overview_dialog").position({my: 'left bottom', at: 'left bottom', of: window, within: $("#game_page")});
+  }
+
+  if (unitpanel_active) {
+    update_active_units_dialog();
+  }
+
+  if (chatbox_active) $("#game_chatbox_panel").parent().show();
+
+  $("#tabs").tabs("option", "active", 0);
+  $("#tabs-map").height("auto");
+
+  tech_dialog_active = false;
+  allow_right_click = false;
+  keyboard_input = true;
+}

@@ -87,8 +87,6 @@ function webgl_start_renderer()
 }
 
 
-
-
 /****************************************************************************
  This will render the map terrain mesh.
 ****************************************************************************/
@@ -187,16 +185,4 @@ function animate() {
   if (stats != null) stats.end();
   requestAnimationFrame( animate );
 
-}
-
-
-/****************************************************************************
-  Converts from map to scene coordinates.
-****************************************************************************/
-function map_to_scene_coords(x, y)
-{
-  var result = {};
-  result['x'] = Math.floor(-470 + x * 3000 / map['xsize']);
-  result['y'] = Math.floor(30 + y * 2000 / map['ysize']);
-  return result;
 }

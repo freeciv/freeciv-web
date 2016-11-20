@@ -123,6 +123,16 @@ function civclient_init()
 
   $('#tabs').tabs({ heightStyle: "fill" });
   $('#tabs').css("height", $(window).height());
+  $("#tabs-map").height("auto");
+  $("#tabs-civ").height("auto");
+  $("#tabs-tec").height("auto");
+  $("#tabs-nat").height("auto");
+  $("#tabs-cities").height("auto");
+  $("#tabs-opt").height("auto");
+  $("#tabs-hel").height("auto");
+
+
+
   $(".button").button();
 
   /* Initialze audio.js music player */

@@ -131,11 +131,11 @@ function control_init()
   document.oncontextmenu = function(){return allow_right_click;};
 
   $.contextMenu({
-        selector: '#canvas',
-	zIndex: 5000,
+        selector: (renderer == RENDERER_2DCANVAS) ? '#canvas' : '#canvas_div' ,
+	    zIndex: 5000,
         autoHide: true,
         callback: function(key, options) {
-	  handle_context_menu_callback(key);
+          handle_context_menu_callback(key);
         },
         build: function($trigger, e) {
             if (!context_menu_active) {

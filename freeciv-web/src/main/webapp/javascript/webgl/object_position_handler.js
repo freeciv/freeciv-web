@@ -18,9 +18,10 @@
 ***********************************************************************/
 
 var unit_positions = {};  // tile index is key, unit 3d model is value.
+var city_positions = {};  // tile index is key, unit 3d model is value.
 
 /****************************************************************************
-...
+  Handles unit positions
 ****************************************************************************/
 function update_unit_position(ptile) {
   if (renderer != RENDERER_WEBGL) return;
@@ -77,6 +78,49 @@ function update_unit_position(ptile) {
     if (scene != null && new_unit != null) {
       scene.add(new_unit);
     }
+  }
+
+}
+
+/****************************************************************************
+  Handles city positions
+****************************************************************************/
+function update_city_position(ptile) {
+  if (renderer != RENDERER_WEBGL) return;
+
+  var pcity = tile_city(ptile);
+
+  var height = 74 + map_tile_height(ptile) * 60;
+
+  if (city_positions[ptile['index']] != null && pcity == null) {
+    // tile has no visible units, remove it from unit_positions.
+    if (scene != null) scene.remove(city_positions[ptile['index']]);
+    delete city_positions[ptile['index']];
+  }
+
+  if (city_positions[ptile['index']] == null && pcity != null) {
+    // add new city
+    if (webgl_models['city_1'] == null) {
+      console.log("City model not loaded correcly.");
+      return;
+    }
+
+    var new_city = webgl_models["city_1"].clone()
+    city_positions[ptile['index']] = new_city;
+
+    var pos = map_to_scene_coords(ptile['x'], ptile['y']);
+    new_city.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
+    new_city.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
+    new_city.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
+
+    if (scene != null && new_city != null) {
+      scene.add(new_city);
+    }
+  }
+
+  if (unit_positions[ptile['index']] != null && visible_unit != null) {
+    // Update of visible unit. TODO.
+
   }
 
 }

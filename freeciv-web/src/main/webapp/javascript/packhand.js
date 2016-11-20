@@ -252,6 +252,11 @@ function handle_city_info(packet)
   if (worklist_dialog_active && active_city != null) {
     city_worklist_dialog(active_city);
   }
+
+  if (renderer == RENDERER_WEBGL) {
+    update_city_position(index_to_tile(packet['tile']));
+  }
+
 }
 
 /* 99% complete
@@ -268,6 +273,10 @@ function handle_city_short_info(packet)
     cities[packet['id']] = packet;
   } else {
     cities[packet['id']] = $.extend(cities[packet['id']], packet);
+  }
+
+  if (renderer == RENDERER_WEBGL) {
+    update_city_position(index_to_tile(packet['tile']));
   }
 }
 

@@ -16,3 +16,5 @@ Build Freeciv-web as normal with Vagrant as described in the main README file.
 For test and development, use this url which will autostart a game as observer in WebGL mode:
 http://localhost/webclient/?action=new&renderer=webgl&autostart=true
 
+The WebGL renderer can also be tested live in production here:
+https://play.freeciv.org/webclient/?action=new&renderer=webgl&autostart=true

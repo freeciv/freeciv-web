@@ -20,6 +20,10 @@
 var webgl_textures = {};
 var webgl_models = {};
 
+var load_count = 0;
+var model_files = ["Settlers", "Workers", "Explorer", "city_1"];
+var total_model_count = model_files.length;
+
 /****************************************************************************
   Preload textures and models
 ****************************************************************************/
@@ -62,15 +66,11 @@ function webgl_preload()
 
 }
 
-var load_count = 0;
-var total_model_count = 3;
-
 /****************************************************************************
   Preload all models.
 ****************************************************************************/
 function webgl_preload_models()
 {
-  var model_files = ["Settlers", "Workers", "Explorer"];
 
   for (var i = 0; i < total_model_count; i++) {
     load_model(model_files[i]);

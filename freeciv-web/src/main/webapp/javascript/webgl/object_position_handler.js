@@ -118,8 +118,8 @@ function update_city_position(ptile) {
     }
   }
 
-  if (unit_positions[ptile['index']] != null && visible_unit != null) {
-    // Update of visible unit. TODO.
+  if (city_positions[ptile['index']] != null && pcity != null) {
+    // Update of visible city. TODO.
 
   }
 

@@ -30,6 +30,9 @@ var total_model_count = model_files.length;
 function webgl_preload()
 {
   $.blockUI({ message: "<h2>Downloading textures and models...</h2>" });
+
+  create_flags();
+
   var loadingManager = new THREE.LoadingManager();
   loadingManager.onLoad = function () {
     webgl_preload_models();
@@ -93,5 +96,18 @@ function load_model(filename)
         load_count++;
         if (load_count == total_model_count) webgl_preload_complete();
     });
+
+}
+
+/****************************************************************************
+ Create flag meshes
+****************************************************************************/
+function create_flags()
+{
+  var flagGeometry = new THREE.PlaneGeometry( 14, 8 );
+  // FIXME: Don't hardcode to one nation flag.
+  var texture = new THREE.CanvasTexture(sprites['f.norway']);
+  var material = new THREE.MeshBasicMaterial( { map: texture, overdraw: 0.5 } );
+  meshes['flag'] = new THREE.Mesh(flagGeometry, material);
 
 }

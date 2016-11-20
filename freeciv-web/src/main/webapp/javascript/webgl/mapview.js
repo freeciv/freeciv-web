@@ -168,9 +168,9 @@ function render_map_terrain() {
   landMesh = new THREE.Mesh( landGeometry, terrain_material );
   scene.add( landMesh );
 
+  prerender(landGeometry, xquality);
   add_all_objects_to_scene();
 
-  prerender(landGeometry, xquality);
   scene.add(meshes['trees']);
   $.unblockUI();
   console.log("WebGL render_testmap took: " + (new Date().getTime() - start_webgl) + " ms.");

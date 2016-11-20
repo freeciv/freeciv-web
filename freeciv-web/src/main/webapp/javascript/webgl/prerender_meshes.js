@@ -70,5 +70,4 @@ function prerender(landGeometry, xquality) {
       emissive: new THREE.Color(0, 0.01, 0) });
   meshes['trees'] = new THREE.Mesh(trees_geometry, trees_material);
 
-
 }

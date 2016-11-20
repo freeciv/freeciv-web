@@ -72,7 +72,6 @@ function init_webgl_renderer()
   fragShader = document.getElementById('fragment_shh').innerHTML;
 
   init_sprites();
-  webgl_preload();
 
 }
 

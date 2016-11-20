@@ -21,6 +21,9 @@
 var unit_positions = {};
 // stores city positions on the map. tile index is key, unit 3d model is value.
 var city_positions = {};
+// stores flag positions on the map. tile index is key, unit 3d model is value.
+var city_flag_positions = {};
+var unit_flag_positions = {};
 
 /****************************************************************************
   Handles unit positions
@@ -35,6 +38,9 @@ function update_unit_position(ptile) {
     // tile has no visible units, remove it from unit_positions.
     if (scene != null) scene.remove(unit_positions[ptile['index']]);
     delete unit_positions[ptile['index']];
+
+    if (scene != null) scene.remove(unit_flag_positions[ptile['index']]);
+    delete unit_flag_positions[ptile['index']];
   }
 
   if (unit_positions[ptile['index']] == null && visible_unit != null) {
@@ -47,14 +53,25 @@ function update_unit_position(ptile) {
 
     var new_unit = webgl_models[unit_type_name].clone()
     unit_positions[ptile['index']] = new_unit;
-
     var pos = map_to_scene_coords(ptile['x'], ptile['y']);
     new_unit.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
     new_unit.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
     new_unit.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
-
     if (scene != null && new_unit != null) {
       scene.add(new_unit);
+    }
+
+    if (meshes['flag'] != null && unit_flag_positions[ptile['index']] == null) {
+      var new_flag = meshes['flag'].clone()
+      unit_flag_positions[ptile['index']] = new_flag;
+      var fpos = map_to_scene_coords(ptile['x'], ptile['y']);
+      new_flag.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10);
+      new_flag.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 10);
+      new_flag.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
+      new_flag.rotation.y = Math.PI / 4;
+      if (scene != null && new_flag != null) {
+        scene.add(new_flag);
+      }
     }
   }
 
@@ -118,6 +135,19 @@ function update_city_position(ptile) {
     if (scene != null && new_city != null) {
       scene.add(new_city);
     }
+
+    if (meshes['flag'] != null) {
+      var new_flag = meshes['flag'].clone()
+      city_flag_positions[ptile['index']] = new_flag;
+      var fpos = map_to_scene_coords(ptile['x'], ptile['y']);
+      new_flag.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 5);
+      new_flag.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 30);
+      new_flag.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']- 5);
+      new_flag.rotation.y = Math.PI / 4;
+      if (scene != null && new_flag != null) {
+        scene.add(new_flag);
+      }
+    }
   }
 
   if (city_positions[ptile['index']] != null && pcity != null) {
@@ -140,6 +170,16 @@ function add_all_objects_to_scene()
   for (var tile_index in city_positions) {
     var pcity = city_positions[tile_index];
     scene.add(pcity);
+  }
+
+  for (var tile_index in unit_flag_positions) {
+    var pflag = unit_flag_positions[tile_index];
+    scene.add(pflag);
+  }
+
+  for (var tile_index in city_flag_positions) {
+    var pflag = city_flag_positions[tile_index];
+    scene.add(pflag);
   }
 
 }

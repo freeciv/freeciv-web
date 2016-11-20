@@ -1136,7 +1136,11 @@ function do_map_click(ptile, qtype, first_time_called)
 	if (sunits != null && sunits.length > 0
             && sunits[0]['activity'] == ACTIVITY_IDLE) {
           set_unit_focus_and_redraw(sunits[0]);
-          $("#canvas").contextMenu();
+          if (renderer == RENDERER_2DCANVAS) {
+            $("#canvas").contextMenu();
+          } else {
+            $("#canvas_div").contextMenu();
+          }
 	} else {
           show_city_dialog(pcity);
 	}
@@ -1160,8 +1164,12 @@ function do_map_click(ptile, qtype, first_time_called)
         }
 
         if (is_touch_device()) {
-          $("#canvas").contextMenu();
-	}
+          if (renderer == RENDERER_2DCANVAS) {
+            $("#canvas").contextMenu();
+          } else {
+            $("#canvas_div").contextMenu();
+          }
+	    }
       }
     }
 

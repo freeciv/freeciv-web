@@ -55,7 +55,6 @@ function webgl_canvas_pos_to_tile(x, y) {
   if ( intersects.length > 0 ) {
     var intersect = intersects[ 0 ];
     var pos = scene_to_map_coords(intersect.point.x, intersect.point.z)
-    console.log(pos);
     var ptile = map_pos_to_tile(pos['x'], pos['y']);
     return ptile;
   } else {

@@ -70,6 +70,7 @@ function create_heightmap()
         heightmap_tiles[x][y] = 0.5;
         heightmap_tiles[x][y] += 0.4 * map_tile_height(ptile);
         heightmap_tiles[x][y] += 0.1 * distance_from_coast_map[x][y];
+        if (ptile != null && heightmap_tiles[x][y] > ptile['height']) ptile['height'] = heightmap_tiles[x][y];
       }
     }
   }
@@ -128,6 +129,10 @@ function propagate_distance_from_coast(distance_from_coast_map, x, y)
 {
   var current_distance = distance_from_coast_map[x][y];
 
+  // limit distance from coast to 2. this is a quick-fix for inland tiles
+  // incorrectly assigned as mountains by the fragment shader.
+  if (current_distance >= 2) current_distance = 2;
+
   for (var dir = 0; dir < DIR8_LAST; dir++) {
     var dir_x = x + DIR_DX[dir];
     var dir_y = y + DIR_DY[dir];
@@ -143,14 +148,14 @@ function propagate_distance_from_coast(distance_from_coast_map, x, y)
 }
 
 /****************************************************************************
-  Returns the tile height from -1.0 to 1.3
+  Returns the tile height from -1.0 to 1.25
 ****************************************************************************/
 function map_tile_height(ptile)
 {
   if (ptile != null && tile_get_known(ptile) != TILE_UNKNOWN) {
       if (is_ocean_tile(ptile)) return -0.1;
       if (tile_terrain(ptile)['name'] == "Hills") return 0.4;
-      if (tile_terrain(ptile)['name'] == "Mountains") return 1.3;
+      if (tile_terrain(ptile)['name'] == "Mountains") return 1.25;
   }
 
   return 0.0;

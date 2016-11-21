@@ -32,7 +32,7 @@ function update_unit_position(ptile) {
   if (renderer != RENDERER_WEBGL) return;
 
   var visible_unit = find_visible_unit(ptile);
-  var height = 78 + map_tile_height(ptile) * 60;
+  var height = 5 + ptile['height'] * 100;
 
   if (unit_positions[ptile['index']] != null && visible_unit == null) {
     // tile has no visible units, remove it from unit_positions.
@@ -109,7 +109,7 @@ function update_city_position(ptile) {
 
   var pcity = tile_city(ptile);
 
-  var height = 74 + map_tile_height(ptile) * 60;
+  var height = 5 + ptile['height'] * 100;
 
   if (city_positions[ptile['index']] != null && pcity == null) {
     // tile has no visible units, remove it from unit_positions.

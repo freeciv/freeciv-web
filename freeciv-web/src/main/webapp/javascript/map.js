@@ -91,6 +91,7 @@ function map_allocate()
       tile['index'] = x + y * map['xsize'];
       tile['x'] = x;
       tile['y'] = y;
+      tile['height'] = 0;
       //tile['nat_x'] = tile['index'] % map['xsize'];
       //tile['nat_y'] = Math.floor(tile['index'] / map['xsize']);
       tile = tile_init(tile);

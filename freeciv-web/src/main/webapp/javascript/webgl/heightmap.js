@@ -148,14 +148,14 @@ function propagate_distance_from_coast(distance_from_coast_map, x, y)
 }
 
 /****************************************************************************
-  Returns the tile height from -1.0 to 1.25
+  Returns the tile height from -1.0 to 1.2
 ****************************************************************************/
 function map_tile_height(ptile)
 {
   if (ptile != null && tile_get_known(ptile) != TILE_UNKNOWN) {
       if (is_ocean_tile(ptile)) return -0.1;
       if (tile_terrain(ptile)['name'] == "Hills") return 0.4;
-      if (tile_terrain(ptile)['name'] == "Mountains") return 1.25;
+      if (tile_terrain(ptile)['name'] == "Mountains") return 1.2;
   }
 
   return 0.0;

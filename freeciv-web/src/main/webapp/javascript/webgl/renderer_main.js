@@ -50,7 +50,7 @@ function init_webgl_renderer()
 
 
   if (!Detector.webgl) {
-    add_chatbox_text("WebGL not supported by your browser or hardware.");
+    swal("WebGL not supported by your browser or hardware.");
     $.ajax({
         async: false,
         url: "/javascript/webgl/libs/CanvasRenderer.js",

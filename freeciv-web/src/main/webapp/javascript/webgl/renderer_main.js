@@ -49,7 +49,19 @@ function init_webgl_renderer()
   });
 
 
-  if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+  if (!Detector.webgl) {
+    add_chatbox_text("WebGL not supported by your browser or hardware.");
+    $.ajax({
+        async: false,
+        url: "/javascript/webgl/libs/CanvasRenderer.js",
+        dataType: "script"
+    });
+    $.ajax({
+            async: false,
+            url: "/javascript/webgl/libs/Projector.js",
+            dataType: "script"
+    });
+  }
 
   /* Loads the two tileset definition files */
   $.ajax({

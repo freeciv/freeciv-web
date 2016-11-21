@@ -68,13 +68,18 @@ function webgl_start_renderer()
   directionalLight.position.set( 1, 0.75, 0.5 ).normalize();
   scene.add( directionalLight );
 
-  maprenderer = new THREE.WebGLRenderer( { antialias: true } ); /* TODO: make antialias configurable. */
+  if (Detector.webgl) {
+    /* TODO: make antialias conficurable. */
+    maprenderer = new THREE.WebGLRenderer( { antialias: true } );
+  } else {
+    maprenderer = new THREE.CanvasRenderer();
+  }
   maprenderer.setClearColor( 0x000000 );
   maprenderer.setPixelRatio( window.devicePixelRatio );
   maprenderer.setSize( window.innerWidth, window.innerHeight );
   container.appendChild( maprenderer.domElement );
 
-  if (location.hostname === "localhost") {
+  if (location.hostname === "localhost" && Detector.webgl) {
     stats = new Stats();
     container.appendChild( stats.dom );
 
@@ -135,12 +140,17 @@ function render_map_terrain() {
     uniforms[tiletype_terrains[i]] = {type: "t", value: webgl_textures[tiletype_terrains[i]]};
   }
 
-  /* create a WebGL shader for terrain. */
-  var terrain_material = new THREE.ShaderMaterial({
-    uniforms: uniforms,
-    vertexShader: vertShader,
-    fragmentShader: fragShader
-  });
+  var terrain_material;
+  if (Detector.webgl) {
+    /* create a WebGL shader for terrain. */
+    terrain_material = new THREE.ShaderMaterial({
+      uniforms: uniforms,
+      vertexShader: vertShader,
+      fragmentShader: fragShader
+    });
+  } else {
+    terrain_material = new THREE.MeshLambertMaterial( { color: 0x00ff00} );
+  }
 
   var xquality = map.xsize * 4 + 1;
   var yquality = map.ysize * 4 + 1;

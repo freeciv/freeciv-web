@@ -148,6 +148,13 @@ function update_city_position(ptile) {
         scene.add(new_flag);
       }
     }
+
+    var text = create_city_label(pcity['name']);
+    text.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] + 5);
+    text.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 45);
+    text.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 5);
+    text.rotation.y = Math.PI / 4;
+    if (scene != null) scene.add(text);
   }
 
   if (city_positions[ptile['index']] != null && pcity != null) {

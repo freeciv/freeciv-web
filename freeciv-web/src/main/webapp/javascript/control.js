@@ -312,14 +312,18 @@ function mouse_moved_cb(e)
 ****************************************************************************/
 function update_mouse_cursor()
 {
-  if (renderer != RENDERER_2DCANVAS) return;
 
   if (tech_dialog_active) {
     update_tech_dialog_cursor();
     return;
   }
 
-  var ptile = canvas_pos_to_tile(mouse_x, mouse_y);
+  var ptile;
+  if (renderer == RENDERER_2DCANVAS) {
+    ptile = canvas_pos_to_tile(mouse_x, mouse_y);
+  } else {
+    ptile = webgl_canvas_pos_to_tile(mouse_x, mouse_y);
+  }
 
   if (ptile == null) return;
 
@@ -328,18 +332,18 @@ function update_mouse_cursor()
 
   if (goto_active && current_goto_turns != null) {
     /* show goto cursor */
-    mapview_canvas.style.cursor = "crosshair";
+    $("#canvas_div").css("cursor", "crosshair");
   } else if (goto_active && current_goto_turns == null) {
     /* show invalid goto cursor*/
-    mapview_canvas.style.cursor = "not-allowed";
+    $("#canvas_div").css("cursor", "not-allowed");
   } else if (pcity != null && city_owner_player_id(pcity) == client.conn.playing.playerno) {
     /* selecti city cursor*/
-    mapview_canvas.style.cursor = "pointer";
+    $("#canvas_div").css("cursor", "pointer");
   } else if (punit != null && punit['owner'] == client.conn.playing.playerno) {
     /* move unit cursor */
-    mapview_canvas.style.cursor = "move";
+    $("#canvas_div").css("cursor", "move");
   } else {
-    mapview_canvas.style.cursor = "default";
+    $("#canvas_div").css("cursor", "default");
   }
 
 }
@@ -1393,7 +1397,7 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift, the_event)
     case 32: // space, will clear selection and goto.
       current_focus = [];
       goto_active = false;
-      mapview_canvas.style.cursor = "default";
+      $("#canvas_div").css("cursor", "default");
       goto_request_map = {};
       goto_turns_request_map = {};
       clear_goto_tiles();
@@ -1547,7 +1551,7 @@ function activate_goto()
 function activate_goto_last(last_order, last_action)
 {
   goto_active = true;
-  mapview_canvas.style.cursor = "crosshair";
+  $("#canvas_div").css("cursor", "crosshair");
 
   /* Set what the unit should do on arrival. */
   goto_last_order = last_order;
@@ -1577,7 +1581,7 @@ function activate_goto_last(last_order, last_action)
 function deactivate_goto()
 {
   goto_active = false;
-  if (mapview_canvas != null) mapview_canvas.style.cursor = "default";
+  $("#canvas_div").css("cursor", "default");
   goto_request_map = {};
   goto_turns_request_map = {};
   clear_goto_tiles();
@@ -2151,7 +2155,12 @@ function check_request_goto_path()
 {
   if (goto_active && current_focus.length > 0
       && prev_mouse_x == mouse_x && prev_mouse_y == mouse_y) {
-    var ptile = canvas_pos_to_tile(mouse_x, mouse_y);
+    var ptile;
+    if (renderer == RENDERER_2DCANVAS) {
+      ptile = canvas_pos_to_tile(mouse_x, mouse_y);
+    } else {
+      ptile = webgl_canvas_pos_to_tile(mouse_x, mouse_y);
+    }
     clear_goto_tiles();
     if (ptile != null) {
       /* Send request for goto_path to server. */

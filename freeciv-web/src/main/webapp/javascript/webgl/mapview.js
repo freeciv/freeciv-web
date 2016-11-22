@@ -192,6 +192,7 @@ function render_map_terrain() {
 function animate() {
   if (stats != null) stats.begin();
   maprenderer.render( scene, camera );
+  check_request_goto_path();
   if (stats != null) stats.end();
   requestAnimationFrame( animate );
 

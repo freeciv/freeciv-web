@@ -541,6 +541,10 @@ function handle_unit_remove(packet)
   clear_tile_unit(punit);
   client_remove_unit(punit);
 
+  if (renderer == RENDERER_WEBGL) {
+    update_unit_position(index_to_tile(punit['tile']));
+  }
+
 }
 
 /* 100% complete */

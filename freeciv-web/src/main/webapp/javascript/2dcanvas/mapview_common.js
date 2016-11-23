@@ -484,7 +484,7 @@ function update_map_canvas_full()
     if (!sprites_init) init_cache_sprites();
 
     // If city dialog is open, don't redraw default mapview.
-    if (active_city != null || active_globeview) return;
+    if (active_city != null) return;
 
     if (mapview_slide['active']) {
       update_map_slide();

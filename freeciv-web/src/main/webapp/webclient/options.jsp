@@ -53,17 +53,6 @@
 </div>
 </td>
 </tr>
-<tr>
-<td>
-<div class="main_menu_buttons">
-  <button id="globeview_button" type="button" class="button setting_button" onClick="init_2d_globe_view();" title="Shows the whole current map as a single image.">Show 2D map view</button>
-</div>
-</td>
-<td>
-<div class="main_menu_buttons">
-</div>
-</td>
-</tr>
 </table>
 
 

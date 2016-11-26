@@ -21,7 +21,22 @@ var webgl_textures = {};
 var webgl_models = {};
 
 var load_count = 0;
-var model_files = ["Settlers", "Workers", "Explorer", "city_1"];
+var model_files = ["AEGIS Cruiser","Cavalry",         "Helicopter",
+                   "Alpine Troops","Chariot",         "Horsemen",      "Riflemen",
+                   "Archers","city_1",          "Howitzer",      "Settlers",
+                   "Armor","Cruise Missile",  "Ironclad",      "Spy",
+                   "Artillery","Cruiser","Knights","Stealth Bomber",
+                   "AWACS","Destroyer","Legion","Stealth Fighter",
+                   "Battleship","Diplomat","Marines","Submarine",
+                   "Bomber","Dragoons","Mech. Inf.","Transport",
+                   "Engineers","Musketeers","Trireme",
+                   "Cannon","Explorer","Nuclear","Warriors",
+                   "Caravan","Fighter","Paratroopers","Workers",
+                   "Caravel","Freight","Partisan",
+                   "Carrier","Frigate","Phalanx",
+                   "Catapult","Galleon","Pikemen"];
+// FIXME: don't hardcode the units.
+
 var total_model_count = model_files.length;
 
 /****************************************************************************

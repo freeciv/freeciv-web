@@ -1,5 +1,7 @@
 Blender 3d models created for Freeciv-web.
 
+3d artists are welcome to improve these models!
+
 These are the source Blender model files.
 
 These should be exported in COllada format to:

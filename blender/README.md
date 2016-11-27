@@ -9,3 +9,5 @@ freeciv-web/src/main/webapp/3d-models/
 
 Filename must match unit name from Freeciv ruleset.
 
+Be sure to limit the file size and number of verticies, since the result
+will be rendered in a web browser.

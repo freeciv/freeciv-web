@@ -24,6 +24,8 @@ var city_positions = {};
 // stores flag positions on the map. tile index is key, unit 3d model is value.
 var city_flag_positions = {};
 var unit_flag_positions = {};
+var unit_label_positions = {};
+var unit_activities_positions = {};
 
 /****************************************************************************
   Handles unit positions
@@ -41,6 +43,10 @@ function update_unit_position(ptile) {
 
     if (scene != null) scene.remove(unit_flag_positions[ptile['index']]);
     delete unit_flag_positions[ptile['index']];
+
+    if (scene != null) scene.remove(unit_label_positions[ptile['index']]);
+    delete unit_label_positions[ptile['index']];
+    unit_activities_positions[ptile['index']] = null;
   }
 
   if (unit_positions[ptile['index']] == null && visible_unit != null) {
@@ -58,13 +64,13 @@ function update_unit_position(ptile) {
     new_unit.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
     new_unit.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
     // rotate unit in the direction it is facing.
-    setTimeout("unit_positions["+ptile['index']+"].rotateY(" + (convert_unit_rotation(visible_unit['facing']) * Math.PI * 2 / 8) + ")", 1);
+    setTimeout("if (unit_positions["+ptile['index']+"] != null) unit_positions["+ptile['index']+"].rotateY(" + (convert_unit_rotation(visible_unit['facing']) * Math.PI * 2 / 8) + ")", 1);
     if (scene != null && new_unit != null) {
       scene.add(new_unit);
     }
     var pflag = get_unit_nation_flag_normal_sprite(visible_unit);
     if (meshes[pflag['key']] != null && unit_flag_positions[ptile['index']] == null) {
-      var new_flag = meshes[pflag['key']].clone()
+      var new_flag = meshes[pflag['key']].clone();
       unit_flag_positions[ptile['index']] = new_flag;
       var fpos = map_to_scene_coords(ptile['x'], ptile['y']);
       new_flag.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10);
@@ -80,6 +86,25 @@ function update_unit_position(ptile) {
   if (unit_positions[ptile['index']] != null && visible_unit != null) {
     // Update of visible unit.
     var unit_type_name = unit_type(visible_unit)['name'];
+    var pos = map_to_scene_coords(ptile['x'], ptile['y']);
+
+    if (unit_activities_positions[ptile['index']] != get_unit_activity_text(visible_unit)) {
+      // add unit activity label
+      if (scene != null && unit_label_positions[ptile['index']] != null) scene.remove(unit_label_positions[ptile['index']]);
+      if (get_unit_activity_text(visible_unit) != null) {
+        var text = create_unit_label(visible_unit);
+        if (text != null) {
+          text.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] + 5);
+          text.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 28);
+          text.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 5);
+          text.rotation.y = Math.PI / 4;
+          if (scene != null) scene.add(text);
+          unit_label_positions[ptile['index']] = text;
+        }
+      }
+      unit_activities_positions[ptile['index']] = get_unit_activity_text(visible_unit);
+    }
+
     if (unit_positions[ptile['index']]['unit_type'] == unit_type_name) return;
 
     if (scene != null) scene.remove(unit_positions[ptile['index']]);
@@ -94,7 +119,6 @@ function update_unit_position(ptile) {
     unit_positions[ptile['index']] = new_unit;
     unit_positions[ptile['index']]['unit_type'] = unit_type_name;
 
-    var pos = map_to_scene_coords(ptile['x'], ptile['y']);
     new_unit.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
     new_unit.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
     new_unit.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);

@@ -47,3 +47,99 @@ function create_city_label(city_name)
 
   return mesh1;
 }
+
+/****************************************************************************
+ Create a unit label
+****************************************************************************/
+function create_unit_label(punit)
+{
+  var canvas1 = document.createElement('canvas');
+  canvas1.width = 32;
+  canvas1.height = 16;
+  var context1 = canvas1.getContext('2d');
+  context1.font = "Bold 16px Arial";
+  context1.fillStyle = "rgba(222,255,0, 1.0)";
+  context1.strokeStyle= "black";
+  context1.lineWidth = 0.5;
+  context1.fillText(get_unit_activity_text(punit), 2, 16);
+  context1.strokeText(get_unit_activity_text(punit), 2, 16);
+
+  var texture1 = new THREE.Texture(canvas1);
+  texture1.needsUpdate = true;
+
+  var material1 = new THREE.MeshBasicMaterial( { map: texture1, side:THREE.DoubleSide } );
+  material1.transparent = true;
+
+  var mesh1 = new THREE.Mesh(
+    new THREE.PlaneGeometry(canvas1.width / 2, canvas1.height / 2),
+    material1
+  );
+
+  return mesh1;
+}
+
+
+/**********************************************************************
+  ...
+***********************************************************************/
+function get_unit_activity_text(punit)
+{
+  var activity = punit['activity'];
+  var act_tgt  = punit['activity_tgt'];
+
+  /* don't draw activity for enemy units */
+  if (client.conn.playing == null || punit['owner'] != client.conn.playing.playerno) {
+    return null;
+  }
+
+  switch (activity) {
+    case ACTIVITY_POLLUTION:
+      return "F";
+
+    case ACTIVITY_MINE:
+      return "M";
+
+    case ACTIVITY_IRRIGATE:
+      return "I";
+
+    case ACTIVITY_FORTIFIED:
+      return "F";
+
+    case ACTIVITY_BASE:
+      return "B";
+
+    case ACTIVITY_SENTRY:
+      return "S";
+
+    case ACTIVITY_PILLAGE:
+      return "P";
+
+    case ACTIVITY_GOTO:
+      return "G";
+
+    case ACTIVITY_EXPLORE:
+      return "X";
+
+    case ACTIVITY_TRANSFORM:
+      return "T";
+
+    case ACTIVITY_FORTIFYING:
+      return "f";
+
+    case ACTIVITY_GEN_ROAD:
+      return "R";
+
+    case ACTIVITY_CONVERT:
+      return "C";
+  }
+
+  if (unit_has_goto(punit)) {
+      return "G";
+  }
+
+  if (punit['ai'] == true) {
+      return "A";
+  }
+
+  return null;
+}

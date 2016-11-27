@@ -61,3 +61,18 @@ function webgl_canvas_pos_to_tile(x, y) {
     return null;
   }
 }
+
+/****************************************************************************
+  Converts from unit['facing'] to number of rotations of 1/8 parts of full circle rotations (2PI).
+****************************************************************************/
+function convert_unit_rotation(facing_dir)
+{
+  if (facing_dir == 0) return -3;
+  if (facing_dir == 1) return -4;
+  if (facing_dir == 2) return -5;
+  if (facing_dir == 4) return -6;
+  if (facing_dir == 7) return -7;
+  if (facing_dir == 6) return 0;
+  if (facing_dir == 5) return -1;
+  if (facing_dir == 3) return -2;
+}

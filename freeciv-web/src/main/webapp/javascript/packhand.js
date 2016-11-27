@@ -610,6 +610,7 @@ function handle_unit_packet_common(packet_unit)
     unit_actor_wants_input(packet_unit);
     packet_unit['anim_list'] = [];
     units[packet_unit['id']] = packet_unit;
+    units[packet_unit['id']]['facing'] = 6;
   } else {
     if (units[packet_unit['id']]['action_decision_want']
         != packet_unit['action_decision_want']) {

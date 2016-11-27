@@ -57,6 +57,8 @@ function update_unit_position(ptile) {
     new_unit.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
     new_unit.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
     new_unit.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
+    // rotate unit in the direction it is facing.
+    setTimeout("unit_positions["+ptile['index']+"].rotateY(" + (convert_unit_rotation(visible_unit['facing']) * Math.PI * 2 / 8) + ")", 1);
     if (scene != null && new_unit != null) {
       scene.add(new_unit);
     }
@@ -77,10 +79,12 @@ function update_unit_position(ptile) {
 
   if (unit_positions[ptile['index']] != null && visible_unit != null) {
     // Update of visible unit.
+    var unit_type_name = unit_type(visible_unit)['name'];
+    if (unit_positions[ptile['index']]['unit_type'] == unit_type_name) return;
+
     if (scene != null) scene.remove(unit_positions[ptile['index']]);
     delete unit_positions[ptile['index']];
 
-    var unit_type_name = unit_type(visible_unit)['name'];
     if (unit_type_name == null || webgl_models[unit_type_name] == null) {
       console.log(unit_type_name + " model not loaded correcly.");
       return;
@@ -88,12 +92,12 @@ function update_unit_position(ptile) {
 
     var new_unit = webgl_models[unit_type_name].clone()
     unit_positions[ptile['index']] = new_unit;
+    unit_positions[ptile['index']]['unit_type'] = unit_type_name;
 
     var pos = map_to_scene_coords(ptile['x'], ptile['y']);
     new_unit.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
     new_unit.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
     new_unit.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
-
     if (scene != null && new_unit != null) {
       scene.add(new_unit);
     }
@@ -190,3 +194,4 @@ function add_all_objects_to_scene()
   }
 
 }
+

@@ -84,6 +84,8 @@ function civclient_init()
   //initialize a seeded random number generator
   fc_seedrandom = new Math.seedrandom('freeciv-web');
 
+  if (window.requestAnimationFrame == null) swal("Please upgrade your browser.");
+
   if ($.getUrlVar('renderer') == "webgl") {
     renderer = RENDERER_WEBGL;
   }

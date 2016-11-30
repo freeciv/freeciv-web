@@ -110,6 +110,11 @@ function load_model(filename)
         webgl_models[filename] = dae;
         load_count++;
         if (load_count == total_model_count) webgl_preload_complete();
+    },
+    null,
+    function ( error_obj ) {
+      console.error("Unable to load " + error_obj['url']);
+      swal("Unable to load 3D model. Please try to reload the page.");
     });
 
 }

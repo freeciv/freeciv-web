@@ -775,6 +775,12 @@ function show_intro_dialog(title, message) {
   var intro_html = message + "<br><br><table><tr><td>Player name:</td><td><input id='username_req' type='text' size='25' maxlength='31'></td></tr>"
       +  "<tr id='password_row' style='display:none;'><td>Password:</td><td id='password_td'></td></tr></table>"
 	  + " <br><br><span id='username_validation_result'></span>";
+
+  if (renderer == RENDERER_WEBGL) {
+    intro_html += "<span style='color: red;'>BETA TEST: The 3D WebGL version of Freeciv-web which you are currently using is an unstable BETA version. "
+               + "It is not complete and contains many bugs. If you are looking for a stable fullly playable game, then go back and try the 2D version. "
+               + "Please report bugs and feedback in the 3D WebGL on the forum. Enjoy the unstable 3D WebGL version!</span>";
+  }
   $("#dialog").html(intro_html);
   var stored_username = simpleStorage.get("username", "");
   if (stored_username != null && stored_username != false) {
@@ -940,6 +946,7 @@ function show_new_user_account_dialog()
                 + "<tr><td>Password:</td><td><input id='password' type='password' size='25'></td></tr>"
                 + "<tr><td>Confim password:</td><td><input id='confirm_password' type='password' size='25'></td></tr></table><br>"
                 + "<div id='username_validation_result'></div><br>"
+                + "Click to accept captcha:<br>"
                 + "<div id='captcha_element'></div><br><br>"
                 + "<div><small><ul><li>It is free and safe to create a new account on Freeciv-web.</li>"
                 + "<li>A user account allows you to save and load games.</li>"
@@ -1046,6 +1053,9 @@ function create_new_freeciv_user_account_request(action_type)
     return false;
   } else if (password != confirm_password) {
     $("#username_validation_result").html("The passwords do not match.");
+    return false;
+  } else if (captcha == null || captcha === undefined ) {
+    $("#username_validation_result").html("Please fill in the captcha. You might have to disable some plugins to see the captcha.");
     return false;
   }
 

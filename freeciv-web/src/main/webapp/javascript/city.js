@@ -341,6 +341,7 @@ function show_city_dialog(pcity)
   var specialist_html = "";
   var citizen_types = ["angry", "unhappy", "content", "happy"];
   for (var s = 0; s < citizen_types.length; s++) {
+    if (pcity['ppl_' + citizen_types[s]] == null) continue;
     for (var i = 0; i < pcity['ppl_' + citizen_types[s]][FEELING_FINAL]; i ++) {
       sprite = get_specialist_image_sprite("citizen." + citizen_types[s] + "_"
          + (i % 2));

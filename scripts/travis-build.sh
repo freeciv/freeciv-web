@@ -46,9 +46,6 @@ apt-get -y install ${dependencies}
 ln -s /usr/bin/python3.4 /usr/bin/python3.5
 python3.5 -m easy_install Pillow
 
-java -version
-javac -version
-
 echo "===== Install Tomcat 8 ======="
 echo "if you get a download error 404 here, then there could be a new Tomcat version released, so update the URL below."
 cd /var/lib

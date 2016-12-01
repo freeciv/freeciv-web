@@ -94,7 +94,7 @@ cd ${basedir}/scripts/freeciv-img-extract/ && ./setup_links.sh && ./sync.sh
 cd ${basedir}/scripts && ./sync-js-hand.sh
 cd ${basedir}/freeciv-web && sudo -u travis ./build.sh
 cp flyway.properties.dist flyway.properties
-#sudo -u travis mvn compile flyway:migrate
+sudo -u travis mvn compile flyway:migrate
 
 echo "==== Building nginx ===="
 cd ${basedir}

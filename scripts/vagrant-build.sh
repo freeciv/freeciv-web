@@ -48,7 +48,7 @@ tornado_url="https://github.com/tornadoweb/tornado/archive/v4.4.1.tar.gz"
 casperjs_url="https://github.com/casperjs/casperjs/zipball/1.1.3"
 
 # Based on fresh install of Ubuntu 16.04
-dependencies="maven mysql-server openjdk-8-jdk-headless libcurl4-openssl-dev nginx libjansson-dev subversion pngcrush python3-pillow libtool automake autoconf autotools-dev language-pack-en python3.5-dev python3-setuptools libbz2-dev imagemagick python3-pip dos2unix liblzma-dev xvfb libicu-dev pkg-config zlib1g-dev libsdl1.2-dev tomcat8 tomcat8-admin php7.0-common php7.0-cli php7.0-fpm php7.0-mysql unzip phantomjs"
+dependencies="maven mysql-server openjdk-8-jdk-headless libcurl4-openssl-dev nginx libjansson-dev subversion pngcrush python3-pillow libtool automake autoconf autotools-dev language-pack-en python3.5-dev python3-setuptools libbz2-dev imagemagick python3-pip dos2unix liblzma-dev xvfb libicu-dev pkg-config zlib1g-dev libsdl1.2-dev tomcat8 tomcat8-admin php7.0-common php7.0-cli php7.0-fpm php7.0-mysql unzip phantomjs zip"
 
 ## Setup
 mkdir -p ${basedir}

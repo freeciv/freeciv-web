@@ -72,6 +72,7 @@ python3.5 setup.py install
 
 ## mysql setup
 echo "==== Setting up MySQL ===="
+mysql -u root -e "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('')"
 mysqladmin -u ${mysql_user}  create freeciv_web
 mysql -u ${mysql_user}  freeciv_web < ${basedir}/freeciv-web/src/main/webapp/meta/private/metaserver.sql
 

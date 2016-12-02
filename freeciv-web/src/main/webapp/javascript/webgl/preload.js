@@ -89,32 +89,46 @@ function webgl_preload()
 ****************************************************************************/
 function webgl_preload_models()
 {
+  var url = '/3d-models/models.zip';
+  zip.createReader(new zip.HttpReader(url), function(zipReader){
+     zipReader.getEntries(function(entries){
+       for (var i = 0; i < entries.length; i++) {
+         var file = entries[i];
+         handle_zip_file(file['filename'].replace(".dae", ""), file);
+       }
+     });
+  }, function(){
+    swal("Unable to download models. Please reload the page and try again.");
+    console.error("Problem downloading models.zip");
+  });
 
-  for (var i = 0; i < total_model_count; i++) {
-    load_model(model_files[i]);
-  }
+}
+
+/****************************************************************************
+  Handle each unzipped file, call load_model on each file.
+****************************************************************************/
+function handle_zip_file(filename, file)
+{
+  file.getData(new zip.TextWriter(), function(text) {
+    load_model(filename, text);
+  });
 
 }
 
 /****************************************************************************
  Loads a single model file.
 ****************************************************************************/
-function load_model(filename)
+function load_model(filename, collada_string)
 {
    var colladaloader = new THREE.ColladaLoader();
     colladaloader.options.convertUpAxis = true;
-    colladaloader.load( '/3d-models/' + filename + '.dae', function ( collada ) {
+    colladaloader.parse( collada_string, function ( collada ) {
         dae = collada.scene;
         dae.updateMatrix();
         dae.scale.x = dae.scale.y = dae.scale.z = 11;
         webgl_models[filename] = dae;
         load_count++;
         if (load_count == total_model_count) webgl_preload_complete();
-    },
-    null,
-    function ( error_obj ) {
-      console.error("Unable to load " + error_obj['url']);
-      swal("Unable to load 3D model. Please try to reload the page.");
     });
 
 }

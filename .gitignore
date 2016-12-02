@@ -76,4 +76,5 @@ resin*
 freeciv-web.project
 configuration.sh.dist
 freeciv-web/src/main/webapp/META-INF/context.xml
+models.zip
 

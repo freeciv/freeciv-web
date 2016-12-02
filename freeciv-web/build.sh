@@ -26,4 +26,11 @@ mkdir -p $DATADIR/savegames
 mkdir -p $DATADIR/scorelogs
 mkdir -p $DATADIR/ranklogs
 
+echo "compressing 3d-models into zip file"
+(
+ cd src/main/webapp/3d-models
+ zip -9 models.zip *.dae
+)
+
+echo "maven package"
 mvn package && cp target/freeciv-web.war "${TOMCATDIR}/webapps/ROOT.war"

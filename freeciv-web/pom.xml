@@ -119,6 +119,7 @@
                     </dependency>
                 </dependencies>
                 <executions>
+                    <!-- Create minified common webclient.min.js and css -->
                     <execution>
                         <id>default-minify</id>
                         <configuration>
@@ -156,11 +157,40 @@
                             </jsSourceExcludes>
                             <jsEngine>CLOSURE</jsEngine>
                             <closureCreateSourceMap>true</closureCreateSourceMap>
+                            <closureLanguage>ECMASCRIPT5</closureLanguage>
                         </configuration>
                         <goals>
                             <goal>minify</goal>
                         </goals>
                     </execution>
+                    <!-- Create minified WebGL specific webgl-client.min.js -->
+                    <execution>
+                        <id>webgl-minify</id>
+                        <configuration>
+                            <jsSourceDir>javascript/webgl/libs/</jsSourceDir>
+                            <jsFinalFile>webgl-client.js</jsFinalFile>
+                            <closureLanguage>ECMASCRIPT5</closureLanguage>
+                            <jsSourceIncludes>
+                                <jsSourceInclude>*.js</jsSourceInclude>
+                            </jsSourceIncludes>
+                            <jsSourceExcludes>
+                                <jsSourceExclude>three.min.js</jsSourceExclude>
+                                <jsSourceExclude>zip.js</jsSourceExclude>
+                                <jsSourceExclude>zip-ext.js</jsSourceExclude>
+                                <jsSourceExclude>deflate.js</jsSourceExclude>
+                                <jsSourceExclude>inflate.js</jsSourceExclude>
+                                <jsSourceExclude>z-worker.js</jsSourceExclude>
+                                <jsSourceExclude>CanvasRenderer.js</jsSourceExclude>
+                                <jsSourceExclude>Projector.js</jsSourceExclude>
+                            </jsSourceExcludes>
+                            <jsEngine>CLOSURE</jsEngine>
+                            <closureCreateSourceMap>true</closureCreateSourceMap>
+                        </configuration>
+                        <goals>
+                            <goal>minify</goal>
+                        </goals>
+                    </execution>
+
                 </executions>
             </plugin>
 

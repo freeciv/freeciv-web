@@ -25,29 +25,30 @@ function init_webgl_renderer()
 {
   // load Three.js dynamically.
   $.ajax({
-    async: false,
-    url: "/javascript/webgl/libs/three.min.js",
-    dataType: "script"
+      async: false,
+      url: "/javascript/webgl/libs/three.min.js",
+      dataType: "script"
+  });
+
+  $.ajax({
+      async: false,
+      url: "/javascript/webgl/libs/zip.js",
+      dataType: "script"
+  });
+
+  $.ajax({
+      async: false,
+      url: "/javascript/webgl/libs/zip-ext.js",
+      dataType: "script"
   });
 
   $.ajax({
     async: false,
-    url: "/javascript/libs/Detector.js",
+    url: "/javascript/webgl/libs/webgl-client.min.js",
     dataType: "script"
   });
 
-  $.ajax({
-    async: false,
-    url: "/javascript/webgl/libs/ColladaLoader.js",
-    dataType: "script"
-  });
-
-  $.ajax({
-    async: false,
-    url: "/javascript/webgl/libs/stats.min.js",
-    dataType: "script"
-  });
-
+  zip.workerScriptsPath = "/javascript/libs/";
 
   if (!Detector.webgl) {
     swal("WebGL not supported by your browser or hardware.");

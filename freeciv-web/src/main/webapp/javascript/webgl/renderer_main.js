@@ -48,7 +48,7 @@ function init_webgl_renderer()
     dataType: "script"
   });
 
-  zip.workerScriptsPath = "/javascript/libs/";
+  zip.workerScriptsPath = "/javascript/webgl/libs/";
 
   if (!Detector.webgl) {
     swal("WebGL not supported by your browser or hardware.");

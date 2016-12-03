@@ -762,6 +762,7 @@ function set_unit_focus(punit)
     current_focus = [];
   } else {
     current_focus[0] = punit;
+    if (renderer == RENDERER_WEBGL) update_unit_position(index_to_tile(punit['tile']));
   }
   update_active_units_dialog();
   update_unit_order_commands();
@@ -778,6 +779,7 @@ function set_unit_focus_and_redraw(punit)
     current_focus = [];
   } else {
     current_focus[0] = punit;
+    if (renderer == RENDERER_WEBGL) update_unit_position(index_to_tile(punit['tile']));
   }
 
   auto_center_on_focus_unit();
@@ -1160,7 +1162,7 @@ function do_map_click(ptile, qtype, first_time_called)
          if (sunits.length == 1) {
           /* A single unit has been clicked with the mouse. */
           var unit = sunits[0];
-	  set_unit_focus_and_activate(unit);
+          set_unit_focus_and_activate(unit);
         } else {
           /* more than one unit is on the selected tile. */
           set_unit_focus_and_redraw(sunits[0]);

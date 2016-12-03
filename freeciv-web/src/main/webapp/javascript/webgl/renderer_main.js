@@ -48,7 +48,10 @@ function init_webgl_renderer()
     dataType: "script"
   });
 
-  zip.workerScriptsPath = "/javascript/webgl/libs/";
+  zip.workerScripts = {
+    deflater: ['/javascript/webgl/libs/z-worker.js', '/javascript/webgl/libs/pako.min.js', '/javascript/webgl/libs/codecs.js'],
+    inflater: ['/javascript/webgl/libs/z-worker.js', '/javascript/webgl/libs/pako.min.js', '/javascript/webgl/libs/codecs.js']
+  };
 
   if (!Detector.webgl) {
     swal("WebGL not supported by your browser or hardware.");

@@ -19,6 +19,7 @@
 
 var webgl_textures = {};
 var webgl_models = {};
+var start_preload = 0;
 
 var load_count = 0;
 var model_files = ["AEGIS Cruiser","Cavalry",         "Helicopter",
@@ -45,7 +46,7 @@ var total_model_count = model_files.length;
 function webgl_preload()
 {
   $.blockUI({ message: "<h2>Downloading textures and models...</h2>" });
-
+  start_preload = new Date().getTime();
   create_flags();
 
   var loadingManager = new THREE.LoadingManager();
@@ -91,6 +92,7 @@ function webgl_preload_models()
 {
   var url = '/3d-models/models.zip';
   zip.createReader(new zip.HttpReader(url), function(zipReader){
+     $.blockUI({ message: "<h2>Uncompressing files and parsing 3D models...</h2>" });
      zipReader.getEntries(function(entries){
        for (var i = 0; i < entries.length; i++) {
          var file = entries[i];
@@ -128,7 +130,10 @@ function load_model(filename, collada_string)
         dae.scale.x = dae.scale.y = dae.scale.z = 11;
         webgl_models[filename] = dae;
         load_count++;
-        if (load_count == total_model_count) webgl_preload_complete();
+        if (load_count == total_model_count) {
+          webgl_preload_complete();
+          console.log("WebGL preloading took: " + (new Date().getTime() - start_preload) + " ms.");
+        }
     });
 
 }

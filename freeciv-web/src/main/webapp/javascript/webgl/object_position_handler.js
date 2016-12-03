@@ -26,6 +26,9 @@ var city_flag_positions = {};
 var unit_flag_positions = {};
 var unit_label_positions = {};
 var unit_activities_positions = {};
+
+var tile_extra_positions = {};
+
 var selected_unit_indicator = null;
 
 /****************************************************************************
@@ -225,6 +228,49 @@ function update_city_position(ptile) {
     // Update of visible city. TODO.
 
   }
+
+}
+
+
+/****************************************************************************
+  Handles tile extras, such as specials, irrigation.
+****************************************************************************/
+function update_tile_extras(ptile) {
+
+  if (tile_extra_positions[ptile['index']] == null) {
+    var height = 5 + ptile['height'] * 100;
+
+    if (tile_has_extra(ptile, EXTRA_IRRIGATION)) {
+      var irrigation = webgl_models["Irrigation"].clone()
+      tile_extra_positions[ptile['index']] = irrigation;
+
+      var pos = map_to_scene_coords(ptile['x'], ptile['y']);
+      irrigation.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
+      irrigation.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 3);
+      irrigation.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
+
+      if (scene != null && irrigation != null) {
+        scene.add(irrigation);
+      }
+    }
+
+    /* TODO: This is a temporary road solution. */
+    if (tile_has_extra(ptile, ROAD_ROAD)) {
+      var road = webgl_models["Road"].clone()
+      tile_extra_positions[ptile['index']] = road;
+
+      var pos = map_to_scene_coords(ptile['x'], ptile['y']);
+      road.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
+      road.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 3);
+      road.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
+
+      if (scene != null && road != null) {
+        scene.add(road);
+      }
+    }
+
+  }
+
 
 }
 

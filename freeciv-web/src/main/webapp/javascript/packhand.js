@@ -171,6 +171,7 @@ function handle_tile_info(packet)
   if (tiles != null) {
     packet['extras'] = new BitVector(packet['extras']);
     tiles[packet['tile']] = $.extend(tiles[packet['tile']], packet);
+    if (renderer = RENDERER_WEBGL) update_tile_extras(tiles[packet['tile']]);
   }
 }
 

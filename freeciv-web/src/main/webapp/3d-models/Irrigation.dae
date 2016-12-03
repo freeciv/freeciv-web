@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <contributor>
+      <author>Blender User</author>
+      <authoring_tool>Blender 2.78.0 commit date:2016-10-24, commit time:12:20, hash:e8299c8</authoring_tool>
+    </contributor>
+    <created>2016-12-03T11:21:09</created>
+    <modified>2016-12-03T11:21:09</modified>
+    <unit name="meter" meter="1"/>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+  <library_images/>
+  <library_effects>
+    <effect id="Material_001-effect">
+      <profile_COMMON>
+        <technique sid="common">
+          <phong>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color sid="ambient">0 0 0 1</color>
+            </ambient>
+            <diffuse>
+              <color sid="diffuse">0.001819051 0.08232488 0.6729619 1</color>
+            </diffuse>
+            <specular>
+              <color sid="specular">0.06726949 0.1681273 0.5 1</color>
+            </specular>
+            <shininess>
+              <float sid="shininess">50</float>
+            </shininess>
+            <transparent opaque="A_ONE">
+              <color>1 1 1 0.430657</color>
+            </transparent>
+            <index_of_refraction>
+              <float sid="index_of_refraction">1</float>
+            </index_of_refraction>
+          </phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_materials>
+    <material id="Material_001-material" name="Material_001">
+      <instance_effect url="#Material_001-effect"/>
+    </material>
+  </library_materials>
+  <library_geometries>
+    <geometry id="Plane-mesh" name="Plane">
+      <mesh>
+        <source id="Plane-mesh-positions">
+          <float_array id="Plane-mesh-positions-array" count="51">-1.285995 0.6376581 0.001999616 0.9920898 0.6516379 -0.009351849 -1.289694 0.8705623 0.01276624 0.9883908 0.8845421 0.001414716 -0.02263545 0.6614543 -0.02293682 0.4160856 0.6481357 -0.006451308 -0.7359227 0.6411311 -6.50237e-4 0.8446328 0.6544764 -0.02310007 -0.1979787 0.6576032 -0.03448098 0.1280835 0.6463845 -0.005001008 -1.109196 0.6456733 0.01256102 -1.281256 -1.378547 -0.007274091 -1.109644 -1.386154 0.003367841 0.9987362 -1.419673 -0.01772272 0.8512791 -1.416835 -0.03147089 -0.01818293 -1.398295 -0.02622944 -0.1935262 -1.402146 -0.03777366</float_array>
+          <technique_common>
+            <accessor source="#Plane-mesh-positions-array" count="17" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Plane-mesh-normals">
+          <float_array id="Plane-mesh-normals-array" count="45">0.0404188 -0.1308083 0.9905834 -0.05942666 -0.004503428 0.9982226 -0.0929141 -0.004321932 0.9956648 -0.06565737 -0.001736998 0.9978408 -0.05744087 -0.0470125 0.9972414 0.03569447 0.02773725 0.9989777 -0.08541327 0.2828052 0.9553669 0.05989444 0.08641237 0.9944574 0.005761682 -0.1342785 0.9909269 -0.09363353 -0.04745948 0.994475 0.005310475 -0.04609364 0.9989231 -0.0488975 -0.4486504 0.8923687 -0.0621016 -0.004736602 0.9980586 -0.09291416 -0.004321932 0.9956648 -0.06565743 -0.001736998 0.9978408</float_array>
+          <technique_common>
+            <accessor source="#Plane-mesh-normals-array" count="15" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="Plane-mesh-vertices">
+          <input semantic="POSITION" source="#Plane-mesh-positions"/>
+        </vertices>
+        <polylist material="Material_001-material" count="15">
+          <input semantic="VERTEX" source="#Plane-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Plane-mesh-normals" offset="1"/>
+          <vcount>3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 </vcount>
+          <p>5 0 7 0 3 0 0 1 12 1 10 1 1 2 14 2 13 2 8 3 15 3 4 3 2 4 0 4 10 4 10 5 6 5 2 5 4 6 9 6 3 6 6 7 8 7 2 7 3 8 2 8 4 8 7 9 1 9 3 9 9 10 5 10 3 10 2 11 8 11 4 11 0 12 11 12 12 12 1 13 7 13 14 13 8 14 16 14 15 14</p>
+        </polylist>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_controllers/>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="Irrigation" name="Irrigation" type="NODE">
+        <matrix sid="transform">0.8959753 0 0 0.2213566 0 0.8959753 0 0.3336371 0 0 0.8959753 -0.01253556 0 0 0 1</matrix>
+        <instance_geometry url="#Plane-mesh" name="Irrigation">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="Material_001-material" target="#Material_001-material"/>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Scene"/>
+  </scene>
+</COLLADA>

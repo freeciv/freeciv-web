@@ -268,6 +268,34 @@ function update_tile_extras(ptile) {
     }
   }
 
+  if (tile_extra_positions[EXTRA_HUT + "." + ptile['index']] == null && tile_has_extra(ptile, EXTRA_HUT)) {
+    /* FIXME: Huts don't work. */
+    var hut = webgl_models["Hut"].clone()
+    tile_extra_positions[EXTRA_HUT + "." + ptile['index']] = hut;
+
+    var pos = map_to_scene_coords(ptile['x'], ptile['y']);
+    hut.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
+    hut.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 3);
+    hut.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
+    if (scene != null && hut != null) {
+      scene.add(hut);
+    }
+  }
+
+  var extra = extras[ptile['resource']];
+  if (extra != null && scene != null && webgl_models[extra['name']] != null) {
+      var extra = webgl_models[extra['name']].clone()
+      tile_extra_positions[extra['id'] + "." + ptile['index']] = extra;
+
+      var pos = map_to_scene_coords(ptile['x'], ptile['y']);
+      extra.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
+      extra.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 3);
+      extra.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
+
+      if (scene != null && extra != null) {
+        scene.add(extra);
+      }
+  }
 
 }
 

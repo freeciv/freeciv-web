@@ -469,6 +469,7 @@ function advance_unit_focus()
   } else {
     /* Couldn't center on a unit, then try to center on a city... */
     current_focus = []; /* Reset focus units. */
+    if (renderer == RENDERER_WEBGL) webgl_clear_unit_focus();
     update_active_units_dialog();
     $("#game_unit_orders_default").hide();
 
@@ -1398,6 +1399,7 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift, the_event)
 
     case 32: // space, will clear selection and goto.
       current_focus = [];
+      if (renderer == RENDERER_WEBGL) webgl_clear_unit_focus();
       goto_active = false;
       $("#canvas_div").css("cursor", "default");
       goto_request_map = {};

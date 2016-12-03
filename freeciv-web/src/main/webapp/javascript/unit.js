@@ -66,6 +66,7 @@ function client_remove_unit(punit)
 {
   if (unit_is_in_focus(punit)) {
     current_focus = [];
+    if (renderer == RENDERER_WEBGL) webgl_clear_unit_focus();
   }
 
   delete units[punit['id']];

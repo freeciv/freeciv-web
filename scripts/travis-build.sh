@@ -116,30 +116,30 @@ cd ${basedir}/scripts/ && sudo -u travis ./start-freeciv-web.sh
 
 cat ${basedir}/logs/*.log 
 
-#echo "============================================"
-#echo "Installing CasperJS for testing"
-#cd ${basedir}/tests
+echo "============================================"
+echo "Installing CasperJS for testing"
+cd ${basedir}/tests
 
-#wget --quiet ${casperjs_url}
-#unzip -qo 1.1.3
-#cd casperjs-casperjs-cd78443
-#ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs
+wget --quiet ${casperjs_url}
+unzip -qo 1.1.3
+cd casperjs-casperjs-cd78443
+ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs
 
-#sleep 10
+sleep 10
 
-#echo "Start testing of Freeciv-web using CasperJS:"
-#cd ${basedir}/tests/
-#xvfb-run casperjs --engine=phantomjs test freeciv-web-tests.js || (>&2 echo "Freeciv-web CasperJS tests failed!" && exit 1)
+echo "Start testing of Freeciv-web using CasperJS:"
+cd ${basedir}/tests/
+xvfb-run casperjs --engine=phantomjs test freeciv-web-tests.js || (>&2 echo "Freeciv-web CasperJS tests failed!" && exit 1)
 
-#echo "Running Freeciv-web server in autogame mode."
-#cp ${basedir}/publite2/pubscript_autogame.serv ${basedir}/publite2/pubscript_singleplayer.serv
-#killall freeciv-web
+echo "Running Freeciv-web server in autogame mode."
+cp ${basedir}/publite2/pubscript_autogame.serv ${basedir}/publite2/pubscript_singleplayer.serv
+killall freeciv-web
 #sleep 20
 #xvfb-run casperjs --engine=phantomjs test freeciv-web-autogame.js || (>&2 echo "Freeciv-web CasperJS autogame tests failed!" && exit 1)
 
-#echo "running pbem unit tests."
-#cd ${basedir}/pbem
-#python3.5 test_pbem.py
+echo "running pbem unit tests."
+cd ${basedir}/pbem
+python3.5 test_pbem.py
 
 #echo "=============================="
 echo "Freeciv-web built, tested and started correctly: Build successful!"

@@ -191,6 +191,7 @@ function render_map_terrain() {
 ****************************************************************************/
 function animate() {
   if (stats != null) stats.begin();
+  if (mapview_slide['active']) update_map_slide_3d();
   maprenderer.render( scene, camera );
   check_request_goto_path();
   if (stats != null) stats.end();

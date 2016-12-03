@@ -90,7 +90,7 @@ function webglOnDocumentMouseUp( e ) {
   if (rightclick) {
     /* right click to recenter. */
     if (!map_select_active || !map_select_setting_enabled) {
-      center_tile_mapcanvas_3d(ptile);
+      enable_mapview_slide_3d(ptile);
       context_menu_active = false;
 
     } else {
@@ -196,7 +196,7 @@ function webglOnMouseWheel(e) {
     camera_dz = new_camera_dz;
   }
 
-  camera_look_at(camera_currect_x, camera_currect_y, camera_currect_z);
+  camera_look_at(camera_current_x, camera_current_y, camera_current_z);
 
 }
 

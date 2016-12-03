@@ -130,8 +130,8 @@ function update_unit_position(ptile) {
         scene.remove(selected_unit_indicator);
         selected_unit_indicator = null;
       }
-      var material = new THREE.MeshBasicMaterial( { color: 0xfeffc5, transparent: true, opacity: 0.5} );
-      var selected_mesh = new THREE.Mesh( new THREE.RingGeometry( 18, 25, 24), material );
+      var material = new THREE.MeshBasicMaterial( { color: 0xfeffc5, transparent: true, opacity: 0.45} );
+      var selected_mesh = new THREE.Mesh( new THREE.RingGeometry( 18, 24, 20), material );
       selected_mesh.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
       selected_mesh.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 11);
       selected_mesh.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);

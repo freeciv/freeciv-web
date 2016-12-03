@@ -215,9 +215,12 @@ function show_city_dialog(pcity)
 
   city_worklist_dialog(pcity);
 
+  var orig_renderer = renderer;
+  renderer = RENDERER_2DCANVAS;
   set_city_mapview_active();
   center_tile_mapcanvas(city_tile(pcity));
   update_map_canvas(0, 0, mapview['store_width'], mapview['store_height']);
+  renderer = orig_renderer;
 
   $("#city_size").html("Population: " + numberWithCommas(city_population(pcity)*1000) + "<br>"
                        + "Size: " + pcity['size'] + "<br>"

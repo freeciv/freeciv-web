@@ -226,10 +226,8 @@ function pick_nation(player_id)
   for (var nation_id in nations) {
     var pnation = nations[nation_id];
     if (pnation['is_playable']) {
-      var flag_url = get_nation_flag_url(pnation);
-      var flag_html = "<img class='pick_nation_flags' src='" + flag_url +"'>";
       nations_html += "<div class='nation_pickme_line' onclick='select_nation(" + nation_id + ");'>"
-             + flag_html + "<div id='nation_" + nation_id + "' class='nation_choice'>" + pnation['adjective'] + "</div></div>";
+             + "<div id='nation_" + nation_id + "' class='nation_choice'>" + pnation['adjective'] + "</div></div>";
       nation_name_list.push(pnation['adjective']);
     }
   }
@@ -256,11 +254,8 @@ function pick_nation(player_id)
 
 
   $("#nation_autocomplete_box").autocomplete({
-      source: nation_name_list
-  });
-
-  $("#nation_autocomplete_box").change(function() {
-    setTimeout(update_nation_selection, 150);
+      source: nation_name_list,
+      close: function (event, ui) { update_nation_selection(); }
   });
 
   if (is_small_screen()) {

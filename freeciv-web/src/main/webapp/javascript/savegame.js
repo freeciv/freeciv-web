@@ -240,7 +240,8 @@ function load_game_check()
     setTimeout(load_game_toggle,3500);
   } else if ($.getUrlVar('action') == "earthload") {
     $.blockUI();
-    loadTimerId = setTimeout("load_game_real('" + $.getUrlVar('savegame') + "');",
+    var savegame_earth_file = $.getUrlVar('savegame').replace("#", "");
+    loadTimerId = setTimeout("load_game_real('" + savegame_earth_file + "');",
                                   1500);
     setTimeout(load_game_toggle,3500);
 

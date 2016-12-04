@@ -26,7 +26,8 @@ var C_S_OVER = 3;       /* Connected with game over. */
 var civclient_state = C_S_INITIAL;
 
 var endgame_player_info = [];
-
+var height_offset = 52;
+var width_offset = 10;
 
 /**************************************************************************
  Sets the client state (initial, pre, running, over etc).

@@ -33,7 +33,6 @@ var fragShader;
 
 var tiletype_terrains = ["lake","coast","floor","arctic","desert","forest","grassland","hills","jungle","mountains","plains","swamp","tundra", "beach"];
 
-var dae;
 var start_webgl;
 
 
@@ -42,47 +41,38 @@ var start_webgl;
 ****************************************************************************/
 function webgl_start_renderer()
 {
+  var new_mapview_width = $(window).width() - width_offset;
+  var new_mapview_height = $(window).height() - height_offset;
+
   container = document.getElementById('canvas_div');
-
-  camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 10000 );
-
+  camera = new THREE.PerspectiveCamera( 45, new_mapview_width / new_mapview_height, 1, 10000 );
   scene = new THREE.Scene();
 
   raycaster = new THREE.Raycaster();
   mouse = new THREE.Vector2();
 
-  var geometry = new THREE.PlaneBufferGeometry( 1000, 1000 );
-  geometry.rotateX( - Math.PI / 2 );
-
-  plane = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial( { visible: false } ) );
-  scene.add( plane );
-
-  objects.push( plane );
-
   // Lights
-
   var ambientLight = new THREE.AmbientLight( 0x606060, 1.0 );
-  scene.add( ambientLight );
+  scene.add(ambientLight);
 
   directionalLight = new THREE.DirectionalLight( 0xffffff, 2.5 );
   directionalLight.position.set( 1, 0.75, 0.5 ).normalize();
   scene.add( directionalLight );
 
   if (Detector.webgl) {
-    /* TODO: make antialias conficurable. */
+    /* TODO: make antialias configurable. */
     maprenderer = new THREE.WebGLRenderer( { antialias: true } );
   } else {
     maprenderer = new THREE.CanvasRenderer();
   }
-  maprenderer.setClearColor( 0x000000 );
-  maprenderer.setPixelRatio( window.devicePixelRatio );
-  maprenderer.setSize( window.innerWidth, window.innerHeight );
-  container.appendChild( maprenderer.domElement );
+  maprenderer.setClearColor(0x000000);
+  maprenderer.setPixelRatio(window.devicePixelRatio );
+  maprenderer.setSize(new_mapview_width, new_mapview_height);
+  container.appendChild(maprenderer.domElement);
 
   if (location.hostname === "localhost" && Detector.webgl) {
     stats = new Stats();
     container.appendChild( stats.dom );
-
     console.log("MAX_FRAGMENT_UNIFORM_VECTORS:" + maprenderer.context.getParameter(maprenderer.context.MAX_FRAGMENT_UNIFORM_VECTORS));
   }
 
@@ -97,23 +87,23 @@ function webgl_start_renderer()
 ****************************************************************************/
 function render_map_terrain() {
   start_webgl = new Date().getTime();
-  var material = new THREE.MeshBasicMaterial( { map: webgl_textures["water_overlay"], overdraw: 0.5, transparent: true, opacity: 0.75, color: 0x5555ff } );
-
   var quality = 32, step = 1024 / quality;
 
-  var geometry = new THREE.PlaneGeometry( 3000, 2000, quality - 1, quality - 1 );
-  geometry.rotateX( - Math.PI / 2 );
-  geometry.translate(1000, 0, 1000);
+  /* Create water mesh with a texture. */
+  var waterGeometry = new THREE.PlaneGeometry( 3000, 2000, 2, 2);
+  waterGeometry.rotateX( - Math.PI / 2 );
+  waterGeometry.translate(1000, 0, 1000);
 
-  for ( var i = 0, l = geometry.vertices.length; i < l; i ++ ) {
+  for ( var i = 0, l = waterGeometry.vertices.length; i < l; i ++ ) {
       var x = i % quality, y = Math.floor( i / quality );
-      geometry.vertices[ i ].y = 50;
+      waterGeometry.vertices[ i ].y = 50;
   }
 
-  mesh = new THREE.Mesh( geometry, material );
-  scene.add( mesh );
+  var waterMaterial = new THREE.MeshBasicMaterial( { map: webgl_textures["water_overlay"], overdraw: 0.5, transparent: true, opacity: 0.75, color: 0x5555ff } );
+  var waterMesh = new THREE.Mesh( waterGeometry, waterMaterial );
+  scene.add(waterMesh);
 
-  /* create a texture which contains one pixel for each map tile, where the color of each pixel
+  /* map_texture: create a texture which contains one pixel for each map tile, where the color of each pixel
     indicates which Freeciv tile type the pixel is. */
   for (var terrain_id in terrains) {
     tiletype_palette.push([terrain_id * 10, 0, 0]);
@@ -166,8 +156,6 @@ function render_map_terrain() {
     var x = i % xquality, y = Math.floor( i / xquality );
     if (heightmap[x] != null && heightmap[x][y] != null) {
       landGeometry.vertices[ i ].y = heightmap[x][y] * 100;
-    } else {
-      //console.log("x: " + x + ", y: " + y + " not found in heightmap.");
     }
 
   }

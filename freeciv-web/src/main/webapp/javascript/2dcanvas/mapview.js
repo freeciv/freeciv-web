@@ -31,9 +31,6 @@ var loaded_images = 0;
 
 var sprites_init = false;
 
-var height_offset = 52;
-var width_offset = 10;
-
 var canvas_text_font = "17px Arial"; // with canvas text support
 
 var fullfog = [];

@@ -5,8 +5,8 @@
       <author>Blender User</author>
       <authoring_tool>Blender 2.78.0 commit date:2016-10-24, commit time:12:20, hash:e8299c8</authoring_tool>
     </contributor>
-    <created>2016-12-03T19:37:23</created>
-    <modified>2016-12-03T19:37:23</modified>
+    <created>2016-12-04T12:53:18</created>
+    <modified>2016-12-04T12:53:18</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
@@ -248,7 +248,7 @@
   <library_visual_scenes>
     <visual_scene id="Scene" name="Scene">
       <node id="Sphere" name="Sphere" type="NODE">
-        <matrix sid="transform">0.2575446 0 0 -0.04604105 0 0.2575446 0 0.0110682 0 0 0.2575446 0.2249217 0 0 0 1</matrix>
+        <matrix sid="transform">0.2575446 0 0 -0.04067725 0 0.2575446 0 0.00450493 0 0 0.2575446 0.1117693 0 0 0 1</matrix>
         <instance_geometry url="#Sphere-mesh" name="Sphere">
           <bind_material>
             <technique_common>
@@ -278,7 +278,7 @@
         </instance_geometry>
       </node>
       <node id="Sphere_003" name="Sphere_003" type="NODE">
-        <matrix sid="transform">0.1453409 0 0 -0.1725202 0 0.1453409 0 0.299415 0 0 0.1453409 0.3431413 0 0 0 1</matrix>
+        <matrix sid="transform">0.1453409 0 0 -0.1989159 0 0.1453409 0 0.3459616 0 0 0.1453409 0.1136029 0 0 0 1</matrix>
         <instance_geometry url="#Sphere_003-mesh" name="Sphere_003">
           <bind_material>
             <technique_common>
@@ -288,7 +288,7 @@
         </instance_geometry>
       </node>
       <node id="Sphere_004" name="Sphere_004" type="NODE">
-        <matrix sid="transform">0.1242798 0 0 -0.1433834 0 0.1242798 0 -0.371057 0 0 0.1242798 0.3022864 0 0 0 1</matrix>
+        <matrix sid="transform">0.1242798 0 0 -0.1362088 0 0.1242798 0 -0.384369 0 0 0.1242798 0.1028097 0 0 0 1</matrix>
         <instance_geometry url="#Sphere_004-mesh" name="Sphere_004">
           <bind_material>
             <technique_common>

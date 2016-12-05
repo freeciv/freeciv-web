@@ -24,8 +24,8 @@
 function map_to_scene_coords(x, y)
 {
   var result = {};
-  result['x'] = Math.floor(-470 + x * 3000 / map['xsize']);
-  result['y'] = Math.floor(30 + y * 2000 / map['ysize']);
+  result['x'] = Math.floor(-470 + x * mapview_model_width / map['xsize']);
+  result['y'] = Math.floor(30 + y * mapview_model_height / map['ysize']);
   return result;
 }
 
@@ -35,8 +35,8 @@ function map_to_scene_coords(x, y)
 function scene_to_map_coords(x, y)
 {
   var result = {};
-  result['x'] = Math.floor((x + 470) * map['xsize'] / 3000);
-  result['y'] = Math.floor((y - 30) * map['ysize'] / 2000);
+  result['x'] = Math.floor((x + 470) * map['xsize'] / mapview_model_width);
+  result['y'] = Math.floor((y - 30) * map['ysize'] / mapview_model_height);
   return result;
 }
 

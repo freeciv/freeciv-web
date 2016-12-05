@@ -275,7 +275,7 @@ function update_tile_extras(ptile) {
 
     var pos = map_to_scene_coords(ptile['x'], ptile['y']);
     hut.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
-    hut.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 3);
+    hut.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 10);
     hut.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
     if (scene != null && hut != null) {
       scene.add(hut);

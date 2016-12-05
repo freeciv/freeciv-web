@@ -84,11 +84,6 @@ function handle_server_join_reply(packet)
       change_ruleset($.getUrlVar('ruleset'));
     }
 
-    if (renderer == RENDERER_WEBGL) {
-      /*FIXME: WebGL renderer currently depends on map being revealed. */
-      send_message_delayed("/set revealmap start", 100);
-    }
-
     if (autostart) {
       if (renderer == RENDERER_WEBGL) {
         $.blockUI({ message: '<h2>Generating terrain map model...</h2>' });
@@ -170,6 +165,7 @@ function handle_tile_info(packet)
 {
   if (tiles != null) {
     packet['extras'] = new BitVector(packet['extras']);
+    if (renderer == RENDERER_WEBGL) webgl_update_tile_known(tiles[packet['tile']], packet);
     tiles[packet['tile']] = $.extend(tiles[packet['tile']], packet);
     if (renderer == RENDERER_WEBGL) update_tile_extras(tiles[packet['tile']]);
   }

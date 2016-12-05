@@ -50,7 +50,7 @@ function map_tiletype_tile_color(map_x, map_y)
 {
   var ptile = map_pos_to_tile(map_x, map_y);
 
-  if (ptile != null && tile_get_known(ptile) != TILE_UNKNOWN) {
+  if (ptile != null && tile_terrain(ptile) != null) {
       return tile_terrain(ptile)['id'];
   }
 

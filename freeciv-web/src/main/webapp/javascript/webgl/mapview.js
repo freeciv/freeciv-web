@@ -33,7 +33,14 @@ var fragShader;
 
 var tiletype_terrains = ["lake","coast","floor","arctic","desert","forest","grassland","hills","jungle","mountains","plains","swamp","tundra", "beach"];
 
+var unknownTerritoryGeometry;
+
 var start_webgl;
+
+var mapview_model_width = 3000;
+var mapview_model_height = 2000;
+var xquality;
+var yquality;
 
 
 /****************************************************************************
@@ -89,17 +96,20 @@ function render_map_terrain() {
   start_webgl = new Date().getTime();
   var quality = 32, step = 1024 / quality;
 
+  mapview_model_width = Math.floor(mapview_model_width * map['xsize'] / 84);
+  mapview_model_height = Math.floor(mapview_model_height * map['ysize'] / 56);
+
   /* Create water mesh with a texture. */
-  var waterGeometry = new THREE.PlaneGeometry( 3000, 2000, 2, 2);
+  var waterGeometry = new THREE.PlaneGeometry( mapview_model_width, mapview_model_height, 2, 2);
   waterGeometry.rotateX( - Math.PI / 2 );
-  waterGeometry.translate(1000, 0, 1000);
+  waterGeometry.translate(Math.floor(mapview_model_height / 2), 0, Math.floor(mapview_model_height / 2));
 
   for ( var i = 0, l = waterGeometry.vertices.length; i < l; i ++ ) {
       var x = i % quality, y = Math.floor( i / quality );
       waterGeometry.vertices[ i ].y = 50;
   }
 
-  var waterMaterial = new THREE.MeshBasicMaterial( { map: webgl_textures["water_overlay"], overdraw: 0.5, transparent: true, opacity: 0.75, color: 0x5555ff } );
+  var waterMaterial = new THREE.MeshBasicMaterial( { map: webgl_textures["water_overlay"], overdraw: 0.5, transparent: true, opacity: 0.65, color: 0x5555ff } );
   var waterMesh = new THREE.Mesh( waterGeometry, waterMaterial );
   scene.add(waterMesh);
 
@@ -142,16 +152,14 @@ function render_map_terrain() {
     terrain_material = new THREE.MeshLambertMaterial( { color: 0x00ff00} );
   }
 
-  var xquality = map.xsize * 4 + 1;
-  var yquality = map.ysize * 4 + 1;
+  xquality = map.xsize * 4 + 1;
+  yquality = map.ysize * 4 + 1;
   var step = 1024 / quality;
 
   /* LandGeometry is a plane representing the landscape of the map. */
-  var landGeometry = new THREE.PlaneGeometry(3000, 2000, xquality - 1, yquality - 1);
+  var landGeometry = new THREE.PlaneGeometry(mapview_model_width, mapview_model_height, xquality - 1, yquality - 1);
   landGeometry.rotateX( - Math.PI / 2 );
-  landGeometry.translate(1000, 0, 1000);
-
-
+  landGeometry.translate(Math.floor(mapview_model_height / 2), 0, Math.floor(mapview_model_height / 2));
   for ( var i = 0, l = landGeometry.vertices.length; i < l; i ++ ) {
     var x = i % xquality, y = Math.floor( i / xquality );
     if (heightmap[x] != null && heightmap[x][y] != null) {
@@ -161,13 +169,35 @@ function render_map_terrain() {
   }
   landGeometry.computeVertexNormals();
   landGeometry.computeMorphNormals();
-
-
   landMesh = new THREE.Mesh( landGeometry, terrain_material );
   scene.add( landMesh );
 
   prerender(landGeometry, xquality);
   add_all_objects_to_scene();
+
+  /* Unknown territory */
+  unknownTerritoryGeometry = new THREE.PlaneGeometry(mapview_model_width, mapview_model_height, xquality - 1, yquality - 1);
+  unknownTerritoryGeometry.rotateX( - Math.PI / 2 );
+  unknownTerritoryGeometry.translate(Math.floor(mapview_model_height / 2), 0, Math.floor(mapview_model_height / 2));
+  for ( var i = 0, l = unknownTerritoryGeometry.vertices.length; i < l; i ++ ) {
+    var x = i % xquality, y = Math.floor( i / xquality );
+    var gx = Math.floor(x / 4);
+    var gy = Math.floor(y / 4);
+    if (heightmap[x] != null && heightmap[x][y] != null) {
+      var ptile = map_pos_to_tile(gx, gy);
+      if (ptile != null && tile_get_known(ptile) != TILE_UNKNOWN) {
+        unknownTerritoryGeometry.vertices[ i ].y = 0;
+      } else {
+        unknownTerritoryGeometry.vertices[ i ].y = heightmap[x][y] * 100 + 20;
+      }
+    }
+  }
+  unknownTerritoryGeometry.computeVertexNormals();
+  unknownTerritoryGeometry.computeMorphNormals();
+  var unknownMaterial = new THREE.MeshBasicMaterial( {color: 0x000000 } );
+  var unknownMesh = new THREE.Mesh( unknownTerritoryGeometry, unknownMaterial );
+  unknownMesh.geometry.dynamic = true;
+  scene.add( unknownMesh );
 
   scene.add(meshes['trees']);
   $.unblockUI();

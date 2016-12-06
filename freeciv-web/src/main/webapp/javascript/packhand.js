@@ -84,6 +84,10 @@ function handle_server_join_reply(packet)
       change_ruleset($.getUrlVar('ruleset'));
     }
 
+    if (renderer == RENDERER_WEBGL) {
+       send_message_delayed("/set fogofwar disabled", 120);
+     }
+
     if (autostart) {
       if (renderer == RENDERER_WEBGL) {
         $.blockUI({ message: '<h2>Generating terrain map model...</h2>' });

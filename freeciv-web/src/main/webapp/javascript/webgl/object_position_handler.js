@@ -269,7 +269,7 @@ function update_tile_extras(ptile) {
   }
 
   if (tile_extra_positions[EXTRA_HUT + "." + ptile['index']] == null && tile_has_extra(ptile, EXTRA_HUT)) {
-    /* FIXME: Huts don't work. */
+    // add hut
     var hut = webgl_models["Hut"].clone()
     tile_extra_positions[EXTRA_HUT + "." + ptile['index']] = hut;
 
@@ -279,6 +279,11 @@ function update_tile_extras(ptile) {
     hut.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
     if (scene != null && hut != null) {
       scene.add(hut);
+    }
+  } else if (tile_extra_positions[EXTRA_HUT + "." + ptile['index']] != null && !tile_has_extra(ptile, EXTRA_HUT)) {
+    // remove hut
+    if (scene != null) {
+      scene.remove(tile_extra_positions[EXTRA_HUT + "." + ptile['index']]);
     }
   }
 

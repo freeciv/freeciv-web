@@ -25,6 +25,7 @@ var ai_skill_level = 2;
 var nation_select_id = -1;
 var metamessage_changed = false;
 var logged_in_with_password = false;
+var antialiasing_setting = true;
 
 /****************************************************************************
   ...
@@ -415,7 +416,13 @@ function pregame_settings()
   $("<div id='pregame_settings'></div>").appendTo("div#pregame_page");
 
 
-  var dhtml = "<table id='settings_table'>" +
+  var dhtml = "<div id='pregame_settings_tabs'>" +
+      "   <ul>" +
+      "     <li><a href='#pregame_settings_tabs-1'>Game</a></li>" +
+      "     <li><a href='#pregame_settings_tabs-2'>3D WebGL</a></li>" +
+      "     <li><a href='#pregame_settings_tabs-3'>Other</a></li>" +
+      "   </ul>" +
+      "<div id='pregame_settings_tabs-1'><table id='settings_table'> " +
   	  "<tr title='Set metaserver info line'><td>Game title:</td>" +
 	  "<td><input type='text' name='metamessage' id='metamessage' size='28' maxlength='42'></td></tr>" +
 	  "<tr title='Enables music'><td>Music:</td>" +
@@ -467,14 +474,26 @@ function pregame_settings()
 	  "<option value='classic'>Classic</option>" +
 	  "<option value='civ2civ3'>Civ2Civ3</option>" +
       "<option value='webperimental'>Webperimental</option>" +
-	  "</select></td></tr>"+
-	  "<tr id='speech_enabled'><td id='speech_label'></td>" +
-               "<td><input type='checkbox' id='speech_setting'>Enable speech audio messages</td></tr>" +
-	  "<tr id='voice_row'><td id='voice_label'></td>" +
-               "<td><select name='voice' id='voice'></select></td></tr>" +
-          "</table><br>" +
+	  "</select></td></tr></table><br>"+
 	  "<span id='settings_info'><i>Freeciv-web can be customized using the command line in many " +
-          "other ways also. Type /help in the command line for more information.</i></span>"
+          "other ways also. Type /help in the command line for more information.</i></span></div>" +
+
+      "<div id='pregame_settings_tabs-2'>"+
+      "<br><span id='settings_info'><i>The 3D WebGL version of Freeciv-web is under development and can be tested " +
+                "by clicking on the \"Single Player 3D Beta\" button on the main page. 3D required a fast computer " +
+                "with 3D graphics card. Here you can configure it:</i></span><br><br>" +
+	    "<table id='settings_table'><tr id='3d_antialiasing_enabled'><td id='3d_antialiasing_label' style='min-width: 150px;'></td>" +
+        "<td><input type='checkbox' id='3d_antialiasing_setting' checked>Enable antialiasing (game looks nicer, but is slower)</td></tr>" +
+        "</table>" +
+      "</div>" +
+
+      "<div id='pregame_settings_tabs-3'>" +
+	    "<table id='settings_table'><tr id='speech_enabled'><td id='speech_label'></td>" +
+        "<td><input type='checkbox' id='speech_setting'>Enable speech audio messages</td></tr>" +
+	    "<tr id='voice_row'><td id='voice_label'></td>" +
+        "<td><select name='voice' id='voice'></select></td></tr>" +
+        "</table>" +
+      "</div>"
 	  ;
   $(id).html(dhtml);
 
@@ -489,8 +508,9 @@ function pregame_settings()
 					$("#pregame_settings").dialog('close');
 				}
 			  }
-
   });
+
+  $("#pregame_settings_tabs").tabs();
 
   if (game_info != null) {
     $("#aifill").val(game_info['aifill']);
@@ -549,6 +569,19 @@ function pregame_settings()
   $("#select_multiple_units_setting").prop("checked", map_select_setting_enabled);
   $("#select_multiple_units_area").prop("title", "Select multiple units with right-click and drag");
   $("#select_multiple_units_label").prop("innerHTML", "Select multiple units with right-click and drag");
+
+  $("#3d_antialiasing_label").prop("innerHTML", "Antialiasing:");
+
+  var stored_antialiasing_setting = simpleStorage.get("antialiasing_setting", "");
+  if (stored_antialiasing_setting != null && stored_antialiasing_setting == "false") {
+      $("#3d_antialiasing_setting").prop("checked", false);
+      antialiasing_setting = false;
+  }
+
+  $('#3d_antialiasing_setting').change(function() {
+    antialiasing_setting = !antialiasing_setting;
+    simpleStorage.set("antialiasing_setting", antialiasing_setting ? "true" : "false");
+  });
 
   if (is_speech_supported()) {
     $("#speech_setting").prop("checked", speech_enabled);

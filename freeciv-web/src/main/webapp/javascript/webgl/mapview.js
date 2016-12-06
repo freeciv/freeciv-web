@@ -170,7 +170,8 @@ function render_map_terrain() {
     if (heightmap[x] != null && heightmap[x][y] != null) {
       landGeometry.vertices[ i ].y = heightmap[x][y] * 100;
     }
-
+    if (x == xquality - 1 && landGeometry.vertices[ i ].y >= 54) landGeometry.vertices[ i ].y = 54;
+    if (y == yquality - 1 && landGeometry.vertices[ i ].y >= 54) landGeometry.vertices[ i ].y = 54;
   }
   landGeometry.computeVertexNormals();
   landGeometry.computeMorphNormals();
@@ -196,6 +197,9 @@ function render_map_terrain() {
         unknownTerritoryGeometry.vertices[ i ].y = heightmap[x][y] * 100 + 20;
       }
     }
+
+    if (x == xquality - 1) unknownTerritoryGeometry.vertices[ i ].x += 50;
+    if (y == yquality - 1) unknownTerritoryGeometry.vertices[ i ].z += 50;
   }
   unknownTerritoryGeometry.computeVertexNormals();
   unknownTerritoryGeometry.computeMorphNormals();

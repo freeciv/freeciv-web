@@ -67,7 +67,8 @@ function webgl_start_renderer()
   scene.add( directionalLight );
 
   if (Detector.webgl) {
-    var enable_antialiasing = true;
+    // Antialiasing is enabled by default for full desktop version only (not mobile since they can be slow).
+    var enable_antialiasing = !is_small_screen();
     var stored_antialiasing_setting = simpleStorage.get("antialiasing_setting", "");
     if (stored_antialiasing_setting != null && stored_antialiasing_setting == "false") {
       enable_antialiasing = false;

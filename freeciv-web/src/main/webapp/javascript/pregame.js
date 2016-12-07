@@ -576,7 +576,12 @@ function pregame_settings()
   if (stored_antialiasing_setting != null && stored_antialiasing_setting == "false") {
       $("#3d_antialiasing_setting").prop("checked", false);
       antialiasing_setting = false;
+  } else if (is_small_screen()) {
+    // antialiasing is disabled by default on mobile, since they are typically slow devices.
+    antialiasing_setting = false;
+    simpleStorage.set("antialiasing_setting", "false");
   }
+
 
   $('#3d_antialiasing_setting').change(function() {
     antialiasing_setting = !antialiasing_setting;

@@ -110,12 +110,12 @@
             <plugin>
                 <groupId>com.samaxes.maven</groupId>
                 <artifactId>minify-maven-plugin</artifactId>
-                <version>1.7.4</version>
+                <version>1.7.6</version>
                 <dependencies>
                     <dependency>
                         <groupId>com.google.javascript</groupId>
                         <artifactId>closure-compiler</artifactId>
-                        <version>v20151216</version>
+                        <version>v20161201</version>
                     </dependency>
                 </dependencies>
                 <executions>
@@ -148,10 +148,7 @@
                                 <jsSourceExclude>frontpage.js</jsSourceExclude>
                                 <jsSourceExclude>libs/jquery.min.js</jsSourceExclude>
                                 <jsSourceExclude>libs/bootstrap.min.js</jsSourceExclude>
-                                <jsSourceExclude>libs/CanvasRenderer.js</jsSourceExclude>
-                                <jsSourceExclude>libs/Projector.js</jsSourceExclude>
                                 <jsSourceExclude>libs/Detector.js</jsSourceExclude>
-                                <jsSourceExclude>libs/FlyControls.js</jsSourceExclude>
                                 <jsSourceExclude>tileset_config*</jsSourceExclude>
                                 <jsSourceExclude>tileset_spec*</jsSourceExclude>
                             </jsSourceExcludes>

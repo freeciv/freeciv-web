@@ -48,24 +48,15 @@ function init_webgl_renderer()
     dataType: "script"
   });
 
+  if (!Detector.webgl) {
+    swal("3D WebGL not supported by your browser or you don't have a 3D graphics card. Please go back and try the 2D version instead. ");
+    return;
+  }
+
   zip.workerScripts = {
     deflater: ['/javascript/webgl/libs/z-worker.js', '/javascript/webgl/libs/pako.min.js', '/javascript/webgl/libs/codecs.js'],
     inflater: ['/javascript/webgl/libs/z-worker.js', '/javascript/webgl/libs/pako.min.js', '/javascript/webgl/libs/codecs.js']
   };
-
-  if (!Detector.webgl) {
-    swal("WebGL not supported by your browser or hardware.");
-    $.ajax({
-        async: false,
-        url: "/javascript/webgl/libs/CanvasRenderer.js",
-        dataType: "script"
-    });
-    $.ajax({
-            async: false,
-            url: "/javascript/webgl/libs/Projector.js",
-            dataType: "script"
-    });
-  }
 
   /* Loads the two tileset definition files */
   $.ajax({

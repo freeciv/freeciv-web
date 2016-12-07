@@ -165,7 +165,7 @@ Developers interested in Freeciv-web
 
 If you want to contibute to Freeciv-web, see the [Freeciv bugs on gna.org](https://gna.org/bugs/index.php?go_report=Apply&group=freeciv&func=browse&set=custom&msort=0&report_id=100&advsrch=0&status_id=1&resolution_id=0&assigned_to=0&category_id=117) and the [TODO file](TODO) for 
 some tasks you can work on. Pull requests on Github is welcome! Please submit changes to the develop branch. 
- 
+  
 
 Contributors to Freeciv-web
 ---------------------------

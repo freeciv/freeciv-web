@@ -31,7 +31,7 @@ function prerender(landGeometry, xquality) {
     var gx = Math.round(x / 4 - 0.5);
     var gy = Math.round(y / 4 - 0.5);
     var ptile = map_pos_to_tile(gx, gy);
-    if (ptile != null && tile_get_known(ptile) != TILE_UNKNOWN) {
+    if (ptile != null) {
       var terrain_name = tile_terrain(ptile).name;
       var add_tree = false;
       if (terrain_name == "Forest" || terrain_name == "Jungle") {

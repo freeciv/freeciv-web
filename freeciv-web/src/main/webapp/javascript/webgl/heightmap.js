@@ -110,7 +110,8 @@ function create_heightmap()
           sum += heightmap_tiles[coords.x][coords.y] / distance / distance;
           norm += 1. / distance / distance;
         }
-        heightmap[x][y] = sum / norm;
+        // set final heightmap value, and add some random noise.
+        heightmap[x][y] = (sum / norm) + ((Math.random() - 0.5) / 60);
       }
     }
   }

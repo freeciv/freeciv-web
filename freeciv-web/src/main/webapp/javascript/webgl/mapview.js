@@ -95,7 +95,7 @@ function webgl_start_renderer()
 
 
   maprenderer.setClearColor(0x000000);
-  maprenderer.setPixelRatio(window.devicePixelRatio );
+  maprenderer.setPixelRatio(window.devicePixelRatio);
   maprenderer.setSize(new_mapview_width, new_mapview_height);
   container.appendChild(maprenderer.domElement);
 
@@ -144,6 +144,8 @@ function render_map_terrain() {
                     generate_map_tiletype_grid(),
                     tiletype_palette);
   var map_texture = new THREE.Texture();
+  map_texture.magFilter = THREE.NearestFilter;
+  map_texture.minFilter = THREE.NearestFilter;
   map_texture.image = document.getElementById("map_tiletype_grid");
   map_texture.needsUpdate = true;
 

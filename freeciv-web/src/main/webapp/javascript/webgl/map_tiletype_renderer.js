@@ -17,7 +17,7 @@
 
 ***********************************************************************/
 
-var map_tiletype_resolution = 2048;
+var map_tiletype_resolution = 4096;
 var tiletype_palette = [];
 
 /****************************************************************************
@@ -25,7 +25,7 @@ var tiletype_palette = [];
 ****************************************************************************/
 function generate_map_tiletype_grid() {
   var row, col;
-
+  var start_tiletype = new Date().getTime();
   // The grid of points that make up the image.
   var grid = Array(map_tiletype_resolution);
   for (row = 0; row < map_tiletype_resolution ; row++) {
@@ -39,6 +39,18 @@ function generate_map_tiletype_grid() {
       grid[x][y] = map_tiletype_tile_color(gy, gx);
     }
   }
+
+  for (var i = 0; i < 2; i++) {
+    for (var x = 0; x < map_tiletype_resolution - 2; x++) {
+      for (var y = 0; y < map_tiletype_resolution - 2; y++) {
+        if (Math.random() >= 0.6) {
+          grid[x][y] = grid[x + 2][y + 2];
+        }
+      }
+    }
+  }
+
+  console.log("generate_map_tiletype_grid took: " + (new Date().getTime() - start_tiletype) + " ms.");
   return grid;
 }
 

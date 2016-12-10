@@ -99,9 +99,9 @@ function webgl_preload_models()
          handle_zip_file(file['filename'].replace(".dae", ""), file);
        }
      });
-  }, function(){
+  }, function(message){
     swal("Unable to download models. Please reload the page and try again.");
-    console.error("Problem downloading models.zip");
+    console.error("Problem downloading models.zip. Error message: " + message);
   });
 
 }

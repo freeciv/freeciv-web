@@ -240,7 +240,7 @@ function control_init()
 ****************************************************************************/
 function is_touch_device() 
 {
-  if(('ontouchstart' in window) || 'onmsgesturechange' in window
+  if(!cardboard_vr_enabled && ('ontouchstart' in window) || 'onmsgesturechange' in window
       || window.DocumentTouch && document instanceof DocumentTouch) {
     return true;
   } else {

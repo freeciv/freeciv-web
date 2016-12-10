@@ -179,8 +179,7 @@
                                 <jsSourceExclude>deflate.js</jsSourceExclude>
                                 <jsSourceExclude>inflate.js</jsSourceExclude>
                                 <jsSourceExclude>z-worker.js</jsSourceExclude>
-                                <jsSourceExclude>CanvasRenderer.js</jsSourceExclude>
-                                <jsSourceExclude>Projector.js</jsSourceExclude>
+                                <jsSourceExclude>StereoEffect.js</jsSourceExclude>
                             </jsSourceExcludes>
                             <jsEngine>CLOSURE</jsEngine>
                             <closureCreateSourceMap>true</closureCreateSourceMap>

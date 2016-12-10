@@ -19,6 +19,8 @@
 
 var container, stats;
 var scene, maprenderer;
+var stereoEffect;
+var cardboard_vr_enabled = false;
 
 var plane, cube;
 var mouse, raycaster, isShiftDown = false;
@@ -78,6 +80,19 @@ function webgl_start_renderer()
   } else {
     maprenderer = new THREE.CanvasRenderer();
   }
+
+  if (cardboard_vr_enabled) {
+    $.ajax({
+      async: false,
+      url: "/javascript/webgl/libs/StereoEffect.js",
+      dataType: "script"
+    });
+    stereoEffect = new THREE.StereoEffect(maprenderer);
+    stereoEffect.setSize(new_mapview_width, new_mapview_height);
+    camera_dy = 300;
+  }
+
+
   maprenderer.setClearColor(0x000000);
   maprenderer.setPixelRatio(window.devicePixelRatio );
   maprenderer.setSize(new_mapview_width, new_mapview_height);
@@ -220,7 +235,13 @@ function render_map_terrain() {
 function animate() {
   if (stats != null) stats.begin();
   if (mapview_slide['active']) update_map_slide_3d();
-  maprenderer.render( scene, camera );
+
+  if (!cardboard_vr_enabled) {
+    maprenderer.render(scene,camera );
+  } else {
+    stereoEffect.render(scene, camera);
+  }
+
   check_request_goto_path();
   if (stats != null) stats.end();
   requestAnimationFrame( animate );

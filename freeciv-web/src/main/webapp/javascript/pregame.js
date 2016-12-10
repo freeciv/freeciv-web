@@ -484,6 +484,9 @@ function pregame_settings()
                 "with 3D graphics card. Here you can configure it:</i></span><br><br>" +
 	    "<table id='settings_table'><tr id='3d_antialiasing_enabled'><td id='3d_antialiasing_label' style='min-width: 150px;'></td>" +
         "<td><input type='checkbox' id='3d_antialiasing_setting' checked>Enable antialiasing (game looks nicer, but is slower)</td></tr>" +
+        "<tr id='cardboard_vr_enabled'><td id='cardboard_vr_label' style='min-width: 150px;'></td>" +
+                "<td><input type='checkbox' id='cardboard_vr_setting'>Enable Virtual reality glasses with Google Cardboard. You can use " +
+                "Google Cardboard glasses with your mobile phone, then connect a bluetooth mouse to your phone for controls. BETA!</td></tr>" +
         "</table>" +
       "</div>" +
 
@@ -749,6 +752,13 @@ function pregame_settings()
       }
   });
 
+  $("#cardboard_vr_label").prop("innerHTML", "3D Virtual Reality:");
+
+  $('#cardboard_vr_setting').change(function() {
+    cardboard_vr_enabled = !cardboard_vr_enabled;
+  });
+
+
   $('#speech_setting').change(function() {
     if ($('#speech_setting').prop('checked')) {
       speech_enabled = true;
@@ -812,7 +822,7 @@ function show_intro_dialog(title, message) {
   if (renderer == RENDERER_WEBGL) {
     intro_html += "<span style='color: red;'>BETA TEST: The 3D WebGL version of Freeciv-web which you are currently using is an unstable BETA version. "
                + "It is not complete and contains many bugs. If you are looking for a stable fullly playable game, then go back and try the 2D version. "
-               + "Please report bugs and feedback in the 3D WebGL on the forum. Enjoy the unstable 3D WebGL version!</span>";
+               + "Please report bugs and feedback in the 3D WebGL on the forum. Enjoy!</span>";
   }
   $("#dialog").html(intro_html);
   var stored_username = simpleStorage.get("username", "");
@@ -844,6 +854,9 @@ function show_intro_dialog(title, message) {
 			  {
 				  text : "Start Game",
 				  click : function() {
+                     if (is_touch_device() || is_small_screen()) {
+                       BigScreen.toggle();
+                     }
 					dialog_close_trigger = "button";
 					autostart = true;
 					validate_username_callback();
@@ -853,6 +866,9 @@ function show_intro_dialog(title, message) {
 			  {
 				  text : $.getUrlVar('action') == "load" ? "Load games" : "Customize Game",
 				  click : function() {
+                    if (is_touch_device() || is_small_screen()) {
+                      BigScreen.toggle();
+                    }
 					dialog_close_trigger = "button";
 					validate_username_callback();
 				},
@@ -913,7 +929,6 @@ function validate_username_callback()
         if (validate_username()) {
           if (!is_touch_device()) $("#pregame_text_input").focus();
           $("#dialog").dialog('close');
-          if (is_touch_device() || is_small_screen()) BigScreen.toggle();
         }
       } else {
         username = $("#username_req").val().trim();
@@ -937,7 +952,6 @@ function validate_username_callback()
                  if (validate_username()) {
                    if (!is_touch_device()) $("#pregame_text_input").focus();
                    $("#dialog").dialog('close');
-                   if (is_touch_device() || is_small_screen()) BigScreen.toggle();
                  }
                  logged_in_with_password = true;
                } else {

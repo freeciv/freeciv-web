@@ -176,7 +176,7 @@ function webglOnMouseWheel(e) {
   var new_camera_dy;
   var new_camera_dz;
 
-  if(e.originalEvent.wheelDelta /120 > 0) {
+  if(e.originalEvent.wheelDelta / 120 > 0) {
     // zoom in
     new_camera_dy = camera_dy - 60;
     new_camera_dx = camera_dx - 45;

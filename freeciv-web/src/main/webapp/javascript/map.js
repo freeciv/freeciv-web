@@ -376,13 +376,17 @@ function dir_ccw(dir)
 }
 
 /**************************************************************************
- ...
+ Removes goto lines and clears goto tiles.
 **************************************************************************/
 function clear_goto_tiles()
 {
-  for (var x = 0; x < map['xsize']; x++) {
-    for (var y = 0; y < map['ysize']; y++) {
-      tiles[x + y * map['xsize']]['goto_dir'] = null;
+  if (renderer == RENDERER_2DCANVAS) {
+    for (var x = 0; x < map['xsize']; x++) {
+      for (var y = 0; y < map['ysize']; y++) {
+        tiles[x + y * map['xsize']]['goto_dir'] = null;
+      }
     }
+  } else {
+    if (scene != null && goto_line != null) scene.remove(goto_line);
   }
 }

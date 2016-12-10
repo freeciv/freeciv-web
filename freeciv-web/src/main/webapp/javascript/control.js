@@ -2189,17 +2189,21 @@ function update_goto_path(goto_packet)
   var ptile = t0;
   var goaltile = index_to_tile(goto_packet['dest']);
 
-  for (var i = 0; i < goto_packet['dir'].length; i++) {
-    if (ptile == null) break;
-    var dir = goto_packet['dir'][i];
+  if (renderer == RENDERER_2DCANVAS) {
+    for (var i = 0; i < goto_packet['dir'].length; i++) {
+      if (ptile == null) break;
+      var dir = goto_packet['dir'][i];
 
-    if (dir == -1) {
-      /* Assume that this means refuel. */
-      continue;
+      if (dir == -1) {
+        /* Assume that this means refuel. */
+        continue;
+      }
+
+      ptile['goto_dir'] = dir;
+      ptile = mapstep(ptile, dir);
     }
-
-    ptile['goto_dir'] = dir;
-    ptile = mapstep(ptile, dir);
+  } else {
+    webgl_render_goto_line(ptile, goto_packet['dir']);
   }
 
   current_goto_turns = goto_packet['turns'];

@@ -78,7 +78,8 @@ function webgl_start_renderer()
 
     maprenderer = new THREE.WebGLRenderer( { antialias: enable_antialiasing } );
   } else {
-    maprenderer = new THREE.CanvasRenderer();
+    swal("3D WebGL not supported by your browser or you don't have a 3D graphics card. Please go back and try the 2D version instead. ");
+    return;
   }
 
   if (cardboard_vr_enabled) {

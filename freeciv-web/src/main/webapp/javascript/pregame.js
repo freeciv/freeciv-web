@@ -583,6 +583,7 @@ function pregame_settings()
     // antialiasing is disabled by default on mobile, since they are typically slow devices.
     antialiasing_setting = false;
     simpleStorage.set("antialiasing_setting", "false");
+    $("#3d_antialiasing_setting").prop("checked", false);
   }
 
 

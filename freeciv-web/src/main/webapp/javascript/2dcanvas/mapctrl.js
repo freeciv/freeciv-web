@@ -30,6 +30,24 @@ var map_select_y;
 var mouse_touch_started_on_unit = false;
 
 /****************************************************************************
+  Init 2D mapctrl
+****************************************************************************/
+function mapctrl_init_2d()
+{
+  // Register keyboard and mouse listener using JQuery.
+  $("#canvas").mouseup(mapview_mouse_click);
+  $("#canvas").mousedown(mapview_mouse_down);
+  $(window).mousemove(mouse_moved_cb);
+
+  if (is_touch_device()) {
+    $('#canvas').bind('touchstart', mapview_touch_start);
+    $('#canvas').bind('touchend', mapview_touch_end);
+    $('#canvas').bind('touchmove', mapview_touch_move);
+  }
+
+}
+
+/****************************************************************************
   Triggered when the mouse button is clicked UP on the mapview canvas.
 ****************************************************************************/
 function mapview_mouse_click(e)

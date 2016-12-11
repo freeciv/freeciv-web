@@ -35,8 +35,8 @@ function map_to_scene_coords(x, y)
 function scene_to_map_coords(x, y)
 {
   var result = {};
-  result['x'] = Math.floor((x + 470) * map['xsize'] / mapview_model_width);
-  result['y'] = Math.floor((y - 30) * map['ysize'] / mapview_model_height);
+  result['x'] = Math.floor((x + 500) * map['xsize'] / mapview_model_width);
+  result['y'] = Math.floor((y) * map['ysize'] / mapview_model_height);
   return result;
 }
 
@@ -46,20 +46,20 @@ function scene_to_map_coords(x, y)
 ****************************************************************************/
 function webgl_canvas_pos_to_tile(x, y) {
 
-  mouse.set( ( x / window.innerWidth ) * 2 - 1, - ( y / window.innerHeight ) * 2 + 1 );
+  mouse.set( ( x / $('#canvas_div').width() ) * 2 - 1, - ( y / $('#canvas_div').height() ) * 2 + 1 );
 
   raycaster.setFromCamera( mouse, camera );
 
   var intersects = raycaster.intersectObjects( scene.children );
 
-  if ( intersects.length > 0 ) {
-    var intersect = intersects[ 0 ];
-    var pos = scene_to_map_coords(intersect.point.x, intersect.point.z)
+  for (var i = 0; i < intersects.length; i++) {
+    var intersect = intersects[i];
+    var pos = scene_to_map_coords(intersect.point.x, intersect.point.z);
     var ptile = map_pos_to_tile(pos['x'], pos['y']);
-    return ptile;
-  } else {
-    return null;
+    if (ptile != null) return ptile;
   }
+
+  return null;
 }
 
 /****************************************************************************

@@ -20,25 +20,8 @@
 var webgl_textures = {};
 var webgl_models = {};
 var start_preload = 0;
-
+var total_model_count = 0;
 var load_count = 0;
-var model_files = ["AEGIS Cruiser","Cavalry",         "Helicopter",
-                   "Alpine Troops","Chariot",         "Horsemen",      "Riflemen",
-                   "Archers","city_1",          "Howitzer",      "Settlers",
-                   "Armor","Cruise Missile",  "Ironclad",      "Spy",
-                   "Artillery","Cruiser","Knights","Stealth Bomber",
-                   "AWACS","Destroyer","Legion","Stealth Fighter",
-                   "Battleship","Diplomat","Marines","Submarine",
-                   "Bomber","Dragoons","Mech. Inf.","Transport",
-                   "Engineers","Musketeers","Trireme",
-                   "Cannon","Explorer","Nuclear","Warriors",
-                   "Caravan","Fighter","Paratroopers","Workers",
-                   "Caravel","Freight","Partisan",
-                   "Carrier","Frigate","Phalanx",
-                   "Catapult","Galleon","Pikemen"];
-// FIXME: don't hardcode the units.
-
-var total_model_count = model_files.length;
 
 /****************************************************************************
   Preload textures and models
@@ -94,6 +77,7 @@ function webgl_preload_models()
   zip.createReader(new zip.HttpReader(url), function(zipReader){
      $.blockUI({ message: "<h2>Uncompressing files and parsing 3D models...</h2>" });
      zipReader.getEntries(function(entries){
+       total_model_count = entries.length;
        for (var i = 0; i < entries.length; i++) {
          var file = entries[i];
          handle_zip_file(file['filename'].replace(".dae", ""), file);
@@ -145,8 +129,17 @@ function create_flags()
 {
   for (var sprite_key in sprites) {
     if (sprite_key.substring(0,2) == "f.") {
-      var flagGeometry = new THREE.PlaneGeometry( 14, 8 );
-      var texture = new THREE.CanvasTexture(sprites[sprite_key]);
+      var flagGeometry = new THREE.PlaneGeometry( 14, 10 );
+      /* resize flag to 32x16, since that is required by Three.js*/
+      var fcanvas = document.createElement("canvas");
+      fcanvas.width = 32;
+      fcanvas.height = 16;
+      var fcontext = fcanvas.getContext("2d");
+      fcontext.drawImage(sprites[sprite_key], 0, 0,
+                sprites[sprite_key].width, sprites[sprite_key].height,
+                0,0,32,16);
+
+      var texture = new THREE.CanvasTexture(fcanvas);
       var material = new THREE.MeshBasicMaterial( { map: texture, overdraw: 0.5 } );
       meshes[sprite_key] = new THREE.Mesh(flagGeometry, material);
     }

@@ -62,7 +62,7 @@ function update_unit_position(ptile) {
       return;
     }
 
-    var new_unit = webgl_models[unit_type_name].clone()
+    var new_unit = webgl_models[unit_type_name].clone();
     unit_positions[ptile['index']] = new_unit;
     var pos = map_to_scene_coords(ptile['x'], ptile['y']);
     new_unit.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
@@ -80,7 +80,7 @@ function update_unit_position(ptile) {
       unit_flag_positions[ptile['index']] = new_flag;
       var fpos = map_to_scene_coords(ptile['x'], ptile['y']);
       new_flag.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10);
-      new_flag.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 10);
+      new_flag.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 14);
       new_flag.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
       new_flag.rotation.y = Math.PI / 4;
       if (scene != null && new_flag != null) {
@@ -155,7 +155,7 @@ function update_unit_position(ptile) {
       return;
     }
 
-    var new_unit = webgl_models[unit_type_name].clone()
+    var new_unit = webgl_models[unit_type_name].clone();
     unit_positions[ptile['index']] = new_unit;
     unit_positions[ptile['index']]['unit_type'] = unit_type_name;
 
@@ -219,7 +219,7 @@ function update_city_position(ptile) {
 
     var text = create_city_label(pcity['name']);
     text.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] + 5);
-    text.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 45);
+    text.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 47);
     text.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 5);
     text.rotation.y = Math.PI / 4;
     if (scene != null) scene.add(text);
@@ -234,7 +234,7 @@ function update_city_position(ptile) {
 
 
 /****************************************************************************
-  Handles tile extras, such as specials, irrigation.
+  Handles tile extras, such as specials, irrigation, mine.
 ****************************************************************************/
 function update_tile_extras(ptile) {
 
@@ -250,6 +250,19 @@ function update_tile_extras(ptile) {
     irrigation.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
     if (scene != null && irrigation != null) {
       scene.add(irrigation);
+    }
+  }
+
+  if (tile_extra_positions[EXTRA_MINE + "." + ptile['index']] == null && tile_has_extra(ptile, EXTRA_MINE)) {
+    var mine = webgl_models["Mine"].clone()
+    tile_extra_positions[EXTRA_MINE + "." + ptile['index']] = mine;
+
+    var pos = map_to_scene_coords(ptile['x'], ptile['y']);
+    mine.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
+    mine.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 3);
+    mine.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
+    if (scene != null && mine != null) {
+      scene.add(mine);
     }
   }
 

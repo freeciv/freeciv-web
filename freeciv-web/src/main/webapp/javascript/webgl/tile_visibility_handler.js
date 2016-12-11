@@ -40,7 +40,7 @@ function webgl_update_tile_known(old_tile, new_tile)
       if (tile_get_known(new_tile) != TILE_UNKNOWN) {
         unknownTerritoryGeometry.vertices[ i ].y = 0;
       } else {
-        unknownTerritoryGeometry.vertices[ i ].y = heightmap[x][y] * 100 + 24;
+        unknownTerritoryGeometry.vertices[ i ].y = heightmap[x][y] * 100 + 26;
       }
       unknownTerritoryGeometry.verticesNeedUpdate = true;
     }

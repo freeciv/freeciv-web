@@ -57,19 +57,16 @@ var has_movesleft_warning_been_shown = false;
 ****************************************************************************/
 function control_init()
 {
-  // Register keyboard and mouse listener using JQuery.
-  $(document).keydown (keyboard_listener);
-  $("#canvas").mouseup(mapview_mouse_click);
-  $("#canvas").mousedown(mapview_mouse_down);
-  $(window).mousemove(mouse_moved_cb);
+
+  if (renderer == RENDERER_2DCANVAS) {
+    mapctrl_init_2d();
+  } else {
+    init_webgl_mapctrl();
+  }
+
+  $(document).keydown(keyboard_listener);
   $(window).resize(mapview_window_resized);
   $(window).bind('orientationchange resize', orientation_changed);
-
-  if (is_touch_device()) {
-    $('#canvas').bind('touchstart', mapview_touch_start);
-    $('#canvas').bind('touchend', mapview_touch_end);
-    $('#canvas').bind('touchmove', mapview_touch_move);
-  }
 
   $("#turn_done_button").click(send_end_turn);
   if (!is_touch_device()) $("#turn_done_button").tooltip();
@@ -278,10 +275,13 @@ function mouse_moved_cb(e)
       mouse_y = e.clientY;
     }
   }
-  if (active_city == null && mapview_canvas != null
+  if (renderer == RENDERER_2DCANVAS && active_city == null && mapview_canvas != null
       && $("#canvas").length) {
     mouse_x = mouse_x - $("#canvas").offset().left;
     mouse_y = mouse_y - $("#canvas").offset().top;
+  } else if (renderer == RENDERER_WEBGL && active_city == null && $("#canvas_div").length) {
+    mouse_x = mouse_x - $("#canvas_div").offset().left;
+    mouse_y = mouse_y - $("#canvas_div").offset().top;
   } else if (active_city != null && city_canvas != null
              && $("#city_canvas").length) {
     mouse_x = mouse_x - $("#city_canvas").offset().left;
@@ -1158,6 +1158,8 @@ function do_map_click(ptile, qtype, first_time_called)
     if (sunits != null && sunits.length == 0) {
       /* Clicked on a tile with no units. */
       set_unit_focus_and_redraw(null);
+      if (renderer == RENDERER_WEBGL && is_touch_device()) center_tile_mapcanvas_3d(ptile);
+
     } else if (sunits != null && sunits.length > 0 ) {
       if (sunits[0]['owner'] == client.conn.playing.playerno) {
          if (sunits.length == 1) {
@@ -1178,6 +1180,7 @@ function do_map_click(ptile, qtype, first_time_called)
           }
 	    }
       }
+      if (renderer == RENDERER_WEBGL && is_touch_device()) center_tile_mapcanvas_3d(ptile);
     }
 
   }

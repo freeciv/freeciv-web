@@ -23,14 +23,19 @@
 ****************************************************************************/
 function init_webgl_mapctrl()
 {
-  document.addEventListener('mousemove', webglOnDocumentMouseMove, false );
-  document.addEventListener('keydown', webglOnDocumentKeyDown, false );
-  document.addEventListener('keyup', webglOnDocumentKeyUp, false );
-  window.addEventListener('resize', webglOnWindowResize, false );
 
   $("#canvas_div").mousedown(webglOnDocumentMouseDown);
   $("#canvas_div").mouseup(webglOnDocumentMouseUp);
   $('#canvas_div').bind('mousewheel', webglOnMouseWheel);
+  $(window).mousemove(mouse_moved_cb);
+
+  if (is_touch_device()) {
+    $('#canvas_div').bind('touchstart', webgl_mapview_touch_start);
+    $('#canvas_div').bind('touchend', webgl_mapview_touch_end);
+    $('#canvas_div').bind('touchmove', webgl_mapview_touch_move);
+  }
+
+  window.addEventListener('resize', webglOnWindowResize, false );
 
 }
 
@@ -40,31 +45,13 @@ function init_webgl_mapctrl()
 ****************************************************************************/
 function webglOnWindowResize() {
 
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-
-  maprenderer.setSize( window.innerWidth, window.innerHeight );
-
-}
-
-/****************************************************************************
-...
-****************************************************************************/
-function webglOnDocumentMouseMove( event ) {
-
-  event.preventDefault();
-  mouse.set( ( event.clientX / window.innerWidth ) * 2 - 1, - ( event.clientY / window.innerHeight ) * 2 + 1 );
-
-  raycaster.setFromCamera( mouse, camera );
-
-  var intersects = raycaster.intersectObjects( objects );
-
-  if ( intersects.length > 0 ) {
-
-    var intersect = intersects[ 0 ];
-
+  if (camera != null) {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
   }
-
+  if (maprenderer != null) {
+    maprenderer.setSize(window.innerWidth, window.innerHeight);
+  }
 }
 
 /****************************************************************************
@@ -84,15 +71,14 @@ function webglOnDocumentMouseUp( e ) {
     middleclick = (e.button == 1 || e.button == 4);
   }
 
-  var ptile = webgl_canvas_pos_to_tile(e.clientX, e.clientY);
+  var ptile = webgl_canvas_pos_to_tile(e.clientX, e.clientY - $("#canvas_div").offset().top);
   if (ptile == null) return;
 
   if (rightclick) {
     /* right click to recenter. */
     if (!map_select_active || !map_select_setting_enabled) {
-      enable_mapview_slide_3d(ptile);
-      context_menu_active = false;
-
+      context_menu_active = true;
+      webgl_recenter_button_pressed(ptile);
     } else {
       context_menu_active = false;
       //map_select_units(mouse_x, mouse_y);
@@ -145,28 +131,6 @@ function webglOnDocumentMouseDown(e) {
 
 }
 
-/****************************************************************************
-...
-****************************************************************************/
-function webglOnDocumentKeyDown( event ) {
-
-  switch( event.keyCode ) {
-     case 16: isShiftDown = true; break;
-
-  }
-
-}
-
-/****************************************************************************
-...
-****************************************************************************/
-function webglOnDocumentKeyUp( event ) {
-  switch ( event.keyCode ) {
-    case 16: isShiftDown = false; break;
-
-  }
-
-}
 
 /****************************************************************************
   Mouse wheel scrolling for map zoom in and zoom out.
@@ -200,3 +164,133 @@ function webglOnMouseWheel(e) {
 
 }
 
+
+
+/****************************************************************************
+  This function is triggered when beginning a touch event on a touch device,
+  eg. finger down on screen.
+****************************************************************************/
+function webgl_mapview_touch_start(e)
+{
+  e.preventDefault();
+
+  touch_start_x = e.originalEvent.touches[0].pageX - $('#canvas_div').position().left;
+  touch_start_y = e.originalEvent.touches[0].pageY - $('#canvas_div').position().top;
+
+  var ptile = webgl_canvas_pos_to_tile(touch_start_x, touch_start_y);
+  if (ptile == null) return;
+  var sunit = find_visible_unit(ptile);
+  if (sunit != null && client.conn.playing != null && sunit['owner'] == client.conn.playing.playerno) {
+    mouse_touch_started_on_unit = true;
+  } else {
+    mouse_touch_started_on_unit = false;
+  }
+
+}
+
+/****************************************************************************
+  This function is triggered when ending a touch event on a touch device,
+  eg finger up from screen.
+****************************************************************************/
+function webgl_mapview_touch_end(e)
+{
+  webgl_action_button_pressed(touch_start_x, touch_start_y, SELECT_POPUP);
+}
+
+/****************************************************************************
+  This function is triggered on a touch move event on a touch device.
+****************************************************************************/
+function webgl_mapview_touch_move(e)
+{
+  mouse_x = e.originalEvent.touches[0].pageX - $('#canvas_div').position().left;
+  mouse_y = e.originalEvent.touches[0].pageY - $('#canvas_div').position().top;
+
+  var diff_x = (touch_start_x - mouse_x) * 2;
+  var diff_y = (touch_start_y - mouse_y) * 2;
+
+  touch_start_x = mouse_x;
+  touch_start_y = mouse_y;
+
+  if (!goto_active) {
+    webgl_check_mouse_drag_unit(mouse_x, mouse_y);
+  }
+
+  if (client.conn.playing == null) return;
+
+  /* Request preview goto path */
+  goto_preview_active = true;
+  if (goto_active && current_focus.length > 0) {
+    var ptile = webgl_canvas_pos_to_tile(mouse_x, mouse_y);
+    if (ptile != null) {
+      for (var i = 0; i < current_focus.length; i++) {
+        if (i >= 20) return;  // max 20 units goto a time.
+        if (goto_request_map[current_focus[i]['id'] + "," + ptile['x'] + "," + ptile['y']] == null) {
+          request_goto_path(current_focus[i]['id'], ptile['x'], ptile['y']);
+        }
+      }
+    }
+  }
+}
+
+
+/**************************************************************************
+  Recenter the map on the canvas location, on user request.  Usually this
+  is done with a right-click.
+**************************************************************************/
+function webgl_recenter_button_pressed(ptile)
+{
+
+  if (can_client_change_view() && ptile != null) {
+    var sunit = find_visible_unit(ptile);
+    if (!client_is_observer() && sunit != null
+        && sunit['owner'] == client.conn.playing.playerno) {
+      /* the user right-clicked on own unit, show context menu instead of recenter. */
+      if (current_focus.length <= 1) set_unit_focus(sunit);
+      $("#canvas_div").contextMenu(true);
+      $("#canvas_div").contextmenu();
+    } else {
+      $("#canvas_div").contextMenu(false);
+      enable_mapview_slide_3d(ptile);
+    }
+  }
+}
+
+/**************************************************************************
+  Do some appropriate action when the "main" mouse button (usually
+  left-click) is pressed.  For more sophisticated user control use (or
+  write) a different xxx_button_pressed function.
+**************************************************************************/
+function webgl_action_button_pressed(canvas_x, canvas_y, qtype)
+{
+  var ptile = webgl_canvas_pos_to_tile(canvas_x, canvas_y)
+
+  if (can_client_change_view() && ptile != null) {
+    do_map_click(ptile, qtype, true);
+  }
+}
+
+
+/****************************************************************************
+ This function checks if there is a visible unit on the given canvas position,
+ and selects that visible unit, and activates goto for touch devices.
+****************************************************************************/
+function webgl_check_mouse_drag_unit(canvas_x, canvas_y)
+{
+  var ptile = webgl_canvas_pos_to_tile(canvas_x, canvas_y);
+  if (ptile == null || !mouse_touch_started_on_unit) return;
+
+  var sunit = find_visible_unit(ptile);
+
+  if (sunit != null) {
+    if (client.conn.playing != null && sunit['owner'] == client.conn.playing.playerno) {
+      set_unit_focus(sunit);
+      if (is_touch_device()) activate_goto();
+    }
+  }
+
+  var ptile_units = tile_units(ptile);
+  if (ptile_units.length > 1) {
+     update_active_units_dialog();
+  }
+
+}

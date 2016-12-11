@@ -51,7 +51,12 @@ var yquality;
 function webgl_start_renderer()
 {
   var new_mapview_width = $(window).width() - width_offset;
-  var new_mapview_height = $(window).height() - height_offset;
+  var new_mapview_height;
+  if (!is_small_screen()) {
+    new_mapview_height = $(window).height() - height_offset;
+  } else {
+    new_mapview_height = $(window).height() - height_offset - 40;
+  }
 
   container = document.getElementById('canvas_div');
   camera = new THREE.PerspectiveCamera( 45, new_mapview_width / new_mapview_height, 1, 10000 );
@@ -99,7 +104,7 @@ function webgl_start_renderer()
   maprenderer.setSize(new_mapview_width, new_mapview_height);
   container.appendChild(maprenderer.domElement);
 
-  if (location.hostname === "localhost" && Detector.webgl) {
+  if (location.hostname != "play.freeciv.org" && Detector.webgl) {
     stats = new Stats();
     container.appendChild( stats.dom );
     console.log("MAX_FRAGMENT_UNIFORM_VECTORS:" + maprenderer.context.getParameter(maprenderer.context.MAX_FRAGMENT_UNIFORM_VECTORS));
@@ -213,7 +218,7 @@ function render_map_terrain() {
       if (ptile != null && tile_get_known(ptile) != TILE_UNKNOWN) {
         unknownTerritoryGeometry.vertices[ i ].y = 0;
       } else {
-        unknownTerritoryGeometry.vertices[ i ].y = heightmap[x][y] * 100 + 20;
+        unknownTerritoryGeometry.vertices[ i ].y = heightmap[x][y] * 100 + 24;
       }
     }
 

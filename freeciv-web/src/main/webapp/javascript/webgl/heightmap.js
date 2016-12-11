@@ -111,7 +111,7 @@ function create_heightmap()
           norm += 1. / distance / distance;
         }
         // set final heightmap value, and add some random noise.
-        heightmap[x][y] = (sum / norm) + ((Math.random() - 0.5) / 60);
+        heightmap[x][y] = (sum / norm) + ((Math.random() - 0.5) / 55);
       }
     }
   }

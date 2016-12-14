@@ -484,9 +484,9 @@ function pregame_settings()
                 "with 3D graphics card. Here you can configure it:</i></span><br><br>" +
 	    "<table id='settings_table'><tr id='3d_antialiasing_enabled'><td id='3d_antialiasing_label' style='min-width: 150px;'></td>" +
         "<td><input type='checkbox' id='3d_antialiasing_setting' checked>Enable antialiasing (game looks nicer, but is slower)</td></tr>" +
-        "<tr id='cardboard_vr_enabled'><td id='cardboard_vr_label' style='min-width: 150px;'></td>" +
+        /*"<tr id='cardboard_vr_enabled'><td id='cardboard_vr_label' style='min-width: 150px;'></td>" +
                 "<td><input type='checkbox' id='cardboard_vr_setting'>Enable Virtual reality glasses with Google Cardboard. You can use " +
-                "Google Cardboard glasses with your mobile phone, then connect a bluetooth mouse to your phone for controls. BETA!</td></tr>" +
+                "Google Cardboard glasses with your mobile phone, then connect a bluetooth mouse to your phone for controls. BETA!</td></tr>" +*/
         "</table>" +
       "</div>" +
 
@@ -855,7 +855,7 @@ function show_intro_dialog(title, message) {
 			  {
 				  text : "Start Game",
 				  click : function() {
-                     if (is_touch_device() || is_small_screen()) {
+                     if ((is_touch_device() || is_small_screen()) && renderer == RENDERER_2DCANVAS) {
                        BigScreen.toggle();
                      }
 					dialog_close_trigger = "button";
@@ -867,7 +867,7 @@ function show_intro_dialog(title, message) {
 			  {
 				  text : $.getUrlVar('action') == "load" ? "Load games" : "Customize Game",
 				  click : function() {
-                    if (is_touch_device() || is_small_screen()) {
+                    if ((is_touch_device() || is_small_screen()) && renderer == RENDERER_2DCANVAS) {
                       BigScreen.toggle();
                     }
 					dialog_close_trigger = "button";

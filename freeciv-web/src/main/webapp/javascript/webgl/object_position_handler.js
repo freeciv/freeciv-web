@@ -57,12 +57,13 @@ function update_unit_position(ptile) {
   if (unit_positions[ptile['index']] == null && visible_unit != null) {
     // add new unit to the unit_positions
     var unit_type_name = unit_type(visible_unit)['name'];
-    if (unit_type_name == null || webgl_models[unit_type_name] == null) {
+    if (unit_type_name == null) {
       console.error(unit_type_name + " model not loaded correcly.");
       return;
     }
 
-    var new_unit = webgl_models[unit_type_name].clone();
+    var new_unit = webgl_get_model(unit_type_name);
+    if (new_unit == null) return;
     unit_positions[ptile['index']] = new_unit;
     var pos = map_to_scene_coords(ptile['x'], ptile['y']);
     new_unit.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
@@ -150,12 +151,13 @@ function update_unit_position(ptile) {
     if (scene != null) scene.remove(unit_positions[ptile['index']]);
     delete unit_positions[ptile['index']];
 
-    if (unit_type_name == null || webgl_models[unit_type_name] == null) {
+    if (unit_type_name == null) {
       console.error(unit_type_name + " model not loaded correcly.");
       return;
     }
 
-    var new_unit = webgl_models[unit_type_name].clone();
+    var new_unit = webgl_get_model(unit_type_name);
+    if (new_unit == null) return;
     unit_positions[ptile['index']] = new_unit;
     unit_positions[ptile['index']]['unit_type'] = unit_type_name;
 
@@ -187,12 +189,9 @@ function update_city_position(ptile) {
 
   if (city_positions[ptile['index']] == null && pcity != null) {
     // add new city
-    if (webgl_models['city_1'] == null) {
-      console.error("City model not loaded correcly.");
-      return;
-    }
 
-    var new_city = webgl_models["city_1"].clone()
+    var new_city = webgl_get_model("city_1");
+    if (new_city == null) return;
     city_positions[ptile['index']] = new_city;
 
     var pos = map_to_scene_coords(ptile['x'], ptile['y']);
@@ -241,7 +240,8 @@ function update_tile_extras(ptile) {
   var height = 5 + ptile['height'] * 100;
 
   if (tile_extra_positions[EXTRA_IRRIGATION + "." + ptile['index']] == null && tile_has_extra(ptile, EXTRA_IRRIGATION)) {
-    var irrigation = webgl_models["Irrigation"].clone()
+    var irrigation = webgl_get_model("Irrigation");
+    if (irrigation == null) return;
     tile_extra_positions[EXTRA_IRRIGATION + "." + ptile['index']] = irrigation;
 
     var pos = map_to_scene_coords(ptile['x'], ptile['y']);
@@ -254,7 +254,8 @@ function update_tile_extras(ptile) {
   }
 
   if (tile_extra_positions[EXTRA_MINE + "." + ptile['index']] == null && tile_has_extra(ptile, EXTRA_MINE)) {
-    var mine = webgl_models["Mine"].clone()
+    var mine = webgl_get_model("Mine");
+    if (mine == null) return;
     tile_extra_positions[EXTRA_MINE + "." + ptile['index']] = mine;
 
     var pos = map_to_scene_coords(ptile['x'], ptile['y']);
@@ -268,7 +269,8 @@ function update_tile_extras(ptile) {
 
   /* TODO: This is a temporary road solution. */
   if (tile_extra_positions[ROAD_ROAD + "." + ptile['index']] == null && tile_has_extra(ptile, ROAD_ROAD)) {
-    var road = webgl_models["Road"].clone()
+    var road = webgl_get_model("Road");
+    if (road == null) return;
     tile_extra_positions[ROAD_ROAD + "." + ptile['index']] = road;
 
     var pos = map_to_scene_coords(ptile['x'], ptile['y']);
@@ -283,7 +285,8 @@ function update_tile_extras(ptile) {
 
   if (tile_extra_positions[EXTRA_HUT + "." + ptile['index']] == null && tile_has_extra(ptile, EXTRA_HUT)) {
     // add hut
-    var hut = webgl_models["Hut"].clone()
+    var hut = webgl_get_model("Hut");
+    if (hut == null) return;
     tile_extra_positions[EXTRA_HUT + "." + ptile['index']] = hut;
 
     var pos = map_to_scene_coords(ptile['x'], ptile['y']);
@@ -301,8 +304,10 @@ function update_tile_extras(ptile) {
   }
 
   var extra = extras[ptile['resource']];
-  if (extra != null && scene != null && webgl_models[extra['name']] != null) {
-      var extra = webgl_models[extra['name']].clone()
+  if (extra != null && scene != null) {
+      var extra = webgl_get_model(extra['name']);
+      if (extra == null) return;
+
       tile_extra_positions[extra['id'] + "." + ptile['index']] = extra;
 
       var pos = map_to_scene_coords(ptile['x'], ptile['y']);

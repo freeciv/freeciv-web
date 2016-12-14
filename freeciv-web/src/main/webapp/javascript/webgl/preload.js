@@ -18,6 +18,7 @@
 ***********************************************************************/
 
 var webgl_textures = {};
+var webgl_models_xml_strings = {};
 var webgl_models = {};
 var start_preload = 0;
 var total_model_count = 0;
@@ -96,7 +97,13 @@ function webgl_preload_models()
 function handle_zip_file(filename, file)
 {
   file.getData(new zip.TextWriter(), function(text) {
-    load_model(filename, text);
+    load_count++;
+
+    webgl_models_xml_strings[filename] = text;
+    if (load_count == total_model_count) {
+      webgl_preload_complete();
+      console.log("WebGL preloading took: " + (new Date().getTime() - start_preload) + " ms.");
+    }
   });
 
 }
@@ -104,21 +111,26 @@ function handle_zip_file(filename, file)
 /****************************************************************************
  Loads a single model file.
 ****************************************************************************/
-function load_model(filename, collada_string)
+function webgl_get_model(filename)
 {
-   var colladaloader = new THREE.ColladaLoader();
-    colladaloader.options.convertUpAxis = true;
-    colladaloader.parse( collada_string, function ( collada ) {
-        dae = collada.scene;
-        dae.updateMatrix();
-        dae.scale.x = dae.scale.y = dae.scale.z = 11;
-        webgl_models[filename] = dae;
-        load_count++;
-        if (load_count == total_model_count) {
-          webgl_preload_complete();
-          console.log("WebGL preloading took: " + (new Date().getTime() - start_preload) + " ms.");
-        }
-    });
+  if (webgl_models[filename] != null) return webgl_models[filename].clone();;
+  if (webgl_models_xml_strings[filename] == null) {
+    console.error("Model " + filename + " not found.");
+    return null;
+  }
+
+  var colladaloader = new THREE.ColladaLoader();
+  colladaloader.options.convertUpAxis = true;
+  colladaloader.parse( webgl_models_xml_strings[filename], function ( collada ) {
+    dae = collada.scene;
+    dae.updateMatrix();
+    dae.scale.x = dae.scale.y = dae.scale.z = 11;
+    webgl_models[filename] = dae;
+
+    webgl_models_xml_strings[filename] = ""; // clear xml string for this model.
+
+    return dae.clone();
+  });
 
 }
 

@@ -115,7 +115,6 @@ function webgl_get_model(filename)
 {
   if (webgl_models[filename] != null) return webgl_models[filename].clone();;
   if (webgl_models_xml_strings[filename] == null) {
-    console.error("Model " + filename + " not found.");
     return null;
   }
 

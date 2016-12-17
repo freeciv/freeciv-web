@@ -22,7 +22,7 @@ if (!isset($config_problem)) {
   fcdb_metaserver_connect();
 }
 
-      $stmt="select distinct statsDate as sd, (select gameCount from games_played_stats where statsDate = sd and gameType = '0') as web_single, (select gameCount from games_played_stats where statsDate = sd and gameType = '1') as web_multi, (select gameCount from games_played_stats where statsDate = sd and gameType = '2') as web_pbem, (select gameCount from games_played_stats where statsDate = sd and gameType = '4') as web_hotseat, (select gameCount from games_played_stats where statsDate = sd and gameType = '3') as desktop_multi from games_played_stats, (select gameCount from games_played_stats where statsDate = sd and gameType = '5') as web_single_3d from games_played_stats;";
+      $stmt="select distinct statsDate as sd, (select gameCount from games_played_stats where statsDate = sd and gameType = '0') as web_single, (select gameCount from games_played_stats where statsDate = sd and gameType = '1') as web_multi, (select gameCount from games_played_stats where statsDate = sd and gameType = '2') as web_pbem, (select gameCount from games_played_stats where statsDate = sd and gameType = '4') as web_hotseat, (select gameCount from games_played_stats where statsDate = sd and gameType = '3') as desktop_multi, (select gameCount from games_played_stats where statsDate = sd and gameType = '5') as web_single_3d from games_played_stats;";
       $res = fcdb_exec($stmt);
       $nr = fcdb_num_rows($res);
       if ( $nr > 0 ) {

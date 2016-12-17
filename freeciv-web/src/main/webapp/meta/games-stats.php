@@ -41,7 +41,7 @@ if (!isset($config_problem)) {
           print db2html($row["desktop_multi"]);
           print ",";
           print db2html($row["web_hotseat"]);
-          print ";";
+          print ",";
           print db2html($row["web_single_3d"]);
           print ";";
 

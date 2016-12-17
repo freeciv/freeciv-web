@@ -44,7 +44,9 @@ function webgl_preload()
   /* Preload water overlay texture. */
   var water_texture = new THREE.Texture();
   webgl_textures["water_overlay"] = water_texture;
-  textureLoader.load( '/textures/water_overlay_texture.png', function ( image ) {
+  var filename = is_small_screen() ? '/textures/small/water_overlay_texture.png'
+                                   : '/textures/large/water_overlay_texture.png';
+  textureLoader.load( filename, function ( image ) {
       water_texture.image = image;
       water_texture.wrapS = THREE.RepeatWrapping;
       water_texture.wrapT = THREE.RepeatWrapping;
@@ -69,7 +71,8 @@ function webgl_preload()
 
   /* Preload a texture for each map tile type. */
   for (var i = 0; i < tiletype_terrains.length; i++) {
-    var imgurl = "/textures/" + tiletype_terrains[i] + ".png";
+    var imgurl = is_small_screen() ? "/textures/small/" + tiletype_terrains[i] + ".png"
+                                   : "/textures/large/" + tiletype_terrains[i] + ".png" ;
     textureLoader.load(imgurl, (function (url, index) {
             return function (image, i) {
                 webgl_textures[tiletype_terrains[index]] = new THREE.Texture();

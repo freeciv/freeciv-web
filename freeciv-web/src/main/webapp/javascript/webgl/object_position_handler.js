@@ -22,7 +22,6 @@ var unit_positions = {};
 // stores city positions on the map. tile index is key, unit 3d model is value.
 var city_positions = {};
 // stores flag positions on the map. tile index is key, unit 3d model is value.
-var city_flag_positions = {};
 var unit_flag_positions = {};
 var unit_label_positions = {};
 var unit_activities_positions = {};
@@ -205,23 +204,10 @@ function update_city_position(ptile) {
     if (scene != null && new_city != null) {
       scene.add(new_city);
     }
-    var cflag = get_city_flag_sprite(pcity);
-    if (cflag != null && meshes[cflag['key']] != null) {
-      var new_flag = meshes[cflag['key']].clone()
-      city_flag_positions[ptile['index']] = new_flag;
-      var fpos = map_to_scene_coords(ptile['x'], ptile['y']);
-      new_flag.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 5);
-      new_flag.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 30);
-      new_flag.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']- 5);
-      new_flag.rotation.y = Math.PI / 4;
-      if (scene != null && new_flag != null) {
-        scene.add(new_flag);
-      }
-    }
 
-    var text = create_city_label(pcity['name']);
+    var text = create_city_label(pcity);
     text.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] + 5);
-    text.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 47);
+    text.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 40);
     text.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 5);
     text.rotation.y = Math.PI / 4;
     if (scene != null) scene.add(text);
@@ -386,10 +372,6 @@ function add_all_objects_to_scene()
     scene.add(pflag);
   }
 
-  for (var tile_index in city_flag_positions) {
-    var pflag = city_flag_positions[tile_index];
-    scene.add(pflag);
-  }
 
 }
 

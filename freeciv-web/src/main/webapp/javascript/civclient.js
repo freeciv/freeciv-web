@@ -244,14 +244,14 @@ function init_chatbox()
   if (is_small_screen()) {
     $(".chatbox_dialog").css("left", "2px");
     $(".chatbox_dialog").css("top", "40px");
-    $("#game_chatbox_panel").parent().css("max-height", "22%");
+    $("#game_chatbox_panel").parent().css("max-height", "15%");
     $("#game_chatbox_panel").parent().css("width", "95%");
     chatbox_resized();
 
     $("#game_message_area").click(function(e) {
       if (chatbox_panel_toggle) {
-        $("#game_chatbox_panel").parent().css("max-height", "22%");
-        $("#game_chatbox_panel").parent().css("height", "22%");
+        $("#game_chatbox_panel").parent().css("max-height", "15%");
+        $("#game_chatbox_panel").parent().css("height", "15%");
       } else {
         $("#game_chatbox_panel").parent().css("max-height", "65%");
         $("#game_chatbox_panel").parent().css("height", "65%");

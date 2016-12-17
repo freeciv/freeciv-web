@@ -36,11 +36,9 @@ function webgl_update_tile_known(old_tile, new_tile)
     var gy = Math.floor(y / 4);
 
     if (gx != tx || gy != ty) continue;
-    if (heightmap[x] != null && heightmap[x][y] != null && new_tile != null) {
+    if ( new_tile != null) {
       if (tile_get_known(new_tile) != TILE_UNKNOWN) {
-        unknownTerritoryGeometry.vertices[ i ].y = 0;
-      } else {
-        unknownTerritoryGeometry.vertices[ i ].y = heightmap[x][y] * 100 + 26;
+        unknownTerritoryGeometry.vertices[ i ].y = 0;  //reveal tile.
       }
       unknownTerritoryGeometry.verticesNeedUpdate = true;
     }

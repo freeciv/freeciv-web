@@ -35,6 +35,7 @@ var fragShader;
 
 var tiletype_terrains = ["lake","coast","floor","arctic","desert","forest","grassland","hills","jungle","mountains","plains","swamp","tundra", "beach"];
 
+var landGeometry;
 var unknownTerritoryGeometry;
 
 var start_webgl;
@@ -186,7 +187,7 @@ function render_map_terrain() {
   var step = 1024 / quality;
 
   /* LandGeometry is a plane representing the landscape of the map. */
-  var landGeometry = new THREE.PlaneGeometry(mapview_model_width, mapview_model_height, xquality - 1, yquality - 1);
+  landGeometry = new THREE.PlaneGeometry(mapview_model_width, mapview_model_height, xquality - 1, yquality - 1);
   landGeometry.rotateX( - Math.PI / 2 );
   landGeometry.translate(Math.floor(mapview_model_height / 2), 0, Math.floor(mapview_model_height / 2));
   for ( var i = 0, l = landGeometry.vertices.length; i < l; i ++ ) {
@@ -203,6 +204,7 @@ function render_map_terrain() {
   scene.add( landMesh );
 
   prerender(landGeometry, xquality);
+
   add_all_objects_to_scene();
 
   /* Unknown territory */
@@ -218,7 +220,7 @@ function render_map_terrain() {
       if (ptile != null && tile_get_known(ptile) != TILE_UNKNOWN) {
         unknownTerritoryGeometry.vertices[ i ].y = 0;
       } else {
-        unknownTerritoryGeometry.vertices[ i ].y = heightmap[x][y] * 100 + 24;
+        unknownTerritoryGeometry.vertices[ i ].y = heightmap[x][y] * 100 + 8;
       }
     }
 
@@ -230,9 +232,17 @@ function render_map_terrain() {
   var unknownMaterial = new THREE.MeshBasicMaterial( {color: 0x000000 } );
   var unknownMesh = new THREE.Mesh( unknownTerritoryGeometry, unknownMaterial );
   unknownMesh.geometry.dynamic = true;
-  scene.add( unknownMesh );
+  scene.add(unknownMesh);
 
-  scene.add(meshes['trees']);
+
+  // cleanup
+  $("#map_tiletype_grid").remove();
+  heightmap = null;
+  for (var i = 0; i < tiletype_terrains.length; i++) {
+    webgl_textures[tiletype_terrains[i]] = null;
+  }
+  webgl_textures = null;
+
   $.unblockUI();
   console.log("WebGL render_testmap took: " + (new Date().getTime() - start_webgl) + " ms.");
 }

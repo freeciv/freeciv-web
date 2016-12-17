@@ -18,14 +18,15 @@
 ***********************************************************************/
 
 var meshes = {};
-
+var forest_geometry = null;
+var jungle_geometry = null;
 
 /****************************************************************************
-  Prerender meshes, such as trees.
+  Prerender trees and jungle on known tiles.
 ****************************************************************************/
 function prerender(landGeometry, xquality) {
  /* Trees */
-  var trees_geometry = new THREE.Geometry();
+  forest_geometry = new THREE.Geometry();
   for (var i = 0, l = landGeometry.vertices.length; i < l; i++) {
     var x = i % xquality, y = Math.floor(i / xquality);
     var gx = Math.round(x / 4 - 0.5);
@@ -34,40 +35,71 @@ function prerender(landGeometry, xquality) {
     if (ptile != null) {
       var terrain_name = tile_terrain(ptile).name;
       var add_tree = false;
-      if (terrain_name == "Forest" || terrain_name == "Jungle") {
+      if (terrain_name == "Forest") {
         /* Dense forests. */
         add_tree = true;
       } else if (terrain_name == "Grassland" ||
                  terrain_name == "Plains" ||
                  terrain_name == "Hills") {
         /* Sparse trees -> Monte-Carlo algorithm */
-        add_tree = (Math.random() < 0.03);
+        add_tree = (Math.random() < 0.02);
       }
 
       /* No trees on beaches */
       add_tree &= (landGeometry.vertices[i].y > 57);
 
       if (add_tree) {
-        var geometry = new THREE.SphereGeometry(6, 4, 4);
-        geometry.rotateX(0.1 * Math.PI * Math.random());
-        geometry.rotateY(0.1 * Math.PI * Math.random());
-        geometry.rotateZ(0.1 * Math.PI * Math.random());
-        geometry.translate(landGeometry.vertices[i].x + 5,
-                           landGeometry.vertices[i].y + 2,
-                           landGeometry.vertices[i].z + 5);
-        geometry.translate(2.5 * (-1 + 2*Math.random()),
-                           0.1 * (-1 + 2*Math.random()),
-                           2.5 * (-1 + 2*Math.random()));
-
-        var mesh = new THREE.Mesh(geometry);
-        mesh.updateMatrix();
-        trees_geometry.merge(mesh.geometry, mesh.matrix);
+        var vertex = new THREE.Vector3();
+        vertex['tile'] = ptile['index'];
+        var theight = Math.floor(landGeometry.vertices[i].y + 2 + 0.1 * (-1 + 2 * Math.random()));
+        vertex['height'] = theight;
+        if (tile_get_known(ptile) != TILE_UNKNOWN) forest_positions[ptile['index']] = true;
+        vertex.x = Math.floor(landGeometry.vertices[i].x + 5 + 2.5 * (-1 + 2 * Math.random()));
+        vertex.y = tile_get_known(ptile) == TILE_UNKNOWN ? 35 : theight;
+        vertex.z = Math.floor(landGeometry.vertices[i].z + 5 + 2.5 * (-1 + 2 * Math.random()));
+        forest_geometry.vertices.push( vertex );
       }
     }
   }
-  var trees_material = new THREE.MeshLambertMaterial({
-      color: new THREE.Color(0, 0.15, 0),
-      emissive: new THREE.Color(0, 0.01, 0) });
-  meshes['trees'] = new THREE.Mesh(trees_geometry, trees_material);
+  var forest_material = new THREE.PointsMaterial( { size: 32, sizeAttenuation: false, map: webgl_textures["tree_1"], alphaTest: 0.5, transparent: true } );
+  var tree_particles = new THREE.Points( forest_geometry, forest_material );
+  scene.add(tree_particles);
+
+
+ /* Jungle */
+  jungle_geometry = new THREE.Geometry();
+  for (var i = 0, l = landGeometry.vertices.length; i < l; i++) {
+    var x = i % xquality, y = Math.floor(i / xquality);
+    var gx = Math.round(x / 4 - 0.5);
+    var gy = Math.round(y / 4 - 0.5);
+    var ptile = map_pos_to_tile(gx, gy);
+    if (ptile != null && tile_get_known(ptile) != TILE_UNKNOWN) {
+      var terrain_name = tile_terrain(ptile).name;
+      var add_tree = false;
+      if (terrain_name == "Jungle") {
+        /* Dense jungle. */
+        add_tree = true;
+      }
+
+      /* No trees on beaches */
+      add_tree &= (landGeometry.vertices[i].y > 57);
+
+      if (add_tree) {
+        var vertex = new THREE.Vector3();
+        vertex['tile'] = ptile['index'];
+        var theight = Math.floor(landGeometry.vertices[i].y + 2 + 0.1 * (-1 + 2 * Math.random()));
+        vertex['height'] = theight;
+        if (tile_get_known(ptile) != TILE_UNKNOWN) jungle_positions[ptile['index']] = true;
+        vertex.x = Math.floor(landGeometry.vertices[i].x + 5 + 2.5 * (-1 + 2 * Math.random()));
+        vertex.y = tile_get_known(ptile) == TILE_UNKNOWN ? 35 : theight;
+        vertex.z = Math.floor(landGeometry.vertices[i].z + 5 + 2.5 * (-1 + 2 * Math.random()));
+        jungle_geometry.vertices.push( vertex );
+      }
+    }
+  }
+
+  var jungle_material = new THREE.PointsMaterial( { size: 32, sizeAttenuation: false, map: webgl_textures["jungle_1"], alphaTest: 0.5, transparent: true } );
+  var jungle_particles = new THREE.Points( jungle_geometry, jungle_material );
+  scene.add(jungle_particles);
 
 }

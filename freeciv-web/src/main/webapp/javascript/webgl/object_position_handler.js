@@ -27,6 +27,9 @@ var unit_flag_positions = {};
 var unit_label_positions = {};
 var unit_activities_positions = {};
 
+var forest_positions = {}; // tile index is key, boolean is value.
+var jungle_positions = {}; // tile index is key, boolean is value.
+
 // stores tile extras (eg specials), key is extra + "." + tile_index.
 var tile_extra_positions = {};
 
@@ -319,6 +322,36 @@ function update_tile_extras(ptile) {
         scene.add(extra);
       }
   }
+
+  // show forest
+  var terrain_name = tile_terrain(ptile).name;
+  if (scene != null
+      && tile_get_known(ptile) != TILE_UNKNOWN
+      && forest_positions[ptile['index']] == null
+      && terrain_name == "Forest") {
+    for (var s = 0; s < forest_geometry.vertices.length; s++) {
+      if (forest_geometry.vertices[s]['tile'] == ptile['index']) {
+        forest_geometry.vertices[s].y = forest_geometry.vertices[s]['height'];
+        forest_positions[ptile['index']] = true;
+      }
+    }
+    forest_geometry.verticesNeedUpdate = true;
+  }
+
+  // show jungle
+  if (scene != null
+      && tile_get_known(ptile) != TILE_UNKNOWN
+      && jungle_positions[ptile['index']] == null
+      && terrain_name == "Jungle") {
+    for (var s = 0; s < jungle_geometry.vertices.length; s++) {
+      if (jungle_geometry.vertices[s]['tile'] == ptile['index']) {
+        jungle_geometry.vertices[s].y = jungle_geometry.vertices[s]['height'];
+        jungle_positions[ptile['index']] = true;
+      }
+    }
+    jungle_geometry.verticesNeedUpdate = true;
+  }
+
 
 }
 

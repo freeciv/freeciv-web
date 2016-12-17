@@ -52,6 +52,21 @@ function webgl_preload()
       water_texture.needsUpdate = true;
   } );
 
+  /* Preload tree sprite. */
+  var tree_sprite = new THREE.Texture();
+  webgl_textures["tree_1"] = tree_sprite;
+  textureLoader.load( '/textures/tree_1.png', function ( image ) {
+      tree_sprite.image = image;
+      tree_sprite.needsUpdate = true;
+  } );
+
+  var jungle_sprite = new THREE.Texture();
+  webgl_textures["jungle_1"] = jungle_sprite;
+  textureLoader.load( '/textures/jungle_1.png', function ( image ) {
+      jungle_sprite.image = image;
+      jungle_sprite.needsUpdate = true;
+  } );
+
   /* Preload a texture for each map tile type. */
   for (var i = 0; i < tiletype_terrains.length; i++) {
     var imgurl = "/textures/" + tiletype_terrains[i] + ".png";

@@ -135,7 +135,7 @@ function render_map_terrain() {
   /* Create water mesh with a texture. */
   var waterGeometry = new THREE.PlaneGeometry( mapview_model_width, mapview_model_height, 2, 2);
   waterGeometry.rotateX( - Math.PI / 2 );
-  waterGeometry.translate(Math.floor(mapview_model_height / 2), 0, Math.floor(mapview_model_height / 2));
+  waterGeometry.translate(Math.floor(mapview_model_width / 2) - 500, 0, Math.floor(mapview_model_height / 2));
 
   for ( var i = 0, l = waterGeometry.vertices.length; i < l; i ++ ) {
       var x = i % quality, y = Math.floor( i / quality );
@@ -194,7 +194,7 @@ function render_map_terrain() {
   /* LandGeometry is a plane representing the landscape of the map. */
   landGeometry = new THREE.PlaneGeometry(mapview_model_width, mapview_model_height, xquality - 1, yquality - 1);
   landGeometry.rotateX( - Math.PI / 2 );
-  landGeometry.translate(Math.floor(mapview_model_height / 2), 0, Math.floor(mapview_model_height / 2));
+  landGeometry.translate(Math.floor(mapview_model_width / 2) - 500, 0, Math.floor(mapview_model_height / 2));
   for ( var i = 0, l = landGeometry.vertices.length; i < l; i ++ ) {
     var x = i % xquality, y = Math.floor( i / xquality );
     if (heightmap[x] != null && heightmap[x][y] != null) {
@@ -215,7 +215,7 @@ function render_map_terrain() {
   /* Unknown territory */
   unknownTerritoryGeometry = new THREE.PlaneGeometry(mapview_model_width, mapview_model_height, xquality - 1, yquality - 1);
   unknownTerritoryGeometry.rotateX( - Math.PI / 2 );
-  unknownTerritoryGeometry.translate(Math.floor(mapview_model_height / 2), 0, Math.floor(mapview_model_height / 2));
+  unknownTerritoryGeometry.translate(Math.floor(mapview_model_width / 2) - 500, 0, Math.floor(mapview_model_height / 2));
   for ( var i = 0, l = unknownTerritoryGeometry.vertices.length; i < l; i ++ ) {
     var x = i % xquality, y = Math.floor( i / xquality );
     var gx = Math.floor(x / 4);

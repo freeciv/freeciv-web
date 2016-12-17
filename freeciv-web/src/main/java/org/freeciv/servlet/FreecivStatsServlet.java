@@ -36,8 +36,14 @@ public class FreecivStatsServlet extends HttpServlet {
 	            conn = ds.getConnection();
 
 				switch (type) {
-					case "single": {
+					case "single2d": {
 						String insertTableSQL = "INSERT INTO games_played_stats (statsDate, gameType, gameCount) VALUES (CURDATE(), 0, 1)  ON DUPLICATE KEY UPDATE gameCount = gameCount + 1";
+						PreparedStatement preparedStatement = conn.prepareStatement(insertTableSQL);
+						preparedStatement.executeUpdate();
+						break;
+					}
+					case "single3d": {
+						String insertTableSQL = "INSERT INTO games_played_stats (statsDate, gameType, gameCount) VALUES (CURDATE(), 5, 1)  ON DUPLICATE KEY UPDATE gameCount = gameCount + 1";
 						PreparedStatement preparedStatement = conn.prepareStatement(insertTableSQL);
 						preparedStatement.executeUpdate();
 						break;

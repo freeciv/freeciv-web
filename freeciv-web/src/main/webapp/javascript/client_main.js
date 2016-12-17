@@ -314,7 +314,11 @@ function update_metamessage_on_gamestart()
 
   if ($.getUrlVar('action') == "new" || $.getUrlVar('action') == "earthload" 
       || $.getUrlVar('scenario') == "true") {
-    $.post("/freeciv_time_played_stats?type=single").fail(function() {});
+    if (renderer == RENDERER_2DCANVAS) {
+      $.post("/freeciv_time_played_stats?type=single2d").fail(function() {});
+    } else {
+      $.post("/freeciv_time_played_stats?type=single3d").fail(function() {});
+    }
   }
   if ($.getUrlVar('action') == "multi" && client.conn.playing != null
       && client.conn.playing['pid'] == players[0]['pid']) {

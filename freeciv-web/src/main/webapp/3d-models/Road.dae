@@ -5,8 +5,8 @@
       <author>Blender User</author>
       <authoring_tool>Blender 2.78.0 commit date:2016-10-24, commit time:12:20, hash:e8299c8</authoring_tool>
     </contributor>
-    <created>2016-12-03T11:44:00</created>
-    <modified>2016-12-03T11:44:00</modified>
+    <created>2016-12-18T09:23:26</created>
+    <modified>2016-12-18T09:23:26</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
@@ -23,10 +23,10 @@
               <color sid="ambient">0 0 0 1</color>
             </ambient>
             <diffuse>
-              <color sid="diffuse">0.3005995 0.1486299 0.03001742 1</color>
+              <color sid="diffuse">0.1301135 0.06621978 0.01484967 1</color>
             </diffuse>
             <specular>
-              <color sid="specular">0.2146126 0.1284819 0.03399312 1</color>
+              <color sid="specular">0.1070174 0.06505975 0.0182443 1</color>
             </specular>
             <shininess>
               <float sid="shininess">50</float>
@@ -48,9 +48,9 @@
     <geometry id="Plane-mesh" name="Plane">
       <mesh>
         <source id="Plane-mesh-positions">
-          <float_array id="Plane-mesh-positions-array" count="12">-0.02263545 0.6614543 -0.02293682 -0.1979787 0.6576032 -0.03448098 -0.01818293 -1.398295 -0.02622944 -0.1935262 -1.402146 -0.03777366</float_array>
+          <float_array id="Plane-mesh-positions-array" count="69">-0.1605984 -0.8106793 -0.009709954 -0.3359417 -0.8145305 -0.02125412 -0.02817219 -1.403406 -0.1320033 -0.2035155 -1.407257 -0.1435475 -0.1303465 -0.4543444 7.72611e-4 -0.3056899 -0.4581956 -0.01077157 0.02453017 0.04161816 0.01402986 -0.1508131 0.03776699 0.002485692 0.3187386 0.6957795 -0.002784013 0.1433953 0.6919283 -0.01432824 0.6029651 1.052398 0.006269991 0.4276217 1.048547 -0.005274176 0.8751719 1.515878 -0.03203666 0.6998286 1.512027 -0.04358088 -0.04536497 0.2477824 -0.005667686 -0.3364653 0.02772015 -0.004103422 -0.2310171 0.2377355 -0.0122568 -0.6165995 0.1288266 -0.01734995 -0.5111513 0.3388419 -0.02550333 -0.8562797 0.3345938 -0.01234042 -0.7508316 0.5446093 -0.0204938 -1.16218 0.59927 -0.1014156 -1.056732 0.8092854 -0.109569</float_array>
           <technique_common>
-            <accessor source="#Plane-mesh-positions-array" count="4" stride="3">
+            <accessor source="#Plane-mesh-positions-array" count="23" stride="3">
               <param name="X" type="float"/>
               <param name="Y" type="float"/>
               <param name="Z" type="float"/>
@@ -58,9 +58,9 @@
           </technique_common>
         </source>
         <source id="Plane-mesh-normals">
-          <float_array id="Plane-mesh-normals-array" count="6">-0.06565737 -0.001736998 0.9978408 -0.06565743 -0.001736998 0.9978408</float_array>
+          <float_array id="Plane-mesh-normals-array" count="63">-0.05947697 -0.2144383 0.9749251 -0.06515598 -0.02381527 0.997591 -0.06555861 -0.006200015 0.9978295 -0.06666499 0.04776602 0.9966315 -0.0662719 0.02749568 0.9974228 -0.06786835 0.1217036 0.9902436 -0.03854882 0.05808371 0.9975672 -0.02811896 0.05287164 0.9982054 0.03786092 0.01977753 0.9990873 -0.1753477 0.125949 0.976417 -0.05947697 -0.2144384 0.9749251 -0.06515598 -0.02381527 0.9975909 -0.06555861 -0.006200015 0.9978296 -0.06710499 0.07232671 0.9951211 -0.08801019 0.06513106 0.9939881 -0.0662719 0.02749568 0.9974228 -0.06786841 0.1217035 0.9902436 -0.03854882 0.05808365 0.9975672 -0.0281189 0.05287164 0.9982054 0.03786098 0.01977747 0.9990873 -0.1753476 0.1259487 0.976417</float_array>
           <technique_common>
-            <accessor source="#Plane-mesh-normals-array" count="2" stride="3">
+            <accessor source="#Plane-mesh-normals-array" count="21" stride="3">
               <param name="X" type="float"/>
               <param name="Y" type="float"/>
               <param name="Z" type="float"/>
@@ -70,44 +70,11 @@
         <vertices id="Plane-mesh-vertices">
           <input semantic="POSITION" source="#Plane-mesh-positions"/>
         </vertices>
-        <polylist material="Material_001-material" count="2">
+        <polylist material="Material_001-material" count="21">
           <input semantic="VERTEX" source="#Plane-mesh-vertices" offset="0"/>
           <input semantic="NORMAL" source="#Plane-mesh-normals" offset="1"/>
-          <vcount>3 3 </vcount>
-          <p>1 0 2 0 0 0 1 1 3 1 2 1</p>
-        </polylist>
-      </mesh>
-    </geometry>
-    <geometry id="Plane_001-mesh" name="Plane.001">
-      <mesh>
-        <source id="Plane_001-mesh-positions">
-          <float_array id="Plane_001-mesh-positions-array" count="12">-0.02408683 0.2496331 -0.02212101 -0.1994302 0.2457819 -0.03366523 -0.01876312 -0.8041807 -0.02738046 -0.1941065 -0.8080319 -0.03892469</float_array>
-          <technique_common>
-            <accessor source="#Plane_001-mesh-positions-array" count="4" stride="3">
-              <param name="X" type="float"/>
-              <param name="Y" type="float"/>
-              <param name="Z" type="float"/>
-            </accessor>
-          </technique_common>
-        </source>
-        <source id="Plane_001-mesh-normals">
-          <float_array id="Plane_001-mesh-normals-array" count="6">-0.0655784 -0.00531131 0.9978334 -0.06557834 -0.00531131 0.9978333</float_array>
-          <technique_common>
-            <accessor source="#Plane_001-mesh-normals-array" count="2" stride="3">
-              <param name="X" type="float"/>
-              <param name="Y" type="float"/>
-              <param name="Z" type="float"/>
-            </accessor>
-          </technique_common>
-        </source>
-        <vertices id="Plane_001-mesh-vertices">
-          <input semantic="POSITION" source="#Plane_001-mesh-positions"/>
-        </vertices>
-        <polylist material="Material_001-material" count="2">
-          <input semantic="VERTEX" source="#Plane_001-mesh-vertices" offset="0"/>
-          <input semantic="NORMAL" source="#Plane_001-mesh-normals" offset="1"/>
-          <vcount>3 3 </vcount>
-          <p>1 0 2 0 0 0 1 1 3 1 2 1</p>
+          <vcount>3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 </vcount>
+          <p>0 0 3 0 2 0 0 1 5 1 1 1 4 2 7 2 5 2 8 3 9 3 14 3 8 4 11 4 9 4 10 5 13 5 11 5 7 6 16 6 15 6 15 7 18 7 17 7 18 8 19 8 17 8 20 9 21 9 19 9 0 10 1 10 3 10 0 11 4 11 5 11 4 12 6 12 7 12 14 13 7 13 6 13 6 14 8 14 14 14 8 15 10 15 11 15 10 16 12 16 13 16 7 17 14 17 16 17 15 18 16 18 18 18 18 19 20 19 19 19 20 20 22 20 21 20</p>
         </polylist>
       </mesh>
     </geometry>
@@ -116,18 +83,8 @@
   <library_visual_scenes>
     <visual_scene id="Scene" name="Scene">
       <node id="Irrigation" name="Irrigation" type="NODE">
-        <matrix sid="transform">1.72732 0 0 0.2152362 0 1.72732 0 0.5453496 0 0 1.72732 -0.004633782 0 0 0 1</matrix>
+        <matrix sid="transform">1.72732 0 0 0.2666484 0 1.72732 0 -0.1957326 0 0 1.72732 -0.04056852 0 0 0 1</matrix>
         <instance_geometry url="#Plane-mesh" name="Irrigation">
-          <bind_material>
-            <technique_common>
-              <instance_material symbol="Material_001-material" target="#Material_001-material"/>
-            </technique_common>
-          </bind_material>
-        </instance_geometry>
-      </node>
-      <node id="Irrigation_001" name="Irrigation_001" type="NODE">
-        <matrix sid="transform">0.01748852 -1.727117 0.01988835 -0.5445367 1.727182 0.01733527 -0.0133646 0.06536195 0.01316343 0.02002207 1.727154 0.00364407 0 0 0 1</matrix>
-        <instance_geometry url="#Plane_001-mesh" name="Irrigation_001">
           <bind_material>
             <technique_common>
               <instance_material symbol="Material_001-material" target="#Material_001-material"/>

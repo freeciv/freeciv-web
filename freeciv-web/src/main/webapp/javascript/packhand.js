@@ -91,6 +91,11 @@ function handle_server_join_reply(packet)
          // WebGL renderer on mobile devices needs to use very little RAM.
          send_message_delayed("/set size 1", 130);
        }
+       // Freeciv-web WebGL doesn't support rendering rivers at the moment.
+       send_message_delayed("/set wetness 5", 140);
+
+       // Freeciv-web WebGL doesn't support rendering borders.
+       send_message_delayed("/set borders disabled", 150);
      }
 
     if (autostart) {

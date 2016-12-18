@@ -24,7 +24,7 @@
 function create_city_label(pcity)
 {
   var canvas1 = document.createElement('canvas');
-  canvas1.width = 128;
+  canvas1.width = 256;
   canvas1.height = 16;
   var ctx = canvas1.getContext('2d');
 
@@ -33,24 +33,34 @@ function create_city_label(pcity)
   var owner = players[owner_id];
 
   ctx.fillStyle=nations[owner['nation']]['color'];
-  ctx.fillRect(0,0,128,16);
+  var city_text = pcity['name'] + " " + pcity['size'];
+  var txt_measure = ctx.measureText(city_text);
+  ctx.fillRect(28,0,28 + txt_measure.width + 72, 16);
+
   ctx.font = "Bold 16px Arial";
   ctx.fillStyle = "rgba(0,0,0, 1.0)";
-  ctx.fillText(pcity['name'] + " " + pcity['size'], 30, 15);
-
+  ctx.fillText(city_text, 55, 15);
   var city_gfx = get_city_flag_sprite(pcity);
   ctx.drawImage(sprites[city_gfx['key']], 0, 0,
                                   sprites[city_gfx['key']].width, sprites[city_gfx['key']].height,
-                                  0,0,28,16);
+                                  20,0,28,16);
+
+  var prod_type = get_city_production_type(pcity);
+  if (prod_type != null) {
+    var tag = prod_type['graphic_str'];
+    if (tileset[tag] != null) {
+      ctx.drawImage(sprites[tag], 28 + txt_measure.width + 70, 0, 36, 18);
+    }
+  }
 
   var texture1 = new THREE.Texture(canvas1);
   texture1.needsUpdate = true;
 
   var material1 = new THREE.MeshBasicMaterial( { map: texture1, side:THREE.DoubleSide } );
-  material1.transparent = false;
+  material1.transparent = true;
 
   var mesh1 = new THREE.Mesh(
-    new THREE.PlaneGeometry(64, 11),
+    new THREE.PlaneGeometry(120, 11),
     material1
   );
 

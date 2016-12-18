@@ -33,6 +33,8 @@ var jungle_positions = {}; // tile index is key, boolean is value.
 // stores tile extras (eg specials), key is extra + "." + tile_index.
 var tile_extra_positions = {};
 
+var road_positions = {};
+
 var selected_unit_indicator = null;
 
 /****************************************************************************
@@ -270,20 +272,56 @@ function update_tile_extras(ptile) {
     }
   }
 
-  /* TODO: This is a temporary road solution. */
-  if (tile_extra_positions[ROAD_ROAD + "." + ptile['index']] == null && tile_has_extra(ptile, ROAD_ROAD)) {
-    var road = webgl_get_model("Road");
-    if (road == null) return;
-    tile_extra_positions[ROAD_ROAD + "." + ptile['index']] = road;
-
+  if (scene != null && road_positions[ptile['index']] == null && tile_has_extra(ptile, ROAD_ROAD)) {
+    var road_added = false;
     var pos = map_to_scene_coords(ptile['x'], ptile['y']);
-    road.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
-    road.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 3);
-    road.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
+    // 1. iterate over adjacent tiles, see if they have road.
+    for (var dir = 0; dir < 8; dir++) {
+      var checktile = mapstep(ptile, dir);
+      if (checktile != null && tile_has_extra(checktile, ROAD_ROAD)) {
+      // 2. if road on this tile and adjacent tile, then add rectangle as road between this tile and adjacent tile.
+        road_added = true;
+        var road_width = 4 + Math.random();
+        var dest = map_to_scene_coords(checktile['x'], checktile['y']);
+        var roadGeometry = new THREE.BufferGeometry();
+        var vertices = new Float32Array( [
+        	 0.0, 0.0,  0.0,
+        	 dest['x'] - pos['x'], (checktile['height'] - ptile['height']) * 100 ,  dest['y'] - pos['y'],
+        	 dest['x'] - pos['x'], (checktile['height'] - ptile['height']) * 100,  dest['y'] - pos['y'] + road_width,
 
-    if (scene != null && road != null) {
-      scene.add(road);
+        	 dest['x'] - pos['x'], (checktile['height'] - ptile['height']) * 100,  dest['y'] - pos['y'] + road_width,
+        	 0.0, 0.0,  road_width,
+        	 0.0, 0.0,  0.0
+        ] );
+        roadGeometry.addAttribute( 'position', new THREE.BufferAttribute( vertices, 3 ) );
+        var roadMaterial = new THREE.MeshBasicMaterial( { color: 0x171108, side:THREE.DoubleSide} );
+        var road = new THREE.Mesh( roadGeometry, roadMaterial );
+        road.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
+        road.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 4);
+        road.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
+        console.log("adding connected road");
+        scene.add(road);
+        road_positions[ptile['index']] = road;
+      }
     }
+
+
+    // 3. if road on this tile only, then use Road model.
+    if (road_added == false) {
+      var road = webgl_get_model("Road");
+      if (road == null) return;
+      road_positions[ptile['index']] = road;
+
+      road.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
+      road.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 4);
+      road.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
+      if (scene != null && road != null) {
+        console.log("adding single road");
+        scene.add(road);
+      }
+    }
+
+    // 4. update road_positions
   }
 
   if (tile_extra_positions[EXTRA_HUT + "." + ptile['index']] == null && tile_has_extra(ptile, EXTRA_HUT)) {

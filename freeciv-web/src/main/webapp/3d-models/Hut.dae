@@ -5,8 +5,8 @@
       <author>Blender User</author>
       <authoring_tool>Blender 2.78.0 commit date:2016-10-24, commit time:12:20, hash:e8299c8</authoring_tool>
     </contributor>
-    <created>2016-12-03T18:43:58</created>
-    <modified>2016-12-03T18:43:58</modified>
+    <created>2016-12-18T08:52:33</created>
+    <modified>2016-12-18T08:52:33</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
@@ -207,7 +207,7 @@
   <library_visual_scenes>
     <visual_scene id="Scene" name="Scene">
       <node id="Cylinder" name="Cylinder" type="NODE">
-        <matrix sid="transform">0.5429005 0 0 0.05834839 0 0.5429005 0 0.03267192 0 0 0.5429005 0.4979447 0 0 0 1</matrix>
+        <matrix sid="transform">0.5429005 0 0 0.07444888 0 0.5429005 0 -0.00725529 0 0 0.5429005 0.3158391 0 0 0 1</matrix>
         <instance_geometry url="#Cylinder-mesh" name="Cylinder">
           <bind_material>
             <technique_common>
@@ -217,7 +217,7 @@
         </instance_geometry>
       </node>
       <node id="Plane" name="Plane" type="NODE">
-        <matrix sid="transform">0.3016456 -0.01606845 0.02245811 0.2112963 0.02231619 -0.003252079 -0.3020663 -0.463646 0.01626497 0.302463 -0.002054719 0.3180993 0 0 0 1</matrix>
+        <matrix sid="transform">0.3016456 -0.01606845 0.02245811 0.2273968 0.02231619 -0.003252079 -0.3020663 -0.5035732 0.01626497 0.302463 -0.002054719 0.1359937 0 0 0 1</matrix>
         <instance_geometry url="#Plane_001-mesh" name="Plane">
           <bind_material>
             <technique_common>
@@ -227,7 +227,7 @@
         </instance_geometry>
       </node>
       <node id="Sphere" name="Sphere" type="NODE">
-        <matrix sid="transform">0.6781483 0 0 0.02793823 0 0.6781483 0 0.04641519 0 0 0.6781483 0.7525176 0 0 0 1</matrix>
+        <matrix sid="transform">0.6781483 0 0 0.04403872 0 0.6781483 0 0.006487973 0 0 0.6781483 0.570412 0 0 0 1</matrix>
         <instance_geometry url="#Sphere_001-mesh" name="Sphere">
           <bind_material>
             <technique_common>

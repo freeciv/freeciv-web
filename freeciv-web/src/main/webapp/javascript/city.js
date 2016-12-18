@@ -81,9 +81,10 @@ function city_owner(pcity)
 **************************************************************************/
 function remove_city(pcity_id)
 {
- if (pcity_id == null) return;
-
- delete cities[pcity_id];
+  if (pcity_id == null) return;
+  var ptile = city_tile(cities[pcity_id]);
+  delete cities[pcity_id];
+  if (renderer == RENDERER_WEBGL) update_city_position(ptile);
 
 }
 

@@ -36,8 +36,7 @@ function create_city_label(pcity)
   ctx.fillRect(0,0,128,16);
   ctx.font = "Bold 16px Arial";
   ctx.fillStyle = "rgba(0,0,0, 1.0)";
-  //TODO: show city size
-  ctx.fillText(pcity['name'], 30, 15);
+  ctx.fillText(pcity['name'] + " " + pcity['size'], 30, 15);
 
   var city_gfx = get_city_flag_sprite(pcity);
   ctx.drawImage(sprites[city_gfx['key']], 0, 0,
@@ -71,8 +70,8 @@ function create_unit_label(punit)
   context1.fillStyle = "rgba(222,255,0, 1.0)";
   context1.strokeStyle= "black";
   context1.lineWidth = 0.5;
-  context1.fillText(get_unit_activity_text(punit), 2, 16);
   context1.strokeText(get_unit_activity_text(punit), 2, 16);
+  context1.fillText(get_unit_activity_text(punit), 2, 16);
 
   var texture1 = new THREE.Texture(canvas1);
   texture1.needsUpdate = true;
@@ -81,7 +80,7 @@ function create_unit_label(punit)
   material1.transparent = true;
 
   var mesh1 = new THREE.Mesh(
-    new THREE.PlaneGeometry(canvas1.width / 2, canvas1.height / 2),
+    new THREE.PlaneGeometry(20, 10),
     material1
   );
 

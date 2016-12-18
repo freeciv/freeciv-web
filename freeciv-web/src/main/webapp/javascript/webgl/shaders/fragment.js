@@ -75,6 +75,7 @@ float beach_low = 47.0;
 float beach_blend_amount = 0.0;
 
 float mountains_low = 100.0;
+float mountains_high = 115.0;
 
 
 void main(void)
@@ -188,8 +189,14 @@ void main(void)
 
   }
 
-  /* render the mountains. */
-  if (vPosition.y > mountains_low) {
+  if (vPosition.y > mountains_high) {
+      /* snow in mountains texture over a certain height threshold. */
+      beach_blend_amount = ((3.0 - (mountains_high - vPosition.y)) / 3.0) - 1.0;
+      vec4 Ca = texture2D(arctic, vec2(vUv.x * 50.0, vUv.y * 50.0));
+      vec4 Cb = texture2D(mountains, vec2(vUv.x * 50.0, vUv.y * 50.0));
+      c = Ca.rgb * beach_blend_amount + Cb.rgb * (1.0 - beach_blend_amount);
+  } else if (vPosition.y > mountains_low) {
+      /* mountain texture over a certain height threshold. */
       vec4 Cb = texture2D(mountains, vec2(vUv.x * 50.0, vUv.y * 50.0));
       c = Cb.rgb;
   }

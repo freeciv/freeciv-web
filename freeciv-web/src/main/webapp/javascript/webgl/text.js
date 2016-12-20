@@ -37,8 +37,16 @@ function create_city_label(pcity)
   var txt_measure = ctx.measureText(city_text);
   ctx.fillRect(28,0,28 + txt_measure.width + 72, 16);
 
+  var dark_bg = false;
+  var nation_colors = nations[owner['nation']]['color'].replace("rgb(", "").replace(")", "").split(",");
+  if (parseInt(nation_colors[0]) < 100 && parseInt(nation_colors[1]) < 100 && parseInt(nation_colors[2]) < 100) dark_bg = true;
+
   ctx.font = "Bold 16px Arial";
-  ctx.fillStyle = "rgba(0,0,0, 1.0)";
+  if (dark_bg) {
+    ctx.fillStyle = "rgba(255,255,255, 1.0)";
+  } else {
+    ctx.fillStyle = "rgba(0,0,0, 1.0)";
+  }
   ctx.fillText(city_text, 55, 15);
   var city_gfx = get_city_flag_sprite(pcity);
   ctx.drawImage(sprites[city_gfx['key']], 0, 0,
@@ -60,7 +68,7 @@ function create_city_label(pcity)
   material1.transparent = true;
 
   var mesh1 = new THREE.Mesh(
-    new THREE.PlaneGeometry(120, 11),
+    new THREE.PlaneBufferGeometry(120, 11),
     material1
   );
 
@@ -90,7 +98,7 @@ function create_unit_label(punit)
   material1.transparent = true;
 
   var mesh1 = new THREE.Mesh(
-    new THREE.PlaneGeometry(20, 10),
+    new THREE.PlaneBufferGeometry(20, 10),
     material1
   );
 

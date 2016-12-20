@@ -23,6 +23,7 @@ var webgl_models = {};
 var start_preload = 0;
 var total_model_count = 0;
 var load_count = 0;
+var webgl_materials = {};
 
 /****************************************************************************
   Preload textures and models
@@ -67,6 +68,16 @@ function webgl_preload()
   textureLoader.load( '/textures/jungle_1.png', function ( image ) {
       jungle_sprite.image = image;
       jungle_sprite.needsUpdate = true;
+  } );
+
+  var road_sprite = new THREE.Texture();
+  webgl_textures["road_1"] = road_sprite;
+  textureLoader.load( '/textures/road_1.png', function ( image ) {
+      road_sprite.image = image;
+      road_sprite.needsUpdate = true;
+      roadMaterial = new THREE.MeshBasicMaterial( { map: road_sprite, side:THREE.DoubleSide } );
+      roadMaterial.transparent = true;
+      webgl_materials['road_1'] = roadMaterial;
   } );
 
   /* Preload a texture for each map tile type. */
@@ -119,6 +130,10 @@ function handle_zip_file(filename, file)
 
     webgl_models_xml_strings[filename] = text;
     if (load_count == total_model_count) {
+      // hack because of webgl_get_model weakness.
+      webgl_get_model("Road");
+      webgl_get_model("Mine");
+      webgl_get_model("Irrigation");
       webgl_preload_complete();
       console.log("WebGL preloading took: " + (new Date().getTime() - start_preload) + " ms.");
     }
@@ -128,6 +143,7 @@ function handle_zip_file(filename, file)
 
 /****************************************************************************
  Loads a single model file.
+ FIXME: This doesn't work the first time it is called.
 ****************************************************************************/
 function webgl_get_model(filename)
 {

@@ -279,44 +279,50 @@ function update_tile_extras(ptile) {
     for (var dir = 0; dir < 8; dir++) {
       var checktile = mapstep(ptile, dir);
       if (checktile != null && tile_has_extra(checktile, ROAD_ROAD)) {
-      // 2. if road on this tile and adjacent tile, then add rectangle as road between this tile and adjacent tile.
-        road_added = true;
-        var road_width = 4 + Math.random();
-        var dest = map_to_scene_coords(checktile['x'], checktile['y']);
-        var roadGeometry = new THREE.BufferGeometry();
-        var vertices = new Float32Array( [
-        	 0.0, 0.0,  0.0,
-        	 dest['x'] - pos['x'], (checktile['height'] - ptile['height']) * 100 ,  dest['y'] - pos['y'],
-        	 dest['x'] - pos['x'], (checktile['height'] - ptile['height']) * 100,  dest['y'] - pos['y'] + road_width,
+        // if the road wraps the map edge, then skip it.
+        if ((ptile['x'] == 0 && checktile['x'] == map['xsize'] -1)
+            ||  (ptile['x'] == map['xsize'] -1 && checktile['x'] == 0)) continue;
 
-        	 dest['x'] - pos['x'], (checktile['height'] - ptile['height']) * 100,  dest['y'] - pos['y'] + road_width,
-        	 0.0, 0.0,  road_width,
-        	 0.0, 0.0,  0.0
-        ] );
-        roadGeometry.addAttribute( 'position', new THREE.BufferAttribute( vertices, 3 ) );
-        var roadMaterial = new THREE.MeshBasicMaterial( { color: 0x171108, side:THREE.DoubleSide} );
-        var road = new THREE.Mesh( roadGeometry, roadMaterial );
+        // 2. if road on this tile and adjacent tile, then add rectangle as road between this tile and adjacent tile.
+        road_added = true;
+        var road_width = 15;
+        var dest = map_to_scene_coords(checktile['x'], checktile['y']);
+        var roadGemetry = new THREE.PlaneGeometry(60, 15);
+        roadGemetry.dynamic = true;
+        roadGemetry.vertices[0].x = 0.0;
+        roadGemetry.vertices[0].y = 0.0;
+        roadGemetry.vertices[0].z = 0.0;
+        roadGemetry.vertices[1].x = dest['x'] - pos['x'];
+        roadGemetry.vertices[1].y = (checktile['height'] - ptile['height']) * 100;
+        roadGemetry.vertices[1].z = dest['y'] - pos['y'];
+        roadGemetry.vertices[2].x = 0.0;
+        roadGemetry.vertices[2].y = 0.0;
+        roadGemetry.vertices[2].z = road_width;
+        roadGemetry.vertices[3].x = dest['x'] - pos['x'];
+        roadGemetry.vertices[3].y = (checktile['height'] - ptile['height']) * 100;
+        roadGemetry.vertices[3].z = dest['y'] - pos['y'] + road_width;
+
+        roadGemetry.verticesNeedUpdate = true;
+
+        var road = new THREE.Mesh(roadGemetry, webgl_materials['road_1']);
+
         road.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
-        road.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 4);
+        road.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 6);
         road.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
-        console.log("adding connected road");
         scene.add(road);
         road_positions[ptile['index']] = road;
       }
     }
-
 
     // 3. if road on this tile only, then use Road model.
     if (road_added == false) {
       var road = webgl_get_model("Road");
       if (road == null) return;
       road_positions[ptile['index']] = road;
-
       road.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
       road.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 4);
       road.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
       if (scene != null && road != null) {
-        console.log("adding single road");
         scene.add(road);
       }
     }

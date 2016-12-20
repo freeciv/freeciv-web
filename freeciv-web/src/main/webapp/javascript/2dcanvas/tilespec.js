@@ -1491,7 +1491,6 @@ function assign_nation_color(nation_id)
 
   /* count the number of each pixel's color */
   for (var i = 0; i < img_data.length; i += 4) {
-    if (renderer == RENDERER_WEBGL && img_data[i] < 10 && img_data[i+1] < 10 && img_data[i+2] < 10) continue; //disallow black color
     var current_color = "rgb(" + img_data[i] + "," + img_data[i+1] + ","
                         + img_data[i+2] + ")";
     if (current_color in color_counts) {

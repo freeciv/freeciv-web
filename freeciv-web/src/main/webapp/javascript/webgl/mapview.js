@@ -89,9 +89,9 @@ function webgl_start_renderer()
   }
 
   if (is_small_screen()) {
-    camera_dy = 320;
-    camera_dx = 100;
-    camera_dz = 100;
+    camera_dy = 310;
+    camera_dx = 140;
+    camera_dz = 140;
   }
 
   if (cardboard_vr_enabled) {

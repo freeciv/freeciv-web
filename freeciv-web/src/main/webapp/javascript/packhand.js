@@ -92,10 +92,14 @@ function handle_server_join_reply(packet)
          send_message_delayed("/set size 1", 130);
        }
        // Freeciv-web WebGL doesn't support rendering rivers at the moment.
-       send_message_delayed("/set wetness 5", 140);
+       send_message_delayed("/set wetness 10", 140);
 
        // Freeciv-web WebGL doesn't support rendering borders.
        send_message_delayed("/set borders disabled", 150);
+
+       // Less hills will be more user-friendly in 3D mode.
+       send_message_delayed("/set steepness 15", 155);
+
      }
 
     if (autostart) {

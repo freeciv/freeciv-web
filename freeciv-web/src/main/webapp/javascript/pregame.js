@@ -822,8 +822,7 @@ function show_intro_dialog(title, message) {
 
   if (renderer == RENDERER_WEBGL) {
     intro_html += "<span style='color: red;'>BETA TEST: The 3D WebGL version of Freeciv-web which you are currently using is an unstable BETA version. "
-               + "It is not complete and contains many bugs. If you are looking for a stable fullly playable game, then go back and try the 2D version. "
-               + "Please report bugs and feedback in the 3D WebGL on the forum. Enjoy!</span>";
+               + "It is not complete and contains many bugs. Please report bugs and feedback on the forum. Enjoy!</span>";
   }
   $("#dialog").html(intro_html);
   var stored_username = simpleStorage.get("username", "");

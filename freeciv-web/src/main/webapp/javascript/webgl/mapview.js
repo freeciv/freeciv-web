@@ -215,7 +215,7 @@ function render_map_terrain() {
   /* Unknown territory */
   unknownTerritoryGeometry = new THREE.PlaneGeometry(mapview_model_width, mapview_model_height, xquality - 1, yquality - 1);
   unknownTerritoryGeometry.rotateX( - Math.PI / 2 );
-  unknownTerritoryGeometry.translate(Math.floor(mapview_model_width / 2) - 500, 0, Math.floor(mapview_model_height / 2));
+  unknownTerritoryGeometry.translate(Math.floor(mapview_model_width / 2) - 496, 0, Math.floor(mapview_model_height / 2) + 4);
   for ( var i = 0, l = unknownTerritoryGeometry.vertices.length; i < l; i ++ ) {
     var x = i % xquality, y = Math.floor( i / xquality );
     var gx = Math.floor(x / 4);
@@ -225,7 +225,7 @@ function render_map_terrain() {
       if (ptile != null && tile_get_known(ptile) != TILE_UNKNOWN) {
         unknownTerritoryGeometry.vertices[ i ].y = 0;
       } else {
-        unknownTerritoryGeometry.vertices[ i ].y = heightmap[x][y] * 100 + 8;
+        unknownTerritoryGeometry.vertices[ i ].y = heightmap[x][y] * 100 + 13;
       }
     }
 

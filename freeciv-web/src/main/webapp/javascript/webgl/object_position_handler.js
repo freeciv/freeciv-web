@@ -81,8 +81,8 @@ function update_unit_position(ptile) {
     }
     /* add flag. */
     var pflag = get_unit_nation_flag_normal_sprite(visible_unit);
-    if (meshes[pflag['key']] != null && unit_flag_positions[ptile['index']] == null) {
-      var new_flag = meshes[pflag['key']].clone();
+    if (unit_flag_positions[ptile['index']] == null) {
+      var new_flag = get_flag_mesh(pflag['key']);
       unit_flag_positions[ptile['index']] = new_flag;
       var fpos = map_to_scene_coords(ptile['x'], ptile['y']);
       new_flag.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10);
@@ -289,17 +289,19 @@ function update_tile_extras(ptile) {
         var dest = map_to_scene_coords(checktile['x'], checktile['y']);
         var roadGemetry = new THREE.PlaneGeometry(60, 15);
         roadGemetry.dynamic = true;
+        var delta = 0;
+        if (dir == 1 || dir == 6) delta = 10;
         roadGemetry.vertices[0].x = 0.0;
-        roadGemetry.vertices[0].y = 0.0;
+        roadGemetry.vertices[0].y = 0.0 - delta;
         roadGemetry.vertices[0].z = 0.0;
         roadGemetry.vertices[1].x = dest['x'] - pos['x'];
-        roadGemetry.vertices[1].y = (checktile['height'] - ptile['height']) * 100;
+        roadGemetry.vertices[1].y = (checktile['height'] - ptile['height']) * 100 - delta;
         roadGemetry.vertices[1].z = dest['y'] - pos['y'];
         roadGemetry.vertices[2].x = 0.0;
-        roadGemetry.vertices[2].y = 0.0;
+        roadGemetry.vertices[2].y = 0.0 + delta;
         roadGemetry.vertices[2].z = road_width;
         roadGemetry.vertices[3].x = dest['x'] - pos['x'];
-        roadGemetry.vertices[3].y = (checktile['height'] - ptile['height']) * 100;
+        roadGemetry.vertices[3].y = (checktile['height'] - ptile['height']) * 100 + delta;
         roadGemetry.vertices[3].z = dest['y'] - pos['y'] + road_width;
 
         roadGemetry.verticesNeedUpdate = true;
@@ -433,3 +435,28 @@ function add_all_objects_to_scene()
 
 }
 
+
+/****************************************************************************
+ Loads a single model file.
+****************************************************************************/
+function webgl_get_model(filename)
+{
+  if (webgl_models[filename] != null) return webgl_models[filename].clone();;
+  if (webgl_models_xml_strings[filename] == null) {
+    return null;
+  }
+
+  var colladaloader = new THREE.ColladaLoader();
+  colladaloader.options.convertUpAxis = true;
+  colladaloader.parse( webgl_models_xml_strings[filename], function ( collada ) {
+    dae = collada.scene;
+    dae.updateMatrix();
+    dae.scale.x = dae.scale.y = dae.scale.z = 11;
+    webgl_models[filename] = dae;
+
+    webgl_models_xml_strings[filename] = ""; // clear xml string for this model.
+
+    return dae.clone();
+  });
+
+}

@@ -32,7 +32,6 @@ function webgl_preload()
 {
   $.blockUI({ message: "<h2>Downloading textures and models...</h2>" });
   start_preload = new Date().getTime();
-  create_flags();
 
   var loadingManager = new THREE.LoadingManager();
   loadingManager.onLoad = function () {
@@ -130,10 +129,6 @@ function handle_zip_file(filename, file)
 
     webgl_models_xml_strings[filename] = text;
     if (load_count == total_model_count) {
-      // hack because of webgl_get_model weakness.
-      webgl_get_model("Road");
-      webgl_get_model("Mine");
-      webgl_get_model("Irrigation");
       webgl_preload_complete();
       console.log("WebGL preloading took: " + (new Date().getTime() - start_preload) + " ms.");
     }
@@ -143,7 +138,6 @@ function handle_zip_file(filename, file)
 
 /****************************************************************************
  Loads a single model file.
- FIXME: This doesn't work the first time it is called.
 ****************************************************************************/
 function webgl_get_model(filename)
 {
@@ -154,40 +148,42 @@ function webgl_get_model(filename)
 
   var colladaloader = new THREE.ColladaLoader();
   colladaloader.options.convertUpAxis = true;
-  colladaloader.parse( webgl_models_xml_strings[filename], function ( collada ) {
-    dae = collada.scene;
-    dae.updateMatrix();
-    dae.scale.x = dae.scale.y = dae.scale.z = 11;
-    webgl_models[filename] = dae;
 
-    webgl_models_xml_strings[filename] = ""; // clear xml string for this model.
+  var collada = colladaloader.parse( webgl_models_xml_strings[filename]);
+  var dae = collada.scene;
+  dae.updateMatrix();
+  dae.scale.x = dae.scale.y = dae.scale.z = 11;
+  webgl_models[filename] = dae;
+  webgl_models_xml_strings[filename] = ""; // clear xml string for this model.
 
-    return dae.clone();
-  });
+  return dae.clone();
 
 }
 
 /****************************************************************************
- Create flag meshes
+ Returns a flag mesh
 ****************************************************************************/
-function create_flags()
+function get_flag_mesh(key)
 {
-  for (var sprite_key in sprites) {
-    if (sprite_key.substring(0,2) == "f.") {
-      var flagGeometry = new THREE.PlaneGeometry( 14, 10 );
-      /* resize flag to 32x16, since that is required by Three.js*/
-      var fcanvas = document.createElement("canvas");
-      fcanvas.width = 32;
-      fcanvas.height = 16;
-      var fcontext = fcanvas.getContext("2d");
-      fcontext.drawImage(sprites[sprite_key], 0, 0,
-                sprites[sprite_key].width, sprites[sprite_key].height,
+  if (meshes[key] != null) return meshes[key].clone();
+  if (sprites[key] == null || key.substring(0,2) != "f.") {
+    console.log("Invalid flag key: " + key);
+    return null;
+  }
+
+  var flagGeometry = new THREE.PlaneBufferGeometry( 14, 10 );
+  /* resize flag to 32x16, since that is required by Three.js*/
+  var fcanvas = document.createElement("canvas");
+  fcanvas.width = 32;
+  fcanvas.height = 16;
+  var fcontext = fcanvas.getContext("2d");
+  fcontext.drawImage(sprites[key], 0, 0,
+                sprites[key].width, sprites[key].height,
                 0,0,32,16);
 
-      var texture = new THREE.CanvasTexture(fcanvas);
-      var material = new THREE.MeshBasicMaterial( { map: texture, overdraw: 0.5 } );
-      meshes[sprite_key] = new THREE.Mesh(flagGeometry, material);
-    }
-  }
+  var texture = new THREE.CanvasTexture(fcanvas);
+  var material = new THREE.MeshBasicMaterial( { map: texture, overdraw: 0.5 } );
+  meshes[key] = new THREE.Mesh(flagGeometry, material);
+  return meshes[key].clone();
 
 }

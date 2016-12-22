@@ -147,7 +147,7 @@ function login_pbem_user()
 
 
 /**************************************************************************
-...
+ TODO: this code is duplicated in pregame.js #show_new_user_account_dialog() - remove this.
 **************************************************************************/
 function create_new_pbem_user() 
 {
@@ -205,10 +205,12 @@ function create_new_pbem_user()
             type: 'POST',
             url: "/validate_user?userstring=" + $("#email").val(),
             success: function(data, textStatus, request) {
-               if (data != "user_does_not_exist") {
-                 $("#username_validation_result").html("The e-mail is already registered. Please choose another.");
-               } else {
+               if (data == "invitation") {
                  $("#username_validation_result").html("");
+                 $(".ui-dialog-buttonset button").button("enable");
+               } else {
+                 $("#username_validation_result").html("The e-mail is already registered. Please choose another.");
+                 $(".ui-dialog-buttonset button").button("disable");
                }
              }
            });

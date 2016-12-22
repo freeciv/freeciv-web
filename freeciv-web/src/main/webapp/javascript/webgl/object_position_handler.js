@@ -310,7 +310,7 @@ function update_tile_extras(ptile) {
 
         road.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
         road.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 6);
-        road.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
+        road.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
         scene.add(road);
         road_positions[ptile['index']] = road;
       }

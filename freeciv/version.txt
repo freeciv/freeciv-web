@@ -1,6 +1,3 @@
-# I keep previous version easily available here so I don't need to check
-# version history constantly when handling ruleset differences.
-# Previous:34426
 FCREV=34448
 FCBRANCH=trunk
 

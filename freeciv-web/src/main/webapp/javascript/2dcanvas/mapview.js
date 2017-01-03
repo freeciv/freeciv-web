@@ -374,7 +374,7 @@ function mapview_put_goto_line(pcanvas, dir, canvas_x, canvas_y) {
   var x1 = x0 + GOTO_DIR_DX[dir] * (tileset_tile_width / 2);
   var y1 = y0 + GOTO_DIR_DY[dir] * (tileset_tile_height / 2);
 
-  pcanvas.strokeStyle = 'rgba(0,168,255,0.7)';
+  pcanvas.strokeStyle = 'rgba(0,168,255,0.9)';
   pcanvas.lineWidth = 10;
   pcanvas.lineCap = "round";
   pcanvas.beginPath();

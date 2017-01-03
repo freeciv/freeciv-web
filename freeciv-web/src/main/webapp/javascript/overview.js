@@ -74,6 +74,8 @@ function init_overview()
 
   $("#game_overview_panel").css("min-height",  map['ysize']);
   $(".overview_dialog").position({my: 'left bottom', at: 'left bottom', of: window, within: $("#game_page")});
+
+  $('#overview_map').on('dragstart', function(event) { event.preventDefault(); });
 }
 
 /****************************************************************************
@@ -123,7 +125,9 @@ function render_viewrect(grid)
 {
   var r;
 
-  if (mapview['gui_x0'] != 0 && mapview['gui_y0'] != 0) {
+  if (C_S_RUNNING != client_state() && C_S_OVER != client_state()) return;
+
+  if (renderer == RENDERER_2DCANVAS && mapview['gui_x0'] != 0 && mapview['gui_y0'] != 0) {
 
     r = base_canvas_to_map_pos(0, 0);
     s = base_canvas_to_map_pos(mapview['width'], 0);
@@ -134,6 +138,19 @@ function render_viewrect(grid)
     drawLine(grid, s['map_y'], s['map_x'], u['map_y'], u['map_x']);
     drawLine(grid, t['map_y'], t['map_x'], u['map_y'], u['map_x']);
     drawLine(grid, r['map_y'], r['map_x'], t['map_y'], t['map_x']);
+
+  } else {
+    var ptile1 = webgl_canvas_pos_to_tile($(window).width() / 6, $(window).height() / 6);
+    var ptile2 = webgl_canvas_pos_to_tile($(window).width() - $(window).width() / 6, $(window).height() / 6);
+    var ptile3 = webgl_canvas_pos_to_tile($(window).width() / 6, $(window).height() - height_offset);
+    var ptile4 = webgl_canvas_pos_to_tile($(window).width() - $(window).width() / 6, $(window).height() - height_offset);
+
+    if (ptile1 == null || ptile2 == null || ptile3 == null || ptile4 == null) return;
+
+    drawLine(grid, ptile1['y'], ptile1['x'], ptile2['y'], ptile2['x']);
+    drawLine(grid, ptile2['y'], ptile2['x'], ptile4['y'], ptile4['x']);
+    drawLine(grid, ptile3['y'], ptile3['x'], ptile4['y'], ptile4['x']);
+    drawLine(grid, ptile1['y'], ptile1['x'], ptile3['y'], ptile3['x']);
 
   }
 }

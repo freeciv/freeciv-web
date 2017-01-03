@@ -104,7 +104,7 @@ function webgl_preload_models()
 {
   var url = '/3d-models/models.zip';
   zip.createReader(new zip.HttpReader(url), function(zipReader){
-     $.blockUI({ message: "<h2>Uncompressing files and parsing 3D models...</h2>" });
+     $.blockUI({ message: "<h2>Downloading 3D models...</h2>" });
      zipReader.getEntries(function(entries){
        total_model_count = entries.length;
        for (var i = 0; i < entries.length; i++) {

@@ -45,6 +45,7 @@ function scene_to_map_coords(x, y)
   Converts from map canvas coordinates to a tile.
 ****************************************************************************/
 function webgl_canvas_pos_to_tile(x, y) {
+  if (mouse == null) return null;
 
   mouse.set( ( x / $('#canvas_div').width() ) * 2 - 1, - ( y / $('#canvas_div').height() ) * 2 + 1 );
 

@@ -373,7 +373,6 @@ function create_diplomacy_dialog(counterpart) {
   $(".ui-dialog").css("overflow", "visible");
 
 
-
   $("#diplomacy_player_box_self").html(flag_self_html + agree_self_html
 		                       + player_info_html);
   $("#diplomacy_player_box_counterpart").html(flag_counterpart_html + agree_counterpart_html
@@ -558,7 +557,7 @@ function create_diplomacy_dialog(counterpart) {
     }, 500);
    });
 
-  $("#diplomacy_dialog").parent().css("z-index", 2);
+  $("#diplomacy_dialog").parent().css("z-index", 1000);
 
 }
 

@@ -41,13 +41,14 @@ function generate_map_tiletype_grid() {
     }
   }
 
-  if (!is_small_screen()) {
-    for (var i = 0; i < 2; i++) {
-      for (var x = 0; x < map_tiletype_resolution - 2; x++) {
-        for (var y = 0; y < map_tiletype_resolution - 2; y++) {
-          if (Math.random() >= 0.6) {
-            grid[x][y] = grid[x + 2][y + 2];
-          }
+  // randomize tile edges
+  var num_iterations = 3;
+  if (is_small_screen()) num_iterations = 1;
+  for (var i = 0; i < num_iterations; i++) {
+    for (var x = 0; x < map_tiletype_resolution - 2; x++) {
+      for (var y = 0; y < map_tiletype_resolution - 2; y++) {
+        if (Math.random() >= 0.6) {
+          grid[x][y] = grid[x + 2][y + 2];
         }
       }
     }

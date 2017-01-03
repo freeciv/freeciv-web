@@ -1029,8 +1029,8 @@ function fill_fog_sprite_array(ptile, pedge, pcorner)
 ****************************************************************************/
 function get_select_sprite()
 {
-  // update selected unit sprite 10 times a second.
-  current_select_sprite = (Math.floor(new Date().getTime() / 100) % max_select_sprite);
+  // update selected unit sprite 6 times a second.
+  current_select_sprite = (Math.floor(new Date().getTime() * 6 / 1000) % max_select_sprite);
   return {"key" : "unit.select" + current_select_sprite };
 }
 

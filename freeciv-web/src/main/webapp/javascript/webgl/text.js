@@ -33,13 +33,13 @@ function create_city_label(pcity)
   var owner = players[owner_id];
 
   ctx.fillStyle=nations[owner['nation']]['color'];
-  var city_text = pcity['name'] + " " + pcity['size'];
+  var city_text = pcity['name'] + "  " + pcity['size'];
   var txt_measure = ctx.measureText(city_text);
   ctx.fillRect(28,0,28 + txt_measure.width + 72, 16);
 
   var dark_bg = false;
   var nation_colors = nations[owner['nation']]['color'].replace("rgb(", "").replace(")", "").split(",");
-  if (parseInt(nation_colors[0]) < 100 && parseInt(nation_colors[1]) < 100 && parseInt(nation_colors[2]) < 100) dark_bg = true;
+  if (parseInt(nation_colors[0]) + parseInt(nation_colors[1]) + parseInt(nation_colors[2]) < 300) dark_bg = true;
 
   ctx.font = "Bold 16px Arial";
   if (dark_bg) {
@@ -47,7 +47,7 @@ function create_city_label(pcity)
   } else {
     ctx.fillStyle = "rgba(0,0,0, 1.0)";
   }
-  ctx.fillText(city_text, 55, 15);
+  ctx.fillText(city_text, 55, 14);
   var city_gfx = get_city_flag_sprite(pcity);
   ctx.drawImage(sprites[city_gfx['key']], 0, 0,
                                   sprites[city_gfx['key']].width, sprites[city_gfx['key']].height,
@@ -68,7 +68,7 @@ function create_city_label(pcity)
   material1.transparent = true;
 
   var mesh1 = new THREE.Mesh(
-    new THREE.PlaneBufferGeometry(120, 11),
+    new THREE.PlaneBufferGeometry(120, 13),
     material1
   );
 

@@ -484,9 +484,6 @@ function pregame_settings()
                 "with 3D graphics card. Here you can configure it:</i></span><br><br>" +
 	    "<table id='settings_table'><tr id='3d_antialiasing_enabled'><td id='3d_antialiasing_label' style='min-width: 150px;'></td>" +
         "<td><input type='checkbox' id='3d_antialiasing_setting' checked>Enable antialiasing (game looks nicer, but is slower)</td></tr>" +
-        /*"<tr id='cardboard_vr_enabled'><td id='cardboard_vr_label' style='min-width: 150px;'></td>" +
-                "<td><input type='checkbox' id='cardboard_vr_setting'>Enable Virtual reality glasses with Google Cardboard. You can use " +
-                "Google Cardboard glasses with your mobile phone, then connect a bluetooth mouse to your phone for controls. BETA!</td></tr>" +*/
         "</table>" +
       "</div>" +
 
@@ -821,8 +818,8 @@ function show_intro_dialog(title, message) {
 	  + " <br><br><span id='username_validation_result'></span>";
 
   if (renderer == RENDERER_WEBGL) {
-    intro_html += "<span style='color: red;'>BETA TEST: The 3D WebGL version of Freeciv-web which you are currently using is an unstable BETA version. "
-               + "It is not complete and contains many bugs. Please report bugs and feedback on the forum. Enjoy!</span>";
+    intro_html += "<span style='color: red;'>BETA TEST: The 3D WebGL version of Freeciv-web which you are currently using is an unstable BETA version.<br> "
+               + "Please report bugs and feedback on the forum. Enjoy!</span>";
   }
   $("#dialog").html(intro_html);
   var stored_username = simpleStorage.get("username", "");

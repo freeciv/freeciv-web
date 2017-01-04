@@ -196,8 +196,14 @@ function update_city_position(ptile) {
 
   if (city_positions[ptile['index']] == null && pcity != null) {
     // add new city
-
-    var new_city = webgl_get_model("city_1");
+    var size = 0;
+    if (pcity['size'] >=4 && pcity['size'] <=7) {
+      size = 1;
+    } else if (pcity['size'] >=8) {
+      size = 2;
+    }
+    pcity['webgl_model_size'] = size;
+    var new_city = webgl_get_model("city_european_" + size);
     if (new_city == null) return;
     city_positions[ptile['index']] = new_city;
 
@@ -221,6 +227,31 @@ function update_city_position(ptile) {
 
   if (city_positions[ptile['index']] != null && pcity != null) {
     // Update of visible city.
+    var size = 0;
+    if (pcity['size'] >=4 && pcity['size'] <=7) {
+      size = 1;
+    } else if (pcity['size'] >=8) {
+      size = 2;
+    }
+    if (pcity['webgl_model_size'] != size) {
+      // update city model to a different size.
+      if (scene != null) scene.remove(city_positions[ptile['index']]);
+      pcity['webgl_model_size'] = size;
+      var new_city = webgl_get_model("city_european_" + size);
+      if (new_city == null) return;
+      city_positions[ptile['index']] = new_city;
+
+      var pos = map_to_scene_coords(ptile['x'], ptile['y']);
+      new_city.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
+      new_city.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
+      new_city.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
+
+      if (scene != null && new_city != null) {
+        scene.add(new_city);
+      }
+    }
+
+
     var pos = map_to_scene_coords(ptile['x'], ptile['y']);
     if (scene != null) scene.remove(city_label_positions[ptile['index']]);
     delete city_label_positions[ptile['index']];

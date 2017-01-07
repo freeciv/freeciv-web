@@ -102,12 +102,6 @@ The Vagrant guest machine will mount the Freeciv-web source repository in the /v
 Note that running Freeciv-web using Vagrant requires about 4Gb of memory
 and 3 Gb of harddisk space.
 
-Development and git branches
-----------------------------
-Freeciv-web has two branches: master and develop. Master is the main branch with production-ready code, while develop contains the latest development changes. The master branch is deployed to the live server nightly if there are updates. Develop is where development should happen, so please submit changes and pull-requests to the develop branch. We will merge from develop to master when we think that the develop branch is ready for the production server. This banching model is based on [A successful Git branching model](http://nvie.com/posts/a-successful-git-branching-model/).
-
-    
-
 System Requirements for manual install
 --------------------------------------
 

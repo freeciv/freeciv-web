@@ -89,20 +89,9 @@ function webgl_start_renderer()
   }
 
   if (is_small_screen()) {
-    camera_dy = 310;
+    camera_dy = 320;
     camera_dx = 140;
     camera_dz = 140;
-  }
-
-  if (cardboard_vr_enabled) {
-    $.ajax({
-      async: false,
-      url: "/javascript/webgl/libs/StereoEffect.js",
-      dataType: "script"
-    });
-    stereoEffect = new THREE.StereoEffect(maprenderer);
-    stereoEffect.setSize(new_mapview_width, new_mapview_height);
-    camera_dy = 300;
   }
 
   maprenderer.setClearColor(0x000000);

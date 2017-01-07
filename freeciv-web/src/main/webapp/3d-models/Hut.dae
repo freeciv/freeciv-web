@@ -5,8 +5,8 @@
       <author>Blender User</author>
       <authoring_tool>Blender 2.78.0 commit date:2016-10-24, commit time:12:20, hash:e8299c8</authoring_tool>
     </contributor>
-    <created>2016-12-18T08:52:33</created>
-    <modified>2016-12-18T08:52:33</modified>
+    <created>2017-01-07T20:00:04</created>
+    <modified>2017-01-07T20:00:04</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
@@ -26,7 +26,7 @@
               <color sid="diffuse">0.2439899 0.2334165 0.1019502 1</color>
             </diffuse>
             <specular>
-              <color sid="specular">0.313331 0.2994278 0.1276094 1</color>
+              <color sid="specular">0.1836186 0.1756068 0.07616321 1</color>
             </specular>
             <shininess>
               <float sid="shininess">50</float>
@@ -75,10 +75,10 @@
               <color sid="ambient">0 0 0 1</color>
             </ambient>
             <diffuse>
-              <color sid="diffuse">0.2930021 0.240435 0.1019502 1</color>
+              <color sid="diffuse">0.1762054 0.1451987 0.06297469 1</color>
             </diffuse>
             <specular>
-              <color sid="specular">0.3806359 0.3108928 0.1285062 1</color>
+              <color sid="specular">0.08667735 0.07158883 0.03143311 1</color>
             </specular>
             <shininess>
               <float sid="shininess">50</float>
@@ -207,7 +207,7 @@
   <library_visual_scenes>
     <visual_scene id="Scene" name="Scene">
       <node id="Cylinder" name="Cylinder" type="NODE">
-        <matrix sid="transform">0.5429005 0 0 0.07444888 0 0.5429005 0 -0.00725529 0 0 0.5429005 0.3158391 0 0 0 1</matrix>
+        <matrix sid="transform">0.271273 -0.2799719 0.00133233 0.01187003 0.2799647 0.271244 -0.004638502 -0.1085962 0.002404228 0.004184554 0.3898099 0.3239222 0 0 0 1</matrix>
         <instance_geometry url="#Cylinder-mesh" name="Cylinder">
           <bind_material>
             <technique_common>
@@ -217,7 +217,7 @@
         </instance_geometry>
       </node>
       <node id="Plane" name="Plane" type="NODE">
-        <matrix sid="transform">0.3016456 -0.01606845 0.02245811 0.2273968 0.02231619 -0.003252079 -0.3020663 -0.5035732 0.01626497 0.302463 -0.002054719 0.1359937 0 0 0 1</matrix>
+        <matrix sid="transform">0.1392559 -0.005609608 0.1669912 0.3438022 0.1665643 -0.01249527 -0.1393196 -0.2761573 0.01318631 0.2170764 -0.00370414 0.1916425 0 0 0 1</matrix>
         <instance_geometry url="#Plane_001-mesh" name="Plane">
           <bind_material>
             <technique_common>
@@ -227,7 +227,7 @@
         </instance_geometry>
       </node>
       <node id="Sphere" name="Sphere" type="NODE">
-        <matrix sid="transform">0.6781483 0 0 0.04403872 0 0.6781483 0 0.006487973 0 0 0.6781483 0.570412 0 0 0 1</matrix>
+        <matrix sid="transform">0.3388528 -0.3497187 0.001664241 -0.009787738 0.3497098 0.3388166 -0.00579405 -0.1195869 0.003003171 0.005227014 0.4869198 0.5066801 0 0 0 1</matrix>
         <instance_geometry url="#Sphere_001-mesh" name="Sphere">
           <bind_material>
             <technique_common>

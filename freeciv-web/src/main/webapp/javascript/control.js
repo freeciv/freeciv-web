@@ -1148,7 +1148,7 @@ function do_map_click(ptile, qtype, first_time_called)
           } else {
             $("#canvas_div").contextMenu();
           }
-	} else {
+	} else if (!goto_active) {
           show_city_dialog(pcity);
 	}
       }

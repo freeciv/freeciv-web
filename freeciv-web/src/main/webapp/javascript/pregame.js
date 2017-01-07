@@ -818,7 +818,7 @@ function show_intro_dialog(title, message) {
 	  + " <br><br><span id='username_validation_result'></span>";
 
   if (renderer == RENDERER_WEBGL) {
-    intro_html += "<span style='color: red;'>BETA TEST: The 3D WebGL version of Freeciv-web which you are currently using is an unstable BETA version.<br> "
+    intro_html += "<span style='color: red;'><br>BETA TEST: The 3D WebGL version of Freeciv-web which you are currently using is an unstable BETA version.<br> "
                + "Please report bugs and feedback on the forum. Enjoy!</span>";
   }
   $("#dialog").html(intro_html);

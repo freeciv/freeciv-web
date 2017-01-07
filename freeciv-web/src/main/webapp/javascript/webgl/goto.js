@@ -17,9 +17,7 @@
 
 ***********************************************************************/
 
-var goto_line = null;
-
-// TODO: lines don't support width. Use rectangles instead.
+var goto_lines = [];
 
 /****************************************************************************
 ...
@@ -30,15 +28,10 @@ function webgl_render_goto_line(start_tile, goto_packet_dir)
   var ptile = start_tile;
   var startpos = map_to_scene_coords(ptile['x'], ptile['y']);
 
-  var material = new THREE.LineBasicMaterial({
-	color: 0x0505ff,
-	linewidth: 1
-  });
+  var material = new THREE.MeshBasicMaterial( { color: 0x0505ff, side:THREE.DoubleSide} );
+  var goto_width = 6;
 
-  var geometry = new THREE.Geometry();
-  geometry.vertices.push(new THREE.Vector3(0, 0, 0));
   var height = 5 + ptile['height'] * 100;
-  goto_line = new THREE.Line(geometry, material);
 
   var dx = 0;
   var dy = 0;
@@ -56,23 +49,38 @@ function webgl_render_goto_line(start_tile, goto_packet_dir)
     if (ptile != null && nexttile != null) {
       var currpos = map_to_scene_coords(ptile['x'], ptile['y']);
       var nextpos = map_to_scene_coords(nexttile['x'], nexttile['y']);
-      dx = dx + nextpos['x'] - currpos['x'];
-      dy = dy + nextpos['y'] - currpos['y'];
-      dh = dh + ((nexttile['height'] - ptile['height']) * 100);
-      geometry.vertices.push(
-	    new THREE.Vector3(dx, dh, dy)
-      );
+      var height = 5 + ptile['height'] * 100;
+      if (ptile['x'] == 0 || ptile['x'] >= map['xsize'] - 1 || nexttile['x'] == 0 || nexttile['x'] >= map['xsize'] - 1) continue;
+
+      var gotoLineGemetry = new THREE.PlaneGeometry(60, 5);
+      gotoLineGemetry.dynamic = true;
+      var delta = 0;
+      if (dir == 1 || dir == 6) delta = 4;
+      gotoLineGemetry.vertices[0].x = 0.0;
+      gotoLineGemetry.vertices[0].y = 0.0;
+      gotoLineGemetry.vertices[0].z = 0.0;
+      gotoLineGemetry.vertices[1].x = nextpos['x'] - currpos['x'];
+      gotoLineGemetry.vertices[1].y = (nexttile['height'] - ptile['height']) * 100 - delta;
+      gotoLineGemetry.vertices[1].z = nextpos['y'] - currpos['y'];
+      gotoLineGemetry.vertices[2].x = 0.0;
+      gotoLineGemetry.vertices[2].y = delta;
+      gotoLineGemetry.vertices[2].z = goto_width;
+      gotoLineGemetry.vertices[3].x = nextpos['x'] - currpos['x'];
+      gotoLineGemetry.vertices[3].y = (nexttile['height'] - ptile['height']) * 100 + delta;
+      gotoLineGemetry.vertices[3].z = nextpos['y'] - currpos['y'] + goto_width;
+      gotoLineGemetry.verticesNeedUpdate = true;
+      var gotoline = new THREE.Mesh(gotoLineGemetry, material);
+
+      gotoline.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), currpos['x'] + 10);
+      gotoline.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 25);
+      gotoline.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), currpos['y'] + 10);
+      scene.add(gotoline);
+      goto_lines.push(gotoline);
+
     }
 
     ptile = mapstep(ptile, dir);
   }
-
-  goto_line.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), startpos['x']);
-  goto_line.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 5);
-  goto_line.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), startpos['y']);
-
-
-  scene.add(goto_line);
 
 
 }

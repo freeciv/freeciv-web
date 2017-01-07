@@ -387,6 +387,11 @@ function clear_goto_tiles()
       }
     }
   } else {
-    if (scene != null && goto_line != null) scene.remove(goto_line);
+    if (scene != null && goto_lines != null) {
+      for (var i = 0; i < goto_lines.length; i++) {
+        scene.remove(goto_lines[i]);
+      }
+      goto_lines = [];
+    }
   }
 }

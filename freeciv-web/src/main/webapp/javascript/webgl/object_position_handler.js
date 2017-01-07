@@ -34,6 +34,7 @@ var jungle_positions = {}; // tile index is key, boolean is value.
 var tile_extra_positions = {};
 
 var road_positions = {};
+var rail_positions = {};
 
 var selected_unit_indicator = null;
 
@@ -74,7 +75,7 @@ function update_unit_position(ptile) {
     new_unit.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
     new_unit.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
     new_unit.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
-    // rotate unit in the direction it is facing.
+    // rotate unit in the direction it is facing. using timeout here because Collada model could not be rotated in another way.
     setTimeout("if (unit_positions["+ptile['index']+"] != null) unit_positions["+ptile['index']+"].rotateY(" + (convert_unit_rotation(visible_unit['facing']) * Math.PI * 2 / 8) + ")", 1);
     if (scene != null && new_unit != null) {
       scene.add(new_unit);
@@ -101,7 +102,7 @@ function update_unit_position(ptile) {
         selected_unit_indicator = null;
       }
       var material = new THREE.MeshBasicMaterial( { color: 0xfeffc5, transparent: true, opacity: 0.5} );
-      var selected_mesh = new THREE.Mesh( new THREE.RingGeometry( 18, 25, 24), material );
+      var selected_mesh = new THREE.Mesh( new THREE.RingGeometry( 16, 25, 24), material );
       selected_mesh.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
       selected_mesh.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 11);
       selected_mesh.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
@@ -141,7 +142,7 @@ function update_unit_position(ptile) {
         selected_unit_indicator = null;
       }
       var material = new THREE.MeshBasicMaterial( { color: 0xfeffc5, transparent: true, opacity: 0.45} );
-      var selected_mesh = new THREE.Mesh( new THREE.RingGeometry( 18, 24, 20), material );
+      var selected_mesh = new THREE.Mesh( new THREE.RingGeometry( 16, 24, 20), material );
       selected_mesh.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
       selected_mesh.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 11);
       selected_mesh.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
@@ -329,7 +330,7 @@ function update_tile_extras(ptile) {
         roadGemetry.vertices[1].y = (checktile['height'] - ptile['height']) * 100 - delta;
         roadGemetry.vertices[1].z = dest['y'] - pos['y'];
         roadGemetry.vertices[2].x = 0.0;
-        roadGemetry.vertices[2].y = 0.0 + delta;
+        roadGemetry.vertices[2].y = delta;
         roadGemetry.vertices[2].z = road_width;
         roadGemetry.vertices[3].x = dest['x'] - pos['x'];
         roadGemetry.vertices[3].y = (checktile['height'] - ptile['height']) * 100 + delta;
@@ -359,8 +360,70 @@ function update_tile_extras(ptile) {
         scene.add(road);
       }
     }
+  }
 
-    // 4. update road_positions
+
+  if (scene != null && road_positions[ptile['index']] == null && tile_has_extra(ptile, ROAD_RAIL)) {
+    var rail_added = false;
+    var pos = map_to_scene_coords(ptile['x'], ptile['y']);
+
+    if (road_positions[ptile['index']] != null) {
+      if (scene != null) scene.remove(road_positions[ptile['index']]);
+    }
+
+    // 1. iterate over adjacent tiles, see if they have rail.
+    for (var dir = 0; dir < 8; dir++) {
+      var checktile = mapstep(ptile, dir);
+      if (checktile != null && tile_has_extra(checktile, ROAD_RAIL)) {
+        // if the rail wraps the map edge, then skip it.
+        if ((ptile['x'] == 0 && checktile['x'] == map['xsize'] -1)
+            ||  (ptile['x'] == map['xsize'] -1 && checktile['x'] == 0)) continue;
+
+        // 2. if rail on this tile and adjacent tile, then add rectangle as rail between this tile and adjacent tile.
+        rail_added = true;
+        var rail_width = 15;
+        var dest = map_to_scene_coords(checktile['x'], checktile['y']);
+        var railGemetry = new THREE.PlaneGeometry(60, 15);
+        railGemetry.dynamic = true;
+        var delta = 0;
+        if (dir == 1 || dir == 6) delta = 10;
+        railGemetry.vertices[0].x = 0.0;
+        railGemetry.vertices[0].y = 0.0 - delta;
+        railGemetry.vertices[0].z = 0.0;
+        railGemetry.vertices[1].x = dest['x'] - pos['x'];
+        railGemetry.vertices[1].y = (checktile['height'] - ptile['height']) * 100 - delta;
+        railGemetry.vertices[1].z = dest['y'] - pos['y'];
+        railGemetry.vertices[2].x = 0.0;
+        railGemetry.vertices[2].y = delta;
+        railGemetry.vertices[2].z = rail_width;
+        railGemetry.vertices[3].x = dest['x'] - pos['x'];
+        railGemetry.vertices[3].y = (checktile['height'] - ptile['height']) * 100 + delta;
+        railGemetry.vertices[3].z = dest['y'] - pos['y'] + rail_width;
+
+        railGemetry.verticesNeedUpdate = true;
+
+        var rail = new THREE.Mesh(railGemetry, webgl_materials['rail_1']);
+
+        rail.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
+        rail.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 6);
+        rail.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
+        scene.add(rail);
+        rail_positions[ptile['index']] = rail;
+      }
+    }
+
+    // 3. if rail on this tile only, then use Rail model.
+    if (rail_added == false) {
+      var rail = webgl_get_model("Rail");
+      if (rail == null) return;
+      rail_positions[ptile['index']] = rail;
+      rail.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
+      rail.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 4);
+      rail.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
+      if (scene != null && rail != null) {
+        scene.add(rail);
+      }
+    }
   }
 
   if (tile_extra_positions[EXTRA_HUT + "." + ptile['index']] == null && tile_has_extra(ptile, EXTRA_HUT)) {

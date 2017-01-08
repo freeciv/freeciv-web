@@ -1,6 +1,6 @@
 <!-- GLSL Vertex Shader for Freeciv-web -->
 
-<script id="vertex_shh" type="x-shader/x-vertex">
+<script id="darkness_vertex_shh" type="x-shader/x-vertex">
 /**********************************************************************
     Freeciv-web - the web version of Freeciv. http://play.freeciv.org/
     Copyright (C) 2009-2016  The Freeciv-web project
@@ -23,14 +23,12 @@
 varying vec2 vUv;
 varying vec3 vNormal;
 varying vec3 vPosition;
-varying vec3 vPosition_camera;
 
 void main()
 {
   vUv = uv;
   vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
   gl_Position = projectionMatrix * mvPosition;
-  vPosition_camera = gl_Position.xyz;
   vNormal = normal;
   vPosition = position;
 }

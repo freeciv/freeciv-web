@@ -19,19 +19,15 @@
 
 var container, stats;
 var scene, maprenderer;
-var stereoEffect;
-var cardboard_vr_enabled = false;
 
 var plane, cube;
 var mouse, raycaster, isShiftDown = false;
-
-var rollOverMesh, rollOverMaterial;
-var cubeGeo, cubeMaterial;
 var directionalLight;
 
-var objects = [];
-var vertShader;
-var fragShader;
+var terrainVertShader;
+var terrainFragShader;
+var darknessVertShader;
+var darknessFragShader;
 
 var tiletype_terrains = ["lake","coast","floor","arctic","desert","forest","grassland","hills","jungle","mountains","plains","swamp","tundra", "beach"];
 
@@ -45,6 +41,8 @@ var mapview_model_height = 2000;
 var xquality;
 var yquality;
 
+var stereoEffect;
+var cardboard_vr_enabled = false;
 
 /****************************************************************************
   Start the Freeciv-web WebGL renderer
@@ -153,7 +151,7 @@ function render_map_terrain() {
   create_heightmap();
 
   /* uniforms are variables which are used in the fragment shader fragment.js */
-  var uniforms = {
+  var terrain_uniforms = {
     maptiles: { type: "t", value: map_texture },
     mapWidth: { type: "i", value: map['xsize'] },
     mapHeight: { type: "i", value: map['ysize'] }
@@ -161,20 +159,15 @@ function render_map_terrain() {
 
   /* create a texture for each map tile type. */
   for (var i = 0; i < tiletype_terrains.length; i++) {
-    uniforms[tiletype_terrains[i]] = {type: "t", value: webgl_textures[tiletype_terrains[i]]};
+    terrain_uniforms[tiletype_terrains[i]] = {type: "t", value: webgl_textures[tiletype_terrains[i]]};
   }
 
-  var terrain_material;
-  if (Detector.webgl) {
-    /* create a WebGL shader for terrain. */
-    terrain_material = new THREE.ShaderMaterial({
-      uniforms: uniforms,
-      vertexShader: vertShader,
-      fragmentShader: fragShader
-    });
-  } else {
-    terrain_material = new THREE.MeshLambertMaterial( { color: 0x00ff00} );
-  }
+  /* create a WebGL shader for terrain. */
+  var terrain_material = new THREE.ShaderMaterial({
+    uniforms: terrain_uniforms,
+    vertexShader: terrainVertShader,
+    fragmentShader: terrainFragShader
+  });
 
   xquality = map.xsize * 4 + 1;
   yquality = map.ysize * 4 + 1;
@@ -202,6 +195,12 @@ function render_map_terrain() {
   add_all_objects_to_scene();
 
   /* Unknown territory */
+  var darkness_material = new THREE.ShaderMaterial({
+    vertexShader: darknessVertShader,
+    fragmentShader: darknessFragShader
+  });
+  darkness_material.transparent = true;
+
   unknownTerritoryGeometry = new THREE.PlaneGeometry(mapview_model_width, mapview_model_height, xquality - 1, yquality - 1);
   unknownTerritoryGeometry.rotateX( - Math.PI / 2 );
   unknownTerritoryGeometry.translate(Math.floor(mapview_model_width / 2) - 496, 0, Math.floor(mapview_model_height / 2) + 4);
@@ -223,8 +222,7 @@ function render_map_terrain() {
   }
   unknownTerritoryGeometry.computeVertexNormals();
   unknownTerritoryGeometry.computeMorphNormals();
-  var unknownMaterial = new THREE.MeshBasicMaterial( {color: 0x000000 } );
-  var unknownMesh = new THREE.Mesh( unknownTerritoryGeometry, unknownMaterial );
+  var unknownMesh = new THREE.Mesh( unknownTerritoryGeometry, darkness_material );
   unknownMesh.geometry.dynamic = true;
   scene.add(unknownMesh);
 
@@ -247,6 +245,12 @@ function render_map_terrain() {
 function animate() {
   if (stats != null) stats.begin();
   if (mapview_slide['active']) update_map_slide_3d();
+
+  if (normalsNeedsUpdating  && unknownTerritoryGeometry != null) {
+    unknownTerritoryGeometry.computeFaceNormals();
+    unknownTerritoryGeometry.computeVertexNormals();
+    normalsNeedsUpdating = false;
+  }
 
   if (!cardboard_vr_enabled) {
     maprenderer.render(scene,camera );

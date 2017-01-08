@@ -75,8 +75,10 @@ function init_webgl_renderer()
     console.error("Unable to load tileset spec. Run Freeciv-img-extract.");
   });
 
-  vertShader = document.getElementById('vertex_shh').innerHTML;
-  fragShader = document.getElementById('fragment_shh').innerHTML;
+  terrainVertShader = document.getElementById('terrain_vertex_shh').innerHTML;
+  terrainFragShader = document.getElementById('terrain_fragment_shh').innerHTML;
+  darknessVertShader = document.getElementById('darkness_vertex_shh').innerHTML;
+  darknessFragShader = document.getElementById('darkness_fragment_shh').innerHTML;
 
   init_sprites();
 

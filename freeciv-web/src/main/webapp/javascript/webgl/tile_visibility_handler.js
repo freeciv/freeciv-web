@@ -17,6 +17,8 @@
 
 ***********************************************************************/
 
+var normalsNeedsUpdating = false;
+
 /**************************************************************************
 ...
 **************************************************************************/
@@ -41,8 +43,7 @@ function webgl_update_tile_known(old_tile, new_tile)
         unknownTerritoryGeometry.vertices[ i ].y = 0;  //reveal tile.
       }
       unknownTerritoryGeometry.verticesNeedUpdate = true;
+      normalsNeedsUpdating = true;
     }
   }
-
-
 }

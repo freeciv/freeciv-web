@@ -1,5 +1,5 @@
 <!-- GLSL Fragment Shader for Freeciv-web -->
-<script id="fragment_shh" type="x-shader/x-fragment">
+<script id="terrain_fragment_shh" type="x-shader/x-fragment">
 /**********************************************************************
     Freeciv-web - the web version of Freeciv. http://play.freeciv.org/
     Copyright (C) 2009-2016  The Freeciv-web project
@@ -171,6 +171,7 @@ void main(void)
     c = chosen_terrain_color.rgb;
 
   /* render the beach. */
+  /* TODO: can we use smoothstep() here? http://www.shaderific.com/glsl-functions/ */
   if (vPosition.y < beach_high && vPosition.y > beach_low) {
     if (vPosition.y > beach_blend_high) {
       beach_blend_amount = (3.0 - (beach_high - vPosition.y)) / 3.0;

@@ -65,7 +65,7 @@ function create_city_label(pcity)
   if (prod_type != null) {
     var tag = prod_type['graphic_str'];
     if (tileset[tag] != null) {
-      ctx.drawImage(sprites[tag], 28 + txt_measure.width + 75, 0, 36, 18);
+      ctx.drawImage(sprites[tag], 28 + txt_measure.width + 82, 0, 36, 18);
     }
   }
 

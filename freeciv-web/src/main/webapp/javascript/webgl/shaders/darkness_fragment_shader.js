@@ -41,6 +41,7 @@ void main(void)
 
   darkness_alpha = min(darkness_alpha,1.0);
   darkness_alpha = max(darkness_alpha,0.0);
+  if (darkness_alpha < 0.25) darkness_alpha = 0.0;
 
   gl_FragColor = vec4(0.0, 0.0, 0.0, darkness_alpha);
 

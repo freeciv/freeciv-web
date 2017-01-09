@@ -141,7 +141,7 @@ function handle_nation_table_select( ui )
   var player_id = selected_player;
   var pplayer = players[selected_player];
 
-  if (pplayer['is_alive'] && (client_is_observer() || player_id == client.conn.playing['playerno']
+  if (pplayer != null && pplayer['is_alive'] && (client_is_observer() || player_id == client.conn.playing['playerno']
       || (diplstates[player_id] != null && diplstates[player_id] != DS_NO_CONTACT))) {
     $('#view_player_button').button("enable");
   } else {

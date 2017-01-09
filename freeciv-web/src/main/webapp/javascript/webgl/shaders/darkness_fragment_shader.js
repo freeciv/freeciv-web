@@ -27,7 +27,7 @@ varying vec3 vNormal;
 varying vec2 vUv;
 varying vec3 vPosition;
 
-float darkness_high_height = 75.0;
+float darkness_high_height = 63.0;
 float darkness_higher_height = 85.0;
 
 
@@ -38,10 +38,9 @@ void main(void)
   if (vPosition.y > darkness_high_height) darkness_alpha += ((vPosition.y - darkness_high_height) / 50.0);
   if (vPosition.y > darkness_higher_height) darkness_alpha += ((vPosition.y - darkness_higher_height) / 50.0);
 
-
   darkness_alpha = min(darkness_alpha,1.0);
   darkness_alpha = max(darkness_alpha,0.0);
-  if (darkness_alpha < 0.25) darkness_alpha = 0.0;
+  if (darkness_alpha < 0.33) darkness_alpha = 0.0;
 
   gl_FragColor = vec4(0.0, 0.0, 0.0, darkness_alpha);
 

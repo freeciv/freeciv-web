@@ -241,7 +241,7 @@ function show_city_dialog(pcity)
 
   var improvements_html = "";
   for (var z = 0; z < ruleset_control.num_impr_types; z ++) {
-    if (pcity['improvements'].isSet(z)) {
+    if (pcity['improvements'] != null && pcity['improvements'].isSet(z)) {
        sprite = get_improvement_image_sprite(improvements[z]);
        if (sprite == null) {
          console.log("Missing sprite for improvement " + z);
@@ -378,7 +378,7 @@ function show_city_dialog(pcity)
 
   $('#disbandable_city').off();
   $('#disbandable_city').prop('checked',
-                              pcity['city_options'].isSet(CITYO_DISBAND));
+                              pcity['city_options'] != null && pcity['city_options'].isSet(CITYO_DISBAND));
   $('#disbandable_city').click(function() {
     var options = pcity['city_options'];
     var packet = {
@@ -554,7 +554,7 @@ function can_city_build_improvement_now(pcity, pimprove)
 function city_has_building(pcity, improvement_id)
 {
   for (var z = 0; z < ruleset_control.num_impr_types; z ++) {
-    if (pcity['improvements'].isSet(z) && z == improvement_id) {
+    if (pcity['improvements'] != null && pcity['improvements'].isSet(z) && z == improvement_id) {
       return true;
     }
   }
@@ -605,12 +605,16 @@ function request_city_buy()
 
   if (pcity['production_kind'] == VUT_UTYPE) {
     var punit_type = unit_types[pcity['production_value']];
-    buy_price_string = punit_type['name'] + " costs " + pcity['buy_gold_cost'] + " gold.";
-    buy_question_string = "Buy " + punit_type['name'] + " for " + pcity['buy_gold_cost'] + " gold?";
+    if (punit_type != null) {
+      buy_price_string = punit_type['name'] + " costs " + pcity['buy_gold_cost'] + " gold.";
+      buy_question_string = "Buy " + punit_type['name'] + " for " + pcity['buy_gold_cost'] + " gold?";
+    }
   } else {
     var improvement = improvements[pcity['production_value']];
-    buy_price_string = improvement['name'] + " costs " + pcity['buy_gold_cost'] + " gold.";
-    buy_question_string = "Buy " + improvement['name'] + " for " + pcity['buy_gold_cost'] + " gold?";
+    if (improvement != null) {
+      buy_price_string = improvement['name'] + " costs " + pcity['buy_gold_cost'] + " gold.";
+      buy_question_string = "Buy " + improvement['name'] + " for " + pcity['buy_gold_cost'] + " gold?";
+    }
   }
 
   var treasury_text = "<br>Treasury contains " + pplayer['gold'] + " gold.";
@@ -719,7 +723,7 @@ function does_city_have_improvement(pcity, improvement_name)
   if (pcity == null || pcity['improvements'] == null) return false;
 
   for (var z = 0; z < ruleset_control.num_impr_types; z++) {
-    if (pcity['improvements'].isSet(z) && improvements[z] != null
+    if (pcity['improvements'] != null && pcity['improvements'].isSet(z) && improvements[z] != null
         && improvements[z]['name'] == improvement_name) {
       return true;
     }

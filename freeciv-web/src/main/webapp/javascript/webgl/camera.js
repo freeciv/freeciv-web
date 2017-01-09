@@ -33,8 +33,8 @@ var camera_current_z = 0;
 function camera_look_at(x, y, z)
 {
   if (is_small_screen()) {
-    x -= 30;
-    z -= 30;
+    x -= 55;
+    z -= 55;
   }
 
   camera_current_x = x;

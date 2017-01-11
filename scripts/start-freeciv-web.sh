@@ -31,13 +31,13 @@ echo "Starting publite2" && \
 sh run.sh) && \
 echo "Publite2 started" && \
 echo "Starting Freeciv-PBEM" && \
-cd ${FREECIV_WEB_DIR}/pbem/ && nohup python3.5 -u pbem.py > ../logs/pbem.log 2>&1 || echo "unable to start pbem" & 
+cd ${FREECIV_WEB_DIR}/pbem/ && nohup python3 -u pbem.py > ../logs/pbem.log 2>&1 || echo "unable to start pbem" &
 
 echo "starting meta-stats.py" && \
-cd ${FREECIV_WEB_DIR}/scripts/meta-stats && nohup python3.5 -u meta-stats.py > ../../logs/meta-stats.log 2>&1 || echo "unable to start meta-stats" & 
+cd ${FREECIV_WEB_DIR}/scripts/meta-stats && nohup python3 -u meta-stats.py > ../../logs/meta-stats.log 2>&1 || echo "unable to start meta-stats" &
 
 echo "Starting Freeciv-Earth-mapgen." && \
-cd ${FREECIV_WEB_DIR}/freeciv-earth/ && nohup python3.5 -u freeciv-earth-mapgen.py > ../logs/freeciv-earth.log 2>&1 || echo "unable to start freeciv-earth-mapgen" & 
+cd ${FREECIV_WEB_DIR}/freeciv-earth/ && nohup python3 -u freeciv-earth-mapgen.py > ../logs/freeciv-earth.log 2>&1 || echo "unable to start freeciv-earth-mapgen" &
 
 echo "Will sleep for 8 seconds, then do a status test..." && \
 sleep 8 && \

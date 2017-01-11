@@ -43,8 +43,8 @@ apt-get -y update
 echo "apt-get install dependencies"
 apt-get -y install ${dependencies}
 
-ln -s /usr/bin/python3.4 /usr/bin/python3.5
-python3.5 -m easy_install Pillow
+ln -s /usr/bin/python3.4 /usr/bin/python3
+python3 -m easy_install Pillow
 
 echo "===== Install Tomcat 8 ======="
 echo "if you get a download error 404 here, then there could be a new Tomcat version released, so update the URL below."
@@ -61,14 +61,14 @@ echo "==== Fetching/Installing Tornado Web Server ===="
 wget ${tornado_url}
 tar xfz v4.4.1.tar.gz
 cd tornado-4.4.1
-python3.5 setup.py install
+python3 setup.py install
 
 ## build and install mysql-connector-python
 cd /tmp
 wget --quiet https://github.com/mysql/mysql-connector-python/archive/2.1.3.zip
 unzip 2.1.3.zip
 cd mysql-connector-python-2.1.3
-python3.5 setup.py install
+python3 setup.py install
 
 ## mysql setup
 echo "==== Setting up MySQL ===="
@@ -139,7 +139,7 @@ xvfb-run casperjs --engine=phantomjs test freeciv-web-tests.js || (>&2 echo "Fre
 
 echo "running pbem unit tests."
 cd ${basedir}/pbem
-python3.5 test_pbem.py
+python3 test_pbem.py
 
 #echo "=============================="
 echo "Freeciv-web built, tested and started correctly: Build successful!"

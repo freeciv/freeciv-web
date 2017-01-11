@@ -7,7 +7,7 @@ Requires:
 https://github.com/mysql/mysql-connector-python
 
 Run like this:
-python3.5 pbem.py
+python3 pbem.py
 
 Freeciv-pbem is automatically started by start-freeciv-web.sh script
 Python unit tests are found in test_pbem.py.

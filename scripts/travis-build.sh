@@ -43,7 +43,6 @@ apt-get -y update
 echo "apt-get install dependencies"
 apt-get -y install ${dependencies}
 
-ln -s /usr/bin/python3.4 /usr/bin/python3
 python3 -m easy_install Pillow
 
 echo "===== Install Tomcat 8 ======="

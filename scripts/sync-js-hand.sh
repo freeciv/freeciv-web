@@ -13,11 +13,11 @@ cp packets.js ../freeciv-web/src/main/webapp/javascript/ && \
 mkdir -p ${DATADIR}savegames/ && \
 mkdir -p ${DATADIR}savegames/pbem/ && \
 cp ../freeciv/freeciv/data/scenarios/*.sav ${DATADIR}savegames/ && \
-python3.5 helpdata_gen/helpdata_gen.py &&\
+python3 helpdata_gen/helpdata_gen.py &&\
 cp freeciv-helpdata.js ../freeciv-web/src/main/webapp/javascript/ && \
 sh helpdata_gen/ruleset_auto_gen.sh && \
 cp ../LICENSE.txt ../freeciv-web/src/main/webapp/docs/ &&
 mkdir -p ../freeciv-web/src/main/webapp/sounds/  && \
 cp ../freeciv/freeciv/data/stdsounds/*.ogg ../freeciv-web/src/main/webapp/sounds/ && \
-cd soundspec-extract && python3.5 soundspec-extract.py && cp soundset_spec.js ../../freeciv-web/src/main/webapp/javascript/ && \
+cd soundspec-extract && python3 soundspec-extract.py && cp soundset_spec.js ../../freeciv-web/src/main/webapp/javascript/ && \
 echo "done with sync-js-hand!"

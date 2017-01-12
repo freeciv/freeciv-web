@@ -129,21 +129,13 @@ function create_unit_label(punit)
   context1.fillStyle = "rgba(222,255,0, 1.0)";
   context1.strokeStyle= "black";
   context1.lineWidth = 0.5;
-  context1.strokeText(get_unit_activity_text(punit), 2, 16);
-  context1.fillText(get_unit_activity_text(punit), 2, 16);
 
-  var texture1 = new THREE.Texture(canvas1);
-  texture1.needsUpdate = true;
+  var text = get_unit_activity_text(punit);
+  var width = context1.measureText(text).width;
+  context1.strokeText(text, 2, 16);
+  context1.fillText(text, 2, 16);
 
-  var material1 = new THREE.MeshBasicMaterial( { map: texture1, side:THREE.DoubleSide } );
-  material1.transparent = true;
-
-  var mesh1 = new THREE.Mesh(
-    new THREE.PlaneBufferGeometry(20, 10),
-    material1
-  );
-
-  return mesh1;
+  return canvas_to_user_facing_mesh(canvas1, width, true);
 }
 
 

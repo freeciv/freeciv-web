@@ -818,8 +818,7 @@ function show_intro_dialog(title, message) {
 	  + " <br><br><span id='username_validation_result'></span>";
 
   if (renderer == RENDERER_WEBGL) {
-    intro_html += "<span style='color: red;'><br>BETA TEST: The 3D WebGL version of Freeciv-web which you are currently using is an unstable BETA version.<br> "
-               + "Please report bugs and feedback on the forum. Enjoy!</span>";
+    intro_html += "<span style='color: #800000;'>The 3D WebGL version of Freeciv-web requires WebGL 3D hardware support and 3GB of RAM or more.</span>";
   }
   $("#dialog").html(intro_html);
   var stored_username = simpleStorage.get("username", "");

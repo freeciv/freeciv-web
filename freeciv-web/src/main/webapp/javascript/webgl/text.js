@@ -17,6 +17,32 @@
 
 ***********************************************************************/
 
+/****************************************************************************
+ Convert a canvas to a mesh that will always face the user. The height of
+ `canvas' should be 16px. `width' gives the width of the content that will
+ actually be displayed, not of the canvas itself. `transparent' should be
+ true if canvas' content is transparent.
+****************************************************************************/
+function canvas_to_user_facing_mesh(canvas, width, transparent)
+{
+  // Create a texture out of the canvas
+  var texture = new THREE.Texture(canvas);
+  texture.needsUpdate = true;
+
+  // Make a material
+  var material = new THREE.ShaderMaterial({
+    vertexShader: document.getElementById('labels_vertex_shh').textContent,
+    fragmentShader: document.getElementById('tex_fragment_shh').textContent,
+    uniforms: {
+      texture: { value: texture },
+      u_scale_factor: { value: width / canvas.width }
+    }
+  });
+  material.transparent = transparent;
+
+  // Put it all together
+  return new THREE.Mesh(new THREE.PlaneBufferGeometry(width, 16), material);
+}
 
 /****************************************************************************
  Create a city name label
@@ -87,23 +113,7 @@ function create_city_label(pcity)
     }
   }
 
-  // Create a texture out of the canvas
-  var texture = new THREE.Texture(canvas1);
-  texture.needsUpdate = true;
-
-  // Make a material
-  var material = new THREE.ShaderMaterial({
-    vertexShader: document.getElementById('labels_vertex_shh').textContent,
-    fragmentShader: document.getElementById('tex_fragment_shh').textContent,
-    uniforms: {
-      texture: { value: texture },
-      u_scale_factor: { value: width / 256. }
-    }
-  });
-  material.transparent = false;
-
-  // Put it all together
-  return new THREE.Mesh(new THREE.PlaneBufferGeometry(width, 16), material);
+  return canvas_to_user_facing_mesh(canvas1, width, false);
 }
 
 /****************************************************************************

@@ -28,59 +28,82 @@ function create_city_label(pcity)
   canvas1.height = 16;
   var ctx = canvas1.getContext('2d');
 
-  var owner_id = pcity['owner'];
+  var owner_id = pcity.owner;
   if (owner_id == null) return null;
   var owner = players[owner_id];
 
-  ctx.fillStyle=nations[owner['nation']]['color'];
-  var city_text = pcity['name'] + "  " + pcity['size'];
-  var txt_measure = ctx.measureText(city_text);
-  ctx.fillRect(48,0,28 + txt_measure.width + 62, 16);
+  // We draw from left to right, updating `width' after each call.
+  var width = 0; // Total width of the bar
 
-  var dark_bg = false;
-  var nation_colors = nations[owner['nation']]['color'].replace("rgb(", "").replace(")", "").split(",");
-  if (parseInt(nation_colors[0]) + parseInt(nation_colors[1]) + parseInt(nation_colors[2]) < 300) dark_bg = true;
+  // Flag
+  var city_gfx = get_city_flag_sprite(pcity);
+  ctx.drawImage(sprites[city_gfx.key],
+                1, 1, // Remove the 1px black border, it's ugly
+                sprites[city_gfx.key].width - 2, sprites[city_gfx.key].height - 2,
+                0, 0, 28, 16);
+  width += 28;
 
+  // Occupied
+  // Background
+  ctx.fillStyle = 'black';
+  ctx.fillRect(width, 0, 16, 16);
+  // Stars
   var ptile = city_tile(pcity);
   var punits = tile_units(ptile);
   if (punits.length > 0) {
-    ctx.fillStyle="rgb(0,0,0)";
-    ctx.fillRect(45,0,16, 16);
-    ctx.drawImage(sprites[get_city_occupied_sprite(pcity)], 48, 0, 13, 16);
+    ctx.drawImage(sprites[get_city_occupied_sprite(pcity)], width, 0, 13, 16);
   }
+  width += 13;
 
-  ctx.font = "Bold 16px Arial";
+  // Name and size
+  var city_text = pcity.name + "  " + pcity.size;
+  ctx.font = 'Bold 14px Arial';
+  var txt_measure = ctx.measureText(city_text);
+  // Background
+  ctx.fillStyle = nations[owner.nation].color;
+  ctx.fillRect(width, 0, txt_measure.width + 8 /* padding */, 16);
+  // Text
+  var dark_bg = false;
+  var nation_colors = nations[owner['nation']].color.replace("rgb(", "").replace(")", "").split(",");
+  if (parseInt(nation_colors[0]) + parseInt(nation_colors[1]) + parseInt(nation_colors[2]) < 300) dark_bg = true;
   if (dark_bg) {
-    ctx.fillStyle = "rgba(255,255,255, 1.0)";
+    ctx.fillStyle = 'white';
   } else {
-    ctx.fillStyle = "rgba(0,0,0, 1.0)";
+    ctx.fillStyle = 'black';
   }
-  ctx.fillText(city_text, 65, 14);
-  var city_gfx = get_city_flag_sprite(pcity);
-  ctx.drawImage(sprites[city_gfx['key']], 0, 0,
-                                  sprites[city_gfx['key']].width, sprites[city_gfx['key']].height,
-                                  20,0,28,16);
+  ctx.fillText(city_text, width + 4 /* padding */, 13);
 
+  width += txt_measure.width + 8 /* padding */;
+
+  // Production
   var prod_type = get_city_production_type(pcity);
   if (prod_type != null) {
-    var tag = prod_type['graphic_str'];
+    var tag = prod_type.graphic_str;
     if (tileset[tag] != null) {
-      ctx.drawImage(sprites[tag], 28 + txt_measure.width + 82, 0, 36, 18);
+      ctx.fillStyle = nations[owner.nation].color;
+      ctx.fillRect(width, 0, 36, 16);
+      ctx.drawImage(sprites[tag], width, 0, 36, 18);
+      width += 32;
     }
   }
 
-  var texture1 = new THREE.Texture(canvas1);
-  texture1.needsUpdate = true;
+  // Create a texture out of the canvas
+  var texture = new THREE.Texture(canvas1);
+  texture.needsUpdate = true;
 
-  var material1 = new THREE.MeshBasicMaterial( { map: texture1, side:THREE.DoubleSide } );
-  material1.transparent = true;
+  // Make a material
+  var material = new THREE.ShaderMaterial({
+    vertexShader: document.getElementById('labels_vertex_shh').textContent,
+    fragmentShader: document.getElementById('tex_fragment_shh').textContent,
+    uniforms: {
+      texture: { value: texture },
+      u_scale_factor: { value: width / 256. }
+    }
+  });
+  material.transparent = false;
 
-  var mesh1 = new THREE.Mesh(
-    new THREE.PlaneBufferGeometry(120, 13),
-    material1
-  );
-
-  return mesh1;
+  // Put it all together
+  return new THREE.Mesh(new THREE.PlaneBufferGeometry(width, 16), material);
 }
 
 /****************************************************************************

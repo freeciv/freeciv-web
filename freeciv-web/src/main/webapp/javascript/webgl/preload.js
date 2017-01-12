@@ -191,9 +191,7 @@ function get_flag_mesh(key)
                 sprites[key].width, sprites[key].height,
                 0,0,32,16);
 
-  var texture = new THREE.CanvasTexture(fcanvas);
-  var material = new THREE.MeshBasicMaterial( { map: texture, overdraw: 0.5 } );
-  meshes[key] = new THREE.Mesh(flagGeometry, material);
+  meshes[key] = canvas_to_user_facing_mesh(fcanvas, 32, false)
   return meshes[key].clone();
 
 }

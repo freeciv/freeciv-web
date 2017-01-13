@@ -41,7 +41,7 @@ function canvas_to_user_facing_mesh(canvas, width, transparent)
   material.transparent = transparent;
 
   // Put it all together
-  return new THREE.Mesh(new THREE.PlaneBufferGeometry(width, 16), material);
+  return new THREE.Mesh(new THREE.PlaneBufferGeometry(Math.floor(width * 0.80), 13), material);
 }
 
 /****************************************************************************

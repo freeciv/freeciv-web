@@ -220,7 +220,7 @@ function update_city_position(ptile) {
     var city_label = create_city_label(pcity);
     city_label_positions[ptile['index']] = city_label;
     city_label.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] + 5);
-    city_label.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 40);
+    city_label.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 35);
     city_label.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 5);
     city_label.rotation.y = Math.PI / 4;
     if (scene != null) scene.add(city_label);
@@ -259,7 +259,7 @@ function update_city_position(ptile) {
     var city_label = create_city_label(pcity);
     city_label_positions[ptile['index']] = city_label;
     city_label.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] + 5);
-    city_label.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 40);
+    city_label.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 35);
     city_label.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 5);
     city_label.rotation.y = Math.PI / 4;
     if (scene != null) scene.add(city_label);

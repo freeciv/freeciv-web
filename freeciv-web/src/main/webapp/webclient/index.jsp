@@ -46,6 +46,6 @@ var ts="${initParam.buildTimeStamp}";
 <jsp:include page="/javascript/webgl/shaders/terrain_vertex_shader.js" flush="false"/>
 <jsp:include page="/javascript/webgl/shaders/darkness_fragment_shader.js" flush="false"/>
 <jsp:include page="/javascript/webgl/shaders/darkness_vertex_shader.js" flush="false"/>
-<jsp:include page="/javascript/webgl/shaders/tex_fragment_shader.js" flush="false"/>
+<jsp:include page="/javascript/webgl/shaders/labels_fragment_shader.js" flush="false"/>
 <jsp:include page="/javascript/webgl/shaders/labels_vertex_shader.js" flush="false"/>
 </html>

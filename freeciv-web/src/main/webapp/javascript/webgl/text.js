@@ -132,8 +132,8 @@ function create_unit_label(punit)
 
   var text = get_unit_activity_text(punit);
   var width = context1.measureText(text).width;
-  context1.strokeText(text, 2, 16);
-  context1.fillText(text, 2, 16);
+  context1.strokeText(text, 0, 16);
+  context1.fillText(text, 0, 16);
 
   return canvas_to_user_facing_mesh(canvas1, width, true);
 }

@@ -69,9 +69,9 @@ float heightmap_ocean = 0.0;
 
 
 float beach_high = 55.0;
-float beach_blend_high = 52.0;
-float beach_blend_low = 49.0;
-float beach_low = 47.0;
+float beach_blend_high = 53.0;
+float beach_blend_low = 50.0;
+float beach_low = 49.0;
 float beach_blend_amount = 0.0;
 
 float mountains_low = 100.0;
@@ -174,12 +174,12 @@ void main(void)
   /* TODO: can we use smoothstep() here? http://www.shaderific.com/glsl-functions/ */
   if (vPosition.y < beach_high && vPosition.y > beach_low) {
     if (vPosition.y > beach_blend_high) {
-      beach_blend_amount = (3.0 - (beach_high - vPosition.y)) / 3.0;
+      beach_blend_amount = (2.0 - (beach_high - vPosition.y)) / 2.0;
       vec4 Cbeach = texture2D(beach, vec2(vUv.x * 50.0, vUv.y * 50.0));
       c = chosen_terrain_color.rgb * beach_blend_amount + (Cbeach.rgb * (1.0 - beach_blend_amount));
 
     } else if (vPosition.y < beach_blend_low) {
-      beach_blend_amount = ((beach_blend_low - vPosition.y)) / 2.0;
+      beach_blend_amount = ((beach_blend_low - vPosition.y)) / 1.0;
       vec4 Cbeach = texture2D(beach, vec2(vUv.x * 50.0, vUv.y * 50.0));
       c = chosen_terrain_color.rgb * beach_blend_amount + (Cbeach.rgb * (1.0 - beach_blend_amount));
 

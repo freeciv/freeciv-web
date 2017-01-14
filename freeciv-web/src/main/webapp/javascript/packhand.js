@@ -85,20 +85,21 @@ function handle_server_join_reply(packet)
     }
 
     if (renderer == RENDERER_WEBGL) {
-       // WebGL renderer does not support fog of war. (it will be slow)
-       send_message_delayed("/set fogofwar disabled", 120);
        if (is_small_screen()) {
+         // Fog of war disabled on mobile for performance reasons. TODO: make this configurable.
+         send_message_delayed("/set fogofwar disabled", 120);
+
          // WebGL renderer on mobile devices needs to use very little RAM.
          send_message_delayed("/set size 1", 130);
        }
-       // Freeciv-web WebGL doesn't support rendering rivers at the moment.
-       send_message_delayed("/set wetness 10", 140);
+       // Reduce the amount of rivers, it's kind of ugly at the moment.
+       send_message_delayed("/set wetness 25", 140);
 
        // Freeciv-web WebGL doesn't support rendering borders.
        send_message_delayed("/set borders disabled", 150);
 
        // Less hills will be more user-friendly in 3D mode.
-       send_message_delayed("/set steepness 15", 155);
+       send_message_delayed("/set steepness 12", 155);
 
      }
 

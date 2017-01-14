@@ -89,6 +89,16 @@ function webgl_preload()
       webgl_materials['rail_1'] = railMaterial;
   } );
 
+  var river_sprite = new THREE.Texture();
+  webgl_textures["river"] = river_sprite;
+  textureLoader.load( '/textures/river.png', function ( image ) {
+      river_sprite.image = image;
+      river_sprite.needsUpdate = true;
+      riverMaterial = new THREE.MeshBasicMaterial( { map: river_sprite, side:THREE.DoubleSide } );
+      riverMaterial.transparent = true;
+      webgl_materials['river'] = riverMaterial;
+  } );
+
   /* Preload a texture for each map tile type. */
   for (var i = 0; i < tiletype_terrains.length; i++) {
     var imgurl = is_small_screen() ? "/textures/small/" + tiletype_terrains[i] + ".png"

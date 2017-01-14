@@ -47,14 +47,8 @@ function generate_map_tiletype_grid() {
   for (var i = 0; i < num_iterations; i++) {
     for (var x = 0; x < map_tiletype_resolution - 2; x++) {
       for (var y = 0; y < map_tiletype_resolution - 2; y++) {
-        var fx = map.ysize * x / map_tiletype_resolution;
-        var fy = map.xsize * y / map_tiletype_resolution;
-        fx -= Math.floor(fx); // Equivalent to % 1, but much faster
-        fy -= Math.floor(fy);
-        if (fx > 0.9 || fx < 0.1 && fy > 0.9 || fy < 0.1) {
-          if (Math.random() >= 0.6) {
-            grid[x][y] = grid[x + 2][y + 2];
-          }
+        if (Math.random() >= 0.6) {
+           grid[x][y] = grid[x + 2][y + 2];
         }
       }
     }

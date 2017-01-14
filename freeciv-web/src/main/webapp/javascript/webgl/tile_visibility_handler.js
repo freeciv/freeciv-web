@@ -26,7 +26,7 @@ function webgl_update_tile_known(old_tile, new_tile)
 {
   if (unknownTerritoryGeometry == null || new_tile == null || old_tile == null) return;
 
-  /* TODO: don't update anything if nothing has changed. */
+  if (tile_get_known(new_tile) == tile_get_known(old_tile)) return;
 
   var tx = old_tile['x'];
   var ty = old_tile['y'];
@@ -39,11 +39,33 @@ function webgl_update_tile_known(old_tile, new_tile)
 
     if (gx != tx || gy != ty) continue;
     if ( new_tile != null) {
-      if (tile_get_known(new_tile) != TILE_UNKNOWN) {
-        unknownTerritoryGeometry.vertices[ i ].y = 0;  //reveal tile.
+      if (tile_get_known(new_tile) == TILE_KNOWN_SEEN) {
+        unknownTerritoryGeometry.vertices[ i ].y = 0;
       }
       unknownTerritoryGeometry.verticesNeedUpdate = true;
       normalsNeedsUpdating = true;
+    }
+  }
+
+  /* Update fog of war */
+  if (!is_small_screen()) {
+    for ( var i = 0, l = fogOfWarGeometry.vertices.length; i < l; i ++ ) {
+      var x = i % xquality, y = Math.floor( i / xquality );
+      var gx = Math.floor(x / 4);
+      var gy = Math.floor(y / 4);
+
+      if (gx != tx || gy != ty) continue;
+      if ( new_tile != null) {
+        if (tile_get_known(new_tile) == TILE_KNOWN_SEEN) {
+          fogOfWarGeometry.vertices[ i ].y = landGeometry.vertices[ i ].y - 15;
+        } else if (tile_get_known(new_tile) == TILE_KNOWN_UNSEEN) {
+          fogOfWarGeometry.vertices[ i ].y = landGeometry.vertices[ i ].y + 13;
+        } else if (tile_get_known(new_tile) == TILE_UNKNOWN) {
+          fogOfWarGeometry.vertices[ i ].y = landGeometry.vertices[ i ].y + 5;
+        }
+        fogOfWarGeometry.verticesNeedUpdate = true;
+        normalsNeedsUpdating = true;
+      }
     }
   }
 }

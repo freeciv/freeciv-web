@@ -82,6 +82,35 @@ function init_webgl_renderer()
 
   init_sprites();
 
+  (function() {
+    // Override THREE.Geometry to work around issue 7361
+    var originalGeometry = THREE.Geometry;
+    THREE.Geometry = function() {
+      // Call original constructor
+      originalGeometry.apply(this, arguments);
+
+      var colors = this.colors;
+      Object.defineProperty(this, "colors", {
+        get: function() {
+          return colors;
+        },
+        set: function(value) {
+          // Make sure the attribute has enough space
+          var nVertices = this.vertices.length;
+          if (this._bufferGeometry) {
+            if (nVertices !== this._bufferGeometry.attributes.color.count) {
+              this._bufferGeometry.addAttribute("color",
+                  new THREE.BufferAttribute(new Float32Array(nVertices * 3), 3));
+            }
+          }
+
+          colors = value;
+        }});
+    };
+    THREE.Geometry.prototype = originalGeometry.prototype;
+    THREE.Geometry.constructor = originalGeometry.constructor;
+  })();
+
 }
 
 

@@ -22,6 +22,8 @@ var unit_positions = {};
 // stores city positions on the map. tile index is key, unit 3d model is value.
 var city_positions = {};
 var city_label_positions = {};
+var city_walls_positions = {};
+
 // stores flag positions on the map. tile index is key, unit 3d model is value.
 var unit_flag_positions = {};
 var unit_label_positions = {};
@@ -35,6 +37,7 @@ var tile_extra_positions = {};
 
 var road_positions = {};
 var rail_positions = {};
+var river_positions = {};
 
 var selected_unit_indicator = null;
 
@@ -193,6 +196,8 @@ function update_city_position(ptile) {
     delete city_positions[ptile['index']];
     if (scene != null) scene.remove(city_label_positions[ptile['index']]);
     delete city_label_positions[ptile['index']];
+    if (scene != null) scene.remove(city_walls_positions[ptile['index']]);
+    delete city_walls_positions[ptile['index']];
   }
 
   if (city_positions[ptile['index']] == null && pcity != null) {
@@ -215,6 +220,15 @@ function update_city_position(ptile) {
 
     if (scene != null && new_city != null) {
       scene.add(new_city);
+    }
+
+    if (scene != null && pcity['walls'] && city_walls_positions[ptile['index']] == null) {
+      var city_walls = webgl_get_model("citywalls");
+      city_walls.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
+      city_walls.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
+      city_walls.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
+      scene.add(city_walls);
+      city_walls_positions[ptile['index']] = city_walls;
     }
 
     var city_label = create_city_label(pcity);
@@ -251,9 +265,17 @@ function update_city_position(ptile) {
         scene.add(new_city);
       }
     }
-
-
     var pos = map_to_scene_coords(ptile['x'], ptile['y']);
+
+    if (scene != null && pcity['walls'] && city_walls_positions[ptile['index']] == null) {
+      var city_walls = webgl_get_model("citywalls");
+      city_walls.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
+      city_walls.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
+      city_walls.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
+      scene.add(city_walls);
+      city_walls_positions[ptile['index']] = city_walls;
+    }
+
     if (scene != null) scene.remove(city_label_positions[ptile['index']]);
     delete city_label_positions[ptile['index']];
     var city_label = create_city_label(pcity);
@@ -341,7 +363,7 @@ function update_tile_extras(ptile) {
         var road = new THREE.Mesh(roadGemetry, webgl_materials['road_1']);
 
         road.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
-        road.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 6);
+        road.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 5);
         road.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
         scene.add(road);
         road_positions[ptile['index']] = road;
@@ -405,7 +427,7 @@ function update_tile_extras(ptile) {
         var rail = new THREE.Mesh(railGemetry, webgl_materials['rail_1']);
 
         rail.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
-        rail.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 6);
+        rail.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 5);
         rail.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
         scene.add(rail);
         rail_positions[ptile['index']] = rail;
@@ -425,6 +447,53 @@ function update_tile_extras(ptile) {
       }
     }
   }
+
+  /* Rivers */
+  if (scene != null && river_positions[ptile['index']] == null && tile_has_extra(ptile, ROAD_RIVER)) {
+    var river_added = false;
+    var pos = map_to_scene_coords(ptile['x'], ptile['y']);
+    // 1. iterate over adjacent tiles, see if they have river.
+    for (var dir = 0; dir < 8; dir++) {
+      var checktile = mapstep(ptile, dir);
+      if (checktile != null && (tile_has_extra(checktile, ROAD_RIVER) || is_ocean_tile(checktile))) {
+        // if the river wraps the map edge, then skip it.
+        if ((ptile['x'] == 0 && checktile['x'] == map['xsize'] -1)
+            ||  (ptile['x'] == map['xsize'] -1 && checktile['x'] == 0)) continue;
+
+        // 2. if river on this tile and adjacent tile, then add rectangle as river between this tile and adjacent tile.
+        river_added = true;
+        var river_width = 15;
+        var dest = map_to_scene_coords(checktile['x'], checktile['y']);
+        var riverGeometry = new THREE.PlaneGeometry(60, 15);
+        riverGeometry.dynamic = true;
+        var delta = 0;
+        if (dir == 1 || dir == 6) delta = 10;
+        riverGeometry.vertices[0].x = 0.0;
+        riverGeometry.vertices[0].y = 0.0 - delta;
+        riverGeometry.vertices[0].z = 0.0;
+        riverGeometry.vertices[1].x = dest['x'] - pos['x'];
+        riverGeometry.vertices[1].y = (checktile['height'] - ptile['height']) * 100 - delta - (is_ocean_tile(checktile) ? 10 : 0);
+        riverGeometry.vertices[1].z = dest['y'] - pos['y'];
+        riverGeometry.vertices[2].x = 0.0;
+        riverGeometry.vertices[2].y = delta;
+        riverGeometry.vertices[2].z = river_width;
+        riverGeometry.vertices[3].x = dest['x'] - pos['x'];
+        riverGeometry.vertices[3].y = (checktile['height'] - ptile['height']) * 100 + delta - (is_ocean_tile(checktile) ? 10 : 0);
+        riverGeometry.vertices[3].z = dest['y'] - pos['y'] + river_width;
+
+        riverGeometry.verticesNeedUpdate = true;
+
+        var river = new THREE.Mesh(riverGeometry, webgl_materials['river']);
+
+        river.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 5);
+        river.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 4);
+        river.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 13);
+        scene.add(river);
+        river_positions[ptile['index']] = river;
+      }
+    }
+  }
+
 
   if (tile_extra_positions[EXTRA_HUT + "." + ptile['index']] == null && tile_has_extra(ptile, EXTRA_HUT)) {
     // add hut

@@ -150,6 +150,7 @@ function propagate_distance_from_coast(distance_from_coast_map, x, y)
 function map_tile_height(ptile)
 {
   if (ptile != null && tile_terrain(ptile) != null) {
+      if (tile_terrain(ptile)['name'] == "Deep Ocean") return -0.15;
       if (is_ocean_tile(ptile)) return -0.1;
       if (tile_terrain(ptile)['name'] == "Hills") return 0.45;
       if (tile_terrain(ptile)['name'] == "Mountains") return 1.0;

@@ -72,9 +72,10 @@ float beach_high = 55.0;
 float beach_blend_high = 53.0;
 float beach_blend_low = 50.0;
 float beach_low = 49.0;
-float beach_blend_amount = 0.0;
+float blend_amount = 0.0;
 
-float mountains_low = 100.0;
+float mountains_low_begin = 98.0;
+float mountains_low_end = 100.0;
 float mountains_high = 115.0;
 
 
@@ -171,17 +172,16 @@ void main(void)
     c = chosen_terrain_color.rgb;
 
   /* render the beach. */
-  /* TODO: can we use smoothstep() here? http://www.shaderific.com/glsl-functions/ */
   if (vPosition.y < beach_high && vPosition.y > beach_low) {
     if (vPosition.y > beach_blend_high) {
-      beach_blend_amount = (2.0 - (beach_high - vPosition.y)) / 2.0;
+      blend_amount = (2.0 - (beach_high - vPosition.y)) / 2.0;
       vec4 Cbeach = texture2D(beach, vec2(vUv.x * 50.0, vUv.y * 50.0));
-      c = chosen_terrain_color.rgb * beach_blend_amount + (Cbeach.rgb * (1.0 - beach_blend_amount));
+      c = chosen_terrain_color.rgb * blend_amount + (Cbeach.rgb * (1.0 - blend_amount));
 
     } else if (vPosition.y < beach_blend_low) {
-      beach_blend_amount = ((beach_blend_low - vPosition.y)) / 1.0;
+      blend_amount = ((beach_blend_low - vPosition.y)) / 1.0;
       vec4 Cbeach = texture2D(beach, vec2(vUv.x * 50.0, vUv.y * 50.0));
-      c = chosen_terrain_color.rgb * beach_blend_amount + (Cbeach.rgb * (1.0 - beach_blend_amount));
+      c = chosen_terrain_color.rgb * blend_amount + (Cbeach.rgb * (1.0 - blend_amount));
 
     } else {
       vec4 Cbeach = texture2D(beach, vec2(vUv.x * 50.0, vUv.y * 50.0));
@@ -192,14 +192,20 @@ void main(void)
 
   if (vPosition.y > mountains_high) {
       /* snow in mountains texture over a certain height threshold. */
-      beach_blend_amount = ((3.0 - (mountains_high - vPosition.y)) / 3.0) - 1.0;
+      blend_amount = ((3.0 - (mountains_high - vPosition.y)) / 3.0) - 1.0;
       vec4 Ca = texture2D(arctic, vec2(vUv.x * 50.0, vUv.y * 50.0));
       vec4 Cb = texture2D(mountains, vec2(vUv.x * 50.0, vUv.y * 50.0));
-      c = Ca.rgb * beach_blend_amount + Cb.rgb * (1.0 - beach_blend_amount);
-  } else if (vPosition.y > mountains_low) {
-      /* mountain texture over a certain height threshold. */
-      vec4 Cb = texture2D(mountains, vec2(vUv.x * 50.0, vUv.y * 50.0));
-      c = Cb.rgb;
+      c = Ca.rgb * blend_amount + Cb.rgb * (1.0 - blend_amount);
+  } else if (vPosition.y > mountains_low_begin) {
+      if (vPosition.y < mountains_low_end) {
+        vec4 Cmountain = texture2D(mountains, vec2(vUv.x * 50.0, vUv.y * 50.0));
+        c = chosen_terrain_color.rgb * (1.0 - smoothstep(mountains_low_begin, mountains_low_end, vPosition.y))
+            + Cmountain.rgb * smoothstep(mountains_low_begin, mountains_low_end, vPosition.y);
+      } else {
+        /* mountain texture over a certain height threshold. */
+        vec4 Cb = texture2D(mountains, vec2(vUv.x * 50.0, vUv.y * 50.0));
+        c = Cb.rgb;
+      }
   }
 
   /* specular component, ambient occlusion and fade out underwater terrain */

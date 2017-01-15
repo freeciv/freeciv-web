@@ -760,10 +760,11 @@ function pregame_settings()
     graphics_quality = parseFloat($('#graphics_quality').val());
     simpleStorage.set("graphics_quality", graphics_quality);
     if (graphics_quality >= QUALITY_MEDIUM) {
-      send_message_delayed("/set fogofwar enabled", 120);
+      send_message("/set fogofwar enabled");
     } else {
-      send_message_delayed("/set fogofwar disabled", 120);
+      send_message("/set fogofwar disabled");
     }
+    setTimeout("location.reload();", 200);
   });
 
   $("#graphics_quality").val(graphics_quality);

@@ -20,7 +20,7 @@
 var goto_lines = [];
 
 /****************************************************************************
-...
+ Renders a goto line by creating many planes along the goto path.
 ****************************************************************************/
 function webgl_render_goto_line(start_tile, goto_packet_dir)
 {
@@ -29,7 +29,7 @@ function webgl_render_goto_line(start_tile, goto_packet_dir)
   var startpos = map_to_scene_coords(ptile['x'], ptile['y']);
 
   var material = new THREE.MeshBasicMaterial( { color: 0x0505ff, side:THREE.DoubleSide} );
-  var goto_width = 6;
+  var goto_width = 4;
 
   var height = 5 + ptile['height'] * 100;
 

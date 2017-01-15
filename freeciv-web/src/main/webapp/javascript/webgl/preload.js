@@ -44,8 +44,11 @@ function webgl_preload()
   /* Preload water overlay texture. */
   var water_texture = new THREE.Texture();
   webgl_textures["water_overlay"] = water_texture;
-  var filename = is_small_screen() ? '/textures/small/water_overlay_texture.png'
-                                   : '/textures/large/water_overlay_texture.png';
+  var filename;
+  if (graphics_quality == QUALITY_LOW) filename = '/textures/small/water_overlay_texture.png';
+  if (graphics_quality == QUALITY_MEDIUM) filename = '/textures/medium/water_overlay_texture.png';
+  if (graphics_quality == QUALITY_HIGH) filename = '/textures/large/water_overlay_texture.png';
+
   textureLoader.load( filename, function ( image ) {
       water_texture.image = image;
       water_texture.wrapS = THREE.RepeatWrapping;
@@ -101,8 +104,11 @@ function webgl_preload()
 
   /* Preload a texture for each map tile type. */
   for (var i = 0; i < tiletype_terrains.length; i++) {
-    var imgurl = is_small_screen() ? "/textures/small/" + tiletype_terrains[i] + ".png"
-                                   : "/textures/large/" + tiletype_terrains[i] + ".png" ;
+    var imgurl;
+    if (graphics_quality == QUALITY_LOW) imgurl = "/textures/small/" + tiletype_terrains[i] + ".png";
+    if (graphics_quality == QUALITY_MEDIUM) imgurl = "/textures/medium/" + tiletype_terrains[i] + ".png";
+    if (graphics_quality == QUALITY_HIGH) imgurl = "/textures/large/" + tiletype_terrains[i] + ".png";
+
     textureLoader.load(imgurl, (function (url, index) {
             return function (image, i) {
                 webgl_textures[tiletype_terrains[index]] = new THREE.Texture();
@@ -169,7 +175,7 @@ function webgl_get_model(filename)
   var colladaloader = new THREE.ColladaLoader();
   colladaloader.options.convertUpAxis = true;
 
-  var collada = colladaloader.parse( webgl_models_xml_strings[filename]);
+  var collada = colladaloader.parse( webgl_models_xml_strings[filename], null, "/textures/");
   var dae = collada.scene;
   dae.updateMatrix();
   dae.scale.x = dae.scale.y = dae.scale.z = 11;

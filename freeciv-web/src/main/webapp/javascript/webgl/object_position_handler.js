@@ -490,6 +490,7 @@ function update_tile_extras(ptile) {
         river.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 13);
         scene.add(river);
         river_positions[ptile['index']] = river;
+        river_positions[checktile['index']] = river;
       }
     }
   }

@@ -152,7 +152,7 @@ function webglOnMouseWheel(e) {
     new_camera_dz = camera_dz + 45;
   }
 
-  if (new_camera_dy < 320 || new_camera_dy > 1200) {
+  if (new_camera_dy < 350 || new_camera_dy > 1200) {
     return;
   } else {
     camera_dx = new_camera_dx;

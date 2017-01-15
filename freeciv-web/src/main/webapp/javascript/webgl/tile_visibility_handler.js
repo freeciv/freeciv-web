@@ -48,7 +48,7 @@ function webgl_update_tile_known(old_tile, new_tile)
   }
 
   /* Update fog of war */
-  if (!is_small_screen()) {
+  if (graphics_quality >= QUALITY_MEDIUM) {
     for ( var i = 0, l = fogOfWarGeometry.vertices.length; i < l; i ++ ) {
       var x = i % xquality, y = Math.floor( i / xquality );
       var gx = Math.floor(x / 4);

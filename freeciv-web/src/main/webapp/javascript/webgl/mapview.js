@@ -74,8 +74,7 @@ function webgl_start_renderer()
   scene.add( directionalLight );
 
   if (Detector.webgl) {
-    // Antialiasing is enabled by default for full desktop version only (not mobile since they can be slow).
-    var enable_antialiasing = !is_small_screen();
+    var enable_antialiasing = graphics_quality >= QUALITY_MEDIUM;
     var stored_antialiasing_setting = simpleStorage.get("antialiasing_setting", "");
     if (stored_antialiasing_setting != null && stored_antialiasing_setting == "false") {
       enable_antialiasing = false;
@@ -88,7 +87,7 @@ function webgl_start_renderer()
   }
 
   if (is_small_screen()) {
-    camera_dy = 320;
+    camera_dy = 350;
     camera_dx = 140;
     camera_dz = 140;
   }
@@ -230,7 +229,7 @@ function init_webgl_mapview() {
 
 
   // Fog of war
-  if (!is_small_screen()) {
+  if (graphics_quality >= QUALITY_MEDIUM) {
     fogOfWarGeometry = new THREE.PlaneGeometry(mapview_model_width, mapview_model_height, xquality - 1, yquality - 1);
     fogOfWarGeometry.rotateX( - Math.PI / 2 );
     fogOfWarGeometry.translate(Math.floor(mapview_model_width / 2) - 496, 0, Math.floor(mapview_model_height / 2) + 4);

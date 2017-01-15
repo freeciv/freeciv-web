@@ -85,10 +85,8 @@ function handle_server_join_reply(packet)
     }
 
     if (renderer == RENDERER_WEBGL) {
-       if (is_small_screen()) {
-         // Fog of war disabled on mobile for performance reasons. TODO: make this configurable.
+       if (graphics_quality == QUALITY_LOW) {
          send_message_delayed("/set fogofwar disabled", 120);
-
          // WebGL renderer on mobile devices needs to use very little RAM.
          send_message_delayed("/set size 1", 130);
        }

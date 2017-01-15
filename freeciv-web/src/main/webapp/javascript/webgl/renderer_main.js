@@ -17,6 +17,11 @@
 
 ***********************************************************************/
 
+var QUALITY_LOW = 1;    // low quality, no antialiasing, no fog of war. Default for mobile.
+var QUALITY_MEDIUM = 2; // medium quality. Default for desktop and laptop computers.
+var QUALITY_HIGH = 3;   // best quality, add features which require high-end graphics hardware here.
+
+var graphics_quality = QUALITY_MEDIUM;
 
 /****************************************************************************
   Init the Freeciv-web WebGL renderer
@@ -82,34 +87,14 @@ function init_webgl_renderer()
 
   init_sprites();
 
-  (function() {
-    // Override THREE.Geometry to work around issue 7361
-    var originalGeometry = THREE.Geometry;
-    THREE.Geometry = function() {
-      // Call original constructor
-      originalGeometry.apply(this, arguments);
-
-      var colors = this.colors;
-      Object.defineProperty(this, "colors", {
-        get: function() {
-          return colors;
-        },
-        set: function(value) {
-          // Make sure the attribute has enough space
-          var nVertices = this.vertices.length;
-          if (this._bufferGeometry) {
-            if (nVertices !== this._bufferGeometry.attributes.color.count) {
-              this._bufferGeometry.addAttribute("color",
-                  new THREE.BufferAttribute(new Float32Array(nVertices * 3), 3));
-            }
-          }
-
-          colors = value;
-        }});
-    };
-    THREE.Geometry.prototype = originalGeometry.prototype;
-    THREE.Geometry.constructor = originalGeometry.constructor;
-  })();
+  var stored_graphics_quality_setting = simpleStorage.get("graphics_quality", "");
+  if (stored_graphics_quality_setting != null && stored_graphics_quality_setting > 0) {
+    graphics_quality = stored_graphics_quality_setting;
+  } else if (is_small_screen()) {
+    graphics_quality = QUALITY_LOW;
+  } else {
+    graphics_quality = QUALITY_MEDIUM;
+  }
 
 }
 

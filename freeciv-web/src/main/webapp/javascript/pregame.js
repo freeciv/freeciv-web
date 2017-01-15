@@ -479,10 +479,16 @@ function pregame_settings()
           "other ways also. Type /help in the command line for more information.</i></span></div>" +
 
       "<div id='pregame_settings_tabs-2'>"+
-      "<br><span id='settings_info'><i>The 3D WebGL version of Freeciv-web is under development and can be tested " +
-                "by clicking on the \"Single Player 3D Beta\" button on the main page. 3D required a fast computer " +
-                "with 3D graphics card. Here you can configure it:</i></span><br><br>" +
-	    "<table id='settings_table'><tr id='3d_antialiasing_enabled'><td id='3d_antialiasing_label' style='min-width: 150px;'></td>" +
+      "<br><span id='settings_info'><i>3D WebGL requires a fast computer with 3D graphics card, such as Nvidia GeForce and at least 3GB of RAM. " +
+      "The 3D WebGL version of Freeciv-web is under development. Here you can configure the 3D WebGL version:</i></span><br><br>" +
+	    "<table id='settings_table'>" +
+	    "<tr title='Graphics quality level'><td>Graphics quality:</td>" +
+        	  "<td><select name='graphics_quality' id='graphics_quality'>" +
+              "<option value='1'>Low</option>" +
+              "<option value='2'>Medium</option>" +
+              "<option value='3'>High</option>" +
+              "</select></td></tr>"+
+	    "<tr id='3d_antialiasing_enabled'><td id='3d_antialiasing_label' style='min-width: 150px;'></td>" +
         "<td><input type='checkbox' id='3d_antialiasing_setting' checked>Enable antialiasing (game looks nicer, but is slower)</td></tr>" +
         "</table>" +
       "</div>" +
@@ -576,8 +582,7 @@ function pregame_settings()
   if (stored_antialiasing_setting != null && stored_antialiasing_setting == "false") {
       $("#3d_antialiasing_setting").prop("checked", false);
       antialiasing_setting = false;
-  } else if (is_small_screen()) {
-    // antialiasing is disabled by default on mobile, since they are typically slow devices.
+  } else if (graphics_quality == QUALITY_LOW) {
     antialiasing_setting = false;
     simpleStorage.set("antialiasing_setting", "false");
     $("#3d_antialiasing_setting").prop("checked", false);
@@ -750,12 +755,18 @@ function pregame_settings()
       }
   });
 
-  $("#cardboard_vr_label").prop("innerHTML", "3D Virtual Reality:");
 
-  $('#cardboard_vr_setting').change(function() {
-    cardboard_vr_enabled = !cardboard_vr_enabled;
+  $('#graphics_quality').change(function() {
+    graphics_quality = parseFloat($('#graphics_quality').val());
+    simpleStorage.set("graphics_quality", graphics_quality);
+    if (graphics_quality >= QUALITY_MEDIUM) {
+      send_message_delayed("/set fogofwar enabled", 120);
+    } else {
+      send_message_delayed("/set fogofwar disabled", 120);
+    }
   });
 
+  $("#graphics_quality").val(graphics_quality);
 
   $('#speech_setting').change(function() {
     if ($('#speech_setting').prop('checked')) {

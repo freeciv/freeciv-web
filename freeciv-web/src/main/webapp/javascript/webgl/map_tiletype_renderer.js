@@ -24,7 +24,11 @@ var tiletype_palette = [];
 
 ****************************************************************************/
 function generate_map_tiletype_grid() {
-  map_tiletype_resolution = is_small_screen() ? 1024 : 4096;
+
+  if (graphics_quality == QUALITY_LOW) map_tiletype_resolution = 1024;
+  if (graphics_quality == QUALITY_MEDIUM) map_tiletype_resolution = 2048;
+  if (graphics_quality == QUALITY_HIGH) map_tiletype_resolution = 4096;
+
   var row, col;
   var start_tiletype = new Date().getTime();
   // The grid of points that make up the image.

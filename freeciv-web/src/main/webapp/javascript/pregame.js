@@ -764,7 +764,8 @@ function pregame_settings()
     } else {
       send_message("/set fogofwar disabled");
     }
-    setTimeout("location.reload();", 200);
+    load_count = 0;
+    webgl_preload();
   });
 
   $("#graphics_quality").val(graphics_quality);

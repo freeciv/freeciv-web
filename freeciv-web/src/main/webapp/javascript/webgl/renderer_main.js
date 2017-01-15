@@ -21,7 +21,7 @@ var QUALITY_LOW = 1;    // low quality, no antialiasing, no fog of war. Default 
 var QUALITY_MEDIUM = 2; // medium quality. Default for desktop and laptop computers.
 var QUALITY_HIGH = 3;   // best quality, add features which require high-end graphics hardware here.
 
-var graphics_quality = QUALITY_MEDIUM;
+var graphics_quality = QUALITY_HIGH;
 
 /****************************************************************************
   Init the Freeciv-web WebGL renderer
@@ -93,7 +93,7 @@ function init_webgl_renderer()
   } else if (is_small_screen()) {
     graphics_quality = QUALITY_LOW;
   } else {
-    graphics_quality = QUALITY_MEDIUM;
+    graphics_quality = QUALITY_HIGH; //default value
   }
 
 }

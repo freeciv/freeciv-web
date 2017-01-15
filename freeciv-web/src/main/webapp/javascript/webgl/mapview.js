@@ -195,12 +195,17 @@ function init_webgl_mapview() {
   add_all_objects_to_scene();
 
   /* Unknown territory */
-  var darkness_material = new THREE.ShaderMaterial({
-    vertexShader: darknessVertShader,
-    fragmentShader: darknessFragShader,
-    uniforms: []
-  });
-  darkness_material.transparent = true;
+  var darkness_material;
+  if (graphics_quality >= QUALITY_MEDIUM) {
+    darkness_material = new THREE.ShaderMaterial({
+      vertexShader: darknessVertShader,
+      fragmentShader: darknessFragShader,
+      uniforms: []
+    });
+    darkness_material.transparent = true;
+  } else {
+    darkness_material = new THREE.MeshBasicMaterial( { color: 0x000000} );
+  }
 
   unknownTerritoryGeometry = new THREE.PlaneGeometry(mapview_model_width, mapview_model_height, xquality - 1, yquality - 1);
   unknownTerritoryGeometry.rotateX( - Math.PI / 2 );

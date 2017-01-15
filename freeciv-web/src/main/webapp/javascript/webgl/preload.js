@@ -115,6 +115,14 @@ function webgl_preload()
                 webgl_textures[tiletype_terrains[index]].image = image;
                 webgl_textures[tiletype_terrains[index]].wrapS = THREE.RepeatWrapping;
                 webgl_textures[tiletype_terrains[index]].wrapT = THREE.RepeatWrapping;
+                if (graphics_quality == QUALITY_LOW) {
+                  webgl_textures[tiletype_terrains[index]].magFilter = THREE.NearestFilter;
+                  webgl_textures[tiletype_terrains[index]].minFilter = THREE.NearestFilter;
+                } else {
+                  webgl_textures[tiletype_terrains[index]].magFilter = THREE.LinearFilter;
+                  webgl_textures[tiletype_terrains[index]].minFilter = THREE.LinearFilter;
+                }
+
                 webgl_textures[tiletype_terrains[index]].needsUpdate = true;
             }
       })(imgurl, i)

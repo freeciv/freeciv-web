@@ -831,7 +831,8 @@ function show_intro_dialog(title, message) {
 	  + " <br><br><span id='username_validation_result'></span>";
 
   if (renderer == RENDERER_WEBGL) {
-    intro_html += "<span style='color: #800000;'>The 3D WebGL version of Freeciv-web requires WebGL 3D hardware support (such as Nvidia GeForce) and at least 3GB of RAM.</span>";
+    intro_html += "<span style='color: #800000;'>The 3D WebGL version of Freeciv-web requires WebGL 3D hardware support (such as Nvidia GeForce) and at least 3GB of RAM. " +
+    "Try tuning the 3D configuration by clicking Customize Game - Game settings - 3D WebGL.</span>";
   }
   $("#dialog").html(intro_html);
   var stored_username = simpleStorage.get("username", "");

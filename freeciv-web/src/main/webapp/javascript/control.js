@@ -2163,12 +2163,12 @@ function check_request_goto_path()
   if (goto_active && current_focus.length > 0
       && prev_mouse_x == mouse_x && prev_mouse_y == mouse_y) {
     var ptile;
+    clear_goto_tiles();
     if (renderer == RENDERER_2DCANVAS) {
       ptile = canvas_pos_to_tile(mouse_x, mouse_y);
     } else {
       ptile = webgl_canvas_pos_to_tile(mouse_x, mouse_y);
     }
-    clear_goto_tiles();
     if (ptile != null) {
       /* Send request for goto_path to server. */
       for (var i = 0; i < current_focus.length; i++) {

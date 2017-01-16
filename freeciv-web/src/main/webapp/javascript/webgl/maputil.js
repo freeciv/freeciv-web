@@ -45,13 +45,13 @@ function scene_to_map_coords(x, y)
   Converts from map canvas coordinates to a tile.
 ****************************************************************************/
 function webgl_canvas_pos_to_tile(x, y) {
-  if (mouse == null) return null;
+  if (mouse == null || landMesh == null) return null;
 
-  mouse.set( ( x / $('#canvas_div').width() ) * 2 - 1, - ( y / $('#canvas_div').height() ) * 2 + 1 );
+  mouse.set( ( x / $('#canvas_div').width() ) * 2 - 1, - ( y / $('#canvas_div').height() ) * 2 + 1);
 
   raycaster.setFromCamera( mouse, camera );
 
-  var intersects = raycaster.intersectObjects( scene.children );
+  var intersects = raycaster.intersectObject(landMesh);
 
   for (var i = 0; i < intersects.length; i++) {
     var intersect = intersects[i];

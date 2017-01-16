@@ -42,7 +42,7 @@ function prerender(landGeometry, xquality) {
                  terrain_name == "Plains" ||
                  terrain_name == "Hills") {
         /* Sparse trees -> Monte-Carlo algorithm */
-        add_tree = (Math.random() < 0.02);
+        add_tree = (Math.random() < 0.01);
       }
 
       /* No trees on beaches */
@@ -73,17 +73,13 @@ function prerender(landGeometry, xquality) {
     var gx = Math.round(x / 4 - 0.5);
     var gy = Math.round(y / 4 - 0.5);
     var ptile = map_pos_to_tile(gx, gy);
-    if (ptile != null && tile_get_known(ptile) != TILE_UNKNOWN) {
+    if (ptile != null) {
       var terrain_name = tile_terrain(ptile).name;
       var add_tree = false;
       if (terrain_name == "Jungle") {
-        /* Dense jungle. */
         add_tree = true;
       }
-
-      /* No trees on beaches */
       add_tree &= (landGeometry.vertices[i].y > 57);
-
       if (add_tree) {
         var vertex = new THREE.Vector3();
         vertex['tile'] = ptile['index'];
@@ -97,7 +93,6 @@ function prerender(landGeometry, xquality) {
       }
     }
   }
-
   var jungle_material = new THREE.PointsMaterial( { size: 32, sizeAttenuation: false, map: webgl_textures["jungle_1"], alphaTest: 0.5, transparent: true } );
   var jungle_particles = new THREE.Points( jungle_geometry, jungle_material );
   scene.add(jungle_particles);

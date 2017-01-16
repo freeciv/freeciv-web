@@ -119,11 +119,6 @@ function webglOnDocumentMouseDown(e) {
     popit();
     return false;
   } else if (rightclick && !map_select_active && is_right_mouse_selection_supported()) {
-    /*map_select_check = true;
-    map_select_x = mouse_x;
-    map_select_y = mouse_y;
-    map_select_check_started = new Date().getTime();*/
-
     /* The context menu blocks the right click mouse up event on some
      * browsers. */
     context_menu_active = false;

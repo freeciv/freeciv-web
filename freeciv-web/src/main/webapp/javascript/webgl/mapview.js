@@ -32,6 +32,7 @@ var darknessFragShader;
 var tiletype_terrains = ["lake","coast","floor","arctic","desert","forest","grassland","hills","jungle","mountains","plains","swamp","tundra", "beach"];
 
 var landGeometry;
+var landMesh;
 var unknownTerritoryGeometry;
 var fogOfWarGeometry;
 

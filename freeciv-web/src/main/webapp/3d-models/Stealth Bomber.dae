@@ -3,10 +3,10 @@
   <asset>
     <contributor>
       <author>Blender User</author>
-      <authoring_tool>Blender 2.78.0 commit date:2016-10-24, commit time:12:20, hash:e8299c8</authoring_tool>
+      <authoring_tool>Blender 2.78.0 commit date:2016-10-24, commit time:12:20, hash:e8299c8100</authoring_tool>
     </contributor>
-    <created>2016-11-26T09:21:48</created>
-    <modified>2016-11-26T09:21:48</modified>
+    <created>2017-01-16T21:53:31</created>
+    <modified>2017-01-16T21:53:31</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
@@ -262,7 +262,7 @@
   <library_visual_scenes>
     <visual_scene id="Scene" name="Scene">
       <node id="body" name="body" type="NODE">
-        <matrix sid="transform">-0.9098457 0.909841 0 0.096623 -0.909841 -0.9098457 0 0.4891426 0 0 1.286713 1.095338 0 0 0 1</matrix>
+        <matrix sid="transform">-0.9098457 0.909841 0 0.096623 -0.909841 -0.9098457 0 0.4891426 0 0 1.286713 2.057466 0 0 0 1</matrix>
         <instance_geometry url="#Plane_008-mesh" name="body">
           <bind_material>
             <technique_common>
@@ -272,7 +272,7 @@
         </instance_geometry>
       </node>
       <node id="Circle" name="Circle" type="NODE">
-        <matrix sid="transform">-0.6313507 -1.82137e-6 0 0.09245533 1.82137e-6 -0.6313507 0 -1.087704 0 0 0.6313507 1.368146 0 0 0 1</matrix>
+        <matrix sid="transform">-0.6313507 -1.82137e-6 0 0.09245533 1.82137e-6 -0.6313507 0 -1.087704 0 0 0.6313507 2.330275 0 0 0 1</matrix>
         <instance_geometry url="#Circle_001-mesh" name="Circle">
           <bind_material>
             <technique_common>
@@ -282,7 +282,7 @@
         </instance_geometry>
       </node>
       <node id="Plane" name="Plane" type="NODE">
-        <matrix sid="transform">-0.09104623 0.09104576 0 0.4335528 -0.09104576 -0.09104623 0 0.4123211 0 0 0.1287584 1.111217 0 0 0 1</matrix>
+        <matrix sid="transform">-0.09104623 0.09104576 0 0.4335528 -0.09104576 -0.09104623 0 0.4123211 0 0 0.1287584 2.073346 0 0 0 1</matrix>
         <instance_geometry url="#Plane_009-mesh" name="Plane">
           <bind_material>
             <technique_common>
@@ -292,7 +292,7 @@
         </instance_geometry>
       </node>
       <node id="Plane_001" name="Plane_001" type="NODE">
-        <matrix sid="transform">0.08864226 -0.09338784 -8.62155e-9 -0.2489792 -0.09338784 -0.08864226 -1.91576e-8 0.4063378 7.95949e-9 1.9442e-8 -0.1287584 1.111217 0 0 0 1</matrix>
+        <matrix sid="transform">0.08864226 -0.09338784 -8.62155e-9 -0.2489792 -0.09338784 -0.08864226 -1.91576e-8 0.4063378 7.95949e-9 1.9442e-8 -0.1287584 2.073346 0 0 0 1</matrix>
         <instance_geometry url="#Plane_010-mesh" name="Plane_001">
           <bind_material>
             <technique_common>

@@ -17,6 +17,7 @@
 
 ***********************************************************************/
 
+var pinched = false;
 
 /****************************************************************************
  Init WebGL mapctrl.
@@ -36,6 +37,13 @@ function init_webgl_mapctrl()
   }
 
   window.addEventListener('resize', webglOnWindowResize, false );
+
+  /* setup zoom in/zoom out*/
+  if (is_touch_device()) {
+    var mc = new Hammer.Manager(document.getElementById('canvas_div'));
+    mc.add(new Hammer.Pinch({ threshold: 0.1 }));
+    mc.on("pinch", webgl_mapview_pinch_zoom);
+  }
 
 }
 
@@ -140,7 +148,7 @@ function webglOnMouseWheel(e) {
     new_camera_dy = camera_dy - 60;
     new_camera_dx = camera_dx - 45;
     new_camera_dz = camera_dz - 45;
-  } else{
+  } else {
     // zoom out
     new_camera_dy = camera_dy + 60;
     new_camera_dx = camera_dx + 45;
@@ -160,6 +168,37 @@ function webglOnMouseWheel(e) {
 }
 
 
+/****************************************************************************
+ Handle zoom in / out on touch device
+****************************************************************************/
+function webgl_mapview_pinch_zoom(ev)
+{
+  pinched = true;
+  var new_camera_dx;
+  var new_camera_dy;
+  var new_camera_dz;
+
+  if(ev.scale > 1) {
+    // zoom in
+    new_camera_dy = camera_dy - 8;
+    new_camera_dx = camera_dx - 4;
+    new_camera_dz = camera_dz - 4;
+  } else{
+    // zoom out
+    new_camera_dy = camera_dy + 8;
+    new_camera_dx = camera_dx + 4;
+    new_camera_dz = camera_dz + 4;
+  }
+  if (new_camera_dy < 250 || new_camera_dy > 1100) {
+    return;
+  } else {
+    camera_dx = new_camera_dx;
+    camera_dy = new_camera_dy;
+    camera_dz = new_camera_dz;
+  }
+
+  camera_look_at(camera_current_x, camera_current_y, camera_current_z);
+}
 
 /****************************************************************************
   This function is triggered when beginning a touch event on a touch device,
@@ -189,6 +228,10 @@ function webgl_mapview_touch_start(e)
 ****************************************************************************/
 function webgl_mapview_touch_end(e)
 {
+  if (pinched) {
+    pinched = false;
+    return;
+  }
   webgl_action_button_pressed(touch_start_x, touch_start_y, SELECT_POPUP);
 }
 

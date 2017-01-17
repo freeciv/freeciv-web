@@ -80,6 +80,15 @@ function init_webgl_renderer()
     console.error("Unable to load tileset spec. Run Freeciv-img-extract.");
   });
 
+  if (is_touch_device()) {
+    $.ajax({
+      url: "/javascript/libs/hammer.min.js",
+      dataType: "script",
+      async: false
+    });
+  }
+
+
   terrainVertShader = document.getElementById('terrain_vertex_shh').innerHTML;
   terrainFragShader = document.getElementById('terrain_fragment_shh').innerHTML;
   darknessVertShader = document.getElementById('darkness_vertex_shh').innerHTML;

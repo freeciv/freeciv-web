@@ -120,8 +120,7 @@ for line in lines:
   if line.startswith("name"):
     tech_line = line.split("\"");
     if ("unitclass" in tech_line[1]): continue;
-    result_tech = tech_line[1].replace("?unit:", "");
-    techs.append(result_tech);
+    techs.append(tech_line[1]);
 
 f = open('../freeciv/freeciv/data/classic/buildings.ruleset')
 lines = f.readlines()

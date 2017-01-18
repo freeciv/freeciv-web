@@ -17,7 +17,7 @@
 
 ***********************************************************************/
 
-var pinched = false;
+var timeOfLastPinchZoom = new Date().getTime();
 
 /****************************************************************************
  Init WebGL mapctrl.
@@ -173,7 +173,7 @@ function webglOnMouseWheel(e) {
 ****************************************************************************/
 function webgl_mapview_pinch_zoom(ev)
 {
-  pinched = true;
+  timeOfLastPinchZoom = new Date().getTime();
   var new_camera_dx;
   var new_camera_dy;
   var new_camera_dz;
@@ -228,8 +228,7 @@ function webgl_mapview_touch_start(e)
 ****************************************************************************/
 function webgl_mapview_touch_end(e)
 {
-  if (pinched) {
-    pinched = false;
+  if (new Date().getTime() - timeOfLastPinchZoom < 400) {
     return;
   }
   webgl_action_button_pressed(touch_start_x, touch_start_y, SELECT_POPUP);
@@ -245,6 +244,9 @@ function webgl_mapview_touch_move(e)
 
   var diff_x = (touch_start_x - mouse_x) * 2;
   var diff_y = (touch_start_y - mouse_y) * 2;
+
+  var spos = webgl_canvas_pos_to_map_pos(touch_start_x, touch_start_y);
+  var epos = webgl_canvas_pos_to_map_pos(mouse_x, mouse_y);
 
   touch_start_x = mouse_x;
   touch_start_y = mouse_y;
@@ -267,7 +269,12 @@ function webgl_mapview_touch_move(e)
         }
       }
     }
+    return;
   }
+
+
+  camera_look_at(camera_current_x + spos['x'] - epos['x'], camera_current_y, camera_current_z + spos['y'] - epos['y']);
+
 }
 
 

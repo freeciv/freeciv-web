@@ -1158,7 +1158,6 @@ function do_map_click(ptile, qtype, first_time_called)
     if (sunits != null && sunits.length == 0) {
       /* Clicked on a tile with no units. */
       set_unit_focus_and_redraw(null);
-      if (renderer == RENDERER_WEBGL && is_touch_device()) center_tile_mapcanvas_3d(ptile);
 
     } else if (sunits != null && sunits.length > 0 ) {
       if (sunits[0]['owner'] == client.conn.playing.playerno) {
@@ -1180,7 +1179,6 @@ function do_map_click(ptile, qtype, first_time_called)
           }
 	    }
       }
-      if (renderer == RENDERER_WEBGL && is_touch_device()) center_tile_mapcanvas_3d(ptile);
     }
 
   }

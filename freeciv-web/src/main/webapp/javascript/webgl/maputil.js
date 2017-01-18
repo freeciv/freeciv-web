@@ -42,7 +42,7 @@ function scene_to_map_coords(x, y)
 
 
 /****************************************************************************
-  Converts from map canvas coordinates to a tile.
+  Converts from canvas coordinates to a tile.
 ****************************************************************************/
 function webgl_canvas_pos_to_tile(x, y) {
   if (mouse == null || landMesh == null) return null;
@@ -58,6 +58,26 @@ function webgl_canvas_pos_to_tile(x, y) {
     var pos = scene_to_map_coords(intersect.point.x, intersect.point.z);
     var ptile = map_pos_to_tile(pos['x'], pos['y']);
     if (ptile != null) return ptile;
+  }
+
+  return null;
+}
+
+/****************************************************************************
+  Converts from canvas coordinates to Three.js coordinates.
+****************************************************************************/
+function webgl_canvas_pos_to_map_pos(x, y) {
+  if (mouse == null || landMesh == null) return null;
+
+  mouse.set( ( x / $('#canvas_div').width() ) * 2 - 1, - ( y / $('#canvas_div').height() ) * 2 + 1);
+
+  raycaster.setFromCamera( mouse, camera );
+
+  var intersects = raycaster.intersectObject(landMesh);
+
+  for (var i = 0; i < intersects.length; i++) {
+    var intersect = intersects[i];
+    return {'x' : intersect.point.x, 'y' : intersect.point.z};
   }
 
   return null;

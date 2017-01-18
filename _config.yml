@@ -1,0 +1,8 @@
+title: Freeciv-web
+description: Freeciv-web is an Open Source strategy game implemented in HTML5, which can be played online against other players, or in single player mode against AI opponents.
+google_analytics: UA-40584174-1
+show_downloads: true
+theme: jekyll-theme-merlot
+
+gems:
+  - jekyll-mentions

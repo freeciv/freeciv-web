@@ -14,7 +14,7 @@ Contact: The Freeciv Project - freeciv-dev@gna.org
 https://mail.gna.org/listinfo/freeciv-dev  
   
 
-![Freeciv-web](https://raw.githubusercontent.com/freeciv/freeciv-web/master/scripts/freeciv-web-screenshot.png "Freeciv-web screenshot")
+![Freeciv-web](https://raw.githubusercontent.com/freeciv/freeciv-web/develop/scripts/freeciv-web-screenshot.png "Freeciv-web screenshot")
 
 
 News

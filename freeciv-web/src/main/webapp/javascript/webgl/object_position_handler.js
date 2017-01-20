@@ -202,7 +202,6 @@ function update_city_position(ptile) {
 
   if (city_positions[ptile['index']] == null && pcity != null) {
     // add new city
-    console.log("preparing new city: " + height);
     var size = 0;
     if (pcity['size'] >=4 && pcity['size'] <=7) {
       size = 1;
@@ -221,7 +220,6 @@ function update_city_position(ptile) {
 
     if (scene != null && new_city != null) {
       scene.add(new_city);
-      console.log("adding new city");
     }
 
     if (scene != null && pcity['walls'] && city_walls_positions[ptile['index']] == null) {

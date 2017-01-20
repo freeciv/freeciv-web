@@ -1,6 +1,6 @@
 /**********************************************************************
     Freeciv-web - the web version of Freeciv. http://play.freeciv.org/
-    Copyright (C) 2009-2016  The Freeciv-web project
+    Copyright (C) 2009-2017  The Freeciv-web project
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as published by
@@ -35,6 +35,7 @@ var landGeometry;
 var landMesh;
 var unknownTerritoryGeometry;
 var fogOfWarGeometry;
+var water;
 
 var start_webgl;
 
@@ -121,18 +122,50 @@ function init_webgl_mapview() {
   mapview_model_height = Math.floor(mapview_model_height * map['ysize'] / 56);
 
   /* Create water mesh with a texture. */
-  var waterGeometry = new THREE.PlaneGeometry( mapview_model_width, mapview_model_height, 2, 2);
-  waterGeometry.rotateX( - Math.PI / 2 );
-  waterGeometry.translate(Math.floor(mapview_model_width / 2) - 500, 0, Math.floor(mapview_model_height / 2));
+  if (graphics_quality <= QUALITY_MEDIUM) {
+    // lower quality water
+    var waterGeometry = new THREE.PlaneGeometry( mapview_model_width, mapview_model_height, 2, 2);
+    waterGeometry.rotateX( - Math.PI / 2 );
+    waterGeometry.translate(Math.floor(mapview_model_width / 2) - 500, 0, Math.floor(mapview_model_height / 2));
 
-  for ( var i = 0, l = waterGeometry.vertices.length; i < l; i ++ ) {
+    for ( var i = 0, l = waterGeometry.vertices.length; i < l; i ++ ) {
       var x = i % quality, y = Math.floor( i / quality );
       waterGeometry.vertices[ i ].y = 50;
-  }
+    }
 
-  var waterMaterial = new THREE.MeshBasicMaterial( { map: webgl_textures["water_overlay"], overdraw: 0.5, transparent: true, opacity: 0.65, color: 0x5555ff } );
-  var waterMesh = new THREE.Mesh( waterGeometry, waterMaterial );
-  scene.add(waterMesh);
+    var waterMaterial = new THREE.MeshBasicMaterial( { map: webgl_textures["water_overlay"], overdraw: 0.5, transparent: true, opacity: 0.65, color: 0x5555ff } );
+    var waterMesh = new THREE.Mesh( waterGeometry, waterMaterial );
+    scene.add(waterMesh);
+  } else {
+    // high quality water using WebGL shader
+  	var waterNormals = new THREE.TextureLoader().load( '/textures/waternormals.jpg' );
+    waterNormals.wrapS = waterNormals.wrapT = THREE.RepeatWrapping;
+
+    water = new THREE.Water( maprenderer, camera, scene, {
+        textureWidth: 512,
+        textureHeight: 512,
+        waterNormals: waterNormals,
+        alpha: 	0.6,
+        sunDirection: directionalLight.position.clone().normalize(),
+        sunColor: 0xece400,
+        waterColor: 0x00307b,
+        distortionScale: 80.0,
+        fog: scene.fog != undefined
+    } );
+
+    mirrorMesh = new THREE.Mesh(
+	  new THREE.PlaneBufferGeometry( mapview_model_width, mapview_model_height),
+	  water.material
+    );
+
+    mirrorMesh.add( water );
+	mirrorMesh.rotation.x = - Math.PI * 0.5;
+	mirrorMesh.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), 50);
+	mirrorMesh.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), Math.floor(mapview_model_width / 2) - 500);
+	mirrorMesh.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), -mapview_model_height / 2);
+	scene.add( mirrorMesh );
+
+  }
 
   /* map_texture: create a texture which contains one pixel for each map tile, where the color of each pixel
     indicates which Freeciv tile type the pixel is. */
@@ -285,6 +318,11 @@ function animate() {
     unknownTerritoryGeometry.computeFaceNormals();
     unknownTerritoryGeometry.computeVertexNormals();
     normalsNeedsUpdating = false;
+  }
+
+  if (graphics_quality == QUALITY_HIGH && water != null) {
+    water.material.uniforms.time.value += 1.0 / 60.0;
+    water.render();
   }
 
   if (!cardboard_vr_enabled) {

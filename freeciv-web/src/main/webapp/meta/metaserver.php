@@ -504,15 +504,21 @@ if ( isset($port) ) {
           } else {
             print "<tr class='meta_row'><td>";
           }
-	  print "<a  class='button' href=\"/webclient?action=observe&amp;civserverport="
+
+	      print "<a  class='button' href=\"/webclient?action=observe&amp;civserverport="
 		  . db2html($row["port"]) . "&amp;civserverhost=" . db2html($row["host"]) . "\">";
-          print "Observe";
+          print "Observe 2D";
+          print "</a>";
+
+	      print "<a  class='button' href=\"/webclient?renderer=webgl&amp;action=observe&amp;civserverport="
+		  . db2html($row["port"]) . "&amp;civserverhost=" . db2html($row["host"]) . "\">";
+          print "3D";
           print "</a>";
 
           print "<a class='button' href=\"/meta/metaserver.php?server_port=" . db2html($row["host"]) . ":" . db2html($row["port"]) . "\">";
-          print "Info";
+          print "Game Info";
           print "</a>";
-	  print "</td><td>";
+	      print "</td><td>";
           $stmt="select * from players where hostport=\"".$row['host'].":".$row['port']."\"";
           $res1 = fcdb_exec($stmt);
           print fcdb_num_rows($res1);
@@ -570,9 +576,13 @@ if ( isset($port) ) {
            print "Play";
 	   print "</a>";
 	  } else {
-	   print "<a  class='button' href=\"/webclient?action=observe&amp;civserverport=" . db2html($row["port"]) . "&amp;civserverhost=" . db2html($row["host"]) . "&amp;multi=true\">";
+	       print "<a  class='button' href=\"/webclient?action=observe&amp;civserverport=" . db2html($row["port"]) . "&amp;civserverhost=" . db2html($row["host"]) . "&amp;multi=true\">";
            print "Join/Observe";
            print "</a>";
+	       print "<a  class='button' href=\"/webclient?renderer=webgl&amp;action=observe&amp;civserverport=" . db2html($row["port"]) . "&amp;civserverhost=" . db2html($row["host"]) . "&amp;multi=true\">";
+           print "3D";
+           print "</a>";
+
 	  }
 
 

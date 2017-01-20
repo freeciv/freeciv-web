@@ -21,18 +21,29 @@
 
 var width = 120;
 var height = 80;
+var renderer_3d = false;
 
 L.mapbox.accessToken = 'pk.eyJ1IjoiYW5kcmVhc3Jvc2RhbCIsImEiOiJjaWo2d2piZnMwMDF0MHJsdjZ2NHBxdmhhIn0.36znzLi2ExS8gwXauDgt3w';
 var map = L.mapbox.map('map', 'mapbox.satellite', {
     maxZoom: 15
 })
     .setView([35, 25], 2);
+
 document.getElementById('snap').addEventListener('click', function() {
     $("#snap_status").html("<b>Please wait while generating map for you!</b>");
     $("#snap").hide();
+    $("#snap3d").hide();
     leafletImage(map, doImage);
 });
- 
+
+document.getElementById('snap3d').addEventListener('click', function() {
+    $("#snap_status").html("<b>Please wait while generating map for you!</b>");
+    $("#snap").hide();
+    $("#snap3d").hide();
+    renderer_3d = true;
+    leafletImage(map, doImage);
+});
+
 $("#geolocate").click(function() {
   map.locate();
 });
@@ -53,7 +64,11 @@ $.ajax({
   url: "/freeciv-earth-mapgen",
   data: savetxt 
 }).done(function(responsedata) {
-    window.location.href="/webclient/?action=earthload&savegame=" + responsedata;
+    if (!renderer_3d) {
+      window.location.href="/webclient/?action=earthload&savegame=" + responsedata;
+    } else {
+      window.location.href="/webclient/?action=earthload&savegame=" + responsedata + "&renderer=webgl";
+    }
   })
   .fail(function() {
     $("#snap_status").html("Something failed. Please try again later!");

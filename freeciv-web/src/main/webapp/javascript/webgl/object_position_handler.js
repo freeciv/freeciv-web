@@ -202,6 +202,7 @@ function update_city_position(ptile) {
 
   if (city_positions[ptile['index']] == null && pcity != null) {
     // add new city
+    console.log("preparing new city: " + height);
     var size = 0;
     if (pcity['size'] >=4 && pcity['size'] <=7) {
       size = 1;
@@ -220,6 +221,7 @@ function update_city_position(ptile) {
 
     if (scene != null && new_city != null) {
       scene.add(new_city);
+      console.log("adding new city");
     }
 
     if (scene != null && pcity['walls'] && city_walls_positions[ptile['index']] == null) {
@@ -583,19 +585,27 @@ function add_all_objects_to_scene()
 {
   for (var tile_index in unit_positions) {
     var punit = unit_positions[tile_index];
+    punit.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), 100 * tiles[tile_index]['height'] - 5);
     scene.add(punit);
   }
 
   for (var tile_index in city_positions) {
     var pcity = city_positions[tile_index];
+    pcity.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), 100 * tiles[tile_index]['height'] - 5);
     scene.add(pcity);
+  }
+
+  for (var tile_index in city_label_positions) {
+    var pcity_label = city_label_positions[tile_index];
+    pcity_label.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), 100 * tiles[tile_index]['height'] - 5);
+    scene.add(pcity_label);
   }
 
   for (var tile_index in unit_flag_positions) {
     var pflag = unit_flag_positions[tile_index];
+    pflag.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), 100 * tiles[tile_index]['height'] - 5);
     scene.add(pflag);
   }
-
 
 }
 

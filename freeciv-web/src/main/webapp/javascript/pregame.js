@@ -864,7 +864,7 @@ function show_intro_dialog(title, message) {
 			  {
 				  text : "Start Game",
 				  click : function() {
-                     if ((is_touch_device() || is_small_screen()) && renderer == RENDERER_2DCANVAS) {
+                     if (is_touch_device() || is_small_screen()) {
                        BigScreen.toggle();
                      }
 					dialog_close_trigger = "button";
@@ -876,7 +876,7 @@ function show_intro_dialog(title, message) {
 			  {
 				  text : $.getUrlVar('action') == "load" ? "Load games" : "Customize Game",
 				  click : function() {
-                    if ((is_touch_device() || is_small_screen()) && renderer == RENDERER_2DCANVAS) {
+                    if (is_touch_device() || is_small_screen()) {
                       BigScreen.toggle();
                     }
 					dialog_close_trigger = "button";

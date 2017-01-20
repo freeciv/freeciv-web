@@ -89,8 +89,8 @@ function webgl_start_renderer()
 
   if (is_small_screen()) {
     camera_dy = 380;
-    camera_dx = 140;
-    camera_dz = 140;
+    camera_dx = 180;
+    camera_dz = 180;
   }
 
   maprenderer.setClearColor(0x000000);

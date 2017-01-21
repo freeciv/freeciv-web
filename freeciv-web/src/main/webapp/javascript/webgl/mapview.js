@@ -138,19 +138,16 @@ function init_webgl_mapview() {
     scene.add(waterMesh);
   } else {
     // high quality water using WebGL shader
-  	var waterNormals = new THREE.TextureLoader().load( '/textures/waternormals.jpg' );
-    waterNormals.wrapS = waterNormals.wrapT = THREE.RepeatWrapping;
-
     water = new THREE.Water( maprenderer, camera, scene, {
         textureWidth: 512,
         textureHeight: 512,
-        waterNormals: waterNormals,
-        alpha: 	0.6,
+        waterNormals: webgl_textures["waternormals"],
+        alpha: 	0.7,
         sunDirection: directionalLight.position.clone().normalize(),
-        sunColor: 0xece400,
-        waterColor: 0x00307b,
-        distortionScale: 80.0,
-        fog: scene.fog != undefined
+        sunColor: 0xfaf100,
+        waterColor: 0x003485,
+        distortionScale: 70.0,
+        fog: false
     } );
 
     mirrorMesh = new THREE.Mesh(
@@ -164,6 +161,12 @@ function init_webgl_mapview() {
 	mirrorMesh.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), Math.floor(mapview_model_width / 2) - 500);
 	mirrorMesh.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), -mapview_model_height / 2);
 	scene.add( mirrorMesh );
+
+    var sunGeometry = new THREE.PlaneGeometry( 1000, 1000, 2, 2);
+    sunGeometry.rotateX( Math.PI / 2 );
+    sunGeometry.translate(Math.floor(mapview_model_width / 2) - 500, 850, Math.floor(mapview_model_height / 3));
+    var sunMesh = new THREE.Mesh( sunGeometry, webgl_materials['sun'] );
+    scene.add(sunMesh);
 
   }
 
@@ -279,7 +282,7 @@ function init_webgl_mapview() {
       if (heightmap[x] != null && heightmap[x][y] != null) {
         var ptile = map_pos_to_tile(gx, gy);
         if (ptile != null && tile_get_known(ptile) == TILE_KNOWN_SEEN) {
-          fogOfWarGeometry.vertices[ i ].y = heightmap[x][y] * 100 - 10;
+          fogOfWarGeometry.vertices[ i ].y = heightmap[x][y] * 100 - 11;
         } else {
           fogOfWarGeometry.vertices[ i ].y = heightmap[x][y] * 100 + 13;
         }

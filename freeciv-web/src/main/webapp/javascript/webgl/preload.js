@@ -77,7 +77,7 @@ function webgl_preload()
   textureLoader.load( '/textures/road_1.png', function ( image ) {
       road_sprite.image = image;
       road_sprite.needsUpdate = true;
-      roadMaterial = new THREE.MeshBasicMaterial( { map: road_sprite, side:THREE.DoubleSide } );
+      var roadMaterial = new THREE.MeshBasicMaterial( { map: road_sprite, side:THREE.DoubleSide } );
       roadMaterial.transparent = true;
       webgl_materials['road_1'] = roadMaterial;
   } );
@@ -87,7 +87,7 @@ function webgl_preload()
   textureLoader.load( '/textures/rail_1.png', function ( image ) {
       rail_sprite.image = image;
       rail_sprite.needsUpdate = true;
-      railMaterial = new THREE.MeshBasicMaterial( { map: rail_sprite, side:THREE.DoubleSide } );
+      var railMaterial = new THREE.MeshBasicMaterial( { map: rail_sprite, side:THREE.DoubleSide } );
       railMaterial.transparent = true;
       webgl_materials['rail_1'] = railMaterial;
   } );
@@ -97,10 +97,31 @@ function webgl_preload()
   textureLoader.load( '/textures/river.png', function ( image ) {
       river_sprite.image = image;
       river_sprite.needsUpdate = true;
-      riverMaterial = new THREE.MeshBasicMaterial( { map: river_sprite, side:THREE.DoubleSide } );
+      var riverMaterial = new THREE.MeshBasicMaterial( { map: river_sprite, side:THREE.DoubleSide } );
       riverMaterial.transparent = true;
       webgl_materials['river'] = riverMaterial;
   } );
+
+  if (graphics_quality == QUALITY_HIGH) {
+    var waternormals = new THREE.Texture();
+    webgl_textures["waternormals"] = waternormals;
+    textureLoader.load( '/textures/waternormals.jpg', function ( image ) {
+      waternormals.image = image;
+      waternormals.needsUpdate = true;
+      waternormals.wrapS = waternormals.wrapT = THREE.RepeatWrapping;
+    } );
+
+
+    var sun_texture = new THREE.Texture();
+    webgl_textures["run"] = sun_texture;
+    textureLoader.load( '/textures/sun.png', function ( image ) {
+      sun_texture.image = image;
+      sun_texture.needsUpdate = true;
+      var sunMaterial = new THREE.MeshBasicMaterial( { map: sun_texture} );
+      webgl_materials['sun'] = sunMaterial;
+    } );
+
+  }
 
   /* Preload a texture for each map tile type. */
   for (var i = 0; i < tiletype_terrains.length; i++) {

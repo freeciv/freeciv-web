@@ -472,13 +472,13 @@ function update_tile_extras(ptile) {
         riverGeometry.vertices[0].y = 0.0 - delta;
         riverGeometry.vertices[0].z = 0.0;
         riverGeometry.vertices[1].x = dest['x'] - pos['x'];
-        riverGeometry.vertices[1].y = (checktile['height'] - ptile['height']) * 100 - delta - (is_ocean_tile(checktile) ? 10 : 0);
+        riverGeometry.vertices[1].y = (checktile['height'] - ptile['height']) * 100 - delta - (is_ocean_tile(checktile) ? 26 : 0);
         riverGeometry.vertices[1].z = dest['y'] - pos['y'];
         riverGeometry.vertices[2].x = 0.0;
         riverGeometry.vertices[2].y = delta;
         riverGeometry.vertices[2].z = river_width;
         riverGeometry.vertices[3].x = dest['x'] - pos['x'];
-        riverGeometry.vertices[3].y = (checktile['height'] - ptile['height']) * 100 + delta - (is_ocean_tile(checktile) ? 10 : 0);
+        riverGeometry.vertices[3].y = (checktile['height'] - ptile['height']) * 100 + delta - (is_ocean_tile(checktile) ? 26 : 0);
         riverGeometry.vertices[3].z = dest['y'] - pos['y'] + river_width;
 
         riverGeometry.verticesNeedUpdate = true;

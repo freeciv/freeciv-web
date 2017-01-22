@@ -146,7 +146,7 @@ function init_webgl_mapview() {
         sunDirection: directionalLight.position.clone().normalize(),
         sunColor: 0xfaf100,
         waterColor: 0x003485,
-        distortionScale: 70.0,
+        distortionScale: 30.0,
         fog: false
     } );
 
@@ -164,7 +164,7 @@ function init_webgl_mapview() {
 
     var sunGeometry = new THREE.PlaneGeometry( 1000, 1000, 2, 2);
     sunGeometry.rotateX( Math.PI / 2 );
-    sunGeometry.translate(Math.floor(mapview_model_width / 2) - 500, 850, Math.floor(mapview_model_height / 3));
+    sunGeometry.translate(Math.floor(mapview_model_width / 2) - 500, 800, Math.floor(mapview_model_height / 3));
     var sunMesh = new THREE.Mesh( sunGeometry, webgl_materials['sun'] );
     scene.add(sunMesh);
 

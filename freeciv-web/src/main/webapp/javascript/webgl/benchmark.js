@@ -30,11 +30,8 @@ function webgl_benchmark_run()
   benchmark_enabled = true;
   $("#dialog").dialog('close');
   $("#pregame_settings").dialog('close');
-  send_message("/set mapseed 42");
-  send_message("/set gameseed 42");
-  send_message("/set aifill 20");
-  send_message("/set revealmap start");
-
+  send_message("/set mapseed 420");
+  send_message("/set gameseed 420");
   send_message("/start");
   setTimeout(benchmark_check, 1000);
 }

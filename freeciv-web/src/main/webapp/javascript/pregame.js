@@ -778,7 +778,7 @@ function pregame_settings()
   if (renderer == RENDERER_WEBGL) {
     $(".benchmark").button();
   } else {
-    $(".benchmark").hide();
+    $('[href="#pregame_settings_tabs-2"]').closest('li').hide();
   }
 
   $('#speech_setting').change(function() {

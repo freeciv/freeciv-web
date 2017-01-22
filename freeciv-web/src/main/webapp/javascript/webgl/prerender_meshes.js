@@ -27,6 +27,7 @@ var jungle_geometry = null;
 function prerender(landGeometry, xquality) {
  /* Trees */
   forest_geometry = new THREE.Geometry();
+  var treecolors = []
   for (var i = 0, l = landGeometry.vertices.length; i < l; i++) {
     var x = i % xquality, y = Math.floor(i / xquality);
     var gx = Math.round(x / 4 - 0.5);
@@ -58,10 +59,16 @@ function prerender(landGeometry, xquality) {
         vertex.y = tile_get_known(ptile) == TILE_UNKNOWN ? 35 : theight;
         vertex.z = Math.floor(landGeometry.vertices[i].z + 5 + 2.5 * (-1 + 2 * Math.random()));
         forest_geometry.vertices.push( vertex );
+        if (graphics_quality == QUALITY_HIGH) {
+          var mycolor = new THREE.Color( 0xffffff );
+          mycolor.setHSL(0.5 + (Math.random() - 0.5) / 3, 0.2 + Math.random(), 0.5 );
+          treecolors.push(mycolor);
+        }
       }
     }
   }
-  var forest_material = new THREE.PointsMaterial( { size: 32, sizeAttenuation: false, map: webgl_textures["tree_1"], alphaTest: 0.5, transparent: true } );
+  if (graphics_quality == QUALITY_HIGH) forest_geometry.colors = treecolors;
+  var forest_material = new THREE.PointsMaterial( { size: 42, sizeAttenuation: true, map: webgl_textures["tree_1"], vertexColors: (graphics_quality == QUALITY_HIGH) ? THREE.VertexColors : THREE.NoColors, alphaTest: 0.5, transparent: true } );
   var tree_particles = new THREE.Points( forest_geometry, forest_material );
   scene.add(tree_particles);
 
@@ -93,7 +100,7 @@ function prerender(landGeometry, xquality) {
       }
     }
   }
-  var jungle_material = new THREE.PointsMaterial( { size: 32, sizeAttenuation: false, map: webgl_textures["jungle_1"], alphaTest: 0.5, transparent: true } );
+  var jungle_material = new THREE.PointsMaterial( { size: 42, sizeAttenuation: true, map: webgl_textures["jungle_1"], alphaTest: 0.5, transparent: true } );
   var jungle_particles = new THREE.Points( jungle_geometry, jungle_material );
   scene.add(jungle_particles);
 

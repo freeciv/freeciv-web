@@ -776,9 +776,9 @@ function city_name_dialog(suggested_name, unit_id) {
 						  return;
 						}
 
-                                                var actor_unit = game_find_unit_by_number(unit_id);
+                        var actor_unit = game_find_unit_by_number(unit_id);
 
-                                                var packet = {"pid" : packet_unit_do_action,
+                        var packet = {"pid" : packet_unit_do_action,
                                                               "actor_id" : unit_id,
                                                               "target_id": actor_unit['tile'],
                                                               "value" : 0,

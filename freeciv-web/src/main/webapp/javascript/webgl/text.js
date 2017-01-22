@@ -70,16 +70,16 @@ function create_city_label(pcity)
   width += 28;
 
   // Occupied
-  // Background
-  ctx.fillStyle = 'black';
-  ctx.fillRect(width, 0, 16, 16);
-  // Stars
   var ptile = city_tile(pcity);
   var punits = tile_units(ptile);
   if (punits.length > 0) {
+    // Background
+    ctx.fillStyle = 'black';
+    ctx.fillRect(width, 0, 16, 16);
+    // Stars
     ctx.drawImage(sprites[get_city_occupied_sprite(pcity)], width, 0, 13, 16);
+    width += 13;
   }
-  width += 13;
 
   // Name and size
   var city_text = pcity.name + "  " + pcity.size;

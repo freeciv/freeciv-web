@@ -490,6 +490,8 @@ function pregame_settings()
               "</select></td></tr>"+
 	    "<tr id='3d_antialiasing_enabled'><td id='3d_antialiasing_label' style='min-width: 150px;'></td>" +
         "<td><input type='checkbox' id='3d_antialiasing_setting' checked>Enable antialiasing (game looks nicer, but is slower)</td></tr>" +
+        "<tr><td style='min-width: 150px;'>Benchmark of 3D WebGL version:</td>" +
+                "<td><button id='bechmark_run' type='button' class='benchmark button'>Run benchmark</button></td></tr>" +
         "</table>" +
       "</div>" +
 
@@ -770,6 +772,15 @@ function pregame_settings()
 
   $("#graphics_quality").val(graphics_quality);
 
+  $(".benchmark").click(function() {
+    webgl_benchmark_run();
+  });
+  if (renderer == RENDERER_WEBGL) {
+    $(".benchmark").button();
+  } else {
+    $(".benchmark").hide();
+  }
+
   $('#speech_setting').change(function() {
     if ($('#speech_setting').prop('checked')) {
       speech_enabled = true;
@@ -831,8 +842,16 @@ function show_intro_dialog(title, message) {
 	  + " <br><br><span id='username_validation_result'></span>";
 
   if (renderer == RENDERER_WEBGL) {
-    intro_html += "<span style='color: #800000;'>The 3D WebGL version of Freeciv-web requires WebGL 3D hardware support (such as Nvidia GeForce) and at least 3GB of RAM. " +
-    "Try tuning the 3D configuration by clicking Customize Game - Game settings - 3D WebGL.</span>";
+    intro_html += "<span style='color: #800000;'>The 3D WebGL version of Freeciv-web requires WebGL 3D hardware support such as Nvidia GeForce and at least 3GB of RAM.<br>" +
+    "Try tuning the 3D configuration by clicking Customize Game - Game settings - 3D WebGL. Current graphics level: ";
+    if (graphics_quality == QUALITY_LOW) {
+      intro_html += "Low quality.";
+    } else if (graphics_quality == QUALITY_MEDIUM) {
+      intro_html += "Medium quality.";
+    } else {
+      intro_html += "High quality.";
+    }
+    "</span>";
   }
   $("#dialog").html(intro_html);
   var stored_username = simpleStorage.get("username", "");

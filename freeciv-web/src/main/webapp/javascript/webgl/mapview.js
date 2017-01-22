@@ -328,14 +328,12 @@ function animate() {
     water.render();
   }
 
-  if (!cardboard_vr_enabled) {
-    maprenderer.render(scene,camera );
-  } else {
-    stereoEffect.render(scene, camera);
-  }
+  maprenderer.render(scene,camera );
 
-  check_request_goto_path();
+  if (goto_active) check_request_goto_path();
   if (stats != null) stats.end();
-  requestAnimationFrame( animate );
+  if (benchmark_enabled) benchmark_frames_count++;
+
+  requestAnimationFrame(animate);
 
 }

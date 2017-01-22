@@ -17,7 +17,7 @@
 
 ***********************************************************************/
 
-var QUALITY_LOW = 1;    // low quality, no antialiasing, no fog of war. Default for mobile.
+var QUALITY_LOW = 1;    // low quality, no antialiasing. Default for mobile.
 var QUALITY_MEDIUM = 2; // medium quality. Default for desktop and laptop computers.
 var QUALITY_HIGH = 3;   // best quality, add features which require high-end graphics hardware here.
 

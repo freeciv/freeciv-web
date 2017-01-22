@@ -271,32 +271,30 @@ function init_webgl_mapview() {
 
 
   // Fog of war
-  if (graphics_quality >= QUALITY_MEDIUM) {
-    fogOfWarGeometry = new THREE.PlaneGeometry(mapview_model_width, mapview_model_height, xquality - 1, yquality - 1);
-    fogOfWarGeometry.rotateX( - Math.PI / 2 );
-    fogOfWarGeometry.translate(Math.floor(mapview_model_width / 2) - 496, 0, Math.floor(mapview_model_height / 2) + 4);
-    for ( var i = 0, l = fogOfWarGeometry.vertices.length; i < l; i ++ ) {
-      var x = i % xquality, y = Math.floor( i / xquality );
-      var gx = Math.floor(x / 4);
-      var gy = Math.floor(y / 4);
-      if (heightmap[x] != null && heightmap[x][y] != null) {
-        var ptile = map_pos_to_tile(gx, gy);
-        if (ptile != null && tile_get_known(ptile) == TILE_KNOWN_SEEN) {
-          fogOfWarGeometry.vertices[ i ].y = heightmap[x][y] * 100 - 11;
-        } else {
-          fogOfWarGeometry.vertices[ i ].y = heightmap[x][y] * 100 + 13;
-        }
+  fogOfWarGeometry = new THREE.PlaneGeometry(mapview_model_width, mapview_model_height, xquality - 1, yquality - 1);
+  fogOfWarGeometry.rotateX( - Math.PI / 2 );
+  fogOfWarGeometry.translate(Math.floor(mapview_model_width / 2) - 496, 0, Math.floor(mapview_model_height / 2) + 4);
+  for ( var i = 0, l = fogOfWarGeometry.vertices.length; i < l; i ++ ) {
+    var x = i % xquality, y = Math.floor( i / xquality );
+    var gx = Math.floor(x / 4);
+    var gy = Math.floor(y / 4);
+    if (heightmap[x] != null && heightmap[x][y] != null) {
+      var ptile = map_pos_to_tile(gx, gy);
+      if (ptile != null && tile_get_known(ptile) == TILE_KNOWN_SEEN) {
+        fogOfWarGeometry.vertices[ i ].y = heightmap[x][y] * 100 - 11;
+      } else {
+        fogOfWarGeometry.vertices[ i ].y = heightmap[x][y] * 100 + 13;
       }
-      if (x == xquality - 1) fogOfWarGeometry.vertices[ i ].x += 50;
-      if (y == yquality - 1) fogOfWarGeometry.vertices[ i ].z += 50;
     }
-    fogOfWarGeometry.computeVertexNormals();
-    fogOfWarGeometry.computeMorphNormals();
-    var fogOfWar_material = new THREE.MeshLambertMaterial({color: 0x000000, transparent: true, opacity: 0.4});
-    var fogOfWarMesh = new THREE.Mesh( fogOfWarGeometry, fogOfWar_material );
-    fogOfWarMesh.geometry.dynamic = true;
-    scene.add(fogOfWarMesh);
+    if (x == xquality - 1) fogOfWarGeometry.vertices[ i ].x += 50;
+    if (y == yquality - 1) fogOfWarGeometry.vertices[ i ].z += 50;
   }
+  fogOfWarGeometry.computeVertexNormals();
+  fogOfWarGeometry.computeMorphNormals();
+  var fogOfWar_material = new THREE.MeshLambertMaterial({color: 0x000000, transparent: true, opacity: 0.4});
+  var fogOfWarMesh = new THREE.Mesh( fogOfWarGeometry, fogOfWar_material );
+  fogOfWarMesh.geometry.dynamic = true;
+  scene.add(fogOfWarMesh);
 
   // cleanup
   $("#map_tiletype_grid").remove();

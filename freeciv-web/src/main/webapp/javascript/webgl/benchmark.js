@@ -32,8 +32,7 @@ function webgl_benchmark_run()
   $("#pregame_settings").dialog('close');
   send_message("/set mapseed 42");
   send_message("/set gameseed 42");
-  send_message("/set size 5");
-  send_message("/set aifill 30");
+  send_message("/set aifill 20");
   send_message("/set revealmap start");
 
   send_message("/start");

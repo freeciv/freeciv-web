@@ -516,27 +516,27 @@ function update_tile_extras(ptile) {
     }
   }
 
-  var extra = extras[ptile['resource']];
-  if (extra != null && scene != null) {
-      var extra = webgl_get_model(extra['name']);
-      if (extra == null) return;
+  var extra_resource = extras[ptile['resource']];
+  if (extra_resource != null && scene != null && tile_extra_positions[extra_resource['id'] + "." + ptile['index']] == null) {
+      var extra_model = webgl_get_model(extra_resource['name']);
+      if (extra_model == null) return;
 
-      tile_extra_positions[extra['id'] + "." + ptile['index']] = extra;
+      tile_extra_positions[extra_resource['id'] + "." + ptile['index']] = extra_model;
 
       var pos = map_to_scene_coords(ptile['x'], ptile['y']);
-      extra.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
-      extra.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 3);
-      extra.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
+      extra_model.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
+      extra_model.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 3);
+      extra_model.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
 
-      if (scene != null && extra != null) {
-        scene.add(extra);
+      if (scene != null && extra_model != null) {
+        scene.add(extra_model);
       }
   }
 
   // show forest
   var terrain_name = tile_terrain(ptile).name;
   if (scene != null
-      && tile_get_known(ptile) != TILE_UNKNOWN
+      && tile_get_known(ptile) == TILE_KNOWN_SEEN
       && forest_positions[ptile['index']] == null
       && terrain_name == "Forest") {
     for (var s = 0; s < forest_geometry.vertices.length; s++) {
@@ -550,7 +550,7 @@ function update_tile_extras(ptile) {
 
   // show jungle
   if (scene != null
-      && tile_get_known(ptile) != TILE_UNKNOWN
+      && tile_get_known(ptile) == TILE_KNOWN_SEEN
       && jungle_positions[ptile['index']] == null
       && terrain_name == "Jungle") {
     for (var s = 0; s < jungle_geometry.vertices.length; s++) {

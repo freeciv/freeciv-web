@@ -181,9 +181,14 @@ function handle_tile_info(packet)
 {
   if (tiles != null) {
     packet['extras'] = new BitVector(packet['extras']);
-    if (renderer == RENDERER_WEBGL) webgl_update_tile_known(tiles[packet['tile']], packet);
+
+    if (renderer == RENDERER_WEBGL) {
+      var old_tile = $.extend({}, tiles[packet['tile']]);
+      webgl_update_tile_known(tiles[packet['tile']], packet);
+      update_tile_extras($.extend(old_tile, packet));
+    }
+
     tiles[packet['tile']] = $.extend(tiles[packet['tile']], packet);
-    if (renderer == RENDERER_WEBGL) update_tile_extras(tiles[packet['tile']]);
   }
 }
 

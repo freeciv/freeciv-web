@@ -252,12 +252,10 @@ function is_tech_in_range(target_player, range, tech)
               TRI_NO);
   case REQ_RANGE_TEAM:
   case REQ_RANGE_ALLIANCE:
-      /* FIXME: Add support. */
-      return TRI_MAYBE;
   case REQ_RANGE_WORLD:
-    // FIXME! Add support for global advances.
+    /* FIXME: Add support for the above ranges. Freeciv's implementation
+     * currently (25th Jan 2017) lives in common/requirements.c */
     return TRI_MAYBE;
-    //return game.info.global_advances[tech];
   case REQ_RANGE_LOCAL:
   case REQ_RANGE_CADJACENT:
   case REQ_RANGE_ADJACENT:

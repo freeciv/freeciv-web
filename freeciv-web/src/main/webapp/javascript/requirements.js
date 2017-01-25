@@ -65,7 +65,7 @@ function is_req_active(target_player,
 		   req,
            prob_type)
 {
-  var eval = false;
+  var eval = TRI_NO;
 
   /* Note the target may actually not exist.  In particular, effects that
    * have a VUT_SPECIAL or VUT_TERRAIN may often be passed to this function
@@ -73,7 +73,7 @@ function is_req_active(target_player,
    * not met. */
   switch (req['kind']) {
   case VUT_NONE:
-    eval = true;
+    eval = TRI_YES;
     break;
   case VUT_ADVANCE:
     /* The requirement is filled if the player owns the tech. */
@@ -188,10 +188,17 @@ function is_req_active(target_player,
     return false;
   }
 
-  if (req['negated'] == true) {
-    return !eval;
+  if (eval == TRI_MAYBE) {
+    if (prob_type == RPT_POSSIBLE) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  if (req['present']) {
+    return eval == TRI_YES;
   } else {
-    return eval;
+    return eval == TRI_NO;
   }
 }
 
@@ -239,15 +246,17 @@ function is_tech_in_range(target_player, range, tech)
 {
   switch (range) {
   case REQ_RANGE_PLAYER:
-    return (target_player != null
-	    && player_invention_state(target_player, tech) == TECH_KNOWN);
+    return ((target_player != null
+            && player_invention_state(target_player, tech) == TECH_KNOWN) ?
+              TRI_YES :
+              TRI_NO);
   case REQ_RANGE_TEAM:
   case REQ_RANGE_ALLIANCE:
       /* FIXME: Add support. */
-      return false;
+      return TRI_MAYBE;
   case REQ_RANGE_WORLD:
     // FIXME! Add support for global advances.
-    return false;
+    return TRI_MAYBE;
     //return game.info.global_advances[tech];
   case REQ_RANGE_LOCAL:
   case REQ_RANGE_CADJACENT:
@@ -258,7 +267,7 @@ function is_tech_in_range(target_player, range, tech)
   case REQ_RANGE_COUNT:
     break;
   }
-  return false;
+  return TRI_MAYBE;
 }
 
 

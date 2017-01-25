@@ -265,6 +265,8 @@ function is_tech_in_range(target_player, range, tech)
   case REQ_RANGE_COUNT:
     break;
   }
+
+  console.log("Invalid tech req range " + range);
   return TRI_MAYBE;
 }
 

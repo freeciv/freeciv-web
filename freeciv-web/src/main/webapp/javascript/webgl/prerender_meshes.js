@@ -61,7 +61,7 @@ function prerender(landGeometry, xquality) {
         forest_geometry.vertices.push( vertex );
         if (graphics_quality == QUALITY_HIGH) {
           var mycolor = new THREE.Color( 0xffffff );
-          mycolor.setHSL(0.5 + (Math.random() - 0.5) / 3, 0.2 + Math.random(), 0.5 );
+          mycolor.setHSL(0.5 + (Math.random() - 0.5) / 2.5, 0.2 + Math.random(), 0.5 );
           treecolors.push(mycolor);
         }
       }

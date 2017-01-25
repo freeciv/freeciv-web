@@ -55,7 +55,7 @@ function webgl_update_tile_known(old_tile, new_tile)
    if (gx != tx || gy != ty) continue;
     if ( new_tile != null) {
       if (tile_get_known(new_tile) == TILE_KNOWN_SEEN) {
-        fogOfWarGeometry.vertices[ i ].y = landGeometry.vertices[ i ].y - 15;
+        fogOfWarGeometry.vertices[ i ].y = landGeometry.vertices[ i ].y - 16;
       } else if (tile_get_known(new_tile) == TILE_KNOWN_UNSEEN) {
         fogOfWarGeometry.vertices[ i ].y = landGeometry.vertices[ i ].y + 13;
       } else if (tile_get_known(new_tile) == TILE_UNKNOWN) {

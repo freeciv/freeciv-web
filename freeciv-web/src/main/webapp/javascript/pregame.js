@@ -761,11 +761,6 @@ function pregame_settings()
   $('#graphics_quality').change(function() {
     graphics_quality = parseFloat($('#graphics_quality').val());
     simpleStorage.set("graphics_quality", graphics_quality);
-    if (graphics_quality >= QUALITY_MEDIUM) {
-      send_message("/set fogofwar enabled");
-    } else {
-      send_message("/set fogofwar disabled");
-    }
     load_count = 0;
     webgl_preload();
   });

@@ -122,7 +122,7 @@ function init_webgl_mapview() {
   mapview_model_height = Math.floor(mapview_model_height * map['ysize'] / 56);
 
   /* Create water mesh with a texture. */
-  if (graphics_quality <= QUALITY_MEDIUM) {
+  if (graphics_quality == QUALITY_LOW) {
     // lower quality water
     var waterGeometry = new THREE.PlaneGeometry( mapview_model_width, mapview_model_height, 2, 2);
     waterGeometry.rotateX( - Math.PI / 2 );
@@ -281,7 +281,7 @@ function init_webgl_mapview() {
     if (heightmap[x] != null && heightmap[x][y] != null) {
       var ptile = map_pos_to_tile(gx, gy);
       if (ptile != null && tile_get_known(ptile) == TILE_KNOWN_SEEN) {
-        fogOfWarGeometry.vertices[ i ].y = heightmap[x][y] * 100 - 11;
+        fogOfWarGeometry.vertices[ i ].y = heightmap[x][y] * 100 - 12;
       } else {
         fogOfWarGeometry.vertices[ i ].y = heightmap[x][y] * 100 + 13;
       }
@@ -321,7 +321,7 @@ function animate() {
     normalsNeedsUpdating = false;
   }
 
-  if (graphics_quality == QUALITY_HIGH && water != null) {
+  if (graphics_quality >= QUALITY_MEDIUM && water != null) {
     water.material.uniforms.time.value += 1.0 / 60.0;
     water.render();
   }

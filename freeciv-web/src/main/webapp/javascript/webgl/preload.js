@@ -42,20 +42,21 @@ function webgl_preload()
   var textureLoader = new THREE.ImageLoader( loadingManager );
 
   /* Preload water overlay texture. */
-  var water_texture = new THREE.Texture();
-  webgl_textures["water_overlay"] = water_texture;
-  var filename;
-  if (graphics_quality == QUALITY_LOW) filename = '/textures/small/water_overlay_texture.png';
-  if (graphics_quality == QUALITY_MEDIUM) filename = '/textures/medium/water_overlay_texture.png';
-  if (graphics_quality == QUALITY_HIGH) filename = '/textures/large/water_overlay_texture.png';
+  if (graphics_quality == QUALITY_LOW) {
+    var water_texture = new THREE.Texture();
+    webgl_textures["water_overlay"] = water_texture;
+    var filename;
+    filename = '/textures/small/water_overlay_texture.png';
 
-  textureLoader.load( filename, function ( image ) {
+
+    textureLoader.load( filename, function ( image ) {
       water_texture.image = image;
       water_texture.wrapS = THREE.RepeatWrapping;
       water_texture.wrapT = THREE.RepeatWrapping;
       water_texture.repeat.set( 5, 5);
       water_texture.needsUpdate = true;
-  } );
+    } );
+  }
 
   /* Preload tree sprite. */
   var tree_sprite = new THREE.Texture();
@@ -102,7 +103,7 @@ function webgl_preload()
       webgl_materials['river'] = riverMaterial;
   } );
 
-  if (graphics_quality == QUALITY_HIGH) {
+  if (graphics_quality >= QUALITY_MEDIUM) {
     var waternormals = new THREE.Texture();
     webgl_textures["waternormals"] = waternormals;
     textureLoader.load( '/textures/waternormals.jpg', function ( image ) {

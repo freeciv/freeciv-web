@@ -11,7 +11,6 @@ set maxconnectionsperhost 256
 set threaded_save enabled
 set scorelog enabled
 set size 3
-set dispersion 4
 set landm 50
 set aifill 1
 set onsetbarbs 5000

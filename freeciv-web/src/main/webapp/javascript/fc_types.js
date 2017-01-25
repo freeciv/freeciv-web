@@ -20,6 +20,10 @@
 var TRUE = true;
 var FALSE = false;
 
+var TRI_NO = 0;
+var TRI_YES = 1;
+var TRI_MAYBE = 2;
+
 var MAX_NUM_ITEMS = 200;
 var MAX_LEN_NAME = 48;
 var MAX_LEN_CITYNAME = 80;

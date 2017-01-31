@@ -33,8 +33,7 @@ import javax.sql.DataSource;
 import org.json.JSONObject;
 
 /**
- * Given a username or an email address it verifies if it matches a user in the
- * database.
+ * Removes servers older than 900 seconds.
  *
  * URL: /meta/cleanup.php
  */

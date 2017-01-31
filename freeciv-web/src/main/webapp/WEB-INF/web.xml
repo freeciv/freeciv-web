@@ -137,6 +137,17 @@
     <url-pattern>/meta/cleanup.php</url-pattern>
   </servlet-mapping>
 
+  <!-- /meta/fpinfo.php -->
+  <servlet>
+    <servlet-name>ServerStatistics</servlet-name>
+    <servlet-class>org.freeciv.servlet.ServerStatistics</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>ServerStatistics</servlet-name>
+    <url-pattern>/meta/fpinfo.php</url-pattern>
+  </servlet-mapping>
+
   <context-param>
     <param-name>buildTimeStamp</param-name>
     <param-value>${timestamp}</param-value>

@@ -17,6 +17,8 @@
  *******************************************************************************/
 package org.freeciv.servlet;
 
+import com.mysql.cj.core.util.StringUtils;
+
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -58,6 +60,7 @@ public class CivclientLauncher extends HttpServlet {
 			case "new":
 			case "load":
 			case "observe":
+			case "multi":
 			case "hotseat":
 			case "earthload":
 				gameType = "singleplayer";
@@ -73,9 +76,9 @@ public class CivclientLauncher extends HttpServlet {
 			}
 			
 
-			// If the user requested a new game, then get host and port for an available
-			// server from the metaserver DB, and use that one.
-			if (!"observe".equals(action)) {
+			if (StringUtils.isNullOrEmpty(civServerPort)) {
+				// If the user requested a new game, then get host and port for an available
+				// server from the metaserver DB, and use that one.
 				String lookupQuery =
 						"SELECT port "
 								+ "FROM servers "

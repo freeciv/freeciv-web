@@ -97,7 +97,7 @@
 	},
 
 	{
-	"DbgColor" : 4614226,
+	"DbgColor" : 3744854,
 	"DbgIndex" : 7,
 	"DbgName" : "jacket",
 	"colorDiffuse" : [0.336271, 0.008448, 0.0],
@@ -109,7 +109,7 @@
 	},
 
 	{
-	"DbgColor" : 3744854,
+	"DbgColor" : 4614226,
 	"DbgIndex" : 8,
 	"DbgName" : "spear",
 	"colorDiffuse" : [0.043676, 0.019889, 0.006799],

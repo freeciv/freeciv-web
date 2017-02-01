@@ -96,7 +96,7 @@
 	},
 
 	{
-	"DbgColor" : 499914,
+	"DbgColor" : 1458591,
 	"DbgIndex" : 7,
 	"DbgName" : "leather",
 	"colorDiffuse" : [0.064007, 0.037171, 0.017811],
@@ -108,7 +108,7 @@
 	},
 
 	{
-	"DbgColor" : 11353132,
+	"DbgColor" : 14968288,
 	"DbgIndex" : 8,
 	"DbgName" : "horse_body",
 	"colorDiffuse" : [0.061666, 0.057343, 0.048823],
@@ -120,7 +120,7 @@
 	},
 
 	{
-	"DbgColor" : 7078673,
+	"DbgColor" : 499914,
 	"DbgIndex" : 9,
 	"DbgName" : "hoof",
 	"colorDiffuse" : [0.021767, 0.008416, 0.0],
@@ -132,7 +132,7 @@
 	},
 
 	{
-	"DbgColor" : 1458591,
+	"DbgColor" : 7078673,
 	"DbgIndex" : 10,
 	"DbgName" : "tail",
 	"colorDiffuse" : [0.430572, 0.430572, 0.430572],
@@ -144,7 +144,7 @@
 	},
 
 	{
-	"DbgColor" : 14968288,
+	"DbgColor" : 11353132,
 	"DbgIndex" : 11,
 	"DbgName" : "boot",
 	"colorDiffuse" : [0.006874, 0.006874, 0.006874],

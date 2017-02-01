@@ -16,7 +16,7 @@
 	"DbgColor" : 15658734,
 	"DbgIndex" : 0,
 	"DbgName" : "Roof",
-	"colorDiffuse" : [0.191642, 0.146655, 0.067744],
+	"colorDiffuse" : [0.143089, 0.109919, 0.051475],
 	"colorSpecular" : [0.155407, 0.118565, 0.05417],
 	"illumination" : 2,
 	"opacity" : 1.0,
@@ -97,7 +97,7 @@
 	},
 
 	{
-	"DbgColor" : 12355935,
+	"DbgColor" : 3744854,
 	"DbgIndex" : 7,
 	"DbgName" : "Light",
 	"colorDiffuse" : [0.631211, 0.729114, 0.0],
@@ -109,7 +109,7 @@
 	},
 
 	{
-	"DbgColor" : 11353132,
+	"DbgColor" : 12355935,
 	"DbgIndex" : 8,
 	"DbgName" : "Crate.001",
 	"colorDiffuse" : [0.247575, 0.076246, 0.010962],
@@ -121,7 +121,7 @@
 	},
 
 	{
-	"DbgColor" : 3744854,
+	"DbgColor" : 11353132,
 	"DbgIndex" : 9,
 	"DbgName" : "Grass",
 	"colorDiffuse" : [0.006928, 0.152142, 0.015359],

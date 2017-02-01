@@ -97,7 +97,7 @@
 	},
 
 	{
-	"DbgColor" : 1458591,
+	"DbgColor" : 11353132,
 	"DbgIndex" : 7,
 	"DbgName" : "feather",
 	"colorDiffuse" : [0.18717, 0.18717, 0.18717],
@@ -121,7 +121,7 @@
 	},
 
 	{
-	"DbgColor" : 14968288,
+	"DbgColor" : 1458591,
 	"DbgIndex" : 9,
 	"DbgName" : "sword",
 	"colorDiffuse" : [0.308625, 0.57434, 0.64],
@@ -133,7 +133,7 @@
 	},
 
 	{
-	"DbgColor" : 11353132,
+	"DbgColor" : 14968288,
 	"DbgIndex" : 10,
 	"DbgName" : "belt",
 	"colorDiffuse" : [0.14186, 0.03662, 0.0],

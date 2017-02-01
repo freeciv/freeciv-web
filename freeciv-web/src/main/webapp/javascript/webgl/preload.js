@@ -1,6 +1,6 @@
 /**********************************************************************
     Freeciv-web - the web version of Freeciv. http://play.freeciv.org/
-    Copyright (C) 2009-2016  The Freeciv-web project
+    Copyright (C) 2009-2017  The Freeciv-web project
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as published by
@@ -18,7 +18,6 @@
 ***********************************************************************/
 
 var webgl_textures = {};
-var webgl_models_xml_strings = {};
 var webgl_models = {};
 var start_preload = 0;
 var total_model_count = 0;
@@ -194,6 +193,7 @@ function load_model(filename)
 
   var binLoader = new THREE.BinaryLoader();
   binLoader.load( url, function(geometry, materials) {
+   // Convert from Geometry to BufferGeometry, since that will be faster and use less memory.
    var bufgeometry = new THREE.BufferGeometry();
    bufgeometry.fromGeometry(geometry);
    geometry.dispose();

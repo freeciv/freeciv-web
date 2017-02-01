@@ -97,7 +97,7 @@
 	},
 
 	{
-	"DbgColor" : 11353132,
+	"DbgColor" : 3744854,
 	"DbgIndex" : 7,
 	"DbgName" : "stairs",
 	"colorDiffuse" : [0.287066, 0.115695, 0.041357],
@@ -121,7 +121,7 @@
 	},
 
 	{
-	"DbgColor" : 3744854,
+	"DbgColor" : 11353132,
 	"DbgIndex" : 9,
 	"DbgName" : "body",
 	"colorDiffuse" : [0.336012, 0.207615, 0.105599],

@@ -78,7 +78,7 @@ function update_unit_position(ptile) {
     new_unit.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
     new_unit.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
     new_unit.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
-    // rotate unit in the direction it is facing. using timeout here because Collada model could not be rotated in another way.
+    // rotate unit in the direction it is facing. using timeout here since that is the only way I could get it to work.
     setTimeout("if (unit_positions["+ptile['index']+"] != null) unit_positions["+ptile['index']+"].rotateY(" + (convert_unit_rotation(visible_unit['facing']) * Math.PI * 2 / 8) + ")", 1);
     if (scene != null && new_unit != null) {
       scene.add(new_unit);
@@ -604,31 +604,5 @@ function add_all_objects_to_scene()
     pflag.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), 100 * tiles[tile_index]['height'] - 5);
     scene.add(pflag);
   }
-
-}
-
-
-/****************************************************************************
- Loads a single model file.
-****************************************************************************/
-function webgl_get_model(filename)
-{
-  if (webgl_models[filename] != null) return webgl_models[filename].clone();;
-  if (webgl_models_xml_strings[filename] == null) {
-    return null;
-  }
-
-  var colladaloader = new THREE.ColladaLoader();
-  colladaloader.options.convertUpAxis = true;
-  colladaloader.parse( webgl_models_xml_strings[filename], function ( collada ) {
-    dae = collada.scene;
-    dae.updateMatrix();
-    dae.scale.x = dae.scale.y = dae.scale.z = 11;
-    webgl_models[filename] = dae;
-
-    webgl_models_xml_strings[filename] = ""; // clear xml string for this model.
-
-    return dae.clone();
-  });
 
 }

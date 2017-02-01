@@ -97,7 +97,7 @@
 	},
 
 	{
-	"DbgColor" : 1458591,
+	"DbgColor" : 11353132,
 	"DbgIndex" : 7,
 	"DbgName" : "socks",
 	"colorDiffuse" : [0.8, 0.8, 0.8],
@@ -109,7 +109,7 @@
 	},
 
 	{
-	"DbgColor" : 11353132,
+	"DbgColor" : 1458591,
 	"DbgIndex" : 8,
 	"DbgName" : "jacket",
 	"colorDiffuse" : [0.026481, 0.026481, 0.026481],

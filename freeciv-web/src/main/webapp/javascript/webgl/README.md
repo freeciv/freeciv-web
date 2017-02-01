@@ -9,6 +9,8 @@ Custom GLSL Fragment and Vertex shaders can be found in the shaders subdirectory
 
 ![Freeciv-web](https://raw.githubusercontent.com/freeciv/freeciv-web/develop/freeciv-web/src/main/webapp/javascript/webgl/freeciv-webgl.png "Freeciv-web WebGL screenshot")
 
+The Blender 3D models can be found here: https://github.com/freeciv/freeciv-web/tree/develop/blender
+
 Building and testing
 --------------------
 Build Freeciv-web as normal with Vagrant as described in the main README file.

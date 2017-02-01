@@ -57,6 +57,7 @@ public class CivclientLauncher extends HttpServlet {
 			switch (action) {
 			case "new":
 			case "load":
+			case "observe":
 			case "hotseat":
 			case "earthload":
 				gameType = "singleplayer";
@@ -74,24 +75,26 @@ public class CivclientLauncher extends HttpServlet {
 
 			// If the user requested a new game, then get host and port for an available
 			// server from the metaserver DB, and use that one.
-			String lookupQuery =
-					  "SELECT port "
-					+ "FROM servers "
-					+ "WHERE state = 'Pregame' "
-					+ "	AND type = ? "
-					+ "	AND humans = '0' "
-					+ "ORDER BY RAND() "
-					+ "LIMIT 1 ";
+			if (!"observe".equals(action)) {
+				String lookupQuery =
+						"SELECT port "
+								+ "FROM servers "
+								+ "WHERE state = 'Pregame' "
+								+ "	AND type = ? "
+								+ "	AND humans = '0' "
+								+ "ORDER BY RAND() "
+								+ "LIMIT 1 ";
 
-			PreparedStatement lookupStmt = conn.prepareStatement(lookupQuery);
-			lookupStmt.setString(1, gameType);
-			ResultSet lookupRs = lookupStmt.executeQuery();
-			if (lookupRs.next()) {
-				civServerPort = Integer.toString(lookupRs.getInt(1));
-			} else {
-				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
-						"No servers available for creating a new game on.");
-				return;
+				PreparedStatement lookupStmt = conn.prepareStatement(lookupQuery);
+				lookupStmt.setString(1, gameType);
+				ResultSet lookupRs = lookupStmt.executeQuery();
+				if (lookupRs.next()) {
+					civServerPort = Integer.toString(lookupRs.getInt(1));
+				} else {
+					response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
+							"No servers available for creating a new game on.");
+					return;
+				}
 			}
 
 			/* Validate port */

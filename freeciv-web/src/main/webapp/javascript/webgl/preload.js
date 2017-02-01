@@ -25,6 +25,26 @@ var total_model_count = 0;
 var load_count = 0;
 var webgl_materials = {};
 
+var model_filenames = ["AEGIS Cruiser",     "city_european_1",  "Helicopter",    "Pikemen",
+                       "Alpine Troops",     "city_european_2",  "Horsemen",      "Rail",
+                       "Archers",           "citywalls",        "Howitzer",      "Riflemen",
+                       "Armor",             "Coal",             "Hut",           "Road",
+                       "Artillery",         "Cruise Missile",   "Ironclad",      "Settlers",
+                       "AWACS",             "Cruiser",          "Iron",          "Spice",
+                       "Barbarian Leader",  "Destroyer",        "Irrigation",    "Spy",
+                       "Battleship",        "Diplomat",         "Knights",       "Stealth Bomber",
+                       "Bomber",            "Dragoons",         "Legion",        "Submarine",
+                       "Buffalo",           "Engineers",        "Marines",       "Transport",
+                       "Cannon",            "Explorer",         "Mech. Inf.",    "Trireme",
+                       "Caravan",           "Fighter",          "Mine",          "Warriors",
+                       "Caravel",           "Fish",             "Musketeers",    "Whales",
+                       "Carrier",           "Freight",          "Nuclear",       "Wheat",
+                       "Catapult",          "Frigate",          "Oil",           "Wine",
+                       "Cavalry",           "Fruit",            "Paratroopers",  "Workers",
+                       "Chariot",           "Galleon",          "Partisan",
+                       "city_european_0",   "Gold",             "Phalanx"
+                      ];
+
 /****************************************************************************
   Preload textures and models
 ****************************************************************************/
@@ -158,37 +178,38 @@ function webgl_preload()
 ****************************************************************************/
 function webgl_preload_models()
 {
-  var url = '/3d-models/models.zip';
-  zip.createReader(new zip.HttpReader(url), function(zipReader){
-     $.blockUI({ message: "<h2>Downloading 3D models...</h2>" });
-     zipReader.getEntries(function(entries){
-       total_model_count = entries.length;
-       for (var i = 0; i < entries.length; i++) {
-         var file = entries[i];
-         handle_zip_file(file['filename'].replace(".dae", ""), file);
-       }
-     });
-  }, function(message){
-    swal("Unable to download models. Please reload the page and try again.");
-    console.error("Problem downloading models.zip. Error message: " + message);
-  });
+  total_model_count = model_filenames.length;
+  for (var i = 0; i < model_filenames.length; i++) {
+    load_model(model_filenames[i]);
+  }
 
 }
 
 /****************************************************************************
-  Handle each unzipped file, call load_model on each file.
+ ...
 ****************************************************************************/
-function handle_zip_file(filename, file)
+function load_model(filename)
 {
-  file.getData(new zip.TextWriter(), function(text) {
-    load_count++;
+  var url = "/3d-models/" + filename + ".js";
 
-    webgl_models_xml_strings[filename] = text;
-    if (load_count == total_model_count) {
-      webgl_preload_complete();
-      console.log("WebGL preloading took: " + (new Date().getTime() - start_preload) + " ms.");
-    }
+  var binLoader = new THREE.BinaryLoader();
+  binLoader.load( url, function(geometry, materials) {
+   var bufgeometry = new THREE.BufferGeometry();
+   bufgeometry.fromGeometry(geometry);
+   geometry.dispose();
+   geometry = null;
+   for (var i = 0; i < materials.length; i++) {
+     materials[i].side = THREE.DoubleSide;
+   }
+
+   var mesh = new THREE.Mesh(bufgeometry, new THREE.MultiMaterial( materials ) );
+   mesh.scale.x = mesh.scale.y = mesh.scale.z = 11;
+   webgl_models[filename] = mesh;
+   load_count++;
+   if (load_count == total_model_count) webgl_preload_complete();
   });
+
+
 
 }
 
@@ -197,22 +218,11 @@ function handle_zip_file(filename, file)
 ****************************************************************************/
 function webgl_get_model(filename)
 {
-  if (webgl_models[filename] != null) return webgl_models[filename].clone();;
-  if (webgl_models_xml_strings[filename] == null) {
+  if (webgl_models[filename] != null) {
+    return webgl_models[filename].clone();;
+  } else {
     return null;
   }
-
-  var colladaloader = new THREE.ColladaLoader();
-  colladaloader.options.convertUpAxis = true;
-
-  var collada = colladaloader.parse( webgl_models_xml_strings[filename], null, "/textures/");
-  var dae = collada.scene;
-  dae.updateMatrix();
-  dae.scale.x = dae.scale.y = dae.scale.z = 11;
-  webgl_models[filename] = dae;
-  webgl_models_xml_strings[filename] = ""; // clear xml string for this model.
-
-  return dae.clone();
 
 }
 

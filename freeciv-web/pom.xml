@@ -172,14 +172,7 @@
                                 <jsSourceInclude>*.js</jsSourceInclude>
                             </jsSourceIncludes>
                             <jsSourceExcludes>
-                                <jsSourceExclude>pako.min.js</jsSourceExclude>
-                                <jsSourceExclude>codecs.js</jsSourceExclude>
                                 <jsSourceExclude>three.min.js</jsSourceExclude>
-                                <jsSourceExclude>zip.js</jsSourceExclude>
-                                <jsSourceExclude>zip-ext.js</jsSourceExclude>
-                                <jsSourceExclude>deflate.js</jsSourceExclude>
-                                <jsSourceExclude>inflate.js</jsSourceExclude>
-                                <jsSourceExclude>z-worker.js</jsSourceExclude>
                                 <jsSourceExclude>StereoEffect.js</jsSourceExclude>
                             </jsSourceExcludes>
                             <jsEngine>CLOSURE</jsEngine>

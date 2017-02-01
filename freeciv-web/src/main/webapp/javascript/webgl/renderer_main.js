@@ -35,17 +35,6 @@ function init_webgl_renderer()
       dataType: "script"
   });
 
-  $.ajax({
-      async: false,
-      url: "/javascript/webgl/libs/zip.js",
-      dataType: "script"
-  });
-
-  $.ajax({
-      async: false,
-      url: "/javascript/webgl/libs/zip-ext.js",
-      dataType: "script"
-  });
 
   $.ajax({
     async: false,
@@ -57,11 +46,6 @@ function init_webgl_renderer()
     swal("3D WebGL not supported by your browser or you don't have a 3D graphics card. Please go back and try the 2D version instead. ");
     return;
   }
-
-  zip.workerScripts = {
-    deflater: ['/javascript/webgl/libs/z-worker.js', '/javascript/webgl/libs/pako.min.js', '/javascript/webgl/libs/codecs.js'],
-    inflater: ['/javascript/webgl/libs/z-worker.js', '/javascript/webgl/libs/pako.min.js', '/javascript/webgl/libs/codecs.js']
-  };
 
   /* Loads the two tileset definition files */
   $.ajax({

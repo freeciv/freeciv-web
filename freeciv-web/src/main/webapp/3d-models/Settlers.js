@@ -97,7 +97,7 @@
 	},
 
 	{
-	"DbgColor" : 10903250,
+	"DbgColor" : 9886237,
 	"DbgIndex" : 7,
 	"DbgName" : "bag",
 	"colorDiffuse" : [0.125943, 0.082163, 0.033204],
@@ -109,7 +109,7 @@
 	},
 
 	{
-	"DbgColor" : 11712834,
+	"DbgColor" : 8478454,
 	"DbgIndex" : 8,
 	"DbgName" : "sandals",
 	"colorDiffuse" : [0.017582, 0.003401, 0.000702],
@@ -121,7 +121,7 @@
 	},
 
 	{
-	"DbgColor" : 9142600,
+	"DbgColor" : 13579988,
 	"DbgIndex" : 9,
 	"DbgName" : "packropes",
 	"colorDiffuse" : [0.0, 0.0, 0.0],
@@ -133,7 +133,7 @@
 	},
 
 	{
-	"DbgColor" : 9886237,
+	"DbgColor" : 11712834,
 	"DbgIndex" : 10,
 	"DbgName" : "pack2",
 	"colorDiffuse" : [0.510608, 0.510608, 0.510608],
@@ -145,7 +145,7 @@
 	},
 
 	{
-	"DbgColor" : 445199,
+	"DbgColor" : 109031,
 	"DbgIndex" : 11,
 	"DbgName" : "clayvessel2",
 	"colorDiffuse" : [0.315862, 0.179421, 0.071015],
@@ -157,7 +157,7 @@
 	},
 
 	{
-	"DbgColor" : 109031,
+	"DbgColor" : 9142600,
 	"DbgIndex" : 12,
 	"DbgName" : "pants",
 	"colorDiffuse" : [0.03258, 0.063974, 0.075698],
@@ -181,7 +181,7 @@
 	},
 
 	{
-	"DbgColor" : 8478454,
+	"DbgColor" : 10903250,
 	"DbgIndex" : 14,
 	"DbgName" : "shirt",
 	"colorDiffuse" : [0.024849, 0.024325, 0.023655],
@@ -193,7 +193,7 @@
 	},
 
 	{
-	"DbgColor" : 3698379,
+	"DbgColor" : 13519402,
 	"DbgIndex" : 15,
 	"DbgName" : "pack",
 	"colorDiffuse" : [0.236548, 0.206565, 0.048364],
@@ -205,7 +205,7 @@
 	},
 
 	{
-	"DbgColor" : 13579988,
+	"DbgColor" : 445199,
 	"DbgIndex" : 16,
 	"DbgName" : "metal",
 	"colorDiffuse" : [0.058586, 0.058586, 0.058586],
@@ -217,7 +217,7 @@
 	},
 
 	{
-	"DbgColor" : 13519402,
+	"DbgColor" : 3698379,
 	"DbgIndex" : 17,
 	"DbgName" : "clayvessel",
 	"colorDiffuse" : [0.102069, 0.027524, 0.010522],

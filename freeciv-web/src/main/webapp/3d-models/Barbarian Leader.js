@@ -97,7 +97,7 @@
 	},
 
 	{
-	"DbgColor" : 11353132,
+	"DbgColor" : 12355935,
 	"DbgIndex" : 7,
 	"DbgName" : "feather",
 	"colorDiffuse" : [0.18717, 0.18717, 0.18717],
@@ -109,7 +109,7 @@
 	},
 
 	{
-	"DbgColor" : 12355935,
+	"DbgColor" : 14968288,
 	"DbgIndex" : 8,
 	"DbgName" : "pants",
 	"colorDiffuse" : [0.13868, 0.124098, 0.095355],
@@ -133,7 +133,7 @@
 	},
 
 	{
-	"DbgColor" : 14968288,
+	"DbgColor" : 11353132,
 	"DbgIndex" : 10,
 	"DbgName" : "belt",
 	"colorDiffuse" : [0.14186, 0.03662, 0.0],

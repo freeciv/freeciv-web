@@ -97,7 +97,7 @@
 	},
 
 	{
-	"DbgColor" : 9142600,
+	"DbgColor" : 3698379,
 	"DbgIndex" : 7,
 	"DbgName" : "jacket",
 	"colorDiffuse" : [0.0, 0.000397, 0.020314],
@@ -121,7 +121,7 @@
 	},
 
 	{
-	"DbgColor" : 8478454,
+	"DbgColor" : 445199,
 	"DbgIndex" : 9,
 	"DbgName" : "hat",
 	"colorDiffuse" : [0.001321, 0.0, 0.072668],
@@ -133,7 +133,7 @@
 	},
 
 	{
-	"DbgColor" : 109031,
+	"DbgColor" : 11712834,
 	"DbgIndex" : 10,
 	"DbgName" : "horse_body",
 	"colorDiffuse" : [0.638486, 0.593728, 0.505506],
@@ -145,7 +145,7 @@
 	},
 
 	{
-	"DbgColor" : 3698379,
+	"DbgColor" : 109031,
 	"DbgIndex" : 11,
 	"DbgName" : "hoof",
 	"colorDiffuse" : [0.021767, 0.008416, 0.0],
@@ -157,7 +157,7 @@
 	},
 
 	{
-	"DbgColor" : 10903250,
+	"DbgColor" : 8478454,
 	"DbgIndex" : 12,
 	"DbgName" : "tail",
 	"colorDiffuse" : [0.430572, 0.179041, 0.067482],
@@ -169,7 +169,7 @@
 	},
 
 	{
-	"DbgColor" : 3335942,
+	"DbgColor" : 9142600,
 	"DbgIndex" : 13,
 	"DbgName" : "shirt",
 	"colorDiffuse" : [0.250687, 0.566939, 0.589474],
@@ -193,7 +193,7 @@
 	},
 
 	{
-	"DbgColor" : 11712834,
+	"DbgColor" : 10903250,
 	"DbgIndex" : 15,
 	"DbgName" : "barrel_metal",
 	"colorDiffuse" : [0.0, 0.0, 0.0],
@@ -205,7 +205,7 @@
 	},
 
 	{
-	"DbgColor" : 445199,
+	"DbgColor" : 3335942,
 	"DbgIndex" : 16,
 	"DbgName" : "trigger",
 	"colorDiffuse" : [0.64, 0.622173, 0.313384],

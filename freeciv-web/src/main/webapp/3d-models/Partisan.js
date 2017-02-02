@@ -97,7 +97,7 @@
 	},
 
 	{
-	"DbgColor" : 1458591,
+	"DbgColor" : 14968288,
 	"DbgIndex" : 7,
 	"DbgName" : "Material.001",
 	"colorDiffuse" : [0.64, 0.461965, 0.055919],
@@ -109,7 +109,7 @@
 	},
 
 	{
-	"DbgColor" : 12355935,
+	"DbgColor" : 11353132,
 	"DbgIndex" : 8,
 	"DbgName" : "aak47_body",
 	"colorDiffuse" : [0.028173, 0.028173, 0.028173],
@@ -121,7 +121,7 @@
 	},
 
 	{
-	"DbgColor" : 11353132,
+	"DbgColor" : 12355935,
 	"DbgIndex" : 9,
 	"DbgName" : "bullet_belt",
 	"colorDiffuse" : [0.088548, 0.083662, 0.082528],
@@ -133,7 +133,7 @@
 	},
 
 	{
-	"DbgColor" : 14968288,
+	"DbgColor" : 1458591,
 	"DbgIndex" : 10,
 	"DbgName" : "belt.001",
 	"colorDiffuse" : [0.048573, 0.032687, 0.00255],

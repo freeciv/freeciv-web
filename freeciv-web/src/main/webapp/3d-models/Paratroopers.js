@@ -97,7 +97,7 @@
 	},
 
 	{
-	"DbgColor" : 499914,
+	"DbgColor" : 3668136,
 	"DbgIndex" : 7,
 	"DbgName" : "parachte_sign",
 	"colorDiffuse" : [0.64, 0.572129, 0.0],
@@ -109,7 +109,7 @@
 	},
 
 	{
-	"DbgColor" : 14968288,
+	"DbgColor" : 8478454,
 	"DbgIndex" : 8,
 	"DbgName" : "chinstrap",
 	"colorDiffuse" : [0.021766, 0.012004, 0.006028],
@@ -121,7 +121,7 @@
 	},
 
 	{
-	"DbgColor" : 3668136,
+	"DbgColor" : 499914,
 	"DbgIndex" : 9,
 	"DbgName" : "shirt",
 	"colorDiffuse" : [0.037165, 0.058586, 0.023218],
@@ -133,7 +133,7 @@
 	},
 
 	{
-	"DbgColor" : 8478454,
+	"DbgColor" : 1458591,
 	"DbgIndex" : 10,
 	"DbgName" : "trigger",
 	"colorDiffuse" : [0.00165, 0.001604, 0.000808],
@@ -157,7 +157,7 @@
 	},
 
 	{
-	"DbgColor" : 1458591,
+	"DbgColor" : 14968288,
 	"DbgIndex" : 12,
 	"DbgName" : "wood",
 	"colorDiffuse" : [0.236515, 0.143077, 0.061586],

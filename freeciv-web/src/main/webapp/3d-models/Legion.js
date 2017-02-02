@@ -97,7 +97,7 @@
 	},
 
 	{
-	"DbgColor" : 4614226,
+	"DbgColor" : 3744854,
 	"DbgIndex" : 7,
 	"DbgName" : "clothes",
 	"colorDiffuse" : [0.068395, 0.069709, 0.068723],
@@ -109,7 +109,7 @@
 	},
 
 	{
-	"DbgColor" : 3744854,
+	"DbgColor" : 4614226,
 	"DbgIndex" : 8,
 	"DbgName" : "helmet_top",
 	"colorDiffuse" : [0.102588, 0.045421, 0.0],

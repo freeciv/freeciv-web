@@ -97,7 +97,7 @@
 	},
 
 	{
-	"DbgColor" : 14968288,
+	"DbgColor" : 1458591,
 	"DbgIndex" : 7,
 	"DbgName" : "tie",
 	"colorDiffuse" : [0.0, 0.0, 0.0],
@@ -109,7 +109,7 @@
 	},
 
 	{
-	"DbgColor" : 11353132,
+	"DbgColor" : 7078673,
 	"DbgIndex" : 8,
 	"DbgName" : "socks",
 	"colorDiffuse" : [0.8, 0.0, 0.028281],
@@ -121,7 +121,7 @@
 	},
 
 	{
-	"DbgColor" : 7078673,
+	"DbgColor" : 14968288,
 	"DbgIndex" : 9,
 	"DbgName" : "jacket",
 	"colorDiffuse" : [0.024585, 0.016971, 0.007249],
@@ -133,7 +133,7 @@
 	},
 
 	{
-	"DbgColor" : 1458591,
+	"DbgColor" : 11353132,
 	"DbgIndex" : 10,
 	"DbgName" : "pants",
 	"colorDiffuse" : [0.024849, 0.024849, 0.024849],

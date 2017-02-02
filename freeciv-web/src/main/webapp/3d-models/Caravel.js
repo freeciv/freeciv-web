@@ -109,7 +109,7 @@
 	},
 
 	{
-	"DbgColor" : 12355935,
+	"DbgColor" : 11353132,
 	"DbgIndex" : 8,
 	"DbgName" : "cannons",
 	"colorDiffuse" : [0.0, 0.0, 0.0],
@@ -121,7 +121,7 @@
 	},
 
 	{
-	"DbgColor" : 11353132,
+	"DbgColor" : 12355935,
 	"DbgIndex" : 9,
 	"DbgName" : "body",
 	"colorDiffuse" : [0.336012, 0.207615, 0.105599],

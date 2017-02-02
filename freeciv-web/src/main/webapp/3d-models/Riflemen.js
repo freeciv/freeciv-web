@@ -97,7 +97,7 @@
 	},
 
 	{
-	"DbgColor" : 11353132,
+	"DbgColor" : 3744854,
 	"DbgIndex" : 7,
 	"DbgName" : "shoes",
 	"colorDiffuse" : [0.035216, 0.006017, 0.0],
@@ -121,7 +121,7 @@
 	},
 
 	{
-	"DbgColor" : 3744854,
+	"DbgColor" : 11353132,
 	"DbgIndex" : 9,
 	"DbgName" : "trigger",
 	"colorDiffuse" : [0.00165, 0.001604, 0.000808],

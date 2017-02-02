@@ -97,7 +97,7 @@
 	},
 
 	{
-	"DbgColor" : 4614226,
+	"DbgColor" : 3744854,
 	"DbgIndex" : 7,
 	"DbgName" : "flag.002",
 	"colorDiffuse" : [0.0, 0.64, 0.04595],
@@ -109,7 +109,7 @@
 	},
 
 	{
-	"DbgColor" : 3744854,
+	"DbgColor" : 4614226,
 	"DbgIndex" : 8,
 	"DbgName" : "body.001",
 	"colorDiffuse" : [0.081978, 0.023895, 0.017589],

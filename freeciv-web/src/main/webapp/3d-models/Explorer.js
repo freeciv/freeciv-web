@@ -109,7 +109,7 @@
 	},
 
 	{
-	"DbgColor" : 11353132,
+	"DbgColor" : 12355935,
 	"DbgIndex" : 8,
 	"DbgName" : "shoes",
 	"colorDiffuse" : [0.119272, 0.020378, 0.0],
@@ -121,7 +121,7 @@
 	},
 
 	{
-	"DbgColor" : 12355935,
+	"DbgColor" : 11353132,
 	"DbgIndex" : 9,
 	"DbgName" : "hat.001",
 	"colorDiffuse" : [0.176201, 0.166875, 0.075152],

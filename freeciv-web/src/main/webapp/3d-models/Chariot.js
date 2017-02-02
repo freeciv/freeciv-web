@@ -96,7 +96,7 @@
 	},
 
 	{
-	"DbgColor" : 1458591,
+	"DbgColor" : 499914,
 	"DbgIndex" : 7,
 	"DbgName" : "hoof",
 	"colorDiffuse" : [0.023278, 0.022016, 0.020776],
@@ -108,7 +108,7 @@
 	},
 
 	{
-	"DbgColor" : 7078673,
+	"DbgColor" : 3668136,
 	"DbgIndex" : 8,
 	"DbgName" : "wood",
 	"colorDiffuse" : [0.044921, 0.026584, 0.00926],
@@ -144,7 +144,7 @@
 	},
 
 	{
-	"DbgColor" : 3668136,
+	"DbgColor" : 3335942,
 	"DbgIndex" : 11,
 	"DbgName" : "belt",
 	"colorDiffuse" : [0.14186, 0.03662, 0.0],
@@ -156,7 +156,7 @@
 	},
 
 	{
-	"DbgColor" : 3335942,
+	"DbgColor" : 1458591,
 	"DbgIndex" : 12,
 	"DbgName" : "clothes",
 	"colorDiffuse" : [0.068395, 0.069709, 0.068723],
@@ -168,7 +168,7 @@
 	},
 
 	{
-	"DbgColor" : 499914,
+	"DbgColor" : 7078673,
 	"DbgIndex" : 13,
 	"DbgName" : "helmet_top",
 	"colorDiffuse" : [0.293784, 0.0, 0.020658],

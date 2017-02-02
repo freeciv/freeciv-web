@@ -697,7 +697,7 @@ function find_best_focus_candidate(accept_current)
   var sorted_units = [];
   for (var unit_id in units) {
     punit = units[unit_id];
-    if (punit['owner'] == client.conn.playing.playerno) {
+    if (client.conn.playing != null && punit['owner'] == client.conn.playing.playerno) {
       sorted_units.push(punit);
     }
   }
@@ -706,6 +706,7 @@ function find_best_focus_candidate(accept_current)
   for (i = 0; i < sorted_units.length; i++) {
     punit = sorted_units[i];
     if ((!unit_is_in_focus(punit) || accept_current)
+       && client.conn.playing != null
        && punit['owner'] == client.conn.playing.playerno
        && punit['activity'] == ACTIVITY_IDLE
        && punit['movesleft'] > 0

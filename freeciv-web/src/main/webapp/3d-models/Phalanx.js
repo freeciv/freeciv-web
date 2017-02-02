@@ -97,7 +97,7 @@
 	},
 
 	{
-	"DbgColor" : 4614226,
+	"DbgColor" : 3744854,
 	"DbgIndex" : 7,
 	"DbgName" : "helmet",
 	"colorDiffuse" : [0.506446, 0.519995, 0.231618],
@@ -109,7 +109,7 @@
 	},
 
 	{
-	"DbgColor" : 3744854,
+	"DbgColor" : 4614226,
 	"DbgIndex" : 8,
 	"DbgName" : "shield",
 	"colorDiffuse" : [0.0, 0.008096, 0.125943],

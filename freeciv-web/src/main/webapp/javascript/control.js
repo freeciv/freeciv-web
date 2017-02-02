@@ -1411,6 +1411,40 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift, the_event)
 
       break;
 
+    case 107:
+      //zoom in
+      if (renderer == RENDERER_WEBGL) {
+        new_camera_dy = camera_dy - 60;
+        new_camera_dx = camera_dx - 45;
+        new_camera_dz = camera_dz - 45;
+        if (new_camera_dy < 350 || new_camera_dy > 1200) {
+          return;
+        } else {
+          camera_dx = new_camera_dx;
+          camera_dy = new_camera_dy;
+          camera_dz = new_camera_dz;
+        }
+        camera_look_at(camera_current_x, camera_current_y, camera_current_z);
+      }
+      break;
+
+    case 109:
+      //zoom out
+      if (renderer == RENDERER_WEBGL) {
+        new_camera_dy = camera_dy + 60;
+        new_camera_dx = camera_dx + 45;
+        new_camera_dz = camera_dz + 45;
+        if (new_camera_dy < 350 || new_camera_dy > 1200) {
+          return;
+        } else {
+          camera_dx = new_camera_dx;
+          camera_dy = new_camera_dy;
+          camera_dz = new_camera_dz;
+        }
+        camera_look_at(camera_current_x, camera_current_y, camera_current_z);
+      }
+      break;
+
   }
 
 }
@@ -2233,4 +2267,43 @@ function center_tile_mapcanvas(ptile)
     center_tile_mapcanvas_3d(ptile);
   }
 
+}
+
+/**************************************************************************
+  Show tile information in a popup
+**************************************************************************/
+function popit()
+{
+  var ptile;
+
+  if (renderer == RENDERER_2DCANVAS) {
+    ptile = canvas_pos_to_tile(mouse_x, mouse_y);
+  } else {
+    ptile = webgl_canvas_pos_to_tile(mouse_x, mouse_y);
+  }
+
+  if (ptile == null) return;
+
+  popit_req(ptile);
+
+}
+
+/**************************************************************************
+  request tile popup
+**************************************************************************/
+function popit_req(ptile)
+{
+  if (ptile == null) return;
+  var punit_id = 0;
+  var punit = find_visible_unit(ptile);
+  if (punit != null) punit_id = punit['id'];
+
+  var focus_unit_id = 0;
+  if (current_focus.length > 0) {
+    focus_unit_id = current_focus[0]['id'];
+  }
+
+  var packet = {"pid" : packet_info_text_req, "visible_unit" : punit_id,
+                "loc" : ptile['index'], "focus_unit": focus_unit_id};
+  send_request(JSON.stringify(packet));
 }

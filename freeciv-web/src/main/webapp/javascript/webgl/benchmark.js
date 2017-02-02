@@ -52,7 +52,7 @@ function benchmark_check()
     $("#tech_dialog").dialog('close');
   } catch (err)  {}
 
-  if (game_info['turn'] >= 30) {
+  if (game_info != null && game_info['turn'] >= 30) {
     var time_elapsed =  (new Date().getTime() - benchmark_start) / 1000;
     var fps = Math.floor(benchmark_frames_count / time_elapsed);
 
@@ -78,7 +78,7 @@ function benchmark_check()
     benchmark_enabled = false;
     return;
   }
-  if (game_info['turn'] == 1 && units[101] != null) {
+  if (game_info != null && game_info['turn'] == 1 && units[101] != null) {
     var packet = {"pid" : packet_unit_do_action,
                                           "actor_id" : 101,
                                           "target_id": units[101]['tile'],

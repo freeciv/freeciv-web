@@ -355,38 +355,6 @@ function recenter_button_pressed(canvas_x, canvas_y)
 /**************************************************************************
 ...
 **************************************************************************/
-function popit()
-{
-  var ptile = canvas_pos_to_tile(mouse_x, mouse_y);
-  if (ptile == null) return;
-
-  popit_req(ptile);
-
-}
-
-/**************************************************************************
-...
-**************************************************************************/
-function popit_req(ptile)
-{
-  if (ptile == null) return;
-  var punit_id = 0;
-  var punit = find_visible_unit(ptile);
-  if (punit != null) punit_id = punit['id'];
-
-  var focus_unit_id = 0;
-  if (current_focus.length > 0) {
-    focus_unit_id = current_focus[0]['id'];
-  }
-
-  var packet = {"pid" : packet_info_text_req, "visible_unit" : punit_id,
-                "loc" : ptile['index'], "focus_unit": focus_unit_id};
-  send_request(JSON.stringify(packet));
-}
-
-/**************************************************************************
-...
-**************************************************************************/
 function handle_info_text_message(packet)
 {
   var message = decodeURIComponent(packet['message']);

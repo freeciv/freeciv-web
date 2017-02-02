@@ -28,8 +28,8 @@ function webgl_render_goto_line(start_tile, goto_packet_dir)
   var ptile = start_tile;
   var startpos = map_to_scene_coords(ptile['x'], ptile['y']);
 
-  var material = new THREE.MeshBasicMaterial( { color: 0x0505ff, side:THREE.DoubleSide} );
-  var goto_width = 4;
+  var material = new THREE.MeshBasicMaterial( { color: 0x055dff, side:THREE.DoubleSide} );
+  var goto_width = 3;
 
   var height = 5 + ptile['height'] * 100;
 
@@ -55,7 +55,7 @@ function webgl_render_goto_line(start_tile, goto_packet_dir)
       var gotoLineGemetry = new THREE.PlaneGeometry(60, 5);
       gotoLineGemetry.dynamic = true;
       var delta = 0;
-      if (dir == 1 || dir == 6) delta = 4;
+      if (dir == 1 || dir == 6) delta = 3;
       gotoLineGemetry.vertices[0].x = 0.0;
       gotoLineGemetry.vertices[0].y = 0.0;
       gotoLineGemetry.vertices[0].z = 0.0;

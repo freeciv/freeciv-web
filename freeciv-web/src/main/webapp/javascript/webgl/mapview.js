@@ -303,7 +303,7 @@ function init_webgl_mapview() {
   webgl_textures = null;
 
   $.unblockUI();
-  console.log("WebGL render_testmap took: " + (new Date().getTime() - start_webgl) + " ms.");
+  console.log("init_webgl_mapview took: " + (new Date().getTime() - start_webgl) + " ms.");
 }
 
 /****************************************************************************

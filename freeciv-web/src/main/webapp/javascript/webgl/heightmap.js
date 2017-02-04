@@ -54,7 +54,7 @@ function create_heightmap()
     for (var y = 0; y < map.ysize; y++) {
       var ptile = map_pos_to_tile(x, y);
       if (ptile != null && tile_terrain(ptile) != null && is_ocean_tile(ptile)) {
-        propagate_distance_from_coast(distance_from_coast_map, x, y);
+        propagate_distance_from_coast(distance_from_coast_map, x, y, 0);
       }
     }
   }
@@ -122,7 +122,7 @@ function create_heightmap()
 /****************************************************************************
   ...
 ****************************************************************************/
-function propagate_distance_from_coast(distance_from_coast_map, x, y)
+function propagate_distance_from_coast(distance_from_coast_map, x, y, level)
 {
   var current_distance = distance_from_coast_map[x][y];
 
@@ -139,7 +139,7 @@ function propagate_distance_from_coast(distance_from_coast_map, x, y)
     }
     if (distance_from_coast_map[dir_x][dir_y] > current_distance + 1) {
       distance_from_coast_map[dir_x][dir_y] = current_distance + 1;
-      propagate_distance_from_coast(distance_from_coast_map, dir_x, dir_y);
+      if (level < 40) propagate_distance_from_coast(distance_from_coast_map, dir_x, dir_y, level + 1);
     }
   }
 }

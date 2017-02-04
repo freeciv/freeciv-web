@@ -76,7 +76,7 @@
 	"DbgColor" : 61166,
 	"DbgIndex" : 5,
 	"DbgName" : "House",
-	"colorDiffuse" : [0.64, 0.64, 0.64],
+	"colorDiffuse" : [0.456376, 0.456376, 0.456376],
 	"colorSpecular" : [0.5, 0.5, 0.5],
 	"illumination" : 2,
 	"opacity" : 1.0,
@@ -97,7 +97,7 @@
 	},
 
 	{
-	"DbgColor" : 8478454,
+	"DbgColor" : 499914,
 	"DbgIndex" : 7,
 	"DbgName" : "Material.002",
 	"colorDiffuse" : [0.64, 0.64, 0.64],
@@ -109,7 +109,7 @@
 	},
 
 	{
-	"DbgColor" : 445199,
+	"DbgColor" : 3668136,
 	"DbgIndex" : 8,
 	"DbgName" : "Crate",
 	"colorDiffuse" : [0.247575, 0.076246, 0.010962],
@@ -133,11 +133,11 @@
 	},
 
 	{
-	"DbgColor" : 3335942,
+	"DbgColor" : 9142600,
 	"DbgIndex" : 10,
 	"DbgName" : "Material.003",
-	"colorDiffuse" : [0.005927, 0.015391, 0.64],
-	"colorSpecular" : [0.004663, 0.010346, 0.151599],
+	"colorDiffuse" : [0.185699, 0.284054, 0.8],
+	"colorSpecular" : [0.03496, 0.146963, 0.5],
 	"illumination" : 2,
 	"opacity" : 1.0,
 	"opticalDensity" : 1.0,
@@ -145,7 +145,7 @@
 	},
 
 	{
-	"DbgColor" : 10903250,
+	"DbgColor" : 3698379,
 	"DbgIndex" : 11,
 	"DbgName" : "House.001",
 	"colorDiffuse" : [0.64, 0.013932, 0.006001],
@@ -157,7 +157,7 @@
 	},
 
 	{
-	"DbgColor" : 9142600,
+	"DbgColor" : 8478454,
 	"DbgIndex" : 12,
 	"DbgName" : "House.002",
 	"colorDiffuse" : [0.300599, 0.183869, 0.064224],
@@ -169,7 +169,7 @@
 	},
 
 	{
-	"DbgColor" : 3698379,
+	"DbgColor" : 10903250,
 	"DbgIndex" : 13,
 	"DbgName" : "Material.001",
 	"colorDiffuse" : [0.0, 0.166333, 0.004896],
@@ -181,7 +181,7 @@
 	},
 
 	{
-	"DbgColor" : 3668136,
+	"DbgColor" : 3335942,
 	"DbgIndex" : 14,
 	"DbgName" : "Crate.001",
 	"colorDiffuse" : [0.247575, 0.076246, 0.010962],
@@ -193,7 +193,7 @@
 	},
 
 	{
-	"DbgColor" : 499914,
+	"DbgColor" : 445199,
 	"DbgIndex" : 15,
 	"DbgName" : "Grass",
 	"colorDiffuse" : [0.006928, 0.152142, 0.015359],

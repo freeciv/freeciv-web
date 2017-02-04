@@ -92,6 +92,9 @@ function handle_server_join_reply(packet)
        // Reduce the amount of rivers, it's kind of ugly at the moment.
        send_message_delayed("/set wetness 25", 140);
 
+       // Freeciv WebGL doesn't support map wrapping yet.
+       send_message_delayed("/set topology flat", 145);
+
        // Freeciv-web WebGL doesn't support rendering borders.
        send_message_delayed("/set borders disabled", 150);
 
@@ -376,7 +379,10 @@ function handle_map_info(packet)
 
   /* TODO: calculate_overview_dimensions();*/
 
-  /*packhand_init();*/
+  if (renderer == RENDERER_WEBGL) {
+    mapview_model_width = Math.floor(MAPVIEW_ASPECT_FACTOR * map['xsize']);
+    mapview_model_height = Math.floor(MAPVIEW_ASPECT_FACTOR * map['ysize']);
+  }
 
 }
 

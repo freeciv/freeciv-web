@@ -39,10 +39,11 @@ var water;
 
 var start_webgl;
 
-var mapview_model_width = 3000;
-var mapview_model_height = 2000;
+var mapview_model_width;
+var mapview_model_height;
 var xquality;
 var yquality;
+var MAPVIEW_ASPECT_FACTOR = 35.71;
 
 var stereoEffect;
 var cardboard_vr_enabled = false;
@@ -117,9 +118,6 @@ function webgl_start_renderer()
 function init_webgl_mapview() {
   start_webgl = new Date().getTime();
   var quality = 32, step = 1024 / quality;
-
-  mapview_model_width = Math.floor(mapview_model_width * map['xsize'] / 84);
-  mapview_model_height = Math.floor(mapview_model_height * map['ysize'] / 56);
 
   /* Create water mesh with a texture. */
   if (graphics_quality == QUALITY_LOW) {

@@ -1,0 +1,27 @@
+diff --git freeciv/common/fc_types.h b/freeciv/freeciv/common/fc_types.h
+index 80960971..327c0749 100644
+--- freeciv/common/fc_types.h
++++ freeciv/common/fc_types.h
+@@ -324,7 +324,9 @@ typedef int Unit_Class_id;
+ #define SPECENUM_VALUE2NAME N_("ISO")
+ #define SPECENUM_VALUE3 TF_HEX
+ #define SPECENUM_VALUE3NAME N_("Hex")
+-#define TOPO_FLAG_BITS  4
++#define SPECENUM_VALUE4 TF_FLAT
++#define SPECENUM_VALUE4NAME N_("Flat")
++#define TOPO_FLAG_BITS  5
+ #include "specenum_gen.h"
+ 
+ /* Used in the network protocol. */
+diff --git freeciv/server/settings.c b/freeciv/freeciv/server/settings.c
+index 455d2e2a..1d6df2b7 100644
+--- freeciv/server/settings.c
++++ freeciv/server/settings.c
+@@ -238,6 +238,7 @@ static const struct sset_val_name *topology_name(int topology_bit)
+   NAME_CASE(TF_WRAPY, "WRAPY", N_("Wrap North-South"));
+   NAME_CASE(TF_ISO, "ISO", N_("Isometric"));
+   NAME_CASE(TF_HEX, "HEX", N_("Hexagonal"));
++  NAME_CASE(TF_FLAT, "FLAT", N_("Flat"));
+   }
+   return NULL;
+ }

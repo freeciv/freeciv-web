@@ -217,7 +217,7 @@ void main(void)
   light = normalize(light);
 
   float dProd = dot(vNormal, light);
-  float shade_factor = 0.4 + 0.6 * max(0., dProd);
+  float shade_factor = 0.2 + 1.0 * max(0., dProd);
 
   vec3 ambiant = vec3(0.27, 0.55, 1.);
   float ambiant_factor = 0.075 * (vPosition_camera.z - 550.) / 400.;

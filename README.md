@@ -13,17 +13,12 @@ Freeciv-web is now playable online at http://play.freeciv.org/
 Contact: The Freeciv Project - freeciv-dev@gna.org  
 https://mail.gna.org/listinfo/freeciv-dev  
   
-
+Freeciv-web HTML5 version:
 ![Freeciv-web](https://raw.githubusercontent.com/freeciv/freeciv-web/develop/scripts/freeciv-web-screenshot.png "Freeciv-web screenshot")
 
-
-News
-----
-We are currently working on a adding support for 3D WebGL rendering to Freeciv-web. The source code for that 
-can be found [here](https://github.com/freeciv/freeciv-web/tree/develop/freeciv-web/src/main/webapp/javascript/webgl).
-
+Freeciv WebGL 3D:
 ![Freeciv-web](https://raw.githubusercontent.com/freeciv/freeciv-web/develop/freeciv-web/src/main/webapp/javascript/webgl/freeciv-webgl.png "Freeciv-web WebGL screenshot")
-
+More info can be found for [developers](https://github.com/freeciv/freeciv-web/tree/develop/freeciv-web/src/main/webapp/javascript/webgl) and [3D artists](https://github.com/freeciv/freeciv-web/wiki/Contributing-Blender-models-for-Freeciv-WebGL).
 
 Overview
 --------
@@ -111,7 +106,7 @@ Install this software if you are not running Freeciv-web with Vagrant:
 
 - Java 8 JDK - http://www.oracle.com/technetwork/java/javase/downloads/ 
 
-- Python 3.5 - http://www.python.org/
+- Python 3.6 - http://www.python.org/
 
 - Pillow v2.3.0 (PIL fork) - http://pillow.readthedocs.org/
   (required for freeciv-img-extract)
@@ -126,7 +121,7 @@ Install this software if you are not running Freeciv-web with Vagrant:
 
 - OpenSSL - http://www.openssl.org/
 
-- nginx 1.9.0 or later - http://nginx.org/
+- nginx 1.11.x or later - http://nginx.org/
 
 - PHP-FPM - FastCGI Process Manager for PHP - http://php-fpm.org/
 

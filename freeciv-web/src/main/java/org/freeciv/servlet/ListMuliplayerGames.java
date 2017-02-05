@@ -187,7 +187,6 @@ public class ListMuliplayerGames extends HttpServlet {
 			response.setContentType(CONTENT_TYPE);
 			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			response.getOutputStream().print(INTERNAL_SERVER_ERROR);
-			response.getOutputStream().print(err.getMessage());
 		} finally {
 			if (conn != null) {
 				try {

@@ -22,8 +22,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 import javax.naming.Context;
@@ -82,7 +82,7 @@ public class ServerStatistics extends HttpServlet {
 					.append(';') //
 					.toString();
 
-			LocalDateTime expires = LocalDateTime.now(ZoneId.of("UTC")).plusHours(1);
+			ZonedDateTime expires = ZonedDateTime.now(ZoneId.of("UTC")).plusHours(1);
 			String rfc1123Expires = expires.format(DateTimeFormatter.RFC_1123_DATE_TIME);
 
 			response.setHeader(HEADER_EXPIRES, rfc1123Expires);

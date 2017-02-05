@@ -177,6 +177,17 @@
     <url-pattern>/meta/status.php</url-pattern>
   </servlet-mapping>
 
+  <!-- /meta/games-stats.php -->
+  <servlet>
+    <servlet-name>GameTypeStatistics</servlet-name>
+    <servlet-class>org.freeciv.servlet.GameTypeStatistics</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>GameTypeStatistics</servlet-name>
+    <url-pattern>/meta/games-stats.php</url-pattern>
+  </servlet-mapping>
+
   <context-param>
     <param-name>buildTimeStamp</param-name>
     <param-value>${timestamp}</param-value>

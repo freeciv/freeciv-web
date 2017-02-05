@@ -155,6 +155,28 @@
     <url-pattern>/meta/fpmultimeta.php</url-pattern>
   </servlet-mapping>
 
+  <!-- /meta/pbem_games_report.php -->
+  <servlet>
+    <servlet-name>PlayByEmailStatistics</servlet-name>
+    <servlet-class>org.freeciv.servlet.PlayByEmailStatistics</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>PlayByEmailStatistics</servlet-name>
+    <url-pattern>/meta/pbem_games_report.php</url-pattern>
+  </servlet-mapping>
+
+  <!-- /meta/status.php -->
+  <servlet>
+    <servlet-name>RecentServerStatistics</servlet-name>
+    <servlet-class>org.freeciv.servlet.RecentServerStatistics</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>RecentServerStatistics</servlet-name>
+    <url-pattern>/meta/status.php</url-pattern>
+  </servlet-mapping>
+
   <context-param>
     <param-name>buildTimeStamp</param-name>
     <param-value>${timestamp}</param-value>

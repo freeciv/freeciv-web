@@ -74,7 +74,7 @@ set={"name","value","gamestart"
 "ec_max_size",256,256
 "ec_chat",TRUE,TRUE
 "ec_info",FALSE,FALSE
-"startunits","ccxx","ccxx"
+"startunits","ccwwx","ccwwx"
 "dispersion",0,0
 "gold",50,50
 "techlevel",3,3

@@ -68,13 +68,21 @@ function generate_map_tiletype_grid() {
 
   // randomize tile edges
   var num_iterations;
-  if (graphics_quality == QUALITY_LOW) num_iterations = 1;
-  if (graphics_quality == QUALITY_MEDIUM) num_iterations = 2;
-  if (graphics_quality == QUALITY_HIGH) num_iterations = 3;
+  var change_probability = 0.6;
+  if (graphics_quality == QUALITY_LOW) {
+    num_iterations = 1;
+    change_probability = 0.25;
+  }
+  if (graphics_quality == QUALITY_MEDIUM) {
+    num_iterations = 2;
+  }
+  if (graphics_quality == QUALITY_HIGH) {
+    num_iterations = 3;
+  }
   for (var i = 0; i < num_iterations; i++) {
     for (var x = 0; x < map_tiletype_resolution - 2; x++) {
       for (var y = 0; y < map_tiletype_resolution - 2; y++) {
-        if (Math.random() >= 0.6) {
+        if (Math.random() >= change_probability) {
            grid[x][y] = grid[x + 2][y + 2];
         }
       }

@@ -29,6 +29,9 @@ var unit_flag_positions = {};
 var unit_label_positions = {};
 var unit_activities_positions = {};
 
+var unit_health_positions = {};
+var unit_healthpercentage_positions = {};
+
 var forest_positions = {}; // tile index is key, boolean is value.
 var jungle_positions = {}; // tile index is key, boolean is value.
 
@@ -61,6 +64,10 @@ function update_unit_position(ptile) {
     if (scene != null) scene.remove(unit_label_positions[ptile['index']]);
     delete unit_label_positions[ptile['index']];
     unit_activities_positions[ptile['index']] = null;
+
+    if (scene != null) scene.remove(unit_health_positions[ptile['index']]);
+    delete unit_health_positions[ptile['index']];
+    unit_healthpercentage_positions[ptile['index']] = null;
   }
 
   if (unit_positions[ptile['index']] == null && visible_unit != null) {
@@ -88,7 +95,6 @@ function update_unit_position(ptile) {
     if (unit_flag_positions[ptile['index']] == null) {
       var new_flag = get_flag_mesh(pflag['key']);
       unit_flag_positions[ptile['index']] = new_flag;
-      var fpos = map_to_scene_coords(ptile['x'], ptile['y']);
       new_flag.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10);
       new_flag.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 16);
       new_flag.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
@@ -97,6 +103,20 @@ function update_unit_position(ptile) {
         scene.add(new_flag);
       }
     }
+
+    if (unit_health_positions[ptile['index']] == null) {
+      var new_unit_health_bar = get_unit_health_mesh(visible_unit);
+      unit_health_positions[ptile['index']] = new_unit_health_bar;
+      new_unit_health_bar.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10);
+      new_unit_health_bar.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 23);
+      new_unit_health_bar.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
+      new_unit_health_bar.rotation.y = Math.PI / 4;
+      if (scene != null && new_unit_health_bar != null) {
+        scene.add(new_unit_health_bar);
+      }
+      unit_healthpercentage_positions[ptile['index']] = visible_unit['hp'];
+    }
+
     /* indicate focus unit*/
     var funit = get_focus_unit_on_tile(ptile);
     if (scene != null && funit != null && funit['id'] == visible_unit['id']) {
@@ -126,7 +146,7 @@ function update_unit_position(ptile) {
       if (get_unit_activity_text(visible_unit) != null) {
         var text = create_unit_label(visible_unit);
         if (text != null) {
-          text.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] + 5);
+          text.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] + 8);
           text.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 28);
           text.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 5);
           text.rotation.y = Math.PI / 4;
@@ -135,6 +155,20 @@ function update_unit_position(ptile) {
         }
       }
       unit_activities_positions[ptile['index']] = get_unit_activity_text(visible_unit);
+    }
+
+    if (unit_healthpercentage_positions[ptile['index']] != visible_unit['hp']) {
+      if (scene != null && unit_health_positions[ptile['index']] != null) scene.remove(unit_health_positions[ptile['index']]);
+      var new_unit_health_bar = get_unit_health_mesh(visible_unit);
+      unit_health_positions[ptile['index']] = new_unit_health_bar;
+      new_unit_health_bar.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10);
+      new_unit_health_bar.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 23);
+      new_unit_health_bar.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
+      new_unit_health_bar.rotation.y = Math.PI / 4;
+      if (scene != null && new_unit_health_bar != null) {
+        scene.add(new_unit_health_bar);
+      }
+      unit_healthpercentage_positions[ptile['index']] = visible_unit['hp'];
     }
 
     /* indicate focus unit*/

@@ -19,11 +19,13 @@
 
 /****************************************************************************
  Convert a canvas to a mesh that will always face the user. The height of
- `canvas' should be 16px. `width' gives the width of the content that will
- actually be displayed, not of the canvas itself. `transparent' should be
- true if canvas' content is transparent.
+ `canvas' should be 16px.
+ `width_final' gives the width of the content that will actually be displayed, not of the canvas itself.
+ 'width_input' I think is the width of the input.
+ 'height' is the height of the result.
+ `transparent' should be true if canvas' content is transparent.
 ****************************************************************************/
-function canvas_to_user_facing_mesh(canvas, width, transparent)
+function canvas_to_user_facing_mesh(canvas, width_input, width_final, height, transparent)
 {
   // Create a texture out of the canvas
   var texture = new THREE.Texture(canvas);
@@ -35,13 +37,13 @@ function canvas_to_user_facing_mesh(canvas, width, transparent)
     fragmentShader: document.getElementById('tex_fragment_shh').textContent,
     uniforms: {
       texture: { value: texture },
-      u_scale_factor: { value: width / canvas.width }
+      u_scale_factor: { value: width_input / canvas.width }
     }
   });
   material.transparent = transparent;
 
   // Put it all together
-  return new THREE.Mesh(new THREE.PlaneBufferGeometry(Math.floor(width * 0.80), 13), material);
+  return new THREE.Mesh(new THREE.PlaneBufferGeometry(width_final, height), material);
 }
 
 /****************************************************************************
@@ -113,7 +115,7 @@ function create_city_label(pcity)
     }
   }
 
-  return canvas_to_user_facing_mesh(canvas1, width, false);
+  return canvas_to_user_facing_mesh(canvas1, width, Math.floor(width * 0.8), 13, false);
 }
 
 /****************************************************************************
@@ -135,7 +137,7 @@ function create_unit_label(punit)
   context1.strokeText(text, 0, 16);
   context1.fillText(text, 0, 16);
 
-  return canvas_to_user_facing_mesh(canvas1, width, true);
+  return canvas_to_user_facing_mesh(canvas1, width, Math.floor(width * 0.8), 13, true);
 }
 
 

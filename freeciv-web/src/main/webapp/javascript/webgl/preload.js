@@ -247,7 +247,35 @@ function get_flag_mesh(key)
                 sprites[key].width, sprites[key].height,
                 0,0,32,16);
 
-  meshes[key] = canvas_to_user_facing_mesh(fcanvas, 32, false)
+  meshes[key] = canvas_to_user_facing_mesh(fcanvas, 32, 26, 13, false);
+  return meshes[key].clone();
+
+}
+
+/****************************************************************************
+ Returns a unit health mesh
+****************************************************************************/
+function get_unit_health_mesh(punit)
+{
+  if (punit == null || punit['hp'] == null) return null;
+  var hp = punit['hp'];
+  var unit_type = unit_types[punit['type']];
+  var max_hp = unit_type['hp'];
+  var healthpercent = 10 * Math.floor((10 * hp) / max_hp);
+  var key = "unit_health_" + healthpercent;
+
+  if (meshes[key] != null) return meshes[key].clone();
+
+  var flagGeometry = new THREE.PlaneBufferGeometry( 14, 10 );
+  var fcanvas = document.createElement("canvas");
+  fcanvas.width = 32;
+  fcanvas.height = 16;
+  var ctx = fcanvas.getContext("2d");
+  ctx.drawImage(sprites["unit.hp_" + healthpercent], 25, 10,
+                22, 7,
+                0,0,32,16);
+
+  meshes[key] = canvas_to_user_facing_mesh(fcanvas, 32, 18, 3, true)
   return meshes[key].clone();
 
 }

@@ -97,7 +97,7 @@
 	},
 
 	{
-	"DbgColor" : 3744854,
+	"DbgColor" : 4614226,
 	"DbgIndex" : 7,
 	"DbgName" : "Crate",
 	"colorDiffuse" : [0.247575, 0.076246, 0.010962],
@@ -109,7 +109,7 @@
 	},
 
 	{
-	"DbgColor" : 4614226,
+	"DbgColor" : 3744854,
 	"DbgIndex" : 8,
 	"DbgName" : "Grass",
 	"colorDiffuse" : [0.085205, 0.134359, 0.12002],

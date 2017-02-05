@@ -168,28 +168,14 @@ function init_webgl_mapview() {
 
   }
 
-  /* map_texture: create a texture which contains one pixel for each map tile, where the color of each pixel
-    indicates which Freeciv tile type the pixel is. */
-  for (var terrain_id in terrains) {
-    tiletype_palette.push([terrain_id * 10, 0, 0]);
-  }
-  bmp_lib.render('map_tiletype_grid',
-                    generate_map_tiletype_grid(),
-                    tiletype_palette);
-  var map_texture = new THREE.Texture();
-  map_texture.magFilter = THREE.NearestFilter;
-  map_texture.minFilter = THREE.NearestFilter;
-  map_texture.image = document.getElementById("map_tiletype_grid");
-  map_texture.needsUpdate = true;
-
   /* heightmap image */
   create_heightmap();
 
   /* uniforms are variables which are used in the fragment shader fragment.js */
   var terrain_uniforms = {
-    maptiles: { type: "t", value: map_texture },
-    mapWidth: { type: "i", value: map['xsize'] },
-    mapHeight: { type: "i", value: map['ysize'] }
+    maptiles: { type: "t", value: init_map_tiletype_image() },
+    map_x_size: { type: "f", value: map['xsize'] },
+    map_y_size: { type: "f", value: map['ysize'] }
   };
 
   /* create a texture for each map tile type. */

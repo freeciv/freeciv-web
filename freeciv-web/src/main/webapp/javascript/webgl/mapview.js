@@ -207,7 +207,6 @@ function init_webgl_mapview() {
     if (y == yquality - 1 && landGeometry.vertices[ i ].y >= 54) landGeometry.vertices[ i ].y = 54;
   }
   landGeometry.computeVertexNormals();
-  landGeometry.computeMorphNormals();
   landMesh = new THREE.Mesh( landGeometry, terrain_material );
   scene.add( landMesh );
 
@@ -248,7 +247,6 @@ function init_webgl_mapview() {
     if (y == yquality - 1) unknownTerritoryGeometry.vertices[ i ].z += 50;
   }
   unknownTerritoryGeometry.computeVertexNormals();
-  unknownTerritoryGeometry.computeMorphNormals();
   var unknownMesh = new THREE.Mesh( unknownTerritoryGeometry, darkness_material );
   unknownMesh.geometry.dynamic = true;
   scene.add(unknownMesh);
@@ -274,7 +272,6 @@ function init_webgl_mapview() {
     if (y == yquality - 1) fogOfWarGeometry.vertices[ i ].z += 50;
   }
   fogOfWarGeometry.computeVertexNormals();
-  fogOfWarGeometry.computeMorphNormals();
   var fogOfWar_material = new THREE.MeshLambertMaterial({color: 0x000000, transparent: true, opacity: 0.4});
   var fogOfWarMesh = new THREE.Mesh( fogOfWarGeometry, fogOfWar_material );
   fogOfWarMesh.geometry.dynamic = true;

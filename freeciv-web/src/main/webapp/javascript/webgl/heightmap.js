@@ -139,7 +139,7 @@ function propagate_distance_from_coast(distance_from_coast_map, x, y, level)
     }
     if (distance_from_coast_map[dir_x][dir_y] > current_distance + 1) {
       distance_from_coast_map[dir_x][dir_y] = current_distance + 1;
-      if (level < 100) propagate_distance_from_coast(distance_from_coast_map, dir_x, dir_y, level + 1);
+      if (level < 200) propagate_distance_from_coast(distance_from_coast_map, dir_x, dir_y, level + 1);
     }
   }
 }

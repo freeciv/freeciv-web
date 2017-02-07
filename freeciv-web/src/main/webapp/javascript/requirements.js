@@ -95,6 +95,30 @@ function is_req_active(target_player,
   case VUT_MINYEAR:
   case VUT_TERRAINALTER:
   case VUT_CITYTILE:
+  case VUT_GOOD:
+  case VUT_TERRFLAG:
+  case VUT_NATIONALITY:
+  case VUT_BASEFLAG:
+  case VUT_ROADFLAG:
+  case VUT_EXTRA:
+  case VUT_TECHFLAG:
+  case VUT_ACHIEVEMENT:
+  case VUT_DIPLREL:
+  case VUT_MAXTILEUNITS:
+  case VUT_STYLE:
+  case VUT_MINCULTURE:
+  case VUT_UNITSTATE:
+  case VUT_MINMOVES:
+  case VUT_MINVETERAN:
+  case VUT_MINHP:
+  case VUT_AGE:
+  case VUT_NATIONGROUP:
+  case VUT_TOPO:
+  case VUT_IMPR_GENUS:
+  case VUT_ACTION:
+  case VUT_MINTECHS:
+  case VUT_EXTRAFLAG:
+  case VUT_MINCALFRAG:
     //FIXME: implement
     console.log("Unimplemented requirement type " + req['kind']);
     break;

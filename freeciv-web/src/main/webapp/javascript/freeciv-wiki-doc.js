@@ -470,9 +470,9 @@ var freeciv_wiki_docs = {
     "title": "Howitzer"
   },
   "Hydro Plant": {
-    "image": "Fo\u010da Hydro Power Plant.jpg",
-    "summary": "The Fo\u010da Hydro Power Plant should be one of Bosnia and Herzegovina's largest hydro power plant, if built, having an installed electric capacity of 56 MW. However, like the Buk Bijela Hydro Power Plant, the project has been under harsh scrutiny of local and national communities and various NGO's from Bosnia and Herzegovina and abroad, due which to it has been postponed and possibly will be eventually canceled.",
-    "title": "Fo\u010da Hydro Power Plant"
+    "image": "Hydroelectricity.jpg",
+    "summary": "Hydroelectricity is electricity produced from hydropower. In 2015 hydropower generated 16.6% of the world's total electricity and 70% of all renewable electricity, and was expected to increase about 3.1% each year for the next 25 years.\nHydropower is produced in 150 countries, with the Asia-Pacific region generating 33 percent of global hydropower in 2013. China is the largest hydroelectricity producer, with 920 TWh of production in 2013, representing 16.9 percent of domestic electricity use.\nThe cost of hydroelectricity is relatively low, making it a competitive source of renewable electricity. The hydro station consumes no water, unlike coal or gas plants. The average cost of electricity from a hydro station larger than 10 megawatts is 3 to 5 U.S. cents per kilowatt-hour. With a dam and reservoir it is also a flexible source of electricity since the amount produced by the station can be changed up or down very quickly to adapt to changing energy demands. Once a hydroelectric complex is constructed, the project produces no direct waste, and has a considerably lower output level of greenhouse gases than fossil fuel powered energy plants.\n\n",
+    "title": "Hydroelectricity"
   },
   "Industrialization": {
     "image": "Industrialisation.jpg",
@@ -585,9 +585,9 @@ var freeciv_wiki_docs = {
     "title": "Cartography"
   },
   "Marco Polo's Embassy": {
-    "image": null,
-    "summary": "Marco Polo Hotels (Chinese: \u99ac\u54e5\u5b5b\u7f85\u9152\u5e97\u96c6\u5718) is a hotel management company based in Hong Kong that operates hotels in Hong Kong, China and the Philippines. Its hotels in Hong Kong are all located within Harbour City in Tsim Sha Tsui, Kowloon. It is a wholly owned subsidiary of Wharf (Holdings) Limited. The company's chairman is Stephen Ng, Chairman and Managing Director of Wharf (Holdings) Limited.",
-    "title": "Marco Polo Hotels"
+    "image": "Marco Polo.jpg",
+    "summary": "Marco Polo (/\u02c8m\u0251\u02d0rko\u028a \u02c8po\u028alo\u028a/ Italian pronunciation: [\u02c8marko \u02c8p\u0254\u02d0lo]; 1254 \u2013 January 8\u20139, 1324) was a Venetian merchant traveller and citizen of the Venice Republic whose travels are recorded in Livres des merveilles du monde (Book of the Marvels of the World, also known as The Travels of Marco Polo, c. 1300), a book that described to Europeans the wealth and great size of China, its capital Peking, and other Asian cities and countries.\nHe learned the mercantile trade from his father and uncle, Niccol\u00f2 and Maffeo, who travelled through Asia and met Kublai Khan. In 1269, they returned to Venice to meet Marco for the first time. The three of them embarked on an epic journey to Asia, returning after 24 years to find Venice at war with Genoa; Marco was imprisoned and dictated his stories to a cellmate. He was released in 1299, became a wealthy merchant, married, and had three children. He died in 1324 and was buried in the church of San Lorenzo in Venice.\nMarco Polo was not the first European to reach China (see Europeans in Medieval China), but he was the first to leave a detailed chronicle of his experience. This book inspired Christopher Columbus and many other travellers. There is a substantial literature based on Polo's writings; he also influenced European cartography, leading to the introduction of the Fra Mauro map.",
+    "title": "Marco Polo"
   },
   "Marines": {
     "image": "Marines.jpg",
@@ -945,9 +945,9 @@ var freeciv_wiki_docs = {
     "title": "Sun Tzu"
   },
   "Super Highways": {
-    "image": "Super Highways.jpg",
-    "summary": "Super Highways is the second album by New Order members Gillian Gilbert and Stephen Morris under the name The Other Two. It was released in 1999 six years after their d\u00e9but, and a year after New Order reformed. Four tracks were co-written by Melanie Williams, who also sang lead on two of them (\"You Can Fly\" and \"One Last Kiss\") and backing vocals on the title track. The album was re-released in January 2010 by LTM Recordings.",
-    "title": "Super Highways"
+    "image": "Controlled-access highway.jpg",
+    "summary": "A controlled-access highway is a type of highway which has been designed for high-speed vehicular traffic, with all traffic flow and ingress/egress regulated. Common English terms are freeway (in Australia and parts of the United States and Canada), motorway (in the United Kingdom and Ireland) and expressway (some parts of Canada, parts of the United States, and many Asian countries).\nOther similar terms include Interstate and parkway. Some of which may be limited-access highways, although this term can also refer to a class of highway with somewhat less isolation from other traffic.\nIn countries following Vienna convention, the motorway qualification implies they are forbidden for walking or parking, and reserved for the use of motorized vehicles only.\nA controlled-access highway provides an unhindered flow of traffic, with no traffic signals, intersections or property access. They are free of any at-grade crossings with other roads, railways, or pedestrian paths, which are instead carried by overpasses and underpasses across the highway. Entrances and exits to the highway are provided at interchanges by slip roads (ramps), which allow for speed changes between the highway and arterial roads and collector roads. On the controlled-access highway, opposing directions of travel are generally separated by a median strip or central reservation containing a traffic barrier or grass. Elimination of conflicts with other directions of traffic dramatically improves safety and capacity.\nControlled-access highways evolved during the first half of the 20th century. Italy opened its first autostrada in 1924 connecting Milan to Varese (A8). Germany began to build its first 30-kilometre (19 mi) autobahn controlled-access highway without speed limits (then referred to as a dual highway) in 1932 between Cologne and Bonn (now A555). It then rapidly constructed a nationwide system of such roads in anticipation of their use in the Second World War. The first North American freeways (known as parkways) opened in the New York City area in the 1920s. Britain, heavily influenced by the railways, did not build its first motorway, the Preston By-pass (M6), until 1958.\nMost technologically advanced nations feature an extensive network of freeways or motorways to provide high-capacity urban travel, or high-speed rural travel, or both. Many have a national-level or even international-level (e.g. European E route) system of route numbering.",
+    "title": "Controlled-access highway"
   },
   "Superconductors": {
     "image": "Superconductivity.jpg",

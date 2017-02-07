@@ -184,7 +184,7 @@ function is_req_active(target_player,
       result = FALSE;
     }*/
     break;
-  case VUT_LAST:
+  case VUT_COUNT:
     return false;
   }
 

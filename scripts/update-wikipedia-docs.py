@@ -57,6 +57,8 @@ def fix_tech(tech_name):
   if (tech_name == "Space Module"): tech_name = "Life support system";
   if (tech_name == "Space Structural"): tech_name = "Spacecraft design";
   if (tech_name == "Hydro Plant"): tech_name = "Hydroelectricity";
+  if (tech_name == "Super Highways"): tech_name = "Controlled-access highway";
+
   return tech_name;
 
 def validate_image(image_url):

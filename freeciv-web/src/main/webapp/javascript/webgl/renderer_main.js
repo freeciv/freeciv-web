@@ -98,6 +98,35 @@ function init_webgl_renderer()
 function webgl_preload_complete()
 {
   $.unblockUI();
+
+  if (C_S_RUNNING == client_state() || C_S_OVER == client_state()) {
+    // init a running game, switching from 2D to 3D.
+    $("#canvas").remove();
+    webgl_start_renderer();
+    init_webgl_mapview();
+    center_tile_mapcanvas(map_pos_to_tile(15,15));
+    advance_unit_focus();
+    init_webgl_mapctrl();
+
+    for (var unit_id in units) {
+      var punit = units[unit_id];
+      var ptile = index_to_tile(punit['tile']);
+      update_unit_position(ptile);
+    }
+
+    for (var city_id in cities) {
+      var pcity = cities[city_id];
+      update_city_position(city_tile(pcity));
+    }
+
+    for (var tile_id in tiles) {
+      update_tile_extras(tiles[tile_id]);
+    }
+
+
+
+  }
+
   if ($.getUrlVar('autostart') == "true") {
     username = "autostart";
     network_init();

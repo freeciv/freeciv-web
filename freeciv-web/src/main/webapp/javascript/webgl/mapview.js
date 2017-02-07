@@ -278,12 +278,12 @@ function init_webgl_mapview() {
   scene.add(fogOfWarMesh);
 
   // cleanup
-  $("#map_tiletype_grid").remove();
+  /*$("#map_tiletype_grid").remove();
   heightmap = null;
   for (var i = 0; i < tiletype_terrains.length; i++) {
     webgl_textures[tiletype_terrains[i]] = null;
   }
-  webgl_textures = null;
+  webgl_textures = null;*/
 
   $.unblockUI();
   console.log("init_webgl_mapview took: " + (new Date().getTime() - start_webgl) + " ms.");
@@ -313,6 +313,6 @@ function animate() {
   if (stats != null) stats.end();
   if (benchmark_enabled) benchmark_frames_count++;
 
-  requestAnimationFrame(animate);
+  if (renderer == RENDERER_WEBGL) requestAnimationFrame(animate);
 
 }

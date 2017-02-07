@@ -162,4 +162,13 @@ function init_options_dialog()
     $('#speech_enabled_setting').attr('disabled', true);
   }
 
+
+  if (renderer == RENDERER_WEBGL) {
+    $("#switch_renderer_button").html("Use 2D HTML5 graphics");
+    $("#renderer_help").html("Switch to 2D isometric graphics.")
+  } else {
+    $("#switch_renderer_button").html("Use 3D WebGL graphics");
+    $("#renderer_help").html("Use 3D WebGL graphics. Make sure your computer supports 3D WebGL graphics. <br>Saving your game is suggested before trying to switch to 3D WebGL the first time.")
+  }
+
 }

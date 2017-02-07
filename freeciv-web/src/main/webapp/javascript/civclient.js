@@ -623,3 +623,59 @@ function show_auth_dialog(packet) {
 
 
 }
+
+
+
+/****************************************************************************
+ Change between 2D isometric and 3D WebGL renderer.
+****************************************************************************/
+function switch_renderer()
+{
+
+  $("#canvas_div").unbind();
+  if (renderer == RENDERER_WEBGL) {
+    //activate 2D isometric renderer
+    renderer = RENDERER_2DCANVAS;
+    $("#canvas_div").empty();
+    init_mapview();
+    set_default_mapview_active();
+    center_tile_mapcanvas(map_pos_to_tile(15,15));
+    advance_unit_focus();
+    requestAnimationFrame(update_map_canvas_check, mapview_canvas);
+    mapctrl_init_2d();
+
+  } else {
+    //activate 3D WebGL renderer
+    renderer = RENDERER_WEBGL;
+    load_count = 0;
+    mapview_model_width = Math.floor(MAPVIEW_ASPECT_FACTOR * map['xsize']);
+    mapview_model_height = Math.floor(MAPVIEW_ASPECT_FACTOR * map['ysize']);
+
+    set_default_mapview_active();
+    init_webgl_renderer();
+
+  }
+
+  $.contextMenu({
+        selector: (renderer == RENDERER_2DCANVAS) ? '#canvas' : '#canvas_div' ,
+	    zIndex: 5000,
+        autoHide: true,
+        callback: function(key, options) {
+          handle_context_menu_callback(key);
+        },
+        build: function($trigger, e) {
+            if (!context_menu_active) {
+              context_menu_active = true;
+              return false;
+            }
+            var unit_actions = update_unit_order_commands();
+            return {
+                 callback: function(key, options) {
+                   handle_context_menu_callback(key);
+                  } ,
+                 items: unit_actions
+            };
+        }
+  });
+
+}

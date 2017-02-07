@@ -139,12 +139,21 @@ function init_sprites()
   $.blockUI({ message: "<h1>Freeciv-web is loading. Please wait..."
 	  + "<br><center><img src='/images/loading.gif'></center></h1>" });
 
-  for (var i = 0; i < tileset_image_count; i++) {
-    var tileset_image = new Image();
-    tileset_image.onload = preload_check;
-    tileset_image.src = '/tileset/freeciv-web-tileset-'
-                        + tileset_name + '-' + i + '.png?ts=' + ts;
-    tileset_images[i] = tileset_image;
+  if (loaded_images != tileset_image_count) {
+    for (var i = 0; i < tileset_image_count; i++) {
+      var tileset_image = new Image();
+      tileset_image.onload = preload_check;
+      tileset_image.src = '/tileset/freeciv-web-tileset-'
+                          + tileset_name + '-' + i + '.png?ts=' + ts;
+      tileset_images[i] = tileset_image;
+    }
+  } else {
+    // already loaded
+    if (renderer == RENDERER_WEBGL) {
+      webgl_preload();
+    } else {
+      $.unblockUI();
+    }
   }
 
 }

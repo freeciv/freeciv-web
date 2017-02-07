@@ -16,12 +16,12 @@
 </div>
 
 <div class="main_menu_buttons">
-  <b>Play sounds:</b> <input type='checkbox' name='play_sounds_setting' id='play_sounds_setting' checked>
+  <button id="switch_renderer_button" type="button" class="button setting_button" onClick="switch_renderer();"></button>
+  <br>
+  <span id="renderer_help" style="font-size: 70%;"></span>
 </div>
 
-<div class="main_menu_buttons">
-  <b>Speech messages:</b> <input type='checkbox' name='speech_enabled_setting' id='speech_enabled_setting'>
-</div>
+
 
 <div class="main_menu_buttons">
   <b>Timeout (seconds per turn):</b> <input type='number' name='timeout_setting' id='timeout_setting' size='6' length='3' min='30' max='3600' step='1'>
@@ -29,6 +29,18 @@
 
 
 <table>
+<tr>
+<td>
+  <div class="main_menu_buttons">
+    <b>Play sounds:</b> <input type='checkbox' name='play_sounds_setting' id='play_sounds_setting' checked>
+  </div>
+</td>
+<td>
+  <div class="main_menu_buttons">
+    <b>Speech messages:</b> <input type='checkbox' name='speech_enabled_setting' id='speech_enabled_setting'>
+  </div>
+</td>
+</tr>
 <tr>
 <td>
 <div class="main_menu_buttons">

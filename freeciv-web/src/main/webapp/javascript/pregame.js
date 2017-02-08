@@ -421,9 +421,15 @@ function pregame_settings()
       "     <li><a href='#pregame_settings_tabs-1'>Game</a></li>" +
       "     <li><a href='#pregame_settings_tabs-2'>3D WebGL</a></li>" +
       "     <li><a href='#pregame_settings_tabs-3'>Other</a></li>" +
-      "   </ul>" +
-      "<div id='pregame_settings_tabs-1'><table id='settings_table'> " +
-  	  "<tr title='Set metaserver info line'><td>Game title:</td>" +
+      "   </ul>"
+      + "<div id='pregame_settings_tabs-1'><table id='settings_table'> "
+      + "<tr class='not_pbem' title='Ruleset version'><td>Ruleset:</td>"
+      + "<td><select name='ruleset' id='ruleset'>"
+      + "<option value='classic'>Classic</option>"
+      + "<option value='civ2civ3'>Civ2Civ3</option>"
+      + "<option value='webperimental'>Webperimental</option>"
+      + "</select></td></tr>"
+      + "<tr title='Set metaserver info line'><td>Game title:</td>" +
 	  "<td><input type='text' name='metamessage' id='metamessage' size='28' maxlength='42'></td></tr>" +
 	  "<tr title='Enables music'><td>Music:</td>" +
           "<td><input type='checkbox' name='music_setting' id='music_setting'>Play Music</td></tr>" +
@@ -468,13 +474,8 @@ function pregame_settings()
           "<option value='ISLAND'>Island-based</option>" +
           "<option value='FAIR'>Fair islands</option>" +
           "<option value='FRACTURE'>Fracture map</option>" +
-	  "</select></td></tr>"+
-  	  "<tr class='not_pbem' title='Ruleset version'><td>Ruleset:</td>" +
-	  "<td><select name='ruleset' id='ruleset'>" +
-	  "<option value='classic'>Classic</option>" +
-	  "<option value='civ2civ3'>Civ2Civ3</option>" +
-      "<option value='webperimental'>Webperimental</option>" +
-	  "</select></td></tr></table><br>"+
+    "</select></td></tr>"
+    + "</table><br>"+
 	  "<span id='settings_info'><i>Freeciv-web can be customized using the command line in many " +
           "other ways also. Type /help in the command line for more information.</i></span></div>" +
 

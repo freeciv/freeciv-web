@@ -615,28 +615,21 @@ function webgl_clear_unit_focus()
 ****************************************************************************/
 function add_all_objects_to_scene()
 {
-  for (var tile_index in unit_positions) {
-    var punit = unit_positions[tile_index];
-    punit.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), 100 * tiles[tile_index]['height'] - 5);
-    scene.add(punit);
+
+  for (var unit_id in units) {
+    var punit = units[unit_id];
+    var ptile = index_to_tile(punit['tile']);
+    update_unit_position(ptile);
   }
 
-  for (var tile_index in city_positions) {
-    var pcity = city_positions[tile_index];
-    pcity.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), 100 * tiles[tile_index]['height'] - 5);
-    scene.add(pcity);
+  for (var city_id in cities) {
+    var pcity = cities[city_id];
+    update_city_position(city_tile(pcity));
   }
 
-  for (var tile_index in city_label_positions) {
-    var pcity_label = city_label_positions[tile_index];
-    pcity_label.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), 100 * tiles[tile_index]['height'] - 5);
-    scene.add(pcity_label);
+  for (var tile_id in tiles) {
+    update_tile_extras(tiles[tile_id]);
   }
 
-  for (var tile_index in unit_flag_positions) {
-    var pflag = unit_flag_positions[tile_index];
-    pflag.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), 100 * tiles[tile_index]['height'] - 5);
-    scene.add(pflag);
-  }
 
 }

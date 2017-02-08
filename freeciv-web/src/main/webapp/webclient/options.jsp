@@ -18,7 +18,7 @@
 <div class="main_menu_buttons">
   <button id="switch_renderer_button" type="button" class="button setting_button" onClick="switch_renderer();"></button>
   <br>
-  <span id="renderer_help" style="font-size: 70%;"></span>
+  <div id="renderer_help" style="font-size: 70%; max-width: 450px;"></div>
 </div>
 
 

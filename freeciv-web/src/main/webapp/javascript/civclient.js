@@ -639,10 +639,40 @@ function switch_renderer()
     $("#canvas_div").empty();
     init_mapview();
     set_default_mapview_active();
-    center_tile_mapcanvas(map_pos_to_tile(15,15));
-    advance_unit_focus();
     requestAnimationFrame(update_map_canvas_check, mapview_canvas);
     mapctrl_init_2d();
+
+    for (var tile_id in tiles) {
+      if (tile_get_known(tiles[tile_id]) == TILE_KNOWN_SEEN) {
+        center_tile_mapcanvas(tiles[tile_id]);
+        break;
+      }
+    }
+
+    // reset 3D WebGL data
+    for (var tile_id in tiles) {
+      tiles[tile_id]['height'] = 0;
+    }
+    scene = null;
+    heightmap = {};
+    unit_positions = {};
+    city_positions = {};
+    city_label_positions = {};
+    city_walls_positions = {};
+    unit_flag_positions = {};
+    unit_label_positions = {};
+    unit_activities_positions = {};
+    unit_health_positions = {};
+    unit_healthpercentage_positions = {};
+    forest_positions = {};
+    jungle_positions = {};
+    tile_extra_positions = {};
+    road_positions = {};
+    rail_positions = {};
+    river_positions = {};
+    tiletype_palette = [];
+    meshes = {};
+    load_count = 0;
 
   } else {
     //activate 3D WebGL renderer

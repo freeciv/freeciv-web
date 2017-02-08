@@ -615,6 +615,21 @@ function webgl_clear_unit_focus()
 ****************************************************************************/
 function add_all_objects_to_scene()
 {
+  unit_positions = {};
+  city_positions = {};
+  city_label_positions = {};
+  city_walls_positions = {};
+  unit_flag_positions = {};
+  unit_label_positions = {};
+  unit_activities_positions = {};
+  unit_health_positions = {};
+  unit_healthpercentage_positions = {};
+  forest_positions = {};
+  jungle_positions = {};
+  tile_extra_positions = {};
+  road_positions = {};
+  rail_positions = {};
+  river_positions = {};
 
   for (var unit_id in units) {
     var punit = units[unit_id];

@@ -18,14 +18,6 @@
 ***********************************************************************/
 
 $(document).ready(function() {
-  $("#feedback_submit").click(function() {
-    $.ajax({
-      url: "/feedbackform.php?feedback=" + $("#feedback_form").val()
-    }).done(function( html ) {
-      alert("Thanks for your feedback!");
-    });
-  });
-
     if (navigator.userAgent.toLowerCase().indexOf('android') > -1) {
       $("#chromews").hide();
       $("#windowsstore").hide();

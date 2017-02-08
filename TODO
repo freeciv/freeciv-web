@@ -43,6 +43,20 @@ Minor/Other:
 - Separate chat box from other messages.
 
 User Interface:
+- The pregame settings dialog may mislead the user
+  - It won't update a displayed setting value changed by someone else.
+    - Example: Another player changes the value of a setting.
+    - Example: The player changes the ruleset. This changes a setting.
+    - The servers informs the client about setting value changes. Those
+      updates should be forwarded to any open pregame settings dialog.
+  - Loading a ruleset overwrites previous setting changes.
+    - The player isn't warned that changing the ruleset will overwrite
+      existing setting changes. Unless the player reads the server messages
+      he may not be aware of what just happened.
+      - note that the pregame settings dialog won't show the new (ruleset
+        provided) setting values before it is closed and reopened.
+    - The player isn't encouraged to choose ruleset before choosing nation.
+      - Example: https://www.youtube.com/watch?v=WVn9z2623Kk
 - Does the Go To And Do X user interaction style fit Freeciv-web's UI design?
   - The goto system handles "must have moves left to perform this action" rules
     - Could perhaps avoid some user confusion? See https://youtu.be/tNYqzg2HwRE?t=5m46s

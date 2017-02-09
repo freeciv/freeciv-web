@@ -104,9 +104,7 @@ casper.test.begin('Test starting new Freeciv-web game', 10, function suite(test)
       }
     });
 
-    casper.waitForText("Ok", function() {
-      this.echo("Clicking Ok in Intro dialog.");
-      this.clickLabel('Ok');
+    casper.waitForText("World map", function() {
       this.echo("Captured screenshot to be saved as screenshot-2.png");
       this.capture('screenshot-2.png', undefined, {
         format: 'png',
@@ -193,7 +191,7 @@ casper.test.begin('Test webperimental', 1, function suite(test) {
 
   casper.waitForSelector('#pregame_settings_button', function() {
     this.echo("Opening pre game settings dialog.");
-    this.clickLabel("Game Settings");
+    this.click('#pregame_settings_button');
   });
 
   casper.waitForSelector('#ruleset', function() {
@@ -206,14 +204,10 @@ casper.test.begin('Test webperimental', 1, function suite(test) {
   });
 
   casper.waitForText(
-        '/rulesetdir: Ruleset directory set to "webperimental"',
+        "Map",
         function() {
           test.pass("Loaded webperimental.");
-        },
-        function() {
-          test.fail("Failed to load webperimental.");
-        },
-        12000);
+        });
 
   casper.run(function() {
     test.done();

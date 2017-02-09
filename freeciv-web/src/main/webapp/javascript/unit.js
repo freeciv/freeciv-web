@@ -212,7 +212,7 @@ function update_unit_anim_list(old_unit, new_unit)
 
   if (anim_units_count > anim_units_max) return;
 
-  if (!is_unit_visible(new_unit)) return;
+  if (renderer == RENDERER_2DCANVAS && !is_unit_visible(new_unit)) return;
 
   if (old_unit['anim_list'] == null) old_unit['anim_list'] = [];
 
@@ -252,7 +252,7 @@ function update_unit_anim_list(old_unit, new_unit)
 
 /**************************************************************************
   Determines the pixel offset for the specified unit, based on the units
-  anim list. This is how Freeciv.net does unit animations.
+  anim list. This is how Freeciv-web does unit animations.
 **************************************************************************/
 function get_unit_anim_offset(punit)
 {
@@ -334,7 +334,8 @@ function get_unit_homecity_name(punit)
 **************************************************************************/
 function is_unit_visible(punit)
 {
-  if (punit == null || punit['tile'] == null) return;
+  if (punit == null || punit['tile'] == null) return false;
+  if (renderer == RENDERER_WEBGL) return false;  // not supported by 3D version.
 
   var u_tile = index_to_tile(punit['tile']);
   var r = map_to_gui_pos(u_tile['x'], u_tile['y']);

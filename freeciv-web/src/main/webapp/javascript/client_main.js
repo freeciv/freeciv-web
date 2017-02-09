@@ -192,6 +192,7 @@ function client_is_observer()
 **************************************************************************/
 function show_new_game_message()
 {
+  chatbox_text = ' ';
 
   if (observing || $.getUrlVar('autostart') == "true") {
     return;
@@ -199,15 +200,13 @@ function show_new_game_message()
   } else if (is_hotseat()) {
     show_hotseat_new_phase();
   } else if (is_pbem()) {
-    show_dialog_message("Welcome to Freeciv-web: Play-By-Email.",
-      "Welcome " + username + "! It is now your turn to play. Each player will " + 
+    add_chatbox_text("Welcome " + username + "! It is now your turn to play. Each player will " +
       "get an e-mail when it is their turn to play, and can only play one turn at a time. " +
       "Click the end turn button to end your turn and let the next opponent play.");
     setTimeout(check_queued_tech_gained_dialog, 2500);
 
   } else if (is_small_screen()) {
-    show_dialog_message("Welcome to Freeciv-web",
-      "Welcome " + username + "! You lead a great civilization. Your task is to conquer the world!\n" +
+    add_chatbox_text("Welcome " + username + "! You lead a great civilization. Your task is to conquer the world!\n" +
       "Click on units for giving them orders, and drag units on the map to move them.\n" +
       "Good luck, and have a lot of fun!");
 
@@ -217,8 +216,7 @@ function show_new_game_message()
         + nations[pplayer['nation']]['adjective'] + " empire.";
 
     if (is_touch_device()) {
-      show_dialog_message("Welcome to Freeciv-web",
-      player_nation_text + " Your\n" +
+      add_chatbox_text(player_nation_text + " Your\n" +
       "task is to create a great empire! You should start by\n" +
       "exploring the land around you with your explorer,\n" +
       "and using your settlers to find a good place to build\n" +
@@ -228,8 +226,7 @@ function show_new_game_message()
       "Good luck, and have a lot of fun!");
 
     } else {
-      show_dialog_message("Welcome to Freeciv-web",
-      player_nation_text + " Your\n" +
+      add_chatbox_text(player_nation_text + " Your\n" +
       "task is to create a great empire! You should start by\n" +
       "exploring the land around you with your explorer,\n" +
       "and using your settlers to find a good place to build\n" +
@@ -248,7 +245,7 @@ function show_new_game_message()
 function alert_war(player_no)
 {
   var pplayer = players[player_no];
-  show_dialog_message("War!", "You are now at war with the "
+  add_chatbox_text("War: You are now at war with the "
 	+ nations[pplayer['nation']]['adjective']
     + " leader " + pplayer['name'] + "!");
 }
@@ -306,10 +303,6 @@ function update_metamessage_on_gamestart()
     var pplayer = client.conn.playing;
     var metasuggest = username + " ruler of the " + nations[pplayer['nation']]['adjective'] + ".";
     send_message("/metamessage " + metasuggest);
-    setTimeout(function () {
-                 chatbox_text = ' ';
-                 add_chatbox_text('');
-               }, 800);
   }
 
   if ($.getUrlVar('action') == "new" || $.getUrlVar('action') == "earthload" 

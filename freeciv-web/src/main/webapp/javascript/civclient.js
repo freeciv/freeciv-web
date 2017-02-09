@@ -201,10 +201,10 @@ function init_common_intro_dialog() {
   } else {
     show_intro_dialog("Welcome to Freeciv-web",
       "You are about to join this game server, where you can " +
-      "play a singleplayer game against the Freeciv AI.<br> You can " +
-      "start the game directly by entering any name, or customize the game settings.<br>" +
+      "play a singleplayer game against the Freeciv AI. You can " +
+      "start the game directly by entering any name, or customize the game settings. " +
       "Creating a user account is optional, but savegame support requires that you create a user account.<br>" +
-      "Please enter your username: ");
+      "Please enter your name: ");
   }
 }
 

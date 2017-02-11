@@ -138,7 +138,7 @@ public class Metaserver extends HttpServlet {
 			"type", "available", "humans", "serverid" };
 
 	@Override
-	public void dbGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String query = null;
 		Connection conn = null;

@@ -288,18 +288,18 @@ public class Metaserver extends HttpServlet {
 		// consorts would all return null when using multipart form data.
 		// @see:
 		// http://stackoverflow.com/questions/2422468/how-to-upload-files-to-server-using-jsp-servlet
-		String serverIsStopping;
-		String sHost;
-		String sPort;
-		String dropPlayers;
+		String serverIsStopping = null;
+		String sHost = null;
+		String sPort = null;
+		String dropPlayers = null;
 
 		List<String> sPlUser = new ArrayList<String>();
 		List<String> sPlName = new ArrayList<String>();
-		List<String> sPlNation =  new ArrayList<String>();
-		List<String> sPlFlag =  new ArrayList<String>();
-		List<String> sPlType =  new ArrayList<String>();
-		List<String> sPlHost =  new ArrayList<String>();
-		List<String> variableNames =  new ArrayList<String>();
+		List<String> sPlNation = new ArrayList<String>();
+		List<String> sPlFlag = new ArrayList<String>();
+		List<String> sPlType = new ArrayList<String>();
+		List<String> sPlHost = new ArrayList<String>();
+		List<String> variableNames = new ArrayList<String>();
 		List<String> variableValues = new ArrayList<String>();
 
 		Map<String, String> serverVariables = new HashMap<>();

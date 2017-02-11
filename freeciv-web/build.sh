@@ -5,9 +5,6 @@ TOMCATDIR="/var/lib/tomcat8"
 DATADIR="/var/lib/tomcat8/webapps/data/"
 ROOTDIR="$(pwd)/.."
 
-( cd src/main/webapp/meta/private
-  ./build_flagspec.sh ${ROOTDIR}/freeciv/freeciv/data/misc/flags.spec )
-
 # Creating build.txt info file
 REVTMP="$(git rev-parse HEAD 2>/dev/null)"
 if test "x$REVTMP" != "x" ; then

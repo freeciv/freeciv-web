@@ -1,6 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@ taglib uri="/WEB-INF/tags/flags.tld" prefix="fl" %> 
 
 <!DOCTYPE html>
 <html lang="en">
@@ -131,8 +130,7 @@
 										${game.player}
 									</td>
 									<td>
-										<!-- @TODO flag goes here -->
-										<img src="/images/${fl:flagPath(game.flag)}" alt="${game.flag}" width="50">
+										<img src="/images/flags/${game.flag}-web.png" alt="${game.flag}" width="50">
 									</td>
 									<td>
 										${game.turn}

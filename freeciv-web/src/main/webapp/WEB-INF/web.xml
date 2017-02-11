@@ -221,11 +221,4 @@
     <welcome-file>index.php</welcome-file>
   </welcome-file-list>
 
-  <jsp-config>
-      <taglib>
-          <taglib-uri>/WEB-INF/tags/flags.tld</taglib-uri>
-          <taglib-location>/WEB-INF/tags/flags.tld</taglib-location>
-      </taglib>
-  </jsp-config>
-
 </web-app>

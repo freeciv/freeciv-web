@@ -79,7 +79,6 @@ public class ServerStatistics extends HttpServlet {
 					.append(rs.getInt(2)) //
 					.append(';') //
 					.append(rs.getInt(3)) //
-					.append(';') //
 					.toString();
 
 			ZonedDateTime expires = ZonedDateTime.now(ZoneId.of("UTC")).plusHours(1);

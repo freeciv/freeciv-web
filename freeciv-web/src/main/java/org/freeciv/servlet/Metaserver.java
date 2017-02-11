@@ -264,6 +264,7 @@ public class Metaserver extends HttpServlet {
 						statement.setString(1, hostPort);
 						statement.setString(2, variableNames[i]);
 						statement.setString(3, variableValues[i]);
+						statement.executeUpdate();
 					}
 				} catch (IndexOutOfBoundsException e) {
 					response.setContentType(CONTENT_TYPE);
@@ -271,8 +272,6 @@ public class Metaserver extends HttpServlet {
 					response.getOutputStream().print(BAD_REQUEST);
 					return;
 				}
-
-				statement.executeUpdate();
 
 			}
 

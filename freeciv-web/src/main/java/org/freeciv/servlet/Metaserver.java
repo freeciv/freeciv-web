@@ -23,7 +23,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -134,8 +133,22 @@ public class Metaserver extends HttpServlet {
 			.put("error", "Bad Request.") //
 			.toString();
 
-	private static final String[] SERVER_COLUMNS = { "version", "patches", "capability", "state", "ruleset", "message",
-			"type", "available", "humans", "serverid" };
+	private static final List<String> SERVER_COLUMNS = new ArrayList<>();
+
+	static {
+		SERVER_COLUMNS.add("version");
+		SERVER_COLUMNS.add("patches");
+		SERVER_COLUMNS.add("capability");
+		SERVER_COLUMNS.add("state");
+		SERVER_COLUMNS.add("ruleset");
+		SERVER_COLUMNS.add("message");
+		SERVER_COLUMNS.add("type");
+		SERVER_COLUMNS.add("available");
+		SERVER_COLUMNS.add("humans");
+		SERVER_COLUMNS.add("serverid");
+		SERVER_COLUMNS.add("host");
+		SERVER_COLUMNS.add("port");
+	}
 
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -315,9 +328,11 @@ public class Metaserver extends HttpServlet {
 				break;
 			case "host":
 				sHost = IOUtils.toString(part.getInputStream());
+				serverVariables.put(part.getName(), sHost);
 				break;
 			case "port":
 				sPort = IOUtils.toString(part.getInputStream());
+				serverVariables.put(part.getName(), sPort);
 				break;
 			case "plu[]":
 				sPlUser.add(IOUtils.toString(part.getInputStream()));
@@ -344,8 +359,7 @@ public class Metaserver extends HttpServlet {
 				variableValues.add(IOUtils.toString(part.getInputStream()));
 				break;
 			default:
-				List<String> columns = Arrays.asList(SERVER_COLUMNS);
-				if (columns.contains(part.getName())) {
+				if (SERVER_COLUMNS.contains(part.getName())) {
 					serverVariables.put(part.getName(), IOUtils.toString(part.getInputStream()));
 				}
 				break;
@@ -371,6 +385,7 @@ public class Metaserver extends HttpServlet {
 
 		String hostPort = sHost + ':' + sPort;
 
+		StringBuilder query = null;
 		Connection conn = null;
 		PreparedStatement statement = null;
 		try {
@@ -395,16 +410,19 @@ public class Metaserver extends HttpServlet {
 				return;
 			}
 
-			if ((!sPlUser.isEmpty()) && (!sPlName.isEmpty()) && (!sPlNation.isEmpty()) && (!sPlFlag.isEmpty())
-					&& (!sPlType.isEmpty()) && (!sPlHost.isEmpty())) {
+			boolean isSettingPlayers = !sPlUser.isEmpty() && !sPlName.isEmpty() //
+					&& !sPlNation.isEmpty() && !sPlFlag.isEmpty() //
+					&& !sPlType.isEmpty() && !sPlHost.isEmpty();
+
+			if (isSettingPlayers || (dropPlayers != null)) {
+
+				statement = conn.prepareStatement("DELETE FROM players WHERE hostport= ?");
+				statement.setString(1, hostPort);
+				statement.executeUpdate();
 
 				if (dropPlayers != null) {
-					statement = conn.prepareStatement("DELETE FROM players WHERE hostport= ?");
-					statement.setString(1, hostPort);
-					statement.executeUpdate();
-
 					statement = conn.prepareStatement(
-							"UPDATE servers SET available = 0, humans = -1 WHERE host= ? and port = ?");
+							"UPDATE servers SET available = 0, humans = -1 WHERE host = ? and port = ?");
 					statement.setString(1, sHost);
 					statement.setInt(2, port);
 					statement.executeUpdate();
@@ -465,22 +483,40 @@ public class Metaserver extends HttpServlet {
 			statement.setInt(2, port);
 			ResultSet rs = statement.executeQuery();
 
-			StringBuilder query = null;
-			if (rs.next() && (rs.getInt(1) == 1)) {
+			boolean serverExists = rs.next() && (rs.getInt(1) == 1);
+
+			if (serverExists) {
 				query = new StringBuilder("UPDATE servers SET ");
 			} else {
 				query = new StringBuilder("INSERT INTO servers SET ");
 			}
 
-			for (String parameter : serverVariables.keySet()) {
+			List<String> setServerVariables = new ArrayList<>(serverVariables.keySet());
+			for (String parameter : setServerVariables) {
 				query.append(parameter).append(" = ?, ");
 			}
 			query.append(" stamp = NOW()");
 
+			if (serverExists) {
+				query.append("WHERE host = ? AND port = ?");
+			}
+
 			statement = conn.prepareStatement(query.toString());
 			int i = 1;
-			for (String parameter : serverVariables.keySet()) {
-				statement.setString(i++, serverVariables.get(parameter));
+			for (String parameter : setServerVariables) {
+				switch (parameter) {
+				case "port":
+				case "available":
+					statement.setInt(i++, Integer.parseInt(serverVariables.get(parameter)));
+					break;
+				default:
+					statement.setString(i++, serverVariables.get(parameter));
+					break;
+				}
+			}
+			if (serverExists) {
+				statement.setString(i++, sHost);
+				statement.setInt(i++, port);
 			}
 			statement.executeUpdate();
 

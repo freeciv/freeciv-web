@@ -48,7 +48,7 @@ tornado_url="https://github.com/tornadoweb/tornado/archive/v4.4.1.tar.gz"
 casperjs_url="https://github.com/casperjs/casperjs/zipball/1.1.3"
 
 # Based on fresh install of Ubuntu 16.04
-dependencies="maven mysql-server openjdk-8-jdk-headless libcurl4-openssl-dev nginx libjansson-dev subversion pngcrush python3-pillow libtool automake autoconf autotools-dev language-pack-en python-minimal python3.6-dev python3-setuptools libbz2-dev imagemagick python3-pip dos2unix liblzma-dev xvfb libicu-dev pkg-config zlib1g-dev libsdl1.2-dev tomcat8 tomcat8-admin php7.0-common php7.0-cli php7.0-fpm php7.0-mysql unzip phantomjs zip"
+dependencies="maven mysql-server openjdk-8-jdk-headless libcurl4-openssl-dev nginx libjansson-dev subversion pngcrush python3-pillow libtool automake autoconf autotools-dev language-pack-en python-minimal python3.6-dev python3-setuptools libbz2-dev imagemagick python3-pip dos2unix liblzma-dev xvfb libicu-dev pkg-config zlib1g-dev libsdl1.2-dev tomcat8 tomcat8-admin unzip phantomjs zip"
 
 ## Setup
 mkdir -p ${basedir}
@@ -94,7 +94,6 @@ mysql -u ${mysql_user} -p${mysql_pass} freeciv_web < ${basedir}/freeciv-web/src/
 dos2unix ${basedir}/scripts/configuration.sh.dist
 sed -e "s/MYSQL_USER=root/MYSQL_USER=${mysql_user}/" -e "s/MYSQL_PASSWORD=changeme/MYSQL_PASSWORD=${mysql_pass}/" ${basedir}/scripts/configuration.sh.dist > ${basedir}/scripts/configuration.sh
 cp ${basedir}/publite2/settings.ini.dist ${basedir}/publite2/settings.ini
-cp ${basedir}/freeciv-web/src/main/webapp/meta/php_code/local.php.dist ${basedir}/freeciv-web/src/main/webapp/meta/php_code/local.php
 cp ${basedir}/freeciv-web/src/main/webapp/META-INF/context.xml.dist ${basedir}/freeciv-web/src/main/webapp/META-INF/context.xml
 
 dos2unix ${basedir}/scripts/configuration.sh.dist
@@ -121,7 +120,6 @@ cp ${basedir}/pbem/settings.ini.dist ${basedir}/pbem/settings.ini
 
 service nginx stop
 rm /etc/nginx/sites-enabled/default
-sed -i.bak -e "s/php7/php\/php7.0/" ${basedir}/publite2/nginx.conf 
 cp ${basedir}/publite2/nginx.conf /etc/nginx/
 
 # add Freeciv-web scripts to path

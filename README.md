@@ -28,8 +28,8 @@ Freeciv-Web consists of these components:
 * [Freeciv-web](freeciv-web) - a Java web application for the Freeciv-web client.
   This application is a Java web application which make up the application
   viewed in each user's web browser. The Metaserver is also a part of this module.
-  Implemented in Javascript, Java, JSP, PHP, HTML and CSS. Built with maven and runs 
-  on Tomcat 8, nginx and php-fpm.
+  Implemented in Javascript, Java, JSP, HTML and CSS. Built with maven and runs 
+  on Tomcat 8 and nginx.
 
 * [Freeciv](freeciv) - the Freeciv C server, which is checked out from the official
   svn repository, and patched to work with a WebSocket/JSON protocol. Implemented in C.
@@ -122,8 +122,6 @@ Install this software if you are not running Freeciv-web with Vagrant:
 - OpenSSL - http://www.openssl.org/
 
 - nginx 1.11.x or later - http://nginx.org/
-
-- PHP-FPM - FastCGI Process Manager for PHP - http://php-fpm.org/
 
 - MySQL Connector/Python - https://github.com/mysql/mysql-connector-python
 

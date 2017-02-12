@@ -11,9 +11,6 @@ if [ "$(pidof nginx)" ] ; then
   sudo killall nginx
 fi
 
-# 1.1 PHP7-FPM
-sudo service php7-fpm stop || sudo service php5-fpm stop || echo "unable to stop php"
-
 # 2. Tomcat
 if service --status-all | grep -Fq 'tomcat8'; then
  sudo service tomcat8 stop || echo "unable to stop tomcat8 service"
@@ -22,5 +19,3 @@ else
 
 fi
 
-# 2. Resin
-#${FREECIV_WEB_DIR}/resin/bin/resin.sh stop

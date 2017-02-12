@@ -23,27 +23,6 @@ else
   sleep 1
 fi
 
-if  type php7.0 > /dev/null; then
-  echo "Starting php7.0-fpm"
-  if [ "$(pidof php7.0-fpm)" ]
-  then
-    echo "php7.0-fpm already running!"
-  else
-    echo "starting php7.0-fpm"
-    sudo service php7.0-fpm start
-  fi
-else
-  echo "Starting php5.0-fpm"
-  if [ "$(pidof php5-fpm)" ]
-  then
-    echo "php5.0-fpm already running!"
-  else
-    echo "starting php5-fpm"
-    sudo service php5-fpm start
-  fi
-fi
-
-
 # 2. Tomcat
 echo "Starting up Tomcat" && \
 if service --status-all | grep -Fq 'tomcat8'; then

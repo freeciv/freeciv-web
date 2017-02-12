@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app id="Freeciv" version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 
-
-
   <display-name>Freeciv-web Client</display-name>
-
 
   <resource-ref>
       <description>MySQL DB Connection</description>
@@ -12,7 +9,6 @@
       <res-type>javax.sql.DataSource</res-type>
       <res-auth>Container</res-auth>
   </resource-ref>
-
 
   <!-- /civclientlauncher   (game launcher servlet) -->
   <servlet>
@@ -126,6 +122,94 @@
     <url-pattern>/freeciv_time_played_stats</url-pattern>
   </servlet-mapping>
 
+  <!-- /meta/cleanup.php -->
+  <servlet>
+    <servlet-name>CleanupServers</servlet-name>
+    <servlet-class>org.freeciv.servlet.CleanupServers</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>CleanupServers</servlet-name>
+    <url-pattern>/meta/cleanup.php</url-pattern>
+  </servlet-mapping>
+
+  <!-- /meta/fpinfo.php -->
+  <servlet>
+    <servlet-name>ServerStatistics</servlet-name>
+    <servlet-class>org.freeciv.servlet.ServerStatistics</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>ServerStatistics</servlet-name>
+    <url-pattern>/meta/fpinfo.php</url-pattern>
+  </servlet-mapping>
+
+  <!-- /meta/fpmultimeta.php -->
+  <servlet>
+    <servlet-name>ListMuliplayerGames</servlet-name>
+    <servlet-class>org.freeciv.servlet.ListMuliplayerGames</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>ListMuliplayerGames</servlet-name>
+    <url-pattern>/meta/fpmultimeta.php</url-pattern>
+  </servlet-mapping>
+
+  <!-- /meta/pbem_games_report.php -->
+  <servlet>
+    <servlet-name>PlayByEmailStatistics</servlet-name>
+    <servlet-class>org.freeciv.servlet.PlayByEmailStatistics</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>PlayByEmailStatistics</servlet-name>
+    <url-pattern>/meta/pbem_games_report.php</url-pattern>
+  </servlet-mapping>
+
+  <!-- /meta/status.php -->
+  <servlet>
+    <servlet-name>RecentServerStatistics</servlet-name>
+    <servlet-class>org.freeciv.servlet.RecentServerStatistics</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>RecentServerStatistics</servlet-name>
+    <url-pattern>/meta/status.php</url-pattern>
+  </servlet-mapping>
+
+  <!-- /meta/games-stats.php -->
+  <servlet>
+    <servlet-name>GameTypeStatistics</servlet-name>
+    <servlet-class>org.freeciv.servlet.GameTypeStatistics</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>GameTypeStatistics</servlet-name>
+    <url-pattern>/meta/games-stats.php</url-pattern>
+  </servlet-mapping>
+
+  <!-- /meta/pbem_top_players.php -->
+  <servlet>
+    <servlet-name>PlayByEmailTopPlayers</servlet-name>
+    <servlet-class>org.freeciv.servlet.PlayByEmailTopPlayers</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>PlayByEmailTopPlayers</servlet-name>
+    <url-pattern>/meta/pbem_top_players.php</url-pattern>
+  </servlet-mapping>
+
+  <!-- /meta/metaserver.php -->
+  <servlet>
+    <servlet-name>Metaserver</servlet-name>
+    <servlet-class>org.freeciv.servlet.Metaserver</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>Metaserver</servlet-name>
+    <url-pattern>/meta/metaserver.php</url-pattern>
+  </servlet-mapping>
+
   <context-param>
     <param-name>buildTimeStamp</param-name>
     <param-value>${timestamp}</param-value>
@@ -136,7 +220,5 @@
     <welcome-file>index.jsp</welcome-file>
     <welcome-file>index.php</welcome-file>
   </welcome-file-list>
-
-  
 
 </web-app>

@@ -34,7 +34,7 @@ casperjs_url="https://github.com/casperjs/casperjs/zipball/1.1.3"
 tomcat_url="https://bitbucket.org/andreasrosdal/fcweb/downloads/apache-tomcat-8.0.33.tar.gz"
 
 # Based on fresh install of Ubuntu 14.04
-dependencies="mysql-server-5.6 mysql-client-core-5.6 mysql-client-5.6 maven openjdk-7-jdk libcurl4-openssl-dev subversion pngcrush libtool automake autoconf autotools-dev language-pack-en python3-setuptools python3.4 python3.4-dev imagemagick liblzma-dev xvfb libicu-dev libsdl1.2-dev libjansson-dev php5-common php5-cli php5-fpm php5-mysql dos2unix zip"
+dependencies="mysql-server-5.6 mysql-client-core-5.6 mysql-client-5.6 maven openjdk-7-jdk libcurl4-openssl-dev subversion pngcrush libtool automake autoconf autotools-dev language-pack-en python3-setuptools python3.4 python3.4-dev imagemagick liblzma-dev xvfb libicu-dev libsdl1.2-dev libjansson-dev dos2unix zip"
 
 ## dependencies
 echo "==== Installing Updates and Dependencies ===="
@@ -85,7 +85,6 @@ cd freeciv && sudo -u travis make install
 
 echo "==== Building freeciv-web ===="
 cd /var/lib/tomcat8 && sudo chmod -R 777 webapps logs && setfacl -d -m g::rwx webapps && sudo chown -R www-data:www-data webapps/
-sed -e "s/vagrant//" ${basedir}/freeciv-web/src/main/webapp/meta/php_code/local.php.dist > ${basedir}/freeciv-web/src/main/webapp/meta/php_code/local.php
 sed -e "s/vagrant//" ${basedir}/freeciv-web/src/main/webapp/META-INF/context.xml.dist > ${basedir}/freeciv-web/src/main/webapp/META-INF/context.xml
 cp ${basedir}/freeciv-web/src/main/webapp/WEB-INF/config.properties.dist ${basedir}/freeciv-web/src/main/webapp/WEB-INF/config.properties
 sed -i.bak -e "s/vagrant//" ${basedir}/freeciv-web/flyway.properties.dist
@@ -105,7 +104,6 @@ make > nginx-log-file 2>&1
 make install
 
 
-sed -i.bak -e "s/php7/php5/" ${basedir}/publite2/nginx.conf 
 cp ${basedir}/publite2/nginx.conf /usr/local/nginx/conf/
 sed -e "s/vagrant//" ${basedir}/pbem/settings.ini.dist > ${basedir}/pbem/settings.ini
 

@@ -23,7 +23,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,10 +36,8 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 import javax.sql.DataSource;
 
-import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
 
 /**
@@ -295,80 +293,43 @@ public class Metaserver extends HttpServlet {
 			return;
 		}
 
-		// Before Servlet 3.0, the Servlet API didn't natively support
-		// multipart/form-data. It supports only the default form enctype of
-		// application/x-www-form-urlencoded. The request.getParameter() and
-		// consorts would all return null when using multipart form data.
-		// @see:
-		// http://stackoverflow.com/questions/2422468/how-to-upload-files-to-server-using-jsp-servlet
-		String serverIsStopping = null;
-		String sHost = null;
-		String sPort = null;
-		String dropPlayers = null;
+		String serverIsStopping = request.getParameter("bye");
+		String sHost = request.getParameter("host");
+		String sPort = request.getParameter("port");
+		String dropPlayers = request.getParameter("dropplrs");
 
-		List<String> sPlUser = new ArrayList<String>();
-		List<String> sPlName = new ArrayList<String>();
-		List<String> sPlNation = new ArrayList<String>();
-		List<String> sPlFlag = new ArrayList<String>();
-		List<String> sPlType = new ArrayList<String>();
-		List<String> sPlHost = new ArrayList<String>();
-		List<String> variableNames = new ArrayList<String>();
-		List<String> variableValues = new ArrayList<String>();
+		List<String> sPlUser = request.getParameterValues("plu[]") == null ? null
+				: Arrays.asList(request.getParameterValues("plu[]"));
+		List<String> sPlName = request.getParameterValues("pll[]") == null ? null
+				: Arrays.asList(request.getParameterValues("pll[]"));
+		List<String> sPlNation = request.getParameterValues("pln[]") == null ? null
+				: Arrays.asList(request.getParameterValues("pln[]"));
+		List<String> sPlFlag = request.getParameterValues("plf[]") == null ? null
+				: Arrays.asList(request.getParameterValues("plf[]"));
+		List<String> sPlType = request.getParameterValues("plt[]") == null ? null
+				: Arrays.asList(request.getParameterValues("plt[]"));
+		List<String> sPlHost = request.getParameterValues("plh[]") == null ? null
+				: Arrays.asList(request.getParameterValues("plh[]"));
+		List<String> variableNames = request.getParameterValues("vn[]") == null ? null
+				: Arrays.asList(request.getParameterValues("vn[]"));
+		List<String> variableValues = request.getParameterValues("vv[]") == null ? null
+				: Arrays.asList(request.getParameterValues("vv[]"));
 
 		Map<String, String> serverVariables = new HashMap<>();
-
-		Collection<Part> parts = request.getParts();
-		for (Part part : parts) {
-			switch (part.getName()) {
-			case "dropplrs":
-				dropPlayers = IOUtils.toString(part.getInputStream());
-				break;
-			case "bye":
-				serverIsStopping = IOUtils.toString(part.getInputStream());
-				break;
-			case "host":
-				sHost = IOUtils.toString(part.getInputStream());
-				serverVariables.put(part.getName(), sHost);
-				break;
-			case "port":
-				sPort = IOUtils.toString(part.getInputStream());
-				serverVariables.put(part.getName(), sPort);
-				break;
-			case "plu[]":
-				sPlUser.add(IOUtils.toString(part.getInputStream()));
-				break;
-			case "pll[]":
-				sPlName.add(IOUtils.toString(part.getInputStream()));
-				break;
-			case "pln[]":
-				sPlNation.add(IOUtils.toString(part.getInputStream()));
-				break;
-			case "plf[]":
-				sPlFlag.add(IOUtils.toString(part.getInputStream()));
-				break;
-			case "plt[]":
-				sPlType.add(IOUtils.toString(part.getInputStream()));
-				break;
-			case "plh[]":
-				sPlHost.add(IOUtils.toString(part.getInputStream()));
-				break;
-			case "vn[]":
-				variableNames.add(IOUtils.toString(part.getInputStream()));
-				break;
-			case "vv[]":
-				variableValues.add(IOUtils.toString(part.getInputStream()));
-				break;
-			default:
-				if (SERVER_COLUMNS.contains(part.getName())) {
-					serverVariables.put(part.getName(), IOUtils.toString(part.getInputStream()));
-				}
-				break;
+		for (String serverParameter : SERVER_COLUMNS) {
+			String parameter = request.getParameter(serverParameter);
+			if (parameter != null) {
+				serverVariables.put(serverParameter, parameter);
 			}
-			IOUtils.closeQuietly(part.getInputStream());
 		}
 
+		// Data validation
+		String query = null;
 		int port = 0;
 		try {
+			if (sPort == null) {
+				throw new IllegalArgumentException("Port must be supplied.");
+			}
 			port = Integer.parseInt(sPort);
 			if ((port < 1024) || (port > 65535)) {
 				throw new IllegalArgumentException("Invalid port supplied. Expected a number between 1024 and 65535");
@@ -384,8 +345,6 @@ public class Metaserver extends HttpServlet {
 		}
 
 		String hostPort = sHost + ':' + sPort;
-
-		StringBuilder query = null;
 		Connection conn = null;
 		PreparedStatement statement = null;
 		try {
@@ -395,62 +354,67 @@ public class Metaserver extends HttpServlet {
 			conn = ds.getConnection();
 
 			if (serverIsStopping != null) {
-				statement = conn.prepareStatement("DELETE FROM servers WHERE host = ? AND port = ?");
+				query = "DELETE FROM servers WHERE host = ? AND port = ?";
+				statement = conn.prepareStatement(query);
 				statement.setString(1, sHost);
 				statement.setInt(2, port);
 				statement.executeUpdate();
 
-				statement = conn.prepareStatement("DELETE FROM variables WHERE hostport = ?");
+				query = "DELETE FROM variables WHERE hostport = ?";
+				statement = conn.prepareStatement(query);
 				statement.setString(1, hostPort);
 				statement.executeUpdate();
 
-				statement = conn.prepareStatement("DELETE FROM players WHERE hostport = ?");
+				query = "DELETE FROM players WHERE hostport = ?";
+				statement = conn.prepareStatement(query);
 				statement.setString(1, hostPort);
 				statement.executeUpdate();
 				return;
 			}
 
-			boolean isSettingPlayers = !sPlUser.isEmpty() && !sPlName.isEmpty() //
-					&& !sPlNation.isEmpty() && !sPlFlag.isEmpty() //
-					&& !sPlType.isEmpty() && !sPlHost.isEmpty();
+			boolean isSettingPlayers = (sPlUser != null) && !sPlUser.isEmpty() //
+					&& (sPlName != null) && !sPlName.isEmpty() //
+					&& (sPlNation != null) && !sPlNation.isEmpty() //
+					&& (sPlFlag != null) && !sPlFlag.isEmpty() //
+					&& (sPlType != null) && !sPlType.isEmpty() //
+					&& (sPlHost != null) && !sPlHost.isEmpty();
 
 			if (isSettingPlayers || (dropPlayers != null)) {
-
-				statement = conn.prepareStatement("DELETE FROM players WHERE hostport= ?");
+				query = "DELETE FROM players WHERE hostport = ?";
+				statement = conn.prepareStatement(query);
 				statement.setString(1, hostPort);
 				statement.executeUpdate();
 
 				if (dropPlayers != null) {
-					statement = conn.prepareStatement(
-							"UPDATE servers SET available = 0, humans = -1 WHERE host = ? and port = ?");
+					query = "UPDATE servers SET available = 0, humans = -1 WHERE host = ? AND port = ?";
+					statement = conn.prepareStatement(query);
 					statement.setString(1, sHost);
 					statement.setInt(2, port);
 					statement.executeUpdate();
 				}
 
-				statement = conn.prepareStatement(
-						"INSERT INTO players (hostport, user, name, nation, flag, type, host) VALUES (?, ?, ?, ?, ?, ?, ?)");
+				if (isSettingPlayers) {
 
-				try {
-
-					for (int i = 0; i < sPlUser.size(); i++) {
-						statement.setString(1, hostPort);
-						statement.setString(2, sPlUser.get(i));
-						statement.setString(3, sPlName.get(i));
-						statement.setString(4, sPlNation.get(i));
-						statement.setString(5, sPlFlag.get(i));
-						statement.setString(6, sPlType.get(i));
-						statement.setString(7, sPlHost.get(i));
-						statement.executeUpdate();
+					query = "INSERT INTO players (hostport, user, name, nation, flag, type, host) VALUES (?, ?, ?, ?, ?, ?, ?)";
+					statement = conn.prepareStatement(query);
+					try {
+						for (int i = 0; i < sPlUser.size(); i++) {
+							statement.setString(1, hostPort);
+							statement.setString(2, sPlUser.get(i));
+							statement.setString(3, sPlName.get(i));
+							statement.setString(4, sPlNation.get(i));
+							statement.setString(5, sPlFlag.get(i));
+							statement.setString(6, sPlType.get(i));
+							statement.setString(7, sPlHost.get(i));
+							statement.executeUpdate();
+						}
+					} catch (IndexOutOfBoundsException e) {
+						response.setContentType(CONTENT_TYPE);
+						response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+						response.getOutputStream().print(BAD_REQUEST);
+						return;
 					}
-
-				} catch (IndexOutOfBoundsException e) {
-					response.setContentType(CONTENT_TYPE);
-					response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-					response.getOutputStream().print(BAD_REQUEST);
-					return;
 				}
-
 			}
 
 			// delete this variables that this server might have already set
@@ -460,8 +424,8 @@ public class Metaserver extends HttpServlet {
 
 			if ((!variableNames.isEmpty()) && (!variableValues.isEmpty())) {
 
-				statement = conn.prepareStatement("INSERT INTO variables (hostport, name, value) VALUES (?, ?, ?)");
-
+				query = "INSERT INTO variables (hostport, name, value) VALUES (?, ?, ?)";
+				statement = conn.prepareStatement(query);
 				try {
 					for (int i = 0; i < variableNames.size(); i++) {
 						statement.setString(1, hostPort);
@@ -478,30 +442,33 @@ public class Metaserver extends HttpServlet {
 
 			}
 
-			statement = conn.prepareStatement("SELECT COUNT(*) FROM servers WHERE host = ? and port = ?");
+			query = "SELECT COUNT(*) FROM servers WHERE host = ? and port = ?";
+			statement = conn.prepareStatement(query);
 			statement.setString(1, sHost);
 			statement.setInt(2, port);
 			ResultSet rs = statement.executeQuery();
 
 			boolean serverExists = rs.next() && (rs.getInt(1) == 1);
 
-			if (serverExists) {
-				query = new StringBuilder("UPDATE servers SET ");
-			} else {
-				query = new StringBuilder("INSERT INTO servers SET ");
-			}
-
 			List<String> setServerVariables = new ArrayList<>(serverVariables.keySet());
-			for (String parameter : setServerVariables) {
-				query.append(parameter).append(" = ?, ");
-			}
-			query.append(" stamp = NOW()");
-
+			StringBuilder queryBuilder = new StringBuilder();
 			if (serverExists) {
-				query.append("WHERE host = ? AND port = ?");
+				queryBuilder.append("UPDATE servers SET ");
+				for (String parameter : setServerVariables) {
+					queryBuilder.append(parameter).append(" = ?, ");
+				}
+				queryBuilder.append(" stamp = NOW() ");
+				queryBuilder.append(" WHERE host = ? AND port = ?");
+			} else {
+				queryBuilder = new StringBuilder("INSERT INTO servers SET ");
+				for (String parameter : setServerVariables) {
+					queryBuilder.append(parameter).append(" = ?, ");
+				}
+				queryBuilder.append(" stamp = NOW() ");
 			}
 
-			statement = conn.prepareStatement(query.toString());
+			query = queryBuilder.toString();
+			statement = conn.prepareStatement(query);
 			int i = 1;
 			for (String parameter : setServerVariables) {
 				switch (parameter) {
@@ -533,6 +500,5 @@ public class Metaserver extends HttpServlet {
 				}
 			}
 		}
-
 	}
 }

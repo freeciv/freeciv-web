@@ -20,7 +20,7 @@ $(document).ready(function() {
   });
 
   $.ajax({
-    url: "/meta/pbem_games_report.php",
+    url: "/meta/pbem_games_report",
     dataType: "html",
     cache: true,
     async: true

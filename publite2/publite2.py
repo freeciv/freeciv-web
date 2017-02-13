@@ -2,7 +2,7 @@
 
 '''**********************************************************************
  Publite2 is a process manager which launches multiple Freeciv-web servers.
-    Copyright (C) 2009-2015  The Freeciv-web project
+    Copyright (C) 2009-2017  The Freeciv-web project
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as published by
@@ -31,8 +31,8 @@ from civlauncher import Civlauncher
 import os.path
 
 metahost = "localhost"
-metapath =  "/meta/metaserver.php"
-statuspath =  "/meta/status.php"
+metapath =  "/meta/metaserver"
+statuspath =  "/meta/status"
 settings_file = "settings.ini"
 game_types = ["singleplayer", "multiplayer", "pbem"]
 

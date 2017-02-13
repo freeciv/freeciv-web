@@ -40,7 +40,7 @@ import org.json.JSONObject;
  * Lists: the number of running games, the number of single player games played,
  * and the number of multi player games played.
  *
- * URL: /meta/fpinfo.php
+ * URL: /meta/fpinfo
  */
 public class PlayByEmailStatistics extends HttpServlet {
 	private static final long serialVersionUID = 1L;

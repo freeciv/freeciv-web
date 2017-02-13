@@ -38,7 +38,7 @@ $(document).ready(function() {
 
 
   $.ajax({
-    url: "/meta/fpinfo.php",
+    url: "/meta/fpinfo",
     cache: true
   }).done(function( game_stats ) {
     var stats = game_stats.split(";");
@@ -51,7 +51,7 @@ $(document).ready(function() {
 
 
 $.ajax({
-  url: "/meta/fpmultimeta.php",
+  url: "/meta/fpmultimeta",
   cache: true
 })
   .done(function( html ) {
@@ -60,7 +60,7 @@ $.ajax({
 
 
   $.ajax({
-    url: "/meta/pbem_top_players.php",
+    url: "/meta/pbem_top_players",
     dataType: "html",
     cache: true,
     async: true

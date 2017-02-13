@@ -103,7 +103,7 @@ public class CivclientLauncher extends HttpServlet {
 			/* Validate port */
 			String validateQuery = "SELECT COUNT(*) FROM servers WHERE port = ?";
 			PreparedStatement validateStmt = conn.prepareStatement(validateQuery);
-			if (civServerPort == null) {
+			if (StringUtils.isNullOrEmpty(civServerPort)) {
 				response.setHeader("result", "invalid port validation");
 				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
 						"Unable to find a valid Freeciv server to play on. Please try again later.");

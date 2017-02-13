@@ -36,7 +36,7 @@ import org.json.JSONObject;
 /**
  * Lists: game type statisticts
  *
- * URL: /meta/game-stats.php
+ * URL: /meta/game-stats
  */
 public class GameTypeStatistics extends HttpServlet {
 	private static final long serialVersionUID = 1L;

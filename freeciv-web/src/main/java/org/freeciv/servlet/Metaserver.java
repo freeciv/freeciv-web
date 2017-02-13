@@ -43,7 +43,7 @@ import org.json.JSONObject;
 /**
  * Displays the multiplayer games
  *
- * URL: /meta/metaserver.php
+ * URL: /meta/metaserver
  */
 @MultipartConfig
 public class Metaserver extends HttpServlet {
@@ -106,10 +106,7 @@ public class Metaserver extends HttpServlet {
 		}
 
 		public boolean isProtected() {
-			if (message != null) {
-				return message.contains("password-protected");
-			}
-			return false;
+			return message != null && message.contains("password-protected");
 		}
 	}
 
@@ -151,7 +148,7 @@ public class Metaserver extends HttpServlet {
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String query = null;
+		String query;
 		Connection conn = null;
 		PreparedStatement statement = null;
 		ResultSet rs = null;
@@ -324,8 +321,8 @@ public class Metaserver extends HttpServlet {
 		}
 
 		// Data validation
-		String query = null;
-		int port = 0;
+		String query;
+		int port;
 		try {
 			if (sPort == null) {
 				throw new IllegalArgumentException("Port must be supplied.");
@@ -346,7 +343,7 @@ public class Metaserver extends HttpServlet {
 
 		String hostPort = sHost + ':' + sPort;
 		Connection conn = null;
-		PreparedStatement statement = null;
+		PreparedStatement statement;
 		try {
 
 			Context env = (Context) (new InitialContext().lookup("java:comp/env"));

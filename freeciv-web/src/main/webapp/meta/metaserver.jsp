@@ -59,7 +59,7 @@
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
 					<li><a href="/">Home</a></li>
-					<li class="active"><a id="metalink" href="/meta/metaserver.php">Online Games</a></li>
+					<li class="active"><a id="metalink" href="/meta/metaserver">Online Games</a></li>
 					<li><a href="https://www.reddit.com/r/freeciv">Forum</a></li>
 					<li><a href="https://github.com/freeciv/freeciv-web">Github</a></li>
 					<li><a href="http://play.freeciv.org/blog/">Blog</a></li>
@@ -116,9 +116,9 @@
 										<a class="button" href="/webclient?renderer=webgl&amp;action=observe&amp;civserverport=${game.port}&amp;civserverhost=${game.host}">
 											3D
 										</a>
-										<a class="button" href="/meta/metaserver.php?server_port=${game.host}:${game.port}">
+										<%--<a class="button" href="/meta/metaserver?server_port=${game.host}:${game.port}">
 											Game Info
-										</a>
+										</a>--%>
 									</td>
 									<td>
 										${game.players}
@@ -130,7 +130,9 @@
 										${game.player}
 									</td>
 									<td>
-										<img src="/images/flags/${game.flag}-web.png" alt="${game.flag}" width="50">
+									    <c:if test="${game.flag ne 'none'}">
+    										<img src="/images/flags/${game.flag}-web.png" alt="${game.flag}" width="50">
+    									</c:if>
 									</td>
 									<td>
 										${game.turn}
@@ -186,9 +188,9 @@
 											</a>
 											</c:otherwise>
 										</c:choose>
-										<a class="button" href="/meta/metaserver.php?server_port=${game.host}:${game.port}">
+										<%--<a class="button" href="/meta/metaserver?server_port=${game.host}:${game.port}">
 											Info
-										</a>
+										</a>--%>
 									</td>
 									<td>
 										${game.state}
@@ -233,6 +235,23 @@
 						period, each player has 7 days to complete their turn.
 					</b>
 					<br>
+
+                   <h3>Current running games:</h3>
+
+                   <table id="pbem_table" class='metatable pbem'>
+                     <tr class='meta_header'><th>Players</th><th>Current player</th><th>Turn</th><th>Last played</th><th>Time left</th></tr>
+                   </table>
+                   <br>
+                   <h3>Results of completed games:</h3>
+
+                   <table id="pbem_result_table" class='metatable pbem'>
+                        <tr class='meta_header'><th>Winner</th><th>Game Date:</th><th>Player 1:</th><th>Player 2:</th></tr>
+                   </table>
+                   <br><br>
+
+                   To start a new Play-By-Email game, <a href="/webclient/?action=pbem">log in here</a>. To play your turn in a running Play-By-Email game,
+                   click on the link in the last e-mail you got from Freeciv-web. Games are expired after 7 days if you don't play your turn. <br><br>
+
 				</div>
 			</div>
 		</div>

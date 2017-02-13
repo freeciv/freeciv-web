@@ -1,6 +1,6 @@
 $(document).ready(function() {
  $.ajax({
-    url: "/meta/games-stats.php",
+    url: "/meta/games-stats",
     dataType: "html",
     cache: false,
     async: true

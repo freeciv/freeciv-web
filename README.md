@@ -1,4 +1,4 @@
-THE FREECIV-WEB PROJECT
+﻿THE FREECIV-WEB PROJECT
 -----------------------
 
 [![Build Status](https://api.travis-ci.org/freeciv/freeciv-web.png)](https://travis-ci.org/freeciv/freeciv-web)
@@ -156,8 +156,10 @@ some tasks you can work on. Pull requests on Github is welcome! Please submit ch
 
 Contributors to Freeciv-web
 ---------------------------
-[Andreas Røsdal](http://github.com/andreasrosdal)  [@andreasrosdal](http://www.twitter.com/andreasrosdal)  
-[Marko Lindqvist](https://github.com/cazfi)  
-[Sveinung Kvilhaugsvik](https://github.com/kvilhaugsvik)  
+Andreas Røsdal  [@andreasrosdal](http://www.twitter.com/andreasrosdal)  
+Marko Lindqvist [@cazfi](https://github.com/cazfi)  
+Sveinung Kvilhaugsvik [@kvilhaugsvik](https://github.com/kvilhaugsvik)  
+Gerik Bonaert [@adaxi](https://github.com/adaxi)  
+Lmoureaux [@lmoureaux](https://github.com/lmoureaux)  
 and the [Freeciv.org project](http://freeciv.wikia.com/wiki/People)!
 

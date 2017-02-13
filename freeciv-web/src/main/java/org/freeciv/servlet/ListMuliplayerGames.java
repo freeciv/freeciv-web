@@ -93,10 +93,7 @@ public class ListMuliplayerGames extends HttpServlet {
 		}
 
 		public boolean isProtected() {
-			if (message == null) {
-				return false;
-			}
-			return message.contains("password-protected");
+			return message != null && message.contains("password-protected");
 		}
 	}
 

@@ -67,16 +67,19 @@ public class ListSaveGames extends HttpServlet {
 				response.getOutputStream().print(";");
 			} else {
 				File[] files = folder.listFiles();
-				Arrays.sort(files, new Comparator<File>() {
-					public int compare(File f1, File f2) {
-						return Long.compare(f1.lastModified(), f2.lastModified());
-					}
-				});
-				StringBuffer buffer = new StringBuffer();
-				for (File file : files) {
-					if (file.isFile()) {
-						buffer.append(file.getName().replaceAll(".sav.xz", ""));
-						buffer.append(';');
+				StringBuilder buffer = new StringBuilder();
+				if (files != null) {
+					Arrays.sort(files, new Comparator<File>() {
+						public int compare(File f1, File f2) {
+							return Long.compare(f1.lastModified(), f2.lastModified());
+						}
+					});
+
+					for (File file : files) {
+						if (file.isFile()) {
+							buffer.append(file.getName().replaceAll(".sav.xz", ""));
+							buffer.append(';');
+						}
 					}
 				}
 				response.getOutputStream().print(buffer.toString());

@@ -36,7 +36,7 @@ import org.json.JSONObject;
 /**
  * Lists: the number of servers.
  *
- * URL: /meta/status.php
+ * URL: /meta/status
  */
 public class RecentServerStatistics extends HttpServlet {
 	private static final long serialVersionUID = 1L;

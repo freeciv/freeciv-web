@@ -27,7 +27,7 @@
 							</a>
 						</c:otherwise>
 					</c:choose>
-					<a class='btn btn-info' href="/meta/metaserver.php?server_port=${game.host}:${game.port}">
+					<a class='btn btn-info' href="/meta/metaserver?server_port=${game.host}:${game.port}">
 						Info
 					</a>
 				</td>

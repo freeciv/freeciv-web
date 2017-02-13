@@ -122,18 +122,7 @@
     <url-pattern>/freeciv_time_played_stats</url-pattern>
   </servlet-mapping>
 
-  <!-- /meta/cleanup.php -->
-  <servlet>
-    <servlet-name>CleanupServers</servlet-name>
-    <servlet-class>org.freeciv.servlet.CleanupServers</servlet-class>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>CleanupServers</servlet-name>
-    <url-pattern>/meta/cleanup.php</url-pattern>
-  </servlet-mapping>
-
-  <!-- /meta/fpinfo.php -->
+  <!-- /meta/fpinfo -->
   <servlet>
     <servlet-name>ServerStatistics</servlet-name>
     <servlet-class>org.freeciv.servlet.ServerStatistics</servlet-class>
@@ -141,10 +130,10 @@
 
   <servlet-mapping>
     <servlet-name>ServerStatistics</servlet-name>
-    <url-pattern>/meta/fpinfo.php</url-pattern>
+    <url-pattern>/meta/fpinfo</url-pattern>
   </servlet-mapping>
 
-  <!-- /meta/fpmultimeta.php -->
+  <!-- /meta/fpmultimeta -->
   <servlet>
     <servlet-name>ListMuliplayerGames</servlet-name>
     <servlet-class>org.freeciv.servlet.ListMuliplayerGames</servlet-class>
@@ -152,10 +141,10 @@
 
   <servlet-mapping>
     <servlet-name>ListMuliplayerGames</servlet-name>
-    <url-pattern>/meta/fpmultimeta.php</url-pattern>
+    <url-pattern>/meta/fpmultimeta</url-pattern>
   </servlet-mapping>
 
-  <!-- /meta/pbem_games_report.php -->
+  <!-- /meta/pbem_games_report -->
   <servlet>
     <servlet-name>PlayByEmailStatistics</servlet-name>
     <servlet-class>org.freeciv.servlet.PlayByEmailStatistics</servlet-class>
@@ -163,10 +152,10 @@
 
   <servlet-mapping>
     <servlet-name>PlayByEmailStatistics</servlet-name>
-    <url-pattern>/meta/pbem_games_report.php</url-pattern>
+    <url-pattern>/meta/pbem_games_report</url-pattern>
   </servlet-mapping>
 
-  <!-- /meta/status.php -->
+  <!-- /meta/status -->
   <servlet>
     <servlet-name>RecentServerStatistics</servlet-name>
     <servlet-class>org.freeciv.servlet.RecentServerStatistics</servlet-class>
@@ -174,10 +163,10 @@
 
   <servlet-mapping>
     <servlet-name>RecentServerStatistics</servlet-name>
-    <url-pattern>/meta/status.php</url-pattern>
+    <url-pattern>/meta/status</url-pattern>
   </servlet-mapping>
 
-  <!-- /meta/games-stats.php -->
+  <!-- /meta/games-stats -->
   <servlet>
     <servlet-name>GameTypeStatistics</servlet-name>
     <servlet-class>org.freeciv.servlet.GameTypeStatistics</servlet-class>
@@ -185,10 +174,10 @@
 
   <servlet-mapping>
     <servlet-name>GameTypeStatistics</servlet-name>
-    <url-pattern>/meta/games-stats.php</url-pattern>
+    <url-pattern>/meta/games-stats</url-pattern>
   </servlet-mapping>
 
-  <!-- /meta/pbem_top_players.php -->
+  <!-- /meta/pbem_top_players -->
   <servlet>
     <servlet-name>PlayByEmailTopPlayers</servlet-name>
     <servlet-class>org.freeciv.servlet.PlayByEmailTopPlayers</servlet-class>
@@ -196,10 +185,10 @@
 
   <servlet-mapping>
     <servlet-name>PlayByEmailTopPlayers</servlet-name>
-    <url-pattern>/meta/pbem_top_players.php</url-pattern>
+    <url-pattern>/meta/pbem_top_players</url-pattern>
   </servlet-mapping>
 
-  <!-- /meta/metaserver.php -->
+  <!-- /meta/metaserver -->
   <servlet>
     <servlet-name>Metaserver</servlet-name>
     <servlet-class>org.freeciv.servlet.Metaserver</servlet-class>
@@ -207,7 +196,7 @@
 
   <servlet-mapping>
     <servlet-name>Metaserver</servlet-name>
-    <url-pattern>/meta/metaserver.php</url-pattern>
+    <url-pattern>/meta/metaserver</url-pattern>
   </servlet-mapping>
 
   <context-param>
@@ -218,7 +207,7 @@
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.jsp</welcome-file>
-    <welcome-file>index.php</welcome-file>
+
   </welcome-file-list>
 
 </web-app>

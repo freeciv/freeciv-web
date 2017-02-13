@@ -116,9 +116,9 @@
 										<a class="button" href="/webclient?renderer=webgl&amp;action=observe&amp;civserverport=${game.port}&amp;civserverhost=${game.host}">
 											3D
 										</a>
-										<%--<a class="button" href="/meta/metaserver?server_port=${game.host}:${game.port}">
+										<a class="button" href="/meta/game-details?host=${game.host}&amp;port=${game.port}">
 											Game Info
-										</a>--%>
+										</a>
 									</td>
 									<td>
 										${game.players}
@@ -188,9 +188,9 @@
 											</a>
 											</c:otherwise>
 										</c:choose>
-										<%--<a class="button" href="/meta/metaserver?server_port=${game.host}:${game.port}">
+										<a class="button" href="/meta/game-details?host=${game.host}&amp;port=${game.port}">
 											Info
-										</a>--%>
+										</a>
 									</td>
 									<td>
 										${game.state}

@@ -71,7 +71,7 @@ public class GameTypeStatistics extends HttpServlet {
 			StringBuilder result = new StringBuilder();
 			while (rs.next()) {
 				result //
-						.append(rs.getInt(1)) //
+						.append(rs.getDate(1)) //
 						.append(',') //
 						.append(rs.getInt(2)) //
 						.append(',') //

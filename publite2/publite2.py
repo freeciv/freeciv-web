@@ -75,7 +75,7 @@ class metachecker():
       while 1:
         try:
           time.sleep(1);
-          conn = http.client.HTTPConnection(metahost);
+          conn = http.client.HTTPConnection(metahost, 8080);
           conn.request("GET", statuspath);
           r1 = conn.getresponse();
           self.check_count += 1;
@@ -99,7 +99,7 @@ class metachecker():
                      and self.total <= self.server_limit
                      and not fork_bomb_preventer):
                 time.sleep(1)
-                new_server = Civlauncher(game_types[0], port, metahost + metapath, self.savesdir);
+                new_server = Civlauncher(game_types[0], port, metahost + ":8080" + metapath, self.savesdir);
                 self.server_list.append(new_server);
                 new_server.start();
                 port += 1;

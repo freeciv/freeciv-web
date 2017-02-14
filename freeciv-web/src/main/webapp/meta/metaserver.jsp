@@ -98,7 +98,7 @@
 				<div id="tabs-1">
 					<h2>Freeciv-web Single-player games</h2>
 					<c:if test="${fn:length(singlePlayerGameList) > 0}">
-						<table>
+						<table class='metatable singleplayer'>
 							<tr class="meta_header">
 								<th>Game Action:</th>
 								<th>Players</th>

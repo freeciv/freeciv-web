@@ -31,6 +31,7 @@ from civlauncher import Civlauncher
 import os.path
 
 metahost = "localhost"
+metaport = 8080
 metapath =  "/meta/metaserver"
 statuspath =  "/meta/status"
 settings_file = "settings.ini"
@@ -75,7 +76,7 @@ class metachecker():
       while 1:
         try:
           time.sleep(1);
-          conn = http.client.HTTPConnection(metahost, 8080);
+          conn = http.client.HTTPConnection(metahost, metaport);
           conn.request("GET", statuspath);
           r1 = conn.getresponse();
           self.check_count += 1;
@@ -99,7 +100,7 @@ class metachecker():
                      and self.total <= self.server_limit
                      and not fork_bomb_preventer):
                 time.sleep(1)
-                new_server = Civlauncher(game_types[0], port, metahost + ":8080" + metapath, self.savesdir);
+                new_server = Civlauncher(game_types[0], port, metahost + ":" + str(metaport) + metapath, self.savesdir);
                 self.server_list.append(new_server);
                 new_server.start();
                 port += 1;
@@ -110,7 +111,7 @@ class metachecker():
                      and self.total <= self.server_limit
                      and not fork_bomb_preventer):
                 time.sleep(1)
-                new_server = Civlauncher(game_types[1], port, metahost + ":8080" + metapath, self.savesdir)
+                new_server = Civlauncher(game_types[1], port, metahost + ":" + str(metaport) + metapath, self.savesdir)
                 self.server_list.append(new_server);
                 new_server.start();
                 port += 1;
@@ -121,7 +122,7 @@ class metachecker():
                      and self.total <= self.server_limit
                      and not fork_bomb_preventer):
                 time.sleep(1)
-                new_server = Civlauncher(game_types[2], port, metahost + ":8080" + metapath, self.savesdir)
+                new_server = Civlauncher(game_types[2], port, metahost + ":" + str(metaport) + metapath, self.savesdir)
                 self.server_list.append(new_server);
                 new_server.start();
                 port += 1;
@@ -157,7 +158,7 @@ if __name__ == '__main__':
   # start the initial Freeciv-web servers
   mc = metachecker()
   for type in game_types:
-    new_server = Civlauncher(type, port, metahost + metapath, mc.savesdir)
+    new_server = Civlauncher(type, port, metahost + ":" + str(metaport) + metapath, mc.savesdir)
     mc.server_list.append(new_server);
     new_server.start();
     port += 1;

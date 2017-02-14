@@ -198,6 +198,17 @@
     <servlet-name>Metaserver</servlet-name>
     <url-pattern>/meta/metaserver</url-pattern>
   </servlet-mapping>
+  
+  <!-- /meta/game-information -->
+  <servlet>
+    <servlet-name>GameDetails</servlet-name>
+    <servlet-class>org.freeciv.servlet.GameDetails</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>GameDetails</servlet-name>
+    <url-pattern>/meta/game-details</url-pattern>
+  </servlet-mapping>
 
   <context-param>
     <param-name>buildTimeStamp</param-name>

@@ -1,6 +1,38 @@
 body {
   background-image:url('/images/bg.jpg');
+}
 
+.table {
+   margin: auto;
+   width: 90% !important; 
+}
+
+.jumbotron {
+  text-align: center;
+  padding-bottom: 10px;
+  background:rgba(0,0,0,0.1);
+  min-height: 350px;
+  padding-top: 5px;
+}
+
+.searchbox {
+  margin-bottom: -5px;
+}
+
+body > .container {
+  padding: 60px 15px 0;
+}
+
+.footer {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  margin-top: 40px;
+  border-top: 1px solid #eee;
+}
+
+#top_logo {
+  max-width: 212px;
+  margin-top: -12px;
 }
 
 .metatable {
@@ -25,11 +57,6 @@ body {
   background-color: white;
 }
 
-table, th, td
-{
-  border: 1px solid white;
-}
-
 .private_game {
   color: grey;
 }
@@ -51,9 +78,6 @@ table, th, td
   background: rgba(255,255,255,0.5);
 }
 
-.freeciv_game_info_box {
-  background: rgba(0,0,0,0.1);
-}
 
 
 @media (max-width: 600px) {

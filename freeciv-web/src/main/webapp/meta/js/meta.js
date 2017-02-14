@@ -44,14 +44,22 @@ function handle_pbem(data)
       var game = gamestats[gamestats.length-i-1];
       var turn = game[0];
       var phase = game[1];
-      var player_one = game[2][0];
-      var player_two = game[2][1];
-      if (player_one.indexOf("@") != -1 || player_two.indexOf("@") != -1) continue;
       var current_player = game[2][phase];
       var last_played = game[3];
       var time_left = game[4];
-      $("#pbem_table").append("<tr><td>" + player_one + " - " + player_two + "</td><td>" + current_player 
-           + "</td><td>" + turn + "</td><td>" + last_played + "</td><td>" + time_left + " hours</td></tr>");
+      var result_html = "<tr><td>";
+      if (game[2].length == 2) {
+        result_html += game[2][0] + " - " + game[2][1];
+      } else {
+        for (var a = 0; a < game[2].length; a++) {
+          result_html += game[2][a];
+          if (a < game[2].length - 1) result_html  += ", ";
+        }
+      }
+
+      result_html += "</td><td>" + current_player + "</td><td>" + turn + "</td><td>" + last_played + "</td><td>" + time_left + " hours</td></tr>";
+      if (result_html.indexOf("@") != -1) continue;
+      $("#pbem_table").append(result_html);
     }
   } else {
     $("#pbem_table").hide();

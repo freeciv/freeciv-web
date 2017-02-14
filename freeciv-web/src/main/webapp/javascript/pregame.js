@@ -177,7 +177,7 @@ function update_player_info_pregame()
             } else if (key == "pick_nation") {
               pick_nation(playerid);
             } else if (key == "aitoggle_player") {
-              send_message("/ai " + name);
+              send_message("/aitoggle " + name);
             } else if (key == "observe_player") {
               send_message("/observe " + name);
             } else if (key == "novice") {
@@ -1144,6 +1144,7 @@ function create_new_freeciv_user_account_request(action_type)
        simpleStorage.set("password", password);
        if (action_type == "pbem") {
          challenge_pbem_player_dialog();
+         swal("New account created. Your username is: " + username + ". You can now start a new PBEM game or wait for an invitation for another player.");
        } else {
          $("#dialog").dialog('close');
          network_init();

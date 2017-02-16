@@ -124,7 +124,7 @@ public class NewPBEMUser extends HttpServlet {
 
 			String query =
 					"INSERT INTO auth (username, email, password, activated, ip) "
-							+ "VALUES (?,?, MD5(?), ?, ?)";
+							+ "VALUES (?,?, ?, ?, ?)";
 			PreparedStatement preparedStatement = conn.prepareStatement(query);
 			preparedStatement.setString(1, username.toLowerCase());
 			preparedStatement.setString(2, email);

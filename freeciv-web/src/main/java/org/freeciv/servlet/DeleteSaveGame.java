@@ -84,7 +84,7 @@ public class DeleteSaveGame extends HttpServlet {
 					  "SELECT count(*) "
 					+ "FROM auth "
 					+ "WHERE LOWER(username) = LOWER(?) "
-					+ "	AND password = MD5(?) "
+					+ "	AND password = ? "
 					+ "	AND activated = '1' ";
 			PreparedStatement preparedStatement = conn.prepareStatement(query);
 			preparedStatement.setString(1, username);

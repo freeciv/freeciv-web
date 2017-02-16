@@ -968,7 +968,7 @@ function validate_username_callback()
         if (password != null && password.length > 2) {
           $.ajax({
            type: 'POST',
-           url: "/login_user?username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(password),
+           url: "/login_user?username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(md5(password)),
            success: function(data, textStatus, request){
                if (data != null && data == "OK") {
                  simpleStorage.set("username", username);
@@ -1008,7 +1008,7 @@ function validate_username_callback()
 /**************************************************************************
  Shows the create new user account with password dialog.
 **************************************************************************/
-function show_new_user_account_dialog()
+function show_new_user_account_dialog(gametype)
 {
 
   var title = "New user account";
@@ -1040,10 +1040,19 @@ function show_new_user_account_dialog()
 			buttons:
 			{
                 "Cancel" : function() {
-	                init_common_intro_dialog();
+                    if (gametype == "pbem") {
+                      show_pbem_dialog();
+                    } else {
+	                  init_common_intro_dialog();
+	                }
 				},
 				"Signup new user" : function() {
-                    create_new_freeciv_user_account_request("normal");
+				    if (gametype == "pbem") {
+				      create_new_freeciv_user_account_request("pbem");
+				    } else {
+				      create_new_freeciv_user_account_request("normal");
+				    }
+
 				}
 			}
 		});
@@ -1120,9 +1129,6 @@ function create_new_freeciv_user_account_request(action_type)
   } else if (username != cleaned_username) {
     $("#username_validation_result").html("Your name contains invalid characters, only the English alphabet is allowed.");
     return false;
-  } else if (password.indexOf("%") != -1 || password.indexOf("#") != -1 || password.indexOf("&") != -1 || password.indexOf("?") != -1) {
-    $("#username_validation_result").html("Please don't use these characters in passwords: % # & ?");
-    return false;
   } else if (password != confirm_password) {
     $("#username_validation_result").html("The passwords do not match.");
     return false;
@@ -1138,13 +1144,12 @@ function create_new_freeciv_user_account_request(action_type)
   $.ajax({
    type: 'POST',
    url: "/create_pbem_user?username=" + encodeURIComponent(username) + "&email=" + encodeURIComponent(email)
-            + "&password=" + encodeURIComponent(password) + "&captcha=" + encodeURIComponent(captcha),
+            + "&password=" + encodeURIComponent(md5(password)) + "&captcha=" + encodeURIComponent(captcha),
    success: function(data, textStatus, request){
        simpleStorage.set("username", username);
        simpleStorage.set("password", password);
        if (action_type == "pbem") {
-         challenge_pbem_player_dialog();
-         swal("New account created. Your username is: " + username + ". You can now start a new PBEM game or wait for an invitation for another player.");
+         challenge_pbem_player_dialog("New account created. Your username is: " + username + ". You can now start a new PBEM game or wait for an invitation for another player.");
        } else {
          $("#dialog").dialog('close');
          network_init();

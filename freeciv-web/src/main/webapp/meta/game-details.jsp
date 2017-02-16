@@ -171,10 +171,10 @@
 			
 				<!-- scores -->
 				<div class="row">
-					<div class="center-block" style="width: 200px;">
+					<div class="center-block" style="width: 800px;">
 						<c:if test="${state == 'Running'}">
 							<b id='scores_heading'>Scores:</b><div id='scores'></div><br><br><b>Settings:</b><br>
-							<script type='text/javascript'>show_scores(${game.port});</script>
+							<script type='text/javascript'>show_scores(${port});</script>
 						</c:if>
 					</div>
 				</div>

@@ -218,7 +218,7 @@ function delete_savegame(filename)
   if (stored_password != null && stored_password != false) {
     $.ajax({
      type: 'POST',
-     url: "/deletesavegame?username=" + encodeURIComponent(username) + "&savegame=" + encodeURIComponent(filename) + "&password=" + encodeURIComponent(stored_password)
+     url: "/deletesavegame?username=" + encodeURIComponent(username) + "&savegame=" + encodeURIComponent(filename) + "&password=" + encodeURIComponent(md5(stored_password))
     });
   }
 }

@@ -82,11 +82,13 @@ function update_unit_position(ptile) {
     if (new_unit == null) return;
     unit_positions[ptile['index']] = new_unit;
     var pos = map_to_scene_coords(ptile['x'], ptile['y']);
+    new_unit.matrixAutoUpdate = false
     new_unit.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
     new_unit.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
     new_unit.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
-    // rotate unit in the direction it is facing. using timeout here since that is the only way I could get it to work.
-    setTimeout("if (unit_positions["+ptile['index']+"] != null) unit_positions["+ptile['index']+"].rotateY(" + (convert_unit_rotation(visible_unit['facing']) * Math.PI * 2 / 8) + ")", 1);
+    new_unit.rotateOnAxis(new THREE.Vector3(0,1,0).normalize(), (convert_unit_rotation(visible_unit['facing']) * Math.PI * 2 / 8));
+    new_unit.updateMatrix();
+
     if (scene != null && new_unit != null) {
       scene.add(new_unit);
     }
@@ -204,9 +206,13 @@ function update_unit_position(ptile) {
     unit_positions[ptile['index']] = new_unit;
     unit_positions[ptile['index']]['unit_type'] = unit_type_name;
 
+    new_unit.matrixAutoUpdate = false
     new_unit.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
     new_unit.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
     new_unit.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
+    new_unit.rotateOnAxis(new THREE.Vector3(0,1,0).normalize(), (convert_unit_rotation(visible_unit['facing']) * Math.PI * 2 / 8));
+    new_unit.updateMatrix();
+
     if (scene != null && new_unit != null) {
       scene.add(new_unit);
     }

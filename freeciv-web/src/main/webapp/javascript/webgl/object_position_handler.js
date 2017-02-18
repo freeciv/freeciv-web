@@ -168,6 +168,15 @@ function update_unit_position(ptile) {
       pos = map_to_scene_coords(ptile['x'], ptile['y']);
     }
 
+    if (scene != null) scene.remove(unit_positions[ptile['index']]);
+    delete unit_positions[ptile['index']];
+
+    if (scene != null && unit_flag_positions[ptile['index']] != null) scene.remove(unit_flag_positions[ptile['index']]);
+    delete unit_flag_positions[ptile['index']];
+
+    if (scene != null && unit_health_positions[ptile['index']] != null) scene.remove(unit_health_positions[ptile['index']]);
+    delete unit_health_positions[ptile['index']];
+
     var activity;
     if (unit_activities_positions[ptile['index']] != get_unit_activity_text(visible_unit) && visible_unit['anim_list'].length == 0) {
       // add unit activity label
@@ -203,8 +212,6 @@ function update_unit_position(ptile) {
         scene.add(new_unit_health_bar);
       }
       unit_healthpercentage_positions[ptile['index']] = visible_unit['hp'];
-    } else {
-      new_unit_health_bar = unit_health_positions[ptile['index']];
     }
 
     /* indicate focus unit*/
@@ -226,12 +233,6 @@ function update_unit_position(ptile) {
         selected_unit_indicator = selected_mesh;
       }
     }
-
-    // no need up update unit model, since the model is unchanged.
-    if (unit_positions[ptile['index']]['unit_type'] == unit_type_name) return;
-
-    if (scene != null) scene.remove(unit_positions[ptile['index']]);
-    delete unit_positions[ptile['index']];
 
     if (unit_type_name == null) {
       console.error(unit_type_name + " model not loaded correcly.");
@@ -269,8 +270,6 @@ function update_unit_position(ptile) {
       if (scene != null && new_flag != null) {
         scene.add(new_flag);
       }
-    } else {
-      new_flag = unit_flag_positions[ptile['index']];
     }
 
     anim_objs[visible_unit['id']] = {'unit' : visible_unit['id'], 'mesh' : new_unit, 'flag' : new_flag, 'health_bar' : new_unit_health_bar};

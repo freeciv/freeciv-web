@@ -24,7 +24,7 @@ var units = {};
  * Set in handle_ruleset_terrain_control(). */
 var SINGLE_MOVE;
 
-var ANIM_STEPS = 6;
+var ANIM_STEPS = 8;
 
 var anim_units_max = 30;
 var anim_units_count = 0;
@@ -257,6 +257,13 @@ function update_unit_anim_list(old_unit, new_unit)
 function get_unit_anim_offset(punit)
 {
   var offset = {};
+
+  if (renderer == RENDERER_WEBGL) {
+    offset['x'] = 0;
+    offset['y'] = 0;
+    return offset;
+  }
+
   if (punit['anim_list'] != null && punit['anim_list'].length >= 2)  {
     var anim_tuple_src = punit['anim_list'][0];
     var anim_tuple_dst = punit['anim_list'][1];

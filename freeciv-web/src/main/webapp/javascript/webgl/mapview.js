@@ -301,6 +301,8 @@ function animate() {
     normalsNeedsUpdating = false;
   }
 
+  update_animated_objects();
+
   if (graphics_quality >= QUALITY_MEDIUM && water != null) {
     water.material.uniforms.time.value += 1.0 / 60.0;
     water.render();

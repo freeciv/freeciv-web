@@ -106,8 +106,8 @@ function generate_borders_image() {
         result[x][y] = grid[x][y];
       } else {
         var is_border = (grid[x][y] > 0
-         && (grid[x-1][y-1] == 0 || grid[x-1][y] == 0 || grid[x][y-1] == 0 || grid[x+1][y] == 0
-          || grid[x][y+1] == 0 || grid[x+1][y+1] == 0 || grid[x-1][y+1] == 0 || grid[x+1][y-1] == 0));
+         && (grid[x-1][y-1] != grid[x][y] || grid[x-1][y] != grid[x][y] || grid[x][y-1] != grid[x][y] || grid[x+1][y] != grid[x][y]
+          || grid[x][y+1] != grid[x][y] || grid[x+1][y+1] != grid[x][y] || grid[x-1][y+1] != grid[x][y] || grid[x+1][y-1] != grid[x][y]));
         if (is_border) {
           result[x][y] = grid[x][y];
         } else {

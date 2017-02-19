@@ -21,7 +21,7 @@ var map_tiletype_resolution;
 var tiletype_palette = [];
 
 /****************************************************************************
-  Returns a texture containing one pixel for each map tile, where the color of each pixel
+  Returns a texture containing each map tile, where the color of each pixel
   indicates which Freeciv tile type the pixel is.
 ****************************************************************************/
 function init_map_tiletype_image()
@@ -51,7 +51,6 @@ function generate_map_tiletype_grid() {
   if (graphics_quality == QUALITY_HIGH) map_tiletype_resolution = 4096;
 
   var row, col;
-  var start_tiletype = new Date().getTime();
   // The grid of points that make up the image.
   var grid = Array(map_tiletype_resolution);
   for (row = 0; row < map_tiletype_resolution ; row++) {
@@ -89,7 +88,6 @@ function generate_map_tiletype_grid() {
     }
   }
 
-  console.log("generate_map_tiletype_grid took: " + (new Date().getTime() - start_tiletype) + " ms.");
   return grid;
 }
 

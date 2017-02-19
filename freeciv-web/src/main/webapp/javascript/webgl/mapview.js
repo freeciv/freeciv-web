@@ -170,10 +170,13 @@ function init_webgl_mapview() {
 
   /* heightmap image */
   create_heightmap();
+  if (graphics_quality > QUALITY_LOW) init_borders_image();
 
   /* uniforms are variables which are used in the fragment shader fragment.js */
   var terrain_uniforms = {
     maptiles: { type: "t", value: init_map_tiletype_image() },
+    borders: { type: "t", value: (graphics_quality > QUALITY_LOW) ? update_borders_image() : null },
+    borders_enabled: { type: "b", value: graphics_quality > QUALITY_LOW },
     map_x_size: { type: "f", value: map['xsize'] },
     map_y_size: { type: "f", value: map['ysize'] }
   };

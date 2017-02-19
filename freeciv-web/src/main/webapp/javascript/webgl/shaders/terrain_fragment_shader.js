@@ -41,6 +41,8 @@ uniform sampler2D tundra;
 uniform sampler2D beach;
 
 uniform sampler2D maptiles;
+uniform sampler2D borders;
+uniform bool borders_enabled;
 
 uniform float map_x_size;
 uniform float map_y_size;
@@ -83,6 +85,7 @@ void main(void)
 {
 
     vec4 terrain_type = texture2D(maptiles, vec2(vUv.x, vUv.y));
+    vec4 border_color = texture2D(borders, vec2(vUv.x, vUv.y));
 
     vec3 c;
     vec4 chosen_terrain_color;
@@ -207,6 +210,11 @@ void main(void)
         c = Cb.rgb;
       }
   }
+
+  if (borders_enabled && !(border_color.r > 0.546875 && border_color.r < 0.5625 && border_color.b == 0.0 && border_color.g == 0.0)) {
+    c = c * 0.3 + border_color.rbg * 0.7;
+  }
+
 
   /* specular component, ambient occlusion and fade out underwater terrain */
   float x = clamp((vPosition.y - 30.) / 15., 0., 1.);

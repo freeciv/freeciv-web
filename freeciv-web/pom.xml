@@ -145,7 +145,9 @@
 								<dest>target/resources/i18n</dest>
 								<src>src/main/resources/i18n</src>
 								<encoding>UTF-8</encoding>
-								<includes>**/text*.properties</includes>
+								<includes>
+									<include>**/text*.properties</include>
+								</includes>
 							</configuration>
 							<phase>compile</phase>
 						</execution>

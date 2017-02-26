@@ -5,10 +5,10 @@
         "formatVersion" : 3.1,
         "sourceFile"    : "citywalls.obj",
         "generatedBy"   : "OBJConverter",
-        "vertices"      : 192,
-        "faces"         : 128,
-        "normals"       : 73,
-        "uvs"           : 204,
+        "vertices"      : 256,
+        "faces"         : 160,
+        "normals"       : 104,
+        "uvs"           : 268,
         "materials"     : 1
     },
 

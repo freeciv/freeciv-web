@@ -81,36 +81,51 @@ function update_unit_position(ptile) {
     var new_unit = webgl_get_model(unit_type_name);
     if (new_unit == null) return;
     unit_positions[ptile['index']] = new_unit;
-    var pos = map_to_scene_coords(ptile['x'], ptile['y']);
+    var pos;
+    if (visible_unit['anim_list'].length > 0) {
+      var stile = tiles[visible_unit['anim_list'][0]['tile']];
+      pos = map_to_scene_coords(stile['x'], stile['y']);
+      height = 5 + stile['height'] * 100;
+    } else {
+      pos = map_to_scene_coords(ptile['x'], ptile['y']);
+    }
+    new_unit.matrixAutoUpdate = false
     new_unit.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
     new_unit.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
     new_unit.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
-    // rotate unit in the direction it is facing. using timeout here since that is the only way I could get it to work.
-    setTimeout("if (unit_positions["+ptile['index']+"] != null) unit_positions["+ptile['index']+"].rotateY(" + (convert_unit_rotation(visible_unit['facing']) * Math.PI * 2 / 8) + ")", 1);
+    new_unit.rotateOnAxis(new THREE.Vector3(0,1,0).normalize(), (convert_unit_rotation(visible_unit['facing']) * Math.PI * 2 / 8));
+    new_unit.updateMatrix();
+
     if (scene != null && new_unit != null) {
       scene.add(new_unit);
     }
     /* add flag. */
     var pflag = get_unit_nation_flag_normal_sprite(visible_unit);
+    var new_flag;
     if (unit_flag_positions[ptile['index']] == null) {
-      var new_flag = get_flag_mesh(pflag['key']);
+      new_flag = get_flag_mesh(pflag['key']);
+      new_flag.matrixAutoUpdate = false;
       unit_flag_positions[ptile['index']] = new_flag;
       new_flag.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10);
       new_flag.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 16);
       new_flag.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
       new_flag.rotation.y = Math.PI / 4;
+      new_flag.updateMatrix();
       if (scene != null && new_flag != null) {
         scene.add(new_flag);
       }
     }
 
+    var new_unit_health_bar;
     if (unit_health_positions[ptile['index']] == null) {
-      var new_unit_health_bar = get_unit_health_mesh(visible_unit);
+      new_unit_health_bar = get_unit_health_mesh(visible_unit);
+      new_unit_health_bar.matrixAutoUpdate = false;
       unit_health_positions[ptile['index']] = new_unit_health_bar;
       new_unit_health_bar.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10);
       new_unit_health_bar.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 23);
       new_unit_health_bar.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
       new_unit_health_bar.rotation.y = Math.PI / 4;
+      new_unit_health_bar.updateMatrix();
       if (scene != null && new_unit_health_bar != null) {
         scene.add(new_unit_health_bar);
       }
@@ -119,52 +134,80 @@ function update_unit_position(ptile) {
 
     /* indicate focus unit*/
     var funit = get_focus_unit_on_tile(ptile);
+    var selected_mesh;
     if (scene != null && funit != null && funit['id'] == visible_unit['id']) {
       if (selected_unit_indicator != null) {
         scene.remove(selected_unit_indicator);
         selected_unit_indicator = null;
       }
-      var material = new THREE.MeshBasicMaterial( { color: 0xfeffc5, transparent: true, opacity: 0.5} );
-      var selected_mesh = new THREE.Mesh( new THREE.RingGeometry( 16, 25, 24), material );
-      selected_mesh.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
-      selected_mesh.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 11);
-      selected_mesh.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
-      selected_mesh.rotation.x = -1 * Math.PI / 2;
-      scene.add(selected_mesh);
-      selected_unit_indicator = selected_mesh;
+      if (visible_unit['anim_list'].length == 0) {
+        var material = new THREE.MeshBasicMaterial( { color: 0xfeffc5, transparent: true, opacity: 0.5} );
+        selected_mesh = new THREE.Mesh( new THREE.RingGeometry( 16, 25, 24), material );
+        selected_mesh.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
+        selected_mesh.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 11);
+        selected_mesh.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
+        selected_mesh.rotation.x = -1 * Math.PI / 2;
+        scene.add(selected_mesh);
+        selected_unit_indicator = selected_mesh;
+      }
     }
-  }
 
-  if (unit_positions[ptile['index']] != null && visible_unit != null) {
+    anim_objs[visible_unit['id']] = {'unit' : visible_unit['id'], 'mesh' : new_unit, 'flag' : new_flag, 'health_bar' : new_unit_health_bar};
+
+
+  } else if (unit_positions[ptile['index']] != null && visible_unit != null) {
     // Update of visible unit.
+    // TODO: update_unit_position() contains _almost_ the same code twice. this is the duplicate part.
     var unit_type_name = unit_type(visible_unit)['name'];
-    var pos = map_to_scene_coords(ptile['x'], ptile['y']);
+    var pos;
+    if (visible_unit['anim_list'].length > 0) {
+      var stile = tiles[visible_unit['anim_list'][0]['tile']];
+      pos = map_to_scene_coords(stile['x'], stile['y']);
+      height = 5 + stile['height'] * 100;
+    } else {
+      pos = map_to_scene_coords(ptile['x'], ptile['y']);
+    }
 
-    if (unit_activities_positions[ptile['index']] != get_unit_activity_text(visible_unit)) {
+    if (scene != null) scene.remove(unit_positions[ptile['index']]);
+    delete unit_positions[ptile['index']];
+
+    if (scene != null && unit_flag_positions[ptile['index']] != null) scene.remove(unit_flag_positions[ptile['index']]);
+    delete unit_flag_positions[ptile['index']];
+
+    if (scene != null && unit_health_positions[ptile['index']] != null) scene.remove(unit_health_positions[ptile['index']]);
+    delete unit_health_positions[ptile['index']];
+
+    var activity;
+    if (unit_activities_positions[ptile['index']] != get_unit_activity_text(visible_unit) && visible_unit['anim_list'].length == 0) {
       // add unit activity label
       if (scene != null && unit_label_positions[ptile['index']] != null) scene.remove(unit_label_positions[ptile['index']]);
       if (get_unit_activity_text(visible_unit) != null) {
-        var text = create_unit_label(visible_unit);
-        if (text != null) {
-          text.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] + 8);
-          text.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 28);
-          text.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 5);
-          text.rotation.y = Math.PI / 4;
-          if (scene != null) scene.add(text);
-          unit_label_positions[ptile['index']] = text;
+        activity = create_unit_label(visible_unit);
+        if (activity != null) {
+          activity.matrixAutoUpdate = false;
+          activity.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] + 8);
+          activity.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 28);
+          activity.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 5);
+          activity.rotation.y = Math.PI / 4;
+          activity.updateMatrix();
+          if (scene != null) scene.add(activity);
+          unit_label_positions[ptile['index']] = activity;
         }
       }
       unit_activities_positions[ptile['index']] = get_unit_activity_text(visible_unit);
     }
 
+    var new_unit_health_bar;
     if (unit_healthpercentage_positions[ptile['index']] != visible_unit['hp']) {
       if (scene != null && unit_health_positions[ptile['index']] != null) scene.remove(unit_health_positions[ptile['index']]);
-      var new_unit_health_bar = get_unit_health_mesh(visible_unit);
+      new_unit_health_bar = get_unit_health_mesh(visible_unit);
+      new_unit_health_bar.matrixAutoUpdate = false;
       unit_health_positions[ptile['index']] = new_unit_health_bar;
       new_unit_health_bar.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10);
       new_unit_health_bar.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 23);
       new_unit_health_bar.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
       new_unit_health_bar.rotation.y = Math.PI / 4;
+      new_unit_health_bar.updateMatrix();
       if (scene != null && new_unit_health_bar != null) {
         scene.add(new_unit_health_bar);
       }
@@ -173,26 +216,23 @@ function update_unit_position(ptile) {
 
     /* indicate focus unit*/
     var funit = get_focus_unit_on_tile(ptile);
+    var selected_mesh;
     if (scene != null && funit != null && funit['id'] == visible_unit['id']) {
       if (selected_unit_indicator != null) {
         scene.remove(selected_unit_indicator);
         selected_unit_indicator = null;
       }
-      var material = new THREE.MeshBasicMaterial( { color: 0xfeffc5, transparent: true, opacity: 0.45} );
-      var selected_mesh = new THREE.Mesh( new THREE.RingGeometry( 16, 24, 20), material );
-      selected_mesh.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
-      selected_mesh.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 11);
-      selected_mesh.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
-      selected_mesh.rotation.x = -1 * Math.PI / 2;
-      scene.add(selected_mesh);
-      selected_unit_indicator = selected_mesh;
+      if (visible_unit['anim_list'].length == 0) {
+        var material = new THREE.MeshBasicMaterial( { color: 0xfeffc5, transparent: true, opacity: 0.45} );
+        selected_mesh = new THREE.Mesh( new THREE.RingGeometry( 16, 24, 20), material );
+        selected_mesh.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
+        selected_mesh.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 11);
+        selected_mesh.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
+        selected_mesh.rotation.x = -1 * Math.PI / 2;
+        scene.add(selected_mesh);
+        selected_unit_indicator = selected_mesh;
+      }
     }
-
-    // no need up update unit model, since the model is unchanged.
-    if (unit_positions[ptile['index']]['unit_type'] == unit_type_name) return;
-
-    if (scene != null) scene.remove(unit_positions[ptile['index']]);
-    delete unit_positions[ptile['index']];
 
     if (unit_type_name == null) {
       console.error(unit_type_name + " model not loaded correcly.");
@@ -204,12 +244,35 @@ function update_unit_position(ptile) {
     unit_positions[ptile['index']] = new_unit;
     unit_positions[ptile['index']]['unit_type'] = unit_type_name;
 
+    new_unit.matrixAutoUpdate = false
     new_unit.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
     new_unit.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
     new_unit.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
+    new_unit.rotateOnAxis(new THREE.Vector3(0,1,0).normalize(), (convert_unit_rotation(visible_unit['facing']) * Math.PI * 2 / 8));
+    new_unit.updateMatrix();
+
     if (scene != null && new_unit != null) {
       scene.add(new_unit);
     }
+
+    /* add flag. */
+    var pflag = get_unit_nation_flag_normal_sprite(visible_unit);
+    var new_flag;
+    if (unit_flag_positions[ptile['index']] == null) {
+      new_flag = get_flag_mesh(pflag['key']);
+      new_flag.matrixAutoUpdate = false;
+      unit_flag_positions[ptile['index']] = new_flag;
+      new_flag.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10);
+      new_flag.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 16);
+      new_flag.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
+      new_flag.rotation.y = Math.PI / 4;
+      new_flag.updateMatrix();
+      if (scene != null && new_flag != null) {
+        scene.add(new_flag);
+      }
+    }
+
+    anim_objs[visible_unit['id']] = {'unit' : visible_unit['id'], 'mesh' : new_unit, 'flag' : new_flag, 'health_bar' : new_unit_health_bar};
   }
 
 }

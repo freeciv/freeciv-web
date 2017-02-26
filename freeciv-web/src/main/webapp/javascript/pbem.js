@@ -17,7 +17,7 @@
 
 ***********************************************************************/
 
-var opponent = null;
+var opponents = [];
 var pbem_phase_ended = false;
 
 var invited_players = [];
@@ -42,11 +42,12 @@ function show_pbem_dialog()
   
   } else {
     message = "You are about to start a Play-by-Email game, where you "
-    + "can challenge another player, and each player will be notified when "
+    + "can challenge other players, and each player will be notified when "
     + "it is their turn to play through e-mail. If you are a new player, then click the sign up button below. These are the game rules:<br>" 
-    + "<ul><li>The game will have two human players playing alternating turns. Each player will get an e-mail when it is their turn to play.</li>" 
+    + "<ul><li>The game will have between 2 and 4 human players playing alternating turns. Each player will get an e-mail when it is their turn to play.</li>"
     + "<li>Standard Freeciv-web rules are used with some changes to map size, research speed, start units and gold to speed up games.</li>"  
     + "<li>Please complete your turn as soon as possible, and use at no longer than 7 days until you complete your turn.</li>"
+    + "<li>Results of games with 2 players are stored to rank players.</li>"
     + "<li>Please post feedback and arrange new games on the <a href='http://forum.freeciv.org/f/viewforum.php?f=24' style='color: black;' target='_new'>forum</a>.</li>"
     + "<li id='user_count'></li></ul>"; 
   }
@@ -63,7 +64,7 @@ function show_pbem_dialog()
 			buttons:
 			{
 				"Signup new user": function() {
-                                    create_new_pbem_user();
+                                    show_new_user_account_dialog("pbem");
 				},
 				"Log In" : function() {
                                     login_pbem_user();
@@ -144,85 +145,6 @@ function login_pbem_user()
 
 }
 
-
-
-/**************************************************************************
- TODO: this code is duplicated in pregame.js #show_new_user_account_dialog() - remove this.
-**************************************************************************/
-function create_new_pbem_user() 
-{
-
-  var title = "New user account";
-  var message = "Create a new Freeciv-web user account with information about yourself:<br><br>"
-                + "<table><tr><td>Username:</td><td><input id='username' type='text' size='25' maxlength='30' onkeyup='return forceLower(this);'></td></tr>"  
-                + "<tr><td>Email:</td><td><input id='email' type='email' size='25' maxlength='64' ></td></tr>"  
-                + "<tr><td>Password:</td><td><input id='password' type='password' size='25'></td></tr>"
-                + "<tr><td>Confirm password:</td><td><input id='confirm_password' type='password' size='25'></td></tr></table><br>"
-                + "<div id='username_validation_result'></div><br>"
-                + "<div id='captcha_element'></div><br><br>"
-                + "<div><small><ul><li>It is free and safe to create a new account on Freeciv-web.</li>"
-                + "<li>Other players can use your username to start Play-by-email games with you.</li>"
-                + "<li>You will not receive any spam and your e-mail address will be kept safe.</li>"
-                + "<li>You can cancel your account at any time if you want.</li>"
-                + "</ul></small></div>";   
-
-  // reset dialog page.
-  $("#dialog").remove();
-  $("<div id='dialog'></div>").appendTo("div#game_page");
-
-  $("#dialog").html(message);
-  $("#dialog").attr("title", title);
-  $("#dialog").dialog({
-			bgiframe: true,
-			modal: true,
-			width: is_small_screen() ? "90%" : "60%",
-			buttons:
-			{
-                                "Cancel" : function() {
-	                          show_pbem_dialog();
-				},
-				"Signup new user" : function() {
-                                  create_new_freeciv_user_account_request("pbem");
-				}
-			}
-		});
-
-  $("#dialog").dialog('open');
-  grecaptcha.render('captcha_element', {
-          'sitekey' : '6LfpcgMTAAAAAPRAOqYy6ZUhuX6bOJ7-7-_1V0FL'
-        });
-
-  $("#username").blur(function() {
-   $.ajax({
-     type: 'POST',
-     url: "/validate_user?userstring=" + $("#username").val(),
-     success: function(data, textStatus, request) {
-        if (data != "user_does_not_exist") {
-          $("#username_validation_result").html("The username is already taken. Please choose another username.");
-        } else {
-          $("#email").blur(function() {
-          $.ajax({
-            type: 'POST',
-            url: "/validate_user?userstring=" + $("#email").val(),
-            success: function(data, textStatus, request) {
-               if (data == "invitation") {
-                 $("#username_validation_result").html("");
-                 $(".ui-dialog-buttonset button").button("enable");
-               } else {
-                 $("#username_validation_result").html("The e-mail is already registered. Please choose another.");
-                 $(".ui-dialog-buttonset button").button("disable");
-               }
-             }
-           });
-         });
-        }
-      }
-    });
-  });
-
-}
-
-
 /**************************************************************************
 ...
 **************************************************************************/
@@ -234,7 +156,7 @@ function login_pbem_user_request()
 
   $.ajax({
    type: 'POST',
-   url: "/login_user?username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(password),
+   url: "/login_user?username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(md5(password)),
    success: function(data, textStatus, request){
        if (data != null && data == "OK") {
          simpleStorage.set("username", username);
@@ -242,7 +164,7 @@ function login_pbem_user_request()
          if ($.getUrlVar('savegame') != null) {
            handle_pbem_load();
          } else {
-           challenge_pbem_player_dialog();
+           challenge_pbem_player_dialog(null);
          }
        } else {
          $("#username_validation_result").html("Incorrect username or password. Please try again!");
@@ -258,17 +180,21 @@ function login_pbem_user_request()
 /**************************************************************************
  Shows the Freeciv play-by-email dialog.
 **************************************************************************/
-function challenge_pbem_player_dialog() 
+function challenge_pbem_player_dialog(extra_intro_message)
 {
 
   var title = "Find other players to play with!";
-  var message = "Enter the username or e-mail address of the other player: "
-   + "<table><tr><td>Username/E-Mail:</td><td><input id='opponent' type='text' size='25' maxlength='64'"
-   + " onkeyup='return forceLower(this);'></td></tr>"
-   + "</table><br>"
-   + "If the other player already has an account, then you will play the first turn. If you enter the e-mail " 
-   + "address of a new player, then we will send an invitation e-mail to that player " 
-   + "and the other player will play the first turn."
+  var message = "";
+  if (extra_intro_message != null) message = extra_intro_message += "<br>";
+
+  message += "Total number of human players: " +
+  "<select name='playercount' id='playercount'>" +
+            "<option value='2'>2</option>" +
+            "<option value='3'>3</option>" +
+            "<option value='4'>4</option>" +
+      "</select> <br><br>" +
+      "<div id='opponent_box'></div>";
+
   // reset dialog page.
   $("#dialog").remove();
   $("<div id='dialog'></div>").appendTo("div#game_page");
@@ -283,11 +209,21 @@ function challenge_pbem_player_dialog()
 			   type: 'POST',
 			   url: "/random_user" ,
 			   success: function(data, textStatus, request){
-				$("#opponent").val(data)
-			      }  });
+                var playercount = parseFloat($('#playercount').val());
+                if (playercount == 2) {
+				  $("#opponent").val(data)
+				} else {
+				  $("#opponent_1").val(data)
+				}
+              }
+              });
 			},
+			"Cancel" : function() {
+               show_pbem_dialog();
+            },
+
 			"Start game": function() {
-                                    create_new_pbem_game($("#opponent").val().trim());
+               create_new_pbem_game();
 			 }
 			}
 
@@ -298,16 +234,57 @@ function challenge_pbem_player_dialog()
     $("#opponent").val(invited);
     $(".ui-dialog-buttonset button").first().hide();
   }
+  prepare_pbem_opponent_selection();
+  $('#playercount').change(prepare_pbem_opponent_selection);
 
   $("#dialog").dialog('open');
 }
 
 /**************************************************************************
+ ...
+**************************************************************************/
+function prepare_pbem_opponent_selection() {
+    var playercount = parseFloat($('#playercount').val());
+    opponents = [];
+    if (playercount == 2) {
+      var msg = "Enter the username or e-mail address of the other player: "
+       + "<table><tr><td>Username/E-Mail:</td><td><input id='opponent' type='text' size='25' maxlength='64'"
+       + " onkeyup='return forceLower(this);'></td></tr>"
+       + "</table><br>"
+       + "If the other player already has an account, then you will play the first turn.<br>If you enter the e-mail "
+       + "address of a new player, then we will send an invitation e-mail to that player "
+       + "and the other player will play the first turn."
+       $("#opponent_box").html(msg);
+
+    } else if (playercount == 3 || playercount == 4) {
+      var msg = "Enter the usernames of the other players: "
+       + "<table>"
+       + "<tr><td>You:</td><td>" + username + "</td></tr>"
+       + "<tr><td>Username 2:</td><td><input id='opponent_1' type='text' size='25' maxlength='64'"
+       + " onkeyup='return forceLower(this);'></td></tr>"
+       + "<tr><td>Username 3:</td><td><input id='opponent_2' type='text' size='25' maxlength='64'"
+       + " onkeyup='return forceLower(this);'></td></tr>";
+      if (playercount == 4) {
+        msg += "<tr><td>Username 4:</td><td><input id='opponent_3' type='text' size='25' maxlength='64'"
+                      + " onkeyup='return forceLower(this);'></td></tr>";
+      }
+
+       msg += "</table><br>"
+       + "The other players have to create their account and tell you their usernames, before you fill in this form. <br>" +
+       "You will play the first turn. The other players will get an e-mail when it is their turn to play."
+       $("#opponent_box").html(msg);
+
+    }
+  }
+
+/**************************************************************************
  Determines if the email is valid
 **************************************************************************/
 function validateEmail(email) {
+    var checkemail = email;
+    if (checkemail != null) checkemail = checkemail.replace("+", "");  // + is allowed.
     var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-    return re.test(email);
+    return re.test(checkemail);
 }
 
 /**************************************************************************
@@ -321,57 +298,112 @@ function forceLower(strInput)
 /**************************************************************************
 ...
 **************************************************************************/
-function create_new_pbem_game(check_opponent) 
+function create_new_pbem_game()
 {
+  opponents = [];
+  var playercount = parseFloat($('#playercount').val());
 
-  if (invited_players.indexOf(check_opponent) != -1) {
-    swal("You have already invited " + check_opponent + ". There is no "
-        + "need to invite multiple times. It can take some time before " 
-        + "the invitation email arrives to " + check_opponent); 
-    return;
-  }
+  if (playercount == 2) {
+    var check_opponent = $("#opponent").val();
+    if (check_opponent != null) check_opponent = check_opponent.trim();
 
-  if (check_opponent == username) {
-    swal("No playing with yourself please.");
-    return;
-  }
+    if (invited_players.indexOf(check_opponent) != -1) {
+      swal("You have already invited " + check_opponent + ". There is no "
+          + "need to invite multiple times. It can take some time before "
+          + "the invitation email arrives to " + check_opponent);
+      return;
+    }
 
-  invited_players.push(check_opponent);
+    if (check_opponent == username) {
+      swal("No playing with yourself please.");
+      return;
+    }
 
-  $.ajax({
-   type: 'POST',
-   url: "/validate_user?userstring=" + check_opponent + "&invited_by=" + username,
-   success: function(data, textStatus, request){
-      if (data == "invitation") {
-        send_pbem_invitation(check_opponent);
+    invited_players.push(check_opponent);
 
-      } else if (data == "user_does_not_exist") {
-        swal("Opponent does not exist. Please try another username.");
+    $.ajax({
+     type: 'POST',
+     url: "/validate_user?userstring=" + check_opponent + "&invited_by=" + username,
+     success: function(data, textStatus, request){
+        if (data == "invitation") {
+          send_pbem_invitation(check_opponent);
 
-      } else if (data != null && data.length > 3) {
-        opponent = data;
-        network_init();
-        $("#dialog").dialog('close');
-        setTimeout("create_pbem_players();", 3500);
-        show_dialog_message("Game ready", "Play-By-Email game is now ready to start. " +
-        "Click the start game button to play the first turn. You can also configure some " +
-        "game settings before the game begins. The default settings are recommended. " +
-        "Some settings are not supported in PBEM games, " +
-        "such as more than two players, AI players or diplomacy. " +
-        "As the first player, you can choose nation for both players. " + 
-        "Have a fun Play-By-Email game!"
-        );
+        } else if (data == "user_does_not_exist") {
+          swal("Opponent does not exist. Please try another username.");
+
+        } else if (data != null && data.length > 3) {
+          opponents.push(data);
+          network_init();
+          $("#dialog").dialog('close');
+          setTimeout("create_pbem_players();", 3500);
+          show_dialog_message("Game ready", "Play-By-Email game is now ready to start. " +
+          "Click the start game button to play the first turn. You can also configure some " +
+          "game settings before the game begins. The default settings are recommended. " +
+          "Some settings are not supported in PBEM games, " +
+          "such as more than four players, AI players or diplomacy. " +
+          "As the first player, you can choose nation for both players. " +
+          "Have a fun Play-By-Email game!"
+          );
 
 
+        } else {
+          swal("Problem starting new pbem game.");
+        }
+      },
+     error: function (request, textStatus, errorThrown) {
+       swal("Opponent does not exist. Please try another username.");
+     }
+    });
+
+  } else {
+    // 3 or 4 players.
+    var pbem_ready_players = 1;
+    var game_start_ready = true;
+    opponents.push($("#opponent_1").val());
+    opponents.push($("#opponent_2").val());
+    if (playercount == 4) {
+      opponents.push($("#opponent_3").val());
+    }
+
+    for (var i = 0; i < opponents.length; i++) {
+      if (opponents[i].length < 1) {
+        swal("Please fill inn all players names.");
+        return;
+      } else if (opponents[i].indexOf("@") != -1) {
+        swal("Please specify the username of the other player, not their e-mail address.");
+        return;
       } else {
-        swal("Problem starting new pbem game.");
+       $.ajax({
+         async: false,
+         type: 'POST',
+         url: "/validate_user?userstring=" + opponents[i] + "&invited_by=" + username,
+         success: function(data, textStatus, request) {
+           if (data == "user_does_not_exist") {
+             swal("Opponent does not exist. Please try another username.");
+             game_start_ready = false;
+           } else {
+             pbem_ready_players = pbem_ready_players + 1;
+           }
+         }
+        });
       }
-    },
-   error: function (request, textStatus, errorThrown) {
-     swal("Opponent does not exist. Please try another username.");
-   }
-  });
+    }
 
+    // start new pbem game
+    if (game_start_ready && pbem_ready_players == playercount) {
+      network_init();
+      $("#dialog").dialog('close');
+      setTimeout("create_pbem_players();", 3500);
+      show_dialog_message("Game ready", "Play-By-Email game is now ready to start. " +
+          "Click the start game button to play the first turn. You can also configure some " +
+          "game settings before the game begins. The default settings are recommended. " +
+          "Some settings are not supported in PBEM games, " +
+          "such as more than four players, AI players or diplomacy. " +
+          "As the first player, you can choose nation for all players. " +
+          "Have a fun Play-By-Email game!"
+          );
+    }
+  }
 }
 
 /**************************************************************************
@@ -401,9 +433,12 @@ function send_pbem_invitation(email)
 **************************************************************************/
 function create_pbem_players()
 {
-  if (opponent != null) {
-    send_message("/create " + opponent);
+  if (opponents != null && opponents.length > 0) {
+    for (var i = 0; i < opponents.length; i++) {
+      send_message("/create " + opponents[i]);
+    }
     setTimeout("pbem_init_game();", 1200);
+
   } else {
     swal("Error: invalid opponent selected.");
   }
@@ -418,7 +453,7 @@ function set_human_pbem_players()
     var pplayer = players[player_id];
     if (pplayer['flags'].isSet(PLRF_AI) == true 
         && pplayer['name'].toUpperCase() != username.toUpperCase()) {
-      send_message("/ai " + opponent);
+      send_message("/aitoggle " + pplayer['name']);
     }
   }
 }
@@ -436,6 +471,7 @@ function is_pbem()
 **************************************************************************/
 function pbem_end_phase() 
 {
+  if (pbem_phase_ended) return;
   pbem_phase_ended = true;
   send_message("/save");
 
@@ -570,7 +606,7 @@ function request_deactivate_account()
 
   $.ajax({
    type: 'POST',
-   url: "/deactivate_user?username=" + usr + "&password=" + password ,
+   url: "/deactivate_user?username=" + usr + "&password=" + md5(password) ,
    success: function(data, textStatus, request){
        swal("User account has been deactivated!");
 

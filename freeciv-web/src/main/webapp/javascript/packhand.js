@@ -88,15 +88,14 @@ function handle_server_join_reply(packet)
        if (graphics_quality == QUALITY_LOW) {
          // WebGL renderer on mobile devices needs to use very little RAM.
          send_message_delayed("/set size 1", 130);
+
+         send_message_delayed("/set borders disabled", 150);
        }
        // Reduce the amount of rivers, it's kind of ugly at the moment.
        send_message_delayed("/set wetness 25", 140);
 
        // Freeciv WebGL doesn't support map wrapping yet.
        send_message_delayed("/set topology flat", 145);
-
-       // Freeciv-web WebGL doesn't support rendering borders.
-       send_message_delayed("/set borders disabled", 150);
 
        // Less hills will be more user-friendly in 3D mode.
        send_message_delayed("/set steepness 12", 155);

@@ -24,22 +24,27 @@
 			data.reverse().forEach(function (game) {
 				var turn = game[0];
 				var phase = game[1];
-				var playerOne = game[2][0];
-				var playerTwo = game[2][1];
-				if (playerOne.indexOf("@") >= 0 || playerTwo.indexOf("@") >= 0) {
-					return;
-				}
+				var players = game[2];
+				
 				var currentPlayer = game[2][phase];
 				var lastPlayed = game[3];
 				var timeLeft = game[4];
 				
+				players = players.map(function (player) {
+					return player === currentPlayer
+						? '<b>' + player + '</b>'
+						: player;
+				}).join(', ');
+				
+				if (players.indexOf("@") >= 0) {
+					return;
+				};
+				
+				
 				$("#play-by-email-table").append(
 					'<tr>' +
-						'<td class="'+ (playerOne === currentPlayer ? 'active-player' : '') +'" >' +
-							playerOne +
-						'</td>' +
-						'<td class="'+ (playerTwo === currentPlayer ? 'active-player' : '') +'">' +
-							playerTwo +
+						'<td>' +
+							players +
 						'</td>' +
 						'<td class="hidden-xs">' +
 							turn +
@@ -257,14 +262,14 @@
 					<div class="row">
 						<div class="col-md-12">
 							<p>
-								A Play-By-Email game is a 1v1 deathmatch on a small map,
+								A Play-By-Email game is a deathmatch on a small map with up to 4 human players, playing 
 								with alternating turns, and players get an e-mail every time it is
 								their turn to play. These games are often played over a long time
 								period, each player has 7 days to complete their turn.
 							</p>
 							<p>
 								To start a new Play-By-Email game, 
-								<a href="/webclient/?action=pbem">log in here</a>. To play your turn
+								<u></u></ul><a href="/webclient/?action=pbem">log in here</a></u>. To play your turn
 								in a running Play-By-Email game, click on the link in the last
 								e-mail you got from Freeciv-web. Games are expired after 7 days if
 								you don't play your turn.
@@ -277,7 +282,7 @@
 							<h4>Ongoing games</h4>
 							<table id="play-by-email-table" class="table">
 								<tr>
-									<th colspan="2">Players</th>
+									<th>Players</th>
 									<th class="hidden-xs">Turn</th>
 									<th class="hidden-xs">Last played</th>
 									<th>Time left</th>

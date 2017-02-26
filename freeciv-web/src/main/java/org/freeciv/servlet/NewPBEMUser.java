@@ -69,7 +69,7 @@ public class NewPBEMUser extends HttpServlet {
 
 		String username = java.net.URLDecoder.decode(request.getParameter("username"), "UTF-8");
 		String password = java.net.URLDecoder.decode(request.getParameter("password"), "UTF-8");
-		String email = java.net.URLDecoder.decode(request.getParameter("email"), "UTF-8");
+		String email = java.net.URLDecoder.decode(request.getParameter("email").replace("+", "%2B"), "UTF-8");
 		String captcha = java.net.URLDecoder.decode(request.getParameter("captcha"), "UTF-8");
 
 		if (password == null || password.length() <= 2) {
@@ -124,7 +124,7 @@ public class NewPBEMUser extends HttpServlet {
 
 			String query =
 					"INSERT INTO auth (username, email, password, activated, ip) "
-							+ "VALUES (?,?, MD5(?), ?, ?)";
+							+ "VALUES (?,?, ?, ?, ?)";
 			PreparedStatement preparedStatement = conn.prepareStatement(query);
 			preparedStatement.setString(1, username.toLowerCase());
 			preparedStatement.setString(2, email);

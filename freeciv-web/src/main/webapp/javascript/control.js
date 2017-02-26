@@ -1646,6 +1646,10 @@ function send_end_turn()
   var packet = {"pid" : packet_player_phase_done, "turn" : game_info['turn']};
   send_request(JSON.stringify(packet));
   update_turn_change_timer();
+
+  if (is_pbem()) {
+    setTimeout(pbem_end_phase, 2000);
+  }
 }
 
 

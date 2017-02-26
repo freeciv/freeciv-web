@@ -40,9 +40,9 @@ import org.json.JSONObject;
  * Lists: the number of running games, the number of single player games played,
  * and the number of multi player games played.
  *
- * URL: /meta/fpinfo
+ * URL: /game/statistics
  */
-public class ServerStatistics extends HttpServlet {
+public class GameStatistics extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private static final String HEADER_EXPIRES = "Expires";
@@ -58,14 +58,16 @@ public class ServerStatistics extends HttpServlet {
 		Connection conn = null;
 
 		try {
+			response.setContentType(CONTENT_TYPE);
+
 			Context env = (Context) (new InitialContext().lookup("java:comp/env"));
 			DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
 			conn = ds.getConnection();
 
 			String query = "SELECT " //
-					+ "	(SELECT COUNT(*) FROM servers WHERE state = 'Running') AS running_count, " //
-					+ "	(SELECT SUM(gameCount) FROM games_played_stats WHERE gametype IN (0, 5)) AS single_count, " //
-					+ "	(SELECT SUM(gameCount) FROM games_played_stats WHERE gametype IN (1, 2)) AS multi_count";
+					+ "	(SELECT COUNT(*) FROM servers WHERE state = 'Running') AS ongoingGames, " //
+					+ "	(SELECT SUM(gameCount) FROM games_played_stats WHERE gametype IN (0, 5)) AS totalSinglePlayerGames, " //
+					+ "	(SELECT SUM(gameCount) FROM games_played_stats WHERE gametype IN (1, 2)) AS totalMultiPlayerGames";
 
 			PreparedStatement preparedStatement = conn.prepareStatement(query);
 			ResultSet rs = preparedStatement.executeQuery();
@@ -73,22 +75,20 @@ public class ServerStatistics extends HttpServlet {
 				throw new Exception("Expected at least one row.");
 			}
 
-			String result = new StringBuilder() //
-					.append(rs.getInt(1)) //
-					.append(';') //
-					.append(rs.getInt(2)) //
-					.append(';') //
-					.append(rs.getInt(3)) //
-					.toString();
+			JSONObject result = new JSONObject();
+			result.put("ongoing", rs.getInt("ongoingGames"));
+			JSONObject finishedGames = new JSONObject();
+			finishedGames.put("singlePlayer", rs.getInt("totalSinglePlayerGames"));
+			finishedGames.put("multiPlayer", rs.getInt("totalMultiPlayerGames"));
+			result.put("finished", finishedGames);
 
 			ZonedDateTime expires = ZonedDateTime.now(ZoneId.of("UTC")).plusHours(1);
 			String rfc1123Expires = expires.format(DateTimeFormatter.RFC_1123_DATE_TIME);
 
 			response.setHeader(HEADER_EXPIRES, rfc1123Expires);
-			response.getOutputStream().print(result);
+			response.getOutputStream().print(result.toString());
 
 		} catch (Exception err) {
-			response.setContentType(CONTENT_TYPE);
 			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			response.getOutputStream().print(INTERNAL_SERVER_ERROR);
 		} finally {

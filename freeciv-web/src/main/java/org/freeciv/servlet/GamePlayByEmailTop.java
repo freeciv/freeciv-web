@@ -34,15 +34,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
  * Lists: the number of running games, the number of single player games played,
  * and the number of multi player games played.
  *
- * URL: /meta/fpinfo
+ * URL: /game/play-by-email/top
  */
-public class PlayByEmailStatistics extends HttpServlet {
+public class GamePlayByEmailTop extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private static final String HEADER_EXPIRES = "Expires";
@@ -58,33 +59,26 @@ public class PlayByEmailStatistics extends HttpServlet {
 		Connection conn = null;
 
 		try {
+			response.setContentType(CONTENT_TYPE);
+
 			Context env = (Context) (new InitialContext().lookup("java:comp/env"));
 			DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
 			conn = ds.getConnection();
 
-			String query = "SELECT winner, playerOne AS one, playerTwo AS two, endDate, "
-					+ "(SELECT COUNT(*) FROM game_results WHERE winner = one) AS wins_by_one, "
-					+ "(SELECT COUNT(*) FROM game_results WHERE winner = two) AS wins_by_two " //
-					+ "FROM game_results " //
-					+ "ORDER BY id DESC LIMIT 20";
+			String query = "" //
+					+ "SELECT winner AS player, COUNT(winner) AS wins " //
+					+ "  FROM game_results " //
+					+ " GROUP BY winner " //
+					+ " ORDER BY wins DESC LIMIT 5";
 
 			PreparedStatement preparedStatement = conn.prepareStatement(query);
 			ResultSet rs = preparedStatement.executeQuery();
-			StringBuilder result = new StringBuilder();
+			JSONArray result = new JSONArray();
 			while (rs.next()) {
-				result //
-						.append(rs.getDate(4)) //
-						.append(',') //
-						.append(rs.getString(1)) //
-						.append(',') //
-						.append(rs.getString(2)) //
-						.append(',') //
-						.append(rs.getString(3)) //
-						.append(',') //
-						.append(rs.getInt(5)) //
-						.append(',') //
-						.append(rs.getInt(6)) //
-						.append(";\n"); //
+				result.put(new JSONObject() //
+						.put("player", rs.getString("player")) //
+						.put("wins", rs.getInt("wins")) //
+				);
 			}
 
 			ZonedDateTime expires = ZonedDateTime.now(ZoneId.of("UTC")).plusHours(1);
@@ -94,7 +88,6 @@ public class PlayByEmailStatistics extends HttpServlet {
 			response.getOutputStream().print(result.toString());
 
 		} catch (Exception err) {
-			response.setContentType(CONTENT_TYPE);
 			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			response.getOutputStream().print(INTERNAL_SERVER_ERROR);
 		} finally {

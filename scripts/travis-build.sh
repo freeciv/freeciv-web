@@ -72,7 +72,12 @@ python3 setup.py install
 ## mysql setup
 echo "==== Setting up MySQL ===="
 mysqladmin -u ${mysql_user} --password=""  create freeciv_web
-mysql -u ${mysql_user} --password=""  freeciv_web < ${basedir}/freeciv-web/src/main/webapp/meta/private/metaserver.sql
+cd ${basedir}/freeciv-web
+cp flyway.properties.dist flyway.properties
+sudo -u travis mvn compile flyway:migrate
+cd -
+
+#mysql -u ${mysql_user} --password=""  freeciv_web < ${basedir}/freeciv-web/src/main/webapp/meta/private/metaserver.sql
 
 sed -e "s/10/2/" ${basedir}/publite2/settings.ini.dist > ${basedir}/publite2/settings.ini
 dos2unix ${basedir}/scripts/configuration.sh.dist

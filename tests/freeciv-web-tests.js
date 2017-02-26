@@ -48,11 +48,12 @@ casper.test.begin('Test of Freeciv-web frontpage on localhost port 80 (nginx).',
     });
 });
 
-casper.test.begin('Test that Metaserver is responding.', 2, function suite(test) {
+casper.test.begin('Test that game list is responding.', 4, function suite(test) {
     casper.start("http://localhost/game/list", function() {
         test.assertHttpStatus(200);
-        test.assertTextExists('Flag',
-                              'Test that Metaserver contains expected text.');
+        test.assertExists('#single-player-tab', 'Test that game-list contains expected tabs.');
+        test.assertExists('#multi-player-tab', 'Test that game-list contains expected tabs.');
+        test.assertExists('#play-by-email-tab', 'Test that game-list contains expected tabs.');
     });
 
     casper.run(function() {

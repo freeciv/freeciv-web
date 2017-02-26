@@ -152,7 +152,7 @@
 						</c:if>
 						<div class="row hidden-xs hidden-sm">
 							<div class="col-md-6">       
-								<a href="/webclient/?action=new" class="btn small pull-right"><i class="fa fa-flag"></i> <fmt:message key="index-game-launcher-2d"/></a>
+								<a id="single-button" href="/webclient/?action=new" class="btn small pull-right"><i class="fa fa-flag"></i> <fmt:message key="index-game-launcher-2d"/></a>
 							</div>
 							<div class="col-md-6"> 
 								<a href="/webclient/?action=new&renderer=webgl" class="btn small pull-left"><i class="fa fa-cube"></i> <fmt:message key="index-game-launcher-3d"/></a>

@@ -11,6 +11,92 @@
 			text-align: center;
 		}
 	</style>
+	<script>
+		/****************************************************************************
+		  Shows scores on the game details page.
+		****************************************************************************/
+		function show_scores(port) {
+			$.ajax({
+				url: "/data/scorelogs/score-" + port + ".log",
+				dataType: "html",
+				cache: false,
+				async: true
+			}).fail(function() {
+				$(".score-message").html("Score graphs not enabled.")
+				console.debug("Unable to load scorelog file.");
+			}).done(function(data) {
+				handle_scorelog(data);
+			});
+		}
+	
+		/****************************************************************************
+		 Handles the scorelog file
+		****************************************************************************/
+		function handle_scorelog(scorelog) {
+		  var start_turn = 1;
+		  var scoreitems = scorelog.split("\n");
+		  var scoreplayers = {};
+		  var playerslist = [];
+		  var playernames = [];
+		  var scoretags = {};
+		  var resultdata = {};
+		  for (var i = 0; i < scoreitems.length; i++) {
+		    var scoreitem = scoreitems[i];
+		    var scoredata = scoreitem.split(" ");
+		    if (scoredata.length >= 3) {
+		      if (scoredata[0] == "addplayer") {
+		        var pname = scoredata[3];
+		        for (var s = 4; s < scoredata.length; s++) {
+		          pname += " " + scoredata[s];
+		        }
+		        scoreplayers[scoredata[2]] = pname;
+		        playerslist.push(scoredata[2]);
+		        playernames.push(pname);
+	
+		      } else if (scoredata[0] == "turn") {
+		        if (start_turn==0) start_turn = scoredata[1];
+		      } else if (scoredata[0] == "tag") {
+		        scoretags[scoredata[1]] = scoredata[2];
+	
+		      } else if (scoredata[0] == "data") {
+		        var turn = scoredata[1];
+		        var tag = scoredata[2];
+		        var player = scoredata[3];
+		        var value = scoredata[4];
+		        if (resultdata[tag] == null) {
+		          var s = {};
+		          s["turn"] = turn;
+		          s[player] = parseInt(value);
+		          resultdata[tag] = [];
+		          resultdata[tag][turn - start_turn] = s;
+		        } else if (resultdata[tag] != null && resultdata[tag][turn-start_turn] == null) {
+		          var s = {};
+		          s["turn"] = turn;
+		          s[player] = parseInt(value);
+		          resultdata[tag][turn - start_turn] = s;
+		        } else if (resultdata[tag][turn-start_turn] != null) {
+		          resultdata[tag][turn-start_turn][player] = parseInt(value);
+		        }
+		      }
+		    }
+		  }
+	
+		  var ps = 4;
+		  if (scoreitems.length >1000) ps = 0;
+	
+		  Morris.Line({
+		      element: 'scores',
+		      data: resultdata[0],
+		      xkey: 'turn',
+		      ykeys: playerslist,
+		      labels: playernames,
+		      parseTime: false,
+		      pointSize: ps
+		  });
+	
+		}
+	
+	</script>
 </head>
 <body>
 	<%@include file="/WEB-INF/jsp/fragments/header.jsp"%>
@@ -112,8 +198,9 @@
 				<div class="row">
 					<div class="center-block" style="width: 800px;">
 						<c:if test="${state == 'Running'}">
+							<span class="score-message"></span>
 							<b>Scores:</b><div id="scores"></div><br><br><b>Settings:</b><br>
-							<script type='text/javascript'>show_scores(${port});</script>
+							<script>show_scores(${port});</script>
 						</c:if>
 					</div>
 				</div>

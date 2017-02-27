@@ -9,7 +9,7 @@ casper.on('remote.message', function(message) {
     this.echo('JavaScript console: ' + message);
 });
 
-casper.test.begin('Test of Resin running on localhost port 8080.', 2, function suite(test) {
+casper.test.begin('Test of Tomcat8 running on localhost port 8080.', 2, function suite(test) {
     casper.start("http://localhost:8080/", function() {
         test.assertHttpStatus(200);
         test.assertTitleMatch(/Freeciv-web/, 'Freeciv-web title is present');
@@ -48,11 +48,12 @@ casper.test.begin('Test of Freeciv-web frontpage on localhost port 80 (nginx).',
     });
 });
 
-casper.test.begin('Test that Metaserver is responding.', 2, function suite(test) {
-    casper.start("http://localhost/meta/metaserver", function() {
+casper.test.begin('Test that game list is responding.', 4, function suite(test) {
+    casper.start("http://localhost/game/list", function() {
         test.assertHttpStatus(200);
-        test.assertTextExists('Freeciv-web Single-player games', 
-                              'Test that Metaserver contains expected text.');
+        test.assertExists('#single-player-tab', 'Test that game-list contains expected tabs.');
+        test.assertExists('#multi-player-tab', 'Test that game-list contains expected tabs.');
+        test.assertExists('#play-by-email-tab', 'Test that game-list contains expected tabs.');
     });
 
     casper.run(function() {

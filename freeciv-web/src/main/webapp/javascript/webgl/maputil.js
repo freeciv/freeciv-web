@@ -75,8 +75,8 @@ function webgl_canvas_pos_to_map_pos(x, y) {
 
   var intersects = raycaster.intersectObject(landMesh);
 
-  for (var i = 0; i < intersects.length; i++) {
-    var intersect = intersects[i];
+  if (intersects.length > 0) {
+    var intersect = intersects[0];
     return {'x' : intersect.point.x, 'y' : intersect.point.z};
   }
 

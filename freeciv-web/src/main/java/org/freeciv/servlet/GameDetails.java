@@ -173,7 +173,7 @@ public class GameDetails extends HttpServlet {
 
 		} catch (Exception err) {
 			request.removeAttribute("state");
-			RequestDispatcher rd = request.getRequestDispatcher("game-details.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/game/details.jsp");
 			rd.forward(request, response);
 			return;
 		} finally {
@@ -186,7 +186,7 @@ public class GameDetails extends HttpServlet {
 			}
 		}
 
-		RequestDispatcher rd = request.getRequestDispatcher("game-details.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/game/details.jsp");
 		rd.forward(request, response);
 	}
 }

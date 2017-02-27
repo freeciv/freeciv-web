@@ -89,12 +89,30 @@
 		margin: 20px auto 10px;
 		background: #f1905b;
 	}
-	#game-launcher a.small { width: 100px;	}
+	#game-launcher a.small { width: 130px;	}
 	.multiplayer-games th:last-child { width: 120px; }
 	.multiplayer-games a.label:last-child { margin-left: 3px; }
 	.multiplayer-games .highlight { 
 		color: green;
 		font-weight: bold;
+	}
+
+	.videoWrapper {
+	position: relative;
+	padding-bottom: 56.25%; /* 16:9 */
+	padding-top: 25px;
+	height: 0;
+    }
+
+	.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	}
+	.jumbotron {
+	padding-bottom: 0px;
 	}
 </style>
 </head>
@@ -117,12 +135,12 @@
 
 		<div id="game-launcher">
 			<div class="row">
-				<div class="col-md-4 top-buffer-3">
+				<div class="col-md-4">
 					<div class="game-type">
 						<div class="header">
 							<span class="name"><i class="fa fa-graduation-cap"></i> <fmt:message key="index-game-launcher-beginner" /></span>
 						</div>
-						<c:if test="${pageContext.request.locale == 'en_US'}">
+						<c:if test="${default_lang}">
 							<div class="features">
 								First time player?<br>
 								This tutorial was made for you.<br>
@@ -140,12 +158,12 @@
 						<a href="/webclient/?action=load" class="btn"><i class="fa fa-save"></i> <fmt:message key="index-game-launcher-load"/></a>
 					</div>
 				</div>
-				<div class="col-md-4 top-buffer-3">
+				<div class="col-md-4">
 					<div class="game-type">
 						<div class="header">
 							<span class="name"><i class="fa fa-user"></i> <fmt:message key="index-game-launcher-singleplayer" /></span>
 						</div>
-						<c:if test="${pageContext.request.locale == 'en_US'}">
+						<c:if test="${default_lang}">
 							<div class="features">
 								Play against the Freeciv AI
 							</div>
@@ -160,13 +178,13 @@
 						</div>
 						<a href="/webclient/?action=new" class="btn hidden-md hidden-lg"><i class="fa fa-flag"></i> <fmt:message key="index-game-launcher-random-map-2d"/></a>
 						<a href="/webclient/?action=new&renderer=webgl" class="btn hidden-md hidden-lg"><i class="fa fa-cube"></i> <fmt:message key="index-game-launcher-random-map-3d"/></a>
-						<c:if test="${pageContext.request.locale == 'en_US'}">
+						<c:if test="${default_lang}">
 							<div class="features">
 								Start on a scenario map, such as <br> World map, America, Italy or Japan.
 							</div>
 						</c:if>
 						<a href="/webclient/?action=load&amp;scenario=true" class="btn"><i class="fa fa-map-o"></i> <fmt:message key="index-game-launcher-scenario"/></a>
-						<c:if test="${pageContext.request.locale == 'en_US'}">
+						<c:if test="${default_lang}">
 							<div class="features">
 								Choose your map from a real earth map.
 							</div>
@@ -174,24 +192,24 @@
 						<a href="/freeciv-earth/" class="btn"><i class="fa fa-globe"></i> <fmt:message key="index-game-launcher-real-earth"/></a>
 					</div>
 				</div>
-				<div class="col-md-4 top-buffer-3">
+				<div class="col-md-4">
 					<div class="game-type">
 						<div class="header">
 							<span class="name"><i class="fa fa-users"></i> <fmt:message key="index-game-launcher-multiplayer"/></span>
 						</div>
-						<c:if test="${pageContext.request.locale == 'en_US'}">
+						<c:if test="${default_lang}">
 							<div class="features">
 								Start or join a game with multiple human or AI players.
 							</div>
 						</c:if>
 						<a href="/game/list?v=multiplayer" class="btn"><i class="fa fa-users"></i> <fmt:message key="index-game-launcher-random-map"/></a>
-						<c:if test="${pageContext.request.locale == 'en_US'}">
+						<c:if test="${default_lang}">
 							<div class="features">
 								Start a play-by-email game where you get an e-mail <br> when it is your turn to play.
 							</div>
 						</c:if>
 						<a href="/webclient/?action=pbem" class="btn"><i class="fa fa-envelope"></i> <fmt:message key="index-game-launcher-play-by-email"/></a>
-						<c:if test="${pageContext.request.locale == 'en_US'}">
+						<c:if test="${default_lang}">
 							<div class="features">
 								Play multiple human players <br> on the same computer
 							</div>
@@ -201,32 +219,6 @@
 				</div>
 			</div>
 		</div> <!-- end game launcher -->
-
-		
-		<div id="chrome-web-store" style="display: none;" class="alert alert-warning top-buffer-3" role="alert">
-			<a href="https://chrome.google.com/webstore/detail/freeciv/ldhdjhmbapbeafmhdoobnlldhfopfcgh">
-				<img src="/static/images/chrome-web-store.png" alt="">
-			</a>
-			<a href="https://chrome.google.com/webstore/detail/freeciv/ldhdjhmbapbeafmhdoobnlldhfopfcgh">
-				<fmt:message key="index-chrome-web-store"/>
-			</a>
-		</div>
-		<div id="google-play-store" style="display: none;" class="alert alert-warning top-buffer-3" role="alert">
-			<a href="https://play.google.com/store/apps/details?id=org.freeciv.play">
-				<img src="/static/images/google-play-store.png" alt="">
-			</a>
-			<a href="https://play.google.com/store/apps/details?id=org.freeciv.play">
-				<fmt:message key="index-play-store"/>
-			</a>
-		</div> 
-		<div id="microsoft-store" style="display: none;" class="alert alert-warning top-buffer-3" role="alert">
-			<a href="http://apps.microsoft.com/windows/app/freeciv/43da4eed-42cf-4105-87a2-e03f45ade081">
-				<img src="/static/images/microsoft-store.png" alt="">
-			</a>
-			<a href="http://apps.microsoft.com/windows/app/freeciv/43da4eed-42cf-4105-87a2-e03f45ade081">
-				<fmt:message key="index-microsoft-store"/>
-			</a>
-		</div> <!-- end apps/browser plugins -->
 
 		<div class="row top-buffer-1">
 			<div class="col-md-12">
@@ -256,13 +248,13 @@
 			</div>
 		</div> <!-- end teasers -->
 
-		<c:if test="${pageContext.request.locale == 'en_US'}"> 
+		<c:if test="${default_lang}">
 			<div id="statistics" class="row">
 				<div class="col-md-12">
 					<div class="panel-freeciv statistics">
 						<span id="statistics-singleplayer"><b>0</b></span> <fmt:message key="index-stats-singleplayer"/> <span id="statistics-multiplayer"><b>0</b></span> <fmt:message key="index-stats-multiplayer"/><br>
 						<fmt:message key="index-stats-since"/>
-						<a href="/game/statistics/details"><fmt:message key="index-stats-details"/></a>			
+
 					</div>
 				</div>
 			</div> <!-- end statistics -->
@@ -275,18 +267,41 @@
 		</div>
 		<div class="row">
 			<div class="col-md-6">
-				<div class="panel-freeciv">
+				<div class="videoWrapper">
 					<iframe class="embed-responsive-item" width="542" height="343" src="https://www.youtube.com/embed/FDVmJXM_FNc" frameborder="0" allowfullscreen></iframe>
 				</div>
 			</div>
-			<!--  
 			<div class="col-md-6">
-				<div class="panel-freeciv">
-					<iframe class="embed-responsive-item" width="542" height="343" src="https://www.youtube.com/embed/7b-kitw91kg" frameborder="0" allowfullscreen></iframe>
+				<div class="videoWrapper">
+					<iframe class="embed-responsive-item" width="542" height="343" src="https://www.youtube.com/embed/K6xBi2JWyZU" frameborder="0" allowfullscreen></iframe>
 				</div>
 			</div>
-			-->
 		</div> <!-- end youtube -->
+
+		<div id="chrome-web-store" style="display: none;" class="alert alert-warning top-buffer-3" role="alert">
+			<a href="https://chrome.google.com/webstore/detail/freeciv/ldhdjhmbapbeafmhdoobnlldhfopfcgh">
+				<img src="/static/images/chrome-web-store.png" alt="">
+			</a>
+			<a href="https://chrome.google.com/webstore/detail/freeciv/ldhdjhmbapbeafmhdoobnlldhfopfcgh">
+				<fmt:message key="index-chrome-web-store"/>
+			</a>
+		</div>
+		<div id="google-play-store" style="display: none;" class="alert alert-warning top-buffer-3" role="alert">
+			<a href="https://play.google.com/store/apps/details?id=org.freeciv.play">
+				<img src="/static/images/google-play-store.png" alt="">
+			</a>
+			<a href="https://play.google.com/store/apps/details?id=org.freeciv.play">
+				<fmt:message key="index-play-store"/>
+			</a>
+		</div>
+		<div id="microsoft-store" style="display: none;" class="alert alert-warning top-buffer-3" role="alert">
+			<a href="http://apps.microsoft.com/windows/app/freeciv/43da4eed-42cf-4105-87a2-e03f45ade081">
+				<img src="/static/images/microsoft-store.png" alt="">
+			</a>
+			<a href="http://apps.microsoft.com/windows/app/freeciv/43da4eed-42cf-4105-87a2-e03f45ade081">
+				<fmt:message key="index-microsoft-store"/>
+			</a>
+		</div> <!-- end apps/browser plugins -->
 
 		<div class="row top-buffer-1">
 			<div class="col-md-12 ">
@@ -396,7 +411,7 @@
 				<h2><fmt:message key="index-latest-blog"/></h2>
 				<div class="panel-freeciv">
 					<ul id="latest-from-blog-articles" class="blog-post-summary">
-						<!-- 
+						<!--
 							loaded dynamically
 						-->
 					</ul>
@@ -417,7 +432,7 @@
 			</div>
 		</div> <!-- end press -->
 		
-		<c:if test="${pageContext.request.locale == 'en_US'}">
+		<c:if test="${default_lang}">
 			<div class="row">
 				<div class="col-md-12">
 					<h2><fmt:message key="index-developers"/></h2>

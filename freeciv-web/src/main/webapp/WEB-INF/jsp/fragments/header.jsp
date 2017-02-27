@@ -33,8 +33,9 @@
 			<li><a href="https://www.reddit.com/r/freeciv"><fmt:message key="nav-forum"/></a></li>
 			<li><a href="https://play.freeciv.org/blog/"><fmt:message key="nav-blog"/></a></li>
 			<li><a href="http://www.freeciv.org/donate.html"><fmt:message key="nav-donate"/></a></li>
+			<li><a href="https://github.com/freeciv/freeciv-web">Contribute</a></li>
 			<li><a href="http://www.freeciv.org/">Freeciv.org</a></li>
-			<li class="dropdown">
+			<%--<li class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" title="${pageContext.request.locale.language} ${pageContext.request.locale.country}">
 					Language <span class="caret"></span>
 				</a>
@@ -45,8 +46,7 @@
 					<li role="separator" class="divider"></li>
 					<li><a href="/?locale=zh_TW">Traditional Chinese</a></li>
 				</ul>
-			
-			</li>
+			</li>--%>
 		</ul>
 		<form class="navbar-form navbar-right hidden-sm hidden-md" action="https://duckduckgo.com/">
 			<input type="hidden" name="kl" value="us-en">

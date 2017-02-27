@@ -26,10 +26,10 @@ public class Statistics {
 			DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
 			connection = ds.getConnection();
 
-			String query = "SELECT winner, playerOne, playerTwo, endDate, "
-					+ "(SELECT COUNT(*) FROM game_results WHERE winner = playerOne) AS winsByPlayerOne, "
-					+ "(SELECT COUNT(*) FROM game_results WHERE winner = playerTwo) AS winsByPlayerTwo " //
-					+ "FROM game_results " //
+			String query = "SELECT winner, r.playerOne, r.playerTwo, endDate, "
+					+ "(SELECT COUNT(*) FROM game_results r2 WHERE r2.winner = r.playerOne) AS winsByPlayerOne, "
+					+ "(SELECT COUNT(*) FROM game_results r3 WHERE r3.winner = r.playerTwo) AS winsByPlayerTwo " //
+					+ "FROM game_results r" //
 					+ "ORDER BY id DESC LIMIT 20";
 
 			PreparedStatement preparedStatement = connection.prepareStatement(query);

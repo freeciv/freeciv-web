@@ -44,7 +44,6 @@ Freeciv has AI related
 Freeciv-web's Freeciv version is set in
 [freeciv/version.txt](freeciv/version.txt).
 The variable FCREV is set to the SVN revision it should use.
-The comment above it should contain the previous SVN revision.
 The latest version of Freeciv's trunk branch can be found in the
 [Freeciv SVN repository](svn://svn.gna.org/svn/freeciv/trunk).
 

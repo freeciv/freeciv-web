@@ -29,7 +29,7 @@ public class Statistics {
 			String query = "SELECT winner, r.playerOne, r.playerTwo, endDate, "
 					+ "(SELECT COUNT(*) FROM game_results r2 WHERE r2.winner = r.playerOne) AS winsByPlayerOne, "
 					+ "(SELECT COUNT(*) FROM game_results r3 WHERE r3.winner = r.playerTwo) AS winsByPlayerTwo " //
-					+ "FROM game_results r" //
+					+ "FROM game_results r " //
 					+ "ORDER BY id DESC LIMIT 20";
 
 			PreparedStatement preparedStatement = connection.prepareStatement(query);

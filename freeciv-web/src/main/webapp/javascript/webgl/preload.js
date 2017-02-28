@@ -49,7 +49,7 @@ var model_filenames = ["AEGIS Cruiser",     "city_european_1",  "Helicopter",   
 ****************************************************************************/
 function webgl_preload()
 {
-  $.blockUI({ message: "<h2>Downloading textures and models...</h2>" });
+  $.blockUI({ message: "<h2>Downloading <span id='download_progress'></span></h2>" });
   start_preload = new Date().getTime();
 
   var loadingManager = new THREE.LoadingManager();
@@ -152,6 +152,12 @@ function webgl_preload()
 
     textureLoader.load(imgurl, (function (url, index) {
             return function (image, i) {
+                var count = 0;
+                for (var k in webgl_textures) {
+                   ++count;
+                }
+                // 0 to 30%, textures.
+                $("#download_progress").html(" textures " + Math.floor(0.3 * 100 * count / (7 +tiletype_terrains.length)) + "%");
                 webgl_textures[tiletype_terrains[index]] = new THREE.Texture();
                 webgl_textures[tiletype_terrains[index]].image = image;
                 webgl_textures[tiletype_terrains[index]].wrapS = THREE.RepeatWrapping;
@@ -193,6 +199,8 @@ function load_model(filename)
 
   var binLoader = new THREE.BinaryLoader();
   binLoader.load( url, function(geometry, materials) {
+   // 30% to 100%, 3d models.
+   $("#download_progress").html(" 3D models " + Math.floor(30 + (0.7 * 100 * load_count / total_model_count)) + "%");
    // Convert from Geometry to BufferGeometry, since that will be faster and use less memory.
    var bufgeometry = new THREE.BufferGeometry();
    bufgeometry.fromGeometry(geometry);

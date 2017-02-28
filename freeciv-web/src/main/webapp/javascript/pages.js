@@ -65,12 +65,6 @@ function set_client_page(page)
   case PAGE_GGZ:
     break;
   case PAGE_START:
-    /*if (is_server_running()) {
-      gtk_widget_show(start_options_table);
-      update_start_page();
-    } else {
-      gtk_widget_hide(start_options_table);
-    }*/
     break;
   case PAGE_NATION:
     break;

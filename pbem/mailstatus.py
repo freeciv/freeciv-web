@@ -34,6 +34,7 @@ class MailStatus(Thread):
   def run(self):
     application = web.Application([
             (r"/mailstatus", StatusHandler, dict(mailchecker=self)),
+            (r"/pbemstatus", PbemstatusHandler, dict(mailchecker=self)),
     ])
 
     http_server = httpserver.HTTPServer(application)
@@ -81,3 +82,20 @@ class StatusHandler(web.RequestHandler):
     self.write("done!")
 
 
+class PbemstatusHandler(web.RequestHandler):
+  def initialize(self, mailchecker):
+    self.mailchecker = mailchecker
+
+  def get(self):
+    self.write("<html><head><title>Mail status for Freeciv-web</title>" + 
+               "<link href='//play.freeciv.org/css/bootstrap.min.css' rel='stylesheet'>" +
+               "<meta http-equiv=\"refresh\" content=\"20\"><style>td { padding: 2px;}</style></head><body>");
+    self.write("<div class='container'><h2>Freeciv-web PBEM status</h2>" + 
+               "<table><tr><td>PBEM E-mails sent:</td><td>" + str(self.mailchecker.emails_sent) + "</td></tr>" +
+               "<tr><td>Savegames read:</td><td>" + str(self.mailchecker.savegames_read) + "</td></tr>" +
+               "<tr><td>Ranklog emails sent:</td><td>" + str(self.mailchecker.ranklog_emails_sent) + "</td></tr>" +
+               "<tr><td>Invitation emails sent:</td><td>" + str(self.mailchecker.invitation_emails_sent) + "</td></tr>" +
+               "<tr><td>Reminder emails sent:</td><td>" + str(self.mailchecker.reminders_sent) + "</td></tr>" +
+               "<tr><td>Games expired:</td><td>" + str(self.mailchecker.retired) + "</td></tr>" +
+               "</table>")
+    self.write("</body></html>");

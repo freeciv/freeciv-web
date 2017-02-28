@@ -119,7 +119,21 @@
 <body>
 	<div class="container">
 		<%@include file="/WEB-INF/jsp/fragments/header.jsp"%>
-		
+
+		<div class="row">
+			<div class="col-md-12">
+				<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<ins class="adsbygoogle"
+					style="display:block"
+					data-ad-client="ca-pub-5520523052926214"
+					data-ad-slot="7043279885"
+					data-ad-format="auto"></ins>
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+			</div>
+		</div>
+
 		<div class="jumbotron">
 			<div class="row">
 				<img src="/static/images/frontpage-jumbotron.png" alt="" class="hidden-xs hidden-sm">
@@ -472,20 +486,7 @@
 			</div> <!-- end developers -->
 		</c:if>
 
-		<div class="row top-buffer-1">
-			<div class="col-md-12">
-				<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-				<ins class="adsbygoogle"
-					style="display:block"
-					data-ad-client="ca-pub-5520523052926214"
-					data-ad-slot="7043279885"
-					data-ad-format="auto"></ins>
-				<script>
-				(adsbygoogle = window.adsbygoogle || []).push({});
-				</script>
-			</div>
-		</div>
-	
+
 		<%@include file="/WEB-INF/jsp/fragments/footer.jsp"%>
 	</div>
 </body>

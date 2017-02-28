@@ -99,6 +99,7 @@ function websocket_init()
    add_chatbox_text("Error: connection to server is closed. Please reload the page to restart. Sorry!");
    console.info("WebSocket connection closed, code+reason: " + event.code + ", " + event.reason);
    $("#turn_done_button").button( "option", "disabled", true);
+   $("#save_button").button( "option", "disabled", true);
    pbem_phase_ended = true;
   };
 

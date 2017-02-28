@@ -138,6 +138,7 @@ function update_unit_position(ptile) {
     if (scene != null && funit != null && funit['id'] == visible_unit['id']) {
       if (selected_unit_indicator != null) {
         scene.remove(selected_unit_indicator);
+        scene.remove(activeUnitLight);
         selected_unit_indicator = null;
       }
       if (visible_unit['anim_list'].length == 0) {
@@ -149,6 +150,12 @@ function update_unit_position(ptile) {
         selected_mesh.rotation.x = -1 * Math.PI / 2;
         scene.add(selected_mesh);
         selected_unit_indicator = selected_mesh;
+
+        activeUnitLight = new THREE.PointLight( 0xfffacf, 10, 35 );
+        activeUnitLight.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
+        activeUnitLight.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 30);
+        activeUnitLight.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
+        scene.add( activeUnitLight );
       }
     }
 
@@ -220,6 +227,7 @@ function update_unit_position(ptile) {
     if (scene != null && funit != null && funit['id'] == visible_unit['id']) {
       if (selected_unit_indicator != null) {
         scene.remove(selected_unit_indicator);
+        scene.remove(activeUnitLight);
         selected_unit_indicator = null;
       }
       if (visible_unit['anim_list'].length == 0) {
@@ -231,6 +239,12 @@ function update_unit_position(ptile) {
         selected_mesh.rotation.x = -1 * Math.PI / 2;
         scene.add(selected_mesh);
         selected_unit_indicator = selected_mesh;
+
+        activeUnitLight = new THREE.PointLight( 0xfffacf, 10, 35 );
+        activeUnitLight.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
+        activeUnitLight.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 30);
+        activeUnitLight.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
+        scene.add( activeUnitLight );
       }
     }
 
@@ -670,6 +684,7 @@ function webgl_clear_unit_focus()
   if (selected_unit_indicator != null) {
     scene.remove(selected_unit_indicator);
     selected_unit_indicator = null;
+    if (activeUnitLight != null) scene.remove(activeUnitLight);
   }
 }
 

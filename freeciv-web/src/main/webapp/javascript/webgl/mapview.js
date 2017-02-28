@@ -23,6 +23,7 @@ var scene, maprenderer;
 var plane, cube;
 var mouse, raycaster, isShiftDown = false;
 var directionalLight;
+var activeUnitLight;
 
 var terrainVertShader;
 var terrainFragShader;
@@ -309,6 +310,11 @@ function animate() {
   if (graphics_quality >= QUALITY_MEDIUM && water != null) {
     water.material.uniforms.time.value += 1.0 / 60.0;
     water.render();
+  }
+
+  if (activeUnitLight != null) {
+    activeUnitLight.intensity += 0.14;
+    if (activeUnitLight.intensity > 20) activeUnitLight.intensity = 7;
   }
 
   maprenderer.render(scene,camera );

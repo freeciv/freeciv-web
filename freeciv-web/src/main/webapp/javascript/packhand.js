@@ -95,7 +95,7 @@ function handle_server_join_reply(packet)
        send_message_delayed("/set wetness 25", 140);
 
        // Freeciv WebGL doesn't support map wrapping yet.
-       send_message_delayed("/set topology flat", 145);
+       send_message_delayed("/set topology=", 145);
 
        // Less hills will be more user-friendly in 3D mode.
        send_message_delayed("/set steepness 12", 155);

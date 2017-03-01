@@ -120,6 +120,8 @@ function init_webgl_mapview() {
   start_webgl = new Date().getTime();
   var quality = 32, step = 1024 / quality;
 
+  selected_unit_material = new THREE.MeshBasicMaterial( { color: 0xf6f7bf, transparent: true, opacity: 0.5} );
+
   /* Create water mesh with a texture. */
   if (graphics_quality == QUALITY_LOW) {
     // lower quality water
@@ -312,9 +314,13 @@ function animate() {
     water.render();
   }
 
-  if (activeUnitLight != null) {
-    activeUnitLight.intensity += 0.14;
-    if (activeUnitLight.intensity > 20) activeUnitLight.intensity = 7;
+  if (selected_unit_indicator != null && selected_unit_material != null) {
+    selected_unit_material.color.multiplyScalar (0.994);
+    if (selected_unit_material_counter > 80) {
+      selected_unit_material_counter = 0;
+      selected_unit_material.color.setHex(0xf6f7bf);
+    }
+    selected_unit_material_counter++;
   }
 
   maprenderer.render(scene,camera );

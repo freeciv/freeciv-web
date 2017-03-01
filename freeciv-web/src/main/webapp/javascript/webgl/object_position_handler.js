@@ -43,6 +43,8 @@ var rail_positions = {};
 var river_positions = {};
 
 var selected_unit_indicator = null;
+var selected_unit_material = null;
+var selected_unit_material_counter = 0;
 
 /****************************************************************************
   Handles unit positions
@@ -138,24 +140,16 @@ function update_unit_position(ptile) {
     if (scene != null && funit != null && funit['id'] == visible_unit['id']) {
       if (selected_unit_indicator != null) {
         scene.remove(selected_unit_indicator);
-        scene.remove(activeUnitLight);
         selected_unit_indicator = null;
       }
       if (visible_unit['anim_list'].length == 0) {
-        var material = new THREE.MeshBasicMaterial( { color: 0xfeffc5, transparent: true, opacity: 0.5} );
-        selected_mesh = new THREE.Mesh( new THREE.RingGeometry( 16, 25, 24), material );
+        selected_mesh = new THREE.Mesh( new THREE.RingGeometry( 16, 25, 24), selected_unit_material );
         selected_mesh.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
-        selected_mesh.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 11);
+        selected_mesh.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 8);
         selected_mesh.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
         selected_mesh.rotation.x = -1 * Math.PI / 2;
         scene.add(selected_mesh);
         selected_unit_indicator = selected_mesh;
-
-        activeUnitLight = new THREE.PointLight( 0xfffacf, 10, 35 );
-        activeUnitLight.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
-        activeUnitLight.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 30);
-        activeUnitLight.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
-        scene.add( activeUnitLight );
       }
     }
 
@@ -227,24 +221,16 @@ function update_unit_position(ptile) {
     if (scene != null && funit != null && funit['id'] == visible_unit['id']) {
       if (selected_unit_indicator != null) {
         scene.remove(selected_unit_indicator);
-        scene.remove(activeUnitLight);
         selected_unit_indicator = null;
       }
       if (visible_unit['anim_list'].length == 0) {
-        var material = new THREE.MeshBasicMaterial( { color: 0xfeffc5, transparent: true, opacity: 0.45} );
-        selected_mesh = new THREE.Mesh( new THREE.RingGeometry( 16, 24, 20), material );
+        selected_mesh = new THREE.Mesh( new THREE.RingGeometry( 16, 24, 20), selected_unit_material );
         selected_mesh.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
-        selected_mesh.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 11);
+        selected_mesh.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 8);
         selected_mesh.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
         selected_mesh.rotation.x = -1 * Math.PI / 2;
         scene.add(selected_mesh);
         selected_unit_indicator = selected_mesh;
-
-        activeUnitLight = new THREE.PointLight( 0xfffacf, 10, 35 );
-        activeUnitLight.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
-        activeUnitLight.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 30);
-        activeUnitLight.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
-        scene.add( activeUnitLight );
       }
     }
 
@@ -684,7 +670,6 @@ function webgl_clear_unit_focus()
   if (selected_unit_indicator != null) {
     scene.remove(selected_unit_indicator);
     selected_unit_indicator = null;
-    if (activeUnitLight != null) scene.remove(activeUnitLight);
   }
 }
 

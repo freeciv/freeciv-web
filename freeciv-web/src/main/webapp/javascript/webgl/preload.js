@@ -210,7 +210,7 @@ function load_model(filename)
      materials[i].side = THREE.DoubleSide;
    }
 
-   var mesh = new THREE.Mesh(bufgeometry, new THREE.MultiMaterial( materials ) );
+   var mesh = new THREE.Mesh(bufgeometry, materials );
    mesh.scale.x = mesh.scale.y = mesh.scale.z = 11;
    webgl_models[filename] = mesh;
    load_count++;

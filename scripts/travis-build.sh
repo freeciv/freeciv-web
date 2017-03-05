@@ -30,7 +30,7 @@ mysql_user="root"
 
 tornado_url="https://github.com/tornadoweb/tornado/archive/v4.4.1.tar.gz"
 nginx_url="http://nginx.org/download/nginx-1.9.11.tar.gz"
-casperjs_url="https://github.com/casperjs/casperjs/zipball/1.1.3"
+casperjs_url="https://github.com/casperjs/casperjs/archive/1.1.4.zip"
 tomcat_url="https://bitbucket.org/andreasrosdal/fcweb/downloads/apache-tomcat-8.0.33.tar.gz"
 
 # Based on fresh install of Ubuntu 14.04
@@ -119,8 +119,8 @@ echo "Installing CasperJS for testing"
 cd ${basedir}/tests
 
 wget --quiet ${casperjs_url}
-unzip -qo 1.1.3
-cd casperjs-casperjs-cd78443
+unzip -qo 1.1.4.zip
+cd casperjs-1.1.4
 ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs
 
 sleep 10

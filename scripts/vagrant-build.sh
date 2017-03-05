@@ -45,7 +45,7 @@ mysql_user="root"
 mysql_pass="vagrant"
 
 tornado_url="https://github.com/tornadoweb/tornado/archive/v4.4.1.tar.gz"
-casperjs_url="https://github.com/casperjs/casperjs/zipball/1.1.3"
+casperjs_url="https://github.com/casperjs/casperjs/archive/1.1.4.zip"
 
 # Based on fresh install of Ubuntu 16.04
 dependencies="maven mysql-server openjdk-8-jdk-headless libcurl4-openssl-dev nginx libjansson-dev subversion pngcrush python3-pillow libtool automake autoconf autotools-dev language-pack-en python-minimal python3.6-dev python3-setuptools libbz2-dev imagemagick python3-pip dos2unix liblzma-dev xvfb libicu-dev pkg-config zlib1g-dev libsdl1.2-dev tomcat8 tomcat8-admin unzip phantomjs zip"
@@ -139,8 +139,8 @@ echo "============================================"
 echo "Installing CasperJS for testing"
 cd ${basedir}/tests/
 wget ${casperjs_url}
-unzip -qo 1.1.3
-cd casperjs-casperjs-cd78443
+unzip -qo 1.1.4.zip
+cd casperjs-1.1.4
 ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs
 
 echo "Start testing of Freeciv-web using CasperJS:"

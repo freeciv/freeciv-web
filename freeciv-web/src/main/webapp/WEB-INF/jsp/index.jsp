@@ -147,8 +147,7 @@
 			</div>
 		</div> <!-- end jumbotron -->
 
-		<div id="game-launcher">
-			<div class="row">
+		<div id="game-launcher" class="row">
 				<div class="col-md-4">
 					<div class="game-type">
 						<div class="header">
@@ -231,7 +230,6 @@
 						<a href="/webclient/?action=hotseat" class="btn"><i class="fa fa-user-plus"></i> <fmt:message key="index-game-launcher-hotseat" /></a>
 					</div>
 				</div>
-			</div>
 		</div> <!-- end game launcher -->
 
 		<div class="row top-buffer-1">

@@ -10,9 +10,6 @@ under the GNU Affero General Public License. See [License](LICENSE.txt) for the 
 
 Freeciv-web is now playable online at http://play.freeciv.org/
 
-Contact: The Freeciv Project - freeciv-dev@gna.org  
-https://mail.gna.org/listinfo/freeciv-dev  
-  
 Freeciv-web HTML5 version:
 ![Freeciv-web](https://raw.githubusercontent.com/freeciv/freeciv-web/develop/scripts/freeciv-web-screenshot.png "Freeciv-web screenshot")
 
@@ -150,8 +147,8 @@ Freeciv-web has CasperJS tests which are run by Travis CI on every commit, and b
 Developers interested in Freeciv-web
 ------------------------------------
 
-If you want to contibute to Freeciv-web, see the [Freeciv bugs on gna.org](https://gna.org/bugs/index.php?go_report=Apply&group=freeciv&func=browse&set=custom&msort=0&report_id=100&advsrch=0&status_id=1&resolution_id=0&assigned_to=0&category_id=117) and the [TODO file](TODO) for 
-some tasks you can work on. Pull requests on Github is welcome! Please submit changes to the develop branch. 
+If you want to contibute to Freeciv-web, see the [issues](https://github.com/freeciv/freeciv-web/issues) on GibHub and the [TODO file](TODO) for 
+some tasks you can work on. Pull requests on Github is welcome! 
   
 
 Contributors to Freeciv-web

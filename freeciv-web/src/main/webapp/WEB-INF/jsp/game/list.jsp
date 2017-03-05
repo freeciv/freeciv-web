@@ -21,6 +21,9 @@
 				$("#play-by-email-table").hide();
 				return;
 			}
+
+			$($($(".nav-tabs").children()[2]).children()[0]).html("Play-By-Email (" + data.length + ")");
+
 			data.reverse().forEach(function (game) {
 				var turn = game[0];
 				var phase = game[1];
@@ -39,7 +42,8 @@
 				if (players.indexOf("@") >= 0) {
 					return;
 				};
-				
+
+				if (players.length > 100) players = players.substring(0, 100) + "...";
 				
 				$("#play-by-email-table").append(
 					'<tr>' +

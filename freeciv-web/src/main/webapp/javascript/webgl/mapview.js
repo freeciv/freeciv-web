@@ -146,7 +146,7 @@ function init_webgl_mapview() {
         alpha: 	0.7,
         sunDirection: directionalLight.position.clone().normalize(),
         sunColor: 0xfaf100,
-        waterColor: 0x003485,
+        waterColor: 0x003e7b,
         distortionScale: 30.0,
         fog: false
     } );

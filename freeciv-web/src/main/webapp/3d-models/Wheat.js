@@ -5,9 +5,9 @@
         "formatVersion" : 3.1,
         "sourceFile"    : "Wheat.obj",
         "generatedBy"   : "OBJConverter",
-        "vertices"      : 3464,
-        "faces"         : 3032,
-        "normals"       : 3032,
+        "vertices"      : 13460,
+        "faces"         : 11744,
+        "normals"       : 11744,
         "uvs"           : 0,
         "materials"     : 2
     },

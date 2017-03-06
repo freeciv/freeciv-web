@@ -205,7 +205,7 @@ function update_tech_tree()
 
     /* TECH WITH KNOWN PREREQS. */
     } else if (player_invention_state(client.conn.playing, ptech['id']) == TECH_PREREQS_KNOWN) {
-      var bgcolor = is_tech_req_for_goal(ptech['id'], client.conn.playing['tech_goal']) ? "rgb(28, 50, 180)" : "rgb(70, 70, 90)";
+      var bgcolor = (client.conn.playing != null && is_tech_req_for_goal(ptech['id'], client.conn.playing['tech_goal'])) ? "rgb(28, 50, 180)" : "rgb(70, 70, 90)";
       if (client.conn.playing['researching'] == ptech['id']) {
         bgcolor = "rgb(28, 108, 255)";
         tech_canvas_ctx.lineWidth=7;
@@ -225,7 +225,7 @@ function update_tech_tree()
 
     /* UNKNOWN TECHNOLOGY. */
     } else if (player_invention_state(client.conn.playing, ptech['id']) == TECH_UNKNOWN) {
-      var bgcolor = is_tech_req_for_goal(ptech['id'], client.conn.playing['tech_goal']) ? "rgb(19, 75, 177)" : "rgb(70, 70, 70)";
+      var bgcolor = (client.conn.playing != null && is_tech_req_for_goal(ptech['id'], client.conn.playing['tech_goal'])) ? "rgb(19, 75, 177)" : "rgb(70, 70, 70)";
 
       var tag = ptech['graphic_str'];
       tech_canvas_ctx.fillStyle =  bgcolor;

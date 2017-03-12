@@ -24,6 +24,8 @@ var plane, cube;
 var mouse, raycaster, isShiftDown = false;
 var directionalLight;
 var activeUnitLight;
+var clock;
+var webgl_controls;
 
 var terrainVertShader;
 var terrainFragShader;
@@ -65,9 +67,13 @@ function webgl_start_renderer()
   container = document.getElementById('canvas_div');
   camera = new THREE.PerspectiveCamera( 45, new_mapview_width / new_mapview_height, 1, 10000 );
   scene = new THREE.Scene();
+  webgl_controls = new THREE.FlyControls(camera);
+  webgl_controls.rollSpeed = Math.PI / 24;
 
   raycaster = new THREE.Raycaster();
   mouse = new THREE.Vector2();
+
+  clock = new THREE.Clock();
 
   // Lights
   var ambientLight = new THREE.AmbientLight( 0x606060, 1.0 );
@@ -328,6 +334,8 @@ function animate() {
   if (goto_active) check_request_goto_path();
   if (stats != null) stats.end();
   if (benchmark_enabled) benchmark_frames_count++;
+
+  webgl_controls.update(clock.getDelta());
 
   if (renderer == RENDERER_WEBGL) requestAnimationFrame(animate);
 

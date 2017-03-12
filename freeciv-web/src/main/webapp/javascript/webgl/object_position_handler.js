@@ -93,7 +93,7 @@ function update_unit_position(ptile) {
     }
     new_unit.matrixAutoUpdate = false
     new_unit.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
-    new_unit.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
+    new_unit.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height - 5);
     new_unit.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
     new_unit.rotateOnAxis(new THREE.Vector3(0,1,0).normalize(), (convert_unit_rotation(visible_unit['facing']) * Math.PI * 2 / 8));
     new_unit.updateMatrix();
@@ -246,7 +246,7 @@ function update_unit_position(ptile) {
 
     new_unit.matrixAutoUpdate = false
     new_unit.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
-    new_unit.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
+    new_unit.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height - 5);
     new_unit.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
     new_unit.rotateOnAxis(new THREE.Vector3(0,1,0).normalize(), (convert_unit_rotation(visible_unit['facing']) * Math.PI * 2 / 8));
     new_unit.updateMatrix();

@@ -281,7 +281,7 @@ function get_flag_shield_mesh(key)
                 sprites[key].width, sprites[key].height,
                 0,0,32,16);
 
-  meshes[key] = canvas_to_user_facing_mesh(fcanvas, 32, 14, 13, true);
+  meshes[key] = canvas_to_user_facing_mesh(fcanvas, 32, 12, 13, true);
   return meshes[key].clone();
 
 }

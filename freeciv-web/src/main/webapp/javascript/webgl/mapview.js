@@ -67,8 +67,6 @@ function webgl_start_renderer()
   container = document.getElementById('canvas_div');
   camera = new THREE.PerspectiveCamera( 45, new_mapview_width / new_mapview_height, 1, 10000 );
   scene = new THREE.Scene();
-  webgl_controls = new THREE.FlyControls(camera);
-  webgl_controls.rollSpeed = Math.PI / 24;
 
   raycaster = new THREE.Raycaster();
   mouse = new THREE.Vector2();
@@ -335,7 +333,7 @@ function animate() {
   if (stats != null) stats.end();
   if (benchmark_enabled) benchmark_frames_count++;
 
-  webgl_controls.update(clock.getDelta());
+  if (webgl_controls != null && clock != null) webgl_controls.update(clock.getDelta());
 
   if (renderer == RENDERER_WEBGL) requestAnimationFrame(animate);
 

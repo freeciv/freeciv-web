@@ -45,6 +45,11 @@ function init_webgl_mapctrl()
     mc.on("pinch", webgl_mapview_pinch_zoom);
   }
 
+  if (!is_touch_device()) {
+    webgl_controls = new THREE.FlyControls(camera);
+    webgl_controls.rollSpeed = Math.PI / 24;
+  }
+
 }
 
 

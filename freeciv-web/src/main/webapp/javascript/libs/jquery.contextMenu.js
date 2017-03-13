@@ -1,17 +1,17 @@
 /**
- * jQuery contextMenu v2.4.3 - Plugin for simple contextMenu handling
+ * jQuery contextMenu v@VERSION - Plugin for simple contextMenu handling
  *
- * Version: v2.4.3
+ * Version: v@VERSION
  *
  * Authors: Björn Brala (SWIS.nl), Rodney Rehm, Addy Osmani (patches for FF)
  * Web: http://swisnl.github.io/jQuery-contextMenu/
  *
- * Copyright (c) 2011-2017 SWIS BV and contributors
+ * Copyright (c) 2011-@YEAR SWIS BV and contributors
  *
  * Licensed under
  *   MIT License http://www.opensource.org/licenses/mit-license
  *
- * Date: 2017-02-27T20:33:08.614Z
+ * Date: @DATE
  */
 
 // jscs:disable
@@ -507,7 +507,7 @@
                         });
                     }
 
-                    if (root !== null && root.$menu !== null) {
+                    if (root !== null && root.$menu != null) {
                         root.$menu.trigger('contextmenu:hide');
                     }
                 }, 50);
@@ -671,7 +671,7 @@
 
                     case 27: // esc
                         handle.keyStop(e, opt);
-                        if (opt.$menu !== null) {
+                        if (opt.$menu != null) {
                             opt.$menu.trigger('contextmenu:hide');
                         }
                         return;

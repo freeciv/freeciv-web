@@ -40,7 +40,7 @@ THREE.FlyControls = function ( object, domElement ) {
 	};
 
 	this.keydown = function( event ) {
-	    if (!keyboard_input) return;
+	    if (!keyboard_input || current_focus.length > 0) return;
 
 		if ( event.altKey ) {
 
@@ -65,7 +65,7 @@ THREE.FlyControls = function ( object, domElement ) {
 	};
 
 	this.keyup = function( event ) {
-        if (!keyboard_input) return;
+        if (!keyboard_input || current_focus.length > 0) return;
 
 		switch ( event.keyCode ) {
 

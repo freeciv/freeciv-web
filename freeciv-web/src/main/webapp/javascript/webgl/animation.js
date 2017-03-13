@@ -30,11 +30,16 @@ function update_animated_objects()
     var punit = units[anim_objs[unit_id]['unit']];
     var mesh = anim_objs[unit_id]['mesh'];
     var flag = anim_objs[unit_id]['flag'];
-    var health_bar = anim_objs[unit_id]['health_bar'];
 
-    if (punit == null || mesh == null) continue;
+    if (punit == null || mesh == null) {
+      delete anim_objs[unit_id];
+      continue;
+    }
     var anim_list = punit['anim_list'];
-    if (anim_list[0] == null || anim_list[1] == null) continue;
+    if (anim_list[0] == null || anim_list[1] == null) {
+      delete anim_objs[unit_id];
+      continue;
+    }
 
     var tile_start = tiles[anim_list[0]['tile']];
     var tile_end = tiles[anim_list[1]['tile']];
@@ -60,16 +65,6 @@ function update_animated_objects()
       flag.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), delta_y);
       flag.rotateOnAxis(new THREE.Vector3(0,1,0).normalize(), Math.PI / 4);
       flag.updateMatrix();
-    }
-
-
-    if (health_bar != null) {
-      health_bar.rotateOnAxis(new THREE.Vector3(0,1,0).normalize(), -1 * Math.PI / 4);
-      health_bar.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), delta_x);
-      health_bar.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), delta_z);
-      health_bar.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), delta_y);
-      health_bar.rotateOnAxis(new THREE.Vector3(0,1,0).normalize(), Math.PI / 4);
-      health_bar.updateMatrix();
     }
 
     anim_list[0]['i'] = anim_list[0]['i'] - 1;

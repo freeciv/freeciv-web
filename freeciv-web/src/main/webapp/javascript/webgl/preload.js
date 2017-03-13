@@ -261,6 +261,32 @@ function get_flag_mesh(key)
 }
 
 /****************************************************************************
+ Returns a flag shield mesh
+****************************************************************************/
+function get_flag_shield_mesh(key)
+{
+  if (meshes[key] != null) return meshes[key].clone();
+  if (sprites[key] == null || key.substring(0,8) != "f.shield") {
+    console.log("Invalid flag shield key: " + key);
+    return null;
+  }
+
+  var flagGeometry = new THREE.PlaneBufferGeometry( 14, 10 );
+  /* resize flag to 32x16, since that is required by Three.js*/
+  var fcanvas = document.createElement("canvas");
+  fcanvas.width = 32;
+  fcanvas.height = 16;
+  var fcontext = fcanvas.getContext("2d");
+  fcontext.drawImage(sprites[key], 0, 0,
+                sprites[key].width, sprites[key].height,
+                0,0,32,16);
+
+  meshes[key] = canvas_to_user_facing_mesh(fcanvas, 32, 14, 13, true);
+  return meshes[key].clone();
+
+}
+
+/****************************************************************************
  Returns a unit health mesh
 ****************************************************************************/
 function get_unit_health_mesh(punit)

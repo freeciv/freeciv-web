@@ -102,36 +102,20 @@ function update_unit_position(ptile) {
       scene.add(new_unit);
     }
     /* add flag. */
-    var pflag = get_unit_nation_flag_normal_sprite(visible_unit);
+    var pflag = get_unit_nation_flag_sprite(visible_unit);
     var new_flag;
     if (unit_flag_positions[ptile['index']] == null) {
-      new_flag = get_flag_mesh(pflag['key']);
+      new_flag = get_flag_shield_mesh(pflag['key']);
       new_flag.matrixAutoUpdate = false;
       unit_flag_positions[ptile['index']] = new_flag;
       new_flag.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10);
-      new_flag.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 16);
+      new_flag.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 20);
       new_flag.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
       new_flag.rotation.y = Math.PI / 4;
       new_flag.updateMatrix();
       if (scene != null && new_flag != null) {
         scene.add(new_flag);
       }
-    }
-
-    var new_unit_health_bar;
-    if (unit_health_positions[ptile['index']] == null) {
-      new_unit_health_bar = get_unit_health_mesh(visible_unit);
-      new_unit_health_bar.matrixAutoUpdate = false;
-      unit_health_positions[ptile['index']] = new_unit_health_bar;
-      new_unit_health_bar.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10);
-      new_unit_health_bar.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 23);
-      new_unit_health_bar.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
-      new_unit_health_bar.rotation.y = Math.PI / 4;
-      new_unit_health_bar.updateMatrix();
-      if (scene != null && new_unit_health_bar != null) {
-        scene.add(new_unit_health_bar);
-      }
-      unit_healthpercentage_positions[ptile['index']] = visible_unit['hp'];
     }
 
     /* indicate focus unit*/
@@ -153,7 +137,7 @@ function update_unit_position(ptile) {
       }
     }
 
-    anim_objs[visible_unit['id']] = {'unit' : visible_unit['id'], 'mesh' : new_unit, 'flag' : new_flag, 'health_bar' : new_unit_health_bar};
+    anim_objs[visible_unit['id']] = {'unit' : visible_unit['id'], 'mesh' : new_unit, 'flag' : new_flag};
 
 
   } else if (unit_positions[ptile['index']] != null && visible_unit != null) {
@@ -175,8 +159,6 @@ function update_unit_position(ptile) {
     if (scene != null && unit_flag_positions[ptile['index']] != null) scene.remove(unit_flag_positions[ptile['index']]);
     delete unit_flag_positions[ptile['index']];
 
-    if (scene != null && unit_health_positions[ptile['index']] != null) scene.remove(unit_health_positions[ptile['index']]);
-    delete unit_health_positions[ptile['index']];
 
     var activity;
     if (unit_activities_positions[ptile['index']] != get_unit_activity_text(visible_unit) && visible_unit['anim_list'].length == 0) {
@@ -199,13 +181,13 @@ function update_unit_position(ptile) {
     }
 
     var new_unit_health_bar;
-    if (unit_healthpercentage_positions[ptile['index']] != visible_unit['hp']) {
+    if (unit_healthpercentage_positions[ptile['index']] != visible_unit['hp'] && visible_unit['anim_list'].length == 0) {
       if (scene != null && unit_health_positions[ptile['index']] != null) scene.remove(unit_health_positions[ptile['index']]);
       new_unit_health_bar = get_unit_health_mesh(visible_unit);
       new_unit_health_bar.matrixAutoUpdate = false;
       unit_health_positions[ptile['index']] = new_unit_health_bar;
       new_unit_health_bar.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10);
-      new_unit_health_bar.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 23);
+      new_unit_health_bar.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 26);
       new_unit_health_bar.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
       new_unit_health_bar.rotation.y = Math.PI / 4;
       new_unit_health_bar.updateMatrix();
@@ -256,14 +238,14 @@ function update_unit_position(ptile) {
     }
 
     /* add flag. */
-    var pflag = get_unit_nation_flag_normal_sprite(visible_unit);
+    var pflag = get_unit_nation_flag_sprite(visible_unit);
     var new_flag;
     if (unit_flag_positions[ptile['index']] == null) {
-      new_flag = get_flag_mesh(pflag['key']);
+      new_flag = get_flag_shield_mesh(pflag['key']);
       new_flag.matrixAutoUpdate = false;
       unit_flag_positions[ptile['index']] = new_flag;
       new_flag.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10);
-      new_flag.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 16);
+      new_flag.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 20);
       new_flag.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
       new_flag.rotation.y = Math.PI / 4;
       new_flag.updateMatrix();
@@ -272,7 +254,7 @@ function update_unit_position(ptile) {
       }
     }
 
-    anim_objs[visible_unit['id']] = {'unit' : visible_unit['id'], 'mesh' : new_unit, 'flag' : new_flag, 'health_bar' : new_unit_health_bar};
+    anim_objs[visible_unit['id']] = {'unit' : visible_unit['id'], 'mesh' : new_unit, 'flag' : new_flag};
   }
 
 }

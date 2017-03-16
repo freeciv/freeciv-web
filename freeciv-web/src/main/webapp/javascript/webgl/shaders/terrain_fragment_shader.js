@@ -72,8 +72,8 @@ float heightmap_ocean = 0.0;
 
 float beach_high = 55.0;
 float beach_blend_high = 53.0;
-float beach_blend_low = 50.0;
-float beach_low = 49.0;
+float beach_blend_low = 49.0;
+float beach_low = 48.0;
 float blend_amount = 0.0;
 
 float mountains_low_begin = 98.0;

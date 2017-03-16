@@ -232,6 +232,19 @@
 				</div>
 		</div> <!-- end game launcher -->
 
+
+		<c:if test="${default_lang}">
+			<div id="statistics" class="row">
+				<div class="col-md-12">
+					<div class="panel-freeciv statistics">
+						<h4><span id="statistics-singleplayer"><b>0</b></span> <fmt:message key="index-stats-singleplayer"/> <span id="statistics-multiplayer"><b>0</b></span> <fmt:message key="index-stats-multiplayer"/><br>
+						<fmt:message key="index-stats-since"/></h4>
+
+					</div>
+				</div>
+			</div> <!-- end statistics -->
+		</c:if>
+
 		<div class="row top-buffer-1">
 			<div class="col-md-12">
 				<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -247,32 +260,6 @@
 		</div>
 
 		<div class="row">
-			<div class="col-md-6">
-				<div class="panel-freeciv">
-					<a href="/webclient/?action=new"><img src="/static/images/2d-teaser.png" alt="Start 2D game" class="teaser"></a>
-				</div>
-			</div>
-
-			<div class="col-md-6">
-				<div class="panel-freeciv">
-					<a href="/webclient/?action=new&renderer=webgl"><img src="/static/images/3d-teaser.png" alt="Start 3D game" class="teaser"></a>
-				</div>
-			</div>
-		</div> <!-- end teasers -->
-
-		<c:if test="${default_lang}">
-			<div id="statistics" class="row">
-				<div class="col-md-12">
-					<div class="panel-freeciv statistics">
-						<span id="statistics-singleplayer"><b>0</b></span> <fmt:message key="index-stats-singleplayer"/> <span id="statistics-multiplayer"><b>0</b></span> <fmt:message key="index-stats-multiplayer"/><br>
-						<fmt:message key="index-stats-since"/>
-
-					</div>
-				</div>
-			</div> <!-- end statistics -->
-		</c:if>
-		
-		<div class="row">
 			<div class="col-md-12">
 				<h2><fmt:message key="index-youtube"/></h2>
 			</div>
@@ -280,7 +267,7 @@
 		<div class="row">
 			<div class="col-md-6">
 				<div class="videoWrapper">
-					<iframe class="embed-responsive-item" width="542" height="343" src="https://www.youtube.com/embed/FDVmJXM_FNc" frameborder="0" allowfullscreen></iframe>
+					<iframe class="embed-responsive-item" width="542" height="343" src="https://www.youtube.com/embed/C9w0w7wel2w" frameborder="0" allowfullscreen></iframe>
 				</div>
 			</div>
 			<div class="col-md-6">
@@ -289,6 +276,7 @@
 				</div>
 			</div>
 		</div> <!-- end youtube -->
+
 
 		<div id="chrome-web-store" style="display: none;" class="alert alert-warning top-buffer-3" role="alert">
 			<a href="https://chrome.google.com/webstore/detail/freeciv/ldhdjhmbapbeafmhdoobnlldhfopfcgh">

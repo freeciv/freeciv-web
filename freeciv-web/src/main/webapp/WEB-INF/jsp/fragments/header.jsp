@@ -19,8 +19,8 @@
 		<ul class="nav navbar-nav">
 			<li class="active"><a href="/"><fmt:message key="nav-home"/> <span class="sr-only">(current)</span></a></li>
 			<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-					Games <span class="caret"></span> <span class="badge ongoing-games-number" id="ongoing-games" title="Ongoing games"></span>
+				<a href="/game/list?v=singleplayer" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+					<span onclick="window.location='/game/list?v=singleplayer'">Games</span> <span class="caret"></span> <span class="badge ongoing-games-number" id="ongoing-games" title="Ongoing games"></span>
 				</a>
 				<ul class="dropdown-menu">
 					<li><a href="/game/list?v=singleplayer">Single player</a></li>
@@ -29,8 +29,19 @@
 					<li role="separator" class="divider"></li>
 					<li><a href="/game/list?v=play-by-email">Play by Email</a></li>
 				</ul>
-			</li>	
-			<li><a href="https://www.reddit.com/r/freeciv"><fmt:message key="nav-forum"/></a></li>
+			</li>
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+					<span onclick="window.location='http://forum.freegamedev.net/viewforum.php?f=97'">Forums</span> <span class="caret"></span>
+				</a>
+				<ul class="dropdown-menu">
+					<li><a href="http://forum.freegamedev.net/viewforum.php?f=97">Freeciv-web <fmt:message key="nav-forum"/></a></li>
+					<li role="separator" class="divider"></li>
+					<li><a href="https://www.reddit.com/r/freeciv">reddit.com/freeciv</a></li>
+					<li role="separator" class="divider"></li>
+					<li><a href="http://forum.freeciv.org/f/viewforum.php?f=24">Freeciv.org Forum</a></li>
+				</ul>
+			</li>
 			<li><a href="https://play.freeciv.org/blog/"><fmt:message key="nav-blog"/></a></li>
 			<li><a href="http://www.freeciv.org/donate.html"><fmt:message key="nav-donate"/></a></li>
 			<li><a href="https://github.com/freeciv/freeciv-web">Contribute</a></li>

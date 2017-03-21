@@ -83,6 +83,12 @@ function handle_map_image_upload()
   var fileInput = document.getElementById('mapFileInput');
   var file = fileInput.files[0];
 
+  if (file == null) {
+    $.unblockUI();
+    swal("Please upload a image file!");
+    return;
+  }
+
   if (!(window.FileReader)) {
     $.unblockUI();
     swal("Uploading files not supported");

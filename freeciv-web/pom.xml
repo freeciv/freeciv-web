@@ -195,7 +195,6 @@
 									<jsSourceExclude>frontpage.js</jsSourceExclude>
 									<jsSourceExclude>libs/jquery.min.js</jsSourceExclude>
 									<jsSourceExclude>libs/bootstrap.min.js</jsSourceExclude>
-									<jsSourceExclude>libs/Detector.js</jsSourceExclude>
 									<jsSourceExclude>libs/hammer.min.js</jsSourceExclude>
 									<jsSourceExclude>tileset_config*</jsSourceExclude>
 									<jsSourceExclude>tileset_spec*</jsSourceExclude>

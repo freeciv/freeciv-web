@@ -117,11 +117,7 @@ var gui_gtk2_small_display_layout = FALSE;
 function init_options_dialog()
 {
   $("#save_button").button("option", "label", "Save Game (Ctrl+S)");
-
-  $("#timeout_setting").val(game_info['timeout']);
   $("#metamessage_setting").val(server_settings['metamessage']['val']);
-
-
   $('#metamessage_setting').change(function() {
     send_message("/metamessage " + $('#metamessage_setting').val());
   });
@@ -133,8 +129,20 @@ function init_options_dialog()
     }
   );
 
+  if (!is_pbem()) {
+    var existing_timeout = game_info['timeout'];
+    if (existing_timeout == 0) $("#timeout_info").html("(0 = no timeout)");
+    $("#timeout_setting").val(existing_timeout);
+  } else {
+    $("#timeout_setting_div").hide();
+  }
   $('#timeout_setting').change(function() {
-    send_message("/set timeout " + $('#timeout_setting').val());
+    var new_timeout = parseInt($('#timeout_setting').val());
+    if (new_timeout >= 1 && new_timeout <= 29) {
+      swal("Invalid timeout specified. Must be 0 or more than 30 seconds.");
+    } else {
+      send_message("/set timeout " + new_timeout);
+    }
   });
 
   if (audio != null && !audio.source.src) {
@@ -169,14 +177,6 @@ function init_options_dialog()
   } else {
     $("#switch_renderer_button").html("Use 3D WebGL graphics");
     $("#renderer_help").html("Use 3D WebGL graphics. Make sure your computer supports 3D WebGL graphics. Saving your game is suggested before trying to switch to 3D WebGL the first time.")
-  }
-
-  if (renderer != RENDERER_WEBGL) {
-    $.ajax({
-        async: false,
-        url: "/javascript/webgl/libs/Detector.js",
-        dataType: "script"
-    });
   }
 
   if (!Detector.webgl) {

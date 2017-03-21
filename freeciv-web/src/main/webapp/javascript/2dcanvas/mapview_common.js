@@ -516,7 +516,7 @@ function update_map_canvas_check()
   if (time > MAPVIEW_REFRESH_INTERVAL && renderer == RENDERER_2DCANVAS) {
     update_map_canvas_full();
   }
-  if (renderer == RENDERER_2DCANVAS) requestAnimationFrame(update_map_canvas_check);
+  if (renderer == RENDERER_2DCANVAS && window.requestAnimationFrame != null) requestAnimationFrame(update_map_canvas_check);
 
 }
 

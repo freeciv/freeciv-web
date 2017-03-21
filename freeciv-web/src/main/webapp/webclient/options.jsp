@@ -22,9 +22,9 @@
 </div>
 
 
-
-<div class="main_menu_buttons">
-  <b>Timeout (seconds per turn):</b> <input type='number' name='timeout_setting' id='timeout_setting' size='6' length='3' min='30' max='3600' step='1'>
+<div class="main_menu_buttons" id="timeout_setting_div">
+  <b>Timeout (seconds per turn):</b> <input type='number' name='timeout_setting' id='timeout_setting' size='6' length='3' max='3600' step='1'>
+  <span id="timeout_info"></span>
 </div>
 
 

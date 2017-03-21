@@ -285,7 +285,7 @@ function pick_nation(player_id)
 function update_nation_selection()
 {
   var nation_name = $("#nation_autocomplete_box").val();
-  if (nation_name.length == 0) return;
+  if (nation_name == null || nation_name.length == 0) return;
   if (C_S_RUNNING == client_state()) return;
 
   for (var nation_id in nations) {

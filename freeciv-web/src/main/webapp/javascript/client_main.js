@@ -60,9 +60,6 @@ function set_client_state(newstate)
         }, 1500);
       }
 
-      if (ruleset_control['name'] == "Civ2Civ3 ruleset") {
-        ROAD_ROAD = ROAD_ROAD_CIV2CIV3;
-      }
       /* remove context menu from pregame. */
       $(".context-menu-root").remove();
 

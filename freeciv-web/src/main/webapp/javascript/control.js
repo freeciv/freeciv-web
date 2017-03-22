@@ -553,15 +553,15 @@ function update_unit_order_commands()
       if (ptype['name'] == "Workers") unit_actions["autosettlers"] = {name: "Auto workers (A)"};
       if (ptype['name'] == "Engineers") unit_actions["autosettlers"] = {name: "Auto engineers (A)"};
 
-      if (!tile_has_extra(ptile, ROAD_ROAD)) {
+      if (!tile_has_extra(ptile, EXTRA_ROAD)) {
         $("#order_road").show();
         $("#order_railroad").hide();
-        if (!(tile_has_extra(ptile, ROAD_RIVER) && player_invention_state(client.conn.playing, 8) == TECH_UNKNOWN)) {
+        if (!(tile_has_extra(ptile, EXTRA_RIVER) && player_invention_state(client.conn.playing, 8) == TECH_UNKNOWN)) {
 	      unit_actions["road"] = {name: "Build road (R)"};
 	    }
       } else if (player_invention_state(client.conn.playing, 65) == TECH_KNOWN
-                 && tile_has_extra(ptile, ROAD_ROAD)
-               && !tile_has_extra(ptile, ROAD_RAIL)) {
+                 && tile_has_extra(ptile, EXTRA_ROAD)
+               && !tile_has_extra(ptile, EXTRA_RAIL)) {
         $("#order_road").hide();
         $("#order_railroad").show();
 	    unit_actions['railroad'] = {name: "Build railroad (R)"};
@@ -569,7 +569,7 @@ function update_unit_order_commands()
         $("#order_road").hide();
         $("#order_railroad").hide();
       }
-      if (tile_has_extra(ptile, ROAD_RIVER) && player_invention_state(client.conn.playing, 8) == TECH_UNKNOWN) {
+      if (tile_has_extra(ptile, EXTRA_RIVER) && player_invention_state(client.conn.playing, 8) == TECH_UNKNOWN) {
         $("#order_road").hide();
       }
 
@@ -1783,7 +1783,7 @@ function key_unit_airbase()
   var funits = get_units_in_focus();
   for (var i = 0; i < funits.length; i++) {
     var punit = funits[i];
-    request_new_unit_activity(punit, ACTIVITY_BASE, BASE_AIRBASE);
+    request_new_unit_activity(punit, ACTIVITY_BASE, EXTRA_AIRBASE);
   }
   setTimeout(update_unit_focus, 700);
 }
@@ -1929,9 +1929,9 @@ function key_unit_road()
   for (var i = 0; i < funits.length; i++) {
     var punit = funits[i];
     var ptile = index_to_tile(punit['tile']);
-    if (!tile_has_extra(ptile, ROAD_ROAD)) {
+    if (!tile_has_extra(ptile, EXTRA_ROAD)) {
       request_new_unit_activity(punit, ACTIVITY_GEN_ROAD, extras['Road']['id']);
-    } else if (!tile_has_extra(ptile, ROAD_RAIL)) {
+    } else if (!tile_has_extra(ptile, EXTRA_RAIL)) {
       request_new_unit_activity(punit, ACTIVITY_GEN_ROAD, extras['Railroad']['id']);
     }
   }

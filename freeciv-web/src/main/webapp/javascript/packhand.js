@@ -1298,10 +1298,21 @@ function handle_player_diplstate(packet)
   }
 }
 
+/**************************************************************************
+  Packet handle_ruleset_extra handler. Also defines EXTRA_* variables
+  dynamically.
+**************************************************************************/
 function handle_ruleset_extra(packet)
 {
   extras[packet['id']] = packet;
   extras[packet['name']] = packet;
+
+  window["EXTRA_" + packet['name'].toUpperCase()] = packet['id'];
+
+  if (packet['name'] == "Railroad") window["EXTRA_RAIL"] = packet['id'];
+  if (packet['name'] == "Oil") window["EXTRA_OIL_WELL"] = packet['id'];
+  if (packet['name'] == "Minor Tribe Village") window["EXTRA_HUT"] = packet['id'];
+
 }
 
 /**************************************************************************

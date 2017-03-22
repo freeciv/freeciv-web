@@ -405,13 +405,13 @@ function update_tile_extras(ptile) {
     }
   }
 
-  if (scene != null && road_positions[ptile['index']] == null && tile_has_extra(ptile, ROAD_ROAD)) {
+  if (scene != null && road_positions[ptile['index']] == null && tile_has_extra(ptile, EXTRA_ROAD)) {
     var road_added = false;
     var pos = map_to_scene_coords(ptile['x'], ptile['y']);
     // 1. iterate over adjacent tiles, see if they have road.
     for (var dir = 0; dir < 8; dir++) {
       var checktile = mapstep(ptile, dir);
-      if (checktile != null && tile_has_extra(checktile, ROAD_ROAD)) {
+      if (checktile != null && tile_has_extra(checktile, EXTRA_ROAD)) {
         // if the road wraps the map edge, then skip it.
         if ((ptile['x'] == 0 && checktile['x'] == map['xsize'] -1)
             ||  (ptile['x'] == map['xsize'] -1 && checktile['x'] == 0)) continue;
@@ -464,7 +464,7 @@ function update_tile_extras(ptile) {
   }
 
 
-  if (scene != null && road_positions[ptile['index']] == null && tile_has_extra(ptile, ROAD_RAIL)) {
+  if (scene != null && road_positions[ptile['index']] == null && tile_has_extra(ptile, EXTRA_RAIL)) {
     var rail_added = false;
     var pos = map_to_scene_coords(ptile['x'], ptile['y']);
 
@@ -475,7 +475,7 @@ function update_tile_extras(ptile) {
     // 1. iterate over adjacent tiles, see if they have rail.
     for (var dir = 0; dir < 8; dir++) {
       var checktile = mapstep(ptile, dir);
-      if (checktile != null && tile_has_extra(checktile, ROAD_RAIL)) {
+      if (checktile != null && tile_has_extra(checktile, EXTRA_RAIL)) {
         // if the rail wraps the map edge, then skip it.
         if ((ptile['x'] == 0 && checktile['x'] == map['xsize'] -1)
             ||  (ptile['x'] == map['xsize'] -1 && checktile['x'] == 0)) continue;
@@ -528,13 +528,13 @@ function update_tile_extras(ptile) {
   }
 
   /* Rivers */
-  if (scene != null && river_positions[ptile['index']] == null && tile_has_extra(ptile, ROAD_RIVER)) {
+  if (scene != null && river_positions[ptile['index']] == null && tile_has_extra(ptile, EXTRA_RIVER)) {
     var river_added = false;
     var pos = map_to_scene_coords(ptile['x'], ptile['y']);
     // 1. iterate over adjacent tiles, see if they have river.
     for (var dir = 0; dir < 8; dir++) {
       var checktile = mapstep(ptile, dir);
-      if (checktile != null && (tile_has_extra(checktile, ROAD_RIVER) || is_ocean_tile(checktile))) {
+      if (checktile != null && (tile_has_extra(checktile, EXTRA_RIVER) || is_ocean_tile(checktile))) {
         // if the river wraps the map edge, then skip it.
         if ((ptile['x'] == 0 && checktile['x'] == map['xsize'] -1)
             ||  (ptile['x'] == map['xsize'] -1 && checktile['x'] == 0)) continue;

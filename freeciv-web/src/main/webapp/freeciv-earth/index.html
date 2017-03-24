@@ -13,10 +13,84 @@
     <link rel="shortcut icon" href="images/freeciv-shortcut-icon.png">
     <link rel="apple-touch-icon" href="images/freeciv-splash2.png" />
     <!-- Bootstrap core CSS -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="/css/frontpage.css" rel="stylesheet">
+      <style>
+	/*
+		 _____                   _                        _
+		|  ___| __ ___  ___  ___(_)_   __   __      _____| |__
+		| |_ | '__/ _ \/ _ \/ __| \ \ / /___\ \ /\ / / _ \ '_ \
+		|  _|| | |  __/  __/ (__| |\ V /_____\ V  V /  __/ |_) |
+		|_|  |_|  \___|\___|\___|_| \_/       \_/\_/ \___|_.__/
+
+		The following styles apply to the whole frontend HTML.
+
+	 */
+	body {
+		background-image: url("/static/images/background-pattern.jpg");
+		padding-top: 60px;
+		padding-bottom: 20px;
+		color: #494A49;
+	}
+	h1, h2, h3, h4, h5, h6 {
+		color: #BE602D;
+	}
+	h1, h2, h3 {
+		border-bottom: 1px solid #D3B86F;
+	}
+	/*
+	 * Delimits an area where to put content.
+	 */
+	.panel-freeciv {
+		background-color: rgba(243, 236, 209, 0.5);
+		border-bottom: 1px solid #D3B86F;
+		border-radius: 3px;
+		margin-top: 1%;
+		padding: 1%;
+	}
+	.panel-freeciv h1, .panel-freeciv h2, .panel-freeciv h3,
+	.panel-freeciv h4, .panel-freeciv h5, .panel-freeciv h6 {
+		margin-top: 0px;
+	}
+	/*
+	 * Jumbotron background is made transparent and its contents
+	 * are centered.
+	 */
+	.jumbotron {
+		background: rgba(0,0,0,0.1);
+		text-align: center;
+	}
+	.jumbotron img {
+		display: block;
+		margin: auto;
+	}
+	/*
+	 * Sometimes we need some additional space between rows.
+	 */
+	.top-buffer-3 { margin-top: 3%; }
+	.top-buffer-2 { margin-top: 2%; }
+	.top-buffer-1 { margin-top: 1%; }
+	/*
+	 * The bootstrap theme we use adds some transparency, this ensure it is removed.
+	 */
+	.navbar-inverse {
+		background-image: none;
+	}
+	/*
+	 * Ensure that the logo fits within the navbar.
+	 */
+	.navbar-brand {
+		float: left;
+		height: 50px;
+		padding: 4px 15px;
+		font-size: 18px;
+		line-height: 20px;
+	}
+	.ongoing-games-number {
+		margin-left: 5px;
+		background:#BE602D;
+	}
+</style>
 
     <script src="/javascript/libs/jquery.min.js"></script>
 <script>
@@ -81,6 +155,10 @@
       </div>
     </nav>
 
+    <div class="row">
+    <br><br><br><br>
+    </div>
+
     <!-- Begin page content -->
     <div id="content" class="container">
 
@@ -92,17 +170,26 @@
 
     <div class="row">
         <div class="col-lg-8">
-		<h2>Real-Earth Map: play Freeciv-web anywhere on the world map!</h2>
+		<h2>Play Freeciv-web on the real world map!</h2>
 		<b>You can now play Freeciv-web anywhere in the world map! Simply use the map above to find the location on the world map that you want to play on, then click the "Play this map" button to play Freeciv-web on the map you chose. You can for example use this map to recreate historic nations with realistic maps, or build your own nation right on your neighbourhoods map. Generating the map can take some time because it is a lot of work for your computer.</b>
         </div>
         <div class="col-lg-4">
 		<br>
                 <a id="geolocate" class="btn btn-info">Find your map position</a>
-		<br>
+        <br><br>
 		<a id="snap" class="btn btn-primary btn-lg">Play this map (2D Isometric)</a>
-		<br>
+		<br><br>
 		<a id="snap3d" class="btn btn-primary btn-lg">Play this map (3D WebGL)</a>
 		<div id="snap_status"></div>
+
+        <br><br>
+        <b>Map width:</b> <input id="xsize" type="number" name="width" maxlength="3" min="20" max="200" value="120"> tiles.
+        <br><br>
+        <b>Map height:</b> <input id="ysize" type="number" name="height" maxlength="3" min="20" max="200" value="80"> tiles.
+        <br><br>
+            Max 180 x 100.   (18 000 tiles).
+
+
         </div>
     </div>
 

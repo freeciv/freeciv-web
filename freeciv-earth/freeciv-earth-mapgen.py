@@ -56,10 +56,14 @@ class MapHandler(web.RequestHandler):
     time.sleep(1);
     print("handling request " + str(savecounter) + " to generate savegame for Freeciv-Earth.");
     self.set_header("Content-Type", "text/plain")
-    users_map_string = self.request.body.decode("utf-8");
+    client_request = self.request.body.decode("utf-8");
+    msg_part = client_request.split(";");
+    users_map_string = msg_part[0];
+    map_xsize = int(msg_part[1]);
+    map_ysize = int(msg_part[2]);
 
     # validate users_map_string.
-    if (len(users_map_string) > 1000000):
+    if (len(users_map_string) > 1000000 or (map_xsize * map_ysize > 18000)):
       self.set_status(504)
       return;
 
@@ -72,7 +76,7 @@ class MapHandler(web.RequestHandler):
         self.set_status(503)
         return;
 
-    user_new_savegame = savetemplate + users_map_string;
+    user_new_savegame = savetemplate.replace("{xsize}", str(map_xsize)).replace("{ysize}", str(map_ysize)) + users_map_string;
 
     # save result to data webapp.
     savecounter += 1;

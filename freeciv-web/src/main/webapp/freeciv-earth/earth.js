@@ -30,6 +30,13 @@ var map = L.mapbox.map('map', 'mapbox.satellite', {
     .setView([35, 25], 2);
 
 document.getElementById('snap').addEventListener('click', function() {
+    if (parseInt($("#xsize").val()) * parseInt($("#ysize").val()) > 18000) {
+      alert("The map is too large. You have chosen " + parseInt($("#xsize").val()) * parseInt($("#ysize").val()) + " tiles. Maximum of 18 000 tiles. Reduce the map size!");
+      return;
+    }
+    width = parseInt($("#xsize").val());
+    height = parseInt($("#ysize").val());
+
     $("#snap_status").html("<b>Please wait while generating map for you!</b>");
     $("#snap").hide();
     $("#snap3d").hide();
@@ -37,6 +44,13 @@ document.getElementById('snap').addEventListener('click', function() {
 });
 
 document.getElementById('snap3d').addEventListener('click', function() {
+    if (parseInt($("#xsize").val()) * parseInt($("#ysize").val()) > 18000) {
+      alert("The map is too large. You have chosen " + parseInt($("#xsize").val()) * parseInt($("#ysize").val()) + " tiles. Maximum of 18 000 tiles. Reduce the map size!");
+      return;
+    }
+    width = parseInt($("#xsize").val());
+    height = parseInt($("#ysize").val());
+
     $("#snap_status").html("<b>Please wait while generating map for you!</b>");
     $("#snap").hide();
     $("#snap3d").hide();
@@ -56,13 +70,13 @@ function doImage(err, canvas) {
   var ctx = mycanvas.getContext("2d");
   ctx.drawImage(canvas, 0, 0, dimensions.x, dimensions.y, 0,0, width, height);
 
-  var savetxt = process_image(ctx);
+  var postData = process_image(ctx) + ";" + $("#xsize").val() + ";" + $("#ysize").val();
 
  /* Post map to server.*/
 $.ajax({
   type: "POST",
   url: "/freeciv-earth-mapgen",
-  data: savetxt 
+  data: postData
 }).done(function(responsedata) {
     if (!renderer_3d) {
       window.location.href="/webclient/?action=earthload&savegame=" + responsedata;

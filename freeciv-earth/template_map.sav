@@ -49,8 +49,8 @@ set={"name","value","gamestart"
 "mapsize","XYSIZE","XYSIZE"
 "size",4,4
 "tilesperplayer",100,100
-"xsize",120,120
-"ysize",80,80
+"xsize",{xsize},{xsize}
+"ysize",{ysize},{ysize}
 "topology","",""
 "generator","SCENARIO","SCENARIO"
 "startpos","DEFAULT","DEFAULT"

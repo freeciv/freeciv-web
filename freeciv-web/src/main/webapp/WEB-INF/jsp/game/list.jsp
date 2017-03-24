@@ -172,7 +172,7 @@
 							<tr>
 								<th>Flag</th>
 								<th>Player</th>
-								<th class="hidden-xs">Message</th>
+								<th class="hidden-xs">Game details</th>
 								<th class="hidden-xs">Players</th>
 								<th class="hidden-xs">Turn</th>
 								<th>Action</th>

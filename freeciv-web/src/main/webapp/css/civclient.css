@@ -927,3 +927,8 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
   padding: 2px;
   margin-bottom: -5px;
 }
+
+.negative_net_income {
+  color: red;
+  background-color: #330000;
+}

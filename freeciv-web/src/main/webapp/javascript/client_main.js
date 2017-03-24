@@ -290,7 +290,7 @@ function show_endgame_dialog()
 
 
 /**************************************************************************
-
+ Updates message on the metaserver on gamestart.
 **************************************************************************/
 function update_metamessage_on_gamestart()
 {
@@ -300,6 +300,7 @@ function update_metamessage_on_gamestart()
     var pplayer = client.conn.playing;
     var metasuggest = username + " ruler of the " + nations[pplayer['nation']]['adjective'] + ".";
     send_message("/metamessage " + metasuggest);
+    setInterval(update_metamessage_game_running_status, 100000);
   }
 
   if ($.getUrlVar('action') == "new" || $.getUrlVar('action') == "earthload" 
@@ -318,7 +319,20 @@ function update_metamessage_on_gamestart()
     $.post("/freeciv_time_played_stats?type=hotseat").fail(function() {});
     send_message("/metamessage hotseat game" );
   }
+}
 
+/**************************************************************************
+ Updates message on the metaserver during a game.
+**************************************************************************/
+function update_metamessage_game_running_status()
+{
+  if (client.conn.playing != null && !metamessage_changed) {
+    var pplayer = client.conn.playing;
+    var metasuggest = nations[pplayer['nation']]['adjective'] + " | People:" + civ_population(client.conn.playing.playerno)
+         + " | Score:" + pplayer['score'] + " | " + "Researching: " + (client.conn.playing['researching'] > 0 ? techs[client.conn.playing['researching']]['name'] : "-" ) + (renderer == RENDERER_2DCANVAS ? " | 2D" : " | 3D");
+    send_message("/metamessage " + metasuggest);
+
+  }
 
 }
 

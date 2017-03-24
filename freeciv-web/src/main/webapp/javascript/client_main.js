@@ -328,8 +328,10 @@ function update_metamessage_game_running_status()
 {
   if (client.conn.playing != null && !metamessage_changed) {
     var pplayer = client.conn.playing;
-    var metasuggest = nations[pplayer['nation']]['adjective'] + " | People:" + civ_population(client.conn.playing.playerno)
-         + " | Score:" + pplayer['score'] + " | " + "Researching: " + (client.conn.playing['researching'] > 0 ? techs[client.conn.playing['researching']]['name'] : "-" ) + (renderer == RENDERER_2DCANVAS ? " | 2D" : " | 3D");
+    var metasuggest = nations[pplayer['nation']]['adjective'] + " | " + governments[client.conn.playing['government']]['name']
+         + " | People:" + civ_population(client.conn.playing.playerno)
+         + " | Score:" + pplayer['score'] + " | " + "Research:" + (techs[client.conn.playing['researching']] != null ? techs[client.conn.playing['researching']]['name'] : "-" )
+         + (renderer == RENDERER_2DCANVAS ? " | 2D" : " | 3D");
     send_message("/metamessage " + metasuggest);
 
   }

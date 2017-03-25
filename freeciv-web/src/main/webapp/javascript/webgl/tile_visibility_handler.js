@@ -77,27 +77,3 @@ function check_remove_unknown_territory()
     unknownTerritoryGeometry = null;
   }
 }
-
-/**************************************************************************
- Removes faces from the hidden terrain mesh when the tiles become visible.
-**************************************************************************/
-function check_remove_unknown_hidden_faces()
-{
-  if (unknownTerritoryGeometry == null) return;
-  var deletelist = [];
-  for ( var i = 0, l = unknownTerritoryGeometry.faces.length; i < l; i ++ ) {
-    if (unknownTerritoryGeometry.vertices[unknownTerritoryGeometry.faces[i].a].y == 0
-        && unknownTerritoryGeometry.vertices[unknownTerritoryGeometry.faces[i].c].y == 0) {
-      deletelist.push(i);
-    }
-  }
-
-  for (i = 0; i < deletelist.length; i++) {
-    delete unknownTerritoryGeometry.faces[deletelist[i]];
-  }
-  if (deletelist.length > 0) {
-    unknownTerritoryGeometry.faces = unknownTerritoryGeometry.faces.filter( function(v) { return v; });
-    unknownTerritoryGeometry.elementsNeedUpdate = true;
-  }
-  setTimeout(check_remove_unknown_hidden_faces, 56000);
-}

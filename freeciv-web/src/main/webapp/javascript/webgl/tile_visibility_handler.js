@@ -24,49 +24,35 @@ var normalsNeedsUpdating = false;
 **************************************************************************/
 function webgl_update_tile_known(old_tile, new_tile)
 {
-  if (unknownTerritoryGeometry == null || new_tile == null || old_tile == null) return;
-
-  if (tile_get_known(new_tile) == tile_get_known(old_tile)) return;
+  if (new_tile == null || old_tile == null || tile_get_known(new_tile) == tile_get_known(old_tile)) return;
 
   var tx = old_tile['x'];
   var ty = old_tile['y'];
 
   /* Update unknown territory */
-  if (unknown_terrain_mesh != null) {
-    for ( var i = 0, l = unknownTerritoryGeometry.vertices.length; i < l; i ++ ) {
-      var x = i % xquality, y = Math.floor( i / xquality );
-      var gx = Math.floor(x / 4);
-      var gy = Math.floor(y / 4);
+  if (fogOfWarGeometry != null && unknown_terrain_mesh != null) {
+    for ( var i = 0, l = fogOfWarGeometry.vertices.length; i < l; i ++ ) {
 
-      if (gx != tx || gy != ty) continue;
-      if ( new_tile != null) {
-        if (tile_get_known(new_tile) == TILE_KNOWN_SEEN) {
-          unknownTerritoryGeometry.vertices[ i ].y = 0;
-        }
+      if (Math.floor((i % xquality) / 4) != tx || Math.floor(Math.floor( i / xquality ) / 4) != ty) continue;
+
+      if (unknownTerritoryGeometry != null && tile_get_known(new_tile) == TILE_KNOWN_SEEN) {
+        unknownTerritoryGeometry.vertices[i].y = 0;
         unknownTerritoryGeometry.verticesNeedUpdate = true;
         normalsNeedsUpdating = true;
       }
-    }
-  }
 
-  /* Update fog of war */
-  for ( var i = 0, l = fogOfWarGeometry.vertices.length; i < l; i ++ ) {
-    var x = i % xquality, y = Math.floor( i / xquality );
-    var gx = Math.floor(x / 4);
-    var gy = Math.floor(y / 4);
-   if (gx != tx || gy != ty) continue;
-    if ( new_tile != null) {
       if (tile_get_known(new_tile) == TILE_KNOWN_SEEN) {
-        fogOfWarGeometry.vertices[ i ].y = landGeometry.vertices[ i ].y - 16;
+        fogOfWarGeometry.vertices[i].y = landGeometry.vertices[ i ].y - 16;
       } else if (tile_get_known(new_tile) == TILE_KNOWN_UNSEEN) {
-        fogOfWarGeometry.vertices[ i ].y = landGeometry.vertices[ i ].y + 13;
+        fogOfWarGeometry.vertices[i].y = landGeometry.vertices[ i ].y + 13;
       } else if (tile_get_known(new_tile) == TILE_UNKNOWN) {
-        fogOfWarGeometry.vertices[ i ].y = landGeometry.vertices[ i ].y + 5;
+        fogOfWarGeometry.vertices[i].y = landGeometry.vertices[ i ].y + 5;
       }
       fogOfWarGeometry.verticesNeedUpdate = true;
       normalsNeedsUpdating = true;
     }
   }
+
 }
 
 /**************************************************************************
@@ -90,5 +76,28 @@ function check_remove_unknown_territory()
     unknown_terrain_mesh = null;
     unknownTerritoryGeometry = null;
   }
+}
 
+/**************************************************************************
+ Removes faces from the hidden terrain mesh when the tiles become visible.
+**************************************************************************/
+function check_remove_unknown_hidden_faces()
+{
+  if (unknownTerritoryGeometry == null) return;
+  var deletelist = [];
+  for ( var i = 0, l = unknownTerritoryGeometry.faces.length; i < l; i ++ ) {
+    if (unknownTerritoryGeometry.vertices[unknownTerritoryGeometry.faces[i].a].y == 0
+        && unknownTerritoryGeometry.vertices[unknownTerritoryGeometry.faces[i].c].y == 0) {
+      deletelist.push(i);
+    }
+  }
+
+  for (i = 0; i < deletelist.length; i++) {
+    delete unknownTerritoryGeometry.faces[deletelist[i]];
+  }
+  if (deletelist.length > 0) {
+    unknownTerritoryGeometry.faces = unknownTerritoryGeometry.faces.filter( function(v) { return v; });
+    unknownTerritoryGeometry.elementsNeedUpdate = true;
+  }
+  setTimeout(check_remove_unknown_hidden_faces, 56000);
 }

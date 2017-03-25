@@ -46,7 +46,7 @@ function init_webgl_mapctrl()
   }
 
   if (!is_touch_device()) {
-    webgl_controls = new THREE.FlyControls(camera);
+    webgl_controls = new THREE.FlyControls(camera, document.getElementById('canvas_div'));
     webgl_controls.rollSpeed = Math.PI / 24;
   }
 

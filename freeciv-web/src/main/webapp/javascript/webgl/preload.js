@@ -201,16 +201,23 @@ function load_model(filename)
   binLoader.load( url, function(geometry, materials) {
    // 30% to 100%, 3d models.
    $("#download_progress").html(" 3D models " + Math.floor(30 + (0.7 * 100 * load_count / total_model_count)) + "%");
-   // Convert from Geometry to BufferGeometry, since that will be faster and use less memory.
-   var bufgeometry = new THREE.BufferGeometry();
-   bufgeometry.fromGeometry(geometry);
-   geometry.dispose();
-   geometry = null;
    for (var i = 0; i < materials.length; i++) {
      materials[i].side = THREE.DoubleSide;
    }
+   var mesh;
+   if (graphics_quality == QUALITY_LOW) {
+     // Convert from Geometry to BufferGeometry, since that will be faster and use less memory.
+     // but it does not have as good looking surface.
+     var bufgeometry = new THREE.BufferGeometry();
+     bufgeometry.fromGeometry(geometry);
+     geometry.dispose();
+     geometry = null;
+     mesh = new THREE.Mesh(bufgeometry, materials );
+   } else {
+     geometry.computeVertexNormals();
+     mesh = new THREE.Mesh(geometry, materials );
+   }
 
-   var mesh = new THREE.Mesh(bufgeometry, materials );
    mesh.scale.x = mesh.scale.y = mesh.scale.z = 11;
    webgl_models[filename] = mesh;
    load_count++;

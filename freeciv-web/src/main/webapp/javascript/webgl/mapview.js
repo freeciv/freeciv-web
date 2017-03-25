@@ -262,6 +262,7 @@ function init_webgl_mapview() {
   unknown_terrain_mesh.geometry.dynamic = true;
   if (!observing) scene.add(unknown_terrain_mesh);
   setTimeout(check_remove_unknown_territory, 120000);
+  setTimeout(check_remove_unknown_hidden_faces, 56000);
 
   // Fog of war
   fogOfWarGeometry = new THREE.PlaneGeometry(mapview_model_width, mapview_model_height, xquality - 1, yquality - 1);

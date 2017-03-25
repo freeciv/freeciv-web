@@ -40,7 +40,7 @@ THREE.FlyControls = function ( object, domElement ) {
 	};
 
 	this.keydown = function( event ) {
-	    if (!keyboard_input || current_focus.length > 0) return;
+	    if (!keyboard_input || current_focus.length > 0 || renderer != RENDERER_WEBGL || active_city != null) return;
 
 		if ( event.altKey ) {
 
@@ -65,7 +65,7 @@ THREE.FlyControls = function ( object, domElement ) {
 	};
 
 	this.keyup = function( event ) {
-        if (!keyboard_input || current_focus.length > 0) return;
+        if (!keyboard_input || current_focus.length > 0 || renderer != RENDERER_WEBGL || active_city != null) return;
 
 		switch ( event.keyCode ) {
 
@@ -83,16 +83,7 @@ THREE.FlyControls = function ( object, domElement ) {
 	};
 
 	this.mousedown = function( event ) {
-
-		//if ( this.domElement !== document ) {
-
-		//	this.domElement.focus();
-
-		//}
-
-		//event.preventDefault();
-		//event.stopPropagation();
-
+        if (renderer != RENDERER_WEBGL || active_city != null) return;
 		if ( this.dragToLook ) {
 
 			this.mouseStatus ++;
@@ -113,7 +104,7 @@ THREE.FlyControls = function ( object, domElement ) {
 	};
 
 	this.mousemove = function( event ) {
-
+        if (renderer != RENDERER_WEBGL || active_city != null) return;
 		if ( ! this.dragToLook || this.mouseStatus > 0 ) {
 
 			var container = this.getContainerDimensions();
@@ -130,9 +121,7 @@ THREE.FlyControls = function ( object, domElement ) {
 	};
 
 	this.mouseup = function( event ) {
-
-		//event.preventDefault();
-		//event.stopPropagation();
+        if (renderer != RENDERER_WEBGL || active_city != null) return;
 
 		if ( this.dragToLook ) {
 
@@ -159,7 +148,7 @@ THREE.FlyControls = function ( object, domElement ) {
 	};
 
 	this.update = function( delta ) {
-
+        if (renderer != RENDERER_WEBGL || active_city != null) return;
 		var moveMult = delta * this.movementSpeed;
 		var rotMult = delta * this.rollSpeed;
 

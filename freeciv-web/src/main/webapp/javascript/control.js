@@ -655,7 +655,7 @@ function update_unit_order_commands()
       $("#order_paradrop").hide();
     }
 
-    if (ptype['attack_strength'] > 0 && (pcity == null || pcity != null && city_owner_player_id(pcity) != client.conn.playing.playerno)) {
+    if (!client_is_observer() && client.conn.playing != null && ptype['attack_strength'] > 0 && (pcity == null || pcity != null && city_owner_player_id(pcity) != client.conn.playing.playerno)) {
       $("#order_pillage").show();
       unit_actions["pillage"] = {name: "Pillage (Shift-P)"};
     } else {

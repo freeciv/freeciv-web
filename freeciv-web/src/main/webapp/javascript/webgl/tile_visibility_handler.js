@@ -32,18 +32,20 @@ function webgl_update_tile_known(old_tile, new_tile)
   var ty = old_tile['y'];
 
   /* Update unknown territory */
-  for ( var i = 0, l = unknownTerritoryGeometry.vertices.length; i < l; i ++ ) {
-    var x = i % xquality, y = Math.floor( i / xquality );
-    var gx = Math.floor(x / 4);
-    var gy = Math.floor(y / 4);
+  if (unknown_terrain_mesh != null) {
+    for ( var i = 0, l = unknownTerritoryGeometry.vertices.length; i < l; i ++ ) {
+      var x = i % xquality, y = Math.floor( i / xquality );
+      var gx = Math.floor(x / 4);
+      var gy = Math.floor(y / 4);
 
-    if (gx != tx || gy != ty) continue;
-    if ( new_tile != null) {
-      if (tile_get_known(new_tile) == TILE_KNOWN_SEEN) {
-        unknownTerritoryGeometry.vertices[ i ].y = 0;
+      if (gx != tx || gy != ty) continue;
+      if ( new_tile != null) {
+        if (tile_get_known(new_tile) == TILE_KNOWN_SEEN) {
+          unknownTerritoryGeometry.vertices[ i ].y = 0;
+        }
+        unknownTerritoryGeometry.verticesNeedUpdate = true;
+        normalsNeedsUpdating = true;
       }
-      unknownTerritoryGeometry.verticesNeedUpdate = true;
-      normalsNeedsUpdating = true;
     }
   }
 
@@ -65,4 +67,28 @@ function webgl_update_tile_known(old_tile, new_tile)
       normalsNeedsUpdating = true;
     }
   }
+}
+
+/**************************************************************************
+ Check if we can remove  unknown_terrain_mesh because whole map is known.
+**************************************************************************/
+function check_remove_unknown_territory()
+{
+  for (var x = 0; x < map['xsize']; x++) {
+    for (var y = 0; y < map['ysize']; y++) {
+      var ptile = tiles[x + y * map['xsize']];
+      if (tile_get_known(ptile) != TILE_KNOWN_SEEN) {
+        setTimeout(check_remove_unknown_territory, 120000);
+        return;
+      }
+    }
+  }
+
+  if (unknown_terrain_mesh != null && unknownTerritoryGeometry != null) {
+    scene.remove(unknown_terrain_mesh);
+    unknownTerritoryGeometry.dispose();
+    unknown_terrain_mesh = null;
+    unknownTerritoryGeometry = null;
+  }
+
 }

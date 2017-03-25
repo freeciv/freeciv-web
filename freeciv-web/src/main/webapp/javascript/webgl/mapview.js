@@ -36,6 +36,7 @@ var tiletype_terrains = ["lake","coast","floor","arctic","desert","forest","gras
 
 var landGeometry;
 var landMesh;
+var unknown_terrain_mesh;
 var unknownTerritoryGeometry;
 var fogOfWarGeometry;
 var water;
@@ -257,10 +258,10 @@ function init_webgl_mapview() {
     if (y == yquality - 1) unknownTerritoryGeometry.vertices[ i ].z += 50;
   }
   unknownTerritoryGeometry.computeVertexNormals();
-  var unknownMesh = new THREE.Mesh( unknownTerritoryGeometry, darkness_material );
-  unknownMesh.geometry.dynamic = true;
-  scene.add(unknownMesh);
-
+  unknown_terrain_mesh = new THREE.Mesh( unknownTerritoryGeometry, darkness_material );
+  unknown_terrain_mesh.geometry.dynamic = true;
+  if (!observing) scene.add(unknown_terrain_mesh);
+  setTimeout(check_remove_unknown_territory, 120000);
 
   // Fog of war
   fogOfWarGeometry = new THREE.PlaneGeometry(mapview_model_width, mapview_model_height, xquality - 1, yquality - 1);
@@ -283,9 +284,9 @@ function init_webgl_mapview() {
   }
   fogOfWarGeometry.computeVertexNormals();
   var fogOfWar_material = new THREE.MeshLambertMaterial({color: 0x000000, transparent: true, opacity: 0.4});
-  var fogOfWarMesh = new THREE.Mesh( fogOfWarGeometry, fogOfWar_material );
-  fogOfWarMesh.geometry.dynamic = true;
-  scene.add(fogOfWarMesh);
+  var fog_of_war_mesh = new THREE.Mesh( fogOfWarGeometry, fogOfWar_material );
+  fog_of_war_mesh.geometry.dynamic = true;
+  if (!observing) scene.add(fog_of_war_mesh);
 
   // cleanup
   heightmap = {};

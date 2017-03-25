@@ -207,6 +207,7 @@ function handle_chat_msg(packet)
     add_chatbox_text("<b>" + username + ":</b>" + message);
   } else {
     if (message != null && message.indexOf("/metamessage") != -1) return;  //don't spam message dialog on game start.
+    if (message != null && message.indexOf("Metaserver message string") != -1) return;  //don't spam message dialog on game start.
     if (packet['event'] == 45) {
       var regxp = /\n/gi;
       message = message.replace(regxp, "<br>\n");

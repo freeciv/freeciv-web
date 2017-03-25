@@ -300,7 +300,7 @@ function update_metamessage_on_gamestart()
     var pplayer = client.conn.playing;
     var metasuggest = username + " ruler of the " + nations[pplayer['nation']]['adjective'] + ".";
     send_message("/metamessage " + metasuggest);
-    setInterval(update_metamessage_game_running_status, 100000);
+    setInterval(update_metamessage_game_running_status, 200000);
   }
 
   if ($.getUrlVar('action') == "new" || $.getUrlVar('action') == "earthload" 

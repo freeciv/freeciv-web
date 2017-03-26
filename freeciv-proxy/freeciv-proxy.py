@@ -104,7 +104,7 @@ class WSHandler(websocket.WebSocketHandler):
 
     # this enables WebSocket compression with default options.
     def get_compression_options(self):
-      return {}
+        return {'compression_level' : 9, 'mem_level' : 9}
 
     # get the civcom instance which corresponds to the requested user.
     def get_civcom(self, username, civserverport, ws_connection):

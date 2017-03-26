@@ -85,7 +85,7 @@ public class LoginUser extends HttpServlet {
 			if (!rs.next()) {
 				response.getOutputStream().print("Failed");
 			} else {
-				if (!rs.getString(1).equals(username)) {
+				if (!rs.getString(1).equalsIgnoreCase(username)) {
 					response.getOutputStream().print("Failed");
 					return;
 				}

@@ -95,7 +95,7 @@ public class LoginUser extends HttpServlet {
 
 				if (rs.getInt(2) == 1) {
 					// migrate user to SHA based password.
-					String migrate = "UPDATE auth SET password = NULL, secure_password = ? WHERE username = ? and password = ?";
+					String migrate = "UPDATE auth SET password = NULL, secure_password = ? WHERE LOWER(username) = LOWER(?) and password = ?";
 					PreparedStatement migrateStatement = conn.prepareStatement(migrate);
 					migrateStatement.setString(1, secure_password);
 					migrateStatement.setString(2, username);

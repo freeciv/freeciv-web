@@ -61,7 +61,8 @@ public class DeleteSaveGame extends HttpServlet {
 
 		String username = request.getParameter("username");
 		String savegame = request.getParameter("savegame");
-		String password = java.net.URLDecoder.decode(request.getParameter("password"), "UTF-8");
+		String secure_password = java.net.URLDecoder.decode(request.getParameter("sha_password"), "UTF-8");
+		@Deprecated String password = java.net.URLDecoder.decode(request.getParameter("password"), "UTF-8");
 
 		if (!p.matcher(username).matches() || username.toLowerCase().equals("pbem")) {
 			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
@@ -84,11 +85,12 @@ public class DeleteSaveGame extends HttpServlet {
 					  "SELECT count(*) "
 					+ "FROM auth "
 					+ "WHERE LOWER(username) = LOWER(?) "
-					+ "	AND password = ? "
+					+ "	AND ((password = ? AND password IS NOT NULL) OR (secure_password = ? AND secure_password IS NOT NULL)) "
 					+ "	AND activated = '1' ";
 			PreparedStatement preparedStatement = conn.prepareStatement(query);
 			preparedStatement.setString(1, username);
 			preparedStatement.setString(2, password);
+			preparedStatement.setString(3, secure_password);
 			ResultSet rs = preparedStatement.executeQuery();
 			rs.next();
 			if (rs.getInt(1) != 1) {

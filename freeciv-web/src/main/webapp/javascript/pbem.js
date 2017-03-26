@@ -153,27 +153,34 @@ function login_pbem_user_request()
 
   username = $("#username").val().trim();
   var password = $("#password").val().trim();
+  if (password != null && password.length > 2) {
+    var shaObj = new jsSHA("SHA-512", "TEXT");
+    shaObj.update(password);
+    var sha_password = encodeURIComponent(shaObj.getHash("HEX"));
 
-  $.ajax({
-   type: 'POST',
-   url: "/login_user?username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(md5(password)),
-   success: function(data, textStatus, request){
-       if (data != null && data == "OK") {
-         simpleStorage.set("username", username);
-         simpleStorage.set("password", password);
-         if ($.getUrlVar('savegame') != null) {
-           handle_pbem_load();
+    $.ajax({
+     type: 'POST',
+     url: "/login_user?username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(md5(password)) + "&sha_password=" + sha_password,
+     success: function(data, textStatus, request){
+         if (data != null && data == "OK") {
+           simpleStorage.set("username", username);
+           simpleStorage.set("password", password);
+           if ($.getUrlVar('savegame') != null) {
+             handle_pbem_load();
+           } else {
+             challenge_pbem_player_dialog(null);
+           }
          } else {
-           challenge_pbem_player_dialog(null);
+           $("#username_validation_result").html("Incorrect username or password. Please try again!");
          }
-       } else {
-         $("#username_validation_result").html("Incorrect username or password. Please try again!");
-       }
-     },
-   error: function (request, textStatus, errorThrown) {
-     swal("Login user failed. ");
-   }
-  });
+       },
+     error: function (request, textStatus, errorThrown) {
+       swal("Login user failed. ");
+     }
+    });
+  } else {
+    swal("Invalid password");
+  }
 }
 
 
@@ -604,9 +611,13 @@ function request_deactivate_account()
   var usr = $("#username").val().trim();
   var password = $("#password").val().trim();
 
+  var shaObj = new jsSHA("SHA-512", "TEXT");
+  shaObj.update(password);
+  var sha_password = encodeURIComponent(shaObj.getHash("HEX"));
+
   $.ajax({
    type: 'POST',
-   url: "/deactivate_user?username=" + usr + "&password=" + md5(password) ,
+   url: "/deactivate_user?username=" + usr + "&password=" + md5(password) + "&sha_password=" + sha_password,
    success: function(data, textStatus, request){
        swal("User account has been deactivated!");
 

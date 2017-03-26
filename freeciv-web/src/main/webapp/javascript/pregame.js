@@ -966,9 +966,14 @@ function validate_username_callback()
         }
 
         if (password != null && password.length > 2) {
+          var shaObj = new jsSHA("SHA-512", "TEXT");
+          shaObj.update(password);
+          var sha_password = encodeURIComponent(shaObj.getHash("HEX"));
+          /* TODO: after some time when most active users have migrated to sha passwords, stop sending in md5 hashed password. */
+
           $.ajax({
            type: 'POST',
-           url: "/login_user?username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(md5(password)),
+           url: "/login_user?username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(md5(password)) + "&sha_password=" + sha_password,
            success: function(data, textStatus, request){
                if (data != null && data == "OK") {
                  simpleStorage.set("username", username);
@@ -1141,10 +1146,14 @@ function create_new_freeciv_user_account_request(action_type)
 
   $("#dialog").parent().hide();
 
+  var shaObj = new jsSHA("SHA-512", "TEXT");
+  shaObj.update(password);
+  var sha_password = encodeURIComponent(shaObj.getHash("HEX"));
+
   $.ajax({
    type: 'POST',
    url: "/create_pbem_user?username=" + encodeURIComponent(username) + "&email=" + encodeURIComponent(email)
-            + "&password=" + encodeURIComponent(md5(password)) + "&captcha=" + encodeURIComponent(captcha),
+            + "&password=" + sha_password + "&captcha=" + encodeURIComponent(captcha),
    success: function(data, textStatus, request){
        simpleStorage.set("username", username);
        simpleStorage.set("password", password);

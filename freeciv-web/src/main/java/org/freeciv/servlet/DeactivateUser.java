@@ -39,7 +39,9 @@ public class DeactivateUser extends HttpServlet {
 			throws IOException, ServletException {
 
 		String username = request.getParameter("username");
-		String password = request.getParameter("password");
+		String secure_password = java.net.URLDecoder.decode(request.getParameter("sha_password"), "UTF-8");
+		@Deprecated String password = request.getParameter("password");
+
 
 
 		Connection conn = null;
@@ -48,10 +50,11 @@ public class DeactivateUser extends HttpServlet {
 			DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
 			conn = ds.getConnection();
 
-			String query = "UPDATE auth SET activated = '0' WHERE username = ? AND password = ?";
+			String query = "UPDATE auth SET activated = '0' WHERE username = ? AND ((password = ? AND password IS NOT NULL) OR (secure_password = ? AND secure_password IS NOT NULL))";
 			PreparedStatement preparedStatement = conn.prepareStatement(query);
 			preparedStatement.setString(1, username);
 			preparedStatement.setString(2, password);
+			preparedStatement.setString(3, secure_password);
 			int no_updated = preparedStatement.executeUpdate();
 			if (no_updated == 1) { 
 				response.getOutputStream().print("OK!");

@@ -216,9 +216,14 @@ function delete_savegame(filename)
 {
   var stored_password = simpleStorage.get("password", "");
   if (stored_password != null && stored_password != false) {
+    var shaObj = new jsSHA("SHA-512", "TEXT");
+    shaObj.update(stored_password);
+    var sha_password = encodeURIComponent(shaObj.getHash("HEX"));
+
     $.ajax({
      type: 'POST',
-     url: "/deletesavegame?username=" + encodeURIComponent(username) + "&savegame=" + encodeURIComponent(filename) + "&password=" + encodeURIComponent(md5(stored_password))
+     url: "/deletesavegame?username=" + encodeURIComponent(username) + "&savegame=" + encodeURIComponent(filename)
+     + "&password=" + encodeURIComponent(md5(stored_password)) + "&sha_password=" + sha_password
     });
   }
 }

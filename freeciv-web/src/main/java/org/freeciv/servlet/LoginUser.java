@@ -41,7 +41,26 @@ public class LoginUser extends HttpServlet {
 			throws IOException, ServletException {
 
 		String username = java.net.URLDecoder.decode(request.getParameter("username"), "UTF-8");
-		String password = java.net.URLDecoder.decode(request.getParameter("password"), "UTF-8");
+		String secure_password = java.net.URLDecoder.decode(request.getParameter("sha_password"), "UTF-8");
+		/* TODO: Remove md5 hashed password once enough users have migrated to SHA. */
+		@Deprecated String old_md5_password = java.net.URLDecoder.decode(request.getParameter("password"), "UTF-8");
+
+
+		if (old_md5_password == null || old_md5_password.length() <= 2) {
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST,
+					"Invalid password. Please try again with another password.");
+			return;
+		}
+		if (secure_password == null || secure_password.length() <= 2) {
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST,
+					"Invalid password. Please try again with another password.");
+			return;
+		}
+		if (username == null || username.length() <= 2) {
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST,
+					"Invalid username. Please try again with another username.");
+			return;
+		}
 
 
 		Connection conn = null;
@@ -51,21 +70,39 @@ public class LoginUser extends HttpServlet {
 			conn = ds.getConnection();
 
 			String query =
-					  "SELECT count(*) "
+					  "SELECT username, password IS NOT NULL "
 					+ "FROM auth "
 					+ "WHERE LOWER(username) = LOWER(?) "
-					+ "	AND password = ? "
-					+ "	AND activated = '1'";
+					+ "	AND ((password = ? AND password IS NOT NULL) OR (secure_password = ? AND secure_password IS NOT NULL)) "
+					+ "	AND activated = '1' LIMIT 1";
 
 			PreparedStatement preparedStatement = conn.prepareStatement(query);
 			preparedStatement.setString(1, username);
-			preparedStatement.setString(2, password);
+			preparedStatement.setString(2, old_md5_password);
+			preparedStatement.setString(3, secure_password);
 			ResultSet rs = preparedStatement.executeQuery();
-			rs.next();
-			if (rs.getInt(1) != 1) {
+
+			if (!rs.next()) {
 				response.getOutputStream().print("Failed");
 			} else {
+				if (!rs.getString(1).equals(username)) {
+					response.getOutputStream().print("Failed");
+					return;
+				}
+
+				// Login is OK!
 				response.getOutputStream().print("OK");
+
+				if (rs.getInt(2) == 1) {
+					// migrate user to SHA based password.
+					String migrate = "UPDATE auth SET password = NULL, secure_password = ? WHERE username = ? and password = ?";
+					PreparedStatement migrateStatement = conn.prepareStatement(migrate);
+					migrateStatement.setString(1, secure_password);
+					migrateStatement.setString(2, username);
+					migrateStatement.setString(3, old_md5_password);
+					migrateStatement.executeUpdate();
+
+				}
 			}
 
 		} catch (Exception err) {

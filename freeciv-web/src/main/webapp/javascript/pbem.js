@@ -617,7 +617,7 @@ function request_deactivate_account()
 
   $.ajax({
    type: 'POST',
-   url: "/deactivate_user?username=" + usr + "&password=" + md5(password) + "&sha_password=" + sha_password,
+   url: "/deactivate_user?username=" + usr + "&sha_password=" + sha_password,
    success: function(data, textStatus, request){
        swal("User account has been deactivated!");
 

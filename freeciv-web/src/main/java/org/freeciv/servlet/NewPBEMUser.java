@@ -17,6 +17,8 @@
  *******************************************************************************/
 package org.freeciv.servlet;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +31,7 @@ import java.util.Properties;
 
 import javax.sql.*;
 
+import org.apache.commons.codec.digest.Crypt;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -37,7 +40,6 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
-
 import javax.naming.*;
 
 
@@ -121,14 +123,12 @@ public class NewPBEMUser extends HttpServlet {
 			DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
 			conn = ds.getConnection();
 
-
-			String query =
-					"INSERT INTO auth (username, email, secure_password, activated, ip) "
-							+ "VALUES (?,?, ?, ?, ?)";
+			String query = "INSERT INTO auth (username, email, secure_hashed_password, activated, ip) "
+							+ "VALUES (?, ?, ?, ?, ?)";
 			PreparedStatement preparedStatement = conn.prepareStatement(query);
 			preparedStatement.setString(1, username.toLowerCase());
 			preparedStatement.setString(2, email);
-			preparedStatement.setString(3, password);
+			preparedStatement.setString(3, Crypt.crypt(password));
 			preparedStatement.setInt(4, ACTIVATED);
 			preparedStatement.setString(5, ipAddress);
 			preparedStatement.executeUpdate();

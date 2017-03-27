@@ -237,7 +237,7 @@ function delete_savegame(filename)
     $.ajax({
      type: 'POST',
      url: "/deletesavegame?username=" + encodeURIComponent(username) + "&savegame=" + encodeURIComponent(filename)
-     + "&password=" + encodeURIComponent(md5(stored_password)) + "&sha_password=" + sha_password
+     + "&sha_password=" + sha_password
     });
   }
 }
@@ -257,7 +257,7 @@ function delete_all_savegames()
     $.ajax({
      type: 'POST',
      url: "/deletesavegame?username=" + encodeURIComponent(username) + "&savegame=ALL"
-     + "&password=" + encodeURIComponent(md5(stored_password)) + "&sha_password=" + sha_password
+     + "&sha_password=" + sha_password
     });
   }
 }

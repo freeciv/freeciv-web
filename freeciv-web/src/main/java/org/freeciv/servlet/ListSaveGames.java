@@ -71,7 +71,7 @@ public class ListSaveGames extends HttpServlet {
 				if (files != null) {
 					Arrays.sort(files, new Comparator<File>() {
 						public int compare(File f1, File f2) {
-							return Long.compare(f1.lastModified(), f2.lastModified());
+							return Long.compare(f2.lastModified(), f1.lastModified());
 						}
 					});
 

@@ -137,7 +137,7 @@ function show_load_game_dialog_cb(savegames_data)
   $("#dialog").remove();
   $("<div id='dialog'></div>").appendTo("div#game_page");
 
-  var saveHtml =  "<ol id='selectable'>";
+  var saveHtml =  "<ul id='selectable' style='height: 95%;'>";
 
 
   if (savegames_data == null || savegames_data.length < 3) {
@@ -174,10 +174,24 @@ function show_load_game_dialog_cb(savegames_data)
 		    $("#game_text_input").blur();
 		  }
     },
+    "Delete ALL" : function() {
+            var r = confirm("Do you really want to delete all your savegames?");
+            if (r == true) {
+              delete_all_savegames();
+		      $("#dialog").dialog('close');
+		      setTimeout(show_load_game_dialog, 1000);
+		    }
+    },
+
     "Delete" : function() {
       var load_game_id = $('#selectable .ui-selected').index();
       if (load_game_id != -1) {
-        delete_savegame($('#selectable .ui-selected').text());
+      $('#selectable .ui-selected').each(function () {
+         var $this = $(this);
+         if ($this.length) {
+          delete_savegame($this.text());
+         }
+      });
       }
       $('#selectable .ui-selected').remove();
     }
@@ -228,6 +242,25 @@ function delete_savegame(filename)
   }
 }
 
+
+/**************************************************************************
+ Deletes all savegames
+**************************************************************************/
+function delete_all_savegames()
+{
+  var stored_password = simpleStorage.get("password", "");
+  if (stored_password != null && stored_password != false) {
+    var shaObj = new jsSHA("SHA-512", "TEXT");
+    shaObj.update(stored_password);
+    var sha_password = encodeURIComponent(shaObj.getHash("HEX"));
+
+    $.ajax({
+     type: 'POST',
+     url: "/deletesavegame?username=" + encodeURIComponent(username) + "&savegame=ALL"
+     + "&password=" + encodeURIComponent(md5(stored_password)) + "&sha_password=" + sha_password
+    });
+  }
+}
 
 /**************************************************************************
  Send a load game command, if requested by user.

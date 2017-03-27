@@ -112,9 +112,22 @@ public class DeleteSaveGame extends HttpServlet {
 		}
 
 		try {
-			File savegameFile = new File(savegameDirectory + username + "/" + savegame + ".sav.xz");
-			if (savegameFile.exists() && savegameFile.isFile() && savegameFile.getName().endsWith(".sav.xz")) {
-				Files.delete(savegameFile.toPath());
+			if (savegame.equals("ALL")) {
+				File folder = new File(savegameDirectory + "/" + username);
+				if (!folder.exists()) {
+					response.getOutputStream().print("Error!");
+				} else {
+					for (File savegameFile: folder.listFiles()) {
+						if (savegameFile.exists() && savegameFile.isFile() && savegameFile.getName().endsWith(".sav.xz")) {
+							Files.delete(savegameFile.toPath());
+						}
+					}
+				}
+			} else {
+				File savegameFile = new File(savegameDirectory + username + "/" + savegame + ".sav.xz");
+				if (savegameFile.exists() && savegameFile.isFile() && savegameFile.getName().endsWith(".sav.xz")) {
+					Files.delete(savegameFile.toPath());
+				}
 			}
 		} catch (Exception err) {
 			response.setHeader("result", "error");

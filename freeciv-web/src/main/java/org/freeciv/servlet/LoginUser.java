@@ -125,7 +125,7 @@ public class LoginUser extends HttpServlet {
 
 				PreparedStatement ps1 = conn.prepareStatement(querySha);
 				ps1.setString(1, username);
-				ps1.setString(2, old_md5_password);
+				ps1.setString(2, secure_password);
 				ResultSet rs1 = ps1.executeQuery();
 				if (!rs1.next() || !rs1.getString(1).equalsIgnoreCase(username)) {
 					response.getOutputStream().print("Failed");

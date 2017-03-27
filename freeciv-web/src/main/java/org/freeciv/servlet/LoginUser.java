@@ -91,7 +91,7 @@ public class LoginUser extends HttpServlet {
 				} else if (rs.getInt(3) == 1) {
 					authMethod = 2; // sha-512 hashed password
 				} else if (rs.getInt(4) == 1) {
-					authMethod = 3; // sha-512 hashed password
+					authMethod = 3; // Password hashed with Apache Commons Crypt. This will be the default method.
 				}
 			}
 

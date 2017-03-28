@@ -55,7 +55,7 @@ function mapview_mouse_click(e)
   var rightclick = false;
   var middleclick = false;
 
-  if (!e) var e = window.event;
+  if (!e) e = window.event;
   if (e.which) {
     rightclick = (e.which == 3);
     middleclick = (e.which == 2);
@@ -90,7 +90,7 @@ function mapview_mouse_down(e)
   var rightclick = false;
   var middleclick = false;
 
-  if (!e) var e = window.event;
+  if (!e) e = window.event;
   if (e.which) {
     rightclick = (e.which == 3);
     middleclick = (e.which == 2);
@@ -197,7 +197,7 @@ function mapview_touch_move(e)
 function city_mapview_mouse_click(e)
 {
   var rightclick;
-  if (!e) var e = window.event;
+  if (!e) e = window.event;
   if (e.which) {
     rightclick = (e.which == 3);
   } else if (e.button) {
@@ -392,7 +392,6 @@ function update_active_units_dialog()
 
   for (var i = 0; i < punits.length; i++) {
     var punit = punits[i];
-    var ptype = unit_type(punit);
     var sprite = get_unit_image_sprite(punit);
     var active = (current_focus.length > 1 || current_focus[0]['id'] == punit['id']);
 
@@ -411,18 +410,18 @@ function update_active_units_dialog()
     var aunit = current_focus[0];
     var ptype = unit_type(aunit);
     unit_info_html += "<div id='active_unit_info' title='" + ptype['helptext'] + "'>";
-    unit_info_html += "<b>" + ptype['name'] + "</b>: "
-    if (get_unit_homecity_name(punit) != null) {
-      unit_info_html += " " + get_unit_homecity_name(punit) + " ";
+    unit_info_html += "<b>" + ptype['name'] + "</b>: ";
+    if (get_unit_homecity_name(aunit) != null) {
+      unit_info_html += " " + get_unit_homecity_name(aunit) + " ";
     }
-    unit_info_html += "<span>" + get_unit_moves_left(punit) + "</span> ";
+    unit_info_html += "<span>" + get_unit_moves_left(aunit) + "</span> ";
     unit_info_html += "<br><span title='Attack strength'>A:" + ptype['attack_strength']
     + "</span> <span title='Defense strength'>D:" + ptype['defense_strength']
     + "</span> <span title='Firepower'>F:" + ptype['firepower']
     + "</span> <span title='Health points'>H:"
     + ptype['hp'] + "</span>";
-    if (punit['veteran'] > 0) {
-      unit_info_html += " <span>Veteran: " + punit['veteran'] + "</span>";
+    if (aunit['veteran'] > 0) {
+      unit_info_html += " <span>Veteran: " + aunit['veteran'] + "</span>";
     }
     if (ptype['transport_capacity'] > 0) {
       unit_info_html += " <span>Transport: " + ptype['transport_capacity'] + "</span>";

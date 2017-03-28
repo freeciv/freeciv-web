@@ -614,7 +614,7 @@ function update_tile_extras(ptile) {
 
   // show forest
   var terrain_name = tile_terrain(ptile).name;
-  if (scene != null
+  if (scene != null && forest_geometry != null
       && tile_get_known(ptile) == TILE_KNOWN_SEEN
       && forest_positions[ptile['index']] == null
       && terrain_name == "Forest") {
@@ -628,7 +628,7 @@ function update_tile_extras(ptile) {
   }
 
   // show jungle
-  if (scene != null
+  if (scene != null && jungle_geometry != null
       && tile_get_known(ptile) == TILE_KNOWN_SEEN
       && jungle_positions[ptile['index']] == null
       && terrain_name == "Jungle") {

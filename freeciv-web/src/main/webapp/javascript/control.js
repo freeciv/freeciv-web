@@ -780,6 +780,8 @@ function unit_distance_compare(unit_a, unit_b)
   var ptile_a = index_to_tile(unit_a['tile']);
   var ptile_b = index_to_tile(unit_b['tile']);
 
+  if (ptile_a == null || ptile_b == null) return 0;
+
   if (ptile_a['x'] == ptile_b['x'] && ptile_a['y'] == ptile_b['y']) {
     return 0;
   } else if (ptile_a['x'] > ptile_b['x'] || ptile_a['y'] > ptile_b['y']) {

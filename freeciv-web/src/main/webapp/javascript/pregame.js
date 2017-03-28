@@ -914,10 +914,6 @@ function show_intro_dialog(title, message) {
          && $.getUrlVar('load') != "tutorial") {
     $(".ui-dialog-buttonset button").first().hide();
   }
-  if ($.getUrlVar('action') == "observe") {
-    $(".ui-dialog-buttonset button").first().remove();
-    $(".ui-dialog-buttonset button").first().button("option", "label", "Observe Game");
-  }
 
   if (is_small_screen()) {
     /* some fixes for pregame screen on small devices.*/
@@ -934,6 +930,11 @@ function show_intro_dialog(title, message) {
       validate_username_callback();
     }
   });
+
+  if ($.getUrlVar('action') == "observe") {
+    $(".ui-dialog-buttonset button").first().remove();
+    $(".ui-dialog-buttonset button").first().button("option", "label", "Observe Game");
+  }
 
   blur_input_on_touchdevice();
 }

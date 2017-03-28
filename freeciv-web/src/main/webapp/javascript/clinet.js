@@ -116,7 +116,7 @@ function websocket_init()
 ****************************************************************************/
 function check_websocket_ready()
 {
-  if (ws.readyState === 1) {
+  if (ws != null && ws.readyState === 1) {
     var login_message = {"pid":4, "username" : username,
     "capability": freeciv_version, "version_label": "-dev",
     "major_version" : 2, "minor_version" : 5, "patch_version" : 99,

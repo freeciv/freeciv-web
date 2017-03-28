@@ -112,7 +112,7 @@ function filter_speech_messages(input) {
 ...
 **************************************************************************/
 function load_voices() {
-  if (!is_speech_supported()) return;
+  if (!is_speech_supported() || speechSynthesis == null) return;
   var voices = speechSynthesis.getVoices();
   var voiceSelect = document.getElementById('voice');
   if (voiceSelect == null) return;

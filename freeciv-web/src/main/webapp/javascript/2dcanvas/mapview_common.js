@@ -353,6 +353,9 @@ function update_map_canvas(canvas_x, canvas_y, width, height)
         if ((ptile_xi + ptile_yi) % 2 != 0) {
           continue;
         }
+
+        if (map['topology_id'] == 0 && (ptile_si <= 0 || ((ptile_si / 4)) > map['xsize'])) continue;  // skip if flat earth without wrapping.
+
         if (ptile_xi % 2 == 0 && ptile_yi % 2 == 0) {
           if ((ptile_xi + ptile_yi) % 4 == 0) {
             /* Tile */

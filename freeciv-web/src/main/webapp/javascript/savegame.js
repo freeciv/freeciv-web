@@ -175,7 +175,12 @@ function show_load_game_dialog_cb(savegames_data)
 		  }
     },
     "Delete ALL" : function() {
-            var r = confirm("Do you really want to delete all your savegames?");
+            var r;
+            if ('confirm' in window) {
+             r = confirm("Do you really want to delete all your savegames?");
+            } else {
+             r = true;
+            }
             if (r == true) {
               delete_all_savegames();
 		      $("#dialog").dialog('close');

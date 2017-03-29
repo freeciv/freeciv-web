@@ -66,7 +66,13 @@ function init_borders_image()
    borders_palette.push([142, 0, 0]);
    for (var player_id in players) {
      var pplayer = players[player_id];
-     var nation_colors = nations[pplayer['nation']].color.replace("rgb(", "").replace(")", "").split(",");
+     var nation_colors;
+     if (nations[pplayer['nation']].color != null) {
+       nation_colors = nations[pplayer['nation']].color.replace("rgb(", "").replace(")", "").split(",");
+     } else {
+       nation_colors = [0,0,0];
+     }
+
      borders_palette.push([parseInt(nation_colors[0]), parseInt(nation_colors[2]), parseInt(nation_colors[1])]);
    }
 

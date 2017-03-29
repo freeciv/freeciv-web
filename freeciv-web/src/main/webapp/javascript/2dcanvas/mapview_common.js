@@ -519,7 +519,15 @@ function update_map_canvas_check()
   if (time > MAPVIEW_REFRESH_INTERVAL && renderer == RENDERER_2DCANVAS) {
     update_map_canvas_full();
   }
-  if (renderer == RENDERER_2DCANVAS && window.requestAnimationFrame != null) requestAnimationFrame(update_map_canvas_check);
+  try {
+    if (renderer == RENDERER_2DCANVAS && window.requestAnimationFrame != null) requestAnimationFrame(update_map_canvas_check);
+  } catch (e) {
+    if (e.name == 'NS_ERROR_NOT_AVAILABLE') {
+      setTimeout(update_map_canvas_check, 100);
+    } else {
+      throw e;
+    }
+  }
 
 }
 

@@ -50,7 +50,6 @@ function set_client_state(newstate)
       set_client_page(PAGE_GAME);
       setup_window_size();
 
-      if (observing) center_tile_mapcanvas(map_pos_to_tile(15,15));
       update_metamessage_on_gamestart();
 
       if (is_pbem()) {
@@ -65,6 +64,13 @@ function set_client_state(newstate)
 
       if (renderer == RENDERER_WEBGL) {
         init_webgl_mapview();
+      }
+
+      if (observing) {
+        var ptile = map_pos_to_tile(15,15);
+        if (ptile != null) {
+          center_tile_mapcanvas(ptile);
+        }
       }
 
       break;

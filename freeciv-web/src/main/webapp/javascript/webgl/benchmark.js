@@ -117,7 +117,7 @@ function initial_benchmark_check()
   } else if (fps < 3) {
     show_dialog_message("Game is running slowly", "The game is running too slowly. "
     + "Please try the 2D version of the game." );
-    
+
     console.error("WebGL 3D is running slowly. FPS: " + fps);
   }
 

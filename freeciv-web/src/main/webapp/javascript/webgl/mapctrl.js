@@ -277,8 +277,9 @@ function webgl_mapview_touch_move(e)
     return;
   }
 
-
-  camera_look_at(camera_current_x + spos['x'] - epos['x'], camera_current_y, camera_current_z + spos['y'] - epos['y']);
+  if (spos != null && epos != null) {
+    camera_look_at(camera_current_x + spos['x'] - epos['x'], camera_current_y, camera_current_z + spos['y'] - epos['y']);
+  }
 
 }
 

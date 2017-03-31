@@ -20,13 +20,13 @@
 var benchmark_start;
 var benchmark_enabled = false;
 var benchmark_frames_count = 0;
+var initial_benchmark_enabled = true;
 
 /****************************************************************************
   Runs a benchmark of the WebGL version
 ****************************************************************************/
 function webgl_benchmark_run()
 {
-  benchmark_start = new Date().getTime();
   benchmark_enabled = true;
   $("#dialog").dialog('close');
   $("#pregame_settings").dialog('close');
@@ -92,4 +92,31 @@ function benchmark_check()
   send_end_turn();
 
   setTimeout(benchmark_check, 1000);
+}
+
+/****************************************************************************
+ Measure the fps for the first 10 seconds of the game, and show an error
+ if the fps is too low to play.
+****************************************************************************/
+function initial_benchmark_check()
+{
+  var time_elapsed =  (new Date().getTime() - benchmark_start) / 1000;
+  var fps = Math.floor(benchmark_frames_count / time_elapsed);
+  initial_benchmark_enabled = false;
+  if (fps < 12 && graphics_quality > QUALITY_LOW) {
+    add_chatbox_text("Warning: The game is running slowly. Try restarting the game with lower quality graphics settings.");
+  }
+
+  if (fps < 3 && graphics_quality > QUALITY_LOW) {
+    show_dialog_message("Game is running slowly", "The game is running too slowly. You can try playing the game on a lower quality setting. "
+    + "Restart the game now to play with low quality graphics. Use the Google Chrome browser. You can also try the 2D version.");
+    simpleStorage.set("antialiasing_setting", "false");
+    simpleStorage.set("graphics_quality", QUALITY_LOW);
+  } else if (fps < 3) {
+    show_dialog_message("Game is running slowly", "The game is running too slowly. "
+    + "Please try the 2D version of the game." );
+  }
+
+  log.error("WebGL 3D is running slowly. FPS: " + fps);
+
 }

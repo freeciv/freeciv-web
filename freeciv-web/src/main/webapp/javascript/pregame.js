@@ -228,7 +228,9 @@ function pick_nation(player_id)
     var pnation = nations[nation_id];
     if (pnation['is_playable']) {
       nations_html += "<div class='nation_pickme_line' onclick='select_nation(" + nation_id + ");'>"
-             + "<div id='nation_" + nation_id + "' class='nation_choice'>" + pnation['adjective'] + "</div></div>";
+             + "<div id='nation_" + nation_id + "' class='nation_choice'>"
+             + "<canvas id='pick_flag_" + nation_id + "' width='29' height='20' class='pick_nation_flags'></canvas>"
+             + pnation['adjective'] + "</div></div>";
       nation_name_list.push(pnation['adjective']);
     }
   }
@@ -241,8 +243,8 @@ function pick_nation(player_id)
   $("#pick_nation_dialog").dialog({
 			bgiframe: true,
 			modal: true,
-			width: is_small_screen() ? "99%" : "80%",
-            height: $(window).height() - 40,
+			width: is_small_screen() ? "99%" : "70%",
+            height: $(window).height() - 100,
 			buttons: {
 				Ok: function() {
 					$("#pick_nation_dialog").dialog('close');
@@ -273,6 +275,19 @@ function pick_nation(player_id)
     render_city_style_list();
   } else {
     $("#nation_autocomplete_box").blur();
+  }
+
+  for (var nation_id in nations) {
+    var pnation = nations[nation_id];
+    if (pnation['is_playable']) {
+      var flag_canvas = document.getElementById('pick_flag_' + nation_id);
+      var flag_canvas_ctx = flag_canvas.getContext("2d");
+      var tag = "f." + pnation['graphic_str'];
+
+      if (tileset[tag] == null) continue;
+
+      flag_canvas_ctx.drawImage(sprites[tag], 0, 0);
+    }
   }
 
 

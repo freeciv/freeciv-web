@@ -296,6 +296,10 @@ function init_webgl_mapview() {
   webgl_textures = {};
   $.unblockUI();
   console.log("init_webgl_mapview took: " + (new Date().getTime() - start_webgl) + " ms.");
+
+  benchmark_start = new Date().getTime();
+  setTimeout(initial_benchmark_check, 10000);
+
 }
 
 /****************************************************************************
@@ -332,7 +336,7 @@ function animate() {
 
   if (goto_active) check_request_goto_path();
   if (stats != null) stats.end();
-  if (benchmark_enabled) benchmark_frames_count++;
+  if (initial_benchmark_enabled || benchmark_enabled) benchmark_frames_count++;
 
   if (webgl_controls != null && clock != null) webgl_controls.update(clock.getDelta());
 

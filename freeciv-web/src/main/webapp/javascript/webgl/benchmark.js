@@ -117,6 +117,6 @@ function initial_benchmark_check()
     + "Please try the 2D version of the game." );
   }
 
-  log.error("WebGL 3D is running slowly. FPS: " + fps);
+  console.error("WebGL 3D is running slowly. FPS: " + fps);
 
 }

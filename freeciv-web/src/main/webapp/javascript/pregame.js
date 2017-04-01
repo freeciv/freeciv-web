@@ -1287,14 +1287,14 @@ function handle_new_flag(image_data, player_id) {
   var shield_tag = "f.shield." + pnation['graphic_str'];
 
   var new_flag_canvas = document.createElement('canvas');
-  new_flag_canvas.height = sprites[flag_tag].width;
-  new_flag_canvas.width = sprites[flag_tag].height;
+  new_flag_canvas.width = sprites[flag_tag].width;
+  new_flag_canvas.height = sprites[flag_tag].height;
   sprites[flag_tag] = new_flag_canvas;
   var ctx_flag = new_flag_canvas.getContext("2d");
 
   var new_shield_canvas = document.createElement('canvas');
-  new_shield_canvas.height = sprites[shield_tag].width;
-  new_shield_canvas.width = sprites[shield_tag].height;
+  new_shield_canvas.width = sprites[shield_tag].width;
+  new_shield_canvas.height = sprites[shield_tag].height;
   sprites[shield_tag] = new_shield_canvas;
   var ctx_shield = new_shield_canvas.getContext("2d");
 

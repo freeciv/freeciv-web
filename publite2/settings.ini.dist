@@ -2,7 +2,7 @@
 save_directory = /var/lib/tomcat8/webapps/data/savegames/
 
 [Resource usage]
-server_capacity_single = 5
-server_capacity_multi = 2
-server_capacity_pbem = 2
+server_capacity_single = 2
+server_capacity_multi = 1
+server_capacity_pbem = 1
 server_limit = 250

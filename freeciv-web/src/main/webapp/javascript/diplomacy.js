@@ -331,9 +331,15 @@ function create_diplomacy_dialog(counterpart) {
   var self_nation = nations[pplayer['nation']];
   var counterpart_nation = nations[counterpart['nation']];
 
-  var flag_self_html = "<img src='/images/flags/" + self_nation['graphic_str'] + "-web.png' id='flag_self'>";
-  var flag_counterpart_html = "<img src='/images/flags/" + counterpart_nation['graphic_str']
-	  + "-web.png' id='flag_counterpart'>";
+  var flag_self_html;
+  var flag_counterpart_html;
+  if (self_nation['customized'] || counterpart_nation['customized']) {
+    flag_self_html = "<canvas id='flag_self' width='58' height='40'></canvas>";
+    flag_counterpart_html = "<canvas id='flag_counterpart' width='58' height='40'></canvas>";
+  } else {
+    flag_self_html = "<img src='/images/flags/" + self_nation['graphic_str'] + "-web.png' id='flag_self'>";
+    flag_counterpart_html = "<img src='/images/flags/" + counterpart_nation['graphic_str'] + "-web.png' id='flag_counterpart'>";
+  }
 
   var player_info_html = "<div style='float:left; width: 70%;'><h3>"
 		  			+ nations[pplayer['nation']]['adjective']
@@ -342,10 +348,8 @@ function create_diplomacy_dialog(counterpart) {
 		  			      + nations[counterpart['nation']]['adjective']
 		                              + " " + counterpart['name'] + "</h3></div>"
 
-
   var agree_self_html = "<div id='agree_self' style='float':right;></div>";
   var agree_counterpart_html = "<div id='agree_counterpart' style='float:right;'></div>";
-
 
   var title = "Diplomacy: " + counterpart['name']
 		 + " of the " + nations[counterpart['nation']]['adjective'];
@@ -378,8 +382,19 @@ function create_diplomacy_dialog(counterpart) {
   $("#diplomacy_player_box_counterpart").html(flag_counterpart_html + agree_counterpart_html
 		                               + counterpart_info_html);
 
+  if (self_nation['customized'] || counterpart_nation['customized']) {
+    var flag_canvas_self = document.getElementById('flag_self');
+    var flag_canvas_self_ctx = flag_canvas_self.getContext("2d");
+    var tag = "f." + self_nation['graphic_str'];
+    flag_canvas_self_ctx.scale(1.5, 1.5);
+    flag_canvas_self_ctx.drawImage(sprites[tag], 0, 0);
 
-
+    var flag_canvas_counterpart = document.getElementById('flag_counterpart');
+    var flag_canvas_counterpart_ctx = flag_canvas_counterpart.getContext("2d");
+    tag = "f." + counterpart_nation['graphic_str'];
+    flag_canvas_counterpart_ctx.scale(1.5, 1.5);
+    flag_canvas_counterpart_ctx.drawImage(sprites[tag], 0, 0);
+  }
 
   // Diplomacy menu for current player.
   $("<div id='self_dipl_div' ></div>").appendTo("#diplomacy_player_box_self");

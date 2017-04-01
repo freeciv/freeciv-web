@@ -130,9 +130,14 @@ function update_player_info_pregame()
       var nation_text = "";
       if (player['nation'] in nations) {
         nation_text = " - " + nations[player['nation']]['adjective'];
-        var flag_url = get_player_flag_url(player);
-	var flag_html = $("<img class='pregame_flags' src='" + flag_url +"'>");
-	$("#pregame_plr_"+id).prepend(flag_html);
+        var flag_html = $("<canvas id='pregame_nation_flags_" + id + "' width='29' height='20' class='pregame_flags'></canvas>");
+        $("#pregame_plr_"+id).prepend(flag_html);
+        var flag_canvas = document.getElementById('pregame_nation_flags_' + id);
+        var flag_canvas_ctx = flag_canvas.getContext("2d");
+        var tag = "f." + nations[player['nation']]['graphic_str'];
+        if (tileset[tag] != null) {
+          flag_canvas_ctx.drawImage(sprites[tag], 0, 0);
+        }
       }
       if (player['is_ready'] == true) {
         $("#pregame_plr_"+id).addClass("pregame_player_ready");
@@ -246,7 +251,11 @@ function pick_nation(player_id)
 			width: is_small_screen() ? "99%" : "70%",
             height: $(window).height() - 100,
 			buttons: {
-				Ok: function() {
+			    "Customize this nation": function() {
+                   show_customize_nation_dialog(player_id);
+            	}
+            				,
+				"Play this nation!": function() {
 					$("#pick_nation_dialog").dialog('close');
 					submit_nation_choice();
 				}
@@ -290,7 +299,9 @@ function pick_nation(player_id)
     }
   }
 
-
+  if (chosen_nation != -1) {
+    select_nation(chosen_nation);
+  }
 }
 
 /****************************************************************************
@@ -359,8 +370,11 @@ function select_nation(new_nation_id)
   $("#nation_autocomplete_box").val(pnation['adjective']);
   $("#nation_" + chosen_nation).css("background-color", "transparent");
   $("#nation_choice").html("Chosen nation: " + pnation['adjective']);
-  $("#select_nation_flag").html("<img style='nation_flag_choice' src='/images/flags/"
+
+  if (!pnation['customized']) {
+    $("#select_nation_flag").html("<img style='nation_flag_choice' src='/images/flags/"
 		            + pnation['graphic_str'] + "-web.png'>");
+  }
 
   if (chosen_nation != new_nation_id && $("#nation_" + new_nation_id).length > 0) {
     $("#nation_" + new_nation_id).get(0).scrollIntoView();
@@ -1187,4 +1201,103 @@ function create_new_freeciv_user_account_request(action_type)
      swal("Creating new user failed.");
    }
   });
+}
+
+/**************************************************************************
+  Customize nation: choose nation name and upload new flag.
+**************************************************************************/
+function show_customize_nation_dialog(player_id) {
+  if (chosen_nation == -1 || client.conn['player_num'] == null
+      || choosing_player == null || choosing_player < 0) return;
+
+  var pnation = nations[chosen_nation];
+
+  // reset dialog page.
+  $("#dialog").remove();
+  $("<div id='dialog'></div>").appendTo("div#game_page");
+
+  var message = "<br>New nation name: <input id='new_nation_adjective' type='text' size='30' value='" + pnation['adjective'] + "'><br><br>"
+       + "Upload new flag: <input type='file' id='newFlagFileInput'><br><br><br>"
+       + "(Note: the customized nation and flag will only be active during the current game session and will not be visible to other players.)";
+
+  $("#dialog").html(message);
+  $("#dialog").attr("title", "Customize nation: " + pnation['adjective']);
+  $("#dialog").dialog({
+			bgiframe: true,
+			modal: true,
+			width: is_small_screen() ? "90%" : "50%",
+			buttons:
+			{
+                "Cancel" : function() {
+                  $("#dialog").dialog('close');
+                  pick_nation(player_id);
+				},
+				"OK" : function() {
+				    handle_customized_nation(player_id);
+				}
+			}
+		});
+
+  $("#dialog").dialog('open');
+}
+
+/**************************************************************************
+  Customize nation: choose nation name and upload new flag.
+**************************************************************************/
+function handle_customized_nation(player_id)
+{
+  var new_nation_name = $("#new_nation_adjective").val();
+  nations[chosen_nation]['adjective'] = new_nation_name;
+
+  var fileInput = document.getElementById('newFlagFileInput');
+  var file = fileInput.files[0];
+
+  if (file == null) {
+    swal("Please upload a image file!");
+    return;
+  }
+
+  if (!(window.FileReader)) {
+    swal("Uploading files not supported");
+    return;
+  }
+
+  var extension = file.name.substring(file.name.lastIndexOf('.'));
+  console.log("New flag: " + file.type + " with extention " + extension);
+
+  if (extension == '.png' || extension == '.bmp' || extension == '.jpg' || extension == '.jpeg' || extension == '.JPG') {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      handle_new_flag(reader.result, player_id);
+    }
+    reader.readAsDataURL(file);
+  } else {
+    $.unblockUI();
+    swal("Image file " + file.name + "  not supported: " + file.type);
+  }
+
+}
+
+/**************************************************************************
+  Update flag sprites based on user uploaded flags.
+**************************************************************************/
+function handle_new_flag(image_data, player_id) {
+  var pnation = nations[chosen_nation];
+  var flag_tag = "f." + pnation['graphic_str'];
+  var shield_tag = "f.shield." + pnation['graphic_str'];
+  var ctx_flag = sprites[flag_tag].getContext("2d");
+  var ctx_shield = sprites[shield_tag].getContext("2d");
+
+  var img = new Image();
+  img.onload = function() {
+      ctx_flag.drawImage(img, 0, 0, this.width, this.height, 0, 0, sprites[flag_tag].width, sprites[flag_tag].height);
+      ctx_shield.drawImage(img, 0, 0, this.width, this.height, 0, 0, sprites[shield_tag].width, sprites[shield_tag].height);
+
+      $("#dialog").dialog('close');
+      pick_nation(player_id);
+  };
+  img.src = image_data;
+
+  nations[chosen_nation]['customized'] = true;
+
 }

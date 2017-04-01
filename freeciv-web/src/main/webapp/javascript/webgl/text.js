@@ -89,7 +89,7 @@ function create_city_label(pcity)
   var txt_measure = ctx.measureText(city_text);
   // Background
   ctx.fillStyle = nations[owner.nation].color;
-  ctx.fillRect(width, 0, txt_measure.width + 8 /* padding */, 16);
+  ctx.fillRect(width, 0, txt_measure.width + 11 /* padding */, 16);
   // Text
   var dark_bg = false;
   var nation_colors = nations[owner['nation']].color.replace("rgb(", "").replace(")", "").split(",");
@@ -101,7 +101,7 @@ function create_city_label(pcity)
   }
   ctx.fillText(city_text, width + 4 /* padding */, 13);
 
-  width += txt_measure.width + 8 /* padding */;
+  width += txt_measure.width + 11 /* padding */;
 
   // Production
   var prod_type = get_city_production_type(pcity);
@@ -110,7 +110,7 @@ function create_city_label(pcity)
     if (tileset[tag] != null) {
       ctx.fillStyle = nations[owner.nation].color;
       ctx.fillRect(width, 0, 36, 16);
-      ctx.drawImage(sprites[tag], width, 0, 36, 18);
+      ctx.drawImage(sprites[tag], width, 0, 31, 18);
       width += 32;
     }
   }

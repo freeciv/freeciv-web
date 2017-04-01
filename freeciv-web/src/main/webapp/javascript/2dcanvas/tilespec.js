@@ -1229,24 +1229,6 @@ function get_technology_image_sprite(ptech)
 /****************************************************************************
  ...
 ****************************************************************************/
-function get_player_flag_url(pplayer)
-{
-  var pnation = nations[pplayer['nation']];
-
-  return "/images/flags/" + pnation['graphic_str'] + "-web.png"
-}
-
-/****************************************************************************
- ...
-****************************************************************************/
-function get_nation_flag_url(pnation)
-{
-  return "/images/flags/" + pnation['graphic_str'] + "-web.png"
-}
-
-/****************************************************************************
- ...
-****************************************************************************/
 function get_nation_flag_sprite(pnation)
 {
   var tag = "f." + pnation['graphic_str'];

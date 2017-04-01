@@ -287,7 +287,7 @@ function mapview_put_city_bar(pcanvas, city, canvas_x, canvas_y) {
 
   var txt_measure = pcanvas.measureText(text);
   var size_measure = pcanvas.measureText(size);
-  pcanvas.globalAlpha = 0.65;
+  pcanvas.globalAlpha = 0.80;
   pcanvas.fillStyle = "rgba(0, 0, 0, 0.5)";
   pcanvas.fillRect (canvas_x - Math.floor(txt_measure.width / 2) - 14, canvas_y - 17,
                     txt_measure.width + 20, 20);

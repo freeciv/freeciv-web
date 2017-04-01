@@ -1300,8 +1300,8 @@ function handle_new_flag(image_data, player_id) {
 
   var img = new Image();
   img.onload = function() {
-      ctx_flag.drawImage(img, 0, 0, this.width, this.height, 0, 0, sprites[flag_tag].width, sprites[flag_tag].height);
-      ctx_shield.drawImage(img, 0, 0, this.width, this.height, 0, 0, sprites[shield_tag].width, sprites[shield_tag].height);
+      ctx_flag.drawImage(img, 0, 0, this.width, this.height, 0, 0, new_flag_canvas.width, new_flag_canvas.height);
+      ctx_shield.drawImage(img, 0, 0, this.width, this.height, 0, 0, new_shield_canvas.width, new_shield_canvas.height);
 
       $("#dialog").dialog('close');
       pick_nation(player_id);

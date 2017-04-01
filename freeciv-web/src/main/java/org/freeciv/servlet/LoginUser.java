@@ -73,7 +73,7 @@ public class LoginUser extends HttpServlet {
 			conn = ds.getConnection();
 
 			String authMethodQuery =
-					"SELECT username, password IS NOT NULL, secure_password IS NOT NULL, secure_hashed_password IS NOT NULL "
+					"SELECT username, password IS NOT NULL, secure_hashed_password IS NOT NULL "
 							+ "FROM auth "
 							+ "WHERE LOWER(username) = LOWER(?) "
 							+ "	AND activated = '1' LIMIT 1";
@@ -89,9 +89,7 @@ public class LoginUser extends HttpServlet {
 				if (rs.getInt(2) == 1) {
 					authMethod = 1; // md5 hashed password
 				} else if (rs.getInt(3) == 1) {
-					authMethod = 2; // sha-512 hashed password
-				} else if (rs.getInt(4) == 1) {
-					authMethod = 3; // Password hashed with Apache Commons Crypt. This will be the default method.
+					authMethod = 2; // Password hashed with Apache Commons Crypt. This will be the default method.
 				}
 			}
 
@@ -116,25 +114,6 @@ public class LoginUser extends HttpServlet {
 				}
 
 			} else if (authMethod == 2) {
-				// SHA-512 hashed password. (deprecated)  TODO: Remove this auth method in some time.
-				String querySha = "SELECT username "
-						+ "FROM auth "
-						+ "WHERE LOWER(username) = LOWER(?) "
-						+ "	AND secure_password = ?  "
-						+ "	AND activated = '1' LIMIT 1";
-
-				PreparedStatement ps1 = conn.prepareStatement(querySha);
-				ps1.setString(1, username);
-				ps1.setString(2, secure_password);
-				ResultSet rs1 = ps1.executeQuery();
-				if (!rs1.next() || !rs1.getString(1).equalsIgnoreCase(username)) {
-					response.getOutputStream().print("Failed");
-					return;
-				} else {
-					migrate = true;
-				}
-
-			} else if (authMethod == 3) {
 				// Salted, hashed password.
 				String saltHashQuery =
 						"SELECT secure_hashed_password "
@@ -166,7 +145,7 @@ public class LoginUser extends HttpServlet {
 			// Login is OK!
 			if (migrate) {
 				// migrate user to salted SHA based password.
-				String migrateQuery = "UPDATE auth SET password = NULL, secure_password = NULL, secure_hashed_password = ? WHERE LOWER(username) = LOWER(?)";
+				String migrateQuery = "UPDATE auth SET password = NULL, secure_hashed_password = ? WHERE LOWER(username) = LOWER(?)";
 				PreparedStatement migrateStatement = conn.prepareStatement(migrateQuery);
 				migrateStatement.setString(1, Crypt.crypt(secure_password));
 				migrateStatement.setString(2, username);

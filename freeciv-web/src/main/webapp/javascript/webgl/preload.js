@@ -27,21 +27,21 @@ var webgl_materials = {};
 var model_filenames = ["AEGIS Cruiser",     "city_european_1",  "Helicopter",    "Pikemen",
                        "Alpine Troops",     "city_european_2",  "Horsemen",      "Rail",
                        "Archers",           "citywalls",        "Howitzer",      "Riflemen",
-                       "Armor",             "Coal",             "Hut",           "Road",
+                       "Armor",             /*"Coal",*/         "Hut",           "Road",
                        "Artillery",         "Cruise Missile",   "Ironclad",      "Settlers",
-                       "AWACS",             "Cruiser",          "Iron",          "Spice",
+                       "AWACS",             "Cruiser",          /*"Iron",*/      /*"Spice",*/
                        "Barbarian Leader",  "Destroyer",        "Irrigation",    "Spy",
                        "Battleship",        "Diplomat",         "Knights",       "Stealth Bomber",
                        "Bomber",            "Dragoons",         "Legion",        "Submarine",
-                       "Buffalo",           "Engineers",        "Marines",       "Transport",
+                       /*"Buffalo",*/       "Engineers",        "Marines",       "Transport",
                        "Cannon",            "Explorer",         "Mech. Inf.",    "Trireme",
                        "Caravan",           "Fighter",          "Mine",          "Warriors",
                        "Caravel",           "Fish",             "Musketeers",    "Whales",
-                       "Carrier",           "Freight",          "Nuclear",       "Wheat",
-                       "Catapult",          "Frigate",          "Oil",           "Wine",
-                       "Cavalry",           "Fruit",            "Paratroopers",  "Workers",
+                       "Carrier",           "Freight",          "Nuclear",       /*"Wheat",*/
+                       "Catapult",          "Frigate",          /*"Oil",*/       /*"Wine",*/
+                       "Cavalry",           /*"Fruit",*/        "Paratroopers",  "Workers",
                        "Chariot",           "Galleon",          "Partisan",
-                       "city_european_0",   "Gold",             "Phalanx"
+                       "city_european_0",   /*"Gold",*/         "Phalanx"
                       ];
 
 /****************************************************************************
@@ -238,31 +238,6 @@ function webgl_get_model(filename)
   } else {
     return null;
   }
-
-}
-
-/****************************************************************************
- Returns a flag mesh
-****************************************************************************/
-function get_flag_mesh(key)
-{
-  if (meshes[key] != null) return meshes[key].clone();
-  if (sprites[key] == null || key.substring(0,2) != "f.") {
-    console.log("Invalid flag key: " + key);
-    return null;
-  }
-
-  /* resize flag to 32x16, since that is required by Three.js*/
-  var fcanvas = document.createElement("canvas");
-  fcanvas.width = 32;
-  fcanvas.height = 16;
-  var fcontext = fcanvas.getContext("2d");
-  fcontext.drawImage(sprites[key], 0, 0,
-                sprites[key].width, sprites[key].height,
-                0,0,32,16);
-
-  meshes[key] = canvas_to_user_facing_mesh(fcanvas, 32, 26, 13, false);
-  return meshes[key].clone();
 
 }
 

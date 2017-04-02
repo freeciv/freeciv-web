@@ -53,7 +53,7 @@ function create_city_label(pcity)
 {
   var canvas1 = document.createElement('canvas');
   canvas1.width = 256;
-  canvas1.height = 16;
+  canvas1.height = 32;
   var ctx = canvas1.getContext('2d');
 
   var owner_id = pcity.owner;
@@ -68,7 +68,7 @@ function create_city_label(pcity)
   ctx.drawImage(sprites[city_gfx.key],
                 1, 1, // Remove the 1px black border, it's ugly
                 sprites[city_gfx.key].width - 2, sprites[city_gfx.key].height - 2,
-                0, 0, 28, 16);
+                0, 0, 28, 32);
   width += 28;
 
   // Occupied
@@ -77,29 +77,29 @@ function create_city_label(pcity)
   if (punits.length > 0) {
     // Background
     ctx.fillStyle = 'black';
-    ctx.fillRect(width, 0, 16, 16);
+    ctx.fillRect(width, 0, 16, 32);
     // Stars
-    ctx.drawImage(sprites[get_city_occupied_sprite(pcity)], width, 0, 13, 16);
+    ctx.drawImage(sprites[get_city_occupied_sprite(pcity)], width, 0, 13, 32);
     width += 13;
   }
 
   // Name and size
   var city_text = pcity.name + "  " + pcity.size;
-  ctx.font = 'Bold 14px Arial';
+  ctx.font = 'Bold 25px Arial';
   var txt_measure = ctx.measureText(city_text);
   // Background
   ctx.fillStyle = nations[owner.nation].color;
-  ctx.fillRect(width, 0, txt_measure.width + 11 /* padding */, 16);
+  ctx.fillRect(width, 0, txt_measure.width + 11 /* padding */, 32);
   // Text
   var dark_bg = false;
   var nation_colors = nations[owner['nation']].color.replace("rgb(", "").replace(")", "").split(",");
   if (parseInt(nation_colors[0]) + parseInt(nation_colors[1]) + parseInt(nation_colors[2]) < 300) dark_bg = true;
   if (dark_bg) {
-    ctx.fillStyle = 'white';
+    ctx.fillStyle = '#EEEEEE';
   } else {
-    ctx.fillStyle = 'black';
+    ctx.fillStyle = '#111111';
   }
-  ctx.fillText(city_text, width + 4 /* padding */, 13);
+  ctx.fillText(city_text, width + 4 /* padding */, 13*2);
 
   width += txt_measure.width + 11 /* padding */;
 
@@ -109,13 +109,13 @@ function create_city_label(pcity)
     var tag = prod_type.graphic_str;
     if (tileset[tag] != null) {
       ctx.fillStyle = nations[owner.nation].color;
-      ctx.fillRect(width, 0, 36, 16);
-      ctx.drawImage(sprites[tag], width, 0, 31, 18);
+      ctx.fillRect(width, 0, 36, 32);
+      ctx.drawImage(sprites[tag], width, 0, 31, 18*2);
       width += 32;
     }
   }
 
-  return canvas_to_user_facing_mesh(canvas1, width, Math.floor(width * 0.8), 13, false);
+  return canvas_to_user_facing_mesh(canvas1, width, Math.floor(width * 0.7), 13, false);
 }
 
 /****************************************************************************

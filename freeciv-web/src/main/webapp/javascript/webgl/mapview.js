@@ -96,7 +96,7 @@ function webgl_start_renderer()
   }
 
   if (is_small_screen()) {
-    camera_dy = 380;
+    camera_dy = 390;
     camera_dx = 180;
     camera_dz = 180;
   }
@@ -283,7 +283,7 @@ function init_webgl_mapview() {
     if (y == yquality - 1) fogOfWarGeometry.vertices[ i ].z += 50;
   }
   fogOfWarGeometry.computeVertexNormals();
-  var fogOfWar_material = new THREE.MeshLambertMaterial({color: 0x000000, transparent: true, opacity: 0.4});
+  var fogOfWar_material = new THREE.MeshLambertMaterial({color: 0x000000, transparent: true, opacity: 0.5});
   var fog_of_war_mesh = new THREE.Mesh( fogOfWarGeometry, fogOfWar_material );
   fog_of_war_mesh.geometry.dynamic = true;
   if (!observing) scene.add(fog_of_war_mesh);

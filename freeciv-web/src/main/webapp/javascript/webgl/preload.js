@@ -252,7 +252,6 @@ function get_flag_mesh(key)
     return null;
   }
 
-  var flagGeometry = new THREE.PlaneBufferGeometry( 14, 10 );
   /* resize flag to 32x16, since that is required by Three.js*/
   var fcanvas = document.createElement("canvas");
   fcanvas.width = 32;
@@ -278,7 +277,6 @@ function get_flag_shield_mesh(key)
     return null;
   }
 
-  var flagGeometry = new THREE.PlaneBufferGeometry( 14, 10 );
   /* resize flag to 32x16, since that is required by Three.js*/
   var fcanvas = document.createElement("canvas");
   fcanvas.width = 32;
@@ -289,6 +287,30 @@ function get_flag_shield_mesh(key)
                 0,0,32,16);
 
   meshes[key] = canvas_to_user_facing_mesh(fcanvas, 32, 12, 13, true);
+  return meshes[key].clone();
+
+}
+
+/****************************************************************************
+ Returns a extra mesh
+****************************************************************************/
+function get_extra_mesh(key)
+{
+  if (meshes[key] != null) return meshes[key].clone();
+  if (sprites[key] == null ) {
+    console.log("Invalid extra key: " + key);
+    return null;
+  }
+
+  var ecanvas = document.createElement("canvas");
+  ecanvas.width = 64;
+  ecanvas.height = 32;
+  var econtext = ecanvas.getContext("2d");
+  econtext.drawImage(sprites[key], 0, 0,
+                sprites[key].width, sprites[key].height,
+                0,0,64,32);
+
+  meshes[key] = canvas_to_user_facing_mesh(ecanvas, 64, 35, 23, true);
   return meshes[key].clone();
 
 }

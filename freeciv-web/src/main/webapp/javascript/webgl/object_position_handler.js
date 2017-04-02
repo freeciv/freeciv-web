@@ -446,6 +446,7 @@ function update_tile_extras(ptile) {
         road.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
         scene.add(road);
         road_positions[ptile['index']] = road;
+        break;
       }
     }
 

@@ -393,10 +393,15 @@ function show_dialog_message(title, message) {
   $("#dialog").dialog('open');
   $("#game_text_input").blur();
   //quick fix to put the dialog on top of everything else.
-  setTimeout("$('#dialog').parent().css('z-index', 2000)", 50);
+  setTimeout(function() {
+    $('#dialog').parent().css('z-index', 2000);
+  }, 50);
 
-  // automatically close dialog after 14 seconds, because sometimes the dilaog can't be closed manually.
-  setTimeout("$('#dialog').dialog('close'); $('#game_text_input').blur();", 14000);
+  // automatically close dialog after 14 seconds, because sometimes the dialog can't be closed manually.
+  setTimeout(function() {
+    $('#dialog').dialog('close');
+    $('#game_text_input').blur();
+  }, 14000);
 
   speak(title);
   speak(message);

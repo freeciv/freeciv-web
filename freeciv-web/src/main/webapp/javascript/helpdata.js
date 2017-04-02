@@ -239,14 +239,14 @@ function generate_help_text(key)
        msg += techs[reqs[n]]['name'] + " ";
       }
     }
-    msg += "<br><br>"
+    msg += "<br><br>";
     msg += wiki_on_item_button(improvement['name']);
   } else if (key.indexOf("help_gen_units") != -1) {
     var punit_type = unit_types[parseInt(key.replace("help_gen_units_", ""))];
     msg = "<h1>" + punit_type['name'] + "</h1>";
     msg += render_sprite(get_unit_type_image_sprite(punit_type));
     msg += "<br>";
-    msg += "<div id='manual_non_helptext_facts'>"
+    msg += "<div id='manual_non_helptext_facts'>";
     msg += "<div id='utype_fact_cost'>";
     msg += "Cost: " + punit_type['build_cost'];
     msg += "</div>";
@@ -286,7 +286,7 @@ function generate_help_text(key)
       msg += "Tech Requirements: " + techs[treq]['name'];
       msg += "</div>";
     }
-    msg += "</div>"
+    msg += "</div>";
 
     msg += "<div id='helptext'><p>" + punit_type['helptext'] + "</p></div>";
 
@@ -298,7 +298,7 @@ function generate_help_text(key)
     msg = "<h1>" + tech['name'] + "</h1>"
 	    + render_sprite(get_technology_image_sprite(tech)) + "<br>"
 	    + get_advances_text(tech['id']);
-    msg += "<br><br>"
+    msg += "<br><br>";
     msg += wiki_on_item_button(tech['name']);
   } else if (key == "help_gen_ruleset") {
     msg = "<h1>" + ruleset_control['name'] + "</h1>";

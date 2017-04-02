@@ -232,15 +232,19 @@ function remove_clause(remove_clause_obj)
 function client_diplomacy_clause_string(counterpart, giver, type, value)
 {
 
+  var pplayer = null;
+  var nation = null;
+
+  if (giver) {
+    pplayer = players[giver];
+    nation = nations[pplayer['nation']]['adjective'];
+  }
+
   switch (type) {
-    case CLAUSE_ADVANCE:
-      var pplayer = players[giver];
-      var nation = nations[pplayer['nation']]['adjective'];
-      var ptech = techs[value];
-      return "The " + nation + " give " + ptech['name'];
+  case CLAUSE_ADVANCE:
+    var ptech = techs[value];
+    return "The " + nation + " give " + ptech['name'];
   case CLAUSE_CITY:
-    var pplayer = players[giver];
-    var nation = nations[pplayer['nation']]['adjective'];
     var pcity = cities[value];
 
     if (pcity != null) {
@@ -251,8 +255,6 @@ function client_diplomacy_clause_string(counterpart, giver, type, value)
     break;
 
   case CLAUSE_GOLD:
-    var pplayer = players[giver];
-    var nation = nations[pplayer['nation']]['adjective'];
     if (giver == client.conn.playing['playerno']) {
       $("#self_gold").val(value);
     } else {
@@ -260,12 +262,8 @@ function client_diplomacy_clause_string(counterpart, giver, type, value)
     }
     return "The " + nation + " give " + value + " gold";
   case CLAUSE_MAP:
-    var pplayer = players[giver];
-    var nation = nations[pplayer['nation']]['adjective']
     return "The " + nation + " give their worldmap";
   case CLAUSE_SEAMAP:
-    var pplayer = players[giver];
-    var nation = nations[pplayer['nation']]['adjective']
     return "The " + nation + " give their seamap";
   case CLAUSE_CEASEFIRE:
     return "The parties agree on a cease-fire";
@@ -274,12 +272,8 @@ function client_diplomacy_clause_string(counterpart, giver, type, value)
   case CLAUSE_ALLIANCE:
     return "The parties create an alliance";
   case CLAUSE_VISION:
-    var pplayer = players[giver];
-    var nation = nations[pplayer['nation']]['adjective']
     return "The " + nation + " give shared vision";
   case CLAUSE_EMBASSY:
-    var pplayer = players[giver];
-    var nation = nations[pplayer['nation']]['adjective']
     return "The " + nation + " give an embassy";
   }
 
@@ -343,10 +337,10 @@ function create_diplomacy_dialog(counterpart) {
 
   var player_info_html = "<div style='float:left; width: 70%;'><h3>"
 		  			+ nations[pplayer['nation']]['adjective']
-		  			+ " " + pplayer['name'] + "</h3></div>"
+		  			+ " " + pplayer['name'] + "</h3></div>";
   var counterpart_info_html = "<div style='float:left; width: 70%;'><h3>"
 		  			      + nations[counterpart['nation']]['adjective']
-		                              + " " + counterpart['name'] + "</h3></div>"
+		                              + " " + counterpart['name'] + "</h3></div>";
 
   var agree_self_html = "<div id='agree_self' style='float':right;></div>";
   var agree_counterpart_html = "<div id='agree_counterpart' style='float:right;'></div>";

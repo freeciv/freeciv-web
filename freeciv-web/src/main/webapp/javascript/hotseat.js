@@ -235,7 +235,9 @@ function show_hotseat_new_phase()
 
   if (overview_active) $("#game_overview_panel").parent().hide();
   $("#game_unit_panel").parent().hide();
-  setTimeout("$('#game_unit_panel').parent().hide();", 1000);
+  setTimeout(function() {
+    $('#game_unit_panel').parent().hide();
+  }, 1000);
   if (chatbox_active) $("#game_chatbox_panel").parent().hide();
   $("#game_page").hide();
   keyboard_input = false;

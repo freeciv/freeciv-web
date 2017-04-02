@@ -96,7 +96,7 @@ function control_init()
   $("#pregame_text_input").blur(function(event) {
       keyboard_input=true;
       if (this.value=='') {
-        $("#pregame_text_input").value='>'
+        $("#pregame_text_input").value='>';
       }
   });
 
@@ -674,7 +674,7 @@ function update_unit_order_commands()
     }
 
     if (pcity != null && ptype != null && unit_types[ptype['obsoleted_by']] != null && can_player_build_unit_direct(client.conn.playing, unit_types[ptype['obsoleted_by']])) {
-      unit_actions["upgrade"] =  {name: "Upgrade unit (U)"}
+      unit_actions["upgrade"] =  {name: "Upgrade unit (U)"};
     }
     if (ptype != null && ptype['name'] != "Explorer") {
       unit_actions["explore"] = {name: "Auto explore (X)"};
@@ -1138,8 +1138,8 @@ function do_map_click(ptile, qtype, first_time_called)
         request_goto_path(current_focus[0]['id'], ptile['x'], ptile['y']);
         if (first_time_called) {
           setTimeout(function(){
-            do_map_click(ptile, qtype, false)}
-          , 250);
+            do_map_click(ptile, qtype, false);
+          }, 250);
         }
         return;
 

@@ -268,7 +268,7 @@ function popup_action_selection(actor_unit, action_probabilities,
              + " " + unit_types[target_unit['type']]['name'] + ".";
   } else {
     dhtml += "Your " + unit_types[actor_unit['type']]['name']
-             + " is waiting for your command."
+             + " is waiting for your command.";
   }
 
   $(id).html(dhtml);
@@ -759,7 +759,7 @@ function select_tgt_unit(actor_unit, target_tile, potential_tgt_units)
 
   $(id).html(dhtml);
 
-  for (var i = 0; i < potential_tgt_units.length; i++) {
+  for (i = 0; i < potential_tgt_units.length; i++) {
     var tgt_unit = potential_tgt_units[i];
 
     buttons.push(create_select_tgt_unit_button(id, actor_unit['id'],

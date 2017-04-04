@@ -115,6 +115,7 @@ function create_city_label(pcity)
     }
   }
 
+  if (width > 256) width = 256;
   return canvas_to_user_facing_mesh(canvas1, width, Math.floor(width * 0.7), 13, false);
 }
 

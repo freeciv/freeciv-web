@@ -607,9 +607,9 @@ function update_tile_extras(ptile) {
 
       var pos = map_to_scene_coords(ptile['x'], ptile['y']);
       extra_mesh.matrixAutoUpdate = false;
-      extra_mesh.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
-      extra_mesh.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 9);
-      extra_mesh.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
+      extra_mesh.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 6);
+      extra_mesh.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 2);
+      extra_mesh.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 6);
       extra_mesh.rotation.y = Math.PI / 4;
       extra_mesh.updateMatrix();
 

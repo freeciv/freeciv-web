@@ -893,7 +893,7 @@ function find_visible_unit(ptile)
   var i;
 
   /* If no units here, return nothing. */
-  if (unit_list_size(tile_units(ptile))==0) {
+  if (ptile == null || unit_list_size(tile_units(ptile))==0) {
     return null;
   }
 

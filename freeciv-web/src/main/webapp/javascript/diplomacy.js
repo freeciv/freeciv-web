@@ -179,8 +179,8 @@ function show_diplomacy_clauses()
       var clause = clauses[i];
       var diplo_str = client_diplomacy_clause_string(clause['counterpart'],
  		          clause['giver'],
-                          clause['type'],
-			  clause['value']);
+                  clause['type'],
+                  clause['value']);
       diplo_html += "<a href='#' onclick='remove_clause_req(" + i + ");'>" + diplo_str + "</a><br>";
 
     }
@@ -235,10 +235,8 @@ function client_diplomacy_clause_string(counterpart, giver, type, value)
   var pplayer = null;
   var nation = null;
 
-  if (giver) {
-    pplayer = players[giver];
-    nation = nations[pplayer['nation']]['adjective'];
-  }
+  pplayer = players[giver];
+  nation = nations[pplayer['nation']]['adjective'];
 
   switch (type) {
   case CLAUSE_ADVANCE:

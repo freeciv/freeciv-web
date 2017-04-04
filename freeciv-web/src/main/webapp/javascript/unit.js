@@ -145,6 +145,7 @@ function clear_tile_unit(punit)
 **************************************************************************/
 function unit_list_size(unit_list)
 {
+  if (unit_list == null) return 0;
   return unit_list.length;
 }
 

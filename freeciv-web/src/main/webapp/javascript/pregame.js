@@ -133,9 +133,10 @@ function update_player_info_pregame()
         var flag_html = $("<canvas id='pregame_nation_flags_" + id + "' width='29' height='20' class='pregame_flags'></canvas>");
         $("#pregame_plr_"+id).prepend(flag_html);
         var flag_canvas = document.getElementById('pregame_nation_flags_' + id);
+        if (flag_canvas == null) continue;
         var flag_canvas_ctx = flag_canvas.getContext("2d");
         var tag = "f." + nations[player['nation']]['graphic_str'];
-        if (tileset[tag] != null) {
+        if (sprites[tag] != null && flag_canvas_ctx != null) {
           flag_canvas_ctx.drawImage(sprites[tag], 0, 0);
         }
       }

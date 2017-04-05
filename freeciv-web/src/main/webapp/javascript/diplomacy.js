@@ -145,7 +145,13 @@ function create_clause_req(giver, type, value)
 
   if (type == CLAUSE_CEASEFIRE || type == CLAUSE_PEACE || type == CLAUSE_ALLIANCE) {
     // eg. creating peace treaty requires removing ceasefire first.
-    remove_clause_req(0);
+    var clauses = diplomacy_clause_map[active_diplomacy_meeting_id];
+    for (var i = 0; i < clauses.length; i++) {
+      var clause = clauses[i];
+      if (clause['type'] == CLAUSE_CEASEFIRE || clause['type'] == CLAUSE_PEACE|| clause['type'] == CLAUSE_ALLIANCE) {
+        remove_clause_req(i);
+      }
+    }
   }
 
   var packet = {"pid" : packet_diplomacy_create_clause_req,

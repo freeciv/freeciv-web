@@ -21,7 +21,7 @@ var observing = false;
 var chosen_nation = -1;
 var chosen_style = -1;
 var choosing_player = -1;
-var ai_skill_level = 2;
+var ai_skill_level = 3;
 var nation_select_id = -1;
 var metamessage_changed = false;
 var logged_in_with_password = false;
@@ -473,9 +473,9 @@ function pregame_settings()
 	  "<td><input type='number' name='mapsize' id='mapsize' size='4' length='3' min='1' max='18' step='1'></td></tr>" +
 	  "<tr class='not_pbem' title='This setting sets the skill-level of the AI players'><td>AI skill level:</td>" +
 	  "<td><select name='skill_level' id='skill_level'>" +
-	  "<option value='1'>Handicapped</option>" +
-	  "<option value='2'>Novice</option>" +
-	  "<option value='3'>Easy</option>" +
+	      "<option value='1'>Handicapped</option>" +
+	      "<option value='2'>Novice</option>" +
+	      "<option value='3'>Easy</option>" +
           "<option value='4'>Normal</option>" +
           "<option value='5'>Hard</option>" +
           "<option value='6'>Cheating</option>" +
@@ -846,6 +846,9 @@ function change_ruleset(to) {
     send_message("/rulesetdir " + to);
     // reset some ruleset defined settings.
     send_message("/set nationset all");
+    if (chosen_nation != -1) {
+      swal("Ruleset changed. You need to select your nation again.");
+    }
   }
 
 

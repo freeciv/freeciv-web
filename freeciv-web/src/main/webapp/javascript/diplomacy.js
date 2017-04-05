@@ -102,6 +102,7 @@ function accept_treaty(counterpart, I_accepted, other_accepted)
            + "px;  width: " + agree_sprite['width'] + "px;height: "
 	   + agree_sprite['height'] + "px; margin: 5px; '>"
            + "</div>";
+
   var disagree_self_html = "<div id='agreement' style='float:left; background: transparent url("
            + disagree_sprite['image-src']
            + "); background-position:-" + disagree_sprite['tileset-x'] + "px -"
@@ -141,8 +142,14 @@ function cancel_meeting_req()
 **************************************************************************/
 function create_clause_req(giver, type, value)
 {
+
+  if (type == CLAUSE_CEASEFIRE || type == CLAUSE_PEACE || type == CLAUSE_ALLIANCE) {
+    // eg. creating peace treaty requires removing ceasefire first.
+    remove_clause_req(0);
+  }
+
   var packet = {"pid" : packet_diplomacy_create_clause_req,
-	        "counterpart" : active_diplomacy_meeting_id,
+                "counterpart" : active_diplomacy_meeting_id,
                 "giver" : giver,
                 "type" : type,
                 "value" : value};
@@ -199,7 +206,7 @@ function remove_clause_req(clause_no)
   var clause = clauses[clause_no];
 
   var packet = {"pid" : packet_diplomacy_remove_clause_req,
-	        "counterpart" : clause['counterpart'],
+	            "counterpart" : clause['counterpart'],
                 "giver": clause['giver'],
                 "type" : clause['type'],
                 "value": clause['value'] };

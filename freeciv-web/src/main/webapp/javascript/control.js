@@ -257,10 +257,12 @@ function blur_input_on_touchdevice()
 }
 
 /****************************************************************************
-...
+ Called when the mouse is moved.
 ****************************************************************************/
 function mouse_moved_cb(e)
 {
+  if (mapview_slide != null && mapview_slide['active']) return;
+
   mouse_x = 0;
   mouse_y = 0;
   if (!e) {

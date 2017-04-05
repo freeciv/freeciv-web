@@ -89,7 +89,7 @@ function benchmark_check()
   }
 
   key_unit_auto_explore();
-  send_end_turn();
+  if (game_info != null) send_end_turn();
 
   setTimeout(benchmark_check, 1000);
 }

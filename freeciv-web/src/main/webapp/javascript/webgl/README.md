@@ -17,3 +17,9 @@ Build Freeciv-web as normal with Vagrant as described in the main README file.
 
 The WebGL renderer can also be tested live in production here:
 https://play.freeciv.org/
+
+Debugging
+---------
+Add the URL parameter &webgl_debug=true to enable the WebGL-Inspector - https://github.com/benvanik/WebGL-Inspector
+
+

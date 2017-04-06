@@ -266,6 +266,7 @@ function update_city_position(ptile) {
   if (renderer != RENDERER_WEBGL) return;
 
   var pcity = tile_city(ptile);
+  var punits = tile_units(ptile);
 
   var height = 5 + ptile['height'] * 100;
 
@@ -316,7 +317,9 @@ function update_city_position(ptile) {
     city_label.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 35);
     city_label.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 5);
     city_label.rotation.y = Math.PI / 4;
+    pcity['webgl_label_hash'] = pcity['name'] + pcity['size'] + pcity['production_value'] + punits.length;
     if (scene != null) scene.add(city_label);
+    return;
   }
 
   if (city_positions[ptile['index']] != null && pcity != null) {
@@ -355,15 +358,20 @@ function update_city_position(ptile) {
       city_walls_positions[ptile['index']] = city_walls;
     }
 
-    if (scene != null) scene.remove(city_label_positions[ptile['index']]);
-    delete city_label_positions[ptile['index']];
-    var city_label = create_city_label(pcity);
-    city_label_positions[ptile['index']] = city_label;
-    city_label.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] + 5);
-    city_label.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 35);
-    city_label.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 5);
-    city_label.rotation.y = Math.PI / 4;
-    if (scene != null) scene.add(city_label);
+    if (pcity['webgl_label_hash'] != pcity['name'] + pcity['size'] + pcity['production_value'] + punits.length) {
+      if (scene != null) {
+        scene.remove(city_label_positions[ptile['index']]);
+      }
+      delete city_label_positions[ptile['index']];
+      var city_label = create_city_label(pcity);
+      city_label_positions[ptile['index']] = city_label;
+      city_label.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] + 5);
+      city_label.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 35);
+      city_label.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 5);
+      city_label.rotation.y = Math.PI / 4;
+      pcity['webgl_label_hash'] = pcity['name'] + pcity['size'] + pcity['production_value'] + punits.length;
+      if (scene != null) scene.add(city_label);
+    }
 
   }
 

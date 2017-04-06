@@ -17,6 +17,8 @@
 
 ***********************************************************************/
 
+var texture_cache = {};
+
 /****************************************************************************
  Convert a canvas to a mesh that will always face the user. The height of
  `canvas' should be 16px.
@@ -25,11 +27,17 @@
  'height' is the height of the result.
  `transparent' should be true if canvas' content is transparent.
 ****************************************************************************/
-function canvas_to_user_facing_mesh(canvas, width_input, width_final, height, transparent)
+function canvas_to_user_facing_mesh(canvas, width_input, width_final, height, transparent, texture_cache_key)
 {
-  // Create a texture out of the canvas
-  var texture = new THREE.Texture(canvas);
-  texture.needsUpdate = true;
+  var texture;
+  if (texture_cache_key != null && texture_cache[texture_cache_key] != null) {
+    texture = texture_cache[texture_cache_key];
+  } else {
+    // Create a new texture out of the canvas
+    texture = new THREE.Texture(canvas);
+    texture.needsUpdate = true;
+    texture_cache[texture_cache_key] = texture;
+  }
 
   // Make a material
   var material = new THREE.ShaderMaterial({
@@ -125,7 +133,7 @@ function create_city_label(pcity)
 function create_unit_label(punit)
 {
   var canvas1 = document.createElement('canvas');
-  canvas1.width = 32;
+  canvas1.width = 16;
   canvas1.height = 16;
   var context1 = canvas1.getContext('2d');
   context1.font = "Bold 16px Arial";
@@ -138,7 +146,7 @@ function create_unit_label(punit)
   context1.strokeText(text, 0, 16);
   context1.fillText(text, 0, 16);
 
-  return canvas_to_user_facing_mesh(canvas1, width, Math.floor(width * 0.8), 13, true);
+  return canvas_to_user_facing_mesh(canvas1, width, Math.floor(width * 0.8), 13, true, get_unit_activity_text(punit));
 }
 
 

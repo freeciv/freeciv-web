@@ -1,0 +1,18 @@
+{
+  "name": "webglinspector",
+  "fullName": "WebGL-Inspector",
+  "id": "jid1-wzJMQZdgCoDRJA",
+  "description": "An advanced WebGL debugging toolkit.",
+  "author": "Ben Vanik <ben.vanik@gmail.com>",
+  "contributors": [
+    "Nick Desaulniers <nick@mozilla.com>"
+  ],
+  "license": "MPL 2.0",
+  "version": "1.0.4",
+  "dependencies": [
+    "menuitems"
+  ],
+  "homepage": "http://benvanik.github.io/WebGL-Inspector/",
+  "icon": "icon48.png"
+}
+

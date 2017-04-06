@@ -1,0 +1,63 @@
+{
+  "manifest_version": 2,
+  "minimum_chrome_version": "20",
+  "name" : "WebGL Inspector",
+  "version" : "1.13",
+  "homepage_url": "http://benvanik.github.com/WebGL-Inspector/",
+  "description" : "Debug, diagnose, and explore WebGL scenes.",
+  "background" : {
+    "scripts": ["background.js"]
+  },
+  "permissions": [
+    "tabs", "http://*/*", "https://*/*"
+  ],
+  "page_action" :
+  {
+    "default_icon" : "webgl-19.png",
+    "default_title" : "Debug with WebGL Inspector"
+  },
+  "content_scripts" : [
+    {
+      "matches" : [
+        "file://*/*",
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js" : ["contentscript.js"],
+      "run_at" : "document_start",
+      "all_frames" : false
+    }
+  ],
+  "web_accessible_resources": [
+    "gli.all.css",
+    "gli.all.js",
+    "assets/*",
+    "assets/array-buffer.png",
+    "assets/button-close.png",
+    "assets/button-options.png",
+    "assets/draw-info.png",
+    "assets/element-array-buffer.png",
+    "assets/grid.png",
+    "assets/gutter-arrow.png",
+    "assets/icon-current.png",
+    "assets/icon-error.png",
+    "assets/icon-warning.png",
+    "assets/isolated-call.png",
+    "assets/mini-button-left.png",
+    "assets/mini-button-right.png",
+    "assets/mini-button-span.png",
+    "assets/minibar-command-next.png",
+    "assets/minibar-command-prev.png",
+    "assets/minibar-command-rewind.png",
+    "assets/minibar-command-run.png",
+    "assets/minibar-command-rununtil.png",
+    "assets/minibar-span.png",
+    "assets/texture-2d.png",
+    "assets/texture-cube.png",
+    "assets/window-top-span.png"
+  ],
+  "icons" : {
+    "48" : "webgl-48.png",
+    "128" : "webgl-128.png"
+  }
+}

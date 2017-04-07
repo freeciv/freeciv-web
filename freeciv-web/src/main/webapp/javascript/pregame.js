@@ -446,6 +446,7 @@ function pregame_settings()
   $("<div id='pregame_settings'></div>").appendTo("div#pregame_page");
 
 
+
   var dhtml = "<div id='pregame_settings_tabs'>" +
       "   <ul>" +
       "     <li><a href='#pregame_settings_tabs-1'>Game</a></li>" +
@@ -871,8 +872,25 @@ function show_intro_dialog(title, message) {
 	  + " <br><br><span id='username_validation_result'></span>";
 
   if (renderer == RENDERER_WEBGL) {
-    intro_html += "<span style='color: #800000;'>The 3D WebGL version of Freeciv-web requires WebGL 3D hardware support such as Nvidia GeForce and at least 3GB of RAM.<br>" +
-    "Try tuning the 3D configuration by clicking Customize Game - Game settings - 3D WebGL. Current graphics level: ";
+    var renderer_name;
+
+    try {
+      var gl = document.createElement('canvas').getContext('webgl',{ failIfMajorPerformanceCaveat: true });
+      if (!gl) {
+        show_dialog_message("WebGL not supported", "WebGL 3D with hardware acceleration is not supported. The 3D version will not work. Please try the 2D version.");
+        return;
+      } else {
+        var extension = gl.getExtension('WEBGL_debug_renderer_info');
+        if (extension != undefined) {
+          renderer_name = gl.getParameter(extension.UNMASKED_RENDERER_WEBGL);
+        }
+      }
+    } catch (err) {
+      console.error(err);
+    }
+
+    intro_html += "<span style='color: #800000;'><small>The 3D WebGL version of Freeciv-web requires WebGL 3D hardware support such as Nvidia GeForce and at least 3GB of RAM.<br>" +
+    "Try tuning the 3D configuration by clicking Customize Game - Game settings - 3D WebGL. <br>Current graphics level: ";
     if (graphics_quality == QUALITY_LOW) {
       intro_html += "Low quality.";
     } else if (graphics_quality == QUALITY_MEDIUM) {
@@ -880,7 +898,8 @@ function show_intro_dialog(title, message) {
     } else {
       intro_html += "High quality.";
     }
-    "</span>";
+    intro_html += " Current WebGL renderer: " + renderer_name;
+    "</small></span>";
   }
   $("#dialog").html(intro_html);
   var stored_username = simpleStorage.get("username", "");

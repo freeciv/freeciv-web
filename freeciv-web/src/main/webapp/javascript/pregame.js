@@ -94,6 +94,12 @@ function update_game_info_pregame()
     }
   }
 
+  if (civserverport == 6003 || civserverport == 6004) {
+      game_info_html += "<p>";
+      game_info_html += "<h2>Freeciv-Web LongTurn game</h2>-Each player plays one turn every day, each turn lasts 23 hours.<br>-A game can typically take some weeks to complete, so please only join if you want to play for this long.<br>-Minimum of 10 human players required before starting.<br>-Please save the game regularly.<br>-Check the Freeciv forum if you have any questions!";
+      game_info_html += "</p>";
+  }
+
   $("#pregame_game_info").html(game_info_html);
 
   /* Update pregame_message_area's height. */

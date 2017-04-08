@@ -1,0 +1,15 @@
+diff --git a/server/settings.c b/server/settings.c
+index 455d2e2..e68c1e0 100644
+--- a/server/settings.c
++++ b/server/settings.c
+@@ -1050,6 +1050,10 @@ static bool timeout_callback(int value, struct connection *caller,
+     return FALSE;
+   }
+ 
++  if (srvarg.port == 6003 && S_S_RUNNING == server_state()) {
++    return FALSE;  // can't change timeout on LongTurn game.
++  }
++   
+   if (value == -1 && game.server.unitwaittime != 0) {
+     /* autogame only with 'unitwaittime' = 0 */
+     settings_snprintf(reject_msg, reject_msg_len,

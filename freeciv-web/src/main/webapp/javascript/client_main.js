@@ -66,10 +66,11 @@ function set_client_state(newstate)
         init_webgl_mapview();
       }
 
-      if (observing) {
+      if (observing || $.getUrlVar('action') == "multi") {
         var ptile = map_pos_to_tile(15,15);
         if (ptile != null) {
           center_tile_mapcanvas(ptile);
+          advance_unit_focus();
         }
       }
 

@@ -120,7 +120,7 @@
 		font-weight: bold;
 	}
 	#multiplayer-table td:last-child {
-		width: 140px;
+		width: 290px;
 	}
 	#singleplayer-table td:last-child {
 		width: 140px;
@@ -241,9 +241,12 @@
 													Play</a>
 											</c:when>
 											<c:otherwise>
+                                                <a class="label label-success label-lg"
+													href="/webclient?action=multi&amp;civserverport=${game.port}&amp;civserverhost=${game.host}&amp;multi=true">
+													Play 2D</a>
 												<a class="label label-success label-lg"
 													href="/webclient?action=observe&amp;civserverport=${game.port}&amp;civserverhost=${game.host}&amp;multi=true">
-													2D</a>
+													Observe 2D</a>
 												<a class="label label-success label-lg"
 													href="/webclient?renderer=webgl&amp;action=observe&amp;civserverport=${game.port}&amp;civserverhost=${game.host}&amp;multi=true">
 													3D</a>

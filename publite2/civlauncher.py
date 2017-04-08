@@ -9,10 +9,11 @@ import time
 # separate thread and restarts the process when the game ends.
 class Civlauncher(Thread):
 
-    def __init__ (self, gametype, new_port, metahostpath, savesdir):
+    def __init__ (self, gametype, scripttype, new_port, metahostpath, savesdir):
         Thread.__init__(self)
         self.new_port = new_port;
         self.gametype = gametype;
+        self.scripttype = scripttype;
         self.metahostpath = metahostpath;
         self.savesdir = savesdir;
         self.started_time = strftime("%Y-%m-%d %H:%M:%S", gmtime());
@@ -29,7 +30,8 @@ class Civlauncher(Thread):
                                + str(self.new_port) + " " 
                                + str(1000 + self.new_port) + " " 
                                + self.metahostpath + " "
-                               + self.gametype, shell=True)
+                               + self.gametype + " "
+                               + self.scripttype, shell=True)
                 self.num_start += 1;
                 if retcode > 0:
                     print("Freeciv-web port " + str(self.new_port) + " was terminated by signal", 

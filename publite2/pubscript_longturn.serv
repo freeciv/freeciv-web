@@ -1,0 +1,25 @@
+cmdlevel ctrl first
+set topology WRAPX
+set nationset all
+set compresstype xs
+set maxplayers 32
+set allowtake H1Ah1adOo
+set autotoggle false
+set timeout 82800
+set netwait 15
+set nettimeout 40
+set pingtime 30
+set pingtimeout 120
+set maxconnectionsperhost 256
+set threaded_save enabled
+set scorelog enabled
+set size 7
+set landm 50
+set minp 5
+set generator FAIR
+metaconnection persistent
+set ec_chat=enabled
+set ec_info=enabled 
+set ec_max_size=20000
+set ec_turns=32768
+metamessage LongTurn Freeciv-web

@@ -207,7 +207,7 @@ void main(void)
 
   /* Borders*/
   if (borders_enabled && !(border_color.r > 0.546875 && border_color.r < 0.5625 && border_color.b == 0.0 && border_color.g == 0.0)) {
-    c = c * 0.4 + border_color.rbg * 0.6;
+    c = c * 0.5 + border_color.rbg * 0.55;
   }
 
 

@@ -7,7 +7,7 @@
         "generatedBy"   : "OBJConverter",
         "vertices"      : 3137,
         "faces"         : 3174,
-        "normals"       : 735,
+        "normals"       : 734,
         "uvs"           : 0,
         "materials"     : 8
     },

@@ -84,8 +84,8 @@
 	
 			var ps = 4;
 			if (scoreitems.length >1000) ps = 0;
-			
-			Morris.Line({
+			try {
+			  Morris.Line({
 			    element: 'scores',
 			    data: resultdata[0],
 			    xkey: 'turn',
@@ -93,7 +93,10 @@
 			    labels: playernames,
 			    parseTime: false,
 			    pointSize: ps
-			});
+			  });
+            } catch(err) {
+              console.log("Problem showing score log graph: " + err);
+            }
 		}
 	</script>
 </head>

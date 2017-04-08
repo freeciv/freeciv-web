@@ -43,8 +43,8 @@
 
 		<script>
 			var data = ${data};
-		
-			Morris.Line({
+		    try {
+		 	 Morris.Line({
 			  element: 'chart',
 			  data: data,
 			  xkey: 'date',
@@ -53,6 +53,9 @@
 			  ykeys: ['webSinglePlayer', 'webMultiPlayer', 'webPlayByEmail', 'desktopMultiplayer','webHotseat', 'webSinglePlayer3D'],
 			  labels: ['Freeciv-web 2D singleplayer', 'Freeciv-web multiplayer', 'Freeciv-web PBEM', 'Freeciv desktop multiplayer', 'Freeciv-web hotseat', 'Freeciv-web 3D WebGL singleplayer']
 			});
+            } catch(err) {
+              console.log("Problem showing score log graph: " + err);
+            }
 		</script>
 
 		<!-- Site footer -->

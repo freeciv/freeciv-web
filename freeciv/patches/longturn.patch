@@ -1,12 +1,38 @@
+diff --git a/server/connecthand.c b/server/connecthand.c
+index d74f178..410ba62 100644
+--- a/server/connecthand.c
++++ b/server/connecthand.c
+@@ -772,7 +772,7 @@ void connection_detach(struct connection *pconn, bool remove_unused_player)
+         } conn_list_iterate_end;
+ 
+         /* Actually do the removal. */
+-        server_remove_player(pplayer);
++        if (srvarg.port != 6003) server_remove_player(pplayer);
+         (void) aifill(game.info.aifill);
+         reset_all_start_commands(TRUE);
+       } else {
+diff --git a/server/plrhand.c b/server/plrhand.c
+index 14a9df2..02ae406 100644
+--- a/server/plrhand.c
++++ b/server/plrhand.c
+@@ -2429,7 +2429,7 @@ void fit_nationset_to_players(void)
+ ****************************************************************************/
+ void reset_all_start_commands(bool plrchange)
+ {
+-  if (S_S_INITIAL != server_state()) {
++  if (S_S_INITIAL != server_state() || srvarg.port == 6003) {
+     return;
+   }
+   players_iterate(pplayer) {
 diff --git a/server/settings.c b/server/settings.c
-index 455d2e2..3335023 100644
+index 455d2e2..e68c1e0 100644
 --- a/server/settings.c
 +++ b/server/settings.c
 @@ -1050,6 +1050,10 @@ static bool timeout_callback(int value, struct connection *caller,
      return FALSE;
    }
  
-+  if ((srvarg.port == 6003 || srvarg.port == 6004) && S_S_RUNNING == server_state()) {
++  if (srvarg.port == 6003 && S_S_RUNNING == server_state()) {
 +    return FALSE;  // can't change timeout on LongTurn game.
 +  }
 +   
@@ -14,14 +40,14 @@ index 455d2e2..3335023 100644
      /* autogame only with 'unitwaittime' = 0 */
      settings_snprintf(reject_msg, reject_msg_len,
 diff --git a/server/stdinhand.c b/server/stdinhand.c
-index a19a6ba..03f64d2 100644
+index a19a6ba..45e9d4c 100644
 --- a/server/stdinhand.c
 +++ b/server/stdinhand.c
 @@ -5785,6 +5785,10 @@ bool start_command(struct connection *caller, bool check, bool notify)
        }
      } players_iterate_end;
  
-+    if ((srvarg.port == 6003 || srvarg.port == 6004) && game.server.min_players < 10) {
++    if (srvarg.port == 6003 && game.server.min_players < 10) {
 +      game.server.min_players = 10;
 +    }
 +

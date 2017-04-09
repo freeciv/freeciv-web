@@ -192,12 +192,14 @@ function init_common_intro_dialog() {
       "Please enter your name: ");
 
   } else if ($.getUrlVar('action') == "multi") {
-    show_intro_dialog("Welcome to Freeciv-web",
-      "You are about to join this game server, where you can "  +
-      "participate in a multiplayer game. You can customize the game " +
-      "settings, and wait for the minimum number of players before " +
-      "the game can start. " +
-      "Please enter your name: ");
+    var msg = "You are about to join this game server, where you can "  +
+                  "participate in a multiplayer game. You can customize the game " +
+                  "settings, and wait for the minimum number of players before " +
+                  "the game can start. ";
+    if ($.getUrlVar('civserverport') == "6003") msg += "<br><br>This is a LongTurn multiplayer game. It requires that you log in with an account."
+      +" Please create a new account if you don't have an account.<br><br>"
+    msg += "Please enter your name: "
+    show_intro_dialog("Welcome to Freeciv-web", msg);
   } else {
     show_intro_dialog("Welcome to Freeciv-web",
       "You are about to join this game server, where you can " +

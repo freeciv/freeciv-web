@@ -163,11 +163,7 @@ if __name__ == '__main__':
     new_server.start();
     port += 1;
 
-  # start 2 longturn servers.
-  new_server = Civlauncher("multiplayer", "longturn", port, metahost + ":" + str(metaport) + metapath, mc.savesdir)
-  mc.server_list.append(new_server);
-  new_server.start();
-  port += 1;
+  # start  longturn server.
   new_server = Civlauncher("multiplayer", "longturn", port, metahost + ":" + str(metaport) + metapath, mc.savesdir)
   mc.server_list.append(new_server);
   new_server.start();

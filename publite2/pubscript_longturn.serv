@@ -22,4 +22,4 @@ set ec_chat=enabled
 set ec_info=enabled 
 set ec_max_size=20000
 set ec_turns=32768
-metamessage LongTurn Freeciv-web
+metamessage LongTurn Freeciv-web | 23 hour timeout | min 10 players

@@ -291,6 +291,56 @@ function get_extra_mesh(key)
 }
 
 /****************************************************************************
+ Returns unit explosion mesh  (frame = [0-4].
+****************************************************************************/
+function get_unit_explosion_mesh(frame)
+{
+  var key = 'explode.unit_' + frame;
+  if (meshes[key] != null) return meshes[key].clone();
+  if (sprites[key] == null) {
+    console.log("Invalid unit explosion key: " + key);
+    return null;
+  }
+
+  var ecanvas = document.createElement("canvas");
+  ecanvas.width = 32;
+  ecanvas.height = 32;
+  var econtext = ecanvas.getContext("2d");
+  econtext.drawImage(sprites[key], 0, 0,
+                sprites[key].width, sprites[key].height,
+                0,0,32,32);
+
+  meshes[key] = canvas_to_user_facing_mesh(ecanvas, 32, 32, 32, true);
+  return meshes[key].clone();
+
+}
+
+/****************************************************************************
+ Returns nuke explosion mesh
+****************************************************************************/
+function get_nuke_explosion_mesh(frame)
+{
+  var key = 'explode.nuke';
+  if (meshes[key] != null) return meshes[key].clone();
+  if (sprites[key] == null) {
+    console.log("Invalid nuke explosion key: " + key);
+    return null;
+  }
+
+  var ecanvas = document.createElement("canvas");
+  ecanvas.width = 256;
+  ecanvas.height = 256;
+  var econtext = ecanvas.getContext("2d");
+  econtext.drawImage(sprites[key], 0, 0,
+                sprites[key].width, sprites[key].height,
+                0,0,sprites[key].width,sprites[key].height);
+
+  meshes[key] = canvas_to_user_facing_mesh(ecanvas, 180, 180, 176, true);
+  return meshes[key].clone();
+
+}
+
+/****************************************************************************
  Returns a unit health mesh
 ****************************************************************************/
 function get_unit_health_mesh(punit)

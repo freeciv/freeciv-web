@@ -100,7 +100,7 @@ function update_game_info_pregame()
     game_info_html += "</p>";
   } else if ($.getUrlVar('action') == "multi") {
     game_info_html += "<p>";
-    game_info_html += "<h2>Freeciv-Web Multiplayer game</h2>-You are now about to play a multiplayer game.<br>-Please wait until at least 2 players have join the game, then click the start game button.";
+    game_info_html += "<h2>Freeciv-Web Multiplayer game</h2>-You are now about to play a multiplayer game.<br>-Please wait until at least 2 players have joined the game, then click the start game button.";
     game_info_html += "</p>";
   }
 

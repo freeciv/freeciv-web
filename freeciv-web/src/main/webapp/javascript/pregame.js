@@ -99,8 +99,9 @@ function update_game_info_pregame()
     game_info_html += "<h2>Freeciv-Web LongTurn game</h2>-Each player plays one turn every day, each turn lasts 23 hours.<br>"
     + "-A game can typically take some months to complete, so please only join if you want to play for this long.<br>"
     + "-Minimum of 10 human players required before starting.<br>-Please save the game regularly.<br>"
+    + "-To join the game, please select a nation.<br>"
+    + "-Click the start game button to indicate that you are ready to begin the game.<br>"
     + "-This is the first time we try a LongTurn game on Freeciv-web, so this is a test game.<br>"
-    + "-Please click the start game button to indicate that you are ready to begin the game.<br>"
     + "-Check the Freeciv forum if you have any questions!";
     game_info_html += "</p>";
 

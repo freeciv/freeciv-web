@@ -1,5 +1,5 @@
 diff --git a/server/connecthand.c b/server/connecthand.c
-index d74f178..410ba62 100644
+index d74f178..94893c7 100644
 --- a/server/connecthand.c
 +++ b/server/connecthand.c
 @@ -772,7 +772,7 @@ void connection_detach(struct connection *pconn, bool remove_unused_player)
@@ -7,7 +7,7 @@ index d74f178..410ba62 100644
  
          /* Actually do the removal. */
 -        server_remove_player(pplayer);
-+        if (srvarg.port != 6003) server_remove_player(pplayer);
++        if (!(srvarg.port == 6003 && NULL != pplayer->nation)) server_remove_player(pplayer);
          (void) aifill(game.info.aifill);
          reset_all_start_commands(TRUE);
        } else {

@@ -731,6 +731,7 @@ function pregame_settings()
 
   if (civserverport == 6003) {
     $('#password').hide(); // no password for LongTurn.
+    $('#ruleset').hide(); // no changing ruleset for LongTurn.
   }
 
   $('#password').change(function() {

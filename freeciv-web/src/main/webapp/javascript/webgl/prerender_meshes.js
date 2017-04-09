@@ -39,11 +39,6 @@ function prerender(landGeometry, xquality) {
       if (terrain_name == "Forest") {
         /* Dense forests. */
         add_tree = true;
-      } else if (terrain_name == "Grassland" ||
-                 terrain_name == "Plains" ||
-                 terrain_name == "Hills") {
-        /* Sparse trees -> Monte-Carlo algorithm */
-        add_tree = (Math.random() < 0.01);
       }
 
       /* No trees on beaches */
@@ -52,7 +47,7 @@ function prerender(landGeometry, xquality) {
       if (add_tree) {
         var vertex = new THREE.Vector3();
         vertex['tile'] = ptile['index'];
-        var theight = Math.floor(landGeometry.vertices[i].y + 2 + 0.1 * (-1 + 2 * Math.random()));
+        var theight = Math.floor(landGeometry.vertices[i].y + 2 + 0.1 * (-1.2 + 2.4 * Math.random()));
         vertex['height'] = theight;
         if (tile_get_known(ptile) != TILE_UNKNOWN) forest_positions[ptile['index']] = true;
         vertex.x = Math.floor(landGeometry.vertices[i].x + 5 + 2.5 * (-1 + 2 * Math.random()));
@@ -90,7 +85,7 @@ function prerender(landGeometry, xquality) {
       if (add_tree) {
         var vertex = new THREE.Vector3();
         vertex['tile'] = ptile['index'];
-        var theight = Math.floor(landGeometry.vertices[i].y + 2 + 0.1 * (-1 + 2 * Math.random()));
+        var theight = Math.floor(landGeometry.vertices[i].y + 2 + 0.1 * (-1.2 + 2.4 * Math.random()));
         vertex['height'] = theight;
         if (tile_get_known(ptile) != TILE_UNKNOWN) jungle_positions[ptile['index']] = true;
         vertex.x = Math.floor(landGeometry.vertices[i].x + 5 + 2.5 * (-1 + 2 * Math.random()));

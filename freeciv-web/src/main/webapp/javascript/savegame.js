@@ -18,6 +18,7 @@
 ***********************************************************************/
 
 var saved_this_turn = false;
+var game_loaded = false;
 
 var scenarios = [
   {"img":"/images/world_small.png", "description":"The World - Small world map, 80x50 map of the Earth", "savegame":"earth-80x50-v3"},
@@ -169,6 +170,7 @@ function show_load_game_dialog_cb(savegames_data)
 		    swal("Unable to load savegame: no game selected.");
 		  } else if ($('#selectable .ui-selected').text() != null){
             send_message("/load " + $('#selectable .ui-selected').text());
+            game_loaded = true;
 
 		    $("#dialog").dialog('close');
 		    $("#game_text_input").blur();
@@ -356,6 +358,7 @@ function load_game_real(filename)
       console.log("Server command: /load " + filename );
       send_message("/load " + filename);
       $.unblockUI();
+      game_loaded = true;
 }
 
 

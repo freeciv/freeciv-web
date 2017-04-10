@@ -1384,7 +1384,7 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift, the_event)
 
   switch (key_code) {
     case 13:
-      if (shift) send_end_turn();
+      if (shift && C_S_RUNNING == client_state()) send_end_turn();
       break;
 
     case 35: //1

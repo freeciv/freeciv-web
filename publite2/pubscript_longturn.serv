@@ -2,7 +2,9 @@ cmdlevel ctrl first
 set topology WRAPX
 set nationset all
 set compresstype xs
-set maxplayers 32
+set maxplayers 100
+set aifill 0
+rulesetdir civ2civ3 
 set allowtake H1Ah1adOo
 set autotoggle false
 set timeout 82800
@@ -20,6 +22,6 @@ set generator FAIR
 metaconnection persistent
 set ec_chat=enabled
 set ec_info=enabled 
-set ec_max_size=20000
+set ec_max_size=80000
 set ec_turns=32768
 metamessage LongTurn Freeciv-web | 23 hour timeout | min 10 players

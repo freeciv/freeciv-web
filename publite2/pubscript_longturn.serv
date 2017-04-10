@@ -1,10 +1,10 @@
 cmdlevel ctrl first
+rulesetdir civ2civ3 
 set topology WRAPX
 set nationset all
 set compresstype xs
 set maxplayers 100
 set aifill 0
-rulesetdir civ2civ3 
 set allowtake H1Ah1adOo
 set autotoggle false
 set timeout 82800

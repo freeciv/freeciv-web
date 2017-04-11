@@ -39,7 +39,7 @@ function update_nation_screen()
     var flag_html = "<canvas id='nation_dlg_flags_" + player_id + "' width='29' height='20' class='nation_flags'></canvas>";
 
     var plr_class = "";
-    if (!client_is_observer() && player_id == client.conn.playing['playerno']) plr_class = "nation_row_self";
+    if (!client_is_observer() && client.conn.playing != null && player_id == client.conn.playing['playerno']) plr_class = "nation_row_self";
     if (!pplayer['is_alive']) plr_class = "nation_row_dead";
     if (!client_is_observer() && diplstates[player_id] != null && diplstates[player_id] == DS_WAR) plr_class = "nation_row_war";
 
@@ -57,7 +57,7 @@ function update_nation_screen()
           get_ai_level_text(pplayer) + " AI" : "Human") + "</td><td>"
 	   + (pplayer['is_alive'] ? "Alive" : "Dead") +  "</td>";
 
-    if (!client_is_observer() && diplstates[player_id] != null && player_id != client.conn.playing['playerno']) {
+    if (!client_is_observer() && client.conn.playing != null && diplstates[player_id] != null && player_id != client.conn.playing['playerno']) {
       nation_list_html += "<td>" + get_diplstate_text(diplstates[player_id]) + "</td>";
     } else {
       nation_list_html += "<td>-</td>";
@@ -132,7 +132,7 @@ function update_nation_screen()
 **************************************************************************/
 function col_love(pplayer)
 {
-  if (client_is_observer() || pplayer['playerno'] == client.conn.playing['playerno']
+  if (client_is_observer() || client.conn.playing == null || pplayer['playerno'] == client.conn.playing['playerno']
       || pplayer['flags'].isSet(PLRF_AI) == false) {
     return "-";
   } else {
@@ -149,6 +149,7 @@ function handle_nation_table_select( ui )
   selected_player = parseFloat($(ui.selected).data("plrid"));
   var player_id = selected_player;
   var pplayer = players[selected_player];
+  if (pplayer == null) return;
 
   if (pplayer != null && pplayer['is_alive'] && (client_is_observer() || player_id == client.conn.playing['playerno']
       || (diplstates[player_id] != null && diplstates[player_id] != DS_NO_CONTACT))) {

@@ -1,3 +1,15 @@
+diff --git a/server/connecthand.c b/server/connecthand.c
+index d74f178..d253eb4 100644
+--- a/server/connecthand.c
++++ b/server/connecthand.c
+@@ -539,6 +539,7 @@ void send_conn_info_remove(struct conn_list *src, struct conn_list *dest)
+ **************************************************************************/
+ struct player *find_uncontrolled_player(void)
+ {
++  if (srvarg.port == 6003) return NULL;
+   players_iterate(played) {
+     if (!played->is_connected && !played->was_created) {
+       return played;
 diff --git a/server/plrhand.c b/server/plrhand.c
 index 14a9df2..2917c7b 100644
 --- a/server/plrhand.c

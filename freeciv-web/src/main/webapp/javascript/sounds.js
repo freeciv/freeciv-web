@@ -73,7 +73,7 @@ function play_combat_sound(unit)
 {
   if (!sounds_enabled) return;
   if (unit == null) return;
-  if (!is_unit_visible(unit)) return;
+  if (!is_unit_visible(unit) && renderer != RENDERER_WEBGL) return;
 
   if (soundset == null) {
     console.error("soundset not found.");

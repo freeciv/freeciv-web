@@ -319,7 +319,7 @@ function is_tech_req_for_tech(check_tech_id, next_tech_id)
 function update_tech_screen()
 {
 
-  if (client_is_observer()) {
+  if (client_is_observer() || client.conn.playing == null) {
     show_observer_tech_dialog();
     return;
   }

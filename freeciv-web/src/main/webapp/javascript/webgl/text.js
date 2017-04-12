@@ -17,6 +17,8 @@
 
 ***********************************************************************/
 
+var texture_cache = {};
+
 /****************************************************************************
  Convert a canvas to a mesh that will always face the user. The height of
  `canvas' should be 16px.
@@ -24,12 +26,19 @@
  'width_input' I think is the width of the input.
  'height' is the height of the result.
  `transparent' should be true if canvas' content is transparent.
+ 'texture_cache_key' is to specify a cache key, to reuse textures for multiple uses, such as unit labels.
 ****************************************************************************/
-function canvas_to_user_facing_mesh(canvas, width_input, width_final, height, transparent)
+function canvas_to_user_facing_mesh(canvas, width_input, width_final, height, transparent, texture_cache_key)
 {
-  // Create a texture out of the canvas
-  var texture = new THREE.Texture(canvas);
-  texture.needsUpdate = true;
+  var texture;
+  if (texture_cache_key != null && texture_cache[texture_cache_key] != null) {
+    texture = texture_cache[texture_cache_key];
+  } else {
+    // Create a new texture out of the canvas
+    texture = new THREE.Texture(canvas);
+    texture.needsUpdate = true;
+    texture_cache[texture_cache_key] = texture;
+  }
 
   // Make a material
   var material = new THREE.ShaderMaterial({
@@ -47,14 +56,16 @@ function canvas_to_user_facing_mesh(canvas, width_input, width_final, height, tr
 }
 
 /****************************************************************************
- Create a city name label
+ Create a new city name label and returns the resulting Three.js mesh.
+ This does the initial creation, not the updates. See update_city_label.
 ****************************************************************************/
 function create_city_label(pcity)
 {
-  var canvas1 = document.createElement('canvas');
-  canvas1.width = 256;
-  canvas1.height = 16;
-  var ctx = canvas1.getContext('2d');
+  var canvas = document.createElement('canvas');
+  canvas.width = 256;
+  canvas.height = 32;
+  var ctx = canvas.getContext('2d');
+  pcity['label_canvas'] = canvas;
 
   var owner_id = pcity.owner;
   if (owner_id == null) return null;
@@ -68,7 +79,7 @@ function create_city_label(pcity)
   ctx.drawImage(sprites[city_gfx.key],
                 1, 1, // Remove the 1px black border, it's ugly
                 sprites[city_gfx.key].width - 2, sprites[city_gfx.key].height - 2,
-                0, 0, 28, 16);
+                0, 0, 28, 32);
   width += 28;
 
   // Occupied
@@ -77,45 +88,139 @@ function create_city_label(pcity)
   if (punits.length > 0) {
     // Background
     ctx.fillStyle = 'black';
-    ctx.fillRect(width, 0, 16, 16);
+    ctx.fillRect(width, 0, 16, 32);
     // Stars
-    ctx.drawImage(sprites[get_city_occupied_sprite(pcity)], width, 0, 13, 16);
+    ctx.drawImage(sprites[get_city_occupied_sprite(pcity)], width, 0, 13, 32);
     width += 13;
   }
 
   // Name and size
-  var city_text = pcity.name + "  " + pcity.size;
-  ctx.font = 'Bold 14px Arial';
+  var city_text = pcity.name + " " + pcity.size;
+  ctx.font = 'Bold 25px Arial';
   var txt_measure = ctx.measureText(city_text);
   // Background
-  ctx.fillStyle = nations[owner.nation].color;
-  ctx.fillRect(width, 0, txt_measure.width + 8 /* padding */, 16);
+  var background_color = nations[owner.nation].color;
+  if (background_color != null) {
+     if (graphics_quality >= QUALITY_HIGH) {
+       background_color = background_color.replace("rgb(", "rgba(").replace(")", ",0.52)");
+     }
+     ctx.fillStyle = background_color;
+  }
+  ctx.fillRect(width, 0, txt_measure.width + 11 /* padding */, 32);
   // Text
   var dark_bg = false;
   var nation_colors = nations[owner['nation']].color.replace("rgb(", "").replace(")", "").split(",");
   if (parseInt(nation_colors[0]) + parseInt(nation_colors[1]) + parseInt(nation_colors[2]) < 300) dark_bg = true;
   if (dark_bg) {
-    ctx.fillStyle = 'white';
+    ctx.fillStyle = '#EFEFEF';
   } else {
-    ctx.fillStyle = 'black';
+    ctx.fillStyle = '#050505';
   }
-  ctx.fillText(city_text, width + 4 /* padding */, 13);
+  ctx.fillText(city_text, width + 4 /* padding */, 13*2);
 
-  width += txt_measure.width + 8 /* padding */;
+  width += txt_measure.width + 11 /* padding */;
 
   // Production
   var prod_type = get_city_production_type(pcity);
   if (prod_type != null) {
     var tag = prod_type.graphic_str;
     if (tileset[tag] != null) {
-      ctx.fillStyle = nations[owner.nation].color;
-      ctx.fillRect(width, 0, 36, 16);
-      ctx.drawImage(sprites[tag], width, 0, 36, 18);
+      ctx.fillStyle = background_color;
+      ctx.fillRect(width, 0, 36, 32);
+      ctx.drawImage(sprites[tag], width, 0, 31, 18*2);
       width += 32;
     }
   }
 
-  return canvas_to_user_facing_mesh(canvas1, width, Math.floor(width * 0.8), 13, false);
+  if (width > 256) width = 256;
+  return canvas_to_user_facing_mesh(canvas, width, Math.floor(width * 0.7), 13, graphics_quality >= QUALITY_HIGH, "city_" + pcity['id']);
+}
+
+/****************************************************************************
+ Update a city name label. This updates the canvas image of the city label,
+ which then updates the corresponding Three.js Texture.
+****************************************************************************/
+function update_city_label(pcity)
+{
+  var canvas = pcity['label_canvas'];
+  if (canvas == null) {
+    canvas = document.createElement('canvas');
+    canvas.width = 256;
+    canvas.height = 32;
+    pcity['label_canvas'] = canvas;
+  }
+
+  var ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  var owner_id = pcity.owner;
+  if (owner_id == null) return null;
+  var owner = players[owner_id];
+
+  // We draw from left to right, updating `width' after each call.
+  var width = 0; // Total width of the bar
+
+  // Flag
+  var city_gfx = get_city_flag_sprite(pcity);
+  ctx.drawImage(sprites[city_gfx.key],
+                1, 1, // Remove the 1px black border, it's ugly
+                sprites[city_gfx.key].width - 2, sprites[city_gfx.key].height - 2,
+                0, 0, 28, 32);
+  width += 28;
+
+  // Occupied
+  var ptile = city_tile(pcity);
+  var punits = tile_units(ptile);
+  if (punits.length > 0) {
+    // Background
+    ctx.fillStyle = 'black';
+    ctx.fillRect(width, 0, 16, 32);
+    // Stars
+    ctx.drawImage(sprites[get_city_occupied_sprite(pcity)], width, 0, 13, 32);
+    width += 13;
+  }
+
+  // Name and size
+  var city_text = pcity.name + " " + pcity.size;
+  ctx.font = 'Bold 25px Arial';
+  var txt_measure = ctx.measureText(city_text);
+  // Background
+  var background_color = nations[owner.nation].color;
+  if (background_color != null) {
+     if (graphics_quality >= QUALITY_HIGH) {
+       background_color = background_color.replace("rgb(", "rgba(").replace(")", ",0.52)");
+     }
+     ctx.fillStyle = background_color;
+  }
+  ctx.fillRect(width, 0, txt_measure.width + 11 /* padding */, 32);
+  // Text
+  var dark_bg = false;
+  var nation_colors = nations[owner['nation']].color.replace("rgb(", "").replace(")", "").split(",");
+  if (parseInt(nation_colors[0]) + parseInt(nation_colors[1]) + parseInt(nation_colors[2]) < 300) dark_bg = true;
+  if (dark_bg) {
+    ctx.fillStyle = '#EFEFEF';
+  } else {
+    ctx.fillStyle = '#050505';
+  }
+  ctx.fillText(city_text, width + 4 /* padding */, 13*2);
+
+  width += txt_measure.width + 11 /* padding */;
+
+  // Production
+  var prod_type = get_city_production_type(pcity);
+  if (prod_type != null) {
+    var tag = prod_type.graphic_str;
+    if (tileset[tag] != null) {
+      ctx.fillStyle = background_color;
+      ctx.fillRect(width, 0, 36, 32);
+      ctx.drawImage(sprites[tag], width, 0, 31, 18*2);
+      width += 32;
+    }
+  }
+
+  var texture = texture_cache['city_' + pcity['id']];
+  texture.needsUpdate = true;
+
 }
 
 /****************************************************************************
@@ -124,7 +229,7 @@ function create_city_label(pcity)
 function create_unit_label(punit)
 {
   var canvas1 = document.createElement('canvas');
-  canvas1.width = 32;
+  canvas1.width = 16;
   canvas1.height = 16;
   var context1 = canvas1.getContext('2d');
   context1.font = "Bold 16px Arial";
@@ -137,7 +242,7 @@ function create_unit_label(punit)
   context1.strokeText(text, 0, 16);
   context1.fillText(text, 0, 16);
 
-  return canvas_to_user_facing_mesh(canvas1, width, Math.floor(width * 0.8), 13, true);
+  return canvas_to_user_facing_mesh(canvas1, width, Math.floor(width * 0.8), 13, true, get_unit_activity_text(punit));
 }
 
 

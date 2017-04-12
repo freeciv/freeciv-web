@@ -192,12 +192,14 @@ function init_common_intro_dialog() {
       "Please enter your name: ");
 
   } else if ($.getUrlVar('action') == "multi") {
-    show_intro_dialog("Welcome to Freeciv-web",
-      "You are about to join this game server, where you can "  +
-      "participate in a multiplayer game. You can customize the game " +
-      "settings, and wait for the minimum number of players before " +
-      "the game can start. " +
-      "Please enter your name: ");
+    var msg = "You are about to join this game server, where you can "  +
+                  "participate in a multiplayer game. You can customize the game " +
+                  "settings, and wait for the minimum number of players before " +
+                  "the game can start. ";
+    if ($.getUrlVar('civserverport') == "6003") msg += "<br><br>This is a LongTurn multiplayer game. It requires that you log in with an account."
+      +" Please create a new account if you don't have an account.<br><br>"
+    msg += "Please enter your name: "
+    show_intro_dialog("Welcome to Freeciv-web", msg);
   } else {
     show_intro_dialog("Welcome to Freeciv-web",
       "You are about to join this game server, where you can " +
@@ -393,10 +395,15 @@ function show_dialog_message(title, message) {
   $("#dialog").dialog('open');
   $("#game_text_input").blur();
   //quick fix to put the dialog on top of everything else.
-  setTimeout("$('#dialog').parent().css('z-index', 2000)", 50);
+  setTimeout(function() {
+    $('#dialog').parent().css('z-index', 2000);
+  }, 50);
 
-  // automatically close dialog after 12 seconds, because sometimes the dilaog can't be closed manually.
-  setTimeout("$('#dialog').dialog('close'); $('#game_text_input').blur();", 12000);
+  // automatically close dialog after 14 seconds, because sometimes the dialog can't be closed manually.
+  setTimeout(function() {
+    $('#dialog').dialog('close');
+    $('#game_text_input').blur();
+  }, 14000);
 
   speak(title);
   speak(message);

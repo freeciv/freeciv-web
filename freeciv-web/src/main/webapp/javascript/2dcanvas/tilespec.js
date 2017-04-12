@@ -631,7 +631,7 @@ function dir_get_tileset_name(dir)
     return "w";
   case DIR8_NORTHWEST:
     return "nw";
-  };
+  }
 
   return "";
 }
@@ -1013,7 +1013,7 @@ function fill_fog_sprite_array(ptile, pedge, pcorner)
 	    case TILE_UNKNOWN:
 	      value = unknown;
 	      break;
-      };
+      }
     }
     tileno = tileno * 3 + value;
   }
@@ -1224,24 +1224,6 @@ function get_technology_image_sprite(ptech)
             "width" : width,
             "height" : height
             };
-}
-
-/****************************************************************************
- ...
-****************************************************************************/
-function get_player_flag_url(pplayer)
-{
-  var pnation = nations[pplayer['nation']];
-
-  return "/images/flags/" + pnation['graphic_str'] + "-web.png"
-}
-
-/****************************************************************************
- ...
-****************************************************************************/
-function get_nation_flag_url(pnation)
-{
-  return "/images/flags/" + pnation['graphic_str'] + "-web.png"
 }
 
 /****************************************************************************
@@ -1525,11 +1507,11 @@ function deduplicate_player_colors()
 {
   for (var player_id in players) {
     var cplayer = players[player_id];
-    var cnation = nations[cplayer['nation']]
+    var cnation = nations[cplayer['nation']];
     var pcolor = cnation['color'];
     for (var splayer_id in players) {
       var splayer = players[splayer_id];
-      var snation = nations[splayer['nation']]
+      var snation = nations[splayer['nation']];
       var scolor = snation['color'];
       if (splayer_id != player_id && is_color_collision(pcolor, scolor)) {
         cnation['color'] = "rgb(" + get_random_int(80,255)  + "," + get_random_int(80,200) + ","

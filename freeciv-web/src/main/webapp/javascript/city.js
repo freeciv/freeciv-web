@@ -1070,6 +1070,8 @@ function show_city_traderoutes()
     var tcity_id;
     var tcity;
     var good;
+    
+    if (routes[i] == null) continue;
 
     tcity_id = routes[i]['partner'];
 

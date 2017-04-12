@@ -1,4 +1,6 @@
 # Freeciv-web docker file 
+# FIXME! Freeciv-web does not work with Docker at the moment. This file needs fixing.
+
 FROM ubuntu:15.10
 
 MAINTAINER The Freeciv Project version: 2.5

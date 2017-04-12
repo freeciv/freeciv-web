@@ -112,12 +112,19 @@ void main(void)
     } else if (terrain_type.r == terrain_coast) {
       if (vPosition.y < beach_blend_high ) {
         chosen_terrain_color = texture2D(coast, vec2(vUv.x * map_x_size, vUv.y * map_y_size));
+        if (fract((vPosition.x + 502.0) / 35.71) < 0.018 || fract((vPosition.z + 2.0) / 35.71) < 0.018) {
+          chosen_terrain_color.rgb = chosen_terrain_color.rgb * 1.55;  // render tile grid.
+        }
+
       } else {
         chosen_terrain_color = texture2D(grassland, vec2(vUv.x * map_x_size, vUv.y * map_y_size));
       }
     } else if (terrain_type.r == terrain_floor) {
       if (vPosition.y < beach_blend_high ) {
         chosen_terrain_color = texture2D(floor, vec2(vUv.x * map_x_size, vUv.y * map_y_size));
+        if (fract((vPosition.x + 502.0) / 35.71) < 0.018 || fract((vPosition.z + 2.0) / 35.71) < 0.018) {
+          chosen_terrain_color.rgb = chosen_terrain_color.rgb * 2.0;  // render tile grid.
+        }
       } else {
         chosen_terrain_color = texture2D(grassland, vec2(vUv.x * map_x_size, vUv.y * map_y_size));
       }
@@ -172,26 +179,8 @@ void main(void)
         chosen_terrain_color = texture2D(coast, vec2(vUv.x * map_x_size, vUv.y * map_y_size));
       }
     }
-    c = chosen_terrain_color.rgb;
 
-  /* render the beach. */
-  if (vPosition.y < beach_high && vPosition.y > beach_low) {
-    if (vPosition.y > beach_blend_high) {
-      blend_amount = (2.0 - (beach_high - vPosition.y)) / 2.0;
-      vec4 Cbeach = texture2D(beach, vec2(vUv.x * map_x_size, vUv.y * map_y_size));
-      c = chosen_terrain_color.rgb * blend_amount + (Cbeach.rgb * (1.0 - blend_amount));
-
-    } else if (vPosition.y < beach_blend_low) {
-      blend_amount = ((beach_blend_low - vPosition.y)) / 1.0;
-      vec4 Cbeach = texture2D(beach, vec2(vUv.x * map_x_size, vUv.y * map_y_size));
-      c = chosen_terrain_color.rgb * blend_amount + (Cbeach.rgb * (1.0 - blend_amount));
-
-    } else {
-      vec4 Cbeach = texture2D(beach, vec2(vUv.x * map_x_size, vUv.y * map_y_size));
-      c = Cbeach.rgb;
-    }
-
-  }
+  c = chosen_terrain_color.rgb;
 
   if (vPosition.y > mountains_high) {
       /* snow in mountains texture over a certain height threshold. */
@@ -211,10 +200,35 @@ void main(void)
       }
   }
 
-  if (borders_enabled && !(border_color.r > 0.546875 && border_color.r < 0.5625 && border_color.b == 0.0 && border_color.g == 0.0)) {
-    c = c * 0.3 + border_color.rbg * 0.7;
+
+  if (fract((vPosition.x + 502.0) / 35.71) < 0.018 || fract((vPosition.z + 2.0) / 35.71) < 0.018) {
+    c = c * 0.85;  // render tile grid.
   }
 
+  /* Borders*/
+  if (borders_enabled && !(border_color.r > 0.546875 && border_color.r < 0.5625 && border_color.b == 0.0 && border_color.g == 0.0)) {
+    c = c * 0.5 + border_color.rbg * 0.55;
+  }
+
+
+  /* render the beach. */
+  if (vPosition.y < beach_high && vPosition.y > beach_low) {
+    if (vPosition.y > beach_blend_high) {
+      blend_amount = (2.0 - (beach_high - vPosition.y)) / 2.0;
+      vec4 Cbeach = texture2D(beach, vec2(vUv.x * map_x_size, vUv.y * map_y_size));
+      c = chosen_terrain_color.rgb * blend_amount + (Cbeach.rgb * (1.0 - blend_amount));
+
+    } else if (vPosition.y < beach_blend_low) {
+      blend_amount = ((beach_blend_low - vPosition.y)) / 1.0;
+      vec4 Cbeach = texture2D(beach, vec2(vUv.x * map_x_size, vUv.y * map_y_size));
+      c = chosen_terrain_color.rgb * blend_amount + (Cbeach.rgb * (1.0 - blend_amount));
+
+    } else {
+      vec4 Cbeach = texture2D(beach, vec2(vUv.x * map_x_size, vUv.y * map_y_size));
+      c = Cbeach.rgb;
+    }
+
+  }
 
   /* specular component, ambient occlusion and fade out underwater terrain */
   float x = clamp((vPosition.y - 30.) / 15., 0., 1.);

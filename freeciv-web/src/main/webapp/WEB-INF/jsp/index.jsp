@@ -267,7 +267,7 @@
 		<div class="row">
 			<div class="col-md-6">
 				<div class="videoWrapper">
-					<iframe class="embed-responsive-item" width="542" height="343" src="https://www.youtube.com/embed/C9w0w7wel2w" frameborder="0" allowfullscreen></iframe>
+					<iframe class="embed-responsive-item" width="542" height="343" src="https://www.youtube.com/embed/9cD7An6QMC8" frameborder="0" allowfullscreen></iframe>
 				</div>
 			</div>
 			<div class="col-md-6">

@@ -27,21 +27,21 @@ var webgl_materials = {};
 var model_filenames = ["AEGIS Cruiser",     "city_european_1",  "Helicopter",    "Pikemen",
                        "Alpine Troops",     "city_european_2",  "Horsemen",      "Rail",
                        "Archers",           "citywalls",        "Howitzer",      "Riflemen",
-                       "Armor",             "Coal",             "Hut",           "Road",
+                       "Armor",             /*"Coal",*/         "Hut",           "Road",
                        "Artillery",         "Cruise Missile",   "Ironclad",      "Settlers",
-                       "AWACS",             "Cruiser",          "Iron",          "Spice",
+                       "AWACS",             "Cruiser",          /*"Iron",*/      /*"Spice",*/
                        "Barbarian Leader",  "Destroyer",        "Irrigation",    "Spy",
                        "Battleship",        "Diplomat",         "Knights",       "Stealth Bomber",
                        "Bomber",            "Dragoons",         "Legion",        "Submarine",
-                       "Buffalo",           "Engineers",        "Marines",       "Transport",
+                       /*"Buffalo",*/       "Engineers",        "Marines",       "Transport",
                        "Cannon",            "Explorer",         "Mech. Inf.",    "Trireme",
                        "Caravan",           "Fighter",          "Mine",          "Warriors",
                        "Caravel",           "Fish",             "Musketeers",    "Whales",
-                       "Carrier",           "Freight",          "Nuclear",       "Wheat",
-                       "Catapult",          "Frigate",          "Oil",           "Wine",
-                       "Cavalry",           "Fruit",            "Paratroopers",  "Workers",
+                       "Carrier",           "Freight",          "Nuclear",       /*"Wheat",*/
+                       "Catapult",          "Frigate",          /*"Oil",*/       /*"Wine",*/
+                       "Cavalry",           /*"Fruit",*/        "Paratroopers",  "Workers",
                        "Chariot",           "Galleon",          "Partisan",
-                       "city_european_0",   "Gold",             "Phalanx"
+                       "city_european_0",   /*"Gold",*/         "Phalanx"
                       ];
 
 /****************************************************************************
@@ -242,32 +242,6 @@ function webgl_get_model(filename)
 }
 
 /****************************************************************************
- Returns a flag mesh
-****************************************************************************/
-function get_flag_mesh(key)
-{
-  if (meshes[key] != null) return meshes[key].clone();
-  if (sprites[key] == null || key.substring(0,2) != "f.") {
-    console.log("Invalid flag key: " + key);
-    return null;
-  }
-
-  var flagGeometry = new THREE.PlaneBufferGeometry( 14, 10 );
-  /* resize flag to 32x16, since that is required by Three.js*/
-  var fcanvas = document.createElement("canvas");
-  fcanvas.width = 32;
-  fcanvas.height = 16;
-  var fcontext = fcanvas.getContext("2d");
-  fcontext.drawImage(sprites[key], 0, 0,
-                sprites[key].width, sprites[key].height,
-                0,0,32,16);
-
-  meshes[key] = canvas_to_user_facing_mesh(fcanvas, 32, 26, 13, false);
-  return meshes[key].clone();
-
-}
-
-/****************************************************************************
  Returns a flag shield mesh
 ****************************************************************************/
 function get_flag_shield_mesh(key)
@@ -278,7 +252,6 @@ function get_flag_shield_mesh(key)
     return null;
   }
 
-  var flagGeometry = new THREE.PlaneBufferGeometry( 14, 10 );
   /* resize flag to 32x16, since that is required by Three.js*/
   var fcanvas = document.createElement("canvas");
   fcanvas.width = 32;
@@ -289,6 +262,80 @@ function get_flag_shield_mesh(key)
                 0,0,32,16);
 
   meshes[key] = canvas_to_user_facing_mesh(fcanvas, 32, 12, 13, true);
+  return meshes[key].clone();
+
+}
+
+/****************************************************************************
+ Returns a extra mesh
+****************************************************************************/
+function get_extra_mesh(key)
+{
+  if (meshes[key] != null) return meshes[key].clone();
+  if (sprites[key] == null ) {
+    console.log("Invalid extra key: " + key);
+    return null;
+  }
+
+  var ecanvas = document.createElement("canvas");
+  ecanvas.width = 64;
+  ecanvas.height = 32;
+  var econtext = ecanvas.getContext("2d");
+  econtext.drawImage(sprites[key], 0, 0,
+                sprites[key].width, sprites[key].height,
+                0,0,64,32);
+
+  meshes[key] = canvas_to_user_facing_mesh(ecanvas, 64, 35, 23, true);
+  return meshes[key].clone();
+
+}
+
+/****************************************************************************
+ Returns unit explosion mesh  (frame = [0-4].
+****************************************************************************/
+function get_unit_explosion_mesh(frame)
+{
+  var key = 'explode.unit_' + frame;
+  if (meshes[key] != null) return meshes[key].clone();
+  if (sprites[key] == null) {
+    console.log("Invalid unit explosion key: " + key);
+    return null;
+  }
+
+  var ecanvas = document.createElement("canvas");
+  ecanvas.width = 32;
+  ecanvas.height = 32;
+  var econtext = ecanvas.getContext("2d");
+  econtext.drawImage(sprites[key], 0, 0,
+                sprites[key].width, sprites[key].height,
+                0,0,32,32);
+
+  meshes[key] = canvas_to_user_facing_mesh(ecanvas, 32, 32, 32, true);
+  return meshes[key].clone();
+
+}
+
+/****************************************************************************
+ Returns nuke explosion mesh
+****************************************************************************/
+function get_nuke_explosion_mesh(frame)
+{
+  var key = 'explode.nuke';
+  if (meshes[key] != null) return meshes[key].clone();
+  if (sprites[key] == null) {
+    console.log("Invalid nuke explosion key: " + key);
+    return null;
+  }
+
+  var ecanvas = document.createElement("canvas");
+  ecanvas.width = 256;
+  ecanvas.height = 256;
+  var econtext = ecanvas.getContext("2d");
+  econtext.drawImage(sprites[key], 0, 0,
+                sprites[key].width, sprites[key].height,
+                0,0,sprites[key].width,sprites[key].height);
+
+  meshes[key] = canvas_to_user_facing_mesh(ecanvas, 180, 180, 176, true);
   return meshes[key].clone();
 
 }

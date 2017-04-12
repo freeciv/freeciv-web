@@ -70,7 +70,7 @@ function check_remove_unknown_territory()
     }
   }
 
-  if (unknown_terrain_mesh != null && unknownTerritoryGeometry != null) {
+  if (scene != null && unknown_terrain_mesh != null && unknownTerritoryGeometry != null) {
     scene.remove(unknown_terrain_mesh);
     unknownTerritoryGeometry.dispose();
     unknown_terrain_mesh = null;

@@ -56,8 +56,6 @@ pip3 install wikipedia
 ## mysql setup
 echo "==== Setting up MySQL ===="
 service mysql start || cat /var/log/mysql/*.*
-echo "create database freeciv_web" | mysql --socket=/var/run/mysqld/mysqld.sock -u ${mysql_user}   
-mysql --socket=/var/run/mysqld/mysqld.sock -u ${mysql_user}  freeciv_web < ${basedir}/freeciv-web/src/main/webapp/meta/private/metaserver.sql
 
 # configuration files
 dos2unix ${basedir}/scripts/configuration.sh.dist
@@ -70,7 +68,6 @@ cd ${basedir}/freeciv && ./prepare_freeciv.sh
 cd freeciv && make install
 
 echo "==== Building freeciv-web ===="
-sed -e "s/user>root/user>${mysql_user}/" -e "s/password>changeme/password>${mysql_pass}/" ${basedir}/freeciv-web/src/main/webapp/WEB-INF/resin-web.xml.dist > ${basedir}/freeciv-web/src/main/webapp/WEB-INF/resin-web.xml
 cd /var/lib/tomcat8 && sudo chmod -R 777 webapps logs && setfacl -d -m g::rwx webapps && sudo chown -R www-data:www-data webapps/
 cd ${basedir}/scripts/freeciv-img-extract/ && ./setup_links.sh && ./sync.sh
 cd ${basedir}/scripts && ./sync-js-hand.sh
@@ -94,23 +91,6 @@ if [ -d "/docker/" ]; then
 else
   echo "Freeciv-web installed. Please start it manually."
 fi
-
-#echo "============================================"
-#echo "Installing SlimerJS and CasperJS for testing"
-#export SLIMERJSLAUNCHER=/usr/bin/firefox
-#export SLIMERJS_EXECUTABLE=${basedir}/tests/slimerjs-0.10.0pre/slimerjs
-#cd ${basedir}/tests
-#wget --no-check-certificate ${slimerjs_url}
-#unzip -qo slimerjs-0.10.0pre.zip
-
-#wget ${casperjs_url}
-#unzip -qo 1.1-beta3.zip
-#cd casperjs-1.1-beta3
-#ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs
-
-#echo "Start testing of Freeciv-web using CasperJS:"
-#cd ${basedir}/tests/
-#xvfb-run casperjs --engine=slimerjs test freeciv-web-tests.js || (>&2 echo "Freeciv-web CasperJS tests failed!" )
 
 echo "Freeciv-web started! Now try to access Freeciv-web with the docker machine IP in your browser.."
 /bin/bash

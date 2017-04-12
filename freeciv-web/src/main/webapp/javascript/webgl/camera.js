@@ -20,7 +20,7 @@
 var camera;
 
 var camera_dx = 300;
-var camera_dy = 480;
+var camera_dy = 490;
 var camera_dz = 300;
 var camera_current_x = 0;
 var camera_current_y = 0;
@@ -36,8 +36,10 @@ function camera_look_at(x, y, z)
   camera_current_y = y;
   camera_current_z = z;
 
-  camera.position.set( x + camera_dx, y + camera_dy, z + camera_dz);
-  camera.lookAt( new THREE.Vector3(x, 0, z));
+  if (camera != null) {
+    camera.position.set( x + camera_dx, y + camera_dy, z + camera_dz);
+    camera.lookAt( new THREE.Vector3(x, 0, z));
+  }
 
   if (directionalLight != null) directionalLight.position.set( x + camera_dx, y + camera_dy, z + camera_dz ).normalize();
 

@@ -96,7 +96,7 @@ function control_init()
   $("#pregame_text_input").blur(function(event) {
       keyboard_input=true;
       if (this.value=='') {
-        $("#pregame_text_input").value='>'
+        $("#pregame_text_input").value='>';
       }
   });
 
@@ -257,10 +257,12 @@ function blur_input_on_touchdevice()
 }
 
 /****************************************************************************
-...
+ Called when the mouse is moved.
 ****************************************************************************/
 function mouse_moved_cb(e)
 {
+  if (mapview_slide != null && mapview_slide['active']) return;
+
   mouse_x = 0;
   mouse_y = 0;
   if (!e) {
@@ -674,7 +676,7 @@ function update_unit_order_commands()
     }
 
     if (pcity != null && ptype != null && unit_types[ptype['obsoleted_by']] != null && can_player_build_unit_direct(client.conn.playing, unit_types[ptype['obsoleted_by']])) {
-      unit_actions["upgrade"] =  {name: "Upgrade unit (U)"}
+      unit_actions["upgrade"] =  {name: "Upgrade unit (U)"};
     }
     if (ptype != null && ptype['name'] != "Explorer") {
       unit_actions["explore"] = {name: "Auto explore (X)"};
@@ -893,7 +895,7 @@ function find_visible_unit(ptile)
   var i;
 
   /* If no units here, return nothing. */
-  if (unit_list_size(tile_units(ptile))==0) {
+  if (ptile == null || unit_list_size(tile_units(ptile))==0) {
     return null;
   }
 
@@ -1138,8 +1140,8 @@ function do_map_click(ptile, qtype, first_time_called)
         request_goto_path(current_focus[0]['id'], ptile['x'], ptile['y']);
         if (first_time_called) {
           setTimeout(function(){
-            do_map_click(ptile, qtype, false)}
-          , 250);
+            do_map_click(ptile, qtype, false);
+          }, 250);
         }
         return;
 
@@ -1382,7 +1384,7 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift, the_event)
 
   switch (key_code) {
     case 13:
-      if (shift) send_end_turn();
+      if (shift && C_S_RUNNING == client_state()) send_end_turn();
       break;
 
     case 35: //1
@@ -1684,6 +1686,8 @@ function deactivate_goto()
 **************************************************************************/
 function send_end_turn()
 {
+  if (game_info == null) return;
+
   $("#turn_done_button").button( "option", "disabled", true);
   if (!is_touch_device()) $("#turn_done_button").tooltip({ disabled: true });
   var packet = {"pid" : packet_player_phase_done, "turn" : game_info['turn']};

@@ -21,7 +21,7 @@
 var anim_objs = {};
 
 /****************************************************************************
-...
+ Updates unit movement animation.
 ****************************************************************************/
 function update_animated_objects()
 {
@@ -84,4 +84,75 @@ function update_animated_objects()
   }
 
 
+}
+
+
+/****************************************************************************
+ Renders an explosion animation on the given tile.
+****************************************************************************/
+function animate_explosion_on_tile(tile_id, animation_frame)
+{
+  var ptile = tiles[tile_id];
+  var height = 5 + ptile['height'] * 100;
+
+  if (animation_frame > 0 && ptile['explosion_mesh'] != null) {
+    scene.remove(ptile['explosion_mesh']);
+  }
+  if (animation_frame == 5) {
+    scene.remove(ptile['explosion_mesh']);
+    ptile['explosion_mesh'] = null;
+    return;
+  }
+
+  var explosion_mesh = get_unit_explosion_mesh(animation_frame);
+  var pos = map_to_scene_coords(ptile['x'], ptile['y']);
+  explosion_mesh.matrixAutoUpdate = false;
+  explosion_mesh.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 6);
+  explosion_mesh.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 2);
+  explosion_mesh.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 6);
+  explosion_mesh.rotation.y = Math.PI / 4;
+  explosion_mesh.updateMatrix();
+  ptile['explosion_mesh'] = explosion_mesh;
+
+  if (scene != null && explosion_mesh != null) {
+     scene.add(explosion_mesh);
+  }
+
+  if (animation_frame <= 4) setTimeout("animate_explosion_on_tile(" + tile_id + "," + (animation_frame + 1) + ")", 350);
+
+}
+
+/****************************************************************************
+ Renders a nuclear explosion animation on the given tile.
+****************************************************************************/
+function render_nuclear_explosion(ptile)
+{
+  if (ptile == null) return;
+  var height = 5 + ptile['height'] * 100;
+
+  var explosion_mesh = get_nuke_explosion_mesh();
+  var pos = map_to_scene_coords(ptile['x'], ptile['y']);
+  explosion_mesh.matrixAutoUpdate = false;
+  explosion_mesh.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] + 30);
+  explosion_mesh.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 50);
+  explosion_mesh.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] + 30);
+  explosion_mesh.rotation.y = Math.PI / 4;
+  explosion_mesh.updateMatrix();
+
+  if (scene != null && explosion_mesh != null) {
+     scene.add(explosion_mesh);
+     ptile['nuclear_mesh'] = explosion_mesh;
+  }
+
+  setTimeout("remove_nuclear_explosion(" + ptile['index'] + ")", 3000);
+
+}
+
+/****************************************************************************
+...
+****************************************************************************/
+function remove_nuclear_explosion(tile_id)
+{
+  var ptile = tiles[tile_id];
+  scene.remove(ptile['nuclear_mesh']);
 }

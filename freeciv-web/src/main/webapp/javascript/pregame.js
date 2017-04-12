@@ -21,7 +21,7 @@ var observing = false;
 var chosen_nation = -1;
 var chosen_style = -1;
 var choosing_player = -1;
-var ai_skill_level = 2;
+var ai_skill_level = 3;
 var nation_select_id = -1;
 var metamessage_changed = false;
 var logged_in_with_password = false;
@@ -94,6 +94,30 @@ function update_game_info_pregame()
     }
   }
 
+  if (civserverport == 6003) {
+    game_info_html += "<p>";
+    game_info_html += "<h2>Freeciv-Web LongTurn game</h2>-Each player plays one turn every day, each turn lasts 23 hours.<br>"
+    + "-A game can typically take some months to complete, so please only join if you want to play for this long.<br>"
+    + "-Minimum of 10 human players required before starting.<br>"
+    + "-To join the game, please select a nation.<br>"
+    + "-Ruleset: Civ2Civ3. Aifill: 0. Timeout: 23 hours.<br>"
+    + "-Click the start game button to indicate that you are ready to begin the game.<br>"
+    + "-This is the first time we try a LongTurn game on Freeciv-web, so this is a test game.<br>-Please save the game regularly.<br>"
+    + "-Check the Freeciv forum if you have any questions!";
+    game_info_html += "</p>";
+
+    if (!logged_in_with_password) {
+      $("#pregame_page").hide();
+      swal("LongTurn requires that you create an account on Freeciv-web. Please reload the page and click new user account. Thank you.");
+      return;
+    }
+
+  } else if ($.getUrlVar('action') == "multi") {
+    game_info_html += "<p>";
+    game_info_html += "<h2>Freeciv-Web Multiplayer game</h2>-You are now about to play a multiplayer game.<br>-Please wait until at least 2 players have joined the game, then click the start game button.";
+    game_info_html += "</p>";
+  }
+
   $("#pregame_game_info").html(game_info_html);
 
   /* Update pregame_message_area's height. */
@@ -130,9 +154,15 @@ function update_player_info_pregame()
       var nation_text = "";
       if (player['nation'] in nations) {
         nation_text = " - " + nations[player['nation']]['adjective'];
-        var flag_url = get_player_flag_url(player);
-	var flag_html = $("<img class='pregame_flags' src='" + flag_url +"'>");
-	$("#pregame_plr_"+id).prepend(flag_html);
+        var flag_html = $("<canvas id='pregame_nation_flags_" + id + "' width='29' height='20' class='pregame_flags'></canvas>");
+        $("#pregame_plr_"+id).prepend(flag_html);
+        var flag_canvas = document.getElementById('pregame_nation_flags_' + id);
+        if (flag_canvas == null) continue;
+        var flag_canvas_ctx = flag_canvas.getContext("2d");
+        var tag = "f." + nations[player['nation']]['graphic_str'];
+        if (sprites[tag] != null && flag_canvas_ctx != null) {
+          flag_canvas_ctx.drawImage(sprites[tag], 0, 0);
+        }
       }
       if (player['is_ready'] == true) {
         $("#pregame_plr_"+id).addClass("pregame_player_ready");
@@ -228,7 +258,9 @@ function pick_nation(player_id)
     var pnation = nations[nation_id];
     if (pnation['is_playable']) {
       nations_html += "<div class='nation_pickme_line' onclick='select_nation(" + nation_id + ");'>"
-             + "<div id='nation_" + nation_id + "' class='nation_choice'>" + pnation['adjective'] + "</div></div>";
+             + "<div id='nation_" + nation_id + "' class='nation_choice'>"
+             + "<canvas id='pick_flag_" + nation_id + "' width='29' height='20' class='pick_nation_flags'></canvas>"
+             + pnation['adjective'] + "</div></div>";
       nation_name_list.push(pnation['adjective']);
     }
   }
@@ -241,10 +273,14 @@ function pick_nation(player_id)
   $("#pick_nation_dialog").dialog({
 			bgiframe: true,
 			modal: true,
-			width: is_small_screen() ? "99%" : "80%",
-            height: $(window).height() - 40,
+			width: is_small_screen() ? "99%" : "70%",
+            height: $(window).height() - 100,
 			buttons: {
-				Ok: function() {
+			    "Customize this nation": function() {
+                   show_customize_nation_dialog(player_id);
+            	}
+            				,
+				"Play this nation!": function() {
 					$("#pick_nation_dialog").dialog('close');
 					submit_nation_choice();
 				}
@@ -275,7 +311,22 @@ function pick_nation(player_id)
     $("#nation_autocomplete_box").blur();
   }
 
+  for (var nation_id in nations) {
+    var pnation = nations[nation_id];
+    if (pnation['is_playable']) {
+      var flag_canvas = document.getElementById('pick_flag_' + nation_id);
+      var flag_canvas_ctx = flag_canvas.getContext("2d");
+      var tag = "f." + pnation['graphic_str'];
 
+      if (tileset[tag] == null) continue;
+
+      flag_canvas_ctx.drawImage(sprites[tag], 0, 0);
+    }
+  }
+
+  if (chosen_nation != -1) {
+    select_nation(chosen_nation);
+  }
 }
 
 /****************************************************************************
@@ -344,8 +395,11 @@ function select_nation(new_nation_id)
   $("#nation_autocomplete_box").val(pnation['adjective']);
   $("#nation_" + chosen_nation).css("background-color", "transparent");
   $("#nation_choice").html("Chosen nation: " + pnation['adjective']);
-  $("#select_nation_flag").html("<img style='nation_flag_choice' src='/images/flags/"
+
+  if (!pnation['customized']) {
+    $("#select_nation_flag").html("<img style='nation_flag_choice' src='/images/flags/"
 		            + pnation['graphic_str'] + "-web.png'>");
+  }
 
   if (chosen_nation != new_nation_id && $("#nation_" + new_nation_id).length > 0) {
     $("#nation_" + new_nation_id).get(0).scrollIntoView();
@@ -416,6 +470,7 @@ function pregame_settings()
   $("<div id='pregame_settings'></div>").appendTo("div#pregame_page");
 
 
+
   var dhtml = "<div id='pregame_settings_tabs'>" +
       "   <ul>" +
       "     <li><a href='#pregame_settings_tabs-1'>Game</a></li>" +
@@ -443,9 +498,9 @@ function pregame_settings()
 	  "<td><input type='number' name='mapsize' id='mapsize' size='4' length='3' min='1' max='18' step='1'></td></tr>" +
 	  "<tr class='not_pbem' title='This setting sets the skill-level of the AI players'><td>AI skill level:</td>" +
 	  "<td><select name='skill_level' id='skill_level'>" +
-	  "<option value='1'>Handicapped</option>" +
-	  "<option value='2'>Novice</option>" +
-	  "<option value='3'>Easy</option>" +
+	      "<option value='1'>Handicapped</option>" +
+	      "<option value='2'>Novice</option>" +
+	      "<option value='3'>Easy</option>" +
           "<option value='4'>Normal</option>" +
           "<option value='5'>Hard</option>" +
           "<option value='6'>Cheating</option>" +
@@ -675,6 +730,11 @@ function pregame_settings()
     change_ruleset($('#ruleset').val());
   });
 
+  if (civserverport == 6003) {
+    $('#password').hide(); // no password for LongTurn.
+    $('#ruleset').hide(); // no changing ruleset for LongTurn.
+  }
+
   $('#password').change(function() {
 
     swal({   
@@ -816,6 +876,9 @@ function change_ruleset(to) {
     send_message("/rulesetdir " + to);
     // reset some ruleset defined settings.
     send_message("/set nationset all");
+    if (chosen_nation != -1) {
+      swal("Ruleset changed. You need to select your nation again.");
+    }
   }
 
 
@@ -838,8 +901,25 @@ function show_intro_dialog(title, message) {
 	  + " <br><br><span id='username_validation_result'></span>";
 
   if (renderer == RENDERER_WEBGL) {
-    intro_html += "<span style='color: #800000;'>The 3D WebGL version of Freeciv-web requires WebGL 3D hardware support such as Nvidia GeForce and at least 3GB of RAM.<br>" +
-    "Try tuning the 3D configuration by clicking Customize Game - Game settings - 3D WebGL. Current graphics level: ";
+    var renderer_name;
+
+    try {
+      var gl = document.createElement('canvas').getContext('webgl',{ failIfMajorPerformanceCaveat: true });
+      if (!gl) {
+        show_dialog_message("WebGL not supported", "WebGL 3D with hardware acceleration is not supported. The 3D version will not work. Please try the 2D version.");
+        return;
+      } else {
+        var extension = gl.getExtension('WEBGL_debug_renderer_info');
+        if (extension != undefined) {
+          renderer_name = gl.getParameter(extension.UNMASKED_RENDERER_WEBGL);
+        }
+      }
+    } catch (err) {
+      console.error(err);
+    }
+
+    intro_html += "<span style='color: #800000;'><small>The 3D WebGL version of Freeciv-web requires WebGL 3D hardware support such as Nvidia GeForce and at least 3GB of RAM.<br>" +
+    "Try tuning the 3D configuration by clicking Customize Game - Game settings - 3D WebGL. <br>Current graphics level: ";
     if (graphics_quality == QUALITY_LOW) {
       intro_html += "Low quality.";
     } else if (graphics_quality == QUALITY_MEDIUM) {
@@ -847,7 +927,8 @@ function show_intro_dialog(title, message) {
     } else {
       intro_html += "High quality.";
     }
-    "</span>";
+    intro_html += " Current WebGL renderer: " + renderer_name;
+    "</small></span>";
   }
   $("#dialog").html(intro_html);
   var stored_username = simpleStorage.get("username", "");
@@ -926,6 +1007,7 @@ function show_intro_dialog(title, message) {
 
   $('#dialog').keyup(function(e) {
     if (e.keyCode == 13) {
+      dialog_close_trigger = "button";
       autostart = true;
       validate_username_callback();
     }
@@ -1172,4 +1254,114 @@ function create_new_freeciv_user_account_request(action_type)
      swal("Creating new user failed.");
    }
   });
+}
+
+/**************************************************************************
+  Customize nation: choose nation name and upload new flag.
+**************************************************************************/
+function show_customize_nation_dialog(player_id) {
+  if (chosen_nation == -1 || client.conn['player_num'] == null
+      || choosing_player == null || choosing_player < 0) return;
+
+  var pnation = nations[chosen_nation];
+
+  // reset dialog page.
+  $("#dialog").remove();
+  $("<div id='dialog'></div>").appendTo("div#game_page");
+
+  var message = "<br>New nation name: <input id='new_nation_adjective' type='text' size='30' value='" + pnation['adjective'] + "'><br><br>"
+       + "Upload new flag: <input type='file' id='newFlagFileInput'><br><br>"
+       + "For best results scale the image to 29 x 20 pixels before uploading. <br><br>"
+       + "(Note: the customized nation and flag will only be active during the current game session and will not be visible to other players.)";
+
+  $("#dialog").html(message);
+  $("#dialog").attr("title", "Customize nation: " + pnation['adjective']);
+  $("#dialog").dialog({
+			bgiframe: true,
+			modal: true,
+			width: is_small_screen() ? "90%" : "50%",
+			buttons:
+			{
+                "Cancel" : function() {
+                  $("#dialog").dialog('close');
+                  pick_nation(player_id);
+				},
+				"OK" : function() {
+				    handle_customized_nation(player_id);
+				}
+			}
+		});
+
+  $("#dialog").dialog('open');
+}
+
+/**************************************************************************
+  Customize nation: choose nation name and upload new flag.
+**************************************************************************/
+function handle_customized_nation(player_id)
+{
+  var new_nation_name = $("#new_nation_adjective").val();
+  nations[chosen_nation]['adjective'] = new_nation_name;
+
+  var fileInput = document.getElementById('newFlagFileInput');
+  var file = fileInput.files[0];
+
+  if (file == null) {
+    swal("Please upload a image file!");
+    return;
+  }
+
+  if (!(window.FileReader)) {
+    swal("Uploading files not supported");
+    return;
+  }
+
+  var extension = file.name.substring(file.name.lastIndexOf('.'));
+  console.log("New flag: " + file.type + " with extention " + extension);
+
+  if (extension == '.png' || extension == '.bmp' || extension == '.jpg' || extension == '.jpeg' || extension == '.JPG') {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      handle_new_flag(reader.result, player_id);
+    }
+    reader.readAsDataURL(file);
+  } else {
+    $.unblockUI();
+    swal("Image file " + file.name + "  not supported: " + file.type);
+  }
+
+}
+
+/**************************************************************************
+  Update flag sprites based on user uploaded flags.
+**************************************************************************/
+function handle_new_flag(image_data, player_id) {
+  var pnation = nations[chosen_nation];
+  var flag_tag = "f." + pnation['graphic_str'];
+  var shield_tag = "f.shield." + pnation['graphic_str'];
+
+  var new_flag_canvas = document.createElement('canvas');
+  new_flag_canvas.width = sprites[flag_tag].width;
+  new_flag_canvas.height = sprites[flag_tag].height;
+  sprites[flag_tag] = new_flag_canvas;
+  var ctx_flag = new_flag_canvas.getContext("2d");
+
+  var new_shield_canvas = document.createElement('canvas');
+  new_shield_canvas.width = sprites[shield_tag].width;
+  new_shield_canvas.height = sprites[shield_tag].height;
+  sprites[shield_tag] = new_shield_canvas;
+  var ctx_shield = new_shield_canvas.getContext("2d");
+
+  var img = new Image();
+  img.onload = function() {
+      ctx_flag.drawImage(img, 0, 0, this.width, this.height, 0, 0, new_flag_canvas.width, new_flag_canvas.height);
+      ctx_shield.drawImage(img, 0, 0, this.width, this.height, 0, 0, new_shield_canvas.width, new_shield_canvas.height);
+
+      $("#dialog").dialog('close');
+      pick_nation(player_id);
+  };
+  img.src = image_data;
+
+  nations[chosen_nation]['customized'] = true;
+
 }

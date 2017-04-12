@@ -97,7 +97,7 @@
 	},
 
 	{
-	"DbgColor" : 4614226,
+	"DbgColor" : 3744854,
 	"DbgIndex" : 7,
 	"DbgName" : "Crate",
 	"colorDiffuse" : [0.247575, 0.076246, 0.010962],
@@ -109,15 +109,16 @@
 	},
 
 	{
-	"DbgColor" : 3744854,
+	"DbgColor" : 4614226,
 	"DbgIndex" : 8,
 	"DbgName" : "Grass",
 	"colorDiffuse" : [0.085205, 0.134359, 0.12002],
 	"colorSpecular" : [0.5, 0.5, 0.5],
 	"illumination" : 2,
-	"opacity" : 1.0,
+	"opacity" : 0.6,
 	"opticalDensity" : 1.0,
-	"specularCoef" : 96.078431
+	"specularCoef" : 96.078431,
+	"transparent" : true
 	}],
 
     "buffers": "city_european_2.bin"

@@ -75,9 +75,12 @@ function init_civ_dialog()
     var pnation = nations[pplayer['nation']];
     var tag = pnation['graphic_str'];
 
-    var civ_description =
-	    "<img src='/images/flags/" + tag + "-web.png' width='180'>"
-	    + "<br><div>" + pplayer['name'] + " rules the " + nations[pplayer['nation']]['adjective']
+    var civ_description = "";
+    if (!pnation['customized']) {
+	    civ_description += "<img src='/images/flags/" + tag + "-web.png' width='180'>";
+	}
+
+    civ_description += "<br><div>" + pplayer['name'] + " rules the " + nations[pplayer['nation']]['adjective']
 	    + " with the form of government: " + governments[client.conn.playing['government']]['name']
 	    + "</div><br>";
     $("#nation_title").html("The " + nations[pplayer['nation']]['adjective'] + " nation");

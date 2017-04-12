@@ -21,6 +21,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Every Vagrant virtual environment requires a box to build off of.
   config.vm.box = "ubuntu-yakkety"
 
+  config.vm.provider "virtualbox"
+
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
   config.vm.box_url = "https://cloud-images.ubuntu.com/yakkety/current/yakkety-server-cloudimg-amd64-vagrant.box"
@@ -42,7 +44,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     v.cpus = "1"
     host = RbConfig::CONFIG['host_os']
 
-    # Give VM 2/3 system memory 
+    # Give VM 50% of system memory 
     if host =~ /darwin/
       # sysctl returns Bytes and we need to convert to MB
       mem = `sysctl -n hw.memsize`.to_i / 1024
@@ -54,7 +56,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       mem = `wmic computersystem Get TotalPhysicalMemory`.split[1].to_i / 1024
     end
 
-    mem = mem / 1024 * 2 / 3
+    mem = mem / 1024 / 2
     v.customize ["modifyvm", :id, "--memory", mem]
   end
 

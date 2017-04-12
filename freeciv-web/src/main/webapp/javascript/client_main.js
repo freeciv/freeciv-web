@@ -66,10 +66,11 @@ function set_client_state(newstate)
         init_webgl_mapview();
       }
 
-      if (observing) {
+      if (observing || $.getUrlVar('action') == "multi") {
         var ptile = map_pos_to_tile(15,15);
         if (ptile != null) {
           center_tile_mapcanvas(ptile);
+          advance_unit_focus();
         }
       }
 
@@ -213,7 +214,7 @@ function show_new_game_message()
       "Click on units for giving them orders, and drag units on the map to move them.\n" +
       "Good luck, and have a lot of fun!");
 
-  } else if (client.conn.playing != null) {
+  } else if (client.conn.playing != null && !game_loaded) {
     var pplayer = client.conn.playing;
     var player_nation_text = "Welcome, " + username + " ruler of the " 
         + nations[pplayer['nation']]['adjective'] + " empire.";
@@ -238,7 +239,11 @@ function show_new_game_message()
       "Good luck, and have a lot of fun!");
 
     }
-
+  } else if (game_loaded) {
+    var pplayer = client.conn.playing;
+    var player_nation_text = "Welcome back, " + username + " ruler of the "
+        + nations[pplayer['nation']]['adjective'] + " empire.";
+      add_chatbox_text(player_nation_text);
   }
 }
 

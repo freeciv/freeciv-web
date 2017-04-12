@@ -20,13 +20,13 @@
 var benchmark_start;
 var benchmark_enabled = false;
 var benchmark_frames_count = 0;
+var initial_benchmark_enabled = true;
 
 /****************************************************************************
   Runs a benchmark of the WebGL version
 ****************************************************************************/
 function webgl_benchmark_run()
 {
-  benchmark_start = new Date().getTime();
   benchmark_enabled = true;
   $("#dialog").dialog('close');
   $("#pregame_settings").dialog('close');
@@ -89,7 +89,37 @@ function benchmark_check()
   }
 
   key_unit_auto_explore();
-  send_end_turn();
+  if (game_info != null) send_end_turn();
 
   setTimeout(benchmark_check, 1000);
+}
+
+/****************************************************************************
+ Measure the fps for the first 10 seconds of the game, and show an error
+ if the fps is too low to play.
+****************************************************************************/
+function initial_benchmark_check()
+{
+  var time_elapsed =  (new Date().getTime() - benchmark_start) / 1000;
+  var fps = Math.floor(benchmark_frames_count / time_elapsed);
+  initial_benchmark_enabled = false;
+  if (fps < 4) {
+    var renderer_name;
+    var gl = document.createElement('canvas').getContext('webgl');
+    var extension = gl.getExtension('WEBGL_debug_renderer_info');
+    if (extension != undefined) {
+      renderer_name = gl.getParameter(extension.UNMASKED_RENDERER_WEBGL);
+    }
+
+    var message = "The game is running too slowly! Please check if the drivers for your graphics driver needs to be updated and that you have a graphics card which supports WebGL 3D. "
+    + "3D WebGL rendering requires updated drivers and a good 3D graphics card with 3D hardware acceleration. The current WebGL renderer is: " + renderer_name + ".<br>";
+    if (renderer_name == "Google SwiftShader") message += "<br>Warning: Google SwiftShader is a software renderer which has very poor performance and will not work with this game. ";
+    message += "<br><b>You can try playing the 2D version instead.</b>";
+
+    show_dialog_message("3D game is running very slowly!", message);
+
+    console.error("WebGL 3D is running slowly. FPS: " + fps + " " + renderer_name);
+
+  }
+
 }

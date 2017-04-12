@@ -102,6 +102,7 @@ function accept_treaty(counterpart, I_accepted, other_accepted)
            + "px;  width: " + agree_sprite['width'] + "px;height: "
 	   + agree_sprite['height'] + "px; margin: 5px; '>"
            + "</div>";
+
   var disagree_self_html = "<div id='agreement' style='float:left; background: transparent url("
            + disagree_sprite['image-src']
            + "); background-position:-" + disagree_sprite['tileset-x'] + "px -"
@@ -141,8 +142,20 @@ function cancel_meeting_req()
 **************************************************************************/
 function create_clause_req(giver, type, value)
 {
+
+  if (type == CLAUSE_CEASEFIRE || type == CLAUSE_PEACE || type == CLAUSE_ALLIANCE) {
+    // eg. creating peace treaty requires removing ceasefire first.
+    var clauses = diplomacy_clause_map[active_diplomacy_meeting_id];
+    for (var i = 0; i < clauses.length; i++) {
+      var clause = clauses[i];
+      if (clause['type'] == CLAUSE_CEASEFIRE || clause['type'] == CLAUSE_PEACE|| clause['type'] == CLAUSE_ALLIANCE) {
+        remove_clause_req(i);
+      }
+    }
+  }
+
   var packet = {"pid" : packet_diplomacy_create_clause_req,
-	        "counterpart" : active_diplomacy_meeting_id,
+                "counterpart" : active_diplomacy_meeting_id,
                 "giver" : giver,
                 "type" : type,
                 "value" : value};
@@ -179,8 +192,8 @@ function show_diplomacy_clauses()
       var clause = clauses[i];
       var diplo_str = client_diplomacy_clause_string(clause['counterpart'],
  		          clause['giver'],
-                          clause['type'],
-			  clause['value']);
+                  clause['type'],
+                  clause['value']);
       diplo_html += "<a href='#' onclick='remove_clause_req(" + i + ");'>" + diplo_str + "</a><br>";
 
     }
@@ -199,7 +212,7 @@ function remove_clause_req(clause_no)
   var clause = clauses[clause_no];
 
   var packet = {"pid" : packet_diplomacy_remove_clause_req,
-	        "counterpart" : clause['counterpart'],
+	            "counterpart" : clause['counterpart'],
                 "giver": clause['giver'],
                 "type" : clause['type'],
                 "value": clause['value'] };
@@ -232,15 +245,17 @@ function remove_clause(remove_clause_obj)
 function client_diplomacy_clause_string(counterpart, giver, type, value)
 {
 
+  var pplayer = null;
+  var nation = null;
+
+  pplayer = players[giver];
+  nation = nations[pplayer['nation']]['adjective'];
+
   switch (type) {
-    case CLAUSE_ADVANCE:
-      var pplayer = players[giver];
-      var nation = nations[pplayer['nation']]['adjective'];
-      var ptech = techs[value];
-      return "The " + nation + " give " + ptech['name'];
+  case CLAUSE_ADVANCE:
+    var ptech = techs[value];
+    return "The " + nation + " give " + ptech['name'];
   case CLAUSE_CITY:
-    var pplayer = players[giver];
-    var nation = nations[pplayer['nation']]['adjective'];
     var pcity = cities[value];
 
     if (pcity != null) {
@@ -251,8 +266,6 @@ function client_diplomacy_clause_string(counterpart, giver, type, value)
     break;
 
   case CLAUSE_GOLD:
-    var pplayer = players[giver];
-    var nation = nations[pplayer['nation']]['adjective'];
     if (giver == client.conn.playing['playerno']) {
       $("#self_gold").val(value);
     } else {
@@ -260,12 +273,8 @@ function client_diplomacy_clause_string(counterpart, giver, type, value)
     }
     return "The " + nation + " give " + value + " gold";
   case CLAUSE_MAP:
-    var pplayer = players[giver];
-    var nation = nations[pplayer['nation']]['adjective']
     return "The " + nation + " give their worldmap";
   case CLAUSE_SEAMAP:
-    var pplayer = players[giver];
-    var nation = nations[pplayer['nation']]['adjective']
     return "The " + nation + " give their seamap";
   case CLAUSE_CEASEFIRE:
     return "The parties agree on a cease-fire";
@@ -274,12 +283,8 @@ function client_diplomacy_clause_string(counterpart, giver, type, value)
   case CLAUSE_ALLIANCE:
     return "The parties create an alliance";
   case CLAUSE_VISION:
-    var pplayer = players[giver];
-    var nation = nations[pplayer['nation']]['adjective']
     return "The " + nation + " give shared vision";
   case CLAUSE_EMBASSY:
-    var pplayer = players[giver];
-    var nation = nations[pplayer['nation']]['adjective']
     return "The " + nation + " give an embassy";
   }
 
@@ -331,21 +336,25 @@ function create_diplomacy_dialog(counterpart) {
   var self_nation = nations[pplayer['nation']];
   var counterpart_nation = nations[counterpart['nation']];
 
-  var flag_self_html = "<img src='/images/flags/" + self_nation['graphic_str'] + "-web.png' id='flag_self'>";
-  var flag_counterpart_html = "<img src='/images/flags/" + counterpart_nation['graphic_str']
-	  + "-web.png' id='flag_counterpart'>";
+  var flag_self_html;
+  var flag_counterpart_html;
+  if (self_nation['customized'] || counterpart_nation['customized']) {
+    flag_self_html = "<canvas id='flag_self' width='58' height='40'></canvas>";
+    flag_counterpart_html = "<canvas id='flag_counterpart' width='58' height='40'></canvas>";
+  } else {
+    flag_self_html = "<img src='/images/flags/" + self_nation['graphic_str'] + "-web.png' id='flag_self'>";
+    flag_counterpart_html = "<img src='/images/flags/" + counterpart_nation['graphic_str'] + "-web.png' id='flag_counterpart'>";
+  }
 
   var player_info_html = "<div style='float:left; width: 70%;'><h3>"
 		  			+ nations[pplayer['nation']]['adjective']
-		  			+ " " + pplayer['name'] + "</h3></div>"
+		  			+ " " + pplayer['name'] + "</h3></div>";
   var counterpart_info_html = "<div style='float:left; width: 70%;'><h3>"
 		  			      + nations[counterpart['nation']]['adjective']
-		                              + " " + counterpart['name'] + "</h3></div>"
-
+		                              + " " + counterpart['name'] + "</h3></div>";
 
   var agree_self_html = "<div id='agree_self' style='float':right;></div>";
   var agree_counterpart_html = "<div id='agree_counterpart' style='float:right;'></div>";
-
 
   var title = "Diplomacy: " + counterpart['name']
 		 + " of the " + nations[counterpart['nation']]['adjective'];
@@ -378,8 +387,19 @@ function create_diplomacy_dialog(counterpart) {
   $("#diplomacy_player_box_counterpart").html(flag_counterpart_html + agree_counterpart_html
 		                               + counterpart_info_html);
 
+  if (self_nation['customized'] || counterpart_nation['customized']) {
+    var flag_canvas_self = document.getElementById('flag_self');
+    var flag_canvas_self_ctx = flag_canvas_self.getContext("2d");
+    var tag = "f." + self_nation['graphic_str'];
+    flag_canvas_self_ctx.scale(1.5, 1.5);
+    flag_canvas_self_ctx.drawImage(sprites[tag], 0, 0);
 
-
+    var flag_canvas_counterpart = document.getElementById('flag_counterpart');
+    var flag_canvas_counterpart_ctx = flag_canvas_counterpart.getContext("2d");
+    tag = "f." + counterpart_nation['graphic_str'];
+    flag_canvas_counterpart_ctx.scale(1.5, 1.5);
+    flag_canvas_counterpart_ctx.drawImage(sprites[tag], 0, 0);
+  }
 
   // Diplomacy menu for current player.
   $("<div id='self_dipl_div' ></div>").appendTo("#diplomacy_player_box_self");

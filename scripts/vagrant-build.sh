@@ -57,7 +57,6 @@ cd ${basedir}
 ## dependencies
 echo "==== Installing Updates and Dependencies ===="
 export DEBIAN_FRONTEND=noninteractive
-apt-mark hold firefox
 echo "apt-get update"
 apt-get -y update
 echo "apt-get upgrade"
@@ -67,6 +66,8 @@ debconf-set-selections <<< "mysql-server mysql-server/root_password password ${m
 debconf-set-selections <<< "mysql-server mysql-server/root_password_again password ${mysql_pass}"
 echo "apt-get install dependencies"
 apt-get -y install ${dependencies}
+
+service snapd stop
 
 echo "==== Fetching/Installing Tornado Web Server ===="
 cd /tmp

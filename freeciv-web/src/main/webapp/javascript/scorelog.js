@@ -137,16 +137,20 @@ function handle_scorelog(scorelog) {
   if (scoreitems.length >1000) ps = 0;
 
   for (var key in scoretags) {
-    Morris.Line({
-      element: 'scoreschart-' + key,
-      data: resultdata[key],
-      xkey: 'turn',
-      ykeys: playerslist,
-      labels: playernames,
-      parseTime: false,
-      lineColors : scorecolors,
-      pointSize: ps
-    });
+    try {
+      Morris.Line({
+        element: 'scoreschart-' + key,
+        data: resultdata[key],
+        xkey: 'turn',
+        ykeys: playerslist,
+        labels: playernames,
+        parseTime: false,
+        lineColors : scorecolors,
+        pointSize: ps
+      });
+    } catch(err) {
+      console.log("Problem showing score log graph: " + err);
+    }
   }
 
   $("#scores_tabs").tabs();

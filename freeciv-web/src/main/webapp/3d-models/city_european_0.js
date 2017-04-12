@@ -103,9 +103,10 @@
 	"colorDiffuse" : [0.006928, 0.152142, 0.015359],
 	"colorSpecular" : [0.5, 0.5, 0.5],
 	"illumination" : 2,
-	"opacity" : 1.0,
+	"opacity" : 0.6,
 	"opticalDensity" : 1.0,
-	"specularCoef" : 96.078431
+	"specularCoef" : 96.078431,
+	"transparent" : true
 	}],
 
     "buffers": "city_european_0.bin"

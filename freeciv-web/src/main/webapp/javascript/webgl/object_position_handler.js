@@ -92,9 +92,9 @@ function update_unit_position(ptile) {
       pos = map_to_scene_coords(ptile['x'], ptile['y']);
     }
     new_unit.matrixAutoUpdate = false
-    new_unit.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
+    new_unit.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 4);
     new_unit.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height - 2);
-    new_unit.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
+    new_unit.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 4);
     new_unit.rotateOnAxis(new THREE.Vector3(0,1,0).normalize(), (convert_unit_rotation(visible_unit['facing']) * Math.PI * 2 / 8));
     new_unit.updateMatrix();
 
@@ -227,9 +227,9 @@ function update_unit_position(ptile) {
     unit_positions[ptile['index']]['unit_type'] = unit_type_name;
 
     new_unit.matrixAutoUpdate = false
-    new_unit.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
+    new_unit.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 4);
     new_unit.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height - 2);
-    new_unit.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
+    new_unit.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 4);
     new_unit.rotateOnAxis(new THREE.Vector3(0,1,0).normalize(), (convert_unit_rotation(visible_unit['facing']) * Math.PI * 2 / 8));
     new_unit.updateMatrix();
 
@@ -266,6 +266,7 @@ function update_city_position(ptile) {
   if (renderer != RENDERER_WEBGL) return;
 
   var pcity = tile_city(ptile);
+  var punits = tile_units(ptile);
 
   var height = 5 + ptile['height'] * 100;
 
@@ -316,7 +317,9 @@ function update_city_position(ptile) {
     city_label.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 35);
     city_label.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 5);
     city_label.rotation.y = Math.PI / 4;
+    pcity['webgl_label_hash'] = pcity['name'] + pcity['size'] + pcity['production_value'] + punits.length;
     if (scene != null) scene.add(city_label);
+    return;
   }
 
   if (city_positions[ptile['index']] != null && pcity != null) {
@@ -355,15 +358,10 @@ function update_city_position(ptile) {
       city_walls_positions[ptile['index']] = city_walls;
     }
 
-    if (scene != null) scene.remove(city_label_positions[ptile['index']]);
-    delete city_label_positions[ptile['index']];
-    var city_label = create_city_label(pcity);
-    city_label_positions[ptile['index']] = city_label;
-    city_label.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] + 5);
-    city_label.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 35);
-    city_label.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 5);
-    city_label.rotation.y = Math.PI / 4;
-    if (scene != null) scene.add(city_label);
+    if (pcity['webgl_label_hash'] != pcity['name'] + pcity['size'] + pcity['production_value'] + punits.length) {
+      update_city_label(pcity);
+      pcity['webgl_label_hash'] = pcity['name'] + pcity['size'] + pcity['production_value'] + punits.length;
+    }
 
   }
 
@@ -446,6 +444,7 @@ function update_tile_extras(ptile) {
         road.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
         scene.add(road);
         road_positions[ptile['index']] = road;
+        if (Math.random() >= 0.5) break;
       }
     }
 
@@ -570,6 +569,7 @@ function update_tile_extras(ptile) {
         scene.add(river);
         river_positions[ptile['index']] = river;
         river_positions[checktile['index']] = river;
+        if (Math.random() >= 0.5) break;
       }
     }
   }
@@ -595,21 +595,40 @@ function update_tile_extras(ptile) {
     }
   }
 
+  // Render tile specials (extras). Fish and whales are 3D models, the rest are 2D sprites from the 2D version.
+  // 2D sprites are faster to render and looks better at the moment. Freeciv WebGL 3D needs better 3D models for specials.
   var extra_resource = extras[ptile['resource']];
   if (extra_resource != null && scene != null && tile_extra_positions[extra_resource['id'] + "." + ptile['index']] == null) {
+    if (extra_resource['name'] != "Fish" && extra_resource['name'] != "Whales") {
+      var key = extra_resource['graphic_str'];
+      var extra_mesh = get_extra_mesh(key);
+
+      var pos = map_to_scene_coords(ptile['x'], ptile['y']);
+      extra_mesh.matrixAutoUpdate = false;
+      extra_mesh.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 6);
+      extra_mesh.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 2);
+      extra_mesh.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 6);
+      extra_mesh.rotation.y = Math.PI / 4;
+      extra_mesh.updateMatrix();
+
+      tile_extra_positions[extra_resource['id'] + "." + ptile['index']] = extra_mesh;
+      if (scene != null && extra_mesh != null) {
+        scene.add(extra_mesh);
+      }
+    } else {
       var extra_model = webgl_get_model(extra_resource['name']);
       if (extra_model == null) return;
-
-      tile_extra_positions[extra_resource['id'] + "." + ptile['index']] = extra_model;
 
       var pos = map_to_scene_coords(ptile['x'], ptile['y']);
       extra_model.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
       extra_model.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
       extra_model.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
 
+      tile_extra_positions[extra_resource['id'] + "." + ptile['index']] = extra_model;
       if (scene != null && extra_model != null) {
         scene.add(extra_model);
       }
+    }
   }
 
   // show forest

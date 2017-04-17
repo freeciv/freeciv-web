@@ -97,12 +97,10 @@ function update_game_info_pregame()
   if (civserverport == 6003) {
     game_info_html += "<p>";
     game_info_html += "<h2>Freeciv-Web LongTurn game</h2>-Each player plays one turn every day, each turn lasts 23 hours.<br>"
-    + "-A game can typically take some months to complete, so please only join if you want to play for this long.<br>"
-    + "-Minimum of 10 human players required before starting.<br>"
-    + "-To join the game, please select a nation.<br>"
-    + "-Ruleset: Civ2Civ3. Aifill: 0. Timeout: 23 hours.<br>"
-    + "-Click the start game button to indicate that you are ready to begin the game.<br>"
-    + "-This is the first time we try a LongTurn game on Freeciv-web, so this is a test game.<br>-Please save the game regularly.<br>"
+    + "-A game can typically take some months to complete, so please only join if you want to play <b>one turn every day</b> for this long.<br>"
+    + "-To join the game, click the <b>Pick nation</b> button above.<br>"
+    + "-150 human players are required before starting.<br>"
+    + "-Ruleset: Longturn. Aifill: 0. Timeout: 23 hours. Movement: x2.<br>"
     + "-Check the Freeciv forum if you have any questions!";
     game_info_html += "</p>";
 
@@ -196,7 +194,8 @@ function update_player_info_pregame()
             "pick_nation": {name: "Pick nation"}};
     }
 
-    $("#pregame_player_list").contextMenu({
+    if (civserverport != 6003) {
+      $("#pregame_player_list").contextMenu({
         selector: '.pregame_player_name', 
         callback: function(key, options) {
             var name = $(this).attr('name');
@@ -221,7 +220,8 @@ function update_player_info_pregame()
             }  
         },
         items: pregame_context_items 
-    });
+      });
+    }
 
     /* set state of Start game button depending on if user is ready. */
     if (client.conn['player_num'] != null  && client.conn['player_num'] in players
@@ -438,6 +438,10 @@ function submit_nation_choice()
                      "style" : style};
   send_request(JSON.stringify(test_packet));
   clearInterval(nation_select_id);
+
+  if (civserverport == 6003) {
+    pregame_start_game();
+  }
 }
 
 /***************************************************************************
@@ -939,6 +943,15 @@ function show_intro_dialog(title, message) {
   if (stored_password != null && stored_password != false) {
     $("#password_req").val(stored_password);
   }
+  var join_game_customize_text = "";
+  if ($.getUrlVar('action') == "load") {
+    join_game_customize_text = "Load games";
+  } else if ($.getUrlVar('action') == "multi") {
+    join_game_customize_text = "Join Game";
+  } else {
+    join_game_customize_text = "Customize Game";
+  }
+
   $("#dialog").attr("title", title);
   $("#dialog").dialog({
 			bgiframe: true,
@@ -970,7 +983,7 @@ function show_intro_dialog(title, message) {
 				  icons: { primary: "ui-icon-play" }
 			  },
 			  {
-				  text : $.getUrlVar('action') == "load" ? "Load games" : "Customize Game",
+				  text : join_game_customize_text,
 				  click : function() {
                     if (is_touch_device() || is_small_screen()) {
                       BigScreen.toggle();

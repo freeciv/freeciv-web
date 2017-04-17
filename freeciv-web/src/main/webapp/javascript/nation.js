@@ -180,7 +180,7 @@ function handle_nation_table_select( ui )
   }
   
   if (!client_is_observer() && player_id != client.conn.playing['playerno']) {
-    if (diplstates[player_id] == DS_CEASEFIRE || diplstates[player_id] == DS_ARMISTICE) {
+    if (diplstates[player_id] == DS_CEASEFIRE || diplstates[player_id] == DS_ARMISTICE || diplstates[player_id] == DS_PEACE) {
       $("#cancel_treaty_button").button("option", "label", "Declare war");
     } else {
       $("#cancel_treaty_button").button("option", "label", "Cancel treaty");

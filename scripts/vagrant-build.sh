@@ -108,6 +108,8 @@ echo "==== Building freeciv ===="
 dos2unix ${basedir}/freeciv/freeciv-web.project
 cd ${basedir}/freeciv && sudo -Hu ubuntu ./prepare_freeciv.sh
 cd freeciv && sudo -u ubuntu make install
+cd ~
+cp -rf freeciv freeciv-longturn
 
 echo "==== Building freeciv-web ===="
 cd ${basedir}/scripts/freeciv-img-extract/ && ./setup_links.sh && ./sync.sh

@@ -267,7 +267,7 @@
 		<div class="row">
 			<div class="col-md-6">
 				<div class="videoWrapper">
-					<iframe class="embed-responsive-item" width="542" height="343" src="https://www.youtube.com/embed/9cD7An6QMC8" frameborder="0" allowfullscreen></iframe>
+					<iframe class="embed-responsive-item" width="542" height="343" src="https://www.youtube.com/embed/AuK6re_xwmY" frameborder="0" allowfullscreen></iframe>
 				</div>
 			</div>
 			<div class="col-md-6">
@@ -359,7 +359,7 @@
 										</td>			
 										<td>
 											<c:choose>
-												<c:when test="${game.state == 'Running'}">
+												<c:when test="${game.state == 'Running' or game.state == 'Pregame'}">
 													<a  class="label label-success" href="/webclient/?action=multi&civserverport=${game.port}&amp;civserverhost=${game.host}&amp;multi=true">
 														Play
 													</a>

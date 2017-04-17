@@ -1,12 +1,12 @@
 cmdlevel ctrl first
-rulesetdir civ2civ3 
+rulesetdir longturn 
 set topology WRAPX
 set nationset all
 set compresstype xs
-set maxplayers 100
+set maxplayers 150
 set startunits=ccccwwwwwwx
 set aifill 0
-set allowtake H1Ah1adOo
+set allowtake=""
 set autotoggle false
 set timeout 82800
 set netwait 15
@@ -16,13 +16,15 @@ set pingtimeout 120
 set maxconnectionsperhost 256
 set threaded_save enabled
 set scorelog enabled
-set size 7
+set mapsize PLAYER
+set tilesperplayer 100
 set landm 50
-set minp 5
+set minp 150
 set generator FAIR
 metaconnection persistent
 set ec_chat=enabled
 set ec_info=enabled 
 set ec_max_size=5000
 set ec_turns=9
-metamessage LongTurn Freeciv-web | 23 hour timeout | min 10 players
+metamessage LongTurn Freeciv-web | 150 players | 1 turn per day
+cmdlevel basic

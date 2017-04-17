@@ -86,6 +86,8 @@ echo "==== Checking out Freeciv from SVN and patching... ===="
 cd ${basedir}/freeciv && sudo -u travis ./prepare_freeciv.sh
 echo "==== Building freeciv ===="
 cd freeciv && sudo -u travis make install
+cd ~
+cp -rf freeciv freeciv-longturn
 
 echo "==== Building freeciv-web ===="
 cd /var/lib/tomcat8 && sudo chmod -R 777 webapps logs && setfacl -d -m g::rwx webapps && sudo chown -R www-data:www-data webapps/

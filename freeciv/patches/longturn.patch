@@ -57,14 +57,14 @@ index 455d2e2..4b32a50 100644
      /* autogame only with 'unitwaittime' = 0 */
      settings_snprintf(reject_msg, reject_msg_len,
 diff --git a/server/stdinhand.c b/server/stdinhand.c
-index a19a6ba..4364149 100644
+index a19a6ba..c27309f 100644
 --- a/server/stdinhand.c
 +++ b/server/stdinhand.c
 @@ -3807,6 +3807,8 @@ static bool set_rulesetdir(struct connection *caller, char *str, bool check,
    char filename[512];
    const char *pfilename;
  
-+  if (srvarg.port == 6003) str = "civ2civ3\0";
++  if (srvarg.port == 6003) str = "longturn\0";
 +
    if (NULL == str || '\0' == str[0]) {
      cmd_reply(CMD_RULESETDIR, caller, C_SYNTAX,
@@ -73,8 +73,8 @@ index a19a6ba..4364149 100644
        }
      } players_iterate_end;
  
-+    if (srvarg.port == 6003 && game.server.min_players < 10) {
-+      game.server.min_players = 10;
++    if (srvarg.port == 6003 && game.server.min_players < 150) {
++      game.server.min_players = 150; 
 +    }
 +
      /* check min_players.

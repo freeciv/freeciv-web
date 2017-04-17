@@ -48,6 +48,8 @@ var audio_enabled = false;
 
 var last_turn_change_time = 0;
 var turn_change_elapsed = 0;
+var seconds_to_phasedone = 0;
+var seconds_to_phasedone_sync = 0;
 var dialog_close_trigger = "";
 var chatbox_panel_toggle = false;
 
@@ -457,8 +459,8 @@ function update_timeout()
   var now = new Date().getTime();
   if (game_info != null
       && current_turn_timeout() != null && current_turn_timeout() > 0) {
-    var remaining = current_turn_timeout()
-                    - Math.floor((now - phase_start_time) / 1000);
+    var remaining = Math.floor(seconds_to_phasedone - ((now - seconds_to_phasedone_sync) / 1000));
+
     if (remaining >= 0 && turn_change_elapsed == 0) {
       if (is_small_screen()) {
         $("#turn_done_button").button("option", "label", "Turn " + remaining);

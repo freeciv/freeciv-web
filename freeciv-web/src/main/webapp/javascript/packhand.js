@@ -1418,6 +1418,8 @@ function handle_worker_task(packet)
 function handle_timeout_info(packet)
 {
   last_turn_change_time = Math.ceil(packet['last_turn_change_time']);
+  seconds_to_phasedone = Math.floor(packet['seconds_to_phasedone']);
+  seconds_to_phasedone_sync = new Date().getTime();
 }
 
 function handle_play_music(packet)

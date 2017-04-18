@@ -160,7 +160,7 @@ class CivCom(Thread):
     def get_client_result_string(self):
         result = ""
         try:
-            if len(self.send_buffer) > 0:
+            if len(self.send_buffer) > 0 and isinstance(self.send_buffer, list):
                 result = "[" + ",".join(self.send_buffer) + "]"
             else:
                 result = None

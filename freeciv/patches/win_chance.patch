@@ -82,7 +82,7 @@ index f1f8ba2..adf5c5e 100644
 +void handle_info_text_req(struct player *pplayer, int loc, int visible_unit_id,
 +                          int focus_unit_id)
  {
-   struct tile *ptile = index_to_tile(loc);
+   struct tile *ptile = index_to_tile(&(wld.map), loc);
    struct unit *punit = (visible_unit_id == 0) ? NULL : game_unit_by_number(visible_unit_id);
 -  const char *info_text = popup_info_text(ptile, pplayer, punit);
 +  struct unit *funit = (focus_unit_id == 0) ? NULL : game_unit_by_number(focus_unit_id);

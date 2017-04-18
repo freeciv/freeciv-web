@@ -31,8 +31,8 @@ index 6415a34..58bb1d5 100644
  CLIENTDATADIRS = 
  endif
  
--SRV_RE_DATADIRS = default classic civ1 civ2 sandbox experimental multiplayer alien civ2civ3 nation
-+SRV_RE_DATADIRS = default classic civ1 civ2 sandbox experimental multiplayer alien civ2civ3 webperimental nation
+-SRV_RE_DATADIRS = default classic civ1 civ2 sandbox multiplayer alien civ2civ3 nation
++SRV_RE_DATADIRS = default classic civ1 civ2 sandbox multiplayer alien civ2civ3 webperimental nation
  if SERVER
  SERVERDATADIRS = $(SRV_RE_DATADIRS) scenarios
  else

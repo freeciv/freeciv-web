@@ -123,7 +123,7 @@ Unimplemented Freeciv client features:
       become less repetitive. This should make it easier to send
       PACKET_UNIT_SSCS_SET with USSDT_UNQUEUE on all user choices.
     - when a client sends a PACKET_UNIT_GET_ACTIONS(actor_unit_id,
-      target_unit_id, target_city_id, target_tile_id, disturb_player) the
+      target_unit_id, target_tile_id, disturb_player) the
       server will respond with the information needed for the action
       selection dialog in a PACKET_UNIT_ACTIONS.
     - the current situation is that the Freeciv-web client sends a

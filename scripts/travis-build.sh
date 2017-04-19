@@ -49,8 +49,8 @@ echo "===== Install Tomcat 8 ======="
 echo "if you get a download error 404 here, then there could be a new Tomcat version released, so update the URL below."
 cd /var/lib
 wget --quiet ${tomcat_url} || (>&2 echo "Unable to download Tomcat. Check download url in travis-build.sh." && exit 1)
-tar -xvzf apache-tomcat-8.5.13.tar.gz
-mv apache-tomcat-8.5.13 tomcat8
+tar -xvzf apache-tomcat-8.5.14.tar.gz
+mv apache-tomcat-8.5.14 tomcat8
 echo "export CATALINA_HOME=\"/var/lib/tomcat8\"" >> ~/.bashrc
 cd tomcat8/bin
 ./startup.sh

@@ -102,6 +102,9 @@ function update_nation_screen()
     $('#take_player_button').hide();
     $('#toggle_ai_button').hide();
     $('#game_scores_button').hide();
+  } else if (civserverport == 6003) {
+    $('#take_player_button').hide();
+    $('#toggle_ai_button').hide();
   } else {
     $('#view_player_button').button("disable");
     $('#meet_player_button').button("disable");

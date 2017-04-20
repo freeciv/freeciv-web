@@ -57,10 +57,19 @@ index 455d2e2..4b32a50 100644
      /* autogame only with 'unitwaittime' = 0 */
      settings_snprintf(reject_msg, reject_msg_len,
 diff --git a/server/stdinhand.c b/server/stdinhand.c
-index a19a6ba..c27309f 100644
+index a19a6ba..ec6129e 100644
 --- a/server/stdinhand.c
 +++ b/server/stdinhand.c
-@@ -3807,6 +3807,8 @@ static bool set_rulesetdir(struct connection *caller, char *str, bool check,
+@@ -3619,6 +3619,8 @@ bool load_command(struct connection *caller, const char *filename, bool check,
+   char arg[MAX_LEN_PATH];
+   struct conn_list *global_observers;
+ 
++  if (srvarg.port == 6003) return FALSE;
++
+   if (!filename || filename[0] == '\0') {
+     cmd_reply(CMD_LOAD, caller, C_FAIL, _("Usage:\n%s"),
+               command_synopsis(command_by_number(CMD_LOAD)));
+@@ -3807,6 +3809,8 @@ static bool set_rulesetdir(struct connection *caller, char *str, bool check,
    char filename[512];
    const char *pfilename;
  
@@ -69,12 +78,12 @@ index a19a6ba..c27309f 100644
    if (NULL == str || '\0' == str[0]) {
      cmd_reply(CMD_RULESETDIR, caller, C_SYNTAX,
                _("You must provide a ruleset name. Use \"/show ruleset\" to "
-@@ -5785,6 +5787,10 @@ bool start_command(struct connection *caller, bool check, bool notify)
+@@ -5785,6 +5789,10 @@ bool start_command(struct connection *caller, bool check, bool notify)
        }
      } players_iterate_end;
  
-+    if (srvarg.port == 6003 && game.server.min_players < 150) {
-+      game.server.min_players = 150; 
++    if (srvarg.port == 6003 && game.server.min_players < 60) {
++      game.server.min_players = 60; 
 +    }
 +
      /* check min_players.

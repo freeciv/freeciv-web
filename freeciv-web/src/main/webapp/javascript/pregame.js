@@ -95,12 +95,13 @@ function update_game_info_pregame()
   }
 
   if (civserverport == 6003) {
+    $("#load_game_button").hide();
+    $("#pregame_settings_button").hide();
     game_info_html += "<p>";
     game_info_html += "<h2>Freeciv-Web LongTurn game</h2>-Each player plays one turn every day, each turn lasts 23 hours.<br>"
-    + "-A game can typically take some months to complete, so please only join if you want to play <b>one turn every day</b> for this long.<br>"
     + "-To join the game, click the <b>Pick nation</b> button above.<br>"
-    + "-The game will start when 150 human players have joined the game.<br>"
-    + "-Ruleset: Longturn. Aifill: 0. Timeout: 23 hours. Movement: x2.<br>"
+    + "-The game will start when 60 human players have joined the game.<br>"
+    + "-Ruleset: Longturn (which is the Civ2Civ3 ruleset with x2 movement). Aifill: 0. Timeout: 23 hours. <br>"
     + "-Check the Freeciv forum if you have any questions!";
     game_info_html += "</p>";
 

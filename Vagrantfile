@@ -19,25 +19,17 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "ubuntu-yakkety"
+  config.vm.box = "ubuntu-zesty64"
 
   config.vm.provider "virtualbox"
 
-  # The url from where the 'config.vm.box' box will be fetched if it
-  # doesn't already exist on the user's system.
-  config.vm.box_url = "https://cloud-images.ubuntu.com/yakkety/current/yakkety-server-cloudimg-amd64-vagrant.box"
+  config.vm.box_url = "https://cloud-images.ubuntu.com/zesty/current/zesty-server-cloudimg-amd64-vagrant.box"
 
-  # Create a forwarded port mapping which allows access to a specific port
-  # within the machine from a port on the host machine. In the example below,
-  # on Windows accessing "localhost:80" will access port 80 on the guest 
-  # machine, and on Linux and OS X accessing "localhost:8080" will access 
-  # port 80 on the guest machine. Se README for creating a SSH tunnel for
-  # Linux and OS X on port 80.
   if Vagrant::Util::Platform.windows?
-    config.vm.network :forwarded_port, guest: 80, host: 80
-    config.vm.network :forwarded_port, guest: 443, host: 443
+    config.vm.network :forwarded_port, guest: 80, host: 80, host_ip: "localhost"
+    config.vm.network :forwarded_port, guest: 443, host: 443, host_ip: "localhost"
   else 
-    config.vm.network :forwarded_port, guest: 80, host: 8080
+    config.vm.network :forwarded_port, guest: 80, host: 8080, host_ip: "localhost"
   end
 
   config.vm.provider "virtualbox" do |v|

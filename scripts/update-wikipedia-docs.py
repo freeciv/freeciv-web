@@ -27,6 +27,7 @@ def fix_tech(tech_name):
   if (tech_name == "Fighter"): tech_name = "Fighter aircraft";
   if (tech_name == "Carrier"): tech_name = "Aircraft carrier";
   if (tech_name == "Legion"): tech_name = "Roman legion";
+  if (tech_name == "Riflemen"): tech_name = "Rifleman";
   if (tech_name == "Magellan's Expedition"): tech_name = "Ferdinand Magellan";
   if (tech_name == "Nuclear"): tech_name = "Nuclear weapon";
   if (tech_name == "Caravan"): tech_name = "Camel train";
@@ -51,6 +52,7 @@ def fix_tech(tech_name):
   if (tech_name == "SETI Program"): tech_name = "Search for extraterrestrial intelligence";
   if (tech_name == "J.S. Bach's Cathedral"): tech_name = "Johann Sebastian Bach";
   if (tech_name == "Marco Polo's Embassy"): tech_name = "Marco Polo";
+  if (tech_name == "Pyramids"): tech_name = "Giza pyramid complex";
   if (tech_name == "Mass Transit"): tech_name = "Public transport";
   if (tech_name == "Spy"): tech_name = "Espionage";
   if (tech_name == "Space Component"): tech_name = "Spacecraft propulsion";

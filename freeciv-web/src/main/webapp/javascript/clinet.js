@@ -189,6 +189,8 @@ function send_message_delayed(message, delay)
 ****************************************************************************/
 function send_message(message)
 {
+  if (civserverport == 6003 && message != null && message.indexOf(encodeURIComponent("/")) == -1 && message.indexOf("/") == -1) message = username + " : " + message;
+
   var packet = {"pid" : packet_chat_msg_req, 
                 "message" : message};
   send_request(JSON.stringify(packet));

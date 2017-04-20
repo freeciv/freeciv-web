@@ -102,7 +102,8 @@ function update_game_info_pregame()
     + "-To join the game, click the <b>Pick nation</b> button above.<br>"
     + "-The game will start when 60 human players have joined the game.<br>"
     + "-Ruleset: Longturn (which is the Civ2Civ3 ruleset with x2 movement). Aifill: 0. Timeout: 23 hours. <br>"
-    + "-Check the Freeciv forum if you have any questions!";
+    + "-You can play your turn once a day. The browser window can be closed and you can log in again later. Skipping some turns is okay.<br>"
+    + "-Check the <a href='http://forum.freeciv.org/f/viewforum.php?f=24' target='newwin'>Freeciv forum</a> if you have any questions!";
     game_info_html += "</p>";
 
     if (!logged_in_with_password) {

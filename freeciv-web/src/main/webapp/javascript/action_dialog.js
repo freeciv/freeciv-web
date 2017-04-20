@@ -723,8 +723,6 @@ function create_select_tgt_unit_button(parent_id, actor_unit_id,
         "pid"            : packet_unit_get_actions,
         "actor_unit_id"  : actor_unit_id,
         "target_unit_id" : target_unit_id,
-        /* Let the server choose the target city. */
-        "target_city_id" : IDENTITY_NUMBER_ZERO,
         "target_tile_id" : target_tile_id,
         "disturb_player" : true
       };

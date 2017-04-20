@@ -40,7 +40,7 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
 +void handle_goto_path_req(struct player *pplayer, int unit_id, int goal)
 +{
 +  struct unit *punit = player_unit_by_number(pplayer, unit_id);
-+  struct tile *ptile = index_to_tile(goal);
++  struct tile *ptile = index_to_tile(&(wld.map), goal);
 +  struct pf_parameter parameter;
 +  struct pf_map *pfm;
 +  struct pf_path *path;

@@ -529,7 +529,7 @@ function surrender_game()
 **************************************************************************/
 function send_surrender_game()
 {
-  if (!client_is_observer()) {
+  if (!client_is_observer() && ws != null && ws.readyState === 1) {
     send_message("/surrender ");
   }
 }

@@ -154,7 +154,9 @@ function control_init()
   });
 
   $(window).on('unload', function(){
-    send_surrender_game();
+    if (civserverport != 6003 && !is_pbem()) {
+      send_surrender_game();
+    }
     network_stop();
   });
 

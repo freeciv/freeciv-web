@@ -18,6 +18,7 @@ import sys
 from time import gmtime, strftime
 import os
 import platform
+import threading
 import time
 from tornado import version as tornado_version
 import gc
@@ -49,6 +50,7 @@ def get_debug_info(civcoms):
         cpu))
 
     code += ("Tornado version %s <br>" % (tornado_version))
+    code += ("Number of threads: %i <br>" % (threading.activeCount()))
 
     try:
         f = open("/proc/loadavg")

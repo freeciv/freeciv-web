@@ -99,7 +99,7 @@ function update_game_info_pregame()
     $("#pregame_settings_button").hide();
     game_info_html += "<p>";
     game_info_html += "<h2>Freeciv-Web LongTurn game</h2>-Each player plays one turn every day, each turn lasts 23 hours.<br>"
-    + "-To join the game, click the <b>Pick nation</b> button above.<br>"
+    + "-To join the game, click the <b>Pick nation</b> button above. Then wait until the game begins. Check regularly, usually in some days.<br>"
     + "-The game will start when 60 human players have joined the game.<br>"
     + "-Ruleset: Longturn (which is the Civ2Civ3 ruleset with x2 movement). Aifill: 0. Timeout: 23 hours. <br>"
     + "-You can play your turn once a day. The browser window can be closed and you can log in again later. Skipping some turns is okay.<br>"

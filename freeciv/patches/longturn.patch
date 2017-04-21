@@ -64,7 +64,7 @@ index a19a6ba..ec6129e 100644
    char arg[MAX_LEN_PATH];
    struct conn_list *global_observers;
  
-+  if (srvarg.port == 6003) return FALSE;
++  if (srvarg.port == 6003 && conn_list_size(game.est_connections) > 2) return FALSE;
 +
    if (!filename || filename[0] == '\0') {
      cmd_reply(CMD_LOAD, caller, C_FAIL, _("Usage:\n%s"),

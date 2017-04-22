@@ -282,7 +282,7 @@ function add_chatbox_text(text)
     }
 
     if (text != null && (text.indexOf("Lost connection") != -1 || text.indexOf("Not enough") != -1 || text.indexOf("has been removed") != -1 || text.indexOf("has connected") != -1)) text = text.replace(/#000000/g, "#666666");
-    if (text != null && text.indexOf("Year:") != -1) text = "<br>" + text;
+    if (text != null && text.indexOf("Year:") != -1) text = "<hr style='border-color: #555555;'>" + text;
 
     chatbox_text += text + "<br>";
     chatbox_text_dirty = true;

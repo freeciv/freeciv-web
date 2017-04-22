@@ -18,7 +18,7 @@ index 90fd4c7..3e70316 100644
  {
    const struct player_slot *pslot;
  
-+  if (is_longturn && NULL != pplayer->nation) return;
++  if (is_longturn() && NULL != pplayer->nation) return;
 +
    fc_assert_ret(NULL != pplayer);
  

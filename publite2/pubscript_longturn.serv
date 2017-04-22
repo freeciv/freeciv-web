@@ -19,12 +19,12 @@ set scorelog enabled
 set mapsize PLAYER
 set tilesperplayer 200
 set landm 50
-set minp 60
+set minp 150
 set generator FAIR
 metaconnection persistent
 set ec_chat=enabled
 set ec_info=enabled 
 set ec_max_size=5000
 set ec_turns=9
-metamessage LongTurn Freeciv-web | 1 turn per day
+metamessage LongTurn Game #2  | 1 turn per day
 cmdlevel basic

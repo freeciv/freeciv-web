@@ -20,7 +20,7 @@ if [ $6 = "longturn" ]; then
   freeciv_dir="freeciv-longturn"
 fi
 
-ulimit -t 10000 && ulimit -Sv 500000 && \
+ulimit -t 20000 && ulimit -Sv 1000000 && \
 export FREECIV_SAVE_PATH=${1};
 rm -f /var/lib/tomcat8/webapps/data/scorelogs/score-${2}.log; 
 

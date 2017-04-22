@@ -94,7 +94,7 @@ function update_game_info_pregame()
     }
   }
 
-  if (civserverport == 6003) {
+  if (is_longturn()) {
     $("#load_game_button").hide();
     $("#pregame_settings_button").hide();
     game_info_html += "<p>";
@@ -196,7 +196,7 @@ function update_player_info_pregame()
             "pick_nation": {name: "Pick nation"}};
     }
 
-    if (civserverport != 6003) {
+    if (!is_longturn()) {
       $("#pregame_player_list").contextMenu({
         selector: '.pregame_player_name', 
         callback: function(key, options) {
@@ -441,7 +441,7 @@ function submit_nation_choice()
   send_request(JSON.stringify(test_packet));
   clearInterval(nation_select_id);
 
-  if (civserverport == 6003) {
+  if (is_longturn()) {
     pregame_start_game();
   }
 }
@@ -736,7 +736,7 @@ function pregame_settings()
     change_ruleset($('#ruleset').val());
   });
 
-  if (civserverport == 6003) {
+  if (is_longturn()) {
     $('#password').hide(); // no password for LongTurn.
     $('#ruleset').hide(); // no changing ruleset for LongTurn.
   }

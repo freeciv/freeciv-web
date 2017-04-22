@@ -204,7 +204,7 @@ function handle_chat_msg(packet)
 
   if (connections[conn_id] != null) {
     var username = connections[conn_id]['username'];
-    if (civserverport == 6003) {
+    if (is_longturn()) {
       add_chatbox_text(message);
     } else {
       add_chatbox_text("<b>" + username + ":</b>" + message);

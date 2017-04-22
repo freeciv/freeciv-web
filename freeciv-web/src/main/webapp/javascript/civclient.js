@@ -198,7 +198,7 @@ function init_common_intro_dialog() {
                   "participate in a multiplayer game. You can customize the game " +
                   "settings, and wait for the minimum number of players before " +
                   "the game can start. ";
-    if ($.getUrlVar('civserverport') == "6003") msg += "<br><br>This is a LongTurn multiplayer game. It requires that you log in with an account."
+    if (is_longturn()) msg += "<br><br>This is a LongTurn multiplayer game. It requires that you log in with an account."
       +" Please create a new account if you don't have an account.<br><br>"
     msg += "Please enter your name: "
     show_intro_dialog("Welcome to Freeciv-web", msg);
@@ -720,4 +720,14 @@ function switch_renderer()
         }
   });
 
+}
+
+
+
+/**************************************************************************
+ Is this a LongTurn game?
+**************************************************************************/
+function is_longturn()
+{
+  return (civserverport == 6003 || $.getUrlVar('civserverport') == "6003");
 }

@@ -140,6 +140,27 @@ function format_action_label(action_id, action_probabilities)
 }
 
 /**************************************************************************
+  Format the tooltip of an action selection button.
+**************************************************************************/
+function format_action_tooltip(act_id, act_probs)
+{
+  var out;
+
+  if (act_probs[act_id]['min'] == act_probs[act_id]['max']) {
+    out = "The probability of success is ";
+    out += format_act_prob_part(act_probs[act_id]['max']) + ".";
+  } else if (act_probs[act_id]['min'] < act_probs[act_id]['max']) {
+    out = "The probability of success is ";
+    out += format_act_prob_part(act_probs[act_id]['min']);
+    out += ", ";
+    out += format_act_prob_part(act_probs[act_id]['max']);
+    out += " or somewhere in between.";
+  }
+
+  return out;
+}
+
+/**************************************************************************
   Returns the function to run when an action is selected.
 **************************************************************************/
 function act_sel_click_function(parent_id,
@@ -234,9 +255,12 @@ function create_act_sel_button(parent_id,
     "class" : 'act_sel_button',
     text    : format_action_label(action_id,
                                   action_probabilities),
+    title   : format_action_tooltip(action_id,
+                                    action_probabilities),
     click   : act_sel_click_function(parent_id,
                                      actor_unit_id, tgt_id, action_id,
-                                     action_probabilities) };
+                                     action_probabilities)
+  };
 
   /* The button is ready. */
   return button;

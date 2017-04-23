@@ -120,6 +120,9 @@ function init_tech_screen()
 
   if (is_tech_tree_init) return;
 
+  if (ruleset_control['name'] == "Civ2Civ3 ruleset") reqtree = reqtree_civ2civ3;
+  if (ruleset_control['name'] == "Multiplayer ruleset") reqtree = reqtree_multiplayer;
+
   tech_canvas = document.getElementById('tech_canvas');
   if (tech_canvas == null) {
     console.log("unable to find tech canvas.");

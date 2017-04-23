@@ -153,13 +153,15 @@ function update_tech_tree()
 
   for (var tech_id in techs) {
     var ptech = techs[tech_id];
-    if (!(tech_id+'' in reqtree)) continue;
+    if (!(tech_id+'' in reqtree) || reqtree[tech_id+''] == null) {
+      continue;
+    }
 
     var sx = Math.floor(reqtree[tech_id+'']['x'] * tech_xscale);  //scale in X direction.
     var sy = reqtree[tech_id+'']['y'];
     for (var i = 0; i < ptech['req'].length; i++) {
       var rid = ptech['req'][i];
-      if (rid == 0) continue;
+      if (rid == 0 || reqtree[rid+''] == null) continue;
 
       var dx = Math.floor(reqtree[rid+'']['x'] * tech_xscale);  //scale in X direction.
       var dy = reqtree[rid+'']['y'];
@@ -181,7 +183,7 @@ function update_tech_tree()
 
   for (var tech_id in techs) {
     var ptech = techs[tech_id];
-    if (!(tech_id+'' in reqtree)) continue;
+    if (!(tech_id+'' in reqtree) || reqtree[tech_id+''] == null) continue;
 
     var x = Math.floor(reqtree[tech_id+'']['x'] * tech_xscale)+2;  //scale in X direction.
     var y = reqtree[tech_id+'']['y']+2;

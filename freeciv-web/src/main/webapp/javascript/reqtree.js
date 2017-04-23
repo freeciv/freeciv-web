@@ -20,6 +20,7 @@
 // This is a hardcoded tech-tree extracted from the Freeciv C client.
 // add this to reqtree.c in the Freeciv C client:
 // printf("\"%d\": {\"x\":%d, \"y\":%d}, // %s \n", node->tech, startx, starty, text);
+// TODO! This really needs to be cleaned up.
 
 
 var reqtree = {

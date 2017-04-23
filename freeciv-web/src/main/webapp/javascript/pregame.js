@@ -1037,7 +1037,7 @@ function validate_username_callback()
    url: "/validate_user?userstring=" + check_username,
    success: function(data, textStatus, request){
       if (data == "user_does_not_exist") {
-        if (is_longturn) {
+        if (is_longturn()) {
           show_new_user_account_dialog();
           return;
         }

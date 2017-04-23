@@ -432,7 +432,6 @@ function submit_nation_choice()
                      "is_male" : true, /* FIXME */
                      "name" : leader_name,
                      "style" : style};
-  console.log(test_packet);
   send_request(JSON.stringify(test_packet));
   clearInterval(nation_select_id);
 

@@ -104,6 +104,14 @@ function encode_building_id(building_id)
   return building_id + 1;
 }
 
+/***************************************************************************
+  Returns a part of an action probability in a user readable format.
+***************************************************************************/
+function format_act_prob_part(prob)
+{
+  return (prob / 2) + "%";
+}
+
 /****************************************************************************
   Format the probability that an action will be a success.
 ****************************************************************************/
@@ -111,11 +119,11 @@ function format_action_probability(probability)
 {
   if (probability['min'] == probability['max']) {
     /* This is a regular and simple chance of success. */
-    return " (" + (probability['max'] / 2) + "%)";
+    return " (" + format_act_prob_part(probability['max']) + ")";
   } else if (probability['min'] < probability['max']) {
     /* This is a regular chance of success range. */
-    return " ([" + (probability['min'] / 2) + "%, "
-           + (probability['max'] / 2) + "%])";
+    return " ([" + format_act_prob_part(probability['min']) + ", "
+           + format_act_prob_part(probability['max']) + "])";
   } else {
     /* The remaining action probabilities shouldn't be displayed. */
     return "";

@@ -104,6 +104,14 @@ function encode_building_id(building_id)
   return building_id + 1;
 }
 
+/***************************************************************************
+  Returns a part of an action probability in a user readable format.
+***************************************************************************/
+function format_act_prob_part(prob)
+{
+  return (prob / 2) + "%";
+}
+
 /****************************************************************************
   Format the probability that an action will be a success.
 ****************************************************************************/
@@ -111,11 +119,11 @@ function format_action_probability(probability)
 {
   if (probability['min'] == probability['max']) {
     /* This is a regular and simple chance of success. */
-    return " (" + (probability['max'] / 2) + "%)";
+    return " (" + format_act_prob_part(probability['max']) + ")";
   } else if (probability['min'] < probability['max']) {
     /* This is a regular chance of success range. */
-    return " ([" + (probability['min'] / 2) + "%, "
-           + (probability['max'] / 2) + "%])";
+    return " ([" + format_act_prob_part(probability['min']) + ", "
+           + format_act_prob_part(probability['max']) + "])";
   } else {
     /* The remaining action probabilities shouldn't be displayed. */
     return "";
@@ -129,6 +137,27 @@ function format_action_label(action_id, action_probabilities)
 {
   return actions[action_id]['ui_name'].replace("%s", "").replace("%s",
       format_action_probability(action_probabilities[action_id]));
+}
+
+/**************************************************************************
+  Format the tooltip of an action selection button.
+**************************************************************************/
+function format_action_tooltip(act_id, act_probs)
+{
+  var out;
+
+  if (act_probs[act_id]['min'] == act_probs[act_id]['max']) {
+    out = "The probability of success is ";
+    out += format_act_prob_part(act_probs[act_id]['max']) + ".";
+  } else if (act_probs[act_id]['min'] < act_probs[act_id]['max']) {
+    out = "The probability of success is ";
+    out += format_act_prob_part(act_probs[act_id]['min']);
+    out += ", ";
+    out += format_act_prob_part(act_probs[act_id]['max']);
+    out += " or somewhere in between.";
+  }
+
+  return out;
 }
 
 /**************************************************************************
@@ -226,9 +255,12 @@ function create_act_sel_button(parent_id,
     "class" : 'act_sel_button',
     text    : format_action_label(action_id,
                                   action_probabilities),
+    title   : format_action_tooltip(action_id,
+                                    action_probabilities),
     click   : act_sel_click_function(parent_id,
                                      actor_unit_id, tgt_id, action_id,
-                                     action_probabilities) };
+                                     action_probabilities)
+  };
 
   /* The button is ready. */
   return button;

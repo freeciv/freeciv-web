@@ -99,12 +99,6 @@ function update_game_info_pregame()
     $("#pregame_settings_button").hide();
     game_info_html += "<p>";
     game_info_html += "<h2>Freeciv-Web LongTurn game</h2>-Each player plays one turn every day, each turn lasts 23 hours.<br>"
-    + "-To join the game, click the <b>Pick nation</b> button above. Then wait until the game begins. Check regularly, usually in some days.<br>"
-    + "-The game will start when 150 human players have joined the game.<br>"
-    + "-Ruleset: Longturn (which is the Civ2Civ3 ruleset with x2 movement). Aifill: 0. Timeout: 23 hours. <br>"
-    + "-You can play your turn once a day. The browser window can be closed and you can log in again later. Skipping some turns is okay.<br>"
-    + "-Check the <a href='http://forum.freeciv.org/f/viewforum.php?f=24' target='newwin'>Freeciv forum</a> if you have any questions!";
-    game_info_html += "</p>";
 
     if (!logged_in_with_password) {
       $("#pregame_page").hide();
@@ -271,7 +265,7 @@ function pick_nation(player_id)
                + "<div id='nation_legend'></div><div id='select_nation_flag'></div>";
 
   $("#pick_nation_dialog").html(nations_html);
-  $("#pick_nation_dialog").attr("title", "What Nation Will You Be?");
+  $("#pick_nation_dialog").attr("title", "What Nation Will " + pplayer['name'] + " Be Ruler Of?");
   $("#pick_nation_dialog").dialog({
 			bgiframe: true,
 			modal: true,
@@ -438,6 +432,7 @@ function submit_nation_choice()
                      "is_male" : true, /* FIXME */
                      "name" : leader_name,
                      "style" : style};
+  console.log(test_packet);
   send_request(JSON.stringify(test_packet));
   clearInterval(nation_select_id);
 

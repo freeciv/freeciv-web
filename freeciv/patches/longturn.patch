@@ -1,122 +1,115 @@
+ server/connecthand.c | 23 +++++++++++++++++++++--
+ server/settings.c    |  4 ++++
+ server/srv_main.c    | 12 ++++++++++--
+ server/srv_main.h    |  1 +
+ 4 files changed, 36 insertions(+), 4 deletions(-)
+
 diff --git a/server/connecthand.c b/server/connecthand.c
-index d74f178..5bb3204 100644
+index d74f178..5b55712 100644
 --- a/server/connecthand.c
 +++ b/server/connecthand.c
-@@ -539,6 +539,7 @@ void send_conn_info_remove(struct conn_list *src, struct conn_list *dest)
- **************************************************************************/
+@@ -251,6 +251,16 @@ void establish_new_connection(struct connection *pconn)
+     notify_conn(dest, NULL, E_CONNECTION, ftc_server,
+ 		_("You are logged in as '%s' connected to no player."),
+                 pconn->username);
++
++    if (is_longturn()) {
++      pplayer = find_uncontrolled_player();
++      if (pplayer) {
++        /* Make it human! */
++        set_as_human(pplayer);
++        connection_attach(pconn, pplayer, FALSE);
++      }
++    }
++
+   } else {
+     notify_conn(dest, NULL, E_CONNECTION, ftc_server,
+ 		_("You are logged in as '%s' connected to %s."),
+@@ -540,8 +550,14 @@ void send_conn_info_remove(struct conn_list *src, struct conn_list *dest)
  struct player *find_uncontrolled_player(void)
  {
-+  if (is_longturn()) return NULL;
    players_iterate(played) {
-     if (!played->is_connected && !played->was_created) {
-       return played;
-diff --git a/server/plrhand.c b/server/plrhand.c
-index 90fd4c7..3e70316 100644
---- a/server/plrhand.c
-+++ b/server/plrhand.c
-@@ -1663,6 +1663,8 @@ void server_remove_player(struct player *pplayer)
- {
-   const struct player_slot *pslot;
+-    if (!played->is_connected && !played->was_created) {
+-      return played;
++    if (!is_longturn()) {
++      if (!played->is_connected && !played->was_created) {
++        return played;
++      }
++    } else {
++      if (!played->is_connected && !played->was_created && is_ai(played)) {
++        return played;
++      }
+     }
+   } players_iterate_end;
  
-+  if (is_longturn() && NULL != pplayer->nation) return;
-+
-   fc_assert_ret(NULL != pplayer);
+@@ -615,6 +631,9 @@ static bool connection_attach_real(struct connection *pconn,
+       }
+       (void) aifill(game.info.aifill);
+     }
++    if (is_longturn()) {
++      server_player_set_name(pplayer, pconn->username);
++    }
  
-   /* save player slot */
-@@ -2429,7 +2431,7 @@ void fit_nationset_to_players(void)
- ****************************************************************************/
- void reset_all_start_commands(bool plrchange)
- {
--  if (S_S_INITIAL != server_state()) {
-+  if (S_S_INITIAL != server_state() || is_longturn()) {
-     return;
-   }
-   players_iterate(pplayer) {
+     if (game.server.auto_ai_toggle && !is_human(pplayer)) {
+       toggle_ai_player_direct(NULL, pplayer);
 diff --git a/server/settings.c b/server/settings.c
-index db41c41..67d83f2 100644
+index db41c41..e1378a6 100644
 --- a/server/settings.c
 +++ b/server/settings.c
-@@ -617,6 +617,8 @@ static void scorelog_action(const struct setting *pset)
- *************************************************************************/
- static void aifill_action(const struct setting *pset)
- {
-+  if (is_longturn()) *pset->integer.pvalue = 0;
-+
-   const char *msg = aifill(*pset->integer.pvalue);
-   if (msg) {
-     log_normal(_("Warning: aifill not met: %s."), msg);
-@@ -1051,6 +1053,10 @@ static bool timeout_callback(int value, struct connection *caller,
+@@ -1051,6 +1051,10 @@ static bool timeout_callback(int value, struct connection *caller,
      return FALSE;
    }
  
 +  if (is_longturn() && S_S_RUNNING == server_state()) {
 +    return FALSE;  // can't change timeout on LongTurn game.
 +  }
-+   
++
    if (value == -1 && game.server.unitwaittime != 0) {
      /* autogame only with 'unitwaittime' = 0 */
      settings_snprintf(reject_msg, reject_msg_len,
 diff --git a/server/srv_main.c b/server/srv_main.c
-index a4b0c03..881a912 100644
+index a4b0c03..e5f37ca 100644
 --- a/server/srv_main.c
 +++ b/server/srv_main.c
-@@ -330,6 +330,14 @@ bool game_was_started(void)
-   return (!game.info.is_new_game || S_S_INITIAL != server_state());
- }
+@@ -1119,7 +1119,7 @@ static void begin_phase(bool is_new_phase)
+     } phase_players_iterate_end;
  
+     log_debug("Aistartturn");
+-    ai_start_phase();
++    if (!is_longturn()) ai_start_phase();
+   } else {
+     phase_players_iterate(pplayer) {
+       if (is_ai(pplayer)) {
+@@ -1204,7 +1204,7 @@ static void end_phase(void)
+   } players_iterate_end;
+   phase_players_iterate(pplayer) {
+     auto_settlers_player(pplayer);
+-    if (is_ai(pplayer)) {
++    if (is_ai(pplayer) && !is_longturn()) {
+       CALL_PLR_AI_FUNC(last_activities, pplayer, pplayer);
+     }
+   } phase_players_iterate_end;
+@@ -3395,3 +3395,11 @@ static struct rgbcolor *mapimg_server_plrcolor_get(int i)
+ {
+   return playercolor_get(i);
+ }
++
 +/**************************************************************************
 + Is this a LongTurn game? 
 +**************************************************************************/
 +bool is_longturn(void)
 +{
-+  return (srvarg.port == 6003 || srvarg.port == 6004);
++  return (srvarg.port == 6003);
 +}
-+
- /****************************************************************************
-   Returns TRUE if any one game end condition is fulfilled, FALSE otherwise.
- 
 diff --git a/server/srv_main.h b/server/srv_main.h
-index 559bc8d..1cc794a 100644
+index 559bc8d..d2701e2 100644
 --- a/server/srv_main.h
 +++ b/server/srv_main.h
-@@ -100,6 +100,7 @@ void set_server_state(enum server_states newstate);
- void check_for_full_turn_done(void);
- bool check_for_game_over(void);
- bool game_was_started(void);
+@@ -93,6 +93,7 @@ void srv_init(void);
+ void srv_main(void);
+ void server_quit(void);
+ void save_game_auto(const char *save_reason, enum autosave_type type);
 +bool is_longturn(void);
  
- bool server_packet_input(struct connection *pconn, void *packet, int type);
- void start_game(void);
-diff --git a/server/stdinhand.c b/server/stdinhand.c
-index f0ebfe6..f1b759e 100644
---- a/server/stdinhand.c
-+++ b/server/stdinhand.c
-@@ -3627,6 +3627,8 @@ bool load_command(struct connection *caller, const char *filename, bool check,
-   char arg[MAX_LEN_PATH];
-   struct conn_list *global_observers;
- 
-+  if (is_longturn() && conn_list_size(game.est_connections) > 2) return FALSE;
-+
-   if (!filename || filename[0] == '\0') {
-     cmd_reply(CMD_LOAD, caller, C_FAIL, _("Usage:\n%s"),
-               command_synopsis(command_by_number(CMD_LOAD)));
-@@ -3815,6 +3817,8 @@ static bool set_rulesetdir(struct connection *caller, char *str, bool check,
-   char filename[512];
-   const char *pfilename;
- 
-+  if (is_longturn()) str = "longturn\0";
-+
-   if (NULL == str || '\0' == str[0]) {
-     cmd_reply(CMD_RULESETDIR, caller, C_SYNTAX,
-               _("You must provide a ruleset name. Use \"/show ruleset\" to "
-@@ -5793,6 +5797,10 @@ bool start_command(struct connection *caller, bool check, bool notify)
-       }
-     } players_iterate_end;
- 
-+    if (is_longturn() && game.server.min_players < 60) {
-+      game.server.min_players = 60; 
-+    }
-+
-     /* check min_players.
-      * Allow continuing of savegames where some of the original
-      * players have died */
+ enum server_states server_state(void);
+ void set_server_state(enum server_states newstate);

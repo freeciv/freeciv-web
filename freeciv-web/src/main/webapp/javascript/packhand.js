@@ -1460,3 +1460,8 @@ function handle_achievement_info(packet)
 {
   /* TODO: implement */
 }
+
+function handle_team_name_info(packet)
+{
+  /* TODO: implement */
+}

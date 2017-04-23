@@ -100,12 +100,6 @@ function update_game_info_pregame()
     game_info_html += "<p>";
     game_info_html += "<h2>Freeciv-Web LongTurn game</h2>-Each player plays one turn every day, each turn lasts 23 hours.<br>"
 
-    if (!logged_in_with_password) {
-      $("#pregame_page").hide();
-      swal("LongTurn requires that you create an account on Freeciv-web. Please reload the page and click new user account. Thank you.");
-      return;
-    }
-
   } else if ($.getUrlVar('action') == "multi") {
     game_info_html += "<p>";
     game_info_html += "<h2>Freeciv-Web Multiplayer game</h2>-You are now about to play a multiplayer game.<br>-Please wait until at least 2 players have joined the game, then click the start game button.";
@@ -1043,6 +1037,11 @@ function validate_username_callback()
    url: "/validate_user?userstring=" + check_username,
    success: function(data, textStatus, request){
       if (data == "user_does_not_exist") {
+        if (is_longturn) {
+          show_new_user_account_dialog();
+          return;
+        }
+
         if (validate_username()) {
           if (!is_touch_device()) $("#pregame_text_input").focus();
           $("#dialog").dialog('close');

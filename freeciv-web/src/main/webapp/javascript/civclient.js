@@ -234,7 +234,7 @@ function init_chatbox()
   $("#game_chatbox_panel").dialog({
 			bgiframe: true,
 			modal: false,
-			width: "25%",
+			width: "27%",
 			height: "auto",
 			resizable: true,
 			dialogClass: 'chatbox_dialog no-close',
@@ -281,7 +281,7 @@ function add_chatbox_text(text)
       text = text.replace(/#FFFFFF/g, '#000000');
     }
 
-    if (text != null && (text.indexOf("Lost connection") != -1 || text.indexOf("waiting on") != -1 || text.indexOf("Not enough") != -1 || text.indexOf("has been removed") != -1 || text.indexOf("has connected") != -1)) text = text.replace(/#000000/g, "#666666").replace(/#FFFFFF/g, "#666666");
+    if (is_longturn() && text != null && (text.indexOf("waiting on") != -1 || text.indexOf("Lost connection") != -1 || text.indexOf("Not enough") != -1 || text.indexOf("has been removed") != -1 || text.indexOf("has connected") != -1)) return;
     if (text != null && text.indexOf("Year:") != -1) text = "<hr style='border-color: #555555;'>" + text;
 
     chatbox_text += text + "<br>";

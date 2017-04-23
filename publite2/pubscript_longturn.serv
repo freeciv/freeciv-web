@@ -28,5 +28,7 @@ set ec_info=enabled
 set ec_max_size=5000
 set ec_turns=9
 metamessage LongTurn Game | 1 turn per day | 150 players | Join now!
-start
-cmdlevel basic
+
+# Run these two commands before starting a LongTurn game.
+#start
+#cmdlevel basic

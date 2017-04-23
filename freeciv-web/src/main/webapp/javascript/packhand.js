@@ -339,6 +339,8 @@ function handle_player_info(packet)
   update_player_info_pregame();
 
   if (is_tech_tree_init && tech_dialog_active) update_tech_screen();
+
+  assign_nation_color(packet['nation']);
 }
 
 /* 100% complete */
@@ -1088,7 +1090,6 @@ function handle_ruleset_nation_groups(packet)
 function handle_ruleset_nation(packet)
 {
   nations[packet['id']] = packet;
-  assign_nation_color(packet['id']);
 }
 
 function handle_ruleset_city(packet)

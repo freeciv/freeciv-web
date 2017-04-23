@@ -1500,28 +1500,6 @@ function assign_nation_color(nation_id)
 
 }
 
-/****************************************************************************
- TODO: not in use
-****************************************************************************/
-function deduplicate_player_colors()
-{
-  for (var player_id in players) {
-    var cplayer = players[player_id];
-    var cnation = nations[cplayer['nation']];
-    var pcolor = cnation['color'];
-    for (var splayer_id in players) {
-      var splayer = players[splayer_id];
-      var snation = nations[splayer['nation']];
-      var scolor = snation['color'];
-      if (splayer_id != player_id && is_color_collision(pcolor, scolor)) {
-        cnation['color'] = "rgb(" + get_random_int(80,255)  + "," + get_random_int(80,200) + ","
-                          + get_random_int(80,200) + ")";
-	break;
-      }
-    }
-  }
-  palette = generate_palette();
-}
 
 /****************************************************************************
 ...

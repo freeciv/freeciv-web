@@ -3,9 +3,9 @@ rulesetdir multiplayer
 set topology WRAPX
 set nationset all
 set compresstype xs
-set maxplayers 150
+set maxplayers 240
 set startunits=ccccwwwwwwx
-set aifill 150
+set aifill 240
 set allowtake=""
 set autotoggle false
 set timeout 82800
@@ -17,7 +17,7 @@ set maxconnectionsperhost 256
 set threaded_save enabled
 set scorelog enabled
 set mapsize FULLSIZE
-set size 11
+set size 13
 set landm 70
 set minp 0
 set generator RANDOM
@@ -27,7 +27,7 @@ set ec_chat=enabled
 set ec_info=enabled 
 set ec_max_size=5000
 set ec_turns=9
-metamessage LongTurn Game | 1 turn per day | 150 players | Join now!
+metamessage LongTurn Game | 1 turn per day | 240 players | Join now!
 
 # Run these two commands before starting a LongTurn game.
 #start

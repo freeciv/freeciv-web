@@ -99,6 +99,7 @@ function update_game_info_pregame()
     $("#pregame_settings_button").hide();
     game_info_html += "<p>";
     game_info_html += "<h2>Freeciv-Web LongTurn game</h2>-Each player plays one turn every day, each turn lasts 23 hours.<br>"
+                   + "As a game admin, now run these two commands:  <br>start<br>  cmdlevel basic<br>";
 
   } else if ($.getUrlVar('action') == "multi") {
     game_info_html += "<p>";
@@ -723,11 +724,6 @@ function pregame_settings()
   $('#ruleset').change(function() {
     change_ruleset($('#ruleset').val());
   });
-
-  if (is_longturn()) {
-    $('#password').hide(); // no password for LongTurn.
-    $('#ruleset').hide(); // no changing ruleset for LongTurn.
-  }
 
   $('#password').change(function() {
 

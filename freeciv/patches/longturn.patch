@@ -1,11 +1,5 @@
- server/connecthand.c | 23 +++++++++++++++++++++--
- server/settings.c    |  4 ++++
- server/srv_main.c    | 12 ++++++++++--
- server/srv_main.h    |  1 +
- 4 files changed, 36 insertions(+), 4 deletions(-)
-
 diff --git a/server/connecthand.c b/server/connecthand.c
-index d74f178..5b55712 100644
+index d74f178..76e08e2 100644
 --- a/server/connecthand.c
 +++ b/server/connecthand.c
 @@ -251,6 +251,16 @@ void establish_new_connection(struct connection *pconn)
@@ -36,7 +30,7 @@ index d74f178..5b55712 100644
 +        return played;
 +      }
 +    } else {
-+      if (!played->is_connected && !played->was_created && is_ai(played)) {
++      if (!played->is_connected && !played->was_created && played->unassigned_user && played->is_alive) {
 +        return played;
 +      }
      }
@@ -68,28 +62,26 @@ index db41c41..e1378a6 100644
      /* autogame only with 'unitwaittime' = 0 */
      settings_snprintf(reject_msg, reject_msg_len,
 diff --git a/server/srv_main.c b/server/srv_main.c
-index a4b0c03..e5f37ca 100644
+index d2fbf65..9201d6e 100644
 --- a/server/srv_main.c
 +++ b/server/srv_main.c
-@@ -1119,7 +1119,7 @@ static void begin_phase(bool is_new_phase)
-     } phase_players_iterate_end;
- 
-     log_debug("Aistartturn");
--    ai_start_phase();
-+    if (!is_longturn()) ai_start_phase();
-   } else {
-     phase_players_iterate(pplayer) {
-       if (is_ai(pplayer)) {
-@@ -1204,7 +1204,7 @@ static void end_phase(void)
-   } players_iterate_end;
-   phase_players_iterate(pplayer) {
-     auto_settlers_player(pplayer);
--    if (is_ai(pplayer)) {
-+    if (is_ai(pplayer) && !is_longturn()) {
-       CALL_PLR_AI_FUNC(last_activities, pplayer, pplayer);
+@@ -3095,6 +3095,15 @@ static void srv_ready(void)
+         map_show_all(pplayer);
+       } players_iterate_end;
      }
-   } phase_players_iterate_end;
-@@ -3395,3 +3395,11 @@ static struct rgbcolor *mapimg_server_plrcolor_get(int i)
++
++    if (is_longturn()) {
++      players_iterate(pplayer) {
++        if (is_ai(pplayer)) {
++          set_as_human(pplayer);
++	  server_player_set_name(pplayer, "New Available Player ");
++	}
++      } players_iterate_end;	    
++    }
+   }
+ 
+   if (game.scenario.is_scenario && game.scenario.players) {
+@@ -3443,3 +3452,11 @@ static struct rgbcolor *mapimg_server_plrcolor_get(int i)
  {
    return playercolor_get(i);
  }

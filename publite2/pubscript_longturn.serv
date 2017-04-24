@@ -17,7 +17,7 @@ set maxconnectionsperhost 256
 set threaded_save enabled
 set scorelog enabled
 set mapsize FULLSIZE
-set size 13
+set size 14
 set landm 70
 set minp 0
 set generator RANDOM

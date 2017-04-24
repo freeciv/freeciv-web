@@ -26,6 +26,7 @@ var nation_select_id = -1;
 var metamessage_changed = false;
 var logged_in_with_password = false;
 var antialiasing_setting = true;
+var update_player_info_pregame_queued = false;
 
 /****************************************************************************
   ...
@@ -99,7 +100,7 @@ function update_game_info_pregame()
     $("#pregame_settings_button").hide();
     game_info_html += "<p>";
     game_info_html += "<h2>Freeciv-Web LongTurn game</h2>-Each player plays one turn every day, each turn lasts 23 hours.<br>"
-                   + "As a game admin, now run these two commands:  <br>start<br>  cmdlevel basic<br>";
+                   + "As a game admin, now run these two commands:  <br>/cmdlevel basic<br>/start<br>";
 
   } else if ($.getUrlVar('action') == "multi") {
     game_info_html += "<p>";
@@ -114,9 +115,21 @@ function update_game_info_pregame()
 }
 
 /****************************************************************************
-  ...
+  Shows the pick nation dialog. This can be called multiple times, but will
+  only call update_player_info_pregame_real once in a short timespan.
 ****************************************************************************/
 function update_player_info_pregame()
+{
+  if (update_player_info_pregame_queued) return;
+  setTimeout(update_player_info_pregame_real, 1000);
+  update_player_info_pregame_queued = true;
+
+}
+
+/****************************************************************************
+  Shows the pick nation dialog.
+****************************************************************************/
+function update_player_info_pregame_real()
 {
   var id;
   if (C_S_PREPARING == client_state()) {
@@ -187,7 +200,7 @@ function update_player_info_pregame()
 
     if (!is_longturn()) {
       $("#pregame_player_list").contextMenu({
-        selector: '.pregame_player_name', 
+        selector: '.pregame_player_name',
         callback: function(key, options) {
             var name = $(this).attr('name');
             if (name != null && name.indexOf(" ") != -1) name = name.split(" ")[0];
@@ -208,9 +221,9 @@ function update_player_info_pregame()
               send_message("/normal " + name);
             } else if (key == "hard") {
               send_message("/hard " + name);
-            }  
+            }
         },
-        items: pregame_context_items 
+        items: pregame_context_items
       });
     }
 
@@ -221,10 +234,8 @@ function update_player_info_pregame()
     } else {
         $("#start_game_button").button( "option", "disabled", false);
     }
-
   }
-
-
+  update_player_info_pregame_queued = false;
 }
 
 
@@ -674,7 +685,9 @@ function pregame_settings()
   $(id).dialog('open');
 
   $('#aifill').change(function() {
-    send_message("/set aifill " + $('#aifill').val());
+    if (parseInt($('#aifill').val()) <= 20) {
+      send_message("/set aifill " + $('#aifill').val());
+    }
   });
 
   $('#metamessage').change(function() {

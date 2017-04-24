@@ -469,7 +469,7 @@ function update_timeout()
         $("#turn_done_button").button("option", "label", "Turn " + remaining);
         $("#turn_done_button .ui-button-text").css("padding", "3px");
       } else {
-        $("#turn_done_button").button("option", "label", "Turn Done (" + remaining + "s)");
+        $("#turn_done_button").button("option", "label", "Turn Done (" + seconds_to_human_time(remaining) + ")");
       }
       if (!is_touch_device()) $("#turn_done_button").tooltip({ disabled: false });
     }

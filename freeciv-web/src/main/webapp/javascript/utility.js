@@ -166,3 +166,16 @@ function is_right_mouse_selection_supported()
   }
 
 }
+
+/**************************************************************************
+...
+**************************************************************************/
+function seconds_to_human_time(input_seconds) {
+  if (input_seconds <= 0) return 0 + 's';
+  var hours   = Math.floor(input_seconds / 3600);
+  var minutes = Math.floor((input_seconds - (hours * 3600)) / 60);
+  var seconds = input_seconds - (hours * 3600) - (minutes * 60);
+  if (hours > 0) return hours+'h '+minutes+'m '+seconds + 's';
+  if (hours == 0 && minutes > 0) return minutes+'m '+seconds + 's';
+  if (hours == 0 && minutes == 0) return seconds + 's';
+}

@@ -458,8 +458,8 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 }
 
 .chatbox_dialog {
-  background: rgba(0,0,0,0.6);
-  background-color: rgba(0,0,0, 0.6);
+  background: rgba(0,0,0,0.75);
+  background-color: rgba(0,0,0, 0.75);
 }
 
 #ui-dialog-title-game_chatbox_panel {

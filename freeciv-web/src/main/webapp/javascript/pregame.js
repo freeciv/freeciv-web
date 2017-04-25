@@ -100,7 +100,7 @@ function update_game_info_pregame()
     $("#pregame_settings_button").hide();
     game_info_html += "<p>";
     game_info_html += "<h2>Freeciv-Web LongTurn game</h2>-Each player plays one turn every day, each turn lasts 23 hours.<br>"
-                   + "As a game admin, now run these two commands:  <br>/cmdlevel basic<br>/start<br>";
+                   + "As a game admin, now run these commands:  <br>/start<br>";
 
   } else if ($.getUrlVar('action') == "multi") {
     game_info_html += "<p>";
@@ -501,7 +501,7 @@ function pregame_settings()
           "<tr class='not_pbem' title='Creates a private game where players need to know this password in order to join.'><td>Password for private game:</td>" +
 	  "<td><input type='text' name='password' id='password' size='10' length='10'></td></tr>" +
 	  "<tr title='Map size (in thousands of tiles)'><td>Map size:</td>" +
-	  "<td><input type='number' name='mapsize' id='mapsize' size='4' length='3' min='1' max='18' step='1'></td></tr>" +
+	  "<td><input type='number' name='mapsize' id='mapsize' size='4' length='3' min='1' max='20' step='1'></td></tr>" +
 	  "<tr class='not_pbem' title='This setting sets the skill-level of the AI players'><td>AI skill level:</td>" +
 	  "<td><select name='skill_level' id='skill_level'>" +
 	      "<option value='1'>Handicapped</option>" +

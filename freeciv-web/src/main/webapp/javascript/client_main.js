@@ -296,6 +296,7 @@ function show_endgame_dialog()
 
   $("#dialog").dialog('open');
   $("#game_text_input").blur();
+  $("#dialog").css("max-height", "500px");
 
 }
 

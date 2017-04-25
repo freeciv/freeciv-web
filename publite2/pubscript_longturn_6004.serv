@@ -1,0 +1,34 @@
+#LongTurn game #2
+#This LongTurn game has not started yet.
+
+cmdlevel ctrl first
+rulesetdir multiplayer 
+set topology WRAPX
+set nationset all
+set compresstype xs
+set maxplayers 250
+set startunits=ccccwwwwwwx
+set aifill 250
+set allowtake=""
+set autotoggle false
+set timeout 82800
+set netwait 15
+set nettimeout 40
+set pingtime 30
+set pingtimeout 120
+set maxconnectionsperhost 256
+set threaded_save enabled
+set scorelog enabled
+set mapsize FULLSIZE
+set size 20
+set landm 85
+set minp 0
+set generator RANDOM
+set saveturns=1
+metaconnection persistent
+set ec_chat=enabled
+set ec_info=enabled 
+set ec_max_size=5000
+set ec_turns=9
+metamessage LongTurn Game #2 | 1 turn per day | 250 players | Join now!
+

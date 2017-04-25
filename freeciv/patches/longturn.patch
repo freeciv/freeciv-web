@@ -46,21 +46,6 @@ index d74f178..76e08e2 100644
  
      if (game.server.auto_ai_toggle && !is_human(pplayer)) {
        toggle_ai_player_direct(NULL, pplayer);
-diff --git a/server/settings.c b/server/settings.c
-index db41c41..e1378a6 100644
---- a/server/settings.c
-+++ b/server/settings.c
-@@ -1051,6 +1051,10 @@ static bool timeout_callback(int value, struct connection *caller,
-     return FALSE;
-   }
- 
-+  if (is_longturn() && S_S_RUNNING == server_state()) {
-+    return FALSE;  // can't change timeout on LongTurn game.
-+  }
-+
-   if (value == -1 && game.server.unitwaittime != 0) {
-     /* autogame only with 'unitwaittime' = 0 */
-     settings_snprintf(reject_msg, reject_msg_len,
 diff --git a/server/srv_main.c b/server/srv_main.c
 index d2fbf65..9201d6e 100644
 --- a/server/srv_main.c

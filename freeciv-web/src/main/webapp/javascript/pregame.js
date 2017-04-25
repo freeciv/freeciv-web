@@ -99,8 +99,10 @@ function update_game_info_pregame()
     $("#load_game_button").hide();
     $("#pregame_settings_button").hide();
     game_info_html += "<p>";
-    game_info_html += "<h2>Freeciv-Web LongTurn game</h2>-Each player plays one turn every day, each turn lasts 23 hours.<br>"
-                   + "As a game admin, now run these commands:  <br>/start<br>";
+    game_info_html += "<h2>Freeciv-Web LongTurn game</h2>-Each player plays one turn every day, each turn lasts 23 hours.<br>"+
+    "To start a new LongTurn game:   <br>/start<br><br><br>" +
+    "To load a LongTurn savegame:  <br>/load ____ <br>/start<br><br>";
+
 
   } else if ($.getUrlVar('action') == "multi") {
     game_info_html += "<p>";

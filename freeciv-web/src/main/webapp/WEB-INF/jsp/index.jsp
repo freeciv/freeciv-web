@@ -148,49 +148,30 @@
 		</div> <!-- end jumbotron -->
 
 		<div id="game-launcher" class="row">
-				<div class="col-md-4">
-					<div class="game-type">
-						<div class="header">
-							<span class="name"><i class="fa fa-graduation-cap"></i> <fmt:message key="index-game-launcher-beginner" /></span>
-						</div>
-						<c:if test="${default_lang}">
-							<div class="features">
-								First time player?<br>
-								This tutorial was made for you.<br>
-								<a href="https://www.youtube.com/watch?v=K6xBi2JWyZU">Quick start video</a><br>
-								<a href="https://freeciv.wikia.com/wiki/The_Art_of_Freeciv-web">Art of Freeciv-web</a>
-							</div>
-						</c:if>
-						<a href="/webclient/?action=load&amp;load=tutorial&amp;scenario=true" class="btn"><i class="fa fa-life-ring"></i> <fmt:message key="index-game-launcher-tutorial"/></a>
-					</div>
 
-					<div class="game-type top-buffer-3">
-						<div class="header">
-							<span class="name"><i class="fa fa-cloud-upload"></i> <fmt:message key="index-game-launcher-load-game"/></span>
-						</div>
-						<a href="/webclient/?action=load" class="btn"><i class="fa fa-save"></i> <fmt:message key="index-game-launcher-load"/></a>
-					</div>
-				</div>
-				<div class="col-md-4">
+				<div class="col-md-6">
 					<div class="game-type">
 						<div class="header">
 							<span class="name"><i class="fa fa-user"></i> <fmt:message key="index-game-launcher-singleplayer" /></span>
 						</div>
 						<c:if test="${default_lang}">
 							<div class="features">
-								Play against the Freeciv AI
+								Play against the Freeciv AI with 2D HTML5 graphics
 							</div>
 						</c:if>
-						<div class="row hidden-xs hidden-sm">
-							<div class="col-md-6">       
-								<a id="single-button" href="/webclient/?action=new" class="btn small pull-right"><i class="fa fa-flag"></i> <fmt:message key="index-game-launcher-2d"/></a>
+						<a id="single-button" href="/webclient/?action=new" class="btn"><i class="fa fa-flag"></i> <fmt:message key="index-game-launcher-2d"/></a>
+
+						<c:if test="${default_lang}">
+							<div class="features">
+								Play against the Freeciv AI with 3D WebGL graphics using the Three.js 3D engine
 							</div>
-							<div class="col-md-6"> 
-								<a href="/webclient/?action=new&renderer=webgl" class="btn small pull-left"><i class="fa fa-cube"></i> <fmt:message key="index-game-launcher-3d"/></a>
-							</div>
-						</div>
+						</c:if>
+						<a href="/webclient/?action=new&renderer=webgl" class="btn"><i class="fa fa-cube"></i> <fmt:message key="index-game-launcher-3d"/></a>
+
+
 						<a href="/webclient/?action=new" class="btn hidden-md hidden-lg"><i class="fa fa-flag"></i> <fmt:message key="index-game-launcher-random-map-2d"/></a>
 						<a href="/webclient/?action=new&renderer=webgl" class="btn hidden-md hidden-lg"><i class="fa fa-cube"></i> <fmt:message key="index-game-launcher-random-map-3d"/></a>
+
 						<c:if test="${default_lang}">
 							<div class="features">
 								Start on a scenario map, such as <br> World map, America, Italy or Japan.
@@ -205,7 +186,7 @@
 						<a href="/freeciv-earth/" class="btn"><i class="fa fa-globe"></i> <fmt:message key="index-game-launcher-real-earth"/></a>
 					</div>
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-6">
 					<div class="game-type">
 						<div class="header">
 							<span class="name"><i class="fa fa-users"></i> <fmt:message key="index-game-launcher-multiplayer"/></span>
@@ -215,7 +196,13 @@
 								Start or join a game with multiple human or AI players.
 							</div>
 						</c:if>
-						<a href="/game/list?v=multiplayer" class="btn"><i class="fa fa-users"></i> <fmt:message key="index-game-launcher-random-map"/></a>
+						<a href="/game/list?v=multiplayer" class="btn"><i class="fa fa-users"></i> <fmt:message key="index-game-launcher-multiplayer"/></a>
+						<c:if test="${default_lang}">
+							<div class="features">
+								Play a LongTurn game, where 250 human players play one turn every day.
+							</div>
+						</c:if>
+						<a href="/game/list?v=multiplayer" class="btn"><i class="fa fa-users"></i><i class="fa fa-clock-o"></i> <fmt:message key="index-game-launcher-longturn"/></a>
 						<c:if test="${default_lang}">
 							<div class="features">
 								Start a play-by-email game where you get an e-mail <br> when it is your turn to play.

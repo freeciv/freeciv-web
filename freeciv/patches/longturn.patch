@@ -76,7 +76,7 @@ index d2fbf65..9201d6e 100644
 +**************************************************************************/
 +bool is_longturn(void)
 +{
-+  return (srvarg.port == 6003);
++  return (srvarg.port == 6003 || srvarg.port == 6004);
 +}
 diff --git a/server/srv_main.h b/server/srv_main.h
 index 559bc8d..d2701e2 100644

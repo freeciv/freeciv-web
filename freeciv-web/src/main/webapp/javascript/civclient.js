@@ -730,5 +730,5 @@ function switch_renderer()
 function is_longturn()
 {
   return (civserverport == 6003 || $.getUrlVar('civserverport') == "6003"
-          civserverport == 6004 || $.getUrlVar('civserverport') == "6004");
+          || civserverport == 6004 || $.getUrlVar('civserverport') == "6004");
 }

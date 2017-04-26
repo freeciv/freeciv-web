@@ -136,7 +136,7 @@
 
 		<div class="jumbotron">
 			<div class="row">
-				<img src="/static/images/frontpage-jumbotron.png" alt="" class="hidden-xs hidden-sm">
+				<img src="/static/images/frontpage-jumbotron.png" alt="" style="width: 100%;">
 			</div>
 			<div class="container-fluid">
 				<div class="row top-buffer-3">
@@ -163,14 +163,10 @@
 
 						<c:if test="${default_lang}">
 							<div class="features">
-								Play against the Freeciv AI with 3D WebGL graphics using the Three.js 3D engine
+								Play against the Freeciv AI with 3D WebGL<br>graphics using the Three.js 3D engine
 							</div>
 						</c:if>
 						<a href="/webclient/?action=new&renderer=webgl" class="btn"><i class="fa fa-cube"></i> <fmt:message key="index-game-launcher-3d"/></a>
-
-
-						<a href="/webclient/?action=new" class="btn hidden-md hidden-lg"><i class="fa fa-flag"></i> <fmt:message key="index-game-launcher-random-map-2d"/></a>
-						<a href="/webclient/?action=new&renderer=webgl" class="btn hidden-md hidden-lg"><i class="fa fa-cube"></i> <fmt:message key="index-game-launcher-random-map-3d"/></a>
 
 						<c:if test="${default_lang}">
 							<div class="features">
@@ -199,7 +195,7 @@
 						<a href="/game/list?v=multiplayer" class="btn"><i class="fa fa-users"></i> <fmt:message key="index-game-launcher-multiplayer"/></a>
 						<c:if test="${default_lang}">
 							<div class="features">
-								Play a LongTurn game, where 250 human players play one turn every day.
+								Play a LongTurn game, where 250 human <br>players play one turn every day.
 							</div>
 						</c:if>
 						<a href="/game/list?v=multiplayer" class="btn"><i class="fa fa-users"></i><i class="fa fa-clock-o"></i> <fmt:message key="index-game-launcher-longturn"/></a>

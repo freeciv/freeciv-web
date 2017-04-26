@@ -154,9 +154,6 @@ function control_init()
   });
 
   $(window).on('unload', function(){
-    if (!is_longturn() && !is_pbem()) {
-      send_surrender_game();
-    }
     network_stop();
   });
 

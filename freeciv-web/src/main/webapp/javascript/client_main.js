@@ -66,12 +66,9 @@ function set_client_state(newstate)
         init_webgl_mapview();
       }
 
-      if (observing || $.getUrlVar('action') == "multi") {
-        var ptile = map_pos_to_tile(15,15);
-        if (ptile != null) {
-          center_tile_mapcanvas(ptile);
-          advance_unit_focus();
-        }
+      if (observing || $.getUrlVar('action') == "multi" || is_longturn()) {
+        center_on_any_city();
+        advance_unit_focus();
       }
 
       break;

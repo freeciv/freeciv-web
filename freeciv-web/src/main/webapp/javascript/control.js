@@ -2366,3 +2366,17 @@ function popit_req(ptile)
                 "loc" : ptile['index'], "focus_unit": focus_unit_id};
   send_request(JSON.stringify(packet));
 }
+
+
+/**************************************************************************
+   find any city to focus on.
+**************************************************************************/
+function center_on_any_city()
+{
+  for (var city_id in cities) {
+    var pcity = cities[city_id];
+    center_tile_mapcanvas(city_tile(pcity));
+    return;
+  }
+
+}

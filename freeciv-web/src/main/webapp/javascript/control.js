@@ -363,6 +363,11 @@ function check_text_input(event,chatboxtextarea) {
     $(chatboxtextarea).val('');
     if (!is_touch_device()) $(chatboxtextarea).focus();
     keyboard_input = true;
+
+    if (message.length >= 4 && message === message.toUpperCase()) {
+      return; //disallow all uppercase messages.
+    }
+
     send_message(message);
     $("#game_text_input").blur();
     return false;

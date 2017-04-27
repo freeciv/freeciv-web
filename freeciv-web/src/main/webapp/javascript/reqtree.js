@@ -239,13 +239,13 @@ var reqtree_civ2civ3 = {
 "54": {"x":917, "y":261}, // Monotheism
 "44": {"x":917, "y":343}, // Magnetism
 "8": {"x":917, "y":581}, // Bridge Building
-"29": {"x":917, "y":615}, // Feudalism
+"29": {"x":917, "y":635}, // Feudalism
 "85": {"x":1250, "y":51}, // University
 "7": {"x":1250, "y":162}, // Banking
 "82": {"x":1250, "y":244}, // Theology
 "60": {"x":1250, "y":380}, // Physics
-"49": {"x":1250, "y":414}, // Medicine
-"37": {"x":1250, "y":448}, // Invention
+"49": {"x":1250, "y":435}, // Medicine
+"37": {"x":1250, "y":492}, // Invention
 "12": {"x":1250, "y":662}, // Chivalry
 "22": {"x":1522, "y":79}, // Economics
 "83": {"x":1522, "y":173}, // Theory of Gravity

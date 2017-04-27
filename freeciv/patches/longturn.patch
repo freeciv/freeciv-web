@@ -1,8 +1,8 @@
 diff --git a/server/connecthand.c b/server/connecthand.c
-index d74f178..76e08e2 100644
+index d74f178..d76f8c3 100644
 --- a/server/connecthand.c
 +++ b/server/connecthand.c
-@@ -251,6 +251,16 @@ void establish_new_connection(struct connection *pconn)
+@@ -251,6 +251,20 @@ void establish_new_connection(struct connection *pconn)
      notify_conn(dest, NULL, E_CONNECTION, ftc_server,
  		_("You are logged in as '%s' connected to no player."),
                  pconn->username);
@@ -12,14 +12,18 @@ index d74f178..76e08e2 100644
 +      if (pplayer) {
 +        /* Make it human! */
 +        set_as_human(pplayer);
++        pplayer->economic.gold += game.info.turn * 5;
 +        connection_attach(pconn, pplayer, FALSE);
++      } else {
++        notify_conn(dest, NULL, E_CONNECTION, ftc_server,
++           _("Unable to join LongTurn game. The game is probably full."));
 +      }
 +    }
 +
    } else {
      notify_conn(dest, NULL, E_CONNECTION, ftc_server,
  		_("You are logged in as '%s' connected to %s."),
-@@ -540,8 +550,14 @@ void send_conn_info_remove(struct conn_list *src, struct conn_list *dest)
+@@ -540,8 +554,15 @@ void send_conn_info_remove(struct conn_list *src, struct conn_list *dest)
  struct player *find_uncontrolled_player(void)
  {
    players_iterate(played) {
@@ -30,13 +34,14 @@ index d74f178..76e08e2 100644
 +        return played;
 +      }
 +    } else {
-+      if (!played->is_connected && !played->was_created && played->unassigned_user && played->is_alive) {
++      if ((!played->is_connected && !played->was_created && played->unassigned_user && played->is_alive) 
++          || (played->is_alive && played->nturns_idle > 12 )) {
 +        return played;
 +      }
      }
    } players_iterate_end;
  
-@@ -615,6 +631,9 @@ static bool connection_attach_real(struct connection *pconn,
+@@ -615,6 +636,9 @@ static bool connection_attach_real(struct connection *pconn,
        }
        (void) aifill(game.info.aifill);
      }
@@ -47,7 +52,7 @@ index d74f178..76e08e2 100644
      if (game.server.auto_ai_toggle && !is_human(pplayer)) {
        toggle_ai_player_direct(NULL, pplayer);
 diff --git a/server/srv_main.c b/server/srv_main.c
-index d2fbf65..9201d6e 100644
+index d2fbf65..18af896 100644
 --- a/server/srv_main.c
 +++ b/server/srv_main.c
 @@ -3095,6 +3095,15 @@ static void srv_ready(void)

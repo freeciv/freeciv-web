@@ -364,7 +364,7 @@ button {
 
 #city_present_units, #city_supported_units {
   float: left;
-  height: 90px; 
+  height: 105px;
   overflow: auto; 
   background:  url("/images/bg-dark.jpg") repeat scroll 0 0 ; 
   border: 1px solid #444444;
@@ -375,7 +375,7 @@ button {
 
 #city_improvements {
   float: left;
-  height: 90px; 
+  height: 105px;
   overflow: auto; 
   background: url("/images/bg-dark.jpg") repeat scroll 0 0 ; 
   border: 1px solid #444444;

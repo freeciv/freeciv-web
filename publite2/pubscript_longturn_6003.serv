@@ -19,8 +19,10 @@ set maxconnectionsperhost 256
 set threaded_save enabled
 set scorelog enabled
 set mapsize FULLSIZE
-set size 20
-set landm 85
+set size 30
+set landm 79
+set topology=
+set dispersion=1
 set minp 0
 set generator RANDOM
 set saveturns=1
@@ -29,6 +31,6 @@ set ec_chat=enabled
 set ec_info=enabled 
 set ec_max_size=5000
 set ec_turns=9
-metamessage LongTurn Game #1 | 1 turn per day | 150 players | Join now!
+metamessage LongTurn Game #1 | 1 turn per day | 250 players | Join now!
 
 

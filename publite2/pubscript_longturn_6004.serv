@@ -24,6 +24,10 @@ set size 30
 set topology=
 set landm 79
 set dispersion=1
+
+set diplomacy=HUMAN
+set contactturns=0
+
 set minp 0
 set generator RANDOM
 set saveturns=1

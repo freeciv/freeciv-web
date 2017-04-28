@@ -198,8 +198,14 @@ function init_common_intro_dialog() {
                   "participate in a multiplayer game. You can customize the game " +
                   "settings, and wait for the minimum number of players before " +
                   "the game can start. ";
-    if (is_longturn()) msg += "<br><br>This is a LongTurn multiplayer game. It requires that you log in with an account."
-      +" Please create a new account if you don't have an account.<br><br>"
+    if (is_longturn()) msg = "<br><br>This is a LongTurn game, which is a Freeciv multiplayer game "+
+      "where the turns are about 23 hours each, so one logs in once per day to do their turn. This format allows for more players to "+
+      "play at once, more time to strategize, more time to coordinate with other players, and less rushing to get things done, which can "+
+      "occur in a standard multi-player Freeciv game. It takes a lot longer to play a game, about 2 to 6 months, but you can play it just a "+
+      "little bit every day. If you are not playing for 12 days, then someone else can take over your player. <br><br> "+
+      "Joining this game requires an account, so please create one if you don't have one already.<br><br>Please only join the LongTurn game if you are "+
+      "interested in playing one turn every day."
+      +" <br><br>"
     msg += "Please enter your name: "
     show_intro_dialog("Welcome to Freeciv-web", msg);
   } else {

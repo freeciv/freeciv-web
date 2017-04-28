@@ -150,18 +150,18 @@ var reqtree_multiplayer = {
 "86": {"x":1169, "y":182}, // University
 "38": {"x":1169, "y":328}, // Invention
 "61": {"x":1169, "y":410}, // Physics
-"55": {"x":1169, "y":444}, // Monotheism
+"55": {"x":1169, "y":464}, // Monotheism
 "12": {"x":1169, "y":630}, // Chivalry
 "22": {"x":1502, "y":20}, // Economics
 "11": {"x":1502, "y":110}, // Chemistry
-"21": {"x":1502, "y":142}, // Democracy
+"21": {"x":1502, "y":165}, // Democracy
 "84": {"x":1502, "y":222}, // Theory of Gravity
 "76": {"x":1502, "y":322}, // Steam Engine
 "72": {"x":1502, "y":402}, // Sanitation
 "35": {"x":1502, "y":482}, // Gunpowder
 "45": {"x":1502, "y":562}, // Magnetism
 "83": {"x":1502, "y":642}, // Theology
-"5": {"x":1835, "y":207}, // Atomic Theory
+"5": {"x":1835, "y":180}, // Atomic Theory
 "28": {"x":1835, "y":241}, // Explosives
 "51": {"x":1835, "y":374}, // Metallurgy
 "66": {"x":1835, "y":471}, // Railroad

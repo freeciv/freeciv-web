@@ -134,6 +134,22 @@ function init_tech_screen()
     tech_canvas_ctx.mozImageSmoothingEnabled = true;
   }
 
+  var max_width = 0;
+  var max_height = 0;
+  for (var tech_id in techs) {
+    var ptech = techs[tech_id];
+    if (!(tech_id+'' in reqtree) || reqtree[tech_id+''] == null) {
+      continue;
+    }
+    var x = reqtree[tech_id+'']['x'];
+    var y = reqtree[tech_id+'']['y'];
+    if (x > max_width) max_width = x;
+    if (y > max_height) max_height = y;
+  }
+
+  tech_canvas.width = (max_width + tech_item_width) * tech_xscale;
+  tech_canvas.height = max_height + tech_item_height;
+
   if (is_small_screen()) {
     tech_canvas.width = Math.floor(tech_canvas.width * 0.6);
     tech_canvas.height = Math.floor(tech_canvas.height * 0.6);

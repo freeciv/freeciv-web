@@ -206,6 +206,13 @@ function show_new_game_message()
       "Click the end turn button to end your turn and let the next opponent play.");
     setTimeout(check_queued_tech_gained_dialog, 2500);
 
+  } else if (is_longturn()) {
+    add_chatbox_text("Welcome " + username + "! This is a LongTurn game, where you play one " +
+    "turn every day. Click the Turn Done button when you are done with your turn. To play your next " +
+    "turn in this LongTurn game, you can bookmark this page and use that link to play your next turn. "+
+    "You can also find this game by going to play.freeciv.org and clicking on the LongTurn button. "+
+    "Good luck, have fun and see you again tomorrow!");
+
   } else if (is_small_screen()) {
     add_chatbox_text("Welcome " + username + "! You lead a great civilization. Your task is to conquer the world!\n" +
       "Click on units for giving them orders, and drag units on the map to move them.\n" +

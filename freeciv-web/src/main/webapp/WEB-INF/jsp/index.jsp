@@ -142,6 +142,17 @@
 				<div class="row top-buffer-3">
 					<p class="lead">
 						<fmt:message key="index-lead"/>
+
+
+                        <%-- <div class="row top-buffer-3">
+                         <h1>LongTurn for Freeciv-web 2</h1>
+                         <b>LongTurn game number 2 of Freeciv-web has started and you can join it now!</b><br>
+                         <b>Each player will play one turn every day. Players in LongTurn game #1 can join <a href="https://play.freeciv.org/game/list?v=multiplayer">here</a>.<br><br>
+                         This will be the largest ever multiplayer game of Freeciv with 250 players!<br>
+                         </b>
+                         <h2><a href="https://play.freeciv.org/webclient?action=multi&civserverport=6004&civserverhost=play&multi=true">Join the LongTurn Freeciv-web game 2 here!</a></h2>
+                        </div>  --%>
+
 					</p>
 				</div>
 			</div>

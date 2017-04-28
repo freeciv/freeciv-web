@@ -14,7 +14,7 @@ if [ $5 = "pbem" ]; then
 fi
 
 quitidle=" -q 20"
-if [ $6 = "longturn" ]; then
+if [[ $6 == *"longturn"* ]]; then
   quitidle=" "
 fi
 

@@ -38,3 +38,5 @@ set ec_turns=9
 metamessage LongTurn Game #1 | 1 turn per day | 250 players | Join now!
 
 
+cmdlevel basic
+

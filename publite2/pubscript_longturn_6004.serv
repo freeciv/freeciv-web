@@ -38,3 +38,5 @@ set ec_max_size=5000
 set ec_turns=9
 metamessage LongTurn Game #2 | 1 turn per day | 250 players | Join now!
 
+
+cmdlevel basic

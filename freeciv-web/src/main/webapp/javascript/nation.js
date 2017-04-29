@@ -36,6 +36,7 @@ function update_nation_screen()
   for (var player_id in players) {
     var pplayer = players[player_id];
     if (pplayer['nation'] == -1) continue;
+    if (is_longturn() && pplayer['name'].indexOf("New Available Player") != -1) continue;
 
     var flag_html = "<canvas id='nation_dlg_flags_" + player_id + "' width='29' height='20' class='nation_flags'></canvas>";
 

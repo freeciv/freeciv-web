@@ -184,4 +184,8 @@ function init_options_dialog()
     $("#renderer_help").html("3D WebGL not supported.")
   }
 
+  if (is_longturn()) {
+    $("#save_button").hide();
+  }
+
 }

@@ -17,15 +17,16 @@
 		<!-- Collect the nav links, forms, and other panel-freeciv for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		<ul class="nav navbar-nav">
-			<li class="active"><a href="/"><fmt:message key="nav-home"/> <span class="sr-only">(current)</span></a></li>
 			<li class="dropdown">
 				<a href="/game/list?v=singleplayer" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-					<span onclick="window.location='/game/list?v=singleplayer'">Games</span> <span class="caret"></span> <span class="badge ongoing-games-number" id="ongoing-games" title="Ongoing games"></span>
+					<span onclick="window.location='/game/list?v=singleplayer'">Online Games</span> <span class="caret"></span> <span class="badge ongoing-games-number" id="ongoing-games" title="Ongoing games"></span>
 				</a>
 				<ul class="dropdown-menu">
-					<li><a href="/game/list?v=singleplayer">Single player</a></li>
+					<li><a href="/game/list?v=singleplayer">Single-player</a></li>
 					<li role="separator" class="divider"></li>
-					<li><a href="/game/list?v=multiplayer">Multi player</a></li>
+					<li><a href="/game/list?v=multiplayer">Multiplayer</a></li>
+					<li role="separator" class="divider"></li>
+					<li><a href="/game/list?v=multiplayer">LongTurn</a></li>
 					<li role="separator" class="divider"></li>
 					<li><a href="/game/list?v=play-by-email">Play by Email</a></li>
 				</ul>
@@ -59,15 +60,7 @@
 				</ul>
 			</li>--%>
 		</ul>
-		<form class="navbar-form navbar-right hidden-sm hidden-md" action="https://duckduckgo.com/">
-			<input type="hidden" name="kl" value="us-en">
-			<input type="hidden" name="kp" value="-1">
-			<input type="hidden" name="kf" value="-1">
-			<input type="hidden" name="kh" value="1">
-			<input type="hidden" name="kae" value="d">
-			<input type="hidden" name="kt" value="h">
-			<input type="hidden" name="ko" value="-2">
-			<input type="hidden" name="km" value="m">
+		<form class="navbar-form navbar-right hidden-sm hidden-md" action="https://duckduckgo.com/" style="width: 220px;">
 			<input type="hidden" name="sites" value="www.freeciv.org,forum.freeciv.org,freeciv.wikia.com,play.freeciv.org">
 			<div class="form-group">
 				<div class="input-group">

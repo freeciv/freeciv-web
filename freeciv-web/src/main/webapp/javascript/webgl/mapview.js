@@ -130,18 +130,14 @@ function init_webgl_mapview() {
   /* Create water mesh with a texture. */
   if (graphics_quality == QUALITY_LOW) {
     // lower quality water
-    var waterGeometry = new THREE.PlaneGeometry( mapview_model_width, mapview_model_height, 2, 2);
-    waterGeometry.rotateX( - Math.PI / 2 );
-    waterGeometry.translate(Math.floor(mapview_model_width / 2) - 500, 0, Math.floor(mapview_model_height / 2));
-
-    for ( var i = 0, l = waterGeometry.vertices.length; i < l; i ++ ) {
-      var x = i % quality, y = Math.floor( i / quality );
-      waterGeometry.vertices[ i ].y = 50;
-    }
-
-    var waterMaterial = new THREE.MeshBasicMaterial( { map: webgl_textures["water_overlay"], overdraw: 0.5, transparent: true, opacity: 0.65, color: 0x5555ff } );
-    var waterMesh = new THREE.Mesh( waterGeometry, waterMaterial );
+    var waterMaterial = new THREE.MeshBasicMaterial( { transparent: true, opacity: 0.5, color: 0x173355 } );
+    var waterMesh = new THREE.Mesh( new THREE.PlaneBufferGeometry( mapview_model_width, mapview_model_height), waterMaterial );
+	waterMesh.rotation.x = - Math.PI * 0.5;
+	waterMesh.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), 50);
+	waterMesh.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), Math.floor(mapview_model_width / 2) - 500);
+	waterMesh.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), -mapview_model_height / 2);
     scene.add(waterMesh);
+
   } else {
     // high quality water using WebGL shader
     water = new THREE.Water( maprenderer, camera, scene, {

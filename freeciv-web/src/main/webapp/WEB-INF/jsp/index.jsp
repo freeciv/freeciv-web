@@ -46,7 +46,7 @@
 	}
 	#game-launcher .game-type:not(:last-child) { margin-right: 40px; }
 	#game-launcher .header {
-		color: #BE602D;
+		color: #000000;
 		font-family: 'Fredericka the Great', cursive;
 		padding: 15px;
 		margin-bottom: 0px;
@@ -82,13 +82,18 @@
 		border: 0;
 		border-radius: 5px;
 		padding: 10px;
-		width: 180px;
+		width: 200px;
 		display: block;
 		font-weight: 700;
-		font-size: 15px;
+		font-size: 20px;
 		text-transform: uppercase;
 		margin: 20px auto 10px;
-		background: #f1905b;
+		background: #be602d;
+   text-shadow:
+    -0.5px -0.5px 0 #000,
+    0.5px -0.5px 0 #000,
+    -0.5px 0.5px 0 #000,
+    0.5px 0.5px 0 #000;
 	}
 	#game-launcher a.small { width: 130px;	}
 	.multiplayer-games th:last-child { width: 100px; }
@@ -115,6 +120,9 @@
 	.jumbotron {
 	padding-bottom: 0px;
 	}
+	.nav {
+	  font-size: 16px;
+	}
 </style>
 </head>
 <body>
@@ -137,7 +145,7 @@
 
 		<div class="jumbotron">
 			<div class="row">
-				<img src="/static/images/frontpage-jumbotron.png" alt="" style="width: 100%;">
+				<img src="/static/images/frontpage-jumbotron.png" alt="" style="width: 95%;">
 			</div>
 			<div class="container-fluid">
 				<div class="row top-buffer-3">

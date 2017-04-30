@@ -60,23 +60,6 @@ function webgl_preload()
 
   var textureLoader = new THREE.ImageLoader( loadingManager );
 
-  /* Preload water overlay texture. */
-  if (graphics_quality == QUALITY_LOW) {
-    var water_texture = new THREE.Texture();
-    webgl_textures["water_overlay"] = water_texture;
-    var filename;
-    filename = '/textures/small/water_overlay_texture.png';
-
-
-    textureLoader.load( filename, function ( image ) {
-      water_texture.image = image;
-      water_texture.wrapS = THREE.RepeatWrapping;
-      water_texture.wrapT = THREE.RepeatWrapping;
-      water_texture.repeat.set( 5, 5);
-      water_texture.needsUpdate = true;
-    } );
-  }
-
   /* Preload tree sprite. */
   var tree_sprite = new THREE.Texture();
   webgl_textures["tree_1"] = tree_sprite;
@@ -133,7 +116,7 @@ function webgl_preload()
 
 
     var sun_texture = new THREE.Texture();
-    webgl_textures["run"] = sun_texture;
+    webgl_textures["sun"] = sun_texture;
     textureLoader.load( '/textures/sun.png', function ( image ) {
       sun_texture.image = image;
       sun_texture.needsUpdate = true;

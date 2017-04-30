@@ -35,7 +35,7 @@ function show_hotseat_dialog()
    + "<div class='hotseat_player'>Player name 1: <input id='username_req_1' type='text' size='25' maxlength='31'></div>"
    + "<div class='hotseat_player'>Player name 2: <input id='username_req_2' type='text' size='25' maxlength='31'></div>"
    + "</div>"
-   + "<br><br><span id='username_validation_result'></span>";
+   + "<br><br><span id='username_validation_result' style='display:none;'></span>";
 
   // reset dialog page.
   $("#hotseat_dialog").remove();
@@ -122,15 +122,19 @@ function validate_hotseat_username(field) {
 
   if (check_username == null || check_username.length == 0) {
     $("#username_validation_result").html("The name can't be empty.");
+    $("#username_validation_result").show();
     return false;
   } else if (check_username.length <= 2 ) {
     $("#username_validation_result").html("The name is too short.");
+    $("#username_validation_result").show();
     return false;
   } else if (check_username.length >= 32) {
     $("#username_validation_result").html("The name is too long.");
+    $("#username_validation_result").show();
     return false;
   } else if (check_username != cleaned_username) {
     $("#username_validation_result").html("The name contains invalid characters, only the English alphabet is allowed.");
+    $("#username_validation_result").show();
     return false;
   }
 

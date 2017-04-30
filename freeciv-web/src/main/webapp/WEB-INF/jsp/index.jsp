@@ -5,6 +5,7 @@
 <html lang="en">
 <head>
 	<%@include file="/WEB-INF/jsp/fragments/head.jsp"%>
+	<script src="/javascript/libs/Detector.js"></script>
 	<script src="/static/javascript/index.js"></script>
 	<style>
 	/* Make sure that the development tools used in freeciv are not to big */
@@ -90,7 +91,7 @@
 		background: #f1905b;
 	}
 	#game-launcher a.small { width: 130px;	}
-	.multiplayer-games th:last-child { width: 120px; }
+	.multiplayer-games th:last-child { width: 100px; }
 	.multiplayer-games a.label:last-child { margin-left: 3px; }
 	.multiplayer-games .highlight { 
 		color: green;
@@ -177,7 +178,7 @@
 								Play against the Freeciv AI with 3D WebGL<br>graphics using the Three.js 3D engine
 							</div>
 						</c:if>
-						<a href="/webclient/?action=new&renderer=webgl" class="btn"><i class="fa fa-cube"></i> <fmt:message key="index-game-launcher-3d"/></a>
+						<a href="/webclient/?action=new&renderer=webgl" class="btn" id="webgl_button"><i class="fa fa-cube"></i> <fmt:message key="index-game-launcher-3d"/></a>
 
 						<c:if test="${default_lang}">
 							<div class="features">
@@ -330,7 +331,9 @@
 								<c:forEach items="${games}" var="game">
 									<tr class="${game.players > 0 && state == 'Pregame' ? 'highlight' : ''}">
 										<td>
-											${game.message}
+										    <b>
+											  ${game.message}
+											</b>
 										</td>
 										<td>
 											${game.state}

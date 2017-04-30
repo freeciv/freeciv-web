@@ -5,10 +5,10 @@
         "formatVersion" : 3.1,
         "sourceFile"    : "city_european_0.obj",
         "generatedBy"   : "OBJConverter",
-        "vertices"      : 4549,
-        "faces"         : 4853,
-        "normals"       : 867,
-        "uvs"           : 4242,
+        "vertices"      : 5769,
+        "faces"         : 6173,
+        "normals"       : 1069,
+        "uvs"           : 5454,
         "materials"     : 8
     },
 

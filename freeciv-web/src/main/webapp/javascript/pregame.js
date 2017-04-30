@@ -542,7 +542,7 @@ function pregame_settings()
 
       "<div id='pregame_settings_tabs-2'>"+
       "<br><span id='settings_info'><i>3D WebGL requires a fast computer with 3D graphics card, such as Nvidia GeForce and at least 3GB of RAM. " +
-      "The 3D WebGL version of Freeciv-web is under development. Here you can configure the 3D WebGL version:</i></span><br><br>" +
+      "Here you can configure the 3D WebGL version:</i></span><br><br>" +
 	    "<table id='settings_table'>" +
 	    "<tr title='Graphics quality level'><td>Graphics quality:</td>" +
         	  "<td><select name='graphics_quality' id='graphics_quality'>" +
@@ -901,7 +901,7 @@ function show_intro_dialog(title, message) {
 
   var intro_html = message + "<br><br><table><tr><td>Player name:</td><td><input id='username_req' type='text' size='25' maxlength='31'></td></tr>"
       +  "<tr id='password_row' style='display:none;'><td>Password:</td><td id='password_td'></td></tr></table>"
-	  + " <br><br><span id='username_validation_result'></span>";
+	  + " <br><br><span id='username_validation_result' style='display:none;'></span><br><br>";
 
   if (renderer == RENDERER_WEBGL) {
     var renderer_name;
@@ -922,7 +922,7 @@ function show_intro_dialog(title, message) {
     }
 
     intro_html += "<span style='color: #800000;'><small>The 3D WebGL version of Freeciv-web requires WebGL 3D hardware support such as Nvidia GeForce and at least 3GB of RAM.<br>" +
-    "Try tuning the 3D configuration by clicking Customize Game - Game settings - 3D WebGL. <br>Current graphics level: ";
+    "Current graphics level: ";
     if (graphics_quality == QUALITY_LOW) {
       intro_html += "Low quality.";
     } else if (graphics_quality == QUALITY_MEDIUM) {
@@ -1086,6 +1086,7 @@ function validate_username_callback()
                  logged_in_with_password = true;
                } else {
                  $("#username_validation_result").html("Incorrect username or password. Please try again!");
+                 $("#username_validation_result").show();
                }
 
              },
@@ -1095,6 +1096,7 @@ function validate_username_callback()
           });
         } else {
           $("#username_validation_result").html("Please enter your password or create a new user account.");
+          $("#username_validation_result").show();
         }
 
         $("#password_row").show();
@@ -1122,7 +1124,7 @@ function show_new_user_account_dialog(gametype)
                 + "<tr><td>Email:</td><td><input id='email' type='email' size='25' maxlength='64' ></td></tr>"
                 + "<tr><td>Password:</td><td><input id='password' type='password' size='25'></td></tr>"
                 + "<tr><td>Confim password:</td><td><input id='confirm_password' type='password' size='25'></td></tr></table><br>"
-                + "<div id='username_validation_result'></div><br>"
+                + "<div id='username_validation_result' style='display:none;'></div><br><br>"
                 + "Click to accept captcha:<br>"
                 + "<div id='captcha_element'></div><br><br>"
                 + "<div><small><ul><li>It is free and safe to create a new account on Freeciv-web.</li>"
@@ -1179,6 +1181,7 @@ function show_new_user_account_dialog(gametype)
      success: function(data, textStatus, request) {
         if (data != "user_does_not_exist") {
           $("#username_validation_result").html("The username is already taken. Please choose another username.");
+          $("#username_validation_result").show();
           $(".ui-dialog-buttonset button").button("disable");
         } else {
           $("#email").blur(function() {
@@ -1188,9 +1191,11 @@ function show_new_user_account_dialog(gametype)
             success: function(data, textStatus, request) {
                if (data == "invitation") {
                  $("#username_validation_result").html("");
+                 $("#username_validation_result").hide();
                  $(".ui-dialog-buttonset button").button("enable");
                } else {
                  $("#username_validation_result").html("The e-mail is already registered. Please choose another.");
+                 $("#username_validation_result").show();
                  $(".ui-dialog-buttonset button").button("disable");
 
                }
@@ -1216,6 +1221,7 @@ function create_new_freeciv_user_account_request(action_type)
 
   var cleaned_username = username.replace(/[^a-zA-Z]/g,'');
 
+  $("#username_validation_result").show();
   if (!validateEmail(email)) {
     $("#username_validation_result").html("Invalid email address.");
     return false;
@@ -1243,6 +1249,7 @@ function create_new_freeciv_user_account_request(action_type)
   }
 
   $("#username_validation_result").html("");
+  $("#username_validation_result").hide();
 
   $("#dialog").parent().hide();
 

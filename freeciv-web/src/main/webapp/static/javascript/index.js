@@ -4,6 +4,11 @@
 		loadBlog();
 		loadBestOfPlayByEmail();
 		displayStore();
+
+		if (!Detector.webgl) {
+          $("#webgl_button").addClass("disabled");
+          $("#webgl_button").html("WebGL not enabled!");
+		}
 	})
 	
 	function loadBlog() {

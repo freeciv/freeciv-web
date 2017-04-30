@@ -69,7 +69,7 @@ public class GamePlayByEmailTop extends HttpServlet {
 					+ "SELECT winner AS player, COUNT(winner) AS wins " //
 					+ "  FROM game_results " //
 					+ " GROUP BY winner " //
-					+ " ORDER BY wins DESC LIMIT 5";
+					+ " ORDER BY wins DESC LIMIT 10";
 
 			PreparedStatement preparedStatement = conn.prepareStatement(query);
 			ResultSet rs = preparedStatement.executeQuery();

@@ -66,7 +66,7 @@ function set_client_state(newstate)
         init_webgl_mapview();
       }
 
-      if (observing || $.getUrlVar('action') == "multi" || is_longturn()) {
+      if (observing || $.getUrlVar('action') == "multi" || is_longturn() || game_loaded) {
         center_on_any_city();
         advance_unit_focus();
       }

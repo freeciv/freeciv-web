@@ -19,6 +19,7 @@
 		  Shows scores on the game details page.
 		****************************************************************************/
 		function show_scores(port) {
+		  <c:if test="${fn:length(players) < 100}">
 			$.ajax({
 				url: "/data/scorelogs/score-" + port + ".log",
 				dataType: "html",
@@ -30,6 +31,7 @@
 			}).done(function(data) {
 				handle_scorelog(data);
 			});
+		  </c:if>
 		}
 	
 		/****************************************************************************
@@ -174,17 +176,19 @@
 									</thead>
 									<tbody>
 										<c:forEach items="${players}" var="player">
-											<tr>
-												<td>
-													<c:if test="${player.flag ne 'none'}">
-				   										<img src="/images/flags/${player.flag}-web.png" alt="${player.flag}" width="50">
-				   									</c:if>
-				   								</td> 
-												<td>${player.name}</td>
-												<td>${player.nation}</td>
-												<td>${player.user}</td>
-												<td>${player.type}</td>
-											</tr>
+										    <c:if test="${fn:contains(player.name, 'New Available Player') == false}">
+    											<tr>
+    												<td>
+    													<c:if test="${player.flag ne 'none'}">
+			    	   										<img src="/images/flags/${player.flag}-web.png" alt="${player.flag}" width="50">
+    				   									</c:if>
+	    			   								</td>
+		    										<td>${player.name}</td>
+			    									<td>${player.nation}</td>
+				    								<td>${player.user}</td>
+					    							<td>${player.type}</td>
+						    					</tr>
+						    				</c:if>
 										</c:forEach>
 									</tbody>
 								</table>

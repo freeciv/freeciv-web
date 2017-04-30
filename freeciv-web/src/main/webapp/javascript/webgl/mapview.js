@@ -152,7 +152,7 @@ function init_webgl_mapview() {
         sunDirection: directionalLight.position.clone().normalize(),
         sunColor: 0xfaf100,
         waterColor: 0x003e7b,
-        distortionScale: 30.0,
+        distortionScale: 25.0,
         fog: false
     } );
 
@@ -283,7 +283,7 @@ function init_webgl_mapview() {
     if (y == yquality - 1) fogOfWarGeometry.vertices[ i ].z += 50;
   }
   fogOfWarGeometry.computeVertexNormals();
-  var fogOfWar_material = new THREE.MeshLambertMaterial({color: 0x000000, transparent: true, opacity: 0.5});
+  var fogOfWar_material = new THREE.MeshLambertMaterial({color: 0x000000, transparent: true, opacity: 0.65});
   var fog_of_war_mesh = new THREE.Mesh( fogOfWarGeometry, fogOfWar_material );
   fog_of_war_mesh.geometry.dynamic = true;
   if (!observing) scene.add(fog_of_war_mesh);

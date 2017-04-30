@@ -103,7 +103,7 @@ function login_pbem_user()
   var message = "Log in to your Freeciv-web user account:<br><br>"
                 + "<table><tr><td>Username:</td><td><input id='username' type='text' size='25' maxlength='30' onkeyup='return forceLower(this);'></td></tr>"  
                 + "<tr><td>Password:</td><td><input id='password' type='password' size='25'></td></tr></table><br><br>"
-                + "<div id='username_validation_result'></div>";   
+                + "<div id='username_validation_result' style='display:none;'></div><br><br>";
 
   // reset dialog page.
   $("#dialog").remove();
@@ -172,6 +172,7 @@ function login_pbem_user_request()
            }
          } else {
            $("#username_validation_result").html("Incorrect username or password. Please try again!");
+           $("#username_validation_result").show();
          }
        },
      error: function (request, textStatus, errorThrown) {
@@ -539,7 +540,7 @@ function close_pbem_account()
   var message = "To deactivate your account, please enter your username and password:<br><br>"
                 + "<table><tr><td>Username:</td><td><input id='username' type='text' size='25' onkeyup='return forceLower(this);'></td></tr>"  
                 + "<tr><td>Password:</td><td><input id='password' type='password' size='25'></td></tr></table><br><br>"
-                + "<div id='username_validation_result'></div>";   
+                + "<div id='username_validation_result' style='display:none;'></div><br><br>";
 
   // reset dialog page.
   $("#dialog").remove();
@@ -576,7 +577,7 @@ function forgot_pbem_password()
   var message = "Please enter your e-mail address to get your password:<br><br>"
                 + "<table><tr><td>E-mail address:</td><td><input id='email' type='text' size='25'></td></tr>"  
                 + "</table><br><br>"
-                + "<div id='username_validation_result'></div>";   
+                + "<div id='username_validation_result' style='display:none;'></div><br><br>";
 
   // reset dialog page.
   $("#dialog").remove();

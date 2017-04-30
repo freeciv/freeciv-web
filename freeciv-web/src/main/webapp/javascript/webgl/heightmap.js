@@ -139,7 +139,7 @@ function propagate_distance_from_coast(distance_from_coast_map, x, y, level)
     }
     if (distance_from_coast_map[dir_x][dir_y] > current_distance + 1) {
       distance_from_coast_map[dir_x][dir_y] = current_distance + 1;
-      if (level < 200) propagate_distance_from_coast(distance_from_coast_map, dir_x, dir_y, level + 1);
+      if (level < (map.xsize * 2)) propagate_distance_from_coast(distance_from_coast_map, dir_x, dir_y, level + 1);
     }
   }
 }
@@ -150,11 +150,11 @@ function propagate_distance_from_coast(distance_from_coast_map, x, y, level)
 function map_tile_height(ptile)
 {
   if (ptile != null && tile_terrain(ptile) != null) {
-      if (tile_terrain(ptile)['name'] == "Deep Ocean") return -0.15;
-      if (is_ocean_tile(ptile)) return -0.1;
-      if (tile_terrain(ptile)['name'] == "Hills") return 0.45;
-      if (tile_terrain(ptile)['name'] == "Mountains") return 0.95;
+      if (tile_terrain(ptile)['name'] == "Deep Ocean") return -0.20 + ((Math.random() - 0.5) / 40);
+      if (is_ocean_tile(ptile)) return -0.15 + ((Math.random() - 0.5) / 60);
+      if (tile_terrain(ptile)['name'] == "Hills") return 0.43;
+      if (tile_terrain(ptile)['name'] == "Mountains") return 0.95 + ((Math.random() - 0.5) / 8);
   }
 
-  return 0.0;
+  return 0.0 + ((Math.random() - 0.5) / 60);
 }

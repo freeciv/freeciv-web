@@ -432,15 +432,19 @@ function validate_username() {
 
   if (username == null || username.length == 0 || username == "pbem") {
     $("#username_validation_result").html("Your name can't be empty.");
+    $("#username_validation_result").show();
     return false;
   } else if (username.length <= 2 ) {
     $("#username_validation_result").html("Your name is too short.");
+    $("#username_validation_result").show();
     return false;
   } else if (username.length >= 32) {
     $("#username_validation_result").html("Your name is too long.");
+    $("#username_validation_result").show();
     return false;
   } else if (username != cleaned_username) {
     $("#username_validation_result").html("Your name contains invalid characters, only the English alphabet is allowed.");
+    $("#username_validation_result").show();
     return false;
   }
 

@@ -381,9 +381,9 @@ function update_tile_extras(ptile) {
     tile_extra_positions[EXTRA_IRRIGATION + "." + ptile['index']] = irrigation;
 
     var pos = map_to_scene_coords(ptile['x'], ptile['y']);
-    irrigation.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
+    irrigation.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10);
     irrigation.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 3);
-    irrigation.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
+    irrigation.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
     if (scene != null && irrigation != null) {
       scene.add(irrigation);
     }
@@ -395,9 +395,9 @@ function update_tile_extras(ptile) {
     tile_extra_positions[EXTRA_MINE + "." + ptile['index']] = mine;
 
     var pos = map_to_scene_coords(ptile['x'], ptile['y']);
-    mine.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
+    mine.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10);
     mine.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 3);
-    mine.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
+    mine.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
     if (scene != null && mine != null) {
       scene.add(mine);
     }
@@ -582,9 +582,9 @@ function update_tile_extras(ptile) {
     tile_extra_positions[EXTRA_HUT + "." + ptile['index']] = hut;
 
     var pos = map_to_scene_coords(ptile['x'], ptile['y']);
-    hut.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
+    hut.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10);
     hut.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
-    hut.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
+    hut.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
     if (scene != null && hut != null) {
       scene.add(hut);
     }
@@ -620,9 +620,9 @@ function update_tile_extras(ptile) {
       if (extra_model == null) return;
 
       var pos = map_to_scene_coords(ptile['x'], ptile['y']);
-      extra_model.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
+      extra_model.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10);
       extra_model.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
-      extra_model.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
+      extra_model.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
 
       tile_extra_positions[extra_resource['id'] + "." + ptile['index']] = extra_model;
       if (scene != null && extra_model != null) {

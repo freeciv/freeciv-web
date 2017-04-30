@@ -127,10 +127,10 @@ function update_unit_position(ptile) {
         selected_unit_indicator = null;
       }
       if (visible_unit['anim_list'].length == 0) {
-        selected_mesh = new THREE.Mesh( new THREE.RingGeometry( 16, 25, 24), selected_unit_material );
-        selected_mesh.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
-        selected_mesh.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 8);
-        selected_mesh.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
+        selected_mesh = new THREE.Mesh( new THREE.RingBufferGeometry( 13, 25, 24), selected_unit_material );
+        selected_mesh.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 2);
+        selected_mesh.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 10);
+        selected_mesh.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 2);
         selected_mesh.rotation.x = -1 * Math.PI / 2;
         scene.add(selected_mesh);
         selected_unit_indicator = selected_mesh;
@@ -206,10 +206,10 @@ function update_unit_position(ptile) {
         selected_unit_indicator = null;
       }
       if (visible_unit['anim_list'].length == 0) {
-        selected_mesh = new THREE.Mesh( new THREE.RingGeometry( 16, 24, 20), selected_unit_material );
-        selected_mesh.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
-        selected_mesh.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 8);
-        selected_mesh.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
+        selected_mesh = new THREE.Mesh( new THREE.RingBufferGeometry( 13, 24, 20), selected_unit_material );
+        selected_mesh.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 2);
+        selected_mesh.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 10);
+        selected_mesh.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 2);
         selected_mesh.rotation.x = -1 * Math.PI / 2;
         scene.add(selected_mesh);
         selected_unit_indicator = selected_mesh;
@@ -313,9 +313,9 @@ function update_city_position(ptile) {
 
     var city_label = create_city_label(pcity);
     city_label_positions[ptile['index']] = city_label;
-    city_label.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] + 5);
-    city_label.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 35);
-    city_label.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 5);
+    city_label.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 5);
+    city_label.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 36);
+    city_label.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 15);
     city_label.rotation.y = Math.PI / 4;
     pcity['webgl_label_hash'] = pcity['name'] + pcity['size'] + pcity['production_value'] + punits.length;
     if (scene != null) scene.add(city_label);
@@ -339,9 +339,9 @@ function update_city_position(ptile) {
       city_positions[ptile['index']] = new_city;
 
       var pos = map_to_scene_coords(ptile['x'], ptile['y']);
-      new_city.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 6);
+      new_city.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10);
       new_city.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
-      new_city.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 6);
+      new_city.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
 
       if (scene != null && new_city != null) {
         scene.add(new_city);

@@ -294,9 +294,9 @@ function update_city_position(ptile) {
     city_positions[ptile['index']] = new_city;
 
     var pos = map_to_scene_coords(ptile['x'], ptile['y']);
-    new_city.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
+    new_city.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10);
     new_city.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
-    new_city.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
+    new_city.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
 
     if (scene != null && new_city != null) {
       scene.add(new_city);
@@ -304,9 +304,9 @@ function update_city_position(ptile) {
 
     if (scene != null && pcity['walls'] && city_walls_positions[ptile['index']] == null) {
       var city_walls = webgl_get_model("citywalls");
-      city_walls.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
+      city_walls.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10);
       city_walls.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
-      city_walls.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
+      city_walls.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
       scene.add(city_walls);
       city_walls_positions[ptile['index']] = city_walls;
     }
@@ -339,9 +339,9 @@ function update_city_position(ptile) {
       city_positions[ptile['index']] = new_city;
 
       var pos = map_to_scene_coords(ptile['x'], ptile['y']);
-      new_city.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
+      new_city.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 6);
       new_city.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
-      new_city.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
+      new_city.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 6);
 
       if (scene != null && new_city != null) {
         scene.add(new_city);
@@ -351,9 +351,9 @@ function update_city_position(ptile) {
 
     if (scene != null && pcity['walls'] && city_walls_positions[ptile['index']] == null) {
       var city_walls = webgl_get_model("citywalls");
-      city_walls.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
+      city_walls.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10);
       city_walls.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
-      city_walls.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
+      city_walls.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
       scene.add(city_walls);
       city_walls_positions[ptile['index']] = city_walls;
     }

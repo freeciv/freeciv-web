@@ -158,7 +158,8 @@ function handle_nation_table_select( ui )
   var pplayer = players[selected_player];
   if (pplayer == null) return;
 
-  if (pplayer != null && pplayer['is_alive'] && (client_is_observer() || player_id == client.conn.playing['playerno']
+  if (pplayer != null && pplayer['is_alive'] && (client_is_observer()
+      || (client.conn.playing != null && player_id == client.conn.playing['playerno'])
       || (diplstates[player_id] != null && diplstates[player_id] != DS_NO_CONTACT))) {
     $('#view_player_button').button("enable");
   } else {
@@ -177,7 +178,7 @@ function handle_nation_table_select( ui )
     $('#meet_player_button').button("disable");
   }
 
-  if (!client_is_observer() && player_id != client.conn.playing['playerno']
+  if (!client_is_observer() && client.conn.playing != null && player_id != client.conn.playing['playerno']
       && diplstates[player_id] != null
       && diplstates[player_id] != DS_WAR && diplstates[player_id] != DS_NO_CONTACT) {
     $('#cancel_treaty_button').button("enable");
@@ -186,7 +187,7 @@ function handle_nation_table_select( ui )
     $('#cancel_treaty_button').button("disable");
   }
   
-  if (!client_is_observer() && player_id != client.conn.playing['playerno']) {
+  if (!client_is_observer() && client.conn.playing != null && player_id != client.conn.playing['playerno']) {
     if (diplstates[player_id] == DS_CEASEFIRE || diplstates[player_id] == DS_ARMISTICE || diplstates[player_id] == DS_PEACE) {
       $("#cancel_treaty_button").button("option", "label", "Declare war");
     } else {

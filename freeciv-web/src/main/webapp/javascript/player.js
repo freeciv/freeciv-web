@@ -168,7 +168,7 @@ function get_ai_level_text(player)
 **************************************************************************/
 function research_get(pplayer)
 {
-  if (player == null) return null;
+  if (pplayer == null) return null;
 
   if (game_info['team_pooled_research']) {
     return research_data[pplayer['team']];

@@ -878,11 +878,16 @@ function previous_city()
 **************************************************************************/
 function city_sell_improvement(improvement_id)
 {
-  var agree=confirm("Are you sure you want to sell this building?");
-  if (agree) {
-
-    var packet = {"pid" : packet_city_sell, "city_id" : active_city['id'],
+  if ('confirm' in window) {
+    var agree=confirm("Are you sure you want to sell this building?");
+    if (agree) {
+      var packet = {"pid" : packet_city_sell, "city_id" : active_city['id'],
                   "build_id": improvement_id};
+      send_request(JSON.stringify(packet));
+    }
+  } else {
+    var packet = {"pid" : packet_city_sell, "city_id" : active_city['id'],
+                "build_id": improvement_id};
     send_request(JSON.stringify(packet));
   }
 

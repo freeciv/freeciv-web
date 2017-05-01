@@ -1190,7 +1190,7 @@ function do_map_click(ptile, qtype, first_time_called)
   } else {
     if (pcity != null) {
       if (pcity['owner'] == client.conn.playing.playerno) {
-	if (sunits != null && sunits.length > 0
+        if (sunits != null && sunits.length > 0
             && sunits[0]['activity'] == ACTIVITY_IDLE) {
           set_unit_focus_and_redraw(sunits[0]);
           if (renderer == RENDERER_2DCANVAS) {
@@ -1198,9 +1198,9 @@ function do_map_click(ptile, qtype, first_time_called)
           } else {
             $("#canvas_div").contextMenu();
           }
-	} else if (!goto_active) {
+        } else if (!goto_active) {
           show_city_dialog(pcity);
-	}
+	    }
       }
       return;
     }

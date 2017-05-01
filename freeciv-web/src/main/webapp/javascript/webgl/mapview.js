@@ -112,7 +112,6 @@ function webgl_start_renderer()
     console.log("MAX_FRAGMENT_UNIFORM_VECTORS:" + maprenderer.context.getParameter(maprenderer.context.MAX_FRAGMENT_UNIFORM_VECTORS));
   }
 
-  init_webgl_mapctrl();
   animate();
 
 }

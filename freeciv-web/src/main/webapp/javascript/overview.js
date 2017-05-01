@@ -22,7 +22,7 @@ var overviewTimerId = -1;
 var overview_w = 230;
 var overview_h = 140;
 
-var OVERVIEW_REFRESH = 4500;
+var OVERVIEW_REFRESH = 8000;
 
 var palette = [];
 var palette_color_offset = 0;
@@ -38,6 +38,8 @@ var COLOR_OVERVIEW_MY_UNIT = 4; /* yellow */
 var COLOR_OVERVIEW_ALLIED_UNIT = 5;
 var COLOR_OVERVIEW_ENEMY_UNIT = 6; /* red */
 var COLOR_OVERVIEW_VIEWRECT = 7; /* white */
+
+var overview_hash = -1;
 
 
 /****************************************************************************
@@ -87,9 +89,15 @@ function redraw_overview()
       || map['xsize'] == null || map['ysize'] == null
       || $("#overview_map").length == 0) return;
 
-  bmp_lib.render('overview_map',
-                  generate_overview_grid(map['xsize'], map['ysize']),
-                  palette);
+  var hash = generate_overview_hash(map['xsize'], map['ysize'])
+
+  if (hash != overview_hash) {
+    bmp_lib.render('overview_map',
+                    generate_overview_grid(map['xsize'], map['ysize']),
+                    palette);
+    overview_hash = hash;
+  }
+
 }
 
 
@@ -116,6 +124,36 @@ function generate_overview_grid(cols, rows) {
   render_viewrect(grid);
 
   return grid;
+}
+
+/****************************************************************************
+  Creates a hash of the current overview map.
+****************************************************************************/
+function generate_overview_hash(cols, rows) {
+
+  var hash = 0;
+  var row, col;
+
+  for (var x = 0; x < rows ; x++) {
+    for (var y = 0; y < cols; y++) {
+      hash += overview_tile_color(y, x);
+    }
+  }
+
+  if (renderer == RENDERER_2DCANVAS) {
+    var r = base_canvas_to_map_pos(0, 0);
+    if (r != null) {
+      hash += r['map_x'];
+      hash += r['map_y'];
+    }
+  } else {
+    var ptile = webgl_canvas_pos_to_tile($(window).width() / 6, $(window).height() / 6);
+    if (ptile != null) {
+      hash += ptile['x'];
+      hash += ptile['y'];
+    }
+  }
+  return hash;
 }
 
 /****************************************************************************

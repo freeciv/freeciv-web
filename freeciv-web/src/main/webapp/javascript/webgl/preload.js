@@ -264,11 +264,11 @@ function get_extra_mesh(key)
   ecanvas.width = 64;
   ecanvas.height = 32;
   var econtext = ecanvas.getContext("2d");
-  econtext.drawImage(sprites[key], 0, 0,
-                sprites[key].width, sprites[key].height,
+  econtext.drawImage(sprites[key], 18, 8,
+                sprites[key].width - 36, sprites[key].height - 12,
                 0,0,64,32);
 
-  meshes[key] = canvas_to_user_facing_mesh(ecanvas, 64, 35, 23, true);
+  meshes[key] = canvas_to_user_facing_mesh(ecanvas, 64, 26, 16, true);
   return meshes[key].clone();
 
 }

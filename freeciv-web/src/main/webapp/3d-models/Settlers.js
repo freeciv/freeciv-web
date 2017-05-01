@@ -7,7 +7,7 @@
         "generatedBy"   : "OBJConverter",
         "vertices"      : 9752,
         "faces"         : 18124,
-        "normals"       : 8123,
+        "normals"       : 8121,
         "uvs"           : 0,
         "materials"     : 18
     },
@@ -43,9 +43,10 @@
 	"colorDiffuse" : [0.715222, 0.703212, 0.428617],
 	"colorSpecular" : [0.248241, 0.25, 0.152345],
 	"illumination" : 2,
-	"opacity" : 1.0,
+	"opacity" : 0.8,
 	"opticalDensity" : 1.0,
-	"specularCoef" : 96.078431
+	"specularCoef" : 96.078431,
+	"transparent" : true
 	},
 
 	{
@@ -97,7 +98,7 @@
 	},
 
 	{
-	"DbgColor" : 9886237,
+	"DbgColor" : 8478454,
 	"DbgIndex" : 7,
 	"DbgName" : "bag",
 	"colorDiffuse" : [0.125943, 0.082163, 0.033204],
@@ -109,7 +110,7 @@
 	},
 
 	{
-	"DbgColor" : 8478454,
+	"DbgColor" : 3335942,
 	"DbgIndex" : 8,
 	"DbgName" : "sandals",
 	"colorDiffuse" : [0.017582, 0.003401, 0.000702],
@@ -121,7 +122,7 @@
 	},
 
 	{
-	"DbgColor" : 13579988,
+	"DbgColor" : 11712834,
 	"DbgIndex" : 9,
 	"DbgName" : "packropes",
 	"colorDiffuse" : [0.0, 0.0, 0.0],
@@ -133,7 +134,7 @@
 	},
 
 	{
-	"DbgColor" : 11712834,
+	"DbgColor" : 3698379,
 	"DbgIndex" : 10,
 	"DbgName" : "pack2",
 	"colorDiffuse" : [0.510608, 0.510608, 0.510608],
@@ -145,7 +146,7 @@
 	},
 
 	{
-	"DbgColor" : 109031,
+	"DbgColor" : 9886237,
 	"DbgIndex" : 11,
 	"DbgName" : "clayvessel2",
 	"colorDiffuse" : [0.315862, 0.179421, 0.071015],
@@ -169,7 +170,7 @@
 	},
 
 	{
-	"DbgColor" : 3335942,
+	"DbgColor" : 445199,
 	"DbgIndex" : 13,
 	"DbgName" : "hat",
 	"colorDiffuse" : [0.358376, 0.342928, 0.127774],
@@ -205,7 +206,7 @@
 	},
 
 	{
-	"DbgColor" : 445199,
+	"DbgColor" : 13579988,
 	"DbgIndex" : 16,
 	"DbgName" : "metal",
 	"colorDiffuse" : [0.058586, 0.058586, 0.058586],
@@ -217,7 +218,7 @@
 	},
 
 	{
-	"DbgColor" : 3698379,
+	"DbgColor" : 109031,
 	"DbgIndex" : 17,
 	"DbgName" : "clayvessel",
 	"colorDiffuse" : [0.102069, 0.027524, 0.010522],

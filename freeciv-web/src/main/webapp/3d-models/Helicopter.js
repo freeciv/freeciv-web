@@ -5,9 +5,9 @@
         "formatVersion" : 3.1,
         "sourceFile"    : "Helicopter.obj",
         "generatedBy"   : "OBJConverter",
-        "vertices"      : 7057,
-        "faces"         : 7399,
-        "normals"       : 5361,
+        "vertices"      : 7185,
+        "faces"         : 7523,
+        "normals"       : 5575,
         "uvs"           : 0,
         "materials"     : 5
     },
@@ -15,13 +15,7 @@
     "materials": [	{
 	"DbgColor" : 15658734,
 	"DbgIndex" : 0,
-	"DbgName" : "Material.000",
-	"colorDiffuse" : [0.8, 0.8, 0.8],
-	"colorSpecular" : [0.0, 0.0, 0.0],
-	"illumination" : 1,
-	"opacity" : 1.0,
-	"opticalDensity" : 1.0,
-	"specularCoef" : 96.078431
+	"DbgName" : "(null)"
 	},
 
 	{

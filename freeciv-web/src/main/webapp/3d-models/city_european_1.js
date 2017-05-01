@@ -97,7 +97,7 @@
 	},
 
 	{
-	"DbgColor" : 8478454,
+	"DbgColor" : 3668136,
 	"DbgIndex" : 7,
 	"DbgName" : "Material_001",
 	"colorDiffuse" : [0.0, 0.081979, 0.003221],
@@ -109,7 +109,7 @@
 	},
 
 	{
-	"DbgColor" : 13579988,
+	"DbgColor" : 3698379,
 	"DbgIndex" : 8,
 	"DbgName" : "Crate_001",
 	"colorDiffuse" : [0.247575, 0.076246, 0.010962],
@@ -121,7 +121,7 @@
 	},
 
 	{
-	"DbgColor" : 109031,
+	"DbgColor" : 9142600,
 	"DbgIndex" : 9,
 	"DbgName" : "Grass.001",
 	"colorDiffuse" : [0.006928, 0.152142, 0.015359],
@@ -134,7 +134,7 @@
 	},
 
 	{
-	"DbgColor" : 10903250,
+	"DbgColor" : 445199,
 	"DbgIndex" : 10,
 	"DbgName" : "Light",
 	"colorDiffuse" : [0.631211, 0.729114, 0.0],
@@ -146,7 +146,7 @@
 	},
 
 	{
-	"DbgColor" : 3668136,
+	"DbgColor" : 9886237,
 	"DbgIndex" : 11,
 	"DbgName" : "House",
 	"colorDiffuse" : [0.456376, 0.456376, 0.456376],
@@ -158,7 +158,7 @@
 	},
 
 	{
-	"DbgColor" : 3698379,
+	"DbgColor" : 13579988,
 	"DbgIndex" : 12,
 	"DbgName" : "Material",
 	"colorDiffuse" : [0.129624, 0.074447, 0.0148],
@@ -170,7 +170,7 @@
 	},
 
 	{
-	"DbgColor" : 9142600,
+	"DbgColor" : 8478454,
 	"DbgIndex" : 13,
 	"DbgName" : "Material.002",
 	"colorDiffuse" : [0.64, 0.64, 0.64],
@@ -182,7 +182,7 @@
 	},
 
 	{
-	"DbgColor" : 9886237,
+	"DbgColor" : 3335942,
 	"DbgIndex" : 14,
 	"DbgName" : "Roof.001",
 	"colorDiffuse" : [0.176206, 0.011778, 0.008991],
@@ -194,7 +194,7 @@
 	},
 
 	{
-	"DbgColor" : 445199,
+	"DbgColor" : 10903250,
 	"DbgIndex" : 15,
 	"DbgName" : "Door",
 	"colorDiffuse" : [0.108507, 0.083693, 0.039765],
@@ -206,7 +206,7 @@
 	},
 
 	{
-	"DbgColor" : 3335942,
+	"DbgColor" : 109031,
 	"DbgIndex" : 16,
 	"DbgName" : "Material.003",
 	"colorDiffuse" : [0.185699, 0.284054, 0.8],

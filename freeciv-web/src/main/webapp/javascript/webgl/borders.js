@@ -20,6 +20,7 @@
 var border_image_resolution = 512;
 var borders_palette = [];
 var borders_texture;
+var borders_hash = -1;
 
 /****************************************************************************
  Initialize borders image.
@@ -56,35 +57,40 @@ function init_borders_image()
 
 }
 
- /****************************************************************************
-   Returns a texture containing one pixel for each map tile, where the color of each pixel
-   contains the border color.
- ****************************************************************************/
- function update_borders_image()
- {
-   borders_palette = []
-   borders_palette.push([142, 0, 0]);
-   for (var player_id in players) {
-     var pplayer = players[player_id];
-     var nation_colors;
-     if (nations[pplayer['nation']].color != null) {
-       nation_colors = nations[pplayer['nation']].color.replace("rgb(", "").replace(")", "").split(",");
-     } else {
-       nation_colors = [0,0,0];
+/****************************************************************************
+  Returns a texture containing one pixel for each map tile, where the color of each pixel
+  contains the border color.
+****************************************************************************/
+function update_borders_image()
+{
+   var hash = generate_borders_image_hash();
+
+   if (hash != borders_hash) {
+     borders_palette = [];
+     borders_palette.push([142, 0, 0]);
+     for (var player_id in players) {
+       var pplayer = players[player_id];
+       var nation_colors;
+       if (nations[pplayer['nation']].color != null) {
+         nation_colors = nations[pplayer['nation']].color.replace("rgb(", "").replace(")", "").split(",");
+       } else {
+         nation_colors = [0,0,0];
+       }
+
+       borders_palette.push([parseInt(nation_colors[0]), parseInt(nation_colors[2]), parseInt(nation_colors[1])]);
      }
 
-     borders_palette.push([parseInt(nation_colors[0]), parseInt(nation_colors[2]), parseInt(nation_colors[1])]);
-   }
+     bmp_lib.render('borders_image',
+                       generate_borders_image(),
+                       borders_palette);
+     borders_texture.image = document.getElementById("borders_image");
+     borders_texture.needsUpdate = true;
+     borders_hash = hash;
 
-   bmp_lib.render('borders_image',
-                     generate_borders_image(),
-                     borders_palette);
-   borders_texture.image = document.getElementById("borders_image");
-   borders_texture.needsUpdate = true;
-
-   return borders_texture;
-
+     return borders_texture;
   }
+
+}
 
 /****************************************************************************
 
@@ -133,13 +139,30 @@ function generate_borders_image() {
 
 
 /****************************************************************************
+ Creates a hash of the map borders.
+****************************************************************************/
+function generate_borders_image_hash() {
+  var hash = 0;
+  var row, col;
+
+  for (var x = 0; x < border_image_resolution ; x++) {
+    for (var y = 0; y < border_image_resolution; y++) {
+      var gx = Math.floor(map.ysize * x / border_image_resolution);
+      var gy = Math.floor(map.xsize * y / border_image_resolution);
+      hash += border_image_color(gy, gx);
+    }
+  }
+
+  return hash;
+}
+
+
+/****************************************************************************
   Returns the color of the tile at the given map position.
 ****************************************************************************/
 function border_image_color(map_x, map_y)
 {
   var ptile = map_pos_to_tile(map_x, map_y);
-
-
 
   if (ptile != null && ptile['owner'] != null && ptile['owner'] < 255) {
       return 1 + ptile['owner'];

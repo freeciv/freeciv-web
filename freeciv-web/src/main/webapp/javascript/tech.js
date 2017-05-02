@@ -463,14 +463,22 @@ function send_player_tech_goal(tech_id)
 ****************************************************************************/
 function tech_mapview_mouse_click(e)
 {
-  //var x = e.offsetX || e.layerX;
-  //var y = e.offsetY || e.layerY;
+
   var rightclick;
   if (!e) var e = window.event;
   if (e.which) {
     rightclick = (e.which == 3);
   } else if (e.button) {
     rightclick = (e.button == 2);
+  }
+
+  if (rightclick) {
+    if (mouse_x > $(window).width() / 2) {
+      $("#technologies").scrollLeft($("#technologies").scrollLeft() + 150);
+    } else {
+        $("#technologies").scrollLeft($("#technologies").scrollLeft() - 150);
+    }
+    return;
   }
 
    if (tech_canvas != null) {
@@ -493,14 +501,12 @@ function tech_mapview_mouse_click(e)
           && tech_mouse_y > y && tech_mouse_y < y + tech_item_height) {
         if (player_invention_state(client.conn.playing, ptech['id']) == TECH_PREREQS_KNOWN) {
           send_player_research(ptech['id']);
-	} else if (player_invention_state(client.conn.playing, ptech['id']) == TECH_UNKNOWN) {
+        } else if (player_invention_state(client.conn.playing, ptech['id']) == TECH_UNKNOWN) {
           send_player_tech_goal(ptech['id']);
-	}
-	clicked_tech_id = ptech['id'];
+        }
+        clicked_tech_id = ptech['id'];
       }
-
     }
-
   }
 
   update_tech_screen();

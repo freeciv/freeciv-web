@@ -1,8 +1,8 @@
 diff --git a/server/connecthand.c b/server/connecthand.c
-index d74f178..d76f8c3 100644
+index d74f178..e2e0e36 100644
 --- a/server/connecthand.c
 +++ b/server/connecthand.c
-@@ -251,6 +251,20 @@ void establish_new_connection(struct connection *pconn)
+@@ -251,6 +251,22 @@ void establish_new_connection(struct connection *pconn)
      notify_conn(dest, NULL, E_CONNECTION, ftc_server,
  		_("You are logged in as '%s' connected to no player."),
                  pconn->username);
@@ -13,6 +13,8 @@ index d74f178..d76f8c3 100644
 +        /* Make it human! */
 +        set_as_human(pplayer);
 +        pplayer->economic.gold += game.info.turn * 5;
++        pplayer->economic.science = 60;
++        pplayer->economic.tax = 40;
 +        connection_attach(pconn, pplayer, FALSE);
 +      } else {
 +        notify_conn(dest, NULL, E_CONNECTION, ftc_server,
@@ -23,7 +25,7 @@ index d74f178..d76f8c3 100644
    } else {
      notify_conn(dest, NULL, E_CONNECTION, ftc_server,
  		_("You are logged in as '%s' connected to %s."),
-@@ -540,8 +554,15 @@ void send_conn_info_remove(struct conn_list *src, struct conn_list *dest)
+@@ -540,8 +556,15 @@ void send_conn_info_remove(struct conn_list *src, struct conn_list *dest)
  struct player *find_uncontrolled_player(void)
  {
    players_iterate(played) {
@@ -41,7 +43,7 @@ index d74f178..d76f8c3 100644
      }
    } players_iterate_end;
  
-@@ -615,6 +636,9 @@ static bool connection_attach_real(struct connection *pconn,
+@@ -615,6 +638,9 @@ static bool connection_attach_real(struct connection *pconn,
        }
        (void) aifill(game.info.aifill);
      }

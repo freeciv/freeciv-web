@@ -289,6 +289,7 @@ function add_chatbox_text(text)
 
     if (is_longturn() && text != null && (text.indexOf("waiting on") != -1 || text.indexOf("Lost connection") != -1 || text.indexOf("Not enough") != -1 || text.indexOf("has been removed") != -1 || text.indexOf("has connected") != -1)) return;
     if (text != null && text.indexOf("Year:") != -1) text = "<hr style='border-color: #555555;'>" + text;
+    if (!check_text_with_banlist(text)) return;
 
     chatbox_text += text + "<br>";
     chatbox_text_dirty = true;

@@ -38,7 +38,7 @@ function init_webgl_renderer()
 
   $.ajax({
     async: false,
-    url: "/javascript/webgl/libs/webgl-client.min.js",
+    url: (location.hostname == "play.freeciv.org") ? "/javascript/webgl/libs/webgl-client.min.js" : "/javascript/webgl/libs/webgl-client.js",
     dataType: "script"
   });
 

@@ -1,6 +1,10 @@
 #!/bin/bash
 # builds javascript files Freeciv-web and copies the resulting file to tomcat.
 
+# workaround for https://github.com/samaxes/minify-maven-plugin/issues/142
+rm -rf target/freeciv-web/javascript/webclient.min.js.map
+rm -rf target/freeciv-web/javascript/webgl/libs/webgl-client.min.js.map
+
 mvn compile && cp target/freeciv-web/javascript/webclient.min.* /var/lib/tomcat8/webapps/ROOT/javascript/ && cp target/freeciv-web/javascript/webgl/libs/webgl-client.min* /var/lib/tomcat8/webapps/ROOT/javascript/webgl/libs/
 
 # update timestamp to clear browser cache.

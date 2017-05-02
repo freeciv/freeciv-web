@@ -14,7 +14,13 @@
 var ts="${initParam.buildTimeStamp}";
 </script>
 <script type="text/javascript" src="/javascript/libs/jquery.min.js?ts=${initParam.buildTimeStamp}"></script>
-<script type="text/javascript" src="/javascript/webclient.min.js?ts=${initParam.buildTimeStamp}"></script>
+
+<% if (request.getServerName().equals("play.freeciv.org")) { %>
+  <script type="text/javascript" src="/javascript/webclient.min.js?ts=${initParam.buildTimeStamp}"></script>
+<% } else { %>
+  <script type="text/javascript" src="/javascript/webclient.js?ts=${initParam.buildTimeStamp}"></script>
+<% } %>
+
 <script type="text/javascript" src="/music/audio.min.js"></script>
 
 <c:if test="${not empty param.webgl_debug}" >

@@ -155,6 +155,14 @@ function format_action_tooltip(act_id, act_probs)
     out += ", ";
     out += format_act_prob_part(act_probs[act_id]['max']);
     out += " or somewhere in between.";
+
+    if (act_probs[act_id]['max'] - act_probs[act_id]['min'] > 1) {
+      /* The interval is wide enough to not be caused by rounding. It is
+       * therefore imprecise because the player doesn't have enough
+       * information. */
+      out += " (This is the most precise interval I can calculate ";
+      out += "given the information our nation has access to.)";
+    }
   }
 
   return out;

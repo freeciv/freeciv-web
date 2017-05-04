@@ -27,8 +27,8 @@ var borders_hash = -1;
 ****************************************************************************/
 function init_borders_image()
 {
-  if (graphics_quality == QUALITY_MEDIUM) border_image_resolution = 256;
-  if (graphics_quality == QUALITY_HIGH) border_image_resolution = 512;
+  if (graphics_quality == QUALITY_MEDIUM) border_image_resolution = 512;
+  if (graphics_quality == QUALITY_HIGH) border_image_resolution = 1024;
 
   borders_palette = []
   borders_palette.push([142, 0, 0]);

@@ -205,11 +205,6 @@ void main(void)
     c = c - 0.085;  // render tile grid.
   }
 
-  /* Borders*/
-  if (borders_enabled && !(border_color.r > 0.546875 && border_color.r < 0.5625 && border_color.b == 0.0 && border_color.g == 0.0)) {
-    c = c * 0.5 + border_color.rbg * 0.5;
-  }
-
 
   /* render the beach. */
   if (vPosition.y < beach_high && vPosition.y > beach_low) {
@@ -227,7 +222,11 @@ void main(void)
       vec4 Cbeach = texture2D(beach, vec2(vUv.x * map_x_size, vUv.y * map_y_size));
       c = Cbeach.rgb;
     }
+  }
 
+  /* Borders*/
+  if (borders_enabled && !(border_color.r > 0.546875 && border_color.r < 0.5625 && border_color.b == 0.0 && border_color.g == 0.0)) {
+    c = c * 0.5 + border_color.rbg * 0.6;
   }
 
   /* specular component, ambient occlusion and fade out underwater terrain */

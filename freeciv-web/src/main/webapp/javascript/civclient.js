@@ -203,8 +203,11 @@ function init_common_intro_dialog() {
       "play at once, more time to strategize, more time to coordinate with other players, and less rushing to get things done, which can "+
       "occur in a standard multi-player Freeciv game. It takes a lot longer to play a game, about 2 to 6 months, but you can play it just a "+
       "little bit every day. If you are not playing for 12 days, then someone else can take over your player. <br><br> "+
-      "Joining this game requires an account, so please create one if you don't have one already.<br><br>Please only join the LongTurn game if you are "+
-      "interested in playing one turn every day."
+      "Joining this game requires an account, so please create one if you don't have one already.<br><br>"+
+      "Please be polite to the other players. Also please only join the LongTurn game if you are "+
+      "interested in playing one turn every day.<br>" +
+      "To send a private message to another player, send a message like this:  UserName: Hello player!<br>" +
+      "You will get to play for turn immediately after signing up, and your next turn tomorrow."
       +" <br><br>"
     msg += "Please enter your name: "
     show_intro_dialog("Welcome to Freeciv-web", msg);

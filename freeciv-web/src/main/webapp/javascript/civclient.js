@@ -206,6 +206,7 @@ function init_common_intro_dialog() {
       "Joining this game requires an account, so please create one if you don't have one already.<br><br>"+
       "Please be polite to the other players. Also please only join the LongTurn game if you are "+
       "interested in playing one turn every day.<br>" +
+      "Players who are idle for more than 12 turns can be replaced by new players. This means that idle players will continually be replaced by new players.<br>" +
       "To send a private message to another player, send a message like this:  UserName: Hello player!<br>" +
       "You will get to play for turn immediately after signing up, and your next turn tomorrow."
       +" <br><br>"

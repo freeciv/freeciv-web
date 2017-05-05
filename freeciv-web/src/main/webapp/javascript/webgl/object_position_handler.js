@@ -390,7 +390,7 @@ function update_tile_extras(ptile) {
   }
 
   if (tile_extra_positions[EXTRA_FARMLAND + "." + ptile['index']] == null && tile_has_extra(ptile, EXTRA_FARMLAND)) {
-    if (tile_extra_positions[EXTRA_IRRIGATION + "." + ptile['index']] != null) {
+    if (scene != null && tile_extra_positions[EXTRA_IRRIGATION + "." + ptile['index']] != null) {
       scene.remove(tile_extra_positions[EXTRA_IRRIGATION + "." + ptile['index']]);
     }
 

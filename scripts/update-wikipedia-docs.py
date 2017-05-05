@@ -28,6 +28,7 @@ def fix_tech(tech_name):
   if (tech_name == "Carrier"): tech_name = "Aircraft carrier";
   if (tech_name == "Legion"): tech_name = "Roman legion";
   if (tech_name == "Riflemen"): tech_name = "Rifleman";
+  if (tech_name == "Transport"): tech_name = "Troopship";
   if (tech_name == "Magellan's Expedition"): tech_name = "Ferdinand Magellan";
   if (tech_name == "Nuclear"): tech_name = "Nuclear weapon";
   if (tech_name == "Caravan"): tech_name = "Camel train";

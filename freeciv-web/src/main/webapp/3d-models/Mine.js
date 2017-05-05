@@ -52,7 +52,7 @@
 	"DbgColor" : 238,
 	"DbgIndex" : 3,
 	"DbgName" : "Material.002",
-	"colorDiffuse" : [0.181267, 0.127654, 0.082154],
+	"colorDiffuse" : [0.088551, 0.063241, 0.04155],
 	"colorSpecular" : [0.167162, 0.148702, 0.100705],
 	"illumination" : 2,
 	"opacity" : 1.0,

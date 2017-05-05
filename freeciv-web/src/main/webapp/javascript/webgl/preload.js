@@ -27,21 +27,21 @@ var webgl_materials = {};
 var model_filenames = ["AEGIS Cruiser",     "city_european_1",  "Helicopter",    "Pikemen",
                        "Alpine Troops",     "city_european_2",  "Horsemen",      "Rail",
                        "Archers",           "citywalls",        "Howitzer",      "Riflemen",
-                       "Armor",             /*"Coal",*/         "Hut",           "Road",
+                       "Armor",             "Hut",              "Road",
                        "Artillery",         "Cruise Missile",   "Ironclad",      "Settlers",
-                       "AWACS",             "Cruiser",          /*"Iron",*/      /*"Spice",*/
+                       "AWACS",             "Cruiser",
                        "Barbarian Leader",  "Destroyer",        "Irrigation",    "Spy",
                        "Battleship",        "Diplomat",         "Knights",       "Stealth Bomber",
                        "Bomber",            "Dragoons",         "Legion",        "Submarine",
-                       /*"Buffalo",*/       "Engineers",        "Marines",       "Transport",
+                       "Engineers",         "Marines",          "Transport",
                        "Cannon",            "Explorer",         "Mech. Inf.",    "Trireme",
                        "Caravan",           "Fighter",          "Mine",          "Warriors",
                        "Caravel",           "Fish",             "Musketeers",    "Whales",
-                       "Carrier",           "Freight",          "Nuclear",       /*"Wheat",*/
-                       "Catapult",          "Frigate",          /*"Oil",*/       /*"Wine",*/
-                       "Cavalry",           /*"Fruit",*/        "Paratroopers",  "Workers",
+                       "Carrier",           "Freight",          "Nuclear",
+                       "Catapult",          "Frigate",
+                       "Cavalry",           "Paratroopers",     "Workers",
                        "Chariot",           "Galleon",          "Partisan",
-                       "city_european_0",   /*"Gold",*/         "Phalanx"
+                       "city_european_0",   "Phalanx",          "Farmland"
                       ];
 
 /****************************************************************************

@@ -457,6 +457,8 @@ function ruledir_from_ruleset_name(ruleset_name, fall_back_dir)
     return "classic";
   case "Civ2Civ3 ruleset":
     return "civ2civ3";
+  case "Multiplayer ruleset":
+    return "multiplayer";
   case "Webperimental":
     return "webperimental";
   default:

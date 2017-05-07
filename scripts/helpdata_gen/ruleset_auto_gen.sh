@@ -17,6 +17,7 @@ SCRIPT_DIR="$(dirname "$0")"
 cd ${SCRIPT_DIR}/../../freeciv/freeciv/ && \
 ./tools/freeciv-manual -r civ2civ3 && \
 ./tools/freeciv-manual -r classic && \
+./tools/freeciv-manual -r multiplayer && \
 ./tools/freeciv-manual -r webperimental && \
 mkdir -p ../../freeciv-web/src/main/webapp/man/ && \
 mv *.html ../../freeciv-web/src/main/webapp/man/

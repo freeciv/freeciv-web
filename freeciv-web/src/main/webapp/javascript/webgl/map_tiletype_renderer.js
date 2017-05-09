@@ -27,7 +27,8 @@ var tiletype_palette = [];
 function init_map_tiletype_image()
 {
   for (var terrain_id in terrains) {
-    tiletype_palette.push([terrain_id * 10, 0, 0]);
+    tiletype_palette.push([terrain_id * 10, 0, 0]);    //no river
+    tiletype_palette.push([terrain_id * 10, 10, 0]);   //river
   }
   bmp_lib.render('map_tiletype_grid',
                     generate_map_tiletype_grid(),
@@ -99,8 +100,10 @@ function map_tiletype_tile_color(map_x, map_y)
 {
   var ptile = map_pos_to_tile(map_x, map_y);
 
-  if (ptile != null && tile_terrain(ptile) != null) {
-      return tile_terrain(ptile)['id'];
+  if (ptile != null && tile_terrain(ptile) != null && !tile_has_extra(ptile, EXTRA_RIVER)) {
+      return tile_terrain(ptile)['id'] * 2;
+  } else if (ptile != null && tile_terrain(ptile) != null && tile_has_extra(ptile, EXTRA_RIVER)) {
+    return tile_terrain(ptile)['id'] * 2 + 1;
   }
 
   return COLOR_OVERVIEW_UNKNOWN;

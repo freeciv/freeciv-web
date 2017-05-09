@@ -66,6 +66,8 @@ float terrain_plains = 110.0/255.0;
 float terrain_swamp = 120.0/255.0;
 float terrain_tundra = 130.0/255.0;
 
+float is_river_modifier = 10.0/255.0;
+
 float heightmap_land = 10.0/255.0;
 float heightmap_ocean = 0.0;
 
@@ -89,6 +91,11 @@ void main(void)
 
     vec3 c;
     vec4 chosen_terrain_color;
+
+    if (terrain_type.g == is_river_modifier) {
+      beach_high = 50.5;
+      beach_blend_high = 50.25;
+    }
 
     /* Set pixel color based on tile type. */
     if (terrain_type.r == terrain_grassland) {
@@ -209,7 +216,7 @@ void main(void)
   /* render the beach. */
   if (vPosition.y < beach_high && vPosition.y > beach_low) {
     if (vPosition.y > beach_blend_high) {
-      blend_amount = (3.5 - (beach_high - vPosition.y)) / 3.5;
+      blend_amount = ((beach_high - beach_blend_high) - (beach_high - vPosition.y)) / (beach_high - beach_blend_high);
       vec4 Cbeach = texture2D(beach, vec2(vUv.x * map_x_size, vUv.y * map_y_size));
       c = chosen_terrain_color.rgb * blend_amount + (Cbeach.rgb * (1.0 - blend_amount));
 

@@ -40,7 +40,6 @@ var tile_extra_positions = {};
 
 var road_positions = {};
 var rail_positions = {};
-var river_positions = {};
 
 var selected_unit_indicator = null;
 var selected_unit_material = null;
@@ -544,56 +543,9 @@ function update_tile_extras(ptile) {
     }
   }
 
-  /* Rivers */
-  if (scene != null && river_positions[ptile['index']] == null && tile_has_extra(ptile, EXTRA_RIVER)) {
-    var river_added = false;
-    var pos = map_to_scene_coords(ptile['x'], ptile['y']);
-    // 1. iterate over adjacent tiles, see if they have river.
-    for (var dir = 0; dir < 8; dir++) {
-      var checktile = mapstep(ptile, dir);
-      if (checktile != null && (tile_has_extra(checktile, EXTRA_RIVER) || is_ocean_tile(checktile))) {
-        // if the river wraps the map edge, then skip it.
-        if ((ptile['x'] == 0 && checktile['x'] == map['xsize'] -1)
-            ||  (ptile['x'] == map['xsize'] -1 && checktile['x'] == 0)) continue;
 
-        // 2. if river on this tile and adjacent tile, then add rectangle as river between this tile and adjacent tile.
-        river_added = true;
-        var river_width = 15;
-        var dest = map_to_scene_coords(checktile['x'], checktile['y']);
-        var riverGeometry = new THREE.PlaneGeometry(60, 15);
-        riverGeometry.dynamic = true;
-        var delta = 0;
-        if (dir == 1 || dir == 6) delta = 10;
-        riverGeometry.vertices[0].x = 0.0;
-        riverGeometry.vertices[0].y = 0.0 - delta;
-        riverGeometry.vertices[0].z = 0.0;
-        riverGeometry.vertices[1].x = dest['x'] - pos['x'];
-        riverGeometry.vertices[1].y = (checktile['height'] - ptile['height']) * 100 - delta - (is_ocean_tile(checktile) ? 26 : 0);
-        riverGeometry.vertices[1].z = dest['y'] - pos['y'];
-        riverGeometry.vertices[2].x = 0.0;
-        riverGeometry.vertices[2].y = delta;
-        riverGeometry.vertices[2].z = river_width;
-        riverGeometry.vertices[3].x = dest['x'] - pos['x'];
-        riverGeometry.vertices[3].y = (checktile['height'] - ptile['height']) * 100 + delta - (is_ocean_tile(checktile) ? 26 : 0);
-        riverGeometry.vertices[3].z = dest['y'] - pos['y'] + river_width;
-
-        riverGeometry.verticesNeedUpdate = true;
-
-        var river = new THREE.Mesh(riverGeometry, webgl_materials['river']);
-
-        river.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 5);
-        river.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 4);
-        river.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 13);
-        scene.add(river);
-        river_positions[ptile['index']] = river;
-        river_positions[checktile['index']] = river;
-        if (Math.random() >= 0.5) break;
-      }
-    }
-  }
-
-
-  if (tile_extra_positions[EXTRA_HUT + "." + ptile['index']] == null && tile_has_extra(ptile, EXTRA_HUT)) {
+  if (tile_extra_positions[EXTRA_HUT + "." + ptile['index']] == null
+      && tile_has_extra(ptile, EXTRA_HUT) && tile_get_known(ptile) == TILE_KNOWN_SEEN) {
     // add hut
     var hut = webgl_get_model("Hut");
     if (hut == null) return;
@@ -617,7 +569,8 @@ function update_tile_extras(ptile) {
   // 2D sprites are faster to render and looks better at the moment. Freeciv WebGL 3D needs better 3D models for specials.
   var extra_resource = extras[ptile['resource']];
   if (extra_resource != null && scene != null && tile_extra_positions[extra_resource['id'] + "." + ptile['index']] == null) {
-    if (extra_resource['name'] != "Fish" && extra_resource['name'] != "Whales") {
+    if (extra_resource['name'] != "Fish" && extra_resource['name'] != "Whales"
+        && (!tile_has_extra(ptile, EXTRA_RIVER)) /* rendering specials on rivers is not supported yet. */) {
       var key = extra_resource['graphic_str'];
       var extra_mesh = get_extra_mesh(key);
 
@@ -711,7 +664,6 @@ function add_all_objects_to_scene()
   tile_extra_positions = {};
   road_positions = {};
   rail_positions = {};
-  river_positions = {};
 
   for (var unit_id in units) {
     var punit = units[unit_id];

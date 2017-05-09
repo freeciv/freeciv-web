@@ -14,6 +14,8 @@
 				<li id="hel_tab"><a href="#tabs-hel"><i class="fa fa-question-circle-o" aria-hidden="true"></i> Manual</a></li>
 
 
+                <div id="game_status_panel_top"></div>
+
 				<div id="turn_done_button_div">
             			  <button id="turn_done_button" type="button" 
 					  class="button" title="Ends your turn. (Shift+Enter)">Turn Done</button>

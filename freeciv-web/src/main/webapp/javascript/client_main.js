@@ -114,7 +114,6 @@ function setup_window_size ()
     buffer_canvas_ctx.font = canvas_text_font;
   }
 
-  $("#game_status_panel").css("width", new_mapview_width);
   $("#pregame_message_area").height( new_mapview_height - 80
                                         - $("#pregame_game_info").getTotalHeight());
   $("#pregame_player_list").height( new_mapview_height - 80);
@@ -152,9 +151,9 @@ function setup_window_size ()
     $("#freeciv_logo").hide();
 
     overview_active = false;
-    $("#game_unit_orders_default").css("bottom", "-5px");
-    $("#game_status_panel").css("font-size", "0.8em");
-    $(".order_button").css("padding-right", "5px");
+    if ($("#game_unit_orders_default").length > 0) $("#game_unit_orders_default").remove();
+    if ($("#game_unit_orders_settlers").length > 0) $("#game_unit_orders_settlers").remove();
+    $("#game_status_panel_bottom").css("font-size", "0.8em");
   }
 
   if (overview_active) init_overview();

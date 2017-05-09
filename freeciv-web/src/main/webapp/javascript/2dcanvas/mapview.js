@@ -110,14 +110,6 @@ function init_mapview()
 }
 
 
-function sum_width()
-{
-  var sum=0;
-  $("#tabs_menu").children().each( function(){ if ($(this).is(":visible")) sum += $(this).width(); });
-  return sum;
-}
-
-
 /**************************************************************************
   ...
 **************************************************************************/

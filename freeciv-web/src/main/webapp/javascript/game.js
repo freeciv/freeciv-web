@@ -108,9 +108,21 @@ function update_game_status_panel() {
     status_html += "Turn: <b>" + game_info['turn'] + "</b>  ";
   }
 
-  if ($("#game_status_panel").length) {
-    $("#game_status_panel").html(status_html);
+  if ($(window).width() - sum_width() > 800) {
+    if ($("#game_status_panel_top").length) {
+      $("#game_status_panel_top").show();
+      $("#game_status_panel_bottom").hide();
+      $("#game_status_panel_top").html(status_html);
+    }
+  } else {
+    if ($("#game_status_panel_bottom").length) {
+      $("#game_status_panel_top").hide();
+      $("#game_status_panel_bottom").show();
+      $("#game_status_panel_bottom").css("width", $(window).width());
+      $("#game_status_panel_bottom").html(status_html);
+    }
   }
+
 
   var page_title = "Freeciv-web - " + username
                                     + "  (turn:" + game_info['turn'] + ", port:"
@@ -154,4 +166,18 @@ function current_turn_timeout()
   } else {
     return game_info['timeout'];
   }
+}
+
+
+
+/**************************************************************************
+  ...
+**************************************************************************/
+function sum_width()
+{
+  var sum=0;
+  $("#tabs_menu").children().each( function(){
+    if ($(this).is(":visible") && $(this).attr('id') != "game_status_panel_top") sum += $(this).width();
+  });
+  return sum;
 }

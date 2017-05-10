@@ -403,7 +403,13 @@ function update_tile_extras(ptile) {
     farmland.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 13);
     farmland.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
     farmland.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 13);
-    farmland.rotateOnAxis(new THREE.Vector3(0,1,0).normalize(), (2 * Math.PI * Math.random()));
+    var rotation_rnd = Math.random();
+    var rotation_val = 0;
+    if (rotation_rnd < 0.25) rotation_val = 0;
+    if (rotation_rnd > 0.25 && rotation_rnd < 0.5) rotation_val = 2 * Math.PI * 0.25;
+    if (rotation_rnd > 0.5 && rotation_rnd < 0.75) rotation_val = 2 * Math.PI * 0.5;
+    if (rotation_rnd > 0.75) rotation_val = 2 * Math.PI * 0.75;
+    farmland.rotateOnAxis(new THREE.Vector3(0,1,0).normalize(), rotation_val);
     if (scene != null && farmland != null) {
       scene.add(farmland);
     }

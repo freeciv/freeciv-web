@@ -296,6 +296,7 @@ function update_city_position(ptile) {
     new_city.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10);
     new_city.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
     new_city.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
+    new_city.rotateOnAxis(new THREE.Vector3(0,1,0).normalize(), (2 * Math.PI * Math.random()));
 
     if (scene != null && new_city != null) {
       scene.add(new_city);
@@ -341,6 +342,7 @@ function update_city_position(ptile) {
       new_city.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10);
       new_city.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
       new_city.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
+      new_city.rotateOnAxis(new THREE.Vector3(0,1,0).normalize(), (2 * Math.PI * Math.random()));
 
       if (scene != null && new_city != null) {
         scene.add(new_city);
@@ -401,6 +403,7 @@ function update_tile_extras(ptile) {
     farmland.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 13);
     farmland.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
     farmland.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 13);
+    farmland.rotateOnAxis(new THREE.Vector3(0,1,0).normalize(), (2 * Math.PI * Math.random()));
     if (scene != null && farmland != null) {
       scene.add(farmland);
     }
@@ -594,6 +597,7 @@ function update_tile_extras(ptile) {
       extra_model.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10);
       extra_model.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
       extra_model.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
+      extra_model.rotateOnAxis(new THREE.Vector3(0,1,0).normalize(), (2 * Math.PI * Math.random()));
 
       tile_extra_positions[extra_resource['id'] + "." + ptile['index']] = extra_model;
       if (scene != null && extra_model != null) {

@@ -314,7 +314,7 @@ function update_city_position(ptile) {
     var city_label = create_city_label(pcity);
     city_label_positions[ptile['index']] = city_label;
     city_label.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 5);
-    city_label.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 36);
+    city_label.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 39);
     city_label.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 15);
     city_label.rotation.y = Math.PI / 4;
     pcity['webgl_label_hash'] = pcity['name'] + pcity['size'] + pcity['production_value'] + punits.length;

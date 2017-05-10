@@ -39,6 +39,14 @@ More information about the Freeciv AI can be found at the
 Freeciv has AI related
 [introduction tasks](http://freeciv.wikia.com/wiki/Introduction_tasks).
 
+# Rules
+
+A collection of rules for Freeciv is called a ruleset.
+Freeciv-web doesn't support all the rules regular Freeciv can support.
+Rulesets with unsupported rules don't work properly with Freeciv-web.
+
+The rulesets Freeciv-web currently uses comes bundled with Freeciv.
+
 # Upgrading Freeciv-web's Freeciv version
 
 Freeciv-web's Freeciv version is set in

@@ -242,7 +242,10 @@ function generate_help_text(key)
     msg += "<br><br>";
     msg += wiki_on_item_button(improvement['name']);
   } else if (key.indexOf("help_gen_units") != -1) {
-    var punit_type = unit_types[parseInt(key.replace("help_gen_units_", ""))];
+    var obsolete_by;
+    var punit_type
+        = unit_types[parseInt(key.replace("help_gen_units_", ""))];
+
     msg = "<h1>" + punit_type['name'] + "</h1>";
     msg += render_sprite(get_unit_type_image_sprite(punit_type));
     msg += "<br>";
@@ -280,12 +283,24 @@ function generate_help_text(key)
       }
       msg += "</div>";
     }
+
     var treq = punit_type['tech_requirement'];
     if (treq != null && techs[treq] != null) {
       msg += "<div id='utype_fact_req_tech'>";
       msg += "Tech Requirements: " + techs[treq]['name'];
       msg += "</div>";
     }
+
+    obsolete_by = unit_types[punit_type['obsoleted_by']];
+    msg += "<div id='utype_fact_obsolete'>";
+    msg += "Obsolete by: ";
+    if (obsolete_by == U_NOT_OBSOLETED) {
+      msg += "None";
+    } else {
+      msg += obsolete_by['name'];
+    }
+    msg += "</div>";
+
     msg += "</div>";
 
     msg += "<div id='helptext'><p>" + punit_type['helptext'] + "</p></div>";

@@ -247,7 +247,10 @@ function handle_early_chat_msg(packet)
   handle_chat_msg(packet);
 }
 
-/* 100% complete */
+/***************************************************************************
+  The city_info packet is used when the player has full information about a
+  city, including it's internals.
+***************************************************************************/
 function handle_city_info(packet)
 {
   /* Decode the city name. */

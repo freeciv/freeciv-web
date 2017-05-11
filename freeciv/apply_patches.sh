@@ -5,10 +5,6 @@
 
 # Not in the upstream Freeciv server
 # ----------------------------------
-# 0001-Revert-Added-packet-type-web_city_info_addition-to-b reverts SVN r32928
-#               freeciv_web_packets_def_changes and city_fixes need to be adjusted
-#               for the fact that freeciv-web specific part of the packet_city_info
-#               is in a new packet. Also receiving web-client side needs changes
 # activity_null_check is for Freeciv bug #22700.
 # freeciv_segfauls_fix is a workaround some segfaults in the Freeciv server. Freeciv bug #23884.
 # message_escape is a patch for protecting against script injection in the message texts.
@@ -29,8 +25,9 @@
 # multiplayer_movement_rates is http://www.hostedredmine.com/issues/654404
 # max_num_players increases MAX_NUM_PLAYER_SLOTS to 256.
 # max_map_size increases MAP_MAX_SIZE.
+# PACKET_WEB_CITY_INFO_ADDITION is hrm Feature #659446
 
-PATCHLIST="0001-Revert-Added-packet-type-web_city_info_addition-to-b freeciv_web_packets_def_changes city_fixes city_impr_fix2 city-naming-change city_fixes2 metachange text_fixes unithand-change2 current_research_cost freeciv-svn-webclient-changes init_lists_disable goto_fcweb misc_devversion_sync tutorial_ruleset savegame maphand_ch ai_traits_crash server_password barbarian-names activity_null_check message_escape freeciv_segfauls_fix scorelog_filenames disable_global_warming win_chance navajo-remove-long-city-names freeciv_web_ruleset webperimental_install webgl_vision_cheat_temporary user_changeable_gameseed multiplayer_movement_rates longturn max_num_players max_map_size"
+PATCHLIST="freeciv_web_packets_def_changes city_impr_fix2 city-naming-change city_fixes2 metachange text_fixes unithand-change2 current_research_cost freeciv-svn-webclient-changes init_lists_disable goto_fcweb misc_devversion_sync tutorial_ruleset savegame maphand_ch ai_traits_crash server_password barbarian-names activity_null_check message_escape freeciv_segfauls_fix scorelog_filenames disable_global_warming win_chance navajo-remove-long-city-names freeciv_web_ruleset webperimental_install webgl_vision_cheat_temporary user_changeable_gameseed multiplayer_movement_rates longturn max_num_players max_map_size PACKET_WEB_CITY_INFO_ADDITION"
 
 apply_patch() {
   echo "*** Applying $1.patch ***"

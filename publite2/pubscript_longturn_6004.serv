@@ -31,6 +31,7 @@ set contactturns=0
 set minp 0
 set generator RANDOM
 set saveturns=1
+set autosaves=TURN
 metaconnection persistent
 set ec_chat=enabled
 set ec_info=enabled 

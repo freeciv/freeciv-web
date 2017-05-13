@@ -3,7 +3,7 @@ index 5891d00..e8fdc54 100644
 --- a/common/networking/packets.def
 +++ b/common/networking/packets.def
 @@ -2193,6 +2193,7 @@ end
- PACKET_INFO_TEXT_REQ = 258; cs, dsend
+ PACKET_INFO_TEXT_REQ = 259; cs, dsend
    TILE loc;
    UNIT visible_unit;
 +  UNIT focus_unit;

@@ -2,17 +2,17 @@ diff -Nurd -X.diff_ignore freeciv/common/networking/packets.def freeciv/common/n
 --- freeciv/common/networking/packets.def	2016-02-24 02:23:44.690548067 +0200
 +++ freeciv/common/networking/packets.def	2016-02-24 02:27:54.434150635 +0200
 @@ -2155,3 +2155,17 @@
- 
- /*************** Webclient specific packets ****************/
- /* Use range 256:511 for these                             */
+   TURN granary_turns;
+   UINT16 buy_gold_cost;
+ end
 +
 +# used for showing GOTO path in web client.
-+PACKET_GOTO_PATH_REQ = 256; cs, dsend
++PACKET_GOTO_PATH_REQ = 257; cs, dsend
 +  UNIT unit_id;
 +  TILE goal;
 +end
 +
-+PACKET_GOTO_PATH = 257; sc, dsend
++PACKET_GOTO_PATH = 258; sc, dsend
 +  UNIT unit_id;
 +  UINT16 length;
 +  DIRECTION dir[MAX_LEN_ROUTE:length];

@@ -10,16 +10,6 @@ diff -Nurd -X.diff_ignore freeciv/common/networking/packets.def freeciv/common/n
  type GOLD               = UINT32
  type HP                 = UINT8
  type PERCENT            = UINT8
-@@ -632,6 +632,9 @@
-   SINT16 citizen_base[O_LAST];
-   SINT16 usage[O_LAST];
-   UINT16 food_stock, shield_stock;
-+  UINT16 granary_size;
-+  TURN granary_turns;
-+  UINT16 buy_gold_cost;
- 
-   UINT8 traderoute_count;
- 
 @@ -659,9 +662,16 @@
  
    WORKLIST worklist;
@@ -64,10 +54,3 @@ diff -Nurd -X.diff_ignore freeciv/common/networking/packets.def freeciv/common/n
    TECH_LIST global_init_techs[MAX_NUM_TECH_LIST];
    BUILDING_LIST global_init_buildings[MAX_NUM_BUILDING_LIST];
  
-@@ -2139,3 +2152,6 @@
- PACKET_PLAY_MUSIC = 245; sc, lsend
-   STRING tag[MAX_LEN_NAME];
- end
-+
-+/*************** Webclient specific packets ****************/
-+/* Use range 256:511 for these                             */

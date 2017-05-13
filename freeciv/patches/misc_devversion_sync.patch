@@ -21,9 +21,9 @@ diff -Nurd -X.diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
    packet->walls = city_got_citywalls(pcity);
  
 @@ -2007,6 +2013,28 @@
-       BV_SET(packet->improvements, improvement_index(pimprove));
-     }
-   } improvement_iterate_end;
+   web_packet->granary_turns = city_turns_to_grow(pcity);
+   web_packet->buy_gold_cost = city_production_buy_gold_cost(pcity);
+ #endif /* FREECIV_WEB */
 +
 +  city_tile_iterate(city_map_radius_sq_get(pcity), pcenter, ptile) {
 +    char f[2];

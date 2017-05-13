@@ -120,7 +120,7 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
 +      if (same_pos(new_tile, old_tile)) {
 +        dir = -1;
 +      } else {
-+        dir = get_direction_for_step(old_tile, new_tile);
++        dir = get_direction_for_step(&(wld.map), old_tile, new_tile);
 +      }
 +      old_tile = new_tile;
 +      p.dir[i] = dir;

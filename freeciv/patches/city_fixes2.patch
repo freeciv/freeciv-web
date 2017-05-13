@@ -25,7 +25,7 @@ diff -Nurd -X.diff_ignore freeciv/server/cityhand.c freeciv/server/cityhand.c
 -
 -  if (NULL == (ptile = city_map_to_tile(pcenter, city_radius_sq, worker_x,
 -                                        worker_y))) {
-+  if (NULL == (ptile = map_pos_to_tile(worker_x, worker_y))) {
++  if (NULL == (ptile = map_pos_to_tile(&(wld.map), worker_x, worker_y))) {
      log_error("handle_city_make_specialist() unavailable city map {%d,%d} "
                "\"%s\".", worker_x, worker_y, city_name_get(pcity));
      return;
@@ -52,7 +52,7 @@ diff -Nurd -X.diff_ignore freeciv/server/cityhand.c freeciv/server/cityhand.c
 -
 -  if (NULL == (ptile = city_map_to_tile(pcenter, city_radius_sq, worker_x,
 -                                        worker_y))) {
-+  if (NULL == (ptile = map_pos_to_tile(worker_x, worker_y))) {
++  if (NULL == (ptile = map_pos_to_tile(&(wld.map), worker_x, worker_y))) {
      log_error("handle_city_make_worker() unavailable city map {%d,%d} "
                "\"%s\".", worker_x, worker_y, city_name_get(pcity));
      return;

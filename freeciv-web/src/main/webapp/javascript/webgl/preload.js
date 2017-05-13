@@ -27,7 +27,7 @@ var webgl_materials = {};
 var model_filenames = ["AEGIS Cruiser",     "city_european_1",  "Helicopter",    "Pikemen",
                        "Alpine Troops",     "city_european_2",  "Horsemen",      "Rail",
                        "Archers",           "citywalls",        "Howitzer",      "Riflemen",
-                       "Armor",             "Hut",              "Road",
+                       "Armor",             "Hut",
                        "Artillery",         "Cruise Missile",   "Ironclad",      "Settlers",
                        "AWACS",             "Cruiser",
                        "Barbarian Leader",  "Destroyer",        "Irrigation",    "Spy",
@@ -75,36 +75,6 @@ function webgl_preload()
       jungle_sprite.needsUpdate = true;
   } );
 
-  var road_sprite = new THREE.Texture();
-  webgl_textures["road_1"] = road_sprite;
-  textureLoader.load( '/textures/road_1.png', function ( image ) {
-      road_sprite.image = image;
-      road_sprite.needsUpdate = true;
-      var roadMaterial = new THREE.MeshBasicMaterial( { map: road_sprite, side:THREE.DoubleSide } );
-      roadMaterial.transparent = true;
-      webgl_materials['road_1'] = roadMaterial;
-  } );
-
-  var rail_sprite = new THREE.Texture();
-  webgl_textures["rail_1"] = rail_sprite;
-  textureLoader.load( '/textures/rail_1.png', function ( image ) {
-      rail_sprite.image = image;
-      rail_sprite.needsUpdate = true;
-      var railMaterial = new THREE.MeshBasicMaterial( { map: rail_sprite, side:THREE.DoubleSide } );
-      railMaterial.transparent = true;
-      webgl_materials['rail_1'] = railMaterial;
-  } );
-
-  var river_sprite = new THREE.Texture();
-  webgl_textures["river"] = river_sprite;
-  textureLoader.load( '/textures/river.png', function ( image ) {
-      river_sprite.image = image;
-      river_sprite.needsUpdate = true;
-      var riverMaterial = new THREE.MeshBasicMaterial( { map: river_sprite, side:THREE.DoubleSide } );
-      riverMaterial.transparent = true;
-      webgl_materials['river'] = riverMaterial;
-  } );
-
   if (graphics_quality >= QUALITY_MEDIUM) {
     var waternormals = new THREE.Texture();
     webgl_textures["waternormals"] = waternormals;
@@ -126,38 +96,81 @@ function webgl_preload()
 
   }
 
-  /* Preload a texture for each map tile type. */
-  for (var i = 0; i < tiletype_terrains.length; i++) {
-    var imgurl;
-    if (graphics_quality == QUALITY_LOW) imgurl = "/textures/small/" + tiletype_terrains[i] + ".png";
-    if (graphics_quality == QUALITY_MEDIUM) imgurl = "/textures/medium/" + tiletype_terrains[i] + ".png";
-    if (graphics_quality == QUALITY_HIGH) imgurl = "/textures/large/" + tiletype_terrains[i] + ".png";
+  /* Preload terrain tile textures.  */
+  var imgurl;
+  if (graphics_quality == QUALITY_LOW) imgurl = "/textures/small/terrains.png";
+  if (graphics_quality == QUALITY_MEDIUM) imgurl = "/textures/medium/terrains.png";
+  if (graphics_quality == QUALITY_HIGH) imgurl = "/textures/large/terrains.png";
 
-    textureLoader.load(imgurl, (function (url, index) {
-            return function (image, i) {
-                var count = 0;
-                for (var k in webgl_textures) {
-                   ++count;
-                }
-                // 0 to 30%, textures.
-                $("#download_progress").html(" textures " + Math.floor(0.3 * 100 * count / (7 +tiletype_terrains.length)) + "%");
-                webgl_textures[tiletype_terrains[index]] = new THREE.Texture();
-                webgl_textures[tiletype_terrains[index]].image = image;
-                webgl_textures[tiletype_terrains[index]].wrapS = THREE.RepeatWrapping;
-                webgl_textures[tiletype_terrains[index]].wrapT = THREE.RepeatWrapping;
+  textureLoader.load(imgurl, (function (url) {
+          return function (image) {
+                $("#download_progress").html(" terrain textures 10%");
+                webgl_textures["terrains"] = new THREE.Texture();
+                webgl_textures["terrains"].image = image;
+                webgl_textures["terrains"].wrapS = THREE.RepeatWrapping;
+                webgl_textures["terrains"].wrapT = THREE.RepeatWrapping;
                 if (graphics_quality == QUALITY_LOW) {
-                  webgl_textures[tiletype_terrains[index]].magFilter = THREE.NearestFilter;
-                  webgl_textures[tiletype_terrains[index]].minFilter = THREE.NearestFilter;
+                  webgl_textures["terrains"].magFilter = THREE.NearestFilter;
+                  webgl_textures["terrains"].minFilter = THREE.NearestFilter;
                 } else {
-                  webgl_textures[tiletype_terrains[index]].magFilter = THREE.LinearFilter;
-                  webgl_textures[tiletype_terrains[index]].minFilter = THREE.LinearFilter;
+                  webgl_textures["terrains"].magFilter = THREE.LinearFilter;
+                  webgl_textures["terrains"].minFilter = THREE.LinearFilter;
                 }
 
-                webgl_textures[tiletype_terrains[index]].needsUpdate = true;
+                webgl_textures["terrains"].needsUpdate = true;
             }
-      })(imgurl, i)
-    );
-  }
+    })(imgurl)
+  );
+
+  /* Preload road textures. */
+  if (graphics_quality == QUALITY_LOW) imgurl = "/textures/small/roads.png";
+  if (graphics_quality == QUALITY_MEDIUM) imgurl = "/textures/medium/roads.png";
+  if (graphics_quality == QUALITY_HIGH) imgurl = "/textures/large/roads.png";
+
+  textureLoader.load(imgurl, (function (url) {
+          return function (image) {
+                $("#download_progress").html(" road textures 15%");
+                webgl_textures["roads"] = new THREE.Texture();
+                webgl_textures["roads"].image = image;
+                webgl_textures["roads"].wrapS = THREE.RepeatWrapping;
+                webgl_textures["roads"].wrapT = THREE.RepeatWrapping;
+                if (graphics_quality == QUALITY_LOW) {
+                  webgl_textures["roads"].magFilter = THREE.NearestFilter;
+                  webgl_textures["roads"].minFilter = THREE.NearestFilter;
+                } else {
+                  webgl_textures["roads"].magFilter = THREE.LinearFilter;
+                  webgl_textures["roads"].minFilter = THREE.LinearFilter;
+                }
+
+                webgl_textures["roads"].needsUpdate = true;
+            }
+    })(imgurl)
+  );
+
+  /* Preload railroads textures. */
+  if (graphics_quality == QUALITY_LOW) imgurl = "/textures/small/railroads.png";
+  if (graphics_quality == QUALITY_MEDIUM) imgurl = "/textures/medium/railroads.png";
+  if (graphics_quality == QUALITY_HIGH) imgurl = "/textures/large/railroads.png";
+
+  textureLoader.load(imgurl, (function (url) {
+          return function (image) {
+                $("#download_progress").html(" railroad textures 25%");
+                webgl_textures["railroads"] = new THREE.Texture();
+                webgl_textures["railroads"].image = image;
+                webgl_textures["railroads"].wrapS = THREE.RepeatWrapping;
+                webgl_textures["railroads"].wrapT = THREE.RepeatWrapping;
+                if (graphics_quality == QUALITY_LOW) {
+                  webgl_textures["railroads"].magFilter = THREE.NearestFilter;
+                  webgl_textures["railroads"].minFilter = THREE.NearestFilter;
+                } else {
+                  webgl_textures["railroads"].magFilter = THREE.LinearFilter;
+                  webgl_textures["railroads"].minFilter = THREE.LinearFilter;
+                }
+
+                webgl_textures["railroads"].needsUpdate = true;
+            }
+    })(imgurl)
+  );
 
 }
 

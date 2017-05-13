@@ -38,9 +38,6 @@ var jungle_positions = {}; // tile index is key, boolean is value.
 // stores tile extras (eg specials), key is extra + "." + tile_index.
 var tile_extra_positions = {};
 
-var road_positions = {};
-var rail_positions = {};
-
 var selected_unit_indicator = null;
 var selected_unit_material = null;
 var selected_unit_material_counter = 0;
@@ -426,129 +423,6 @@ function update_tile_extras(ptile) {
     mine.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
     if (scene != null && mine != null) {
       scene.add(mine);
-    }
-  }
-
-  if (scene != null && road_positions[ptile['index']] == null && tile_has_extra(ptile, EXTRA_ROAD)) {
-    var road_added = false;
-    var pos = map_to_scene_coords(ptile['x'], ptile['y']);
-    // 1. iterate over adjacent tiles, see if they have road.
-    for (var dir = 0; dir < 8; dir++) {
-      var checktile = mapstep(ptile, dir);
-      if (checktile != null && tile_has_extra(checktile, EXTRA_ROAD)) {
-        // if the road wraps the map edge, then skip it.
-        if ((ptile['x'] == 0 && checktile['x'] == map['xsize'] -1)
-            ||  (ptile['x'] == map['xsize'] -1 && checktile['x'] == 0)) continue;
-
-        // 2. if road on this tile and adjacent tile, then add rectangle as road between this tile and adjacent tile.
-        road_added = true;
-        var road_width = 15;
-        var dest = map_to_scene_coords(checktile['x'], checktile['y']);
-        var roadGemetry = new THREE.PlaneGeometry(60, 15);
-        roadGemetry.dynamic = true;
-        var delta = 0;
-        if (dir == 1 || dir == 6) delta = 10;
-        roadGemetry.vertices[0].x = 0.0;
-        roadGemetry.vertices[0].y = 0.0 - delta;
-        roadGemetry.vertices[0].z = 0.0;
-        roadGemetry.vertices[1].x = dest['x'] - pos['x'];
-        roadGemetry.vertices[1].y = (checktile['height'] - ptile['height']) * 100 - delta;
-        roadGemetry.vertices[1].z = dest['y'] - pos['y'];
-        roadGemetry.vertices[2].x = 0.0;
-        roadGemetry.vertices[2].y = delta;
-        roadGemetry.vertices[2].z = road_width;
-        roadGemetry.vertices[3].x = dest['x'] - pos['x'];
-        roadGemetry.vertices[3].y = (checktile['height'] - ptile['height']) * 100 + delta;
-        roadGemetry.vertices[3].z = dest['y'] - pos['y'] + road_width;
-
-        roadGemetry.verticesNeedUpdate = true;
-
-        var road = new THREE.Mesh(roadGemetry, webgl_materials['road_1']);
-
-        road.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
-        road.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 5);
-        road.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
-        scene.add(road);
-        road_positions[ptile['index']] = road;
-        if (Math.random() >= 0.5) break;
-      }
-    }
-
-    // 3. if road on this tile only, then use Road model.
-    if (road_added == false) {
-      var road = webgl_get_model("Road");
-      if (road == null) return;
-      road_positions[ptile['index']] = road;
-      road.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
-      road.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 4);
-      road.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
-      if (scene != null && road != null) {
-        scene.add(road);
-      }
-    }
-  }
-
-
-  if (scene != null && road_positions[ptile['index']] == null && tile_has_extra(ptile, EXTRA_RAIL)) {
-    var rail_added = false;
-    var pos = map_to_scene_coords(ptile['x'], ptile['y']);
-
-    if (road_positions[ptile['index']] != null) {
-      if (scene != null) scene.remove(road_positions[ptile['index']]);
-    }
-
-    // 1. iterate over adjacent tiles, see if they have rail.
-    for (var dir = 0; dir < 8; dir++) {
-      var checktile = mapstep(ptile, dir);
-      if (checktile != null && tile_has_extra(checktile, EXTRA_RAIL)) {
-        // if the rail wraps the map edge, then skip it.
-        if ((ptile['x'] == 0 && checktile['x'] == map['xsize'] -1)
-            ||  (ptile['x'] == map['xsize'] -1 && checktile['x'] == 0)) continue;
-
-        // 2. if rail on this tile and adjacent tile, then add rectangle as rail between this tile and adjacent tile.
-        rail_added = true;
-        var rail_width = 15;
-        var dest = map_to_scene_coords(checktile['x'], checktile['y']);
-        var railGemetry = new THREE.PlaneGeometry(60, 15);
-        railGemetry.dynamic = true;
-        var delta = 0;
-        if (dir == 1 || dir == 6) delta = 10;
-        railGemetry.vertices[0].x = 0.0;
-        railGemetry.vertices[0].y = 0.0 - delta;
-        railGemetry.vertices[0].z = 0.0;
-        railGemetry.vertices[1].x = dest['x'] - pos['x'];
-        railGemetry.vertices[1].y = (checktile['height'] - ptile['height']) * 100 - delta;
-        railGemetry.vertices[1].z = dest['y'] - pos['y'];
-        railGemetry.vertices[2].x = 0.0;
-        railGemetry.vertices[2].y = delta;
-        railGemetry.vertices[2].z = rail_width;
-        railGemetry.vertices[3].x = dest['x'] - pos['x'];
-        railGemetry.vertices[3].y = (checktile['height'] - ptile['height']) * 100 + delta;
-        railGemetry.vertices[3].z = dest['y'] - pos['y'] + rail_width;
-
-        railGemetry.verticesNeedUpdate = true;
-
-        var rail = new THREE.Mesh(railGemetry, webgl_materials['rail_1']);
-
-        rail.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
-        rail.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 5);
-        rail.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
-        scene.add(rail);
-        rail_positions[ptile['index']] = rail;
-      }
-    }
-
-    // 3. if rail on this tile only, then use Rail model.
-    if (rail_added == false) {
-      var rail = webgl_get_model("Rail");
-      if (rail == null) return;
-      rail_positions[ptile['index']] = rail;
-      rail.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x']);
-      rail.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 4);
-      rail.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y']);
-      if (scene != null && rail != null) {
-        scene.add(rail);
-      }
     }
   }
 

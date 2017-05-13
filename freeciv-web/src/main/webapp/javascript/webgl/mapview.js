@@ -174,24 +174,27 @@ function init_webgl_mapview() {
   /* heightmap image */
   create_heightmap();
   if (graphics_quality > QUALITY_LOW) init_borders_image();
+  init_roads_image();
 
   /* uniforms are variables which are used in the fragment shader fragment.js */
-  var terrain_uniforms = {
+  var freeciv_uniforms = {
     maptiles: { type: "t", value: init_map_tiletype_image() },
     borders: { type: "t", value: (graphics_quality > QUALITY_LOW) ? update_borders_image() : null },
     borders_enabled: { type: "b", value: graphics_quality > QUALITY_LOW },
     map_x_size: { type: "f", value: map['xsize'] },
-    map_y_size: { type: "f", value: map['ysize'] }
+    map_y_size: { type: "f", value: map['ysize'] },
+    terrains: {type: "t", value: webgl_textures["terrains"]},
+    roadsmap: { type: "t", value: update_roads_image()},
+    roadsprites: {type: "t", value: webgl_textures["roads"]},
+    railroadsprites: {type: "t", value: webgl_textures["railroads"]}
+
   };
 
-  /* create a texture for each map tile type. */
-  for (var i = 0; i < tiletype_terrains.length; i++) {
-    terrain_uniforms[tiletype_terrains[i]] = {type: "t", value: webgl_textures[tiletype_terrains[i]]};
-  }
+
 
   /* create a WebGL shader for terrain. */
   var terrain_material = new THREE.ShaderMaterial({
-    uniforms: terrain_uniforms,
+    uniforms: freeciv_uniforms,
     vertexShader: terrainVertShader,
     fragmentShader: terrainFragShader
   });

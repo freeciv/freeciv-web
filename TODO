@@ -80,6 +80,13 @@ Unimplemented rule variation support:
   Open server/settings.c. Find topology_callback(). Remove the blocking of
   the toplogy you are working to support.
 - The ID of certain extras are hard coded.
+  - EXTRA_NONE isn't from the ruleset. There is no need to do anything about
+    it.
+  - replace the hard coded drawing code with code that draws the extra as
+    specified by the tileset Freeciv-web extracts from and by the extra
+    related packages the server sends.
+  - replace the hard coded control code. Maybe delay this part until unit
+    activities to becomes action enabler controlled?
 - The graphic tags of certain extras are hard coded.
 - Wikipedia help is only extracted for items that appear in the classic
   ruleset.

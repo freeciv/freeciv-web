@@ -97,7 +97,7 @@
 	},
 
 	{
-	"DbgColor" : 12355935,
+	"DbgColor" : 3744854,
 	"DbgIndex" : 7,
 	"DbgName" : "body_color",
 	"colorDiffuse" : [0.000579, 0.00212, 0.005234],
@@ -109,7 +109,7 @@
 	},
 
 	{
-	"DbgColor" : 11353132,
+	"DbgColor" : 12355935,
 	"DbgIndex" : 8,
 	"DbgName" : "deck",
 	"colorDiffuse" : [0.132859, 0.132859, 0.132859],
@@ -121,7 +121,7 @@
 	},
 
 	{
-	"DbgColor" : 3744854,
+	"DbgColor" : 11353132,
 	"DbgIndex" : 9,
 	"DbgName" : "body",
 	"colorDiffuse" : [0.029371, 0.03295, 0.075187],

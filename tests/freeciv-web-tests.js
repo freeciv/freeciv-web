@@ -204,8 +204,12 @@ casper.test.begin('Test webperimental', 1, function suite(test) {
     $('#ruleset').val('webperimental').change();
   });
 
-  casper.waitForText(
-        "Map",
+  casper.waitFor(
+        function() {
+          return this.evaluate(function() {
+            return "Webperimental" == ruleset_control['name'];
+          });
+        },
         function() {
           test.pass("Loaded webperimental.");
         });

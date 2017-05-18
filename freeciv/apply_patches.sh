@@ -17,7 +17,6 @@
 #     when the name is url encoded in json protocol.
 #     MAX_LEN_CITYNAME was increased in patch #7305 (SVN r33048)
 #     Giving one of the longer removed city names to a new city still causes problems.
-# freeciv_web_ruleset allows Freeciv-web to load rulesets not marked as web-compatible (civ2civ3). See discussion in patch #7514.
 # webperimental_install make "make install" install webperimental.
 # webgl_vision_cheat_temporary is a temporary solution to reveal terrain types to the WebGL client.
 # user_changeable_gameseed allows user to change map and game seed, to get reliable benchmarks of WebGL version.
@@ -25,8 +24,9 @@
 # multiplayer_movement_rates is http://www.hostedredmine.com/issues/654404
 # max_num_players increases MAX_NUM_PLAYER_SLOTS to 256.
 # max_map_size increases MAP_MAX_SIZE.
+# Incite-City-Escape-is-a-reason-for-war is hrm Bug #661539
 
-PATCHLIST="freeciv_web_packets_def_changes city_impr_fix2 city-naming-change city_fixes2 metachange text_fixes unithand-change2 current_research_cost freeciv-svn-webclient-changes init_lists_disable goto_fcweb misc_devversion_sync tutorial_ruleset savegame maphand_ch ai_traits_crash server_password barbarian-names activity_null_check message_escape freeciv_segfauls_fix scorelog_filenames disable_global_warming win_chance navajo-remove-long-city-names freeciv_web_ruleset webperimental_install webgl_vision_cheat_temporary user_changeable_gameseed multiplayer_movement_rates longturn max_num_players max_map_size "
+PATCHLIST="freeciv_web_packets_def_changes city_impr_fix2 city-naming-change city_fixes2 metachange text_fixes unithand-change2 current_research_cost freeciv-svn-webclient-changes init_lists_disable goto_fcweb misc_devversion_sync tutorial_ruleset savegame maphand_ch ai_traits_crash server_password barbarian-names activity_null_check message_escape freeciv_segfauls_fix scorelog_filenames disable_global_warming win_chance navajo-remove-long-city-names webperimental_install webgl_vision_cheat_temporary user_changeable_gameseed multiplayer_movement_rates longturn max_num_players max_map_size Incite-City-Escape-is-a-reason-for-war "
 
 apply_patch() {
   echo "*** Applying $1.patch ***"

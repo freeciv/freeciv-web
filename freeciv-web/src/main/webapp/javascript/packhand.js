@@ -564,7 +564,8 @@ function handle_city_sabotage_list(packet)
 {
   popup_sabotage_dialog(game_find_unit_by_number(packet['diplomat_id']),
                         game_find_city_by_number(packet['city_id']),
-                        new BitVector(packet['improvements']));
+                        new BitVector(packet['improvements']),
+                        packet['action_id']);
 }
 
 function handle_player_attribute_chunk(packet)
@@ -764,13 +765,14 @@ function handle_unit_action_answer(packet)
       popup_bribe_dialog(actor_unit, target_unit, cost);
       return;
     }
-  } else if (action_type == ACTION_SPY_INCITE_CITY) {
+  } else if (action_type == ACTION_SPY_INCITE_CITY
+             || action_type == ACTION_SPY_INCITE_CITY_ESC) {
     if (target_city == null) {
       console.log("Bad target city (" + target_id
                   + ") in unit action answer.");
       return;
     } else {
-      popup_incite_dialog(actor_unit, target_city, cost);
+      popup_incite_dialog(actor_unit, target_city, cost, action_type);
       return;
     }
   } else if (action_type == ACTION_COUNT) {

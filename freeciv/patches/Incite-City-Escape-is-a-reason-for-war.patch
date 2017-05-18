@@ -1,0 +1,165 @@
+From 0a81cf39c13afd5a2a95a43873f3d6586459491a Mon Sep 17 00:00:00 2001
+From: Sveinung Kvilhaugsvik <sveinung84@users.sourceforge.net>
+Date: Wed, 17 May 2017 13:50:39 +0200
+Subject: [PATCH 5/6] "Incite City Escape" is a reason for war.
+
+When "Incite City" was split in hrm Feature #660927 the Casus Belli weren't
+given to "Incite City Escape" too. Do it.
+
+See hrm Bug #661539
+---
+ data/alien/effects.ruleset         | 9 +++++++++
+ data/civ1/effects.ruleset          | 9 +++++++++
+ data/civ2/effects.ruleset          | 9 +++++++++
+ data/civ2civ3/effects.ruleset      | 9 +++++++++
+ data/classic/effects.ruleset       | 9 +++++++++
+ data/experimental/effects.ruleset  | 9 +++++++++
+ data/multiplayer/effects.ruleset   | 9 +++++++++
+ data/sandbox/effects.ruleset       | 9 +++++++++
+ data/webperimental/effects.ruleset | 9 +++++++++
+ server/rscompat.c                  | 5 +++++
+ 10 files changed, 86 insertions(+)
+
+diff --git a/data/civ2/effects.ruleset b/data/civ2/effects.ruleset
+index 259bd33..2ec14dd 100644
+--- a/data/civ2/effects.ruleset
++++ b/data/civ2/effects.ruleset
+@@ -2405,6 +2405,15 @@ reqs	=
+       "DiplRel", "War", "Local", FALSE
+     }
+ 
++[effect_incident_success_incite_esc]
++type	= "Casus_Belli_Success"
++value	= 1
++reqs	=
++    { "type", "name", "range", "present"
++      "Action", "Incite City Escape", "Local", TRUE
++      "DiplRel", "War", "Local", FALSE
++    }
++
+ [effect_incident_success_poison]
+ type	= "Casus_Belli_Success"
+ value	= 1
+diff --git a/data/civ2civ3/effects.ruleset b/data/civ2civ3/effects.ruleset
+index e16c339..9f494a9 100644
+--- a/data/civ2civ3/effects.ruleset
++++ b/data/civ2civ3/effects.ruleset
+@@ -4297,6 +4297,15 @@ reqs	=
+       "DiplRel", "War", "Local", FALSE
+     }
+ 
++[effect_incident_success_incite_esc]
++type	= "Casus_Belli_Success"
++value	= 1
++reqs	=
++    { "type", "name", "range", "present"
++      "Action", "Incite City Escape", "Local", TRUE
++      "DiplRel", "War", "Local", FALSE
++    }
++
+ [effect_incident_success_poison]
+ type	= "Casus_Belli_Success"
+ value	= 1
+diff --git a/data/classic/effects.ruleset b/data/classic/effects.ruleset
+index af428d0..dec0d93 100644
+--- a/data/classic/effects.ruleset
++++ b/data/classic/effects.ruleset
+@@ -2472,6 +2472,15 @@ reqs	=
+       "DiplRel", "War", "Local", FALSE
+     }
+ 
++[effect_incident_success_incite_esc]
++type	= "Casus_Belli_Success"
++value	= 1
++reqs	=
++    { "type", "name", "range", "present"
++      "Action", "Incite City Escape", "Local", TRUE
++      "DiplRel", "War", "Local", FALSE
++    }
++
+ [effect_incident_success_poison]
+ type	= "Casus_Belli_Success"
+ value	= 1
+diff --git a/data/experimental/effects.ruleset b/data/experimental/effects.ruleset
+index 512bc1d..6080a7c 100644
+--- a/data/experimental/effects.ruleset
++++ b/data/experimental/effects.ruleset
+@@ -2855,6 +2855,15 @@ reqs	=
+       "DiplRel", "War", "Local", FALSE
+     }
+ 
++[effect_incident_success_incite_esc]
++type	= "Casus_Belli_Success"
++value	= 1
++reqs	=
++    { "type", "name", "range", "present"
++      "Action", "Incite City Escape", "Local", TRUE
++      "DiplRel", "War", "Local", FALSE
++    }
++
+ [effect_incident_success_poison]
+ type	= "Casus_Belli_Success"
+ value	= 1
+diff --git a/data/multiplayer/effects.ruleset b/data/multiplayer/effects.ruleset
+index 2e2f52c..aa984b2 100644
+--- a/data/multiplayer/effects.ruleset
++++ b/data/multiplayer/effects.ruleset
+@@ -2507,6 +2507,15 @@ reqs	=
+       "DiplRel", "War", "Local", FALSE
+     }
+ 
++[effect_incident_success_incite_esc]
++type	= "Casus_Belli_Success"
++value	= 1
++reqs	=
++    { "type", "name", "range", "present"
++      "Action", "Incite City Escape", "Local", TRUE
++      "DiplRel", "War", "Local", FALSE
++    }
++
+ [effect_incident_success_poison]
+ type	= "Casus_Belli_Success"
+ value	= 1
+diff --git a/data/sandbox/effects.ruleset b/data/sandbox/effects.ruleset
+index d326870..5956249 100644
+--- a/data/sandbox/effects.ruleset
++++ b/data/sandbox/effects.ruleset
+@@ -4357,6 +4357,15 @@ reqs	=
+       "DiplRel", "War", "Local", FALSE
+     }
+ 
++[effect_incident_success_incite_esc]
++type	= "Casus_Belli_Success"
++value	= 1
++reqs	=
++    { "type", "name", "range", "present"
++      "Action", "Incite City Escape", "Local", TRUE
++      "DiplRel", "War", "Local", FALSE
++    }
++
+ [effect_incident_success_poison]
+ type	= "Casus_Belli_Success"
+ value	= 1
+diff --git a/data/webperimental/effects.ruleset b/data/webperimental/effects.ruleset
+index 70da8c6..5c00589 100644
+--- a/data/webperimental/effects.ruleset
++++ b/data/webperimental/effects.ruleset
+@@ -2542,6 +2542,15 @@ reqs	=
+       "DiplRel", "War", "Local", FALSE
+     }
+ 
++[effect_incident_success_incite_esc]
++type	= "Casus_Belli_Success"
++value	= 1
++reqs	=
++    { "type", "name", "range", "present"
++      "Action", "Incite City Escape", "Local", TRUE
++      "DiplRel", "War", "Local", FALSE
++    }
++
+ [effect_incident_success_poison]
+ type	= "Casus_Belli_Success"
+ value	= 1
+-- 
+2.1.4
+

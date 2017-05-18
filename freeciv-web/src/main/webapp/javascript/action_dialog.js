@@ -197,6 +197,7 @@ function act_sel_click_function(parent_id,
       $(parent_id).remove();
     };
   case ACTION_SPY_INCITE_CITY:
+  case ACTION_SPY_INCITE_CITY_ESC:
     return function() {
       var packet = {
         "pid"         : packet_unit_action_query,
@@ -490,7 +491,7 @@ function popup_bribe_dialog(actor_unit, target_unit, cost)
   Show the player the price of inviting the city and, if inciting is
   possible, allow him to order it done.
 **************************************************************************/
-function popup_incite_dialog(actor_unit, target_city, cost)
+function popup_incite_dialog(actor_unit, target_city, cost, act_id)
 {
   var incite_possible;
   var id;
@@ -531,7 +532,7 @@ function popup_incite_dialog(actor_unit, target_city, cost)
                                                "target_id": target_city['id'],
                                                "value" : 0,
                                                "name" : "",
-                                               "action_type": ACTION_SPY_INCITE_CITY};
+                                               "action_type": act_id};
                                  send_request(JSON.stringify(packet));
 
                                  $(id).dialog('close');
@@ -663,7 +664,7 @@ function popup_steal_tech_selection_dialog(actor_unit, target_city,
   Needed because of JavaScript's scoping rules.
 **************************************************************************/
 function create_sabotage_impr_button(improvement, parent_id,
-                                     actor_unit_id, target_city_id)
+                                     actor_unit_id, target_city_id, act_id)
 {
   /* Create the initial button with this tech */
   var button = {
@@ -675,7 +676,7 @@ function create_sabotage_impr_button(improvement, parent_id,
         "target_id"    : target_city_id,
         "value"        : encode_building_id(improvement['id']),
         "name"         : "",
-        "action_type"  : ACTION_SPY_TARGETED_SABOTAGE_CITY
+        "action_type"  : act_id
       };
       send_request(JSON.stringify(packet));
 
@@ -690,7 +691,7 @@ function create_sabotage_impr_button(improvement, parent_id,
 /**************************************************************************
   Select what improvement to sabotage when doing targeted sabotage city.
 **************************************************************************/
-function popup_sabotage_dialog(actor_unit, target_city, city_imprs)
+function popup_sabotage_dialog(actor_unit, target_city, city_imprs, act_id)
 {
   var id = "sabotage_impr_dialog_" + actor_unit['id'];
   var buttons = [];
@@ -712,7 +713,8 @@ function popup_sabotage_dialog(actor_unit, target_city, city_imprs)
        * sabotaging it as above zero. */
       buttons.push(create_sabotage_impr_button(improvement, id,
                                                actor_unit['id'],
-                                               target_city['id']));
+                                               target_city['id'],
+                                               act_id));
     }
   }
 

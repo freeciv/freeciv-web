@@ -764,13 +764,14 @@ function handle_unit_action_answer(packet)
       popup_bribe_dialog(actor_unit, target_unit, cost);
       return;
     }
-  } else if (action_type == ACTION_SPY_INCITE_CITY) {
+  } else if (action_type == ACTION_SPY_INCITE_CITY
+             || action_type == ACTION_SPY_INCITE_CITY_ESC) {
     if (target_city == null) {
       console.log("Bad target city (" + target_id
                   + ") in unit action answer.");
       return;
     } else {
-      popup_incite_dialog(actor_unit, target_city, cost);
+      popup_incite_dialog(actor_unit, target_city, cost, action_type);
       return;
     }
   } else if (action_type == ACTION_COUNT) {

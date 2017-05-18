@@ -197,6 +197,7 @@ function act_sel_click_function(parent_id,
       $(parent_id).remove();
     };
   case ACTION_SPY_INCITE_CITY:
+  case ACTION_SPY_INCITE_CITY_ESC:
     return function() {
       var packet = {
         "pid"         : packet_unit_action_query,
@@ -490,7 +491,7 @@ function popup_bribe_dialog(actor_unit, target_unit, cost)
   Show the player the price of inviting the city and, if inciting is
   possible, allow him to order it done.
 **************************************************************************/
-function popup_incite_dialog(actor_unit, target_city, cost)
+function popup_incite_dialog(actor_unit, target_city, cost, act_id)
 {
   var incite_possible;
   var id;
@@ -531,7 +532,7 @@ function popup_incite_dialog(actor_unit, target_city, cost)
                                                "target_id": target_city['id'],
                                                "value" : 0,
                                                "name" : "",
-                                               "action_type": ACTION_SPY_INCITE_CITY};
+                                               "action_type": act_id};
                                  send_request(JSON.stringify(packet));
 
                                  $(id).dialog('close');

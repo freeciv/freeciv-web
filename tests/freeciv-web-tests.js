@@ -179,7 +179,8 @@ casper.test.begin('Test starting new Freeciv-web game', 10, function suite(test)
     });
 });
 
-casper.test.begin('Test webperimental', 1, function suite(test) {
+casper.test.begin('Test pregame settings dialog ruleset switcher',
+                  3, function suite(test) {
   casper.start("http://localhost/webclient/?action=new");
 
   casper.waitForSelector('#username_req', function() {
@@ -212,6 +213,44 @@ casper.test.begin('Test webperimental', 1, function suite(test) {
         },
         function() {
           test.pass("Loaded webperimental.");
+        });
+
+  casper.wait(1000, function() {
+    this.echo("Loading civ2civ3.");
+  });
+
+  casper.thenEvaluate(function() {
+    /* Change to civ2civ3. */
+    $('#ruleset').val('civ2civ3').change();
+  });
+
+  casper.waitFor(
+        function() {
+          return this.evaluate(function() {
+            return "Civ2Civ3 ruleset" == ruleset_control['name'];
+          });
+        },
+        function() {
+          test.pass("Loaded civ2civ3.");
+        });
+
+  casper.wait(1000, function() {
+    this.echo("Loading classic.");
+  });
+
+  casper.thenEvaluate(function() {
+    /* Change to classic. */
+    $('#ruleset').val('classic').change();
+  });
+
+  casper.waitFor(
+        function() {
+          return this.evaluate(function() {
+            return "Classic ruleset" == ruleset_control['name'];
+          });
+        },
+        function() {
+          test.pass("Loaded classic.");
         });
 
   casper.run(function() {

@@ -29,6 +29,8 @@ var unit_flag_positions = {};
 var unit_label_positions = {};
 var unit_activities_positions = {};
 
+var map_tile_label_positions = {};
+
 var unit_health_positions = {};
 var unit_healthpercentage_positions = {};
 
@@ -91,7 +93,8 @@ function update_unit_position(ptile) {
     new_unit.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 4);
     new_unit.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height - 2);
     new_unit.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 4);
-    new_unit.rotateOnAxis(new THREE.Vector3(0,1,0).normalize(), (convert_unit_rotation(visible_unit['facing']) * Math.PI * 2 / 8));
+    var rnd_rotation = Math.floor(Math.random() * 8);
+    new_unit.rotateOnAxis(new THREE.Vector3(0,1,0).normalize(), (convert_unit_rotation(rnd_rotation) * Math.PI * 2 / 8));
     new_unit.updateMatrix();
 
     if (scene != null && new_unit != null) {
@@ -515,6 +518,17 @@ function update_tile_extras(ptile) {
     jungle_geometry.verticesNeedUpdate = true;
   }
 
+
+  if (scene != null && ptile['label'] != null && ptile['label'].length > 0 && map_tile_label_positions[ptile['index']] == null) {
+    map_tile_label_positions[ptile['index']] = ptile;
+    var label = create_map_tile_label(ptile);
+    var pos = map_to_scene_coords(ptile['x'], ptile['y']);
+    label.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 5);
+    label.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 29);
+    label.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 15);
+    label.rotation.y = Math.PI / 4;
+    scene.add(label);
+  }
 
 }
 

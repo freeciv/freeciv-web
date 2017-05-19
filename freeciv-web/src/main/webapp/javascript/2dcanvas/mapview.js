@@ -102,6 +102,7 @@ function init_mapview()
     fullfog[i] = buf;
   }
 
+  if (is_small_screen()) MAPVIEW_REFRESH_INTERVAL = 12;
 
   orientation_changed();
   init_sprites();
@@ -332,10 +333,12 @@ function mapview_put_city_bar(pcanvas, city, canvas_x, canvas_y) {
 **************************************************************************/
 function mapview_put_tile_label(pcanvas, tile, canvas_x, canvas_y) {
   var text = tile['label'];
-  var txt_measure = pcanvas.measureText(text);
+  if (text != null && text.length > 0) {
+    var txt_measure = pcanvas.measureText(text);
 
-  pcanvas.fillStyle = "rgba(255, 255, 255, 1)";
-  pcanvas.fillText(text, canvas_x + normal_tile_width / 2 - Math.floor(txt_measure.width / 2), canvas_y - 1);
+    pcanvas.fillStyle = "rgba(255, 255, 255, 1)";
+    pcanvas.fillText(text, canvas_x + normal_tile_width / 2 - Math.floor(txt_measure.width / 2), canvas_y - 1);
+  }
 }
 
 /**************************************************************************

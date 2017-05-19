@@ -88,6 +88,7 @@ echo "==== Building freeciv ===="
 cd freeciv && sudo -u travis make install
 
 echo "==== Building freeciv-web ===="
+touch ${basedir}/freeciv-web/src/main/webapp/fpfeed.json
 cd /var/lib/tomcat8 && sudo chmod -R 777 webapps logs && setfacl -d -m g::rwx webapps && sudo chown -R www-data:www-data webapps/
 sed -e "s/vagrant//" ${basedir}/freeciv-web/src/main/webapp/META-INF/context.xml.dist > ${basedir}/freeciv-web/src/main/webapp/META-INF/context.xml
 cp ${basedir}/freeciv-web/src/main/webapp/WEB-INF/config.properties.dist ${basedir}/freeciv-web/src/main/webapp/WEB-INF/config.properties

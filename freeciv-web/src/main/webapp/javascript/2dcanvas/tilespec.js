@@ -348,7 +348,7 @@ function fill_sprite_array(layer, ptile, pedge, pcorner, punit, pcity, citymode)
       break;
 
     case LAYER_TILELABEL:
-      if (ptile != null) {
+      if (ptile != null && ptile['label'] != null && ptile['label'].length > 0) {
         sprite_array.push(get_tile_label_text(ptile));
       }
       break;

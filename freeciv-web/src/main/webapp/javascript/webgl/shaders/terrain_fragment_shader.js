@@ -126,6 +126,9 @@ float mountains_low_begin = 98.0;
 float mountains_low_end = 100.0;
 float mountains_high = 115.0;
 
+vec3 ambiant = vec3(0.27, 0.55, 1.);
+vec3 light = vec3(0.8, 0.6, 0.7);
+
 vec2 texture_coord;
 
 
@@ -269,12 +272,11 @@ void main(void)
 
       vec4 Ca = texture2D(terrains, vec2(mod(map_x_size * (vUv.x / 4.0), 0.25) + sprite_pos0_x , mod((vUv.y * map_y_size / 4.0), 0.25) + sprite_pos0_y));
       vec4 Cb = texture2D(terrains, vec2(mod(map_x_size * (vUv.x / 4.0), 0.25) + sprite_pos10_x , mod((vUv.y * map_y_size / 4.0), 0.25) + sprite_pos10_y));
-      c = Ca.rgb * blend_amount + Cb.rgb * (1.0 - blend_amount);
+      c = mix(Ca.rgb, Cb.rgb, (1.0 - blend_amount));
   } else if (vPosition.y > mountains_low_begin) {
       if (vPosition.y < mountains_low_end) {
         vec4 Cmountain = texture2D(terrains, vec2(mod(map_x_size * (vUv.x / 4.0), 0.25) + sprite_pos10_x , mod((vUv.y * map_y_size / 4.0), 0.25) + sprite_pos10_y));
-        c = chosen_terrain_color.rgb * (1.0 - smoothstep(mountains_low_begin, mountains_low_end, vPosition.y))
-            + Cmountain.rgb * smoothstep(mountains_low_begin, mountains_low_end, vPosition.y);
+        c = mix(chosen_terrain_color.rgb, Cmountain.rgb, smoothstep(mountains_low_begin, mountains_low_end, vPosition.y));
       } else {
         // mountain texture over a certain height threshold.
         vec4 Cb = texture2D(terrains, vec2(mod(map_x_size * (vUv.x / 4.0), 0.25) + sprite_pos10_x , mod((vUv.y * map_y_size / 4.0), 0.25) + sprite_pos10_y));
@@ -294,12 +296,12 @@ void main(void)
     if (vPosition.y > beach_blend_high) {
       blend_amount = ((beach_high - beach_blend_high) - (beach_high - vPosition.y)) / (beach_high - beach_blend_high);
       vec4 Cbeach = texture2D(terrains, texture_coord);
-      c = chosen_terrain_color.rgb * blend_amount + (Cbeach.rgb * (1.0 - blend_amount));
+      c = mix(chosen_terrain_color.rgb, Cbeach.rgb, (1.0 - blend_amount));
 
     } else if (vPosition.y < beach_blend_low) {
       blend_amount = (beach_blend_low - vPosition.y) / 6.0;
-      vec4 Cbeach = texture2D(terrains, texture_coord);
-      c = chosen_terrain_color.rgb * blend_amount + (Cbeach.rgb * 2.0 * (1.0 - blend_amount));
+      vec4 Cbeach = texture2D(terrains, texture_coord) * 2.0;
+      c = mix(chosen_terrain_color.rgb, Cbeach.rgb, (1.0 - blend_amount));
 
     } else {
       vec4 Cbeach = texture2D(terrains, texture_coord);
@@ -406,23 +408,17 @@ void main(void)
 
   /* Borders*/
   if (borders_enabled && !(border_color.r > 0.546875 && border_color.r < 0.5625 && border_color.b == 0.0 && border_color.g == 0.0)) {
-    c = c * 0.5 + border_color.rbg * 0.6;
+    c = mix(c, border_color.rbg, 0.55);
   }
 
   /* specular component, ambient occlusion and fade out underwater terrain */
-  float x = clamp((vPosition.y - 30.) / 15., 0., 1.);
+  float x = 1.0 - clamp((vPosition.y - 30.) / 15., 0., 1.);
   vec4 Cb = texture2D(terrains, vec2(mod(map_x_size * (vUv.x / 4.0), 0.25) + sprite_pos1_x , mod((vUv.y * map_y_size / 4.0), 0.25) + sprite_pos1_y));
-  c = Cb.rgb * (1. - x) + c * x;
+  c = mix(c, Cb.rgb, x);
 
-  vec3 light = vec3(0.8, 0.6, 0.7);
-  light = normalize(light);
+  float shade_factor = 0.28 + 1.0 * max(0., dot(vNormal, normalize(light)));
 
-  float dProd = dot(vNormal, light);
-  float shade_factor = 0.28 + 1.0 * max(0., dProd);
-
-  vec3 ambiant = vec3(0.27, 0.55, 1.);
-  float ambiant_factor = 0.075 * (vPosition_camera.z - 550.) / 400.;
-  gl_FragColor.rgb = (1. - ambiant_factor) * c * shade_factor + ambiant * ambiant_factor;
+  gl_FragColor.rgb = mix(c * shade_factor, ambiant, (vPosition_camera.z - 550.) * 0.0001875);
 
 }
 

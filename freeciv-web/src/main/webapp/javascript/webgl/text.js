@@ -246,6 +246,42 @@ function create_unit_label(punit)
 }
 
 
+/****************************************************************************
+ Create a map tile label
+****************************************************************************/
+function create_map_tile_label(ptile)
+{
+  if (ptile['label'] == null || ptile['label'].length == 0) return null;
+
+  var canvas = document.createElement('canvas');
+  canvas.width = 256;
+  canvas.height = 32;
+  var ctx = canvas.getContext('2d');
+
+
+  // We draw from left to right, updating `width' after each call.
+  var width = 0; // Total width of the bar
+
+
+  // Name and size
+  var label = ptile['label'];
+  ctx.font = 'Bold 22px Arial';
+  var txt_measure = ctx.measureText(label);
+  // Background
+  var background_color = "rgba(0,0,0,0.5)";
+  ctx.fillStyle = background_color;
+  ctx.fillRect(width, 0, txt_measure.width + 11 /* padding */, 32);
+
+  // Text
+  ctx.fillStyle = '#EFEFEF';
+  ctx.fillText(label, width + 4 /* padding */, 13*2);
+
+  width += txt_measure.width + 11 /* padding */;
+
+  if (width > 256) width = 256;
+  return canvas_to_user_facing_mesh(canvas, width, Math.floor(width * 0.7), 12, graphics_quality >= QUALITY_HIGH, "ptile_" + ptile['label']);
+}
+
 /**********************************************************************
   ...
 ***********************************************************************/

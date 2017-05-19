@@ -174,12 +174,6 @@
 						<div class="header">
 							<span class="name"><i class="fa fa-user"></i> <fmt:message key="index-game-launcher-singleplayer" /></span>
 						</div>
-						<c:if test="${default_lang}">
-							<div class="features">
-								Play against the Freeciv AI with 2D HTML5 graphics
-							</div>
-						</c:if>
-						<a id="single-button" href="/webclient/?action=new" class="btn"><i class="fa fa-flag"></i> <fmt:message key="index-game-launcher-2d"/></a>
 
 						<c:if test="${default_lang}">
 							<div class="features">
@@ -187,6 +181,14 @@
 							</div>
 						</c:if>
 						<a href="/webclient/?action=new&renderer=webgl" class="btn" id="webgl_button"><i class="fa fa-cube"></i> <fmt:message key="index-game-launcher-3d"/></a>
+
+
+						<c:if test="${default_lang}">
+							<div class="features">
+								Play against the Freeciv AI with 2D HTML5 graphics
+							</div>
+						</c:if>
+						<a id="single-button" href="/webclient/?action=new" class="btn"><i class="fa fa-flag"></i> <fmt:message key="index-game-launcher-2d"/></a>
 
 						<c:if test="${default_lang}">
 							<div class="features">
@@ -270,7 +272,7 @@
 		<div class="row">
 			<div class="col-md-6">
 				<div class="videoWrapper">
-					<iframe class="embed-responsive-item" width="542" height="343" src="https://www.youtube.com/embed/GZyfmcGPPoU" frameborder="0" allowfullscreen></iframe>
+					<iframe class="embed-responsive-item" width="542" height="343" src="https://www.youtube.com/embed/Vlon-ZF8F40" frameborder="0" allowfullscreen></iframe>
 				</div>
 			</div>
 			<div class="col-md-6">

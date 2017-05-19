@@ -38,7 +38,7 @@ var model_filenames = ["AEGIS Cruiser",     "city_european_1",  "Helicopter",   
                        "Caravan",           "Fighter",          "Mine",          "Warriors",
                        "Caravel",           "Fish",             "Musketeers",    "Whales",
                        "Carrier",           "Freight",          "Nuclear",
-                       "Catapult",          "Frigate",
+                       "Catapult",          "Frigate",          "Migrants",
                        "Cavalry",           "Paratroopers",     "Workers",
                        "Chariot",           "Galleon",          "Partisan",
                        "city_european_0",   "Phalanx",          "Farmland"

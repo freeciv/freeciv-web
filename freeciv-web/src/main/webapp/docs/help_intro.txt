@@ -1,5 +1,5 @@
 <h1>The Freeciv Online Manual</h1>
-<img src='/images/freeciv-fp-logo-2.png' style="max-width: 50%;"><br><br>
+<img src='/static/images/frontpage-jumbotron.png' style="max-width: 40%;"><br><br>
 
 Freeciv is a Free and Open Source empire-building strategy game inspired by the 
 history of human civilization. The game commences in prehistory and your mission  

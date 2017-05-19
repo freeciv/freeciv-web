@@ -22,7 +22,7 @@ var mapview = {};
 var mapdeco_highlight_table = {};
 var mapdeco_crosshair_table = {};
 var last_redraw_time = 0;
-var MAPVIEW_REFRESH_INTERVAL = 10;
+var MAPVIEW_REFRESH_INTERVAL = 8;
 
 var mapview_slide = {};
 mapview_slide['active'] = false;

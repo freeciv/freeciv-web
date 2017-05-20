@@ -19,6 +19,8 @@
 
 var map_tiletype_resolution;
 var tiletype_palette = [];
+var tiletype_hash = -1;
+var map_texture;
 
 /****************************************************************************
   Returns a texture containing each map tile, where the color of each pixel
@@ -33,13 +35,19 @@ function init_map_tiletype_image()
   bmp_lib.render('map_tiletype_grid',
                     generate_map_tiletype_grid(),
                     tiletype_palette);
-  var map_texture = new THREE.Texture();
+  map_texture = new THREE.Texture();
   map_texture.magFilter = THREE.NearestFilter;
   map_texture.minFilter = THREE.NearestFilter;
   map_texture.image = document.getElementById("map_tiletype_grid");
   map_texture.needsUpdate = true;
-  return map_texture;
 
+  if (graphics_quality == QUALITY_LOW) setInterval(update_tiletypes_image, 120000);
+  if (graphics_quality == QUALITY_MEDIUM) setInterval(update_tiletypes_image, 80000);
+  if (graphics_quality == QUALITY_HIGH) setInterval(update_tiletypes_image, 60000);
+
+  tiletype_hash = generate_tiletype_hash();
+
+  return map_texture;
  }
 
 /****************************************************************************
@@ -70,8 +78,7 @@ function generate_map_tiletype_grid() {
   var num_iterations;
   var change_probability = 0.6;
   if (graphics_quality == QUALITY_LOW) {
-    num_iterations = 1;
-    change_probability = 0.25;
+    num_iterations = 0;
   }
   if (graphics_quality == QUALITY_MEDIUM) {
     num_iterations = 2;
@@ -108,4 +115,37 @@ function map_tiletype_tile_color(map_x, map_y)
 
   return COLOR_OVERVIEW_UNKNOWN;
 
+}
+
+
+/****************************************************************************
+  ...
+****************************************************************************/
+function update_tiletypes_image()
+{
+   var hash = generate_tiletype_hash();
+   if (hash != tiletype_hash) {
+     bmp_lib.render('map_tiletype_grid',
+                    generate_map_tiletype_grid(),
+                    tiletype_palette);
+     map_texture.image = document.getElementById("map_tiletype_grid");
+     map_texture.needsUpdate = true;
+     tiletype_hash = hash;
+  }
+
+   return roads_texture;
+}
+
+/****************************************************************************
+ Creates a hash of the map tiletypes.
+****************************************************************************/
+function generate_tiletype_hash() {
+  var hash = 0;
+
+  for (var x = 0; x < map.xsize ; x++) {
+    for (var y = 0; y < map.ysize; y++) {
+      hash += map_tiletype_tile_color(x, y);
+    }
+  }
+  return hash;
 }

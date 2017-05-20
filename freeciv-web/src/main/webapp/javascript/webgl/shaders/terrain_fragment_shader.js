@@ -112,11 +112,7 @@ float roadtype_17 = 17.0/255.0;
 float roadtype_18 = 18.0/255.0;
 float roadtype_19 = 19.0/255.0;
 
-float heightmap_land = 10.0/255.0;
-float heightmap_ocean = 0.0;
-
-
-float beach_high = 55.5;
+float beach_high = 54.5;
 float beach_blend_high = 52.5;
 float beach_blend_low = 50.0;
 float beach_low = 44.0;

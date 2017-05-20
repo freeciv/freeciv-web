@@ -564,7 +564,7 @@ function update_tile_extras(ptile) {
 ****************************************************************************/
 function webgl_clear_unit_focus()
 {
-  if (selected_unit_indicator != null) {
+  if (scene != null && selected_unit_indicator != null) {
     scene.remove(selected_unit_indicator);
     selected_unit_indicator = null;
   }

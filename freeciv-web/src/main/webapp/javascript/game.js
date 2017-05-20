@@ -104,7 +104,7 @@ function update_game_status_panel() {
     status_html += "<i class='fa fa-flask' aria-hidden='true' title='Science rate'></i>: <b>" + sci + "</b>%</span> ";
   } else if (server_settings != null && server_settings['metamessage'] != null) {
     status_html += server_settings['metamessage']['val']
-                   + " - Observing - ";
+                   + " Observing - ";
     status_html += "Turn: <b>" + game_info['turn'] + "</b>  ";
   }
 

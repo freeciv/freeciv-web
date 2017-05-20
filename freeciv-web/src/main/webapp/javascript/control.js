@@ -828,6 +828,7 @@ function set_unit_focus_and_redraw(punit)
 
   if (punit == null) {
     current_focus = [];
+    if (renderer == RENDERER_WEBGL) webgl_clear_unit_focus();
   } else {
     current_focus[0] = punit;
     if (renderer == RENDERER_WEBGL) update_unit_position(index_to_tile(punit['tile']));

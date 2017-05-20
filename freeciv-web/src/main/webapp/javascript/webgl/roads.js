@@ -97,16 +97,16 @@ function road_image_color(map_x, map_y)
       if (dir != 1 && dir != 3 && dir != 4 && dir != 6) continue;
       var checktile = mapstep(ptile, dir);
       if (checktile != null && tile_has_extra(checktile, EXTRA_RAIL)) {
-        if (dir == 0) result[adj_road_count] = 19;
         if (dir == 1) result[adj_road_count] = 12;
-        if (dir == 2) result[adj_road_count] = 13;
         if (dir == 3) result[adj_road_count] = 18;
         if (dir == 4) result[adj_road_count] = 14;
-        if (dir == 5) result[adj_road_count] = 17;
         if (dir == 6) result[adj_road_count] = 16;
-        if (dir == 7) result[adj_road_count] = 15;
         adj_road_count++;
-        if (adj_road_count > 2) break;
+        if (adj_road_count > 2) {
+          var checktile = mapstep(ptile, 6);
+          if (checktile != null && tile_has_extra(checktile, EXTRA_RAIL)) return "rgb(43,0,0)";  //special case, 4 connected rails.
+          break;
+        }
       }
     }
     for (var dir = 0; dir < 8; dir++) {
@@ -114,12 +114,8 @@ function road_image_color(map_x, map_y)
       var checktile = mapstep(ptile, dir);
       if (checktile != null && tile_has_extra(checktile, EXTRA_RAIL)) {
         if (dir == 0) result[adj_road_count] = 19;
-        if (dir == 1) result[adj_road_count] = 12;
         if (dir == 2) result[adj_road_count] = 13;
-        if (dir == 3) result[adj_road_count] = 18;
-        if (dir == 4) result[adj_road_count] = 14;
         if (dir == 5) result[adj_road_count] = 17;
-        if (dir == 6) result[adj_road_count] = 16;
         if (dir == 7) result[adj_road_count] = 15;
         adj_road_count++;
         if (adj_road_count > 2) break;
@@ -140,16 +136,16 @@ function road_image_color(map_x, map_y)
       if (dir != 1 && dir != 3 && dir != 4 && dir != 6) continue;
       var checktile = mapstep(ptile, dir);
       if (checktile != null && tile_has_extra(checktile, EXTRA_ROAD)) {
-        if (dir == 0) result[adj_road_count] = 9;
         if (dir == 1) result[adj_road_count] = 2;
-        if (dir == 2) result[adj_road_count] = 3;
         if (dir == 3) result[adj_road_count] = 8;
         if (dir == 4) result[adj_road_count] = 4;
-        if (dir == 5) result[adj_road_count] = 7;
         if (dir == 6) result[adj_road_count] = 6;
-        if (dir == 7) result[adj_road_count] = 5;
         adj_road_count++;
-        if (adj_road_count > 2) break;
+        if (adj_road_count > 2) {
+          var checktile = mapstep(ptile, 6);
+          if (checktile != null && tile_has_extra(checktile, EXTRA_ROAD)) return "rgb(42,0,0)"; //special case, 4 connected roads.
+          break;
+        }
       }
     }
     for (var dir = 0; dir < 8; dir++) {
@@ -157,12 +153,8 @@ function road_image_color(map_x, map_y)
       var checktile = mapstep(ptile, dir);
       if (checktile != null && tile_has_extra(checktile, EXTRA_ROAD)) {
         if (dir == 0) result[adj_road_count] = 9;
-        if (dir == 1) result[adj_road_count] = 2;
         if (dir == 2) result[adj_road_count] = 3;
-        if (dir == 3) result[adj_road_count] = 8;
-        if (dir == 4) result[adj_road_count] = 4;
         if (dir == 5) result[adj_road_count] = 7;
-        if (dir == 6) result[adj_road_count] = 6;
         if (dir == 7) result[adj_road_count] = 5;
         adj_road_count++;
         if (adj_road_count > 2) break;

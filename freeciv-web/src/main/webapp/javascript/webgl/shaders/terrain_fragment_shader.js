@@ -99,6 +99,7 @@ float roadtype_6 = 6.0/255.0;
 float roadtype_7 = 7.0/255.0;
 float roadtype_8 = 8.0/255.0;
 float roadtype_9 = 9.0/255.0;
+float roadtype_all = 42.0/255.0;
 
 // railroads
 float roadtype_10 = 10.0/255.0;
@@ -111,6 +112,7 @@ float roadtype_16 = 16.0/255.0;
 float roadtype_17 = 17.0/255.0;
 float roadtype_18 = 18.0/255.0;
 float roadtype_19 = 19.0/255.0;
+float railtype_all = 43.0/255.0;
 
 float beach_high = 54.5;
 float beach_blend_high = 52.5;
@@ -307,8 +309,37 @@ void main(void)
 
   /* Roads */
     if (road_type.r == roadtype_1 && road_type.g == 0.0 &&  road_type.b == 0.0) {
+      // a single road tile.
       texture_coord = vec2(mod(map_x_size * (vUv.x / 4.0), 0.25) + sprite_pos0_x , mod((vUv.y * map_y_size / 4.0), 0.25) + sprite_pos0_y);
       vec4 t1 = texture2D(roadsprites, texture_coord);
+      c = mix(c, vec3(t1), t1.a);
+    } else if (road_type.r == roadtype_all) {
+      // a road tile with 4 connecting roads.
+      texture_coord = vec2(mod(map_x_size * (vUv.x / 4.0), 0.25) + sprite_pos1_x , mod((vUv.y * map_y_size / 4.0), 0.25) + sprite_pos1_y);
+      vec4 t1 = texture2D(roadsprites, texture_coord);
+      c = mix(c, vec3(t1), t1.a);
+      texture_coord = vec2(mod(map_x_size * (vUv.x / 4.0), 0.25) + sprite_pos3_x , mod((vUv.y * map_y_size / 4.0), 0.25) + sprite_pos3_y);
+      t1 = texture2D(roadsprites, texture_coord);
+      c = mix(c, vec3(t1), t1.a);
+      texture_coord = vec2(mod(map_x_size * (vUv.x / 4.0), 0.25) + sprite_pos5_x , mod((vUv.y * map_y_size / 4.0), 0.25) + sprite_pos5_y);
+      t1 = texture2D(roadsprites, texture_coord);
+      c = mix(c, vec3(t1), t1.a);
+      texture_coord = vec2(mod(map_x_size * (vUv.x / 4.0), 0.25) + sprite_pos7_x , mod((vUv.y * map_y_size / 4.0), 0.25) + sprite_pos7_y);
+      t1 = texture2D(roadsprites, texture_coord);
+      c = mix(c, vec3(t1), t1.a);
+    } else if (road_type.r == railtype_all) {
+      // a rail tile with 4 connecting rails.
+      texture_coord = vec2(mod(map_x_size * (vUv.x / 4.0), 0.25) + sprite_pos1_x , mod((vUv.y * map_y_size / 4.0), 0.25) + sprite_pos1_y);
+      vec4 t1 = texture2D(railroadsprites, texture_coord);
+      c = mix(c, vec3(t1), t1.a);
+      texture_coord = vec2(mod(map_x_size * (vUv.x / 4.0), 0.25) + sprite_pos3_x , mod((vUv.y * map_y_size / 4.0), 0.25) + sprite_pos3_y);
+      t1 = texture2D(railroadsprites, texture_coord);
+      c = mix(c, vec3(t1), t1.a);
+      texture_coord = vec2(mod(map_x_size * (vUv.x / 4.0), 0.25) + sprite_pos5_x , mod((vUv.y * map_y_size / 4.0), 0.25) + sprite_pos5_y);
+      t1 = texture2D(railroadsprites, texture_coord);
+      c = mix(c, vec3(t1), t1.a);
+      texture_coord = vec2(mod(map_x_size * (vUv.x / 4.0), 0.25) + sprite_pos7_x , mod((vUv.y * map_y_size / 4.0), 0.25) + sprite_pos7_y);
+      t1 = texture2D(railroadsprites, texture_coord);
       c = mix(c, vec3(t1), t1.a);
     } else if (road_type.r > 0.0 && road_type.r < roadtype_10) {
       // Roads
@@ -352,7 +383,7 @@ void main(void)
         vec4 t1 = texture2D(roadsprites, texture_coord);
         c = mix(c, vec3(t1), t1.a);
       }
-    } else if (road_type.r >= roadtype_10) {
+    } else if (road_type.r >= roadtype_10 && road_type.r < roadtype_all) {
       // Railroads
       if (road_type.r == roadtype_10 && road_type.g == 0.0 &&  road_type.b == 0.0) {
         texture_coord = vec2(mod(map_x_size * (vUv.x / 4.0), 0.25) + sprite_pos0_x , mod((vUv.y * map_y_size / 4.0), 0.25) + sprite_pos0_y);

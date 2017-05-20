@@ -308,7 +308,9 @@ void main(void)
   }
 
   /* Roads */
-    if (road_type.r == roadtype_1 && road_type.g == 0.0 &&  road_type.b == 0.0) {
+    if (road_type.r == 0.0) {
+      // no roads
+    } else if (road_type.r == roadtype_1 && road_type.g == 0.0 &&  road_type.b == 0.0) {
       // a single road tile.
       texture_coord = vec2(mod(map_x_size * (vUv.x / 4.0), 0.25) + sprite_pos0_x , mod((vUv.y * map_y_size / 4.0), 0.25) + sprite_pos0_y);
       vec4 t1 = texture2D(roadsprites, texture_coord);

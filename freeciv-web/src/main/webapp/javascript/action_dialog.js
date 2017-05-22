@@ -434,7 +434,7 @@ function popup_action_selection(actor_unit, action_probabilities,
   Show the player the price of bribing the unit and, if bribing is
   possible, allow him to order it done.
 **************************************************************************/
-function popup_bribe_dialog(actor_unit, target_unit, cost)
+function popup_bribe_dialog(actor_unit, target_unit, cost, act_id)
 {
   var bribe_possible = false;
   var dhtml = "";
@@ -469,7 +469,7 @@ function popup_bribe_dialog(actor_unit, target_unit, cost)
                     "target_id": target_unit['id'],
                     "value" : 0,
                     "name" : "",
-                    "action_type": ACTION_SPY_BRIBE_UNIT};
+                    "action_type": act_id};
       send_request(JSON.stringify(packet));
       $(id).dialog('close');
     }

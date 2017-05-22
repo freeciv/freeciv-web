@@ -762,7 +762,7 @@ function handle_unit_action_answer(packet)
                   + ") in unit action answer.");
       return;
     } else {
-      popup_bribe_dialog(actor_unit, target_unit, cost);
+      popup_bribe_dialog(actor_unit, target_unit, cost, action_type);
       return;
     }
   } else if (action_type == ACTION_SPY_INCITE_CITY

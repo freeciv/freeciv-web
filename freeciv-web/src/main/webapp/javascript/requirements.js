@@ -119,6 +119,7 @@ function is_req_active(target_player,
   case VUT_MINTECHS:
   case VUT_EXTRAFLAG:
   case VUT_MINCALFRAG:
+  case VUT_SERVERSETTING:
     //FIXME: implement
     console.log("Unimplemented requirement type " + req['kind']);
     break;

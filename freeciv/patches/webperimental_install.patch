@@ -41,7 +41,7 @@ new file mode 100644
 index 0000000..ff5b433
 --- /dev/null
 +++ b/data/webperimental/Makefile.am
-@@ -0,0 +1,19 @@
+@@ -0,0 +1,20 @@
 +## Process this file with automake to produce Makefile.in
 +
 +## Override automake so that "make install" puts these in proper place:
@@ -55,6 +55,7 @@ index 0000000..ff5b433
 +	governments.ruleset	\
 +	nations.ruleset		\
 +	script.lua		\
++	parser.lua		\
 +	styles.ruleset		\
 +	techs.ruleset		\
 +	terrain.ruleset		\

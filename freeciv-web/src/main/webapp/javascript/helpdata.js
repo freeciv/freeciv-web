@@ -211,6 +211,21 @@ function wiki_on_item_button(item_name)
 }
 
 /**************************************************************************
+  Format a long text description of the current ruleset.
+**************************************************************************/
+function helpdata_format_current_ruleset()
+{
+  var msg = "<h1>" + ruleset_control['name'] + "</h1>";
+  if (ruleset_summary != null) {
+    msg += "<p>" + ruleset_summary.replace(/\n/g, "<br>") + "</p>";
+  }
+  if (ruleset_description != null) {
+    msg += "<p>" + ruleset_description.replace(/\n/g, "<br>") + "</p>";
+  }
+  return msg;
+}
+
+/**************************************************************************
 ...
 **************************************************************************/
 function generate_help_text(key)
@@ -316,13 +331,7 @@ function generate_help_text(key)
     msg += "<br><br>";
     msg += wiki_on_item_button(tech['name']);
   } else if (key == "help_gen_ruleset") {
-    msg = "<h1>" + ruleset_control['name'] + "</h1>";
-    if (ruleset_summary != null) {
-      msg += "<p>" + ruleset_summary.replace(/\n/g, "<br>") + "</p>";
-    }
-    if (ruleset_description != null) {
-      msg += "<p>" + ruleset_description.replace(/\n/g, "<br>") + "</p>";
-    }
+    msg = helpdata_format_current_ruleset();
   } else if (key.indexOf("help_gen_governments") != -1) {
     var pgov = governments[parseInt(key.replace("help_gen_governments_",
                                                 ""))];

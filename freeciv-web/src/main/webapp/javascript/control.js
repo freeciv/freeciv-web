@@ -212,6 +212,10 @@ function control_init()
     overview_clicked (x, y);
   });
 
+  $("#send_message_button").click(function(e) {
+    show_send_private_message_dialog();
+  });
+
   $('#meet_player_button').click(nation_meet_clicked);
   $('#view_player_button').click(center_on_player);
   $('#cancel_treaty_button').click(cancel_treaty_clicked);

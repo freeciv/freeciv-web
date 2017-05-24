@@ -178,6 +178,12 @@ function handle_nation_table_select( ui )
     $('#meet_player_button').button("disable");
   }
 
+    if (pplayer['flags'].isSet(PLRF_AI) || (client.conn.playing != null && player_id == client.conn.playing['playerno'])) {
+      $('#send_message_button').button("disable");
+    } else {
+      $('#send_message_button').button("enable");
+    }
+
   if (!client_is_observer() && client.conn.playing != null && player_id != client.conn.playing['playerno']
       && diplstates[player_id] != null
       && diplstates[player_id] != DS_WAR && diplstates[player_id] != DS_NO_CONTACT) {
@@ -331,4 +337,44 @@ function center_on_player()
         return;
       }
     }
+}
+
+/**************************************************************************
+  Show the dialog for sending a private message to another human player.
+**************************************************************************/
+function show_send_private_message_dialog()
+{
+  if (selected_player == -1) return;
+  var pplayer = players[selected_player];
+  var name = pplayer['name'];
+  keyboard_input = false;
+
+  // reset dialog page.
+  $("#dialog").remove();
+  $("<div id='dialog'></div>").appendTo("div#game_page");
+
+  var intro_html = "Message: <input id='private_message_text' type='text' size='50' maxlength='80'>";
+  $("#dialog").html(intro_html);
+  $("#dialog").attr("title", "Send private message to " + name);
+  $("#dialog").dialog({
+			bgiframe: true,
+			modal: true,
+			width: is_small_screen() ? "80%" : "40%",
+			buttons:
+			{
+				"Send" : function() {
+                          var message = name + ": " + encodeURIComponent($("#private_message_text").val());
+                          send_message(message);
+                          keyboard_input = true;
+                          $("#dialog").dialog('close');
+				}
+			}
+		});
+
+
+  $("#dialog").dialog('open');
+
+
+
+
 }

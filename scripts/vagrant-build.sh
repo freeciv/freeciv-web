@@ -81,7 +81,7 @@ pip3 install wikipedia
 ## build and install mysql-connector-python
 cd /tmp
 wget https://github.com/mysql/mysql-connector-python/archive/2.1.3.zip
-unzip 2.1.3.zip
+unzip -qo 2.1.3.zip
 cd mysql-connector-python-2.1.3
 python3 setup.py install
 

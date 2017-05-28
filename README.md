@@ -76,14 +76,7 @@ a directory on your computer, by running this git command:
 
   This will build, compile, install and run Freeciv-web on the virtual server image. Wait for the installation process to complete, watching for any error messages in the logs.
 
-5. (Skip this step if you run Windows) For Linux or OS X, then you 
-need to setup a SSH tunnel to port 80 like this:
- ```bash
- sudo ssh -p 2222 -gNfL 80:localhost:80 vagrant@localhost -i ~/.vagrant.d/insecure_private_key
- ```
-
-Then test Freeciv-web by pointing your browser to http://localhost/ on your
-host operating system.
+5. Test Freeciv-web by pointing your browser to http://localhost if you run Windows or http://localhost:8080 if you run Linux or macOS. 
 
 To log in to your Vagrant server, run the command: 
  ```bash

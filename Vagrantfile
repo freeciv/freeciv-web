@@ -52,9 +52,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     v.customize ["modifyvm", :id, "--memory", mem]
   end
 
-  # workaround vbox bug 16670
-  config.vm.synced_folder "./", "/vagrant", disabled: true
-  config.vm.provision :shell, :path => "scripts/vbox-workaround-16670.sh", run: "always"
+  config.vm.synced_folder "./", "/vagrant"
 
   # run the Freeciv bootstrap script on startup
   config.vm.provision :shell, :path => "scripts/vagrant-build.sh", run: "always"

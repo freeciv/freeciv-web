@@ -62,6 +62,10 @@ class metachecker():
                                            fallback = 250))
       self.savesdir = settings.get("Config", "save_directory",
                                    fallback = "/var/lib/tomcat8/webapps/data/savegames/")
+
+      self.start_longturn = settings.get("Config", "start_longturn",
+                                fallback = "false")
+
       self.check_count = 0;
       self.total = 0;
       self.single = 0;
@@ -163,17 +167,15 @@ if __name__ == '__main__':
     new_server.start();
     port += 1;
 
-  # LongTurn game #1.
-  new_server = Civlauncher("multiplayer", "longturn_6003", port, metahost + ":" + str(metaport) + metapath, mc.savesdir)
-  mc.server_list.append(new_server);
-  new_server.start();
-  port += 1;
-
-  # LongTurn game #2.
-  new_server = Civlauncher("multiplayer", "longturn_6004", port, metahost + ":" + str(metaport) + metapath, mc.savesdir)
-  mc.server_list.append(new_server);
-  new_server.start();
-  port += 1;
+  if (mc.start_longturn == "true"):
+    # start LongTurn games
+    for i in range(3):  
+      new_server = Civlauncher("multiplayer", "longturn_600" + str(i + 3), port, metahost + ":" + str(metaport) + metapath, mc.savesdir)
+      mc.server_list.append(new_server);
+      new_server.start();
+      port += 1;
+  else:    
+    port += 3;
 
   print("Publite2 started!");
   time.sleep(20);

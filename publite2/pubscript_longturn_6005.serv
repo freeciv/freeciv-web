@@ -1,4 +1,5 @@
-#LongTurn game #2
+#LongTurn game #3
+#This LongTurn game has not started yet.
 
 cmdlevel ctrl first
 rulesetdir multiplayer 
@@ -36,7 +37,7 @@ set ec_chat=enabled
 set ec_info=enabled 
 set ec_max_size=5000
 set ec_turns=9
-metamessage LongTurn Game #2 | 1 turn per day | 250 players | Join now!
+metamessage LongTurn Game #3 | 1 turn per day | 250 players | Join now!
 
 
 cmdlevel basic

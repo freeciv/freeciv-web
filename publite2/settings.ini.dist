@@ -1,5 +1,6 @@
 [Config]
 save_directory = /var/lib/tomcat8/webapps/data/savegames/
+start_longturn = false
 
 [Resource usage]
 server_capacity_single = 2

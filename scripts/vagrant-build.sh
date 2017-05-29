@@ -30,7 +30,7 @@ echo "================================="
 
 # if system already provisioned and Freeciv-web already built with Vagrant,
 # then start it instead.
-if [ -f "/usr/sbin/nginx" -a -f "/vagrant/freeciv-web/target/freeciv-web.war" ]; then
+if [ -f "/vagrant/freeciv-web/target/freeciv-web.war" ]; then
   printf "\n\nFreeciv-web already built, starting it.\n\n-----";
   cd ${basedir}/scripts/ && sudo -H -u ubuntu ./start-freeciv-web.sh
   printf "Freeciv-web started. Now login with 'vagrant ssh' and point your browser to http://localhost";

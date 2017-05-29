@@ -188,6 +188,7 @@ function act_sel_click_function(parent_id,
   case ACTION_SPY_INCITE_CITY:
   case ACTION_SPY_INCITE_CITY_ESC:
   case ACTION_SPY_BRIBE_UNIT:
+  case ACTION_UPGRADE_UNIT:
     return function() {
       var packet = {
         "pid"         : packet_unit_action_query,
@@ -522,6 +523,65 @@ function popup_incite_dialog(actor_unit, target_city, cost, act_id)
   $(id).dialog({bgiframe: true,
                 modal: true,
                 buttons: (incite_possible ? incite_close_buttons : close_button),
+                height: "auto",
+                width: "auto"});
+
+  $(id).dialog('open');
+}
+
+/**************************************************************************
+  Show the player the price of upgrading the unit and, if upgrading is
+  affordable, allow him to order it done.
+**************************************************************************/
+function popup_unit_upgrade_dlg(actor_unit, target_city, cost, act_id)
+{
+  var upgrade_possible;
+  var id;
+  var dhtml;
+
+  id = "#upgrade_unit_dialog_" + actor_unit['id'];
+
+  /* Reset dialog page. */
+  $(id).remove();
+
+  $("<div id='upgrade_unit_dialog_" + actor_unit['id'] + "'></div>")
+      .appendTo("div#game_page");
+
+  dhtml = "";
+
+  dhtml += "Treasury contains " + unit_owner(actor_unit)['gold'] + " gold.";
+  dhtml += " ";
+  dhtml += "The price of upgrading our "
+           + unit_types[actor_unit['type']]['name']
+           + " is " + cost + ".";
+
+  upgrade_possible = cost <= unit_owner(actor_unit)['gold'];
+
+  $(id).html(dhtml);
+
+  var close_button = {          Close:    function() {$(id).dialog('close');}};
+  var upgrade_close_buttons = { 'Cancel': function() {$(id).dialog('close');},
+                                'Do it!': function() {
+                                  var packet = {
+                                    "pid" : packet_unit_do_action,
+                                    "actor_id" : actor_unit['id'],
+                                    "target_id": target_city['id'],
+                                    "value" : 0,
+                                    "name" : "",
+                                    "action_type": act_id
+                                  };
+                                  send_request(JSON.stringify(packet));
+
+                                  $(id).dialog('close');
+                                }
+                             };
+
+  $(id).attr("title", "Unit upgrade");
+
+  $(id).dialog({bgiframe: true,
+                modal: true,
+                buttons: (upgrade_possible ? upgrade_close_buttons
+                                           : close_button),
                 height: "auto",
                 width: "auto"});
 

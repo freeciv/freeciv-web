@@ -10,7 +10,6 @@ Current TODO-list in prioritized order here:
 - There is no "Unload" hotkey for ships containing units to be unloaded. You have to click on the ship, then select each unit one by one, and it the ship has finished it's moves, the map recenters to the capital and then I have to go back and find the ship and repeat the process.
 - There doesn't appear to be a way to rearrange the items in the worklist. If I have a long worklist, I have to remove everything if I want to insert something, then re-add everything back in.
   - see also point in "Unimplemented Freeciv client features"
-- Upgrade doesn't provide me an option if I want to upgrade given the cost of the upgrade before it happens.
 
 Various:
 - Let the player find another player's (known) capital without having to middle click every visible city he owns. Could be based on solution to Freeciv bug #23790

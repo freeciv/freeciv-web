@@ -775,6 +775,15 @@ function handle_unit_action_answer(packet)
       popup_incite_dialog(actor_unit, target_city, cost, action_type);
       return;
     }
+  } else if (action_type == ACTION_UPGRADE_UNIT) {
+    if (target_city == null) {
+      console.log("Bad target city (" + target_id
+                  + ") in unit action answer.");
+      return;
+    } else {
+      popup_unit_upgrade_dlg(actor_unit, target_city, cost, action_type);
+      return;
+    }
   } else if (action_type == ACTION_COUNT) {
     console.log("unit_action_answer: Server refused to respond.");
   } else {

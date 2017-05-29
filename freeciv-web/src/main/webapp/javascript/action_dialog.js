@@ -176,18 +176,6 @@ function act_sel_click_function(parent_id,
                                 action_probabilities)
 {
   switch (action_id) {
-  case ACTION_SPY_TARGETED_SABOTAGE_CITY:
-    return function() {
-      var packet = {
-        "pid"         : packet_unit_action_query,
-        "diplomat_id" : actor_unit_id,
-        "target_id"   : tgt_id,
-        "action_type" : action_id
-      };
-      send_request(JSON.stringify(packet));
-
-      $(parent_id).remove();
-    };
   case ACTION_SPY_TARGETED_STEAL_TECH:
     return function() {
       popup_steal_tech_selection_dialog(units[actor_unit_id],
@@ -196,19 +184,9 @@ function act_sel_click_function(parent_id,
 
       $(parent_id).remove();
     };
+  case ACTION_SPY_TARGETED_SABOTAGE_CITY:
   case ACTION_SPY_INCITE_CITY:
   case ACTION_SPY_INCITE_CITY_ESC:
-    return function() {
-      var packet = {
-        "pid"         : packet_unit_action_query,
-        "diplomat_id" : actor_unit_id,
-        "target_id"   : tgt_id,
-        "action_type" : action_id
-      };
-      send_request(JSON.stringify(packet));
-
-      $(parent_id).remove();
-    };
   case ACTION_SPY_BRIBE_UNIT:
     return function() {
       var packet = {

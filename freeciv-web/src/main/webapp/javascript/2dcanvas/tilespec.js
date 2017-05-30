@@ -861,11 +861,6 @@ function get_unit_activity_sprite(punit)
   var activity = punit['activity'];
   var act_tgt  = punit['activity_tgt'];
 
-  /* don't draw activity for enemy units */
-  if (client.conn.playing == null || punit['owner'] != client.conn.playing.playerno) {
-    return null;
-  }
-
   switch (activity) {
     case ACTIVITY_POLLUTION:
       return {"key" : "unit.fallout",

@@ -384,6 +384,16 @@ function show_send_private_message_dialog()
   $("#dialog").dialog('open');
 
 
+  $('#dialog').keyup(function(e) {
+    if (e.keyCode == 13) {
+      var message = name + ": " + encodeURIComponent($("#private_message_text").val());
+      var packet = {"pid" : packet_chat_msg_req,
+                      "message" : message};
+      send_request(JSON.stringify(packet));
+      keyboard_input = true;
+      $("#dialog").dialog('close');
+    }
+  });
 
 
 }

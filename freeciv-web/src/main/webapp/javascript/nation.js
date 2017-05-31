@@ -346,6 +346,12 @@ function show_send_private_message_dialog()
 {
   if (selected_player == -1) return;
   var pplayer = players[selected_player];
+
+  if (pplayer == null) {
+    swal("Please select a player to send a private message to first.");
+    return;
+  }
+
   var name = pplayer['name'];
   keyboard_input = false;
 

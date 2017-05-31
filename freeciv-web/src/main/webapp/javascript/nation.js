@@ -370,7 +370,10 @@ function show_send_private_message_dialog()
 			{
 				"Send" : function() {
                           var message = name + ": " + encodeURIComponent($("#private_message_text").val());
-                          send_message(message);
+                          var packet = {"pid" : packet_chat_msg_req,
+                                          "message" : message};
+                          send_request(JSON.stringify(packet));
+
                           keyboard_input = true;
                           $("#dialog").dialog('close');
 				}

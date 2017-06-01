@@ -200,6 +200,9 @@ function handle_help_menu_select( ui )
 **************************************************************************/
 function wiki_on_item_button(item_name)
 {
+  /* Item name shouldn't be a qualified string. */
+  item_name = string_unqualify(item_name);
+
   if (freeciv_wiki_docs[item_name] == null) {
     console.log("No wiki data about " + item_name);
     return "";

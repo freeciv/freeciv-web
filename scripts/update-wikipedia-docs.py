@@ -9,9 +9,15 @@ from io import BytesIO
 
 freeciv_wiki_doc = {};
 
+# Remove translator qualification from names
+def unqualify(name):
+  if (name.startswith("?")):
+    return name.partition(':')[2];
+  else:
+    return name;
+
 def fix_tech(tech_name):
-  if (tech_name.startswith("?")):
-    tech_name = tech_name.partition(':')[2];
+  tech_name = unqualify(tech_name);
 
   if (tech_name == "Advanced Flight"): tech_name = "Aeronautics";
   if (tech_name == "AWACS"): tech_name = "Boeing E-3 Sentry";
@@ -103,7 +109,7 @@ def download_wiki_page(tech_name):
     img.convert('RGB').save("../freeciv-web/src/main/webapp/images/wiki/" + page.title + ".jpg");
     image = page.title + ".jpg";
 
-  freeciv_wiki_doc[tech_name] = {"title" : page.title, "summary" : page.summary, "image" : image};
+  freeciv_wiki_doc[unqualify(tech_name)] = {"title" : page.title, "summary" : page.summary, "image" : image};
 
 
 # FIXME: extract item names from the other supported rulesets too. An item

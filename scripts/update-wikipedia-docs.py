@@ -9,9 +9,15 @@ from io import BytesIO
 
 freeciv_wiki_doc = {};
 
+# Remove translator qualification from names
+def unqualify(name):
+  if (name.startswith("?")):
+    return name.partition(':')[2];
+  else:
+    return name;
+
 def fix_tech(tech_name):
-  if (tech_name.startswith("?")):
-    tech_name = tech_name.partition(':')[2];
+  tech_name = unqualify(tech_name);
 
   if (tech_name == "Advanced Flight"): tech_name = "Aeronautics";
   if (tech_name == "AWACS"): tech_name = "Boeing E-3 Sentry";
@@ -35,6 +41,7 @@ def fix_tech(tech_name):
   if (tech_name == "Aqueduct"): tech_name = "Aqueduct water supply";
   if (tech_name == "Barracks II"): tech_name = "Barracks";
   if (tech_name == "Barracks III"): tech_name = "Barracks";
+  if (tech_name == "Research Lab"): tech_name = "Laboratory";
   if (tech_name == "Mfg. Plant"): tech_name = "Factory";
   if (tech_name == "Sewer System"): tech_name = "Sanitary_sewer";
   if (tech_name == "Space Structural"): tech_name = "Spacecraft";
@@ -56,6 +63,7 @@ def fix_tech(tech_name):
   if (tech_name == "Pyramids"): tech_name = "Giza pyramid complex";
   if (tech_name == "Mass Transit"): tech_name = "Public transport";
   if (tech_name == "Spy"): tech_name = "Espionage";
+  if (tech_name == "Workers"): tech_name = "Laborer";
   if (tech_name == "Space Component"): tech_name = "Spacecraft propulsion";
   if (tech_name == "Space Module"): tech_name = "Life support system";
   if (tech_name == "Space Structural"): tech_name = "Spacecraft design";
@@ -101,7 +109,7 @@ def download_wiki_page(tech_name):
     img.convert('RGB').save("../freeciv-web/src/main/webapp/images/wiki/" + page.title + ".jpg");
     image = page.title + ".jpg";
 
-  freeciv_wiki_doc[tech_name] = {"title" : page.title, "summary" : page.summary, "image" : image};
+  freeciv_wiki_doc[unqualify(tech_name)] = {"title" : page.title, "summary" : page.summary, "image" : image};
 
 
 # FIXME: extract item names from the other supported rulesets too. An item

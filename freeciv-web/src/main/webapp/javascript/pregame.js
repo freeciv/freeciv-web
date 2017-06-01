@@ -468,6 +468,30 @@ function ruledir_from_ruleset_name(ruleset_name, fall_back_dir)
   }
 }
 
+/***************************************************************************
+  Show the full description of the current ruleset.
+***************************************************************************/
+function show_ruleset_description_full() {
+  var id = "#long_help_dialog";
+
+  $(id).remove();
+  $("<div id='long_help_dialog'></div>").appendTo("div#pregame_page");
+
+  $(id).html(helpdata_format_current_ruleset());
+
+  $(id).dialog({
+                 title   : ruleset_control['name'],
+                 buttons : {
+                   Close : function () {
+                     $(id).dialog('close');
+                   }
+                 },
+                 height  : $("#pregame_settings").dialog("option",
+                                                         "height"),
+                 width   : "80%"
+               });
+}
+
 /****************************************************************************
  Shows the pregame settings dialog.
 ****************************************************************************/
@@ -491,7 +515,7 @@ function pregame_settings()
       + "<option value='classic'>Classic</option>"
       + "<option value='civ2civ3'>Civ2Civ3</option>"
       + "<option value='webperimental'>Webperimental</option>"
-      + "</select></td></tr>"
+      + "</select><a id='ruleset_description'></a></td></tr>"
       + "<tr title='Set metaserver info line'><td>Game title:</td>" +
 	  "<td><input type='text' name='metamessage' id='metamessage' size='28' maxlength='42'></td></tr>" +
 	  "<tr title='Enables music'><td>Music:</td>" +
@@ -738,6 +762,11 @@ function pregame_settings()
   $('#generator').change(function() {
     send_message("/set generator " + $('#generator').val());
   });
+
+  /* Make the long ruleset description available in the pregame. The
+   * ruleset's README isn't located at the player's computer. */
+  $('#ruleset_description').html(" description");
+  $('#ruleset_description').click(show_ruleset_description_full);
 
   $('#ruleset').change(function() {
     change_ruleset($('#ruleset').val());

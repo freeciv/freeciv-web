@@ -197,6 +197,11 @@ function move_points_text(moves)
 **************************************************************************/
 function unit_has_goto(punit)
 {
+  /* don't show goto activity for enemy units. I'm not 100% sure this is correct.  */
+  if (client.conn.playing == null || punit['owner'] != client.conn.playing.playerno) {
+    return false;
+  }
+
   return (punit['goto_tile'] != -1);
 }
 

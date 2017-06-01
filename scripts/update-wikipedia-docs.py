@@ -35,6 +35,7 @@ def fix_tech(tech_name):
   if (tech_name == "Aqueduct"): tech_name = "Aqueduct water supply";
   if (tech_name == "Barracks II"): tech_name = "Barracks";
   if (tech_name == "Barracks III"): tech_name = "Barracks";
+  if (tech_name == "Research Lab"): tech_name = "Laboratory";
   if (tech_name == "Mfg. Plant"): tech_name = "Factory";
   if (tech_name == "Sewer System"): tech_name = "Sanitary_sewer";
   if (tech_name == "Space Structural"): tech_name = "Spacecraft";

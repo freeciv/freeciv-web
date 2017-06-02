@@ -354,15 +354,27 @@ function update_mouse_cursor()
 }
 
 /****************************************************************************
+ Common replacements and encoding for messages.
+ They are going to be injected as html. " and ' are changed to appease
+ the server message_escape.patch until it is removed.
+****************************************************************************/
+function encode_message_text(message) {
+  message = message.replace(/^\s+|\s+$/g,"");
+  message = message.replace(/&/g, "&amp;");
+  message = message.replace(/'/g, "&apos;");
+  message = message.replace(/"/g, "&quot;");
+  message = message.replace(/</g, "&lt;");
+  message = message.replace(/>/g, "&gt;");
+  return encodeURIComponent(message);
+}
+
+/****************************************************************************
 ...
 ****************************************************************************/
 function check_text_input(event,chatboxtextarea) {
 
   if (event.keyCode == 13 && event.shiftKey == 0)  {
-    var message = $(chatboxtextarea).val();
-    message = message.replace(/^\s+|\s+$/g,"");
-    message = message.replace("'", "");
-    message = encodeURIComponent(message);
+    var message = encode_message_text($(chatboxtextarea).val());
 
     $(chatboxtextarea).val('');
     if (!is_touch_device()) $(chatboxtextarea).focus();

@@ -340,6 +340,20 @@ function center_on_player()
 }
 
 /**************************************************************************
+  Send a private message to another human player from the dialog.
+  Only called from within the dialog.
+**************************************************************************/
+function send_private_message(other_player_name)
+{
+  var message = other_player_name + ": " + encode_message_text($("#private_message_text").val());
+  var packet = {"pid" : packet_chat_msg_req,
+                "message" : message};
+  send_request(JSON.stringify(packet));
+  keyboard_input = true;
+  $("#dialog").dialog('close');
+}
+
+/**************************************************************************
   Show the dialog for sending a private message to another human player.
 **************************************************************************/
 function show_send_private_message_dialog()
@@ -369,13 +383,7 @@ function show_send_private_message_dialog()
 			buttons:
 			{
 				"Send" : function() {
-                          var message = name + ": " + encodeURIComponent($("#private_message_text").val());
-                          var packet = {"pid" : packet_chat_msg_req,
-                                          "message" : message};
-                          send_request(JSON.stringify(packet));
-
-                          keyboard_input = true;
-                          $("#dialog").dialog('close');
+				  send_private_message(name);
 				}
 			}
 		});
@@ -386,12 +394,7 @@ function show_send_private_message_dialog()
 
   $('#dialog').keyup(function(e) {
     if (e.keyCode == 13) {
-      var message = name + ": " + encodeURIComponent($("#private_message_text").val());
-      var packet = {"pid" : packet_chat_msg_req,
-                      "message" : message};
-      send_request(JSON.stringify(packet));
-      keyboard_input = true;
-      $("#dialog").dialog('close');
+      send_private_message(name);
     }
   });
 

@@ -1423,3 +1423,10 @@ function handle_new_flag(image_data, player_id) {
   nations[chosen_nation]['customized'] = true;
 
 }
+
+/**************************************************************************
+  Recaptcha callback.
+**************************************************************************/
+function onloadCallback() {
+  // recaptcha is ready and loaded.
+}

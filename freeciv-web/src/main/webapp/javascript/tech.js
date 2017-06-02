@@ -129,9 +129,9 @@ function init_tech_screen()
     return;
   }
   tech_canvas_ctx = tech_canvas.getContext("2d");
-  if ("mozImageSmoothingEnabled" in tech_canvas_ctx) {
+  if ("imageSmoothingEnabled " in tech_canvas_ctx) {
     // if this Boolean value is false, images won't be smoothed when scaled. This property is true by default.
-    tech_canvas_ctx.mozImageSmoothingEnabled = true;
+    tech_canvas_ctx.imageSmoothingEnabled = false;
   }
 
   var max_width = 0;

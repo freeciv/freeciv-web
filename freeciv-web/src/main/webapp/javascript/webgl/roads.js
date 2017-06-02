@@ -32,7 +32,9 @@ function init_roads_image()
   roads_texture.magFilter = THREE.NearestFilter;
   roads_texture.minFilter = THREE.NearestFilter;
   roads_texture.image = document.getElementById("roads_image");
-  roads_texture.needsUpdate = true;
+  roads_texture.image.onload = function () {
+    roads_texture.needsUpdate = true;
+  }
 
   if (graphics_quality == QUALITY_LOW) setInterval(update_roads_image, 10000);
   if (graphics_quality == QUALITY_MEDIUM) setInterval(update_roads_image, 3000);
@@ -51,7 +53,9 @@ function update_roads_image()
    if (hash != roads_hash) {
      generate_roads_image();
      roads_texture.image = document.getElementById("roads_image");
-     roads_texture.needsUpdate = true;
+     roads_texture.image.onload = function () {
+       roads_texture.needsUpdate = true;
+     }
      roads_hash = hash;
   }
 

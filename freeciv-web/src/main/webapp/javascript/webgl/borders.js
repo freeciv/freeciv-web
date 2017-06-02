@@ -50,7 +50,9 @@ function init_borders_image()
   borders_texture.magFilter = THREE.NearestFilter;
   borders_texture.minFilter = THREE.NearestFilter;
   borders_texture.image = document.getElementById("borders_image");
-  borders_texture.needsUpdate = true;
+  borders_texture.image.onload = function () {
+    borders_texture.needsUpdate = true;
+  }
 
   if (graphics_quality == QUALITY_MEDIUM) setInterval(update_borders_image, 20000);
   if (graphics_quality == QUALITY_HIGH) setInterval(update_borders_image, 10000);
@@ -84,7 +86,9 @@ function update_borders_image()
                        generate_borders_image(),
                        borders_palette);
      borders_texture.image = document.getElementById("borders_image");
-     borders_texture.needsUpdate = true;
+     borders_texture.image.onload = function () {
+       borders_texture.needsUpdate = true;
+     }
      borders_hash = hash;
 
      return borders_texture;

@@ -69,7 +69,6 @@ class WSHandler(websocket.WebSocketHandler):
             login_message = json.loads(message)
             self.username = login_message['username']
             self.civserverport = login_message['port']
-            self.ip = self.request.headers.get("X-Real-IP", "missing")
             self.loginpacket = message
             self.is_ready = True
             self.civcom = self.get_civcom(

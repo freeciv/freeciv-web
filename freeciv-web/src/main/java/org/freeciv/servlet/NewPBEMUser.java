@@ -114,23 +114,17 @@ public class NewPBEMUser extends HttpServlet {
 		try {
 			Thread.sleep(300);
 
-			String ipAddress = request.getHeader("X-Real-IP");  
-			if (ipAddress == null) {  
-				ipAddress = request.getRemoteAddr();  
-			}
-
 			Context env = (Context) (new InitialContext().lookup("java:comp/env"));
 			DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
 			conn = ds.getConnection();
 
-			String query = "INSERT INTO auth (username, email, secure_hashed_password, activated, ip) "
-							+ "VALUES (?, ?, ?, ?, ?)";
+			String query = "INSERT INTO auth (username, email, secure_hashed_password, activated) "
+							+ "VALUES (?, ?, ?, ?)";
 			PreparedStatement preparedStatement = conn.prepareStatement(query);
 			preparedStatement.setString(1, username.toLowerCase());
 			preparedStatement.setString(2, email);
 			preparedStatement.setString(3, Crypt.crypt(password));
 			preparedStatement.setInt(4, ACTIVATED);
-			preparedStatement.setString(5, ipAddress);
 			preparedStatement.executeUpdate();
 
 		} catch (Exception err) {

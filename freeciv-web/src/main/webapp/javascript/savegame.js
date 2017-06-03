@@ -387,7 +387,8 @@ function load_game_toggle()
   if (players[0] == null) {
     setTimeout(load_game_toggle,1000);
   } else {
-
+    send_message("/set nationset all");
+    
     var firstplayer = players[0]['name'].split(" ")[0];
 
     send_message("/aitoggle " + firstplayer);

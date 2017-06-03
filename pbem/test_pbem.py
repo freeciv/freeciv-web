@@ -33,9 +33,9 @@ class TestPBEM(unittest.TestCase):
     try:
       cnx = mysql.connector.connect(user=pbem.mysql_user, database=pbem.mysql_database, password=pbem.mysql_password)
       cursor = cnx.cursor()
-      query = ("insert ignore into auth (username, password, email, activated, ip) values ('test', 'test', 'test@testtest.com', '1', '127.0.0.1')");
+      query = ("insert ignore into auth (username, password, email, activated) values ('test', 'test', 'test@testtest.com', '1')");
       cursor.execute(query)
-      query = ("insert ignore into auth (username, password, email, activated, ip) values ('test2', 'test2', 'test2@testtest.com', '1', '127.0.0.1')");
+      query = ("insert ignore into auth (username, password, email, activated) values ('test2', 'test2', 'test2@testtest.com', '1')");
       cursor.execute(query)
       cnx.commit()
     finally:

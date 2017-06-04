@@ -581,8 +581,8 @@ function pregame_settings()
         "<tr><td style='min-width: 150px;'>Benchmark of 3D WebGL version:</td>" +
                 "<td><button id='bechmark_run' type='button' class='benchmark button'>Run benchmark</button></td></tr>" +
         "<tr id='cardboard_vr_enabled'><td id='cardboard_vr_label' style='min-width: 150px;'></td>" +
-                "<td><input type='checkbox' id='cardboard_vr_setting'>Enable Virtual reality glasses with Google Cardboard. You can use " +
-                "Google Cardboard glasses with your mobile phone. Use voice recogntion to control the game. You must also manually disable screensavers in your device settings. "+
+                "<td><br><br><input type='checkbox' id='cardboard_vr_setting'>Enable Virtual reality glasses with Google Cardboard. You can use " +
+                "Google Cardboard glasses with your mobile phone. Use voice recognition to control the game. You must also manually disable screensavers in your device settings. "+
                 "Put your phone in the VR glasses when the game starts. BETA!<br>"+
                 "<button id='show_voice_commands' type='button' class='voice button'>Show voice commands</button></td></tr>" +
         "</table>" +

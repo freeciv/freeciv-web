@@ -798,11 +798,27 @@ function city_name_dialog(suggested_name, unit_id) {
 
   $('#city_name_dialog').keyup(function(e) {
     if (e.keyCode == 13) {
-    	var name = $("#city_name_req").val();
+      var name = $("#city_name_req").val();
+      var actor_unit = game_find_unit_by_number(unit_id);
+      var packet = {"pid" : packet_unit_do_action,
+                      "actor_id" : unit_id,
+                      "target_id": actor_unit['tile'],
+                      "value" : 0,
+                      "name" : encodeURIComponent(name),
+                      "action_type": ACTION_FOUND_CITY};
+      send_request(JSON.stringify(packet));
+	  $("#city_name_dialog").remove();
+      keyboard_input=true;
+    }
+  });
 
-        var actor_unit = game_find_unit_by_number(unit_id);
+  blur_input_on_touchdevice();
+  keyboard_input=false;
 
-        var packet = {"pid" : packet_unit_do_action,
+  if (speech_recogntition_enabled || cardboard_vr_enabled) {
+    var name = $("#city_name_req").val();
+    var actor_unit = game_find_unit_by_number(unit_id);
+    var packet = {"pid" : packet_unit_do_action,
                       "actor_id" : unit_id,
                       "target_id": actor_unit['tile'],
                       "value" : 0,
@@ -810,11 +826,9 @@ function city_name_dialog(suggested_name, unit_id) {
                       "action_type": ACTION_FOUND_CITY};
 	send_request(JSON.stringify(packet));
 	$("#city_name_dialog").remove();
-        keyboard_input=true;
-    }
-  });
-  blur_input_on_touchdevice();
-  keyboard_input=false;
+    keyboard_input=true;
+  }
+
 }
 
 /**************************************************************************

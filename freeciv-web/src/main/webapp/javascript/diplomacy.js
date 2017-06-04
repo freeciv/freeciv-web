@@ -63,6 +63,7 @@ function refresh_diplomacy_request_queue()
 **************************************************************************/
 function show_diplomacy_dialog(counterpart)
 {
+ if (cardboard_vr_enabled) return;
  var pplayer = players[counterpart];
  create_diplomacy_dialog(pplayer);
 }

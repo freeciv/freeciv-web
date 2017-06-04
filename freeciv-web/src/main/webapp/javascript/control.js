@@ -858,7 +858,7 @@ function set_unit_focus_and_redraw(punit)
   auto_center_on_focus_unit();
   update_active_units_dialog();
   update_unit_order_commands();
-  if ($("#game_unit_orders_default").length > 0) $("#game_unit_orders_default").show();
+  if ($("#game_unit_orders_default").length > 0 && !cardboard_vr_enabled) $("#game_unit_orders_default").show();
 
 }
 

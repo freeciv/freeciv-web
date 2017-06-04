@@ -71,6 +71,8 @@ function set_client_state(newstate)
         advance_unit_focus();
       }
 
+      if (speech_recogntition_enabled) speech_recogntition_init()
+
       break;
     case C_S_OVER:
       setTimeout(show_endgame_dialog, 500);

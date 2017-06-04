@@ -49,8 +49,6 @@ var xquality;
 var yquality;
 var MAPVIEW_ASPECT_FACTOR = 35.71;
 
-var stereoEffect;
-var cardboard_vr_enabled = false;
 
 /****************************************************************************
   Start the Freeciv-web WebGL renderer
@@ -99,6 +97,10 @@ function webgl_start_renderer()
     camera_dy = 390;
     camera_dx = 180;
     camera_dz = 180;
+  }
+
+  if (cardboard_vr_enabled) {
+    init_stereo_vr_cardboard(new_mapview_width, new_mapview_height);
   }
 
   maprenderer.setClearColor(0x000000);
@@ -330,7 +332,11 @@ function animate() {
     selected_unit_material_counter++;
   }
 
-  maprenderer.render(scene,camera );
+  if (!cardboard_vr_enabled) {
+    maprenderer.render(scene,camera );
+  } else {
+    stereoEffect.render(scene, camera);
+  }
 
   if (goto_active) check_request_goto_path();
   if (stats != null) stats.end();

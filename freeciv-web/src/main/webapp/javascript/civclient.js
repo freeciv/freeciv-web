@@ -393,6 +393,11 @@ function show_dialog_message(title, message) {
   $("#dialog").remove();
   $("<div id='dialog'></div>").appendTo("div#game_page");
 
+  speak(title);
+  speak(message);
+
+  if (cardboard_vr_enabled) return;
+
   $("#dialog").html(message);
   $("#dialog").attr("title", title);
   $("#dialog").dialog({
@@ -414,14 +419,13 @@ function show_dialog_message(title, message) {
     $('#dialog').parent().css('z-index', 2000);
   }, 50);
 
-  // automatically close dialog after 14 seconds, because sometimes the dialog can't be closed manually.
+  // automatically close dialog after 24 seconds, because sometimes the dialog can't be closed manually.
   setTimeout(function() {
     $('#dialog').dialog('close');
     $('#game_text_input').blur();
-  }, 14000);
+  }, 24000);
 
-  speak(title);
-  speak(message);
+
 
 }
 

@@ -580,11 +580,17 @@ function pregame_settings()
         "<td><input type='checkbox' id='3d_antialiasing_setting' checked>Enable antialiasing (game looks nicer, but is slower)</td></tr>" +
         "<tr><td style='min-width: 150px;'>Benchmark of 3D WebGL version:</td>" +
                 "<td><button id='bechmark_run' type='button' class='benchmark button'>Run benchmark</button></td></tr>" +
+        "<tr id='cardboard_vr_enabled'><td id='cardboard_vr_label' style='min-width: 150px;'></td>" +
+                "<td><input type='checkbox' id='cardboard_vr_setting'>Enable Virtual reality glasses with Google Cardboard. You can use " +
+                "Google Cardboard glasses with your mobile phone. Use voice recogntion to control the game. You must also manually disable screensavers in your device settings. "+
+                "Put your phone in the VR glasses when the game starts. BETA!<br>"+
+                "<button id='show_voice_commands' type='button' class='voice button'>Show voice commands</button></td></tr>" +
         "</table>" +
       "</div>" +
 
       "<div id='pregame_settings_tabs-3'>" +
-	    "<table id='settings_table'><tr id='speech_enabled'><td id='speech_label'></td>" +
+	    "<table id='settings_table'>" +
+	    "<tr id='speech_enabled'><td id='speech_label'></td>" +
         "<td><input type='checkbox' id='speech_setting'>Enable speech audio messages</td></tr>" +
 	    "<tr id='voice_row'><td id='voice_label'></td>" +
         "<td><select name='voice' id='voice'></select></td></tr>" +
@@ -692,6 +698,16 @@ function pregame_settings()
     $("#speech_label").prop("innerHTML", "Speech messages:");
     $("#speech_setting").parent().html("Speech Synthesis API is not supported or enabled in your browser.");
   }
+
+  $("#cardboard_vr_label").prop("innerHTML", "3D Virtual Reality:");
+  $('#cardboard_vr_setting').change(function() {
+    cardboard_vr_enabled = !cardboard_vr_enabled;
+    if (cardboard_vr_enabled) {
+      speech_enabled = true;
+      speech_recogntition_enabled = true;
+    }
+  });
+
 
   if (server_settings['metamessage'] != null
       && server_settings['metamessage']['val'] != null) {
@@ -870,6 +886,7 @@ function pregame_settings()
   });
   if (renderer == RENDERER_WEBGL) {
     $(".benchmark").button();
+    $("#show_voice_commands").button();
   } else {
     $('[href="#pregame_settings_tabs-2"]').closest('li').hide();
   }
@@ -903,6 +920,35 @@ function pregame_settings()
   if (is_touch_device() || is_small_screen()) {
       $('#metamessage').blur();
   }
+
+  $("#show_voice_commands").click(function() {
+   var previous_setting = cardboard_vr_enabled;
+   cardboard_vr_enabled = false;
+   show_dialog_message("Voice commands",
+     "T, Turn - Turn Done<br>" +
+     "Y, Yes, O, Ok   - Yes<br>" +
+     "No - No<br>" +
+     "B, Build, City   - Build city<br>" +
+     "X, Explore - Explore<br>" +
+     "I, Irrigation  - Irrigation<br>" +
+     "Road  - Road<br>" +
+     "A, Auto  - Auto settlers<br>" +
+     "F, Fortify  - Fortify<br>" +
+     "M, Mine  - Mine<br>" +
+     "Wait  - Wait<br>" +
+     "U, Up  - Move unit up<br>" +
+     "D, Down  - Down<br>" +
+     "L, Left  - Left<br>" +
+     "R, Right  - Right<br>" +
+     "N, North  - North<br>" +
+     "S, South  - South<br>" +
+     "E, East  - East<br>" +
+     "W, West  - West<br>" +
+     "North West, North East, South East, South West<br>"
+      );
+    cardboard_vr_enabled = previous_setting;
+  });
+
 
 }
 

@@ -384,6 +384,11 @@ function check_text_input(event,chatboxtextarea) {
       return; //disallow all uppercase messages.
     }
 
+    if (is_longturn() && C_S_RUNNING == client_state()
+      && message != null && message.indexOf(encode_message_text("/set")) != -1) {
+      return; // disallow changing settings in a running LongTurn game.
+    }
+
     send_message(message);
     $("#game_text_input").blur();
     return false;

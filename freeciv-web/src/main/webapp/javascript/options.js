@@ -186,6 +186,8 @@ function init_options_dialog()
 
   if (is_longturn()) {
     $("#save_button").hide();
+    $("#timeout_setting_div").hide();
+    $("#title_setting_div").hide();
   }
 
 }

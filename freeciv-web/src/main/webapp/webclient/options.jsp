@@ -6,7 +6,7 @@
 
 <h2>Game Options</h2>
 
-<div class="main_menu_buttons">
+<div class="main_menu_buttons" id="title_setting_div">
   <b>Game title:</b> <input type='text' name='metamessage_setting' id='metamessage_setting' size='28' maxlength='42'>
 </div>
 

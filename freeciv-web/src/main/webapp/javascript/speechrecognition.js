@@ -100,7 +100,6 @@ function speech_recogntition_handle_result(event)
         break;
 
       case "x":
-      case "explore":
         key_unit_auto_explore();
         found = true;
         break;

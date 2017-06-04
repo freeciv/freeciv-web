@@ -925,11 +925,12 @@ function pregame_settings()
    var previous_setting = cardboard_vr_enabled;
    cardboard_vr_enabled = false;
    show_dialog_message("Voice commands",
+     "<b>Voice command - Explanation:</b> <br>"
      "T, Turn - Turn Done<br>" +
      "Y, Yes, O, Ok   - Yes<br>" +
      "No - No<br>" +
      "B, Build, City   - Build city<br>" +
-     "X, Explore - Explore<br>" +
+     "X - Explore<br>" +
      "I, Irrigation  - Irrigation<br>" +
      "Road  - Road<br>" +
      "A, Auto  - Auto settlers<br>" +

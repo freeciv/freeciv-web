@@ -96,6 +96,10 @@ public class DeleteSaveGame extends HttpServlet {
 				return;
 			} else {
 				String hashedPasswordFromDB = rs1.getString(1);
+				if (hashedPasswordFromDB == null || secure_password == null) {
+					response.getOutputStream().print("Failed auth when deleting.");
+					return;
+				}
 				if ( hashedPasswordFromDB.equals(Crypt.crypt(secure_password, hashedPasswordFromDB))) {
 					// Login OK!
 				} else {

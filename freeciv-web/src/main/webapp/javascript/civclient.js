@@ -390,42 +390,42 @@ function chatbox_scroll_down ()
 function show_dialog_message(title, message) {
 
   // reset dialog page.
-  $("#dialog").remove();
-  $("<div id='dialog'></div>").appendTo("div#game_page");
+  $("#generic_dialog").remove();
+  $("<div id='generic_dialog'></div>").appendTo("div#game_page");
 
   speak(title);
   speak(message);
 
   if (cardboard_vr_enabled) return;
 
-  $("#dialog").html(message);
-  $("#dialog").attr("title", title);
-  $("#dialog").dialog({
+  $("#generic_dialog").html(message);
+  $("#generic_dialog").attr("title", title);
+  $("#generic_dialog").dialog({
 			bgiframe: true,
 			modal: true,
 			width: is_small_screen() ? "90%" : "50%",
 			buttons: {
 				Ok: function() {
-					$("#dialog").dialog('close');
+					$("#generic_dialog").dialog('close');
 					$("#game_text_input").blur();
 				}
 			}
 		});
 
-  $("#dialog").dialog('open');
+  $("#generic_dialog").dialog('open');
   $("#game_text_input").blur();
   //quick fix to put the dialog on top of everything else.
   setTimeout(function() {
-    $('#dialog').parent().css('z-index', 2000);
+    $('#generic_dialog').parent().css('z-index', 2000);
   }, 50);
 
   // automatically close dialog after 24 seconds, because sometimes the dialog can't be closed manually.
   setTimeout(function() {
-    $('#dialog').dialog('close');
+    $('#generic_dialog').dialog('close');
     $('#game_text_input').blur();
   }, 24000);
 
-
+  $('#generic_dialog').css("max-height", "500");
 
 }
 

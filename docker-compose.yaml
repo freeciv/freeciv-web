@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+  freecivproxy:
+    build: ./freeciv-proxy
+    ports:
+      - 8002:8002
+    expose:
+      - 8002
+
+  freecivserver:
+    build: ./freeciv
+    ports:
+      - 6556:6556
+    expose:
+      - 6556
+

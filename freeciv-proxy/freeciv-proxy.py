@@ -69,7 +69,7 @@ class WSHandler(websocket.WebSocketHandler):
             # called the first time the user connects.
             login_message = json.loads(message)
             self.username = login_message['username']
-            if hasattr(login_message, 'host'):
+            if 'host' in login_message:
                 self.civserverhost = login_message['host']
             else:
                 self.civserverhost = DEFAULT_HOST

@@ -20,7 +20,6 @@ from threading import Thread
 import logging
 import time
 
-HOST = '127.0.0.1'
 logger = logging.getLogger("freeciv-proxy")
 
 # The CivCom handles communication between freeciv-proxy and the Freeciv C
@@ -29,11 +28,12 @@ logger = logging.getLogger("freeciv-proxy")
 
 class CivCom(Thread):
 
-    def __init__(self, username, civserverport, key, civwebserver):
+    def __init__(self, username, civserverport, civserverhost, key, civwebserver):
         Thread.__init__(self)
         self.socket = None
         self.username = username
         self.civserverport = civserverport
+        self.civserverhost = civserverhost
         self.key = key
         self.send_buffer = []
         self.connect_time = time.time()
@@ -53,7 +53,7 @@ class CivCom(Thread):
         self.socket.setblocking(True)
         self.socket.settimeout(2)
         try:
-            self.socket.connect((HOST, self.civserverport))
+            self.socket.connect((self.civserverhost, self.civserverport))
             self.socket.settimeout(0.01)
         except socket.error as reason:
             self.send_error_to_client(
@@ -188,7 +188,7 @@ class CivCom(Thread):
                     b'\0')
         except:
             self.send_error_to_client(
-                "Proxy unable to communicate with civserver on port " + str(self.civserverport))
+                "Proxy unable to communicate with civserver on " + self.civserverhost + ":" + str(self.civserverport))
         finally:
             self.civserver_messages = []
 

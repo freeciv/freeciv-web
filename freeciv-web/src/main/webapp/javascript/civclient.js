@@ -425,7 +425,7 @@ function show_dialog_message(title, message) {
     $('#game_text_input').blur();
   }, 24000);
 
-  $('#generic_dialog').css("max-height", "500");
+  $('#generic_dialog').css("height", "600");
 
 }
 

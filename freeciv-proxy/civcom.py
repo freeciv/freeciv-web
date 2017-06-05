@@ -28,7 +28,7 @@ logger = logging.getLogger("freeciv-proxy")
 
 class CivCom(Thread):
 
-    def __init__(self, username, civserverport, civserverhost, key, civwebserver):
+    def __init__(self, username, civserverhost, civserverport, key, civwebserver):
         Thread.__init__(self)
         self.socket = None
         self.username = username

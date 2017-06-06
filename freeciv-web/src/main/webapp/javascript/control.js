@@ -2377,6 +2377,9 @@ function popit()
 function popit_req(ptile)
 {
   if (ptile == null) return;
+
+  if (tile_get_known(ptile) == TILE_UNKNOWN) return;
+
   var punit_id = 0;
   var punit = find_visible_unit(ptile);
   if (punit != null) punit_id = punit['id'];

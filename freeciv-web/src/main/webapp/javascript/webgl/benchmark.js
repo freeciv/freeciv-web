@@ -104,11 +104,13 @@ function initial_benchmark_check()
   var fps = Math.floor(benchmark_frames_count / time_elapsed);
   initial_benchmark_enabled = false;
   if (fps < 4) {
-    var renderer_name;
+    var renderer_name = "-";
     var gl = document.createElement('canvas').getContext('webgl');
-    var extension = gl.getExtension('WEBGL_debug_renderer_info');
-    if (extension != undefined) {
-      renderer_name = gl.getParameter(extension.UNMASKED_RENDERER_WEBGL);
+    if (gl != null) {
+      var extension = gl.getExtension('WEBGL_debug_renderer_info');
+      if (extension != undefined) {
+        renderer_name = gl.getParameter(extension.UNMASKED_RENDERER_WEBGL);
+      }
     }
 
     var message = "The game is running too slowly! Please check if the drivers for your graphics driver needs to be updated and that you have a graphics card which supports WebGL 3D. "

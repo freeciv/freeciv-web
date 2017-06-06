@@ -169,7 +169,7 @@ if __name__ == '__main__':
 
   if (mc.start_longturn == "true"):
     # start LongTurn games
-    for i in range(3):  
+    for i in range(4):  
       new_server = Civlauncher("multiplayer", "longturn_600" + str(i + 3), port, metahost + ":" + str(metaport) + metapath, mc.savesdir)
       mc.server_list.append(new_server);
       new_server.start();

@@ -177,18 +177,18 @@
 
 						<c:if test="${default_lang}">
 							<div class="features">
+								Play against the Freeciv AI with 2D HTML5 graphics
+							</div>
+						</c:if>
+						<a id="single-button" href="/webclient/?action=new" class="btn"><i class="fa fa-flag"></i> <fmt:message key="index-game-launcher-2d"/></a>
+
+						<c:if test="${default_lang}">
+							<div class="features">
 								Play against the Freeciv AI with 3D WebGL<br>graphics using the Three.js 3D engine
 							</div>
 						</c:if>
 						<a href="/webclient/?action=new&renderer=webgl" class="btn" id="webgl_button"><i class="fa fa-cube"></i> <fmt:message key="index-game-launcher-3d"/></a>
 
-
-						<c:if test="${default_lang}">
-							<div class="features">
-								Play against the Freeciv AI with 2D HTML5 graphics
-							</div>
-						</c:if>
-						<a id="single-button" href="/webclient/?action=new" class="btn"><i class="fa fa-flag"></i> <fmt:message key="index-game-launcher-2d"/></a>
 
 						<c:if test="${default_lang}">
 							<div class="features">

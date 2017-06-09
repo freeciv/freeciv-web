@@ -6,10 +6,6 @@
 
 <h2>Game Options</h2>
 
-<div class="main_menu_buttons" id="title_setting_div">
-  <b>Game title:</b> <input type='text' name='metamessage_setting' id='metamessage_setting' size='28' maxlength='42'>
-</div>
-
 <div class="main_menu_buttons">
 <b>Music:</b><br>
   <audio preload="none"></audio>
@@ -68,6 +64,12 @@
 </table>
 
 
+<div class="main_menu_buttons" id="title_setting_div">
+  <b>Game title:</b> <input type='text' name='metamessage_setting' id='metamessage_setting' size='28' maxlength='42'>
+</div>
+
+
+</center>
 </div>
 
 </div>

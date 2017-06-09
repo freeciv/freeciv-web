@@ -18,6 +18,7 @@
 ***********************************************************************/
 
 var texture_cache = {};
+var webgl_mapview_font = 'Bold 23px Georgia, serif';
 
 /****************************************************************************
  Convert a canvas to a mesh that will always face the user. The height of
@@ -95,8 +96,8 @@ function create_city_label(pcity)
   }
 
   // Name and size
-  var city_text = pcity.name + " " + pcity.size;
-  ctx.font = 'Bold 25px Arial';
+  var city_text = pcity.name.toUpperCase() + " " + pcity.size;
+  ctx.font = webgl_mapview_font;
   var txt_measure = ctx.measureText(city_text);
   // Background
   var background_color = nations[owner.nation].color;
@@ -133,7 +134,7 @@ function create_city_label(pcity)
   }
 
   if (width > 256) width = 256;
-  return canvas_to_user_facing_mesh(canvas, width, Math.floor(width * 0.7), 13, graphics_quality >= QUALITY_HIGH, "city_" + pcity['id']);
+  return canvas_to_user_facing_mesh(canvas, width, Math.floor(width * 0.65), 13, graphics_quality >= QUALITY_HIGH, "city_" + pcity['id']);
 }
 
 /****************************************************************************
@@ -181,8 +182,8 @@ function update_city_label(pcity)
   }
 
   // Name and size
-  var city_text = pcity.name + " " + pcity.size;
-  ctx.font = 'Bold 25px Arial';
+  var city_text = pcity.name.toUpperCase() + " " + pcity.size;
+  ctx.font = webgl_mapview_font;
   var txt_measure = ctx.measureText(city_text);
   // Background
   var background_color = nations[owner.nation].color;

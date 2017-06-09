@@ -40,6 +40,7 @@ var unknown_terrain_mesh;
 var unknownTerritoryGeometry;
 var fogOfWarGeometry;
 var water;
+var high_quality_water_force_enabled = false;
 
 var start_webgl;
 
@@ -128,18 +129,8 @@ function init_webgl_mapview() {
 
   selected_unit_material = new THREE.MeshBasicMaterial( { color: 0xf6f7bf, transparent: true, opacity: 0.5} );
 
-  /* Create water mesh with a texture. */
-  if (graphics_quality == QUALITY_LOW) {
-    // lower quality water
-    var waterMaterial = new THREE.MeshBasicMaterial( { transparent: true, opacity: 0.5, color: 0x173355 } );
-    var waterMesh = new THREE.Mesh( new THREE.PlaneBufferGeometry( mapview_model_width, mapview_model_height), waterMaterial );
-	waterMesh.rotation.x = - Math.PI * 0.5;
-	waterMesh.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), 50);
-	waterMesh.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), Math.floor(mapview_model_width / 2) - 500);
-	waterMesh.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), -mapview_model_height / 2);
-    scene.add(waterMesh);
 
-  } else {
+  if (graphics_quality > QUALITY_LOW || high_quality_water_force_enabled) {
     // high quality water using WebGL shader
     water = new THREE.Water( maprenderer, camera, scene, {
         textureWidth: 512,
@@ -171,6 +162,15 @@ function init_webgl_mapview() {
     var sunMesh = new THREE.Mesh( sunGeometry, webgl_materials['sun'] );
     scene.add(sunMesh);
 
+  } else {
+    // lower quality water, create water mesh with a texture.
+    var waterMaterial = new THREE.MeshBasicMaterial( { transparent: true, opacity: 0.5, color: 0x173355 } );
+    var waterMesh = new THREE.Mesh( new THREE.PlaneBufferGeometry( mapview_model_width, mapview_model_height), waterMaterial );
+	waterMesh.rotation.x = - Math.PI * 0.5;
+	waterMesh.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), 50);
+	waterMesh.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), Math.floor(mapview_model_width / 2) - 500);
+	waterMesh.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), -mapview_model_height / 2);
+    scene.add(waterMesh);
   }
 
   /* heightmap image */
@@ -283,7 +283,7 @@ function init_webgl_mapview() {
     if (y == yquality - 1) fogOfWarGeometry.vertices[ i ].z += 50;
   }
   fogOfWarGeometry.computeVertexNormals();
-  var fogOfWar_material = new THREE.MeshLambertMaterial({color: 0x000000, transparent: true, opacity: 0.65});
+  var fogOfWar_material = new THREE.MeshLambertMaterial({color: 0x000000, transparent: true, opacity: 0.55});
   var fog_of_war_mesh = new THREE.Mesh( fogOfWarGeometry, fogOfWar_material );
   fog_of_war_mesh.geometry.dynamic = true;
   if (!observing) scene.add(fog_of_war_mesh);
@@ -318,7 +318,7 @@ function animate() {
 
   update_animated_objects();
 
-  if (graphics_quality >= QUALITY_MEDIUM && water != null) {
+  if ((graphics_quality > QUALITY_LOW || high_quality_water_force_enabled) && water != null) {
     water.material.uniforms.time.value += 1.0 / 60.0;
     water.render();
   }

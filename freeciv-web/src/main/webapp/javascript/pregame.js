@@ -590,6 +590,8 @@ function pregame_settings()
 
       "<div id='pregame_settings_tabs-3'>" +
 	    "<table id='settings_table'>" +
+        "<tr title='Font on map'><td>Font on map:</td>" +
+	    "<td><input type='text' name='mapview_font' id='mapview_font' size='28' maxlength='42' value='16px Georgia, serif'></td></tr>" +
 	    "<tr id='speech_enabled'><td id='speech_label'></td>" +
         "<td><input type='checkbox' id='speech_setting'>Enable speech audio messages</td></tr>" +
 	    "<tr id='voice_row'><td id='voice_label'></td>" +
@@ -743,6 +745,10 @@ function pregame_settings()
       $(this).val( cleaned_text ); }
     }
   );
+
+  $('#mapview_font').change(function() {
+    canvas_text_font =  $('#mapview_font').val();
+  });
 
   $('#mapsize').change(function() {
     var mapsize = parseFloat($('#mapsize').val());

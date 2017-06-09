@@ -91,6 +91,7 @@ function init_webgl_renderer()
     // iOS devices default to low quality, because high quality may crash on some iOS devices. This can
     // probably be removed in the future when iOS devices get better WebGL performance.
     graphics_quality = QUALITY_LOW;
+    high_quality_water_force_enabled = true;
   } else {
     graphics_quality = QUALITY_HIGH; //default value
   }

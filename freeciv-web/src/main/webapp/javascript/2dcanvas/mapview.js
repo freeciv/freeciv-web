@@ -31,7 +31,7 @@ var loaded_images = 0;
 
 var sprites_init = false;
 
-var canvas_text_font = "17px Arial"; // with canvas text support
+var canvas_text_font = "16px Georgia, serif"; // with canvas text support
 
 var fullfog = [];
 
@@ -273,14 +273,14 @@ function canvas_put_select_rectangle(canvas_context, canvas_x, canvas_y, width, 
 **************************************************************************/
 function mapview_put_city_bar(pcanvas, city, canvas_x, canvas_y) {
 
-  var text = decodeURIComponent(city['name']);
+  var text = decodeURIComponent(city['name']).toUpperCase();
   var size = city['size'];
   var color = nations[city_owner(city)['nation']]['color'];
   var prod_type = get_city_production_type(city);
 
   var txt_measure = pcanvas.measureText(text);
   var size_measure = pcanvas.measureText(size);
-  pcanvas.globalAlpha = 0.80;
+  pcanvas.globalAlpha = 0.75;
   pcanvas.fillStyle = "rgba(0, 0, 0, 0.5)";
   pcanvas.fillRect (canvas_x - Math.floor(txt_measure.width / 2) - 14, canvas_y - 17,
                     txt_measure.width + 20, 20);
@@ -320,8 +320,6 @@ function mapview_put_city_bar(pcanvas, city, canvas_x, canvas_y) {
               canvas_y - 19, 28, 24);
   }
 
-  pcanvas.fillStyle = "rgba(0, 0, 0, 1)";
-  pcanvas.fillText(size, canvas_x + Math.floor(txt_measure.width / 2) + 10, canvas_y + 1);
   pcanvas.fillStyle = "rgba(255, 255, 255, 1)";
   pcanvas.fillText(text, canvas_x - Math.floor(txt_measure.width / 2) - 2, canvas_y - 1);
   pcanvas.fillText(size, canvas_x + Math.floor(txt_measure.width / 2) + 8, canvas_y - 1);

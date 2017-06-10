@@ -166,16 +166,17 @@ if __name__ == '__main__':
     mc.server_list.append(new_server);
     new_server.start();
     port += 1;
-
+  
+  num_longturn_servers = 4;
   if (mc.start_longturn == "true"):
     # start LongTurn games
-    for i in range(4):  
+    for i in range(num_longturn_servers):  
       new_server = Civlauncher("multiplayer", "longturn_600" + str(i + 3), port, metahost + ":" + str(metaport) + metapath, mc.savesdir)
       mc.server_list.append(new_server);
       new_server.start();
       port += 1;
   else:    
-    port += 3;
+    port += num_longturn_servers;
 
   print("Publite2 started!");
   time.sleep(20);

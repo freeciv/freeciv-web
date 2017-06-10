@@ -410,11 +410,18 @@ function update_active_units_dialog()
     var aunit = current_focus[0];
     var ptype = unit_type(aunit);
     unit_info_html += "<div id='active_unit_info' title='" + ptype['helptext'] + "'>";
+
+    if (client.conn.playing != null && current_focus[0]['owner'] != client.conn.playing.playerno) {
+      unit_info_html += "<b>" + nations[players[current_focus[0]['owner']]['nation']]['adjective'] + "</b> ";
+    }
+
     unit_info_html += "<b>" + ptype['name'] + "</b>: ";
     if (get_unit_homecity_name(aunit) != null) {
       unit_info_html += " " + get_unit_homecity_name(aunit) + " ";
     }
-    unit_info_html += "<span>" + get_unit_moves_left(aunit) + "</span> ";
+    if (current_focus[0]['owner'] == client.conn.playing.playerno) {
+      unit_info_html += "<span>" + get_unit_moves_left(aunit) + "</span> ";
+    }
     unit_info_html += "<br><span title='Attack strength'>A:" + ptype['attack_strength']
     + "</span> <span title='Defense strength'>D:" + ptype['defense_strength']
     + "</span> <span title='Firepower'>F:" + ptype['firepower']
@@ -428,6 +435,10 @@ function update_active_units_dialog()
     }
 
     unit_info_html += "</div>";
+  } else if (current_focus.length >= 1 && client.conn.playing != null && current_focus[0]['owner'] != client.conn.playing.playerno) {
+    unit_info_html += "<div id='active_unit_info'>" + current_focus.length + " foreign units  (" +
+     nations[players[current_focus[0]['owner']]['nation']]['adjective']
+     +")</div> ";
   } else if (current_focus.length > 1) {
     unit_info_html += "<div id='active_unit_info'>" + current_focus.length + " units selected.</div> ";
   }

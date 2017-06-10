@@ -234,7 +234,7 @@ function show_city_dialog(pcity)
   turns_to_complete = get_city_production_time(pcity);
 
   if (turns_to_complete != FC_INFINITY) {
-    $("#city_production_turns_overview").html("Turns to completion: " + turns_to_complete);
+    $("#city_production_turns_overview").html(turns_to_complete + " turns &nbsp;&nbsp;(" + get_production_progress(pcity) + ")");
   } else {
     $("#city_production_turns_overview").html("-");
   }
@@ -448,12 +448,12 @@ function get_city_production_type(pcity)
 
 
 /**************************************************************************
- Returns the number of turns to complete current city production. 
+ Returns the number of turns to complete current city production.
 **************************************************************************/
 function get_city_production_time(pcity)
 {
-  if (pcity == null) return FC_INFINITY;
- 
+ if (pcity == null) return FC_INFINITY;
+
   if (pcity['production_kind'] == VUT_UTYPE) {
     var punit_type = unit_types[pcity['production_value']];
     return city_turns_to_build(pcity, punit_type, true);
@@ -469,6 +469,31 @@ function get_city_production_time(pcity)
   }
 
   return FC_INFINITY;
+
+}
+
+
+/**************************************************************************
+ Returns city production progress, eg. the string "5 / 30"
+**************************************************************************/
+function get_production_progress(pcity)
+{
+  if (pcity == null) return " ";
+
+  if (pcity['production_kind'] == VUT_UTYPE) {
+    var punit_type = unit_types[pcity['production_value']];
+    return  pcity['shield_stock'] + "/" + universal_build_shield_cost(punit_type);;
+  }
+
+  if (pcity['production_kind'] == VUT_IMPROVEMENT) {
+    var improvement = improvements[pcity['production_value']];
+    if (improvement['name'] == "Coinage") {
+      return " ";
+    }
+    return  pcity['shield_stock'] + "/" + universal_build_shield_cost(improvement);;
+  }
+
+  return " ";
 
 }
 
@@ -570,19 +595,13 @@ function city_turns_to_build(pcity,
 							 target,
 			                 include_shield_stock)
 {
-  var city_shield_surplus = pcity['last_turns_shield_surplus'];
+  var city_shield_surplus =  pcity['surplus'][O_SHIELD];
   var city_shield_stock = include_shield_stock ? pcity['shield_stock'] : 0;
   var cost = universal_build_shield_cost(target);
 
-  /*if (target.kind == VUT_IMPROVEMENT
-      && is_great_wonder(target.value.building)
-      && !great_wonder_is_available(target.value.building)) {
-    return FC_INFINITY;
-  }*/
-
   if (include_shield_stock == true && (pcity['shield_stock'] >= cost)) {
     return 1;
-  } else if (pcity['last_turns_shield_surplus'] > 0) {
+  } else if ( pcity['surplus'][O_SHIELD] > 0) {
     return Math.floor((cost - city_shield_stock - 1) / city_shield_surplus + 1);
   } else {
     return FC_INFINITY;

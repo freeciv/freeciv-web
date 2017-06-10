@@ -63,9 +63,7 @@ function create_heightmap()
     for (var y = 0; y < map.ysize; y++) {
       var ptile = map_pos_to_tile(x, y);
       if (ptile != null) {
-        heightmap_tiles[x][y] = 0.5;
-        heightmap_tiles[x][y] += 0.4 * map_tile_height(ptile);
-        heightmap_tiles[x][y] += 0.1 * distance_from_coast_map[x][y];
+        heightmap_tiles[x][y] = 0.5 + 0.4 * map_tile_height(ptile) + 0.1 * distance_from_coast_map[x][y];
         if (ptile != null && heightmap_tiles[x][y] > ptile['height']) ptile['height'] = heightmap_tiles[x][y];
       }
     }
@@ -115,6 +113,15 @@ function create_heightmap()
       }
     }
   }
+
+  for (var x = 0; x < heightmap_resolution_x; x++) {
+    for (var y = 0; y < heightmap_resolution_y; y++) {
+      if (heightmap[x][y] > 100) {
+        heightmap[x][y] = 0.5 + 0.4 * ((Math.random() - 0.5) / 60) + 0.2;
+      }
+    }
+  }
+
   console.log("create_heightmap took: " + (new Date().getTime() - start_heightmap) + " ms.");
 
 }

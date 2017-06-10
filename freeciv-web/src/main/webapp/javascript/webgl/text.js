@@ -96,7 +96,7 @@ function create_city_label(pcity)
   }
 
   // Name and size
-  var city_text = pcity.name.toUpperCase() + " " + pcity.size;
+  var city_text = pcity.name.toUpperCase() + "  " + pcity.size;
   ctx.font = webgl_mapview_font;
   var txt_measure = ctx.measureText(city_text);
   // Background
@@ -182,7 +182,7 @@ function update_city_label(pcity)
   }
 
   // Name and size
-  var city_text = pcity.name.toUpperCase() + " " + pcity.size;
+  var city_text = pcity.name.toUpperCase() + "  " + pcity.size;
   ctx.font = webgl_mapview_font;
   var txt_measure = ctx.measureText(city_text);
   // Background

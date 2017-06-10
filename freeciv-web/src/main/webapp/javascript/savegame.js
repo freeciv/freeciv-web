@@ -391,6 +391,10 @@ function load_game_toggle()
     
     var firstplayer = players[0]['name'].split(" ")[0];
 
+    if ($.getUrlVar('scenario') == "true" || scenario_activated) {
+      send_message("/set aifill 6");
+    }
+
     send_message("/aitoggle " + firstplayer);
     send_message("/take " + firstplayer);
     $.unblockUI();

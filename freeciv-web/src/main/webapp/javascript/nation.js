@@ -115,6 +115,8 @@ function update_nation_screen()
     $('#toggle_ai_button').button("disable");
   }
 
+  $("#intelligence_report_button").button("disable");
+
   if (is_small_screen) {
     $('#take_player_button').hide();
   }
@@ -199,6 +201,13 @@ function handle_nation_table_select( ui )
     } else {
       $("#cancel_treaty_button").button("option", "label", "Cancel treaty");
     }
+  }
+
+  if (!client_is_observer() && client.conn.playing != null && player_id != client.conn.playing['playerno']
+    && diplstates[player_id] != DS_NO_CONTACT) {
+    $("#intelligence_report_button").button("enable");
+  } else {
+    $("#intelligence_report_button").button("disable");
   }
 
   if (!is_hotseat() && client_is_observer() && pplayer['flags'].isSet(PLRF_AI)

@@ -216,6 +216,10 @@ function control_init()
     show_send_private_message_dialog();
   });
 
+  $("#intelligence_report_button").click(function(e) {
+    show_intelligence_report_dialog();
+  });
+
   $('#meet_player_button').click(nation_meet_clicked);
   $('#view_player_button').click(center_on_player);
   $('#cancel_treaty_button').click(cancel_treaty_clicked);
@@ -858,7 +862,7 @@ function set_unit_focus_and_redraw(punit)
   auto_center_on_focus_unit();
   update_active_units_dialog();
   update_unit_order_commands();
-  if ($("#game_unit_orders_default").length > 0 && !cardboard_vr_enabled) $("#game_unit_orders_default").show();
+  if (current_focus.length > 0 && $("#game_unit_orders_default").length > 0 && !cardboard_vr_enabled) $("#game_unit_orders_default").show();
 
 }
 
@@ -1233,7 +1237,7 @@ function do_map_click(ptile, qtype, first_time_called)
 
     } else if (sunits != null && sunits.length > 0 ) {
       if (sunits[0]['owner'] == client.conn.playing.playerno) {
-         if (sunits.length == 1) {
+        if (sunits.length == 1) {
           /* A single unit has been clicked with the mouse. */
           var unit = sunits[0];
           set_unit_focus_and_activate(unit);
@@ -1250,9 +1254,13 @@ function do_map_click(ptile, qtype, first_time_called)
             $("#canvas_div").contextMenu();
           }
 	    }
+      } else if (pcity == null) {
+        // clicked on a tile with units owned by other players.
+        current_focus = sunits;
+        $("#game_unit_orders_default").hide();
+        update_active_units_dialog();
       }
     }
-
   }
 
   paradrop_active = false;

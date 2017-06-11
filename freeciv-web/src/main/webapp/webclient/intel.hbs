@@ -1,0 +1,42 @@
+<div id="intel_tabs">
+  <ul>
+    <li><a href="#intel_tabs-overview">Overview</a></li>
+    <li><a href="#intel_tabs-diplomacy">Diplomacy</a></li>
+    <li><a href="#intel_tabs-technology">Technology</a></li>
+  </ul>
+
+  <div id="intel_tabs-overview" class="inteldlg_tabs">
+    <table class="vert-attr-list">
+    <tr><th>Ruler</th><td>{{ruler}}</td></tr>
+    <tr><th>Government</th><td>{{government}}</td></tr>
+    <tr><th>Capital</th><td>{{capital}}</td></tr>
+    <tr><th>Gold</th><td>{{gold}}</td></tr>
+    <tr><th>&nbsp;</th><td></td></tr>
+    <tr><th>Tax</th><td>{{tax}}</td></tr>
+    <tr><th>Science</th><td>{{science}}</td></tr>
+    <tr><th>Luxury</th><td>{{luxury}}</td></tr>
+    <tr><th>&nbsp;</th><td></td></tr>
+    <tr><th>Researching</th><td>{{researching}}</td></tr>
+    </table>
+  </div> 
+
+  <div id="intel_tabs-diplomacy" class="inteldlg_tabs">
+    <ul>{{#each dipl}}
+    <li>{{state}}<ul>
+    {{#each nations}}<li>{{this}}</li>{{/each}}
+    </ul></li>
+    {{else}}
+    {{!-- Shouldn't happen, as they have contacted us --}}
+    No contact with other nations
+    {{/each}}</ul>
+  </div> 
+
+  <div id="intel_tabs-technology" class="inteldlg_tabs">
+    <ul>{{#each tech}}
+    <li>{{this}}</li>
+    {{else}}
+    No technology we don't have
+    {{/each}}</ul>
+  </div> 
+ 
+</div>  

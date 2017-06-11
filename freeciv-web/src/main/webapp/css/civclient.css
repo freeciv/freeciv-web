@@ -941,3 +941,24 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
   color: red;
   background-color: #330000;
 }
+
+.vert-attr-list th {
+  padding-right: 0.5em;
+  text-align: right;
+}
+
+.inteldlg_tabs { 
+  margin: 0.5em 0em; 
+} 
+
+.inteldlg_tabs > ul {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+@media(max-height:600px) {
+  .inteldlg_tabs > ul {
+    max-height: 250px;
+    overflow-y: auto;
+  }
+}

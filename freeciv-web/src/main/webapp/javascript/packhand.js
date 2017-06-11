@@ -1361,6 +1361,22 @@ function handle_player_diplstate(packet)
   } else if (packet['plr2'] == client.conn.playing['playerno']) {
     diplstates[packet['plr1']] = packet['type'];
   }
+
+  // TODO: remove current diplstates (after moving all users to the new one),
+  //       or just make it a reference to players[me].diplstates
+  //
+  // There's no need to set players[packet.plr2].diplstates, as there'll be
+  // a packet for that.  In fact, there's a packet for each of (p1,x) and (p2,x)
+  // when the state changes between p1 and p2, and for all pairs of players
+  // when a turn begins
+  if (players[packet['plr1']].diplstates === undefined) {
+    players[packet['plr1']].diplstates = [];
+  }
+  players[packet['plr1']].diplstates[packet['plr2']] = {
+    state: packet['type'],
+    turns_left: packet['turns_left'],
+    contact_turns_left: packet['contact_turns_left']
+  };
 }
 
 /**************************************************************************

@@ -35,7 +35,7 @@ function show_intelligence_report_dialog()
       msg += "Gold: " + pplayer['gold'] + "<br>";
     }
 
-  if (pplayer['researching'] != null) {
+  if (pplayer['researching'] != null && pplayer['researching'] > 0 && techs[pplayer['researching']] != null) {
     msg += "Researching: " + techs[pplayer['researching']]['name'] + "<br>";
   }
 

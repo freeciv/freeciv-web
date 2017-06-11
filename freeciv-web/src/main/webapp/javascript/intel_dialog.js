@@ -19,13 +19,26 @@
 
 
 /**************************************************************************
- ...
+ Show the intelligence report dialog, with data depending on the
+ stablishment of an embassy.
 **************************************************************************/
 function show_intelligence_report_dialog()
 {
   if (selected_player == -1) return;
   var pplayer = players[selected_player];
 
+  if (client.conn.playing.real_embassy[selected_player]) {
+    show_intelligence_report_embassy(pplayer);
+  } else {
+    show_intelligence_report_hearsay(pplayer);
+  }
+}
+
+/**************************************************************************
+ Show the intelligence report dialog when there's no embassy.
+**************************************************************************/
+function show_intelligence_report_hearsay(pplayer)
+{
   var msg = "Ruler " + pplayer['name'] + "<br>";
   if (pplayer['government'] > 0) {
     msg += "Government: " + governments[pplayer['government']]['name'] + "<br>";
@@ -46,3 +59,89 @@ function show_intelligence_report_dialog()
       msg);
 
 }
+
+/**************************************************************************
+ Show the intelligence report dialog when there's an embassy.
+**************************************************************************/
+function show_intelligence_report_embassy(pplayer)
+{
+  // reset dialog page.
+  $("#intel_dialog").remove();
+  $("<div id='intel_dialog'></div>").appendTo("div#game_page");
+
+  var intel_data = {
+    ruler: pplayer['name'],
+    government: governments[pplayer['government']]['name'],
+    capital: '(not implemeted yet)', // TODO
+    gold: pplayer['gold'],
+    tax: pplayer['tax'] + '%',
+    science: pplayer['science'] + '%',
+    luxury: pplayer['luxury'] + '%',
+    researching: '(Unknown)',
+    dipl: [],
+    tech: []
+  };
+
+  // TODO: future techs
+  var research = research_get(pplayer);
+  if (research !== undefined) {
+    var researching = techs[research['researching']];
+    if (researching !== undefined) {
+      intel_data['researching'] = researching['name'] + ' ('
+                                + research['bulbs_researched'] + '/'
+                                + research['researching_cost'] + ')';
+    } else {
+      intel_data['researching'] = '(Nothing)';
+    }
+    var myresearch = research_get(client.conn.playing);
+    var tidx = 0; // techs[0] is empty, let's search after that
+    while ((tidx = research['inventions'].indexOf(TECH_KNOWN, tidx + 1)) > 0) {
+      if (!myresearch || myresearch['inventions'][tidx] != TECH_KNOWN) {
+        intel_data['tech'].push(techs[tidx]['name']);
+      }
+    }
+  }
+
+  if (pplayer['diplstates'] !== undefined) {
+    pplayer['diplstates'].forEach(function (st, i) {
+      if (st['state'] !== DS_NO_CONTACT && i !== pplayer['playerno']) {
+        var dplst = intel_data['dipl'][st['state']];
+        if (dplst === undefined) {
+          dplst = {
+            state: get_diplstate_text(st['state']),
+            nations: []
+          };
+          intel_data['dipl'][st['state']] = dplst;
+        }
+        dplst['nations'].push(nations[players[i]['nation']]['adjective']);
+      }
+    });
+  }
+
+  $.ajax({
+    url: "/webclient/intel.hbs?ts=" + ts,
+    dataType: "html",
+    cache: true,
+    async: false
+  }).fail(function() {
+    console.error("Unable to intelligence report dialog template.");
+  }).done(function( data ) {
+    var template=Handlebars.compile(data);
+    $("#intel_dialog").html(template(intel_data));
+  });
+
+  $("#intel_dialog").dialog({
+			bgiframe: true,
+			modal: true,
+			title: "Foreign Intelligence: "
+                             + nations[pplayer['nation']]['adjective']
+                             + " Empire",
+                        width: "auto"
+                     });
+
+  $("#intel_dialog").dialog('open');
+  $("#intel_tabs").tabs();
+  $("#game_text_input").blur();
+
+}
+

@@ -101,7 +101,8 @@ function control_init()
   });
 
   $("#pregame_text_input").focus(function(event) {
-    keyboard_input=false; if (this.value=='>') this.value='';
+    keyboard_input=false;
+    if (this.value=='>') this.value='';
   });
 
   $("#start_game_button").click(function(event) {
@@ -1274,7 +1275,7 @@ function do_map_click(ptile, qtype, first_time_called)
 function keyboard_listener(ev)
 {
   // Check if focus is in chat field, where these keyboard events are ignored.
-  if (!keyboard_input) return;
+  if ($('input:focus').length > 0 || !keyboard_input) return;
 
   if (C_S_RUNNING != client_state()) return;
 
@@ -2157,6 +2158,17 @@ function request_unit_build_city()
 **************************************************************************/
 function key_unit_disband()
 {
+
+  swal({
+    title: "Disband unit?",
+    text: "Do you want to destroy this unit?",
+    type: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#DD6B55",
+    confirmButtonText: "Yes, disband unit.",
+    closeOnConfirm: true
+},
+function(){
   var funits = get_units_in_focus();
   for (var i = 0; i < funits.length; i++) {
     var punit = funits[i];
@@ -2180,6 +2192,9 @@ function key_unit_disband()
     send_request(JSON.stringify(packet));
   }
   setTimeout(update_unit_focus, 700);
+  setTimeout(update_active_units_dialog, 800);
+});
+
 }
 
 /**************************************************************************

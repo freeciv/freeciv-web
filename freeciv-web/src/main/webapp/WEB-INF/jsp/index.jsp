@@ -150,17 +150,17 @@
 			<div class="container-fluid">
 				<div class="row top-buffer-3">
 					<p class="lead">
-						<fmt:message key="index-lead"/>
+						<%--<fmt:message key="index-lead"/> --%>
 
 
-                        <%-- <div class="row top-buffer-3">
-                         <h1>LongTurn for Freeciv-web 2</h1>
-                         <b>LongTurn game number 2 of Freeciv-web has started and you can join it now!</b><br>
-                         <b>Each player will play one turn every day. Players in LongTurn game #1 can join <a href="https://play.freeciv.org/game/list?v=multiplayer">here</a>.<br><br>
-                         This will be the largest ever multiplayer game of Freeciv with 250 players!<br>
+                         <div class="row top-buffer-3">
+                         <h1>LongTurn for Freeciv-web 4</h1>
+                         <b>LongTurn game number 4 of Freeciv-web has started and you can join it now!</b><br>
+                         <b>Each player will play one turn every day. <br><br>
+                         This will be one of the largest ever multiplayer game of Freeciv with 250 players!<br>
                          </b>
-                         <h2><a href="https://play.freeciv.org/webclient?action=multi&civserverport=6004&civserverhost=play&multi=true">Join the LongTurn Freeciv-web game 2 here!</a></h2>
-                        </div>  --%>
+                         <h2><a href="https://play.freeciv.org/webclient?action=multi&civserverport=6006&civserverhost=play&multi=true">Join the LongTurn Freeciv-web game 4 here!</a></h2>
+                        </div>  
 
 					</p>
 				</div>
@@ -249,38 +249,6 @@
 				</div>
 			</div> <!-- end statistics -->
 		</c:if>
-
-		<div class="row top-buffer-1">
-			<div class="col-md-12">
-				<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-				<ins class="adsbygoogle"
-					style="display:block"
-					data-ad-client="ca-pub-5520523052926214"
-					data-ad-slot="7043279885"
-					data-ad-format="auto"></ins>
-				<script>
-				(adsbygoogle = window.adsbygoogle || []).push({});
-				</script>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-md-12">
-				<h2><fmt:message key="index-youtube"/></h2>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-6">
-				<div class="videoWrapper">
-					<iframe class="embed-responsive-item" width="542" height="343" src="https://www.youtube.com/embed/Vlon-ZF8F40" frameborder="0" allowfullscreen></iframe>
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="videoWrapper">
-					<iframe class="embed-responsive-item" width="542" height="343" src="https://www.youtube.com/embed/K6xBi2JWyZU" frameborder="0" allowfullscreen></iframe>
-				</div>
-			</div>
-		</div> <!-- end youtube -->
 
 
 		<div id="chrome-web-store" style="display: none;" class="alert alert-warning top-buffer-3" role="alert">
@@ -412,6 +380,39 @@
 				</div>
 			</div>
 		</div> <!-- end multiplayer/best play by email -->
+
+
+               <div class="row top-buffer-1">
+                        <div class="col-md-12">
+                                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                                <ins class="adsbygoogle"
+                                        style="display:block"
+                                        data-ad-client="ca-pub-5520523052926214"
+                                        data-ad-slot="7043279885"
+                                        data-ad-format="auto"></ins>
+                                <script>
+                                (adsbygoogle = window.adsbygoogle || []).push({});
+                                </script>
+                        </div>
+                </div>
+
+
+
+                <div class="row">
+                        <div class="col-md-12">
+                                <h2><fmt:message key="index-youtube"/></h2>
+                        </div>
+                </div>
+                <div class="row">
+                        <div class="col-md-2">
+                        </div>
+                        <div class="col-md-8">
+                                <div class="videoWrapper">
+                                        <iframe class="embed-responsive-item" width="542" height="343" src="https://www.youtube.com/embed/eGP-Pfip3mM" frameborder="0" allowfullscreen></iframe>
+                                </div>
+                        </div>
+                </div> <!-- end youtube -->
+
 
 		<div class="row" id="latest-from-blog">
 			<div class="col-md-12 container">

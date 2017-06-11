@@ -66,6 +66,9 @@ class metachecker():
       self.start_longturn = settings.get("Config", "start_longturn",
                                 fallback = "false")
 
+      longturn_ports_str = settings.get("Config", "longturn_server_ports").split(",")
+      self.longturn_ports_list = [int(e) if e.isdigit() else e for e in longturn_ports_str]
+
       self.check_count = 0;
       self.total = 0;
       self.single = 0;
@@ -167,16 +170,15 @@ if __name__ == '__main__':
     new_server.start();
     port += 1;
   
-  num_longturn_servers = 4;
   if (mc.start_longturn == "true"):
     # start LongTurn games
-    for i in range(num_longturn_servers):  
-      new_server = Civlauncher("multiplayer", "longturn_600" + str(i + 3), port, metahost + ":" + str(metaport) + metapath, mc.savesdir)
+    for i in mc.longturn_ports_list:  
+      new_server = Civlauncher("multiplayer", "longturn_" + str(i), i, metahost + ":" + str(metaport) + metapath, mc.savesdir)
       mc.server_list.append(new_server);
       new_server.start();
       port += 1;
   else:    
-    port += num_longturn_servers;
+    port += len(mc.longturn_ports_list);
 
   print("Publite2 started!");
   time.sleep(20);

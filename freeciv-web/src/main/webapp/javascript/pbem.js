@@ -504,10 +504,9 @@ function handle_pbem_load()
   var savegame = $.getUrlVar('savegame');
   $("#dialog").dialog('close');
   $.blockUI();
-  loadTimerIdA = setTimeout("load_game_real('" + savegame + "');", 1500);
-  loadTimerIdB = setTimeout("activate_pbem_player();", 2500);
 
- 
+  wait_for_text("You are logged in as", "load_game_real('" + savegame + "'); activate_pbem_player();");
+
 }
 
 /**************************************************************************
@@ -525,8 +524,8 @@ function pbem_init_game()
 **************************************************************************/
 function activate_pbem_player()
 {
-  send_message_delayed("/take " + username, 100);
-  send_message_delayed("/start", 200);
+  send_message_delayed("/take " + username, 400);
+  send_message_delayed("/start", 500);
 }
 
 

@@ -280,15 +280,13 @@ function load_game_check()
 
   if ($.getUrlVar('load') == "tutorial") {
     $.blockUI();
-    loadTimerId = setTimeout("load_game_real('tutorial');",
-                                  1500);
-    setTimeout(load_game_toggle,3500);
+    wait_for_text("You are logged in as","load_game_real'tutorial');");
+    wait_for_text("Load complete", "load_game_toggle();");
   } else if ($.getUrlVar('action') == "earthload") {
     $.blockUI();
     var savegame_earth_file = $.getUrlVar('savegame').replace("#", "");
-    loadTimerId = setTimeout("load_game_real('" + savegame_earth_file + "');",
-                                  1500);
-    setTimeout(load_game_toggle,3500);
+    wait_for_text("You are logged in as","load_game_real('" + savegame_earth_file + "');");
+    wait_for_text("Load complete", "load_game_toggle();");
 
   } else if (load_game_id != -1) {
     $.blockUI();
@@ -298,47 +296,8 @@ function load_game_check()
         show_scenario_dialog();
       } else {
         scenario_game_id = scenarios[load_game_id]['savegame'];
-        loadTimerId = setTimeout("load_game_real('" + scenario_game_id + "');",
-                                  1500);
-        setTimeout(load_game_toggle,2500);
-      }
-    } else if (load_game_id != -1) {
-      console.log("Attempting to load savegame-file-" + load_game_id);
-      var savegames = simpleStorage.get("savegames");
-      if (savegames == null || savegames.length == 0) {
-        console.error("Loading game failed (savenames is empty).");
-        swal("Loading game failed (savenames is empty).");
-        return;
-      } else {
-        var savegame = savegames[load_game_id];
-        console.log("Saved title: " +  savegame["title"]);
-        console.log("Saved user: " + savegame["username"]);
-        console.log("Game type: " + savegame["game_type"]);
-        console.log("Logged in username: " + username);
-        if (savegame["file"] == null) {
-          swal("Loading game failed (savegame file is null)");
-  	return;
-        } else {
-          console.log("Savegame file length: " + savegame["file"].length);
-        }
-        if (savegame["title"] == null) {
-          swal("Loading game failed (savegame title is null)");
-          return;
-        }
-        if (username == null || savegame["username"] == null) {
-          swal("Loading game failed (username is null)");
-	  return;
-        }
-        $.ajax({
-          url: "/loadservlet?username=" + savegame["username"] + "&savename=" + savegame["title"],
-          type: "POST",
-          data: savegame["file"],
-          processData: false
-        }).done(function() {
-          console.log("Upload of savegame complete");
-          loadTimerId = setTimeout("load_game_real('" + username + "');", 1500);
-          set_metamessage_on_loaded_game(savegame["game_type"]);
-        }).fail(function() { swal("Loading game failed (ajax request failed)"); });
+        wait_for_text("You are logged in as","load_game_real('" + scenario_game_id + "');");
+        wait_for_text("Load complete", "load_game_toggle();");
       }
     }
   } else if (scenario == "true" && $.getUrlVar('load') != "tutorial") {
@@ -384,22 +343,19 @@ function set_metamessage_on_loaded_game(game_type)
 **************************************************************************/
 function load_game_toggle()
 {
-  if (players[0] == null) {
-    setTimeout(load_game_toggle,1000);
-  } else {
-    send_message("/set nationset all");
+
+  send_message("/set nationset all");
     
-    var firstplayer = players[0]['name'].split(" ")[0];
+  var firstplayer = players[0]['name'].split(" ")[0];
 
-    if ($.getUrlVar('scenario') == "true" || scenario_activated) {
-      send_message("/set aifill 6");
-    }
-
-    send_message("/aitoggle " + firstplayer);
-    send_message("/take " + firstplayer);
-    $.unblockUI();
-
+  if ($.getUrlVar('scenario') == "true" || scenario_activated) {
+    send_message("/set aifill 6");
   }
+
+  send_message("/aitoggle " + firstplayer);
+  send_message("/take " + firstplayer);
+  $.unblockUI();
+
 
 }
 

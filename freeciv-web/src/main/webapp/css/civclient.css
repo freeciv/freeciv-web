@@ -962,3 +962,24 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
     overflow-y: auto;
   }
 }
+
+#intel_tabs-technology ul {
+  list-style-type: none;
+  position: relative;
+}
+
+li.tech-them {
+  font-weight: bold;
+}
+
+li.tech-them::before {
+  content: '\2605';
+  position: absolute;
+  left: 1em;
+}
+
+li.tech-both::before {
+  content: '\2713';
+  position: absolute;
+  left: 1em;
+}

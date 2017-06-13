@@ -94,10 +94,12 @@ function show_intelligence_report_embassy(pplayer)
       intel_data['researching'] = '(Nothing)';
     }
     var myresearch = research_get(client.conn.playing);
-    var tidx = 0; // techs[0] is empty, let's search after that
-    while ((tidx = research['inventions'].indexOf(TECH_KNOWN, tidx + 1)) > 0) {
-      if (!myresearch || myresearch['inventions'][tidx] != TECH_KNOWN) {
-        intel_data['tech'].push(techs[tidx]['name']);
+    for (var tech_id in techs) {
+      if (research['inventions'][tech_id] == TECH_KNOWN) {
+        intel_data['tech'].push({
+          name: techs[tech_id]['name'],
+          who: myresearch['inventions'][tech_id] == TECH_KNOWN ? 'both' : 'them'
+        });
       }
     }
   }

@@ -1,25 +1,27 @@
-#LongTurn game #4
+#LongTurn game #5
+#This LongTurn game has not started yet.
 
 cmdlevel ctrl first
 rulesetdir multiplayer 
 set topology WRAPX
 set nationset all
 set compresstype xs
-set maxplayers 250
+set maxplayers 500
 set startunits=ccccwwwwwwx
-set aifill 250
+set aifill 500
 set allowtake=""
 set autotoggle false
-set timeout 82800
-set netwait 15
-set nettimeout 40
-set pingtime 30
-set pingtimeout 120
-set maxconnectionsperhost 256
+#set timeout 82800
+set timeout 250
+set netwait 150
+set nettimeout 120
+set pingtime 60
+set pingtimeout 240
+set maxconnectionsperhost 500
 set threaded_save enabled
 set scorelog enabled
 set mapsize FULLSIZE
-set size 30
+set size 40
 set topology=
 set landm 79
 set dispersion=1
@@ -36,7 +38,7 @@ set ec_chat=enabled
 set ec_info=enabled 
 set ec_max_size=5000
 set ec_turns=9
-metamessage LongTurn Game #4 | 1 turn per day | 250 players | Join now!
+metamessage LongTurn Game #5 | 1 turn per day | 500 players | 40000 tiles | Join now!
 
 
 cmdlevel basic

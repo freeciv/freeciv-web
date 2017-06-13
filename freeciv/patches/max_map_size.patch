@@ -7,7 +7,7 @@ index e4d7bcd..0770596 100644
  #define MAP_DEFAULT_SIZE         3
  #define MAP_MIN_SIZE             0
 -#define MAP_MAX_SIZE             18
-+#define MAP_MAX_SIZE             30
++#define MAP_MAX_SIZE             40
  #else  /* FREECIV_WEB */
  #define MAP_DEFAULT_SIZE         4
  #define MAP_MIN_SIZE             0

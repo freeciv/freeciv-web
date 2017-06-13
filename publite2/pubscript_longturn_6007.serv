@@ -11,8 +11,7 @@ set startunits=ccccwwwwwwx
 set aifill 500
 set allowtake=""
 set autotoggle false
-#set timeout 82800
-set timeout 250
+set timeout 82800
 set netwait 150
 set nettimeout 120
 set pingtime 60

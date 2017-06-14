@@ -28,8 +28,10 @@
 # webperimental-reduce-Manhattan is hrm Feature #662938
 # load_command_confirmation adds a log message which confirms that loading is complete, so that Freeciv-web can issue additional commands.
 # 500_players allows 500 players.
+# Webperimental-allow-giving-units-to-allies is hrm Feature #676403
+# inform_gift is hrm Feature #676658
 
-PATCHLIST="freeciv_web_packets_def_changes city_impr_fix2 city-naming-change city_fixes2 metachange text_fixes unithand-change2 current_research_cost freeciv-svn-webclient-changes init_lists_disable goto_fcweb misc_devversion_sync tutorial_ruleset savegame maphand_ch ai_traits_crash server_password barbarian-names activity_null_check message_escape freeciv_segfauls_fix scorelog_filenames disable_global_warming win_chance navajo-remove-long-city-names webperimental_install webgl_vision_cheat_temporary user_changeable_gameseed multiplayer_movement_rates longturn max_map_size unit-upgrade-cost README.webperimental webperimental-reduce-Manhattan load_command_confirmation 500_players"
+PATCHLIST="freeciv_web_packets_def_changes city_impr_fix2 city-naming-change city_fixes2 metachange text_fixes unithand-change2 current_research_cost freeciv-svn-webclient-changes init_lists_disable goto_fcweb misc_devversion_sync tutorial_ruleset savegame maphand_ch ai_traits_crash server_password barbarian-names activity_null_check message_escape freeciv_segfauls_fix scorelog_filenames disable_global_warming win_chance navajo-remove-long-city-names webperimental_install webgl_vision_cheat_temporary user_changeable_gameseed multiplayer_movement_rates longturn max_map_size unit-upgrade-cost README.webperimental webperimental-reduce-Manhattan load_command_confirmation 500_players Webperimental-allow-giving-units-to-allies inform_gift"
 
 apply_patch() {
   echo "*** Applying $1.patch ***"

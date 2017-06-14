@@ -1,0 +1,32 @@
+commit 99d09ce27fd9593705b14bfd247aaa100373281f
+Author: Sveinung Kvilhaugsvik <sveinung84@users.sourceforge.net>
+Date:   Wed May 31 02:18:03 2017 +0200
+
+    Tiles, not unit stacks, are owned by tile owner.
+    
+    See hrm Bug #672734
+
+diff --git a/server/unithand.c b/server/unithand.c
+index 122c061..7ce2e13 100644
+--- a/server/unithand.c
++++ b/server/unithand.c
+@@ -2370,8 +2370,7 @@ bool unit_perform_action(struct player *pplayer,
+     return success;                                                       \
+   } else {                                                                \
+     illegal_action(pplayer, actor_unit, action_type,                      \
+-                   target_tile ? tile_owner(target_tile) : NULL,          \
+-                   target_tile, NULL, NULL,                               \
++                   NULL, target_tile, NULL, NULL,                         \
+                    requester);                                            \
+   }
+ 
+@@ -2395,7 +2394,8 @@ bool unit_perform_action(struct player *pplayer,
+     return success;                                                       \
+   } else {                                                                \
+     illegal_action(pplayer, actor_unit, action_type,                      \
+-                   NULL, target_tile, NULL, NULL,                         \
++                   target_tile ? tile_owner(target_tile) : NULL,          \
++                   target_tile, NULL, NULL,                               \
+                    requester);                                            \
+   }
+ 

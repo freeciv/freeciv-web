@@ -20,7 +20,7 @@ set maxconnectionsperhost 500
 set threaded_save enabled
 set scorelog enabled
 set mapsize FULLSIZE
-set size 40
+set size 38
 set topology=
 set landm 79
 set dispersion=1

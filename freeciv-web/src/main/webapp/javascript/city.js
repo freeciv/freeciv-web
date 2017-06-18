@@ -1374,7 +1374,7 @@ function update_city_screen()
         turns_to_complete_str = get_city_production_time(pcity) + " turns";
       }
 
-      city_list_html += "<tr id='cities_row' onclick='javascript:show_city_dialog_by_id(" + pcity['id'] + ");'><td>" 
+      city_list_html += "<tr class='cities_row' id='cities_list_" + pcity['id'] + "' onclick='javascript:show_city_dialog_by_id(" + pcity['id'] + ");'><td>"
               + pcity['name'] + "</td><td>" + numberWithCommas(city_population(pcity)*1000) +
               "</td><td>" + pcity['size'] + "</td><td>" + get_city_state(pcity) + "</td><td>" + pcity['food_stock'] + "/" + pcity['granary_size'] +
               "</td><td>" + city_turns_to_growth_text(pcity) + "</td>" + 

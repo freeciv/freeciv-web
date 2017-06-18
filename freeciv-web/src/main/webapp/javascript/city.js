@@ -49,6 +49,8 @@ var INCITE_IMPOSSIBLE_COST = (1000 * 1000 * 1000);
 var city_tab_index = 0;
 var city_prod_clicks = 0;
 
+var pending_update_city_screen = null;
+
 /**************************************************************************
  ...
 **************************************************************************/
@@ -82,9 +84,14 @@ function city_owner(pcity)
 function remove_city(pcity_id)
 {
   if (pcity_id == null) return;
+  var update = client.conn.playing.playerno &&
+               city_owner(pcity).playerno == client.conn.playing.playerno;
   var ptile = city_tile(cities[pcity_id]);
   delete cities[pcity_id];
   if (renderer == RENDERER_WEBGL) update_city_position(ptile);
+  if (update) {
+    request_update_city_screen();
+  }
 
 }
 
@@ -1351,10 +1358,33 @@ function city_add_to_worklist()
 }
 
 /**************************************************************************
+ Queues an update to the Cities tab, to coalesce bursts of changes.
+**************************************************************************/
+function request_update_city_screen()
+{
+  if (pending_update_city_screen === null) {
+    pending_update_city_screen = setTimeout(update_city_screen, 500);
+  }
+}
+
+/**************************************************************************
+ Updates the Cities tab if there are pending requests.
+**************************************************************************/
+function ensure_city_screen_is_updated()
+{
+  if (pending_update_city_screen !== null) {
+    clearTimeout(pending_update_city_screen);
+    update_city_screen();
+  }
+}
+
+/**************************************************************************
  Updates the Cities tab when clicked, populating the table.
 **************************************************************************/
 function update_city_screen()
 {
+  pending_update_city_screen = null;
+
   if (observing) return;
 
   var city_list_html = "<table class='tablesorter' id='city_table' border=0 cellspacing=0>"

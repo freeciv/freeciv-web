@@ -863,26 +863,18 @@ function city_name_dialog(suggested_name, unit_id) {
 function next_city()
 {
   if (!client.conn.playing) return;
-  var city_id;
 
-  var is_next = false;
-  for (city_id in cities) {
-    var pcity = cities[city_id];
-    if (is_next && city_owner(pcity).playerno == client.conn.playing.playerno) {
-      show_city_dialog(pcity);
-      return;
-    }
-    if (active_city['id'] == city_id) {
-      is_next = true;
-    }
+  ensure_city_screen_is_updated();
+
+  var next_row = $('#cities_list_' + active_city['id']).next();
+  if (next_row.length === 0) {
+    // Either the city is not in the list anymore or it was the last item.
+    // Anyway, go to the beginning
+    next_row = $('#city_table tbody tr').first();
   }
-
-  for (city_id in cities) {
-    var scity = cities[city_id];
-    if (is_next && city_owner(scity).playerno == client.conn.playing.playerno) {
-      show_city_dialog(scity);
-      return;
-    }
+  if (next_row.length > 0) {
+    // If there's a city
+    show_city_dialog(cities[next_row.attr('id').substr(12)]);
   }
 }
 
@@ -893,24 +885,18 @@ function previous_city()
 {
   if (!client.conn.playing) return;
 
-  var prev_city = null;
-  for (var city_id in cities) {
-    var next_city = cities[city_id];
+  ensure_city_screen_is_updated();
 
-    if (prev_city != null && active_city['id'] == city_id
-        && city_owner(next_city).playerno == client.conn.playing.playerno) {
-      show_city_dialog(prev_city);
-      return;
-    }
-    if (city_owner(next_city).playerno == client.conn.playing.playerno) {
-      prev_city = next_city;
-    }
+  var prev_row = $('#cities_list_' + active_city['id']).prev();
+  if (prev_row.length === 0) {
+    // Either the city is not in the list anymore or it was the last item.
+    // Anyway, go to the end
+    prev_row = $('#city_table tbody tr').last();
   }
-  if (prev_city != null) {
-    show_city_dialog(prev_city);
+  if (prev_row.length > 0) {
+    // If there's a city
+    show_city_dialog(cities[prev_row.attr('id').substr(12)]);
   }
-
-
 }
 
 /**************************************************************************

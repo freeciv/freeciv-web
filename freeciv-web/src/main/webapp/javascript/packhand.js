@@ -318,6 +318,9 @@ function handle_web_city_info_addition(packet)
   if (renderer == RENDERER_WEBGL) {
     update_city_position(index_to_tile(packet['tile']));
   }
+
+  /* Update the cities info tab */
+  request_update_city_screen();
 }
 
 /* 99% complete
@@ -339,6 +342,9 @@ function handle_city_short_info(packet)
   if (renderer == RENDERER_WEBGL) {
     update_city_position(index_to_tile(packet['tile']));
   }
+
+  /* Update the cities info tab */
+  request_update_city_screen();
 }
 
 /**************************************************************************

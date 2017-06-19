@@ -1387,6 +1387,15 @@ function update_city_screen()
 
   if (observing) return;
 
+  var sortList = [];
+  var headers = $('#city_table thead td');
+  headers.filter('.tablesorter-headerAsc').each(function (i, cell) {
+    sortList.push([cell.cellIndex, 0]);
+  });
+  headers.filter('.tablesorter-headerDesc').each(function (i, cell) {
+    sortList.push([cell.cellIndex, 1]);
+  });
+
   var city_list_html = "<table class='tablesorter' id='city_table' border=0 cellspacing=0>"
         + "<thead><td>Name</td><td>Population</td><td>Size</td><td>State</td>"
         + "<td>Granary</td><td>Grows In</td><td>Producing</td>"  
@@ -1427,7 +1436,7 @@ function update_city_screen()
 
   $('#cities_scroll').css("height", $(window).height() - 200);
 
-  $("#city_table").tablesorter({theme:"dark"});
+  $("#city_table").tablesorter({theme:"dark", sortList: sortList});
 }
 
 /**************************************************************************

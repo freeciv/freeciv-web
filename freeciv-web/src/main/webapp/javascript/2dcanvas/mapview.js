@@ -280,7 +280,7 @@ function mapview_put_city_bar(pcanvas, city, canvas_x, canvas_y) {
 
   var txt_measure = pcanvas.measureText(text);
   var size_measure = pcanvas.measureText(size);
-  pcanvas.globalAlpha = 0.75;
+  pcanvas.globalAlpha = 0.7;
   pcanvas.fillStyle = "rgba(0, 0, 0, 0.5)";
   pcanvas.fillRect (canvas_x - Math.floor(txt_measure.width / 2) - 14, canvas_y - 17,
                     txt_measure.width + 20, 20);
@@ -319,6 +319,9 @@ function mapview_put_city_bar(pcanvas, city, canvas_x, canvas_y) {
               canvas_x + Math.floor(txt_measure.width / 2) + size_measure.width + 13,
               canvas_y - 19, 28, 24);
   }
+
+  pcanvas.fillStyle = "rgba(0, 0, 0, 1)";
+  pcanvas.fillText(size, canvas_x + Math.floor(txt_measure.width / 2) + 10, canvas_y + 1);
 
   pcanvas.fillStyle = "rgba(255, 255, 255, 1)";
   pcanvas.fillText(text, canvas_x - Math.floor(txt_measure.width / 2) - 2, canvas_y - 1);

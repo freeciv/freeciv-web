@@ -1,0 +1,28 @@
+From a7f8a6dfe6f3c099f2152f8a58d8d777f9a65c98 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Thu, 15 Jun 2017 15:04:40 +0300
+Subject: [PATCH 32/41] Make team number PLAYER type
+
+See hrm Feature #677112
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ common/networking/packets.def | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/common/networking/packets.def b/common/networking/packets.def
+index 8549470a6d..3c72df125e 100644
+--- a/common/networking/packets.def
++++ b/common/networking/packets.def
+@@ -305,7 +305,7 @@ type PLAYER             = UINT8
+ type RESEARCH           = UINT8
+ type RESOURCE           = uint8(Resource_type_id)
+ type SPECIALIST         = uint8(Specialist_type_id)
+-type TEAM               = UINT8
++type TEAM               = PLAYER
+ type TECH               = UINT8
+ type TERRAIN            = uint8(Terrain_type_id)
+ type TILE               = SINT32
+-- 
+2.11.0
+

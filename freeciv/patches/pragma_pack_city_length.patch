@@ -1,0 +1,33 @@
+diff --git a/common/city.h b/common/city.h
+index 91eb2e1..17b2890 100644
+--- a/common/city.h
++++ b/common/city.h
+@@ -302,6 +302,7 @@ struct tile_cache; /* defined and only used within city.c */
+ 
+ struct adv_city; /* defined in ./server/advisors/infracache.h */
+ 
++#pragma pack(push, 1)
+ struct city {
+   char name[MAX_LEN_CITYNAME];
+   struct tile *tile; /* May be NULL, should check! */
+@@ -449,6 +450,7 @@ struct city {
+     } client;
+   };
+ };
++#pragma pack(pop)
+ 
+ struct citystyle {
+   struct name_translation name;
+diff --git a/common/fc_types.h b/common/fc_types.h
+index fd245e8..21e7308 100644
+--- a/common/fc_types.h
++++ b/common/fc_types.h
+@@ -65,7 +65,7 @@ extern "C" {
+ 
+ /* Changing these will probably break network compatability. */
+ #define MAX_LEN_NAME     48
+-#define MAX_LEN_CITYNAME 80
++#define MAX_LEN_CITYNAME 50
+ #define MAX_LEN_DEMOGRAPHY 16
+ #define MAX_LEN_ALLOW_TAKE 16
+ #define MAX_LEN_GAME_IDENTIFIER 33

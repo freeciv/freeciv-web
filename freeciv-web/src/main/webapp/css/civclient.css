@@ -916,6 +916,7 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 
 #city_table {
   width: 100%;
+  cursor: pointer;
 }
 
 .cities_row {

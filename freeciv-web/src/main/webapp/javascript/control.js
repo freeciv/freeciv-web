@@ -2401,7 +2401,13 @@ function popit_req(ptile)
 {
   if (ptile == null) return;
 
-  if (tile_get_known(ptile) != TILE_KNOWN_SEEN) return;
+  if (tile_get_known(ptile) == TILE_KNOWN_UNSEEN) {
+    show_dialog_message("Tile info", "Location: x:" + ptile['x'] + " y:" + ptile['y']);
+    return;
+  } else if (tile_get_known(ptile) == TILE_UNKNOWN) {
+    show_dialog_message("Tile info", "Location: x:" + ptile['x'] + " y:" + ptile['y']);
+    return;
+  }
 
   var punit_id = 0;
   var punit = find_visible_unit(ptile);

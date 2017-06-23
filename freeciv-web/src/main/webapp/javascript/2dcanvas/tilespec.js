@@ -772,8 +772,8 @@ function get_border_line_sprites(ptile)
 
     if (checktile != null && checktile['owner'] != null
         && ptile['owner'] != null
-        && ptile['owner'] != 255
-	&& ptile['owner'] != checktile['owner']) {
+        && ptile['owner'] != checktile['owner']
+        && players[ptile['owner']] != null) {
       var pnation = nations[players[ptile['owner']]['nation']];
       result.push({"key" : "border", "dir" : dir,
                    "color": pnation['color']});

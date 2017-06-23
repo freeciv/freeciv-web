@@ -7,11 +7,12 @@ set topology WRAPX
 set nationset all
 set compresstype xs
 set maxplayers 500
-set startunits=ccccwwwwwwx
+set startunits=ccwwwx
 set aifill 500
 set allowtake=""
 set autotoggle false
 set timeout 82800
+set unitwaittime=36000
 set netwait 150
 set nettimeout 120
 set pingtime 60
@@ -24,6 +25,8 @@ set size 38
 set topology=
 set landm 79
 set dispersion=1
+
+set trading_tech=disabled
 
 set diplomacy=HUMAN
 set contactturns=0

@@ -796,8 +796,8 @@ function city_name_dialog(suggested_name, unit_id) {
 					text: "Ok",
 				        click: function() {
 						var name = $("#city_name_req").val();
-						if (name.length == 0 || name.length >= MAX_LEN_NAME - 4
-						    || encodeURIComponent(name).length  >= MAX_LEN_NAME - 4) {
+						if (name.length == 0 || name.length >= MAX_LEN_CITYNAME - 6
+						    || encodeURIComponent(name).length  >= MAX_LEN_CITYNAME - 6) {
 						  swal("City name is invalid. Please try a different shorter name.");
 						  return;
 						}

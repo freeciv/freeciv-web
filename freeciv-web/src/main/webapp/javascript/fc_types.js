@@ -26,7 +26,7 @@ var TRI_MAYBE = 2;
 
 var MAX_NUM_ITEMS = 200;
 var MAX_LEN_NAME = 48;
-var MAX_LEN_CITYNAME = 80;
+var MAX_LEN_CITYNAME = 50;
 
 var FC_INFINITY = (1000 * 1000 * 1000);
 

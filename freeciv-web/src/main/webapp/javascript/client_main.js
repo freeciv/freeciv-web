@@ -365,6 +365,11 @@ function set_default_mapview_active()
     mapview_canvas_ctx.font = canvas_text_font;
   }
 
+  var active_tab = $('#tabs').tabs('option', 'active');
+  if (active_tab == 4) { // cities dialog is active
+    return;
+  }
+
   chatbox_scroll_down();
 
   if (!is_small_screen() && overview_active) {

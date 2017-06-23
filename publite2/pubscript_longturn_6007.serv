@@ -1,14 +1,13 @@
 #LongTurn game #5
-#This LongTurn game has not started yet.
 
 cmdlevel ctrl first
 rulesetdir multiplayer 
 set topology WRAPX
 set nationset all
 set compresstype xs
-set maxplayers 500
+set maxplayers 300
 set startunits=ccwwwx
-set aifill 500
+set aifill 300
 set allowtake=""
 set autotoggle false
 set timeout 82800
@@ -21,7 +20,7 @@ set maxconnectionsperhost 500
 set threaded_save enabled
 set scorelog enabled
 set mapsize FULLSIZE
-set size 38
+set size 30
 set topology=
 set landm 79
 set dispersion=1

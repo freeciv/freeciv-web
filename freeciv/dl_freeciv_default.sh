@@ -7,6 +7,5 @@
 #svn --quiet export svn://svn.gna.org/svn/freeciv/$2 -r $1 freeciv
 
 #Temporary git repo for Freeciv. 
-#Note to self: say thanks to JTN for setting up new Git repo for Freeciv.
-git clone git://repo.or.cz/freeciv.git  --depth=10
+git clone https://github.com/freeciv/freeciv.git  --depth=10
 

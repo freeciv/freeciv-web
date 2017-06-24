@@ -1,0 +1,33 @@
+From 53e6e644d6acb322756068dbe8f33d6f291ed1d1 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Sat, 24 Jun 2017 12:48:34 +0300
+Subject: [PATCH 61/61] Increase plain file buffer size to 8MB
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Reported by Andreas Røsdal
+
+See hrm Bug #679197
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ utility/ioz.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/utility/ioz.c b/utility/ioz.c
+index 37c3a5b217..1cb2622772 100644
+--- a/utility/ioz.c
++++ b/utility/ioz.c
+@@ -72,7 +72,7 @@ struct bzip2_struct {
+ 
+ #ifdef FREECIV_HAVE_LIBLZMA
+ 
+-#define PLAIN_FILE_BUF_SIZE (1024*1024)    /* 1024kb */
++#define PLAIN_FILE_BUF_SIZE (8096*1024)    /* 8096kb */
+ #define XZ_DECODER_TEST_SIZE (4*1024)      /* 4kb */
+ 
+ /* In my tests 7Mb proved to be not enough and with 10Mb decompression
+-- 
+2.11.0
+

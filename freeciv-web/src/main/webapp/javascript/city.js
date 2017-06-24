@@ -83,7 +83,10 @@ function city_owner(pcity)
 **************************************************************************/
 function remove_city(pcity_id)
 {
-  if (pcity_id == null) return;
+  if (pcity_id == null || client.conn.playing == null) return;
+  var pcity = cities[pcity_id];
+  if (pcity == null) return;
+
   var update = client.conn.playing.playerno &&
                city_owner(pcity).playerno == client.conn.playing.playerno;
   var ptile = city_tile(cities[pcity_id]);

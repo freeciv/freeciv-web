@@ -773,6 +773,7 @@ function get_border_line_sprites(ptile)
     if (checktile != null && checktile['owner'] != null
         && ptile['owner'] != null
         && ptile['owner'] != checktile['owner']
+        && ptile['owner'] != 255 /* 255 is a special constant indicating that the tile is not owned by anyone. */
         && players[ptile['owner']] != null) {
       var pnation = nations[players[ptile['owner']]['nation']];
       result.push({"key" : "border", "dir" : dir,

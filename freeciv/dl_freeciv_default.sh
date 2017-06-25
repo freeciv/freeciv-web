@@ -4,6 +4,6 @@
 # This will happen unless the script dl_freeciv.sh exists.
 # If you wish to modify this file copy it to dl_freeciv.sh and edit it.
 
-git clone https://github.com/freeciv/freeciv.git --depth=10
+git clone https://github.com/freeciv/freeciv.git --depth=500
 cd freeciv
 git reset --hard $1

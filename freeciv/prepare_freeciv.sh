@@ -17,7 +17,7 @@ else
   FC_DL=dl_freeciv_default.sh
 fi
 
-if ! sh $FC_DL $FCREV $FCBRANCH ; then
+if ! sh $FC_DL $FCREV ; then
   echo "Svn export failed" >&2
   exit 1
 fi

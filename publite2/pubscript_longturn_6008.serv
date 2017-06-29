@@ -1,0 +1,44 @@
+#LongTurn game #6
+# Not started yet
+
+cmdlevel ctrl first
+rulesetdir multiplayer 
+set topology WRAPX
+set nationset all
+set compresstype xs
+set maxplayers 300
+set startunits=ccwwwx
+set aifill 300
+set allowtake=""
+set autotoggle false
+set timeout 82800
+set unitwaittime=36000
+set netwait 150
+set nettimeout 120
+set pingtime 60
+set pingtimeout 240
+set maxconnectionsperhost 500
+set threaded_save enabled
+set scorelog enabled
+set mapsize FULLSIZE
+set size 30
+set topology=
+set landm 79
+set dispersion=1
+
+set diplomacy=HUMAN
+set contactturns=0
+
+set minp 0
+set generator RANDOM
+set saveturns=1
+set autosaves=TURN
+metaconnection persistent
+set ec_chat=enabled
+set ec_info=enabled 
+set ec_max_size=5000
+set ec_turns=9
+metamessage LongTurn Game #6 | 1 turn per day | 300 players | 30000 tiles | Join now!
+
+
+cmdlevel basic

@@ -7,7 +7,7 @@ set topology WRAPX
 set nationset all
 set compresstype xs
 set maxplayers 300
-set startunits=ccwwwx
+set startunits=cccwwwx
 set aifill 300
 set allowtake=""
 set autotoggle false

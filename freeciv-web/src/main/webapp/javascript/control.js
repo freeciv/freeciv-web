@@ -395,7 +395,6 @@ function check_text_input(event,chatboxtextarea) {
     }
 
     send_message(message);
-    $("#game_text_input").blur();
     return false;
   }
 }

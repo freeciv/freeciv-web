@@ -191,7 +191,6 @@ function control_init()
   });
 
   $("#chat_tab").click(function(event) {
-    chatbox_resized();
     set_default_mapview_inactive();
     $("#tabs-chat").show();
 

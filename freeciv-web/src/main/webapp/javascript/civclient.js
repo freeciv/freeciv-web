@@ -221,16 +221,6 @@ function init_common_intro_dialog() {
   }
 }
 
-/**************************************************************************
- ...
-**************************************************************************/
-function chatbox_resized()
-{
-  var newheight = $("#game_chatbox_panel").parent().height() - 50;
-  $("#game_message_area").css("height", newheight);
-
-}
-
 
 /**************************************************************************
  ...
@@ -244,10 +234,9 @@ function init_chatbox()
 			bgiframe: true,
 			modal: false,
 			width: "27%",
-			height: "auto",
+			height: (is_small_screen() ? 100 : 200),
 			resizable: true,
 			dialogClass: 'chatbox_dialog no-close',
-			resize: chatbox_resized,
 			closeOnEscape: false,
 			position: {my: 'left bottom', at: 'left bottom', of: window, within: $("#game_page")},
 			close: function(event, ui) { chatbox_active = false;}
@@ -262,7 +251,6 @@ function init_chatbox()
     $(".chatbox_dialog").css("top", "40px");
     $("#game_chatbox_panel").parent().css("max-height", "15%");
     $("#game_chatbox_panel").parent().css("width", "95%");
-    chatbox_resized();
 
     $("#game_message_area").click(function(e) {
       if (chatbox_panel_toggle) {
@@ -272,7 +260,6 @@ function init_chatbox()
         $("#game_chatbox_panel").parent().css("max-height", "65%");
         $("#game_chatbox_panel").parent().css("height", "65%");
       }
-      chatbox_resized();
       chatbox_panel_toggle = !chatbox_panel_toggle;
     });
   }

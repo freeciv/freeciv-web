@@ -52,6 +52,8 @@ var show_citybar = true;
 var context_menu_active = true;
 var has_movesleft_warning_been_shown = false;
 
+var send_to_allies = false;
+
 /****************************************************************************
 ...
 ****************************************************************************/
@@ -87,6 +89,10 @@ function control_init()
   $("#game_text_input").blur(function(event) {
     keyboard_input=true;
     resize_enabled = true;
+  });
+
+  $("#chat_box_allies").click(function(event) {
+    toggle_send_to_allies();
   });
 
   $("#pregame_text_input").keydown(function(event) {
@@ -358,6 +364,17 @@ function update_mouse_cursor()
 }
 
 /****************************************************************************
+...
+****************************************************************************/
+function toggle_send_to_allies() {
+  send_to_allies = !send_to_allies;
+  $("#chat_box_allies").attr("data-toggle", send_to_allies ? "true" : "false")
+                       .attr("title", send_to_allies ?
+                         "Sending to allies (push to toggle)" :
+                         "Sending to all (push to toggle)");
+}
+
+/****************************************************************************
  Common replacements and encoding for messages.
  They are going to be injected as html. " and ' are changed to appease
  the server message_escape.patch until it is removed.
@@ -373,12 +390,40 @@ function encode_message_text(message) {
 }
 
 /****************************************************************************
+ Tell whether this is a simple message to the choir.
+****************************************************************************/
+function is_unprefixed_message(message) {
+  if (message === null) return false;
+  if (message.length === 0) return true;
+
+  /* Commands, messages to allies and explicit send to everybody */
+  var first = message.charAt(0);
+  if (first === '/' || first === '.' || first === ':') return false;
+
+  /* Private messages */
+  var quoted_pos = -1;
+  if (first === '"' || first === "'") {
+    quoted_pos = message.indexOf(first, 1);
+  }
+  var private_mark = message.indexOf(':', quoted_pos);
+  if (private_mark < 0) return true;
+  var space_pos = message.indexOf(' ', quoted_pos);
+  return (space_pos !== -1 && (space_pos < private_mark));
+}
+
+/****************************************************************************
 ...
 ****************************************************************************/
 function check_text_input(event,chatboxtextarea) {
 
   if (event.keyCode == 13 && event.shiftKey == 0)  {
-    var message = encode_message_text($(chatboxtextarea).val());
+    var message = $(chatboxtextarea).val();
+
+    if (send_to_allies && is_unprefixed_message(message)) {
+      message = encode_message_text(". " + message);
+    } else {
+      message = encode_message_text(message);
+    }
 
     $(chatboxtextarea).val('');
     if (!is_touch_device()) $(chatboxtextarea).focus();

@@ -987,3 +987,14 @@ li.tech-both::before {
   left: 1em;
 }
 
+.bw-toggle[data-toggle=true] {
+  color: lightgrey;
+}
+
+.bw-toggle[data-toggle=false] {
+  color: grey;
+}
+
+.bw-toggle:hover {
+  color: white;
+}

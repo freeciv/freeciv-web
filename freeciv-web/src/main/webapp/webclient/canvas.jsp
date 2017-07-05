@@ -16,6 +16,7 @@
 	<div id="game_chat_box">
 		<i class="fa fa-commenting-o fa-fw" aria-hidden="true" style="color: #7b7b7b; "></i>
 		<input id="game_text_input" type="text" name="text_input" />
+		<i class="fa fa-shield fa-fw bw-toggle" id="chat_box_allies" role="button" title="Sending to all (push to toggle)" data-toggle="false"></i>
 	</div>
      </div>
 

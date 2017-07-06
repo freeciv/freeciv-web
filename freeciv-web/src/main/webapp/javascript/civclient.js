@@ -275,6 +275,11 @@ function add_chatbox_text(text)
 
     if (civclient_state <= C_S_PREPARING) {
       text = text.replace(/#FFFFFF/g, '#000000');
+    } else {
+      text = text.replace(/#0000FF/g, '#5555FF')
+                 .replace(/#006400/g, '#00AA00')
+                 .replace(/#551166/g, '#AA88FF')
+                 .replace(/#A020F0/g, '#F020FF');
     }
 
     if (is_longturn() && text != null && (text.indexOf("waiting on") != -1 || text.indexOf("Lost connection") != -1 || text.indexOf("Not enough") != -1 || text.indexOf("has been removed") != -1 || text.indexOf("has connected") != -1)) return;

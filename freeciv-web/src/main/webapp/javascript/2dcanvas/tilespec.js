@@ -360,14 +360,14 @@ function fill_sprite_array(layer, ptile, pedge, pcorner, punit, pcity, citymode)
 
       if (active_city != null && ptile != null && ptile['worked'] != null
           && active_city['id'] == ptile['worked'] && active_city['food_output'] != null) {
-	var dx = city_tile(active_city)['x'] - ptile['x'];
-	var dy = city_tile(active_city)['y'] - ptile['y'];
-
+        var ctile = city_tile(active_city);
+	var dx = ctile['x'] - ptile['x'];
+	var dy = ctile['y'] - ptile['y'];
         //this is a quick-fix for showing city workers correctly near map edges.
         if (dx > 4) dx -= map['xsize']; 
         if (dx < -4) dx += map['xsize'];
 
-        var idx = get_city_dxy_to_index(dx, dy);
+        var idx = get_city_dxy_to_index(dx, dy, ctile);
 	var food_output = active_city['food_output'].substring(idx, idx + 1);
 	var shield_output = active_city['shield_output'].substring(idx, idx + 1);
 	var trade_output = active_city['trade_output'].substring(idx, idx + 1);

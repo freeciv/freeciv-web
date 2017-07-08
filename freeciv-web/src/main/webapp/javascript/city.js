@@ -944,7 +944,7 @@ function city_turns_to_growth_text(pcity)
   Converts from coordinate offset from city center (dx, dy),
   to index in the city_info['food_output'] packet.
 **************************************************************************/
-function get_city_dxy_to_index(dx, dy)
+function get_city_dxy_to_index(dx, dy, ctile)
 {
   city_tile_map = {};
   city_tile_map[" 00"] = 0;
@@ -969,7 +969,30 @@ function get_city_dxy_to_index(dx, dy)
   city_tile_map[" -21"] = 19;
   city_tile_map[" -2-1"] = 20;
 
-  return city_tile_map[" "+dx+""+dy];
+  var idx = city_tile_map[" "+dx+""+dy];
+
+  var no_tiles = [];
+  switch (ctile.y) {
+  case 1:
+    no_tiles = [10, 15, 17];
+    break;
+  case (map.ysize - 2):
+    no_tiles = [11, 16, 18];
+    break;
+  case (map.ysize - 1):
+    no_tiles = [3, 6, 8, 11, 14, 16, 17, 20];
+    break;
+  case 0:
+    no_tiles = [2, 5, 7, 10, 13, 15, 17, 19];
+    break;
+  }
+
+  var le = no_tiles.length;
+  var correction = 0;
+  while (correction < le && no_tiles[correction] < idx) {
+    correction++;
+  }
+  return idx - correction;
 
 }
 

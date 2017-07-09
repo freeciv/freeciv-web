@@ -51,6 +51,7 @@ var turn_change_elapsed = 0;
 var seconds_to_phasedone = 0;
 var seconds_to_phasedone_sync = 0;
 var dialog_close_trigger = "";
+var dialog_message_close_task;
 var chatbox_panel_toggle = false;
 
 var RENDERER_2DCANVAS = 1;      // default HTML5 Canvas
@@ -377,6 +378,18 @@ function chatbox_scroll_down ()
 }
 
 /**************************************************************************
+ Closes a generic message dialog.
+**************************************************************************/
+function close_dialog_message() {
+  $("#generic_dialog").dialog('close');
+}
+
+function closing_dialog_message() {
+  clearTimeout(dialog_message_close_task);
+  $("#game_text_input").blur();
+}
+
+/**************************************************************************
  Shows a generic message dialog.
 **************************************************************************/
 function show_dialog_message(title, message) {
@@ -396,26 +409,17 @@ function show_dialog_message(title, message) {
 			bgiframe: true,
 			modal: true,
 			width: is_small_screen() ? "90%" : "50%",
+			close: closing_dialog_message,
 			buttons: {
-				Ok: function() {
-					$("#generic_dialog").dialog('close');
-					$("#game_text_input").blur();
-				}
+				Ok: close_dialog_message
 			}
 		});
 
   $("#generic_dialog").dialog('open');
   $("#game_text_input").blur();
-  //quick fix to put the dialog on top of everything else.
-  setTimeout(function() {
-    $('#generic_dialog').parent().css('z-index', 2000);
-  }, 50);
 
   // automatically close dialog after 24 seconds, because sometimes the dialog can't be closed manually.
-  setTimeout(function() {
-    $('#generic_dialog').dialog('close');
-    $('#game_text_input').blur();
-  }, 24000);
+  dialog_message_close_task = setTimeout(close_dialog_message, 24000);
 
   $('#generic_dialog').css("max-height", "450px");
 

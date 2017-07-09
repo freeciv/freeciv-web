@@ -406,10 +406,6 @@ function show_dialog_message(title, message) {
 
   $("#generic_dialog").dialog('open');
   $("#game_text_input").blur();
-  //quick fix to put the dialog on top of everything else.
-  setTimeout(function() {
-    $('#generic_dialog').parent().css('z-index', 2000);
-  }, 50);
 
   // automatically close dialog after 24 seconds, because sometimes the dialog can't be closed manually.
   setTimeout(function() {

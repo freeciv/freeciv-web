@@ -1460,7 +1460,7 @@ function get_city_state(pcity)
 
   if (pcity['was_happy'] && pcity['size'] >= 3) {
     return "Celebrating";
-  } else if (pcity['uhappy']) {
+  } else if (pcity['unhappy']) {
     return "Disorder";
   } else {
     return "Peace";

@@ -45,7 +45,7 @@ apt-get -y install ${dependencies}
 python3 -m easy_install Pillow
 
 echo "===== Install Tomcat 8 ======="
-cp ${basedir}/apache-tomcat-8.5.16.tar.gz /var/lib/
+cp ${basedir}/scripts/apache-tomcat-8.5.16.tar.gz /var/lib/
 cd /var/lib
 tar -xvzf apache-tomcat-8.5.16.tar.gz
 mv apache-tomcat-8.5.16 tomcat8

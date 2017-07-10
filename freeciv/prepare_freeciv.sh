@@ -18,7 +18,7 @@ else
 fi
 
 if ! sh $FC_DL $FCREV ; then
-  echo "Svn export failed" >&2
+  echo "Git checkout failed" >&2
   exit 1
 fi
 

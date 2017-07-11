@@ -192,6 +192,7 @@ function send_message(message)
   if (is_longturn() && message != null
       && message.indexOf(encodeURIComponent("/")) == -1
       && message.indexOf("/") == -1
+      && message.trim().charAt(0) !== "."
       && message.indexOf(encodeURIComponent(":")) == -1) {
       message = username + " : " + message;
     }

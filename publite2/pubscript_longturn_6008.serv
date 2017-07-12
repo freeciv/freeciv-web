@@ -26,6 +26,8 @@ set topology=
 set landm 79
 set dispersion=1
 
+set trading_tech=disabled
+
 set diplomacy=HUMAN
 set contactturns=0
 

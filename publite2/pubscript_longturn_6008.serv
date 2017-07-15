@@ -23,7 +23,7 @@ set scorelog enabled
 set mapsize FULLSIZE
 set size 30
 set topology=
-set landm 79
+set landm 75
 set dispersion=1
 
 set trading_tech=disabled

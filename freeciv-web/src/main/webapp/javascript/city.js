@@ -26,8 +26,7 @@ var goods = {};
 
 var active_city = null;
 var worklist_dialog_active = false;
-var selected_value = -1;
-var selected_kind = -1;
+var production_selection = [];
 
 /* The city_options enum. */
 var CITYO_DISBAND      = 0;
@@ -134,8 +133,7 @@ function show_city_dialog(pcity)
 
   if (active_city != pcity || active_city == null) {
     city_prod_clicks = 0;
-    selected_value = -1;
-    selected_kind = -1;
+    production_selection = [];
   }
   active_city = pcity;
 
@@ -1280,18 +1278,20 @@ function city_worklist_dialog(pcity)
        unselected: handle_worklist_unselect
     });
 
-    if (selected_value >= 0) {
-      $("#worklist_production_choices .kindvalue_item[data-value='"
-          + selected_value + "'][data-kind='" + selected_kind + "']")
-          .addClass("ui-selected");
+    if (production_selection.length > 0) {
+      var prod_items = $("#worklist_production_choices .kindvalue_item");
+      var sel = [];
+      production_selection.forEach(function (v) {
+        sel.push("[data-value='" + v.value + "']" +
+                 "[data-kind='"  + v.kind  + "']");
+      });
+      prod_items.filter(sel.join(",")).addClass("ui-selected");
     }
 
     $(".kindvalue_item").dblclick(function() {
       value = parseFloat($(this).data('value'));
       kind = parseFloat($(this).data('kind'));
-      if (selected_kind >= 0 && selected_value >= 0) {
-        send_city_worklist_add(pcity['id'], kind, value);
-      }
+      send_city_worklist_add(pcity['id'], kind, value);
     });
   } else {
     $(".kindvalue_item").click(function() {
@@ -1317,16 +1317,58 @@ function city_worklist_dialog(pcity)
 /**************************************************************************
  Handle selection in the production list.
 **************************************************************************/
+function extract_universal(element)
+{
+  return {
+    value: parseFloat($(element).data("value")),
+    kind:  parseFloat($(element).data("kind"))
+  }
+}
+
+function find_universal_in_worklist(universal, worklist)
+{
+  for (var i = 0; i < worklist.length; i++) {
+    if (worklist[i].kind === universal.kind &&
+        worklist[i].value === universal.value) {
+      return i;
+    }
+  }
+  return -1;
+}
+
 function handle_worklist_select(event, ui)
 {
-  selected_value = parseFloat($(ui.selected).data("value"));
-  selected_kind = parseFloat($(ui.selected).data("kind"));
+  var selected = extract_universal(ui.selected);
+  var idx = find_universal_in_worklist(selected, production_selection);
+  if (idx < 0) {
+    production_selection.push(selected);
+  }
 }
 
 function handle_worklist_unselect(event, ui)
 {
-  selected_value = -1;
-  selected_kind = -1;
+  var selected = extract_universal(ui.unselected);
+  var idx = find_universal_in_worklist(selected, production_selection);
+  if (idx >= 0) {
+    production_selection.splice(idx, 1);
+  }
+}
+
+/**************************************************************************
+ Notifies the server about a change in the city worklist.
+**************************************************************************/
+function send_city_worklist(city_id)
+{
+  var worklist = cities[city_id]['worklist'];
+  var overflow = worklist.length - MAX_LEN_WORKLIST;
+  if (overflow > 0) {
+    worklist.splice(MAX_LEN_WORKLIST, overflow);
+  }
+
+  send_request(JSON.stringify({pid     : packet_city_worklist,
+                               city_id : city_id,
+                               worklist: worklist}));
+  city_tab_index = 1;
 }
 
 /**************************************************************************
@@ -1341,11 +1383,7 @@ function send_city_worklist_add(city_id, kind, value)
 
   pcity['worklist'].push({"kind" : kind, "value" : value});
 
-  var city_message = {"pid"      : packet_city_worklist,
-                      "city_id"  : city_id,
-                      "worklist" : pcity['worklist']};
-  send_request(JSON.stringify(city_message));
-  city_tab_index = 1;
+  send_city_worklist(city_id);
 }
 
 /**************************************************************************
@@ -1353,15 +1391,8 @@ function send_city_worklist_add(city_id, kind, value)
 **************************************************************************/
 function send_city_worklist_remove(city_id, index)
 {
-  var pcity = cities[city_id];
-
-  pcity['worklist'].splice(index, 1);
-
-  var city_message = {"pid"      : packet_city_worklist,
-                      "city_id"  : city_id,
-                      "worklist" : pcity['worklist']};
-  send_request(JSON.stringify(city_message));
-  city_tab_index = 1;
+  cities[city_id]['worklist'].splice(index, 1);
+  send_city_worklist(city_id);
 }
 
 /**************************************************************************
@@ -1369,8 +1400,9 @@ function send_city_worklist_remove(city_id, index)
 **************************************************************************/
 function city_change_production()
 {
-  if (selected_kind != -1 && selected_value != -1) {
-    send_city_change(active_city['id'], selected_kind, selected_value);
+  if (production_selection.length === 1) {
+    send_city_change(active_city['id'], production_selection[0].kind,
+                     production_selection[0].value);
     city_tab_index = 1;
   }
 }
@@ -1381,9 +1413,9 @@ function city_change_production()
 **************************************************************************/
 function city_add_to_worklist()
 {
-  if (selected_kind != -1 && selected_value != -1) {
-    send_city_worklist_add(active_city['id'], selected_kind, selected_value);
-    city_tab_index = 1;
+  if (production_selection.length > 0) {
+    active_city['worklist'] = active_city['worklist'].concat(production_selection);
+    send_city_worklist(active_city['id']);
   }
 
 }

@@ -365,14 +365,6 @@ button {
 }
 
 
-#city_change_production {
-  height: 100%; 
-  width: 100%; 
-  background-color: #090909; 
-  border: 1px solid #444444;
-  
-}
-
 #city_present_units, #city_supported_units {
   float: left;
   height: 105px;

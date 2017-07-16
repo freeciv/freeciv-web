@@ -1312,6 +1312,8 @@ function city_worklist_dialog(pcity)
   $(".button").button();
   $("#city_current_worklist").height($("#city_production_tab").height() - 150);
   $("#worklist_production_choices").height($("#city_production_tab").height() - 100);
+
+  update_worklist_actions();
 }
 
 /**************************************************************************
@@ -1342,6 +1344,7 @@ function handle_worklist_select(event, ui)
   var idx = find_universal_in_worklist(selected, production_selection);
   if (idx < 0) {
     production_selection.push(selected);
+    update_worklist_actions();
   }
 }
 
@@ -1351,6 +1354,24 @@ function handle_worklist_unselect(event, ui)
   var idx = find_universal_in_worklist(selected, production_selection);
   if (idx >= 0) {
     production_selection.splice(idx, 1);
+    update_worklist_actions();
+  }
+}
+
+/**************************************************************************
+ Enables/disables buttons in production tab.
+**************************************************************************/
+function update_worklist_actions()
+{
+  if (production_selection.length > 0) {
+    $("#city_add_to_worklist_btn").button("enable");
+  } else {
+    $("#city_add_to_worklist_btn").button("disable");
+  }
+  if (production_selection.length === 1) {
+    $("#city_change_production_btn").button("enable");
+  } else {
+    $("#city_change_production_btn").button("disable");
   }
 }
 

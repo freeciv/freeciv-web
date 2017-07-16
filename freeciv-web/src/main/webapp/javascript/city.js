@@ -132,7 +132,11 @@ function show_city_dialog(pcity)
   var punit;
   var ptype;
 
-  if (active_city != pcity || active_city == null) city_prod_clicks = 0;
+  if (active_city != pcity || active_city == null) {
+    city_prod_clicks = 0;
+    selected_value = -1;
+    selected_kind = -1;
+  }
   active_city = pcity;
 
   if (pcity == null) return;
@@ -1270,8 +1274,17 @@ function city_worklist_dialog(pcity)
   $(".production_list_item_sub").tooltip();
 
   if (!is_touch_device()) {
-    $(".worklist_table").selectable({ filter: "tr",
-       selected: function( event, ui ) {handle_worklist_select(ui); }});
+    $(".worklist_table").selectable({
+       filter: "tr",
+       selected: handle_worklist_select,
+       unselected: handle_worklist_unselect
+    });
+
+    if (selected_value >= 0) {
+      $("#worklist_production_choices .kindvalue_item[data-value='"
+          + selected_value + "'][data-kind='" + selected_kind + "']")
+          .addClass("ui-selected");
+    }
 
     $(".kindvalue_item").dblclick(function() {
       value = parseFloat($(this).data('value'));
@@ -1302,12 +1315,18 @@ function city_worklist_dialog(pcity)
 }
 
 /**************************************************************************
- ...
+ Handle selection in the production list.
 **************************************************************************/
-function handle_worklist_select( ui )
+function handle_worklist_select(event, ui)
 {
   selected_value = parseFloat($(ui.selected).data("value"));
   selected_kind = parseFloat($(ui.selected).data("kind"));
+}
+
+function handle_worklist_unselect(event, ui)
+{
+  selected_value = -1;
+  selected_kind = -1;
 }
 
 /**************************************************************************

@@ -8,8 +8,6 @@ Current TODO-list in prioritized order here:
 - On the City detail page, the citizen icons are too small to see what they mean, there also appears to be a black line around each block which appears unnecessary.
 - Three back-to-back (i.e same turn) successful spy/diplomat sabotages on the same city should not destroy production on the same item if the previous spy just destroyed the production.
 - There is no "Unload" hotkey for ships containing units to be unloaded. You have to click on the ship, then select each unit one by one, and it the ship has finished it's moves, the map recenters to the capital and then I have to go back and find the ship and repeat the process.
-- There doesn't appear to be a way to rearrange the items in the worklist. If I have a long worklist, I have to remove everything if I want to insert something, then re-add everything back in.
-  - see also point in "Unimplemented Freeciv client features"
 
 Various:
 - Let the player find another player's (known) capital without having to middle click every visible city he owns. Could be based on solution to Freeciv bug #23790
@@ -142,15 +140,7 @@ Unimplemented Freeciv client features:
 - global work lists
 - advanced unit selection
 - rearranging items in the city production worklist
-  - see also item near the top
-  - Needs UI work. Maybe allow rearranging items by drag and drop?
-  - Implementation hints:
-    - A worklist is an array of universals.
-    - A universal has two fields: kind and value.
-    - Sending the packet PACKET_CITY_WORKLIST(city_id, worklist) to the
-      server replaces the city's current worklist with the sent worklist.
-    - A client can therefore take a city's worklist and rearrange the order
-      of its items (or perform other changes to it) before sending back.
+  - Maybe allow rearranging items by drag and drop?
 - the cities tab
 - the auto generated part of the help texts
   - the code is big (it also refers to other Freeciv C code)

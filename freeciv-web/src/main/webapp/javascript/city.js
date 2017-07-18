@@ -27,6 +27,7 @@ var goods = {};
 var active_city = null;
 var worklist_dialog_active = false;
 var production_selection = [];
+var worklist_selection = [];
 
 /* The city_options enum. */
 var CITYO_DISBAND      = 0;
@@ -134,6 +135,7 @@ function show_city_dialog(pcity)
   if (active_city != pcity || active_city == null) {
     city_prod_clicks = 0;
     production_selection = [];
+    worklist_selection = [];
   }
   active_city = pcity;
 
@@ -1206,8 +1208,7 @@ function city_worklist_dialog(pcity)
       continue;
     }
 
-    worklist_html += "<tr class='prod_choice_list_item' onclick='send_city_worklist_remove("
-     + pcity['id'] + "," + j + ")' "
+    worklist_html += "<tr class='prod_choice_list_item' data-wlitem='" + j + "' "
      + " title=\"" + universal['helptext'] + "\">"
      + "<td><div class='production_list_item_sub' style=' background: transparent url("
            + sprite['image-src'] +
@@ -1272,7 +1273,7 @@ function city_worklist_dialog(pcity)
   $(".production_list_item_sub").tooltip();
 
   if (!is_touch_device()) {
-    $(".worklist_table").selectable({
+    $("#worklist_production_choices .worklist_table").selectable({
        filter: "tr",
        selected: handle_worklist_select,
        unselected: handle_worklist_unselect
@@ -1310,8 +1311,36 @@ function city_worklist_dialog(pcity)
   }
 
   $(".button").button();
-  $("#city_current_worklist").height($("#city_production_tab").height() - 150);
-  $("#worklist_production_choices").height($("#city_production_tab").height() - 100);
+
+  var tab_h = $("#city_production_tab").height();
+  $("#city_current_worklist").height(tab_h - 150);
+  $("#worklist_production_choices").height(tab_h - 97);
+  /* TODO: remove all hacky sizing and positioning */
+  /* It would have been nice to use $("#city_current_worklist").position().top
+     for worklist_control padding-top, but that's 0 on first run.
+     73 is also wrong, as it depends on text size. */
+  if (tab_h > 250) {
+    $("#worklist_control").height(tab_h - 148).css("padding-top", 73);
+  } else {
+    $("#worklist_control").height(tab_h - 77);
+  }
+
+  var worklist_items = $("#city_current_worklist .prod_choice_list_item");
+  for (var k = 0; k < worklist_selection.length; k++) {
+    if (worklist_selection[k] >= MAX_LEN_WORKLIST) {
+      worklist_selection.splice(k, 1 + worklist_selection.length - k);
+      break;
+    }
+    worklist_items.eq(worklist_selection[k]).addClass("ui-selected");
+  }
+
+  $("#city_current_worklist .worklist_table").selectable({
+     filter: "tr",
+     selected: handle_current_worklist_select,
+     unselected: handle_current_worklist_unselect
+  });
+
+  worklist_items.dblclick(handle_current_worklist_direct_remove);
 
   update_worklist_actions();
 }
@@ -1324,7 +1353,7 @@ function extract_universal(element)
   return {
     value: parseFloat($(element).data("value")),
     kind:  parseFloat($(element).data("kind"))
-  }
+  };
 }
 
 function find_universal_in_worklist(universal, worklist)
@@ -1359,15 +1388,75 @@ function handle_worklist_unselect(event, ui)
 }
 
 /**************************************************************************
+ Handles the selection of another item in the tasklist.
+**************************************************************************/
+function handle_current_worklist_select(event, ui)
+{
+  var idx = parseInt($(ui.selected).data('wlitem'), 10);
+  var i = worklist_selection.length - 1;
+  while (i >= 0 && worklist_selection[i] > idx)
+    i--;
+  if (i < 0 || worklist_selection[i] < idx) {
+    worklist_selection.splice(i + 1, 0, idx);
+    update_worklist_actions();
+  }
+}
+
+/**************************************************************************
+ Handles the removal of an item from the selection in the tasklist.
+**************************************************************************/
+function handle_current_worklist_unselect(event, ui)
+{
+  var idx = parseInt($(ui.unselected).data('wlitem'), 10);
+  var i = worklist_selection.length - 1;
+  while (i >= 0 && worklist_selection[i] > idx)
+    i--;
+  if (i >= 0 && worklist_selection[i] === idx) {
+    worklist_selection.splice(i, 1);
+    update_worklist_actions();
+  }
+}
+
+/**************************************************************************
  Enables/disables buttons in production tab.
 **************************************************************************/
 function update_worklist_actions()
 {
+  if (worklist_selection.length > 0) {
+    $("#city_worklist_up_btn").button("enable");
+    $("#city_worklist_remove_btn").button("enable");
+
+    if (worklist_selection[worklist_selection.length - 1] ===
+        active_city['worklist'].length - 1) {
+      $("#city_worklist_down_btn").button("disable");
+    } else {
+      $("#city_worklist_down_btn").button("enable");
+    }
+
+  } else {
+    $("#city_worklist_up_btn").button("disable");
+    $("#city_worklist_down_btn").button("disable");
+    $("#city_worklist_exchange_btn").button("disable");
+    $("#city_worklist_remove_btn").button("disable");
+  }
+
   if (production_selection.length > 0) {
     $("#city_add_to_worklist_btn").button("enable");
+    $("#city_worklist_insert_btn").button("enable");
+
+    if (production_selection.length == worklist_selection.length ||
+        worklist_selection.length == 1) {
+      $("#city_worklist_exchange_btn").button("enable");
+    } else {
+      $("#city_worklist_exchange_btn").button("disable");
+    }
+
   } else {
     $("#city_add_to_worklist_btn").button("disable");
+    $("#city_worklist_insert_btn").button("disable");
+    $("#city_worklist_exchange_btn").button("disable");
   }
+
   if (production_selection.length === 1) {
     $("#city_change_production_btn").button("enable");
   } else {
@@ -1410,15 +1499,6 @@ function send_city_worklist_add(city_id, kind, value)
 /**************************************************************************
 ...
 **************************************************************************/
-function send_city_worklist_remove(city_id, index)
-{
-  cities[city_id]['worklist'].splice(index, 1);
-  send_city_worklist(city_id);
-}
-
-/**************************************************************************
-...
-**************************************************************************/
 function city_change_production()
 {
   if (production_selection.length === 1) {
@@ -1439,6 +1519,180 @@ function city_add_to_worklist()
     send_city_worklist(active_city['id']);
   }
 
+}
+
+/**************************************************************************
+ Handles dblclick-issued removal
+**************************************************************************/
+function handle_current_worklist_direct_remove()
+{
+  var idx = parseInt($(this).data('wlitem'), 10);
+  active_city['worklist'].splice(idx, 1);
+
+  // User may dblclick a task while having other selected
+  var i = worklist_selection.length - 1;
+  while (i >= 0 && worklist_selection[i] > idx) {
+    worklist_selection[i]--;
+    i--;
+  }
+  if (i >= 0 && worklist_selection[i] === idx) {
+    worklist_selection.splice(i, 1);
+  }
+
+  send_city_worklist(active_city['id']);
+}
+
+/**************************************************************************
+ Inserts selected production items into the worklist.
+ Inserts at the beginning if no worklist items are selected, or just before
+ the first one if there's a selection.
+**************************************************************************/
+function city_insert_in_worklist()
+{
+  var count = Math.min(production_selection.length, MAX_LEN_WORKLIST);
+  if (count === 0) return;
+
+  var i;
+  var wl = active_city['worklist'];
+
+  if (worklist_selection.length === 0) {
+
+    wl.splice.apply(wl, [0, 0].concat(production_selection));
+
+    // Initialize the selection with the inserted items
+    for (i = 0; i < count; i++) {
+      worklist_selection.push(i);
+    }
+
+  } else {
+
+    wl.splice.apply(wl, [worklist_selection[0], 0].concat(production_selection));
+
+    for (i = 0; i < worklist_selection.length; i++) {
+      worklist_selection[i] += count;
+    }
+  }
+
+  send_city_worklist(active_city['id']);
+}
+
+/**************************************************************************
+ Moves the selected tasks one place up.
+ If the first task is selected, the current production is changed.
+ TODO: Some combinations may send unnecessary updates.
+ TODO: If change + worklist, we reopen the dialog twice and the second
+       does not keep the tab.
+**************************************************************************/
+function city_worklist_task_up()
+{
+  var count = worklist_selection.length;
+  if (count === 0) return;
+
+  var swap;
+  var wl = active_city['worklist'];
+
+  if (worklist_selection[0] === 0) {
+    worklist_selection.shift();
+    if (wl[0].kind !== active_city['production_kind'] ||
+        wl[0].value !== active_city['production_value']) {
+      swap = wl[0];
+      wl[0] = {
+        kind : active_city['production_kind'],
+        value: active_city['production_value']
+      };
+
+      send_city_change(active_city['id'], swap.kind, swap.value);
+    }
+    count--;
+  }
+
+  for (var i = 0; i < count; i++) {
+    var task_idx = worklist_selection[i];
+    swap = wl[task_idx - 1];
+    wl[task_idx - 1] = wl[task_idx];
+    wl[task_idx] = swap;
+    worklist_selection[i]--;
+  }
+
+  send_city_worklist(active_city['id']);
+}
+
+/**************************************************************************
+ Moves the selected tasks one place down.
+**************************************************************************/
+function city_worklist_task_down()
+{
+  var count = worklist_selection.length;
+  if (count === 0) return;
+
+  var swap;
+  var wl = active_city['worklist'];
+
+  if (worklist_selection[--count] === wl.length - 1) return;
+
+  while (count >= 0) {
+    var task_idx = worklist_selection[count];
+    swap = wl[task_idx + 1];
+    wl[task_idx + 1] = wl[task_idx];
+    wl[task_idx] = swap;
+    worklist_selection[count]++;
+    count--;
+  }
+
+  send_city_worklist(active_city['id']);
+}
+
+/**************************************************************************
+ Removes the selected tasks, changing them for the selected production.
+**************************************************************************/
+function city_exchange_worklist_task()
+{
+  var prod_l = production_selection.length;
+  if (prod_l === 0) return;
+
+  var i;
+  var same = true;
+  var wl = active_city['worklist'];
+  var task_l = worklist_selection.length;
+  if (prod_l === task_l) {
+    for (i = 0; i < prod_l; i++) {
+      if (same &&
+          (wl[worklist_selection[i]].kind !== production_selection[i].kind ||
+           wl[worklist_selection[i]].value !== production_selection[i].value)) {
+        same = false;
+      }
+      wl[worklist_selection[i]] = production_selection[i];
+    }
+  } else if (task_l === 1) {
+    i = worklist_selection[0];
+    wl.splice.apply(wl, [i, 1].concat(production_selection));
+    same = false;
+    while (--prod_l) {
+      worklist_selection.push(++i);
+    }
+  }
+
+  if (!same) {
+    send_city_worklist(active_city['id']);
+  }
+}
+
+/**************************************************************************
+ Removes the selected tasks.
+**************************************************************************/
+function city_worklist_task_remove()
+{
+  var count = worklist_selection.length;
+  if (count === 0) return;
+
+  var wl = active_city['worklist'];
+
+  while (--count >= 0) {
+    wl.splice(worklist_selection[count], 1);
+  }
+  worklist_selection = [];
+
+  send_city_worklist(active_city['id']);
 }
 
 /**************************************************************************
@@ -1524,7 +1778,7 @@ function update_city_screen()
 }
 
 /**************************************************************************
- Returns the city state: Celebrating, Disorder og Peace.
+ Returns the city state: Celebrating, Disorder or Peace.
 **************************************************************************/
 function get_city_state(pcity) 
 {

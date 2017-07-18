@@ -695,6 +695,32 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
   width: 50%;
 }
 
+#worklist_control {
+  width: 5%;
+  overflow: hidden;
+  text-align: center;
+}
+
+#worklist_control button {
+  padding: 0;
+  margin: 0;
+  width: 80%;
+  height: 10%;
+  min-height: 1.2em;
+  max-height: 5em;
+}
+
+#worklist_control .wc_spacer {
+  height: 10%;
+  max-height: 5em;
+}
+
+@media (max-width: 480px) {
+  #worklist_control {
+    display: none;
+  }
+}
+
 .prod_choice_list_item {
   text-align: left; 
   font-size: 100%;

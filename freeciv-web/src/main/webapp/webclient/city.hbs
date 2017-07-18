@@ -77,6 +77,16 @@
         <button type="button" class="button" onClick="city_change_production();" id="city_change_production_btn">Change Production</button>
         <button type="button" class="button" onClick="city_add_to_worklist();" id="city_add_to_worklist_btn">Add to worklist</button>
       </div>
+      <div id="worklist_control">
+        <button type="button" class="button" onClick="city_insert_in_worklist();" id="city_worklist_insert_btn" title="Insert before first selected task, or first in the list"><i class="fa fa-chevron-left fa-fw"></i></button>
+        <div class="wc_spacer"></div>
+        <button type="button" class="button" onClick="city_worklist_task_up();" id="city_worklist_up_btn" style="height: 20%;" title="Move selected tasks up"><i class="fa fa-chevron-up fa-fw"></i></button>
+        <button type="button" class="button" onClick="city_worklist_task_down();" id="city_worklist_down_btn" style="height: 20%;" title="Move selected tasks down"><i class="fa fa-chevron-down fa-fw"></i></button>
+        <div class="wc_spacer"></div>
+        <button type="button" class="button" onClick="city_exchange_worklist_task();" id="city_worklist_exchange_btn" title="Change selected tasks"><i class="fa fa-exchange fa-fw"></i></button>
+        <div class="wc_spacer"></div>
+        <button type="button" class="button" onClick="city_worklist_task_remove();" id="city_worklist_remove_btn" title="Remove selected tasks"><i class="fa fa-trash fa-fw"></i></button>
+      </div>
     </div>
   </div> 
   <div id="city_tabs-3">

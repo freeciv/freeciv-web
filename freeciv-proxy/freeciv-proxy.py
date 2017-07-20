@@ -33,6 +33,7 @@ import uuid
 import gc
 
 PROXY_PORT = 8002
+DEFAULT_HOST = '127.0.0.1'
 CONNECTION_LIMIT = 1000
 
 civcoms = {}
@@ -68,18 +69,27 @@ class WSHandler(websocket.WebSocketHandler):
             # called the first time the user connects.
             login_message = json.loads(message)
             self.username = login_message['username']
+            if 'host' in login_message:
+                self.civserverhost = login_message['host']
+            else:
+                self.civserverhost = DEFAULT_HOST
             self.civserverport = login_message['port']
             self.loginpacket = message
             self.is_ready = True
             self.civcom = self.get_civcom(
                 self.username,
+                self.civserverhost,
                 self.civserverport,
                 self)
             return
 
         # get the civcom instance which corresponds to this user.
         if (self.is_ready): 
-            self.civcom = self.get_civcom(self.username, self.civserverport, self)
+            self.civcom = self.get_civcom(
+                self.username,
+                self.civserverhost,
+                self.civserverport,
+                self)
 
         if (self.civcom is None):
             self.write_message("Error: Could not authenticate user.")
@@ -105,13 +115,13 @@ class WSHandler(websocket.WebSocketHandler):
     def get_compression_options(self):
         return {'compression_level' : 9, 'mem_level' : 9}
 
-    # get the civcom instance which corresponds to the requested user.
-    def get_civcom(self, username, civserverport, ws_connection):
-        key = username + str(civserverport) + ws_connection.id
+    # get the civcom instance which corresponds to the requested user/host/port
+    def get_civcom(self, username, civserverhost, civserverport, ws_connection):
+        key = username + civserverhost + str(civserverport) + ws_connection.id
         if key not in list(civcoms.keys()):
             if (int(civserverport) < 5000):
                 return None
-            civcom = CivCom(username, int(civserverport), key, self)
+            civcom = CivCom(username, civserverhost, int(civserverport), key, self)
             civcom.start()
             civcoms[key] = civcom
 

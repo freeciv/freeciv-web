@@ -20,7 +20,6 @@ from threading import Thread
 import logging
 import time
 
-HOST = '127.0.0.1'
 logger = logging.getLogger("freeciv-proxy")
 
 # The CivCom handles communication between freeciv-proxy and the Freeciv C
@@ -29,11 +28,12 @@ logger = logging.getLogger("freeciv-proxy")
 
 class CivCom(Thread):
 
-    def __init__(self, username, civserverport, key, civwebserver):
+    def __init__(self, username, civserverhost, civserverport, key, civwebserver):
         Thread.__init__(self)
         self.socket = None
         self.username = username
         self.civserverport = civserverport
+        self.civserverhost = civserverhost
         self.key = key
         self.send_buffer = []
         self.connect_time = time.time()
@@ -48,16 +48,19 @@ class CivCom(Thread):
     def run(self):
         # setup connection to civserver
         if (logger.isEnabledFor(logging.INFO)):
-            logger.info("Start connection to civserver for " + self.username)
+            logger.info("Start connection to " +
+                self.username + "@" + self.civserverhost + ":" + str(self.civserverport))
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.socket.setblocking(True)
         self.socket.settimeout(2)
         try:
-            self.socket.connect((HOST, self.civserverport))
+            self.socket.connect((self.civserverhost, self.civserverport))
             self.socket.settimeout(0.01)
         except socket.error as reason:
             self.send_error_to_client(
-                "Proxy unable to connect to civserver. Error: %s" %
+                "Proxy unable to connect to " +
+                self.civserverhost + ":" + str(self.civserverport) +
+                ". Error: %s" %
                 (reason))
             return
 
@@ -124,7 +127,7 @@ class CivCom(Thread):
         if (logger.isEnabledFor(logging.INFO)):
             logger.info(
                 "Server connection closed. Removing civcom thread for " +
-                self.username)
+                self.username + "@" + self.civserverhost + ":" + str(self.civserverport))
 
         if (hasattr(self.civwebserver, "civcoms") and self.key in list(self.civwebserver.civcoms.keys())):
             del self.civwebserver.civcoms[self.key]
@@ -145,8 +148,8 @@ class CivCom(Thread):
         except UnicodeDecodeError:
             if (logger.isEnabledFor(logging.ERROR)):
                 logger.error(
-                    "Unable to decode string from civcom socket, for user: " +
-                    self.username)
+                    "Unable to decode string from civcom socket " +
+                    self.username + "@" + self.civserverhost + ":" + str(self.civserverport))
             return
 
     # sends packets to client (WebSockets client / browser)
@@ -188,7 +191,8 @@ class CivCom(Thread):
                     b'\0')
         except:
             self.send_error_to_client(
-                "Proxy unable to communicate with civserver on port " + str(self.civserverport))
+                "Proxy unable to communicate with " +
+                self.username + "@" + self.civserverhost + ":" + str(self.civserverport))
         finally:
             self.civserver_messages = []
 

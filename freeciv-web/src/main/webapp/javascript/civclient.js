@@ -748,5 +748,6 @@ function is_longturn()
           || civserverport == 6005 || $.getUrlVar('civserverport') == "6005"
           || civserverport == 6006 || $.getUrlVar('civserverport') == "6006"
           || civserverport == 6007 || $.getUrlVar('civserverport') == "6007"
+          || civserverport == 6008 || $.getUrlVar('civserverport') == "6008"
           );
 }

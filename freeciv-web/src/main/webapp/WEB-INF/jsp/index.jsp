@@ -154,12 +154,13 @@
 
 
                          <div class="row top-buffer-3">
-                         <h1>LongTurn for Freeciv-web 5</h1>
-                         <b>LongTurn game number 5 of Freeciv-web has started and you can join it now!</b><br>
+                         <h1>LongTurn for Freeciv-web 6</h1>
+                         <b>LongTurn game number 6 of Freeciv-web has started and you can join it now!</b><br>
+                         <b>400 players, each with their own island!<br><br>
                          <b>Each player will play one turn every day. <br><br>
-                         This will be the largest ever multiplayer game of Freeciv with 500 players!<br>
+                         This will be the largest ever multiplayer game of Freeciv with 400 players!<br>
                          </b>
-                         <h2><a href="https://play.freeciv.org/webclient?action=multi&civserverport=6007&civserverhost=play&multi=true">Join the LongTurn Freeciv-web game 5 here!</a></h2>
+                         <h2><a href="https://play.freeciv.org/webclient?action=multi&civserverport=6008&civserverhost=play&multi=true">Join the LongTurn Freeciv-web game 6 here!</a></h2>
                         </div>  
 
 					</p>

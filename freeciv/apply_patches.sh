@@ -20,7 +20,7 @@
 # webperimental_install make "make install" install webperimental.
 # webgl_vision_cheat_temporary is a temporary solution to reveal terrain types to the WebGL client.
 # user_changeable_gameseed allows user to change map and game seed, to get reliable benchmarks of WebGL version.
-# longturn implements a very basic longturn mode for Freeciv-web. Longturn port number is (6003).
+# longturn implements a very basic longturn mode for Freeciv-web.
 # multiplayer_movement_rates is http://www.hostedredmine.com/issues/654404
 # max_map_size increases MAP_MAX_SIZE.
 # unit-upgrade-cost is hrm Feature #664985. It gives Freeciv-web access to a unit's upgrade cost.

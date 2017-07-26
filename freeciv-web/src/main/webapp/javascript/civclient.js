@@ -36,6 +36,9 @@ var username = null;
 
 var fc_seedrandom = null;
 
+// List of ports which are reserved for LongTurn games.
+var longturn_server_port_list = [6003, 6004, 6005, 6006, 6007, 6008];
+
 var music_list = [ "battle-epic",
                    "andrewbeck-ancient",
                    "into_the_shadows",
@@ -743,11 +746,10 @@ function switch_renderer()
 **************************************************************************/
 function is_longturn()
 {
-  return (civserverport == 6003 || $.getUrlVar('civserverport') == "6003"
-          || civserverport == 6004 || $.getUrlVar('civserverport') == "6004"
-          || civserverport == 6005 || $.getUrlVar('civserverport') == "6005"
-          || civserverport == 6006 || $.getUrlVar('civserverport') == "6006"
-          || civserverport == 6007 || $.getUrlVar('civserverport') == "6007"
-          || civserverport == 6008 || $.getUrlVar('civserverport') == "6008"
-          );
+  for (var i = 0; i < longturn_server_port_list.length; i++) {
+    if (longturn_server_port_list[i] == civserverport || $.getUrlVar('civserverport') == longturn_server_port_list[i]) {
+      return true;
+    }
+  }
+  return false;
 }

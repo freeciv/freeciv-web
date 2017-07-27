@@ -26,9 +26,8 @@
 # load_command_confirmation adds a log message which confirms that loading is complete, so that Freeciv-web can issue additional commands.
 # 500_players allows 500 players.
 # pragma_pack_city_length adds pragma pack to city packet. Also sets MAX_LEN_CITYNAME 50 for large longturn games.
-# 0033-Make-aifill-value-PLAYER-type https://www.hostedredmine.com/issues/677122
 
-PATCHLIST="freeciv_web_packets_def_changes city_impr_fix2 city-naming-change city_fixes2 metachange text_fixes unithand-change2 current_research_cost freeciv-svn-webclient-changes init_lists_disable goto_fcweb misc_devversion_sync tutorial_ruleset savegame maphand_ch ai_traits_crash server_password barbarian-names activity_null_check message_escape freeciv_segfauls_fix scorelog_filenames disable_global_warming win_chance navajo-remove-long-city-names webperimental_install webgl_vision_cheat_temporary user_changeable_gameseed multiplayer_movement_rates longturn max_map_size load_command_confirmation 500_players pragma_pack_city_length 0033-Make-aifill-value-PLAYER-type"
+PATCHLIST="freeciv_web_packets_def_changes city_impr_fix2 city-naming-change city_fixes2 metachange text_fixes unithand-change2 current_research_cost freeciv-svn-webclient-changes init_lists_disable goto_fcweb misc_devversion_sync tutorial_ruleset savegame maphand_ch ai_traits_crash server_password barbarian-names activity_null_check message_escape freeciv_segfauls_fix scorelog_filenames disable_global_warming win_chance navajo-remove-long-city-names webperimental_install webgl_vision_cheat_temporary user_changeable_gameseed multiplayer_movement_rates longturn max_map_size load_command_confirmation 500_players pragma_pack_city_length"
 
 apply_patch() {
   echo "*** Applying $1.patch ***"

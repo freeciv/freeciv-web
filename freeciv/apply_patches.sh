@@ -24,7 +24,6 @@
 # multiplayer_movement_rates is http://www.hostedredmine.com/issues/654404
 # max_map_size increases MAP_MAX_SIZE.
 # unit-upgrade-cost is hrm Feature #664985. It gives Freeciv-web access to a unit's upgrade cost.
-# README.webperimental is hrm Feature #662934
 # webperimental-reduce-Manhattan is hrm Feature #662938
 # load_command_confirmation adds a log message which confirms that loading is complete, so that Freeciv-web can issue additional commands.
 # 500_players allows 500 players.
@@ -36,7 +35,7 @@
 # 0033-Make-aifill-value-PLAYER-type https://www.hostedredmine.com/issues/677122
 # 0061-Increase-plain-file-buffer-size-to-8MB is http://www.hostedredmine.com/issues/679197
 
-PATCHLIST="freeciv_web_packets_def_changes city_impr_fix2 city-naming-change city_fixes2 metachange text_fixes unithand-change2 current_research_cost freeciv-svn-webclient-changes init_lists_disable goto_fcweb misc_devversion_sync tutorial_ruleset savegame maphand_ch ai_traits_crash server_password barbarian-names activity_null_check message_escape freeciv_segfauls_fix scorelog_filenames disable_global_warming win_chance navajo-remove-long-city-names webperimental_install webgl_vision_cheat_temporary user_changeable_gameseed multiplayer_movement_rates longturn max_map_size unit-upgrade-cost README.webperimental webperimental-reduce-Manhattan load_command_confirmation 500_players Webperimental-allow-giving-units-to-allies inform_gift unit_stack_has_no_owner pragma_pack_city_length 0032-Make-team-number-PLAYER-type 0033-Make-aifill-value-PLAYER-type 0061-Increase-plain-file-buffer-size-to-8MB"
+PATCHLIST="freeciv_web_packets_def_changes city_impr_fix2 city-naming-change city_fixes2 metachange text_fixes unithand-change2 current_research_cost freeciv-svn-webclient-changes init_lists_disable goto_fcweb misc_devversion_sync tutorial_ruleset savegame maphand_ch ai_traits_crash server_password barbarian-names activity_null_check message_escape freeciv_segfauls_fix scorelog_filenames disable_global_warming win_chance navajo-remove-long-city-names webperimental_install webgl_vision_cheat_temporary user_changeable_gameseed multiplayer_movement_rates longturn max_map_size unit-upgrade-cost webperimental-reduce-Manhattan load_command_confirmation 500_players Webperimental-allow-giving-units-to-allies inform_gift unit_stack_has_no_owner pragma_pack_city_length 0032-Make-team-number-PLAYER-type 0033-Make-aifill-value-PLAYER-type 0061-Increase-plain-file-buffer-size-to-8MB"
 
 apply_patch() {
   echo "*** Applying $1.patch ***"

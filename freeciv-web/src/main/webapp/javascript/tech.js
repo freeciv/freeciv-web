@@ -80,6 +80,8 @@ var tech_item_height = 52;
 var maxleft = 0;
 var clicked_tech_id = null;
 
+var pending_update_bulbs_output = null;
+
 /**************************************************************************
   Returns state of the tech for current pplayer.
   This can be: TECH_KNOWN, TECH_UNKNOWN, or TECH_PREREQS_KNOWN
@@ -799,4 +801,116 @@ function show_observer_tech_dialog()
   }
   $("#technologies").html(msg);
   $("#technologies").css("color", "black");
+}
+
+/**************************************************************************
+ Calculates current research output.
+
+ Returns:
+    self_bulbs: current "gross" bulbs output from player
+    self_upkeep: upkeep cost for player (to deduce from self_bulbs)
+    pooled: whether there's pooled research AND other players in the team
+    team_bulbs: total bulbs output from the team, player included
+    team_upkeep: total upkeep cost for the team, player included
+**************************************************************************/
+function get_current_bulbs_output()
+{
+  var self_bulbs = 0;
+  var self_upkeep = 0;
+  var pooled = false;
+  var team_bulbs = 0;
+  var team_upkeep = 0;
+
+  if (!client_is_observer() && client.conn.playing != null) {
+
+    var cplayer = client.conn.playing.playerno;
+    Object.values(cities).forEach(function(city) {
+      if(city.owner === cplayer) {
+        self_bulbs += city.prod[O_SCIENCE];
+      }
+    });
+
+    self_upkeep = client.conn.playing.tech_upkeep;
+
+    if (game_info['team_pooled_research']) {
+      var team = client.conn.playing.team;
+      Object.values(players).forEach(function(player) {
+        if (player.team === team && player.is_alive) {
+          team_upkeep += player.tech_upkeep;
+          if (player.playerno !== cplayer) {
+            pooled = true;
+          }
+        }
+      });
+      if (pooled) {
+        team_bulbs = research_data[team].total_bulbs_prod;
+      }
+    }
+
+    if (!pooled) {
+      /* With no team mates, player's total_bulbs_prod may not be accurate
+       * because the server doesn't send an update research info packet for
+       * tax rates or specialist changes.
+       */
+      team_bulbs = self_bulbs;
+      team_upkeep = self_upkeep;
+    }
+  }
+
+  return {
+    self_bulbs: self_bulbs,
+    self_upkeep: self_upkeep,
+    pooled: pooled,
+    team_bulbs: team_bulbs,
+    team_upkeep: team_upkeep
+  };
+}
+
+/**************************************************************************
+ Returns a textual description of current bulbs output.
+**************************************************************************/
+function get_current_bulbs_output_text(cbo)
+{
+  if (cbo === undefined) {
+    cbo = get_current_bulbs_output();
+  }
+
+  var text;
+  if (cbo.self_bulbs === 0 && cbo.self_upkeep === 0) {
+    text = "No bulbs researched";
+  } else {
+    text = cbo.self_bulbs;
+    var net = cbo.self_bulbs - cbo.self_upkeep;
+    if (cbo.self_upkeep !== 0) {
+      text = text + " - " + cbo.self_upkeep + " = " + net;
+    }
+    if (1 == Math.abs(net)) {
+      text = text + " bulb/turn";
+    } else {
+      text = text + " bulbs/turn";
+    }
+  }
+  if (cbo.pooled) {
+    text = text + " (" + (cbo.team_bulbs - cbo.team_upkeep) + " team total)";
+  }
+  return text;
+}
+
+/**************************************************************************
+ Updates bulbs output info.
+**************************************************************************/
+function update_bulbs_output_info()
+{
+  pending_update_bulbs_output = null;
+  $('#bulbs_output').html(get_current_bulbs_output_text());
+}
+
+/**************************************************************************
+ Queues an update to the bulbs output info.
+**************************************************************************/
+function request_update_bulbs_output()
+{
+  if (pending_update_bulbs_output === null) {
+    pending_update_bulbs_output = setTimeout(update_bulbs_output_info, 500);
+  }
 }

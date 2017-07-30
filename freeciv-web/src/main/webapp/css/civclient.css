@@ -289,6 +289,7 @@ button {
   background-color: #bbbbbb; 
   width: 100%;
   border: 1px solid #ffffff;
+  position: relative;
 }
 
 #progress_fg {
@@ -297,6 +298,10 @@ button {
   background-color: #5582c2;
 }
 
+#tech_progress_text {
+  position: absolute;
+  left: 0;
+}
 
 #tech_results {
   float: left; 

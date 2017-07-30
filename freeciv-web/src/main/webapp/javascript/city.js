@@ -94,6 +94,7 @@ function remove_city(pcity_id)
   if (renderer == RENDERER_WEBGL) update_city_position(ptile);
   if (update) {
     request_update_city_screen();
+    request_update_bulbs_output();
   }
 
 }

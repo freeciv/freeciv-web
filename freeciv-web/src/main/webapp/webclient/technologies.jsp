@@ -4,12 +4,13 @@
     <div id="tech_goal_box">
     </div>
     <div id="tech_progress_box">
-      <span id="tech_progress_text">
-      </span>
       <div id="progress_bg">
         <div id="progress_fg">&nbsp;
         </div>
+        <span id="tech_progress_text">
+        </span>
       </div>
+      <div><span id="bulbs_output"></span></div>
     </div>
     <div id="tech_results">
       <span id="tech_result_text">

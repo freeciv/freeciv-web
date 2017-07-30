@@ -41,8 +41,8 @@ function show_tax_rates_dialog()
   $(id).remove();
   $("<div id='rates_dialog'></div>").appendTo("div#game_page");
 
-  var dhtml = "<div> <p><h2>Select tax, luxury and science rates</h2>"
-    + "<P><form name='rates'><table border='0' style='color: #ffffff;'>"
+  var dhtml = "<h2>Select tax, luxury and science rates</h2>"
+    + "<form name='rates'><table border='0' style='color: #ffffff;'>"
     + "<tr> <td><span>Tax:</td> <td> <div class='slider' id='slider-tax' tabIndex='1'></div>"
     + "</td><td>"
     + "<div id='tax_result' style='float:left;'></div></td>"
@@ -55,7 +55,9 @@ function show_tax_rates_dialog()
     + "</td><td><INPUT TYPE='CHECKBOX' NAME='lock'>Lock</td></tr>"
     + "</table></form>"
     + "<div id='max_tax_rate' style='margin:10px;'>"
-    + "</div><span id='rates_info' style='margin:10px;'></div>";
+    + "</div><div style='margin:10px;'>"
+    + "Net income: <span id='income_info'></span><br>"
+    + "Research: <span id='bulbs_info'></span></div>";
 
   $(id).html(dhtml);
 
@@ -98,6 +100,7 @@ function update_rates_dialog()
 
   $("#max_tax_rate").html("<i>" + govt['name'] + " max rate: " + maxrate + "</i>");
   update_net_income();
+  update_net_bulbs();
 }
 
 /**************************************************************************
@@ -109,7 +112,22 @@ function update_net_income()
   if (client.conn.playing['net_income'] > 0) {
     net_income = "+" + client.conn.playing['net_income'];
   }
-  $("#rates_info").html("Net income: " + net_income);
+  $("#income_info").html(net_income);
+}
+
+/**************************************************************************
+  ...
+**************************************************************************/
+function update_net_bulbs(bulbs)
+{
+  if (bulbs === undefined) {
+    var cbo = get_current_bulbs_output();
+    bulbs = cbo.self_bulbs - cbo.self_upkeep;
+  }
+  if (bulbs > 0) {
+    bulbs = "+" + bulbs;
+  }
+  $("#bulbs_info").html(bulbs);
 }
 
 /**************************************************************************

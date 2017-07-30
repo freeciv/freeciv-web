@@ -902,7 +902,9 @@ function get_current_bulbs_output_text(cbo)
 function update_bulbs_output_info()
 {
   pending_update_bulbs_output = null;
-  $('#bulbs_output').html(get_current_bulbs_output_text());
+  var cbo = get_current_bulbs_output();
+  $('#bulbs_output').html(get_current_bulbs_output_text(cbo));
+  update_net_bulbs(cbo.self_bulbs - cbo.self_upkeep);
 }
 
 /**************************************************************************

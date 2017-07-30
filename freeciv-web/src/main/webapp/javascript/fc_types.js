@@ -179,3 +179,8 @@ var O_TRADE = 2;
 var O_GOLD = 3;
 var O_LUXURY = 4;
 var O_SCIENCE = 5;
+
+/* vision_layer enum */
+var V_MAIN = 0;
+var V_INVIS = 1;
+var V_COUNT = 2;

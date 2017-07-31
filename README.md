@@ -30,7 +30,7 @@ Freeciv-Web consists of these components:
   on Tomcat 8 and nginx.
 
 * [Freeciv](freeciv) - the Freeciv C server, which is checked out from the official
-  svn repository, and patched to work with a WebSocket/JSON protocol. Implemented in C.
+  Git repository, and patched to work with a WebSocket/JSON protocol. Implemented in C.
 
 * [Freeciv-proxy](freeciv-proxy) - a WebSocket proxy which allows WebSocket clients in Freeciv-web
   to send socket requests to Freeciv servers. WebSocket requests are sent from Javascript 

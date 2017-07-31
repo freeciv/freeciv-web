@@ -9,7 +9,7 @@ Don't expect to be able to understand everything here even after reading the
 # Freeciv-web and Freeciv
 
 Freeciv-web uses a [patched](freeciv/apply_patches.sh) version of Freeciv's
-[trunk branch](http://freeciv.wikia.com/wiki/Freeciv_source_code_repository).
+[master branch](http://freeciv.wikia.com/wiki/Freeciv_source_code_repository).
 This makes it easier to get Freeciv-web related changes into Freeciv.
 It also makes it easier for Freeciv-web to take advantage of the newest
 Freeciv features.
@@ -58,9 +58,9 @@ The rulesets Freeciv-web currently uses comes bundled with Freeciv.
 
 Freeciv-web's Freeciv version is set in
 [freeciv/version.txt](freeciv/version.txt).
-The variable FCREV is set to the SVN revision it should use.
-The latest version of Freeciv's trunk branch can be found in the
-[Freeciv SVN repository](https://github.com/freeciv/freeciv/).
+The variable FCREV is set to the Git revision it should use.
+The latest version of Freeciv's master branch can be found in the
+[Freeciv Git repository](https://github.com/freeciv/freeciv/).
 
 ## Freeciv version upgrade checklist
 

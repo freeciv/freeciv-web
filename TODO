@@ -17,7 +17,7 @@ Various:
 Basically you can help improve Freeciv-web in any way you like, as long at it actually makes the game better! Other things to improve there:
 
 Major:
-- Update Freeciv-web to work with latest Freeciv.org SVN trunk version.
+- Update Freeciv-web to work with latest Freeciv.org Git master version.
 - Integrate Freeciv-web into Freeciv.org codebase as much as possible.
 - Merge all dialogs to use Handlebars templates. See city dialog for a starting example. http://handlebarsjs.com/
 - Remove need for patches in /freeciv/patches directory.

@@ -80,7 +80,7 @@ sed -e "s/10/2/" ${basedir}/publite2/settings.ini.dist > ${basedir}/publite2/set
 dos2unix ${basedir}/scripts/configuration.sh.dist
 sed -e "s/MYSQL_USER=root/MYSQL_USER=${mysql_user}/" -e "s/MYSQL_PASSWORD=changeme/MYSQL_PASSWORD=/" ${basedir}/scripts/configuration.sh.dist > ${basedir}/scripts/configuration.sh
 
-echo "==== Checking out Freeciv from SVN and patching... ===="
+echo "==== Checking out Freeciv from Git and patching... ===="
 cd ${basedir}/freeciv && sudo -u travis ./prepare_freeciv.sh
 echo "==== Building freeciv ===="
 cd freeciv && sudo -u travis make install

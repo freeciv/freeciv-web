@@ -1479,7 +1479,7 @@ def gen_main():
     try:
       content=open(input_name).read()
     except IOError:
-      print("Error! Check out freeciv from svn in ../freeciv directory and apply patches.");
+      print("Error! Check out freeciv from Git in ../freeciv directory and apply patches.");
       exit(-1);
     content=strip_c_comment(content)
     lines=content.split("\n")

@@ -1,4 +1,4 @@
-# The GitHub SHA hash for the commit to checkout from
+# The Git SHA hash for the commit to checkout from
 # https://github.com/freeciv/freeciv
 
 FCREV=ab21c336f305f5533ea7a71b432cd2a1427a2e5d

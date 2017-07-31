@@ -9,7 +9,7 @@ Don't expect to be able to understand everything here even after reading the
 # Freeciv-web and Freeciv
 
 Freeciv-web uses a [patched](freeciv/apply_patches.sh) version of Freeciv's
-[trunk branch](http://freeciv.wikia.com/wiki/Freeciv_source_code_repository).
+[master branch](http://freeciv.wikia.com/wiki/Freeciv_source_code_repository).
 This makes it easier to get Freeciv-web related changes into Freeciv.
 It also makes it easier for Freeciv-web to take advantage of the newest
 Freeciv features.
@@ -17,7 +17,7 @@ Freeciv features.
 Graphics, static help texts, rulesets and scenarios are extracted from
 Freeciv.
 Parts of The Freeciv-web client's Freeciv protocol support is auto generated
-from Freeciv's [common/networking/packets.def](http://svn.gna.org/viewcvs/freeciv/trunk/common/networking/packets.def).
+from Freeciv's [common/networking/packets.def](https://github.com/freeciv/freeciv/blob/master/common/networking/packets.def).
 
 The Freeciv server is responsible for running the game.
 It makes sure that the rules are followed.
@@ -58,9 +58,9 @@ The rulesets Freeciv-web currently uses comes bundled with Freeciv.
 
 Freeciv-web's Freeciv version is set in
 [freeciv/version.txt](freeciv/version.txt).
-The variable FCREV is set to the SVN revision it should use.
-The latest version of Freeciv's trunk branch can be found in the
-[Freeciv SVN repository](svn://svn.gna.org/svn/freeciv/trunk).
+The variable FCREV is set to the Git revision it should use.
+The latest version of Freeciv's master branch can be found in the
+[Freeciv Git repository](https://github.com/freeciv/freeciv/).
 
 ## Freeciv version upgrade checklist
 
@@ -83,7 +83,7 @@ Was a [patch](freeciv/patches/) accepted into the new Freeciv version?
 Remove the patch file.
 Update [apply_patches.sh](freeciv/apply_patches.sh).
 
-### Check: [Freeciv's bug tracker](https://gna.org/bugs/?group=freeciv)
+### Check: [Freeciv's bug tracker](https://www.hostedredmine.com/projects/freeciv)
 
 Was (known) bugs introduced?
 Have a look at fixed bugs too if you upgrade to a version that isn't the

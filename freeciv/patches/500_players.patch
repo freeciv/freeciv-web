@@ -11,25 +11,3 @@ index 734b901..e12fa67 100644
                                   /* Must be divisable by 32 or iterations
                                    * in savegame2.c needs to be changed */
  #define MAX_NUM_BARBARIANS   6   /* 3, but slots reserved for future use. */
-diff --git a/common/networking/packets.def b/common/networking/packets.def
-index 6b81afd..11e75d2 100644
---- a/common/networking/packets.def
-+++ b/common/networking/packets.def
-@@ -300,7 +300,7 @@ type GOVERNMENT         = sint8(Government_type_id)
- type IMPROVEMENT        = uint8(Impr_type_id)
- type MULTIPLIER         = uint8(Multiplier_type_id)
- type NATION             = sint16(Nation_type_id)
--type PLAYER             = UINT8
-+type PLAYER             = UINT16
- type RESEARCH           = UINT8
- type RESOURCE           = uint8(Resource_type_id)
- type SPECIALIST         = uint8(Specialist_type_id)
-@@ -418,7 +418,7 @@ PACKET_ENDGAME_REPORT = 12; sc, lsend, no-delta, handle-via-packet
-   UINT8 category_num;
-   STRING category_name[32:category_num][MAX_LEN_NAME];
- 
--  UINT8 player_num;
-+  PLAYER player_num;
- end
- 
- PACKET_ENDGAME_PLAYER = 223; sc, lsend, no-delta, handle-via-packet

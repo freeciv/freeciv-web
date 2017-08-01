@@ -65,7 +65,7 @@ function show_tax_rates_dialog()
   $(id).dialog({
 			bgiframe: true,
 			modal: true,
-			width: "450",
+			width: is_small_screen() ? "90%" : "40%",
 			  buttons: {
 				"Close" : function() {
 					$("#rates_dialog").dialog('close');

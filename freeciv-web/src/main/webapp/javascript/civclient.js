@@ -95,6 +95,11 @@ function civclient_init()
     return;
   }
 
+  if (is_longturn() && observing) {
+    swal("LongTurn games can't be observed.");
+    return;
+  }
+
   if ($.getUrlVar('renderer') == "webgl") {
     renderer = RENDERER_WEBGL;
   }

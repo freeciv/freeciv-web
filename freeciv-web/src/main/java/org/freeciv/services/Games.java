@@ -236,7 +236,7 @@ public class Games {
 					+ "    ) AS turn, " //
 					+ "    (SELECT COUNT(*) FROM players WHERE type = 'Human' AND hostport = CONCAT(s.host, ':', s.port)) AS players " //
 					+ "    FROM servers s " //
-					+ "    WHERE message NOT LIKE '%Private%' AND type = 'multiplayer' AND state = 'Running' ORDER BY state DESC " //
+					+ "    WHERE message NOT LIKE '%Private%' AND type IN ('multiplayer', 'longturn') AND state = 'Running' ORDER BY state DESC " //
 					+ "  ) " //
 					+ "UNION " //
 					+ "  ( " //
@@ -249,7 +249,7 @@ public class Games {
 					+ "    (SELECT COUNT(*) FROM players WHERE type = 'Human' AND hostport = CONCAT(s.host, ':', s.port)) AS players " //
 					+ "    FROM servers s " //
 					+ "    WHERE message NOT LIKE '%Private%' " //
-					+ "      AND type = 'multiplayer' " //
+					+ "      AND type IN ('multiplayer', 'longturn') " //
 					+ "      AND state = 'Pregame' " //
 					+ "      AND CONCAT(s.host ,':',s.port) IN (SELECT hostport FROM players WHERE type <> 'A.I.') " //
 					+ "    LIMIT 1 " //

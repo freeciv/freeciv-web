@@ -185,6 +185,7 @@ function act_sel_click_function(parent_id,
       $(parent_id).remove();
     };
   case ACTION_SPY_TARGETED_SABOTAGE_CITY:
+  case ACTION_SPY_TARGETED_SABOTAGE_CITY_ESC:
   case ACTION_SPY_INCITE_CITY:
   case ACTION_SPY_INCITE_CITY_ESC:
   case ACTION_SPY_BRIBE_UNIT:

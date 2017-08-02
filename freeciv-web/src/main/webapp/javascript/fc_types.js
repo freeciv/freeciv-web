@@ -186,4 +186,5 @@ var O_SCIENCE = 5;
 /* vision_layer enum */
 var V_MAIN = 0;
 var V_INVIS = 1;
-var V_COUNT = 2;
+var V_SUBSURFACE = 2;
+var V_COUNT = 3;

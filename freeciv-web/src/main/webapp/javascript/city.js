@@ -1742,7 +1742,7 @@ function update_city_screen()
   var count = 0;
   for (var city_id in cities){
     var pcity = cities[city_id];
-    if (city_owner(pcity).playerno == client.conn.playing.playerno) {
+    if (client.conn.playing != null && city_owner(pcity) != null && city_owner(pcity).playerno == client.conn.playing.playerno) {
       count++; 
       var prod_type = get_city_production_type(pcity);
       var turns_to_complete_str;

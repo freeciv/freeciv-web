@@ -824,24 +824,25 @@ function get_current_bulbs_output()
   if (!client_is_observer() && client.conn.playing != null) {
 
     var cplayer = client.conn.playing.playerno;
-    Object.values(cities).forEach(function(city) {
+    for (var city_id in cities){
+      var city = cities[city_id];
       if(city.owner === cplayer) {
         self_bulbs += city.prod[O_SCIENCE];
       }
-    });
-
+    }
     self_upkeep = client.conn.playing.tech_upkeep;
 
     if (game_info['team_pooled_research']) {
       var team = client.conn.playing.team;
-      Object.values(players).forEach(function(player) {
+      for (var player_id in players) {
+        var player = players[player_id];
         if (player.team === team && player.is_alive) {
           team_upkeep += player.tech_upkeep;
           if (player.playerno !== cplayer) {
             pooled = true;
           }
         }
-      });
+      }
       if (pooled) {
         team_bulbs = research_data[team].total_bulbs_prod;
       }

@@ -150,10 +150,10 @@
 			<div class="container-fluid">
 				<div class="row top-buffer-3">
 					<p class="lead">
-						<%--<fmt:message key="index-lead"/> --%>
+						<fmt:message key="index-lead"/>
 
 
-                         <div class="row top-buffer-3">
+                         <%--<div class="row top-buffer-3">
                          <h1>LongTurn for Freeciv-web 6</h1>
                          <b>LongTurn game number 6 of Freeciv-web has started and you can join it now!</b><br>
                          <b>300 players, each with their own island!<br><br>
@@ -161,7 +161,7 @@
                          This will be one of the greatest ever multiplayer game of Freeciv with 300 players!<br>
                          </b>
                          <h2><a href="https://play.freeciv.org/webclient?action=multi&civserverport=6008&civserverhost=play&multi=true">Join the LongTurn Freeciv-web game 6 here!</a></h2>
-                        </div>  
+                        </div>--%>
 
 					</p>
 				</div>
@@ -405,11 +405,14 @@
                         </div>
                 </div>
                 <div class="row">
-                        <div class="col-md-2">
-                        </div>
-                        <div class="col-md-8">
+                        <div class="col-md-6">
                                 <div class="videoWrapper">
-                                        <iframe class="embed-responsive-item" width="542" height="343" src="https://www.youtube.com/embed/NsB2CfmOH2A" frameborder="0" allowfullscreen></iframe>
+                                        <iframe class="embed-responsive-item" width="542" height="343" src="https://www.youtube.com/embed/mLEtDyrCJz4" frameborder="0" allowfullscreen></iframe>
+                                </div>
+                        </div>
+                        <div class="col-md-6">
+                                <div class="videoWrapper">
+                                        <iframe class="embed-responsive-item" width="542" height="343" src="https://www.youtube.com/embed/tRyogKvljAE" frameborder="0" allowfullscreen></iframe>
                                 </div>
                         </div>
                 </div> <!-- end youtube -->

@@ -18,14 +18,20 @@
 ***********************************************************************/
 
 var meshes = {};
+var tree_points = null;
+var jungle_points = null;
+
 var forest_geometry = null;
 var jungle_geometry = null;
+
 
 /****************************************************************************
   Prerender trees and jungle on known tiles.
 ****************************************************************************/
 function prerender(landGeometry, xquality) {
- /* Trees */
+  /* Trees using Three.Points
+    TODO: Trees should be implemented using InstancedBufferGeometry with RawShaderMaterial and a billboard shader.
+  */
   forest_geometry = new THREE.Geometry();
   var treecolors = []
   for (var i = 0, l = landGeometry.vertices.length; i < l; i++) {
@@ -64,8 +70,8 @@ function prerender(landGeometry, xquality) {
   }
   if (graphics_quality == QUALITY_HIGH) forest_geometry.colors = treecolors;
   var forest_material = new THREE.PointsMaterial( { size: 42, sizeAttenuation: true, map: webgl_textures["tree_1"], vertexColors: (graphics_quality == QUALITY_HIGH) ? THREE.VertexColors : THREE.NoColors, alphaTest: 0.5, transparent: true } );
-  var tree_particles = new THREE.Points( forest_geometry, forest_material );
-  scene.add(tree_particles);
+  tree_points = new THREE.Points( forest_geometry, forest_material );
+  scene.add(tree_points);
 
 
  /* Jungle */
@@ -96,7 +102,7 @@ function prerender(landGeometry, xquality) {
     }
   }
   var jungle_material = new THREE.PointsMaterial( { size: 42, sizeAttenuation: true, map: webgl_textures["jungle_1"], alphaTest: 0.5, transparent: true } );
-  var jungle_particles = new THREE.Points( jungle_geometry, jungle_material );
-  scene.add(jungle_particles);
+  jungle_points = new THREE.Points( jungle_geometry, jungle_material );
+  scene.add(jungle_points);
 
 }

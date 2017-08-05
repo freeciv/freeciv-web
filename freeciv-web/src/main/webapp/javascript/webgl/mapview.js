@@ -140,7 +140,7 @@ function init_webgl_mapview() {
         sunDirection: directionalLight.position.clone().normalize(),
         sunColor: 0xfaf100,
         waterColor: 0x003e7b,
-        distortionScale: 25.0,
+        distortionScale: 3.0,
         fog: false
     } );
 
@@ -318,9 +318,13 @@ function animate() {
 
   update_animated_objects();
 
-  if ((graphics_quality > QUALITY_LOW || high_quality_water_force_enabled) && water != null) {
+  if ((graphics_quality > QUALITY_LOW || high_quality_water_force_enabled) && water != null && tree_points != null && jungle_points != null) {
     water.material.uniforms.time.value += 1.0 / 60.0;
+    tree_points.visible = false;
+    jungle_points.visible = false;
     water.render();
+    tree_points.visible = true;
+    jungle_points.visible = true;
   }
 
   if (selected_unit_indicator != null && selected_unit_material != null) {

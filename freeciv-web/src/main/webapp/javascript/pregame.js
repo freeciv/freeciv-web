@@ -423,6 +423,7 @@ function submit_nation_choice()
       || choosing_player == null || choosing_player < 0) return;
 
   var pplayer = players[choosing_player];
+  if (pplayer == null) return;
 
   var leader_name = pplayer['name']; 
 

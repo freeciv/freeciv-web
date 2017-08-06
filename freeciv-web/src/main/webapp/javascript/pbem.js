@@ -71,9 +71,6 @@ function show_pbem_dialog()
 				},
 				  "Account...": function() {
                                     close_pbem_account();
-				}, 
-				  "Forgot password?": function() {
-                                    forgot_pbem_password();
 				}
 
 
@@ -102,7 +99,7 @@ function login_pbem_user()
   var title = "Log in";
   var message = "Log in to your Freeciv-web user account:<br><br>"
                 + "<table><tr><td>Username:</td><td><input id='username' type='text' size='25' maxlength='30' onkeyup='return forceLower(this);'></td></tr>"  
-                + "<tr><td>Password:</td><td><input id='password' type='password' size='25'></td></tr></table><br><br>"
+                + "<tr><td>Password:</td><td><input id='password' type='password' size='25'> &nbsp; <a class='pwd_reset' href='#' style='color: #666666;'>Forgot password?</a></td></tr></table><br><br>"
                 + "<div id='username_validation_result' style='display:none;'></div><br><br>";
 
   // reset dialog page.
@@ -142,6 +139,8 @@ function login_pbem_user()
       login_pbem_user_request();
     }
   });
+
+  $(".pwd_reset").click(forgot_pbem_password);
 
 }
 
@@ -551,7 +550,7 @@ function close_pbem_account()
   $("#dialog").dialog({
 			bgiframe: true,
 			modal: true,
-			width: is_small_screen() ? "80%" : "60%",
+			width: is_small_screen() ? "80%" : "50%",
 			buttons:
 			{
 				"Cancel" : function() {
@@ -566,42 +565,6 @@ function close_pbem_account()
   $("#dialog").dialog('open');
 }
 
-
-/**************************************************************************
- Send password link to user. TODO: This method is not complete yet.
-**************************************************************************/
-function forgot_pbem_password() 
-{
-
-  var title = "Forgot your password?";
-  var message = "Please enter your e-mail address to get your password:<br><br>"
-                + "<table><tr><td>E-mail address:</td><td><input id='email' type='text' size='25'></td></tr>"  
-                + "</table><br><br>"
-                + "<div id='username_validation_result' style='display:none;'></div><br><br>";
-
-  // reset dialog page.
-  $("#dialog").remove();
-  $("<div id='dialog'></div>").appendTo("div#game_page");
-
-  $("#dialog").html(message);
-  $("#dialog").attr("title", title);
-  $("#dialog").dialog({
-			bgiframe: true,
-			modal: true,
-			width: is_small_screen() ? "80%" : "60%",
-			buttons:
-			{ 
-                                "Cancel" : function() {
-	                          show_pbem_dialog();
-				},
-				"Send password" : function() {
-                                  /* TODO. */
-				}
-			}
-		});
-
-  $("#dialog").dialog('open');
-}
 
 
 /**************************************************************************

@@ -27,6 +27,8 @@ var metamessage_changed = false;
 var logged_in_with_password = false;
 var antialiasing_setting = true;
 var update_player_info_pregame_queued = false;
+var captcha_site_key = '6LfpcgMTAAAAAPRAOqYy6ZUhuX6bOJ7-7-_1V0FL';
+var password_reset_count = 0;
 
 /****************************************************************************
   ...
@@ -1182,13 +1184,15 @@ function validate_username_callback()
            }
           });
         } else {
-          $("#username_validation_result").html("Please enter your password or create a new user account.");
+          $("#username_validation_result").html("Please enter your password or create a new user account. <a class='pwd_reset' href='#' style='color: #bbbbbb;'>Forgot password?</a>");
           $("#username_validation_result").show();
         }
 
         $("#password_row").show();
         $("#password_req").focus();
-        $("#password_td").html("<input id='password_req' type='password' size='25' maxlength='200'>");
+        $("#password_td").html("<input id='password_req' type='password' size='25' maxlength='200'>  &nbsp; <a class='pwd_reset' href='#' style='color: #666666;'>Forgot password?</a>");
+
+        $(".pwd_reset").click(forgot_pbem_password);
       }
     },
    error: function (request, textStatus, errorThrown) {
@@ -1218,8 +1222,8 @@ function show_new_user_account_dialog(gametype)
                 + "<div><small><ul><li>It is free and safe to create a new account on Freeciv-web.</li>"
                 + "<li>A user account allows you to save and load games.</li>"
                 + "<li>Other players can use your username to start Play-by-email games with you.</li>"
-                + "<li>You will not receive any spam and your e-mail address will be kept safe.</li>"
-                + "<li>You can cancel your account at any time if you want.</li>"
+                + "<li>You will not receive any spam and your e-mail address will be kept safe. Your password is stored securely as a secure hash.</li>"
+                + "<li>You can <a href='#' onclick='javascript:close_pbem_account();' style='color: black;'>cancel</a> your account at any time if you want.</li>"
                 + "</ul></small></div>";
 
   // reset dialog page.
@@ -1256,7 +1260,7 @@ function show_new_user_account_dialog(gametype)
 
   if (grecaptcha != null) {
     grecaptcha.render('captcha_element', {
-          'sitekey' : '6LfpcgMTAAAAAPRAOqYy6ZUhuX6bOJ7-7-_1V0FL'
+          'sitekey' : captcha_site_key
         });
   } else {
     swal("Captcha not available. This could be caused by a browser plugin.");
@@ -1483,4 +1487,68 @@ function handle_new_flag(image_data, player_id) {
 **************************************************************************/
 function onloadCallback() {
   // recaptcha is ready and loaded.
+}
+
+
+/**************************************************************************
+ Reset the password for the user.
+**************************************************************************/
+function forgot_pbem_password()
+{
+
+  var title = "Forgot your password?";
+  var message = "Please enter your e-mail address to reset your password. Also complete the captcha. The new password will be sent to you by e-mail.<br><br>"
+                + "<table><tr><td>E-mail address:</td><td><input id='email_reset' type='text' size='25'></td></tr>"
+                + "</table><br><br>"
+                + "<div id='captcha_element'></div>"
+                + "<br><br>";
+
+  // reset dialog page.
+  $("#pwd_dialog").remove();
+  $("<div id='pwd_dialog'></div>").appendTo("div#game_page");
+
+  $("#pwd_dialog").html(message);
+  $("#pwd_dialog").attr("title", title);
+  $("#pwd_dialog").dialog({
+			bgiframe: true,
+			modal: true,
+			width: is_small_screen() ? "80%" : "40%",
+			buttons:
+			{
+                "Cancel" : function() {
+	                 $("#pwd_dialog").remove();
+				},
+				"Send password" : function() {
+				    password_reset_count++;
+                    if (password_reset_count > 3) {
+                      swal("Unable to reset password.");
+                      return;
+                    }
+				    var reset_email = $("#email_reset").val();
+				    var captcha = $("#g-recaptcha-response").val();
+                    $.ajax({
+                       type: 'POST',
+                       url: "/reset_password?email=" + reset_email + "&captcha=" + encodeURIComponent(captcha),
+                       success: function(data, textStatus, request){
+                          swal("Password reset. Please check your email.");
+                          $("#pwd_dialog").remove();
+                        },
+                       error: function (request, textStatus, errorThrown) {
+                         swal("Error, password was not reset.");
+                       }
+                      });
+				}
+			}
+		});
+
+  $("#pwd_dialog").dialog('open');
+
+  if (grecaptcha != null) {
+    grecaptcha.render('captcha_element', {
+          'sitekey' : captcha_site_key
+        });
+  } else {
+    swal("Captcha not available. This could be caused by a browser plugin.");
+  }
+
 }

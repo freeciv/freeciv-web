@@ -179,6 +179,17 @@
 		<url-pattern>/deactivate_user</url-pattern>
 	</servlet-mapping>
 
+	<!-- /password_reset -->
+	<servlet>
+		<servlet-name>ResetPassword</servlet-name>
+		<servlet-class>org.freeciv.servlet.ResetPassword</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ResetPassword</servlet-name>
+		<url-pattern>/reset_password</url-pattern>
+	</servlet-mapping>
+
 
 	<!-- /deletesavegame -->
 	<servlet>

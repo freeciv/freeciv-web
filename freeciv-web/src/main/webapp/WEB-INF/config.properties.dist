@@ -1,2 +1,4 @@
 captcha_secret=secret goes here
 savegame_dir=/var/lib/tomcat8/webapps/data/savegames/
+email_username=username
+email_password=password

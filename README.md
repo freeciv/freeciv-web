@@ -151,5 +151,6 @@ Marko Lindqvist [@cazfi](https://github.com/cazfi)
 Sveinung Kvilhaugsvik [@kvilhaugsvik](https://github.com/kvilhaugsvik)  
 Gerik Bonaert [@adaxi](https://github.com/adaxi)  
 Lmoureaux [@lmoureaux](https://github.com/lmoureaux)  
+Máximo Castañeda [@lonemadmax](https://github.com/lonemadmax)  
 and the [Freeciv.org project](http://freeciv.wikia.com/wiki/People)!
 

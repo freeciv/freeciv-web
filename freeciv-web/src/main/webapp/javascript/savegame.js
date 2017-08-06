@@ -345,6 +345,12 @@ function load_game_toggle()
 {
 
   send_message("/set nationset all");
+
+  if (players == null || players[0] == null) {
+    add_chatbox_text("Error: Unable to aitoggle and take your player. Try reloading the page.");
+    $.unblockUI();
+    return;
+  }
     
   var firstplayer = players[0]['name'].split(" ")[0];
 

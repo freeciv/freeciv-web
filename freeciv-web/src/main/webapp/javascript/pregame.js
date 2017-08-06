@@ -1157,11 +1157,10 @@ function validate_username_callback()
           var shaObj = new jsSHA("SHA-512", "TEXT");
           shaObj.update(password);
           var sha_password = encodeURIComponent(shaObj.getHash("HEX"));
-          /* TODO: after some time when most active users have migrated to sha passwords, stop sending in md5 hashed password. */
 
           $.ajax({
            type: 'POST',
-           url: "/login_user?username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(md5(password)) + "&sha_password=" + sha_password,
+           url: "/login_user?username=" + encodeURIComponent(username) + "&sha_password=" + sha_password,
            success: function(data, textStatus, request){
                if (data != null && data == "OK") {
                  simpleStorage.set("username", username);

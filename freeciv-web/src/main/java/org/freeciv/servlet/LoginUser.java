@@ -45,15 +45,7 @@ public class LoginUser extends HttpServlet {
 		String username = java.net.URLDecoder.decode(request.getParameter("username"), "UTF-8");
 		String secure_password = java.net.URLDecoder.decode(request.getParameter("sha_password"), "UTF-8");
 
-		/* TODO: Remove md5 hashed password once enough users have migrated to SHA. */
-		@Deprecated String old_md5_password = java.net.URLDecoder.decode(request.getParameter("password"), "UTF-8");
 
-
-		if (old_md5_password == null || old_md5_password.length() <= 2) {
-			response.sendError(HttpServletResponse.SC_BAD_REQUEST,
-					"Invalid password. Please try again with another password.");
-			return;
-		}
 		if (secure_password == null || secure_password.length() <= 2) {
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST,
 					"Invalid password. Please try again with another password.");
@@ -72,87 +64,29 @@ public class LoginUser extends HttpServlet {
 			DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
 			conn = ds.getConnection();
 
-			String authMethodQuery =
-					"SELECT username, password IS NOT NULL, secure_hashed_password IS NOT NULL "
+			// Salted, hashed password.
+			String saltHashQuery =
+					"SELECT secure_hashed_password "
 							+ "FROM auth "
 							+ "WHERE LOWER(username) = LOWER(?) "
 							+ "	AND activated = '1' LIMIT 1";
-			PreparedStatement preparedStatement = conn.prepareStatement(authMethodQuery);
-			preparedStatement.setString(1, username);
-			ResultSet rs = preparedStatement.executeQuery();
-			int authMethod = 0;
-			boolean migrate = false;
-			if (!rs.next()) {
+			PreparedStatement ps1 = conn.prepareStatement(saltHashQuery);
+			ps1.setString(1, username);
+			ResultSet rs1 = ps1.executeQuery();
+			if (!rs1.next()) {
 				response.getOutputStream().print("Failed");
 				return;
 			} else {
-				if (rs.getInt(2) == 1) {
-					authMethod = 1; // md5 hashed password
-				} else if (rs.getInt(3) == 1) {
-					authMethod = 2; // Password hashed with Apache Commons Crypt. This will be the default method.
-				}
-			}
-
-
-			if (authMethod == 1) {
-				// MD5 hashed password. (deprecated) TODO: Remove this auth method in some time.
-				String queryMd5 = "SELECT username "
-								+ "FROM auth "
-								+ "WHERE LOWER(username) = LOWER(?) "
-								+ "	AND password = ?  "
-								+ "	AND activated = '1' LIMIT 1";
-
-				PreparedStatement ps1 = conn.prepareStatement(queryMd5);
-				ps1.setString(1, username);
-				ps1.setString(2, old_md5_password);
-				ResultSet rs1 = ps1.executeQuery();
-				if (!rs1.next() || !rs1.getString(1).equalsIgnoreCase(username)) {
+				String hashedPasswordFromDB = rs1.getString(1);
+				if (hashedPasswordFromDB.equals(Crypt.crypt(secure_password, hashedPasswordFromDB))) {
+					// Login OK!
+					response.getOutputStream().print("OK");
+				} else {
 					response.getOutputStream().print("Failed");
 					return;
-				} else {
-					migrate = true;
 				}
-
-			} else if (authMethod == 2) {
-				// Salted, hashed password.
-				String saltHashQuery =
-						"SELECT secure_hashed_password "
-								+ "FROM auth "
-								+ "WHERE LOWER(username) = LOWER(?) "
-								+ "	AND activated = '1' LIMIT 1";
-				PreparedStatement ps1 = conn.prepareStatement(saltHashQuery);
-				ps1.setString(1, username);
-				ResultSet rs1 = ps1.executeQuery();
-				if (!rs1.next()) {
-					response.getOutputStream().print("Failed");
-					return;
-				} else {
-					migrate = false;
-
-					String hashedPasswordFromDB = rs1.getString(1);
-					if ( hashedPasswordFromDB.equals(Crypt.crypt(secure_password, hashedPasswordFromDB))) {
-						// Login OK!
-					} else {
-						response.getOutputStream().print("Failed");
-						return;
-					}
-				}
-			} else {
-				response.getOutputStream().print("Failed");
-				return;
 			}
 
-			// Login is OK!
-			if (migrate) {
-				// migrate user to salted SHA based password.
-				String migrateQuery = "UPDATE auth SET password = NULL, secure_hashed_password = ? WHERE LOWER(username) = LOWER(?)";
-				PreparedStatement migrateStatement = conn.prepareStatement(migrateQuery);
-				migrateStatement.setString(1, Crypt.crypt(secure_password));
-				migrateStatement.setString(2, username);
-				migrateStatement.executeUpdate();
-			}
-
-			response.getOutputStream().print("OK");
 
 		} catch (Exception err) {
 			response.setHeader("result", "error");

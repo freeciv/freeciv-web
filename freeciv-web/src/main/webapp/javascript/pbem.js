@@ -87,6 +87,12 @@ function show_pbem_dialog()
 	$("#user_count").html("We are now " + data + " players available for Play-By-Email games.");
    }  });
 
+  var stored_username = simpleStorage.get("username", "");
+  var stored_password = simpleStorage.get("password", "");
+  if (stored_username != null && stored_username != false && stored_password != null && stored_password != false) {
+    // Not allowed to create a new user account when already logged in.
+    $(".ui-dialog-buttonset button").first().button("disable");
+  }
 
 }
 

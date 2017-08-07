@@ -1099,6 +1099,13 @@ function show_intro_dialog(title, message) {
     $(".ui-dialog-buttonset button").first().hide();
   }
 
+  var stored_username = simpleStorage.get("username", "");
+  var stored_password = simpleStorage.get("password", "");
+  if (stored_username != null && stored_username != false && stored_password != null && stored_password != false) {
+    // Not allowed to create a new user account when already logged in.
+    $(".ui-dialog-buttonset button").last().button("disable");
+  }
+
   if (is_small_screen()) {
     /* some fixes for pregame screen on small devices.*/
     $("#freeciv_logo").remove();

@@ -120,7 +120,12 @@ function initial_benchmark_check()
 
     show_dialog_message("3D game is running very slowly!", message);
 
-    console.error("WebGL 3D is running slowly. FPS: " + fps + " " + renderer_name);
+    var quality_string = "";
+    if (graphics_quality == QUALITY_LOW) quality_string = "Low quality";
+    if (graphics_quality == QUALITY_MEDIUM) quality_string = "Medium quality";
+    if (graphics_quality == QUALITY_HIGH) quality_string = "High quality";
+
+    console.error("WebGL 3D is running slowly. FPS: " + fps + ", Quality:" + quality_string + ", Renderer: " + renderer_name);
 
   }
 

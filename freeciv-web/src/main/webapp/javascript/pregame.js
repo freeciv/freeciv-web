@@ -1031,7 +1031,10 @@ function show_intro_dialog(title, message) {
   }
   var stored_password = simpleStorage.get("password", "");
   if (stored_password != null && stored_password != false) {
+    $("#password_row").show();
+    $("#password_td").html("<input id='password_req' type='password' size='25' maxlength='200'>  &nbsp; <a class='pwd_reset' href='#' style='color: #666666;'>Forgot password?</a>");
     $("#password_req").val(stored_password);
+    $(".pwd_reset").click(forgot_pbem_password);
   }
   var join_game_customize_text = "";
   if ($.getUrlVar('action') == "load") {
@@ -1199,7 +1202,6 @@ function validate_username_callback()
         $("#password_row").show();
         $("#password_req").focus();
         $("#password_td").html("<input id='password_req' type='password' size='25' maxlength='200'>  &nbsp; <a class='pwd_reset' href='#' style='color: #666666;'>Forgot password?</a>");
-
         $(".pwd_reset").click(forgot_pbem_password);
       }
     },

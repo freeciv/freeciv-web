@@ -78,7 +78,7 @@ public class LoginUser extends HttpServlet {
 				return;
 			} else {
 				String hashedPasswordFromDB = rs1.getString(1);
-				if (hashedPasswordFromDB.equals(Crypt.crypt(secure_password, hashedPasswordFromDB))) {
+				if (hashedPasswordFromDB != null && hashedPasswordFromDB.equals(Crypt.crypt(secure_password, hashedPasswordFromDB))) {
 					// Login OK!
 					response.getOutputStream().print("OK");
 				} else {

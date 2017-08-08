@@ -129,7 +129,6 @@ public class NewPBEMUser extends HttpServlet {
 
 		} catch (Exception err) {
 			response.setHeader("result", "error");
-			err.printStackTrace();
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Unable to create user: " + err);
 		} finally {
 			if (conn != null)

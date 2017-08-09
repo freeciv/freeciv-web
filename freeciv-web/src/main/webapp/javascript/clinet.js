@@ -189,13 +189,21 @@ function send_message_delayed(message, delay)
 ****************************************************************************/
 function send_message(message)
 {
-  if (is_longturn() && message != null
-      && message.indexOf(encodeURIComponent("/")) == -1
-      && message.indexOf("/") == -1
-      && message.trim().charAt(0) !== "."
-      && message.indexOf(encodeURIComponent(":")) == -1) {
-      message = username + " : " + message;
+  if (is_longturn() && message != null) {
+    if (message.indexOf(encodeURIComponent("/")) !== 0
+      && message.indexOf("/") !== 0
+      && message.charAt(0) !== ".") {
+      var private_mark_i = message.indexOf(encodeURIComponent(":"));
+      if (private_mark_i <= 0) {
+        message = username + " : " + message;
+      } else {
+        var first_space = message.indexOf(encodeURIComponent(" "));
+        if (first_space >= 0 && first_space < private_mark_i) {
+          message = username + " : " + message;
+        }
+      }
     }
+  }
 
   var packet = {"pid" : packet_chat_msg_req, 
                 "message" : message};

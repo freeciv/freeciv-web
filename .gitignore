@@ -82,3 +82,4 @@ src/main/webapp/tilesets
 */__pycache__/*
 logs/
 tests/screenshot*.png
+.freeciv_index

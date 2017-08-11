@@ -177,10 +177,12 @@ function act_sel_click_function(parent_id,
 {
   switch (action_id) {
   case ACTION_SPY_TARGETED_STEAL_TECH:
+  case ACTION_SPY_TARGETED_STEAL_TECH_ESC:
     return function() {
       popup_steal_tech_selection_dialog(units[actor_unit_id],
                                         cities[tgt_id],
-                                        action_probabilities);
+                                        action_probabilities,
+                                        action_id);
 
       $(parent_id).remove();
     };
@@ -595,7 +597,8 @@ function popup_unit_upgrade_dlg(actor_unit, target_city, cost, act_id)
   Needed because of JavaScript's scoping rules.
 **************************************************************************/
 function create_steal_tech_button(parent_id, tech,
-                                  actor_unit_id, target_city_id)
+                                  actor_unit_id, target_city_id,
+                                  action_id)
 {
   /* Create the initial button with this tech */
   var button = {
@@ -606,7 +609,7 @@ function create_steal_tech_button(parent_id, tech,
         "target_id": target_city_id,
         "value" : tech['id'],
         "name" : "",
-        "action_type": ACTION_SPY_TARGETED_STEAL_TECH};
+        "action_type": action_id};
 
       send_request(JSON.stringify(packet));
 
@@ -622,10 +625,11 @@ function create_steal_tech_button(parent_id, tech,
   Select what tech to steal when doing targeted tech theft.
 **************************************************************************/
 function popup_steal_tech_selection_dialog(actor_unit, target_city, 
-                                           act_probs)
+                                           act_probs, action_id)
 {
   var id = "stealtech_dialog_" + actor_unit['id'];
   var buttons = [];
+  var untargeted_action_id = ACTION_COUNT;
 
   /* Reset dialog page. */
   $("#" + id).remove();
@@ -653,13 +657,23 @@ function popup_steal_tech_selection_dialog(actor_unit, target_city,
       /* Add a button for stealing this tech to the dialog. */
       buttons.push(create_steal_tech_button(id, tech,
                                             actor_unit['id'],
-                                            target_city['id']));
+                                            target_city['id']),
+                                            action_id);
     }
   }
 
-  /* The player may change his mind after selecting targeted tech theft. */
-  if (action_prob_possible(
-        act_probs[ACTION_SPY_STEAL_TECH])) {
+  /* The player may change his mind after selecting targeted tech theft and
+   * go for the untargeted version after concluding that no listed tech is
+   * worth the extra risk. */
+  if (action_id == ACTION_SPY_TARGETED_STEAL_TECH_ESC) {
+    untargeted_action_id = ACTION_SPY_STEAL_TECH_ESC;
+  } else if (action_id == ACTION_SPY_TARGETED_STEAL_TECH) {
+    untargeted_action_id = ACTION_SPY_STEAL_TECH;
+  }
+
+  if (untargeted_action_id != ACTION_COUNT
+      && action_prob_possible(
+           act_probs[untargeted_action_id])) {
     /* Untargeted tech theft may be legal. Add it as an alternative. */
     buttons.push({
                    text  : "At " + unit_types[actor_unit['type']]['name']
@@ -671,7 +685,7 @@ function popup_steal_tech_selection_dialog(actor_unit, target_city,
                        "target_id": target_city['id'],
                        "value" : 0,
                        "name" : "",
-                       "action_type": ACTION_SPY_STEAL_TECH};
+                       "action_type": untargeted_action_id};
                      send_request(JSON.stringify(packet));
 
                      $("#" + id).remove();

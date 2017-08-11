@@ -37,7 +37,7 @@ var username = null;
 var fc_seedrandom = null;
 
 // List of ports which are reserved for LongTurn games.
-var longturn_server_port_list = [6003, 6004, 6005, 6006, 6007, 6008];
+var longturn_server_port_list = [6003, 6004, 6005, 6006, 6007, 6008, 6009];
 
 var music_list = [ "battle-epic",
                    "andrewbeck-ancient",

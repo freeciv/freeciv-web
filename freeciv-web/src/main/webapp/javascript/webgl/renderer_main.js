@@ -82,6 +82,15 @@ function init_webgl_renderer()
 
   var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
+  var renderer_name = "-";
+  var gl = document.createElement('canvas').getContext('webgl');
+  if (gl != null) {
+    var extension = gl.getExtension('WEBGL_debug_renderer_info');
+    if (extension != undefined) {
+      renderer_name = gl.getParameter(extension.UNMASKED_RENDERER_WEBGL);
+    }
+  }
+
   var stored_graphics_quality_setting = simpleStorage.get("graphics_quality", "");
   if (stored_graphics_quality_setting != null && stored_graphics_quality_setting > 0) {
     graphics_quality = stored_graphics_quality_setting;
@@ -90,6 +99,10 @@ function init_webgl_renderer()
   } else if (iOS) {
     // iOS devices default to low quality, because high quality may crash on some iOS devices. This can
     // probably be removed in the future when iOS devices get better WebGL performance.
+    graphics_quality = QUALITY_LOW;
+    high_quality_water_force_enabled = true;
+  } else if (renderer_name.indexOf("Mesa") != -1 || renderer_name.indexOf("Intel") != -1 || renderer_name.indexOf("DRI") != -1) {
+    // These are renderers which are likely to be slow.
     graphics_quality = QUALITY_LOW;
     high_quality_water_force_enabled = true;
   } else {

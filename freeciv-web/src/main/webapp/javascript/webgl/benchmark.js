@@ -113,20 +113,66 @@ function initial_benchmark_check()
       }
     }
 
-    var message = "The game is running too slowly! Please check if the drivers for your graphics driver needs to be updated and that you have a graphics card which supports WebGL 3D. "
-    + "3D WebGL rendering requires updated drivers and a good 3D graphics card with 3D hardware acceleration. The current WebGL renderer is: " + renderer_name + ".<br>";
-    if (renderer_name == "Google SwiftShader") message += "<br>Warning: Google SwiftShader is a software renderer which has very poor performance and will not work with this game. ";
-    message += "<br><b>You can try playing the 2D version instead.</b>";
-
-    show_dialog_message("3D game is running very slowly!", message);
-
     var quality_string = "";
     if (graphics_quality == QUALITY_LOW) quality_string = "Low quality";
     if (graphics_quality == QUALITY_MEDIUM) quality_string = "Medium quality";
     if (graphics_quality == QUALITY_HIGH) quality_string = "High quality";
 
+    var message = "The game is running too slowly! Please check if the drivers for your graphics driver needs to be updated and that you have a graphics card which supports WebGL 3D. "
+    + "3D WebGL rendering requires updated drivers and a good 3D graphics card with 3D hardware acceleration. The current WebGL renderer is: " + renderer_name + ".<br>";
+    if (renderer_name == "Google SwiftShader") message += "<br>Warning: Google SwiftShader is a software renderer which has very poor performance and will not work with this game. ";
+    message += "<br><b>You can try playing the 2D version instead, or configure lower graphics quality.</b><br><br>";
+    message += "Current graphics level: " + quality_string;
+
+    show_slow_game_warning_message("3D game is running very slowly!", message);
+
     console.error("WebGL 3D is running slowly. FPS: " + fps + ", Quality:" + quality_string + ", Renderer: " + renderer_name);
 
   }
+
+}
+
+
+/**************************************************************************
+ Shows a generic message dialog.
+**************************************************************************/
+function show_slow_game_warning_message(title, message) {
+
+  // reset dialog page.
+  $("#generic_dialog").remove();
+  $("<div id='generic_dialog'></div>").appendTo("div#game_page");
+
+  speak(title);
+  speak(message);
+
+  if (cardboard_vr_enabled) return;
+
+  $("#generic_dialog").html(message);
+  $("#generic_dialog").attr("title", title);
+  $("#generic_dialog").dialog({
+			bgiframe: true,
+			modal: true,
+			width: is_small_screen() ? "90%" : "50%",
+			close: closing_dialog_message,
+			buttons: {
+			    "Play 2D version - Restart!" : function() {
+                  window.location.href = '/';
+                 },
+			    "Configure graphics settings" : function() {
+			      $("#generic_dialog").remove();
+                  $("<div id='pregame_page'></div>").appendTo("div#game_page");
+			      $("<div id='pregame_settings'></div>").appendTo("div#pregame_page");
+                  pregame_settings();
+                  $("#pregame_settings_tabs").tabs({ active: 1 });
+                 },
+				"Play anyway": close_dialog_message
+
+			}
+		});
+
+  $("#generic_dialog").dialog('open');
+  $("#game_text_input").blur();
+
+  $('#generic_dialog').css("max-height", "450px");
 
 }

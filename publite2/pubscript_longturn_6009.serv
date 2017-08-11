@@ -1,7 +1,7 @@
 #LongTurn game #7
 
 cmdlevel ctrl first
-rulesetdir multiplayer 
+rulesetdir multiplayer2 
 set topology WRAPX
 set nationset all
 set compresstype xs
@@ -23,14 +23,17 @@ set mapsize FULLSIZE
 set size 30
 set topology=
 set landm 22
-set specials 500
+set specials 1
 set dispersion=1
 
 set wetness 0
-set landmass 85
 set gold 1000
 set techlevel 100
 set temperature 100
+set steepness 0 
+
+# Patch common.map.h manually
+set landmass 100
 
 set trading_tech=enabled
 

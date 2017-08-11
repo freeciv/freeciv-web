@@ -1268,7 +1268,8 @@ function show_new_user_account_dialog(gametype)
 
   $("#dialog").dialog('open');
 
-  if (grecaptcha != null) {
+  if (grecaptcha !== undefined && grecaptcha != null) {
+    $('#captcha_element').html('');
     grecaptcha.render('captcha_element', {
           'sitekey' : captcha_site_key
         });
@@ -1536,6 +1537,10 @@ function forgot_pbem_password()
                     }
 				    var reset_email = $("#email_reset").val();
 				    var captcha = $("#g-recaptcha-response").val();
+				    if (reset_email == null || reset_email.length == 0 || captcha == null || captcha.length == 0) {
+				      swal("Please fill in e-mail and complete the captcha.");
+				      return;
+				    }
                     $.ajax({
                        type: 'POST',
                        url: "/reset_password?email=" + reset_email + "&captcha=" + encodeURIComponent(captcha),
@@ -1553,7 +1558,8 @@ function forgot_pbem_password()
 
   $("#pwd_dialog").dialog('open');
 
-  if (grecaptcha != null) {
+  if (grecaptcha !== undefined && grecaptcha != null) {
+    $('#captcha_element').html('');
     grecaptcha.render('captcha_element', {
           'sitekey' : captcha_site_key
         });

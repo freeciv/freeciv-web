@@ -107,6 +107,7 @@ function update_nation_screen()
   } else if (is_longturn()) {
     $('#take_player_button').hide();
     $('#toggle_ai_button').hide();
+    $('#game_scores_button').hide();
   } else {
     $('#view_player_button').button("disable");
     $('#meet_player_button').button("disable");

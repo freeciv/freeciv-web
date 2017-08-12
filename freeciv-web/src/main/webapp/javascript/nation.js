@@ -33,6 +33,17 @@ function update_nation_screen()
 	  + "<td>Nation:</td><td>Attitude</td><td>Score</td><td>AI/Human</td><td>Alive?</td>"
 	  + "<td>Diplomatic state</td><td>Team</td><td>State</td></thead>";
 
+  /* Fetch online (connected) players on this game from Freeciv-proxy. */
+  var online_players_html = "";
+  $.ajax({
+    url: "/civsocket/" + (parseInt(civserverport) + 1000) + "/status",
+    dataType: "html",
+    cache: false,
+    async: false
+  }).done(function( data ) {
+    online_players_html = data;
+  });
+
   for (var player_id in players) {
     var pplayer = players[player_id];
     if (pplayer['nation'] == -1) continue;
@@ -67,7 +78,9 @@ function update_nation_screen()
 
     nation_list_html += "<td>Team " + pplayer['team'] + "</td>";
     var pstate = " ";
-    if (pplayer['phase_done'] && !pplayer['flags'].isSet(PLRF_AI)) {
+    if (online_players_html.toLowerCase().indexOf(pplayer['name'].toLowerCase()) != -1) {
+      pstate = "<span style='color: #00FF00;'><b>Online</b></span>";
+    } else if (pplayer['phase_done'] && !pplayer['flags'].isSet(PLRF_AI)) {
       pstate = "Done";
     } else if (!pplayer['flags'].isSet(PLRF_AI)
                && pplayer['nturns_idle'] > 1) {

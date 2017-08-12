@@ -16,14 +16,6 @@ Various:
 
 Basically you can help improve Freeciv-web in any way you like, as long at it actually makes the game better! Other things to improve there:
 
-Major:
-- Update Freeciv-web to work with latest Freeciv.org Git master version.
-- Integrate Freeciv-web into Freeciv.org codebase as much as possible.
-- Merge all dialogs to use Handlebars templates. See city dialog for a starting example. http://handlebarsjs.com/
-- Remove need for patches in /freeciv/patches directory.
-- Remove freeciv-proxy, integrate a WebSocket server into the freeciv C server. Integrate http://libwebsockets.org into the Freeciv C server. This will be useful! 
-- Add better goto handling with display of the number of turns required for goto
-
 Medium:
 - Playback of games.
 - Show what city is a unit's homecity. 

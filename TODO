@@ -16,18 +16,6 @@ Various:
 
 Basically you can help improve Freeciv-web in any way you like, as long at it actually makes the game better! Other things to improve there:
 
-Medium:
-- Playback of games.
-- Show what city is a unit's homecity. 
-- Statue of liberty doesn't allow all governments.
-- Better interface to load units into boats and transports.
-- Planes goto get blocked by ground units.
-- Show number of turns a diplomatic agreement will last.
-- diplomats inside cities can't see units there.
-- Sometimes other countries won't "meet" even if you're in contact and are on good terms.
-- Cannot disband unit in city to gain half production back. However, disbanding on the map still seems to give you that bonus. It's just not clear/available in the city dialog. 
-
-
 Minor/Other:
 - Separate chat box from other messages.
 

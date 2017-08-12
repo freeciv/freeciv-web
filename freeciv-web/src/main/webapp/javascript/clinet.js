@@ -95,6 +95,7 @@ function websocket_init()
   };
 
   ws.onclose = function (event) {
+   swal("Network Error", "Connection to server is closed. Please reload the page to restart. Sorry!", "error");
    add_chatbox_text("Error: connection to server is closed. Please reload the page to restart. Sorry!");
    console.info("WebSocket connection closed, code+reason: " + event.code + ", " + event.reason);
    $("#turn_done_button").button( "option", "disabled", true);

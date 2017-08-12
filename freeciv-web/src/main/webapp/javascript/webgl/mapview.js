@@ -94,7 +94,7 @@ function webgl_start_renderer()
     return;
   }
 
-  if (is_small_screen()) {
+  if (is_small_screen() || $(window).width() <= 1366) {
     camera_dy = 390;
     camera_dx = 180;
     camera_dz = 180;

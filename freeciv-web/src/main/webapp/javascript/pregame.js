@@ -1001,7 +1001,8 @@ function show_intro_dialog(title, message) {
 
     try {
       var gl = document.createElement('canvas').getContext('webgl',{ failIfMajorPerformanceCaveat: true });
-      if (!gl) {
+      var is_microsoft_edge = (window.navigator.userAgent.indexOf("Edge") > -1);
+      if (!gl && !is_microsoft_edge) {
         show_dialog_message("WebGL not supported", "WebGL 3D with hardware acceleration is not supported. The 3D version will not work. Please try the 2D version.");
         return;
       } else {

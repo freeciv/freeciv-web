@@ -23,6 +23,8 @@ var QUALITY_HIGH = 3;   // best quality, add features which require high-end gra
 
 var graphics_quality = QUALITY_HIGH;
 
+var anaglyph_3d_enabled = false;
+
 /****************************************************************************
   Init the Freeciv-web WebGL renderer
 ****************************************************************************/

@@ -19,6 +19,7 @@
 
 var container, stats;
 var scene, maprenderer;
+var anaglyph_effect;
 
 var plane, cube;
 var mouse, raycaster, isShiftDown = false;
@@ -108,6 +109,11 @@ function webgl_start_renderer()
   maprenderer.setPixelRatio(window.devicePixelRatio);
   maprenderer.setSize(new_mapview_width, new_mapview_height);
   container.appendChild(maprenderer.domElement);
+
+  if (anaglyph_3d_enabled) {
+    anaglyph_effect = new THREE.AnaglyphEffect( maprenderer );
+    anaglyph_effect.setSize( new_mapview_width, new_mapview_height );
+  }
 
   if (location.hostname != "play.freeciv.org" && Detector.webgl) {
     stats = new Stats();
@@ -336,10 +342,12 @@ function animate() {
     selected_unit_material_counter++;
   }
 
-  if (!cardboard_vr_enabled) {
-    maprenderer.render(scene,camera );
-  } else {
+  if (anaglyph_3d_enabled) {
+    anaglyph_effect.render(scene,camera );
+  } else if (cardboard_vr_enabled) {
     stereoEffect.render(scene, camera);
+  } else {
+    maprenderer.render(scene,camera );
   }
 
   if (goto_active) check_request_goto_path();

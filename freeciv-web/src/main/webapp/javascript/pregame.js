@@ -578,14 +578,17 @@ function pregame_settings()
               "<option value='2'>Medium</option>" +
               "<option value='3'>High</option>" +
               "</select></td></tr>"+
-	    "<tr id='3d_antialiasing_enabled'><td id='3d_antialiasing_label' style='min-width: 150px;'></td>" +
+	    "<tr id='3d_antialiasing_enabled'><td id='3d_antialiasing_label' style='min-width: 150px;'><br></td>" +
         "<td><input type='checkbox' id='3d_antialiasing_setting' checked>Enable antialiasing (game looks nicer, but is slower)</td></tr>" +
         "<tr><td style='min-width: 150px;'>Benchmark of 3D WebGL version:</td>" +
                 "<td><button id='bechmark_run' type='button' class='benchmark button'>Run benchmark</button></td></tr>" +
+        "<tr id='anaglyph_enabled'><td id='anaglyph_label' style='min-width: 150px;'></td>" +
+                "<td><input type='checkbox' id='anaglyph_setting'>Enable Anaglyph 3D (Red+Cyan glasses) "+
+                "<br>"+
         "<tr id='cardboard_vr_enabled'><td id='cardboard_vr_label' style='min-width: 150px;'></td>" +
-                "<td><br><br><input type='checkbox' id='cardboard_vr_setting'>Enable Virtual reality glasses with Google Cardboard. <i class='fa fa-info-circle' aria-hidden='true' "+
+                "<td><input type='checkbox' id='cardboard_vr_setting'>Enable Virtual reality glasses with Google Cardboard. <i class='fa fa-info-circle' aria-hidden='true' "+
                 "title='You can use Google Cardboard glasses with your mobile phone. Use voice recognition to control the game. You must also manually disable screensavers in your device settings. Put your phone in the VR glasses when the game starts. BETA!'></i><br>"+
-                "<button id='show_voice_commands' type='button' class='voice button'>Voice commands</button></td></tr>" +
+                "<button id='show_voice_commands' type='button' class='voice button' style='padding:0px;'>Voice commands</button></td></tr>" +
         "</table>" +
       "</div>" +
 
@@ -707,7 +710,7 @@ function pregame_settings()
     $("#speech_setting").parent().html("Speech Synthesis API is not supported or enabled in your browser.");
   }
 
-  $("#cardboard_vr_label").prop("innerHTML", "3D Virtual Reality:");
+  $("#cardboard_vr_label").prop("innerHTML", "3D Cardboard VR glasses:");
   $('#cardboard_vr_setting').change(function() {
     cardboard_vr_enabled = !cardboard_vr_enabled;
     if (cardboard_vr_enabled) {
@@ -716,6 +719,10 @@ function pregame_settings()
     }
   });
 
+  $("#anaglyph_label").prop("innerHTML", "3D Anaglyph glasses:");
+  $('#anaglyph_setting').change(function() {
+    anaglyph_3d_enabled = !anaglyph_3d_enabled;
+  });
 
   if (server_settings['metamessage'] != null
       && server_settings['metamessage']['val'] != null) {

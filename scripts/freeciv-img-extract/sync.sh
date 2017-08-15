@@ -10,7 +10,13 @@ pngcrush pre-freeciv-web-tileset-trident-1.png freeciv-web-tileset-trident-1.png
 pngcrush pre-freeciv-web-tileset-isotrident-0.png freeciv-web-tileset-isotrident-0.png &&
 pngcrush pre-freeciv-web-tileset-isotrident-1.png freeciv-web-tileset-isotrident-1.png &&
 mkdir -p ../../freeciv-web/src/main/webapp/tileset &&
+echo "converting flag png files to webp ..." && 
+(for X in `find *.png` 
+do
+ cwebp -lossless $X -o ${X/.png/.webp}
+done) &&
 cp freeciv-web-tileset-*.png ../../freeciv-web/src/main/webapp/tileset/ &&
+cp freeciv-web-tileset-*.webp ../../freeciv-web/src/main/webapp/tileset/ &&
 cp tileset_spec_*.js ../../freeciv-web/src/main/webapp/javascript/2dcanvas/ && 
 echo "converting flag svg files to png..." && 
 mkdir -p ../../freeciv-web/src/main/webapp/images/flags/ &&

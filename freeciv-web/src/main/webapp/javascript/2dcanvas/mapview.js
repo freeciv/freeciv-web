@@ -137,7 +137,7 @@ function init_sprites()
       var tileset_image = new Image();
       tileset_image.onload = preload_check;
       tileset_image.src = '/tileset/freeciv-web-tileset-'
-                          + tileset_name + '-' + i + '.png?ts=' + ts;
+                          + tileset_name + '-' + i + get_tileset_file_extention() + '?ts=' + ts;
       tileset_images[i] = tileset_image;
     }
   } else {

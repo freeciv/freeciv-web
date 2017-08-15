@@ -123,6 +123,8 @@ Install this software if you are not running Freeciv-web with Vagrant:
 
 - liblzma-dev - http://tukaani.org/xz/ - for XZ compressed savegames.
 
+- cwebp to create .webp files of the tileset.
+
 
 Start and stop Freeciv-web with the following commands:  
   start-freeciv-web.sh  

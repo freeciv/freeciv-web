@@ -179,3 +179,16 @@ function seconds_to_human_time(input_seconds) {
   if (hours == 0 && minutes > 0) return minutes+'m '+seconds + 's';
   if (hours == 0 && minutes == 0) return seconds + 's';
 }
+
+/**************************************************************************
+ Returns the supported file format for the tileset.
+**************************************************************************/
+function get_tileset_file_extention()
+{
+  if (Modernizr.webp.lossless) {
+    return ".webp";
+  } else {
+    return ".png";
+  }
+
+}

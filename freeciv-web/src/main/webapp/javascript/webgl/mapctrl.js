@@ -143,7 +143,7 @@ function webglOnMouseWheel(e) {
   var new_camera_dy;
   var new_camera_dz;
 
-  if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
+  if (platform.name == "Firefox") {
     // Firefox special-case
     if(e.originalEvent.detail < 0) {
       // zoom in

@@ -81,7 +81,7 @@
 		<dependency>
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
-			<version>20160810</version>
+			<version>20170516</version>
 		</dependency>
 
 		<dependency>
@@ -189,7 +189,7 @@
 									<cssSourceFile>sweetalert.css</cssSourceFile>
 									<cssSourceFile>bluecurve.css</cssSourceFile>
 									<cssSourceFile>fg.menu.css</cssSourceFile>
-									<cssSourceFile>theme.dark.css</cssSourceFile>
+									<cssSourceFile>theme.dark.min.css</cssSourceFile>
 									<cssSourceFile>jquery.contextMenu.min.css</cssSourceFile>
 									<cssSourceFile>morris.css</cssSourceFile>
 									<cssSourceFile>spectrum.css</cssSourceFile>

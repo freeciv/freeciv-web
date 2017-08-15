@@ -185,7 +185,7 @@ function seconds_to_human_time(input_seconds) {
 **************************************************************************/
 function get_tileset_file_extention()
 {
-  if (Modernizr.webp.lossless) {
+  if (Modernizr.webp != null && Modernizr.webp.lossless) {
     return ".webp";
   } else {
     return ".png";

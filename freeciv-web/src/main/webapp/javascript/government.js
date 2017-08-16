@@ -77,7 +77,7 @@ function init_civ_dialog()
 
     var civ_description = "";
     if (!pnation['customized']) {
-	    civ_description += "<img src='/images/flags/" + tag + "-web.png' width='180'>";
+	    civ_description += "<img src='/images/flags/" + tag + "-web" + get_tileset_file_extention() + "' width='180'>";
 	}
 
     civ_description += "<br><div>" + pplayer['name'] + " rules the " + nations[pplayer['nation']]['adjective']

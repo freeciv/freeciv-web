@@ -343,8 +343,8 @@ function create_diplomacy_dialog(counterpart) {
     flag_self_html = "<canvas id='flag_self' width='58' height='40'></canvas>";
     flag_counterpart_html = "<canvas id='flag_counterpart' width='58' height='40'></canvas>";
   } else {
-    flag_self_html = "<img src='/images/flags/" + self_nation['graphic_str'] + "-web.png' id='flag_self'>";
-    flag_counterpart_html = "<img src='/images/flags/" + counterpart_nation['graphic_str'] + "-web.png' id='flag_counterpart'>";
+    flag_self_html = "<img src='/images/flags/" + self_nation['graphic_str'] + "-web" + get_tileset_file_extention() + "' id='flag_self'>";
+    flag_counterpart_html = "<img src='/images/flags/" + counterpart_nation['graphic_str'] + "-web" + get_tileset_file_extention() + "' id='flag_counterpart'>";
   }
 
   var player_info_html = "<div style='float:left; width: 70%;'><h3>"

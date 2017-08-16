@@ -580,5 +580,8 @@ function create_diplomacy_dialog(counterpart) {
 
   $("#diplomacy_dialog").parent().css("z-index", 1000);
 
+  // Disable trading with gold in LongTurn games, as this is commonly used when cheating with multipla accounts.
+  if (is_longturn()) $(".diplomacy_gold").remove();
+
 }
 

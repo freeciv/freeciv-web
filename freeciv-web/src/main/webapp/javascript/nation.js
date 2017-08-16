@@ -29,9 +29,9 @@ var selected_player = -1;
 function update_nation_screen()
 {
   var nation_list_html = "<table class='tablesorter' id='nation_table' width='95%' border=0 cellspacing=0 >"
-	  + "<thead><td>Flag</td><td>Color</td><td>Player Name:</td>"
-	  + "<td>Nation:</td><td>Attitude</td><td>Score</td><td>AI/Human</td><td>Alive?</td>"
-	  + "<td>Diplomatic state</td><td>Team</td><td>State</td></thead>";
+	  + "<thead><tr><th>Flag</th><th>Color</th><th>Player Name:</th>"
+	  + "<th>Nation:</th><th>Attitude</th><th>Score</th><th>AI/Human</th><th>Alive?</th>"
+	  + "<th>Diplomatic state</th><th>Team</th><th>State</th></tr></thead><tbody>";
 
   /* Fetch online (connected) players on this game from Freeciv-proxy. */
   var online_players_html = "";
@@ -94,16 +94,10 @@ function update_nation_screen()
 
 
   }
-  nation_list_html += "</table>";
+  nation_list_html += "</tbody></table>";
 
   $("#nations_list").html(nation_list_html);
   $(".nation_button").button();
-  if (!is_touch_device()) {
-    $("#nation_table").tablesorter({theme: "dark"});
-  } else if (is_small_screen()) {
-    $("#nations").height( mapview['height'] - 150);
-    $("#nations").width( mapview['width']);
-  }
 
   $("#nation_table").selectable({ filter: "tr",
        selected: function( event, ui ) {handle_nation_table_select(ui); } });
@@ -145,6 +139,13 @@ function update_nation_screen()
         flag_canvas_ctx.drawImage(sprites[tag], 0, 0);
       }
     }
+  }
+
+  if (!is_touch_device()) {
+    $("#nation_table").tablesorter({theme: "dark"});
+  } else if (is_small_screen()) {
+    $("#nations").height( mapview['height'] - 150);
+    $("#nations").width( mapview['width']);
   }
 
 }

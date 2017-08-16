@@ -1727,7 +1727,7 @@ function update_city_screen()
   if (observing) return;
 
   var sortList = [];
-  var headers = $('#city_table thead td');
+  var headers = $('#city_table thead th');
   headers.filter('.tablesorter-headerAsc').each(function (i, cell) {
     sortList.push([cell.cellIndex, 0]);
   });
@@ -1736,9 +1736,9 @@ function update_city_screen()
   });
 
   var city_list_html = "<table class='tablesorter' id='city_table' border=0 cellspacing=0>"
-        + "<thead><td>Name</td><td>Population</td><td>Size</td><td>State</td>"
-        + "<td>Granary</td><td>Grows In</td><td>Producing</td>"  
-        + "<td>Surplus<br>Food/Prod/Trade</td><td>Economy<br>Gold/Luxury/Science</td></thead>";
+        + "<thead><tr><th>Name</th><th>Population</th><th>Size</th><th>State</th>"
+        + "<th>Granary</th><th>Grows In</th><th>Producing</th>"
+        + "<th>Surplus<br>Food/Prod/Trade</th><th>Economy<br>Gold/Luxury/Science</th></tr></thead><tbody>";
   var count = 0;
   for (var city_id in cities){
     var pcity = cities[city_id];
@@ -1766,7 +1766,7 @@ function update_city_screen()
   }
 
 
-  city_list_html += "</table>";
+  city_list_html += "</tbody></table>";
   $("#cities_list").html(city_list_html);
 
   if (count == 0) {

@@ -440,8 +440,8 @@ function create_diplomacy_dialog(counterpart) {
       city_count_self += 1;
     }
   }
-  if (city_count_self == 0) {
-    $("#self_city_menu").hide();
+  if (city_count_self == 0 || is_longturn()) {
+    $("#self_city_menu").remove();
   }
 
   $("<li><a href='#' onclick='create_clause_req(" + pplayer['playerno']+ "," + CLAUSE_VISION + ",1);'>Give shared vision</a></li>").appendTo("#self_dipl_add");
@@ -499,8 +499,8 @@ function create_diplomacy_dialog(counterpart) {
       city_count_counterpart += 1;
     }
   }
-  if (city_count_counterpart == 0) {
-    $("#counterpart_city_menu").hide();
+  if (city_count_counterpart == 0 || is_longturn()) {
+    $("#counterpart_city_menu").remove();
   }
 
   $("<li><a href='#' onclick='create_clause_req(" + counterpart['playerno']+ "," + CLAUSE_VISION + ",1);'>Give shared vision</a></li>").appendTo("#counterpart_dipl_add");

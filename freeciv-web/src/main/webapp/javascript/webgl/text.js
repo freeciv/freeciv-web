@@ -18,7 +18,7 @@
 ***********************************************************************/
 
 var texture_cache = {};
-var webgl_mapview_font = 'Bold 23px Georgia, serif';
+var webgl_mapview_font = 'Bold 21px Georgia, serif';
 
 /****************************************************************************
  Convert a canvas to a mesh that will always face the user. The height of
@@ -134,7 +134,7 @@ function create_city_label(pcity)
   }
 
   if (width > 256) width = 256;
-  return canvas_to_user_facing_mesh(canvas, width, Math.floor(width * 0.65), 13, graphics_quality >= QUALITY_HIGH, "city_" + pcity['id']);
+  return canvas_to_user_facing_mesh(canvas, width, Math.floor(width * 0.6), 13, true, "city_" + pcity['id']);
 }
 
 /****************************************************************************
@@ -236,14 +236,14 @@ function create_unit_label(punit)
   context1.font = "Bold 16px Arial";
   context1.fillStyle = "rgba(222,255,0, 1.0)";
   context1.strokeStyle= "black";
-  context1.lineWidth = 0.5;
+  context1.lineWidth = 1.5;
 
   var text = get_unit_activity_text(punit);
   var width = context1.measureText(text).width;
-  context1.strokeText(text, 0, 16);
-  context1.fillText(text, 0, 16);
+  context1.strokeText(text, 0, 15);
+  context1.fillText(text, 0, 15);
 
-  return canvas_to_user_facing_mesh(canvas1, width, Math.floor(width * 0.8), 13, true, get_unit_activity_text(punit));
+  return canvas_to_user_facing_mesh(canvas1, width, 10, 13, true, get_unit_activity_text(punit));
 }
 
 
@@ -280,7 +280,7 @@ function create_map_tile_label(ptile)
   width += txt_measure.width + 11 /* padding */;
 
   if (width > 256) width = 256;
-  return canvas_to_user_facing_mesh(canvas, width, Math.floor(width * 0.7), 12, graphics_quality >= QUALITY_HIGH, "ptile_" + ptile['label']);
+  return canvas_to_user_facing_mesh(canvas, width, Math.floor(width * 0.7), 12, true, "ptile_" + ptile['label']);
 }
 
 /**********************************************************************
@@ -328,7 +328,7 @@ function get_unit_activity_text(punit)
       return "T";
 
     case ACTIVITY_FORTIFYING:
-      return "f";
+      return "F";
 
     case ACTIVITY_GEN_ROAD:
       return "R";

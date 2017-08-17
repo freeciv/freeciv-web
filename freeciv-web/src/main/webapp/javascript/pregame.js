@@ -901,8 +901,20 @@ function pregame_settings()
   $("#graphics_quality").val(graphics_quality);
 
   $(".benchmark").click(function() {
-    webgl_benchmark_run();
+    swal({
+      title: "Run benchmark?",
+      text: "Do you want to run a benchmark now? This will start a new game and run measure the performance of a game playing for 30 turns.",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#DD6B55",
+      confirmButtonText: "Yes, run benchmark!",
+      closeOnConfirm: true
+    },
+    function(){
+      webgl_benchmark_run();
+    });
   });
+
   if (renderer == RENDERER_WEBGL) {
     $(".benchmark").button();
     $("#show_voice_commands").button();

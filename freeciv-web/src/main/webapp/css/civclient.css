@@ -497,6 +497,10 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
   color: white;
 }
 
+.tablesorter-dark thead th {
+  font: 100% sans-serif;
+}
+
 .tablesorter-dark thead td {
   font: 100% sans-serif; 
 }

@@ -31,7 +31,7 @@ function update_nation_screen()
   var nation_list_html = "<table class='tablesorter' id='nation_table' width='95%' border=0 cellspacing=0 >"
 	  + "<thead><tr><th>Flag</th><th>Color</th><th>Player Name:</th>"
 	  + "<th>Nation:</th><th>Attitude</th><th>Score</th><th>AI/Human</th><th>Alive?</th>"
-	  + "<th>Diplomatic state</th><th>Team</th><th>State</th></tr></thead><tbody>";
+	  + "<th>Diplomatic state</th><th>Shared vision</th><th>Team</th><th>State</th></tr></thead><tbody>";
 
   /* Fetch online (connected) players on this game from Freeciv-proxy. */
   var online_players_html = "";
@@ -75,6 +75,20 @@ function update_nation_screen()
     } else {
       nation_list_html += "<td>-</td>";
     }
+
+    nation_list_html += "<td>"
+    if (!client_is_observer() && client.conn.playing != null) {
+      if (pplayer['gives_shared_vision'].isSet(client.conn.playing['playerno']) && client.conn.playing['gives_shared_vision'].isSet(player_id)) {
+        nation_list_html += "Both ways"
+      } else if (pplayer['gives_shared_vision'].isSet(client.conn.playing['playerno'])) {
+        nation_list_html += "To you"
+      } else if (client.conn.playing['gives_shared_vision'].isSet(player_id)) {
+        nation_list_html += "To them"
+      } else {
+        nation_list_html += "-"
+      }
+    }
+    nation_list_html += "</td>"
 
     nation_list_html += "<td>Team " + pplayer['team'] + "</td>";
     var pstate = " ";
@@ -218,6 +232,12 @@ function handle_nation_table_select( ui )
     }
   }
 
+  if (!client_is_observer() && client.conn.playing != null && client.conn.playing['gives_shared_vision'].isSet(player_id)) {
+    $('#withdraw_vision_button').button("enable");
+  } else {
+    $('#withdraw_vision_button').button("disable");
+  }
+
   if (!client_is_observer() && client.conn.playing != null && player_id != client.conn.playing['playerno']
     && diplstates[player_id] != DS_NO_CONTACT) {
     $("#intelligence_report_button").button("enable");
@@ -254,6 +274,20 @@ function cancel_treaty_clicked()
 {
   if (selected_player == -1) return;
   diplomacy_cancel_treaty(selected_player);
+  set_default_mapview_active();
+}
+
+/**************************************************************************
+ ...
+**************************************************************************/
+function withdraw_vision_clicked()
+{
+  if (selected_player == -1) return;
+
+  var packet = {"pid" : packet_diplomacy_cancel_pact,
+                "other_player_id" : selected_player,
+                "clause" : CLAUSE_VISION};
+  send_request(JSON.stringify(packet));
   set_default_mapview_active();
 }
 

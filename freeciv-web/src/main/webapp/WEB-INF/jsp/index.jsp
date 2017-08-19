@@ -267,15 +267,7 @@
 			<a href="https://play.google.com/store/apps/details?id=org.freeciv.play">
 				<fmt:message key="index-play-store"/>
 			</a>
-		</div>
-		<div id="microsoft-store" style="display: none;" class="alert alert-warning top-buffer-3" role="alert">
-			<a href="http://apps.microsoft.com/windows/app/freeciv/43da4eed-42cf-4105-87a2-e03f45ade081">
-				<img src="/static/images/microsoft-store.png" alt="">
-			</a>
-			<a href="http://apps.microsoft.com/windows/app/freeciv/43da4eed-42cf-4105-87a2-e03f45ade081">
-				<fmt:message key="index-microsoft-store"/>
-			</a>
-		</div> <!-- end apps/browser plugins -->
+		</div>  <!-- end apps/browser plugins -->
 
 		<div class="row top-buffer-1">
 			<div class="col-md-12 ">

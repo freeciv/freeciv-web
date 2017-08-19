@@ -73,8 +73,6 @@
 			$("#google-play-store").show();
 		} else if (ua.indexOf('chrome') >= 0) {
 			$("#chrome-web-store").show();
-		} else if (ua.indexOf('trident') >= 0) {
-			$("#microsoft-store").show();
 		}
 	}
 	

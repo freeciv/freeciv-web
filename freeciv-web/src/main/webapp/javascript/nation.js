@@ -33,17 +33,6 @@ function update_nation_screen()
 	  + "<th>Nation:</th><th>Attitude</th><th>Score</th><th>AI/Human</th><th>Alive?</th>"
 	  + "<th>Diplomatic state</th><th>Shared vision</th><th>Team</th><th>State</th></tr></thead><tbody>";
 
-  /* Fetch online (connected) players on this game from Freeciv-proxy. */
-  var online_players_html = "";
-  $.ajax({
-    url: "/civsocket/" + (parseInt(civserverport) + 1000) + "/status",
-    dataType: "html",
-    cache: false,
-    async: false
-  }).done(function( data ) {
-    online_players_html = data;
-  });
-
   for (var player_id in players) {
     var pplayer = players[player_id];
     if (pplayer['nation'] == -1) continue;
@@ -92,9 +81,7 @@ function update_nation_screen()
 
     nation_list_html += "<td>Team " + pplayer['team'] + "</td>";
     var pstate = " ";
-    if (online_players_html.toLowerCase().indexOf(pplayer['name'].toLowerCase()) != -1) {
-      pstate = "<span style='color: #00FF00;'><b>Online</b></span>";
-    } else if (pplayer['phase_done'] && !pplayer['flags'].isSet(PLRF_AI)) {
+    if (pplayer['phase_done'] && !pplayer['flags'].isSet(PLRF_AI)) {
       pstate = "Done";
     } else if (!pplayer['flags'].isSet(PLRF_AI)
                && pplayer['nturns_idle'] > 1) {
@@ -103,7 +90,7 @@ function update_nation_screen()
                && !pplayer['flags'].isSet(PLRF_AI)) {
       pstate = "Moving";
     }
-    nation_list_html += "<td>" + pstate + "</td>";
+    nation_list_html += "<td id='player_state_" + player_id + "'>" + pstate + "</td>";
     nation_list_html += "</tr>";
 
 
@@ -161,6 +148,22 @@ function update_nation_screen()
     $("#nations").height( mapview['height'] - 150);
     $("#nations").width( mapview['width']);
   }
+
+  /* Fetch online (connected) players on this game from Freeciv-proxy. */
+  $.ajax({
+    url: "/civsocket/" + (parseInt(civserverport) + 1000) + "/status",
+    dataType: "html",
+    cache: false,
+    async: true
+  }).done(function( data ) {
+    var online_players_html = data;
+    for (var player_id in players) {
+      var pplayer = players[player_id];
+      if (online_players_html.toLowerCase().indexOf(pplayer['name'].toLowerCase()) != -1) {
+        $("#player_state_" + player_id).html("<span style='color: #00EE00;'><b>Online</b></span>");
+      }
+    }
+  });
 
 }
 

@@ -51,6 +51,25 @@ var city_prod_clicks = 0;
 
 var pending_update_city_screen = null;
 
+var city_dialog_template = null;
+
+/**************************************************************************
+  Initialize the city dialog once the first time.
+**************************************************************************/
+function init_city_dialog()
+{
+  $.ajax({
+    url: "/webclient/city.hbs?ts=" + ts,
+    dataType: "html",
+    cache: true,
+    async: true
+  }).fail(function() {
+    swal("Unable to load city dialog template.");
+  }).done(function( data ) {
+    city_dialog_template = Handlebars.compile(data);
+  });
+}
+
 /**************************************************************************
  ...
 **************************************************************************/
@@ -148,17 +167,7 @@ function show_city_dialog(pcity)
 
   var city_data = {};
 
-  $.ajax({
-    url: "/webclient/city.hbs?ts=" + ts,
-    dataType: "html",
-    cache: true,
-    async: false
-  }).fail(function() {
-    console.error("Unable to load city dialog template.");
-  }).done(function( data ) {
-    var template=Handlebars.compile(data);
-    $("#city_dialog").html(template(city_data));
-  });
+  $("#city_dialog").html(city_dialog_template(city_data));
 
   $("#city_canvas").click(city_mapview_mouse_click);
 

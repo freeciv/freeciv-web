@@ -225,7 +225,7 @@ function load_model(filename)
 }
 
 /****************************************************************************
- Loads a single model file.
+ Returns a single 3D model mesh object.
 ****************************************************************************/
 function webgl_get_model(filename)
 {

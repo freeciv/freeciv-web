@@ -108,6 +108,7 @@ function civclient_init()
 
   game_init();
   control_init();
+  init_city_dialog();
 
   timeoutTimerId = setInterval(update_timeout, 1000);
 
@@ -146,8 +147,6 @@ function civclient_init()
   $("#tabs-cities").height("auto");
   $("#tabs-opt").height("auto");
   $("#tabs-hel").height("auto");
-
-
 
   $(".button").button();
 

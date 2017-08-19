@@ -35,6 +35,7 @@ function show_revolution_dialog()
   $(id).remove();
   $("<div id='revolution_dialog'></div>").appendTo("div#game_page");
 
+  if (client.conn.playing == null) return;
 
   var dhtml = "Current form of government: " + governments[client.conn.playing['government']]['name']
 	  + "<br>To start a revolution, select the new form of government:"

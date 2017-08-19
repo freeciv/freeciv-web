@@ -221,8 +221,10 @@ function show_new_game_message()
 
   } else if (client.conn.playing != null && !game_loaded) {
     var pplayer = client.conn.playing;
-    var player_nation_text = "Welcome, " + username + " ruler of the " 
-        + nations[pplayer['nation']]['adjective'] + " empire.";
+    var player_nation_text = "Welcome, " + username;
+    if (client.conn.playing != null) {
+        player_nation_text += " ruler of the " + nations[pplayer['nation']]['adjective'] + " empire.";
+    }
 
     if (is_touch_device()) {
       add_chatbox_text(player_nation_text + " Your\n" +
@@ -245,10 +247,11 @@ function show_new_game_message()
 
     }
   } else if (game_loaded) {
-    var pplayer = client.conn.playing;
-    var player_nation_text = "Welcome back, " + username + " ruler of the "
-        + nations[pplayer['nation']]['adjective'] + " empire.";
-      add_chatbox_text(player_nation_text);
+    var player_nation_text = "Welcome back, " + username;
+    if (client.conn.playing != null) {
+     player_nation_text += " ruler of the " + nations[client.conn.playing['nation']]['adjective'] + " empire.";
+    }
+    add_chatbox_text(player_nation_text);
   }
 }
 

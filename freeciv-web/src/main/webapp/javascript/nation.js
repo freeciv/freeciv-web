@@ -142,13 +142,6 @@ function update_nation_screen()
     }
   }
 
-  if (!is_touch_device()) {
-    $("#nation_table").tablesorter({theme: "dark"});
-  } else if (is_small_screen()) {
-    $("#nations").height( mapview['height'] - 150);
-    $("#nations").width( mapview['width']);
-  }
-
   /* Fetch online (connected) players on this game from Freeciv-proxy. */
   $.ajax({
     url: "/civsocket/" + (parseInt(civserverport) + 1000) + "/status",
@@ -163,6 +156,14 @@ function update_nation_screen()
         $("#player_state_" + player_id).html("<span style='color: #00EE00;'><b>Online</b></span>");
       }
     }
+
+    if (!is_touch_device()) {
+      $("#nation_table").tablesorter({theme: "dark"});
+    } else if (is_small_screen()) {
+      $("#nations").height( mapview['height'] - 150);
+      $("#nations").width( mapview['width']);
+    }
+
   });
 
 }
@@ -194,7 +195,8 @@ function handle_nation_table_select( ui )
 
   if (pplayer != null && pplayer['is_alive'] && (client_is_observer()
       || (client.conn.playing != null && player_id == client.conn.playing['playerno'])
-      || (diplstates[player_id] != null && diplstates[player_id] != DS_NO_CONTACT))) {
+      || (diplstates[player_id] != null && diplstates[player_id] != DS_NO_CONTACT)
+      || client_state() == C_S_OVER)) {
     $('#view_player_button').button("enable");
   } else {
     $('#view_player_button').button("disable");

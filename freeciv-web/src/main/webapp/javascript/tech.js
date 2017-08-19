@@ -80,7 +80,9 @@ var tech_item_height = 52;
 var maxleft = 0;
 var clicked_tech_id = null;
 
-var pending_update_bulbs_output = null;
+var bulbs_output_updater = new EventAggregator(update_bulbs_output_info, 250,
+                                               EventAggregator.DP_NONE,
+                                               250, 3, 250);
 
 /**************************************************************************
   Returns state of the tech for current pplayer.
@@ -902,18 +904,8 @@ function get_current_bulbs_output_text(cbo)
 **************************************************************************/
 function update_bulbs_output_info()
 {
-  pending_update_bulbs_output = null;
   var cbo = get_current_bulbs_output();
   $('#bulbs_output').html(get_current_bulbs_output_text(cbo));
   update_net_bulbs(cbo.self_bulbs - cbo.self_upkeep);
 }
 
-/**************************************************************************
- Queues an update to the bulbs output info.
-**************************************************************************/
-function request_update_bulbs_output()
-{
-  if (pending_update_bulbs_output === null) {
-    pending_update_bulbs_output = setTimeout(update_bulbs_output_info, 500);
-  }
-}

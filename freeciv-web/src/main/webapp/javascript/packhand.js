@@ -320,8 +320,8 @@ function handle_web_city_info_addition(packet)
   }
 
   /* Update the cities info tab */
-  request_update_city_screen();
-  request_update_bulbs_output();
+  city_screen_updater.update();
+  bulbs_output_updater.update();
 }
 
 /* 99% complete
@@ -345,8 +345,8 @@ function handle_city_short_info(packet)
   }
 
   /* Update the cities info tab */
-  request_update_city_screen();
-  request_update_bulbs_output();
+  city_screen_updater.update();
+  bulbs_output_updater.update();
 }
 
 /**************************************************************************
@@ -1484,7 +1484,7 @@ function handle_research_info(packet)
   }
 
   if (is_tech_tree_init && tech_dialog_active) update_tech_screen();
-  request_update_bulbs_output();
+  bulbs_output_updater.update();
 }
 
 function handle_worker_task(packet)

@@ -73,24 +73,26 @@ EventAggregator.prototype.setTimeout = function (delay) {
 
 // Calls the handler with no delay.
 EventAggregator.prototype.fireNow = function () {
-  var count = this.count;
-  var data = this.data;
-  this.cancel();
-  this.clear();
-  switch (this.dataPolicy) {
-  case EventAggregator.DP_FIRST:
-  case EventAggregator.DP_LAST:
-  case EventAggregator.DP_ALL:
-    this.handler(data);
-    break;
-  case EventAggregator.DP_COUNT:
-    this.handler(count);
-    break;
-  default:
-    this.handler();
-  }
-  if (this.latency > 0) {
-    this.timer = this.setTimeout(this.latency);
+  if (this.count > 0) {
+    var count = this.count;
+    var data = this.data;
+    this.cancel();
+    this.clear();
+    switch (this.dataPolicy) {
+    case EventAggregator.DP_FIRST:
+    case EventAggregator.DP_LAST:
+    case EventAggregator.DP_ALL:
+      this.handler(data);
+      break;
+    case EventAggregator.DP_COUNT:
+      this.handler(count);
+      break;
+    default:
+      this.handler();
+    }
+    if (this.latency > 0) {
+      this.timer = this.setTimeout(this.latency);
+    }
   }
 }
 
@@ -124,13 +126,9 @@ EventAggregator.prototype.fired = function () {
     this.burst = false;
     this.delays++;
     this.timer = this.setTimeout(this.delayTimeout);
-  } else if (this.count > 0) {
-    // Only one event received in last timeout, or no more latency
+  } else {
     this.timer = null;
     this.fireNow();
-  } else {
-    // No event received during last latency pause
-    this.timer = null;
   }
 }
 

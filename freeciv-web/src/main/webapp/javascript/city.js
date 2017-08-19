@@ -49,7 +49,9 @@ var INCITE_IMPOSSIBLE_COST = (1000 * 1000 * 1000);
 var city_tab_index = 0;
 var city_prod_clicks = 0;
 
-var pending_update_city_screen = null;
+var city_screen_updater = new EventAggregator(update_city_screen, 250,
+                                              EventAggregator.DP_NONE,
+                                              250, 3, 250);
 
 var city_dialog_template = null;
 
@@ -112,8 +114,8 @@ function remove_city(pcity_id)
   delete cities[pcity_id];
   if (renderer == RENDERER_WEBGL) update_city_position(ptile);
   if (update) {
-    request_update_city_screen();
-    request_update_bulbs_output();
+    city_screen_updater.update();
+    bulbs_output_updater.update();
   }
 
 }
@@ -881,7 +883,7 @@ function next_city()
 {
   if (!client.conn.playing) return;
 
-  ensure_city_screen_is_updated();
+  city_screen_updater.fireNow();
 
   var next_row = $('#cities_list_' + active_city['id']).next();
   if (next_row.length === 0) {
@@ -902,7 +904,7 @@ function previous_city()
 {
   if (!client.conn.playing) return;
 
-  ensure_city_screen_is_updated();
+  city_screen_updater.fireNow();
 
   var prev_row = $('#cities_list_' + active_city['id']).prev();
   if (prev_row.length === 0) {
@@ -1706,33 +1708,10 @@ function city_worklist_task_remove()
 }
 
 /**************************************************************************
- Queues an update to the Cities tab, to coalesce bursts of changes.
-**************************************************************************/
-function request_update_city_screen()
-{
-  if (pending_update_city_screen === null) {
-    pending_update_city_screen = setTimeout(update_city_screen, 500);
-  }
-}
-
-/**************************************************************************
- Updates the Cities tab if there are pending requests.
-**************************************************************************/
-function ensure_city_screen_is_updated()
-{
-  if (pending_update_city_screen !== null) {
-    clearTimeout(pending_update_city_screen);
-    update_city_screen();
-  }
-}
-
-/**************************************************************************
  Updates the Cities tab when clicked, populating the table.
 **************************************************************************/
 function update_city_screen()
 {
-  pending_update_city_screen = null;
-
   if (observing) return;
 
   var sortList = [];

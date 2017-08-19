@@ -198,6 +198,9 @@
 								</cssSourceFiles>
 								<jsSourceDir>javascript</jsSourceDir>
 								<jsFinalFile>webclient.js</jsFinalFile>
+								<jsSourceFiles>
+									<jsSourceFile>libs/EventAggregator.js</jsSourceFile>
+								</jsSourceFiles>
 								<jsSourceIncludes>
 									<jsSourceInclude>*.js</jsSourceInclude>
 									<jsSourceInclude>libs/*.js</jsSourceInclude>

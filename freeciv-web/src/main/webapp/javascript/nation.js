@@ -31,7 +31,7 @@ function update_nation_screen()
   var nation_list_html = "<table class='tablesorter' id='nation_table' width='95%' border=0 cellspacing=0 >"
 	  + "<thead><tr><th>Flag</th><th>Color</th><th>Player Name:</th>"
 	  + "<th>Nation:</th><th>Attitude</th><th>Score</th><th>AI/Human</th><th>Alive?</th>"
-	  + "<th>Diplomatic state</th><th>Shared vision</th><th>Team</th><th>State</th></tr></thead><tbody>";
+	  + "<th>Diplomatic state</th><th>Embassy</th><th>Shared vision</th><th>Team</th><th>State</th></tr></thead><tbody>";
 
   for (var player_id in players) {
     var pplayer = players[player_id];
@@ -64,6 +64,8 @@ function update_nation_screen()
     } else {
       nation_list_html += "<td>-</td>";
     }
+
+    nation_list_html += "<td>" + get_embassy_text(player_id) + "</td>";
 
     nation_list_html += "<td>"
     if (!client_is_observer() && client.conn.playing != null) {
@@ -142,6 +144,13 @@ function update_nation_screen()
     }
   }
 
+  if (!is_touch_device()) {
+    $("#nation_table").tablesorter({theme: "dark", sortList: [[2,0]] });
+   } else if (is_small_screen()) {
+    $("#nations").height( mapview['height'] - 150);
+    $("#nations").width( mapview['width']);
+  }
+
   /* Fetch online (connected) players on this game from Freeciv-proxy. */
   $.ajax({
     url: "/civsocket/" + (parseInt(civserverport) + 1000) + "/status",
@@ -156,14 +165,9 @@ function update_nation_screen()
         $("#player_state_" + player_id).html("<span style='color: #00EE00;'><b>Online</b></span>");
       }
     }
-
     if (!is_touch_device()) {
       $("#nation_table").tablesorter({theme: "dark"});
-    } else if (is_small_screen()) {
-      $("#nations").height( mapview['height'] - 150);
-      $("#nations").width( mapview['width']);
     }
-
   });
 
 }

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 '''
- Freeciv - Copyright (C) 2009-2014 - Andreas Røsdal   andrearo@pvv.ntnu.no
+ Freeciv - Copyright (C) 2009-2017 - Andreas Røsdal   andrearo@pvv.ntnu.no
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation; either version 2, or (at your option)
@@ -13,7 +13,6 @@
    GNU General Public License for more details.
 '''
 
-
 import sys
 from time import gmtime, strftime
 import os
@@ -23,9 +22,7 @@ import time
 from tornado import version as tornado_version
 import gc
 
-
 startTime = time.time()
-
 
 def get_debug_info(civcoms):
     code = "<html><head><meta http-equiv=\"refresh\" content=\"20\">" \
@@ -51,14 +48,6 @@ def get_debug_info(civcoms):
 
     code += ("Tornado version %s <br>" % (tornado_version))
     code += ("Number of threads: %i <br>" % (threading.activeCount()))
-
-    try:
-        f = open("/proc/loadavg")
-        contents = f.read()
-        code += "Load average: " + contents
-        f.close()
-    except:
-        print("Cannot open uptime file: /proc/uptime")
 
     try:
         code += ("<h3>Logged in users  (count %i) :</h3>" % len(civcoms))

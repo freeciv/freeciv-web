@@ -138,6 +138,26 @@ function get_diplstate_text(state_id)
 /**************************************************************************
   ...
 **************************************************************************/
+function get_embassy_text(player_id)
+{
+  if (client_is_observer() || client.conn.playing == null) return "-";
+  var pplayer = players[player_id];
+
+  if (player_id == client.conn.playing['playerno']) {
+    return "-";
+  } else if (client.conn.playing.real_embassy[player_id]) {
+    return "We have embassy";
+  } else if (pplayer.real_embassy[client.conn.playing['playerno']]) {
+    return "They have embassy";
+  } else {
+    return "No embassy"
+  }
+
+}
+
+/**************************************************************************
+  ...
+**************************************************************************/
 function get_ai_level_text(player)
 {
   var ai_level = player['ai_skill_level'];

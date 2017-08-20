@@ -6,19 +6,19 @@
   "background_color": "#fff",
   "description": "Freeciv is a Free and Open Source empire-building strategy game inspired by the history of human civilization.",
   "icons": [{
-    "src": "static/images/apple-touch-icon.png",
+    "src": "/static/images/apple-touch-icon.png",
     "sizes": "150x157",
     "type": "image/png"
   },{
-    "src": "static/images/favicon.png",
+    "src": "/static/images/favicon.png",
     "sizes": "32x32",
     "type": "image/png"
   },{
-    "src": "images/freeciv-splash3.png",
+    "src": "/images/freeciv-splash3.png",
     "sizes": "128x128",
     "type": "image/png"
   },{
-    "src": "static/images/freeciv-splash-icon.png",
+    "src": "/static/images/freeciv-splash-icon.png",
     "sizes": "144x144",
     "type": "image/png"
   }  ],

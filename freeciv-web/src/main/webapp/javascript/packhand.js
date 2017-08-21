@@ -670,7 +670,6 @@ function handle_unit_packet_common(packet_unit)
   var need_update_menus = true;
   var repaint_unit = true;
   var repaint_city = true;
-  var old_tile = true;
   var check_focus = true;
   var moved = true;
   var ret = true;

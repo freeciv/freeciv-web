@@ -315,11 +315,11 @@ function fill_sprite_array(layer, ptile, pedge, pcorner, punit, pcity, citymode)
          sprite_array.push({"key" : "explode.unit_1",
            "offset_x" : unit_offset_x,
            "offset_y" : unit_offset_y});
-       } else if (explode_step > 20) {
+       } else if (explode_step > 10) {
          sprite_array.push({"key" : "explode.unit_2",
            "offset_x" : unit_offset_x,
            "offset_y" : unit_offset_y});
-       } else if (explode_step > 10) {
+       } else if (explode_step > 5) {
          sprite_array.push({"key" : "explode.unit_3",
            "offset_x" : unit_offset_x,
            "offset_y" : unit_offset_y});
@@ -435,20 +435,19 @@ function fill_terrain_sprite_array(l, ptile, pterrain, tterrain_near)
           var result_sprites = [];
       	   if (dlp['dither'] == true) {
              for (var i = 0; i < num_cardinal_tileset_dirs; i++) {
-               var dir = cardinal_tileset_dirs[i];
                if (ts_tiles[tterrain_near[DIR4_TO_DIR8[i]]['graphic_str']] == null) continue;
                var near_dlp = tile_types_setup["l" + l + "." + tterrain_near[DIR4_TO_DIR8[i]]['graphic_str']];
-	       var terrain_near = (near_dlp['dither'] == true) ?  tterrain_near[DIR4_TO_DIR8[i]]['graphic_str'] : pterrain['graphic_str'];
-	       var dither_tile = i + pterrain['graphic_str'] + "_" +  terrain_near;
+	           var terrain_near = (near_dlp['dither'] == true) ?  tterrain_near[DIR4_TO_DIR8[i]]['graphic_str'] : pterrain['graphic_str'];
+	           var dither_tile = i + pterrain['graphic_str'] + "_" +  terrain_near;
                var x = dither_offset_x[i];
                var y = dither_offset_y[i];
-	       result_sprites.push({"key": dither_tile, "offset_x" : x, "offset_y" : y});
+	           result_sprites.push({"key": dither_tile, "offset_x" : x, "offset_y" : y});
              }
-	     return result_sprites;
+	        return result_sprites;
 
-	   } else {
+	       } else {
              return [ {"key" : "t.l" + l + "." + pterrain['graphic_str'] + 1} ];
-	   }
+	       }
           break;
         }
 
@@ -466,7 +465,7 @@ function fill_terrain_sprite_array(l, ptile, pterrain, tterrain_near)
             }
           }
           var gfx_key = "t.l" + l + "." + pterrain['graphic_str'] + "_" + cardinal_index_str(tileno);
-	  var y = tileset_tile_height - tileset[gfx_key][3];
+	      var y = tileset_tile_height - tileset[gfx_key][3];
 
           return [ {"key" : gfx_key, "offset_x" : 0, "offset_y" : y} ];
           break;

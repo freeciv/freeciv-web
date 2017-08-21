@@ -199,9 +199,9 @@ function update_tax_rates ()
   if (s_lux.getValue() % 10 != 0) s_lux.setValue(s_lux.getValue() - (s_lux.getValue() % 10));
   if (s_sci.getValue() % 10 != 0) s_sci.setValue(s_sci.getValue() - (s_sci.getValue() % 10));
 
-  lock_tax = document.rates.lock[0].checked;
-  lock_lux = document.rates.lock[1].checked;
-  lock_sci = document.rates.lock[2].checked;
+  var lock_tax = document.rates.lock[0].checked;
+  var lock_lux = document.rates.lock[1].checked;
+  var lock_sci = document.rates.lock[2].checked;
 
   tax = s_tax.getValue();
   lux = s_lux.getValue();
@@ -246,9 +246,9 @@ function update_lux_rates ()
   if (s_lux.getValue() % 10 != 0) s_lux.setValue(s_lux.getValue() - (s_lux.getValue() % 10));
   if (s_sci.getValue() % 10 != 0) s_sci.setValue(s_sci.getValue() - (s_sci.getValue() % 10));
 
-  lock_tax = document.rates.lock[0].checked;
-  lock_lux = document.rates.lock[1].checked;
-  lock_sci = document.rates.lock[2].checked;
+  var lock_tax = document.rates.lock[0].checked;
+  var lock_lux = document.rates.lock[1].checked;
+  var lock_sci = document.rates.lock[2].checked;
 
   tax = s_tax.getValue();
   lux = s_lux.getValue();
@@ -293,9 +293,9 @@ function update_sci_rates ()
   if (s_lux.getValue() % 10 != 0) s_lux.setValue(s_lux.getValue() - (s_lux.getValue() % 10));
   if (s_sci.getValue() % 10 != 0) s_sci.setValue(s_sci.getValue() - (s_sci.getValue() % 10));
 
-  lock_tax = document.rates.lock[0].checked;
-  lock_lux = document.rates.lock[1].checked;
-  lock_sci = document.rates.lock[2].checked;
+  var lock_tax = document.rates.lock[0].checked;
+  var lock_lux = document.rates.lock[1].checked;
+  var lock_sci = document.rates.lock[2].checked;
 
   tax = s_tax.getValue();
   lux = s_lux.getValue();

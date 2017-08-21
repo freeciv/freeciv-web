@@ -135,9 +135,9 @@ function update_player_info_pregame_real()
 {
   var id;
   if (C_S_PREPARING == client_state()) {
-    player_html = "";
+    var player_html = "";
     for (id in players) {
-      player = players[id];
+      var player = players[id];
       if (player != null) {
         if (player['name'].indexOf("AI") != -1) {
           player_html += "<div id='pregame_plr_" + id
@@ -154,7 +154,7 @@ function update_player_info_pregame_real()
 
     /* show player ready state in pregame dialog */
     for (id in players) {
-      player = players[id];
+      var player = players[id];
       var nation_text = "";
       if (player['nation'] in nations) {
         nation_text = " - " + nations[player['nation']]['adjective'];
@@ -1047,8 +1047,7 @@ function show_intro_dialog(title, message) {
     } else {
       intro_html += "High quality.";
     }
-    intro_html += " Current WebGL renderer: " + renderer_name;
-    "</small></span>";
+    intro_html += " Current WebGL renderer: " + renderer_name + "</small></span>";
   }
   $("#dialog").html(intro_html);
   var stored_username = simpleStorage.get("username", "");

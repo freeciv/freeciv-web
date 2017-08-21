@@ -147,7 +147,7 @@ function init_webgl_mapview() {
       fog: false
   } );
 
-  mirrorMesh = new THREE.Mesh(
+  var mirrorMesh = new THREE.Mesh(
     new THREE.PlaneBufferGeometry( mapview_model_width, mapview_model_height),
     water.material
   );

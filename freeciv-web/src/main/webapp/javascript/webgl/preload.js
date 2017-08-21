@@ -228,7 +228,7 @@ function load_model(filename)
 function webgl_get_model(filename)
 {
   if (webgl_models[filename] != null) {
-    return webgl_models[filename].clone();;
+    return webgl_models[filename].clone();
   } else {
     return null;
   }

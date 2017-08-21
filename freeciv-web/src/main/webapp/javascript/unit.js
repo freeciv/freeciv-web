@@ -374,7 +374,7 @@ function unittype_ids_alphabetic()
   var unit_type;
   var unit_id;
   for (unit_id in unit_types) {
-    punit_type = unit_types[unit_id];
+    var punit_type = unit_types[unit_id];
     unittype_names.push(punit_type['name']);
   }
 

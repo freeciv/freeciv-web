@@ -82,8 +82,10 @@ class MapHandler(web.RequestHandler):
     savecounter += 1;
     new_filename =  savegame_filename + str(savecounter); 
     save_file = open(savedir + new_filename + ".sav", "w");
-    save_file.write(user_new_savegame);
-    save_file.close()
+    try:
+      save_file.write(user_new_savegame);
+    finally:
+      save_file.close()
 
     #return new savegame filename to user.
     self.write(new_filename);

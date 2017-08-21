@@ -214,9 +214,9 @@ function init_common_intro_dialog() {
       "Please be polite to the other players. Please join the LongTurn game only if you are "+
       "interested in playing one turn every day.<br>" +
       "Players who are idle for more than 12 turns can be replaced by new players. This means that idle players will continually be replaced by new players.<br>" +
-      "You will get to play for turn immediately after signing up, and your next turn tomorrow.<br><br>"
+      "You will get to play for turn immediately after signing up, and your next turn tomorrow.<br><br>" +
       "Joining this game requires an account, so please create one if you don't have one already."+
-      +" <br><br>"
+      " <br><br>"
     msg += "Please enter your name: "
     show_intro_dialog("Welcome to Freeciv-web", msg);
   } else {
@@ -280,8 +280,6 @@ function init_chatbox()
 **************************************************************************/
 function add_chatbox_text(text)
 {
-    var scrollDiv;
-
     if (civclient_state <= C_S_PREPARING) {
       text = text.replace(/#FFFFFF/g, '#000000');
     } else {
@@ -308,6 +306,7 @@ function add_chatbox_text(text)
 **************************************************************************/
 function update_chatbox()
 {
+  var scrollDiv;
   if (civclient_state <= C_S_PREPARING) {
       scrollDiv = document.getElementById('pregame_message_area');
   } else {

@@ -568,15 +568,15 @@ function advance_unit_focus()
 **************************************************************************/
 function update_unit_order_commands()
 {
-  var i;
+  var i, r;
   var punit;
   var ptype;
   var pcity;
+  var ptile;
   var unit_actions = {};
   var funits = get_units_in_focus();
   for (i = 0; i < funits.length; i++) {
     punit = funits[i];
-    ptype = unit_type(punit);
     ptile = index_to_tile(punit['tile']);
     if (ptile == null) continue;
     pcity = tile_city(ptile);
@@ -774,7 +774,6 @@ function update_unit_order_commands()
     if (ptype['transport_capacity'] > 0 && units_on_tile.length >= 2) {
       for (r = 0; r < units_on_tile.length; r++) {
         var tunit = units_on_tile[r];
-        var ntype = unit_type(tunit);
         if (tunit['transported']) {
           unit_actions["unit_show_cargo"] = {name: "Activate cargo units"};
           if (pcity != null) unit_actions["unit_unload"] = {name: "Unload units from transport (T)"};
@@ -1895,7 +1894,6 @@ function key_unit_unload()
 
   for (var i = 0; i < units_on_tile.length; i++) {
     var punit = units_on_tile[i];
-    var ptile = index_to_tile(punit['tile']);
     if (punit['transported'] && punit['transported_by'] > 0 ) {
       var packet = {
         "pid"         : packet_unit_unload,
@@ -1925,7 +1923,6 @@ function key_unit_show_cargo()
   current_focus = [];
   for (var i = 0; i < units_on_tile.length; i++) {
     var punit = units_on_tile[i];
-    var ptile = index_to_tile(punit['tile']);
     if (punit['transported'] && punit['transported_by'] > 0 ) {
       current_focus.push(punit);
     }

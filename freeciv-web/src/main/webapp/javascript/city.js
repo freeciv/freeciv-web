@@ -149,7 +149,7 @@ function show_city_dialog_by_id(pcity_id)
 **************************************************************************/
 function show_city_dialog(pcity)
 {
-  var turns_to_complete = FC_INFINITY;
+  var turns_to_complete;
   var sprite;
   var punit;
   var ptype;
@@ -291,7 +291,6 @@ function show_city_dialog(pcity)
     var present_units_html = "";
     for (var r = 0; r < punits.length; r++) {
       punit = punits[r];
-      ptype = unit_type(punit);
       sprite = get_unit_image_sprite(punit);
       if (sprite == null) {
          console.log("Missing sprite for " + punit);
@@ -315,7 +314,6 @@ function show_city_dialog(pcity)
     var supported_units_html = "";
     for (var t = 0; t < sunits.length; t++) {
       punit = sunits[t];
-      ptype = unit_type(punit);
       sprite = get_unit_image_sprite(punit);
       if (sprite == null) {
          console.log("Missing sprite for " + punit);
@@ -508,7 +506,7 @@ function get_production_progress(pcity)
 
   if (pcity['production_kind'] == VUT_UTYPE) {
     var punit_type = unit_types[pcity['production_value']];
-    return  pcity['shield_stock'] + "/" + universal_build_shield_cost(punit_type);;
+    return  pcity['shield_stock'] + "/" + universal_build_shield_cost(punit_type);
   }
 
   if (pcity['production_kind'] == VUT_IMPROVEMENT) {
@@ -516,7 +514,7 @@ function get_production_progress(pcity)
     if (improvement['name'] == "Coinage") {
       return " ";
     }
-    return  pcity['shield_stock'] + "/" + universal_build_shield_cost(improvement);;
+    return  pcity['shield_stock'] + "/" + universal_build_shield_cost(improvement);
   }
 
   return " ";
@@ -962,7 +960,7 @@ function city_turns_to_growth_text(pcity)
 **************************************************************************/
 function get_city_dxy_to_index(dx, dy, ctile)
 {
-  city_tile_map = {};
+  var city_tile_map = {};
   city_tile_map[" 00"] = 0;
   city_tile_map[" 10"] = 1;
   city_tile_map[" 01"] = 2;
@@ -1214,7 +1212,7 @@ function city_worklist_dialog(pcity)
   var worklist_html = "<table class='worklist_table'><tr><td>Type</td><td>Name</td><td>Cost</td></tr>";
   for (var j = 0; j < universals_list.length; j++) {
     var universal = universals_list[j];
-    sprite = universal['sprite'];
+    var sprite = universal['sprite'];
     if (sprite == null) {
       console.log("Missing sprite for " + universal[j]['name']);
       continue;
@@ -1236,7 +1234,7 @@ function city_worklist_dialog(pcity)
   var production_list = generate_production_list(pcity);
   var production_html = "<table class='worklist_table'><tr><td>Type</td><td>Name</td><td title='Attack/Defense/Firepower'>Info</td><td>Cost</td></tr>";
   for (var a = 0; a < production_list.length; a++) {
-    sprite = production_list[a]['sprite'];
+    var sprite = production_list[a]['sprite'];
     if (sprite == null) {
       console.log("Missing sprite for " + production_list[a]['value']);
       continue;

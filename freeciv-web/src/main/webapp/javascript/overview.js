@@ -167,10 +167,10 @@ function render_viewrect(grid)
 
   if (renderer == RENDERER_2DCANVAS && mapview['gui_x0'] != 0 && mapview['gui_y0'] != 0) {
 
-    r = base_canvas_to_map_pos(0, 0);
-    s = base_canvas_to_map_pos(mapview['width'], 0);
-    t = base_canvas_to_map_pos(0, mapview['height']);
-    u = base_canvas_to_map_pos(mapview['width'], mapview['height']);
+    var r = base_canvas_to_map_pos(0, 0);
+    var s = base_canvas_to_map_pos(mapview['width'], 0);
+    var t = base_canvas_to_map_pos(0, mapview['height']);
+    var u = base_canvas_to_map_pos(mapview['width'], mapview['height']);
 
     drawLine(grid, r['map_y'], r['map_x'], s['map_y'], s['map_x']);
     drawLine(grid, s['map_y'], s['map_x'], u['map_y'], u['map_x']);

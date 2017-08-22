@@ -657,8 +657,8 @@ function popup_steal_tech_selection_dialog(actor_unit, target_city,
       /* Add a button for stealing this tech to the dialog. */
       buttons.push(create_steal_tech_button(id, tech,
                                             actor_unit['id'],
-                                            target_city['id']),
-                                            action_id);
+                                            target_city['id'],
+                                            action_id));
     }
   }
 

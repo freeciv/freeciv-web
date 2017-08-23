@@ -1,0 +1,26 @@
+commit cc10fa462975541b0e5b61fd2a58911dfa7037b9
+Author: Jacob Nevins <0jacobnk.fcdev@chiark.greenend.org.uk>
+Date:   Mon Aug 21 21:27:16 2017 +0100
+
+    Fix multiplayer ruleset Darwin's Voyage.
+    
+    An edit was missed during gna patch #6531, leading to a Lua syntax error
+    upon building Darwin's Voyage, and no free techs.
+    
+    Reported by "pungtryne" on the forum.
+    
+    See hrm bug #692096.
+
+diff --git a/data/multiplayer/script.lua b/data/multiplayer/script.lua
+index c8868fb354..edb6d73ff6 100644
+--- a/data/multiplayer/script.lua
++++ b/data/multiplayer/script.lua
+@@ -38,7 +38,7 @@ function building_built_handler(btype, city)
+     -- This also prevents those they share research with from getting two
+     -- free advances from building Darwin`s Voyage themselves.
+     if player:give_tech(find.tech_type("Theory of Evolution"),
+-                        0, "researched") then
++                        0, false, "researched") then
+       -- Give the player two free advances.
+       gained[0] = player:give_tech(nil, 0, false, "researched")
+       gained[1] = player:give_tech(nil, 0, false, "researched")

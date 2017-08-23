@@ -100,12 +100,17 @@ function update_nation_screen()
   nation_list_html += "</tbody></table>";
 
   $("#nations_list").html(nation_list_html);
-  $(".nation_button").button();
 
   $("#nation_table").selectable({ filter: "tr",
-       selected: function( event, ui ) {handle_nation_table_select(ui); } });
+       selected: function( event, ui ) {handle_nation_table_select(ui); },
+       unselected: function( event, ui ) {
+         if (parseFloat($(ui.unselected).data("plrid")) == selected_player) {
+           select_no_nation();
+         }
+       }
+  });
 
-  selected_player = -1;
+  select_no_nation();
 
   if (is_pbem()) {
     /* TODO: PBEM games do not support diplomacy.*/
@@ -118,15 +123,7 @@ function update_nation_screen()
     $('#take_player_button').hide();
     $('#toggle_ai_button').hide();
     $('#game_scores_button').hide();
-  } else {
-    $('#view_player_button').button("disable");
-    $('#meet_player_button').button("disable");
-    $('#cancel_treaty_button').button("disable");
-    $('#take_player_button').button("disable");
-    $('#toggle_ai_button').button("disable");
   }
-
-  $("#intelligence_report_button").button("disable");
 
   if (is_small_screen) {
     $('#take_player_button').hide();
@@ -192,6 +189,7 @@ function col_love(pplayer)
 **************************************************************************/
 function handle_nation_table_select( ui )
 {
+  $(ui.selected).siblings().removeClass('ui-selected');
   selected_player = parseFloat($(ui.selected).data("plrid"));
   var player_id = selected_player;
   var pplayer = players[selected_player];
@@ -264,6 +262,16 @@ function handle_nation_table_select( ui )
 
   $('#toggle_ai_button').button("enable");
 
+}
+
+/**************************************************************************
+ Marks the selected player as none and disables all action buttons,
+ except the scores one.
+**************************************************************************/
+function select_no_nation()
+{
+  selected_player = -1;
+  $('#nations_button_div button').not('#game_scores_button').button("disable");
 }
 
 /**************************************************************************

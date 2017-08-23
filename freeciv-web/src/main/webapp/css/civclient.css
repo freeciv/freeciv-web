@@ -479,10 +479,6 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
   padding: 5px 0;
 }
 
-.nation_button {
-  font-size: 11px;
-}
-
 .specialist_item {
   float: left;
 }

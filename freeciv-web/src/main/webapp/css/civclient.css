@@ -857,7 +857,7 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
   cursor:hand;
 }
 
-// city tabs will be on the bottom of the dialog.
+/* city tabs will be on the bottom of the dialog. */
 #city_tabs { 
     position: relative; 
     padding-bottom: 3em; 

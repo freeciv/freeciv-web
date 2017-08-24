@@ -165,7 +165,7 @@ function login_pbem_user_request()
 
     $.ajax({
      type: 'POST',
-     url: "/login_user?username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(md5(password)) + "&sha_password=" + sha_password,
+     url: "/login_user?username=" + encodeURIComponent(username) + "&sha_password=" + sha_password,
      success: function(data, textStatus, request){
          if (data != null && data == "OK") {
            simpleStorage.set("username", username);

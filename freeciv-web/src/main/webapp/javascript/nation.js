@@ -29,9 +29,9 @@ var selected_player = -1;
 function update_nation_screen()
 {
   var nation_list_html = "<table class='tablesorter' id='nation_table' width='95%' border=0 cellspacing=0 >"
-	  + "<thead><td>Flag</td><td>Color</td><td>Player Name:</td>"
-	  + "<td>Nation:</td><td>Attitude</td><td>Score</td><td>AI/Human</td><td>Alive?</td>"
-	  + "<td>Diplomatic state</td><td>Team</td><td>State</td></thead>";
+	  + "<thead><tr><th>Flag</th><th>Color</th><th>Player Name:</th>"
+	  + "<th>Nation:</th><th>Attitude</th><th>Score</th><th>AI/Human</th><th>Alive?</th>"
+	  + "<th>Diplomatic state</th><th>Embassy</th><th>Shared vision</th><th>Team</th><th>State</th></tr></thead><tbody>";
 
   for (var player_id in players) {
     var pplayer = players[player_id];
@@ -65,6 +65,22 @@ function update_nation_screen()
       nation_list_html += "<td>-</td>";
     }
 
+    nation_list_html += "<td>" + get_embassy_text(player_id) + "</td>";
+
+    nation_list_html += "<td>"
+    if (!client_is_observer() && client.conn.playing != null) {
+      if (pplayer['gives_shared_vision'].isSet(client.conn.playing['playerno']) && client.conn.playing['gives_shared_vision'].isSet(player_id)) {
+        nation_list_html += "Both ways"
+      } else if (pplayer['gives_shared_vision'].isSet(client.conn.playing['playerno'])) {
+        nation_list_html += "To you"
+      } else if (client.conn.playing['gives_shared_vision'].isSet(player_id)) {
+        nation_list_html += "To them"
+      } else {
+        nation_list_html += "-"
+      }
+    }
+    nation_list_html += "</td>"
+
     nation_list_html += "<td>Team " + pplayer['team'] + "</td>";
     var pstate = " ";
     if (pplayer['phase_done'] && !pplayer['flags'].isSet(PLRF_AI)) {
@@ -76,26 +92,25 @@ function update_nation_screen()
                && !pplayer['flags'].isSet(PLRF_AI)) {
       pstate = "Moving";
     }
-    nation_list_html += "<td>" + pstate + "</td>";
+    nation_list_html += "<td id='player_state_" + player_id + "'>" + pstate + "</td>";
     nation_list_html += "</tr>";
 
 
   }
-  nation_list_html += "</table>";
+  nation_list_html += "</tbody></table>";
 
   $("#nations_list").html(nation_list_html);
-  $(".nation_button").button();
-  if (!is_touch_device()) {
-    $("#nation_table").tablesorter({theme: "dark"});
-  } else if (is_small_screen()) {
-    $("#nations").height( mapview['height'] - 150);
-    $("#nations").width( mapview['width']);
-  }
 
   $("#nation_table").selectable({ filter: "tr",
-       selected: function( event, ui ) {handle_nation_table_select(ui); } });
+       selected: function( event, ui ) {handle_nation_table_select(ui); },
+       unselected: function( event, ui ) {
+         if (parseFloat($(ui.unselected).data("plrid")) == selected_player) {
+           select_no_nation();
+         }
+       }
+  });
 
-  selected_player = -1;
+  select_no_nation();
 
   if (is_pbem()) {
     /* TODO: PBEM games do not support diplomacy.*/
@@ -108,15 +123,7 @@ function update_nation_screen()
     $('#take_player_button').hide();
     $('#toggle_ai_button').hide();
     $('#game_scores_button').hide();
-  } else {
-    $('#view_player_button').button("disable");
-    $('#meet_player_button').button("disable");
-    $('#cancel_treaty_button').button("disable");
-    $('#take_player_button').button("disable");
-    $('#toggle_ai_button').button("disable");
   }
-
-  $("#intelligence_report_button").button("disable");
 
   if (is_small_screen) {
     $('#take_player_button').hide();
@@ -133,6 +140,32 @@ function update_nation_screen()
       }
     }
   }
+
+  if (!is_touch_device()) {
+    $("#nation_table").tablesorter({theme: "dark", sortList: [[2,0]] });
+   } else if (is_small_screen()) {
+    $("#nations").height( mapview['height'] - 150);
+    $("#nations").width( mapview['width']);
+  }
+
+  /* Fetch online (connected) players on this game from Freeciv-proxy. */
+  $.ajax({
+    url: "/civsocket/" + (parseInt(civserverport) + 1000) + "/status",
+    dataType: "html",
+    cache: false,
+    async: true
+  }).done(function( data ) {
+    var online_players_html = data;
+    for (var player_id in players) {
+      var pplayer = players[player_id];
+      if (online_players_html.toLowerCase().indexOf(pplayer['name'].toLowerCase()) != -1) {
+        $("#player_state_" + player_id).html("<span style='color: #00EE00;'><b>Online</b></span>");
+      }
+    }
+    if (!is_touch_device()) {
+      $("#nation_table").tablesorter({theme: "dark"});
+    }
+  });
 
 }
 
@@ -156,6 +189,7 @@ function col_love(pplayer)
 **************************************************************************/
 function handle_nation_table_select( ui )
 {
+  $(ui.selected).siblings().removeClass('ui-selected');
   selected_player = parseFloat($(ui.selected).data("plrid"));
   var player_id = selected_player;
   var pplayer = players[selected_player];
@@ -163,7 +197,8 @@ function handle_nation_table_select( ui )
 
   if (pplayer != null && pplayer['is_alive'] && (client_is_observer()
       || (client.conn.playing != null && player_id == client.conn.playing['playerno'])
-      || (diplstates[player_id] != null && diplstates[player_id] != DS_NO_CONTACT))) {
+      || (diplstates[player_id] != null && diplstates[player_id] != DS_NO_CONTACT)
+      || client_state() == C_S_OVER)) {
     $('#view_player_button').button("enable");
   } else {
     $('#view_player_button').button("disable");
@@ -204,6 +239,12 @@ function handle_nation_table_select( ui )
     }
   }
 
+  if (!client_is_observer() && client.conn.playing != null && client.conn.playing['gives_shared_vision'].isSet(player_id)) {
+    $('#withdraw_vision_button').button("enable");
+  } else {
+    $('#withdraw_vision_button').button("disable");
+  }
+
   if (!client_is_observer() && client.conn.playing != null && player_id != client.conn.playing['playerno']
     && diplstates[player_id] != DS_NO_CONTACT) {
     $("#intelligence_report_button").button("enable");
@@ -224,6 +265,16 @@ function handle_nation_table_select( ui )
 }
 
 /**************************************************************************
+ Marks the selected player as none and disables all action buttons,
+ except the scores one.
+**************************************************************************/
+function select_no_nation()
+{
+  selected_player = -1;
+  $('#nations_button_div button').not('#game_scores_button').button("disable");
+}
+
+/**************************************************************************
  ...
 **************************************************************************/
 function nation_meet_clicked()
@@ -240,6 +291,20 @@ function cancel_treaty_clicked()
 {
   if (selected_player == -1) return;
   diplomacy_cancel_treaty(selected_player);
+  set_default_mapview_active();
+}
+
+/**************************************************************************
+ ...
+**************************************************************************/
+function withdraw_vision_clicked()
+{
+  if (selected_player == -1) return;
+
+  var packet = {"pid" : packet_diplomacy_cancel_pact,
+                "other_player_id" : selected_player,
+                "clause" : CLAUSE_VISION};
+  send_request(JSON.stringify(packet));
   set_default_mapview_active();
 }
 

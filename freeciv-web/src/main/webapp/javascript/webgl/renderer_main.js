@@ -23,6 +23,8 @@ var QUALITY_HIGH = 3;   // best quality, add features which require high-end gra
 
 var graphics_quality = QUALITY_HIGH;
 
+var anaglyph_3d_enabled = false;
+
 /****************************************************************************
   Init the Freeciv-web WebGL renderer
 ****************************************************************************/
@@ -80,7 +82,7 @@ function init_webgl_renderer()
 
   init_sprites();
 
-  var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+  var iOS = (platform.os.family == "iOS");
 
   var renderer_name = "-";
   var gl = document.createElement('canvas').getContext('webgl');
@@ -100,11 +102,9 @@ function init_webgl_renderer()
     // iOS devices default to low quality, because high quality may crash on some iOS devices. This can
     // probably be removed in the future when iOS devices get better WebGL performance.
     graphics_quality = QUALITY_LOW;
-    high_quality_water_force_enabled = true;
   } else if (renderer_name.indexOf("Mesa") != -1 || renderer_name.indexOf("Intel") != -1 || renderer_name.indexOf("DRI") != -1) {
     // These are renderers which are likely to be slow.
     graphics_quality = QUALITY_LOW;
-    high_quality_water_force_enabled = true;
   } else {
     graphics_quality = QUALITY_HIGH; //default value
   }

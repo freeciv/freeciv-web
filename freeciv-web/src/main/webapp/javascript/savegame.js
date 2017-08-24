@@ -295,7 +295,7 @@ function load_game_check()
       if (load_game_id == -1) {
         show_scenario_dialog();
       } else {
-        scenario_game_id = scenarios[load_game_id]['savegame'];
+        var scenario_game_id = scenarios[load_game_id]['savegame'];
         wait_for_text("You are logged in as","load_game_real('" + scenario_game_id + "');");
         wait_for_text("Load complete", "load_game_toggle();");
       }

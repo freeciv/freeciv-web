@@ -225,7 +225,11 @@ def handle_ranklog(root, file):
   filename = os.path.join(root,file)
   print("Handling ranklog: " + filename);
   openfile = open(filename, 'r')
-  lines = openfile.readlines()
+  lines = "";
+  try:
+    lines = openfile.readlines()
+  finally:
+    openfile.close();
   winner = None;
   winner_score = None;
   winner_email = None;
@@ -251,7 +255,6 @@ def handle_ranklog(root, file):
 
   else:
     print("error: game with winner without email in " + file);
-  openfile.close();
   os.remove(filename);
 
 def process_ranklogs():

@@ -91,7 +91,6 @@ files = {"amplio2" : [
   "../../freeciv/freeciv/data/isotrident/nuke.spec",
   "../../freeciv/freeciv/data/isotrident/select.spec",
   "../../freeciv/freeciv/data/isotrident/terrain2.spec",
-  "../../freeciv/freeciv/data/isotrident/ocean.spec",
   "../../freeciv/freeciv/data/isotrident/tiles.spec",
   "../../freeciv/freeciv/data/isotrident/unitextras.spec",
   "../../freeciv/freeciv/data/misc/wonders-large.spec",

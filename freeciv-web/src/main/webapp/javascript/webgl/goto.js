@@ -31,8 +31,6 @@ function webgl_render_goto_line(start_tile, goto_packet_dir)
   var material = new THREE.MeshBasicMaterial( { color: 0x055dff, side:THREE.DoubleSide} );
   var goto_width = 3;
 
-  var height = 5 + ptile['height'] * 100;
-
   var dx = 0;
   var dy = 0;
   var dh = 0;

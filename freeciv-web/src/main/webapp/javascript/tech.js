@@ -80,7 +80,9 @@ var tech_item_height = 52;
 var maxleft = 0;
 var clicked_tech_id = null;
 
-var pending_update_bulbs_output = null;
+var bulbs_output_updater = new EventAggregator(update_bulbs_output_info, 250,
+                                               EventAggregator.DP_NONE,
+                                               250, 3, 250);
 
 /**************************************************************************
   Returns state of the tech for current pplayer.
@@ -530,7 +532,7 @@ function get_tech_infobox_html(tech_id)
   var width = tileset[tag][2];
   var height = tileset[tag][3];
   var i = tileset[tag][4];
-  var image_src = "/tileset/freeciv-web-tileset-" + tileset_name + "-" + i + ".png?ts=" + ts;
+  var image_src = "/tileset/freeciv-web-tileset-" + tileset_name + "-" + i + get_tileset_file_extention() + "?ts=" + ts;
   if (is_small_screen()) {
     infobox_html += "<div class='specific_tech' onclick='send_player_research(" + tech_id + ");' title='"
 	   + get_advances_text(tech_id).replace(/(<([^>]+)>)/ig,"") + "'>"
@@ -902,18 +904,8 @@ function get_current_bulbs_output_text(cbo)
 **************************************************************************/
 function update_bulbs_output_info()
 {
-  pending_update_bulbs_output = null;
   var cbo = get_current_bulbs_output();
   $('#bulbs_output').html(get_current_bulbs_output_text(cbo));
   update_net_bulbs(cbo.self_bulbs - cbo.self_upkeep);
 }
 
-/**************************************************************************
- Queues an update to the bulbs output info.
-**************************************************************************/
-function request_update_bulbs_output()
-{
-  if (pending_update_bulbs_output === null) {
-    pending_update_bulbs_output = setTimeout(update_bulbs_output_info, 500);
-  }
-}

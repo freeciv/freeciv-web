@@ -229,6 +229,7 @@ function control_init()
   $('#meet_player_button').click(nation_meet_clicked);
   $('#view_player_button').click(center_on_player);
   $('#cancel_treaty_button').click(cancel_treaty_clicked);
+  $('#withdraw_vision_button').click(withdraw_vision_clicked);
   $('#take_player_button').click(take_player_clicked);
   $('#toggle_ai_button').click(toggle_ai_clicked);
   $('#game_scores_button').click(view_game_scores);
@@ -567,15 +568,15 @@ function advance_unit_focus()
 **************************************************************************/
 function update_unit_order_commands()
 {
-  var i;
+  var i, r;
   var punit;
   var ptype;
   var pcity;
+  var ptile;
   var unit_actions = {};
   var funits = get_units_in_focus();
   for (i = 0; i < funits.length; i++) {
     punit = funits[i];
-    ptype = unit_type(punit);
     ptile = index_to_tile(punit['tile']);
     if (ptile == null) continue;
     pcity = tile_city(ptile);
@@ -754,6 +755,32 @@ function update_unit_order_commands()
     if (ptype != null && ptype['name'] != "Explorer") {
       unit_actions["explore"] = {name: "Auto explore (X)"};
     }
+
+    // Load unit on transport
+    if (pcity != null) {
+      var has_transport_unit = false;
+      var units_on_tile = tile_units(ptile);
+      for (r = 0; r < units_on_tile.length; r++) {
+        var tunit = units_on_tile[r];
+        if (tunit['id'] == punit['id']) continue;
+        var ntype = unit_type(tunit);
+        if (ntype['transport_capacity'] > 0) unit_actions["unit_load"] = {name: "Load on transport (L)"};
+      }
+    }
+
+    // Unload unit from transport
+    var has_transport_unit = false;
+    var units_on_tile = tile_units(ptile);
+    if (ptype['transport_capacity'] > 0 && units_on_tile.length >= 2) {
+      for (r = 0; r < units_on_tile.length; r++) {
+        var tunit = units_on_tile[r];
+        if (tunit['transported']) {
+          unit_actions["unit_show_cargo"] = {name: "Activate cargo units"};
+          if (pcity != null) unit_actions["unit_unload"] = {name: "Unload units from transport (T)"};
+        }
+      }
+    }
+
   }
 
   unit_actions = $.extend(unit_actions, {
@@ -1365,6 +1392,8 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift, the_event)
     case 'L':
       if (shift) {
         key_unit_airlift();
+      } else {
+        key_unit_load();
       }
     break;
 
@@ -1424,6 +1453,10 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift, the_event)
 
     case 'O':
       key_unit_transform();
+    break;
+
+    case 'T':
+      key_unit_unload();
     break;
 
     case 'C':
@@ -1683,6 +1716,18 @@ function handle_context_menu_callback(key)
       key_unit_disband();
       break;
 
+    case "unit_load":
+      key_unit_load();
+      break;
+
+    case "unit_unload":
+      key_unit_unload();
+      break;
+
+    case "unit_show_cargo":
+      key_unit_show_cargo();
+      break;
+
     case "action_selection":
       key_unit_action_select();
       break;
@@ -1796,6 +1841,95 @@ function key_unit_auto_explore()
     request_new_unit_activity(punit, ACTIVITY_EXPLORE, EXTRA_NONE);
   }
   setTimeout(update_unit_focus, 700);
+}
+
+/**************************************************************************
+ Tell the units in focus to load on a transport.
+**************************************************************************/
+function key_unit_load()
+{
+  var funits = get_units_in_focus();
+  for (var i = 0; i < funits.length; i++) {
+    var punit = funits[i];
+    var ptile = index_to_tile(punit['tile']);
+    var transporter_unit_id = 0;
+
+    var has_transport_unit = false;
+    var units_on_tile = tile_units(ptile);
+    for (r = 0; r < units_on_tile.length; r++) {
+      var tunit = units_on_tile[r];
+      if (tunit['id'] == punit['id']) continue;
+      var ntype = unit_type(tunit);
+      if (ntype['transport_capacity'] > 0) {
+        has_transport_unit = true;
+        transporter_unit_id = tunit['id'];
+      }
+    }
+
+    if (has_transport_unit && transporter_unit_id > 0 && punit['tile'] > 0) {
+      var packet = {
+        "pid"         : packet_unit_load,
+        "cargo_id"    : punit['id'],
+        "transporter_id"   : transporter_unit_id,
+        "transporter_tile" : punit['tile']
+      };
+      send_request(JSON.stringify(packet));
+    }
+  }
+  setTimeout(advance_unit_focus, 700);
+}
+
+/**************************************************************************
+ Unload all units from transport
+**************************************************************************/
+function key_unit_unload()
+{
+  var funits = get_units_in_focus();
+  var units_on_tile = [];
+  for (var i = 0; i < funits.length; i++) {
+    var punit = funits[i];
+    var ptile = index_to_tile(punit['tile']);
+    units_on_tile = tile_units(ptile);
+  }
+
+  for (var i = 0; i < units_on_tile.length; i++) {
+    var punit = units_on_tile[i];
+    if (punit['transported'] && punit['transported_by'] > 0 ) {
+      var packet = {
+        "pid"         : packet_unit_unload,
+        "cargo_id"    : punit['id'],
+        "transporter_id"   : punit['transported_by']
+      };
+      console.log(packet);
+      send_request(JSON.stringify(packet));
+    }
+  }
+  setTimeout(advance_unit_focus, 700);
+}
+
+/**************************************************************************
+ Focus a unit transported by this transport unit
+**************************************************************************/
+function key_unit_show_cargo()
+{
+  var funits = get_units_in_focus();
+  var units_on_tile = [];
+  for (var i = 0; i < funits.length; i++) {
+    var punit = funits[i];
+    var ptile = index_to_tile(punit['tile']);
+    units_on_tile = tile_units(ptile);
+  }
+
+  current_focus = [];
+  for (var i = 0; i < units_on_tile.length; i++) {
+    var punit = units_on_tile[i];
+    if (punit['transported'] && punit['transported_by'] > 0 ) {
+      current_focus.push(punit);
+    }
+  }
+  update_active_units_dialog();
+  update_unit_order_commands();
+
 }
 
 /**************************************************************************

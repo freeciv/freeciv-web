@@ -81,7 +81,7 @@
 		<dependency>
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
-			<version>20160810</version>
+			<version>20170516</version>
 		</dependency>
 
 		<dependency>
@@ -198,6 +198,9 @@
 								</cssSourceFiles>
 								<jsSourceDir>javascript</jsSourceDir>
 								<jsFinalFile>webclient.js</jsFinalFile>
+								<jsSourceFiles>
+									<jsSourceFile>libs/EventAggregator.js</jsSourceFile>
+								</jsSourceFiles>
 								<jsSourceIncludes>
 									<jsSourceInclude>*.js</jsSourceInclude>
 									<jsSourceInclude>libs/*.js</jsSourceInclude>

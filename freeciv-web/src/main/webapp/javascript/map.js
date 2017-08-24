@@ -87,7 +87,7 @@ function map_allocate()
    * better to do a manual loop here. */
   for (var x = 0; x < map['xsize']; x++) {
     for (var y = 0; y < map['ysize']; y++) {
-      tile = {};
+      var tile = {};
       tile['index'] = x + y * map['xsize'];
       tile['x'] = x;
       tile['y'] = y;

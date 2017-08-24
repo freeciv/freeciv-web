@@ -35,6 +35,7 @@ function show_revolution_dialog()
   $(id).remove();
   $("<div id='revolution_dialog'></div>").appendTo("div#game_page");
 
+  if (client.conn.playing == null) return;
 
   var dhtml = "Current form of government: " + governments[client.conn.playing['government']]['name']
 	  + "<br>To start a revolution, select the new form of government:"
@@ -77,7 +78,7 @@ function init_civ_dialog()
 
     var civ_description = "";
     if (!pnation['customized']) {
-	    civ_description += "<img src='/images/flags/" + tag + "-web.png' width='180'>";
+	    civ_description += "<img src='/images/flags/" + tag + "-web" + get_tileset_file_extention() + "' width='180'>";
 	}
 
     civ_description += "<br><div>" + pplayer['name'] + " rules the " + nations[pplayer['nation']]['adjective']

@@ -135,9 +135,9 @@ function update_player_info_pregame_real()
 {
   var id;
   if (C_S_PREPARING == client_state()) {
-    player_html = "";
+    var player_html = "";
     for (id in players) {
-      player = players[id];
+      var player = players[id];
       if (player != null) {
         if (player['name'].indexOf("AI") != -1) {
           player_html += "<div id='pregame_plr_" + id
@@ -154,7 +154,7 @@ function update_player_info_pregame_real()
 
     /* show player ready state in pregame dialog */
     for (id in players) {
-      player = players[id];
+      var player = players[id];
       var nation_text = "";
       if (player['nation'] in nations) {
         nation_text = " - " + nations[player['nation']]['adjective'];
@@ -403,7 +403,7 @@ function select_nation(new_nation_id)
 
   if (!pnation['customized']) {
     $("#select_nation_flag").html("<img style='nation_flag_choice' src='/images/flags/"
-		            + pnation['graphic_str'] + "-web.png'>");
+		            + pnation['graphic_str'] + "-web" + get_tileset_file_extention() + "'>");
   }
 
   if (chosen_nation != new_nation_id && $("#nation_" + new_nation_id).length > 0) {
@@ -578,14 +578,17 @@ function pregame_settings()
               "<option value='2'>Medium</option>" +
               "<option value='3'>High</option>" +
               "</select></td></tr>"+
-	    "<tr id='3d_antialiasing_enabled'><td id='3d_antialiasing_label' style='min-width: 150px;'></td>" +
+	    "<tr id='3d_antialiasing_enabled'><td id='3d_antialiasing_label' style='min-width: 150px;'><br></td>" +
         "<td><input type='checkbox' id='3d_antialiasing_setting' checked>Enable antialiasing (game looks nicer, but is slower)</td></tr>" +
         "<tr><td style='min-width: 150px;'>Benchmark of 3D WebGL version:</td>" +
                 "<td><button id='bechmark_run' type='button' class='benchmark button'>Run benchmark</button></td></tr>" +
+        "<tr id='anaglyph_enabled'><td id='anaglyph_label' style='min-width: 150px;'></td>" +
+                "<td><input type='checkbox' id='anaglyph_setting'>Enable Anaglyph 3D (Red+Cyan glasses) "+
+                "<br>"+
         "<tr id='cardboard_vr_enabled'><td id='cardboard_vr_label' style='min-width: 150px;'></td>" +
-                "<td><br><br><input type='checkbox' id='cardboard_vr_setting'>Enable Virtual reality glasses with Google Cardboard. <i class='fa fa-info-circle' aria-hidden='true' "+
+                "<td><input type='checkbox' id='cardboard_vr_setting'>Enable Virtual reality glasses with Google Cardboard. <i class='fa fa-info-circle' aria-hidden='true' "+
                 "title='You can use Google Cardboard glasses with your mobile phone. Use voice recognition to control the game. You must also manually disable screensavers in your device settings. Put your phone in the VR glasses when the game starts. BETA!'></i><br>"+
-                "<button id='show_voice_commands' type='button' class='voice button'>Voice commands</button></td></tr>" +
+                "<button id='show_voice_commands' type='button' class='voice button' style='padding:0px;'>Voice commands</button></td></tr>" +
         "</table>" +
       "</div>" +
 
@@ -707,7 +710,7 @@ function pregame_settings()
     $("#speech_setting").parent().html("Speech Synthesis API is not supported or enabled in your browser.");
   }
 
-  $("#cardboard_vr_label").prop("innerHTML", "3D Virtual Reality:");
+  $("#cardboard_vr_label").prop("innerHTML", "3D Cardboard VR glasses:");
   $('#cardboard_vr_setting').change(function() {
     cardboard_vr_enabled = !cardboard_vr_enabled;
     if (cardboard_vr_enabled) {
@@ -716,6 +719,10 @@ function pregame_settings()
     }
   });
 
+  $("#anaglyph_label").prop("innerHTML", "3D Anaglyph glasses:");
+  $('#anaglyph_setting').change(function() {
+    anaglyph_3d_enabled = !anaglyph_3d_enabled;
+  });
 
   if (server_settings['metamessage'] != null
       && server_settings['metamessage']['val'] != null) {
@@ -894,8 +901,20 @@ function pregame_settings()
   $("#graphics_quality").val(graphics_quality);
 
   $(".benchmark").click(function() {
-    webgl_benchmark_run();
+    swal({
+      title: "Run benchmark?",
+      text: "Do you want to run a benchmark now? This will start a new game and run measure the performance of a game playing for 30 turns.",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#DD6B55",
+      confirmButtonText: "Yes, run benchmark!",
+      closeOnConfirm: true
+    },
+    function(){
+      webgl_benchmark_run();
+    });
   });
+
   if (renderer == RENDERER_WEBGL) {
     $(".benchmark").button();
     $("#show_voice_commands").button();
@@ -997,18 +1016,23 @@ function show_intro_dialog(title, message) {
 	  + " <br><br><span id='username_validation_result' style='display:none;'></span><br><br>";
 
   if (renderer == RENDERER_WEBGL) {
-    var renderer_name;
+    var renderer_name = "unknown";
 
     try {
       var gl = document.createElement('canvas').getContext('webgl',{ failIfMajorPerformanceCaveat: true });
-      if (!gl) {
-        show_dialog_message("WebGL not supported", "WebGL 3D with hardware acceleration is not supported. The 3D version will not work. Please try the 2D version.");
-        return;
-      } else {
-        var extension = gl.getExtension('WEBGL_debug_renderer_info');
-        if (extension != undefined) {
-          renderer_name = gl.getParameter(extension.UNMASKED_RENDERER_WEBGL);
+
+      if (!(platform.name == "Microsoft Edge")) {
+        if (!gl) {
+          show_dialog_message("WebGL not supported", "WebGL 3D with hardware acceleration is not supported. The 3D version will not work. Please try the 2D version.");
+          return;
+        } else {
+          var extension = gl.getExtension('WEBGL_debug_renderer_info');
+          if (extension != undefined) {
+            renderer_name = gl.getParameter(extension.UNMASKED_RENDERER_WEBGL);
+          }
         }
+      } else {
+        renderer_name = "Microsoft Edge";
       }
     } catch (err) {
       console.error(err);
@@ -1023,8 +1047,7 @@ function show_intro_dialog(title, message) {
     } else {
       intro_html += "High quality.";
     }
-    intro_html += " Current WebGL renderer: " + renderer_name;
-    "</small></span>";
+    intro_html += " Current WebGL renderer: " + renderer_name + "</small></span>";
   }
   $("#dialog").html(intro_html);
   var stored_username = simpleStorage.get("username", "");
@@ -1034,9 +1057,9 @@ function show_intro_dialog(title, message) {
   var stored_password = simpleStorage.get("password", "");
   if (stored_password != null && stored_password != false) {
     $("#password_row").show();
-    $("#password_td").html("<input id='password_req' type='password' size='25' maxlength='200'>  &nbsp; <a class='pwd_reset' href='#' style='color: #666666;'>Forgot password?</a>");
+    $("#password_td").html("<input id='password_req' type='password' size='25' maxlength='200'>  &nbsp; <a class='pwd_reset_2' href='#' style='color: #666666;'>Forgot password?</a>");
     $("#password_req").val(stored_password);
-    $(".pwd_reset").click(forgot_pbem_password);
+    $(".pwd_reset_2").click(forgot_pbem_password);
   }
   var join_game_customize_text = "";
   if ($.getUrlVar('action') == "load") {

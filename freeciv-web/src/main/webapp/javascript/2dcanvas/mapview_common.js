@@ -289,10 +289,10 @@ function update_map_canvas(canvas_x, canvas_y, width, height)
    *
    * Of course it's necessary to draw to the whole area to cover up any old
    * drawing that was done there. */
-    r = base_canvas_to_map_pos(0, 0);
-    s = base_canvas_to_map_pos(mapview['width'], 0);
-    t = base_canvas_to_map_pos(0, mapview['height']);
-    u = base_canvas_to_map_pos(mapview['width'], mapview['height']);
+    var r = base_canvas_to_map_pos(0, 0);
+    var s = base_canvas_to_map_pos(mapview['width'], 0);
+    var t = base_canvas_to_map_pos(0, mapview['height']);
+    var u = base_canvas_to_map_pos(mapview['width'], mapview['height']);
     if (    r['map_x'] < 0 || r['map_x'] > map['xsize'] || r['map_y'] < 0 || r['map_y'] > map['ysize']
 	 || s['map_x'] < 0 || s['map_x'] > map['xsize'] || s['map_y'] < 0 || s['map_y'] > map['ysize']
 	 || t['map_x'] < 0 || t['map_x'] > map['xsize'] || t['map_y'] < 0 || t['map_y'] > map['ysize']

@@ -49,7 +49,28 @@ var INCITE_IMPOSSIBLE_COST = (1000 * 1000 * 1000);
 var city_tab_index = 0;
 var city_prod_clicks = 0;
 
-var pending_update_city_screen = null;
+var city_screen_updater = new EventAggregator(update_city_screen, 250,
+                                              EventAggregator.DP_NONE,
+                                              250, 3, 250);
+
+var city_dialog_template = null;
+
+/**************************************************************************
+  Initialize the city dialog once the first time.
+**************************************************************************/
+function init_city_dialog()
+{
+  $.ajax({
+    url: "/webclient/city.hbs?ts=" + ts,
+    dataType: "html",
+    cache: true,
+    async: true
+  }).fail(function() {
+    swal("Unable to load city dialog template.");
+  }).done(function( data ) {
+    city_dialog_template = Handlebars.compile(data);
+  });
+}
 
 /**************************************************************************
  ...
@@ -93,8 +114,8 @@ function remove_city(pcity_id)
   delete cities[pcity_id];
   if (renderer == RENDERER_WEBGL) update_city_position(ptile);
   if (update) {
-    request_update_city_screen();
-    request_update_bulbs_output();
+    city_screen_updater.update();
+    bulbs_output_updater.update();
   }
 
 }
@@ -128,7 +149,7 @@ function show_city_dialog_by_id(pcity_id)
 **************************************************************************/
 function show_city_dialog(pcity)
 {
-  var turns_to_complete = FC_INFINITY;
+  var turns_to_complete;
   var sprite;
   var punit;
   var ptype;
@@ -148,17 +169,7 @@ function show_city_dialog(pcity)
 
   var city_data = {};
 
-  $.ajax({
-    url: "/webclient/city.hbs?ts=" + ts,
-    dataType: "html",
-    cache: true,
-    async: false
-  }).fail(function() {
-    console.error("Unable to load city dialog template.");
-  }).done(function( data ) {
-    var template=Handlebars.compile(data);
-    $("#city_dialog").html(template(city_data));
-  });
+  $("#city_dialog").html(city_dialog_template(city_data));
 
   $("#city_canvas").click(city_mapview_mouse_click);
 
@@ -280,7 +291,6 @@ function show_city_dialog(pcity)
     var present_units_html = "";
     for (var r = 0; r < punits.length; r++) {
       punit = punits[r];
-      ptype = unit_type(punit);
       sprite = get_unit_image_sprite(punit);
       if (sprite == null) {
          console.log("Missing sprite for " + punit);
@@ -304,7 +314,6 @@ function show_city_dialog(pcity)
     var supported_units_html = "";
     for (var t = 0; t < sunits.length; t++) {
       punit = sunits[t];
-      ptype = unit_type(punit);
       sprite = get_unit_image_sprite(punit);
       if (sprite == null) {
          console.log("Missing sprite for " + punit);
@@ -497,7 +506,7 @@ function get_production_progress(pcity)
 
   if (pcity['production_kind'] == VUT_UTYPE) {
     var punit_type = unit_types[pcity['production_value']];
-    return  pcity['shield_stock'] + "/" + universal_build_shield_cost(punit_type);;
+    return  pcity['shield_stock'] + "/" + universal_build_shield_cost(punit_type);
   }
 
   if (pcity['production_kind'] == VUT_IMPROVEMENT) {
@@ -505,7 +514,7 @@ function get_production_progress(pcity)
     if (improvement['name'] == "Coinage") {
       return " ";
     }
-    return  pcity['shield_stock'] + "/" + universal_build_shield_cost(improvement);;
+    return  pcity['shield_stock'] + "/" + universal_build_shield_cost(improvement);
   }
 
   return " ";
@@ -872,7 +881,7 @@ function next_city()
 {
   if (!client.conn.playing) return;
 
-  ensure_city_screen_is_updated();
+  city_screen_updater.fireNow();
 
   var next_row = $('#cities_list_' + active_city['id']).next();
   if (next_row.length === 0) {
@@ -893,7 +902,7 @@ function previous_city()
 {
   if (!client.conn.playing) return;
 
-  ensure_city_screen_is_updated();
+  city_screen_updater.fireNow();
 
   var prev_row = $('#cities_list_' + active_city['id']).prev();
   if (prev_row.length === 0) {
@@ -951,7 +960,7 @@ function city_turns_to_growth_text(pcity)
 **************************************************************************/
 function get_city_dxy_to_index(dx, dy, ctile)
 {
-  city_tile_map = {};
+  var city_tile_map = {};
   city_tile_map[" 00"] = 0;
   city_tile_map[" 10"] = 1;
   city_tile_map[" 01"] = 2;
@@ -1203,7 +1212,7 @@ function city_worklist_dialog(pcity)
   var worklist_html = "<table class='worklist_table'><tr><td>Type</td><td>Name</td><td>Cost</td></tr>";
   for (var j = 0; j < universals_list.length; j++) {
     var universal = universals_list[j];
-    sprite = universal['sprite'];
+    var sprite = universal['sprite'];
     if (sprite == null) {
       console.log("Missing sprite for " + universal[j]['name']);
       continue;
@@ -1225,7 +1234,7 @@ function city_worklist_dialog(pcity)
   var production_list = generate_production_list(pcity);
   var production_html = "<table class='worklist_table'><tr><td>Type</td><td>Name</td><td title='Attack/Defense/Firepower'>Info</td><td>Cost</td></tr>";
   for (var a = 0; a < production_list.length; a++) {
-    sprite = production_list[a]['sprite'];
+    var sprite = production_list[a]['sprite'];
     if (sprite == null) {
       console.log("Missing sprite for " + production_list[a]['value']);
       continue;
@@ -1697,37 +1706,14 @@ function city_worklist_task_remove()
 }
 
 /**************************************************************************
- Queues an update to the Cities tab, to coalesce bursts of changes.
-**************************************************************************/
-function request_update_city_screen()
-{
-  if (pending_update_city_screen === null) {
-    pending_update_city_screen = setTimeout(update_city_screen, 500);
-  }
-}
-
-/**************************************************************************
- Updates the Cities tab if there are pending requests.
-**************************************************************************/
-function ensure_city_screen_is_updated()
-{
-  if (pending_update_city_screen !== null) {
-    clearTimeout(pending_update_city_screen);
-    update_city_screen();
-  }
-}
-
-/**************************************************************************
  Updates the Cities tab when clicked, populating the table.
 **************************************************************************/
 function update_city_screen()
 {
-  pending_update_city_screen = null;
-
   if (observing) return;
 
   var sortList = [];
-  var headers = $('#city_table thead td');
+  var headers = $('#city_table thead th');
   headers.filter('.tablesorter-headerAsc').each(function (i, cell) {
     sortList.push([cell.cellIndex, 0]);
   });
@@ -1736,9 +1722,9 @@ function update_city_screen()
   });
 
   var city_list_html = "<table class='tablesorter' id='city_table' border=0 cellspacing=0>"
-        + "<thead><td>Name</td><td>Population</td><td>Size</td><td>State</td>"
-        + "<td>Granary</td><td>Grows In</td><td>Producing</td>"  
-        + "<td>Surplus<br>Food/Prod/Trade</td><td>Economy<br>Gold/Luxury/Science</td></thead>";
+        + "<thead><tr><th>Name</th><th>Population</th><th>Size</th><th>State</th>"
+        + "<th>Granary</th><th>Grows In</th><th>Producing</th>"
+        + "<th>Surplus<br>Food/Prod/Trade</th><th>Economy<br>Gold/Luxury/Science</th></tr></thead><tbody>";
   var count = 0;
   for (var city_id in cities){
     var pcity = cities[city_id];
@@ -1766,7 +1752,7 @@ function update_city_screen()
   }
 
 
-  city_list_html += "</table>";
+  city_list_html += "</tbody></table>";
   $("#cities_list").html(city_list_html);
 
   if (count == 0) {

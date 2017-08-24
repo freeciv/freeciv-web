@@ -75,16 +75,15 @@ function webgl_preload()
       jungle_sprite.needsUpdate = true;
   } );
 
+  var waternormals = new THREE.Texture();
+  webgl_textures["waternormals"] = waternormals;
+  textureLoader.load( '/textures/waternormals.jpg', function ( image ) {
+    waternormals.image = image;
+    waternormals.needsUpdate = true;
+    waternormals.wrapS = waternormals.wrapT = THREE.RepeatWrapping;
+  } );
+
   if (graphics_quality >= QUALITY_MEDIUM) {
-    var waternormals = new THREE.Texture();
-    webgl_textures["waternormals"] = waternormals;
-    textureLoader.load( '/textures/waternormals.jpg', function ( image ) {
-      waternormals.image = image;
-      waternormals.needsUpdate = true;
-      waternormals.wrapS = waternormals.wrapT = THREE.RepeatWrapping;
-    } );
-
-
     var sun_texture = new THREE.Texture();
     webgl_textures["sun"] = sun_texture;
     textureLoader.load( '/textures/sun.png', function ( image ) {
@@ -93,7 +92,6 @@ function webgl_preload()
       var sunMaterial = new THREE.MeshBasicMaterial( { map: sun_texture} );
       webgl_materials['sun'] = sunMaterial;
     } );
-
   }
 
   /* Preload terrain tile textures.  */
@@ -225,12 +223,12 @@ function load_model(filename)
 }
 
 /****************************************************************************
- Loads a single model file.
+ Returns a single 3D model mesh object.
 ****************************************************************************/
 function webgl_get_model(filename)
 {
   if (webgl_models[filename] != null) {
-    return webgl_models[filename].clone();;
+    return webgl_models[filename].clone();
   } else {
     return null;
   }

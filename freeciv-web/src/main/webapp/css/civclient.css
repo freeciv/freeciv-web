@@ -479,10 +479,6 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
   padding: 5px 0;
 }
 
-.nation_button {
-  font-size: 11px;
-}
-
 .specialist_item {
   float: left;
 }
@@ -495,6 +491,10 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
   font: 100% sans-serif; 
   background: url("/images/bg-dark.jpg") repeat scroll 0 0 ; 
   color: white;
+}
+
+.tablesorter-dark thead th {
+  font: 100% sans-serif;
 }
 
 .tablesorter-dark thead td {
@@ -857,7 +857,7 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
   cursor:hand;
 }
 
-// city tabs will be on the bottom of the dialog.
+/* city tabs will be on the bottom of the dialog. */
 #city_tabs { 
     position: relative; 
     padding-bottom: 3em; 

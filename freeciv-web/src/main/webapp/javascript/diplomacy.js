@@ -343,8 +343,8 @@ function create_diplomacy_dialog(counterpart) {
     flag_self_html = "<canvas id='flag_self' width='58' height='40'></canvas>";
     flag_counterpart_html = "<canvas id='flag_counterpart' width='58' height='40'></canvas>";
   } else {
-    flag_self_html = "<img src='/images/flags/" + self_nation['graphic_str'] + "-web.png' id='flag_self'>";
-    flag_counterpart_html = "<img src='/images/flags/" + counterpart_nation['graphic_str'] + "-web.png' id='flag_counterpart'>";
+    flag_self_html = "<img src='/images/flags/" + self_nation['graphic_str'] + "-web" + get_tileset_file_extention() + "' id='flag_self'>";
+    flag_counterpart_html = "<img src='/images/flags/" + counterpart_nation['graphic_str'] + "-web" + get_tileset_file_extention() + "' id='flag_counterpart'>";
   }
 
   var player_info_html = "<div style='float:left; width: 70%;'><h3>"
@@ -440,8 +440,8 @@ function create_diplomacy_dialog(counterpart) {
       city_count_self += 1;
     }
   }
-  if (city_count_self == 0) {
-    $("#self_city_menu").hide();
+  if (city_count_self == 0 || is_longturn()) {
+    $("#self_city_menu").remove();
   }
 
   $("<li><a href='#' onclick='create_clause_req(" + pplayer['playerno']+ "," + CLAUSE_VISION + ",1);'>Give shared vision</a></li>").appendTo("#self_dipl_add");
@@ -499,8 +499,8 @@ function create_diplomacy_dialog(counterpart) {
       city_count_counterpart += 1;
     }
   }
-  if (city_count_counterpart == 0) {
-    $("#counterpart_city_menu").hide();
+  if (city_count_counterpart == 0 || is_longturn()) {
+    $("#counterpart_city_menu").remove();
   }
 
   $("<li><a href='#' onclick='create_clause_req(" + counterpart['playerno']+ "," + CLAUSE_VISION + ",1);'>Give shared vision</a></li>").appendTo("#counterpart_dipl_add");
@@ -579,6 +579,9 @@ function create_diplomacy_dialog(counterpart) {
    });
 
   $("#diplomacy_dialog").parent().css("z-index", 1000);
+
+  // Disable trading with gold in LongTurn games, as this is commonly used when cheating with multipla accounts.
+  if (is_longturn()) $(".diplomacy_gold").remove();
 
 }
 

@@ -772,7 +772,7 @@ function update_unit_order_commands()
     var has_transport_unit = false;
     var units_on_tile = tile_units(ptile);
     if (ptype['transport_capacity'] > 0 && units_on_tile.length >= 2) {
-      for (r = 0; r < units_on_tile.length; r++) {
+      for (var r = 0; r < units_on_tile.length; r++) {
         var tunit = units_on_tile[r];
         if (tunit['transported']) {
           unit_actions["unit_show_cargo"] = {name: "Activate cargo units"};

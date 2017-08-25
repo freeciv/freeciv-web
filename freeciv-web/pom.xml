@@ -245,6 +245,39 @@
 							</goals>
 						</execution>
 
+						<execution>
+							<id>index-minify</id>
+							<configuration>
+								<jsSourceDir>static/javascript</jsSourceDir>
+								<jsFinalFile>index.min.js</jsFinalFile>
+								<closureLanguage>ECMASCRIPT5</closureLanguage>
+								<jsSourceIncludes>
+									<jsSourceInclude>index.js</jsSourceInclude>
+								</jsSourceIncludes>
+								<jsEngine>CLOSURE</jsEngine>
+								<closureCreateSourceMap>false</closureCreateSourceMap>
+							</configuration>
+							<goals>
+								<goal>minify</goal>
+							</goals>
+						</execution>	
+
+						<execution>
+							<id>header-minify</id>
+							<configuration>
+								<jsSourceDir>static/javascript</jsSourceDir>
+								<jsFinalFile>header.min.js</jsFinalFile>
+								<closureLanguage>ECMASCRIPT5</closureLanguage>
+								<jsSourceIncludes>
+									<jsSourceInclude>header.js</jsSourceInclude>
+								</jsSourceIncludes>
+								<jsEngine>CLOSURE</jsEngine>
+								<closureCreateSourceMap>false</closureCreateSourceMap>
+							</configuration>
+							<goals>
+								<goal>minify</goal>
+							</goals>
+						</execution>							
 					</executions>
 				</plugin>
 

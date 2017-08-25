@@ -68,34 +68,7 @@ $(document).ready(function () {
 				});
 			}).fail(clearContent);
 		}
-	
-		function displayStore() {
-			var ua = navigator.userAgent.toLowerCase();
-			if (ua.indexOf('android') >= 0) {
-				$("#google-play-store").show();
-			} else if (ua.indexOf('chrome') >= 0) {
-				$("#chrome-web-store").show();
-			} else if (ua.indexOf('trident') >= 0) {
-				$("#microsoft-store").show();
-				var root = document.getElementById('play-by-email-list');
-				data.forEach(function (item, i) {
-					var row = document.createElement('tr')
-					var rank = document.createElement('td');
-					var player = document.createElement('td');
-					var wins = document.createElement('td');
-				
-					rank.innerHTML = "#" + (i + 1);
-					player.innerHTML = item.player;
-					wins.innerHTML = item.wins;
-				
-					row.appendChild(rank);
-					row.appendChild(player);
-					row.appendChild(wins);
-					root.appendChild(row);
-				});
-			}).fail(clearContent);
-		}
-	
+
 		function displayStore() {
 			var ua = navigator.userAgent.toLowerCase();
 			if (ua.indexOf('android') >= 0) {

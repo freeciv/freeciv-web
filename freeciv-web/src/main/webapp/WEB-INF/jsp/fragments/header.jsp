@@ -74,7 +74,7 @@
 		</div><!-- end navbar-collapse -->
 	</div><!-- end container-fluid -->
 </nav> <!-- end nav -->
-<script src="/static/javascript/header.js"></script>
+<script src="/static/javascript/header.min.js"></script>
 <!--[if lt IE 8]>
 	<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->

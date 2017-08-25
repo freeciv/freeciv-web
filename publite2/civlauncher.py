@@ -34,10 +34,10 @@ class Civlauncher(Thread):
                                + self.scripttype, shell=True)
                 self.num_start += 1;
                 if retcode > 0:
-                    print("Freeciv-web port " + str(self.new_port) + " was terminated by signal " + str(retcode), file=sys.stderr)
+                    print("Freeciv-web port " + str(self.new_port) + " was terminated by signal " + str(retcode))
                     self.num_error += 1;
                 else:
-                    print("Freeciv-web port " + str(self.new_port) + " returned " + str(retcode), file=sys.stderr)
+                    print("Freeciv-web port " + str(self.new_port) + " returned " + str(retcode))
             except OSError as e:
                 print("Execution failed:", e, file=sys.stderr)
                 self.num_error += 1;

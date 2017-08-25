@@ -249,7 +249,7 @@
 							<id>index-minify</id>
 							<configuration>
 								<jsSourceDir>static/javascript</jsSourceDir>
-								<jsFinalFile>index.min.js</jsFinalFile>
+								<jsFinalFile>index.js</jsFinalFile>
 								<closureLanguage>ECMASCRIPT5</closureLanguage>
 								<jsSourceIncludes>
 									<jsSourceInclude>index.js</jsSourceInclude>
@@ -266,7 +266,7 @@
 							<id>header-minify</id>
 							<configuration>
 								<jsSourceDir>static/javascript</jsSourceDir>
-								<jsFinalFile>header.min.js</jsFinalFile>
+								<jsFinalFile>header.js</jsFinalFile>
 								<closureLanguage>ECMASCRIPT5</closureLanguage>
 								<jsSourceIncludes>
 									<jsSourceInclude>header.js</jsSourceInclude>

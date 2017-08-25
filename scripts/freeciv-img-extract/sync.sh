@@ -13,7 +13,7 @@ mkdir -p ../../freeciv-web/src/main/webapp/tileset &&
 echo "converting tileset .png files to .webp ..." && 
 (for X in `find *.png` 
 do
- cwebp -lossless $X -o ${X/.png/.webp}
+ cwebp -quiet -lossless $X -o ${X/.png/.webp}
 done) &&
 cp freeciv-web-tileset-*.png ../../freeciv-web/src/main/webapp/tileset/ &&
 cp freeciv-web-tileset-*.webp ../../freeciv-web/src/main/webapp/tileset/ &&
@@ -26,7 +26,7 @@ do
 done) &&
 (for X in `find ../../freeciv/freeciv/data/flags/*.png` 
 do
- cwebp -lossless $X -o ${X/.png/.webp}
+ cwebp -quiet -lossless $X -o ${X/.png/.webp}
 done) &&	
 mv -f ../../freeciv/freeciv/data/flags/*-web.png ../../freeciv-web/src/main/webapp/images/flags/ &&	
 mv -f ../../freeciv/freeciv/data/flags/*-web.webp ../../freeciv-web/src/main/webapp/images/flags/ &&	

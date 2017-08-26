@@ -25,7 +25,7 @@ var load_count = 0;
 var webgl_materials = {};
 
 var model_filenames = ["AEGIS Cruiser",     "city_european_1",  "Helicopter",    "Pikemen",
-                       "Alpine Troops",     "city_european_2",  "Horsemen",      "Rail",
+                       "Alpine Troops",     "city_european_2",  "Horsemen",
                        "Archers",           "citywalls",        "Howitzer",      "Riflemen",
                        "Armor",             "Hut",
                        "Artillery",         "Cruise Missile",   "Ironclad",      "Settlers",
@@ -185,40 +185,38 @@ function webgl_preload_models()
 }
 
 /****************************************************************************
- ...
+ Load glTF (binary .glb) model from the server and import is as a model mesh.
 ****************************************************************************/
 function load_model(filename)
 {
-  var url = "/3d-models/" + filename + ".js";
+  var url = "/gltf/" + filename + ".glb";
 
-  var binLoader = new THREE.BinaryLoader();
-  binLoader.load( url, function(geometry, materials) {
-   // 30% to 100%, 3d models.
-   $("#download_progress").html(" 3D models " + Math.floor(30 + (0.7 * 100 * load_count / total_model_count)) + "%");
-   for (var i = 0; i < materials.length; i++) {
-     materials[i].side = THREE.DoubleSide;
-   }
-   var mesh;
-   if (graphics_quality == QUALITY_LOW) {
-     // Convert from Geometry to BufferGeometry, since that will be faster and use less memory.
-     // but it does not have as good looking surface.
-     var bufgeometry = new THREE.BufferGeometry();
-     bufgeometry.fromGeometry(geometry);
-     geometry.dispose();
-     geometry = null;
-     mesh = new THREE.Mesh(bufgeometry, materials );
-   } else {
-     geometry.computeVertexNormals();
-     mesh = new THREE.Mesh(geometry, materials );
-   }
+  var glTFLoader = new THREE.GLTFLoader();
 
-   mesh.scale.x = mesh.scale.y = mesh.scale.z = 11;
-   webgl_models[filename] = mesh;
-   load_count++;
-   if (load_count == total_model_count) webgl_preload_complete();
-  });
+  glTFLoader.load( url, function(data) {
+    gltf = data;
+    var model = gltf.scene;
+    // 30% to 100%, 3d models.
+    $("#download_progress").html(" 3D models " + Math.floor(30 + (0.7 * 100 * load_count / total_model_count)) + "%");
+
+    model.traverse((node) => {
+      if (node.isMesh) {
+        if (graphics_quality > QUALITY_LOW) {
+          node.material.side = THREE.DoubleSide;
+          node.material.flatShading = false;
+          node.material.needsUpdate = true;
+          node.geometry.computeVertexNormals();
+        }
+      }
+    });
 
 
+    model.scale.x = model.scale.y = model.scale.z = 11;
+    webgl_models[filename] = model;
+    load_count++;
+    if (load_count == total_model_count) webgl_preload_complete();
+
+   });
 
 }
 

@@ -304,11 +304,13 @@ function update_city_position(ptile) {
 
     if (scene != null && pcity['walls'] && city_walls_positions[ptile['index']] == null) {
       var city_walls = webgl_get_model("citywalls");
-      city_walls.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10);
-      city_walls.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
-      city_walls.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
-      scene.add(city_walls);
-      city_walls_positions[ptile['index']] = city_walls;
+      if (city_walls != null) {
+        city_walls.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10);
+        city_walls.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
+        city_walls.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
+        scene.add(city_walls);
+        city_walls_positions[ptile['index']] = city_walls;
+      }
     }
 
     var city_label = create_city_label(pcity);
@@ -352,11 +354,13 @@ function update_city_position(ptile) {
 
     if (scene != null && pcity['walls'] && city_walls_positions[ptile['index']] == null) {
       var city_walls = webgl_get_model("citywalls");
-      city_walls.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10);
-      city_walls.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
-      city_walls.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
-      scene.add(city_walls);
-      city_walls_positions[ptile['index']] = city_walls;
+      if (city_walls != null) {
+        city_walls.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10);
+        city_walls.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
+        city_walls.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
+        scene.add(city_walls);
+        city_walls_positions[ptile['index']] = city_walls;
+      }
     }
 
     if (pcity['webgl_label_hash'] != pcity['name'] + pcity['size'] + pcity['production_value'] + "." + pcity['production_kind'] + punits.length) {

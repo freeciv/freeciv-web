@@ -304,7 +304,7 @@ function get_unit_activity_text(punit)
       return "M";
 
     case ACTIVITY_IRRIGATE:
-      return "I";
+      return " I ";
 
     case ACTIVITY_FORTIFIED:
       return "F";

@@ -155,10 +155,19 @@ function update_nation_screen()
     cache: false,
     async: true
   }).done(function( data ) {
-    var online_players_html = data;
+    var online_players = {};
+    var players_re = /username: <b>([^<]*)</g;
+    var found;
+
+    while ((found = players_re.exec(data)) != null) {
+      if (found[1].length > 0) {
+        online_players[found[1].toLowerCase()] = true;
+      }
+    }
+
     for (var player_id in players) {
       var pplayer = players[player_id];
-      if (online_players_html.toLowerCase().indexOf(pplayer['name'].toLowerCase()) != -1) {
+      if (online_players[pplayer['name'].toLowerCase()]) {
         $("#player_state_" + player_id).html("<span style='color: #00EE00;'><b>Online</b></span>");
       }
     }

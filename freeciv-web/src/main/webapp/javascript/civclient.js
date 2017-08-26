@@ -578,9 +578,6 @@ function show_debug_info()
   console.log("jQuery version: " + $().jquery);
   console.log("jQuery UI version: " + $.ui.version);
   console.log("simpleStorage version: " + simpleStorage.version);
-  var savegames = simpleStorage.get("savegames");
-  if (savegames == null) savegames = [];
-  console.log("savegame count: " + savegames.length);
   console.log("Touch device: " + is_touch_device());
   console.log("HTTP protocol: " + document.location.protocol);
   if (ws != null && ws.url != null) console.log("WebSocket URL: " + ws.url);

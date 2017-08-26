@@ -304,7 +304,6 @@
 						</directories>
 						<excludes>
 							<exclude>src/main/webapp/javascript/libs/bigscreen.min.js</exclude>
-							<exclude>src/main/webapp/javascript/libs/FileSaver.min.js</exclude>
 							<exclude>src/main/webapp/javascript/libs/bmp_lib.js</exclude>
 							<exclude>src/main/webapp/javascript/libs/bootstrap.min.js</exclude>
 							<exclude>src/main/webapp/javascript/libs/fg.menu.js</exclude>

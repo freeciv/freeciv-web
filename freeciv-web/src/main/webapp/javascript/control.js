@@ -760,7 +760,7 @@ function update_unit_order_commands()
     if (pcity != null) {
       var has_transport_unit = false;
       var units_on_tile = tile_units(ptile);
-      for (r = 0; r < units_on_tile.length; r++) {
+      for (var r = 0; r < units_on_tile.length; r++) {
         var tunit = units_on_tile[r];
         if (tunit['id'] == punit['id']) continue;
         var ntype = unit_type(tunit);

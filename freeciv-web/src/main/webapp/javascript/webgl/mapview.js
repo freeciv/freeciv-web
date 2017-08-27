@@ -30,16 +30,11 @@ var webgl_controls;
 
 var terrainVertShader;
 var terrainFragShader;
-var darknessVertShader;
-var darknessFragShader;
 
 var tiletype_terrains = ["lake","coast","floor","arctic","desert","forest","grassland","hills","jungle","mountains","plains","swamp","tundra", "beach"];
 
 var landGeometry;
 var landMesh;
-var unknown_terrain_mesh;
-var unknownTerritoryGeometry;
-var fogOfWarGeometry;
 var water;
 
 var start_webgl;
@@ -136,10 +131,10 @@ function init_webgl_mapview() {
 
   // high quality water using WebGL shader
   water = new THREE.Water( maprenderer, camera, scene, {
-      textureWidth: 512,
-      textureHeight: 512,
+      textureWidth: (graphics_quality == QUALITY_LOW) ? 128 : 512,
+      textureHeight: (graphics_quality == QUALITY_LOW) ? 128 : 512,
       waterNormals: webgl_textures["waternormals"],
-      alpha: 	0.7,
+      alpha: 	(graphics_quality == QUALITY_LOW) ? 1.0 : 0.7,
       sunDirection: directionalLight.position.clone().normalize(),
       sunColor: 0xfaf100,
       waterColor: 0x003e7b,
@@ -192,7 +187,8 @@ function init_webgl_mapview() {
   var terrain_material = new THREE.ShaderMaterial({
     uniforms: freeciv_uniforms,
     vertexShader: terrainVertShader,
-    fragmentShader: terrainFragShader
+    fragmentShader: terrainFragShader,
+    vertexColors: THREE.FaceColors
   });
 
   xquality = map.xsize * 4 + 1;
@@ -215,72 +211,38 @@ function init_webgl_mapview() {
   landMesh = new THREE.Mesh( landGeometry, terrain_material );
   scene.add( landMesh );
 
+  for (var x = 0; x <= map.xsize; x++) {
+    for (var y = 0; y <= map.ysize; y++) {
+      map_index_to_face[x + "." + y] = [];
+    }
+  }
+
+  for ( var i = 0; i < landGeometry.faces.length; i ++ ) {
+    var v = ['a', 'b', 'c'];
+    for (var r = 0; r < v.length; r++) {
+      var vertex = landGeometry.vertices[landGeometry.faces[i][v[r]]];
+      var vPos = landMesh.localToWorld(vertex);
+      var mapPos = scene_to_map_coords(vPos.x, vPos.z)
+      if (mapPos['x'] >= 0 && mapPos['y'] >= 0) {
+        map_index_to_face[mapPos['x'] + "." + mapPos['y']].push(landGeometry.faces[i]);
+        var ptile = map_pos_to_tile(mapPos['x'], mapPos['y']);
+        if (ptile == null) {
+          landGeometry.faces[i].color.copy(new THREE.Color(0,0,0));
+        } else if (tile_get_known(ptile) == TILE_KNOWN_SEEN) {
+          landGeometry.faces[i].color.copy(new THREE.Color(1,0,0));
+        } else if (tile_get_known(ptile) == TILE_KNOWN_UNSEEN) {
+          landGeometry.faces[i].color.copy(new THREE.Color(0.5,0,0));
+        } else if (tile_get_known(ptile) == TILE_UNKNOWN) {
+          landGeometry.faces[i].color.copy(new THREE.Color(0,0,0));
+        }
+      }
+    }
+
+  }
+
   prerender(landGeometry, xquality);
 
   add_all_objects_to_scene();
-
-  /* Unknown territory */
-  var darkness_material;
-  if (graphics_quality >= QUALITY_MEDIUM) {
-    darkness_material = new THREE.ShaderMaterial({
-      vertexShader: darknessVertShader,
-      fragmentShader: darknessFragShader,
-      uniforms: []
-    });
-    darkness_material.transparent = true;
-  } else {
-    darkness_material = new THREE.MeshBasicMaterial( { color: 0x000000} );
-  }
-
-  unknownTerritoryGeometry = new THREE.PlaneGeometry(mapview_model_width, mapview_model_height, xquality - 1, yquality - 1);
-  unknownTerritoryGeometry.rotateX( - Math.PI / 2 );
-  unknownTerritoryGeometry.translate(Math.floor(mapview_model_width / 2) - 496, 0, Math.floor(mapview_model_height / 2) + 4);
-  for ( var i = 0, l = unknownTerritoryGeometry.vertices.length; i < l; i ++ ) {
-    var x = i % xquality, y = Math.floor( i / xquality );
-    var gx = Math.floor(x / 4);
-    var gy = Math.floor(y / 4);
-    if (heightmap[x] != null && heightmap[x][y] != null) {
-      var ptile = map_pos_to_tile(gx, gy);
-      if (ptile != null && tile_get_known(ptile) != TILE_UNKNOWN) {
-        unknownTerritoryGeometry.vertices[ i ].y = 0;
-      } else {
-        unknownTerritoryGeometry.vertices[ i ].y = heightmap[x][y] * 100 + 13;
-      }
-    }
-
-    if (x == xquality - 1) unknownTerritoryGeometry.vertices[ i ].x += 50;
-    if (y == yquality - 1) unknownTerritoryGeometry.vertices[ i ].z += 50;
-  }
-  unknownTerritoryGeometry.computeVertexNormals();
-  unknown_terrain_mesh = new THREE.Mesh( unknownTerritoryGeometry, darkness_material );
-  unknown_terrain_mesh.geometry.dynamic = true;
-  if (!observing) scene.add(unknown_terrain_mesh);
-  setTimeout(check_remove_unknown_territory, 120000);
-
-  // Fog of war
-  fogOfWarGeometry = new THREE.PlaneGeometry(mapview_model_width, mapview_model_height, xquality - 1, yquality - 1);
-  fogOfWarGeometry.rotateX( - Math.PI / 2 );
-  fogOfWarGeometry.translate(Math.floor(mapview_model_width / 2) - 496, 0, Math.floor(mapview_model_height / 2) + 4);
-  for ( var i = 0, l = fogOfWarGeometry.vertices.length; i < l; i ++ ) {
-    var x = i % xquality, y = Math.floor( i / xquality );
-    var gx = Math.floor(x / 4);
-    var gy = Math.floor(y / 4);
-    if (heightmap[x] != null && heightmap[x][y] != null) {
-      var ptile = map_pos_to_tile(gx, gy);
-      if (ptile != null && tile_get_known(ptile) == TILE_KNOWN_SEEN) {
-        fogOfWarGeometry.vertices[ i ].y = heightmap[x][y] * 100 - 12;
-      } else {
-        fogOfWarGeometry.vertices[ i ].y = heightmap[x][y] * 100 + 13;
-      }
-    }
-    if (x == xquality - 1) fogOfWarGeometry.vertices[ i ].x += 50;
-    if (y == yquality - 1) fogOfWarGeometry.vertices[ i ].z += 50;
-  }
-  fogOfWarGeometry.computeVertexNormals();
-  var fogOfWar_material = new THREE.MeshLambertMaterial({color: 0x000000, transparent: true, opacity: 0.55});
-  var fog_of_war_mesh = new THREE.Mesh( fogOfWarGeometry, fogOfWar_material );
-  fog_of_war_mesh.geometry.dynamic = true;
-  if (!observing) scene.add(fog_of_war_mesh);
 
   // cleanup
   heightmap = {};
@@ -303,12 +265,6 @@ function animate() {
   if (scene == null) return;
   if (stats != null) stats.begin();
   if (mapview_slide['active']) update_map_slide_3d();
-
-  if (normalsNeedsUpdating  && unknownTerritoryGeometry != null) {
-    unknownTerritoryGeometry.computeFaceNormals();
-    unknownTerritoryGeometry.computeVertexNormals();
-    normalsNeedsUpdating = false;
-  }
 
   update_animated_objects();
 

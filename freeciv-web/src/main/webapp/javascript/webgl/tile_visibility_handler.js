@@ -17,63 +17,32 @@
 
 ***********************************************************************/
 
-var normalsNeedsUpdating = false;
+var map_index_to_face = {};  // a map where the key is x.y and the value is a Tree.js Face
 
 /**************************************************************************
 ...
 **************************************************************************/
 function webgl_update_tile_known(old_tile, new_tile)
 {
-  if (new_tile == null || old_tile == null || tile_get_known(new_tile) == tile_get_known(old_tile)) return;
+  if (new_tile == null || old_tile == null || tile_get_known(new_tile) == tile_get_known(old_tile) || landGeometry == null) return;
 
   var tx = old_tile['x'];
   var ty = old_tile['y'];
 
-  /* Update unknown territory */
-  if (fogOfWarGeometry != null && unknown_terrain_mesh != null) {
-    for ( var i = 0, l = fogOfWarGeometry.vertices.length; i < l; i ++ ) {
+  for (var i = 0; i < map_index_to_face[tx + "." + ty].length; i++) {
+    var face = map_index_to_face[tx + "." + ty][i];
 
-      if (Math.floor((i % xquality) / 4) != tx || Math.floor(Math.floor( i / xquality ) / 4) != ty) continue;
-
-      if (unknownTerritoryGeometry != null && tile_get_known(new_tile) == TILE_KNOWN_SEEN) {
-        unknownTerritoryGeometry.vertices[i].y = 0;
-        unknownTerritoryGeometry.verticesNeedUpdate = true;
-        normalsNeedsUpdating = true;
-      }
-
-      if (tile_get_known(new_tile) == TILE_KNOWN_SEEN) {
-        fogOfWarGeometry.vertices[i].y = landGeometry.vertices[ i ].y - 16;
-      } else if (tile_get_known(new_tile) == TILE_KNOWN_UNSEEN) {
-        fogOfWarGeometry.vertices[i].y = landGeometry.vertices[ i ].y + 13;
-      } else if (tile_get_known(new_tile) == TILE_UNKNOWN) {
-        fogOfWarGeometry.vertices[i].y = landGeometry.vertices[ i ].y + 5;
-      }
-      fogOfWarGeometry.verticesNeedUpdate = true;
-      normalsNeedsUpdating = true;
+    if (tile_get_known(new_tile) == TILE_KNOWN_SEEN) {
+      face.color.copy(new THREE.Color(1,0,0));
+    } else if (tile_get_known(new_tile) == TILE_KNOWN_UNSEEN) {
+      face.color.copy(new THREE.Color(0.5,0,0));
+    } else if (tile_get_known(new_tile) == TILE_UNKNOWN) {
+      face.color.copy(new THREE.Color(0,0,0));
     }
   }
 
+  landGeometry.colorsNeedUpdate = true;
+
 }
 
-/**************************************************************************
- Check if we can remove  unknown_terrain_mesh because whole map is known.
-**************************************************************************/
-function check_remove_unknown_territory()
-{
-  for (var x = 0; x < map['xsize']; x++) {
-    for (var y = 0; y < map['ysize']; y++) {
-      var ptile = tiles[x + y * map['xsize']];
-      if (tile_get_known(ptile) != TILE_KNOWN_SEEN) {
-        setTimeout(check_remove_unknown_territory, 120000);
-        return;
-      }
-    }
-  }
 
-  if (scene != null && unknown_terrain_mesh != null && unknownTerritoryGeometry != null) {
-    scene.remove(unknown_terrain_mesh);
-    unknownTerritoryGeometry.dispose();
-    unknown_terrain_mesh = null;
-    unknownTerritoryGeometry = null;
-  }
-}

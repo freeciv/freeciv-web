@@ -77,8 +77,6 @@ function init_webgl_renderer()
 
   terrainVertShader = document.getElementById('terrain_vertex_shh').innerHTML;
   terrainFragShader = document.getElementById('terrain_fragment_shh').innerHTML;
-  darknessVertShader = document.getElementById('darkness_vertex_shh').innerHTML;
-  darknessFragShader = document.getElementById('darkness_fragment_shh').innerHTML;
 
   init_sprites();
 

@@ -12,12 +12,6 @@ on the game map.
 * terrain_fragment_shader.js 
 
 
-Darkness
-========
-The darkness shaders implement darkness for unknown tiles.
-* darkness_vertex_shader.js 
-* darkness_fragment_shader.js 
-
 Labels
 ======
 The labels shaders implement labels which always face in the direction of the user.

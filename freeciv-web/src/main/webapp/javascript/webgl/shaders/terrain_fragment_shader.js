@@ -24,7 +24,7 @@ precision highp float;
 #endif
 
 varying vec3 vNormal;
-
+varying vec3 vColor;
 
 uniform sampler2D terrains;
 uniform sampler2D maptiles;
@@ -133,6 +133,12 @@ vec2 texture_coord;
 void main(void)
 {
 
+    // vColor.rgb is the vertex color
+    if (vColor.r == 0.0) {
+      gl_FragColor = vec4( 0.0, 0.0, 0.0, 0.0 );
+      return;
+    }
+
     vec4 terrain_type = texture2D(maptiles, vec2(vUv.x, vUv.y));
     vec4 border_color = texture2D(borders, vec2(vUv.x, vUv.y));
     vec4 road_type = texture2D(roadsmap, vec2(vUv.x, vUv.y));
@@ -145,7 +151,7 @@ void main(void)
       beach_blend_high = 50.25;
     }
 
-    /* Set pixel color based on tile type. */
+    // Set pixel color based on tile type.
     if (terrain_type.r == terrain_grassland) {
       if (vPosition.y > beach_blend_high ) {
         texture_coord = vec2(mod(map_x_size * (vUv.x / 4.0), 0.25) + sprite_pos6_x , mod((vUv.y * map_y_size / 4.0), 0.25) + sprite_pos6_y);
@@ -288,7 +294,7 @@ void main(void)
   }
 
 
-  /* render the beach. */
+  // render the beach.
   if (vPosition.y < beach_high && vPosition.y > beach_low) {
     texture_coord = vec2(mod(map_x_size * (vUv.x / 4.0), 0.25) + sprite_pos1_x , mod((vUv.y * map_y_size / 4.0), 0.25) + sprite_pos1_y);
     if (vPosition.y > beach_blend_high) {
@@ -307,7 +313,7 @@ void main(void)
     }
   }
 
-  /* Roads */
+  // Roads
   if (road_type.r == 0.0) {
       // no roads
   } else if (road_type.r == roadtype_1 && road_type.g == 0.0 &&  road_type.b == 0.0) {
@@ -435,17 +441,21 @@ void main(void)
   }
 
 
-  /* Borders*/
+  // Borders
   if (borders_enabled && !(border_color.r > 0.546875 && border_color.r < 0.5625 && border_color.b == 0.0 && border_color.g == 0.0)) {
     c = mix(c, border_color.rbg, 0.55);
   }
 
-  /* specular component, ambient occlusion and fade out underwater terrain */
+  // specular component, ambient occlusion and fade out underwater terrain
   float x = 1.0 - clamp((vPosition.y - 30.) / 15., 0., 1.);
   vec4 Cb = texture2D(terrains, vec2(mod(map_x_size * (vUv.x / 4.0), 0.25) + sprite_pos1_x , mod((vUv.y * map_y_size / 4.0), 0.25) + sprite_pos1_y));
   c = mix(c, Cb.rgb, x);
 
   float shade_factor = 0.28 + 1.0 * max(0., dot(vNormal, normalize(light)));
+
+  if (vColor.r > 0.4 && vColor.r < 0.6) {
+    c = c * 0.5;
+  }
 
   gl_FragColor.rgb = mix(c * shade_factor, ambiant, (vPosition_camera.z - 550.) * 0.0001875);
 

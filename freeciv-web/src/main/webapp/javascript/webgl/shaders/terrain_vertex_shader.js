@@ -24,15 +24,24 @@ varying vec2 vUv;
 varying vec3 vNormal;
 varying vec3 vPosition;
 varying vec3 vPosition_camera;
+varying vec3 vColor;
 
 void main()
 {
   vUv = uv;
-  vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
-  gl_Position = projectionMatrix * mvPosition;
+
+  if (color.r == 0.0 &&  position.y < 54.0) {
+    // hidden water tile, move the black terrain landscape above the water plane.
+    vec4 mvPosition = modelViewMatrix * vec4( position.x, 54.0, position.z , 1.0 );
+    gl_Position = projectionMatrix * mvPosition;
+  } else {
+    vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+    gl_Position = projectionMatrix * mvPosition;
+  }
   vPosition_camera = gl_Position.xyz;
   vNormal = normal;
   vPosition = position;
+  vColor = color;
 }
 
 </script>

@@ -280,13 +280,17 @@ function load_game_check()
 
   if ($.getUrlVar('load') == "tutorial") {
     $.blockUI();
-    wait_for_text("You are logged in as","load_game_real'tutorial');");
-    wait_for_text("Load complete", "load_game_toggle();");
+    wait_for_text("You are logged in as", function () {
+      load_game_real('tutorial');
+    });
+    wait_for_text("Load complete", load_game_toggle);
   } else if ($.getUrlVar('action') == "earthload") {
     $.blockUI();
     var savegame_earth_file = $.getUrlVar('savegame').replace("#", "");
-    wait_for_text("You are logged in as","load_game_real('" + savegame_earth_file + "');");
-    wait_for_text("Load complete", "load_game_toggle();");
+    wait_for_text("You are logged in as", function () {
+      load_game_real(savegame_earth_file);
+    });
+    wait_for_text("Load complete", load_game_toggle);
 
   } else if (load_game_id != -1) {
     $.blockUI();
@@ -296,8 +300,10 @@ function load_game_check()
         show_scenario_dialog();
       } else {
         var scenario_game_id = scenarios[load_game_id]['savegame'];
-        wait_for_text("You are logged in as","load_game_real('" + scenario_game_id + "');");
-        wait_for_text("Load complete", "load_game_toggle();");
+        wait_for_text("You are logged in as", function () {
+          load_game_real(scenario_game_id);
+        });
+        wait_for_text("Load complete", load_game_toggle);
       }
     }
   } else if (scenario == "true" && $.getUrlVar('load') != "tutorial") {

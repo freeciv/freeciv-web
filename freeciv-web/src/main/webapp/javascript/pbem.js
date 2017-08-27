@@ -510,8 +510,10 @@ function handle_pbem_load()
   $("#dialog").dialog('close');
   $.blockUI();
 
-  wait_for_text("You are logged in as", "load_game_real('" + savegame + "'); ");
-  wait_for_text("Load complete", "activate_pbem_player();");
+  wait_for_text("You are logged in as", function () {
+    load_game_real(savegame);
+  });
+  wait_for_text("Load complete", activate_pbem_player);
 
 }
 

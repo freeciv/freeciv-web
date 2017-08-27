@@ -107,12 +107,12 @@ function handle_server_join_reply(packet)
         $.blockUI({ message: '<h2>Generating terrain map model...</h2>' });
       }
       if (loadTimerId == -1) {
-        wait_for_text("You are logged in as", "pregame_start_game();");
+        wait_for_text("You are logged in as", pregame_start_game);
       } else {
-        wait_for_text("Load complete", "pregame_start_game();");
+        wait_for_text("Load complete", pregame_start_game);
       }
     } else if (observing) {
-      wait_for_text("You are logged in as", "request_observe_game();");
+      wait_for_text("You are logged in as", request_observe_game);
     }
 
   } else {

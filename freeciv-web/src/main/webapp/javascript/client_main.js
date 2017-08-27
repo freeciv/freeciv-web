@@ -391,17 +391,3 @@ function set_default_mapview_active()
   keyboard_input = true;
 }
 
-/**************************************************************************
-  Wait for the specified text to appear in the chat log, then
-  executes the given JavaScript code.
-**************************************************************************/
-function wait_for_text(text_to_wait_for, javascript_code_to_execute)
-{
-  if (chatbox_text != null && chatbox_text.indexOf(text_to_wait_for) != -1) {
-    eval(javascript_code_to_execute);
-  } else {
-    setTimeout("wait_for_text(\"" + text_to_wait_for + "\",\"" +
-               javascript_code_to_execute + "\")", 100);
-  }
-
-}

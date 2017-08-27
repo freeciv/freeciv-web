@@ -175,3 +175,18 @@ function chatbox_scroll_down ()
 
 }
 
+/**************************************************************************
+  Waits for the specified text to appear in the chat log, then
+  executes the given JavaScript code.
+**************************************************************************/
+function wait_for_text(text, runnable)
+{
+  if (chatbox_text != null && chatbox_text.indexOf(text) != -1) {
+    runnable();
+  } else {
+    setTimeout(function () {
+      wait_for_text(text, runnable);
+    }, 100);
+  }
+
+}

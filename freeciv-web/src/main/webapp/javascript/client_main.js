@@ -43,7 +43,7 @@ function set_client_state(newstate)
 
     switch (civclient_state) {
     case C_S_RUNNING:
-      chatbox_text = " ";
+      clear_chatbox();
       $.unblockUI();
       show_new_game_message();
 
@@ -194,7 +194,7 @@ function client_is_observer()
 **************************************************************************/
 function show_new_game_message()
 {
-  chatbox_text = ' ';
+  clear_chatbox();
 
   if (observing || $.getUrlVar('autostart') == "true") {
     return;

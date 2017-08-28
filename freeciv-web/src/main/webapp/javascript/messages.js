@@ -95,6 +95,31 @@ function add_chatbox_text(text)
 
 }
 
+/**************************************************************************
+ Returns the chatbox messages.
+**************************************************************************/
+function get_chatbox_text()
+{
+  return chatbox_text;
+}
+
+/**************************************************************************
+ Returns the chatbox message list element.
+**************************************************************************/
+function get_chatbox_msg_list()
+{
+  return document.getElementById(civclient_state <= C_S_PREPARING ?
+    'pregame_message_area' : 'game_message_area');
+}
+
+/**************************************************************************
+ Clears the chatbox.
+**************************************************************************/
+function clear_chatbox()
+{
+  chatbox_text = " ";
+  chatbox_text_dirty = true;
+}
 
 /**************************************************************************
  This is called at regular time intervals to update the chatbox text window
@@ -103,12 +128,7 @@ function add_chatbox_text(text)
 **************************************************************************/
 function update_chatbox()
 {
-  var scrollDiv;
-  if (civclient_state <= C_S_PREPARING) {
-      scrollDiv = document.getElementById('pregame_message_area');
-  } else {
-      scrollDiv = document.getElementById('game_message_area');
-  }
+  var scrollDiv = get_chatbox_msg_list();
 
   if (chatbox_text_dirty && scrollDiv != null && chatbox_text != null) {
       scrollDiv.innerHTML = chatbox_text;
@@ -157,13 +177,7 @@ function chatbox_clip_messages()
 **************************************************************************/
 function chatbox_scroll_down ()
 {
-    var scrollDiv;
-
-    if (civclient_state <= C_S_PREPARING) {
-      scrollDiv = document.getElementById('pregame_message_area');
-    } else {
-      scrollDiv = document.getElementById('game_message_area');
-    }
+    var scrollDiv = get_chatbox_msg_list();
 
     if (scrollDiv != null) {
       var currentHeight = 0;
@@ -187,6 +201,7 @@ function chatbox_scroll_down ()
 **************************************************************************/
 function wait_for_text(text, runnable)
 {
+  var chatbox_text = get_chatbox_text();
   if (chatbox_text != null && chatbox_text.indexOf(text) != -1) {
     runnable();
   } else {

@@ -173,7 +173,7 @@ function hotseat_next_player()
 {
   hotseat_active_player = ((hotseat_active_player + 1) % num_hotseat_players);
   send_message("/take " + hotseat_players[hotseat_active_player]);
-  chatbox_text = ' ';
+  clear_chatbox();
   setTimeout(advance_unit_focus, 400);
   $("#turn_done_button").button("option", "disabled", false);
   $("#turn_done_button").button("option", "label", "Turn Done");

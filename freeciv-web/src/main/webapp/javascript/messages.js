@@ -17,7 +17,7 @@
 ***********************************************************************/
 
 var chatbox_active = true;
-var chatbox_text = " ";
+var chatbox_text = [];
 var chatbox_text_dirty = false;
 var previous_scroll = 0;
 var chatbox_panel_toggle = false;
@@ -72,6 +72,18 @@ function init_chatbox()
 **************************************************************************/
 function add_chatbox_text(text)
 {
+    if (text == null) return;
+    if (!check_text_with_banlist(text)) return;
+    if (is_longturn()) {
+      if (text.indexOf("waiting on") != -1 || text.indexOf("Lost connection") != -1 || text.indexOf("Not enough") != -1 || text.indexOf("has been removed") != -1 || text.indexOf("has connected") != -1) return;
+      if (!longturn_chat_enabled) {
+        // disable chat in LongTurn games.
+        var filtered_text = text.replace(/ *\([^)]*\) */g, "");  // remove text in parenthesis ().
+        if (filtered_text.indexOf(":") != -1) return;
+      }
+    }
+    if (text.indexOf("Year:") != -1) text = "<hr style='border-color: #555555;'>" + text;
+
     if (civclient_state <= C_S_PREPARING) {
       text = text.replace(/#FFFFFF/g, '#000000');
     } else {
@@ -81,16 +93,7 @@ function add_chatbox_text(text)
                  .replace(/#A020F0/g, '#F020FF');
     }
 
-    if (is_longturn() && text != null && (text.indexOf("waiting on") != -1 || text.indexOf("Lost connection") != -1 || text.indexOf("Not enough") != -1 || text.indexOf("has been removed") != -1 || text.indexOf("has connected") != -1)) return;
-    if (is_longturn() && !longturn_chat_enabled && text != null) {
-      // disable chat in LongTurn games.
-      var filtered_text = text.replace(/ *\([^)]*\) */g, "");  // remove text in parenthesis ().
-      if (filtered_text.indexOf(":") != -1) return;
-    }
-    if (text != null && text.indexOf("Year:") != -1) text = "<hr style='border-color: #555555;'>" + text;
-    if (!check_text_with_banlist(text)) return;
-
-    chatbox_text += text + "<br>";
+    chatbox_text.push(text);
     chatbox_text_dirty = true;
 
 }
@@ -100,7 +103,7 @@ function add_chatbox_text(text)
 **************************************************************************/
 function get_chatbox_text()
 {
-  return chatbox_text;
+  return get_chatbox_msg_list().textContent;
 }
 
 /**************************************************************************
@@ -117,8 +120,8 @@ function get_chatbox_msg_list()
 **************************************************************************/
 function clear_chatbox()
 {
-  chatbox_text = " ";
-  chatbox_text_dirty = true;
+  chatbox_text = [];
+  chatbox_clip_messages(0);
 }
 
 /**************************************************************************
@@ -130,8 +133,14 @@ function update_chatbox()
 {
   var scrollDiv = get_chatbox_msg_list();
 
-  if (chatbox_text_dirty && scrollDiv != null && chatbox_text != null) {
-      scrollDiv.innerHTML = chatbox_text;
+  if (chatbox_text_dirty && scrollDiv != null) {
+      for (var i = 0; i < chatbox_text.length; i++) {
+        var item = document.createElement('li');
+        item.innerHTML = chatbox_text[i];
+        scrollDiv.appendChild(item);
+      }
+      chatbox_text = [];
+      chatbox_text_dirty = false;
 
       var currentHeight = 0;
 
@@ -146,7 +155,6 @@ function update_chatbox()
       }
 
       previous_scroll = currentHeight;
-      chatbox_text_dirty = false;
   }
 
 }
@@ -154,22 +162,27 @@ function update_chatbox()
 /**************************************************************************
  Clips the chatbox text to a maximum number of lines.
 **************************************************************************/
-function chatbox_clip_messages()
+function chatbox_clip_messages(lines)
 {
-  var max_chatbox_lines = 24;
-
-  var new_chatbox_text = "";
-  var chat_lines = chatbox_text.split("<br>");
-  if (chat_lines.length <=  max_chatbox_lines) return;
-  for (var i = chat_lines.length - max_chatbox_lines; i < chat_lines.length; i++) {
-    new_chatbox_text += chat_lines[i];
-    if ( i < chat_lines.length - 1) new_chatbox_text += "<br>";
+  if (lines === undefined) {
+    lines = 24;
   }
 
-  chatbox_text = new_chatbox_text;
+  var msglist = get_chatbox_msg_list();
+  var queued = chatbox_text.length;
+  if (queued > lines) {
+    chatbox_text.splice(0, queued - lines);
+    while (msglist.firstChild) {
+      msglist.removeChild(msglist.firstChild);
+    }
+  } else {
+    var remove = msglist.children.length - (lines - queued);
+    while (remove-- > 0) {
+      msglist.removeChild(msglist.firstChild);
+    }
+  }
 
-  update_chatbox();
-
+  chatbox_text_dirty = true;
 }
 
 /**************************************************************************
@@ -211,3 +224,4 @@ function wait_for_text(text, runnable)
   }
 
 }
+

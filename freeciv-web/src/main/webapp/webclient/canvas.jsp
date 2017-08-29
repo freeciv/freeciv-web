@@ -12,7 +12,7 @@
     
      <%-- Message chatbox --%>
      <div id="game_chatbox_panel">
-	<div id="game_message_area"></div>
+	<ol id="game_message_area"></ol>
 	<div id="game_chat_box">
 		<i class="fa fa-commenting-o fa-fw" aria-hidden="true" style="color: #7b7b7b; "></i>
 		<input id="game_text_input" type="text" name="text_input" />

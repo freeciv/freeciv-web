@@ -68,6 +68,8 @@ body {
   float: left;
   padding: 5px 5px;
   border: 1px solid black;
+  list-style-type: none;
+  margin: 0px;
 }
 
 #pregame_player_icon {

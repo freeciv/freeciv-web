@@ -158,13 +158,23 @@ function init_options_dialog()
   $('#play_sounds_setting').prop('checked', sounds_enabled);
 
   $('#play_sounds_setting').change(function() {
-    sounds_enabled = !sounds_enabled;
+    sounds_enabled = this.checked;
   });
+
+  if (!is_longturn()) {
+    $("#longturn_chat_row").hide();
+  } else {
+    $('#longturn_chat_setting').prop('checked', longturn_chat_enabled);
+    $('#longturn_chat_setting').change(function() {
+      longturn_chat_enabled = this.checked;
+      simpleStorage.set("longturn_chat_setting", longturn_chat_enabled ? "true" : "false");
+    });
+  }
 
   if (is_speech_supported()) {
     $('#speech_enabled_setting').prop('checked', speech_enabled);
     $('#speech_enabled_setting').change(function() {
-      speech_enabled = !speech_enabled;
+      speech_enabled = this.checked;
     });
   } else {
     $('#speech_enabled_setting').attr('disabled', true);

@@ -163,6 +163,11 @@ function civclient_init()
  init_common_intro_dialog();
  setup_window_size();
 
+  var stored_longturn_chat_setting = simpleStorage.get("longturn_chat_setting", "");
+  if (stored_longturn_chat_setting != null && stored_longturn_chat_setting == "true") {
+    longturn_chat_enabled = true;
+  }
+
 
 }
 

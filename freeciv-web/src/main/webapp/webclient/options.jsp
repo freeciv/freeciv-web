@@ -37,6 +37,13 @@
   </div>
 </td>
 </tr>
+<tr id="longturn_chat_row">
+<td colspan="2">
+  <div class="main_menu_buttons">
+    <b>Show chat messages from other players in LongTurn games:</b> <input type='checkbox' name='longturn_chat_setting' id='longturn_chat_setting'>
+  </div>
+</td>
+</tr>
 <tr>
 <td>
 <div class="main_menu_buttons">

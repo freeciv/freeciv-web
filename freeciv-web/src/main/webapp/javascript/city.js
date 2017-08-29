@@ -795,6 +795,19 @@ function city_name_dialog(suggested_name, unit_id) {
    * like below or by escaping the string. */
   $("#city_name_req").attr("value", suggested_name);
 
+  if (is_longturn()) {
+    var name = $("#city_name_req").val();
+    var actor_unit = game_find_unit_by_number(unit_id);
+    var packet = {"pid" : packet_unit_do_action,
+                      "actor_id" : unit_id,
+                      "target_id": actor_unit['tile'],
+                      "value" : 0,
+                      "name" : encodeURIComponent(name),
+                      "action_type": ACTION_FOUND_CITY};
+    send_request(JSON.stringify(packet));
+    return;
+  }
+
   $("#city_name_dialog").attr("title", "Build New City");
   $("#city_name_dialog").dialog({
 			bgiframe: true,
@@ -1051,7 +1064,7 @@ function city_population(pcity)
 **************************************************************************/
 function rename_city()
 {
-  if (active_city == null) return;
+  if (active_city == null || is_longturn()) return;
 
   // reset dialog page.
   $("#city_name_dialog").remove();

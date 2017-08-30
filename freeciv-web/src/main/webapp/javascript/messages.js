@@ -79,7 +79,12 @@ function add_chatbox_text(text)
       if (!longturn_chat_enabled) {
         // disable chat in LongTurn games.
         var filtered_text = text.replace(/ *\([^)]*\) */g, "");  // remove text in parenthesis ().
-        if (filtered_text.indexOf(":") != -1) return;
+        if (filtered_text.indexOf(":") != -1
+         && filtered_text.indexOf("Year: ") !== 0
+         && filtered_text.match(/^<font [^>]*>\/help: /) == null
+         && filtered_text.match(/^<font [^>]*>\/show: /) == null) {
+          return;
+        }
       }
     }
     if (text.indexOf("Year:") != -1) text = "<hr style='border-color: #555555;'>" + text;

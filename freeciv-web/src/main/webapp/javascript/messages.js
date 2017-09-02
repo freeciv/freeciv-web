@@ -17,8 +17,8 @@
 ***********************************************************************/
 
 var chatbox_active = true;
-var chatbox_text = [];
-var chatbox_text_dirty = false;
+var message_log = new EventAggregator(update_chatbox, 125,
+                                      EventAggregator.DP_ALL, 1000, 0);
 var previous_scroll = 0;
 var chatbox_panel_toggle = false;
 var longturn_chat_enabled = false;
@@ -98,8 +98,7 @@ function add_chatbox_text(text)
                  .replace(/#A020F0/g, '#F020FF');
     }
 
-    chatbox_text.push(text);
-    chatbox_text_dirty = true;
+    message_log.update(text);
 
 }
 
@@ -125,27 +124,23 @@ function get_chatbox_msg_list()
 **************************************************************************/
 function clear_chatbox()
 {
-  chatbox_text = [];
+  message_log.clear();
   chatbox_clip_messages(0);
 }
 
 /**************************************************************************
- This is called at regular time intervals to update the chatbox text window
- with new messages. It is updated at interals for performance reasons
- when many messages appear.
+ Updates the chatbox text window.
 **************************************************************************/
-function update_chatbox()
+function update_chatbox(messages)
 {
   var scrollDiv = get_chatbox_msg_list();
 
-  if (chatbox_text_dirty && scrollDiv != null) {
-      for (var i = 0; i < chatbox_text.length; i++) {
+  if (scrollDiv != null) {
+      for (var i = 0; i < messages.length; i++) {
         var item = document.createElement('li');
-        item.innerHTML = chatbox_text[i];
+        item.innerHTML = messages[i];
         scrollDiv.appendChild(item);
       }
-      chatbox_text = [];
-      chatbox_text_dirty = false;
 
       var currentHeight = 0;
 
@@ -160,6 +155,13 @@ function update_chatbox()
       }
 
       previous_scroll = currentHeight;
+  } else {
+      // It seems this might happen in pregame while handling a join request.
+      // If so, enqueue the messages again, but we'll be emptying-requeueing
+      // every second until the state changes.
+      for (var i = 0; i < messages.length; i++) {
+        message_log.update(messages[i]);
+      }
   }
 
 }
@@ -169,25 +171,21 @@ function update_chatbox()
 **************************************************************************/
 function chatbox_clip_messages(lines)
 {
-  if (lines === undefined) {
+  if (lines === undefined || lines < 0) {
     lines = 24;
   }
 
+  // Flush the buffered messages
+  message_log.fireNow();
+
   var msglist = get_chatbox_msg_list();
-  var queued = chatbox_text.length;
-  if (queued > lines) {
-    chatbox_text.splice(0, queued - lines);
-    while (msglist.firstChild) {
-      msglist.removeChild(msglist.firstChild);
-    }
-  } else {
-    var remove = msglist.children.length - (lines - queued);
-    while (remove-- > 0) {
-      msglist.removeChild(msglist.firstChild);
-    }
+  var remove = msglist.children.length - lines;
+  while (remove-- > 0) {
+    msglist.removeChild(msglist.firstChild);
   }
 
-  chatbox_text_dirty = true;
+  // To update scroll size
+  update_chatbox([]);
 }
 
 /**************************************************************************

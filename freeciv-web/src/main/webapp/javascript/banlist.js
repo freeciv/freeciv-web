@@ -21,7 +21,7 @@
 /* This is a list of banned users of Freeciv-web.
    Note that user accounts can also be disabled by setting activated=0 in the auth DB table.
 */
-var banned_users = ["NegaodaPutaria", "Sasake"];
+var banned_users = ["NegaodaPutaria", "Sasake", "Corbeau"];
 
 /**************************************************************************
  Returns false if the text contains a banned user.
@@ -30,7 +30,20 @@ function check_text_with_banlist(text)
 {
   if (text == null || text.length == 0) return false;
   for (var i = 0; i < banned_users.length; i++) {
-    if (text.indexOf(banned_users[i]) != -1) return false;
+    if (text.toLowerCase().indexOf(banned_users[i].toLowerCase()) != -1) return false;
+  }
+  return true;
+
+}
+
+/**************************************************************************
+ Returns false if the text contains a banned user.
+**************************************************************************/
+function check_text_with_banlist_exact(text)
+{
+  if (text == null || text.length == 0) return false;
+  for (var i = 0; i < banned_users.length; i++) {
+    if (text.toLowerCase() == banned_users[i].toLowerCase()) return false;
   }
   return true;
 

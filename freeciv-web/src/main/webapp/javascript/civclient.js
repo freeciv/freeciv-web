@@ -163,10 +163,6 @@ function civclient_init()
  init_common_intro_dialog();
  setup_window_size();
 
-  var stored_longturn_chat_setting = simpleStorage.get("longturn_chat_setting", "");
-  if (stored_longturn_chat_setting != null && stored_longturn_chat_setting == "true") {
-    longturn_chat_enabled = true;
-  }
 
 
 }
@@ -210,10 +206,11 @@ function init_common_intro_dialog() {
       "play at once, more time to strategize, more time to coordinate with other players, and less rushing to get things done, which can "+
       "occur in a standard multi-player Freeciv game. It takes a lot longer to play a game, about 2 to 6 months, but you can play it just a "+
       "little bit every day. <br><br> "+
-      "Please be polite to the other players. Please join the LongTurn game only if you are "+
-      "interested in playing one turn every day.<br>" +
-      "Players who are idle for more than 12 turns can be replaced by new players. This means that idle players will continually be replaced by new players.<br>" +
-      "You will get to play for turn immediately after signing up, and your next turn tomorrow.<br><br>" +
+      "Please be polite to the other players and don't cheat. "+
+      "Contact a moderator at <a style='color: black;' href='mailto:freeciv-web-moderation@tutanota.com'>freeciv-web-moderation@tutanota.com</a> "+
+      "to report players who behave badly or cheat.<br><br>" +
+      "You will get to play for turn immediately after signing up, and your next turn tomorrow. Please join the LongTurn game only if you are interested in playing one turn every day. " +
+      "Players who are idle for more than 12 turns can be replaced by new players. This means that idle players will continually be replaced by new players.<br><br>" +
       "Joining this game requires an account, so please create one if you don't have one already."+
       " <br><br>"
     msg += "Please enter your name: "
@@ -301,6 +298,10 @@ function validate_username() {
     return false;
   } else if (username != cleaned_username) {
     $("#username_validation_result").html("Your name contains invalid characters, only the English alphabet is allowed.");
+    $("#username_validation_result").show();
+    return false;
+  } else if (!check_text_with_banlist_exact(username)) {
+    $("#username_validation_result").html("Your account has been banned.");
     $("#username_validation_result").show();
     return false;
   }

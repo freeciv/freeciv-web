@@ -21,7 +21,6 @@ var chatbox_text = [];
 var chatbox_text_dirty = false;
 var previous_scroll = 0;
 var chatbox_panel_toggle = false;
-var longturn_chat_enabled = false;
 
 /**************************************************************************
  ...
@@ -76,16 +75,6 @@ function add_chatbox_text(text)
     if (!check_text_with_banlist(text)) return;
     if (is_longturn()) {
       if (text.indexOf("waiting on") != -1 || text.indexOf("Lost connection") != -1 || text.indexOf("Not enough") != -1 || text.indexOf("has been removed") != -1 || text.indexOf("has connected") != -1) return;
-      if (!longturn_chat_enabled) {
-        // disable chat in LongTurn games.
-        var filtered_text = text.replace(/ *\([^)]*\) */g, "");  // remove text in parenthesis ().
-        if (filtered_text.indexOf(":") != -1
-         && filtered_text.indexOf("Year: ") !== 0
-         && filtered_text.match(/^<font [^>]*>\/help: /) == null
-         && filtered_text.match(/^<font [^>]*>\/show: /) == null) {
-          return;
-        }
-      }
     }
     if (text.indexOf("Year:") != -1) text = "<hr style='border-color: #555555;'>" + text;
 

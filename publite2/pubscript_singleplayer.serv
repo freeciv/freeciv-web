@@ -6,8 +6,8 @@ set maxplayers 32
 set allowtake H1Ah1adOo
 set autotoggle enabled
 set netwait 30
-set nettimeout 80
-set pingtime 30
+set nettimeout 120
+set pingtime 120
 set pingtimeout 160
 set maxconnectionsperhost 256
 set threaded_save enabled

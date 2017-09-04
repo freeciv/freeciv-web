@@ -253,6 +253,17 @@
 		</div> <!-- end game launcher -->
 
 
+                       <div  class="row">
+                                <div class="col-md-2">
+                                </div>
+                                <div class="col-md-8">
+                                    <iframe src="https://discordapp.com/widget?id=354200788785954818&theme=light" width="100%" height="400" allowtransparency="true" frameborder="0"></iframe>
+                                </div>
+                                <div class="col-md-2">
+                                </div>
+                        </div>
+
+
 		<c:if test="${default_lang}">
 			<div id="statistics" class="row">
 				<div class="col-md-12">

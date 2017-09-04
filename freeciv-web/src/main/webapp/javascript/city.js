@@ -1349,9 +1349,10 @@ function city_worklist_dialog(pcity)
   }
 
   var worklist_items = $("#city_current_worklist .prod_choice_list_item");
+  var max_selection = Math.min(MAX_LEN_WORKLIST, worklist_items.length);
   for (var k = 0; k < worklist_selection.length; k++) {
-    if (worklist_selection[k] >= MAX_LEN_WORKLIST) {
-      worklist_selection.splice(k, 1 + worklist_selection.length - k);
+    if (worklist_selection[k] >= max_selection) {
+      worklist_selection.splice(k, worklist_selection.length - k);
       break;
     }
     worklist_items.eq(worklist_selection[k]).addClass("ui-selected");

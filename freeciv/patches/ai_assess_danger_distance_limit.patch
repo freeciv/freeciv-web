@@ -1,0 +1,86 @@
+diff --git a/ai/default/daimilitary.c b/ai/default/daimilitary.c
+index fa00e7e..d6e21f8 100644
+--- a/ai/default/daimilitary.c
++++ b/ai/default/daimilitary.c
+@@ -552,6 +552,14 @@ static unsigned int assess_danger(struct ai_type *ait, struct city *pcity)
+       struct unit_type *utype = unit_type_get(punit);
+       struct unit_type_ai *utai = utype_ai_data(utype, ait);
+ 
++      int unit_distance = real_map_distance(ptile, unit_tile(punit));
++      if (unit_distance > ASSESS_DANGER_MAX_DISTANCE
++          || (has_handicap(pplayer, H_ASSESS_DANGER_LIMITED)
++              && unit_distance > AI_HANDICAP_DISTANCE_LIMIT)) {
++        /* Unit too far away. */
++        continue;
++      }
++
+       if (!utai->carries_occupiers
+           && !utype_acts_hostile(utype)
+           && (utype_has_flag(utype, UTYF_CIVILIAN)
+diff --git a/ai/default/daimilitary.h b/ai/default/daimilitary.h
+index a494aaa..3939709 100644
+--- a/ai/default/daimilitary.h
++++ b/ai/default/daimilitary.h
+@@ -20,6 +20,9 @@
+ /* server/advisors */
+ #include "advchoice.h"
+ 
++#define ASSESS_DANGER_MAX_DISTANCE         35
++#define AI_HANDICAP_DISTANCE_LIMIT         6
++
+ struct unit_type *dai_choose_defender_versus(struct city *pcity,
+                                              struct unit *attacker);
+ void military_advisor_choose_tech(struct player *pplayer,
+diff --git a/ai/difficulty.c b/ai/difficulty.c
+index 9b86b47..f160fcf 100644
+--- a/ai/difficulty.c
++++ b/ai/difficulty.c
+@@ -65,6 +65,7 @@ static bv_handicap handicap_of_skill_level(enum ai_level level)
+      BV_SET(handicap, H_TARGETS);
+      BV_SET(handicap, H_HUTS);
+      BV_SET(handicap, H_REVOLUTION);
++     BV_SET(handicap, H_ASSESS_DANGER_LIMITED);
+      BV_SET(handicap, H_PRODCHGPEN);
+      break;
+    case AI_LEVEL_NOVICE:
+@@ -82,6 +83,7 @@ static bv_handicap handicap_of_skill_level(enum ai_level level)
+      BV_SET(handicap, H_DANGER);
+      BV_SET(handicap, H_CEASEFIRE);
+      BV_SET(handicap, H_NOBRIBE_WF);
++     BV_SET(handicap, H_ASSESS_DANGER_LIMITED);
+      BV_SET(handicap, H_PRODCHGPEN);
+      break;
+    case AI_LEVEL_EASY:
+@@ -96,6 +98,7 @@ static bv_handicap handicap_of_skill_level(enum ai_level level)
+      BV_SET(handicap, H_REVOLUTION);
+      BV_SET(handicap, H_EXPANSION);
+      BV_SET(handicap, H_CEASEFIRE);
++     BV_SET(handicap, H_ASSESS_DANGER_LIMITED);
+      BV_SET(handicap, H_NOBRIBE_WF);
+      break;
+    case AI_LEVEL_NORMAL:
+diff --git a/ai/handicaps.c b/ai/handicaps.c
+index e92b749..d9a1834 100644
+--- a/ai/handicaps.c
++++ b/ai/handicaps.c
+@@ -126,6 +126,8 @@ const char *handicap_desc(enum handicap_type htype, bool *inverted)
+   case H_PRODCHGPEN:
+     *inverted = TRUE;
+     return _("Can change city production type without penalty.");
++  case H_ASSESS_DANGER_LIMITED:
++    return _("Limits the distance to search for threatening enemy units.");
+   case H_LAST:
+     break; /* fall through -- should never see this */
+   }
+diff --git a/ai/handicaps.h b/ai/handicaps.h
+index fca4666..46e824d 100644
+--- a/ai/handicaps.h
++++ b/ai/handicaps.h
+@@ -33,6 +33,7 @@ enum handicap_type {
+   H_CEASEFIRE,
+   H_NOBRIBE_WF,
+   H_PRODCHGPEN,
++  H_ASSESS_DANGER_LIMITED,
+   H_LAST
+ };
+ 

@@ -33,7 +33,7 @@ function prerender(landGeometry, xquality) {
     TODO: Trees should be implemented using InstancedBufferGeometry with RawShaderMaterial and a billboard shader.
   */
   forest_geometry = new THREE.Geometry();
-  var treecolors = []
+  var treecolors = [];
   for (var i = 0, l = landGeometry.vertices.length; i < l; i++) {
     var x = i % xquality, y = Math.floor(i / xquality);
     var gx = Math.round(x / 4 - 0.5);

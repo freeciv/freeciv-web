@@ -324,7 +324,7 @@ function webgl_recenter_button_pressed(ptile)
 **************************************************************************/
 function webgl_action_button_pressed(canvas_x, canvas_y, qtype)
 {
-  var ptile = webgl_canvas_pos_to_tile(canvas_x, canvas_y)
+  var ptile = webgl_canvas_pos_to_tile(canvas_x, canvas_y);
 
   if (can_client_change_view() && ptile != null) {
     do_map_click(ptile, qtype, true);

@@ -26,7 +26,7 @@
 				cache: false,
 				async: true
 			}).fail(function() {
-				$(".score-message").html("Score graphs not enabled.")
+				$(".score-message").html("Score graphs not enabled.");
 				console.debug("Unable to load scorelog file.");
 			}).done(function(data) {
 				handle_scorelog(data);

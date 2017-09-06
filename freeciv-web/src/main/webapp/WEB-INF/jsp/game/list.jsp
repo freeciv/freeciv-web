@@ -13,7 +13,7 @@
 	
 	$(function () {
 		displayPlayByEmailGames();
-	})
+	});
 	
 	function displayPlayByEmailGames () {
 		$.getJSON('/mailstatus', function(data) {
@@ -41,7 +41,7 @@
 				
 				if (players.indexOf("@") >= 0) {
 					return;
-				};
+				}
 
 				if (players.length > 100) players = players.substring(0, 100) + "...";
 				

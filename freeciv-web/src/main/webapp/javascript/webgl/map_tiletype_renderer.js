@@ -41,7 +41,7 @@ function init_map_tiletype_image()
   map_texture.image = document.getElementById("map_tiletype_grid");
   map_texture.image.onload = function () {
      map_texture.needsUpdate = true;
-  }
+  };
 
   if (graphics_quality == QUALITY_LOW) setInterval(update_tiletypes_image, 120000);
   if (graphics_quality == QUALITY_MEDIUM) setInterval(update_tiletypes_image, 80000);
@@ -133,7 +133,7 @@ function update_tiletypes_image()
      map_texture.image = document.getElementById("map_tiletype_grid");
      map_texture.image.onload = function () {
        map_texture.needsUpdate = true;
-     }
+     };
      tiletype_hash = hash;
   }
 

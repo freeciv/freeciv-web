@@ -222,7 +222,7 @@ function init_webgl_mapview() {
     for (var r = 0; r < v.length; r++) {
       var vertex = landGeometry.vertices[landGeometry.faces[i][v[r]]];
       var vPos = landMesh.localToWorld(vertex);
-      var mapPos = scene_to_map_coords(vPos.x, vPos.z)
+      var mapPos = scene_to_map_coords(vPos.x, vPos.z);
       if (mapPos['x'] >= 0 && mapPos['y'] >= 0) {
         map_index_to_face[mapPos['x'] + "." + mapPos['y']].push(landGeometry.faces[i]);
         var ptile = map_pos_to_tile(mapPos['x'], mapPos['y']);

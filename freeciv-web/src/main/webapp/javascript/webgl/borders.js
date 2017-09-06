@@ -30,7 +30,7 @@ function init_borders_image()
   if (graphics_quality == QUALITY_MEDIUM) border_image_resolution = 512;
   if (graphics_quality == QUALITY_HIGH) border_image_resolution = 1024;
 
-  borders_palette = []
+  borders_palette = [];
   borders_palette.push([142, 0, 0]);
   for (var player_id in players) {
     var pplayer = players[player_id];
@@ -52,7 +52,7 @@ function init_borders_image()
   borders_texture.image = document.getElementById("borders_image");
   borders_texture.image.onload = function () {
     borders_texture.needsUpdate = true;
-  }
+  };
 
   if (graphics_quality == QUALITY_MEDIUM) setInterval(update_borders_image, 20000);
   if (graphics_quality == QUALITY_HIGH) setInterval(update_borders_image, 10000);
@@ -88,7 +88,7 @@ function update_borders_image()
      borders_texture.image = document.getElementById("borders_image");
      borders_texture.image.onload = function () {
        borders_texture.needsUpdate = true;
-     }
+     };
      borders_hash = hash;
 
      return borders_texture;

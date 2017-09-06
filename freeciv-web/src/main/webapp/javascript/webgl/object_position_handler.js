@@ -89,7 +89,7 @@ function update_unit_position(ptile) {
     } else {
       pos = map_to_scene_coords(ptile['x'], ptile['y']);
     }
-    new_unit.matrixAutoUpdate = false
+    new_unit.matrixAutoUpdate = false;
     new_unit.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 4);
     new_unit.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height - 2);
     new_unit.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 4);
@@ -225,7 +225,7 @@ function update_unit_position(ptile) {
     unit_positions[ptile['index']] = new_unit;
     unit_positions[ptile['index']]['unit_type'] = unit_type_name;
 
-    new_unit.matrixAutoUpdate = false
+    new_unit.matrixAutoUpdate = false;
     new_unit.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 4);
     new_unit.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height - 2);
     new_unit.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 4);

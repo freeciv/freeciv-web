@@ -354,7 +354,7 @@ function get_unit_health_mesh(punit)
                 22, 7,
                 0,0,32,16);
 
-  meshes[key] = canvas_to_user_facing_mesh(fcanvas, 32, 18, 3, true)
+  meshes[key] = canvas_to_user_facing_mesh(fcanvas, 32, 18, 3, true);
   return meshes[key].clone();
 
 }

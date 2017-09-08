@@ -10,6 +10,8 @@ DATADIR="/var/lib/tomcat8/webapps/data/"
 python generate_js_hand/generate_js_hand.py && \
 cp packhand_gen.js ../freeciv-web/src/main/webapp/javascript/ && \
 cp packets.js ../freeciv-web/src/main/webapp/javascript/ && \
+python3 gen_event_types/gen_event_types.py && \
+mv fc_events.js ../freeciv-web/src/main/webapp/javascript/ && \
 mkdir -p ${DATADIR}savegames/ && \
 mkdir -p ${DATADIR}savegames/pbem/ && \
 cp ../freeciv/freeciv/data/scenarios/*.sav ${DATADIR}savegames/ && \

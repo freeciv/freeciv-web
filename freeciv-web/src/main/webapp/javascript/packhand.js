@@ -202,33 +202,35 @@ function handle_chat_msg(packet)
   var event = packet['event'];
   var ptile = packet['tile'];
 
-  if (connections[conn_id] != null) {
-    var username = connections[conn_id]['username'];
-    if (is_longturn()) {
-      add_chatbox_text(message);
-    } else {
-      add_chatbox_text("<b>" + username + ":</b>" + message);
-    }
-  } else {
-    if (message != null && message.indexOf("/metamessage") != -1) return;  //don't spam message dialog on game start.
-    if (message != null && message.indexOf("Metaserver message string") != -1) return;  //don't spam message dialog on game start.
-
-    if (packet['event'] == 45) {
-      var regxp = /\n/gi;
-      message = message.replace(regxp, "<br>\n");
-      show_dialog_message("Message for you:", message);
-    } else {
-      if (ptile != null && ptile > 0) {
-        add_chatbox_text("<span class='chatbox_text_tileinfo' "
-             + "onclick='center_tile_id(" + ptile + ");'>" + message + "</span>");
-      } else {
-        add_chatbox_text(message);
-      }
-
-      if (is_speech_supported()) speak(message);
-
-    }
+  if (message == null) return;
+  if (event == null || event < 0 || event >= E_UNDEFINED) {
+    console.log('Undefined message event type');
+    console.log(packet);
+    packet['event'] = event = E_UNDEFINED;
   }
+
+  if (connections[conn_id] != null) {
+    if (!is_longturn()) {
+      message = "<b>" + connections[conn_id]['username'] + ":</b>" + message;
+    }
+  } else if (packet['event'] == E_SCRIPT) {
+    var regxp = /\n/gi;
+    message = message.replace(regxp, "<br>\n");
+    show_dialog_message("Message for you:", message);
+    return;
+  } else {
+    if (message.indexOf("/metamessage") != -1) return;  //don't spam message dialog on game start.
+    if (message.indexOf("Metaserver message string") != -1) return;  //don't spam message dialog on game start.
+
+    if (ptile != null && ptile > 0) {
+       message = "<span class='chatbox_text_tileinfo' "
+           + "onclick='center_tile_id(" + ptile + ");'>" + message + "</span>";
+    }
+    if (is_speech_supported()) speak(message);
+  }
+
+  packet['message'] = message;
+  add_chatbox_text(packet);
 }
 
 /**************************************************************************
@@ -551,8 +553,7 @@ function handle_city_remove(packet)
 
 function handle_connect_msg(packet)
 {
-  var message = packet['message'];
-  add_chatbox_text(message);
+  add_chatbox_text(packet);
 }
 
 

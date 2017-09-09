@@ -194,6 +194,8 @@ function client_is_observer()
 **************************************************************************/
 function show_new_game_message()
 {
+  var message = null;
+
   clear_chatbox();
 
   if (observing || $.getUrlVar('autostart') == "true") {
@@ -201,55 +203,59 @@ function show_new_game_message()
 
   } else if (is_hotseat()) {
     show_hotseat_new_phase();
+    return;
   } else if (is_pbem()) {
-    add_chatbox_text("Welcome " + username + "! It is now your turn to play. Each player will " +
+    message = "Welcome " + username + "! It is now your turn to play. Each player will " +
       "get an e-mail when it is their turn to play, and can only play one turn at a time. " +
-      "Click the end turn button to end your turn and let the next opponent play.");
+      "Click the end turn button to end your turn and let the next opponent play.";
     setTimeout(check_queued_tech_gained_dialog, 2500);
 
   } else if (is_longturn()) {
-    add_chatbox_text("Welcome " + username + "! This is a LongTurn game, where you play one " +
+    message = "Welcome " + username + "! This is a LongTurn game, where you play one " +
     "turn every day. Click the Turn Done button when you are done with your turn. To play your next " +
     "turn in this LongTurn game, you can bookmark this page and use that link to play your next turn. "+
     "You can also find this game by going to play.freeciv.org and clicking on the LongTurn button. "+
-    "Good luck, have fun and see you again tomorrow!");
+    "Good luck, have fun and see you again tomorrow!";
 
   } else if (is_small_screen()) {
-    add_chatbox_text("Welcome " + username + "! You lead a great civilization. Your task is to conquer the world!\n" +
+    message = "Welcome " + username + "! You lead a great civilization. Your task is to conquer the world!\n" +
       "Click on units for giving them orders, and drag units on the map to move them.\n" +
-      "Good luck, and have a lot of fun!");
+      "Good luck, and have a lot of fun!";
 
   } else if (client.conn.playing != null && !game_loaded) {
     var pplayer = client.conn.playing;
     var player_nation_text = "Welcome, " + username + " ruler of the " + nations[pplayer['nation']]['adjective'] + " empire.";
 
     if (is_touch_device()) {
-      add_chatbox_text(player_nation_text + " Your\n" +
+      message = player_nation_text + " Your\n" +
       "task is to create a great empire! You should start by\n" +
       "exploring the land around you with your explorer,\n" +
       "and using your settlers to find a good place to build\n" +
       "a city. Click on units to get a list of available orders. \n" +
       "To move your units around, carefully drag the units to the \n" +
       "place you want it to go.\n" +
-      "Good luck, and have a lot of fun!");
+      "Good luck, and have a lot of fun!";
 
     } else {
-      add_chatbox_text(player_nation_text + " Your\n" +
+      message = player_nation_text + " Your\n" +
       "task is to create a great empire! You should start by\n" +
       "exploring the land around you with your explorer,\n" +
       "and using your settlers to find a good place to build\n" +
       "a city. Right-click with the mouse on your units for a list of available \n" +
       "orders such as move, explore, build cities and attack. \n" +
-      "Good luck, and have a lot of fun!");
+      "Good luck, and have a lot of fun!";
 
     }
   } else if (game_loaded) {
-    var player_nation_text = "Welcome back, " + username;
+    message = "Welcome back, " + username;
     if (client.conn.playing != null) {
-     player_nation_text += " ruler of the " + nations[client.conn.playing['nation']]['adjective'] + " empire.";
+     message += " ruler of the " + nations[client.conn.playing['nation']]['adjective'] + " empire.";
     }
-    add_chatbox_text(player_nation_text);
+  } else {
+    return;
   }
+
+  message_log.update({ event: E_CONNECTION, message: message });
 }
 
 /**************************************************************************
@@ -258,9 +264,12 @@ function show_new_game_message()
 function alert_war(player_no)
 {
   var pplayer = players[player_no];
-  add_chatbox_text("War: You are now at war with the "
+  message_log.update({
+    event: E_DIPLOMACY,
+    message: "War: You are now at war with the "
 	+ nations[pplayer['nation']]['adjective']
-    + " leader " + pplayer['name'] + "!");
+        + " leader " + pplayer['name'] + "!"
+  });
 }
 
 /**************************************************************************

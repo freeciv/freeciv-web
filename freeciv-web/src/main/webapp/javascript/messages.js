@@ -69,14 +69,15 @@ function init_chatbox()
  This adds new text to the main message chatbox. See update_chatbox() which
  does the actual update to the screen.
 **************************************************************************/
-function add_chatbox_text(text)
+function add_chatbox_text(packet)
 {
+    var text = packet['message'];
+
     if (text == null) return;
     if (!check_text_with_banlist(text)) return;
     if (is_longturn()) {
       if (text.indexOf("waiting on") != -1 || text.indexOf("Lost connection") != -1 || text.indexOf("Not enough") != -1 || text.indexOf("has been removed") != -1 || text.indexOf("has connected") != -1) return;
     }
-    if (text.indexOf("Year:") != -1) text = "<hr style='border-color: #555555;'>" + text;
 
     if (civclient_state <= C_S_PREPARING) {
       text = text.replace(/#FFFFFF/g, '#000000');
@@ -87,8 +88,8 @@ function add_chatbox_text(text)
                  .replace(/#A020F0/g, '#F020FF');
     }
 
-    message_log.update(text);
-
+    packet['message'] = text;
+    message_log.update(packet);
 }
 
 /**************************************************************************
@@ -127,7 +128,8 @@ function update_chatbox(messages)
   if (scrollDiv != null) {
       for (var i = 0; i < messages.length; i++) {
         var item = document.createElement('li');
-        item.innerHTML = messages[i];
+        item.className = fc_e_events[messages[i].event][E_I_NAME];
+        item.innerHTML = messages[i].message;
         scrollDiv.appendChild(item);
       }
 

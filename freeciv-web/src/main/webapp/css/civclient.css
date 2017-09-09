@@ -1020,3 +1020,9 @@ li.tech-both::before {
 .bw-toggle:hover {
   color: white;
 }
+
+.e_next_year {
+  border-top: 2px #555555 groove;
+  margin-top: 0.5em;
+  padding-bottom: 0.5em;
+}

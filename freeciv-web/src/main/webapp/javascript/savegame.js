@@ -105,7 +105,10 @@ function quicksave()
   }
 
   send_message("/save");
-  add_chatbox_text("Game saved.");
+  message_log.update({
+    event: E_SCRIPT,
+    message: "Game saved."
+  });
   saved_this_turn = true;
 
 }
@@ -353,7 +356,10 @@ function load_game_toggle()
   send_message("/set nationset all");
 
   if (players == null || players[0] == null) {
-    add_chatbox_text("Error: Unable to aitoggle and take your player. Try reloading the page.");
+    message_log.update({
+      event: E_LOG_ERROR,
+      message: "Error: Unable to aitoggle and take your player. Try reloading the page."
+    });
     $.unblockUI();
     return;
   }

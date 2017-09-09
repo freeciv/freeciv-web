@@ -69,8 +69,10 @@ function init_chatbox()
  This adds new text to the main message chatbox. See update_chatbox() which
  does the actual update to the screen.
 **************************************************************************/
-function add_chatbox_text(text)
+function add_chatbox_text(packet)
 {
+    var text = packet['message'];
+
     if (text == null) return;
     if (!check_text_with_banlist(text)) return;
     if (is_longturn()) {
@@ -87,8 +89,8 @@ function add_chatbox_text(text)
                  .replace(/#A020F0/g, '#F020FF');
     }
 
-    message_log.update(text);
-
+    packet['message'] = text;
+    message_log.update(packet);
 }
 
 /**************************************************************************
@@ -127,7 +129,8 @@ function update_chatbox(messages)
   if (scrollDiv != null) {
       for (var i = 0; i < messages.length; i++) {
         var item = document.createElement('li');
-        item.innerHTML = messages[i];
+        item.className = fc_e_events[messages[i].event][E_I_NAME];
+        item.innerHTML = messages[i].message;
         scrollDiv.appendChild(item);
       }
 

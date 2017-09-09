@@ -1226,7 +1226,10 @@ function do_map_click(ptile, qtype, first_time_called)
         } else if (!has_movesleft_warning_been_shown) {
           has_movesleft_warning_been_shown = true;
           var ptype = unit_type(punit);
-          add_chatbox_text(ptype['name'] + " has no moves left. Press turn done for the next turn.");
+          message_log.update({
+            event: E_BAD_COMMAND,
+            message: ptype['name'] + " has no moves left. Press turn done for the next turn."
+          });
         }
 
       }
@@ -1768,16 +1771,25 @@ function activate_goto_last(last_order, last_action)
   if (current_focus.length > 0) {
     if (intro_click_description) {
       if (is_touch_device()) {
-        add_chatbox_text("Carefully drag unit to the tile you want it to go to.");
+        message_log.update({
+          event: E_BEGINNER_HELP,
+          message: "Carefully drag unit to the tile you want it to go to."
+        });
       } else {
-        add_chatbox_text("Click on the tile to send this unit to.");
+        message_log.update({
+          event: E_BEGINNER_HELP,
+          message: "Click on the tile to send this unit to."
+        });
       }
       intro_click_description = false;
     }
 
   } else {
-    add_chatbox_text("First select a unit to move by clicking on it, then click on the"
-		     + " goto button or the 'G' key, then click on the position to move to.");
+    message_log.update({
+      event: E_BEGINNER_HELP,
+      message: "First select a unit to move by clicking on it, then click on the"
+             + " goto button or the 'G' key, then click on the position to move to."
+    });
     deactivate_goto();
   }
 
@@ -2080,7 +2092,10 @@ function key_unit_upgrade()
 function key_unit_paradrop()
 {
   paradrop_active = true;
-  add_chatbox_text("Click on the tile to send this paratrooper to.");
+  message_log.update({
+    event: E_BEGINNER_HELP,
+    message: "Click on the tile to send this paratrooper to."
+  });
 }
 
 /**************************************************************************
@@ -2089,7 +2104,10 @@ function key_unit_paradrop()
 function key_unit_airlift()
 {
   airlift_active = true;
-  add_chatbox_text("Click on the city to airlift this unit to.");
+  message_log.update({
+    event: E_BEGINNER_HELP,
+    message: "Click on the city to airlift this unit to."
+  });
 }
 
 /**************************************************************************
@@ -2202,8 +2220,11 @@ function key_unit_action_select()
     request_unit_act_sel_vs_own_tile();
   } else {
     action_tgt_sel_active = true;
-    add_chatbox_text("Click on a tile to act against it. "
-                     + "Press 'd' again to act against own tile.");
+    message_log.update({
+      event: E_BEGINNER_HELP,
+      message: "Click on a tile to act against it. "
+             + "Press 'd' again to act against own tile."
+    });
   }
 }
 
@@ -2302,7 +2323,10 @@ function request_unit_build_city()
     if (punit != null) {
 
       if (punit['movesleft'] == 0) {
-        add_chatbox_text("Unit has no moves left to build city");
+        message_log.update({
+          event: E_BAD_COMMAND,
+          message: "Unit has no moves left to build city"
+        });
         return;
       }
 

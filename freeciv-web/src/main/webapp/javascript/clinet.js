@@ -118,10 +118,18 @@ function websocket_init()
 function check_websocket_ready()
 {
   if (ws != null && ws.readyState === 1) {
+    var sha_password = null;
+    var stored_password = simpleStorage.get("password", "");
+    if (stored_password != null && stored_password != false) {
+      var shaObj = new jsSHA("SHA-512", "TEXT");
+      shaObj.update(stored_password);
+      sha_password = encodeURIComponent(shaObj.getHash("HEX"));
+    }
+
     var login_message = {"pid":4, "username" : username,
     "capability": freeciv_version, "version_label": "-dev",
     "major_version" : 2, "minor_version" : 5, "patch_version" : 99,
-    "port": civserverport};
+    "port": civserverport, "password" : sha_password};
     ws.send(JSON.stringify(login_message));
     $.unblockUI();
   } else {

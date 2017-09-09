@@ -22,6 +22,8 @@
 
 
 from os import path as op
+from os import chdir
+import sys
 import time
 from tornado import web, websocket, ioloop, httpserver
 from tornado.ioloop import IOLoop
@@ -31,12 +33,21 @@ from civcom import *
 import json
 import uuid
 import gc
+import mysql.connector
+import configparser
 
 PROXY_PORT = 8002
 CONNECTION_LIMIT = 1000
 
 civcoms = {}
 
+chdir(sys.path[0])
+settings = configparser.ConfigParser()
+settings.read("settings.ini")
+
+mysql_user=settings.get("Config", "mysql_user");
+mysql_database=settings.get("Config", "mysql_database");
+mysql_password=settings.get("Config", "mysql_password");
 
 class IndexHandler(web.RequestHandler):
 
@@ -69,6 +80,11 @@ class WSHandler(websocket.WebSocketHandler):
             login_message = json.loads(message)
             self.username = login_message['username']
             self.civserverport = login_message['port']
+            auth_ok = self.check_user(login_message['username'], login_message['password']);
+            if (not auth_ok): 
+              self.write_message("Error: Could not authenticate user with password.")
+              return
+
             self.loginpacket = message
             self.is_ready = True
             self.civcom = self.get_civcom(
@@ -96,6 +112,34 @@ class WSHandler(websocket.WebSocketHandler):
                 del civcoms[self.civcom.key]
             del(self.civcom)
             gc.collect()
+
+    # Check if username and password if correct, if the user already exists in the database.
+    def check_user(self, username, password):
+      result = None;
+      cursor = None;
+      cnx = None;
+      try:
+        cnx = mysql.connector.connect(user=mysql_user, database=mysql_database, password=mysql_password)
+        cursor = cnx.cursor()
+        query = ("select username, secure_hashed_password, activated from auth where lower(username)=lower(%(usr)s)")
+        cursor.execute(query, {'usr' : username})
+        salt = None;
+        for usrrow in cursor:
+          salt = usrrow[1];
+          if (usrrow[2] == 0): return False;
+        if (salt == None): return True;
+
+        query = ("select count(*) from auth where lower(username)=lower(%(usr)s) and secure_hashed_password = ENCRYPT(%(pwd)s, %(salt)s)")
+        cursor.execute(query, {'usr' : username, 'pwd' : password, 'salt' : salt})
+        usrcount = 0;
+        for authrow in cursor:
+          usrcount = authrow[0];
+        if (usrcount != 1): return False; 
+      finally:
+        cursor.close()
+        cnx.close()
+      return True;
+
 
     # enables support for allowing alternate origins. See check_origin in websocket.py
     def check_origin(self, origin):
@@ -128,9 +172,8 @@ if __name__ == "__main__":
             PROXY_PORT = int(sys.argv[1])
         print(('port: ' + str(PROXY_PORT)))
 
-        LOG_FILENAME = '/tmp/logging' + str(PROXY_PORT) + '.out'
-        # logging.basicConfig(filename=LOG_FILENAME,level=logging.INFO)
-        logging.basicConfig(level=logging.INFO)
+        LOG_FILENAME = '../logs/freeciv-proxy-logging-' + str(PROXY_PORT) + '.log'
+        logging.basicConfig(filename=LOG_FILENAME,level=logging.INFO)
         logger = logging.getLogger("freeciv-proxy")
 
         application = web.Application([

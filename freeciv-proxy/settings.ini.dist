@@ -1,0 +1,4 @@
+[Config]
+mysql_user = root
+mysql_database = freeciv_web
+mysql_password = vagrant

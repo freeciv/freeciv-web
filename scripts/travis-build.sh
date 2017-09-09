@@ -106,6 +106,7 @@ make install
 
 cp ${basedir}/publite2/nginx.conf /usr/local/nginx/conf/
 sed -e "s/vagrant//" ${basedir}/pbem/settings.ini.dist > ${basedir}/pbem/settings.ini
+sed -e "s/vagrant//" ${basedir}/freeciv-proxy/settings.ini.dist > ${basedir}/freeciv-proxy/settings.ini
 
 echo "Starting Freeciv-web..."
 /usr/local/nginx/sbin/nginx

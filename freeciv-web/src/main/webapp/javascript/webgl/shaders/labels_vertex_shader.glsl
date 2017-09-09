@@ -1,9 +1,6 @@
-<!-- GLSL Vertex Shader for Freeciv-web -->
-
-<script id="labels_vertex_shh" type="x-shader/x-vertex">
 /**********************************************************************
     Freeciv-web - the web version of Freeciv. http://play.freeciv.org/
-    Copyright (C) 2009-2016  The Freeciv-web project
+    Copyright (C) 2009-2017  The Freeciv-web project
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as published by
@@ -46,5 +43,3 @@ void main()
   // We don't use the full projection matrix because we don't want perspective
   gl_Position = translation + scale * modelViewMatrix * vec4(position, 0.);
 }
-
-</script>

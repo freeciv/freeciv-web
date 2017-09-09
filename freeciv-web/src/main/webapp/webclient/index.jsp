@@ -54,8 +54,21 @@ var ts="${initParam.buildTimeStamp}";
   ga('send', 'pageview');
 </script> 
 </body>
-<jsp:include page="/javascript/webgl/shaders/terrain_fragment_shader.js" flush="false"/>
-<jsp:include page="/javascript/webgl/shaders/terrain_vertex_shader.js" flush="false"/>
-<jsp:include page="/javascript/webgl/shaders/labels_fragment_shader.js" flush="false"/>
-<jsp:include page="/javascript/webgl/shaders/labels_vertex_shader.js" flush="false"/>
+
+<script id="terrain_fragment_shh" type="x-shader/x-fragment">
+  <jsp:include page="/javascript/webgl/shaders/terrain_fragment_shader.glsl" flush="false"/>
+</script>
+
+<script id="terrain_vertex_shh" type="x-shader/x-vertex">
+  <jsp:include page="/javascript/webgl/shaders/terrain_vertex_shader.glsl" flush="false"/>
+</script>
+
+<script id="tex_fragment_shh" type="x-shader/x-fragment">
+  <jsp:include page="/javascript/webgl/shaders/labels_fragment_shader.glsl" flush="false"/>
+</script>
+
+<script id="labels_vertex_shh" type="x-shader/x-vertex">
+  <jsp:include page="/javascript/webgl/shaders/labels_vertex_shader.glsl" flush="false"/>
+</script>
+
 </html>

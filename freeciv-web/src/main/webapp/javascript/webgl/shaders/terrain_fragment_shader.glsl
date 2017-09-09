@@ -1,8 +1,6 @@
-<!-- GLSL Fragment Shader for Freeciv-web -->
-<script id="terrain_fragment_shh" type="x-shader/x-fragment">
 /**********************************************************************
     Freeciv-web - the web version of Freeciv. http://play.freeciv.org/
-    Copyright (C) 2009-2016  The Freeciv-web project
+    Copyright (C) 2009-2017  The Freeciv-web project
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as published by
@@ -460,6 +458,3 @@ void main(void)
   gl_FragColor.rgb = mix(c * shade_factor, ambiant, (vPosition_camera.z - 550.) * 0.0001875);
 
 }
-
-</script>
-

@@ -1,8 +1,6 @@
-<!-- GLSL Fragment Shader for Freeciv-web -->
-<script id="tex_fragment_shh" type="x-shader/x-fragment">
 /**********************************************************************
     Freeciv-web - the web version of Freeciv. http://play.freeciv.org/
-    Copyright (C) 2009-2016  The Freeciv-web project
+    Copyright (C) 2009-2017  The Freeciv-web project
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as published by
@@ -19,12 +17,26 @@
 
 ***********************************************************************/
 
-uniform sampler2D texture;
-
 varying vec2 vUv;
+varying vec3 vNormal;
+varying vec3 vPosition;
+varying vec3 vPosition_camera;
+varying vec3 vColor;
 
-void main() {
-  gl_FragColor = texture2D(texture, vUv);
+void main()
+{
+  vUv = uv;
+
+  if (color.r == 0.0 &&  position.y < 54.0) {
+    // hidden water tile, move the black terrain landscape above the water plane.
+    vec4 mvPosition = modelViewMatrix * vec4( position.x, 54.0, position.z , 1.0 );
+    gl_Position = projectionMatrix * mvPosition;
+  } else {
+    vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+    gl_Position = projectionMatrix * mvPosition;
+  }
+  vPosition_camera = gl_Position.xyz;
+  vNormal = normal;
+  vPosition = position;
+  vColor = color;
 }
-
-</script>

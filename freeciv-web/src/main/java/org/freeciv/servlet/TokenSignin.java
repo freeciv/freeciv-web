@@ -36,6 +36,8 @@ import javax.naming.*;
 /**
  * Sign in with a Google Account
  * URL: /token_signin
+ *
+ * https://developers.google.com/identity/sign-in/web/backend-auth
  */
 public class TokenSignin extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -56,9 +58,14 @@ public class TokenSignin extends HttpServlet {
             GoogleIdToken idToken = verifier.verify(idtoken);
             if (idToken != null) {
                 Payload payload = idToken.getPayload();
-                // Print user identifier
+
                 String userId = payload.getSubject();
-                System.out.println("User ID: " + userId);
+                String email = payload.getEmail();
+                boolean emailVerified = Boolean.valueOf(payload.getEmailVerified());
+                if (!emailVerified) {
+                    response.getOutputStream().print("Email not verified");
+                    return;
+                }
 
                 Context env = (Context) (new InitialContext().lookup("java:comp/env"));
                 DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
@@ -66,29 +73,29 @@ public class TokenSignin extends HttpServlet {
 
                 // 1. Check if username and userId is already stored in the database,
                 //  and check if the username and userId matches.
-
                 String authQuery =
-                        "SELECT subject "
+                        "SELECT subject, activated "
                                 + "FROM google_auth "
-                                + "WHERE LOWER(username) = LOWER(?) "
-                                + "	AND activated = '1' LIMIT 1";
+                                + "WHERE LOWER(username) = LOWER(?)";
                 PreparedStatement ps1 = conn.prepareStatement(authQuery);
                 ps1.setString(1, username);
                 ResultSet rs1 = ps1.executeQuery();
                 if (!rs1.next()) {
                     // if username not found, then a new user.
-                    String query = "INSERT INTO google_auth (username, subject, activated) "
-                            + "VALUES (?, ?, ?)";
+                    String query = "INSERT INTO google_auth (username, subject, email, activated) "
+                            + "VALUES (?, ?, ?, ?)";
                     PreparedStatement preparedStatement = conn.prepareStatement(query);
                     preparedStatement.setString(1, username.toLowerCase());
                     preparedStatement.setString(2, userId);
-                    preparedStatement.setInt(3, 1);
+                    preparedStatement.setString(3, email);
+                    preparedStatement.setInt(4, 1);
                     preparedStatement.executeUpdate();
                     response.getOutputStream().print(userId);
                 } else {
                     String dbSubject = rs1.getString(1);
+                    int activated = rs1.getInt(2);
 
-                    if (dbSubject != null && dbSubject.equals(userId)) {
+                    if (dbSubject != null && dbSubject.equals(userId) && activated == 1) {
                         // if username and userId matches, then login OK!
                         response.getOutputStream().print(userId);
                     } else {

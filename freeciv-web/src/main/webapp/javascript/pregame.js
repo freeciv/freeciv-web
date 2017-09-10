@@ -1177,7 +1177,7 @@ function show_longturn_intro_dialog() {
         "to report players who behave badly or cheat.<br><br>" +
         "You will get to play for turn immediately after signing up, and your next turn tomorrow. Please join the LongTurn game only if you are interested in playing one turn every day. " +
         "Players who are idle for more than 12 turns can be replaced by new players. This means that idle players will continually be replaced by new players.<br><br>" +
-        "Joining this game requires signing in with a player name and Google Account."+
+        "Joining this game requires signing in with a player name and validated Google Account."+
         "<br><br><br><table><tr><td>Player name:</td><td><input id='username_req' type='text' size='25' maxlength='31'></td></tr></table>" +
         " <br><br><span id='username_validation_result' style='display:none;'></span><br>" +
         "<div id='fc-signin2'></div><br><br>";
@@ -1238,7 +1238,7 @@ function show_longturn_intro_dialog() {
 
 
  gapi.signin2.render('fc-signin2', {
-        'scope': 'profile',
+        'scope': 'profile email',
         'width': 240,
         'height': 50,
         'onsuccess': google_signin_on_success,
@@ -1700,6 +1700,8 @@ function google_signin_on_success(googleUser)
   xhr.onload = function() {
     if (xhr.responseText == "Failed" || xhr.responseText == null || xhr.responseText.length < 5) {
       swal("Login failed.");
+    } else if (xhr.responseText == "Email not verified") {
+      swal("Login failed. E-mail not verified.");
     } else {
       google_user_subject = xhr.responseText;
       simpleStorage.set("username", username);

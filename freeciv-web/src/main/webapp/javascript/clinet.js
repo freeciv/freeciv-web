@@ -129,7 +129,10 @@ function check_websocket_ready()
       sha_password = encodeURIComponent(shaObj.getHash("HEX"));
     }
 
-    if (is_longturn() && google_user_subject.length < 10) return;
+    if (is_longturn() && google_user_subject == null) {
+      swal("Login failed.");
+      return;
+    }
 
     var login_message = {"pid":4, "username" : username,
     "capability": freeciv_version, "version_label": "-dev",

@@ -15,6 +15,8 @@ var ts="${initParam.buildTimeStamp}";
 </script>
 <script type="text/javascript" src="/javascript/libs/jquery.min.js?ts=${initParam.buildTimeStamp}"></script>
 
+<script src="https://apis.google.com/js/platform.js"></script>
+
 <% if (request.getServerName().equals("play.freeciv.org")) { %>
   <script type="text/javascript" src="/javascript/webclient.min.js?ts=${initParam.buildTimeStamp}"></script>
 <% } else { %>
@@ -36,7 +38,6 @@ var ts="${initParam.buildTimeStamp}";
 <meta name="google-signin-client_id" content="122428231951-2vrvrtd9sc2v9nktemclkvc2t187jkr6.apps.googleusercontent.com">
 <link rel="manifest" href="/static/manifest.json">
 
-<script src="https://apis.google.com/js/platform.js" async defer></script>
 <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
         async defer>
 </script>

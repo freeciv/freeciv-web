@@ -82,7 +82,7 @@ class WSHandler(websocket.WebSocketHandler):
             self.civserverport = login_message['port']
             auth_ok = self.check_user(login_message['username'], login_message['password'], login_message['subject']);
             if (not auth_ok): 
-              self.write_message("Error: Could not authenticate user with password.")
+              self.write_message("{'Error': 'Could not authenticate user with password.'}")
               return
 
             self.loginpacket = message
@@ -123,13 +123,15 @@ class WSHandler(websocket.WebSocketHandler):
 
         # Check login with Google Account
         cursor = cnx.cursor()
-        query = ("select subject, activated from google_auth where lower(username)=lower(%(usr)s)")
+        query = ("select subject, activated, (select a.username from auth a where ga.username = a.username) as auth_username from google_auth ga where lower(username)=lower(%(usr)s)")
         cursor.execute(query, {'usr' : username})
         dbSubject = None;
+        authUsername = None;
         for usrrow in cursor:
           if (usrrow[1] == 0): return False;
           dbSubject = usrrow[0];
-        if (dbSubject is not None and dbSubject != check_subject): return False;
+          authUsername = usrrow[2];
+        if (dbSubject is not None and dbSubject != check_subject and authUsername is None): return False;
         if (dbSubject is not None and dbSubject == check_subject): return True;
 
         # Get the hashed password from the database

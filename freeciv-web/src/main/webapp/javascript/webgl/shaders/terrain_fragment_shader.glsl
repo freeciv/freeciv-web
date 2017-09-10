@@ -467,8 +467,8 @@ void main(void)
     c = mix(c, vec3(t1), t1.a);
   }
 
-  if (vColor.g == 1.0) {
-    // render Irrigation.
+  if (vColor.g > 0.9) {
+    // render farmland.
     texture_coord = vec2(mod(map_x_size * (vUv.x / 4.0), 0.25) + sprite_pos14_x , mod((vUv.y * map_y_size / 4.0), 0.25) + sprite_pos14_y);
     vec4 t1 = texture2D(terrains, texture_coord);
     c = mix(c, vec3(t1), t1.a);

@@ -1714,10 +1714,12 @@ function google_signin_on_success(googleUser)
 
 
 /**************************************************************************
-
+ Handle Google signin problems.
 **************************************************************************/
 function google_signin_on_failure(error)
 {
+  if (error['error'] == "popup_closed_by_user") return;
+
   swal("Unable to sign in with Google: " + JSON.stringify(error));
   console.error("Unable to sign in with Google: " + JSON.stringify(error));
 

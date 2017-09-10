@@ -74,14 +74,15 @@ public class TokenSignin extends HttpServlet {
                 // 1. Check if username and userId is already stored in the database,
                 //  and check if the username and userId matches.
                 String authQuery =
-                        "SELECT subject, activated "
+                        "SELECT subject, activated, username "
                                 + "FROM google_auth "
-                                + "WHERE LOWER(username) = LOWER(?)";
+                                + "WHERE LOWER(username) = LOWER(?) OR subject = ?";
                 PreparedStatement ps1 = conn.prepareStatement(authQuery);
                 ps1.setString(1, username);
+                ps1.setString(2, userId);
                 ResultSet rs1 = ps1.executeQuery();
                 if (!rs1.next()) {
-                    // if username not found, then a new user.
+                    // if username or subject not found, then a new user.
                     String query = "INSERT INTO google_auth (username, subject, email, activated) "
                             + "VALUES (?, ?, ?, ?)";
                     PreparedStatement preparedStatement = conn.prepareStatement(query);
@@ -93,9 +94,10 @@ public class TokenSignin extends HttpServlet {
                     response.getOutputStream().print(userId);
                 } else {
                     String dbSubject = rs1.getString(1);
-                    int activated = rs1.getInt(2);
+                    int dbActivated = rs1.getInt(2);
+                    String Username = rs1.getString(3);
 
-                    if (dbSubject != null && dbSubject.equals(userId) && activated == 1) {
+                    if (dbSubject != null && dbSubject.equals(userId) && dbActivated == 1 && username.equals(Username)) {
                         // if username and userId matches, then login OK!
                         response.getOutputStream().print(userId);
                     } else {

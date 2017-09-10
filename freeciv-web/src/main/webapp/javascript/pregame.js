@@ -1718,7 +1718,7 @@ function google_signin_on_success(googleUser)
 **************************************************************************/
 function google_signin_on_failure(error)
 {
-  swal("Unable to sign in with Google: " + error);
-  console.error("Unable to sign in with Google: " + error);
+  swal("Unable to sign in with Google: " + JSON.stringify(error));
+  console.error("Unable to sign in with Google: " + JSON.stringify(error));
 
 }

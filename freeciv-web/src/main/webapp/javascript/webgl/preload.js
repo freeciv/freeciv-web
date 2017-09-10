@@ -30,7 +30,7 @@ var model_filenames = ["AEGIS Cruiser",     "city_european_1",  "Helicopter",   
                        "Armor",             "Hut",
                        "Artillery",         "Cruise Missile",   "Ironclad",      "Settlers",
                        "AWACS",             "Cruiser",
-                       "Barbarian Leader",  "Destroyer",        "Irrigation",    "Spy",
+                       "Barbarian Leader",  "Destroyer",        "Spy",
                        "Battleship",        "Diplomat",         "Knights",       "Stealth Bomber",
                        "Bomber",            "Dragoons",         "Legion",        "Submarine",
                        "Engineers",         "Marines",          "Transport",
@@ -41,7 +41,7 @@ var model_filenames = ["AEGIS Cruiser",     "city_european_1",  "Helicopter",   
                        "Catapult",          "Frigate",          "Migrants",
                        "Cavalry",           "Paratroopers",     "Workers",
                        "Chariot",           "Galleon",          "Partisan",
-                       "city_european_0",   "Phalanx",          "Farmland"
+                       "city_european_0",   "Phalanx"
                       ];
 
 /****************************************************************************

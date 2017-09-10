@@ -373,50 +373,13 @@ function update_city_position(ptile) {
 
 
 /****************************************************************************
-  Handles tile extras, such as specials, irrigation, mine.
+  Handles tile extras, such as specials, mine.
 ****************************************************************************/
 function update_tile_extras(ptile) {
 
   var height = 5 + ptile['height'] * 100;
 
-  if (tile_extra_positions[EXTRA_IRRIGATION + "." + ptile['index']] == null && tile_has_extra(ptile, EXTRA_IRRIGATION)) {
-    var irrigation = webgl_get_model("Irrigation");
-    if (irrigation == null) return;
-    tile_extra_positions[EXTRA_IRRIGATION + "." + ptile['index']] = irrigation;
-
-    var pos = map_to_scene_coords(ptile['x'], ptile['y']);
-    irrigation.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 13);
-    irrigation.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
-    irrigation.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 13);
-    if (scene != null && irrigation != null) {
-      scene.add(irrigation);
-    }
-  }
-
-  if (tile_extra_positions[EXTRA_FARMLAND + "." + ptile['index']] == null && tile_has_extra(ptile, EXTRA_FARMLAND)) {
-    if (scene != null && tile_extra_positions[EXTRA_IRRIGATION + "." + ptile['index']] != null) {
-      scene.remove(tile_extra_positions[EXTRA_IRRIGATION + "." + ptile['index']]);
-    }
-
-    var farmland = webgl_get_model("Farmland");
-    if (farmland == null) return;
-    tile_extra_positions[EXTRA_FARMLAND + "." + ptile['index']] = farmland;
-
-    var pos = map_to_scene_coords(ptile['x'], ptile['y']);
-    farmland.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 13);
-    farmland.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
-    farmland.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 13);
-    var rotation_rnd = Math.random();
-    var rotation_val = 0;
-    if (rotation_rnd < 0.25) rotation_val = 0;
-    if (rotation_rnd > 0.25 && rotation_rnd < 0.5) rotation_val = 2 * Math.PI * 0.25;
-    if (rotation_rnd > 0.5 && rotation_rnd < 0.75) rotation_val = 2 * Math.PI * 0.5;
-    if (rotation_rnd > 0.75) rotation_val = 2 * Math.PI * 0.75;
-    farmland.rotateOnAxis(new THREE.Vector3(0,1,0).normalize(), rotation_val);
-    if (scene != null && farmland != null) {
-      scene.add(farmland);
-    }
-  }
+  webgl_update_farmland_irrigation_vertex_colors(ptile);
 
   if (tile_extra_positions[EXTRA_MINE + "." + ptile['index']] == null && tile_has_extra(ptile, EXTRA_MINE)) {
     var mine = webgl_get_model("Mine");

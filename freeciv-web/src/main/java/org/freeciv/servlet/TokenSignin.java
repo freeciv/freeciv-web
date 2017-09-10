@@ -97,7 +97,7 @@ public class TokenSignin extends HttpServlet {
                     int dbActivated = rs1.getInt(2);
                     String Username = rs1.getString(3);
 
-                    if (dbSubject != null && dbSubject.equals(userId) && dbActivated == 1 && username.equals(Username)) {
+                    if (dbSubject != null && dbSubject.equalsIgnoreCase(userId) && dbActivated == 1 && username.equalsIgnoreCase(Username)) {
                         // if username and userId matches, then login OK!
                         response.getOutputStream().print(userId);
                     } else {

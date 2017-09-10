@@ -20,7 +20,7 @@
 var map_index_to_face = {};  // a map where the key is x.y and the value is a Tree.js Face
 
 /**************************************************************************
-...
+ Updates the terrain vertex colors to set tile to known, unknown or fogged.
 **************************************************************************/
 function webgl_update_tile_known(old_tile, new_tile)
 {
@@ -31,14 +31,7 @@ function webgl_update_tile_known(old_tile, new_tile)
 
   for (var i = 0; i < map_index_to_face[tx + "." + ty].length; i++) {
     var face = map_index_to_face[tx + "." + ty][i];
-
-    if (tile_get_known(new_tile) == TILE_KNOWN_SEEN) {
-      face.color.copy(new THREE.Color(1,0,0));
-    } else if (tile_get_known(new_tile) == TILE_KNOWN_UNSEEN) {
-      face.color.copy(new THREE.Color(0.5,0,0));
-    } else if (tile_get_known(new_tile) == TILE_UNKNOWN) {
-      face.color.copy(new THREE.Color(0,0,0));
-    }
+    face.color.copy(get_vertex_color_from_tile(new_tile));
   }
 
   landGeometry.colorsNeedUpdate = true;
@@ -46,3 +39,52 @@ function webgl_update_tile_known(old_tile, new_tile)
 }
 
 
+
+/**************************************************************************
+Updates the terrain vertex colors to set irrigation, farmland, or none.
+**************************************************************************/
+function webgl_update_farmland_irrigation_vertex_colors(ptile)
+{
+  if (ptile == null || landGeometry == null) return;
+
+  var tx = ptile['x'];
+  var ty = ptile['y'];
+
+  for (var i = 0; i < map_index_to_face[tx + "." + ty].length; i++) {
+    var face = map_index_to_face[tx + "." + ty][i];
+    face.color.copy(get_vertex_color_from_tile(ptile));
+  }
+
+  landGeometry.colorsNeedUpdate = true;
+
+}
+
+
+
+/**************************************************************************
+ Returns the vertex colors (THREE.Color) of a tile. The color is used to
+ set terrain type in the terrain fragment shader.
+**************************************************************************/
+function get_vertex_color_from_tile(ptile)
+{
+    var known_status_color = 0;
+    if (tile_get_known(ptile) == TILE_KNOWN_SEEN) {
+      known_status_color = 1;
+    } else if (tile_get_known(ptile) == TILE_KNOWN_UNSEEN) {
+      known_status_color = 0.5;
+    } else if (tile_get_known(ptile) == TILE_UNKNOWN) {
+      known_status_color = 0;
+    }
+
+    var farmland_irrigation_color = 0;
+    if (tile_has_extra(ptile, EXTRA_FARMLAND)) {
+      farmland_irrigation_color = 1.0;
+    } else if (tile_has_extra(ptile, EXTRA_IRRIGATION)) {
+      farmland_irrigation_color = 0.5;
+    } else {
+      farmland_irrigation_color = 0;
+    }
+
+    return new THREE.Color(known_status_color, farmland_irrigation_color,0);
+
+}

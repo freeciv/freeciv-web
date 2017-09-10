@@ -1180,7 +1180,7 @@ function show_longturn_intro_dialog() {
         "Joining this game requires signing in with a player name and validated Google Account."+
         "<br><br><br><table><tr><td>Player name:</td><td><input id='username_req' type='text' size='25' maxlength='31'></td></tr></table>" +
         " <br><br><span id='username_validation_result' style='display:none;'></span><br>" +
-        "<div id='fc-signin2'></div><br><br>";
+        "<div id='fc-signin2'></div><br><br><br><small>(Please disable adblockers for Google login button to work)</small>";
 
 
 

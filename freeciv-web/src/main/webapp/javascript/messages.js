@@ -66,6 +66,53 @@ function init_chatbox()
 }
 
 /**************************************************************************
+ Returns the kind of message (normal, private, ally).
+ If an observer sends a private message, it will be treated as private.
+ Same for a message to allies sent by an observer. That is, only public
+ messages from observers will have the E_CHAT_OBSERVER type.
+ There are quite a few message formats, selection is made depending on font
+ color, that comes after the player in normal games or the timestamp or
+ nothing in longturn games.
+
+ Current examples:
+ <b>player:</b><font color="#FFFFFF"><player> Normal message</font>
+ <b>player:</b><font color="#A020F0">->{other} Private sent</font>
+ <b>player:</b><font color="#A020F0">{player -> other} Private recv</font>
+ <b>player:</b><font color="#551166">player to allies: allies msg</font>
+ <b>observer:</b><font color="#FFFFFF"><(observer)> mesage</font>
+ <b>observer:</b><font color="#A020F0">{(observer)} private from observer</font>
+ <b>observer:</b><font color="#A020F0">*(observer)* private from observer</font>
+ (T24 - 19:14:47) <font color="#FFFFFF"><player> player : lt msg with ts</player></font>
+ <font color="#FFFFFF"><player> player : lt msg without ts</player></font>
+ <font color="#A020F0">->{other} lt private sent msg</font>
+ ...
+**************************************************************************/
+function reclassify_chat_message(text)
+{
+  // 29 characters just for the font tags
+  if (text == null || text.length < 29) {
+    return E_CHAT_MSG;
+  }
+
+  // Remove the player
+  text = text.replace(/^<b>[^<]*:<\/b>/, "");
+
+  // Remove the timestamp
+  text = text.replace(/^\([^)]*\) /, "");
+
+  // We should have the font tag now
+  var color = text.substring(14, 20);
+  if (color == "A020F0") {
+    return E_CHAT_PRIVATE;
+  } else if (color == "551166") {
+    return E_CHAT_ALLIES;
+  } else if (text.charAt(23) == '(') {
+    return E_CHAT_OBSERVER;
+  }
+  return E_CHAT_MSG;
+}
+
+/**************************************************************************
  This adds new text to the main message chatbox. See update_chatbox() which
  does the actual update to the screen.
 **************************************************************************/
@@ -77,6 +124,10 @@ function add_chatbox_text(packet)
     if (!check_text_with_banlist(text)) return;
     if (is_longturn()) {
       if (text.indexOf("waiting on") != -1 || text.indexOf("Lost connection") != -1 || text.indexOf("Not enough") != -1 || text.indexOf("has been removed") != -1 || text.indexOf("has connected") != -1) return;
+    }
+
+    if (packet['event'] === E_CHAT_MSG) {
+      packet['event'] = reclassify_chat_message(text);
     }
 
     if (civclient_state <= C_S_PREPARING) {

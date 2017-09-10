@@ -12,7 +12,7 @@ index d74f178..e2e0e36 100644
 +      if (pplayer) {
 +        /* Make it human! */
 +        set_as_human(pplayer);
-+        pplayer->economic.gold += game.info.turn * 30; if (pplayer->economic.gold > 1000) pplayer->economic.gold = 1000;
++        pplayer->economic.gold += game.info.turn * 30; if (pplayer->economic.gold > 700) pplayer->economic.gold = 700;
 +        pplayer->economic.science = 60;
 +        pplayer->economic.tax = 40;
 +        connection_attach(pconn, pplayer, FALSE);

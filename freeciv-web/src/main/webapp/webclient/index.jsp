@@ -33,8 +33,10 @@ var ts="${initParam.buildTimeStamp}";
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, minimal-ui" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="google-signin-client_id" content="122428231951-2vrvrtd9sc2v9nktemclkvc2t187jkr6.apps.googleusercontent.com">
 <link rel="manifest" href="/static/manifest.json">
 
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
         async defer>
 </script>

@@ -10,7 +10,8 @@
 		This is the privacy policy for Freeciv:
 		<ul>
 			<li>Freeciv is a free service provided to users.</li>
-			<li>Freeciv does not collect any personal information about users, such as email address, real name or address.</li>
+			<li>Freeciv can be used without the user providing any personal information , such as email address, real name or address.</li>
+			<li>Freeciv can be used where the user provides their e-mail address or signs in with a Google account. This e-mail address can be used for Play-by-email games.</li>
 			<li>Freeciv allows you to enter a player name when starting a game, to personalize your game experience.</li>
 			<li>Freeciv uses Google Analytics to collect information about the number of visitors to the web service.</li>
 			<li>Freeciv uses Track.js to detect and log Javacript errors.</li>

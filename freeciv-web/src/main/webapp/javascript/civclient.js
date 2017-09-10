@@ -32,7 +32,7 @@ var username = null;
 var fc_seedrandom = null;
 
 // List of ports which are reserved for LongTurn games.
-var longturn_server_port_list = [6003, 6004, 6005, 6006, 6007, 6008, 6009];
+var longturn_server_port_list = [6003];
 
 var music_list = [ "battle-epic",
                    "andrewbeck-ancient",
@@ -182,8 +182,12 @@ function init_common_intro_dialog() {
     show_hotseat_dialog();
 
   } else if (is_small_screen()) {
-    show_intro_dialog("Welcome to Freeciv-web",
-      "You are about to join the game. Please enter your name:");
+    if (is_longturn()) {
+        show_longturn_intro_dialog();
+    } else {
+      show_intro_dialog("Welcome to Freeciv-web",
+        "You are about to join the game. Please enter your name:");
+    }
   } else if ($.getUrlVar('action') == "earthload") {
     show_intro_dialog("Welcome to Freeciv-web",
       "You can now play Freeciv-web on the earth map you have chosen. " +
@@ -196,24 +200,17 @@ function init_common_intro_dialog() {
       "Please enter your name: ");
 
   } else if ($.getUrlVar('action') == "multi") {
-    var msg = "You are about to join this game server, where you can "  +
+
+    if (is_longturn()) {
+        show_longturn_intro_dialog();
+    } else {
+      var msg = "You are about to join this game server, where you can "  +
                   "participate in a multiplayer game. You can customize the game " +
                   "settings, and wait for the minimum number of players before " +
                   "the game can start. ";
-    if (is_longturn()) msg = "<br>This is a LongTurn game, which is a Freeciv multiplayer game "+
-      "where the turns are 23 hours each, so players logs in once every day to do their turn. This format allows for more players to "+
-      "play at once, more time to strategize, more time to coordinate with other players, and less rushing to get things done, which can "+
-      "occur in a standard multi-player Freeciv game. It takes a lot longer to play a game, about 2 to 6 months, but you can play it just a "+
-      "little bit every day. <br><br> "+
-      "Please be polite to the other players and don't cheat. "+
-      "Contact a moderator at <a style='color: black;' href='mailto:freeciv-web-moderation@tutanota.com'>freeciv-web-moderation@tutanota.com</a> "+
-      "to report players who behave badly or cheat.<br><br>" +
-      "You will get to play for turn immediately after signing up, and your next turn tomorrow. Please join the LongTurn game only if you are interested in playing one turn every day. " +
-      "Players who are idle for more than 12 turns can be replaced by new players. This means that idle players will continually be replaced by new players.<br><br>" +
-      "Joining this game requires an account, so please create one if you don't have one already."+
-      " <br><br>"
-    msg += "Please enter your name: "
-    show_intro_dialog("Welcome to Freeciv-web", msg);
+      show_intro_dialog("Welcome to Freeciv-web", msg);
+    }
+
   } else {
     show_intro_dialog("Welcome to Freeciv-web",
       "You are about to join this game server, where you can " +
@@ -306,7 +303,6 @@ function validate_username() {
   }
 
   simpleStorage.set("username", username);
-  network_init();
 
   return true;
 }

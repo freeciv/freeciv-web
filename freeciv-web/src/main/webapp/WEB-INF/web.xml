@@ -134,6 +134,17 @@
 		<url-pattern>/login_user</url-pattern>
 	</servlet-mapping>
 
+	<!-- /token_signin -->
+	<servlet>
+		<servlet-name>TokenSignin</servlet-name>
+		<servlet-class>org.freeciv.servlet.TokenSignin</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>TokenSignin</servlet-name>
+		<url-pattern>/token_signin</url-pattern>
+	</servlet-mapping>
+
 	<!-- /validate_user -->
 	<servlet>
 		<servlet-name>ValidateUser</servlet-name>

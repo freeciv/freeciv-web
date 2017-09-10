@@ -29,6 +29,7 @@ var antialiasing_setting = true;
 var update_player_info_pregame_queued = false;
 var captcha_site_key = '6LfpcgMTAAAAAPRAOqYy6ZUhuX6bOJ7-7-_1V0FL';
 var password_reset_count = 0;
+var google_user_subject = null;
 
 /****************************************************************************
   ...
@@ -1017,10 +1018,8 @@ function show_intro_dialog(title, message) {
 
   if (renderer == RENDERER_WEBGL) {
     var renderer_name = "unknown";
-
     try {
       var gl = document.createElement('canvas').getContext('webgl',{ failIfMajorPerformanceCaveat: true });
-
       if (!(platform.name == "Microsoft Edge")) {
         if (!gl) {
           show_dialog_message("WebGL not supported", "WebGL 3D with hardware acceleration is not supported. The 3D version will not work. Please try the 2D version.");
@@ -1037,9 +1036,8 @@ function show_intro_dialog(title, message) {
     } catch (err) {
       console.error(err);
     }
-
-    intro_html += "<span style='color: #800000;'><small>The 3D WebGL version of Freeciv-web requires WebGL 3D hardware support such as Nvidia GeForce and at least 3GB of RAM.<br>" +
-    "Current graphics level: ";
+    intro_html += "<span style='color: #800000;'><small>The 3D WebGL version of Freeciv-web requires WebGL 3D hardware.<br>" +
+    "Graphics level: ";
     if (graphics_quality == QUALITY_LOW) {
       intro_html += "Low quality.";
     } else if (graphics_quality == QUALITY_MEDIUM) {
@@ -1047,9 +1045,11 @@ function show_intro_dialog(title, message) {
     } else {
       intro_html += "High quality.";
     }
-    intro_html += " Current WebGL renderer: " + renderer_name + "</small></span>";
+    intro_html += "</small></span>";
   }
+
   $("#dialog").html(intro_html);
+
   var stored_username = simpleStorage.get("username", "");
   if (stored_username != null && stored_username != false) {
     $("#username_req").val(stored_username);
@@ -1079,6 +1079,7 @@ function show_intro_dialog(title, message) {
 			  // if intro dialog is closed, then check the username and connect to the server.
 			  if (dialog_close_trigger != "button") {
 			    if (validate_username()) {
+			      network_init();
 			      if (!is_touch_device()) $("#pregame_text_input").focus();
 			      return true;
 			    } else {
@@ -1159,6 +1160,92 @@ function show_intro_dialog(title, message) {
   blur_input_on_touchdevice();
 }
 
+/**************************************************************************
+ Shows the Freeciv LongTurn intro dialog.
+**************************************************************************/
+function show_longturn_intro_dialog() {
+
+  var title = "Welcome to Freeciv-web LongTurn!"
+
+  var message = "<br>This is a LongTurn game, which is a Freeciv multiplayer game "+
+        "where the turns are 23 hours each, so players logs in once every day to do their turn. This format allows for more players to "+
+        "play at once, more time to strategize, more time to coordinate with other players, and less rushing to get things done, which can "+
+        "occur in a standard multi-player Freeciv game. It takes a lot longer to play a game, about 2 to 6 months, but you can play it just a "+
+        "little bit every day. <br><br> "+
+        "Please be polite to the other players and don't cheat. "+
+        "Contact a moderator at <a style='color: black;' href='mailto:freeciv-web-moderation@tutanota.com'>freeciv-web-moderation@tutanota.com</a> "+
+        "to report players who behave badly or cheat.<br><br>" +
+        "You will get to play for turn immediately after signing up, and your next turn tomorrow. Please join the LongTurn game only if you are interested in playing one turn every day. " +
+        "Players who are idle for more than 12 turns can be replaced by new players. This means that idle players will continually be replaced by new players.<br><br>" +
+        "Joining this game requires signing in with a player name and Google Account."+
+        "<br><br><br><table><tr><td>Player name:</td><td><input id='username_req' type='text' size='25' maxlength='31'></td></tr></table>" +
+        " <br><br><span id='username_validation_result' style='display:none;'></span><br>" +
+        "<div id='fc-signin2'></div><br><br>";
+
+
+
+  // reset dialog page.
+  $("#dialog").remove();
+  $("<div id='dialog'></div>").appendTo("div#game_page");
+
+  var intro_html = message
+
+  $("#dialog").html(message);
+  var stored_username = simpleStorage.get("username", "");
+  if (stored_username != null && stored_username != false) {
+    $("#username_req").val(stored_username);
+  }
+
+
+  $("#dialog").attr("title", title);
+  $("#dialog").dialog({
+			bgiframe: true,
+			modal: true,
+			width: is_small_screen() ? "80%" : "60%",
+			beforeClose: function( event, ui ) {
+			  // if intro dialog is closed, then check the username and connect to the server.
+			  if (dialog_close_trigger != "button") {
+			    if (validate_username()) {
+			      network_init();
+			      if (!is_touch_device()) $("#pregame_text_input").focus();
+			      return true;
+			    } else {
+			      return false;
+			    }
+			  }
+			},
+			buttons: []
+
+		});
+
+  var stored_username = simpleStorage.get("username", "");
+  var stored_password = simpleStorage.get("password", "");
+  if (stored_username != null && stored_username != false && stored_password != null && stored_password != false) {
+    // Not allowed to create a new user account when already logged in.
+    $(".ui-dialog-buttonset button").last().button("disable");
+  }
+
+  if (is_small_screen()) {
+    /* some fixes for pregame screen on small devices.*/
+    $("#freeciv_logo").remove();
+    $("#pregame_message_area").css("width", "73%");
+    $("#observe_button").remove();
+  }
+
+  $("#dialog").dialog('open');
+
+  blur_input_on_touchdevice();
+
+
+ gapi.signin2.render('fc-signin2', {
+        'scope': 'profile',
+        'width': 240,
+        'height': 50,
+        'onsuccess': google_signin_on_success,
+        'onfailure': google_signin_on_failure
+      });
+
+}
 
 /**************************************************************************
   Validate username callback
@@ -1178,6 +1265,7 @@ function validate_username_callback()
         }
 
         if (validate_username()) {
+          network_init();
           if (!is_touch_device()) $("#pregame_text_input").focus();
           $("#dialog").dialog('close');
         }
@@ -1205,6 +1293,7 @@ function validate_username_callback()
                  simpleStorage.set("password", password);
                  /* Login OK! */
                  if (validate_username()) {
+                   network_init();
                    if (!is_touch_device()) $("#pregame_text_input").focus();
                    $("#dialog").dialog('close');
                  }
@@ -1591,5 +1680,43 @@ function forgot_pbem_password()
   } else {
     swal("Captcha not available. This could be caused by a browser plugin.");
   }
+
+}
+
+/**************************************************************************
+ User signed in with Google account.
+**************************************************************************/
+function google_signin_on_success(googleUser)
+{
+  var id_token = googleUser.getAuthResponse().id_token;
+  username = $("#username_req").val().trim().toLowerCase();
+  if (!validate_username()) {
+    return;
+  }
+  //validate user token.
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', '/token_signin');
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhr.onload = function() {
+    if (xhr.responseText == "Failed" || xhr.responseText == null || xhr.responseText.length < 5) {
+      swal("Login failed.");
+    } else {
+      google_user_subject = xhr.responseText;
+      simpleStorage.set("username", username);
+      $("#dialog").dialog('close');
+    }
+  };
+  xhr.send('idtoken=' + id_token + "&username=" + username);
+
+}
+
+
+/**************************************************************************
+
+**************************************************************************/
+function google_signin_on_failure(error)
+{
+  swal("Unable to sign in with Google: " + error);
+  console.error("Unable to sign in with Google: " + error);
 
 }

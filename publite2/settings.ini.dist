@@ -6,7 +6,7 @@ save_directory = /var/lib/tomcat8/webapps/data/savegames/
 start_longturn = false
 
 #list of server ports which are reserved for LongTurn.
-longturn_server_ports=6003,6004,6005,6006,6007,6008,6009
+longturn_server_ports=6003
 
 [Resource usage]
 server_capacity_single = 2

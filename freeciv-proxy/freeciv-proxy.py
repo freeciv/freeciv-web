@@ -80,7 +80,7 @@ class WSHandler(websocket.WebSocketHandler):
             login_message = json.loads(message)
             self.username = login_message['username']
             self.civserverport = login_message['port']
-            auth_ok = self.check_user(login_message['username'], login_message['password']);
+            auth_ok = self.check_user(login_message['username'], login_message['password'], login_message['subject']);
             if (not auth_ok): 
               self.write_message("Error: Could not authenticate user with password.")
               return
@@ -114,13 +114,25 @@ class WSHandler(websocket.WebSocketHandler):
             gc.collect()
 
     # Check if username and password if correct, if the user already exists in the database.
-    def check_user(self, username, password):
+    def check_user(self, username, password, check_subject):
       result = None;
       cursor = None;
       cnx = None;
       try:
         cnx = mysql.connector.connect(user=mysql_user, database=mysql_database, password=mysql_password)
+
+        # Check login with Google Account
         cursor = cnx.cursor()
+        query = ("select subject, activated from google_auth where lower(username)=lower(%(usr)s)")
+        cursor.execute(query, {'usr' : username})
+        dbSubject = None;
+        for usrrow in cursor:
+          if (usrrow[1] == 0): return False;
+          dbSubject = usrrow[0];
+        if (dbSubject is not None and dbSubject != check_subject): return False;
+        if (dbSubject is not None and dbSubject == check_subject): return True;
+
+        # Get the hashed password from the database
         query = ("select username, secure_hashed_password, activated from auth where lower(username)=lower(%(usr)s)")
         cursor.execute(query, {'usr' : username})
         salt = None;
@@ -129,6 +141,7 @@ class WSHandler(websocket.WebSocketHandler):
           if (usrrow[2] == 0): return False;
         if (salt == None): return True;
 
+        # Validate the password in the database
         query = ("select count(*) from auth where lower(username)=lower(%(usr)s) and secure_hashed_password = ENCRYPT(%(pwd)s, %(salt)s)")
         cursor.execute(query, {'usr' : username, 'pwd' : password, 'salt' : salt})
         usrcount = 0;

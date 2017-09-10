@@ -440,9 +440,6 @@ function create_diplomacy_dialog(counterpart) {
       city_count_self += 1;
     }
   }
-  if (city_count_self == 0 || is_longturn()) {
-    $("#self_city_menu").remove();
-  }
 
   $("<li><a href='#' onclick='create_clause_req(" + pplayer['playerno']+ "," + CLAUSE_VISION + ",1);'>Give shared vision</a></li>").appendTo("#self_dipl_add");
   $("<li><a href='#' onclick='create_clause_req(" + pplayer['playerno']+ "," + CLAUSE_EMBASSY + ",1);'>Give embassy</a></li>").appendTo("#self_dipl_add");
@@ -498,9 +495,6 @@ function create_diplomacy_dialog(counterpart) {
       $("<li><a href='#' onclick='create_clause_req(" + counterpart['playerno']+ "," + CLAUSE_CITY + "," + city_id + ");'>" + decodeURIComponent(pcity['name']) + "</a></li>").appendTo("#counterpart_cities");
       city_count_counterpart += 1;
     }
-  }
-  if (city_count_counterpart == 0 || is_longturn()) {
-    $("#counterpart_city_menu").remove();
   }
 
   $("<li><a href='#' onclick='create_clause_req(" + counterpart['playerno']+ "," + CLAUSE_VISION + ",1);'>Give shared vision</a></li>").appendTo("#counterpart_dipl_add");
@@ -579,9 +573,6 @@ function create_diplomacy_dialog(counterpart) {
    });
 
   $("#diplomacy_dialog").parent().css("z-index", 1000);
-
-  // Disable trading with gold in LongTurn games, as this is commonly used when cheating with multipla accounts.
-  if (is_longturn()) $(".diplomacy_gold").remove();
 
 }
 

@@ -100,6 +100,8 @@ dos2unix ${basedir}/scripts/configuration.sh.dist
 sed -e "s/MYSQL_USER=root/MYSQL_USER=${mysql_user}/" -e "s/MYSQL_PASSWORD=changeme/MYSQL_PASSWORD=${mysql_pass}/" ${basedir}/scripts/configuration.sh.dist > ${basedir}/scripts/configuration.sh
 cp ${basedir}/publite2/settings.ini.dist ${basedir}/publite2/settings.ini
 cp ${basedir}/freeciv-web/src/main/webapp/META-INF/context.xml.dist ${basedir}/freeciv-web/src/main/webapp/META-INF/context.xml
+cp ${basedir}/pbem/settings.ini.dist ${basedir}/pbem/settings.ini
+cp ${basedir}/freeciv-proxy/settings.ini.dist ${basedir}/freeciv-proxy/settings.ini
 
 dos2unix ${basedir}/scripts/configuration.sh.dist
 sed -e "s/MYSQL_USER=root/MYSQL_USER=${mysql_user}/" -e "s/MYSQL_PASSWORD=changeme/MYSQL_PASSWORD=/" ${basedir}/scripts/configuration.sh.dist > ${basedir}/scripts/configuration.sh
@@ -119,8 +121,6 @@ cd ${basedir}/freeciv-web
 sudo -u ubuntu ./setup.sh || sudo -u ubuntu ./build.sh 
 
 echo "=============================="
-
-cp ${basedir}/pbem/settings.ini.dist ${basedir}/pbem/settings.ini
 
 service nginx stop
 rm /etc/nginx/sites-enabled/default

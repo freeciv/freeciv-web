@@ -80,9 +80,12 @@ class WSHandler(websocket.WebSocketHandler):
             login_message = json.loads(message)
             self.username = login_message['username']
             self.civserverport = login_message['port']
-            auth_ok = self.check_user(login_message['username'], login_message['password'], login_message['subject']);
+            auth_ok = self.check_user(
+                    login_message['username'] if 'username' in login_message else None, 
+                    login_message['password'] if 'password' in login_message else None, 
+                    login_message['subject'] if 'subject' in login_message else None);
             if (not auth_ok): 
-              self.write_message("{'Error': 'Could not authenticate user with password.'}")
+              self.write_message("'Error: Could not authenticate user with password.'")
               return
 
             self.loginpacket = message

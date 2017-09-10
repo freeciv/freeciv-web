@@ -1182,7 +1182,11 @@ function show_longturn_intro_dialog() {
         " <br><br><span id='username_validation_result' style='display:none;'></span><br>" +
         "<div id='fc-signin2'></div><br><br><br><small>(Please disable adblockers, then reload the page, for Google login button to work)</small>";
 
-
+  if (is_small_screen()) {
+    message = "Welcome to this LongTurn game! Enter your player name:"+
+      "<br><br><table><tr><td>Player name:</td><td><input id='username_req' type='text' size='25' maxlength='31'></td></tr></table>" +
+      " <br><br><span id='username_validation_result' style='display:none;'></span><br>";
+  }
 
   // reset dialog page.
   $("#dialog").remove();

@@ -1017,27 +1017,17 @@ function show_intro_dialog(title, message) {
 	  + " <br><br><span id='username_validation_result' style='display:none;'></span><br><br>";
 
   if (renderer == RENDERER_WEBGL) {
-    var renderer_name = "unknown";
     try {
       var gl = document.createElement('canvas').getContext('webgl',{ failIfMajorPerformanceCaveat: true });
       if (!(platform.name == "Microsoft Edge")) {
         if (!gl) {
           show_dialog_message("WebGL not supported", "WebGL 3D with hardware acceleration is not supported. The 3D version will not work. Please try the 2D version.");
           return;
-        } else {
-          var extension = gl.getExtension('WEBGL_debug_renderer_info');
-          if (extension != undefined) {
-            renderer_name = gl.getParameter(extension.UNMASKED_RENDERER_WEBGL);
-          }
-        }
-      } else {
-        renderer_name = "Microsoft Edge";
       }
     } catch (err) {
       console.error(err);
     }
-    intro_html += "<span style='color: #800000;'><small>The 3D WebGL version of Freeciv-web requires WebGL 3D hardware.<br>" +
-    "Graphics level: ";
+    intro_html += "<span style='color: #800000;'><small>The 3D WebGL version of Freeciv-web requires WebGL 3D hardware. Graphics level: ";
     if (graphics_quality == QUALITY_LOW) {
       intro_html += "Low quality.";
     } else if (graphics_quality == QUALITY_MEDIUM) {

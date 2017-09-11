@@ -183,7 +183,7 @@ function init_common_intro_dialog() {
 
   } else if (is_small_screen()) {
     if (is_longturn()) {
-        show_longturn_intro_dialog();
+        setTimeout(show_longturn_intro_dialog, 300);
     } else {
       show_intro_dialog("Welcome to Freeciv-web",
         "You are about to join the game. Please enter your name:");
@@ -202,7 +202,7 @@ function init_common_intro_dialog() {
   } else if ($.getUrlVar('action') == "multi") {
 
     if (is_longturn()) {
-        show_longturn_intro_dialog();
+        setTimeout(show_longturn_intro_dialog, 300);
     } else {
       var msg = "You are about to join this game server, where you can "  +
                   "participate in a multiplayer game. You can customize the game " +

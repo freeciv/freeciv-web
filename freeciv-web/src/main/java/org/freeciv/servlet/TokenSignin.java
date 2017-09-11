@@ -51,6 +51,11 @@ public class TokenSignin extends HttpServlet {
         String username = request.getParameter("username");
         Connection conn = null;
 
+        String ipAddress = request.getHeader("X-Real-IP");
+        if (ipAddress == null) {
+            ipAddress = request.getRemoteAddr();
+        }
+
         try {
             GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(GoogleNetHttpTransport.newTrustedTransport(), jacksonFactory)
                     .setAudience(Collections.singletonList("122428231951-2vrvrtd9sc2v9nktemclkvc2t187jkr6.apps.googleusercontent.com"))
@@ -83,13 +88,14 @@ public class TokenSignin extends HttpServlet {
                 ResultSet rs1 = ps1.executeQuery();
                 if (!rs1.next()) {
                     // if username or subject not found, then a new user.
-                    String query = "INSERT INTO google_auth (username, subject, email, activated) "
-                            + "VALUES (?, ?, ?, ?)";
+                    String query = "INSERT INTO google_auth (username, subject, email, activated, ip) "
+                            + "VALUES (?, ?, ?, ?, ?)";
                     PreparedStatement preparedStatement = conn.prepareStatement(query);
                     preparedStatement.setString(1, username.toLowerCase());
                     preparedStatement.setString(2, userId);
                     preparedStatement.setString(3, email);
                     preparedStatement.setInt(4, 1);
+                    preparedStatement.setString(5, ipAddress);
                     preparedStatement.executeUpdate();
                     response.getOutputStream().print(userId);
                 } else {

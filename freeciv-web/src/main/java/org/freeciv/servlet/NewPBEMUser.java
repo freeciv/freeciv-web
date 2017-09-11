@@ -74,6 +74,11 @@ public class NewPBEMUser extends HttpServlet {
 		String email = java.net.URLDecoder.decode(request.getParameter("email").replace("+", "%2B"), "UTF-8");
 		String captcha = java.net.URLDecoder.decode(request.getParameter("captcha"), "UTF-8");
 
+		String ipAddress = request.getHeader("X-Real-IP");
+		if (ipAddress == null) {
+			ipAddress = request.getRemoteAddr();
+		}
+
 		if (password == null || password.length() <= 2) {
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST,
 					"Invalid password. Please try again with another password.");
@@ -118,13 +123,14 @@ public class NewPBEMUser extends HttpServlet {
 			DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
 			conn = ds.getConnection();
 
-			String query = "INSERT INTO auth (username, email, secure_hashed_password, activated) "
-							+ "VALUES (?, ?, ?, ?)";
+			String query = "INSERT INTO auth (username, email, secure_hashed_password, activated, ip) "
+							+ "VALUES (?, ?, ?, ?, ?)";
 			PreparedStatement preparedStatement = conn.prepareStatement(query);
 			preparedStatement.setString(1, username.toLowerCase());
 			preparedStatement.setString(2, email);
 			preparedStatement.setString(3, Crypt.crypt(password));
 			preparedStatement.setInt(4, ACTIVATED);
+			preparedStatement.setString(5, ipAddress);
 			preparedStatement.executeUpdate();
 
 		} catch (Exception err) {

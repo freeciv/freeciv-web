@@ -74,7 +74,6 @@ public class LoginUser extends HttpServlet {
 			ResultSet rs1 = ps1.executeQuery();
 			if (!rs1.next()) {
 				response.getOutputStream().print("Failed");
-				return;
 			} else {
 				String hashedPasswordFromDB = rs1.getString(1);
 				if (hashedPasswordFromDB != null && hashedPasswordFromDB.equals(Crypt.crypt(secure_password, hashedPasswordFromDB))) {
@@ -82,7 +81,6 @@ public class LoginUser extends HttpServlet {
 					response.getOutputStream().print("OK");
 				} else {
 					response.getOutputStream().print("Failed");
-					return;
 				}
 			}
 

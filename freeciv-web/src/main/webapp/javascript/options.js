@@ -188,6 +188,7 @@ function init_options_dialog()
     $("#save_button").hide();
     $("#timeout_setting_div").hide();
     $("#title_setting_div").hide();
+    $("#surrender_button").hide();
   }
 
 }

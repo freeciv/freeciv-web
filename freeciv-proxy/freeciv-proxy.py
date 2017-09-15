@@ -85,7 +85,7 @@ class WSHandler(websocket.WebSocketHandler):
                     login_message['password'] if 'password' in login_message else None, 
                     login_message['subject'] if 'subject' in login_message else None);
             if (not auth_ok): 
-              self.write_message("'Error: Could not authenticate user with password.'")
+              self.write_message("[{\"pid\":25,\"message\":\"Error: Could not authenticate user with password. Try a different username.\"}]");
               return
 
             self.loginpacket = message

@@ -171,7 +171,7 @@ class CivCom(Thread):
         if (logger.isEnabledFor(logging.ERROR)):
             logger.error(message)
         self.send_buffer_append(
-            ("{\"pid\":25,\"message\":\"" + message + "\"}").encode("utf-8"))
+            ("{\"pid\":25,\"event\":100,\"message\":\"" + message + "\"}").encode("utf-8"))
 
     # Send packets from freeciv-proxy to civserver
     def send_packets_to_civserver(self):

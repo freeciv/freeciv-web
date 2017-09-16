@@ -85,7 +85,7 @@ class WSHandler(websocket.WebSocketHandler):
                     login_message['password'] if 'password' in login_message else None, 
                     login_message['subject'] if 'subject' in login_message else None);
             if (not auth_ok): 
-              self.write_message("[{\"pid\":25,\"message\":\"Error: Could not authenticate user with password. Try a different username.\"}]");
+              self.write_message("[{\"pid\":5,\"message\":\"Error: Could not authenticate user with password. Try a different username.\",\"you_can_join\":false,\"conn_id\":-1}]")
               return
 
             self.loginpacket = message
@@ -101,7 +101,7 @@ class WSHandler(websocket.WebSocketHandler):
             self.civcom = self.get_civcom(self.username, self.civserverport, self)
 
         if (self.civcom is None):
-            self.write_message("Error: Could not authenticate user.")
+            self.write_message("[{\"pid\":5,\"message\":\"Error: Could not authenticate user.\",\"you_can_join\":false,\"conn_id\":-1}]")
             return
 
         # send JSON request to civserver.

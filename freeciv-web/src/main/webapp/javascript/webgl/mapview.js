@@ -139,7 +139,7 @@ function init_webgl_mapview() {
   } );
 
   var mirrorMesh = new THREE.Mesh(
-    new THREE.PlaneBufferGeometry( mapview_model_width, mapview_model_height),
+    new THREE.PlaneBufferGeometry( mapview_model_width - 10, mapview_model_height - 10),
     water.material
   );
 

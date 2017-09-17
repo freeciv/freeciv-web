@@ -96,9 +96,11 @@ function animate_explosion_on_tile(tile_id, animation_frame)
   
   var ptile = tiles[tile_id];
   var height = 5 + ptile['height'] * 100;
+  if (ptile == null) return;
 
-  if (animation_frame > 0 && ptile['explosion_mesh'] != null) {
+  if (ptile['explosion_mesh'] != null) {
     scene.remove(ptile['explosion_mesh']);
+    ptile['explosion_mesh'] = null;
   }
   if (animation_frame == 5) {
     scene.remove(ptile['explosion_mesh']);
@@ -114,9 +116,8 @@ function animate_explosion_on_tile(tile_id, animation_frame)
   explosion_mesh.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 6);
   explosion_mesh.rotation.y = Math.PI / 4;
   explosion_mesh.updateMatrix();
-  ptile['explosion_mesh'] = explosion_mesh;
-
   if (scene != null && explosion_mesh != null) {
+     ptile['explosion_mesh'] = explosion_mesh;
      scene.add(explosion_mesh);
   }
 

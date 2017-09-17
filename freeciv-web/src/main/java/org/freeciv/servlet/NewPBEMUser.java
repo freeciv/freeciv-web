@@ -17,8 +17,6 @@
  *******************************************************************************/
 package org.freeciv.servlet;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 

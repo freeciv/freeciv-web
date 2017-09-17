@@ -52,7 +52,9 @@ function webgl_update_farmland_irrigation_vertex_colors(ptile)
 
   for (var i = 0; i < map_index_to_face[tx + "." + ty].length; i++) {
     var face = map_index_to_face[tx + "." + ty][i];
-    face.color.copy(get_vertex_color_from_tile(ptile));
+    var new_color = get_vertex_color_from_tile(ptile);
+    new_color.r = face.color.r; // don't update tile known status here.
+    face.color.copy(new_color);
   }
 
   landGeometry.colorsNeedUpdate = true;

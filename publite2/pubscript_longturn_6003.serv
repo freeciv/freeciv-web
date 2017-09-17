@@ -14,7 +14,7 @@ set timeout 82800
 set unitwaittime=36000
 set netwait 150
 set nettimeout 120
-set pingtime 60
+set pingtime 30
 set pingtimeout 240
 set maxconnectionsperhost 500
 set threaded_save enabled

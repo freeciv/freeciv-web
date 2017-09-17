@@ -1,3 +1,5 @@
+<%@ page import="java.util.Properties" %>
+<%@ page import="java.io.IOException" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -35,7 +37,16 @@ var ts="${initParam.buildTimeStamp}";
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, minimal-ui" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<meta name="google-signin-client_id" content="122428231951-2vrvrtd9sc2v9nktemclkvc2t187jkr6.apps.googleusercontent.com">
+
+<meta name="google-signin-client_id" content="<%
+try {
+  Properties prop = new Properties();
+  prop.load(getServletContext().getResourceAsStream("/WEB-INF/config.properties"));
+  out.print(prop.getProperty("google-signin-client-key"));
+} catch (IOException e) {
+  e.printStackTrace();
+}
+%>">
 <link rel="manifest" href="/static/manifest.json">
 
 <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"

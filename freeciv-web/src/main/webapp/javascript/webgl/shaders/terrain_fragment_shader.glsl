@@ -31,8 +31,6 @@ uniform sampler2D roadsmap;
 uniform sampler2D roadsprites;
 uniform sampler2D railroadsprites;
 
-uniform bool borders_enabled;
-
 uniform float map_x_size;
 uniform float map_y_size;
 
@@ -444,7 +442,7 @@ void main(void)
 
 
   // Borders
-  if (borders_enabled && !(border_color.r > 0.546875 && border_color.r < 0.5625 && border_color.b == 0.0 && border_color.g == 0.0)) {
+  if (!(border_color.r > 0.546875 && border_color.r < 0.5625 && border_color.b == 0.0 && border_color.g == 0.0)) {
     c = mix(c, border_color.rbg, 0.55);
   }
 

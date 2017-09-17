@@ -78,10 +78,6 @@ function set_client_state(newstate)
       setTimeout(show_endgame_dialog, 500);
       break;
     case C_S_PREPARING:
-      if (is_small_screen() && $.getUrlVar('action') == "new") {
-        // disable borders on mobile devices for performance reasons.
-        send_message_delayed("/set borders disabled", 200);
-      }
       break;
     default:
       break;

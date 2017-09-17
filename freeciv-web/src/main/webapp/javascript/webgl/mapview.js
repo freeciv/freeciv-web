@@ -22,14 +22,10 @@ var scene, maprenderer;
 var anaglyph_effect;
 
 var plane, cube;
-var mouse, raycaster, isShiftDown = false;
+var mouse, raycaster;
 var directionalLight;
-var activeUnitLight;
 var clock;
 var webgl_controls;
-
-var terrainVertShader;
-var terrainFragShader;
 
 var tiletype_terrains = ["lake","coast","floor","arctic","desert","forest","grassland","hills","jungle","mountains","plains","swamp","tundra", "beach"];
 
@@ -131,10 +127,10 @@ function init_webgl_mapview() {
 
   // high quality water using WebGL shader
   water = new THREE.Water( maprenderer, camera, scene, {
-      textureWidth: (graphics_quality == QUALITY_LOW) ? 128 : 512,
-      textureHeight: (graphics_quality == QUALITY_LOW) ? 128 : 512,
+      textureWidth: (graphics_quality == QUALITY_LOW) ? 256 : 512,
+      textureHeight: (graphics_quality == QUALITY_LOW) ? 256 : 512,
       waterNormals: webgl_textures["waternormals"],
-      alpha: 	(graphics_quality == QUALITY_LOW) ? 1.0 : 0.7,
+      alpha: 0.7,
       sunDirection: directionalLight.position.clone().normalize(),
       sunColor: 0xfaf100,
       waterColor: 0x003e7b,
@@ -164,14 +160,13 @@ function init_webgl_mapview() {
 
   /* heightmap image */
   create_heightmap();
-  if (graphics_quality > QUALITY_LOW) init_borders_image();
+  init_borders_image();
   init_roads_image();
 
   /* uniforms are variables which are used in the fragment shader fragment.js */
   var freeciv_uniforms = {
     maptiles: { type: "t", value: init_map_tiletype_image() },
-    borders: { type: "t", value: (graphics_quality > QUALITY_LOW) ? update_borders_image() : null },
-    borders_enabled: { type: "b", value: graphics_quality > QUALITY_LOW },
+    borders: { type: "t", value: update_borders_image() },
     map_x_size: { type: "f", value: map['xsize'] },
     map_y_size: { type: "f", value: map['ysize'] },
     terrains: {type: "t", value: webgl_textures["terrains"]},
@@ -181,13 +176,11 @@ function init_webgl_mapview() {
 
   };
 
-
-
   /* create a WebGL shader for terrain. */
   var terrain_material = new THREE.ShaderMaterial({
     uniforms: freeciv_uniforms,
-    vertexShader: terrainVertShader,
-    fragmentShader: terrainFragShader,
+    vertexShader: document.getElementById('terrain_vertex_shh').innerHTML,
+    fragmentShader: document.getElementById('terrain_fragment_shh').innerHTML,
     vertexColors: THREE.FaceColors
   });
 

@@ -17,8 +17,7 @@
  *******************************************************************************/
 package org.freeciv.servlet;
 
-import java.io.*;
-import java.security.GeneralSecurityException;
+import java.io.IOException;
 import java.util.Collections;
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -30,6 +29,7 @@ import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
 
 import java.sql.*;
+import java.util.Properties;
 import javax.sql.*;
 import javax.naming.*;
 
@@ -43,6 +43,19 @@ public class TokenSignin extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     private static final JacksonFactory jacksonFactory = new JacksonFactory();
+    private String google_signin_key;
+
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+
+        try {
+            Properties prop = new Properties();
+            prop.load(getServletContext().getResourceAsStream("/WEB-INF/config.properties"));
+            google_signin_key = prop.getProperty("google-signin-client-key");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
@@ -58,7 +71,7 @@ public class TokenSignin extends HttpServlet {
 
         try {
             GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(GoogleNetHttpTransport.newTrustedTransport(), jacksonFactory)
-                    .setAudience(Collections.singletonList("122428231951-2vrvrtd9sc2v9nktemclkvc2t187jkr6.apps.googleusercontent.com"))
+                    .setAudience(Collections.singletonList(google_signin_key))
                     .build();
             GoogleIdToken idToken = verifier.verify(idtoken);
             if (idToken != null) {

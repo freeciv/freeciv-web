@@ -200,11 +200,9 @@ function load_model(filename)
 
     model.traverse((node) => {
       if (node.isMesh) {
-        if (graphics_quality > QUALITY_LOW) {
-          node.material.flatShading = false;
-          node.material.side = THREE.DoubleSide;
-          node.material.needsUpdate = true;
-        }
+        node.material.flatShading = false;
+        node.material.side = THREE.DoubleSide;
+        node.material.needsUpdate = true;
         node.geometry.computeVertexNormals();
       }
     });

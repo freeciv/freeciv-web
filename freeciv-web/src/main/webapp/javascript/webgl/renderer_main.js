@@ -18,7 +18,7 @@
 ***********************************************************************/
 
 var QUALITY_LOW = 1;    // low quality, no antialiasing. Default for mobile.
-var QUALITY_MEDIUM = 2; // medium quality. Default for desktop and laptop computers.
+var QUALITY_MEDIUM = 2; // medium quality.
 var QUALITY_HIGH = 3;   // best quality, add features which require high-end graphics hardware here.
 
 var graphics_quality = QUALITY_HIGH;
@@ -73,10 +73,6 @@ function init_webgl_renderer()
       async: false
     });
   }
-
-
-  terrainVertShader = document.getElementById('terrain_vertex_shh').innerHTML;
-  terrainFragShader = document.getElementById('terrain_fragment_shh').innerHTML;
 
   init_sprites();
 

@@ -20,7 +20,7 @@
 
 /* All generalized actions. */
 var actions = {};
-
+var auto_attack = false;
 
 /**************************************************************************
   Returns true iff the given action probability belongs to an action that
@@ -391,6 +391,43 @@ function popup_action_selection(actor_unit, action_probabilities,
         } });
   }
 
+  /* Special-case handling for auto-attack. */
+  if (action_prob_possible(action_probabilities[ACTION_ATTACK])) {
+        if (!auto_attack) {
+          var button = {
+            id      : "act_sel_" + ACTION_ATTACK + "_" + actor_unit['id'],
+            "class" : 'act_sel_button',
+            text    : "Auto attack from now on!",
+            title   : "Attack without showing this attack dialog in the future",
+            click   : function() {
+                          var packet = {
+                              "pid"         : packet_unit_do_action,
+                              "actor_id"    : actor_unit['id'],
+                              "target_id"   : target_tile['index'],
+                              "value"       : 0,
+                              "name"        : "",
+                              "action_type" : ACTION_ATTACK
+                            };
+                            send_request(JSON.stringify(packet));
+                            auto_attack = true;
+                            $(id).remove();
+                          }
+          };
+          buttons.push(button);
+        } else {
+          var packet = {
+              "pid"         : packet_unit_do_action,
+              "actor_id"    : actor_unit['id'],
+              "target_id"   : target_tile['index'],
+              "value"       : 0,
+              "name"        : "",
+              "action_type" : ACTION_ATTACK
+            };
+            send_request(JSON.stringify(packet));
+            return;
+        }
+  }
+
   buttons.push({
       id      : "act_sel_cancel" + actor_unit['id'],
       "class" : 'act_sel_button',
@@ -406,7 +443,7 @@ function popup_action_selection(actor_unit, action_probabilities,
       bgiframe: true,
       modal: true,
       dialogClass: "act_sel_dialog",
-      width: "350",
+      width: "390",
       buttons: buttons });
 
   $(id).dialog('open');

@@ -95,8 +95,9 @@ function animate_explosion_on_tile(tile_id, animation_frame)
   if (scene == null) return;
   
   var ptile = tiles[tile_id];
-  var height = 5 + ptile['height'] * 100;
   if (ptile == null) return;
+
+  var height = 5 + ptile['height'] * 100;
 
   if (ptile['explosion_mesh'] != null) {
     scene.remove(ptile['explosion_mesh']);

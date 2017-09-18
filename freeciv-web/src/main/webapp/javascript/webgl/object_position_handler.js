@@ -417,6 +417,28 @@ function update_tile_extras(ptile) {
     }
   }
 
+  if (tile_extra_positions[EXTRA_RUINS + "." + ptile['index']] == null
+      && tile_has_extra(ptile, EXTRA_RUINS) && tile_get_known(ptile) == TILE_KNOWN_SEEN) {
+    // add ruins
+    var ruins = webgl_get_model("Ruins");
+    if (ruins == null) return;
+    tile_extra_positions[EXTRA_RUINS + "." + ptile['index']] = ruins;
+
+    var pos = map_to_scene_coords(ptile['x'], ptile['y']);
+    ruins.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10);
+    ruins.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
+    ruins.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
+    if (scene != null && ruins != null) {
+      scene.add(ruins);
+    }
+  } else if (tile_extra_positions[EXTRA_RUINS + "." + ptile['index']] != null && !tile_has_extra(ptile, EXTRA_RUINS)) {
+    // remove ruins
+    if (scene != null) {
+      scene.remove(tile_extra_positions[EXTRA_RUINS + "." + ptile['index']]);
+    }
+  }
+
+
   // Render tile specials (extras). Fish and whales are 3D models, the rest are 2D sprites from the 2D version.
   // 2D sprites are faster to render and looks better at the moment. Freeciv WebGL 3D needs better 3D models for specials.
   var extra_resource = extras[ptile['resource']];

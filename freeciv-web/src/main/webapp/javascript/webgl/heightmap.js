@@ -26,7 +26,7 @@ var heightmap = null;
 function create_heightmap()
 {
   var start_heightmap = new Date().getTime();
-  var heightmap_resolution_x = map.xsize * 4 + 1;
+  var heightmap_resolution_x = map.xsize * 4 + 1;  // FIXME: in some special-cases, map.xsize is null (not set yet).
   var heightmap_resolution_y = map.ysize * 4 + 1;
 
   var heightmap_tiles = new Array(map.xsize);

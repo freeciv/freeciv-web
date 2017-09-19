@@ -630,24 +630,30 @@ function show_tech_gained_dialog(tech_gained_id)
 			bgiframe: true,
 			modal: true,
 			width: is_small_screen() ? "90%" : "60%",
-			buttons: {
-				"Show Technology Tree" : function() {
-				  $("#tabs").tabs("option", "active", 2);
-				      set_default_mapview_inactive();
-				      update_tech_screen();
-    				      $("#tech_dialog").dialog('close');
-				},
-				"Close": function() {
-					$("#tech_dialog").dialog('close');
-					$("#game_text_input").blur();
-				}
-			}
+			buttons: [
+			 {
+                text : "Close",
+                click : function() {
+                  $("#tech_dialog").dialog('close');
+                  $("#game_text_input").blur();
+                }
+            },{
+				text : "Show Technology Tree",
+				click : function() {
+                  $("#tabs").tabs("option", "active", 2);
+                  set_default_mapview_inactive();
+                  update_tech_screen();
+				  $("#tech_dialog").dialog('close');
+                }
+              }
+             ]
 		});
 
   $("#tech_dialog").dialog('open');
   $("#game_text_input").blur();
   $("#tech_advance_helptext").tooltip({ disabled: false });
   $(".specific_tech").tooltip({ disabled: false });
+
 }
 
 /**************************************************************************

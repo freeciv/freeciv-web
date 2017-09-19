@@ -182,7 +182,7 @@ function show_city_dialog(pcity)
        "Previous city" : function() {
          previous_city();
        },
-       "Next city" : function() {
+       "Next city (N)" : function() {
          next_city();
        }
      });
@@ -197,7 +197,7 @@ function show_city_dialog(pcity)
 
    dialog_buttons = $.extend(dialog_buttons,
    {
-     "Buy" : function() {
+     "Buy (B)" : function() {
        request_city_buy();
       },
       "Rename" : function() {
@@ -421,10 +421,7 @@ function show_city_dialog(pcity)
     /* Send the (now updated) city options. */
     send_request(JSON.stringify(packet));
 
-    city_tab_index = 3;
   });
-
-  city_tab_index = 0;
 
   if (is_small_screen()) {
    $(".ui-tabs-anchor").css("padding", "2px");
@@ -807,7 +804,7 @@ function city_name_dialog(suggested_name, unit_id) {
 					text: "Cancel",
 				        click: function() {
 						$("#city_name_dialog").remove();
-        					keyboard_input=true;
+                        keyboard_input=true;
 					}
 				},{
 					text: "Ok",
@@ -1108,8 +1105,6 @@ function rename_city()
       keyboard_input=true;
     }
   });
-  keyboard_input=false;
-
 
 }
 
@@ -1256,7 +1251,6 @@ function city_worklist_dialog(pcity)
 
   $("#worklist_production_choices").html(production_html);
 
-  keyboard_input=false;
   worklist_dialog_active = true;
   var turns_to_complete = get_city_production_time(pcity);
   var prod_type = get_city_production_type_sprite(pcity);
@@ -1313,7 +1307,6 @@ function city_worklist_dialog(pcity)
       } else {
         send_city_worklist_add(pcity['id'], kind, value);
       }
-      city_tab_index = 1;
       city_prod_clicks += 1;
 
     });
@@ -1489,7 +1482,6 @@ function send_city_worklist(city_id)
   send_request(JSON.stringify({pid     : packet_city_worklist,
                                city_id : city_id,
                                worklist: worklist}));
-  city_tab_index = 1;
 }
 
 /**************************************************************************
@@ -1515,7 +1507,6 @@ function city_change_production()
   if (production_selection.length === 1) {
     send_city_change(active_city['id'], production_selection[0].kind,
                      production_selection[0].value);
-    city_tab_index = 1;
   }
 }
 
@@ -1779,4 +1770,33 @@ function get_city_state(pcity)
   } else {
     return "Peace";
   }
+}
+
+
+/**************************************************************************
+ Callback to handle keyboard events for the city dialog.
+**************************************************************************/
+function city_keyboard_listener(ev)
+{
+  // Check if focus is in chat field, where these keyboard events are ignored.
+  if ($('input:focus').length > 0 || !keyboard_input) return;
+
+  if (C_S_RUNNING != client_state()) return;
+
+  if (!ev) ev = window.event;
+  var keyboard_key = String.fromCharCode(ev.keyCode);
+
+  if (active_city != null) {
+     switch (keyboard_key) {
+       case 'N':
+         next_city();
+         break;
+
+       case 'B':
+         request_city_buy();
+         break;
+      }
+  }
+
+
 }

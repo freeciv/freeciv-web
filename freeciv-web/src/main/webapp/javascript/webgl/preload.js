@@ -83,6 +83,23 @@ function webgl_preload()
     waternormals.wrapS = waternormals.wrapT = THREE.RepeatWrapping;
   } );
 
+  var city_disorder = new THREE.Texture();
+  textureLoader.load( '/textures/city_civil_disorder.png', function ( image ) {
+    city_disorder.image = image;
+    city_disorder.needsUpdate = true;
+
+    var material = new THREE.ShaderMaterial({
+      vertexShader: document.getElementById('labels_vertex_shh').textContent,
+      fragmentShader: document.getElementById('tex_fragment_shh').textContent,
+      uniforms: {
+        texture: { value: city_disorder },
+        u_scale_factor: { value: 1 }
+      }
+    });
+    material.transparent = true;
+    webgl_materials['city_disorder'] = material;
+  });
+
   if (graphics_quality >= QUALITY_MEDIUM) {
     var sun_texture = new THREE.Texture();
     webgl_textures["sun"] = sun_texture;

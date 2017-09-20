@@ -23,6 +23,7 @@ var unit_positions = {};
 var city_positions = {};
 var city_label_positions = {};
 var city_walls_positions = {};
+var city_disorder_positions = {};
 
 // stores flag positions on the map. tile index is key, unit 3d model is value.
 var unit_flag_positions = {};
@@ -277,6 +278,8 @@ function update_city_position(ptile) {
     delete city_label_positions[ptile['index']];
     if (scene != null) scene.remove(city_walls_positions[ptile['index']]);
     delete city_walls_positions[ptile['index']];
+    if (scene != null && city_disorder_positions[ptile['index']] != null) scene.remove(city_disorder_positions[ptile['index']]);
+    delete city_disorder_positions[ptile['index']];
   }
 
   if (city_positions[ptile['index']] == null && pcity != null) {
@@ -366,6 +369,27 @@ function update_city_position(ptile) {
     if (pcity['webgl_label_hash'] != pcity['name'] + pcity['size'] + pcity['production_value'] + "." + pcity['production_kind'] + punits.length) {
       update_city_label(pcity);
       pcity['webgl_label_hash'] = pcity['name'] + pcity['size'] + pcity['production_value'] + "." +  pcity['production_kind'] + punits.length;
+    }
+  }
+
+  // City civil disorder label
+  if (scene != null && pcity != null) {
+    if (city_disorder_positions[ptile['index']] == null && pcity['unhappy']) {
+        var city_disorder_label = create_city_disorder_label();
+        if (city_disorder_label != null) {
+          city_disorder_label.matrixAutoUpdate = false;
+          city_disorder_label.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 5);
+          city_disorder_label.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 25);
+          city_disorder_label.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
+          city_disorder_label.rotation.y = Math.PI / 4;
+          city_disorder_label.updateMatrix();
+          if (scene != null) scene.add(city_disorder_label);
+          city_disorder_positions[ptile['index']] = city_disorder_label;
+        }
+    } else if (city_disorder_positions[ptile['index']] != null && !pcity['unhappy']) {
+      // Remove city civil disorder label
+      scene.remove(city_disorder_positions[ptile['index']]);
+      delete city_disorder_positions[ptile['index']];
     }
   }
 

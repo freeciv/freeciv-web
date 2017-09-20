@@ -246,6 +246,13 @@ function create_unit_label(punit)
   return canvas_to_user_facing_mesh(canvas1, width, 10, 13, true, get_unit_activity_text(punit));
 }
 
+/****************************************************************************
+ Create a city civil disorder label
+****************************************************************************/
+function create_city_disorder_label()
+{
+  return new THREE.Mesh(new THREE.PlaneBufferGeometry(80, 80), webgl_materials['city_disorder']);
+}
 
 /****************************************************************************
  Create a map tile label

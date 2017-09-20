@@ -184,6 +184,12 @@ function show_city_dialog(pcity)
        },
        "Next city (N)" : function() {
          next_city();
+       },
+       "Buy (B)" : function() {
+         request_city_buy();
+       },
+       "Rename" : function() {
+         rename_city();
        }
      });
    } else {
@@ -191,19 +197,15 @@ function show_city_dialog(pcity)
          {
           "Next" : function() {
             next_city();
+          },
+          "Buy" : function() {
+            request_city_buy();
           }
         });
    }
 
    dialog_buttons = $.extend(dialog_buttons,
-   {
-     "Buy (B)" : function() {
-       request_city_buy();
-      },
-      "Rename" : function() {
-       rename_city();
-      },
-      "Close": function() {
+    {"Close": function() {
        close_city_dialog();
       }
     });

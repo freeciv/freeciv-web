@@ -18,7 +18,7 @@ set pingtime 30
 set pingtimeout 240
 set maxconnectionsperhost 500
 set threaded_save enabled
-set scorelog enabled
+set scorelog disabled
 set mapsize FULLSIZE
 set size 34
 set topology=

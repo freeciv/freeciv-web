@@ -55,6 +55,8 @@ var city_screen_updater = new EventAggregator(update_city_screen, 250,
 
 var city_dialog_template = null;
 
+var basic_cma_enabled = true;
+
 /**************************************************************************
   Initialize the city dialog once the first time.
 **************************************************************************/
@@ -70,6 +72,14 @@ function init_city_dialog()
   }).done(function( data ) {
     city_dialog_template = Handlebars.compile(data);
   });
+
+
+  var stored_basic_cma_enabled = simpleStorage.get("basic_cma_setting", "");
+  if (stored_basic_cma_enabled != null && stored_basic_cma_enabled == "false") {
+    basic_cma_enabled = false;
+  } else {
+    basic_cma_enabled = true;
+  }
 }
 
 /**************************************************************************
@@ -428,6 +438,17 @@ function show_city_dialog(pcity)
   if (is_small_screen()) {
    $(".ui-tabs-anchor").css("padding", "2px");
   }
+
+  $('#basic_cma_enabled').change(function() {
+    basic_cma_enabled = this.checked;
+    if (basic_cma_enabled) {
+      simpleStorage.set("basic_cma_setting", "true");
+    } else {
+      simpleStorage.set("basic_cma_setting", "false");
+    }
+  });
+  $('#basic_cma_enabled').prop('checked', basic_cma_enabled);
+
 }
 
 
@@ -1800,5 +1821,25 @@ function city_keyboard_listener(ev)
       }
   }
 
+}
 
+
+/**************************************************************************
+ Runs the basic CMA (Governor).
+**************************************************************************/
+function run_basic_cma()
+{
+  for (city_id in cities) {
+    var pcity = cities[city_id];
+    if (client.conn.playing != null && city_owner(pcity) != null && city_owner(pcity).playerno == client.conn.playing.playerno) {
+      var ptile = index_to_tile(pcity['tile']);
+      if (ptile != null) {
+        var packet = {"pid" : packet_city_make_worker,
+                 "city_id" : pcity['id'],
+                 "worker_x" : ptile['x'],
+                 "worker_y" : ptile['y']};
+        send_request(JSON.stringify(packet));
+      }
+    }
+  }
 }

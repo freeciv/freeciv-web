@@ -593,7 +593,11 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 }
 
 #city_disband_options {
-  padding: 20px;
+  padding: 10px;
+}
+
+#basic_cma_options {
+  padding: 10px;
 }
 
 #tech_advance_helptext span {

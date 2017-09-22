@@ -460,7 +460,11 @@ function handle_start_phase(packet)
 
   saved_this_turn = false;
 
-  /* TODO: implement rest*/
+  if (basic_cma_enabled) {
+    run_basic_cma();
+  }
+
+
 
 }
 

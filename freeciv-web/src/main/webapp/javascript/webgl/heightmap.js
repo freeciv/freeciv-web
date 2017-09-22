@@ -166,3 +166,35 @@ function map_tile_height(ptile)
 
   return 0.0 + ((Math.random() - 0.5) / 60);
 }
+
+/****************************************************************************
+  Returns height offset for units. This will make units higher above cities.
+****************************************************************************/
+function get_unit_height_offset(punit)
+{
+  if (punit == null) return 0;
+  var ptile = index_to_tile(punit['tile']);
+  if (ptile == null) return 0;
+  var pcity = tile_city(ptile);
+  if (pcity != null) return 10;
+  return 0;
+
+}
+
+/****************************************************************************
+  Returns height offset for cities.
+****************************************************************************/
+function get_city_height_offset(pcity)
+{
+  if (pcity == null) return 0;
+  var ptile = index_to_tile(pcity['tile']);
+  if (ptile == null) return 0;
+
+  if (ptile != null && tile_terrain(ptile) != null) {
+      if (tile_terrain(ptile)['name'] == "Hills") return -8;
+      if (tile_terrain(ptile)['name'] == "Mountains") return -10;
+  }
+
+  return 0;
+
+}

@@ -52,7 +52,7 @@ function update_unit_position(ptile) {
   if (renderer != RENDERER_WEBGL) return;
 
   var visible_unit = find_visible_unit(ptile);
-  var height = 5 + ptile['height'] * 100;
+  var height = 5 + ptile['height'] * 100 + get_unit_height_offset(visible_unit);
 
   if (unit_positions[ptile['index']] != null && visible_unit == null) {
     // tile has no visible units, remove it from unit_positions.
@@ -86,7 +86,7 @@ function update_unit_position(ptile) {
     if (visible_unit['anim_list'].length > 0) {
       var stile = tiles[visible_unit['anim_list'][0]['tile']];
       pos = map_to_scene_coords(stile['x'], stile['y']);
-      height = 5 + stile['height'] * 100;
+      height = 5 + stile['height'] * 100  + get_unit_height_offset(visible_unit);
     } else {
       pos = map_to_scene_coords(ptile['x'], ptile['y']);
     }
@@ -148,7 +148,7 @@ function update_unit_position(ptile) {
     if (visible_unit['anim_list'].length > 0) {
       var stile = tiles[visible_unit['anim_list'][0]['tile']];
       pos = map_to_scene_coords(stile['x'], stile['y']);
-      height = 5 + stile['height'] * 100;
+      height = 5 + stile['height'] * 100  + get_unit_height_offset(visible_unit);
     } else {
       pos = map_to_scene_coords(ptile['x'], ptile['y']);
     }
@@ -268,7 +268,7 @@ function update_city_position(ptile) {
   var pcity = tile_city(ptile);
   var punits = tile_units(ptile);
 
-  var height = 5 + ptile['height'] * 100;
+  var height = 5 + ptile['height'] * 100 + get_city_height_offset(pcity);
 
   if (city_positions[ptile['index']] != null && pcity == null) {
     // tile has no city, remove it from unit_positions.

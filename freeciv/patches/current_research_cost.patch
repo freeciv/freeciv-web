@@ -24,3 +24,15 @@ index ad373a9..41bbf15 100644
    /* Make absolutely sure - in case you lose your embassy! */
    if (info_level >= INFO_EMBASSY 
        || (receiver
+diff --git a/server/techtools.c b/server/techtools.c
+index 925d227..abe32ee 100644
+--- a/server/techtools.c
++++ b/server/techtools.c
+@@ -287,6 +287,7 @@ void send_research_info(const struct research *presearch,
+       if (presearch == research_get(pplayer)) {
+         /* Case research owner. */
+         send_packet_research_info(pconn, &full_info);
++	send_player_info_c(conn_get_player(pconn), conn_get_player(pconn)->connections);
+       } else {
+         /* 'pplayer' may have an embassy for looking to 'presearch'. */
+         research_players_iterate(presearch, powner) {

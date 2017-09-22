@@ -5,9 +5,9 @@ rulesetdir multiplayer
 set topology WRAPX
 set nationset all
 set compresstype xs
-set maxplayers 500
+set maxplayers 300
 set startunits=cccwwwxx
-set aifill 500
+set aifill 300
 set allowtake=""
 set autotoggle false
 set timeout 82800
@@ -20,10 +20,12 @@ set maxconnectionsperhost 500
 set threaded_save enabled
 set scorelog disabled
 set mapsize FULLSIZE
-set size 34
+set size 32
 set topology=
 set landm 80
 set dispersion=1
+
+set endt 365
 
 set diplomacy=HUMAN
 set contactturns=0
@@ -37,7 +39,7 @@ set ec_chat=enabled
 set ec_info=enabled 
 set ec_max_size=5000
 set ec_turns=9
-metamessage LongTurn Game #9 | 1 turn per day | 500 players | 34000 tiles | Join now!
+metamessage LongTurn Game #9 | 1 turn per day | 300 players | 32000 tiles | Join now!
 
 
 cmdlevel basic

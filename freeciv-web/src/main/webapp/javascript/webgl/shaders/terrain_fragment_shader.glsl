@@ -313,6 +313,20 @@ void main(void)
     }
   }
 
+  if (vColor.g > 0.4 && vColor.g < 0.6) {
+    // render Irrigation.
+    texture_coord = vec2(mod(map_x_size * (vUv.x / 4.0), 0.25) + sprite_pos15_x , mod((vUv.y * map_y_size / 4.0), 0.25) + sprite_pos15_y);
+    vec4 t1 = texture2D(terrains, texture_coord);
+    c = mix(c, vec3(t1), t1.a);
+  }
+
+  if (vColor.g > 0.9) {
+    // render farmland.
+    texture_coord = vec2(mod(map_x_size * (vUv.x / 4.0), 0.25) + sprite_pos14_x , mod((vUv.y * map_y_size / 4.0), 0.25) + sprite_pos14_y);
+    vec4 t1 = texture2D(terrains, texture_coord);
+    c = mix(c, vec3(t1), t1.a);
+  }
+
   // Roads
   if (road_type.r == 0.0) {
       // no roads
@@ -456,20 +470,6 @@ void main(void)
   if (vColor.r > 0.4 && vColor.r < 0.6) {
     // render Fog of war.
     c = c * 0.5;
-  }
-
-  if (vColor.g > 0.4 && vColor.g < 0.6) {
-    // render Irrigation.
-    texture_coord = vec2(mod(map_x_size * (vUv.x / 4.0), 0.25) + sprite_pos15_x , mod((vUv.y * map_y_size / 4.0), 0.25) + sprite_pos15_y);
-    vec4 t1 = texture2D(terrains, texture_coord);
-    c = mix(c, vec3(t1), t1.a);
-  }
-
-  if (vColor.g > 0.9) {
-    // render farmland.
-    texture_coord = vec2(mod(map_x_size * (vUv.x / 4.0), 0.25) + sprite_pos14_x , mod((vUv.y * map_y_size / 4.0), 0.25) + sprite_pos14_y);
-    vec4 t1 = texture2D(terrains, texture_coord);
-    c = mix(c, vec3(t1), t1.a);
   }
 
   gl_FragColor.rgb = mix(c * shade_factor, ambiant, (vPosition_camera.z - 550.) * 0.0001875);

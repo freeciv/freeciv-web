@@ -150,17 +150,17 @@
 			<div class="container-fluid">
 				<div class="row top-buffer-3">
 					<p class="lead">
-						<%--<fmt:message key="index-lead"/>--%>
+						<fmt:message key="index-lead"/>
 
 
-                         <div class="row top-buffer-3">
+                         <%--<div class="row top-buffer-3">
                          <h1>LongTurn for Freeciv-web 8</h1>
                          <b>LongTurn game number 8 of Freeciv-web has started and you can join it now!</b><br>
                          <b>Each player will play one turn every day. <br><br>
                          This will be one of the greatest ever multiplayer game of Freeciv with 300 players!<br>
                          </b>
                          <h2><a href="https://play.freeciv.org/webclient?action=multi&civserverport=6003&civserverhost=play&multi=true">Join the LongTurn Freeciv-web game 8 here!</a></h2>
-                        </div>
+			 </div>--%>
 
 					</p>
 				</div>
@@ -412,7 +412,7 @@
                 <div class="row">
                         <div class="col-md-12">
                                 <div class="videoWrapper">
-                                        <iframe class="embed-responsive-item" width="542" height="343" src="https://www.youtube.com/embed/xCsqQDmVXFE" frameborder="0" allowfullscreen></iframe>
+                                        <iframe class="embed-responsive-item" width="542" height="343" src="https://www.youtube.com/embed/WZkTHp478Ew" frameborder="0" allowfullscreen></iframe>
                                 </div>
                         </div>
                 </div> <!-- end youtube -->

@@ -145,7 +145,7 @@
 
 		<div class="jumbotron">
 			<div class="row">
-				<img src="/static/images/frontpage-jumbotron.png" alt="" style="width: 95%;">
+				<a href="/webclient/?action=new&renderer=webgl"><img src="/static/images/freeciv-webgl-splash-48.png" alt="" style="width: 95%;"></a>
 			</div>
 			<div class="container-fluid">
 				<div class="row top-buffer-3">

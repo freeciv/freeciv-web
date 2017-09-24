@@ -135,7 +135,7 @@ function control_init()
   /* disable right clicks. */
   document.oncontextmenu = function(){return allow_right_click;};
 
-  $.contextMenu({
+  var context_options = {
         selector: (renderer == RENDERER_2DCANVAS) ? '#canvas' : '#canvas_div' ,
 	    zIndex: 5000,
         autoHide: true,
@@ -155,7 +155,18 @@ function control_init()
                  items: unit_actions
             };
         }
-  });
+  };
+
+  if (!is_touch_device()) {
+    context_options['position'] = function(opt, x, y){
+                                                if (is_touch_device()) return;
+                                                var new_top = mouse_y + $("#canvas_div").offset().top;
+                                                if (renderer == RENDERER_2DCANVAS) new_top = mouse_y + $("#canvas").offset().top;
+                                                opt.$menu.css({top: new_top , left: mouse_x});
+                                              };
+  }
+
+  $.contextMenu(context_options);
 
   $(window).bind('beforeunload', function(){
     return "Do you really want to leave your nation behind now?";
@@ -1551,7 +1562,11 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift, the_event)
 
       /* Abort any context menu blocking. */
       context_menu_active = true;
-      $("#canvas").contextMenu(true);
+      if (renderer == RENDERER_2DCANVAS) {
+        $("#canvas").contextMenu(true);
+      } else {
+        $("#canvas_div").contextMenu(true);
+      }
 
       /* Abort target tile selection. */
       paradrop_active = false;
@@ -1913,7 +1928,6 @@ function key_unit_unload()
         "cargo_id"    : punit['id'],
         "transporter_id"   : punit['transported_by']
       };
-      console.log(packet);
       send_request(JSON.stringify(packet));
     }
   }
@@ -2637,4 +2651,101 @@ function center_on_any_city()
     return;
   }
 
+}
+
+/**************************************************************************
+ This function shows the dialog containing active units on the current tile.
+**************************************************************************/
+function update_active_units_dialog()
+{
+  var unit_info_html = "";
+  var ptile = null;
+  var punits = [];
+  var width = 0;
+
+  if (client_is_observer() || !unitpanel_active) return;
+
+  if (current_focus.length == 1) {
+    ptile = index_to_tile(current_focus[0]['tile']);
+    punits.push(current_focus[0]);
+    var tmpunits = tile_units(ptile);
+    for (var i = 0; i < tmpunits.length; i++) {
+      var kunit = tmpunits[i];
+      if (kunit['id'] == current_focus[0]['id']) continue;
+      punits.push(kunit);
+    }
+  } else if (current_focus.length > 1) {
+    punits = current_focus;
+  }
+
+  for (var i = 0; i < punits.length; i++) {
+    var punit = punits[i];
+    var sprite = get_unit_image_sprite(punit);
+    var active = (current_focus.length > 1 || current_focus[0]['id'] == punit['id']);
+
+    unit_info_html += "<div id='unit_info_div' class='" + (active ? "current_focus_unit" : "")
+           + "'><div id='unit_info_image' onclick='set_unit_focus_and_redraw(units[" + punit['id'] + "])' "
+	   + " style='background: transparent url("
+           + sprite['image-src'] +
+           ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y']
+           + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px;'"
+           + "'></div></div>";
+    width = sprite['width'];
+  }
+
+  if (current_focus.length == 1) {
+    /* show info about the active focus unit. */
+    var aunit = current_focus[0];
+    var ptype = unit_type(aunit);
+    unit_info_html += "<div id='active_unit_info' title='" + ptype['helptext'] + "'>";
+
+    if (client.conn.playing != null && current_focus[0]['owner'] != client.conn.playing.playerno) {
+      unit_info_html += "<b>" + nations[players[current_focus[0]['owner']]['nation']]['adjective'] + "</b> ";
+    }
+
+    unit_info_html += "<b>" + ptype['name'] + "</b>: ";
+    if (get_unit_homecity_name(aunit) != null) {
+      unit_info_html += " " + get_unit_homecity_name(aunit) + " ";
+    }
+    if (current_focus[0]['owner'] == client.conn.playing.playerno) {
+      unit_info_html += "<span>" + get_unit_moves_left(aunit) + "</span> ";
+    }
+    unit_info_html += "<br><span title='Attack strength'>A:" + ptype['attack_strength']
+    + "</span> <span title='Defense strength'>D:" + ptype['defense_strength']
+    + "</span> <span title='Firepower'>F:" + ptype['firepower']
+    + "</span> <span title='Health points'>H:"
+    + aunit['hp'] + "/" + ptype['hp'] + "</span>";
+    if (aunit['veteran'] > 0) {
+      unit_info_html += " <span>Veteran: " + aunit['veteran'] + "</span>";
+    }
+    if (ptype['transport_capacity'] > 0) {
+      unit_info_html += " <span>Transport: " + ptype['transport_capacity'] + "</span>";
+    }
+
+    unit_info_html += "</div>";
+  } else if (current_focus.length >= 1 && client.conn.playing != null && current_focus[0]['owner'] != client.conn.playing.playerno) {
+    unit_info_html += "<div id='active_unit_info'>" + current_focus.length + " foreign units  (" +
+     nations[players[current_focus[0]['owner']]['nation']]['adjective']
+     +")</div> ";
+  } else if (current_focus.length > 1) {
+    unit_info_html += "<div id='active_unit_info'>" + current_focus.length + " units selected.</div> ";
+  }
+
+  $("#game_unit_info").html(unit_info_html);
+
+  if (current_focus.length > 0) {
+    /* reposition and resize unit dialog. */
+    var newwidth = 32 + punits.length * (width + 10);
+    if (newwidth < 140) newwidth = 140;
+    var newheight = 75 + normal_tile_height;
+    $("#game_unit_panel").parent().show();
+    $("#game_unit_panel").parent().width(newwidth);
+    $("#game_unit_panel").parent().height(newheight);
+    $("#game_unit_panel").parent().css("left", ($( window ).width() - newwidth) + "px");
+    $("#game_unit_panel").parent().css("top", ($( window ).height() - newheight - 30) + "px");
+    $("#game_unit_panel").parent().css("background", "rgba(50,50,40,0.5)");
+  } else {
+    $("#game_unit_panel").parent().hide();
+  }
+  $("#active_unit_info").tooltip();
 }

@@ -25,6 +25,8 @@ set topology=
 set landm 82
 set dispersion=1
 
+set endt 365
+
 set diplomacy=HUMAN
 set contactturns=0
 

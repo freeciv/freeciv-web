@@ -401,6 +401,8 @@ function update_city_position(ptile) {
 ****************************************************************************/
 function update_tile_extras(ptile) {
 
+  if (ptile == null || tile_get_known(ptile) != TILE_KNOWN_SEEN) return;
+
   var height = 5 + ptile['height'] * 100;
 
   webgl_update_farmland_irrigation_vertex_colors(ptile);

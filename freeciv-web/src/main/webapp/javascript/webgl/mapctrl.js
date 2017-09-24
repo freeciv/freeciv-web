@@ -97,6 +97,8 @@ function webglOnDocumentMouseUp( e ) {
   } else if (!rightclick && !middleclick) {
     /* Left mouse button*/
     do_map_click(ptile, SELECT_POPUP, true);
+    mapview_mouse_movement = false;
+    update_mouse_cursor();
   }
   e.preventDefault();
 
@@ -123,6 +125,10 @@ function webglOnDocumentMouseDown(e) {
     if (goto_active) return;
 
     //setTimeout("check_mouse_drag_unit(" + mouse_x + "," + mouse_y + ");", 200);
+    mapview_mouse_movement = true;
+    touch_start_x = mouse_x;
+    touch_start_y = mouse_y;
+
   } else if (middleclick || e['altKey']) {
     popit();
     return false;

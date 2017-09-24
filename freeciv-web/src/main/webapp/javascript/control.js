@@ -25,6 +25,7 @@ var prev_mouse_y;
 var keyboard_input = true;
 var unitpanel_active = false;
 var allow_right_click = false;
+var mapview_mouse_movement = false;
 
 var current_focus = [];
 var goto_active = false;
@@ -307,9 +308,35 @@ function mouse_moved_cb(e)
       && $("#canvas").length) {
     mouse_x = mouse_x - $("#canvas").offset().left;
     mouse_y = mouse_y - $("#canvas").offset().top;
+
+    if (mapview_mouse_movement && !goto_active) {
+      // move the mapview using mouse movement.
+      var diff_x = (touch_start_x - mouse_x) * 2;
+      var diff_y = (touch_start_y - mouse_y) * 2;
+      check_mouse_drag_unit(mouse_x, mouse_y);
+      mapview['gui_x0'] += diff_x;
+      mapview['gui_y0'] += diff_y;
+      touch_start_x = mouse_x;
+      touch_start_y = mouse_y;
+      update_mouse_cursor();
+    }
   } else if (renderer == RENDERER_WEBGL && active_city == null && $("#canvas_div").length) {
     mouse_x = mouse_x - $("#canvas_div").offset().left;
     mouse_y = mouse_y - $("#canvas_div").offset().top;
+
+    if (mapview_mouse_movement && !goto_active) {
+      // move the mapview using mouse movement.
+      var spos = webgl_canvas_pos_to_map_pos(touch_start_x, touch_start_y);
+      var epos = webgl_canvas_pos_to_map_pos(mouse_x, mouse_y);
+      if (spos != null && epos != null) {
+        camera_look_at(camera_current_x + spos['x'] - epos['x'], camera_current_y, camera_current_z + spos['y'] - epos['y']);
+      }
+
+      touch_start_x = mouse_x;
+      touch_start_y = mouse_y;
+      update_mouse_cursor();
+    }
+
   } else if (active_city != null && city_canvas != null
              && $("#city_canvas").length) {
     mouse_x = mouse_x - $("#city_canvas").offset().left;
@@ -358,7 +385,10 @@ function update_mouse_cursor()
   var punit = find_visible_unit(ptile);
   var pcity = tile_city(ptile);
 
-  if (goto_active && current_goto_turns != null) {
+  if (mapview_mouse_movement && !goto_active) {
+    /* show move map cursor */
+    $("#canvas_div").css("cursor", "move");
+  } else if (goto_active && current_goto_turns != null) {
     /* show goto cursor */
     $("#canvas_div").css("cursor", "crosshair");
   } else if (goto_active && current_goto_turns == null) {
@@ -369,7 +399,7 @@ function update_mouse_cursor()
     $("#canvas_div").css("cursor", "pointer");
   } else if (punit != null && punit['owner'] == client.conn.playing.playerno) {
     /* move unit cursor */
-    $("#canvas_div").css("cursor", "move");
+    $("#canvas_div").css("cursor", "pointer");
   } else {
     $("#canvas_div").css("cursor", "default");
   }

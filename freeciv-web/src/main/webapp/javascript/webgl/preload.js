@@ -41,7 +41,8 @@ var model_filenames = ["AEGIS Cruiser",     "city_european_1",  "Helicopter",   
                        "Catapult",          "Frigate",          "Migrants",
                        "Cavalry",           "Paratroopers",     "Workers",
                        "Chariot",           "Galleon",          "Partisan",
-                       "city_european_0",   "Phalanx",          "Ruins"
+                       "city_european_0",   "Phalanx",          "Ruins",
+                       "Airbase",           "Fortress"
                       ];
 
 /****************************************************************************

@@ -395,7 +395,6 @@ function update_city_position(ptile) {
 
 }
 
-
 /****************************************************************************
   Handles tile extras, such as specials, mine.
 ****************************************************************************/
@@ -407,66 +406,13 @@ function update_tile_extras(ptile) {
 
   webgl_update_farmland_irrigation_vertex_colors(ptile);
 
-  if (tile_extra_positions[EXTRA_MINE + "." + ptile['index']] == null && tile_has_extra(ptile, EXTRA_MINE)) {
-    var mine = webgl_get_model("Mine");
-    if (mine == null) return;
-    tile_extra_positions[EXTRA_MINE + "." + ptile['index']] = mine;
-
-    var pos = map_to_scene_coords(ptile['x'], ptile['y']);
-    mine.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10);
-    mine.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 3);
-    mine.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
-    if (scene != null && mine != null) {
-      scene.add(mine);
-    }
-  }
-
-
-  if (tile_extra_positions[EXTRA_HUT + "." + ptile['index']] == null
-      && tile_has_extra(ptile, EXTRA_HUT) && tile_get_known(ptile) == TILE_KNOWN_SEEN) {
-    // add hut
-    var hut = webgl_get_model("Hut");
-    if (hut == null) return;
-    tile_extra_positions[EXTRA_HUT + "." + ptile['index']] = hut;
-
-    var pos = map_to_scene_coords(ptile['x'], ptile['y']);
-    hut.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10);
-    hut.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
-    hut.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
-    if (scene != null && hut != null) {
-      scene.add(hut);
-    }
-  } else if (tile_extra_positions[EXTRA_HUT + "." + ptile['index']] != null && !tile_has_extra(ptile, EXTRA_HUT)) {
-    // remove hut
-    if (scene != null) {
-      scene.remove(tile_extra_positions[EXTRA_HUT + "." + ptile['index']]);
-    }
-  }
-
-  if (tile_extra_positions[EXTRA_RUINS + "." + ptile['index']] == null
-      && tile_has_extra(ptile, EXTRA_RUINS) && tile_get_known(ptile) == TILE_KNOWN_SEEN) {
-    // add ruins
-    var ruins = webgl_get_model("Ruins");
-    if (ruins == null) return;
-    tile_extra_positions[EXTRA_RUINS + "." + ptile['index']] = ruins;
-
-    var pos = map_to_scene_coords(ptile['x'], ptile['y']);
-    ruins.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10);
-    ruins.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
-    ruins.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
-    if (scene != null && ruins != null) {
-      scene.add(ruins);
-    }
-  } else if (tile_extra_positions[EXTRA_RUINS + "." + ptile['index']] != null && !tile_has_extra(ptile, EXTRA_RUINS)) {
-    // remove ruins
-    if (scene != null) {
-      scene.remove(tile_extra_positions[EXTRA_RUINS + "." + ptile['index']]);
-    }
-  }
-
+  update_tile_extra_update_model(EXTRA_MINE, "Mine", ptile);
+  update_tile_extra_update_model(EXTRA_HUT, "Hut", ptile);
+  update_tile_extra_update_model(EXTRA_RUINS, "Ruins", ptile);
+  update_tile_extra_update_model(EXTRA_AIRBASE, "Airbase", ptile);
+  update_tile_extra_update_model(EXTRA_FORTRESS, "Fortress", ptile);
 
   // Render tile specials (extras). Fish and whales are 3D models, the rest are 2D sprites from the 2D version.
-  // 2D sprites are faster to render and looks better at the moment. Freeciv WebGL 3D needs better 3D models for specials.
   var extra_resource = extras[ptile['resource']];
   if (extra_resource != null && scene != null && tile_extra_positions[extra_resource['id'] + "." + ptile['index']] == null) {
     if (extra_resource['name'] != "Fish" && extra_resource['name'] != "Whales"
@@ -483,23 +429,10 @@ function update_tile_extras(ptile) {
       extra_mesh.updateMatrix();
 
       tile_extra_positions[extra_resource['id'] + "." + ptile['index']] = extra_mesh;
-      if (scene != null && extra_mesh != null) {
-        scene.add(extra_mesh);
-      }
+      if (scene != null && extra_mesh != null) scene.add(extra_mesh);
     } else {
-      var extra_model = webgl_get_model(extra_resource['name']);
-      if (extra_model == null) return;
+      update_tile_extra_update_model(extra_resource['id'], extra_resource['name'], ptile);
 
-      var pos = map_to_scene_coords(ptile['x'], ptile['y']);
-      extra_model.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10);
-      extra_model.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
-      extra_model.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
-      extra_model.rotateOnAxis(new THREE.Vector3(0,1,0).normalize(), (2 * Math.PI * Math.random()));
-
-      tile_extra_positions[extra_resource['id'] + "." + ptile['index']] = extra_model;
-      if (scene != null && extra_model != null) {
-        scene.add(extra_model);
-      }
     }
   }
 
@@ -571,6 +504,28 @@ function update_tile_extras(ptile) {
     scene.add(label);
   }
 
+}
+
+
+/****************************************************************************
+  Adds or removes a extra tile 3d model.
+****************************************************************************/
+function update_tile_extra_update_model(extra_type, extra_name, ptile)
+{
+  if (tile_extra_positions[extra_type + "." + ptile['index']] == null && tile_has_extra(ptile, extra_type)) {
+    var height = 5 + ptile['height'] * 100;
+    var model = webgl_get_model(extra_name);
+    if (model == null) return;
+    tile_extra_positions[extra_type + "." + ptile['index']] = model;
+    var pos = map_to_scene_coords(ptile['x'], ptile['y']);
+    model.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10);
+    model.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 3);
+    model.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
+    if (scene != null && model != null) scene.add(model);
+
+  } else if (scene != null && tile_extra_positions[extra_type + "." + ptile['index']] != null && !tile_has_extra(ptile, extra_type)) {
+    scene.remove(tile_extra_positions[extra_type + "." + ptile['index']]);
+  }
 }
 
 /****************************************************************************

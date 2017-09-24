@@ -176,7 +176,10 @@ function get_unit_height_offset(punit)
   var ptile = index_to_tile(punit['tile']);
   if (ptile == null) return 0;
   var pcity = tile_city(ptile);
+
   if (pcity != null) return 10;
+  if (tile_terrain(ptile)['name'] == "Deep Ocean") return 7;
+
   return 0;
 
 }

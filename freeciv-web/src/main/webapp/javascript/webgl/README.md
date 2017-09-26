@@ -22,4 +22,4 @@ Debugging
 ---------
 Add the URL parameter &webgl_debug=true to enable the WebGL-Inspector - https://github.com/benvanik/WebGL-Inspector
 
-
+Developer: Andreas Røsdal [@andreasrosdal](http://www.twitter.com/andreasrosdal)

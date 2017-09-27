@@ -141,9 +141,8 @@ function update_nation_screen()
     }
   }
 
-  if (!is_touch_device()) {
-    $("#nation_table").tablesorter({theme: "dark", sortList: [[2,0]] });
-   } else if (is_small_screen()) {
+  $("#nation_table").tablesorter({theme: "dark", sortList: [[2,0]] });
+  if (is_small_screen()) {
     $("#nations").height( mapview['height'] - 150);
     $("#nations").width( mapview['width']);
   }
@@ -171,9 +170,7 @@ function update_nation_screen()
         $("#player_state_" + player_id).html("<span style='color: #00EE00;'><b>Online</b></span>");
       }
     }
-    if (!is_touch_device()) {
-      $("#nation_table").tablesorter({theme: "dark"});
-    }
+    $("#nation_table").tablesorter({theme: "dark"});
   });
 
 }

@@ -394,10 +394,10 @@ function update_mouse_cursor()
   } else if (goto_active && current_goto_turns == null) {
     /* show invalid goto cursor*/
     $("#canvas_div").css("cursor", "not-allowed");
-  } else if (pcity != null && city_owner_player_id(pcity) == client.conn.playing.playerno) {
-    /* selecti city cursor*/
+  } else if (pcity != null && client.conn.playing != null && city_owner_player_id(pcity) == client.conn.playing.playerno) {
+    /* select city cursor*/
     $("#canvas_div").css("cursor", "pointer");
-  } else if (punit != null && punit['owner'] == client.conn.playing.playerno) {
+  } else if (punit != null && client.conn.playing != null && punit['owner'] == client.conn.playing.playerno) {
     /* move unit cursor */
     $("#canvas_div").css("cursor", "pointer");
   } else {

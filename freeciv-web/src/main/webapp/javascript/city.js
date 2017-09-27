@@ -241,9 +241,11 @@ function show_city_dialog(pcity)
     $("#city_tabs-5").remove();
     $("#city_tabs-6").remove();
     $(".extra_tabs_small").remove();
+    $("#mobile_cma_checkbox").remove();
   } else {
     $("#city_tabs-4").remove();
     $(".extra_tabs_big").remove();
+    $("#city_stats").hide();
     var units_element = $("#city_improvements_panel").detach();
     $('#city_units_tab').append(units_element);
    }

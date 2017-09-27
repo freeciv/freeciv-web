@@ -410,9 +410,14 @@
                         </div>
                 </div>
                 <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                                 <div class="videoWrapper">
-                                        <iframe class="embed-responsive-item" width="542" height="343" src="https://www.youtube.com/embed/WZkTHp478Ew" frameborder="0" allowfullscreen></iframe>
+                                        <iframe class="embed-responsive-item" width="542" height="343" src="https://www.youtube.com/embed/Ker04WaCoFE" frameborder="0" allowfullscreen></iframe>
+                                </div>
+                        </div>
+                        <div class="col-md-6">
+                                <div class="videoWrapper">
+                                        <iframe class="embed-responsive-item" width="542" height="343" src="https://www.youtube.com/embed/gVDUPDixi2A" frameborder="0" allowfullscreen></iframe>
                                 </div>
                         </div>
                 </div> <!-- end youtube -->

@@ -24,22 +24,22 @@ index d74f178..1f16013 100644
 +static void do_longturn_tech_latejoiner_effect(struct player *pplayer)
 +{
 +  struct research *presearch;
-+  Tech_type_id tech;
-+  int mod = 40;
++  
++  int mod = 35;
 +  int num_players;
 +
-+  tech = A_UNSET;
++  
 +  presearch = research_get(pplayer);
-+  advance_index_iterate(A_FIRST, i) {
-+    if (TECH_KNOWN == research_invention_state(presearch, i)) {
++  advance_index_iterate(A_FIRST, ptech) {
++    if (presearch != NULL && TECH_KNOWN == research_invention_state(presearch, ptech)) {
 +      continue;
 +    }
 +
 +    num_players = 0;
 +    players_iterate(aplayer) {
-+      if (TECH_KNOWN == research_invention_state(research_get(aplayer), i)) {
++      if (TECH_KNOWN == research_invention_state(research_get(aplayer), ptech)) {
 +        if (mod <= ++num_players) {
-+          found_new_tech(presearch, tech, FALSE, TRUE);		
++          found_new_tech(presearch, ptech, FALSE, TRUE);		
 +	  break;
 +        }
 +      }

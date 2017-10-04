@@ -170,7 +170,7 @@ function update_nation_screen()
         $("#player_state_" + player_id).html("<span style='color: #00EE00;'><b>Online</b></span>");
       }
     }
-    $("#nation_table").tablesorter({theme: "dark"});
+    $("#nation_table").trigger('update');
   });
 
 }

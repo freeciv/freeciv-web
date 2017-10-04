@@ -1,7 +1,7 @@
-#LongTurn game #9
+#LongTurn Web X
 
 cmdlevel ctrl first
-rulesetdir multiplayer 
+rulesetdir longturn-web-x 
 set topology WRAPX
 set nationset all
 set compresstype xs
@@ -22,7 +22,7 @@ set scorelog disabled
 set mapsize FULLSIZE
 set size 32
 set topology=
-set landm 80
+set landm 70
 set dispersion=1
 
 set endt 365
@@ -31,7 +31,7 @@ set diplomacy=HUMAN
 set contactturns=0
 
 set minp 0
-set generator RANDOM
+set generator Island
 set saveturns=1
 set autosaves=TURN
 metaconnection persistent
@@ -39,7 +39,7 @@ set ec_chat=enabled
 set ec_info=enabled 
 set ec_max_size=5000
 set ec_turns=9
-metamessage LongTurn Game #9 | 1 turn per day | 300 players | 32000 tiles | Join now!
+metamessage LongTurn-Web-X | LTW-X | 1 turn per day | 300 players | 32000 tiles | Join now!
 
 
 cmdlevel basic

@@ -55,7 +55,7 @@ var city_screen_updater = new EventAggregator(update_city_screen, 250,
 
 var city_dialog_template = null;
 
-var basic_cma_enabled = true;
+var basic_cma_enabled = false;
 
 /**************************************************************************
   Initialize the city dialog once the first time.

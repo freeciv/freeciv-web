@@ -11,7 +11,7 @@ set aifill 300
 set allowtake=""
 set autotoggle false
 set timeout 82800
-set unitwaittime=3600
+set unitwaittime=36000
 set netwait 150
 set nettimeout 120
 set pingtime 30

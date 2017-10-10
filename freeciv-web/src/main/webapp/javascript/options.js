@@ -177,6 +177,7 @@ function init_options_dialog()
   } else {
     $("#switch_renderer_button").html("Use 3D WebGL graphics");
     $("#renderer_help").html("Use 3D WebGL graphics. Make sure your computer supports 3D WebGL graphics. Saving your game is suggested before trying to switch to 3D WebGL the first time.")
+    $("#update_model_button").hide();
   }
 
   if (!Detector.webgl) {

@@ -101,15 +101,6 @@ function update_nation_screen()
 
   $("#nations_list").html(nation_list_html);
 
-  $("#nation_table").selectable({ filter: "tr",
-       selected: function( event, ui ) {handle_nation_table_select(ui); },
-       unselected: function( event, ui ) {
-         if (parseFloat($(ui.unselected).data("plrid")) == selected_player) {
-           select_no_nation();
-         }
-       }
-  });
-
   select_no_nation();
 
   if (is_pbem()) {
@@ -193,10 +184,29 @@ function col_love(pplayer)
 /**************************************************************************
  ...
 **************************************************************************/
-function handle_nation_table_select( ui )
+function handle_nation_table_select(ev)
 {
-  $(ui.selected).siblings().removeClass('ui-selected');
-  selected_player = parseFloat($(ui.selected).data("plrid"));
+  ev.stopPropagation();
+
+  var new_element = $(this);
+  var new_player = parseFloat(new_element.data("plrid"));
+
+  if (new_player === selected_player) {
+     new_element.removeClass('ui-selected');
+     select_no_nation();
+  } else {
+     new_element.siblings().removeClass('ui-selected');
+     new_element.addClass('ui-selected');
+     selected_player = new_player;
+     select_a_nation();
+  }
+}
+
+/**************************************************************************
+ Enables the appropriate action buttons for the selected nation.
+**************************************************************************/
+function select_a_nation()
+{
   var player_id = selected_player;
   var pplayer = players[selected_player];
   if (pplayer == null) return;

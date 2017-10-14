@@ -54,7 +54,7 @@ function update_tiles_known_vertex_colors()
       var mapPos = scene_to_map_coords(vPos.x, vPos.z);
       if (mapPos['x'] >= 0 && mapPos['y'] >= 0) {
         var ptile = map_pos_to_tile(mapPos['x'], mapPos['y']);
-        if (ptile != null) {
+        if (ptile != null && tile_get_known(ptile) != TILE_UNKNOWN) {
           if (landGeometry.faces[i].vertexColors[r] != null) landGeometry.faces[i].vertexColors[r].copy(get_vertex_color_from_tile(ptile));
         }
       }

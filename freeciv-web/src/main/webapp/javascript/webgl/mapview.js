@@ -181,7 +181,7 @@ function init_webgl_mapview() {
     uniforms: freeciv_uniforms,
     vertexShader: document.getElementById('terrain_vertex_shh').innerHTML,
     fragmentShader: document.getElementById('terrain_fragment_shh').innerHTML,
-    vertexColors: THREE.FaceColors
+    vertexColors: THREE.VertexColors
   });
 
   xquality = map.xsize * 4 + 1;
@@ -204,34 +204,34 @@ function init_webgl_mapview() {
   landMesh = new THREE.Mesh( landGeometry, terrain_material );
   scene.add( landMesh );
 
-  for (var x = 0; x <= map.xsize; x++) {
-    for (var y = 0; y <= map.ysize; y++) {
-      map_index_to_face[x + "." + y] = [];
-    }
-  }
-
   for ( var i = 0; i < landGeometry.faces.length; i ++ ) {
     var v = ['a', 'b', 'c'];
+    var vertex_colors = [];
     for (var r = 0; r < v.length; r++) {
       var vertex = landGeometry.vertices[landGeometry.faces[i][v[r]]];
       var vPos = landMesh.localToWorld(vertex);
       var mapPos = scene_to_map_coords(vPos.x, vPos.z);
       if (mapPos['x'] >= 0 && mapPos['y'] >= 0) {
-        map_index_to_face[mapPos['x'] + "." + mapPos['y']].push(landGeometry.faces[i]);
         var ptile = map_pos_to_tile(mapPos['x'], mapPos['y']);
         if (ptile == null) {
-          landGeometry.faces[i].color.copy(new THREE.Color(0,0,0));
+          vertex_colors.push(new THREE.Color(0,0,0));
         } else if (tile_get_known(ptile) == TILE_KNOWN_SEEN) {
-          landGeometry.faces[i].color.copy(new THREE.Color(1,0,0));
+          vertex_colors.push(new THREE.Color(1,0,0));
         } else if (tile_get_known(ptile) == TILE_KNOWN_UNSEEN) {
-          landGeometry.faces[i].color.copy(new THREE.Color(0.5,0,0));
+          vertex_colors.push(new THREE.Color(0.5,0,0));
         } else if (tile_get_known(ptile) == TILE_UNKNOWN) {
-          landGeometry.faces[i].color.copy(new THREE.Color(0,0,0));
+          vertex_colors.push(new THREE.Color(0,0,0));
         }
       }
     }
-
+    landGeometry.faces[i].vertexColors = vertex_colors;
   }
+  if (graphics_quality == QUALITY_HIGH) {
+    setInterval(update_tiles_known_vertex_colors, 350);
+  } else {
+    setInterval(update_tiles_known_vertex_colors, 1200);
+  }
+
 
   prerender(landGeometry, xquality);
 

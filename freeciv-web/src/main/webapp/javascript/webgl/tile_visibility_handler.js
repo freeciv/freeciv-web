@@ -17,7 +17,7 @@
 
 ***********************************************************************/
 
-var map_index_to_face = {};  // a map where the key is x.y and the value is a Tree.js Face
+var vertex_colors_dirty = false;
 
 /**************************************************************************
  Updates the terrain vertex colors to set tile to known, unknown or fogged.
@@ -25,17 +25,7 @@ var map_index_to_face = {};  // a map where the key is x.y and the value is a Tr
 function webgl_update_tile_known(old_tile, new_tile)
 {
   if (new_tile == null || old_tile == null || tile_get_known(new_tile) == tile_get_known(old_tile) || landGeometry == null) return;
-
-  var tx = old_tile['x'];
-  var ty = old_tile['y'];
-
-  for (var i = 0; i < map_index_to_face[tx + "." + ty].length; i++) {
-    var face = map_index_to_face[tx + "." + ty][i];
-    face.color.copy(get_vertex_color_from_tile(new_tile));
-  }
-
-  landGeometry.colorsNeedUpdate = true;
-
+  vertex_colors_dirty = true;
 }
 
 
@@ -46,21 +36,34 @@ Updates the terrain vertex colors to set irrigation, farmland, or none.
 function webgl_update_farmland_irrigation_vertex_colors(ptile)
 {
   if (ptile == null || landGeometry == null) return;
-
-  var tx = ptile['x'];
-  var ty = ptile['y'];
-
-  for (var i = 0; i < map_index_to_face[tx + "." + ty].length; i++) {
-    var face = map_index_to_face[tx + "." + ty][i];
-    var new_color = get_vertex_color_from_tile(ptile);
-    new_color.r = face.color.r; // don't update tile known status here.
-    face.color.copy(new_color);
-  }
-
-  landGeometry.colorsNeedUpdate = true;
-
+  vertex_colors_dirty = true;
 }
 
+/**************************************************************************
+ This will update the fog of war and unknown tiles, and farmland/irrigation
+ by storing these as vertex colors in the landscape mesh.
+**************************************************************************/
+function update_tiles_known_vertex_colors()
+{
+  if (!vertex_colors_dirty) return;
+  for ( var i = 0; i < landGeometry.faces.length; i ++ ) {
+    var v = ['a', 'b', 'c'];
+    for (var r = 0; r < v.length; r++) {
+      var vertex = landGeometry.vertices[landGeometry.faces[i][v[r]]];
+      var vPos = landMesh.localToWorld(vertex);
+      var mapPos = scene_to_map_coords(vPos.x, vPos.z);
+      if (mapPos['x'] >= 0 && mapPos['y'] >= 0) {
+        var ptile = map_pos_to_tile(mapPos['x'], mapPos['y']);
+        if (ptile != null) {
+          if (landGeometry.faces[i].vertexColors[r] != null) landGeometry.faces[i].vertexColors[r].copy(get_vertex_color_from_tile(ptile));
+        }
+      }
+    }
+  }
+  landGeometry.colorsNeedUpdate = true;
+  vertex_colors_dirty = false;
+
+}
 
 
 /**************************************************************************

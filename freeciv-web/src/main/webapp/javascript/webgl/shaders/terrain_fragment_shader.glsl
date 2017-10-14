@@ -133,12 +133,6 @@ vec2 texture_coord;
 void main(void)
 {
 
-    // Render unknown terrain. (vColor.rgb is the vertex color)
-    if (vColor.r == 0.0) {
-      gl_FragColor = vec4( 0.0, 0.0, 0.0, 0.0 );
-      return;
-    }
-
     vec4 terrain_type = texture2D(maptiles, vec2(vUv.x, vUv.y));
     vec4 border_color = texture2D(borders, vec2(vUv.x, vUv.y));
     vec4 road_type = texture2D(roadsmap, vec2(vUv.x, vUv.y));
@@ -467,10 +461,8 @@ void main(void)
 
   float shade_factor = 0.28 + 1.0 * max(0., dot(vNormal, normalize(light)));
 
-  if (vColor.r > 0.4 && vColor.r < 0.6) {
-    // render Fog of war.
-    c = c * 0.5;
-  }
+  // Fog of war, and unknown tiles, are stored as a vertex color in vColor.r.
+  c = c * vColor.r;
 
   gl_FragColor.rgb = mix(c * shade_factor, ambiant, (vPosition_camera.z - 550.) * 0.0001875);
 

@@ -221,7 +221,11 @@ function init_webgl_mapview() {
           vertex_colors.push(new THREE.Color(0.5,0,0));
         } else if (tile_get_known(ptile) == TILE_UNKNOWN) {
           vertex_colors.push(new THREE.Color(0,0,0));
+        } else {
+          vertex_colors.push(new THREE.Color(0,0,0));
         }
+      } else {
+        vertex_colors.push(new THREE.Color(0,0,0));
       }
     }
     landGeometry.faces[i].vertexColors = vertex_colors;

@@ -1363,11 +1363,15 @@ function city_worklist_dialog(pcity)
     worklist_items.eq(worklist_selection[k]).addClass("ui-selected");
   }
 
-  $("#city_current_worklist .worklist_table").selectable({
-     filter: "tr",
-     selected: handle_current_worklist_select,
-     unselected: handle_current_worklist_unselect
-  });
+  if (!is_touch_device()) {
+    $("#city_current_worklist .worklist_table").selectable({
+       filter: "tr",
+       selected: handle_current_worklist_select,
+       unselected: handle_current_worklist_unselect
+    });
+  } else {
+    worklist_items.click(handle_current_worklist_click);
+  }
 
   worklist_items.dblclick(handle_current_worklist_direct_remove);
 
@@ -1444,6 +1448,28 @@ function handle_current_worklist_unselect(event, ui)
     worklist_selection.splice(i, 1);
     update_worklist_actions();
   }
+}
+
+/**************************************************************************
+ Handles an item selection from the tasklist (for touch devices).
+**************************************************************************/
+function handle_current_worklist_click(event)
+{
+  event.stopPropagation();
+
+  var element = $(this);
+  var item = parseInt(element.data('wlitem'), 10);
+
+  if (worklist_selection.length === 1 && worklist_selection[0] === item) {
+     element.removeClass('ui-selected');
+     worklist_selection = [];
+  } else {
+     element.siblings().removeClass('ui-selected');
+     element.addClass('ui-selected');
+     worklist_selection = [item];
+  }
+
+  update_worklist_actions();
 }
 
 /**************************************************************************

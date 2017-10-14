@@ -246,6 +246,7 @@ function control_init()
   $('#take_player_button').click(take_player_clicked);
   $('#toggle_ai_button').click(toggle_ai_clicked);
   $('#game_scores_button').click(view_game_scores);
+  $('#nations_list').on('click', 'tbody tr', handle_nation_table_select);
 
   /* prevents keyboard input from changing tabs. */
   $('#tabs').tabs({

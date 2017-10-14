@@ -178,6 +178,22 @@ function can_client_change_view()
 }
 
 /**************************************************************************
+  Returns TRUE if the client can control the player.
+**************************************************************************/
+function can_client_control()
+{
+  return (null != client.conn.playing && !client_is_observer());
+}
+
+/**************************************************************************
+  Returns TRUE if the client can issue orders (giving unit commands, etc).
+**************************************************************************/
+function can_client_issue_orders()
+{
+  return (can_client_control() && C_S_RUNNING == client_state());
+}
+
+/**************************************************************************
   Webclient does have observer support.
 **************************************************************************/
 function client_is_observer()

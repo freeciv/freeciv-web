@@ -211,8 +211,14 @@ function select_a_nation()
   var pplayer = players[selected_player];
   if (pplayer == null) return;
 
+  var selected_myself = client.conn.playing != null && player_id == client.conn.playing['playerno'];
+  var both_alive_and_different = client.conn.playing != null
+                              && player_id != client.conn.playing['playerno']
+                              && pplayer['is_alive']
+                              && client.conn.playing['is_alive'];
+
   if (pplayer != null && pplayer['is_alive'] && (client_is_observer()
-      || (client.conn.playing != null && player_id == client.conn.playing['playerno'])
+      || selected_myself
       || (diplstates[player_id] != null && diplstates[player_id] != DS_NO_CONTACT)
       || client_state() == C_S_OVER)) {
     $('#view_player_button').button("enable");
@@ -220,7 +226,9 @@ function select_a_nation()
     $('#view_player_button').button("disable");
   }
 
-  if (!client_is_observer() && diplstates[player_id] != null
+  if (!client_is_observer()
+      && both_alive_and_different
+      && diplstates[player_id] != null
       && diplstates[player_id] != DS_NO_CONTACT) {
     $('#meet_player_button').button("enable");
   } else {
@@ -232,13 +240,15 @@ function select_a_nation()
     $('#meet_player_button').button("disable");
   }
 
-    if (pplayer['flags'].isSet(PLRF_AI) || (client.conn.playing != null && player_id == client.conn.playing['playerno'])) {
+    if (pplayer['flags'].isSet(PLRF_AI) || selected_myself) {
       $('#send_message_button').button("disable");
     } else {
       $('#send_message_button').button("enable");
     }
 
-  if (!client_is_observer() && client.conn.playing != null && player_id != client.conn.playing['playerno']
+  if (!client_is_observer()
+      && both_alive_and_different
+      && pplayer['team'] != client.conn.playing['team']
       && diplstates[player_id] != null
       && diplstates[player_id] != DS_WAR && diplstates[player_id] != DS_NO_CONTACT) {
     $('#cancel_treaty_button').button("enable");
@@ -247,7 +257,7 @@ function select_a_nation()
     $('#cancel_treaty_button').button("disable");
   }
   
-  if (!client_is_observer() && client.conn.playing != null && player_id != client.conn.playing['playerno']) {
+  if (can_client_control() && !selected_myself) {
     if (diplstates[player_id] == DS_CEASEFIRE || diplstates[player_id] == DS_ARMISTICE || diplstates[player_id] == DS_PEACE) {
       $("#cancel_treaty_button").button("option", "label", "Declare war");
     } else {
@@ -255,14 +265,17 @@ function select_a_nation()
     }
   }
 
-  if (!client_is_observer() && client.conn.playing != null && client.conn.playing['gives_shared_vision'].isSet(player_id)) {
+  if (can_client_control()
+      && both_alive_and_different
+      && pplayer['team'] != client.conn.playing['team']
+      && client.conn.playing['gives_shared_vision'].isSet(player_id)) {
     $('#withdraw_vision_button').button("enable");
   } else {
     $('#withdraw_vision_button').button("disable");
   }
 
-  if (!client_is_observer() && client.conn.playing != null && player_id != client.conn.playing['playerno']
-    && diplstates[player_id] != DS_NO_CONTACT) {
+  if (client_is_observer() ||
+       (both_alive_and_different && diplstates[player_id] != DS_NO_CONTACT)) {
     $("#intelligence_report_button").button("enable");
   } else {
     $("#intelligence_report_button").button("disable");

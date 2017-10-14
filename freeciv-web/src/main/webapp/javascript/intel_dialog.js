@@ -27,7 +27,8 @@ function show_intelligence_report_dialog()
   if (selected_player == -1) return;
   var pplayer = players[selected_player];
 
-  if (client.conn.playing.real_embassy[selected_player]) {
+  if (client_is_observer()
+      || client.conn.playing.real_embassy[selected_player]) {
     show_intelligence_report_embassy(pplayer);
   } else {
     show_intelligence_report_hearsay(pplayer);
@@ -93,12 +94,15 @@ function show_intelligence_report_embassy(pplayer)
     } else {
       intel_data['researching'] = '(Nothing)';
     }
-    var myresearch = research_get(client.conn.playing);
+    var myresearch = client_is_observer()
+                     ? null
+                     : research_get(client.conn.playing)['inventions'];
     for (var tech_id in techs) {
       if (research['inventions'][tech_id] == TECH_KNOWN) {
         intel_data['tech'].push({
           name: techs[tech_id]['name'],
-          who: myresearch['inventions'][tech_id] == TECH_KNOWN ? 'both' : 'them'
+          who: (myresearch != null && myresearch[tech_id] == TECH_KNOWN)
+                           ? 'both' : 'them'
         });
       }
     }

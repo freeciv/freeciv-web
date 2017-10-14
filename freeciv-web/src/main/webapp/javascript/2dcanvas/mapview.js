@@ -69,7 +69,7 @@ function init_mapview()
   buffer_canvas = document.createElement('canvas');
   buffer_canvas_ctx = buffer_canvas.getContext('2d');
 
-  if ("imageSmoothingEnabled " in mapview_canvas_ctx) {
+  if ("imageSmoothingEnabled" in mapview_canvas_ctx) {
     // if this Boolean value is false, images won't be smoothed when scaled. This property is true by default.
     mapview_canvas_ctx.imageSmoothingEnabled = false;
   }

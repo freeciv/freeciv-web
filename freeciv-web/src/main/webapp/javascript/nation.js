@@ -412,7 +412,7 @@ function love_text(love)
 **************************************************************************/
 function take_player(player_name)
 {
-  send_message("/take " + player_name.substring(0,3));
+  send_message("/take " + player_name);
   observing = false;
 }
 
@@ -421,7 +421,7 @@ function take_player(player_name)
 **************************************************************************/
 function aitoggle_player(player_name)
 {
-  send_message("/ai " + player_name.substring(0,3));
+  send_message("/aitoggle " + player_name);
   observing = false;
 }
 

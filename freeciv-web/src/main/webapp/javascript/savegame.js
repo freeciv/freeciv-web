@@ -224,7 +224,18 @@ function show_load_game_dialog_cb(savegames_data)
 			height: is_small_screen() ? $(window).height() - 20 : $(window).height() - 80,
 			buttons: dialog_buttons
 		});
-  $("#selectable").selectable();
+
+  if (!is_touch_device()) {
+    $("#selectable").selectable();
+  } else {
+    $("#selectable").on("click", "li", function (ev) {
+      ev.stopPropagation();
+      var item = $(this);
+      item.siblings().removeClass('ui-selected');
+      item.addClass('ui-selected');
+    });
+  }
+
   $("#dialog").dialog('open');
   $("#game_text_input").blur();
 

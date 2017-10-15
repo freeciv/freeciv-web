@@ -151,17 +151,13 @@ function show_load_game_dialog_cb(savegames_data)
     var savegames = savegames_data.split(";");
     for (var i = 0; i < savegames.length; i++) {
         if (savegames[i].length > 2) {
-          if (i < savegames.length - 2) {
-            saveHtml += "<li class='ui-widget-content'>" + savegames[i] + "</li>";
-          } else {
-            saveHtml += "<li class='ui-selected ui-widget-content'>" + savegames[i] + "</li>";
-          }
+          saveHtml += "<li class='ui-widget-content'>" + savegames[i] + "</li>";
         }
 
     }
   }
 
-  saveHtml += "</ol><br>";
+  saveHtml += "</ul><br>";
 
   var dialog_buttons = {};
 
@@ -224,6 +220,8 @@ function show_load_game_dialog_cb(savegames_data)
 			height: is_small_screen() ? $(window).height() - 20 : $(window).height() - 80,
 			buttons: dialog_buttons
 		});
+
+  $("#selectable li").first().addClass('ui-selected');
 
   if (!is_touch_device()) {
     $("#selectable").selectable();

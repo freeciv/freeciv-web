@@ -157,9 +157,9 @@ function propagate_distance_from_coast(distance_from_coast_map, x, y, level)
 function map_tile_height(ptile)
 {
   if (ptile != null && tile_terrain(ptile) != null) {
-      if (tile_terrain(ptile)['name'] == "Deep Ocean") return -0.20 + ((Math.random() - 0.5) / 40);
+      //if (tile_terrain(ptile)['name'] == "Deep Ocean") return -0.20 + ((Math.random() - 0.5) / 40);
       if (tile_has_extra(ptile, EXTRA_RIVER)) return -0.01;
-      if (is_ocean_tile(ptile)) return -0.15 + ((Math.random() - 0.5) / 60);
+      if (is_ocean_tile(ptile)) return -0.13 + ((Math.random() - 0.5) / 80);
       if (tile_terrain(ptile)['name'] == "Hills") return 0.43;
       if (tile_terrain(ptile)['name'] == "Mountains") return 0.95 + ((Math.random() - 0.5) / 8);
   }
@@ -178,7 +178,7 @@ function get_unit_height_offset(punit)
   var pcity = tile_city(ptile);
 
   if (pcity != null) return 10;
-  if (tile_terrain(ptile)['name'] == "Deep Ocean") return 7;
+  //if (tile_terrain(ptile)['name'] == "Deep Ocean") return 7;
 
   return 0;
 

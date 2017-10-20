@@ -18,6 +18,7 @@ else
   logfile="${basedir}/freeciv-web-vagrant.log"
 fi
 
+START_TIME=$SECONDS
 
 # Redirect copy of output to a log file.
 exec > >(tee ${logfile})
@@ -142,5 +143,8 @@ if [ -d "/vagrant/" ]; then
 else
   echo "Freeciv-web installed. Please start it manually."
 fi
+
+ELAPSED_TIME=$(($SECONDS - $START_TIME))
+echo "Vagrant took $ELAPSED_TIME seconds to build Freeciv-web."
 
 echo "Freeciv-web started! Now try http://localhost/ on your host operating system."

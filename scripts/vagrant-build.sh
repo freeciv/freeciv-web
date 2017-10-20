@@ -49,7 +49,7 @@ tornado_url="https://github.com/tornadoweb/tornado/archive/v4.4.1.tar.gz"
 casperjs_url="https://github.com/casperjs/casperjs/archive/1.1.4.zip"
 
 # Based on fresh install of Ubuntu 16.04
-dependencies="maven mysql-server openjdk-8-jdk-headless libcurl4-openssl-dev nginx libjansson-dev subversion pngcrush python3-pillow libtool automake autoconf autotools-dev language-pack-en python-minimal python3.6-dev python3-setuptools libbz2-dev imagemagick python3-pip dos2unix liblzma-dev xvfb libicu-dev pkg-config zlib1g-dev libsdl1.2-dev tomcat8 tomcat8-admin unzip phantomjs zip libsqlite3-dev webp"
+dependencies="maven mysql-server openjdk-8-jdk-headless libcurl4-openssl-dev nginx libjansson-dev subversion pngcrush python3-pillow libtool automake autoconf autotools-dev language-pack-en python-minimal python3.6-dev python3-setuptools libbz2-dev imagemagick python3-pip dos2unix liblzma-dev libicu-dev pkg-config zlib1g-dev tomcat8 tomcat8-admin unzip zip libsqlite3-dev webp libmagickcore*extra"
 
 ## Setup
 mkdir -p ${basedir}
@@ -66,7 +66,12 @@ echo "mysql setup..."
 debconf-set-selections <<< "mysql-server mysql-server/root_password password ${mysql_pass}"
 debconf-set-selections <<< "mysql-server mysql-server/root_password_again password ${mysql_pass}"
 echo "apt-get install dependencies"
-apt-get -y install ${dependencies}
+apt-get -y install --no-install-recommends ${dependencies}
+
+#clean up disk space.
+apt-get autoremove -y
+sudo apt-get clean
+rm -rf /usr/src/linux*
 
 service snapd stop
 
@@ -137,17 +142,5 @@ if [ -d "/vagrant/" ]; then
 else
   echo "Freeciv-web installed. Please start it manually."
 fi
-
-echo "============================================"
-echo "Installing CasperJS for testing"
-cd ${basedir}/tests/
-wget ${casperjs_url}
-unzip -qo 1.1.4.zip
-cd casperjs-1.1.4
-ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs
-
-echo "Start testing of Freeciv-web using CasperJS:"
-cd ${basedir}/tests/
-xvfb-run casperjs --engine=phantomjs test freeciv-web-tests.js || (>&2 echo "Freeciv-web CasperJS tests failed!" && exit 1)
 
 echo "Freeciv-web started! Now try http://localhost/ on your host operating system."

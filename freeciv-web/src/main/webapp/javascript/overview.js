@@ -20,6 +20,7 @@
 var OVERVIEW_TILE_SIZE = 1;
 var overviewTimerId = -1;
 var min_overview_width = 200;
+var max_overview_width = 350;
 
 var OVERVIEW_REFRESH = 6000;
 
@@ -48,6 +49,9 @@ function init_overview()
 {
   while (min_overview_width > OVERVIEW_TILE_SIZE * map['xsize']) {
     OVERVIEW_TILE_SIZE++;
+  }
+  if (max_overview_width < OVERVIEW_TILE_SIZE * map['xsize']) {
+    OVERVIEW_TILE_SIZE = 1;
   }
 
   overview_active = true;

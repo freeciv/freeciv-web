@@ -182,8 +182,6 @@ function update_chatbox(messages)
         scrollDiv.appendChild(item);
     }
 
-    $("#freeciv_custom_scrollbar_div").mCustomScrollbar("scrollTo", "bottom");
-
   } else {
       // It seems this might happen in pregame while handling a join request.
       // If so, enqueue the messages again, but we'll be emptying-requeueing
@@ -192,7 +190,7 @@ function update_chatbox(messages)
         message_log.update(messages[i]);
       }
   }
-
+  setTimeout("$('#freeciv_custom_scrollbar_div').mCustomScrollbar('scrollTo', 'bottom');", 100);
 }
 
 /**************************************************************************

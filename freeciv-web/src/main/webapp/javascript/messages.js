@@ -175,26 +175,15 @@ function update_chatbox(messages)
   var scrollDiv = get_chatbox_msg_list();
 
   if (scrollDiv != null) {
-      for (var i = 0; i < messages.length; i++) {
+    for (var i = 0; i < messages.length; i++) {
         var item = document.createElement('li');
         item.className = fc_e_events[messages[i].event][E_I_NAME];
         item.innerHTML = messages[i].message;
         scrollDiv.appendChild(item);
-      }
+    }
 
-      var currentHeight = 0;
+    $("#freeciv_custom_scrollbar_div").mCustomScrollbar("scrollTo", "bottom");
 
-      if (scrollDiv.scrollHeight > 0) {
-        currentHeight = scrollDiv.scrollHeight;
-      } else if (scrollDiv.offsetHeight > 0) {
-        currentHeight = scrollDiv.offsetHeight;
-      }
-
-      if (previous_scroll < currentHeight) {
-        scrollDiv.scrollTop = currentHeight;
-      }
-
-      previous_scroll = currentHeight;
   } else {
       // It seems this might happen in pregame while handling a join request.
       // If so, enqueue the messages again, but we'll be emptying-requeueing
@@ -226,29 +215,6 @@ function chatbox_clip_messages(lines)
 
   // To update scroll size
   update_chatbox([]);
-}
-
-/**************************************************************************
- ...
-**************************************************************************/
-function chatbox_scroll_down ()
-{
-    var scrollDiv = get_chatbox_msg_list();
-
-    if (scrollDiv != null) {
-      var currentHeight = 0;
-
-      if (scrollDiv.scrollHeight > 0) {
-        currentHeight = scrollDiv.scrollHeight;
-      } else if (scrollDiv.offsetHeight > 0) {
-        currentHeight = scrollDiv.offsetHeight;
-      }
-
-      scrollDiv.scrollTop = currentHeight;
-
-      previous_scroll = currentHeight;
-    }
-
 }
 
 /**************************************************************************

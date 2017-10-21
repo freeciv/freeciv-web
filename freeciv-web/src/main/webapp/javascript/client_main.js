@@ -391,8 +391,6 @@ function set_default_mapview_active()
     return;
   }
 
-  chatbox_scroll_down();
-
   if (!is_small_screen() && overview_active) {
     $("#game_overview_panel").parent().show();
     $(".overview_dialog").position({my: 'left bottom', at: 'left bottom', of: window, within: $("#game_page")});

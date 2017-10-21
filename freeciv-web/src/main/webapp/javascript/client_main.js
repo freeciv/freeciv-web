@@ -69,6 +69,7 @@ function set_client_state(newstate)
       if (observing || $.getUrlVar('action') == "multi" || is_longturn() || game_loaded) {
         center_on_any_city();
         advance_unit_focus();
+        $("#freeciv_custom_scrollbar_div").mCustomScrollbar("scrollTo", "bottom",{scrollInertia:0});
       }
 
       if (speech_recogntition_enabled) speech_recogntition_init()

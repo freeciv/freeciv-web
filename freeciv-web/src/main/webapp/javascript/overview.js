@@ -20,7 +20,7 @@
 var OVERVIEW_TILE_SIZE = 1;
 var overviewTimerId = -1;
 var min_overview_width = 200;
-var max_overview_width = 350;
+var max_overview_width = 300;
 var max_overview_height = 300;
 
 var OVERVIEW_REFRESH = 6000;

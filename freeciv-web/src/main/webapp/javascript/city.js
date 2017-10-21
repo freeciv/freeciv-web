@@ -230,8 +230,14 @@ function show_city_dialog(pcity)
                         close : function(){
                           close_city_dialog();
                         },
-			buttons: dialog_buttons
-                     });
+            buttons: dialog_buttons
+                   }).dialogExtend({
+                     "minimizable" : true,
+                     "closable" : true,
+                     "icons" : {
+                       "minimize" : "ui-icon-circle-minus",
+                       "restore" : "ui-icon-bullet"
+                     }});
 
   $("#city_dialog").dialog('open');
   $("#game_text_input").blur();

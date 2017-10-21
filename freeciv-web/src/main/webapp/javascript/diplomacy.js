@@ -377,7 +377,13 @@ function create_diplomacy_dialog(counterpart) {
 			close: function() {
 			     cancel_meeting_req();
 			}
-		});
+		}).dialogExtend({
+           "minimizable" : true,
+           "closable" : true,
+           "icons" : {
+             "minimize" : "ui-icon-circle-minus",
+             "restore" : "ui-icon-bullet"
+           }});
 
   $("#diplomacy_dialog").dialog('open');
   $(".ui-dialog").css("overflow", "visible");

@@ -863,7 +863,13 @@ function init_game_unit_panel()
 			position: {my: 'right bottom', at: 'right bottom', of: window, within: $("#game_page")},
 			close: function(event, ui) { unitpanel_active = false;}
 
-		});
+		}).dialogExtend({
+             "minimizable" : true,
+             "closable" : false,
+             "icons" : {
+               "minimize" : "ui-icon-circle-minus",
+               "restore" : "ui-icon-bullet"
+             }});
 
   $("#game_unit_panel").dialog('open');
   $("#game_unit_panel").parent().css("overflow", "hidden");

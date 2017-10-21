@@ -40,7 +40,13 @@ function init_chatbox()
 			closeOnEscape: false,
 			position: {my: 'left bottom', at: 'left bottom', of: window, within: $("#game_page")},
 			close: function(event, ui) { chatbox_active = false;}
-		});
+		}).dialogExtend({
+                     "minimizable" : true,
+                     "closable" : false,
+                     "icons" : {
+                       "minimize" : "ui-icon-circle-minus",
+                       "restore" : "ui-icon-bullet"
+                     }});
 
   $("#game_chatbox_panel").dialog('open');
   $(".chatbox_dialog").css("top", "52px");
@@ -63,6 +69,9 @@ function init_chatbox()
       chatbox_panel_toggle = !chatbox_panel_toggle;
     });
   }
+
+  $("#game_message_area").parent().mCustomScrollbar({theme:"3d"});
+
 }
 
 /**************************************************************************

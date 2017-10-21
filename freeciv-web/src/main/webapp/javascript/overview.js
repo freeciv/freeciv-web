@@ -64,7 +64,13 @@ function init_overview()
 			autoResize:true,
 			width: "auto",
 			close: function(event, ui) { overview_active = false;}
-		});
+		}).dialogExtend({
+                  "minimizable" : true,
+                  "closable" : false,
+                  "icons" : {
+                    "minimize" : "ui-icon-circle-minus",
+                    "restore" : "ui-icon-bullet"
+                  }});
 
   $("#game_overview_panel").parent().css("overflow", "hidden");
 

@@ -145,7 +145,9 @@
 
 		<div class="jumbotron">
 			<div class="row">
+
 				<a href="/webclient/?action=new&renderer=webgl"><img src="/static/images/freeciv-webgl-splash-48.png" alt="" style="width: 95%;"></a>
+
 			</div>
 			<div class="container-fluid">
 				<div class="row top-buffer-3">
@@ -153,14 +155,14 @@
 						<fmt:message key="index-lead"/>
 
 
-                         <%--<div class="row top-buffer-3">
-                         <h1>LongTurn for Freeciv-web 8</h1>
-                         <b>LongTurn game number 8 of Freeciv-web has started and you can join it now!</b><br>
+                         <div class="row top-buffer-3">
+                         <h1>Join LongTurn Web X</h1>
+                         <b>LongTurn Web X has started and you can join it now!</b><br>
                          <b>Each player will play one turn every day. <br><br>
                          This will be one of the greatest ever multiplayer game of Freeciv with 300 players!<br>
                          </b>
-                         <h2><a href="https://play.freeciv.org/webclient?action=multi&civserverport=6003&civserverhost=play&multi=true">Join the LongTurn Freeciv-web game 8 here!</a></h2>
-			 </div>--%>
+                         <h2><a href="https://play.freeciv.org/webclient?action=multi&civserverport=6004&civserverhost=play&multi=true">Join the LongTurn Web X here!</a></h2>
+			 </div>
 
 					</p>
 				</div>
@@ -281,6 +283,8 @@
 				<fmt:message key="index-play-store"/>
 			</a>
 		</div>  <!-- end apps/browser plugins -->
+
+
 
 		<div class="row top-buffer-1">
 			<div class="col-md-12 ">
@@ -412,15 +416,15 @@
                 <div class="row">
                         <div class="col-md-6">
                                 <div class="videoWrapper">
-                                        <iframe class="embed-responsive-item" width="542" height="343" src="https://www.youtube.com/embed/Ker04WaCoFE" frameborder="0" allowfullscreen></iframe>
+                                        <iframe class="embed-responsive-item" width="542" height="343" src="https://www.youtube.com/embed/3Agk3S28bVE" frameborder="0" allowfullscreen></iframe>
                                 </div>
                         </div>
                         <div class="col-md-6">
                                 <div class="videoWrapper">
-                                        <iframe class="embed-responsive-item" width="542" height="343" src="https://www.youtube.com/embed/gVDUPDixi2A" frameborder="0" allowfullscreen></iframe>
+                                        <iframe class="embed-responsive-item" width="542" height="343" src="https://www.youtube.com/embed/tKFpP7hIJEc" frameborder="0" allowfullscreen></iframe>
                                 </div>
                         </div>
-                </div> <!-- end youtube -->
+</div> <!-- end youtube -->
 
 
 		<div class="row" id="latest-from-blog">
@@ -444,7 +448,7 @@
                                 </div>
                                 <div class="col-md-2">
                                 </div>
-                        </div>
+</div>
 
 
 		<div class="row">

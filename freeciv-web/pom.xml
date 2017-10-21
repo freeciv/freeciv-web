@@ -202,6 +202,7 @@
 									<cssSourceFile>bluecurve.css</cssSourceFile>
 									<cssSourceFile>fg.menu.css</cssSourceFile>
 									<cssSourceFile>theme.dark.css</cssSourceFile>
+									<cssSourceFile>jquery.mCustomScrollbar.css</cssSourceFile>
 									<cssSourceFile>jquery.contextMenu.min.css</cssSourceFile>
 									<cssSourceFile>morris.css</cssSourceFile>
 									<cssSourceFile>spectrum.css</cssSourceFile>

@@ -777,7 +777,8 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
   padding-left: 5px;
   padding-top: 0px;
   margin-top: -4px;
-  height: 8px;
+  height: 10px;
+  overflow: hidden;
 }
 
 .chatbox_dialog .ui-dialog-titlebar {

@@ -69,8 +69,6 @@ button {
 
 
 #game_overview_map {
-  float: left;
-  height: 150px;
   text-align: center;
 }
 
@@ -78,7 +76,6 @@ button {
 #overview_map {
   cursor:crosshair;
   border: 1px solid #555555;
-  height: 140px;
 }
 
 #game_unit_info {

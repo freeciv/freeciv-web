@@ -19,10 +19,9 @@
 
 var OVERVIEW_TILE_SIZE = 1;
 var overviewTimerId = -1;
-var overview_w = 230;
-var overview_h = 140;
+var min_overview_width = 200;
 
-var OVERVIEW_REFRESH = 8000;
+var OVERVIEW_REFRESH = 6000;
 
 var palette = [];
 var palette_color_offset = 0;
@@ -47,12 +46,9 @@ var overview_hash = -1;
 ****************************************************************************/
 function init_overview()
 {
-
-  var xfact = 2;
-
-  OVERVIEW_TILE_SIZE = Math.min(Math.floor((overview_w - 1) / (map['xsize'] * xfact) + 1) + 1,
-			                    Math.floor((overview_h - 1) / map['ysize'] + 1) + 1);
-  OVERVIEW_TILE_SIZE = Math.max(OVERVIEW_TILE_SIZE, 1);
+  while (min_overview_width > OVERVIEW_TILE_SIZE * map['xsize']) {
+    OVERVIEW_TILE_SIZE++;
+  }
 
   overview_active = true;
 
@@ -60,11 +56,11 @@ function init_overview()
   $("#game_overview_panel").dialog({
 			bgiframe: true,
 			modal: false,
-			width: "auto",
-			minHeight: 110,
 			resizable: false,
 			closeOnEscape: false,
 			dialogClass: 'overview_dialog no-close',
+			autoResize:true,
+			width: "auto",
 			close: function(event, ui) { overview_active = false;}
 		});
 
@@ -74,7 +70,8 @@ function init_overview()
 
   redraw_overview();
 
-  //$("#game_overview_panel").css("min-height",  map['ysize']);
+  $('#overview_map').width(OVERVIEW_TILE_SIZE * map['xsize']);
+  $('#overview_map').height(OVERVIEW_TILE_SIZE * map['ysize']);
   $(".overview_dialog").position({my: 'left bottom', at: 'left bottom', of: window, within: $("#game_page")});
 
   $('#overview_map').on('dragstart', function(event) { event.preventDefault(); });

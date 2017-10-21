@@ -29,6 +29,7 @@ function init_chatbox()
 
   chatbox_active = true;
 
+  $("#game_chatbox_panel").attr("title", "Messages");
   $("#game_chatbox_panel").dialog({
 			bgiframe: true,
 			modal: false,
@@ -41,9 +42,11 @@ function init_chatbox()
 			close: function(event, ui) { chatbox_active = false;}
 		}).dialogExtend({
                      "minimizable" : true,
+                     "maximizable" : true,
                      "closable" : false,
                      "icons" : {
                        "minimize" : "ui-icon-circle-minus",
+                       "maximize" : "ui-icon-circle-plus",
                        "restore" : "ui-icon-bullet"
                      }});
 

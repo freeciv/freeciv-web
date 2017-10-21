@@ -765,21 +765,13 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
   font-size: 140%;
 }
 
-.overview_dialog .ui-dialog-titlebar, .unit_dialog .ui-dialog-titlebar {
+.overview_dialog .ui-dialog-titlebar, .unit_dialog .ui-dialog-titlebar, .chatbox_dialog .ui-dialog-titlebar  {
   padding-bottom: 0px;
-  padding-left: 5px;
+  padding-left: 4px;
   padding-top: 0px;
   font-size: 11px;
   margin-top: -5px;
   height: 15px;
-}
-
-.chatbox_dialog .ui-dialog-titlebar {
-  padding-bottom: 0px;
-  padding-left: 5px;
-  padding-top: 0px;
-  margin-top: -4px;
-  height: 10px;
   overflow: hidden;
 }
 
@@ -1029,4 +1021,9 @@ li.tech-both::before {
   border-top: 2px #555555 groove;
   margin-top: 0.5em;
   padding-bottom: 0.5em;
+}
+
+
+.ui-widget-header .ui-icon {
+  background-image: url(images/ui-icons_c47a23_256x240.png);
 }

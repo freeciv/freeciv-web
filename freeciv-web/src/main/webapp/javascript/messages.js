@@ -20,7 +20,6 @@ var chatbox_active = true;
 var message_log = new EventAggregator(update_chatbox, 125,
                                       EventAggregator.DP_ALL, 1000, 0);
 var previous_scroll = 0;
-var chatbox_panel_toggle = false;
 
 /**************************************************************************
  ...
@@ -58,19 +57,9 @@ function init_chatbox()
     $("#game_chatbox_panel").parent().css("max-height", "15%");
     $("#game_chatbox_panel").parent().css("width", "95%");
 
-    $("#game_message_area").click(function(e) {
-      if (chatbox_panel_toggle) {
-        $("#game_chatbox_panel").parent().css("max-height", "15%");
-        $("#game_chatbox_panel").parent().css("height", "15%");
-      } else {
-        $("#game_chatbox_panel").parent().css("max-height", "65%");
-        $("#game_chatbox_panel").parent().css("height", "65%");
-      }
-      chatbox_panel_toggle = !chatbox_panel_toggle;
-    });
   }
 
-  $("#game_message_area").parent().mCustomScrollbar({theme:"3d"});
+  $("#freeciv_custom_scrollbar_div").mCustomScrollbar({theme:"3d"});
 
 }
 

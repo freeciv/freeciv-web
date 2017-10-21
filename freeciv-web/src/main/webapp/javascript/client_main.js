@@ -391,8 +391,6 @@ function set_default_mapview_active()
     return;
   }
 
-  $("#freeciv_custom_scrollbar_div").mCustomScrollbar("scrollTo", "bottom");
-
   if (!is_small_screen() && overview_active) {
     $("#game_overview_panel").parent().show();
     $(".overview_dialog").position({my: 'left bottom', at: 'left bottom', of: window, within: $("#game_page")});
@@ -410,5 +408,8 @@ function set_default_mapview_active()
   tech_dialog_active = false;
   allow_right_click = false;
   keyboard_input = true;
+
+  $("#freeciv_custom_scrollbar_div").mCustomScrollbar("scrollTo", "bottom",{scrollInertia:0});
+
 }
 

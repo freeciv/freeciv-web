@@ -65,11 +65,11 @@ function webgl_start_renderer()
   clock = new THREE.Clock();
 
   // Lights
-  var ambientLight = new THREE.AmbientLight( 0x606060, 1.0 );
+  var ambientLight = new THREE.AmbientLight( 0x606060, 0.3 );
   scene.add(ambientLight);
 
   directionalLight = new THREE.DirectionalLight( 0xffffff, 2.5 );
-  directionalLight.position.set( 1, 0.75, 0.5 ).normalize();
+  directionalLight.position.set( 0.5, 0.75, 1.0 ).normalize();
   scene.add( directionalLight );
 
   if (Detector.webgl) {

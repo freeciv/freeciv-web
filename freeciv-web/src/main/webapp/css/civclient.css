@@ -330,7 +330,7 @@ button {
 
 .ui-widget-overlay {
   background: none repeat scroll 0 0 #000000;
-  opacity: 0.65;
+  opacity: 0.75;
 }
 
 .ui-widget-content {

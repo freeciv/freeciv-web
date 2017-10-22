@@ -41,6 +41,7 @@ var COLOR_OVERVIEW_ENEMY_UNIT = 6; /* red */
 var COLOR_OVERVIEW_VIEWRECT = 7; /* white */
 
 var overview_hash = -1;
+var overview_current_state = null;
 
 
 /****************************************************************************
@@ -67,10 +68,13 @@ function init_overview()
 		}).dialogExtend({
                   "minimizable" : true,
                   "closable" : false,
+                  "minimize" : function(evt, dlg){ overview_current_state = $("#game_overview_panel").dialogExtend("state") },
+                  "restore" : function(evt, dlg){ overview_current_state = $("#game_overview_panel").dialogExtend("state") },
                   "icons" : {
                     "minimize" : "ui-icon-circle-minus",
                     "restore" : "ui-icon-bullet"
                   }});
+  if (overview_current_state == "minimized") $("#game_overview_panel").dialogExtend("minimize");
 
   $("#game_overview_panel").parent().css("overflow", "hidden");
 

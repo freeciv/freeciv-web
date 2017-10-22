@@ -394,13 +394,17 @@ function set_default_mapview_active()
   if (!is_small_screen() && overview_active) {
     $("#game_overview_panel").parent().show();
     $(".overview_dialog").position({my: 'left bottom', at: 'left bottom', of: window, within: $("#game_page")});
+    if (overview_current_state == "minimized") $("#game_overview_panel").dialogExtend("minimize");
   }
 
   if (unitpanel_active) {
     update_active_units_dialog();
   }
 
-  if (chatbox_active) $("#game_chatbox_panel").parent().show();
+  if (chatbox_active) {
+    $("#game_chatbox_panel").parent().show();
+    if (current_message_dialog_state == "minimized") $("#game_chatbox_panel").dialogExtend("minimize");
+  }
 
   $("#tabs").tabs("option", "active", 0);
   $("#tabs-map").height("auto");

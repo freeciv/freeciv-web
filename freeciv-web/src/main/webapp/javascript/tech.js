@@ -629,7 +629,7 @@ function show_tech_gained_dialog(tech_gained_id)
   $("#tech_dialog").attr("title", title);
   $("#tech_dialog").dialog({
 			bgiframe: true,
-			modal: true,
+			modal: false,
 			width: is_small_screen() ? "90%" : "60%",
 			buttons: [
 			 {

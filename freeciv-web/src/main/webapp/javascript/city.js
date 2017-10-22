@@ -169,8 +169,9 @@ function show_city_dialog(pcity)
     production_selection = [];
     worklist_selection = [];
   }
-  active_city = pcity;
 
+  if (active_city != null) $("#city_dialog").dialogExtend("restore");
+  active_city = pcity;
   if (pcity == null) return;
 
   // reset dialog page.
@@ -224,7 +225,7 @@ function show_city_dialog(pcity)
                          + " (" + pcity['size'] + ")");
   $("#city_dialog").dialog({
 			bgiframe: true,
-			modal: true,
+			modal: false,
 			width: is_small_screen() ? "98%" : "80%",
                         height: is_small_screen() ? $(window).height() + 10 : $(window).height() - 80,
                         close : function(){
@@ -234,6 +235,7 @@ function show_city_dialog(pcity)
                    }).dialogExtend({
                      "minimizable" : true,
                      "closable" : true,
+                     "minimize" : function(evt, dlg){ set_default_mapview_active(); },
                      "icons" : {
                        "minimize" : "ui-icon-circle-minus",
                        "restore" : "ui-icon-bullet"

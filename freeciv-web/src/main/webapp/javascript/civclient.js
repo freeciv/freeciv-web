@@ -253,13 +253,19 @@ function show_dialog_message(title, message) {
   $("#generic_dialog").attr("title", title);
   $("#generic_dialog").dialog({
 			bgiframe: true,
-			modal: true,
+			modal: false,
 			width: is_small_screen() ? "90%" : "50%",
 			close: closing_dialog_message,
 			buttons: {
 				Ok: close_dialog_message
 			}
-		});
+		}).dialogExtend({
+                   "minimizable" : true,
+                   "closable" : true,
+                   "icons" : {
+                     "minimize" : "ui-icon-circle-minus",
+                     "restore" : "ui-icon-bullet"
+                   }});
 
   $("#generic_dialog").dialog('open');
   $("#game_text_input").blur();

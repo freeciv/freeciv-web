@@ -20,6 +20,7 @@ var chatbox_active = true;
 var message_log = new EventAggregator(update_chatbox, 125,
                                       EventAggregator.DP_ALL, 1000, 0);
 var previous_scroll = 0;
+var current_message_dialog_state = null;
 
 /**************************************************************************
  ...
@@ -44,12 +45,14 @@ function init_chatbox()
                      "minimizable" : true,
                      "maximizable" : true,
                      "closable" : false,
+                     "minimize" : function(evt, dlg){ current_message_dialog_state = $("#game_chatbox_panel").dialogExtend("state") },
+                     "restore" : function(evt, dlg){ current_message_dialog_state = $("#game_chatbox_panel").dialogExtend("state") },
+                     "maximize" : function(evt, dlg){ current_message_dialog_state = $("#game_chatbox_panel").dialogExtend("state") },
                      "icons" : {
                        "minimize" : "ui-icon-circle-minus",
                        "maximize" : "ui-icon-circle-plus",
                        "restore" : "ui-icon-bullet"
                      }});
-
   $("#game_chatbox_panel").dialog('open');
   $(".chatbox_dialog").css("top", "52px");
 
@@ -63,6 +66,7 @@ function init_chatbox()
   }
 
   $("#freeciv_custom_scrollbar_div").mCustomScrollbar({theme:"3d"});
+  if (current_message_dialog_state == "minimized") $("#game_chatbox_panel").dialogExtend("minimize");
 
 }
 

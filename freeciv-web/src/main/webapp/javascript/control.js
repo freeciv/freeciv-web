@@ -52,6 +52,7 @@ var waiting_units_list = [];
 var show_citybar = true;
 var context_menu_active = true;
 var has_movesleft_warning_been_shown = false;
+var game_unit_panel_state = null;
 
 var send_to_allies = false;
 
@@ -866,6 +867,8 @@ function init_game_unit_panel()
 		}).dialogExtend({
              "minimizable" : true,
              "closable" : false,
+             "minimize" : function(evt, dlg){ game_unit_panel_state = $("#game_unit_panel").dialogExtend("state") },
+             "restore" : function(evt, dlg){ game_unit_panel_state = $("#game_unit_panel").dialogExtend("state") },
              "icons" : {
                "minimize" : "ui-icon-circle-minus",
                "restore" : "ui-icon-bullet"
@@ -873,6 +876,7 @@ function init_game_unit_panel()
 
   $("#game_unit_panel").dialog('open');
   $("#game_unit_panel").parent().css("overflow", "hidden");
+  if (game_unit_panel_state == "minimized") $("#game_unit_panel").dialogExtend("minimize");
 }
 
 /**************************************************************************
@@ -2781,6 +2785,7 @@ function update_active_units_dialog()
     $("#game_unit_panel").parent().css("left", ($( window ).width() - newwidth) + "px");
     $("#game_unit_panel").parent().css("top", ($( window ).height() - newheight - 30) + "px");
     $("#game_unit_panel").parent().css("background", "rgba(50,50,40,0.5)");
+    if (game_unit_panel_state == "minimized") $("#game_unit_panel").dialogExtend("minimize");
   } else {
     $("#game_unit_panel").parent().hide();
   }

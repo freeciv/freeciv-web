@@ -17,6 +17,7 @@
 		<!-- Collect the nav links, forms, and other panel-freeciv for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		<ul class="nav navbar-nav">
+			<li><a href="/webclient/?action=new">New Game</a></li>
 			<li class="dropdown">
 				<a href="/game/list?v=singleplayer" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 					<span onclick="window.location='/game/list?v=singleplayer'">Online Games</span> <span class="caret"></span> <span class="badge ongoing-games-number" id="ongoing-games" title="Ongoing games"></span>
@@ -36,17 +37,16 @@
 					<span onclick="window.location='http://forum.freegamedev.net/viewforum.php?f=97'">Forums</span> <span class="caret"></span>
 				</a>
 				<ul class="dropdown-menu">
+					<li><a href="https://discord.gg/hgvR9wc">Discord chat</a></li>
+					<li role="separator" class="divider"></li>
 					<li><a href="http://forum.freegamedev.net/viewforum.php?f=97">Freeciv-web <fmt:message key="nav-forum"/></a></li>
 					<li role="separator" class="divider"></li>
 					<li><a href="https://www.reddit.com/r/freeciv">reddit.com/freeciv</a></li>
-					<li role="separator" class="divider"></li>
-					<li><a href="http://forum.freeciv.org/f/viewforum.php?f=24">Freeciv.org Forum</a></li>
 				</ul>
 			</li>
 			<li><a href="https://play.freeciv.org/blog/"><fmt:message key="nav-blog"/></a></li>
 			<li><a href="http://www.freeciv.org/donate.html"><fmt:message key="nav-donate"/></a></li>
 			<li><a href="https://github.com/freeciv/freeciv-web">Contribute</a></li>
-			<li><a href="http://www.freeciv.org/">Freeciv.org</a></li>
 			<%--<li class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" title="${pageContext.request.locale.language} ${pageContext.request.locale.country}">
 					Language <span class="caret"></span>

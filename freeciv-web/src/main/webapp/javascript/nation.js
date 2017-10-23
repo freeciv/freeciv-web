@@ -81,7 +81,7 @@ function update_nation_screen()
     }
     nation_list_html += "</td>"
 
-    nation_list_html += "<td>Team " + pplayer['team'] + "</td>";
+    nation_list_html += "<td>Team " + (pplayer['team'] + 1) + "</td>";
     var pstate = " ";
     if (pplayer['phase_done'] && !pplayer['flags'].isSet(PLRF_AI)) {
       pstate = "Done";

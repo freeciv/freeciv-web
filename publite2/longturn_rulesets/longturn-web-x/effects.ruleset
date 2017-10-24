@@ -2466,36 +2466,36 @@ reqs	=
 type	= "Casus_Belli_Caught"
 value	= 1
 reqs	=
-    { "type",    "name",              "range", "present"
-      "Action",  "Steal Tech Escape", "Local", TRUE
-      "DiplRel", "War",               "Local", FALSE
+    { "type",    "name",                       "range", "present"
+      "Action",  "Steal Tech Escape Expected", "Local", TRUE
+      "DiplRel", "War",                        "Local", FALSE
     }
 
 [effect_incident_success_steal_tech_esc]
 type	= "Casus_Belli_Success"
 value	= 1
 reqs	=
-    { "type",    "name",              "range", "present"
-      "Action",  "Steal Tech Escape", "Local", TRUE
-      "DiplRel", "War",               "Local", FALSE
+    { "type",    "name",                       "range", "present"
+      "Action",  "Steal Tech Escape Expected", "Local", TRUE
+      "DiplRel", "War",                        "Local", FALSE
     }
 
 [effect_incident_caught_tgt_steal_tech]
 type	= "Casus_Belli_Caught"
 value	= 1
 reqs	=
-    { "type",    "name",                       "range", "present"
-      "Action",  "Targeted Steal Tech Escape", "Local", TRUE
-      "DiplRel", "War",                        "Local", FALSE
+    { "type",    "name",                                "range", "present"
+      "Action",  "Targeted Steal Tech Escape Expected", "Local", TRUE
+      "DiplRel", "War",                                 "Local", FALSE
     }
 
 [effect_incident_success_tgt_steal_tech]
 type	= "Casus_Belli_Success"
 value	= 1
 reqs	=
-    { "type",    "name",                       "range", "present"
-      "Action",  "Targeted Steal Tech Escape", "Local", TRUE
-      "DiplRel", "War",                        "Local", FALSE
+    { "type",    "name",                                "range", "present"
+      "Action",  "Targeted Steal Tech Escape Expected", "Local", TRUE
+      "DiplRel", "War",                                 "Local", FALSE
     }
 
 [effect_incident_success_bribe_unit]

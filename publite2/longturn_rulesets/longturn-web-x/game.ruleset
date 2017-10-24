@@ -456,7 +456,7 @@ target_reqs  =
     }
 
 [actionenabler_steal_tech_random_esc]
-action = "Steal Tech Escape"
+action = "Steal Tech Escape Expected"
 actor_reqs    =
     { "type",         "name",          "range"
       "UnitFlag",     "Spy",           "Local"
@@ -470,7 +470,7 @@ target_reqs  =
     }
 
 [actionenabler_steal_tech_target]
-action = "Targeted Steal Tech Escape"
+action = "Targeted Steal Tech Escape Expected"
 actor_reqs    =
     { "type",         "name",          "range"
       "UnitFlag",     "Spy",           "Local"
@@ -754,7 +754,7 @@ actor_reqs    =
 
 [borders]
 ; Base border radius from city.
-radius_sq_city = 10
+radius_sq_city = 17
 
 ; Border radius square increased by this amount / point of city size
 size_effect    = 1

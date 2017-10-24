@@ -1,7 +1,7 @@
 #LongTurn Web XI
 
 cmdlevel ctrl first
-rulesetdir longturn-web-x 
+rulesetdir multiplayer 
 set topology WRAPX
 set nationset all
 set compresstype xs

@@ -6,12 +6,12 @@ set topology WRAPX
 set nationset all
 set compresstype xs
 set maxplayers 300
-set startunits=cccwwwxx
+set startunits=cwx
 set aifill 300
 set allowtake=""
 set autotoggle false
 set timeout 82800
-set unitwaittime=36000
+set unitwaittime=3600
 set netwait 150
 set nettimeout 120
 set pingtime 30
@@ -20,10 +20,19 @@ set maxconnectionsperhost 500
 set threaded_save enabled
 set scorelog disabled
 set mapsize FULLSIZE
-set size 32
-set topology=
-set landm 70
-set dispersion=1
+set size 3
+set landm 85
+set dispersion=0
+
+set techlevel 100
+set borders disabled
+set citymindist 1
+set steepness 0
+set specials 900
+set temperature 50
+set wetness 90
+set generator FRACT
+set huts 0
 
 set endt 365
 
@@ -31,7 +40,6 @@ set diplomacy=HUMAN
 set contactturns=0
 
 set minp 0
-set generator Island
 set saveturns=1
 set autosaves=TURN
 metaconnection persistent
@@ -39,7 +47,7 @@ set ec_chat=enabled
 set ec_info=enabled 
 set ec_max_size=5000
 set ec_turns=9
-metamessage LongTurn-Web-XI | LTW-XI | 1 turn per day | 300 players | 32000 tiles | Join now!
+metamessage LongTurn-Web-XI | LTW-XI | 1 turn per day | 300 players | 3000 tiles | JOIN! 
 
 
 cmdlevel basic

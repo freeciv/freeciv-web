@@ -33,7 +33,7 @@ echo "================================="
 # then start it instead.
 if [ -f "/usr/sbin/nginx" -a -f "/vagrant/freeciv-web/target/freeciv-web.war" ]; then
   printf "\n\nFreeciv-web already built, starting it.\n\n-----";
-  cd ${basedir}/scripts/ && sudo -H -u ubuntu ./start-freeciv-web.sh
+  cd ${basedir}/scripts/ && sudo -H -u vagrant ./start-freeciv-web.sh
   printf "Freeciv-web started. Now login with 'vagrant ssh' and point your browser to http://localhost";
   exit 0;
 fi
@@ -98,7 +98,7 @@ echo "==== Setting up MySQL ===="
 mysqladmin -u ${mysql_user} -p${mysql_pass} create freeciv_web
 cd ${basedir}/freeciv-web
 cp flyway.properties.dist flyway.properties
-sudo -u ubuntu mvn compile flyway:migrate
+sudo -u vagrant mvn compile flyway:migrate
 cd -
 
 # configuration files
@@ -115,8 +115,8 @@ sed -e "s/MYSQL_USER=root/MYSQL_USER=${mysql_user}/" -e "s/MYSQL_PASSWORD=change
 
 echo "==== Building freeciv ===="
 dos2unix ${basedir}/freeciv/freeciv-web.project
-cd ${basedir}/freeciv && sudo -Hu ubuntu ./prepare_freeciv.sh
-cd freeciv && sudo -u ubuntu make install
+cd ${basedir}/freeciv && sudo -Hu vagrant ./prepare_freeciv.sh
+cd freeciv && sudo -u vagrant make install
 
 echo "==== Building freeciv-web ===="
 cd ${basedir}/scripts/freeciv-img-extract/ && ./setup_links.sh && ./sync.sh
@@ -124,7 +124,7 @@ cd /var/lib/tomcat8 && chmod -R 777 webapps logs && setfacl -d -m g::rwx webapps
 cp ${basedir}/freeciv-web/src/main/webapp/WEB-INF/config.properties.dist ${basedir}/freeciv-web/src/main/webapp/WEB-INF/config.properties
 cd ${basedir}/scripts && ./sync-js-hand.sh
 cd ${basedir}/freeciv-web
-sudo -u ubuntu ./setup.sh || sudo -u ubuntu ./build.sh 
+sudo -u vagrant ./setup.sh || sudo -u vagrant ./build.sh 
 
 echo "=============================="
 
@@ -134,12 +134,12 @@ cp ${basedir}/publite2/nginx.conf /etc/nginx/
 
 # add Freeciv-web scripts to path
 export PATH=$PATH:/vagrant/scripts
-echo 'export PATH=$PATH:/vagrant/scripts' >> /home/ubuntu/.bashrc
+echo 'export PATH=$PATH:/vagrant/scripts' >> /home/vagrant/.bashrc
 
 if [ -d "/vagrant/" ]; then
   echo "Starting Freeciv-web..."
   service nginx start
-  cd ${basedir}/scripts/ && sudo -Hu ubuntu ./start-freeciv-web.sh
+  cd ${basedir}/scripts/ && sudo -Hu vagrant ./start-freeciv-web.sh
 else
   echo "Freeciv-web installed. Please start it manually."
 fi

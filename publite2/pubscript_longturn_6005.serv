@@ -28,12 +28,12 @@ set techlevel 100
 set borders disabled
 set citymindist 1
 set steepness 0
-set specials 900
+set specials 1000
 set temperature 50
 set wetness 90
 set generator FRACT
 set huts 0
-set gold 5000
+set gold 400
 
 set endt 365
 

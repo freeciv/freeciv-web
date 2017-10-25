@@ -146,22 +146,20 @@
 		<div class="jumbotron">
 			<div class="row">
 
-				<a href="/webclient/?action=new&renderer=webgl"><img src="/static/images/freeciv-webgl-splash-48.png" alt="" style="width: 95%;"></a>
+				<a href="/webclient?action=multi&civserverport=6005&civserverhost=play&multi=true"><img src="/static/images/freeciv-webgl-splash-48.png" alt="" style="width: 95%;"></a>
 
 			</div>
 			<div class="container-fluid">
 				<div class="row top-buffer-3">
 					<p class="lead">
 						<fmt:message key="index-lead"/>
-
-
                          <div class="row top-buffer-3">
-                         <h1>Join LongTurn Web X</h1>
-                         <b>LongTurn Web X has started and you can join it now!</b><br>
+                         <h1>Join LongTurn Web XI</h1>
+                         <b>LongTurn Web XI has started and you can join it now!</b><br>
                          <b>Each player will play one turn every day. <br><br>
-                         This will be one of the greatest ever multiplayer game of Freeciv with 300 players!<br>
+                         This will be one of the greatest, yet smallest ever multiplayer game of Freeciv with 300 players on 3000 map tiles!<br>
                          </b>
-                         <h2><a href="https://play.freeciv.org/webclient?action=multi&civserverport=6004&civserverhost=play&multi=true">Join the LongTurn Web X here!</a></h2>
+                         <h2><a href="/webclient?action=multi&civserverport=6005&civserverhost=play&multi=true">Join the LongTurn Web XI here!</a></h2>
 			 </div>
 
 					</p>
@@ -414,14 +412,9 @@
                         </div>
                 </div>
                 <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                                 <div class="videoWrapper">
-                                        <iframe class="embed-responsive-item" width="542" height="343" src="https://www.youtube.com/embed/3Agk3S28bVE" frameborder="0" allowfullscreen></iframe>
-                                </div>
-                        </div>
-                        <div class="col-md-6">
-                                <div class="videoWrapper">
-                                        <iframe class="embed-responsive-item" width="542" height="343" src="https://www.youtube.com/embed/tKFpP7hIJEc" frameborder="0" allowfullscreen></iframe>
+                                        <iframe class="embed-responsive-item" width="542" height="343" src="https://www.youtube.com/embed/OiRShIAhEKE" frameborder="0" allowfullscreen></iframe>
                                 </div>
                         </div>
 </div> <!-- end youtube -->

@@ -110,6 +110,11 @@ function civclient_init()
   statusTimerId = setInterval(update_game_status_panel, 6000);
 
   if (overviewTimerId == -1) {
+    if (renderer == RENDERER_WEBGL) {
+      OVERVIEW_REFRESH = 12000;
+    } else {
+      OVERVIEW_REFRESH = 6000;
+    }
     overviewTimerId = setInterval(redraw_overview, OVERVIEW_REFRESH);
   }
 

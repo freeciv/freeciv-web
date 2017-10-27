@@ -23,7 +23,7 @@ var min_overview_width = 200;
 var max_overview_width = 300;
 var max_overview_height = 300;
 
-var OVERVIEW_REFRESH = 6000;
+var OVERVIEW_REFRESH;
 
 var palette = [];
 var palette_color_offset = 0;

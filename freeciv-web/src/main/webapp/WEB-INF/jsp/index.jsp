@@ -412,11 +412,18 @@
                         </div>
                 </div>
                 <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                                 <div class="videoWrapper">
                                         <iframe class="embed-responsive-item" width="542" height="343" src="https://www.youtube.com/embed/OiRShIAhEKE" frameborder="0" allowfullscreen></iframe>
                                 </div>
                         </div>
+                       <div class="col-md-6">
+                                <div class="videoWrapper">
+                                        <iframe class="embed-responsive-item" width="542" height="343" src="https://www.youtube.com/embed/Y-v_FBbV3Tk" frameborder="0" allowfullscreen></iframe>
+                                </div>
+                        </div>
+
+
 </div> <!-- end youtube -->
 
 

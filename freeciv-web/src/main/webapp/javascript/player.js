@@ -65,6 +65,25 @@ function player_by_name(pname)
   return null;
 }
 
+function player_by_full_username(pname)
+{
+  var ainame;
+  if (pname.substr(0, 3) == 'AI ') {
+    ainame = pname.substr(3);
+  } else {
+    ainame = pname;
+  }
+  for (var player_id in players) {
+    var pplayer = players[player_id];
+    if (pplayer['flags'].isSet(PLRF_AI)){
+      if (ainame == pplayer['name']) return pplayer;
+    } else {
+      if (pname == pplayer['username']) return pplayer;
+    }
+  }
+  return null;
+}
+
 
 /***************************************************************
  If the specified player owns the unit with the specified id,
@@ -181,6 +200,23 @@ function get_ai_level_text(player)
 
   return "Unknown";
 
+}
+
+/**************************************************************************
+  Status text for short connection info
+**************************************************************************/
+function get_player_connection_status(pplayer)
+{
+  if (pplayer == null) return "";
+  if (!pplayer['is_alive']) return "dead";
+
+  if (pplayer['phase_done']) {
+    return "done moving";
+  } else if (pplayer['nturns_idle'] > 1) {
+    return pplayer['nturns_idle'] + " turns idling";
+  } else {
+    return "moving";
+  }
 }
 
 /**************************************************************************

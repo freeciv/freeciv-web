@@ -304,6 +304,20 @@ function select_no_nation()
 }
 
 /**************************************************************************
+ Changes to the nations tab, selects a player and scrolls the table
+ so that it is on view.
+**************************************************************************/
+function nation_table_select_player(player_no)
+{
+  $('#players_tab a').click();
+  var row = $('#nation_table tr[data-plrid=' + player_no + ']');
+  if (row.length == 1) {
+    row.click();
+    row[0].scrollIntoView();
+  }
+}
+
+/**************************************************************************
  ...
 **************************************************************************/
 function nation_meet_clicked()

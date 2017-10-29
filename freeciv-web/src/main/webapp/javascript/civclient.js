@@ -148,6 +148,12 @@ function civclient_init()
 
   $(".button").button();
 
+  sounds_enabled = simpleStorage.get('sndFX');
+  if (sounds_enabled == null) {
+    // Default to true, as it was before saving the setting
+    sounds_enabled = true;
+  }
+
   /* Initialze audio.js music player */
   audiojs.events.ready(function() {
     var as = audiojs.createAll({

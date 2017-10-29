@@ -98,9 +98,25 @@ function play_sound(sound_file)
   try {
     if (!sounds_enabled || !(document.createElement('audio').canPlayType) || Audio == null) return;
     var audio = new Audio(sound_path + sound_file);
-    audio.play();
+    var promise = audio.play();
+    if (promise != null) {
+      promise.catch(sound_error_handler);
+    }
 
   } catch(err) {
-    /* ignore sound error message. */
+    sound_error_handler(err);
+  }
+}
+
+/**************************************************************************
+ Logs a sound error in the tracker
+**************************************************************************/
+function sound_error_handler(err)
+{
+  if (window.trackJs) {
+    trackJs.console.log(err);
+    trackJs.track("Sound problem");
+  } else {
+    console.log(err);
   }
 }

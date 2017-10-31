@@ -463,8 +463,9 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 }
 
 #tabs_menu {
-  font-size: 0.9em;
+  font-size: 0.98em;
   overflow: hidden;
+  background: #444 url("images/ui-bg_highlight-soft_44_444444_1x100.png") 50% 50% repeat-x;
 }
 
 .chatbox_dialog {
@@ -490,17 +491,17 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 }
 
 .tablesorter-dark {
-  font: 100% sans-serif; 
+  font: 115% sans-serif;
   background: url("/images/bg-dark.jpg") repeat scroll 0 0 ; 
   color: white;
 }
 
 .tablesorter-dark thead th {
-  font: 100% sans-serif;
+  font: 110% sans-serif;
 }
 
 .tablesorter-dark thead td {
-  font: 100% sans-serif; 
+  font: 110% sans-serif;
 }
 
 #city_stats tr {
@@ -533,7 +534,8 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 }
 
 #nation_table {
-  cursor: pointer;    
+  cursor: pointer;
+  padding-bottom: 400px;
 }
 
 #nations_button_div {
@@ -580,15 +582,15 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 }
 
 .nation_row_self {
-  color: white;
+  color: lightgreen;
 }
 
 .nation_row_war {
-  color: red;
+  color: #ff3333;
 }
 
 .nation_row_dead {
-  color: #222222;
+  color: #9e9e9e;
 }
 
 #city_disband_options {
@@ -831,10 +833,6 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 
 }
 
-#tabs_menu {
-  background: #444 url("images/ui-bg_highlight-soft_44_444444_1x100.png") 50% 50% repeat-x;
-}
-
 .context-menu-list {
   background: none;
 }
@@ -961,6 +959,10 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 .negative_net_income {
   color: red;
   background-color: #330000;
+}
+
+.nation_table_body {
+  background: rgba(0, 0, 0, 0.45);
 }
 
 .vert-attr-list th {

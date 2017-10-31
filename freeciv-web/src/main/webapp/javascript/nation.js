@@ -31,7 +31,7 @@ function update_nation_screen()
   var nation_list_html = "<table class='tablesorter' id='nation_table' width='95%' border=0 cellspacing=0 >"
 	  + "<thead><tr><th>Flag</th><th>Color</th><th>Player Name:</th>"
 	  + "<th>Nation:</th><th>Attitude</th><th>Score</th><th>AI/Human</th><th>Alive?</th>"
-	  + "<th>Diplomatic state</th><th>Embassy</th><th>Shared vision</th><th>Team</th><th>State</th></tr></thead><tbody>";
+	  + "<th>Diplomatic state</th><th>Embassy</th><th>Shared vision</th><th>Team</th><th>State</th></tr></thead><tbody class='nation_table_body'>";
 
   for (var player_id in players) {
     var pplayer = players[player_id];

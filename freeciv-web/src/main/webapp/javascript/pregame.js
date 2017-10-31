@@ -524,7 +524,7 @@ function pregame_settings()
 	  "<tr title='Enables music'><td>Music:</td>" +
           "<td><input type='checkbox' name='music_setting' id='music_setting'>Play Music</td></tr>" +
 	  "<tr class='not_pbem' title='Total number of players (including AI players)'><td>Number of Players (including AI):</td>" +
-	  "<td><input type='number' name='aifill' id='aifill' size='4' length='3' min='0' max='10' step='1'></td></tr>" +
+	  "<td><input type='number' name='aifill' id='aifill' size='4' length='3' min='0' max='12' step='1'></td></tr>" +
 	  "<tr class='not_pbem' title='Maximum seconds per turn'><td>Timeout (seconds per turn):</td>" +
 	  "<td><input type='number' name='timeout' id='timeout' size='4' length='3' min='30' max='3600' step='1'></td></tr>" +
           "<tr class='not_pbem' title='Creates a private game where players need to know this password in order to join.'><td>Password for private game:</td>" +
@@ -743,7 +743,7 @@ function pregame_settings()
   $(id).dialog('open');
 
   $('#aifill').change(function() {
-    if (parseInt($('#aifill').val()) <= 10) {
+    if (parseInt($('#aifill').val()) <= 12) {
       send_message("/set aifill " + $('#aifill').val());
     }
   });

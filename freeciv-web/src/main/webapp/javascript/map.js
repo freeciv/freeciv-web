@@ -261,6 +261,74 @@ function MAP_TO_NATURAL_POS(map_x, map_y)
 }
 
 /****************************************************************************
+  Return the squared distance for a map vector
+****************************************************************************/
+function map_vector_to_sq_distance(dx, dy)
+{
+  if (topo_has_flag(TF_HEX)) {
+    map_vector_to_sq_distance = function (dx, dy) {
+      var d = map_vector_to_distance(dx, dy);
+      return d * d;
+    };
+  } else {
+    map_vector_to_sq_distance = function (dx, dy) {
+      return dx*dx + dy*dy;
+    };
+  }
+  return map_vector_to_sq_distance(dx, dy);
+}
+
+/****************************************************************************
+  Return the distance for a map vector
+****************************************************************************/
+function map_vector_to_distance(dx, dy)
+{
+  if (topo_has_flag(TF_HEX)) {
+    if (topo_has_flag(TF_ISO)) {
+      map_vector_to_distance = function (dx, dy) {
+        if ((dx < 0 && dy > 0) || (dx > 0 && dy < 0)) {
+          return Math.abs(dx) + Math.abs(dy);
+        } else {
+          return Math.max(Math.abs(dx), Math.abs(dy));
+        }
+      };
+    } else {
+      map_vector_to_distance = function (dx, dy) {
+        if ((dx > 0 && dy > 0) || (dx < 0 && dy < 0)) {
+          return Math.abs(dx) + Math.abs(dy);
+        } else {
+          return Math.max(Math.abs(dx), Math.abs(dy));
+        }
+      }
+    }
+  } else {
+    map_vector_to_distance = function (dx, dy) {
+      return Math.max(Math.abs(dx), Math.abs(dy));
+    };
+  }
+  return map_vector_to_distance(dx, dy);
+}
+
+/****************************************************************************
+  Return a vector of minimum distance between tiles.
+****************************************************************************/
+function map_distance_vector(tile0, tile1)
+{
+  var half_world;
+  var dx = tile1.x - tile0.x;
+  if (topo_has_flag(TF_WRAPX)) {
+    half_world = Math.floor(map.xsize / 2);
+    dx = FC_WRAP(dx + half_world, map.xsize) - half_world;
+  }
+  var dy = tile1.y - tile0.y;
+  if (topo_has_flag(TF_WRAPY)) {
+    half_world = Math.floor(map.ysize / 2);
+    dx = FC_WRAP(dy + half_world, map.ysize) - half_world;
+  }
+  return [dx, dy];
+}
+
+/****************************************************************************
   Step from the given tile in the given direction.  The new tile is returned,
   or NULL if the direction is invalid or leads off the map.
 ****************************************************************************/

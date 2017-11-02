@@ -57,6 +57,10 @@ var city_dialog_template = null;
 
 var basic_cma_enabled = false;
 
+/* Information for mapping workable tiles of a city to local index */
+var city_tile_map = null;
+
+
 /**************************************************************************
   Initialize the city dialog once the first time.
 **************************************************************************/
@@ -985,61 +989,169 @@ function city_turns_to_growth_text(pcity)
 }
 
 /**************************************************************************
+  Returns an index for a flat array containing x,y data.
+  dx,dy are displacements from the center, r is the "radius" of the data
+  in the array. That is, for r=0, the array would just have the center;
+  for r=1 it'd be (-1,-1), (-1,0), (-1,1), (0,-1), (0,0), etc.
+  There's no check for coherence.
+**************************************************************************/
+function dxy_to_center_index(dx, dy, r)
+{
+  return (dx + r) * (2 * r + 1) + dy + r;
+}
+
+/**************************************************************************
   Converts from coordinate offset from city center (dx, dy),
   to index in the city_info['food_output'] packet.
 **************************************************************************/
-function get_city_dxy_to_index(dx, dy, ctile)
+function get_city_dxy_to_index(dx, dy, pcity)
 {
-  var city_tile_map = {};
-  city_tile_map[" 00"] = 0;
-  city_tile_map[" 10"] = 1;
-  city_tile_map[" 01"] = 2;
-  city_tile_map[" 0-1"] = 3;
-  city_tile_map[" -10"] = 4;
-  city_tile_map[" 11"] = 5;
-  city_tile_map[" 1-1"] = 6;
-  city_tile_map[" -11"] = 7;
-  city_tile_map[" -1-1"] = 8;
-  city_tile_map[" 20"] = 9;
-  city_tile_map[" 02"] = 10;
-  city_tile_map[" 0-2"] = 11;
-  city_tile_map[" -20"] = 12;
-  city_tile_map[" 21"] = 13;
-  city_tile_map[" 2-1"] = 14;
-  city_tile_map[" 12"] = 15;
-  city_tile_map[" 1-2"] = 16;
-  city_tile_map[" -12"] = 17;
-  city_tile_map[" -1-2"] = 18;
-  city_tile_map[" -21"] = 19;
-  city_tile_map[" -2-1"] = 20;
-
-  var idx = city_tile_map[" "+dx+""+dy];
-
-  var no_tiles = [];
-  switch (ctile.y) {
-  case 1:
-    no_tiles = [10, 15, 17];
-    break;
-  case (map.ysize - 2):
-    no_tiles = [11, 16, 18];
-    break;
-  case (map.ysize - 1):
-    no_tiles = [3, 6, 8, 11, 14, 16, 17, 20];
-    break;
-  case 0:
-    no_tiles = [2, 5, 7, 10, 13, 15, 17, 19];
-    break;
-  }
-
-  var le = no_tiles.length;
-  var correction = 0;
-  while (correction < le && no_tiles[correction] < idx) {
-    correction++;
-  }
-  return idx - correction;
-
+  build_city_tile_map(pcity.city_radius_sq);
+  var city_tile_map_index = dxy_to_center_index(dx, dy, city_tile_map.radius);
+  var ctile = city_tile(active_city);
+  return get_city_tile_map_for_pos(ctile.x, ctile.y)[city_tile_map_index];
 }
 
+/**************************************************************************
+  Builds city_tile_map info for a given squared city radius.
+**************************************************************************/
+function build_city_tile_map(radius_sq)
+{
+  if (city_tile_map == null || city_tile_map.radius_sq < radius_sq) {
+    var r = Math.floor(Math.sqrt(radius_sq));
+    var vectors = [];
+
+    for (var dx = -r; dx <= r; dx++) {
+      for (var dy = -r; dy <= r; dy++) {
+        var d_sq = map_vector_to_sq_distance(dx, dy);
+        if (d_sq <= radius_sq) {
+          vectors.push([dx, dy, d_sq, dxy_to_center_index(dx, dy, r)]);
+        }
+      }
+    }
+
+    vectors.sort(function (a, b) {
+      var d = a[2] - b[2];
+      if (d !== 0) return d;
+      d = a[0] - b[0];
+      if (d !== 0) return d;
+      return a[1] - b[1];
+    });
+
+    base_map = [];
+    for (var i = 0; i < vectors.length; i++) {
+      base_map[vectors[i][3]] = i;
+    }
+
+    city_tile_map = {
+      radius_sq: radius_sq,
+      radius: r,
+      base_sorted: vectors,
+      maps: [base_map]
+    };
+  }
+}
+
+/**************************************************************************
+  Helper for get_city_tile_map_for_pos.
+  From position, radius and size, returns an array with delta_min,
+  delta_max and clipped tile_map index.
+**************************************************************************/
+function delta_tile_helper(pos, r, size)
+{
+  var d_min = -pos;
+  var d_max = (size-1) - pos;
+  var i = 0;
+  if (d_min > -r) {
+    i = r + d_min;
+  } else if (d_max < r) {
+    i = 2*r - d_max;
+  }
+  return [d_min, d_max, i];
+}
+
+/**************************************************************************
+  Builds the city_tile_map with the given delta limits.
+  Helper for get_city_tile_map_for_pos.
+**************************************************************************/
+function build_city_tile_map_with_limits(dx_min, dx_max, dy_min, dy_max)
+{
+  var clipped_map = [];
+  var v = city_tile_map.base_sorted;
+  var vl = v.length;
+  var index = 0;
+  for (var vi = 0; vi < vl; vi++) {
+    tile_data = v[vi];
+    if (tile_data[0] >= dx_min && tile_data[0] <= dx_max &&
+        tile_data[1] >= dy_min && tile_data[1] <= dy_max) {
+      clipped_map[tile_data[3]] = index;
+      index++;
+    }
+  }
+  return clipped_map;
+}
+
+/**************************************************************************
+  Returns the mapping of position from city center to index in city_info.
+**************************************************************************/
+function get_city_tile_map_for_pos(x, y)
+{
+  if (topo_has_flag(TF_WRAPX)) {
+    if (topo_has_flag(TF_WRAPY)) {
+
+      // Torus
+      get_city_tile_map_for_pos = function (x, y) {
+        return city_tile_map.maps[0];
+      };
+
+    } else {
+
+      // Cylinder with N-S axis
+      get_city_tile_map_for_pos = function (x, y) {
+        var r = city_tile_map.radius;
+        var d = delta_tile_helper(y, r, map.ysize)
+        if (city_tile_map.maps[d[2]] == null) {
+          var m = build_city_tile_map_with_limits(-r, r, d[0], d[1]);
+          city_tile_map.maps[d[2]] = m;
+        }
+        return city_tile_map.maps[d[2]];
+      };
+
+    }
+  } else {
+    if (topo_has_flag(TF_WRAPY)) {
+
+      // Cylinder with E-W axis
+      get_city_tile_map_for_pos = function (x, y) {
+        var r = city_tile_map.radius;
+        var d = delta_tile_helper(x, r, map.xsize)
+        if (city_tile_map.maps[d[2]] == null) {
+          var m = build_city_tile_map_with_limits(d[0], d[1], -r, r);
+          city_tile_map.maps[d[2]] = m;
+        }
+        return city_tile_map.maps[d[2]];
+      };
+
+    } else {
+
+      // Flat
+      get_city_tile_map_for_pos = function (x, y) {
+        var r = city_tile_map.radius;
+        var dx = delta_tile_helper(x, r, map.xsize)
+        var dy = delta_tile_helper(y, r, map.ysize)
+        var map_i = (2*r + 1) * dx[2] + dy[2];
+        if (city_tile_map.maps[map_i] == null) {
+          var m = build_city_tile_map_with_limits(dx[0], dx[1], dy[0], dy[1]);
+          city_tile_map.maps[map_i] = m;
+        }
+        return city_tile_map.maps[map_i];
+      };
+
+    }
+  }
+
+  return get_city_tile_map_for_pos(x, y);
+}
 
 /**************************************************************************
 ...

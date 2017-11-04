@@ -76,7 +76,7 @@ function get_vertex_color_from_tile(ptile)
     if (tile_get_known(ptile) == TILE_KNOWN_SEEN) {
       known_status_color = 1;
     } else if (tile_get_known(ptile) == TILE_KNOWN_UNSEEN) {
-      known_status_color = 0.5;
+      known_status_color = 0.40;
     } else if (tile_get_known(ptile) == TILE_UNKNOWN) {
       known_status_color = 0;
     }

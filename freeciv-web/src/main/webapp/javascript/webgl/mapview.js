@@ -218,7 +218,7 @@ function init_webgl_mapview() {
         } else if (tile_get_known(ptile) == TILE_KNOWN_SEEN) {
           vertex_colors.push(new THREE.Color(1,0,0));
         } else if (tile_get_known(ptile) == TILE_KNOWN_UNSEEN) {
-          vertex_colors.push(new THREE.Color(0.5,0,0));
+          vertex_colors.push(new THREE.Color(0.40,0,0));
         } else if (tile_get_known(ptile) == TILE_UNKNOWN) {
           vertex_colors.push(new THREE.Color(0,0,0));
         } else {

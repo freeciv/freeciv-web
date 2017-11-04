@@ -21,6 +21,7 @@ var message_log = new EventAggregator(update_chatbox, 125,
                                       EventAggregator.DP_ALL, 1000, 0);
 var previous_scroll = 0;
 var current_message_dialog_state = null;
+var max_chat_message_length = 350;
 
 /**************************************************************************
  ...
@@ -130,6 +131,7 @@ function add_chatbox_text(packet)
     if (is_longturn()) {
       if (text.indexOf("waiting on") != -1 || text.indexOf("Lost connection") != -1 || text.indexOf("Not enough") != -1 || text.indexOf("has been removed") != -1 || text.indexOf("has connected") != -1) return;
     }
+    if (text.length >= max_chat_message_length) return;
 
     if (packet['event'] === E_CHAT_MSG) {
       packet['event'] = reclassify_chat_message(text);

@@ -483,6 +483,8 @@ function check_text_input(event,chatboxtextarea) {
       return; // disallow changing settings in a running LongTurn game.
     }
 
+    if (message.length >= max_chat_message_length) return;
+
     send_message(message);
     return false;
   }

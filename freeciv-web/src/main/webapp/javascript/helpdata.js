@@ -218,7 +218,10 @@ function wiki_on_item_button(item_name)
 **************************************************************************/
 function helpdata_format_current_ruleset()
 {
-  var msg = "<h1>" + ruleset_control['name'] + "</h1>";
+  var msg = "";
+  if (ruleset_control != null) {
+    msg += "<h1>" + ruleset_control['name'] + "</h1>";
+  }
   if (ruleset_summary != null) {
     msg += "<p>" + ruleset_summary.replace(/\n/g, "<br>") + "</p>";
   }

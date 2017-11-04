@@ -663,6 +663,7 @@ function show_tech_gained_dialog(tech_gained_id)
 function show_wikipedia_dialog(tech_name)
 {
   $("#tech_tab_item").css("color", "#aa0000");
+  if (freeciv_wiki_docs == null || freeciv_wiki_docs[tech_name] == null) return;
 
   var message = "<b>Wikipedia on <a href='" + wikipedia_url
 	  + freeciv_wiki_docs[tech_name]['title']

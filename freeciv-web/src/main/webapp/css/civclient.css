@@ -540,6 +540,7 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 
 #nations_button_div {
   padding-bottom: 15px;
+  clear: left;
 }
 
 .act_sel_dialog {
@@ -1028,4 +1029,15 @@ li.tech-both::before {
 
 .ui-widget-header .ui-icon {
   background-image: url(images/ui-icons_c47a23_256x240.png);
+}
+
+#nations_title {
+  font-size: 170%;
+  float: left;
+  padding: 10px;
+}
+
+#nations_label {
+  float: left;
+  padding: 15px;
 }

@@ -1,5 +1,7 @@
 <div>
-<h3 id="nations_title"></h3>
+  <div>
+    <div id="nations_title"></div> <div id="nations_label"></div>
+  </div>
   <div id="nations_button_div">
     <button id="view_player_button" type="button" class="button" title="">View on Map</button>
     <button id="meet_player_button" type="button" class="button" title="">Meet Player</button>

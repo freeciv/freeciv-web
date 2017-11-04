@@ -1038,7 +1038,7 @@ function build_city_tile_map(radius_sq)
       return a[1] - b[1];
     });
 
-    base_map = [];
+    var base_map = [];
     for (var i = 0; i < vectors.length; i++) {
       base_map[vectors[i][3]] = i;
     }
@@ -1081,7 +1081,7 @@ function build_city_tile_map_with_limits(dx_min, dx_max, dy_min, dy_max)
   var vl = v.length;
   var index = 0;
   for (var vi = 0; vi < vl; vi++) {
-    tile_data = v[vi];
+    var tile_data = v[vi];
     if (tile_data[0] >= dx_min && tile_data[0] <= dx_max &&
         tile_data[1] >= dy_min && tile_data[1] <= dy_max) {
       clipped_map[tile_data[3]] = index;

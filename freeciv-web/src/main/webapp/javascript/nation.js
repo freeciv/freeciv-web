@@ -100,7 +100,7 @@ function update_nation_screen()
     nation_list_html += "<td id='player_state_" + player_id + "'>" + pstate + "</td>";
     nation_list_html += "</tr>";
 
-    if (!pplayer['flags'].isSet(PLRF_AI) && pplayer['is_alive'] && pplayer['nturns_idle'] <= 3) no_humans++;
+    if (!pplayer['flags'].isSet(PLRF_AI) && pplayer['is_alive'] && pplayer['nturns_idle'] <= 4) no_humans++;
     if (pplayer['flags'].isSet(PLRF_AI) && pplayer['is_alive']) no_ais++;
 
   }
@@ -108,7 +108,7 @@ function update_nation_screen()
 
   $("#nations_list").html(nation_list_html);
 
-  $("#nations_title").html(" Nations of the World  -  Humans: " + no_humans + ". AIs: " + no_ais + ". Inactive: " + (total_players - no_humans - no_ais) + ".");
+  $("#nations_title").html(" Nations of the World  -  Human players: " + no_humans + ". AIs: " + no_ais + ". Inactive/dead: " + (total_players - no_humans - no_ais) + ".");
 
   select_no_nation();
 

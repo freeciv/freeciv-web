@@ -57,17 +57,17 @@ function update_nation_screen()
            + "</div></td>";
 
     nation_list_html += "<td>" + pplayer['name'] + "</td><td>"
-           + nations[pplayer['nation']]['adjective']  + "</td><td>"
-	   + col_love(pplayer) + "</td><td>"
-	   + get_score_text(pplayer) + "</td><td>"
-     + (pplayer['flags'].isSet(PLRF_AI) ?
+           + nations[pplayer['nation']]['adjective']  + "</td>"
+       + "<td class='nation_attitude'>" + col_love(pplayer) + "</td>"
+       + "<td>" + get_score_text(pplayer) + "</td>"
+       +"<td>" + (pplayer['flags'].isSet(PLRF_AI) ?
           get_ai_level_text(pplayer) + " AI" : "Human") + "</td><td>"
 	   + (pplayer['is_alive'] ? "Alive" : "Dead") +  "</td>";
 
     if (!client_is_observer() && client.conn.playing != null && diplstates[player_id] != null && player_id != client.conn.playing['playerno']) {
-      nation_list_html += "<td class='nation_attitude'>" + get_diplstate_text(diplstates[player_id]) + "</td>";
+      nation_list_html += "<td>" + get_diplstate_text(diplstates[player_id]) + "</td>";
     } else {
-      nation_list_html += "<td class='nation_attitude'>-</td>";
+      nation_list_html += "<td>-</td>";
     }
 
     nation_list_html += "<td>" + get_embassy_text(player_id) + "</td>";

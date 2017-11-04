@@ -28,15 +28,20 @@ var selected_player = -1;
 **************************************************************************/
 function update_nation_screen()
 {
+  var total_players = 0;
+  var no_humans = 0;
+  var no_ais = 0;
+
   var nation_list_html = "<table class='tablesorter' id='nation_table' width='95%' border=0 cellspacing=0 >"
 	  + "<thead><tr><th>Flag</th><th>Color</th><th>Player Name:</th>"
-	  + "<th>Nation:</th><th>Attitude</th><th>Score</th><th>AI/Human</th><th>Alive?</th>"
-	  + "<th>Diplomatic state</th><th>Embassy</th><th>Shared vision</th><th>Team</th><th>State</th></tr></thead><tbody class='nation_table_body'>";
+	  + "<th>Nation:</th><th class='nation_attitude'>Attitude</th><th>Score</th><th>AI/Human</th><th>Alive?</th>"
+	  + "<th>Diplomatic state</th><th>Embassy</th><th>Shared vision</th><th class='nation_team'>Team</th><th>State</th></tr></thead><tbody class='nation_table_body'>";
 
   for (var player_id in players) {
     var pplayer = players[player_id];
     if (pplayer['nation'] == -1) continue;
     if (is_longturn() && pplayer['name'].indexOf("New Available Player") != -1) continue;
+    total_players++;
 
     var flag_html = "<canvas id='nation_dlg_flags_" + player_id + "' width='29' height='20' class='nation_flags'></canvas>";
 
@@ -60,9 +65,9 @@ function update_nation_screen()
 	   + (pplayer['is_alive'] ? "Alive" : "Dead") +  "</td>";
 
     if (!client_is_observer() && client.conn.playing != null && diplstates[player_id] != null && player_id != client.conn.playing['playerno']) {
-      nation_list_html += "<td>" + get_diplstate_text(diplstates[player_id]) + "</td>";
+      nation_list_html += "<td class='nation_attitude'>" + get_diplstate_text(diplstates[player_id]) + "</td>";
     } else {
-      nation_list_html += "<td>-</td>";
+      nation_list_html += "<td class='nation_attitude'>-</td>";
     }
 
     nation_list_html += "<td>" + get_embassy_text(player_id) + "</td>";
@@ -81,7 +86,7 @@ function update_nation_screen()
     }
     nation_list_html += "</td>"
 
-    nation_list_html += "<td>Team " + (pplayer['team'] + 1) + "</td>";
+    nation_list_html += "<td class='nation_team'>Team " + (pplayer['team'] + 1) + "</td>";
     var pstate = " ";
     if (pplayer['phase_done'] && !pplayer['flags'].isSet(PLRF_AI)) {
       pstate = "Done";
@@ -95,11 +100,15 @@ function update_nation_screen()
     nation_list_html += "<td id='player_state_" + player_id + "'>" + pstate + "</td>";
     nation_list_html += "</tr>";
 
+    if (!pplayer['flags'].isSet(PLRF_AI) && pplayer['is_alive'] && pplayer['nturns_idle'] <= 3) no_humans++;
+    if (pplayer['flags'].isSet(PLRF_AI) && pplayer['is_alive']) no_ais++;
 
   }
   nation_list_html += "</tbody></table>";
 
   $("#nations_list").html(nation_list_html);
+
+  $("#nations_title").html(" Nations of the World  -  Humans: " + no_humans + ". AIs: " + no_ais + ". Inactive: " + (total_players - no_humans - no_ais) + ".");
 
   select_no_nation();
 
@@ -163,6 +172,9 @@ function update_nation_screen()
     }
     $("#nation_table").trigger('update');
   });
+
+  if (is_longturn()) $(".nation_attitude").hide();
+  if (is_longturn()) $(".nation_team").hide();
 
 }
 

@@ -133,6 +133,11 @@ vec2 texture_coord;
 void main(void)
 {
 
+    if (vColor.r == 0.0) {
+      gl_FragColor.rgb = vec3(0, 0, 0);
+      return;
+    }
+
     vec4 terrain_type = texture2D(maptiles, vec2(vUv.x, vUv.y));
     vec4 border_color = texture2D(borders, vec2(vUv.x, vUv.y));
     vec4 road_type = texture2D(roadsmap, vec2(vUv.x, vUv.y));
@@ -451,7 +456,7 @@ void main(void)
 
   // Borders
   if (!(border_color.r > 0.546875 && border_color.r < 0.5625 && border_color.b == 0.0 && border_color.g == 0.0)) {
-    c = mix(c, border_color.rbg, 0.55);
+    c = mix(c, border_color.rbg, 0.40);
   }
 
   // specular component, ambient occlusion and fade out underwater terrain

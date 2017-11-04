@@ -155,7 +155,13 @@ function add_chatbox_text(packet)
 **************************************************************************/
 function get_chatbox_text()
 {
-  return get_chatbox_msg_list().textContent;
+  var chatbox_msg_list = get_chatbox_msg_list();
+  if (chatbox_msg_list != null) {
+    return chatbox_msg_list.textContent;
+  } else {
+    return null;
+  }
+
 }
 
 /**************************************************************************

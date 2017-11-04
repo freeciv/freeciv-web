@@ -456,7 +456,7 @@ void main(void)
 
   // Borders
   if (!(border_color.r > 0.546875 && border_color.r < 0.5625 && border_color.b == 0.0 && border_color.g == 0.0)) {
-    c = mix(c, border_color.rbg, 0.40);
+    c = mix(c, border_color.rbg, 0.53);
   }
 
   // specular component, ambient occlusion and fade out underwater terrain

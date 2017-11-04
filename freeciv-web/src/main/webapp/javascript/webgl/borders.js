@@ -37,6 +37,7 @@ function init_borders_image()
     var nation_colors;
     if (nations[pplayer['nation']].color != null) {
       nation_colors = nations[pplayer['nation']].color.replace("rgb(", "").replace(")", "").split(",");
+      if (nation_colors[0] < nation_colors[1] - 10 && nation_colors[2] < nation_colors[1] - 10) nation_colors = [0, 20, 0]; //darken green
     } else {
       nation_colors = [0, 0, 0];
     }
@@ -75,6 +76,7 @@ function update_borders_image()
        var nation_colors;
        if (nations[pplayer['nation']].color != null) {
          nation_colors = nations[pplayer['nation']].color.replace("rgb(", "").replace(")", "").split(",");
+         if (nation_colors[0] < nation_colors[1] - 10 && nation_colors[2] < nation_colors[1] - 10) nation_colors = [0, 20, 0]; //darken green
        } else {
          nation_colors = [0,0,0];
        }
@@ -121,14 +123,18 @@ function generate_borders_image() {
     result[row] = Array(border_image_resolution);
   }
 
+  var odd_border_pixel = true;
   for (var x = 0; x < border_image_resolution ; x++) {
+    odd_border_pixel = !odd_border_pixel;
     for (var y = 0; y < border_image_resolution; y++) {
+      odd_border_pixel = !odd_border_pixel;
       if (x == 0 || y == 0 || x >= border_image_resolution - 1  || y >= border_image_resolution - 1) {
         result[x][y] = grid[x][y];
       } else {
-        var is_border = (grid[x][y] > 0
-         && (grid[x-1][y-1] != grid[x][y] || grid[x-1][y] != grid[x][y] || grid[x][y-1] != grid[x][y] || grid[x+1][y] != grid[x][y]
-          || grid[x][y+1] != grid[x][y] || grid[x+1][y+1] != grid[x][y] || grid[x-1][y+1] != grid[x][y] || grid[x+1][y-1] != grid[x][y]));
+        var is_border = (odd_border_pixel
+           && grid[x][y] > 0
+           && (grid[x-1][y-1] != grid[x][y] || grid[x-1][y] != grid[x][y] || grid[x][y-1] != grid[x][y] || grid[x+1][y] != grid[x][y]
+            || grid[x][y+1] != grid[x][y] || grid[x+1][y+1] != grid[x][y] || grid[x-1][y+1] != grid[x][y] || grid[x+1][y-1] != grid[x][y]));
         if (is_border) {
           result[x][y] = grid[x][y];
         } else {

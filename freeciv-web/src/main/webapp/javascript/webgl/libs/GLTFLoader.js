@@ -78,7 +78,17 @@ THREE.GLTFLoader = ( function () {
 
 				if ( magic === BINARY_EXTENSION_HEADER_MAGIC ) {
 
-					extensions[ EXTENSIONS.KHR_BINARY_GLTF ] = new GLTFBinaryExtension( data );
+					try {
+
+						extensions[ EXTENSIONS.KHR_BINARY_GLTF ] = new GLTFBinaryExtension( data );
+
+					} catch ( error ) {
+
+						if ( onError ) onError( error );
+						return;
+
+					}
+
 					content = extensions[ EXTENSIONS.KHR_BINARY_GLTF ].content;
 
 				} else {
@@ -93,7 +103,7 @@ THREE.GLTFLoader = ( function () {
 
 			if ( json.asset === undefined || json.asset.version[ 0 ] < 2 ) {
 
-				onError( new Error( 'THREE.GLTFLoader: Unsupported asset. glTF versions >=2.0 are supported.' ) );
+				if ( onError ) onError( new Error( 'THREE.GLTFLoader: Unsupported asset. glTF versions >=2.0 are supported.' ) );
 				return;
 
 			}
@@ -1421,7 +1431,7 @@ THREE.GLTFLoader = ( function () {
 
 		if ( bufferDef.type && bufferDef.type !== 'arraybuffer' ) {
 
-			throw new Error( 'THREE.GLTFLoader: %s buffer type is not supported.', bufferDef.type );
+			throw new Error( 'THREE.GLTFLoader: ' + bufferDef.type + ' buffer type is not supported.' );
 
 		}
 
@@ -1438,7 +1448,7 @@ THREE.GLTFLoader = ( function () {
 
 			loader.load( resolveURL( bufferDef.uri, options.path ), resolve, undefined, function () {
 
-				reject( new Error( 'THREE.GLTFLoader: Buffer "' + bufferDef.uri + '" not found.' ) );
+				reject( new Error( 'THREE.GLTFLoader: Failed to load buffer "' + bufferDef.uri + '".' ) );
 
 			} );
 
@@ -1481,6 +1491,7 @@ THREE.GLTFLoader = ( function () {
 				var elementBytes = TypedArray.BYTES_PER_ELEMENT;
 				var itemBytes = elementBytes * itemSize;
 				var byteStride = json.bufferViews[ accessor.bufferView ].byteStride;
+				var normalized = accessor.normalized === true;
 				var array;
 
 				// The buffer is not interleaved if the stride is the item size in bytes.
@@ -1492,13 +1503,13 @@ THREE.GLTFLoader = ( function () {
 					// Integer parameters to IB/IBA are in array elements, not bytes.
 					var ib = new THREE.InterleavedBuffer( array, byteStride / elementBytes );
 
-					return new THREE.InterleavedBufferAttribute( ib, itemSize, accessor.byteOffset / elementBytes );
+					return new THREE.InterleavedBufferAttribute( ib, itemSize, accessor.byteOffset / elementBytes, normalized );
 
 				} else {
 
 					array = new TypedArray( bufferView, accessor.byteOffset, accessor.count * itemSize );
 
-					return new THREE.BufferAttribute( array, itemSize );
+					return new THREE.BufferAttribute( array, itemSize, normalized );
 
 				}
 
@@ -1699,7 +1710,7 @@ THREE.GLTFLoader = ( function () {
 
 				if ( alphaMode === ALPHA_MODES.MASK ) {
 
-					materialParams.alphaTest = material.alphaCutoff || 0.5;
+					materialParams.alphaTest = material.alphaCutoff !== undefined ? material.alphaCutoff : 0.5;
 
 				}
 
@@ -2231,7 +2242,7 @@ THREE.GLTFLoader = ( function () {
 
 		// Nothing in the node definition indicates whether it is a Bone or an
 		// Object3D. Use the skins' joint references to mark bones.
-		for ( var skinIndex in skins ) {
+		for ( var skinIndex =  0; skinIndex < skins.length; skinIndex ++ ) {
 
 			var joints = skins[ skinIndex ].joints;
 
@@ -2248,7 +2259,7 @@ THREE.GLTFLoader = ( function () {
 		// references and rename instances below.
 		//
 		// Example: CesiumMilkTruck sample model reuses "Wheel" meshes.
-		for ( var nodeIndex in nodes ) {
+		for ( var nodeIndex =  0; nodeIndex < nodes.length; nodeIndex ++ ) {
 
 			var nodeDef = nodes[ nodeIndex ];
 

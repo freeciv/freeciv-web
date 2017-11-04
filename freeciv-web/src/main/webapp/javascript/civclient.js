@@ -151,9 +151,11 @@ function civclient_init()
   sounds_enabled = simpleStorage.get('sndFX');
   if (sounds_enabled == null) {
     // Default to true, except when known to be problematic.
-    sounds_enabled = true;
-  } else if (platform.name == 'Safari') {
-    sounds_enabled = false;
+    if (platform.name == 'Safari') {
+      sounds_enabled = false;
+    } else {
+      sounds_enabled = true;
+    }
   }
 
   /* Initialze audio.js music player */

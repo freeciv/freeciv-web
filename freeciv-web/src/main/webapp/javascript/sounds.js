@@ -113,6 +113,7 @@ function play_sound(sound_file)
 **************************************************************************/
 function sound_error_handler(err)
 {
+  sounds_enabled = false;
   if (window.trackJs) {
     trackJs.console.log(err);
     trackJs.track("Sound problem");

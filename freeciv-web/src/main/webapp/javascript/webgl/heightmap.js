@@ -192,7 +192,7 @@ function get_city_height_offset(pcity)
   if (ptile == null) return 0;
 
   if (ptile != null && tile_terrain(ptile) != null) {
-      if (tile_terrain(ptile)['name'] == "Hills") return -8;
+      if (tile_terrain(ptile)['name'] == "Hills") return -6;
       if (tile_terrain(ptile)['name'] == "Mountains") return -10;
   }
 

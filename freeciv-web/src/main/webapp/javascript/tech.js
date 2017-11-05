@@ -190,8 +190,8 @@ function update_tech_tree()
       var dx = Math.floor(reqtree[rid+'']['x'] * tech_xscale);  //scale in X direction.
       var dy = reqtree[rid+'']['y'];
 
-      tech_canvas_ctx.strokeStyle = 'rgb(50, 50, 50)';
-      tech_canvas_ctx.lineWidth = 2;
+      tech_canvas_ctx.strokeStyle = 'rgba(70, 70, 70, 0.8)';
+      tech_canvas_ctx.lineWidth = 3;
 
       tech_canvas_ctx.beginPath();
       tech_canvas_ctx.moveTo(sx, sy + hy);
@@ -231,39 +231,53 @@ function update_tech_tree()
 
     /* TECH WITH KNOWN PREREQS. */
     } else if (player_invention_state(client.conn.playing, ptech['id']) == TECH_PREREQS_KNOWN) {
-      var bgcolor = (client.conn.playing != null && is_tech_req_for_goal(ptech['id'], client.conn.playing['tech_goal'])) ? "rgb(28, 50, 180)" : "rgb(70, 70, 90)";
+      var bgcolor = (client.conn.playing != null && is_tech_req_for_goal(ptech['id'], client.conn.playing['tech_goal'])) ? "rgb(131, 170, 101)" : "rgb(91, 130, 61)";
       if (client.conn.playing['researching'] == ptech['id']) {
-        bgcolor = "rgb(28, 108, 255)";
-        tech_canvas_ctx.lineWidth=7;
+        bgcolor = "rgb(161, 200, 131)";
+        tech_canvas_ctx.lineWidth=6;
       }
 
       var tag = ptech['graphic_str'];
+      tech_canvas_ctx.lineWidth=4;
       tech_canvas_ctx.fillStyle = bgcolor;
       tech_canvas_ctx.fillRect(x-2, y-2, tech_item_width, tech_item_height);
       tech_canvas_ctx.strokeStyle = 'rgb(255, 255, 255)';
       tech_canvas_ctx.strokeRect(x-2, y-2, tech_item_width, tech_item_height);
-      tech_canvas_ctx.lineWidth=1;
+      tech_canvas_ctx.lineWidth=2;
       mapview_put_tile(tech_canvas_ctx, tag, x+1, y)
 
-      tech_canvas_ctx.font = tech_canvas_text_font;
-      tech_canvas_ctx.fillStyle = "rgba(255, 255, 255, 1)";
-      tech_canvas_ctx.fillText(ptech['name'], x + 50, y + 15);
+      if (client.conn.playing['researching'] == ptech['id']) {
+        tech_canvas_ctx.fillStyle = 'rgb(0, 0, 0)';
+        tech_canvas_ctx.font = "Bold " + tech_canvas_text_font;
+      } else {
+        tech_canvas_ctx.font = tech_canvas_text_font;
+        tech_canvas_ctx.fillStyle = 'rgb(255, 255, 255)';
+      }
+      tech_canvas_ctx.fillText(ptech['name'], x + 51, y + 16);
 
     /* UNKNOWN TECHNOLOGY. */
     } else if (player_invention_state(client.conn.playing, ptech['id']) == TECH_UNKNOWN) {
-      var bgcolor = (client.conn.playing != null && is_tech_req_for_goal(ptech['id'], client.conn.playing['tech_goal'])) ? "rgb(19, 75, 177)" : "rgb(70, 70, 70)";
+      var bgcolor = (client.conn.playing != null && is_tech_req_for_goal(ptech['id'], client.conn.playing['tech_goal'])) ? "rgb(111, 141, 180)" : "rgb(61, 80, 130)";
+      if (client.conn.playing['tech_goal'] == ptech['id']) {
+        tech_canvas_ctx.lineWidth=6;
+      }
 
       var tag = ptech['graphic_str'];
       tech_canvas_ctx.fillStyle =  bgcolor;
       tech_canvas_ctx.fillRect(x-2, y-2, tech_item_width, tech_item_height);
       tech_canvas_ctx.strokeStyle = 'rgb(255, 255, 255)';
       tech_canvas_ctx.strokeRect(x-2, y-2, tech_item_width, tech_item_height);
-
+      tech_canvas_ctx.lineWidth=2;
       mapview_put_tile(tech_canvas_ctx, tag, x+1, y)
 
-      tech_canvas_ctx.font = tech_canvas_text_font;
-      tech_canvas_ctx.fillStyle = "rgba(255, 255, 255, 1)";
-      tech_canvas_ctx.fillText(ptech['name'], x + 50, y + 15);
+      if (client.conn.playing['tech_goal'] == ptech['id']) {
+        tech_canvas_ctx.fillStyle = 'rgb(0, 0, 0)';
+        tech_canvas_ctx.font = "Bold " + tech_canvas_text_font;
+      } else {
+        tech_canvas_ctx.fillStyle = 'rgb(255, 255, 255)';
+        tech_canvas_ctx.font = tech_canvas_text_font;
+      }
+      tech_canvas_ctx.fillText(ptech['name'], x + 51, y + 16);
     }
 
     var tech_things = 0;
@@ -782,9 +796,13 @@ function update_tech_dialog_cursor()
           && tech_mouse_y > y && tech_mouse_y < y + tech_item_height) {
         if (player_invention_state(client.conn.playing, ptech['id']) == TECH_PREREQS_KNOWN) {
           tech_canvas.style.cursor = "pointer";
-	} else if (player_invention_state(client.conn.playing, ptech['id']) == TECH_UNKNOWN) {
-          tech_canvas.style.cursor = "pointer";
+        } else if (player_invention_state(client.conn.playing, ptech['id']) == TECH_UNKNOWN) {
+          tech_canvas.style.cursor = "progress";
+        } else {
+          tech_canvas.style.cursor = "not-allowed";
         }
+        $("#tech_result_text").html("<span id='tech_advance_helptext'>" + get_advances_text(ptech['id']) + "</span>");
+        $("#tech_advance_helptext").tooltip({ disabled: false });
       }
     }
 }

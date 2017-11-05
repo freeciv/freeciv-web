@@ -67,11 +67,29 @@ function init_overview()
 			close: function(event, ui) { overview_active = false;}
 		}).dialogExtend({
                   "minimizable" : true,
+                  "maximizable" : true,
                   "closable" : false,
-                  "minimize" : function(evt, dlg){ overview_current_state = $("#game_overview_panel").dialogExtend("state") },
-                  "restore" : function(evt, dlg){ overview_current_state = $("#game_overview_panel").dialogExtend("state") },
+                  "minimize" : function(evt, dlg){
+                      overview_current_state = $("#game_overview_panel").dialogExtend("state");
+                    },
+                  "maximize" : function(evt, dlg){
+                      overview_current_state = $("#game_overview_panel").dialogExtend("state");
+                      $('#overview_map').width($("#game_overview_panel").width() - 20);
+                      $('#overview_map').height($("#game_overview_panel").height() - 20);
+                    },
+                  "restore" : function(evt, dlg){
+                      overview_current_state = $("#game_overview_panel").dialogExtend("state");
+                      var new_width = OVERVIEW_TILE_SIZE * map['xsize'];
+                      if (new_width > max_overview_width) new_width = max_overview_width;
+                      var new_height = OVERVIEW_TILE_SIZE * map['ysize'];
+                      if (new_height > max_overview_height) new_height = max_overview_height;
+                      $('#overview_map').width(new_width);
+                      $('#overview_map').height(new_height);
+                      $(".overview_dialog").position({my: 'left bottom', at: 'left bottom', of: window, within: $("#game_page")});
+                    },
                   "icons" : {
                     "minimize" : "ui-icon-circle-minus",
+                    "maximize" : "ui-icon-circle-plus",
                     "restore" : "ui-icon-bullet"
                   }});
   if (overview_current_state == "minimized") $("#game_overview_panel").dialogExtend("minimize");

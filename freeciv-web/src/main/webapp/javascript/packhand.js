@@ -266,6 +266,10 @@ function handle_city_info(packet)
 
   if (cities[packet['id']] == null) {
     cities[packet['id']] = packet;
+    if (C_S_RUNNING == client_state() && !observing
+        && client.conn.playing != null && packet['owner'] == client.conn.playing.playerno) {
+      show_city_dialog_by_id(packet['id']);
+    }
   } else {
     cities[packet['id']] = $.extend(cities[packet['id']], packet);
   }

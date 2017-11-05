@@ -266,7 +266,7 @@ button {
 #tech_info_box {
   float: left; 
   border: 1px solid rgb(153, 153, 153); 
-  min-width: 1000px; 
+  width: 100%;
   min-height: 40px; 
   padding: 4px; 
   margin: 2px; 

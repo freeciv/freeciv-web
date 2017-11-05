@@ -24,7 +24,7 @@
     <div style="background-color: white; float: left; padding: 2px;  margin: 1px;">Known tech</div>
     <div style="background-color: rgb(91, 130, 61); color: white;  float: left;  padding: 2px; margin: 1px;">Possible research</div>
 	<div style="background-color: rgb(161, 200, 131); color: black;  float: left;  padding: 2px;  margin: 1px;"><b>Current research</b></div>
-    <div style="background-color: rgb(61, 80, 130); color: white;  float: left;  padding: 2px;  margin: 1px;">Unknown tech</div>
+    <div style="background-color: rgb(61, 95, 130); color: white;  float: left;  padding: 2px;  margin: 1px;">Unknown tech</div>
     <div style="background-color: rgb(111, 141, 180); color: black;  float: left;  padding: 2px;  margin: 1px;"><b>Research goal</b></div>
   </div>
 

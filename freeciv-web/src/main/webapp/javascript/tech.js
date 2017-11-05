@@ -414,7 +414,7 @@ function get_advances_text(tech_id)
 {
   var ptech = techs[tech_id];
 
-  var adv_txt = "<span onclick='show_tech_info_dialog(\"" +ptech['name'] + "\", null, null);'>" + ptech['name'] + "</span> allows ";
+  var adv_txt = "<span onclick='show_tech_info_dialog(\"" +ptech['name'] + "\", null, null);'>" + ptech['name'] + "</span> (" + Math.floor(ptech['cost']) + ") allows ";
   var prunits = get_units_from_tech(tech_id);
   var pimprovements = get_improvements_from_tech(tech_id);
 

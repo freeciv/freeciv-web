@@ -802,7 +802,7 @@ function update_tech_dialog_cursor()
         if (player_invention_state(client.conn.playing, ptech['id']) == TECH_PREREQS_KNOWN) {
           tech_canvas.style.cursor = "pointer";
         } else if (player_invention_state(client.conn.playing, ptech['id']) == TECH_UNKNOWN) {
-          tech_canvas.style.cursor = "progress";
+          tech_canvas.style.cursor = "pointer";
         } else {
           tech_canvas.style.cursor = "not-allowed";
         }

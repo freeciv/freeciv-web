@@ -159,6 +159,11 @@ function init_tech_screen()
     tech_canvas.width = Math.floor(tech_canvas.width * 0.6);
     tech_canvas.height = Math.floor(tech_canvas.height * 0.6);
     tech_canvas_ctx.scale(0.6,0.6);
+    $("#tech_result_text").css("font-size", "85%");
+    $("#tech_color_help").css("font-size", "65%");
+    $("#tech_progress_box").css("padding-left", "10px");
+
+
   }
 
   is_tech_tree_init = true;

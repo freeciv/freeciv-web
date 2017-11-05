@@ -483,7 +483,13 @@ function check_text_input(event,chatboxtextarea) {
       return; // disallow changing settings in a running LongTurn game.
     }
 
-    if (message.length >= max_chat_message_length) return;
+    if (message.length >= max_chat_message_length) {
+      message_log.update({
+        event: E_LOG_ERROR,
+        message: "Error! The message is too long. Limit: " + max_chat_message_length
+      });
+      return;
+    }
 
     send_message(message);
     return false;

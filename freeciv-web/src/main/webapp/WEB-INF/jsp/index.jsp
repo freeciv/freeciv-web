@@ -146,7 +146,7 @@
 		<div class="jumbotron">
 			<div class="row">
 
-				<a href="/webclient?action=multi&civserverport=6005&civserverhost=play&multi=true"><img src="/static/images/freeciv-webgl-splash-48.png" alt="" style="width: 95%;"></a>
+				<img src="/static/images/freeciv-webgl-splash-48.png" alt="" style="width: 95%;">
 
 			</div>
 			<div class="container-fluid">
@@ -231,12 +231,6 @@
 						<a href="/game/list?v=multiplayer" class="btn"><i class="fa fa-users"></i> <fmt:message key="index-game-launcher-multiplayer"/></a>
 						<c:if test="${default_lang}">
 							<div class="features">
-								Play a LongTurn game, where 250 human <br>players play one turn every day.
-							</div>
-						</c:if>
-						<a href="/game/list?v=multiplayer" class="btn"><i class="fa fa-users"></i><i class="fa fa-clock-o"></i> <fmt:message key="index-game-launcher-longturn"/></a>
-						<c:if test="${default_lang}">
-							<div class="features">
 								Start a play-by-email game where you get an e-mail <br> when it is your turn to play.
 							</div>
 						</c:if>
@@ -247,6 +241,16 @@
 							</div>
 						</c:if>
 						<a href="/webclient/?action=hotseat" class="btn"><i class="fa fa-user-plus"></i> <fmt:message key="index-game-launcher-hotseat" /></a>
+
+						<c:if test="${default_lang}">
+							<div class="features">
+								Play a LongTurn game, where up to 300 human <br>players play one turn every day:
+							</div>
+						</c:if>
+						<a href="/webclient?action=multi&civserverport=6003&civserverhost=play&multi=true" class="btn" style="font-size: 15px; padding: 4px;">LongTurn Web 8</a>
+						<a href="/webclient?action=multi&civserverport=6004&civserverhost=play&multi=true" class="btn" style="font-size: 15px; padding: 4px;">LongTurn Web X</a>
+						<a href="/webclient?action=multi&civserverport=6005&civserverhost=play&multi=true" class="btn" style="font-size: 15px; padding: 4px;">LongTurn Web XI</a>
+
 					</div>
 				</div>
 		</div> <!-- end game launcher -->
@@ -301,7 +305,7 @@
 		<div class="row">
 			<div class="col-md-6">
 				<div class="panel-freeciv">
-					<h3><fmt:message key="index-multiplayer-games"/></h3>
+					<h3>Multiplayer and LongTurn games:</h3>
 					<c:if test="${not empty games and fn:length(games) > 0}">
 						<table class="table multiplayer-games">
 							<thead>

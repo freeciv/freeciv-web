@@ -266,7 +266,7 @@ function handle_city_info(packet)
 
   if (cities[packet['id']] == null) {
     cities[packet['id']] = packet;
-    if (C_S_RUNNING == client_state() && !observing
+    if (C_S_RUNNING == client_state() && !observing && benchmark_start == 0
         && client.conn.playing != null && packet['owner'] == client.conn.playing.playerno) {
       show_city_dialog_by_id(packet['id']);
     }

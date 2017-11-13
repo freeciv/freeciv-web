@@ -15,6 +15,7 @@ set landm 50
 set aifill 1
 set onsetbarbs 5000
 set barbarians disabled
+set civilwarsize 1000
 set minp 2
 set maxp 4
 set gold 500

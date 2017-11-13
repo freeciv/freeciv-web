@@ -102,7 +102,7 @@ function update_game_info_pregame()
     $("#load_game_button").hide();
     $("#pregame_settings_button").hide();
     game_info_html += "<p>";
-    game_info_html += "<h2>Freeciv-Web LongTurn game</h2>-Each player plays one turn every day, each turn lasts 23 hours.<br>";
+    game_info_html += "<h2>Freeciv-web: One Turn per Day game</h2>-Each player plays one turn every day, each turn lasts 23 hours.<br>";
 
 
   } else if ($.getUrlVar('action') == "multi") {
@@ -1154,9 +1154,9 @@ function show_intro_dialog(title, message) {
 **************************************************************************/
 function show_longturn_intro_dialog() {
 
-  var title = "Welcome to Freeciv-web LongTurn!"
+  var title = "Welcome to Freeciv-web: One Turn per Day!"
 
-  var message = "<br>This is a LongTurn game, which is a Freeciv multiplayer game "+
+  var message = "<br>This is a Freeciv-web: One Turn per Day game, which is a Freeciv multiplayer game "+
         "where the turns are 23 hours each, so players logs in once every day to do their turn. This format allows for more players to "+
         "play at once, more time to strategize, more time to coordinate with other players, and less rushing to get things done, which can "+
         "occur in a standard multi-player Freeciv game. It takes a lot longer to play a game, about 2 to 6 months, but you can play it just a "+
@@ -1164,7 +1164,7 @@ function show_longturn_intro_dialog() {
         "Please be polite to the other players and don't cheat. "+
         "Contact a moderator at <a style='color: black;' href='mailto:freeciv-web-moderation@tutanota.com'>freeciv-web-moderation@tutanota.com</a> "+
         "to report players who behave badly or cheat.<br><br>" +
-        "You will get to play for turn immediately after signing up, and your next turn tomorrow. Please join the LongTurn game only if you are interested in playing one turn every day. " +
+        "You will get to play for turn immediately after signing up, and your next turn tomorrow. Please join the game only if you are interested in playing one turn every day. " +
         "Players who are idle for more than 12 turns can be replaced by new players. This means that idle players will continually be replaced by new players.<br><br>" +
         "Joining this game requires signing in with a player name and validated Google Account."+
         "<br><br><br><table><tr><td>Player name:</td><td><input id='username_req' type='text' size='25' maxlength='31'></td></tr></table>" +
@@ -1172,7 +1172,7 @@ function show_longturn_intro_dialog() {
         "<div id='fc-signin2'></div><br><br><br><small>(Please disable adblockers, then reload the page, for Google login button to work)</small>";
 
   if (is_small_screen()) {
-    message = "Welcome to this LongTurn game! Enter your player name:"+
+    message = "Welcome to this Freeciv-web: One Turn per Day game! Enter your player name:"+
       "<br><br><table><tr><td>Player name:</td><td><input id='username_req' type='text' size='25' maxlength='31'></td></tr></table>" +
       " <br><br><span id='username_validation_result' style='display:none;'></span><br><br>" +
       "<div id='fc-signin2'></div><br>";

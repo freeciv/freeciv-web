@@ -1899,9 +1899,9 @@ function send_end_turn()
   }
   if (is_longturn()) {
     show_dialog_message("Turn done!",
-      "Your turn in this LongTurn game is now over. In this game one turn is played every day. " +
+      "Your turn in this Freeciv-web: One Turn per Day game is now over. In this game one turn is played every day. " +
       "To play your next turn in this game, go to play.freeciv.org and click <b>Games</b> in the menu, then <b>Multiplayer</b> " +
-      "and there you will find this LongTurn game in the list. You can also bookmark this page.<br>" +
+      "and there you will find this Freeciv-web: One Turn per Day game in the list. You can also bookmark this page.<br>" +
       "See you again soon!"  );
   }
 }

@@ -223,10 +223,10 @@ function show_new_game_message()
     setTimeout(check_queued_tech_gained_dialog, 2500);
 
   } else if (is_longturn()) {
-    message = "Welcome " + username + "! This is a LongTurn game, where you play one " +
+    message = "Welcome " + username + "! This is a One Turn per Day game, where you play one " +
     "turn every day. Click the Turn Done button when you are done with your turn. To play your next " +
-    "turn in this LongTurn game, you can bookmark this page and use that link to play your next turn. "+
-    "You can also find this game by going to play.freeciv.org and clicking on the LongTurn button. "+
+    "turn in this One Turn per Day game, you can bookmark this page and use that link to play your next turn. "+
+    "You can also find this game by going to play.freeciv.org and clicking on the One Turn per Day button. "+
     "Good luck, have fun and see you again tomorrow!";
 
   } else if (is_small_screen()) {

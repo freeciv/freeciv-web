@@ -82,7 +82,7 @@
 		border: 0;
 		border-radius: 5px;
 		padding: 10px;
-		width: 200px;
+		width: 230px;
 		display: block;
 		font-weight: 700;
 		font-size: 20px;
@@ -244,12 +244,12 @@
 
 						<c:if test="${default_lang}">
 							<div class="features">
-								Play a LongTurn game, where up to 300 human <br>players play one turn every day:
+								Play a <b>Freeciv-web One Turn per Day</b>, where up to 300 human <br>players play one turn every day:
 							</div>
 						</c:if>
-						<a href="/webclient?action=multi&civserverport=6003&civserverhost=play&multi=true" class="btn" style="font-size: 15px; padding: 4px;">LongTurn Web 8</a>
-						<a href="/webclient?action=multi&civserverport=6004&civserverhost=play&multi=true" class="btn" style="font-size: 15px; padding: 4px;">LongTurn Web X</a>
-						<a href="/webclient?action=multi&civserverport=6005&civserverhost=play&multi=true" class="btn" style="font-size: 15px; padding: 4px;">LongTurn Web XI</a>
+						<a href="/webclient?action=multi&civserverport=6003&civserverhost=play&multi=true" class="btn" style="font-size: 15px; padding: 4px;">Game 8 - One Turn per Day</a>
+						<a href="/webclient?action=multi&civserverport=6004&civserverhost=play&multi=true" class="btn" style="font-size: 15px; padding: 4px;">Game X - One Turn per Day</a>
+						<a href="/webclient?action=multi&civserverport=6005&civserverhost=play&multi=true" class="btn" style="font-size: 15px; padding: 4px;">Game XI - One Turn per Day</a>
 
 					</div>
 				</div>
@@ -305,7 +305,7 @@
 		<div class="row">
 			<div class="col-md-6">
 				<div class="panel-freeciv">
-					<h3>Multiplayer and LongTurn games:</h3>
+					<h3>Multiplayer and One Turn per Day games:</h3>
 					<c:if test="${not empty games and fn:length(games) > 0}">
 						<table class="table multiplayer-games">
 							<thead>
@@ -322,7 +322,7 @@
 									<tr class="${game.players > 0 && state == 'Pregame' ? 'highlight' : ''}">
 										<td>
 										    <b>
-											  ${game.message}
+											  ${fn:replace(game.message, 'LongTurn', ' One Turn per Day ')}
 											</b>
 										</td>
 										<td>

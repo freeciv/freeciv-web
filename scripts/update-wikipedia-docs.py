@@ -69,6 +69,9 @@ def fix_tech(tech_name):
   if (tech_name == "Space Structural"): tech_name = "Spacecraft design";
   if (tech_name == "Hydro Plant"): tech_name = "Hydroelectricity";
   if (tech_name == "Super Highways"): tech_name = "Controlled-access highway";
+  if (tech_name == "Pikemen"): tech_name = "Pike square";
+  if (tech_name == "Armor"): tech_name = "Armoured fighting vehicle";
+  if (tech_name == "Port Facility"): tech_name = "Port";
 
   return tech_name;
 

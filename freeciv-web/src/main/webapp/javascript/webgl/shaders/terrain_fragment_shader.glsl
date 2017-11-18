@@ -464,7 +464,7 @@ void main(void)
   vec4 Cb = texture2D(terrains, vec2(mod(map_x_size * (vUv.x / 4.0), 0.25) + sprite_pos1_x , mod((vUv.y * map_y_size / 4.0), 0.25) + sprite_pos1_y));
   c = mix(c, Cb.rgb, x);
 
-  float shade_factor = 0.23 + 1.3 * max(0., dot(vNormal, normalize(light)));
+  float shade_factor = 0.19 + 1.3 * max(0., dot(vNormal, normalize(light)));
 
   // Fog of war, and unknown tiles, are stored as a vertex color in vColor.r.
   c = c * vColor.r;

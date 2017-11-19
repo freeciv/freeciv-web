@@ -479,6 +479,8 @@ function ruledir_from_ruleset_name(ruleset_name, fall_back_dir)
 function show_ruleset_description_full() {
   var id = "#long_help_dialog";
 
+  if (ruleset_control == null) return;
+
   $(id).remove();
   $("<div id='long_help_dialog'></div>").appendTo("div#pregame_page");
 

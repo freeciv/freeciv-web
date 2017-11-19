@@ -153,14 +153,15 @@
 				<div class="row top-buffer-3">
 					<p class="lead">
 						<fmt:message key="index-lead"/>
-                         <%--<div class="row top-buffer-3">
-                         <h1>Join LongTurn Web XI</h1>
-                         <b>LongTurn Web XI has started and you can join it now!</b><br>
+
+                         <div class="row top-buffer-3">
+                         <h1>Join Freeciv-web: One Turn per Day game XII</h1>
+                         <b>Game XII XI has started and you can join it now!</b><br>
                          <b>Each player will play one turn every day. <br><br>
-                         This will be one of the greatest, yet smallest ever multiplayer game of Freeciv with 300 players on 3000 map tiles!<br>
+                         This will be one of the greatest ever multiplayer game of Freeciv with 300 players on 30000 map tiles!<br>
                          </b>
-                         <h2><a href="/webclient?action=multi&civserverport=6005&civserverhost=play&multi=true">Join the LongTurn Web XI here!</a></h2>
-			            </div>--%>
+                         <h2><a href="/webclient?action=multi&civserverport=6006&civserverhost=play&multi=true">Join the LongTurn Web XII here!</a></h2>
+			            </div>
 
 					</p>
 				</div>
@@ -250,6 +251,7 @@
 						<a href="/webclient?action=multi&civserverport=6003&civserverhost=play&multi=true" class="btn" style="font-size: 15px; padding: 4px;">Game 8 - One Turn per Day</a>
 						<a href="/webclient?action=multi&civserverport=6004&civserverhost=play&multi=true" class="btn" style="font-size: 15px; padding: 4px;">Game X - One Turn per Day</a>
 						<a href="/webclient?action=multi&civserverport=6005&civserverhost=play&multi=true" class="btn" style="font-size: 15px; padding: 4px;">Game XI - One Turn per Day</a>
+						<a href="/webclient?action=multi&civserverport=6006&civserverhost=play&multi=true" class="btn" style="font-size: 15px; padding: 4px;">Game XII - One Turn per Day</a>
 
 					</div>
 				</div>

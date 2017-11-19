@@ -1,7 +1,5 @@
 #Freeciv-web: One Turn per day game #XII
 
-#load longturnxii
-#
 cmdlevel ctrl first
 rulesetdir multiplayer 
 set topology WRAPX
@@ -27,6 +25,12 @@ set topology=
 set landm 59
 set dispersion=1
 
+set temperature 15
+set wetness 20
+set steepness 90
+
+set spec 800
+
 set endt 365
 
 set diplomacy=HUMAN
@@ -35,6 +39,7 @@ set contactturns=0
 set trading_tech=disabled
 
 set minp 0
+set generator RANDOM
 set saveturns=1
 set autosaves=TURN
 metaconnection persistent
@@ -42,7 +47,7 @@ set ec_chat=enabled
 set ec_info=enabled 
 set ec_max_size=5000
 set ec_turns=9
-metamessage One Turn per day #XII | Map of Europe with 300 players! 
+metamessage One Turn per day #XII | 300 players | 30000 tiles | Join now!
 
 
 cmdlevel basic

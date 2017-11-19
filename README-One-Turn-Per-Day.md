@@ -1,4 +1,4 @@
-Configuration of LongTurn games in Freeciv-web
+Configuration of One Turn per Day (LongTurn) games in Freeciv-web
 
 LongTurn games require some manual configuration to work. 
 

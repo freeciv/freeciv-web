@@ -21,16 +21,16 @@ var saved_this_turn = false;
 var game_loaded = false;
 
 var scenarios = [
-  {"img":"/images/world_small.png", "description":"The World - Small world map, 80x50 map of the Earth", "savegame":"earth-80x50-v3"},
-  {"img":"/images/world_big.png", "description":"The World - Large world map, 160x90 map of the Earth", "savegame":"earth-160x90-v2"},
-  {"img":"/images/iberian.png", "description":"Iberian Peninsula - 136x100 map of Spain and Portugal", "savegame":"iberian-peninsula-136x100-v1.0"},
-  {"img":"/images/france.png", "description":"France - Large (140x90)", "savegame":"france-140x90-v2"},
-  {"img":"/images/japan.png", "description":"Japan - Medium (88x100)", "savegame":"japan-88x100-v1.3"},
-  {"img":"/images/italy.png", "description":"Italy - Medium (100x100)", "savegame":"italy-100x100-v1.5"},
-  {"img":"/images/america.png", "description":"North America - 116x100 map of North America", "savegame":"north_america_116x100-v1.2"},
-  {"img":"/images/british.png", "description":"British Aisles - Medium (85x80)", "savegame":"british-isles-85x80-v2.80"},
-  {"img":"/images/hagworld.png", "description":"The World - Classic-style 120x60 map of the Earth", "savegame":"hagworld-120x60-v1.2"},
-  {"img":"/images/europe.png", "description":"Very large map of Europe, 200x100", "savegame":"europe-200x100-v2"}
+  {"img":"/images/world_small.png", "description":"The World - Small world map, 80x50 map of the Earth", "savegame":"earth-small"},
+  {"img":"/images/world_big.png", "description":"The World - Large world map, 160x90 map of the Earth", "savegame":"earth-large"},
+  {"img":"/images/iberian.png", "description":"Iberian Peninsula - 136x100 map of Spain and Portugal", "savegame":"iberian-peninsula"},
+  {"img":"/images/france.png", "description":"France - Large (140x90)", "savegame":"france"},
+  {"img":"/images/japan.png", "description":"Japan - Medium (88x100)", "savegame":"japan"},
+  {"img":"/images/italy.png", "description":"Italy - Medium (100x100)", "savegame":"italy"},
+  {"img":"/images/america.png", "description":"North America - 116x100 map of North America", "savegame":"north_america"},
+  {"img":"/images/british.png", "description":"British Aisles - Medium (85x80)", "savegame":"british-isles"},
+  {"img":"/images/hagworld.png", "description":"The World - Classic-style 120x60 map of the Earth", "savegame":"hagworld"},
+  {"img":"/images/europe.png", "description":"Very large map of Europe, 200x100", "savegame":"europe"}
 ];
 
 var scenario_info = null;

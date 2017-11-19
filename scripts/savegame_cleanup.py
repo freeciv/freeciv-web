@@ -9,12 +9,12 @@ import os
 import sys
 
 rootdir = "/var/lib/tomcat8/webapps/data/savegames/" 
-scenario_list = ['british-isles-85x80-v2.80.sav.gz', 'iberian-peninsula-136x100-v1.0.sav.gz',
-    'earth-160x90-v2.sav.gz', 'italy-100x100-v1.5.sav.gz',
-    'earth-80x50-v3.sav.gz','japan-88x100-v1.3.sav.gz',
-    'europe-200x100-v2.sav.gz','north_america_116x100-v1.2.sav.gz',
-    'france-140x90-v2.sav.gz','tutorial.sav',
-    'hagworld-120x60-v1.2.sav.gz']
+scenario_list = ['british-isles.sav', 'iberian-peninsula.sav',
+    'earth-large.sav', 'italy.sav',
+    'earth-small.sav','japan.sav',
+    'europe.sav','north_america.sav',
+    'france.sav','tutorial.sav',
+    'hagworld.sav']
 
 
 keeptime = 60*60*24*365;

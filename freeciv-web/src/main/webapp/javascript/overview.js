@@ -139,6 +139,9 @@ function generate_overview_grid(cols, rows) {
   // Loop variables
   var row, col;
 
+  if (cols & 1) cols -= 1;  //Bugfix, the overview map doesn't support map size which is odd.
+  if (rows & 1) rows -= 1;
+
   // The grid of points that make up the image.
   var grid = Array(rows*OVERVIEW_TILE_SIZE);
   for (row = 0; row < rows * OVERVIEW_TILE_SIZE; row++) {

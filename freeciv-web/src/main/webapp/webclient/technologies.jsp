@@ -30,7 +30,7 @@
   </div>
 
   <div id="technologies">
-     <canvas id="tech_canvas" onmousedown="tech_mapview_mouse_click(event)"></canvas>
+     <canvas id="tech_canvas"></canvas>
   </div>
     
 </div>    

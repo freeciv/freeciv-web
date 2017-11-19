@@ -130,6 +130,10 @@ function control_init()
     pregame_settings();
   });
 
+  $("#tech_canvas").click(function(event) {
+     tech_mapview_mouse_click(event);
+   });
+
   /* disable text-selection, as this gives wrong mouse cursor
    * during drag to goto units. */
   document.onselectstart = function(){ return false; };
@@ -370,7 +374,7 @@ function mouse_moved_cb(e)
 function update_mouse_cursor()
 {
 
-  if (tech_dialog_active) {
+  if (tech_dialog_active && !is_touch_device()) {
     update_tech_dialog_cursor();
     return;
   }

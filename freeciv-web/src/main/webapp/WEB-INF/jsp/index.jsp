@@ -154,14 +154,14 @@
 					<p class="lead">
 						<fmt:message key="index-lead"/>
 
-                         <div class="row top-buffer-3">
+                         <%--<div class="row top-buffer-3">
                          <h1>Join Freeciv-web: One Turn per Day game XII</h1>
                          <b>Game XII XI has started and you can join it now!</b><br>
                          <b>Each player will play one turn every day. <br><br>
                          This will be one of the greatest ever multiplayer game of Freeciv with 300 players on 30000 map tiles!<br>
                          </b>
                          <h2><a href="/webclient?action=multi&civserverport=6006&civserverhost=play&multi=true">Join the LongTurn Web XII here!</a></h2>
-			            </div>
+			            </div>--%>
 
 					</p>
 				</div>

@@ -55,6 +55,7 @@ var has_movesleft_warning_been_shown = false;
 var game_unit_panel_state = null;
 
 var send_to_allies = false;
+var end_turn_info_message_shown = false;
 
 /****************************************************************************
 ...
@@ -139,7 +140,10 @@ function control_init()
   document.onselectstart = function(){ return false; };
 
   /* disable right clicks. */
-  document.oncontextmenu = function(){return allow_right_click;};
+  window.addEventListener('contextmenu', function (e) {
+    if (e.target != null && (e.target.id == 'game_text_input' || e.target.id == 'overview_map' || e.target.parent.id == 'game_message_area')) return;
+    if (!allow_right_click) e.preventDefault();
+  }, false);
 
   var context_options = {
         selector: (renderer == RENDERER_2DCANVAS) ? '#canvas' : '#canvas_div' ,
@@ -614,6 +618,11 @@ function advance_unit_focus()
           break;
         }
       }
+    }
+    $("#turn_done_button").button("option", "label", "<i class='fa fa-check-circle-o' style='color: green;'aria-hidden='true'></i> Turn Done");
+    if (!end_turn_info_message_shown) {
+      end_turn_info_message_shown = true;
+      message_log.update({ event: E_BEGINNER_HELP, message: "All units have moved, click the \"Turn Done\" button to end your turn."});
     }
   }
 

@@ -306,6 +306,7 @@ function update_city_position(ptile) {
         city_walls.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10);
         city_walls.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
         city_walls.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
+        city_walls.scale.x = city_walls.scale.y = city_walls.scale.z = get_citywalls_scale(pcity);
         scene.add(city_walls);
         city_walls_positions[ptile['index']] = city_walls;
       }
@@ -342,6 +343,12 @@ function update_city_position(ptile) {
       if (scene != null && new_city != null) {
         scene.add(new_city);
       }
+
+      if (scene != null && pcity['walls'] && city_walls_positions[ptile['index']] != null) {
+        // remove city walls, they need updating.
+        scene.remove(city_walls_positions[ptile['index']]);
+        delete city_walls_positions[ptile['index']];
+      }
     }
     var pos = map_to_scene_coords(ptile['x'], ptile['y']);
 
@@ -351,6 +358,7 @@ function update_city_position(ptile) {
         city_walls.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10);
         city_walls.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
         city_walls.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
+        city_walls.scale.x = city_walls.scale.y = city_walls.scale.z = get_citywalls_scale(pcity);
         scene.add(city_walls);
         city_walls_positions[ptile['index']] = city_walls;
       }

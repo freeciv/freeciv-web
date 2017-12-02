@@ -2020,3 +2020,23 @@ function city_to_3d_model_name(pcity)
 
   return "city_" + city_style_name + "_" + size;
 }
+
+/**************************************************************************
+ Returns the city walls scale of for the given city.
+**************************************************************************/
+function get_citywalls_scale(pcity)
+{
+  var scale = 8;
+  if (pcity['size'] >=3 && pcity['size'] <=6) {
+    scale = 9;
+  } else if (pcity['size'] > 6 && pcity['size'] <= 9) {
+    scale = 10;
+  } else if (pcity['size'] > 9 && pcity['size'] <= 11) {
+    scale = 11;
+  } else if (pcity['size'] > 11) {
+    scale = 12;
+  }
+
+  return scale;
+
+}

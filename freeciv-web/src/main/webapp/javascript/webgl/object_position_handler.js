@@ -284,14 +284,9 @@ function update_city_position(ptile) {
 
   if (city_positions[ptile['index']] == null && pcity != null) {
     // add new city
-    var size = 0;
-    if (pcity['size'] >=4 && pcity['size'] <=7) {
-      size = 1;
-    } else if (pcity['size'] >=8) {
-      size = 2;
-    }
-    pcity['webgl_model_size'] = size;
-    var new_city = webgl_get_model("city_european_" + size);
+    var model_name = city_to_3d_model_name(pcity);
+    pcity['webgl_model_name'] = model_name;
+    var new_city = webgl_get_model(model_name);
     if (new_city == null) return;
     city_positions[ptile['index']] = new_city;
 
@@ -329,17 +324,12 @@ function update_city_position(ptile) {
 
   if (city_positions[ptile['index']] != null && pcity != null) {
     // Update of visible city.
-    var size = 0;
-    if (pcity['size'] >=4 && pcity['size'] <=7) {
-      size = 1;
-    } else if (pcity['size'] >=8) {
-      size = 2;
-    }
-    if (pcity['webgl_model_size'] != size) {
+    var model_name = city_to_3d_model_name(pcity);
+    if (pcity['webgl_model_name'] != model_name) {
       // update city model to a different size.
       if (scene != null) scene.remove(city_positions[ptile['index']]);
-      pcity['webgl_model_size'] = size;
-      var new_city = webgl_get_model("city_european_" + size);
+      pcity['webgl_model_name'] = model_name;
+      var new_city = webgl_get_model(model_name);
       if (new_city == null) return;
       city_positions[ptile['index']] = new_city;
 

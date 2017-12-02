@@ -24,8 +24,8 @@ var total_model_count = 0;
 var load_count = 0;
 var webgl_materials = {};
 
-var model_filenames = ["AEGIS Cruiser",     "city_european_1",  "Helicopter",    "Pikemen",
-                       "Alpine Troops",     "city_european_2",  "Horsemen",
+var model_filenames = ["AEGIS Cruiser",     "Helicopter",    "Pikemen",
+                       "Alpine Troops",     "Horsemen",
                        "Archers",           "citywalls",        "Howitzer",      "Riflemen",
                        "Armor",             "Hut",
                        "Artillery",         "Cruise Missile",   "Ironclad",      "Settlers",
@@ -41,8 +41,18 @@ var model_filenames = ["AEGIS Cruiser",     "city_european_1",  "Helicopter",   
                        "Catapult",          "Frigate",          "Migrants",
                        "Cavalry",           "Paratroopers",     "Workers",
                        "Chariot",           "Galleon",          "Partisan",
-                       "city_european_0",   "Phalanx",          "Ruins",
-                       "Airbase",           "Fortress"
+                       "Phalanx",          "Ruins",
+                       "Airbase",           "Fortress",
+                       "city_european_0",
+                       "city_european_1",
+                       "city_european_2",
+                       "city_european_3",
+                       "city_european_4",
+                       "city_modern_0",
+                       "city_modern_1",
+                       "city_modern_2",
+                       "city_modern_3",
+                       "city_modern_4"
                       ];
 
 /****************************************************************************
@@ -224,7 +234,6 @@ function load_model(filename)
         node.geometry.computeVertexNormals();
       }
     });
-
 
     model.scale.x = model.scale.y = model.scale.z = 11;
     webgl_models[filename] = model;

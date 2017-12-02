@@ -196,6 +196,6 @@ function get_city_height_offset(pcity)
       if (tile_terrain(ptile)['name'] == "Mountains") return -10;
   }
 
-  return 0;
+  return 2;
 
 }

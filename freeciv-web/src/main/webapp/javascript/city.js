@@ -1991,3 +1991,32 @@ function run_basic_cma()
     }
   }
 }
+
+/**************************************************************************
+ Returns the 3d model name for the given city.
+**************************************************************************/
+function city_to_3d_model_name(pcity)
+{
+  var size = 0;
+  if (pcity['size'] >=3 && pcity['size'] <=6) {
+    size = 1;
+  } else if (pcity['size'] > 6 && pcity['size'] <= 9) {
+    size = 2;
+  } else if (pcity['size'] > 9 && pcity['size'] <= 11) {
+    size = 3;
+  } else if (pcity['size'] > 11) {
+    size = 4;
+  }
+
+  var style_id = pcity['style'];
+  if (style_id == -1) style_id = 0;
+  var city_rule = city_rules[style_id];
+
+  var city_style_name = "european";
+  if (city_rule['rule_name'] == "Industrial" || city_rule['rule_name'] == "ElectricAge" || city_rule['rule_name'] == "Modern"
+      || city_rule['rule_name'] == "PostModern" || city_rule['rule_name'] == "Asian") {
+    city_style_name = "modern"
+  }
+
+  return "city_" + city_style_name + "_" + size;
+}

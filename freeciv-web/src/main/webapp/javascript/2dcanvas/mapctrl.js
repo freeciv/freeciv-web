@@ -104,9 +104,9 @@ function mapview_mouse_down(e)
   if (!rightclick && !middleclick) {
     /* Left mouse button is down */
     if (goto_active) return;
-
-    setTimeout("check_mouse_drag_unit(" + mouse_x + "," + mouse_y + ");", 200);
-    mapview_mouse_movement = true;
+    set_mouse_touch_started_on_unit(canvas_pos_to_tile(mouse_x, mouse_y));
+    check_mouse_drag_unit(canvas_pos_to_tile(mouse_x, mouse_y));
+    if (!mouse_touch_started_on_unit) mapview_mouse_movement = true;
     touch_start_x = mouse_x;
     touch_start_y = mouse_y;
 
@@ -135,15 +135,8 @@ function mapview_touch_start(e)
 
   touch_start_x = e.originalEvent.touches[0].pageX - $('#canvas').position().left;
   touch_start_y = e.originalEvent.touches[0].pageY - $('#canvas').position().top;
-
   var ptile = canvas_pos_to_tile(touch_start_x, touch_start_y);
-  if (ptile == null) return;
-  var sunit = find_visible_unit(ptile);
-  if (sunit != null && client.conn.playing != null && sunit['owner'] == client.conn.playing.playerno) {
-    mouse_touch_started_on_unit = true;
-  } else {
-    mouse_touch_started_on_unit = false;
-  }
+  set_mouse_touch_started_on_unit(ptile);
 
 }
 
@@ -171,7 +164,7 @@ function mapview_touch_move(e)
   touch_start_y = mouse_y;
 
   if (!goto_active) {
-    check_mouse_drag_unit(mouse_x, mouse_y);
+    check_mouse_drag_unit(canvas_pos_to_tile(mouse_x, mouse_y));
 
     mapview['gui_x0'] += diff_x;
     mapview['gui_y0'] += diff_y;
@@ -217,30 +210,6 @@ function city_mapview_mouse_click(e)
 
 }
 
-/****************************************************************************
- This function checks if there is a visible unit on the given canvas position,
- and selects that visible unit, and activates goto for touch devices.
-****************************************************************************/
-function check_mouse_drag_unit(canvas_x, canvas_y)
-{
-  var ptile = canvas_pos_to_tile(canvas_x, canvas_y);
-  if (ptile == null || !mouse_touch_started_on_unit) return;
-
-  var sunit = find_visible_unit(ptile);
-
-  if (sunit != null) {
-    if (client.conn.playing != null && sunit['owner'] == client.conn.playing.playerno) {
-      set_unit_focus(sunit);
-      if (is_touch_device()) activate_goto();
-    }
-  }
-
-  var ptile_units = tile_units(ptile);
-  if (ptile_units.length > 1) {
-     update_active_units_dialog();
-  }
-
-}
 
 /**************************************************************************
   Do some appropriate action when the "main" mouse button (usually

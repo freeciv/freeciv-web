@@ -125,7 +125,10 @@ function webglOnDocumentMouseDown(e) {
     /* Left mouse button is down */
     if (goto_active) return;
 
-    //setTimeout("check_mouse_drag_unit(" + mouse_x + "," + mouse_y + ");", 200);
+    var ptile = webgl_canvas_pos_to_tile(e.clientX, e.clientY - $("#canvas_div").offset().top);
+    set_mouse_touch_started_on_unit(ptile);
+    check_mouse_drag_unit(ptile);
+    if (!mouse_touch_started_on_unit) mapview_mouse_movement = true;
     mapview_mouse_movement = true;
     touch_start_x = mouse_x;
     touch_start_y = mouse_y;
@@ -222,13 +225,7 @@ function webgl_mapview_touch_start(e)
   touch_start_y = e.originalEvent.touches[0].pageY - $('#canvas_div').position().top;
 
   var ptile = webgl_canvas_pos_to_tile(touch_start_x, touch_start_y);
-  if (ptile == null) return;
-  var sunit = find_visible_unit(ptile);
-  if (sunit != null && client.conn.playing != null && sunit['owner'] == client.conn.playing.playerno) {
-    mouse_touch_started_on_unit = true;
-  } else {
-    mouse_touch_started_on_unit = false;
-  }
+  set_mouse_touch_started_on_unit(ptile);
 
 }
 
@@ -260,9 +257,9 @@ function webgl_mapview_touch_move(e)
 
   touch_start_x = mouse_x;
   touch_start_y = mouse_y;
-
+  var ptile = webgl_canvas_pos_to_tile(mouse_x, mouse_y);
   if (!goto_active) {
-    webgl_check_mouse_drag_unit(mouse_x, mouse_y);
+    check_mouse_drag_unit(ptile);
   }
 
   if (client.conn.playing == null) return;
@@ -270,7 +267,6 @@ function webgl_mapview_touch_move(e)
   /* Request preview goto path */
   goto_preview_active = true;
   if (goto_active && current_focus.length > 0) {
-    var ptile = webgl_canvas_pos_to_tile(mouse_x, mouse_y);
     if (ptile != null) {
       for (var i = 0; i < current_focus.length; i++) {
         if (i >= 20) return;  // max 20 units goto a time.
@@ -323,30 +319,4 @@ function webgl_action_button_pressed(canvas_x, canvas_y, qtype)
   if (can_client_change_view() && ptile != null) {
     do_map_click(ptile, qtype, true);
   }
-}
-
-
-/****************************************************************************
- This function checks if there is a visible unit on the given canvas position,
- and selects that visible unit, and activates goto for touch devices.
-****************************************************************************/
-function webgl_check_mouse_drag_unit(canvas_x, canvas_y)
-{
-  var ptile = webgl_canvas_pos_to_tile(canvas_x, canvas_y);
-  if (ptile == null || !mouse_touch_started_on_unit) return;
-
-  var sunit = find_visible_unit(ptile);
-
-  if (sunit != null) {
-    if (client.conn.playing != null && sunit['owner'] == client.conn.playing.playerno) {
-      set_unit_focus(sunit);
-      if (is_touch_device()) activate_goto();
-    }
-  }
-
-  var ptile_units = tile_units(ptile);
-  if (ptile_units.length > 1) {
-     update_active_units_dialog();
-  }
-
 }

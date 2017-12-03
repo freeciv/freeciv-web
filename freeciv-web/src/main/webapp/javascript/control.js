@@ -323,7 +323,7 @@ function mouse_moved_cb(e)
       // move the mapview using mouse movement.
       var diff_x = (touch_start_x - mouse_x) * 2;
       var diff_y = (touch_start_y - mouse_y) * 2;
-      check_mouse_drag_unit(mouse_x, mouse_y);
+
       mapview['gui_x0'] += diff_x;
       mapview['gui_y0'] += diff_y;
       touch_start_x = mouse_x;
@@ -2814,4 +2814,43 @@ function update_active_units_dialog()
     $("#game_unit_panel").parent().hide();
   }
   $("#active_unit_info").tooltip();
+}
+
+/**************************************************************************
+  Sets mouse_touch_started_on_unit
+**************************************************************************/
+function set_mouse_touch_started_on_unit(ptile) {
+  if (ptile == null) return;
+  var sunit = find_visible_unit(ptile);
+  if (sunit != null && client.conn.playing != null && sunit['owner'] == client.conn.playing.playerno) {
+    mouse_touch_started_on_unit = true;
+  } else {
+    mouse_touch_started_on_unit = false;
+  }
+
+}
+
+
+/****************************************************************************
+ This function checks if there is a visible unit on the given tile,
+ and selects that visible unit, and activates goto.
+****************************************************************************/
+function check_mouse_drag_unit(ptile)
+{
+  if (ptile == null || !mouse_touch_started_on_unit) return;
+
+  var sunit = find_visible_unit(ptile);
+
+  if (sunit != null) {
+    if (client.conn.playing != null && sunit['owner'] == client.conn.playing.playerno) {
+      set_unit_focus(sunit);
+      activate_goto();
+    }
+  }
+
+  var ptile_units = tile_units(ptile);
+  if (ptile_units.length > 1) {
+     update_active_units_dialog();
+  }
+
 }

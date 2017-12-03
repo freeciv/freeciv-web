@@ -1298,7 +1298,7 @@ function validate_username_callback()
            }
           });
         } else {
-          $("#username_validation_result").html("Please enter your password or create a new user account. <a class='pwd_reset' href='#' style='color: #bbbbbb;'>Forgot password?</a>");
+          $("#username_validation_result").html("Player name already in use. Try a different player name, or enter the username and password of your account,<br> or create a new user account. <a class='pwd_reset' href='#' style='color: #bbbbbb;'>Forgot password?</a>");
           $("#username_validation_result").show();
         }
 

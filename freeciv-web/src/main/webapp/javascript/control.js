@@ -141,7 +141,7 @@ function control_init()
 
   /* disable right clicks. */
   window.addEventListener('contextmenu', function (e) {
-    if (e.target != null && (e.target.id == 'game_text_input' || e.target.id == 'overview_map' || e.target.parent.id == 'game_message_area')) return;
+    if (e.target != null && e.target.parent != null && (e.target.id == 'game_text_input' || e.target.id == 'overview_map' || e.target.parent.id == 'game_message_area')) return;
     if (!allow_right_click) e.preventDefault();
   }, false);
 
@@ -1616,11 +1616,14 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift, the_event)
       break;
 
     case 27:
+      //Esc
+
       deactivate_goto();
 
       /* Abort started multiple unit selection. */
       map_select_active = false;
       map_select_check = false;
+      mapview_mouse_movement = false;
 
       /* Abort any context menu blocking. */
       context_menu_active = true;

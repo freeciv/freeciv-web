@@ -254,7 +254,7 @@ function challenge_pbem_player_dialog(extra_intro_message)
 }
 
 /**************************************************************************
- ...
+ TODO: validate all usernames when game has 3 or more players.
 **************************************************************************/
 function prepare_pbem_opponent_selection() {
     var playercount = parseFloat($('#playercount').val());
@@ -270,7 +270,7 @@ function prepare_pbem_opponent_selection() {
        $("#opponent_box").html(msg);
 
     } else if (playercount == 3 || playercount == 4) {
-      var msg = "Enter the usernames of the other players: "
+      var msg = "Enter the <u>usernames</u> of the other <u>human</u> players: "
        + "<table>"
        + "<tr><td>You:</td><td>" + username + "</td></tr>"
        + "<tr><td>Username 2:</td><td><input id='opponent_1' type='text' size='25' maxlength='64'"
@@ -283,8 +283,9 @@ function prepare_pbem_opponent_selection() {
       }
 
        msg += "</table><br>"
-       + "The other players have to create their account and tell you their usernames, before you fill in this form. <br>" +
-       "You will play the first turn. The other players will get an e-mail when it is their turn to play."
+       + "Before you fill in this form, the other players have to create their account and tell you their usernames. <br>" +
+       "You will play the first turn. The other players will get an e-mail when it is their turn to play.<br>" +
+       "This type of game can have human players only."
        $("#opponent_box").html(msg);
 
     }

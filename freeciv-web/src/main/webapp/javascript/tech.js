@@ -121,6 +121,7 @@ function init_tech_screen()
 {
   if (is_small_screen()) tech_canvas_text_font = "20px Arial";
   $("#technologies").width($(window).width() - 20);
+  $("#technologies").height($(window).height() - $("#technologies").offset().top - 15);
 
   if (is_tech_tree_init) return;
 
@@ -162,8 +163,6 @@ function init_tech_screen()
     $("#tech_result_text").css("font-size", "85%");
     $("#tech_color_help").css("font-size", "65%");
     $("#tech_progress_box").css("padding-left", "10px");
-
-
   }
 
   is_tech_tree_init = true;

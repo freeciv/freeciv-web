@@ -1041,3 +1041,7 @@ li.tech-both::before {
   float: left;
   padding: 15px;
 }
+
+#technology_dialog {
+  overflow: hidden;
+}

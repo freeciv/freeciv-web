@@ -28,7 +28,7 @@ function init_webgl_mapctrl()
   $("#canvas_div").mousedown(webglOnDocumentMouseDown);
   $("#canvas_div").mouseup(webglOnDocumentMouseUp);
   $(window).mousemove(mouse_moved_cb);
-  $('#canvas_div').bind('mousewheel DOMMouseScroll', webglOnMouseWheel);
+  $('#canvas_div').bind('wheel', webglOnWheel);
 
   if (is_touch_device()) {
     $('#canvas_div').bind('touchstart', webgl_mapview_touch_start);
@@ -93,6 +93,7 @@ function webglOnDocumentMouseUp( e ) {
     }
     map_select_active = false;
     map_select_check = false;
+    mapview_mouse_movement = false;
 
   } else if (!rightclick && !middleclick) {
     /* Left mouse button*/
@@ -136,6 +137,7 @@ function webglOnDocumentMouseDown(e) {
     /* The context menu blocks the right click mouse up event on some
      * browsers. */
     context_menu_active = false;
+    mapview_mouse_movement = false;
   }
 
 }
@@ -144,37 +146,23 @@ function webglOnDocumentMouseDown(e) {
 /****************************************************************************
   Mouse wheel scrolling for map zoom in and zoom out.
 ****************************************************************************/
-function webglOnMouseWheel(e) {
+function webglOnWheel(e) {
   var new_camera_dx;
   var new_camera_dy;
   var new_camera_dz;
 
-  if (platform.name == "Firefox") {
-    // Firefox special-case
-    if(e.originalEvent.detail < 0) {
-      // zoom in
-      new_camera_dy = camera_dy - 60;
-      new_camera_dx = camera_dx - 45;
-      new_camera_dz = camera_dz - 45;
-    } else {
-      // zoom out
-      new_camera_dy = camera_dy + 60;
-      new_camera_dx = camera_dx + 45;
-      new_camera_dz = camera_dz + 45;
-    }
-  } else {
-    if(e.originalEvent.wheelDelta / 120 > 0) {
-      // zoom in
-      new_camera_dy = camera_dy - 60;
-      new_camera_dx = camera_dx - 45;
-      new_camera_dz = camera_dz - 45;
-    } else {
-      // zoom out
-      new_camera_dy = camera_dy + 60;
-      new_camera_dx = camera_dx + 45;
-      new_camera_dz = camera_dz + 45;
-    }
+  var wd = e.originalEvent.deltaY;
 
+  if (wd < 0) {
+    // zoom in
+    new_camera_dy = camera_dy - 60;
+    new_camera_dx = camera_dx - 45;
+    new_camera_dz = camera_dz - 45;
+  } else {
+    // zoom out
+    new_camera_dy = camera_dy + 60;
+    new_camera_dx = camera_dx + 45;
+    new_camera_dz = camera_dz + 45;
   }
 
   if (new_camera_dy < 350 || new_camera_dy > 1500) {

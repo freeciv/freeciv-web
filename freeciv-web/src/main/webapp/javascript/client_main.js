@@ -115,8 +115,6 @@ function setup_window_size ()
   $("#pregame_message_area").height( new_mapview_height - 80
                                         - $("#pregame_game_info").getTotalHeight());
   $("#pregame_player_list").height( new_mapview_height - 80);
-  $("#technologies").height( new_mapview_height - 50);
-  $("#technologies").width( new_mapview_width - 20);
 
   $("#nations").height( new_mapview_height - 100);
   $("#nations").width( new_mapview_width);

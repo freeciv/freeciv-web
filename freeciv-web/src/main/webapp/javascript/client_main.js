@@ -307,6 +307,9 @@ function show_endgame_dialog()
 			modal: true,
 			width: is_small_screen() ? "90%" : "50%",
 			buttons: {
+                "Submit game to Hall of Fame" : function() {
+                  submit_game_to_hall_of_fame();
+                },
 				"Show Scores" : function() {
 					$("#dialog").dialog('close');
 					view_game_scores();

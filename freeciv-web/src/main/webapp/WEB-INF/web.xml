@@ -190,6 +190,17 @@
 		<url-pattern>/deactivate_user</url-pattern>
 	</servlet-mapping>
 
+	<!-- /hall_of_fame_post -->
+	<servlet>
+		<servlet-name>HallOfFamePost</servlet-name>
+		<servlet-class>org.freeciv.servlet.HallOfFamePost</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>HallOfFamePost</servlet-name>
+		<url-pattern>/hall_of_fame_post</url-pattern>
+	</servlet-mapping>
+
 	<!-- /password_reset -->
 	<servlet>
 		<servlet-name>ResetPassword</servlet-name>

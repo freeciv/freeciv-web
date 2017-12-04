@@ -15,6 +15,7 @@
         border: 1px solid black;
         padding: 5px;
         font-size: 135%;
+        text-transform: capitalize;
 
     }
 </style>

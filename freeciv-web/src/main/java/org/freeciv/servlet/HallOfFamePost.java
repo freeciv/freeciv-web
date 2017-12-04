@@ -49,7 +49,7 @@ public class HallOfFamePost extends HttpServlet {
             conn = ds.getConnection();
 
             String query = "INSERT INTO hall_of_fame (username, nation, score, end_turn, end_date, ip) "
-                    + "VALUES (?, ?, ?, ?, NOW(), ?, ?)";
+                    + "VALUES (?, ?, ?, ?, NOW(), ?)";
             PreparedStatement preparedStatement = conn.prepareStatement(query);
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, nation);

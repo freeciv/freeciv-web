@@ -29,7 +29,6 @@ public class HallOfFamePost extends HttpServlet {
         String nation = java.net.URLDecoder.decode(request.getParameter("nation"), "UTF-8");
         String score = java.net.URLDecoder.decode(request.getParameter("score"), "UTF-8");
         String turn = java.net.URLDecoder.decode(request.getParameter("turn"), "UTF-8");
-        String imgur_url = java.net.URLDecoder.decode(request.getParameter("imgur_url"), "UTF-8");
         String ipAddress = request.getHeader("X-Real-IP");
         if (ipAddress == null) {
             ipAddress = request.getRemoteAddr();
@@ -49,15 +48,14 @@ public class HallOfFamePost extends HttpServlet {
             DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
             conn = ds.getConnection();
 
-            String query = "INSERT INTO hall_of_fame (username, nation, score, end_turn, end_date, imgur_url, ip) "
+            String query = "INSERT INTO hall_of_fame (username, nation, score, end_turn, end_date, ip) "
                     + "VALUES (?, ?, ?, ?, NOW(), ?, ?)";
             PreparedStatement preparedStatement = conn.prepareStatement(query);
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, nation);
             preparedStatement.setString(3, score);
             preparedStatement.setString(4, turn);
-            preparedStatement.setString(5, imgur_url);
-            preparedStatement.setString(6, ipAddress);
+            preparedStatement.setString(5, ipAddress);
             preparedStatement.executeUpdate();
 
         } catch (Exception err) {

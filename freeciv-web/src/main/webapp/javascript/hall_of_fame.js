@@ -38,9 +38,9 @@ function submit_game_to_hall_of_fame()
   $.ajax({
    type: 'POST',
    url: "/hall_of_fame_post?username=" + username + "&nation=" + nations[pplayer['nation']]['adjective'] + "&score=" + get_score_text(pplayer)
-         + "&turn=" + game_info['turn'] + "&imgur_url=null"  ,
+         + "&turn=" + game_info['turn']  ,
    success: function(data, textStatus, request){
-       $("#dialog").html("Game submitted to Hall of Fame!");
+       $("#dialog").html("Game submitted to Hall of Fame! See it <a href='/hall_of_fame' target='_new'>here</a>.");
    }
 
    }).fail(function() {

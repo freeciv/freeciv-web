@@ -90,6 +90,17 @@
 		<url-pattern>/game/statistics/details</url-pattern>
 	</servlet-mapping>
 
+	<!-- /hall_of_fame -->
+	<servlet>
+		<servlet-name>HallOfFameList</servlet-name>
+		<servlet-class>org.freeciv.servlet.HallOfFameList</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>HallOfFameList</servlet-name>
+		<url-pattern>/hall_of_fame</url-pattern>
+	</servlet-mapping>
+
 	<!-- /civclientlauncher (game launcher servlet) -->
 	<servlet>
 		<servlet-name>CivclientLauncher</servlet-name>

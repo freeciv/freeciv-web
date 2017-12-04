@@ -105,4 +105,44 @@ public class Statistics {
 			}
 		}
 	}
+
+	public List<Map<String, Object>> getHallOfFameList() {
+
+		Connection connection = null;
+		try {
+			Context env = (Context) (new InitialContext().lookup("java:comp/env"));
+			DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
+			connection = ds.getConnection();
+			String query = "SELECT username, nation, score, end_turn, end_date "
+					+ "FROM hall_of_fame order by score DESC limit 500";
+
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			ResultSet rs = preparedStatement.executeQuery();
+			List<Map<String, Object>> result = new ArrayList<>();
+			int num = 1;
+			while (rs.next()) {
+				Map<String, Object> item = new HashMap<>();
+				item.put("position", num);
+				item.put("username", rs.getString("username"));
+				item.put("nation", rs.getString("nation"));
+				item.put("score", rs.getString("score"));
+				item.put("end_turn", rs.getString("end_turn"));
+				item.put("end_date", rs.getString("end_date"));
+				result.add(item);
+				num++;
+			}
+			return result;
+		} catch (Exception err) {
+			throw new RuntimeException(err);
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
 }

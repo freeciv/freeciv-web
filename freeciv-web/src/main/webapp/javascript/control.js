@@ -1182,7 +1182,7 @@ function do_map_click(ptile, qtype, first_time_called)
   if (current_focus.length > 0 && current_focus[0]['tile'] == ptile['index']) {
     /* clicked on unit at the same tile, then deactivate goto and show context menu. */
     if (goto_active && !is_touch_device()) {
-      deactivate_goto();
+      deactivate_goto(false);
     }
     if (renderer == RENDERER_2DCANVAS) {
       $("#canvas").contextMenu();
@@ -1195,7 +1195,6 @@ function do_map_click(ptile, qtype, first_time_called)
   pcity = tile_city(ptile);
 
   if (goto_active) {
- 
     if (current_focus.length > 0) {
       // send goto order for all units in focus. 
       for (var s = 0; s < current_focus.length; s++) {
@@ -1326,7 +1325,7 @@ function do_map_click(ptile, qtype, first_time_called)
       }
     }
 
-    deactivate_goto();
+    deactivate_goto(true);
     update_unit_focus();
 
   } else if (paradrop_active && current_focus.length > 0) {
@@ -1618,7 +1617,7 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift, the_event)
     case 27:
       //Esc
 
-      deactivate_goto();
+      deactivate_goto(false);
 
       /* Abort started multiple unit selection. */
       map_select_active = false;
@@ -1824,7 +1823,7 @@ function handle_context_menu_callback(key)
       break;
   }
   if (key != "goto" && is_touch_device()) {
-    deactivate_goto();
+    deactivate_goto(false);
   }
 }
 
@@ -1871,7 +1870,7 @@ function activate_goto_last(last_order, last_action)
       message: "First select a unit to move by clicking on it, then click on the"
              + " goto button or the 'G' key, then click on the position to move to."
     });
-    deactivate_goto();
+    deactivate_goto(false);
   }
 
 }
@@ -1879,7 +1878,7 @@ function activate_goto_last(last_order, last_action)
 /**************************************************************************
  ...
 **************************************************************************/
-function deactivate_goto()
+function deactivate_goto(will_advance_unit_focus)
 {
   goto_active = false;
   $("#canvas_div").css("cursor", "default");
@@ -1892,7 +1891,7 @@ function deactivate_goto()
   goto_last_action = ACTION_COUNT;
 
   // update focus to next unit after 600ms.
-  setTimeout(update_unit_focus, 600);
+  if (will_advance_unit_focus) setTimeout(update_unit_focus, 600);
 
 
 }
@@ -2519,7 +2518,7 @@ function key_unit_move(dir)
     unit_move_sound_play(punit);
   }
 
-  deactivate_goto();
+  deactivate_goto(true);
 }
 
 /**************************************************************************

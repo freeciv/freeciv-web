@@ -12,12 +12,15 @@
 <script src="/javascript/libs/morris.min.js"></script>
 <style>
 	table, th, td {
-        border: 1px solid black;
         padding: 5px;
         font-size: 135%;
         text-transform: capitalize;
-
     }
+
+    .score_row {
+      border: 1px solid black;
+    }
+
 </style>
 
 </head>
@@ -37,7 +40,7 @@
                 <th>Score</td>
               </tr>
             <c:forEach items="${data}" var="item">
-              <tr>
+              <tr class="score_row">
                 <td><c:out value="${item.position}"/></td>
                 <td><c:out value="${item.username}"/></td>
                 <td><c:out value="${item.nation}"/></td>

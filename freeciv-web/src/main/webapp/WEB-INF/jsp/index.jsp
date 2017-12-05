@@ -376,7 +376,7 @@
 
 			<div class="col-md-6 container" id="best-of-play-by-email">
 				<div class="panel-freeciv">
-				    <a href="/hall_of_fame"><h3>Hall Of Fame</h3></a>
+				    <a href="/hall_of_fame"><h2>Hall Of Fame</h2></a>
 				    See the <a href="/hall_of_fame">Hall Of Fame</a>, where the best scores of single-player games are listed!<br>
 				    <br>
 					<h3><fmt:message key="index-best-of-play-by-email"/></h3>

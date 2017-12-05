@@ -27,7 +27,7 @@
 <body>
 	<%@include file="/WEB-INF/jsp/fragments/header.jsp" %>
 	<div class="container">
-		<h2>Hall Of Fame</h2>
+		<h1>Hall Of Fame</h1>
         <br>
 
         <table>

@@ -43,7 +43,7 @@ public class HallOfFamePost extends HttpServlet {
             return;
         }
 
-        if (!p.matcher(username).matches() || !p.matcher(score).matches() || !p.matcher(nation).matches() || !p.matcher(turn).matches()) {
+        if (!p.matcher(username).matches() || !p.matcher(score).matches() || !p.matcher(turn).matches()) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST,
                     "Invalid data submitted. ");
             return;

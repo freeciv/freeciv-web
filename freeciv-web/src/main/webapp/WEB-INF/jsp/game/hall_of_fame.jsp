@@ -30,7 +30,7 @@
 		<h1>Hall Of Fame</h1>
         <br>
 
-        <table>
+        <table style="width: 100%;">
              <tr>
                 <th>Rank:</td>
                 <th>Name:</td>

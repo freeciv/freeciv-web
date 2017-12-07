@@ -113,8 +113,7 @@ public class Statistics {
 			Context env = (Context) (new InitialContext().lookup("java:comp/env"));
 			DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
 			connection = ds.getConnection();
-			String query = "SELECT username, nation, score, end_turn, end_date "
-					+ "FROM hall_of_fame order by score DESC limit 500";
+			String query = "SELECT username, nation, score, end_turn, end_date, (select sum(s.score) from hall_of_fame s where s.username = a.username) as total_score FROM hall_of_fame a order by score DESC limit 500";
 
 			PreparedStatement preparedStatement = connection.prepareStatement(query);
 			ResultSet rs = preparedStatement.executeQuery();
@@ -128,6 +127,7 @@ public class Statistics {
 				item.put("score", rs.getString("score"));
 				item.put("end_turn", rs.getString("end_turn"));
 				item.put("end_date", rs.getString("end_date"));
+				item.put("total_score", rs.getString("total_score"));
 				result.add(item);
 				num++;
 			}

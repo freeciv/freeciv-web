@@ -32,12 +32,13 @@
 
         <table>
              <tr>
-                <th>Position</td>
-                <th>Name</td>
-                <th>Nation</td>
-                <th>End turn</td>
-                <th>End date</td>
-                <th>Score</td>
+                <th>Rank:</td>
+                <th>Name:</td>
+                <th>Nation:</td>
+                <th>End turn:</td>
+                <th>End date:</td>
+                <th>Score:</td>
+                <th>Total Score:</td>
               </tr>
             <c:forEach items="${data}" var="item">
               <tr class="score_row">
@@ -47,6 +48,7 @@
                 <td><c:out value="${item.end_turn}"/></td>
                 <td><c:out value="${item.end_date}"/></td>
                 <td><c:out value="${item.score}"/></td>
+                <td><c:out value="${item.total_score}"/></td>
               </tr>
             </c:forEach>
         <table>

@@ -265,7 +265,8 @@ function render_multipixel(grid, x, y, ocolor)
 function render_singlepixel(grid, x, y, ocolor)
 {
   if (x >= 0 && y >= 0 && x < (map['ysize'] * OVERVIEW_TILE_SIZE)
-      && y < (map['xsize'] * OVERVIEW_TILE_SIZE)) {
+      && y < (map['xsize'] * OVERVIEW_TILE_SIZE)
+      && grid[x] != null) {
     grid[x][y] = ocolor;
   }
 }

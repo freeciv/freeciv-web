@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.regex.Pattern;
 
 /**
  * Submit game results to Hall of Fame.
@@ -21,6 +22,8 @@ import java.sql.SQLException;
  */
 public class HallOfFamePost extends HttpServlet {
 
+    private String PATTERN_VALIDATE_ALPHA_NUMERIC = "[0-9a-zA-Z\\.]*";
+    private Pattern p = Pattern.compile(PATTERN_VALIDATE_ALPHA_NUMERIC);
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
@@ -37,6 +40,12 @@ public class HallOfFamePost extends HttpServlet {
         if (username == null || username.length() <= 2) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST,
                     "Invalid username. Please try again with another username.");
+            return;
+        }
+
+        if (!p.matcher(username).matches() || !p.matcher(score).matches() || !p.matcher(nation).matches() || !p.matcher(turn).matches()) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST,
+                    "Invalid data submitted. ");
             return;
         }
 

@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
  */
 public class HallOfFamePost extends HttpServlet {
 
-    private String PATTERN_VALIDATE_ALPHA_NUMERIC = "[0-9a-zA-Z\\.]*";
+    private String PATTERN_VALIDATE_ALPHA_NUMERIC = "[0-9a-zA-Z \\.]*";
     private Pattern p = Pattern.compile(PATTERN_VALIDATE_ALPHA_NUMERIC);
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)

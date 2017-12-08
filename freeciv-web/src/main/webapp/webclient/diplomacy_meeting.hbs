@@ -1,0 +1,44 @@
+{{#*inline "diplomacy_player_box"}}
+{{!--
+ box: "self"/"counterpart" for ids
+ player: {flag?, adjective, name, pid, clauses}
+ where clauses: (clause|{title, clauses:[clause]})*
+   and clause: {type, value, name}
+ }
+--}}
+<div id='diplomacy_player_box_{{box}}'>
+  {{#if player.flag}}
+  <img src='/images/flags/{{player.flag}}' id='flag_{{box}}'>
+  {{else}}
+  <canvas id='flag_{{box}}' width='58' height='40'></canvas>
+  {{/if}}
+  <div id='agree_{{box}}'></div>
+  <div style='float:left; width: 70%;'><h3>{{player.adjective}} {{player.name}}</h3></div>
+  <div id='{{box}}_dipl_div' >
+    <a tabindex='0' class='fg-button fg-button-icon-right ui-widget ui-state-default ui-corner-all' id='hierarchy_{{box}}'><span class='ui-icon ui-icon-triangle-1-s'></span>Add Clause...</a>
+    <span class='diplomacy_gold'>Gold:<input id='{{box}}_gold' type='number' step='1' size='3' value='0'></span>
+    <div id='{{box}}-items' class='hidden'>
+      <ul id='{{box}}_dipl_add'>{{#each player.clauses}}
+        {{#if this.title}}
+          <li><a href='#'>{{this.title}}</a>
+          <ul>{{#each this.clauses}}
+            <li><a href='#' onclick='create_clause_req({{../../player.pid}}, {{this.type}}, {{this.value}});'>{{this.name}}</a></li>
+          {{/each}}</ul>
+          </li>
+        {{else}}
+          <li><a href='#' onclick='create_clause_req({{../player.pid}}, {{this.type}}, {{this.value}});'>{{this.name}}</a></li>
+        {{/if}}
+      {{/each}}</ul>
+    </div>
+  </div>
+</div>
+{{/inline}}
+
+<div id='diplomacy_dialog'>
+  <div>
+    Treaty clauses:<br>
+    <div id='diplomacy_messages'></div>
+    {{> diplomacy_player_box box="self" player=self}}
+    {{> diplomacy_player_box box="counterpart" player=counterpart}}
+  </div>
+</div>

@@ -42,7 +42,6 @@ function diplomacy_init_meeting_req(counterpart)
   send_request(JSON.stringify(packet));
 }
 
-
 /**************************************************************************
  ...
 **************************************************************************/
@@ -65,7 +64,16 @@ function show_diplomacy_dialog(counterpart)
 {
  if (cardboard_vr_enabled) return;
  var pplayer = players[counterpart];
- create_diplomacy_dialog(pplayer);
+ $.ajax({
+   url: "/webclient/diplomacy_meeting.hbs?ts=" + ts,
+   dataType: "html",
+   cache: true,
+   async: false
+ }).fail(function() {
+   swal("Unable to load diplomacy meeting dialog template.");
+ }).done(function( data ) {
+   create_diplomacy_dialog(pplayer, Handlebars.compile(data));
+ });
 }
 
 /**************************************************************************
@@ -315,10 +323,8 @@ function diplomacy_cancel_treaty(player_id)
 /**************************************************************************
  ...
 **************************************************************************/
-function create_diplomacy_dialog(counterpart) {
-
+function create_diplomacy_dialog(counterpart, template) {
   var pplayer = client.conn.playing;
-  var city_id;
 
   // reset diplomacy_dialog div.
   $("#dialog").remove();
@@ -326,36 +332,10 @@ function create_diplomacy_dialog(counterpart) {
   $("#self-items").remove();
   $("#counterpart-items").remove();
   $(".positionHelper").remove();
-  $("<div id='diplomacy_dialog'></div>").appendTo("div#game_page");
-
-  $("#diplomacy_dialog").html(
-          "<div>Treaty clauses:<br><div id='diplomacy_messages'></div>"
-	  + "<div id='diplomacy_player_box_self'></div>"
-	  + "<div id='diplomacy_player_box_counterpart'></div>"
-	  + "</div>");
-
-  var self_nation = nations[pplayer['nation']];
-  var counterpart_nation = nations[counterpart['nation']];
-
-  var flag_self_html;
-  var flag_counterpart_html;
-  if (self_nation['customized'] || counterpart_nation['customized']) {
-    flag_self_html = "<canvas id='flag_self' width='58' height='40'></canvas>";
-    flag_counterpart_html = "<canvas id='flag_counterpart' width='58' height='40'></canvas>";
-  } else {
-    flag_self_html = "<img src='/images/flags/" + self_nation['graphic_str'] + "-web" + get_tileset_file_extention() + "' id='flag_self'>";
-    flag_counterpart_html = "<img src='/images/flags/" + counterpart_nation['graphic_str'] + "-web" + get_tileset_file_extention() + "' id='flag_counterpart'>";
-  }
-
-  var player_info_html = "<div style='float:left; width: 70%;'><h3>"
-		  			+ nations[pplayer['nation']]['adjective']
-		  			+ " " + pplayer['name'] + "</h3></div>";
-  var counterpart_info_html = "<div style='float:left; width: 70%;'><h3>"
-		  			      + nations[counterpart['nation']]['adjective']
-		                              + " " + counterpart['name'] + "</h3></div>";
-
-  var agree_self_html = "<div id='agree_self' style='float':right;></div>";
-  var agree_counterpart_html = "<div id='agree_counterpart' style='float:right;'></div>";
+  $("#game_page").append(template({
+    self: meeting_template_data(pplayer, counterpart),
+    counterpart: meeting_template_data(counterpart, pplayer)
+  }));
 
   var title = "Diplomacy: " + counterpart['name']
 		 + " of the " + nations[counterpart['nation']]['adjective'];
@@ -388,77 +368,14 @@ function create_diplomacy_dialog(counterpart) {
   $("#diplomacy_dialog").dialog('open');
   $(".ui-dialog").css("overflow", "visible");
 
-
-  $("#diplomacy_player_box_self").html(flag_self_html + agree_self_html
-		                       + player_info_html);
-  $("#diplomacy_player_box_counterpart").html(flag_counterpart_html + agree_counterpart_html
-		                               + counterpart_info_html);
-
-  if (self_nation['customized'] || counterpart_nation['customized']) {
-    var flag_canvas_self = document.getElementById('flag_self');
-    var flag_canvas_self_ctx = flag_canvas_self.getContext("2d");
-    var tag = "f." + self_nation['graphic_str'];
-    flag_canvas_self_ctx.scale(1.5, 1.5);
-    flag_canvas_self_ctx.drawImage(sprites[tag], 0, 0);
-
-    var flag_canvas_counterpart = document.getElementById('flag_counterpart');
-    var flag_canvas_counterpart_ctx = flag_canvas_counterpart.getContext("2d");
-    tag = "f." + counterpart_nation['graphic_str'];
-    flag_canvas_counterpart_ctx.scale(1.5, 1.5);
-    flag_canvas_counterpart_ctx.drawImage(sprites[tag], 0, 0);
+  var nation = nations[pplayer['nation']];
+  if (nation['customized']) {
+    meeting_paint_custom_flag(nation, document.getElementById('flag_self'));
   }
-
-  // Diplomacy menu for current player.
-  $("<div id='self_dipl_div' ></div>").appendTo("#diplomacy_player_box_self");
-
-  var fg_menu_self_html = "<a tabindex='0' class='fg-button fg-button-icon-right ui-widget ui-state-default ui-corner-all' id='hierarchy_self'>" +
-	  "<span class='ui-icon ui-icon-triangle-1-s'></span>Add Clause...</a> " +
-	  "<span class='diplomacy_gold'>Gold:<input id='self_gold' type='number' step='1' size='3' value='0'></span><div id='self-items' class='hidden'></div>";
-  $(fg_menu_self_html).appendTo("#self_dipl_div");
-
-
-  $("<ul id='self_dipl_add'></ul>").appendTo("#self-items");
-  $("<li><a href='#'>Maps...</a><ul id='self_maps'></ul></li>").appendTo("#self_dipl_add");
-  $("<li><a href='#' onclick='create_clause_req(" + pplayer['playerno']+ "," + CLAUSE_MAP + ",1);'>World-map</a></li>").appendTo("#self_maps");
-  $("<li><a href='#' onclick='create_clause_req(" + pplayer['playerno']+ "," + CLAUSE_SEAMAP + ",1);'>Sea-map</a></li>").appendTo("#self_maps");
-  $("<li id='self_adv_menu'><a href='#'>Advances...</a><ul id='self_advances'></ul></li>").appendTo("#self_dipl_add");
-  var tech_count_self = 0;
-  for (var tech_id in techs) {
-    if (player_invention_state(pplayer, tech_id) == TECH_KNOWN
-        // && player_invention_reachable(pother, i)
-        && (player_invention_state(counterpart, tech_id) == TECH_UNKNOWN
-            || player_invention_state(counterpart, tech_id) == TECH_PREREQS_KNOWN)) {
-      var ptech = techs[tech_id];
-      $("<li><a href='#' onclick='create_clause_req(" + pplayer['playerno']+ "," + CLAUSE_ADVANCE + "," + tech_id
-		      + ");'>" + ptech['name'] + "</a></li>").appendTo("#self_advances");
-      tech_count_self += 1;
-    }
+  nation = nations[counterpart['nation']];
+  if (nation['customized']) {
+    meeting_paint_custom_flag(nation, document.getElementById('flag_counterpart'));
   }
-  if (tech_count_self == 0) {
-    $("#self_adv_menu").hide();
-  }
-  var city_count_self = 0;
-  $("<li id='self_city_menu'><a href='#'>Cities...</a><ul id='self_cities'></ul></li>").appendTo("#self_dipl_add");
-  for (city_id in cities) {
-    var pcity = cities[city_id];
-    if (!does_city_have_improvement(pcity, "Palace") && city_owner(pcity) == pplayer) {
-      $("<li><a href='#' onclick='create_clause_req(" + pplayer['playerno']+ "," + CLAUSE_CITY + "," + city_id + ");'>" + decodeURIComponent(pcity['name']) + "</a></li>").appendTo("#self_cities");
-      city_count_self += 1;
-    }
-  }
-
-  if (city_count_self == 0 || is_longturn()) {
-    $("#self_city_menu").remove();
-  }
-
-  $("<li><a href='#' onclick='create_clause_req(" + pplayer['playerno']+ "," + CLAUSE_VISION + ",1);'>Give shared vision</a></li>").appendTo("#self_dipl_add");
-  $("<li><a href='#' onclick='create_clause_req(" + pplayer['playerno']+ "," + CLAUSE_EMBASSY + ",1);'>Give embassy</a></li>").appendTo("#self_dipl_add");
-  $("<li><a href='#'>Pacts...</a><ul id='self_pacts'></ul></li>").appendTo("#self_dipl_add");
-  $("<li><a href='#' onclick='create_clause_req(" + pplayer['playerno']+ "," + CLAUSE_CEASEFIRE + ",1);'>Cease-fire</a></li>").appendTo("#self_pacts");
-  $("<li><a href='#' onclick='create_clause_req(" + pplayer['playerno']+ "," + CLAUSE_PEACE + ",1);'>Peace</a></li>").appendTo("#self_pacts");
-  $("<li><a href='#' onclick='create_clause_req(" + pplayer['playerno']+ "," + CLAUSE_ALLIANCE + ",1);'>Alliance</a></li>").appendTo("#self_pacts");
-
-
 
   /* setup fg-menu */
   $('#hierarchy_self').fgmenu({
@@ -466,56 +383,6 @@ function create_diplomacy_dialog(counterpart) {
     flyOut: true
   });
 
-
-  // Counterpart menu.
-  $("<div id='counterpart_dipl_div'></div>").appendTo("#diplomacy_player_box_counterpart");
-
-  var fg_menu_counterpart_html = "<a tabindex='0' class='fg-button fg-button-icon-right ui-widget ui-state-default ui-corner-all' id='hierarchy_counterpart'>" +
-	  "<span class='ui-icon ui-icon-triangle-1-s'></span>Add Clause...</a> " +
-	  "<span class='diplomacy_gold'>Gold:<input id='counterpart_gold' type='number' step='1' size='3' value='0'></span><div id='counterpart-items' class='hidden'> </div>";
-  $(fg_menu_counterpart_html).appendTo("#counterpart_dipl_div");
-
-
-  $("<ul id='counterpart_dipl_add'></ul>").appendTo("#counterpart-items");
-  $("<li><a href='#'>Maps...</a><ul id='counterpart_maps'></ul></li>").appendTo("#counterpart_dipl_add");
-
-  $("<li><a href='#' onclick='create_clause_req(" + counterpart['playerno']+ "," + CLAUSE_MAP + ",1);'>World-map</a></li>").appendTo("#counterpart_maps");
-  $("<li><a href='#' onclick='create_clause_req(" + counterpart['playerno']+ "," + CLAUSE_SEAMAP + ",1);'>Sea-map</a></li>").appendTo("#counterpart_maps");
-  $("<li id='counterpart_adv_menu'><a href='#'>Advances...</a><ul id='counterpart_advances'></ul></li>").appendTo("#counterpart_dipl_add");
-  var tech_count_counterpart = 0;
-  for (var tech_id in techs) {
-    if (player_invention_state(counterpart, tech_id) == TECH_KNOWN
-        // && player_invention_reachable(pother, i)
-        && (player_invention_state(pplayer, tech_id) == TECH_UNKNOWN
-            || player_invention_state(pplayer, tech_id) == TECH_PREREQS_KNOWN)) {
-      var ptech = techs[tech_id];
-      $("<li><a href='#' onclick='create_clause_req(" + counterpart['playerno']+ "," + CLAUSE_ADVANCE + "," + tech_id
-		      + ");'>" + ptech['name'] + "</a></li>").appendTo("#counterpart_advances");
-      tech_count_counterpart += 1;
-    }
-  }
-  if (tech_count_counterpart == 0) {
-    $("#counterpart_adv_menu").hide();
-  }
-  var city_count_counterpart = 0;
-  $("<li id='counterpart_city_menu'><a href='#'>Cities...</a><ul id='counterpart_cities'></ul></li>").appendTo("#counterpart_dipl_add");
-  for (city_id in cities) {
-    var pcity = cities[city_id];
-    if (!does_city_have_improvement(pcity, "Palace") && city_owner(pcity) == counterpart) {
-      $("<li><a href='#' onclick='create_clause_req(" + counterpart['playerno']+ "," + CLAUSE_CITY + "," + city_id + ");'>" + decodeURIComponent(pcity['name']) + "</a></li>").appendTo("#counterpart_cities");
-      city_count_counterpart += 1;
-    }
-  }
-
-  if (city_count_counterpart == 0 || is_longturn()) {
-    $("#counterpart_city_menu").remove();
-  }
-
-  $("<li><a href='#' onclick='create_clause_req(" + counterpart['playerno']+ "," + CLAUSE_VISION + ",1);'>Give shared vision</a></li>").appendTo("#counterpart_dipl_add");
-  $("<li><a href='#' onclick='create_clause_req(" + counterpart['playerno']+ "," + CLAUSE_EMBASSY + ",1);'>Give embassy</a></li>").appendTo("#counterpart_dipl_add");
-
-
-  /* setup fg-menu */
   $('#hierarchy_counterpart').fgmenu({
     content: $('#counterpart-items').html(),
     flyOut: true
@@ -587,6 +454,88 @@ function create_diplomacy_dialog(counterpart) {
    });
 
   $("#diplomacy_dialog").parent().css("z-index", 1000);
+}
 
+function meeting_paint_custom_flag(nation, flag_canvas)
+{
+  var tag = "f." + nation['graphic_str'];
+  var flag_canvas_ctx = flag_canvas.getContext("2d");
+  flag_canvas_ctx.scale(1.5, 1.5);
+  flag_canvas_ctx.drawImage(sprites[tag], 0, 0);
+}
+
+/**************************************************************************
+ Build data object for the dialog template.
+**************************************************************************/
+function meeting_template_data(giver, taker)
+{
+  var data = {};
+  var nation = nations[giver['nation']];
+
+  if (!nation['customized']) {
+    data.flag = nation['graphic_str'] + "-web" + get_tileset_file_extention();
+  }
+
+  data.adjective = nation['adjective'];
+  data.name = giver['name'];
+  data.pid = giver['playerno'];
+
+  var all_clauses = [];
+
+  var clauses = [];
+  clauses.push({type: CLAUSE_MAP, value: 1, name: 'World-map'});
+  clauses.push({type: CLAUSE_SEAMAP, value: 1, name: 'Sea-map'});
+  all_clauses.push({title: 'Maps...', clauses: clauses});
+
+  clauses = [];
+  for (var tech_id in techs) {
+    if (player_invention_state(giver, tech_id) == TECH_KNOWN
+        && (player_invention_state(taker, tech_id) == TECH_UNKNOWN
+            || player_invention_state(taker, tech_id) == TECH_PREREQS_KNOWN)) {
+      var ptech = techs[tech_id];
+      clauses.push({
+        type: CLAUSE_ADVANCE,
+        value: tech_id,
+        name: techs[tech_id]['name']
+      });
+    }
+  }
+  if (clauses.length > 0) {
+    all_clauses.push({title: 'Advances...', clauses: clauses});
+  }
+
+  clauses = [];
+  for (var city_id in cities) {
+    var pcity = cities[city_id];
+    if (city_owner(pcity) == giver
+        && !does_city_have_improvement(pcity, "Palace")) {
+      clauses.push({
+        type: CLAUSE_CITY,
+        value: city_id,
+        name: decodeURIComponent(pcity['name'])
+      });
+    }
+  }
+  if (clauses.length > 0) {
+    all_clauses.push({title: 'Cities...', clauses: clauses});
+  }
+
+  all_clauses.push({type: CLAUSE_VISION, value: 1, name: 'Give shared vision'});
+  all_clauses.push({type: CLAUSE_EMBASSY, value: 1, name: 'Give embassy'});
+
+  if (giver == client.conn.playing) {
+    all_clauses.push({
+      title: 'Pacts...',
+      clauses: [
+        {type: CLAUSE_CEASEFIRE, value: 1, name: 'Cease-fire'},
+        {type: CLAUSE_PEACE, value: 1, name: 'Peace'},
+        {type: CLAUSE_ALLIANCE, value: 1, name: 'Alliance'}
+      ]
+    });
+  }
+
+  data.clauses = all_clauses;
+
+  return data;
 }
 

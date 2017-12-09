@@ -354,7 +354,7 @@ function update_metamessage_on_gamestart()
     }
   }
   if ($.getUrlVar('action') == "multi" && client.conn.playing != null
-      && client.conn.playing['pid'] == players[0]['pid']) {
+      && client.conn.playing['pid'] == players[0]['pid'] && !is_longturn()) {
     $.post("/freeciv_time_played_stats?type=multi").fail(function() {});
   }
   if ($.getUrlVar('action') == "hotseat") {

@@ -25,6 +25,7 @@ var replay_gif;
 **************************************************************************/
 function init_replay()
 {
+  if (is_small_screen()) replay_enabled = false;
   if (!replay_enabled) return;
 
   replay_gif = new GIF({

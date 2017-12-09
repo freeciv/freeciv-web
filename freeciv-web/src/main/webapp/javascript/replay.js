@@ -45,7 +45,9 @@ function add_replay_frame()
 {
   if (!replay_enabled) return;
 
-  replay_gif.addFrame(document.getElementById("overview_map"), {delay: 1000, copy: true});
+  if ($("#overview_map").length > 0 && $("#overview_map").width() > 0 && $("#overview_map").height() > 0) {
+    replay_gif.addFrame(document.getElementById("overview_map"), {delay: 1000, copy: true});
+  }
 
 }
 

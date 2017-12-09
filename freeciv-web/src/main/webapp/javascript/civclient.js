@@ -103,6 +103,7 @@ function civclient_init()
   game_init();
   control_init();
   init_city_dialog();
+  init_replay();
 
   timeoutTimerId = setInterval(update_timeout, 1000);
 

@@ -141,7 +141,7 @@ function control_init()
 
   /* disable right clicks. */
   window.addEventListener('contextmenu', function (e) {
-    if (e.target != null && e.target.parent != null && (e.target.id == 'game_text_input' || e.target.id == 'overview_map' || e.target.parent.id == 'game_message_area')) return;
+    if (e.target != null && (e.target.id == 'game_text_input' || e.target.id == 'overview_map' || e.target.id == 'replay_result' || (e.target.parent != null && e.target.parent.id == 'game_message_area'))) return;
     if (!allow_right_click) e.preventDefault();
   }, false);
 

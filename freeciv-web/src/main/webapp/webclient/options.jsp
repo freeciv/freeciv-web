@@ -12,9 +12,25 @@
 </div>
 
 <div class="main_menu_buttons">
-  <button id="switch_renderer_button" type="button" class="button setting_button" onClick="switch_renderer();"></button>
-  <br>
-  <div id="renderer_help" style="font-size: 70%; max-width: 450px;"></div>
+<table>
+<tr>
+  <td>
+    <button id="switch_renderer_button" type="button" class="button setting_button" onClick="switch_renderer();"></button>
+  </td>
+  <td>
+    <div id="renderer_help" style="font-size: 85%; max-width: 450px;"></div>
+  </td>
+</tr>
+<tr>
+  <td>
+    <button id="replay_button" type="button" class="button setting_button" onClick="show_replay();">Show game replay</button>
+  </td>
+  <td>
+    Show game replay
+  </td>
+</tr>
+</table>
+
 </div>
 
 

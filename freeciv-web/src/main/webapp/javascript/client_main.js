@@ -310,6 +310,9 @@ function show_endgame_dialog()
                 "Submit game to Hall of Fame" : function() {
                   submit_game_to_hall_of_fame();
                 },
+                "Game replay" : function() {
+                  show_replay();
+                },
 				"Show Scores" : function() {
 					$("#dialog").dialog('close');
 					view_game_scores();

@@ -227,6 +227,7 @@
 									<jsSourceExclude>libs/hammer.min.js</jsSourceExclude>
 									<jsSourceExclude>tileset_config*</jsSourceExclude>
 									<jsSourceExclude>tileset_spec*</jsSourceExclude>
+									<jsSourceExclude>libs/gif.worker.js</jsSourceExclude>
 								</jsSourceExcludes>
 								<jsEngine>CLOSURE</jsEngine>
 								<closureCreateSourceMap>true</closureCreateSourceMap>

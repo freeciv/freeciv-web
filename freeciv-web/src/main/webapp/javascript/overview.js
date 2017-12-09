@@ -155,7 +155,7 @@ function generate_overview_grid(cols, rows) {
     }
   }
 
-  render_viewrect(grid);
+  //render_viewrect(grid);  TODO: This has been disabled temporarily, since it looks ugly on the game replay.
 
   return grid;
 }

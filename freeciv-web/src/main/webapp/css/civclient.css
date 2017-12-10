@@ -520,6 +520,10 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
   width: 40px;
 }
 
+#agree_self {
+  float: left;
+}
+
 #agree_counterpart {
   float: right;
 }

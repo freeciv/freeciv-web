@@ -504,20 +504,22 @@ function meeting_template_data(giver, taker)
     all_clauses.push({title: 'Advances...', clauses: clauses});
   }
 
-  clauses = [];
-  for (var city_id in cities) {
-    var pcity = cities[city_id];
-    if (city_owner(pcity) == giver
-        && !does_city_have_improvement(pcity, "Palace")) {
-      clauses.push({
-        type: CLAUSE_CITY,
-        value: city_id,
-        name: decodeURIComponent(pcity['name'])
-      });
+  if (!is_longturn()) {
+    clauses = [];
+    for (var city_id in cities) {
+      var pcity = cities[city_id];
+      if (city_owner(pcity) == giver
+          && !does_city_have_improvement(pcity, "Palace")) {
+        clauses.push({
+          type: CLAUSE_CITY,
+          value: city_id,
+          name: decodeURIComponent(pcity['name'])
+        });
+      }
     }
-  }
-  if (clauses.length > 0) {
-    all_clauses.push({title: 'Cities...', clauses: clauses});
+    if (clauses.length > 0) {
+      all_clauses.push({title: 'Cities...', clauses: clauses});
+    }
   }
 
   all_clauses.push({type: CLAUSE_VISION, value: 1, name: 'Give shared vision'});

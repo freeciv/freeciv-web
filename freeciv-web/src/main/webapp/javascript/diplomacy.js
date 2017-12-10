@@ -435,12 +435,8 @@ function meeting_gold_change_req(giver, gold)
     for (var i = 0; i < clauses.length; i++) {
       var clause = clauses[i];
       if (clause['giver'] == giver && clause['type'] == CLAUSE_GOLD) {
-        var packet = {"pid" : packet_diplomacy_remove_clause_req,
-                      "counterpart" : active_diplomacy_meeting_id,
-                      "giver": clause['giver'],
-                      "type" : CLAUSE_GOLD,
-                      "value": clause['value']};
-        send_request(JSON.stringify(packet));
+        if (clause['value'] == gold) return;
+        remove_clause_req(i);
       }
     }
   }

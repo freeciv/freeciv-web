@@ -403,14 +403,15 @@ function create_diplomacy_dialog(counterpart, template) {
     clearTimeout(wto);
     wto = setTimeout(function() {
       meeting_gold_change_req(counterpart['playerno'],
-                              $("#counterpart_gold").val());
+                              parseFloat($("#counterpart_gold").val()));
     }, 500);
   });
 
    $("#self_gold").change(function() {
     clearTimeout(wto);
     wto = setTimeout(function() {
-      meeting_gold_change_req(pplayer['playerno'], $("#self_gold").val());
+      meeting_gold_change_req(pplayer['playerno'],
+                              parseFloat($("#self_gold").val()));
     }, 500);
    });
 
@@ -441,12 +442,14 @@ function meeting_gold_change_req(giver, gold)
     }
   }
 
-  var packet = {"pid" : packet_diplomacy_create_clause_req,
-                "counterpart" : active_diplomacy_meeting_id,
-                "giver" : giver,
-                "type" : CLAUSE_GOLD,
-                "value" : parseFloat(gold)};
-  send_request(JSON.stringify(packet));
+  if (gold != 0) {
+    var packet = {"pid" : packet_diplomacy_create_clause_req,
+                  "counterpart" : active_diplomacy_meeting_id,
+                  "giver" : giver,
+                  "type" : CLAUSE_GOLD,
+                  "value" : gold};
+    send_request(JSON.stringify(packet));
+  }
 }
 
 /**************************************************************************

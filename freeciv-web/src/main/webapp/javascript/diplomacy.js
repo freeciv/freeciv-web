@@ -388,32 +388,38 @@ function create_diplomacy_dialog(counterpart, template) {
     flyOut: true
   });
 
-  $("#self_gold").attr({
+  if (game_info.trading_gold) {
+    $("#self_gold").attr({
        "max" : pplayer['gold'],
        "min" : 0
     });
 
-  $("#counterpart_gold").attr({
+    $("#counterpart_gold").attr({
        "max" : counterpart['gold'],
        "min" : 0
     });
 
-  var wto;
-  $("#counterpart_gold").change(function() {
-    clearTimeout(wto);
-    wto = setTimeout(function() {
-      meeting_gold_change_req(counterpart['playerno'],
-                              parseFloat($("#counterpart_gold").val()));
-    }, 500);
-  });
+    var wto;
+    $("#counterpart_gold").change(function() {
+      clearTimeout(wto);
+      wto = setTimeout(function() {
+        meeting_gold_change_req(counterpart['playerno'],
+                                parseFloat($("#counterpart_gold").val()));
+      }, 500);
+    });
 
-   $("#self_gold").change(function() {
-    clearTimeout(wto);
-    wto = setTimeout(function() {
-      meeting_gold_change_req(pplayer['playerno'],
-                              parseFloat($("#self_gold").val()));
-    }, 500);
-   });
+    $("#self_gold").change(function() {
+      clearTimeout(wto);
+      wto = setTimeout(function() {
+        meeting_gold_change_req(pplayer['playerno'],
+                                parseFloat($("#self_gold").val()));
+      }, 500);
+    });
+
+  } else {
+    $("#self_gold").prop("disabled", true).parent().hide();
+    $("#counterpart_gold").prop("disabled", true).parent().hide();
+  }
 
   $("#diplomacy_dialog").parent().css("z-index", 1000);
 }
@@ -475,24 +481,26 @@ function meeting_template_data(giver, taker)
   clauses.push({type: CLAUSE_SEAMAP, value: 1, name: 'Sea-map'});
   all_clauses.push({title: 'Maps...', clauses: clauses});
 
-  clauses = [];
-  for (var tech_id in techs) {
-    if (player_invention_state(giver, tech_id) == TECH_KNOWN
-        && (player_invention_state(taker, tech_id) == TECH_UNKNOWN
-            || player_invention_state(taker, tech_id) == TECH_PREREQS_KNOWN)) {
-      var ptech = techs[tech_id];
-      clauses.push({
-        type: CLAUSE_ADVANCE,
-        value: tech_id,
-        name: techs[tech_id]['name']
-      });
+  if (game_info.trading_tech) {
+    clauses = [];
+    for (var tech_id in techs) {
+      if (player_invention_state(giver, tech_id) == TECH_KNOWN
+          && (player_invention_state(taker, tech_id) == TECH_UNKNOWN
+              || player_invention_state(taker, tech_id) == TECH_PREREQS_KNOWN)) {
+        var ptech = techs[tech_id];
+        clauses.push({
+          type: CLAUSE_ADVANCE,
+          value: tech_id,
+          name: techs[tech_id]['name']
+        });
+      }
+    }
+    if (clauses.length > 0) {
+      all_clauses.push({title: 'Advances...', clauses: clauses});
     }
   }
-  if (clauses.length > 0) {
-    all_clauses.push({title: 'Advances...', clauses: clauses});
-  }
 
-  if (!is_longturn()) {
+  if (game_info.trading_city && !is_longturn()) {
     clauses = [];
     for (var city_id in cities) {
       var pcity = cities[city_id];

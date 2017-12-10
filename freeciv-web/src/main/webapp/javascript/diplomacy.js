@@ -402,54 +402,15 @@ function create_diplomacy_dialog(counterpart, template) {
   $("#counterpart_gold").change(function() {
     clearTimeout(wto);
     wto = setTimeout(function() {
-    var clauses = diplomacy_clause_map[active_diplomacy_meeting_id];
-    if (clauses != null) {
-      for (var i = 0; i < clauses.length; i++) {
-        var clause = clauses[i];
-        if (clause['giver'] == counterpart['playerno'] && clause['type'] == CLAUSE_GOLD) {
-  	  var packet = {"pid" : packet_diplomacy_remove_clause_req,
-	                "counterpart" : active_diplomacy_meeting_id,
-                        "giver": clause['giver'],
-                        "type" : CLAUSE_GOLD,
-                        "value": clause['value']};
-           send_request(JSON.stringify(packet));
-         }
-       }
-     }
-
-     var packet = {"pid" : packet_diplomacy_create_clause_req,
-	           "counterpart" : active_diplomacy_meeting_id,
-                   "giver" : counterpart['playerno'],
-                   "type" : CLAUSE_GOLD,
-                   "value" : parseFloat($("#counterpart_gold").val())};
-     send_request(JSON.stringify(packet));
+      meeting_gold_change_req(counterpart['playerno'],
+                              $("#counterpart_gold").val());
     }, 500);
   });
 
    $("#self_gold").change(function() {
     clearTimeout(wto);
     wto = setTimeout(function() {
-    var clauses = diplomacy_clause_map[active_diplomacy_meeting_id];
-    if (clauses != null) {
-      for (var i = 0; i < clauses.length; i++) {
-        var clause = clauses[i];
-        if (clause['giver'] == pplayer['playerno'] && clause['type'] == CLAUSE_GOLD) {
-          var packet = {"pid" : packet_diplomacy_remove_clause_req,
-	                "counterpart" : active_diplomacy_meeting_id,
-                        "giver": clause['giver'],
-                        "type" : CLAUSE_GOLD,
-                        "value": clause['value']};
-         send_request(JSON.stringify(packet));
-        }
-      }
-     }
-
-     var packet = {"pid" : packet_diplomacy_create_clause_req,
-	           "counterpart" : active_diplomacy_meeting_id,
-                   "giver" : pplayer['playerno'],
-                   "type" : CLAUSE_GOLD,
-                   "value" : parseFloat($("#self_gold").val())};
-    send_request(JSON.stringify(packet));
+      meeting_gold_change_req(pplayer['playerno'], $("#self_gold").val());
     }, 500);
    });
 
@@ -462,6 +423,34 @@ function meeting_paint_custom_flag(nation, flag_canvas)
   var flag_canvas_ctx = flag_canvas.getContext("2d");
   flag_canvas_ctx.scale(1.5, 1.5);
   flag_canvas_ctx.drawImage(sprites[tag], 0, 0);
+}
+
+/**************************************************************************
+ Request update of gold clause
+**************************************************************************/
+function meeting_gold_change_req(giver, gold)
+{
+  var clauses = diplomacy_clause_map[active_diplomacy_meeting_id];
+  if (clauses != null) {
+    for (var i = 0; i < clauses.length; i++) {
+      var clause = clauses[i];
+      if (clause['giver'] == giver && clause['type'] == CLAUSE_GOLD) {
+        var packet = {"pid" : packet_diplomacy_remove_clause_req,
+                      "counterpart" : active_diplomacy_meeting_id,
+                      "giver": clause['giver'],
+                      "type" : CLAUSE_GOLD,
+                      "value": clause['value']};
+        send_request(JSON.stringify(packet));
+      }
+    }
+  }
+
+  var packet = {"pid" : packet_diplomacy_create_clause_req,
+                "counterpart" : active_diplomacy_meeting_id,
+                "giver" : giver,
+                "type" : CLAUSE_GOLD,
+                "value" : parseFloat(gold)};
+  send_request(JSON.stringify(packet));
 }
 
 /**************************************************************************

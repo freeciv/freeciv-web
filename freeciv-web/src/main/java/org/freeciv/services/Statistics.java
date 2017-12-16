@@ -122,7 +122,9 @@ public class Statistics {
 			while (rs.next()) {
 				Map<String, Object> item = new HashMap<>();
 				item.put("position", num);
-				item.put("username", rs.getString("username"));
+				String username = rs.getString("username");
+				if (username.length() >= 20) username = username.substring(0, 19)  + "..";
+				item.put("username", username);
 				item.put("nation", rs.getString("nation"));
 				item.put("score", rs.getString("score"));
 				item.put("end_turn", rs.getString("end_turn"));

@@ -17,10 +17,22 @@ index 05bc085..3167b3c 100644
      }
      img_destroy(pimg);
 diff --git a/server/srv_main.c b/server/srv_main.c
-index 665f116..a974fa8 100644
+index 665f116..3ae2dc3 100644
 --- a/server/srv_main.c
 +++ b/server/srv_main.c
-@@ -2870,6 +2870,20 @@ static void srv_scores(void)
+@@ -2667,7 +2667,10 @@ static void srv_running(void)
+           for (i = 0; i < mapimg_count(); i++) {
+             struct mapdef *pmapdef = mapimg_isvalid(i);
+             if (pmapdef != NULL) {
+-              mapimg_create(pmapdef, FALSE, game.server.save_name,
++              char imgfilename[128];
++              fc_snprintf(imgfilename, sizeof(imgfilename), "map-%d", srvarg.port);
++
++              mapimg_create(pmapdef, FALSE, imgfilename,
+                             srvarg.saves_pathname);
+             } else {
+               log_error("%s", mapimg_error());
+@@ -2870,6 +2873,20 @@ static void srv_scores(void)
       * the -q parameter. */
      save_game_auto("Game over", AS_GAME_OVER);
    }

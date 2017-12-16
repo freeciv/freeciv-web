@@ -72,7 +72,7 @@
                 <td><c:out value="${item.score}"/></td>
                 <td><c:out value="${item.total_score}"/></td>
                 <td>
-                    <c:if test="${item.id gt 37}">
+                    <c:if test="${item.id gt 40}">
                         <a href="/data/mapimgs/<c:out value="${item.id}"/>.gif">
                             <img src="/data/mapimgs/<c:out value="${item.id}"/>.gif" width="70" height="40">
                         </a>

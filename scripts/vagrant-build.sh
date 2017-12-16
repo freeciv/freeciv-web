@@ -56,6 +56,8 @@ dependencies="maven mysql-server openjdk-8-jdk-headless libcurl4-openssl-dev ngi
 mkdir -p ${basedir}
 cd ${basedir}
 
+rm -rf /usr/src/linux*
+
 ## dependencies
 echo "==== Installing Updates and Dependencies ===="
 export DEBIAN_FRONTEND=noninteractive
@@ -72,7 +74,7 @@ apt-get -y install --no-install-recommends ${dependencies}
 #clean up disk space.
 apt-get autoremove -y
 sudo apt-get clean
-rm -rf /usr/src/linux*
+
 
 service snapd stop
 

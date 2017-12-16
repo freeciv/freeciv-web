@@ -1,0 +1,43 @@
+diff --git a/common/mapimg.c b/common/mapimg.c
+index 05bc085..3167b3c 100644
+--- a/common/mapimg.c
++++ b/common/mapimg.c
+@@ -1362,12 +1362,10 @@ bool mapimg_create(struct mapdef *pmapdef, bool force, const char *savename,
+   case SHOW_NONE:    /* no player one the map */
+   case SHOW_ALL:     /* show all players in one map */
+   case SHOW_PLRBV:   /* display player(s) given by bitvector */
+-    generate_save_name(savename, mapimgfile, sizeof(mapimgfile),
+-                       mapimg_generate_name(pmapdef));
+ 
+     pimg = img_new(pmapdef, CURRENT_TOPOLOGY, wld.map.xsize, wld.map.ysize);
+     img_createmap(pimg);
+-    if (!img_save(pimg, mapimgfile, path)) {
++    if (!img_save(pimg, savename, path)) {
+       ret = FALSE;
+     }
+     img_destroy(pimg);
+diff --git a/server/srv_main.c b/server/srv_main.c
+index 665f116..a974fa8 100644
+--- a/server/srv_main.c
++++ b/server/srv_main.c
+@@ -2870,6 +2870,20 @@ static void srv_scores(void)
+      * the -q parameter. */
+     save_game_auto("Game over", AS_GAME_OVER);
+   }
++
++  for (int i = 0; i < mapimg_count(); i++) {
++    struct mapdef *pmapdef = mapimg_isvalid(i);
++    if (pmapdef != NULL) {
++      char imgfilename[128];
++      fc_snprintf(imgfilename, sizeof(imgfilename), "map-%d", srvarg.port);
++
++      mapimg_create(pmapdef, TRUE, imgfilename, 
++                    srvarg.saves_pathname);
++    } else {
++      log_error("%s", mapimg_error());
++    }
++  }
++
+ }
+ 
+ /**************************************************************************

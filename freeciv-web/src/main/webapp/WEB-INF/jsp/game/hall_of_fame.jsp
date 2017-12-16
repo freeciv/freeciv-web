@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+
 <%@ include file="/WEB-INF/jsp/fragments/i18n.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -58,6 +60,7 @@
                 <th>End date:</td>
                 <th>Score:</td>
                 <th>Total Score:</td>
+                <th>Map:</td>
               </tr>
             <c:forEach items="${data}" var="item">
               <tr class="score_row">
@@ -68,6 +71,13 @@
                 <td><c:out value="${item.end_date}"/></td>
                 <td><c:out value="${item.score}"/></td>
                 <td><c:out value="${item.total_score}"/></td>
+                <td>
+                    <c:if test="${item.id gt 37}">
+                        <a href="/data/mapimgs/<c:out value="${item.id}"/>.gif">
+                            <img src="/data/mapimgs/<c:out value="${item.id}"/>.gif" width="70" height="40">
+                        </a>
+                    </c:if>
+                </td>
               </tr>
             </c:forEach>
         <table>

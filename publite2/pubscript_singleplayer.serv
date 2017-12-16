@@ -1,3 +1,4 @@
+/mapimg define 'zoom=2:map=tcub:turns=0:format=png'
 cmdlevel ctrl first
 set topology WRAPX
 set nationset all

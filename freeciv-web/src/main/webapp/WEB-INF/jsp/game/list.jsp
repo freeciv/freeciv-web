@@ -187,7 +187,7 @@
 									</td>
 									<td class="hidden-xs">
 									    <a href="/data/savegames/map-${game.port}.map.gif">
-									        <img src="/data/savegames/map-${game.port}.map.gif" width="100" height="60">
+									        <img src="/data/savegames/map-${game.port}.map.gif" width="80" height="50">
 									    </a>
 									</td>
 									<td>${game.player}</td>

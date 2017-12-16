@@ -14,8 +14,8 @@
 <script src="/javascript/libs/morris.min.js"></script>
 <style>
 	table, th, td {
-        padding: 5px;
-        font-size: 135%;
+        padding: 4px;
+        font-size: 130%;
         text-transform: capitalize;
     }
 

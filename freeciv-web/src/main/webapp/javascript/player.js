@@ -145,7 +145,7 @@ function get_diplstate_text(state_id)
   } else if (DS_ALLIANCE == state_id) {
     return "Alliance";
   } else if (DS_NO_CONTACT == state_id) {
-    return "No contact";
+    return "None";
   } else if (DS_TEAM == state_id) {
     return "Team";
   } else {
@@ -169,7 +169,7 @@ function get_embassy_text(player_id)
   } else if (pplayer.real_embassy[client.conn.playing['playerno']]) {
     return "They have embassy";
   } else {
-    return "No embassy"
+    return "None"
   }
 
 }

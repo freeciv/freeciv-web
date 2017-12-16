@@ -56,7 +56,7 @@ function update_nation_screen()
            + "; margin: 5px; width: 25px; height: 25px;'>"
            + "</div></td>";
 
-    nation_list_html += "<td>" + pplayer['name'] + "</td><td>"
+    nation_list_html += "<td>" + pplayer['name'] + "</td><td title=\"" + nations[pplayer['nation']]['legend'] + "\">"
            + nations[pplayer['nation']]['adjective']  + "</td>"
        + "<td class='nation_attitude'>" + col_love(pplayer) + "</td>"
        + "<td>" + get_score_text(pplayer) + "</td>"
@@ -81,12 +81,12 @@ function update_nation_screen()
       } else if (client.conn.playing['gives_shared_vision'].isSet(player_id)) {
         nation_list_html += "To them"
       } else {
-        nation_list_html += "-"
+        nation_list_html += "None"
       }
     }
     nation_list_html += "</td>"
 
-    nation_list_html += "<td class='nation_team'>Team " + (pplayer['team'] + 1) + "</td>";
+    nation_list_html += "<td class='nation_team'>" + (pplayer['team'] + 1) + "</td>";
     var pstate = " ";
     if (pplayer['phase_done'] && !pplayer['flags'].isSet(PLRF_AI)) {
       pstate = "Done";
@@ -176,6 +176,8 @@ function update_nation_screen()
 
   if (is_longturn()) $(".nation_attitude").hide();
   if (is_longturn()) $(".nation_team").hide();
+
+  $("#nation_table").tooltip();
 
 }
 

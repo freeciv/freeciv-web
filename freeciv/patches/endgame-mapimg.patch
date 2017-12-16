@@ -24,8 +24,8 @@ index 665f116..a974fa8 100644
       * the -q parameter. */
      save_game_auto("Game over", AS_GAME_OVER);
    }
-+
-+  for (int i = 0; i < mapimg_count(); i++) {
++  int i = 0;
++  for (i = 0; i < mapimg_count(); i++) {
 +    struct mapdef *pmapdef = mapimg_isvalid(i);
 +    if (pmapdef != NULL) {
 +      char imgfilename[128];

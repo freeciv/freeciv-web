@@ -190,7 +190,7 @@
 									        <img src="/data/savegames/map-${game.port}.map.gif" width="80" height="50">
 									    </a>
 									</td>
-									<td>${game.player}</td>
+									<td><b>${game.player}</b></td>
 									<td class="hidden-xs">${game.message}</td>
 									<td class="hidden-xs">${game.players}</td>
 									<td class="hidden-xs">${game.turn}</td>

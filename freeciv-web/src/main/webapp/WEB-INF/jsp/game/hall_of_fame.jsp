@@ -49,6 +49,7 @@
      			<div class="col-md-12">
 
 		<h1>Hall Of Fame</h1>
+		These are the greatest players of Freeciv-web! Each row shows the result of one game.
         <br>
 
         <table style="width: 100%;">
@@ -58,8 +59,8 @@
                 <th>Nation:</td>
                 <th>End turn:</td>
                 <th>End date:</td>
+                <th title="Score of this player in all games">Score (all):</td>
                 <th title="Score of this player in this game">Score:</td>
-                <th title="Score of this player in all games">Total Score:</td>
                 <th>Map:</td>
               </tr>
             <c:forEach items="${data}" var="item">
@@ -69,8 +70,8 @@
                 <td title="Nation"><c:out value="${item.nation}"/></td>
                 <td style="text-align: right;" title="Turn when the game ended"><c:out value="${item.end_turn}"/></td>
                 <td title="Date when the game ended"><c:out value="${item.end_date}"/></td>
-                <td style="text-align: right;" title="Score of this player in this game"><c:out value="${item.score}"/></td>
                 <td style="text-align: right;" title="Score of this player in all games"><c:out value="${item.total_score}"/></td>
+                <td style="text-align: right;" title="Score of this player in this game"><c:out value="${item.score}"/></td>
                 <td>
                     <c:if test="${item.id gt 47}">
                         <a href="/data/mapimgs/<c:out value="${item.id}"/>.gif">

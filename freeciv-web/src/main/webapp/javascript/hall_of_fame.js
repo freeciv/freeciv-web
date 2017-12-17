@@ -33,7 +33,7 @@ function submit_game_to_hall_of_fame()
   var pplayer = client.conn.playing;
   var pnation = nations[pplayer['nation']];
 
-  if (game_info['turn'] < 20) {
+  if (game_info['turn'] < 20 || get_score_text(pplayer) == 0) {
     swal("Not enough turns have been played to be able to submit to the Hall of Fame.");
     return;
   }

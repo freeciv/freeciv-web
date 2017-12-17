@@ -24,8 +24,7 @@ var submitted_to_hof = false;
 **************************************************************************/
 function submit_game_to_hall_of_fame()
 {
-  if (client_is_observer() || client.conn.playing == null || submitted_to_hof) {
-    swal("Unable to submit to Hall of Fame!");
+  if (client_is_observer() || client.conn.playing == null || submitted_to_hof || is_longturn() || $.getUrlVar('action') == "multi") {
     return;
   }
   submitted_to_hof = true;
@@ -33,8 +32,7 @@ function submit_game_to_hall_of_fame()
   var pplayer = client.conn.playing;
   var pnation = nations[pplayer['nation']];
 
-  if (game_info['turn'] < 20 || get_score_text(pplayer) == 0) {
-    swal("Not enough turns have been played to be able to submit to the Hall of Fame.");
+  if (game_info['turn'] < 30 || get_score_text(pplayer) == 0) {
     return;
   }
 
@@ -43,7 +41,7 @@ function submit_game_to_hall_of_fame()
    url: "/hall_of_fame_post?username=" + username + "&nation=" + nations[pplayer['nation']]['adjective'] + "&score=" + get_score_text(pplayer)
          + "&turn=" + game_info['turn'] + "&port=" + civserverport  ,
    success: function(data, textStatus, request){
-       $("#dialog").html("Game submitted to Hall of Fame! See it <a href='/hall_of_fame' target='_new'>here</a>.");
+       $("#hof_msg").html("Game submitted to Hall of Fame! See it <a href='/hall_of_fame' target='_new'>here</a>.");
    }
 
    }).fail(function() {

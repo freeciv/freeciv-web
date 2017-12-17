@@ -288,7 +288,7 @@ function alert_war(player_no)
 function show_endgame_dialog()
 {
   var title = "Final Report: The Greatest Civilizations in the world!";
-  var message = "";
+  var message = "<p id='hof_msg'></p>";
   for (var i = 0; i < endgame_player_info.length; i++) {
     var pplayer = players[endgame_player_info[i]['player_id']];
     var nation_adj = nations[pplayer['nation']]['adjective'];
@@ -307,9 +307,6 @@ function show_endgame_dialog()
 			modal: true,
 			width: is_small_screen() ? "90%" : "50%",
 			buttons: {
-                "Submit game to Hall of Fame" : function() {
-                  submit_game_to_hall_of_fame();
-                },
                 "Game replay" : function() {
                   show_replay();
                 },
@@ -327,6 +324,8 @@ function show_endgame_dialog()
   $("#dialog").dialog('open');
   $("#game_text_input").blur();
   $("#dialog").css("max-height", "500px");
+
+  setTimeout(submit_game_to_hall_of_fame, 1000);
 
 }
 

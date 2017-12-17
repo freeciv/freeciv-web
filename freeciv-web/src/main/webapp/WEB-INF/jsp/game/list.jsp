@@ -182,7 +182,7 @@
 								<tr class="${game.isProtected() ? '.private-game' : '' }">
 									<td>
 										<c:if test="${game.flag ne 'none'}">
-											<img src="/images/flags/${game.flag}-web.png" alt="${game.flag}" width="50" title="${game.turn}">
+											<img src="/images/flags/${game.flag}-web.png" alt="${game.flag}" width="80" height="50" title="${game.turn}">
 										</c:if>
 									</td>
 									<td class="hidden-xs">

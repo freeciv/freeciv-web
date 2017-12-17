@@ -67,10 +67,10 @@
                 <td><c:out value="${item.position}"/></td>
                 <td><c:out value="${item.username}"/></td>
                 <td><c:out value="${item.nation}"/></td>
-                <td><c:out value="${item.end_turn}"/></td>
+                <td style="text-align: right;"><c:out value="${item.end_turn}"/></td>
                 <td><c:out value="${item.end_date}"/></td>
-                <td><c:out value="${item.score}"/></td>
-                <td><c:out value="${item.total_score}"/></td>
+                <td style="text-align: right;"><c:out value="${item.score}"/></td>
+                <td style="text-align: right;"><c:out value="${item.total_score}"/></td>
                 <td>
                     <c:if test="${item.id gt 47}">
                         <a href="/data/mapimgs/<c:out value="${item.id}"/>.gif">

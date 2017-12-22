@@ -10,9 +10,9 @@ MAINTAINER The Freeciv Project version: 2.5
 RUN export DEBIAN_FRONTEND=noninteractive && apt-get update && apt-get -y upgrade && apt-get install -y locales locales-all
 ENV LC_ALL en_us.UTF-8
 ENV LANG en_US.UTF-8
+ENV DEBIAN_FRONTEND=noninteractive
 ENV LANGUAGE en_US:en
 
-ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update
 RUN apt-get install -y maven mysql-server openjdk-8-jdk  libcurl4-openssl-dev nginx libjansson-dev subversion pngcrush python3-pillow libtool automake autoconf autotools-dev python3.5-dev python3-setuptools libbz2-dev imagemagick python3-pip dos2unix liblzma-dev xvfb libicu-dev pkg-config zlib1g-dev wget curl libsdl1.2-dev ca-certificates-java libsqlite3-dev sudo git python-dev webp acl python3-mysql.connector
 
@@ -71,10 +71,13 @@ EXPOSE 8080
 RUN chmod +x /docker/scripts/docker-build.sh
 RUN chmod +x /docker/scripts/init_mysql_db.sh
 RUN /bin/bash /docker/scripts/init_mysql_db.sh
+
+RUN apt-get install -y libmagickwand-dev
 USER docker
 
 WORKDIR /docker/scripts/
 
 RUN sudo ./docker-build.sh 
 
-CMD ["./docker-run.sh"]
+#CMD ["./docker-run.sh"]
+CMD ["/bin/bash"]

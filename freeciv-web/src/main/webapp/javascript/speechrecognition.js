@@ -78,7 +78,6 @@ function speech_recogntition_handle_result(event)
         e.keyCode = 13;
         $(document).trigger(e);
 
-        accept_treaty_req();
         found = true;
         break;
 
@@ -88,7 +87,6 @@ function speech_recogntition_handle_result(event)
         e.keyCode = 27;
         $(document).trigger(e);
 
-        cancel_meeting_req();
         found = true;
         break;
 

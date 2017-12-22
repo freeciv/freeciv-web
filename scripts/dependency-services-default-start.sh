@@ -8,7 +8,7 @@
 
 
 export JAVA_OPTS="-Djava.security.egd=file:/dev/urandom"
-export CATALINA_HOME=/var/lib/tomcat8
+export CATALINA_HOME=/usr/local/tomcat
 
 # 1. nginx
 echo "Starting nginx first."
@@ -23,13 +23,13 @@ else
   sleep 1
 fi
 
+sudo service --status-all
 # 2. Tomcat
 echo "Starting up Tomcat" && \
-if service --status-all | grep -Fq 'tomcat8'; then
- sudo service tomcat8 start || echo "unable to start tomcat8 service"
+if sudo service --status-all | grep -Fq 'tomcat8'; then
+   sudo /usr/sbin/service tomcat8 start || echo "unable to start tomcat8 service"
 else
-  /var/lib/tomcat8/bin/catalina.sh start
-
+   sudo $CATALINA_HOME/bin/catalina.sh start
 fi
 
 # waiting for Tomcat to start, since it will take some time.

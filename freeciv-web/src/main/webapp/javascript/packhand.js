@@ -906,11 +906,12 @@ function handle_diplomacy_cancel_meeting(packet)
 
 function handle_diplomacy_create_clause(packet)
 {
-  if(diplomacy_clause_map[packet['counterpart']] == null) {
-    diplomacy_clause_map[packet['counterpart']] = [];
+  var counterpart_id = packet['counterpart'];
+  if(diplomacy_clause_map[counterpart_id] == null) {
+    diplomacy_clause_map[counterpart_id] = [];
   }
-  diplomacy_clause_map[packet['counterpart']].push(packet);
-  show_diplomacy_clauses();
+  diplomacy_clause_map[counterpart_id].push(packet);
+  show_diplomacy_clauses(counterpart_id);
 }
 
 function handle_diplomacy_remove_clause(packet)

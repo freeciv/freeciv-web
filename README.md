@@ -151,7 +151,7 @@ Answer prompt for docker sudo password with "docker"
 
 3. Connect to docker via host machine using standard browser
 
-http://localhost:8888/
+http://localhost/
 
 Enjoy. The overall dockerfile and required changes to scripts needs some further improvements.
 

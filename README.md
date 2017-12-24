@@ -147,6 +147,10 @@ docker build . -t freeciv-web
 
 docker run -i -t --user docker -p 8888:8080 -p 80:80 -p 7000:7000 -p 7001:7001 -p 7002:7002 -p 6000:6000 -p 6001:6001 -p 6002:6002 freeciv-web
 
+3. Run docker runner in docker bash
+
+./docker-run.sh
+
 Answer prompt for docker sudo password with "docker"
 
 3. Connect to docker via host machine using standard browser

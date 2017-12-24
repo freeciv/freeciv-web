@@ -23,7 +23,7 @@ echo logfile $logfile
 
 # User will need permissions to create a database
 mysql_user="root"
-mysql_pass="freeciv_docker"
+mysql_pass="vagrant"
 
 resin_version="4.0.44"
 resin_url="http://www.caucho.com/download/resin-${resin_version}.tar.gz"
@@ -60,7 +60,7 @@ service mysql start || cat /var/log/mysql/*.*
 
 # configuration files
 dos2unix ${basedir}/scripts/configuration.sh.dist
-sed -e "s/MYSQL_USER=root/MYSQL_USER=${mysql_user}/" -e "s/MYSQL_PASSWORD=freeciv_docker/MYSQL_PASSWORD=${mysql_pass}/" ${basedir}/scripts/configuration.sh.dist > ${basedir}/scripts/configuration.sh
+sed -e "s/MYSQL_USER=root/MYSQL_USER=${mysql_user}/" -e "s/MYSQL_PASSWORD=vagrant/MYSQL_PASSWORD=${mysql_pass}/" ${basedir}/scripts/configuration.sh.dist > ${basedir}/scripts/configuration.sh
 cp ${basedir}/publite2/settings.ini.dist ${basedir}/publite2/settings.ini
 
 echo "==== Building freeciv ===="

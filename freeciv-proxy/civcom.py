@@ -142,6 +142,7 @@ class CivCom(Thread):
                 data.decode(
                     encoding="utf-8",
                     errors="ignore"))
+            logger.info("send to client: " + self.send_buffer[-1])
         except UnicodeDecodeError:
             if (logger.isEnabledFor(logging.ERROR)):
                 logger.error(
@@ -154,6 +155,7 @@ class CivCom(Thread):
         packet = self.get_client_result_string()
         if (packet is not None and self.civwebserver is not None):
             # Calls the write_message callback on the next Tornado I/O loop iteration (thread safely).
+            logger.info("send to client:" + packet)
             self.civwebserver.io_loop.add_callback(lambda: self.civwebserver.write_message(packet))
 
     def get_client_result_string(self):
@@ -180,6 +182,7 @@ class CivCom(Thread):
 
         try:
             for net_message in self.civserver_messages:
+                logger.info("send to serv:" + net_message)
                 utf8_encoded = net_message.encode('utf-8')
                 header = pack('>H', len(utf8_encoded) + 3)
                 self.socket.sendall(

@@ -2,7 +2,7 @@
 
 # Freeciv-web MySQL database
 MYSQL_USER=root
-MYSQL_PASSWORD=freeciv_docker
+MYSQL_PASSWORD=vagrant
 
 # Dependency service configuration
 DEPENDENCY_SERVICES_START="./dependency-services-default-start.sh"

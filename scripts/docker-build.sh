@@ -40,10 +40,6 @@ cd ${basedir}
 ## dependencies
 echo "==== Installing Updates and Dependencies ===="
 export DEBIAN_FRONTEND=noninteractive
-echo "mysql setup..."
-sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password ${mysql_pass}"
-sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again password ${mysql_pass}"
-
 
 echo "==== Fetching/Installing Tornado Web Server ===="
 cd /tmp

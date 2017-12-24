@@ -8,7 +8,7 @@
 
 
 export JAVA_OPTS="-Djava.security.egd=file:/dev/urandom"
-export CATALINA_HOME=/usr/local/tomcat
+export CATALINA_HOME=/var/lib/tomcat8
 
 # 1. nginx
 echo "Starting nginx first."

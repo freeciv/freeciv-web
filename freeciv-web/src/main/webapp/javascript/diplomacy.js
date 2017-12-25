@@ -93,7 +93,7 @@ function accept_treaty(counterpart, I_accepted, other_accepted)
 {
   if (active_diplomacy_meeting_id == counterpart
       && I_accepted == true && other_accepted == true) {
-    $("#diplomacy_dialog").remove(); //close the dialog.
+    $("#diplomacy_dialog_" + counterpart).remove(); //close the dialog.
 
     if (diplomacy_request_queue.indexOf(counterpart) >= 0) {
       diplomacy_request_queue.splice(diplomacy_request_queue.indexOf(counterpart), 1);
@@ -104,7 +104,7 @@ function accept_treaty(counterpart, I_accepted, other_accepted)
   var disagree_sprite = get_treaty_disagree_thumb_down();
 
 
-  var agree_self_html = "<div id='agreement' style='float:left; background: transparent url("
+  var agree_html = "<div style='float:left; background: transparent url("
            + agree_sprite['image-src']
            + "); background-position:-" + agree_sprite['tileset-x'] + "px -"
 	   + agree_sprite['tileset-y']
@@ -112,7 +112,7 @@ function accept_treaty(counterpart, I_accepted, other_accepted)
 	   + agree_sprite['height'] + "px; margin: 5px; '>"
            + "</div>";
 
-  var disagree_self_html = "<div id='agreement' style='float:left; background: transparent url("
+  var disagree_html = "<div style='float:left; background: transparent url("
            + disagree_sprite['image-src']
            + "); background-position:-" + disagree_sprite['tileset-x'] + "px -"
 	   + disagree_sprite['tileset-y']
@@ -120,15 +120,15 @@ function accept_treaty(counterpart, I_accepted, other_accepted)
 	   + disagree_sprite['height'] + "px; margin: 5px; '>"
            + "</div>";
     if (I_accepted == true) {
-      $("#agree_self").html(agree_self_html);
+      $("#agree_self_" + counterpart).html(agree_html);
     } else {
-      $("#agree_self").html(disagree_self_html);
+      $("#agree_self_" + counterpart).html(disagree_html);
     }
 
     if (other_accepted) {
-      $("#agree_counterpart").html(agree_self_html);
+      $("#agree_counterpart_" + counterpart).html(agree_html);
     } else {
-      $("#agree_counterpart").html(disagree_self_html);
+      $("#agree_counterpart_" + counterpart).html(disagree_html);
     }
   }
 
@@ -177,7 +177,7 @@ function create_clause_req(counterpart_id, giver, type, value)
 function cancel_meeting(counterpart)
 {
   if (active_diplomacy_meeting_id == counterpart) {
-    $("#diplomacy_dialog").remove(); //close the dialog.
+    $("#diplomacy_dialog_" + counterpart).remove(); //close the dialog.
     active_diplomacy_meeting_id = null;
   }
 
@@ -208,7 +208,7 @@ function show_diplomacy_clauses(counterpart_id)
 
     }
 
-    $("#diplomacy_messages").html(diplo_html);
+    $("#diplomacy_messages_" + counterpart_id).html(diplo_html);
   }
 
 }
@@ -278,9 +278,9 @@ function client_diplomacy_clause_string(counterpart, giver, type, value)
 
   case CLAUSE_GOLD:
     if (giver == client.conn.playing['playerno']) {
-      $("#self_gold").val(value);
+      $("#self_gold_" + counterpart).val(value);
     } else {
-      $("#counterpart_gold").val(value);
+      $("#counterpart_gold_" + counterpart).val(value);
     }
     return "The " + nation + " give " + value + " gold";
   case CLAUSE_MAP:
@@ -327,25 +327,25 @@ function diplomacy_cancel_treaty(player_id)
 **************************************************************************/
 function create_diplomacy_dialog(counterpart, template) {
   var pplayer = client.conn.playing;
+  var counterpart_id = counterpart['playerno'];
 
   // reset diplomacy_dialog div.
   $("#dialog").remove();
-  $("#diplomacy_dialog").remove();
-  $("#self-items").remove();
-  $("#counterpart-items").remove();
+  $("#diplomacy_dialog_" + counterpart_id).remove();
+  $("#self-items_" + counterpart_id).remove();
+  $("#counterpart-items_" + counterpart_id).remove();
   $(".positionHelper").remove();
   $("#game_page").append(template({
     self: meeting_template_data(pplayer, counterpart),
     counterpart: meeting_template_data(counterpart, pplayer)
   }));
 
-  var counterpart_id = counterpart['playerno'];
-
   var title = "Diplomacy: " + counterpart['name']
 		 + " of the " + nations[counterpart['nation']]['adjective'];
 
-  $("#diplomacy_dialog").attr("title", title);
-  $("#diplomacy_dialog").dialog({
+  var diplomacy_dialog = $("#diplomacy_dialog_" + counterpart_id);
+  diplomacy_dialog.attr("title", title);
+  diplomacy_dialog.dialog({
 			bgiframe: true,
 			modal: false,
 			width: is_small_screen() ? "90%" : "50%",
@@ -369,63 +369,63 @@ function create_diplomacy_dialog(counterpart, template) {
              "restore" : "ui-icon-bullet"
            }});
 
-  $("#diplomacy_dialog").dialog('open');
+  diplomacy_dialog.dialog('open');
   $(".ui-dialog").css("overflow", "visible");
 
   var nation = nations[pplayer['nation']];
   if (nation['customized']) {
-    meeting_paint_custom_flag(nation, document.getElementById('flag_self'));
+    meeting_paint_custom_flag(nation, document.getElementById('flag_self_' + counterpart_id));
   }
   nation = nations[counterpart['nation']];
   if (nation['customized']) {
-    meeting_paint_custom_flag(nation, document.getElementById('flag_counterpart'));
+    meeting_paint_custom_flag(nation, document.getElementById('flag_counterpart_' + counterpart_id));
   }
 
   /* setup fg-menu */
-  $('#hierarchy_self').fgmenu({
-    content: $('#self-items').html(),
+  $('#hierarchy_self_' + counterpart_id).fgmenu({
+    content: $('#self-items_' + counterpart_id).html(),
     flyOut: true
   });
 
-  $('#hierarchy_counterpart').fgmenu({
-    content: $('#counterpart-items').html(),
+  $('#hierarchy_counterpart_' + counterpart_id).fgmenu({
+    content: $('#counterpart-items_' + counterpart_id).html(),
     flyOut: true
   });
 
   if (game_info.trading_gold) {
-    $("#self_gold").attr({
+    $("#self_gold_" + counterpart_id).attr({
        "max" : pplayer['gold'],
        "min" : 0
     });
 
-    $("#counterpart_gold").attr({
+    $("#counterpart_gold_" + counterpart_id).attr({
        "max" : counterpart['gold'],
        "min" : 0
     });
 
     var wto;
-    $("#counterpart_gold").change(function() {
+    $("#counterpart_gold_" + counterpart_id).change(function() {
       clearTimeout(wto);
       wto = setTimeout(function() {
         meeting_gold_change_req(counterpart_id, counterpart_id,
-                                parseFloat($("#counterpart_gold").val()));
+                                parseFloat($("#counterpart_gold_" + counterpart_id).val()));
       }, 500);
     });
 
-    $("#self_gold").change(function() {
+    $("#self_gold_" + counterpart_id).change(function() {
       clearTimeout(wto);
       wto = setTimeout(function() {
         meeting_gold_change_req(counterpart_id, pplayer['playerno'],
-                                parseFloat($("#self_gold").val()));
+                                parseFloat($("#self_gold_" + counterpart_id).val()));
       }, 500);
     });
 
   } else {
-    $("#self_gold").prop("disabled", true).parent().hide();
-    $("#counterpart_gold").prop("disabled", true).parent().hide();
+    $("#self_gold_" + counterpart_id).prop("disabled", true).parent().hide();
+    $("#counterpart_gold_" + counterpart_id).prop("disabled", true).parent().hide();
   }
 
-  $("#diplomacy_dialog").parent().css("z-index", 1000);
+  diplomacy_dialog.parent().css("z-index", 1000);
 }
 
 function meeting_paint_custom_flag(nation, flag_canvas)

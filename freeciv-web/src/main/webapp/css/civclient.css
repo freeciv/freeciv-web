@@ -200,7 +200,7 @@ button {
   overflow: auto;
 }
 
-#diplomacy_messages {
+.diplomacy_messages {
   background: url("/images/bg-dark.jpg") repeat scroll 0 0 ; 
   min-height: 120px;
   max-height: 200px;
@@ -211,21 +211,15 @@ button {
   font-size: 130%;
 }
 
-#diplomacy_messages a {
+.diplomacy_messages a {
   color: white;
 }
 
-#diplomacy_dialog {
+.diplomacy_dialog {
   overflow: hidden;
 }
 
-#diplomacy_player_box_self {
-  width: 50%;
-  float: left;
-  text-align:center;
-}
-
-#diplomacy_player_box_counterpart {
+.diplomacy_player_box {
   width: 50%;
   float: left;
   text-align:center;
@@ -235,14 +229,7 @@ button {
   border: 1px #444444 solid;
 }
 
-#self_dipl_div {
-  float: left;
-  padding-left: 60px;
-  text-align: left;
-  z-index: 2000;
-}
-
-#counterpart_dipl_div {
+.dipl_div {
   float: left;
   padding-left: 60px;
   text-align: left;
@@ -363,11 +350,7 @@ button {
   position: static;
 }
 
-#counterpart_dipl_add {
-  z-index: 100;
-}
-
-#self_dipl_add {
+.dipl_add {
   z-index: 100;
 }
 
@@ -508,23 +491,17 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
   line-height: 14px;
 }
 
-#self_gold {
+.diplomacy_gold input {
   height: 15px;
   font-size: 14px;
   width: 40px;
 }
 
-#counterpart_gold {
-  height: 15px;
-  font-size: 14px;
-  width: 40px;
-}
-
-#agree_self {
+.agree_self {
   float: left;
 }
 
-#agree_counterpart {
+.agree_counterpart {
   float: right;
 }
 
@@ -831,12 +808,12 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
   background-image: url(/images/gov.monarchy.png) !important; 
 }
 
-#flag_self {
+.flag_self {
   float: left;
   width: 140px;
 }
 
-#flag_counterpart {
+.flag_counterpart {
   float: right;
   width: 140px;
 

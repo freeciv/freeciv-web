@@ -6,19 +6,19 @@
    and clause: {type, value, name}
  }
 --}}
-<div id='diplomacy_player_box_{{box}}'>
+<div class='diplomacy_player_box'>
   {{#if player.flag}}
-  <img src='/images/flags/{{player.flag}}' id='flag_{{box}}'>
+  <img src='/images/flags/{{player.flag}}' class='flag_{{box}}' id='flag_{{box}}_{{counterpart.pid}}'>
   {{else}}
-  <canvas id='flag_{{box}}' width='58' height='40'></canvas>
+  <canvas class='flag_{{box}}' id='flag_{{box}}_{{counterpart.pid}}' width='58' height='40'></canvas>
   {{/if}}
-  <div id='agree_{{box}}'></div>
+  <div class='agree_{{box}}' id='agree_{{box}}_{{counterpart.pid}}'></div>
   <div style='float:left; width: 70%;'><h3>{{player.adjective}} {{player.name}}</h3></div>
-  <div id='{{box}}_dipl_div' >
-    <a tabindex='0' class='fg-button fg-button-icon-right ui-widget ui-state-default ui-corner-all' id='hierarchy_{{box}}'><span class='ui-icon ui-icon-triangle-1-s'></span>Add Clause...</a>
-    <span class='diplomacy_gold'>Gold:<input id='{{box}}_gold' type='number' step='1' size='3' value='0'></span>
-    <div id='{{box}}-items' class='hidden'>
-      <ul id='{{box}}_dipl_add'>{{#each player.clauses}}
+  <div class='dipl_div' >
+    <a tabindex='0' class='fg-button fg-button-icon-right ui-widget ui-state-default ui-corner-all' id='hierarchy_{{box}}_{{counterpart.pid}}'><span class='ui-icon ui-icon-triangle-1-s'></span>Add Clause...</a>
+    <span class='diplomacy_gold'>Gold:<input id='{{box}}_gold_{{counterpart.pid}}' type='number' step='1' size='3' value='0'></span>
+    <div id='{{box}}-items_{{counterpart.pid}}' class='hidden'>
+      <ul class='dipl_add'>{{#each player.clauses}}
         {{#if this.title}}
           <li><a href='#'>{{this.title}}</a>
           <ul>{{#each this.clauses}}
@@ -34,10 +34,10 @@
 </div>
 {{/inline}}
 
-<div id='diplomacy_dialog'>
+<div class='diplomacy_dialog' id='diplomacy_dialog_{{counterpart.pid}}'>
   <div>
     Treaty clauses:<br>
-    <div id='diplomacy_messages'></div>
+    <div class='diplomacy_messages' id='diplomacy_messages_{{counterpart.pid}}'></div>
     {{> diplomacy_player_box box="self" player=self}}
     {{> diplomacy_player_box box="counterpart" player=counterpart}}
   </div>

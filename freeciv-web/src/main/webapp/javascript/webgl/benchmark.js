@@ -46,7 +46,7 @@ function benchmark_check()
     $("#dialog").dialog('close');
   } catch (err)  {}
   try {
-    $("#diplomacy_dialog").dialog('close');
+    $(".diplomacy_dialog").dialog('close');
   } catch (err)  {}
   try {
     $("#tech_dialog").dialog('close');

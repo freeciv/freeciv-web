@@ -28,9 +28,7 @@ var CLAUSE_ALLIANCE = 7;
 var CLAUSE_VISION = 8;
 var CLAUSE_EMBASSY = 9;
 
-var diplomacy_request_queue = [];
 var diplomacy_clause_map = {};
-var active_diplomacy_meeting_id = null;
 
 /**************************************************************************
  ...
@@ -42,20 +40,6 @@ function diplomacy_init_meeting_req(counterpart)
   send_request(JSON.stringify(packet));
 }
 
-/**************************************************************************
- ...
-**************************************************************************/
-function refresh_diplomacy_request_queue()
-{
-  if (diplomacy_request_queue.length > 0) {
-    var next = diplomacy_request_queue[0];
-    if (next != null && next != active_diplomacy_meeting_id) {
-        active_diplomacy_meeting_id = next;
-      	show_diplomacy_dialog(active_diplomacy_meeting_id);
-	show_diplomacy_clauses(active_diplomacy_meeting_id);
-    }
-  }
-}
 
 /**************************************************************************
  ...
@@ -91,14 +75,11 @@ function accept_treaty_req(counterpart_id)
 **************************************************************************/
 function accept_treaty(counterpart, I_accepted, other_accepted)
 {
-  if (active_diplomacy_meeting_id == counterpart
-      && I_accepted == true && other_accepted == true) {
-    $("#diplomacy_dialog_" + counterpart).remove(); //close the dialog.
+  if (I_accepted == true && other_accepted == true) {
+    diplomacy_clause_map[counterpart] = [];
+    cleanup_diplomacy_dialog(counterpart);
 
-    if (diplomacy_request_queue.indexOf(counterpart) >= 0) {
-      diplomacy_request_queue.splice(diplomacy_request_queue.indexOf(counterpart), 1);
-    }
-  } else if (active_diplomacy_meeting_id == counterpart) {
+  } else {
 
   var agree_sprite = get_treaty_agree_thumb_up();
   var disagree_sprite = get_treaty_disagree_thumb_down();
@@ -131,8 +112,6 @@ function accept_treaty(counterpart, I_accepted, other_accepted)
       $("#agree_counterpart_" + counterpart).html(disagree_html);
     }
   }
-
-  setTimeout(refresh_diplomacy_request_queue, 1000);
 
 }
 
@@ -176,16 +155,21 @@ function create_clause_req(counterpart_id, giver, type, value)
 **************************************************************************/
 function cancel_meeting(counterpart)
 {
-  if (active_diplomacy_meeting_id == counterpart) {
-    $("#diplomacy_dialog_" + counterpart).remove(); //close the dialog.
-    active_diplomacy_meeting_id = null;
-  }
+  diplomacy_clause_map[counterpart] = [];
+  cleanup_diplomacy_dialog(counterpart);
+}
 
-  if (diplomacy_request_queue.indexOf(counterpart) >= 0) {
-    diplomacy_request_queue.splice(diplomacy_request_queue.indexOf(counterpart), 1);
-  }
-
-  setTimeout(refresh_diplomacy_request_queue, 1000);
+/**************************************************************************
+ Remove diplomacy dialog.
+ Hack for fgmenu. There's still leaking with allUIMenus.
+**************************************************************************/
+function cleanup_diplomacy_dialog(counterpart_id)
+{
+  $("#diplomacy_dialog_" + counterpart_id).remove();
+  $("[aria-labelledby=hierarchy_self_" + counterpart_id +"]")
+    .parent().parent().remove();
+  $("[aria-labelledby=hierarchy_counterpart_" + counterpart_id +"]")
+    .parent().parent().remove();
 }
 
 /**************************************************************************
@@ -193,8 +177,6 @@ function cancel_meeting(counterpart)
 **************************************************************************/
 function show_diplomacy_clauses(counterpart_id)
 {
-  if (active_diplomacy_meeting_id != null
-      && active_diplomacy_meeting_id == counterpart_id) {
     var clauses = diplomacy_clause_map[counterpart_id];
     var diplo_html = "";
     for (var i = 0; i < clauses.length; i++) {
@@ -209,7 +191,6 @@ function show_diplomacy_clauses(counterpart_id)
     }
 
     $("#diplomacy_messages_" + counterpart_id).html(diplo_html);
-  }
 
 }
 
@@ -330,11 +311,8 @@ function create_diplomacy_dialog(counterpart, template) {
   var counterpart_id = counterpart['playerno'];
 
   // reset diplomacy_dialog div.
-  $("#dialog").remove();
-  $("#diplomacy_dialog_" + counterpart_id).remove();
-  $("#self-items_" + counterpart_id).remove();
-  $("#counterpart-items_" + counterpart_id).remove();
-  $(".positionHelper").remove();
+  // TODO: check whether this is still needed
+  cleanup_diplomacy_dialog(counterpart_id);
   $("#game_page").append(template({
     self: meeting_template_data(pplayer, counterpart),
     counterpart: meeting_template_data(counterpart, pplayer)

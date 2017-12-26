@@ -13,7 +13,7 @@
   <canvas class='flag_{{box}}' id='flag_{{box}}_{{counterpart.pid}}' width='58' height='40'></canvas>
   {{/if}}
   <div class='agree_{{box}}' id='agree_{{box}}_{{counterpart.pid}}'></div>
-  <div style='float:left; width: 70%;'><h3>{{player.adjective}} {{player.name}}</h3></div>
+  <h3>{{player.adjective}} {{player.name}}</h3>
   <div class='dipl_div' >
     <a tabindex='0' class='fg-button fg-button-icon-right ui-widget ui-state-default ui-corner-all' id='hierarchy_{{box}}_{{counterpart.pid}}'><span class='ui-icon ui-icon-triangle-1-s'></span>Add Clause...</a>
     <span class='diplomacy_gold'>Gold:<input id='{{box}}_gold_{{counterpart.pid}}' type='number' step='1' size='3' value='0'></span>
@@ -34,7 +34,7 @@
 </div>
 {{/inline}}
 
-<div class='diplomacy_dialog' id='diplomacy_dialog_{{counterpart.pid}}'>
+<div id='diplomacy_dialog_{{counterpart.pid}}'>
   <div>
     Treaty clauses:<br>
     <div class='diplomacy_messages' id='diplomacy_messages_{{counterpart.pid}}'></div>

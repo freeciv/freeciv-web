@@ -200,40 +200,8 @@ button {
   overflow: auto;
 }
 
-.diplomacy_messages {
-  background: url("/images/bg-dark.jpg") repeat scroll 0 0 ; 
-  min-height: 120px;
-  max-height: 200px;
-  overflow: auto;
-  border-color: 1px solid;
-  border: 1px solid #555555
-  width: 100%;
-  font-size: 130%;
-}
-
-.diplomacy_messages a {
-  color: white;
-}
-
-.diplomacy_dialog {
-  overflow: hidden;
-}
-
-.diplomacy_player_box {
-  width: 50%;
-  float: left;
-  text-align:center;
-}
-
 .ui-dialog {
   border: 1px #444444 solid;
-}
-
-.dipl_div {
-  float: left;
-  padding-left: 60px;
-  text-align: left;
-  z-index: 2000;
 }
 
 #dialog {
@@ -348,10 +316,6 @@ button {
 
 .ui-dialog .ui-dialog-content {
   position: static;
-}
-
-.dipl_add {
-  z-index: 100;
 }
 
 
@@ -489,25 +453,6 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 
 #city_stats tr {
   line-height: 14px;
-}
-
-.diplomacy_gold input {
-  height: 15px;
-  font-size: 14px;
-  width: 40px;
-}
-
-.agree_self {
-  float: left;
-}
-
-.agree_counterpart {
-  float: right;
-}
-
-.diplomacy_gold {
-  padding: 8px;
-  font-size: 80%;
 }
 
 .govbutton {
@@ -1029,4 +974,62 @@ li.tech-both::before {
 
 #technology_dialog {
   overflow: hidden;
+}
+
+/* Diplomacy dialog. */
+
+.diplomacy_messages {
+  background: url("/images/bg-dark.jpg") repeat scroll 0 0 ;
+  min-height: 120px;
+  max-height: 200px;
+  overflow: auto;
+  border-color: 1px solid;
+  border: 1px solid #555555
+  width: 100%;
+  font-size: 130%;
+}
+
+.diplomacy_messages a {
+  color: white;
+}
+
+.diplomacy_player_box {
+  width: 50%;
+  float: left;
+  text-align:center;
+}
+
+.diplomacy_player_box h3 {
+  clear: both;
+  width: 100%;
+  padding-top: 1em;
+}
+
+.dipl_div {
+  float: left;
+  text-align: left;
+  z-index: 2000;
+}
+
+.dipl_add {
+  z-index: 100;
+}
+
+.agree_self {
+  float: left;
+}
+
+.agree_counterpart {
+  float: right;
+}
+
+.diplomacy_gold {
+  padding: 8px;
+  font-size: 80%;
+}
+
+.diplomacy_gold input {
+  height: 15px;
+  font-size: 14px;
+  width: 40px;
 }

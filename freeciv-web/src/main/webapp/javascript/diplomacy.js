@@ -166,10 +166,6 @@ function cancel_meeting(counterpart)
 function cleanup_diplomacy_dialog(counterpart_id)
 {
   $("#diplomacy_dialog_" + counterpart_id).remove();
-  $("[aria-labelledby=hierarchy_self_" + counterpart_id +"]")
-    .parent().parent().remove();
-  $("[aria-labelledby=hierarchy_counterpart_" + counterpart_id +"]")
-    .parent().parent().remove();
 }
 
 /**************************************************************************
@@ -348,7 +344,6 @@ function create_diplomacy_dialog(counterpart, template) {
            }});
 
   diplomacy_dialog.dialog('open');
-  $(".ui-dialog").css("overflow", "visible");
 
   var nation = nations[pplayer['nation']];
   if (nation['customized']) {
@@ -359,16 +354,8 @@ function create_diplomacy_dialog(counterpart, template) {
     meeting_paint_custom_flag(nation, document.getElementById('flag_counterpart_' + counterpart_id));
   }
 
-  /* setup fg-menu */
-  $('#hierarchy_self_' + counterpart_id).fgmenu({
-    content: $('#self-items_' + counterpart_id).html(),
-    flyOut: true
-  });
-
-  $('#hierarchy_counterpart_' + counterpart_id).fgmenu({
-    content: $('#counterpart-items_' + counterpart_id).html(),
-    flyOut: true
-  });
+  create_clauses_menu($('#hierarchy_self_' + counterpart_id));
+  create_clauses_menu($('#hierarchy_counterpart_' + counterpart_id));
 
   if (game_info.trading_gold) {
     $("#self_gold_" + counterpart_id).attr({
@@ -403,6 +390,7 @@ function create_diplomacy_dialog(counterpart, template) {
     $("#counterpart_gold_" + counterpart_id).prop("disabled", true).parent().hide();
   }
 
+  diplomacy_dialog.css("overflow", "visible");
   diplomacy_dialog.parent().css("z-index", 1000);
 }
 
@@ -412,6 +400,39 @@ function meeting_paint_custom_flag(nation, flag_canvas)
   var flag_canvas_ctx = flag_canvas.getContext("2d");
   flag_canvas_ctx.scale(1.5, 1.5);
   flag_canvas_ctx.drawImage(sprites[tag], 0, 0);
+}
+
+function create_clauses_menu(content) {
+  content.css('position', 'relative');
+  var children = content.children();
+  var button = children.eq(0);
+  var menu = children.eq(1);
+  menu.menu();
+  menu.hide();
+  menu.css({
+    position: 'absolute',
+    top: button.height()
+       + parseFloat(button.css('paddingTop'))
+       + parseFloat(button.css('paddingBottom'))
+       + parseFloat(button.css('borderTopWidth')),
+    left: parseFloat(button.css('marginLeft'))
+  });
+  var menu_open = function () {
+    menu.show();
+    menu.data('diplAdd', 'open');
+  };
+  var menu_close = function () {
+    menu.hide();
+    menu.data('diplAdd', 'closed');
+  };
+  button.click(function () {
+    if (menu.data('diplAdd') == 'open') {
+      menu_close();
+    } else {
+      menu_open();
+    }
+  });
+  content.hover(menu_open, menu_close);
 }
 
 /**************************************************************************

@@ -73,7 +73,7 @@
                 <td style="text-align: right;" title="Score of this player in all games"><c:out value="${item.total_score}"/></td>
                 <td style="text-align: right;" title="Score of this player in this game"><c:out value="${item.score}"/></td>
                 <td>
-                    <c:if test="${item.id gt 60}">
+                    <c:if test="${item.id gt 210}">
                         <a href="/data/mapimgs/<c:out value="${item.id}"/>.gif">
                             <img src="/data/mapimgs/<c:out value="${item.id}"/>.gif" width="70" height="40">
                         </a>

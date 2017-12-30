@@ -5,6 +5,7 @@ sudo service nginx start
 
 sudo -u freeciv mkdir /home/freeciv/freeciv
 sudo -u freeciv ln -s /docker/freeciv/freeciv/server/ /home/freeciv/freeciv/bin
+sudo -u freeciv ln -s /docker/freeciv/freeciv/data/ /home/freeciv/freeciv/data
 
 cd /docker/scripts/
 sudo -u freeciv ./start-freeciv-web.sh

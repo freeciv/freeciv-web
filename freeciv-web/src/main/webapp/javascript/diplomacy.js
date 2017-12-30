@@ -161,11 +161,21 @@ function cancel_meeting(counterpart)
 
 /**************************************************************************
  Remove diplomacy dialog.
- Hack for fgmenu. There's still leaking with allUIMenus.
 **************************************************************************/
 function cleanup_diplomacy_dialog(counterpart_id)
 {
   $("#diplomacy_dialog_" + counterpart_id).remove();
+}
+
+/**************************************************************************
+ Remove all diplomacy dialogs and empty clauses map.
+**************************************************************************/
+function discard_diplomacy_dialogs()
+{
+  for (var counterpart in diplomacy_clause_map) {
+    cleanup_diplomacy_dialog(counterpart);
+  }
+  diplomacy_clause_map = {};
 }
 
 /**************************************************************************

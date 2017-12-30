@@ -149,6 +149,10 @@ function handle_conn_info(packet)
     packet['playing'] = pplayer;
 
     if (packet['id'] == client.conn.id) {
+      if (client.conn.player_num == null
+          || client.conn.player_num !== packet['player_num']) {
+        discard_diplomacy_dialogs();
+      }
       client.conn = packet;
     }
 

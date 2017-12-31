@@ -24,4 +24,5 @@ mkdir -p $DATADIR/scorelogs
 mkdir -p $DATADIR/ranklogs
 
 echo "maven package"
+sudo mvn compile flyway:migrate
 mvn package && cp target/freeciv-web.war "${TOMCATDIR}/webapps/ROOT.war"

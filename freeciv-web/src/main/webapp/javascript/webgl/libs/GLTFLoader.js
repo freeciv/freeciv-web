@@ -1178,7 +1178,7 @@ THREE.GLTFLoader = ( function () {
 
 	}
 
-	function isPrimitiveEqual ( a, b ) {
+	function isPrimitiveEqual( a, b ) {
 
 		if ( a.indices !== b.indices ) {
 
@@ -1990,6 +1990,7 @@ THREE.GLTFLoader = ( function () {
 					geometries.push( geometry );
 
 				}
+
 			}
 
 			return geometries;
@@ -2030,8 +2031,8 @@ THREE.GLTFLoader = ( function () {
 					var geometry = geometries[ i ];
 
 					var material = primitive.material === undefined
-							? createDefaultMaterial()
-							: dependencies.materials[ primitive.material ];
+						? createDefaultMaterial()
+						: dependencies.materials[ primitive.material ];
 
 					if ( material.aoMap
 							&& geometry.attributes.uv2 === undefined
@@ -2317,10 +2318,10 @@ THREE.GLTFLoader = ( function () {
 
 							for ( var j = 0, jl = outputAccessor.count; j < jl; j += 3 ) {
 
-								outputAccessorValues[ j / 3 ] = outputAccessor.getX( j + 1 );
-								if ( itemSize > 1 ) outputAccessorValues[ j / 3 + 1 ] = outputAccessor.getY( j + 1 );
-								if ( itemSize > 2 ) outputAccessorValues[ j / 3 + 2 ] = outputAccessor.getZ( j + 1 );
-								if ( itemSize > 3 ) outputAccessorValues[ j / 3 + 3 ] = outputAccessor.getW( j + 1 );
+								outputAccessorValues[ j * itemSize / 3 ] = outputAccessor.getX( j + 1 );
+								if ( itemSize > 1 ) outputAccessorValues[ j * itemSize / 3 + 1 ] = outputAccessor.getY( j + 1 );
+								if ( itemSize > 2 ) outputAccessorValues[ j * itemSize / 3 + 2 ] = outputAccessor.getZ( j + 1 );
+								if ( itemSize > 3 ) outputAccessorValues[ j * itemSize / 3 + 3 ] = outputAccessor.getW( j + 1 );
 
 							}
 

@@ -9,9 +9,3 @@ sudo -u freeciv ln -s /docker/freeciv/freeciv/data/ /home/freeciv/freeciv/data
 
 cd /docker/scripts/
 sudo -u freeciv ./start-freeciv-web.sh
-
-while [ 1 ]
-do
-  sleep 60 &
-  wait $!
-done

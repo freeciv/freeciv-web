@@ -200,53 +200,8 @@ button {
   overflow: auto;
 }
 
-#diplomacy_messages {
-  background: url("/images/bg-dark.jpg") repeat scroll 0 0 ; 
-  min-height: 120px;
-  max-height: 200px;
-  overflow: auto;
-  border-color: 1px solid;
-  border: 1px solid #555555
-  width: 100%;
-  font-size: 130%;
-}
-
-#diplomacy_messages a {
-  color: white;
-}
-
-#diplomacy_dialog {
-  overflow: hidden;
-}
-
-#diplomacy_player_box_self {
-  width: 50%;
-  float: left;
-  text-align:center;
-}
-
-#diplomacy_player_box_counterpart {
-  width: 50%;
-  float: left;
-  text-align:center;
-}
-
 .ui-dialog {
   border: 1px #444444 solid;
-}
-
-#self_dipl_div {
-  float: left;
-  padding-left: 60px;
-  text-align: left;
-  z-index: 2000;
-}
-
-#counterpart_dipl_div {
-  float: left;
-  padding-left: 60px;
-  text-align: left;
-  z-index: 2000;
 }
 
 #dialog {
@@ -363,14 +318,6 @@ button {
   position: static;
 }
 
-#counterpart_dipl_add {
-  z-index: 100;
-}
-
-#self_dipl_add {
-  z-index: 100;
-}
-
 
 #city_present_units, #city_supported_units {
   float: left;
@@ -442,22 +389,6 @@ button {
   padding-top: 10px;
 }
 
-/* This is for popup menu support */
-.hidden { position:absolute; top:0; left:-9999px; width:1px; height:1px; overflow:hidden; }
-	
-.fg-button { font-size: 14px; clear:left; margin:0 4px 40px 20px; padding: .4em 1em; text-decoration:none !important; cursor:pointer; position: relative; text-align: center; zoom: 1; }
-.fg-button .ui-icon { position: absolute; top: 50%; margin-top: -8px; left: 50%; margin-left: -8px; }
-.fg-menu-container {font-size: 14px;}
-a.fg-button { float:left;  }
-button.fg-button {  width:auto; overflow:visible; } /* removes extra button width in IE */
-	
-.fg-button-icon-left { padding-left: 2.1em; }
-.fg-button-icon-right { padding-right: 2.1em; }
-.fg-button-icon-left .ui-icon { right: auto; left: .2em; margin-left: 0; }
-.fg-button-icon-right .ui-icon { left: auto; right: .2em; margin-left: 0; }
-.fg-button-icon-solo { display:block; width:8px; text-indent: -9999px; }	 /* solo icon buttons must have block properties for the text-indent to work */	
-
-
 .ui-dialog .ui-dialog-title {
   float: none;
 }
@@ -506,31 +437,6 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 
 #city_stats tr {
   line-height: 14px;
-}
-
-#self_gold {
-  height: 15px;
-  font-size: 14px;
-  width: 40px;
-}
-
-#counterpart_gold {
-  height: 15px;
-  font-size: 14px;
-  width: 40px;
-}
-
-#agree_self {
-  float: left;
-}
-
-#agree_counterpart {
-  float: right;
-}
-
-.diplomacy_gold {
-  padding: 8px;
-  font-size: 80%;
 }
 
 .govbutton {
@@ -803,10 +709,6 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
   text-align: center;
 }
 
-.fg-menu a {
-  color: black;
-}
-
 .Democracy {
   background-image: url(/images/gov.democracy.png) !important; 
 }
@@ -831,12 +733,12 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
   background-image: url(/images/gov.monarchy.png) !important; 
 }
 
-#flag_self {
+.flag_self {
   float: left;
   width: 140px;
 }
 
-#flag_counterpart {
+.flag_counterpart {
   float: right;
   width: 140px;
 
@@ -1052,4 +954,89 @@ li.tech-both::before {
 
 #technology_dialog {
   overflow: hidden;
+}
+
+/* Diplomacy dialog. */
+
+.diplomacy_messages {
+  background: url("/images/bg-dark.jpg") repeat scroll 0 0 ;
+  min-height: 120px;
+  max-height: 200px;
+  overflow: auto;
+  border-color: 1px solid;
+  border: 1px solid #555555
+  width: 100%;
+  font-size: 130%;
+}
+
+.diplomacy_messages a {
+  color: white;
+}
+
+.diplomacy_player_box {
+  width: 50%;
+  float: left;
+  text-align:center;
+}
+
+.diplomacy_player_box h3 {
+  clear: both;
+  width: 100%;
+  padding-top: 1em;
+}
+
+.dipl_div {
+  float: left;
+  text-align: left;
+  font-size: 14px;
+  white-space: nowrap;
+  z-index: 2000;
+}
+
+.dipl_div a {
+  color: #1e1b1d;
+  text-decoration: none;
+}
+
+.dipl_add {
+  z-index: 100;
+}
+
+.agree_self {
+  float: left;
+}
+
+.agree_counterpart {
+  float: right;
+}
+
+.diplomacy_gold {
+  padding: 8px;
+  font-size: 80%;
+}
+
+.diplomacy_gold input {
+  height: 15px;
+  font-size: 14px;
+  width: 40px;
+}
+
+.menu-button-activator {
+  font-size: 14px;
+  float: left;
+  margin: 0 4px 40px 20px;
+  padding: .4em 1em;
+  text-decoration: none !important;
+  cursor: pointer;
+  position: relative;
+  text-align: center;
+}
+
+.menu-button-activator .ui-icon {
+  position: absolute;
+  top: 50%;
+  margin-top: -8px;
+  left: auto;
+  margin-left: 0;
+  right: .2em;
 }

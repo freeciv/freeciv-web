@@ -149,6 +149,10 @@ function handle_conn_info(packet)
     packet['playing'] = pplayer;
 
     if (packet['id'] == client.conn.id) {
+      if (client.conn.player_num == null
+          || client.conn.player_num !== packet['player_num']) {
+        discard_diplomacy_dialogs();
+      }
       client.conn = packet;
     }
 
@@ -891,12 +895,9 @@ function handle_diplomacy_init_meeting(packet)
   // for hotseat games, only activate diplomacy if the player is playing.
   if (is_hotseat() && packet['initiated_from'] != client.conn.playing['playerno']) return;   
 
-  if (diplomacy_request_queue.indexOf(packet['counterpart']) < 0) {
-    diplomacy_request_queue.push(packet['counterpart']);
-  }
   diplomacy_clause_map[packet['counterpart']] = [];
-  refresh_diplomacy_request_queue();
-
+  show_diplomacy_dialog(packet['counterpart']);
+  show_diplomacy_clauses(packet['counterpart']);
 }
 
 function handle_diplomacy_cancel_meeting(packet)
@@ -906,11 +907,12 @@ function handle_diplomacy_cancel_meeting(packet)
 
 function handle_diplomacy_create_clause(packet)
 {
-  if(diplomacy_clause_map[packet['counterpart']] == null) {
-    diplomacy_clause_map[packet['counterpart']] = [];
+  var counterpart_id = packet['counterpart'];
+  if(diplomacy_clause_map[counterpart_id] == null) {
+    diplomacy_clause_map[counterpart_id] = [];
   }
-  diplomacy_clause_map[packet['counterpart']].push(packet);
-  show_diplomacy_clauses();
+  diplomacy_clause_map[counterpart_id].push(packet);
+  show_diplomacy_clauses(counterpart_id);
 }
 
 function handle_diplomacy_remove_clause(packet)

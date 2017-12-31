@@ -23,7 +23,7 @@ rm -f /var/lib/tomcat8/webapps/data/scorelogs/score-${2}.log;
 
 python3 ../freeciv-proxy/freeciv-proxy.py ${3} > ../logs/freeciv-proxy-${3}.log 2>&1 &
 proxy_pid=$! && 
-/docker/freeciv/freeciv/server/freeciv-web --debug=1 --port ${2} --keep ${quitidle} --Announce none -e  -m \
+${HOME}/freeciv/bin/freeciv-web --debug=1 --port ${2} --keep ${quitidle} --Announce none -e  -m \
 -M http://${4} --type ${5} --read pubscript_${6}.serv --log ../logs/freeciv-web-log-${2}.log \
 --saves ${1} ${pbemcmd:- } > /dev/null 2> ../logs/freeciv-web-stderr-${2}.log;
 

@@ -4,7 +4,7 @@
 SCRIPT_DIR="$(dirname "$0")"
 cd "$(dirname "$0")"
 export FREECIV_WEB_DIR="${SCRIPT_DIR}/.."
-export FREECIV_DATA_PATH="/docker/freeciv/freeciv/data/"
+export FREECIV_DATA_PATH="${HOME}/freeciv/data/"
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8

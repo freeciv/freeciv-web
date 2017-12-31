@@ -442,6 +442,11 @@ function create_clauses_menu(content) {
       menu_open();
     }
   });
+  menu.click(function (e) {
+    if (e && e.target && e.target.tagName == 'A') {
+      menu_close();
+    }
+  });
   content.hover(menu_open, menu_close);
 }
 

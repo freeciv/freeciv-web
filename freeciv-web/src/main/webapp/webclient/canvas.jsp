@@ -31,10 +31,9 @@
 
     <%-- Overview mini-map --%>
     <div id="game_overview_panel">
-	<div id="game_overview_map">
-       		<div id="map_click_div">
-	     		<img id="overview_map"/>   
-        	</div>
+	<div id="overview_map">
+            <img id="overview_img"/>
+            <canvas id="overview_viewrect"></canvas>
 	</div>
     </div>
 

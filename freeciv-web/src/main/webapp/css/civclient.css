@@ -70,14 +70,18 @@ button {
 }
 
 
-#game_overview_map {
-  text-align: center;
-}
-
-
 #overview_map {
   cursor:crosshair;
   border: 1px solid #555555;
+  position: relative;
+}
+
+#overview_img, #overview_viewrect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 #game_unit_info {

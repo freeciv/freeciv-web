@@ -234,7 +234,7 @@ function control_init()
     $("#game_unit_orders_default").tooltip();
   }
 
-  $("#game_overview_map").click(function(e) {
+  $("#overview_map").click(function(e) {
     var x = e.pageX - $(this).offset().left;
     var y = e.pageY - $(this).offset().top;
     overview_clicked (x, y);

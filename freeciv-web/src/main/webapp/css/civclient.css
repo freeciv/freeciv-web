@@ -929,6 +929,19 @@ li.tech-both::before {
 }
 
 
+#chat_context_dialog {
+  overflow-y: auto;
+}
+
+#chat_context_dialog tr:hover {
+  background-color: rgba(240, 240, 240, 0.75);
+}
+
+#chat_context_dialog canvas {
+  vertical-align: middle;
+}
+
+
 .ui-widget-header .ui-icon {
   background-image: url(images/ui-icons_c47a23_256x240.png);
 }

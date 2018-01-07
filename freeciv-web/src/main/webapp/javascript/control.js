@@ -96,7 +96,7 @@ function control_init()
   });
 
   $("#chat_direction").click(function(event) {
-    toggle_send_to_allies();
+    show_chat_context_dialog();
   });
   set_chat_direction(null);
 
@@ -420,12 +420,119 @@ function update_mouse_cursor()
 /****************************************************************************
 ...
 ****************************************************************************/
-function toggle_send_to_allies() {
-  if (client.conn.playing != null
-      && chat_send_to != client.conn.playing['playerno']) {
-    set_chat_direction(client.conn.playing['playerno']);
-  } else {
+function show_chat_context_dialog() {
+  var dlg = $("#chat_context_dialog");
+  if (dlg.length > 0) {
+    dlg.dialog('close');
+    dlg.remove();
+  }
+  $("<div id='chat_context_dialog' title='Choose chat recipient'></div>")
+    .appendTo("div#game_page");
+
+  var self = -1;
+  if (client.conn.playing != null) {
+    self = client.conn.playing['playerno'];
+  }
+  var pm = [];
+  for (var player_id in players) {
+    if (player_id == self || player_id == chat_send_to) continue;
+    var pplayer = players[player_id];
+    if (pplayer['flags'].isSet(PLRF_AI)) continue;
+
+    // TODO: add connection state, to list connected players first
+    pm.push({
+      id: player_id,
+      description: pplayer['name']
+                   + " of the " + nations[pplayer['nation']]['adjective'],
+      flag: sprites["f." + nations[pplayer['nation']]['graphic_str']],
+      alive: pplayer['is_alive']
+    });
+  }
+
+  pm.sort(function (a, b) {
+    if (a.alive && !b.alive) return -1;
+    if (!a.alive && b.alive) return 1;
+    if (a.description < b.description) return -1;
+    if (a.description > b.description) return 1;
+    return 0;
+  });
+
+  var tbody_el = document.createElement('tbody');
+
+  var add_row = function (id, flag, description) {
+    var flag_canvas, ctx, row, cell;
+    row = document.createElement('tr');
+    cell = document.createElement('td');
+    flag_canvas = document.createElement('canvas');
+    flag_canvas.width = 29;
+    flag_canvas.height = 20;
+    ctx = flag_canvas.getContext("2d");
+    if (flag != null) {
+      ctx.drawImage(flag, 0, 0);
+    }
+    cell.appendChild(flag_canvas);
+    row.appendChild(cell);
+    cell = document.createElement('td');
+    cell.appendChild(document.createTextNode(description));
+    row.appendChild(cell);
+    if (id != null) {
+      $(row).data("chatSendTo", id);
+    }
+    tbody_el.appendChild(row);
+    return ctx;
+  }
+
+  var ctx;
+
+  if (chat_send_to != null && chat_send_to >= 0) {
+    ctx = add_row(null, null, 'Everybody');
+    ctx.font = "18px FontAwesome";
+    ctx.fillStyle = "rgba(32, 32, 32, 1)";
+    ctx.fillText('\uf27b', 5, 15);
+  }
+
+  if (self != null && self >= 0 && chat_send_to != self) {
+    ctx = add_row(self, null, 'Allies');
+    ctx.font = "18px FontAwesome";
+    ctx.fillStyle = "rgba(32, 32, 32, 1)";
+    ctx.fillText('\uf132', 8, 16);
+  }
+
+  for (var i = 0; i < pm.length; i++) {
+    add_row(pm[i].id, pm[i].flag, pm[i].description);
+  }
+
+  var table = document.createElement('table');
+  table.appendChild(tbody_el);
+  $(table).on('click', 'tbody tr', handle_chat_direction_chosen);
+  $(table).appendTo("#chat_context_dialog");
+
+  $("#chat_context_dialog").dialog({
+    bgiframe: true,
+    modal: false,
+    maxHeight: 0.9 * $(window).height()
+  }).dialogExtend({
+    minimizable: true,
+    closable: true,
+    icons: {
+      minimize: "ui-icon-circle-minus",
+      restore: "ui-icon-bullet"
+    }
+  });
+
+  $("#chat_context_dialog").dialog('open');
+}
+
+/****************************************************************************
+ Handle a choice in the chat context dialog.
+****************************************************************************/
+function handle_chat_direction_chosen(ev) {
+  var new_send_to = $(this).data("chatSendTo");
+  $("#chat_context_dialog").dialog('close');
+  if (new_send_to == null) {
     set_chat_direction(null);
+  } else {
+    set_chat_direction(parseFloat(new_send_to));
   }
 }
 
@@ -468,6 +575,7 @@ function set_chat_direction(player_id) {
 
   icon.attr("title", "Sending messages to " + player_name);
   chat_send_to = player_id;
+  $("#game_text_input").focus();
 }
 
 /****************************************************************************

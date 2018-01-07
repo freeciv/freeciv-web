@@ -54,7 +54,7 @@ var context_menu_active = true;
 var has_movesleft_warning_been_shown = false;
 var game_unit_panel_state = null;
 
-var send_to_allies = false;
+var chat_send_to = -1;
 var end_turn_info_message_shown = false;
 
 /****************************************************************************
@@ -95,9 +95,10 @@ function control_init()
     resize_enabled = true;
   });
 
-  $("#chat_box_allies").click(function(event) {
+  $("#chat_direction").click(function(event) {
     toggle_send_to_allies();
   });
+  set_chat_direction(null);
 
   $("#pregame_text_input").keydown(function(event) {
    return check_text_input(event, $("#pregame_text_input"));
@@ -420,11 +421,53 @@ function update_mouse_cursor()
 ...
 ****************************************************************************/
 function toggle_send_to_allies() {
-  send_to_allies = !send_to_allies;
-  $("#chat_box_allies").attr("data-toggle", send_to_allies ? "true" : "false")
-                       .attr("title", send_to_allies ?
-                         "Sending to allies (push to toggle)" :
-                         "Sending to all (push to toggle)");
+  if (client.conn.playing != null
+      && chat_send_to != client.conn.playing['playerno']) {
+    set_chat_direction(client.conn.playing['playerno']);
+  } else {
+    set_chat_direction(null);
+  }
+}
+
+/****************************************************************************
+ Set the context for the chatbox.
+****************************************************************************/
+function set_chat_direction(player_id) {
+
+  if (player_id == chat_send_to) return;
+
+  var player_name;
+  var icon = $("#chat_direction");
+  if (icon.length <= 0) return;
+  var ctx = icon[0].getContext("2d");
+
+  if (player_id == null || player_id < 0) {
+    ctx.clearRect(0, 0, 29, 20);
+    ctx.font = "18px FontAwesome";
+    ctx.fillStyle = "rgba(192, 192, 192, 1)";
+    ctx.fillText('\uf27b', 7, 15);
+    player_name = 'everybody';
+  } else if (client.conn.playing != null
+             && player_id == client.conn.playing['playerno']) {
+    ctx.clearRect(0, 0, 29, 20);
+    ctx.font = "18px FontAwesome";
+    ctx.fillStyle = "rgba(192, 192, 192, 1)";
+    ctx.fillText('\uf132', 10, 16);
+    player_name = 'allies';
+  } else {
+    var pplayer = players[player_id];
+    if (pplayer == null) return;
+    player_name = pplayer['name']
+                + " of the " + nations[pplayer['nation']]['adjective'];
+    ctx.clearRect(0, 0, 29, 20);
+    var flag = sprites["f." + nations[pplayer['nation']]['graphic_str']];
+    if (flag != null) {
+      ctx.drawImage(flag, 0, 0);
+    }
+  }
+
+  icon.attr("title", "Sending messages to " + player_name);
+  chat_send_to = player_id;
 }
 
 /****************************************************************************
@@ -472,8 +515,36 @@ function check_text_input(event,chatboxtextarea) {
   if (event.keyCode == 13 && event.shiftKey == 0)  {
     var message = $(chatboxtextarea).val();
 
-    if (send_to_allies && is_unprefixed_message(message)) {
-      message = encode_message_text(". " + message);
+    if (chat_send_to != null && chat_send_to >= 0
+        && is_unprefixed_message(message)) {
+      if (client.conn.playing != null
+          && chat_send_to == client.conn.playing['playerno']) {
+        message = ". " + encode_message_text(message);
+      } else {
+        var pplayer = players[chat_send_to];
+        if (pplayer == null) {
+          // Change to public chat, don't send the message,
+          // keep it in the chatline and hope the user notices
+          set_chat_direction(null);
+          return;
+        }
+        var player_name = pplayer['name'];
+        /* TODO:
+           - Spaces before ':' not good for longturn yet
+           - Encoding characters in the name also does not work
+           - Sending a ' or " cuts the message
+           So we send the name unencoded, cut until the first "special" character
+           and hope that is unique enough to recognize the player. It usually is.
+         */
+        var badchars = [' ', '"', "'"];
+        for (var c in badchars) {
+          var i = player_name.indexOf(badchars[c]);
+          if (i > 0) {
+            player_name = player_name.substring(0, i);
+          }
+        }
+        message = player_name + encode_message_text(": " + message);
+      }
     } else {
       message = encode_message_text(message);
     }

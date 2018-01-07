@@ -922,18 +922,6 @@ li.tech-both::before {
   left: 1em;
 }
 
-.bw-toggle[data-toggle=true] {
-  color: lightgrey;
-}
-
-.bw-toggle[data-toggle=false] {
-  color: grey;
-}
-
-.bw-toggle:hover {
-  color: white;
-}
-
 .e_next_year {
   border-top: 2px #555555 groove;
   margin-top: 0.5em;

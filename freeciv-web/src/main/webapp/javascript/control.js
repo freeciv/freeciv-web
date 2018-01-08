@@ -55,6 +55,8 @@ var has_movesleft_warning_been_shown = false;
 var game_unit_panel_state = null;
 
 var chat_send_to = -1;
+var CHAT_ICON_EVERYBODY = String.fromCharCode(62075);
+var CHAT_ICON_ALLIES = String.fromCharCode(61746);
 var end_turn_info_message_shown = false;
 
 /****************************************************************************
@@ -488,14 +490,14 @@ function show_chat_context_dialog() {
     ctx = add_row(null, null, 'Everybody');
     ctx.font = "18px FontAwesome";
     ctx.fillStyle = "rgba(32, 32, 32, 1)";
-    ctx.fillText('\uf27b', 5, 15);
+    ctx.fillText(CHAT_ICON_EVERYBODY, 5, 15);
   }
 
   if (self != null && self >= 0 && chat_send_to != self) {
     ctx = add_row(self, null, 'Allies');
     ctx.font = "18px FontAwesome";
     ctx.fillStyle = "rgba(32, 32, 32, 1)";
-    ctx.fillText('\uf132', 8, 16);
+    ctx.fillText(CHAT_ICON_ALLIES, 8, 16);
   }
 
   for (var i = 0; i < pm.length; i++) {
@@ -552,14 +554,14 @@ function set_chat_direction(player_id) {
     ctx.clearRect(0, 0, 29, 20);
     ctx.font = "18px FontAwesome";
     ctx.fillStyle = "rgba(192, 192, 192, 1)";
-    ctx.fillText('\uf27b', 7, 15);
+    ctx.fillText(CHAT_ICON_EVERYBODY, 7, 15);
     player_name = 'everybody';
   } else if (client.conn.playing != null
              && player_id == client.conn.playing['playerno']) {
     ctx.clearRect(0, 0, 29, 20);
     ctx.font = "18px FontAwesome";
     ctx.fillStyle = "rgba(192, 192, 192, 1)";
-    ctx.fillText('\uf132', 10, 16);
+    ctx.fillText(CHAT_ICON_ALLIES, 10, 16);
     player_name = 'allies';
   } else {
     var pplayer = players[player_id];

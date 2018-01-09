@@ -28,7 +28,7 @@ echo logfile $logfile
 # User will need permissions to create a database
 mysql_user="root"
 
-tornado_url="https://github.com/tornadoweb/tornado/archive/v4.4.1.tar.gz"
+tornado_url="https://github.com/tornadoweb/tornado/archive/v4.5.3.tar.gz"
 nginx_url="http://nginx.org/download/nginx-1.9.11.tar.gz"
 casperjs_url="https://github.com/casperjs/casperjs/archive/1.1.4.zip"
 
@@ -56,8 +56,8 @@ cd tomcat8/bin
 
 echo "==== Fetching/Installing Tornado Web Server ===="
 wget ${tornado_url}
-tar xfz v4.4.1.tar.gz
-cd tornado-4.4.1
+tar xfz v4.5.3.tar.gz
+cd tornado-4.5.3
 python3 setup.py install
 
 ## build and install mysql-connector-python

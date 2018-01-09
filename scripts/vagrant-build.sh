@@ -46,7 +46,7 @@ echo logfile $logfile
 mysql_user="root"
 mysql_pass="vagrant"
 
-tornado_url="https://github.com/tornadoweb/tornado/archive/v4.4.1.tar.gz"
+tornado_url="https://github.com/tornadoweb/tornado/archive/v4.5.3.tar.gz"
 casperjs_url="https://github.com/casperjs/casperjs/archive/1.1.4.zip"
 
 # Based on fresh install of Ubuntu 16.04
@@ -81,8 +81,8 @@ service snapd stop
 echo "==== Fetching/Installing Tornado Web Server ===="
 cd /tmp
 wget ${tornado_url}
-tar xvfz v4.4.1.tar.gz
-cd tornado-4.4.1
+tar xvfz v4.5.3.tar.gz
+cd tornado-4.5.3
 python3 setup.py install
 
 pip3 install wikipedia

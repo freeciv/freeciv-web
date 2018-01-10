@@ -7,7 +7,7 @@ set nationset all
 set compresstype xs
 set maxplayers 300
 set startunits=cccwwwx
-set aifill 300
+set aifill 250
 set allowtake=""
 set autotoggle false
 set timeout 82800
@@ -29,6 +29,7 @@ set endt 365
 
 set diplomacy=HUMAN
 set contactturns=0
+set trading_tech=disabled
 
 set minp 0
 set generator RANDOM
@@ -39,7 +40,7 @@ set ec_chat=enabled
 set ec_info=enabled 
 set ec_max_size=5000
 set ec_turns=9
-metamessage One Turn per day #XIII | 1 turn per day | 300 players | 34000 tiles | Join now!
+metamessage One Turn per day #XIII | 1 turn per day | 250 players | 34000 tiles | Join now!
 
 
 cmdlevel basic

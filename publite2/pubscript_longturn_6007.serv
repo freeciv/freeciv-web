@@ -29,7 +29,6 @@ set endt 365
 
 set diplomacy=HUMAN
 set contactturns=0
-set trading_tech=disabled
 
 set minp 0
 set generator RANDOM

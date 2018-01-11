@@ -1,7 +1,7 @@
 #Freeciv-web: One Turn per day game #XIII
 
 cmdlevel ctrl first
-rulesetdir multiplayer 
+rulesetdir multiplayer3 
 set topology WRAPX
 set nationset all
 set compresstype xs

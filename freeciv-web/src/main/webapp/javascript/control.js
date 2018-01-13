@@ -440,6 +440,7 @@ function show_chat_context_dialog() {
     if (player_id == self || player_id == chat_send_to) continue;
     var pplayer = players[player_id];
     if (pplayer['flags'].isSet(PLRF_AI)) continue;
+    if (is_longturn() && pplayer['name'].indexOf("New Available Player") != -1) continue;
 
     // TODO: add connection state, to list connected players first
     pm.push({

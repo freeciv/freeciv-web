@@ -98,7 +98,7 @@ function control_init()
   });
 
   $("#chat_direction").click(function(event) {
-    show_chat_context_dialog();
+    chat_context_change();
   });
   set_chat_direction(null);
 
@@ -420,9 +420,93 @@ function update_mouse_cursor()
 }
 
 /****************************************************************************
-...
+ Set the chatbox messages context to the next item on the list if it is
+ small. Otherwise, show a dialog for the user to select one.
 ****************************************************************************/
-function show_chat_context_dialog() {
+function chat_context_change() {
+  var recipients = chat_context_get_recipients();
+  if (recipients.length < 4) {
+    chat_context_set_next(recipients);
+  } else {
+    chat_context_dialog_show(recipients);
+  }
+}
+
+/****************************************************************************
+ Get ordered list of possible alive human chatbox messages recipients.
+****************************************************************************/
+function chat_context_get_recipients() {
+  var allies = false;
+  var pm = [];
+
+  pm.push({id: null, flag: null, description: 'Everybody'});
+
+  var self = -1;
+  if (client.conn.playing != null) {
+    self = client.conn.playing['playerno'];
+  }
+
+  for (var player_id in players) {
+    if (player_id == self) continue;
+
+    var pplayer = players[player_id];
+    if (pplayer['flags'].isSet(PLRF_AI)) continue;
+    if (!pplayer['is_alive']) continue;
+    if (is_longturn() && pplayer['name'].indexOf("New Available Player") != -1) continue;
+
+    var nation = nations[pplayer['nation']];
+    if (nation == null) continue;
+
+    // TODO: add connection state, to list connected players first
+    pm.push({
+      id: player_id,
+      description: pplayer['name'] + " of the " + nation['adjective'],
+      flag: sprites["f." + nation['graphic_str']]
+    });
+
+    if (diplstates[player_id] == DS_ALLIANCE) {
+      allies = true;
+    }
+  }
+
+  if (allies && self >= 0) {
+    pm.push({id: self, flag: null, description: 'Allies'});
+  }
+
+  pm.sort(function (a, b) {
+    if (a.id == null) return -1;
+    if (b.id == null) return 1;
+    if (a.id == self) return -1;
+    if (b.id == self) return 1;
+    if (a.description < b.description) return -1;
+    if (a.description > b.description) return 1;
+    return 0;
+  });
+
+  return pm;
+}
+
+/****************************************************************************
+ Switch chatbox messages recipients.
+****************************************************************************/
+function chat_context_set_next(recipients) {
+  var next = 0;
+  while (next < recipients.length && recipients[next].id != chat_send_to) {
+    next++;
+  }
+  next++;
+  if (next >= recipients.length) {
+    next = 0;
+  }
+
+  set_chat_direction(recipients[next].id);
+}
+
+/****************************************************************************
+ Show a dialog for the user to select the default recipient of
+ chatbox messages.
+****************************************************************************/
+function chat_context_dialog_show(recipients) {
   var dlg = $("#chat_context_dialog");
   if (dlg.length > 0) {
     dlg.dialog('close');
@@ -435,30 +519,6 @@ function show_chat_context_dialog() {
   if (client.conn.playing != null) {
     self = client.conn.playing['playerno'];
   }
-  var pm = [];
-  for (var player_id in players) {
-    if (player_id == self || player_id == chat_send_to) continue;
-    var pplayer = players[player_id];
-    if (pplayer['flags'].isSet(PLRF_AI)) continue;
-    if (is_longturn() && pplayer['name'].indexOf("New Available Player") != -1) continue;
-
-    // TODO: add connection state, to list connected players first
-    pm.push({
-      id: player_id,
-      description: pplayer['name']
-                   + " of the " + nations[pplayer['nation']]['adjective'],
-      flag: sprites["f." + nations[pplayer['nation']]['graphic_str']],
-      alive: pplayer['is_alive']
-    });
-  }
-
-  pm.sort(function (a, b) {
-    if (a.alive && !b.alive) return -1;
-    if (!a.alive && b.alive) return 1;
-    if (a.description < b.description) return -1;
-    if (a.description > b.description) return 1;
-    return 0;
-  });
 
   var tbody_el = document.createElement('tbody');
 
@@ -485,24 +545,21 @@ function show_chat_context_dialog() {
     return ctx;
   }
 
-  var ctx;
+  for (var i = 0; i < recipients.length; i++) {
+    if (recipients[i].id != chat_send_to) {
+      var ctx = add_row(recipients[i].id, recipients[i].flag,
+                        recipients[i].description);
 
-  if (chat_send_to != null && chat_send_to >= 0) {
-    ctx = add_row(null, null, 'Everybody');
-    ctx.font = "18px FontAwesome";
-    ctx.fillStyle = "rgba(32, 32, 32, 1)";
-    ctx.fillText(CHAT_ICON_EVERYBODY, 5, 15);
-  }
-
-  if (self != null && self >= 0 && chat_send_to != self) {
-    ctx = add_row(self, null, 'Allies');
-    ctx.font = "18px FontAwesome";
-    ctx.fillStyle = "rgba(32, 32, 32, 1)";
-    ctx.fillText(CHAT_ICON_ALLIES, 8, 16);
-  }
-
-  for (var i = 0; i < pm.length; i++) {
-    add_row(pm[i].id, pm[i].flag, pm[i].description);
+      if (recipients[i].id == null || recipients[i].id == self) {
+        ctx.font = "18px FontAwesome";
+        ctx.fillStyle = "rgba(32, 32, 32, 1)";
+        if (recipients[i].id == null) {
+          ctx.fillText(CHAT_ICON_EVERYBODY, 5, 15);
+        } else {
+          ctx.fillText(CHAT_ICON_ALLIES, 8, 16);
+        }
+      }
+    }
   }
 
   var table = document.createElement('table');
@@ -552,6 +609,7 @@ function set_chat_direction(player_id) {
   var ctx = icon[0].getContext("2d");
 
   if (player_id == null || player_id < 0) {
+    player_id = null;
     ctx.clearRect(0, 0, 29, 20);
     ctx.font = "18px FontAwesome";
     ctx.fillStyle = "rgba(192, 192, 192, 1)";

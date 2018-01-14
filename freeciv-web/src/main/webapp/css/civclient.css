@@ -55,8 +55,9 @@ button {
   display: flex;
 }
 
-#game_chat_box > i {
-  font-size: 110%;
+#chat_direction {
+  width: 29px;
+  height: 20px;
 }
 
 #game_text_input {

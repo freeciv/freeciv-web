@@ -100,7 +100,6 @@ function control_init()
   $("#chat_direction").click(function(event) {
     chat_context_change();
   });
-  set_chat_direction(null);
 
   $("#pregame_text_input").keydown(function(event) {
    return check_text_input(event, $("#pregame_text_input"));

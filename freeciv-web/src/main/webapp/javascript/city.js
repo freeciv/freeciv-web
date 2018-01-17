@@ -210,11 +210,7 @@ function show_city_dialog(pcity)
         });
    }
 
-   dialog_buttons = $.extend(dialog_buttons,
-    {"Close": function() {
-       close_city_dialog();
-      }
-    });
+   dialog_buttons = $.extend(dialog_buttons, {"Close": close_city_dialog});
 
   $("#city_dialog").attr("title", decodeURIComponent(pcity['name'])
                          + " (" + pcity['size'] + ")");
@@ -223,9 +219,7 @@ function show_city_dialog(pcity)
 			modal: false,
 			width: is_small_screen() ? "98%" : "80%",
                         height: is_small_screen() ? $(window).height() + 10 : $(window).height() - 80,
-                        close : function(){
-                          close_city_dialog();
-                        },
+                        close : city_dialog_close_handler,
             buttons: dialog_buttons
                    }).dialogExtend({
                      "minimizable" : true,
@@ -740,6 +734,13 @@ function send_city_change(city_id, kind, value)
 function close_city_dialog()
 {
   $("#city_dialog").dialog('close');
+}
+
+/**************************************************************************
+ Clean up after closing the city dialog.
+**************************************************************************/
+function city_dialog_close_handler()
+{
   set_default_mapview_active();
   if (active_city != null) {
     setup_window_size ();

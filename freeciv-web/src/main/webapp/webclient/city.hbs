@@ -72,7 +72,13 @@
         <div id='worklist_dialog_headline'></div>
         <div id='worklist_heading'>Target Worklist:</div><div id='city_current_worklist'></div>
       </div>
-      <div id='worklist_right'><div id='tasks_heading'>Source tasks:</div><div id='worklist_production_choices'></div></div>
+      <div id='worklist_right'>
+        <div id='tasks_heading'>
+          <input id='show_unreachable_items' type='checkbox'/>Show unreachable items<br/>
+          Source tasks:
+        </div>
+        <div id='worklist_production_choices'></div>
+      </div>
       <div id='prod_buttons'>
         <button type="button" class="button" onClick="city_change_production();" id="city_change_production_btn">Change Production</button>
         <button type="button" class="button" onClick="city_add_to_worklist();" id="city_add_to_worklist_btn">Add to worklist</button>

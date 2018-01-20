@@ -58,6 +58,7 @@ var city_dialog_template = null;
 /* Information for mapping workable tiles of a city to local index */
 var city_tile_map = null;
 
+var opt_show_unreachable_items = false;
 
 /**************************************************************************
   Initialize the city dialog once the first time.
@@ -533,7 +534,7 @@ function get_production_progress(pcity)
 /**************************************************************************
 ...
 **************************************************************************/
-function generate_production_list(pcity)
+function generate_production_list()
 {
   var production_list = [];
   for (var unit_type_id in unit_types) {
@@ -542,7 +543,6 @@ function generate_production_list(pcity)
     /* FIXME: web client doesn't support unit flags yet, so this is a hack: */
     if (punit_type['name'] == "Barbarian Leader" || punit_type['name'] == "Leader") continue;
 
-    if (can_city_build_unit_now(pcity, punit_type) == true) {
       production_list.push({"kind": VUT_UTYPE, "value" : punit_type['id'],
                             "text" : punit_type['name'],
 	                    "helptext" : punit_type['helptext'],
@@ -552,12 +552,10 @@ function generate_production_list(pcity)
                                              + punit_type['defense_strength'] + ", " 
                                              + punit_type['firepower'],
                             "sprite" : get_unit_type_image_sprite(punit_type)});
-    }
   }
 
   for (var improvement_id in improvements) {
     var pimprovement = improvements[improvement_id];
-    if (can_city_build_improvement_now(pcity, pimprovement)) {
       var build_cost = pimprovement['build_cost'];
       if (pimprovement['name'] == "Coinage") build_cost = "-";
       production_list.push({"kind": VUT_IMPROVEMENT,
@@ -568,7 +566,6 @@ function generate_production_list(pcity)
                             "build_cost" : build_cost,
                             "unit_details" : "-",
                             "sprite" : get_improvement_image_sprite(pimprovement) });
-    }
   }
   return production_list;
 }
@@ -588,10 +585,10 @@ function can_city_build_unit_direct(pcity, punittype)
   Return whether given city can build given unit; returns FALSE if unit is
   obsolete.
 **************************************************************************/
-function can_city_build_unit_now(pcity, punittype)
+function can_city_build_unit_now(pcity, punittype_id)
 {
   return (pcity != null && pcity['can_build_unit'] != null
-          && pcity['can_build_unit'][punittype['id']] == "1");
+          && pcity['can_build_unit'][punittype_id] == "1");
 }
 
 
@@ -599,10 +596,22 @@ function can_city_build_unit_now(pcity, punittype)
   Return whether given city can build given building; returns FALSE if
   the building is obsolete.
 **************************************************************************/
-function can_city_build_improvement_now(pcity, pimprove)
+function can_city_build_improvement_now(pcity, pimprove_id)
 {
   return (pcity != null && pcity['can_build_improvement'] != null
-          && pcity['can_build_improvement'][pimprove['id']] == "1");
+          && pcity['can_build_improvement'][pimprove_id] == "1");
+}
+
+
+/**************************************************************************
+  Return whether given city can build given item.
+**************************************************************************/
+function can_city_build_now(pcity, kind, value)
+{
+  return kind != null && value != null &&
+       ((kind == VUT_UTYPE)
+       ? can_city_build_unit_now(pcity, value)
+       : can_city_build_improvement_now(pcity, value));
 }
 
 
@@ -1329,12 +1338,16 @@ function city_worklist_dialog(pcity)
 	var build_cost = pimpr['build_cost'];
 	if (pimpr['name'] == "Coinage") build_cost = "-";
 	universals_list.push({"name" : pimpr['name'],
+		"kind" : kind,
+		"value" : value,
 		"helptext" : pimpr['helptext'],
 		"build_cost" : build_cost,
 		"sprite" : get_improvement_image_sprite(pimpr)});
       } else if (kind == VUT_UTYPE) {
         var putype = unit_types[value];
         universals_list.push({"name" : putype['name'],
+		"kind" : kind,
+		"value" : value,
 		"helptext" : putype['helptext'],
 		"build_cost" : putype['build_cost'],
 		"sprite" : get_unit_type_image_sprite(putype)});
@@ -1353,7 +1366,10 @@ function city_worklist_dialog(pcity)
       continue;
     }
 
-    worklist_html += "<tr class='prod_choice_list_item' data-wlitem='" + j + "' "
+    worklist_html += "<tr class='prod_choice_list_item"
+     + (can_city_build_now(pcity, universal['kind'], universal['value']) ?
+        "" : " cannot_build_item")
+     + "' data-wlitem='" + j + "' "
      + " title=\"" + universal['helptext'] + "\">"
      + "<td><div class='production_list_item_sub' style=' background: transparent url("
            + sprite['image-src'] +
@@ -1366,7 +1382,7 @@ function city_worklist_dialog(pcity)
   worklist_html += "</table>";
   $("#city_current_worklist").html(worklist_html);
 
-  var production_list = generate_production_list(pcity);
+  var production_list = generate_production_list();
   var production_html = "<table class='worklist_table'><tr><td>Type</td><td>Name</td><td title='Attack/Defense/Firepower'>Info</td><td>Cost</td></tr>";
   for (var a = 0; a < production_list.length; a++) {
     var sprite = production_list[a]['sprite'];
@@ -1377,7 +1393,9 @@ function city_worklist_dialog(pcity)
     kind = production_list[a]['kind'];
     value = production_list[a]['value'];
 
-    production_html += "<tr class='prod_choice_list_item kindvalue_item' data-value='" + value + "' data-kind='" + kind + "'>"
+    production_html += "<tr class='prod_choice_list_item kindvalue_item"
+     + (can_city_build_now(pcity, kind, value) ? "" : " cannot_build_item")
+     + "' data-value='" + value + "' data-kind='" + kind + "'>"
      + "<td><div class='production_list_item_sub' title=\"" + production_list[a]['helptext'] + "\" style=' background: transparent url("
            + sprite['image-src'] +
            ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y']
@@ -1390,6 +1408,12 @@ function city_worklist_dialog(pcity)
   production_html += "</table>";
 
   $("#worklist_production_choices").html(production_html);
+  $('#show_unreachable_items').off('click');
+  $('#show_unreachable_items').click(function() {
+    opt_show_unreachable_items = !opt_show_unreachable_items;
+    show_unreachable_items_update();
+  });
+  show_unreachable_items_update();
 
   worklist_dialog_active = true;
   var turns_to_complete = get_city_production_time(pcity);
@@ -1457,7 +1481,7 @@ function city_worklist_dialog(pcity)
 
   var tab_h = $("#city_production_tab").height();
   $("#city_current_worklist").height(tab_h - 150);
-  $("#worklist_production_choices").height(tab_h - 97);
+  $("#worklist_production_choices").height(tab_h - 121);
   /* TODO: remove all hacky sizing and positioning */
   /* It would have been nice to use $("#city_current_worklist").position().top
      for worklist_control padding-top, but that's 0 on first run.
@@ -1491,6 +1515,27 @@ function city_worklist_dialog(pcity)
   worklist_items.dblclick(handle_current_worklist_direct_remove);
 
   update_worklist_actions();
+}
+
+/**************************************************************************
+ Update unreachable items visibility.
+**************************************************************************/
+function show_unreachable_items_update()
+{
+  $('#show_unreachable_items').prop('checked', opt_show_unreachable_items);
+  var cbi = $('#worklist_production_choices').find('.cannot_build_item');
+  if (opt_show_unreachable_items) {
+    cbi.show();
+  } else {
+    cbi.hide();
+    // Unselect everything if the selection contains hidden items
+    if (production_selection.length !== 0
+        && cbi.filter('.ui-selected').length !== 0) {
+      production_selection = [];
+      $('#worklist_production_choices').find('tr').removeClass('ui-selected');
+      update_worklist_actions();
+    }
+  }
 }
 
 /**************************************************************************

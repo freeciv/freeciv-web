@@ -679,6 +679,18 @@ button {
   background-color: white;
 }
 
+.cannot_build_item {
+  background-color: rgba(255,63,63,0.5);
+}
+
+.cannot_build_item.ui-selected {
+  background-color: rgba(255,63,63,1);
+}
+
+.cannot_build_item.ui-selecting {
+  background-color: rgba(255,127,127,1);
+}
+
 .ui-widget-header {
   background: #cb842e url("/images/ui-widget-header.png") 50% 50% repeat-x;
 }

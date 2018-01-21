@@ -91,7 +91,7 @@ function new_hotseat_game()
 **************************************************************************/
 function setup_hotseat_game() 
 {
-  if (ws.readyState === 1) {
+  if (ws != null && ws.readyState === 1) {
     send_message("/set phasemode player");
     send_message("/set minp 2");
     send_message("/set ec_chat=enabled");

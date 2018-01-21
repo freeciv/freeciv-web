@@ -119,6 +119,14 @@ public class TokenSignin extends HttpServlet {
                     if (dbSubject != null && dbSubject.equalsIgnoreCase(userId) && dbActivated == 1 && username.equalsIgnoreCase(Username)) {
                         // if username and userId matches, then login OK!
                         response.getOutputStream().print(userId);
+
+                        String query = "UPDATE google_auth SET ip = ? WHERE LOWER(username) = ?";
+                        PreparedStatement preparedStatement = conn.prepareStatement(query);
+                        preparedStatement.setString(1, ipAddress);
+                        preparedStatement.setString(2, username.toLowerCase());
+                        preparedStatement.executeUpdate();
+
+
                     } else {
                         // if username and userId doesn't match, then login not OK!
                         response.getOutputStream().print("Failed");

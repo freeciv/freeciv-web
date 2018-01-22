@@ -1382,38 +1382,21 @@ function city_worklist_dialog(pcity)
   worklist_html += "</table>";
   $("#city_current_worklist").html(worklist_html);
 
-  var production_list = generate_production_list();
-  var production_html = "<table class='worklist_table'><tr><td>Type</td><td>Name</td><td title='Attack/Defense/Firepower'>Info</td><td>Cost</td></tr>";
-  for (var a = 0; a < production_list.length; a++) {
-    var sprite = production_list[a]['sprite'];
-    if (sprite == null) {
-      console.log("Missing sprite for " + production_list[a]['value']);
-      continue;
-    }
-    kind = production_list[a]['kind'];
-    value = production_list[a]['value'];
+  populate_worklist_production_choices(pcity);
 
-    production_html += "<tr class='prod_choice_list_item kindvalue_item"
-     + (can_city_build_now(pcity, kind, value) ? "" : " cannot_build_item")
-     + "' data-value='" + value + "' data-kind='" + kind + "'>"
-     + "<td><div class='production_list_item_sub' title=\"" + production_list[a]['helptext'] + "\" style=' background: transparent url("
-           + sprite['image-src'] +
-           ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y']
-           + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px;'"
-           +"></div></td>"
-     + "<td class='prod_choice_name'>" + production_list[a]['text'] + "</td>"
-     + "<td class='prod_choice_name'>" + production_list[a]['unit_details'] + "</td>"
-     + "<td class='prod_choice_cost'>" + production_list[a]['build_cost'] + "</td></tr>";
-  }
-  production_html += "</table>";
-
-  $("#worklist_production_choices").html(production_html);
   $('#show_unreachable_items').off('click');
   $('#show_unreachable_items').click(function() {
     opt_show_unreachable_items = !opt_show_unreachable_items;
-    show_unreachable_items_update();
+    $('#show_unreachable_items').prop('checked', opt_show_unreachable_items);
+    // TODO: properly update the selection only when needed,
+    //       instead of always emptying it.
+    if (production_selection.length !== 0) {
+      production_selection = [];
+      update_worklist_actions();
+    }
+    populate_worklist_production_choices(pcity);
   });
-  show_unreachable_items_update();
+  $('#show_unreachable_items').prop('checked', opt_show_unreachable_items);
 
   worklist_dialog_active = true;
   var turns_to_complete = get_city_production_time(pcity);
@@ -1440,40 +1423,7 @@ function city_worklist_dialog(pcity)
 
   $(".production_list_item_sub").tooltip();
 
-  if (!is_touch_device()) {
-    $("#worklist_production_choices .worklist_table").selectable({
-       filter: "tr",
-       selected: handle_worklist_select,
-       unselected: handle_worklist_unselect
-    });
-
-    if (production_selection.length > 0) {
-      var prod_items = $("#worklist_production_choices .kindvalue_item");
-      var sel = [];
-      production_selection.forEach(function (v) {
-        sel.push("[data-value='" + v.value + "']" +
-                 "[data-kind='"  + v.kind  + "']");
-      });
-      prod_items.filter(sel.join(",")).addClass("ui-selected");
-    }
-
-    $(".kindvalue_item").dblclick(function() {
-      value = parseFloat($(this).data('value'));
-      kind = parseFloat($(this).data('kind'));
-      send_city_worklist_add(pcity['id'], kind, value);
-    });
-  } else {
-    $(".kindvalue_item").click(function() {
-      value = parseFloat($(this).data('value'));
-      kind = parseFloat($(this).data('kind'));
-      if (city_prod_clicks == 0) {
-        send_city_change(pcity['id'], kind, value);
-      } else {
-        send_city_worklist_add(pcity['id'], kind, value);
-      }
-      city_prod_clicks += 1;
-
-    });
+  if (is_touch_device()) {
     $("#prod_buttons").html("<x-small>Click to change production, next clicks will add to worklist on mobile.</x-small>");
   }
 
@@ -1518,23 +1468,75 @@ function city_worklist_dialog(pcity)
 }
 
 /**************************************************************************
- Update unreachable items visibility.
+ Update the production choices.
 **************************************************************************/
-function show_unreachable_items_update()
+function populate_worklist_production_choices(pcity)
 {
-  $('#show_unreachable_items').prop('checked', opt_show_unreachable_items);
-  var cbi = $('#worklist_production_choices').find('.cannot_build_item');
-  if (opt_show_unreachable_items) {
-    cbi.show();
-  } else {
-    cbi.hide();
-    // Unselect everything if the selection contains hidden items
-    if (production_selection.length !== 0
-        && cbi.filter('.ui-selected').length !== 0) {
-      production_selection = [];
-      $('#worklist_production_choices').find('tr').removeClass('ui-selected');
-      update_worklist_actions();
+  var production_list = generate_production_list();
+  var production_html = "<table class='worklist_table'><tr><td>Type</td><td>Name</td><td title='Attack/Defense/Firepower'>Info</td><td>Cost</td></tr>";
+  for (var a = 0; a < production_list.length; a++) {
+    var sprite = production_list[a]['sprite'];
+    if (sprite == null) {
+      console.log("Missing sprite for " + production_list[a]['value']);
+      continue;
     }
+    var kind = production_list[a]['kind'];
+    var value = production_list[a]['value'];
+    var can_build = can_city_build_now(pcity, kind, value);
+
+    if (can_build || opt_show_unreachable_items) {
+      production_html += "<tr class='prod_choice_list_item kindvalue_item"
+       + (can_build ? "" : " cannot_build_item")
+       + "' data-value='" + value + "' data-kind='" + kind + "'>"
+       + "<td><div class='production_list_item_sub' title=\"" + production_list[a]['helptext'] + "\" style=' background: transparent url("
+           + sprite['image-src'] +
+           ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y']
+           + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px;'"
+           +"></div></td>"
+       + "<td class='prod_choice_name'>" + production_list[a]['text'] + "</td>"
+       + "<td class='prod_choice_name'>" + production_list[a]['unit_details'] + "</td>"
+       + "<td class='prod_choice_cost'>" + production_list[a]['build_cost'] + "</td></tr>";
+     }
+  }
+  production_html += "</table>";
+
+  $("#worklist_production_choices").html(production_html);
+  $("#worklist_production_choices .production_list_item_sub").tooltip();
+
+  if (!is_touch_device()) {
+    $("#worklist_production_choices .worklist_table").selectable({
+       filter: "tr",
+       selected: handle_worklist_select,
+       unselected: handle_worklist_unselect
+    });
+
+    if (production_selection.length > 0) {
+      var prod_items = $("#worklist_production_choices .kindvalue_item");
+      var sel = [];
+      production_selection.forEach(function (v) {
+        sel.push("[data-value='" + v.value + "']" +
+                 "[data-kind='"  + v.kind  + "']");
+      });
+      prod_items.filter(sel.join(",")).addClass("ui-selected");
+    }
+
+    $(".kindvalue_item").dblclick(function() {
+      var value = parseFloat($(this).data('value'));
+      var kind = parseFloat($(this).data('kind'));
+      send_city_worklist_add(pcity['id'], kind, value);
+    });
+  } else {
+    $(".kindvalue_item").click(function() {
+      var value = parseFloat($(this).data('value'));
+      var kind = parseFloat($(this).data('kind'));
+      if (city_prod_clicks == 0) {
+        send_city_change(pcity['id'], kind, value);
+      } else {
+        send_city_worklist_add(pcity['id'], kind, value);
+      }
+      city_prod_clicks += 1;
+
+    });
   }
 }
 

@@ -166,7 +166,7 @@ function show_city_dialog(pcity)
     worklist_selection = [];
   }
 
-  if (active_city != null) $("#city_dialog").dialogExtend("restore");
+  if (active_city != null) close_city_dialog();
   active_city = pcity;
   if (pcity == null) return;
 
@@ -755,6 +755,19 @@ function city_dialog_close_handler()
     setup_window_size ();
     center_tile_mapcanvas(city_tile(active_city));
     active_city = null;
+     /*
+      * TODO: this is just a hack to recover the background map.
+      *       setup_window_size will resize (and thus clean) the map canvas,
+      *       and this is now called when we show a city dialog while another
+      *       one is open, which is unexpectedly common, tracing the functions
+      *       shows two or three calls to show_city_dialog. Maybe one internal
+      *       from the client UI, the rest from info packets from the server.
+      *       Both those duplicate calls and the stopping of map updates due
+      *       to the 2D rendered being used to draw the minimap should go.
+      */
+    if (renderer == RENDERER_2DCANVAS) {
+      update_map_canvas_full();
+    }
 
   }
   keyboard_input=true;

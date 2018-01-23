@@ -936,10 +936,10 @@ function update_unit_order_commands()
       if (!tile_has_extra(ptile, EXTRA_ROAD)) {
         $("#order_road").show();
         $("#order_railroad").hide();
-        if (!(tile_has_extra(ptile, EXTRA_RIVER) && player_invention_state(client.conn.playing, 8) == TECH_UNKNOWN)) {
+        if (!(tile_has_extra(ptile, EXTRA_RIVER) && player_invention_state(client.conn.playing, tech_id_by_name('Bridge Building')) == TECH_UNKNOWN)) {
 	      unit_actions["road"] = {name: "Build road (R)"};
 	    }
-      } else if (player_invention_state(client.conn.playing, 65) == TECH_KNOWN
+      } else if (player_invention_state(client.conn.playing, tech_id_by_name('Railroad')) == TECH_KNOWN
                  && tile_has_extra(ptile, EXTRA_ROAD)
                && !tile_has_extra(ptile, EXTRA_RAIL)) {
         $("#order_road").hide();
@@ -949,7 +949,7 @@ function update_unit_order_commands()
         $("#order_road").hide();
         $("#order_railroad").hide();
       }
-      if (tile_has_extra(ptile, EXTRA_RIVER) && player_invention_state(client.conn.playing, 8) == TECH_UNKNOWN) {
+      if (tile_has_extra(ptile, EXTRA_RIVER) && player_invention_state(client.conn.playing, tech_id_by_name('Bridge Building')) == TECH_UNKNOWN) {
         $("#order_road").hide();
       }
 
@@ -990,11 +990,11 @@ function update_unit_order_commands()
         $("#order_irrigate").hide();
 
       }
-      if (player_invention_state(client.conn.playing, 19) == TECH_KNOWN) {
+      if (player_invention_state(client.conn.playing, tech_id_by_name('Construction')) == TECH_KNOWN) {
         unit_actions["fortress"] = {name: string_unqualify(terrain_control['gui_type_base0']) + " (Shift-F)"};
       }
 
-      if (player_invention_state(client.conn.playing, 64) == TECH_KNOWN) {
+      if (player_invention_state(client.conn.playing, tech_id_by_name('Radio')) == TECH_KNOWN) {
         unit_actions["airbase"] = {name: string_unqualify(terrain_control['gui_type_base1']) + " (E)"};
       }
 

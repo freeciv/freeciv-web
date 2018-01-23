@@ -81,6 +81,7 @@ function mapview_mouse_click(e)
     mapview_mouse_movement = false;
     update_mouse_cursor();
   }
+  keyboard_input = true;
 
 }
 

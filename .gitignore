@@ -83,3 +83,4 @@ src/main/webapp/tilesets
 logs/
 tests/screenshot*.png
 .freeciv_index
+.idea

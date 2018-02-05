@@ -26,10 +26,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box_url = "https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64-vagrant.box"
 
   if Vagrant::Util::Platform.windows?
-    config.vm.network :forwarded_port, guest: 80, host: 80, host_ip: "localhost"
-    config.vm.network :forwarded_port, guest: 443, host: 443, host_ip: "localhost"
+	  config.vm.network :forwarded_port, guest: 80, host: 80, host_ip: "127.0.0.1"
+	  config.vm.network :forwarded_port, guest: 443, host: 443, host_ip: "127.0.0.1"
   else 
-    config.vm.network :forwarded_port, guest: 80, host: 8080, host_ip: "localhost"
+	  config.vm.network :forwarded_port, guest: 80, host: 8080, host_ip: "127.0.0.1"
   end
 
   config.vm.provider "virtualbox" do |v|

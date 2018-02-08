@@ -41,6 +41,11 @@ cd ${basedir}
 echo "==== Installing Updates and Dependencies ===="
 export DEBIAN_FRONTEND=noninteractive
 
+echo "==== Installing Handlebars ===="
+curl -sL https://deb.nodesource.com/setup_8.x | bash -
+apt-get -y install nodejs
+npm install handlebars -g
+
 echo "==== Fetching/Installing Tornado Web Server ===="
 cd /tmp
 wget ${tornado_url}

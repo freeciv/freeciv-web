@@ -180,6 +180,25 @@
 				</plugin>
 
 				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>exec-maven-plugin</artifactId>
+					<version>1.6.0</version>
+					<executions>
+						<execution>
+							<id>Precompile Handlebars templates</id>
+							<goals>
+								<goal>exec</goal>
+							</goals>
+							<configuration>
+								<executable>handlebars</executable>
+								<commandlineArgs>src/main/webapp/webclient -e hbs -f src/main/webapp/javascript/hbs-templates.js --knownOnly</commandlineArgs>
+							</configuration>
+							<phase>generate-sources</phase>
+						</execution>
+					</executions>
+				</plugin>
+
+				<plugin>
 					<groupId>com.samaxes.maven</groupId>
 					<artifactId>minify-maven-plugin</artifactId>
 					<version>1.7.6</version>

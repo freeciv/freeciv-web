@@ -48,16 +48,7 @@ function show_diplomacy_dialog(counterpart)
 {
  if (cardboard_vr_enabled) return;
  var pplayer = players[counterpart];
- $.ajax({
-   url: "/webclient/diplomacy_meeting.hbs?ts=" + ts,
-   dataType: "html",
-   cache: true,
-   async: false
- }).fail(function() {
-   swal("Unable to load diplomacy meeting dialog template.");
- }).done(function( data ) {
-   create_diplomacy_dialog(pplayer, Handlebars.compile(data));
- });
+ create_diplomacy_dialog(pplayer, Handlebars.templates['diplomacy_meeting']);
 }
 
 /**************************************************************************

@@ -53,30 +53,10 @@ var city_screen_updater = new EventAggregator(update_city_screen, 250,
                                               EventAggregator.DP_NONE,
                                               250, 3, 250);
 
-var city_dialog_template = null;
-
 /* Information for mapping workable tiles of a city to local index */
 var city_tile_map = null;
 
 var opt_show_unreachable_items = false;
-
-/**************************************************************************
-  Initialize the city dialog once the first time.
-**************************************************************************/
-function init_city_dialog()
-{
-  $.ajax({
-    url: "/webclient/city.hbs?ts=" + ts,
-    dataType: "html",
-    cache: true,
-    async: true
-  }).fail(function() {
-    swal("Unable to load city dialog template.");
-  }).done(function( data ) {
-    city_dialog_template = Handlebars.compile(data);
-  });
-
-}
 
 /**************************************************************************
  ...
@@ -176,7 +156,7 @@ function show_city_dialog(pcity)
 
   var city_data = {};
 
-  $("#city_dialog").html(city_dialog_template(city_data));
+  $("#city_dialog").html(Handlebars.templates['city'](city_data));
 
   $("#city_canvas").click(city_mapview_mouse_click);
 

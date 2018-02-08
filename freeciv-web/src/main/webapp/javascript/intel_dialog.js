@@ -124,18 +124,7 @@ function show_intelligence_report_embassy(pplayer)
     });
   }
 
-  $.ajax({
-    url: "/webclient/intel.hbs?ts=" + ts,
-    dataType: "html",
-    cache: true,
-    async: false
-  }).fail(function() {
-    console.error("Unable to intelligence report dialog template.");
-  }).done(function( data ) {
-    var template=Handlebars.compile(data);
-    $("#intel_dialog").html(template(intel_data));
-  });
-
+  $("#intel_dialog").html(Handlebars.templates['intel'](intel_data));
   $("#intel_dialog").dialog({
 			bgiframe: true,
 			modal: true,

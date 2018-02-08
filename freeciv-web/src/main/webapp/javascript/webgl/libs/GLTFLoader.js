@@ -121,12 +121,6 @@ THREE.GLTFLoader = ( function () {
 
 				}
 
-				if ( json.extensionsUsed.indexOf( EXTENSIONS.KHR_MATERIALS_COMMON ) >= 0 ) {
-
-					extensions[ EXTENSIONS.KHR_MATERIALS_COMMON ] = new GLTFMaterialsCommonExtension( json );
-
-				}
-
 				if ( json.extensionsUsed.indexOf( EXTENSIONS.KHR_MATERIALS_PBR_SPECULAR_GLOSSINESS ) >= 0 ) {
 
 					extensions[ EXTENSIONS.KHR_MATERIALS_PBR_SPECULAR_GLOSSINESS ] = new GLTFMaterialsPbrSpecularGlossinessExtension();
@@ -208,7 +202,6 @@ THREE.GLTFLoader = ( function () {
 	var EXTENSIONS = {
 		KHR_BINARY_GLTF: 'KHR_binary_glTF',
 		KHR_LIGHTS: 'KHR_lights',
-		KHR_MATERIALS_COMMON: 'KHR_materials_common',
 		KHR_MATERIALS_PBR_SPECULAR_GLOSSINESS: 'KHR_materials_pbrSpecularGlossiness'
 	};
 
@@ -296,107 +289,6 @@ THREE.GLTFLoader = ( function () {
 
 	}
 
-	/**
-	 * Common Materials Extension
-	 *
-	 * Specification: https://github.com/KhronosGroup/glTF/tree/master/extensions/Khronos/KHR_materials_common
-	 */
-	function GLTFMaterialsCommonExtension( json ) {
-
-		this.name = EXTENSIONS.KHR_MATERIALS_COMMON;
-
-	}
-
-	GLTFMaterialsCommonExtension.prototype.getMaterialType = function ( material ) {
-
-		var khrMaterial = material.extensions[ this.name ];
-
-		switch ( khrMaterial.type ) {
-
-			case 'commonBlinn' :
-			case 'commonPhong' :
-				return THREE.MeshPhongMaterial;
-
-			case 'commonLambert' :
-				return THREE.MeshLambertMaterial;
-
-			case 'commonConstant' :
-			default :
-				return THREE.MeshBasicMaterial;
-
-		}
-
-	};
-
-	GLTFMaterialsCommonExtension.prototype.extendParams = function ( materialParams, material, parser ) {
-
-		var khrMaterial = material.extensions[ this.name ];
-
-		var pending = [];
-
-		var keys = [];
-
-		// TODO: Currently ignored: 'ambientFactor', 'ambientTexture'
-		switch ( khrMaterial.type ) {
-
-			case 'commonBlinn' :
-			case 'commonPhong' :
-				keys.push( 'diffuseFactor', 'diffuseTexture', 'specularFactor', 'specularTexture', 'shininessFactor' );
-				break;
-
-			case 'commonLambert' :
-				keys.push( 'diffuseFactor', 'diffuseTexture' );
-				break;
-
-			case 'commonConstant' :
-			default :
-				break;
-
-		}
-
-		var materialValues = {};
-
-		keys.forEach( function ( v ) {
-
-			if ( khrMaterial[ v ] !== undefined ) materialValues[ v ] = khrMaterial[ v ];
-
-		} );
-
-		if ( materialValues.diffuseFactor !== undefined ) {
-
-			materialParams.color = new THREE.Color().fromArray( materialValues.diffuseFactor );
-			materialParams.opacity = materialValues.diffuseFactor[ 3 ];
-
-		}
-
-		if ( materialValues.diffuseTexture !== undefined ) {
-
-			pending.push( parser.assignTexture( materialParams, 'map', materialValues.diffuseTexture.index ) );
-
-		}
-
-		if ( materialValues.specularFactor !== undefined ) {
-
-			materialParams.specular = new THREE.Color().fromArray( materialValues.specularFactor );
-
-		}
-
-		if ( materialValues.specularTexture !== undefined ) {
-
-			pending.push( parser.assignTexture( materialParams, 'specularMap', materialValues.specularTexture.index ) );
-
-		}
-
-		if ( materialValues.shininessFactor !== undefined ) {
-
-			materialParams.shininess = materialValues.shininessFactor;
-
-		}
-
-		return Promise.all( pending );
-
-	};
-
 	/* BINARY EXTENSION */
 
 	var BINARY_EXTENSION_BUFFER_NAME = 'binary_glTF';
@@ -468,7 +360,7 @@ THREE.GLTFLoader = ( function () {
 	/**
 	 * Specular-Glossiness Extension
 	 *
-	 * Specification: https://github.com/KhronosGroup/glTF/tree/master/extensions/Khronos/KHR_materials_pbrSpecularGlossiness
+	 * Specification: https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Khronos/KHR_materials_pbrSpecularGlossiness
 	 */
 	function GLTFMaterialsPbrSpecularGlossinessExtension() {
 
@@ -713,6 +605,12 @@ THREE.GLTFLoader = ( function () {
 
 			// Here's based on refreshUniformsCommon() and refreshUniformsStandard() in WebGLRenderer.
 			refreshUniforms: function ( renderer, scene, camera, geometry, material, group ) {
+
+				if ( material.isGLTFSpecularGlossinessMaterial !== true ) {
+
+					return;
+
+				}
 
 				var uniforms = material.uniforms;
 				var defines = material.defines;
@@ -1811,13 +1709,7 @@ THREE.GLTFLoader = ( function () {
 
 		var pending = [];
 
-		if ( materialExtensions[ EXTENSIONS.KHR_MATERIALS_COMMON ] ) {
-
-			var khcExtension = extensions[ EXTENSIONS.KHR_MATERIALS_COMMON ];
-			materialType = khcExtension.getMaterialType( materialDef );
-			pending.push( khcExtension.extendParams( materialParams, materialDef, parser ) );
-
-		} else if ( materialExtensions[ EXTENSIONS.KHR_MATERIALS_PBR_SPECULAR_GLOSSINESS ] ) {
+		if ( materialExtensions[ EXTENSIONS.KHR_MATERIALS_PBR_SPECULAR_GLOSSINESS ] ) {
 
 			var sgExtension = extensions[ EXTENSIONS.KHR_MATERIALS_PBR_SPECULAR_GLOSSINESS ];
 			materialType = sgExtension.getMaterialType( materialDef );
@@ -2198,19 +2090,60 @@ THREE.GLTFLoader = ( function () {
 
 						}
 
-					} else if ( primitive.mode === WEBGL_CONSTANTS.LINES ) {
+					} else if ( primitive.mode === WEBGL_CONSTANTS.LINES ||
+						primitive.mode === WEBGL_CONSTANTS.LINE_STRIP ||
+						primitive.mode === WEBGL_CONSTANTS.LINE_LOOP ) {
 
-						mesh = new THREE.LineSegments( geometry, material );
+						var cacheKey = 'LineBasicMaterial:' + material.uuid;
 
-					} else if ( primitive.mode === WEBGL_CONSTANTS.LINE_STRIP ) {
+						var lineMaterial = scope.cache.get( cacheKey );
 
-						mesh = new THREE.Line( geometry, material );
+						if ( ! lineMaterial ) {
 
-					} else if ( primitive.mode === WEBGL_CONSTANTS.LINE_LOOP ) {
+							lineMaterial = new THREE.LineBasicMaterial();
+							THREE.Material.prototype.copy.call( lineMaterial, material );
+							lineMaterial.color.copy( material.color );
+							lineMaterial.lights = false;  // LineBasicMaterial doesn't support lights yet
 
-						mesh = new THREE.LineLoop( geometry, material );
+							scope.cache.add( cacheKey, lineMaterial );
+
+						}
+
+						material = lineMaterial;
+
+						if ( primitive.mode === WEBGL_CONSTANTS.LINES ) {
+
+							mesh = new THREE.LineSegments( geometry, material );
+
+						} else if ( primitive.mode === WEBGL_CONSTANTS.LINE_STRIP ) {
+
+							mesh = new THREE.Line( geometry, material );
+
+						} else {
+
+							mesh = new THREE.LineLoop( geometry, material );
+
+						}
 
 					} else if ( primitive.mode === WEBGL_CONSTANTS.POINTS ) {
+
+						var cacheKey = 'PointsMaterial:' + material.uuid;
+
+						var pointsMaterial = scope.cache.get( cacheKey );
+
+						if ( ! pointsMaterial ) {
+
+							pointsMaterial = new THREE.PointsMaterial();
+							THREE.Material.prototype.copy.call( pointsMaterial, material );
+							pointsMaterial.color.copy( material.color );
+							pointsMaterial.map = material.map;
+							pointsMaterial.lights = false;  // PointsMaterial doesn't support lights yet
+
+							scope.cache.add( cacheKey, pointsMaterial );
+
+						}
+
+						material = pointsMaterial;
 
 						mesh = new THREE.Points( geometry, material );
 

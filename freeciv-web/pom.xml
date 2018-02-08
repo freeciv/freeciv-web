@@ -340,7 +340,7 @@
 							<exclude>src/main/webapp/javascript/libs/bmp_lib.js</exclude>
 							<exclude>src/main/webapp/javascript/libs/bootstrap.min.js</exclude>
 							<exclude>src/main/webapp/javascript/libs/fg.menu.js</exclude>
-							<exclude>src/main/webapp/javascript/libs/handlebars-v4.0.5.js</exclude>
+							<exclude>src/main/webapp/javascript/libs/handlebars.runtime-v4.0.11.js</exclude>
 							<exclude>src/main/webapp/javascript/libs/jquery.blockUI.js</exclude>
 							<exclude>src/main/webapp/javascript/libs/jquery.contextMenu.js</exclude>
 							<exclude>src/main/webapp/javascript/libs/jquery.min.js</exclude>

@@ -500,6 +500,7 @@ function handle_ruleset_control(packet)
   terrain_control = {};
   SINGLE_MOVE = undefined;
   unit_types = {};
+  unit_classes = {};
   city_rules = {};
   improvements = {};
   terrains = {};
@@ -521,7 +522,6 @@ function handle_ruleset_control(packet)
    * Some ruleset packets don't have handlers *yet*. Remember to clean up
    * when they are implemented:
    *   handle_ruleset_government_ruler_title
-   *   handle_ruleset_unit_class
    *   handle_ruleset_base
    *   handle_ruleset_choices
    *   handle_ruleset_road
@@ -1216,7 +1216,8 @@ function handle_ruleset_building(packet)
 
 function handle_ruleset_unit_class(packet)
 {
-  /* TODO: implement */
+  packet['flags'] = new BitVector(packet['flags']);
+  unit_classes[packet['id']] = packet;
 }
 
 function handle_ruleset_disaster(packet)

@@ -420,3 +420,42 @@ function get_unit_city_info(punit)
   return result;
 }
 
+/**************************************************************************
+ Returns a list of extras a unit can pillage from a tile.
+ It is empty if the unit can't pillage or there's nothing to.
+ Contains just EXTRA_NONE if there's something but the unit can't choose.
+**************************************************************************/
+function get_what_can_unit_pillage_from(punit, ptile)
+{
+  var targets = [];
+  if (punit == null || ptile == null) return targets;
+  if (terrains[ptile.terrain].pillage_time == 0) return targets;
+  var unit_class = unit_classes[unit_types[punit.type].unit_class_id];
+  if (!unit_class.flags.isSet(UCF_CAN_PILLAGE)) return targets;
+
+  /* Get what other units are pillaging on the tile */
+  var pillaging = new BitVector([]);
+  for (unit in ptile.units) {
+    if (unit.activity == ACTIVITY_PILLAGE) {
+      pillaging.set(unit.activity_tgt);
+    }
+  }
+
+  var available = ptile.extras.toBitSet();
+  for (var i = 0; i < available.length; i++) {
+    var extra = available[i];
+    if ((extras[extra].rmcauses & (1 << ERM_PILLAGE))
+        && !pillaging.isSet(extra)) {
+      // TODO: check dependencies
+      if (game_info.pillage_select) {
+        targets.push(extra);
+      } else {
+        targets.push(EXTRA_NONE);
+        break;
+      }
+    }
+  }
+
+  return targets;
+}
+

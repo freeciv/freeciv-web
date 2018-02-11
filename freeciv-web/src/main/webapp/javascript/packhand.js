@@ -491,7 +491,59 @@ function handle_ruleset_control(packet)
   ruleset_summary = null;
   ruleset_description = null;
 
-  /* TODO: implement rest*/
+  game_rules = null;
+  nation_groups = [];
+  nations = {};
+  specialists = {};
+  techs = {};
+  governments = {};
+  terrain_control = {};
+  SINGLE_MOVE = undefined;
+  unit_types = {};
+  city_rules = {};
+  improvements = {};
+  terrains = {};
+  resources = {};
+  goods = {};
+  actions = {};
+
+  /* handle_ruleset_extra defines some variables dinamically */
+  for (var extra in extras) {
+    var ename = extras[extra]['name'];
+    delete window["EXTRA_" + ename.toUpperCase()];
+    if (ename == "Railroad") delete window["EXTRA_RAIL"];
+    else if (ename == "Oil") delete window["EXTRA_OIL_WELL"];
+    else if (ename == "Minor Tribe Village") delete window["EXTRA_HUT"];
+  }
+  extras = {};
+
+  /* TODO: implement rest.
+   * Some ruleset packets don't have handlers *yet*. Remember to clean up
+   * when they are implemented:
+   *   handle_ruleset_government_ruler_title
+   *   handle_ruleset_unit_class
+   *   handle_ruleset_base
+   *   handle_ruleset_choices
+   *   handle_ruleset_road
+   *   handle_ruleset_disaster
+   *   handle_ruleset_extra_flag
+   *   handle_ruleset_trade
+   *   handle_ruleset_unit_bonus
+   *   handle_ruleset_unit_flag
+   *   handle_ruleset_unit_class_flag
+   *   handle_ruleset_terrain_flag
+   *   handle_ruleset_achievement
+   *   handle_ruleset_tech_flag
+   *   handle_ruleset_action_enabler
+   *   handle_ruleset_nation_sets
+   *   handle_ruleset_style
+   *   handle_ruleset_music
+   *   handle_ruleset_action_auto
+   *
+   * Maybe also:
+   *   handle_rulesets_ready
+   *   handle_nation_availability
+   */
 
 }
 

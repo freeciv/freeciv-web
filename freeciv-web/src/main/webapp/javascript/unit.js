@@ -428,7 +428,13 @@ function get_unit_city_info(punit)
 function get_what_can_unit_pillage_from(punit, ptile)
 {
   var targets = [];
-  if (punit == null || ptile == null) return targets;
+  if (punit == null) return targets;
+
+  /* If no tile is given, use the one the unit is on */
+  if (ptile == null) {
+    ptile = index_to_tile(punit.tile);
+  }
+
   if (terrains[ptile.terrain].pillage_time == 0) return targets;
   var unit_class = unit_classes[unit_types[punit.type].unit_class_id];
   if (!unit_class.flags.isSet(UCF_CAN_PILLAGE)) return targets;

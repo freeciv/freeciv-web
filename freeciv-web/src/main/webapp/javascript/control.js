@@ -2470,7 +2470,14 @@ function key_unit_pillage()
   var funits = get_units_in_focus();
   for (var i = 0; i < funits.length; i++) {
     var punit = funits[i];
-    request_new_unit_activity(punit, ACTIVITY_PILLAGE, EXTRA_NONE);
+    var tgt = get_what_can_unit_pillage_from(punit, null);
+    if (tgt.length > 0) {
+      if (tgt.length == 1) {
+        request_new_unit_activity(punit, ACTIVITY_PILLAGE, EXTRA_NONE);
+      } else {
+        popup_pillage_selection_dialog(punit);
+      }
+    }
   }
   setTimeout(update_unit_focus, 700);
 }

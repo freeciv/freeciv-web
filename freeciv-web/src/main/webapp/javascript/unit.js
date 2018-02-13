@@ -427,6 +427,8 @@ function get_unit_city_info(punit)
 **************************************************************************/
 function get_what_can_unit_pillage_from(punit, ptile)
 {
+  var i, j;
+  var extra;
   var targets = [];
   if (punit == null) return targets;
 
@@ -439,20 +441,33 @@ function get_what_can_unit_pillage_from(punit, ptile)
   var unit_class = unit_classes[unit_types[punit.type].unit_class_id];
   if (!unit_class.flags.isSet(UCF_CAN_PILLAGE)) return targets;
 
+  var available = ptile.extras.toBitSet();
+  var cannot_pillage = new BitVector([]);
+
   /* Get what other units are pillaging on the tile */
-  var pillaging = new BitVector([]);
   for (unit in ptile.units) {
     if (unit.activity == ACTIVITY_PILLAGE) {
-      pillaging.set(unit.activity_tgt);
+      cannot_pillage.set(unit.activity_tgt);
     }
   }
 
-  var available = ptile.extras.toBitSet();
-  for (var i = 0; i < available.length; i++) {
-    var extra = available[i];
+  /* Get what extras that are dependencies of other */
+  for (i = 0; i < available.length; i++) {
+    extra = extras[available[i]];
+    for (j = 0; j < extra.reqs.length; j++) {
+      var req = extra.reqs[j];
+      if (req.kind == VUT_EXTRA && req.present == true) {
+        cannot_pillage.set(req.value);
+      }
+    }
+  }
+
+  // TODO: more things to check?
+
+  for (i = 0; i < available.length; i++) {
+    extra = available[i];
     if ((extras[extra].rmcauses & (1 << ERM_PILLAGE))
-        && !pillaging.isSet(extra)) {
-      // TODO: check dependencies
+        && !cannot_pillage.isSet(extra)) {
       if (game_info.pillage_select) {
         targets.push(extra);
       } else {

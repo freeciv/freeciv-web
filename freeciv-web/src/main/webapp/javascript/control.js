@@ -1093,12 +1093,16 @@ function update_unit_order_commands()
       }
     }
 
+    if (punit.activity != ACTIVITY_IDLE || punit.ai || punit.has_orders) {
+      unit_actions["idle"] = {name: "Cancel orders (Shift-J)"};
+    } else {
+      unit_actions["noorders"] = {name: "No orders (J)"};
+    }
   }
 
   unit_actions = $.extend(unit_actions, {
             "sentry": {name: "Sentry (S)"},
             "wait": {name: "Wait (W)"},
-            "noorders": {name: "No orders (J)"},
             "disband": {name: "Disband (Shift-D)"}
             });
 
@@ -1725,7 +1729,11 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift, the_event)
     break;
 
     case 'J':
-      key_unit_noorders();
+      if (shift) {
+        key_unit_idle();
+      } else {
+        key_unit_noorders();
+      }
     break;
 
     case 'R':
@@ -2038,6 +2046,10 @@ function handle_context_menu_callback(key)
       key_unit_noorders();
       break;
 
+    case "idle":
+      key_unit_idle();
+      break;
+
     case "upgrade":
       key_unit_upgrade();
       break;
@@ -2297,6 +2309,18 @@ function key_unit_noorders()
   advance_unit_focus();
 }
 
+/**************************************************************************
+ Tell the units to stop what they are doing.
+**************************************************************************/
+function key_unit_idle()
+{
+  var funits = get_units_in_focus();
+  for (var i = 0; i < funits.length; i++) {
+    var punit = funits[i];
+    request_new_unit_activity(punit, ACTIVITY_IDLE, EXTRA_NONE);
+  }
+  setTimeout(update_unit_focus, 700);
+}
 
 /**************************************************************************
  Tell the units in focus to sentry.
@@ -2622,11 +2646,34 @@ function key_unit_auto_settle()
 
 
 /**************************************************************************
+  Ask the server to cancel unit orders, if any.
+**************************************************************************/
+function request_unit_cancel_orders(punit)
+{
+  if (punit != null && (punit.ai || punit.has_orders)) {
+    punit.ai = false;
+    punit.has_orders = false;
+    var packet = {
+      pid: packet_unit_orders,
+      unit_id: punit.id,
+      src_tile: punit.tile,
+      length: 0,
+      repeat: false,
+      vigilant: false,
+      dest_tile: punit.tile
+    };
+    packet.orders = packet.dir = packet.activity = packet.target
+                  = packet.action = [];
+    send_request(JSON.stringify(packet));
+  }
+}
+
+/**************************************************************************
  ...
 **************************************************************************/
 function request_new_unit_activity(punit, activity, target)
 {
-
+  request_unit_cancel_orders(punit);
   var packet = {"pid" : packet_unit_change_activity, "unit_id" : punit['id'],
                 "activity" : activity, "target" : target };
   send_request(JSON.stringify(packet));
@@ -2640,6 +2687,7 @@ function request_new_unit_activity(punit, activity, target)
 function request_unit_autosettlers(punit)
 {
   if (punit != null ) {
+    request_unit_cancel_orders(punit);
     var packet = {"pid" : packet_unit_autosettlers, "unit_id" : punit['id']};
     send_request(JSON.stringify(packet));
   }

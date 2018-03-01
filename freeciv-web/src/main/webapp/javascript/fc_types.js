@@ -192,3 +192,9 @@ var V_MAIN = 0;
 var V_INVIS = 1;
 var V_SUBSURFACE = 2;
 var V_COUNT = 3;
+
+/* causes for extra removal */
+var ERM_PILLAGE = 0;
+var ERM_CLEANPOLLUTION = 1;
+var ERM_CLEANFALLOUT = 2;
+var ERM_DISAPPEARANCE = 3;

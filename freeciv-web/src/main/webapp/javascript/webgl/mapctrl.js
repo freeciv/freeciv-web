@@ -102,6 +102,7 @@ function webglOnDocumentMouseUp( e ) {
     update_mouse_cursor();
   }
   e.preventDefault();
+  keyboard_input = true;
 
 }
 

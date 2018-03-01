@@ -66,4 +66,19 @@ function BitVector(raw)
 
     return out;
   };
+
+  /************************************************************************
+    Returns the list of set bits.
+  ************************************************************************/
+  this.toBitSet = function() {
+    var out = [];
+
+    for (var i = 0; i < this.raw.length * 8; i++) {
+      if(this.isSet(i)) {
+        out.push(i);
+      }
+    }
+
+    return out;
+  };
 }

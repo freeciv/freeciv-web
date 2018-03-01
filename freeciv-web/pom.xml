@@ -180,6 +180,25 @@
 				</plugin>
 
 				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>exec-maven-plugin</artifactId>
+					<version>1.6.0</version>
+					<executions>
+						<execution>
+							<id>Precompile Handlebars templates</id>
+							<goals>
+								<goal>exec</goal>
+							</goals>
+							<configuration>
+								<executable>handlebars</executable>
+								<commandlineArgs>src/main/webapp/webclient -e hbs -f src/main/webapp/javascript/hbs-templates.js --knownOnly</commandlineArgs>
+							</configuration>
+							<phase>generate-sources</phase>
+						</execution>
+					</executions>
+				</plugin>
+
+				<plugin>
 					<groupId>com.samaxes.maven</groupId>
 					<artifactId>minify-maven-plugin</artifactId>
 					<version>1.7.6</version>
@@ -321,7 +340,7 @@
 							<exclude>src/main/webapp/javascript/libs/bmp_lib.js</exclude>
 							<exclude>src/main/webapp/javascript/libs/bootstrap.min.js</exclude>
 							<exclude>src/main/webapp/javascript/libs/fg.menu.js</exclude>
-							<exclude>src/main/webapp/javascript/libs/handlebars-v4.0.5.js</exclude>
+							<exclude>src/main/webapp/javascript/libs/handlebars.runtime-v4.0.11.js</exclude>
 							<exclude>src/main/webapp/javascript/libs/jquery.blockUI.js</exclude>
 							<exclude>src/main/webapp/javascript/libs/jquery.contextMenu.js</exclude>
 							<exclude>src/main/webapp/javascript/libs/jquery.min.js</exclude>

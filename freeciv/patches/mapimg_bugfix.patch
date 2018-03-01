@@ -1,0 +1,16 @@
+ common/mapimg.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/common/mapimg.c b/common/mapimg.c
+index 05bc085f19..51ae95cb41 100644
+--- a/common/mapimg.c
++++ b/common/mapimg.c
+@@ -2149,7 +2149,7 @@ static bool img_save_magickwand(const struct img *pimg,
+     }
+ 
+     /* Show a line displaying the colors of alive players */
+-    plrwidth = map_width / player_slot_count();
++    plrwidth = MAX(map_width / player_slot_count(), 1);
+     plroffset = (map_width - plrwidth * player_slot_count()) / 2;
+ 
+     imw = NewPixelRegionIterator(mw, IMG_BORDER_WIDTH,

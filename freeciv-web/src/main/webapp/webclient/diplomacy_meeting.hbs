@@ -15,21 +15,20 @@
   <div class='agree_{{box}}' id='agree_{{box}}_{{counterpart.pid}}'></div>
   <h3>{{player.adjective}} {{player.name}}</h3>
   <div class='dipl_div' >
-    <a tabindex='0' class='fg-button fg-button-icon-right ui-widget ui-state-default ui-corner-all' id='hierarchy_{{box}}_{{counterpart.pid}}'><span class='ui-icon ui-icon-triangle-1-s'></span>Add Clause...</a>
-    <span class='diplomacy_gold'>Gold:<input id='{{box}}_gold_{{counterpart.pid}}' type='number' step='1' size='3' value='0'></span>
-    <div id='{{box}}-items_{{counterpart.pid}}' class='hidden'>
+    <div id='hierarchy_{{box}}_{{counterpart.pid}}'><a tabindex='0' class='menu-button-activator ui-button ui-widget ui-state-default ui-corner-all'><span class='ui-icon ui-icon-triangle-1-s'></span>Add Clause...</a>
       <ul class='dipl_add'>{{#each player.clauses}}
         {{#if this.title}}
-          <li><a href='#'>{{this.title}}</a>
+          <li><div>{{this.title}}</div>
           <ul>{{#each this.clauses}}
-            <li><a href='#' onclick='create_clause_req({{../../counterpart.pid}}, {{../../player.pid}}, {{this.type}}, {{this.value}});'>{{this.name}}</a></li>
+            <li><div><a href='#' onclick='create_clause_req({{../../counterpart.pid}}, {{../../player.pid}}, {{this.type}}, {{this.value}});'>{{this.name}}</a></div></li>
           {{/each}}</ul>
           </li>
         {{else}}
-          <li><a href='#' onclick='create_clause_req({{../counterpart.pid}}, {{../player.pid}}, {{this.type}}, {{this.value}});'>{{this.name}}</a></li>
+          <li><div><a href='#' onclick='create_clause_req({{../counterpart.pid}}, {{../player.pid}}, {{this.type}}, {{this.value}});'>{{this.name}}</a></div></li>
         {{/if}}
       {{/each}}</ul>
     </div>
+    <span class='diplomacy_gold'>Gold:<input id='{{box}}_gold_{{counterpart.pid}}' type='number' step='1' size='3' value='0'></span>
   </div>
 </div>
 {{/inline}}

@@ -939,3 +939,15 @@ function update_bulbs_output_info()
   update_net_bulbs(cbo.self_bulbs - cbo.self_upkeep);
 }
 
+/**************************************************************************
+ Finds tech id by exact name.
+ Null if not found.
+**************************************************************************/
+function tech_id_by_name(tname)
+{
+  for (var tech_id in techs) {
+    if (tname == techs[tech_id]['name']) return tech_id;
+  }
+  return null;
+}
+

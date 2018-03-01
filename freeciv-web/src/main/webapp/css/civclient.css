@@ -55,8 +55,9 @@ button {
   display: flex;
 }
 
-#game_chat_box > i {
-  font-size: 110%;
+#chat_direction {
+  width: 29px;
+  height: 20px;
 }
 
 #game_text_input {
@@ -70,14 +71,18 @@ button {
 }
 
 
-#game_overview_map {
-  text-align: center;
-}
-
-
 #overview_map {
   cursor:crosshair;
   border: 1px solid #555555;
+  position: relative;
+}
+
+#overview_img, #overview_viewrect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 #game_unit_info {
@@ -389,22 +394,6 @@ button {
   padding-top: 10px;
 }
 
-/* This is for popup menu support */
-.hidden { position:absolute; top:0; left:-9999px; width:1px; height:1px; overflow:hidden; }
-	
-.fg-button { font-size: 14px; clear:left; margin:0 4px 40px 20px; padding: .4em 1em; text-decoration:none !important; cursor:pointer; position: relative; text-align: center; zoom: 1; }
-.fg-button .ui-icon { position: absolute; top: 50%; margin-top: -8px; left: 50%; margin-left: -8px; }
-.fg-menu-container {font-size: 14px;}
-a.fg-button { float:left;  }
-button.fg-button {  width:auto; overflow:visible; } /* removes extra button width in IE */
-	
-.fg-button-icon-left { padding-left: 2.1em; }
-.fg-button-icon-right { padding-right: 2.1em; }
-.fg-button-icon-left .ui-icon { right: auto; left: .2em; margin-left: 0; }
-.fg-button-icon-right .ui-icon { left: auto; right: .2em; margin-left: 0; }
-.fg-button-icon-solo { display:block; width:8px; text-indent: -9999px; }	 /* solo icon buttons must have block properties for the text-indent to work */	
-
-
 .ui-dialog .ui-dialog-title {
   float: none;
 }
@@ -690,6 +679,18 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
   background-color: white;
 }
 
+.cannot_build_item {
+  background-color: rgba(255,63,63,0.5);
+}
+
+.cannot_build_item.ui-selected {
+  background-color: rgba(255,63,63,1);
+}
+
+.cannot_build_item.ui-selecting {
+  background-color: rgba(255,127,127,1);
+}
+
 .ui-widget-header {
   background: #cb842e url("/images/ui-widget-header.png") 50% 50% repeat-x;
 }
@@ -723,10 +724,6 @@ button.fg-button {  width:auto; overflow:visible; } /* removes extra button widt
 
 #governments {
   text-align: center;
-}
-
-.fg-menu a {
-  color: black;
 }
 
 .Democracy {
@@ -938,22 +935,23 @@ li.tech-both::before {
   left: 1em;
 }
 
-.bw-toggle[data-toggle=true] {
-  color: lightgrey;
-}
-
-.bw-toggle[data-toggle=false] {
-  color: grey;
-}
-
-.bw-toggle:hover {
-  color: white;
-}
-
 .e_next_year {
   border-top: 2px #555555 groove;
   margin-top: 0.5em;
   padding-bottom: 0.5em;
+}
+
+
+#chat_context_dialog {
+  overflow-y: auto;
+}
+
+#chat_context_dialog tr:hover {
+  background-color: rgba(240, 240, 240, 0.75);
+}
+
+#chat_context_dialog canvas {
+  vertical-align: middle;
 }
 
 
@@ -1008,7 +1006,14 @@ li.tech-both::before {
 .dipl_div {
   float: left;
   text-align: left;
+  font-size: 14px;
+  white-space: nowrap;
   z-index: 2000;
+}
+
+.dipl_div a {
+  color: #1e1b1d;
+  text-decoration: none;
 }
 
 .dipl_add {
@@ -1032,4 +1037,24 @@ li.tech-both::before {
   height: 15px;
   font-size: 14px;
   width: 40px;
+}
+
+.menu-button-activator {
+  font-size: 14px;
+  float: left;
+  margin: 0 4px 40px 20px;
+  padding: .4em 1em;
+  text-decoration: none !important;
+  cursor: pointer;
+  position: relative;
+  text-align: center;
+}
+
+.menu-button-activator .ui-icon {
+  position: absolute;
+  top: 50%;
+  margin-top: -8px;
+  left: auto;
+  margin-left: 0;
+  right: .2em;
 }

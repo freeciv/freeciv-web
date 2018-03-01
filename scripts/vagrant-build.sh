@@ -46,11 +46,11 @@ echo logfile $logfile
 mysql_user="root"
 mysql_pass="vagrant"
 
-tornado_url="https://github.com/tornadoweb/tornado/archive/v4.4.1.tar.gz"
+tornado_url="https://github.com/tornadoweb/tornado/archive/v4.5.3.tar.gz"
 casperjs_url="https://github.com/casperjs/casperjs/archive/1.1.4.zip"
 
 # Based on fresh install of Ubuntu 16.04
-dependencies="maven mysql-server openjdk-8-jdk-headless libcurl4-openssl-dev nginx libjansson-dev subversion pngcrush python3-pillow libtool automake autoconf autotools-dev language-pack-en python-minimal python3.6-dev python3-setuptools libbz2-dev imagemagick python3-pip dos2unix liblzma-dev libicu-dev pkg-config zlib1g-dev tomcat8 tomcat8-admin unzip zip libsqlite3-dev webp libmagickcore*extra libmagickwand-dev"
+dependencies="maven mysql-server openjdk-8-jdk-headless libcurl4-openssl-dev nginx libjansson-dev subversion pngcrush python3-pillow libtool automake autoconf autotools-dev language-pack-en python-minimal python3.6-dev python3-setuptools libbz2-dev imagemagick python3-pip dos2unix liblzma-dev libicu-dev pkg-config zlib1g-dev tomcat8 tomcat8-admin unzip zip libsqlite3-dev webp libmagickcore*extra libmagickwand-dev npm"
 
 ## Setup
 mkdir -p ${basedir}
@@ -78,11 +78,14 @@ sudo apt-get clean
 
 service snapd stop
 
+echo "==== Installing Handlebars ===="
+npm install handlebars -g
+
 echo "==== Fetching/Installing Tornado Web Server ===="
 cd /tmp
 wget ${tornado_url}
-tar xvfz v4.4.1.tar.gz
-cd tornado-4.4.1
+tar xvfz v4.5.3.tar.gz
+cd tornado-4.5.3
 python3 setup.py install
 
 pip3 install wikipedia

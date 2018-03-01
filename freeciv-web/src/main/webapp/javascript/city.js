@@ -53,29 +53,10 @@ var city_screen_updater = new EventAggregator(update_city_screen, 250,
                                               EventAggregator.DP_NONE,
                                               250, 3, 250);
 
-var city_dialog_template = null;
-
 /* Information for mapping workable tiles of a city to local index */
 var city_tile_map = null;
 
-
-/**************************************************************************
-  Initialize the city dialog once the first time.
-**************************************************************************/
-function init_city_dialog()
-{
-  $.ajax({
-    url: "/webclient/city.hbs?ts=" + ts,
-    dataType: "html",
-    cache: true,
-    async: true
-  }).fail(function() {
-    swal("Unable to load city dialog template.");
-  }).done(function( data ) {
-    city_dialog_template = Handlebars.compile(data);
-  });
-
-}
+var opt_show_unreachable_items = false;
 
 /**************************************************************************
  ...
@@ -165,7 +146,7 @@ function show_city_dialog(pcity)
     worklist_selection = [];
   }
 
-  if (active_city != null) $("#city_dialog").dialogExtend("restore");
+  if (active_city != null) close_city_dialog();
   active_city = pcity;
   if (pcity == null) return;
 
@@ -175,7 +156,7 @@ function show_city_dialog(pcity)
 
   var city_data = {};
 
-  $("#city_dialog").html(city_dialog_template(city_data));
+  $("#city_dialog").html(Handlebars.templates['city'](city_data));
 
   $("#city_canvas").click(city_mapview_mouse_click);
 
@@ -210,11 +191,7 @@ function show_city_dialog(pcity)
         });
    }
 
-   dialog_buttons = $.extend(dialog_buttons,
-    {"Close": function() {
-       close_city_dialog();
-      }
-    });
+   dialog_buttons = $.extend(dialog_buttons, {"Close": close_city_dialog});
 
   $("#city_dialog").attr("title", decodeURIComponent(pcity['name'])
                          + " (" + pcity['size'] + ")");
@@ -223,9 +200,7 @@ function show_city_dialog(pcity)
 			modal: false,
 			width: is_small_screen() ? "98%" : "80%",
                         height: is_small_screen() ? $(window).height() + 10 : $(window).height() - 80,
-                        close : function(){
-                          close_city_dialog();
-                        },
+                        close : city_dialog_close_handler,
             buttons: dialog_buttons
                    }).dialogExtend({
                      "minimizable" : true,
@@ -539,7 +514,7 @@ function get_production_progress(pcity)
 /**************************************************************************
 ...
 **************************************************************************/
-function generate_production_list(pcity)
+function generate_production_list()
 {
   var production_list = [];
   for (var unit_type_id in unit_types) {
@@ -548,7 +523,6 @@ function generate_production_list(pcity)
     /* FIXME: web client doesn't support unit flags yet, so this is a hack: */
     if (punit_type['name'] == "Barbarian Leader" || punit_type['name'] == "Leader") continue;
 
-    if (can_city_build_unit_now(pcity, punit_type) == true) {
       production_list.push({"kind": VUT_UTYPE, "value" : punit_type['id'],
                             "text" : punit_type['name'],
 	                    "helptext" : punit_type['helptext'],
@@ -558,12 +532,10 @@ function generate_production_list(pcity)
                                              + punit_type['defense_strength'] + ", " 
                                              + punit_type['firepower'],
                             "sprite" : get_unit_type_image_sprite(punit_type)});
-    }
   }
 
   for (var improvement_id in improvements) {
     var pimprovement = improvements[improvement_id];
-    if (can_city_build_improvement_now(pcity, pimprovement)) {
       var build_cost = pimprovement['build_cost'];
       if (pimprovement['name'] == "Coinage") build_cost = "-";
       production_list.push({"kind": VUT_IMPROVEMENT,
@@ -574,7 +546,6 @@ function generate_production_list(pcity)
                             "build_cost" : build_cost,
                             "unit_details" : "-",
                             "sprite" : get_improvement_image_sprite(pimprovement) });
-    }
   }
   return production_list;
 }
@@ -594,10 +565,10 @@ function can_city_build_unit_direct(pcity, punittype)
   Return whether given city can build given unit; returns FALSE if unit is
   obsolete.
 **************************************************************************/
-function can_city_build_unit_now(pcity, punittype)
+function can_city_build_unit_now(pcity, punittype_id)
 {
   return (pcity != null && pcity['can_build_unit'] != null
-          && pcity['can_build_unit'][punittype['id']] == "1");
+          && pcity['can_build_unit'][punittype_id] == "1");
 }
 
 
@@ -605,10 +576,22 @@ function can_city_build_unit_now(pcity, punittype)
   Return whether given city can build given building; returns FALSE if
   the building is obsolete.
 **************************************************************************/
-function can_city_build_improvement_now(pcity, pimprove)
+function can_city_build_improvement_now(pcity, pimprove_id)
 {
   return (pcity != null && pcity['can_build_improvement'] != null
-          && pcity['can_build_improvement'][pimprove['id']] == "1");
+          && pcity['can_build_improvement'][pimprove_id] == "1");
+}
+
+
+/**************************************************************************
+  Return whether given city can build given item.
+**************************************************************************/
+function can_city_build_now(pcity, kind, value)
+{
+  return kind != null && value != null &&
+       ((kind == VUT_UTYPE)
+       ? can_city_build_unit_now(pcity, value)
+       : can_city_build_improvement_now(pcity, value));
 }
 
 
@@ -740,11 +723,31 @@ function send_city_change(city_id, kind, value)
 function close_city_dialog()
 {
   $("#city_dialog").dialog('close');
+}
+
+/**************************************************************************
+ Clean up after closing the city dialog.
+**************************************************************************/
+function city_dialog_close_handler()
+{
   set_default_mapview_active();
   if (active_city != null) {
     setup_window_size ();
     center_tile_mapcanvas(city_tile(active_city));
     active_city = null;
+     /*
+      * TODO: this is just a hack to recover the background map.
+      *       setup_window_size will resize (and thus clean) the map canvas,
+      *       and this is now called when we show a city dialog while another
+      *       one is open, which is unexpectedly common, tracing the functions
+      *       shows two or three calls to show_city_dialog. Maybe one internal
+      *       from the client UI, the rest from info packets from the server.
+      *       Both those duplicate calls and the stopping of map updates due
+      *       to the 2D rendered being used to draw the minimap should go.
+      */
+    if (renderer == RENDERER_2DCANVAS) {
+      update_map_canvas_full();
+    }
 
   }
   keyboard_input=true;
@@ -1315,12 +1318,16 @@ function city_worklist_dialog(pcity)
 	var build_cost = pimpr['build_cost'];
 	if (pimpr['name'] == "Coinage") build_cost = "-";
 	universals_list.push({"name" : pimpr['name'],
+		"kind" : kind,
+		"value" : value,
 		"helptext" : pimpr['helptext'],
 		"build_cost" : build_cost,
 		"sprite" : get_improvement_image_sprite(pimpr)});
       } else if (kind == VUT_UTYPE) {
         var putype = unit_types[value];
         universals_list.push({"name" : putype['name'],
+		"kind" : kind,
+		"value" : value,
 		"helptext" : putype['helptext'],
 		"build_cost" : putype['build_cost'],
 		"sprite" : get_unit_type_image_sprite(putype)});
@@ -1339,7 +1346,10 @@ function city_worklist_dialog(pcity)
       continue;
     }
 
-    worklist_html += "<tr class='prod_choice_list_item' data-wlitem='" + j + "' "
+    worklist_html += "<tr class='prod_choice_list_item"
+     + (can_city_build_now(pcity, universal['kind'], universal['value']) ?
+        "" : " cannot_build_item")
+     + "' data-wlitem='" + j + "' "
      + " title=\"" + universal['helptext'] + "\">"
      + "<td><div class='production_list_item_sub' style=' background: transparent url("
            + sprite['image-src'] +
@@ -1352,30 +1362,21 @@ function city_worklist_dialog(pcity)
   worklist_html += "</table>";
   $("#city_current_worklist").html(worklist_html);
 
-  var production_list = generate_production_list(pcity);
-  var production_html = "<table class='worklist_table'><tr><td>Type</td><td>Name</td><td title='Attack/Defense/Firepower'>Info</td><td>Cost</td></tr>";
-  for (var a = 0; a < production_list.length; a++) {
-    var sprite = production_list[a]['sprite'];
-    if (sprite == null) {
-      console.log("Missing sprite for " + production_list[a]['value']);
-      continue;
+  populate_worklist_production_choices(pcity);
+
+  $('#show_unreachable_items').off('click');
+  $('#show_unreachable_items').click(function() {
+    opt_show_unreachable_items = !opt_show_unreachable_items;
+    $('#show_unreachable_items').prop('checked', opt_show_unreachable_items);
+    // TODO: properly update the selection only when needed,
+    //       instead of always emptying it.
+    if (production_selection.length !== 0) {
+      production_selection = [];
+      update_worklist_actions();
     }
-    kind = production_list[a]['kind'];
-    value = production_list[a]['value'];
-
-    production_html += "<tr class='prod_choice_list_item kindvalue_item' data-value='" + value + "' data-kind='" + kind + "'>"
-     + "<td><div class='production_list_item_sub' title=\"" + production_list[a]['helptext'] + "\" style=' background: transparent url("
-           + sprite['image-src'] +
-           ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y']
-           + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px;'"
-           +"></div></td>"
-     + "<td class='prod_choice_name'>" + production_list[a]['text'] + "</td>"
-     + "<td class='prod_choice_name'>" + production_list[a]['unit_details'] + "</td>"
-     + "<td class='prod_choice_cost'>" + production_list[a]['build_cost'] + "</td></tr>";
-  }
-  production_html += "</table>";
-
-  $("#worklist_production_choices").html(production_html);
+    populate_worklist_production_choices(pcity);
+  });
+  $('#show_unreachable_items').prop('checked', opt_show_unreachable_items);
 
   worklist_dialog_active = true;
   var turns_to_complete = get_city_production_time(pcity);
@@ -1402,40 +1403,7 @@ function city_worklist_dialog(pcity)
 
   $(".production_list_item_sub").tooltip();
 
-  if (!is_touch_device()) {
-    $("#worklist_production_choices .worklist_table").selectable({
-       filter: "tr",
-       selected: handle_worklist_select,
-       unselected: handle_worklist_unselect
-    });
-
-    if (production_selection.length > 0) {
-      var prod_items = $("#worklist_production_choices .kindvalue_item");
-      var sel = [];
-      production_selection.forEach(function (v) {
-        sel.push("[data-value='" + v.value + "']" +
-                 "[data-kind='"  + v.kind  + "']");
-      });
-      prod_items.filter(sel.join(",")).addClass("ui-selected");
-    }
-
-    $(".kindvalue_item").dblclick(function() {
-      value = parseFloat($(this).data('value'));
-      kind = parseFloat($(this).data('kind'));
-      send_city_worklist_add(pcity['id'], kind, value);
-    });
-  } else {
-    $(".kindvalue_item").click(function() {
-      value = parseFloat($(this).data('value'));
-      kind = parseFloat($(this).data('kind'));
-      if (city_prod_clicks == 0) {
-        send_city_change(pcity['id'], kind, value);
-      } else {
-        send_city_worklist_add(pcity['id'], kind, value);
-      }
-      city_prod_clicks += 1;
-
-    });
+  if (is_touch_device()) {
     $("#prod_buttons").html("<x-small>Click to change production, next clicks will add to worklist on mobile.</x-small>");
   }
 
@@ -1443,7 +1411,7 @@ function city_worklist_dialog(pcity)
 
   var tab_h = $("#city_production_tab").height();
   $("#city_current_worklist").height(tab_h - 150);
-  $("#worklist_production_choices").height(tab_h - 97);
+  $("#worklist_production_choices").height(tab_h - 121);
   /* TODO: remove all hacky sizing and positioning */
   /* It would have been nice to use $("#city_current_worklist").position().top
      for worklist_control padding-top, but that's 0 on first run.
@@ -1477,6 +1445,79 @@ function city_worklist_dialog(pcity)
   worklist_items.dblclick(handle_current_worklist_direct_remove);
 
   update_worklist_actions();
+}
+
+/**************************************************************************
+ Update the production choices.
+**************************************************************************/
+function populate_worklist_production_choices(pcity)
+{
+  var production_list = generate_production_list();
+  var production_html = "<table class='worklist_table'><tr><td>Type</td><td>Name</td><td title='Attack/Defense/Firepower'>Info</td><td>Cost</td></tr>";
+  for (var a = 0; a < production_list.length; a++) {
+    var sprite = production_list[a]['sprite'];
+    if (sprite == null) {
+      console.log("Missing sprite for " + production_list[a]['value']);
+      continue;
+    }
+    var kind = production_list[a]['kind'];
+    var value = production_list[a]['value'];
+    var can_build = can_city_build_now(pcity, kind, value);
+
+    if (can_build || opt_show_unreachable_items) {
+      production_html += "<tr class='prod_choice_list_item kindvalue_item"
+       + (can_build ? "" : " cannot_build_item")
+       + "' data-value='" + value + "' data-kind='" + kind + "'>"
+       + "<td><div class='production_list_item_sub' title=\"" + production_list[a]['helptext'] + "\" style=' background: transparent url("
+           + sprite['image-src'] +
+           ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y']
+           + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px;'"
+           +"></div></td>"
+       + "<td class='prod_choice_name'>" + production_list[a]['text'] + "</td>"
+       + "<td class='prod_choice_name'>" + production_list[a]['unit_details'] + "</td>"
+       + "<td class='prod_choice_cost'>" + production_list[a]['build_cost'] + "</td></tr>";
+     }
+  }
+  production_html += "</table>";
+
+  $("#worklist_production_choices").html(production_html);
+  $("#worklist_production_choices .production_list_item_sub").tooltip();
+
+  if (!is_touch_device()) {
+    $("#worklist_production_choices .worklist_table").selectable({
+       filter: "tr",
+       selected: handle_worklist_select,
+       unselected: handle_worklist_unselect
+    });
+
+    if (production_selection.length > 0) {
+      var prod_items = $("#worklist_production_choices .kindvalue_item");
+      var sel = [];
+      production_selection.forEach(function (v) {
+        sel.push("[data-value='" + v.value + "']" +
+                 "[data-kind='"  + v.kind  + "']");
+      });
+      prod_items.filter(sel.join(",")).addClass("ui-selected");
+    }
+
+    $(".kindvalue_item").dblclick(function() {
+      var value = parseFloat($(this).data('value'));
+      var kind = parseFloat($(this).data('kind'));
+      send_city_worklist_add(pcity['id'], kind, value);
+    });
+  } else {
+    $(".kindvalue_item").click(function() {
+      var value = parseFloat($(this).data('value'));
+      var kind = parseFloat($(this).data('kind'));
+      if (city_prod_clicks == 0) {
+        send_city_change(pcity['id'], kind, value);
+      } else {
+        send_city_worklist_add(pcity['id'], kind, value);
+      }
+      city_prod_clicks += 1;
+
+    });
+  }
 }
 
 /**************************************************************************

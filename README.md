@@ -136,6 +136,29 @@ Start and stop Freeciv-web with the following commands:
 
 All software components in Freeciv-web will log to the /logs sub-directory of the Freeciv-web installation.
 
+Freeciv-Web alternative Docker image
+-----------------------------------------------
+
+1. Build local dockerfile based on debian - this will take a significant amount of time (10 - 20 minutes)
+
+docker build . -t freeciv-web
+
+2. Run docker image including required ports on your host
+
+docker run -i -t --user docker -p 8888:8080 -p 80:80 -p 7000:7000 -p 7001:7001 -p 7002:7002 -p 6000:6000 -p 6001:6001 -p 6002:6002 freeciv-web
+
+3. Run docker runner in docker bash
+
+./docker-run.sh
+
+Answer prompt for docker sudo password with "docker"
+
+3. Connect to docker via host machine using standard browser
+
+http://localhost/
+
+Enjoy. The overall dockerfile and required changes to scripts needs some further improvements.
+
 Freeciv-Web continuous integration on Travis CI 
 -----------------------------------------------
 Freeciv-Web is built on Travis CI on every commit. This is the current build status: [![Build Status](https://api.travis-ci.org/freeciv/freeciv-web.png)](https://travis-ci.org/freeciv/freeciv-web)

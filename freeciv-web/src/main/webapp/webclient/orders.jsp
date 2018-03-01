@@ -31,6 +31,10 @@
     <a href="#" onclick="key_unit_irrigate();"><img src="/images/orders/forest_remove_default.png" name="forest_remove_button" alt="" border="0" width="30" height="30"></a>
   </div>
 
+  <div id="order_build_farmland" class="order_button" title="Build farmland (I)" >
+    <a href="#" onclick="key_unit_irrigate();"><img src="/images/orders/irrigate_default.png" name="build_farmland_button" alt="" border="0" width="30" height="30"></a>
+  </div>
+
   <div id="order_road" class="order_button" title="Build road (R)">
     <a href="#" onclick="key_unit_road();"><img src="/images/orders/road_default.png" name="road_button" alt="" border="0" width="30" height="30"></a>
   </div>

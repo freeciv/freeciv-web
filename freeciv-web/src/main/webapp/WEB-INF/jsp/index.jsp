@@ -248,10 +248,10 @@
 								Play a <b>Freeciv-web One Turn per Day</b>, where up to 300 human <br>players play one turn every day:
 							</div>
 						</c:if>
-						<a href="/webclient?action=multi&civserverport=6003&civserverhost=play&multi=true" class="btn" style="font-size: 15px; padding: 4px;">Game 8 - One Turn per Day</a>
 						<a href="/webclient?action=multi&civserverport=6004&civserverhost=play&multi=true" class="btn" style="font-size: 15px; padding: 4px;">Game X - One Turn per Day</a>
 						<a href="/webclient?action=multi&civserverport=6005&civserverhost=play&multi=true" class="btn" style="font-size: 15px; padding: 4px;">Game XI - One Turn per Day</a>
 						<a href="/webclient?action=multi&civserverport=6006&civserverhost=play&multi=true" class="btn" style="font-size: 15px; padding: 4px;">Game XII - One Turn per Day</a>
+						<a href="/webclient?action=multi&civserverport=6007&civserverhost=play&multi=true" class="btn" style="font-size: 15px; padding: 4px;">Game XIII - One Turn per Day</a>
 
 					</div>
 				</div>

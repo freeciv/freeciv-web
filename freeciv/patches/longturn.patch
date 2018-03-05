@@ -1,7 +1,6 @@
-diff --git a/server/connecthand.c b/server/connecthand.c
-index d74f178..1f16013 100644
---- a/server/connecthand.c
-+++ b/server/connecthand.c
+diff -Nurd freeciv/server/connecthand.c freeciv/server/connecthand.c
+--- freeciv/server/connecthand.c	2018-03-05 17:08:25.294999119 +0200
++++ freeciv/server/connecthand.c	2018-03-05 17:10:27.770239134 +0200
 @@ -50,6 +50,11 @@
  #include "stdinhand.h"
  #include "voting.h"
@@ -14,12 +13,12 @@ index d74f178..1f16013 100644
  #include "connecthand.h"
  
  
-@@ -102,6 +107,36 @@ static void restore_access_level(struct connection *pconn)
+@@ -102,6 +107,36 @@
    conn_set_access(pconn, level, FALSE);
  }
  
-+/****************************************************************************
-+...
++/************************************************************************//**
++  Give techs for the late joiners in freeciv-web longturn game.
 +****************************************************************************/
 +static void do_longturn_tech_latejoiner_effect(struct player *pplayer)
 +{
@@ -48,10 +47,10 @@ index d74f178..1f16013 100644
 +
 +}
 +
- /**************************************************************************
+ /**********************************************************************//**
    This is used when a new player joins a server, before the game
    has started.  If pconn is NULL, is an AI, else a client.
-@@ -251,6 +286,23 @@ void establish_new_connection(struct connection *pconn)
+@@ -251,6 +286,23 @@
      notify_conn(dest, NULL, E_CONNECTION, ftc_server,
  		_("You are logged in as '%s' connected to no player."),
                  pconn->username);
@@ -75,7 +74,7 @@ index d74f178..1f16013 100644
    } else {
      notify_conn(dest, NULL, E_CONNECTION, ftc_server,
  		_("You are logged in as '%s' connected to %s."),
-@@ -540,8 +592,15 @@ void send_conn_info_remove(struct conn_list *src, struct conn_list *dest)
+@@ -540,8 +592,15 @@
  struct player *find_uncontrolled_player(void)
  {
    players_iterate(played) {
@@ -93,7 +92,7 @@ index d74f178..1f16013 100644
      }
    } players_iterate_end;
  
-@@ -615,6 +674,9 @@ static bool connection_attach_real(struct connection *pconn,
+@@ -615,6 +674,9 @@
        }
        (void) aifill(game.info.aifill);
      }
@@ -103,24 +102,24 @@ index d74f178..1f16013 100644
  
      if (game.server.auto_ai_toggle && !is_human(pplayer)) {
        toggle_ai_player_direct(NULL, pplayer);
-diff --git a/server/settings.c b/server/settings.c
-index 0d7605f..ab7fa7b 100644
---- a/server/settings.c
-+++ b/server/settings.c
-@@ -755,6 +755,8 @@ static void topology_action(const struct setting *pset)
- *************************************************************************/
+diff -Nurd freeciv/server/settings.c freeciv/server/settings.c
+--- freeciv/server/settings.c	2018-03-05 17:08:25.282999193 +0200
++++ freeciv/server/settings.c	2018-03-05 17:12:06.365627347 +0200
+@@ -756,6 +756,10 @@
+ ****************************************************************************/
  static void metamessage_action(const struct setting *pset)
  {
-+  if (is_longturn() && S_S_RUNNING == server_state())  return;
++  if (is_longturn() && S_S_RUNNING == server_state()) {
++    return;
++  }
 +
    /* Set the metaserver message based on the new meta server user message.
     * An empty user metaserver message results in an automatic meta message.
     * A non empty user meta message results in the user meta message. */
-diff --git a/server/srv_main.c b/server/srv_main.c
-index a9d14cb..06e0598 100644
---- a/server/srv_main.c
-+++ b/server/srv_main.c
-@@ -3137,6 +3137,15 @@ static void srv_ready(void)
+diff -Nurd freeciv/server/srv_main.c freeciv/server/srv_main.c
+--- freeciv/server/srv_main.c	2018-03-05 17:08:25.306999044 +0200
++++ freeciv/server/srv_main.c	2018-03-05 17:08:48.934852427 +0200
+@@ -3139,6 +3139,15 @@
          map_show_all(pplayer);
        } players_iterate_end;
      }
@@ -136,7 +135,7 @@ index a9d14cb..06e0598 100644
    }
  
    if (game.scenario.is_scenario && game.scenario.players) {
-@@ -3501,3 +3510,11 @@ static struct rgbcolor *mapimg_server_plrcolor_get(int i)
+@@ -3503,3 +3512,11 @@
  {
    return playercolor_get(i);
  }
@@ -148,11 +147,10 @@ index a9d14cb..06e0598 100644
 +{
 +  return (fc_strcasecmp(game.server.meta_info.type, "longturn") == 0);
 +}
-diff --git a/server/srv_main.h b/server/srv_main.h
-index 3379031..cef131c 100644
---- a/server/srv_main.h
-+++ b/server/srv_main.h
-@@ -93,6 +93,7 @@ void srv_init(void);
+diff -Nurd freeciv/server/srv_main.h freeciv/server/srv_main.h
+--- freeciv/server/srv_main.h	2018-03-05 17:08:25.306999044 +0200
++++ freeciv/server/srv_main.h	2018-03-05 17:08:48.934852427 +0200
+@@ -93,6 +93,7 @@
  void srv_main(void);
  void server_quit(void);
  void save_game_auto(const char *save_reason, enum autosave_type type);
@@ -160,33 +158,38 @@ index 3379031..cef131c 100644
  
  enum server_states server_state(void);
  void set_server_state(enum server_states newstate);
-diff --git a/server/stdinhand.c b/server/stdinhand.c
-index faa1d20..add5d62 100644
---- a/server/stdinhand.c
-+++ b/server/stdinhand.c
-@@ -599,6 +599,8 @@ static bool metamessage_command(struct connection *caller,
+diff -Nurd freeciv/server/stdinhand.c freeciv/server/stdinhand.c
+--- freeciv/server/stdinhand.c	2018-03-05 17:08:25.306999044 +0200
++++ freeciv/server/stdinhand.c	2018-03-05 17:12:40.477415686 +0200
+@@ -599,6 +599,10 @@
  {
    struct setting *pset;
  
-+  if (is_longturn() && S_S_RUNNING == server_state())  return FALSE;
++  if (is_longturn() && S_S_RUNNING == server_state()) {
++    return FALSE;
++  }
 +
    if (check) {
      return TRUE;
    }
-@@ -686,6 +688,8 @@ void toggle_ai_player_direct(struct connection *caller, struct player *pplayer)
+@@ -686,6 +690,10 @@
  {
    fc_assert_ret(pplayer != NULL);
  
-+  if (is_longturn() && S_S_RUNNING == server_state())  return;
++  if (is_longturn() && S_S_RUNNING == server_state()) {
++    return;
++  }
 +
    if (is_human(pplayer)) {
      cmd_reply(CMD_AITOGGLE, caller, C_OK,
  	      _("%s is now under AI control."),
-@@ -712,6 +716,8 @@ static bool toggle_ai_command(struct connection *caller, char *arg, bool check)
+@@ -712,6 +720,10 @@
    enum m_pre_result match_result;
    struct player *pplayer;
  
-+  if (is_longturn() && S_S_RUNNING == server_state()) return FALSE;
++  if (is_longturn() && S_S_RUNNING == server_state()) {
++    return FALSE;
++  }
 +
    pplayer = player_by_name_prefix(arg, &match_result);
  

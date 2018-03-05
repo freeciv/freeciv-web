@@ -1,67 +1,67 @@
-diff -Nurd -X.diff_ignore freeciv/common/game.h freeciv/common/game.h
---- freeciv/common/game.h	2016-05-02 13:03:18.357230715 +0300
-+++ freeciv/common/game.h	2016-05-02 13:03:40.033167249 +0300
-@@ -209,7 +209,7 @@
+diff -Nurd freeciv/common/game.h freeciv/common/game.h
+--- freeciv/common/game.h	2018-03-05 17:21:24.098920332 +0200
++++ freeciv/common/game.h	2018-03-05 17:21:46.850809317 +0200
+@@ -214,7 +214,7 @@
        char save_name[MAX_LEN_NAME];
        bool scorelog;
        enum scorelog_level scoreloglevel;
 -      char scorefile[MAX_LEN_NAME];
 +      char scorefile[100];
        int scoreturn;    /* next make_history_report() */
+       int seed_setting;
        int seed;
- 
-diff -Nurd -X.diff_ignore freeciv/server/report.c freeciv/server/report.c
---- freeciv/server/report.c	2016-05-02 13:03:18.413230550 +0300
-+++ freeciv/server/report.c	2016-05-02 13:04:38.892996083 +0300
-@@ -599,6 +599,7 @@
+diff -Nurd freeciv/server/report.c freeciv/server/report.c
+--- freeciv/server/report.c	2018-03-05 17:21:25.186915047 +0200
++++ freeciv/server/report.c	2018-03-05 17:26:45.817270125 +0200
+@@ -581,6 +581,7 @@
    return result;
  }
  
 +#if 0
- /****************************************************************************
+ /**********************************************************************//**
    Number of city building units.
- ****************************************************************************/
-@@ -617,6 +618,7 @@
+ **************************************************************************/
+@@ -599,6 +600,7 @@
  
    return result;
  }
 +#endif
  
- /****************************************************************************
-   Wonder scpre
-@@ -634,6 +636,7 @@
+ /**********************************************************************//**
+   Wonder score
+@@ -616,6 +618,7 @@
    return pplayer->score.techout;
  }
  
 +#if 0
- /****************************************************************************
+ /**********************************************************************//**
    Literacy score calculated one way. See also get_literacy() to see
    alternative way.
-@@ -642,6 +645,7 @@
+@@ -624,6 +627,7 @@
  {
    return pplayer->score.literacy;
  }
 +#endif
  
- /****************************************************************************
+ /**********************************************************************//**
    Spaceship score
-@@ -683,6 +687,7 @@
+@@ -665,6 +669,7 @@
    return pplayer->economic.gold;
  }
  
 +#if 0
- /****************************************************************************
+ /**********************************************************************//**
    Tax rate
- ****************************************************************************/
-@@ -782,6 +787,7 @@
+ **************************************************************************/
+@@ -764,6 +769,7 @@
  
    return result;
  }
 +#endif
  
- /****************************************************************************
+ /**********************************************************************//**
    Total score
-@@ -1288,6 +1294,10 @@
+@@ -1270,6 +1276,10 @@
      return;
    }
  
@@ -72,7 +72,7 @@ diff -Nurd -X.diff_ignore freeciv/server/report.c freeciv/server/report.c
    score_log = fc_calloc(1, sizeof(*score_log));
    score_log->fp = NULL;
    score_log->last_turn = -1;
-@@ -1347,41 +1357,25 @@
+@@ -1329,41 +1339,25 @@
      char *name;
      int (*get_value) (const struct player *);
    } score_tags[] = {

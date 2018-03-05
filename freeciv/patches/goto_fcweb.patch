@@ -1,7 +1,7 @@
-diff -Nurd -X.diff_ignore freeciv/common/networking/packets.def freeciv/common/networking/packets.def
---- freeciv/common/networking/packets.def	2016-02-24 02:23:44.690548067 +0200
-+++ freeciv/common/networking/packets.def	2016-02-24 02:27:54.434150635 +0200
-@@ -2155,3 +2155,17 @@
+diff -Nurd freeciv/common/networking/packets.def freeciv/common/networking/packets.def
+--- freeciv/common/networking/packets.def	2018-03-05 16:43:39.460226279 +0200
++++ freeciv/common/networking/packets.def	2018-03-05 16:44:07.640050958 +0200
+@@ -2251,3 +2251,17 @@
    TURN granary_turns;
    UINT16 buy_gold_cost;
  end
@@ -19,9 +19,9 @@ diff -Nurd -X.diff_ignore freeciv/common/networking/packets.def freeciv/common/n
 +  TILE dest;
 +  UINT32 turns;
 +end
-diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
---- freeciv/server/unithand.c	2016-02-24 02:18:09.987084559 +0200
-+++ freeciv/server/unithand.c	2016-02-24 02:23:54.422532542 +0200
+diff -Nurd freeciv/server/unithand.c freeciv/server/unithand.c
+--- freeciv/server/unithand.c	2018-03-05 16:43:39.848223865 +0200
++++ freeciv/server/unithand.c	2018-03-05 16:45:54.663385336 +0200
 @@ -70,6 +70,8 @@
  /* server/scripting */
  #include "script_server.h"
@@ -30,11 +30,11 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
 +
  #include "unithand.h"
  
- /* A category of reasons why an action isn't enabled. */
-@@ -2189,6 +2191,107 @@
+ /* An explanation why an action isn't enabled. */
+@@ -2882,6 +2884,107 @@
  }
  
- /**************************************************************************
+ /**********************************************************************//**
 +  This function handles GOTO path requests from the client.
 +**************************************************************************/
 +void handle_goto_path_req(struct player *pplayer, int unit_id, int goal)
@@ -135,7 +135,7 @@ diff -Nurd -X.diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
 +  }
 +}
 +
-+/**************************************************************************
++/**********************************************************************//**
    Handle change in unit activity.
  **************************************************************************/
  static void handle_unit_change_activity_real(struct player *pplayer,

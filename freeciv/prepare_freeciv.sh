@@ -5,9 +5,6 @@ if test "x$(dirname $0)" != "x." ; then
   exit 1
 fi
 
-# Remove old version
-rm -Rf freeciv
-
 . ./version.txt
 
 # Allow the user to override how Freeciv is downloaded.

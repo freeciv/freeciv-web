@@ -5,6 +5,9 @@
 # dl_freeciv_default.sh if it exists.
 # If you want to modify this file copy it to dl_freeciv.sh and edit it.
 
+# Remove old version
+rm -Rf freeciv
+
 # Download the wanted Freeciv revision from GitHub unless it is here already.
 # The download step saves having to merge in Freeciv's history each time the
 # Freeciv server revision is updated.

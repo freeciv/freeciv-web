@@ -6,6 +6,6 @@ META_URL="http://localhost:8080/meta/metaserver.php"
 # MODPACK_LIST_URL="http://modpack.freeciv.org/${DATASUBDIR}/modpack.list"
 
 # Where to store user files. Note that changing this after user has already stored
-# something to the old dir with older version of the projects means that those
+# something to the old dir with older version of the project means that those
 # files won't be used any more.
 FREECIV_STORAGE_DIR="~/.freeciv-web"

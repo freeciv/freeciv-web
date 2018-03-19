@@ -109,7 +109,7 @@ public class ResetPassword extends HttpServlet {
             Thread.sleep(1000);
 
             Context env = (Context) (new InitialContext().lookup("java:comp/env"));
-            DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
+            DataSource ds = (DataSource) env.lookup("jdbc/freeciv_sql");
             conn = ds.getConnection();
 
             String query = "UPDATE auth SET secure_hashed_password = ? where email = ? and activated = 1";

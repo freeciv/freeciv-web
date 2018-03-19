@@ -86,7 +86,7 @@ public class TokenSignin extends HttpServlet {
                 }
 
                 Context env = (Context) (new InitialContext().lookup("java:comp/env"));
-                DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
+                DataSource ds = (DataSource) env.lookup("jdbc/freeciv_sql");
                 conn = ds.getConnection();
 
                 // 1. Check if username and userId is already stored in the database,

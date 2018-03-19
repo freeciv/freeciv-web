@@ -6,8 +6,8 @@
 	<display-name>Freeciv-web Client</display-name>
 
 	<resource-ref>
-		<description>MySQL DB Connection</description>
-		<res-ref-name>jdbc/freeciv_mysql</res-ref-name>
+		<description>SQL DB Connection</description>
+		<res-ref-name>jdbc/freeciv_sql</res-ref-name>
 		<res-type>javax.sql.DataSource</res-type>
 		<res-auth>Container</res-auth>
 	</resource-ref>

@@ -152,7 +152,7 @@ public class Metaserver extends HttpServlet {
 		try {
 
 			Context env = (Context) (new InitialContext().lookup("java:comp/env"));
-			DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
+			DataSource ds = (DataSource) env.lookup("jdbc/freeciv_sql");
 			conn = ds.getConnection();
 
 			if (serverIsStopping != null) {
@@ -188,7 +188,7 @@ public class Metaserver extends HttpServlet {
 				statement.executeUpdate();
 
 				if (dropPlayers != null) {
-					query = "UPDATE servers SET available = 0, humans = -1 WHERE host = ? AND port = ?";
+					query = "UPDATE servers SET available = 0, humans = -1, stamp = CURRENT_TIMESTAMP WHERE host = ? AND port = ?";
 					statement = conn.prepareStatement(query);
 					statement.setString(1, sHost);
 					statement.setInt(2, port);
@@ -197,7 +197,7 @@ public class Metaserver extends HttpServlet {
 
 				if (isSettingPlayers) {
 
-					query = "INSERT INTO players (hostport, user, name, nation, flag, type, host) VALUES (?, ?, ?, ?, ?, ?, ?)";
+					query = "INSERT INTO players (hostport, [user], name, nation, flag, type, host) VALUES (?, ?, ?, ?, ?, ?, ?)";
 					statement = conn.prepareStatement(query);
 					try {
 						for (int i = 0; i < sPlUser.size(); i++) {
@@ -259,14 +259,14 @@ public class Metaserver extends HttpServlet {
 				for (String parameter : setServerVariables) {
 					queryBuilder.append(parameter).append(" = ?, ");
 				}
-				queryBuilder.append(" stamp = NOW() ");
+				queryBuilder.append(" stamp = CURRENT_TIMESTAMP ");
 				queryBuilder.append(" WHERE host = ? AND port = ?");
 			} else {
 				queryBuilder = new StringBuilder("INSERT INTO servers SET ");
 				for (String parameter : setServerVariables) {
 					queryBuilder.append(parameter).append(" = ?, ");
 				}
-				queryBuilder.append(" stamp = NOW() ");
+				queryBuilder.append(" stamp = CURRENT_TIMESTAMP ");
 			}
 
 			query = queryBuilder.toString();

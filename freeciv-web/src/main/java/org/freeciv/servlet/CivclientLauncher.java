@@ -17,7 +17,7 @@
  *******************************************************************************/
 package org.freeciv.servlet;
 
-import com.mysql.cj.core.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.*;
 import javax.servlet.*;
@@ -52,7 +52,7 @@ public class CivclientLauncher extends HttpServlet {
 		Connection conn = null;
 		try {
 			Context env = (Context) (new InitialContext().lookup("java:comp/env"));
-			DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
+			DataSource ds = (DataSource) env.lookup("jdbc/freeciv_sql");
 			conn = ds.getConnection();
 			
 			String gameType;
@@ -76,7 +76,7 @@ public class CivclientLauncher extends HttpServlet {
 			}
 			
 
-			if (StringUtils.isNullOrEmpty(civServerPort)) {
+			if (StringUtils.isEmpty(civServerPort)) {
 				// If the user requested a new game, then get host and port for an available
 				// server from the metaserver DB, and use that one.
 				String lookupQuery =
@@ -103,7 +103,7 @@ public class CivclientLauncher extends HttpServlet {
 			/* Validate port */
 			String validateQuery = "SELECT COUNT(*) FROM servers WHERE port = ?";
 			PreparedStatement validateStmt = conn.prepareStatement(validateQuery);
-			if (StringUtils.isNullOrEmpty(civServerPort)) {
+			if (StringUtils.isEmpty(civServerPort)) {
 				response.setHeader("result", "invalid port validation");
 				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
 						"Unable to find a valid Freeciv server to play on. Please try again later.");

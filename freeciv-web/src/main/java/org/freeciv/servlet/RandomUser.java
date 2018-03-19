@@ -41,7 +41,7 @@ public class RandomUser extends HttpServlet {
 		Connection conn = null;
 		try {
 			Context env = (Context) (new InitialContext().lookup("java:comp/env"));
-			DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
+			DataSource ds = (DataSource) env.lookup("jdbc/freeciv_sql");
 			conn = ds.getConnection();
 
 			String query =

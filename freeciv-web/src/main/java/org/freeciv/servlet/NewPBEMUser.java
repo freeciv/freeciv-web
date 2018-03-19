@@ -118,7 +118,7 @@ public class NewPBEMUser extends HttpServlet {
 			Thread.sleep(300);
 
 			Context env = (Context) (new InitialContext().lookup("java:comp/env"));
-			DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
+			DataSource ds = (DataSource) env.lookup("jdbc/freeciv_sql");
 			conn = ds.getConnection();
 
 			String query = "INSERT INTO auth (username, email, secure_hashed_password, activated, ip) "

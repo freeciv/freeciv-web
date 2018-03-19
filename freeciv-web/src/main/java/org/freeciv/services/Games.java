@@ -24,7 +24,7 @@ public class Games {
 		ResultSet rs = null;
 		try {
 			Context env = (Context) (new InitialContext().lookup("java:comp/env"));
-			DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
+			DataSource ds = (DataSource) env.lookup("jdbc/freeciv_sql");
 			connection = ds.getConnection();
 
 			query = "SELECT COUNT(*) AS count " //
@@ -64,11 +64,11 @@ public class Games {
 		ResultSet rs = null;
 		try {
 			Context env = (Context) (new InitialContext().lookup("java:comp/env"));
-			DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
+			DataSource ds = (DataSource) env.lookup("jdbc/freeciv_sql");
 			connection = ds.getConnection();
 
 			query = "SELECT host, port, version, patches, state, message, " //
-					+ "UNIX_TIMESTAMP()-UNIX_TIMESTAMP(stamp) AS duration, " //
+					+ "DATEDIFF(SECOND, CURRENT_TIMESTAMP, stamp) AS duration, " //
 					+ "	(SELECT COUNT(*) " //
 					+ "	  FROM players " //
 					+ "	 WHERE type = 'Human' " //
@@ -123,7 +123,7 @@ public class Games {
 		ResultSet rs = null;
 		try {
 			Context env = (Context) (new InitialContext().lookup("java:comp/env"));
-			DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
+			DataSource ds = (DataSource) env.lookup("jdbc/freeciv_sql");
 			connection = ds.getConnection();
 			query = "SELECT COUNT(*) AS count " //
 					+ "FROM servers s " //
@@ -155,12 +155,12 @@ public class Games {
 		ResultSet rs = null;
 		try {
 			Context env = (Context) (new InitialContext().lookup("java:comp/env"));
-			DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
+			DataSource ds = (DataSource) env.lookup("jdbc/freeciv_sql");
 			connection = ds.getConnection();
 			query = "SELECT host, port, version, patches, state, message, " //
-					+ "	unix_timestamp()-unix_timestamp(stamp) AS duration, " //
+					+ "	DATEDIFF(SECOND, CURRENT_TIMESTAMP, stamp) AS duration, " //
 					+ "	IFNULL(" //
-					+ "		(SELECT user FROM players p WHERE p.hostport = CONCAT(s.host ,':',s.port) AND p.type = 'Human' LIMIT 1 )," //
+					+ "		(SELECT [user] FROM players p WHERE p.hostport = CONCAT(s.host ,':',s.port) AND p.type = 'Human' LIMIT 1 )," //
 					+ " 	'none') AS player, " //
 					+ "	IFNULL(" //
 					+ "		(SELECT flag FROM players p WHERE p.hostport = CONCAT(s.host ,':',s.port) AND p.type = 'Human' LIMIT 1 ), " //
@@ -223,13 +223,13 @@ public class Games {
 		Connection connection = null;
 		try {
 			Context env = (Context) (new InitialContext().lookup("java:comp/env"));
-			DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
+			DataSource ds = (DataSource) env.lookup("jdbc/freeciv_sql");
 			connection = ds.getConnection();
 
 			String query = "" //
 					+ "  ( " //
 					+ "    SELECT host, port, version, patches, state, message, " //
-					+ "    UNIX_TIMESTAMP() - UNIX_TIMESTAMP(stamp) AS duration, " //
+					+ "    DATEDIFF(SECOND, CURRENT_TIMESTAMP, stamp) AS duration, " //
 					+ "    (SELECT value " //
 					+ "       FROM variables " //
 					+ "      WHERE name = 'turn' AND hostport = CONCAT(s.host, ':', s.port) " //
@@ -241,7 +241,7 @@ public class Games {
 					+ "UNION " //
 					+ "  ( " //
 					+ "    SELECT host, port, version, patches, state, message, " //
-					+ "    UNIX_TIMESTAMP() - UNIX_TIMESTAMP(stamp) AS duration, " //
+					+ "    DATEDIFF(SECOND, CURRENT_TIMESTAMP, stamp) AS duration, " //
 					+ "    (SELECT value " //
 					+ "       FROM variables " //
 					+ "      WHERE message NOT LIKE '%Private%' AND name = 'turn' AND hostport = CONCAT(s.host, ':', s.port) " //
@@ -257,7 +257,7 @@ public class Games {
 					+ "UNION " //
 					+ "  ( " //
 					+ "    SELECT host, port, version, patches, state, message, " //
-					+ "    UNIX_TIMESTAMP()-UNIX_TIMESTAMP(stamp), " //
+					+ "    DATEDIFF(SECOND, CURRENT_TIMESTAMP, stamp), " //
 					+ "    (SELECT value " //
 					+ "       FROM variables " //
 					+ "      WHERE name = 'turn' AND hostport = CONCAT(s.host, ':', s.port) " //

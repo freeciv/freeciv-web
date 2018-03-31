@@ -33,7 +33,7 @@ nginx_url="http://nginx.org/download/nginx-1.9.11.tar.gz"
 casperjs_url="https://github.com/casperjs/casperjs/archive/1.1.4.zip"
 
 # Based on fresh install of Ubuntu 14.04
-dependencies="mysql-server-5.6 mysql-client-core-5.6 mysql-client-5.6 maven openjdk-7-jdk libcurl4-openssl-dev subversion pngcrush libtool automake autoconf autotools-dev language-pack-en python3-setuptools python3.4 python3.4-dev imagemagick liblzma-dev xvfb libicu-dev libsdl1.2-dev libjansson-dev dos2unix zip libsqlite3-dev webp libmagickwand-dev npm nodejs-legacy"
+dependencies="mysql-server-5.6 mysql-client-core-5.6 mysql-client-5.6 maven openjdk-7-jdk libcurl4-openssl-dev subversion pngcrush libtool automake autoconf autotools-dev language-pack-en python3-setuptools python3.4 python3.4-dev imagemagick liblzma-dev xvfb libicu-dev libsdl1.2-dev libjansson-dev dos2unix zip libsqlite3-dev webp libmagickwand-dev"
 
 ## dependencies
 echo "==== Installing Updates and Dependencies ===="
@@ -45,6 +45,9 @@ apt-get -y install ${dependencies}
 python3 -m easy_install Pillow
 
 echo "==== Installing Handlebars ===="
+curl -LOsS 'https://deb.nodesource.com/setup_8.x'
+bash setup_8.x
+apt-get install nodejs
 npm install handlebars -g
 
 echo "===== Install Tomcat 8 ======="

@@ -13,7 +13,7 @@ if [ ! -f ${SCRIPT_DIR}/configuration.sh ]; then
     echo "ERROR: configuration.sh not found. copy configuration.sh.dist to configuration.sh and update it with your settings."
 fi
 
-${SCRIPT_DIR}/configuration.sh
+. ${SCRIPT_DIR}/configuration.sh
 
 if [ "x$DEPENDENCY_SERVICES_START" = x ] ; then
   DEPENDENCY_SERVICES_START="./dependency-services-default-start.sh"

@@ -54,6 +54,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.synced_folder "./", "/vagrant"
 
+  # There are problems with the default configuration of a DNS stub in some
+  # versions of systemd-resolved
+  config.vm.provision "systemd-resolved workaround", type: "shell", inline: "ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf"
   # run the Freeciv bootstrap script on startup
   config.vm.provision :shell, :path => "scripts/vagrant-build.sh", run: "always"
 

@@ -101,10 +101,7 @@ python3 setup.py install
 ## mysql setup
 echo "==== Setting up MySQL ===="
 mysqladmin -u ${mysql_user} -p${mysql_pass} create freeciv_web
-cd ${basedir}/freeciv-web
-cp flyway.properties.dist flyway.properties
-sudo -u vagrant mvn compile flyway:migrate
-cd -
+cp ${basedir}/freeciv-web/flyway.properties{.dist,}
 
 # configuration files
 dos2unix ${basedir}/scripts/configuration.sh.dist

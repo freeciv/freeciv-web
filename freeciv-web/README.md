@@ -27,7 +27,7 @@ The build script will also create a data webapp directory where savegames and sc
 
 Flyway migrations of the database is supported. Remember to set the mysql password in flyway.properties.dist and rename the file to flyway.properties.
 To migrate the database to the latest version, run this Maven command:
-mvn compile flyway:migrate
+mvn flyway:migrate
 
 The following files contains MySQL username and password, and must be set manually
 if you are not using vagrant:

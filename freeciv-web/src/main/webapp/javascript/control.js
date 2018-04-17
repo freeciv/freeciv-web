@@ -1478,6 +1478,7 @@ function do_map_click(ptile, qtype, first_time_called)
         packet['dir'] = [];
         packet['activity'] = [];
         packet['target'] = [];
+        packet['extra'] = [];
         packet['action'] = [];
         for (var i = 0; i < goto_path['length']; i++) {
           /* TODO: Have the server send the full orders in stead of just the
@@ -1496,7 +1497,8 @@ function do_map_click(ptile, qtype, first_time_called)
 
           packet['dir'][i] = goto_path['dir'][i];
           packet['activity'][i] = ACTIVITY_LAST;
-          packet['target'][i] = EXTRA_NONE;
+          packet['target'][i] = 0;
+          packet['extra'][i] = EXTRA_NONE;
           packet['action'][i] = ACTION_COUNT;
         }
 
@@ -1518,7 +1520,8 @@ function do_map_click(ptile, qtype, first_time_called)
             packet['orders'][pos] = ORDER_LAST;
             packet['dir'][pos] = -1;
             packet['activity'][pos] = ACTIVITY_LAST;
-            packet['target'][pos] = EXTRA_NONE;
+            packet['target'][pos] = 0;
+            packet['extra'][pos] = EXTRA_NONE;
             packet['action'][pos] = ACTION_COUNT;
           } else {
             /* Replace the existing last order with the final order */
@@ -2663,7 +2666,7 @@ function request_unit_cancel_orders(punit)
       dest_tile: punit.tile
     };
     packet.orders = packet.dir = packet.activity = packet.target
-                  = packet.action = [];
+                  = packet.extra = packet.action = [];
     send_request(JSON.stringify(packet));
   }
 }
@@ -2811,7 +2814,8 @@ function key_unit_move(dir)
       "orders"   : [ORDER_ACTION_MOVE],
       "dir"      : [dir],
       "activity" : [ACTIVITY_LAST],
-      "target"   : [EXTRA_NONE],
+      "target"   : [0],
+      "extra"    : [EXTRA_NONE],
       "action"   : [ACTION_COUNT],
       "dest_tile": newtile['index']
     };

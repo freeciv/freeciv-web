@@ -361,7 +361,8 @@ function popup_action_selection(actor_unit, action_probabilities,
             "orders"    : [ORDER_MOVE],
             "dir"       : [dir],
             "activity"  : [ACTIVITY_LAST],
-            "target"    : [EXTRA_NONE],
+            "target"    : [0],
+            "extra"     : [EXTRA_NONE],
             "action"    : [ACTION_COUNT],
             "dest_tile" : target_tile['index']
           };

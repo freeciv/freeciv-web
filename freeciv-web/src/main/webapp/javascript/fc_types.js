@@ -107,7 +107,8 @@ var ACTION_IRRIGATE_TF = 45;
 var ACTION_MINE_TF = 46;
 var ACTION_PILLAGE = 47;
 var ACTION_FORTIFY = 48;
-var ACTION_COUNT = 49;
+var ACTION_ROAD = 49;
+var ACTION_COUNT = 50;
 
 /* The action_decision enum */
 /* Doesn't need the player to decide what action to take. */

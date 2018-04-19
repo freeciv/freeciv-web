@@ -105,7 +105,8 @@ var ACTION_HEAL_UNIT = 43;
 var ACTION_TRANSFORM_TERRAIN = 44;
 var ACTION_IRRIGATE_TF = 45;
 var ACTION_MINE_TF = 46;
-var ACTION_COUNT = 47;
+var ACTION_PILLAGE = 47;
+var ACTION_COUNT = 48;
 
 /* The action_decision enum */
 /* Doesn't need the player to decide what action to take. */

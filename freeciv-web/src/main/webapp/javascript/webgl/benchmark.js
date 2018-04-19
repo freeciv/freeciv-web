@@ -79,12 +79,13 @@ function benchmark_check()
     return;
   }
   if (game_info != null && game_info['turn'] == 1 && units[101] != null) {
-    var packet = {"pid" : packet_unit_do_action,
-                                          "actor_id" : 101,
-                                          "target_id": units[101]['tile'],
-                                          "value" : 0,
-                                          "name" : "Hello world",
-                                          "action_type": ACTION_FOUND_CITY};
+    var packet = {"pid"         : packet_unit_do_action,
+                  "actor_id"    : 101,
+                  "target_id"   : units[101]['tile'],
+                  "extra_id"    : EXTRA_NONE,
+                  "value"       : 0,
+                  "name"        : "Hello world",
+                  "action_type" : ACTION_FOUND_CITY};
     send_request(JSON.stringify(packet));
   }
 

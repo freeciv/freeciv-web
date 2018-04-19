@@ -1588,6 +1588,7 @@ function do_map_click(ptile, qtype, first_time_called)
       "pid"         : packet_unit_do_action,
       "actor_id"    : punit['id'],
       "target_id"   : ptile['index'],
+      "extra_id"    : EXTRA_NONE,
       "value"       : 0,
       "name"        : "",
       "action_type" : ACTION_PARADROP
@@ -1603,6 +1604,7 @@ function do_map_click(ptile, qtype, first_time_called)
         "pid"         : packet_unit_do_action,
         "actor_id"    : punit['id'],
         "target_id"   : pcity['id'],
+        "extra_id"    : EXTRA_NONE,
         "value"       : 0,
         "name"        : "",
         "action_type" : ACTION_AIRLIFT
@@ -2430,6 +2432,7 @@ function key_unit_upgrade()
       "pid"         : packet_unit_do_action,
       "actor_id"    : punit['id'],
       "target_id"   : target_id,
+      "extra_id"    : EXTRA_NONE,
       "value"       : 0,
       "name"        : "",
       "action_type" : ACTION_UPGRADE_UNIT
@@ -2556,6 +2559,7 @@ function key_unit_homecity()
       var packet = {"pid" : packet_unit_do_action,
                     "actor_id" : punit['id'],
                     "target_id": pcity['id'],
+                    "extra_id" : EXTRA_NONE,
                     "value" : 0,
                     "name" : "",
                     "action_type": ACTION_HOME_CITY};
@@ -2727,6 +2731,7 @@ function request_unit_build_city()
           packet = {"pid" : packet_unit_do_action,
             "actor_id"    : punit['id'],
             "target_id"   : target_city['id'],
+            "extra_id"    : EXTRA_NONE,
             "value"       : 0,
             "name"        : "",
             "action_type" : ACTION_JOIN_CITY };
@@ -2768,6 +2773,7 @@ function(){
       "actor_id"    : punit['id'],
       "target_id"   : (target_city == null ? punit['id']
                                            : target_city['id']),
+      "extra_id"    : EXTRA_NONE,
       "value"       : 0,
       "name"        : "",
       "action_type" : (target_city == null ? ACTION_DISBAND_UNIT
@@ -2855,6 +2861,7 @@ function process_diplomat_arrival(pdiplomat, target_tile_id)
       "actor_unit_id" : pdiplomat['id'],
       "target_unit_id" : IDENTITY_NUMBER_ZERO,
       "target_tile_id": target_tile_id,
+      "target_extra_id": EXTRA_NONE,
       "disturb_player": true
     };
     send_request(JSON.stringify(packet));

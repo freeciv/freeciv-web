@@ -631,6 +631,11 @@ function handle_city_name_suggestion_info(packet)
 **************************************************************************/
 function handle_city_sabotage_list(packet)
 {
+  if (!packet["disturb_player"]) {
+    console.log("handle_city_sabotage_list(): was asked to not disturb "
+                + "the player. That is unimplemented.");
+  }
+
   popup_sabotage_dialog(game_find_unit_by_number(packet['diplomat_id']),
                         game_find_city_by_number(packet['city_id']),
                         new BitVector(packet['improvements']),
@@ -822,6 +827,11 @@ function handle_unit_action_answer(packet)
     console.log("Bad actor unit (" + diplomat_id
                 + ") in unit action answer.");
     return;
+  }
+
+  if (!packet["disturb_player"]) {
+    console.log("handle_unit_action_answer(): was asked to not disturb "
+                + "the player. That is unimplemented.");
   }
 
   if (action_type == ACTION_SPY_BRIBE_UNIT) {

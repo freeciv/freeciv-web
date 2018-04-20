@@ -839,12 +839,13 @@ function city_name_dialog(suggested_name, unit_id) {
 
                         var actor_unit = game_find_unit_by_number(unit_id);
 
-                        var packet = {"pid" : packet_unit_do_action,
-                                                              "actor_id" : unit_id,
-                                                              "target_id": actor_unit['tile'],
-                                                              "value" : 0,
-                                                              "name" : encodeURIComponent(name),
-                                                              "action_type": ACTION_FOUND_CITY};
+                        var packet = {"pid"         : packet_unit_do_action,
+                                      "actor_id"    : unit_id,
+                                      "target_id"   : actor_unit['tile'],
+                                      "extra_id"    : EXTRA_NONE,
+                                      "value"       : 0,
+                                      "name"        : encodeURIComponent(name),
+                                      "action_type" : ACTION_FOUND_CITY};
 						send_request(JSON.stringify(packet));
 						$("#city_name_dialog").remove();
 						keyboard_input=true;
@@ -864,6 +865,7 @@ function city_name_dialog(suggested_name, unit_id) {
       var packet = {"pid" : packet_unit_do_action,
                       "actor_id" : unit_id,
                       "target_id": actor_unit['tile'],
+                      "extra_id" : EXTRA_NONE,
                       "value" : 0,
                       "name" : encodeURIComponent(name),
                       "action_type": ACTION_FOUND_CITY};
@@ -882,6 +884,7 @@ function city_name_dialog(suggested_name, unit_id) {
     var packet = {"pid" : packet_unit_do_action,
                       "actor_id" : unit_id,
                       "target_id": actor_unit['tile'],
+                      "extra_id" : EXTRA_NONE,
                       "value" : 0,
                       "name" : encodeURIComponent(name),
                       "action_type": ACTION_FOUND_CITY};

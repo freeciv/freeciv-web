@@ -23,13 +23,12 @@ else
   sleep 1
 fi
 
-sudo service --status-all
 # 2. Tomcat
 echo "Starting up Tomcat" && \
-if sudo service --status-all | grep -Fq 'tomcat8'; then
+if service --status-all | grep -Fq 'tomcat8'; then
    sudo /usr/sbin/service tomcat8 start || echo "unable to start tomcat8 service"
 else
-   $CATALINA_HOME/bin/catalina.sh start
+   sudo $CATALINA_HOME/bin/catalina.sh start
 fi
 
 # waiting for Tomcat to start, since it will take some time.

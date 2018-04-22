@@ -8,7 +8,7 @@ compiler:
 python:
   - "3.3"
 
-script: "sudo bash ./scripts/travis-build.sh"
+script: ./scripts/install/install.sh --mode=TEST && ./scripts/travis-run.sh
 
 before_install:
   - sudo sysctl -w net.ipv6.conf.all.disable_ipv6=1

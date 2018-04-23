@@ -10,6 +10,9 @@
 export JAVA_OPTS="-Djava.security.egd=file:/dev/urandom"
 export CATALINA_HOME=/var/lib/tomcat8
 
+# 0. mysql
+service mysql status | grep -Fq running || sudo service mysql start
+
 # 1. nginx
 echo "Starting nginx first."
 

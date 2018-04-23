@@ -5,8 +5,8 @@
 # Freeciv-web Vagrant Vagrantfile - play.freeciv.org
 # 2014-02-17 - Andreas Røsdal
 #
-# Run 'vagrant up' in this directory, which will create a VirtualBox image,
-# and run scripts/freeciv-web-bootstrap.sh to install Freeciv-web for you.
+# Run 'vagrant up' in this directory, which will create a VirtualBox image
+# and install Freeciv-web for you.
 # Then point your browser to http://localhost/ on your host OS.
 #
 
@@ -57,8 +57,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # There are problems with the default configuration of a DNS stub in some
   # versions of systemd-resolved
   config.vm.provision "systemd-resolved workaround", type: "shell", inline: "ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf"
-  # run the Freeciv bootstrap script on startup
-  config.vm.provision :shell, :path => "scripts/vagrant-build.sh", run: "always"
-
+  # run the Freeciv bootstrap script on machine creation
+  config.vm.provision "bootstrap", type: "shell", inline: "/vagrant/scripts/install/install.sh", privileged: false
+  # run the Freeciv start script on startup
+  config.vm.provision "startup", type: "shell", inline: "/vagrant/scripts/start-freeciv-web.sh", run: "always", privileged: false
 
 end

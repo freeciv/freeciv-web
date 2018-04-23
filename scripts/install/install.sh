@@ -218,7 +218,7 @@ echo "==== Filling configuration templates ===="
 "${basedir}/scripts/install/gen-from-templates.sh"
 
 echo "==== Setting up DB ===="
-service mysql status | grep -Fq running || sudo service mysql start
+pidof mysqld > /dev/null || sudo service mysql start
 if [ -z "${DB_ROOT_PASSWORD}" ]; then
   echo "Will need the DB root password twice"
 fi

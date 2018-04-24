@@ -39,23 +39,3 @@ diff -Nurd -X.diff_ignore freeciv/common/featured_text.c freeciv/common/featured
                             ptag->color.foreground);
        }
        if (ptag->color.background[0] != '\0') {
-diff -Nurd -X.diff_ignore freeciv/server/ruleset.c freeciv/server/ruleset.c
---- freeciv/server/ruleset.c	2014-09-11 01:41:13.955730680 +0300
-+++ freeciv/server/ruleset.c	2014-09-11 01:41:34.951685399 +0300
-@@ -6272,6 +6272,8 @@
-     misc_p.move_bonus[i] = vlevel->move_bonus;
-   }
- 
-+  /* FIXME: removed for webclient. */
-+#if 0
-   fc_assert(sizeof(misc_p.global_init_techs)
-             == sizeof(game.rgame.global_init_techs));
-   fc_assert(ARRAY_SIZE(misc_p.global_init_techs)
-@@ -6286,6 +6288,7 @@
-     misc_p.global_init_buildings[i] =
-       game.rgame.global_init_buildings[i];
-   }
-+#endif
- 
-   misc_p.default_specialist = DEFAULT_SPECIALIST;
- 

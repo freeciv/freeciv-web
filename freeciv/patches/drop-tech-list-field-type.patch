@@ -1,0 +1,97 @@
+From 25ea76e87925707f4b2b9d7166f8055023358bf5 Mon Sep 17 00:00:00 2001
+From: Sveinung Kvilhaugsvik <sveinung84@users.sourceforge.net>
+Date: Mon, 23 Apr 2018 09:49:24 +0200
+Subject: [PATCH 3/4] protocol: drop hard coded tech list field type.
+
+The Freeciv protocol has had tech_list, a custom network protocol field type
+for transferring lists of techs. It has no JSON implementation. Freeciv-web
+patches out all its users.
+
+Replace the tech_list field type with arrays of TECH. This keeps the type
+information intact. It uses the same amount of space in the binary protocol.
+It magically gives us a JSON implementation.
+
+See hrm Feature #748774
+---
+ client/packhand.c               | 12 ++++++++++--
+ common/generate_packets.py      |  5 ++---
+ common/networking/dataio_json.c | 30 ------------------------------
+ common/networking/dataio_json.h |  5 -----
+ common/networking/dataio_raw.c  | 41 -----------------------------------------
+ common/networking/dataio_raw.h  |  3 ---
+ common/networking/packets.def   |  7 ++++---
+ fc_version                      |  2 +-
+ server/ruleset.c                | 17 ++++++++++++++---
+ 9 files changed, 31 insertions(+), 91 deletions(-)
+
+diff --git a/common/networking/packets.def b/common/networking/packets.def
+index 88c467ff40..afcd6d3207 100644
+--- a/common/networking/packets.def
++++ b/common/networking/packets.def
+@@ -203,7 +203,6 @@ type STRING             = string(char)
+ # Marking it this way is useful as documentation. The marking can also be
+ # used in non vanilla generate_packets.py packet generators.
+ type STRVEC             = STRING
+-type TECH_LIST          = tech_list(int)
+ type BUILDING_LIST      = building_list(int)
+ type WORKLIST           = worklist(struct worklist)
+ # string that is URI encoded in the JSON protocol
+@@ -1388,7 +1387,8 @@ end
+ PACKET_RULESET_GAME = 141; sc, lsend
+   UINT8 default_specialist;
+ 
+-  TECH_LIST global_init_techs[MAX_NUM_TECH_LIST];
++  UINT8 global_init_techs_count;
++  TECH global_init_techs[MAX_NUM_TECH_LIST:global_init_techs_count];
+   BUILDING_LIST global_init_buildings[MAX_NUM_BUILDING_LIST];
+ 
+   UINT8 veteran_levels;
+@@ -1529,7 +1529,8 @@ PACKET_RULESET_NATION = 148; sc, lsend
+   UINT8 groups[MAX_NUM_NATION_GROUPS:ngroups];
+ 
+   GOVERNMENT init_government_id;
+-  TECH_LIST init_techs[MAX_NUM_TECH_LIST];
++  UINT8 init_techs_count;
++  TECH init_techs[MAX_NUM_TECH_LIST:init_techs_count];
+   UINT8 init_units_count;
+   UNIT_TYPE init_units[MAX_NUM_UNIT_LIST:init_units_count];
+   BUILDING_LIST init_buildings[MAX_NUM_BUILDING_LIST];
+diff --git a/server/ruleset.c b/server/ruleset.c
+index 8d21fe1db9..ef8a195f7f 100644
+--- a/server/ruleset.c
++++ b/server/ruleset.c
+@@ -7757,8 +7757,13 @@ static void send_ruleset_nations(struct conn_list *dest)
+       ? government_number(n->init_government) : government_count();
+     fc_assert(ARRAY_SIZE(packet.init_techs) == ARRAY_SIZE(n->init_techs));
+     for (i = 0; i < MAX_NUM_TECH_LIST; i++) {
+-      packet.init_techs[i] = n->init_techs[i];
++      if (n->init_techs[i] != A_LAST) {
++        packet.init_techs[i] = n->init_techs[i];
++      } else {
++        break;
++      }
+     }
++    packet.init_techs_count = i;
+     fc_assert(ARRAY_SIZE(packet.init_units) == ARRAY_SIZE(n->init_units));
+     for (i = 0; i < MAX_NUM_UNIT_LIST; i++) {
+       const struct unit_type *t = n->init_units[i];
+@@ -7914,8 +7919,14 @@ static void send_ruleset_game(struct conn_list *dest)
+             == sizeof(game.rgame.global_init_techs));
+   fc_assert(ARRAY_SIZE(misc_p.global_init_techs)
+             == ARRAY_SIZE(game.rgame.global_init_techs));
+-  memcpy(misc_p.global_init_techs, game.rgame.global_init_techs,
+-         sizeof(misc_p.global_init_techs));
++  for (i = 0; i < MAX_NUM_TECH_LIST; i++) {
++    if (game.rgame.global_init_techs[i] != A_LAST) {
++      misc_p.global_init_techs[i] = game.rgame.global_init_techs[i];
++    } else {
++      break;
++    }
++  }
++  misc_p.global_init_techs_count = i;
+ 
+   fc_assert(ARRAY_SIZE(misc_p.global_init_buildings)
+             == ARRAY_SIZE(game.rgame.global_init_buildings));
+-- 
+2.11.0
+

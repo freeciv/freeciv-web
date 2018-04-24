@@ -26,8 +26,11 @@
 # pragma_pack_city_length adds pragma pack to city packet. Also sets MAX_LEN_CITYNAME 50 for large longturn games.
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 # mapimg_bugfix is http://www.hostedredmine.com/issues/707912.
+# drop-unit-list-field-type is http://www.hostedredmine.com/issues/748728
+# drop-tech-list-field-type is http://www.hostedredmine.com/issues/748774
+# drop-hard-coded-impr-list-field-type is http://www.hostedredmine.com/issues/748929
 
-PATCHLIST="freeciv_web_packets_def_changes city_impr_fix2 city-naming-change city_fixes2 metachange text_fixes unithand-change2 current_research_cost freeciv-svn-webclient-changes init_lists_disable goto_fcweb misc_devversion_sync tutorial_ruleset savegame maphand_ch ai_traits_crash server_password barbarian-names activity_null_check message_escape freeciv_segfauls_fix scorelog_filenames disable_global_warming win_chance navajo-remove-long-city-names webperimental_install user_changeable_gameseed longturn max_map_size load_command_confirmation pragma_pack_city_length webgl_vision_cheat_temporary endgame-mapimg mapimg_bugfix"
+PATCHLIST="freeciv_web_packets_def_changes city_impr_fix2 city-naming-change city_fixes2 metachange text_fixes unithand-change2 current_research_cost freeciv-svn-webclient-changes goto_fcweb misc_devversion_sync tutorial_ruleset savegame maphand_ch ai_traits_crash server_password barbarian-names activity_null_check message_escape freeciv_segfauls_fix scorelog_filenames disable_global_warming win_chance navajo-remove-long-city-names webperimental_install user_changeable_gameseed longturn max_map_size load_command_confirmation pragma_pack_city_length webgl_vision_cheat_temporary endgame-mapimg mapimg_bugfix drop-unit-list-field-type drop-tech-list-field-type drop-hard-coded-impr-list-field-type"
 
 apply_patch() {
   echo "*** Applying $1.patch ***"

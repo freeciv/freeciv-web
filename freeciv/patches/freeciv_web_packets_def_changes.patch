@@ -46,11 +46,3 @@ diff -Nurd -X.diff_ignore freeciv/common/networking/packets.def freeciv/common/n
  
    SINT32 multiplier[MAX_NUM_MULTIPLIERS];
    SINT32 multiplier_target[MAX_NUM_MULTIPLIERS];
-@@ -1334,6 +1346,7 @@
- PACKET_RULESET_GAME = 141; sc, lsend
-   UINT8 default_specialist;
- 
-+  # These are removed from freeciv-web
-   TECH_LIST global_init_techs[MAX_NUM_TECH_LIST];
-   BUILDING_LIST global_init_buildings[MAX_NUM_BUILDING_LIST];
- 

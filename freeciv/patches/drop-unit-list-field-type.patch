@@ -1,0 +1,75 @@
+From f0be319c60e49fc19a19da5ad89d1ce9047b112e Mon Sep 17 00:00:00 2001
+From: Sveinung Kvilhaugsvik <sveinung84@users.sourceforge.net>
+Date: Sun, 22 Apr 2018 21:19:09 +0200
+Subject: [PATCH 2/4] protocol: drop hard coded unit list field type.
+
+The Freeciv protocol has had unit_list, a custom network protocol field type
+for transferring lists of unit types. It has no JSON implementation. This
+causes a segfault in the help system in Freeciv JSON builds. Freeciv-web
+patches out all its users. The unit_list field type is only used in one
+packet.
+
+Replace the unit_list field type with an array of UNIT_TYPE. This keeps the
+type information intact. It uses the same amount of space in the binary
+protocol. (The elements-to-transfer field takes up the same amount of space
+as the termination code value.) It magically gives us a JSON implementation.
+It makes it possible to view the unit help text in JSON clients. (Nation help
+will still crash because of other missing information.)
+
+See hrm Feature #748728
+---
+ client/packhand.c               |  7 ++++++-
+ common/generate_packets.py      |  4 ++--
+ common/networking/dataio_json.c | 33 ---------------------------------
+ common/networking/dataio_json.h |  5 -----
+ common/networking/dataio_raw.c  | 41 -----------------------------------------
+ common/networking/dataio_raw.h  |  3 ---
+ common/networking/packets.def   |  4 ++--
+ fc_version                      |  2 +-
+ server/ruleset.c                |  7 ++++++-
+ 9 files changed, 17 insertions(+), 89 deletions(-)
+
+diff --git a/common/networking/packets.def b/common/networking/packets.def
+index a611f2e769..88c467ff40 100644
+--- a/common/networking/packets.def
++++ b/common/networking/packets.def
+@@ -204,7 +204,6 @@ type STRING             = string(char)
+ # used in non vanilla generate_packets.py packet generators.
+ type STRVEC             = STRING
+ type TECH_LIST          = tech_list(int)
+-type UNIT_LIST          = unit_list(int)
+ type BUILDING_LIST      = building_list(int)
+ type WORKLIST           = worklist(struct worklist)
+ # string that is URI encoded in the JSON protocol
+@@ -1531,7 +1530,8 @@ PACKET_RULESET_NATION = 148; sc, lsend
+ 
+   GOVERNMENT init_government_id;
+   TECH_LIST init_techs[MAX_NUM_TECH_LIST];
+-  UNIT_LIST init_units[MAX_NUM_UNIT_LIST];
++  UINT8 init_units_count;
++  UNIT_TYPE init_units[MAX_NUM_UNIT_LIST:init_units_count];
+   BUILDING_LIST init_buildings[MAX_NUM_BUILDING_LIST];
+ end
+ 
+diff --git a/server/ruleset.c b/server/ruleset.c
+index 9caf39ace5..8d21fe1db9 100644
+--- a/server/ruleset.c
++++ b/server/ruleset.c
+@@ -7762,8 +7762,13 @@ static void send_ruleset_nations(struct conn_list *dest)
+     fc_assert(ARRAY_SIZE(packet.init_units) == ARRAY_SIZE(n->init_units));
+     for (i = 0; i < MAX_NUM_UNIT_LIST; i++) {
+       const struct unit_type *t = n->init_units[i];
+-      packet.init_units[i] = t ? utype_number(t) : U_LAST;
++      if (t) {
++        packet.init_units[i] = utype_number(t);
++      } else {
++        break;
++      }
+     }
++    packet.init_units_count = i;
+     fc_assert(ARRAY_SIZE(packet.init_buildings)
+               == ARRAY_SIZE(n->init_buildings));
+     for (i = 0; i < MAX_NUM_BUILDING_LIST; i++) {
+-- 
+2.11.0
+

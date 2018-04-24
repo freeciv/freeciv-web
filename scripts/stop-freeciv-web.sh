@@ -10,15 +10,11 @@ if [ ! -f ${SCRIPT_DIR}/configuration.sh ]; then
 fi
 . configuration.sh
 
-if [ "x$DEPENDENCY_SERVICES_STOP" = x ] ; then
-  DEPENDENCY_SERVICES_STOP="./dependency-services-default-stop.sh"
-fi
-
 echo "Shutting down Freeciv-web: nginx, tomcat, publite2, freeciv-proxy, pbem."
 
 # Shutdown Freeciv-web's dependency services according to the users
 # configuration.
-$DEPENDENCY_SERVICES_STOP
+./dependency-services-default-stop.sh
 
 #3. publite2
 ps aux | grep -ie publite2 | awk '{print $2}' | xargs kill -9 

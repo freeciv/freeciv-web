@@ -92,3 +92,5 @@ freeciv-web/src/main/webapp/WEB-INF/config.properties
 pbem/settings.ini
 publite2/settings.ini
 scripts/configuration.sh
+scripts/dependency-services-start.sh
+scripts/dependency-services-stop.sh

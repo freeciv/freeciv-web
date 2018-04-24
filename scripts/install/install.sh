@@ -214,11 +214,35 @@ fi
 . "${basedir}/scripts/install/ext-install.sh"
 . "${basedir}/scripts/install/${FCW_INSTALL_SCRIPT}"
 
+if which service > /dev/null; then
+  svcman=default
+  start_svc () {
+    sudo service "$1" start
+  }
+  stop_svc () {
+    sudo service "$1" stop
+  }
+else
+  svcman=systemd
+  start_svc () {
+    sudo systemctl start "$1".service
+  }
+  stop_svc () {
+    sudo systemctl stop "$1".service
+  }
+fi
+
+for action in start stop; do
+  if [ ! -f "${basedir}/scripts/dependency-services-${action}.sh" ]; then
+    ln -s "install/dependency-services-${svcman}-${action}.sh" "${basedir}/scripts/dependency-services-${action}.sh" || cp "${basedir}/scripts/install/dependency-services-${svcman}-${action}.sh" "${basedir}/scripts/dependency-services-${action}.sh"
+  fi
+done
+
 echo "==== Filling configuration templates ===="
 "${basedir}/scripts/install/gen-from-templates.sh"
 
 echo "==== Setting up DB ===="
-pidof mysqld > /dev/null || sudo service mysql start
+pidof mysqld > /dev/null || start_svc mysql
 if [ -z "${DB_ROOT_PASSWORD}" ]; then
   echo "Will need the DB root password twice"
 fi
@@ -249,7 +273,7 @@ cd "${basedir}"/scripts && ./sync-js-hand.sh
 cd "${basedir}"/freeciv-web && ./build.sh
 
 echo "==== Setting up nginx ===="
-sudo service nginx stop
+stop_svc nginx
 sudo rm /etc/nginx/sites-enabled/default
 sudo cp "${basedir}"/publite2/nginx.conf /etc/nginx/nginx.conf
 

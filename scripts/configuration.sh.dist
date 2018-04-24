@@ -16,7 +16,3 @@ DB_PASSWORD=changeme
 # so it won't be the correct one for this variable, and you are not notified
 # of the first one.
 DB_ROOT_PASSWORD=${RANDOM}${RANDOM}${RANDOM}
-
-# Dependency service configuration
-DEPENDENCY_SERVICES_START="./dependency-services-default-start.sh"
-DEPENDENCY_SERVICES_STOP="./dependency-services-default-stop.sh"

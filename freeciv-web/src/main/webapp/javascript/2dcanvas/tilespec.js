@@ -105,26 +105,45 @@ function tileset_has_tag(tagname)
 }
 
 /**************************************************************************
+  Returns the tag name of the sprite of a ruleset entity where the
+  preferred tag name is in the 'graphic_str' field, the fall back tag in
+  case the tileset don't support the first tag is the 'graphic_alt' field
+  and the entity name is stored in the 'name' field.
+**************************************************************************/
+function tileset_ruleset_entity_tag_str_or_alt(entity, kind_name)
+{
+  if (entity == null) {
+    console.log("No " + kind_name + " to return tag for.");
+    return null;
+  }
+
+  if (tileset_has_tag(entity['graphic_str'])) {
+    return entity['graphic_str'];
+  }
+
+  if (tileset_has_tag(entity['graphic_alt'])) {
+    return entity['graphic_alt'];
+  }
+
+  console.log("No graphic for " + kind_name + " " + entity['name']);
+  return null;
+}
+
+/**************************************************************************
   Returns the tag name of the graphic showing the specified Extra on the
   map.
 **************************************************************************/
 function tileset_extra_graphic_tag(extra)
 {
-  if (extra == null) {
-    console.log("No extra to return tag for.");
-    return null;
-  }
+  return tileset_ruleset_entity_tag_str_or_alt(extra, "extra");
+}
 
-  if (tileset_has_tag(extra['graphic_str'])) {
-    return extra['graphic_str'];
-  }
-
-  if (tileset_has_tag(extra['graphic_alt'])) {
-    return extra['graphic_alt'];
-  }
-
-  console.log("No graphic for extra " + extra['name']);
-  return null;
+/**************************************************************************
+  Returns the tag name of the graphic showing the specified unit type.
+**************************************************************************/
+function tileset_unit_type_graphic_tag(utype)
+{
+  return tileset_ruleset_entity_tag_str_or_alt(utype, "unit type");
 }
 
 /**************************************************************************
@@ -582,7 +601,7 @@ function fill_unit_sprite_array(punit, stacked, backdrop)
 {
   var unit_offset = get_unit_anim_offset(punit);
   var result = [ get_unit_nation_flag_sprite(punit),
-           {"key" : unit_type(punit)['graphic_str'],
+           {"key" : tileset_unit_type_graphic_tag(unit_type(punit)),
             "offset_x": unit_offset['x'] + unit_offset_x,
 	    "offset_y" : unit_offset['y'] - unit_offset_y} ];
   var activities = get_unit_activity_sprite(punit);
@@ -1122,9 +1141,11 @@ function get_unit_image_sprite(punit)
 ****************************************************************************/
 function get_unit_type_image_sprite(punittype)
 {
-  var tag = punittype['graphic_str'];
+  var tag = tileset_unit_type_graphic_tag(punittype);
 
-  if (tileset[tag] == null) return null;
+  if (tag == null) {
+    return null;
+  }
 
   var tileset_x = tileset[tag][0];
   var tileset_y = tileset[tag][1];

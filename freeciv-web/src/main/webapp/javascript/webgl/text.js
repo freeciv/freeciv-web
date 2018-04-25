@@ -124,8 +124,9 @@ function create_city_label(pcity)
   // Production
   var prod_type = get_city_production_type(pcity);
   if (prod_type != null) {
-    var tag = prod_type.graphic_str;
-    if (tileset[tag] != null) {
+    var tag = tileset_ruleset_entity_tag_str_or_alt(prod_type,
+                                                    "unit or building");
+    if (tag != null) {
       ctx.fillStyle = background_color;
       ctx.fillRect(width, 0, 36, 32);
       ctx.drawImage(sprites[tag], width, 0, 31, 18*2);
@@ -210,8 +211,9 @@ function update_city_label(pcity)
   // Production
   var prod_type = get_city_production_type(pcity);
   if (prod_type != null) {
-    var tag = prod_type.graphic_str;
-    if (tileset[tag] != null) {
+    var tag = tileset_ruleset_entity_tag_str_or_alt(prod_type,
+                                                    "unit or building");
+    if (tag != null) {
       ctx.fillStyle = background_color;
       ctx.fillRect(width, 0, 36, 32);
       ctx.drawImage(sprites[tag], width, 0, 31, 18*2);

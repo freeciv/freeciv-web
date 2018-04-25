@@ -313,8 +313,9 @@ function mapview_put_city_bar(pcanvas, city, canvas_x, canvas_y) {
   pcanvas.globalAlpha = 1.0;
 
   if (prod_type != null) {
-    var tag = prod_type['graphic_str'];
-    if (tileset[tag] == null) return;
+    var tag = tileset_ruleset_entity_tag_str_or_alt(prod_type,
+                                                    "unit or building");
+    if (tag == null) return;
     pcanvas.drawImage(sprites[tag],
               canvas_x + Math.floor(txt_measure.width / 2) + size_measure.width + 13,
               canvas_y - 19, 28, 24);

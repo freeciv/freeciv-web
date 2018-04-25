@@ -1103,22 +1103,17 @@ function get_tile_river_sprite(ptile)
 ****************************************************************************/
 function get_unit_image_sprite(punit)
 {
-  var tag = unit_type(punit)['graphic_str'];
+  var from_type = get_unit_type_image_sprite(unit_type(punit));
 
-  if (tileset[tag] == null) return null;
+  /* TODO: Find out what the purpose of this is, if it is needed here and if
+   * it is needed in get_unit_type_image_sprite() too. It was the only
+   * difference from get_unit_type_image_sprite() before
+   * get_unit_image_sprite() started to use it. It was added in
+   * f4a3ef358d1462d1f0ef7529982c417ddc402583 but that commit is to huge for
+   * me to figure out what it does. */
+  from_type["height"] = from_type["height"] - 2;
 
-  var tileset_x = tileset[tag][0];
-  var tileset_y = tileset[tag][1];
-  var width = tileset[tag][2];
-  var height = (tileset[tag][3] - 2);
-  var i = tileset[tag][4];
-  return {"tag": tag,
-            "image-src" : "/tileset/freeciv-web-tileset-" + tileset_name + "-" + i + get_tileset_file_extention() + "?ts=" + ts,
-            "tileset-x" : tileset_x,
-            "tileset-y" : tileset_y,
-            "width" : width,
-            "height" : height
-            };
+  return from_type;
 }
 
 

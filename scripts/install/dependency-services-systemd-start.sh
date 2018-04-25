@@ -1,7 +1,9 @@
 #!/bin/sh
 
-# Use systemd to start the services Freeciv-web depends on. Put this script
-# in configuration.sh's DEPENDENCY_SERVICES_START variable to use it.
+# Use systemd to start the services Freeciv-web depends on.
+# Need to start the dependency services in a different way to work with
+# your set up? Create a script that starts them and put it in
+# scripts/dependency-services-start.sh.
 
 # Just in case it didn't start at boot time
 systemctl is-active --quiet mysql.service || sudo systemctl start mysql.service

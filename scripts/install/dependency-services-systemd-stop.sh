@@ -1,7 +1,9 @@
 #!/bin/sh
 
-# Use systemd to stop the services Freeciv-web depends on. Put this script
-# in configuration.sh's DEPENDENCY_SERVICES_STOP variable to use it.
+# Use systemd to stop the services Freeciv-web depends on.
+# Need to start the dependency services in a different way to work with
+# your set up? Create a script that starts them and put it in
+# scripts/dependency-services-stop.sh.
 
 if systemctl is-active --quiet nginx.service ; then
   sudo systemctl stop nginx.service

@@ -289,7 +289,7 @@ fi
 cat << EOF
 
 You may want to personalize some things before starting it:
-- Set the scripts to start/stop dependency services in scripts/configuration.sh.
+- Replace the scripts to start/stop dependency services in scripts.
 - Configure the game server in publite2/settings.ini, and update/create
   pubscript_*.serv to suit your needs.
 - Set the mail account data for pbem games in pbem/settings.ini, and the

@@ -4,7 +4,7 @@
 #
 # Need to stop the dependency services in a different way to work with
 # your set up? Create a script that stops them and put it in
-# configuration.sh's DEPENDENCY_SERVICES_STOP variable.
+# scripts/dependency-services-stop.sh.
 
 # 1. nginx
 if [ "$(pidof nginx)" ] ; then

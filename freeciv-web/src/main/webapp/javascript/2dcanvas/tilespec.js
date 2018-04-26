@@ -147,6 +147,14 @@ function tileset_unit_type_graphic_tag(utype)
 }
 
 /**************************************************************************
+  Returns the tag name of the graphic showing the specified building.
+**************************************************************************/
+function tileset_building_graphic_tag(pimprovement)
+{
+  return tileset_ruleset_entity_tag_str_or_alt(pimprovement, "building");
+}
+
+/**************************************************************************
   Returns the tag name of the graphic showing the Extra specified by ID on
   the map.
 **************************************************************************/
@@ -1166,11 +1174,10 @@ function get_unit_type_image_sprite(punittype)
 ****************************************************************************/
 function get_improvement_image_sprite(pimprovement)
 {
-  var tag = pimprovement['graphic_str'];
+  var tag = tileset_building_graphic_tag(pimprovement);
 
-  if (tileset[tag] == null) {
-    tag = pimprovement['graphic_alt'];
-    if (tileset[tag] == null) return null;
+  if (tag == null) {
+    return null;
   }
 
   var tileset_x = tileset[tag][0];

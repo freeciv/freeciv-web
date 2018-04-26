@@ -288,7 +288,7 @@ function update_tech_tree()
     var prunits = get_units_from_tech(tech_id);
     for (var i = 0; i < prunits.length; i++) {
       var punit = prunits[i];
-      var sprite = sprites[punit['graphic_str']];
+      var sprite = sprites[tileset_unit_type_graphic_tag(punit)];
       if (sprite != null) {
         tech_canvas_ctx.drawImage(sprite, x + 50 + ((tech_things++) * 30), y + 23, 28, 24);
       }
@@ -297,16 +297,12 @@ function update_tech_tree()
     var primprovements = get_improvements_from_tech(tech_id);
     for (var i = 0; i < primprovements.length; i++) {
       var pimpr = primprovements[i];
-      var sprite = sprites[pimpr['graphic_str']];
+      var sprite = sprites[tileset_building_graphic_tag(pimpr)];
       if (sprite != null) {
         tech_canvas_ctx.drawImage(sprite, x + 50 + ((tech_things++) * 30), y + 23, 28, 24);
       }
     }
-
-
-
   }
-
 }
 
 /**************************************************************************

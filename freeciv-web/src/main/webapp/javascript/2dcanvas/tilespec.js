@@ -105,26 +105,53 @@ function tileset_has_tag(tagname)
 }
 
 /**************************************************************************
+  Returns the tag name of the sprite of a ruleset entity where the
+  preferred tag name is in the 'graphic_str' field, the fall back tag in
+  case the tileset don't support the first tag is the 'graphic_alt' field
+  and the entity name is stored in the 'name' field.
+**************************************************************************/
+function tileset_ruleset_entity_tag_str_or_alt(entity, kind_name)
+{
+  if (entity == null) {
+    console.log("No " + kind_name + " to return tag for.");
+    return null;
+  }
+
+  if (tileset_has_tag(entity['graphic_str'])) {
+    return entity['graphic_str'];
+  }
+
+  if (tileset_has_tag(entity['graphic_alt'])) {
+    return entity['graphic_alt'];
+  }
+
+  console.log("No graphic for " + kind_name + " " + entity['name']);
+  return null;
+}
+
+/**************************************************************************
   Returns the tag name of the graphic showing the specified Extra on the
   map.
 **************************************************************************/
 function tileset_extra_graphic_tag(extra)
 {
-  if (extra == null) {
-    console.log("No extra to return tag for.");
-    return null;
-  }
+  return tileset_ruleset_entity_tag_str_or_alt(extra, "extra");
+}
 
-  if (tileset_has_tag(extra['graphic_str'])) {
-    return extra['graphic_str'];
-  }
+/**************************************************************************
+  Returns the tag name of the graphic showing the specified unit type.
+**************************************************************************/
+function tileset_unit_type_graphic_tag(utype)
+{
+  return tileset_ruleset_entity_tag_str_or_alt(utype, "unit type");
+}
 
-  if (tileset_has_tag(extra['graphic_alt'])) {
-    return extra['graphic_alt'];
-  }
-
-  console.log("No graphic for extra " + extra['name']);
-  return null;
+/**************************************************************************
+  Returns the tag name of the graphic showing the specified building.
+**************************************************************************/
+function tileset_building_graphic_tag(pimprovement)
+{
+  return tileset_ruleset_entity_tag_str_or_alt(pimprovement, "building");
 }
 
 /**************************************************************************
@@ -582,7 +609,7 @@ function fill_unit_sprite_array(punit, stacked, backdrop)
 {
   var unit_offset = get_unit_anim_offset(punit);
   var result = [ get_unit_nation_flag_sprite(punit),
-           {"key" : unit_type(punit)['graphic_str'],
+           {"key" : tileset_unit_type_graphic_tag(unit_type(punit)),
             "offset_x": unit_offset['x'] + unit_offset_x,
 	    "offset_y" : unit_offset['y'] - unit_offset_y} ];
   var activities = get_unit_activity_sprite(punit);
@@ -1103,22 +1130,17 @@ function get_tile_river_sprite(ptile)
 ****************************************************************************/
 function get_unit_image_sprite(punit)
 {
-  var tag = unit_type(punit)['graphic_str'];
+  var from_type = get_unit_type_image_sprite(unit_type(punit));
 
-  if (tileset[tag] == null) return null;
+  /* TODO: Find out what the purpose of this is, if it is needed here and if
+   * it is needed in get_unit_type_image_sprite() too. It was the only
+   * difference from get_unit_type_image_sprite() before
+   * get_unit_image_sprite() started to use it. It was added in
+   * f4a3ef358d1462d1f0ef7529982c417ddc402583 but that commit is to huge for
+   * me to figure out what it does. */
+  from_type["height"] = from_type["height"] - 2;
 
-  var tileset_x = tileset[tag][0];
-  var tileset_y = tileset[tag][1];
-  var width = tileset[tag][2];
-  var height = (tileset[tag][3] - 2);
-  var i = tileset[tag][4];
-  return {"tag": tag,
-            "image-src" : "/tileset/freeciv-web-tileset-" + tileset_name + "-" + i + get_tileset_file_extention() + "?ts=" + ts,
-            "tileset-x" : tileset_x,
-            "tileset-y" : tileset_y,
-            "width" : width,
-            "height" : height
-            };
+  return from_type;
 }
 
 
@@ -1127,9 +1149,11 @@ function get_unit_image_sprite(punit)
 ****************************************************************************/
 function get_unit_type_image_sprite(punittype)
 {
-  var tag = punittype['graphic_str'];
+  var tag = tileset_unit_type_graphic_tag(punittype);
 
-  if (tileset[tag] == null) return null;
+  if (tag == null) {
+    return null;
+  }
 
   var tileset_x = tileset[tag][0];
   var tileset_y = tileset[tag][1];
@@ -1150,11 +1174,10 @@ function get_unit_type_image_sprite(punittype)
 ****************************************************************************/
 function get_improvement_image_sprite(pimprovement)
 {
-  var tag = pimprovement['graphic_str'];
+  var tag = tileset_building_graphic_tag(pimprovement);
 
-  if (tileset[tag] == null) {
-    tag = pimprovement['graphic_alt'];
-    if (tileset[tag] == null) return null;
+  if (tag == null) {
+    return null;
   }
 
   var tileset_x = tileset[tag][0];

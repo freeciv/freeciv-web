@@ -1,15 +1,6 @@
 diff -Nurd -X.diff_ignore freeciv/common/networking/packets.def freeciv/common/networking/packets.def
 --- freeciv/common/networking/packets.def	2016-02-24 01:30:52.178367420 +0200
 +++ freeciv/common/networking/packets.def	2016-02-24 02:07:55.184096429 +0200
-@@ -297,7 +297,7 @@
- type UNIT_TYPE          = uint8(Unit_type_id)
- 
- # other typedefs
--type CITY_COORD         = UINT8
-+type CITY_COORD         = UINT32
- type GOLD               = UINT32
- type HP                 = UINT8
- type PERCENT            = UINT8
 @@ -659,9 +662,16 @@
  
    WORKLIST worklist;

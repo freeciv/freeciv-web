@@ -762,15 +762,13 @@ function do_city_map_click(ptile)
   var packet = null;
   var c_tile = index_to_tile(active_city['tile']);
   if (ptile['worked'] == active_city['id']) {
-    packet = {"pid" : packet_city_make_specialist,
-	         "city_id" : active_city['id'],
-                 "worker_x" : ptile['x'],
-		 "worker_y" : ptile['y']};
+    packet = {"pid"     : packet_city_make_specialist,
+              "city_id" : active_city['id'],
+              "tile_id" : ptile['index']};
   } else {
-    packet = {"pid" : packet_city_make_worker,
-	         "city_id" : active_city['id'],
-                 "worker_x" : ptile['x'],
-		 "worker_y" : ptile['y']};
+    packet = {"pid"     : packet_city_make_worker,
+              "city_id" : active_city['id'],
+              "tile_id" : ptile['index']};
   }
   send_request(JSON.stringify(packet));
 

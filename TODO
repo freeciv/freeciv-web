@@ -94,4 +94,3 @@ Unimplemented rule variation support:
 Simplify Freeciv server upgrade:
 - get rid of the worst merge conflict causes
   - freeciv_web_all_packets_def_changes:
-    - find and get rid of pointless changes

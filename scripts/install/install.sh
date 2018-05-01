@@ -224,11 +224,16 @@ if which service > /dev/null; then
   }
 else
   svcman=systemd
+  if which pkexec > /dev/null; then
+    ACCESS_MANAGER=
+  else
+    ACCESS_MANAGER=sudo
+  fi
   start_svc () {
-    sudo systemctl start "$1".service
+    ${ACCESS_MANAGER} systemctl start "$1".service
   }
   stop_svc () {
-    sudo systemctl stop "$1".service
+    ${ACCESS_MANAGER} systemctl stop "$1".service
   }
 fi
 

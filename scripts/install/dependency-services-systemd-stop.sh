@@ -5,10 +5,13 @@
 # your set up? Create a script that starts them and put it in
 # scripts/dependency-services-stop.sh.
 
-if systemctl is-active --quiet nginx.service ; then
-  sudo systemctl stop nginx.service
+if which pkexec > /dev/null; then
+  ACCESS_MANAGER=
+else
+  ACCESS_MANAGER=sudo
 fi
 
-if systemctl is-active --quiet tomcat8.service ; then
-  sudo systemctl stop tomcat8.service
-fi
+for unit in nginx tomcat8; do
+  systemctl is-active --quiet ${unit}.service && ${ACCESS_MANAGER} systemctl stop ${unit}.service
+done
+

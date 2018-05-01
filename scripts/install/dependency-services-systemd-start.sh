@@ -5,9 +5,13 @@
 # your set up? Create a script that starts them and put it in
 # scripts/dependency-services-start.sh.
 
-# Just in case it didn't start at boot time
-systemctl is-active --quiet mysql.service || sudo systemctl start mysql.service
+if which pkexec > /dev/null; then
+  ACCESS_MANAGER=
+else
+  ACCESS_MANAGER=sudo
+fi
 
-# Is stopped and (re)started with Freeciv-web
-systemctl is-active --quiet nginx.service || sudo systemctl start nginx.service
-systemctl is-active --quiet tomcat8.service || sudo systemctl start tomcat8.service
+for unit in mysql nginx tomcat8; do
+  systemctl is-active --quiet ${unit}.service || ${ACCESS_MANAGER} systemctl start ${unit}.service
+done
+

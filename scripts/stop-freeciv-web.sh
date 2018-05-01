@@ -14,7 +14,7 @@ echo "Shutting down Freeciv-web: nginx, tomcat, publite2, freeciv-proxy, pbem."
 
 # Shutdown Freeciv-web's dependency services according to the users
 # configuration.
-./dependency-services-default-stop.sh
+./dependency-services-stop.sh
 
 #3. publite2
 ps aux | grep -ie publite2 | awk '{print $2}' | xargs kill -9 

@@ -1950,6 +1950,17 @@ function update_city_screen()
   $("#city_table").tablesorter({theme:"dark", sortList: sortList});
 }
 
+/**********************************************************************//**
+  Return TRUE iff the city is unhappy.  An unhappy city will fall
+  into disorder soon.
+**************************************************************************/
+function city_unhappy(pcity)
+{
+  return (pcity['ppl_happy'][FEELING_FINAL]
+          < pcity['ppl_unhappy'][FEELING_FINAL]
+            + 2 * pcity['ppl_angry'][FEELING_FINAL]);
+}
+
 /**************************************************************************
  Returns the city state: Celebrating, Disorder or Peace.
 **************************************************************************/

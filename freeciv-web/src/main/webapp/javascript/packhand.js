@@ -268,6 +268,9 @@ function handle_city_info(packet)
   packet['improvements'] = new BitVector(packet['improvements']);
   packet['city_options'] = new BitVector(packet['city_options']);
 
+  /* Add an unhappy field like the city_short_info packet has. */
+  packet['unhappy'] = city_unhappy(packet);
+
   if (cities[packet['id']] == null) {
     cities[packet['id']] = packet;
     if (C_S_RUNNING == client_state() && !observing && benchmark_start == 0

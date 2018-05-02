@@ -155,6 +155,14 @@ function tileset_building_graphic_tag(pimprovement)
 }
 
 /**************************************************************************
+  Returns the tag name of the graphic showing the specified tech.
+**************************************************************************/
+function tileset_tech_graphic_tag(ptech)
+{
+  return tileset_ruleset_entity_tag_str_or_alt(ptech, "tech");
+}
+
+/**************************************************************************
   Returns the tag name of the graphic showing the Extra specified by ID on
   the map.
 **************************************************************************/
@@ -1221,9 +1229,9 @@ function get_specialist_image_sprite(tag)
 ****************************************************************************/
 function get_technology_image_sprite(ptech)
 {
-  var tag = ptech['graphic_str'];
+  var tag = tileset_tech_graphic_tag(ptech);
 
-  if (tileset[tag] == null) return null;
+  if (tag == null) return null;
 
   var tileset_x = tileset[tag][0];
   var tileset_y = tileset[tag][1];

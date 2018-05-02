@@ -219,7 +219,7 @@ function update_tech_tree()
     /* KNOWN TECHNOLOGY */
     if (player_invention_state(client.conn.playing, ptech['id']) == TECH_KNOWN) {
 
-      var tag = ptech['graphic_str'];
+      var tag = tileset_tech_graphic_tag(ptech);
       tech_canvas_ctx.fillStyle = 'rgb(255, 255, 255)';
       tech_canvas_ctx.fillRect(x-2, y-2, tech_item_width, tech_item_height);
       tech_canvas_ctx.strokeStyle = 'rgb(225, 225, 225)';
@@ -241,7 +241,7 @@ function update_tech_tree()
         tech_canvas_ctx.lineWidth=6;
       }
 
-      var tag = ptech['graphic_str'];
+      var tag = tileset_tech_graphic_tag(ptech);
       tech_canvas_ctx.lineWidth=4;
       tech_canvas_ctx.fillStyle = bgcolor;
       tech_canvas_ctx.fillRect(x-2, y-2, tech_item_width, tech_item_height);
@@ -266,7 +266,7 @@ function update_tech_tree()
         tech_canvas_ctx.lineWidth=6;
       }
 
-      var tag = ptech['graphic_str'];
+      var tag = tileset_tech_graphic_tag(ptech);
       tech_canvas_ctx.fillStyle =  bgcolor;
       tech_canvas_ctx.fillRect(x-2, y-2, tech_item_width, tech_item_height);
       tech_canvas_ctx.strokeStyle = 'rgb(255, 255, 255)';
@@ -539,9 +539,9 @@ function get_tech_infobox_html(tech_id)
 {
   var infobox_html = "";
   var ptech = techs[tech_id];
-  var tag = ptech['graphic_str'];
+  var tag = tileset_tech_graphic_tag(ptech);
 
-  if (tileset[tag] == null) return null;
+  if (tag == null) return null;
   var tileset_x = tileset[tag][0];
   var tileset_y = tileset[tag][1];
   var width = tileset[tag][2];

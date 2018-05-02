@@ -104,6 +104,9 @@ function websocket_init()
    $("#turn_done_button").button( "option", "disabled", true);
    $("#save_button").button( "option", "disabled", true);
    pbem_phase_ended = true;
+
+   /* The player can't save the game after the connection is down. */
+   $(window).unbind('beforeunload');
   };
 
   ws.onerror = function (evt) {

@@ -379,10 +379,12 @@ function update_tech_screen()
   $("#tech_goal_box").html(research_goal_text);
 
   $("#tech_progress_text").html("Research progress: "
-		         + client.conn.playing['bulbs_researched']
-			 + " / " + client.conn.playing['current_research_cost']);
+                                + client.conn.playing['bulbs_researched']
+                                + " / "
+                                + client.conn.playing['researching_cost']);
 
-  var pct_progress = 100 * (client.conn.playing['bulbs_researched'] / client.conn.playing['current_research_cost']);
+  var pct_progress = 100 * (client.conn.playing['bulbs_researched']
+                            / client.conn.playing['researching_cost']);
 
   $("#progress_fg").css("width", pct_progress  + "%");
 

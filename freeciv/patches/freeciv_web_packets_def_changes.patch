@@ -17,18 +17,7 @@ diff -Nurd -X.diff_ignore freeciv/common/networking/packets.def freeciv/common/n
  end
  
  PACKET_CITY_SHORT_INFO = 32; sc, lsend, is-game-info, cancel(PACKET_CITY_INFO)
-@@ -813,16 +823,18 @@
-   BV_PLAYER gives_shared_vision;
-   UINT16 culture;
-   SINT16 love[MAX_NUM_PLAYER_SLOTS];
-+  UINT32 current_research_cost;
- 
-   BOOL color_valid;
-   BOOL color_changeable;
-   UINT8 color_red;
-   UINT8 color_green;
-   UINT8 color_blue;
- 
+@@ -813,6 +823,7 @@
    BV_PLR_FLAGS flags;
  
    CITYSPE wonders[B_LAST]; diff

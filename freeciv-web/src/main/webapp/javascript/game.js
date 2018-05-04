@@ -84,16 +84,16 @@ function update_game_status_panel() {
     var lux = client.conn.playing['luxury'];
     var sci = client.conn.playing['science'];
 
-    var net_income = pplayer['net_income'];
-    if (pplayer['net_income'] > 0) {
-      net_income = "+" + pplayer['net_income'];
+    var net_income = pplayer['expected_income'];
+    if (pplayer['expected_income'] > 0) {
+      net_income = "+" + pplayer['expected_income'];
     }
 
     if (!is_small_screen()) status_html += "<b>" + nations[pplayer['nation']]['adjective'] + "</b> &nbsp;&nbsp; <i class='fa fa-child' aria-hidden='true' title='Population'></i>: ";
     if (!is_small_screen()) status_html += "<b>" + civ_population(client.conn.playing.playerno) + "</b>  &nbsp;&nbsp;";
     if (!is_small_screen()) status_html += "<i class='fa fa-clock-o' aria-hidden='true' title='Year (turn)'></i>: <b>" + get_year_string() + "</b> &nbsp;&nbsp;";
     status_html += "<i class='fa fa-money' aria-hidden='true' title='Gold (net income)'></i>: ";
-    if (pplayer['net_income'] >= 0) {
+    if (pplayer['expected_income'] >= 0) {
       status_html += "<b title='Gold (net income)'>";
     } else {
       status_html += "<b class='negative_net_income' title='Gold (net income)'>";

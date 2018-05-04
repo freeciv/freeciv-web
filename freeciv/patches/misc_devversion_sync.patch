@@ -41,15 +41,3 @@ diff -Nurd -X.diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
  }
  
  /**************************************************************************
-diff -Nurd -X.diff_ignore freeciv/server/plrhand.c freeciv/server/plrhand.c
---- freeciv/server/plrhand.c	2012-07-16 01:02:18.000000000 +0300
-+++ freeciv/server/plrhand.c	2012-07-16 01:09:07.000000000 +0300
-@@ -892,6 +892,8 @@
-     packet->score = 0;
-   }
- 
-+  packet->net_income = player_get_expected_income(plr);
-+
-   if (info_level >= INFO_MEETING) {
-     packet->gold = plr->economic.gold;
-     pgov = government_of_player(plr);

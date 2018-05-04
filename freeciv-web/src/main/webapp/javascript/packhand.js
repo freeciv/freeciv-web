@@ -374,13 +374,29 @@ function handle_traderoute_info(packet)
   city_trade_routes[packet['city']][packet['index']] = packet;
 }
 
-/* 100% complete */
+/************************************************************************//**
+  Handle information about a player.
+
+  It is followed by web_player_info_addition that gives additional
+  information only needed by Freeciv-web. Its processing will therefore
+  stop while it waits for the corresponding web_player_info_addition packet.
+****************************************************************************/
 function handle_player_info(packet)
 {
   /* Interpret player flags. */
   packet['flags'] = new BitVector(packet['flags']);
   packet['gives_shared_vision'] = new BitVector(packet['gives_shared_vision']);
 
+  players[packet['playerno']] = $.extend(players[packet['playerno']], packet);
+}
+
+/************************************************************************//**
+  The web_player_info_addition packet is a follow up packet to the
+  player_info packet. It gives some information the C clients calculates on
+  their own.
+****************************************************************************/
+function handle_web_player_info_addition(packet)
+{
   players[packet['playerno']] = $.extend(players[packet['playerno']], packet);
 
   if (client.conn.playing != null) {
@@ -394,7 +410,7 @@ function handle_player_info(packet)
 
   if (is_tech_tree_init && tech_dialog_active) update_tech_screen();
 
-  assign_nation_color(packet['nation']);
+  assign_nation_color(players[packet['playerno']]['nation']);
 }
 
 /* 100% complete */

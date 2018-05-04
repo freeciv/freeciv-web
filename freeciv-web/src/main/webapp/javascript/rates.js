@@ -108,9 +108,9 @@ function update_rates_dialog()
 **************************************************************************/
 function update_net_income()
 {
-  var net_income = client.conn.playing['net_income'];
-  if (client.conn.playing['net_income'] > 0) {
-    net_income = "+" + client.conn.playing['net_income'];
+  var net_income = client.conn.playing['expected_income'];
+  if (client.conn.playing['expected_income'] > 0) {
+    net_income = "+" + client.conn.playing['expected_income'];
   }
   $("#income_info").html(net_income);
 }

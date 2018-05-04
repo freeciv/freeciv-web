@@ -17,11 +17,3 @@ diff -Nurd -X.diff_ignore freeciv/common/networking/packets.def freeciv/common/n
  end
  
  PACKET_CITY_SHORT_INFO = 32; sc, lsend, is-game-info, cancel(PACKET_CITY_INFO)
-@@ -813,6 +823,7 @@
-   BV_PLR_FLAGS flags;
- 
-   CITYSPE wonders[B_LAST]; diff
-+  UINT32  net_income;
- 
-   SINT32 multiplier[MAX_NUM_MULTIPLIERS];
-   SINT32 multiplier_target[MAX_NUM_MULTIPLIERS];

@@ -281,6 +281,13 @@ echo "==== Setting up nginx ===="
 stop_svc nginx
 sudo rm /etc/nginx/sites-enabled/default
 sudo cp "${basedir}"/publite2/nginx.conf /etc/nginx/nginx.conf
+if [ "${FCW_INSTALL_MODE}" = TEST ] && [ ! -f /etc/nginx/ssl/freeciv-web.crt ]; then
+  sudo mkdir -p /etc/nginx/ssl/private
+  sudo chmod 700 /etc/nginx/ssl/private
+  openssl req -x509 -newkey rsa:2048 -keyout freeciv-web.key -out freeciv-web.crt -days 3650 -nodes -subj '/CN=localhost'
+  sudo mv freeciv-web.crt /etc/nginx/ssl/
+  sudo mv freeciv-web.key /etc/nginx/ssl/private/
+fi
 
 echo
 echo Freeciv-web installed!
@@ -300,6 +307,7 @@ You may want to personalize some things before starting it:
 - Set the mail account data for pbem games in pbem/settings.ini, and the
   templates for the messages in pbem/email_template* (at least the URL).
 - Users for tomcat-admin web interface.
+- Point /etc/nginx/nginx.conf to your SSL certificate and key.
 
 Then run scripts/start-freeciv-web.sh and enjoy!
 EOF

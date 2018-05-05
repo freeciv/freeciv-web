@@ -30,6 +30,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	  config.vm.network :forwarded_port, guest: 443, host: 443, host_ip: "127.0.0.1"
   else 
 	  config.vm.network :forwarded_port, guest: 80, host: 8080, host_ip: "127.0.0.1"
+	  config.vm.network :forwarded_port, guest: 443, host: 8443, host_ip: "127.0.0.1"
   end
 
   config.vm.provider "virtualbox" do |v|

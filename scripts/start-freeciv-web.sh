@@ -9,23 +9,13 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 
-if [ ! -f ${SCRIPT_DIR}/configuration.sh ]; then
-    echo "ERROR: configuration.sh not found. copy configuration.sh.dist to configuration.sh and update it with your settings."
-fi
-
-. ${SCRIPT_DIR}/configuration.sh
-
-if [ "x$DEPENDENCY_SERVICES_START" = x ] ; then
-  DEPENDENCY_SERVICES_START="./dependency-services-default-start.sh"
-fi
-
 echo "Starting up Freeciv-web: nginx, tomcat, publite2, freeciv-proxy."
 
 mkdir -p ${FREECIV_WEB_DIR}/logs
 
 # Start Freeciv-web's dependency services according to the users
 # configuration.
-$DEPENDENCY_SERVICES_START
+./dependency-services-start.sh
 
 #3. publite2
 echo "Starting publite2" && \

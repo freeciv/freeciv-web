@@ -2,7 +2,6 @@
 # builds Freeciv-web and copies the war file to Tomcat.
 
 TOMCATDIR="/var/lib/tomcat8"
-DATADIR="/var/lib/tomcat8/webapps/data/"
 ROOTDIR="$(pwd)/.."
 
 # Creating build.txt info file
@@ -17,11 +16,6 @@ if test "x$REVTMP" != "x" ; then
 else
   rm -f ${ROOTDIR}/freeciv-web/src/main/webapp/build.txt
 fi
-
-#create data webapp for savegames.
-mkdir -p $DATADIR/savegames
-mkdir -p $DATADIR/scorelogs
-mkdir -p $DATADIR/ranklogs
 
 echo "maven package"
 mvn flyway:migrate package && cp target/freeciv-web.war "${TOMCATDIR}/webapps/ROOT.war"

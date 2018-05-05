@@ -1,0 +1,8 @@
+# Install script for different systems
+# vendor[TAB]codename[TAB]script
+Ubuntu	bionic	deb.sh
+Ubuntu	xenial	deb.sh
+Ubuntu	trusty	deb.sh
+Ubuntu	artful	deb.sh
+Debian	stretch	deb.sh
+

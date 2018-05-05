@@ -10,15 +10,11 @@ if [ ! -f ${SCRIPT_DIR}/configuration.sh ]; then
 fi
 . configuration.sh
 
-if [ "x$DEPENDENCY_SERVICES_STOP" = x ] ; then
-  DEPENDENCY_SERVICES_STOP="./dependency-services-default-stop.sh"
-fi
-
 echo "Shutting down Freeciv-web: nginx, tomcat, publite2, freeciv-proxy, pbem."
 
 # Shutdown Freeciv-web's dependency services according to the users
 # configuration.
-$DEPENDENCY_SERVICES_STOP
+./dependency-services-stop.sh
 
 #3. publite2
 ps aux | grep -ie publite2 | awk '{print $2}' | xargs kill -9 
@@ -39,4 +35,4 @@ ps aux | grep -ie meta-stats | awk '{print $2}' | xargs kill -9
 ps aux | grep -ie freeciv-earth | awk '{print $2}' | xargs kill -9 
 
 # Clean up server list in metaserver database.
-echo "delete from servers" | mysql -u ${MYSQL_USER} -p${MYSQL_PASSWORD} freeciv_web
+echo "delete from servers" | mysql -u "${DB_USER}" -p"${DB_PASSWORD}" "${DB_NAME}"

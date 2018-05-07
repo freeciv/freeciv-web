@@ -3,13 +3,13 @@ index 5891d00..e8fdc54 100644
 --- a/common/networking/packets.def
 +++ b/common/networking/packets.def
 @@ -2193,6 +2193,7 @@ end
- PACKET_INFO_TEXT_REQ = 259; cs, dsend
+ PACKET_INFO_TEXT_REQ = 289; cs, dsend
    TILE loc;
    UNIT visible_unit;
 +  UNIT focus_unit;
  end
  
- PACKET_INFO_TEXT_MESSAGE = 259; sc, dsend
+ PACKET_INFO_TEXT_MESSAGE = 289; sc, dsend
 diff --git a/server/maphand.c b/server/maphand.c
 index f1f8ba2..adf5c5e 100644
 --- a/server/maphand.c

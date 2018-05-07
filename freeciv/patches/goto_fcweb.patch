@@ -7,12 +7,12 @@ diff -Nurd freeciv/common/networking/packets.def freeciv/common/networking/packe
  end
 +
 +# used for showing GOTO path in web client.
-+PACKET_GOTO_PATH_REQ = 257; cs, dsend
++PACKET_GOTO_PATH_REQ = 287; cs, dsend
 +  UNIT unit_id;
 +  TILE goal;
 +end
 +
-+PACKET_GOTO_PATH = 258; sc, dsend
++PACKET_GOTO_PATH = 288; sc, dsend
 +  UNIT unit_id;
 +  UINT16 length;
 +  DIRECTION dir[MAX_LEN_ROUTE:length];

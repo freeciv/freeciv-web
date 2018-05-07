@@ -6,12 +6,12 @@ diff -Nurd -X.diff_ignore freeciv/common/networking/packets.def freeciv/common/n
    UINT32 turns;
  end
 +
-+PACKET_INFO_TEXT_REQ = 259; cs, dsend
++PACKET_INFO_TEXT_REQ = 289; cs, dsend
 +  TILE loc;
 +  UNIT visible_unit;
 +end
 +
-+PACKET_INFO_TEXT_MESSAGE = 260; sc, dsend
++PACKET_INFO_TEXT_MESSAGE = 290; sc, dsend
 +  STRING message[MAX_LEN_MSG];
 +end
 diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c

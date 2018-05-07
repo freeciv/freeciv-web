@@ -172,8 +172,8 @@ function format_action_tooltip(act_id, act_probs)
   Returns the function to run when an action is selected.
 **************************************************************************/
 function act_sel_click_function(parent_id,
-                                actor_unit_id, tgt_id, action_id,
-                                action_probabilities)
+                                actor_unit_id, tgt_id, sub_tgt_id,
+                                action_id, action_probabilities)
 {
   switch (action_id) {
   case ACTION_SPY_TARGETED_STEAL_TECH:
@@ -215,6 +215,22 @@ function act_sel_click_function(parent_id,
 
       $(parent_id).remove();
     };
+  case ACTION_PILLAGE:
+  case ACTION_ROAD:
+    return function() {
+      var packet = {
+        "pid"         : packet_unit_do_action,
+        "actor_id"    : actor_unit_id,
+        "target_id"   : tgt_id,
+        "extra_id"    : sub_tgt_id,
+        "value"       : 0,
+        "name"        : "",
+        "action_type" : action_id
+      };
+      send_request(JSON.stringify(packet));
+
+      $(parent_id).remove();
+    };
   default:
     return function() {
       var packet = {
@@ -239,8 +255,8 @@ function act_sel_click_function(parent_id,
   Needed because of JavaScript's scoping rules.
 **************************************************************************/
 function create_act_sel_button(parent_id,
-                               actor_unit_id, tgt_id, action_id,
-                               action_probabilities)
+                               actor_unit_id, tgt_id, sub_tgt_id,
+                               action_id, action_probabilities)
 {
   /* Create the initial button with this action */
   var button = {
@@ -251,8 +267,8 @@ function create_act_sel_button(parent_id,
     title   : format_action_tooltip(action_id,
                                     action_probabilities),
     click   : act_sel_click_function(parent_id,
-                                     actor_unit_id, tgt_id, action_id,
-                                     action_probabilities)
+                                     actor_unit_id, tgt_id, sub_tgt_id,
+                                     action_id, action_probabilities)
   };
 
   /* The button is ready. */
@@ -263,7 +279,8 @@ function create_act_sel_button(parent_id,
   Ask the player to select an action.
 ****************************************************************************/
 function popup_action_selection(actor_unit, action_probabilities,
-                                target_tile, target_unit, target_city)
+                                target_tile, target_extra,
+                                target_unit, target_city)
 {
   // reset dialog page.
   var id = "#act_sel_dialog_" + actor_unit['id'];
@@ -302,6 +319,7 @@ function popup_action_selection(actor_unit, action_probabilities,
    * target kind first and then by action id number. */
   for (var tgt_kind = ATK_CITY; tgt_kind < ATK_COUNT; tgt_kind++) {
     var tgt_id = -1;
+    var sub_tgt_id = -1;
 
     switch (tgt_kind) {
     case ATK_CITY:
@@ -323,6 +341,9 @@ function popup_action_selection(actor_unit, action_probabilities,
       if (target_tile != null) {
         tgt_id = target_tile['index'];
       }
+      if (target_extra != null) {
+        sub_tgt_id = target_extra['id'];
+      }
       break;
     case ATK_SELF:
       if (actor_unit != null) {
@@ -338,8 +359,8 @@ function popup_action_selection(actor_unit, action_probabilities,
       if (actions[action_id]['tgt_kind'] == tgt_kind
           && action_prob_possible(
               action_probabilities[action_id])) {
-        buttons.push(create_act_sel_button(id, actor_unit['id'], tgt_id,
-                                           action_id,
+        buttons.push(create_act_sel_button(id, actor_unit['id'],
+                                           tgt_id, sub_tgt_id, action_id,
                                            action_probabilities));
       }
     }

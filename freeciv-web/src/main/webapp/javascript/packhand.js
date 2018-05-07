@@ -909,6 +909,7 @@ function handle_unit_actions(packet)
   var target_unit_id = packet['target_unit_id'];
   var target_city_id = packet['target_city_id'];
   var target_tile_id = packet['target_tile_id'];
+  var target_extra_id = packet['target_extra_id'];
   var action_probabilities = packet['action_probabilities'];
   var disturb_player = packet['disturb_player'];
 
@@ -916,6 +917,7 @@ function handle_unit_actions(packet)
   var target_unit = game_find_unit_by_number(target_unit_id);
   var target_city = game_find_city_by_number(target_city_id);
   var ptile = index_to_tile(target_tile_id);
+  var target_extra = extra_by_number(target_extra_id);
 
   var hasActions = false;
 
@@ -946,7 +948,7 @@ function handle_unit_actions(packet)
 
   if (hasActions && disturb_player) {
     popup_action_selection(pdiplomat, action_probabilities,
-                           ptile, target_unit, target_city);
+                           ptile, target_extra, target_unit, target_city);
   } else if (hasActions) {
     /* This was a background request. */
 

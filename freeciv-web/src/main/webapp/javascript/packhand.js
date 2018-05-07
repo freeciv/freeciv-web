@@ -1138,6 +1138,19 @@ function handle_ruleset_unit(packet)
   unit_types[packet['id']] = packet;
 }
 
+/************************************************************************//**
+  The web_ruleset_unit_addition packet is a follow up packet to the
+  ruleset_unit packet. It gives some information the C clients calculates on
+  their own.
+****************************************************************************/
+function handle_web_ruleset_unit_addition(packet)
+{
+  /* Decode bit vector. */
+  packet['utype_actions'] = new BitVector(packet['utype_actions']);
+
+  unit_types[packet['id']] = $.extend(unit_types[packet['id']], packet);
+}
+
 /* 100% complete */
 function handle_ruleset_game(packet)
 {

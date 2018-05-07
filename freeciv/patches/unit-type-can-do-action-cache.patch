@@ -1,0 +1,91 @@
+From 19f6c185c91b32e141de46a9d86855ed55dc8376 Mon Sep 17 00:00:00 2001
+From: Sveinung Kvilhaugsvik <sveinung84@users.sourceforge.net>
+Date: Mon, 7 May 2018 14:44:12 +0200
+Subject: [PATCH] Freeciv-web: send unit type can do action cache.
+
+Freeciv-web is unable to calculate what actions a unit type may be able to
+perform. This makes it hard code what ui elements to show when a unit is
+active based on its unit type name.
+
+Introduce the new packet web_ruleset_unit_addition. Send the unit type can do
+action cache in it.
+
+See hrm Feature #750505
+---
+ client/packhand.c             |  9 +++++++++
+ common/networking/packets.def |  6 ++++++
+ server/ruleset.c              | 16 ++++++++++++++++
+ 3 files changed, 31 insertions(+)
+
+diff --git a/client/packhand.c b/client/packhand.c
+index 416c1ef034..3200cb5189 100644
+--- a/client/packhand.c
++++ b/client/packhand.c
+@@ -3375,6 +3375,15 @@ void handle_ruleset_unit(const struct packet_ruleset_unit *p)
+ }
+ 
+ /************************************************************************//**
++  This is a packet that only the web-client needs. The regular client has no
++  use for it.
++  TODO: Do not generate code calling this in the C-client.
++****************************************************************************/
++void handle_web_ruleset_unit_addition(int id, bv_actions utype_actions)
++{
++}
++
++/************************************************************************//**
+   Packet ruleset_unit_bonus handler.
+ ****************************************************************************/
+ void handle_ruleset_unit_bonus(const struct packet_ruleset_unit_bonus *p)
+diff --git a/common/networking/packets.def b/common/networking/packets.def
+index 0efc57363a..8ce426199c 100644
+--- a/common/networking/packets.def
++++ b/common/networking/packets.def
+@@ -2265,3 +2265,9 @@ PACKET_WEB_PLAYER_INFO_ADDITION = 257; sc, is-info
+ 
+   UINT32 expected_income;
+ end
++
++PACKET_WEB_RULESET_UNIT_ADDITION = 258; sc, lsend
++  UNIT_TYPE id; key
++
++  BV_ACTIONS utype_actions;
++end
+diff --git a/server/ruleset.c b/server/ruleset.c
+index 5fb914676a..41a35b38b1 100644
+--- a/server/ruleset.c
++++ b/server/ruleset.c
+@@ -6876,6 +6876,9 @@ static void send_ruleset_unit_classes(struct conn_list *dest)
+ static void send_ruleset_units(struct conn_list *dest)
+ {
+   struct packet_ruleset_unit packet;
++#ifdef FREECIV_WEB
++  struct packet_web_ruleset_unit_addition web_packet;
++#endif /* FREECIV_WEB */
+   struct packet_ruleset_unit_flag fpacket;
+   int i;
+ 
+@@ -6978,7 +6981,20 @@ static void send_ruleset_units(struct conn_list *dest)
+ 
+     packet.worker = u->adv.worker;
+ 
++#ifdef FREECIV_WEB
++    web_packet.id = utype_number(u);
++
++    BV_CLR_ALL(web_packet.utype_actions);
++
++    action_iterate(act) {
++      if (utype_can_do_action(u, act)) {
++        BV_SET(web_packet.utype_actions, act);
++      }
++    } action_iterate_end;
++#endif /* FREECIV_WEB */
++
+     lsend_packet_ruleset_unit(dest, &packet);
++    web_lsend_packet(ruleset_unit_addition, dest, &web_packet);
+ 
+     combat_bonus_list_iterate(u->bonuses, pbonus) {
+       struct packet_ruleset_unit_bonus bonuspacket;
+-- 
+2.11.0
+

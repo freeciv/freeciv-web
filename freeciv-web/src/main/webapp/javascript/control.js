@@ -897,13 +897,14 @@ function update_unit_order_commands()
     if (ptile == null) continue;
     pcity = tile_city(ptile);
 
-    if (ptype['name'] == "Settlers") {
+    if (utype_can_do_action(ptype, ACTION_FOUND_CITY)
+        && pcity == null) {
       $("#order_build_city").show();
-      if (pcity == null) {
-        unit_actions["build"] = {name: "Build city (B)"};
-      } else {
-        unit_actions["build"] = {name: "Join city (B)"};
-      }
+      unit_actions["build"] = {name: "Build city (B)"};
+    } else if (utype_can_do_action(ptype, ACTION_JOIN_CITY)
+               && pcity != null) {
+      $("#order_build_city").show();
+      unit_actions["build"] = {name: "Join city (B)"};
     } else {
       $("#order_build_city").hide();
     }
@@ -1022,21 +1023,21 @@ function update_unit_order_commands()
     /* Practically all unit types can currently perform some action. */
     unit_actions["action_selection"] = {name: "Do... (D)"};
 
-    if (ptype['name'] == "Engineers") {
+    if (utype_can_do_action(ptype, ACTION_TRANSFORM_TERRAIN)) {
       $("#order_transform").show();
       unit_actions["transform"] = {name: "Transform terrain (O)"};
     } else {
       $("#order_transform").hide();
     }
 
-    if (ptype['name'] == "Nuclear") {
+    if (utype_can_do_action(ptype, ACTION_NUKE)) {
       $("#order_nuke").show();
       unit_actions["nuke"] = {name: "Detonate Nuke At (Shift-N)"};
     } else {
       $("#order_nuke").hide();
     }
 
-    if (ptype['name'] == "Paratroopers") {
+    if (utype_can_do_action(ptype, ACTION_PARADROP)) {
       $("#order_paradrop").show();
       unit_actions["paradrop"] = {name: "Paradrop"};
     } else {

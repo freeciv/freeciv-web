@@ -22,3 +22,21 @@ var extras = {};
 var EXTRA_NONE = -1;
 
 // see handle_ruleset_extra, where EXTRA_* variables are defines dynamically.
+
+/************************************************************************//**
+  Return extras type of given id.
+****************************************************************************/
+function extra_by_number(id)
+{
+  if (id == EXTRA_NONE) {
+    return null;
+  }
+
+  if (id >= 0 && id < MAX_EXTRA_TYPES) {
+    return extras[id];
+  } else {
+    console.log("extra_by_number(): Invalid extra id: " + id);
+    return null;
+  }
+}
+

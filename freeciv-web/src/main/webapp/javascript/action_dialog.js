@@ -217,6 +217,7 @@ function act_sel_click_function(parent_id,
     };
   case ACTION_PILLAGE:
   case ACTION_ROAD:
+  case ACTION_BASE:
     return function() {
       var packet = {
         "pid"         : packet_unit_do_action,

@@ -268,7 +268,7 @@ cd freeciv && make install
 
 echo "==== Building freeciv-web ===="
 cd "${basedir}"/scripts/freeciv-img-extract/ && ./setup_links.sh && ./sync.sh
-cd /var/lib/tomcat8 && sudo rm -rf webapps/ROOT; sudo mkdir -p webapps/data/{savegames/pbem,scorelogs,ranklogs} && sudo chmod -R 777 webapps logs && sudo setfacl -d -m g::rwx webapps && sudo chown -R www-data:www-data webapps/
+cd /var/lib/tomcat8 && sudo rm -rf webapps/ROOT; sudo setfacl -m u:$(id -u):rwx webapps; mkdir -p webapps/data/{savegames/pbem,scorelogs,ranklogs}
 
 if [ ! -f "${basedir}"/publite2/settings.ini ]; then
   cp "${basedir}"/publite2/settings.ini{.dist,}

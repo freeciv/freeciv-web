@@ -15,6 +15,6 @@ fi
 if service --status-all | grep -Fq 'tomcat8'; then
  sudo service tomcat8 stop || echo "unable to stop tomcat8 service"
 else
- sudo /var/lib/tomcat8/bin/catalina.sh stop
+ sudo -u tomcat8 /var/lib/tomcat8/bin/catalina.sh stop
 fi
 

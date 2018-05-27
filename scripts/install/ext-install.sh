@@ -36,8 +36,20 @@ ext_install_tomcat8 () {
   cd /var/lib
   sudo tar -xvzf "${TMPFILE}"
   sudo mv apache-tomcat-8.* tomcat8
-
   rm "${TMPFILE}"
+
+  if ! getent group tomcat8 > /dev/null 2>&1 ; then
+    sudo groupadd --system tomcat8
+  fi
+  if ! id tomcat8 > /dev/null 2>&1 ; then
+    sudo useradd --system --home /var/lib/tomcat8 -g tomcat8 --shell /bin/false tomcat8
+  fi
+
+  sudo chgrp -R tomcat8 /var/lib/tomcat8
+  sudo chmod -R g+r /var/lib/tomcat8/conf
+  sudo chmod g+x /var/lib/tomcat8/conf
+  sudo chown -R tomcat8 /var/lib/tomcat8/{webapps,work,temp,logs}
+
   echo "export CATALINA_HOME=\"/var/lib/tomcat8\"" >> ~/.bashrc
   ext_installed[${#ext_installed[@]}]="tomcat8"
 }

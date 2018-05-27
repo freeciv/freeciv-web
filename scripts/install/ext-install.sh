@@ -49,6 +49,7 @@ ext_install_tomcat8 () {
   sudo chmod -R g+r /var/lib/tomcat8/conf
   sudo chmod g+x /var/lib/tomcat8/conf
   sudo chown -R tomcat8 /var/lib/tomcat8/{webapps,work,temp,logs}
+  sudo setfacl -m d:g:tomcat8:rwX /var/lib/tomcat8/webapps
 
   echo "export CATALINA_HOME=\"/var/lib/tomcat8\"" >> ~/.bashrc
   ext_installed[${#ext_installed[@]}]="tomcat8"

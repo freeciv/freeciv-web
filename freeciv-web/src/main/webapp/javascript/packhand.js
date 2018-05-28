@@ -658,7 +658,7 @@ function handle_city_sabotage_list(packet)
   popup_sabotage_dialog(game_find_unit_by_number(packet['diplomat_id']),
                         game_find_city_by_number(packet['city_id']),
                         new BitVector(packet['improvements']),
-                        packet['action_id']);
+                        packet['act_id']);
 }
 
 function handle_player_attribute_chunk(packet)

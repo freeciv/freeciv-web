@@ -1309,6 +1309,8 @@ function validate_username_callback()
       }
     },
    error: function (request, textStatus, errorThrown) {
+     console.log("For programmers and server admins: "
+                 + "Please check if the meta server is running properly.");
      swal("Error. Please try again with a different name.");
    }
   });

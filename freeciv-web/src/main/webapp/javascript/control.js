@@ -180,10 +180,6 @@ function control_init()
 
   $.contextMenu(context_options);
 
-  $(window).bind('beforeunload', function(){
-    return "Do you really want to leave your nation behind now?";
-  });
-
   $(window).on('unload', function(){
     network_stop();
   });

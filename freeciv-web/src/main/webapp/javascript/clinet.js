@@ -142,11 +142,16 @@ function check_websocket_ready()
     "major_version" : 2, "minor_version" : 5, "patch_version" : 99,
     "port": civserverport, "password" : sha_password, "subject" : google_user_subject};
     ws.send(JSON.stringify(login_message));
+
+    /* Leaving the page without saving can now be an issue. */
+    $(window).bind('beforeunload', function(){
+      return "Do you really want to leave your nation behind now?";
+    });
+
     $.unblockUI();
   } else {
     setTimeout(check_websocket_ready, 500);
   }
-
 }
 
 /****************************************************************************

@@ -31,6 +31,7 @@ var civserverport = null;
 
 var ping_last = new Date().getTime();
 var pingtime_check = 240000;
+var ping_timer = null;
 
 /****************************************************************************
   Initialized the Network communication, by requesting a valid server port.
@@ -67,9 +68,6 @@ function network_init()
 		+ textStatus + " " + errorThrown + " " + request.getResponseHeader('result'));
    }
   });
-
-  setInterval(ping_check, pingtime_check);
-
 }
 
 /****************************************************************************
@@ -107,6 +105,9 @@ function websocket_init()
 
    /* The player can't save the game after the connection is down. */
    $(window).unbind('beforeunload');
+
+   /* Don't ping a dead connection. */
+   clearInterval(ping_timer);
   };
 
   ws.onerror = function (evt) {
@@ -147,6 +148,9 @@ function check_websocket_ready()
     $(window).bind('beforeunload', function(){
       return "Do you really want to leave your nation behind now?";
     });
+
+    /* The connection is now up. Verify that it remains alive. */
+    ping_timer = setInterval(ping_check, pingtime_check);
 
     $.unblockUI();
   } else {

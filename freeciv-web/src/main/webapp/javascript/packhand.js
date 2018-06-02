@@ -79,7 +79,7 @@ function handle_server_join_reply(packet)
 
     set_client_state(C_S_PREPARING);
 
-    if ($.getUrlVar('action') == "new"
+    if (($.getUrlVar('action') == "new" || $.getUrlVar('action') == "hack")
         && $.getUrlVar('ruleset') != null) {
       change_ruleset($.getUrlVar('ruleset'));
     }

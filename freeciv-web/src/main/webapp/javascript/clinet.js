@@ -33,6 +33,24 @@ var ping_last = new Date().getTime();
 var pingtime_check = 240000;
 var ping_timer = null;
 
+/**************************************************************************
+  Initialize the network communication with the server manually.
+**************************************************************************/
+function network_init_manual_hack(civserverport_manual, username_manual,
+                                  savegame)
+{
+  civserverport = civserverport_manual;
+  username = username_manual;
+
+  websocket_init();
+
+  if (savegame != null) {
+    wait_for_text("You are logged in as", function () {
+      load_game_real(savegame);
+    });
+  }
+}
+
 /****************************************************************************
   Initialized the Network communication, by requesting a valid server port.
 ****************************************************************************/

@@ -16,3 +16,11 @@ DB_PASSWORD=changeme
 # so it won't be the correct one for this variable, and you are not notified
 # of the first one.
 DB_ROOT_PASSWORD=${RANDOM}${RANDOM}${RANDOM}
+
+# If you are sharing tomcat with other apps, you may want the stop scripts
+# to only stop freeciv-web and not the whole tomcat instance. Setup
+# tomcat-manager and uncomment the next lines adding proper user and password
+# info. If the password is empty, it will be asked every time a start or stop
+# script is run.
+# TOMCATMANAGER_USER=tomcat-user
+# TOMCATMANAGER_PASSWORD=

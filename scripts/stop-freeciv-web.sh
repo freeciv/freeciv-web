@@ -6,15 +6,26 @@ cd "$(dirname "$0")"
 export FREECIV_WEB_DIR="${SCRIPT_DIR}/.."
 
 if [ ! -f ${SCRIPT_DIR}/configuration.sh ]; then
-    echo "ERROR: configuration.sh not found. copy configuration.sh.dist to configuration.sh and update it with your settings."
+    echo "ERROR: configuration.sh not found. Copy configuration.sh.dist to configuration.sh and update it with your settings."
+    exit 2
 fi
-. configuration.sh
+. ./configuration.sh
 
 echo "Shutting down Freeciv-web: nginx, tomcat, publite2, freeciv-proxy, pbem."
 
+if [ -n "${TOMCATMANAGER_USER}" ]; then
+    if [ -z "${TOMCATMANAGER_PASSWORD}" ]; then
+        echo "Please enter tomcat-manager password for ${TOMCATMANAGER_USER}"
+        read TOMCATMANAGER_PASSWORD
+    fi
+    curl -LsSg -K - << EOF
+url="http://${TOMCATMANAGER_USER}:${TOMCATMANAGER_PASSWORD}@localhost:8080/manager/text/stop?path=/freeciv-web"
+EOF
+fi
+
 # Shutdown Freeciv-web's dependency services according to the users
 # configuration.
-./dependency-services-stop.sh
+. ./dependency-services-stop.sh
 
 #3. publite2
 ps aux | grep -ie publite2 | awk '{print $2}' | xargs kill -9 

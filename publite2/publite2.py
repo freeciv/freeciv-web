@@ -32,8 +32,8 @@ import os.path
 
 metahost = "localhost"
 metaport = 8080
-metapath =  "/meta/metaserver"
-statuspath =  "/meta/status"
+metapath =  "/freeciv-web/meta/metaserver"
+statuspath =  "/freeciv-web/meta/status"
 settings_file = "settings.ini"
 game_types = ["singleplayer", "multiplayer", "pbem"]
 
@@ -152,7 +152,7 @@ class metachecker():
 if __name__ == '__main__':
   #perform a test-request to the Metaserver
   try:
-    conn = http.client.HTTPConnection(metahost);
+    conn = http.client.HTTPConnection(metahost, metaport);
     conn.request("GET", statuspath);
     r1 = conn.getresponse();
   except Exception as e:

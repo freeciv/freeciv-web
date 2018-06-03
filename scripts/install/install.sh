@@ -268,7 +268,7 @@ cd freeciv && make install
 
 echo "==== Building freeciv-web ===="
 cd "${basedir}"/scripts/freeciv-img-extract/ && ./setup_links.sh && ./sync.sh
-cd /var/lib/tomcat8 && sudo rm -rf webapps/ROOT
+cd /var/lib/tomcat8
 sudo setfacl -m d:u:$(id -u):rwX,u:$(id -u):rwx webapps
 mkdir -p webapps/data/{savegames/pbem,scorelogs,ranklogs}
 

@@ -28,6 +28,14 @@ else
   echo "Tomcat not running!"
 fi
 
+printf "checking freeciv-web on Tomcat on http://localhost:8080/freeciv-web\n"
+if checkURL http://localhost:8080/freeciv-web /tmp/status2.log --head; then
+  echo "freeciv-web webapp OK!"
+else
+  cat /tmp/status2.log
+  echo "freeciv-web webapp not running!"
+fi
+
 printf "\n--------------------------------\n";
 
 echo "checking freeciv-proxy directly on http://localhost:7001/status"

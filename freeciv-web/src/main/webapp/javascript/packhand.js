@@ -1496,6 +1496,10 @@ function handle_player_diplstate(packet)
 **************************************************************************/
 function handle_ruleset_extra(packet)
 {
+  /* Decode bit vectors. */
+  packet['causes'] = new BitVector(packet['causes']);
+  packet['rmcauses'] = new BitVector(packet['rmcauses']);
+
   extras[packet['id']] = packet;
   extras[packet['name']] = packet;
 

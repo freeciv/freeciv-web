@@ -40,3 +40,26 @@ function extra_by_number(id)
   }
 }
 
+/************************************************************************//**
+  Who owns extras on tile
+****************************************************************************/
+function extra_owner(ptile)
+{
+  return player_by_number(ptile['extras_owner']);
+}
+
+/************************************************************************//**
+  Is given cause one of the causes for the given extra?
+****************************************************************************/
+function is_extra_caused_by(pextra, cause)
+{
+  return pextra.causes.isSet(cause);
+}
+
+/************************************************************************//**
+  Is given cause one of the removal causes for the given extra?
+****************************************************************************/
+function is_extra_removed_by(pextra, rmcause)
+{
+  return pextra.rmcauses.isSet(rmcause);
+}

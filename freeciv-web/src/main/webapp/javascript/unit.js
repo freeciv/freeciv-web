@@ -158,6 +158,15 @@ function unit_type(unit)
 }
 
 /**************************************************************************
+  Return TRUE iff this unit can do the specified generalized (ruleset
+  defined) action enabler controlled action.
+**************************************************************************/
+function unit_can_do_action(punit, act_id)
+{
+  return utype_can_do_action(unit_type(punit), act_id);
+}
+
+/**************************************************************************
   Returns a string saying how many moves a unit has left.
 **************************************************************************/
 function get_unit_moves_left(punit)
@@ -466,7 +475,7 @@ function get_what_can_unit_pillage_from(punit, ptile)
 
   for (i = 0; i < available.length; i++) {
     extra = available[i];
-    if ((extras[extra].rmcauses & (1 << ERM_PILLAGE))
+    if (is_extra_removed_by(extras[extra], ERM_PILLAGE)
         && !cannot_pillage.isSet(extra)) {
       if (game_info.pillage_select) {
         targets.push(extra);

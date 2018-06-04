@@ -466,7 +466,7 @@ function get_what_can_unit_pillage_from(punit, ptile)
 
   for (i = 0; i < available.length; i++) {
     extra = available[i];
-    if ((extras[extra].rmcauses & (1 << ERM_PILLAGE))
+    if (is_extra_removed_by(extras[extra], ERM_PILLAGE)
         && !cannot_pillage.isSet(extra)) {
       if (game_info.pillage_select) {
         targets.push(extra);

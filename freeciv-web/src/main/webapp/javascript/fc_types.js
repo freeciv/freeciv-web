@@ -202,6 +202,17 @@ var V_INVIS = 1;
 var V_SUBSURFACE = 2;
 var V_COUNT = 3;
 
+/* causes for extra */
+var EC_IRRIGATION = 0;
+var EC_MINE = 1;
+var EC_ROAD = 2;
+var EC_BASE = 3;
+var EC_POLLUTION = 4;
+var EC_FALLOUT = 5;
+var EC_HUT = 6;
+var EC_APPEARANCE = 7;
+var EC_RESOURCE = 8;
+
 /* causes for extra removal */
 var ERM_PILLAGE = 0;
 var ERM_CLEANPOLLUTION = 1;

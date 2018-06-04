@@ -40,3 +40,11 @@ function extra_by_number(id)
   }
 }
 
+/************************************************************************//**
+  Who owns extras on tile
+****************************************************************************/
+function extra_owner(ptile)
+{
+  return player_by_number(ptile['extras_owner']);
+}
+

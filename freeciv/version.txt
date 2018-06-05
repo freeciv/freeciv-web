@@ -1,9 +1,9 @@
 # The Git SHA hash for the commit to checkout from
 # https://github.com/freeciv/freeciv
 
-FCREV=2a7ce4927930051d0d504f5f19270a2724434137
+FCREV=1706932937d58ba8784286fca16a6d60cc7060d4
 
-ORIGCAPSTR="+Freeciv.Devel-3.1-2018.May.23"
+ORIGCAPSTR="+Freeciv.Devel-3.1-2018.May.25"
 
 # There's no need to bump this constantly as current freeciv-web
 # makes no connections to outside world - all connections are

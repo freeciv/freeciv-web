@@ -219,6 +219,7 @@ function act_sel_click_function(parent_id,
   case ACTION_ROAD:
   case ACTION_BASE:
   case ACTION_MINE:
+  case ACTION_IRRIGATE:
     return function() {
       var packet = {
         "pid"         : packet_unit_do_action,
@@ -975,8 +976,10 @@ function list_potential_target_extras(act_unit, target_tile)
     } else {
       /* This extra isn't at the tile yet. Can it be created? */
       if (pextra.buildable
-          && ((is_extra_caused_by(pextra, EC_MINE)
-               && unit_can_do_action(act_unit, ACTION_MINE))
+          && ((is_extra_caused_by(pextra, EC_IRRIGATION)
+               && unit_can_do_action(act_unit, ACTION_IRRIGATE))
+              || (is_extra_caused_by(pextra, EC_MINE)
+                  && unit_can_do_action(act_unit, ACTION_MINE))
               || (is_extra_caused_by(pextra, EC_BASE)
                   && unit_can_do_action(act_unit, ACTION_BASE))
               || (is_extra_caused_by(pextra, EC_ROAD)

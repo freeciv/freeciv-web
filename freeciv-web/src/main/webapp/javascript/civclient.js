@@ -226,6 +226,37 @@ function init_common_intro_dialog() {
       show_intro_dialog("Welcome to Freeciv-web", msg);
     }
 
+  } else if ($.getUrlVar('action') == "hack") {
+    var hack_port;
+    var hack_username;
+
+    if ($.getUrlVar('civserverport') != null) {
+      hack_port = $.getUrlVar('civserverport');
+    } else {
+      show_intro_dialog("Welcome to Freeciv-web",
+        "Hack mode disabled because civserverport wasn't specified. "
+        + "Falling back to regular mode.");
+      return;
+    }
+
+    if ($.getUrlVar("username") != null) {
+      hack_username = $.getUrlVar("username");
+    } else if (simpleStorage.hasKey("username")) {
+      hack_username = simpleStorage.get("username");
+    } else {
+      show_intro_dialog("Welcome to Freeciv-web",
+        "Hack mode disabled because \"username\" wasn't specified and no "
+        + "stored user name was found. " +
+        "Falling back to regular mode.");
+      return;
+    }
+
+    if ($.getUrlVar('autostart') == "true") {
+      autostart = true;
+    }
+
+    network_init_manual_hack(hack_port, hack_username,
+                             $.getUrlVar("savegame"));
   } else {
     show_intro_dialog("Welcome to Freeciv-web",
       "You are about to join this game server, where you can " +

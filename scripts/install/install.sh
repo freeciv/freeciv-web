@@ -281,9 +281,8 @@ cd "${basedir}"/freeciv-web && ./build.sh
 
 echo "==== Setting up nginx ===="
 stop_svc nginx
-sudo rm /etc/nginx/sites-enabled/default
+sudo rm -f /etc/nginx/sites-enabled/default
 sudo cp -R "${basedir}"/nginx /etc/
-sudo ln -s ../sites-available/freeciv-web /etc/nginx/sites-enabled/freeciv-web
 if [ "${FCW_INSTALL_MODE}" = TEST ] && [ ! -f /etc/nginx/ssl/freeciv-web.crt ]; then
   sudo mkdir -p /etc/nginx/ssl/private
   sudo chmod 700 /etc/nginx/ssl/private

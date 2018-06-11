@@ -19,6 +19,7 @@ echo "Starting nginx first."
 if [ "$(pidof nginx)" ]
 then
   echo "nginx already running!"
+  sudo nginx -s reload
 else
   echo "Please enter root password:"
   sudo service nginx start && \

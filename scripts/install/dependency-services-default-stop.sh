@@ -8,7 +8,7 @@
 
 # 1. nginx
 if [ "$(pidof nginx)" ] ; then
-  sudo killall nginx
+  sudo nginx -s reload
 fi
 
 # 2. Tomcat

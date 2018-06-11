@@ -18,6 +18,7 @@ fi
 echo "Starting up Freeciv-web: nginx, tomcat, publite2, freeciv-proxy."
 
 mkdir -p ${FREECIV_WEB_DIR}/logs
+sudo ln -f /etc/nginx/sites-available/freeciv-web /etc/nginx/sites-enabled/freeciv-web
 
 # Start Freeciv-web's dependency services according to the users
 # configuration.

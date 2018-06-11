@@ -11,7 +11,7 @@ else
   ACCESS_MANAGER=sudo
 fi
 
-systemctl is-active --quiet nginx.service && ${ACCESS_MANAGER} systemctl stop nginx.service
+systemctl is-active --quiet nginx.service && ${ACCESS_MANAGER} systemctl reload nginx.service
 if [ -z "${TOMCATMANAGER_USER}" ]; then
   systemctl is-active --quiet tomcat8.service && ${ACCESS_MANAGER} systemctl stop tomcat8.service
 fi

@@ -23,6 +23,8 @@ url="http://${TOMCATMANAGER_USER}:${TOMCATMANAGER_PASSWORD}@localhost:8080/manag
 EOF
 fi
 
+sudo rm -f /etc/nginx/sites-enabled/freeciv-web
+
 # Shutdown Freeciv-web's dependency services according to the users
 # configuration.
 . ./dependency-services-stop.sh

@@ -143,7 +143,6 @@ Install this software if you are not running Freeciv-web with Vagrant:
 
 When in a [tested system](scripts/install/systems),
 you may run `scripts/install/install.sh` and it will fetch and configure what's needed.
-Be aware that it assumes a server only for Freeciv-web, and overwrites nginx configuration and Tomcat's ROOT, if they already exist.
 
 Start and stop Freeciv-web with the following commands:  
   start-freeciv-web.sh  

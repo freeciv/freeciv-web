@@ -20,6 +20,7 @@ ADD scripts /docker/scripts
 ADD tests /docker/tests
 ADD music /docker/music
 ADD blender /docker/blender
+ADD nginx /docker/nginx
 
 ## Install relevant packages
 

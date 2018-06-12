@@ -268,7 +268,7 @@ cd freeciv && make install
 
 echo "==== Building freeciv-web ===="
 cd "${basedir}"/scripts/freeciv-img-extract/ && ./setup_links.sh && ./sync.sh
-cd /var/lib/tomcat8 && sudo rm -rf webapps/ROOT
+cd /var/lib/tomcat8
 sudo setfacl -m d:u:$(id -u):rwX,u:$(id -u):rwx webapps
 mkdir -p webapps/data/{savegames/pbem,scorelogs,ranklogs}
 
@@ -281,8 +281,8 @@ cd "${basedir}"/freeciv-web && ./build.sh
 
 echo "==== Setting up nginx ===="
 stop_svc nginx
-sudo rm /etc/nginx/sites-enabled/default
-sudo cp "${basedir}"/publite2/nginx.conf /etc/nginx/nginx.conf
+sudo rm -f /etc/nginx/sites-enabled/default
+sudo cp -R "${basedir}"/nginx /etc/
 if [ "${FCW_INSTALL_MODE}" = TEST ] && [ ! -f /etc/nginx/ssl/freeciv-web.crt ]; then
   sudo mkdir -p /etc/nginx/ssl/private
   sudo chmod 700 /etc/nginx/ssl/private
@@ -309,7 +309,8 @@ You may want to personalize some things before starting it:
 - Set the mail account data for pbem games in pbem/settings.ini, and the
   templates for the messages in pbem/email_template* (at least the URL).
 - Users for tomcat-admin web interface.
-- Point /etc/nginx/nginx.conf to your SSL certificate and key.
+- Point /etc/nginx/snippets/freeciv-web-ssl.conf to your certificate and key,
+  or remove SSL support from /etc/nginx/sites-available/freeciv-web.
 
 Then run scripts/start-freeciv-web.sh and enjoy!
 EOF

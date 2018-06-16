@@ -1,22 +1,14 @@
 #!/bin/bash
+TILESET_DEST=../../freeciv-web/src/main/webapp/tileset
 echo "running Freeciv-img-extract..."
 python3 img-extract.py &&
-pngcrush pre-freeciv-web-tileset-amplio2-0.png freeciv-web-tileset-amplio2-0.png &&
-pngcrush pre-freeciv-web-tileset-amplio2-1.png freeciv-web-tileset-amplio2-1.png &&
-pngcrush pre-freeciv-web-tileset-amplio2-2.png freeciv-web-tileset-amplio2-2.png &&
-pngcrush pre-freeciv-web-tileset-amplio2-3.png freeciv-web-tileset-amplio2-3.png &&
-pngcrush pre-freeciv-web-tileset-trident-0.png freeciv-web-tileset-trident-0.png &&
-pngcrush pre-freeciv-web-tileset-trident-1.png freeciv-web-tileset-trident-1.png &&
-pngcrush pre-freeciv-web-tileset-isotrident-0.png freeciv-web-tileset-isotrident-0.png &&
-pngcrush pre-freeciv-web-tileset-isotrident-1.png freeciv-web-tileset-isotrident-1.png &&
-mkdir -p ../../freeciv-web/src/main/webapp/tileset &&
+mkdir -p "${TILESET_DEST}" &&
+pngcrush -d "${TILESET_DEST}" freeciv-web-tileset*.png &&
 echo "converting tileset .png files to .webp ..." && 
-(for X in `find *.png` 
+(for X in "${TILESET_DEST}"/*.png
 do
  cwebp -quiet -lossless $X -o ${X/.png/.webp}
 done) &&
-cp freeciv-web-tileset-*.png ../../freeciv-web/src/main/webapp/tileset/ &&
-cp freeciv-web-tileset-*.webp ../../freeciv-web/src/main/webapp/tileset/ &&
 cp tileset_spec_*.js ../../freeciv-web/src/main/webapp/javascript/2dcanvas/ && 
 echo "converting flag svg files to png and webp..." && 
 mkdir -p ../../freeciv-web/src/main/webapp/images/flags/ &&

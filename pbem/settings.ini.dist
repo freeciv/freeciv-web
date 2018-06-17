@@ -11,3 +11,5 @@ mysql_password = #DB_PASSWORD#
 
 savegame_directory = /var/lib/tomcat8/webapps/data/savegames/pbem/
 ranklog_directory = /var/lib/tomcat8/webapps/data/ranklogs/
+
+host = #FCW_HOST#

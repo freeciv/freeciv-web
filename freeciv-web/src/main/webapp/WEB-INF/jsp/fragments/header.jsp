@@ -44,7 +44,7 @@
 					<li><a href="https://www.reddit.com/r/freeciv">reddit.com/freeciv</a></li>
 				</ul>
 			</li>
-			<li><a href="https://play.freeciv.org/blog/"><fmt:message key="nav-blog"/></a></li>
+			<li><a href="/blog/"><fmt:message key="nav-blog"/></a></li>
 			<li><a href="http://www.freeciv.org/donate.html"><fmt:message key="nav-donate"/></a></li>
 			<li><a href="https://github.com/freeciv/freeciv-web">Contribute</a></li>
 			<%--<li class="dropdown">
@@ -61,7 +61,7 @@
 			</li>--%>
 		</ul>
 		<form class="navbar-form navbar-right hidden-sm hidden-md" action="https://duckduckgo.com/" style="width: 220px;">
-			<input type="hidden" name="sites" value="www.freeciv.org,forum.freeciv.org,freeciv.wikia.com,play.freeciv.org">
+			<input type="hidden" name="sites" value="www.freeciv.org,forum.freeciv.org,freeciv.wikia.com">
 			<div class="form-group">
 				<div class="input-group">
 					<input type="text" class="form-control" name="q" placeholder="Search Freeciv...">

@@ -45,6 +45,7 @@ public class ResetPassword extends HttpServlet {
     private String captchaSecret;
     private String emailUsername;
     private String emailPassword;
+    private String fcwHost;
 
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
@@ -55,6 +56,7 @@ public class ResetPassword extends HttpServlet {
             captchaSecret = prop.getProperty("captcha_secret");
             emailUsername = prop.getProperty("email_username");
             emailPassword = prop.getProperty("email_password");
+            fcwHost = prop.getProperty("fcw_host");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -158,7 +160,7 @@ public class ResetPassword extends HttpServlet {
             email.setSSLOnConnect(true);
             email.setFrom("Freeciv-web <postmaster@freecivweb.info>");
             email.setSubject("New password for Freeciv-web");
-            email.setMsg("Your new password for play.freeciv.org has been generated. \n\nUsername: " + username + " \nPassword: " + randomPassword);
+            email.setMsg("Your new password for " + fcwHost + " has been generated. \n\nUsername: " + username + " \nPassword: " + randomPassword);
             email.addTo(email_parameter);
             email.send();
         } catch (EmailException err) {

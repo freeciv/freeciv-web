@@ -24,3 +24,6 @@ DB_ROOT_PASSWORD=${RANDOM}${RANDOM}${RANDOM}
 # script is run.
 # TOMCATMANAGER_USER=tomcat-user
 # TOMCATMANAGER_PASSWORD=
+
+# Freeciv-web externally accessible host
+FCW_HOST=example.com

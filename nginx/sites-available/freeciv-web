@@ -138,7 +138,7 @@
 	}
 
 
-	# proxy for resin app-server on port 8080 at play.freeciv.org
+	# proxy for app-server on port 8080
 	location ~ / {
         rewrite ^(.*)$ /freeciv-web/$1 break;
         proxy_pass         http://localhost:8080;

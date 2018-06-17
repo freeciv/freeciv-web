@@ -35,6 +35,8 @@ class MailSender():
   smtp_port=settings.get("Config", "smtp_port")
   smtp_sender=settings.get("Config", "smtp_sender")
 
+  host = settings.get("Config", "host")
+
   template_next_turn = "";
   with open('email_template_next_turn.html', 'r') as content_file:
     template_next_turn = content_file.read();
@@ -76,6 +78,7 @@ class MailSender():
     for p in players:
        plrs_txt += p + ", ";
     msg = msg.replace("{players}", plrs_txt);
+    msg = msg.replace("{host}", self.host);
 
     self.send_mailgun_message(email_address, "Freeciv-Web: It's your turn to play! Turn: " \
         + str(turn), msg);
@@ -84,6 +87,7 @@ class MailSender():
     sender = re.sub(r'\W+', '', invitation_from);
     msg = self.template_invitation;
     msg = msg.replace("{sender}", sender);
+    msg = msg.replace("{host}", self.host);
 
     self.send_mailgun_message(invitation_to, "Freeciv-Web: Join my game!" , msg);
 
@@ -95,12 +99,14 @@ class MailSender():
     msg_winner += "Winner score: " + winner_score + "<br>"
     msg_winner += "Loser score: " + losers_score + "<br>"
     msg = self.template_generic.replace("{message}", msg_winner);
+    msg = msg.replace("{host}", self.host);
     self.send_mailgun_message(winner_email, "Freeciv-Web: You won!", msg);
 
     msg_loser = "To " + losers + "<br>You have lost the game of Freeciv-web against " + winner + ".<br>";
     msg_loser += "Winner score: " + winner_score + "<br>"
     msg_loser += "Loser score: " + losers_score + "<br>"
     msg = self.template_generic.replace("{message}", msg_loser);
+    msg = msg.replace("{host}", self.host);
     self.send_mailgun_message(losers_email, "Freeciv-Web: You lost!", msg);
 
   # send email with reminder that game is about to expire
@@ -110,5 +116,6 @@ class MailSender():
     msg += "<a href='" + game_url + "'>Click here to play your turn now</a> <br><br>";
     msg += "Your game will expire in 24 hours.<br>"
     msg = self.template_generic.replace("{message}", msg);
+    msg = msg.replace("{host}", self.host);
     self.send_mailgun_message(email, "Freeciv-Web: Remember to play your turn!", msg);
 

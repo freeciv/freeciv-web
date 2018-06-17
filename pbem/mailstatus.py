@@ -88,7 +88,7 @@ class PbemstatusHandler(web.RequestHandler):
 
   def get(self):
     self.write("<html><head><title>Mail status for Freeciv-web</title>" + 
-               "<link href='//play.freeciv.org/css/bootstrap.min.css' rel='stylesheet'>" +
+               "<link href='/css/bootstrap.min.css' rel='stylesheet'>" +
                "<meta http-equiv=\"refresh\" content=\"20\"><style>td { padding: 2px;}</style></head><body>");
     self.write("<div class='container'><h2>Freeciv-web PBEM status</h2>" + 
                "<table><tr><td>PBEM E-mails sent:</td><td>" + str(self.mailchecker.emails_sent) + "</td></tr>" +

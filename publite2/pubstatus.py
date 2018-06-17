@@ -35,7 +35,7 @@ class StatusHandler(web.RequestHandler):
     if (game_count > 0): error_rate = (error_count * 100) / game_count;
       
     self.write("<html><head><title>Publite2 status for Freeciv-web</title>" + 
-               "<link href='//play.freeciv.org/css/bootstrap.min.css' rel='stylesheet'>" +
+               "<link href='/css/bootstrap.min.css' rel='stylesheet'>" +
                "<meta http-equiv=\"refresh\" content=\"20\"><style>td { padding: 2px;}</style></head><body>");
     self.write("<div class='container'><h2>Freeciv-web Publite2 status</h2>" + 
                "<table><tr><td>Number of Freeciv-web games run:</td><td>" + str(game_count) + "</td></tr>" +

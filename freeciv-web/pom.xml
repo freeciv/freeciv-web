@@ -242,7 +242,6 @@
 								<jsSourceExcludes>
 									<jsSourceExclude>frontpage.js</jsSourceExclude>
 									<jsSourceExclude>libs/jquery.min.js</jsSourceExclude>
-									<jsSourceExclude>libs/bootstrap.min.js</jsSourceExclude>
 									<jsSourceExclude>libs/hammer.min.js</jsSourceExclude>
 									<jsSourceExclude>tileset_config*</jsSourceExclude>
 									<jsSourceExclude>tileset_spec*</jsSourceExclude>
@@ -338,7 +337,6 @@
 						<excludes>
 							<exclude>src/main/webapp/javascript/libs/bigscreen.min.js</exclude>
 							<exclude>src/main/webapp/javascript/libs/bmp_lib.js</exclude>
-							<exclude>src/main/webapp/javascript/libs/bootstrap.min.js</exclude>
 							<exclude>src/main/webapp/javascript/libs/fg.menu.js</exclude>
 							<exclude>src/main/webapp/javascript/libs/handlebars.runtime-v4.0.11.js</exclude>
 							<exclude>src/main/webapp/javascript/libs/jquery.blockUI.js</exclude>

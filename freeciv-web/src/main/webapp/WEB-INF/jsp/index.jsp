@@ -120,9 +120,6 @@
 	.jumbotron {
 	padding-bottom: 0px;
 	}
-	.nav {
-	  font-size: 16px;
-	}
 </style>
 </head>
 <body>

@@ -105,4 +105,7 @@
 		margin-left: 5px;
 		background:#BE602D;
 	}
+	.nav {
+		font-size: 16px;
+	}
 </style>

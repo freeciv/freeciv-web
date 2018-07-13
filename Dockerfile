@@ -41,7 +41,7 @@ ENV LC_ALL C.UTF-8
 
 WORKDIR /docker/scripts/
 
-RUN install/install.sh
+RUN install/install.sh --mode=TEST
 RUN sudo rm /etc/sudoers.d/docker
 
 CMD ["/bin/bash"]

@@ -59,7 +59,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # versions of systemd-resolved
   config.vm.provision "systemd-resolved workaround", type: "shell", inline: "ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf"
   # run the Freeciv bootstrap script on machine creation
-  config.vm.provision "bootstrap", type: "shell", inline: "/vagrant/scripts/install/install.sh", privileged: false
+  config.vm.provision "bootstrap", type: "shell", inline: "/vagrant/scripts/install/install.sh --mode=TEST", privileged: false
   # run the Freeciv start script on startup
   config.vm.provision "startup", type: "shell", inline: "/vagrant/scripts/start-freeciv-web.sh", run: "always", privileged: false
 

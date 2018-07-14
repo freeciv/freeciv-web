@@ -68,6 +68,17 @@ and [WEB-INF/config.properties.dist](freeciv-web/src/main/webapp/WEB-INF/config.
 copy them without the `.dist` extension and edit to your liking.
 Don't change the `.dist` files, they are the ones from the repo.
 
+#### :warning: Notice for Windows users
+
+Please keep in mind that the files are to be used in a Unix-like system
+(some Ubuntu version with the provided Vagrant file).
+Line endings for text files are different in Windows, and some editors
+"correct" them, making the files unusable in the VM.
+There's some provision to recode the main configuration files when installing,
+but not afterwards. If you touch shared files after installation, please use
+an editor that respect Unix line endings or transform them with a utility
+like dos2unix after saving them.
+
 ### Running Freeciv-web with Vagrant on VirtualBox
 
 Freeciv-web can be setup using Vagrant on VirtualBox to quickly create a 

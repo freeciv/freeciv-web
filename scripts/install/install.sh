@@ -134,7 +134,7 @@ basedir=$(pwd)
 
 if [ "${SHOW_LIST}" = 1 ]; then
   echo "List of supported systems:"
-  while IFS=$'\t' read -r v r s; do
+  while IFS=$'\t\r' read -r v r s; do
     if [ -n "$v" ] && [ "${v:0:1}" != '#' ] && [ -n "$r" ] && [ -n "$s" ]; then
       echo -E "${v}"$'\t'"${r}"
     fi
@@ -180,6 +180,10 @@ if [ ! -f "${basedir}"/scripts/configuration.sh ]; then
     echo >&2 "edit its content to suit your needs."
     exit 4
   fi
+else
+  # Remove \r, just in case the file comes from a Windows editor that doesn't
+  # respect line endings. See issue #168
+  sed -i 's/\r$//' "${basedir}"/scripts/configuration.sh
 fi
 
 if [ ! -f "${basedir}"/freeciv-web/src/main/webapp/WEB-INF/config.properties ]; then
@@ -192,10 +196,14 @@ if [ ! -f "${basedir}"/freeciv-web/src/main/webapp/WEB-INF/config.properties ]; 
     echo >&2 "suit your needs."
     exit 4
   fi
+else
+  # Remove \r, just in case the file comes from a Windows editor that doesn't
+  # respect line endings. See issue #168
+  sed -i 's/\r$//' "${basedir}"/freeciv-web/src/main/webapp/WEB-INF/config.properties
 fi
 
 FCW_INSTALL_SCRIPT=
-while IFS=$'\t' read -r v r s; do
+while IFS=$'\t\r' read -r v r s; do
   if [ -n "$v" ] && [ "${v:0:1}" != '#' ] && [ "${v}" = "${FCW_INSTALL_VND}" ] \
   && [ -n "$r" ] && [ "${r}" = "${FCW_INSTALL_REL}" ] \
   && [ -n "$s" ]; then

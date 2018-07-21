@@ -279,6 +279,7 @@ cd "${basedir}"/scripts/freeciv-img-extract/ && ./setup_links.sh && ./sync.sh
 cd /var/lib/tomcat8
 sudo setfacl -m d:u:$(id -u):rwX,u:$(id -u):rwx webapps
 mkdir -p webapps/data/{savegames/pbem,scorelogs,ranklogs}
+setfacl -Rm d:u:tomcat8:rwX webapps/data
 
 if [ ! -f "${basedir}"/publite2/settings.ini ]; then
   cp "${basedir}"/publite2/settings.ini{.dist,}

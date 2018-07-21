@@ -113,3 +113,15 @@ index 4762171..4b0eb15 100644
    if (conn_can_vote(caller, NULL) && level == ALLOW_CTRL
        && conn_get_access(caller) == ALLOW_BASIC && !check
        && !vote_would_pass_immediately(caller, cmd)) {
+diff -u freeciv/utility/shared.c.orig freeciv/utility/shared.c
+--- freeciv/utility/shared.c.orig	2018-07-20 21:00:24.906700718 +0200
++++ freeciv/utility/shared.c	2018-07-20 21:09:59.219943538 +0200
+@@ -1762,7 +1762,7 @@
+     mkdir(path, 0755);
+ #endif /* HAVE__MKDIR */
+ #else  /* FREECIV_MSWINDOWS */
+-    mkdir(path, 0755);
++    mkdir(path, 0775);
+ #endif /* FREECIV_MSWINDOWS */
+ 
+     if (dir) {

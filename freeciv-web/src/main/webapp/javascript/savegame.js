@@ -174,7 +174,10 @@ function show_load_game_dialog_cb(savegames_data)
 		    $("#dialog").dialog('close');
 		    $("#game_text_input").blur();
 		  }
-    },
+    }});
+    var stored_password = simpleStorage.get("password", "");
+    if (stored_password != null && stored_password != false) {
+      dialog_buttons = $.extend(dialog_buttons, {
     "Delete ALL" : function() {
             var r;
             if ('confirm' in window) {
@@ -201,7 +204,9 @@ function show_load_game_dialog_cb(savegames_data)
       }
       $('#selectable .ui-selected').remove();
     }
-     ,
+    });
+    }
+    dialog_buttons = $.extend(dialog_buttons, {
      "Load Scenarios...": function() {
 		  $("#dialog").dialog('close');
 		  $("#game_text_input").blur();

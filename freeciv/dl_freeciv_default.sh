@@ -19,5 +19,5 @@ git cat-file -e $1 || git fetch --no-tags https://github.com/freeciv/freeciv.git
 # means that committing unrelated changes won't accidentally revert the
 # Freeciv server revision because a command didn't run.
 git read-tree --prefix=freeciv/freeciv/ --index-output=.freeciv_index $1
-GIT_INDEX_FILE=.freeciv_index git checkout-index -af
-rm -f .freeciv_index
+mkdir freeciv && cd freeciv && GIT_INDEX_FILE=.freeciv_index git checkout-index -af && cd ..
+rm -f ../.freeciv_index

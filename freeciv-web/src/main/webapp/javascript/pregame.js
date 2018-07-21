@@ -1257,6 +1257,8 @@ function validate_username_callback()
           network_init();
           if (!is_touch_device()) $("#pregame_text_input").focus();
           $("#dialog").dialog('close');
+          $("#password_req").val("");
+          simpleStorage.set("password", "");
         }
       } else {
         username = $("#username_req").val().trim();

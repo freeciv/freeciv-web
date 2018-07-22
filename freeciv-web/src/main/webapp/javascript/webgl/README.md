@@ -16,7 +16,9 @@ Building and testing
 Build Freeciv-web as normal with Vagrant as described in the main README file.
 You can then test it in your instance.
 
-If you run a Freeciv-web server and have not removed WebGL support, tell us to list it here.
+You may use the WebGL interface live at:
+- [freecivweb.ddns.net](http://freecivweb.ddns.net/?)
+- [Battle for Planet Isotrident](https://www.isotrident.com/)
 
 Debugging
 ---------

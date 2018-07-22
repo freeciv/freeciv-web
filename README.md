@@ -9,7 +9,9 @@ Freeciv-web is free and open source software. The Freeciv C server is released u
 under the GNU Affero General Public License. See [License](LICENSE.txt) for the full license document.
 
 Currently known servers based on Freeciv-web:
-- https://freecivweb.org
+- [freecivweb.org](https://freecivweb.org) (Only longturn games, no 3D)
+- [freecivweb.ddns.net](http://freecivweb.ddns.net/?)
+- [Battle for Planet Isotrident](https://www.isotrident.com/) (with their own [repo](https://github.com/Isotrident/Isotrident))
 
 Freeciv WebGL 3D:
 ![Freeciv-web](https://raw.githubusercontent.com/freeciv/freeciv-web/develop/freeciv-web/src/main/webapp/javascript/webgl/freeciv-webgl.png "Freeciv-web WebGL screenshot")

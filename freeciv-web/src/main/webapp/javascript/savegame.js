@@ -137,27 +137,24 @@ function show_load_game_dialog()
 **************************************************************************/
 function show_load_game_dialog_cb(savegames_data)
 {
-  // reset dialog page.
-  $("#dialog").remove();
-  $("<div id='dialog'></div>").appendTo("div#game_page");
+  var saveHtml = [];
 
-  var saveHtml =  "<ul id='selectable' style='height: 95%;'>";
-
-
-  if (savegames_data == null || savegames_data.length < 3) {
-      saveHtml = "<b>No savegames found. Please start a new game.</b>";
-
-  } else {
+  if (savegames_data != null && savegames_data.length >= 3) {
     var savegames = savegames_data.split(";");
     for (var i = 0; i < savegames.length; i++) {
         if (savegames[i].length > 2) {
-          saveHtml += "<li class='ui-widget-content'>" + savegames[i] + "</li>";
+          saveHtml.push("<li class='ui-widget-content'>" + savegames[i] + "</li>");
         }
-
     }
   }
 
-  saveHtml += "</ul><br>";
+  if (saveHtml.length == 0) {
+    show_scenario_dialog();
+    return;
+  }
+
+  saveHtml = "<ul id='selectable' style='height: 95%;'>" + saveHtml.join('')
+           + "</ul><br>";
 
   var dialog_buttons = {};
 
@@ -188,7 +185,7 @@ function show_load_game_dialog_cb(savegames_data)
             if (r == true) {
               delete_all_savegames();
 		      $("#dialog").dialog('close');
-		      setTimeout(show_load_game_dialog, 1000);
+		      setTimeout(show_scenario_dialog, 1000);
 		    }
     },
 
@@ -215,6 +212,10 @@ function show_load_game_dialog_cb(savegames_data)
     });
   }
 
+
+  // reset dialog page.
+  $("#dialog").remove();
+  $("<div id='dialog'></div>").appendTo("div#game_page");
 
   $("#dialog").html(saveHtml);
   $("#dialog").attr("title", "Resume playing a saved game");

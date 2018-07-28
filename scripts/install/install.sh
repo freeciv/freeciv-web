@@ -175,8 +175,6 @@ if [ ! -f "${basedir}"/scripts/configuration.sh ]; then
   if [ "${FCW_INSTALL_MODE}" = TEST ]; then
     cp "${basedir}"/scripts/configuration.sh{.dist,}
     echo "Default config parameters used"
-    # Fix line endings on Windows
-    sed -i 's/\r$//' "${basedir}"/scripts/configuration.sh    
   else
     echo >&2 "Please copy scripts/configuration.sh.dist to scripts/configuration.sh and"
     echo >&2 "edit its content to suit your needs."
@@ -191,8 +189,6 @@ if [ ! -f "${basedir}"/freeciv-web/src/main/webapp/WEB-INF/config.properties ]; 
   if [ "${FCW_INSTALL_MODE}" = TEST ]; then
     cp "${basedir}"/freeciv-web/src/main/webapp/WEB-INF/config.properties{.dist,}
     echo "Default config.properties used"
-    # Fix line endings on Windows
-    sed -i 's/\r$//' "${basedir}"/freeciv-web/src/main/webapp/WEB-INF/config.properties
   else
     echo >&2 "Please copy freeciv-web/src/main/webapp/WEB-INF/config.properties.dist to"
     echo >&2 "freeciv-web/src/main/webapp/WEB-INF/config.properties and edit its content to"

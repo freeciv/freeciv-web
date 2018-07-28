@@ -23,6 +23,7 @@
 
 from os import path as op
 from os import chdir
+import re
 import sys
 import time
 from tornado import web, websocket, ioloop, httpserver
@@ -79,6 +80,10 @@ class WSHandler(websocket.WebSocketHandler):
             # called the first time the user connects.
             login_message = json.loads(message)
             self.username = login_message['username']
+            if (not validate_username(self.username)):
+              logger.warn("invalid username: " + str(message))
+              self.write_message("[{\"pid\":5,\"message\":\"Error: Could not authenticate user. If you find a bug, please report it.\",\"you_can_join\":false,\"conn_id\":-1}]")
+              return
             self.civserverport = login_message['port']
             auth_ok = self.check_user(
                     login_message['username'] if 'username' in login_message else None, 
@@ -180,6 +185,16 @@ class WSHandler(websocket.WebSocketHandler):
             return civcom
         else:
             return civcoms[key]
+
+
+def validate_username(name):
+    if (name is None
+            or len(name) <= 2 or len(name) >= 32
+            or name == "pbem"
+            or re.search('[^a-zA-Z]', name) is not None):
+        return False
+    else:
+        return True
 
 
 if __name__ == "__main__":

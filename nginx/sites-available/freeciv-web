@@ -2,10 +2,7 @@
 
     server {
         listen       80;
-
-        # Uncomment this to enable SSL:
-        #include /etc/nginx/snippets/freeciv-web-ssl.conf;
-
+        include /etc/nginx/snippets/freeciv-web-ssl.conf;
         tcp_nodelay on; 
  
         gzip  on;

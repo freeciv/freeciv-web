@@ -319,8 +319,7 @@ You may want to personalize some things before starting it:
 - Set the mail account data for pbem games in pbem/settings.ini, and the
   templates for the messages in pbem/email_template* (at least the URL).
 - Users for tomcat-admin web interface.
-- For SSL, edit /etc/nginx/sites-available/freeciv-web and 
-  point /etc/nginx/snippets/freeciv-web-ssl.conf to your certificate and key,
+- Point /etc/nginx/snippets/freeciv-web-ssl.conf to your certificate and key,
   or remove SSL support from /etc/nginx/sites-available/freeciv-web.
 
 Then run scripts/start-freeciv-web.sh and enjoy!

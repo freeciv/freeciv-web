@@ -269,6 +269,9 @@ EOF
 
 echo "==== Building freeciv ===="
 echo "Please be patient"
+# Fix line endings on Windows
+sed -i 's/\r$//' "${basedir}"/freeciv/freeciv-web.project
+
 cd "${basedir}"/freeciv && ./prepare_freeciv.sh
 cd freeciv && make install
 

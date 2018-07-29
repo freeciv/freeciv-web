@@ -410,45 +410,35 @@ function update_tech_screen()
 }
 
 /**************************************************************************
- Returns for example "Bronze working allows building phalax".
+ Returns for example "Bronze working allows building phalanx."
 **************************************************************************/
 function get_advances_text(tech_id)
 {
-  var ptech = techs[tech_id];
+  const num = (value) => value === null ? 'null' : value;
+  const tech_span = (name, unit_id, impr_id, title) =>
+    `<span ${title ? `title='${title}'` : ''}`
+    + ` onclick='show_tech_info_dialog("${name}", ${num(unit_id)}, ${num(impr_id)})'>${name}</span>`;
 
-  var adv_txt = "<span onclick='show_tech_info_dialog(\"" +ptech['name'] + "\", null, null);'>" + ptech['name'] + "</span> (" + Math.floor(ptech['cost']) + ") allows ";
-  var prunits = get_units_from_tech(tech_id);
-  var pimprovements = get_improvements_from_tech(tech_id);
+  const is_valid_and_required = (next_tech_id) =>
+    reqtree.hasOwnProperty(next_tech_id) && is_tech_req_for_tech(tech_id, next_tech_id);
 
-  for (var i = 0; i < prunits.length; i++) {
-    if (i == 0) adv_txt += "building unit ";
-    var punit = prunits[i];
-    adv_txt += "<span title='" + punit['helptext'] 
-            + "' onclick='show_tech_info_dialog(\"" + punit['name'] + "\", " + punit['id'] + ", null)'>" 
-            + punit['name'] + "</span>, ";
-  }
+  const format_list_with_intro = (intro, list) =>
+    (list = list.filter(Boolean)).length ? (intro + ' ' + list.join(', ')) : '';
 
-  for (var i = 0; i < pimprovements.length; i++) {
-    if (i == 0) adv_txt += "building ";
-    var pimpr = pimprovements[i];
-    adv_txt += "<span title='" + pimpr['helptext'] 
-            + "' onclick='show_tech_info_dialog(\"" + pimpr['name'] + "\", null, " + pimpr['id'] + ")'>" + pimpr['name'] + "</span>, ";
-  }
+  const ptech = techs[tech_id];
 
-
-  for (var next_tech_id in techs) {
-    var ntech = techs[next_tech_id];
-    if (!(next_tech_id+'' in reqtree)) continue;
-
-    if (is_tech_req_for_tech(tech_id, next_tech_id)) {
-      if (adv_txt.indexOf("researching") == -1) adv_txt += "researching ";
-      adv_txt +=  "<span onclick='show_tech_info_dialog(\"" +ntech['name'] + "\", null, null)'>" + ntech['name'] + "</span>, ";
-    }
-  }
-
-  if (adv_txt.length > 3) adv_txt = adv_txt.substring(0, adv_txt.length - 2) + ".";
-
-  return adv_txt;
+  return tech_span(ptech.name, null, null) + ' (' + Math.floor(ptech.cost) + ')'
+    + format_list_with_intro(' allows',
+      [
+        format_list_with_intro('building unit', get_units_from_tech(tech_id)
+          .map(unit => tech_span(unit.name, unit.id, null, unit.helptext))),
+        format_list_with_intro('building', get_improvements_from_tech(tech_id)
+          .map(impr => tech_span(impr.name, null, impr.id, impr.helptext))),
+        format_list_with_intro('researching', Object.keys(techs)
+          .filter(is_valid_and_required)
+          .map(tid => techs[tid])
+          .map(tech => tech_span(tech.name, null, null)))
+      ]) + '.';
 }
 
 /**************************************************************************

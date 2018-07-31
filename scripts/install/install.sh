@@ -286,6 +286,10 @@ if [ ! -f "${basedir}"/publite2/settings.ini ]; then
   cp "${basedir}"/publite2/settings.ini{.dist,}
 fi
 
+cd "${basedir}"/scripts/migration
+mig_scripts=([0-9]*)
+echo "${mig_scripts[-1]}" > checkpoint
+
 cd "${basedir}"/scripts && ./sync-js-hand.sh
 cd "${basedir}"/freeciv-web && ./build.sh
 

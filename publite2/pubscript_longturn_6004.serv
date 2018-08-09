@@ -1,13 +1,12 @@
-#LongTurn Web X
+#LongTurn Game 0x10
 
 cmdlevel ctrl first
-rulesetdir longturn-web-x 
+rulesetdir warciv
 set topology WRAPX
 set nationset all
 set compresstype xs
 set maxplayers 300
-set startunits=cccwwwxx
-set aifill 300
+set startunits=cccwwwxxxx
 set allowtake=""
 set autotoggle false
 set timeout 82800
@@ -19,19 +18,22 @@ set pingtimeout 240
 set maxconnectionsperhost 500
 set threaded_save enabled
 set scorelog disabled
-set mapsize FULLSIZE
-set size 32
-set topology=
-set landm 70
-set dispersion=1
+set mapsize TILESPERPLAYER
+set tilesperplayer 108
+set landm 30
+set dispersion=0
 
 set endt 365
 
-set diplomacy=HUMAN
+set diplomacy DISABLED
 set contactturns=0
 
 set minp 0
-set generator Island
+set generator FAIR
+set diplchance 50
+set caravan_revenue_style LOGARITHMIC
+set trade_revenue_style SIMPLE
+set trademindist 8
 set saveturns=1
 set autosaves=TURN
 metaconnection persistent
@@ -39,7 +41,7 @@ set ec_chat=enabled
 set ec_info=enabled 
 set ec_max_size=5000
 set ec_turns=9
-metamessage LongTurn-Web-X | LTW-X | 1 turn per day | 300 players | 32000 tiles | Join now!
+metamessage Test game
 
 
 cmdlevel basic

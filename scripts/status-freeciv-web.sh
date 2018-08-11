@@ -1,6 +1,8 @@
 #!/bin/bash
 # Checks status of various Freeciv-web processes
 
+alias curl='stdbuf -i0 -o0 -e0 curl'
+
 checkURL () {
   local URL=$1
   local logfile=$2
@@ -59,11 +61,11 @@ printf "\n--------------------------------\n";
 
 echo "testing WebSocket connection directly to Tornado"
 echo "This should show \"HTTP/1.1 101 Switching Protocols\" and then timeout after 2 seconds."
-curl -i -N -H "Connection: Upgrade" -H "Upgrade: websocket" -H "Host: localhost" -H "Origin: http://localhost" -H "Sec-WebSocket-Version: 13" -H 'Sec-WebSocket-Key: +onQ3ZxjWlkNa0na6ydhNg==' --max-time 2  http://localhost:7002/civsocket/7002
+curl -isSN -H "Connection: Upgrade" -H "Upgrade: websocket" -H "Host: localhost" -H "Origin: http://localhost" -H "Sec-WebSocket-Version: 13" -H 'Sec-WebSocket-Key: +onQ3ZxjWlkNa0na6ydhNg==' --max-time 2  http://localhost:7002/civsocket/7002
 
 echo "testing WebSocket connection through nginx"
 echo "This should show \"HTTP/1.1 101 Switching Protocols\" and then timeout after 2 seconds."
-curl -i -N -H "Connection: Upgrade" -H "Upgrade: websocket" -H "Host: localhost" -H "Origin: http://localhost" -H "Sec-WebSocket-Version: 13" -H 'Sec-WebSocket-Key: +onQ3ZxjWlkNa0na6ydhNg==' --max-time 2  http://localhost/civsocket/7002
+curl -isSN -H "Connection: Upgrade" -H "Upgrade: websocket" -H "Host: localhost" -H "Origin: http://localhost" -H "Sec-WebSocket-Version: 13" -H 'Sec-WebSocket-Key: +onQ3ZxjWlkNa0na6ydhNg==' --max-time 2  http://localhost/civsocket/7002
 printf "\n--------------------------------\n ";
 
 echo "checking freeciv-web / publite2"

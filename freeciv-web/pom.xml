@@ -11,6 +11,7 @@
 
 
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<timestamp>${maven.build.timestamp}</timestamp>
 	</properties>
 
@@ -133,7 +134,6 @@
 					<configuration>
 						<source>1.7</source>
 						<target>1.7</target>
-						<encoding>UTF-8</encoding>
 					</configuration>
 				</plugin>
 
@@ -206,9 +206,14 @@
 						<dependency>
 							<groupId>com.google.javascript</groupId>
 							<artifactId>closure-compiler</artifactId>
-							<version>v20170521</version>
+							<version>v20180716</version>
 						</dependency>
 					</dependencies>
+					<configuration>
+						<jsEngine>CLOSURE</jsEngine>
+						<closureLanguageIn>ECMASCRIPT_2017</closureLanguageIn>
+						<closureCreateSourceMap>true</closureCreateSourceMap>
+					</configuration>
 					<executions>
 						<!-- Create minified common webclient.min.js and css -->
 						<execution>
@@ -247,9 +252,6 @@
 									<jsSourceExclude>tileset_spec*</jsSourceExclude>
 									<jsSourceExclude>libs/gif.worker.js</jsSourceExclude>
 								</jsSourceExcludes>
-								<jsEngine>CLOSURE</jsEngine>
-								<closureCreateSourceMap>true</closureCreateSourceMap>
-								<closureLanguage>ECMASCRIPT5</closureLanguage>
 							</configuration>
 							<goals>
 								<goal>minify</goal>
@@ -261,7 +263,6 @@
 							<configuration>
 								<jsSourceDir>javascript/webgl/libs/</jsSourceDir>
 								<jsFinalFile>webgl-client.js</jsFinalFile>
-								<closureLanguage>ECMASCRIPT5</closureLanguage>
 								<jsSourceIncludes>
 									<jsSourceInclude>*.js</jsSourceInclude>
 								</jsSourceIncludes>
@@ -269,8 +270,6 @@
 									<jsSourceExclude>three.min.js</jsSourceExclude>
 									<jsSourceExclude>StereoEffect.js</jsSourceExclude>
 								</jsSourceExcludes>
-								<jsEngine>CLOSURE</jsEngine>
-								<closureCreateSourceMap>true</closureCreateSourceMap>
 							</configuration>
 							<goals>
 								<goal>minify</goal>
@@ -282,34 +281,30 @@
 							<configuration>
 								<jsSourceDir>static/javascript</jsSourceDir>
 								<jsFinalFile>index.js</jsFinalFile>
-								<closureLanguage>ECMASCRIPT5</closureLanguage>
 								<jsSourceIncludes>
 									<jsSourceInclude>index.js</jsSourceInclude>
 								</jsSourceIncludes>
-								<jsEngine>CLOSURE</jsEngine>
 								<closureCreateSourceMap>false</closureCreateSourceMap>
 							</configuration>
 							<goals>
 								<goal>minify</goal>
 							</goals>
-						</execution>	
+						</execution>
 
 						<execution>
 							<id>header-minify</id>
 							<configuration>
 								<jsSourceDir>static/javascript</jsSourceDir>
 								<jsFinalFile>header.js</jsFinalFile>
-								<closureLanguage>ECMASCRIPT5</closureLanguage>
 								<jsSourceIncludes>
 									<jsSourceInclude>header.js</jsSourceInclude>
 								</jsSourceIncludes>
-								<jsEngine>CLOSURE</jsEngine>
 								<closureCreateSourceMap>false</closureCreateSourceMap>
 							</configuration>
 							<goals>
 								<goal>minify</goal>
 							</goals>
-						</execution>							
+						</execution>
 					</executions>
 				</plugin>
 

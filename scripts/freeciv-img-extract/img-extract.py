@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 # -*- coding: iso-8859-1 -*-
 ''' 
  Freeciv - Copyright (C) 2009-2016 - Andreas Røsdal   andrearo@pvv.ntnu.no
@@ -16,99 +16,96 @@
 import os, sys
 os.environ['PYTHON_EGG_CACHE'] = '/tmp'
 
+import argparse
 import configparser
+from os import path
 from PIL import Image
 from PIL import ImageFont, ImageDraw, ImageOps
 import json
 
-gfxdir = "";
+parser = argparse.ArgumentParser(
+  description='Generate .js tileset specifications based on freeciv data')
+parser.add_argument('-f', '--freeciv', required=True, help='path to (original) freeciv project')
+parser.add_argument('-o', '--outdir', required=True, help='path to webapp output directory')
+parser.add_argument('-v', '--verbose', action='store_true', help='show progress details during run')
+args = parser.parse_args()
 
-files = {"amplio2" : [
-  "../../freeciv/freeciv/data/amplio2/terrain1.spec",
-  "../../freeciv/freeciv/data/amplio2.tilespec",
-  "../../freeciv/freeciv/data/amplio2/activities.spec",
-  "../../freeciv/freeciv/data/amplio2/cities.spec",
-  "../../freeciv/freeciv/data/amplio2/bases.spec",
-  "../../freeciv/freeciv/data/amplio2/explosions.spec",
-  "../../freeciv/freeciv/data/amplio2/fog.spec",
-  "../../freeciv/freeciv/data/amplio2/grid.spec",
-  "../../freeciv/freeciv/data/amplio2/nuke.spec",
-  "../../freeciv/freeciv/data/amplio2/mountains.spec",
-  "../../freeciv/freeciv/data/amplio2/hills.spec",
-  "../../freeciv/freeciv/data/amplio2/ocean.spec",
-  "../../freeciv/freeciv/data/amplio2/select.spec",
-  "../../freeciv/freeciv/data/amplio2/terrain2.spec",
-  "../../freeciv/freeciv/data/amplio2/tiles.spec",
-  "../../freeciv/freeciv/data/amplio2/units.spec",
-  "../../freeciv/freeciv/data/amplio2/upkeep.spec",
-  "../../freeciv/freeciv/data/amplio2/veterancy.spec",
-  "../../freeciv/freeciv/data/amplio2/water.spec",
-  "../../freeciv/freeciv/data/misc/wonders-large.spec",
-  "../../freeciv/freeciv/data/misc/colors.tilespec",
-  "../../freeciv/freeciv/data/misc/buildings-large.spec",
-  "../../freeciv/freeciv/data/misc/overlays.spec",
-  "../../freeciv/freeciv/data/misc/shields.spec",
-  "../../freeciv/freeciv/data/misc/small.spec",
-  "../../freeciv/freeciv/data/misc/governments.spec",
-  "../../freeciv/freeciv/data/misc/specialists.spec",
-  "../../freeciv/freeciv/data/misc/space.spec",
-  "../../freeciv/freeciv/data/misc/editor.spec",
-  "../../freeciv/freeciv/data/misc/techs.spec",
-  "../../freeciv/freeciv/data/misc/flags.spec",
-  "../../freeciv/freeciv/data/misc/treaty.spec",
-  "../../freeciv/freeciv/data/misc/citybar.spec"],
+out_dir = args.outdir
+freeciv_dir = args.freeciv
+verbose = args.verbose
+
+freeciv_data_dir = path.join(freeciv_dir, "data")
+
+gfxdir = freeciv_data_dir
+
+misc_files = [
+  "wonders-large.spec",
+  "colors.tilespec",
+  "buildings-large.spec",
+  "overlays.spec",
+  "shields.spec",
+  "small.spec",
+  "governments.spec",
+  "specialists.spec",
+  "space.spec",
+  "editor.spec",
+  "techs.spec",
+  "flags.spec",
+  "treaty.spec",
+  "citybar.spec"
+]
+spec_files = {
+  "amplio2" : [
+    "terrain1.spec",
+    "activities.spec",
+    "cities.spec",
+    "bases.spec",
+    "explosions.spec",
+    "fog.spec",
+    "grid.spec",
+    "nuke.spec",
+    "mountains.spec",
+    "hills.spec",
+    "ocean.spec",
+    "select.spec",
+    "terrain2.spec",
+    "tiles.spec",
+    "units.spec",
+    "upkeep.spec",
+    "veterancy.spec",
+    "water.spec"
+  ],
   "trident" : [
-  "../../freeciv/freeciv/data/trident/auto_ll.spec",
-  "../../freeciv/freeciv/data/trident/fog.spec",
-  "../../freeciv/freeciv/data/trident/roads.spec",
-  "../../freeciv/freeciv/data/trident/tiles.spec",
-  "../../freeciv/freeciv/data/trident/cities.spec",
-  "../../freeciv/freeciv/data/trident/explosions.spec",
-  "../../freeciv/freeciv/data/trident/grid.spec",
-  "../../freeciv/freeciv/data/trident/select.spec",
-  "../../freeciv/freeciv/data/trident/units.spec",
-  "../../freeciv/freeciv/data/misc/wonders-large.spec",
-  "../../freeciv/freeciv/data/misc/colors.tilespec",
-  "../../freeciv/freeciv/data/misc/buildings-large.spec",
-  "../../freeciv/freeciv/data/misc/overlays.spec",
-  "../../freeciv/freeciv/data/misc/shields.spec",
-  "../../freeciv/freeciv/data/misc/small.spec",
-  "../../freeciv/freeciv/data/misc/governments.spec",
-  "../../freeciv/freeciv/data/misc/specialists.spec",
-  "../../freeciv/freeciv/data/misc/space.spec",
-  "../../freeciv/freeciv/data/misc/editor.spec",
-  "../../freeciv/freeciv/data/misc/techs.spec",
-  "../../freeciv/freeciv/data/misc/flags.spec",
-  "../../freeciv/freeciv/data/misc/treaty.spec",
-  "../../freeciv/freeciv/data/misc/citybar.spec"
+    "auto_ll.spec",
+    "fog.spec",
+    "roads.spec",
+    "tiles.spec",
+    "cities.spec",
+    "explosions.spec",
+    "grid.spec",
+    "select.spec",
+    "units.spec"
   ],
   "isotrident" : [
-  "../../freeciv/freeciv/data/isotrident/terrain1.spec",
-  "../../freeciv/freeciv/data/isotrident/cities.spec",
-  "../../freeciv/freeciv/data/isotrident/fog.spec",
-  "../../freeciv/freeciv/data/isotrident/grid.spec",
-  "../../freeciv/freeciv/data/isotrident/morecities.spec",
-  "../../freeciv/freeciv/data/isotrident/nuke.spec",
-  "../../freeciv/freeciv/data/isotrident/select.spec",
-  "../../freeciv/freeciv/data/isotrident/terrain2.spec",
-  "../../freeciv/freeciv/data/isotrident/tiles.spec",
-  "../../freeciv/freeciv/data/isotrident/unitextras.spec",
-  "../../freeciv/freeciv/data/misc/wonders-large.spec",
-  "../../freeciv/freeciv/data/misc/colors.tilespec",
-  "../../freeciv/freeciv/data/misc/buildings-large.spec",
-  "../../freeciv/freeciv/data/misc/overlays.spec",
-  "../../freeciv/freeciv/data/misc/shields.spec",
-  "../../freeciv/freeciv/data/misc/small.spec",
-  "../../freeciv/freeciv/data/misc/governments.spec",
-  "../../freeciv/freeciv/data/misc/specialists.spec",
-  "../../freeciv/freeciv/data/misc/space.spec",
-  "../../freeciv/freeciv/data/misc/editor.spec",
-  "../../freeciv/freeciv/data/misc/techs.spec",
-  "../../freeciv/freeciv/data/misc/flags.spec",
-  "../../freeciv/freeciv/data/misc/treaty.spec",
-  "../../freeciv/freeciv/data/misc/citybar.spec"
+    "terrain1.spec",
+    "cities.spec",
+    "fog.spec",
+    "grid.spec",
+    "morecities.spec",
+    "nuke.spec",
+    "select.spec",
+    "terrain2.spec",
+    "tiles.spec",
+    "unitextras.spec"
   ]
-}; 
+}
+def expand_spec_files(name, file_names):
+  files = [path.join(freeciv_data_dir, name + ".tilespec")]
+  files.extend([path.join(freeciv_data_dir, name, f) for f in file_names])
+  files.extend([path.join(freeciv_data_dir, "misc", f) for f in misc_files])
+  return files
+
+files = {k: expand_spec_files(k, v) for k,v in spec_files.items()}
 
 global tileset;
 global curr_x;
@@ -155,7 +152,7 @@ def config_read(file):
     config_text = config_text.replace("         \"unit.auto_settler\"", "  4, 10, \"unit.auto_settler\"");
     config_text = config_text.replace("\t  ;", "\n;");
     config.read_string(config_text);
-    print((config.sections()));
+    if verbose: print("  found sections: {}".format(config.sections()))
     return config;
 
 def increment_tileset_image(tileset_name):
@@ -171,7 +168,8 @@ def increment_tileset_image(tileset_name):
   draw = ImageDraw.Draw(tileset)
   draw.text((130, 0), "Freeciv-web - https://github.com/freeciv/freeciv-web  GPL Licensed  - Copyright 2007-2015  Andreas Rosdal", fill="rgb(0,0,0)")
 
-  tileset.save("freeciv-web-tileset-" + tileset_name + "-" + str(tileset_inc) + ".png");
+  tileset_file = "freeciv-web-tileset-" + tileset_name + "-" + str(tileset_inc) + ".png"
+  tileset.save(path.join(out_dir, tileset_file))
   tileset_inc += 1;
 
   tileset = Image.new('RGBA', (tileset_width, tileset_height), (0, 0, 0, 0));
@@ -182,13 +180,13 @@ def increment_tileset_image(tileset_name):
   max_width = 0;
   max_height = 0;
 
-for tile_file in sorted(files.keys()):
-  print("*** Extracting tileset: " + tile_file + "\n");
+for tileset_id in sorted(files.keys()):
+  print("*** Extracting tileset: " + tileset_id);
   tileset_inc = 0;
-  coords[tile_file] = {};
+  coords[tileset_id] = {};
   dither_map = {};
 
-  for file in files[tile_file]:
+  for file in files[tileset_id]:
     config = config_read(file);
     
     if "extra" in config.sections():
@@ -201,17 +199,18 @@ for tile_file in sorted(files.keys()):
         tag = rsprite[1];
         if (tag.find(";")): tag = tag.split(";")[0]; 
         tag = tag.strip();
-  
-        im = Image.open(gfxdir + tag + ".png");
+
+        gfx_file = path.join(gfxdir, tag + ".png")
+        im = Image.open(gfx_file)
         (w, h) = im.size;
         if (w > max_width): max_width = w;
         if (h > max_height): max_height = h;
         sum_area += (h*w);
   
         if (curr_y + h >= tileset_height):
-          increment_tileset_image(tile_file);
+          increment_tileset_image(tileset_id);
         tileset.paste(im, (curr_x, curr_y));
-        coords[tile_file][rsprite[0]] = (curr_x, curr_y, w, h, tileset_inc);
+        coords[tileset_id][rsprite[0]] = (curr_x, curr_y, w, h, tileset_inc);
         curr_x += w;
         if (h > max_row_height): max_row_height = h;
         if (w + curr_x >= tileset_width): 
@@ -221,9 +220,10 @@ for tile_file in sorted(files.keys()):
   
   
     if "file" in config.sections():
-      gfx = config.get("file", "gfx") + ".png";
-      print(gfx);
-      im = Image.open(gfxdir + gfx.replace("\"", ""));
+      gfx = config.get("file", "gfx").replace("\"", "")
+      gfx_file = path.join(gfxdir, gfx + ".png")
+      if verbose: print("  processing: " + gfx_file)
+      im = Image.open(gfx_file)
  
       for current_section in ["grid_main", "grid_roads", "grid_rails", "grid_coasts", "grid_extra"]: 
         if current_section in config.sections():
@@ -236,8 +236,8 @@ for tile_file in sorted(files.keys()):
             pixel_border = int(config.get(current_section, "pixel_border"));
           except:
             pass;
-  
-          print("pixel_border " + str(pixel_border));
+
+          if verbose: print("  {} pixel_border {}".format(current_section, pixel_border))
           tag2 = None;
   
           tiles_buf = config.get(current_section, "tiles");
@@ -291,12 +291,12 @@ for tile_file in sorted(files.keys()):
                 sum_area += (h*w);
   
                 if (curr_y + h >= tileset_height):
-                  increment_tileset_image(tile_file);
+                  increment_tileset_image(tileset_id);
   
                 tileset.paste(result_cell, (int(curr_x), int(curr_y)), mask);
                 store_img = Image.new('RGBA', (w, h), (0, 0, 0, 0));
                 store_img.paste(result_cell, (0, 0), mask);
-                coords[tile_file][tag + "." + str(dir)] = (curr_x, curr_y, w, h, tileset_inc);
+                coords[tileset_id][tag + "." + str(dir)] = (curr_x, curr_y, w, h, tileset_inc);
                 curr_x += w;
                 if (h > max_row_height): max_row_height = h;
                 if (w + curr_x >= tileset_width): 
@@ -323,11 +323,11 @@ for tile_file in sorted(files.keys()):
               sum_area += (h*w);
   
               if (curr_y + h >= tileset_height):
-                increment_tileset_image(tile_file);
+                increment_tileset_image(tileset_id);
   
               tileset.paste(result_tile, (curr_x, curr_y));
   
-              coords[tile_file][tag] = (curr_x, curr_y, w, h, tileset_inc);
+              coords[tileset_id][tag] = (curr_x, curr_y, w, h, tileset_inc);
               curr_x += w;
               if (h > max_row_height): max_row_height = h;
               if (w + curr_x >= tileset_width): 
@@ -336,10 +336,10 @@ for tile_file in sorted(files.keys()):
                 max_row_height = 0;
   
               if (tag2 != None and len(tag2) > 0): 
-                coords[tile_file][tag2] = (curr_x, curr_y, w, h, tileset_inc);
+                coords[tileset_id][tag2] = (curr_x, curr_y, w, h, tileset_inc);
 
-  if not (tile_file == "amplio2" or tile_file == "isotrident"):  
-    increment_tileset_image(tile_file);
+  if not (tileset_id == "amplio2" or tileset_id == "isotrident"):
+    increment_tileset_image(tileset_id);
   else: 
     for src_key in dither_map.keys():
       for alt_key in dither_map.keys():
@@ -360,10 +360,10 @@ for tile_file in sorted(files.keys()):
             if (h > max_height): max_height = h;
             sum_area += (h*w);
             if (curr_y + h >= tileset_height):
-              increment_tileset_image(tile_file);
+              increment_tileset_image(tileset_id);
             tileset.paste(result_cell, (curr_x, curr_y));
 
-            coords[tile_file][tag] = (curr_x, curr_y, w, h, tileset_inc);
+            coords[tileset_id][tag] = (curr_x, curr_y, w, h, tileset_inc);
 
             curr_x += w;
             if (h > max_row_height): max_row_height = h;
@@ -372,13 +372,13 @@ for tile_file in sorted(files.keys()):
               curr_y += max_row_height;
               max_row_height = 0;
 
-    increment_tileset_image(tile_file);
+    increment_tileset_image(tileset_id);
 
-print("MAX: " + str(max_width) + "  " + str(max_height) + "  " + str(sum_area));
+if verbose: print("MAX: " + str(max_width) + "  " + str(max_height) + "  " + str(sum_area));
 
-for tile_file in files.keys():
-  f = open('tileset_spec_' + tile_file + '.js', 'w')
-  f.write("var tileset = " + json.dumps(coords[tile_file], separators=(',',':')) + ";");
-
+for tileset_id in files.keys():
+  tileset_file = 'tileset_spec_' + tileset_id + '.js'
+  f = open(path.join(out_dir, tileset_file), 'w')
+  f.write("var tileset = " + json.dumps(coords[tileset_id], separators=(',', ':')) + ";")
 
 print("Freeciv-img-extract creating tilesets complete.");

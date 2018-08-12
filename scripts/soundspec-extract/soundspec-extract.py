@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#!/usr/bin/env python3
 
 '''**********************************************************************
  Publite2 is a process manager which launches multiple Freeciv-web servers.
@@ -20,18 +20,28 @@
 ***********************************************************************'''
 
 
+from os import path
+import argparse
 import configparser
-import json
-import os, sys
 
+parser = argparse.ArgumentParser(
+  description='Generate .js sound data based on freeciv data')
+parser.add_argument('-f', '--freeciv', required=True, help='path to (original) freeciv project')
+parser.add_argument('-o', '--outdir', required=True, help='path to webapp output directory')
+args = parser.parse_args()
 
-print("parsing stdsounds.soundspec");
+webapp_dir = args.outdir
+freeciv_dir = args.freeciv
+
+input_name = path.join(freeciv_dir, "data", "stdsounds.soundspec")
+
+print("Parsing " + input_name)
 config = configparser.ConfigParser()
-config.read("../../freeciv/freeciv/data/stdsounds.soundspec")
+config.read(input_name)
 
-f = open('soundset_spec.js', 'w')
+output_name = path.join(webapp_dir, 'javascript', 'soundset_spec.js')
+f = open(output_name, 'w')
 f.write("var soundset = {");
-
 
 for key in config['files']:
   f.write("\"" + key + "\" : " );
@@ -40,3 +50,4 @@ for key in config['files']:
 
 f.write("\"last\":null};");
 
+print("Generated " + output_name)

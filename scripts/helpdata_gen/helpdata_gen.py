@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 # -*- coding: iso-8859-1 -*-
 ''' 
  Freeciv - Copyright (C) 2009-2014 - Andreas Røsdal   andrearo@pvv.ntnu.no
@@ -13,11 +13,22 @@
    GNU General Public License for more details.
 '''
 
-import os, sys
+from os import path
+import argparse
+import sys
 
 import configparser
 import json
 import re
+
+parser = argparse.ArgumentParser(
+    description='Generate .js help data based on freeciv project')
+parser.add_argument('-f', '--freeciv', required=True, help='path to (original) freeciv project')
+parser.add_argument('-o', '--outdir', required=True, help='path to webapp output directory')
+args = parser.parse_args()
+
+webapp_dir = args.outdir
+freeciv_dir = args.freeciv
 
 def removeComments(string):
     string = re.sub(re.compile("/\*.*?\*/",re.DOTALL ) ,"" ,string);
@@ -27,7 +38,7 @@ def removeComments(string):
     return string
 
 def config_read(file):
-  print(("Parsing " + file ));
+  print(("Parsing " + file));
   config = configparser.ConfigParser(strict=False)
   with open (file, "r") as myfile:
     config_text=myfile.read();
@@ -52,21 +63,21 @@ def config_read(file):
     return config;
 
 
-
-
-parser = config_read("../freeciv/freeciv/data/helpdata.txt");
+input_name = path.join(freeciv_dir, "data", "helpdata.txt")
+config = config_read(input_name)
 thedict = {}
-for section in parser.sections():
+for section in config.sections():
     thedict[section] = {}
-    for key, val in parser.items(section):
+    for key, val in config.items(section):
         # skip these hidden help sections, since they are not in use.
         if (section in ["help_connecting", "help_languages", "help_governor", 
     "help_chatline", "help_about", "help_worklist_editor", "help_copying"]): continue;
         thedict[section][key] = val
 
-f = open('freeciv-helpdata.js', 'w')
+output_name = path.join(webapp_dir, 'javascript', 'freeciv-helpdata.js')
+f = open(output_name, 'w')
 
-f.write("var helpdata_order = " + json.dumps(parser.sections()) + ";  var helpdata = " + json.dumps(thedict, separators=(',',':')) + ";");
+f.write("var helpdata_order = " + json.dumps(config.sections(), indent=2, separators=(',', ': ')) + ";\n")
+f.write("var helpdata = " + json.dumps(thedict, indent=2, separators=(',', ': ')) + ";\n")
 
-
-print("done extracting helpdata.");
+print("Generated " + output_name)

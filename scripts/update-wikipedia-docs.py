@@ -1,11 +1,23 @@
-#! /usr/bin/env python
+#!/usr/bin/env python3
 
+import argparse
 import wikipedia
 import json
-from subprocess import call
 from PIL import Image
 import requests
 from io import BytesIO
+from os import path
+
+parser = argparse.ArgumentParser(
+  description='Generate .js and tech data from Wikipedia and freeciv rulesets')
+parser.add_argument('-f', '--freeciv', required=True, help='path to (original) freeciv project')
+parser.add_argument('-o', '--outdir', required=True, help='path to webapp output directory')
+args = parser.parse_args()
+
+webapp_dir = args.outdir
+freeciv_dir = args.freeciv
+
+src_data_dir = path.join(freeciv_dir, "data")
 
 freeciv_wiki_doc = {};
 
@@ -91,7 +103,7 @@ def download_wiki_page(tech_name):
   image_width = 500;
   max_height = 450;
 
-  print(tech_name + " -> " + fix_tech(tech_name));
+  print("Downloading wiki data and image: " + tech_name + " -> " + fix_tech(tech_name));
   page = wikipedia.page(fix_tech(tech_name), auto_suggest=True, redirect=True);
 
   image = None;
@@ -109,8 +121,10 @@ def download_wiki_page(tech_name):
     if (hsize > max_height):
       hsize = max_height;
     img = img.resize((image_width,hsize), Image.ANTIALIAS)
-    img.convert('RGB').save("../freeciv-web/src/main/webapp/images/wiki/" + page.title + ".jpg");
     image = page.title + ".jpg";
+
+    image_file = path.join(webapp_dir, 'images', 'wiki', page.title + '.jpg')
+    img.convert('RGB').save(image_file)
 
   freeciv_wiki_doc[unqualify(tech_name)] = {"title" : page.title, "summary" : page.summary, "image" : image};
 
@@ -119,7 +133,9 @@ def download_wiki_page(tech_name):
 # name that don't appear in classic may still appear in another supported
 # ruleset.
 
-f = open('../freeciv/freeciv/data/classic/techs.ruleset')
+input_name = path.join(src_data_dir, 'classic', 'techs.ruleset')
+print("Reading " + input_name)
+f = open(input_name, 'r')
 lines = f.readlines()
 f.close()
 
@@ -129,7 +145,9 @@ for line in lines:
     tech_line = line.split("\"");
     techs.append(tech_line[1]);
 
-f = open('../freeciv/freeciv/data/classic/units.ruleset')
+input_name = path.join(src_data_dir, 'classic', 'units.ruleset')
+print("Reading " + input_name)
+f = open(input_name, 'r')
 lines = f.readlines()
 f.close()
 
@@ -139,7 +157,9 @@ for line in lines:
     if ("unitclass" in tech_line[1]): continue;
     techs.append(tech_line[1]);
 
-f = open('../freeciv/freeciv/data/classic/buildings.ruleset')
+input_name = path.join(src_data_dir, 'classic', 'buildings.ruleset')
+print("Reading " + input_name)
+f = open(input_name, 'r')
 lines = f.readlines()
 f.close()
 
@@ -148,7 +168,9 @@ for line in lines:
     tech_line = line.split("\"");
     techs.append(tech_line[1]);
 
-f = open('../freeciv/freeciv/data/classic/governments.ruleset')
+input_name = path.join(src_data_dir, 'classic', 'governments.ruleset')
+print("Reading " + input_name)
+f = open(input_name, 'r')
 lines = f.readlines()
 f.close()
 
@@ -160,9 +182,15 @@ for line in lines:
 for tech in techs:
   download_wiki_page(tech);
 
-f = open('../freeciv-web/src/main/webapp/javascript/freeciv-wiki-doc.js' ,'w');
+output_name = path.join(webapp_dir, 'javascript', 'freeciv-wiki-doc.js')
+f = open(output_name ,'w');
 f.write("var freeciv_wiki_docs = "
         + json.dumps(freeciv_wiki_doc, sort_keys=True, indent=2) + ";\n");
 f.close();
-print("Please verify manually that the images from Wikipedia are suited for the game and players of all ages.");
-print("Downloading tech summaries from Wikipedia complete!");
+print("Generated " + output_name)
+
+print("\n*****************************************************")
+print("Please verify manually that the images from Wikipedia")
+print("are suited for the game and players of all ages.")
+print("*****************************************************\n")
+print("Downloading tech summaries from Wikipedia complete!")

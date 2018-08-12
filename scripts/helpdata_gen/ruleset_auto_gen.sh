@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Freeciv has code that generates certain help texts based on the ruleset.
 # This code is written in C. It is huge. Replicating it in JavaScript would
@@ -12,12 +12,27 @@
 #
 # Generate HTML manuals for the supported rulesets.
 
-SCRIPT_DIR="$(dirname "$0")"
+resolve() { echo "$(cd "$1" >/dev/null && pwd)"; }
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    -f) FREECIV_DIR=$(resolve "$2"); shift; shift;;
+    -o) WEBAPP_DIR=$(resolve "$2"); shift; shift;;
+    *) echo "Unrecognized argument: $1"; shift;;
+  esac
+done
+: ${FREECIV_DIR:?Must specify (original) freeciv project dir with -f}
+: ${WEBAPP_DIR:?Must specify existing freeciv-web (webapp) dir with -o}
 
-cd ${SCRIPT_DIR}/../../freeciv/freeciv/ && \
-./tools/freeciv-manual -r civ2civ3 && \
-./tools/freeciv-manual -r classic && \
-./tools/freeciv-manual -r multiplayer && \
-./tools/freeciv-manual -r webperimental && \
-mkdir -p ../../freeciv-web/src/main/webapp/man/ && \
-mv *.html ../../freeciv-web/src/main/webapp/man/
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null && pwd)"
+
+MAN_DIR="${WEBAPP_DIR}/man"
+
+freeciv_manual="${FREECIV_DIR}/tools/freeciv-manual"
+
+mkdir -p "${MAN_DIR}" && \
+cd "${MAN_DIR}" && \
+"$freeciv_manual" -r civ2civ3 && \
+"$freeciv_manual" -r classic && \
+"$freeciv_manual" -r multiplayer && \
+"$freeciv_manual" -r webperimental && \
+echo "Generated Ruleset manual files in ${MAN_DIR}"

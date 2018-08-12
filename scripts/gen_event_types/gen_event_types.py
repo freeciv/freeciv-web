@@ -1,4 +1,4 @@
-#! /usr/bin/env python3
+#!/usr/bin/env python3
 
 '''**********************************************************************
     Copyright (C) 2017  The Freeciv-web project
@@ -18,9 +18,20 @@
 
 ***********************************************************************'''
 
+from os import path
+import argparse
 import re
 
-root = '../freeciv/freeciv/common/'
+parser = argparse.ArgumentParser(
+    description='Generate .js event support from freeciv sources')
+parser.add_argument('-f', '--freeciv', required=True, help='path to (original) freeciv project')
+parser.add_argument('-o', '--outdir', default='.', help='path to webapp output directory')
+args = parser.parse_args()
+
+webapp_dir = args.outdir
+freeciv_dir = args.freeciv
+
+srcdir = path.join(freeciv_dir, "common")
 in_comment = False
 
 section_names = []
@@ -64,7 +75,9 @@ def remove_comments(line):
     return remove_comments(line)
 
 
-with open(root + 'events.h', 'r') as f:
+input_name = path.join(srcdir, 'events.h')
+with open(input_name, 'r') as f:
+    print("Parsing " + input_name)
     for line in f:
         line = remove_comments(line)
         match = event_number_re.match(line)
@@ -72,7 +85,9 @@ with open(root + 'events.h', 'r') as f:
             events[match.group(2)] = {'index': int(match.group(1)),
                                       'name': match.group(2)}
 
-with open(root + 'events.c', 'r') as f:
+input_name = path.join(srcdir, 'events.c')
+with open(input_name, 'r') as f:
+    print("Parsing " + input_name)
     for line in f:
         line = remove_comments(line)
         match = section_name_re.match(line)
@@ -139,7 +154,8 @@ events.append({
     'section': 'E_S_XYZZY',
     'description': 'Unknown event'})
 
-with open('fc_events.js', 'w') as f:
+output_name = path.join(webapp_dir, 'javascript/fc_events.js')
+with open(output_name, 'w') as f:
     print('''/****************************************
  * THIS IS A GENERATED FILE, DO NOT EDIT
  *
@@ -169,3 +185,4 @@ var E_I_NAME = 0;
 var E_I_SECTION = 1;
 var E_I_DESCRIPTION = 2;
 ''', file=f)
+    print("Generated " + output_name)

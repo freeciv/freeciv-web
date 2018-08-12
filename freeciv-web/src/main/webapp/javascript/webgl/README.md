@@ -18,7 +18,7 @@ You can then test it in your instance.
 
 You may use the WebGL interface live at:
 - [freecivweb.ddns.net](http://freecivweb.ddns.net/?)
-- [Battle for Planet Isotrident](https://www.isotrident.com/)
+- [Battle for Planet Isotrident](https://www.isotrident.com/), also in Chinese: [Wenming](http://wenming.io)
 
 Debugging
 ---------

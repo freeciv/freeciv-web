@@ -76,16 +76,17 @@ models.zip
 freeciv-web/src/main/webapp/build.txt
 */__pycache__/*
 logs/
+out/
 tests/screenshot*.png
 .freeciv_index
 .idea
+*.iml
 
 # Configuration files the user is expected to create using the *.dist as base
 freeciv-proxy/settings.ini
 freeciv-web/flyway.properties
 freeciv-web/src/main/webapp/META-INF/context.xml
 freeciv-web/src/main/webapp/WEB-INF/config.properties
-pbem/settings.ini
 publite2/settings.ini
 scripts/configuration.sh
 scripts/dependency-services-start.sh

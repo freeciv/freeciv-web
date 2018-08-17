@@ -110,16 +110,16 @@ files = {"amplio2" : [
   ]
 }; 
 
-global tileset;
-global curr_x;
-global curr_y;
-global max_row_height;
-global max_width;
-global max_height;
-global tileset_inc;
-global dither_map;
-global dither_mask;
-global mask_image;
+tileset;
+curr_x;
+curr_y;
+max_row_height;
+max_width;
+max_height;
+tileset_inc;
+dither_map;
+dither_mask;
+mask_image;
 
 coords = {};
 max_width = 0;

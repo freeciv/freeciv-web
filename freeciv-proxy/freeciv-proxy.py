@@ -21,7 +21,6 @@
 ***********************************************************************'''
 
 
-from os import path as op
 from os import chdir
 import re
 import sys

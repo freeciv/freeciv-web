@@ -34,7 +34,7 @@ ext_install_tomcat8 () {
   curl -LsS -o "${TMPFILE}" "${TOMCAT_URL}"
 
   cd /var/lib
-  sudo tar -xvzf "${TMPFILE}"
+  sudo tar -xzf "${TMPFILE}"
   sudo mv apache-tomcat-8.* tomcat8
   rm "${TMPFILE}"
 
@@ -64,7 +64,7 @@ ext_install_tornado () {
   (
     cd "${TMPINSTDIR}"
     curl -LOsS 'https://github.com/tornadoweb/tornado/archive/v4.5.3.tar.gz'
-    tar xvfz v4.5.3.tar.gz
+    tar -xzf v4.5.3.tar.gz
     cd tornado-4.5.3
     sudo -H python3 setup.py install
   )

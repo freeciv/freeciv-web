@@ -18,18 +18,19 @@ dependencies="nginx maven mysql-server openjdk-8-jdk-headless acl procps curl se
 export DEBIAN_FRONTEND=noninteractive
 INSTALLED_TOMCAT=N
 INSTALLED_MYSQLPYCON=N
+APT_GET='apt-get -y -qq -o=Dpkg::Use-Pty=0'
 
-sudo apt-get -y update
+sudo ${APT_GET} update
 
 if ! apt-cache -qq show openjdk-8-jdk-headless > /dev/null; then
   echo "==== Adding openjdk-8 repo ===="
   if [ "${FCW_INSTALL_VND}" = Ubuntu ]; then
-    sudo apt-get -y install --no-install-recommends python3-software-properties software-properties-common
+    sudo ${APT_GET} install --no-install-recommends python3-software-properties software-properties-common
     sudo add-apt-repository -y ppa:openjdk-r/ppa
   else
     echo "deb http://http.debian.net/debian ${FCW_INSTALL_REL}-backports main" | sudo tee --append /etc/apt/sources.list.d/${FCW_INSTALL_REL}-backports.list > /dev/null
   fi
-  sudo apt-get -y update
+  sudo ${APT_GET} update
 fi
 
 if apt-cache -qq show tomcat8 > /dev/null; then
@@ -59,12 +60,12 @@ done
 
 echo "==== Installing Updates and Dependencies ===="
 echo "apt-get upgrade"
-sudo apt-get -y upgrade
+sudo ${APT_GET} upgrade
 echo "mysql setup..."
 sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password ${DB_ROOT_PASSWORD}"
 sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again password ${DB_ROOT_PASSWORD}"
 echo "apt-get install dependencies"
-sudo apt-get -y install --no-install-recommends ${dependencies}
+sudo ${APT_GET} install --no-install-recommends ${dependencies}
 
 # Where default-jdk is v7, it may be installed with a higher priority than v8
 for n in java javac; do
@@ -91,7 +92,7 @@ echo "==== Installing Node.js ===="
 cd "${TMPINSTDIR}"
 curl -LOsS 'https://deb.nodesource.com/setup_8.x'
 sudo bash setup_8.x
-sudo apt-get -y install --no-install-recommends nodejs
+sudo ${APT_GET} install --no-install-recommends nodejs
 # Populate ~/.config with current user
 npm help > /dev/null
 

@@ -305,9 +305,10 @@ cd "${basedir}"/scripts/migration
 mig_scripts=([0-9]*)
 echo "${mig_scripts[-1]}" > checkpoint
 
+mkdir -p "${basedir}/freeciv-web/src/derived/webapp" && \
 "${basedir}"/scripts/sync-js-hand.sh \
   -f "${basedir}/freeciv/freeciv" \
-  -o "${basedir}/freeciv-web/src/main/webapp" \
+  -o "${basedir}/freeciv-web/src/derived/webapp" \
   -d "${TOMCAT_HOME}/webapps/data" || \
   handle_error 6 "Failed to synchronize freeciv project"
 

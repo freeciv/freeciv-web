@@ -74,10 +74,6 @@ resin*
 freeciv-web.project
 models.zip
 freeciv-web/src/main/webapp/build.txt
-freeciv-web/src/main/webapp/man
-freeciv-web/src/main/webapp/sounds
-freeciv-web/src/main/webapp/tileset
-freeciv-web/src/main/webapp/images/flags
 */__pycache__/*
 logs/
 tests/screenshot*.png

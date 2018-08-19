@@ -7,7 +7,11 @@ FCW_DEST=/var/lib/tomcat8/webapps/freeciv-web
 rm -rf target/freeciv-web/javascript/webclient.min.js.map
 rm -rf target/freeciv-web/javascript/webgl/libs/webgl-client.min.js.map
 
-mvn compile && cp target/freeciv-web/javascript/webclient.* "${FCW_DEST}"/javascript/ && cp target/freeciv-web/javascript/webgl/libs/webgl-client* "${FCW_DEST}"/javascript/webgl/libs/
+mvn compile && \
+echo "Copying target/javascript/webclient.* to ${FCW_DEST}/javascript" && \
+  cp target/freeciv-web/javascript/webclient.* "${FCW_DEST}"/javascript/ && \
+echo target/freeciv-web/javascript/webgl/libs/webgl-client* "${FCW_DEST}"/javascript/webgl/libs && \
+  cp target/freeciv-web/javascript/webgl/libs/webgl-client* "${FCW_DEST}"/javascript/webgl/libs/
 
 # update timestamp to clear browser cache.
 sed -i.bak -e "s/ts=\"/ts=\"1/" -e "s/\?ts=/\?ts=1/" "${FCW_DEST}"/webclient/index.jsp

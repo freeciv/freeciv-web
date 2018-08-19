@@ -1,21 +1,26 @@
 #!/bin/bash
 # builds Freeciv-web and copies the war file to Tomcat.
 
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null && pwd)"
+
 TOMCATDIR="/var/lib/tomcat8"
-ROOTDIR="$(pwd)/.."
+WEBAPP_DIR="${DIR}/target/freeciv-web"
 
 # Creating build.txt info file
 REVTMP="$(git rev-parse HEAD 2>/dev/null)"
 if test "x$REVTMP" != "x" ; then
   # This is build from git repository.
-  echo "This build is from freeciv-web commit: $REVTMP" > ${ROOTDIR}/freeciv-web/src/main/webapp/build.txt
+  mkdir -p "${WEBAPP_DIR}"
+  echo "This build is from freeciv-web commit: $REVTMP" > "${WEBAPP_DIR}/build.txt"
   if ! test $(git diff | wc -l) -eq 0 ; then
-    echo "It had local modifications." >> ${ROOTDIR}/freeciv-web/src/main/webapp/build.txt
+    echo "It had local modifications." >> "${WEBAPP_DIR}/build.txt"
   fi
-  date >> ${ROOTDIR}/freeciv-web/src/main/webapp/build.txt
+  date >> "${WEBAPP_DIR}/build.txt"
 else
-  rm -f ${ROOTDIR}/freeciv-web/src/main/webapp/build.txt
+  rm -f "${WEBAPP_DIR}/build.txt"
 fi
 
 echo "maven package"
-mvn -B flyway:migrate package && cp target/freeciv-web.war "${TOMCATDIR}/webapps/"
+mvn -B flyway:migrate package && \
+echo "Copying target/freeciv-web.war to ${TOMCATDIR}/webapps" && \
+  cp target/freeciv-web.war "${TOMCATDIR}/webapps/"

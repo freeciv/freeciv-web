@@ -300,7 +300,7 @@ sudo cp -R "${basedir}"/nginx /etc/
 if [ "${FCW_INSTALL_MODE}" = TEST ] && [ ! -f /etc/nginx/ssl/freeciv-web.crt ]; then
   sudo mkdir -p /etc/nginx/ssl/private
   sudo chmod 700 /etc/nginx/ssl/private
-  openssl req -x509 -newkey rsa:2048 -keyout freeciv-web.key -out freeciv-web.crt -days 3650 -nodes -subj '/CN=localhost'
+  openssl req -x509 -newkey rsa:2048 -keyout freeciv-web.key -out freeciv-web.crt -days 3650 -nodes -subj '/CN=localhost' -batch
   sudo mv freeciv-web.crt /etc/nginx/ssl/
   sudo mv freeciv-web.key /etc/nginx/ssl/private/
 fi

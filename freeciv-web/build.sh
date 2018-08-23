@@ -18,4 +18,4 @@ else
 fi
 
 echo "maven package"
-mvn flyway:migrate package && cp target/freeciv-web.war "${TOMCATDIR}/webapps/"
+mvn -B flyway:migrate package && cp target/freeciv-web.war "${TOMCATDIR}/webapps/"

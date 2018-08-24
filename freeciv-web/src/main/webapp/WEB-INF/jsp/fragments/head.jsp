@@ -1,3 +1,16 @@
+<%@ page import="static org.apache.commons.lang3.StringUtils.stripToNull" %>
+<%@ page import="java.util.Properties" %>
+<%@ page import="java.io.IOException" %>
+<%
+    String trackJsToken = null;
+    try {
+        Properties prop = new Properties();
+        prop.load(getServletContext().getResourceAsStream("/WEB-INF/config.properties"));
+        trackJsToken = stripToNull(prop.getProperty("trackjs-token"));
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+%>
 <title>${empty title ? "Freeciv-web - open source turn-based strategy game" : title}</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -26,9 +39,11 @@
 
 	ga('create', 'UA-40584174-1', 'auto');
 	ga('send', 'pageview');  
-</script> 
-<script src="https://d2zah9y47r7bi2.cloudfront.net/releases/current/tracker.js" data-token="ee5dba6fe2e048f79b422157b450947b"></script>
-
+</script>
+<% if (trackJsToken != null) { %>
+<script type="text/javascript">window._trackJs = { token: '<%= trackJsToken %>' };</script>
+<script type="text/javascript" src="https://cdn.trackjs.com/releases/current/tracker.js"></script>
+<% } %>
 <style>
 	/*
 		 _____                   _                        _     

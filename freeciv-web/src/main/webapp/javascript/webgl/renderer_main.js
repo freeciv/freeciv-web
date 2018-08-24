@@ -37,10 +37,9 @@ function init_webgl_renderer()
       dataType: "script"
   });
 
-
   $.ajax({
     async: false,
-    url: (location.host == fcw_host) ? "/javascript/webgl/libs/webgl-client.min.js" : "/javascript/webgl/libs/webgl-client.js",
+    url: "/javascript/webgl/libs/webgl-client" + fcwMinified + ".js",
     dataType: "script"
   });
 

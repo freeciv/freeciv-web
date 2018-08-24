@@ -6,19 +6,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 String googleSigninClientKey = null;
-String fcwHost = null;
 String trackJsToken = null;
+boolean fcwDebug = false;
+String fcwMinified = "";
 try {
   Properties prop = new Properties();
   prop.load(getServletContext().getResourceAsStream("/WEB-INF/config.properties"));
   googleSigninClientKey = stripToEmpty(prop.getProperty("google-signin-client-key"));
   trackJsToken = stripToNull(prop.getProperty("trackjs-token"));
-  fcwHost = prop.getProperty("fcw_host");
+
+  String debugParam = request.getParameter("debug");
+  fcwDebug = (debugParam != null && (debugParam.isEmpty() || parseBoolean(debugParam)));
+  fcwMinified = fcwDebug ? "" : ".min";
 } catch (IOException e) {
   e.printStackTrace();
-}
-if (fcwHost == null || fcwHost.isEmpty()) {
-  fcwHost = request.getServerName();
 }
 %>
 <!DOCTYPE html>
@@ -26,7 +27,7 @@ if (fcwHost == null || fcwHost.isEmpty()) {
 <head>
 <title>Freeciv-web</title>
 <link rel="stylesheet" href="/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="/css/webclient.min.css?ts=${initParam.buildTimeStamp}" />
+<link rel="stylesheet" type="text/css" href="/css/webclient<%= fcwMinified %>.css?ts=${initParam.buildTimeStamp}" />
 <meta name="description" content="Freeciv-Web is a Free and Open Source empire-building strategy game inspired by the history of human civilization.">
 <% if (trackJsToken != null) { %>
 <script type="text/javascript">window._trackJs = { token: '<%= trackJsToken %>' };</script>
@@ -34,17 +35,14 @@ if (fcwHost == null || fcwHost.isEmpty()) {
 <% } %>
 <script type="text/javascript">
 var ts="${initParam.buildTimeStamp}";
-var fcw_host="<%= fcwHost %>";
+var fcwDebug=<%= fcwDebug %>;
+var fcwMinified="<%= fcwMinified %>";
 </script>
 <script type="text/javascript" src="/javascript/libs/jquery.min.js?ts=${initParam.buildTimeStamp}"></script>
 
 <script src="https://apis.google.com/js/platform.js"></script>
 
-<% if (request.getServerName().equals(fcwHost)) { %>
-  <script type="text/javascript" src="/javascript/webclient.min.js?ts=${initParam.buildTimeStamp}"></script>
-<% } else { %>
-  <script type="text/javascript" src="/javascript/webclient.js?ts=${initParam.buildTimeStamp}"></script>
-<% } %>
+<script type="text/javascript" src="/javascript/webclient<%= fcwMinified %>.js?ts=${initParam.buildTimeStamp}"></script>
 
 <script type="text/javascript" src="/music/audio.min.js"></script>
 

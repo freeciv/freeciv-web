@@ -28,6 +28,8 @@ import java.sql.*;
 import javax.sql.*;
 import javax.naming.*;
 
+import org.freeciv.services.Validation;
+
 
 /**
  * Deactivate a user account.
@@ -37,13 +39,15 @@ import javax.naming.*;
 public class DeactivateUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	private final Validation validation = new Validation();
+
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 
 		String username = request.getParameter("username");
 		String secure_password = java.net.URLDecoder.decode(request.getParameter("sha_password"), "UTF-8");
 
-		if (username == null || username.length() <= 2) {
+		if (!validation.isValidUsername(username)) {
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST,
 					"Invalid username. Please try again with another username.");
 			return;

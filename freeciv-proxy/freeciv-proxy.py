@@ -190,7 +190,7 @@ class WSHandler(websocket.WebSocketHandler):
 def validate_username(name):
     if (name is None
             or len(name) <= 2 or len(name) >= 32
-            or name == "pbem"
+            or name.lower() == "pbem"
             or re.search('[^a-zA-Z]', name) is not None):
         return False
     else:

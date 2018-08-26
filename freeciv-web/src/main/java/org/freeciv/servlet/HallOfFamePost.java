@@ -16,13 +16,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.regex.Pattern;
 
+import org.freeciv.services.Validation;
+
+
 /**
  * Submit game results to Hall of Fame.
  *
- * URL: /deactivate_user
+ * URL: /hall_of_fame_post
  */
 public class HallOfFamePost extends HttpServlet {
 
+    private final Validation validation = new Validation();
     private String PATTERN_VALIDATE_ALPHA_NUMERIC = "[0-9a-zA-Z \\.]*";
     private Pattern p = Pattern.compile(PATTERN_VALIDATE_ALPHA_NUMERIC);
     private static final String mapSrcImgPaths = "/var/lib/tomcat8/webapps/data/savegames/";
@@ -41,13 +45,13 @@ public class HallOfFamePost extends HttpServlet {
             ipAddress = request.getRemoteAddr();
         }
 
-        if (username == null || username.length() <= 2) {
+        if (!validation.isValidUsername(username)) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST,
                     "Invalid username. Please try again with another username.");
             return;
         }
 
-        if (!p.matcher(username).matches() || !p.matcher(score).matches() || !p.matcher(turn).matches()) {
+        if (!p.matcher(score).matches() || !p.matcher(turn).matches()) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST,
                     "Invalid data submitted. ");
             return;

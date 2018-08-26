@@ -30,6 +30,11 @@ var anaglyph_3d_enabled = false;
 ****************************************************************************/
 function init_webgl_renderer()
 {
+  if (!Detector.webgl) {
+    swal("3D WebGL not supported by your browser or you don't have a 3D graphics card. Please go back and try the 2D version instead. ");
+    return;
+  }
+
   // load Three.js dynamically.
   $.ajax({
       async: false,
@@ -42,11 +47,6 @@ function init_webgl_renderer()
     url: "/javascript/webgl/libs/webgl-client" + fcwMinified + ".js",
     dataType: "script"
   });
-
-  if (!Detector.webgl) {
-    swal("3D WebGL not supported by your browser or you don't have a 3D graphics card. Please go back and try the 2D version instead. ");
-    return;
-  }
 
   /* Loads the two tileset definition files */
   $.ajax({

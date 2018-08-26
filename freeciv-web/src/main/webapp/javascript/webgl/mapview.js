@@ -105,7 +105,7 @@ function webgl_start_renderer()
     anaglyph_effect.setSize( new_mapview_width, new_mapview_height );
   }
 
-  if (location.host != fcw_host && Detector.webgl) {
+  if (fcwDebug && Detector.webgl) {
     stats = new Stats();
     container.appendChild( stats.dom );
     console.log("MAX_FRAGMENT_UNIFORM_VECTORS:" + maprenderer.context.getParameter(maprenderer.context.MAX_FRAGMENT_UNIFORM_VECTORS));

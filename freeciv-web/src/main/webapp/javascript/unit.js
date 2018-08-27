@@ -454,8 +454,8 @@ function get_what_can_unit_pillage_from(punit, ptile)
   var cannot_pillage = new BitVector([]);
 
   /* Get what other units are pillaging on the tile */
-  for (unit in ptile.units) {
-    if (unit.activity == ACTIVITY_PILLAGE) {
+  for (const unit in Object.keys(ptile.units)) {
+    if (unit.activity === ACTIVITY_PILLAGE) {
       cannot_pillage.set(unit.activity_tgt);
     }
   }

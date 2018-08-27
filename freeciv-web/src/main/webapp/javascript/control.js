@@ -1911,9 +1911,9 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift, the_event)
     case 107:
       //zoom in
       if (renderer == RENDERER_WEBGL) {
-        new_camera_dy = camera_dy - 60;
-        new_camera_dx = camera_dx - 45;
-        new_camera_dz = camera_dz - 45;
+        let new_camera_dy = camera_dy - 60;
+        let new_camera_dx = camera_dx - 45;
+        let new_camera_dz = camera_dz - 45;
         if (new_camera_dy < 350 || new_camera_dy > 1200) {
           return;
         } else {
@@ -1928,9 +1928,9 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift, the_event)
     case 109:
       //zoom out
       if (renderer == RENDERER_WEBGL) {
-        new_camera_dy = camera_dy + 60;
-        new_camera_dx = camera_dx + 45;
-        new_camera_dz = camera_dz + 45;
+        let new_camera_dy = camera_dy + 60;
+        let new_camera_dx = camera_dx + 45;
+        let new_camera_dz = camera_dz + 45;
         if (new_camera_dy < 350 || new_camera_dy > 1200) {
           return;
         } else {
@@ -2210,7 +2210,7 @@ function key_unit_load()
 
     var has_transport_unit = false;
     var units_on_tile = tile_units(ptile);
-    for (r = 0; r < units_on_tile.length; r++) {
+    for (let r = 0; r < units_on_tile.length; r++) {
       var tunit = units_on_tile[r];
       if (tunit['id'] == punit['id']) continue;
       var ntype = unit_type(tunit);

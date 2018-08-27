@@ -208,7 +208,7 @@ function handle_chat_msg(packet)
   if (event == null || event < 0 || event >= E_UNDEFINED) {
     console.log('Undefined message event type');
     console.log(packet);
-    packet['event'] = event = E_UNDEFINED;
+    packet['event'] = E_UNDEFINED;
   }
 
   if (connections[conn_id] != null) {

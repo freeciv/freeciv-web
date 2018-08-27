@@ -75,7 +75,7 @@ function mapview_mouse_click(e)
     map_select_active = false;
     map_select_check = false;
 
-  } else if (!rightclick && !middleclick) {
+  } else if (!middleclick) {
     /* Left mouse button*/
     action_button_pressed(mouse_x, mouse_y, SELECT_POPUP);
     mapview_mouse_movement = false;

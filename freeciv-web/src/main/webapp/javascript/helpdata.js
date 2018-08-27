@@ -209,7 +209,7 @@ function wiki_on_item_button(item_name)
   }
 
   return ("<button class='help_button' onclick=\"show_wikipedia_dialog('"
-          + item_name.replace(/\'/g, "\\'") + "');\">Wikipedia on "
+          + item_name.replace(/'/g, "\\'") + "');\">Wikipedia on "
           + item_name +  "</button>");
 }
 

@@ -290,11 +290,10 @@ setfacl -Rm d:u:tomcat8:rwX webapps/data
 
 echo "==== Building freeciv ===="
 echo "Please be patient"
-# Fix line endings on Windows
-sed -i 's/\r$//' "${basedir}"/freeciv/freeciv-web.project
-
-cd "${basedir}"/freeciv && ./prepare_freeciv.sh
-cd freeciv && make install
+cd "${basedir}"/freeciv && \
+  ./prepare_freeciv.sh  && \
+  cd freeciv && make install || \
+  handle_error 5 "Failed to install freeciv"
 
 echo "==== Building freeciv-web ===="
 if [ ! -f "${basedir}"/publite2/settings.ini ]; then

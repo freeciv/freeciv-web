@@ -143,7 +143,6 @@ function init_tech_screen()
   var max_width = 0;
   var max_height = 0;
   for (var tech_id in techs) {
-    var ptech = techs[tech_id];
     if (!(tech_id+'' in reqtree) || reqtree[tech_id+''] == null) {
       continue;
     }
@@ -604,7 +603,6 @@ function show_tech_gained_dialog(tech_gained_id)
 
   $("#tech_tab_item").css("color", "#aa0000");
   var pplayer = client.conn.playing;
-  var pnation = nations[pplayer['nation']];
   var tech = techs[tech_gained_id];
   if (tech == null) return;
 

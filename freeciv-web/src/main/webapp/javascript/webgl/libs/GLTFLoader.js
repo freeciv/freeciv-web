@@ -2113,7 +2113,6 @@ THREE.GLTFLoader = ( function () {
 	GLTFParser.prototype.loadMaterial = function ( materialIndex ) {
 
 		var parser = this;
-		var json = this.json;
 		var extensions = this.extensions;
 		var materialDef = json.materials[ materialIndex ];
 
@@ -2487,7 +2486,6 @@ THREE.GLTFLoader = ( function () {
 	GLTFParser.prototype.loadMesh = function ( meshIndex ) {
 
 		var scope = this;
-		var json = this.json;
 		var extensions = this.extensions;
 
 		var meshDef = json.meshes[ meshIndex ];
@@ -2931,7 +2929,6 @@ THREE.GLTFLoader = ( function () {
 	 */
 	GLTFParser.prototype.loadNode = function ( nodeIndex ) {
 
-		var json = this.json;
 		var extensions = this.extensions;
 
 		var meshReferences = json.meshReferences;

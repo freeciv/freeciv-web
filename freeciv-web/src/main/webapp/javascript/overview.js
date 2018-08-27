@@ -129,7 +129,6 @@ function redraw_overview()
     overview_hash = hash;
     render_viewrect();
   }
-
 }
 
 
@@ -138,7 +137,7 @@ function redraw_overview()
 ****************************************************************************/
 function generate_overview_grid(cols, rows) {
   // Loop variables
-  var row, col;
+  var row;
 
   if (cols & 1) cols -= 1;  //Bugfix, the overview map doesn't support map size which is odd.
   if (rows & 1) rows -= 1;
@@ -165,7 +164,6 @@ function generate_overview_grid(cols, rows) {
 function generate_overview_hash(cols, rows) {
 
   var hash = 0;
-  var row, col;
 
   for (var x = 0; x < rows ; x++) {
     for (var y = 0; y < cols; y++) {

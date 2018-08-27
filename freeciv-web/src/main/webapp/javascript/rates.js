@@ -36,7 +36,6 @@ var current_government;
 **************************************************************************/
 function show_tax_rates_dialog()
 {
-
   var id = "#rates_dialog";
   $(id).remove();
   $("<div id='rates_dialog'></div>").appendTo("div#game_page");
@@ -75,7 +74,6 @@ function show_tax_rates_dialog()
   });
 
   update_rates_dialog();
-
 }
 
 /**************************************************************************
@@ -83,7 +81,6 @@ function show_tax_rates_dialog()
 **************************************************************************/
 function update_rates_dialog()
 {
-
   if (client_is_observer()) return;
 
   maxrate = government_max_rate(client.conn.playing['government']);
@@ -166,7 +163,6 @@ function create_rates_dialog(tax, lux, sci, max)
   maxrate = max ;
 
   update_rates_labels();
-
 }
 
 /**************************************************************************
@@ -175,7 +171,6 @@ function create_rates_dialog(tax, lux, sci, max)
 function
 update_rates_labels ()
 {
-
   tax = s_tax.getValue();
   lux = s_lux.getValue();
   sci = s_sci.getValue();
@@ -183,8 +178,6 @@ update_rates_labels ()
   $("#tax_result").html(tax + "%");
   $("#lux_result").html(lux + "%");
   $("#sci_result").html(sci + "%");
-
-
 }
 
 /**************************************************************************
@@ -199,7 +192,6 @@ function update_tax_rates ()
   if (s_lux.getValue() % 10 != 0) s_lux.setValue(s_lux.getValue() - (s_lux.getValue() % 10));
   if (s_sci.getValue() % 10 != 0) s_sci.setValue(s_sci.getValue() - (s_sci.getValue() % 10));
 
-  var lock_tax = document.rates.lock[0].checked;
   var lock_lux = document.rates.lock[1].checked;
   var lock_sci = document.rates.lock[2].checked;
 
@@ -225,9 +217,7 @@ function update_tax_rates ()
   s_sci.setValue(sci);
 
   $("#tax_result").html(tax + "%");
-
   $("#lux_result").html(lux + "%");
-
   $("#sci_result").html(sci + "%");
 
   freeze = false;
@@ -247,7 +237,6 @@ function update_lux_rates ()
   if (s_sci.getValue() % 10 != 0) s_sci.setValue(s_sci.getValue() - (s_sci.getValue() % 10));
 
   var lock_tax = document.rates.lock[0].checked;
-  var lock_lux = document.rates.lock[1].checked;
   var lock_sci = document.rates.lock[2].checked;
 
   tax = s_tax.getValue();
@@ -278,7 +267,6 @@ function update_lux_rates ()
 
   freeze = false;
   submit_player_rates();
-
 }
 
 /**************************************************************************
@@ -295,7 +283,6 @@ function update_sci_rates ()
 
   var lock_tax = document.rates.lock[0].checked;
   var lock_lux = document.rates.lock[1].checked;
-  var lock_sci = document.rates.lock[2].checked;
 
   tax = s_tax.getValue();
   lux = s_lux.getValue();
@@ -324,7 +311,6 @@ function update_sci_rates ()
 
   freeze = false;
   submit_player_rates();
-
 }
 
 /**************************************************************************

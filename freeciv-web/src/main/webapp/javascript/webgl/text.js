@@ -223,7 +223,6 @@ function update_city_label(pcity)
 
   var texture = texture_cache['city_' + pcity['id']];
   texture.needsUpdate = true;
-
 }
 
 /****************************************************************************
@@ -298,7 +297,6 @@ function create_map_tile_label(ptile)
 function get_unit_activity_text(punit)
 {
   var activity = punit['activity'];
-  var act_tgt  = punit['activity_tgt'];
 
   /* don't draw activity for enemy units */
   if (client.conn.playing == null || punit['owner'] != client.conn.playing.playerno) {

@@ -66,7 +66,6 @@ function webgl_preload()
   var loadingManager = new THREE.LoadingManager();
   loadingManager.onLoad = function () {
     webgl_preload_models();
-
   };
 
   var textureLoader = new THREE.ImageLoader( loadingManager );
@@ -197,7 +196,6 @@ function webgl_preload()
             }
     })(imgurl)
   );
-
 }
 
 /****************************************************************************
@@ -209,7 +207,6 @@ function webgl_preload_models()
   for (var i = 0; i < model_filenames.length; i++) {
     load_model(model_filenames[i]);
   }
-
 }
 
 /****************************************************************************
@@ -241,7 +238,6 @@ function load_model(filename)
     if (load_count == total_model_count) webgl_preload_complete();
 
    });
-
 }
 
 /****************************************************************************
@@ -254,7 +250,6 @@ function webgl_get_model(filename)
   } else {
     return null;
   }
-
 }
 
 /****************************************************************************
@@ -279,7 +274,6 @@ function get_flag_shield_mesh(key)
 
   meshes[key] = canvas_to_user_facing_mesh(fcanvas, 32, 12, 13, true);
   return meshes[key].clone();
-
 }
 
 /****************************************************************************
@@ -303,7 +297,6 @@ function get_extra_mesh(key)
 
   meshes[key] = canvas_to_user_facing_mesh(ecanvas, 64, 26, 16, true);
   return meshes[key].clone();
-
 }
 
 /****************************************************************************
@@ -328,7 +321,6 @@ function get_unit_explosion_mesh(frame)
 
   meshes[key] = canvas_to_user_facing_mesh(ecanvas, 32, 32, 32, true);
   return meshes[key].clone();
-
 }
 
 /****************************************************************************
@@ -353,7 +345,6 @@ function get_nuke_explosion_mesh(frame)
 
   meshes[key] = canvas_to_user_facing_mesh(ecanvas, 180, 180, 176, true);
   return meshes[key].clone();
-
 }
 
 /****************************************************************************
@@ -370,7 +361,6 @@ function get_unit_health_mesh(punit)
 
   if (meshes[key] != null) return meshes[key].clone();
 
-  var flagGeometry = new THREE.PlaneBufferGeometry( 14, 10 );
   var fcanvas = document.createElement("canvas");
   fcanvas.width = 32;
   fcanvas.height = 16;
@@ -381,5 +371,4 @@ function get_unit_health_mesh(punit)
 
   meshes[key] = canvas_to_user_facing_mesh(fcanvas, 32, 18, 3, true);
   return meshes[key].clone();
-
 }

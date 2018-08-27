@@ -1184,8 +1184,6 @@ function show_longturn_intro_dialog() {
   $("#dialog").remove();
   $("<div id='dialog'></div>").appendTo("div#game_page");
 
-  var intro_html = message
-
   $("#dialog").html(message);
   var stored_username = simpleStorage.get("username", "");
   if (stored_username != null && stored_username != false) {
@@ -1242,7 +1240,6 @@ function show_longturn_intro_dialog() {
 function validate_username_callback()
 {
   var check_username = $("#username_req").val();
-  var result = false;
   $.ajax({
    type: 'POST',
    url: "/validate_user?userstring=" + check_username,

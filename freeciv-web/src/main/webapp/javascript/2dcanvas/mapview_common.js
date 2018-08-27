@@ -41,7 +41,6 @@ function mapdeco_init()
   init_game_unit_panel();
   init_chatbox();
   keyboard_input=true;
-
 }
 
 /**************************************************************************
@@ -57,7 +56,6 @@ function center_tile_mapcanvas_2d(ptile)
   gui_y -= (mapview['height'] - tileset_tile_height) >> 1;
 
   set_mapview_origin(gui_x, gui_y);
-
 }
 
 /**************************************************************************
@@ -97,7 +95,6 @@ function map_to_gui_vector(map_dx, map_dy)
     var gui_dx = ((map_dx - map_dy) * tileset_tile_width) >> 1;
     var gui_dy = ((map_dx + map_dy) * tileset_tile_height) >> 1;
     return {'gui_dx' : gui_dx, 'gui_dy' : gui_dy};
-
 }
 
 /****************************************************************************
@@ -105,15 +102,12 @@ function map_to_gui_vector(map_dx, map_dy)
 ****************************************************************************/
 function set_mapview_origin(gui_x0, gui_y0)
 {
-  var xmin, xmax, ymin, ymax, xsize, ysize;
-
   /* Normalize (wrap) the mapview origin. */
   var r = normalize_gui_pos(gui_x0, gui_y0);
   gui_x0 = r['gui_x'];
   gui_y0 = r['gui_y'];
 
   base_set_mapview_origin(gui_x0, gui_y0);
-
 }
 
 /****************************************************************************
@@ -133,7 +127,6 @@ function base_set_mapview_origin(gui_x0, gui_y0)
 
   mapview['gui_x0'] = gui_x0;
   mapview['gui_y0'] = gui_y0;
-
 }
 
 /****************************************************************************
@@ -238,8 +231,6 @@ function gui_to_map_pos(gui_x, gui_y)
     var map_y = DIVIDE(gui_y * W - gui_x * H, W * H);
 
     return {'map_x' : map_x, 'map_y' : map_y};
-
-
 }
 
 
@@ -275,7 +266,6 @@ function map_to_gui_pos(map_x, map_y)
 function update_map_canvas(canvas_x, canvas_y, width, height)
 {
   var gui_x0, gui_y0;
-  var full = true;
 
   gui_x0 = mapview['gui_x0'] + canvas_x;
   gui_y0 = mapview['gui_y0'] + canvas_y;
@@ -392,7 +382,6 @@ function update_map_canvas(canvas_x, canvas_y, width, height)
     canvas_put_select_rectangle(mapview_canvas_ctx, map_select_x, map_select_y, 
                                 mouse_x - map_select_x, mouse_y - map_select_y);
   }
-
 }
 
 
@@ -416,15 +405,12 @@ function put_one_tile(pcanvas, layer, ptile, canvas_x, canvas_y, citymode)
 function put_one_element(pcanvas, layer, ptile, pedge, pcorner, punit,
                          pcity, canvas_x, canvas_y, citymode)
 {
-
   var tile_sprs = fill_sprite_array(layer, ptile, pedge, pcorner, punit, pcity, citymode);
 
   var fog = (ptile != null && draw_fog_of_war
 	      && TILE_KNOWN_UNSEEN == tile_get_known(ptile));
 
   put_drawn_sprites(pcanvas, canvas_x, canvas_y, tile_sprs, fog);
-
-
 }
 
 
@@ -528,7 +514,6 @@ function update_map_canvas_check()
       throw e;
     }
   }
-
 }
 
 /**************************************************************************
@@ -569,5 +554,4 @@ function update_map_slide()
   mapview_canvas_ctx.drawImage(buffer_canvas, sx, sy,
       mapview['width'], mapview['height'],
       0,0, mapview['width'], mapview['height']);
-
 }

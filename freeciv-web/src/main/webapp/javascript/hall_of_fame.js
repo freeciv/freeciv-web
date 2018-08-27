@@ -30,7 +30,6 @@ function submit_game_to_hall_of_fame()
   submitted_to_hof = true;
 
   var pplayer = client.conn.playing;
-  var pnation = nations[pplayer['nation']];
 
   if (game_info['turn'] < 30 || get_score_text(pplayer) == 0) {
     return;
@@ -47,7 +46,5 @@ function submit_game_to_hall_of_fame()
    }).fail(function() {
     swal("Unable to sumit game to Hall of Fame. Please try again later!");
     $.unblockUI();
-
   })
-
 }

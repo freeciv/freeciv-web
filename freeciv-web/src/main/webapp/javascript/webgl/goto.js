@@ -26,14 +26,10 @@ function webgl_render_goto_line(start_tile, goto_packet_dir)
 {
   clear_goto_tiles();
   var ptile = start_tile;
-  var startpos = map_to_scene_coords(ptile['x'], ptile['y']);
 
   var material = new THREE.MeshBasicMaterial( { color: 0x055dff, side:THREE.DoubleSide} );
   var goto_width = 3;
 
-  var dx = 0;
-  var dy = 0;
-  var dh = 0;
   for (var i = 0; i < goto_packet_dir.length; i++) {
     if (ptile == null) break;
     var dir = goto_packet_dir[i];
@@ -74,11 +70,8 @@ function webgl_render_goto_line(start_tile, goto_packet_dir)
       gotoline.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), currpos['y'] + 10);
       scene.add(gotoline);
       goto_lines.push(gotoline);
-
     }
 
     ptile = mapstep(ptile, dir);
   }
-
-
 }

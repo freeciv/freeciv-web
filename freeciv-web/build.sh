@@ -1,6 +1,15 @@
 #!/bin/bash
 # builds Freeciv-web and copies the war file to Tomcat.
 
+BATCH_MODE=""
+
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    -B) BATCH_MODE="-B"; shift;;
+    *) echo "Unrecognized argument: $1"; shift;;
+  esac
+done
+
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null && pwd)"
 
 TOMCATDIR="/var/lib/tomcat8"
@@ -21,6 +30,6 @@ else
 fi
 
 echo "maven package"
-mvn -B flyway:migrate package && \
+mvn ${BATCH_MODE} flyway:migrate package && \
 echo "Copying target/freeciv-web.war to ${TOMCATDIR}/webapps" && \
   cp target/freeciv-web.war "${TOMCATDIR}/webapps/"

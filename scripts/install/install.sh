@@ -312,7 +312,7 @@ mkdir -p "${basedir}/freeciv-web/src/derived/webapp" && \
   handle_error 6 "Failed to synchronize freeciv project"
 
 cd "${basedir}"/freeciv-web && \
-  ./build.sh || \
+  ./build.sh -B || \
   handle_error 7 "Failed to build freeciv-web server"
 
 echo "==== Setting up nginx ===="

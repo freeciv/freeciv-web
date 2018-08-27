@@ -1426,26 +1426,15 @@ function create_new_freeciv_user_account_request(action_type)
   var email = $("#email").val().trim();
   var captcha = $("#g-recaptcha-response").val();
 
-  var cleaned_username = username.replace(/[^a-zA-Z]/g,'');
-
   $("#username_validation_result").show();
+  if (!is_username_valid_show(username)) {
+    return false;
+  }
   if (!validateEmail(email)) {
     $("#username_validation_result").html("Invalid email address.");
     return false;
-  } else if (username == null || username.length == 0 || username == "pbem") {
-    $("#username_validation_result").html("Your name can't be empty.");
-    return false;
-  } else if (username.length <= 2 ) {
-    $("#username_validation_result").html("Your name is too short.");
-    return false;
   } else if (password == null || password.length <= 2 ) {
     $("#username_validation_result").html("Your password is too short.");
-    return false;
-  } else if (username.length >= 32) {
-    $("#username_validation_result").html("Your name is too long.");
-    return false;
-  } else if (username != cleaned_username) {
-    $("#username_validation_result").html("Your name contains invalid characters, only the English alphabet is allowed.");
     return false;
   } else if (password != confirm_password) {
     $("#username_validation_result").html("The passwords do not match.");

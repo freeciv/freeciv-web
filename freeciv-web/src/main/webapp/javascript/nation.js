@@ -232,7 +232,7 @@ function select_a_nation()
                               && pplayer['is_alive']
                               && client.conn.playing['is_alive'];
 
-  if (pplayer != null && pplayer['is_alive'] && (client_is_observer()
+  if (pplayer['is_alive'] && (client_is_observer()
       || selected_myself
       || (diplstates[player_id] != null && diplstates[player_id] != DS_NO_CONTACT)
       || client_state() == C_S_OVER)) {

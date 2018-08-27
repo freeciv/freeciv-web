@@ -44,7 +44,7 @@ function webgl_render_goto_line(start_tile, goto_packet_dir)
     }
 
     var nexttile = mapstep(ptile, dir);
-    if (ptile != null && nexttile != null) {
+    if (nexttile != null) {
       var currpos = map_to_scene_coords(ptile['x'], ptile['y']);
       var nextpos = map_to_scene_coords(nexttile['x'], nexttile['y']);
       var height = 5 + ptile['height'] * 100;

@@ -1453,7 +1453,7 @@ function create_new_freeciv_user_account_request(action_type)
   } else if (password != confirm_password) {
     $("#username_validation_result").html("The passwords do not match.");
     return false;
-  } else if (captcha == null || captcha === undefined ) {
+  } else if (captcha == null) {
     $("#username_validation_result").html("Please fill in the captcha. You might have to disable some plugins to see the captcha.");
     return false;
   }

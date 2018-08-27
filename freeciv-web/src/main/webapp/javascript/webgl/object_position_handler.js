@@ -98,7 +98,7 @@ function update_unit_position(ptile) {
     new_unit.rotateOnAxis(new THREE.Vector3(0,1,0).normalize(), (convert_unit_rotation(rnd_rotation) * Math.PI * 2 / 8));
     new_unit.updateMatrix();
 
-    if (scene != null && new_unit != null) {
+    if (scene != null) {
       scene.add(new_unit);
     }
     /* add flag. */
@@ -296,7 +296,7 @@ function update_city_position(ptile) {
     new_city.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
     new_city.rotateOnAxis(new THREE.Vector3(0,1,0).normalize(), (2 * Math.PI * Math.random()));
 
-    if (scene != null && new_city != null) {
+    if (scene != null) {
       scene.add(new_city);
     }
 
@@ -340,7 +340,7 @@ function update_city_position(ptile) {
       new_city.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
       new_city.rotateOnAxis(new THREE.Vector3(0,1,0).normalize(), (2 * Math.PI * Math.random()));
 
-      if (scene != null && new_city != null) {
+      if (scene != null) {
         scene.add(new_city);
       }
 
@@ -519,7 +519,7 @@ function update_tile_extra_update_model(extra_type, extra_name, ptile)
     model.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10);
     model.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 3);
     model.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
-    if (scene != null && model != null) scene.add(model);
+    if (scene != null) scene.add(model);
 
   } else if (scene != null && tile_extra_positions[extra_type + "." + ptile['index']] != null && !tile_has_extra(ptile, extra_type)) {
     scene.remove(tile_extra_positions[extra_type + "." + ptile['index']]);

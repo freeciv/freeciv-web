@@ -1040,14 +1040,16 @@ function update_unit_order_commands()
       $("#order_paradrop").hide();
     }
 
-    if (!client_is_observer() && client.conn.playing != null && get_what_can_unit_pillage_from(punit, ptile).length > 0 && (pcity == null || pcity != null && city_owner_player_id(pcity) != client.conn.playing.playerno)) {
+    if (!client_is_observer() && client.conn.playing != null
+        && get_what_can_unit_pillage_from(punit, ptile).length > 0
+        && (pcity == null || city_owner_player_id(pcity) !== client.conn.playing.playerno)) {
       $("#order_pillage").show();
       unit_actions["pillage"] = {name: "Pillage (Shift-P)"};
     } else {
       $("#order_pillage").hide();
     }
 
-    if (pcity == null || punit['homecity'] == 0 || (pcity != null && punit['homecity'] == pcity['id'])) {
+    if (pcity == null || punit['homecity'] === 0 || punit['homecity'] === pcity['id']) {
       $("#order_change_homecity").hide();
     } else if (pcity != null && punit['homecity'] != pcity['id']) {
       $("#order_change_homecity").show();
@@ -1564,7 +1566,7 @@ function do_map_click(ptile, qtype, first_time_called)
       GOTO from the context menu or clicks the goto icon. Then the goto path
       has to be requested first, and then do_map_click will be called again
       to issue the unit order based on the goto path. */
-      if (ptile != null && current_focus.length > 0) {
+      if (current_focus.length > 0) {
         request_goto_path(current_focus[0]['id'], ptile['x'], ptile['y']);
         if (first_time_called) {
           setTimeout(function(){
@@ -1572,7 +1574,6 @@ function do_map_click(ptile, qtype, first_time_called)
           }, 250);
         }
         return;
-
       }
     }
 

@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
 
 public class Validation {
 
-	private static final Pattern usernameInvalidPattern = Pattern.compile("[^a-z]");
+	private static final Pattern usernamePattern = Pattern.compile("[a-z][a-z0-9]*");
 
 	public boolean isValidUsername(String name) {
 
@@ -29,7 +29,7 @@ public class Validation {
 			return false;
 		}
 		name = name.toLowerCase();
-		if (usernameInvalidPattern.matcher(name).find()) {
+		if (!usernamePattern.matcher(name).matches()) {
 			return false;
 		}
 		if (name.equals("pbem")) {

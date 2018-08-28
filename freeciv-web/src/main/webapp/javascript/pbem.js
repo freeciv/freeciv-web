@@ -31,7 +31,7 @@ function show_pbem_dialog()
   var message = "";
 
   if ($.getUrlVar('invited_by') != null) {
-    var invited = $.getUrlVar('invited_by').replace(/[^a-zA-Z]/g,'');
+    var invited = $.getUrlVar('invited_by').replace(/[^a-zA-Z0-9]/g,'');
     message = "You have been invited by " + invited + " for a Play-by-Email game of Freeciv-web. "
     + "You and " + invited + " will play alternating turns, and you will get an e-mail every time "
     + "it is your turn to play. First you can create a new user or log-in, then you will play "

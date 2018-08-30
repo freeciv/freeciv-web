@@ -24,6 +24,8 @@ FCW_INSTALL_REL=
 SHOW_LIST=0
 basedir=
 
+TOMCAT_HOME=/var/lib/tomcat8
+
 show_help () {
   cat << EOF
 ${0##*/} [options]
@@ -41,6 +43,18 @@ Installs a freeciv-web server.
 Send your pull requests, bug reports and feature requests to
 https://github.com/freeciv/freeciv-web
 EOF
+}
+
+handle_error () {
+  local status=${1:-1}
+  local msg=${2:-Unknown Error}
+  local stars=$(printf '%*s' ${#msg} '')
+  >&2 echo
+  >&2 echo "${stars// /*}"
+  >&2 echo "${msg}"
+  >&2 echo "${stars// /*}"
+  >&2 echo
+  exit $status
 }
 
 while :; do
@@ -219,6 +233,7 @@ fi
 . "${basedir}/scripts/configuration.sh"
 . "${basedir}/scripts/install/ext-install.sh"
 . "${basedir}/scripts/install/${FCW_INSTALL_SCRIPT}"
+echo "System specific install complete (${basedir}/scripts/install/${FCW_INSTALL_SCRIPT})"
 
 if which service > /dev/null; then
   svcman=default
@@ -267,21 +282,20 @@ GRANT ALL ON ${DB_NAME}.* TO '${DB_USER}'@'localhost',
                              '${DB_USER}'@'::1';
 EOF
 
-echo "==== Building freeciv ===="
-echo "Please be patient"
-# Fix line endings on Windows
-sed -i 's/\r$//' "${basedir}"/freeciv/freeciv-web.project
-
-cd "${basedir}"/freeciv && ./prepare_freeciv.sh
-cd freeciv && make install
-
-echo "==== Building freeciv-web ===="
-cd "${basedir}"/scripts/freeciv-img-extract/ && ./setup_links.sh && ./sync.sh
-cd /var/lib/tomcat8
+echo "==== Preparing Tomcat ===="
+cd "${TOMCAT_HOME}"
 sudo setfacl -m d:u:$(id -u):rwX,u:$(id -u):rwx webapps
 mkdir -p webapps/data/{savegames/pbem,scorelogs,ranklogs}
 setfacl -Rm d:u:tomcat8:rwX webapps/data
 
+echo "==== Building freeciv ===="
+echo "Please be patient"
+cd "${basedir}"/freeciv && \
+  ./prepare_freeciv.sh  && \
+  cd freeciv && make install || \
+  handle_error 5 "Failed to install freeciv"
+
+echo "==== Building freeciv-web ===="
 if [ ! -f "${basedir}"/publite2/settings.ini ]; then
   cp "${basedir}"/publite2/settings.ini{.dist,}
 fi
@@ -290,8 +304,16 @@ cd "${basedir}"/scripts/migration
 mig_scripts=([0-9]*)
 echo "${mig_scripts[-1]}" > checkpoint
 
-cd "${basedir}"/scripts && ./sync-js-hand.sh
-cd "${basedir}"/freeciv-web && ./build.sh
+mkdir -p "${basedir}/freeciv-web/src/derived/webapp" && \
+"${basedir}"/scripts/sync-js-hand.sh \
+  -f "${basedir}/freeciv/freeciv" \
+  -o "${basedir}/freeciv-web/src/derived/webapp" \
+  -d "${TOMCAT_HOME}/webapps/data" || \
+  handle_error 6 "Failed to synchronize freeciv project"
+
+cd "${basedir}"/freeciv-web && \
+  ./build.sh -B || \
+  handle_error 7 "Failed to build freeciv-web server"
 
 echo "==== Setting up nginx ===="
 stop_svc nginx

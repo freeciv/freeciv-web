@@ -1,9 +1,11 @@
-#!/bin/sh
+#!/bin/bash
 
-if test "x$(dirname $0)" != "x." ; then
-  echo "Currently this script must be run on its own directory" >&2
-  exit 1
-fi
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null && pwd)"
+
+cd "${DIR}"
+
+# Fix line endings on Windows
+sed -i 's/\r$//' freeciv-web.project
 
 . ./version.txt
 

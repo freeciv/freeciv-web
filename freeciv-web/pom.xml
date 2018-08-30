@@ -13,6 +13,8 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<timestamp>${maven.build.timestamp}</timestamp>
+		<derived-webapp.dir>${basedir}/src/derived/webapp</derived-webapp.dir>
+		<generated-js.dir>${project.build.directory}/generated-sources/javascript</generated-js.dir>
 	</properties>
 
 	<repositories>
@@ -123,6 +125,36 @@
 		<!-- <pluginManagement> -->
 			<plugins>
 				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-enforcer-plugin</artifactId>
+					<version>3.0.0-M2</version>
+					<executions>
+						<execution>
+							<id>enforce-files-exist</id>
+							<goals>
+								<goal>enforce</goal>
+							</goals>
+							<configuration>
+								<rules>
+									<requireFilesExist>
+										<files>
+											<file>${derived-webapp.dir}</file>
+										</files>
+										<message>
+Files derived from the original freeciv project not found as expected.
+
+Rerun the sync-js-hand.js script.
+
+										</message>
+									</requireFilesExist>
+								</rules>
+								<fail>true</fail>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+
+				<plugin>
 					<groupId>org.flywaydb</groupId>
 					<artifactId>flyway-maven-plugin</artifactId>
 					<version>4.0.3</version>
@@ -180,20 +212,68 @@
 				</plugin>
 
 				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>2.6</version>
+					<executions>
+						<execution>
+							<id>copy-generated-webapp-resources</id>
+							<phase>generate-sources</phase>
+							<goals>
+								<goal>copy-resources</goal>
+							</goals>
+							<configuration>
+								<outputDirectory>${project.build.directory}/${project.build.finalName}</outputDirectory>
+								<resources>
+									<resource>
+										<directory>${derived-webapp.dir}</directory>
+										<excludes>
+											<exclude>.gitignore</exclude>
+											<exclude>README.md</exclude>
+											<exclude>javascript/*.js</exclude>
+											<!-- NOT excluding `javascript/2dcavas/*` -->
+										</excludes>
+									</resource>
+								</resources>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-antrun-plugin</artifactId>
+					<version>1.8</version>
+					<executions>
+						<execution>
+							<id>create-generated-javascript-dir</id>
+							<phase>generate-sources</phase>
+							<goals>
+								<goal>run</goal>
+							</goals>
+							<configuration>
+								<target>
+									<mkdir dir="${generated-js.dir}"/>
+								</target>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>exec-maven-plugin</artifactId>
 					<version>1.6.0</version>
 					<executions>
 						<execution>
 							<id>Precompile Handlebars templates</id>
+							<phase>generate-sources</phase>
 							<goals>
 								<goal>exec</goal>
 							</goals>
 							<configuration>
 								<executable>handlebars</executable>
-								<commandlineArgs>src/main/webapp/webclient -e hbs -f src/main/webapp/javascript/hbs-templates.js --knownOnly</commandlineArgs>
+								<commandlineArgs>src/main/webapp/webclient -e hbs -f ${generated-js.dir}/hbs-templates.js --knownOnly</commandlineArgs>
 							</configuration>
-							<phase>generate-sources</phase>
 						</execution>
 					</executions>
 				</plugin>
@@ -236,7 +316,19 @@
 								<jsSourceDir>javascript</jsSourceDir>
 								<jsFinalFile>webclient.js</jsFinalFile>
 								<jsSourceFiles>
+									<!-- order is important: these must be before sources below -->
 									<jsSourceFile>libs/EventAggregator.js</jsSourceFile>
+									<jsSourceFile>libs/handlebars.runtime-v4.0.11.js</jsSourceFile>
+									<!-- these must be listed here, jsSourceIncludes doesn't work -->
+									<jsSourceFile>../../../derived/webapp/javascript/fc_events.js</jsSourceFile>
+									<jsSourceFile>../../../derived/webapp/javascript/freeciv-helpdata.js</jsSourceFile>
+									<jsSourceFile>../../../derived/webapp/javascript/packets.js</jsSourceFile>
+									<jsSourceFile>../../../derived/webapp/javascript/packhand_gen.js</jsSourceFile>
+									<jsSourceFile>../../../derived/webapp/javascript/soundset_spec.js</jsSourceFile>
+									<jsSourceFile>../../../derived/webapp/javascript/2dcanvas/tileset_spec_amplio2.js</jsSourceFile>
+									<jsSourceFile>../../../derived/webapp/javascript/2dcanvas/tileset_spec_isotrident.js</jsSourceFile>
+									<jsSourceFile>../../../derived/webapp/javascript/2dcanvas/tileset_spec_trident.js</jsSourceFile>
+									<jsSourceFile>../../../../target/generated-sources/javascript/hbs-templates.js</jsSourceFile>
 								</jsSourceFiles>
 								<jsSourceIncludes>
 									<jsSourceInclude>*.js</jsSourceInclude>
@@ -307,7 +399,6 @@
 						</execution>
 					</executions>
 				</plugin>
-
 
 				<plugin>
 					<groupId>com.cj.jshintmojo</groupId>

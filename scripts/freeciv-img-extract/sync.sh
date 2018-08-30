@@ -1,25 +1,42 @@
 #!/bin/bash
-TILESET_DEST=../../freeciv-web/src/main/webapp/tileset
+
+resolve() { echo "$(cd "$1" >/dev/null && pwd)"; }
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    -f) FREECIV_DIR=$(resolve "$2"); shift; shift;;
+    -o) WEBAPP_DIR=$(resolve "$2"); shift; shift;;
+    *) echo "Unrecognized argument: $1"; shift;;
+  esac
+done
+: ${FREECIV_DIR:?Must specify (original) freeciv project dir with -f}
+: ${WEBAPP_DIR:?Must specify existing freeciv-web (webapp) dir with -o}
+
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null && pwd)"
+
+TILESET_DEST="${WEBAPP_DIR}/tileset"
+SPEC_DEST="${WEBAPP_DIR}/javascript/2dcanvas"
+FLAG_DEST="${WEBAPP_DIR}/images/flags"
+
+TEMP_DIR=$(mktemp -d -t 'freeciv-img-extract.XXX')
+
 echo "running Freeciv-img-extract..."
-python3 img-extract.py &&
-mkdir -p "${TILESET_DEST}" &&
-pngcrush -d "${TILESET_DEST}" freeciv-web-tileset*.png &&
-echo "converting tileset .png files to .webp ..." && 
-(for X in "${TILESET_DEST}"/*.png
-do
- cwebp -quiet -lossless $X -o ${X/.png/.webp}
+echo "  extracting to ${TEMP_DIR}"
+mkdir -p "${TILESET_DEST}" "${SPEC_DEST}" "${FLAG_DEST}" &&
+python3 "${DIR}"/img-extract.py -f "${FREECIV_DIR}" -o "${TEMP_DIR}" &&
+echo "compressing .png files from ${TEMP_DIR} to ${TILESET_DEST}" &&
+pngcrush -q -d "${TILESET_DEST}" "${TEMP_DIR}"/freeciv-web-tileset*.png &&
+echo "converting tileset .png files to .webp ..." &&
+(for pngfile in "${TILESET_DEST}"/*.png; do
+  cwebp -quiet -lossless "$pngfile" -o "${pngfile/%.png/.webp}"
 done) &&
-cp tileset_spec_*.js ../../freeciv-web/src/main/webapp/javascript/2dcanvas/ && 
-echo "converting flag svg files to png and webp..." && 
-mkdir -p ../../freeciv-web/src/main/webapp/images/flags/ &&
-(for X in `find ../../freeciv/freeciv/data/flags/*.svg` 
-do
- convert -density 80 -resize 180 $X ${X/.svg/-web.png}
+cp "${TEMP_DIR}"/tileset_spec_*.js "${SPEC_DEST}" &&
+echo "converting flag .svg files to .png and .webp ..." &&
+(for svgfile in $(find "${FREECIV_DIR}"/data/flags/*.svg); do
+  name="$(basename "$svgfile")"
+  pngfile="${FLAG_DEST}/${name/%.svg/-web.png}"
+  convert -density 80 -resize 180 "$svgfile" "${pngfile}" ||
+    >&2 echo "  ERROR converting ${pngfile}"
+  [[ -f "${pngfile}" ]] && cwebp -quiet -lossless "${pngfile}" -o "${pngfile/%.png/.webp}" ||
+    >&2 echo "  ERROR packing ${pngfile}"
 done) &&
-(for X in `find ../../freeciv/freeciv/data/flags/*.png` 
-do
- cwebp -quiet -lossless $X -o ${X/.png/.webp}
-done) &&	
-mv -f ../../freeciv/freeciv/data/flags/*-web.png ../../freeciv-web/src/main/webapp/images/flags/ &&	
-mv -f ../../freeciv/freeciv/data/flags/*-web.webp ../../freeciv-web/src/main/webapp/images/flags/ &&	
 echo "Freeciv-img-extract done." || (>&2 echo "Freeciv-img-extract failed!" && exit 1)

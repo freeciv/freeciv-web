@@ -5,6 +5,17 @@ This is the Freeciv web application, which consists of the Java servlets
 and filters for running the web client, JSP templates, javascript code
 and other web content. 
 
+Derived Sources
+===============
+
+Freeciv-web uses packet definitions, tilesets, and other resources
+derived from the original freeciv project, keeping these up to date by
+generating them during install from freeciv source.
+
+Scripts to generate these files are in `$freeciv-web/scripts` and they
+are generated to `$freeciv-web/freeciv-web/src/derived`. See the
+README.md in those directories for more info.
+
 Tomcat 8 + nginx setup
 ================================
 Freeciv-web supports the Tomcat 8 application server for hosting the Java web application.

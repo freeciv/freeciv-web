@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: latin-1 -*-
 
 #
@@ -13,6 +13,8 @@
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
 #
+
+from os import path
 
 ### The following parameters change the amount of output.
 
@@ -1465,18 +1467,11 @@ def strip_c_comment(s):
 
 # Main function. It reads and parses the input and generates the
 # various files.
-def gen_main():
+def gen_main(freeciv_dir):
     ### parsing input
-    src_dir=os.path.dirname(sys.argv[0])
-    src_root=src_dir+"."
-    input_name="../freeciv/freeciv/common/networking/packets.def"
-    ### We call this variable target_root instead of build_root
-    ### to avoid confusion as we are not building to builddir in
-    ### automake sense.
-    ### We build to src dir. Building to builddir causes a lot
-    ### of problems we have been unable to solve.
-    target_root=src_root
+    input_name = path.abspath(path.join(freeciv_dir, "common/networking/packets.def"))
     try:
+      print("Parsing " + input_name)
       content=open(input_name).read()
     except IOError:
       print("Error! Check out freeciv from Git in ../freeciv directory and apply patches.");

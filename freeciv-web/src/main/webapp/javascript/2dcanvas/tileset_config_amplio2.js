@@ -77,10 +77,6 @@ var citybar_offset_x = 45;
 var tilelabel_offset_y = 15;
 var tilelabel_offset_x = 0;
 
-// Font size (points) to use to draw city names and productions:
-var city_names_font_size = 10;
-var city_productions_font_size = 8;
-
 var dither_offset_x = [normal_tile_width/2, 0, normal_tile_width/2, 0];
 var dither_offset_y = [0, normal_tile_height/2, normal_tile_height/2, 0];
 

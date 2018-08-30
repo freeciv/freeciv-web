@@ -1634,6 +1634,11 @@ function handle_ruleset_achievement(packet)
   /* TODO: Implement. */
 }
 
+function handle_ruleset_clause(packet)
+{
+  /* TODO: Implement. */
+}
+
 function handle_achievement_info(packet)
 {
   /* TODO: implement */

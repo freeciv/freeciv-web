@@ -609,7 +609,7 @@ button {
 }
 
 #worklist_heading {
-  width: 100%
+  width: 100%;
   float: left;
 }
 
@@ -981,8 +981,7 @@ li.tech-both::before {
   min-height: 120px;
   max-height: 200px;
   overflow: auto;
-  border-color: 1px solid;
-  border: 1px solid #555555
+  border: 1px solid #555555;
   width: 100%;
   font-size: 130%;
 }

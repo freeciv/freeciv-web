@@ -5,6 +5,7 @@
 <%@ page import="static java.lang.Boolean.parseBoolean" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
+String gaTrackingId = null;
 String googleSigninClientKey = null;
 String trackJsToken = null;
 boolean fcwDebug = false;
@@ -12,6 +13,7 @@ String fcwMinified = "";
 try {
   Properties prop = new Properties();
   prop.load(getServletContext().getResourceAsStream("/WEB-INF/config.properties"));
+  gaTrackingId = stripToNull(prop.getProperty("ga-tracking-id"));
   googleSigninClientKey = stripToEmpty(prop.getProperty("google-signin-client-key"));
   trackJsToken = stripToNull(prop.getProperty("trackjs-token"));
 
@@ -68,16 +70,17 @@ var fcwMinified="<%= fcwMinified %>";
 <body>
     <jsp:include page="pregame.jsp" flush="false"/>
     <jsp:include page="game.jsp" flush="false"/>
-    
+
+<% if (gaTrackingId != null) { %>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-40584174-1', 'auto');
+  ga('create', '<%= gaTrackingId %>', 'auto');
   ga('send', 'pageview');
-</script> 
+</script>
+<% } %>
 </body>
 
 <script id="terrain_fragment_shh" type="x-shader/x-fragment">

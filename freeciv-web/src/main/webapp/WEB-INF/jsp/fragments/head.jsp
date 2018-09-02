@@ -2,10 +2,12 @@
 <%@ page import="java.util.Properties" %>
 <%@ page import="java.io.IOException" %>
 <%
+    String gaTrackingId = null;
     String trackJsToken = null;
     try {
         Properties prop = new Properties();
         prop.load(getServletContext().getResourceAsStream("/WEB-INF/config.properties"));
+        gaTrackingId = stripToNull(prop.getProperty("ga-tracking-id"));
         trackJsToken = stripToNull(prop.getProperty("trackjs-token"));
     } catch (IOException e) {
         e.printStackTrace();
@@ -31,15 +33,17 @@
 
 <link rel="manifest" href="/static/manifest.json">
 
+<% if (gaTrackingId != null) { %>
 <script>
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-	ga('create', 'UA-40584174-1', 'auto');
+	ga('create', '<%= gaTrackingId =%>>', 'auto');
 	ga('send', 'pageview');  
 </script>
+<% } %>
 <% if (trackJsToken != null) { %>
 <script type="text/javascript">window._trackJs = { token: '<%= trackJsToken %>' };</script>
 <script type="text/javascript" src="https://cdn.trackjs.com/releases/current/tracker.js"></script>

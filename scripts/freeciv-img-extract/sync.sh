@@ -35,8 +35,8 @@ echo "converting flag .svg files to .png and .webp ..." &&
   name="$(basename "$svgfile")"
   pngfile="${FLAG_DEST}/${name/%.svg/-web.png}"
   convert -density 80 -resize 180 "$svgfile" "${pngfile}" ||
-    >&2 echo "  ERROR converting ${pngfile}"
+    >&2 echo "  ERROR converting ${svgfile} to ${pngfile}"
   [[ -f "${pngfile}" ]] && cwebp -quiet -lossless "${pngfile}" -o "${pngfile/%.png/.webp}" ||
-    >&2 echo "  ERROR packing ${pngfile}"
+    >&2 echo "  ERROR packing ${pngfile} to ${pngfile/%.png/.webp}"
 done) &&
 echo "Freeciv-img-extract done." || (>&2 echo "Freeciv-img-extract failed!" && exit 1)

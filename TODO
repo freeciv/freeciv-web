@@ -90,6 +90,8 @@ Unimplemented rule variation support:
 - The graphic tags of certain extras are hard coded.
 - Wikipedia help is only extracted for items that appear in the classic
   ruleset.
+- Freeciv-web has no client side effect evaluation.
+  - Building_Build_Cost_Pct doesn't work.
 
 Simplify Freeciv server upgrade:
 - get rid of the worst merge conflict causes

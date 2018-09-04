@@ -496,7 +496,8 @@ function get_production_progress(pcity)
 
   if (pcity['production_kind'] == VUT_UTYPE) {
     var punit_type = unit_types[pcity['production_value']];
-    return  pcity['shield_stock'] + "/" + universal_build_shield_cost(punit_type);
+    return pcity['shield_stock'] + "/"
+           + universal_build_shield_cost(pcity, punit_type);
   }
 
   if (pcity['production_kind'] == VUT_IMPROVEMENT) {
@@ -504,7 +505,8 @@ function get_production_progress(pcity)
     if (improvement['name'] == "Coinage") {
       return " ";
     }
-    return  pcity['shield_stock'] + "/" + universal_build_shield_cost(improvement);
+    return  pcity['shield_stock'] + "/"
+            + universal_build_shield_cost(pcity, improvement);
   }
 
   return " ";
@@ -619,7 +621,7 @@ function city_turns_to_build(pcity,
 {
   var city_shield_surplus =  pcity['surplus'][O_SHIELD];
   var city_shield_stock = include_shield_stock ? pcity['shield_stock'] : 0;
-  var cost = universal_build_shield_cost(target);
+  var cost = universal_build_shield_cost(pcity, target);
 
   if (include_shield_stock == true && (pcity['shield_stock'] >= cost)) {
     return 1;

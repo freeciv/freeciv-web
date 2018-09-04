@@ -216,7 +216,15 @@ function is_tech_in_range(target_player, range, tech)
 /**************************************************************************
   Return the number of shields it takes to build this universal.
 **************************************************************************/
-function universal_build_shield_cost(target)
+function universal_build_shield_cost(pcity, target)
 {
+  /* FIXME: The build cost of an improvement may be modified by the
+   * Building_Build_Cost_Pct effect. Implement effect support in Freeciv-web
+   * and evaluate EFT_IMPR_BUILD_COST_PCT or start sending it from the
+   * server.
+   * Then port any direct read of build_cost from an improvement (or from a
+   * universal that may be a building) to something that evaluates the
+   * effect (like this function).
+   * At the moment (3rd Sep 2018) it isn't used in any bundled ruleset. */
   return target['build_cost'];
 }

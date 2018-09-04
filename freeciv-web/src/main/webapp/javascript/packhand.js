@@ -537,6 +537,9 @@ function handle_ruleset_control(packet)
   }
   extras = {};
 
+  /* Reset legal diplomatic clauses. */
+  clause_infos = {};
+
   /* TODO: implement rest.
    * Some ruleset packets don't have handlers *yet*. Remember to clean up
    * when they are implemented:
@@ -1634,9 +1637,12 @@ function handle_ruleset_achievement(packet)
   /* TODO: Implement. */
 }
 
+/************************************************************************//**
+  Handle a packet about a particular clause.
+****************************************************************************/
 function handle_ruleset_clause(packet)
 {
-  /* TODO: Implement. */
+  clause_infos[packet['type']] = packet;
 }
 
 function handle_achievement_info(packet)

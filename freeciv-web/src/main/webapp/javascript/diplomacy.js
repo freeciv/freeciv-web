@@ -105,7 +105,6 @@ function accept_treaty(counterpart, I_accepted, other_accepted)
       $("#agree_counterpart_" + counterpart).html(disagree_html);
     }
   }
-
 }
 
 /**************************************************************************
@@ -190,7 +189,6 @@ function show_diplomacy_clauses(counterpart_id)
     }
 
     $("#diplomacy_messages_" + counterpart_id).html(diplo_html);
-
 }
 
 /**************************************************************************
@@ -235,12 +233,8 @@ function remove_clause(remove_clause_obj)
 **************************************************************************/
 function client_diplomacy_clause_string(counterpart, giver, type, value)
 {
-
-  var pplayer = null;
-  var nation = null;
-
-  pplayer = players[giver];
-  nation = nations[pplayer['nation']]['adjective'];
+  var pplayer = players[giver];
+  var nation = nations[pplayer['nation']]['adjective'];
 
   switch (type) {
   case CLAUSE_ADVANCE:
@@ -504,7 +498,6 @@ function meeting_template_data(giver, taker)
       if (player_invention_state(giver, tech_id) == TECH_KNOWN
           && (player_invention_state(taker, tech_id) == TECH_UNKNOWN
               || player_invention_state(taker, tech_id) == TECH_PREREQS_KNOWN)) {
-        var ptech = techs[tech_id];
         clauses.push({
           type: CLAUSE_ADVANCE,
           value: tech_id,

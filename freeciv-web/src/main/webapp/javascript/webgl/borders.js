@@ -54,7 +54,6 @@ function init_borders_image()
 
   if (graphics_quality == QUALITY_MEDIUM) setInterval(update_borders_image, 20000);
   if (graphics_quality == QUALITY_HIGH) setInterval(update_borders_image, 10000);
-
 }
 
 /****************************************************************************
@@ -92,7 +91,6 @@ function update_borders_image()
 
      return borders_texture;
   }
-
 }
 
 /****************************************************************************
@@ -100,7 +98,7 @@ function update_borders_image()
 ****************************************************************************/
 function generate_borders_image() {
 
-  var row, col;
+  var row;
   // The grid of points that make up the image.
   var grid = Array(border_image_resolution);
   for (row = 0; row < border_image_resolution ; row++) {
@@ -146,7 +144,6 @@ function generate_borders_image() {
 ****************************************************************************/
 function generate_borders_image_hash() {
   var hash = 0;
-  var row, col;
 
   for (var x = 0; x < border_image_resolution ; x++) {
     for (var y = 0; y < border_image_resolution; y++) {
@@ -172,5 +169,4 @@ function border_image_color(map_x, map_y)
   }
 
   return 0;
-
 }

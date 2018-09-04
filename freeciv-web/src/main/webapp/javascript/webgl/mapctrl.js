@@ -24,7 +24,6 @@ var timeOfLastPinchZoom = new Date().getTime();
 ****************************************************************************/
 function init_webgl_mapctrl()
 {
-
   $("#canvas_div").mousedown(webglOnDocumentMouseDown);
   $("#canvas_div").mouseup(webglOnDocumentMouseUp);
   $(window).mousemove(mouse_moved_cb);
@@ -44,7 +43,6 @@ function init_webgl_mapctrl()
     mc.add(new Hammer.Pinch({ threshold: 0.1 }));
     mc.on("pinch", webgl_mapview_pinch_zoom);
   }
-
 }
 
 
@@ -103,7 +101,6 @@ function webglOnDocumentMouseUp( e ) {
   }
   e.preventDefault();
   keyboard_input = true;
-
 }
 
 /****************************************************************************
@@ -143,7 +140,6 @@ function webglOnDocumentMouseDown(e) {
     context_menu_active = false;
     mapview_mouse_movement = false;
   }
-
 }
 
 
@@ -178,7 +174,6 @@ function webglOnWheel(e) {
   }
 
   camera_look_at(camera_current_x, camera_current_y, camera_current_z);
-
 }
 
 
@@ -227,7 +222,6 @@ function webgl_mapview_touch_start(e)
 
   var ptile = webgl_canvas_pos_to_tile(touch_start_x, touch_start_y);
   set_mouse_touch_started_on_unit(ptile);
-
 }
 
 /****************************************************************************
@@ -249,9 +243,6 @@ function webgl_mapview_touch_move(e)
 {
   mouse_x = e.originalEvent.touches[0].pageX - $('#canvas_div').position().left;
   mouse_y = e.originalEvent.touches[0].pageY - $('#canvas_div').position().top;
-
-  var diff_x = (touch_start_x - mouse_x) * 2;
-  var diff_y = (touch_start_y - mouse_y) * 2;
 
   var spos = webgl_canvas_pos_to_map_pos(touch_start_x, touch_start_y);
   var epos = webgl_canvas_pos_to_map_pos(mouse_x, mouse_y);
@@ -282,7 +273,6 @@ function webgl_mapview_touch_move(e)
   if (spos != null && epos != null) {
     camera_look_at(camera_current_x + spos['x'] - epos['x'], camera_current_y, camera_current_z + spos['y'] - epos['y']);
   }
-
 }
 
 
@@ -292,7 +282,6 @@ function webgl_mapview_touch_move(e)
 **************************************************************************/
 function webgl_recenter_button_pressed(ptile)
 {
-
   if (can_client_change_view() && ptile != null) {
     var sunit = find_visible_unit(ptile);
     if (!client_is_observer() && sunit != null

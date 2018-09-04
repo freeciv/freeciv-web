@@ -64,7 +64,6 @@ var end_turn_info_message_shown = false;
 ****************************************************************************/
 function control_init()
 {
-
   if (renderer == RENDERER_2DCANVAS) {
     mapctrl_init_2d();
   } else {
@@ -264,7 +263,6 @@ function control_init()
   $('#tabs a').click(function () {
     $(this).blur();
   });
-
 }
 
 /****************************************************************************
@@ -344,12 +342,10 @@ function mouse_moved_cb(e)
       touch_start_y = mouse_y;
       update_mouse_cursor();
     }
-
   } else if (active_city != null && city_canvas != null
              && $("#city_canvas").length) {
     mouse_x = mouse_x - $("#city_canvas").offset().left;
     mouse_y = mouse_y - $("#city_canvas").offset().top;
-
   }
 
   if (client.conn.playing == null) return;
@@ -366,8 +362,6 @@ function mouse_moved_cb(e)
       && (new Date().getTime() - map_select_check_started) > 200)  {
     map_select_active = true;
   }
-
-
 }
 
 /****************************************************************************
@@ -375,7 +369,6 @@ function mouse_moved_cb(e)
 ****************************************************************************/
 function update_mouse_cursor()
 {
-
   if (tech_dialog_active && !is_touch_device()) {
     update_tech_dialog_cursor();
     return;
@@ -411,7 +404,6 @@ function update_mouse_cursor()
   } else {
     $("#canvas_div").css("cursor", "default");
   }
-
 }
 
 /****************************************************************************
@@ -746,7 +738,6 @@ function check_text_input(event,chatboxtextarea) {
 ****************************************************************************/
 function get_focus_unit_on_tile(ptile)
 {
-
   var funits = get_units_in_focus();
   if (funits == null) return null;
 
@@ -813,7 +804,6 @@ function update_unit_focus()
   }
 
   advance_unit_focus();
-
 }
 
 /**************************************************************************
@@ -826,8 +816,6 @@ function update_unit_focus()
 function advance_unit_focus()
 {
   if (client_is_observer()) return;
-
-  var funits = get_units_in_focus();
 
   var candidate = find_best_focus_candidate(false);
 
@@ -860,7 +848,6 @@ function advance_unit_focus()
       message_log.update({ event: E_BEGINNER_HELP, message: "All units have moved, click the \"Turn Done\" button to end your turn."});
     }
   }
-
 }
 
 /**************************************************************************
@@ -1040,14 +1027,16 @@ function update_unit_order_commands()
       $("#order_paradrop").hide();
     }
 
-    if (!client_is_observer() && client.conn.playing != null && get_what_can_unit_pillage_from(punit, ptile).length > 0 && (pcity == null || pcity != null && city_owner_player_id(pcity) != client.conn.playing.playerno)) {
+    if (!client_is_observer() && client.conn.playing != null
+        && get_what_can_unit_pillage_from(punit, ptile).length > 0
+        && (pcity == null || city_owner_player_id(pcity) !== client.conn.playing.playerno)) {
       $("#order_pillage").show();
       unit_actions["pillage"] = {name: "Pillage (Shift-P)"};
     } else {
       $("#order_pillage").hide();
     }
 
-    if (pcity == null || punit['homecity'] == 0 || (pcity != null && punit['homecity'] == pcity['id'])) {
+    if (pcity == null || punit['homecity'] === 0 || punit['homecity'] === pcity['id']) {
       $("#order_change_homecity").hide();
     } else if (pcity != null && punit['homecity'] != pcity['id']) {
       $("#order_change_homecity").show();
@@ -1067,7 +1056,6 @@ function update_unit_order_commands()
 
     // Load unit on transport
     if (pcity != null) {
-      var has_transport_unit = false;
       var units_on_tile = tile_units(ptile);
       for (var r = 0; r < units_on_tile.length; r++) {
         var tunit = units_on_tile[r];
@@ -1078,7 +1066,6 @@ function update_unit_order_commands()
     }
 
     // Unload unit from transport
-    var has_transport_unit = false;
     var units_on_tile = tile_units(ptile);
     if (ptype['transport_capacity'] > 0 && units_on_tile.length >= 2) {
       for (var r = 0; r < units_on_tile.length; r++) {
@@ -1256,7 +1243,6 @@ function set_unit_focus_and_redraw(punit)
   update_active_units_dialog();
   update_unit_order_commands();
   if (current_focus.length > 0 && $("#game_unit_orders_default").length > 0 && !cardboard_vr_enabled) $("#game_unit_orders_default").show();
-
 }
 
 /**************************************************************************
@@ -1266,7 +1252,6 @@ function set_unit_focus_and_activate(punit)
 {
   set_unit_focus_and_redraw(punit);
   request_new_unit_activity(punit, ACTIVITY_IDLE, EXTRA_NONE);
-
 }
 
 /**************************************************************************
@@ -1311,10 +1296,6 @@ Return a pointer to a visible unit, if there is one.
 **************************************************************************/
 function find_visible_unit(ptile)
 {
-  var panyowned = null;
-  var panyother = null;
-  var ptptother = null;
-  var pfocus = null;
   var i;
 
   /* If no units here, return nothing. */
@@ -1323,7 +1304,7 @@ function find_visible_unit(ptile)
   }
 
   /* If the unit in focus is at this tile, show that on top */
-  pfocus = get_focus_unit_on_tile(ptile);
+  var pfocus = get_focus_unit_on_tile(ptile);
   if (pfocus != null) {
     return pfocus;
   }
@@ -1564,7 +1545,7 @@ function do_map_click(ptile, qtype, first_time_called)
       GOTO from the context menu or clicks the goto icon. Then the goto path
       has to be requested first, and then do_map_click will be called again
       to issue the unit order based on the goto path. */
-      if (ptile != null && current_focus.length > 0) {
+      if (current_focus.length > 0) {
         request_goto_path(current_focus[0]['id'], ptile['x'], ptile['y']);
         if (first_time_called) {
           setTimeout(function(){
@@ -1572,7 +1553,6 @@ function do_map_click(ptile, qtype, first_time_called)
           }, 250);
         }
         return;
-
       }
     }
 
@@ -1684,7 +1664,6 @@ function keyboard_listener(ev)
   civclient_handle_key(keyboard_key, ev.keyCode, ev['ctrlKey'],  ev['altKey'], ev['shiftKey'], ev);
 
   if (renderer == RENDERER_2DCANVAS) $("#canvas").contextMenu('hide');
-
 }
 
 /**************************************************************************
@@ -1693,7 +1672,6 @@ function keyboard_listener(ev)
 function
 civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift, the_event)
 {
-
   switch (keyboard_key) {
     case 'B':
       request_unit_build_city();
@@ -1910,9 +1888,9 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift, the_event)
     case 107:
       //zoom in
       if (renderer == RENDERER_WEBGL) {
-        new_camera_dy = camera_dy - 60;
-        new_camera_dx = camera_dx - 45;
-        new_camera_dz = camera_dz - 45;
+        let new_camera_dy = camera_dy - 60;
+        let new_camera_dx = camera_dx - 45;
+        let new_camera_dz = camera_dz - 45;
         if (new_camera_dy < 350 || new_camera_dy > 1200) {
           return;
         } else {
@@ -1927,9 +1905,9 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift, the_event)
     case 109:
       //zoom out
       if (renderer == RENDERER_WEBGL) {
-        new_camera_dy = camera_dy + 60;
-        new_camera_dx = camera_dx + 45;
-        new_camera_dz = camera_dz + 45;
+        let new_camera_dy = camera_dy + 60;
+        let new_camera_dx = camera_dx + 45;
+        let new_camera_dz = camera_dz + 45;
         if (new_camera_dy < 350 || new_camera_dy > 1200) {
           return;
         } else {
@@ -2209,7 +2187,7 @@ function key_unit_load()
 
     var has_transport_unit = false;
     var units_on_tile = tile_units(ptile);
-    for (r = 0; r < units_on_tile.length; r++) {
+    for (let r = 0; r < units_on_tile.length; r++) {
       var tunit = units_on_tile[r];
       if (tunit['id'] == punit['id']) continue;
       var ntype = unit_type(tunit);
@@ -2281,7 +2259,6 @@ function key_unit_show_cargo()
   }
   update_active_units_dialog();
   update_unit_order_commands();
-
 }
 
 /**************************************************************************
@@ -2563,7 +2540,6 @@ function key_unit_homecity()
       send_request(JSON.stringify(packet));
       $("#order_change_homecity").hide();
     }
-
   }
 }
 
@@ -2907,7 +2883,6 @@ function check_request_goto_path()
   }
   prev_mouse_x = mouse_x;
   prev_mouse_y = mouse_y;
-
 }
 
 /****************************************************************************
@@ -2962,7 +2937,6 @@ function center_tile_mapcanvas(ptile)
   } else {
     center_tile_mapcanvas_3d(ptile);
   }
-
 }
 
 /**************************************************************************
@@ -2981,7 +2955,6 @@ function popit()
   if (ptile == null) return;
 
   popit_req(ptile);
-
 }
 
 /**************************************************************************
@@ -3024,7 +2997,6 @@ function center_on_any_city()
     center_tile_mapcanvas(city_tile(pcity));
     return;
   }
-
 }
 
 /**************************************************************************
@@ -3136,7 +3108,6 @@ function set_mouse_touch_started_on_unit(ptile) {
   } else {
     mouse_touch_started_on_unit = false;
   }
-
 }
 
 
@@ -3161,5 +3132,4 @@ function check_mouse_drag_unit(ptile)
   if (ptile_units.length > 1) {
      update_active_units_dialog();
   }
-
 }

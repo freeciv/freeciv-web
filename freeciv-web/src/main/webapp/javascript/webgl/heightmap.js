@@ -64,7 +64,9 @@ function create_heightmap()
       var ptile = map_pos_to_tile(x, y);
       if (ptile != null) {
         heightmap_tiles[x][y] = 0.5 + 0.4 * map_tile_height(ptile) + 0.09 * distance_from_coast_map[x][y];
-        if (ptile != null && heightmap_tiles[x][y] > ptile['height']) ptile['height'] = heightmap_tiles[x][y];
+        if (heightmap_tiles[x][y] > ptile['height']) {
+          ptile['height'] = heightmap_tiles[x][y];
+        }
       }
     }
   }
@@ -191,7 +193,7 @@ function get_city_height_offset(pcity)
   var ptile = index_to_tile(pcity['tile']);
   if (ptile == null) return 0;
 
-  if (ptile != null && tile_terrain(ptile) != null) {
+  if (tile_terrain(ptile) != null) {
       if (tile_terrain(ptile)['name'] == "Hills") return -6;
       if (tile_terrain(ptile)['name'] == "Mountains") return -10;
   }

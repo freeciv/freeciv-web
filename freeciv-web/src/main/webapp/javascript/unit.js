@@ -121,7 +121,6 @@ function update_tile_unit(punit)
   if (!found) {
     ptile['units'].push(punit);
   }
-
 }
 
 /**************************************************************************
@@ -137,7 +136,6 @@ function clear_tile_unit(punit)
   if (ptile['units'].indexOf(punit) >= 0) {
     ptile['units'].splice(ptile['units'].indexOf(punit), 1);
   }
-
 }
 
 /**************************************************************************
@@ -348,7 +346,6 @@ function get_unit_homecity_name(punit)
   } else {
     return null;
   }
-
 }
 
 /**************************************************************************
@@ -371,7 +368,6 @@ function is_unit_visible(punit)
   } else {
     return true;
   }
-
 }
 
 /**************************************************************************
@@ -380,7 +376,6 @@ function is_unit_visible(punit)
 function unittype_ids_alphabetic()
 {
   var unittype_names = [];
-  var unit_type;
   var unit_id;
   for (unit_id in unit_types) {
     var punit_type = unit_types[unit_id];
@@ -454,8 +449,8 @@ function get_what_can_unit_pillage_from(punit, ptile)
   var cannot_pillage = new BitVector([]);
 
   /* Get what other units are pillaging on the tile */
-  for (unit in ptile.units) {
-    if (unit.activity == ACTIVITY_PILLAGE) {
+  for (const unit in Object.keys(ptile.units)) {
+    if (unit.activity === ACTIVITY_PILLAGE) {
       cannot_pillage.set(unit.activity_tgt);
     }
   }

@@ -2,7 +2,7 @@
 //                  Luke Smith http://lucassmith.name/ (2008)
 //                  Loic Dachary <loic@dachary.org> (2008)
 //                  Johan Euphrosine <proppy@aminche.com> (2008)
-//                  Øyvind Sean Kinsey http://kinsey.no/blog (2010)
+//                  ï¿½yvind Sean Kinsey http://kinsey.no/blog (2010)
 //
 // Information and discussions
 // http://jspoker.pokersource.info/skin/test-printstacktrace.html
@@ -375,7 +375,6 @@ printStackTrace.implementation.prototype = {
         var line = "", maxLines = 10;
         for (var i = 0; i < maxLines; ++i) {
             line = source[lineNo - i] + line;
-            if (line !== undefined) {
                 var m = reGuessFunction.exec(line);
                 if (m && m[1]) {
                     return m[1];
@@ -385,7 +384,6 @@ printStackTrace.implementation.prototype = {
                         return m[1];
                     }
                 }
-            }
         }
         return '(?)';
     }

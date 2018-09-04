@@ -34,10 +34,6 @@ var width_offset = 10;
 **************************************************************************/
 function set_client_state(newstate)
 {
-  var connect_error = (C_S_PREPARING == civclient_state)
-      && (C_S_PREPARING == newstate);
-  var oldstate = civclient_state;
-
   if (civclient_state != newstate) {
     civclient_state = newstate;
 
@@ -83,8 +79,6 @@ function set_client_state(newstate)
       break;
     }
   }
-
-
 }
 
 /**************************************************************************
@@ -154,7 +148,6 @@ function setup_window_size ()
 
   if (overview_active) init_overview();
   if (unitpanel_active) init_game_unit_panel();
-
 }
 
 function client_state()
@@ -326,7 +319,6 @@ function show_endgame_dialog()
   $("#dialog").css("max-height", "500px");
 
   setTimeout(submit_game_to_hall_of_fame, 1000);
-
 }
 
 
@@ -375,7 +367,6 @@ function update_metamessage_game_running_status()
     send_message("/metamessage " + metasuggest);
 
   }
-
 }
 
 
@@ -417,6 +408,5 @@ function set_default_mapview_active()
   keyboard_input = true;
 
   $("#freeciv_custom_scrollbar_div").mCustomScrollbar("scrollTo", "bottom",{scrollInertia:0});
-
 }
 

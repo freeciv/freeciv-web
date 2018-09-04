@@ -103,7 +103,6 @@ function remove_city(pcity_id)
     city_screen_updater.update();
     bulbs_output_updater.update();
   }
-
 }
 
 /**************************************************************************
@@ -138,7 +137,6 @@ function show_city_dialog(pcity)
   var turns_to_complete;
   var sprite;
   var punit;
-  var ptype;
 
   if (active_city != pcity || active_city == null) {
     city_prod_clicks = 0;
@@ -418,7 +416,6 @@ function show_city_dialog(pcity)
   if (is_small_screen()) {
    $(".ui-tabs-anchor").css("padding", "2px");
   }
-
 }
 
 
@@ -483,7 +480,6 @@ function get_city_production_time(pcity)
   }
 
   return FC_INFINITY;
-
 }
 
 
@@ -510,7 +506,6 @@ function get_production_progress(pcity)
   }
 
   return " ";
-
 }
 
 /**************************************************************************
@@ -691,8 +686,6 @@ function request_city_buy()
 		});
 
   $("#dialog").dialog('open');
-
-
 }
 
 
@@ -715,8 +708,6 @@ function send_city_change(city_id, kind, value)
   var packet = {"pid" : packet_city_change, "city_id" : city_id,
                 "production_kind": kind, "production_value" : value};
   send_request(JSON.stringify(packet));
-
-
 }
 
 /**************************************************************************
@@ -762,7 +753,6 @@ function city_dialog_close_handler()
 function do_city_map_click(ptile)
 {
   var packet = null;
-  var c_tile = index_to_tile(active_city['tile']);
   if (ptile['worked'] == active_city['id']) {
     packet = {"pid"     : packet_city_make_specialist,
               "city_id" : active_city['id'],
@@ -773,7 +763,6 @@ function do_city_map_click(ptile)
               "tile_id" : ptile['index']};
   }
   send_request(JSON.stringify(packet));
-
 }
 
 /**************************************************************************
@@ -892,7 +881,6 @@ function city_name_dialog(suggested_name, unit_id) {
 	$("#city_name_dialog").remove();
     keyboard_input=true;
   }
-
 }
 
 /**************************************************************************
@@ -954,7 +942,6 @@ function city_sell_improvement(improvement_id)
                 "build_id": improvement_id};
     send_request(JSON.stringify(packet));
   }
-
 }
 
 /**************************************************************************
@@ -1237,7 +1224,6 @@ function rename_city()
       keyboard_input=true;
     }
   });
-
 }
 
 /**************************************************************************
@@ -1296,7 +1282,6 @@ function show_city_traderoutes()
   }
 
   $("#city_traderoutes_tab").html(msg);
-
 }
 
 /**************************************************************************
@@ -1716,7 +1701,6 @@ function city_add_to_worklist()
     active_city['worklist'] = active_city['worklist'].concat(production_selection);
     send_city_worklist(active_city['id']);
   }
-
 }
 
 /**************************************************************************
@@ -1936,9 +1920,7 @@ function update_city_screen()
 
       city_list_html += "</tr>";
     }
-
   }
-
 
   city_list_html += "</tbody></table>";
   $("#cities_list").html(city_list_html);

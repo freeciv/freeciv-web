@@ -112,7 +112,6 @@ function webgl_start_renderer()
   }
 
   animate();
-
 }
 
 
@@ -121,7 +120,7 @@ function webgl_start_renderer()
 ****************************************************************************/
 function init_webgl_mapview() {
   start_webgl = new Date().getTime();
-  var quality = 32, step = 1024 / quality;
+  var quality = 32;
 
   selected_unit_material = new THREE.MeshBasicMaterial( { color: 0xf6f7bf, transparent: true, opacity: 0.5} );
 
@@ -186,7 +185,6 @@ function init_webgl_mapview() {
 
   xquality = map.xsize * 4 + 1;
   yquality = map.ysize * 4 + 1;
-  var step = 1024 / quality;
 
   /* LandGeometry is a plane representing the landscape of the map. */
   landGeometry = new THREE.PlaneGeometry(mapview_model_width, mapview_model_height, xquality - 1, yquality - 1);
@@ -252,7 +250,6 @@ function init_webgl_mapview() {
 
   benchmark_start = new Date().getTime();
   setTimeout(initial_benchmark_check, 10000);
-
 }
 
 /****************************************************************************
@@ -298,5 +295,4 @@ function animate() {
   if (webgl_controls != null && clock != null) webgl_controls.update(clock.getDelta());
 
   if (renderer == RENDERER_WEBGL) requestAnimationFrame(animate);
-
 }

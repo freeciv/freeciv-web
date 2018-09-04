@@ -478,7 +478,6 @@ function fill_terrain_sprite_array(l, ptile, pterrain, tterrain_near)
 	       } else {
              return [ {"key" : "t.l" + l + "." + pterrain['graphic_str'] + 1} ];
 	       }
-          break;
         }
 
         case MATCH_SAME:
@@ -487,7 +486,6 @@ function fill_terrain_sprite_array(l, ptile, pterrain, tterrain_near)
           var this_match_type = ts_tiles[pterrain['graphic_str']]['layer' + l + '_match_type'];
 
           for (var i = 0; i < num_cardinal_tileset_dirs; i++) {
-            var dir = cardinal_tileset_dirs[i];
             if (ts_tiles[tterrain_near[i]['graphic_str']] == null) continue;
             var that = ts_tiles[tterrain_near[i]['graphic_str']]['layer' + l + '_match_type'];
             if (that == this_match_type) {
@@ -498,7 +496,6 @@ function fill_terrain_sprite_array(l, ptile, pterrain, tterrain_near)
 	      var y = tileset_tile_height - tileset[gfx_key][3];
 
           return [ {"key" : gfx_key, "offset_x" : 0, "offset_y" : y} ];
-          break;
         }
       }
     }
@@ -582,8 +579,6 @@ function fill_terrain_sprite_array(l, ptile, pterrain, tterrain_near)
       }
 
       return result_sprites;
-      break;
-
     }
   }
 

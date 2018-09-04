@@ -34,7 +34,6 @@ function show_help()
   $("<ul id='help_menu'></ul><div id='help_info_page'></div>").appendTo("#tabs-hel");
   for (var sec_id in helpdata_order) {
     var key = helpdata_order[sec_id];
-    var sec_name = helpdata[key]['name'];
     if (hidden_menu_items.indexOf(key) > -1) {
       continue;
     } else if (key.indexOf("help_gen") != -1) {
@@ -55,7 +54,6 @@ function show_help()
   show_help_intro();
   $("#tabs-hel").css("height", $(window).height() - 60);
   $("#help_info_page").css("max-width", $(window).width() - $("#help_menu").width() - 60);
-
 }
 
 /**************************************************************************
@@ -146,7 +144,6 @@ function generate_help_toplevel(key)
   $("<li id='" + key +  "' data-helptag='" + key +  "'>"
      + helpdata_tag_to_title(key) + "</li>").appendTo(parent_key);
   $("<ul id='" + key + "_ul' class='help_submenu'></ul>").appendTo("#" + key);
-
 }
 
 /**************************************************************************
@@ -169,6 +166,7 @@ function find_parent_help_key(key)
     return "#help_menu";
   }
 }
+
 /**************************************************************************
 ...
 **************************************************************************/
@@ -209,7 +207,7 @@ function wiki_on_item_button(item_name)
   }
 
   return ("<button class='help_button' onclick=\"show_wikipedia_dialog('"
-          + item_name.replace(/\'/g, "\\'") + "');\">Wikipedia on "
+          + item_name.replace(/'/g, "\\'") + "');\">Wikipedia on "
           + item_name +  "</button>");
 }
 
@@ -397,5 +395,4 @@ function helpdata_tag_to_title(tag)
 {
   var result = tag.replace("_of_the_world", "").replace("help_", "").replace("gen_", "").replace("misc_", "").replace(/_/g, " ");
   return to_title_case(result);
-
 }

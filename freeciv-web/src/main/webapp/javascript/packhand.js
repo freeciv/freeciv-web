@@ -208,7 +208,7 @@ function handle_chat_msg(packet)
   if (event == null || event < 0 || event >= E_UNDEFINED) {
     console.log('Undefined message event type');
     console.log(packet);
-    packet['event'] = event = E_UNDEFINED;
+    packet['event'] = E_UNDEFINED;
   }
 
   if (connections[conn_id] != null) {
@@ -692,7 +692,6 @@ function handle_player_attribute_chunk(packet)
 function handle_unit_remove(packet)
 {
   var punit = game_find_unit_by_number(packet['unit_id']);
-  var powner;
 
   if (punit == null) {
     return;
@@ -752,16 +751,7 @@ function handle_unit_short_info(packet)
 **************************************************************************/
 function handle_unit_packet_common(packet_unit)
 {
-  var pcity;
-  var punit;
-  var need_update_menus = true;
-  var repaint_unit = true;
-  var repaint_city = true;
-  var check_focus = true;
-  var moved = true;
-  var ret = true;
-
-  punit = player_find_unit_by_id(unit_owner(packet_unit), packet_unit['id']);
+  var punit = player_find_unit_by_id(unit_owner(packet_unit), packet_unit['id']);
 
   clear_tile_unit(punit);
 

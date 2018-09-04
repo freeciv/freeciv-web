@@ -502,7 +502,7 @@ function pbem_end_phase()
     simpleStorage.set("pbem_" + $.getUrlVar('savegame'), "true");
   }
   $(window).unbind('beforeunload');
-  setTimeout("window.location.href ='/';", 5000);
+  setTimeout(() => window.location.href ='/', 5000);
 }
 
 /**************************************************************************

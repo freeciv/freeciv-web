@@ -61,7 +61,7 @@ function generate_map_tiletype_grid() {
   if (graphics_quality == QUALITY_MEDIUM) map_tiletype_resolution = 2048;
   if (graphics_quality == QUALITY_HIGH) map_tiletype_resolution = 4096;
 
-  var row, col;
+  var row;
   // The grid of points that make up the image.
   var grid = Array(map_tiletype_resolution);
   for (row = 0; row < map_tiletype_resolution ; row++) {
@@ -116,7 +116,6 @@ function map_tiletype_tile_color(map_x, map_y)
   }
 
   return COLOR_OVERVIEW_UNKNOWN;
-
 }
 
 

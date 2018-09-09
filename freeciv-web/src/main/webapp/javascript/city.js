@@ -597,12 +597,8 @@ function can_city_build_now(pcity, kind, value)
 **************************************************************************/
 function city_has_building(pcity, improvement_id)
 {
-  for (var z = 0; z < ruleset_control.num_impr_types; z ++) {
-    if (pcity['improvements'] != null && pcity['improvements'].isSet(z) && z == improvement_id) {
-      return true;
-    }
-  }
-  return false;
+  return 0 <= improvement_id && improvement_id < ruleset_control.num_impr_types
+    && pcity['improvements'] && pcity['improvements'].isSet(improvement_id);
 }
 
 

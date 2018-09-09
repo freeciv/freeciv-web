@@ -19,6 +19,10 @@
 
 var improvements = {};
 
+// incomplete list of (well defined) building names - populate as needed
+// Remove in favor of [Effects](https://github.com/freeciv/freeciv-web/issues/208) when implemented.
+// IDs are dynamic based on ruleset
+const B_PALACE_NAME = 'Palace';
 
 var B_LAST = MAX_NUM_ITEMS;
 
@@ -68,4 +72,17 @@ function get_improvement_requirements(improvement_id)
 
   return result;
 
+}
+
+/**************************************************************************
+ Finds improvement id by exact name, returning null if not found.
+ **************************************************************************/
+function improvement_id_by_name(name)
+{
+  for (const id in improvements) {
+    if (improvements.hasOwnProperty(id) && name === improvements[id]['name']) {
+      return id
+    }
+  }
+  return null;
 }

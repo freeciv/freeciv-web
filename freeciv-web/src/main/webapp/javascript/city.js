@@ -119,6 +119,13 @@ function is_free_worked(city, tile) {
   return (city['tile'] == tile['index']);
 }
 
+/**************************************************************************
+ ...
+ **************************************************************************/
+function is_capital(city) {
+  return city_has_building(city, improvement_id_by_name(B_PALACE_NAME));
+}
+
 
 /**************************************************************************
  ...

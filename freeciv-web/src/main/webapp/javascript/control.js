@@ -1043,7 +1043,7 @@ function update_unit_order_commands()
       unit_actions["homecity"] = {name: "Change homecity of unit (H)"};
     }
 
-    if (pcity != null && city_has_building(pcity, 0)) {
+    if (pcity != null && city_has_building(pcity, improvement_id_by_name(B_AIRPORT_NAME))) {
       unit_actions["airlift"] = {name: "Airlift (Shift-L)"};
     }
 

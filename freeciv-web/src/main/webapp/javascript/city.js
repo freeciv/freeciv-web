@@ -613,9 +613,7 @@ function city_has_building(pcity, improvement_id)
  Calculates the turns which are needed to build the requested
  improvement in the city.  GUI Independent.
 **************************************************************************/
-function city_turns_to_build(pcity,
-							 target,
-			                 include_shield_stock)
+function city_turns_to_build(pcity, target, include_shield_stock)
 {
   var city_shield_surplus =  pcity['surplus'][O_SHIELD];
   var city_shield_stock = include_shield_stock ? pcity['shield_stock'] : 0;
@@ -1989,7 +1987,6 @@ function city_keyboard_listener(ev)
          break;
       }
   }
-
 }
 
 /**************************************************************************
@@ -2038,5 +2035,4 @@ function get_citywalls_scale(pcity)
   }
 
   return scale;
-
 }

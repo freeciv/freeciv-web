@@ -22,6 +22,7 @@ var improvements = {};
 // incomplete list of (well defined) building names - populate as needed
 // Remove in favor of [Effects](https://github.com/freeciv/freeciv-web/issues/208) when implemented.
 // IDs are dynamic based on ruleset
+const B_AIRPORT_NAME = 'Airport';
 const B_PALACE_NAME = 'Palace';
 
 var B_LAST = MAX_NUM_ITEMS;
@@ -43,7 +44,6 @@ function get_improvements_from_tech(tech_id)
     }
   }
   return result;
-
 }
 
 /**************************************************************************
@@ -69,9 +69,7 @@ function get_improvement_requirements(improvement_id)
       }
     }
   }
-
   return result;
-
 }
 
 /**************************************************************************

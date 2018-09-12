@@ -40,6 +40,8 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import javax.naming.*;
 
+import org.freeciv.services.Validation;
+
 
 /**
  * Creates a new play by email user account.
@@ -50,6 +52,8 @@ public class NewPBEMUser extends HttpServlet {
 
 	private static final int ACTIVATED = 1;
 	private static final long serialVersionUID = 1L;
+
+	private final Validation validation = new Validation();
 	private String captchaSecret;
 
 	public void init(ServletConfig config) throws ServletException {
@@ -82,7 +86,7 @@ public class NewPBEMUser extends HttpServlet {
 					"Invalid password. Please try again with another password.");
 			return;
 		}
-		if (username == null || username.length() <= 2) {
+		if (!validation.isValidUsername(username)) {
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST,
 					"Invalid username. Please try again with another username.");
 			return;

@@ -21,9 +21,10 @@ import java.io.*;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Properties;
-import java.util.regex.Pattern;
 import javax.servlet.*;
 import javax.servlet.http.*;
+
+import org.freeciv.services.Validation;
 
 
 /**
@@ -33,9 +34,8 @@ import javax.servlet.http.*;
  */
 public class ListSaveGames extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private String PATTERN_VALIDATE_ALPHA_NUMERIC = "[0-9a-zA-Z\\.]*";
-	private Pattern p = Pattern.compile(PATTERN_VALIDATE_ALPHA_NUMERIC);
 
+	private final Validation validation = new Validation();
 	private String savegameDirectory;
 
 	public void init(ServletConfig config) throws ServletException {
@@ -54,7 +54,7 @@ public class ListSaveGames extends HttpServlet {
 			throws IOException, ServletException {
 
 		String username = request.getParameter("username");
-		if (username != null && !p.matcher(username).matches()) {
+		if (!validation.isValidUsername(username)) {
 			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
 					"Invalid username");
 			return;

@@ -330,27 +330,7 @@ function show_dialog_message(title, message) {
 function validate_username() {
   username = $("#username_req").val();
 
-  var cleaned_username = username.replace(/[^a-zA-Z]/g,'');
-
-  if (username == null || username.length == 0 || username == "pbem") {
-    $("#username_validation_result").html("Your name can't be empty.");
-    $("#username_validation_result").show();
-    return false;
-  } else if (username.length <= 2 ) {
-    $("#username_validation_result").html("Your name is too short.");
-    $("#username_validation_result").show();
-    return false;
-  } else if (username.length >= 32) {
-    $("#username_validation_result").html("Your name is too long.");
-    $("#username_validation_result").show();
-    return false;
-  } else if (username != cleaned_username) {
-    $("#username_validation_result").html("Your name contains invalid characters, only the English alphabet is allowed.");
-    $("#username_validation_result").show();
-    return false;
-  } else if (!check_text_with_banlist_exact(username)) {
-    $("#username_validation_result").html("Your account has been banned.");
-    $("#username_validation_result").show();
+  if (!is_username_valid_show(username)) {
     return false;
   }
 
@@ -359,6 +339,21 @@ function validate_username() {
   return true;
 }
 
+/**************************************************************************
+ Checks if the username is valid and shows the reason if it is not.
+ Returns whether the username is valid.
+**************************************************************************/
+function is_username_valid_show(username) {
+  var reason = get_invalid_username_reason(username);
+  if (reason != null) {
+    $("#username_validation_result").html("The username '"
+                + username.replace(/&/g, "&amp;").replace(/</g, "&lt;")
+                + "' is " + reason + ".");
+    $("#username_validation_result").show();
+    return false;
+  }
+  return true;
+}
 
 
 

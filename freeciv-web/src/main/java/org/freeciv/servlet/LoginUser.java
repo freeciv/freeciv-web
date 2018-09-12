@@ -27,16 +27,19 @@ import java.sql.*;
 import javax.sql.*;
 import javax.naming.*;
 
+import org.freeciv.services.Validation;
+
 
 /**
- * Validates that the give username and password match
- * a user in the database.
+ * Validates that the given username and password match a user in the database.
  * Such user must be activated.
  *
  * URL: /login_user
  */
 public class LoginUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
+	private final Validation validation = new Validation();
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
@@ -50,7 +53,7 @@ public class LoginUser extends HttpServlet {
 					"Invalid password. Please try again with another password.");
 			return;
 		}
-		if (username == null || username.length() <= 2) {
+		if (!validation.isValidUsername(username)) {
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST,
 					"Invalid username. Please try again with another username.");
 			return;

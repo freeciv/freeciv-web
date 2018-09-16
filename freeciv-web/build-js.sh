@@ -3,10 +3,6 @@
 
 FCW_DEST=/var/lib/tomcat8/webapps/freeciv-web
 
-# workaround for https://github.com/samaxes/minify-maven-plugin/issues/142
-rm -rf target/freeciv-web/javascript/webclient.min.js.map
-rm -rf target/freeciv-web/javascript/webgl/libs/webgl-client.min.js.map
-
 mvn compile && \
 echo "Copying target/javascript/webclient.* to ${FCW_DEST}/javascript" && \
   cp target/freeciv-web/javascript/webclient.* "${FCW_DEST}"/javascript/ && \

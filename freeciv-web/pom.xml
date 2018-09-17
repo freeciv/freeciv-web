@@ -246,6 +246,21 @@ Rerun the sync-js-hand.js script.
 					<version>1.8</version>
 					<executions>
 						<execution>
+							<!-- workaround for https://github.com/samaxes/minify-maven-plugin/issues/142 -->
+							<id>source-mapping-fix</id>
+							<phase>initialize</phase>
+							<goals>
+								<goal>run</goal>
+							</goals>
+							<configuration>
+								<target>
+									<delete quiet="true">
+										<fileset dir="${project.build.directory}/freeciv-web/javascript" includes="**/*.map"/>
+									</delete>
+								</target>
+							</configuration>
+						</execution>
+						<execution>
 							<id>create-generated-javascript-dir</id>
 							<phase>generate-sources</phase>
 							<goals>
@@ -259,6 +274,7 @@ Rerun the sync-js-hand.js script.
 						</execution>
 					</executions>
 				</plugin>
+
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>exec-maven-plugin</artifactId>

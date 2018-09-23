@@ -54,18 +54,18 @@
 
         <table style="width: 100%;">
              <tr>
-                <th>Rank:</td>
-                <th>Name:</td>
-                <th>Nation:</td>
-                <th>End turn:</td>
-                <th>End date:</td>
-                <th title="Score of this player in all games">Score (all):</td>
-                <th title="Score of this player in this game">Score:</td>
-                <th>Map:</td>
+                <th>Rank:</th>
+                <th>Name:</th>
+                <th>Nation:</th>
+                <th>End turn:</th>
+                <th>End date:</th>
+                <th title="Score of this player in all games">Score (all):</th>
+                <th title="Score of this player in this game">Score:</th>
+                <th>Map:</th>
               </tr>
             <c:forEach items="${data}" var="item">
               <tr class="score_row">
-                <td title"The rank of the game score compared to other game scores"><c:out value="${item.position}"/></td>
+                <td title="The rank of the game score compared to other game scores"><c:out value="${item.position}"/></td>
                 <td title="Player name"><c:out value="${item.username}"/></td>
                 <td title="Nation"><c:out value="${item.nation}"/></td>
                 <td style="text-align: right;" title="Turn when the game ended"><c:out value="${item.end_turn}"/></td>
@@ -81,7 +81,7 @@
                 </td>
               </tr>
             </c:forEach>
-        <table>
+        </table>
         <br><br><br>
     			</div>
     		</div>

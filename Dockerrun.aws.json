@@ -5,6 +5,5 @@
       "ContainerPort": "80"
     }
   ],
-  "Logging": "/var/log",
-  "Image": "doctorpangloss/freeciv-web:latest"
+  "Logging": "/var/log"
 }

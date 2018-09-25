@@ -1,0 +1,6 @@
+#!/bin/bash
+export JAVA_OPTS="-Djava.security.egd=file:/dev/urandom -Dmysql.user=${MYSQL_USER} -Dmysql.password=${MYSQL_PASSWORD} -Dmysql.url=${MYSQL_URL}"
+
+cd "${FREECIV_RUNTIME_PREFIX}"/freeciv-web
+mvn flyway:migrate -Dflyway.user=${MYSQL_USER} -Dflyway.password=${MYSQL_PASSWORD} -Dflyway.url=jdbc:${MYSQL_URL}
+"${TOMCAT_HOME}"/bin/catalina.sh run

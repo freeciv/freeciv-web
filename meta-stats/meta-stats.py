@@ -29,13 +29,16 @@ import datetime
 import mysql.connector
 import configparser
 import http.client
+from os import environ
 
-settings = configparser.ConfigParser()
-settings.read("../../pbem/settings.ini")
+try:
+    from urllib.parse import urlparse
+except:
+    from urlparse import urlparse
 
-mysql_user=settings.get("Config", "mysql_user")
-mysql_database=settings.get("Config", "mysql_database");
-mysql_password=settings.get("Config", "mysql_password");
+mysql_user=environ['MYSQL_USER']
+mysql_url=environ['MYSQL_URL']
+mysql_password=environ['MYSQL_PASSWORD']
 
 server_map = {};
 is_first_check = True;
@@ -45,7 +48,8 @@ def increment_metaserver_stats():
   cursor = None;
   cnx = None;
   try:
-    cnx = mysql.connector.connect(user=mysql_user, database=mysql_database, password=mysql_password)
+    url = urlparse(mysql_url)
+    cnx = mysql.connector.connect(user=mysql_user, password=mysql_password, database=url.path[1:], host=url.hostname, port=url.port)
     cursor = cnx.cursor()
     query = ("INSERT INTO games_played_stats (statsDate, gameType, gameCount) VALUES (CURDATE(), 3, 1)  ON DUPLICATE KEY UPDATE gameCount = gameCount + 1;")
     cursor.execute(query);
@@ -77,7 +81,7 @@ def poll_metaserver():
       # new game: new server starts directly in running state.
       print("new game started for: " + hostname_port);
       increment_metaserver_stats();
-      
+
     server_map[hostname_port] = state;
   is_first_check = False;
 

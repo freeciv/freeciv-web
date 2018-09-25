@@ -49,17 +49,9 @@ public class ResetPassword extends HttpServlet {
 
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-
-        try {
-            Properties prop = new Properties();
-            prop.load(getServletContext().getResourceAsStream("/WEB-INF/config.properties"));
-            captchaSecret = prop.getProperty("captcha_secret");
-            emailUsername = prop.getProperty("email_username");
-            emailPassword = prop.getProperty("email_password");
-            fcwHost = prop.getProperty("fcw_host");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        captchaSecret = System.getenv("FREECIV_WEB_CAPTCHA_SECRET");
+        emailUsername = System.getenv("FREECIV_WEB_MAILGUN_EMAIL_USERNAME");
+        emailPassword = System.getenv("FREECIV_WEB_MAILGUN_EMAIL_PASSWORD");
     }
 
 
@@ -85,7 +77,7 @@ public class ResetPassword extends HttpServlet {
         urlParameters.add(new BasicNameValuePair("response", captcha));
         post.setEntity(new UrlEncodedFormEntity(urlParameters));
 
-        if (!captchaSecret.contains("secret goes here")) {
+        if (captchaSecret == null || captchaSecret.isEmpty()) {
 			/* Validate captcha against google api. skip validation for localhost
              where captcha_secret still has default value. */
             HttpResponse captchaResponse = client.execute(post);
@@ -160,7 +152,7 @@ public class ResetPassword extends HttpServlet {
             email.setSSLOnConnect(true);
             email.setFrom("Freeciv-web <postmaster@freecivweb.info>");
             email.setSubject("New password for Freeciv-web");
-            email.setMsg("Your new password for " + fcwHost + " has been generated. \n\nUsername: " + username + " \nPassword: " + randomPassword);
+            email.setMsg("Your new password for Freeciv has been generated. \n\nUsername: " + username + " \nPassword: " + randomPassword);
             email.addTo(email_parameter);
             email.send();
         } catch (EmailException err) {

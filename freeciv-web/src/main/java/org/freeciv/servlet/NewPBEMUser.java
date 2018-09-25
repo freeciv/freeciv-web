@@ -58,14 +58,7 @@ public class NewPBEMUser extends HttpServlet {
 
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
-
-		try {
-			Properties prop = new Properties();
-			prop.load(getServletContext().getResourceAsStream("/WEB-INF/config.properties"));
-			captchaSecret = prop.getProperty("captcha_secret");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		captchaSecret = System.getenv("FREECIV_WEB_CAPTCHA_SECRET");
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -105,7 +98,7 @@ public class NewPBEMUser extends HttpServlet {
 		urlParameters.add(new BasicNameValuePair("response", captcha));
 		post.setEntity(new UrlEncodedFormEntity(urlParameters));
 
-		if (!captchaSecret.contains("secret goes here")) {
+		if (captchaSecret == null || captchaSecret.isEmpty()) {
 			/* Validate captcha against google api. skip validation for localhost 
              where captcha_secret still has default value. */
 			HttpResponse captchaResponse = client.execute(post);

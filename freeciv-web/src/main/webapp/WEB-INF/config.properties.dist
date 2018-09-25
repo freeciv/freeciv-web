@@ -1,9 +1,0 @@
-captcha_secret=secret goes here
-savegame_dir=/var/lib/tomcat8/webapps/data/savegames/
-email_username=username
-email_password=password
-google-signin-client-key=122428231951-2vrvrtd9sc2v9nktemclkvc2t187jkr6.apps.googleusercontent.com
-#ga-tracking-id=UA-40584174-1
-#trackjs-token=ee5dba6fe2e048f79b422157b450947b
-# Used in some messages, so put the production server even when testing.
-fcw_host=example.com

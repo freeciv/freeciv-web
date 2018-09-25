@@ -20,31 +20,32 @@ import json
 import configparser
 import re
 import time
+from os import environ, path
 
 from email.mime.text import MIMEText
 
-class MailSender():
+def _get_relative_path(filepath):
+  return path.join(path.dirname(__file__), filepath)
 
-  settings = configparser.ConfigParser()
-  settings.read("settings.ini")
+class MailSender():
   testmode = False;
 
-  smtp_login=settings.get("Config", "smtp_login")
-  smtp_password=settings.get("Config", "smtp_password")
-  smtp_host=settings.get("Config", "smtp_host")
-  smtp_port=settings.get("Config", "smtp_port")
-  smtp_sender=settings.get("Config", "smtp_sender")
+  smtp_login=environ['FREECIV_WEB_MAILGUN_EMAIL_USERNAME']
+  smtp_password=environ['FREECIV_WEB_MAILGUN_EMAIL_PASSWORD']
+  smtp_host='smtp.mailgun.org'
+  smtp_port=587
+  smtp_sender='Freeciv-web <postmaster@freecivweb.info>'
 
-  host = settings.get("Config", "host")
+  host = environ['FREECIV_WEB_ROOT_URL']
 
   template_next_turn = "";
-  with open('email_template_next_turn.html', 'r') as content_file:
+  with open(_get_relative_path('email_template_next_turn.html'), 'r') as content_file:
     template_next_turn = content_file.read();
   template_invitation = "";
-  with open('email_template_invitation.html', 'r') as content_file:
+  with open(_get_relative_path('email_template_invitation.html'), 'r') as content_file:
     template_invitation = content_file.read();
   template_generic = "";
-  with open('email_template_generic.html', 'r') as content_file:
+  with open(_get_relative_path('email_template_generic.html'), 'r') as content_file:
     template_generic = content_file.read();
 
 

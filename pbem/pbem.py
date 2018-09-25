@@ -19,6 +19,7 @@
 ***********************************************************************'''
 
 import os, os.path
+from os import environ
 import sys
 import time
 import lzma
@@ -32,21 +33,23 @@ import configparser
 import json
 import traceback
 
+try:
+    from urllib.parse import urlparse
+except:
+    from urlparse import urlparse
+
 game_expire_time = 60 * 60 * 24 * 7;  # 7 days until games are expired.
 game_remind_time = 60 * 60 * 24 * 6;  # 6 days until games are sent a reminder.
 testmode = False;
 
-settings = configparser.ConfigParser()
-settings.read("settings.ini")
+mysql_user = environ['MYSQL_USER']
+mysql_password = environ['MYSQL_PASSWORD']
+mysql_url = environ['MYSQL_URL']
 
-mysql_user=settings.get("Config", "mysql_user");
-mysql_database=settings.get("Config", "mysql_database");
-mysql_password=settings.get("Config", "mysql_password");
+savedir = environ['FREECIV_WEB_SAVE_GAME_DIRECTORY']; 
+rankdir = environ['FREECIV_WEB_RANK_LOGS_DIRECTORY'];
 
-savedir = settings.get("Config", "savegame_directory"); 
-rankdir = settings.get("Config", "ranklog_directory");
-
-host = settings.get("Config", "host");
+host = environ['FREECIV_WEB_ROOT_URL'];
 
 # load game status from file.
 loaded_games = {};
@@ -120,7 +123,7 @@ def handle_savegame(root, file):
   active_player = players[phase];
   print("active_player=" + active_player);    
   active_email = find_email_address(active_player);
-  game_url = "https://" + host + "/webclient/?action=pbem&savegame=" + new_filename.replace(".xz", "");
+  game_url = host + "/webclient/?action=pbem&savegame=" + new_filename.replace(".xz", "");
   if (active_email != None):
     status.games[game_id] = {'turn' : turn, 'phase': phase, 'players' : players, 'time_str' : time.ctime(), 
                              'time_int' : int(time.time()), 'state' : state, 'url' : game_url, 
@@ -172,7 +175,8 @@ def find_email_address(user_to_find):
   cursor = None;
   cnx = None;
   try:
-    cnx = mysql.connector.connect(user=mysql_user, database=mysql_database, password=mysql_password)
+    url = urlparse(game_url)
+    cnx = mysql.connector.connect(user=mysql_user, password=mysql_password, database=url.path[1:], host=url.hostname, port=url.port)
     cursor = cnx.cursor()
     query = ("select email from auth where lower(username)=lower(%(usr)s) and activated='1' limit 1")
     cursor.execute(query, {'usr' : user_to_find})

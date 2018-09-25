@@ -1,0 +1,26 @@
+version: '3.3'
+
+services:
+   db:
+     image: mysql:5.7
+     volumes:
+       - db_data:/var/lib/mysql
+     restart: always
+     environment:
+       MYSQL_ROOT_PASSWORD: u9f0dsuf91dfsia90d
+       MYSQL_DATABASE: freeciv_web
+       MYSQL_USER: freeciv
+       MYSQL_PASSWORD: u9f0dsuf91dfsia90d
+   freecivweb:
+     depends_on:
+       - db
+     ports:
+       - "80:80"
+     image: freeciv-web:latest
+     restart: always
+     environment:
+       MYSQL_URL: mysql://db:3306/freeciv_web
+       MYSQL_USER: freeciv
+       MYSQL_PASSWORD: u9f0dsuf91dfsia90d
+volumes:
+    db_data:

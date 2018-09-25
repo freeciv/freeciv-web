@@ -21,15 +21,19 @@
 from threading import Thread
 from tornado import web, websocket, ioloop, httpserver
 from tornado.ioloop import IOLoop
+from os import environ, path
 import re
 import time
 
+def _get_relative_path(filepath):
+  return path.join(path.dirname(__file__), filepath)
+
 STATUS_PORT = 3999
-savedir = "/var/lib/tomcat8/webapps/data/savegames/";
+savedir = environ['FREECIV_WEB_SAVE_GAME_DIRECTORY']
 savegame_filename = "freeciv-earth-savegame-";
 savecounter = 10000;
 savetemplate = "";
-with open('template_map.sav', 'r') as myfile:
+with open(_get_relative_path('template_map.sav'), 'r') as myfile:
     savetemplate=myfile.read();
 myfile.close();
 

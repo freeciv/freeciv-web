@@ -28,45 +28,34 @@ import http.client
 import configparser
 from pubstatus import *
 from civlauncher import Civlauncher
-import os.path
+from os.path import dirname, abspath
+from os import environ, chdir
 
 metahost = "localhost"
-metaport = 8080
-metapath =  "/freeciv-web/meta/metaserver"
-statuspath =  "/freeciv-web/meta/status"
+metaport = 80
+metapath =  "/meta/metaserver"
+statuspath =  "/meta/status"
 settings_file = "settings.ini"
 game_types = ["singleplayer", "multiplayer", "pbem"]
 
 metachecker_interval = 40
-port = 6000
+port = int(environ['PUBLITE2_PORT'])
 
 # The Metachecker class connects to the Freeciv-web metaserver, gets the number of available
 # Freeciv-web server instances, and launches new servers if needed.
 class metachecker():
     def __init__(self):
       self.server_list = []
-      if not os.path.isfile(settings_file):
-        print("ERROR: Publite2 isn't setup correctly. Copy settings.ini.dist to settings.ini " +
-              "and update it do match your system.")
-        sys.exit(1)
-      settings = configparser.ConfigParser()
-      settings.read(settings_file)
-      self.server_capacity_single = int(settings.get("Resource usage", "server_capacity_single",
-                                              fallback = 5))
-      self.server_capacity_multi = int(settings.get("Resource usage", "server_capacity_multi",
-                                              fallback = 2))
-      self.server_capacity_pbem = int(settings.get("Resource usage", "server_capacity_pbem",
-                                              fallback = 2))
+      self.server_capacity_single = int(environ['FREECIV_WEB_SERVER_CAPACITY_SINGLE'])
+      self.server_capacity_multi = int(environ['FREECIV_WEB_SERVER_CAPACITY_MULTI'])
+      self.server_capacity_pbem = int(environ['FREECIV_WEB_SERVER_CAPACITY_PBEM'])
 
-      self.server_limit = int(settings.get("Resource usage", "server_limit",
-                                           fallback = 250))
-      self.savesdir = settings.get("Config", "save_directory",
-                                   fallback = "/var/lib/tomcat8/webapps/data/savegames/")
+      self.server_limit = int(environ['FREECIV_WEB_SERVER_LIMIT'])
+      self.savesdir = environ['FREECIV_WEB_SAVE_GAME_DIRECTORY']
 
-      self.start_longturn = settings.get("Config", "start_longturn",
-                                fallback = "false")
+      self.start_longturn = bool(environ['FREECIV_WEB_START_LONGTURN'])
 
-      longturn_ports_str = settings.get("Config", "longturn_server_ports").split(",")
+      longturn_ports_str = environ['FREECIV_WEB_LONGTURN_SERVER_PORTS'].split(" ")
       self.longturn_ports_list = [int(e) if e.isdigit() else e for e in longturn_ports_str]
 
       self.check_count = 0;
@@ -150,6 +139,7 @@ class metachecker():
 
 
 if __name__ == '__main__':
+  chdir(dirname(abspath(__file__)))
   #perform a test-request to the Metaserver
   try:
     conn = http.client.HTTPConnection(metahost, metaport);
@@ -170,7 +160,7 @@ if __name__ == '__main__':
     new_server.start();
     port += 1;
   
-  if (mc.start_longturn == "true"):
+  if mc.start_longturn:
     # start LongTurn games
     for i in mc.longturn_ports_list:  
       new_server = Civlauncher("longturn", "longturn_" + str(i), i, metahost + ":" + str(metaport) + metapath, mc.savesdir)

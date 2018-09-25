@@ -9,12 +9,6 @@ Freeciv-web scripts
 
 * freeciv-img-extract - extracts the images of the Freeciv tileset,
   and generates a version for the web. This produces a tileset PNG 
-  and Javascript. 
-
-* start-freeciv-web.sh - starts Freeciv-web.
-
-* stop-freeciv-web.sh - stops Freeciv-web.
-
-* status-freeciv-web.sh - checks if Freeciv-web is running.
+  and Javascript.
 
 * update-wikipedia-docs.py - generates docs from wikipedia about techs, units and buildings.

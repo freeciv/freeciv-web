@@ -1,5 +1,5 @@
 # Default metaserver URL
-META_URL="http://localhost:8080/meta/metaserver.php"
+META_URL="http://localhost/meta/metaserver"
 
 # We don't have use for MODPACK_LIST_URL at the moment.
 # This is just an example.

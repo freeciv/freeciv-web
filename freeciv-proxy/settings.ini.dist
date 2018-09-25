@@ -1,4 +1,0 @@
-[Config]
-mysql_user = #DB_USER#
-mysql_database = #DB_NAME#
-mysql_password = #DB_PASSWORD#

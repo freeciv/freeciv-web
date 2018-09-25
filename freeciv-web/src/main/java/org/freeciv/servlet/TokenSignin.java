@@ -47,14 +47,7 @@ public class TokenSignin extends HttpServlet {
 
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-
-        try {
-            Properties prop = new Properties();
-            prop.load(getServletContext().getResourceAsStream("/WEB-INF/config.properties"));
-            google_signin_key = prop.getProperty("google-signin-client-key");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        google_signin_key = System.getenv("FREECIV_WEB_GOOGLE_SIGN_IN_CLIENT_KEY");
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)

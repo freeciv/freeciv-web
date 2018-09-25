@@ -22,10 +22,12 @@
 
 
 from os import path as op
-from os import chdir
+from os import chdir, environ
 import re
 import sys
 import time
+from os.path import dirname, abspath
+
 from tornado import web, websocket, ioloop, httpserver
 from tornado.ioloop import IOLoop
 from debugging import *
@@ -37,18 +39,25 @@ import gc
 import mysql.connector
 import configparser
 
-PROXY_PORT = 8002
+try:
+    from urllib.parse import urlparse
+except:
+    from urlparse import urlparse
+
+PROXY_PORT = int(environ['FREECIV_PROXY_PORT'])
 CONNECTION_LIMIT = 1000
 
 civcoms = {}
 
-chdir(sys.path[0])
-settings = configparser.ConfigParser()
-settings.read("settings.ini")
+mysql_user=environ['MYSQL_USER']
+mysql_url=environ['MYSQL_URL']
+mysql_password=environ['MYSQL_PASSWORD']
 
-mysql_user=settings.get("Config", "mysql_user");
-mysql_database=settings.get("Config", "mysql_database");
-mysql_password=settings.get("Config", "mysql_password");
+def validate_username(name):
+    if (name is None or len(name) <= 2 or len(name) >= 32):
+        return False
+    name = name.lower()
+    return name != "pbem" and re.fullmatch('[a-z][a-z0-9]*', name) is not None
 
 class IndexHandler(web.RequestHandler):
 
@@ -81,7 +90,7 @@ class WSHandler(websocket.WebSocketHandler):
             login_message = json.loads(message)
             self.username = login_message['username']
             if (not validate_username(self.username)):
-              logger.warn("invalid username: " + str(message))
+              print("WARN: WSHandler onMessage: invalid username: " + str(message))
               self.write_message("[{\"pid\":5,\"message\":\"Error: Could not authenticate user. If you find a bug, please report it.\",\"you_can_join\":false,\"conn_id\":-1}]")
               return
             self.civserverport = login_message['port']
@@ -127,7 +136,8 @@ class WSHandler(websocket.WebSocketHandler):
       cursor = None;
       cnx = None;
       try:
-        cnx = mysql.connector.connect(user=mysql_user, database=mysql_database, password=mysql_password)
+        url = urlparse(mysql_url)
+        cnx = mysql.connector.connect(user=mysql_user, password=mysql_password, database=url.path[1:], host=url.hostname, port=url.port)
 
         # Check login with Google Account
         cursor = cnx.cursor()
@@ -187,25 +197,14 @@ class WSHandler(websocket.WebSocketHandler):
             return civcoms[key]
 
 
-def validate_username(name):
-    if (name is None or len(name) <= 2 or len(name) >= 32):
-        return False
-    name = name.lower()
-    return name != "pbem" and re.fullmatch('[a-z][a-z0-9]*', name) is not None
-
-
 if __name__ == "__main__":
+    chdir(dirname(abspath(__file__)))
     try:
         print('Started Freeciv-proxy. Use Control-C to exit')
 
         if len(sys.argv) == 2:
             PROXY_PORT = int(sys.argv[1])
         print(('port: ' + str(PROXY_PORT)))
-
-        LOG_FILENAME = '../logs/freeciv-proxy-logging-' + str(PROXY_PORT) + '.log'
-        logging.basicConfig(filename=LOG_FILENAME,level=logging.INFO)
-        logger = logging.getLogger("freeciv-proxy")
-
         application = web.Application([
             (r'/civsocket/' + str(PROXY_PORT), WSHandler),
             (r"/", IndexHandler),

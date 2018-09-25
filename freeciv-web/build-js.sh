@@ -1,7 +1,7 @@
 #!/bin/bash
 # builds javascript files Freeciv-web and copies the resulting file to tomcat.
 
-FCW_DEST=/var/lib/tomcat8/webapps/freeciv-web
+FCW_DEST=${TOMCAT_HOME}/webapps/freeciv-web
 
 mvn compile && \
 echo "Copying target/javascript/webclient.* to ${FCW_DEST}/javascript" && \

@@ -11,8 +11,6 @@ while [[ $# -gt 0 ]]; do
 done
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null && pwd)"
-
-TOMCATDIR="/var/lib/tomcat8"
 WEBAPP_DIR="${DIR}/target/freeciv-web"
 
 # Creating build.txt info file
@@ -30,6 +28,6 @@ else
 fi
 
 echo "maven package"
-mvn ${BATCH_MODE} flyway:migrate package && \
-echo "Copying target/freeciv-web.war to ${TOMCATDIR}/webapps" && \
-  cp target/freeciv-web.war "${TOMCATDIR}/webapps/"
+mvn ${BATCH_MODE} package && \
+echo "Copying target/freeciv-web.war to ${TOMCAT_HOME}/webapps" && \
+  cp target/freeciv-web.war "${TOMCAT_HOME}/webapps/"

@@ -2,10 +2,3 @@
 # https://github.com/freeciv/freeciv
 
 FCREV=32599783df58197a2625bea5120635d95f14db9f
-
-ORIGCAPSTR="+Freeciv.Devel-3.1-2018.Sep.05"
-
-# There's no need to bump this constantly as current freeciv-web
-# makes no connections to outside world - all connections are
-# internal to it. The server and client are always compatible.
-WEBCAPSTR="+Freeciv.Web.Devel-3.1"

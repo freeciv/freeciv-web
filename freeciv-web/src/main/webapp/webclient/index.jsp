@@ -10,19 +10,13 @@ String googleSigninClientKey = null;
 String trackJsToken = null;
 boolean fcwDebug = false;
 String fcwMinified = "";
-try {
-  Properties prop = new Properties();
-  prop.load(getServletContext().getResourceAsStream("/WEB-INF/config.properties"));
-  gaTrackingId = stripToNull(prop.getProperty("ga-tracking-id"));
-  googleSigninClientKey = stripToEmpty(prop.getProperty("google-signin-client-key"));
-  trackJsToken = stripToNull(prop.getProperty("trackjs-token"));
+gaTrackingId = stripToNull(System.getenv("FREECIV_WEB_GOOGLE_ANALYTICS_UA_ID"));
+googleSigninClientKey = stripToEmpty(System.getenv("FREECIV_WEB_GOOGLE_SIGN_IN_CLIENT_KEY"));
+trackJsToken = stripToNull(System.getenv("FREECIV_WEB_TRACK_JS_TOKEN"));
 
-  String debugParam = request.getParameter("debug");
-  fcwDebug = (debugParam != null && (debugParam.isEmpty() || parseBoolean(debugParam)));
-  fcwMinified = fcwDebug ? "" : ".min";
-} catch (IOException e) {
-  e.printStackTrace();
-}
+String debugParam = request.getParameter("debug");
+fcwDebug = (debugParam != null && (debugParam.isEmpty() || parseBoolean(debugParam)));
+fcwMinified = fcwDebug ? "" : ".min";
 %>
 <!DOCTYPE html>
 <html>

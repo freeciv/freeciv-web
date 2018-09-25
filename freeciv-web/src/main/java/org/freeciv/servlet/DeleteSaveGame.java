@@ -48,14 +48,7 @@ public class DeleteSaveGame extends HttpServlet {
 
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
-
-		try {
-			Properties prop = new Properties();
-			prop.load(getServletContext().getResourceAsStream("/WEB-INF/config.properties"));
-			savegameDirectory = prop.getProperty("savegame_dir");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		savegameDirectory = System.getenv("FREECIV_WEB_SAVE_GAME_DIRECTORY");
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)

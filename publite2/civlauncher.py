@@ -1,11 +1,15 @@
 from threading import Thread
 from subprocess import call, PIPE
 from shutil import *
+from os import path
 import sys
 from time import gmtime, strftime
 import time
 
-# The Civlauncher class launches a new instance of a Freeciv-web server in a 
+def _get_relative_path(filepath):
+    return path.join(path.dirname(__file__), filepath)
+
+# The Civlauncher class launches a new instance of a Freeciv-web server in a
 # separate thread and restarts the process when the game ends.
 class Civlauncher(Thread):
 
@@ -23,12 +27,12 @@ class Civlauncher(Thread):
     def run(self):
         while 1:
             try:
-                print("Start freeciv-web on port " + str(self.new_port) + 
+                print("Start freeciv-web on port " + str(self.new_port) +
                       " and freeciv-proxy on port " + str(1000 + self.new_port) + ".");
-                retcode = call("../publite2/init-freeciv-web.sh " 
-                               + self.savesdir + " " 
-                               + str(self.new_port) + " " 
-                               + str(1000 + self.new_port) + " " 
+                retcode = call(_get_relative_path("init-freeciv-web.sh") + " "
+                               + self.savesdir + " "
+                               + str(self.new_port) + " "
+                               + str(1000 + self.new_port) + " "
                                + self.metahostpath + " "
                                + self.gametype + " "
                                + self.scripttype, shell=True)

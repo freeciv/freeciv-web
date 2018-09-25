@@ -4,14 +4,8 @@
 <%
     String gaTrackingId = null;
     String trackJsToken = null;
-    try {
-        Properties prop = new Properties();
-        prop.load(getServletContext().getResourceAsStream("/WEB-INF/config.properties"));
-        gaTrackingId = stripToNull(prop.getProperty("ga-tracking-id"));
-        trackJsToken = stripToNull(prop.getProperty("trackjs-token"));
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
+    gaTrackingId = stripToNull(System.getenv("FREECIV_WEB_GOOGLE_ANALYTICS_UA_ID"));
+    trackJsToken = stripToNull(System.getenv("FREECIV_WEB_TRACK_JS_TOKEN"));
 %>
 <title>${empty title ? "Freeciv-web - open source turn-based strategy game" : title}</title>
 <meta charset="utf-8">

@@ -62,23 +62,32 @@ fi
 
 . ./version.txt
 
-if ! grep "NETWORK_CAPSTRING_MANDATORY=\"$ORIGCAPSTR\"" freeciv/fc_version 2>/dev/null >/dev/null ; then
-  echo "Capstring to be replaced does not match one given in version.txt" >&2
-  exit 1
+# Check out the correct revision
+(
+    cd freeciv
+    git checkout ${FCREV}
+)
+
+# Apply the patches
+if [ ! -f freeciv/patched.txt ]; then
+    for patch in $PATCHLIST
+    do
+      if test "x${patch}.patch" = "x$APPLY_UNTIL" ; then
+        echo "$patch not applied as requested to stop"
+        break
+      fi
+      if ! apply_patch $patch ; then
+        echo "Patching failed ($patch.patch)" >&2
+        exit 1
+      fi
+    done
 fi
 
-sed "s/$ORIGCAPSTR/$WEBCAPSTR/" freeciv/fc_version > freeciv/fc_version.tmp
-mv freeciv/fc_version.tmp freeciv/fc_version
-chmod a+x freeciv/fc_version
+# Remove .orig files
+(
+    cd freeciv
+    git clean -df "*.orig"
+)
 
-for patch in $PATCHLIST
-do
-  if test "x${patch}.patch" = "x$APPLY_UNTIL" ; then
-    echo "$patch not applied as requested to stop"
-    break
-  fi
-  if ! apply_patch $patch ; then
-    echo "Patching failed ($patch.patch)" >&2
-    exit 1
-  fi
-done
+# Mark that we've already patched this directory
+touch freeciv/patched.txt

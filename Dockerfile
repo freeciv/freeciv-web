@@ -127,8 +127,10 @@ ENV FREECIV_WEB_SERVER_CAPACITY_PBEM=1
 ENV FREECIV_WEB_SERVER_IDLE=20
 # The maximum number of games to run
 ENV FREECIV_WEB_SERVER_LIMIT=999
-
 # Runtime prefix (in case you want to run services locally, this can be changed
 ENV FREECIV_RUNTIME_PREFIX=/docker
+
+# Remove unneeded files and folders
+RUN rm -rf /docker/music /docker/blender /docker/freeciv-web /docker/freeciv
 
 EXPOSE 80

@@ -84,8 +84,8 @@ fi
 
 printf "\n--------------------------------\n";
 
-echo "checking metaserver on PHP server..."
-if checkURL http://localhost/game/list /tmp/status7.log --head; then
+echo "checking metaserver server..."
+if checkURL http://localhost/meta/status /tmp/status7.log --head; then
   echo "metaserver is OK!"
 else
   cat /tmp/status7.log

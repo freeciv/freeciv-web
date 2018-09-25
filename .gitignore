@@ -92,3 +92,8 @@ scripts/configuration.sh
 scripts/dependency-services-start.sh
 scripts/dependency-services-stop.sh
 .DS_Store
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

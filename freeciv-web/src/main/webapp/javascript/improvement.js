@@ -17,8 +17,6 @@
 
 ***********************************************************************/
 
-var improvements = {};
-
 // incomplete list of (well defined) building names - populate as needed
 // Remove in favor of [Effects](https://github.com/freeciv/freeciv-web/issues/208) when implemented.
 // IDs are dynamic based on ruleset
@@ -27,6 +25,26 @@ const B_PALACE_NAME = 'Palace';
 
 var B_LAST = MAX_NUM_ITEMS;
 
+const improvements = {};
+/** @private */
+const improvements_name_index = {};
+
+/**************************************************************************
+ Prepare improvements for use, resetting state from any previous ruleset
+ **************************************************************************/
+function improvements_init()
+{
+  Object.keys(improvements).forEach(k => delete improvements[k]);
+  Object.keys(improvements_name_index).forEach(k => delete improvements_name_index[k]);
+}
+
+/**************************************************************************
+ Add a new improvement definition
+ **************************************************************************/
+function improvements_add_building(improvement) {
+  improvements[improvement.id] = improvement;
+  improvements_name_index[improvement.name] = improvement.id
+}
 
 /**************************************************************************
  Returns a list containing improvements which are available from a tech.
@@ -73,14 +91,12 @@ function get_improvement_requirements(improvement_id)
 }
 
 /**************************************************************************
- Finds improvement id by exact name, returning null if not found.
+ Finds improvement id by exact name, or -1 if not found.
  **************************************************************************/
 function improvement_id_by_name(name)
 {
-  for (const id in improvements) {
-    if (improvements.hasOwnProperty(id) && name === improvements[id]['name']) {
-      return id
-    }
-  }
-  return null;
+  // 0 is a valid id, so cannot use `|| -1`
+  return improvements_name_index.hasOwnProperty(name)
+    ? improvements_name_index[name]
+    : -1;
 }

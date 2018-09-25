@@ -521,11 +521,12 @@ function handle_ruleset_control(packet)
   unit_types = {};
   unit_classes = {};
   city_rules = {};
-  improvements = {};
   terrains = {};
   resources = {};
   goods = {};
   actions = {};
+
+  improvements_init();
 
   /* handle_ruleset_extra defines some variables dinamically */
   for (var extra in extras) {
@@ -1248,7 +1249,7 @@ function handle_ruleset_city(packet)
 /* 100% complete */
 function handle_ruleset_building(packet)
 {
-  improvements[packet['id']] = packet;
+  improvements_add_building(packet);
 }
 
 function handle_ruleset_unit_class(packet)

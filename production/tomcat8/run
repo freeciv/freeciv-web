@@ -2,5 +2,10 @@
 export JAVA_OPTS="-Djava.security.egd=file:/dev/urandom -Dmysql.user=${MYSQL_USER} -Dmysql.password=${MYSQL_PASSWORD} -Dmysql.url=${MYSQL_URL}"
 
 cd "${FREECIV_RUNTIME_PREFIX}"/freeciv-web
-mvn flyway:migrate -Dflyway.user=${MYSQL_USER} -Dflyway.password=${MYSQL_PASSWORD} -Dflyway.url=jdbc:${MYSQL_URL}
+# Since the SQL service might not be ready yet, repeatedly run until the migration succeeds
+while ! mvn flyway:migrate -Dflyway.user=${MYSQL_USER} -Dflyway.password=${MYSQL_PASSWORD} -Dflyway.url=jdbc:${MYSQL_URL} ; do
+    echo "Failed to migrate, retrying in 8s"
+    sleep 8
+done
+
 "${TOMCAT_HOME}"/bin/catalina.sh run 2>&1

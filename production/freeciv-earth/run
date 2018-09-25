@@ -1,2 +1,2 @@
 #!/bin/sh
-python3 -u "${FREECIV_RUNTIME_PREFIX}"/freeciv-earth/freeciv-earth-mapgen.py
+python3 -u "${FREECIV_RUNTIME_PREFIX}"/freeciv-earth/freeciv-earth-mapgen.py 2>&1

@@ -29,6 +29,7 @@ echo FC_DATA_DIR=$FC_DATA_DIR
 
 mkdir -p "${DOCS_DEST}" "${JS_DEST}" "${SOUNDS_DEST}" "${GAME_DEST}" && \
 "${DIR}"/freeciv-img-extract/sync.sh -f "${FREECIV_DIR}" -o "${WEBAPP_DIR}" && \
+"${DIR}"/helpdata_gen/ruleset_auto_gen.sh -f "${FREECIV_DIR}" -o "${WEBAPP_DIR}" && \
 "${DIR}"/generate_js_hand/generate_js_hand.py -f "${FREECIV_DIR}" -o "${WEBAPP_DIR}" && \
 "${DIR}"/gen_event_types/gen_event_types.py -f "${FREECIV_DIR}" -o "${WEBAPP_DIR}" && \
 "${DIR}"/helpdata_gen/helpdata_gen.py -f "${FREECIV_DIR}" -o "${WEBAPP_DIR}" && \

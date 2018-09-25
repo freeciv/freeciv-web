@@ -98,7 +98,7 @@ public class NewPBEMUser extends HttpServlet {
 		urlParameters.add(new BasicNameValuePair("response", captcha));
 		post.setEntity(new UrlEncodedFormEntity(urlParameters));
 
-		if (captchaSecret == null || captchaSecret.isEmpty()) {
+		if (captchaSecret == null || captchaSecret.equals("empty")) {
 			/* Validate captcha against google api. skip validation for localhost 
              where captcha_secret still has default value. */
 			HttpResponse captchaResponse = client.execute(post);

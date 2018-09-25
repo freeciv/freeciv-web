@@ -151,7 +151,8 @@ if __name__ == '__main__':
     sys.exit(1)
   finally:
     conn.close();
-  
+
+  time.sleep(16)
   # start the initial Freeciv-web servers
   mc = metachecker()
   for type in game_types:

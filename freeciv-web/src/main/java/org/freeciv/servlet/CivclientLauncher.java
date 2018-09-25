@@ -17,6 +17,8 @@
  *******************************************************************************/
 package org.freeciv.servlet;
 
+import org.apache.commons.lang3.exception.ExceptionUtils;
+
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -28,9 +30,9 @@ import javax.naming.*;
 
 
 /**
- * This class is responsible for finding an available freeciv-web server for clients
- * based on information in the metaserver database.
- *
+ * This class is responsible for finding an available freeciv-web server for clients based on information in the
+ * metaserver database.
+ * <p>
  * URL: /civclientlauncher
  */
 public class CivclientLauncher extends HttpServlet {
@@ -38,41 +40,43 @@ public class CivclientLauncher extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
-
-		// Parse input parameters ...
-		String action = request.getParameter("action");
-		if (action == null) {
-			action = "new";
-		}
-
-		String civServerPort = request.getParameter("civserverport");
-
 		Connection conn = null;
+		String civServerPort = null;
+		String action = null;
 		try {
+
+			// Parse input parameters ...
+			action = request.getParameter("action");
+			if (action == null) {
+				action = "new";
+			}
+
+			civServerPort = request.getParameter("civserverport");
+
 			Context env = (Context) (new InitialContext().lookup("java:comp/env"));
 			DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
 			conn = ds.getConnection();
-			
+
 			String gameType;
 			switch (action) {
-			case "new":
-			case "load":
-			case "observe":
-			case "multi":
-			case "hotseat":
-			case "earthload":
-				gameType = "singleplayer";
-				break;
-			case "pbem":
-				gameType = "pbem";
-				break;
-			default:
-				response.setHeader("result", "invalid port validation");
-				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
-						"Unable to find a valid Freeciv server to play on. Please try again later.");
-				return;
+				case "new":
+				case "load":
+				case "observe":
+				case "multi":
+				case "hotseat":
+				case "earthload":
+					gameType = "singleplayer";
+					break;
+				case "pbem":
+					gameType = "pbem";
+					break;
+				default:
+					response.setHeader("result", "invalid port validation");
+					response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
+							"Unable to find a valid Freeciv server to play on. Please try again later.");
+					return;
 			}
-			
+
 
 			if (civServerPort == null || civServerPort.length() == 0) {
 				// If the user requested a new game, then get host and port for an available
@@ -118,8 +122,8 @@ public class CivclientLauncher extends HttpServlet {
 				return;
 			}
 
-		} catch (Exception err) {
-			response.setHeader("result", err.getMessage());
+		} catch (Throwable err) {
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST, ExceptionUtils.getMessage(err) + "\n" + ExceptionUtils.getStackTrace(err));
 			err.printStackTrace();
 			return;
 		} finally {

@@ -1,2 +1,2 @@
 #!/bin/sh
-python3 -u "${FREECIV_RUNTIME_PREFIX}"/publite2/publite2.py
+python3 -u "${FREECIV_RUNTIME_PREFIX}"/publite2/publite2.py 2>&1

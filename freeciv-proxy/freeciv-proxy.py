@@ -44,7 +44,6 @@ try:
 except:
     from urlparse import urlparse
 
-PROXY_PORT = int(environ['FREECIV_PROXY_PORT'])
 CONNECTION_LIMIT = 1000
 
 civcoms = {}
@@ -85,12 +84,13 @@ class WSHandler(websocket.WebSocketHandler):
         self.set_nodelay(True)
 
     def on_message(self, message):
+        # print('DEBUG freeciv-proxy WSHandler %s on_message: %s' % (str(self.civserverport) if hasattr(self, 'civserverport') else "-1", message))
         if (not self.is_ready and len(civcoms) <= CONNECTION_LIMIT):
             # called the first time the user connects.
             login_message = json.loads(message)
             self.username = login_message['username']
             if (not validate_username(self.username)):
-              print("WARN: WSHandler onMessage: invalid username: " + str(message))
+              print("WARN freeciv-proxy WSHandler on_message: invalid username: " + str(message))
               self.write_message("[{\"pid\":5,\"message\":\"Error: Could not authenticate user. If you find a bug, please report it.\",\"you_can_join\":false,\"conn_id\":-1}]")
               return
             self.civserverport = login_message['port']
@@ -203,16 +203,16 @@ if __name__ == "__main__":
         print('Started Freeciv-proxy. Use Control-C to exit')
 
         if len(sys.argv) == 2:
-            PROXY_PORT = int(sys.argv[1])
-        print(('port: ' + str(PROXY_PORT)))
+            proxy_port = int(sys.argv[1])
+        print(('port: ' + str(proxy_port)))
         application = web.Application([
-            (r'/civsocket/' + str(PROXY_PORT), WSHandler),
+            (r'/civsocket/' + str(proxy_port), WSHandler),
             (r"/", IndexHandler),
             (r"(.*)status", StatusHandler),
         ])
 
         http_server = httpserver.HTTPServer(application)
-        http_server.listen(PROXY_PORT)
+        http_server.listen(proxy_port)
         ioloop.IOLoop.instance().start()
 
     except KeyboardInterrupt:

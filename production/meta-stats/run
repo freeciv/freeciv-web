@@ -1,2 +1,2 @@
 #!/bin/sh
-python3 -u "${FREECIV_RUNTIME_PREFIX}"/meta-stats/meta-stats.py
+python3 -u "${FREECIV_RUNTIME_PREFIX}"/meta-stats/meta-stats.py 2>&1

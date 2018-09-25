@@ -1,0 +1,14 @@
+diff --git a/server/civserver.c b/server/civserver.c
+index 52a1c7a73a..dd3120bf49 100644
+--- a/server/civserver.c
++++ b/server/civserver.c
+@@ -473,9 +473,6 @@ int main(int argc, char *argv[])
+   }
+ #endif /* HAVE_FCDB */
+ 
+-  /* disallow running as root -- too dangerous */
+-  dont_run_as_root(argv[0], "freeciv_server");
+-
+   init_our_capability();
+ 
+   /* have arguments, call the main server loop... */

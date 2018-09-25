@@ -17,11 +17,11 @@ import socket
 import select
 from struct import *
 from threading import Thread
+import traceback
 import logging
 import time
 
 HOST = '127.0.0.1'
-logger = logging.getLogger("freeciv-proxy")
 
 # The CivCom handles communication between freeciv-proxy and the Freeciv C
 # server.
@@ -47,8 +47,7 @@ class CivCom(Thread):
 
     def run(self):
         # setup connection to civserver
-        if (logger.isEnabledFor(logging.INFO)):
-            logger.info("Start connection to civserver for " + self.username)
+        print("INFO CivCom run: Start connection to civserver for " + self.username, flush=True)
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.socket.setblocking(True)
         self.socket.settimeout(2)
@@ -90,17 +89,21 @@ class CivCom(Thread):
         try:
             if (self.socket is not None and not self.stopped):
                 if (self.packet_size == -1):
-                    self.header_buf += self.socket.recv(2 -
-                                                        len(self.header_buf))
+                    received = self.socket.recv(2 - len(self.header_buf))
+                    # print('DEBUG CivCom read_from_connection: received ' + str(received))
+                    # print('DEBUG CivCom read_from_connection: header_buf ' + str(self.header_buf))
+                    self.header_buf += received
                     if (len(self.header_buf) == 0):
                         self.close_connection()
                         return None
                     if (len(self.header_buf) == 2):
                         header_pck = unpack('>H', self.header_buf)
                         self.header_buf = bytearray(0)
+                        # print('DEBUG CivCom read_from_connection: header_buf ' + str(self.header_buf))
                         self.packet_size = header_pck[0] - 2
+                        # print('DEBUG CivCom read_from_connection: packet_size ' + str(self.packet_size))
                         if (self.packet_size <= 0 or self.packet_size > 32767):
-                            logger.error("Invalid packet size " + str(self.packet_size))
+                            print("ERROR CivCom read_from_connection: Invalid packet size " + str(self.packet_size), flush=True)
                     else:
                         # complete header not read yet. return now, and read
                         # the rest next time.
@@ -108,6 +111,7 @@ class CivCom(Thread):
 
             if (self.socket is not None and self.net_buf is not None and self.packet_size > 0):
                 data = self.socket.recv(self.packet_size - len(self.net_buf))
+                # print('DEBUG CivCom read_from_connection: data ' + str(data))
                 if (len(data) == 0):
                     self.close_connection()
                     return None
@@ -121,10 +125,8 @@ class CivCom(Thread):
             return None
 
     def close_connection(self):
-        if (logger.isEnabledFor(logging.INFO)):
-            logger.info(
-                "Server connection closed. Removing civcom thread for " +
-                self.username)
+        # print("DEBUG CivCom close_connnection:" + '\n'.join(traceback.format_stack()), flush=True)
+        # print("INFO CivCom close_connection: Server connection closed. Removing civcom thread for " + self.username, flush=True)
 
         if (hasattr(self.civwebserver, "civcoms") and self.key in list(self.civwebserver.civcoms.keys())):
             del self.civwebserver.civcoms[self.key]
@@ -143,10 +145,7 @@ class CivCom(Thread):
                     encoding="utf-8",
                     errors="ignore"))
         except UnicodeDecodeError:
-            if (logger.isEnabledFor(logging.ERROR)):
-                logger.error(
-                    "Unable to decode string from civcom socket, for user: " +
-                    self.username)
+            print("ERROR CivCom send_buffer_append: Unable to decode string from civcom socket, for user: " + self.username, flush=True)
             return
 
     # sends packets to client (WebSockets client / browser)
@@ -168,14 +167,14 @@ class CivCom(Thread):
         return result
 
     def send_error_to_client(self, message):
-        if (logger.isEnabledFor(logging.ERROR)):
-            logger.error(message)
+        print("ERROR CivCom send_error_to_client: " + message, flush=True)
         self.send_buffer_append(
             ("{\"pid\":25,\"event\":100,\"message\":\"" + message + "\"}").encode("utf-8"))
 
     # Send packets from freeciv-proxy to civserver
     def send_packets_to_civserver(self):
         if (self.civserver_messages is None or self.socket is None):
+            # print("DEBUG CivCom send_packets_to_civserver: early return, %s, %s" % (repr(self.civserver_messages), repr(self.socket)) )
             return
 
         try:

@@ -43,8 +43,8 @@ mvn flyway:migrate
 The following files contains MySQL username and password, and must be set manually
 if you are not using vagrant:
 
-freeciv-web/src/main/webapp/META-INF/context.xml.dist  (rename to context.xml)
-freeciv-web/src/main/webapp/WEB-INF/config.properties.dist  (rename to config.properties, contains capcha secret for pbem)  
+* freeciv-web/src/main/webapp/META-INF/context.xml.dist  (rename to context.xml)
+* freeciv-web/src/main/webapp/WEB-INF/config.properties.dist  (rename to config.properties, contains capcha secret for pbem)
 
 
 Copyright (C) 2007-2016 Andreas Røsdal. 

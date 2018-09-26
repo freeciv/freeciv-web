@@ -256,7 +256,7 @@ function get_invalid_username_reason(username)
 {
   if (username == null || username.length == 0) {
     return "empty";
-  } else if (username.length <= 2 ) {
+  } else if (username.length <= 2) {
     return "too short";
   } else if (username.length >= 32) {
     return "too long";
@@ -270,4 +270,25 @@ function get_invalid_username_reason(username)
     return "banned";
   }
   return null;
+}
+
+/**************************************************************************
+ returns the the player's capital city, or undefined
+ **************************************************************************/
+function player_capital(player)
+{
+  for (const city_id in cities) {
+    const city = cities[city_id];
+    if (does_player_own_city(player, city) && is_capital(city)) {
+      return city;
+    }
+  }
+}
+
+/**************************************************************************
+ returns true if the specified player owns the specified city
+ **************************************************************************/
+function does_player_own_city(player, city)
+{
+  return city_owner_player_id(city) === player.playerno;
 }

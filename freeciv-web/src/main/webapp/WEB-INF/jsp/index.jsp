@@ -20,18 +20,6 @@
 	}
 	.statistics { text-align: center; }
 
-   /* Make lastest blog articles look less like a list.	*/
-	ul.blog-post-summary { list-style-type: none; }
-	ul.blog-post-summary > li {	margin-bottom: 5px;	}
-	ul.blog-post-summary > li > a {
-		color: #494A49;
-		display: block;
-	}
-	ul.blog-post-summary > li > a:nth-of-type(1n) {	text-decoration: underline; }
-	ul.blog-post-summary > li > a:nth-of-type(2n) {
-		font-size: x-small;
-		text-decoration: none;
-	}
 	/* Game launcher */          
 	#game-launcher {
 		width: 100%;
@@ -126,20 +114,6 @@
 	<div class="container">
 		<%@include file="/WEB-INF/jsp/fragments/header.jsp"%>
 
-		<div class="row">
-			<div class="col-md-12">
-				<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-				<ins class="adsbygoogle"
-					style="display:block"
-					data-ad-client="ca-pub-5520523052926214"
-					data-ad-slot="7043279885"
-					data-ad-format="auto"></ins>
-				<script>
-				(adsbygoogle = window.adsbygoogle || []).push({});
-				</script>
-			</div>
-		</div>
-
 		<div class="jumbotron">
 			<div class="row">
 
@@ -164,20 +138,6 @@
 				</div>
 			</div>
 		</div> <!-- end jumbotron -->
-
-		<div class="row">
-			<div class="col-md-12">
-				<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-				<ins class="adsbygoogle"
-					style="display:block"
-					data-ad-client="ca-pub-5520523052926214"
-					data-ad-slot="7043279885"
-					data-ad-format="auto"></ins>
-				<script>
-				(adsbygoogle = window.adsbygoogle || []).push({});
-				</script>
-			</div>
-		</div>
 
 		<div id="game-launcher" class="row">
 
@@ -286,21 +246,6 @@
 		</div>  <!-- end apps/browser plugins -->
 
 
-
-		<div class="row top-buffer-1">
-			<div class="col-md-12 ">
-				<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-				<ins class="adsbygoogle"
-					style="display:block"
-					data-ad-client="ca-pub-5520523052926214"
-					data-ad-slot="7043279885"
-					data-ad-format="auto"></ins>
-				<script>
-				(adsbygoogle = window.adsbygoogle || []).push({});
-				</script>
-			</div>
-		</div>
-
 		<div class="row">
 			<div class="col-md-6">
 				<div class="panel-freeciv">
@@ -396,22 +341,6 @@
 		</div> <!-- end multiplayer/best play by email -->
 
 
-               <div class="row top-buffer-1">
-                        <div class="col-md-12">
-                                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                                <ins class="adsbygoogle"
-                                        style="display:block"
-                                        data-ad-client="ca-pub-5520523052926214"
-                                        data-ad-slot="7043279885"
-                                        data-ad-format="auto"></ins>
-                                <script>
-                                (adsbygoogle = window.adsbygoogle || []).push({});
-                                </script>
-                        </div>
-                </div>
-
-
-
                 <div class="row">
                         <div class="col-md-12">
                                 <h2><fmt:message key="index-youtube"/></h2>
@@ -431,30 +360,6 @@
 
 
 </div> <!-- end youtube -->
-
-
-		<div class="row" id="latest-from-blog">
-			<div class="col-md-12 container">
-				<h2><fmt:message key="index-latest-blog"/></h2>
-				<div class="panel-freeciv">
-					<ul id="latest-from-blog-articles" class="blog-post-summary">
-						<!--
-							loaded dynamically
-						-->
-					</ul>
-				</div>
-			</div>
-		</div> <!-- end blog -->
-
-			 <div  class="row" style="padding-top: 30px;">
-                                <div class="col-md-2">
-                                </div>
-                                <div class="col-md-8">
-                                    <iframe src="https://discordapp.com/widget?id=354200788785954818&theme=light" width="100%" height="400" allowtransparency="true" frameborder="0"></iframe>
-                                </div>
-                                <div class="col-md-2">
-                                </div>
-</div>
 
 
 		<div class="row">

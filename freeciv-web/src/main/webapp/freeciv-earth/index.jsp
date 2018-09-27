@@ -37,8 +37,6 @@
 
   </head>
   <body>
-  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-553240ed5ba009c1" async="async"></script>
-
 <%@ include file="../WEB-INF/jsp/fragments/header.jsp" %>
 
     <div class="row">
@@ -78,23 +76,6 @@
 
         </div>
     </div>
-
-    <div class="row">
-        <div class="col-lg-12">
-<br><br><br>
-<br><br><br>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-5520523052926214"
-     data-ad-slot="7043279885"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-        </div>
-    </div>
-
 
 <%@ include file="../WEB-INF/jsp/fragments/footer.jsp" %>
 

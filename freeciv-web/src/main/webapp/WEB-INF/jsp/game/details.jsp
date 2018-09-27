@@ -5,7 +5,6 @@
 <html lang="en">
 <head>
 	<%@include file="/WEB-INF/jsp/fragments/head.jsp"%>
-	<script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-553240ed5ba009c1" async="async"></script>
     <link rel="stylesheet" href="/css/morris.css" />
     <script src="/javascript/libs/raphael-min.js"></script>
 	<script type="text/javascript" src="/javascript/libs/morris.min.js" ></script>

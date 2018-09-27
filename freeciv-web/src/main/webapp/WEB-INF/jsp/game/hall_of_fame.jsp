@@ -32,19 +32,6 @@
 
 	<div class="container">
 
-		<div class="row">
-    			<div class="col-md-12">
-    				<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    				<ins class="adsbygoogle"
-    					style="display:block"
-    					data-ad-client="ca-pub-5520523052926214"
-    					data-ad-slot="7043279885"
-    					data-ad-format="auto"></ins>
-    				<script>
-    				(adsbygoogle = window.adsbygoogle || []).push({});
-    				</script>
-    			</div>
-    		</div>
  		<div class="row">
      			<div class="col-md-12">
 
@@ -81,20 +68,6 @@
             </c:forEach>
         </table>
         <br><br><br>
-    			</div>
-    		</div>
-
-		<div class="row">
-    			<div class="col-md-12">
-    				<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    				<ins class="adsbygoogle"
-    					style="display:block"
-    					data-ad-client="ca-pub-5520523052926214"
-    					data-ad-slot="7043279885"
-    					data-ad-format="auto"></ins>
-    				<script>
-    				(adsbygoogle = window.adsbygoogle || []).push({});
-    				</script>
     			</div>
     		</div>
 

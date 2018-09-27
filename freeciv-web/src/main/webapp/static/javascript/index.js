@@ -3,7 +3,6 @@ $(document).ready(function () {
 	(function ($) {
 	
 		$(function () {
-			loadBlog();
 			loadBestOfPlayByEmail();
 			displayStore();
 
@@ -12,33 +11,6 @@ $(document).ready(function () {
 	          $("#webgl_button").html("WebGL not enabled!");
 			}
 		});
-	
-		function loadBlog() {
-			// TODO: rename /fpfeed.json to /feed
-			$.getJSON('/fpfeed.json', function(data) {
-				var MAX_ELEMENTS = 5;
-				var root = document.getElementById('latest-from-blog-articles');
-				data.forEach(function (article, i) {
-					if (i >= MAX_ELEMENTS) {
-						return;
-					}
-					var item = document.createElement('li');
-					var title = document.createElement('a');
-					var date = document.createElement('a');
-					 
-					title.href = article.permalink;
-					title.innerHTML = article.title;
-					date.href = article.permalink;
-					date.innerHTML = article.date;
-					 
-					item.appendChild(title);
-					item.appendChild(date);
-					root.appendChild(item);
-				});
-			}).fail(function () {
-				document.getElementById('latest-from-blog').style.display = 'none';
-			})
-		}
 	
 		function loadBestOfPlayByEmail() {
 		

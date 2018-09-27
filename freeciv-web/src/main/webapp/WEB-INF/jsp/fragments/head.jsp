@@ -18,7 +18,6 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="author" content="The Freeciv project">
 <meta name="description" content="Play Freeciv online with 2d HTML5 or 3D WebGL in the browser. Freeciv is a Free and Open Source empire-building strategy game made with 2D HTML5 or 3D WebGL mode, which you can play in your browser, tablet or mobile device!">
-<meta name="google-site-verification" content="Dz5U0ImteDS6QJqksSs6Nq7opQXZaHLntcSUkshCF8I" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta property="og:image" content="/static/images/frontpage-jumbotron-alt.png" />
 

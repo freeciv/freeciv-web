@@ -56,6 +56,8 @@ Tips
  - To watch the server traffic between the web client and the servers, uncomment the `print('DEBUG ...` lines in [civcom.py](freeciv-proxy/civcom.py).
  - Changes to freeciv usually require rebuilding the entire project.
  - If you add additional, important root files to [freeciv-web](freeciv-web), make sure to include them in the Dockerfile.
+ - When deploying to AWS Elastic Beanstalk's single container Docker environment, create an RDS MySql instance. Modify the RDS instance's security group to permit your personal IP address, login, and create the database with `CREATE DATABASE freeciv_web;`. Restart your environment, and the `doctorpangloss/freeciv-web` image will connect and run successfully. The image will soon create a database, given it has the appropriate permissions.
+ - Many rolling update deployments will fail on an image as big as this. Use `strm/helloworld-http` while configuring your deployment.
  
 Learning More
 -------------

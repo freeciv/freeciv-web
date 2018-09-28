@@ -1,2 +1,5 @@
 #!/bin/sh
+# Ensure the log directory and error files exist
+mkdir -p /var/log/nginx
+touch /var/log/nginx/error.log /var/log/nginx/access.log
 nginx -g 'daemon off;' 2>&1

@@ -130,7 +130,4 @@ ENV FREECIV_WEB_SERVER_LIMIT=999
 # Runtime prefix (in case you want to run services locally, this can be changed
 ENV FREECIV_RUNTIME_PREFIX=/docker
 
-# Address issues in ELB related to missing log locations
-RUN mkdir -p /var/log/nginx && touch /var/log/nginx/error.log
-
 EXPOSE 80

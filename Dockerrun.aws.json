@@ -5,6 +5,7 @@
       "ContainerPort": "80"
     }
   ],
-  "Logging": "/var/log",
-  "Image": "doctorpangloss/freeciv-web"
+  "Image": {
+    "Name": "doctorpangloss/freeciv-web"
+  }
 }

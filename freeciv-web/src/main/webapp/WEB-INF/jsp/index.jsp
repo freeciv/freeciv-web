@@ -126,20 +126,6 @@
 	<div class="container">
 		<%@include file="/WEB-INF/jsp/fragments/header.jsp"%>
 
-		<div class="row">
-			<div class="col-md-12">
-				<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-				<ins class="adsbygoogle"
-					style="display:block"
-					data-ad-client="ca-pub-5520523052926214"
-					data-ad-slot="7043279885"
-					data-ad-format="auto"></ins>
-				<script>
-				(adsbygoogle = window.adsbygoogle || []).push({});
-				</script>
-			</div>
-		</div>
-
 		<div class="jumbotron">
 			<div class="row">
 
@@ -165,19 +151,6 @@
 			</div>
 		</div> <!-- end jumbotron -->
 
-		<div class="row">
-			<div class="col-md-12">
-				<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-				<ins class="adsbygoogle"
-					style="display:block"
-					data-ad-client="ca-pub-5520523052926214"
-					data-ad-slot="7043279885"
-					data-ad-format="auto"></ins>
-				<script>
-				(adsbygoogle = window.adsbygoogle || []).push({});
-				</script>
-			</div>
-		</div>
 
 		<div id="game-launcher" class="row">
 
@@ -285,22 +258,6 @@
 			</a>
 		</div>  <!-- end apps/browser plugins -->
 
-
-
-		<div class="row top-buffer-1">
-			<div class="col-md-12 ">
-				<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-				<ins class="adsbygoogle"
-					style="display:block"
-					data-ad-client="ca-pub-5520523052926214"
-					data-ad-slot="7043279885"
-					data-ad-format="auto"></ins>
-				<script>
-				(adsbygoogle = window.adsbygoogle || []).push({});
-				</script>
-			</div>
-		</div>
-
 		<div class="row">
 			<div class="col-md-6">
 				<div class="panel-freeciv">
@@ -394,24 +351,6 @@
 				</div>
 			</div>
 		</div> <!-- end multiplayer/best play by email -->
-
-
-               <div class="row top-buffer-1">
-                        <div class="col-md-12">
-                                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                                <ins class="adsbygoogle"
-                                        style="display:block"
-                                        data-ad-client="ca-pub-5520523052926214"
-                                        data-ad-slot="7043279885"
-                                        data-ad-format="auto"></ins>
-                                <script>
-                                (adsbygoogle = window.adsbygoogle || []).push({});
-                                </script>
-                        </div>
-                </div>
-
-
-
                 <div class="row">
                         <div class="col-md-12">
                                 <h2><fmt:message key="index-youtube"/></h2>

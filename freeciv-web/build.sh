@@ -29,5 +29,6 @@ fi
 
 echo "maven package"
 mvn ${BATCH_MODE} package && \
+sudo rm -rf "${TOMCAT_HOME}"/webapps/ROOT
 echo "Copying target/freeciv-web.war to ${TOMCAT_HOME}/webapps" && \
-  cp target/freeciv-web.war "${TOMCAT_HOME}/webapps/"
+  cp target/freeciv-web.war "${TOMCAT_HOME}/webapps/ROOT.war"

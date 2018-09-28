@@ -1,5 +1,3 @@
-
-
     server {
         listen       80;
         tcp_nodelay on; 
@@ -62,7 +60,6 @@
 
 	# location for javascript, css and images.
 	location ~* \.(js|css|png|jpg|dae)$ {
-        rewrite ^(.*)$ /freeciv-web/$1 break;
         proxy_pass         http://localhost:8080;
         proxy_redirect     off;
 
@@ -132,14 +129,13 @@
 	}
 
 	location = / {
-          proxy_pass         http://localhost:8080/freeciv-web/;
+          proxy_pass         http://localhost:8080/;
           proxy_redirect     off;
 	}
 
 
 	# proxy for app-server on port 8080
 	location ~ / {
-        rewrite ^(.*)$ /freeciv-web/$1 break;
         proxy_pass         http://localhost:8080;
         proxy_redirect     off;
 
@@ -161,7 +157,5 @@
         proxy_busy_buffers_size    64k;
         proxy_temp_file_write_size 64k;
 	}
-
-
-     }
+}
 

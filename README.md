@@ -30,6 +30,17 @@ Visit the [Dockerfile](Dockerfile) to see which environment variables can be set
 
 You can specify these environment variables according to the `docker` documentation, or put them into your own `docker-compose.yml`. This includes environment variables like `MYSQL_URL`, `MYSQL_USERNAME` and `MYSQL_PASSWORD`.
 
+In the production Freeciv environment, the following environment variables are used. Example (not-working) values are given:
+
+```
+     MYSQL_URL = mysql://dbname:3306/freeciv_web
+     MYSQL_PASSWORD = mysql_password
+     MYSQL_USER = username
+     FREECIV_GOOGLE_SITE_VERIFY_KEY = site_verify_from_google
+     FREECIV_WEB_CAPTCHA_SECRET = captcha_secret_from_google
+     FREECIV_WEB_CAPTCHA_SITE_KEY = captcha_site_key_from_google
+```
+
 Known Issues
 ------------
 

@@ -3,7 +3,7 @@ $(document).ready(function () {
 	(function ($) {
 	
 		$(function () {
-			loadBlog();
+			// loadBlog();
 			loadBestOfPlayByEmail();
 			displayStore();
 

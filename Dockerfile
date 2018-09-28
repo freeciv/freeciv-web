@@ -110,6 +110,9 @@ ENV FREECIV_WEB_MAILGUN_EMAIL_USERNAME=empty
 ENV FREECIV_WEB_MAILGUN_EMAIL_PASSWORD=empty
 # A Google Analytics property ID, typically starting with UA or GA.
 ENV FREECIV_WEB_GOOGLE_ANALYTICS_UA_ID=empty
+# A Google site verification ID. Follow the instructions on https://www.google.com/webmasters/verification to configure
+# this key.
+ENV FREECIV_GOOGLE_SITE_VERIFY_KEY=empty
 # A Google Sign In client ID. Follow the instructions at https://developers.google.com/identity/sign-in/web/sign-in#specify_your_apps_client_id
 # to create a Google platform project and enable Google Sign In. Find the client ID and paste it here.
 ENV FREECIV_WEB_GOOGLE_SIGN_IN_CLIENT_KEY=empty

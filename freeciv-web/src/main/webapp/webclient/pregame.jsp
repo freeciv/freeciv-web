@@ -1,4 +1,10 @@
-
+<%@ page import="static org.apache.commons.lang3.StringUtils.stripToNull" %>
+<%
+    String captchaSiteKey = stripToNull(System.getenv("FREECIV_WEB_CAPTCHA_SITE_KEY"));
+%>
+<script type="text/javascript">
+    var captcha_site_key = '<%=captchaSiteKey%>';
+</script>
 <div id="pregame_page">
   <div id="pregame_options">
 	<div id="pregame_buttons">

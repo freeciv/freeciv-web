@@ -101,6 +101,8 @@ ENV FREECIV_WEB_ROOT_URL=http://localhost
 # A Google reCAPTCHA secret key. Follow the instructions at https://developers.google.com/recaptcha/intro to sign up
 # for the appropriate service account and use the secret key you receive here
 ENV FREECIV_WEB_CAPTCHA_SECRET=empty
+# A Google reCAPTCHA site key. This is the publicly accessible key.
+ENV FREECIV_WEB_CAPTCHA_SITE_KEY=empty
 # A Mailgun mailing service username. Create a Mailgun account and then create SMTP credentials using the instructions
 # from https://help.mailgun.com/hc/en-us/articles/203409084-How-do-I-create-additional-SMTP-credentials-
 ENV FREECIV_WEB_MAILGUN_EMAIL_USERNAME=empty

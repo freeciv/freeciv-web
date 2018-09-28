@@ -2,10 +2,9 @@
 <%@ page import="java.util.Properties" %>
 <%@ page import="java.io.IOException" %>
 <%
-    String gaTrackingId = null;
-    String trackJsToken = null;
-    gaTrackingId = stripToNull(System.getenv("FREECIV_WEB_GOOGLE_ANALYTICS_UA_ID"));
-    trackJsToken = stripToNull(System.getenv("FREECIV_WEB_TRACK_JS_TOKEN"));
+    String gaTrackingId = stripToNull(System.getenv("FREECIV_WEB_GOOGLE_ANALYTICS_UA_ID"));
+    String trackJsToken = stripToNull(System.getenv("FREECIV_WEB_TRACK_JS_TOKEN"));
+    String captchaSiteKey = stripToNull(System.getenv("FREECIV_WEB_CAPTCHA_SITE_KEY"));
 %>
 <title>${empty title ? "Freeciv-web - open source turn-based strategy game" : title}</title>
 <meta charset="utf-8">
@@ -24,8 +23,11 @@
 <link href="/static/css/bootstrap-theme.min.css" rel="stylesheet">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 <link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great|Open+Sans:400,400i,700,700i" rel="stylesheet">
-
 <link rel="manifest" href="/static/manifest.json">
+
+<script>
+    var captcha_site_key = '<%=captchaSiteKey%>';
+</script>
 
 <% if (gaTrackingId != null) { %>
 <script>

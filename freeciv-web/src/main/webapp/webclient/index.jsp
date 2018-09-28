@@ -5,15 +5,12 @@
 <%@ page import="static java.lang.Boolean.parseBoolean" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-String gaTrackingId = null;
-String googleSigninClientKey = null;
-String trackJsToken = null;
+String gaTrackingId = stripToNull(System.getenv("FREECIV_WEB_GOOGLE_ANALYTICS_UA_ID"));
+String trackJsToken = stripToNull(System.getenv("FREECIV_WEB_TRACK_JS_TOKEN"));
+String captchaSiteKey = stripToNull(System.getenv("FREECIV_WEB_CAPTCHA_SITE_KEY"));
+String googleSigninClientKey = stripToEmpty(System.getenv("FREECIV_WEB_GOOGLE_SIGN_IN_CLIENT_KEY"));
 boolean fcwDebug = false;
 String fcwMinified = "";
-gaTrackingId = stripToNull(System.getenv("FREECIV_WEB_GOOGLE_ANALYTICS_UA_ID"));
-googleSigninClientKey = stripToEmpty(System.getenv("FREECIV_WEB_GOOGLE_SIGN_IN_CLIENT_KEY"));
-trackJsToken = stripToNull(System.getenv("FREECIV_WEB_TRACK_JS_TOKEN"));
-
 String debugParam = request.getParameter("debug");
 fcwDebug = (debugParam != null && (debugParam.isEmpty() || parseBoolean(debugParam)));
 fcwMinified = fcwDebug ? "" : ".min";
@@ -33,6 +30,7 @@ fcwMinified = fcwDebug ? "" : ".min";
 var ts="${initParam.buildTimeStamp}";
 var fcwDebug=<%= fcwDebug %>;
 var fcwMinified="<%= fcwMinified %>";
+var captcha_site_key = '<%=captchaSiteKey%>';
 </script>
 <script type="text/javascript" src="/javascript/libs/jquery.min.js?ts=${initParam.buildTimeStamp}"></script>
 

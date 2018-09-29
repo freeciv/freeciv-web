@@ -121,13 +121,13 @@
 						<c:choose>
 							<c:when test="${state == 'Pregame'}">
 								<div>
-									<a class="label label-success" href="/webclient/?action=multi&civserverport=${port}&amp;civserverhost=${host}">
+									<a class="label label-success" href="/webclient/?action=multi&civserverport=${port}&amp;civserverhost=${host}&amp;type=${type}">
 										Join</a> You can join this game now.
 								</div>
 							</c:when>
 							<c:otherwise>
 								<div>
-									<a class="label label-primary" href="/webclient/?action=multi&civserverport=${port}&amp;civserverhost=${host}">
+									<a class="label label-primary" href="/webclient/?action=multi&civserverport=${port}&amp;civserverhost=${host}&amp;type=${type}">
 										Join/Observe</a> You can observe this game now.
 								</div>
 							</c:otherwise>

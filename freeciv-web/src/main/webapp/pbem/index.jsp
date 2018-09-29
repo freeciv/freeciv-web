@@ -24,7 +24,7 @@ var getUrlParameter = function getUrlParameter(sParam) {
 
 var u = getUrlParameter('u');
 if (u != null) {
-  window.location="/webclient/?action=pbem&invited_by=" + u;
+  window.location="/webclient/?action=pbem&type=pbem&invited_by=" + u;
 } else {
   alert("missing user url paramter.");
 }

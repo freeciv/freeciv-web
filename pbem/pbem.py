@@ -120,7 +120,7 @@ def handle_savegame(root, file):
   active_player = players[phase];
   print("active_player=" + active_player);    
   active_email = find_email_address(active_player);
-  game_url = "https://" + host + "/webclient/?action=pbem&savegame=" + new_filename.replace(".xz", "");
+  game_url = "https://" + host + "/webclient/?action=pbem&type=pbem&savegame=" + new_filename.replace(".xz", "");
   if (active_email != None):
     status.games[game_id] = {'turn' : turn, 'phase': phase, 'players' : players, 'time_str' : time.ctime(), 
                              'time_int' : int(time.time()), 'state' : state, 'url' : game_url, 

@@ -124,16 +124,6 @@
 				<div class="row top-buffer-3">
 					<p class="lead">
 						<fmt:message key="index-lead"/>
-
-                         <%--<div class="row top-buffer-3">
-                         <h1>Join Freeciv-web: One Turn per Day game XII</h1>
-                         <b>Game XII XI has started and you can join it now!</b><br>
-                         <b>Each player will play one turn every day. <br><br>
-                         This will be one of the greatest ever multiplayer game of Freeciv with 300 players on 30000 map tiles!<br>
-                         </b>
-                         <h2><a href="/webclient?action=multi&civserverport=6006&civserverhost=play&multi=true">Join the LongTurn Web XII here!</a></h2>
-			            </div>--%>
-
 					</p>
 				</div>
 			</div>
@@ -152,14 +142,14 @@
 								Play against the Freeciv AI with 2D HTML5 graphics
 							</div>
 						</c:if>
-						<a id="single-button" href="/webclient/?action=new" class="btn"><i class="fa fa-flag"></i> <fmt:message key="index-game-launcher-2d"/></a>
+						<a id="single-button" href="/webclient/?action=new&type=singleplayer" class="btn"><i class="fa fa-flag"></i> <fmt:message key="index-game-launcher-2d"/></a>
 
 						<c:if test="${default_lang}">
 							<div class="features">
 								Play against the Freeciv AI with 3D WebGL<br>graphics using the Three.js 3D engine
 							</div>
 						</c:if>
-						<a href="/webclient/?action=new&renderer=webgl" class="btn" id="webgl_button"><i class="fa fa-cube"></i> <fmt:message key="index-game-launcher-3d"/></a>
+						<a href="/webclient/?action=new&renderer=webgl&type=singleplayer" class="btn" id="webgl_button"><i class="fa fa-cube"></i> <fmt:message key="index-game-launcher-3d"/></a>
 
 
 						<c:if test="${default_lang}">
@@ -167,7 +157,7 @@
 								Start on a scenario map, such as <br> World map, America, Italy or Japan.
 							</div>
 						</c:if>
-						<a href="/webclient/?action=load&amp;scenario=true" class="btn"><i class="fa fa-map-o"></i> <fmt:message key="index-game-launcher-scenario"/></a>
+						<a href="/webclient/?action=load&amp;scenario=true&type=singleplayer" class="btn"><i class="fa fa-map-o"></i> <fmt:message key="index-game-launcher-scenario"/></a>
 						<c:if test="${default_lang}">
 							<div class="features">
 								Choose your map from a real earth map.
@@ -192,23 +182,19 @@
 								Start a play-by-email game where you get an e-mail <br> when it is your turn to play.
 							</div>
 						</c:if>
-						<a href="/webclient/?action=pbem" class="btn"><i class="fa fa-envelope"></i> <fmt:message key="index-game-launcher-play-by-email"/></a>
+						<a href="/webclient/?action=pbem&type=pbem" class="btn"><i class="fa fa-envelope"></i> <fmt:message key="index-game-launcher-play-by-email"/></a>
 						<c:if test="${default_lang}">
 							<div class="features">
 								Play multiple human players <br> on the same computer
 							</div>
 						</c:if>
-						<a href="/webclient/?action=hotseat" class="btn"><i class="fa fa-user-plus"></i> <fmt:message key="index-game-launcher-hotseat" /></a>
+						<a href="/webclient/?action=hotseat&type=singleplayer" class="btn"><i class="fa fa-user-plus"></i> <fmt:message key="index-game-launcher-hotseat" /></a>
 
 						<c:if test="${default_lang}">
 							<div class="features">
 								Play a <b>Freeciv-web One Turn per Day</b>, where up to 300 human <br>players play one turn every day:
 							</div>
 						</c:if>
-						<a href="/webclient?action=multi&civserverport=6004&civserverhost=play&multi=true" class="btn" style="font-size: 15px; padding: 4px;">Game X - One Turn per Day</a>
-						<a href="/webclient?action=multi&civserverport=6005&civserverhost=play&multi=true" class="btn" style="font-size: 15px; padding: 4px;">Game XI - One Turn per Day</a>
-						<a href="/webclient?action=multi&civserverport=6006&civserverhost=play&multi=true" class="btn" style="font-size: 15px; padding: 4px;">Game XII - One Turn per Day</a>
-						<a href="/webclient?action=multi&civserverport=6007&civserverhost=play&multi=true" class="btn" style="font-size: 15px; padding: 4px;">Game XIII - One Turn per Day</a>
 
 					</div>
 				</div>
@@ -291,12 +277,12 @@
 										<td>
 											<c:choose>
 												<c:when test="${game.state == 'Running' or game.state == 'Pregame'}">
-													<a  class="label label-success" href="/webclient/?action=multi&civserverport=${game.port}&amp;civserverhost=${game.host}&amp;multi=true">
+													<a  class="label label-success" href="/webclient/?action=multi&civserverport=${game.port}&amp;civserverhost=${game.host}&amp;multi=true&amp;type=${game.type}">
 														Play
 													</a>
 												</c:when>
 												<c:otherwise>
-													<a class="label label-success" href="/webclient/?action=observe&amp;civserverport=${game.port}&amp;civserverhost=${game.host}&amp;multi=true">
+													<a class="label label-success" href="/webclient/?action=observe&amp;civserverport=${game.port}&amp;civserverhost=${game.host}&amp;multi=true&amp;type=${game.type}">
 														Observe
 													</a>
 												</c:otherwise>

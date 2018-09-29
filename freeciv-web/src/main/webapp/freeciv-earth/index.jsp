@@ -37,8 +37,6 @@
 
   </head>
   <body>
-  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-553240ed5ba009c1" async="async"></script>
-
 <%@ include file="../WEB-INF/jsp/fragments/header.jsp" %>
 
     <div class="row">
@@ -78,14 +76,6 @@
 
         </div>
     </div>
-
-    <div class="row">
-        <div class="col-lg-12">
-<br><br><br>
-<br><br><br>
-        </div>
-    </div>
-
 
 <%@ include file="../WEB-INF/jsp/fragments/footer.jsp" %>
 

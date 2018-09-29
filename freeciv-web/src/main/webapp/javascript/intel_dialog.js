@@ -70,10 +70,12 @@ function show_intelligence_report_embassy(pplayer)
   $("#intel_dialog").remove();
   $("<div id='intel_dialog'></div>").appendTo("div#game_page");
 
+  const capital = player_capital(pplayer);
+
   var intel_data = {
     ruler: pplayer['name'],
     government: governments[pplayer['government']]['name'],
-    capital: '(not implemeted yet)', // TODO
+    capital: capital ? capital.name : '(capital unknown)',
     gold: pplayer['gold'],
     tax: pplayer['tax'] + '%',
     science: pplayer['science'] + '%',

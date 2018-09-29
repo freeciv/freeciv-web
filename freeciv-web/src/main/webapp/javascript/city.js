@@ -119,6 +119,13 @@ function is_free_worked(city, tile) {
   return (city['tile'] == tile['index']);
 }
 
+/**************************************************************************
+ ...
+ **************************************************************************/
+function is_capital(city) {
+  return city_has_building(city, improvement_id_by_name(B_PALACE_NAME));
+}
+
 
 /**************************************************************************
  ...
@@ -597,12 +604,8 @@ function can_city_build_now(pcity, kind, value)
 **************************************************************************/
 function city_has_building(pcity, improvement_id)
 {
-  for (var z = 0; z < ruleset_control.num_impr_types; z ++) {
-    if (pcity['improvements'] != null && pcity['improvements'].isSet(z) && z == improvement_id) {
-      return true;
-    }
-  }
-  return false;
+  return 0 <= improvement_id && improvement_id < ruleset_control.num_impr_types
+    && pcity['improvements'] && pcity['improvements'].isSet(improvement_id);
 }
 
 
@@ -610,9 +613,7 @@ function city_has_building(pcity, improvement_id)
  Calculates the turns which are needed to build the requested
  improvement in the city.  GUI Independent.
 **************************************************************************/
-function city_turns_to_build(pcity,
-							 target,
-			                 include_shield_stock)
+function city_turns_to_build(pcity, target, include_shield_stock)
 {
   var city_shield_surplus =  pcity['surplus'][O_SHIELD];
   var city_shield_stock = include_shield_stock ? pcity['shield_stock'] : 0;
@@ -1986,7 +1987,6 @@ function city_keyboard_listener(ev)
          break;
       }
   }
-
 }
 
 /**************************************************************************
@@ -2035,5 +2035,4 @@ function get_citywalls_scale(pcity)
   }
 
   return scale;
-
 }

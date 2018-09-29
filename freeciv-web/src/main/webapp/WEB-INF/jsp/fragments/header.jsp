@@ -37,14 +37,11 @@
 					<span onclick="window.location='http://forum.freegamedev.net/viewforum.php?f=97'">Forums</span> <span class="caret"></span>
 				</a>
 				<ul class="dropdown-menu">
-					<li><a href="https://discord.gg/hgvR9wc">Discord chat</a></li>
-					<li role="separator" class="divider"></li>
 					<li><a href="http://forum.freegamedev.net/viewforum.php?f=97">Freeciv-web <fmt:message key="nav-forum"/></a></li>
 					<li role="separator" class="divider"></li>
 					<li><a href="https://www.reddit.com/r/freeciv">reddit.com/freeciv</a></li>
 				</ul>
 			</li>
-			<li><a href="/blog/"><fmt:message key="nav-blog"/></a></li>
 			<%--<li><a href="http://www.freeciv.org/donate.html"><fmt:message key="nav-donate"/></a></li>--%>
 			<li><a href="https://github.com/freeciv/freeciv-web">Contribute</a></li>
 			<%--<li class="dropdown">

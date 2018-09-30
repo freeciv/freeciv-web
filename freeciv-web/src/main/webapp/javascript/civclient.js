@@ -31,8 +31,8 @@ var username = null;
 
 var fc_seedrandom = null;
 
-// List of ports which are reserved for LongTurn games.
-var longturn_server_port_list = [6003,6004,6005,6006,6007];
+// singleplayer, multiplayer, longturn, pbem
+var game_type = "";
 
 var music_list = [ "battle-epic",
                    "andrewbeck-ancient",
@@ -72,7 +72,30 @@ function civclient_init()
   $.blockUI.defaults['css']['color'] = "#fff";
   $.blockUI.defaults['theme'] = true;
 
-  if ($.getUrlVar('action') == "observe") {
+  var action = $.getUrlVar('action');
+  game_type = $.getUrlVar('type');
+  if (game_type == null) {
+    if (action == null || action == 'multi') {
+      swal({
+             title: "Unknown game type",
+             text: "For some reason the client can't determine what kind of game this is. Please <a href='https://github.com/freeciv/freeciv-web/issues'>open an issue</a> detailing how you got here",
+             html: true,
+             type: "error"
+           },
+           // Requires a parameter to also be called on cancel
+           function (unused) {
+             window.location.href ='/';
+           }
+      );
+      return;
+    } else if (action == 'pbem') {
+      game_type = 'pbem';
+    } else {
+      game_type = 'singleplayer';
+    }
+  }
+
+  if (action == "observe") {
     observing = true;
     $("#civ_tab").remove();
     $("#cities_tab").remove();
@@ -636,10 +659,5 @@ function switch_renderer()
 **************************************************************************/
 function is_longturn()
 {
-  for (var i = 0; i < longturn_server_port_list.length; i++) {
-    if (longturn_server_port_list[i] == civserverport || $.getUrlVar('civserverport') == longturn_server_port_list[i]) {
-      return true;
-    }
-  }
-  return false;
+  return game_type == "longturn";
 }

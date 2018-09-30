@@ -1,0 +1,66 @@
+#LongTurn Web XVII
+
+cmdlevel ctrl first
+
+rulesetdir multiplayer
+
+set maxplayers 80
+set aifill 80
+
+#geological
+set size 32
+set topology WRAPX
+set generator RANDOM
+set startpos DEFAULT
+
+#sociological
+set startunits=cccwwwxx
+
+
+set nationset all
+set compresstype xs
+set allowtake=""
+set autotoggle false
+set timeout 82800
+set unitwaittime=36000
+set netwait 150
+set nettimeout 120
+set pingtime 30
+set pingtimeout 240
+set maxconnectionsperhost 500
+set threaded_save enabled
+set scorelog disabled
+set mapsize FULLSIZE
+set topology=
+set landm 63
+set dispersion=1
+
+
+set endt 365
+
+set diplomacy=HUMAN
+set contactturns=0
+
+set minp 0
+set saveturns=1
+set autosaves=TURN
+metaconnection persistent
+set ec_chat=enabled
+set ec_info=enabled 
+set ec_max_size=5000
+set ec_turns=9
+
+set revolen 1
+set spacerace DISABLED
+set borders SEE_INSIDE
+
+
+
+
+metamessage LongTurn-Web-XVII | 1 turn per day | 80 players | 32000 tiles | 50% Land | Join now!
+
+
+cmdlevel basic
+
+
+

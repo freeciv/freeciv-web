@@ -223,7 +223,7 @@ function update_tech_tree()
       tech_canvas_ctx.fillRect(x-2, y-2, tech_item_width, tech_item_height);
       tech_canvas_ctx.strokeStyle = 'rgb(225, 225, 225)';
       tech_canvas_ctx.strokeRect(x-2, y-2, tech_item_width, tech_item_height);
-      mapview_put_tile(tech_canvas_ctx, tag, x+1, y)
+      mapview_put_tile(tech_canvas_ctx, tag, x+1, y);
 
       tech_canvas_ctx.font = tech_canvas_text_font;
       tech_canvas_ctx.fillStyle = "rgba(0, 0, 0, 1)";
@@ -247,7 +247,7 @@ function update_tech_tree()
       tech_canvas_ctx.strokeStyle = 'rgb(255, 255, 255)';
       tech_canvas_ctx.strokeRect(x-2, y-2, tech_item_width, tech_item_height);
       tech_canvas_ctx.lineWidth=2;
-      mapview_put_tile(tech_canvas_ctx, tag, x+1, y)
+      mapview_put_tile(tech_canvas_ctx, tag, x+1, y);
 
       if (client.conn.playing['researching'] == ptech['id']) {
         tech_canvas_ctx.fillStyle = 'rgb(0, 0, 0)';
@@ -271,7 +271,7 @@ function update_tech_tree()
       tech_canvas_ctx.strokeStyle = 'rgb(255, 255, 255)';
       tech_canvas_ctx.strokeRect(x-2, y-2, tech_item_width, tech_item_height);
       tech_canvas_ctx.lineWidth=2;
-      mapview_put_tile(tech_canvas_ctx, tag, x+1, y)
+      mapview_put_tile(tech_canvas_ctx, tag, x+1, y);
 
       if (client.conn.playing['tech_goal'] == ptech['id']) {
         tech_canvas_ctx.fillStyle = 'rgb(0, 0, 0)';

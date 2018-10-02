@@ -110,11 +110,7 @@ function civclient_init()
   statusTimerId = setInterval(update_game_status_panel, 6000);
 
   if (overviewTimerId == -1) {
-    if (renderer == RENDERER_WEBGL) {
-      OVERVIEW_REFRESH = 12000;
-    } else {
-      OVERVIEW_REFRESH = 6000;
-    }
+    OVERVIEW_REFRESH = renderer == RENDERER_WEBGL ? 12000 : 6000;
     overviewTimerId = setInterval(redraw_overview, OVERVIEW_REFRESH);
   }
 
@@ -151,11 +147,7 @@ function civclient_init()
   sounds_enabled = simpleStorage.get('sndFX');
   if (sounds_enabled == null) {
     // Default to true, except when known to be problematic.
-    if (platform.name == 'Safari') {
-      sounds_enabled = false;
-    } else {
-      sounds_enabled = true;
-    }
+    sounds_enabled = platform.name != 'Safari';
   }
 
   /* Initialze audio.js music player */

@@ -18,10 +18,7 @@
 
 ***********************************************************************'''
 
-from threading import Thread
-from tornado import web, websocket, ioloop, httpserver
-from tornado.ioloop import IOLoop
-import re
+from tornado import web, ioloop, httpserver
 import time
 
 STATUS_PORT = 3999

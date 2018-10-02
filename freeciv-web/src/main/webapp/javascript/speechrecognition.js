@@ -41,7 +41,7 @@ function speech_recogntition_init()
   recognition.lang = 'en-US';
   recognition.interimResults = false;
 
-  var grammar = '#JSGF V1.0; grammar commands; public <command> =  y | o | b | x | a | f | m | u  | d | l | r | n | e | w | t | yes | no | build | city | explore | road | irrigation | auto | mine | up | down | right | left | north | south | east | west | northeast | northwest | southeast | southwest | done | turn | end ;'
+  var grammar = '#JSGF V1.0; grammar commands; public <command> =  y | o | b | x | a | f | m | u  | d | l | r | n | e | w | t | yes | no | build | city | explore | road | irrigation | auto | mine | up | down | right | left | north | south | east | west | northeast | northwest | southeast | southwest | done | turn | end ;';
   var speechRecognitionList = new (window.SpeechGrammarList || window.webkitSpeechGrammarList)();
   speechRecognitionList.addFromString(grammar, 1);
   recognition.grammars = speechRecognitionList;

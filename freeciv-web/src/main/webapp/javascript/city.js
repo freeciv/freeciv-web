@@ -2010,9 +2010,8 @@ function city_to_3d_model_name(pcity)
   var city_rule = city_rules[style_id];
 
   var city_style_name = "european";
-  if (city_rule['rule_name'] == "Industrial" || city_rule['rule_name'] == "ElectricAge" || city_rule['rule_name'] == "Modern"
-      || city_rule['rule_name'] == "PostModern" || city_rule['rule_name'] == "Asian") {
-    city_style_name = "modern"
+  if (["Industrial", "ElectricAge", "Modern", "PostModern", "Asian"].includes(city_rule['rule_name'])) {
+    city_style_name = "modern";
   }
 
   return "city_" + city_style_name + "_" + size;

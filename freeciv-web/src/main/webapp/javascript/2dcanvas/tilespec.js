@@ -514,7 +514,7 @@ function fill_terrain_sprite_array(l, ptile, pterrain, tterrain_near)
       var H = normal_tile_height;
       var iso_offsets = [ [W / 4, 0], [W / 4, H / 2], [W / 2, H / 4], [0, H / 4]];
       var this_match_index = ('l' + l + '.' + pterrain['graphic_str'] in tile_types_setup) ? tile_types_setup['l' + l + '.' + pterrain['graphic_str']]['match_index'][0] : -1;
-      var that_match_index = ('l' + l + '.' + pterrain['graphic_str'] in tile_types_setup) ? tile_types_setup['l' + l + '.' + pterrain['graphic_str']]['match_index'][1] : -1;
+      // var that_match_index = ('l' + l + '.' + pterrain['graphic_str'] in tile_types_setup) ? tile_types_setup['l' + l + '.' + pterrain['graphic_str']]['match_index'][1] : -1;
       var result_sprites = [];
 
       /* put corner cells */
@@ -535,25 +535,23 @@ function fill_terrain_sprite_array(l, ptile, pterrain, tterrain_near)
 	      /* We have no need for matching, just plug the piece in place. */
 	      break;
 	    case MATCH_SAME:
-	      	var b1 = (m[2] != this_match_index) ? 1 : 0;
-	      	var b2 = (m[1] != this_match_index) ? 1 : 0;
-	      	var b3 = (m[0] != this_match_index) ? 1 : 0;
-	      	array_index = array_index * 2 + b1;
-			array_index = array_index * 2 + b2;
+	      var b1 = (m[2] != this_match_index) ? 1 : 0;
+	      var b2 = (m[1] != this_match_index) ? 1 : 0;
+	      var b3 = (m[0] != this_match_index) ? 1 : 0;
+	      array_index = array_index * 2 + b1;
+			  array_index = array_index * 2 + b2;
 	  		array_index = array_index * 2 + b3;
 	      break;
 	    case MATCH_PAIR:
-            // FIXME: This doesn't work!
-            /*var b1 = (m[2] == that_match_index) ? 1 : 0;
-            var b2 = (m[1] == that_match_index) ? 1 : 0;
-            var b3 = (m[0] == that_match_index) ? 1 : 0;
-            array_index = array_index * 2 + b1;
-            array_index = array_index * 2 + b2;
-            array_index = array_index * 2 + b3;*/
+        // FIXME: This doesn't work!
+        /*var b1 = (m[2] == that_match_index) ? 1 : 0;
+        var b2 = (m[1] == that_match_index) ? 1 : 0;
+        var b3 = (m[0] == that_match_index) ? 1 : 0;
+        array_index = array_index * 2 + b1;
+        array_index = array_index * 2 + b2;
+        array_index = array_index * 2 + b3;*/
 
-            return [];
-
-	      break;
+        return [];
 	    case MATCH_FULL:
   	      {
 	      var n = [];

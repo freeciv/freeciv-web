@@ -233,7 +233,7 @@ function update_unit_position(ptile) {
     new_unit.rotateOnAxis(new THREE.Vector3(0,1,0).normalize(), (convert_unit_rotation(visible_unit['facing']) * Math.PI * 2 / 8));
     new_unit.updateMatrix();
 
-    if (scene != null && new_unit != null) {
+    if (scene != null) {
       scene.add(new_unit);
     }
 

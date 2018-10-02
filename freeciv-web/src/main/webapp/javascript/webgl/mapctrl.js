@@ -93,7 +93,7 @@ function webglOnDocumentMouseUp( e ) {
     map_select_check = false;
     mapview_mouse_movement = false;
 
-  } else if (!rightclick && !middleclick) {
+  } else if (!middleclick) {
     /* Left mouse button*/
     do_map_click(ptile, SELECT_POPUP, true);
     mapview_mouse_movement = false;
@@ -217,8 +217,8 @@ function webgl_mapview_touch_start(e)
 {
   e.preventDefault();
 
-  touch_start_x = e.originalEvent.touches[0].pageX - $('#canvas_div').position().left;
-  touch_start_y = e.originalEvent.touches[0].pageY - $('#canvas_div').position().top;
+  var touch_start_x = e.originalEvent.touches[0].pageX - $('#canvas_div').position().left;
+  var touch_start_y = e.originalEvent.touches[0].pageY - $('#canvas_div').position().top;
 
   var ptile = webgl_canvas_pos_to_tile(touch_start_x, touch_start_y);
   set_mouse_touch_started_on_unit(ptile);
@@ -241,8 +241,8 @@ function webgl_mapview_touch_end(e)
 ****************************************************************************/
 function webgl_mapview_touch_move(e)
 {
-  mouse_x = e.originalEvent.touches[0].pageX - $('#canvas_div').position().left;
-  mouse_y = e.originalEvent.touches[0].pageY - $('#canvas_div').position().top;
+  var mouse_x = e.originalEvent.touches[0].pageX - $('#canvas_div').position().left;
+  var mouse_y = e.originalEvent.touches[0].pageY - $('#canvas_div').position().top;
 
   var spos = webgl_canvas_pos_to_map_pos(touch_start_x, touch_start_y);
   var epos = webgl_canvas_pos_to_map_pos(mouse_x, mouse_y);

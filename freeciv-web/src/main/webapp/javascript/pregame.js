@@ -1156,7 +1156,7 @@ function show_intro_dialog(title, message) {
 **************************************************************************/
 function show_longturn_intro_dialog() {
 
-  var title = "Welcome to Freeciv-web: One Turn per Day!"
+  var title = "Welcome to Freeciv-web: One Turn per Day!";
 
   var message = "<br>This is a Freeciv-web: One Turn per Day game, which is a Freeciv multiplayer game "+
         "where the turns are 23 hours each, so players logs in once every day to do their turn. This format allows for more players to "+
@@ -1500,14 +1500,13 @@ function show_customize_nation_dialog(player_id) {
 			bgiframe: true,
 			modal: true,
 			width: is_small_screen() ? "90%" : "50%",
-			buttons:
-			{
-                "Cancel" : function() {
-                  $("#dialog").dialog('close');
-                  pick_nation(player_id);
+			buttons: {
+        "Cancel" : function() {
+          $("#dialog").dialog('close');
+          pick_nation(player_id);
 				},
 				"OK" : function() {
-				    handle_customized_nation(player_id);
+          handle_customized_nation(player_id);
 				}
 			}
 		});

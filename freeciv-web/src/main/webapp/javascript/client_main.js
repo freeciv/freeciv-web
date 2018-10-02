@@ -38,45 +38,47 @@ function set_client_state(newstate)
     civclient_state = newstate;
 
     switch (civclient_state) {
-    case C_S_RUNNING:
-      clear_chatbox();
-      $.unblockUI();
-      show_new_game_message();
+      case C_S_RUNNING:
+        clear_chatbox();
+        $.unblockUI();
+        show_new_game_message();
 
-      set_client_page(PAGE_GAME);
-      setup_window_size();
+        set_client_page(PAGE_GAME);
+        setup_window_size();
 
-      update_metamessage_on_gamestart();
+        update_metamessage_on_gamestart();
 
-      if (is_pbem()) {
-        setTimeout(function () {
-          set_human_pbem_players();
+        if (is_pbem()) {
+          setTimeout(function () {
+            set_human_pbem_players();
+            advance_unit_focus();
+          }, 1500);
+        }
+
+        /* remove context menu from pregame. */
+        $(".context-menu-root").remove();
+
+        if (renderer == RENDERER_WEBGL) {
+          init_webgl_mapview();
+        }
+
+        if (observing || $.getUrlVar('action') == "multi" || is_longturn() || game_loaded) {
+          center_on_any_city();
           advance_unit_focus();
-        }, 1500);
-      }
+        }
 
-      /* remove context menu from pregame. */
-      $(".context-menu-root").remove();
+        if (speech_recogntition_enabled) {
+          speech_recogntition_init();
+        }
 
-      if (renderer == RENDERER_WEBGL) {
-        init_webgl_mapview();
-      }
-
-      if (observing || $.getUrlVar('action') == "multi" || is_longturn() || game_loaded) {
-        center_on_any_city();
-        advance_unit_focus();
-      }
-
-      if (speech_recogntition_enabled) speech_recogntition_init()
-
-      break;
-    case C_S_OVER:
-      setTimeout(show_endgame_dialog, 500);
-      break;
-    case C_S_PREPARING:
-      break;
-    default:
-      break;
+        break;
+      case C_S_OVER:
+        setTimeout(show_endgame_dialog, 500);
+        break;
+      case C_S_PREPARING:
+        break;
+      default:
+        break;
     }
   }
 }

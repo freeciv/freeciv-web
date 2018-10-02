@@ -530,7 +530,7 @@ function chat_context_dialog_show(recipients) {
     }
     tbody_el.appendChild(row);
     return ctx;
-  }
+  };
 
   for (var i = 0; i < recipients.length; i++) {
     if (recipients[i].id != chat_send_to) {
@@ -1038,7 +1038,7 @@ function update_unit_order_commands()
 
     if (pcity == null || punit['homecity'] === 0 || punit['homecity'] === pcity['id']) {
       $("#order_change_homecity").hide();
-    } else if (pcity != null && punit['homecity'] != pcity['id']) {
+    } else {
       $("#order_change_homecity").show();
       unit_actions["homecity"] = {name: "Change homecity of unit (H)"};
     }

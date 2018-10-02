@@ -21,11 +21,9 @@
 ***********************************************************************'''
 
 
-from os import path as op
 from os import chdir
 import re
 import sys
-import time
 from tornado import web, websocket, ioloop, httpserver
 from tornado.ioloop import IOLoop
 from debugging import *
@@ -123,7 +121,6 @@ class WSHandler(websocket.WebSocketHandler):
 
     # Check if username and password if correct, if the user already exists in the database.
     def check_user(self, username, password, check_subject):
-      result = None;
       cursor = None;
       cnx = None;
       try:
@@ -149,7 +146,7 @@ class WSHandler(websocket.WebSocketHandler):
         for usrrow in cursor:
           salt = usrrow[1];
           if (usrrow[2] == 0): return False;
-        if (salt == None): return True;
+        if (salt is None): return True;
 
         # Validate the password in the database
         query = ("select count(*) from auth where lower(username)=lower(%(usr)s) and secure_hashed_password = ENCRYPT(%(pwd)s, %(salt)s)")

@@ -155,8 +155,8 @@ function mapview_touch_end(e)
 ****************************************************************************/
 function mapview_touch_move(e)
 {
-  mouse_x = e.originalEvent.touches[0].pageX - $('#canvas').position().left;
-  mouse_y = e.originalEvent.touches[0].pageY - $('#canvas').position().top;
+  var mouse_x = e.originalEvent.touches[0].pageX - $('#canvas').position().left;
+  var mouse_y = e.originalEvent.touches[0].pageY - $('#canvas').position().top;
 
   var diff_x = (touch_start_x - mouse_x) * 2;
   var diff_y = (touch_start_y - mouse_y) * 2;
@@ -347,7 +347,7 @@ function handle_info_text_message(packet)
     'Terri': /^(Territory of )([^(]*)(\s+\([^,]*)(.*)/,
     'City:': /^(City:[^|]*\|\s+)([^(]*)(\s+\([^,]*)(.*)/,
     'Unit:': /^(Unit:[^|]*\|\s+)([^(]*)(\s+\([^,]*)(.*)/
-  }
+  };
 
   for (var i = 0; i < lines.length; i++) {
     var re = matcher[lines[i].substr(0, 5)];

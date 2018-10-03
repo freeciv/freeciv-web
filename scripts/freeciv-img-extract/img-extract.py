@@ -13,14 +13,13 @@
    GNU General Public License for more details.
 '''
 
-import os, sys
+from os import environ, path
 os.environ['PYTHON_EGG_CACHE'] = '/tmp'
 
 import argparse
 import configparser
-from os import path
 from PIL import Image
-from PIL import ImageFont, ImageDraw, ImageOps
+from PIL import ImageDraw
 import json
 
 parser = argparse.ArgumentParser(

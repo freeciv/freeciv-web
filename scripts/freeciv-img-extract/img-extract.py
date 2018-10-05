@@ -14,7 +14,7 @@
 '''
 
 from os import environ, path
-os.environ['PYTHON_EGG_CACHE'] = '/tmp'
+environ['PYTHON_EGG_CACHE'] = '/tmp'
 
 import argparse
 import configparser

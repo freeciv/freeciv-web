@@ -219,12 +219,14 @@ function is_tech_in_range(target_player, range, tech)
 function universal_build_shield_cost(pcity, target)
 {
   /* FIXME: The build cost of an improvement may be modified by the
-   * Building_Build_Cost_Pct effect. Implement effect support in Freeciv-web
-   * and evaluate EFT_IMPR_BUILD_COST_PCT or start sending it from the
-   * server.
-   * Then port any direct read of build_cost from an improvement (or from a
-   * universal that may be a building) to something that evaluates the
-   * effect (like this function).
-   * At the moment (3rd Sep 2018) it isn't used in any bundled ruleset. */
+   * Building_Build_Cost_Pct effect. The build cost of a unit may be
+   * modified by the Unit_Build_Cost_Pct effect. Implement effect support
+   * in Freeciv-web and evaluate EFT_IMPR_BUILD_COST_PCT and
+   * EFT_UNIT_BUILD_COST_PCT or start sending the correct (city dependent)
+   * cost from the server.
+   * Then port any direct read of build_cost from any improvements or units
+   * (or from a universal that may be a building or a unit) to something
+   * that evaluates the effect (like this function).
+   * At the moment (10th Oct 2018) it isn't used in any bundled ruleset. */
   return target['build_cost'];
 }

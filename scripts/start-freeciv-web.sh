@@ -49,4 +49,4 @@ cd ${FREECIV_WEB_DIR}/freeciv-earth/ && nohup python3 -u freeciv-earth-mapgen.py
 
 echo "Will sleep for 8 seconds, then do a status test..." && \
 sleep 8 && \
-sh ${FREECIV_WEB_DIR}/scripts/status-freeciv-web.sh
+bash ${FREECIV_WEB_DIR}/scripts/status-freeciv-web.sh

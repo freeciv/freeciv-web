@@ -3,6 +3,18 @@
 
 alias curl='stdbuf -i0 -o0 -e0 curl'
 
+# Some versions of Curl will by default change the formatting of headers
+# when printing them to the terminal. A bug will then cause Curl to not turn
+# of the custom formatting after the headers are printed. This causes all
+# subsequent console output to have the custom formatting.
+# This can't be worked around with the --no-styled-output option because
+# older versions of curl, that don't have --no-styled-output, fails on the
+# unknown option.
+work_around_curl_console_output_bug () {
+  # reset the terminal formatting
+  echo -e "\e[0m"
+}
+
 checkURL () {
   local URL=$1
   local logfile=$2
@@ -62,10 +74,12 @@ printf "\n--------------------------------\n";
 echo "testing WebSocket connection directly to Tornado"
 echo "This should show \"HTTP/1.1 101 Switching Protocols\" and then timeout after 2 seconds."
 curl -isSN -H "Connection: Upgrade" -H "Upgrade: websocket" -H "Host: localhost" -H "Origin: http://localhost" -H "Sec-WebSocket-Version: 13" -H 'Sec-WebSocket-Key: +onQ3ZxjWlkNa0na6ydhNg==' --max-time 2  http://localhost:7002/civsocket/7002
+work_around_curl_console_output_bug
 
 echo "testing WebSocket connection through nginx"
 echo "This should show \"HTTP/1.1 101 Switching Protocols\" and then timeout after 2 seconds."
 curl -isSN -H "Connection: Upgrade" -H "Upgrade: websocket" -H "Host: localhost" -H "Origin: http://localhost" -H "Sec-WebSocket-Version: 13" -H 'Sec-WebSocket-Key: +onQ3ZxjWlkNa0na6ydhNg==' --max-time 2  http://localhost/civsocket/7002
+work_around_curl_console_output_bug
 printf "\n--------------------------------\n ";
 
 echo "checking freeciv-web / publite2"

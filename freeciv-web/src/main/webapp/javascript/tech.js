@@ -64,7 +64,7 @@ typedef int Tech_type_id;
  */
 var A_NONE = 0;
 var A_FIRST = 1;
-var A_LAST = MAX_NUM_ITEMS;
+var A_LAST = (MAX_NUM_ADVANCES + 1);
 var A_FUTURE  = (A_LAST + 1);
 var A_UNSET = (A_LAST + 2);
 var A_UNKNOWN = (A_LAST + 3);

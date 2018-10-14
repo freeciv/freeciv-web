@@ -67,7 +67,7 @@ public class Games {
 			DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
 			connection = ds.getConnection();
 
-			query = "SELECT host, port, version, patches, state, message, " //
+			query = "SELECT host, port, type, version, patches, state, message, " //
 					+ "UNIX_TIMESTAMP()-UNIX_TIMESTAMP(stamp) AS duration, " //
 					+ "	(SELECT COUNT(*) " //
 					+ "	  FROM players " //
@@ -90,6 +90,7 @@ public class Games {
 				Game game = new Game() //
 						.setHost(rs.getString("host")) //
 						.setPort(rs.getInt("port")) //
+						.setType(rs.getString("type")) //
 						.setVersion(rs.getString("version")) //
 						.setPatches(rs.getString("patches")) //
 						.setState(rs.getString("state")) //
@@ -157,7 +158,7 @@ public class Games {
 			Context env = (Context) (new InitialContext().lookup("java:comp/env"));
 			DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
 			connection = ds.getConnection();
-			query = "SELECT host, port, version, patches, state, message, " //
+			query = "SELECT host, port, type, version, patches, state, message, " //
 					+ "	unix_timestamp()-unix_timestamp(stamp) AS duration, " //
 					+ "	IFNULL(" //
 					+ "		(SELECT user FROM players p WHERE p.hostport = CONCAT(s.host ,':',s.port) AND p.type = 'Human' LIMIT 1 )," //
@@ -189,6 +190,7 @@ public class Games {
 				Game game = new Game() //
 						.setHost(rs.getString("host")) //
 						.setPort(rs.getInt("port")) //
+						.setType(rs.getString("type")) //
 						.setVersion(rs.getString("version")) //
 						.setPatches(rs.getString("patches")) //
 						.setState(rs.getString("state")) //
@@ -228,7 +230,7 @@ public class Games {
 
 			String query = "" //
 					+ "  ( " //
-					+ "    SELECT host, port, version, patches, state, message, " //
+					+ "    SELECT host, port, type, version, patches, state, message, " //
 					+ "    UNIX_TIMESTAMP() - UNIX_TIMESTAMP(stamp) AS duration, " //
 					+ "    (SELECT value " //
 					+ "       FROM variables " //
@@ -240,7 +242,7 @@ public class Games {
 					+ "  ) " //
 					+ "UNION " //
 					+ "  ( " //
-					+ "    SELECT host, port, version, patches, state, message, " //
+					+ "    SELECT host, port, type, version, patches, state, message, " //
 					+ "    UNIX_TIMESTAMP() - UNIX_TIMESTAMP(stamp) AS duration, " //
 					+ "    (SELECT value " //
 					+ "       FROM variables " //
@@ -256,7 +258,7 @@ public class Games {
 					+ "  ) " //
 					+ "UNION " //
 					+ "  ( " //
-					+ "    SELECT host, port, version, patches, state, message, " //
+					+ "    SELECT host, port, type, version, patches, state, message, " //
 					+ "    UNIX_TIMESTAMP()-UNIX_TIMESTAMP(stamp), " //
 					+ "    (SELECT value " //
 					+ "       FROM variables " //
@@ -275,6 +277,7 @@ public class Games {
 				multiplayerGames.add(new Game() //
 						.setHost(rs.getString("host")) //
 						.setPort(rs.getInt("port")) //
+						.setType(rs.getString("type")) //
 						.setVersion(rs.getString("version")) //
 						.setPatches(rs.getString("patches")) //
 						.setState(rs.getString("state")) //

@@ -10,7 +10,7 @@ casper.options.waitTimeout = 60 * 60 * 1000;
 casper.options.viewportSize = {width: 1024, height: 768};
 
 casper.test.begin('Test starting new Freeciv-web autogame', 3, function suite(test) {
-    casper.start("http://localhost/webclient/?action=new");
+    casper.start("http://localhost/webclient/?action=new&type=singleplayer");
 
     casper.waitForSelector('#username_req', function() {
         test.assertHttpStatus(200);

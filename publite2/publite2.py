@@ -29,6 +29,7 @@ import configparser
 from pubstatus import *
 from civlauncher import Civlauncher
 import os.path
+import glob
 
 metahost = "localhost"
 metaport = 8080
@@ -63,17 +64,12 @@ class metachecker():
       self.savesdir = settings.get("Config", "save_directory",
                                    fallback = "/var/lib/tomcat8/webapps/data/savegames/")
 
-      self.start_longturn = settings.get("Config", "start_longturn",
-                                fallback = "false")
-
-      longturn_ports_str = settings.get("Config", "longturn_server_ports").split(",")
-      self.longturn_ports_list = [int(e) if e.isdigit() else e for e in longturn_ports_str]
-
       self.check_count = 0;
       self.total = 0;
       self.single = 0;
       self.multi = 0;
       self.pbem = 0;
+      self.longturn = set()
       self.html_doc = "-";
       self.last_http_status = -1;
       s = PubStatus(self)
@@ -102,6 +98,20 @@ class metachecker():
                 print("Error: Have tried to start more than " + str(self.server_limit)
                       + " servers (the server limit) but according to the"
                       + " metaserver it has found none.");
+
+              # start LongTurn games, one per pass
+              lt_scripts = glob.glob('pubscript_longturn_*.serv')
+              self.longturn.intersection_update(lt_scripts)
+              for script in lt_scripts:
+                if script not in self.longturn:
+                   # script[10:-5] is the magic needed for now because
+                   # init-freeciv-web adds its own 'pubscript_' and '.serv'
+                   new_server = Civlauncher("longturn", script[10:-5], port, metahost + ":" + str(metaport) + metapath, self.savesdir)
+                   self.server_list.append(new_server)
+                   new_server.start()
+                   port += 1
+                   self.longturn.add(script)
+                   break
 
               while (self.single < self.server_capacity_single
                      and self.total <= self.server_limit
@@ -170,16 +180,6 @@ if __name__ == '__main__':
     new_server.start();
     port += 1;
   
-  if (mc.start_longturn == "true"):
-    # start LongTurn games
-    for i in mc.longturn_ports_list:  
-      new_server = Civlauncher("longturn", "longturn_" + str(i), i, metahost + ":" + str(metaport) + metapath, mc.savesdir)
-      mc.server_list.append(new_server);
-      new_server.start();
-      port += 1;
-  else:    
-    port += len(mc.longturn_ports_list);
-
   print("Publite2 started!");
   time.sleep(20);
   mc.check(port);

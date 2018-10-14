@@ -79,9 +79,9 @@ $.ajax({
   data: postData
 }).done(function(responsedata) {
     if (!renderer_3d) {
-      window.location.href="/webclient/?action=earthload&savegame=" + responsedata;
+      window.location.href="/webclient/?action=earthload&type=singleplayer&savegame=" + responsedata;
     } else {
-      window.location.href="/webclient/?action=earthload&savegame=" + responsedata + "&renderer=webgl";
+      window.location.href="/webclient/?action=earthload&type=singleplayer&savegame=" + responsedata + "&renderer=webgl";
     }
   })
   .fail(function() {

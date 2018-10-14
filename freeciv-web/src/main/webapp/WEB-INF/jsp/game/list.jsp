@@ -180,9 +180,9 @@
 									<td class="hidden-xs">${game.players}</td>
 									<td class="hidden-xs">${game.turn}</td>
 									<td><a class="label label-success label-lg"
-										href="/webclient?action=observe&amp;civserverport=${game.port}&amp;civserverhost=${game.host}" title="Observe">
+										href="/webclient?action=observe&amp;civserverport=${game.port}&amp;civserverhost=${game.host}&amp;type=${game.type}" title="Observe">
 											2D</a> <a class="label label-success label-lg"
-										href="/webclient?renderer=webgl&amp;action=observe&amp;civserverport=${game.port}&amp;civserverhost=${game.host}" title="Observe">
+										href="/webclient?renderer=webgl&amp;action=observe&amp;civserverport=${game.port}&amp;civserverhost=${game.host}&amp;type=${game.type}" title="Observe">
 											3D</a> <a class="label label-primary label-lg"
 										href="/game/details?host=${game.host}&amp;port=${game.port}">
 											Info</a>
@@ -192,7 +192,7 @@
 						</table>
 					</c:if>
 					<c:if test="${fn:length(singlePlayerGameList) == 0}">
-							<a class="label label-primary" href="/webclient/?action=new">Start</a> a new single player game! 
+							<a class="label label-primary" href="/webclient/?action=new&amp;type=singleplayer">Start</a> a new single player game!
 					</c:if>
 				</div>
 	
@@ -228,19 +228,21 @@
 									<td><c:choose>
 											<c:when test="${game.state != 'Running'}">
 												<a class="label label-success label-lg"
-													href="/webclient?action=multi&amp;civserverport=${game.port}&amp;civserverhost=${game.host}&amp;multi=true">
+													href="/webclient?action=multi&amp;civserverport=${game.port}&amp;civserverhost=${game.host}&amp;multi=true&amp;type=${game.type}">
 													Play</a>
 											</c:when>
 											<c:otherwise>
                                                 <a class="label label-success label-lg"
-													href="/webclient?action=multi&amp;civserverport=${game.port}&amp;civserverhost=${game.host}&amp;multi=true">
+													href="/webclient?action=multi&amp;civserverport=${game.port}&amp;civserverhost=${game.host}&amp;multi=true&amp;type=${game.type}">
 													Play 2D</a>
+											<c:if test="${game.type} ne 'longturn'}">
 												<a class="label label-success label-lg"
-													href="/webclient?action=observe&amp;civserverport=${game.port}&amp;civserverhost=${game.host}&amp;multi=true">
+													href="/webclient?action=observe&amp;civserverport=${game.port}&amp;civserverhost=${game.host}&amp;multi=true&amp;type=${game.type}">
 													Observe 2D</a>
 												<a class="label label-success label-lg"
-													href="/webclient?renderer=webgl&amp;action=observe&amp;civserverport=${game.port}&amp;civserverhost=${game.host}&amp;multi=true">
+													href="/webclient?renderer=webgl&amp;action=observe&amp;civserverport=${game.port}&amp;civserverhost=${game.host}&amp;multi=true&amp;type=${game.type}">
 													3D</a>
+											</c:if>
 											</c:otherwise>
 										</c:choose>
 										<a class="label label-primary label-lg"	href="/game/details?host=${game.host}&amp;port=${game.port}">
@@ -267,7 +269,7 @@
 							</p>
 							<p>
 								To start a new Play-By-Email game, 
-								<u></u></ul><a href="/webclient/?action=pbem">log in here</a></u>. To play your turn
+								<a href="/webclient/?action=pbem&amp;type=pbem">log in here</a></u>. To play your turn
 								in a running Play-By-Email game, click on the link in the last
 								e-mail you got from Freeciv-web. Games are expired after 7 days if
 								you don't play your turn.

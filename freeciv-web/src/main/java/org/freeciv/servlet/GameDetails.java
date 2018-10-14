@@ -136,6 +136,7 @@ public class GameDetails extends HttpServlet {
 				request.setAttribute("serverid", rs.getString("serverid"));
 				request.setAttribute("port", port);
 				request.setAttribute("host", sHost);
+				request.setAttribute("type", rs.getString("type"));
 			} else {
 				RequestDispatcher rd = request.getRequestDispatcher("game-information.jsp");
 				rd.forward(request, response);

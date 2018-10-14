@@ -10,6 +10,8 @@ public class Game {
 
 	private String patches;
 
+	private String type;
+
 	private String state;
 
 	private String message;
@@ -54,6 +56,10 @@ public class Game {
 
 	public int getPort() {
 		return port;
+	}
+
+	public String getType() {
+		return type;
 	}
 
 	public String getState() {
@@ -109,6 +115,11 @@ public class Game {
 
 	public Game setPort(int port) {
 		this.port = port;
+		return this;
+	}
+
+	public Game setType(String type) {
+		this.type = type;
 		return this;
 	}
 

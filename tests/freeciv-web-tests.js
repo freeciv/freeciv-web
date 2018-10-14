@@ -77,7 +77,7 @@ casper.test.begin('Test of Freeciv-web frontpage', 3, function suite(test) {
 });
 
 casper.test.begin('Test starting new Freeciv-web game', 10, function suite(test) {
-    casper.start("http://localhost/webclient/?action=new", function() {
+    casper.start("http://localhost/webclient/?action=new&type=singleplayer", function() {
         test.assertHttpStatus(200);
         test.assertTitleMatch(/Freeciv-web/, 'Freeciv-web title is present');
     });
@@ -181,7 +181,7 @@ casper.test.begin('Test starting new Freeciv-web game', 10, function suite(test)
 
 casper.test.begin('Test pregame settings dialog ruleset switcher',
                   3, function suite(test) {
-  casper.start("http://localhost/webclient/?action=new");
+  casper.start("http://localhost/webclient/?action=new&type=singleplayer");
 
   casper.waitForSelector('#username_req', function() {
     this.echo("Filling in username in new game dialog.");

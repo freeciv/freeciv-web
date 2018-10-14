@@ -41,10 +41,8 @@ Freeciv has AI related
 
 # Freeciv-web LongTurn
 
-Activation of LongTurn support is configured as a list of port numbers in these files:
-publite2/settings.ini 
-freeciv/patches/longturn.patch
-freeciv-web\src\main\webapp\javascript\civcliet.js  is_longturn()
+Activation of LongTurn games is handled by adding the server commands files:
+publite2/pubscript_longturn_*.serv
 
 # Rules
 

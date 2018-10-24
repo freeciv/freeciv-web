@@ -161,9 +161,11 @@ When in a [tested system](scripts/install/systems),
 you may run `scripts/install/install.sh` and it will fetch and configure what's needed.
 
 Start and stop Freeciv-web with the following commands:  
+```bash
   start-freeciv-web.sh  
   stop-freeciv-web.sh  
   status-freeciv-web.sh
+```
 
 All software components in Freeciv-web will log to the /logs sub-directory of the Freeciv-web installation.
 
@@ -171,15 +173,19 @@ All software components in Freeciv-web will log to the /logs sub-directory of th
 
 1. Build local dockerfile based on debian - this will take a significant amount of time (10 - 20 minutes)
 
+```bash
 docker build . -t freeciv-web
+```
 
 2. Run docker image including required ports on your host
-
+```bash
 docker run -i -t --user docker -p 8888:8080 -p 80:80 -p 7000:7000 -p 7001:7001 -p 7002:7002 -p 6000:6000 -p 6001:6001 -p 6002:6002 freeciv-web
+```
 
 3. Start Freeciv-web with:
-
+```bash
 ./start-freeciv-web.sh
+```
 
 Answer prompt for docker sudo password with "docker"
 

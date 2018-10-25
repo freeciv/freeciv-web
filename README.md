@@ -90,15 +90,25 @@ local developer image running Freeciv-web on latest Ubuntu on your host
 operating system such as Windows, OSX or Linux. 
 This is the recommended way to build Freeciv-web on your computer.
 
+0. Before installing run the following commands (install homebrew on MacOS by running the command `curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install`):
+```bash
+sudo apt-get update [Ubuntu]
+sudo apt-get upgrade [Ubuntu]
+brew doctor [MacOS]
+brew update [MacOS]
+```
+
 1. Install VirtualBox: https://www.virtualbox.org/ - Install manually on Windows, and with the following command on Linux:
  ```bash
-sudo apt-get install virtualbox
+sudo apt-get install virtualbox [Ubuntu]
+brew cask install virtualbox [MacOS]
  ```
 
 2. Install Vagrant: http://www.vagrantup.com/ - Install manually on Windows
 , and with the following command on Linux:
  ```bash
-sudo apt-get install vagrant
+sudo apt-get install vagrant [Linux]
+brew cask vagrant [MacOS]
  ```
 
 3. Run Vagrant with the following commands in your Freeciv-web directory:
@@ -106,7 +116,7 @@ sudo apt-get install vagrant
  vagrant up
  ```
 
-  This will build, compile, install and run Freeciv-web on the virtual server image. Wait for the installation process to complete, watching for any error messages in the logs.
+This will build, compile, install and run Freeciv-web on the virtual server image. Wait for the installation process to complete, watching for any error messages in the logs.
 
 4. Test Freeciv-web by pointing your browser to http://localhost if you run Windows or http://localhost:8080 if you run Linux or macOS.
 

@@ -1,4 +1,14 @@
-﻿THE FREECIV-WEB PROJECT
+﻿# Freeciv Python Environment
+
+The project began with an aim to develop an AI agent capable of handling complex 
+tasks like playing strategy games, similar work in this domain can be found 
+[here](https://arxiv.org/pdf/1401.5390.pdf). Though it began with a simple 
+research to get an environment in python, soon I realised there was no such 
+thing available. I decided to write a binding for the same. - YJB
+
+The original freeciv-web project README is given below.
+
+THE FREECIV-WEB PROJECT
 -----------------------
 
 [![Build Status](https://api.travis-ci.org/freeciv/freeciv-web.png)](https://travis-ci.org/freeciv/freeciv-web)
@@ -107,7 +117,7 @@ brew cask install virtualbox [MacOS]
 2. Install Vagrant: http://www.vagrantup.com/ - Install manually on Windows
 , and with the following command on Linux:
  ```bash
-sudo apt-get install vagrant [Linux]
+sudo apt-get install vagrant [Ubuntu]
 brew cask vagrant [MacOS]
  ```
 

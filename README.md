@@ -1,4 +1,4 @@
-﻿# Freeciv Python Environment
+# Freeciv Python Environment
 
 The project began with an aim to develop an AI agent capable of handling complex 
 tasks like playing strategy games, similar work in this domain can be found 
@@ -8,8 +8,7 @@ thing available. I decided to write a binding for the same. - YJB
 
 The original freeciv-web project README is given below.
 
-THE FREECIV-WEB PROJECT
------------------------
+## THE FREECIV-WEB PROJECT
 
 [![Build Status](https://api.travis-ci.org/freeciv/freeciv-web.png)](https://travis-ci.org/freeciv/freeciv-web)
 [![Code Quality: Javascript](https://img.shields.io/lgtm/grade/javascript/g/freeciv/freeciv-web.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/freeciv/freeciv-web/context:javascript)

@@ -1,0 +1,603 @@
+============================================================================
+  Freeciv Coding Style Guide
+============================================================================
+
+If you want to hack Freeciv, and want your patches to be accepted, it helps
+to follow some simple style rules. Yes, some of these are a bit nit-picky,
+but wars are fought over the silliest things ...
+
+- This style is used for all code in Freeciv. Freeciv gtk-clients use
+  this style, not gtk style.
+
+- Freeciv is mostly programmed in C, C89 with some C99 features.
+  Qt parts are programmed in C++. Even C++ parts should have mostly
+  consistent style with C parts, so where not otherwise noted, this
+  guide applies to C++ parts too. Headers that are included to both
+  C and C++ source files follow C style.
+
+- C++-style comments (i.e., // comments) are forbidden in C code.
+  They should be used for single-line comments in C++ code.
+
+- Declaring variables in the middle of the scope is forbidden
+  (unless you are using C99 dynamic arrays and you need to check the size
+   of the array before you declare it).
+
+- Where variable is logically boolean, 'bool' type should be used even in
+  C code. To make sure that the type is defined, include utility/support.h.
+  In C code boolean values are uppercase macros 'TRUE' and 'FALSE'.
+  In C++ code lowercase boolean values 'true' and 'false' should be used.
+
+- Functions that take no arguments should be declared and defined with
+  'void' argument list in C code, and empty argument list in C++ code.
+
+  C:
+    int no_arguments(void);
+
+  C++:
+    int no_arguments();
+
+- Use K&R indentation style with indentation 2 (if in doubt, use "indent -kr
+  -i2 -l77", but beware that that will probably mangle the _() macros used
+  to mark translated strings and the brace style for iteration macros).
+
+- Do not re-indent areas of code you are not modifying or creating.
+
+- Here are the most important formatting rules:
+
+  - Lines are at most 77 characters long, including the terminating newline.
+
+  - The tab width is 8 spaces for tabs that already exist in the source code
+    (this is just so that old code will appear correctly in your editor).
+    However, tabs should be avoided in newly written code.
+
+  - The indentation is 2 spaces per level for all new code; do not use tabs
+    for any kind of indentation. The one exception to this is if you are
+    just adding one line to a set of lines that are already indented with
+    some strange mix of tabs and spaces; in this case you may use the same
+    indentation as the surrounding lines.
+
+  - Do not add more than 2 empty lines between any sections in the code.
+
+  - Spaces are inserted before and after operators: instead of "int a,b,c;"
+    use "int i, j, k;" and instead of
+
+      if(foo<=bar){
+        c=a+b;
+      }
+
+    use
+
+      if (foo <= bar) {
+        c = a + b;
+      }
+
+    Note the space between "if" and the bracket.
+
+  - Switch statement case labels are aligned with the enclosing "switch":
+
+      switch (value) {
+      case MY_VALUE1:
+        do_some_stuff(value);
+        break;
+      case MY_VALUE2:
+        {
+          int value2 = value + 5;
+          do_some_other_stuff(value2);
+        }
+        break;
+      }
+
+  - In the rare case that you actually use goto, the label should be all
+    capitals and "out-dented" in the block in which it is contained:
+
+      static int frob(int n)
+      {
+        int i, j;
+        for (i = 0; i < n; i++) {
+          for (j = i; j < n; j++) {
+            if (some_condition(i, j)) {
+              goto EXIT_LOOP;
+            }
+          }
+        }
+      EXIT_LOOP:
+        return 123;
+      }
+
+  - If a function prototype exceeds 77 characters on one line, you should
+    put the return value type and storage specifier on the line immediately
+    above it:
+
+      static const struct incredibly_long_structure_name *
+      get_a_const_struct_incredibly_long_structure_name(int id);
+
+  - If arguments in a function prototype or a function call cause the line
+    to exceed 77 characters, they should be placed on the following line and
+    lined up with spaces to the column after the '(':
+
+      void some_function(const struct another_really_long_name *arln,
+                         int some_other_argument);
+
+  - If the line is still too long for some reason, you may place the
+    arguments two indentation levels on the next line:
+
+      a_very_awkward_long_function_name(some_argument,
+          "A really long string that would have to be cut up.");
+
+    But you should try to avoid this situation, either by naming your
+    functions/types/variables more succinctly, or by using helper variables
+    or functions to split the expression over a number of lines.
+
+- An empty line should be placed between two separate blocks of code.
+
+- Place operators at the beginning of a line, not at the end. It should be
+
+    if ((a
+         && b)
+        || c) {
+
+  instead of
+
+    if ((a &&
+         b) ||
+        c) {
+
+
+============================================================================
+  Comments
+============================================================================
+
+- All comments should have proper English grammar, spelling and punctuation,
+  but you should not capitalize names of identifiers (variables, types,
+  functions, etc.) used in the code. If using plain identifiers in sentences
+  would be confusing to the reader, you should put the names in quotes.
+
+- Every function should have a comment header. The comment should look like
+  the example below, indented by two spaces. It should be above the
+  function's implementation, not the prototype. Note "*//**" in the end
+  of the beginning line for the doxygen.
+
+/************************************************************************//**
+  The description of the function should be here. Also describe what is
+  expected of the arguments if it is not obvious. Especially note down any
+  non-trivial assumptions that the function makes.
+
+  Do _not_ introduce a new function without some sort of comment.
+****************************************************************************/
+int the_function_starts_here(int value) 
+{
+  return value + 2;
+}
+
+- One line comments should be indented correctly and placed above the code
+  being commented upon:
+
+    int x;
+
+    /* I am a single line comment. */
+    x = 3;
+
+- For multiline comments, asterisks should be placed in front of the comment
+  line like so:
+
+    /* I am a multiline
+     * comment, blah 
+     * blah blah. */
+
+- If you need to comment a declared variable, it should be as such:
+
+    struct foo {
+      int bar;     /* bar is used for ...
+                    * in ... way. */
+      int blah;    /* blah is used for ... . */
+    };
+
+  Or if the comment is very long, it may be placed above the field
+  declaration, as in the one-line or multi-line comment cases.
+
+- Comments in conditionals: if you need a comment to show program flow, it
+  should be below the if or else:
+
+    if (is_barbarian(pplayer)) {
+      x++;
+    } else {
+      /* If not barbarian... */
+      x--;
+    }
+
+- Comments to translators are placed before the N_(), _(), Q_() or PL_()
+  marked string, and are preceded by "TRANS:". . They must be on the same or
+  immediately previous line to the gettext invocation. These comments are
+  copied to the translator's file. Use them whenever you think the
+  translators may need some more information:
+
+    /* TRANS: Do not translate "commandname". */
+    printf(_("commandname <arg> [-o <optarg>]"));
+
+
+============================================================================
+  Declaring Variables
+============================================================================
+
+- Avoid static and global variables if at all possible. When you absolutely
+  do need them, minimize the number of times they are referenced in the code
+  (e.g. use a helper function to wrap their access).
+
+- Never initialize variables with values that make no sense as their
+  value in case they get used. If there's no sensible initialization
+  value for a variable, leave it uninitialized. This allows various
+  tools to detect if such a variable ever gets used without assigning
+  proper value to it.
+
+- Variables can be initialized as soon as they are declared:
+
+    int foo(struct unit *punit)
+    {
+      int x = punit->x;
+      int foo = x;
+      char *blah;
+
+      /* Etc. */
+
+  (But you should generally check arguments to functions before using them,
+  unless you are absolutely sure that pointers are not NULL, etc.)
+
+- After variables are declared, there should be an empty line before the
+  rest of the function body.
+
+- Merging declarations: variables do not have to be declared one per line;
+  however, they should only be grouped by similar function.
+
+    int foo(struct city *pcity)
+    {
+      int i, j, k;
+      int total, cost;
+      int build = pcity->shield_stock;
+    }
+
+- When declaring a pointer, there should be a space before '*' and no space
+  after, except if it is a second '*'.
+
+    struct unit *find_random_unit(struct unit **array, size_t num)
+    {
+      struct unit *const *prand = array + fc_rand(num);
+
+      return *prand;
+    }
+
+  instead of
+
+    struct unit* find_random_unit(struct unit* *array, size_t num)
+    {
+      struct unit * const* prand = array + fc_rand(num);
+
+      return *prand;
+    }
+
+
+============================================================================
+  Bracing
+============================================================================
+
+- Function braces begin and end in the first column:
+
+    int foo(void)
+    {
+      return 0;
+    }
+
+  instead of
+
+    int foo(void) {
+      return 0;
+    }
+
+- Use extra braces for iteration macros. Note that the "*_iterate_end;"
+  should be placed on the same line as the end brace:
+
+    unit_list_iterate(pcity->units_supported, punit) {
+      kill(punit);
+    } unit_list_iterate_end;
+
+- In switch statements, braces should only be placed where needed, i.e. to
+  protect local variables.
+
+- Braces shall always be used after conditionals, loops, etc.:
+
+    if (x == 3) {
+      return;
+    }
+
+  and
+
+    if (x == 3) {
+      return 1;
+    } else {
+      return 0;
+    }
+
+  not
+
+    if (x == 3)
+      return 1;  /* BAD! */
+
+
+============================================================================
+  Enumerators
+============================================================================
+- First of all, reread comment about the switch statement indentations and
+  braces.
+
+- Avoid the usage of magic values (plain hard-coded value, such as 0 or -1)
+  and prefer the usage of enumerators. If an enumeration cannot be defined
+  for any reason, then define a macro for this value.
+
+- Avoid storing magic values in external processes. For example, savegames
+  shouldn't contain any enumerators as magic numbers. They should be saved
+  as strings, to keep compatibility when their definition is changed. For
+  doing this, there are some tools in utility/specenum_gen.h; have a look at
+  it.
+
+- Avoid the usage of the default case in switch statements, if possible. The
+  default case removes the warning of the compiler when a value is missing
+  in a switch statement.
+
+
+============================================================================
+  Including Headers
+============================================================================
+- Order include files consistently: all includes are grouped together.
+  These groups are divided by an empty line. The order of these groups is as
+  follows:
+
+    1) fc_config.h (see below)
+    2) system include files which are OS-independent (part of C-standard or
+       POSIX)
+    3) system include files which are OS-dependent or conditional includes
+    4) include files from utility/
+    5) include files from common/
+    6) include files from client/
+    7) include files from server/ and ai/
+    8) include the header corresponding to the current c source file after
+       all other headers.
+
+  Each group is sorted in alphabetic order. This helps to avoid adding
+  unnecessary or duplicated include files.
+
+  Always set a comment to determine the location of the following headers
+  before every group.
+
+  It is very important that '#include <fc_config.h>' is at the top of
+  every .c file (it need not be included from .h files). Some definitions in
+  fc_config.h will affect how the code is compiled, without which you can end
+  up with bad and untraceable memory bugs.
+
+    #ifdef HAVE_CONFIG_H
+    #include <fc_config.h>
+    #endif
+
+    #include <stdlib.h>
+
+    /* utility */
+    #include "log.h"
+
+    /* common */
+    #include "game.h"
+
+    #include "myfileheader.h"
+
+- For headers within a subdirectory path, the common rule is to set them
+  in an additional group, after the same group (don't forget the location
+  comment).
+
+    /* common */
+    #include "game.h"
+
+    /* common/aicore */
+    #include "pf_tools.h"
+
+  However, there is an exception to this. The last group is always the one
+  we are working on. So, if we are working on the common part, the order
+  should be:
+
+    /* common/aicore */
+    #include "pf_tools.h"
+
+    /* common */
+    #include "game.h"
+
+  Same observations with ai/ and server/. When working on the server/
+  directory, the order should be:
+
+    /* ai */
+    #include "aitools.h"
+
+    /* server */
+    #include "srv_main.h"
+
+  and working on the ai/ directory:
+
+    /* server */
+    #include "srv_main.h"
+
+    /* ai */
+    #include "aitools.h"
+
+- Do not include headers in other headers if at all possible. Use forward
+  declarations for pointers to structs:
+
+    struct connection;
+    void a_function(struct connection *pconn);
+
+  instead of
+
+    #include "connection.h"
+    void a_function(struct connection *pconn);
+
+- Of course, never include headers of non-linked parts of the code. For
+  example, never include client/ headers into a server/ file. Also, in the
+  client/ directory, GUI specific headers are never included. Always, use
+  the common set of headers defined in client/include/.
+
+
+============================================================================
+  Object-Oriented Programming
+============================================================================
+Freeciv is not really object-oriented programming, but last written parts
+seems to tend to there. Also, there are more and more parts which are
+modular, so there are some observations to do:
+
+- Any function or member of a module must be prefixed by the name of this
+  module, or an abbreviation of it (but use the same prefix for all members
+  please!). Never set the module name as suffix!
+
+    /* Super mega cool module! */
+    void smc_module_init(void);
+    void smc_module_free(void);
+
+  not
+
+    /* Super mega cool module! */
+    void smc_module_init(void);
+    void sm_cool_free(void);
+
+  neither
+
+    /* Super mega cool module! */
+    void init_smc_module(void);
+    void free_smc_module(void);
+
+- A function which allocates memory for a pointer variable should use the
+  suffix '_new'. The memory is freed by a corresponding function with the
+  suffix '_destroy'.
+
+    {
+      struct test *t = test_new();
+      /* Do something. */
+      test_destroy(t);
+    }
+
+- The suffix '_init' should be used for functions which initialize some
+  static data. The name of the corresponding function to deinitialize stuff
+  should use the suffix '_free' (see server/settings.c or common/map.c).
+
+    {
+      struct astring str;
+
+      astr_init(&str);
+      /* Do something. */
+      astr_free(&str);
+    }
+
+
+============================================================================
+  Miscellaneous
+============================================================================
+
+- If an empty statement is needed, you should put an explanatory comment
+  in an empty block (i.e. {}):
+
+    while (*i++) {
+      /* Do nothing. */
+    }
+
+- Use the postfix operator instead of the prefix operator when either will
+  work. That is, write "a++" instead of "++a".
+
+- Strive to make your code re-entrant (thread/recursion safe), as long as
+  this does not make the implementation too cumbersome or involved.
+
+- Strive to make your code modular: make it independent from other parts of
+  the codebase, and assume as little as possible about the circumstances in
+  which it is used.
+
+- Strive to avoid code duplication: if some part of the code is repeated in
+  several places, factor it out into a helper function.
+
+- Try to use static inline functions and const data instead of macros.
+
+- If helper functions internal to freeciv are added, prefix their names
+  with 'fc_'. Do not use 'my_' because it is also used by MySQL and could
+  be included in some libs.
+
+- Do not use assert() or die(); instead use the macros defined within
+  utility/log.h:
+
+    fc_assert(condition)
+    fc_assert_ret(condition)
+    fc_assert_ret_val(condition, val)
+    fc_assert_action(condition, action_on_failure)
+    fc_assert_exit(condition, action_on_failure)
+
+    fc_assert_msg(condition, message, ...)
+    fc_assert_ret_msg(condition, message, ...)
+    fc_assert_ret_val_msg(condition, val, message, ...)
+    fc_assert_action_msg(condition, action_on_failure, message, ...)
+    fc_assert_exit_msg(condition, action_on_failure, message, ...)
+
+  This way error conditions can be handled gracefully while still enforcing
+  invariants you expect not to be violated in the code.
+  (By default execution will continue with a warning, but it can be made
+  to halt by specifying the '-F' option to the client or server.)
+
+    int foo_get_id(const struct foo *pfoo)
+    {
+      fc_assert_ret_val(pfoo != NULL, -1);
+      return pfoo->id;
+    }
+
+- Do not put multiple conditions in the same fc_assert*() statement:
+
+    fc_assert(pfoo != NULL);
+    fc_assert(pfoo->id >= 0);
+
+  instead of
+
+    fc_assert(pfoo != NULL && pfoo->id >= 0);
+
+- Never include functionality also otherwise necessary inside fc_assert*().
+  Such functionality would be missing from release builds where asserts
+  are disabled. If you want to assert return value of a critical function
+  call, make the call outside assert and place the return value to variable
+  and then assert value of that variable.
+
+- For strings containing multiple sentences, use a single space after periods
+  (not two, not zero, just one).
+
+- If you use a system specific feature, do not add #ifdef __CRAY__ or
+  something like that. Rather write a check for that feature for
+  configure.ac, and use a meaningful macro name in the source.
+
+- Always prototype global functions in the appropriate header file. Local
+  functions should always be declared as static. To catch these and some
+  other problems please use the following warning options "-Wall
+  -Wpointer-arith -Wcast-align -Wmissing-prototypes -Wmissing-declarations
+  -Wstrict-prototypes -Wnested-externs -Wl,--no-add-needed" if you use gcc.
+
+- Always check compilation with the configure option --enable-debug set.
+
+- Header files should be compatible with C++ but code (.c) files need not
+  be. This means some C++ keywords (like "this" or "class") may not be used
+  in header files. It also means casts on void pointers (which should be
+  avoided in C files) must be used in headers.
+
+- To assign null pointer, or to compare against one, use 'NULL' in C code,
+  and 'nullptr' in C++ code.
+
+- If you send patches, use "diff -u" (or "diff -r -u"). "git diff" works
+  correctly without extra parameters.
+
+  For further information, see:
+  <http://www.freeciv.org/wiki/How_to_Contribute>.
+
+  Also, name patch files descriptively (e.g. "fix-foo-bug-0.patch" is good,
+  but "freeciv.patch" is not).
+
+- When doing a "diff" for a patch, be sure to exclude unnecessary files by
+  using the "-X" argument to "diff". E.g.:
+
+    % diff -ruN -Xdiff_ignore freeciv_git freeciv >/tmp/fix-foo-bug-0.patch
+
+  A suggested "diff_ignore" file is included in the Freeciv distribution.
+
+============================================================================

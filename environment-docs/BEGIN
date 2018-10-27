@@ -1,0 +1,20 @@
+===============
+A HACKERS GUIDE
+===============
+
+This project started as my whim to train an RL model capabale of handling
+complex tasks such as a strategy games. Life is shit and life is hard.
+- YJB [Init]
+
+
+BASIC
+==============
+
+Freeciv is a client-server style game where processing for each is done at 
+the server's end. This way the integrity of 
+
+
+NETWORK
+==============
+
+The main 

@@ -1,0 +1,154 @@
+
+CONTENTS
+========
+
+1. Default build
+2. Using freeciv built with AI-modules support
+3. Building freeciv with AI-modules support
+4. Coding new AI module
+5. Using default AI as part of new AI module
+6. Callback interface ChangeLog
+
+
+1. Default build
+----------------
+
+By default Freeciv is built with two AI types; "classic" and "threaded",
+statically built in, and with no support for dynamic AI modules.
+Classic AI is always used for all players, effectively hiding the
+fact that AI module interface even exist.
+
+
+2. Using freeciv built with AI-modules support
+----------------------------------------------
+
+Some modules might be statically linked to freeciv server, and those
+are always available. If freeciv is built with also dynamic modules
+support enabled, one can load additional AI modules to server with
+commandline option "--LoadAI <modulename>"
+Whether module is statically linked or dynamically loaded, new AI players
+that use that module can be created by giving "create" command AI type as
+second parameter
+> create Leonidas classic
+
+Players created any other way, such as by aifill will get the AI type
+that has been made the default freeciv build time.
+
+Information "list" command shows includes player's AI type:
+> list
+Leonidas [#ff0000]: Team 0, user Unassigned
+  AI, classic, difficulty level Easy
+
+
+3. Building freeciv with AI-modules support
+-------------------------------------------
+
+There's three configure options controlling AI-modules support to be
+built in to freeciv.
+
+To statically link some of the supplied AI modules to freeciv,
+use --enable-ai-static=<comma,separated,list>. Default value for this
+is "classic,threaded". Order of the modules is important in that first of
+the modules will be the default AI type used for all the players for whom
+it's not explicitly set.
+
+To support dynamically loading additional modules, use
+--enable-aimodules. It requires that also --enable-shared has been used,
+which may not work on all platforms.
+Special value --enable-aimodules=experimental makes freeciv also to build
+all the modules in its source tree as dynamically loadable AI modules.
+
+In case you want to use some dynamically loadable module as the default
+AI type instead of first type listed for --enable-ai-static, you can
+explicitly set the default type with --with-default-ai=<type>.
+
+Dynamic AI modules are expected in their correct installation location
+unless one has configured with --enable-debug which allows freeciv
+server to look for supplied modules from build directory too. Otherwise you
+cannot use dynamic modules from the freeciv build dir, but you need
+to "make install" freeciv to install them to correct location.
+
+
+4. Coding new dynamic AI module
+-------------------------------
+
+Dynamic AI module to be loaded with "--LoadAI <modulename>" needs to contain
+two functions.
+
+const char *fc_ai_<modulename>_capstr(void)
+  This needs to return capability string of the module. This is used to
+  check if module is compatible with the version of freeciv one tries to
+  load it into. Current freeciv's capstr is in common/ai.h macro FC_AI_MOD_CAPSTR.
+
+ 
+bool fc_ai_<modulename>_setup(struct ai_type *ai)
+  This function is called for AI module to setup itself. Most importantly
+  it should setup callback table ai->funcs so that its other functions
+  get called, and fill ai->name so that it can be referred to in creation of
+  new players.
+  Callback table, with comments when each callback gets called, is defined
+  in common/ai.h
+
+For "--LoadAI <modulename>" to find the AI module, it must reside in ${libdir}/fcai/
+(/usr/lib/fcai by default) under name fc_ai_<modulename>.so
+
+
+5. Using default AI as part of new AI module
+--------------------------------------------
+
+Default AI here refers to specific code module that any AI module can use, not to any
+one AI module. Classic AI module is just a thin wrapper around it, and also Threaded AI
+uses it.
+
+Almost all functions in default AI API take pointer to current AI type as parameter.
+This is used for accessing memory associated with the correct AI type from the structures
+having such AI type specific data.
+
+If a AI type wants to add its own data associated with some code structure, it needs
+to make sure data needed by default AI is in the beginning of the allocated data blocks.
+For example, see threaded AI: tai_player_alloc(), tai_player_free(), and struct tai_plr.
+
+Default AI code is usually built in freeciv only if some AI type using it has been built;
+either 'classic' or 'threaded'. If no such ai type has been built, you can still force
+it in for custom ai types to use by passing configure option --with-ai-lib
+
+
+6. Callback interface ChangeLog
+-------------------------------
+
+New in Freeciv 3.1:
+-------------------
+- Added 'tile_info', called when tile has changed
+- Added 'map_alloc' and 'map_free', called when map tiles are allocated or freed
+- Added 'map_ready', called when map has been generated or, in case of scenario, loaded
+- Added 'unit_move_seen', called for all AI types when unit moves
+
+
+New in Freeciv 3.0:
+-------------------
+- Added 'private' pointer for ai module to store data of its own
+- Added 'module_close', called when server quits
+- Added 'player_console', called when user enter aicmd
+- Added 'city_created', 'city_destroyed', 'unit_created', and 'unit_destroyed'
+  They are like 'city_alloc', 'city_free', 'unit_alloc', and 'unit_free' but called
+  for real cities and units only, in a later phase of creation or earlier phase
+  of destruction
+
+
+New in Freeciv 2.6:
+-------------------
+- Renamed enum danger_consideration as enum override_bool
+- Added restart_phase, called when AI gains control of the player whose phase is already
+  active, for example when continuing from a saved game
+- Added created_by_civil_war, called for AI type of the player who got created from
+  civil war
+- Added "created" player parameter to split_by_civil_war
+- Added game_start, called for all AI types when game starts
+- "city_got" is called when the city is fully initialized, "city_lost" when city still valid
+- Added gov_value for giving AI control of deciding value of governments
+- Added player_save_relations and player_load_relations called on savegame handling for a
+  player once per other player in game. Old player_save and player_load are called only once
+  overall
+- Added want_to_explore, called for AI type of the unit owner, when it is about to autoexplore
+- Added currently unused 'reserved' pointers that we can populate with optional callbacks
+  without need to change the mandatory capability of the modules

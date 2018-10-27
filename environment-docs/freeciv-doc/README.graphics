@@ -1,0 +1,536 @@
+----------------------------------------------------------------------
+Freeciv Graphics, and Tile Specification Files
+----------------------------------------------------------------------
+
+Using Graphics:
+---------------
+
+To use different graphics with Freeciv, use the '--tiles' argument to
+the Freeciv client. Eg, to use the 'engels' graphics, start the
+client as:
+  
+    freeciv-gtk3 --tiles engels
+
+What Freeciv actually does in this case is look for a file called
+'engels.tilespec' somewhere in your Freeciv data path. (See the file
+INSTALL for some information on the Freeciv data path.) That tilespec
+file contains information telling Freeciv which graphics files to use,
+and what those graphics files contain.
+
+That is all you need to know to use alternative graphics provided by
+Freeciv or by third-party add-ons. The rest of this file describes
+(though not fully) the contents of the tilespec file and related
+files. This is intended as developer reference, and for people
+wanting to create/compile alternative tilesets and modpacks for
+Freeciv.
+
+----------------------------------------------------------------------
+Overview:
+---------
+
+The purpose of the 'tilespec' file and related 'spec' files is to
+allow the detailed layout of the graphics within the files to be
+flexible and not hard-coded into Freeciv, and to allow add-ons to
+conveniently provide additional graphics.
+
+There are two layers to the tilespec files:
+
+The top-level file is named, eg: 'trident.tilespec'.  The basename of
+this file (here, 'trident') corresponds to the parameter of the
+'--tiles' command-line argument for the Freeciv client, as described
+above.
+
+The top-level tilespec file contains general information on the full
+tileset, and a list of files which specify information about the
+individual graphics files. These filenames must be located somewhere
+in the data path, though not necessarily the same place as the
+top-level tilespec file. Note that with this system the number and
+contents of the referenced files are completely flexible at this
+level.
+
+An exception is that the intro graphics must be in individual files,
+as listed in the tilespec file, because Freeciv treats these
+specially: these graphics are freed after the game starts, and
+reloaded later as necessary.
+
+----------------------------------------------------------------------
+Graphics formats:
+-----------------
+
+All clients currently use 24/32 bit PNGs.
+
+----------------------------------------------------------------------
+Tileset options:
+----------------
+
+In the top-level tilespec file you can set options for the tileset.
+Each of these should go within the [tilespec] section. Currently
+options include:
+
+  Strings (enclosed in "")
+  ------------------------
+  options               : A capability string, this should be "+Freeciv-a.b-tilespec", where
+                          "a.b" it the current freeciv version.
+  name                  : the name of the tileset
+  type                  : general type of tileset, different types have
+                          quite different format. Supported types are
+                          "overhead" and "isometric"
+  main_intro_file       : GFX file for the intro graphics
+  unit_default_orientation : Specifies a direction to use for unit types in
+                          worklists etc. See "Unit Sprites" below.
+
+  String vectors
+  --------------
+  preferred_themes      : List of preferred client themes to use with this
+                          tileset
+
+  Integers
+  --------
+  priority              : when user does not specify tileset, client
+                          automatically loads available compatible tileset
+                          with highest priority.
+  normal_tile_width     : the width of terrain tiles
+  normal_tile_height    : the height of terrain tiles
+  unit_width            : unit sprite width. Default is always ok, setting is
+                          provided just for symmetry with unit_height
+  unit_height           : unit sprite height if more than 1.5x terrain tile
+                          height in isometric tileset
+  small_tile_width      : the width of icon sprites
+  small_tile_height     : the height of icon sprites
+  fog_style             : Specifies how fog is drawn.
+                          "Auto" :     Code automatically adds fog.
+                          "Sprite :    A single fog sprite is drawn on top of all
+                                       other sprites for fogged tiles. The
+                                       tx.fog sprite is used for this.
+                          "Darkness" : No fog, or fog from darkness_style = 4.
+  darkness_style        : Specifies how "encroaching darkness" is drawn.
+                          "None"           : No darkness.
+                          "IsoRect"        : A single sprite can be split into 4
+                                             parts, each containing the darkness
+                                             for that particular cardinal direction.
+                                             (Iso-view only.)
+                          "CardinalSingle" : Four different sprites exist, each
+                                             holding the darkness for a particular
+                                             direction. Any or all of the sprites
+                                             may be drawn.
+                          "CardinalFull"   : The sprite is chosen based on the vector
+                                             sum of the darkness in all 4 cardinal
+                                             directions. 15 different sprites are
+                                             needed.
+                          "Corner"         : Corner darkness & fog, 81 sprites needed.
+  unit_flag_offset_x   : Gives an offset from the tile origin at which to
+  unit_flag_offset_y     draw flags behind units or cities. With isometric
+  city_flag_offset_x     tilesets this should be non-zero so that the flag
+  city_flag_offset_y     is placed correctly behind the unit/city.
+  occupied_offset_x    : Gives an offset from the tile origin at which to
+  occupied_offset_y      draw city occupied icon (in many tilesets placed above the flag)
+  city_size_offset_x   : Gives an offset from the full tile origin at which to
+  city_size_offset_y     draw city size number.
+  unit_offset_x        : Gives an offset from the tile origin at which to
+  unit_offset_y          draw units.
+  activity_offset_x    : Gives an offset from the tile origin at which to
+  activity_offset_y      draw normal unit activity icons. "Auto" icons are not
+                         affected by this as they are usually wanted in different
+                         offset than real activity icons for both to appear simultaneously
+                         "Auto" icons are auto_attack, auto_settler, patrol, connect.
+  select_offset_x      : Gives an offset from the tile origin at which to
+  select_offset_y        draw selected unit sprites.
+  unit_upkeep_offset_y : Gives an offset from the unit origin at which to draw
+                         the upkeep icons when they are shown along the unit. The upkeep
+                         icons can safely extend below the unit icon itself.
+                         If this value is omitted, normal tile height is used instead;
+                         - Upkeep icons appear below the unit icon if the unit icons are
+                           equal to tile height (typical in overhead tileset)
+                         - Upkeep icons overlay lower part of the unit icon, if unit icon
+                           is higher than tile height (typical in iso tilesets)
+  unit_upkeep_small_offset_y:
+                         Like unit_upkeep_offset_y, but to be used in case there's only small
+                         space for the overall icon produced. Defaults to unit_upkeep_offset_y -
+                         not having alternative layout.
+  citybar_offset_y     : Gives an offset from city tile origin at which to
+                         draw city bar text.
+  hex_side             : When is_hex is specified (see is_hex, below), this
+                         value gives the length of the "extra" side of the
+                         hexagon. This extra side will be on the top/bottom
+                         of the tile if is_isometric (below) is given, or
+                         on the left/right of the tile otherwise. The actual
+                         dimensions of the hex tile are determined from the
+                         normal_tile_width/normal_tile_height of the tileset
+                         as well as the hex side. The "normal" dimensions
+                         give the X and Y offsets between adjacent tiles in
+                         the tileset - this is not the same as the dimensions
+                         of the tile itself. The dimension of the bounding
+                         box of the hexagonal tile will be equal to the
+                         "normal" dimension minus the hex_side. For instance
+                         "normal" dimensions of 64x32 with a hex_side of 16
+                         for an iso-hex tileset will give hexagons of size
+                         48x32.
+
+  Booleans (FALSE or TRUE)
+  ------------------------
+  is_hex                : set to TRUE for a hexagonal tileset. If is_isometric
+                          is also specified then you have an iso-hex tileset.
+                          Hex tilesets should be used with topologies 8-11 and
+                          iso-hex tilesets with topologies 12-15.
+
+  String lists (a comma-separated list of strings)
+  ------------------------------------------------
+  files                 : A list of .spec files to scan for sprites.
+                          See "individual spec files", below.
+
+
+----------------------------------------------------------------------
+Terrain options:
+----------------
+
+The top-level tilespec file also contains information on how to draw each
+terrain type.  For each terrain type include a section "[tile_xxx]".
+This section contains information on how to draw this terrain type.
+(The terrain types are specified in the server ruleset file.)
+
+  [tile_XXX] options
+  ----------------
+  tag                   : Tag of the terrain this drawing information refers
+                          to. That must match the "graphic" or "graphic_alt"
+                          field given in the ruleset file.x
+  blend_layer           : If non-zero, given layer of this terrain will be
+                          blended with adjacent terrains. Blending is done
+                          civ2-style with a dither mask. Only iso-view
+                          currently supports blending. Only the base graphic
+                          will be blended.
+                          The blending mask has sprite t.dither_tile.
+  is_reversed           : Draw layers in reverse order.
+  num_layers            : The number of layers in the terrain. This value
+                          must be 1, 2 or 3. Each layer is drawn
+                          separately. The layerN options below control the
+                          drawing of each layer (N should be 0, 1 or 2)
+  layerN_is_tall        : Left right corner of terrain sprites is not based
+                          on normal_tile_width and normal_tile_height, but
+                          to corner of the full tile.
+  layerN_offset_x       : Offset for terrain sprites
+  layerN_offset_y       
+  layerN_match_type     : If 0 or unset, no terrain matching will be done and
+                          the base sprite will be drawn for the terrain. If
+                          non-zero, then terrain matching will be done. A
+                          matched sprite will be chosen that matches all
+                          cardinally adjacent tiles whose terrain has the same
+                          match_type.
+  layerN_match_with     : List of match_types to match against
+  layerN_sprite_type    : With traditional tilesets each tile is drawn using
+                          one sprite. This default sprite_type is "whole".
+                          Which sprite to use may be specified using a
+                          match_type, and there may be multiple layers
+                          (each having one sprite). This method corresponds
+                          to sprite_type "single".
+                          A more sophisticated drawing method breaks the tile
+                          up into 4 rectangles. Each rectangular cell is
+                          adjacent to 3 different tiles. Each adjacency is
+                          matched, giving 8 different sprites for each of the
+                          4 cells. This sprite_type is "corner".
+
+Additionally the top-level tilespec file should contain information about
+the drawing of each layer. This is needed because the way each layer is
+drawn must be consistent between different terrain types. You may not have
+more than 3 layers (either in this section or in the [tile_XXX] sections).
+
+  [layerN] options
+  ----------------
+  match_types            : Gives a string list of all different match types.
+                           This list must include every possible match_type
+                           used by terrains for this layer.
+                           First letter of the match_type must be unique
+                           within layer.
+
+  Extra options
+  ------------
+
+  Tilespec should define style of extra graphics for each extra type in
+  section [extras] like:
+
+  [extras]
+  styles =
+      { "name",          "style"
+        "road",          "RoadAllSeparate"
+        "rail",          "RoadAllSeparate"
+        "river",         "River"
+        "tx.irrigation", "Cardinals"
+      }
+
+  RoadAllSeparate    : A single sprite is drawn for every connection the tile has;
+                       only 8 sprites are needed.
+  RoadParityCombined : A single sprite is drawn for all cardinal connections and
+                       a second sprite is drawn for all diagonal connections;
+                       32 sprites are needed.
+  RoadAllCombined    : One sprite is drawn to show roads in all directions.
+                       There are thus 256 sprites (64 for a hex tileset).
+  River              : Cardinal connections are drawn, as well as delta at the coast
+  Single1            : Single sprite at layer Special1
+  Single2            : Single sprite at layer Special2
+  3Layer             : 3 Sprites, tagged <name>_bg, <name>_mg, and <name>_fg
+  Cardinals          : Sprite for each cardinal connection
+
+----------------------------------------------------------------------
+Individual spec files:
+----------------------
+
+Each spec file describes one graphics file (PNG format is standard,
+although some clients may accept other formats as well) as specified in
+the spec file. The graphics file must be in the Freeciv data path, but
+not necessarily in the same location as the spec file. Note you can have
+multiple spec files using a single graphics file in different ways.
+
+The main data described in the spec file is in sections named
+[grid_*], where * is some arbitrary tag (but unique within each file).
+A grid corresponds to a regular rectangular array of tiles. In
+general one may have multiple grids in one file, but the default
+tilesets usually only have one per file. (Multiple grids would be
+useful to have different size tiles in the same file.) Each grid
+defines an origin (top left) and spacing, both in terms of pixels, and
+then refers to individual tiles of the grid by row and column. The
+origin, and rows and columns, are counted as (0,0) = top left.
+
+x_top_left     : x-coordinate of the leftmost pixel of the leftomost cell
+y_top_left     : y-coordinate of the topmost pixel of the topmost cell
+dx             : cell width
+dy             : cell height
+pixel_border   : Number of pixels between cells, unless overridden by axis specific value
+pixel_border_x : Number of pixels between cells in x-direction, overrides pixel_border
+pixel_border_y : Number of pixels between cells in y-direction, overrides pixel_border
+tiles          : Table of tags, each line having "row", "column", and "tag"
+
+[grid_example]
+x_top_left   = 1   ; Border (in x=0) also in left side of the entire grid
+y_top_left   = 1   ; Border (in y=0) also in top side of the entire grid
+dx           = 96
+dy           = 48
+pixel_border = 1
+tiles = { "row", "column", "tag"
+ 0, 0, "tag1"
+ 0, 1, "tag2"
+ 1, 0, "tag3"
+ 1, 1, "tag4"
+}
+
+
+Each individual tile is given a "tag", which is a string which is
+referenced in the code and/or from ruleset files. A grid may be
+sparse, with some elements unused (simply don't mention their row and
+column), and a single tile may have multiple tags (eg, to use the same
+graphic for multiple purposes in the game): just specify a list of
+comma-separated strings.
+
+If a given tag appears multiple times in the spec files, the *last*
+such tag is used. (That is, in the order of files listed in the
+tilespec file, and order within each file.) This allows selected
+graphics to be "overridden" by listing a replacement spec file near
+the end of the 'files' list in the top-level tilespec file, without
+having to modify earlier files in the list.
+
+----------------------------------------------------------------------
+Tag prefixes:
+-------------
+
+To help keep the tags organised, there is a rough prefix system used 
+for standard tags:
+
+  f.	      national flags
+  r.	      road/rail
+  s.	      general "small"
+  u.	      unit images
+  t.	      basic terrain types (with _n0s0e0w0 to _n1s1e1w1)
+  ts.	      terrain special resources
+  tx.	      extra terrain-related
+  gov.	      government types
+  unit.	      unit overlays: hp, stack, activities (goto, fortify etc)
+  upkeep.     unit upkeep and unhappiness
+  city.	      city related (city, size, sq.-prod., disorder, occupied)
+  cd.	      city defaults
+  citizen.    citizens, including specialists
+  explode.    explosion graphics (nuke, units)
+  spaceship.  spaceship components
+  treaty.     treaty thumbs
+  user.	      crosshairs (in general: user interface?)
+
+In general, graphics tags hard-wired into Freeciv _must_ be provided
+by the spec files, or the client will refuse to start. Graphics tags
+provided by ruleset files (at least for the "standard" rulesets)
+should also be provided, but generally the client will continue even
+if they are not, though the results may not be satisfactory for the
+user. To work properly tags should correspond to appropriately sized
+graphics. (The basic size may vary, as specified in the top-level
+tilespec file, but the individual tiles should be consistent with
+those sizes and/or the usage of those graphics.)
+
+----------------------------------------------------------------------
+Sprites
+-------
+
+Depending on the information given here the tileset must/may contain certain
+sprites.
+
+  Theme Sprites
+  -------------
+
+  citizen sprites :
+
+    This provides citizen graphics. Each citizen has one or more sprites
+    which are shown in the city dialog. The types of citizen are "happy",
+    "content", "unhappy", and "angry". The tag name is "citizen.<type>_<n>".
+    <type> is one of the listed types. <n> is the number of the graphic
+    (numbered starting with 0, unlike most other graphics) which allows more
+    than one sprite to be used. No more than 6 sprites per citizen may be
+    used.
+
+    Currently the citizen and specialist sprites may not have any
+    transparency, as this is ignored in much of the drawing. This is
+    considered a bug.
+
+  specialist sprites:
+
+    These provide specialist graphics just like the citizen graphics. However
+    specialist types come from the ruleset and may be changed in modpacks.
+    The sprite name is "specialist.<type>_<n>". Again <type> is the
+    type of specialist (currently "elvis", "scientist", "taxman") while <n>
+    is the sprite number. See "citizen sprites" above.
+
+  progress indicators:
+
+    There are three types of progress indicator. "science_bulb" indicates
+    progress toward the current research target. "warming_sun" indicates 
+    progress toward global warming. "cooling_flake" indicates progress
+    toward nuclear winter. Each indicator should have 8 states, numbered
+    0 (least) through 7 (most). The sprite names are "s.<type>_<n>".
+
+  government icons:
+
+    There should be one icon for each government. Its name is "gov.<gov>",
+    where <gov> is the government name. Government types come from
+    governments.ruleset (currently "anarchy", "despotism", "monarchy",
+    "communism", "fundamentalism", "republic", "democracy").
+
+  tax icons:
+
+    One icon for each tax type. These are used to show the tax rates. The
+    sprites are "s.tax_luxury", "s.tax_science", "s.tax_gold". Commonly
+    the specialist sprites are reused for this.
+
+  right arrow:
+
+    A sprite "s.right_arrow" is used on the panel when more units are
+    present than can be shown.
+
+  Terrain sprites
+  ---------------
+  base sprite           : If the terrain has no match type or is layered, a
+                          base sprite is needed. This sprite has tag
+                          "t.<terrain>1" (e.g., "t.grassland1"). More than
+                          one such sprite may be given ("t.grassland2", etc.)
+                          in which case one will be chosen at random for each
+                          tile.
+  matched sprites       : If the terrain has a match type or is layered, a
+                          set of matched sprites is needed. This consists of
+                          16 sprites with tags "t.<terrain>_n<V>e<V>s<V>w<V>"
+                          (e.g., "t.hills_n0e0s1w0". Each direcional value
+                          <V> is either 0 or 1. Note that the directions are
+                          in map coordinates, so n (north) in iso-view is
+                          northeast on the mapview. (Note this only applies
+                          for cell_type "single".)
+  cell sprites          : For matched terrains that have cell_type "rect",
+                          32 different sprites are needed. Each sprite is
+                          a rectangle corresponding to one cell, and there are
+                          8 different sprites per cell. Each sprite has
+                          a name like "t.ocean_cell_u110" where "ocean" is the
+                          terrain, "u" means up (north on the map) and
+                          110 indicates which of the adjacent tiles are
+                      	  mismatched. For instance u110 means
+
+				    /\
+				   /B \
+				  /\ 1/\
+				 / A\/C \
+				 \1 /\ 0/
+				  \/D \/
+				   \  /
+				    \/
+
+			  a matching terrain exists at C but not at A or B. In
+                          this case D is the current tile.
+
+  Examples:
+
+    ; This specifies a civ2-like grassland tile. A single sprite
+    ; t.grassland is needed; it will be drawn blended.
+    [terrain_grassland]
+    blend_layer = 1
+    num_layers  = 1
+    layer0_match_type = 0
+
+    ; This specifies a civ1-like mountain tile. 16 sprites
+    ; t.mountains_n0s0e0w0 ... t.mountains_n1s1e1w1 are needed. One of them
+    ; will be drawn to match the adjacent tiles. Assuming only mountains
+    ; has this match_type, adjacent mountains will match.
+    [terrain_mountains]
+    blend_layer = 0
+    num_layers  = 1
+    layer0_match_type = 7
+
+    ; This specifies a civ2-like hills tile. A base sprite t.hills will be
+    ; needed, plus 16 matching sprites. The base sprite will be drawn,
+    ; dithered with adjacent base sprites, and the matching sprite will be
+    ; drawn on top. (In most civ2 tilesets the base sprite is the grassland
+    ; sprite).
+    [terrain_hills]
+    blend_layer = 1
+    num_layers  = 2
+    layer0_match_type = 0
+    layer1_match_type = 8
+
+    ; This specifies a civ2-like ocean tile. Ocean is drawn via a cell-based
+    ; system as explained above.
+    [terrain_ocean]
+    blend_layer = 1
+    num_layers  = 1
+    layer0_match_type = 6
+    layer0_cell_type = "rect"
+
+  Terrain Special Sprites
+  -----------------------
+
+  farmland/irrigation:
+
+    tx.farmland and tx.irrigation provide the basic sprites for farmland
+    and irrigation. Additionally, there is support for drawing continuous
+    farmland and irrigation (as is used in Civ3). Here there are 16
+    irrigation sprites (and the same for farmland), starting with
+    tx.irrigation_n0s0e0w0 and running through tx.irrigation_n1s1e1w1.
+    An appropriate sprite will be chosen depending on which adjacent tiles
+    also have farmland/irrigation. If any of these sprites are not present,
+    the default sprite will be used as a fallback.
+
+  Unit Sprites
+  ------------
+
+    Units sprites can be either unoriented or oriented, in which case the
+    sprite that is displayed depends on the direction the unit is facing (it
+    turns when it moves or fights).
+
+    Unoriented sprites are specified as 'u.phalanx'. Oriented sprites have
+    a direction suffix: 'u.phalanx_s', 'u.phalanx_nw' and so on.
+    For each unit type, either an unoriented sprite or a full set of
+    the oriented sprites needed for the tileset topology must be provided
+    (you can also provide both, see below).
+
+    The game sometimes needs to draw a sprite for a unit type that doesn't
+    correspond to a specific unit, so is not facing a particular direction.
+    There are several options for oriented tilesets:
+
+     - If the unit_default_orientation is specified for the tileset, the
+       game will by default use that directional sprite. (The direction
+       doesn't have to be a valid one for the tileset.)
+
+     - Specific unit types may override this by providing an unoriented
+       sprite as well as the oriented ones; this doesn't have to be
+       distinct, so it can point to one of the oriented sprites, allowing
+       choice of the best orientation for each individual unit type.
+       If unit_default_orientation is not specified, an unoriented sprite
+       must be specified for *every* unit.

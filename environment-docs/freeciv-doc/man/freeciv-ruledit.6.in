@@ -1,0 +1,20 @@
+.TH FREECIV "21" "September 2014" "Freeciv" "User Commands"
+.SH NAME
+freeciv-ruledit - Freeciv Ruleset Editor
+.SH SYNOPSIS
+.B freeciv-ruledit
+[\fIoption \fR...]
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Print a summary of the options
+.TP
+\fB\-v\fR, \fB\-\-version\fR
+Print the version number
+.SH DESCRIPTION
+This tool can be used to edit freeciv rulesets.
+
+.SH "REPORTING BUGS"
+Report bugs at @BUG_URL@
+.SH "SEE ALSO"
+.IR freeciv-server (6)
+and the Client Manual at the Freeciv homepage.

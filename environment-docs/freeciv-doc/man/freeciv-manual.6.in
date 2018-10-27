@@ -1,0 +1,68 @@
+.TH FREECIV "6" "January 2012" "Debian" "User Commands"
+.SH NAME
+freeciv-manual - Generate HTML manual for 
+.IR freeciv-server(6)
+.SH SYNOPSIS
+.B freeciv-manual
+[\fIoption \fR...]
+.TP
+\fB\-d\fR, \fB\-\-debug\fR NUM
+Set debug log level (0 to 4)
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Print a summary of the options
+.TP
+\fB\-l\fR, \fB\-\-log\fR FILE
+Use FILE as logfile
+.HP
+\fB\-r\fR, \fB\-\-ruleset\fR RULESET Make manual for RULESET
+.TP
+\fB\-v\fR, \fB\-\-version\fR
+Print the version number
+.SH DESCRIPTION
+\fBfreeciv-manual\fR generates a subset of documentation for
+.IR freeciv-server(6)
+and the game rules of a selected ruleset that it runs. Currently it
+generates 7 files:
+.TP
+.BI "manual1.html"
+Server options
+
+.TP
+.BI "manual2.html"
+Server commands
+
+.TP
+.BI "manual3.html"
+Terrain
+
+.TP
+.BI "manual4.html"
+Buildings
+
+.TP
+.BI "manual5.html"
+Wonders
+
+.TP
+.BI "manual6.html"
+Governments
+
+.TP
+.BI "manual7.html"
+Unit types
+
+.SH BUGS
+This tool is currently only really of use to the Freeciv maintainers,
+as a starting point for pages on the main Freeciv wiki; it's not very
+useful to end users.
+
+Known shortcomings include that it is missing many ruleset features,
+and is hardcoded to output a mixture of MediaWiki markup and HTML.
+
+.SH "REPORTING BUGS"
+Report bugs at @BUG_URL@
+(but see above caveats).
+.SH "SEE ALSO"
+.IR freeciv-server (6)
+and the Client Manual at the Freeciv homepage.

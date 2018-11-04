@@ -1,0 +1,34 @@
+{
+  "description": "Freeciv ruleset plugin for Docker",
+  "documentation": "https://docs.docker.com/engine/extend/plugins/",
+  "entrypoint": [
+    "/codeoflaws"
+  ],
+  "interface": {
+    "socket": "codeoflaws.sock",
+    "types": [
+      "docker.volumedriver/1.0"
+    ]
+  },
+  "mounts": [
+    {
+      "destination": "/mnt/repo",
+      "options": [
+        "rbind"
+      ],
+      "name": "repo",
+      "source": "/var/lib/docker/plugins/",
+      "settable": [
+        "source"
+      ],
+      "type": "bind"
+    }
+  ],
+  "network": {
+    "type": "host"
+  },
+  "propagatedmount": "/mnt/volumes",
+  "linux": {
+    "capabilities": ["CAP_SYS_ADMIN"]
+  }
+}

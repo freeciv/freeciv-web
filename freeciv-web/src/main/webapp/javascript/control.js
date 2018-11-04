@@ -71,7 +71,6 @@ function control_init()
   }
 
   $(document).keydown(keyboard_listener);
-  $(document).keydown(city_keyboard_listener);
   $(window).resize(mapview_window_resized);
   $(window).bind('orientationchange resize', orientation_changed);
 

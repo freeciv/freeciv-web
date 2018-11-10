@@ -124,6 +124,7 @@ function civclient_init()
   if (renderer == RENDERER_WEBGL) init_webgl_renderer();
 
   game_init();
+  $('#tabs').tabs({ heightStyle: "fill" });
   control_init();
   init_replay();
 
@@ -159,7 +160,6 @@ function civclient_init()
   }
 
 
-  $('#tabs').tabs({ heightStyle: "fill" });
   $('#tabs').css("height", $(window).height());
   $("#tabs-map").height("auto");
   $("#tabs-civ").height("auto");

@@ -254,14 +254,8 @@ function control_init()
   $('#nations_list').on('click', 'tbody tr', handle_nation_table_select);
 
   /* prevents keyboard input from changing tabs. */
-  $('#tabs').tabs({
-    activate: function (event, ui) {
-        ui.newTab.blur();
-    }
-  });
-  $('#tabs a').click(function () {
-    $(this).blur();
-  });
+  $('#tabs>ul>li').off('keydown');
+  $('#tabs>div').off('keydown');
 }
 
 /****************************************************************************

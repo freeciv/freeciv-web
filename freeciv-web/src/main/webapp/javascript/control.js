@@ -70,7 +70,7 @@ function control_init()
     init_webgl_mapctrl();
   }
 
-  $(document).keydown(keyboard_listener);
+  $(document).keydown(global_keyboard_listener);
   $(window).resize(mapview_window_resized);
   $(window).bind('orientationchange resize', orientation_changed);
 
@@ -256,6 +256,9 @@ function control_init()
   /* prevents keyboard input from changing tabs. */
   $('#tabs>ul>li').off('keydown');
   $('#tabs>div').off('keydown');
+
+  $('#tabs-map').keydown(map_keyboard_listener);
+  $('#map_tab').keydown(map_keyboard_listener);
 }
 
 /****************************************************************************
@@ -1644,7 +1647,7 @@ function do_map_click(ptile, qtype, first_time_called)
 /**************************************************************************
  Callback to handle keyboard events
 **************************************************************************/
-function keyboard_listener(ev)
+function global_keyboard_listener(ev)
 {
   // Check if focus is in chat field, where these keyboard events are ignored.
   if ($('input:focus').length > 0 || !keyboard_input) return;
@@ -1660,16 +1663,64 @@ function keyboard_listener(ev)
 }
 
 /**************************************************************************
- Handles everything when the user typed on the keyboard.
+ Handles global keybindings.
 **************************************************************************/
 function
 civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift, the_event)
 {
   switch (keyboard_key) {
+    case 'S':
+      if (ctrl) {
+        the_event.preventDefault();
+        quicksave();
+      }
+    break;
+
+    case 'Q':
+      if (alt) civclient_benchmark(0);
+    break;
+
+    case 'D':
+      if ((!shift) && (alt || ctrl)) {
+        show_debug_info();
+      }
+    break;
+
+    default:
+      if (key_code == 13 && shift && C_S_RUNNING == client_state()) {
+        send_end_turn();
+      }
+  }
+}
+
+/**************************************************************************
+ Callback to handle map keyboard events
+**************************************************************************/
+function map_keyboard_listener(ev)
+{
+  // Check if focus is in chat field, where these keyboard events are ignored.
+  if ($('input:focus').length > 0 || !keyboard_input) return;
+
+  if (C_S_RUNNING != client_state()) return;
+
+  if (!ev) ev = window.event;
+  var keyboard_key = String.fromCharCode(ev.keyCode);
+
+  map_handle_key(keyboard_key, ev.keyCode, ev['ctrlKey'],  ev['altKey'], ev['shiftKey'], ev);
+
+  if (renderer == RENDERER_2DCANVAS) $("#canvas").contextMenu('hide');
+}
+
+/**************************************************************************
+ Handles map keybindings.
+**************************************************************************/
+function
+map_handle_key(keyboard_key, key_code, ctrl, alt, shift, the_event)
+{
+  switch (keyboard_key) {
     case 'B':
       request_unit_build_city();
-
-      break;
+    break;
 
     case 'G':
       if (current_focus.length > 0) {
@@ -1731,18 +1782,16 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift, the_event)
       key_unit_irrigate();
     break;
 
-   case 'U':
+    case 'U':
       key_unit_upgrade();
     break;
 
     case 'S':
-      if (ctrl) {
-        the_event.preventDefault();
-        quicksave();
-      } else {
+      if (!ctrl) {
         key_unit_sentry();
       }
     break;
+
     case 'P':
       if (shift) {
         key_unit_pillage();
@@ -1769,9 +1818,7 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift, the_event)
       } else if (current_focus.length > 0) {
         auto_center_on_focus_unit();
       }
-
     break;
-
 
     case 'N':
       if (shift) {
@@ -1781,16 +1828,10 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift, the_event)
       }
     break;
 
-    case 'Q':
-      if (alt) civclient_benchmark(0);
-    break;
-
     case 'D':
       if (shift) {
         key_unit_disband();
-      } else if (alt || ctrl) {
-        show_debug_info();
-      } else {
+      } else if (!(alt || ctrl)) {
         key_unit_action_select();
       }
     break;
@@ -1798,14 +1839,10 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift, the_event)
   }
 
   switch (key_code) {
-    case 13:
-      if (shift && C_S_RUNNING == client_state()) send_end_turn();
-      break;
-
     case 35: //1
     case 97:
       key_unit_move(DIR8_SOUTH);
-    break;
+      break;
 
     case 40: // 2
     case 98:

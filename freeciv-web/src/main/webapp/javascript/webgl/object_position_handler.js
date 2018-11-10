@@ -411,7 +411,8 @@ function update_tile_extras(ptile) {
   update_tile_extra_update_model(EXTRA_FORTRESS, "Fortress", ptile);
 
   // Render tile specials (extras). Fish and whales are 3D models, the rest are 2D sprites from the 2D version.
-  var extra_resource = extras[ptile['resource']];
+  const extra_id = tile_resource(ptile);
+  var extra_resource = (extra_id === null) ? null : extras[extra_id];
   if (extra_resource != null && scene != null && tile_extra_positions[extra_resource['id'] + "." + ptile['index']] == null) {
     if (extra_resource['name'] != "Fish" && extra_resource['name'] != "Whales"
         && (!tile_has_extra(ptile, EXTRA_RIVER)) /* rendering specials on rivers is not supported yet. */) {

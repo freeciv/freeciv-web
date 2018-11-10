@@ -117,7 +117,6 @@ function tile_init(tile)
   tile['known'] = null;  /* tile_known in C side */
   tile['seen'] = {};     /* tile_seen in C side */
   tile['specials'] = [];
-  tile['resource'] = null;
   tile['terrain'] = T_UNKNOWN;
   tile['units'] = [];
   tile['owner'] = null;

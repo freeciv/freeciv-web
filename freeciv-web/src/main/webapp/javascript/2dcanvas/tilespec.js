@@ -1077,15 +1077,15 @@ function get_tile_label_text(ptile)
 ****************************************************************************/
 function get_tile_specials_sprite(ptile)
 {
-  if (ptile == null || ptile['resource'] == null) return null;
+  const extra_id = tile_resource(ptile);
 
-  var extra = extras[ptile['resource']];
-
-  if (extra == null) {
-    return null;
+  if (extra_id !== null) {
+    const extra = extras[extra_id];
+    if (extra != null) {
+      return  {"key" : extra['graphic_str']} ;
+    }
   }
-
-  return  {"key" : extra['graphic_str']} ;
+  return null;
 }
 
 /****************************************************************************

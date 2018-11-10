@@ -54,14 +54,16 @@ function tile_has_extra(ptile, extra)
 
 function tile_resource(tile)
 {
-  return tile['resource'];
+  if (tile != null && tile.extras != null) {
+    const tile_extras = tile.extras.toBitSet();
+    for (var extra in tile_extras) {
+      if (is_extra_caused_by(extras[tile_extras[extra]], EC_RESOURCE)) {
+        return tile_extras[extra];
+      }
+    }
+  }
+  return null;
 }
-
-function tile_set_resource(tile, resource)
-{
-  tile['resource'] = resource;
-}
-
 
 function tile_owner(tile)
 {

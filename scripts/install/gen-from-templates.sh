@@ -62,7 +62,7 @@ while IFS= read -r line; do
   fi
 done < "${CONFIG}" > "${TMPFILE}"
 
-for f in "${SRCDIR}"/{freeciv-proxy,pbem}/settings.ini "${SRCDIR}"/freeciv-web/flyway.properties "${SRCDIR}"/freeciv-web/src/main/webapp/META-INF/context.xml; do
+for f in "${SRCDIR}"/{freeciv-proxy,pbem}/settings.ini "${SRCDIR}"/freeciv-web/flyway.properties "${SRCDIR}"/freeciv-web/src/main/webapp/META-INF/context.xml "${SRCDIR}"/freeciv-web/src/main/webapp/WEB-INF/config.properties; do
   sed -f "${TMPFILE}" < "$f".dist > "$f"
 done
 rm "${TMPFILE}"

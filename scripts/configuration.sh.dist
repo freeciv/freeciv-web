@@ -27,3 +27,14 @@ DB_ROOT_PASSWORD=${RANDOM}${RANDOM}${RANDOM}
 
 # Freeciv-web externally accessible host
 FCW_HOST=example.com
+
+# Mail server
+# Login and password are used for authentication to the SMTP server, the default
+# is no auth.
+# Default host is localhost
+# Default port is 25 for no login, 587 with auth.
+SMTP_LOGIN=
+SMTP_PASSWORD=
+SMTP_HOST=
+SMTP_PORT=
+SMTP_SENDER=

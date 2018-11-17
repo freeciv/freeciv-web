@@ -16,7 +16,6 @@
 
 ***********************************************************************'''
 import smtplib
-import json
 import configparser
 import re
 import time
@@ -29,11 +28,18 @@ class MailSender():
   settings.read("settings.ini")
   testmode = False;
 
-  smtp_login=settings.get("Config", "smtp_login")
-  smtp_password=settings.get("Config", "smtp_password")
-  smtp_host=settings.get("Config", "smtp_host")
-  smtp_port=settings.get("Config", "smtp_port")
-  smtp_sender=settings.get("Config", "smtp_sender")
+  smtp_login = settings.get("Config", "smtp_login", fallback="")
+  smtp_auth = (len(smtp_login) > 0)
+  smtp_password = settings.get("Config", "smtp_password", fallback="")
+  smtp_host = settings.get("Config", "smtp_host", fallback="").strip()
+  if len(smtp_host) == 0:
+    smtp_host = "localhost"
+  smtp_port = settings.get("Config", "smtp_port", fallback="")
+  if smtp_port.isnumeric():
+    smtp_port = int(stmp_port)
+  else:
+    smtp_port = 587 if smtp_auth else 25
+  smtp_sender = settings.get("Config", "smtp_sender")
 
   host = settings.get("Config", "host")
 
@@ -51,8 +57,9 @@ class MailSender():
   def send_message_via_smtp(self, from_, to, mime_string):
     time.sleep(2);
     if not self.testmode:
-      smtp = smtplib.SMTP(self.smtp_host, int(self.smtp_port))
-      smtp.login(self.smtp_login, self.smtp_password);
+      smtp = smtplib.SMTP(self.smtp_host, self.smtp_port)
+      if self.smtp_auth:
+        smtp.login(self.smtp_login, self.smtp_password);
       smtp.sendmail(from_, to, mime_string)
       smtp.quit()
     else:

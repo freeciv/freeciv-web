@@ -22,7 +22,7 @@
                 		</div>
 			</ul>
 			
-			<div id="tabs-map">
+			<div id="tabs-map" tabindex="-1">
 			  <jsp:include page="canvas.jsp" flush="false"/>
 			</div>
 			<div id="tabs-civ">

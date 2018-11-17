@@ -216,6 +216,7 @@ function show_city_dialog(pcity)
                        "restore" : "ui-icon-bullet"
                      }});
 
+  $("#city_dialog").dialog('widget').keydown(city_keyboard_listener);
   $("#city_dialog").dialog('open');
   $("#game_text_input").blur();
 
@@ -1980,10 +1981,12 @@ function city_keyboard_listener(ev)
      switch (keyboard_key) {
        case 'N':
          next_city();
+         ev.stopPropagation();
          break;
 
        case 'B':
          request_city_buy();
+         ev.stopPropagation();
          break;
       }
   }

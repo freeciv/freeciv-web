@@ -1,5 +1,18 @@
+<%@ page import="java.util.Properties" %>
+<%@ page import="java.io.IOException" %>
+<%@ page import="static org.apache.commons.lang3.StringUtils.stripToEmpty" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../WEB-INF/jsp/fragments/i18n.jsp" %>
+<%
+String mapToken = null;
+try {
+  Properties prop = new Properties();
+  prop.load(getServletContext().getResourceAsStream("/WEB-INF/config.properties"));
+  mapToken = stripToEmpty(prop.getProperty("map_token"));
+} catch (IOException e) {
+  e.printStackTrace();
+}
+%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -85,6 +98,7 @@
 
     <script type="text/javascript" src="/javascript/libs/json3.min.js"></script>
     <script type="text/javascript" src="/javascript/libs/simpleStorage.min.js"></script>
+    <script type="text/javascript">L.mapbox.accessToken = '<%= mapToken %>';</script>
     <script type="text/javascript" src="/freeciv-earth/earth.js"></script>
 
   </body>

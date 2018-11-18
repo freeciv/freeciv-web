@@ -9,4 +9,5 @@ email_sender=#SMTP_SENDER#
 google-signin-client-key=#GOOGLE_SIGNIN#
 ga-tracking-id=#GADS#
 trackjs-token=#TRACKJS#
+map_token=#MAP_TOKEN#
 fcw_host=#FCW_HOST#

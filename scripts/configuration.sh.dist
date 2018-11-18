@@ -51,3 +51,6 @@ GADS=
 
 # TrackJs token id
 TRACKJS=
+
+# Mapbox token for real Earth generated maps
+MAP_TOKEN=

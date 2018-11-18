@@ -8,6 +8,7 @@
 String gaTrackingId = null;
 String googleSigninClientKey = null;
 String trackJsToken = null;
+String captchaKey = null;
 boolean fcwDebug = false;
 String fcwMinified = "";
 try {
@@ -16,6 +17,7 @@ try {
   gaTrackingId = stripToNull(prop.getProperty("ga-tracking-id"));
   googleSigninClientKey = stripToEmpty(prop.getProperty("google-signin-client-key"));
   trackJsToken = stripToNull(prop.getProperty("trackjs-token"));
+  captchaKey = stripToEmpty(prop.getProperty("captcha_public"));
 
   String debugParam = request.getParameter("debug");
   fcwDebug = (debugParam != null && (debugParam.isEmpty() || parseBoolean(debugParam)));
@@ -62,6 +64,7 @@ var fcwMinified="<%= fcwMinified %>";
 <meta name="google-signin-client_id" content="<%= googleSigninClientKey %>">
 <link rel="manifest" href="/static/manifest.json">
 
+<script>var captcha_site_key = '<%= captchaKey %>';</script>
 <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
         async defer>
 </script>

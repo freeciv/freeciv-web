@@ -27,7 +27,6 @@ var metamessage_changed = false;
 var logged_in_with_password = false;
 var antialiasing_setting = true;
 var update_player_info_pregame_queued = false;
-var captcha_site_key = '6LfpcgMTAAAAAPRAOqYy6ZUhuX6bOJ7-7-_1V0FL';
 var password_reset_count = 0;
 var google_user_subject = null;
 

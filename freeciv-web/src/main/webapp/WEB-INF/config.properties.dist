@@ -1,4 +1,5 @@
 captcha_secret=#CAPTCHA_SECRET#
+captcha_public=#CAPTCHA_PUBLIC#
 savegame_dir=/var/lib/tomcat8/webapps/data/savegames/
 email_username=#SMTP_LOGIN#
 email_password=#SMTP_PASSWORD#

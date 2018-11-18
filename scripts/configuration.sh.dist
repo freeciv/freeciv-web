@@ -41,9 +41,11 @@ SMTP_SENDER=
 
 # Google services.
 # CAPTCHA_SECRET: private key for reCAPTCHA.
+# CAPTCHA_PUBLIC: the public part for reCAPTCHA that is included in the HTML.
 # GOOGLE_SIGNIN: client key to check signin with Google account.
 # GADS: ads tracking id.
 CAPTCHA_SECRET=secret goes here
+CAPTCHA_PUBLIC=
 GOOGLE_SIGNIN=
 GADS=
 

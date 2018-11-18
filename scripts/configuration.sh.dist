@@ -3,6 +3,9 @@
 # Keep in mind there's no escaping yet, so some characters like \ or "
 # may be problematic in some variables.
 
+# Freeciv-web externally accessible host.
+FCW_HOST=example.com
+
 # Freeciv-web database
 DB_NAME=freeciv_web
 DB_USER=$(id -run)
@@ -25,9 +28,6 @@ DB_ROOT_PASSWORD=${RANDOM}${RANDOM}${RANDOM}
 # TOMCATMANAGER_USER=tomcat-user
 # TOMCATMANAGER_PASSWORD=
 
-# Freeciv-web externally accessible host
-FCW_HOST=example.com
-
 # Mail server
 # Login and password are used for authentication to the SMTP server, the default
 # is no auth.
@@ -38,3 +38,14 @@ SMTP_PASSWORD=
 SMTP_HOST=
 SMTP_PORT=
 SMTP_SENDER=
+
+# Google services.
+# CAPTCHA_SECRET: private key for reCAPTCHA.
+# GOOGLE_SIGNIN: client key to check signin with Google account.
+# GADS: ads tracking id.
+CAPTCHA_SECRET=secret goes here
+GOOGLE_SIGNIN=
+GADS=
+
+# TrackJs token id
+TRACKJS=

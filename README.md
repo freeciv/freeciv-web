@@ -67,9 +67,8 @@ running this command:
 
 You may also want to change some parameters before installing, although
 it's not needed in most cases. If you have special requirements, have a look
-at [configuration.sh.dist](scripts/configuration.sh.dist)
-and [WEB-INF/config.properties.dist](freeciv-web/src/main/webapp/WEB-INF/config.properties.dist),
-copy them without the `.dist` extension and edit to your liking.
+at [configuration.sh.dist](scripts/configuration.sh.dist),
+copy it without the `.dist` extension and edit to your liking.
 Don't change the `.dist` files, they are the ones from the repo.
 
 #### :warning: Notice for Windows users

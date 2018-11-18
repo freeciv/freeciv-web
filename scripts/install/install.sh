@@ -199,21 +199,6 @@ fi
 # respect line endings, or from a transformed .dist. See issue #168
 sed -i 's/\r$//' "${basedir}"/scripts/configuration.sh
 
-if [ ! -f "${basedir}"/freeciv-web/src/main/webapp/WEB-INF/config.properties ]; then
-  if [ "${FCW_INSTALL_MODE}" = TEST ]; then
-    cp "${basedir}"/freeciv-web/src/main/webapp/WEB-INF/config.properties{.dist,}
-    echo "Default config.properties used"
-  else
-    echo >&2 "Please copy freeciv-web/src/main/webapp/WEB-INF/config.properties.dist to"
-    echo >&2 "freeciv-web/src/main/webapp/WEB-INF/config.properties and edit its content to"
-    echo >&2 "suit your needs."
-    exit 4
-  fi
-fi
-# Remove \r, just in case the file comes from a Windows editor that doesn't
-# respect line endings, or from a transformed .dist. See issue #168
-sed -i 's/\r$//' "${basedir}"/freeciv-web/src/main/webapp/WEB-INF/config.properties
-
 FCW_INSTALL_SCRIPT=
 while IFS=$'\t\r' read -r v r s; do
   if [ -n "$v" ] && [ "${v:0:1}" != '#' ] && [ "${v}" = "${FCW_INSTALL_VND}" ] \

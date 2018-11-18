@@ -82,18 +82,17 @@ public class ResetPassword extends HttpServlet {
             return;
         }
 
-        HttpClient client = HttpClientBuilder.create().build();
-        String captchaUrl = "https://www.google.com/recaptcha/api/siteverify";
-        HttpPost post = new HttpPost(captchaUrl);
+        /* Validate captcha against google api if a key is defined */
+        if (captchaSecret != null && captchaSecret.length() > 0) {
+            HttpClient client = HttpClientBuilder.create().build();
+            String captchaUrl = "https://www.google.com/recaptcha/api/siteverify";
+            HttpPost post = new HttpPost(captchaUrl);
 
-        List<NameValuePair> urlParameters = new ArrayList<>();
-        urlParameters.add(new BasicNameValuePair("secret", captchaSecret));
-        urlParameters.add(new BasicNameValuePair("response", captcha));
-        post.setEntity(new UrlEncodedFormEntity(urlParameters));
+            List<NameValuePair> urlParameters = new ArrayList<>();
+            urlParameters.add(new BasicNameValuePair("secret", captchaSecret));
+            urlParameters.add(new BasicNameValuePair("response", captcha));
+            post.setEntity(new UrlEncodedFormEntity(urlParameters));
 
-        if (!captchaSecret.contains("secret goes here")) {
-			/* Validate captcha against google api. skip validation for localhost
-             where captcha_secret still has default value. */
             HttpResponse captchaResponse = client.execute(post);
             InputStream in = captchaResponse.getEntity().getContent();
             String body = IOUtils.toString(in, "UTF-8");

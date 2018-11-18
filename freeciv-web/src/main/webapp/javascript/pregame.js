@@ -1330,7 +1330,7 @@ function show_new_user_account_dialog(gametype)
                 + "<tr><td>Confim password:</td><td><input id='confirm_password' type='password' size='25'></td></tr></table><br>"
                 + "<div id='username_validation_result' style='display:none;'></div><br>"
                 + "Remember your username and password, since you will need this to log in later.<br><br>"
-                + "Click to accept captcha to show that you are real human player:<br>"
+                + (captcha_site_key != '' ? "Click to accept captcha to show that you are real human player:<br>" : "")
                 + "<div id='captcha_element'></div><br><br>"
                 + "<div><small><ul><li>It is free and safe to create a new account on Freeciv-web.</li>"
                 + "<li>A user account allows you to save and load games.</li>"
@@ -1371,13 +1371,15 @@ function show_new_user_account_dialog(gametype)
 
   $("#dialog").dialog('open');
 
-  if (grecaptcha !== undefined && grecaptcha != null) {
-    $('#captcha_element').html('');
-    grecaptcha.render('captcha_element', {
-          'sitekey' : captcha_site_key
-        });
-  } else {
-    swal("Captcha not available. This could be caused by a browser plugin.");
+  if (captcha_site_key != '') {
+    if (grecaptcha !== undefined && grecaptcha != null) {
+      $('#captcha_element').html('');
+      grecaptcha.render('captcha_element', {
+            'sitekey' : captcha_site_key
+          });
+    } else {
+      swal("Captcha not available. This could be caused by a browser plugin.");
+    }
   }
 
   $("#username").blur(function() {
@@ -1438,7 +1440,7 @@ function create_new_freeciv_user_account_request(action_type)
   } else if (password != confirm_password) {
     $("#username_validation_result").html("The passwords do not match.");
     return false;
-  } else if (captcha == null) {
+  } else if (captcha_site_key != '' && captcha == null) {
     $("#username_validation_result").html("Please fill in the captcha. You might have to disable some plugins to see the captcha.");
     return false;
   }
@@ -1629,8 +1631,12 @@ function forgot_pbem_password()
                     }
 				    var reset_email = $("#email_reset").val();
 				    var captcha = $("#g-recaptcha-response").val();
-				    if (reset_email == null || reset_email.length == 0 || captcha == null || captcha.length == 0) {
-				      swal("Please fill in e-mail and complete the captcha.");
+				    if (reset_email == null || reset_email.length == 0) {
+				      swal("Please fill in e-mail.");
+				      return;
+				    }
+				    if (captcha_site_key != '' && (captcha == null || captcha.length == 0)) {
+				      swal("Please fill complete the captcha.");
 				      return;
 				    }
                     $.ajax({
@@ -1650,13 +1656,15 @@ function forgot_pbem_password()
 
   $("#pwd_dialog").dialog('open');
 
-  if (grecaptcha !== undefined && grecaptcha != null) {
-    $('#captcha_element').html('');
-    grecaptcha.render('captcha_element', {
-          'sitekey' : captcha_site_key
-        });
-  } else {
-    swal("Captcha not available. This could be caused by a browser plugin.");
+  if (captcha_site_key != '') {
+    if (grecaptcha !== undefined && grecaptcha != null) {
+      $('#captcha_element').html('');
+      grecaptcha.render('captcha_element', {
+            'sitekey' : captcha_site_key
+          });
+    } else {
+      swal("Captcha not available. This could be caused by a browser plugin.");
+    }
   }
 
 }

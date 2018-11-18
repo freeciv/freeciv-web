@@ -65,9 +65,11 @@ var fcwMinified="<%= fcwMinified %>";
 <link rel="manifest" href="/static/manifest.json">
 
 <script>var captcha_site_key = '<%= captchaKey %>';</script>
-<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
-        async defer>
-</script>
+<% if (!captchaKey.equals("")) { %>
+  <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+          async defer>
+  </script>
+<% } %>
 </head>
 
 <body>

@@ -1,3 +1,5 @@
+<!-- LOCATION:freeciv-web/src/main/webapp/META-INF/context.xml
+-->
 <Context>
   <!-- Does Freeciv-web fail with a complaint about how your time zone is
     "unrecognized or represents more than one time zone"? Change the "url"

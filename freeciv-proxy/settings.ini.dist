@@ -1,3 +1,4 @@
+# LOCATION:freeciv-proxy/settings.ini
 [Config]
 mysql_user = #DB_USER#
 mysql_database = #DB_NAME#

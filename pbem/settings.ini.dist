@@ -1,3 +1,4 @@
+# LOCATION:pbem/settings.ini
 [Config]
 smtp_login = #SMTP_LOGIN#
 smtp_password = #SMTP_PASSWORD#

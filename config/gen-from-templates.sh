@@ -18,7 +18,7 @@
 # Substitutes variables from the configuration file in the templates.
 # gen-from-templates [configfile [source_dir]]
 # When source_dir is not given, configfile's parent is used.
-# When configfile is not given, script_src_dir/../config is used.
+# When configfile is not given, script_src_dir/config is used.
 
 set -e
 unset CDPATH
@@ -32,7 +32,7 @@ if [ -z "${CONFIG}" ]; then
     echo >&2 "Configuration file not found."
     exit 2
   fi
-  CONFIG="${CONFIG}"/../config
+  CONFIG="${CONFIG}"/config
 fi
 
 if [ "${CONFIG:0:1}" = - ]; then
@@ -62,8 +62,9 @@ while IFS= read -r line; do
   fi
 done < "${CONFIG}" > "${TMPFILE}"
 
-for f in "${SRCDIR}"/{freeciv-proxy,pbem}/settings.ini "${SRCDIR}"/freeciv-web/flyway.properties "${SRCDIR}"/freeciv-web/src/main/webapp/META-INF/context.xml "${SRCDIR}"/freeciv-web/src/main/webapp/WEB-INF/config.properties "${SRCDIR}"/scripts/configuration.sh; do
-  sed -f "${TMPFILE}" < "$f".dist > "$f"
+for f in "${SRCDIR}"/config/*.tmpl; do
+  DEST="${SRCDIR}"/$(sed -n 's/.* LOCATION:\(.*\)/\1/p' < "$f" | head -n 1)
+  sed -f "${TMPFILE}" < "$f" > "${DEST}"
 done
 rm "${TMPFILE}"
 

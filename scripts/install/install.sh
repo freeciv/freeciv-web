@@ -185,19 +185,19 @@ if [ $(id -u) = 0 ]; then
   exit 3
 fi
 
-if [ ! -f "${basedir}"/scripts/config ]; then
+if [ ! -f "${basedir}"/config/config ]; then
   if [ "${FCW_INSTALL_MODE}" = TEST ]; then
-    cp "${basedir}"/scripts/config{.dist,}
+    cp "${basedir}"/config/config{.dist,}
     echo "Default config parameters used"
   else
-    echo >&2 "Please copy scripts/config.dist to scripts/config and"
+    echo >&2 "Please copy config/config.dist to config/config and"
     echo >&2 "edit its content to suit your needs."
     exit 4
   fi
 fi
 # Remove \r, just in case the file comes from a Windows editor that doesn't
 # respect line endings, or from a transformed .dist. See issue #168
-sed -i 's/\r$//' "${basedir}"/scripts/config
+sed -i 's/\r$//' "${basedir}"/config/config
 
 FCW_INSTALL_SCRIPT=
 while IFS=$'\t\r' read -r v r s; do
@@ -215,7 +215,7 @@ if [ -z "${FCW_INSTALL_SCRIPT}" ]; then
   exit 5
 fi
 
-. "${basedir}/scripts/config"
+. "${basedir}/config/config"
 . "${basedir}/scripts/install/ext-install.sh"
 . "${basedir}/scripts/install/${FCW_INSTALL_SCRIPT}"
 echo "System specific install complete (${basedir}/scripts/install/${FCW_INSTALL_SCRIPT})"
@@ -250,7 +250,7 @@ for action in start stop; do
 done
 
 echo "==== Filling configuration templates ===="
-"${basedir}/scripts/install/gen-from-templates.sh"
+"${basedir}/config/gen-from-templates.sh"
 
 echo "==== Setting up DB ===="
 pidof mysqld > /dev/null || start_svc mysql

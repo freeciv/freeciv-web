@@ -67,9 +67,8 @@ running this command:
 
 You may also want to change some parameters before installing, although
 it's not needed in most cases. If you have special requirements, have a look
-at [config.dist](scripts/config.dist),
+at [config.dist](config/config.dist),
 copy it without the `.dist` extension and edit to your liking.
-Don't change the `.dist` files, they are the ones from the repo.
 
 #### :warning: Notice for Windows users
 

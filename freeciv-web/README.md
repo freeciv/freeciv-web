@@ -40,11 +40,11 @@ Flyway migrations of the database is supported. Remember to set the mysql passwo
 To migrate the database to the latest version, run this Maven command:
 mvn flyway:migrate
 
-The following files contains MySQL username and password, and must be set manually
-if you are not using vagrant:
+The following files contain DB, mail and other configuration, and must be set manually
+if you are not using vagrant or the install script:
 
-* freeciv-web/src/main/webapp/META-INF/context.xml.dist  (rename to context.xml)
-* freeciv-web/src/main/webapp/WEB-INF/config.properties.dist  (rename to config.properties, contains capcha secret for pbem)
+* freeciv-web/src/main/webapp/META-INF/context.xml  (you can use config/web.context.tmpl as a template)
+* freeciv-web/src/main/webapp/WEB-INF/config.properties  (you can use config/web.properties.tmpl as a template)
 
 
 Copyright (C) 2007-2016 Andreas Røsdal. 

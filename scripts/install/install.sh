@@ -185,19 +185,19 @@ if [ $(id -u) = 0 ]; then
   exit 3
 fi
 
-if [ ! -f "${basedir}"/scripts/configuration.sh ]; then
+if [ ! -f "${basedir}"/scripts/config ]; then
   if [ "${FCW_INSTALL_MODE}" = TEST ]; then
-    cp "${basedir}"/scripts/configuration.sh{.dist,}
+    cp "${basedir}"/scripts/config{.dist,}
     echo "Default config parameters used"
   else
-    echo >&2 "Please copy scripts/configuration.sh.dist to scripts/configuration.sh and"
+    echo >&2 "Please copy scripts/config.dist to scripts/config and"
     echo >&2 "edit its content to suit your needs."
     exit 4
   fi
 fi
 # Remove \r, just in case the file comes from a Windows editor that doesn't
 # respect line endings, or from a transformed .dist. See issue #168
-sed -i 's/\r$//' "${basedir}"/scripts/configuration.sh
+sed -i 's/\r$//' "${basedir}"/scripts/config
 
 FCW_INSTALL_SCRIPT=
 while IFS=$'\t\r' read -r v r s; do
@@ -215,7 +215,7 @@ if [ -z "${FCW_INSTALL_SCRIPT}" ]; then
   exit 5
 fi
 
-. "${basedir}/scripts/configuration.sh"
+. "${basedir}/scripts/config"
 . "${basedir}/scripts/install/ext-install.sh"
 . "${basedir}/scripts/install/${FCW_INSTALL_SCRIPT}"
 echo "System specific install complete (${basedir}/scripts/install/${FCW_INSTALL_SCRIPT})"

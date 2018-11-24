@@ -13,7 +13,7 @@ fi
 
 echo "Shutting down Freeciv-web: nginx, tomcat, publite2, freeciv-proxy, pbem."
 
-if [ -n "${TOMCATMANAGER_USER}" ]; then
+if [ "${TOMCATMANAGER}" = "Y" ]; then
     if [ -z "${TOMCATMANAGER_PASSWORD}" ]; then
         echo "Please enter tomcat-manager password for ${TOMCATMANAGER_USER}"
         read TOMCATMANAGER_PASSWORD

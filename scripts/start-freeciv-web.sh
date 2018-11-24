@@ -23,7 +23,7 @@ sudo ln -f /etc/nginx/sites-available/freeciv-web /etc/nginx/sites-enabled/freec
 # Start Freeciv-web's dependency services according to the users
 # configuration.
 ./dependency-services-start.sh
-if [ -n "${TOMCATMANAGER_USER}" ]; then
+if [ "${TOMCATMANAGER}" = "Y" ]; then
     if [ -z "${TOMCATMANAGER_PASSWORD}" ]; then
         echo "Please enter tomcat-manager password for ${TOMCATMANAGER_USER}"
         read TOMCATMANAGER_PASSWORD

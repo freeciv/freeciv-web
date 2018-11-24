@@ -89,5 +89,6 @@ freeciv-web/src/main/webapp/META-INF/context.xml
 freeciv-web/src/main/webapp/WEB-INF/config.properties
 publite2/settings.ini
 scripts/configuration.sh
+scripts/config
 scripts/dependency-services-start.sh
 scripts/dependency-services-stop.sh

@@ -1,0 +1,57 @@
+# Configuration substituted in templates
+#
+# Keep in mind there's no escaping yet, so some characters like \ or "
+# may be problematic in some variables.
+
+# Freeciv-web externally accessible host.
+FCW_HOST=example.com
+
+# Freeciv-web database
+DB_NAME=freeciv_web
+DB_USER=$(id -run)
+DB_PASSWORD=changeme
+
+# This is the DB manager superuser password.
+# Leave it blank to be asked for it when needed.
+# The default value is random, which is OK only if you will never mess
+# with the DB manager (in a dedicated vm for tests, like the travis install,
+# for example), as reading the config again will give another value,
+# so it won't be the correct one for this variable, and you are not notified
+# of the first one.
+DB_ROOT_PASSWORD=${RANDOM}${RANDOM}${RANDOM}
+
+# If you are sharing tomcat with other apps, you may want the stop scripts
+# to only stop freeciv-web and not the whole tomcat instance. Setup
+# tomcat-manager and change TOMCATMANAGER to Y, adding proper user and password
+# info. If the password is empty, it will be asked every time a start or stop
+# script is run.
+TOMCATMANAGER=N
+TOMCATMANAGER_USER=tomcat-user
+TOMCATMANAGER_PASSWORD=
+
+# Mail server
+# Login and password are used for authentication to the SMTP server, the default
+# is no auth.
+# Default host is localhost
+# Default port is 25 for no login, 587 with auth.
+SMTP_LOGIN=
+SMTP_PASSWORD=
+SMTP_HOST=
+SMTP_PORT=
+SMTP_SENDER=
+
+# Google services.
+# CAPTCHA_SECRET: private key for reCAPTCHA.
+# CAPTCHA_PUBLIC: the public part for reCAPTCHA that is included in the HTML.
+# GOOGLE_SIGNIN: client key to check signin with Google account.
+# GADS: ads tracking id.
+CAPTCHA_SECRET=
+CAPTCHA_PUBLIC=
+GOOGLE_SIGNIN=
+GADS=
+
+# TrackJs token id
+TRACKJS=
+
+# Mapbox token for real Earth generated maps
+MAP_TOKEN=

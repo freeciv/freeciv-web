@@ -93,12 +93,17 @@ fi
 
 . ./version.txt
 
-if ! grep "NETWORK_CAPSTRING_MANDATORY=\"$ORIGCAPSTR\"" freeciv/fc_version 2>/dev/null >/dev/null ; then
-  echo "Capstring to be replaced does not match one given in version.txt" >&2
+CAPSTR_EXPECT="NETWORK_CAPSTRING_MANDATORY=\"${ORIGCAPSTR}\""
+CAPSTR_SRC="freeciv/fc_version"
+echo "Verifying ${CAPSTR_EXPECT}"
+
+if ! grep "$CAPSTR_EXPECT" ${CAPSTR_SRC} 2>/dev/null >/dev/null ; then
+  echo "   Found  $(grep 'NETWORK_CAPSTRING_MANDATORY=' ${CAPSTR_SRC}) in $(pwd)/freeciv/fc_version" >&2
+  echo "Capstring to be replaced does not match that given in version.txt" >&2
   exit 1
 fi
 
-sed "s/$ORIGCAPSTR/$WEBCAPSTR/" freeciv/fc_version > freeciv/fc_version.tmp
+sed "s/${ORIGCAPSTR}/${WEBCAPSTR}/" freeciv/fc_version > freeciv/fc_version.tmp
 mv freeciv/fc_version.tmp freeciv/fc_version
 chmod a+x freeciv/fc_version
 

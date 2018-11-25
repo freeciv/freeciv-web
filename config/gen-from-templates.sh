@@ -64,7 +64,22 @@ done < "${CONFIG}" > "${TMPFILE}"
 
 for f in "${SRCDIR}"/config/*.tmpl; do
   DEST="${SRCDIR}"/$(sed -n 's/.* LOCATION:\(.*\)/\1/p' < "$f" | head -n 1)
-  sed -f "${TMPFILE}" < "$f" > "${DEST}"
+  sed -f "${TMPFILE}" < "$f" > "$f".new
+  if [ -f "${DEST}" ]; then
+    cp "${DEST}" "$f".bck
+    if [ -f "$f".gen ]; then
+      if ! diff -u "$f".{gen,new} | patch --posix -s --merge -o - "$f".bck > "${DEST}"; then
+        cp "$f".new "${DEST}"
+        echo >&2 "Couldn't merge user changes for ${DEST}, the newly generated file will be used. There's a backup of the previous file in $f.bck"
+      fi
+    else
+      echo "${DEST} overwriten, a backup with user changes can be found in $f.bck"
+      cp "$f".new "${DEST}"
+    fi
+  else
+    cp "$f".new "${DEST}"
+  fi
+  mv "$f".{new,gen}
 done
 rm "${TMPFILE}"
 

@@ -1,1 +1,4 @@
 config
+*.new
+*.bck
+*.gen

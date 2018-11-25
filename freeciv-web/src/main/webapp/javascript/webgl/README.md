@@ -17,8 +17,7 @@ Build Freeciv-web as normal with Vagrant as described in the main README file.
 You can then test it in your instance.
 
 You may use the WebGL interface live at:
-- [freecivweb.ddns.net](http://freecivweb.ddns.net/?)
-- [Battle for Planet Isotrident](https://www.isotrident.com/), also in Chinese: [Wenming](http://wenming.io)
+- [moving borders](https://fcw.movingborders.es)
 
 Debugging
 ---------

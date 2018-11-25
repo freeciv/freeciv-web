@@ -12,8 +12,7 @@ under the GNU Affero General Public License. See [License](LICENSE.txt) for the 
 
 Currently known servers based on Freeciv-web:
 - [freecivweb.org](https://freecivweb.org) (Only longturn games, no 3D)
-- [freecivweb.ddns.net](http://freecivweb.ddns.net/?)
-- [Battle for Planet Isotrident](https://www.isotrident.com/) (with their own [repo](https://github.com/Isotrident/Isotrident)), now also in Chinese: [Wenming](http://wenming.io)
+- [moving borders](https://fcw.movingborders.es) (Everything except longturn and real-Earth)
 
 Freeciv WebGL 3D:
 ![Freeciv-web](https://raw.githubusercontent.com/freeciv/freeciv-web/develop/freeciv-web/src/main/webapp/javascript/webgl/freeciv-webgl.png "Freeciv-web WebGL screenshot")

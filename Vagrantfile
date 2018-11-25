@@ -51,6 +51,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     mem = mem / 1024 / 2
     v.customize ["modifyvm", :id, "--memory", mem]
+
+    # Disable serial port. It is unnecessary, and may cause error on Win10
+    #   https://github.com/joelhandwell/ubuntu_vagrant_boxes/issues/1#issuecomment-292370353
+    v.customize ["modifyvm", :id, "--uartmode1", "disconnected"]
   end
 
   config.vm.synced_folder "./", "/vagrant"

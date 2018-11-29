@@ -92,12 +92,7 @@ function new_hotseat_game()
 function setup_hotseat_game() 
 {
   if (ws != null && ws.readyState === 1) {
-    send_message("/set phasemode player");
-    send_message("/set minp 2");
-    send_message("/set ec_chat=enabled");
-    send_message("/set ec_info=enabled");
-    send_message("/set ec_max_size=20000");
-    send_message("/set ec_turns=32768");
+    set_alternate_turns();
     send_message("/set autotoggle disabled");
     hotseat_players.push($("#username_req_1").val());
     for (var i = 2; i <= num_hotseat_players; i++) {

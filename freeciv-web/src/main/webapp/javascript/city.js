@@ -646,20 +646,20 @@ function request_city_buy()
   if (pcity['production_kind'] == VUT_UTYPE) {
     var punit_type = unit_types[pcity['production_value']];
     if (punit_type != null) {
-      buy_price_string = punit_type['name'] + " costs " + pcity['buy_gold_cost'] + " gold.";
-      buy_question_string = "Buy " + punit_type['name'] + " for " + pcity['buy_gold_cost'] + " gold?";
+      buy_price_string = punit_type['name'] + " costs " + pcity['buy_cost'] + " gold.";
+      buy_question_string = "Buy " + punit_type['name'] + " for " + pcity['buy_cost'] + " gold?";
     }
   } else {
     var improvement = improvements[pcity['production_value']];
     if (improvement != null) {
-      buy_price_string = improvement['name'] + " costs " + pcity['buy_gold_cost'] + " gold.";
-      buy_question_string = "Buy " + improvement['name'] + " for " + pcity['buy_gold_cost'] + " gold?";
+      buy_price_string = improvement['name'] + " costs " + pcity['buy_cost'] + " gold.";
+      buy_question_string = "Buy " + improvement['name'] + " for " + pcity['buy_cost'] + " gold?";
     }
   }
 
   var treasury_text = "<br>Treasury contains " + pplayer['gold'] + " gold.";
 
-  if (pcity['buy_gold_cost'] > pplayer['gold']) {
+  if (pcity['buy_cost'] > pplayer['gold']) {
     show_dialog_message("Buy It!",
       buy_price_string + treasury_text);
     return;

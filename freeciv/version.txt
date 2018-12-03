@@ -3,7 +3,7 @@
 
 FCREV=cb6c700735f466792f54b443b8df519be56a1fc4
 
-ORIGCAPSTR="+Freeciv.Devel-3.1-2018.Sep.30"
+ORIGCAPSTR="+Freeciv.Devel-3.1-2018.Oct.05"
 
 # There's no need to bump this constantly as current freeciv-web
 # makes no connections to outside world - all connections are

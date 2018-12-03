@@ -9,5 +9,5 @@ index 09e4614..c13385a 100644
  improvement_size=68
 @@ -313,3 +313,2 @@ set={"name","value","gamestart"
  "size",1,1
--"topology","WRAPX|ISO","WRAPX|ISO"
+-"topology","WRAPX|ISO|HEX","WRAPX|ISO|HEX"
  "victories","",""

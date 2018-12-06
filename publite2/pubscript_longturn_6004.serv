@@ -21,7 +21,6 @@ set threaded_save enabled
 set scorelog disabled
 set mapsize FULLSIZE
 set size 32
-set topology=
 set landm 70
 set dispersion=1
 

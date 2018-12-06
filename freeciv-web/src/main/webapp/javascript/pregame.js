@@ -37,12 +37,29 @@ function pregame_start_game()
 {
   if (client.conn['player_num'] == null) return;
 
+  if (is_pbem() || is_hotseat()) {
+    set_alternate_turns();
+  }
+
   var test_packet = {"pid" : packet_player_ready, "is_ready" : true,
                      "player_no": client.conn['player_num']};
   var myJSONText = JSON.stringify(test_packet);
   send_request(myJSONText);
 
   setup_window_size ();
+}
+
+/****************************************************************************
+  Set some parameters needed for alternate turns game type.
+****************************************************************************/
+function set_alternate_turns()
+{
+  send_message("/set phasemode player");
+  send_message("/set minp 2");
+  send_message("/set ec_chat=enabled");
+  send_message("/set ec_info=enabled");
+  send_message("/set ec_max_size=20000");
+  send_message("/set ec_turns=32768");
 }
 
 /****************************************************************************
@@ -514,7 +531,7 @@ function pregame_settings()
       "     <li><a href='#pregame_settings_tabs-3'>Other</a></li>" +
       "   </ul>"
       + "<div id='pregame_settings_tabs-1'><table id='settings_table'> "
-      + "<tr class='not_pbem' title='Ruleset version'><td>Ruleset:</td>"
+      + "<tr title='Ruleset version'><td>Ruleset:</td>"
       + "<td><select name='ruleset' id='ruleset'>"
       + "<option value='classic'>Classic</option>"
       + "<option value='civ2civ3'>Civ2Civ3</option>"

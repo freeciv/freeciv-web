@@ -180,9 +180,9 @@
 									<td class="hidden-xs">${game.players}</td>
 									<td class="hidden-xs">${game.turn}</td>
 									<td><a class="label label-success label-lg"
-										href="/webclient?action=observe&amp;civserverport=${game.port}&amp;civserverhost=${game.host}&amp;type=${game.type}" title="Observe">
+										href="/webclient/?action=observe&amp;civserverport=${game.port}&amp;civserverhost=${game.host}&amp;type=${game.type}" title="Observe">
 											2D</a> <a class="label label-success label-lg"
-										href="/webclient?renderer=webgl&amp;action=observe&amp;civserverport=${game.port}&amp;civserverhost=${game.host}&amp;type=${game.type}" title="Observe">
+										href="/webclient/?renderer=webgl&amp;action=observe&amp;civserverport=${game.port}&amp;civserverhost=${game.host}&amp;type=${game.type}" title="Observe">
 											3D</a> <a class="label label-primary label-lg"
 										href="/game/details?host=${game.host}&amp;port=${game.port}">
 											Info</a>
@@ -228,19 +228,19 @@
 									<td><c:choose>
 											<c:when test="${game.state != 'Running'}">
 												<a class="label label-success label-lg"
-													href="/webclient?action=multi&amp;civserverport=${game.port}&amp;civserverhost=${game.host}&amp;multi=true&amp;type=${game.type}">
+													href="/webclient/?action=multi&amp;civserverport=${game.port}&amp;civserverhost=${game.host}&amp;multi=true&amp;type=${game.type}">
 													Play</a>
 											</c:when>
 											<c:otherwise>
                                                 <a class="label label-success label-lg"
-													href="/webclient?action=multi&amp;civserverport=${game.port}&amp;civserverhost=${game.host}&amp;multi=true&amp;type=${game.type}">
+													href="/webclient/?action=multi&amp;civserverport=${game.port}&amp;civserverhost=${game.host}&amp;multi=true&amp;type=${game.type}">
 													Play 2D</a>
 											<c:if test="${game.type} ne 'longturn'}">
 												<a class="label label-success label-lg"
-													href="/webclient?action=observe&amp;civserverport=${game.port}&amp;civserverhost=${game.host}&amp;multi=true&amp;type=${game.type}">
+													href="/webclient/?action=observe&amp;civserverport=${game.port}&amp;civserverhost=${game.host}&amp;multi=true&amp;type=${game.type}">
 													Observe 2D</a>
 												<a class="label label-success label-lg"
-													href="/webclient?renderer=webgl&amp;action=observe&amp;civserverport=${game.port}&amp;civserverhost=${game.host}&amp;multi=true&amp;type=${game.type}">
+													href="/webclient/?renderer=webgl&amp;action=observe&amp;civserverport=${game.port}&amp;civserverhost=${game.host}&amp;multi=true&amp;type=${game.type}">
 													3D</a>
 											</c:if>
 											</c:otherwise>

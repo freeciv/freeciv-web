@@ -207,6 +207,8 @@ button {
 
 .ui-dialog {
   border: 1px #444444 solid;
+  max-height: 100%;
+  overflow: auto;
 }
 
 #dialog {

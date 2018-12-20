@@ -469,8 +469,11 @@ function set_human_pbem_players()
 {
   for (var player_id in players) {
     var pplayer = players[player_id];
-    if (pplayer['flags'].isSet(PLRF_AI) == true 
-        && pplayer['name'].toUpperCase() != username.toUpperCase()) {
+    if ((pplayer['barbarian_type'] == NOT_A_BARBARIAN
+         && pplayer['flags'].isSet(PLRF_AI)
+         && pplayer['name'].toUpperCase() != username.toUpperCase())
+     || (pplayer['barbarian_type'] != NOT_A_BARBARIAN
+         && !pplayer['flags'].isSet(PLRF_AI))) {
       send_message("/aitoggle " + pplayer['name']);
     }
   }

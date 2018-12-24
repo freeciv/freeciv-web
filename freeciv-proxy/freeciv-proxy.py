@@ -21,11 +21,9 @@
 ***********************************************************************'''
 
 
-from os import path as op
 from os import chdir
 import re
 import sys
-import time
 from tornado import web, websocket, ioloop, httpserver
 from tornado.ioloop import IOLoop
 from debugging import *
@@ -46,9 +44,12 @@ chdir(sys.path[0])
 settings = configparser.ConfigParser()
 settings.read("settings.ini")
 
-mysql_user=settings.get("Config", "mysql_user");
-mysql_database=settings.get("Config", "mysql_database");
-mysql_password=settings.get("Config", "mysql_password");
+mysql_user = settings.get("Config", "mysql_user")
+mysql_database = settings.get("Config", "mysql_database")
+mysql_password = settings.get("Config", "mysql_password")
+
+google_signin = settings.get("Config", "google_signin")
+
 
 class IndexHandler(web.RequestHandler):
 
@@ -89,7 +90,7 @@ class WSHandler(websocket.WebSocketHandler):
                     login_message['username'] if 'username' in login_message else None, 
                     login_message['password'] if 'password' in login_message else None, 
                     login_message['subject'] if 'subject' in login_message else None);
-            if (not auth_ok): 
+            if (not auth_ok):
               self.write_message("[{\"pid\":5,\"message\":\"Error: Could not authenticate user with password. Try a different username.\",\"you_can_join\":false,\"conn_id\":-1}]")
               return
 
@@ -121,48 +122,61 @@ class WSHandler(websocket.WebSocketHandler):
             del(self.civcom)
             gc.collect()
 
-    # Check if username and password if correct, if the user already exists in the database.
+    # Check user authentication
     def check_user(self, username, password, check_subject):
-      result = None;
-      cursor = None;
-      cnx = None;
+      cursor = None
+      cnx = None
       try:
         cnx = mysql.connector.connect(user=mysql_user, database=mysql_database, password=mysql_password)
-
-        # Check login with Google Account
         cursor = cnx.cursor()
-        query = ("select subject, activated, (select a.username from auth a where ga.username = a.username) as auth_username from google_auth ga where lower(username)=lower(%(usr)s)")
-        cursor.execute(query, {'usr' : username})
-        dbSubject = None;
-        authUsername = None;
-        for usrrow in cursor:
-          if (usrrow[1] == 0): return False;
-          dbSubject = usrrow[0];
-          authUsername = usrrow[2];
-        if (dbSubject is not None and dbSubject != check_subject and authUsername is None): return False;
-        if (dbSubject is not None and dbSubject == check_subject): return True;
 
-        # Get the hashed password from the database
-        query = ("select username, secure_hashed_password, activated from auth where lower(username)=lower(%(usr)s)")
-        cursor.execute(query, {'usr' : username})
-        salt = None;
-        for usrrow in cursor:
-          salt = usrrow[1];
-          if (usrrow[2] == 0): return False;
-        if (salt == None): return True;
+        auth_method = self.get_game_auth_method(cursor)
+        if auth_method == "password":
+          return self.check_user_password(cursor, username, password)
+        elif auth_method == "google":
+          return self.check_user_google(cursor, username, check_subject)
+        else:
+          return False
 
-        # Validate the password in the database
-        query = ("select count(*) from auth where lower(username)=lower(%(usr)s) and secure_hashed_password = ENCRYPT(%(pwd)s, %(salt)s)")
-        cursor.execute(query, {'usr' : username, 'pwd' : password, 'salt' : salt})
-        usrcount = 0;
-        for authrow in cursor:
-          usrcount = authrow[0];
-        if (usrcount != 1): return False; 
       finally:
         cursor.close()
         cnx.close()
-      return True;
+      return False
 
+    # Returns the auth method for this game
+    # Right now this is:
+    # - Google account for otpd if a client key is defined
+    # - password for any other case
+    def get_game_auth_method(self, cursor):
+        if google_signin is None or len(google_signin.strip()) == 0:
+            return "password"
+        query = ("select count(*) from servers where port=%(port)s and type='longturn'")
+        cursor.execute(query, {'port': self.civserverport})
+        if cursor.fetchall()[0][0] > 0:
+            return "google"
+        else:
+            return "password"
+
+    def check_user_password(self, cursor, username, password):
+        query = ("select secure_hashed_password, ENCRYPT(%(pwd)s, secure_hashed_password), activated from auth where lower(username)=lower(%(usr)s)")
+        cursor.execute(query, {'usr': username, 'pwd': password})
+        result = cursor.fetchall()
+
+        if len(result) == 0:
+            # Unreserved user, no password needed
+            return True
+
+        for db_pass, encrypted_pass, active in result:
+            if (active == 0): return False
+            if db_pass == encrypted_pass.decode(): return True
+
+        return False
+
+    def check_user_google(self, cursor, username, token):
+        # Check login with Google Account
+        query = ("select count(*) from google_auth ga where lower(username)=lower(%(usr)s) and activated=1 and subject=%(subject)s")
+        cursor.execute(query, {'usr': username, 'subject': token})
+        return (cursor.fetchall()[0][0] == 1)
 
     # enables support for allowing alternate origins. See check_origin in websocket.py
     def check_origin(self, origin):

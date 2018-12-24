@@ -1,8 +1,9 @@
 #!/bin/bash
 # Shutdown script for Freeciv-web
 
-SCRIPT_DIR="$(dirname "$0")"
-cd "$(dirname "$0")"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null && pwd)"
+cd ${SCRIPT_DIR}
+
 export FREECIV_WEB_DIR="${SCRIPT_DIR}/.."
 
 if [ ! -f ${SCRIPT_DIR}/configuration.sh ]; then
@@ -35,7 +36,6 @@ killall -9 freeciv-web
 
 
 #4. freeciv-proxy
-
 ps aux | grep -ie freeciv-proxy | awk '{print $2}' | xargs kill -9 
 
 #5.1 Freeciv-PBEM

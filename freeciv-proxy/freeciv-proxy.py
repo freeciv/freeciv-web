@@ -34,6 +34,8 @@ import uuid
 import gc
 import mysql.connector
 import configparser
+import urllib.request
+import urllib.parse
 
 PROXY_PORT = 8002
 CONNECTION_LIMIT = 1000
@@ -87,9 +89,8 @@ class WSHandler(websocket.WebSocketHandler):
               return
             self.civserverport = login_message['port']
             auth_ok = self.check_user(
-                    login_message['username'] if 'username' in login_message else None, 
-                    login_message['password'] if 'password' in login_message else None, 
-                    login_message['subject'] if 'subject' in login_message else None);
+                    login_message['username'] if 'username' in login_message else None,
+                    login_message['password'] if 'password' in login_message else None)
             if (not auth_ok):
               self.write_message("[{\"pid\":5,\"message\":\"Error: Could not authenticate user with password. Try a different username.\",\"you_can_join\":false,\"conn_id\":-1}]")
               return
@@ -123,7 +124,7 @@ class WSHandler(websocket.WebSocketHandler):
             gc.collect()
 
     # Check user authentication
-    def check_user(self, username, password, check_subject):
+    def check_user(self, username, token):
       cursor = None
       cnx = None
       try:
@@ -132,9 +133,9 @@ class WSHandler(websocket.WebSocketHandler):
 
         auth_method = self.get_game_auth_method(cursor)
         if auth_method == "password":
-          return self.check_user_password(cursor, username, password)
+          return self.check_user_password(cursor, username, token)
         elif auth_method == "google":
-          return self.check_user_google(cursor, username, check_subject)
+          return self.check_user_google(username, token)
         else:
           return False
 
@@ -172,11 +173,14 @@ class WSHandler(websocket.WebSocketHandler):
 
         return False
 
-    def check_user_google(self, cursor, username, token):
+    def check_user_google(self, username, token):
         # Check login with Google Account
-        query = ("select count(*) from google_auth ga where lower(username)=lower(%(usr)s) and activated=1 and subject=%(subject)s")
-        cursor.execute(query, {'usr': username, 'subject': token})
-        return (cursor.fetchall()[0][0] == 1)
+        try:
+            request = urllib.request.Request('http://localhost:8080/freeciv-web/token_signin', data=urllib.parse.urlencode({'idtoken': token, 'username': username}).encode('ascii'), headers={'X-Real-IP': 'proxy'})
+            return urllib.request.urlopen(request).read().decode('ascii') == 'OK'
+        except Exception as e:
+            logger.warn(e)
+            return False
 
     # enables support for allowing alternate origins. See check_origin in websocket.py
     def check_origin(self, origin):
